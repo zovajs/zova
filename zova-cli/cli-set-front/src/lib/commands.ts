@@ -34,6 +34,7 @@ import refactorRenameComponent from './command/refactor.renameComponent.js';
 import toolsMetadata from './command/tools.metadata.js';
 import toolsDeps from './command/tools.deps.js';
 import openapiConfig from './command/openapi.config.js';
+import openapiGenerate from './command/openapi.generate.js';
 
 export const commands = {
   default: {
@@ -85,5 +86,6 @@ export const commands = {
   },
   openapi: {
     config: openapiConfig,
+    generate: openapiGenerate,
   },
 };

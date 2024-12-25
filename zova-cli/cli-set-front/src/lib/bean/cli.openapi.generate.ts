@@ -7,15 +7,15 @@ declare module '@cabloy/cli' {
   interface ICommandArgv {}
 }
 
-export class CliOpenapiConfig extends BeanCliBase {
+export class CliOpenapiGenerate extends BeanCliBase {
   async execute() {
     const { argv } = this.context;
     // super
     await super.execute();
-    // target file
+    // config file
     const configFile = path.join(argv.projectPath, 'openapi.config.ts');
     if (fse.existsSync(configFile)) {
-      throw new Error(`config exists: ${configFile}`);
+      throw new Error('Please generate config first!');
     }
     // render boilerplate
     await this.template.renderBoilerplateAndSnippets({
