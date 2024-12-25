@@ -42,7 +42,7 @@
     "compressing": "^1.10.0",
     "egg-born-utils": "^1.2.0",
     "fs-extra": "^11.2.0",
-    "gogocode": "^1.0.53",
+    "gogocode": "^1.0.55",
     "openapi-typescript": "^7.4.4",
     "rimraf": "^5.0.5",
     "svg-baker": "1.7.0",
