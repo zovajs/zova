@@ -3,14 +3,16 @@ import { BeanSimple } from '../../bean/beanSimple.js';
 import { uuid as _uuid } from '../../utils/uuid.js';
 
 export class AppUtil extends BeanSimple {
-  getApiBaseURL() {
+  getApiBaseURL(useApiPrefix: boolean = true) {
     let baseURL;
     if (process.env.SERVER) {
       baseURL = process.env.SSR_API_BASE_URL;
     } else {
       baseURL = this.app.config.api.baseURL || '';
     }
-    baseURL = `${baseURL}${this.app.config.api.prefix || ''}`;
+    if (useApiPrefix) {
+      baseURL = `${baseURL}${this.app.config.api.prefix || ''}`;
+    }
     return baseURL;
   }
 }

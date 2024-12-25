@@ -18,7 +18,9 @@ export default (app: ZovaApplication) => {
         any,
         paths['/api/vona/test/onion/echo2/{userId}/{userName}']['post']['responses']['200']['content']['application/json']['data']
       >('/api/vona/test/onion/echo2/1/2', body, {
-        params: options?.params,
+        baseURL: app.util.getApiBaseURL(false),
+        params: options?.query,
+        headers: options?.headers,
       }),
   };
 };
