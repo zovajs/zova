@@ -10,6 +10,11 @@ declare module '@cabloy/cli' {
   interface ICommandArgv {}
 }
 
+interface INodeMethodInfo {
+  operationId: string;
+  node: ts.PropertySignature;
+}
+
 export class CliOpenapiGenerate extends BeanCliBase {
   async execute() {
     const { argv } = this.context;
@@ -48,8 +53,66 @@ export class CliOpenapiGenerate extends BeanCliBase {
     }
   }
 
-  _generateService(_ast: ts.Node[], _serviceName: string, _nodeService: Record<string, ts.PropertySignature>) {
-    const serviceContent = "import { ZovaApplication } from 'zova';";
+  _generateMethod(_ast: ts.Node[], _serviceName: string, methodName: string, nodeMethodInfo: INodeMethodInfo) {
+    // names
+    // const _nameRequestPath = '';
+    // const _nameRequestMethod = '';
+    const nameRequestParams = '';
+    const nameRequestQuery = '';
+    const nameRequestHeaders = '';
+    const nameRequestBody = '';
+    // const _nameResponseBody = '';
+    // content
+    const contentTypes = [''];
+    const contentRequestMethod = this._getRequestMethodValue(_ast, nodeMethodInfo);
+    const contentRequestBody = ['get', 'delete'].includes(contentRequestMethod) ? '' : `body: ${nameRequestBody},`;
+    const contentOptions = [];
+    const contentOptions2 =
+      nameRequestParams || nameRequestQuery || nameRequestHeaders
+        ? `
+    options?: {
+        ${contentOptions.join('\n')}
+      },
+    `
+        : '';
+    const contentSignature = `${methodName}: (
+      ${contentRequestBody}
+      ${contentOptions2}
+    ) =>
+      app.meta.$api.post<any, ServiceOnionEcho2ResponseBody>(
+        app.util.apiTranslatePath(ServiceOnionEcho2Path, options?.params),
+        body,
+        app.util.apiInvokeConfig(options),
+      ),`;
+    return [contentTypes.join('\n'), contentSignature];
+  }
+
+  _getNodePath(_ast: ts.Node[], _nodeMethodInfo: INodeMethodInfo) {}
+
+  _getRequestMethodValue(_ast: ts.Node[], _nodeMethodInfo: INodeMethodInfo) {
+    return 'post';
+  }
+
+  _generateService(ast: ts.Node[], serviceName: string, nodeService: Record<string, INodeMethodInfo>) {
+    const contentTypes: string[] = [];
+    const contentSignatures: string[] = [];
+    for (const methodName in nodeService) {
+      const nodeMethodInfo = nodeService[methodName];
+      const contentMethod = this._generateMethod(ast, serviceName, methodName, nodeMethodInfo);
+      contentTypes.push(contentMethod[0]);
+      contentSignatures.push(contentMethod[1]);
+    }
+    const serviceContent = `import { ZovaApplication } from 'zova';
+import type { paths } from './_openapi_.js';
+
+${contentTypes.join('\n')}
+
+export default (app: ZovaApplication) => {
+  return {
+    ${contentSignatures.join('\n')}
+  };
+};
+`;
     return serviceContent;
   }
 
@@ -58,7 +121,7 @@ export class CliOpenapiGenerate extends BeanCliBase {
       node => ts.isInterfaceDeclaration(node) && node.name.escapedText === 'operations',
     ) as ts.InterfaceDeclaration | undefined;
     if (!nodeOperations) return;
-    const services: Record<string, Record<string, ts.PropertySignature>> = {};
+    const services: Record<string, Record<string, INodeMethodInfo>> = {};
     for (let index = 0; index < nodeOperations.members.length; index++) {
       const node = nodeOperations.members[index];
       if (!ts.isPropertySignature(node)) continue;
@@ -71,7 +134,7 @@ export class CliOpenapiGenerate extends BeanCliBase {
       if (!services[service]) {
         services[service] = {};
       }
-      services[service][method] = node;
+      services[service][method] = { operationId, node };
     }
     return services;
   }
