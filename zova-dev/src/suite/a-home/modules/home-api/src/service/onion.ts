@@ -17,10 +17,10 @@ export default (app: ZovaApplication) => {
       app.meta.$api.post<
         any,
         paths['/api/vona/test/onion/echo2/{userId}/{userName}']['post']['responses']['200']['content']['application/json']['data']
-      >('/api/vona/test/onion/echo2/1/2', body, {
-        baseURL: app.util.getApiBaseURL(false),
-        params: options?.query,
-        headers: options?.headers,
-      }),
+      >(
+        app.util.apiTranslatePath('/api/vona/test/onion/echo2/{userId}/{userName}', options?.params),
+        body,
+        app.util.apiInvokeConfig(options),
+      ),
   };
 };

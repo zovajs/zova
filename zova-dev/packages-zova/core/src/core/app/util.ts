@@ -15,6 +15,29 @@ export class AppUtil extends BeanSimple {
     }
     return baseURL;
   }
+
+  apiTranslatePath(pathName: string, pathParams?: Record<string, any>): string {
+    return defaultPathSerializer(pathName, pathParams);
+  }
+
+  apiInvokeConfig(options?: any) {
+    return {
+      baseURL: this.getApiBaseURL(false),
+      params: options?.query,
+      headers: options?.headers,
+    };
+  }
+}
+
+const PATH_PARAM_RE = /\{([^{}\/]+)\}/g;
+export function defaultPathSerializer(pathName: string, pathParams?: Record<string, any>): string {
+  if (!pathParams) return pathName;
+  return pathName.replace(PATH_PARAM_RE, (_, _part) => {
+    const value = pathParams?.[_part];
+    if (value === undefined || value === null) return `{${_part}}`;
+    if (typeof value === 'object') return encodeURIComponent(JSON.stringify(value));
+    return encodeURIComponent(value);
+  });
 }
 
 export function uuid(): string {
