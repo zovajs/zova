@@ -42,9 +42,11 @@
     "egg-born-utils": "^1.2.0",
     "fs-extra": "^11.2.0",
     "gogocode": "^1.0.53",
+    "openapi-typescript": "^7.4.4",
     "rimraf": "^5.0.5",
     "svg-baker": "1.7.0",
     "svgo": "^3.2.0",
+    "typescript": "5.7.2",
     "urllib": "^3.24.0",
     "zova-shared": "^1.0.7",
     "zova-vite": "^1.0.182"
