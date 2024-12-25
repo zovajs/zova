@@ -1,12 +1,8 @@
-import { createConfig } from '@redocly/openapi-core';
+import { OpenAPITSOptions } from 'openapi-typescript';
 
 export default function () {
-  return createConfig(
-    {
-      apis: {
-        default: { root: 'path/to/api.json' },
-      },
-    },
-    { extends: ['recommended'] },
-  );
+  return {
+    source: 'path/to/openapi.json',
+    options: {},
+  } as { source: string; options: OpenAPITSOptions };
 }
