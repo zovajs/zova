@@ -33,6 +33,7 @@ import refactorRenameComponent from './command/refactor.renameComponent.js';
 // import toolsIcon from './command/tools.icon.js';
 import toolsMetadata from './command/tools.metadata.js';
 import toolsDeps from './command/tools.deps.js';
+import openapiConfig from './command/openapi.config.js';
 
 export const commands = {
   default: {
@@ -81,5 +82,8 @@ export const commands = {
     // icon: toolsIcon,
     metadata: toolsMetadata,
     deps: toolsDeps,
+  },
+  openapi: {
+    config: openapiConfig,
   },
 };

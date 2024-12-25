@@ -33,6 +33,7 @@ import { CliRefactorComponentEmits } from './bean/cli.refactor.componentEmits.js
 import { CliRefactorComponentSlots } from './bean/cli.refactor.componentSlots.js';
 import { CliRefactorComponentModel } from './bean/cli.refactor.componentModel.js';
 import { CliRefactorRenameComponent } from './bean/cli.refactor.renameComponent.js';
+import { CliOpenapiConfig } from './bean/cli.openapi.config.js';
 
 export const beans = {
   'default.list': CliDefaultList,
@@ -70,4 +71,5 @@ export const beans = {
   'tools.icon': CliToolsIcon,
   'tools.metadata': CliToolsMetadata,
   'tools.deps': CliToolsDeps,
+  'openapi.config': CliOpenapiConfig,
 };

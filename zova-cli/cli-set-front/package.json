@@ -38,7 +38,6 @@
   "license": "MIT",
   "dependencies": {
     "@cabloy/cli": "^2.0.2",
-    "@redocly/openapi-core": "^1.26.1",
     "compressing": "^1.10.0",
     "egg-born-utils": "^1.2.0",
     "fs-extra": "^11.2.0",
