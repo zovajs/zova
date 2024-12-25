@@ -23,8 +23,9 @@ export class CliOpenapiGenerate extends BeanCliBase {
       const config = (await instance.default()) as { source: string; options: OpenAPITSOptions };
       const ast = await openapiTS(config.source, config.options);
       const contents = astToString(ast);
-      const outputFile = path.join(argv.projectPath, 'src/suite/a-home/modules/home-api/src/service/.openapi.ts');
+      const outputFile = path.join(argv.projectPath, 'src/suite/a-home/modules/home-api/src/service/_openapi_.ts');
       await fse.outputFile(outputFile, contents);
+      await this.helper.formatFile({ fileName: outputFile });
       await this._generate(ast);
     });
   }
