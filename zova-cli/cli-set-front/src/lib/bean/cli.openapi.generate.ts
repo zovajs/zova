@@ -10,10 +10,10 @@ declare module '@cabloy/cli' {
   interface ICommandArgv {}
 }
 
-interface INodeMethodInfo {
-  serviceName: string;
-  serviceNameLower: string;
-  methodName: string;
+interface INodeActionInfo {
+  service: string;
+  serviceLower: string;
+  action: string;
   operationId: string;
   node: ts.PropertySignature;
 }
@@ -56,19 +56,26 @@ export class CliOpenapiGenerate extends BeanCliBase {
     }
   }
 
-  _generateMethod(ast: ts.Node[], nodeMethodInfo: INodeMethodInfo) {
+  _generateAction(ast: ts.Node[], nodeActionInfo: INodeActionInfo) {
     // pathInfo
-    const pathInfo = this._getRequestPathInfo(ast, nodeMethodInfo);
-    // names
-    // const _nameRequestPath = '';
-    // const _nameRequestMethod = '';
+    const pathInfo = this._getRequestPathInfo(ast, nodeActionInfo);
+    // contentTypes
+    const contentTypes: string[] = [];
+    contentTypes.push(`/** ${nodeActionInfo.operationId} */`);
+    // name: path
+    const nameRequestPath = `Service${nodeActionInfo.service}${nodeActionInfo.action}Path`;
+    contentTypes.push(`export const ${nameRequestPath} = '${pathInfo.path}';`);
+    contentTypes.push(`export type ${nameRequestPath} = '${pathInfo.path}' `);
+    // name: method
+    const nameRequestMethod = `Service${nodeActionInfo.service}${nodeActionInfo.action}Method`;
+    contentTypes.push(`export type ${nameRequestMethod} = '${pathInfo.method}';`);
+    // name: params
     const nameRequestParams = '';
     const nameRequestQuery = '';
     const nameRequestHeaders = '';
     const nameRequestBody = '';
     // const _nameResponseBody = '';
     // content
-    const contentTypes = [''];
     const contentRequestMethod = pathInfo.method;
     const contentRequestBody = ['get', 'delete'].includes(contentRequestMethod) ? '' : `body: ${nameRequestBody},`;
     const contentOptions = [];
@@ -80,7 +87,7 @@ export class CliOpenapiGenerate extends BeanCliBase {
       },
     `
         : '';
-    const contentSignature = `${nodeMethodInfo.methodName}: (
+    const contentSignature = `${nodeActionInfo.action}: (
       ${contentRequestBody}
       ${contentOptions2}
     ) =>
@@ -92,7 +99,7 @@ export class CliOpenapiGenerate extends BeanCliBase {
     return [contentTypes.join('\n'), contentSignature];
   }
 
-  _getRequestPathInfo(ast: ts.Node[], nodeMethodInfo: INodeMethodInfo) {
+  _getRequestPathInfo(ast: ts.Node[], nodeActionInfo: INodeActionInfo) {
     const nodePaths = ast.find(node => ts.isInterfaceDeclaration(node) && node.name.text === 'paths') as
       | ts.InterfaceDeclaration
       | undefined;
@@ -107,7 +114,7 @@ export class CliOpenapiGenerate extends BeanCliBase {
         if (!ts.isPropertySignature(item)) return false;
         if (!item.type || !ts.isIndexedAccessTypeNode(item.type)) return false;
         const operationId = (<ts.StringLiteral>(<ts.LiteralTypeNode>item.type.indexType).literal).text;
-        if (operationId !== nodeMethodInfo.operationId) return false;
+        if (operationId !== nodeActionInfo.operationId) return false;
         method = (<ts.Identifier>item.name).text;
         return true;
       });
@@ -117,14 +124,14 @@ export class CliOpenapiGenerate extends BeanCliBase {
     return { path, method, nodePath };
   }
 
-  _generateService(ast: ts.Node[], nodeService: Record<string, INodeMethodInfo>) {
+  _generateService(ast: ts.Node[], nodeService: Record<string, INodeActionInfo>) {
     const contentTypes: string[] = [];
     const contentSignatures: string[] = [];
-    for (const methodName in nodeService) {
-      const nodeMethodInfo = nodeService[methodName];
-      const contentMethod = this._generateMethod(ast, nodeMethodInfo);
-      contentTypes.push(contentMethod[0]);
-      contentSignatures.push(contentMethod[1]);
+    for (const actionName in nodeService) {
+      const nodeActionInfo = nodeService[actionName];
+      const contentAction = this._generateAction(ast, nodeActionInfo);
+      contentTypes.push(contentAction[0]);
+      contentSignatures.push(contentAction[1]);
     }
     const serviceContent = `import { ZovaApplication } from 'zova';
 import type { paths } from './_openapi_.js';
@@ -145,23 +152,23 @@ export default (app: ZovaApplication) => {
       | ts.InterfaceDeclaration
       | undefined;
     if (!nodeOperations) return;
-    const services: Record<string, Record<string, INodeMethodInfo>> = {};
+    const services: Record<string, Record<string, INodeActionInfo>> = {};
     for (let index = 0; index < nodeOperations.members.length; index++) {
       const node = nodeOperations.members[index];
       if (!ts.isPropertySignature(node)) continue;
       const operationId = (<ts.Identifier>node.name).text;
-      let [serviceName, methodName] = operationId.toString().split('_');
-      if (!methodName) {
-        methodName = serviceName;
-        serviceName = 'default';
+      let [service, action] = operationId.toString().split('_');
+      if (!action) {
+        action = service;
+        service = 'default';
       }
-      if (!services[serviceName]) {
-        services[serviceName] = {};
+      if (!services[service]) {
+        services[service] = {};
       }
-      services[serviceName][methodName] = {
-        serviceName,
-        serviceNameLower: toLowerCaseFirstChar(serviceName),
-        methodName,
+      services[service][action] = {
+        service,
+        serviceLower: toLowerCaseFirstChar(service),
+        action,
         operationId,
         node,
       };
