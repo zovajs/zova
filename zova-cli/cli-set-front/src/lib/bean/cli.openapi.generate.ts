@@ -21,7 +21,7 @@ interface INodeActionInfo {
 
 interface INodeTypeInfoItem {
   question: boolean;
-  nodeType?: ts.TypeLiteralNode;
+  nodeType: ts.TypeLiteralNode;
 }
 type TypeNodeTypeInfo = Record<string, INodeTypeInfoItem>;
 
@@ -69,16 +69,38 @@ export class CliOpenapiGenerate extends BeanCliBase {
     // contentTypes
     const contentTypes: string[] = [];
     contentTypes.push(`/** ${nodeActionInfo.operationId} */`);
+    // name: ServiceAction
+    const nameServiceAction = `Service${nodeActionInfo.service}${nodeActionInfo.action}`;
     // name: path
-    const nameRequestPath = `Service${nodeActionInfo.service}${nodeActionInfo.action}Path`;
+    const nameRequestPath = `Service${nameServiceAction}Path`;
     contentTypes.push(`export const ${nameRequestPath} = '${pathInfo.path}';`);
     contentTypes.push(`export type ${nameRequestPath} = '${pathInfo.path}' `);
     // name: method
-    const nameRequestMethod = `Service${nodeActionInfo.service}${nodeActionInfo.action}Method`;
+    const nameRequestMethod = `Service${nameServiceAction}Method`;
     contentTypes.push(`export type ${nameRequestMethod} = '${pathInfo.method}';`);
     // name: params
-    const nameRequestParams = '';
-    const nameRequestQuery = '';
+    const nodeTypeInfoParameters = _parseNodeType(nodeActionInfo.nodeTypeInfo['parameters'].nodeType)!;
+    let nameRequestParams = '';
+    let nameRequestParamsQuestion: boolean;
+    if (!_isNodeNever(nodeTypeInfoParameters['path'].nodeType)) {
+      nameRequestParamsQuestion = nodeTypeInfoParameters['path'].question;
+      nameRequestParams = `Service${nameServiceAction}RequestParams`;
+      contentTypes.push(
+        `export type ${nameRequestParams} = paths[${nameRequestPath}][${nameRequestMethod}]['parameters']['path'];`,
+      );
+      console.log(nameRequestParamsQuestion);
+    }
+    // name: query
+    let nameRequestQuery = '';
+    let nameRequestQueryQuestion: boolean;
+    if (!_isNodeNever(nodeTypeInfoParameters['query'].nodeType)) {
+      nameRequestQueryQuestion = nodeTypeInfoParameters['query'].question;
+      nameRequestQuery = `Service${nameServiceAction}RequestQuery`;
+      contentTypes.push(
+        `export type ${nameRequestQuery} = paths[${nameRequestPath}][${nameRequestMethod}]['parameters']['query'];`,
+      );
+      console.log(nameRequestQueryQuestion);
+    }
     const nameRequestHeaders = '';
     const nameRequestBody = '';
     // const _nameResponseBody = '';
@@ -178,23 +200,28 @@ export default (app: ZovaApplication) => {
         action,
         operationId,
         node,
-        nodeTypeInfo: this._parseNodeType(node.type as ts.TypeLiteralNode),
+        nodeTypeInfo: _parseNodeType(node.type as ts.TypeLiteralNode)!,
       };
     }
     return services;
   }
+}
 
-  _parseNodeType(nodeType: ts.TypeLiteralNode) {
-    const nodeTypeInfo: TypeNodeTypeInfo = {};
-    nodeType.members.forEach(node => {
-      if (!ts.isPropertySignature(node)) return;
-      const name = (<ts.Identifier>node.name).text;
-      const value = <ts.TypeLiteralNode>node.type;
-      nodeTypeInfo[name] = {
-        question: !!node.questionToken,
-        nodeType: value,
-      };
-    });
-    return nodeTypeInfo;
-  }
+function _parseNodeType(nodeType?: ts.TypeLiteralNode) {
+  if (!nodeType) return;
+  const nodeTypeInfo: TypeNodeTypeInfo = {};
+  nodeType.members.forEach(node => {
+    if (!ts.isPropertySignature(node)) return;
+    const name = (<ts.Identifier>node.name).text;
+    const value = <ts.TypeLiteralNode>node.type;
+    nodeTypeInfo[name] = {
+      question: !!node.questionToken,
+      nodeType: value,
+    };
+  });
+  return nodeTypeInfo;
+}
+
+function _isNodeNever(node: ts.Node) {
+  return node.kind === ts.SyntaxKind.NeverKeyword;
 }

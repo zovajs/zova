@@ -2,9 +2,9 @@ import { ZovaApplication } from 'zova';
 import type { paths } from './_openapi_.js';
 
 /** Home_index */
-export const ServiceHomeindexPath = '/';
-export type ServiceHomeindexPath = '/';
-export type ServiceHomeindexMethod = 'get';
+export const ServiceServiceHomeindexPath = '/';
+export type ServiceServiceHomeindexPath = '/';
+export type ServiceServiceHomeindexMethod = 'get';
 
 export default (app: ZovaApplication) => {
   return {
