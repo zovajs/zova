@@ -120,16 +120,16 @@ export class CliOpenapiGenerate extends BeanCliBase {
     }
     const contentOptions2 =
       contentOptions.length > 0
-        ? `options${contentOptionsQuestion}: {\n${contentOptions.join('\n')}\n} & IApiServiceActionOptions,`
-        : `options${contentOptionsQuestion}: IApiServiceActionOptions,`;
+        ? `options${_q(contentOptionsQuestion)}: {\n${contentOptions.join('\n')}\n} & IApiServiceActionOptions,`
+        : `options${_q(contentOptionsQuestion)}: IApiServiceActionOptions,`;
     // content: request body
     let contentRequestBody = '';
     if (!['get', 'delete'].includes(pathInfo.method)) {
       if (!nameRequestBody) {
-        contentRequestBody = `body${contentOptionsQuestion}: undefined,`;
+        contentRequestBody = `body${_q(contentOptionsQuestion)}: undefined,`;
       } else {
         if (nameRequestBodyQuestion) {
-          contentRequestBody = `body${contentOptionsQuestion}: ${nameRequestBody} | undefined,`;
+          contentRequestBody = `body${_q(contentOptionsQuestion)}: ${nameRequestBody} | undefined,`;
         } else {
           contentRequestBody = `body: ${nameRequestBody},`;
         }
@@ -140,7 +140,7 @@ export class CliOpenapiGenerate extends BeanCliBase {
       ${contentOptions2}
     ) =>
       app.meta.$api.post<any, ${nameResponseBody}>(
-        app.util.apiServiceActionPathTranslate(${nameRequestPath}, options${contentOptionsQuestion}.params),
+        app.util.apiServiceActionPathTranslate(${nameRequestPath}, options${_q(contentOptionsQuestion)}.params),
         ${contentRequestBody ? 'body,' : ''} 
         app.util.apiServiceActionConfig(options),
       ),`;
@@ -244,4 +244,8 @@ function _parseNodeType(nodeType?: ts.TypeLiteralNode) {
 
 function _isNodeNever(node: ts.Node) {
   return node.kind === ts.SyntaxKind.NeverKeyword;
+}
+
+function _q(question: boolean) {
+  return question ? '?' : '';
 }

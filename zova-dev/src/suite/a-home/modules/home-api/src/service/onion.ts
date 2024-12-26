@@ -61,59 +61,59 @@ export type ServiceServiceOnionecho5ResponseBody =
 
 export default (app: ZovaApplication) => {
   return {
-    index: (optionstrue: IApiServiceActionOptions) =>
+    index: (options?: IApiServiceActionOptions) =>
       app.meta.$api.post<any, ServiceServiceOnionindexResponseBody>(
-        app.util.apiServiceActionPathTranslate(ServiceServiceOnionindexPath, optionstrue.params),
+        app.util.apiServiceActionPathTranslate(ServiceServiceOnionindexPath, options?.params),
 
         app.util.apiServiceActionConfig(options),
       ),
     echo: (
-      optionstrue: {
+      options?: {
         querytrue: ServiceServiceOnionechoRequestQuery;
       } & IApiServiceActionOptions,
     ) =>
       app.meta.$api.post<any, ServiceServiceOnionechoResponseBody>(
-        app.util.apiServiceActionPathTranslate(ServiceServiceOnionechoPath, optionstrue.params),
+        app.util.apiServiceActionPathTranslate(ServiceServiceOnionechoPath, options?.params),
 
         app.util.apiServiceActionConfig(options),
       ),
     echo2: (
       body: ServiceServiceOnionecho2RequestBody,
-      optionsfalse: {
+      options: {
         paramsfalse: ServiceServiceOnionecho2RequestParams;
         queryfalse: ServiceServiceOnionecho2RequestQuery;
       } & IApiServiceActionOptions,
     ) =>
       app.meta.$api.post<any, ServiceServiceOnionecho2ResponseBody>(
-        app.util.apiServiceActionPathTranslate(ServiceServiceOnionecho2Path, optionsfalse.params),
+        app.util.apiServiceActionPathTranslate(ServiceServiceOnionecho2Path, options.params),
         body,
         app.util.apiServiceActionConfig(options),
       ),
     echo3: (
-      optionsfalse: {
+      options: {
         paramsfalse: ServiceServiceOnionecho3RequestParams;
         querytrue: ServiceServiceOnionecho3RequestQuery;
         headersfalse: ServiceServiceOnionecho3RequestHeaders;
       } & IApiServiceActionOptions,
     ) =>
       app.meta.$api.post<any, ServiceServiceOnionecho3ResponseBody>(
-        app.util.apiServiceActionPathTranslate(ServiceServiceOnionecho3Path, optionsfalse.params),
+        app.util.apiServiceActionPathTranslate(ServiceServiceOnionecho3Path, options.params),
 
         app.util.apiServiceActionConfig(options),
       ),
-    echo4: (bodytrue: ServiceServiceOnionecho4RequestBody | undefined, optionstrue: IApiServiceActionOptions) =>
+    echo4: (body?: ServiceServiceOnionecho4RequestBody | undefined, options?: IApiServiceActionOptions) =>
       app.meta.$api.post<any, ServiceServiceOnionecho4ResponseBody>(
-        app.util.apiServiceActionPathTranslate(ServiceServiceOnionecho4Path, optionstrue.params),
+        app.util.apiServiceActionPathTranslate(ServiceServiceOnionecho4Path, options?.params),
         body,
         app.util.apiServiceActionConfig(options),
       ),
     echo5: (
-      optionstrue: {
+      options?: {
         querytrue: ServiceServiceOnionecho5RequestQuery;
       } & IApiServiceActionOptions,
     ) =>
       app.meta.$api.post<any, ServiceServiceOnionecho5ResponseBody>(
-        app.util.apiServiceActionPathTranslate(ServiceServiceOnionecho5Path, optionstrue.params),
+        app.util.apiServiceActionPathTranslate(ServiceServiceOnionecho5Path, options?.params),
 
         app.util.apiServiceActionConfig(options),
       ),
