@@ -11,6 +11,9 @@ declare module '@cabloy/cli' {
 }
 
 interface INodeMethodInfo {
+  serviceName: string;
+  serviceNameLower: string;
+  methodName: string;
   operationId: string;
   node: ts.PropertySignature;
 }
@@ -47,13 +50,13 @@ export class CliOpenapiGenerate extends BeanCliBase {
         argv.projectPath,
         `src/suite/a-home/modules/home-api/src/service/${serviceNameLower}.ts`,
       );
-      const serviceContent = this._generateService(ast, serviceName, nodeService);
+      const serviceContent = this._generateService(ast, nodeService);
       await fse.outputFile(serviceFile, serviceContent);
       await this.helper.formatFile({ fileName: serviceFile });
     }
   }
 
-  _generateMethod(_ast: ts.Node[], _serviceName: string, methodName: string, nodeMethodInfo: INodeMethodInfo) {
+  _generateMethod(_ast: ts.Node[], nodeMethodInfo: INodeMethodInfo) {
     // names
     // const _nameRequestPath = '';
     // const _nameRequestMethod = '';
@@ -75,7 +78,7 @@ export class CliOpenapiGenerate extends BeanCliBase {
       },
     `
         : '';
-    const contentSignature = `${methodName}: (
+    const contentSignature = `${nodeMethodInfo.methodName}: (
       ${contentRequestBody}
       ${contentOptions2}
     ) =>
@@ -93,12 +96,12 @@ export class CliOpenapiGenerate extends BeanCliBase {
     return 'post';
   }
 
-  _generateService(ast: ts.Node[], serviceName: string, nodeService: Record<string, INodeMethodInfo>) {
+  _generateService(ast: ts.Node[], nodeService: Record<string, INodeMethodInfo>) {
     const contentTypes: string[] = [];
     const contentSignatures: string[] = [];
     for (const methodName in nodeService) {
       const nodeMethodInfo = nodeService[methodName];
-      const contentMethod = this._generateMethod(ast, serviceName, methodName, nodeMethodInfo);
+      const contentMethod = this._generateMethod(ast, nodeMethodInfo);
       contentTypes.push(contentMethod[0]);
       contentSignatures.push(contentMethod[1]);
     }
@@ -126,15 +129,21 @@ export default (app: ZovaApplication) => {
       const node = nodeOperations.members[index];
       if (!ts.isPropertySignature(node)) continue;
       const operationId = (<ts.Identifier>node.name).text;
-      let [service, method] = operationId.toString().split('_');
-      if (!method) {
-        method = service;
-        service = 'default';
+      let [serviceName, methodName] = operationId.toString().split('_');
+      if (!methodName) {
+        methodName = serviceName;
+        serviceName = 'default';
       }
-      if (!services[service]) {
-        services[service] = {};
+      if (!services[serviceName]) {
+        services[serviceName] = {};
       }
-      services[service][method] = { operationId, node };
+      services[serviceName][methodName] = {
+        serviceName,
+        serviceNameLower: toLowerCaseFirstChar(serviceName),
+        methodName,
+        operationId,
+        node,
+      };
     }
     return services;
   }
