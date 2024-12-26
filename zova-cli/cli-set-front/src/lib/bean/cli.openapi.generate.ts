@@ -56,7 +56,9 @@ export class CliOpenapiGenerate extends BeanCliBase {
     }
   }
 
-  _generateMethod(_ast: ts.Node[], nodeMethodInfo: INodeMethodInfo) {
+  _generateMethod(ast: ts.Node[], nodeMethodInfo: INodeMethodInfo) {
+    // pathInfo
+    const pathInfo = this._getRequestPathInfo(ast, nodeMethodInfo);
     // names
     // const _nameRequestPath = '';
     // const _nameRequestMethod = '';
@@ -67,7 +69,7 @@ export class CliOpenapiGenerate extends BeanCliBase {
     // const _nameResponseBody = '';
     // content
     const contentTypes = [''];
-    const contentRequestMethod = this._getRequestMethodValue(_ast, nodeMethodInfo);
+    const contentRequestMethod = pathInfo.method;
     const contentRequestBody = ['get', 'delete'].includes(contentRequestMethod) ? '' : `body: ${nameRequestBody},`;
     const contentOptions = [];
     const contentOptions2 =
@@ -90,10 +92,29 @@ export class CliOpenapiGenerate extends BeanCliBase {
     return [contentTypes.join('\n'), contentSignature];
   }
 
-  _getNodePath(_ast: ts.Node[], _nodeMethodInfo: INodeMethodInfo) {}
-
-  _getRequestMethodValue(_ast: ts.Node[], _nodeMethodInfo: INodeMethodInfo) {
-    return 'post';
+  _getRequestPathInfo(ast: ts.Node[], nodeMethodInfo: INodeMethodInfo) {
+    const nodePaths = ast.find(node => ts.isInterfaceDeclaration(node) && node.name.text === 'paths') as
+      | ts.InterfaceDeclaration
+      | undefined;
+    if (!nodePaths) throw new Error('paths not found');
+    let path;
+    let method;
+    const nodePath = nodePaths.members.find(node => {
+      if (!ts.isPropertySignature(node)) return false;
+      if (!node.type || !ts.isTypeLiteralNode(node.type)) return false;
+      path = (<ts.StringLiteral>node.name).text;
+      const nodeMethod = node.type.members.find(item => {
+        if (!ts.isPropertySignature(item)) return false;
+        if (!item.type || !ts.isIndexedAccessTypeNode(item.type)) return false;
+        const operationId = (<ts.StringLiteral>(<ts.LiteralTypeNode>item.type.indexType).literal).text;
+        if (operationId !== nodeMethodInfo.operationId) return false;
+        method = (<ts.Identifier>item.name).text;
+        return true;
+      });
+      return !!nodeMethod;
+    }) as ts.PropertySignature | undefined;
+    if (!nodePath) throw new Error('path not found');
+    return { path, method, nodePath };
   }
 
   _generateService(ast: ts.Node[], nodeService: Record<string, INodeMethodInfo>) {
@@ -120,9 +141,9 @@ export default (app: ZovaApplication) => {
   }
 
   _getNodeServices(ast: ts.Node[]) {
-    const nodeOperations = ast.find(
-      node => ts.isInterfaceDeclaration(node) && node.name.escapedText === 'operations',
-    ) as ts.InterfaceDeclaration | undefined;
+    const nodeOperations = ast.find(node => ts.isInterfaceDeclaration(node) && node.name.text === 'operations') as
+      | ts.InterfaceDeclaration
+      | undefined;
     if (!nodeOperations) return;
     const services: Record<string, Record<string, INodeMethodInfo>> = {};
     for (let index = 0; index < nodeOperations.members.length; index++) {
