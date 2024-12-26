@@ -1,5 +1,6 @@
 import { BeanBase, BeanContainer, BeanSimple, IMonkeyAppInitialize, IMonkeyBeanInit } from 'zova';
 import { BeanApi } from './bean/bean.api.js';
+import { __ThisModule__ } from './.metadata/this.js';
 
 export class Monkey extends BeanSimple implements IMonkeyAppInitialize, IMonkeyBeanInit {
   async appInitialize() {
@@ -14,6 +15,14 @@ export class Monkey extends BeanSimple implements IMonkeyAppInitialize, IMonkeyB
       configurable: true,
       get() {
         return self.app.meta.$api;
+      },
+    });
+    // $service
+    bean.defineProperty(beanInstance, '$service', {
+      enumerable: false,
+      configurable: true,
+      get() {
+        return self.app.bean.scope(__ThisModule__).service;
       },
     });
   }
