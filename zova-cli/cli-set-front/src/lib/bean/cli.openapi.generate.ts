@@ -100,9 +100,11 @@ export class CliOpenapiGenerate extends BeanCliBase {
     if (!_isNodeNever(nodeActionInfo.nodeTypeInfo['requestBody'].nodeType)) {
       nameRequestBody = `Service${nameServiceAction}RequestBody`;
       nameRequestBodyQuestion = nodeActionInfo.nodeTypeInfo['requestBody'].question;
-      contentTypes.push(
-        `export type ${nameRequestBody} = paths[${nameRequestPath}][${nameRequestMethod}]['requestBody']['content']['application/json'];`,
-      );
+      const nodeRequestBodyInfo = _parseNodeType(nodeActionInfo.nodeTypeInfo['requestBody'].nodeType)!;
+      const nodeRequestBodyContentInfo = _parseNodeType(nodeRequestBodyInfo['content'].nodeType)!;
+      const nodeRequestBodyApplicationJson = nodeRequestBodyContentInfo['application/json'];
+      const typeRequestBody = astToString(nodeRequestBodyApplicationJson.nodeType);
+      contentTypes.push(`export type ${nameRequestBody} = ${typeRequestBody};`);
     }
     // name: response body
     const nameResponseBody = `Service${nameServiceAction}ResponseBody`;
@@ -135,13 +137,17 @@ export class CliOpenapiGenerate extends BeanCliBase {
         }
       }
     }
+    // content: path translate
+    const contentPathTranslate = parametersInfo['params']
+      ? `app.util.apiServiceActionPathTranslate(${nameRequestPath}, options${_q(contentOptionsQuestion)}.params),`
+      : `${nameRequestPath},`;
+    // content: signature
     const contentSignature = `${nodeActionInfo.action}: (
       ${contentRequestBody}
       ${contentOptions2}
     ) =>
       app.meta.$api.post<any, ${nameResponseBody}>(
-        app.util.apiServiceActionPathTranslate(${nameRequestPath}, options${_q(contentOptionsQuestion)}.params),
-        ${contentRequestBody ? 'body,' : ''} 
+        ${contentPathTranslate} ${contentRequestBody ? 'body,' : ''} 
         app.util.apiServiceActionConfig(options),
       ),`;
     return [contentTypes.join('\n'), contentSignature];
@@ -181,11 +187,16 @@ export class CliOpenapiGenerate extends BeanCliBase {
       contentTypes.push(contentAction[0]);
       contentSignatures.push(contentAction[1]);
     }
-    const serviceContent = `import { ZovaApplication } from 'zova';
-import type { paths } from './_openapi_.js';
+    const contentTypes2 = contentTypes.join('\n');
+    const importsType: string[] = [];
+    if (contentTypes2.includes('components["schemas"]')) importsType.push('components');
+    if (contentTypes2.includes('paths[')) importsType.push('paths');
+    const contentImportsType =
+      importsType.length > 0 ? `import type { ${importsType.join(', ')} } from './_openapi_.js';` : '';
+    const serviceContent = `import { ZovaApplication } from 'zova';${contentImportsType}
 import { IApiServiceActionOptions } from '../types.js';
 
-${contentTypes.join('\n')}
+${contentTypes2}
 
 export default (app: ZovaApplication) => {
   return {

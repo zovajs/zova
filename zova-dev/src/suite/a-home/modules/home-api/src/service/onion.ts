@@ -1,5 +1,5 @@
 import { ZovaApplication } from 'zova';
-import type { paths } from './_openapi_.js';
+import type { components, paths } from './_openapi_.js';
 import { IApiServiceActionOptions } from '../types.js';
 
 /** Onion_index */
@@ -14,8 +14,10 @@ export type ServiceServiceOnionechoPath = '/echo';
 export type ServiceServiceOnionechoMethod = 'get';
 export type ServiceServiceOnionechoRequestQuery =
   paths[ServiceServiceOnionechoPath][ServiceServiceOnionechoMethod]['parameters']['query'];
-export type ServiceServiceOnionechoRequestBody =
-  paths[ServiceServiceOnionechoPath][ServiceServiceOnionechoMethod]['requestBody']['content']['application/json'];
+export type ServiceServiceOnionechoRequestBody = {
+  /** @description User Id */
+  id: number;
+};
 export type ServiceServiceOnionechoResponseBody =
   paths[ServiceServiceOnionechoPath][ServiceServiceOnionechoMethod]['responses']['200']['content']['application/json']['data'];
 /** Onion_echo2 */
@@ -26,8 +28,10 @@ export type ServiceServiceOnionecho2RequestParams =
   paths[ServiceServiceOnionecho2Path][ServiceServiceOnionecho2Method]['parameters']['path'];
 export type ServiceServiceOnionecho2RequestQuery =
   paths[ServiceServiceOnionecho2Path][ServiceServiceOnionecho2Method]['parameters']['query'];
-export type ServiceServiceOnionecho2RequestBody =
-  paths[ServiceServiceOnionecho2Path][ServiceServiceOnionecho2Method]['requestBody']['content']['application/json'];
+export type ServiceServiceOnionecho2RequestBody = {
+  /** @description User Id */
+  id: number;
+};
 export type ServiceServiceOnionecho2ResponseBody =
   paths[ServiceServiceOnionecho2Path][ServiceServiceOnionecho2Method]['responses']['200']['content']['application/json']['data'];
 /** Onion_echo3 */
@@ -46,8 +50,7 @@ export type ServiceServiceOnionecho3ResponseBody =
 export const ServiceServiceOnionecho4Path = '/api/vona/test/onion/echo4';
 export type ServiceServiceOnionecho4Path = '/api/vona/test/onion/echo4';
 export type ServiceServiceOnionecho4Method = 'post';
-export type ServiceServiceOnionecho4RequestBody =
-  paths[ServiceServiceOnionecho4Path][ServiceServiceOnionecho4Method]['requestBody']['content']['application/json'];
+export type ServiceServiceOnionecho4RequestBody = components['schemas']['vona-test.dto.user'][];
 export type ServiceServiceOnionecho4ResponseBody =
   paths[ServiceServiceOnionecho4Path][ServiceServiceOnionecho4Method]['responses']['200']['content']['application/json']['data'];
 /** Onion_echo5 */
@@ -63,8 +66,7 @@ export default (app: ZovaApplication) => {
   return {
     index: (options?: IApiServiceActionOptions) =>
       app.meta.$api.post<any, ServiceServiceOnionindexResponseBody>(
-        app.util.apiServiceActionPathTranslate(ServiceServiceOnionindexPath, options?.params),
-
+        ServiceServiceOnionindexPath,
         app.util.apiServiceActionConfig(options),
       ),
     echo: (
@@ -73,8 +75,7 @@ export default (app: ZovaApplication) => {
       } & IApiServiceActionOptions,
     ) =>
       app.meta.$api.post<any, ServiceServiceOnionechoResponseBody>(
-        app.util.apiServiceActionPathTranslate(ServiceServiceOnionechoPath, options?.params),
-
+        ServiceServiceOnionechoPath,
         app.util.apiServiceActionConfig(options),
       ),
     echo2: (
@@ -98,12 +99,11 @@ export default (app: ZovaApplication) => {
     ) =>
       app.meta.$api.post<any, ServiceServiceOnionecho3ResponseBody>(
         app.util.apiServiceActionPathTranslate(ServiceServiceOnionecho3Path, options.params),
-
         app.util.apiServiceActionConfig(options),
       ),
     echo4: (body?: ServiceServiceOnionecho4RequestBody | undefined, options?: IApiServiceActionOptions) =>
       app.meta.$api.post<any, ServiceServiceOnionecho4ResponseBody>(
-        app.util.apiServiceActionPathTranslate(ServiceServiceOnionecho4Path, options?.params),
+        ServiceServiceOnionecho4Path,
         body,
         app.util.apiServiceActionConfig(options),
       ),
@@ -113,8 +113,7 @@ export default (app: ZovaApplication) => {
       } & IApiServiceActionOptions,
     ) =>
       app.meta.$api.post<any, ServiceServiceOnionecho5ResponseBody>(
-        app.util.apiServiceActionPathTranslate(ServiceServiceOnionecho5Path, options?.params),
-
+        ServiceServiceOnionecho5Path,
         app.util.apiServiceActionConfig(options),
       ),
   };

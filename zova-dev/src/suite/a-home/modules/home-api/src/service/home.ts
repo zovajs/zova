@@ -13,8 +13,7 @@ export default (app: ZovaApplication) => {
   return {
     index: (options?: IApiServiceActionOptions) =>
       app.meta.$api.post<any, ServiceServiceHomeindexResponseBody>(
-        app.util.apiServiceActionPathTranslate(ServiceServiceHomeindexPath, options?.params),
-
+        ServiceServiceHomeindexPath,
         app.util.apiServiceActionConfig(options),
       ),
   };
