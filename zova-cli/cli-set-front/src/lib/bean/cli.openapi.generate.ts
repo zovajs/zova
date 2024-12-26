@@ -81,9 +81,9 @@ export class CliOpenapiGenerate extends BeanCliBase {
     // name: params/query/headers
     const parametersInfo: Record<string, { name: string; question: boolean }> = {};
     const nodeTypeInfoParameters = _parseNodeType(nodeActionInfo.nodeTypeInfo['parameters'].nodeType)!;
-    for (const key of ['path', 'query', 'headers']) {
+    for (const key of ['path', 'query', 'header']) {
       if (_isNodeNever(nodeTypeInfoParameters[key].nodeType)) continue;
-      const key2 = key === 'path' ? 'params' : key;
+      const key2 = key === 'path' ? 'params' : key === 'header' ? 'headers' : key;
       const key2Upper = toUpperCaseFirstChar(key2);
       const info = {
         name: `Service${nameServiceAction}Request${key2Upper}`,
