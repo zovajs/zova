@@ -137,6 +137,8 @@ export class AppModule extends BeanSimple {
     module[SymbolInstalled].touch();
     // scope: should after [SymbolInstalled].touch
     await this.app.bean._getBean(`${moduleName}.scope.module` as any, false);
+    // monkey: moduleLoaded
+    await this._monkeyModule('moduleLoaded', module);
   }
 
   private async _installInner(_moduleName: string, module: IModule, moduleRepo: IModule) {
@@ -156,8 +158,6 @@ export class AppModule extends BeanSimple {
     await this._monkeyModule('moduleLoading', module);
     // register resources
     await this._registerResources(module);
-    // monkey: moduleLoaded
-    await this._monkeyModule('moduleLoaded', module);
   }
 
   private async _registerResources(module: IModule) {
