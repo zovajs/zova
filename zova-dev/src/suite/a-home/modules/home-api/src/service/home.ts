@@ -11,6 +11,7 @@ export type ServiceServiceHomeindexResponseBody =
 
 export default (app: ZovaApplication) => {
   return {
+    /** @description Home */
     index: (options?: IApiServiceActionOptions) =>
       app.meta.$api.post<any, ServiceServiceHomeindexResponseBody>(
         ServiceServiceHomeindexPath,

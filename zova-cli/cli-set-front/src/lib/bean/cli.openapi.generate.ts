@@ -67,10 +67,10 @@ export class CliOpenapiGenerate extends BeanCliBase {
 
   _generateAction(ast: ts.Node[], nodeActionInfo: INodeActionInfo) {
     // pathInfo
-    const pathInfo = this._getRequestPathInfo(ast, nodeActionInfo);
+    const pathInfo = _getRequestPathInfo(ast, nodeActionInfo);
     // contentTypes
     const contentTypes: string[] = [];
-    contentTypes.push(`/** ${nodeActionInfo.operationId} */`);
+    contentTypes.push(`\n/** ${nodeActionInfo.operationId} */`);
     // name: ServiceAction
     const nameServiceAction = `Service${nodeActionInfo.service}${nodeActionInfo.action}`;
     // name: path
@@ -143,8 +143,11 @@ export class CliOpenapiGenerate extends BeanCliBase {
     const contentPathTranslate = parametersInfo['params']
       ? `app.util.apiServiceActionPathTranslate(${nameRequestPath}, options${_q(contentOptionsQuestion)}.params),`
       : `${nameRequestPath},`;
+    // content: comment
+    const contentComments =
+      pathInfo.comments && pathInfo.comments.length > 0 ? `/*${pathInfo.comments.join()}*/\n` : '';
     // content: signature
-    const contentSignature = `${nodeActionInfo.action}: (
+    const contentSignature = `${contentComments}${nodeActionInfo.action}: (
       ${contentRequestBody}
       ${contentOptions2}
     ) =>
@@ -153,31 +156,6 @@ export class CliOpenapiGenerate extends BeanCliBase {
         app.util.apiServiceActionConfig(options),
       ),`;
     return [contentTypes.join('\n'), contentSignature];
-  }
-
-  _getRequestPathInfo(ast: ts.Node[], nodeActionInfo: INodeActionInfo) {
-    const nodePaths = ast.find(node => ts.isInterfaceDeclaration(node) && node.name.text === 'paths') as
-      | ts.InterfaceDeclaration
-      | undefined;
-    if (!nodePaths) throw new Error('paths not found');
-    let path;
-    let method;
-    const nodePath = nodePaths.members.find(node => {
-      if (!ts.isPropertySignature(node)) return false;
-      if (!node.type || !ts.isTypeLiteralNode(node.type)) return false;
-      path = (<ts.StringLiteral>node.name).text;
-      const nodeMethod = node.type.members.find(item => {
-        if (!ts.isPropertySignature(item)) return false;
-        if (!item.type || !ts.isIndexedAccessTypeNode(item.type)) return false;
-        const operationId = (<ts.StringLiteral>(<ts.LiteralTypeNode>item.type.indexType).literal).text;
-        if (operationId !== nodeActionInfo.operationId) return false;
-        method = (<ts.Identifier>item.name).text;
-        return true;
-      });
-      return !!nodeMethod;
-    }) as ts.PropertySignature | undefined;
-    if (!nodePath) throw new Error('path not found');
-    return { path, method, nodePath };
   }
 
   _generateService(ast: ts.Node[], nodeService: Record<string, INodeActionInfo>) {
@@ -238,6 +216,37 @@ export default (app: ZovaApplication) => {
     }
     return services;
   }
+}
+
+function _getRequestPathInfo(ast: ts.Node[], nodeActionInfo: INodeActionInfo) {
+  const nodePaths = ast.find(node => ts.isInterfaceDeclaration(node) && node.name.text === 'paths') as
+    | ts.InterfaceDeclaration
+    | undefined;
+  if (!nodePaths) throw new Error('paths not found');
+  let path;
+  let method;
+  let comments;
+  const nodePath = nodePaths.members.find(node => {
+    if (!ts.isPropertySignature(node)) return false;
+    if (!node.type || !ts.isTypeLiteralNode(node.type)) return false;
+    path = (<ts.StringLiteral>node.name).text;
+    const nodeMethod = node.type.members.find(item => {
+      if (!ts.isPropertySignature(item)) return false;
+      if (!item.type || !ts.isIndexedAccessTypeNode(item.type)) return false;
+      const operationId = (<ts.StringLiteral>(<ts.LiteralTypeNode>item.type.indexType).literal).text;
+      if (operationId !== nodeActionInfo.operationId) return false;
+      method = (<ts.Identifier>item.name).text;
+      // comment
+      const nodeComments = (<any>item).emitNode?.leadingComments;
+      if (nodeComments) {
+        comments = nodeComments.map(nodeComment => nodeComment.text);
+      }
+      return true;
+    });
+    return !!nodeMethod;
+  }) as ts.PropertySignature | undefined;
+  if (!nodePath) throw new Error('path not found');
+  return { path, method, comments, nodePath };
 }
 
 function _parseNodeType(nodeType?: ts.TypeLiteralNode) {
