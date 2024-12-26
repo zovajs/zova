@@ -1,9 +1,11 @@
 /** service: begin */
-import service_book from '../service/book.js';
-import service_onion from '../service/onion.js';
+import ServiceBook from '../service/book.js';
+import ServiceHome from '../service/home.js';
+import ServiceOnion from '../service/onion.js';
 export const services = {
-  book: service_book,
-  onion: service_onion,
+  book: ServiceBook,
+  home: ServiceHome,
+  onion: ServiceOnion,
 };
 /** service: end */
 /** scope: begin */

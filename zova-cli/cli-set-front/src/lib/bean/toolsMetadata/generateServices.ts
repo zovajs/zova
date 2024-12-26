@@ -1,5 +1,6 @@
 import path from 'path';
 import eggBornUtils from 'egg-born-utils';
+import { toUpperCaseFirstChar } from '@cabloy/word-utils';
 
 export async function generateServices(modulePath: string) {
   const pattern = `${modulePath}/src/service/*.ts`;
@@ -9,8 +10,11 @@ export async function generateServices(modulePath: string) {
   const contentImports: string[] = [];
   const contentServices: string[] = [];
   for (const file of files) {
-    const serviceName = path.basename(file.substring(0, file.length - '.ts'.length));
-    const className = 'service_' + serviceName;
+    const fileName = path.basename(file);
+    if (fileName.startsWith('_')) continue;
+    const parts = fileName.split('.').slice(0, -1);
+    const serviceName = parts[parts.length - 1];
+    const className = 'Service' + toUpperCaseFirstChar(serviceName);
     contentImports.push(`import ${className} from '../service/${serviceName}.js';`);
     contentServices.push(`'${serviceName}': ${className},`);
   }

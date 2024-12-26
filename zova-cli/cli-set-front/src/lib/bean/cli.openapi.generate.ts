@@ -43,6 +43,8 @@ export class CliOpenapiGenerate extends BeanCliBase {
       await fse.outputFile(outputFile, contents);
       await this.helper.formatFile({ fileName: outputFile });
       await this._generate(ast);
+      // tools.metadata
+      await this.helper.invokeCli([':tools:metadata', 'home-api'], { cwd: argv.projectPath });
     });
   }
 
