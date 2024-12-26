@@ -1,14 +1,11 @@
 /** beans: begin */
-export * from '../bean/bean.api.js';
 export * from '../bean/style.default.js';
 export * from '../bean/theme.default.js';
-import { BeanApi } from '../bean/bean.api.js';
 import { StyleDefault } from '../bean/style.default.js';
 import { ThemeDefault } from '../bean/theme.default.js';
 import 'zova';
 declare module 'zova' {
   export interface IBeanRecord {
-    'home-base.bean.api': BeanApi;
     'home-base.style.default': StyleDefault;
     'home-base.theme.default': ThemeDefault;
   }
@@ -62,7 +59,8 @@ import { BeanScopeBase, Scope, TypeLocaleBase, TypeModuleResource } from 'zova';
 @Scope()
 export class ScopeModuleHomeBase extends BeanScopeBase {}
 
-export interface ScopeModuleHomeBase extends TypeModuleResource<any, any, (typeof locales)[TypeLocaleBase], any, any> {}
+export interface ScopeModuleHomeBase
+  extends TypeModuleResource<never, never, (typeof locales)[TypeLocaleBase], never, never> {}
 
 import 'zova';
 declare module 'zova' {
