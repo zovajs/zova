@@ -16,7 +16,14 @@ interface INodeActionInfo {
   action: string;
   operationId: string;
   node: ts.PropertySignature;
+  nodeTypeInfo: TypeNodeTypeInfo;
 }
+
+interface INodeTypeInfoItem {
+  question: boolean;
+  nodeType?: ts.TypeLiteralNode;
+}
+type TypeNodeTypeInfo = Record<string, INodeTypeInfoItem>;
 
 export class CliOpenapiGenerate extends BeanCliBase {
   async execute() {
@@ -171,8 +178,23 @@ export default (app: ZovaApplication) => {
         action,
         operationId,
         node,
+        nodeTypeInfo: this._parseNodeType(node.type as ts.TypeLiteralNode),
       };
     }
     return services;
+  }
+
+  _parseNodeType(nodeType: ts.TypeLiteralNode) {
+    const nodeTypeInfo: TypeNodeTypeInfo = {};
+    nodeType.members.forEach(node => {
+      if (!ts.isPropertySignature(node)) return;
+      const name = (<ts.Identifier>node.name).text;
+      const value = <ts.TypeLiteralNode>node.type;
+      nodeTypeInfo[name] = {
+        question: !!node.questionToken,
+        nodeType: value,
+      };
+    });
+    return nodeTypeInfo;
   }
 }
