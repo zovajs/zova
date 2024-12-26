@@ -71,7 +71,7 @@ export default (app: ZovaApplication) => {
       ),
     echo: (
       options?: {
-        querytrue: ServiceServiceOnionechoRequestQuery;
+        query?: ServiceServiceOnionechoRequestQuery;
       } & IApiServiceActionOptions,
     ) =>
       app.meta.$api.post<any, ServiceServiceOnionechoResponseBody>(
@@ -81,8 +81,8 @@ export default (app: ZovaApplication) => {
     echo2: (
       body: ServiceServiceOnionecho2RequestBody,
       options: {
-        paramsfalse: ServiceServiceOnionecho2RequestParams;
-        queryfalse: ServiceServiceOnionecho2RequestQuery;
+        params: ServiceServiceOnionecho2RequestParams;
+        query: ServiceServiceOnionecho2RequestQuery;
       } & IApiServiceActionOptions,
     ) =>
       app.meta.$api.post<any, ServiceServiceOnionecho2ResponseBody>(
@@ -92,9 +92,9 @@ export default (app: ZovaApplication) => {
       ),
     echo3: (
       options: {
-        paramsfalse: ServiceServiceOnionecho3RequestParams;
-        querytrue: ServiceServiceOnionecho3RequestQuery;
-        headersfalse: ServiceServiceOnionecho3RequestHeaders;
+        params: ServiceServiceOnionecho3RequestParams;
+        query?: ServiceServiceOnionecho3RequestQuery;
+        headers: ServiceServiceOnionecho3RequestHeaders;
       } & IApiServiceActionOptions,
     ) =>
       app.meta.$api.post<any, ServiceServiceOnionecho3ResponseBody>(
@@ -109,7 +109,7 @@ export default (app: ZovaApplication) => {
       ),
     echo5: (
       options?: {
-        querytrue: ServiceServiceOnionecho5RequestQuery;
+        query?: ServiceServiceOnionecho5RequestQuery;
       } & IApiServiceActionOptions,
     ) =>
       app.meta.$api.post<any, ServiceServiceOnionecho5ResponseBody>(

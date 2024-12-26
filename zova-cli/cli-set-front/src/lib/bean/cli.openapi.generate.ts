@@ -118,7 +118,7 @@ export class CliOpenapiGenerate extends BeanCliBase {
       const info = parametersInfo[key];
       if (!info) continue;
       if (!info.question) contentOptionsQuestion = false;
-      contentOptions.push(`${key}${info.question}: ${info.name};`);
+      contentOptions.push(`${key}${_q(info.question)}: ${info.name};`);
     }
     const contentOptions2 =
       contentOptions.length > 0

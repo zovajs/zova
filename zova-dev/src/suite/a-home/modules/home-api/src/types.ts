@@ -1,3 +1,1 @@
-export interface IApiServiceActionOptions {
-  user: string;
-}
+export interface IApiServiceActionOptions {}
