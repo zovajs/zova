@@ -16,11 +16,11 @@ export class AppUtil extends BeanSimple {
     return baseURL;
   }
 
-  apiTranslatePath(pathName: string, pathParams?: Record<string, any>): string {
+  apiServiceActionPathTranslate(pathName: string, pathParams?: Record<string, any>): string {
     return defaultPathSerializer(pathName, pathParams);
   }
 
-  apiInvokeConfig(options?: any) {
+  apiServiceActionConfig(options?: any) {
     return {
       baseURL: this.getApiBaseURL(false),
       params: options?.query,

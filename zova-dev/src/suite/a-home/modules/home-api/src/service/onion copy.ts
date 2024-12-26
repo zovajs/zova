@@ -1,5 +1,6 @@
 import { ZovaApplication } from 'zova';
 import type { paths } from './_openapi_.js';
+import { IApiServiceActionOptions } from '../types.js';
 
 export const ServiceOnionEcho2Path = '/api/vona/test/onion/echo2/{userId}/{userName}';
 export type ServiceOnionEcho2Path = '/api/vona/test/onion/echo2/{userId}/{userName}';
@@ -27,12 +28,12 @@ export default (app: ZovaApplication) => {
         params?: ServiceOnionEcho2RequestParams;
         query?: ServiceOnionEcho2RequestQuery;
         headers?: ServiceOnionEcho2RequestHeaders;
-      },
+      } & IApiServiceActionOptions,
     ) =>
       app.meta.$api.post<any, ServiceOnionEcho2ResponseBody>(
-        app.util.apiTranslatePath(ServiceOnionEcho2Path, options?.params),
+        app.util.apiServiceActionPathTranslate(ServiceOnionEcho2Path, options?.params),
         body,
-        app.util.apiInvokeConfig(options),
+        app.util.apiServiceActionConfig(options),
       ),
   };
 };

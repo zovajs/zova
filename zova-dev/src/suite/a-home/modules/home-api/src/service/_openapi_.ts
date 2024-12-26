@@ -188,7 +188,14 @@ export interface operations {
       path?: never;
       cookie?: never;
     };
-    requestBody?: never;
+    requestBody?: {
+      content: {
+        'application/json': {
+          /** @description User Id */
+          id: number;
+        };
+      };
+    };
     responses: {
       200: {
         headers: {

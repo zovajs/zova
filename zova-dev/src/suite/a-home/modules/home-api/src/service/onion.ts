@@ -1,5 +1,6 @@
 import { ZovaApplication } from 'zova';
 import type { paths } from './_openapi_.js';
+import { IApiServiceActionOptions } from '../types.js';
 
 /** Onion_index */
 export const ServiceServiceOnionindexPath = '/api/';
@@ -53,7 +54,7 @@ echo2: (
       
     options?: {
         
-      },
+      } & IApiServiceActionOptions,
     
     ) =>
       app.meta.$api.post<any, ServiceOnionEcho2ResponseBody>(

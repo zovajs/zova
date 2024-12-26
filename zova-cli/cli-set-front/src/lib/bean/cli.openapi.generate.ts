@@ -4,7 +4,7 @@ import { __ThisSetName__ } from '../this.js';
 import path from 'node:path';
 import openapiTS, { astToString, OpenAPITSOptions } from 'openapi-typescript';
 import ts from 'typescript';
-import { toLowerCaseFirstChar } from '@cabloy/word-utils';
+import { toLowerCaseFirstChar, toUpperCaseFirstChar } from '@cabloy/word-utils';
 
 declare module '@cabloy/cli' {
   interface ICommandArgv {}
@@ -78,52 +78,71 @@ export class CliOpenapiGenerate extends BeanCliBase {
     // name: method
     const nameRequestMethod = `Service${nameServiceAction}Method`;
     contentTypes.push(`export type ${nameRequestMethod} = '${pathInfo.method}';`);
-    // name: params
+    // name: params/query/headers
+    const parametersInfo: Record<string, { name: string; question: boolean }> = {};
     const nodeTypeInfoParameters = _parseNodeType(nodeActionInfo.nodeTypeInfo['parameters'].nodeType)!;
-    let nameRequestParams = '';
-    let nameRequestParamsQuestion: boolean;
-    if (!_isNodeNever(nodeTypeInfoParameters['path'].nodeType)) {
-      nameRequestParamsQuestion = nodeTypeInfoParameters['path'].question;
-      nameRequestParams = `Service${nameServiceAction}RequestParams`;
+    for (const key of ['path', 'query', 'headers']) {
+      if (_isNodeNever(nodeTypeInfoParameters[key].nodeType)) continue;
+      const key2 = key === 'path' ? 'params' : key;
+      const key2Upper = toUpperCaseFirstChar(key2);
+      const info = {
+        name: `Service${nameServiceAction}Request${key2Upper}`,
+        question: nodeTypeInfoParameters[key].question,
+      };
+      parametersInfo[key2] = info;
       contentTypes.push(
-        `export type ${nameRequestParams} = paths[${nameRequestPath}][${nameRequestMethod}]['parameters']['path'];`,
+        `export type ${info.name} = paths[${nameRequestPath}][${nameRequestMethod}]['parameters']['${key}'];`,
       );
-      console.log(nameRequestParamsQuestion);
     }
-    // name: query
-    let nameRequestQuery = '';
-    let nameRequestQueryQuestion: boolean;
-    if (!_isNodeNever(nodeTypeInfoParameters['query'].nodeType)) {
-      nameRequestQueryQuestion = nodeTypeInfoParameters['query'].question;
-      nameRequestQuery = `Service${nameServiceAction}RequestQuery`;
+    // name: request body
+    let nameRequestBody = '';
+    let nameRequestBodyQuestion: boolean = true;
+    if (!_isNodeNever(nodeActionInfo.nodeTypeInfo['requestBody'].nodeType)) {
+      nameRequestBody = `Service${nameServiceAction}RequestBody`;
+      nameRequestBodyQuestion = nodeActionInfo.nodeTypeInfo['requestBody'].question;
       contentTypes.push(
-        `export type ${nameRequestQuery} = paths[${nameRequestPath}][${nameRequestMethod}]['parameters']['query'];`,
+        `export type ${nameRequestBody} = paths[${nameRequestPath}][${nameRequestMethod}]['requestBody']['content']['application/json'];`,
       );
-      console.log(nameRequestQueryQuestion);
     }
-    const nameRequestHeaders = '';
-    const nameRequestBody = '';
-    // const _nameResponseBody = '';
-    // content
-    const contentRequestMethod = pathInfo.method;
-    const contentRequestBody = ['get', 'delete'].includes(contentRequestMethod) ? '' : `body: ${nameRequestBody},`;
-    const contentOptions = [];
+    // name: response body
+    const nameResponseBody = `Service${nameServiceAction}ResponseBody`;
+    contentTypes.push(
+      `export type ${nameResponseBody} = paths[${nameRequestPath}][${nameRequestMethod}]['responses']['200']['content']['application/json']['data'];`,
+    );
+    // content: options
+    const contentOptions: string[] = [];
+    let contentOptionsQuestion: boolean = true;
+    for (const key of ['params', 'query', 'headers']) {
+      const info = parametersInfo[key];
+      if (!info) continue;
+      if (!info.question) contentOptionsQuestion = false;
+      contentOptions.push(`${key}${info.question}: ${info.name};`);
+    }
     const contentOptions2 =
-      nameRequestParams || nameRequestQuery || nameRequestHeaders
-        ? `
-    options?: {
-        ${contentOptions.join('\n')}
-      },
-    `
-        : '';
+      contentOptions.length > 0
+        ? `options${contentOptionsQuestion}: {\n${contentOptions.join('\n')}\n} & IApiServiceActionOptions,`
+        : `options${contentOptionsQuestion}: IApiServiceActionOptions,`;
+    // content: request body
+    let contentRequestBody = '';
+    if (!['get', 'delete'].includes(pathInfo.method)) {
+      if (!nameRequestBody) {
+        contentRequestBody = `body${contentOptionsQuestion}: undefined,`;
+      } else {
+        if (nameRequestBodyQuestion) {
+          contentRequestBody = `body${contentOptionsQuestion}: ${nameRequestBody} | undefined,`;
+        } else {
+          contentRequestBody = `body: ${nameRequestBody},`;
+        }
+      }
+    }
     const contentSignature = `${nodeActionInfo.action}: (
       ${contentRequestBody}
       ${contentOptions2}
     ) =>
-      app.meta.$api.post<any, ServiceOnionEcho2ResponseBody>(
-        app.util.apiTranslatePath(ServiceOnionEcho2Path, options?.params),
-        body,
-        app.util.apiInvokeConfig(options),
+      app.meta.$api.post<any, ${nameResponseBody}>(
+        app.util.apiServiceActionPathTranslate(${nameRequestPath}, options${contentOptionsQuestion}.params),
+        ${contentRequestBody ? 'body,' : ''} 
+        app.util.apiServiceActionConfig(options),
       ),`;
     return [contentTypes.join('\n'), contentSignature];
   }
@@ -164,6 +183,7 @@ export class CliOpenapiGenerate extends BeanCliBase {
     }
     const serviceContent = `import { ZovaApplication } from 'zova';
 import type { paths } from './_openapi_.js';
+import { IApiServiceActionOptions } from '../types.js';
 
 ${contentTypes.join('\n')}
 
