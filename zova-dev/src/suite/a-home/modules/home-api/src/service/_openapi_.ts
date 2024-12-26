@@ -205,7 +205,7 @@ export interface operations {
           'application/json': {
             code: string;
             message: string;
-            data?: unknown;
+            data?: string;
           };
         };
       };
