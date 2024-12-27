@@ -95,7 +95,7 @@ export class CliOpenapiGenerate extends BeanCliBase {
     await this.helper.formatFile({ fileName: outputFile });
     await this._generate(ast, moduleInfo, module);
     // tools.metadata
-    await this.helper.invokeCli([':tools:metadata', `'${moduleInfo.relativeName}'`], { cwd: argv.projectPath });
+    await this.helper.invokeCli([':tools:metadata', moduleInfo.relativeName], { cwd: argv.projectPath });
   }
 
   async _generate(ast: ts.Node[], _moduleInfo: IModuleInfo, module: IModule) {
