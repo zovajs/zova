@@ -45,6 +45,7 @@ export class CliOpenapiGenerate extends BeanCliBase {
         throw new Error('Please generate config first!');
       }
       const total = moduleNames.length;
+      const __caches: Record<string, any> = {};
       for (let index = 0; index < total; index++) {
         const moduleName = moduleNames[index];
         // log
@@ -56,7 +57,7 @@ export class CliOpenapiGenerate extends BeanCliBase {
         // generate res
         const moduleInfo = this.helper.parseModuleInfo(moduleName);
         const module = this.helper.findModule(moduleName);
-        await this._generateOpenapi(config, moduleInfo, module);
+        await this._generateOpenapi(config, moduleInfo, module, __caches);
       }
     });
   }
@@ -70,11 +71,25 @@ export class CliOpenapiGenerate extends BeanCliBase {
     return Object.keys(config.modules).filter(item => moduleNames.includes(item));
   }
 
-  async _generateOpenapi(config: ZovaOpenapiConfig, moduleInfo: IModuleInfo, module: IModule) {
+  async _generateOpenapi(
+    config: ZovaOpenapiConfig,
+    moduleInfo: IModuleInfo,
+    module: IModule,
+    __caches: Record<string, any>,
+  ) {
     const { argv } = this.context;
     const moduleConfig = extend(true, {}, config.default, config.modules[moduleInfo.relativeName]);
-    const ast = await openapiTS(moduleConfig.source, moduleConfig.options);
-    const contents = astToString(ast);
+    let ast;
+    let contents;
+    const cache = __caches[moduleConfig.source];
+    if (cache) {
+      ast = cache.ast;
+      contents = cache.contents;
+    } else {
+      ast = await openapiTS(moduleConfig.source, moduleConfig.options);
+      contents = astToString(ast);
+      __caches[moduleConfig.source] = { ast, contents };
+    }
     const outputFile = path.join(module.root, 'src/service/_openapi_.ts');
     await fse.outputFile(outputFile, contents);
     await this.helper.formatFile({ fileName: outputFile });
