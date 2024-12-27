@@ -1,13 +1,10 @@
 {
-  "name": "zova-module-a-zova",
-  "version": "5.0.49",
-  "title": "a-zova",
+  "name": "zova-module-a-api",
+  "version": "5.0.0",
+  "title": "a-api",
   "zovaModule": {
-    "dependencies": {
-      "a-api": "5.0.0",
-      "a-router": "5.0.0",
-      "a-model": "5.0.0",
-      "a-style": "5.0.0"
+    "capabilities": {
+      "monkey": true
     }
   },
   "type": "module",
@@ -22,13 +19,13 @@
     },
     "./*": "./*"
   },
-  "description": "zova",
+  "description": "",
   "keywords": [
     "Zova Module"
   ],
-  "author": "zhennann",
-  "license": "MIT",
+  "author": "",
   "files": [
+    "mock",
     "dist",
     "src"
   ],
@@ -37,5 +34,5 @@
     "tsc:publish": "npm run clean && tsc -b",
     "_prepublishOnly": "npm run tsc:publish"
   },
-  "gitHead": "73721393c1ea9a95539948d57ad692f2c004d7c7"
+  "dependencies": {}
 }
