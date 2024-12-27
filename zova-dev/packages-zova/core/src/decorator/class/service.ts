@@ -10,7 +10,7 @@ export function Service(options?: IDecoratorServiceOptions): ClassDecorator {
       module: Cast(options).module,
       scene: options.scene || 'service',
       name: options.name,
-      containerScope: 'app',
+      containerScope: 'ctx',
       markReactive: options.markReactive,
       beanClass: target as unknown as Constructable,
     });

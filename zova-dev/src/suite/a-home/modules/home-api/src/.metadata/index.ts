@@ -9,12 +9,11 @@ declare module 'zova' {
 }
 /** beans: end */
 /** service: begin */
-
-export interface IModuleService {}
+import { ServiceBook } from '../service/book.js';
+export interface IModuleService {
+  book: ServiceBook;
+}
 /** service: end */
-/** monkey: begin */
-export * from '../monkey.js';
-/** monkey: end */
 /** scope: begin */
 import { BeanScopeBase, Scope, TypeModuleResource } from 'zova';
 

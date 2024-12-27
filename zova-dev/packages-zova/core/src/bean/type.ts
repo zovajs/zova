@@ -10,6 +10,15 @@ export type TypeBeanRecordSelector<SCENE extends TypeDecoratorBeanOptionsSceneBa
 export type TypeBeanRecordSelectorKeys<SCENE extends TypeDecoratorBeanOptionsSceneBase> =
   keyof TypeBeanRecordSelector<SCENE>;
 
+export type TypeBeanRecordSelectorSpecificName<SCENE extends TypeDecoratorBeanOptionsSceneBase, NAME extends string> = {
+  [K in keyof IBeanRecord as K extends `${string}.${SCENE}.${NAME}` ? K : never]: IBeanRecord[K];
+};
+
+export type TypeBeanRecordSelectorSpecificNameKeys<
+  SCENE extends TypeDecoratorBeanOptionsSceneBase,
+  NAME extends string,
+> = keyof TypeBeanRecordSelectorSpecificName<SCENE, NAME>;
+
 export interface IBeanScopeRecord {}
 export type TypeBeanScopeRecordKeys = keyof IBeanScopeRecord;
 

@@ -8,18 +8,29 @@ declare module 'zova' {
   }
 }
 /** beans: end */
+/** config: begin */
+export * from '../config/config.js';
+import { config } from '../config/config.js';
+/** config: end */
+/** monkey: begin */
+export * from '../monkey.js';
+/** monkey: end */
 /** scope: begin */
 import { BeanScopeBase, Scope, TypeModuleResource } from 'zova';
 
 @Scope()
 export class ScopeModuleAApi extends BeanScopeBase {}
 
-export interface ScopeModuleAApi extends TypeModuleResource<never, never, never, never, never> {}
+export interface ScopeModuleAApi extends TypeModuleResource<typeof config, never, never, never, never> {}
 
 import 'zova';
 declare module 'zova' {
   export interface IBeanScopeRecord {
     'a-api': ScopeModuleAApi;
+  }
+
+  export interface IBeanScopeConfig {
+    'a-api': ReturnType<typeof config>;
   }
 }
 /** scope: end */
