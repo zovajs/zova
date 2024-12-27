@@ -19,7 +19,7 @@ export default function (): ZovaOpenapiConfig {
         const code = await cli.template.renderContent({
           content: `'${moduleName}': { source: 'path/to/openapi.json' }\n`,
         });
-        ast.replace('return { modules: { $$$0 } }', `return { modules: { $$$0 ,\n ${code} } }`);
+        ast.replace('return { modules: { $$$0 } }', `return { modules: { $$$0 , ${code} } }`);
       }
     }
     // ok
