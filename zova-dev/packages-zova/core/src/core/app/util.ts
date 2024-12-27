@@ -20,7 +20,7 @@ export class AppUtil extends BeanSimple {
     return defaultPathSerializer(pathName, pathParams);
   }
 
-  apiServiceActionConfig(options?: any) {
+  apiServiceActionConfigPrepare(options?: any) {
     return {
       baseURL: this.getApiBaseURL(false),
       params: options?.query,

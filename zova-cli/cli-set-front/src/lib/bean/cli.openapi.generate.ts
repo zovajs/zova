@@ -153,7 +153,7 @@ export class CliOpenapiGenerate extends BeanCliBase {
     ) =>
       app.meta.$api.post<any, ${nameResponseBody}>(
         ${contentPathTranslate} ${contentRequestBody ? 'body,' : ''} 
-        app.util.apiServiceActionConfig(options),
+        app.util.apiServiceActionConfigPrepare(options),
       ),`;
     return [contentTypes.join('\n'), contentSignature];
   }

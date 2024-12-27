@@ -15,7 +15,7 @@ export default (app: ZovaApplication) => {
     index: (options?: IApiServiceActionOptions) =>
       app.meta.$api.post<any, ServiceServiceHomeindexResponseBody>(
         ServiceServiceHomeindexPath,
-        app.util.apiServiceActionConfig(options),
+        app.util.apiServiceActionConfigPrepare(options),
       ),
   };
 };

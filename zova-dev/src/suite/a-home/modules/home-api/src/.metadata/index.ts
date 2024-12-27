@@ -1,10 +1,13 @@
 /** beans: begin */
 export * from '../bean/bean.api.js';
+export * from '../bean/bean.serviceBase.js';
 import { BeanApi } from '../bean/bean.api.js';
+import { BeanServiceBase } from '../bean/bean.serviceBase.js';
 import 'zova';
 declare module 'zova' {
   export interface IBeanRecord {
     'home-api.bean.api': BeanApi;
+    'home-api.bean.serviceBase': BeanServiceBase;
   }
 }
 /** beans: end */

@@ -72,7 +72,7 @@ export default (app: ZovaApplication) => {
     index: (options?: IApiServiceActionOptions) =>
       app.meta.$api.post<any, ServiceServiceOnionindexResponseBody>(
         ServiceServiceOnionindexPath,
-        app.util.apiServiceActionConfig(options),
+        app.util.apiServiceActionConfigPrepare(options),
       ),
     echo: (
       options?: {
@@ -81,7 +81,7 @@ export default (app: ZovaApplication) => {
     ) =>
       app.meta.$api.post<any, ServiceServiceOnionechoResponseBody>(
         ServiceServiceOnionechoPath,
-        app.util.apiServiceActionConfig(options),
+        app.util.apiServiceActionConfigPrepare(options),
       ),
     echo2: (
       body: ServiceServiceOnionecho2RequestBody,
@@ -93,7 +93,7 @@ export default (app: ZovaApplication) => {
       app.meta.$api.post<any, ServiceServiceOnionecho2ResponseBody>(
         app.util.apiServiceActionPathTranslate(ServiceServiceOnionecho2Path, options.params),
         body,
-        app.util.apiServiceActionConfig(options),
+        app.util.apiServiceActionConfigPrepare(options),
       ),
     echo3: (
       options: {
@@ -104,13 +104,13 @@ export default (app: ZovaApplication) => {
     ) =>
       app.meta.$api.post<any, ServiceServiceOnionecho3ResponseBody>(
         app.util.apiServiceActionPathTranslate(ServiceServiceOnionecho3Path, options.params),
-        app.util.apiServiceActionConfig(options),
+        app.util.apiServiceActionConfigPrepare(options),
       ),
     echo4: (body?: ServiceServiceOnionecho4RequestBody | undefined, options?: IApiServiceActionOptions) =>
       app.meta.$api.post<any, ServiceServiceOnionecho4ResponseBody>(
         ServiceServiceOnionecho4Path,
         body,
-        app.util.apiServiceActionConfig(options),
+        app.util.apiServiceActionConfigPrepare(options),
       ),
     echo5: (
       options?: {
@@ -119,7 +119,7 @@ export default (app: ZovaApplication) => {
     ) =>
       app.meta.$api.post<any, ServiceServiceOnionecho5ResponseBody>(
         ServiceServiceOnionecho5Path,
-        app.util.apiServiceActionConfig(options),
+        app.util.apiServiceActionConfigPrepare(options),
       ),
   };
 };
