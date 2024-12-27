@@ -20,7 +20,7 @@ export interface ScopeModule${relativeNameCapitalize}
     ${options.errors ? 'typeof Errors' : 'never'},
     ${options.locales ? '(typeof locales)[TypeLocaleBase]' : 'never'},
     ${options.constants ? 'typeof constants' : 'never'},
-    ${options.services ? 'typeof services' : 'never'},
+    ${options.services ? 'IModuleService' : 'never'},
   > {}
 
 import 'zova';

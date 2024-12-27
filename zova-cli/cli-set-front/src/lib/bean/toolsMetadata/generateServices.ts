@@ -15,13 +15,13 @@ export async function generateServices(modulePath: string) {
     const parts = fileName.split('.').slice(0, -1);
     const serviceName = parts[parts.length - 1];
     const className = 'Service' + toUpperCaseFirstChar(serviceName);
-    contentImports.push(`import ${className} from '../service/${serviceName}.js';`);
-    contentServices.push(`'${serviceName}': ${className},`);
+    contentImports.push(`import { ${className} } from '../service/${serviceName}.js';`);
+    contentServices.push(`'${serviceName}': ${className};`);
   }
   // combine
   const content = `/** service: begin */
 ${contentImports.join('\n')}
-export const services = {
+export interface IModuleService {
   ${contentServices.join('\n')}
 };
 /** service: end */

@@ -51,10 +51,10 @@ export const locales = {
 };
 /** locale: end */
 /** service: begin */
-import service_menu from '../service/menu.js';
-export const services = {
-  menu: service_menu,
-};
+import { ServiceMenu } from '../service/menu.js';
+export interface IModuleService {
+  menu: ServiceMenu;
+}
 /** service: end */
 /** scope: begin */
 import { BeanScopeBase, Scope, TypeLocaleBase, TypeModuleResource } from 'zova';
@@ -63,7 +63,7 @@ import { BeanScopeBase, Scope, TypeLocaleBase, TypeModuleResource } from 'zova';
 export class ScopeModuleHomeLayout extends BeanScopeBase {}
 
 export interface ScopeModuleHomeLayout
-  extends TypeModuleResource<typeof config, any, (typeof locales)[TypeLocaleBase], any, typeof services> {}
+  extends TypeModuleResource<typeof config, never, (typeof locales)[TypeLocaleBase], never, IModuleService> {}
 
 import 'zova';
 declare module 'zova' {
