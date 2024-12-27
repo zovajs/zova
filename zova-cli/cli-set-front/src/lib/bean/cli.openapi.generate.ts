@@ -36,7 +36,8 @@ export class CliOpenapiGenerate extends BeanCliBase {
       throw new Error('Please generate config first!');
     }
     await this.helper.importDynamic(configFile, async instance => {
-      const config = (await instance.default()) as { source: string; options: OpenAPITSOptions };
+      const config = (await instance.default()) as ZovaOpenapiConfig;
+
       const ast = await openapiTS(config.source, config.options);
       const contents = astToString(ast);
       const outputFile = path.join(argv.projectPath, 'src/suite/a-home/modules/home-api/src/service/_openapi_.ts');

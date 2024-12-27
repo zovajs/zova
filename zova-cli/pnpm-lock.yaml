@@ -74,6 +74,9 @@ importers:
       urllib:
         specifier: ^3.24.0
         version: 3.27.1
+      zova-openapi:
+        specifier: ^1.0.0
+        version: 1.0.0(typescript@5.7.2)
       zova-shared:
         specifier: ^1.0.7
         version: 1.0.7
@@ -3782,6 +3785,9 @@ packages:
   yocto-queue@0.1.0:
     resolution: {integrity: sha512-rVksvsnNCdJ/ohGc6xgPwyN8eheCxsiLM8mxuE/t/mOVqJewPuO1miLpTHQiRgTKCLexL4MeAFVagts7HmNZ2Q==}
     engines: {node: '>=10'}
+
+  zova-openapi@1.0.0:
+    resolution: {integrity: sha512-41HoJOVBanhzryyvcapYfXjfKJCVURtLLbYRfBcgBQP0ISgdb28q8rgZLmQ1kEAjszcrtUXAdQuSiXld3PoSlA==}
 
   zova-shared@1.0.7:
     resolution: {integrity: sha512-vTJSY9t7+nQq2Geg5kWVCVpP+TThooYf0Z+Bs1amxfJKj0M2rO1iDZ3howOm85Hw71QpqGbpDzLbZhR/V8sO6Q==}
@@ -7732,6 +7738,13 @@ snapshots:
   yn@3.1.1: {}
 
   yocto-queue@0.1.0: {}
+
+  zova-openapi@1.0.0(typescript@5.7.2):
+    dependencies:
+      openapi-typescript: 7.4.4(typescript@5.7.2)
+    transitivePeerDependencies:
+      - encoding
+      - typescript
 
   zova-shared@1.0.7: {}
 
