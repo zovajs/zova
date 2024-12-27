@@ -1,4 +1,5 @@
-import { ZovaApplication } from 'zova';
+import { Service } from 'zova';
+import { BeanServiceBase } from 'zova-module-a-api';
 import { ServiceUserEntity } from './user.js';
 
 export interface ServiceAuthJWT {
@@ -17,10 +18,13 @@ export interface ServiceAuthLoginResult {
   jwt?: ServiceAuthJWT;
 }
 
-export default (app: ZovaApplication) => {
-  return {
-    login: (params: ServiceAuthLoginParams) =>
-      app.meta.$api.post<any, ServiceAuthLoginResult, ServiceAuthLoginParams>('/home/user/login', params),
-    logout: () => app.meta.$api.post<any, void, void>('/home/user/logout'),
-  };
-};
+@Service()
+export class ServiceAuth extends BeanServiceBase {
+  login(params: ServiceAuthLoginParams) {
+    return this.$api.post<any, ServiceAuthLoginResult, ServiceAuthLoginParams>('/home/user/login', params);
+  }
+
+  logout() {
+    return this.$api.post<any, void, void>('/home/user/logout');
+  }
+}

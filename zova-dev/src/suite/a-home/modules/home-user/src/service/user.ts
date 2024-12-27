@@ -1,12 +1,14 @@
-import { ZovaApplication } from 'zova';
+import { Service } from 'zova';
+import { BeanServiceBase } from 'zova-module-a-api';
 
 export interface ServiceUserEntity {
   username?: string;
   avatar?: string;
 }
 
-export default (app: ZovaApplication) => {
-  return {
-    getUserInfo: () => app.meta.$api.get<any, ServiceUserEntity>('/home/user/info'),
-  };
-};
+@Service()
+export class ServiceUser extends BeanServiceBase {
+  getUserInfo() {
+    return this.$api.get<any, ServiceUserEntity>('/home/user/info');
+  }
+}

@@ -40,12 +40,12 @@ export const locales = {
 /** locale: end */
 /** service: begin */
 import { ServiceAuth } from '../service/auth.js';
-import { ServiceAuth1 } from '../service/auth1.js';
 import { ServiceUser } from '../service/user.js';
+import { ServiceUser1 } from '../service/user1.js';
 export interface IModuleService {
   auth: ServiceAuth;
-  auth1: ServiceAuth1;
   user: ServiceUser;
+  user1: ServiceUser1;
 }
 /** service: end */
 /** scope: begin */
