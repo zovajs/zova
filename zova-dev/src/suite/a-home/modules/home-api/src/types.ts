@@ -1,5 +1,4 @@
-import { TypeModuleServices } from 'zova';
-import { services } from './.metadata/index.js';
+import { IModuleService } from './.metadata/index.js';
 import { BeanApi } from './bean/bean.api.js';
 
 export interface IApiServiceActionOptions {}
@@ -10,6 +9,6 @@ declare module 'zova' {
   }
   export interface BeanBase {
     $api: BeanApi;
-    $service: TypeModuleServices<typeof services>;
+    $service: IModuleService;
   }
 }
