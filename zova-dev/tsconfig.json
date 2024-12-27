@@ -42,6 +42,9 @@
       "path": "packages-zova/zova"
     },
     {
+      "path": "packages-utils/zova-openapi"
+    },
+    {
       "path": "packages-utils/zova-vite"
     },
     {
