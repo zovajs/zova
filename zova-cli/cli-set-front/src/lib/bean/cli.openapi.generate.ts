@@ -6,6 +6,8 @@ import openapiTS, { astToString } from 'openapi-typescript';
 import ts from 'typescript';
 import { toLowerCaseFirstChar, toUpperCaseFirstChar } from '@cabloy/word-utils';
 import { ZovaOpenapiConfig } from 'zova-openapi';
+import { extend } from '@cabloy/extend';
+import { IModule, IModuleInfo } from '@cabloy/module-info';
 
 declare module '@cabloy/cli' {
   interface ICommandArgv {}
@@ -52,7 +54,9 @@ export class CliOpenapiGenerate extends BeanCliBase {
           text: moduleName,
         });
         // generate res
-        await this._generateOpenapi(config, moduleName);
+        const moduleInfo = this.helper.parseModuleInfo(moduleName);
+        const module = this.helper.findModule(moduleName);
+        await this._generateOpenapi(config, moduleInfo, module);
       }
     });
   }
@@ -66,28 +70,26 @@ export class CliOpenapiGenerate extends BeanCliBase {
     return Object.keys(config.modules).filter(item => moduleNames.includes(item));
   }
 
-  async _generateOpenapi(config: ZovaOpenapiConfig, moduleName: string) {
-    const ast = await openapiTS(config.source, config.options);
+  async _generateOpenapi(config: ZovaOpenapiConfig, moduleInfo: IModuleInfo, module: IModule) {
+    const { argv } = this.context;
+    const moduleConfig = extend(true, {}, config.default, config.modules[moduleInfo.relativeName]);
+    const ast = await openapiTS(moduleConfig.source, moduleConfig.options);
     const contents = astToString(ast);
-    const outputFile = path.join(argv.projectPath, 'src/suite/a-home/modules/home-api/src/service/_openapi_.ts');
+    const outputFile = path.join(module.root, 'src/service/_openapi_.ts');
     await fse.outputFile(outputFile, contents);
     await this.helper.formatFile({ fileName: outputFile });
-    await this._generate(ast);
+    await this._generate(ast, moduleInfo, module);
     // tools.metadata
-    await this.helper.invokeCli([':tools:metadata', 'home-api'], { cwd: argv.projectPath });
+    await this.helper.invokeCli([':tools:metadata', `'${moduleInfo.relativeName}'`], { cwd: argv.projectPath });
   }
 
-  async _generate(ast: ts.Node[]) {
-    const { argv } = this.context;
+  async _generate(ast: ts.Node[], _moduleInfo: IModuleInfo, module: IModule) {
     const nodeServices = this._getNodeServices(ast);
     if (!nodeServices) return;
     for (const serviceName in nodeServices) {
       const serviceNameLower = toLowerCaseFirstChar(serviceName);
       const nodeService = nodeServices[serviceName];
-      const serviceFile = path.join(
-        argv.projectPath,
-        `src/suite/a-home/modules/home-api/src/service/${serviceNameLower}.ts`,
-      );
+      const serviceFile = path.join(module.root, `src/service/${serviceNameLower}.ts`);
       const serviceContent = this._generateService(ast, serviceName, nodeService);
       await fse.outputFile(serviceFile, serviceContent);
       await this.helper.formatFile({ fileName: serviceFile });

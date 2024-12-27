@@ -50,7 +50,7 @@
     "svgo": "^3.2.0",
     "typescript": "5.7.2",
     "urllib": "^3.24.0",
-    "zova-openapi": "^1.0.0",
+    "zova-openapi": "^1.0.1",
     "zova-shared": "^1.0.7",
     "zova-vite": "^1.0.182"
   },
