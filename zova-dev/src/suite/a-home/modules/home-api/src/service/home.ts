@@ -1,0 +1,22 @@
+import { Service } from 'zova';
+import { BeanServiceBase } from 'zova-module-a-api';
+import { IApiServiceActionOptions } from '../types.js';
+import type { paths } from './_openapi_.js';
+
+/** Home_index */
+export const ServiceServiceHomeindexPath = '/';
+export type ServiceServiceHomeindexPath = '/';
+export type ServiceServiceHomeindexMethod = 'get';
+export type ServiceServiceHomeindexResponseBody =
+  paths[ServiceServiceHomeindexPath][ServiceServiceHomeindexMethod]['responses']['200']['content']['application/json']['data'];
+
+@Service()
+export class ServiceHome extends BeanServiceBase {
+  /** @description Home */
+  index(options?: IApiServiceActionOptions) {
+    return this.$api.get<any, ServiceServiceHomeindexResponseBody>(
+      ServiceServiceHomeindexPath,
+      this.$configPrepare(options),
+    );
+  }
+}

@@ -59,7 +59,7 @@ export class CliOpenapiGenerate extends BeanCliBase {
         argv.projectPath,
         `src/suite/a-home/modules/home-api/src/service/${serviceNameLower}.ts`,
       );
-      const serviceContent = this._generateService(ast, nodeService);
+      const serviceContent = this._generateService(ast, serviceName, nodeService);
       await fse.outputFile(serviceFile, serviceContent);
       await this.helper.formatFile({ fileName: serviceFile });
     }
@@ -141,24 +141,25 @@ export class CliOpenapiGenerate extends BeanCliBase {
     }
     // content: path translate
     const contentPathTranslate = parametersInfo['params']
-      ? `app.util.apiServiceActionPathTranslate(${nameRequestPath}, options${_q(contentOptionsQuestion)}.params),`
+      ? `this.$pathTranslate(${nameRequestPath}, options${_q(contentOptionsQuestion)}.params),`
       : `${nameRequestPath},`;
     // content: comment
     const contentComments =
       pathInfo.comments && pathInfo.comments.length > 0 ? `/*${pathInfo.comments.join()}*/\n` : '';
     // content: signature
-    const contentSignature = `${contentComments}${nodeActionInfo.action}: (
+    const contentSignature = `${contentComments}${nodeActionInfo.action}(
       ${contentRequestBody}
       ${contentOptions2}
-    ) =>
-      app.meta.$api.post<any, ${nameResponseBody}>(
+    ) {
+      return this.$api.${pathInfo.method}<any, ${nameResponseBody}>(
         ${contentPathTranslate} ${contentRequestBody ? 'body,' : ''} 
-        app.util.apiServiceActionConfigPrepare(options),
-      ),`;
+        this.$configPrepare(options),
+      );
+    }\n`;
     return [contentTypes.join('\n'), contentSignature];
   }
 
-  _generateService(ast: ts.Node[], nodeService: Record<string, INodeActionInfo>) {
+  _generateService(ast: ts.Node[], serviceName: string, nodeService: Record<string, INodeActionInfo>) {
     const contentTypes: string[] = [];
     const contentSignatures: string[] = [];
     for (const actionName in nodeService) {
@@ -173,16 +174,17 @@ export class CliOpenapiGenerate extends BeanCliBase {
     if (contentTypes2.includes('paths[')) importsType.push('paths');
     const contentImportsType =
       importsType.length > 0 ? `import type { ${importsType.join(', ')} } from './_openapi_.js';` : '';
-    const serviceContent = `import { ZovaApplication } from 'zova';${contentImportsType}
+    const serviceContent = `import { Service } from 'zova';
+import { BeanServiceBase } from 'zova-module-a-api';
 import { IApiServiceActionOptions } from '../types.js';
+${contentImportsType}
 
 ${contentTypes2}
 
-export default (app: ZovaApplication) => {
-  return {
-    ${contentSignatures.join('\n')}
-  };
-};
+@Service()
+export class Service${serviceName} extends BeanServiceBase {
+  ${contentSignatures.join('\n')}
+}
 `;
     return serviceContent;
   }

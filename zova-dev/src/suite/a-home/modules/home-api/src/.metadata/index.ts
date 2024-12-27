@@ -10,8 +10,12 @@ declare module 'zova' {
 /** beans: end */
 /** service: begin */
 import { ServiceBook } from '../service/book.js';
+import { ServiceHome } from '../service/home.js';
+import { ServiceOnion } from '../service/onion.js';
 export interface IModuleService {
   book: ServiceBook;
+  home: ServiceHome;
+  onion: ServiceOnion;
 }
 /** service: end */
 /** scope: begin */
