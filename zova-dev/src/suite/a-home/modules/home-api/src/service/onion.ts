@@ -13,7 +13,7 @@ export type ServiceServiceOnionindexResponseBody =
 /** Onion_echo */
 export const ServiceServiceOnionechoPath = '/echo';
 export type ServiceServiceOnionechoPath = '/echo';
-export type ServiceServiceOnionechoMethod = 'get';
+export type ServiceServiceOnionechoMethod = 'post';
 export type ServiceServiceOnionechoRequestQuery =
   paths[ServiceServiceOnionechoPath][ServiceServiceOnionechoMethod]['parameters']['query'];
 export type ServiceServiceOnionechoRequestBody = {
@@ -78,12 +78,14 @@ export class ServiceOnion extends BeanServiceBase {
   }
 
   echo(
+    body: ServiceServiceOnionechoRequestBody,
     options?: {
       query?: ServiceServiceOnionechoRequestQuery;
     } & IApiServiceActionOptions,
   ) {
-    return this.$api.get<any, ServiceServiceOnionechoResponseBody>(
+    return this.$api.post<any, ServiceServiceOnionechoResponseBody>(
       ServiceServiceOnionechoPath,
+      body,
       this.$configPrepare(options),
     );
   }

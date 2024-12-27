@@ -39,9 +39,9 @@ export interface paths {
       path?: never;
       cookie?: never;
     };
-    get: operations['Onion_echo'];
+    get?: never;
     put?: never;
-    post?: never;
+    post: operations['Onion_echo'];
     delete?: never;
     options?: never;
     head?: never;
@@ -188,7 +188,7 @@ export interface operations {
       path?: never;
       cookie?: never;
     };
-    requestBody?: {
+    requestBody: {
       content: {
         'application/json': {
           /** @description User Id */
