@@ -39,12 +39,14 @@ export const locales = {
 };
 /** locale: end */
 /** service: begin */
-import service_auth from '../service/auth.js';
-import service_user from '../service/user.js';
-export const services = {
-  auth: service_auth,
-  user: service_user,
-};
+import { ServiceAuth } from '../service/auth.js';
+import { ServiceAuth1 } from '../service/auth1.js';
+import { ServiceUser } from '../service/user.js';
+export interface IModuleService {
+  auth: ServiceAuth;
+  auth1: ServiceAuth1;
+  user: ServiceUser;
+}
 /** service: end */
 /** scope: begin */
 import { BeanScopeBase, Scope, TypeLocaleBase, TypeModuleResource } from 'zova';
@@ -53,7 +55,7 @@ import { BeanScopeBase, Scope, TypeLocaleBase, TypeModuleResource } from 'zova';
 export class ScopeModuleHomeUser extends BeanScopeBase {}
 
 export interface ScopeModuleHomeUser
-  extends TypeModuleResource<any, any, (typeof locales)[TypeLocaleBase], any, typeof services> {}
+  extends TypeModuleResource<never, never, (typeof locales)[TypeLocaleBase], never, IModuleService> {}
 
 import 'zova';
 declare module 'zova' {
