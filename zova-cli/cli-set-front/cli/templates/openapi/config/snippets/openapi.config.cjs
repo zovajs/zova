@@ -12,7 +12,16 @@ export default function (): ZovaOpenapiConfig {
   };
 }
 `,
-  async transform({ cli: _cli, ast }) {
+  async transform({ cli: cli, ast, argv }) {
+    const moduleNames = argv._;
+    for (const moduleName of moduleNames) {
+      if (!ast.has(`return { modules: { '${moduleName}':{$$$0}, $$$1} }`)) {
+        const code = await cli.template.renderContent({
+          content: `'${moduleName}': { source: 'path/to/openapi.json' }\n`,
+        });
+        ast.replace('return { modules: { $$$0 } }', `return { modules: { $$$0 ,\n ${code} } }`);
+      }
+    }
     // ok
     return ast;
   },
