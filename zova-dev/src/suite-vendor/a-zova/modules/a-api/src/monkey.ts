@@ -38,7 +38,7 @@ export class Monkey extends BeanSimple implements IMonkeyAppInitialize, IMonkeyM
     // self
     if (this._moduleSelf === module) {
       const scopeSelf: ScopeModule = await this.bean.getScope(__ThisModule__);
-      this._defaultModuleService = scopeSelf.config.defaultModuleService;
+      this._defaultModuleService = scopeSelf.config.defaultModuleServices;
       await this.app.meta.module.use(this._defaultModuleService);
     }
   }
