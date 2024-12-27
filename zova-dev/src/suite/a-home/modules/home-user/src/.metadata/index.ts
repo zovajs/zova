@@ -39,6 +39,8 @@ export const locales = {
 };
 /** locale: end */
 /** service: begin */
+export * from '../service/auth.js';
+export * from '../service/user.js';
 import { ServiceAuth } from '../service/auth.js';
 import { ServiceUser } from '../service/user.js';
 export interface IModuleService {

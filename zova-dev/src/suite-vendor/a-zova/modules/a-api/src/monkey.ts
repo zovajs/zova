@@ -29,11 +29,13 @@ export class Monkey extends BeanSimple implements IMonkeyAppInitialize, IMonkeyM
   async moduleLoaded(module: IModule) {
     // load services
     const onions = appResource.scenes['service']?.[module.info.relativeName];
-    if (!onions) return;
-    const scope = this.bean.scope(module.info.relativeName) as any;
-    for (const beanFullName in onions) {
-      const beanOptions = onions[beanFullName];
-      scope.service[beanOptions.name] = await this.bean._getBean(beanFullName as any, true);
+    if (onions) {
+      const scope = this.bean.scope(module.info.relativeName) as any;
+      scope.service = {};
+      for (const beanFullName in onions) {
+        const beanOptions = onions[beanFullName];
+        scope.service[beanOptions.name] = await this.bean._getBean(beanFullName as any, true);
+      }
     }
     // self
     if (this._moduleSelf === module) {

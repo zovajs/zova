@@ -10,6 +10,7 @@ const __Decorator_Supported = [
   'Data',
   'Model',
   'Style',
+  'Service',
   'Theme',
   'ThemeHandler',
   'Tool',
