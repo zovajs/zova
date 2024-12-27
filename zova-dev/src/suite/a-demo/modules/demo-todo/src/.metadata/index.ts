@@ -37,6 +37,7 @@ export const pageNameSchemas = {
 };
 /** pages: end */
 /** service: begin */
+export * from '../service/todo.js';
 import { ServiceTodo } from '../service/todo.js';
 export interface IModuleService {
   todo: ServiceTodo;

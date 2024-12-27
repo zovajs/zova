@@ -103,7 +103,7 @@ import { BeanScopeBase, Scope, TypeLocaleBase, TypeModuleResource } from 'zova';
 export class ScopeModuleDemoBasic extends BeanScopeBase {}
 
 export interface ScopeModuleDemoBasic
-  extends TypeModuleResource<any, any, (typeof locales)[TypeLocaleBase], any, any> {}
+  extends TypeModuleResource<never, never, (typeof locales)[TypeLocaleBase], never, never> {}
 
 import 'zova';
 declare module 'zova' {

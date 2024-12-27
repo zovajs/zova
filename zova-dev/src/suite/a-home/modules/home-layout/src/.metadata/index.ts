@@ -51,6 +51,7 @@ export const locales = {
 };
 /** locale: end */
 /** service: begin */
+export * from '../service/menu.js';
 import { ServiceMenu } from '../service/menu.js';
 export interface IModuleService {
   menu: ServiceMenu;
