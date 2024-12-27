@@ -37,10 +37,10 @@ export const pageNameSchemas = {
 };
 /** pages: end */
 /** service: begin */
-import service_todo from '../service/todo.js';
-export const services = {
-  todo: service_todo,
-};
+import { ServiceTodo } from '../service/todo.js';
+export interface IModuleService {
+  todo: ServiceTodo;
+}
 /** service: end */
 /** scope: begin */
 import { BeanScopeBase, Scope, TypeModuleResource } from 'zova';
@@ -48,7 +48,7 @@ import { BeanScopeBase, Scope, TypeModuleResource } from 'zova';
 @Scope()
 export class ScopeModuleDemoTodo extends BeanScopeBase {}
 
-export interface ScopeModuleDemoTodo extends TypeModuleResource<any, any, any, any, typeof services> {}
+export interface ScopeModuleDemoTodo extends TypeModuleResource<never, never, never, never, IModuleService> {}
 
 import 'zova';
 declare module 'zova' {
