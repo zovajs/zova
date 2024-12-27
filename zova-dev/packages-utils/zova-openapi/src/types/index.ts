@@ -2,13 +2,18 @@ import { OpenAPITSOptions } from 'openapi-typescript';
 
 export type TypeOpenapiConfigMatchRule = string | RegExp | (string | RegExp)[];
 
-export interface ZovaOpenapiConfigModule {
-  source: string;
+export interface ZovaOpenapiConfigModuleBase {
+  source?: string;
+  baseURL?: string;
   options?: OpenAPITSOptions;
+}
+
+export interface ZovaOpenapiConfigModule extends ZovaOpenapiConfigModuleBase {
   match?: TypeOpenapiConfigMatchRule;
   ignore?: TypeOpenapiConfigMatchRule;
 }
 
 export interface ZovaOpenapiConfig {
+  default?: ZovaOpenapiConfigModuleBase;
   modules: Record<string, ZovaOpenapiConfigModule>;
 }

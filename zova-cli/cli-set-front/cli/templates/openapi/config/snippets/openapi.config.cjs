@@ -8,6 +8,10 @@ module.exports = {
 
 export default function (): ZovaOpenapiConfig {
   return {
+    default: { 
+      source: 'path/to/openapi.json',
+      baseURL: '',
+    },
     modules: {},
   };
 }
@@ -15,11 +19,11 @@ export default function (): ZovaOpenapiConfig {
   async transform({ cli: cli, ast, argv }) {
     const moduleNames = argv._;
     for (const moduleName of moduleNames) {
-      if (!ast.has(`return { modules: { '${moduleName}':{$$$0}, $$$1} }`)) {
+      if (!ast.has(`return { modules: { '${moduleName}':{$$$0}, $$$1}, $$$2}`)) {
         const code = await cli.template.renderContent({
-          content: `'${moduleName}': { source: 'path/to/openapi.json' }\n`,
+          content: `'${moduleName}': {}\n`,
         });
-        ast.replace('return { modules: { $$$0 } }', `return { modules: { $$$0 , ${code} } }`);
+        ast.replace('return { $$$0, modules: { $$$1 } }', `return { $$$0, modules: { $$$1 , ${code} } }`);
       }
     }
     // ok
