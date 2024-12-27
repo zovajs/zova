@@ -1,6 +1,6 @@
 {
   "name": "zova-openapi",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "description": "Zova Openapi",
   "publishConfig": {
     "access": "public"
