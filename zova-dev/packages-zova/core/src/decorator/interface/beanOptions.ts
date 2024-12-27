@@ -2,9 +2,18 @@ import { MetadataKey } from '../../core/metadata.js';
 import { Constructable } from '../index.js';
 import { ContainerScope } from '../index.js';
 
+// todo: remove
 export type TypeDecoratorBeanOptionsSceneBase = 'local' | 'aop' | 'virtual' | 'scope' | TypeDecoratorBeanOptionsScene;
 // containerScope: store(app) model(ctx)
-export type TypeDecoratorBeanOptionsScene = 'bean' | 'store' | 'model' | 'style' | 'theme' | 'themeHandler' | 'tool'; // | 'ui' | 'event';
+export type TypeDecoratorBeanOptionsScene =
+  | 'bean'
+  | 'store'
+  | 'model'
+  | 'service'
+  | 'style'
+  | 'theme'
+  | 'themeHandler'
+  | 'tool'; // | 'ui' | 'event';
 
 export interface IDecoratorBeanOptionsBase<T = unknown> {
   /**
@@ -56,6 +65,12 @@ export interface IDecoratorStoreOptions {
 }
 
 export interface IDecoratorModelOptions {
+  scene?: TypeDecoratorBeanOptionsScene;
+  name?: string;
+  markReactive?: boolean;
+}
+
+export interface IDecoratorServiceOptions {
   scene?: TypeDecoratorBeanOptionsScene;
   name?: string;
   markReactive?: boolean;

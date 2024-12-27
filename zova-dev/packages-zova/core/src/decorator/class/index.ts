@@ -2,6 +2,7 @@ export * from './bean.js';
 export * from './model.js';
 export * from './local.js';
 export * from './scope.js';
+export * from './service.js';
 export * from './store.js';
 export * from './style.js';
 export * from './theme.js';
