@@ -221,8 +221,7 @@ export class CliOpenapiGenerate extends BeanCliBase {
     const contentImportsType =
       importsType.length > 0 ? `import type { ${importsType.join(', ')} } from './_openapi_.js';` : '';
     const serviceContent = `import { Service } from 'zova';
-import { BeanServiceBase } from 'zova-module-a-api';
-import { IApiServiceActionOptions } from '../types.js';
+import { BeanServiceBase, IApiServiceActionOptions } from 'zova-module-a-api';
 ${contentImportsType}
 
 ${contentTypes2}

@@ -1,6 +1,5 @@
 import { Service } from 'zova';
-import { BeanServiceBase } from 'zova-module-a-api';
-import { IApiServiceActionOptions } from '../types.js';
+import { BeanServiceBase, IApiServiceActionOptions } from 'zova-module-a-api';
 import type { components, paths } from './_openapi_.js';
 
 /** Onion_index */

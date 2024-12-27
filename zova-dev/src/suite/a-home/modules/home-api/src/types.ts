@@ -1,8 +1,6 @@
 import { IModuleService } from './.metadata/index.js';
 import { BeanApi } from './bean/bean.api.js';
 
-export interface IApiServiceActionOptions {}
-
 declare module 'zova' {
   export interface AppMeta {
     $api: BeanApi;
