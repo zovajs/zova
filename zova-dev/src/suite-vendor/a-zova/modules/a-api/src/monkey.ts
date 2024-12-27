@@ -3,6 +3,7 @@ import {
   BeanBase,
   BeanContainer,
   BeanSimple,
+  IBeanScopeRecord,
   IModule,
   IMonkeyAppInitialize,
   IMonkeyBeanInit,
@@ -12,7 +13,7 @@ import { __ThisModule__, ScopeModule } from './.metadata/this.js';
 
 export class Monkey extends BeanSimple implements IMonkeyAppInitialize, IMonkeyModule, IMonkeyBeanInit {
   private _moduleSelf: IModule;
-  private _defaultModuleService: string;
+  private _defaultModuleService: keyof IBeanScopeRecord;
 
   constructor(moduleSelf: IModule) {
     super();
@@ -31,7 +32,6 @@ export class Monkey extends BeanSimple implements IMonkeyAppInitialize, IMonkeyM
     const onions = appResource.scenes['service']?.[module.info.relativeName];
     if (onions) {
       const scope = this.bean.scope(module.info.relativeName) as any;
-      scope.service = {};
       for (const beanFullName in onions) {
         const beanOptions = onions[beanFullName];
         scope.service[beanOptions.name] = await this.bean._getBean(beanFullName as any, true);
@@ -61,7 +61,7 @@ export class Monkey extends BeanSimple implements IMonkeyAppInitialize, IMonkeyM
       enumerable: false,
       configurable: true,
       get() {
-        return self.app.bean.scope(this._defaultModuleService).service;
+        return self.app.bean.scope(self._defaultModuleService).service;
       },
     });
   }
