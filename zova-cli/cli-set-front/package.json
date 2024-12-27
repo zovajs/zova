@@ -38,6 +38,7 @@
   "license": "MIT",
   "dependencies": {
     "@cabloy/cli": "^2.0.10",
+    "@cabloy/extend": "^3.0.12",
     "@cabloy/word-utils": "^1.0.6",
     "compressing": "^1.10.0",
     "egg-born-utils": "^1.2.0",

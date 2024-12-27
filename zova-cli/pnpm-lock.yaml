@@ -41,6 +41,9 @@ importers:
       '@cabloy/cli':
         specifier: ^2.0.10
         version: 2.0.10(vue@3.5.13(typescript@5.7.2))
+      '@cabloy/extend':
+        specifier: ^3.0.12
+        version: 3.0.12
       '@cabloy/word-utils':
         specifier: ^1.0.6
         version: 1.0.7

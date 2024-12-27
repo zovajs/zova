@@ -2,9 +2,10 @@ import { BeanCliBase } from '@cabloy/cli';
 import fse from 'fs-extra';
 import { __ThisSetName__ } from '../this.js';
 import path from 'node:path';
-import openapiTS, { astToString, OpenAPITSOptions } from 'openapi-typescript';
+import openapiTS, { astToString } from 'openapi-typescript';
 import ts from 'typescript';
 import { toLowerCaseFirstChar, toUpperCaseFirstChar } from '@cabloy/word-utils';
+import { ZovaOpenapiConfig } from 'zova-openapi';
 
 declare module '@cabloy/cli' {
   interface ICommandArgv {}
@@ -37,16 +38,43 @@ export class CliOpenapiGenerate extends BeanCliBase {
     }
     await this.helper.importDynamic(configFile, async instance => {
       const config = (await instance.default()) as ZovaOpenapiConfig;
-
-      const ast = await openapiTS(config.source, config.options);
-      const contents = astToString(ast);
-      const outputFile = path.join(argv.projectPath, 'src/suite/a-home/modules/home-api/src/service/_openapi_.ts');
-      await fse.outputFile(outputFile, contents);
-      await this.helper.formatFile({ fileName: outputFile });
-      await this._generate(ast);
-      // tools.metadata
-      await this.helper.invokeCli([':tools:metadata', 'home-api'], { cwd: argv.projectPath });
+      const moduleNames = this._prepareModuleNames(config);
+      if (moduleNames.length === 0) {
+        throw new Error('Please generate config first!');
+      }
+      const total = moduleNames.length;
+      for (let index = 0; index < total; index++) {
+        const moduleName = moduleNames[index];
+        // log
+        await this.console.log({
+          total,
+          progress: index,
+          text: moduleName,
+        });
+        // generate res
+        await this._generateOpenapi(config, moduleName);
+      }
     });
+  }
+
+  _prepareModuleNames(config: ZovaOpenapiConfig) {
+    const { argv } = this.context;
+    const moduleNames = argv._;
+    if (moduleNames.length === 0) {
+      return Object.keys(config.modules);
+    }
+    return Object.keys(config.modules).filter(item => moduleNames.includes(item));
+  }
+
+  async _generateOpenapi(config: ZovaOpenapiConfig, moduleName: string) {
+    const ast = await openapiTS(config.source, config.options);
+    const contents = astToString(ast);
+    const outputFile = path.join(argv.projectPath, 'src/suite/a-home/modules/home-api/src/service/_openapi_.ts');
+    await fse.outputFile(outputFile, contents);
+    await this.helper.formatFile({ fileName: outputFile });
+    await this._generate(ast);
+    // tools.metadata
+    await this.helper.invokeCli([':tools:metadata', 'home-api'], { cwd: argv.projectPath });
   }
 
   async _generate(ast: ts.Node[]) {
