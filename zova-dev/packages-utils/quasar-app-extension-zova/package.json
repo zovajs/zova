@@ -36,6 +36,7 @@
     "vite": "^5.2.10",
     "vite-node": "^2.0.5",
     "zova-shared": "^1.0.7",
+    "zova-openapi": "^1.0.0",
     "zova-vite": "^1.0.182"
   },
   "gitHead": "c90e59abc1bf445154a3fb32856f83783dc0eb39"
