@@ -46,6 +46,7 @@
     "vue": "^3.5.10",
     "vue-router": "^4.4.5",
     "zod": "^3.23.8",
+    "zova": "^5.0.237",
     "zova-module-demo-basic": "workspace:^",
     "zova-module-home-api": "workspace:^",
     "zova-module-a-model": "^5.0.37",

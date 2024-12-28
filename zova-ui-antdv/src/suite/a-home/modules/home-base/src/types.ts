@@ -1,4 +1,3 @@
-import { AxiosInstance } from 'axios';
 import { StyleDefault } from './bean/style.default.js';
 import { createCache } from 'ant-design-vue';
 import { ScopeModule } from './.metadata/this.js';

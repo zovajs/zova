@@ -44,6 +44,9 @@ importers:
       zod:
         specifier: ^3.23.8
         version: 3.24.1
+      zova-module-a-api:
+        specifier: ^5.0.0
+        version: 5.0.0
       zova-module-a-model:
         specifier: ^5.0.37
         version: 5.0.37(vue@3.5.13(typescript@5.6.2))
@@ -68,6 +71,9 @@ importers:
       zova-module-demo-basic:
         specifier: workspace:^
         version: link:src/suite/a-demo/modules/demo-basic
+      zova-module-home-api:
+        specifier: workspace:^
+        version: link:src/suite/a-home/modules/home-api
       zova-module-home-base:
         specifier: workspace:^
         version: link:src/suite/a-home/modules/home-base
@@ -139,6 +145,9 @@ importers:
 
   src/suite/a-home:
     dependencies:
+      zova-module-home-api:
+        specifier: workspace:^
+        version: link:modules/home-api
       zova-module-home-base:
         specifier: workspace:^
         version: link:modules/home-base
@@ -152,11 +161,13 @@ importers:
         specifier: workspace:^
         version: link:modules/home-layout
 
-  src/suite/a-home/modules/home-base:
+  src/suite/a-home/modules/home-api:
     dependencies:
       axios:
         specifier: ^1.6.8
         version: 1.7.9
+
+  src/suite/a-home/modules/home-base: {}
 
   src/suite/a-home/modules/home-icon: {}
 
@@ -3691,6 +3702,9 @@ packages:
 
   zod@3.24.1:
     resolution: {integrity: sha512-muH7gBL9sI1nciMZV67X5fTKKBLtwpZ5VBp1vsOQzj1MhrBZ4wlVCm3gedKZWLp0Oyel8sIGfeiz54Su+OVT+A==}
+
+  zova-module-a-api@5.0.0:
+    resolution: {integrity: sha512-Rf4LvC02Q3Qen9TjBrL3LwUmj1Bt+fGfWVOnMjeqBoJ46eqKxwdNZAslSgfbp0tKf+rxtZF3f1y645XP1f1/bw==}
 
   zova-module-a-model@5.0.37:
     resolution: {integrity: sha512-MgyEAeFU1BPWvmCjQhe3mlAD8fjV93sOTYAcpyxdWdw1CFGO8lWKzkEule8POo9H1hXyrw8iGG5CONkm8uTQaQ==}
@@ -7277,6 +7291,8 @@ snapshots:
       readable-stream: 4.6.0
 
   zod@3.24.1: {}
+
+  zova-module-a-api@5.0.0: {}
 
   zova-module-a-model@5.0.37(vue@3.5.13(typescript@5.6.2)):
     dependencies:

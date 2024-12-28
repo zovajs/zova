@@ -1,4 +1,4 @@
-import { IModuleService } from './.metadata/index.js';
+// import { IModuleService } from './.metadata/index.js';
 import { BeanApi } from './bean/bean.api.js';
 
 declare module 'zova' {
@@ -7,6 +7,6 @@ declare module 'zova' {
   }
   export interface BeanBase {
     $api: BeanApi;
-    $service: IModuleService;
+    // $service: IModuleService;
   }
 }
