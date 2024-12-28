@@ -8,4 +8,6 @@ export declare function splitWords(str?: string, toLowerCase?: boolean, separato
 export declare function combineWordsDeduplicate(str1: string, str2: string): string;
 export declare function stringToCapitalize(str: string[] | string, separator?: string): string;
 export declare function replaceTemplate(content: string | undefined, scope?: object | undefined): string | undefined;
+export type TypeMatchSelectorRule<T> = T | RegExp | (T | RegExp)[];
+export declare function matchSelector<T extends string = string>(match: TypeMatchSelectorRule<T>, selector: string): any;
 //# sourceMappingURL=index.d.ts.map

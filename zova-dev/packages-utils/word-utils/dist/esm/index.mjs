@@ -136,5 +136,11 @@ function _getProperty(obj, name, sep, forceObject) {
     }
     return obj;
 }
+function matchSelector(match, selector) {
+    if (!Array.isArray(match)) {
+        return (typeof match === 'string' && match === selector) || (match instanceof RegExp && match.test(selector));
+    }
+    return match.some(item => matchSelector(item, selector));
+}
 
-export { combineWordsDeduplicate, parseFirstWord, parseLastWord, replaceTemplate, skipLastWord, skipPrefix, splitWords, stringToCapitalize, toLowerCaseFirstChar, toUpperCaseFirstChar };
+export { combineWordsDeduplicate, matchSelector, parseFirstWord, parseLastWord, replaceTemplate, skipLastWord, skipPrefix, splitWords, stringToCapitalize, toLowerCaseFirstChar, toUpperCaseFirstChar };

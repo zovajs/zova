@@ -11,6 +11,7 @@ exports.splitWords = splitWords;
 exports.combineWordsDeduplicate = combineWordsDeduplicate;
 exports.stringToCapitalize = stringToCapitalize;
 exports.replaceTemplate = replaceTemplate;
+exports.matchSelector = matchSelector;
 function _parseLastWord(str) {
     if (!str)
         return str;
@@ -148,4 +149,10 @@ function _getProperty(obj, name, sep, forceObject) {
         obj = obj[name];
     }
     return obj;
+}
+function matchSelector(match, selector) {
+    if (!Array.isArray(match)) {
+        return (typeof match === 'string' && match === selector) || (match instanceof RegExp && match.test(selector));
+    }
+    return match.some(item => matchSelector(item, selector));
 }
