@@ -251,7 +251,7 @@ export class CliOpenapiGenerate extends BeanCliBase {
     ) {
       return this.$api.${pathInfo.method}<any, ${nameResponseBody}>(
         ${contentPathTranslate} ${contentRequestBody ? 'body,' : ''} 
-        this.$configPrepare(options),
+        this.$configPrepare(ApiBaseURL, options),
       );
     }\n`;
     return [contentTypes.join('\n'), contentSignature];
@@ -268,10 +268,11 @@ export class CliOpenapiGenerate extends BeanCliBase {
     }
     const contentTypes2 = contentTypes.join('\n');
     const importsType: string[] = [];
-    if (contentTypes2.includes('components["schemas"]')) importsType.push('components');
-    if (contentTypes2.includes('paths[')) importsType.push('paths');
+    if (contentSignatures.length > 0) importsType.push('ApiBaseURL');
+    if (contentTypes2.includes('components["schemas"]')) importsType.push('type components');
+    if (contentTypes2.includes('paths[')) importsType.push('type paths');
     const contentImportsType =
-      importsType.length > 0 ? `import type { ${importsType.join(', ')} } from './openapi/index.js';` : '';
+      importsType.length > 0 ? `import { ${importsType.join(', ')} } from './openapi/index.js';` : '';
     const serviceContent = `import { Service } from 'zova';
 import { BeanServiceBase, IApiServiceActionOptions } from 'zova-module-a-api';
 ${contentImportsType}

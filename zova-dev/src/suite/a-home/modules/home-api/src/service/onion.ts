@@ -1,6 +1,6 @@
 import { Service } from 'zova';
 import { BeanServiceBase, IApiServiceActionOptions } from 'zova-module-a-api';
-import type { components, paths } from './openapi/index.js';
+import { ApiBaseURL, type components, type paths } from './openapi/index.js';
 
 /** Onion_index */
 export const ServiceServiceOnionindexPath = '/api/';
@@ -72,7 +72,7 @@ export class ServiceOnion extends BeanServiceBase {
   index(options?: IApiServiceActionOptions) {
     return this.$api.get<any, ServiceServiceOnionindexResponseBody>(
       ServiceServiceOnionindexPath,
-      this.$configPrepare(options),
+      this.$configPrepare(ApiBaseURL, options),
     );
   }
 
@@ -85,7 +85,7 @@ export class ServiceOnion extends BeanServiceBase {
     return this.$api.post<any, ServiceServiceOnionechoResponseBody>(
       ServiceServiceOnionechoPath,
       body,
-      this.$configPrepare(options),
+      this.$configPrepare(ApiBaseURL, options),
     );
   }
 
@@ -99,7 +99,7 @@ export class ServiceOnion extends BeanServiceBase {
     return this.$api.post<any, ServiceServiceOnionecho2ResponseBody>(
       this.$pathTranslate(ServiceServiceOnionecho2Path, options.params),
       body,
-      this.$configPrepare(options),
+      this.$configPrepare(ApiBaseURL, options),
     );
   }
 
@@ -112,7 +112,7 @@ export class ServiceOnion extends BeanServiceBase {
   ) {
     return this.$api.get<any, ServiceServiceOnionecho3ResponseBody>(
       this.$pathTranslate(ServiceServiceOnionecho3Path, options.params),
-      this.$configPrepare(options),
+      this.$configPrepare(ApiBaseURL, options),
     );
   }
 
@@ -120,7 +120,7 @@ export class ServiceOnion extends BeanServiceBase {
     return this.$api.post<any, ServiceServiceOnionecho4ResponseBody>(
       ServiceServiceOnionecho4Path,
       body,
-      this.$configPrepare(options),
+      this.$configPrepare(ApiBaseURL, options),
     );
   }
 
@@ -131,7 +131,7 @@ export class ServiceOnion extends BeanServiceBase {
   ) {
     return this.$api.get<any, ServiceServiceOnionecho5ResponseBody>(
       ServiceServiceOnionecho5Path,
-      this.$configPrepare(options),
+      this.$configPrepare(ApiBaseURL, options),
     );
   }
 }

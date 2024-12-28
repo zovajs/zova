@@ -6,7 +6,7 @@ export class BeanServiceBase<TScopeModule = unknown> extends BeanBase<TScopeModu
     return this.app.util.apiServiceActionPathTranslate(pathName, pathParams);
   }
 
-  $configPrepare(options?: any) {
-    return this.app.util.apiServiceActionConfigPrepare(options);
+  $configPrepare(baseURL?: string, options?: any) {
+    return this.app.util.apiServiceActionConfigPrepare(baseURL, options);
   }
 }
