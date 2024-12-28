@@ -170,13 +170,13 @@ importers:
         specifier: workspace:^
         version: link:modules/home-layout
 
-  src/suite/a-home/modules/home-api: {}
-
-  src/suite/a-home/modules/home-base:
+  src/suite/a-home/modules/home-api:
     dependencies:
       axios:
         specifier: ^1.6.8
         version: 1.7.7
+
+  src/suite/a-home/modules/home-base: {}
 
   src/suite/a-home/modules/home-icon: {}
 
