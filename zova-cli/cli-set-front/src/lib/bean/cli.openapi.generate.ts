@@ -297,6 +297,7 @@ export class Service${serviceName} extends BeanServiceBase {
       const node = nodeOperations.members[index];
       if (!ts.isPropertySignature(node)) continue;
       const operationId = (<ts.Identifier>node.name).text;
+
       let [service, action] = operationId.toString().split('_');
       if (!action) {
         action = service;
