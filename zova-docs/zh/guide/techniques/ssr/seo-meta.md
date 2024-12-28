@@ -6,7 +6,7 @@
 
 Zova 在`BeanBase`基类中提供了`$useMeta`方法，可以提供 SEO Meta 数据
 
-`zova-dev/packages-zova/core/src/bean/beanBase.ts`
+`zova-dev/packages-zova/zova-core/src/bean/beanBase.ts`
 
 ```typescript
 export class BeanBase {
@@ -14,7 +14,7 @@ export class BeanBase {
 }
 ```
 
-`zova-dev/packages-zova/core/src/types/interface/ssr.ts`
+`zova-dev/packages-zova/zova-core/src/types/interface/ssr.ts`
 
 ```typescript
 export interface SSRMetaOptions {

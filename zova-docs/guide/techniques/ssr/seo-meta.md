@@ -6,7 +6,7 @@ SEO Meta can dynamically change page title, manage `<meta>` tags, manage `<html>
 
 Zova provides the `$useMeta` method in the `BeanBase` base class, which can provide SEO Meta data
 
-`zova-dev/packages-zova/core/src/bean/beanBase.ts`
+`zova-dev/packages-zova/zova-core/src/bean/beanBase.ts`
 
 ```typescript
 export class BeanBase {
@@ -14,7 +14,7 @@ export class BeanBase {
 }
 ```
 
-`zova-dev/packages-zova/core/src/types/interface/ssr.ts`
+`zova-dev/packages-zova/zova-core/src/types/interface/ssr.ts`
 
 ```typescript
 export interface SSRMetaOptions {
