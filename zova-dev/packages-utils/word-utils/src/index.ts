@@ -131,3 +131,12 @@ function _getProperty(obj, name, sep, forceObject) {
   }
   return obj;
 }
+
+export type TypeMatchSelectorRule<T> = T | RegExp | (T | RegExp)[];
+
+export function matchSelector<T extends string = string>(match: TypeMatchSelectorRule<T>, selector: string) {
+  if (!Array.isArray(match)) {
+    return (typeof match === 'string' && match === selector) || (match instanceof RegExp && match.test(selector));
+  }
+  return match.some(item => matchSelector(item, selector));
+}
