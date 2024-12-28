@@ -39,10 +39,11 @@ declare module 'zova' {
 }
 /** components: end */
 /** service: begin */
-import service_menu from '../service/menu.js';
-export const services = {
-  menu: service_menu,
-};
+export * from '../service/menu.js';
+import { ServiceMenu } from '../service/menu.js';
+export interface IModuleService {
+  menu: ServiceMenu;
+}
 /** service: end */
 /** scope: begin */
 import { BeanScopeBase, Scope, TypeModuleResource } from 'zova';
@@ -50,7 +51,7 @@ import { BeanScopeBase, Scope, TypeModuleResource } from 'zova';
 @Scope()
 export class ScopeModuleHomeLayout extends BeanScopeBase {}
 
-export interface ScopeModuleHomeLayout extends TypeModuleResource<any, any, any, any, typeof services> {}
+export interface ScopeModuleHomeLayout extends TypeModuleResource<never, never, never, never, IModuleService> {}
 
 import 'zova';
 declare module 'zova' {

@@ -1,4 +1,5 @@
-import { ZovaApplication } from 'zova';
+import { Service } from 'zova';
+import { BeanServiceBase } from 'zova-module-a-api';
 
 export interface ServiceMenuEntity {
   title: string;
@@ -10,8 +11,9 @@ export interface ServiceMenuEntity {
   separator?: boolean;
 }
 
-export default (app: ZovaApplication) => {
-  return {
-    select: () => app.meta.$api.get<any, ServiceMenuEntity[]>('/home/layout/menu/select'),
-  };
-};
+@Service()
+export class ServiceMenu extends BeanServiceBase {
+  select() {
+    return this.$api.get<any, ServiceMenuEntity[]>('/home/layout/menu/select');
+  }
+}
