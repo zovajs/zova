@@ -9,6 +9,7 @@ declare module 'zova' {
 }
 /** beans: end */
 /** service: begin */
+export * from '../service/openapi/index.js';
 export * from '../service/book.js';
 export * from '../service/home.js';
 export * from '../service/onion.js';

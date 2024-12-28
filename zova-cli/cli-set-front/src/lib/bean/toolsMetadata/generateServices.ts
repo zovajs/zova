@@ -1,4 +1,5 @@
 import path from 'path';
+import fse from 'fs-extra';
 import eggBornUtils from 'egg-born-utils';
 import { toUpperCaseFirstChar } from '@cabloy/word-utils';
 
@@ -10,6 +11,11 @@ export async function generateServices(modulePath: string) {
   const contentExports: string[] = [];
   const contentImports: string[] = [];
   const contentServices: string[] = [];
+  // openapi
+  if (fse.existsSync(path.join(modulePath, 'src/service/openapi/index.ts'))) {
+    contentExports.push("export * from '../service/openapi/index.js';");
+  }
+  // files
   for (const file of files) {
     const fileName = path.basename(file);
     if (fileName.startsWith('_')) continue;
