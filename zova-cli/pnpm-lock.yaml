@@ -45,8 +45,8 @@ importers:
         specifier: ^3.0.12
         version: 3.0.12
       '@cabloy/word-utils':
-        specifier: ^1.0.6
-        version: 1.0.7
+        specifier: ^1.0.8
+        version: 1.0.8
       compressing:
         specifier: ^1.10.0
         version: 1.10.1
@@ -265,8 +265,8 @@ packages:
   '@cabloy/vue-runtime-core@3.5.11':
     resolution: {integrity: sha512-VJF9PKSU403FNGMK4x4EX/mPHRecv49T8Ayz8I+95Nc40+YCdLAoTf2dzLNtF4XOUiIxoZDWUxThZa/9hlhusw==}
 
-  '@cabloy/word-utils@1.0.7':
-    resolution: {integrity: sha512-mXMbPm3NrwzhMjZfmf3VESbG9QaRPrmf7xLjaIaJt5AAe+Zk2+/+QyaZoLSwM+z0ok9rsa3YIHkvz4gHKDW8HA==}
+  '@cabloy/word-utils@1.0.8':
+    resolution: {integrity: sha512-XQEMT4/OXy2dflkoasvNKPc1tcxLu2j4MIwvcKjHR+Eadt/HSPNSdmiwLuHYm0bOECU58VVw7nHUQWhz9jVxhQ==}
 
   '@colors/colors@1.5.0':
     resolution: {integrity: sha512-ooWCrlZP11i8GImSjTHYHLkvFDP48nS4+204nGb1RiX/WXYHmJA2III9/e2DWVabCESdW7hBAEzHRqUn9OUVvQ==}
@@ -996,46 +996,55 @@ packages:
     resolution: {integrity: sha512-9OwUnK/xKw6DyRlgx8UizeqRFOfi9mf5TYCw1uolDaJSbUmBxP85DE6T4ouCMoN6pXw8ZoTeZCSEfSaYo+/s1w==}
     cpu: [arm]
     os: [linux]
+    libc: [glibc]
 
   '@rollup/rollup-linux-arm-musleabihf@4.27.4':
     resolution: {integrity: sha512-Vgdo4fpuphS9V24WOV+KwkCVJ72u7idTgQaBoLRD0UxBAWTF9GWurJO9YD9yh00BzbkhpeXtm6na+MvJU7Z73A==}
     cpu: [arm]
     os: [linux]
+    libc: [musl]
 
   '@rollup/rollup-linux-arm64-gnu@4.27.4':
     resolution: {integrity: sha512-pleyNgyd1kkBkw2kOqlBx+0atfIIkkExOTiifoODo6qKDSpnc6WzUY5RhHdmTdIJXBdSnh6JknnYTtmQyobrVg==}
     cpu: [arm64]
     os: [linux]
+    libc: [glibc]
 
   '@rollup/rollup-linux-arm64-musl@4.27.4':
     resolution: {integrity: sha512-caluiUXvUuVyCHr5DxL8ohaaFFzPGmgmMvwmqAITMpV/Q+tPoaHZ/PWa3t8B2WyoRcIIuu1hkaW5KkeTDNSnMA==}
     cpu: [arm64]
     os: [linux]
+    libc: [musl]
 
   '@rollup/rollup-linux-powerpc64le-gnu@4.27.4':
     resolution: {integrity: sha512-FScrpHrO60hARyHh7s1zHE97u0KlT/RECzCKAdmI+LEoC1eDh/RDji9JgFqyO+wPDb86Oa/sXkily1+oi4FzJQ==}
     cpu: [ppc64]
     os: [linux]
+    libc: [glibc]
 
   '@rollup/rollup-linux-riscv64-gnu@4.27.4':
     resolution: {integrity: sha512-qyyprhyGb7+RBfMPeww9FlHwKkCXdKHeGgSqmIXw9VSUtvyFZ6WZRtnxgbuz76FK7LyoN8t/eINRbPUcvXB5fw==}
     cpu: [riscv64]
     os: [linux]
+    libc: [glibc]
 
   '@rollup/rollup-linux-s390x-gnu@4.27.4':
     resolution: {integrity: sha512-PFz+y2kb6tbh7m3A7nA9++eInGcDVZUACulf/KzDtovvdTizHpZaJty7Gp0lFwSQcrnebHOqxF1MaKZd7psVRg==}
     cpu: [s390x]
     os: [linux]
+    libc: [glibc]
 
   '@rollup/rollup-linux-x64-gnu@4.27.4':
     resolution: {integrity: sha512-Ni8mMtfo+o/G7DVtweXXV/Ol2TFf63KYjTtoZ5f078AUgJTmaIJnj4JFU7TK/9SVWTaSJGxPi5zMDgK4w+Ez7Q==}
     cpu: [x64]
     os: [linux]
+    libc: [glibc]
 
   '@rollup/rollup-linux-x64-musl@4.27.4':
     resolution: {integrity: sha512-5AeeAF1PB9TUzD+3cROzFTnAJAcVUGLuR8ng0E0WXGkYhp6RD6L+6szYVX+64Rs0r72019KHZS1ka1q+zU/wUw==}
     cpu: [x64]
     os: [linux]
+    libc: [musl]
 
   '@rollup/rollup-win32-arm64-msvc@4.27.4':
     resolution: {integrity: sha512-yOpVsA4K5qVwu2CaS3hHxluWIK5HQTjNV4tWjQXluMiiiu4pJj4BN98CvxohNCpcjMeTXk/ZMJBRbgRg8HBB6A==}
@@ -3988,7 +3997,7 @@ snapshots:
       '@cabloy/module-glob': 5.1.8
       '@cabloy/module-info': 1.1.9
       '@cabloy/process-helper': 1.0.12
-      '@cabloy/word-utils': 1.0.7
+      '@cabloy/word-utils': 1.0.8
       '@npmcli/config': 8.3.4
       '@zhennann/common-bin': 4.0.0
       '@zhennann/ejs': 3.0.1
@@ -4097,7 +4106,7 @@ snapshots:
       '@vue/reactivity': '@cabloy/vue-reactivity@3.5.11'
       '@vue/shared': 3.5.6
 
-  '@cabloy/word-utils@1.0.7': {}
+  '@cabloy/word-utils@1.0.8': {}
 
   '@colors/colors@1.5.0':
     optional: true

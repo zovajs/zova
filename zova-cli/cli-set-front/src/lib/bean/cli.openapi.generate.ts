@@ -4,7 +4,7 @@ import { __ThisSetName__ } from '../this.js';
 import path from 'node:path';
 import openapiTS, { astToString } from 'openapi-typescript';
 import ts from 'typescript';
-import { toLowerCaseFirstChar, toUpperCaseFirstChar } from '@cabloy/word-utils';
+import { matchSelector, toLowerCaseFirstChar, toUpperCaseFirstChar } from '@cabloy/word-utils';
 import { ZovaOpenapiConfig, ZovaOpenapiConfigModule } from 'zova-openapi';
 import { extend } from '@cabloy/extend';
 import { IModule, IModuleInfo } from '@cabloy/module-info';
@@ -82,7 +82,7 @@ export class CliOpenapiGenerate extends BeanCliBase {
     const moduleConfig = extend(true, {}, config.default, config.modules[moduleInfo.relativeName]);
     const cache = await this._outputFiles(moduleConfig, moduleInfo, module, __caches);
     // generate
-    await this._generateServices(cache.ast, moduleInfo, module);
+    await this._generateServices(cache.ast, moduleConfig, moduleInfo, module);
     // tools.metadata
     await this.helper.invokeCli([':tools:metadata', moduleInfo.relativeName], { cwd: argv.projectPath });
   }
@@ -150,8 +150,13 @@ export class CliOpenapiGenerate extends BeanCliBase {
     return contentSchemas;
   }
 
-  async _generateServices(ast: ts.Node[], _moduleInfo: IModuleInfo, module: IModule) {
-    const nodeServices = this._getNodeServices(ast);
+  async _generateServices(
+    ast: ts.Node[],
+    moduleConfig: ZovaOpenapiConfigModule,
+    _moduleInfo: IModuleInfo,
+    module: IModule,
+  ) {
+    const nodeServices = this._getNodeServices(ast, moduleConfig);
     if (!nodeServices) return;
     for (const serviceName in nodeServices) {
       const serviceNameLower = toLowerCaseFirstChar(serviceName);
@@ -287,7 +292,7 @@ export class Service${serviceName} extends BeanServiceBase {
     return serviceContent;
   }
 
-  _getNodeServices(ast: ts.Node[]) {
+  _getNodeServices(ast: ts.Node[], moduleConfig: ZovaOpenapiConfigModule) {
     const nodeOperations = ast.find(node => ts.isInterfaceDeclaration(node) && node.name.text === 'operations') as
       | ts.InterfaceDeclaration
       | undefined;
@@ -297,7 +302,7 @@ export class Service${serviceName} extends BeanServiceBase {
       const node = nodeOperations.members[index];
       if (!ts.isPropertySignature(node)) continue;
       const operationId = (<ts.Identifier>node.name).text;
-
+      if (!_checkOperationIdEnabled(moduleConfig, operationId)) continue;
       let [service, action] = operationId.toString().split('_');
       if (!action) {
         action = service;
@@ -371,4 +376,13 @@ function _isNodeNever(node: ts.Node) {
 
 function _q(question: boolean) {
   return question ? '?' : '';
+}
+
+function _checkOperationIdEnabled(moduleConfig: ZovaOpenapiConfigModule, selector?: string) {
+  if (!selector) return false;
+  if (!moduleConfig.match && !moduleConfig.ignore) return true;
+  return (
+    (moduleConfig.match && matchSelector(moduleConfig.match, selector)) ||
+    (moduleConfig.ignore && !matchSelector(moduleConfig.ignore, selector))
+  );
 }
