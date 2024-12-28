@@ -10,14 +10,11 @@ declare module 'zova' {
 /** beans: end */
 /** service: begin */
 export * from '../service/openapi/index.js';
-export * from '../service/book.js';
 export * from '../service/home.js';
 export * from '../service/onion.js';
-import { ServiceBook } from '../service/book.js';
 import { ServiceHome } from '../service/home.js';
 import { ServiceOnion } from '../service/onion.js';
 export interface IModuleService {
-  book: ServiceBook;
   home: ServiceHome;
   onion: ServiceOnion;
 }

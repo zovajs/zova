@@ -1,6 +1,6 @@
 import { Service } from 'zova';
 import { BeanServiceBase, IApiServiceActionOptions } from 'zova-module-a-api';
-import type { paths } from './_openapi_.js';
+import type { paths } from './openapi/index.js';
 
 /** Home_index */
 export const ServiceServiceHomeindexPath = '/';
