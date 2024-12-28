@@ -5,7 +5,7 @@ import path from 'node:path';
 import openapiTS, { astToString } from 'openapi-typescript';
 import ts from 'typescript';
 import { toLowerCaseFirstChar, toUpperCaseFirstChar } from '@cabloy/word-utils';
-import { ZovaOpenapiConfig } from 'zova-openapi';
+import { ZovaOpenapiConfig, ZovaOpenapiConfigModule } from 'zova-openapi';
 import { extend } from '@cabloy/extend';
 import { IModule, IModuleInfo } from '@cabloy/module-info';
 
@@ -28,6 +28,12 @@ interface INodeTypeInfoItem {
 }
 type TypeNodeTypeInfo = Record<string, INodeTypeInfoItem>;
 
+interface IAstCache {
+  ast: ts.Node[];
+  contents: string;
+}
+type TypeAstCaches = Record<string, IAstCache>;
+
 export class CliOpenapiGenerate extends BeanCliBase {
   async execute() {
     const { argv } = this.context;
@@ -45,7 +51,7 @@ export class CliOpenapiGenerate extends BeanCliBase {
         throw new Error('Please generate config first!');
       }
       const total = moduleNames.length;
-      const __caches: Record<string, any> = {};
+      const __caches: TypeAstCaches = {};
       for (let index = 0; index < total; index++) {
         const moduleName = moduleNames[index];
         // log
@@ -71,34 +77,48 @@ export class CliOpenapiGenerate extends BeanCliBase {
     return Object.keys(config.modules).filter(item => moduleNames.includes(item));
   }
 
-  async _generateOpenapi(
-    config: ZovaOpenapiConfig,
-    moduleInfo: IModuleInfo,
-    module: IModule,
-    __caches: Record<string, any>,
-  ) {
+  async _generateOpenapi(config: ZovaOpenapiConfig, moduleInfo: IModuleInfo, module: IModule, __caches: TypeAstCaches) {
     const { argv } = this.context;
     const moduleConfig = extend(true, {}, config.default, config.modules[moduleInfo.relativeName]);
-    let ast;
-    let contents;
-    const cache = __caches[moduleConfig.source];
-    if (cache) {
-      ast = cache.ast;
-      contents = cache.contents;
-    } else {
-      ast = await openapiTS(moduleConfig.source, moduleConfig.options);
-      contents = astToString(ast);
-      __caches[moduleConfig.source] = { ast, contents };
-    }
-    const outputFile = path.join(module.root, 'src/service/_openapi_.ts');
-    await fse.outputFile(outputFile, contents);
-    await this.helper.formatFile({ fileName: outputFile });
-    await this._generate(ast, moduleInfo, module);
+    const cache = await this._outputFiles(moduleConfig, moduleInfo, module, __caches);
+    // generate
+    await this._generateServices(cache.ast, moduleInfo, module);
     // tools.metadata
     await this.helper.invokeCli([':tools:metadata', moduleInfo.relativeName], { cwd: argv.projectPath });
   }
 
-  async _generate(ast: ts.Node[], _moduleInfo: IModuleInfo, module: IModule) {
+  async _outputFiles(
+    moduleConfig: ZovaOpenapiConfigModule,
+    _moduleInfo: IModuleInfo,
+    module: IModule,
+    __caches: TypeAstCaches,
+  ) {
+    if (!moduleConfig.source) throw new Error('source not found');
+    // cache
+    let cache = __caches[moduleConfig.source];
+    if (!cache) {
+      const ast = await openapiTS(moduleConfig.source, moduleConfig.options);
+      const contents = astToString(ast);
+      cache = __caches[moduleConfig.source] = { ast, contents };
+    }
+    // output: openapi/types.ts
+    const outputFile = path.join(module.root, 'src/service/openapi/types.ts');
+    await fse.outputFile(outputFile, cache.contents);
+    await this.helper.formatFile({ fileName: outputFile });
+    // output: openapi/schemas.ts
+
+    // output: openapi/baseURL.ts
+    const baseURLFile = path.join(module.root, 'src/service/openapi/baseURL.ts');
+    await fse.outputFile(baseURLFile, `export const ApiBaseURL = '${moduleConfig.baseURL || ''}';`);
+    await this.helper.formatFile({ fileName: baseURLFile });
+    // output: openapi/index.ts
+    const indexFile = path.join(module.root, 'src/service/openapi/index.ts');
+    await fse.outputFile(indexFile, "export * from './baseURL.js';\nexport * from './types.js';");
+    await this.helper.formatFile({ fileName: indexFile });
+    return cache;
+  }
+
+  async _generateServices(ast: ts.Node[], _moduleInfo: IModuleInfo, module: IModule) {
     const nodeServices = this._getNodeServices(ast);
     if (!nodeServices) return;
     for (const serviceName in nodeServices) {
