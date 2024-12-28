@@ -106,16 +106,48 @@ export class CliOpenapiGenerate extends BeanCliBase {
     await fse.outputFile(outputFile, cache.contents);
     await this.helper.formatFile({ fileName: outputFile });
     // output: openapi/schemas.ts
-
+    const schemasFile = path.join(module.root, 'src/service/openapi/schemas.ts');
+    const contentSchemas = this._generateSchemas(cache.ast);
+    await fse.outputFile(schemasFile, contentSchemas || 'export {}');
+    await this.helper.formatFile({ fileName: schemasFile });
     // output: openapi/baseURL.ts
     const baseURLFile = path.join(module.root, 'src/service/openapi/baseURL.ts');
     await fse.outputFile(baseURLFile, `export const ApiBaseURL = '${moduleConfig.baseURL || ''}';`);
     await this.helper.formatFile({ fileName: baseURLFile });
     // output: openapi/index.ts
     const indexFile = path.join(module.root, 'src/service/openapi/index.ts');
-    await fse.outputFile(indexFile, "export * from './baseURL.js';\nexport * from './types.js';");
+    await fse.outputFile(
+      indexFile,
+      "export * from './baseURL.js';\nexport * from './schemas.js';\nexport * from './types.js';",
+    );
     await this.helper.formatFile({ fileName: indexFile });
     return cache;
+  }
+
+  _generateSchemas(ast: ts.Node[]) {
+    const nodeComponents = ast.find(node => ts.isInterfaceDeclaration(node) && node.name.text === 'components') as
+      | ts.InterfaceDeclaration
+      | undefined;
+    if (!nodeComponents) return '';
+    const nodeTypeInfoComponents = _parseNodeType(nodeComponents)!;
+    if (!nodeTypeInfoComponents['schemas']) return '';
+    const nodeTypeInfoSchemas = _parseNodeType(nodeTypeInfoComponents['schemas'].nodeType)!;
+    const typeSchemas: string[] = [];
+    for (const key in nodeTypeInfoSchemas) {
+      const schemaName =
+        'ApiSchema' +
+        key
+          .replaceAll('.', '-')
+          .split('-')
+          .map(item => toUpperCaseFirstChar(item))
+          .join('');
+      typeSchemas.push(`export type ${schemaName} = components["schemas"]["${key}"];`);
+    }
+    let contentSchemas = typeSchemas.join('\n');
+    if (contentSchemas.includes('components["schemas"]')) {
+      contentSchemas = `import type { components } from './types.js';\n${contentSchemas}`;
+    }
+    return contentSchemas;
   }
 
   async _generateServices(ast: ts.Node[], _moduleInfo: IModuleInfo, module: IModule) {
@@ -316,7 +348,7 @@ function _getRequestPathInfo(ast: ts.Node[], nodeActionInfo: INodeActionInfo) {
   return { path, method, comments, nodePath };
 }
 
-function _parseNodeType(nodeType?: ts.TypeLiteralNode) {
+function _parseNodeType(nodeType?: ts.TypeLiteralNode | ts.InterfaceDeclaration) {
   if (!nodeType) return;
   const nodeTypeInfo: TypeNodeTypeInfo = {};
   nodeType.members.forEach(node => {
