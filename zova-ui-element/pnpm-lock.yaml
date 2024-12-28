@@ -47,6 +47,9 @@ importers:
       zova:
         specifier: ^5.0.237
         version: 5.0.237(typescript@5.6.2)(vue@3.5.8(typescript@5.6.2))
+      zova-module-a-api:
+        specifier: ^5.0.0
+        version: 5.0.0
       zova-module-a-model:
         specifier: ^5.0.37
         version: 5.0.37(vue@3.5.8(typescript@5.6.2))
@@ -71,6 +74,9 @@ importers:
       zova-module-element-adapter:
         specifier: workspace:^
         version: link:src/suite-vendor/a-element/modules/element-adapter
+      zova-module-home-api:
+        specifier: workspace:^
+        version: link:src/suite/a-home/modules/home-api
       zova-module-home-base:
         specifier: workspace:^
         version: link:src/suite/a-home/modules/home-base
@@ -148,6 +154,9 @@ importers:
 
   src/suite/a-home:
     dependencies:
+      zova-module-home-api:
+        specifier: workspace:^
+        version: link:modules/home-api
       zova-module-home-base:
         specifier: workspace:^
         version: link:modules/home-base
@@ -160,6 +169,8 @@ importers:
       zova-module-home-layout:
         specifier: workspace:^
         version: link:modules/home-layout
+
+  src/suite/a-home/modules/home-api: {}
 
   src/suite/a-home/modules/home-base:
     dependencies:
@@ -3829,6 +3840,9 @@ packages:
 
   zova-core@5.0.185:
     resolution: {integrity: sha512-KCZHVIIPeb0euJzCebv7V93Q+aHFsM72ct5qKI7agCrixYBC4PFC2MtS5fGD+ets7UHXpiKOVbKbBjEZ5+zVxQ==}
+
+  zova-module-a-api@5.0.0:
+    resolution: {integrity: sha512-Rf4LvC02Q3Qen9TjBrL3LwUmj1Bt+fGfWVOnMjeqBoJ46eqKxwdNZAslSgfbp0tKf+rxtZF3f1y645XP1f1/bw==}
 
   zova-module-a-model@5.0.37:
     resolution: {integrity: sha512-MgyEAeFU1BPWvmCjQhe3mlAD8fjV93sOTYAcpyxdWdw1CFGO8lWKzkEule8POo9H1hXyrw8iGG5CONkm8uTQaQ==}
@@ -7704,6 +7718,8 @@ snapshots:
       zova-shared: 1.0.7
     transitivePeerDependencies:
       - typescript
+
+  zova-module-a-api@5.0.0: {}
 
   zova-module-a-model@5.0.37(vue@3.5.8(typescript@5.6.2)):
     dependencies:

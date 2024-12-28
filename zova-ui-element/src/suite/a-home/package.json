@@ -9,6 +9,7 @@
     "zova-module-home-index": "workspace:^",
     "zova-module-home-icon": "workspace:^",
     "zova-module-home-layout": "workspace:^",
-    "zova-module-home-base": "workspace:^"
+    "zova-module-home-base": "workspace:^",
+    "zova-module-home-api": "workspace:^"
   }
 }
