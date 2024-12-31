@@ -21,7 +21,6 @@ export interface IDecoratorBeanOptionsBase<T = unknown> {
    * others: undefined: use beanClass
    */
   beanFullName: string;
-  beanUuid: string;
   module: string;
   scene?: TypeDecoratorBeanOptionsSceneBase;
   name: string;

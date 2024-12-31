@@ -1,5 +1,5 @@
 import { isClass } from '../utils/isClass.js';
-import { isNilOrEmptyString, isUuid, ZovaApplication, ZovaContext } from '../core/index.js';
+import { isNilOrEmptyString, ZovaApplication, ZovaContext } from '../core/index.js';
 import {
   Constructable,
   Functionable,
@@ -381,7 +381,7 @@ export class BeanContainer {
       return appResource.getBean(beanFullName);
     }
     // check if uuid
-    if (!isUuid(beanFullName)) {
+    if (!beanFullName.includes('__local__:')) {
       // module: name
       const moduleName = beanFullName.split('.')[0];
       // module: load

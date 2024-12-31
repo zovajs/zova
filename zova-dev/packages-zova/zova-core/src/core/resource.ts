@@ -55,12 +55,10 @@ export class AppResource extends BeanSimple {
     const module = beanInfo?.module;
     // name
     const { scene, name } = this._parseSceneAndBeanName(beanClass!, options.scene, options.name);
-    // uuid
-    const beanUuid = uuid();
     // beanFullName
     let beanFullName;
     if (['local'].includes(scene)) {
-      beanFullName = beanUuid;
+      beanFullName = `__local__:${beanInfo?.hash || uuid()}`;
     } else {
       beanFullName = `${module}.${scene}.${name}`;
     }
@@ -72,7 +70,6 @@ export class AppResource extends BeanSimple {
       module,
       scene,
       name,
-      beanUuid,
       beanFullName,
       moduleBelong,
     } as IDecoratorBeanOptionsBase<T>;
@@ -98,7 +95,7 @@ export class AppResource extends BeanSimple {
   getBeanFullNameOfComposable(beanComposable: Functionable | undefined): string | undefined {
     if (!beanComposable) return;
     if (!beanComposable[DecoratorBeanFullNameOfComposable]) {
-      beanComposable[DecoratorBeanFullNameOfComposable] = `useComposable.${uuid()}`;
+      beanComposable[DecoratorBeanFullNameOfComposable] = `__composable__:${uuid()}`;
     }
     return beanComposable[DecoratorBeanFullNameOfComposable];
   }
