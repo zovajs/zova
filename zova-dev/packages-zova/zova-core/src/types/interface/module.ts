@@ -3,7 +3,7 @@ import { ZovaApplication } from '../../core/app/application.js';
 import { IModuleMain, IMonkeyModule, IMonkeyController, IMonkeySystem } from './monkey.js';
 import { StateLock } from '../../utils/stateLock.js';
 import { Component } from 'vue';
-import { ZovaConfigMeta } from 'zova-shared';
+import { ZovaConfigMeta } from '@cabloy/module-info';
 
 export type TypeModuleResourceIcons = Record<string, string>;
 export type TypeModuleResourceLocales = Record<string, object>;

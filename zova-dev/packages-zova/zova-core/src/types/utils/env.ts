@@ -1,4 +1,4 @@
-import { ZovaMetaAppMode, ZovaMetaFlavor, ZovaMetaMode } from 'zova-shared';
+import { ZovaMetaAppMode, ZovaMetaFlavor, ZovaMetaMode } from '@cabloy/module-info';
 
 export interface ZovaConfigEnv {
   appRouterMode: 'hash' | 'history' | 'abstract' | undefined;
