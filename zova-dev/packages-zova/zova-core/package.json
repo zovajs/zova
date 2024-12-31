@@ -42,7 +42,7 @@
     "@cabloy/compose": "^1.0.2",
     "@cabloy/extend": "^3.0.5",
     "@cabloy/localeutil": "^1.0.4",
-    "@cabloy/module-info": "^1.0.23",
+    "@cabloy/module-info": "^1.2.3",
     "@cabloy/vue-reactivity": "^3.5.11",
     "@cabloy/vue-router": "^4.4.8",
     "@cabloy/vue-runtime-core": "^3.5.11",
