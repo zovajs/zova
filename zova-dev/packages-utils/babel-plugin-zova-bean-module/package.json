@@ -31,7 +31,7 @@
   "license": "MIT",
   "dependencies": {
     "@cabloy/module-info": "^1.2.3",
-    "@cabloy/word-utils": "^1.0.9"
+    "@cabloy/word-utils": "^1.0.10"
   },
   "devDependencies": {
     "@types/babel__core": "^7.20.5",
