@@ -159,12 +159,12 @@ function matchSelector(match, selector) {
 }
 function hashCode(input) {
     let hash = 0, i, chr;
-    if (input.length === 0)
-        return hash;
+    if (!input)
+        return '';
     for (i = 0; i < input.length; i++) {
         chr = input.charCodeAt(i);
         hash = (hash << 5) - hash + chr;
         hash |= 0; // Convert to 32bit integer
     }
-    return hash;
+    return (hash + 2147483647 + 1).toString();
 }

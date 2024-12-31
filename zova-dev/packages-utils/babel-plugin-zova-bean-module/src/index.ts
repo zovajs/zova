@@ -16,6 +16,11 @@ export default function () {
       fileName = fileName.substring(0, fileName.lastIndexOf('.'));
       const hash = hashCode(fileName) + 2147483647 + 1;
       console.log(hash);
+      const propertyNodeModule = t.objectProperty(t.identifier('module'), t.stringLiteral(moduleName));
+      const propertyNodeHash = t.objectProperty(t.identifier('hash'), t.stringLiteral(hash));
+      const objectExpression = t.objectExpression([propertyNodeModule, propertyNodeHash]);
+
+      const decoratorNode = t.decorator();
     },
   };
   return { visitor };
