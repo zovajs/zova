@@ -3,7 +3,6 @@ import {
   BeanContainer,
   BeanControllerPageBase,
   BeanSimple,
-  IModule,
   IMonkeyModule,
   IMonkeyController,
   IControllerData,
@@ -18,6 +17,7 @@ import { useRoute } from 'vue-router';
 import { BeanRouter } from './bean/bean.router.js';
 import { getRealRouteName } from './utils.js';
 import { LocalRouter } from './bean/local.router.js';
+import { IModule } from '@cabloy/module-info';
 
 export class Monkey
   extends BeanSimple
