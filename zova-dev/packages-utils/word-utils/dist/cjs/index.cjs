@@ -12,6 +12,7 @@ exports.combineWordsDeduplicate = combineWordsDeduplicate;
 exports.stringToCapitalize = stringToCapitalize;
 exports.replaceTemplate = replaceTemplate;
 exports.matchSelector = matchSelector;
+exports.hashCode = hashCode;
 function _parseLastWord(str) {
     if (!str)
         return str;
@@ -155,4 +156,15 @@ function matchSelector(match, selector) {
         return (typeof match === 'string' && match === selector) || (match instanceof RegExp && match.test(selector));
     }
     return match.some(item => matchSelector(item, selector));
+}
+function hashCode(input) {
+    let hash = 0, i, chr;
+    if (input.length === 0)
+        return hash;
+    for (i = 0; i < input.length; i++) {
+        chr = input.charCodeAt(i);
+        hash = (hash << 5) - hash + chr;
+        hash |= 0; // Convert to 32bit integer
+    }
+    return hash;
 }

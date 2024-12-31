@@ -10,4 +10,5 @@ export declare function stringToCapitalize(str: string[] | string, separator?: s
 export declare function replaceTemplate(content: string | undefined, scope?: object | undefined): string | undefined;
 export type TypeMatchSelectorRule<T> = T | RegExp | (T | RegExp)[];
 export declare function matchSelector<T extends string = string>(match: TypeMatchSelectorRule<T>, selector: string): any;
+export declare function hashCode(input: string): number;
 //# sourceMappingURL=index.d.ts.map
