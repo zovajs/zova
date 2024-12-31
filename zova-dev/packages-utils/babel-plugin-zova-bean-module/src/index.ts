@@ -41,7 +41,7 @@ function createVisitor(context: ContextInfo, beanInfo) {
 
 function insertImport(path: NodePath<t.Program>) {
   const nodeImport = t.importDeclaration(
-    [t.importSpecifier(t.identifier('BeanInfo'), t.stringLiteral('BeanInfo'))],
+    [t.importSpecifier(t.identifier('__z_BeanInfo'), t.stringLiteral('BeanInfo'))],
     t.stringLiteral('zova'),
   );
   path.get('body')[0].insertBefore(nodeImport);
@@ -69,7 +69,7 @@ function __createDecoratorNode(beanInfo) {
   const propertyNodeModule = t.objectProperty(t.identifier('module'), t.stringLiteral(beanInfo.module));
   const propertyNodeHash = t.objectProperty(t.identifier('hash'), t.stringLiteral(beanInfo.hash));
   const objectExpression = t.objectExpression([propertyNodeModule, propertyNodeHash]);
-  const callExpression = t.callExpression(t.identifier('BeanInfo'), [objectExpression]);
+  const callExpression = t.callExpression(t.identifier('__z_BeanInfo'), [objectExpression]);
   const decoratorNode = t.decorator(callExpression);
   return decoratorNode;
 }
