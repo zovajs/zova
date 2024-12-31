@@ -2,6 +2,7 @@ import { isClass } from '../utils/isClass.js';
 import {
   Constructable,
   Functionable,
+  IDecoratorBeanInfoOptions,
   IDecoratorBeanOptionsBase,
   IDecoratorUseOptionsBase,
 } from '../decorator/index.js';
@@ -47,7 +48,11 @@ export class AppResource extends BeanSimple {
   }
 
   addBean<T>(options: Partial<IDecoratorBeanOptionsBase<T>>) {
-    const { module, beanClass, virtual } = options;
+    const { beanClass, virtual } = options;
+    // beanInfo
+    const beanInfo = appMetadata.getMetadata<IDecoratorBeanInfoOptions>(DecoratorBeanInfo, beanClass!);
+    // module
+    const module = beanInfo?.module;
     // name
     const { scene, name } = this._parseSceneAndBeanName(beanClass!, options.scene, options.name);
     // uuid

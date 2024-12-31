@@ -1,5 +1,4 @@
 import { appResource } from '../../core/resource.js';
-import { Cast } from '../../types/utils/cast.js';
 import { Constructable, IDecoratorServiceOptions } from '../index.js';
 
 export function Service(options?: IDecoratorServiceOptions): ClassDecorator {
@@ -7,7 +6,6 @@ export function Service(options?: IDecoratorServiceOptions): ClassDecorator {
     if (!options) options = {};
     // add
     appResource.addBean({
-      module: Cast(options).module,
       scene: options.scene || 'service',
       name: options.name,
       containerScope: 'ctx',
