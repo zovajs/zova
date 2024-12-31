@@ -44,6 +44,11 @@ export interface IDecoratorBeanOptions {
   markReactive?: boolean;
 }
 
+export interface IDecoratorBeanInfoOptions {
+  module: string;
+  hash: string;
+}
+
 export type IDecoratorVirtualOptions = IDecoratorBeanOptions;
 
 export interface IDecoratorLocalOptions {

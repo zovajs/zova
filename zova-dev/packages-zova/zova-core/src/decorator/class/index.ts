@@ -1,4 +1,5 @@
 export * from './bean.js';
+export * from './beanInfo.js';
 export * from './model.js';
 export * from './local.js';
 export * from './scope.js';
