@@ -69,6 +69,7 @@ export class AppResource extends BeanSimple {
     // options
     const beanOptions = {
       ...options,
+      module,
       scene,
       name,
       beanUuid,
