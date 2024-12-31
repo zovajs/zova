@@ -55,7 +55,7 @@ function __parseBeanInfo(state) {
   let fileName = sourceFileName.substring(sourceFileName.indexOf(pattern) + pattern.length);
   fileName = fileName.substring(0, fileName.lastIndexOf('.'));
   const hash = hashCode(fileName);
-  return { moduleName, hash };
+  return { module: moduleName, hash };
 }
 
 function __getModuleName(sourceFileName: string | null | undefined) {
