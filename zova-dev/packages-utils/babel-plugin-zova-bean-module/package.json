@@ -29,8 +29,11 @@
   ],
   "author": "zhennann",
   "license": "MIT",
-  "devDependencies": {
+  "dependencies": {
     "@cabloy/module-info": "^1.2.3",
+    "@cabloy/word-utils": "^1.0.9"
+  },
+  "devDependencies": {
     "@types/babel__core": "^7.20.5",
     "@types/babel__traverse": "^7.20.5"
   },
