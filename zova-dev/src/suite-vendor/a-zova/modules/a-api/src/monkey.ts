@@ -4,12 +4,12 @@ import {
   BeanContainer,
   BeanSimple,
   IBeanScopeRecord,
-  IModule,
   IMonkeyAppInitialize,
   IMonkeyBeanInit,
   IMonkeyModule,
 } from 'zova';
 import { __ThisModule__, ScopeModule } from './.metadata/this.js';
+import { IModule } from '@cabloy/module-info';
 
 export class Monkey extends BeanSimple implements IMonkeyAppInitialize, IMonkeyModule, IMonkeyBeanInit {
   private _moduleSelf: IModule;
