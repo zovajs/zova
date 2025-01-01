@@ -11,7 +11,7 @@ interface Slots {
 
 export interface ControllerPage {
   $props: RequiredSome<Props, keyof typeof ControllerPage.$propsDefault>;
-  $emits: Emits;
+  $emit: Emits;
   $slots: Slots;
 }
 

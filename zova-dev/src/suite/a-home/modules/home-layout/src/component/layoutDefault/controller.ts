@@ -11,7 +11,7 @@ interface Slots {}
 
 export interface ControllerLayoutDefault {
   $props: RequiredSome<Props, keyof typeof ControllerLayoutDefault.$propsDefault>;
-  $emits: Emits;
+  $emit: Emits;
   $slots: Slots;
 }
 

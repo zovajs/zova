@@ -14,7 +14,7 @@ interface Slots {}
 
 export interface ControllerEssentialLink {
   $props: RequiredSome<Props, keyof typeof ControllerEssentialLink.$propsDefault>;
-  $emits: Emits;
+  $emit: Emits;
   $slots: Slots;
 }
 
