@@ -33,12 +33,13 @@ declare module 'zova' {
     'a-model': ReturnType<typeof config>;
   }
 }
-export * from '../bean/local.storage.js';
 /** scope: end */
 /** scope module: begin */
- declare module 'zova-module-a-model' {
+export * from '../bean/local.storage.js';
+declare module 'zova-module-a-model' {
   export interface LocalStorage {
+    /** @internal */
     get scope(): ScopeModuleAModel;
   }
- }
+}
 /** scope module: end */

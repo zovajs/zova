@@ -1,3 +1,4 @@
+import path from 'node:path';
 import { getScopeModuleName, globAllTsFiles } from './utils.js';
 
 export async function generateScopeModule(moduleName: string, modulePath: string) {
@@ -5,9 +6,11 @@ export async function generateScopeModule(moduleName: string, modulePath: string
   const globFiles = await globAllTsFiles(moduleName, modulePath);
   if (globFiles.length === 0) return '';
   //
+  const contentExports: string[] = [];
   const contentScopes: string[] = [];
+  const metadataFile = path.join(modulePath, 'src/.metadata');
   for (const globFile of globFiles) {
-    const { fileContent, isVirtual } = globFile;
+    const { file, fileContent, isVirtual } = globFile;
     if (!isVirtual) {
       const matches = fileContent.match(/\s@[\s\S]*?export class (.*?) extends/);
       if (matches) {
@@ -16,6 +19,12 @@ export async function generateScopeModule(moduleName: string, modulePath: string
         if (pos > -1) {
           className = className.substring(0, pos);
         }
+        const fileRelative = path
+          .relative(metadataFile, file)
+          .replace(/\\/g, '/')
+          .replace('.ts', '.js')
+          .replace('.tsx', '.jsx');
+        contentExports.push(`export * from '${fileRelative}';`);
         contentScopes.push(`
           export interface ${className} {
             /** @internal */
@@ -26,6 +35,7 @@ export async function generateScopeModule(moduleName: string, modulePath: string
   }
   // combine
   const content = `/** scope module: begin */
+${contentExports.join('\n')}  
 declare module 'zova-module-${moduleName}' {
   ${contentScopes.join('\n')} 
 }
