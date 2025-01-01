@@ -9,15 +9,12 @@ declare module 'zova' {
 }
 /** beans: end */
 /** components: begin */
-export { ControllerEssentialLink } from '../component/essentialLink/controller.js';
-export * as NSControllerEssentialLink from '../component/essentialLink/controller.js';
-export { ControllerLayoutDefault } from '../component/layoutDefault/controller.js';
-export * as NSControllerLayoutDefault from '../component/layoutDefault/controller.js';
-export { ControllerLayoutEmpty } from '../component/layoutEmpty/controller.js';
-export * as NSControllerLayoutEmpty from '../component/layoutEmpty/controller.js';
-import * as NSControllerEssentialLink from '../component/essentialLink/controller.js';
-import * as NSControllerLayoutDefault from '../component/layoutDefault/controller.js';
-import * as NSControllerLayoutEmpty from '../component/layoutEmpty/controller.js';
+export * from '../component/essentialLink/controller.js';
+export * from '../component/layoutDefault/controller.js';
+export * from '../component/layoutEmpty/controller.js';
+import { ControllerEssentialLink } from '../component/essentialLink/controller.js';
+import { ControllerLayoutDefault } from '../component/layoutDefault/controller.js';
+import { ControllerLayoutEmpty } from '../component/layoutEmpty/controller.js';
 export { default as ZEssentialLink } from '../component/essentialLink/index.vue';
 import ZEssentialLink from '../component/essentialLink/index.vue';
 export { default as ZLayoutDefault } from '../component/layoutDefault/index.vue';
@@ -32,9 +29,9 @@ export const components = {
 import 'zova';
 declare module 'zova' {
   export interface IComponentRecord {
-    'home-layout:essentialLink': NSControllerEssentialLink.ControllerEssentialLink;
-    'home-layout:layoutDefault': NSControllerLayoutDefault.ControllerLayoutDefault;
-    'home-layout:layoutEmpty': NSControllerLayoutEmpty.ControllerLayoutEmpty;
+    'home-layout:essentialLink': ControllerEssentialLink;
+    'home-layout:layoutDefault': ControllerLayoutDefault;
+    'home-layout:layoutEmpty': ControllerLayoutEmpty;
   }
 }
 /** components: end */

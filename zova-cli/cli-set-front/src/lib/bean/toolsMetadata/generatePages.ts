@@ -3,6 +3,7 @@ import eggBornUtils from 'egg-born-utils';
 import { IModuleInfo } from '@cabloy/module-info';
 import fse from 'fs-extra';
 import gogocode from 'gogocode';
+import { toUpperCaseFirstChar } from '@cabloy/word-utils';
 
 export async function generatePages(moduleInfo: IModuleInfo, moduleName: string, modulePath: string) {
   const pattern = `${modulePath}/src/page/*/index.vue`;
@@ -17,47 +18,48 @@ export async function generatePages(moduleInfo: IModuleInfo, moduleName: string,
   const contentNameSchemas: string[] = [];
   for (const file of files) {
     const pageName = path.basename(file.substring(0, file.length - '/index.vue'.length));
-    const className = pageName.charAt(0).toUpperCase() + pageName.substring(1);
+    const pageNameCapitalize = toUpperCaseFirstChar(pageName);
+    const className = 'ControllerPage' + pageNameCapitalize;
     // controller.ts
     const controllerContent = (await fse.readFile(file.replace('index.vue', 'controller.ts'))).toString();
-    const enableRouteQuery = controllerContent.includes('export const QuerySchema');
-    const enableRouteParams = controllerContent.includes('export const ParamsSchema');
+    const enableRouteQuery = controllerContent.includes('const QuerySchema');
+    const enableRouteParams = controllerContent.includes('const ParamsSchema');
     //
-    const { routePath, routeName } = await _extractRoutePathOrName(modulePath, className);
+    const { routePath, routeName } = await _extractRoutePathOrName(modulePath, pageNameCapitalize);
     // no matter that: route.meta?.absolute
     const routePathFull = routePath
       ? `/${moduleInfo.pid}/${moduleInfo.name}/${routePath}`
       : `/${moduleInfo.pid}/${moduleInfo.name}`;
     const routeNameFull = `${moduleName}:${routeName}`;
     //
-    contentExports.push(`export * as NSControllerPage${className} from '../page/${pageName}/controller.js';`);
+    contentExports.push(`export * from '../page/${pageName}/controller.js';`);
     if (enableRouteQuery || enableRouteParams) {
-      contentImports.push(`import * as NSControllerPage${className} from '../page/${pageName}/controller.js';`);
+      contentImports.push(`import { ${className} } from '../page/${pageName}/controller.js';`);
     }
     if (!routeName) {
       if (enableRouteQuery) {
-        contentPathRecords.push(`'${routePathFull}': NSControllerPage${className}.QueryInput;`);
+        contentPathRecords.push(`'${routePathFull}': ${className}.QueryInput;`);
       } else {
         contentPathRecords.push(`'${routePathFull}': undefined;`); // for type of route path
       }
     } else {
       if (enableRouteQuery || enableRouteParams) {
         contentNameRecords.push(
-          `'${routeNameFull}': TypePageParamsQuery<${enableRouteQuery ? `NSControllerPage${className}.QueryInput` : 'unknown'}, ${enableRouteParams ? `NSControllerPage${className}.ParamsInput` : 'unknown'}>;`,
+          `'${routeNameFull}': TypePageParamsQuery<${enableRouteQuery ? `${className}.QueryInput` : 'unknown'}, ${enableRouteParams ? `${className}.ParamsInput` : 'unknown'}>;`,
         );
       }
     }
     if (!routeName) {
       if (enableRouteQuery) {
         contentPathSchemas.push(`'${routePathFull}': {
-          query: NSControllerPage${className}.QuerySchema,
+          query: ${className}.querySchema,
         },`);
       }
     } else {
       if (enableRouteQuery || enableRouteParams) {
         contentNameSchemas.push(`'${routeNameFull}': {
-          ${enableRouteParams ? `params: NSControllerPage${className}.ParamsSchema,` : ''}
-          ${enableRouteQuery ? `query: NSControllerPage${className}.QuerySchema,` : ''}
+          ${enableRouteParams ? `params: ${className}.paramsSchema,` : ''}
+          ${enableRouteQuery ? `query: ${className}.querySchema,` : ''}
         },`);
       }
     }

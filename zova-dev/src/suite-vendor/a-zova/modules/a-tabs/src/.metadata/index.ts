@@ -9,9 +9,8 @@ declare module 'zova' {
 }
 /** beans: end */
 /** components: begin */
-export { ControllerRouterViewTabs } from '../component/routerViewTabs/controller.js';
-export * as NSControllerRouterViewTabs from '../component/routerViewTabs/controller.js';
-import * as NSControllerRouterViewTabs from '../component/routerViewTabs/controller.js';
+export * from '../component/routerViewTabs/controller.js';
+import { ControllerRouterViewTabs } from '../component/routerViewTabs/controller.js';
 export { default as ZRouterViewTabs } from '../component/routerViewTabs/index.vue';
 import ZRouterViewTabs from '../component/routerViewTabs/index.vue';
 export const components = {
@@ -20,7 +19,7 @@ export const components = {
 import 'zova';
 declare module 'zova' {
   export interface IComponentRecord {
-    'a-tabs:routerViewTabs': NSControllerRouterViewTabs.ControllerRouterViewTabs;
+    'a-tabs:routerViewTabs': ControllerRouterViewTabs;
   }
 }
 /** components: end */

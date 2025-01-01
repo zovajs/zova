@@ -9,30 +9,30 @@ declare module 'zova' {
 }
 /** beans: end */
 /** pages: begin */
-export * as NSControllerPageItem from '../page/item/controller.js';
-export * as NSControllerPageTodo from '../page/todo/controller.js';
-import * as NSControllerPageItem from '../page/item/controller.js';
-import * as NSControllerPageTodo from '../page/todo/controller.js';
+export * from '../page/item/controller.js';
+export * from '../page/todo/controller.js';
+import { ControllerPageItem } from '../page/item/controller.js';
+import { ControllerPageTodo } from '../page/todo/controller.js';
 export * from '../routes.js';
 import { TypePageParamsQuery } from 'zova';
 import 'zova';
 declare module 'zova' {
   export interface IPagePathRecord {
-    '/demo/todo/todo': NSControllerPageTodo.QueryInput;
+    '/demo/todo/todo': ControllerPageTodo.QueryInput;
   }
   export interface IPageNameRecord {
-    'demo-todo:item': TypePageParamsQuery<NSControllerPageItem.QueryInput, NSControllerPageItem.ParamsInput>;
+    'demo-todo:item': TypePageParamsQuery<ControllerPageItem.QueryInput, ControllerPageItem.ParamsInput>;
   }
 }
 export const pagePathSchemas = {
   '/demo/todo/todo': {
-    query: NSControllerPageTodo.QuerySchema,
+    query: ControllerPageTodo.querySchema,
   },
 };
 export const pageNameSchemas = {
   'demo-todo:item': {
-    params: NSControllerPageItem.ParamsSchema,
-    query: NSControllerPageItem.QuerySchema,
+    params: ControllerPageItem.paramsSchema,
+    query: ControllerPageItem.querySchema,
   },
 };
 /** pages: end */

@@ -1,5 +1,6 @@
 import path from 'path';
 import eggBornUtils from 'egg-born-utils';
+import { toUpperCaseFirstChar } from '@cabloy/word-utils';
 
 export async function generateComponents(moduleName: string, modulePath: string) {
   const pattern = `${modulePath}/src/component/*/index.vue`;
@@ -13,16 +14,15 @@ export async function generateComponents(moduleName: string, modulePath: string)
   const contentRecords: string[] = [];
   for (const file of files) {
     const componentName = path.basename(file.substring(0, file.length - '/index.vue'.length));
-    const className = componentName.charAt(0).toUpperCase() + componentName.substring(1);
+    const className = 'Controller' + toUpperCaseFirstChar(componentName);
     const componentFullName = `${moduleName}:${componentName}`;
     const componentName2 = 'Z' + firstCharToUpperCase(componentName);
-    contentExports.push(`export { Controller${className} } from '../component/${componentName}/controller.js';`);
-    contentExports.push(`export * as NSController${className} from '../component/${componentName}/controller.js';`);
-    contentImports.push(`import * as NSController${className} from '../component/${componentName}/controller.js';`);
+    contentExports.push(`export * from '../component/${componentName}/controller.js';`);
+    contentImports.push(`import { ${className} } from '../component/${componentName}/controller.js';`);
     contentImports2.push(`export { default as ${componentName2} } from '../component/${componentName}/index.vue';`);
     contentImports2.push(`import ${componentName2} from '../component/${componentName}/index.vue';`);
     contentComponents.push(`'${componentName}': ${componentName2},`);
-    contentRecords.push(`'${componentFullName}': NSController${className}.Controller${className};`);
+    contentRecords.push(`'${componentFullName}': ${className};`);
   }
   // combine
   const content = `/** components: begin */

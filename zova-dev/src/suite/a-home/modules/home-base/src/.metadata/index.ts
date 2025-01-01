@@ -12,9 +12,8 @@ declare module 'zova' {
 }
 /** beans: end */
 /** components: begin */
-export { ControllerPage } from '../component/page/controller.js';
-export * as NSControllerPage from '../component/page/controller.js';
-import * as NSControllerPage from '../component/page/controller.js';
+export * from '../component/page/controller.js';
+import { ControllerPage } from '../component/page/controller.js';
 export { default as ZPage } from '../component/page/index.vue';
 import ZPage from '../component/page/index.vue';
 export const components = {
@@ -23,12 +22,12 @@ export const components = {
 import 'zova';
 declare module 'zova' {
   export interface IComponentRecord {
-    'home-base:page': NSControllerPage.ControllerPage;
+    'home-base:page': ControllerPage;
   }
 }
 /** components: end */
 /** pages: begin */
-export * as NSControllerPageErrorNotFound from '../page/errorNotFound/controller.js';
+export * from '../page/errorNotFound/controller.js';
 
 export * from '../routes.js';
 

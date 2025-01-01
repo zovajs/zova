@@ -12,20 +12,20 @@ declare module 'zova' {
 }
 /** beans: end */
 /** pages: begin */
-export * as NSControllerPageLogin from '../page/login/controller.js';
-import * as NSControllerPageLogin from '../page/login/controller.js';
+export * from '../page/login/controller.js';
+import { ControllerPageLogin } from '../page/login/controller.js';
 export * from '../routes.js';
 
 import 'zova';
 declare module 'zova' {
   export interface IPagePathRecord {
-    '/home/user/login': NSControllerPageLogin.QueryInput;
+    '/home/user/login': ControllerPageLogin.QueryInput;
   }
   export interface IPageNameRecord {}
 }
 export const pagePathSchemas = {
   '/home/user/login': {
-    query: NSControllerPageLogin.QuerySchema,
+    query: ControllerPageLogin.querySchema,
   },
 };
 export const pageNameSchemas = {};

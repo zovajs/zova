@@ -1,5 +1,5 @@
 /** pages: begin */
-export * as NSControllerPageIndex from '../page/index/controller.js';
+export * from '../page/index/controller.js';
 
 export * from '../routes.js';
 
