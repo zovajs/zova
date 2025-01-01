@@ -59,6 +59,14 @@ declare module 'zova' {
 }
 /** scope: end */
 /** scope module: begin */
+export * from '../bean/model.todo.js';
+export * from '../page/item/controller.js';
+export * from '../page/item/render.jsx';
+export * from '../page/item/style.js';
+export * from '../page/todo/controller.js';
+export * from '../page/todo/render.jsx';
+export * from '../page/todo/style.js';
+export * from '../service/todo.js';
 declare module 'zova-module-demo-todo' {
   export interface ModelTodo {
     /** @internal */

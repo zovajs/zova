@@ -35,6 +35,7 @@ declare module 'zova' {
 }
 /** scope: end */
 /** scope module: begin */
+export * from '../bean/bean.theme.js';
 declare module 'zova-module-a-style' {
   export interface BeanTheme {
     /** @internal */

@@ -117,6 +117,34 @@ declare module 'zova' {
 }
 /** scope: end */
 /** scope module: begin */
+export * from '../bean/store.counter.js';
+export * from '../bean/theme.orange.js';
+export * from '../component/card/controller.js';
+export * from '../component/card/render.jsx';
+export * from '../page/component/controller.js';
+export * from '../page/component/render.jsx';
+export * from '../page/legacy/controller.js';
+export * from '../page/legacy/render.jsx';
+export * from '../page/legacy/style.js';
+export * from '../page/locale/controller.js';
+export * from '../page/locale/render.jsx';
+export * from '../page/pinia/controller.js';
+export * from '../page/pinia/render.jsx';
+export * from '../page/pinia/style.js';
+export * from '../page/routeParams/controller.js';
+export * from '../page/routeParams/render.jsx';
+export * from '../page/routeParams/style.js';
+export * from '../page/routeQuery/controller.js';
+export * from '../page/routeQuery/render.jsx';
+export * from '../page/routeQuery/style.js';
+export * from '../page/routeQuery2/controller.js';
+export * from '../page/routeQuery2/render.jsx';
+export * from '../page/routeQuery2/style.js';
+export * from '../page/state/controller.js';
+export * from '../page/state/render.jsx';
+export * from '../page/style/controller.js';
+export * from '../page/style/render.jsx';
+export * from '../page/style/style.js';
 declare module 'zova-module-demo-basic' {
   export interface StoreCounter {
     /** @internal */

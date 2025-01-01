@@ -82,6 +82,23 @@ declare module 'zova' {
 }
 /** scope: end */
 /** scope module: begin */
+export * from '../bean/model.menu.js';
+export * from '../component/essentialLink/controller.js';
+export * from '../component/essentialLink/render.jsx';
+export * from '../component/layoutDefault/controller.js';
+export * from '../component/layoutDefault/render.jsx';
+export * from '../component/layoutDefault/renderContent.jsx';
+export * from '../component/layoutDefault/renderHeader.jsx';
+export * from '../component/layoutDefault/renderLocale.jsx';
+export * from '../component/layoutDefault/renderMenu.jsx';
+export * from '../component/layoutDefault/renderSidebar.jsx';
+export * from '../component/layoutDefault/renderTabs.jsx';
+export * from '../component/layoutDefault/renderTheme.jsx';
+export * from '../component/layoutDefault/renderUser.jsx';
+export * from '../component/layoutDefault/style.js';
+export * from '../component/layoutEmpty/controller.js';
+export * from '../component/layoutEmpty/render.jsx';
+export * from '../service/menu.js';
 declare module 'zova-module-home-layout' {
   export interface ModelMenu {
     /** @internal */

@@ -69,6 +69,13 @@ declare module 'zova' {
 }
 /** scope: end */
 /** scope module: begin */
+export * from '../bean/model.auth.js';
+export * from '../bean/model.user.js';
+export * from '../page/login/controller.js';
+export * from '../page/login/render.jsx';
+export * from '../page/login/style.js';
+export * from '../service/auth.js';
+export * from '../service/user.js';
 declare module 'zova-module-home-user' {
   export interface ModelAuth {
     /** @internal */

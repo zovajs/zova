@@ -74,6 +74,16 @@ declare module 'zova' {
 }
 /** scope: end */
 /** scope module: begin */
+export * from '../bean/local.router.js';
+export * from '../bean/local.ssr.js';
+export * from '../bean/style.default.js';
+export * from '../bean/theme.default.js';
+export * from '../component/page/controller.js';
+export * from '../component/page/render.jsx';
+export * from '../component/page/style.js';
+export * from '../page/errorNotFound/controller.js';
+export * from '../page/errorNotFound/render.jsx';
+export * from '../page/errorNotFound/style.js';
 declare module 'zova-module-home-base' {
   export interface LocalRouter {
     /** @internal */

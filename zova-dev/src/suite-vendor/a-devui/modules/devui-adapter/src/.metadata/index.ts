@@ -27,6 +27,7 @@ declare module 'zova' {
 }
 /** scope: end */
 /** scope module: begin */
+export * from '../bean/themeHandler.default.js';
 declare module 'zova-module-devui-adapter' {
   export interface ThemeHandlerDefault {
     /** @internal */

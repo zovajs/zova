@@ -40,6 +40,10 @@ declare module 'zova' {
 }
 /** scope: end */
 /** scope module: begin */
+export * from '../bean/model.tabs.js';
+export * from '../component/routerViewTabs/controller.js';
+export * from '../component/routerViewTabs/render.jsx';
+export * from '../component/routerViewTabs/style.js';
 declare module 'zova-module-a-tabs' {
   export interface ModelTabs {
     /** @internal */

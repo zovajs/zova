@@ -29,6 +29,9 @@ declare module 'zova' {
 }
 /** scope: end */
 /** scope module: begin */
+export * from '../page/index/controller.js';
+export * from '../page/index/render.jsx';
+export * from '../page/index/style.js';
 declare module 'zova-module-home-index' {
   export interface ControllerPageIndex {
     /** @internal */
