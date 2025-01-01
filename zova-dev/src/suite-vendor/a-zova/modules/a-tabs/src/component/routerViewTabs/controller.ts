@@ -1,4 +1,4 @@
-import { BeanControllerBase, Cast, Local, PropsBase, Use, RequiredSome } from 'zova';
+import { BeanControllerBase, cast, Local, PropsBase, Use, RequiredSome } from 'zova';
 import { ScopeModule } from '../../.metadata/this.js';
 import { RouterViewSlotParams } from './render.jsx';
 import { RouteLocationNormalizedLoaded } from 'vue-router';

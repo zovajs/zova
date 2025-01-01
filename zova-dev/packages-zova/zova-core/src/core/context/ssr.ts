@@ -9,7 +9,7 @@ import {
   SSRContextState,
   SSRContextStateDefer,
 } from '../../types/interface/ssr.js';
-import { Cast } from '../../types/utils/cast.js';
+import { cast } from '../../types/utils/cast.js';
 import { CtxSSRMetaStore } from './ssrMetaStore.js';
 import { includeBooleanAttr, isBooleanAttr, isString, stringifyStyle } from '@vue/shared';
 import { ErrorSSR } from '../../bean/index.js';

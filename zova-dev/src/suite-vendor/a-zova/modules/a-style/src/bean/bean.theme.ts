@@ -1,4 +1,4 @@
-import { Bean, Cast, IBeanRecord } from 'zova';
+import { Bean, cast, IBeanRecord } from 'zova';
 import { ScopeModule } from '../.metadata/this.js';
 import { IThemeBase, IThemeHandler } from '../types.js';
 import { BeanModelBase } from 'zova-module-a-model';

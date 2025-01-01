@@ -2,7 +2,7 @@ import { ComponentInternalInstance, markRaw } from 'vue';
 import { ZovaApplication } from '../app/application.js';
 import { BeanContainer } from '../../bean/beanContainer.js';
 import { CtxMeta } from './meta.js';
-import { Cast } from '../../types/utils/cast.js';
+import { cast } from '../../types/utils/cast.js';
 import { CtxUtil } from './util.js';
 
 export class ZovaContext {

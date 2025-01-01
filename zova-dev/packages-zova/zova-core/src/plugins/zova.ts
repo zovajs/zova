@@ -2,7 +2,7 @@ import { App } from 'vue';
 import { ZovaApplication, ZovaContext } from '../core/index.js';
 import { PluginZovaOptions } from '../types/interface/pluginZova.js';
 import { BeanContainerInstances } from '../bean/beanContainer.js';
-import { Cast } from '../types/index.js';
+import { cast } from '../types/index.js';
 import { BeanControllerIdentifier, BeanRenderIdentifier, BeanStyleIdentifier } from '../bean/type.js';
 
 export const PluginZova = {

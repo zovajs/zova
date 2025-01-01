@@ -14,7 +14,7 @@ import { BeanBase } from './beanBase.js';
 import { BeanSimple } from './beanSimple.js';
 import { compose } from '@cabloy/compose';
 import { markRaw, reactive, shallowReactive, provide as composableProvide, inject as composableInject } from 'vue';
-import { Cast } from '../types/utils/cast.js';
+import { cast } from '../types/utils/cast.js';
 import { IInjectRecord } from '../types/interface/inject.js';
 import { SymbolBeanFullName, SymbolInited } from './beanBaseSimple.js';
 

@@ -1,7 +1,7 @@
 import { BeanRenderBase } from '../../bean/beanRenderBase.js';
 import { BeanSimple } from '../../bean/beanSimple.js';
 import { BeanRenderIdentifier } from '../../bean/type.js';
-import { Cast } from '../../types/utils/cast.js';
+import { cast } from '../../types/utils/cast.js';
 
 export class CtxComponent extends BeanSimple {
   private _bean_render_original: any;

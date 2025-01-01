@@ -1,7 +1,7 @@
 import { useModel } from 'vue';
 import { BeanBase } from './beanBase.js';
 import { IControllerData } from './type.js';
-import { Cast } from '../types/utils/cast.js';
+import { cast } from '../types/utils/cast.js';
 import { useRef } from '../vue/ref.js';
 
 type Data = Record<string, unknown>;

@@ -1,4 +1,4 @@
-import { Cast, SSRContext } from 'zova';
+import { cast, SSRContext } from 'zova';
 import { App } from 'vue';
 import { Quasar } from 'quasar';
 import 'quasar/dist/quasar.sass';

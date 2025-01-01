@@ -1,4 +1,4 @@
-import { BeanBase, Cast, getZovaIcon, Local, useApp } from 'zova';
+import { BeanBase, cast, getZovaIcon, Local, useApp } from 'zova';
 import { Platform, QIcon, Quasar } from 'quasar';
 import { ScopeModule } from '../.metadata/this.js';
 

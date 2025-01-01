@@ -2,7 +2,7 @@
 import { extend } from '@cabloy/extend';
 import * as devalue from 'devalue';
 import { BeanSimple } from '../../bean/beanSimple.js';
-import { Cast, SSRContext, SSRMetaOptions, SSRMetaOptionsWrapper } from '../../types/index.js';
+import { cast, SSRContext, SSRMetaOptions, SSRMetaOptionsWrapper } from '../../types/index.js';
 
 export class CtxSSRMetaStore extends BeanSimple {
   private _updateId: number = 0;

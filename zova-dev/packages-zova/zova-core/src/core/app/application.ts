@@ -4,7 +4,7 @@ import { AppMeta } from './meta.js';
 import { PluginZovaOptions } from '../../types/interface/pluginZova.js';
 import { ZovaConfig, configDefault } from './config.js';
 import { ZovaConstant, constantDefault } from './constant.js';
-import { Cast } from '../../types/utils/cast.js';
+import { cast } from '../../types/utils/cast.js';
 import { ZovaContext } from '../context/context.js';
 import { TypeModuleResourceConfig } from '../../types/interface/module.js';
 import { AppUtil, deepExtend } from './util.js';

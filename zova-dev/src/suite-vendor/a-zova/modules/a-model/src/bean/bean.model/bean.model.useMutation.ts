@@ -9,7 +9,7 @@ import {
 } from '@tanstack/vue-query';
 import { MaybeRefDeep } from '../../common/types.js';
 import { UnwrapNestedRefs } from 'vue';
-import { Cast } from 'zova';
+import { cast } from 'zova';
 import { BeanModelUseQuery } from './bean.model.useQuery.js';
 
 const SymbolUseMutations = Symbol('SymbolUseMutations');

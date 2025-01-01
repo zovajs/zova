@@ -1,4 +1,4 @@
-import { Cast } from '../types/utils/cast.js';
+import { cast } from '../types/utils/cast.js';
 import { BeanControllerLike } from './beanControllerLike.js';
 import { BeanStyleIdentifier } from './type.js';
 

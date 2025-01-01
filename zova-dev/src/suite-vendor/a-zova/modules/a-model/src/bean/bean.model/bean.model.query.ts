@@ -11,7 +11,7 @@ import {
 } from '@tanstack/vue-query';
 import localforage from 'localforage';
 import { MaybeRefDeep, NoUnknown } from '../../common/types.js';
-import { Cast } from 'zova';
+import { cast } from 'zova';
 import { BeanModelCookie } from './bean.model.cookie.js';
 
 export class BeanModelQuery<TScopeModule = unknown> extends BeanModelCookie<TScopeModule> {

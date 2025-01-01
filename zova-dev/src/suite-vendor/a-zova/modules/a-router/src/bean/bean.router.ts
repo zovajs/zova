@@ -1,4 +1,4 @@
-import { Bean, BeanBase, Cast, deepExtend, IPageNameRecord, IPagePathRecord } from 'zova';
+import { Bean, BeanBase, cast, deepExtend, IPageNameRecord, IPagePathRecord } from 'zova';
 import { createMemoryHistory, createRouter, createWebHashHistory, createWebHistory, Router } from 'vue-router';
 import * as ModuleInfo from '@cabloy/module-info';
 import { IModuleRoute, IModuleRouteComponent } from '../types.js';

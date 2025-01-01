@@ -3,7 +3,7 @@ import { BeanSimple } from '../../beanSimple.js';
 import { IIconInfo, IIconMeta, TypeIconModules, TypeIconSymbols } from './types.js';
 import { IconGroup } from './iconGroup.js';
 import { AppIcon } from './icon.js';
-import { Cast } from '../../../types/utils/cast.js';
+import { cast } from '../../../types/utils/cast.js';
 
 const XMLNS = 'http://www.w3.org/2000/svg';
 const XMLNS_LINK = 'http://www.w3.org/1999/xlink';
@@ -13,7 +13,7 @@ export class AppIconBase extends BeanSimple {
   protected _iconMoudles: TypeIconModules = {};
 
   protected get self() {
-    return Cast<AppIcon>(this);
+    return cast<AppIcon>(this);
   }
 
   // undefined: ignore

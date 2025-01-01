@@ -1,4 +1,4 @@
-import { BeanBase, Cast, ThemeHandler } from 'zova';
+import { BeanBase, cast, ThemeHandler } from 'zova';
 import { ScopeModule } from '../.metadata/this.js';
 import { IThemeHandler, IThemeHandlerApplyParams } from 'zova-module-a-style';
 

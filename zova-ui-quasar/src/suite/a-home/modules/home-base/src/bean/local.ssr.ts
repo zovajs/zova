@@ -1,4 +1,4 @@
-import { BeanBase, Cast, Local } from 'zova';
+import { BeanBase, cast, Local } from 'zova';
 import { ScopeModule } from '../.metadata/this.js';
 
 @Local()
