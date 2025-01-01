@@ -6,9 +6,9 @@ export class BeanRouterBase<TScopeModule = unknown> extends BeanBase<TScopeModul
   private _eventRouterGuards: TypeEventOff;
 
   protected async __init__() {
-    this._eventRouterGuards = this.app.meta.event.on('a-router:routerGuards', async (context, next) => {
-      this.onRouterGuards(context.data);
-      await next();
+    this._eventRouterGuards = this.app.meta.event.on('a-router:routerGuards', async (data, next) => {
+      this.onRouterGuards(data);
+      return await next();
     });
   }
 
