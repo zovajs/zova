@@ -10,17 +10,6 @@ declare module 'zova' {
     'home-user.model.user': ModelUser;
   }
 }
-declare module 'zova-module-home-user' {
-  export interface ModelAuth {
-    /** @internal */
-    get scope(): ScopeModuleHomeUser;
-  }
-
-  export interface ModelUser {
-    /** @internal */
-    get scope(): ScopeModuleHomeUser;
-  }
-}
 /** beans: end */
 /** pages: begin */
 export * as NSControllerPageLogin from '../page/login/controller.js';
@@ -79,3 +68,41 @@ declare module 'zova' {
   }
 }
 /** scope: end */
+/** scope module: begin */
+declare module 'zova-module-home-user' {
+  export interface ModelAuth {
+    /** @internal */
+    get scope(): ScopeModuleHomeUser;
+  }
+
+  export interface ModelUser {
+    /** @internal */
+    get scope(): ScopeModuleHomeUser;
+  }
+
+  export interface ControllerPageLogin {
+    /** @internal */
+    get scope(): ScopeModuleHomeUser;
+  }
+
+  export interface RenderLogin {
+    /** @internal */
+    get scope(): ScopeModuleHomeUser;
+  }
+
+  export interface StyleLogin {
+    /** @internal */
+    get scope(): ScopeModuleHomeUser;
+  }
+
+  export interface ServiceAuth {
+    /** @internal */
+    get scope(): ScopeModuleHomeUser;
+  }
+
+  export interface ServiceUser {
+    /** @internal */
+    get scope(): ScopeModuleHomeUser;
+  }
+}
+/** scope module: end */

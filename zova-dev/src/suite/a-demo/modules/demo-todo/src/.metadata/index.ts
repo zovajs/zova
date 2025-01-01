@@ -7,12 +7,6 @@ declare module 'zova' {
     'demo-todo.model.todo': ModelTodo;
   }
 }
-declare module 'zova-module-demo-todo' {
-  export interface ModelTodo {
-    /** @internal */
-    get scope(): ScopeModuleDemoTodo;
-  }
-}
 /** beans: end */
 /** pages: begin */
 export * as NSControllerPageItem from '../page/item/controller.js';
@@ -64,3 +58,46 @@ declare module 'zova' {
   }
 }
 /** scope: end */
+/** scope module: begin */
+declare module 'zova-module-demo-todo' {
+  export interface ModelTodo {
+    /** @internal */
+    get scope(): ScopeModuleDemoTodo;
+  }
+
+  export interface ControllerPageItem {
+    /** @internal */
+    get scope(): ScopeModuleDemoTodo;
+  }
+
+  export interface RenderItem {
+    /** @internal */
+    get scope(): ScopeModuleDemoTodo;
+  }
+
+  export interface StyleItem {
+    /** @internal */
+    get scope(): ScopeModuleDemoTodo;
+  }
+
+  export interface ControllerPageTodo {
+    /** @internal */
+    get scope(): ScopeModuleDemoTodo;
+  }
+
+  export interface RenderTodo {
+    /** @internal */
+    get scope(): ScopeModuleDemoTodo;
+  }
+
+  export interface StyleTodo {
+    /** @internal */
+    get scope(): ScopeModuleDemoTodo;
+  }
+
+  export interface ServiceTodo {
+    /** @internal */
+    get scope(): ScopeModuleDemoTodo;
+  }
+}
+/** scope module: end */

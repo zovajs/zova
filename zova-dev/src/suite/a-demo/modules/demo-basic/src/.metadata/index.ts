@@ -10,17 +10,6 @@ declare module 'zova' {
     'demo-basic.theme.orange': ThemeOrange;
   }
 }
-declare module 'zova-module-demo-basic' {
-  export interface StoreCounter {
-    /** @internal */
-    get scope(): ScopeModuleDemoBasic;
-  }
-
-  export interface ThemeOrange {
-    /** @internal */
-    get scope(): ScopeModuleDemoBasic;
-  }
-}
 /** beans: end */
 /** components: begin */
 export { ControllerCard } from '../component/card/controller.js';
@@ -127,3 +116,146 @@ declare module 'zova' {
   }
 }
 /** scope: end */
+/** scope module: begin */
+declare module 'zova-module-demo-basic' {
+  export interface StoreCounter {
+    /** @internal */
+    get scope(): ScopeModuleDemoBasic;
+  }
+
+  export interface ThemeOrange {
+    /** @internal */
+    get scope(): ScopeModuleDemoBasic;
+  }
+
+  export interface ControllerCard {
+    /** @internal */
+    get scope(): ScopeModuleDemoBasic;
+  }
+
+  export interface RenderCard {
+    /** @internal */
+    get scope(): ScopeModuleDemoBasic;
+  }
+
+  export interface ControllerPageComponent {
+    /** @internal */
+    get scope(): ScopeModuleDemoBasic;
+  }
+
+  export interface RenderComponent {
+    /** @internal */
+    get scope(): ScopeModuleDemoBasic;
+  }
+
+  export interface ControllerPageLegacy {
+    /** @internal */
+    get scope(): ScopeModuleDemoBasic;
+  }
+
+  export interface RenderLegacy {
+    /** @internal */
+    get scope(): ScopeModuleDemoBasic;
+  }
+
+  export interface StyleLegacy {
+    /** @internal */
+    get scope(): ScopeModuleDemoBasic;
+  }
+
+  export interface ControllerPageLocale {
+    /** @internal */
+    get scope(): ScopeModuleDemoBasic;
+  }
+
+  export interface RenderLocale {
+    /** @internal */
+    get scope(): ScopeModuleDemoBasic;
+  }
+
+  export interface ControllerPagePinia {
+    /** @internal */
+    get scope(): ScopeModuleDemoBasic;
+  }
+
+  export interface RenderPinia {
+    /** @internal */
+    get scope(): ScopeModuleDemoBasic;
+  }
+
+  export interface StylePinia {
+    /** @internal */
+    get scope(): ScopeModuleDemoBasic;
+  }
+
+  export interface ControllerPageRouteParams {
+    /** @internal */
+    get scope(): ScopeModuleDemoBasic;
+  }
+
+  export interface RenderRouteParams {
+    /** @internal */
+    get scope(): ScopeModuleDemoBasic;
+  }
+
+  export interface StyleRouteParams {
+    /** @internal */
+    get scope(): ScopeModuleDemoBasic;
+  }
+
+  export interface ControllerPageRouteQuery {
+    /** @internal */
+    get scope(): ScopeModuleDemoBasic;
+  }
+
+  export interface RenderRouteQuery {
+    /** @internal */
+    get scope(): ScopeModuleDemoBasic;
+  }
+
+  export interface StyleRouteQuery {
+    /** @internal */
+    get scope(): ScopeModuleDemoBasic;
+  }
+
+  export interface ControllerPageRouteQuery2 {
+    /** @internal */
+    get scope(): ScopeModuleDemoBasic;
+  }
+
+  export interface RenderRouteQuery2 {
+    /** @internal */
+    get scope(): ScopeModuleDemoBasic;
+  }
+
+  export interface StyleRouteQuery2 {
+    /** @internal */
+    get scope(): ScopeModuleDemoBasic;
+  }
+
+  export interface ControllerPageState {
+    /** @internal */
+    get scope(): ScopeModuleDemoBasic;
+  }
+
+  export interface RenderState {
+    /** @internal */
+    get scope(): ScopeModuleDemoBasic;
+  }
+
+  export interface ControllerPageStyle {
+    /** @internal */
+    get scope(): ScopeModuleDemoBasic;
+  }
+
+  export interface RenderStyle {
+    /** @internal */
+    get scope(): ScopeModuleDemoBasic;
+  }
+
+  export interface StyleStyle {
+    /** @internal */
+    get scope(): ScopeModuleDemoBasic;
+  }
+}
+/** scope module: end */

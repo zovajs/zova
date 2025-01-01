@@ -10,17 +10,6 @@ declare module 'zova' {
     'a-router.bean.routerBase': BeanRouterBase;
   }
 }
-declare module 'zova-module-a-router' {
-  export interface BeanRouter {
-    /** @internal */
-    get scope(): ScopeModuleARouter;
-  }
-
-  export interface BeanRouterBase {
-    /** @internal */
-    get scope(): ScopeModuleARouter;
-  }
-}
 /** beans: end */
 /** config: begin */
 export * from '../config/config.js';
@@ -48,3 +37,16 @@ declare module 'zova' {
   }
 }
 /** scope: end */
+/** scope module: begin */
+declare module 'zova-module-a-router' {
+  export interface BeanRouter {
+    /** @internal */
+    get scope(): ScopeModuleARouter;
+  }
+
+  export interface LocalRouter {
+    /** @internal */
+    get scope(): ScopeModuleARouter;
+  }
+}
+/** scope module: end */

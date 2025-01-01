@@ -7,12 +7,6 @@ declare module 'zova' {
     'home-layout.model.menu': ModelMenu;
   }
 }
-declare module 'zova-module-home-layout' {
-  export interface ModelMenu {
-    /** @internal */
-    get scope(): ScopeModuleHomeLayout;
-  }
-}
 /** beans: end */
 /** components: begin */
 export { ControllerEssentialLink } from '../component/essentialLink/controller.js';
@@ -87,3 +81,91 @@ declare module 'zova' {
   }
 }
 /** scope: end */
+/** scope module: begin */
+declare module 'zova-module-home-layout' {
+  export interface ModelMenu {
+    /** @internal */
+    get scope(): ScopeModuleHomeLayout;
+  }
+
+  export interface ControllerEssentialLink {
+    /** @internal */
+    get scope(): ScopeModuleHomeLayout;
+  }
+
+  export interface RenderEssentialLink {
+    /** @internal */
+    get scope(): ScopeModuleHomeLayout;
+  }
+
+  export interface ControllerLayoutDefault {
+    /** @internal */
+    get scope(): ScopeModuleHomeLayout;
+  }
+
+  export interface RenderLayoutDefault {
+    /** @internal */
+    get scope(): ScopeModuleHomeLayout;
+  }
+
+  export interface RenderContent {
+    /** @internal */
+    get scope(): ScopeModuleHomeLayout;
+  }
+
+  export interface RenderHeader {
+    /** @internal */
+    get scope(): ScopeModuleHomeLayout;
+  }
+
+  export interface RenderLocale {
+    /** @internal */
+    get scope(): ScopeModuleHomeLayout;
+  }
+
+  export interface RenderMenu {
+    /** @internal */
+    get scope(): ScopeModuleHomeLayout;
+  }
+
+  export interface RenderSidebar {
+    /** @internal */
+    get scope(): ScopeModuleHomeLayout;
+  }
+
+  export interface RenderTabs {
+    /** @internal */
+    get scope(): ScopeModuleHomeLayout;
+  }
+
+  export interface RenderTheme {
+    /** @internal */
+    get scope(): ScopeModuleHomeLayout;
+  }
+
+  export interface RenderUser {
+    /** @internal */
+    get scope(): ScopeModuleHomeLayout;
+  }
+
+  export interface StyleLayoutDefault {
+    /** @internal */
+    get scope(): ScopeModuleHomeLayout;
+  }
+
+  export interface ControllerLayoutEmpty {
+    /** @internal */
+    get scope(): ScopeModuleHomeLayout;
+  }
+
+  export interface RenderLayoutEmpty {
+    /** @internal */
+    get scope(): ScopeModuleHomeLayout;
+  }
+
+  export interface ServiceMenu {
+    /** @internal */
+    get scope(): ScopeModuleHomeLayout;
+  }
+}
+/** scope module: end */

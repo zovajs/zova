@@ -10,17 +10,6 @@ declare module 'zova' {
     'home-base.theme.default': ThemeDefault;
   }
 }
-declare module 'zova-module-home-base' {
-  export interface StyleDefault {
-    /** @internal */
-    get scope(): ScopeModuleHomeBase;
-  }
-
-  export interface ThemeDefault {
-    /** @internal */
-    get scope(): ScopeModuleHomeBase;
-  }
-}
 /** beans: end */
 /** components: begin */
 export { ControllerPage } from '../component/page/controller.js';
@@ -84,3 +73,56 @@ declare module 'zova' {
   }
 }
 /** scope: end */
+/** scope module: begin */
+declare module 'zova-module-home-base' {
+  export interface LocalRouter {
+    /** @internal */
+    get scope(): ScopeModuleHomeBase;
+  }
+
+  export interface LocalSSR {
+    /** @internal */
+    get scope(): ScopeModuleHomeBase;
+  }
+
+  export interface StyleDefault {
+    /** @internal */
+    get scope(): ScopeModuleHomeBase;
+  }
+
+  export interface ThemeDefault {
+    /** @internal */
+    get scope(): ScopeModuleHomeBase;
+  }
+
+  export interface ControllerPage {
+    /** @internal */
+    get scope(): ScopeModuleHomeBase;
+  }
+
+  export interface RenderPage {
+    /** @internal */
+    get scope(): ScopeModuleHomeBase;
+  }
+
+  export interface StylePage {
+    /** @internal */
+    get scope(): ScopeModuleHomeBase;
+  }
+
+  export interface ControllerPageErrorNotFound {
+    /** @internal */
+    get scope(): ScopeModuleHomeBase;
+  }
+
+  export interface RenderErrorNotFound {
+    /** @internal */
+    get scope(): ScopeModuleHomeBase;
+  }
+
+  export interface StyleErrorNotFound {
+    /** @internal */
+    get scope(): ScopeModuleHomeBase;
+  }
+}
+/** scope module: end */

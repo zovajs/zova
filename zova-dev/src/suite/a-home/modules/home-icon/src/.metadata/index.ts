@@ -280,3 +280,6 @@ declare module 'zova' {
   }
 }
 /** scope: end */
+/** scope module: begin */
+declare module 'zova-module-home-icon' {}
+/** scope module: end */

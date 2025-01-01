@@ -7,12 +7,6 @@ declare module 'zova' {
     'a-api.bean.serviceBase': BeanServiceBase;
   }
 }
-declare module 'zova-module-a-api' {
-  export interface BeanServiceBase {
-    /** @internal */
-    get scope(): ScopeModuleAApi;
-  }
-}
 /** beans: end */
 /** config: begin */
 export * from '../config/config.js';
@@ -40,3 +34,6 @@ declare module 'zova' {
   }
 }
 /** scope: end */
+/** scope module: begin */
+declare module 'zova-module-a-api' {}
+/** scope module: end */

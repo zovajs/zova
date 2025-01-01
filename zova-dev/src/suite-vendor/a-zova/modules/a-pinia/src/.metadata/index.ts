@@ -7,12 +7,6 @@ declare module 'zova' {
     'a-pinia.bean.piniaStoreBase': BeanPiniaStoreBase;
   }
 }
-declare module 'zova-module-a-pinia' {
-  export interface BeanPiniaStoreBase {
-    /** @internal */
-    get scope(): ScopeModuleAPinia;
-  }
-}
 /** beans: end */
 /** monkey: begin */
 export * from '../monkey.js';
@@ -32,3 +26,11 @@ declare module 'zova' {
   }
 }
 /** scope: end */
+/** scope module: begin */
+declare module 'zova-module-a-pinia' {
+  export interface LocalPinia {
+    /** @internal */
+    get scope(): ScopeModuleAPinia;
+  }
+}
+/** scope module: end */

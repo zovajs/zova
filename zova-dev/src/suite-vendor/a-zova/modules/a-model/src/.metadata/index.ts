@@ -7,12 +7,6 @@ declare module 'zova' {
     'a-model.bean.modelBase': BeanModelBase;
   }
 }
-declare module 'zova-module-a-model' {
-  export interface BeanModelBase {
-    /** @internal */
-    get scope(): ScopeModuleAModel;
-  }
-}
 /** beans: end */
 /** config: begin */
 export * from '../config/config.js';
@@ -39,4 +33,12 @@ declare module 'zova' {
     'a-model': ReturnType<typeof config>;
   }
 }
+export * from '../bean/local.storage.js';
 /** scope: end */
+/** scope module: begin */
+ declare module 'zova-module-a-model' {
+  export interface LocalStorage {
+    get scope(): ScopeModuleAModel;
+  }
+ }
+/** scope module: end */
