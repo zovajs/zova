@@ -843,7 +843,13 @@ export class BeanContainer {
     return host.__aopChains__;
   }
 
-  private _getAopChainsProp(beanFullName, methodName, methodNameMagic) {
+  private _getAopChainsProp(
+    beanFullName,
+    methodName,
+    methodNameMagic,
+    methodType: 'get' | 'set' | 'method',
+    prop: string,
+  ) {
     const chainsKey = `__aopChains_${methodName}__`;
     const beanOptions = appResource.getBean(beanFullName);
     const host = beanOptions || beanFullName;
@@ -857,9 +863,37 @@ export class BeanContainer {
       } else {
         const aop: any = this._getBeanSyncOnly(aopKey as string);
         if (aop[methodName]) {
-          chains.push([aopKey, methodName]);
+          let fn;
+          if (methodType === 'get') {
+            fn = function (_, next) {
+              return aop[methodName](next);
+            };
+          } else if (methodType === 'set') {
+            fn = function (value, next) {
+              return aop[methodName](value, next);
+            };
+          } else if (methodType === 'method') {
+            fn = function (args, next) {
+              return aop[methodName](args, next);
+            };
+          }
+          chains.push([aopKey, fn]);
         } else if (methodNameMagic && aop[methodNameMagic]) {
-          chains.push([aopKey, methodNameMagic]);
+          let fn;
+          if (methodType === 'get') {
+            fn = function (_, next) {
+              return aop[methodNameMagic](prop, next);
+            };
+          } else if (methodType === 'set') {
+            fn = function (value, next) {
+              return aop[methodNameMagic](prop, value, next);
+            };
+          } else if (methodType === 'method') {
+            fn = function (args, next) {
+              return aop[methodNameMagic](args, next);
+            };
+          }
+          chains.push([aopKey, fn]);
         }
       }
     }
