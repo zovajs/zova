@@ -44,10 +44,14 @@ declare module 'zova' {
   }
 
   export interface IEventRecord {
-    'a-router:routerGuards': BeanRouter;
+    'a-router:routerGuards': { data: BeanRouter; result: void };
   }
 
-  export interface IEventResultRecord {
-    'a-router:routerGuards': void;
-  }
+  // export interface IEventRecord {
+  //   'a-router:routerGuards': BeanRouter;
+  // }
+
+  // export interface IEventResultRecord {
+  //   'a-router:routerGuards': void;
+  // }
 }
