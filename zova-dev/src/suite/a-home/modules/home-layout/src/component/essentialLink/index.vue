@@ -4,9 +4,9 @@
 
 <script setup lang="ts">
 import { useController } from 'zova';
-import { ControllerEssentialLink, Props, Emits } from './controller.js';
+import { ControllerEssentialLink } from './controller.js';
 import { RenderEssentialLink } from './render.jsx';
-const props = withDefaults(defineProps<Props>(), ControllerEssentialLink.$propsDefault);
-const emit = defineEmits<Emits>();
+const props = withDefaults(defineProps<ControllerEssentialLink['$props']>(), ControllerEssentialLink.$propsDefault);
+const emit = defineEmits<ControllerEssentialLink['$emit']>();
 useController(props, emit, ControllerEssentialLink, RenderEssentialLink);
 </script>

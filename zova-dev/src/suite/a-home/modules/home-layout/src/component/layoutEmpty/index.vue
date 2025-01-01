@@ -4,9 +4,9 @@
 
 <script setup lang="ts">
 import { useController } from 'zova';
-import { ControllerLayoutEmpty, Props, Emits } from './controller.js';
+import { ControllerLayoutEmpty } from './controller.js';
 import { RenderLayoutEmpty } from './render.jsx';
-const props = withDefaults(defineProps<Props>(), ControllerLayoutEmpty.$propsDefault);
-const emit = defineEmits<Emits>();
+const props = withDefaults(defineProps<ControllerLayoutEmpty['$props']>(), ControllerLayoutEmpty.$propsDefault);
+const emit = defineEmits<ControllerLayoutEmpty['$emit']>();
 useController(props, emit, ControllerLayoutEmpty, RenderLayoutEmpty);
 </script>
