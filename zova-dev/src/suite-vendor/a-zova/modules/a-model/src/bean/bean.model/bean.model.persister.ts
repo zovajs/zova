@@ -6,7 +6,7 @@ import { SymbolBeanFullName } from 'zova';
 import { BeanModelLast } from './bean.model.last.js';
 import { CookieWrapper } from '../../common/cookieWrapper.js';
 
-export class BeanModelPersister<TScopeModule = unknown> extends BeanModelLast<TScopeModule> {
+export class BeanModelPersister extends BeanModelLast {
   $persisterLoad<T>(queryKey: QueryKey): T | undefined {
     const query = this.self.$queryFind({ queryKey });
     if (!query) return undefined;

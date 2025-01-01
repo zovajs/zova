@@ -1,5 +1,4 @@
 import { BeanControllerPageBase, Local, zz } from 'zova';
-import { ScopeModule } from '../../.metadata/this.js';
 
 export const ParamsSchema = zz.object({});
 export type ParamsInput = zz.input<typeof ParamsSchema>;
@@ -27,7 +26,7 @@ export type QueryInput = zz.input<typeof QuerySchema>;
 export type QueryOutput = zz.output<typeof QuerySchema>;
 
 @Local()
-export class ControllerPageRouteQuery2 extends BeanControllerPageBase<ScopeModule, QueryOutput, ParamsOutput> {
+export class ControllerPageRouteQuery2 extends BeanControllerPageBase<QueryOutput, ParamsOutput> {
   togglePrivate() {
     const _private = this.$query.private ? false : true;
     const query = { ...this.$query, private: _private };

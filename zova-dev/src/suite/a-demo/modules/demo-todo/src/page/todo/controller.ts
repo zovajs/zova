@@ -1,5 +1,4 @@
 import { BeanControllerPageBase, Local, Use, uuid, zz } from 'zova';
-import { ScopeModule } from '../../.metadata/this.js';
 import { ModelTodo } from '../../bean/model.todo.js';
 import { ServiceTodoEntity, ServiceTodoGetParams } from '../../service/todo.js';
 
@@ -12,7 +11,7 @@ export type QueryInput = zz.input<typeof QuerySchema>;
 export type QueryOutput = zz.output<typeof QuerySchema>;
 
 @Local()
-export class ControllerPageTodo extends BeanControllerPageBase<ScopeModule, QueryOutput, ParamsOutput> {
+export class ControllerPageTodo extends BeanControllerPageBase<QueryOutput, ParamsOutput> {
   @Use()
   $$modelTodo: ModelTodo;
   newTitle: string;

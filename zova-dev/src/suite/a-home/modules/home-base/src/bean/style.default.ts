@@ -1,8 +1,7 @@
 import { BeanBase, Style, useComputed } from 'zova';
-import { ScopeModule } from '../.metadata/this.js';
 
 @Style()
-export class StyleDefault extends BeanBase<ScopeModule> {
+export class StyleDefault extends BeanBase {
   textCenter: string;
   buttonPrimary: string;
 

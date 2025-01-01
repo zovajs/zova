@@ -1,5 +1,4 @@
 import { BeanControllerBase, Local, PropsBase, RequiredSome } from 'zova';
-import { ScopeModule } from '../../.metadata/this.js';
 import { JSX } from 'vue/jsx-runtime';
 
 export interface Props extends PropsBase<ControllerPage, Slots> {}

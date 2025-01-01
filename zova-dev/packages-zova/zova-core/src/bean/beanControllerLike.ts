@@ -4,7 +4,7 @@ import { BeanControllerIdentifier } from './type.js';
 
 const SymbolController = Symbol('SymbolController');
 
-export class BeanControllerLike<TScopeModule = unknown> extends BeanBase<TScopeModule> {
+export class BeanControllerLike extends BeanBase {
   protected get [SymbolController](): unknown | undefined {
     return this.bean._getBeanSyncOnly(BeanControllerIdentifier);
   }

@@ -1,6 +1,5 @@
 import { Model, useComputed } from 'zova';
 import { BeanModelBase, UseQueryOptions } from 'zova-module-a-model';
-import { ScopeModule } from '../.metadata/this.js';
 import { watch } from 'vue';
 import { mutate } from 'mutate-on-copy';
 
@@ -29,7 +28,7 @@ export interface ModelTabsOptions {
 }
 
 @Model()
-export class ModelTabs extends BeanModelBase<ScopeModule> {
+export class ModelTabs extends BeanModelBase {
   tabsOptions: ModelTabsOptions;
   tabs: RouteTab[];
   tabCurrentKey?: string;

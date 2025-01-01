@@ -1,11 +1,7 @@
 import { BeanBase } from './beanBase.js';
 import { IControllerData } from './type.js';
 
-export class BeanControllerPageBase<
-  TScopeModule = unknown,
-  Query = unknown,
-  Params = unknown,
-> extends BeanBase<TScopeModule> {
+export class BeanControllerPageBase<Query = unknown, Params = unknown> extends BeanBase {
   public $params: Params;
   public $query: Query;
 

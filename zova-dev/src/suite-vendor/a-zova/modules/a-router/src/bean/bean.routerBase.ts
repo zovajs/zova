@@ -2,7 +2,7 @@ import { BeanBase, TypeEventOff, Virtual } from 'zova';
 import { BeanRouter } from './bean.router.js';
 
 @Virtual()
-export class BeanRouterBase<TScopeModule = unknown> extends BeanBase<TScopeModule> {
+export class BeanRouterBase extends BeanBase {
   private _eventRouterGuards: TypeEventOff;
 
   protected async __init__() {

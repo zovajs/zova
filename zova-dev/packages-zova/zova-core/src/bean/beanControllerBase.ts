@@ -16,12 +16,7 @@ export interface PropsBase<Controller = unknown, Slots = unknown> {
   slots?: Slots;
 }
 
-export class BeanControllerBase<
-  TScopeModule = unknown,
-  Props = unknown,
-  Emits = unknown,
-  Slots = unknown,
-> extends BeanBase<TScopeModule> {
+export class BeanControllerBase<Props = unknown, Emits = unknown, Slots = unknown> extends BeanBase {
   public $props: Props;
   public $emit: Emits;
   public $slots: Slots;

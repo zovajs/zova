@@ -1,12 +1,11 @@
 import { BeanRenderBase, Local } from 'zova';
 import type { StyleItem } from './style.js';
-import { ScopeModule } from '../../.metadata/this.js';
 import { ZPage } from 'zova-module-home-base';
 
 export interface RenderItem extends StyleItem {}
 
 @Local()
-export class RenderItem extends BeanRenderBase<ScopeModule> {
+export class RenderItem extends BeanRenderBase {
   render() {
     const todoCurrent = this.$$modelTodo.get(this.currentTodo);
     return (

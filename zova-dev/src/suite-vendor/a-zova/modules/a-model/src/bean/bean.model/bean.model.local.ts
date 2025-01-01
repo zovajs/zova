@@ -1,7 +1,7 @@
 import { Query } from '@tanstack/vue-query';
 import { BeanModelPersister } from './bean.model.persister.js';
 
-export class BeanModelLocal<TScopeModule = unknown> extends BeanModelPersister<TScopeModule> {
+export class BeanModelLocal extends BeanModelPersister {
   $serializeLocal(obj?: Query) {
     return JSON.stringify(obj?.state?.data);
   }

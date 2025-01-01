@@ -1,9 +1,8 @@
 import { BeanBase, Local } from 'zova';
-import { ScopeModule } from '../.metadata/this.js';
 import { createPinia, Pinia } from 'pinia';
 
 @Local()
-export class LocalPinia extends BeanBase<ScopeModule> {
+export class LocalPinia extends BeanBase {
   pinia: Pinia;
 
   protected async __init__() {

@@ -1,11 +1,10 @@
 import { BeanRenderBase, Local, iconh } from 'zova';
 import { StyleLayoutDefault } from './style.js';
-import { ScopeModule } from '../../.metadata/this.js';
 
 export interface RenderLocale extends StyleLayoutDefault {}
 
 @Local()
-export class RenderLocale extends BeanRenderBase<ScopeModule> {
+export class RenderLocale extends BeanRenderBase {
   render() {
     const locales = [
       {

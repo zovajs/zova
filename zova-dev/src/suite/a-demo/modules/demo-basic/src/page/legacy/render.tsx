@@ -1,13 +1,12 @@
 import { BeanRenderBase, Local } from 'zova';
 import type { StyleLegacy } from './style.js';
-import { ScopeModule } from '../../.metadata/this.js';
 import Counter from '@/components/counter.vue';
 import { ZPage } from 'zova-module-home-base';
 
 export interface RenderLegacy extends StyleLegacy {}
 
 @Local()
-export class RenderLegacy extends BeanRenderBase<ScopeModule> {
+export class RenderLegacy extends BeanRenderBase {
   render() {
     return (
       <ZPage>

@@ -1,7 +1,6 @@
 import { BeanControllerPageBase, Local } from 'zova';
-import { ScopeModule } from '../../.metadata/this.js';
 
 @Local()
-export class ControllerPageErrorNotFound extends BeanControllerPageBase<ScopeModule> {
+export class ControllerPageErrorNotFound extends BeanControllerPageBase {
   protected async __init__() {}
 }

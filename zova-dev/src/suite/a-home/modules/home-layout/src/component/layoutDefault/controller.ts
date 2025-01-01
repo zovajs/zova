@@ -1,7 +1,6 @@
 import { BeanControllerBase, Local, Use, UseScope, PropsBase, RequiredSome } from 'zova';
 import { ModelMenu } from '../../bean/model.menu.js';
 import { ModelAuth, ModelUser } from 'zova-module-home-user';
-import { ScopeModule } from '../../.metadata/this.js';
 import { ModelTabs, ModelTabsOptions, ScopeModuleATabs } from 'zova-module-a-tabs';
 
 export interface Props extends PropsBase<ControllerLayoutDefault, Slots> {}

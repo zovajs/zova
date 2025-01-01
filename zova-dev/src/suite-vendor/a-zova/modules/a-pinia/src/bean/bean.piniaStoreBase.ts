@@ -3,7 +3,7 @@ import { BeanBase, Virtual } from 'zova';
 const SymbolPiniaStore = Symbol('SymbolPiniaStore');
 
 @Virtual()
-export class BeanPiniaStoreBase<TScopeModule = unknown> extends BeanBase<TScopeModule> {
+export class BeanPiniaStoreBase extends BeanBase {
   [SymbolPiniaStore];
 
   protected __get__(prop) {

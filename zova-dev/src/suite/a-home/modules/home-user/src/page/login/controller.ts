@@ -1,5 +1,4 @@
 import { BeanControllerPageBase, Local, Use, zz } from 'zova';
-import { ScopeModule } from '../../.metadata/this.js';
 import { ModelAuth } from '../../bean/model.auth.js';
 import { ServiceAuthLoginParams } from '../../service/auth.js';
 
@@ -12,7 +11,7 @@ export type QueryInput = zz.input<typeof QuerySchema>;
 export type QueryOutput = zz.output<typeof QuerySchema>;
 
 @Local()
-export class ControllerPageLogin extends BeanControllerPageBase<ScopeModule, QueryOutput, ParamsOutput> {
+export class ControllerPageLogin extends BeanControllerPageBase<QueryOutput, ParamsOutput> {
   @Use()
   $$modelAuth: ModelAuth;
 

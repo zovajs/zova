@@ -1,11 +1,10 @@
 import { BeanRenderBase, ClientOnly, Local, iconh } from 'zova';
 import { StyleLayoutDefault } from './style.js';
-import { ScopeModule } from '../../.metadata/this.js';
 
 export interface RenderTheme extends StyleLayoutDefault {}
 
 @Local()
-export class RenderTheme extends BeanRenderBase<ScopeModule> {
+export class RenderTheme extends BeanRenderBase {
   renderThemeDark() {
     const themes = [
       {

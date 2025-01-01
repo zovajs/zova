@@ -1,12 +1,11 @@
 import { BeanRenderBase, Local } from 'zova';
 import type { ControllerPageLocale } from './controller.js';
-import { ScopeModule } from '../../.metadata/this.js';
 import { ZPage } from 'zova-module-home-base';
 
 export interface RenderLocale extends ControllerPageLocale {}
 
 @Local()
-export class RenderLocale extends BeanRenderBase<ScopeModule> {
+export class RenderLocale extends BeanRenderBase {
   render() {
     return (
       <ZPage>

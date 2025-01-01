@@ -8,7 +8,7 @@ import { ZRouterViewTabs } from 'zova-module-a-tabs';
 export interface RenderTabs extends StyleLayoutDefault {}
 
 @Local()
-export class RenderTabs extends BeanRenderBase<ScopeModule> {
+export class RenderTabs extends BeanRenderBase {
   render() {
     const domTabs: JSX.Element[] = [];
     for (const tab of this.$$modelTabs.tabs) {

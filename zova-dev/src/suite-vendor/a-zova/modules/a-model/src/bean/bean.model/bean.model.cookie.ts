@@ -2,7 +2,7 @@ import { Query } from '@tanstack/vue-query';
 import { BeanModelLocal } from './bean.model.local.js';
 import { QueryMetaPersisterCookieType } from '../../types.js';
 
-export class BeanModelCookie<TScopeModule = unknown> extends BeanModelLocal<TScopeModule> {
+export class BeanModelCookie extends BeanModelLocal {
   $serializeCookie(obj?: Query) {
     return String(obj?.state?.data ?? '');
   }

@@ -1,6 +1,5 @@
 import { BeanRenderBase, Local, Use } from 'zova';
 import type { StyleLayoutDefault } from './style.js';
-import { ScopeModule } from '../../.metadata/this.js';
 import { RenderTabs } from './renderTabs.jsx';
 import { RenderTheme } from './renderTheme.jsx';
 import { RenderLocale } from './renderLocale.jsx';
@@ -13,7 +12,7 @@ import { RenderMenu } from './renderMenu.jsx';
 export interface RenderLayoutDefault extends StyleLayoutDefault {}
 
 @Local()
-export class RenderLayoutDefault extends BeanRenderBase<ScopeModule> {
+export class RenderLayoutDefault extends BeanRenderBase {
   @Use()
   $$renderHeader: RenderHeader;
   @Use()

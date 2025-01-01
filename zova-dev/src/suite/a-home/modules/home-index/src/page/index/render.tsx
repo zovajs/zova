@@ -1,11 +1,10 @@
 import { BeanRenderBase, Local } from 'zova';
 import type { StyleIndex } from './style.js';
-import { ScopeModule } from '../../.metadata/this.js';
 
 export interface RenderIndex extends StyleIndex {}
 
 @Local()
-export class RenderIndex extends BeanRenderBase<ScopeModule> {
+export class RenderIndex extends BeanRenderBase {
   render() {
     return (
       <div style="text-align: center;">

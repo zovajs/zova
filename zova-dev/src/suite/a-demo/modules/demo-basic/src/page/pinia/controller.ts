@@ -1,5 +1,4 @@
 import { BeanControllerPageBase, Local, Use, zz } from 'zova';
-import { ScopeModule } from '../../.metadata/this.js';
 import { StoreCounter } from '../../bean/store.counter.js';
 
 export const ParamsSchema = zz.object({});
@@ -11,7 +10,7 @@ export type QueryInput = zz.input<typeof QuerySchema>;
 export type QueryOutput = zz.output<typeof QuerySchema>;
 
 @Local()
-export class ControllerPagePinia extends BeanControllerPageBase<ScopeModule, QueryOutput, ParamsOutput> {
+export class ControllerPagePinia extends BeanControllerPageBase<QueryOutput, ParamsOutput> {
   @Use()
   $$counter: StoreCounter;
 

@@ -1,7 +1,6 @@
 import { BeanControllerPageBase, Local } from 'zova';
-import { ScopeModule } from '../../.metadata/this.js';
 
 @Local()
-export class ControllerPageLegacy extends BeanControllerPageBase<ScopeModule> {
+export class ControllerPageLegacy extends BeanControllerPageBase {
   protected async __init__() {}
 }

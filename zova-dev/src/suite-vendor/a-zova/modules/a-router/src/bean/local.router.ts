@@ -1,11 +1,10 @@
 import { Local, Use } from 'zova';
 import * as ModuleInfo from '@cabloy/module-info';
-import { ScopeModule } from '../.metadata/this.js';
 import { BeanRouterBase } from './bean.routerBase.js';
 import { BeanRouter } from './bean.router.js';
 
 @Local()
-export class LocalRouter extends BeanRouterBase<ScopeModule> {
+export class LocalRouter extends BeanRouterBase {
   @Use()
   $$router: BeanRouter;
 

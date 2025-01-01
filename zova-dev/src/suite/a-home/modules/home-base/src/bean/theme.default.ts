@@ -1,5 +1,4 @@
 import { BeanBase, Theme } from 'zova';
-import { ScopeModule } from '../.metadata/this.js';
 import { IThemeApplyParams, IThemeApplyResult, IThemeBase } from 'zova-module-a-style';
 import { ThemeToken } from '../themeToken.js';
 

@@ -1,6 +1,5 @@
 import { BeanRenderBase, Local } from 'zova';
 import type { StyleTodo } from './style.js';
-import { ScopeModule } from '../../.metadata/this.js';
 import { withModifiers } from 'vue';
 import { RouterLink } from 'vue-router';
 import { ZPage } from 'zova-module-home-base';
@@ -8,7 +7,7 @@ import { ZPage } from 'zova-module-home-base';
 export interface RenderTodo extends StyleTodo {}
 
 @Local()
-export class RenderTodo extends BeanRenderBase<ScopeModule> {
+export class RenderTodo extends BeanRenderBase {
   render() {
     const todoCurrent = this.$$modelTodo.get(this.currentTodo);
     const todos = this.$$modelTodo.select();

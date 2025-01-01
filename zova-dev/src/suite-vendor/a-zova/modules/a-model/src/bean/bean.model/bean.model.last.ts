@@ -2,7 +2,7 @@ import { BeanBase, cast } from 'zova';
 import { BeanModelBase } from '../bean.modelBase.js';
 import { ScopeModule, __ThisModule__ } from '../../.metadata/this.js';
 
-export class BeanModelLast<TScopeModule = unknown> extends BeanBase<TScopeModule> {
+export class BeanModelLast extends BeanBase {
   get self() {
     return cast<BeanModelBase>(this);
   }

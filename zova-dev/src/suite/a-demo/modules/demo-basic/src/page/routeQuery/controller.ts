@@ -1,5 +1,4 @@
 import { BeanControllerPageBase, Local, zz } from 'zova';
-import { ScopeModule } from '../../.metadata/this.js';
 
 export const ParamsSchema = zz.object({});
 export type ParamsInput = zz.input<typeof ParamsSchema>;
@@ -13,6 +12,6 @@ export type QueryInput = zz.input<typeof QuerySchema>;
 export type QueryOutput = zz.output<typeof QuerySchema>;
 
 @Local()
-export class ControllerPageRouteQuery extends BeanControllerPageBase<ScopeModule, QueryOutput, ParamsOutput> {
+export class ControllerPageRouteQuery extends BeanControllerPageBase<QueryOutput, ParamsOutput> {
   protected async __init__() {}
 }

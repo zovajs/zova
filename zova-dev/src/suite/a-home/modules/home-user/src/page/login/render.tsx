@@ -1,12 +1,11 @@
 import { BeanRenderBase, Local } from 'zova';
 import type { StyleLogin } from './style.js';
-import { ScopeModule } from '../../.metadata/this.js';
 import { withModifiers } from 'vue';
 
 export interface RenderLogin extends StyleLogin {}
 
 @Local()
-export class RenderLogin extends BeanRenderBase<ScopeModule> {
+export class RenderLogin extends BeanRenderBase {
   _renderLandingInfo() {
     return (
       <div class="min-h-full rounded-l-xl bg-base-200">

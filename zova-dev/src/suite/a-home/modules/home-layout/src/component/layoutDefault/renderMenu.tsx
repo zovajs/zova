@@ -8,7 +8,7 @@ import { ServiceMenuEntity } from '../../service/menu.js';
 export interface RenderMenu extends StyleLayoutDefault {}
 
 @Local()
-export class RenderMenu extends BeanRenderBase<ScopeModule> {
+export class RenderMenu extends BeanRenderBase {
   _renderMenuItem(item: ServiceMenuEntity) {
     const titleLocale = this.app.meta.locale.getText(__ThisModule__, undefined, item.title);
     if (item.separator) {

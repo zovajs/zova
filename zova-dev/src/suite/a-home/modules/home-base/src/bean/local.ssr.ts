@@ -1,8 +1,7 @@
 import { BeanBase, Local } from 'zova';
-import { ScopeModule } from '../.metadata/this.js';
 
 @Local()
-export class LocalSSR extends BeanBase<ScopeModule> {
+export class LocalSSR extends BeanBase {
   public async initialize() {
     // ssr hydrated
     if (process.env.CLIENT) {

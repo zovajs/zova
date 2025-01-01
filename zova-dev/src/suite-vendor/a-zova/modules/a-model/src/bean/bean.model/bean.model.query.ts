@@ -14,7 +14,7 @@ import { MaybeRefDeep, NoUnknown } from '../../common/types.js';
 import { cast } from 'zova';
 import { BeanModelCookie } from './bean.model.cookie.js';
 
-export class BeanModelQuery<TScopeModule = unknown> extends BeanModelCookie<TScopeModule> {
+export class BeanModelQuery extends BeanModelCookie {
   $setQueryData<
     TQueryFnData,
     TTaggedQueryKey extends QueryKey,

@@ -1,5 +1,4 @@
 import { Model } from 'zova';
-import { ScopeModule } from '../.metadata/this.js';
 import { BeanModelBase } from 'zova-module-a-model';
 import {
   ServiceTodoDeleteParams,
@@ -9,7 +8,7 @@ import {
 } from '../service/todo.js';
 
 @Model()
-export class ModelTodo extends BeanModelBase<ScopeModule> {
+export class ModelTodo extends BeanModelBase {
   select() {
     return this.$useQueryExisting({
       queryKey: ['select'],

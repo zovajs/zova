@@ -17,7 +17,7 @@ import { resolveStaleTime } from '../../types.js';
 
 const SymbolUseQueries = Symbol('SymbolUseQueries');
 
-export class BeanModelUseQuery<TScopeModule = unknown> extends BeanModelQuery<TScopeModule> {
+export class BeanModelUseQuery extends BeanModelQuery {
   private [SymbolUseQueries]: Record<string, unknown> = {};
 
   $useQuery<TQueryFnData = unknown, TError = DefaultError, TData = TQueryFnData, TQueryKey extends QueryKey = QueryKey>(

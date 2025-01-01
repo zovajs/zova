@@ -1,12 +1,11 @@
 import { BeanRenderBase, Local } from 'zova';
 import type { StyleErrorNotFound } from './style.js';
-import { ScopeModule } from '../../.metadata/this.js';
 import { RouterLink } from 'vue-router';
 
 export interface RenderErrorNotFound extends StyleErrorNotFound {}
 
 @Local()
-export class RenderErrorNotFound extends BeanRenderBase<ScopeModule> {
+export class RenderErrorNotFound extends BeanRenderBase {
   render() {
     return (
       <div class="text-center">

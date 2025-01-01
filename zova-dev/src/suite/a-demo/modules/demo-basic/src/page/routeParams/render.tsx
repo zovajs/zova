@@ -1,12 +1,11 @@
 import { BeanRenderBase, Local } from 'zova';
 import type { StyleRouteParams } from './style.js';
-import { ScopeModule } from '../../.metadata/this.js';
 import { ZPage } from 'zova-module-home-base';
 
 export interface RenderRouteParams extends StyleRouteParams {}
 
 @Local()
-export class RenderRouteParams extends BeanRenderBase<ScopeModule> {
+export class RenderRouteParams extends BeanRenderBase {
   render() {
     return (
       <ZPage>

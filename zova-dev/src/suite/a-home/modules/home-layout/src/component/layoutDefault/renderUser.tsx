@@ -1,11 +1,10 @@
 import { BeanRenderBase, Local, iconh } from 'zova';
 import { StyleLayoutDefault } from './style.js';
-import { ScopeModule } from '../../.metadata/this.js';
 
 export interface RenderUser extends StyleLayoutDefault {}
 
 @Local()
-export class RenderUser extends BeanRenderBase<ScopeModule> {
+export class RenderUser extends BeanRenderBase {
   render() {
     return (
       <li>

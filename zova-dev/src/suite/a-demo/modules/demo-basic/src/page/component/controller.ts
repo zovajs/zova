@@ -1,9 +1,8 @@
 import { BeanControllerPageBase, Local, onControllerMounted } from 'zova';
-import { ScopeModule } from '../../.metadata/this.js';
 import { ControllerCard } from '../../.metadata/index.js';
 
 @Local()
-export class ControllerPageComponent extends BeanControllerPageBase<ScopeModule> {
+export class ControllerPageComponent extends BeanControllerPageBase {
   resetTime: Date = new Date();
   cardRef?: ControllerCard;
   inputRef?: HTMLInputElement;

@@ -4,7 +4,7 @@ import { BeanStyleIdentifier } from './type.js';
 
 const SymbolStyle = Symbol('SymbolStyle');
 
-export class BeanRenderLike<TScopeModule = unknown> extends BeanControllerLike<TScopeModule> {
+export class BeanRenderLike extends BeanControllerLike {
   private get [SymbolStyle](): unknown | undefined {
     return this.bean._getBeanSyncOnly(BeanStyleIdentifier);
   }

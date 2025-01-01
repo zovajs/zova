@@ -1,12 +1,11 @@
 import { BeanRenderBase, Local, Use } from 'zova';
 import { StyleLayoutDefault } from './style.js';
-import { ScopeModule } from '../../.metadata/this.js';
 import type { RenderLayoutDefault } from './render.jsx';
 
 export interface RenderSidebar extends StyleLayoutDefault {}
 
 @Local()
-export class RenderSidebar extends BeanRenderBase<ScopeModule> {
+export class RenderSidebar extends BeanRenderBase {
   @Use()
   $$r: RenderLayoutDefault;
 

@@ -1,7 +1,7 @@
 import { BeanBase, Virtual } from 'zova';
 
 @Virtual()
-export class BeanServiceBase<TScopeModule = unknown> extends BeanBase<TScopeModule> {
+export class BeanServiceBase extends BeanBase {
   $pathTranslate(pathName: string, pathParams?: Record<string, any>): string {
     return this.app.util.apiServiceActionPathTranslate(pathName, pathParams);
   }
