@@ -9,12 +9,6 @@ type Emits = {};
 
 interface Slots {}
 
-export interface ControllerLayoutDefault {
-  $props: RequiredSome<Props, keyof typeof ControllerLayoutDefault.$propsDefault>;
-  $emit: Emits;
-  $slots: Slots;
-}
-
 @Local()
 export class ControllerLayoutDefault extends BeanControllerBase {
   static $propsDefault = {};
@@ -75,4 +69,14 @@ export class ControllerLayoutDefault extends BeanControllerBase {
   toggleLeftDrawer() {
     this.leftDrawerOpen = !this.leftDrawerOpen;
   }
+}
+
+export interface ControllerLayoutDefault {
+  $props: RequiredSome<Props, keyof typeof ControllerLayoutDefault.$propsDefault>;
+  $emit: Emits;
+  $slots: Slots;
+}
+
+export namespace ControllerLayoutDefault {
+  export type PropsInput = Props;
 }

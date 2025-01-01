@@ -6,7 +6,7 @@
 import { useController } from 'zova';
 import { ControllerCard } from './controller.js';
 import { RenderCard } from './render.jsx';
-const props = withDefaults(defineProps<ControllerCard['$props']>(), ControllerCard.$propsDefault);
+const props = withDefaults(defineProps<ControllerCard.PropsInput>(), ControllerCard.$propsDefault);
 const emit = defineEmits<ControllerCard['$emit']>();
 useController(props, emit, ControllerCard, RenderCard);
 </script>

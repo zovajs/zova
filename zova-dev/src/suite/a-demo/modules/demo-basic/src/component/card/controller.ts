@@ -17,15 +17,19 @@ interface Slots {
   footer?(): JSX.Element;
 }
 
+@Local()
+export class ControllerCard extends BeanControllerBase {
+  static $propsDefault = {
+    header: 'default header',
+  };
+}
+
 export interface ControllerCard {
   $props: RequiredSome<Props, keyof typeof ControllerCard.$propsDefault>;
   $emit: Emits;
   $slots: Slots;
 }
 
-@Local()
-export class ControllerCard extends BeanControllerBase {
-  static $propsDefault = {
-    header: 'default header',
-  };
+export namespace ControllerCard {
+  export type PropsInput = Props;
 }

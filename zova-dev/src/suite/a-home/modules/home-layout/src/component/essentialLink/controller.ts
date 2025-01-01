@@ -12,16 +12,20 @@ type Emits = {};
 
 interface Slots {}
 
-export interface ControllerEssentialLink {
-  $props: RequiredSome<Props, keyof typeof ControllerEssentialLink.$propsDefault>;
-  $emit: Emits;
-  $slots: Slots;
-}
-
 @Local()
 export class ControllerEssentialLink extends BeanControllerBase {
   static $propsDefault = {
     caption: '',
     icon: '',
   };
+}
+
+export interface ControllerEssentialLink {
+  $props: RequiredSome<Props, keyof typeof ControllerEssentialLink.$propsDefault>;
+  $emit: Emits;
+  $slots: Slots;
+}
+
+export namespace ControllerEssentialLink {
+  export type PropsInput = Props;
 }
