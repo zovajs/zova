@@ -12,7 +12,7 @@ import { MetadataKey } from '../core/metadata.js';
 import { IBeanRecord, IBeanScopeRecord, IControllerData, TypeBeanScopeRecordKeys } from './type.js';
 import { BeanBase } from './beanBase.js';
 import { BeanSimple } from './beanSimple.js';
-import { compose, composeAsync } from '@cabloy/compose';
+import { compose } from '@cabloy/compose';
 import { markRaw, reactive, shallowReactive, provide as composableProvide, inject as composableInject } from 'vue';
 import { Cast } from '../types/utils/cast.js';
 import { IInjectRecord } from '../types/interface/inject.js';
@@ -734,28 +734,16 @@ export class BeanContainer {
         if (!methodType) {
           const methodName = `__get_${prop}__`;
           const methodNameMagic = '__get__';
-          const _aopChainsProp = self._getAopChainsProp(beanFullName, methodName, methodNameMagic);
+          const _aopChainsProp = self._getAopChainsProp(beanFullName, methodName, methodNameMagic, 'get', prop);
           if (_aopChainsProp.length === 0) return target[prop];
-          // context
-          const context = {
-            target,
-            receiver,
-            prop,
-            value: undefined,
-          };
           // aop
-          self.__composeForProp(_aopChainsProp)(context, (context, next) => {
-            if (context.value === undefined) {
-              if (!descriptorInfo && target.__get__) {
-                context.value = target.__get__(prop);
-              } else {
-                context.value = target[prop];
-              }
+          return self.__composeForProp(_aopChainsProp)(undefined, () => {
+            if (!descriptorInfo && target.__get__) {
+              return target.__get__(prop);
+            } else {
+              return target[prop];
             }
-            next();
           });
-          // ok
-          return context.value;
         }
         // method
         return self._getInstanceMethodProxy(beanFullName, target, prop, methodType);
@@ -935,10 +923,6 @@ export class BeanContainer {
 
   private __composeForProp(chains) {
     return compose(chains, this.__composeForPropAdapter);
-  }
-
-  private __composeForPropAsync(chains) {
-    return composeAsync(chains, this.__composeForPropAdapter);
   }
 
   private __recordProp(recordProp, fullName: string | undefined, beanInstance, throwError: boolean) {
