@@ -4,19 +4,20 @@ import { RouteLocationNormalizedLoaded } from 'vue-router';
 import { nextTick } from 'vue';
 import { ModelTabs } from '../../bean/model.tabs.js';
 
-export interface Props extends PropsBase<ControllerRouterViewTabs, Slots> {}
+interface Props extends PropsBase<ControllerRouterViewTabs, Slots> {}
 
-export type Emits = {};
+type Emits = {};
 
-export interface Slots {}
+interface Slots {}
+
+export interface ControllerRouterViewTabs {
+  $props: RequiredSome<Props, keyof typeof ControllerRouterViewTabs.$propsDefault>;
+  $emit: Emits;
+  $slots: Slots;
+}
 
 @Local()
-export class ControllerRouterViewTabs extends BeanControllerBase<
-  ScopeModule,
-  RequiredSome<Props, keyof typeof ControllerRouterViewTabs.$propsDefault>,
-  Emits,
-  Slots
-> {
+export class ControllerRouterViewTabs extends BeanControllerBase {
   static $propsDefault = {};
 
   @Use({ injectionScope: 'skipSelf' })
