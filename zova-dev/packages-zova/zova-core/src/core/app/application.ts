@@ -25,11 +25,11 @@ export class ZovaApplication {
     this.vue = vue;
     this.ctx = ctxRoot;
     this.bean = ctxRoot.bean;
-    Cast(this.bean).app = this;
+    cast(this.bean).app = this;
     ctxRoot.app = this;
     this.util = this.bean._newBeanSimple(AppUtil, false);
     this.meta = this.bean._newBeanSimple(AppMeta, false);
-    Cast(ctxRoot.instance.appContext).reload = () => {
+    cast(ctxRoot.instance.appContext).reload = () => {
       this.reloadDelay();
     };
   }

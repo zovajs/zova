@@ -13,7 +13,7 @@ export class BeanRenderLike<TScopeModule = unknown> extends BeanControllerLike<T
   public __get__(prop): unknown {
     const value = super.__get__(prop);
     if (value !== undefined) return value;
-    const style = Cast(this[SymbolStyle]);
+    const style = cast(this[SymbolStyle]);
     return style?.[prop];
   }
 
@@ -21,7 +21,7 @@ export class BeanRenderLike<TScopeModule = unknown> extends BeanControllerLike<T
   public __set__(prop, value): boolean {
     const res = super.__set__(prop, value);
     if (res) return res;
-    const style = Cast(this[SymbolStyle]);
+    const style = cast(this[SymbolStyle]);
     if (!style) return false;
     if (prop in style) {
       style[prop] = value;

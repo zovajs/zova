@@ -33,7 +33,7 @@ export class BeanControllerBase<
     this.$emit = controllerData.context.emit as Emits;
     this.$attrs = controllerData.context.attrs as Data;
     this.$slots = useRef(() => {
-      const propSlots = Cast(this.$props).slots;
+      const propSlots = cast(this.$props).slots;
       const contextSlots = controllerData.context.slots;
       if (!propSlots) {
         return contextSlots;

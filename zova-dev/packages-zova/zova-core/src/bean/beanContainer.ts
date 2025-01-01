@@ -53,7 +53,7 @@ export class BeanContainer {
     const beanInstances = this[BeanContainerInstances];
     for (const prop in beanInstances) {
       if (prop.startsWith('$$')) continue;
-      const beanInstance = Cast(beanInstances[prop]);
+      const beanInstance = cast(beanInstances[prop]);
       if (beanInstance.__dispose__) {
         this.app.meta.module._monkeyModule('beanDispose', undefined, this, beanInstance);
         this.runWithInstanceScopeOrAppContext(() => {

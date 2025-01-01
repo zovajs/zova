@@ -57,7 +57,7 @@ export class BeanBase<TScopeModule = unknown> extends BeanBaseSimple {
 
   // need not
   // public dispose() {
-  //   const self = Cast(this);
+  //   const self = cast(this);
   //   if (self.__dispose__) {
   //     self.__dispose__();
   //   }

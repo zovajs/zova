@@ -27,7 +27,7 @@ export class ControllerRouterViewTabs extends BeanControllerBase<
     let name = component.Component.type.name;
     if (name) return name;
     name = component.route.meta.name || this.$router.getRealRouteName(component.route.name) || component.route.path;
-    Cast(component.Component.type).name = name;
+    cast(component.Component.type).name = name;
     return name;
   }
 

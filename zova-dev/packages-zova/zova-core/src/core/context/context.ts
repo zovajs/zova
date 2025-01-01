@@ -27,11 +27,11 @@ export class ZovaContext {
   /** @internal */
   public dispose() {
     this.meta.dispose();
-    Cast(this.instance).zova = null;
-    Cast(this).instance = null;
-    Cast(this).app = null;
-    Cast(this).bean = null;
-    Cast(this).meta = null;
+    cast(this.instance).zova = null;
+    cast(this).instance = null;
+    cast(this).app = null;
+    cast(this).bean = null;
+    cast(this).meta = null;
   }
 }
 

@@ -7,7 +7,7 @@ export class LocalSSR extends BeanBase<ScopeModule> {
     // ssr hydrated
     if (process.env.CLIENT) {
       this.ctx.meta.ssr.onHydrated(() => {
-        Cast(this.app.vue.config.globalProperties.$q).onSSRHydrated();
+        cast(this.app.vue.config.globalProperties.$q).onSSRHydrated();
       });
     }
     // ssr theme

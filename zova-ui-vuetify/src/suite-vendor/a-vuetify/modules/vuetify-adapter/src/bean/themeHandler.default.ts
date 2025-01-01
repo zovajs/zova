@@ -6,8 +6,8 @@ import { IThemeHandler, IThemeHandlerApplyParams } from 'zova-module-a-style';
 export class ThemeHandlerDefault extends BeanBase<ScopeModule> implements IThemeHandler {
   async apply({ name, dark, token }: IThemeHandlerApplyParams): Promise<void> {
     // theme
-    Cast(this.$vuetify.theme.global).name = name;
-    Cast(this.$vuetify.theme.themes)[name] = token;
+    cast(this.$vuetify.theme.global).name = name;
+    cast(this.$vuetify.theme.themes)[name] = token;
     if (process.env.SERVER) {
       // no matter that cookie or not
       this.$ssr.state[`data-ssr-theme-dark-${dark}`] = this.$vuetify.theme.styles;

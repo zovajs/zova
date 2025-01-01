@@ -24,7 +24,7 @@ export class CtxSSRMetaStore extends BeanSimple {
       };
     }
     if (process.env.CLIENT && this.ctx.meta.ssr.isRuntimeSsrPreHydration) {
-      this._currentClientMeta = Cast(window).__Q_META__;
+      this._currentClientMeta = cast(window).__Q_META__;
       document.getElementById('ssr-meta-init')?.remove();
     }
   }

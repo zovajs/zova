@@ -17,7 +17,7 @@ export const PluginZova = {
     return app;
   },
   async update(app: ZovaApplication, ctxRoot: ZovaContext) {
-    const bean = Cast(app.bean);
+    const bean = cast(app.bean);
     bean.ctx = ctxRoot;
     for (const key in bean[BeanContainerInstances]) {
       bean[BeanContainerInstances][key].ctx = ctxRoot;

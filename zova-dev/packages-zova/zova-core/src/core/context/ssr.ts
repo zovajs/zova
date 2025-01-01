@@ -46,16 +46,16 @@ export class CtxSSR extends BeanSimple {
     }
     // SymbolSSRState
     if (process.env.CLIENT) {
-      if (Cast(window).__INITIAL_STATE__) {
-        this[SymbolSSRState] = Cast(window).__INITIAL_STATE__;
-        delete Cast(window).__INITIAL_STATE__;
+      if (cast(window).__INITIAL_STATE__) {
+        this[SymbolSSRState] = cast(window).__INITIAL_STATE__;
+        delete cast(window).__INITIAL_STATE__;
         document.getElementById('ssr-state-init')?.remove();
       } else {
         this[SymbolSSRState] = {};
       }
-      if (Cast(window).__INITIAL_STATE_DEFER__) {
-        this[SymbolSSRStateDefer] = Cast(window).__INITIAL_STATE_DEFER__;
-        delete Cast(window).__INITIAL_STATE_DEFER__;
+      if (cast(window).__INITIAL_STATE_DEFER__) {
+        this[SymbolSSRStateDefer] = cast(window).__INITIAL_STATE_DEFER__;
+        delete cast(window).__INITIAL_STATE_DEFER__;
         document.getElementById('ssr-state-defer-init')?.remove();
       } else {
         this[SymbolSSRStateDefer] = {};

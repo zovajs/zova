@@ -82,7 +82,7 @@ export class LocalIcon extends BeanBase<ScopeModule> {
         }
 
         if (Quasar.iconSet.iconMapFn !== null) {
-          const res = Cast(Quasar.iconSet.iconMapFn(icon));
+          const res = cast(Quasar.iconSet.iconMapFn(icon));
           if (res !== void 0) {
             icon = res.icon;
             if (icon === 'none' || !icon) {

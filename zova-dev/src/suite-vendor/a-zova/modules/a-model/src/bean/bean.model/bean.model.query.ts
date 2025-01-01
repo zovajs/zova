@@ -51,7 +51,7 @@ export class BeanModelQuery<TScopeModule = unknown> extends BeanModelCookie<TSco
     filters: QueryFilters,
   ): Query<TQueryFnData, TError, TData> | undefined {
     filters = { ...filters };
-    Cast(filters).queryKey = this._forceQueryKeyPrefix(Cast(filters).queryKey);
+    cast(filters).queryKey = this._forceQueryKeyPrefix(cast(filters).queryKey);
     return this.$queryClient.getQueryCache().find(filters as any);
   }
 
@@ -60,7 +60,7 @@ export class BeanModelQuery<TScopeModule = unknown> extends BeanModelCookie<TSco
     options?: MaybeRefDeep<InvalidateOptions>,
   ): Promise<void> {
     if (!filters) filters = {};
-    const queryKey = this._forceQueryKeyPrefix(Cast(filters).queryKey);
+    const queryKey = this._forceQueryKeyPrefix(cast(filters).queryKey);
     filters = { ...filters, queryKey };
     return this.$queryClient.invalidateQueries(filters, options);
   }

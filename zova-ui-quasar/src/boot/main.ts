@@ -10,5 +10,5 @@ export default (app: App, ssrContext: SSRContext) => {
       dark: process.env.CLIENT ? window.ssr_themedark : 'auto',
     },
   };
-  Cast(app.use)(Quasar, quasarUserOptions, ssrContext);
+  cast(app.use)(Quasar, quasarUserOptions, ssrContext);
 };

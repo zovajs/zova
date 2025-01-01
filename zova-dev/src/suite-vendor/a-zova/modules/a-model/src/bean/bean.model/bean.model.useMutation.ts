@@ -30,7 +30,7 @@ export class BeanModelUseMutation<TScopeModule = unknown> extends BeanModelUseQu
     mutationOptions: MaybeRefDeep<MutationObserverOptions<TData, DefaultError, TVariables, TContext>>,
     queryClient?: QueryClient,
   ): UnwrapNestedRefs<UseMutationReturnType<TData, DefaultError, TVariables, TContext>> {
-    let mutationKey: MutationKey = Cast(mutationOptions).mutationKey;
+    let mutationKey: MutationKey = cast(mutationOptions).mutationKey;
     if (!mutationKey || mutationKey.length === 0) throw new Error('should specify mutationKey');
     mutationKey = this.self._forceQueryKeyPrefix(mutationKey);
     const mutationHash = hashKey(mutationKey);

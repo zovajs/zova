@@ -55,8 +55,8 @@ export class BeanRouter extends BeanBase {
   }
 
   public resolveName<K extends keyof IPageNameRecord>(name: K, options?: IPageNameRecord[K]): string {
-    const params = Cast(options)?.params;
-    const query = Cast(options)?.query;
+    const params = cast(options)?.params;
+    const query = cast(options)?.query;
     return this._resolveNameOrPath(query, query => {
       const route = this[SymbolRouter].resolve({ name, params, query });
       return route.fullPath;
@@ -201,7 +201,7 @@ export class BeanRouter extends BeanBase {
   }
 
   private _loadLegacyRoutes() {
-    const legacyRoutes = Cast(this.app.meta).legacyRoutes;
+    const legacyRoutes = cast(this.app.meta).legacyRoutes;
     if (!legacyRoutes) return;
     for (const route of legacyRoutes) {
       this._registerRoute(route);
@@ -226,7 +226,7 @@ export class BeanRouter extends BeanBase {
     name: string | symbol | null | undefined,
     path: string | undefined,
   ): IModuleRoute | undefined {
-    const legacyRoutes = Cast(this.app.meta).legacyRoutes;
+    const legacyRoutes = cast(this.app.meta).legacyRoutes;
     if (!legacyRoutes) return;
     name = this.getRealRouteName(name);
     return legacyRoutes.find(item => {
