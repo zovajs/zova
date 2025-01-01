@@ -765,33 +765,25 @@ export class BeanContainer {
         }
         const methodName = `__set_${prop}__`;
         const methodNameMagic = '__set__';
-        const _aopChainsProp = self._getAopChainsProp(beanFullName, methodName, methodNameMagic);
+        const _aopChainsProp = self._getAopChainsProp(beanFullName, methodName, methodNameMagic, 'set', prop);
         if (_aopChainsProp.length === 0) {
           target[prop] = value;
           return true;
         }
-        // context
-        const context = {
-          target,
-          receiver,
-          prop,
-          value,
-        };
         // aop
-        self.__composeForProp(_aopChainsProp)(context, (context, next) => {
+        return self.__composeForProp(_aopChainsProp)(value, value => {
           if (!descriptorInfo && target.__set__) {
-            const res = target.__set__(prop, context.value);
+            const res = target.__set__(prop, value);
             if (res === undefined) throw new Error('__set__ must return true/false');
             if (!res) {
-              target[prop] = context.value;
+              target[prop] = value;
             }
           } else {
-            target[prop] = context.value;
+            target[prop] = value;
           }
-          next();
+          // ok: prop be set
+          return true;
         });
-        // ok
-        return true;
       },
     });
     return proxy;
