@@ -1,3 +1,5 @@
+import { Next } from '../../decorator/type/functionable.js';
+
 export type TypeEventOff = () => void;
 
 export type TypeEventHandlersMap<KS extends keyof IEventRecord> = {
@@ -12,14 +14,14 @@ export type TypeEventContext<D, R> = {
 };
 
 export type TypeEventHandlerWrapper<D, R> = {
-  fn: TypeEventHandler<D, R> | null;
+  fn: TypeEventHandler<D, R> | undefined;
 };
 
 export type TypeEventHandler<D, R> = {
-  (context: TypeEventContext<D, R>, next: TypeEventNext): Promise<void>;
+  (data: D, next: Next): Promise<R>;
 };
 
-export type TypeEventNext = () => Promise<void>;
+export type NextEvent<D = unknown, R = unknown> = (data?: D) => Promise<R>;
 
 export interface IEventRecord {}
 export type TypeEventRecordKeys = keyof IEventRecord;
