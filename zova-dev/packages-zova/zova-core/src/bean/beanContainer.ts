@@ -796,49 +796,17 @@ export class BeanContainer {
       return beanInstance[prop];
     }
     // aop chains
-    const _aopChainsProp = this._getAopChainsProp(beanFullName, prop, null);
+    const _aopChainsProp = this._getAopChainsProp(beanFullName, prop, undefined, 'method', prop);
     if (_aopChainsProp.length === 0) return beanInstance[prop];
     // proxy
     const methodProxyKey = `__aopproxy_method_${prop}__`;
     if (beanInstance[methodProxyKey]) return beanInstance[methodProxyKey];
     const methodProxy = new Proxy(beanInstance[prop], {
       apply(target, thisArg, args) {
-        // context
-        const context = {
-          target: beanInstance,
-          receiver: thisArg,
-          prop,
-          arguments: args,
-          result: undefined,
-        };
         // aop
-        if (methodType === 'Function') {
-          self.__composeForProp(_aopChainsProp)(context, (context, next) => {
-            if (context.result === undefined) {
-              context.result = target.apply(thisArg, args);
-            }
-            next();
-          });
-          // ok
-          return context.result;
-        }
-        if (methodType === 'AsyncFunction') {
-          return new Promise((resolve, reject) => {
-            self
-              .__composeForPropAsync(_aopChainsProp)(context, async (context, next) => {
-                if (context.result === undefined) {
-                  context.result = await target.apply(thisArg, args);
-                }
-                await next();
-              })
-              .then(() => {
-                resolve(context.result);
-              })
-              .catch(err => {
-                reject(err);
-              });
-          });
-        }
+        return self.__composeForProp(_aopChainsProp)(args, args => {
+          return target.apply(thisArg, args);
+        });
       },
     });
     __setPropertyValue(beanInstance, methodProxyKey, methodProxy);
