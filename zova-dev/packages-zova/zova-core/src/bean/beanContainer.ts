@@ -718,7 +718,7 @@ export class BeanContainer {
   private _newBeanProxy(beanFullName, beanInstance) {
     const self = this;
     const proxy = new Proxy(beanInstance, {
-      get(target, prop, receiver) {
+      get(target, prop, _receiver) {
         if (typeof prop === 'symbol') {
           return target[prop];
         }
@@ -746,9 +746,9 @@ export class BeanContainer {
           });
         }
         // method
-        return self._getInstanceMethodProxy(beanFullName, target, prop, methodType);
+        return self._getInstanceMethodProxy(beanFullName, target, prop);
       },
-      set(target, prop, value, receiver) {
+      set(target, prop, value, _receiver) {
         if (typeof prop === 'symbol') {
           target[prop] = value;
           return true;
@@ -789,7 +789,7 @@ export class BeanContainer {
     return proxy;
   }
 
-  private _getInstanceMethodProxy(beanFullName, beanInstance, prop, methodType) {
+  private _getInstanceMethodProxy(beanFullName, beanInstance, prop) {
     const self = this;
     // not aop magic methods
     if (__isInnerMethod(prop)) {
