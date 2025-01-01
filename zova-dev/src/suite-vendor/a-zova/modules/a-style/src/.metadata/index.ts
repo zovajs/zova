@@ -7,6 +7,12 @@ declare module 'zova' {
     'a-style.bean.theme': BeanTheme;
   }
 }
+declare module 'zova-module-a-style' {
+  export interface BeanTheme {
+    /** @internal */
+    get scope(): ScopeModuleAStyle;
+  }
+}
 /** beans: end */
 /** config: begin */
 export * from '../config/config.js';

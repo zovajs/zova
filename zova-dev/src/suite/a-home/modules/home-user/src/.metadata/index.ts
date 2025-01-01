@@ -10,6 +10,17 @@ declare module 'zova' {
     'home-user.model.user': ModelUser;
   }
 }
+declare module 'zova-module-home-user' {
+  export interface ModelAuth {
+    /** @internal */
+    get scope(): ScopeModuleHomeUser;
+  }
+
+  export interface ModelUser {
+    /** @internal */
+    get scope(): ScopeModuleHomeUser;
+  }
+}
 /** beans: end */
 /** pages: begin */
 export * as NSControllerPageLogin from '../page/login/controller.js';

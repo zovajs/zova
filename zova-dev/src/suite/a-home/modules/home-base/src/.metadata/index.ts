@@ -10,6 +10,17 @@ declare module 'zova' {
     'home-base.theme.default': ThemeDefault;
   }
 }
+declare module 'zova-module-home-base' {
+  export interface StyleDefault {
+    /** @internal */
+    get scope(): ScopeModuleHomeBase;
+  }
+
+  export interface ThemeDefault {
+    /** @internal */
+    get scope(): ScopeModuleHomeBase;
+  }
+}
 /** beans: end */
 /** components: begin */
 export { ControllerPage } from '../component/page/controller.js';

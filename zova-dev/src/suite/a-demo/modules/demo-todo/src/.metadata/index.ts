@@ -7,6 +7,12 @@ declare module 'zova' {
     'demo-todo.model.todo': ModelTodo;
   }
 }
+declare module 'zova-module-demo-todo' {
+  export interface ModelTodo {
+    /** @internal */
+    get scope(): ScopeModuleDemoTodo;
+  }
+}
 /** beans: end */
 /** pages: begin */
 export * as NSControllerPageItem from '../page/item/controller.js';

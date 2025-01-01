@@ -7,6 +7,12 @@ declare module 'zova' {
     'devui-adapter.themeHandler.default': ThemeHandlerDefault;
   }
 }
+declare module 'zova-module-devui-adapter' {
+  export interface ThemeHandlerDefault {
+    /** @internal */
+    get scope(): ScopeModuleDevuiAdapter;
+  }
+}
 /** beans: end */
 /** monkey: begin */
 export * from '../monkey.js';

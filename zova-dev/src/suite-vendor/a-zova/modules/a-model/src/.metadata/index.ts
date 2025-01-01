@@ -7,6 +7,12 @@ declare module 'zova' {
     'a-model.bean.modelBase': BeanModelBase;
   }
 }
+declare module 'zova-module-a-model' {
+  export interface BeanModelBase {
+    /** @internal */
+    get scope(): ScopeModuleAModel;
+  }
+}
 /** beans: end */
 /** config: begin */
 export * from '../config/config.js';

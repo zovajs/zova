@@ -10,6 +10,17 @@ declare module 'zova' {
     'demo-basic.theme.orange': ThemeOrange;
   }
 }
+declare module 'zova-module-demo-basic' {
+  export interface StoreCounter {
+    /** @internal */
+    get scope(): ScopeModuleDemoBasic;
+  }
+
+  export interface ThemeOrange {
+    /** @internal */
+    get scope(): ScopeModuleDemoBasic;
+  }
+}
 /** beans: end */
 /** components: begin */
 export { ControllerCard } from '../component/card/controller.js';

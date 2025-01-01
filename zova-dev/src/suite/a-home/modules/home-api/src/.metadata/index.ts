@@ -7,6 +7,12 @@ declare module 'zova' {
     'home-api.bean.api': BeanApi;
   }
 }
+declare module 'zova-module-home-api' {
+  export interface BeanApi {
+    /** @internal */
+    get scope(): ScopeModuleHomeApi;
+  }
+}
 /** beans: end */
 /** service: begin */
 export * from '../service/openapi/index.js';

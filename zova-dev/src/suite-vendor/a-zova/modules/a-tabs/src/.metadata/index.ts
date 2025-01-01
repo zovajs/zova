@@ -7,6 +7,12 @@ declare module 'zova' {
     'a-tabs.model.tabs': ModelTabs;
   }
 }
+declare module 'zova-module-a-tabs' {
+  export interface ModelTabs {
+    /** @internal */
+    get scope(): ScopeModuleATabs;
+  }
+}
 /** beans: end */
 /** components: begin */
 export { ControllerRouterViewTabs } from '../component/routerViewTabs/controller.js';

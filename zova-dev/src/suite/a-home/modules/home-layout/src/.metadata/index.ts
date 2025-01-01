@@ -7,6 +7,12 @@ declare module 'zova' {
     'home-layout.model.menu': ModelMenu;
   }
 }
+declare module 'zova-module-home-layout' {
+  export interface ModelMenu {
+    /** @internal */
+    get scope(): ScopeModuleHomeLayout;
+  }
+}
 /** beans: end */
 /** components: begin */
 export { ControllerEssentialLink } from '../component/essentialLink/controller.js';
