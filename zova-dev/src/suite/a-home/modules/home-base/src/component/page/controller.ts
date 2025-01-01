@@ -9,15 +9,19 @@ interface Slots {
   default?(): JSX.Element;
 }
 
+@Local()
+export class ControllerPage extends BeanControllerBase {
+  static $propsDefault = {};
+
+  protected async __init__() {}
+}
+
 export interface ControllerPage {
   $props: RequiredSome<Props, keyof typeof ControllerPage.$propsDefault>;
   $emit: Emits;
   $slots: Slots;
 }
 
-@Local()
-export class ControllerPage extends BeanControllerBase {
-  static $propsDefault = {};
-
-  protected async __init__() {}
+export namespace ControllerPage {
+  export type PropsInput = Props;
 }

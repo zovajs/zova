@@ -10,12 +10,6 @@ type Emits = {};
 
 interface Slots {}
 
-export interface ControllerRouterViewTabs {
-  $props: RequiredSome<Props, keyof typeof ControllerRouterViewTabs.$propsDefault>;
-  $emit: Emits;
-  $slots: Slots;
-}
-
 @Local()
 export class ControllerRouterViewTabs extends BeanControllerBase {
   static $propsDefault = {};
@@ -60,4 +54,14 @@ export class ControllerRouterViewTabs extends BeanControllerBase {
     });
     return { componentKey };
   }
+}
+
+export interface ControllerRouterViewTabs {
+  $props: RequiredSome<Props, keyof typeof ControllerRouterViewTabs.$propsDefault>;
+  $emit: Emits;
+  $slots: Slots;
+}
+
+export namespace ControllerRouterViewTabs {
+  export type PropsInput = Props;
 }

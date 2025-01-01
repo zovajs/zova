@@ -6,7 +6,7 @@
 import { useController } from 'zova';
 import { ControllerLayoutEmpty } from './controller.js';
 import { RenderLayoutEmpty } from './render.jsx';
-const props = withDefaults(defineProps<ControllerLayoutEmpty['$props']>(), ControllerLayoutEmpty.$propsDefault);
+const props = withDefaults(defineProps<ControllerLayoutEmpty.PropsInput>(), ControllerLayoutEmpty.$propsDefault);
 const emit = defineEmits<ControllerLayoutEmpty['$emit']>();
 useController(props, emit, ControllerLayoutEmpty, RenderLayoutEmpty);
 </script>

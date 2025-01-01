@@ -6,13 +6,17 @@ type Emits = {};
 
 interface Slots {}
 
+@Local()
+export class ControllerLayoutEmpty extends BeanControllerBase {
+  static $propsDefault = {};
+}
+
 export interface ControllerLayoutEmpty {
   $props: RequiredSome<Props, keyof typeof ControllerLayoutEmpty.$propsDefault>;
   $emit: Emits;
   $slots: Slots;
 }
 
-@Local()
-export class ControllerLayoutEmpty extends BeanControllerBase {
-  static $propsDefault = {};
+export namespace ControllerLayoutEmpty {
+  export type PropsInput = Props;
 }
