@@ -1,6 +1,6 @@
 import { BeanControllerBase, Local, PropsBase, RequiredSome } from 'zova';
 
-export interface Props extends PropsBase<ControllerEssentialLink, Slots> {
+interface Props extends PropsBase<ControllerEssentialLink, Slots> {
   title: string;
   caption?: string;
   icon?: string;
@@ -8,17 +8,18 @@ export interface Props extends PropsBase<ControllerEssentialLink, Slots> {
   to?: { name?: string } | string;
 }
 
-export type Emits = {};
+type Emits = {};
 
-export interface Slots {}
+interface Slots {}
+
+export interface ControllerEssentialLink {
+  $props: RequiredSome<Props, keyof typeof ControllerEssentialLink.$propsDefault>;
+  $emits: Emits;
+  $slots: Slots;
+}
 
 @Local()
-export class ControllerEssentialLink extends BeanControllerBase<
-  unknown,
-  RequiredSome<Props, keyof typeof ControllerEssentialLink.$propsDefault>,
-  Emits,
-  Slots
-> {
+export class ControllerEssentialLink extends BeanControllerBase {
   static $propsDefault = {
     caption: '',
     icon: '',

@@ -6,26 +6,26 @@ import { useRef } from '../vue/ref.js';
 
 type Data = Record<string, unknown>;
 
-type DefineModelOptions<T = any> = {
-  get?: (v: T) => any;
-  set?: (v: T) => any;
-};
+// type DefineModelOptions<T = any> = {
+//   get?: (v: T) => any;
+//   set?: (v: T) => any;
+// };
 
 export interface PropsBase<Controller = unknown, Slots = unknown> {
   controllerRef?: (ref: Controller) => void;
   slots?: Slots;
 }
 
-export class BeanControllerBase<Props = unknown, Emits = unknown, Slots = unknown> extends BeanBase {
-  public $props: Props;
-  public $emit: Emits;
-  public $slots: Slots;
+export class BeanControllerBase extends BeanBase {
+  public $props: unknown;
+  public $emit: unknown;
+  public $slots: unknown;
   public $attrs: Data;
 
   /** @internal */
   public __initControllerData(controllerData: IControllerData) {
-    this.$props = controllerData.props as Props;
-    this.$emit = controllerData.context.emit as Emits;
+    this.$props = controllerData.props;
+    this.$emit = controllerData.context.emit;
     this.$attrs = controllerData.context.attrs as Data;
     this.$slots = useRef(() => {
       const propSlots = cast(this.$props).slots;
@@ -40,8 +40,9 @@ export class BeanControllerBase<Props = unknown, Emits = unknown, Slots = unknow
   }
 
   // @ts-ignore ignore
-  protected $useModel(options?: DefineModelOptions<Props['modelValue']>): Props['modelValue'];
-  protected $useModel<K extends keyof Props>(name: K, options?: DefineModelOptions<Props[K]>): Props[K];
+  // todo: 需要通过接口合并的方式添加以下两个函数类型定义
+  //protected $useModel(options?: DefineModelOptions<Props['modelValue']>): Props['modelValue'];
+  //protected $useModel<K extends keyof Props>(name: K, options?: DefineModelOptions<Props[K]>): Props[K];
   protected $useModel(name?, options?) {
     if (typeof name === 'object') {
       options = name;

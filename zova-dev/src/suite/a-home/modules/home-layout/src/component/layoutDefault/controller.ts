@@ -3,19 +3,20 @@ import { ModelMenu } from '../../bean/model.menu.js';
 import { ModelAuth, ModelUser } from 'zova-module-home-user';
 import { ModelTabs, ModelTabsOptions, ScopeModuleATabs } from 'zova-module-a-tabs';
 
-export interface Props extends PropsBase<ControllerLayoutDefault, Slots> {}
+interface Props extends PropsBase<ControllerLayoutDefault, Slots> {}
 
-export type Emits = {};
+type Emits = {};
 
-export interface Slots {}
+interface Slots {}
+
+export interface ControllerLayoutDefault {
+  $props: RequiredSome<Props, keyof typeof ControllerLayoutDefault.$propsDefault>;
+  $emits: Emits;
+  $slots: Slots;
+}
 
 @Local()
-export class ControllerLayoutDefault extends BeanControllerBase<
-  ScopeModule,
-  RequiredSome<Props, keyof typeof ControllerLayoutDefault.$propsDefault>,
-  Emits,
-  Slots
-> {
+export class ControllerLayoutDefault extends BeanControllerBase {
   static $propsDefault = {};
 
   @UseScope()

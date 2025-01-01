@@ -1,21 +1,22 @@
 import { BeanControllerBase, Local, PropsBase, RequiredSome } from 'zova';
 import { JSX } from 'vue/jsx-runtime';
 
-export interface Props extends PropsBase<ControllerPage, Slots> {}
+interface Props extends PropsBase<ControllerPage, Slots> {}
 
-export type Emits = {};
+type Emits = {};
 
-export interface Slots {
+interface Slots {
   default?(): JSX.Element;
 }
 
+export interface ControllerPage {
+  $props: RequiredSome<Props, keyof typeof ControllerPage.$propsDefault>;
+  $emits: Emits;
+  $slots: Slots;
+}
+
 @Local()
-export class ControllerPage extends BeanControllerBase<
-  ScopeModule,
-  RequiredSome<Props, keyof typeof ControllerPage.$propsDefault>,
-  Emits,
-  Slots
-> {
+export class ControllerPage extends BeanControllerBase {
   static $propsDefault = {};
 
   protected async __init__() {}

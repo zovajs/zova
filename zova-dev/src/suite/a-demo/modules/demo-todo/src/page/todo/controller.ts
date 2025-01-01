@@ -2,16 +2,11 @@ import { BeanControllerPageBase, Local, Use, uuid, zz } from 'zova';
 import { ModelTodo } from '../../bean/model.todo.js';
 import { ServiceTodoEntity, ServiceTodoGetParams } from '../../service/todo.js';
 
-export const ParamsSchema = zz.object({});
-export type ParamsInput = zz.input<typeof ParamsSchema>;
-export type ParamsOutput = zz.output<typeof ParamsSchema>;
-
-export const QuerySchema = zz.object({});
-export type QueryInput = zz.input<typeof QuerySchema>;
-export type QueryOutput = zz.output<typeof QuerySchema>;
+const ParamsSchema = zz.object({});
+const QuerySchema = zz.object({});
 
 @Local()
-export class ControllerPageTodo extends BeanControllerPageBase<QueryOutput, ParamsOutput> {
+export class ControllerPageTodo extends BeanControllerPageBase {
   @Use()
   $$modelTodo: ModelTodo;
   newTitle: string;
@@ -42,4 +37,19 @@ export class ControllerPageTodo extends BeanControllerPageBase<QueryOutput, Para
   async deleteTodo(item: ServiceTodoEntity) {
     await this.$$modelTodo.delete().mutateAsync({ id: item.id });
   }
+}
+
+export interface ControllerPageTodo {
+  $params: ControllerPageTodo.ParamsOutput;
+  $query: ControllerPageTodo.QueryOutput;
+}
+
+export namespace ControllerPageTodo {
+  export const paramsSchema = ParamsSchema;
+  export type ParamsInput = zz.input<typeof ParamsSchema>;
+  export type ParamsOutput = zz.output<typeof ParamsSchema>;
+
+  export const querySchema = QuerySchema;
+  export type QueryInput = zz.input<typeof QuerySchema>;
+  export type QueryOutput = zz.output<typeof QuerySchema>;
 }

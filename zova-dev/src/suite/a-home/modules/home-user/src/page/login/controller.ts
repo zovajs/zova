@@ -2,16 +2,11 @@ import { BeanControllerPageBase, Local, Use, zz } from 'zova';
 import { ModelAuth } from '../../bean/model.auth.js';
 import { ServiceAuthLoginParams } from '../../service/auth.js';
 
-export const ParamsSchema = zz.object({});
-export type ParamsInput = zz.input<typeof ParamsSchema>;
-export type ParamsOutput = zz.output<typeof ParamsSchema>;
-
-export const QuerySchema = zz.object({});
-export type QueryInput = zz.input<typeof QuerySchema>;
-export type QueryOutput = zz.output<typeof QuerySchema>;
+const ParamsSchema = zz.object({});
+const QuerySchema = zz.object({});
 
 @Local()
-export class ControllerPageLogin extends BeanControllerPageBase<QueryOutput, ParamsOutput> {
+export class ControllerPageLogin extends BeanControllerPageBase {
   @Use()
   $$modelAuth: ModelAuth;
 
@@ -23,4 +18,19 @@ export class ControllerPageLogin extends BeanControllerPageBase<QueryOutput, Par
   async login() {
     await this.$$modelAuth.login().mutateAsync(this.user);
   }
+}
+
+export interface ControllerPageLogin {
+  $params: ControllerPageLogin.ParamsOutput;
+  $query: ControllerPageLogin.QueryOutput;
+}
+
+export namespace ControllerPageLogin {
+  export const paramsSchema = ParamsSchema;
+  export type ParamsInput = zz.input<typeof ParamsSchema>;
+  export type ParamsOutput = zz.output<typeof ParamsSchema>;
+
+  export const querySchema = QuerySchema;
+  export type QueryInput = zz.input<typeof QuerySchema>;
+  export type QueryOutput = zz.output<typeof QuerySchema>;
 }

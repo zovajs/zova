@@ -1,9 +1,9 @@
 import { BeanBase } from './beanBase.js';
 import { IControllerData } from './type.js';
 
-export class BeanControllerPageBase<Query = unknown, Params = unknown> extends BeanBase {
-  public $params: Params;
-  public $query: Query;
+export class BeanControllerPageBase extends BeanBase {
+  public $params: unknown;
+  public $query: unknown;
 
   /** @internal */
   public __initControllerData(controllerData: IControllerData) {
