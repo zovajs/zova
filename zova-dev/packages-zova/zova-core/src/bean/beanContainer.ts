@@ -380,12 +380,11 @@ export class BeanContainer {
     if (typeof beanFullName === 'function' && isClass(beanFullName)) {
       return appResource.getBean(beanFullName);
     }
-    // check if uuid
-    if (!beanFullName.includes('__local__:')) {
-      // module: name
-      const moduleName = beanFullName.split('.')[0];
+    // module: name
+    const parts = beanFullName.split('.');
+    if (!['local'].includes(parts[1])) {
       // module: load
-      await this.app.meta.module.use(moduleName);
+      await this.app.meta.module.use(parts[0]);
     }
     // get
     return appResource.getBean(beanFullName);

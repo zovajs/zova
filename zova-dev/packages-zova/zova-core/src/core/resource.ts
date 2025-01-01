@@ -54,14 +54,12 @@ export class AppResource extends BeanSimple {
     // module
     const module = beanInfo?.module;
     // name
-    const { scene, name } = this._parseSceneAndBeanName(beanClass!, options.scene, options.name);
-    // beanFullName
-    let beanFullName;
+    let { scene, name } = this._parseSceneAndBeanName(beanClass!, options.scene, options.name);
     if (['local'].includes(scene)) {
-      beanFullName = `__local__:${beanInfo?.hash || uuid()}`;
-    } else {
-      beanFullName = `${module}.${scene}.${name}`;
+      name = beanInfo?.hash || uuid();
     }
+    // beanFullName
+    const beanFullName = `${module}.${scene}.${name}`;
     // moduleBelong
     const moduleBelong = this._parseModuleBelong(module, beanClass, virtual);
     // options
