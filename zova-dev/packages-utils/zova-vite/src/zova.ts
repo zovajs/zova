@@ -4,8 +4,8 @@ import { createConfigUtils } from './configUtils.js';
 import { generateEntryFiles } from './generateEntryFiles.js';
 import { CommonServerOptions } from 'vite';
 import path from 'node:path';
-import { ZovaConfigMeta } from 'zova-shared';
 import { setModuleAlias } from './utils.js';
+import { ZovaConfigMeta } from '@cabloy/module-info';
 
 const __SvgIconPattern = /\.metadata\/icons\/groups\/.*?\.svg/;
 

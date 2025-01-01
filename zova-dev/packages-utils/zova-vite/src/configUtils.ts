@@ -3,9 +3,8 @@ import path from 'path';
 import * as dotenv from '@cabloy/dotenv';
 import { getEnvMeta } from './utils.js';
 import { glob } from '@cabloy/module-glob';
-import { IBundleVendor } from '@cabloy/module-info';
+import { IBundleVendor, ZovaConfigMeta } from '@cabloy/module-info';
 import crypto from 'node:crypto';
-import { ZovaConfigMeta } from 'zova-shared';
 
 const __ModuleLibs = [
   /src\/module\/([^\/]*?)\//,

@@ -5,7 +5,7 @@ import path from 'node:path';
 import { copyTemplateFile, getEnvMeta, resolveTemplatePath } from './utils.js';
 import { getEnvFiles } from '@cabloy/dotenv';
 import { ZovaViteConfigOptions } from './types.js';
-import { ZovaConfigMeta } from 'zova-shared';
+import { ZovaConfigMeta } from '@cabloy/module-info';
 
 export async function generateEntryFiles(
   configMeta: ZovaConfigMeta,

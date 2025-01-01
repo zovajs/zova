@@ -1,4 +1,4 @@
-import { ZovaConfigMeta } from 'zova-shared';
+import { ZovaConfigMeta } from '@cabloy/module-info';
 import { ZovaViteConfigOptions, ZovaViteConfigResult } from 'zova-vite';
 
 export interface ConfigContext {
