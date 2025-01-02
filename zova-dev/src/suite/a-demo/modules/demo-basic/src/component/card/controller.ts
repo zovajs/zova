@@ -1,17 +1,17 @@
-import { BeanControllerBase, Local, PropsBase, RequiredSome } from 'zova';
+import { BeanControllerBase, Local, RequiredSome } from 'zova';
 import { JSX } from 'vue/jsx-runtime';
 
-export interface Props extends PropsBase {
+export interface ControllerCardProps {
   header?: string;
   content?: string;
   footer?: string;
 }
 
-type Emits = {
+export type ControllerCardEmits = {
   (e: 'reset', time: Date): void;
 };
 
-interface Slots {
+export interface ControllerCardSlots {
   header?(): JSX.Element;
   default?(): JSX.Element;
   footer?(): JSX.Element;
@@ -24,12 +24,17 @@ export class ControllerCard extends BeanControllerBase {
   };
 }
 
+export interface ControllerCardProps {
+  controllerRef?: (ref: ControllerCard) => void;
+  slots?: ControllerCardSlots;
+}
+
 export interface ControllerCard {
-  $props: RequiredSome<Props, keyof typeof ControllerCard.$propsDefault>;
-  $emit: Emits;
-  $slots: Slots;
+  $props: RequiredSome<ControllerCardProps, keyof typeof ControllerCard.$propsDefault>;
+  $emit: ControllerCardEmits;
+  $slots: ControllerCardSlots;
 }
 
 export namespace ControllerCard {
-  export type PropsInput = Props;
+  export type PropsInput = ControllerCardProps;
 }

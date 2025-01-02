@@ -11,10 +11,6 @@ type Data = Record<string, unknown>;
 //   set?: (v: T) => any;
 // };
 
-export interface PropsBase {
-  controllerRef?: unknown;
-}
-
 export class BeanControllerBase extends BeanBase {
   public $props: unknown;
   public $emit: unknown;
