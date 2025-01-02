@@ -4,11 +4,11 @@ import { RouteLocationNormalizedLoaded } from 'vue-router';
 import { nextTick } from 'vue';
 import { ModelTabs } from '../../bean/model.tabs.js';
 
-interface Props extends PropsBase<ControllerRouterViewTabs, Slots> {}
+interface Slots {}
+
+interface Props extends PropsBase {}
 
 type Emits = {};
-
-interface Slots {}
 
 @Local()
 export class ControllerRouterViewTabs extends BeanControllerBase {
@@ -54,6 +54,11 @@ export class ControllerRouterViewTabs extends BeanControllerBase {
     });
     return { componentKey };
   }
+}
+
+interface Props {
+  controllerRef?: (ref: ControllerRouterViewTabs) => void;
+  'v-slots'?: Slots;
 }
 
 export interface ControllerRouterViewTabs {

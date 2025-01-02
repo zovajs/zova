@@ -3,7 +3,12 @@ import { ModelMenu } from '../../bean/model.menu.js';
 import { ModelAuth, ModelUser } from 'zova-module-home-user';
 import { ModelTabs, ModelTabsOptions, ScopeModuleATabs } from 'zova-module-a-tabs';
 
-interface Props extends PropsBase<ControllerLayoutDefault, Slots> {}
+interface Props extends PropsBase {}
+
+interface Props {
+  controllerRef?: (ref: ControllerLayoutDefault) => void;
+  'v-slots'?: Slots;
+}
 
 type Emits = {};
 

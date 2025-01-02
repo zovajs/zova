@@ -1,6 +1,11 @@
 import { BeanControllerBase, Local, PropsBase, RequiredSome } from 'zova';
 
-interface Props extends PropsBase<ControllerLayoutEmpty, Slots> {}
+interface Props extends PropsBase {}
+
+interface Props {
+  controllerRef?: (ref: ControllerLayoutEmpty) => void;
+  'v-slots'?: Slots;
+}
 
 type Emits = {};
 

@@ -1,11 +1,16 @@
 import { BeanControllerBase, Local, PropsBase, RequiredSome } from 'zova';
 
-interface Props extends PropsBase<ControllerEssentialLink, Slots> {
+interface Props extends PropsBase {
   title: string;
   caption?: string;
   icon?: string;
   href?: string;
   to?: { name?: string } | string;
+}
+
+interface Props {
+  controllerRef?: (ref: ControllerEssentialLink) => void;
+  'v-slots'?: Slots;
 }
 
 type Emits = {};

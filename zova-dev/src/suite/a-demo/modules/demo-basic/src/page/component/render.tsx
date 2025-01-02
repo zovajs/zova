@@ -22,7 +22,7 @@ export class RenderComponent extends BeanRenderBase {
           onReset={time => {
             this.resetTime = time;
           }}
-          slots={{
+          v-slots={{
             header: () => {
               return <div>this is a header slot from parent</div>;
             },

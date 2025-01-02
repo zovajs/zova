@@ -1,7 +1,12 @@
 import { BeanControllerBase, Local, PropsBase, RequiredSome } from 'zova';
 import { JSX } from 'vue/jsx-runtime';
 
-interface Props extends PropsBase<ControllerPage, Slots> {}
+interface Props extends PropsBase {}
+
+interface Props {
+  controllerRef?: (ref: ControllerPage) => void;
+  'v-slots'?: Slots;
+}
 
 type Emits = {};
 

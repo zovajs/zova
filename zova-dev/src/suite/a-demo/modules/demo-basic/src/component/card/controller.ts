@@ -1,21 +1,26 @@
 import { BeanControllerBase, Local, PropsBase, RequiredSome } from 'zova';
 import { JSX } from 'vue/jsx-runtime';
 
-interface Props extends PropsBase<ControllerCard, Slots> {
-  header?: string;
-  content?: string;
-  footer?: string;
-}
-
-type Emits = {
-  (e: 'reset', time: Date): void;
-};
-
 interface Slots {
   header?(): JSX.Element;
   default?(): JSX.Element;
   footer?(): JSX.Element;
 }
+
+interface Props extends PropsBase {
+  header?: string;
+  content?: string;
+  footer?: string;
+}
+
+interface Props {
+  controllerRef?: (ref: ControllerCard) => void;
+  'v-slots'?: Slots;
+}
+
+type Emits = {
+  (e: 'reset', time: Date): void;
+};
 
 @Local()
 export class ControllerCard extends BeanControllerBase {
