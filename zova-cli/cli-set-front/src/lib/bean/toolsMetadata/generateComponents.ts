@@ -12,20 +12,37 @@ export async function generateComponents(moduleName: string, modulePath: string)
   const contentImports2: string[] = [];
   const contentComponents: string[] = [];
   const contentRecords: string[] = [];
+  const contentRecords2: string[] = [];
+  const contentRecords3: string[] = [];
   for (const file of files) {
     const componentName = path.basename(file.substring(0, file.length - '/index.vue'.length));
     const className = 'Controller' + toUpperCaseFirstChar(componentName);
     const componentFullName = `${moduleName}:${componentName}`;
     const componentName2 = 'Z' + firstCharToUpperCase(componentName);
     contentExports.push(`export * from '../component/${componentName}/controller.js';`);
-    contentImports.push(`import { ${className} } from '../component/${componentName}/controller.js';`);
+    contentImports.push(
+      `import { ${className}, ${className}Props, ${className}Emits, ${className}Slots } from '../component/${componentName}/controller.js';`,
+    );
     contentImports2.push(`export { default as ${componentName2} } from '../component/${componentName}/index.vue';`);
     contentImports2.push(`import ${componentName2} from '../component/${componentName}/index.vue';`);
     contentComponents.push(`'${componentName}': ${componentName2},`);
     contentRecords.push(`'${componentFullName}': ${className};`);
+    contentRecords2.push(`export interface ${className}Props {
+  controllerRef?: (ref: ${className}) => void;
+  slots?: ${className}Slots;
+}
+
+export interface ${className} {
+  $props: RequiredSome<${className}Props, keyof typeof ${className}.$propsDefault>;
+  $emit: ${className}Emits;
+  $slots: ${className}Slots;
+}`);
+    contentRecords3.push(`export namespace NS${className} {
+  export type PropsInput = ${className}Props;      
+}`);
   }
   // combine
-  const content = `/** components: begin */
+  let content = `/** components: begin */
 ${contentExports.join('\n')}
 ${contentImports.join('\n')}
 ${contentImports2.join('\n')}
@@ -38,8 +55,15 @@ export interface IComponentRecord {
   ${contentRecords.join('\n')}
 }
 }
+declare module 'zova-module-${moduleName}' {
+  ${contentRecords2.join('\n')} 
+}
+${contentRecords3.join('\n')}   
 /** components: end */
 `;
+  if (content.includes('RequiredSome')) {
+    content = `import { RequiredSome } from 'zova';\n${content}`;
+  }
   return content;
 }
 

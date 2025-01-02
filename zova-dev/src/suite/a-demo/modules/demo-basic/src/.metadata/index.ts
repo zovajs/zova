@@ -11,9 +11,15 @@ declare module 'zova' {
   }
 }
 /** beans: end */
+import { RequiredSome } from 'zova';
 /** components: begin */
 export * from '../component/card/controller.js';
-import { ControllerCard } from '../component/card/controller.js';
+import {
+  ControllerCard,
+  ControllerCardProps,
+  ControllerCardEmits,
+  ControllerCardSlots,
+} from '../component/card/controller.js';
 export { default as ZCard } from '../component/card/index.vue';
 import ZCard from '../component/card/index.vue';
 export const components = {
@@ -24,6 +30,21 @@ declare module 'zova' {
   export interface IComponentRecord {
     'demo-basic:card': ControllerCard;
   }
+}
+declare module 'zova-module-demo-basic' {
+  export interface ControllerCardProps {
+    controllerRef?: (ref: ControllerCard) => void;
+    slots?: ControllerCardSlots;
+  }
+
+  export interface ControllerCard {
+    $props: RequiredSome<ControllerCardProps, keyof typeof ControllerCard.$propsDefault>;
+    $emit: ControllerCardEmits;
+    $slots: ControllerCardSlots;
+  }
+}
+export namespace NSControllerCard {
+  export type PropsInput = ControllerCardProps;
 }
 /** components: end */
 /** pages: begin */

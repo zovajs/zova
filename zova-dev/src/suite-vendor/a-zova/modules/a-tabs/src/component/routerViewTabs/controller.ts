@@ -1,4 +1,4 @@
-import { BeanControllerBase, cast, Local, PropsBase, Use, RequiredSome } from 'zova';
+import { BeanControllerBase, cast, Local, Use, RequiredSome } from 'zova';
 import { RouterViewSlotParams } from './render.jsx';
 import { RouteLocationNormalizedLoaded } from 'vue-router';
 import { nextTick } from 'vue';
@@ -6,7 +6,7 @@ import { ModelTabs } from '../../bean/model.tabs.js';
 
 interface Slots {}
 
-interface Props extends PropsBase {}
+interface Props {}
 
 type Emits = {};
 
