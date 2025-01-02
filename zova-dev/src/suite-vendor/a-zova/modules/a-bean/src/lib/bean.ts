@@ -19,3 +19,7 @@ export function Store(): ClassDecorator {
 export function Tool(): ClassDecorator {
   return createBeanDecorator('tool', 'app');
 }
+
+export function Data(): ClassDecorator {
+  return createBeanDecorator('data', 'new');
+}

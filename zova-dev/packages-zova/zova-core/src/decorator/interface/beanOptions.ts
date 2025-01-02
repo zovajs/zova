@@ -4,19 +4,6 @@ import { ContainerScope } from '../index.js';
 
 export interface IBeanSceneRecord {}
 
-// todo: remove
-export type TypeDecoratorBeanOptionsSceneBase = 'local' | 'aop' | 'virtual' | 'scope' | TypeDecoratorBeanOptionsScene;
-// containerScope: store(app) model(ctx)
-export type TypeDecoratorBeanOptionsScene =
-  | 'bean'
-  | 'store'
-  | 'model'
-  | 'service'
-  | 'style'
-  | 'theme'
-  | 'themeHandler'
-  | 'tool'; // | 'ui' | 'event';
-
 export interface IDecoratorBeanOptionsBase<T = unknown, OPTIONS = unknown> {
   /**
    * global: module.scene.name

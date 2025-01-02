@@ -6,5 +6,6 @@ declare module 'zova' {
     local: never;
     store: never;
     tool: never;
+    data: never;
   }
 }
