@@ -48,7 +48,7 @@ export class CliToolsMetadata extends BeanCliBase {
     if (!module) throw new Error(`module not found: ${moduleName}`);
     const modulePath = module.root;
     const metaDir = path.join(modulePath, 'src/.metadata');
-    const metaIndexFile = path.join(metaDir, 'index.tsx');
+    const metaIndexFile = path.join(metaDir, 'index.ts');
     if (fse.existsSync(metaIndexFile) && !force) {
       // do nothing
       return;
@@ -119,8 +119,8 @@ export { ScopeModule${relativeNameCapitalize} as ScopeModule } from './index.js'
   }
 
   async _generateIndex(modulePath: string) {
-    const jsExport = "export * from './.metadata/index.jsx';";
-    const jsFile = path.join(modulePath, 'src/index.tsx');
+    const jsExport = "export * from './.metadata/index.js';";
+    const jsFile = path.join(modulePath, 'src/index.ts');
     let jsContent;
     if (fse.existsSync(jsFile)) {
       jsContent = (await fse.readFile(jsFile)).toString();
