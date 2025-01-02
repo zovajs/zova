@@ -1,6 +1,6 @@
 import { BeanRenderBase, Local } from 'zova';
 import { StyleLayoutDefault } from './style.js';
-import { __ThisModule__ } from '../../.metadata/this.js';
+import { __ThisModule__ } from '../../.metadata/this.jsx';
 import EssentialLink from '../essentialLink/index.vue';
 import { JSX } from 'vue/jsx-runtime';
 import { ServiceMenuEntity } from '../../service/menu.js';

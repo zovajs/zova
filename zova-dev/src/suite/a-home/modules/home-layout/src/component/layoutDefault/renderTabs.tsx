@@ -1,5 +1,5 @@
 import { BeanRenderBase, ClientOnly, Local, ZovaIcon, icon } from 'zova';
-import { __ThisModule__ } from '../../.metadata/this.js';
+import { __ThisModule__ } from '../../.metadata/this.jsx';
 import { StyleLayoutDefault } from './style.js';
 import { JSX } from 'vue/jsx-runtime';
 import { withModifiers } from 'vue';

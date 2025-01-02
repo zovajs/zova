@@ -7,7 +7,8 @@ import { useController } from 'zova';
 import { ControllerPage } from './controller.js';
 import { RenderPage } from './render.jsx';
 import { StylePage } from './style.js';
-const props = withDefaults(defineProps<ControllerPage.PropsInput>(), ControllerPage.$propsDefault);
+import { NSControllerPage } from '../../.metadata/index.jsx';
+const props = withDefaults(defineProps<NSControllerPage.PropsInput>(), ControllerPage.$propsDefault);
 const emit = defineEmits<ControllerPage['$emit']>();
 useController(props, emit, ControllerPage, RenderPage, StylePage);
 </script>

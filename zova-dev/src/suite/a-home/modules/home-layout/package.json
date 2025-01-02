@@ -6,11 +6,11 @@
   "exports": {
     ".": {
       "types": [
-        "./src/index.ts",
-        "./dist/index.d.ts"
+        "./src/index.tsx",
+        "./dist/index.d.tsx"
       ],
-      "import": "./src/index.ts",
-      "default": "./dist/index.js"
+      "import": "./src/index.tsx",
+      "default": "./dist/index.jsx"
     },
     "./*": "./*"
   },

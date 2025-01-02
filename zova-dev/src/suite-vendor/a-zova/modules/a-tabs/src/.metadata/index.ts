@@ -8,9 +8,15 @@ declare module 'zova' {
   }
 }
 /** beans: end */
+import { RequiredSome } from 'zova';
 /** components: begin */
 export * from '../component/routerViewTabs/controller.js';
-import { ControllerRouterViewTabs } from '../component/routerViewTabs/controller.js';
+import {
+  ControllerRouterViewTabs,
+  ControllerRouterViewTabsProps,
+  ControllerRouterViewTabsEmits,
+  ControllerRouterViewTabsSlots,
+} from '../component/routerViewTabs/controller.js';
 export { default as ZRouterViewTabs } from '../component/routerViewTabs/index.vue';
 import ZRouterViewTabs from '../component/routerViewTabs/index.vue';
 export const components = {
@@ -21,6 +27,21 @@ declare module 'zova' {
   export interface IComponentRecord {
     'a-tabs:routerViewTabs': ControllerRouterViewTabs;
   }
+}
+declare module 'zova-module-a-tabs' {
+  export interface ControllerRouterViewTabsProps {
+    controllerRef?: (ref: ControllerRouterViewTabs) => void;
+    slots?: ControllerRouterViewTabsSlots;
+  }
+
+  export interface ControllerRouterViewTabs {
+    $props: RequiredSome<ControllerRouterViewTabsProps, keyof typeof ControllerRouterViewTabs.$propsDefault>;
+    $emit: ControllerRouterViewTabsEmits;
+    $slots: ControllerRouterViewTabsSlots;
+  }
+}
+export namespace NSControllerRouterViewTabs {
+  export type PropsInput = ControllerRouterViewTabsProps;
 }
 /** components: end */
 /** scope: begin */

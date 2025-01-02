@@ -8,13 +8,29 @@ declare module 'zova' {
   }
 }
 /** beans: end */
+import { RequiredSome } from 'zova';
 /** components: begin */
 export * from '../component/essentialLink/controller.js';
 export * from '../component/layoutDefault/controller.js';
 export * from '../component/layoutEmpty/controller.js';
-import { ControllerEssentialLink } from '../component/essentialLink/controller.js';
-import { ControllerLayoutDefault } from '../component/layoutDefault/controller.js';
-import { ControllerLayoutEmpty } from '../component/layoutEmpty/controller.js';
+import {
+  ControllerEssentialLink,
+  ControllerEssentialLinkProps,
+  ControllerEssentialLinkEmits,
+  ControllerEssentialLinkSlots,
+} from '../component/essentialLink/controller.js';
+import {
+  ControllerLayoutDefault,
+  ControllerLayoutDefaultProps,
+  ControllerLayoutDefaultEmits,
+  ControllerLayoutDefaultSlots,
+} from '../component/layoutDefault/controller.js';
+import {
+  ControllerLayoutEmpty,
+  ControllerLayoutEmptyProps,
+  ControllerLayoutEmptyEmits,
+  ControllerLayoutEmptySlots,
+} from '../component/layoutEmpty/controller.js';
 export { default as ZEssentialLink } from '../component/essentialLink/index.vue';
 import ZEssentialLink from '../component/essentialLink/index.vue';
 export { default as ZLayoutDefault } from '../component/layoutDefault/index.vue';
@@ -33,6 +49,47 @@ declare module 'zova' {
     'home-layout:layoutDefault': ControllerLayoutDefault;
     'home-layout:layoutEmpty': ControllerLayoutEmpty;
   }
+}
+declare module 'zova-module-home-layout' {
+  export interface ControllerEssentialLinkProps {
+    controllerRef?: (ref: ControllerEssentialLink) => void;
+    slots?: ControllerEssentialLinkSlots;
+  }
+
+  export interface ControllerEssentialLink {
+    $props: RequiredSome<ControllerEssentialLinkProps, keyof typeof ControllerEssentialLink.$propsDefault>;
+    $emit: ControllerEssentialLinkEmits;
+    $slots: ControllerEssentialLinkSlots;
+  }
+  export interface ControllerLayoutDefaultProps {
+    controllerRef?: (ref: ControllerLayoutDefault) => void;
+    slots?: ControllerLayoutDefaultSlots;
+  }
+
+  export interface ControllerLayoutDefault {
+    $props: RequiredSome<ControllerLayoutDefaultProps, keyof typeof ControllerLayoutDefault.$propsDefault>;
+    $emit: ControllerLayoutDefaultEmits;
+    $slots: ControllerLayoutDefaultSlots;
+  }
+  export interface ControllerLayoutEmptyProps {
+    controllerRef?: (ref: ControllerLayoutEmpty) => void;
+    slots?: ControllerLayoutEmptySlots;
+  }
+
+  export interface ControllerLayoutEmpty {
+    $props: RequiredSome<ControllerLayoutEmptyProps, keyof typeof ControllerLayoutEmpty.$propsDefault>;
+    $emit: ControllerLayoutEmptyEmits;
+    $slots: ControllerLayoutEmptySlots;
+  }
+}
+export namespace NSControllerEssentialLink {
+  export type PropsInput = ControllerEssentialLinkProps;
+}
+export namespace NSControllerLayoutDefault {
+  export type PropsInput = ControllerLayoutDefaultProps;
+}
+export namespace NSControllerLayoutEmpty {
+  export type PropsInput = ControllerLayoutEmptyProps;
 }
 /** components: end */
 /** config: begin */
