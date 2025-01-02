@@ -48,7 +48,7 @@ export class CliToolsMetadata extends BeanCliBase {
     if (!module) throw new Error(`module not found: ${moduleName}`);
     const modulePath = module.root;
     const metaDir = path.join(modulePath, 'src/.metadata');
-    const metaIndexFile = path.join(metaDir, 'index.ts');
+    const metaIndexFile = path.join(metaDir, 'index.tsx');
     if (fse.existsSync(metaIndexFile) && !force) {
       // do nothing
       return;
