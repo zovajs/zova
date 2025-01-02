@@ -11,11 +11,12 @@ export interface IDecoratorBeanOptionsBase<T = unknown, OPTIONS = unknown> {
    */
   beanFullName: string;
   module: string;
-  scene?: TypeDecoratorBeanOptionsSceneBase;
+  scene?: keyof IBeanSceneRecord;
   name: string;
   beanClass: Constructable<T>;
   containerScope?: ContainerScope;
   markReactive?: boolean;
+  // todo: remove
   aop?: boolean;
   aopMatch?: string | RegExp | (string | RegExp)[];
   virtual?: boolean;
@@ -26,70 +27,13 @@ export interface IDecoratorBeanOptionsBase<T = unknown, OPTIONS = unknown> {
   __aopChainsKey__: Record<string, [MetadataKey, string][]>;
 }
 
-export interface IDecoratorBeanOptions {
-  scene?: TypeDecoratorBeanOptionsScene;
-  name?: string;
-  containerScope?: ContainerScope;
-  markReactive?: boolean;
-}
-
 export interface IDecoratorBeanInfoOptions {
   module: string;
   hash: string;
 }
 
-export type IDecoratorVirtualOptions = IDecoratorBeanOptions;
-
-export interface IDecoratorLocalOptions {
-  containerScope?: ContainerScope;
-  markReactive?: boolean;
-}
-
+// todo: remove
 export interface IDecoratorAopOptions {
   name?: string;
   match: string | RegExp | (string | RegExp)[];
-}
-
-export interface IDecoratorScopeOptions {}
-
-export interface IDecoratorStoreOptions {
-  scene?: TypeDecoratorBeanOptionsScene;
-  name?: string;
-  markReactive?: boolean;
-}
-
-export interface IDecoratorModelOptions {
-  scene?: TypeDecoratorBeanOptionsScene;
-  name?: string;
-  markReactive?: boolean;
-}
-
-export interface IDecoratorServiceOptions {
-  scene?: TypeDecoratorBeanOptionsScene;
-  name?: string;
-  markReactive?: boolean;
-}
-
-export interface IDecoratorStyleOptions {
-  scene?: TypeDecoratorBeanOptionsScene;
-  name?: string;
-  markReactive?: boolean;
-}
-
-export interface IDecoratorThemeOptions {
-  scene?: TypeDecoratorBeanOptionsScene;
-  name?: string;
-  markReactive?: boolean;
-}
-
-export interface IDecoratorThemeHandlerOptions {
-  scene?: TypeDecoratorBeanOptionsScene;
-  name?: string;
-  markReactive?: boolean;
-}
-
-export interface IDecoratorToolOptions {
-  scene?: TypeDecoratorBeanOptionsScene;
-  name?: string;
-  markReactive?: boolean;
 }

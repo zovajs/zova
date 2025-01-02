@@ -1,21 +1,20 @@
-import { TypeDecoratorBeanOptionsSceneBase } from '../decorator/interface/beanOptions.js';
+import { IBeanSceneRecord } from '../decorator/interface/beanOptions.js';
 
 /** bean merge: bean.instance */
 export interface IBeanRecord {}
 export type TypeBeanRecordKeys = keyof IBeanRecord;
 
-export type TypeBeanRecordSelector<SCENE extends TypeDecoratorBeanOptionsSceneBase> = {
+export type TypeBeanRecordSelector<SCENE extends keyof IBeanSceneRecord> = {
   [K in keyof IBeanRecord as K extends `${string}.${SCENE}.${string}` ? K : never]: IBeanRecord[K];
 };
-export type TypeBeanRecordSelectorKeys<SCENE extends TypeDecoratorBeanOptionsSceneBase> =
-  keyof TypeBeanRecordSelector<SCENE>;
+export type TypeBeanRecordSelectorKeys<SCENE extends keyof IBeanSceneRecord> = keyof TypeBeanRecordSelector<SCENE>;
 
-export type TypeBeanRecordSelectorSpecificName<SCENE extends TypeDecoratorBeanOptionsSceneBase, NAME extends string> = {
+export type TypeBeanRecordSelectorSpecificName<SCENE extends keyof IBeanSceneRecord, NAME extends string> = {
   [K in keyof IBeanRecord as K extends `${string}.${SCENE}.${NAME}` ? K : never]: IBeanRecord[K];
 };
 
 export type TypeBeanRecordSelectorSpecificNameKeys<
-  SCENE extends TypeDecoratorBeanOptionsSceneBase,
+  SCENE extends keyof IBeanSceneRecord,
   NAME extends string,
 > = keyof TypeBeanRecordSelectorSpecificName<SCENE, NAME>;
 

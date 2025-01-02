@@ -66,7 +66,7 @@ export class AppResource extends BeanSimple {
     const beanOptions = {
       ...options,
       module,
-      scene,
+      scene: scene as keyof IBeanRecord,
       name,
       beanFullName,
       moduleBelong,
