@@ -362,6 +362,11 @@ export class BeanContainer {
     if (beanComposable) {
       return appResource.getBeanFullNameOfComposable(beanComposable);
     }
+    // check beanFullName: for app controller/render
+    if (!beanFullName) {
+      // not found
+      return undefined;
+    }
     // bean options
     const beanOptions = await this._getBeanOptionsForce(beanFullName);
     if (!beanOptions) {

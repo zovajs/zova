@@ -1,12 +1,11 @@
 import { App, getCurrentInstance } from 'vue';
-import { BeanControllerPageBase, Local, PluginZova, ZovaApplication } from 'zova';
+import { BeanControllerPageBase, PluginZova, ZovaApplication } from 'zova';
 import { locales } from '../../src/front/config/locales.js';
 <%=appMonkey?"import { AppMonkey } from '../../src/front/config/monkey.js';":''%>
 <%=legacy?"import { routes as legacyRoutes } from '../../src/legacy/routes.js';":''%>
 import config from '../config.js';
 import { modulesMeta } from '../modules-meta.js';
 
-@Local()
 export class ControllerPageApp extends BeanControllerPageBase {
   protected async __init__() {
     // app
