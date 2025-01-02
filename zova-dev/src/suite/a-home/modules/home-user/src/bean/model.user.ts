@@ -1,5 +1,5 @@
-import { Model, Use } from 'zova';
-import { BeanModelBase } from 'zova-module-a-model';
+import { Use } from 'zova';
+import { BeanModelBase, Model } from 'zova-module-a-model';
 import { ModelAuth } from 'zova-module-home-user';
 import { ServiceUserEntity } from '../service/user.js';
 

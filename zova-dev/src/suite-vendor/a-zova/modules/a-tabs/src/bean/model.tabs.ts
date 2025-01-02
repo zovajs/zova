@@ -1,5 +1,5 @@
-import { Model, useComputed } from 'zova';
-import { BeanModelBase, UseQueryOptions } from 'zova-module-a-model';
+import { useComputed } from 'zova';
+import { BeanModelBase, Model, UseQueryOptions } from 'zova-module-a-model';
 import { watch } from 'vue';
 import { mutate } from 'mutate-on-copy';
 

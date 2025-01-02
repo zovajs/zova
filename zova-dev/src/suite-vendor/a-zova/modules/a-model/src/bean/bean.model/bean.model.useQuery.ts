@@ -13,7 +13,7 @@ import { UnwrapNestedRefs } from 'vue';
 import { deepExtend, useCustomRef } from 'zova';
 import { DefinedInitialQueryOptions, UndefinedInitialQueryOptions } from '../../common/types.js';
 import { BeanModelQuery } from './bean.model.query.js';
-import { resolveStaleTime } from '../../types.js';
+import { resolveStaleTime } from '../../types/index.js';
 
 const SymbolUseQueries = Symbol('SymbolUseQueries');
 

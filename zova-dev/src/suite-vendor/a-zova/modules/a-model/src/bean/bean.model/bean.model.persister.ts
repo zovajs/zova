@@ -1,4 +1,4 @@
-import { QueryMetaPersister, resolveMaxAgeTime } from '../../types.js';
+import { QueryMetaPersister, resolveMaxAgeTime } from '../../types/index.js';
 import { experimental_createPersister } from '@tanstack/query-persist-client-core';
 import { Query, QueryKey } from '@tanstack/vue-query';
 import localforage from 'localforage';

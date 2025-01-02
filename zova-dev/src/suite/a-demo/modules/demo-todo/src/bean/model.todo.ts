@@ -1,5 +1,4 @@
-import { Model } from 'zova';
-import { BeanModelBase } from 'zova-module-a-model';
+import { BeanModelBase, Model } from 'zova-module-a-model';
 import {
   ServiceTodoDeleteParams,
   ServiceTodoGetParams,

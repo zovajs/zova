@@ -1,6 +1,5 @@
 export * from './createBeanDecorator.js';
 export * from './beanInfo.js';
-export * from './model.js';
 export * from './service.js';
 export * from './style.js';
 export * from './theme.js';
