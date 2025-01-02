@@ -7,7 +7,7 @@
     ".": {
       "types": [
         "./src/index.tsx",
-        "./dist/index.d.tsx"
+        "./dist/index.d.ts"
       ],
       "import": "./src/index.tsx",
       "default": "./dist/index.jsx"
