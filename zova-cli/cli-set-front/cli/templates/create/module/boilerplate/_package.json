@@ -5,9 +5,9 @@
   "type": "module",
   "exports": {
     ".": {
-      "types": ["./src/index.tsx", "./dist/index.d.ts"],
-      "import": "./src/index.tsx",
-      "default": "./dist/index.jsx"
+      "types": ["./src/index.ts", "./dist/index.d.ts"],
+      "import": "./src/index.ts",
+      "default": "./dist/index.js"
     },
     "./*": "./*"
   },
