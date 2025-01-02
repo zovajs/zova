@@ -8,7 +8,7 @@ export function Service(options?: IDecoratorServiceOptions): ClassDecorator {
     appResource.addBean({
       scene: options.scene || 'service',
       name: options.name,
-      containerScope: 'ctx',
+      containerScope: 'app',
       markReactive: options.markReactive,
       beanClass: target as unknown as Constructable,
     });

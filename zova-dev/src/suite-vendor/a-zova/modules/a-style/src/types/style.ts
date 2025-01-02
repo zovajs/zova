@@ -1,6 +1,6 @@
 import { style } from 'typestyle';
 import 'zova';
-import { BeanTheme } from './bean/bean.theme.js';
+import { BeanTheme } from '../bean/bean.theme.js';
 import { IBeanRecord } from 'zova';
 declare module 'zova' {
   export interface BeanBase {
@@ -29,4 +29,12 @@ export interface IThemeHandler {
 export interface IThemeHandlerApplyParams {
   name: string;
   dark: boolean;
+}
+
+declare module 'zova' {
+  export interface IBeanSceneRecord {
+    style: never;
+    theme: never;
+    themeHandler: never;
+  }
 }
