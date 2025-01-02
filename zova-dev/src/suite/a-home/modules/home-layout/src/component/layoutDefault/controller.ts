@@ -1,18 +1,13 @@
-import { BeanControllerBase, Local, Use, UseScope, PropsBase, RequiredSome } from 'zova';
+import { BeanControllerBase, Local, Use, UseScope } from 'zova';
 import { ModelMenu } from '../../bean/model.menu.js';
 import { ModelAuth, ModelUser } from 'zova-module-home-user';
 import { ModelTabs, ModelTabsOptions, ScopeModuleATabs } from 'zova-module-a-tabs';
 
-interface Props extends PropsBase {}
+export interface ControllerLayoutDefaultProps {}
 
-interface Props {
-  controllerRef?: (ref: ControllerLayoutDefault) => void;
-  'v-slots'?: Slots;
-}
+export type ControllerLayoutDefaultEmits = {};
 
-type Emits = {};
-
-interface Slots {}
+export interface ControllerLayoutDefaultSlots {}
 
 @Local()
 export class ControllerLayoutDefault extends BeanControllerBase {
@@ -74,14 +69,4 @@ export class ControllerLayoutDefault extends BeanControllerBase {
   toggleLeftDrawer() {
     this.leftDrawerOpen = !this.leftDrawerOpen;
   }
-}
-
-export interface ControllerLayoutDefault {
-  $props: RequiredSome<Props, keyof typeof ControllerLayoutDefault.$propsDefault>;
-  $emit: Emits;
-  $slots: Slots;
-}
-
-export namespace ControllerLayoutDefault {
-  export type PropsInput = Props;
 }

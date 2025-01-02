@@ -1,14 +1,14 @@
-import { BeanControllerBase, cast, Local, Use, RequiredSome } from 'zova';
+import { BeanControllerBase, cast, Local, Use } from 'zova';
 import { RouterViewSlotParams } from './render.jsx';
 import { RouteLocationNormalizedLoaded } from 'vue-router';
 import { nextTick } from 'vue';
 import { ModelTabs } from '../../bean/model.tabs.js';
 
-interface Slots {}
+export interface ControllerRouterViewTabsSlots {}
 
-interface Props {}
+export interface ControllerRouterViewTabsProps {}
 
-type Emits = {};
+export type ControllerRouterViewTabsEmits = {};
 
 @Local()
 export class ControllerRouterViewTabs extends BeanControllerBase {
@@ -54,19 +54,4 @@ export class ControllerRouterViewTabs extends BeanControllerBase {
     });
     return { componentKey };
   }
-}
-
-interface Props {
-  controllerRef?: (ref: ControllerRouterViewTabs) => void;
-  'v-slots'?: Slots;
-}
-
-export interface ControllerRouterViewTabs {
-  $props: RequiredSome<Props, keyof typeof ControllerRouterViewTabs.$propsDefault>;
-  $emit: Emits;
-  $slots: Slots;
-}
-
-export namespace ControllerRouterViewTabs {
-  export type PropsInput = Props;
 }

@@ -1,27 +1,12 @@
-import { BeanControllerBase, Local, PropsBase, RequiredSome } from 'zova';
+import { BeanControllerBase, Local } from 'zova';
 
-interface Props extends PropsBase {}
+export interface ControllerLayoutEmptyProps {}
 
-interface Props {
-  controllerRef?: (ref: ControllerLayoutEmpty) => void;
-  'v-slots'?: Slots;
-}
+export type ControllerLayoutEmptyEmits = {};
 
-type Emits = {};
-
-interface Slots {}
+export interface ControllerLayoutEmptySlots {}
 
 @Local()
 export class ControllerLayoutEmpty extends BeanControllerBase {
   static $propsDefault = {};
-}
-
-export interface ControllerLayoutEmpty {
-  $props: RequiredSome<Props, keyof typeof ControllerLayoutEmpty.$propsDefault>;
-  $emit: Emits;
-  $slots: Slots;
-}
-
-export namespace ControllerLayoutEmpty {
-  export type PropsInput = Props;
 }
