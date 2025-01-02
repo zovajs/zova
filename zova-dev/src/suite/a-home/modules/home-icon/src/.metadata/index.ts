@@ -266,12 +266,15 @@ declare module 'zova' {
 
 /** icons: end */
 /** scope: begin */
-import { BeanScopeBase, Scope, TypeModuleResource } from 'zova';
+import { BeanScopeBase, BeanScopeUtil } from 'zova';
+import { Scope } from 'zova';
 
 @Scope()
 export class ScopeModuleHomeIcon extends BeanScopeBase {}
 
-export interface ScopeModuleHomeIcon extends TypeModuleResource<never, never, never, never, never> {}
+export interface ScopeModuleHomeIcon {
+  util: BeanScopeUtil;
+}
 
 import 'zova';
 declare module 'zova' {
@@ -279,6 +282,7 @@ declare module 'zova' {
     'home-icon': ScopeModuleHomeIcon;
   }
 }
+
 /** scope: end */
 /** scope module: begin */
 

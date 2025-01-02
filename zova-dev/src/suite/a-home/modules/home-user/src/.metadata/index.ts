@@ -49,13 +49,17 @@ export interface IModuleService {
 }
 /** service: end */
 /** scope: begin */
-import { BeanScopeBase, Scope, TypeLocaleBase, TypeModuleResource } from 'zova';
+import { BeanScopeBase, BeanScopeUtil, TypeModuleLocales, TypeLocaleBase } from 'zova';
+import { Scope } from 'zova';
 
 @Scope()
 export class ScopeModuleHomeUser extends BeanScopeBase {}
 
-export interface ScopeModuleHomeUser
-  extends TypeModuleResource<never, never, (typeof locales)[TypeLocaleBase], never, IModuleService> {}
+export interface ScopeModuleHomeUser {
+  util: BeanScopeUtil;
+  locale: TypeModuleLocales<(typeof locales)[TypeLocaleBase]>;
+  service: IModuleService;
+}
 
 import 'zova';
 declare module 'zova' {
@@ -66,6 +70,10 @@ declare module 'zova' {
   export interface IBeanScopeLocale {
     'home-user': (typeof locales)[TypeLocaleBase];
   }
+}
+
+export function locale<K extends keyof (typeof locales)[TypeLocaleBase]>(key: K): `home-user::${K}` {
+  return `home-user::${key}`;
 }
 /** scope: end */
 /** scope module: begin */

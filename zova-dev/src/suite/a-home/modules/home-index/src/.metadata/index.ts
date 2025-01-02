@@ -14,12 +14,15 @@ export const pagePathSchemas = {};
 export const pageNameSchemas = {};
 /** pages: end */
 /** scope: begin */
-import { BeanScopeBase, Scope, TypeModuleResource } from 'zova';
+import { BeanScopeBase, BeanScopeUtil } from 'zova';
+import { Scope } from 'zova';
 
 @Scope()
 export class ScopeModuleHomeIndex extends BeanScopeBase {}
 
-export interface ScopeModuleHomeIndex extends TypeModuleResource<never, never, never, never, never> {}
+export interface ScopeModuleHomeIndex {
+  util: BeanScopeUtil;
+}
 
 import 'zova';
 declare module 'zova' {
@@ -27,6 +30,7 @@ declare module 'zova' {
     'home-index': ScopeModuleHomeIndex;
   }
 }
+
 /** scope: end */
 /** scope module: begin */
 export * from '../page/index/controller.js';

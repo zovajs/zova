@@ -20,12 +20,16 @@ export interface IModuleService {
 }
 /** service: end */
 /** scope: begin */
-import { BeanScopeBase, Scope, TypeModuleResource } from 'zova';
+import { BeanScopeBase, BeanScopeUtil } from 'zova';
+import { Scope } from 'zova';
 
 @Scope()
 export class ScopeModuleHomeApi extends BeanScopeBase {}
 
-export interface ScopeModuleHomeApi extends TypeModuleResource<never, never, never, never, IModuleService> {}
+export interface ScopeModuleHomeApi {
+  util: BeanScopeUtil;
+  service: IModuleService;
+}
 
 import 'zova';
 declare module 'zova' {
@@ -33,6 +37,7 @@ declare module 'zova' {
     'home-api': ScopeModuleHomeApi;
   }
 }
+
 /** scope: end */
 /** scope module: begin */
 export * from '../bean/bean.api.js';

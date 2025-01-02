@@ -41,12 +41,15 @@ declare module 'zova-module-a-tabs' {
 }
 /** components: end */
 /** scope: begin */
-import { BeanScopeBase, Scope, TypeModuleResource } from 'zova';
+import { BeanScopeBase, BeanScopeUtil } from 'zova';
+import { Scope } from 'zova';
 
 @Scope()
 export class ScopeModuleATabs extends BeanScopeBase {}
 
-export interface ScopeModuleATabs extends TypeModuleResource<never, never, never, never, never> {}
+export interface ScopeModuleATabs {
+  util: BeanScopeUtil;
+}
 
 import 'zova';
 declare module 'zova' {
@@ -54,6 +57,7 @@ declare module 'zova' {
     'a-tabs': ScopeModuleATabs;
   }
 }
+
 /** scope: end */
 /** scope module: begin */
 export * from '../bean/model.tabs.js';

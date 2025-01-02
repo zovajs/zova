@@ -12,12 +12,15 @@ declare module 'zova' {
 export * from '../monkey.js';
 /** monkey: end */
 /** scope: begin */
-import { BeanScopeBase, Scope, TypeModuleResource } from 'zova';
+import { BeanScopeBase, BeanScopeUtil } from 'zova';
+import { Scope } from 'zova';
 
 @Scope()
 export class ScopeModuleDevuiAdapter extends BeanScopeBase {}
 
-export interface ScopeModuleDevuiAdapter extends TypeModuleResource<never, never, never, never, never> {}
+export interface ScopeModuleDevuiAdapter {
+  util: BeanScopeUtil;
+}
 
 import 'zova';
 declare module 'zova' {
@@ -25,6 +28,7 @@ declare module 'zova' {
     'devui-adapter': ScopeModuleDevuiAdapter;
   }
 }
+
 /** scope: end */
 /** scope module: begin */
 export * from '../bean/themeHandler.default.js';

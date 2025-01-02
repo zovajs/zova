@@ -1,10 +1,13 @@
 /** scope: begin */
-import { BeanScopeBase, Scope, TypeModuleResource } from 'zova';
+import { BeanScopeBase, BeanScopeUtil } from 'zova';
+import { Scope } from 'zova';
 
 @Scope()
 export class ScopeModuleAZova extends BeanScopeBase {}
 
-export interface ScopeModuleAZova extends TypeModuleResource<never, never, never, never, never> {}
+export interface ScopeModuleAZova {
+  util: BeanScopeUtil;
+}
 
 import 'zova';
 declare module 'zova' {
@@ -12,6 +15,7 @@ declare module 'zova' {
     'a-zova': ScopeModuleAZova;
   }
 }
+
 /** scope: end */
 /** scope module: begin */
 

@@ -16,12 +16,16 @@ import { config } from '../config/config.js';
 export * from '../monkey.js';
 /** monkey: end */
 /** scope: begin */
-import { BeanScopeBase, Scope, TypeModuleResource } from 'zova';
+import { BeanScopeBase, BeanScopeUtil, TypeModuleConfig } from 'zova';
+import { Scope } from 'zova';
 
 @Scope()
 export class ScopeModuleAApi extends BeanScopeBase {}
 
-export interface ScopeModuleAApi extends TypeModuleResource<typeof config, never, never, never, never> {}
+export interface ScopeModuleAApi {
+  util: BeanScopeUtil;
+  config: TypeModuleConfig<typeof config>;
+}
 
 import 'zova';
 declare module 'zova' {
@@ -33,6 +37,7 @@ declare module 'zova' {
     'a-api': ReturnType<typeof config>;
   }
 }
+
 /** scope: end */
 /** scope module: begin */
 

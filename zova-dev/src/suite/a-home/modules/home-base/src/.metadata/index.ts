@@ -66,13 +66,16 @@ export const locales = {
 export * from '../monkey.js';
 /** monkey: end */
 /** scope: begin */
-import { BeanScopeBase, Scope, TypeLocaleBase, TypeModuleResource } from 'zova';
+import { BeanScopeBase, BeanScopeUtil, TypeModuleLocales, TypeLocaleBase } from 'zova';
+import { Scope } from 'zova';
 
 @Scope()
 export class ScopeModuleHomeBase extends BeanScopeBase {}
 
-export interface ScopeModuleHomeBase
-  extends TypeModuleResource<never, never, (typeof locales)[TypeLocaleBase], never, never> {}
+export interface ScopeModuleHomeBase {
+  util: BeanScopeUtil;
+  locale: TypeModuleLocales<(typeof locales)[TypeLocaleBase]>;
+}
 
 import 'zova';
 declare module 'zova' {
@@ -83,6 +86,10 @@ declare module 'zova' {
   export interface IBeanScopeLocale {
     'home-base': (typeof locales)[TypeLocaleBase];
   }
+}
+
+export function locale<K extends keyof (typeof locales)[TypeLocaleBase]>(key: K): `home-base::${K}` {
+  return `home-base::${key}`;
 }
 /** scope: end */
 /** scope module: begin */
