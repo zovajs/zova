@@ -1,5 +1,5 @@
-import { BeanBase, ThemeHandler } from 'zova';
-import { IThemeHandler, IThemeHandlerApplyParams } from 'zova-module-a-style';
+import { BeanBase } from 'zova';
+import { IThemeHandler, IThemeHandlerApplyParams, ThemeHandler } from 'zova-module-a-style';
 
 const __Themes = { 'demo-basic.theme.orange': 'orange', 'home-base.theme.default': '' };
 

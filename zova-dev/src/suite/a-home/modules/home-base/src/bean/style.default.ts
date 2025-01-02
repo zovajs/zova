@@ -1,4 +1,5 @@
-import { BeanBase, Style, useComputed } from 'zova';
+import { BeanBase, useComputed } from 'zova';
+import { Style } from 'zova-module-a-style';
 
 @Style()
 export class StyleDefault extends BeanBase {

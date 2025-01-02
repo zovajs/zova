@@ -1,5 +1,5 @@
-import { BeanBase, Theme } from 'zova';
-import { IThemeApplyParams, IThemeApplyResult, IThemeBase } from 'zova-module-a-style';
+import { BeanBase } from 'zova';
+import { IThemeApplyParams, IThemeApplyResult, IThemeBase, Theme } from 'zova-module-a-style';
 import { ThemeToken } from 'zova-module-home-base';
 
 @Theme()

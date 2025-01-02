@@ -7,3 +7,7 @@ export function Style(): ClassDecorator {
 export function Theme(): ClassDecorator {
   return createBeanDecorator('theme', 'app');
 }
+
+export function ThemeHandler(): ClassDecorator {
+  return createBeanDecorator('themeHandler', 'app');
+}

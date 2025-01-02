@@ -1,5 +1,5 @@
 import { cast, IBeanRecord } from 'zova';
-import { IThemeBase, IThemeHandler } from '../types.js';
+import { IThemeBase, IThemeHandler } from '../types/index.js';
 import { BeanModelBase } from 'zova-module-a-model';
 import { watch } from 'vue';
 import { Bean } from 'zova-module-a-bean';
