@@ -1,5 +1,4 @@
-import { Service } from 'zova';
-import { BeanServiceBase } from 'zova-module-a-api';
+import { BeanServiceBase, Service } from 'zova-module-a-api';
 
 export interface ServiceMenuEntity {
   title?: string;

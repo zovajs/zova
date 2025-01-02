@@ -1,5 +1,4 @@
-import { Service } from 'zova';
-import { BeanServiceBase, IApiServiceActionOptions } from 'zova-module-a-api';
+import { BeanServiceBase, IApiServiceActionOptions, Service } from 'zova-module-a-api';
 import { ApiBaseURL, type paths } from './openapi/index.js';
 
 /** Home_index */
