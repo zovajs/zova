@@ -7,21 +7,45 @@ export interface GenerateScopeOptions {
   services: string;
 }
 export async function generateScope(moduleName: string, relativeNameCapitalize: string, options: GenerateScopeOptions) {
+  const contentImports: string[] = [];
+  const contentRecords: string[] = [];
+  // basic
+  contentImports.push('BeanScopeBase');
+  // util
+  contentImports.push('BeanScopeUtil');
+  contentRecords.push('util: BeanScopeUtil;');
+  //
+  if (options.config) {
+    contentImports.push('TypeModuleConfig');
+    contentRecords.push('config: TypeModuleConfig<typeof config>;');
+  }
+  if (options.errors) {
+    contentImports.push('TypeModuleErrors');
+    contentRecords.push('error: TypeModuleErrors<typeof Errors>;');
+  }
+  if (options.locales) {
+    contentImports.push('TypeModuleLocales');
+    contentImports.push('TypeLocaleBase');
+    contentRecords.push('locale: TypeModuleLocales<(typeof locales)[TypeLocaleBase]>;');
+  }
+  if (options.constants) {
+    contentImports.push('TypeModuleConstants');
+    contentRecords.push('constant: TypeModuleConstants<typeof constants>;');
+  }
+  if (options.services) {
+    contentRecords.push('service: IModuleService;');
+  }
   // combine
   const content = `/** scope: begin */
-import { BeanScopeBase, Scope, ${options.locales ? 'TypeLocaleBase,' : ''} TypeModuleResource } from 'zova';
+import { ${contentImports.join(', ')} } from 'zova';
+import { Scope } from '${moduleName === 'a-bean' ? '../lib/scope.js' : 'zova'}';
 
 @Scope()
 export class ScopeModule${relativeNameCapitalize} extends BeanScopeBase {}
 
-export interface ScopeModule${relativeNameCapitalize}
-  extends TypeModuleResource<
-    ${options.config ? 'typeof config' : 'never'},
-    ${options.errors ? 'typeof Errors' : 'never'},
-    ${options.locales ? '(typeof locales)[TypeLocaleBase]' : 'never'},
-    ${options.constants ? 'typeof constants' : 'never'},
-    ${options.services ? 'IModuleService' : 'never'},
-  > {}
+export interface ScopeModule${relativeNameCapitalize} {
+  ${contentRecords.join('\n')}
+}
 
 import 'zova';
 declare module 'zova' {
@@ -45,6 +69,13 @@ declare module 'zova' {
       : ''
   }
 }
+${
+  options.locales
+    ? `\nexport function locale<K extends keyof (typeof locales)[TypeLocaleBase]>(key: K): \`${moduleName}::\${K}\` {
+  return \`${moduleName}::\${key}\`;
+}`
+    : ''
+}  
 /** scope: end */
 `;
   return content;

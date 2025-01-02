@@ -109,13 +109,16 @@ export const locales = {
 };
 /** locale: end */
 /** scope: begin */
-import { BeanScopeBase, Scope, TypeLocaleBase, TypeModuleResource } from 'zova';
+import { BeanScopeBase, BeanScopeUtil, TypeModuleLocales, TypeLocaleBase } from 'zova';
+import { Scope } from 'zova';
 
 @Scope()
 export class ScopeModuleDemoBasic extends BeanScopeBase {}
 
-export interface ScopeModuleDemoBasic
-  extends TypeModuleResource<never, never, (typeof locales)[TypeLocaleBase], never, never> {}
+export interface ScopeModuleDemoBasic {
+  util: BeanScopeUtil;
+  locale: TypeModuleLocales<(typeof locales)[TypeLocaleBase]>;
+}
 
 import 'zova';
 declare module 'zova' {
@@ -126,6 +129,10 @@ declare module 'zova' {
   export interface IBeanScopeLocale {
     'demo-basic': (typeof locales)[TypeLocaleBase];
   }
+}
+
+export function locale<K extends keyof (typeof locales)[TypeLocaleBase]>(key: K): `demo-basic::${K}` {
+  return `demo-basic::${key}`;
 }
 /** scope: end */
 /** scope module: begin */

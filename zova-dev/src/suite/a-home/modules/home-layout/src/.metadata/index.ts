@@ -100,13 +100,18 @@ export interface IModuleService {
 }
 /** service: end */
 /** scope: begin */
-import { BeanScopeBase, Scope, TypeLocaleBase, TypeModuleResource } from 'zova';
+import { BeanScopeBase, BeanScopeUtil, TypeModuleConfig, TypeModuleLocales, TypeLocaleBase } from 'zova';
+import { Scope } from 'zova';
 
 @Scope()
 export class ScopeModuleHomeLayout extends BeanScopeBase {}
 
-export interface ScopeModuleHomeLayout
-  extends TypeModuleResource<typeof config, never, (typeof locales)[TypeLocaleBase], never, IModuleService> {}
+export interface ScopeModuleHomeLayout {
+  util: BeanScopeUtil;
+  config: TypeModuleConfig<typeof config>;
+  locale: TypeModuleLocales<(typeof locales)[TypeLocaleBase]>;
+  service: IModuleService;
+}
 
 import 'zova';
 declare module 'zova' {
@@ -121,6 +126,10 @@ declare module 'zova' {
   export interface IBeanScopeLocale {
     'home-layout': (typeof locales)[TypeLocaleBase];
   }
+}
+
+export function locale<K extends keyof (typeof locales)[TypeLocaleBase]>(key: K): `home-layout::${K}` {
+  return `home-layout::${key}`;
 }
 /** scope: end */
 /** scope module: begin */

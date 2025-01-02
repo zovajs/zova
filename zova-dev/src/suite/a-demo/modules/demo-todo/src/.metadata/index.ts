@@ -44,12 +44,16 @@ export interface IModuleService {
 }
 /** service: end */
 /** scope: begin */
-import { BeanScopeBase, Scope, TypeModuleResource } from 'zova';
+import { BeanScopeBase, BeanScopeUtil } from 'zova';
+import { Scope } from 'zova';
 
 @Scope()
 export class ScopeModuleDemoTodo extends BeanScopeBase {}
 
-export interface ScopeModuleDemoTodo extends TypeModuleResource<never, never, never, never, IModuleService> {}
+export interface ScopeModuleDemoTodo {
+  util: BeanScopeUtil;
+  service: IModuleService;
+}
 
 import 'zova';
 declare module 'zova' {
@@ -57,6 +61,7 @@ declare module 'zova' {
     'demo-todo': ScopeModuleDemoTodo;
   }
 }
+
 /** scope: end */
 /** scope module: begin */
 export * from '../bean/model.todo.js';
