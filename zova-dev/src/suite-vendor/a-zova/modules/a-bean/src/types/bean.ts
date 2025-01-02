@@ -1,4 +1,5 @@
-declare module 'vona' {
+export {};
+declare module 'zova' {
   export interface IBeanSceneRecord {
     bean: never;
   }

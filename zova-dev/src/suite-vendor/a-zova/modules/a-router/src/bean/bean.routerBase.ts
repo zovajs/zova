@@ -1,5 +1,6 @@
-import { BeanBase, TypeEventOff, Virtual } from 'zova';
+import { BeanBase, TypeEventOff } from 'zova';
 import { BeanRouter } from './bean.router.js';
+import { Virtual } from 'zova-module-a-bean';
 
 @Virtual()
 export class BeanRouterBase extends BeanBase {

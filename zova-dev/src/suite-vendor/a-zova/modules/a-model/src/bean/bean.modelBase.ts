@@ -1,4 +1,4 @@
-import { Virtual } from 'zova';
+import { Virtual } from 'zova-module-a-bean';
 import { BeanModelFirst } from './bean.model/bean.model.first.js';
 
 @Virtual()

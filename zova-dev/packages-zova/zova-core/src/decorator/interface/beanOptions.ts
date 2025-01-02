@@ -2,6 +2,8 @@ import { MetadataKey } from '../../core/metadata.js';
 import { Constructable } from '../index.js';
 import { ContainerScope } from '../index.js';
 
+export interface IBeanSceneRecord {}
+
 // todo: remove
 export type TypeDecoratorBeanOptionsSceneBase = 'local' | 'aop' | 'virtual' | 'scope' | TypeDecoratorBeanOptionsScene;
 // containerScope: store(app) model(ctx)
@@ -15,7 +17,7 @@ export type TypeDecoratorBeanOptionsScene =
   | 'themeHandler'
   | 'tool'; // | 'ui' | 'event';
 
-export interface IDecoratorBeanOptionsBase<T = unknown> {
+export interface IDecoratorBeanOptionsBase<T = unknown, OPTIONS = unknown> {
   /**
    * global: module.scene.name
    * others: undefined: use beanClass
@@ -31,7 +33,8 @@ export interface IDecoratorBeanOptionsBase<T = unknown> {
   aopMatch?: string | RegExp | (string | RegExp)[];
   virtual?: boolean;
   moduleBelong?: string;
-  options?: unknown;
+  options?: OPTIONS;
+  optionsPrimitive?: boolean;
   __aopChains__: MetadataKey[];
   __aopChainsKey__: Record<string, [MetadataKey, string][]>;
 }

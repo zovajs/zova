@@ -1,7 +1,8 @@
-import { Bean, BeanBase, Use } from 'zova';
+import { BeanBase, Use } from 'zova';
 import axios, { AxiosInstance } from 'axios';
 import { markRaw } from 'vue';
 import { ModelAuth } from 'zova-module-home-user';
+import { Bean } from 'zova-module-a-bean';
 
 const SymbolApi = Symbol('SymbolApi');
 

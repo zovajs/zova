@@ -1,4 +1,5 @@
-import { BeanBase, Virtual } from 'zova';
+import { BeanBase } from 'zova';
+import { Virtual } from 'zova-module-a-bean';
 
 @Virtual()
 export class BeanServiceBase extends BeanBase {

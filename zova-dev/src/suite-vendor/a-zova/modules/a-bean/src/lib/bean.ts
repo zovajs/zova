@@ -1,5 +1,5 @@
-import { createBeanDecorator } from 'vona';
+import { createBeanDecorator } from 'zova';
 
 export function Bean(): ClassDecorator {
-  return createBeanDecorator('bean');
+  return createBeanDecorator('bean', 'ctx');
 }

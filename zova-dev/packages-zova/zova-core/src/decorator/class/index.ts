@@ -1,8 +1,7 @@
-export * from './bean.js';
+export * from './createBeanDecorator.js';
 export * from './beanInfo.js';
 export * from './model.js';
 export * from './local.js';
-export * from './scope.js';
 export * from './service.js';
 export * from './store.js';
 export * from './style.js';
@@ -12,4 +11,3 @@ export * from './tool.js';
 export * from './use.js';
 export * from './useComposable.js';
 export * from './useScope.js';
-export * from './virtual.js';

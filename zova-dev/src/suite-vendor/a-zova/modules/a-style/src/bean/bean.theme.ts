@@ -1,11 +1,12 @@
-import { Bean, cast, IBeanRecord } from 'zova';
+import { cast, IBeanRecord } from 'zova';
 import { IThemeBase, IThemeHandler } from '../types.js';
 import { BeanModelBase } from 'zova-module-a-model';
 import { watch } from 'vue';
+import { Bean } from 'zova-module-a-bean';
 
 export type ThemeDarkMode = 'auto' | boolean;
 
-@Bean({ containerScope: 'app' })
+@Bean()
 export class BeanTheme extends BeanModelBase {
   name: keyof IBeanRecord;
   darkMode: ThemeDarkMode; // auto/true/false
