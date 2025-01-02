@@ -1,2 +1,2 @@
 export const __ThisModule__ = 'a-pinia';
-export { ScopeModuleAPinia as ScopeModule } from './index.jsx';
+export { ScopeModuleAPinia as ScopeModule } from './index.js';

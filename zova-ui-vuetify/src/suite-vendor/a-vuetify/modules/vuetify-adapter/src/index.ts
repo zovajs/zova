@@ -1,3 +1,3 @@
-export * from './.metadata/index.jsx';
+export * from './.metadata/index.js';
 export * from './types.js';
 import './typings.js';

@@ -1,2 +1,2 @@
 export const __ThisModule__ = 'element-adapter';
-export { ScopeModuleElementAdapter as ScopeModule } from './index.jsx';
+export { ScopeModuleElementAdapter as ScopeModule } from './index.js';

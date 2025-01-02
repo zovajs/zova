@@ -1,2 +1,2 @@
 export const __ThisModule__ = 'a-router';
-export { ScopeModuleARouter as ScopeModule } from './index.jsx';
+export { ScopeModuleARouter as ScopeModule } from './index.js';
