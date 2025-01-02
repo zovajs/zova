@@ -160,6 +160,8 @@ declare module 'zova-module-demo-basic' {
     get scope(): ScopeModuleDemoBasic;
   }
 
+  
+
   export interface RenderCard {
     /** @internal */
     get scope(): ScopeModuleDemoBasic;

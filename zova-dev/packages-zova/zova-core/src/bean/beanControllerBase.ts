@@ -27,7 +27,6 @@ export class BeanControllerBase extends BeanBase {
     this.$emit = controllerData.context.emit;
     this.$attrs = controllerData.context.attrs as Data;
     this.$slots = useRef(() => {
-      // todo: remove $props.slots
       const propSlots = cast(this.$props).slots;
       const contextSlots = controllerData.context.slots;
       if (!propSlots) {
