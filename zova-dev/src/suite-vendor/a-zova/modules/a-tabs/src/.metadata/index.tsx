@@ -13,7 +13,6 @@ import { RequiredSome } from 'zova';
 export * from '../component/routerViewTabs/controller.js';
 import {
   ControllerRouterViewTabs,
-  ControllerRouterViewTabsProps,
   ControllerRouterViewTabsEmits,
   ControllerRouterViewTabsSlots,
 } from '../component/routerViewTabs/controller.js';
@@ -39,9 +38,6 @@ declare module 'zova-module-a-tabs' {
     $emit: ControllerRouterViewTabsEmits;
     $slots: ControllerRouterViewTabsSlots;
   }
-}
-export namespace NSControllerRouterViewTabs {
-  export type PropsInput = ControllerRouterViewTabsProps;
 }
 /** components: end */
 /** scope: begin */

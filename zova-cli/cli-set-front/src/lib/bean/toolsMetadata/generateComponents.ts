@@ -13,7 +13,6 @@ export async function generateComponents(moduleName: string, modulePath: string)
   const contentComponents: string[] = [];
   const contentRecords: string[] = [];
   const contentRecords2: string[] = [];
-  const contentRecords3: string[] = [];
   for (const file of files) {
     const componentName = path.basename(file.substring(0, file.length - '/index.vue'.length));
     const className = 'Controller' + toUpperCaseFirstChar(componentName);
@@ -21,7 +20,7 @@ export async function generateComponents(moduleName: string, modulePath: string)
     const componentName2 = 'Z' + firstCharToUpperCase(componentName);
     contentExports.push(`export * from '../component/${componentName}/controller.js';`);
     contentImports.push(
-      `import { ${className}, ${className}Props, ${className}Emits, ${className}Slots } from '../component/${componentName}/controller.js';`,
+      `import { ${className}, ${className}Emits, ${className}Slots } from '../component/${componentName}/controller.js';`,
     );
     contentImports2.push(`export { default as ${componentName2} } from '../component/${componentName}/index.vue';`);
     contentImports2.push(`import ${componentName2} from '../component/${componentName}/index.vue';`);
@@ -36,9 +35,6 @@ export interface ${className} {
   $props: RequiredSome<${className}Props, keyof typeof ${className}.$propsDefault>;
   $emit: ${className}Emits;
   $slots: ${className}Slots;
-}`);
-    contentRecords3.push(`export namespace NS${className} {
-  export type PropsInput = ${className}Props;      
 }`);
   }
   // combine
@@ -57,8 +53,7 @@ export interface IComponentRecord {
 }
 declare module 'zova-module-${moduleName}' {
   ${contentRecords2.join('\n')} 
-}
-${contentRecords3.join('\n')}   
+}  
 /** components: end */
 `;
   if (content.includes('RequiredSome')) {

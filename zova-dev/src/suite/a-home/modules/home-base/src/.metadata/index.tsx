@@ -14,12 +14,7 @@ declare module 'zova' {
 import { RequiredSome } from 'zova';
 /** components: begin */
 export * from '../component/page/controller.js';
-import {
-  ControllerPage,
-  ControllerPageProps,
-  ControllerPageEmits,
-  ControllerPageSlots,
-} from '../component/page/controller.js';
+import { ControllerPage, ControllerPageEmits, ControllerPageSlots } from '../component/page/controller.js';
 export { default as ZPage } from '../component/page/index.vue';
 import ZPage from '../component/page/index.vue';
 export const components = {
@@ -42,9 +37,6 @@ declare module 'zova-module-home-base' {
     $emit: ControllerPageEmits;
     $slots: ControllerPageSlots;
   }
-}
-export namespace NSControllerPage {
-  export type PropsInput = ControllerPageProps;
 }
 /** components: end */
 /** pages: begin */

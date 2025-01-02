@@ -15,19 +15,16 @@ export * from '../component/layoutDefault/controller.js';
 export * from '../component/layoutEmpty/controller.js';
 import {
   ControllerEssentialLink,
-  ControllerEssentialLinkProps,
   ControllerEssentialLinkEmits,
   ControllerEssentialLinkSlots,
 } from '../component/essentialLink/controller.js';
 import {
   ControllerLayoutDefault,
-  ControllerLayoutDefaultProps,
   ControllerLayoutDefaultEmits,
   ControllerLayoutDefaultSlots,
 } from '../component/layoutDefault/controller.js';
 import {
   ControllerLayoutEmpty,
-  ControllerLayoutEmptyProps,
   ControllerLayoutEmptyEmits,
   ControllerLayoutEmptySlots,
 } from '../component/layoutEmpty/controller.js';
@@ -81,15 +78,6 @@ declare module 'zova-module-home-layout' {
     $emit: ControllerLayoutEmptyEmits;
     $slots: ControllerLayoutEmptySlots;
   }
-}
-export namespace NSControllerEssentialLink {
-  export type PropsInput = ControllerEssentialLinkProps;
-}
-export namespace NSControllerLayoutDefault {
-  export type PropsInput = ControllerLayoutDefaultProps;
-}
-export namespace NSControllerLayoutEmpty {
-  export type PropsInput = ControllerLayoutEmptyProps;
 }
 /** components: end */
 /** config: begin */
