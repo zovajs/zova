@@ -1,0 +1,41 @@
+{
+  "name": "zova-module-a-bean",
+  "version": "5.0.0",
+  "title": "a-bean",
+  "zovaModule": {
+    "onions": {
+      "bean": {
+        "optionsNone": true,
+        "boilerplate": "cli/bean/boilerplate",
+        "metadataCustom": "cli/bean/metadata/generate.ts"
+      }
+    }
+  },
+  "type": "module",
+  "exports": {
+    ".": {
+      "types": [
+        "./src/index.ts",
+        "./dist/index.d.ts"
+      ],
+      "import": "./src/index.ts",
+      "default": "./dist/index.js"
+    },
+    "./*": "./*"
+  },
+  "description": "",
+  "keywords": [
+    "Zova Module"
+  ],
+  "author": "",
+  "files": [
+    "mock",
+    "dist"
+  ],
+  "scripts": {
+    "clean": "tsc -b --clean",
+    "tsc:publish": "npm run clean && tsc -b",
+    "_prepublishOnly": "npm run tsc:publish"
+  },
+  "dependencies": {}
+}
