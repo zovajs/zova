@@ -3,6 +3,7 @@ import {
   BeanBase,
   BeanContainer,
   BeanSimple,
+  cast,
   IBeanScopeRecord,
   IMonkeyAppInitialize,
   IMonkeyBeanInit,
@@ -61,7 +62,7 @@ export class Monkey extends BeanSimple implements IMonkeyAppInitialize, IMonkeyM
       enumerable: false,
       configurable: true,
       get() {
-        return self.app.bean.scope(self._defaultModuleService).service;
+        return cast(self.app.bean.scope(self._defaultModuleService)).service;
       },
     });
   }
