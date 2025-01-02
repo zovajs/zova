@@ -1,6 +1,6 @@
-import { Store } from 'zova';
 import { BeanPiniaStoreBase, PiniaStore } from 'zova-module-a-pinia';
 import { useCounterStore } from './counterStore.js';
+import { Store } from 'zova-module-a-bean';
 
 export interface StoreCounter extends PiniaStore<typeof useCounterStore> {}
 

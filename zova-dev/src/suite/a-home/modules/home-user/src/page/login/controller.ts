@@ -1,4 +1,5 @@
-import { BeanControllerPageBase, Local, Use, zz } from 'zova';
+import { BeanControllerPageBase, Use, zz } from 'zova';
+import { Local } from 'zova-module-a-bean';
 import { ModelAuth } from '../../bean/model.auth.js';
 import { ServiceAuthLoginParams } from '../../service/auth.js';
 

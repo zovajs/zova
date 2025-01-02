@@ -1,4 +1,5 @@
-import { BeanRenderBase, Local } from 'zova';
+import { BeanRenderBase } from 'zova';
+import { Local } from 'zova-module-a-bean';
 import type { ControllerLayoutEmpty } from './controller.js';
 import { RouterView } from 'vue-router';
 

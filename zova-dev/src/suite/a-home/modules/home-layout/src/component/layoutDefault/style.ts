@@ -1,4 +1,5 @@
-import { BeanStyleBase, Local } from 'zova';
+import { BeanStyleBase } from 'zova';
+import { Local } from 'zova-module-a-bean';
 import type { ControllerLayoutDefault } from './controller.js';
 
 export interface StyleLayoutDefault extends ControllerLayoutDefault {}

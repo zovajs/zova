@@ -1,4 +1,5 @@
-import { BeanRenderBase, ZovaIcon, Local } from 'zova';
+import { BeanRenderBase, ZovaIcon } from 'zova';
+import { Local } from 'zova-module-a-bean';
 import type { ControllerEssentialLink } from './controller.js';
 import { RouterLink } from 'vue-router';
 

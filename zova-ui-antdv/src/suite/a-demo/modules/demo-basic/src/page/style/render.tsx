@@ -1,4 +1,5 @@
-import { BeanRenderBase, Local, getBeanName } from 'zova';
+import { BeanRenderBase, getBeanName } from 'zova';
+import { Local } from 'zova-module-a-bean';
 import type { StyleStyle } from './style.js';
 import { ScopeModule } from '../../.metadata/this.js';
 import { Button, Radio, RadioGroup } from 'ant-design-vue';

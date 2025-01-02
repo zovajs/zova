@@ -1,4 +1,5 @@
-import { BeanStyleBase, Local } from 'zova';
+import { BeanStyleBase } from 'zova';
+import { Local } from 'zova-module-a-bean';
 import type { ControllerPageIndex } from './controller.js';
 
 export interface StyleIndex extends ControllerPageIndex {}

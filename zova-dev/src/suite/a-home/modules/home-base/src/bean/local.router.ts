@@ -1,4 +1,5 @@
-import { Local, Use } from 'zova';
+import { Use } from 'zova';
+import { Local } from 'zova-module-a-bean';
 import { BeanRouter, BeanRouterBase } from 'zova-module-a-router';
 import { ModelAuth } from 'zova-module-home-user';
 

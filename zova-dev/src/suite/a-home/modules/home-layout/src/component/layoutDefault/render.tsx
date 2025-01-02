@@ -1,4 +1,5 @@
-import { BeanRenderBase, Local, Use } from 'zova';
+import { BeanRenderBase, Use } from 'zova';
+import { Local } from 'zova-module-a-bean';
 import type { StyleLayoutDefault } from './style.js';
 import { RenderTabs } from './renderTabs.jsx';
 import { RenderTheme } from './renderTheme.jsx';

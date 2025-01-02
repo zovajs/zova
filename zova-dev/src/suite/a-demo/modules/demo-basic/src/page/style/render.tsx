@@ -1,4 +1,5 @@
-import { BeanRenderBase, Local, getBeanName, useComputed } from 'zova';
+import { BeanRenderBase, getBeanName, useComputed } from 'zova';
+import { Local } from 'zova-module-a-bean';
 import type { StyleStyle } from './style.js';
 import { ZPage } from 'zova-module-home-base';
 

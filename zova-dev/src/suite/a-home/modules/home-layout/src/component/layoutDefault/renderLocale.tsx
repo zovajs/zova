@@ -1,4 +1,5 @@
-import { BeanRenderBase, Local, iconh } from 'zova';
+import { BeanRenderBase, iconh } from 'zova';
+import { Local } from 'zova-module-a-bean';
 import { StyleLayoutDefault } from './style.js';
 
 export interface RenderLocale extends StyleLayoutDefault {}

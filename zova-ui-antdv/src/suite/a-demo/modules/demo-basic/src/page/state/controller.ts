@@ -1,4 +1,5 @@
-import { BeanControllerPageBase, Local, useComputed } from 'zova';
+import { BeanControllerPageBase, useComputed } from 'zova';
+import { Local } from 'zova-module-a-bean';
 
 @Local()
 export class ControllerPageState extends BeanControllerPageBase {

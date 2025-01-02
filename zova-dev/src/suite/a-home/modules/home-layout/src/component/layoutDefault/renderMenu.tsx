@@ -1,4 +1,5 @@
-import { BeanRenderBase, Local } from 'zova';
+import { BeanRenderBase } from 'zova';
+import { Local } from 'zova-module-a-bean';
 import { StyleLayoutDefault } from './style.js';
 import { __ThisModule__ } from '../../.metadata/this.js';
 import EssentialLink from '../essentialLink/index.vue';

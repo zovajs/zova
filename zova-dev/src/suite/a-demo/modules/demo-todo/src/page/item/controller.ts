@@ -1,4 +1,5 @@
-import { BeanControllerPageBase, Local, Use, useComputed, zz } from 'zova';
+import { BeanControllerPageBase, Use, useComputed, zz } from 'zova';
+import { Local } from 'zova-module-a-bean';
 import { ModelTodo } from '../../bean/model.todo.js';
 import { ServiceTodoGetParams } from '../../service/todo.js';
 

@@ -1,4 +1,5 @@
-import { BeanBase, deepExtend, Local } from 'zova';
+import { BeanBase, deepExtend } from 'zova';
+import { Local } from 'zova-module-a-bean';
 import { dehydrate, hydrate, QueryClient, VueQueryPlugin, VueQueryPluginOptions } from '@tanstack/vue-query';
 
 @Local()

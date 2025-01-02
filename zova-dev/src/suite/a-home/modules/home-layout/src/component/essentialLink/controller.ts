@@ -1,4 +1,5 @@
-import { BeanControllerBase, Local } from 'zova';
+import { BeanControllerBase } from 'zova';
+import { Local } from 'zova-module-a-bean';
 
 export interface ControllerEssentialLinkProps {
   title: string;

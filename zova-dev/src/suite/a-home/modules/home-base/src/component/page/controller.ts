@@ -1,4 +1,5 @@
-import { BeanControllerBase, Local } from 'zova';
+import { BeanControllerBase } from 'zova';
+import { Local } from 'zova-module-a-bean';
 import { JSX } from 'vue/jsx-runtime';
 
 export interface ControllerPageProps {}

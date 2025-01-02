@@ -1,4 +1,5 @@
-import { BeanControllerBase, cast, Local, Use } from 'zova';
+import { BeanControllerBase, cast, Use } from 'zova';
+import { Local } from 'zova-module-a-bean';
 import { RouterViewSlotParams } from './render.jsx';
 import { RouteLocationNormalizedLoaded } from 'vue-router';
 import { nextTick } from 'vue';

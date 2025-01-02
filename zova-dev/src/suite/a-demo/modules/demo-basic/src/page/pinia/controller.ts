@@ -1,4 +1,5 @@
-import { BeanControllerPageBase, Local, Use, zz } from 'zova';
+import { BeanControllerPageBase, Use, zz } from 'zova';
+import { Local } from 'zova-module-a-bean';
 import { StoreCounter } from '../../bean/store.counter.js';
 
 const ParamsSchema = zz.object({});

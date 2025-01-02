@@ -1,4 +1,5 @@
-import { BeanControllerPageBase, Local, zz } from 'zova';
+import { BeanControllerPageBase, zz } from 'zova';
+import { Local } from 'zova-module-a-bean';
 import { ScopeModule } from '../../.metadata/this.js';
 
 export const ParamsSchema = zz.object({});

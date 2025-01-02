@@ -1,4 +1,5 @@
-import { BeanControllerPageBase, Local, onControllerMounted } from 'zova';
+import { BeanControllerPageBase, onControllerMounted } from 'zova';
+import { Local } from 'zova-module-a-bean';
 import { ControllerCard } from '../../.metadata/index.jsx';
 
 @Local()

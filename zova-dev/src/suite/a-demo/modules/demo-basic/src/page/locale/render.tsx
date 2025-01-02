@@ -1,4 +1,5 @@
-import { BeanRenderBase, Local } from 'zova';
+import { BeanRenderBase } from 'zova';
+import { Local } from 'zova-module-a-bean';
 import type { ControllerPageLocale } from './controller.js';
 import { ZPage } from 'zova-module-home-base';
 

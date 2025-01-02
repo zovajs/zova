@@ -1,4 +1,5 @@
-import { BeanRenderBase, Local } from 'zova';
+import { BeanRenderBase } from 'zova';
+import { Local } from 'zova-module-a-bean';
 import type { StyleTodo } from './style.js';
 import { withModifiers } from 'vue';
 import { RouterLink } from 'vue-router';

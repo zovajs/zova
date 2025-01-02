@@ -1,4 +1,5 @@
-import { BeanBase, Local } from 'zova';
+import { BeanBase } from 'zova';
+import { Local } from 'zova-module-a-bean';
 
 @Local()
 export class LocalSSR extends BeanBase {
