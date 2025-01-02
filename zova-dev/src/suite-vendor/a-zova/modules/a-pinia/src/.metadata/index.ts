@@ -13,7 +13,7 @@ export * from '../monkey.js';
 /** monkey: end */
 /** scope: begin */
 import { BeanScopeBase, BeanScopeUtil } from 'zova';
-import { Scope } from 'zova';
+import { Scope } from 'zova-module-a-bean';
 
 @Scope()
 export class ScopeModuleAPinia extends BeanScopeBase {}

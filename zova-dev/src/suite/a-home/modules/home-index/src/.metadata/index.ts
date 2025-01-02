@@ -15,7 +15,7 @@ export const pageNameSchemas = {};
 /** pages: end */
 /** scope: begin */
 import { BeanScopeBase, BeanScopeUtil } from 'zova';
-import { Scope } from 'zova';
+import { Scope } from 'zova-module-a-bean';
 
 @Scope()
 export class ScopeModuleHomeIndex extends BeanScopeBase {}

@@ -110,7 +110,7 @@ export const locales = {
 /** locale: end */
 /** scope: begin */
 import { BeanScopeBase, BeanScopeUtil, TypeModuleLocales, TypeLocaleBase } from 'zova';
-import { Scope } from 'zova';
+import { Scope } from 'zova-module-a-bean';
 
 @Scope()
 export class ScopeModuleDemoBasic extends BeanScopeBase {}

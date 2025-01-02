@@ -267,7 +267,7 @@ declare module 'zova' {
 /** icons: end */
 /** scope: begin */
 import { BeanScopeBase, BeanScopeUtil } from 'zova';
-import { Scope } from 'zova';
+import { Scope } from 'zova-module-a-bean';
 
 @Scope()
 export class ScopeModuleHomeIcon extends BeanScopeBase {}

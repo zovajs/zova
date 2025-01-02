@@ -101,7 +101,7 @@ export interface IModuleService {
 /** service: end */
 /** scope: begin */
 import { BeanScopeBase, BeanScopeUtil, TypeModuleConfig, TypeModuleLocales, TypeLocaleBase } from 'zova';
-import { Scope } from 'zova';
+import { Scope } from 'zova-module-a-bean';
 
 @Scope()
 export class ScopeModuleHomeLayout extends BeanScopeBase {}

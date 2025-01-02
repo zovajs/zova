@@ -20,7 +20,7 @@ export * from '../monkey.js';
 /** monkey: end */
 /** scope: begin */
 import { BeanScopeBase, BeanScopeUtil, TypeModuleConfig } from 'zova';
-import { Scope } from 'zova';
+import { Scope } from 'zova-module-a-bean';
 
 @Scope()
 export class ScopeModuleARouter extends BeanScopeBase {}
