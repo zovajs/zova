@@ -112,7 +112,7 @@ export class CliToolsMetadata extends BeanCliBase {
     const thisDest = path.join(modulePath, 'src/.metadata/this.ts');
     if (fse.existsSync(thisDest)) return;
     const content = `export const __ThisModule__ = '${moduleName}';
-export { ScopeModule${relativeNameCapitalize} as ScopeModule } from './index.js';
+export { ScopeModule${relativeNameCapitalize} as ScopeModule } from './index.jsx';
 `;
     // save
     await fse.writeFile(thisDest, content);

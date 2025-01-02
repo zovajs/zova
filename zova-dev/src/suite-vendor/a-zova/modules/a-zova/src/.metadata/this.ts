@@ -1,2 +1,2 @@
 export const __ThisModule__ = 'a-zova';
-export { ScopeModuleACore as ScopeModule } from './index.js';
+export { ScopeModuleACore as ScopeModule } from './index.jsx';

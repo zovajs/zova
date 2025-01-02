@@ -1,2 +1,2 @@
 export const __ThisModule__ = 'a-tabs';
-export { ScopeModuleATabs as ScopeModule } from './index.js';
+export { ScopeModuleATabs as ScopeModule } from './index.jsx';
