@@ -1,4 +1,4 @@
-import { IModuleService } from './.metadata/index.js';
+import { IModuleService } from './.metadata/index.jsx';
 import { BeanApi } from './bean/bean.api.js';
 
 declare module 'zova' {
