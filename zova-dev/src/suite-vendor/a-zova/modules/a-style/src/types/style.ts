@@ -35,6 +35,5 @@ declare module 'zova' {
   export interface IBeanSceneRecord {
     style: never;
     theme: never;
-    themeHandler: never;
   }
 }

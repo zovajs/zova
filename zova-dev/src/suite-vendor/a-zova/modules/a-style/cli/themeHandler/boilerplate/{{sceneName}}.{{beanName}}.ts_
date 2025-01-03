@@ -1,7 +1,7 @@
 import { BeanBase } from 'zova';
-import { ThemeHandler } from 'zova-module-a-style';
+import { Meta } from 'vona-module-a-meta';
 
-@ThemeHandler()
-export class ThemeHandler<%=argv.beanNameCapitalize%> extends BeanBase {
+@Meta()
+export class Meta<%=argv.beanNameCapitalize%> extends BeanBase {
   protected async __init__() {}
 }

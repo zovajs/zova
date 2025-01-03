@@ -23,10 +23,10 @@
         "beanGeneral": true,
         "optionsNone": true,
         "boilerplate": "cli/theme/boilerplate"
-      },
+      }
+    },
+    "metas": {
       "themeHandler": {
-        "beanGeneral": true,
-        "optionsNone": true,
         "boilerplate": "cli/themeHandler/boilerplate"
       }
     },
