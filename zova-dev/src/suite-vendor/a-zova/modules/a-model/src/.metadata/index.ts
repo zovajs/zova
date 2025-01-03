@@ -14,6 +14,27 @@ declare module 'zova' {
   }
 }
 /** bean: end */
+/** local: begin */
+export * from '../bean/local.storage.js';
+
+import 'zova';
+declare module 'zova' {}
+declare module 'zova-module-a-model' {
+  export interface LocalStorage {
+    /** @internal */
+    get scope(): ScopeModuleAModel;
+  }
+}
+/** local: end */
+/** local: begin */
+import { LocalStorage } from '../bean/local.storage.js';
+import 'zova';
+declare module 'zova' {
+  export interface IBeanRecordLocal {
+    'a-model.local.storage': LocalStorage;
+  }
+}
+/** local: end */
 /** config: begin */
 export * from '../config/config.js';
 import { config } from '../config/config.js';

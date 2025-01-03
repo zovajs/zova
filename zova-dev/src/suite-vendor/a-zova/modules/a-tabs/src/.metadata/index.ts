@@ -19,6 +19,43 @@ declare module 'zova' {
   }
 }
 /** model: end */
+/** local: begin */
+export * from '../component/routerViewTabs/controller.js';
+export * from '../component/routerViewTabs/render.jsx';
+export * from '../component/routerViewTabs/style.js';
+
+import 'zova';
+declare module 'zova' {}
+declare module 'zova-module-a-tabs' {
+  export interface ControllerRouterViewTabs {
+    /** @internal */
+    get scope(): ScopeModuleATabs;
+  }
+
+  export interface RenderRouterViewTabs {
+    /** @internal */
+    get scope(): ScopeModuleATabs;
+  }
+
+  export interface StyleRouterViewTabs {
+    /** @internal */
+    get scope(): ScopeModuleATabs;
+  }
+}
+/** local: end */
+/** local: begin */
+import { ControllerRouterViewTabs } from '../component/routerViewTabs/controller.js';
+import { RenderRouterViewTabs } from '../component/routerViewTabs/render.jsx';
+import { StyleRouterViewTabs } from '../component/routerViewTabs/style.js';
+import 'zova';
+declare module 'zova' {
+  export interface IBeanRecordLocal {
+    'a-tabs.local.controllerRouterViewTabs': ControllerRouterViewTabs;
+    'a-tabs.local.renderRouterViewTabs': RenderRouterViewTabs;
+    'a-tabs.local.styleRouterViewTabs': StyleRouterViewTabs;
+  }
+}
+/** local: end */
 import { RequiredSome } from 'zova';
 /** components: begin */
 export * from '../component/routerViewTabs/controller.js';

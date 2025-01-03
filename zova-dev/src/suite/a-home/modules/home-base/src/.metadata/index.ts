@@ -40,6 +40,83 @@ declare module 'zova' {
   }
 }
 /** theme: end */
+/** local: begin */
+export * from '../bean/local.router.js';
+export * from '../bean/local.ssr.js';
+export * from '../component/page/controller.js';
+export * from '../component/page/render.jsx';
+export * from '../component/page/style.js';
+export * from '../page/errorNotFound/controller.js';
+export * from '../page/errorNotFound/render.jsx';
+export * from '../page/errorNotFound/style.js';
+
+import 'zova';
+declare module 'zova' {}
+declare module 'zova-module-home-base' {
+  export interface LocalRouter {
+    /** @internal */
+    get scope(): ScopeModuleHomeBase;
+  }
+
+  export interface LocalSSR {
+    /** @internal */
+    get scope(): ScopeModuleHomeBase;
+  }
+
+  export interface ControllerPage {
+    /** @internal */
+    get scope(): ScopeModuleHomeBase;
+  }
+
+  export interface RenderPage {
+    /** @internal */
+    get scope(): ScopeModuleHomeBase;
+  }
+
+  export interface StylePage {
+    /** @internal */
+    get scope(): ScopeModuleHomeBase;
+  }
+
+  export interface ControllerPageErrorNotFound {
+    /** @internal */
+    get scope(): ScopeModuleHomeBase;
+  }
+
+  export interface RenderErrorNotFound {
+    /** @internal */
+    get scope(): ScopeModuleHomeBase;
+  }
+
+  export interface StyleErrorNotFound {
+    /** @internal */
+    get scope(): ScopeModuleHomeBase;
+  }
+}
+/** local: end */
+/** local: begin */
+import { LocalRouter } from '../bean/local.router.js';
+import { LocalSSR } from '../bean/local.ssr.js';
+import { ControllerPage } from '../component/page/controller.js';
+import { RenderPage } from '../component/page/render.jsx';
+import { StylePage } from '../component/page/style.js';
+import { ControllerPageErrorNotFound } from '../page/errorNotFound/controller.js';
+import { RenderErrorNotFound } from '../page/errorNotFound/render.jsx';
+import { StyleErrorNotFound } from '../page/errorNotFound/style.js';
+import 'zova';
+declare module 'zova' {
+  export interface IBeanRecordLocal {
+    'home-base.local.router': LocalRouter;
+    'home-base.local.sSR': LocalSSR;
+    'home-base.local.controllerPage': ControllerPage;
+    'home-base.local.renderPage': RenderPage;
+    'home-base.local.stylePage': StylePage;
+    'home-base.local.controllerPageErrorNotFound': ControllerPageErrorNotFound;
+    'home-base.local.renderErrorNotFound': RenderErrorNotFound;
+    'home-base.local.styleErrorNotFound': StyleErrorNotFound;
+  }
+}
+/** local: end */
 import { RequiredSome } from 'zova';
 /** components: begin */
 export * from '../component/page/controller.js';

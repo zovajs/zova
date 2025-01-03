@@ -66,6 +66,43 @@ declare module 'zova' {
   }
 }
 /** model: end */
+/** local: begin */
+export * from '../page/login/controller.js';
+export * from '../page/login/render.jsx';
+export * from '../page/login/style.js';
+
+import 'zova';
+declare module 'zova' {}
+declare module 'zova-module-home-user' {
+  export interface ControllerPageLogin {
+    /** @internal */
+    get scope(): ScopeModuleHomeUser;
+  }
+
+  export interface RenderLogin {
+    /** @internal */
+    get scope(): ScopeModuleHomeUser;
+  }
+
+  export interface StyleLogin {
+    /** @internal */
+    get scope(): ScopeModuleHomeUser;
+  }
+}
+/** local: end */
+/** local: begin */
+import { ControllerPageLogin } from '../page/login/controller.js';
+import { RenderLogin } from '../page/login/render.jsx';
+import { StyleLogin } from '../page/login/style.js';
+import 'zova';
+declare module 'zova' {
+  export interface IBeanRecordLocal {
+    'home-user.local.controllerPageLogin': ControllerPageLogin;
+    'home-user.local.renderLogin': RenderLogin;
+    'home-user.local.styleLogin': StyleLogin;
+  }
+}
+/** local: end */
 /** pages: begin */
 export * from '../page/login/controller.js';
 import { ControllerPageLogin } from '../page/login/controller.js';

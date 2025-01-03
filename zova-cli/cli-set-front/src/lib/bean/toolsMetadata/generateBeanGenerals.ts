@@ -26,7 +26,7 @@ export async function generateBeanGenerals(
 ${contentImports.join('\n')}
 import 'zova';
 declare module 'zova' {
-  export interface IBeanRecordGeneral {
+  export interface ${sceneMeta.beanGeneral ? 'IBeanRecordGeneral' : 'IBeanRecordLocal'} {
     ${contentRecords.join('\n')}
   }
 }

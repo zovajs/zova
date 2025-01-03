@@ -89,9 +89,7 @@ export class CliToolsMetadata extends BeanCliBase {
         }
       }
       // bean generals
-      if (sceneMeta.beanGeneral) {
-        content += await generateBeanGenerals(globFilesScene, sceneName, sceneMeta, moduleName, modulePath);
-      }
+      content += await generateBeanGenerals(globFilesScene, sceneName, sceneMeta, moduleName, modulePath);
       // metas
       if (sceneName === 'meta') {
         const onionMetasMeta = getOnionMetasMeta(this.modulesMeta.modules);

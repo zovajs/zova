@@ -14,6 +14,11 @@
         "optionsNone": true,
         "boilerplate": "cli/data/boilerplate"
       },
+      "local": {
+        "beanGeneral": false,
+        "optionsNone": true,
+        "boilerplate": "cli/local/boilerplate"
+      },
       "store": {
         "beanGeneral": true,
         "optionsNone": true,

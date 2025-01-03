@@ -49,6 +49,67 @@ declare module 'zova' {
   }
 }
 /** model: end */
+/** local: begin */
+export * from '../page/item/controller.js';
+export * from '../page/item/render.jsx';
+export * from '../page/item/style.js';
+export * from '../page/todo/controller.js';
+export * from '../page/todo/render.jsx';
+export * from '../page/todo/style.js';
+
+import 'zova';
+declare module 'zova' {}
+declare module 'zova-module-demo-todo' {
+  export interface ControllerPageItem {
+    /** @internal */
+    get scope(): ScopeModuleDemoTodo;
+  }
+
+  export interface RenderItem {
+    /** @internal */
+    get scope(): ScopeModuleDemoTodo;
+  }
+
+  export interface StyleItem {
+    /** @internal */
+    get scope(): ScopeModuleDemoTodo;
+  }
+
+  export interface ControllerPageTodo {
+    /** @internal */
+    get scope(): ScopeModuleDemoTodo;
+  }
+
+  export interface RenderTodo {
+    /** @internal */
+    get scope(): ScopeModuleDemoTodo;
+  }
+
+  export interface StyleTodo {
+    /** @internal */
+    get scope(): ScopeModuleDemoTodo;
+  }
+}
+/** local: end */
+/** local: begin */
+import { ControllerPageItem } from '../page/item/controller.js';
+import { RenderItem } from '../page/item/render.jsx';
+import { StyleItem } from '../page/item/style.js';
+import { ControllerPageTodo } from '../page/todo/controller.js';
+import { RenderTodo } from '../page/todo/render.jsx';
+import { StyleTodo } from '../page/todo/style.js';
+import 'zova';
+declare module 'zova' {
+  export interface IBeanRecordLocal {
+    'demo-todo.local.controllerPageItem': ControllerPageItem;
+    'demo-todo.local.renderItem': RenderItem;
+    'demo-todo.local.styleItem': StyleItem;
+    'demo-todo.local.controllerPageTodo': ControllerPageTodo;
+    'demo-todo.local.renderTodo': RenderTodo;
+    'demo-todo.local.styleTodo': StyleTodo;
+  }
+}
+/** local: end */
 /** pages: begin */
 export * from '../page/item/controller.js';
 export * from '../page/todo/controller.js';
