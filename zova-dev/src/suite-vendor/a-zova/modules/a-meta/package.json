@@ -1,0 +1,37 @@
+{
+  "name": "zova-module-a-meta",
+  "version": "5.0.0",
+  "title": "a-meta",
+  "zovaModule": {
+    "onions": {
+      "meta": {
+        "beanGeneral": true,
+        "optionsGlobalInterfaceName": ""
+      }
+    }
+  },
+  "type": "module",
+  "exports": {
+    ".": {
+      "types": [
+        "./src/index.ts",
+        "./dist/index.d.ts"
+      ],
+      "import": "./src/index.ts",
+      "default": "./dist/index.js"
+    },
+    "./*": "./*"
+  },
+  "description": "",
+  "keywords": [
+    "Zova Module"
+  ],
+  "author": "",
+  "files": [
+    "mock",
+    "dist",
+    "cli"
+  ],
+  "scripts": {},
+  "dependencies": {}
+}
