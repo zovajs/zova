@@ -48,6 +48,8 @@ export async function globAllTsFiles(moduleName: string, modulePath: string): Pr
     const beanName = parseBeanName(className, sceneName);
     const beanNameFull = `${moduleName}:${beanName}`;
     result.push({
+      sceneName,
+      sceneNameCapitalize,
       file,
       fileContent,
       fileName,

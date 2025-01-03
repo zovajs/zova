@@ -45,8 +45,8 @@ importers:
         specifier: ^3.0.12
         version: 3.0.12
       '@cabloy/module-info':
-        specifier: ^1.2.4
-        version: 1.2.4
+        specifier: ^1.2.5
+        version: 1.2.5
       '@cabloy/word-utils':
         specifier: ^1.0.10
         version: 1.0.10
@@ -245,8 +245,8 @@ packages:
   '@cabloy/module-info@1.2.3':
     resolution: {integrity: sha512-JleZxeEqUBTd4U170+CCikCl8GNhKzTbwxeUsIqOzMVqcMW5/Yowi58pBQ+K/KuZ9UkDFRUjI7ZpgLpcfj8zEQ==}
 
-  '@cabloy/module-info@1.2.4':
-    resolution: {integrity: sha512-sdWS1ScLFPVM7jhogC1tilsDIskLQDc93XTRYJta+EOUAAtLExdNddHttZOJQwzdw/O+SglCoNePGzHKvlIW3A==}
+  '@cabloy/module-info@1.2.5':
+    resolution: {integrity: sha512-kyl8jik1mDsGTiG85zJ2Oj5fNYMOruSpbFZjY9WwFgTI6bqqVwniIvlyuYFQFWNLUVYkvvFB0diJrLt+Lk4PEA==}
 
   '@cabloy/process-helper@1.0.12':
     resolution: {integrity: sha512-STpc2zNxGlRZvl1z+WhIQAvc1y44YwB8i+hMwCb4aB31LNRhi7FjdjoEeTVFWw/lODzM0LhnmEw3yL4RmkjQdg==}
@@ -4046,7 +4046,7 @@ snapshots:
 
   '@cabloy/module-glob@5.1.8':
     dependencies:
-      '@cabloy/module-info': 1.2.4
+      '@cabloy/module-info': 1.2.5
       boxen: 4.2.0
       egg-born-utils: 1.2.1
     transitivePeerDependencies:
@@ -4056,7 +4056,7 @@ snapshots:
     dependencies:
       stack-utils: 2.0.6
 
-  '@cabloy/module-info@1.2.4':
+  '@cabloy/module-info@1.2.5':
     dependencies:
       stack-utils: 2.0.6
 
@@ -7736,7 +7736,7 @@ snapshots:
       '@cabloy/dotenv': 1.0.9
       '@cabloy/extend': 3.0.12
       '@cabloy/module-glob': 5.1.8
-      '@cabloy/module-info': 1.2.4
+      '@cabloy/module-info': 1.2.5
       '@cabloy/vite-plugin-babel': 1.1.3(@babel/core@7.26.0)(vite@5.4.11(@types/node@20.17.9)(terser@5.36.0))
       '@cabloy/vue-reactivity': 3.5.11
       '@cabloy/vue-router': 4.4.8(vue@3.5.13(typescript@5.7.2))

@@ -1,6 +1,7 @@
 import { BeanCliBase } from '@cabloy/cli';
 import fse from 'fs-extra';
 import path from 'path';
+import { generateGenerals } from './toolsMetadata/generateGenerals.js';
 import { generateBeans } from './toolsMetadata/generateBeans.js';
 import { generateComponents } from './toolsMetadata/generateComponents.js';
 import { generatePages } from './toolsMetadata/generatePages.js';
@@ -10,6 +11,8 @@ import { generateServices } from './toolsMetadata/generateServices.js';
 import { generateScope } from './toolsMetadata/generateScope.js';
 import { generateMonkey } from './toolsMetadata/generateMonkey.js';
 import { generateScopeModule } from './toolsMetadata/generateScopeModule.js';
+import { globAllTsFiles } from './toolsMetadata/utils.js';
+import { getOnionScenesMeta } from '@cabloy/module-info';
 
 declare module '@cabloy/cli' {
   interface ICommandArgv {
@@ -56,10 +59,65 @@ export class CliToolsMetadata extends BeanCliBase {
     await this.helper.ensureDir(metaDir);
     // relativeNameCapitalize
     const relativeNameCapitalize = this.helper.stringToCapitalize(moduleName, '-');
+    // onionScenesMeta
+    const onionScenesMeta = getOnionScenesMeta(this.modulesMeta.modules);
     // content
     let content = '';
-    // beans
-    content += await generateBeans(moduleName, modulePath);
+    // all files
+    const globFiles = await globAllTsFiles(moduleName, modulePath);
+    // onions
+    const scopeResources = {};
+    for (const sceneName in onionScenesMeta) {
+      const sceneMeta = onionScenesMeta[sceneName];
+      const globFilesScene = globFiles.filter(item => item.sceneName === sceneName);
+      // general
+      content += await generateOnions(globFilesScene, sceneName, sceneMeta, moduleName, modulePath);
+      // scope resources
+      if (sceneMeta.scopeResource) {
+        const contentScopeResource = await generateScopeResources(
+          globFilesScene,
+          sceneName,
+          sceneMeta,
+          moduleName,
+          modulePath,
+        );
+        if (contentScopeResource) {
+          content += contentScopeResource;
+          scopeResources[sceneName] = `IModule${toUpperCaseFirstChar(sceneName)}`;
+        }
+      }
+      // bean generals
+      if (sceneMeta.beanGeneral) {
+        content += await generateBeanGenerals(globFilesScene, sceneName, sceneMeta, moduleName, modulePath);
+      }
+      // metas
+      if (sceneName === 'meta') {
+        const onionMetasMeta = getOnionMetasMeta(this.modulesMeta.modules);
+        for (const metaName in onionMetasMeta) {
+          const metaMeta = onionMetasMeta[metaName];
+          const globFilesMeta = globFiles.filter(item => item.sceneName === 'meta' && item.beanName === metaName);
+          if (metaMeta.scopeResource) {
+            const contentScopeResourceMeta = await generateScopeResourcesMeta(
+              globFilesMeta,
+              metaName,
+              metaMeta,
+              sceneName,
+              sceneMeta,
+              moduleName,
+              modulePath,
+            );
+            if (contentScopeResourceMeta) {
+              content += contentScopeResourceMeta;
+              scopeResources[metaName] = `Meta${toUpperCaseFirstChar(metaName)}`;
+            }
+          }
+        }
+      }
+      // metadata custom
+      if (sceneMeta.metadataCustom) {
+        content += await generateMetadataCustom(this, globFilesScene, sceneName, sceneMeta, moduleName, modulePath);
+      }
+    }
     // components
     const contentComponents = await generateComponents(moduleName, modulePath);
     content += contentComponents;

@@ -39,7 +39,7 @@
   "dependencies": {
     "@cabloy/cli": "^2.1.2",
     "@cabloy/extend": "^3.0.12",
-    "@cabloy/module-info": "^1.2.4",
+    "@cabloy/module-info": "^1.2.5",
     "@cabloy/word-utils": "^1.0.10",
     "compressing": "^1.10.0",
     "egg-born-utils": "^1.2.0",
