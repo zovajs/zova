@@ -32,9 +32,8 @@ export class CliCreateBean extends BeanCliBase {
     // target dir
     const targetDir = await this.helper.ensureDir(_module.root);
     // scene name
-    const sceneName = argv.sceneName; // bean/summer.cache
-    const sceneParts = sceneName.split('.');
-    argv.sceneNameCapitalize = sceneParts.map(item => this.helper.firstCharToUpperCase(item)).join();
+    const sceneName = argv.sceneName;
+    argv.sceneNameCapitalize = this.helper.firstCharToUpperCase(sceneName);
     // scene meta
     // onionScenesMeta
     const onionScenesMeta = getOnionScenesMeta(this.modulesMeta.modules);
