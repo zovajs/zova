@@ -1,10 +1,10 @@
-import { BeanBase, ThemeHandler, Use } from 'zova';
-import { ScopeModule } from '../.metadata/this.js';
+import { BeanBase, Use } from 'zova';
+import { Meta } from 'zova-module-a-meta';
 import { IThemeHandler, IThemeHandlerApplyParams } from 'zova-module-a-style';
-import { ModelTheme } from './model.theme.js';
+import { ModelTheme } from '../model/theme.js';
 
-@ThemeHandler()
-export class ThemeHandlerDefault extends BeanBase<ScopeModule> implements IThemeHandler {
+@Meta()
+export class MetaThemeHandler extends BeanBase implements IThemeHandler {
   @Use()
   $$modelTheme: ModelTheme;
 

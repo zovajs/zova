@@ -1,9 +1,9 @@
-import { BeanBase, cast, ThemeHandler } from 'zova';
-import { ScopeModule } from '../.metadata/this.js';
+import { BeanBase, cast } from 'zova';
+import { Meta } from 'zova-module-a-meta';
 import { IThemeHandler, IThemeHandlerApplyParams } from 'zova-module-a-style';
 
-@ThemeHandler()
-export class ThemeHandlerDefault extends BeanBase<ScopeModule> implements IThemeHandler {
+@Meta()
+export class MetaThemeHandler extends BeanBase implements IThemeHandler {
   async apply({ name, dark, token }: IThemeHandlerApplyParams): Promise<void> {
     // theme
     cast(this.$vuetify.theme.global).name = name;
