@@ -9,6 +9,14 @@
     "globalDependencies": {
       "mutate-on-copy": true
     },
+    "onions": {
+      "model": {
+        "sceneIsolate": true,
+        "beanGeneral": true,
+        "optionsNone": true,
+        "boilerplate": "cli/model/boilerplate"
+      }
+    },
     "bundle": {
       "vendors": [
         {
@@ -46,7 +54,8 @@
   "license": "MIT",
   "files": [
     "dist",
-    "src"
+    "src",
+    "cli"
   ],
   "scripts": {
     "clean": "tsc -b --clean",

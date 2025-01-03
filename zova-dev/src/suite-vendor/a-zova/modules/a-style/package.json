@@ -67,7 +67,8 @@
   "license": "MIT",
   "files": [
     "dist",
-    "src"
+    "src",
+    "cli"
   ],
   "scripts": {
     "clean": "tsc -b --clean",

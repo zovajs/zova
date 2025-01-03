@@ -8,6 +8,14 @@
     },
     "dependencies": {
       "a-zova": "5.0.0"
+    },
+    "onions": {
+      "service": {
+        "sceneIsolate": true,
+        "beanGeneral": true,
+        "optionsNone": true,
+        "boilerplate": "cli/service/boilerplate"
+      }
     }
   },
   "type": "module",
@@ -30,7 +38,8 @@
   "files": [
     "mock",
     "dist",
-    "src"
+    "src",
+    "cli"
   ],
   "scripts": {
     "clean": "tsc -b --clean",
