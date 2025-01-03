@@ -19,6 +19,27 @@ declare module 'zova' {
   }
 }
 /** theme: end */
+/** store: begin */
+export * from '../bean/store.counter.js';
+
+import 'zova';
+declare module 'zova' {}
+declare module 'zova-module-demo-basic' {
+  export interface StoreCounter {
+    /** @internal */
+    get scope(): ScopeModuleDemoBasic;
+  }
+}
+/** store: end */
+/** store: begin */
+import { StoreCounter } from '../bean/store.counter.js';
+import 'zova';
+declare module 'zova' {
+  export interface IBeanRecordGeneral {
+    'demo-basic.store.counter': StoreCounter;
+  }
+}
+/** store: end */
 import { RequiredSome } from 'zova';
 /** components: begin */
 export * from '../component/card/controller.js';

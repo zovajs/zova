@@ -1,3 +1,24 @@
+/** themeHandler: begin */
+export * from '../bean/themeHandler.default.js';
+
+import 'zova';
+declare module 'zova' {}
+declare module 'zova-module-devui-adapter' {
+  export interface ThemeHandlerDefault {
+    /** @internal */
+    get scope(): ScopeModuleDevuiAdapter;
+  }
+}
+/** themeHandler: end */
+/** themeHandler: begin */
+import { ThemeHandlerDefault } from '../bean/themeHandler.default.js';
+import 'zova';
+declare module 'zova' {
+  export interface IBeanRecordGeneral {
+    'devui-adapter.themeHandler.default': ThemeHandlerDefault;
+  }
+}
+/** themeHandler: end */
 /** monkey: begin */
 export * from '../monkey.js';
 /** monkey: end */

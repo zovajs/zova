@@ -19,15 +19,6 @@ declare module 'zova' {
   }
 }
 /** bean: end */
-/** bean: begin */
-import { BeanTheme } from '../bean/bean.theme.js';
-import 'vona';
-declare module 'vona' {
-  export interface IBeanRecordGlobal {
-    theme: BeanTheme;
-  }
-}
-/** bean: end */
 /** config: begin */
 export * from '../config/config.js';
 import { config } from '../config/config.js';

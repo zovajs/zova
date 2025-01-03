@@ -19,15 +19,6 @@ declare module 'zova' {
   }
 }
 /** bean: end */
-/** bean: begin */
-import { BeanApi } from '../bean/bean.api.js';
-import 'vona';
-declare module 'vona' {
-  export interface IBeanRecordGlobal {
-    api: BeanApi;
-  }
-}
-/** bean: end */
 /** service: begin */
 export * from '../service/openapi/index.js';
 export * from '../service/home.js';
