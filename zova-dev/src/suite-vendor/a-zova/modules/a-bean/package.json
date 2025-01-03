@@ -30,7 +30,8 @@
   "author": "",
   "files": [
     "mock",
-    "dist"
+    "dist",
+    "cli"
   ],
   "scripts": {
     "clean": "tsc -b --clean",
