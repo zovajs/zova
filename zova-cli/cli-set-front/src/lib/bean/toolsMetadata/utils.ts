@@ -69,51 +69,6 @@ export function parseBeanName(className: string, scene: string) {
   return skipPrefix(className, scene, true)!;
 }
 
-export async function globBeanFiles(
-  sceneName: string,
-  sceneMeta: OnionSceneMeta,
-  moduleName: string,
-  modulePath: string,
-): Promise<IGlobBeanFile[]> {
-  const result: IGlobBeanFile[] = [];
-  const sceneNameCapitalize = toUpperCaseFirstChar(sceneName);
-  const pattern = sceneMeta.sceneIsolate
-    ? `${modulePath}/src/${sceneName}/*.ts`
-    : `${modulePath}/src/bean/${sceneName}.*.ts`;
-  const files = await eggBornUtils.tools.globbyAsync(pattern);
-  if (files.length === 0) return result;
-  files.sort();
-  for (const file of files) {
-    const fileName = path.basename(file);
-    if (fileName.startsWith('_')) continue;
-    const parts = fileName.split('.').slice(0, -1);
-    if (sceneMeta.sceneIsolate && parts.length !== 1) continue;
-    if (!sceneMeta.sceneIsolate && parts.length < 2) continue;
-    const isIgnore = checkIgnoreOfParts(parts);
-    const fileNameJS = fileName.replace('.ts', '.js');
-    const fileNameJSRelative = sceneMeta.sceneIsolate ? `../${sceneName}/${fileNameJS}` : `../bean/${fileNameJS}`;
-    const className =
-      (sceneMeta.sceneIsolate ? sceneNameCapitalize : '') + parts.map(item => toUpperCaseFirstChar(item)).join('');
-    const beanName = parts[parts.length - 1];
-    const beanNameFull = `${moduleName}:${beanName}`;
-    const fileContent = isIgnore ? '' : fse.readFileSync(file).toString();
-    const isVirtual = fileContent.includes('@Virtual()');
-    result.push({
-      file,
-      fileContent,
-      fileName,
-      fileNameJS,
-      fileNameJSRelative,
-      className,
-      beanName,
-      beanNameFull,
-      isIgnore,
-      isVirtual,
-    });
-  }
-  return result;
-}
-
 export function extractBeanInfo(sceneName: string, fileContent: string, sceneMeta: OnionSceneMeta) {
   const sceneNameCapitalize = toUpperCaseFirstChar(sceneName);
   // optionsCustomInterface
