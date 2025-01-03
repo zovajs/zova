@@ -8,6 +8,21 @@
         "beanGeneral": true,
         "optionsNone": true,
         "boilerplate": "cli/bean/boilerplate"
+      },
+      "data": {
+        "beanGeneral": true,
+        "optionsNone": true,
+        "boilerplate": "cli/data/boilerplate"
+      },
+      "store": {
+        "beanGeneral": true,
+        "optionsNone": true,
+        "boilerplate": "cli/store/boilerplate"
+      },
+      "tool": {
+        "beanGeneral": true,
+        "optionsNone": true,
+        "boilerplate": "cli/tool/boilerplate"
       }
     }
   },
