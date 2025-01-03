@@ -1,4 +1,4 @@
-import { extractBeanInfo, getScopeModuleName, globBeanFiles } from './utils.js';
+import { extractBeanInfo, getScopeModuleName } from './utils.js';
 import { toUpperCaseFirstChar } from '@cabloy/word-utils';
 import { IGlobBeanFile, OnionSceneMeta } from '@cabloy/module-info';
 
@@ -7,11 +7,10 @@ export async function generateOnions(
   sceneName: string,
   sceneMeta: OnionSceneMeta,
   moduleName: string,
-  modulePath: string,
+  _modulePath: string,
 ) {
   const scopeModuleName = getScopeModuleName(moduleName);
   const sceneNameCapitalize = toUpperCaseFirstChar(sceneName);
-  const globFiles = await globBeanFiles(sceneName, sceneMeta, moduleName, modulePath);
   if (globFiles.length === 0) return '';
   //
   const contentExports: string[] = [];
@@ -24,7 +23,7 @@ export async function generateOnions(
     const { fileContent, fileNameJSRelative, className, beanNameFull, isIgnore, isVirtual } = globFile;
     contentExports.push(`export * from '${fileNameJSRelative}';`);
     // get scope() also can be ignored
-    if (!['entity', 'dto'].includes(sceneName) && !isVirtual) {
+    if (!['__nothing__'].includes(sceneName) && !isVirtual) {
       contentScopes.push(`
         export interface ${className} {
           /** @internal */
@@ -77,12 +76,12 @@ export interface I${sceneNameCapitalize}RecordLocal {
   const content = `/** ${sceneName}: begin */
 ${contentExports.join('\n')}
 ${contentImports.join('\n')}
-${needImportOptionsGlobalInterface ? `import { ${sceneMeta.optionsGlobalInterfaceName} } from '${sceneMeta.optionsGlobalInterfaceFrom || 'vona'}';` : "import 'vona';"}
-declare module '${sceneMeta.optionsGlobalInterfaceFrom || 'vona'}' {
+${needImportOptionsGlobalInterface ? `import { ${sceneMeta.optionsGlobalInterfaceName} } from '${sceneMeta.optionsGlobalInterfaceFrom || 'zova'}';` : "import 'zova';"}
+declare module '${sceneMeta.optionsGlobalInterfaceFrom || 'zova'}' {
   ${contentRecordsGlobal.length > 0 ? exportRecordsMiddlewareGlobal : ''}
   ${contentRecordsLocal.length > 0 ? exportRecordsMiddlewareLocal : ''}
 }
-declare module 'vona-module-${moduleName}' {
+declare module 'zova-module-${moduleName}' {
   ${contentScopes.join('\n')} 
 }
 /** ${sceneName}: end */
