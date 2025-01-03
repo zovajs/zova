@@ -33,7 +33,7 @@ export class RenderStyle extends BeanRenderBase {
         </button>
         <hr></hr>
         <div class={this.$css.textCenter}>
-          <div>$class.textCenter</div>
+          <div>$css.textCenter</div>
           <button class={this.$css.buttonPrimary}>{`$token.color.primary: ${this.$token.color.primary}`}</button>
           <hr></hr>
           <div class={this.cBlock}>
