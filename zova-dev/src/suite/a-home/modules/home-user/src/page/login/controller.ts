@@ -1,7 +1,7 @@
 import { BeanControllerPageBase, Use, zz } from 'zova';
 import { Local } from 'zova-module-a-bean';
-import { ModelAuth } from '../../bean/model.auth.js';
 import { ServiceAuthLoginParams } from '../../service/auth.js';
+import { ModelAuth } from '../../model/auth.js';
 
 const ParamsSchema = zz.object({});
 const QuerySchema = zz.object({});
