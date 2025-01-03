@@ -1,4 +1,4 @@
-import { IGlobBeanFile, IGlobTsFile, OnionSceneMeta } from '@cabloy/module-info';
+import { IGlobBeanFile, OnionSceneMeta } from '@cabloy/module-info';
 import { skipPrefix, stringToCapitalize, toLowerCaseFirstChar, toUpperCaseFirstChar } from '@cabloy/word-utils';
 import path from 'path';
 import fse from 'fs-extra';
@@ -17,7 +17,7 @@ export function getScopeModuleName(moduleName: string) {
   return `ScopeModule${stringToCapitalize(moduleName, '-')}`;
 }
 
-export async function globAllTsFiles(moduleName: string, modulePath: string): Promise<IGlobTsFile[]> {
+export async function globAllTsFiles(moduleName: string, modulePath: string): Promise<IGlobBeanFile[]> {
   const result: IGlobBeanFile[] = [];
   const pattern = `${modulePath}/src/**/*.ts(x)?`;
   const files = await eggBornUtils.tools.globbyAsync(pattern);
