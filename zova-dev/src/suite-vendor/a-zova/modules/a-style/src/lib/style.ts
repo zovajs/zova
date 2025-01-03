@@ -1,7 +1,7 @@
 import { createBeanDecorator } from 'zova';
 
-export function Style(): ClassDecorator {
-  return createBeanDecorator('style', 'app');
+export function Css(): ClassDecorator {
+  return createBeanDecorator('css', 'app');
 }
 
 export function Theme(): ClassDecorator {

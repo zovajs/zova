@@ -33,7 +33,7 @@ export interface IThemeHandlerApplyParams {
 
 declare module 'zova' {
   export interface IBeanSceneRecord {
-    style: never;
+    css: never;
     theme: never;
   }
 }

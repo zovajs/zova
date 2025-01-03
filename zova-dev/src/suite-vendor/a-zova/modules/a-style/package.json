@@ -14,10 +14,10 @@
       "typestyle": true
     },
     "onions": {
-      "style": {
+      "css": {
         "beanGeneral": true,
         "optionsNone": true,
-        "boilerplate": "cli/style/boilerplate"
+        "boilerplate": "cli/css/boilerplate"
       },
       "theme": {
         "beanGeneral": true,
