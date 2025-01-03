@@ -13,6 +13,13 @@
       "csx": true,
       "typestyle": true
     },
+    "onions": {
+      "theme": {
+        "beanGeneral": true,
+        "optionsNone": true,
+        "boilerplate": "cli/theme/boilerplate"
+      }
+    },
     "bundle": {
       "vendors": [
         {

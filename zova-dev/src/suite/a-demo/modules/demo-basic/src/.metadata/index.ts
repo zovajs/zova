@@ -1,16 +1,24 @@
-/** beans: begin */
-export * from '../bean/store.counter.js';
+/** theme: begin */
 export * from '../bean/theme.orange.js';
-import { StoreCounter } from '../bean/store.counter.js';
+
+import 'zova';
+declare module 'zova' {}
+declare module 'zova-module-demo-basic' {
+  export interface ThemeOrange {
+    /** @internal */
+    get scope(): ScopeModuleDemoBasic;
+  }
+}
+/** theme: end */
+/** theme: begin */
 import { ThemeOrange } from '../bean/theme.orange.js';
 import 'zova';
 declare module 'zova' {
-  export interface IBeanRecord {
-    'demo-basic.store.counter': StoreCounter;
+  export interface IBeanRecordGeneral {
     'demo-basic.theme.orange': ThemeOrange;
   }
 }
-/** beans: end */
+/** theme: end */
 import { RequiredSome } from 'zova';
 /** components: begin */
 export * from '../component/card/controller.js';

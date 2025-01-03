@@ -1,13 +1,19 @@
-/** beans: begin */
+/** bean: begin */
 export * from '../bean/bean.serviceBase.js';
+
+import 'zova';
+declare module 'zova' {}
+declare module 'zova-module-a-api' {}
+/** bean: end */
+/** bean: begin */
 import { BeanServiceBase } from '../bean/bean.serviceBase.js';
 import 'zova';
 declare module 'zova' {
-  export interface IBeanRecord {
+  export interface IBeanRecordGeneral {
     'a-api.bean.serviceBase': BeanServiceBase;
   }
 }
-/** beans: end */
+/** bean: end */
 /** config: begin */
 export * from '../config/config.js';
 import { config } from '../config/config.js';

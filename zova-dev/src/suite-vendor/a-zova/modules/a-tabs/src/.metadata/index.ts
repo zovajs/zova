@@ -1,13 +1,3 @@
-/** beans: begin */
-export * from '../bean/model.tabs.js';
-import { ModelTabs } from '../bean/model.tabs.js';
-import 'zova';
-declare module 'zova' {
-  export interface IBeanRecord {
-    'a-tabs.model.tabs': ModelTabs;
-  }
-}
-/** beans: end */
 import { RequiredSome } from 'zova';
 /** components: begin */
 export * from '../component/routerViewTabs/controller.js';

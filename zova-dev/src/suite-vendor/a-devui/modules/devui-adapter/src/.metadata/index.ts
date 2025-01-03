@@ -1,13 +1,3 @@
-/** beans: begin */
-export * from '../bean/themeHandler.default.js';
-import { ThemeHandlerDefault } from '../bean/themeHandler.default.js';
-import 'zova';
-declare module 'zova' {
-  export interface IBeanRecord {
-    'devui-adapter.themeHandler.default': ThemeHandlerDefault;
-  }
-}
-/** beans: end */
 /** monkey: begin */
 export * from '../monkey.js';
 /** monkey: end */

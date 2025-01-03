@@ -1,13 +1,33 @@
-/** beans: begin */
+/** bean: begin */
 export * from '../bean/bean.theme.js';
+
+import 'zova';
+declare module 'zova' {}
+declare module 'zova-module-a-style' {
+  export interface BeanTheme {
+    /** @internal */
+    get scope(): ScopeModuleAStyle;
+  }
+}
+/** bean: end */
+/** bean: begin */
 import { BeanTheme } from '../bean/bean.theme.js';
 import 'zova';
 declare module 'zova' {
-  export interface IBeanRecord {
+  export interface IBeanRecordGeneral {
     'a-style.bean.theme': BeanTheme;
   }
 }
-/** beans: end */
+/** bean: end */
+/** bean: begin */
+import { BeanTheme } from '../bean/bean.theme.js';
+import 'vona';
+declare module 'vona' {
+  export interface IBeanRecordGlobal {
+    theme: BeanTheme;
+  }
+}
+/** bean: end */
 /** config: begin */
 export * from '../config/config.js';
 import { config } from '../config/config.js';

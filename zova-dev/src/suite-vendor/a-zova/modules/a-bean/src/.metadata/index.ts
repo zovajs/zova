@@ -17,7 +17,3 @@ declare module 'zova' {
 }
 
 /** scope: end */
-/** scope module: begin */
-
-declare module 'zova-module-a-bean' {}
-/** scope module: end */

@@ -1,13 +1,33 @@
-/** beans: begin */
+/** bean: begin */
 export * from '../bean/bean.api.js';
+
+import 'zova';
+declare module 'zova' {}
+declare module 'zova-module-home-api' {
+  export interface BeanApi {
+    /** @internal */
+    get scope(): ScopeModuleHomeApi;
+  }
+}
+/** bean: end */
+/** bean: begin */
 import { BeanApi } from '../bean/bean.api.js';
 import 'zova';
 declare module 'zova' {
-  export interface IBeanRecord {
+  export interface IBeanRecordGeneral {
     'home-api.bean.api': BeanApi;
   }
 }
-/** beans: end */
+/** bean: end */
+/** bean: begin */
+import { BeanApi } from '../bean/bean.api.js';
+import 'vona';
+declare module 'vona' {
+  export interface IBeanRecordGlobal {
+    api: BeanApi;
+  }
+}
+/** bean: end */
 /** service: begin */
 export * from '../service/openapi/index.js';
 export * from '../service/home.js';

@@ -1,13 +1,19 @@
-/** beans: begin */
+/** bean: begin */
 export * from '../bean/bean.piniaStoreBase.js';
+
+import 'zova';
+declare module 'zova' {}
+declare module 'zova-module-a-pinia' {}
+/** bean: end */
+/** bean: begin */
 import { BeanPiniaStoreBase } from '../bean/bean.piniaStoreBase.js';
 import 'zova';
 declare module 'zova' {
-  export interface IBeanRecord {
+  export interface IBeanRecordGeneral {
     'a-pinia.bean.piniaStoreBase': BeanPiniaStoreBase;
   }
 }
-/** beans: end */
+/** bean: end */
 /** monkey: begin */
 export * from '../monkey.js';
 /** monkey: end */

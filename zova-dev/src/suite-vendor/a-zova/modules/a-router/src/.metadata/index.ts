@@ -1,16 +1,36 @@
-/** beans: begin */
+/** bean: begin */
 export * from '../bean/bean.router.js';
 export * from '../bean/bean.routerBase.js';
+
+import 'zova';
+declare module 'zova' {}
+declare module 'zova-module-a-router' {
+  export interface BeanRouter {
+    /** @internal */
+    get scope(): ScopeModuleARouter;
+  }
+}
+/** bean: end */
+/** bean: begin */
 import { BeanRouter } from '../bean/bean.router.js';
 import { BeanRouterBase } from '../bean/bean.routerBase.js';
 import 'zova';
 declare module 'zova' {
-  export interface IBeanRecord {
+  export interface IBeanRecordGeneral {
     'a-router.bean.router': BeanRouter;
     'a-router.bean.routerBase': BeanRouterBase;
   }
 }
-/** beans: end */
+/** bean: end */
+/** bean: begin */
+import { BeanRouter } from '../bean/bean.router.js';
+import 'vona';
+declare module 'vona' {
+  export interface IBeanRecordGlobal {
+    router: BeanRouter;
+  }
+}
+/** bean: end */
 /** config: begin */
 export * from '../config/config.js';
 import { config } from '../config/config.js';

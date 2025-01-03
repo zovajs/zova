@@ -22,7 +22,7 @@ const SymbolBeanContainerParent = Symbol('Bean#BeanContainerParent');
 const SymbolProxyMagic = Symbol('Bean#ProxyMagic');
 export const BeanContainerInstances = Symbol('Bean#Instances');
 
-export interface BeanContainer extends IBeanRecord {}
+export interface BeanContainer {}
 
 export class BeanContainer {
   private app: ZovaApplication;

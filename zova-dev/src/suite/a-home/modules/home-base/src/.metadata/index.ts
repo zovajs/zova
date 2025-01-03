@@ -1,16 +1,24 @@
-/** beans: begin */
-export * from '../bean/style.default.js';
+/** theme: begin */
 export * from '../bean/theme.default.js';
-import { StyleDefault } from '../bean/style.default.js';
+
+import 'zova';
+declare module 'zova' {}
+declare module 'zova-module-home-base' {
+  export interface ThemeDefault {
+    /** @internal */
+    get scope(): ScopeModuleHomeBase;
+  }
+}
+/** theme: end */
+/** theme: begin */
 import { ThemeDefault } from '../bean/theme.default.js';
 import 'zova';
 declare module 'zova' {
-  export interface IBeanRecord {
-    'home-base.style.default': StyleDefault;
+  export interface IBeanRecordGeneral {
     'home-base.theme.default': ThemeDefault;
   }
 }
-/** beans: end */
+/** theme: end */
 import { RequiredSome } from 'zova';
 /** components: begin */
 export * from '../component/page/controller.js';
