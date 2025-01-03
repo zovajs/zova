@@ -131,7 +131,7 @@ function sidebarGuide(): DefaultTheme.SidebarItem[] {
           items: [
             { text: 'Introduction', link: 'introduction' },
             { text: '$style', link: 'style' },
-            { text: '$class', link: 'class' },
+            { text: '$css', link: 'css' },
             { text: '$token', link: 'token' },
             { text: '$theme', link: 'theme' },
           ],

@@ -1,4 +1,4 @@
-# $class
+# $css
 
 ## Global style
 
@@ -56,9 +56,9 @@ export class RenderTest extends BeanRenderBase {
 
 - Use `@Use` to inject the Bean instance
 
-## $class
+## $css
 
-Since the default global style bean can be used extensively across different bean instances. To simplify the code, Zova injects a `$class` object into the `BeanBase` base class, so that global styles can be directly accessed through `this.$css` in any bean instance
+Since the default global style bean can be used extensively across different bean instances. To simplify the code, Zova injects a `$css` object into the `BeanBase` base class, so that global styles can be directly accessed through `this.$css` in any bean instance
 
 ```typescript
 export class RenderTest extends BeanRenderBase {
