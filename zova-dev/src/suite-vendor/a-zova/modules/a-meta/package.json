@@ -32,6 +32,10 @@
     "dist",
     "cli"
   ],
-  "scripts": {},
+  "scripts": {
+    "clean": "tsc -b --clean",
+    "tsc:publish": "npm run clean && tsc -b",
+    "_prepublishOnly": "npm run tsc:publish"
+  },
   "dependencies": {}
 }

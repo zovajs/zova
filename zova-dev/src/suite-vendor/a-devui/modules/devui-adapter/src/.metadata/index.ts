@@ -1,24 +1,28 @@
-/** themeHandler: begin */
-export * from '../bean/themeHandler.default.js';
+/** meta: begin */
+export * from '../bean/meta.themeHandler.js';
 
 import 'zova';
-declare module 'zova' {}
+declare module 'zova' {
+  export interface IMetaRecord {
+    'devui-adapter:themeHandler': never;
+  }
+}
 declare module 'zova-module-devui-adapter' {
-  export interface ThemeHandlerDefault {
+  export interface MetaThemeHandler {
     /** @internal */
     get scope(): ScopeModuleDevuiAdapter;
   }
 }
-/** themeHandler: end */
-/** themeHandler: begin */
-import { ThemeHandlerDefault } from '../bean/themeHandler.default.js';
+/** meta: end */
+/** meta: begin */
+import { MetaThemeHandler } from '../bean/meta.themeHandler.js';
 import 'zova';
 declare module 'zova' {
   export interface IBeanRecordGeneral {
-    'devui-adapter.themeHandler.default': ThemeHandlerDefault;
+    'devui-adapter.meta.themeHandler': MetaThemeHandler;
   }
 }
-/** themeHandler: end */
+/** meta: end */
 /** monkey: begin */
 export * from '../monkey.js';
 /** monkey: end */
