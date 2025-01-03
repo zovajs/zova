@@ -59,24 +59,3 @@ declare module 'zova' {
 }
 
 /** scope: end */
-/** scope module: begin */
-export * from '../bean/bean.api.js';
-export * from '../service/home.js';
-export * from '../service/onion.js';
-declare module 'zova-module-home-api' {
-  export interface BeanApi {
-    /** @internal */
-    get scope(): ScopeModuleHomeApi;
-  }
-
-  export interface ServiceHome {
-    /** @internal */
-    get scope(): ScopeModuleHomeApi;
-  }
-
-  export interface ServiceOnion {
-    /** @internal */
-    get scope(): ScopeModuleHomeApi;
-  }
-}
-/** scope module: end */

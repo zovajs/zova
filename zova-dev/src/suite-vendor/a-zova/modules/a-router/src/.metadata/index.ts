@@ -62,18 +62,3 @@ declare module 'zova' {
 }
 
 /** scope: end */
-/** scope module: begin */
-export * from '../bean/bean.router.js';
-export * from '../bean/local.router.js';
-declare module 'zova-module-a-router' {
-  export interface BeanRouter {
-    /** @internal */
-    get scope(): ScopeModuleARouter;
-  }
-
-  export interface LocalRouter {
-    /** @internal */
-    get scope(): ScopeModuleARouter;
-  }
-}
-/** scope module: end */

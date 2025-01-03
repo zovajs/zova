@@ -45,12 +45,3 @@ declare module 'zova' {
 }
 
 /** scope: end */
-/** scope module: begin */
-export * from '../bean/local.storage.js';
-declare module 'zova-module-a-model' {
-  export interface LocalStorage {
-    /** @internal */
-    get scope(): ScopeModuleAModel;
-  }
-}
-/** scope module: end */

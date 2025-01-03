@@ -45,7 +45,3 @@ declare module 'zova' {
 }
 
 /** scope: end */
-/** scope module: begin */
-
-declare module 'zova-module-a-api' {}
-/** scope module: end */

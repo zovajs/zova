@@ -36,12 +36,3 @@ declare module 'zova' {
 }
 
 /** scope: end */
-/** scope module: begin */
-export * from '../bean/local.pinia.js';
-declare module 'zova-module-a-pinia' {
-  export interface LocalPinia {
-    /** @internal */
-    get scope(): ScopeModuleAPinia;
-  }
-}
-/** scope module: end */

@@ -13,7 +13,6 @@ import { generateConfig, generateConstant, generateError, generateLocale } from 
 import { generateServices } from './toolsMetadata/generateServices.js';
 import { generateScope } from './toolsMetadata/generateScope.js';
 import { generateMonkey } from './toolsMetadata/generateMonkey.js';
-import { generateScopeModule } from './toolsMetadata/generateScopeModule.js';
 import { globAllTsFiles } from './toolsMetadata/utils.js';
 import { getOnionMetasMeta, getOnionScenesMeta } from '@cabloy/module-info';
 import { toUpperCaseFirstChar } from '@cabloy/word-utils';
@@ -155,8 +154,6 @@ export class CliToolsMetadata extends BeanCliBase {
       constants: contentConstants,
       services: contentServices,
     });
-    // scope module
-    content += await generateScopeModule(moduleName, modulePath);
     // empty
     if (!content.trim()) {
       content = 'export {};';
