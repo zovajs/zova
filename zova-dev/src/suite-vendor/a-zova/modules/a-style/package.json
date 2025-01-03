@@ -14,10 +14,20 @@
       "typestyle": true
     },
     "onions": {
+      "style": {
+        "beanGeneral": true,
+        "optionsNone": true,
+        "boilerplate": "cli/style/boilerplate"
+      },
       "theme": {
         "beanGeneral": true,
         "optionsNone": true,
         "boilerplate": "cli/theme/boilerplate"
+      },
+      "themeHandler": {
+        "beanGeneral": true,
+        "optionsNone": true,
+        "boilerplate": "cli/themeHandler/boilerplate"
       }
     },
     "bundle": {

@@ -1,0 +1,7 @@
+import { BeanBase } from 'zova';
+import { Theme } from 'zova-module-a-style';
+
+@Theme()
+export class Theme<%=argv.beanNameCapitalize%> extends BeanBase {
+  protected async __init__() {}
+}
