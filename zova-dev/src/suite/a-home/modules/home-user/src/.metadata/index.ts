@@ -38,8 +38,8 @@ declare module 'zova' {
 
 /** openapi: end */
 /** model: begin */
-export * from '../bean/model.auth.js';
-export * from '../bean/model.user.js';
+export * from '../model/auth.js';
+export * from '../model/user.js';
 
 import 'zova';
 declare module 'zova' {}
@@ -56,8 +56,8 @@ declare module 'zova-module-home-user' {
 }
 /** model: end */
 /** model: begin */
-import { ModelAuth } from '../bean/model.auth.js';
-import { ModelUser } from '../bean/model.user.js';
+import { ModelAuth } from '../model/auth.js';
+import { ModelUser } from '../model/user.js';
 import 'zova';
 declare module 'zova' {
   export interface IBeanRecordGeneral {
