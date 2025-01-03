@@ -10,7 +10,6 @@ import { generateComponents } from './toolsMetadata/generateComponents.js';
 import { generatePages } from './toolsMetadata/generatePages.js';
 import { generateIcons } from './toolsMetadata/generateIcons.js';
 import { generateConfig, generateConstant, generateError, generateLocale } from './toolsMetadata/generateConfig.js';
-import { generateServices } from './toolsMetadata/generateServices.js';
 import { generateScope } from './toolsMetadata/generateScope.js';
 import { generateMonkey } from './toolsMetadata/generateMonkey.js';
 import { globAllTsFiles } from './toolsMetadata/utils.js';
@@ -140,9 +139,6 @@ export class CliToolsMetadata extends BeanCliBase {
     // error
     const contentErrors = await generateError(modulePath);
     content += contentErrors;
-    // services
-    const contentServices = await generateServices(modulePath);
-    content += contentServices;
     // monkey
     content += await generateMonkey(modulePath);
     // scope
@@ -152,7 +148,6 @@ export class CliToolsMetadata extends BeanCliBase {
       errors: contentErrors,
       locales: contentLocales,
       constants: contentConstants,
-      services: contentServices,
     });
     // empty
     if (!content.trim()) {

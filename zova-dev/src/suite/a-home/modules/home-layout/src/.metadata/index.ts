@@ -1,3 +1,45 @@
+/** service: begin */
+export * from '../service/menu.js';
+
+import 'zova';
+declare module 'zova' {}
+declare module 'zova-module-home-layout' {
+  export interface ServiceMenu {
+    /** @internal */
+    get scope(): ScopeModuleHomeLayout;
+  }
+}
+/** service: end */
+/** service: begin */
+import { ServiceMenu } from '../service/menu.js';
+import 'zova';
+declare module 'zova' {
+  export interface IBeanRecordGeneral {
+    'home-layout.service.menu': ServiceMenu;
+  }
+}
+/** service: end */
+/** model: begin */
+export * from '../bean/model.menu.js';
+
+import 'zova';
+declare module 'zova' {}
+declare module 'zova-module-home-layout' {
+  export interface ModelMenu {
+    /** @internal */
+    get scope(): ScopeModuleHomeLayout;
+  }
+}
+/** model: end */
+/** model: begin */
+import { ModelMenu } from '../bean/model.menu.js';
+import 'zova';
+declare module 'zova' {
+  export interface IBeanRecordGeneral {
+    'home-layout.model.menu': ModelMenu;
+  }
+}
+/** model: end */
 import { RequiredSome } from 'zova';
 /** components: begin */
 export * from '../component/essentialLink/controller.js';

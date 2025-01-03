@@ -4,7 +4,6 @@ export interface GenerateScopeOptions {
   errors: string;
   locales: string;
   constants: string;
-  services: string;
 }
 export async function generateScope(
   moduleName: string,
@@ -36,9 +35,6 @@ export async function generateScope(
   if (options.constants) {
     contentImports.push('TypeModuleConstants');
     contentRecords.push('constant: TypeModuleConstants<typeof constants>;');
-  }
-  if (options.services) {
-    contentRecords.push('service: IModuleService;');
   }
   // loop
   for (const sceneName in scopeResources) {

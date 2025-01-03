@@ -12,9 +12,11 @@
     "onions": {
       "service": {
         "sceneIsolate": true,
+        "scopeResource": true,
         "beanGeneral": true,
         "optionsNone": true,
-        "boilerplate": "cli/service/boilerplate"
+        "boilerplate": "cli/service/boilerplate",
+        "metadataCustom": "cli/service/metadata/generate.ts"
       }
     }
   },

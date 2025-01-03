@@ -1,3 +1,45 @@
+/** service: begin */
+export * from '../service/todo.js';
+
+import 'zova';
+declare module 'zova' {}
+declare module 'zova-module-demo-todo' {
+  export interface ServiceTodo {
+    /** @internal */
+    get scope(): ScopeModuleDemoTodo;
+  }
+}
+/** service: end */
+/** service: begin */
+import { ServiceTodo } from '../service/todo.js';
+import 'zova';
+declare module 'zova' {
+  export interface IBeanRecordGeneral {
+    'demo-todo.service.todo': ServiceTodo;
+  }
+}
+/** service: end */
+/** model: begin */
+export * from '../bean/model.todo.js';
+
+import 'zova';
+declare module 'zova' {}
+declare module 'zova-module-demo-todo' {
+  export interface ModelTodo {
+    /** @internal */
+    get scope(): ScopeModuleDemoTodo;
+  }
+}
+/** model: end */
+/** model: begin */
+import { ModelTodo } from '../bean/model.todo.js';
+import 'zova';
+declare module 'zova' {
+  export interface IBeanRecordGeneral {
+    'demo-todo.model.todo': ModelTodo;
+  }
+}
+/** model: end */
 /** pages: begin */
 export * from '../page/item/controller.js';
 export * from '../page/todo/controller.js';

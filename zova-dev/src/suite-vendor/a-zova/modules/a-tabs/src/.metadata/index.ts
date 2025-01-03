@@ -1,3 +1,24 @@
+/** model: begin */
+export * from '../bean/model.tabs.js';
+
+import 'zova';
+declare module 'zova' {}
+declare module 'zova-module-a-tabs' {
+  export interface ModelTabs {
+    /** @internal */
+    get scope(): ScopeModuleATabs;
+  }
+}
+/** model: end */
+/** model: begin */
+import { ModelTabs } from '../bean/model.tabs.js';
+import 'zova';
+declare module 'zova' {
+  export interface IBeanRecordGeneral {
+    'a-tabs.model.tabs': ModelTabs;
+  }
+}
+/** model: end */
 import { RequiredSome } from 'zova';
 /** components: begin */
 export * from '../component/routerViewTabs/controller.js';

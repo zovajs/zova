@@ -1,3 +1,24 @@
+/** service: begin */
+export * from '../service/home.js';
+
+import 'zova';
+declare module 'zova' {}
+declare module 'zova-module-home-api' {
+  export interface ServiceHome {
+    /** @internal */
+    get scope(): ScopeModuleHomeApi;
+  }
+}
+/** service: end */
+/** service: begin */
+import { ServiceHome } from '../service/home.js';
+import 'zova';
+declare module 'zova' {
+  export interface IBeanRecordGeneral {
+    'home-api.service.home': ServiceHome;
+  }
+}
+/** service: end */
 /** bean: begin */
 export * from '../bean/bean.api.js';
 

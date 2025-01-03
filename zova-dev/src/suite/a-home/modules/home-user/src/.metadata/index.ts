@@ -1,3 +1,61 @@
+/** service: begin */
+export * from '../service/auth.js';
+export * from '../service/user.js';
+
+import 'zova';
+declare module 'zova' {}
+declare module 'zova-module-home-user' {
+  export interface ServiceAuth {
+    /** @internal */
+    get scope(): ScopeModuleHomeUser;
+  }
+
+  export interface ServiceUser {
+    /** @internal */
+    get scope(): ScopeModuleHomeUser;
+  }
+}
+/** service: end */
+/** service: begin */
+import { ServiceAuth } from '../service/auth.js';
+import { ServiceUser } from '../service/user.js';
+import 'zova';
+declare module 'zova' {
+  export interface IBeanRecordGeneral {
+    'home-user.service.auth': ServiceAuth;
+    'home-user.service.user': ServiceUser;
+  }
+}
+/** service: end */
+/** model: begin */
+export * from '../bean/model.auth.js';
+export * from '../bean/model.user.js';
+
+import 'zova';
+declare module 'zova' {}
+declare module 'zova-module-home-user' {
+  export interface ModelAuth {
+    /** @internal */
+    get scope(): ScopeModuleHomeUser;
+  }
+
+  export interface ModelUser {
+    /** @internal */
+    get scope(): ScopeModuleHomeUser;
+  }
+}
+/** model: end */
+/** model: begin */
+import { ModelAuth } from '../bean/model.auth.js';
+import { ModelUser } from '../bean/model.user.js';
+import 'zova';
+declare module 'zova' {
+  export interface IBeanRecordGeneral {
+    'home-user.model.auth': ModelAuth;
+    'home-user.model.user': ModelUser;
+  }
+}
+/** model: end */
 /** pages: begin */
 export * from '../page/login/controller.js';
 import { ControllerPageLogin } from '../page/login/controller.js';
