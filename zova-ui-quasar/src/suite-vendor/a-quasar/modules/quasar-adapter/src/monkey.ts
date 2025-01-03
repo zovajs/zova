@@ -6,7 +6,7 @@ export class Monkey extends BeanSimple implements IMonkeyAppInitialize, IMonkeyB
   async appInitialize() {
     // defaultThemeHandler
     const scopeStyle: ScopeModuleAStyle = await this.bean.getScope('a-style');
-    scopeStyle.config.defaultThemeHandler = 'quasar-adapter.themeHandler.default';
+    scopeStyle.config.defaultThemeHandler = 'quasar-adapter.meta.themeHandler';
     // icon
     const localIcon = await this.bean._newBean(LocalIcon, false);
     await localIcon.initialize();

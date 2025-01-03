@@ -6,7 +6,7 @@ export class Monkey extends BeanSimple implements IMonkeyAppInitialize {
   async appInitialize() {
     // defaultThemeHandler
     const scopeStyle: ScopeModuleAStyle = await this.bean.getScope('a-style');
-    scopeStyle.config.defaultThemeHandler = 'element-adapter.themeHandler.default';
+    scopeStyle.config.defaultThemeHandler = 'element-adapter.meta.themeHandler';
     // icon
     const localIcon = await this.bean._newBean(LocalIcon, false);
     await localIcon.initialize();
