@@ -7,8 +7,7 @@
       "bean": {
         "beanGeneral": true,
         "optionsNone": true,
-        "boilerplate": "cli/bean/boilerplate",
-        "metadataCustom": "cli/bean/metadata/generate.ts"
+        "boilerplate": "cli/bean/boilerplate"
       }
     }
   },
