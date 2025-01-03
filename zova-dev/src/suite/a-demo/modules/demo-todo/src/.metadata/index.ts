@@ -113,8 +113,6 @@ declare module 'zova' {
 /** pages: begin */
 export * from '../page/item/controller.js';
 export * from '../page/todo/controller.js';
-import { ControllerPageItem } from '../page/item/controller.js';
-import { ControllerPageTodo } from '../page/todo/controller.js';
 export * from '../routes.js';
 import { TypePageParamsQuery } from 'zova';
 import 'zova';

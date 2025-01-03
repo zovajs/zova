@@ -20,10 +20,10 @@ export async function generateComponents(moduleName: string, modulePath: string)
     const componentName2 = 'Z' + firstCharToUpperCase(componentName);
     contentExports.push(`export * from '../component/${componentName}/controller.js';`);
     contentImports.push(
-      `import { ${className}, ${className}Emits, ${className}Slots } from '../component/${componentName}/controller.js';`,
+      `import { ${className}Emits, ${className}Slots } from '../component/${componentName}/controller.js';`,
     );
     contentImports2.push(`export { default as ${componentName2} } from '../component/${componentName}/index.vue';`);
-    contentImports2.push(`import ${componentName2} from '../component/${componentName}/index.vue';`);
+    contentImports2.push(`import { default as ${componentName2} } from '../component/${componentName}/index.vue';`);
     contentComponents.push(`'${componentName}': ${componentName2},`);
     contentRecords.push(`'${componentFullName}': ${className};`);
     contentRecords2.push(`export interface ${className}Props {

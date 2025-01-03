@@ -264,9 +264,9 @@ declare module 'zova' {
 import { RequiredSome } from 'zova';
 /** components: begin */
 export * from '../component/card/controller.js';
-import { ControllerCard, ControllerCardEmits, ControllerCardSlots } from '../component/card/controller.js';
+import { ControllerCardEmits, ControllerCardSlots } from '../component/card/controller.js';
 export { default as ZCard } from '../component/card/index.vue';
-import ZCard from '../component/card/index.vue';
+import { default as ZCard } from '../component/card/index.vue';
 export const components = {
   card: ZCard,
 };
@@ -299,12 +299,6 @@ export * from '../page/routeQuery/controller.js';
 export * from '../page/routeQuery2/controller.js';
 export * from '../page/state/controller.js';
 export * from '../page/style/controller.js';
-import { ControllerPageLocale } from '../page/locale/controller.js';
-import { ControllerPagePinia } from '../page/pinia/controller.js';
-import { ControllerPageRouteParams } from '../page/routeParams/controller.js';
-import { ControllerPageRouteQuery } from '../page/routeQuery/controller.js';
-import { ControllerPageRouteQuery2 } from '../page/routeQuery2/controller.js';
-import { ControllerPageStyle } from '../page/style/controller.js';
 export * from '../routes.js';
 import { TypePageParamsQuery } from 'zova';
 import 'zova';

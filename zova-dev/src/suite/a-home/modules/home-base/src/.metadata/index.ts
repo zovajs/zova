@@ -120,9 +120,9 @@ declare module 'zova' {
 import { RequiredSome } from 'zova';
 /** components: begin */
 export * from '../component/page/controller.js';
-import { ControllerPage, ControllerPageEmits, ControllerPageSlots } from '../component/page/controller.js';
+import { ControllerPageEmits, ControllerPageSlots } from '../component/page/controller.js';
 export { default as ZPage } from '../component/page/index.vue';
-import ZPage from '../component/page/index.vue';
+import { default as ZPage } from '../component/page/index.vue';
 export const components = {
   page: ZPage,
 };
@@ -147,7 +147,6 @@ declare module 'zova-module-home-base' {
 /** components: end */
 /** pages: begin */
 export * from '../page/errorNotFound/controller.js';
-
 export * from '../routes.js';
 
 import 'zova';

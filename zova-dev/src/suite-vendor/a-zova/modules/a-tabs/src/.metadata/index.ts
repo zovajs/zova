@@ -60,12 +60,11 @@ import { RequiredSome } from 'zova';
 /** components: begin */
 export * from '../component/routerViewTabs/controller.js';
 import {
-  ControllerRouterViewTabs,
   ControllerRouterViewTabsEmits,
   ControllerRouterViewTabsSlots,
 } from '../component/routerViewTabs/controller.js';
 export { default as ZRouterViewTabs } from '../component/routerViewTabs/index.vue';
-import ZRouterViewTabs from '../component/routerViewTabs/index.vue';
+import { default as ZRouterViewTabs } from '../component/routerViewTabs/index.vue';
 export const components = {
   routerViewTabs: ZRouterViewTabs,
 };

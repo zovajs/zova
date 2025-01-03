@@ -187,27 +187,15 @@ import { RequiredSome } from 'zova';
 export * from '../component/essentialLink/controller.js';
 export * from '../component/layoutDefault/controller.js';
 export * from '../component/layoutEmpty/controller.js';
-import {
-  ControllerEssentialLink,
-  ControllerEssentialLinkEmits,
-  ControllerEssentialLinkSlots,
-} from '../component/essentialLink/controller.js';
-import {
-  ControllerLayoutDefault,
-  ControllerLayoutDefaultEmits,
-  ControllerLayoutDefaultSlots,
-} from '../component/layoutDefault/controller.js';
-import {
-  ControllerLayoutEmpty,
-  ControllerLayoutEmptyEmits,
-  ControllerLayoutEmptySlots,
-} from '../component/layoutEmpty/controller.js';
+import { ControllerEssentialLinkEmits, ControllerEssentialLinkSlots } from '../component/essentialLink/controller.js';
+import { ControllerLayoutDefaultEmits, ControllerLayoutDefaultSlots } from '../component/layoutDefault/controller.js';
+import { ControllerLayoutEmptyEmits, ControllerLayoutEmptySlots } from '../component/layoutEmpty/controller.js';
 export { default as ZEssentialLink } from '../component/essentialLink/index.vue';
-import ZEssentialLink from '../component/essentialLink/index.vue';
+import { default as ZEssentialLink } from '../component/essentialLink/index.vue';
 export { default as ZLayoutDefault } from '../component/layoutDefault/index.vue';
-import ZLayoutDefault from '../component/layoutDefault/index.vue';
+import { default as ZLayoutDefault } from '../component/layoutDefault/index.vue';
 export { default as ZLayoutEmpty } from '../component/layoutEmpty/index.vue';
-import ZLayoutEmpty from '../component/layoutEmpty/index.vue';
+import { default as ZLayoutEmpty } from '../component/layoutEmpty/index.vue';
 export const components = {
   essentialLink: ZEssentialLink,
   layoutDefault: ZLayoutDefault,

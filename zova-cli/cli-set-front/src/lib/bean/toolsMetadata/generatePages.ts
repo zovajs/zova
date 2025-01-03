@@ -11,7 +11,6 @@ export async function generatePages(moduleInfo: IModuleInfo, moduleName: string,
   if (files.length === 0) return '';
   files.sort();
   const contentExports: string[] = [];
-  const contentImports: string[] = [];
   const contentPathRecords: string[] = [];
   const contentNameRecords: string[] = [];
   const contentPathSchemas: string[] = [];
@@ -33,9 +32,6 @@ export async function generatePages(moduleInfo: IModuleInfo, moduleName: string,
     const routeNameFull = `${moduleName}:${routeName}`;
     //
     contentExports.push(`export * from '../page/${pageName}/controller.js';`);
-    if (enableRouteQuery || enableRouteParams) {
-      contentImports.push(`import { ${className} } from '../page/${pageName}/controller.js';`);
-    }
     if (!routeName) {
       if (enableRouteQuery) {
         contentPathRecords.push(`'${routePathFull}': ${className}.QueryInput;`);
@@ -67,7 +63,6 @@ export async function generatePages(moduleInfo: IModuleInfo, moduleName: string,
   // combine
   const content = `/** pages: begin */
 ${contentExports.join('\n')}
-${contentImports.join('\n')}
 export * from '../routes.js';
 ${contentNameRecords.length > 0 ? "import { TypePageParamsQuery } from 'zova';" : ''}
 import 'zova';

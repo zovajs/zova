@@ -37,7 +37,6 @@ declare module 'zova' {
 /** local: end */
 /** pages: begin */
 export * from '../page/index/controller.js';
-
 export * from '../routes.js';
 
 import 'zova';
