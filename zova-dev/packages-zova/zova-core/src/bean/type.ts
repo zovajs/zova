@@ -1,22 +1,25 @@
 import { IBeanSceneRecord } from '../decorator/interface/beanOptions.js';
 
-/** bean merge: bean.instance */
-export interface IBeanRecord {}
+export interface IBeanRecordGeneral {}
+export interface IBeanRecordLocal {}
+
+export type IBeanRecord = IBeanRecordGeneral & IBeanRecordLocal;
 export type TypeBeanRecordKeys = keyof IBeanRecord;
 
-export type TypeBeanRecordSelector<SCENE extends keyof IBeanSceneRecord> = {
-  [K in keyof IBeanRecord as K extends `${string}.${SCENE}.${string}` ? K : never]: IBeanRecord[K];
+export type TypeBeanRecordGeneralSelector<SCENE extends keyof IBeanSceneRecord> = {
+  [K in keyof IBeanRecordGeneral as K extends `${string}.${SCENE}.${string}` ? K : never]: IBeanRecordGeneral[K];
 };
-export type TypeBeanRecordSelectorKeys<SCENE extends keyof IBeanSceneRecord> = keyof TypeBeanRecordSelector<SCENE>;
+export type TypeBeanRecordGeneralSelectorKeys<SCENE extends keyof IBeanSceneRecord> =
+  keyof TypeBeanRecordGeneralSelector<SCENE>;
 
-export type TypeBeanRecordSelectorSpecificName<SCENE extends keyof IBeanSceneRecord, NAME extends string> = {
-  [K in keyof IBeanRecord as K extends `${string}.${SCENE}.${NAME}` ? K : never]: IBeanRecord[K];
+export type TypeBeanRecordGeneralSelectorSpecificName<SCENE extends keyof IBeanSceneRecord, NAME extends string> = {
+  [K in keyof IBeanRecordGeneral as K extends `${string}.${SCENE}.${NAME}` ? K : never]: IBeanRecordGeneral[K];
 };
 
-export type TypeBeanRecordSelectorSpecificNameKeys<
+export type TypeBeanRecordGeneralSelectorSpecificNameKeys<
   SCENE extends keyof IBeanSceneRecord,
   NAME extends string,
-> = keyof TypeBeanRecordSelectorSpecificName<SCENE, NAME>;
+> = keyof TypeBeanRecordGeneralSelectorSpecificName<SCENE, NAME>;
 
 export interface IBeanScopeRecord {}
 export type TypeBeanScopeRecordKeys = keyof IBeanScopeRecord;

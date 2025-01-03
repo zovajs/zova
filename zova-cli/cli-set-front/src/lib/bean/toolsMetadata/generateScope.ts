@@ -6,7 +6,12 @@ export interface GenerateScopeOptions {
   constants: string;
   services: string;
 }
-export async function generateScope(moduleName: string, relativeNameCapitalize: string, options: GenerateScopeOptions) {
+export async function generateScope(
+  moduleName: string,
+  relativeNameCapitalize: string,
+  scopeResources: Record<string, boolean>,
+  options: GenerateScopeOptions,
+) {
   const contentImports: string[] = [];
   const contentRecords: string[] = [];
   // basic
@@ -34,6 +39,10 @@ export async function generateScope(moduleName: string, relativeNameCapitalize: 
   }
   if (options.services) {
     contentRecords.push('service: IModuleService;');
+  }
+  // loop
+  for (const sceneName in scopeResources) {
+    contentRecords.push(`${sceneName}: ${scopeResources[sceneName]};`);
   }
   // combine
   const content = `/** scope: begin */

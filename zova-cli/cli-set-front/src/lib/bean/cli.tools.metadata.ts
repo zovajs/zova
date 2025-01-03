@@ -2,6 +2,10 @@ import { BeanCliBase } from '@cabloy/cli';
 import fse from 'fs-extra';
 import path from 'path';
 import { generateOnions } from './toolsMetadata/generateOnions.js';
+import { generateBeanGenerals } from './toolsMetadata/generateBeanGenerals.js';
+import { generateScopeResources } from './toolsMetadata/generateScopeResources.js';
+import { generateScopeResourcesMeta } from './toolsMetadata/generateScopeResourcesMeta.js';
+import { generateMetadataCustom } from './toolsMetadata/generateMetadataCustom.js';
 import { generateComponents } from './toolsMetadata/generateComponents.js';
 import { generatePages } from './toolsMetadata/generatePages.js';
 import { generateIcons } from './toolsMetadata/generateIcons.js';
@@ -11,7 +15,8 @@ import { generateScope } from './toolsMetadata/generateScope.js';
 import { generateMonkey } from './toolsMetadata/generateMonkey.js';
 import { generateScopeModule } from './toolsMetadata/generateScopeModule.js';
 import { globAllTsFiles } from './toolsMetadata/utils.js';
-import { getOnionScenesMeta } from '@cabloy/module-info';
+import { getOnionMetasMeta, getOnionScenesMeta } from '@cabloy/module-info';
+import { toUpperCaseFirstChar } from '@cabloy/word-utils';
 
 declare module '@cabloy/cli' {
   interface ICommandArgv {
@@ -142,7 +147,7 @@ export class CliToolsMetadata extends BeanCliBase {
     // monkey
     content += await generateMonkey(modulePath);
     // scope
-    content += await generateScope(moduleName, relativeNameCapitalize, {
+    content += await generateScope(moduleName, relativeNameCapitalize, scopeResources, {
       components: contentComponents,
       config: contentConfig,
       errors: contentErrors,
