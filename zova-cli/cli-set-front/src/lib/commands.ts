@@ -2,7 +2,6 @@ import defaultList from './command/default.list.js';
 import createProject from './command/create.project.js';
 import createComponent from './command/create.component.js';
 import createBean from './command/create.bean.js';
-import beanGeneral from './command/bean.general.js';
 import beanStore from './command/bean.store.js';
 import beanModel from './command/bean.model.js';
 import beanStyle from './command/bean.style.js';
@@ -52,7 +51,6 @@ export const commands = {
     bean: createBean,
   },
   bean: {
-    general: beanGeneral,
     store: beanStore,
     model: beanModel,
     style: beanStyle,

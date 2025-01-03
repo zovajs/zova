@@ -1,6 +1,0 @@
-import { <%=argv.sceneName==='model'?'':'BeanBase, '%><%=argv.sceneNameCapitalize%> } from 'zova';<%-argv.sceneName==='model'?"\nimport { BeanModelBase } from 'zova-module-a-model';":''%>
-
-@<%=argv.sceneNameCapitalize%>()
-export class <%=argv.sceneNameCapitalize%><%=argv.nameMeta.fullCapitalize%> extends <%=argv.sceneName==='model'?'BeanModelBase':'BeanBase'%> {
-  protected async __init__() {}
-}
