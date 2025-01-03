@@ -1,8 +1,7 @@
 import { BeanCliBase } from '@cabloy/cli';
 import fse from 'fs-extra';
 import path from 'path';
-import { generateGenerals } from './toolsMetadata/generateGenerals.js';
-import { generateBeans } from './toolsMetadata/generateBeans.js';
+import { generateOnions } from './toolsMetadata/generateOnions.js';
 import { generateComponents } from './toolsMetadata/generateComponents.js';
 import { generatePages } from './toolsMetadata/generatePages.js';
 import { generateIcons } from './toolsMetadata/generateIcons.js';

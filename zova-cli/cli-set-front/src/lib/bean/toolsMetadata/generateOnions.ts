@@ -1,6 +1,18 @@
-import { IGlobBeanFile } from '@cabloy/module-info';
+import { extractBeanInfo, getScopeModuleName, globBeanFiles } from './utils.js';
+import { toUpperCaseFirstChar } from '@cabloy/word-utils';
+import { IGlobBeanFile, OnionSceneMeta } from '@cabloy/module-info';
 
-export async function generateGenerals(globFiles: IGlobBeanFile[], moduleName: string, modulePath: string) {
+export async function generateOnions(
+  globFiles: IGlobBeanFile[],
+  sceneName: string,
+  sceneMeta: OnionSceneMeta,
+  moduleName: string,
+  modulePath: string,
+) {
+  const scopeModuleName = getScopeModuleName(moduleName);
+  const sceneNameCapitalize = toUpperCaseFirstChar(sceneName);
+  const globFiles = await globBeanFiles(sceneName, sceneMeta, moduleName, modulePath);
+  if (globFiles.length === 0) return '';
   //
   const contentExports: string[] = [];
   const contentScopes: string[] = [];
