@@ -3,7 +3,7 @@ import { Local } from 'zova-module-a-bean';
 import { RouterViewSlotParams } from './render.jsx';
 import { RouteLocationNormalizedLoaded } from 'vue-router';
 import { nextTick } from 'vue';
-import { ModelTabs } from '../../bean/model.tabs.js';
+import { ModelTabs } from '../../model/tabs.js';
 
 export interface ControllerRouterViewTabsSlots {}
 

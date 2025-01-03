@@ -37,7 +37,7 @@ export class Monkey extends BeanSimple implements IMonkeyAppInitialize, IMonkeyA
     this._beanTheme = await this.bean._getBean(BeanTheme, true);
     // style default
     const scope: ScopeModule = await this.bean.getScope(__ThisModule__);
-    this._beanStyleDefault = await this.bean._getBean(scope.config.defaultStyle, true);
+    this._beanStyleDefault = await this.bean._getBean(scope.config.defaultCss, true);
   }
   async beanInit(bean: BeanContainer, beanInstance: BeanBase) {
     const self = this;

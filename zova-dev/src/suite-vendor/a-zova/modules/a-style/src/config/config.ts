@@ -6,7 +6,7 @@ import {
 
 export const config = (_app: ZovaApplication) => {
   return {
-    defaultStyle: 'home-base.style.default' as TypeBeanRecordGeneralSelectorKeys<'style'>,
+    defaultCss: 'home-base.css.default' as TypeBeanRecordGeneralSelectorKeys<'css'>,
     defaultTheme: 'home-base.theme.default' as TypeBeanRecordGeneralSelectorKeys<'theme'>,
     defaultThemeHandler: '' as TypeBeanRecordGeneralSelectorSpecificNameKeys<'meta', 'themeHandler'>,
     model: {

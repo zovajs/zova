@@ -1,6 +1,6 @@
 import { BeanControllerPageBase, Use, useComputed, zz } from 'zova';
 import { Local } from 'zova-module-a-bean';
-import { ModelTodo } from '../../bean/model.todo.js';
+import { ModelTodo } from '../../model/todo.js';
 import { ServiceTodoGetParams } from '../../service/todo.js';
 
 const ParamsSchema = zz.object({
