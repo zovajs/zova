@@ -29,7 +29,7 @@ declare module 'zova' {
 
 /** openapi: end */
 /** model: begin */
-export * from '../bean/model.todo.js';
+export * from '../model/todo.js';
 
 import 'zova';
 declare module 'zova' {}
@@ -41,7 +41,7 @@ declare module 'zova-module-demo-todo' {
 }
 /** model: end */
 /** model: begin */
-import { ModelTodo } from '../bean/model.todo.js';
+import { ModelTodo } from '../model/todo.js';
 import 'zova';
 declare module 'zova' {
   export interface IBeanRecordGeneral {

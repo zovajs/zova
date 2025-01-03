@@ -29,7 +29,7 @@ declare module 'zova' {
 
 /** openapi: end */
 /** model: begin */
-export * from '../bean/model.menu.js';
+export * from '../model/menu.js';
 
 import 'zova';
 declare module 'zova' {}
@@ -41,7 +41,7 @@ declare module 'zova-module-home-layout' {
 }
 /** model: end */
 /** model: begin */
-import { ModelMenu } from '../bean/model.menu.js';
+import { ModelMenu } from '../model/menu.js';
 import 'zova';
 declare module 'zova' {
   export interface IBeanRecordGeneral {

@@ -1,5 +1,5 @@
 /** model: begin */
-export * from '../bean/model.tabs.js';
+export * from '../model/tabs.js';
 
 import 'zova';
 declare module 'zova' {}
@@ -11,7 +11,7 @@ declare module 'zova-module-a-tabs' {
 }
 /** model: end */
 /** model: begin */
-import { ModelTabs } from '../bean/model.tabs.js';
+import { ModelTabs } from '../model/tabs.js';
 import 'zova';
 declare module 'zova' {
   export interface IBeanRecordGeneral {
