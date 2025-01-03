@@ -16,11 +16,11 @@
 
 Zova 在模块`home-base`中提供了一个全局样式 Bean，我们可以直接在这里提供一些全局样式
 
-`src/suite/a-home/modules/home-base/src/bean/style.default.ts`
+`src/suite/a-home/modules/home-base/src/bean/css.default.ts`
 
 ```typescript
-@Style()
-export class StyleDefault extends BeanBase {
+@Css()
+export class CssDefault extends BeanBase {
   textCenter: string;
   buttonPrimary: string;
 

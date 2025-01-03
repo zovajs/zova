@@ -16,11 +16,11 @@ Enter the name of style bean according to the prompt, such as `myStyle`. The VSC
 
 Zova provides a global style Bean in the module `home-base`. We can provide some global styles directly here
 
-`src/suite/a-home/modules/home-base/src/bean/style.default.ts`
+`src/suite/a-home/modules/home-base/src/bean/css.default.ts`
 
 ```typescript
-@Style()
-export class StyleDefault extends BeanBase {
+@Css()
+export class CssDefault extends BeanBase {
   textCenter: string;
   buttonPrimary: string;
 

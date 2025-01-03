@@ -1,8 +1,8 @@
-import { BeanBase, Style } from 'zova';
-import { ScopeModule } from '../.metadata/this.js';
+import { BeanBase } from 'zova';
+import { Css } from 'zova-module-a-style';
 
-@Style()
-export class StyleDefault extends BeanBase<ScopeModule> {
+@Css()
+export class CssDefault extends BeanBase {
   textCenter: string;
 
   protected async __init__() {

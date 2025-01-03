@@ -1,8 +1,8 @@
 import { BeanBase, useComputed } from 'zova';
-import { Style } from 'zova-module-a-style';
+import { Css } from 'zova-module-a-style';
 
-@Style()
-export class StyleDefault extends BeanBase {
+@Css()
+export class CssDefault extends BeanBase {
   textCenter: string;
   buttonPrimary: string;
 

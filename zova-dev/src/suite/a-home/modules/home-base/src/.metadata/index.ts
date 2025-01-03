@@ -1,3 +1,24 @@
+/** css: begin */
+export * from '../bean/css.default.js';
+
+import 'zova';
+declare module 'zova' {}
+declare module 'zova-module-home-base' {
+  export interface CssDefault {
+    /** @internal */
+    get scope(): ScopeModuleHomeBase;
+  }
+}
+/** css: end */
+/** css: begin */
+import { CssDefault } from '../bean/css.default.js';
+import 'zova';
+declare module 'zova' {
+  export interface IBeanRecordGeneral {
+    'home-base.css.default': CssDefault;
+  }
+}
+/** css: end */
 /** theme: begin */
 export * from '../bean/theme.default.js';
 
