@@ -1,5 +1,5 @@
-import { BeanBase } from 'vona';
-import { Bean } from 'vona-module-a-bean';
+import { BeanBase } from 'zova';
+import { Bean } from 'zova-module-a-bean';
 
 @Bean()
 export class Bean<%=argv.beanNameCapitalize%> extends BeanBase {
