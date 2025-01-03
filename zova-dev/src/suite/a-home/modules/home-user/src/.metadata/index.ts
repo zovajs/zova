@@ -19,6 +19,13 @@ declare module 'zova-module-home-user' {
 /** service: begin */
 import { ServiceAuth } from '../service/auth.js';
 import { ServiceUser } from '../service/user.js';
+export interface IModuleService {
+  auth: ServiceAuth;
+  user: ServiceUser;
+}
+/** service: end */
+/** service: begin */
+
 import 'zova';
 declare module 'zova' {
   export interface IBeanRecordGeneral {
@@ -27,6 +34,9 @@ declare module 'zova' {
   }
 }
 /** service: end */
+/** openapi: begin */
+
+/** openapi: end */
 /** model: begin */
 export * from '../bean/model.auth.js';
 export * from '../bean/model.user.js';
@@ -83,16 +93,6 @@ export const locales = {
   'zh-cn': locale_zh_cn,
 };
 /** locale: end */
-/** service: begin */
-export * from '../service/auth.js';
-export * from '../service/user.js';
-import { ServiceAuth } from '../service/auth.js';
-import { ServiceUser } from '../service/user.js';
-export interface IModuleService {
-  auth: ServiceAuth;
-  user: ServiceUser;
-}
-/** service: end */
 /** scope: begin */
 import { BeanScopeBase, BeanScopeUtil, TypeModuleLocales, TypeLocaleBase } from 'zova';
 import { Scope } from 'zova-module-a-bean';

@@ -12,6 +12,12 @@ declare module 'zova-module-home-layout' {
 /** service: end */
 /** service: begin */
 import { ServiceMenu } from '../service/menu.js';
+export interface IModuleService {
+  menu: ServiceMenu;
+}
+/** service: end */
+/** service: begin */
+
 import 'zova';
 declare module 'zova' {
   export interface IBeanRecordGeneral {
@@ -19,6 +25,9 @@ declare module 'zova' {
   }
 }
 /** service: end */
+/** openapi: begin */
+
+/** openapi: end */
 /** model: begin */
 export * from '../bean/model.menu.js';
 
@@ -124,13 +133,6 @@ export const locales = {
   'zh-cn': locale_zh_cn,
 };
 /** locale: end */
-/** service: begin */
-export * from '../service/menu.js';
-import { ServiceMenu } from '../service/menu.js';
-export interface IModuleService {
-  menu: ServiceMenu;
-}
-/** service: end */
 /** scope: begin */
 import { BeanScopeBase, BeanScopeUtil, TypeModuleConfig, TypeModuleLocales, TypeLocaleBase } from 'zova';
 import { Scope } from 'zova-module-a-bean';

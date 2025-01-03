@@ -12,6 +12,12 @@ declare module 'zova-module-demo-todo' {
 /** service: end */
 /** service: begin */
 import { ServiceTodo } from '../service/todo.js';
+export interface IModuleService {
+  todo: ServiceTodo;
+}
+/** service: end */
+/** service: begin */
+
 import 'zova';
 declare module 'zova' {
   export interface IBeanRecordGeneral {
@@ -19,6 +25,9 @@ declare module 'zova' {
   }
 }
 /** service: end */
+/** openapi: begin */
+
+/** openapi: end */
 /** model: begin */
 export * from '../bean/model.todo.js';
 
@@ -68,13 +77,6 @@ export const pageNameSchemas = {
   },
 };
 /** pages: end */
-/** service: begin */
-export * from '../service/todo.js';
-import { ServiceTodo } from '../service/todo.js';
-export interface IModuleService {
-  todo: ServiceTodo;
-}
-/** service: end */
 /** scope: begin */
 import { BeanScopeBase, BeanScopeUtil } from 'zova';
 import { Scope } from 'zova-module-a-bean';

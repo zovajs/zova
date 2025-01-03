@@ -12,6 +12,12 @@ declare module 'zova-module-home-api' {
 /** service: end */
 /** service: begin */
 import { ServiceHome } from '../service/home.js';
+export interface IModuleService {
+  home: ServiceHome;
+}
+/** service: end */
+/** service: begin */
+
 import 'zova';
 declare module 'zova' {
   export interface IBeanRecordGeneral {
@@ -19,6 +25,9 @@ declare module 'zova' {
   }
 }
 /** service: end */
+/** openapi: begin */
+export * from '../service/openapi/index.js';
+/** openapi: end */
 /** bean: begin */
 export * from '../bean/bean.api.js';
 
@@ -40,17 +49,6 @@ declare module 'zova' {
   }
 }
 /** bean: end */
-/** service: begin */
-export * from '../service/openapi/index.js';
-export * from '../service/home.js';
-export * from '../service/onion.js';
-import { ServiceHome } from '../service/home.js';
-import { ServiceOnion } from '../service/onion.js';
-export interface IModuleService {
-  home: ServiceHome;
-  onion: ServiceOnion;
-}
-/** service: end */
 /** scope: begin */
 import { BeanScopeBase, BeanScopeUtil } from 'zova';
 import { Scope } from 'zova-module-a-bean';
