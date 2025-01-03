@@ -10,7 +10,7 @@ export interface RenderStyle extends StyleStyle {}
 export class RenderStyle extends BeanRenderBase<ScopeModule> {
   render() {
     return (
-      <div class={this.$class.textCenter}>
+      <div class={this.$css.textCenter}>
         <div class={this.cTextColor}>Hello World</div>
         <Button
           onClick={() => {

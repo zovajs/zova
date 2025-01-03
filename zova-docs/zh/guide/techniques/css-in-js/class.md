@@ -44,11 +44,11 @@ export class CssDefault extends BeanBase {
 ```typescript
 export class RenderTest extends BeanRenderBase {
   @Use()
-  $$styleDefault: StyleDefault;
+  $$cssDefault: CssDefault;
 
   render() {
     return (
-      <div class={this.$$styleDefault.textCenter}>Hello Zova</div>
+      <div class={this.$$cssDefault.textCenter}>Hello Zova</div>
     );
   }
 }
@@ -58,13 +58,13 @@ export class RenderTest extends BeanRenderBase {
 
 ## $class
 
-由于缺省全局样式可以在不同的 bean 实例中大量使用。为了简化代码，Zova 在 BeanBase 基类中注入了`$class`对象，从而可以在任何 bean 实例中通过`this.$class`直接访问全局样式
+由于缺省全局样式可以在不同的 bean 实例中大量使用。为了简化代码，Zova 在 BeanBase 基类中注入了`$class`对象，从而可以在任何 bean 实例中通过`this.$css`直接访问全局样式
 
 ```typescript
 export class RenderTest extends BeanRenderBase {
   render() {
     return (
-      <div class={this.$class.textCenter}>Hello Zova</div>
+      <div class={this.$css.textCenter}>Hello Zova</div>
     );
   }
 }

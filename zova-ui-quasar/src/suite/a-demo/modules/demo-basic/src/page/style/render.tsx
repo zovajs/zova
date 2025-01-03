@@ -9,7 +9,7 @@ export interface RenderStyle extends StyleStyle {}
 export class RenderStyle extends BeanRenderBase<ScopeModule> {
   render() {
     return (
-      <QPage padding class={this.$class.textCenter}>
+      <QPage padding class={this.$css.textCenter}>
         <div class={this.cTextColor}>Hello World</div>
         <QBtn
           onClick={() => {

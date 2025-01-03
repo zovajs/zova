@@ -14,7 +14,7 @@ import { BeanTheme } from './bean/bean.theme.js';
 
 export class Monkey extends BeanSimple implements IMonkeyAppInitialize, IMonkeyAppInitialized, IMonkeyBeanInit {
   private _beanTheme: BeanTheme;
-  private _beanStyleDefault: any;
+  private _beanCssDefault: any;
   private _styleInstance: TypeStyle;
 
   async appInitialize() {
@@ -35,9 +35,9 @@ export class Monkey extends BeanSimple implements IMonkeyAppInitialize, IMonkeyA
   async appInitialized() {
     // theme
     this._beanTheme = await this.bean._getBean(BeanTheme, true);
-    // style default
+    // css default
     const scope: ScopeModule = await this.bean.getScope(__ThisModule__);
-    this._beanStyleDefault = await this.bean._getBean(scope.config.defaultCss, true);
+    this._beanCssDefault = await this.bean._getBean(scope.config.defaultCss, true);
   }
   async beanInit(bean: BeanContainer, beanInstance: BeanBase) {
     const self = this;
@@ -50,11 +50,11 @@ export class Monkey extends BeanSimple implements IMonkeyAppInitialize, IMonkeyA
         };
       },
     });
-    bean.defineProperty(beanInstance, '$class', {
+    bean.defineProperty(beanInstance, '$css', {
       enumerable: false,
       configurable: true,
       get() {
-        return self._beanStyleDefault;
+        return self._beanCssDefault;
       },
     });
     bean.defineProperty(beanInstance, '$theme', {

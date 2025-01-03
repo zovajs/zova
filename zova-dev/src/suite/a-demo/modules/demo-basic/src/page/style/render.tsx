@@ -32,9 +32,9 @@ export class RenderStyle extends BeanRenderBase {
           Switch Active
         </button>
         <hr></hr>
-        <div class={this.$class.textCenter}>
+        <div class={this.$css.textCenter}>
           <div>$class.textCenter</div>
-          <button class={this.$class.buttonPrimary}>{`$token.color.primary: ${this.$token.color.primary}`}</button>
+          <button class={this.$css.buttonPrimary}>{`$token.color.primary: ${this.$token.color.primary}`}</button>
           <hr></hr>
           <div class={this.cBlock}>
             <div>{`dark: ${String(this.$theme.dark)}`}</div>

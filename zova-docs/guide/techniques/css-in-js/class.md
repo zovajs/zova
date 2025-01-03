@@ -44,11 +44,11 @@ export class CssDefault extends BeanBase {
 ```typescript
 export class RenderTest extends BeanRenderBase {
   @Use()
-  $$styleDefault: StyleDefault;
+  $$cssDefault: CssDefault;
 
   render() {
     return (
-      <div class={this.$$styleDefault.textCenter}>Hello Zova</div>
+      <div class={this.$$cssDefault.textCenter}>Hello Zova</div>
     );
   }
 }
@@ -58,13 +58,13 @@ export class RenderTest extends BeanRenderBase {
 
 ## $class
 
-Since the default global style bean can be used extensively across different bean instances. To simplify the code, Zova injects a `$class` object into the `BeanBase` base class, so that global styles can be directly accessed through `this.$class` in any bean instance
+Since the default global style bean can be used extensively across different bean instances. To simplify the code, Zova injects a `$class` object into the `BeanBase` base class, so that global styles can be directly accessed through `this.$css` in any bean instance
 
 ```typescript
 export class RenderTest extends BeanRenderBase {
   render() {
     return (
-      <div class={this.$class.textCenter}>Hello Zova</div>
+      <div class={this.$css.textCenter}>Hello Zova</div>
     );
   }
 }
