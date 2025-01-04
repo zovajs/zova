@@ -49,15 +49,13 @@ export class AppResource extends BeanSimple {
 
   addBean<T>(options: Partial<IDecoratorBeanOptionsBase<T>>) {
     const { beanClass, virtual } = options;
+    // name
+    const { scene, name } = this._parseSceneAndBeanName(beanClass!, options.scene, options.name);
     // beanInfo
     const beanInfo = appMetadata.getMetadata<IDecoratorBeanInfoOptions>(DecoratorBeanInfo, beanClass!);
     // module
-    const module = beanInfo?.module ?? '';
-    // name
-    let { scene, name } = this._parseSceneAndBeanName(beanClass!, options.scene, options.name);
-    if (['local'].includes(scene)) {
-      name = beanInfo?.hash || uuid();
-    }
+    const module = beanInfo?.module;
+    if (!module) throw new Error(`module name not parsed for bean: ${scene}.${name}`);
     // beanFullName
     const beanFullName = `${module}.${scene}.${name}`;
     // moduleBelong
@@ -76,10 +74,8 @@ export class AppResource extends BeanSimple {
     // record
     this.beans[beanFullName] = beanOptions;
     if (!this.scenes[scene!]) this.scenes[scene!] = {};
-    if (module) {
-      if (!this.scenes[scene!][module]) this.scenes[scene!][module] = {};
-      this.scenes[scene!][module][beanFullName] = beanOptions;
-    }
+    if (!this.scenes[scene!][module]) this.scenes[scene!][module] = {};
+    this.scenes[scene!][module][beanFullName] = beanOptions;
     // set metadata
     appMetadata.defineMetadata(DecoratorBeanFullName, beanFullName, beanOptions.beanClass);
     // ok
