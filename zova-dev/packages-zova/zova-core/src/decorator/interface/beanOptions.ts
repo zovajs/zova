@@ -29,7 +29,6 @@ export interface IDecoratorBeanOptionsBase<T = unknown, OPTIONS = unknown> {
 
 export interface IDecoratorBeanInfoOptions {
   module: string;
-  hash: string;
 }
 
 // todo: remove

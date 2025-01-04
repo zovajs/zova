@@ -1,7 +1,6 @@
 import { /*template,*/ types as t, type PluginPass } from '@babel/core';
 import type { NodePath, Visitor } from '@babel/traverse';
 import { parseInfoFromPath } from '@cabloy/module-info';
-import { hashCode } from '@cabloy/word-utils';
 
 interface ContextInfo {
   needBeanInfo: boolean;
@@ -51,11 +50,7 @@ function __parseBeanInfo(state) {
   const sourceFileName = state.file.opts.sourceFileName || state.file.opts.filename || '';
   const moduleName = __getModuleName(sourceFileName);
   if (!moduleName) return;
-  const pattern = `${moduleName}/src/`;
-  let fileName = sourceFileName.substring(sourceFileName.indexOf(pattern) + pattern.length);
-  fileName = fileName.substring(0, fileName.lastIndexOf('.'));
-  const hash = hashCode(fileName);
-  return { module: moduleName, hash };
+  return { module: moduleName };
 }
 
 function __getModuleName(sourceFileName: string | null | undefined) {
@@ -67,8 +62,7 @@ function __getModuleName(sourceFileName: string | null | undefined) {
 
 function __createDecoratorNode(beanInfo) {
   const propertyNodeModule = t.objectProperty(t.identifier('module'), t.stringLiteral(beanInfo.module));
-  const propertyNodeHash = t.objectProperty(t.identifier('hash'), t.stringLiteral(beanInfo.hash));
-  const objectExpression = t.objectExpression([propertyNodeModule, propertyNodeHash]);
+  const objectExpression = t.objectExpression([propertyNodeModule]);
   const callExpression = t.callExpression(t.identifier('__z_BeanInfo'), [objectExpression]);
   const decoratorNode = t.decorator(callExpression);
   return decoratorNode;
