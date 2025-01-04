@@ -34,6 +34,7 @@ export class CliRefactorFirstRender extends BeanCliBase {
     const componentName = argv.componentName;
     // nameMeta
     argv.nameMeta = this.helper.parseNameMeta(componentName, ['component', 'page']);
+    argv.renderName = 'render';
     argv.renderNameCapitalize = this.helper.firstCharToUpperCase(argv.renderName);
     // directory
     const componentDir = path.join(targetDir, 'src', argv.nameMeta.original);
@@ -48,10 +49,10 @@ export class CliRefactorFirstRender extends BeanCliBase {
     await this.template.renderBoilerplateAndSnippets({
       targetDir: componentDir,
       setName: __ThisSetName__,
-      snippetsPath: 'refactor/anotherRender/snippets',
-      boilerplatePath: 'refactor/anotherRender/boilerplate',
+      snippetsPath: 'refactor/firstRender/snippets',
+      boilerplatePath: 'refactor/firstRender/boilerplate',
     });
     // tools.metadata
-    // await this.helper.invokeCli([':tools:metadata', moduleName], { cwd: argv.projectPath });
+    await this.helper.invokeCli([':tools:metadata', moduleName], { cwd: argv.projectPath });
   }
 }

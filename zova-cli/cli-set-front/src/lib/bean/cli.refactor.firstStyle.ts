@@ -35,6 +35,7 @@ export class CliRefactorFirstStyle extends BeanCliBase {
     const componentName = argv.componentName;
     // nameMeta
     argv.nameMeta = this.helper.parseNameMeta(componentName, ['component', 'page']);
+    argv.styleName = 'style';
     argv.styleNameCapitalize = this.helper.firstCharToUpperCase(argv.styleName);
     argv.controllerClassName = `Controller${argv.nameMeta.directory === 'page' ? 'Page' : ''}${argv.nameMeta.shortCapitalize}`;
     // directory
@@ -50,10 +51,10 @@ export class CliRefactorFirstStyle extends BeanCliBase {
     await this.template.renderBoilerplateAndSnippets({
       targetDir: componentDir,
       setName: __ThisSetName__,
-      snippetsPath: 'refactor/anotherStyle/snippets',
-      boilerplatePath: 'refactor/anotherStyle/boilerplate',
+      snippetsPath: 'refactor/firstStyle/snippets',
+      boilerplatePath: 'refactor/firstStyle/boilerplate',
     });
     // tools.metadata
-    // await this.helper.invokeCli([':tools:metadata', moduleName], { cwd: argv.projectPath });
+    await this.helper.invokeCli([':tools:metadata', moduleName], { cwd: argv.projectPath });
   }
 }
