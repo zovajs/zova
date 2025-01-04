@@ -23,3 +23,15 @@ export function Tool(): ClassDecorator {
 export function Data(): ClassDecorator {
   return createBeanDecorator('data', 'new');
 }
+
+export function Controller(): ClassDecorator {
+  return createBeanDecorator('controller', 'ctx');
+}
+
+export function Render(): ClassDecorator {
+  return createBeanDecorator('render', 'ctx');
+}
+
+export function Style(): ClassDecorator {
+  return createBeanDecorator('style', 'ctx');
+}

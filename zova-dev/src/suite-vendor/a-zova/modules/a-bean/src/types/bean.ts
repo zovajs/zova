@@ -7,5 +7,8 @@ declare module 'zova' {
     store: never;
     tool: never;
     data: never;
+    controller: never;
+    render: never;
+    style: never;
   }
 }

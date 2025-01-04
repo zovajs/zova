@@ -28,6 +28,18 @@
         "beanGeneral": true,
         "optionsNone": true,
         "boilerplate": "cli/tool/boilerplate"
+      },
+      "controller": {
+        "beanGeneral": false,
+        "optionsNone": true
+      },
+      "render": {
+        "beanGeneral": false,
+        "optionsNone": true
+      },
+      "style": {
+        "beanGeneral": false,
+        "optionsNone": true
       }
     }
   },
