@@ -1,5 +1,4 @@
 export interface GenerateScopeOptions {
-  components: string;
   config: string;
   errors: string;
   locales: string;

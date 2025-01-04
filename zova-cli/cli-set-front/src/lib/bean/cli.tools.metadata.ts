@@ -141,7 +141,6 @@ export class CliToolsMetadata extends BeanCliBase {
     content += await generateMonkey(modulePath);
     // scope
     content += await generateScope(moduleName, relativeNameCapitalize, scopeResources, {
-      components: contentComponents,
       config: contentConfig,
       errors: contentErrors,
       locales: contentLocales,
