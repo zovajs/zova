@@ -2,13 +2,6 @@ import { CliDefaultList } from './bean/cli.default.list.js';
 import { CliCreateProject } from './bean/cli.create.project.js';
 import { CliCreateComponent } from './bean/cli.create.component.js';
 import { CliCreateBean } from './bean/cli.create.bean.js';
-import { CliBeanStore } from './bean/cli.bean.store.js';
-import { CliBeanModel } from './bean/cli.bean.model.js';
-import { CliBeanStyle } from './bean/cli.bean.style.js';
-import { CliBeanTheme } from './bean/cli.bean.theme.js';
-import { CliBeanTool } from './bean/cli.bean.tool.js';
-import { CliBeanLocal } from './bean/cli.bean.local.js';
-import { CliCreateService } from './bean/cli.create.service.js';
 import { CliCreateMock } from './bean/cli.create.mock.js';
 import { CliCreateModule } from './bean/cli.create.module.js';
 import { CliCreatePage } from './bean/cli.create.page.js';
@@ -43,15 +36,8 @@ export const beans = {
   'create.module': CliCreateModule,
   'create.page': CliCreatePage,
   'create.component': CliCreateComponent,
-  'create.service': CliCreateService,
   'create.mock': CliCreateMock,
   'create.bean': CliCreateBean,
-  'bean.store': CliBeanStore,
-  'bean.model': CliBeanModel,
-  'bean.style': CliBeanStyle,
-  'bean.theme': CliBeanTheme,
-  'bean.tool': CliBeanTool,
-  'bean.local': CliBeanLocal,
   'init.icon': CliInitIcon,
   'init.config': CliInitConfig,
   'init.constant': CliInitConstant,
