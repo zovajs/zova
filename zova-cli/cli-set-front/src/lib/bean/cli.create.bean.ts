@@ -39,16 +39,25 @@ export class CliCreateBean extends BeanCliBase {
     const onionScenesMeta = getOnionScenesMeta(this.modulesMeta.modules);
     const onionSceneMeta = onionScenesMeta[sceneName];
     // bean name
-    const beanName = argv.beanName;
+    let beanName = argv.beanName;
+    let beanDir;
+    if (beanName.includes('/')) {
+      const pos = beanName.lastIndexOf('/');
+      const subDir = beanName.substring(0, pos);
+      beanDir = path.join(targetDir, `src/${subDir}`);
+      beanName = argv.beanName = beanName.substring(pos + 1);
+    } else {
+      beanDir = path.join(targetDir, onionSceneMeta.sceneIsolate ? `src/${sceneName}` : 'src/bean');
+    }
     argv.beanNameCapitalize = this.helper.firstCharToUpperCase(beanName);
-    // moduleResourceName
-    argv.moduleResourceName = this.helper.combineModuleNameAndResource(argv.moduleInfo.relativeName, argv.beanName);
-    // directory
-    const beanDir = path.join(targetDir, onionSceneMeta.sceneIsolate ? `src/${sceneName}` : 'src/bean');
+    // file
     const beanFile = path.join(beanDir, onionSceneMeta.sceneIsolate ? `${beanName}.ts` : `${sceneName}.${beanName}.ts`);
     if (fs.existsSync(beanFile)) {
       throw new Error(`${sceneName} bean exists: ${beanName}`);
     }
+    // moduleResourceName
+    argv.moduleResourceName = this.helper.combineModuleNameAndResource(argv.moduleInfo.relativeName, argv.beanName);
+    // dir
     await this.helper.ensureDir(beanDir);
     // boilerplate name
     const boilerplates = this._getBoilerplates();
