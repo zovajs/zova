@@ -15,9 +15,6 @@ export class CtxComponent extends BeanSimple {
       if (!self.ctx.meta.state.inited.state) {
         return self._bean_render_original.call(this, ...args);
       }
-      // todo: BeanControllerPageBase/BeanControllerBase需要增加render方法的类型定义
-      // protected render()
-      // BeanRenderBase不需要render方法的定义
       const render = self._getRender();
       if (!render) {
         return self._bean_render_original.call(this, ...args);
