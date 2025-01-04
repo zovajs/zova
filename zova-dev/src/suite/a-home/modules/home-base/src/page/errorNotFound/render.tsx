@@ -7,7 +7,7 @@ export interface RenderErrorNotFound extends StyleErrorNotFound {}
 
 @Local()
 export class RenderErrorNotFound extends BeanRenderBase {
-  render() {
+  public render() {
     return (
       <div class="text-center">
         <div>

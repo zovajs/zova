@@ -8,7 +8,7 @@ export interface RenderLegacy extends StyleLegacy {}
 
 @Local()
 export class RenderLegacy extends BeanRenderBase {
-  render() {
+  public render() {
     return (
       <ZPage>
         <div>Legacy Vue3 composables/components can be used directly in Zova</div>

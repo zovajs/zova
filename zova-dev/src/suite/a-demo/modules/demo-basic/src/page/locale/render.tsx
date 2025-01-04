@@ -7,7 +7,7 @@ export interface RenderLocale extends ControllerPageLocale {}
 
 @Local()
 export class RenderLocale extends BeanRenderBase {
-  render() {
+  public render() {
     return (
       <ZPage>
         <div>

@@ -56,7 +56,7 @@ export async function generateEntryFiles(
     const pathDest = path.join(configOptions.appDir, configOptions.runtimeDir, 'app');
     fse.ensureDirSync(pathDest);
     // src
-    const files = ['controller.ts', 'render.tsx'];
+    const files = ['controller.tsx'];
     for (const file of files) {
       const fileSrc = resolveTemplatePath(`app/${file}`);
       const fileDest = path.join(pathDest, file);

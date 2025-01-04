@@ -11,6 +11,7 @@ declare module '@cabloy/cli' {
     componentName: string;
     styleName: string;
     styleNameCapitalize: string;
+    styleClassName: string;
     controllerClassName: string;
     nameMeta: NameMeta;
   }
@@ -37,6 +38,7 @@ export class CliRefactorFirstStyle extends BeanCliBase {
     argv.nameMeta = this.helper.parseNameMeta(componentName, ['component', 'page']);
     argv.styleName = 'style';
     argv.styleNameCapitalize = this.helper.firstCharToUpperCase(argv.styleName);
+    argv.styleClassName = `Style${argv.nameMeta.directory === 'page' ? 'Page' : ''}${argv.nameMeta.shortCapitalize}`;
     argv.controllerClassName = `Controller${argv.nameMeta.directory === 'page' ? 'Page' : ''}${argv.nameMeta.shortCapitalize}`;
     // directory
     const componentDir = path.join(targetDir, 'src', argv.nameMeta.original);
@@ -51,7 +53,7 @@ export class CliRefactorFirstStyle extends BeanCliBase {
     await this.template.renderBoilerplateAndSnippets({
       targetDir: componentDir,
       setName: __ThisSetName__,
-      snippetsPath: 'refactor/firstStyle/snippets',
+      snippetsPath: null,
       boilerplatePath: 'refactor/firstStyle/boilerplate',
     });
     // tools.metadata

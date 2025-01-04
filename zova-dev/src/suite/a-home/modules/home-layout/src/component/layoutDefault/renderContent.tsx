@@ -10,7 +10,7 @@ export class RenderContent extends BeanRenderBase {
   @Use()
   $$r: RenderLayoutDefault;
 
-  render() {
+  public render() {
     return this.$$r.$$renderTabs._renderRouterViewTabs();
   }
 }

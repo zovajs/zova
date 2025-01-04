@@ -16,7 +16,7 @@ export class RenderStyle extends BeanRenderBase {
       return <div class={this.cTextColor}>Hello World</div>;
     });
   }
-  render() {
+  public render() {
     return (
       <ZPage>
         <hr></hr>

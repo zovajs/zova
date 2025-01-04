@@ -6,5 +6,5 @@ export interface <%=argv.renderNameCapitalize%> extends Style<%=argv.nameMeta.sh
 
 @Local()
 export class <%=argv.renderNameCapitalize%> extends BeanRenderBase<ScopeModule> {
-  render() {}
+  public render() {}
 }

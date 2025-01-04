@@ -7,7 +7,7 @@ export interface RenderRouteParams extends StyleRouteParams {}
 
 @Local()
 export class RenderRouteParams extends BeanRenderBase {
-  render() {
+  public render() {
     return (
       <ZPage>
         <div class="overflow-x-auto">

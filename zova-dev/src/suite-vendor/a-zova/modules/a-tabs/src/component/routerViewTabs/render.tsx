@@ -13,7 +13,7 @@ export interface RouterViewSlotParams {
 
 @Local()
 export class RenderRouterViewTabs extends BeanRenderBase {
-  render() {
+  public render() {
     const slots = {
       default: component => {
         const { componentKey } = this._handleComponent(component);

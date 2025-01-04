@@ -10,7 +10,7 @@ export class RenderHeader extends BeanRenderBase {
   @Use()
   $$r: RenderLayoutDefault;
 
-  render() {
+  public render() {
     return (
       <div class="navbar bg-base-300 w-full">
         <div class="flex-none lg:hidden">

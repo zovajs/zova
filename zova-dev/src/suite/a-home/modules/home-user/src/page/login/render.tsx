@@ -19,7 +19,7 @@ export class RenderLogin extends BeanRenderBase {
       </div>
     );
   }
-  render() {
+  public render() {
     return (
       <div class="min-h-screen bg-base-200 flex items-center">
         <div class="card mx-auto w-full max-w-5xl  shadow-xl">

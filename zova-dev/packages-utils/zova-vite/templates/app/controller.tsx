@@ -18,6 +18,10 @@ export class ControllerPageApp extends BeanControllerPageBase {
     }
   }
 
+  protected render() {
+    return <router-view />;
+  }
+
   protected async initApp(app: App) {
     // install
     await PluginZova.install(app, this.ctx, { 

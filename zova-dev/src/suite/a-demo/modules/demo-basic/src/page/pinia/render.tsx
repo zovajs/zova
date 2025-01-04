@@ -7,7 +7,7 @@ export interface RenderPinia extends StylePinia {}
 
 @Local()
 export class RenderPinia extends BeanRenderBase {
-  render() {
+  public render() {
     return (
       <ZPage>
         <div>{`count: ${this.$$counter.count}`}</div>

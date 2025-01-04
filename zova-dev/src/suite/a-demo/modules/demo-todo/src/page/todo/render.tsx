@@ -9,7 +9,7 @@ export interface RenderTodo extends StyleTodo {}
 
 @Local()
 export class RenderTodo extends BeanRenderBase {
-  render() {
+  public render() {
     const todoCurrent = this.$$modelTodo.get(this.currentTodo);
     const todos = this.$$modelTodo.select();
     return (

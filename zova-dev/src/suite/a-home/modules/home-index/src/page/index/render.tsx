@@ -6,7 +6,7 @@ export interface RenderIndex extends StyleIndex {}
 
 @Local()
 export class RenderIndex extends BeanRenderBase {
-  render() {
+  public render() {
     return (
       <div style="text-align: center;">
         <div>

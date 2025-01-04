@@ -9,7 +9,7 @@ export interface RenderComponent extends ControllerPageComponent {}
 
 @Local()
 export class RenderComponent extends BeanRenderBase {
-  render() {
+  public render() {
     return (
       <ZPage>
         <ZCard

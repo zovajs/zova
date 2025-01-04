@@ -11,6 +11,7 @@ declare module '@cabloy/cli' {
     componentName: string;
     renderName: string;
     renderNameCapitalize: string;
+    renderClassName: string;
     nameMeta: NameMeta;
   }
 }
@@ -36,6 +37,7 @@ export class CliRefactorFirstRender extends BeanCliBase {
     argv.nameMeta = this.helper.parseNameMeta(componentName, ['component', 'page']);
     argv.renderName = 'render';
     argv.renderNameCapitalize = this.helper.firstCharToUpperCase(argv.renderName);
+    argv.renderClassName = `Render${argv.nameMeta.directory === 'page' ? 'Page' : ''}${argv.nameMeta.shortCapitalize}`;
     // directory
     const componentDir = path.join(targetDir, 'src', argv.nameMeta.original);
     if (!fs.existsSync(componentDir)) {
@@ -49,7 +51,7 @@ export class CliRefactorFirstRender extends BeanCliBase {
     await this.template.renderBoilerplateAndSnippets({
       targetDir: componentDir,
       setName: __ThisSetName__,
-      snippetsPath: 'refactor/firstRender/snippets',
+      snippetsPath: null,
       boilerplatePath: 'refactor/firstRender/boilerplate',
     });
     // tools.metadata

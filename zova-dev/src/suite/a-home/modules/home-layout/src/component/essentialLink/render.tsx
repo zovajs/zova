@@ -25,7 +25,7 @@ export class RenderEssentialLink extends BeanRenderBase {
     return <RouterLink to={this.$props.to!}>{domContent}</RouterLink>;
   }
 
-  render() {
+  public render() {
     return this._renderLink();
   }
 }

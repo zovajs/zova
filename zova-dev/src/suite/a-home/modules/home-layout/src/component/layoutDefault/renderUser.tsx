@@ -6,7 +6,7 @@ export interface RenderUser extends StyleLayoutDefault {}
 
 @Local()
 export class RenderUser extends BeanRenderBase {
-  render() {
+  public render() {
     return (
       <li>
         <details>

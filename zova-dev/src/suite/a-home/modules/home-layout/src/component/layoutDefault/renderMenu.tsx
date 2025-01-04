@@ -39,7 +39,7 @@ export class RenderMenu extends BeanRenderBase {
     return domItems;
   }
 
-  render() {
+  public render() {
     const queryMenus = this.$$modelMenu.select();
     if (queryMenus.isLoading || !queryMenus.data) return;
     const domItems = this._renderMenuItems(queryMenus.data);

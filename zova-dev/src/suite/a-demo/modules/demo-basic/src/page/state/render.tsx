@@ -7,7 +7,7 @@ export interface RenderState extends ControllerPageState {}
 
 @Local()
 export class RenderState extends BeanRenderBase {
-  render() {
+  public render() {
     return (
       <ZPage>
         <div>{`count(ref): ${this.count}`}</div>

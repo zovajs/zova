@@ -31,7 +31,7 @@ export class RenderLayoutDefault extends BeanRenderBase {
   @Use()
   $$renderUser: RenderUser;
 
-  render() {
+  public render() {
     return (
       <div class="drawer lg:drawer-open">
         <input id="my-drawer-2" type="checkbox" class="drawer-toggle" />

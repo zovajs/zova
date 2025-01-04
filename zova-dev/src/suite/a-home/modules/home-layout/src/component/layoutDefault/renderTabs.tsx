@@ -10,7 +10,7 @@ export interface RenderTabs extends StyleLayoutDefault {}
 
 @Local()
 export class RenderTabs extends BeanRenderBase {
-  render() {
+  public render() {
     const domTabs: JSX.Element[] = [];
     for (const tab of this.$$modelTabs.tabs) {
       const className = tab.key === this.$$modelTabs.tabCurrentKey ? 'tab tab-active text-primary' : 'tab';

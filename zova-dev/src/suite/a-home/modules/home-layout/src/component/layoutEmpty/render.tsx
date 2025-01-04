@@ -7,7 +7,7 @@ export interface RenderLayoutEmpty extends ControllerLayoutEmpty {}
 
 @Local()
 export class RenderLayoutEmpty extends BeanRenderBase {
-  render() {
+  public render() {
     return (
       <div>
         <RouterView />
