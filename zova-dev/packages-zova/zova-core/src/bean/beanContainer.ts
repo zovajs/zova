@@ -387,10 +387,8 @@ export class BeanContainer {
     }
     // module: name
     const parts = beanFullName.split('.');
-    if (!['local'].includes(parts[1])) {
-      // module: load
-      await this.app.meta.module.use(parts[0]);
-    }
+    // module: load
+    await this.app.meta.module.use(parts[0]);
     // get
     return appResource.getBean(beanFullName);
   }
