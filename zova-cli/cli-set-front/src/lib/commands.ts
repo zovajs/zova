@@ -16,6 +16,8 @@ import initMonkey from './command/init.monkey.js';
 import refactorPageQuery from './command/refactor.pageQuery.js';
 import refactorPageParams from './command/refactor.pageParams.js';
 import refactorComponentGeneric from './command/refactor.componentGeneric.js';
+import refactorFirstRender from './command/refactor.firstRender.js';
+import refactorFirstStyle from './command/refactor.firstStyle.js';
 import refactorAnotherRender from './command/refactor.anotherRender.js';
 import refactorAnotherStyle from './command/refactor.anotherStyle.js';
 import refactorComponentProps from './command/refactor.componentProps.js';
@@ -55,6 +57,8 @@ export const commands = {
     pageQuery: refactorPageQuery,
     pageParams: refactorPageParams,
     componentGeneric: refactorComponentGeneric,
+    firstRender: refactorFirstRender,
+    firstStyle: refactorFirstStyle,
     anotherRender: refactorAnotherRender,
     anotherStyle: refactorAnotherStyle,
     componentProps: refactorComponentProps,

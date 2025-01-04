@@ -19,6 +19,8 @@ import { CliInitMonkey } from './bean/cli.init.monkey.js';
 import { CliRefactorPageQuery } from './bean/cli.refactor.pageQuery.js';
 import { CliRefactorPageParams } from './bean/cli.refactor.pageParams.js';
 import { CliRefactorComponentGeneric } from './bean/cli.refactor.componentGeneric.js';
+import { CliRefactorFirstRender } from './bean/cli.refactor.firstRender.js';
+import { CliRefactorFirstStyle } from './bean/cli.refactor.firstStyle.js';
 import { CliRefactorAnotherRender } from './bean/cli.refactor.anotherRender.js';
 import { CliRefactorAnotherStyle } from './bean/cli.refactor.anotherStyle.js';
 import { CliRefactorComponentProps } from './bean/cli.refactor.componentProps.js';
@@ -48,6 +50,8 @@ export const beans = {
   'refactor.pageQuery': CliRefactorPageQuery,
   'refactor.pageParams': CliRefactorPageParams,
   'refactor.componentGeneric': CliRefactorComponentGeneric,
+  'refactor.firstRender': CliRefactorFirstRender,
+  'refactor.firstStyle': CliRefactorFirstStyle,
   'refactor.anotherRender': CliRefactorAnotherRender,
   'refactor.anotherStyle': CliRefactorAnotherStyle,
   'refactor.componentProps': CliRefactorComponentProps,
