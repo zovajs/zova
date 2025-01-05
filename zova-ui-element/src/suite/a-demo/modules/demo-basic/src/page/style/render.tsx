@@ -1,6 +1,5 @@
 import { BeanRenderBase, getBeanName } from 'zova';
 import { Render } from 'zova-module-a-bean';
-import type { StyleStyle } from './style.js';
 import { ScopeModule } from '../../.metadata/this.js';
 import { ElButton, ElRadio, ElRadioGroup } from 'element-plus';
 

@@ -1,6 +1,5 @@
 import { BeanRenderBase } from 'zova';
 import { Render } from 'zova-module-a-bean';
-import type { StyleRouterViewTabs } from './style.js';
 import { ComponentInternalInstance, KeepAlive, Transition } from 'vue';
 import { RouteLocationNormalizedLoaded, RouterView } from 'vue-router';
 

@@ -1,6 +1,5 @@
 import { BeanRenderBase } from 'zova';
 import { Render } from 'zova-module-a-bean';
-import type { StyleErrorNotFound } from './style.js';
 import { ScopeModule } from '../../.metadata/this.js';
 import { QBtn, QPage } from 'quasar';
 

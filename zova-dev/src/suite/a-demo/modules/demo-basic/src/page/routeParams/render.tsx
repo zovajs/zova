@@ -1,6 +1,5 @@
 import { BeanRenderBase } from 'zova';
 import { Render } from 'zova-module-a-bean';
-import type { StyleRouteParams } from './style.js';
 import { ZPage } from 'zova-module-home-base';
 
 @Render()

@@ -1,6 +1,5 @@
 import { BeanRenderBase } from 'zova';
 import { Render } from 'zova-module-a-bean';
-import type { StyleIndex } from './style.js';
 
 @Render()
 export class RenderPageIndex extends BeanRenderBase {

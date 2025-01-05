@@ -1,6 +1,5 @@
 import { BeanRenderBase, getBeanName, useComputed } from 'zova';
 import { Render } from 'zova-module-a-bean';
-import type { StyleStyle } from './style.js';
 import { ZPage } from 'zova-module-home-base';
 
 @Render()

@@ -1,6 +1,5 @@
 import { BeanRenderBase } from 'zova';
 import { Render } from 'zova-module-a-bean';
-import type { StyleLayoutDefault } from './style.js';
 import { JSX } from 'vue/jsx-runtime';
 import { ScopeModule } from '../../.metadata/this.js';
 import EssentialLink from '../essentialLink/index.vue';
