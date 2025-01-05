@@ -6,7 +6,7 @@ import { generateBeanGenerals } from './toolsMetadata/generateBeanGenerals.js';
 import { generateScopeResources } from './toolsMetadata/generateScopeResources.js';
 import { generateScopeResourcesMeta } from './toolsMetadata/generateScopeResourcesMeta.js';
 import { generateMetadataCustom } from './toolsMetadata/generateMetadataCustom.js';
-import { generateComponents } from './toolsMetadata/generateComponents.js';
+// import { generateComponents } from './toolsMetadata/generateComponents.js';
 import { generatePages } from './toolsMetadata/generatePages.js';
 import { generateIcons } from './toolsMetadata/generateIcons.js';
 import { generateConfig, generateConstant, generateError, generateLocale } from './toolsMetadata/generateConfig.js';
@@ -119,8 +119,8 @@ export class CliToolsMetadata extends BeanCliBase {
       }
     }
     // components
-    const contentComponents = await generateComponents(moduleName, modulePath);
-    content += contentComponents;
+    // const contentComponents = await generateComponents(moduleName, modulePath);
+    // content += contentComponents;
     // pages
     content += await generatePages(module.info, moduleName, modulePath);
     // icons
