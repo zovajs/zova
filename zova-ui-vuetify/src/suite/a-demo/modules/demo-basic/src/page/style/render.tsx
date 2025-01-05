@@ -5,7 +5,7 @@ import { ScopeModule } from '../../.metadata/this.js';
 import { VBtn, VRadio, VRadioGroup } from 'vuetify/components';
 
 @Render()
-export class RenderStyle extends BeanRenderBase<ScopeModule> {
+export class RenderPageStyle extends BeanRenderBase<ScopeModule> {
   render() {
     return (
       <div class={this.$css.textCenter}>

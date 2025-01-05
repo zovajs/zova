@@ -272,6 +272,9 @@ declare module 'zova' {
   }
 }
 /** render: end */
+/** renders: begin */
+declare module 'zova-module-home-layout' {}
+/** renders: end */
 /** style: begin */
 export * from '../component/layoutDefault/style.js';
 

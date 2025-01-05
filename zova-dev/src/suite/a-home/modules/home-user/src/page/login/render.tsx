@@ -4,7 +4,7 @@ import type { StyleLogin } from './style.js';
 import { withModifiers } from 'vue';
 
 @Render()
-export class RenderLogin extends BeanRenderBase {
+export class RenderPageLogin extends BeanRenderBase {
   _renderLandingInfo() {
     return (
       <div class="min-h-full rounded-l-xl bg-base-200">

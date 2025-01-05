@@ -4,7 +4,7 @@ import type { StyleErrorNotFound } from './style.js';
 import { RouterLink } from 'vue-router';
 
 @Render()
-export class RenderErrorNotFound extends BeanRenderBase {
+export class RenderPageErrorNotFound extends BeanRenderBase {
   public render() {
     return (
       <div class="text-center">

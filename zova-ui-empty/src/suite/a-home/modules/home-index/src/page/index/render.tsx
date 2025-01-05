@@ -5,7 +5,7 @@ import { ScopeModule } from '../../.metadata/this.js';
 import { ZPage } from 'zova-module-home-base';
 
 @Render()
-export class RenderIndex extends BeanRenderBase<ScopeModule> {
+export class RenderPageIndex extends BeanRenderBase<ScopeModule> {
   render() {
     return (
       <ZPage style="text-align: center;">

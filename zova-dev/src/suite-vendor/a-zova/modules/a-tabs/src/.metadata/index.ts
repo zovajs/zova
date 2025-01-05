@@ -106,6 +106,9 @@ declare module 'zova' {
   }
 }
 /** render: end */
+/** renders: begin */
+declare module 'zova-module-a-tabs' {}
+/** renders: end */
 /** style: begin */
 export * from '../component/routerViewTabs/style.js';
 

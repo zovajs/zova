@@ -5,7 +5,7 @@ import { ScopeModule } from '../../.metadata/this.js';
 import { ElButton } from 'element-plus';
 
 @Render()
-export class RenderErrorNotFound extends BeanRenderBase<ScopeModule> {
+export class RenderPageErrorNotFound extends BeanRenderBase<ScopeModule> {
   render() {
     return (
       <div class={this.cTextCenter}>

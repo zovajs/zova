@@ -119,21 +119,24 @@ export * from '../page/login/render.jsx';
 import 'zova';
 declare module 'zova' {}
 declare module 'zova-module-home-user' {
-  export interface RenderLogin {
+  export interface RenderPageLogin {
     /** @internal */
     get scope(): ScopeModuleHomeUser;
   }
 }
 /** render: end */
 /** render: begin */
-import { RenderLogin } from '../page/login/render.jsx';
+import { RenderPageLogin } from '../page/login/render.jsx';
 import 'zova';
 declare module 'zova' {
   export interface IBeanRecordLocal {
-    'home-user.render.login': RenderLogin;
+    'home-user.render.pageLogin': RenderPageLogin;
   }
 }
 /** render: end */
+/** renders: begin */
+declare module 'zova-module-home-user' {}
+/** renders: end */
 /** style: begin */
 export * from '../page/login/style.js';
 

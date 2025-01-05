@@ -5,7 +5,7 @@ import { ScopeModule } from '../../.metadata/this.js';
 import { QBtn, QOptionGroup, QPage } from 'quasar';
 
 @Render()
-export class RenderStyle extends BeanRenderBase<ScopeModule> {
+export class RenderPageStyle extends BeanRenderBase<ScopeModule> {
   render() {
     return (
       <QPage padding class={this.$css.textCenter}>

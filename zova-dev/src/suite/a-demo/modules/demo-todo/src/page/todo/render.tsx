@@ -6,7 +6,7 @@ import { RouterLink } from 'vue-router';
 import { ZPage } from 'zova-module-home-base';
 
 @Render()
-export class RenderTodo extends BeanRenderBase {
+export class RenderPageTodo extends BeanRenderBase {
   public render() {
     const todoCurrent = this.$$modelTodo.get(this.currentTodo);
     const todos = this.$$modelTodo.select();

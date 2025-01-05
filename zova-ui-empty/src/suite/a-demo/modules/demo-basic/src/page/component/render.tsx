@@ -6,7 +6,7 @@ import { ZCard } from '../../index.js';
 import { ZPage } from 'zova-module-home-base';
 
 @Render()
-export class RenderComponent extends BeanRenderBase<ScopeModule> {
+export class RenderPageComponent extends BeanRenderBase<ScopeModule> {
   render() {
     return (
       <ZPage>

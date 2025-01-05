@@ -154,7 +154,7 @@ declare module 'zova-module-home-base' {
     get scope(): ScopeModuleHomeBase;
   }
 
-  export interface RenderErrorNotFound {
+  export interface RenderPageErrorNotFound {
     /** @internal */
     get scope(): ScopeModuleHomeBase;
   }
@@ -162,15 +162,18 @@ declare module 'zova-module-home-base' {
 /** render: end */
 /** render: begin */
 import { RenderPage } from '../component/page/render.jsx';
-import { RenderErrorNotFound } from '../page/errorNotFound/render.jsx';
+import { RenderPageErrorNotFound } from '../page/errorNotFound/render.jsx';
 import 'zova';
 declare module 'zova' {
   export interface IBeanRecordLocal {
     'home-base.render.page': RenderPage;
-    'home-base.render.errorNotFound': RenderErrorNotFound;
+    'home-base.render.pageErrorNotFound': RenderPageErrorNotFound;
   }
 }
 /** render: end */
+/** renders: begin */
+declare module 'zova-module-home-base' {}
+/** renders: end */
 /** style: begin */
 export * from '../component/page/style.js';
 export * from '../page/errorNotFound/style.js';

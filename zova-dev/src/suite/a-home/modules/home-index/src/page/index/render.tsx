@@ -3,7 +3,7 @@ import { Render } from 'zova-module-a-bean';
 import type { StyleIndex } from './style.js';
 
 @Render()
-export class RenderIndex extends BeanRenderBase {
+export class RenderPageIndex extends BeanRenderBase {
   public render() {
     return (
       <div style="text-align: center;">

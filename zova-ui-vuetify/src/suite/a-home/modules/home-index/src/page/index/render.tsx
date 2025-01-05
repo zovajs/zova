@@ -4,7 +4,7 @@ import type { StyleIndex } from './style.js';
 import { ScopeModule } from '../../.metadata/this.js';
 
 @Render()
-export class RenderIndex extends BeanRenderBase<ScopeModule> {
+export class RenderPageIndex extends BeanRenderBase<ScopeModule> {
   render() {
     return (
       <div style="text-align: center;">

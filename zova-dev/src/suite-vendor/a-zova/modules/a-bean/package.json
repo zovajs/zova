@@ -36,7 +36,8 @@
       },
       "render": {
         "beanGeneral": false,
-        "optionsNone": true
+        "optionsNone": true,
+        "metadataCustom": "cli/render/metadata/generate.ts"
       },
       "style": {
         "beanGeneral": false,

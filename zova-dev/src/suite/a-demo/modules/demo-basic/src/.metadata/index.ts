@@ -272,32 +272,32 @@ declare module 'zova-module-demo-basic' {
     get scope(): ScopeModuleDemoBasic;
   }
 
-  export interface RenderComponent {
+  export interface RenderPageComponent {
     /** @internal */
     get scope(): ScopeModuleDemoBasic;
   }
 
-  export interface RenderLegacy {
+  export interface RenderPageLegacy {
     /** @internal */
     get scope(): ScopeModuleDemoBasic;
   }
 
-  export interface RenderLocale {
+  export interface RenderPageLocale {
     /** @internal */
     get scope(): ScopeModuleDemoBasic;
   }
 
-  export interface RenderPinia {
+  export interface RenderPagePinia {
     /** @internal */
     get scope(): ScopeModuleDemoBasic;
   }
 
-  export interface RenderRouteParams {
+  export interface RenderPageRouteParams {
     /** @internal */
     get scope(): ScopeModuleDemoBasic;
   }
 
-  export interface RenderRouteQuery {
+  export interface RenderPageRouteQuery {
     /** @internal */
     get scope(): ScopeModuleDemoBasic;
   }
@@ -307,12 +307,12 @@ declare module 'zova-module-demo-basic' {
     get scope(): ScopeModuleDemoBasic;
   }
 
-  export interface RenderState {
+  export interface RenderPageState {
     /** @internal */
     get scope(): ScopeModuleDemoBasic;
   }
 
-  export interface RenderStyle {
+  export interface RenderPageStyle {
     /** @internal */
     get scope(): ScopeModuleDemoBasic;
   }
@@ -320,31 +320,34 @@ declare module 'zova-module-demo-basic' {
 /** render: end */
 /** render: begin */
 import { RenderCard } from '../component/card/render.jsx';
-import { RenderComponent } from '../page/component/render.jsx';
-import { RenderLegacy } from '../page/legacy/render.jsx';
-import { RenderLocale } from '../page/locale/render.jsx';
-import { RenderPinia } from '../page/pinia/render.jsx';
-import { RenderRouteParams } from '../page/routeParams/render.jsx';
-import { RenderRouteQuery } from '../page/routeQuery/render.jsx';
+import { RenderPageComponent } from '../page/component/render.jsx';
+import { RenderPageLegacy } from '../page/legacy/render.jsx';
+import { RenderPageLocale } from '../page/locale/render.jsx';
+import { RenderPagePinia } from '../page/pinia/render.jsx';
+import { RenderPageRouteParams } from '../page/routeParams/render.jsx';
+import { RenderPageRouteQuery } from '../page/routeQuery/render.jsx';
 import { RenderPageRouteQueryB } from '../page/routeQueryB/render.jsx';
-import { RenderState } from '../page/state/render.jsx';
-import { RenderStyle } from '../page/style/render.jsx';
+import { RenderPageState } from '../page/state/render.jsx';
+import { RenderPageStyle } from '../page/style/render.jsx';
 import 'zova';
 declare module 'zova' {
   export interface IBeanRecordLocal {
     'demo-basic.render.card': RenderCard;
-    'demo-basic.render.component': RenderComponent;
-    'demo-basic.render.legacy': RenderLegacy;
-    'demo-basic.render.locale': RenderLocale;
-    'demo-basic.render.pinia': RenderPinia;
-    'demo-basic.render.routeParams': RenderRouteParams;
-    'demo-basic.render.routeQuery': RenderRouteQuery;
+    'demo-basic.render.pageComponent': RenderPageComponent;
+    'demo-basic.render.pageLegacy': RenderPageLegacy;
+    'demo-basic.render.pageLocale': RenderPageLocale;
+    'demo-basic.render.pagePinia': RenderPagePinia;
+    'demo-basic.render.pageRouteParams': RenderPageRouteParams;
+    'demo-basic.render.pageRouteQuery': RenderPageRouteQuery;
     'demo-basic.render.pageRouteQueryB': RenderPageRouteQueryB;
-    'demo-basic.render.state': RenderState;
-    'demo-basic.render.style': RenderStyle;
+    'demo-basic.render.pageState': RenderPageState;
+    'demo-basic.render.pageStyle': RenderPageStyle;
   }
 }
 /** render: end */
+/** renders: begin */
+declare module 'zova-module-demo-basic' {}
+/** renders: end */
 /** style: begin */
 export * from '../page/legacy/style.js';
 export * from '../page/pinia/style.js';

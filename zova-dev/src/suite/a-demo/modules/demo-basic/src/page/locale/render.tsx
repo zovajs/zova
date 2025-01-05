@@ -4,7 +4,7 @@ import type { ControllerPageLocale } from './controller.js';
 import { ZPage } from 'zova-module-home-base';
 
 @Render()
-export class RenderLocale extends BeanRenderBase {
+export class RenderPageLocale extends BeanRenderBase {
   public render() {
     return (
       <ZPage>

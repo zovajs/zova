@@ -132,28 +132,31 @@ export * from '../page/todo/render.jsx';
 import 'zova';
 declare module 'zova' {}
 declare module 'zova-module-demo-todo' {
-  export interface RenderItem {
+  export interface RenderPageItem {
     /** @internal */
     get scope(): ScopeModuleDemoTodo;
   }
 
-  export interface RenderTodo {
+  export interface RenderPageTodo {
     /** @internal */
     get scope(): ScopeModuleDemoTodo;
   }
 }
 /** render: end */
 /** render: begin */
-import { RenderItem } from '../page/item/render.jsx';
-import { RenderTodo } from '../page/todo/render.jsx';
+import { RenderPageItem } from '../page/item/render.jsx';
+import { RenderPageTodo } from '../page/todo/render.jsx';
 import 'zova';
 declare module 'zova' {
   export interface IBeanRecordLocal {
-    'demo-todo.render.item': RenderItem;
-    'demo-todo.render.todo': RenderTodo;
+    'demo-todo.render.pageItem': RenderPageItem;
+    'demo-todo.render.pageTodo': RenderPageTodo;
   }
 }
 /** render: end */
+/** renders: begin */
+declare module 'zova-module-demo-todo' {}
+/** renders: end */
 /** style: begin */
 export * from '../page/item/style.js';
 export * from '../page/todo/style.js';

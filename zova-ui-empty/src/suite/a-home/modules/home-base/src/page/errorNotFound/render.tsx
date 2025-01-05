@@ -5,7 +5,7 @@ import { ScopeModule } from '../../.metadata/this.js';
 import { RouterLink } from 'vue-router';
 
 @Render()
-export class RenderErrorNotFound extends BeanRenderBase<ScopeModule> {
+export class RenderPageErrorNotFound extends BeanRenderBase<ScopeModule> {
   render() {
     return (
       <div class="text-center">

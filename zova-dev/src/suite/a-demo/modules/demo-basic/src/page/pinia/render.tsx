@@ -4,7 +4,7 @@ import type { StylePinia } from './style.js';
 import { ZPage } from 'zova-module-home-base';
 
 @Render()
-export class RenderPinia extends BeanRenderBase {
+export class RenderPagePinia extends BeanRenderBase {
   public render() {
     return (
       <ZPage>

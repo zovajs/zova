@@ -4,7 +4,7 @@ import type { StyleItem } from './style.js';
 import { ZPage } from 'zova-module-home-base';
 
 @Render()
-export class RenderItem extends BeanRenderBase {
+export class RenderPageItem extends BeanRenderBase {
   render() {
     const todoCurrent = this.$$modelTodo.get(this.currentTodo);
     return (

@@ -5,7 +5,7 @@ import { ScopeModule } from '../../.metadata/this.js';
 import { ElTooltip } from 'element-plus';
 
 @Render()
-export class RenderIndex extends BeanRenderBase<ScopeModule> {
+export class RenderPageIndex extends BeanRenderBase<ScopeModule> {
   render() {
     return (
       <div style="text-align: center;">

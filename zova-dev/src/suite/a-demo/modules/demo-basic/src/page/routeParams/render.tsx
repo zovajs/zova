@@ -4,7 +4,7 @@ import type { StyleRouteParams } from './style.js';
 import { ZPage } from 'zova-module-home-base';
 
 @Render()
-export class RenderRouteParams extends BeanRenderBase {
+export class RenderPageRouteParams extends BeanRenderBase {
   public render() {
     return (
       <ZPage>

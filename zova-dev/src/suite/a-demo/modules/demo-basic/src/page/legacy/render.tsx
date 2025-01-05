@@ -5,7 +5,7 @@ import Counter from '@/components/counter.vue';
 import { ZPage } from 'zova-module-home-base';
 
 @Render()
-export class RenderLegacy extends BeanRenderBase {
+export class RenderPageLegacy extends BeanRenderBase {
   public render() {
     return (
       <ZPage>

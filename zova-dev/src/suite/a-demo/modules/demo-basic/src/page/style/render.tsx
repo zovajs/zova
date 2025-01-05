@@ -4,7 +4,7 @@ import type { StyleStyle } from './style.js';
 import { ZPage } from 'zova-module-home-base';
 
 @Render()
-export class RenderStyle extends BeanRenderBase {
+export class RenderPageStyle extends BeanRenderBase {
   renderHello;
   renderHello2;
 

@@ -51,21 +51,24 @@ export * from '../page/index/render.jsx';
 import 'zova';
 declare module 'zova' {}
 declare module 'zova-module-home-index' {
-  export interface RenderIndex {
+  export interface RenderPageIndex {
     /** @internal */
     get scope(): ScopeModuleHomeIndex;
   }
 }
 /** render: end */
 /** render: begin */
-import { RenderIndex } from '../page/index/render.jsx';
+import { RenderPageIndex } from '../page/index/render.jsx';
 import 'zova';
 declare module 'zova' {
   export interface IBeanRecordLocal {
-    'home-index.render.index': RenderIndex;
+    'home-index.render.pageIndex': RenderPageIndex;
   }
 }
 /** render: end */
+/** renders: begin */
+declare module 'zova-module-home-index' {}
+/** renders: end */
 /** style: begin */
 export * from '../page/index/style.js';
 

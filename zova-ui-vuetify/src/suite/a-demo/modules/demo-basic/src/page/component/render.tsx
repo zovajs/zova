@@ -5,7 +5,7 @@ import { ScopeModule } from '../../.metadata/this.js';
 import { ZCard } from '../../index.js';
 
 @Render()
-export class RenderComponent extends BeanRenderBase<ScopeModule> {
+export class RenderPageComponent extends BeanRenderBase<ScopeModule> {
   render() {
     return (
       <div>

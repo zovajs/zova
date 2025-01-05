@@ -4,7 +4,7 @@ import type { ControllerPageState } from './controller.js';
 import { ZPage } from 'zova-module-home-base';
 
 @Render()
-export class RenderState extends BeanRenderBase {
+export class RenderPageState extends BeanRenderBase {
   public render() {
     return (
       <ZPage>

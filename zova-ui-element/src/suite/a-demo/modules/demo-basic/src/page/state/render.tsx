@@ -4,7 +4,7 @@ import type { ControllerPageState } from './controller.js';
 import { ElButton } from 'element-plus';
 
 @Render()
-export class RenderState extends BeanRenderBase {
+export class RenderPageState extends BeanRenderBase {
   render() {
     return (
       <div>
