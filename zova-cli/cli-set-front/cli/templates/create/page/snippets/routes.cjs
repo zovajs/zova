@@ -1,4 +1,4 @@
-const __snippet_declare = "import <%=argv.nameMeta.fullCapitalize%> from './page/<%=argv.pageName%>/index.vue';\n";
+const __snippet_declare = "import <%=argv.nameMeta.fullCapitalize%> from './.metadata/page/<%=argv.pageName%>.vue';\n";
 const __snippet_body =
   '{ path: \'<%=argv.moduleInfo.name!==argv.pageName?argv.pageName:""%>\', component: <%=argv.nameMeta.fullCapitalize%> },';
 
