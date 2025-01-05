@@ -1,4 +1,5 @@
-import { BeanControllerBase, Local, PropsBase, RequiredSome } from 'zova';
+import { BeanControllerBase, PropsBase, RequiredSome } from 'zova';
+import { Controller } from 'zova-module-a-bean';
 
 export interface Props extends PropsBase<ControllerEssentialLink, Slots> {
   title: string;
@@ -12,7 +13,7 @@ export type Emits = {};
 
 export interface Slots {}
 
-@Local()
+@Controller()
 export class ControllerEssentialLink extends BeanControllerBase<
   unknown,
   RequiredSome<Props, keyof typeof ControllerEssentialLink.$propsDefault>,

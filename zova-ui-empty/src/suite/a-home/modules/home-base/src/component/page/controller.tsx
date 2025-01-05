@@ -1,4 +1,5 @@
-import { BeanControllerBase, Local, PropsBase, RequiredSome } from 'zova';
+import { BeanControllerBase, PropsBase, RequiredSome } from 'zova';
+import { Controller } from 'zova-module-a-bean';
 import { ScopeModule } from '../../.metadata/this.js';
 import { JSX } from 'vue/jsx-runtime';
 
@@ -10,7 +11,7 @@ export interface Slots {
   default?(): JSX.Element;
 }
 
-@Local()
+@Controller()
 export class ControllerPage extends BeanControllerBase<
   ScopeModule,
   RequiredSome<Props, keyof typeof ControllerPage.$propsDefault>,
