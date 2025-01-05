@@ -1,4 +1,4 @@
-import ErrorNotFound from './page/errorNotFound/index.vue';
+import ErrorNotFound from './.metadata/page/errorNotFound.vue';
 import { IModuleRoute } from 'zova-module-a-router';
 
 export const routes: IModuleRoute[] = [

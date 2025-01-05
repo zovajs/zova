@@ -1,4 +1,4 @@
-import Login from './page/login/index.vue';
+import Login from './.metadata/page/login.vue';
 import { IModuleRoute } from 'zova-module-a-router';
 
 export const routes: IModuleRoute[] = [

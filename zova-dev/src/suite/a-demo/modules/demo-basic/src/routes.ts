@@ -1,12 +1,12 @@
-import Legacy from './page/legacy/index.vue';
-import RouteQuery2 from './page/routeQuery2/index.vue';
-import RouteParams from './page/routeParams/index.vue';
-import RouteQuery from './page/routeQuery/index.vue';
-import Pinia from './page/pinia/index.vue';
-import Style from './page/style/index.vue';
-import Locale from './page/locale/index.vue';
-import Component from './page/component/index.vue';
-import State from './page/state/index.vue';
+import Legacy from './.metadata/page/legacy.vue';
+import RouteQuery2 from './.metadata/page/routeQuery2.vue';
+import RouteParams from './.metadata/page/routeParams.vue';
+import RouteQuery from './.metadata/page/routeQuery.vue';
+import Pinia from './.metadata/page/pinia.vue';
+import Style from './.metadata/page/style.vue';
+import Locale from './.metadata/page/locale.vue';
+import Component from './.metadata/page/component.vue';
+import State from './.metadata/page/state.vue';
 import { IModuleRoute } from 'zova-module-a-router';
 
 export const routes: IModuleRoute[] = [

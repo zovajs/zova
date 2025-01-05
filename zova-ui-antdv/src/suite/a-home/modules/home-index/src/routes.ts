@@ -1,4 +1,4 @@
-import Index from './page/index/index.vue';
+import Index from './.metadata/page/index.vue';
 import { IModuleRoute } from 'zova-module-a-router';
 
 export const routes: IModuleRoute[] = [
