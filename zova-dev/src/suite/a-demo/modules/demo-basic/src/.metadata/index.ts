@@ -21,7 +21,6 @@ declare module 'zova' {
 /** theme: end */
 /** local: begin */
 export * from '../component/card/controller.js';
-export * from '../component/card/render.jsx';
 export * from '../page/component/controller.js';
 export * from '../page/component/render.jsx';
 export * from '../page/legacy/controller.js';
@@ -32,7 +31,6 @@ export * from '../page/locale/render.jsx';
 export * from '../page/pinia/controller.js';
 export * from '../page/pinia/render.jsx';
 export * from '../page/pinia/style.js';
-export * from '../page/routeParams/controller.js';
 export * from '../page/routeParams/render.jsx';
 export * from '../page/routeParams/style.js';
 export * from '../page/routeQuery/controller.js';
@@ -51,11 +49,6 @@ import 'zova';
 declare module 'zova' {}
 declare module 'zova-module-demo-basic' {
   export interface ControllerCard {
-    /** @internal */
-    get scope(): ScopeModuleDemoBasic;
-  }
-
-  export interface RenderCard {
     /** @internal */
     get scope(): ScopeModuleDemoBasic;
   }
@@ -106,11 +99,6 @@ declare module 'zova-module-demo-basic' {
   }
 
   export interface StylePinia {
-    /** @internal */
-    get scope(): ScopeModuleDemoBasic;
-  }
-
-  export interface ControllerPageRouteParams {
     /** @internal */
     get scope(): ScopeModuleDemoBasic;
   }
@@ -183,7 +171,6 @@ declare module 'zova-module-demo-basic' {
 /** local: end */
 /** local: begin */
 import { ControllerCard } from '../component/card/controller.js';
-import { RenderCard } from '../component/card/render.jsx';
 import { ControllerPageComponent } from '../page/component/controller.js';
 import { RenderComponent } from '../page/component/render.jsx';
 import { ControllerPageLegacy } from '../page/legacy/controller.js';
@@ -194,7 +181,6 @@ import { RenderLocale } from '../page/locale/render.jsx';
 import { ControllerPagePinia } from '../page/pinia/controller.js';
 import { RenderPinia } from '../page/pinia/render.jsx';
 import { StylePinia } from '../page/pinia/style.js';
-import { ControllerPageRouteParams, ControllerPageRouteParamsSchemaParams } from '../page/routeParams/controller.js';
 import { RenderRouteParams } from '../page/routeParams/render.jsx';
 import { StyleRouteParams } from '../page/routeParams/style.js';
 import { ControllerPageRouteQuery } from '../page/routeQuery/controller.js';
@@ -212,7 +198,6 @@ import 'zova';
 declare module 'zova' {
   export interface IBeanRecordLocal {
     'demo-basic.local.controllerCard': ControllerCard;
-    'demo-basic.local.renderCard': RenderCard;
     'demo-basic.local.controllerPageComponent': ControllerPageComponent;
     'demo-basic.local.renderComponent': RenderComponent;
     'demo-basic.local.controllerPageLegacy': ControllerPageLegacy;
@@ -223,7 +208,6 @@ declare module 'zova' {
     'demo-basic.local.controllerPagePinia': ControllerPagePinia;
     'demo-basic.local.renderPinia': RenderPinia;
     'demo-basic.local.stylePinia': StylePinia;
-    'demo-basic.local.controllerPageRouteParams': ControllerPageRouteParams;
     'demo-basic.local.renderRouteParams': RenderRouteParams;
     'demo-basic.local.styleRouteParams': StyleRouteParams;
     'demo-basic.local.controllerPageRouteQuery': ControllerPageRouteQuery;
@@ -261,93 +245,99 @@ declare module 'zova' {
   }
 }
 /** store: end */
-import { RequiredSome } from 'zova';
-/** components: begin */
-export * from '../component/card/controller.js';
-import { ControllerCardEmits, ControllerCardSlots } from '../component/card/controller.js';
-export { default as ZCard } from '../component/card/index.vue';
-import { default as ZCard } from '../component/card/index.vue';
-export const components = {
-  card: ZCard,
-};
-import 'zova';
-declare module 'zova' {
-  export interface IComponentRecord {
-    'demo-basic:card': ControllerCard;
-  }
-}
-declare module 'zova-module-demo-basic' {
-  export interface ControllerCardProps {
-    controllerRef?: (ref: ControllerCard) => void;
-    slots?: ControllerCardSlots;
-  }
-
-  export interface ControllerCard {
-    $props: RequiredSome<ControllerCardProps, keyof typeof ControllerCard.$propsDefault>;
-    $emit: ControllerCardEmits;
-    $slots: ControllerCardSlots;
-  }
-}
-/** components: end */
-/** pages: begin */
-export * from '../page/component/controller.js';
-export * from '../page/legacy/controller.js';
-export * from '../page/locale/controller.js';
-export * from '../page/pinia/controller.js';
+/** controller: begin */
 export * from '../page/routeParams/controller.js';
-export * from '../page/routeQuery/controller.js';
-export * from '../page/routeQuery2/controller.js';
-export * from '../page/state/controller.js';
-export * from '../page/style/controller.js';
-export * from '../routes.js';
 
-
-
-
-import { TypePageParamsQuery } from 'zova';
+import 'zova';
+declare module 'zova' {}
+declare module 'zova-module-demo-basic' {
+  export interface ControllerPageRouteParams {
+    /** @internal */
+    get scope(): ScopeModuleDemoBasic;
+  }
+}
+/** controller: end */
+/** controller: begin */
+import { ControllerPageRouteParams } from '../page/routeParams/controller.js';
 import 'zova';
 declare module 'zova' {
-  export interface IPagePathRecord {
-    '/demo/basic/component': undefined;
-    '/demo/basic/legacy': undefined;
-    '/demo/basic/locale': ControllerPageLocale.QueryInput;
-    '/demo/basic/pinia': ControllerPagePinia.QueryInput;
-    '/demo/basic/routeQuery': ControllerPageRouteQuery.QueryInput;
-    '/demo/basic/routeQuery2': ControllerPageRouteQuery2.QueryInput;
-    '/demo/basic/state': undefined;
-    '/demo/basic/style': ControllerPageStyle.QueryInput;
+  export interface IBeanRecordLocal {
+    'demo-basic.controller.pageRouteParams': ControllerPageRouteParams;
   }
+}
+/** controller: end */
+/** pages: begin */
+import {
+  ControllerPageRouteParamsSchemaParams,
+  ControllerPageRouteParamsSchemaQuery,
+} from '../page/routeParams/controller.jsx';
+export * from '../routes.js';
+import { TypePageParamsQuery } from 'zova';
+import { zz } from 'zova';
+import 'zova';
+declare module 'zova' {
+  export interface IPagePathRecord {}
   export interface IPageNameRecord {
     'demo-basic:routeParams': TypePageParamsQuery<
-      ControllerPageRouteParams.QueryInput,
-      ControllerPageRouteParams.ParamsInput
+      NSControllerPageRouteParams.QueryInput,
+      NSControllerPageRouteParams.ParamsInput
     >;
   }
 }
-export const pagePathSchemas = {
-  '/demo/basic/locale': {
-    query: ControllerPageLocale.querySchema,
-  },
-  '/demo/basic/pinia': {
-    query: ControllerPagePinia.querySchema,
-  },
-  '/demo/basic/routeQuery': {
-    query: ControllerPageRouteQuery.querySchema,
-  },
-  '/demo/basic/routeQuery2': {
-    query: ControllerPageRouteQuery2.querySchema,
-  },
-  '/demo/basic/style': {
-    query: ControllerPageStyle.querySchema,
-  },
-};
+export const pagePathSchemas = {};
 export const pageNameSchemas = {
   'demo-basic:routeParams': {
-    params: ControllerPageRouteParams.paramsSchema,
-    query: ControllerPageRouteParams.querySchema,
+    params: NSControllerPageRouteParams.paramsSchema,
+    query: NSControllerPageRouteParams.querySchema,
   },
 };
+declare module 'zova-module-demo-basic' {
+  export interface ControllerPageRouteParams {
+    $params: NSControllerPageRouteParams.ParamsOutput;
+    $query: NSControllerPageRouteParams.QueryOutput;
+  }
+}
+export namespace NSControllerPageRouteParams {
+  export const paramsSchema = ControllerPageRouteParamsSchemaParams;
+  export type ParamsInput = zz.input<typeof ControllerPageRouteParamsSchemaParams>;
+  export type ParamsOutput = zz.output<typeof ControllerPageRouteParamsSchemaParams>;
+
+  export const querySchema = ControllerPageRouteParamsSchemaQuery;
+  export type QueryInput = zz.input<typeof ControllerPageRouteParamsSchemaQuery>;
+  export type QueryOutput = zz.output<typeof ControllerPageRouteParamsSchemaQuery>;
+}
 /** pages: end */
+
+/** components: begin */
+
+export const components = {};
+import 'zova';
+declare module 'zova' {
+  export interface IComponentRecord {}
+}
+declare module 'zova-module-demo-basic' {}
+/** components: end */
+/** render: begin */
+export * from '../component/card/render.jsx';
+
+import 'zova';
+declare module 'zova' {}
+declare module 'zova-module-demo-basic' {
+  export interface RenderCard {
+    /** @internal */
+    get scope(): ScopeModuleDemoBasic;
+  }
+}
+/** render: end */
+/** render: begin */
+import { RenderCard } from '../component/card/render.jsx';
+import 'zova';
+declare module 'zova' {
+  export interface IBeanRecordLocal {
+    'demo-basic.render.card': RenderCard;
+  }
+}
+/** render: end */
 /** locale: begin */
 import locale_en_us from '../config/locale/en-us.js';
 import locale_zh_cn from '../config/locale/zh-cn.js';

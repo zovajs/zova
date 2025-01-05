@@ -10,28 +10,3 @@ export const ControllerPageRouteParamsSchemaQuery = zz.object({});
 export class ControllerPageRouteParams extends BeanControllerPageBase {
   protected async __init__() {}
 }
-
-// export interface ControllerPageRouteParams {
-//   $params: ControllerPageRouteParams.ParamsOutput;
-//   $query: ControllerPageRouteParams.QueryOutput;
-// }
-
-// export namespace NSControllerPageRouteParams {
-//   export const paramsSchema = ControllerPageRouteParamsSchemaParams;
-//   export type ParamsInput = zz.input<typeof ParamsSchema>;
-//   export type ParamsOutput = zz.output<typeof ParamsSchema>;
-
-//   export const querySchema = QuerySchema;
-//   export type QueryInput = zz.input<typeof QuerySchema>;
-//   export type QueryOutput = zz.output<typeof QuerySchema>;
-// }
-
-// export namespace ControllerPageRouteParams {
-//   export const paramsSchema = ParamsSchema;
-//   export type ParamsInput = zz.input<typeof ParamsSchema>;
-//   export type ParamsOutput = zz.output<typeof ParamsSchema>;
-
-//   export const querySchema = QuerySchema;
-//   export type QueryInput = zz.input<typeof QuerySchema>;
-//   export type QueryOutput = zz.output<typeof QuerySchema>;
-// }

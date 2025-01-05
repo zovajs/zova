@@ -9,56 +9,93 @@ export function generateMetaPage(
   globFiles: [IGlobBeanFile, IControllerInfo][],
 ) {
   const { moduleName } = options;
-  const contentExports: string[] = [];
+  const contentImports: string[] = [];
   const contentPathRecords: string[] = [];
   const contentNameRecords: string[] = [];
   const contentPathSchemas: string[] = [];
   const contentNameSchemas: string[] = [];
+  const contentRecords: string[] = [];
+  const contentRecords2: string[] = [];
   for (const [globFile, controllerInfo] of globFiles) {
     const { className } = globFile;
-    const { name, nameCapitalize, nameSchemaParams, hasSchemaParams, nameSchemaQuery, hasSchemaQuery } = controllerInfo;
+    const { name, nameSchemaParams, hasSchemaParams, nameSchemaQuery, hasSchemaQuery } = controllerInfo;
+    // import
+    const _contentImports_parts: string[] = [];
+    if (hasSchemaParams) _contentImports_parts.push(nameSchemaParams);
+    if (hasSchemaQuery) _contentImports_parts.push(nameSchemaQuery);
+    if (_contentImports_parts.length > 0) {
+      contentImports.push(`import { ${_contentImports_parts.join(', ')} } from '../page/${name}/controller.jsx';`);
+    }
     // controller.tsx
-    const { routePath, routeName } = await _extractRoutePathOrName(options, globFile, controllerInfo);
+    const { routePath, routeName } = _extractRoutePathOrName(options, globFile, controllerInfo);
     // no matter that: route.meta?.absolute
     const routePathFull = routePath
-      ? `/${moduleInfo.pid}/${moduleInfo.name}/${routePath}`
-      : `/${moduleInfo.pid}/${moduleInfo.name}`;
+      ? `/${moduleName.replace('-', '/')}/${routePath}`
+      : `/${moduleName.replace('-', '/')}`;
     const routeNameFull = `${moduleName}:${routeName}`;
     //
-    contentExports.push(`export * from '../page/${pageName}/controller.js';`);
     if (!routeName) {
-      if (enableRouteQuery) {
-        contentPathRecords.push(`'${routePathFull}': ${className}.QueryInput;`);
+      if (hasSchemaQuery) {
+        contentPathRecords.push(`'${routePathFull}': NS${className}.QueryInput;`);
       } else {
         contentPathRecords.push(`'${routePathFull}': undefined;`); // for type of route path
       }
     } else {
-      if (enableRouteQuery || enableRouteParams) {
+      if (hasSchemaQuery || hasSchemaParams) {
         contentNameRecords.push(
-          `'${routeNameFull}': TypePageParamsQuery<${enableRouteQuery ? `${className}.QueryInput` : 'unknown'}, ${enableRouteParams ? `${className}.ParamsInput` : 'unknown'}>;`,
+          `'${routeNameFull}': TypePageParamsQuery<${hasSchemaQuery ? `NS${className}.QueryInput` : 'unknown'}, ${hasSchemaParams ? `NS${className}.ParamsInput` : 'unknown'}>;`,
         );
       }
     }
     if (!routeName) {
-      if (enableRouteQuery) {
+      if (hasSchemaQuery) {
         contentPathSchemas.push(`'${routePathFull}': {
-          query: ${className}.querySchema,
+          query: NS${className}.querySchema,
         },`);
       }
     } else {
-      if (enableRouteQuery || enableRouteParams) {
+      if (hasSchemaQuery || hasSchemaParams) {
         contentNameSchemas.push(`'${routeNameFull}': {
-          ${enableRouteParams ? `params: ${className}.paramsSchema,` : ''}
-          ${enableRouteQuery ? `query: ${className}.querySchema,` : ''}
+          ${hasSchemaParams ? `params: NS${className}.paramsSchema,` : ''}
+          ${hasSchemaQuery ? `query: NS${className}.querySchema,` : ''}
         },`);
       }
+    }
+    //
+    const _contentRecords_parts: string[] = [];
+    if (hasSchemaParams) _contentRecords_parts.push(`$params: NS${className}.ParamsOutput;`);
+    if (hasSchemaQuery) _contentRecords_parts.push(`$query: NS${className}.QueryOutput;`);
+    if (_contentRecords_parts.length > 0) {
+      contentRecords.push(`export interface ${className} {
+        ${_contentRecords_parts.join('\n')}
+      }`);
+    }
+    //
+    const _contentRecords2_parts: string[] = [];
+    if (hasSchemaParams) {
+      _contentRecords2_parts.push(`export const paramsSchema = ${nameSchemaParams};
+        export type ParamsInput = zz.input<typeof ${nameSchemaParams}>;
+        export type ParamsOutput = zz.output<typeof ${nameSchemaParams}>;
+      `);
+    }
+    if (hasSchemaQuery) {
+      _contentRecords2_parts.push(`export const querySchema = ${nameSchemaQuery};
+        export type QueryInput = zz.input<typeof ${nameSchemaQuery}>;
+        export type QueryOutput = zz.output<typeof ${nameSchemaQuery}>;
+      `);
+    }
+    if (_contentRecords2_parts.length > 0) {
+      contentRecords2.push(`export namespace NS${className} {
+        ${_contentRecords2_parts.join('\n')}
+      }`);
     }
   }
   // combine
   const content = `/** pages: begin */
-${contentExports.join('\n')}
+${contentImports.join('\n')}
 export * from '../routes.js';
 ${contentNameRecords.length > 0 ? "import { TypePageParamsQuery } from 'zova';" : ''}
+${contentRecords2.length > 0 ? "import { zz } from 'zova';" : ''}
 import 'zova';
 declare module 'zova' {
 export interface IPagePathRecord {
@@ -74,6 +111,10 @@ ${contentPathSchemas.join('\n')}
 export const pageNameSchemas = {
 ${contentNameSchemas.join('\n')}
 };
+declare module 'zova-module-${moduleName}' {
+  ${contentRecords.join('\n')} 
+}
+${contentRecords2.join('\n')} 
 /** pages: end */
 `;
   return content;
@@ -92,11 +133,11 @@ function _extractRoutePathOrName(
   const astMatches = astNode.match[0];
   const astMatch = astMatches.find(item => {
     return (<any>item.node).properties.some(prop => {
-      return prop.key.name === 'component' && prop.value.name === className;
+      return prop.key.name === 'component' && prop.value.name === controllerInfo.nameCapitalize;
     });
   });
   if (!astMatch) {
-    throw new Error(`page route not found: ${className}`);
+    throw new Error(`page route not found: ${controllerInfo.nameCapitalize}`);
   }
   const astPropPath = (<any>astMatch?.node).properties.find(prop => {
     return prop.key.name === 'path';
