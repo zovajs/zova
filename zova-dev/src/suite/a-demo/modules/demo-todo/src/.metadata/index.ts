@@ -147,8 +147,8 @@ declare module 'zova' {
 /** render: end */
 /** renders: begin */
 declare module 'zova-module-demo-todo' {
-  export interface RenderPageItem extends ControllerPageItem {}
-  export interface RenderPageTodo extends ControllerPageTodo {}
+  export interface RenderPageItem extends StylePageItem {}
+  export interface RenderPageTodo extends StylePageTodo {}
 }
 /** renders: end */
 /** style: begin */

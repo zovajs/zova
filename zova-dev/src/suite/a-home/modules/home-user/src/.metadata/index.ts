@@ -127,7 +127,7 @@ declare module 'zova' {
 /** render: end */
 /** renders: begin */
 declare module 'zova-module-home-user' {
-  export interface RenderPageLogin extends ControllerPageLogin {}
+  export interface RenderPageLogin extends StylePageLogin {}
 }
 /** renders: end */
 /** style: begin */

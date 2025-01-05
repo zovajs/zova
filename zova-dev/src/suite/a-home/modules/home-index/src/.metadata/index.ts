@@ -59,7 +59,7 @@ declare module 'zova' {
 /** render: end */
 /** renders: begin */
 declare module 'zova-module-home-index' {
-  export interface RenderPageIndex extends ControllerPageIndex {}
+  export interface RenderPageIndex extends StylePageIndex {}
 }
 /** renders: end */
 /** style: begin */

@@ -261,7 +261,7 @@ declare module 'zova' {
 /** renders: begin */
 declare module 'zova-module-home-layout' {
   export interface RenderEssentialLink extends ControllerEssentialLink {}
-  export interface RenderLayoutDefault extends ControllerLayoutDefault {}
+  export interface RenderLayoutDefault extends StyleLayoutDefault {}
   export interface RenderLayoutEmpty extends ControllerLayoutEmpty {}
 }
 /** renders: end */

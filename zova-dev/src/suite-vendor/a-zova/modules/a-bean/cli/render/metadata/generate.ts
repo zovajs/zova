@@ -1,11 +1,15 @@
 import { IGlobBeanFile, IMetadataCustomGenerateOptions } from '@cabloy/module-info';
 import { toUpperCaseFirstChar } from '@cabloy/word-utils';
+import path from 'node:path';
+import fse from 'fs-extra';
 
 export interface IControllerInfo {
   type: string;
   name: string;
   nameCapitalize: string;
   controllerClassName: string;
+  styleClassName: string;
+  hasStyleFirst: boolean;
 }
 
 export default async function (options: IMetadataCustomGenerateOptions): Promise<string> {
@@ -16,7 +20,11 @@ export default async function (options: IMetadataCustomGenerateOptions): Promise
     const { className } = globFile;
     const controllerInfo = _parseControllerInfo(options, globFile);
     if (!controllerInfo) continue;
-    contentRecords.push(`export interface ${className} extends ${controllerInfo.controllerClassName} {}`);
+    if (controllerInfo.hasStyleFirst) {
+      contentRecords.push(`export interface ${className} extends ${controllerInfo.styleClassName} {}`);
+    } else {
+      contentRecords.push(`export interface ${className} extends ${controllerInfo.controllerClassName} {}`);
+    }
   }
   const content = `/** renders: begin */
 declare module 'zova-module-${moduleName}' {
@@ -28,7 +36,7 @@ declare module 'zova-module-${moduleName}' {
 }
 
 function _parseControllerInfo(
-  _options: IMetadataCustomGenerateOptions,
+  options: IMetadataCustomGenerateOptions,
   globFile: IGlobBeanFile,
 ): IControllerInfo | undefined {
   const { fileNameJSRelative } = globFile;
@@ -40,11 +48,17 @@ function _parseControllerInfo(
   const nameCapitalize = toUpperCaseFirstChar(name);
   // controllerClassName
   const controllerClassName = `Controller${type === 'page' ? 'Page' : ''}${nameCapitalize}`;
+  // styleClassName
+  const styleClassName = `Style${type === 'page' ? 'Page' : ''}${nameCapitalize}`;
+  const fileStyle = path.join(options.modulePath, `src/${type}/${name}/style.ts`);
+  const hasStyleFirst = fse.existsSync(fileStyle);
   // ok
   return {
     type,
     name,
     nameCapitalize,
     controllerClassName,
+    styleClassName,
+    hasStyleFirst,
   };
 }

@@ -349,14 +349,14 @@ declare module 'zova' {
 declare module 'zova-module-demo-basic' {
   export interface RenderCard extends ControllerCard {}
   export interface RenderPageComponent extends ControllerPageComponent {}
-  export interface RenderPageLegacy extends ControllerPageLegacy {}
+  export interface RenderPageLegacy extends StylePageLegacy {}
   export interface RenderPageLocale extends ControllerPageLocale {}
-  export interface RenderPagePinia extends ControllerPagePinia {}
-  export interface RenderPageRouteParams extends ControllerPageRouteParams {}
-  export interface RenderPageRouteQuery extends ControllerPageRouteQuery {}
-  export interface RenderPageRouteQueryB extends ControllerPageRouteQueryB {}
+  export interface RenderPagePinia extends StylePagePinia {}
+  export interface RenderPageRouteParams extends StylePageRouteParams {}
+  export interface RenderPageRouteQuery extends StylePageRouteQuery {}
+  export interface RenderPageRouteQueryB extends StylePageRouteQueryB {}
   export interface RenderPageState extends ControllerPageState {}
-  export interface RenderPageStyle extends ControllerPageStyle {}
+  export interface RenderPageStyle extends StylePageStyle {}
 }
 /** renders: end */
 /** style: begin */

@@ -94,7 +94,7 @@ declare module 'zova' {
 /** render: end */
 /** renders: begin */
 declare module 'zova-module-a-tabs' {
-  export interface RenderRouterViewTabs extends ControllerRouterViewTabs {}
+  export interface RenderRouterViewTabs extends StyleRouterViewTabs {}
 }
 /** renders: end */
 /** style: begin */
