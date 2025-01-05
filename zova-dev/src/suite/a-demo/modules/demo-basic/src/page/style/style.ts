@@ -1,6 +1,5 @@
 import { BeanStyleBase, useComputed } from 'zova';
 import { Style } from 'zova-module-a-bean';
-import type { ControllerPageStyle } from './controller.js';
 
 @Style()
 export class StylePageStyle extends BeanStyleBase {

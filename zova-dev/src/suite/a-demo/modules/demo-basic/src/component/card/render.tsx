@@ -1,8 +1,5 @@
 import { BeanRenderBase } from 'zova';
 import { Render } from 'zova-module-a-bean';
-import type { ControllerCard } from './controller.js';
-
-export interface RenderCard extends ControllerCard {}
 
 @Render()
 export class RenderCard extends BeanRenderBase {

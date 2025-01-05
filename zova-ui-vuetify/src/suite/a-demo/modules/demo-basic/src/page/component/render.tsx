@@ -1,6 +1,5 @@
 import { BeanRenderBase } from 'zova';
 import { Render } from 'zova-module-a-bean';
-import type { ControllerPageComponent } from './controller.js';
 import { ScopeModule } from '../../.metadata/this.js';
 import { ZCard } from '../../index.js';
 

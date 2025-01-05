@@ -1,6 +1,5 @@
 import { BeanRenderBase } from 'zova';
 import { Render } from 'zova-module-a-bean';
-import type { ControllerPageLocale } from './controller.js';
 import { ZPage } from 'zova-module-home-base';
 
 @Render()

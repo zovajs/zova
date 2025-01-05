@@ -1,6 +1,5 @@
 import { BeanRenderBase, ZovaIcon } from 'zova';
 import { Render } from 'zova-module-a-bean';
-import type { ControllerEssentialLink } from './controller.js';
 import { RouterLink } from 'vue-router';
 
 @Render()

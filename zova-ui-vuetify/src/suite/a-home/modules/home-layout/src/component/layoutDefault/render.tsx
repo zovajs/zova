@@ -1,6 +1,5 @@
 import { BeanRenderBase } from 'zova';
 import { Render } from 'zova-module-a-bean';
-import type { ControllerLayoutDefault } from './controller.js';
 import {
   VApp,
   VAppBar,
