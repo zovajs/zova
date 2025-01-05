@@ -14,9 +14,9 @@ export default async function (options: IMetadataCustomGenerateOptions): Promise
   for (const globFile of globFiles) {
     if (globFile.isIgnore) continue;
     const { className } = globFile;
-    const controllerInfo = _parseControllerInfo(options, globFile);
-    if (!controllerInfo) continue;
-    contentRecords.push(`export interface ${className} extends ${controllerInfo.controllerClassName} {}`);
+    const renderInfo = _parseRenderInfo(options, globFile);
+    if (!renderInfo) continue;
+    contentRecords.push(`export interface ${className} extends ${renderInfo.controllerClassName} {}`);
   }
   const content = `/** renders: begin */
 declare module 'zova-module-${moduleName}' {
@@ -27,7 +27,7 @@ declare module 'zova-module-${moduleName}' {
   return content;
 }
 
-function _parseControllerInfo(
+function _parseRenderInfo(
   _options: IMetadataCustomGenerateOptions,
   globFile: IGlobBeanFile,
 ): IControllerInfo | undefined {
