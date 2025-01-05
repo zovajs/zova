@@ -11,7 +11,7 @@ interface IControllerInfo {
 }
 
 export default async function (options: IMetadataCustomGenerateOptions): Promise<string> {
-  const { modulePath, globFiles } = options;
+  const { globFiles } = options;
   for (const globFile of globFiles) {
     const { fileNameJSRelative } = globFile;
     const controllerInfo = _parseControllerInfo(fileNameJSRelative);
@@ -45,18 +45,22 @@ function _generateFileVuePage(
 ) {
   const { type, name, nameCapitalize } = controllerInfo;
   const contentImports: string[] = [];
+  // controller
   contentImports.push("import { useControllerPage } from 'zova';");
   contentImports.push(`import { ControllerPage${nameCapitalize} } from '../../page/${name}/controller.jsx';`);
   const fileRender = path.join(options.modulePath, `src/${type}/${name}/render.tsx`);
+  // render
   const hasRender = fse.existsSync(fileRender);
   if (hasRender) {
     contentImports.push(`import { RenderPage${nameCapitalize} } from '../../page/${name}/render.jsx';`);
   }
+  // style
   const fileStyle = path.join(options.modulePath, `src/${type}/${name}/style.ts`);
   const hasStyle = fse.existsSync(fileStyle);
   if (hasStyle) {
     contentImports.push(`import { StylePage${nameCapitalize} } from '../../page/${name}/style.js';`);
   }
+  // content
   const content = `<template>
   <template></template>
 </template>
@@ -74,7 +78,59 @@ function _generateFileVueComponent(
   globFile: IGlobBeanFile,
   controllerInfo: IControllerInfo,
 ) {
-  return 'component';
+  const { type, name, nameCapitalize } = controllerInfo;
+  const contentImports: string[] = [];
+  // props
+  const nameProps = `Controller${nameCapitalize}Props`;
+  const hasProps = globFile.fileContent.includes(nameProps);
+  // emits
+  const nameEmits = `Controller${nameCapitalize}Emits`;
+  const hasEmits = globFile.fileContent.includes(nameEmits);
+  // slots
+  const nameSlots = `Controller${nameCapitalize}Slots`;
+  const hasSlots = globFile.fileContent.includes(nameSlots);
+  // controller
+  contentImports.push(`import { useController${hasProps ? '' : ', PropsBase'} } from 'zova';`);
+  contentImports.push(
+    `import { Controller${nameCapitalize}${hasProps ? `, ${nameProps}` : ''}${hasEmits ? `, ${nameEmits}` : ''}${!hasProps && hasSlots ? `, ${nameSlots}` : ''} } from '../../component/${name}/controller.jsx';`,
+  );
+  // render
+  const fileRender = path.join(options.modulePath, `src/${type}/${name}/render.tsx`);
+  const hasRender = fse.existsSync(fileRender);
+  if (hasRender) {
+    contentImports.push(`import { Render${nameCapitalize} } from '../../component/${name}/render.jsx';`);
+  }
+  // style
+  const fileStyle = path.join(options.modulePath, `src/${type}/${name}/style.ts`);
+  const hasStyle = fse.existsSync(fileStyle);
+  if (hasStyle) {
+    contentImports.push(`import { Style${nameCapitalize} } from '../../component/${name}/style.js';`);
+  }
+  // props
+  let contentProps = '';
+  if (hasProps) {
+    contentProps = `const props = withDefaults(defineProps<${nameProps}>(), Controller${nameCapitalize}.$propsDefault);`;
+  } else {
+    contentProps = `const props = defineProps<PropsBase<Controller${nameCapitalize}${hasSlots ? `, ${nameSlots}` : ''}>>();`;
+  }
+  // emits
+  let contentEmits = '';
+  if (hasEmits) {
+    contentEmits = `const emit = defineEmits<${nameSlots}>();`;
+  }
+  // content
+  const content = `<template>
+  <template></template>
+</template>
+
+<script setup lang="ts">
+${contentImports.join('\n')}
+${contentProps}
+${contentEmits}
+useController(props, ${hasEmits ? 'emit' : 'undefined'}, Controller${nameCapitalize}, ${hasRender ? `Render${nameCapitalize}` : undefined}, ${hasStyle ? `Style${nameCapitalize}` : undefined});
+</script>
+`;
+  return content;
 }
 
 function _parseControllerInfo(fileNameJSRelative: string): IControllerInfo | undefined {

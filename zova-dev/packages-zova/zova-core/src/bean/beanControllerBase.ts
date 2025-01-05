@@ -11,6 +11,11 @@ type Data = Record<string, unknown>;
 //   set?: (v: T) => any;
 // };
 
+export interface PropsBase<CONTROLLER = unknown, SLOTS = unknown> {
+  controllerRef?: (ref: CONTROLLER) => void;
+  slots?: SLOTS;
+}
+
 export class BeanControllerBase extends BeanBase {
   public $props: unknown;
   public $emit: unknown;
