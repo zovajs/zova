@@ -1,12 +1,11 @@
-import { BeanRenderBase, Local } from 'zova';
+import { BeanRenderBase } from 'zova';
+import { Render } from 'zova-module-a-bean';
 import type { ControllerPageComponent } from './controller.js';
 import { ScopeModule } from '../../.metadata/this.js';
 import { ZCard } from '../../index.js';
 import { ZPage } from 'zova-module-home-base';
 
-export interface RenderComponent extends ControllerPageComponent {}
-
-@Local()
+@Render()
 export class RenderComponent extends BeanRenderBase<ScopeModule> {
   render() {
     return (

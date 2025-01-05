@@ -1,10 +1,9 @@
-import { BeanRenderBase, ZovaIcon, Local } from 'zova';
+import { BeanRenderBase, ZovaIcon } from 'zova';
+import { Render } from 'zova-module-a-bean';
 import type { ControllerEssentialLink } from './controller.js';
 import { RouterLink } from 'vue-router';
 
-export interface RenderEssentialLink extends ControllerEssentialLink {}
-
-@Local()
+@Render()
 export class RenderEssentialLink extends BeanRenderBase {
   _renderLink() {
     const domContent = [
