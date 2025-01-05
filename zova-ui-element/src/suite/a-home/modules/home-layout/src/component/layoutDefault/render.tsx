@@ -1,4 +1,5 @@
-import { BeanRenderBase, Local } from 'zova';
+import { BeanRenderBase } from 'zova';
+import { Render } from 'zova-module-a-bean';
 import type { StyleLayoutDefault } from './style.js';
 import {
   ElAside,
@@ -16,9 +17,7 @@ import { RouterView } from 'vue-router';
 import { ServiceMenuEntity } from '../../service/menu.js';
 import { ScopeModule } from '../../.metadata/this.js';
 
-export interface RenderLayoutDefault extends StyleLayoutDefault {}
-
-@Local()
+@Render()
 export class RenderLayoutDefault extends BeanRenderBase<ScopeModule> {
   _renderMenuItem(item: ServiceMenuEntity) {
     // folder

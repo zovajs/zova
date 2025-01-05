@@ -1,11 +1,10 @@
-import { BeanRenderBase, Local, getBeanName } from 'zova';
+import { BeanRenderBase, getBeanName } from 'zova';
+import { Render } from 'zova-module-a-bean';
 import type { StyleStyle } from './style.js';
 import { ScopeModule } from '../../.metadata/this.js';
 import { ElButton, ElRadio, ElRadioGroup } from 'element-plus';
 
-export interface RenderStyle extends StyleStyle {}
-
-@Local()
+@Render()
 export class RenderStyle extends BeanRenderBase<ScopeModule> {
   render() {
     return (

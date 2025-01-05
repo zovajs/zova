@@ -1,11 +1,10 @@
-import { BeanRenderBase, Local } from 'zova';
+import { BeanRenderBase } from 'zova';
+import { Render } from 'zova-module-a-bean';
 import type { StyleIndex } from './style.js';
 import { ScopeModule } from '../../.metadata/this.js';
 import { ElTooltip } from 'element-plus';
 
-export interface RenderIndex extends StyleIndex {}
-
-@Local()
+@Render()
 export class RenderIndex extends BeanRenderBase<ScopeModule> {
   render() {
     return (
