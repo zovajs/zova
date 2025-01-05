@@ -3,7 +3,7 @@ import { Render } from 'zova-module-a-bean';
 import { ZPage } from 'zova-module-home-base';
 
 @Render()
-export class RenderRouteQueryB extends BeanRenderBase {
+export class RenderPageRouteQueryB extends BeanRenderBase {
   public render() {
     return (
       <ZPage>

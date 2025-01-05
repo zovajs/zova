@@ -302,7 +302,7 @@ declare module 'zova-module-demo-basic' {
     get scope(): ScopeModuleDemoBasic;
   }
 
-  export interface RenderRouteQueryB {
+  export interface RenderPageRouteQueryB {
     /** @internal */
     get scope(): ScopeModuleDemoBasic;
   }
@@ -326,7 +326,7 @@ import { RenderLocale } from '../page/locale/render.jsx';
 import { RenderPinia } from '../page/pinia/render.jsx';
 import { RenderRouteParams } from '../page/routeParams/render.jsx';
 import { RenderRouteQuery } from '../page/routeQuery/render.jsx';
-import { RenderRouteQueryB } from '../page/routeQueryB/render.jsx';
+import { RenderPageRouteQueryB } from '../page/routeQueryB/render.jsx';
 import { RenderState } from '../page/state/render.jsx';
 import { RenderStyle } from '../page/style/render.jsx';
 import 'zova';
@@ -339,7 +339,7 @@ declare module 'zova' {
     'demo-basic.render.pinia': RenderPinia;
     'demo-basic.render.routeParams': RenderRouteParams;
     'demo-basic.render.routeQuery': RenderRouteQuery;
-    'demo-basic.render.routeQueryB': RenderRouteQueryB;
+    'demo-basic.render.pageRouteQueryB': RenderPageRouteQueryB;
     'demo-basic.render.state': RenderState;
     'demo-basic.render.style': RenderStyle;
   }
@@ -376,7 +376,7 @@ declare module 'zova-module-demo-basic' {
     get scope(): ScopeModuleDemoBasic;
   }
 
-  export interface StyleRouteQueryB {
+  export interface StylePageRouteQueryB {
     /** @internal */
     get scope(): ScopeModuleDemoBasic;
   }
@@ -392,7 +392,7 @@ import { StyleLegacy } from '../page/legacy/style.js';
 import { StylePinia } from '../page/pinia/style.js';
 import { StyleRouteParams } from '../page/routeParams/style.js';
 import { StyleRouteQuery } from '../page/routeQuery/style.js';
-import { StyleRouteQueryB } from '../page/routeQueryB/style.js';
+import { StylePageRouteQueryB } from '../page/routeQueryB/style.js';
 import { StyleStyle } from '../page/style/style.js';
 import 'zova';
 declare module 'zova' {
@@ -401,7 +401,7 @@ declare module 'zova' {
     'demo-basic.style.pinia': StylePinia;
     'demo-basic.style.routeParams': StyleRouteParams;
     'demo-basic.style.routeQuery': StyleRouteQuery;
-    'demo-basic.style.routeQueryB': StyleRouteQueryB;
+    'demo-basic.style.pageRouteQueryB': StylePageRouteQueryB;
     'demo-basic.style.style': StyleStyle;
   }
 }
