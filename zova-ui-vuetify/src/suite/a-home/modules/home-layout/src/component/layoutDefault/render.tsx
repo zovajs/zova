@@ -1,4 +1,5 @@
-import { BeanRenderBase, Local } from 'zova';
+import { BeanRenderBase } from 'zova';
+import { Render } from 'zova-module-a-bean';
 import type { ControllerLayoutDefault } from './controller.js';
 import {
   VApp,
@@ -18,9 +19,7 @@ import EssentialLink from '../essentialLink/index.vue';
 import { RouterView } from 'vue-router';
 import { ServiceMenuEntity } from '../../service/menu.js';
 
-export interface RenderLayoutDefault extends ControllerLayoutDefault {}
-
-@Local()
+@Render()
 export class RenderLayoutDefault extends BeanRenderBase {
   _renderMenuItem(item: ServiceMenuEntity) {
     if (item.separator) {

@@ -1,10 +1,9 @@
-import { BeanRenderBase, Local } from 'zova';
+import { BeanRenderBase } from 'zova';
+import { Render } from 'zova-module-a-bean';
 import type { ControllerPageState } from './controller.js';
 import { VBtn } from 'vuetify/components';
 
-export interface RenderState extends ControllerPageState {}
-
-@Local()
+@Render()
 export class RenderState extends BeanRenderBase {
   render() {
     return (
