@@ -1,7 +1,7 @@
 import { BeanControllerPageBase } from 'zova';
-import { Local } from 'zova-module-a-bean';
+import { Controller } from 'zova-module-a-bean';
 
-@Local()
+@Controller()
 export class ControllerPageErrorNotFound extends BeanControllerPageBase {
   protected async __init__() {}
 }

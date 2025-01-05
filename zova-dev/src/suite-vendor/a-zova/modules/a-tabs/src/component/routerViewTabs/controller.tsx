@@ -1,5 +1,5 @@
 import { BeanControllerBase, cast, Use } from 'zova';
-import { Local } from 'zova-module-a-bean';
+import { Controller } from 'zova-module-a-bean';
 import { RouterViewSlotParams } from './render.jsx';
 import { RouteLocationNormalizedLoaded } from 'vue-router';
 import { nextTick } from 'vue';
@@ -11,7 +11,7 @@ export interface ControllerRouterViewTabsProps {}
 
 export type ControllerRouterViewTabsEmits = {};
 
-@Local()
+@Controller()
 export class ControllerRouterViewTabs extends BeanControllerBase {
   static $propsDefault = {};
 

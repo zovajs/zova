@@ -1,5 +1,5 @@
 import { BeanControllerBase, Use, UseScope } from 'zova';
-import { Local } from 'zova-module-a-bean';
+import { Controller } from 'zova-module-a-bean';
 import { ModelMenu } from '../../model/menu.js';
 import { ModelAuth, ModelUser } from 'zova-module-home-user';
 import { ModelTabs, ModelTabsOptions, ScopeModuleATabs } from 'zova-module-a-tabs';
@@ -10,7 +10,7 @@ export type ControllerLayoutDefaultEmits = {};
 
 export interface ControllerLayoutDefaultSlots {}
 
-@Local()
+@Controller()
 export class ControllerLayoutDefault extends BeanControllerBase {
   static $propsDefault = {};
 

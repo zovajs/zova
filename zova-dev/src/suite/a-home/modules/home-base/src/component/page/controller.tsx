@@ -1,5 +1,5 @@
 import { BeanControllerBase } from 'zova';
-import { Local } from 'zova-module-a-bean';
+import { Controller } from 'zova-module-a-bean';
 import { JSX } from 'vue/jsx-runtime';
 
 export interface ControllerPageProps {}
@@ -10,7 +10,7 @@ export interface ControllerPageSlots {
   default?(): JSX.Element;
 }
 
-@Local()
+@Controller()
 export class ControllerPage extends BeanControllerBase {
   static $propsDefault = {};
 

@@ -1,5 +1,5 @@
 import { BeanControllerBase } from 'zova';
-import { Local } from 'zova-module-a-bean';
+import { Controller } from 'zova-module-a-bean';
 import { JSX } from 'vue/jsx-runtime';
 
 export interface ControllerCardProps {
@@ -18,7 +18,7 @@ export interface ControllerCardSlots {
   footer?(): JSX.Element;
 }
 
-@Local()
+@Controller()
 export class ControllerCard extends BeanControllerBase {
   static $propsDefault = {
     header: 'default header',

@@ -1,9 +1,9 @@
 import { BeanControllerPageBase, zz } from 'zova';
-import { Local } from 'zova-module-a-bean';
+import { Controller } from 'zova-module-a-bean';
 
-const ParamsSchema = zz.object({});
+export const ControllerPageRouteQueryBSchemaParams = zz.object({});
 
-const QuerySchema = zz.object({
+export const ControllerPageRouteQueryBSchemaQuery = zz.object({
   tabName: zz.string().optional().default('boolean'),
   private: zz.boolean().optional(),
   user: zz
@@ -22,8 +22,8 @@ const QuerySchema = zz.object({
     .optional(),
 });
 
-@Local()
-export class ControllerPageRouteQuery2 extends BeanControllerPageBase {
+@Controller()
+export class ControllerPageRouteQueryB extends BeanControllerPageBase {
   togglePrivate() {
     const _private = this.$query.private ? false : true;
     const query = { ...this.$query, private: _private };
@@ -54,19 +54,4 @@ export class ControllerPageRouteQuery2 extends BeanControllerPageBase {
     const url = this.$router.resolvePath('/demo/basic/routeQuery2', query);
     this.$router.push(url);
   }
-}
-
-export interface ControllerPageRouteQuery2 {
-  $params: ControllerPageRouteQuery2.ParamsOutput;
-  $query: ControllerPageRouteQuery2.QueryOutput;
-}
-
-export namespace ControllerPageRouteQuery2 {
-  export const paramsSchema = ParamsSchema;
-  export type ParamsInput = zz.input<typeof ParamsSchema>;
-  export type ParamsOutput = zz.output<typeof ParamsSchema>;
-
-  export const querySchema = QuerySchema;
-  export type QueryInput = zz.input<typeof QuerySchema>;
-  export type QueryOutput = zz.output<typeof QuerySchema>;
 }

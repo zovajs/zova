@@ -1,5 +1,5 @@
 import { BeanControllerBase } from 'zova';
-import { Local } from 'zova-module-a-bean';
+import { Controller } from 'zova-module-a-bean';
 
 export interface ControllerEssentialLinkProps {
   title: string;
@@ -13,7 +13,7 @@ export type ControllerEssentialLinkEmits = {};
 
 export interface ControllerEssentialLinkSlots {}
 
-@Local()
+@Controller()
 export class ControllerEssentialLink extends BeanControllerBase {
   static $propsDefault = {
     caption: '',

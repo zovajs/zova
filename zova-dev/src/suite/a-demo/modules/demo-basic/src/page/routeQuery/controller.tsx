@@ -1,29 +1,14 @@
 import { BeanControllerPageBase, zz } from 'zova';
-import { Local } from 'zova-module-a-bean';
+import { Controller } from 'zova-module-a-bean';
 
-const ParamsSchema = zz.object({});
+export const ControllerPageRouteQuerySchemaParams = zz.object({});
 
-const QuerySchema = zz.object({
+export const ControllerPageRouteQuerySchemaQuery = zz.object({
   name: zz.string().optional(),
   age: zz.number().optional(),
 });
 
-@Local()
+@Controller()
 export class ControllerPageRouteQuery extends BeanControllerPageBase {
   protected async __init__() {}
-}
-
-export interface ControllerPageRouteQuery {
-  $params: ControllerPageRouteQuery.ParamsOutput;
-  $query: ControllerPageRouteQuery.QueryOutput;
-}
-
-export namespace ControllerPageRouteQuery {
-  export const paramsSchema = ParamsSchema;
-  export type ParamsInput = zz.input<typeof ParamsSchema>;
-  export type ParamsOutput = zz.output<typeof ParamsSchema>;
-
-  export const querySchema = QuerySchema;
-  export type QueryInput = zz.input<typeof QuerySchema>;
-  export type QueryOutput = zz.output<typeof QuerySchema>;
 }

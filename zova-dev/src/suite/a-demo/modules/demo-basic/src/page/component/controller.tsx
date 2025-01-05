@@ -1,8 +1,8 @@
 import { BeanControllerPageBase, onControllerMounted } from 'zova';
-import { Local } from 'zova-module-a-bean';
+import { Controller } from 'zova-module-a-bean';
 import { ControllerCard } from '../../.metadata/index.jsx';
 
-@Local()
+@Controller()
 export class ControllerPageComponent extends BeanControllerPageBase {
   resetTime: Date = new Date();
   cardRef?: ControllerCard;
