@@ -172,7 +172,10 @@ declare module 'zova' {
 }
 /** render: end */
 /** renders: begin */
-declare module 'zova-module-home-base' {}
+declare module 'zova-module-home-base' {
+  export interface RenderPage extends ControllerPage {}
+  export interface RenderPageErrorNotFound extends ControllerPageErrorNotFound {}
+}
 /** renders: end */
 /** style: begin */
 export * from '../component/page/style.js';

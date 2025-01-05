@@ -32,13 +32,13 @@ function _parseRenderInfo(
   globFile: IGlobBeanFile,
 ): IControllerInfo | undefined {
   const { fileNameJSRelative } = globFile;
-  const matches = fileNameJSRelative.match(/..\/(.+?)\/(.+?)\/controller/);
+  const matches = fileNameJSRelative.match(/..\/(.+?)\/(.+?)\/render/);
   if (!matches) return;
   const type = matches[1];
   const name = matches[2];
   const nameCapitalize = toUpperCaseFirstChar(name);
   // controllerClassName
-  const controllerClassName = `Controller${type === 'page' ? 'Page' : ''}nameCapitalize`;
+  const controllerClassName = `Controller${type === 'page' ? 'Page' : ''}${nameCapitalize}`;
   // ok
   return {
     type,

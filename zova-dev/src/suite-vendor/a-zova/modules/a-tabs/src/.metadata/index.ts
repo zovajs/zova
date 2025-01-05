@@ -107,7 +107,9 @@ declare module 'zova' {
 }
 /** render: end */
 /** renders: begin */
-declare module 'zova-module-a-tabs' {}
+declare module 'zova-module-a-tabs' {
+  export interface RenderRouterViewTabs extends ControllerRouterViewTabs {}
+}
 /** renders: end */
 /** style: begin */
 export * from '../component/routerViewTabs/style.js';

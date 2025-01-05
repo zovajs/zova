@@ -273,7 +273,11 @@ declare module 'zova' {
 }
 /** render: end */
 /** renders: begin */
-declare module 'zova-module-home-layout' {}
+declare module 'zova-module-home-layout' {
+  export interface RenderEssentialLink extends ControllerEssentialLink {}
+  export interface RenderLayoutDefault extends ControllerLayoutDefault {}
+  export interface RenderLayoutEmpty extends ControllerLayoutEmpty {}
+}
 /** renders: end */
 /** style: begin */
 export * from '../component/layoutDefault/style.js';

@@ -346,7 +346,18 @@ declare module 'zova' {
 }
 /** render: end */
 /** renders: begin */
-declare module 'zova-module-demo-basic' {}
+declare module 'zova-module-demo-basic' {
+  export interface RenderCard extends ControllerCard {}
+  export interface RenderPageComponent extends ControllerPageComponent {}
+  export interface RenderPageLegacy extends ControllerPageLegacy {}
+  export interface RenderPageLocale extends ControllerPageLocale {}
+  export interface RenderPagePinia extends ControllerPagePinia {}
+  export interface RenderPageRouteParams extends ControllerPageRouteParams {}
+  export interface RenderPageRouteQuery extends ControllerPageRouteQuery {}
+  export interface RenderPageRouteQueryB extends ControllerPageRouteQueryB {}
+  export interface RenderPageState extends ControllerPageState {}
+  export interface RenderPageStyle extends ControllerPageStyle {}
+}
 /** renders: end */
 /** style: begin */
 export * from '../page/legacy/style.js';
