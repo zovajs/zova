@@ -1,10 +1,9 @@
-import { BeanStyleBase, Local } from 'zova';
+import { BeanStyleBase } from 'zova';
+import { Style } from 'zova-module-a-bean';
 import type { ControllerPage } from './controller.js';
 import { ScopeModule } from '../../.metadata/this.js';
 
-export interface StylePage extends ControllerPage {}
-
-@Local()
+@Style()
 export class StylePage extends BeanStyleBase<ScopeModule> {
   cPage: string;
 

@@ -1,10 +1,9 @@
-import { BeanStyleBase, Local, useComputed } from 'zova';
+import { BeanStyleBase, useComputed } from 'zova';
+import { Style } from 'zova-module-a-bean';
 import type { ControllerPageStyle } from './controller.js';
 import { ScopeModule } from '../../.metadata/this.js';
 
-export interface StyleStyle extends ControllerPageStyle {}
-
-@Local()
+@Style()
 export class StyleStyle extends BeanStyleBase<ScopeModule> {
   cTextColor: string;
 
