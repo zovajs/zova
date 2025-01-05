@@ -31,7 +31,8 @@
       },
       "controller": {
         "beanGeneral": false,
-        "optionsNone": true
+        "optionsNone": true,
+        "metadataCustom": "cli/controller/metadata/generate.ts"
       },
       "render": {
         "beanGeneral": false,
