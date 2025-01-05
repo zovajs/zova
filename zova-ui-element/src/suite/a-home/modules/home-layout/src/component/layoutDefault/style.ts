@@ -1,10 +1,9 @@
-import { BeanStyleBase, Local } from 'zova';
+import { BeanStyleBase } from 'zova';
+import { Style } from 'zova-module-a-bean';
 import type { ControllerLayoutDefault } from './controller.js';
 import { ScopeModule } from '../../.metadata/this.js';
 
-export interface StyleLayoutDefault extends ControllerLayoutDefault {}
-
-@Local()
+@Style()
 export class StyleLayoutDefault extends BeanStyleBase<ScopeModule> {
   cMainContainer: string;
   cMenuVerticalDemo: string;
