@@ -4,6 +4,6 @@ import type { ControllerPageErrorNotFound } from './controller.js';
 import { ScopeModule } from '../../.metadata/this.js';
 
 @Style()
-export class StyleErrorNotFound extends BeanStyleBase<ScopeModule> {
+export class StylePageErrorNotFound extends BeanStyleBase<ScopeModule> {
   protected async __init__() {}
 }

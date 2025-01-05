@@ -4,6 +4,6 @@ import type { ControllerPageIndex } from './controller.js';
 import { ScopeModule } from '../../.metadata/this.js';
 
 @Style()
-export class StyleIndex extends BeanStyleBase<ScopeModule> {
+export class StylePageIndex extends BeanStyleBase<ScopeModule> {
   protected async __init__() {}
 }
