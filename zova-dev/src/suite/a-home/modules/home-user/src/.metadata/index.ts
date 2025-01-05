@@ -160,6 +160,11 @@ declare module 'zova' {
   }
 }
 /** style: end */
+/** styles: begin */
+declare module 'zova-module-home-user' {
+  export interface StyleLogin extends ControllerPageLogin {}
+}
+/** styles: end */
 /** locale: begin */
 import locale_en_us from '../config/locale/en-us.js';
 import locale_zh_cn from '../config/locale/zh-cn.js';

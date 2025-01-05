@@ -206,6 +206,12 @@ declare module 'zova' {
   }
 }
 /** style: end */
+/** styles: begin */
+declare module 'zova-module-home-base' {
+  export interface StylePage extends ControllerPage {}
+  export interface StyleErrorNotFound extends ControllerPageErrorNotFound {}
+}
+/** styles: end */
 /** locale: begin */
 import locale_en_us from '../config/locale/en-us.js';
 import locale_zh_cn from '../config/locale/zh-cn.js';

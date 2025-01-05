@@ -132,6 +132,11 @@ declare module 'zova' {
   }
 }
 /** style: end */
+/** styles: begin */
+declare module 'zova-module-a-tabs' {
+  export interface StyleRouterViewTabs extends ControllerRouterViewTabs {}
+}
+/** styles: end */
 /** scope: begin */
 import { BeanScopeBase, BeanScopeUtil } from 'zova';
 import { Scope } from 'zova-module-a-bean';

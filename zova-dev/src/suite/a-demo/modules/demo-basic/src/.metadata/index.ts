@@ -420,6 +420,16 @@ declare module 'zova' {
   }
 }
 /** style: end */
+/** styles: begin */
+declare module 'zova-module-demo-basic' {
+  export interface StyleLegacy extends ControllerPageLegacy {}
+  export interface StylePinia extends ControllerPagePinia {}
+  export interface StyleRouteParams extends ControllerPageRouteParams {}
+  export interface StyleRouteQuery extends ControllerPageRouteQuery {}
+  export interface StylePageRouteQueryB extends ControllerPageRouteQueryB {}
+  export interface StyleStyle extends ControllerPageStyle {}
+}
+/** styles: end */
 /** locale: begin */
 import locale_en_us from '../config/locale/en-us.js';
 import locale_zh_cn from '../config/locale/zh-cn.js';

@@ -92,6 +92,11 @@ declare module 'zova' {
   }
 }
 /** style: end */
+/** styles: begin */
+declare module 'zova-module-home-index' {
+  export interface StyleIndex extends ControllerPageIndex {}
+}
+/** styles: end */
 /** scope: begin */
 import { BeanScopeBase, BeanScopeUtil } from 'zova';
 import { Scope } from 'zova-module-a-bean';

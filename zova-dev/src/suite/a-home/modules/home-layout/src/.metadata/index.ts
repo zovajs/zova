@@ -300,6 +300,11 @@ declare module 'zova' {
   }
 }
 /** style: end */
+/** styles: begin */
+declare module 'zova-module-home-layout' {
+  export interface StyleLayoutDefault extends ControllerLayoutDefault {}
+}
+/** styles: end */
 /** config: begin */
 export * from '../config/config.js';
 import { config } from '../config/config.js';

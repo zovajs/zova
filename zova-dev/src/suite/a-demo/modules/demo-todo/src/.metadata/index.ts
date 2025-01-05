@@ -189,6 +189,12 @@ declare module 'zova' {
   }
 }
 /** style: end */
+/** styles: begin */
+declare module 'zova-module-demo-todo' {
+  export interface StyleItem extends ControllerPageItem {}
+  export interface StyleTodo extends ControllerPageTodo {}
+}
+/** styles: end */
 /** scope: begin */
 import { BeanScopeBase, BeanScopeUtil } from 'zova';
 import { Scope } from 'zova-module-a-bean';

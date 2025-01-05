@@ -35,6 +35,7 @@ function _parseControllerInfo(
   const matches = fileNameJSRelative.match(/..\/(.+?)\/(.+?)\/render/);
   if (!matches) return;
   const type = matches[1];
+  if (!['page', 'component'].includes(type)) return;
   const name = matches[2];
   const nameCapitalize = toUpperCaseFirstChar(name);
   // controllerClassName
