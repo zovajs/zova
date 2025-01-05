@@ -129,6 +129,9 @@ function _extractRoutePathOrName(
   const targetFile = path.join(options.modulePath, 'src/routes.ts');
   const content = fse.readFileSync(targetFile).toString('utf8');
   const ast = cli.helper.gogocode(content);
+  if (!ast || !ast.find) {
+    console.log(targetFile);
+  }
   const astNode = ast.find('export const routes: IModuleRoute[] = [$_$]');
   const astMatches = astNode.match[0];
   const astMatch = astMatches.find(item => {
