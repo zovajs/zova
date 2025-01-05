@@ -8,19 +8,52 @@ interface IControllerInfo {
   type: string;
   name: string;
   nameCapitalize: string;
+  nameProps: string;
+  hasProps: boolean;
+  nameEmits: string;
+  hasEmits: boolean;
+  nameSlots: string;
+  hasSlots: boolean;
+  fileRender: string;
+  importRender: string;
+  fileStyle: string;
+  importStyle: string;
 }
 
 export default async function (options: IMetadataCustomGenerateOptions): Promise<string> {
   const { globFiles } = options;
+  const globFilesPage: [IGlobBeanFile, IControllerInfo][] = [];
+  const globFilesComponent: [IGlobBeanFile, IControllerInfo][] = [];
   for (const globFile of globFiles) {
-    const { fileNameJSRelative } = globFile;
-    const controllerInfo = _parseControllerInfo(fileNameJSRelative);
+    const controllerInfo = _parseControllerInfo(globFile);
     if (!controllerInfo) continue;
     await _generateFileVue(options, globFile, controllerInfo);
-    console.log(controllerInfo);
+    if (controllerInfo.type === 'page') {
+      globFilesPage.push([globFile, controllerInfo]);
+    } else {
+      globFilesComponent.push([globFile, controllerInfo]);
+    }
   }
-  const content = '';
+  const contentMetaPage = _generateMetaPage(options, globFilesPage);
+  const contentMetaComponent = _generateMetaComponent(options, globFilesComponent);
+  const content = `${contentMetaPage}\n${contentMetaComponent}`;
   return content;
+}
+
+function _generateMetaPage(options: IMetadataCustomGenerateOptions, globFiles: [IGlobBeanFile, IControllerInfo][]) {}
+
+function _generateMetaComponent(
+  options: IMetadataCustomGenerateOptions,
+  globFiles: [IGlobBeanFile, IControllerInfo][],
+) {
+  const contentExports: string[] = [];
+  const contentImports: string[] = [];
+  const contentImports2: string[] = [];
+  const contentComponents: string[] = [];
+  const contentRecords: string[] = [];
+  const contentRecords2: string[] = [];
+  for (const [globFile, controllerInfo] of globFiles) {
+  }
 }
 
 async function _generateFileVue(
@@ -39,26 +72,22 @@ async function _generateFileVue(
 }
 
 function _generateFileVuePage(
-  options: IMetadataCustomGenerateOptions,
+  _options: IMetadataCustomGenerateOptions,
   _globFile: IGlobBeanFile,
   controllerInfo: IControllerInfo,
 ) {
-  const { type, name, nameCapitalize } = controllerInfo;
+  const { name, nameCapitalize, importRender, importStyle } = controllerInfo;
   const contentImports: string[] = [];
   // controller
   contentImports.push("import { useControllerPage } from 'zova';");
   contentImports.push(`import { ControllerPage${nameCapitalize} } from '../../page/${name}/controller.jsx';`);
-  const fileRender = path.join(options.modulePath, `src/${type}/${name}/render.tsx`);
   // render
-  const hasRender = fse.existsSync(fileRender);
-  if (hasRender) {
-    contentImports.push(`import { RenderPage${nameCapitalize} } from '../../page/${name}/render.jsx';`);
+  if (importRender) {
+    contentImports.push(importRender);
   }
   // style
-  const fileStyle = path.join(options.modulePath, `src/${type}/${name}/style.ts`);
-  const hasStyle = fse.existsSync(fileStyle);
-  if (hasStyle) {
-    contentImports.push(`import { StylePage${nameCapitalize} } from '../../page/${name}/style.js';`);
+  if (importStyle) {
+    contentImports.push(importStyle);
   }
   // content
   const content = `<template>
@@ -67,44 +96,42 @@ function _generateFileVuePage(
 
 <script setup lang="ts">
 ${contentImports.join('\n')}
-useControllerPage(ControllerPage${nameCapitalize}, ${hasRender ? `RenderPage${nameCapitalize}` : undefined}, ${hasStyle ? `StylePage${nameCapitalize}` : undefined});
+useControllerPage(ControllerPage${nameCapitalize}, ${importRender ? `RenderPage${nameCapitalize}` : undefined}, ${importStyle ? `StylePage${nameCapitalize}` : undefined});
 </script>
 `;
   return content;
 }
 
 function _generateFileVueComponent(
-  options: IMetadataCustomGenerateOptions,
-  globFile: IGlobBeanFile,
+  _options: IMetadataCustomGenerateOptions,
+  _globFile: IGlobBeanFile,
   controllerInfo: IControllerInfo,
 ) {
-  const { type, name, nameCapitalize } = controllerInfo;
+  const {
+    name,
+    nameCapitalize,
+    nameProps,
+    hasProps,
+    nameEmits,
+    hasEmits,
+    nameSlots,
+    hasSlots,
+    importRender,
+    importStyle,
+  } = controllerInfo;
   const contentImports: string[] = [];
-  // props
-  const nameProps = `Controller${nameCapitalize}Props`;
-  const hasProps = globFile.fileContent.includes(nameProps);
-  // emits
-  const nameEmits = `Controller${nameCapitalize}Emits`;
-  const hasEmits = globFile.fileContent.includes(nameEmits);
-  // slots
-  const nameSlots = `Controller${nameCapitalize}Slots`;
-  const hasSlots = globFile.fileContent.includes(nameSlots);
   // controller
   contentImports.push(`import { useController${hasProps ? '' : ', PropsBase'} } from 'zova';`);
   contentImports.push(
     `import { Controller${nameCapitalize}${hasProps ? `, ${nameProps}` : ''}${hasEmits ? `, ${nameEmits}` : ''}${!hasProps && hasSlots ? `, ${nameSlots}` : ''} } from '../../component/${name}/controller.jsx';`,
   );
   // render
-  const fileRender = path.join(options.modulePath, `src/${type}/${name}/render.tsx`);
-  const hasRender = fse.existsSync(fileRender);
-  if (hasRender) {
-    contentImports.push(`import { Render${nameCapitalize} } from '../../component/${name}/render.jsx';`);
+  if (importRender) {
+    contentImports.push(importRender);
   }
   // style
-  const fileStyle = path.join(options.modulePath, `src/${type}/${name}/style.ts`);
-  const hasStyle = fse.existsSync(fileStyle);
-  if (hasStyle) {
-    contentImports.push(`import { Style${nameCapitalize} } from '../../component/${name}/style.js';`);
+  if (importStyle) {
+    contentImports.push(importStyle);
   }
   // props
   let contentProps = '';
@@ -127,18 +154,57 @@ function _generateFileVueComponent(
 ${contentImports.join('\n')}
 ${contentProps}
 ${contentEmits}
-useController(props, ${hasEmits ? 'emit' : 'undefined'}, Controller${nameCapitalize}, ${hasRender ? `Render${nameCapitalize}` : undefined}, ${hasStyle ? `Style${nameCapitalize}` : undefined});
+useController(props, ${hasEmits ? 'emit' : 'undefined'}, Controller${nameCapitalize}, ${importRender ? `Render${nameCapitalize}` : undefined}, ${importStyle ? `Style${nameCapitalize}` : undefined});
 </script>
 `;
   return content;
 }
 
-function _parseControllerInfo(fileNameJSRelative: string): IControllerInfo | undefined {
+function _parseControllerInfo(
+  options: IMetadataCustomGenerateOptions,
+  globFile: IGlobBeanFile,
+): IControllerInfo | undefined {
+  const { fileContent, fileNameJSRelative } = globFile;
   const matches = fileNameJSRelative.match(/..\/(.+?)\/(.+?)\/controller/);
   if (!matches) return;
+  const type = matches[1];
+  const name = matches[2];
+  const nameCapitalize = toUpperCaseFirstChar(name);
+  // props
+  const nameProps = `Controller${nameCapitalize}Props`;
+  const hasProps = fileContent.includes(nameProps);
+  // emits
+  const nameEmits = `Controller${nameCapitalize}Emits`;
+  const hasEmits = fileContent.includes(nameEmits);
+  // slots
+  const nameSlots = `Controller${nameCapitalize}Slots`;
+  const hasSlots = fileContent.includes(nameSlots);
+  // render
+  const fileRender = path.join(options.modulePath, `src/${type}/${name}/render.tsx`);
+  let importRender = '';
+  if (fse.existsSync(fileRender)) {
+    importRender = `import { Render${type === 'page' ? 'Page' : ''}${nameCapitalize} } from '../../${type}/${name}/render.jsx';`;
+  }
+  // style
+  const fileStyle = path.join(options.modulePath, `src/${type}/${name}/style.ts`);
+  let importStyle = '';
+  if (fse.existsSync(fileStyle)) {
+    importStyle = `import { StylePage${nameCapitalize} } from '../../page/${name}/style.js';`;
+  }
+  // ok
   return {
-    type: matches[1],
-    name: matches[2],
-    nameCapitalize: toUpperCaseFirstChar(matches[2]),
+    type,
+    name,
+    nameCapitalize,
+    nameProps,
+    hasProps,
+    nameEmits,
+    hasEmits,
+    nameSlots,
+    hasSlots,
+    fileRender,
+    importRender,
+    fileStyle,
+    importStyle,
   };
 }
