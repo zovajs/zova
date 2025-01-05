@@ -194,7 +194,7 @@ import { RenderLocale } from '../page/locale/render.jsx';
 import { ControllerPagePinia } from '../page/pinia/controller.js';
 import { RenderPinia } from '../page/pinia/render.jsx';
 import { StylePinia } from '../page/pinia/style.js';
-import { ControllerPageRouteParams } from '../page/routeParams/controller.js';
+import { ControllerPageRouteParams, ControllerPageRouteParamsSchemaParams } from '../page/routeParams/controller.js';
 import { RenderRouteParams } from '../page/routeParams/render.jsx';
 import { StyleRouteParams } from '../page/routeParams/style.js';
 import { ControllerPageRouteQuery } from '../page/routeQuery/controller.js';
@@ -300,6 +300,10 @@ export * from '../page/routeQuery2/controller.js';
 export * from '../page/state/controller.js';
 export * from '../page/style/controller.js';
 export * from '../routes.js';
+
+
+
+
 import { TypePageParamsQuery } from 'zova';
 import 'zova';
 declare module 'zova' {

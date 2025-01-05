@@ -8,6 +8,10 @@ export interface IControllerInfo {
   hasEmits: boolean;
   nameSlots: string;
   hasSlots: boolean;
+  nameSchemaParams: string;
+  hasSchemaParams: boolean;
+  nameSchemaQuery: string;
+  hasSchemaQuery: boolean;
   fileRender: string;
   importRender: string;
   fileStyle: string;

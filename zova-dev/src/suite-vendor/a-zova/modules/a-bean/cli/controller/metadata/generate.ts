@@ -47,6 +47,12 @@ function _parseControllerInfo(
   // slots
   const nameSlots = `Controller${nameCapitalize}Slots`;
   const hasSlots = fileContent.includes(nameSlots);
+  // schemaParams
+  const nameSchemaParams = `ControllerPage${nameCapitalize}SchemaParams`;
+  const hasSchemaParams = fileContent.includes(nameSchemaParams);
+  // schemaQuery
+  const nameSchemaQuery = `ControllerPage${nameCapitalize}SchemaQuery`;
+  const hasSchemaQuery = fileContent.includes(nameSchemaQuery);
   // render
   const fileRender = path.join(options.modulePath, `src/${type}/${name}/render.tsx`);
   let importRender = '';
@@ -70,6 +76,10 @@ function _parseControllerInfo(
     hasEmits,
     nameSlots,
     hasSlots,
+    nameSchemaParams,
+    hasSchemaParams,
+    nameSchemaQuery,
+    hasSchemaQuery,
     fileRender,
     importRender,
     fileStyle,
