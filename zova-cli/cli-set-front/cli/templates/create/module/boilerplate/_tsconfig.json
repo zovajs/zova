@@ -5,5 +5,5 @@
       "@/*": ["<%=argv.suite?'../../':''%>../../../src/legacy/*"]
     }
   },
-  "include": ["src", "src/.metadata/*.ts", "<%=argv.suite?'../../':''%>../../../src/legacy"]
+  "include": ["src", "src/.metadata/**/*", "<%=argv.suite?'../../':''%>../../../src/legacy"]
 }
