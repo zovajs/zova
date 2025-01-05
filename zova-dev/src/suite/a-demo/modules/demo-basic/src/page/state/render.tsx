@@ -1,11 +1,9 @@
 import { BeanRenderBase } from 'zova';
-import { Local } from 'zova-module-a-bean';
+import { Render } from 'zova-module-a-bean';
 import type { ControllerPageState } from './controller.js';
 import { ZPage } from 'zova-module-home-base';
 
-export interface RenderState extends ControllerPageState {}
-
-@Local()
+@Render()
 export class RenderState extends BeanRenderBase {
   public render() {
     return (

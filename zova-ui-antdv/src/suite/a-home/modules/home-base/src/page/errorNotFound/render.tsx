@@ -1,11 +1,10 @@
-import { BeanRenderBase, Local } from 'zova';
+import { BeanRenderBase } from 'zova';
+import { Render } from 'zova-module-a-bean';
 import type { StyleErrorNotFound } from './style.js';
 import { ScopeModule } from '../../.metadata/this.js';
 import { Button } from 'ant-design-vue';
 
-export interface RenderErrorNotFound extends StyleErrorNotFound {}
-
-@Local()
+@Render()
 export class RenderErrorNotFound extends BeanRenderBase<ScopeModule> {
   render() {
     return (

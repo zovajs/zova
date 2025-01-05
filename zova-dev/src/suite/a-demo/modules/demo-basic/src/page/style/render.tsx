@@ -1,11 +1,9 @@
 import { BeanRenderBase, getBeanName, useComputed } from 'zova';
-import { Local } from 'zova-module-a-bean';
+import { Render } from 'zova-module-a-bean';
 import type { StyleStyle } from './style.js';
 import { ZPage } from 'zova-module-home-base';
 
-export interface RenderStyle extends StyleStyle {}
-
-@Local()
+@Render()
 export class RenderStyle extends BeanRenderBase {
   renderHello;
   renderHello2;

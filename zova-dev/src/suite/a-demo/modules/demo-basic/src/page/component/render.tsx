@@ -1,13 +1,11 @@
 import { BeanRenderBase } from 'zova';
-import { Local } from 'zova-module-a-bean';
+import { Render } from 'zova-module-a-bean';
 import type { ControllerPageComponent } from './controller.js';
 import { nextTick } from 'vue';
 import { ZPage } from 'zova-module-home-base';
 import { ZCard } from '../../index.js';
 
-export interface RenderComponent extends ControllerPageComponent {}
-
-@Local()
+@Render()
 export class RenderComponent extends BeanRenderBase {
   public render() {
     return (

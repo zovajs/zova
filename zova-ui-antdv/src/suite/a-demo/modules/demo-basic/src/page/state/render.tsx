@@ -1,11 +1,9 @@
 import { BeanRenderBase } from 'zova';
-import { Local } from 'zova-module-a-bean';
+import { Render } from 'zova-module-a-bean';
 import type { ControllerPageState } from './controller.js';
 import { Button } from 'ant-design-vue';
 
-export interface RenderState extends ControllerPageState {}
-
-@Local()
+@Render()
 export class RenderState extends BeanRenderBase {
   render() {
     return (

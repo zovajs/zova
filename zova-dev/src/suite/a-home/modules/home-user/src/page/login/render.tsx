@@ -1,11 +1,9 @@
 import { BeanRenderBase } from 'zova';
-import { Local } from 'zova-module-a-bean';
+import { Render } from 'zova-module-a-bean';
 import type { StyleLogin } from './style.js';
 import { withModifiers } from 'vue';
 
-export interface RenderLogin extends StyleLogin {}
-
-@Local()
+@Render()
 export class RenderLogin extends BeanRenderBase {
   _renderLandingInfo() {
     return (

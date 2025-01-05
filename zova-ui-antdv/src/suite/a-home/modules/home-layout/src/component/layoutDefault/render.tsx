@@ -1,11 +1,10 @@
-import { BeanRenderBase, ClientOnly, Local } from 'zova';
+import { BeanRenderBase, ClientOnly } from 'zova';
+import { Render } from 'zova-module-a-bean';
 import type { ControllerLayoutDefault } from './controller.js';
 import { ConfigProvider, Layout, LayoutHeader, LayoutSider, Menu, StyleProvider } from 'ant-design-vue';
 import { RouterView } from 'vue-router';
 
-export interface RenderLayoutDefault extends ControllerLayoutDefault {}
-
-@Local()
+@Render()
 export class RenderLayoutDefault extends BeanRenderBase {
   _renderMenu() {
     return (

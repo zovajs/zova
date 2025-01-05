@@ -1,17 +1,15 @@
 import { BeanRenderBase } from 'zova';
-import { Local } from 'zova-module-a-bean';
+import { Render } from 'zova-module-a-bean';
 import type { StyleRouterViewTabs } from './style.js';
 import { ComponentInternalInstance, KeepAlive, Transition } from 'vue';
 import { RouteLocationNormalizedLoaded, RouterView } from 'vue-router';
-
-export interface RenderRouterViewTabs extends StyleRouterViewTabs {}
 
 export interface RouterViewSlotParams {
   Component: ComponentInternalInstance;
   route: RouteLocationNormalizedLoaded;
 }
 
-@Local()
+@Render()
 export class RenderRouterViewTabs extends BeanRenderBase {
   public render() {
     const slots = {

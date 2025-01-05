@@ -1,11 +1,9 @@
 import { BeanRenderBase } from 'zova';
-import { Local } from 'zova-module-a-bean';
+import { Render } from 'zova-module-a-bean';
 import type { StyleRouteParams } from './style.js';
 import { ZPage } from 'zova-module-home-base';
 
-export interface RenderRouteParams extends StyleRouteParams {}
-
-@Local()
+@Render()
 export class RenderRouteParams extends BeanRenderBase {
   public render() {
     return (

@@ -1,11 +1,9 @@
 import { BeanRenderBase } from 'zova';
-import { Local } from 'zova-module-a-bean';
+import { Render } from 'zova-module-a-bean';
 import type { StyleErrorNotFound } from './style.js';
 import { RouterLink } from 'vue-router';
 
-export interface RenderErrorNotFound extends StyleErrorNotFound {}
-
-@Local()
+@Render()
 export class RenderErrorNotFound extends BeanRenderBase {
   public render() {
     return (

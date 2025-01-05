@@ -1,11 +1,9 @@
 import { BeanRenderBase } from 'zova';
-import { Local } from 'zova-module-a-bean';
+import { Render } from 'zova-module-a-bean';
 import type { StylePinia } from './style.js';
 import { ZPage } from 'zova-module-home-base';
 
-export interface RenderPinia extends StylePinia {}
-
-@Local()
+@Render()
 export class RenderPinia extends BeanRenderBase {
   public render() {
     return (

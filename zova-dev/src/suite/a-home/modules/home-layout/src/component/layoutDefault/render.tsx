@@ -1,5 +1,5 @@
 import { BeanRenderBase, Use } from 'zova';
-import { Local } from 'zova-module-a-bean';
+import { Render } from 'zova-module-a-bean';
 import type { StyleLayoutDefault } from './style.js';
 import { RenderTabs } from './renderTabs.jsx';
 import { RenderTheme } from './renderTheme.jsx';
@@ -10,9 +10,7 @@ import { RenderHeader } from './renderHeader.jsx';
 import { RenderContent } from './renderContent.jsx';
 import { RenderMenu } from './renderMenu.jsx';
 
-export interface RenderLayoutDefault extends StyleLayoutDefault {}
-
-@Local()
+@Render()
 export class RenderLayoutDefault extends BeanRenderBase {
   @Use()
   $$renderHeader: RenderHeader;

@@ -1,13 +1,11 @@
 import { BeanRenderBase } from 'zova';
-import { Local } from 'zova-module-a-bean';
+import { Render } from 'zova-module-a-bean';
 import type { StyleTodo } from './style.js';
 import { withModifiers } from 'vue';
 import { RouterLink } from 'vue-router';
 import { ZPage } from 'zova-module-home-base';
 
-export interface RenderTodo extends StyleTodo {}
-
-@Local()
+@Render()
 export class RenderTodo extends BeanRenderBase {
   public render() {
     const todoCurrent = this.$$modelTodo.get(this.currentTodo);

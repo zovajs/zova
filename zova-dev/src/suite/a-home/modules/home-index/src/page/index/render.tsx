@@ -1,10 +1,8 @@
 import { BeanRenderBase } from 'zova';
-import { Local } from 'zova-module-a-bean';
+import { Render } from 'zova-module-a-bean';
 import type { StyleIndex } from './style.js';
 
-export interface RenderIndex extends StyleIndex {}
-
-@Local()
+@Render()
 export class RenderIndex extends BeanRenderBase {
   public render() {
     return (

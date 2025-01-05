@@ -1,11 +1,9 @@
 import { BeanRenderBase } from 'zova';
-import { Local } from 'zova-module-a-bean';
+import { Render } from 'zova-module-a-bean';
 import type { StyleRouteQuery2 } from './style.js';
 import { ZPage } from 'zova-module-home-base';
 
-export interface RenderRouteQuery2 extends StyleRouteQuery2 {}
-
-@Local()
+@Render()
 export class RenderRouteQuery2 extends BeanRenderBase {
   public render() {
     return (
