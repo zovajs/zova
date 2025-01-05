@@ -1,4 +1,5 @@
-import { BeanControllerBase, Local, PropsBase, RequiredSome } from 'zova';
+import { BeanControllerBase, PropsBase, RequiredSome } from 'zova';
+import { Controller } from 'zova-module-a-bean';
 import { JSX } from 'vue/jsx-runtime';
 
 export interface Props extends PropsBase<ControllerCard, Slots> {
@@ -17,7 +18,7 @@ export interface Slots {
   footer?(): JSX.Element;
 }
 
-@Local()
+@Controller()
 export class ControllerCard extends BeanControllerBase<
   unknown,
   RequiredSome<Props, keyof typeof ControllerCard.$propsDefault>,
