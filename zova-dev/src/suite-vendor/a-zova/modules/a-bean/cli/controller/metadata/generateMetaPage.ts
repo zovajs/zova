@@ -2,6 +2,7 @@ import fse from 'fs-extra';
 import { IGlobBeanFile, IMetadataCustomGenerateOptions } from '@cabloy/module-info';
 import { IControllerInfo } from './types.js';
 import path from 'node:path';
+import { BeanCliBase } from '@cabloy/cli';
 
 export function generateMetaPage(
   options: IMetadataCustomGenerateOptions,
@@ -17,7 +18,7 @@ export function generateMetaPage(
     const { className } = globFile;
     const { name, nameCapitalize, nameSchemaParams, hasSchemaParams, nameSchemaQuery, hasSchemaQuery } = controllerInfo;
     // controller.tsx
-    const { routePath, routeName } = await _extractRoutePathOrName(modulePath, pageNameCapitalize);
+    const { routePath, routeName } = await _extractRoutePathOrName(options, globFile, controllerInfo);
     // no matter that: route.meta?.absolute
     const routePathFull = routePath
       ? `/${moduleInfo.pid}/${moduleInfo.name}/${routePath}`
@@ -78,10 +79,15 @@ ${contentNameSchemas.join('\n')}
   return content;
 }
 
-function _extractRoutePathOrName(modulePath: string, className: string) {
-  const targetFile = path.join(modulePath, 'src/routes.ts');
+function _extractRoutePathOrName(
+  options: IMetadataCustomGenerateOptions,
+  _globFile: IGlobBeanFile,
+  controllerInfo: IControllerInfo,
+) {
+  const cli = options.cli as BeanCliBase;
+  const targetFile = path.join(options.modulePath, 'src/routes.ts');
   const content = fse.readFileSync(targetFile).toString('utf8');
-  const ast = gogocode(content);
+  const ast = cli.helper.gogocode(content);
   const astNode = ast.find('export const routes: IModuleRoute[] = [$_$]');
   const astMatches = astNode.match[0];
   const astMatch = astMatches.find(item => {
