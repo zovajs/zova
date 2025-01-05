@@ -1,5 +1,7 @@
+import fse from 'fs-extra';
 import { IGlobBeanFile, IMetadataCustomGenerateOptions } from '@cabloy/module-info';
 import { IControllerInfo } from './types.js';
+import path from 'node:path';
 
 export function generateMetaPage(
   options: IMetadataCustomGenerateOptions,
@@ -13,11 +15,8 @@ export function generateMetaPage(
   const contentNameSchemas: string[] = [];
   for (const [globFile, controllerInfo] of globFiles) {
     const { className } = globFile;
-    const { name, nameCapitalize } = controllerInfo;
-    // controller.ts
-    const enableRouteQuery = controllerContent.includes('const QuerySchema');
-    const enableRouteParams = controllerContent.includes('const ParamsSchema');
-    //
+    const { name, nameCapitalize, nameSchemaParams, hasSchemaParams, nameSchemaQuery, hasSchemaQuery } = controllerInfo;
+    // controller.tsx
     const { routePath, routeName } = await _extractRoutePathOrName(modulePath, pageNameCapitalize);
     // no matter that: route.meta?.absolute
     const routePathFull = routePath
@@ -77,4 +76,29 @@ ${contentNameSchemas.join('\n')}
 /** pages: end */
 `;
   return content;
+}
+
+function _extractRoutePathOrName(modulePath: string, className: string) {
+  const targetFile = path.join(modulePath, 'src/routes.ts');
+  const content = fse.readFileSync(targetFile).toString('utf8');
+  const ast = gogocode(content);
+  const astNode = ast.find('export const routes: IModuleRoute[] = [$_$]');
+  const astMatches = astNode.match[0];
+  const astMatch = astMatches.find(item => {
+    return (<any>item.node).properties.some(prop => {
+      return prop.key.name === 'component' && prop.value.name === className;
+    });
+  });
+  if (!astMatch) {
+    throw new Error(`page route not found: ${className}`);
+  }
+  const astPropPath = (<any>astMatch?.node).properties.find(prop => {
+    return prop.key.name === 'path';
+  });
+  const routePath = astPropPath?.value.value || '';
+  const astPropName = (<any>astMatch?.node).properties.find(prop => {
+    return prop.key.name === 'name';
+  });
+  const routeName = astPropName?.value.value;
+  return { routePath, routeName };
 }
