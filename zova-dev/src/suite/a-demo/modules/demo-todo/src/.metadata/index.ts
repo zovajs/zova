@@ -116,15 +116,6 @@ export namespace NSControllerPageItem {
 }
 /** pages: end */
 
-/** components: begin */
-
-export const components = {};
-import 'zova';
-declare module 'zova' {
-  export interface IComponentRecord {}
-}
-declare module 'zova-module-demo-todo' {}
-/** components: end */
 /** render: begin */
 export * from '../page/item/render.jsx';
 export * from '../page/todo/render.jsx';

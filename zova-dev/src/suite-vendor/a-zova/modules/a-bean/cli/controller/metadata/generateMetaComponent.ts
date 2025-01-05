@@ -6,6 +6,7 @@ export function generateMetaComponent(
   // eslint-disable-next-line no-undef
   globFiles: [IGlobBeanFile, IControllerInfo][],
 ) {
+  if (globFiles.length === 0) return '';
   const { moduleName } = options;
   const contentImports: string[] = [];
   const contentImports2: string[] = [];

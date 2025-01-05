@@ -104,15 +104,6 @@ declare module 'zova-module-home-user' {}
 
 /** pages: end */
 
-/** components: begin */
-
-export const components = {};
-import 'zova';
-declare module 'zova' {
-  export interface IComponentRecord {}
-}
-declare module 'zova-module-home-user' {}
-/** components: end */
 /** render: begin */
 export * from '../page/login/render.jsx';
 

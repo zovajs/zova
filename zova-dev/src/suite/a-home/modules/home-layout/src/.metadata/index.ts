@@ -163,20 +163,6 @@ declare module 'zova' {
   }
 }
 /** controller: end */
-/** pages: begin */
-
-export * from '../routes.js';
-
-import 'zova';
-declare module 'zova' {
-  export interface IPagePathRecord {}
-  export interface IPageNameRecord {}
-}
-export const pagePathSchemas = {};
-export const pageNameSchemas = {};
-declare module 'zova-module-home-layout' {}
-
-/** pages: end */
 
 import { RequiredSome } from 'zova';
 /** components: begin */

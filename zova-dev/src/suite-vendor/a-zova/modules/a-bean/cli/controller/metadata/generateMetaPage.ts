@@ -8,6 +8,7 @@ export function generateMetaPage(
   options: IMetadataCustomGenerateOptions,
   globFiles: [IGlobBeanFile, IControllerInfo][],
 ) {
+  if (globFiles.length === 0) return '';
   const { moduleName } = options;
   const contentImports: string[] = [];
   const contentPathRecords: string[] = [];
