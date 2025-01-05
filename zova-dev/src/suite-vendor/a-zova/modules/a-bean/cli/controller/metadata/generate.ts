@@ -116,7 +116,7 @@ function _generateFileVueComponent(
   // emits
   let contentEmits = '';
   if (hasEmits) {
-    contentEmits = `const emit = defineEmits<${nameSlots}>();`;
+    contentEmits = `const emit = defineEmits<${nameEmits}>();`;
   }
   // content
   const content = `<template>
