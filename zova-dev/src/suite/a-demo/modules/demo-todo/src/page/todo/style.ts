@@ -3,6 +3,6 @@ import { Style } from 'zova-module-a-bean';
 import type { ControllerPageTodo } from './controller.js';
 
 @Style()
-export class StyleTodo extends BeanStyleBase {
+export class StylePageTodo extends BeanStyleBase {
   protected async __init__() {}
 }

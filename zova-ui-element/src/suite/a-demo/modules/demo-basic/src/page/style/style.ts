@@ -4,7 +4,7 @@ import type { ControllerPageStyle } from './controller.js';
 import { ScopeModule } from '../../.metadata/this.js';
 
 @Style()
-export class StyleStyle extends BeanStyleBase<ScopeModule> {
+export class StylePageStyle extends BeanStyleBase<ScopeModule> {
   cTextColor: string;
 
   protected async __init__() {

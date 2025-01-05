@@ -4,7 +4,7 @@ import type { ControllerPageErrorNotFound } from './controller.js';
 import { classes } from 'typestyle';
 
 @Style()
-export class StyleErrorNotFound extends BeanStyleBase {
+export class StylePageErrorNotFound extends BeanStyleBase {
   cTitle: string;
   cDescription: string;
 

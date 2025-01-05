@@ -3,6 +3,6 @@ import { Style } from 'zova-module-a-bean';
 import type { ControllerPagePinia } from './controller.js';
 
 @Style()
-export class StylePinia extends BeanStyleBase {
+export class StylePagePinia extends BeanStyleBase {
   protected async __init__() {}
 }

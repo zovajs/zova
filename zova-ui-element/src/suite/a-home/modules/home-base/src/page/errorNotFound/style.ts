@@ -4,7 +4,7 @@ import type { ControllerPageErrorNotFound } from './controller.js';
 import { ScopeModule } from '../../.metadata/this.js';
 
 @Style()
-export class StyleErrorNotFound extends BeanStyleBase<ScopeModule> {
+export class StylePageErrorNotFound extends BeanStyleBase<ScopeModule> {
   cTextCenter: string;
 
   protected async __init__() {
