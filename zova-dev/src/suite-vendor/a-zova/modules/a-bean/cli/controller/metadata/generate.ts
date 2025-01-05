@@ -25,6 +25,7 @@ export default async function (options: IMetadataCustomGenerateOptions): Promise
   const globFilesPage: [IGlobBeanFile, IControllerInfo][] = [];
   const globFilesComponent: [IGlobBeanFile, IControllerInfo][] = [];
   for (const globFile of globFiles) {
+    if (globFile.isIgnore) continue;
     const controllerInfo = _parseControllerInfo(options, globFile);
     if (!controllerInfo) continue;
     await _generateFileVue(options, globFile, controllerInfo);
@@ -40,14 +41,15 @@ export default async function (options: IMetadataCustomGenerateOptions): Promise
   return content;
 }
 
-function _generateMetaPage(_options: IMetadataCustomGenerateOptions, _globFiles: [IGlobBeanFile, IControllerInfo][]) {}
+function _generateMetaPage(_options: IMetadataCustomGenerateOptions, _globFiles: [IGlobBeanFile, IControllerInfo][]) {
+  return '// -- page -- ';
+}
 
 function _generateMetaComponent(
   options: IMetadataCustomGenerateOptions,
   globFiles: [IGlobBeanFile, IControllerInfo][],
 ) {
   const { moduleName } = options;
-  const contentExports: string[] = [];
   const contentImports: string[] = [];
   const contentImports2: string[] = [];
   const contentComponents: string[] = [];
@@ -58,7 +60,6 @@ function _generateMetaComponent(
     const { name, nameCapitalize, nameProps, hasProps, nameEmits, hasEmits, nameSlots, hasSlots } = controllerInfo;
     const componentFullName = `${moduleName}:${name}`;
     const componentName2 = 'Z' + nameCapitalize;
-    //? contentExports.push(`export * from '../component/${componentName}/controller.js';`);
     const _contentImports_parts: string[] = [];
     if (hasEmits) _contentImports_parts.push(nameEmits);
     if (hasSlots) _contentImports_parts.push(nameSlots);
@@ -89,7 +90,6 @@ function _generateMetaComponent(
   }
   // combine
   let content = `/** components: begin */
-${contentExports.join('\n')}
 ${contentImports.join('\n')}
 ${contentImports2.join('\n')}
 export const components = {
@@ -245,7 +245,7 @@ function _parseControllerInfo(
   const fileStyle = path.join(options.modulePath, `src/${type}/${name}/style.ts`);
   let importStyle = '';
   if (fse.existsSync(fileStyle)) {
-    importStyle = `import { StylePage${nameCapitalize} } from '../../page/${name}/style.js';`;
+    importStyle = `import { Style${type === 'page' ? 'Page' : ''}${nameCapitalize} } from '../../${type}/${name}/style.js';`;
   }
   // ok
   return {
