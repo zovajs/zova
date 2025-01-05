@@ -1,10 +1,9 @@
-import { BeanRenderBase, Local } from 'zova';
+import { BeanRenderBase } from 'zova';
+import { Render } from 'zova-module-a-bean';
 import type { ControllerEssentialLink } from './controller.js';
 import { QIcon, QItem, QItemLabel, QItemSection } from 'quasar';
 
-export interface RenderEssentialLink extends ControllerEssentialLink {}
-
-@Local()
+@Render()
 export class RenderEssentialLink extends BeanRenderBase {
   render() {
     return (

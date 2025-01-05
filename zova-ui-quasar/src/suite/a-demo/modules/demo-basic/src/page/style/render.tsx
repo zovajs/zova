@@ -1,11 +1,10 @@
-import { BeanRenderBase, Local } from 'zova';
+import { BeanRenderBase } from 'zova';
+import { Render } from 'zova-module-a-bean';
 import type { StyleStyle } from './style.js';
 import { ScopeModule } from '../../.metadata/this.js';
 import { QBtn, QOptionGroup, QPage } from 'quasar';
 
-export interface RenderStyle extends StyleStyle {}
-
-@Local()
+@Render()
 export class RenderStyle extends BeanRenderBase<ScopeModule> {
   render() {
     return (
