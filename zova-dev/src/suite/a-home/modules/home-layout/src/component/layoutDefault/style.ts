@@ -1,10 +1,8 @@
 import { BeanStyleBase } from 'zova';
-import { Local } from 'zova-module-a-bean';
+import { Style } from 'zova-module-a-bean';
 import type { ControllerLayoutDefault } from './controller.js';
 
-export interface StyleLayoutDefault extends ControllerLayoutDefault {}
-
-@Local()
+@Style()
 export class StyleLayoutDefault extends BeanStyleBase {
   cTab: string;
 

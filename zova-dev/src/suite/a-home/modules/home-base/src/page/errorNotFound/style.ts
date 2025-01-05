@@ -1,11 +1,9 @@
 import { BeanStyleBase } from 'zova';
-import { Local } from 'zova-module-a-bean';
+import { Style } from 'zova-module-a-bean';
 import type { ControllerPageErrorNotFound } from './controller.js';
 import { classes } from 'typestyle';
 
-export interface StyleErrorNotFound extends ControllerPageErrorNotFound {}
-
-@Local()
+@Style()
 export class StyleErrorNotFound extends BeanStyleBase {
   cTitle: string;
   cDescription: string;
