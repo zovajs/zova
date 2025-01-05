@@ -370,22 +370,22 @@ export * from '../page/style/style.js';
 import 'zova';
 declare module 'zova' {}
 declare module 'zova-module-demo-basic' {
-  export interface StyleLegacy {
+  export interface StylePageLegacy {
     /** @internal */
     get scope(): ScopeModuleDemoBasic;
   }
 
-  export interface StylePinia {
+  export interface StylePagePinia {
     /** @internal */
     get scope(): ScopeModuleDemoBasic;
   }
 
-  export interface StyleRouteParams {
+  export interface StylePageRouteParams {
     /** @internal */
     get scope(): ScopeModuleDemoBasic;
   }
 
-  export interface StyleRouteQuery {
+  export interface StylePageRouteQuery {
     /** @internal */
     get scope(): ScopeModuleDemoBasic;
   }
@@ -395,39 +395,39 @@ declare module 'zova-module-demo-basic' {
     get scope(): ScopeModuleDemoBasic;
   }
 
-  export interface StyleStyle {
+  export interface StylePageStyle {
     /** @internal */
     get scope(): ScopeModuleDemoBasic;
   }
 }
 /** style: end */
 /** style: begin */
-import { StyleLegacy } from '../page/legacy/style.js';
-import { StylePinia } from '../page/pinia/style.js';
-import { StyleRouteParams } from '../page/routeParams/style.js';
-import { StyleRouteQuery } from '../page/routeQuery/style.js';
+import { StylePageLegacy } from '../page/legacy/style.js';
+import { StylePagePinia } from '../page/pinia/style.js';
+import { StylePageRouteParams } from '../page/routeParams/style.js';
+import { StylePageRouteQuery } from '../page/routeQuery/style.js';
 import { StylePageRouteQueryB } from '../page/routeQueryB/style.js';
-import { StyleStyle } from '../page/style/style.js';
+import { StylePageStyle } from '../page/style/style.js';
 import 'zova';
 declare module 'zova' {
   export interface IBeanRecordLocal {
-    'demo-basic.style.legacy': StyleLegacy;
-    'demo-basic.style.pinia': StylePinia;
-    'demo-basic.style.routeParams': StyleRouteParams;
-    'demo-basic.style.routeQuery': StyleRouteQuery;
+    'demo-basic.style.pageLegacy': StylePageLegacy;
+    'demo-basic.style.pagePinia': StylePagePinia;
+    'demo-basic.style.pageRouteParams': StylePageRouteParams;
+    'demo-basic.style.pageRouteQuery': StylePageRouteQuery;
     'demo-basic.style.pageRouteQueryB': StylePageRouteQueryB;
-    'demo-basic.style.style': StyleStyle;
+    'demo-basic.style.pageStyle': StylePageStyle;
   }
 }
 /** style: end */
 /** styles: begin */
 declare module 'zova-module-demo-basic' {
-  export interface StyleLegacy extends ControllerPageLegacy {}
-  export interface StylePinia extends ControllerPagePinia {}
-  export interface StyleRouteParams extends ControllerPageRouteParams {}
-  export interface StyleRouteQuery extends ControllerPageRouteQuery {}
+  export interface StylePageLegacy extends ControllerPageLegacy {}
+  export interface StylePagePinia extends ControllerPagePinia {}
+  export interface StylePageRouteParams extends ControllerPageRouteParams {}
+  export interface StylePageRouteQuery extends ControllerPageRouteQuery {}
   export interface StylePageRouteQueryB extends ControllerPageRouteQueryB {}
-  export interface StyleStyle extends ControllerPageStyle {}
+  export interface StylePageStyle extends ControllerPageStyle {}
 }
 /** styles: end */
 /** locale: begin */

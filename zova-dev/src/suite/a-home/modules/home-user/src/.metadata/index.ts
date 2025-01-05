@@ -145,24 +145,24 @@ export * from '../page/login/style.js';
 import 'zova';
 declare module 'zova' {}
 declare module 'zova-module-home-user' {
-  export interface StyleLogin {
+  export interface StylePageLogin {
     /** @internal */
     get scope(): ScopeModuleHomeUser;
   }
 }
 /** style: end */
 /** style: begin */
-import { StyleLogin } from '../page/login/style.js';
+import { StylePageLogin } from '../page/login/style.js';
 import 'zova';
 declare module 'zova' {
   export interface IBeanRecordLocal {
-    'home-user.style.login': StyleLogin;
+    'home-user.style.pageLogin': StylePageLogin;
   }
 }
 /** style: end */
 /** styles: begin */
 declare module 'zova-module-home-user' {
-  export interface StyleLogin extends ControllerPageLogin {}
+  export interface StylePageLogin extends ControllerPageLogin {}
 }
 /** styles: end */
 /** locale: begin */

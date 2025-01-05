@@ -167,32 +167,32 @@ export * from '../page/todo/style.js';
 import 'zova';
 declare module 'zova' {}
 declare module 'zova-module-demo-todo' {
-  export interface StyleItem {
+  export interface StylePageItem {
     /** @internal */
     get scope(): ScopeModuleDemoTodo;
   }
 
-  export interface StyleTodo {
+  export interface StylePageTodo {
     /** @internal */
     get scope(): ScopeModuleDemoTodo;
   }
 }
 /** style: end */
 /** style: begin */
-import { StyleItem } from '../page/item/style.js';
-import { StyleTodo } from '../page/todo/style.js';
+import { StylePageItem } from '../page/item/style.js';
+import { StylePageTodo } from '../page/todo/style.js';
 import 'zova';
 declare module 'zova' {
   export interface IBeanRecordLocal {
-    'demo-todo.style.item': StyleItem;
-    'demo-todo.style.todo': StyleTodo;
+    'demo-todo.style.pageItem': StylePageItem;
+    'demo-todo.style.pageTodo': StylePageTodo;
   }
 }
 /** style: end */
 /** styles: begin */
 declare module 'zova-module-demo-todo' {
-  export interface StyleItem extends ControllerPageItem {}
-  export interface StyleTodo extends ControllerPageTodo {}
+  export interface StylePageItem extends ControllerPageItem {}
+  export interface StylePageTodo extends ControllerPageTodo {}
 }
 /** styles: end */
 /** scope: begin */

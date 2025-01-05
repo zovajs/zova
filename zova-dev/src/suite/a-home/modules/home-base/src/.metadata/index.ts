@@ -189,7 +189,7 @@ declare module 'zova-module-home-base' {
     get scope(): ScopeModuleHomeBase;
   }
 
-  export interface StyleErrorNotFound {
+  export interface StylePageErrorNotFound {
     /** @internal */
     get scope(): ScopeModuleHomeBase;
   }
@@ -197,19 +197,19 @@ declare module 'zova-module-home-base' {
 /** style: end */
 /** style: begin */
 import { StylePage } from '../component/page/style.js';
-import { StyleErrorNotFound } from '../page/errorNotFound/style.js';
+import { StylePageErrorNotFound } from '../page/errorNotFound/style.js';
 import 'zova';
 declare module 'zova' {
   export interface IBeanRecordLocal {
     'home-base.style.page': StylePage;
-    'home-base.style.errorNotFound': StyleErrorNotFound;
+    'home-base.style.pageErrorNotFound': StylePageErrorNotFound;
   }
 }
 /** style: end */
 /** styles: begin */
 declare module 'zova-module-home-base' {
   export interface StylePage extends ControllerPage {}
-  export interface StyleErrorNotFound extends ControllerPageErrorNotFound {}
+  export interface StylePageErrorNotFound extends ControllerPageErrorNotFound {}
 }
 /** styles: end */
 /** locale: begin */

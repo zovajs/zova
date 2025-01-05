@@ -77,24 +77,24 @@ export * from '../page/index/style.js';
 import 'zova';
 declare module 'zova' {}
 declare module 'zova-module-home-index' {
-  export interface StyleIndex {
+  export interface StylePageIndex {
     /** @internal */
     get scope(): ScopeModuleHomeIndex;
   }
 }
 /** style: end */
 /** style: begin */
-import { StyleIndex } from '../page/index/style.js';
+import { StylePageIndex } from '../page/index/style.js';
 import 'zova';
 declare module 'zova' {
   export interface IBeanRecordLocal {
-    'home-index.style.index': StyleIndex;
+    'home-index.style.pageIndex': StylePageIndex;
   }
 }
 /** style: end */
 /** styles: begin */
 declare module 'zova-module-home-index' {
-  export interface StyleIndex extends ControllerPageIndex {}
+  export interface StylePageIndex extends ControllerPageIndex {}
 }
 /** styles: end */
 /** scope: begin */
