@@ -34,7 +34,7 @@ const __MenuData = [
         title: 'Route Query(2)',
         caption: 'boolean, json, array',
         icon: '',
-        to: '/demo/basic/routeQuery2',
+        to: '/demo/basic/routeQueryB',
       },
       {
         title: 'Route Params',

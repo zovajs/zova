@@ -66,10 +66,8 @@ declare module 'zova' {
   }
 }
 /** model: end */
-/** local: begin */
-export * from '../page/login/controller.js';
-export * from '../page/login/render.jsx';
-export * from '../page/login/style.js';
+/** controller: begin */
+export * from '../page/login/controller.jsx';
 
 import 'zova';
 declare module 'zova' {}
@@ -78,49 +76,85 @@ declare module 'zova-module-home-user' {
     /** @internal */
     get scope(): ScopeModuleHomeUser;
   }
-
-  export interface RenderLogin {
-    /** @internal */
-    get scope(): ScopeModuleHomeUser;
-  }
-
-  export interface StyleLogin {
-    /** @internal */
-    get scope(): ScopeModuleHomeUser;
-  }
 }
-/** local: end */
-/** local: begin */
-import { ControllerPageLogin } from '../page/login/controller.js';
-import { RenderLogin } from '../page/login/render.jsx';
-import { StyleLogin } from '../page/login/style.js';
+/** controller: end */
+/** controller: begin */
+import { ControllerPageLogin } from '../page/login/controller.jsx';
 import 'zova';
 declare module 'zova' {
   export interface IBeanRecordLocal {
-    'home-user.local.controllerPageLogin': ControllerPageLogin;
-    'home-user.local.renderLogin': RenderLogin;
-    'home-user.local.styleLogin': StyleLogin;
+    'home-user.controller.pageLogin': ControllerPageLogin;
   }
 }
-/** local: end */
+/** controller: end */
 /** pages: begin */
-export * from '../page/login/controller.js';
+
 export * from '../routes.js';
 
 import 'zova';
 declare module 'zova' {
   export interface IPagePathRecord {
-    '/home/user/login': ControllerPageLogin.QueryInput;
+    '/home/user/login': undefined;
   }
   export interface IPageNameRecord {}
 }
-export const pagePathSchemas = {
-  '/home/user/login': {
-    query: ControllerPageLogin.querySchema,
-  },
-};
+export const pagePathSchemas = {};
 export const pageNameSchemas = {};
+declare module 'zova-module-home-user' {}
+
 /** pages: end */
+
+/** components: begin */
+
+export const components = {};
+import 'zova';
+declare module 'zova' {
+  export interface IComponentRecord {}
+}
+declare module 'zova-module-home-user' {}
+/** components: end */
+/** render: begin */
+export * from '../page/login/render.jsx';
+
+import 'zova';
+declare module 'zova' {}
+declare module 'zova-module-home-user' {
+  export interface RenderLogin {
+    /** @internal */
+    get scope(): ScopeModuleHomeUser;
+  }
+}
+/** render: end */
+/** render: begin */
+import { RenderLogin } from '../page/login/render.jsx';
+import 'zova';
+declare module 'zova' {
+  export interface IBeanRecordLocal {
+    'home-user.render.login': RenderLogin;
+  }
+}
+/** render: end */
+/** style: begin */
+export * from '../page/login/style.js';
+
+import 'zova';
+declare module 'zova' {}
+declare module 'zova-module-home-user' {
+  export interface StyleLogin {
+    /** @internal */
+    get scope(): ScopeModuleHomeUser;
+  }
+}
+/** style: end */
+/** style: begin */
+import { StyleLogin } from '../page/login/style.js';
+import 'zova';
+declare module 'zova' {
+  export interface IBeanRecordLocal {
+    'home-user.style.login': StyleLogin;
+  }
+}
+/** style: end */
 /** locale: begin */
 import locale_en_us from '../config/locale/en-us.js';
 import locale_zh_cn from '../config/locale/zh-cn.js';

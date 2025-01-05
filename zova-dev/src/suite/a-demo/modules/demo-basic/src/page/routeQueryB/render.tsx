@@ -1,10 +1,9 @@
 import { BeanRenderBase } from 'zova';
 import { Render } from 'zova-module-a-bean';
-import type { StyleRouteQuery2 } from './style.js';
 import { ZPage } from 'zova-module-home-base';
 
 @Render()
-export class RenderRouteQuery2 extends BeanRenderBase {
+export class RenderRouteQueryB extends BeanRenderBase {
   public render() {
     return (
       <ZPage>

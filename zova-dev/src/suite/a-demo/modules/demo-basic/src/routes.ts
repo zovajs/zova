@@ -1,5 +1,5 @@
 import Legacy from './.metadata/page/legacy.vue';
-import RouteQuery2 from './.metadata/page/routeQuery2.vue';
+import RouteQueryB from './.metadata/page/routeQueryB.vue';
 import RouteParams from './.metadata/page/routeParams.vue';
 import RouteQuery from './.metadata/page/routeQuery.vue';
 import Pinia from './.metadata/page/pinia.vue';
@@ -17,6 +17,6 @@ export const routes: IModuleRoute[] = [
   { path: 'pinia', component: Pinia },
   { path: 'routeQuery', component: RouteQuery },
   { name: 'routeParams', path: 'routeParams/:id?', component: RouteParams },
-  { path: 'routeQuery2', component: RouteQuery2 },
+  { path: 'routeQueryB', component: RouteQueryB },
   { path: 'legacy', component: Legacy },
 ];

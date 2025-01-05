@@ -19,211 +19,6 @@ declare module 'zova' {
   }
 }
 /** theme: end */
-/** local: begin */
-export * from '../component/card/controller.js';
-export * from '../page/component/controller.js';
-export * from '../page/component/render.jsx';
-export * from '../page/legacy/controller.js';
-export * from '../page/legacy/render.jsx';
-export * from '../page/legacy/style.js';
-export * from '../page/locale/controller.js';
-export * from '../page/locale/render.jsx';
-export * from '../page/pinia/controller.js';
-export * from '../page/pinia/render.jsx';
-export * from '../page/pinia/style.js';
-export * from '../page/routeParams/render.jsx';
-export * from '../page/routeParams/style.js';
-export * from '../page/routeQuery/controller.js';
-export * from '../page/routeQuery/render.jsx';
-export * from '../page/routeQuery/style.js';
-export * from '../page/routeQuery2/controller.js';
-export * from '../page/routeQuery2/render.jsx';
-export * from '../page/routeQuery2/style.js';
-export * from '../page/state/controller.js';
-export * from '../page/state/render.jsx';
-export * from '../page/style/controller.js';
-export * from '../page/style/render.jsx';
-export * from '../page/style/style.js';
-
-import 'zova';
-declare module 'zova' {}
-declare module 'zova-module-demo-basic' {
-  export interface ControllerCard {
-    /** @internal */
-    get scope(): ScopeModuleDemoBasic;
-  }
-
-  export interface ControllerPageComponent {
-    /** @internal */
-    get scope(): ScopeModuleDemoBasic;
-  }
-
-  export interface RenderComponent {
-    /** @internal */
-    get scope(): ScopeModuleDemoBasic;
-  }
-
-  export interface ControllerPageLegacy {
-    /** @internal */
-    get scope(): ScopeModuleDemoBasic;
-  }
-
-  export interface RenderLegacy {
-    /** @internal */
-    get scope(): ScopeModuleDemoBasic;
-  }
-
-  export interface StyleLegacy {
-    /** @internal */
-    get scope(): ScopeModuleDemoBasic;
-  }
-
-  export interface ControllerPageLocale {
-    /** @internal */
-    get scope(): ScopeModuleDemoBasic;
-  }
-
-  export interface RenderLocale {
-    /** @internal */
-    get scope(): ScopeModuleDemoBasic;
-  }
-
-  export interface ControllerPagePinia {
-    /** @internal */
-    get scope(): ScopeModuleDemoBasic;
-  }
-
-  export interface RenderPinia {
-    /** @internal */
-    get scope(): ScopeModuleDemoBasic;
-  }
-
-  export interface StylePinia {
-    /** @internal */
-    get scope(): ScopeModuleDemoBasic;
-  }
-
-  export interface RenderRouteParams {
-    /** @internal */
-    get scope(): ScopeModuleDemoBasic;
-  }
-
-  export interface StyleRouteParams {
-    /** @internal */
-    get scope(): ScopeModuleDemoBasic;
-  }
-
-  export interface ControllerPageRouteQuery {
-    /** @internal */
-    get scope(): ScopeModuleDemoBasic;
-  }
-
-  export interface RenderRouteQuery {
-    /** @internal */
-    get scope(): ScopeModuleDemoBasic;
-  }
-
-  export interface StyleRouteQuery {
-    /** @internal */
-    get scope(): ScopeModuleDemoBasic;
-  }
-
-  export interface ControllerPageRouteQuery2 {
-    /** @internal */
-    get scope(): ScopeModuleDemoBasic;
-  }
-
-  export interface RenderRouteQuery2 {
-    /** @internal */
-    get scope(): ScopeModuleDemoBasic;
-  }
-
-  export interface StyleRouteQuery2 {
-    /** @internal */
-    get scope(): ScopeModuleDemoBasic;
-  }
-
-  export interface ControllerPageState {
-    /** @internal */
-    get scope(): ScopeModuleDemoBasic;
-  }
-
-  export interface RenderState {
-    /** @internal */
-    get scope(): ScopeModuleDemoBasic;
-  }
-
-  export interface ControllerPageStyle {
-    /** @internal */
-    get scope(): ScopeModuleDemoBasic;
-  }
-
-  export interface RenderStyle {
-    /** @internal */
-    get scope(): ScopeModuleDemoBasic;
-  }
-
-  export interface StyleStyle {
-    /** @internal */
-    get scope(): ScopeModuleDemoBasic;
-  }
-}
-/** local: end */
-/** local: begin */
-import { ControllerCard } from '../component/card/controller.js';
-import { ControllerPageComponent } from '../page/component/controller.js';
-import { RenderComponent } from '../page/component/render.jsx';
-import { ControllerPageLegacy } from '../page/legacy/controller.js';
-import { RenderLegacy } from '../page/legacy/render.jsx';
-import { StyleLegacy } from '../page/legacy/style.js';
-import { ControllerPageLocale } from '../page/locale/controller.js';
-import { RenderLocale } from '../page/locale/render.jsx';
-import { ControllerPagePinia } from '../page/pinia/controller.js';
-import { RenderPinia } from '../page/pinia/render.jsx';
-import { StylePinia } from '../page/pinia/style.js';
-import { RenderRouteParams } from '../page/routeParams/render.jsx';
-import { StyleRouteParams } from '../page/routeParams/style.js';
-import { ControllerPageRouteQuery } from '../page/routeQuery/controller.js';
-import { RenderRouteQuery } from '../page/routeQuery/render.jsx';
-import { StyleRouteQuery } from '../page/routeQuery/style.js';
-import { ControllerPageRouteQuery2 } from '../page/routeQuery2/controller.js';
-import { RenderRouteQuery2 } from '../page/routeQuery2/render.jsx';
-import { StyleRouteQuery2 } from '../page/routeQuery2/style.js';
-import { ControllerPageState } from '../page/state/controller.js';
-import { RenderState } from '../page/state/render.jsx';
-import { ControllerPageStyle } from '../page/style/controller.js';
-import { RenderStyle } from '../page/style/render.jsx';
-import { StyleStyle } from '../page/style/style.js';
-import 'zova';
-declare module 'zova' {
-  export interface IBeanRecordLocal {
-    'demo-basic.local.controllerCard': ControllerCard;
-    'demo-basic.local.controllerPageComponent': ControllerPageComponent;
-    'demo-basic.local.renderComponent': RenderComponent;
-    'demo-basic.local.controllerPageLegacy': ControllerPageLegacy;
-    'demo-basic.local.renderLegacy': RenderLegacy;
-    'demo-basic.local.styleLegacy': StyleLegacy;
-    'demo-basic.local.controllerPageLocale': ControllerPageLocale;
-    'demo-basic.local.renderLocale': RenderLocale;
-    'demo-basic.local.controllerPagePinia': ControllerPagePinia;
-    'demo-basic.local.renderPinia': RenderPinia;
-    'demo-basic.local.stylePinia': StylePinia;
-    'demo-basic.local.renderRouteParams': RenderRouteParams;
-    'demo-basic.local.styleRouteParams': StyleRouteParams;
-    'demo-basic.local.controllerPageRouteQuery': ControllerPageRouteQuery;
-    'demo-basic.local.renderRouteQuery': RenderRouteQuery;
-    'demo-basic.local.styleRouteQuery': StyleRouteQuery;
-    'demo-basic.local.controllerPageRouteQuery2': ControllerPageRouteQuery2;
-    'demo-basic.local.renderRouteQuery2': RenderRouteQuery2;
-    'demo-basic.local.styleRouteQuery2': StyleRouteQuery2;
-    'demo-basic.local.controllerPageState': ControllerPageState;
-    'demo-basic.local.renderState': RenderState;
-    'demo-basic.local.controllerPageStyle': ControllerPageStyle;
-    'demo-basic.local.renderStyle': RenderStyle;
-    'demo-basic.local.styleStyle': StyleStyle;
-  }
-}
-/** local: end */
 /** store: begin */
 export * from '../bean/store.counter.js';
 
@@ -246,23 +41,95 @@ declare module 'zova' {
 }
 /** store: end */
 /** controller: begin */
-export * from '../page/routeParams/controller.js';
+export * from '../component/card/controller.jsx';
+export * from '../page/component/controller.jsx';
+export * from '../page/legacy/controller.jsx';
+export * from '../page/locale/controller.jsx';
+export * from '../page/pinia/controller.jsx';
+export * from '../page/routeParams/controller.jsx';
+export * from '../page/routeQuery/controller.jsx';
+export * from '../page/routeQueryB/controller.jsx';
+export * from '../page/state/controller.jsx';
+export * from '../page/style/controller.jsx';
 
 import 'zova';
 declare module 'zova' {}
 declare module 'zova-module-demo-basic' {
+  export interface ControllerCard {
+    /** @internal */
+    get scope(): ScopeModuleDemoBasic;
+  }
+
+  export interface ControllerPageComponent {
+    /** @internal */
+    get scope(): ScopeModuleDemoBasic;
+  }
+
+  export interface ControllerPageLegacy {
+    /** @internal */
+    get scope(): ScopeModuleDemoBasic;
+  }
+
+  export interface ControllerPageLocale {
+    /** @internal */
+    get scope(): ScopeModuleDemoBasic;
+  }
+
+  export interface ControllerPagePinia {
+    /** @internal */
+    get scope(): ScopeModuleDemoBasic;
+  }
+
   export interface ControllerPageRouteParams {
+    /** @internal */
+    get scope(): ScopeModuleDemoBasic;
+  }
+
+  export interface ControllerPageRouteQuery {
+    /** @internal */
+    get scope(): ScopeModuleDemoBasic;
+  }
+
+  export interface ControllerPageRouteQueryB {
+    /** @internal */
+    get scope(): ScopeModuleDemoBasic;
+  }
+
+  export interface ControllerPageState {
+    /** @internal */
+    get scope(): ScopeModuleDemoBasic;
+  }
+
+  export interface ControllerPageStyle {
     /** @internal */
     get scope(): ScopeModuleDemoBasic;
   }
 }
 /** controller: end */
 /** controller: begin */
-import { ControllerPageRouteParams } from '../page/routeParams/controller.js';
+import { ControllerCard } from '../component/card/controller.jsx';
+import { ControllerPageComponent } from '../page/component/controller.jsx';
+import { ControllerPageLegacy } from '../page/legacy/controller.jsx';
+import { ControllerPageLocale } from '../page/locale/controller.jsx';
+import { ControllerPagePinia } from '../page/pinia/controller.jsx';
+import { ControllerPageRouteParams } from '../page/routeParams/controller.jsx';
+import { ControllerPageRouteQuery } from '../page/routeQuery/controller.jsx';
+import { ControllerPageRouteQueryB } from '../page/routeQueryB/controller.jsx';
+import { ControllerPageState } from '../page/state/controller.jsx';
+import { ControllerPageStyle } from '../page/style/controller.jsx';
 import 'zova';
 declare module 'zova' {
   export interface IBeanRecordLocal {
+    'demo-basic.controller.card': ControllerCard;
+    'demo-basic.controller.pageComponent': ControllerPageComponent;
+    'demo-basic.controller.pageLegacy': ControllerPageLegacy;
+    'demo-basic.controller.pageLocale': ControllerPageLocale;
+    'demo-basic.controller.pagePinia': ControllerPagePinia;
     'demo-basic.controller.pageRouteParams': ControllerPageRouteParams;
+    'demo-basic.controller.pageRouteQuery': ControllerPageRouteQuery;
+    'demo-basic.controller.pageRouteQueryB': ControllerPageRouteQueryB;
+    'demo-basic.controller.pageState': ControllerPageState;
+    'demo-basic.controller.pageStyle': ControllerPageStyle;
   }
 }
 /** controller: end */
@@ -271,12 +138,29 @@ import {
   ControllerPageRouteParamsSchemaParams,
   ControllerPageRouteParamsSchemaQuery,
 } from '../page/routeParams/controller.jsx';
+import {
+  ControllerPageRouteQuerySchemaParams,
+  ControllerPageRouteQuerySchemaQuery,
+} from '../page/routeQuery/controller.jsx';
+import {
+  ControllerPageRouteQueryBSchemaParams,
+  ControllerPageRouteQueryBSchemaQuery,
+} from '../page/routeQueryB/controller.jsx';
 export * from '../routes.js';
 import { TypePageParamsQuery } from 'zova';
 import { zz } from 'zova';
 import 'zova';
 declare module 'zova' {
-  export interface IPagePathRecord {}
+  export interface IPagePathRecord {
+    '/demo/basic/component': undefined;
+    '/demo/basic/legacy': undefined;
+    '/demo/basic/locale': undefined;
+    '/demo/basic/pinia': undefined;
+    '/demo/basic/routeQuery': NSControllerPageRouteQuery.QueryInput;
+    '/demo/basic/routeQueryB': NSControllerPageRouteQueryB.QueryInput;
+    '/demo/basic/state': undefined;
+    '/demo/basic/style': undefined;
+  }
   export interface IPageNameRecord {
     'demo-basic:routeParams': TypePageParamsQuery<
       NSControllerPageRouteParams.QueryInput,
@@ -284,7 +168,14 @@ declare module 'zova' {
     >;
   }
 }
-export const pagePathSchemas = {};
+export const pagePathSchemas = {
+  '/demo/basic/routeQuery': {
+    query: NSControllerPageRouteQuery.querySchema,
+  },
+  '/demo/basic/routeQueryB': {
+    query: NSControllerPageRouteQueryB.querySchema,
+  },
+};
 export const pageNameSchemas = {
   'demo-basic:routeParams': {
     params: NSControllerPageRouteParams.paramsSchema,
@@ -296,6 +187,14 @@ declare module 'zova-module-demo-basic' {
     $params: NSControllerPageRouteParams.ParamsOutput;
     $query: NSControllerPageRouteParams.QueryOutput;
   }
+  export interface ControllerPageRouteQuery {
+    $params: NSControllerPageRouteQuery.ParamsOutput;
+    $query: NSControllerPageRouteQuery.QueryOutput;
+  }
+  export interface ControllerPageRouteQueryB {
+    $params: NSControllerPageRouteQueryB.ParamsOutput;
+    $query: NSControllerPageRouteQueryB.QueryOutput;
+  }
 }
 export namespace NSControllerPageRouteParams {
   export const paramsSchema = ControllerPageRouteParamsSchemaParams;
@@ -306,19 +205,64 @@ export namespace NSControllerPageRouteParams {
   export type QueryInput = zz.input<typeof ControllerPageRouteParamsSchemaQuery>;
   export type QueryOutput = zz.output<typeof ControllerPageRouteParamsSchemaQuery>;
 }
+export namespace NSControllerPageRouteQuery {
+  export const paramsSchema = ControllerPageRouteQuerySchemaParams;
+  export type ParamsInput = zz.input<typeof ControllerPageRouteQuerySchemaParams>;
+  export type ParamsOutput = zz.output<typeof ControllerPageRouteQuerySchemaParams>;
+
+  export const querySchema = ControllerPageRouteQuerySchemaQuery;
+  export type QueryInput = zz.input<typeof ControllerPageRouteQuerySchemaQuery>;
+  export type QueryOutput = zz.output<typeof ControllerPageRouteQuerySchemaQuery>;
+}
+export namespace NSControllerPageRouteQueryB {
+  export const paramsSchema = ControllerPageRouteQueryBSchemaParams;
+  export type ParamsInput = zz.input<typeof ControllerPageRouteQueryBSchemaParams>;
+  export type ParamsOutput = zz.output<typeof ControllerPageRouteQueryBSchemaParams>;
+
+  export const querySchema = ControllerPageRouteQueryBSchemaQuery;
+  export type QueryInput = zz.input<typeof ControllerPageRouteQueryBSchemaQuery>;
+  export type QueryOutput = zz.output<typeof ControllerPageRouteQueryBSchemaQuery>;
+}
 /** pages: end */
 
+import { RequiredSome } from 'zova';
 /** components: begin */
-
-export const components = {};
+import { ControllerCardEmits, ControllerCardSlots } from '../component/card/controller.jsx';
+export { default as ZCard } from './component/card.vue';
+import { default as ZCard } from './component/card.vue';
+export const components = {
+  card: ZCard,
+};
 import 'zova';
 declare module 'zova' {
-  export interface IComponentRecord {}
+  export interface IComponentRecord {
+    'demo-basic:card': ControllerCard;
+  }
 }
-declare module 'zova-module-demo-basic' {}
+declare module 'zova-module-demo-basic' {
+  export interface ControllerCardProps {
+    controllerRef?: (ref: ControllerCard) => void;
+    slots?: ControllerCardSlots;
+  }
+
+  export interface ControllerCard {
+    $props: RequiredSome<ControllerCardProps, keyof typeof ControllerCard.$propsDefault>;
+    $emit: ControllerCardEmits;
+    $slots: ControllerCardSlots;
+  }
+}
 /** components: end */
 /** render: begin */
 export * from '../component/card/render.jsx';
+export * from '../page/component/render.jsx';
+export * from '../page/legacy/render.jsx';
+export * from '../page/locale/render.jsx';
+export * from '../page/pinia/render.jsx';
+export * from '../page/routeParams/render.jsx';
+export * from '../page/routeQuery/render.jsx';
+export * from '../page/routeQueryB/render.jsx';
+export * from '../page/state/render.jsx';
+export * from '../page/style/render.jsx';
 
 import 'zova';
 declare module 'zova' {}
@@ -327,17 +271,141 @@ declare module 'zova-module-demo-basic' {
     /** @internal */
     get scope(): ScopeModuleDemoBasic;
   }
+
+  export interface RenderComponent {
+    /** @internal */
+    get scope(): ScopeModuleDemoBasic;
+  }
+
+  export interface RenderLegacy {
+    /** @internal */
+    get scope(): ScopeModuleDemoBasic;
+  }
+
+  export interface RenderLocale {
+    /** @internal */
+    get scope(): ScopeModuleDemoBasic;
+  }
+
+  export interface RenderPinia {
+    /** @internal */
+    get scope(): ScopeModuleDemoBasic;
+  }
+
+  export interface RenderRouteParams {
+    /** @internal */
+    get scope(): ScopeModuleDemoBasic;
+  }
+
+  export interface RenderRouteQuery {
+    /** @internal */
+    get scope(): ScopeModuleDemoBasic;
+  }
+
+  export interface RenderRouteQueryB {
+    /** @internal */
+    get scope(): ScopeModuleDemoBasic;
+  }
+
+  export interface RenderState {
+    /** @internal */
+    get scope(): ScopeModuleDemoBasic;
+  }
+
+  export interface RenderStyle {
+    /** @internal */
+    get scope(): ScopeModuleDemoBasic;
+  }
 }
 /** render: end */
 /** render: begin */
 import { RenderCard } from '../component/card/render.jsx';
+import { RenderComponent } from '../page/component/render.jsx';
+import { RenderLegacy } from '../page/legacy/render.jsx';
+import { RenderLocale } from '../page/locale/render.jsx';
+import { RenderPinia } from '../page/pinia/render.jsx';
+import { RenderRouteParams } from '../page/routeParams/render.jsx';
+import { RenderRouteQuery } from '../page/routeQuery/render.jsx';
+import { RenderRouteQueryB } from '../page/routeQueryB/render.jsx';
+import { RenderState } from '../page/state/render.jsx';
+import { RenderStyle } from '../page/style/render.jsx';
 import 'zova';
 declare module 'zova' {
   export interface IBeanRecordLocal {
     'demo-basic.render.card': RenderCard;
+    'demo-basic.render.component': RenderComponent;
+    'demo-basic.render.legacy': RenderLegacy;
+    'demo-basic.render.locale': RenderLocale;
+    'demo-basic.render.pinia': RenderPinia;
+    'demo-basic.render.routeParams': RenderRouteParams;
+    'demo-basic.render.routeQuery': RenderRouteQuery;
+    'demo-basic.render.routeQueryB': RenderRouteQueryB;
+    'demo-basic.render.state': RenderState;
+    'demo-basic.render.style': RenderStyle;
   }
 }
 /** render: end */
+/** style: begin */
+export * from '../page/legacy/style.js';
+export * from '../page/pinia/style.js';
+export * from '../page/routeParams/style.js';
+export * from '../page/routeQuery/style.js';
+export * from '../page/routeQueryB/style.js';
+export * from '../page/style/style.js';
+
+import 'zova';
+declare module 'zova' {}
+declare module 'zova-module-demo-basic' {
+  export interface StyleLegacy {
+    /** @internal */
+    get scope(): ScopeModuleDemoBasic;
+  }
+
+  export interface StylePinia {
+    /** @internal */
+    get scope(): ScopeModuleDemoBasic;
+  }
+
+  export interface StyleRouteParams {
+    /** @internal */
+    get scope(): ScopeModuleDemoBasic;
+  }
+
+  export interface StyleRouteQuery {
+    /** @internal */
+    get scope(): ScopeModuleDemoBasic;
+  }
+
+  export interface StyleRouteQueryB {
+    /** @internal */
+    get scope(): ScopeModuleDemoBasic;
+  }
+
+  export interface StyleStyle {
+    /** @internal */
+    get scope(): ScopeModuleDemoBasic;
+  }
+}
+/** style: end */
+/** style: begin */
+import { StyleLegacy } from '../page/legacy/style.js';
+import { StylePinia } from '../page/pinia/style.js';
+import { StyleRouteParams } from '../page/routeParams/style.js';
+import { StyleRouteQuery } from '../page/routeQuery/style.js';
+import { StyleRouteQueryB } from '../page/routeQueryB/style.js';
+import { StyleStyle } from '../page/style/style.js';
+import 'zova';
+declare module 'zova' {
+  export interface IBeanRecordLocal {
+    'demo-basic.style.legacy': StyleLegacy;
+    'demo-basic.style.pinia': StylePinia;
+    'demo-basic.style.routeParams': StyleRouteParams;
+    'demo-basic.style.routeQuery': StyleRouteQuery;
+    'demo-basic.style.routeQueryB': StyleRouteQueryB;
+    'demo-basic.style.style': StyleStyle;
+  }
+}
+/** style: end */
 /** locale: begin */
 import locale_en_us from '../config/locale/en-us.js';
 import locale_zh_cn from '../config/locale/zh-cn.js';

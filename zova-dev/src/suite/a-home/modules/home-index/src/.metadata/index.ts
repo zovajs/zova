@@ -1,7 +1,5 @@
-/** local: begin */
-export * from '../page/index/controller.js';
-export * from '../page/index/render.jsx';
-export * from '../page/index/style.js';
+/** controller: begin */
+export * from '../page/index/controller.jsx';
 
 import 'zova';
 declare module 'zova' {}
@@ -10,33 +8,19 @@ declare module 'zova-module-home-index' {
     /** @internal */
     get scope(): ScopeModuleHomeIndex;
   }
-
-  export interface RenderIndex {
-    /** @internal */
-    get scope(): ScopeModuleHomeIndex;
-  }
-
-  export interface StyleIndex {
-    /** @internal */
-    get scope(): ScopeModuleHomeIndex;
-  }
 }
-/** local: end */
-/** local: begin */
-import { ControllerPageIndex } from '../page/index/controller.js';
-import { RenderIndex } from '../page/index/render.jsx';
-import { StyleIndex } from '../page/index/style.js';
+/** controller: end */
+/** controller: begin */
+import { ControllerPageIndex } from '../page/index/controller.jsx';
 import 'zova';
 declare module 'zova' {
   export interface IBeanRecordLocal {
-    'home-index.local.controllerPageIndex': ControllerPageIndex;
-    'home-index.local.renderIndex': RenderIndex;
-    'home-index.local.styleIndex': StyleIndex;
+    'home-index.controller.pageIndex': ControllerPageIndex;
   }
 }
-/** local: end */
+/** controller: end */
 /** pages: begin */
-export * from '../page/index/controller.js';
+
 export * from '../routes.js';
 
 import 'zova';
@@ -48,7 +32,61 @@ declare module 'zova' {
 }
 export const pagePathSchemas = {};
 export const pageNameSchemas = {};
+declare module 'zova-module-home-index' {}
+
 /** pages: end */
+
+/** components: begin */
+
+export const components = {};
+import 'zova';
+declare module 'zova' {
+  export interface IComponentRecord {}
+}
+declare module 'zova-module-home-index' {}
+/** components: end */
+/** render: begin */
+export * from '../page/index/render.jsx';
+
+import 'zova';
+declare module 'zova' {}
+declare module 'zova-module-home-index' {
+  export interface RenderIndex {
+    /** @internal */
+    get scope(): ScopeModuleHomeIndex;
+  }
+}
+/** render: end */
+/** render: begin */
+import { RenderIndex } from '../page/index/render.jsx';
+import 'zova';
+declare module 'zova' {
+  export interface IBeanRecordLocal {
+    'home-index.render.index': RenderIndex;
+  }
+}
+/** render: end */
+/** style: begin */
+export * from '../page/index/style.js';
+
+import 'zova';
+declare module 'zova' {}
+declare module 'zova-module-home-index' {
+  export interface StyleIndex {
+    /** @internal */
+    get scope(): ScopeModuleHomeIndex;
+  }
+}
+/** style: end */
+/** style: begin */
+import { StyleIndex } from '../page/index/style.js';
+import 'zova';
+declare module 'zova' {
+  export interface IBeanRecordLocal {
+    'home-index.style.index': StyleIndex;
+  }
+}
+/** style: end */
 /** scope: begin */
 import { BeanScopeBase, BeanScopeUtil } from 'zova';
 import { Scope } from 'zova-module-a-bean';

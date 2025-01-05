@@ -43,12 +43,6 @@ declare module 'zova' {
 /** local: begin */
 export * from '../bean/local.router.js';
 export * from '../bean/local.ssr.js';
-export * from '../component/page/controller.js';
-export * from '../component/page/render.jsx';
-export * from '../component/page/style.js';
-export * from '../page/errorNotFound/controller.js';
-export * from '../page/errorNotFound/render.jsx';
-export * from '../page/errorNotFound/style.js';
 
 import 'zova';
 declare module 'zova' {}
@@ -62,18 +56,27 @@ declare module 'zova-module-home-base' {
     /** @internal */
     get scope(): ScopeModuleHomeBase;
   }
+}
+/** local: end */
+/** local: begin */
+import { LocalRouter } from '../bean/local.router.js';
+import { LocalSSR } from '../bean/local.ssr.js';
+import 'zova';
+declare module 'zova' {
+  export interface IBeanRecordLocal {
+    'home-base.local.router': LocalRouter;
+    'home-base.local.sSR': LocalSSR;
+  }
+}
+/** local: end */
+/** controller: begin */
+export * from '../component/page/controller.jsx';
+export * from '../page/errorNotFound/controller.jsx';
 
+import 'zova';
+declare module 'zova' {}
+declare module 'zova-module-home-base' {
   export interface ControllerPage {
-    /** @internal */
-    get scope(): ScopeModuleHomeBase;
-  }
-
-  export interface RenderPage {
-    /** @internal */
-    get scope(): ScopeModuleHomeBase;
-  }
-
-  export interface StylePage {
     /** @internal */
     get scope(): ScopeModuleHomeBase;
   }
@@ -82,47 +85,41 @@ declare module 'zova-module-home-base' {
     /** @internal */
     get scope(): ScopeModuleHomeBase;
   }
-
-  export interface RenderErrorNotFound {
-    /** @internal */
-    get scope(): ScopeModuleHomeBase;
-  }
-
-  export interface StyleErrorNotFound {
-    /** @internal */
-    get scope(): ScopeModuleHomeBase;
-  }
 }
-/** local: end */
-/** local: begin */
-import { LocalRouter } from '../bean/local.router.js';
-import { LocalSSR } from '../bean/local.ssr.js';
-import { ControllerPage } from '../component/page/controller.js';
-import { RenderPage } from '../component/page/render.jsx';
-import { StylePage } from '../component/page/style.js';
-import { ControllerPageErrorNotFound } from '../page/errorNotFound/controller.js';
-import { RenderErrorNotFound } from '../page/errorNotFound/render.jsx';
-import { StyleErrorNotFound } from '../page/errorNotFound/style.js';
+/** controller: end */
+/** controller: begin */
+import { ControllerPage } from '../component/page/controller.jsx';
+import { ControllerPageErrorNotFound } from '../page/errorNotFound/controller.jsx';
 import 'zova';
 declare module 'zova' {
   export interface IBeanRecordLocal {
-    'home-base.local.router': LocalRouter;
-    'home-base.local.sSR': LocalSSR;
-    'home-base.local.controllerPage': ControllerPage;
-    'home-base.local.renderPage': RenderPage;
-    'home-base.local.stylePage': StylePage;
-    'home-base.local.controllerPageErrorNotFound': ControllerPageErrorNotFound;
-    'home-base.local.renderErrorNotFound': RenderErrorNotFound;
-    'home-base.local.styleErrorNotFound': StyleErrorNotFound;
+    'home-base.controller.page': ControllerPage;
+    'home-base.controller.pageErrorNotFound': ControllerPageErrorNotFound;
   }
 }
-/** local: end */
+/** controller: end */
+/** pages: begin */
+
+export * from '../routes.js';
+
+import 'zova';
+declare module 'zova' {
+  export interface IPagePathRecord {
+    '/home/base//:catchAll(.*)*': undefined;
+  }
+  export interface IPageNameRecord {}
+}
+export const pagePathSchemas = {};
+export const pageNameSchemas = {};
+declare module 'zova-module-home-base' {}
+
+/** pages: end */
+
 import { RequiredSome } from 'zova';
 /** components: begin */
-export * from '../component/page/controller.js';
-import { ControllerPageEmits, ControllerPageSlots } from '../component/page/controller.js';
-export { default as ZPage } from '../component/page/index.vue';
-import { default as ZPage } from '../component/page/index.vue';
+import { ControllerPageEmits, ControllerPageSlots } from '../component/page/controller.jsx';
+export { default as ZPage } from './component/page.vue';
+import { default as ZPage } from './component/page.vue';
 export const components = {
   page: ZPage,
 };
@@ -145,20 +142,64 @@ declare module 'zova-module-home-base' {
   }
 }
 /** components: end */
-/** pages: begin */
-export * from '../page/errorNotFound/controller.js';
-export * from '../routes.js';
+/** render: begin */
+export * from '../component/page/render.jsx';
+export * from '../page/errorNotFound/render.jsx';
 
 import 'zova';
-declare module 'zova' {
-  export interface IPagePathRecord {
-    '/home/base//:catchAll(.*)*': undefined;
+declare module 'zova' {}
+declare module 'zova-module-home-base' {
+  export interface RenderPage {
+    /** @internal */
+    get scope(): ScopeModuleHomeBase;
   }
-  export interface IPageNameRecord {}
+
+  export interface RenderErrorNotFound {
+    /** @internal */
+    get scope(): ScopeModuleHomeBase;
+  }
 }
-export const pagePathSchemas = {};
-export const pageNameSchemas = {};
-/** pages: end */
+/** render: end */
+/** render: begin */
+import { RenderPage } from '../component/page/render.jsx';
+import { RenderErrorNotFound } from '../page/errorNotFound/render.jsx';
+import 'zova';
+declare module 'zova' {
+  export interface IBeanRecordLocal {
+    'home-base.render.page': RenderPage;
+    'home-base.render.errorNotFound': RenderErrorNotFound;
+  }
+}
+/** render: end */
+/** style: begin */
+export * from '../component/page/style.js';
+export * from '../page/errorNotFound/style.js';
+
+import 'zova';
+declare module 'zova' {}
+declare module 'zova-module-home-base' {
+  export interface StylePage {
+    /** @internal */
+    get scope(): ScopeModuleHomeBase;
+  }
+
+  export interface StyleErrorNotFound {
+    /** @internal */
+    get scope(): ScopeModuleHomeBase;
+  }
+}
+/** style: end */
+/** style: begin */
+import { StylePage } from '../component/page/style.js';
+import { StyleErrorNotFound } from '../page/errorNotFound/style.js';
+import 'zova';
+declare module 'zova' {
+  export interface IBeanRecordLocal {
+    'home-base.style.page': StylePage;
+    'home-base.style.errorNotFound': StyleErrorNotFound;
+  }
+}
+/** style: end */
 /** locale: begin */
 import locale_en_us from '../config/locale/en-us.js';
 import locale_zh_cn from '../config/locale/zh-cn.js';

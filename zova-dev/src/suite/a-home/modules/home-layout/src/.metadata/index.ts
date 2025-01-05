@@ -50,10 +50,6 @@ declare module 'zova' {
 }
 /** model: end */
 /** local: begin */
-export * from '../component/essentialLink/controller.js';
-export * from '../component/essentialLink/render.jsx';
-export * from '../component/layoutDefault/controller.js';
-export * from '../component/layoutDefault/render.jsx';
 export * from '../component/layoutDefault/renderContent.jsx';
 export * from '../component/layoutDefault/renderHeader.jsx';
 export * from '../component/layoutDefault/renderLocale.jsx';
@@ -62,33 +58,10 @@ export * from '../component/layoutDefault/renderSidebar.jsx';
 export * from '../component/layoutDefault/renderTabs.jsx';
 export * from '../component/layoutDefault/renderTheme.jsx';
 export * from '../component/layoutDefault/renderUser.jsx';
-export * from '../component/layoutDefault/style.js';
-export * from '../component/layoutEmpty/controller.js';
-export * from '../component/layoutEmpty/render.jsx';
 
 import 'zova';
 declare module 'zova' {}
 declare module 'zova-module-home-layout' {
-  export interface ControllerEssentialLink {
-    /** @internal */
-    get scope(): ScopeModuleHomeLayout;
-  }
-
-  export interface RenderEssentialLink {
-    /** @internal */
-    get scope(): ScopeModuleHomeLayout;
-  }
-
-  export interface ControllerLayoutDefault {
-    /** @internal */
-    get scope(): ScopeModuleHomeLayout;
-  }
-
-  export interface RenderLayoutDefault {
-    /** @internal */
-    get scope(): ScopeModuleHomeLayout;
-  }
-
   export interface RenderContent {
     /** @internal */
     get scope(): ScopeModuleHomeLayout;
@@ -128,28 +101,9 @@ declare module 'zova-module-home-layout' {
     /** @internal */
     get scope(): ScopeModuleHomeLayout;
   }
-
-  export interface StyleLayoutDefault {
-    /** @internal */
-    get scope(): ScopeModuleHomeLayout;
-  }
-
-  export interface ControllerLayoutEmpty {
-    /** @internal */
-    get scope(): ScopeModuleHomeLayout;
-  }
-
-  export interface RenderLayoutEmpty {
-    /** @internal */
-    get scope(): ScopeModuleHomeLayout;
-  }
 }
 /** local: end */
 /** local: begin */
-import { ControllerEssentialLink } from '../component/essentialLink/controller.js';
-import { RenderEssentialLink } from '../component/essentialLink/render.jsx';
-import { ControllerLayoutDefault } from '../component/layoutDefault/controller.js';
-import { RenderLayoutDefault } from '../component/layoutDefault/render.jsx';
 import { RenderContent } from '../component/layoutDefault/renderContent.jsx';
 import { RenderHeader } from '../component/layoutDefault/renderHeader.jsx';
 import { RenderLocale } from '../component/layoutDefault/renderLocale.jsx';
@@ -158,16 +112,9 @@ import { RenderSidebar } from '../component/layoutDefault/renderSidebar.jsx';
 import { RenderTabs } from '../component/layoutDefault/renderTabs.jsx';
 import { RenderTheme } from '../component/layoutDefault/renderTheme.jsx';
 import { RenderUser } from '../component/layoutDefault/renderUser.jsx';
-import { StyleLayoutDefault } from '../component/layoutDefault/style.js';
-import { ControllerLayoutEmpty } from '../component/layoutEmpty/controller.js';
-import { RenderLayoutEmpty } from '../component/layoutEmpty/render.jsx';
 import 'zova';
 declare module 'zova' {
   export interface IBeanRecordLocal {
-    'home-layout.local.controllerEssentialLink': ControllerEssentialLink;
-    'home-layout.local.renderEssentialLink': RenderEssentialLink;
-    'home-layout.local.controllerLayoutDefault': ControllerLayoutDefault;
-    'home-layout.local.renderLayoutDefault': RenderLayoutDefault;
     'home-layout.local.renderContent': RenderContent;
     'home-layout.local.renderHeader': RenderHeader;
     'home-layout.local.renderLocale': RenderLocale;
@@ -176,26 +123,72 @@ declare module 'zova' {
     'home-layout.local.renderTabs': RenderTabs;
     'home-layout.local.renderTheme': RenderTheme;
     'home-layout.local.renderUser': RenderUser;
-    'home-layout.local.styleLayoutDefault': StyleLayoutDefault;
-    'home-layout.local.controllerLayoutEmpty': ControllerLayoutEmpty;
-    'home-layout.local.renderLayoutEmpty': RenderLayoutEmpty;
   }
 }
 /** local: end */
+/** controller: begin */
+export * from '../component/essentialLink/controller.jsx';
+export * from '../component/layoutDefault/controller.jsx';
+export * from '../component/layoutEmpty/controller.jsx';
+
+import 'zova';
+declare module 'zova' {}
+declare module 'zova-module-home-layout' {
+  export interface ControllerEssentialLink {
+    /** @internal */
+    get scope(): ScopeModuleHomeLayout;
+  }
+
+  export interface ControllerLayoutDefault {
+    /** @internal */
+    get scope(): ScopeModuleHomeLayout;
+  }
+
+  export interface ControllerLayoutEmpty {
+    /** @internal */
+    get scope(): ScopeModuleHomeLayout;
+  }
+}
+/** controller: end */
+/** controller: begin */
+import { ControllerEssentialLink } from '../component/essentialLink/controller.jsx';
+import { ControllerLayoutDefault } from '../component/layoutDefault/controller.jsx';
+import { ControllerLayoutEmpty } from '../component/layoutEmpty/controller.jsx';
+import 'zova';
+declare module 'zova' {
+  export interface IBeanRecordLocal {
+    'home-layout.controller.essentialLink': ControllerEssentialLink;
+    'home-layout.controller.layoutDefault': ControllerLayoutDefault;
+    'home-layout.controller.layoutEmpty': ControllerLayoutEmpty;
+  }
+}
+/** controller: end */
+/** pages: begin */
+
+export * from '../routes.js';
+
+import 'zova';
+declare module 'zova' {
+  export interface IPagePathRecord {}
+  export interface IPageNameRecord {}
+}
+export const pagePathSchemas = {};
+export const pageNameSchemas = {};
+declare module 'zova-module-home-layout' {}
+
+/** pages: end */
+
 import { RequiredSome } from 'zova';
 /** components: begin */
-export * from '../component/essentialLink/controller.js';
-export * from '../component/layoutDefault/controller.js';
-export * from '../component/layoutEmpty/controller.js';
-import { ControllerEssentialLinkEmits, ControllerEssentialLinkSlots } from '../component/essentialLink/controller.js';
-import { ControllerLayoutDefaultEmits, ControllerLayoutDefaultSlots } from '../component/layoutDefault/controller.js';
-import { ControllerLayoutEmptyEmits, ControllerLayoutEmptySlots } from '../component/layoutEmpty/controller.js';
-export { default as ZEssentialLink } from '../component/essentialLink/index.vue';
-import { default as ZEssentialLink } from '../component/essentialLink/index.vue';
-export { default as ZLayoutDefault } from '../component/layoutDefault/index.vue';
-import { default as ZLayoutDefault } from '../component/layoutDefault/index.vue';
-export { default as ZLayoutEmpty } from '../component/layoutEmpty/index.vue';
-import { default as ZLayoutEmpty } from '../component/layoutEmpty/index.vue';
+import { ControllerEssentialLinkEmits, ControllerEssentialLinkSlots } from '../component/essentialLink/controller.jsx';
+import { ControllerLayoutDefaultEmits, ControllerLayoutDefaultSlots } from '../component/layoutDefault/controller.jsx';
+import { ControllerLayoutEmptyEmits, ControllerLayoutEmptySlots } from '../component/layoutEmpty/controller.jsx';
+export { default as ZEssentialLink } from './component/essentialLink.vue';
+import { default as ZEssentialLink } from './component/essentialLink.vue';
+export { default as ZLayoutDefault } from './component/layoutDefault.vue';
+import { default as ZLayoutDefault } from './component/layoutDefault.vue';
+export { default as ZLayoutEmpty } from './component/layoutEmpty.vue';
+import { default as ZLayoutEmpty } from './component/layoutEmpty.vue';
 export const components = {
   essentialLink: ZEssentialLink,
   layoutDefault: ZLayoutDefault,
@@ -242,6 +235,64 @@ declare module 'zova-module-home-layout' {
   }
 }
 /** components: end */
+/** render: begin */
+export * from '../component/essentialLink/render.jsx';
+export * from '../component/layoutDefault/render.jsx';
+export * from '../component/layoutEmpty/render.jsx';
+
+import 'zova';
+declare module 'zova' {}
+declare module 'zova-module-home-layout' {
+  export interface RenderEssentialLink {
+    /** @internal */
+    get scope(): ScopeModuleHomeLayout;
+  }
+
+  export interface RenderLayoutDefault {
+    /** @internal */
+    get scope(): ScopeModuleHomeLayout;
+  }
+
+  export interface RenderLayoutEmpty {
+    /** @internal */
+    get scope(): ScopeModuleHomeLayout;
+  }
+}
+/** render: end */
+/** render: begin */
+import { RenderEssentialLink } from '../component/essentialLink/render.jsx';
+import { RenderLayoutDefault } from '../component/layoutDefault/render.jsx';
+import { RenderLayoutEmpty } from '../component/layoutEmpty/render.jsx';
+import 'zova';
+declare module 'zova' {
+  export interface IBeanRecordLocal {
+    'home-layout.render.essentialLink': RenderEssentialLink;
+    'home-layout.render.layoutDefault': RenderLayoutDefault;
+    'home-layout.render.layoutEmpty': RenderLayoutEmpty;
+  }
+}
+/** render: end */
+/** style: begin */
+export * from '../component/layoutDefault/style.js';
+
+import 'zova';
+declare module 'zova' {}
+declare module 'zova-module-home-layout' {
+  export interface StyleLayoutDefault {
+    /** @internal */
+    get scope(): ScopeModuleHomeLayout;
+  }
+}
+/** style: end */
+/** style: begin */
+import { StyleLayoutDefault } from '../component/layoutDefault/style.js';
+import 'zova';
+declare module 'zova' {
+  export interface IBeanRecordLocal {
+    'home-layout.style.layoutDefault': StyleLayoutDefault;
+  }
+}
+/** style: end */
 /** config: begin */
 export * from '../config/config.js';
 import { config } from '../config/config.js';
