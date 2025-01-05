@@ -41,7 +41,8 @@
       },
       "style": {
         "beanGeneral": false,
-        "optionsNone": true
+        "optionsNone": true,
+        "metadataCustom": "cli/style/metadata/generate.ts"
       }
     }
   },
