@@ -27,6 +27,7 @@ export function generateMetaComponent(
       hasSlots,
       hasModel,
       hasModelValue,
+      hasGeneric,
     } = controllerInfo;
     const componentFullName = `${moduleName}:${name}`;
     const componentName2 = 'Z' + nameCapitalize;
@@ -43,9 +44,11 @@ export function generateMetaComponent(
     contentComponents.push(`'${name}': ${componentName2},`);
     contentRecords.push(`'${componentFullName}': ${className};`);
     if (hasProps) {
-      contentRecords2.push(`export interface ${nameProps} {
+      const namePropsGeneric = hasGeneric && hasSlots ? `${nameProps}<T>` : nameProps;
+      const nameSlotsGeneric = hasGeneric ? `${nameSlots}<T>` : nameSlots;
+      contentRecords2.push(`export interface ${namePropsGeneric} {
         controllerRef?: (ref: ${className}) => void;
-        ${hasSlots ? `slots?: ${nameSlots};` : ''} 
+        ${hasSlots ? `slots?: ${nameSlotsGeneric};` : ''} 
       }
       `);
     }
