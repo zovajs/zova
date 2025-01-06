@@ -50,6 +50,7 @@ export function generateConfigDefine(env) {
 export function setModuleAlias() {
   // alias
   const alias = {
+    '@vue/compiler-sfc': getAbsolutePathOfModule('@cabloy/vue-compiler-sfc'),
     '@vue/runtime-core': getAbsolutePathOfModule('@cabloy/vue-runtime-core'),
     '@vue/reactivity': getAbsolutePathOfModule('@cabloy/vue-reactivity'),
     'vue-router': getAbsolutePathOfModule('@cabloy/vue-router'),
