@@ -15,9 +15,9 @@ module.exports = {
     return 'controller.tsx';
   },
   parseOptions: { language: 'plain' },
-  async transform({ ast }) {
+  async transform({ ast, argv }) {
     // check if exists
-    if (ast.includes('export type ParamsInput')) throw new Error('Params exists');
+    if (ast.includes(`${argv.controllerClassName}SchemaParams`)) throw new Error('Params exists');
     // zz
     if (!ast.match(/import \{[^\}]*zz[^\}]*\} from 'zova';/)) {
       ast = ast.replace(/import \{ ([^\}]*) \} from 'zova';/, (_, $1) => {
@@ -25,14 +25,10 @@ module.exports = {
       });
     }
     // export
-    ast = ast.replace('@Local', `${__snippet_export}\n@Local`);
-    // BeanControllerPageBase
-    ast = ast.replace(/BeanControllerPageBase<(.*?)> \{/, (_, $1) => {
-      const parts = $1.split(',');
-      if (!parts[1]) parts[1] = ' unknown';
-      parts[2] = ' ParamsOutput';
-      return `BeanControllerPageBase<${parts.join(',')}> {`;
-    });
+    ast = ast.replace(
+      '@Controller',
+      `export const ${argv.controllerClassName}SchemaParams = zz.object({});\n\n@Controller`,
+    );
     // ok
     return ast;
   },
