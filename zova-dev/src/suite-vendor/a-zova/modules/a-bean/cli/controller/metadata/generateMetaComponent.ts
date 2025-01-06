@@ -15,8 +15,19 @@ export function generateMetaComponent(
   const contentRecords2: string[] = [];
   for (const [globFile, controllerInfo] of globFiles) {
     const { className } = globFile;
-    const { name, nameCapitalize, controllerExtJs, nameProps, hasProps, nameEmits, hasEmits, nameSlots, hasSlots } =
-      controllerInfo;
+    const {
+      name,
+      nameCapitalize,
+      controllerExtJs,
+      nameProps,
+      hasProps,
+      nameEmits,
+      hasEmits,
+      nameSlots,
+      hasSlots,
+      hasModel,
+      hasModelValue,
+    } = controllerInfo;
     const componentFullName = `${moduleName}:${name}`;
     const componentName2 = 'Z' + nameCapitalize;
     const _contentImports_parts: string[] = [];
@@ -43,6 +54,16 @@ export function generateMetaComponent(
       _contentRecords_parts.push(`$props: RequiredSome<${nameProps}, keyof typeof ${className}.$propsDefault>;`);
     if (hasEmits) _contentRecords_parts.push(`$emit: ${nameEmits};`);
     if (hasSlots) _contentRecords_parts.push(`$slots: ${nameSlots};`);
+    if (hasModel) {
+      _contentRecords_parts.push(
+        `$useModel<K extends keyof ${nameProps}>(name: K, options?: DefineModelOptions<${nameProps}[K]>): RequiredSome<${nameProps}, keyof typeof ${className}.$propsDefault>[K];`,
+      );
+      if (hasModelValue) {
+        _contentRecords_parts.push(
+          `$useModel(options?: DefineModelOptions<${nameProps}['modelValue']>): RequiredSome<${nameProps}, keyof typeof ${className}.$propsDefault>['modelValue'];`,
+        );
+      }
+    }
     if (_contentRecords_parts.length > 0) {
       contentRecords2.push(`export interface ${className} {
         ${_contentRecords_parts.join('\n')}
@@ -67,8 +88,13 @@ declare module 'zova-module-${moduleName}' {
 }  
 /** components: end */
 `;
-  if (content.includes('RequiredSome')) {
-    content = `import { RequiredSome } from 'zova';\n${content}`;
+  // RequiredSome / DefineModelOptions
+  const _imports_parts: string[] = [];
+  ['RequiredSome', 'DefineModelOptions'].forEach(item => {
+    if (content.includes(item)) _imports_parts.push(item);
+  });
+  if (_imports_parts.length > 0) {
+    content = `import { ${_imports_parts.join(', ')} } from 'zova';\n${content}`;
   }
   return content;
 }

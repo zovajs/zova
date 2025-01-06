@@ -50,6 +50,9 @@ function _parseControllerInfo(
   // slots
   const nameSlots = `Controller${nameCapitalize}Slots`;
   const hasSlots = fileContent.includes(nameSlots);
+  // model
+  const hasModel = fileContent.includes("(e: 'update:");
+  const hasModelValue = fileContent.includes("(e: 'update:modelValue'");
   // schemaParams
   const nameSchemaParams = `ControllerPage${nameCapitalize}SchemaParams`;
   const hasSchemaParams = fileContent.includes(nameSchemaParams);
@@ -81,6 +84,8 @@ function _parseControllerInfo(
     hasEmits,
     nameSlots,
     hasSlots,
+    hasModel,
+    hasModelValue,
     nameSchemaParams,
     hasSchemaParams,
     nameSchemaQuery,
