@@ -3,6 +3,7 @@ import path from 'path';
 import fs from 'fs';
 import { IModuleInfo } from '@cabloy/module-info';
 import { __ThisSetName__ } from '../this.js';
+import { getControllerFileName } from '../common/utils.js';
 
 declare module '@cabloy/cli' {
   interface ICommandArgv {
@@ -11,6 +12,7 @@ declare module '@cabloy/cli' {
     pageName: string;
     nameMeta: NameMeta;
     controllerClassName: string;
+    controllerFileName: string;
   }
 }
 
@@ -34,6 +36,7 @@ export class CliRefactorPageParams extends BeanCliBase {
     // nameMeta
     argv.nameMeta = this.helper.parseNameMeta(pageName, ['page']);
     argv.controllerClassName = `ControllerPage${argv.nameMeta.shortCapitalize}`;
+    argv.controllerFileName = getControllerFileName(_module, 'page', argv.nameMeta.short);
     // directory
     const pageDir = path.join(targetDir, 'src/page', argv.nameMeta.short);
     if (!fs.existsSync(pageDir)) {

@@ -10,6 +10,7 @@ declare module '@cabloy/cli' {
     moduleInfo: IModuleInfo;
     componentName: string;
     nameMeta: NameMeta;
+    controllerClassName: string;
   }
 }
 
@@ -32,6 +33,7 @@ export class CliRefactorComponentEmits extends BeanCliBase {
     const componentName = argv.componentName;
     // nameMeta
     argv.nameMeta = this.helper.parseNameMeta(componentName, ['component']);
+    argv.controllerClassName = `Controller${argv.nameMeta.shortCapitalize}`;
     // directory
     const componentDir = path.join(targetDir, 'src/component', argv.nameMeta.short);
     if (!fs.existsSync(componentDir)) {

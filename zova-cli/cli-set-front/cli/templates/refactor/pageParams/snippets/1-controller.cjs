@@ -1,18 +1,10 @@
-const fs = require('node:fs');
-const path = require('node:path');
-
 const __snippet_export = `export const ParamsSchema = zz.object({});
 export type ParamsInput = zz.input<typeof ParamsSchema>;
 export type ParamsOutput = zz.output<typeof ParamsSchema>;\n`;
 
 module.exports = {
-  file: ({ cli, argv }) => {
-    const _module = cli.helper.findModule(argv.module);
-    const controllerFile = path.join(_module.root, `src/page/${argv.nameMeta.short}/controller.ts`);
-    if (fs.existsSync(controllerFile)) {
-      return 'controller.ts';
-    }
-    return 'controller.tsx';
+  file: ({ argv }) => {
+    return argv.controllerFileName;
   },
   parseOptions: { language: 'plain' },
   async transform({ ast, argv }) {
