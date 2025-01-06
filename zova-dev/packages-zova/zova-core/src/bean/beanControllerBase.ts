@@ -6,11 +6,6 @@ import { useRef } from '../vue/ref.js';
 
 type Data = Record<string, unknown>;
 
-// type DefineModelOptions<T = any> = {
-//   get?: (v: T) => any;
-//   set?: (v: T) => any;
-// };
-
 export interface PropsBase<CONTROLLER = unknown, SLOTS = unknown> {
   controllerRef?: (ref: CONTROLLER) => void;
   slots?: SLOTS;
@@ -39,11 +34,7 @@ export class BeanControllerBase extends BeanBase {
     this.app.meta.module._monkeyModuleSync('controllerDataInit', undefined, controllerData, this);
   }
 
-  // @ts-ignore ignore
-  // todo: 需要通过接口合并的方式添加以下两个函数类型定义
-  //protected $useModel(options?: DefineModelOptions<Props['modelValue']>): Props['modelValue'];
-  //protected $useModel<K extends keyof Props>(name: K, options?: DefineModelOptions<Props[K]>): Props[K];
-  protected $useModel(name?, options?) {
+  public $useModel(name?, options?) {
     if (typeof name === 'object') {
       options = name;
       name = 'modelValue';

@@ -48,3 +48,8 @@ export const BeanStyleIdentifier = '$$s';
 export function getBeanName<K extends keyof IBeanRecord>(beanFullName: K): K {
   return beanFullName;
 }
+
+export type DefineModelOptions<T = any> = {
+  get?: (v: T) => any;
+  set?: (v: T) => any;
+};

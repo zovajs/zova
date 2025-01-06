@@ -9,12 +9,12 @@ module.exports = {
     const eventName = `update:${modelName}`;
     if (ast.includes(`e: '${eventName}'`)) throw new Error('Model exists');
     // Props
-    ast = ast.replace(/export interface Props([^\{]*) \{/, $0 => {
+    ast = ast.replace(/interface [^<]*Props([^\{]*) \{/, $0 => {
       return `${$0}\n  ${modelName}?: number;`;
     });
     // Emits
-    ast = ast.replace(/export type Emits([^\{]*) = \{/, $0 => {
-      return `${$0}\n  (e: '${eventName}', value: number);`;
+    ast = ast.replace(/interface [^<]*Emits([^\{]*) \{/, $0 => {
+      return `${$0}\n  (e: '${eventName}', value: number): void;`;
     });
     // propsDefault
     ast = ast.replace(/static \$propsDefault([^\{]*) = \{/, $0 => {
