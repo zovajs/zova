@@ -49,7 +49,7 @@ export class CliRefactorComponentSlots extends BeanCliBase {
       snippetsPath: 'refactor/componentSlots/snippets',
       boilerplatePath: null,
     });
-    // // tools.metadata
-    // await this.helper.invokeCli([':tools:metadata', moduleName], { cwd: argv.projectPath });
+    // tools.metadata
+    await this.helper.invokeCli([':tools:metadata', moduleName], { cwd: argv.projectPath });
   }
 }
