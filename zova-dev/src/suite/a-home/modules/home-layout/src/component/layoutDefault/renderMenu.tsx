@@ -2,9 +2,9 @@ import { BeanRenderBase } from 'zova';
 import { Local } from 'zova-module-a-bean';
 import { StyleLayoutDefault } from './style.js';
 import { __ThisModule__ } from '../../.metadata/this.js';
-import EssentialLink from '../essentialLink/index.vue';
 import { JSX } from 'vue/jsx-runtime';
 import { ServiceMenuEntity } from '../../service/menu.js';
+import { ZEssentialLink } from '../../.metadata/index.js';
 
 export interface RenderMenu extends StyleLayoutDefault {}
 
@@ -25,7 +25,7 @@ export class RenderMenu extends BeanRenderBase {
     }
     return (
       <li key={item.title}>
-        <EssentialLink title={titleLocale} caption={item.caption} icon={item.icon} href={item.href} to={item.to} />
+        <ZEssentialLink title={titleLocale} caption={item.caption} icon={item.icon} href={item.href} to={item.to} />
       </li>
     );
   }
