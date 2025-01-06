@@ -50,7 +50,7 @@ export class CliRefactorFirstStyle extends BeanCliBase {
       throw new Error(`style exists: ${styleFile}`);
     }
     // render file must exists
-    const renderFile = path.join(componentDir, `${argv.renderName}.tsx`);
+    const renderFile = path.join(componentDir, 'render.tsx');
     if (!fs.existsSync(renderFile)) {
       await this.helper.invokeCli([':refactor:firstRender', argv.componentName, `--module=${moduleName}`], {
         cwd: argv.projectPath,

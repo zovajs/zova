@@ -46,6 +46,13 @@ export class CliRefactorAnotherStyle extends BeanCliBase {
     if (fs.existsSync(styleFile)) {
       throw new Error(`style exists: ${styleFile}`);
     }
+    // render file must exists
+    const styleFileFirst = path.join(componentDir, 'style.ts');
+    if (!fs.existsSync(styleFileFirst)) {
+      await this.helper.invokeCli([':refactor:firstStyle', argv.componentName, `--module=${moduleName}`], {
+        cwd: argv.projectPath,
+      });
+    }
     // render boilerplate
     await this.template.renderBoilerplateAndSnippets({
       targetDir: componentDir,
