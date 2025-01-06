@@ -3,22 +3,13 @@ module.exports = {
     return argv.controllerFileName;
   },
   parseOptions: { language: 'plain' },
-  async transform({ cli, ast }) {
-    if (ast.includes('export type Emits')) throw new Error('Emits exists');
-    const matchController = ast.match(/export class ([^< ]*)(.*?) extends/);
-    // const className = matchController[1];
-    const hasGeneric = !!matchController[2];
-    const genericT = hasGeneric ? '<T>' : '';
-    const genericT2 = hasGeneric ? '<_T>' : '';
-    //
-    ast = ast.replace('@Local', `export type Emits${genericT2} = {};\n\n@Local`);
-    // BeanControllerBase
-    ast = ast.replace(/BeanControllerBase<([\s\S]*?)> \{/, (_, $1) => {
-      const parts = cli.helper.safeSplit($1, ',');
-      if (!parts[1]) parts[1] = ' unknown';
-      parts[2] = ` Emits${genericT}`;
-      return `BeanControllerBase<${parts.join(',')}> {`;
-    });
+  async transform({ ast, argv }) {
+    if (ast.includes(`${argv.controllerClassName}Emits`)) throw new Error('Emits exists');
+    const matchGeneric = ast.match(/interface [^<]*Emits<(.*?)> \{/);
+    const hasGeneric = !!matchGeneric;
+    const genericT = hasGeneric ? '<T = unknown>' : '';
+    // Emits
+    ast = ast.replace('@Controller', `export interface ${argv.controllerClassName}Emits${genericT} {}\n\n@Controller`);
     // ok
     return ast;
   },

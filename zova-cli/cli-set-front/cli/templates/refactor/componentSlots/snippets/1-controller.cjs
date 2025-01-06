@@ -3,8 +3,8 @@ module.exports = {
     return argv.controllerFileName;
   },
   parseOptions: { language: 'plain' },
-  async transform({ cli, ast }) {
-    if (ast.includes('export interface Slots')) throw new Error('Slots exists');
+  async transform({ cli, ast, argv }) {
+    if (ast.includes(`${argv.controllerClassName}Slots`)) throw new Error('Slots exists');
     const matchController = ast.match(/export class ([^< ]*)(.*?) extends/);
     // const className = matchController[1];
     const hasGeneric = !!matchController[2];

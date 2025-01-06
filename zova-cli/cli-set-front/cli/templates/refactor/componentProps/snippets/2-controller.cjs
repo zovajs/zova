@@ -10,6 +10,8 @@ module.exports = {
     const genericT = hasGeneric ? '<T = unknown>' : '';
     // Props
     ast = ast.replace('@Controller', `export interface ${argv.controllerClassName}Props${genericT} {}\n\n@Controller`);
+    // $propsDefault
+    ast = ast.replace('BeanControllerBase {', 'BeanControllerBase {\n  static $propsDefault = {};\n\n');
     // ok
     return ast;
   },
