@@ -10,6 +10,7 @@ declare module '@cabloy/cli' {
     moduleInfo: IModuleInfo;
     pageName: string;
     nameMeta: NameMeta;
+    controllerClassName: string;
   }
 }
 
@@ -32,6 +33,7 @@ export class CliRefactorPageQuery extends BeanCliBase {
     const pageName = argv.pageName;
     // nameMeta
     argv.nameMeta = this.helper.parseNameMeta(pageName, ['page']);
+    argv.controllerClassName = `ControllerPage${argv.nameMeta.shortCapitalize}`;
     // directory
     const pageDir = path.join(targetDir, 'src/page', argv.nameMeta.short);
     if (!fs.existsSync(pageDir)) {
