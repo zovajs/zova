@@ -15,14 +15,17 @@ export function generateMetaComponent(
   const contentRecords2: string[] = [];
   for (const [globFile, controllerInfo] of globFiles) {
     const { className } = globFile;
-    const { name, nameCapitalize, nameProps, hasProps, nameEmits, hasEmits, nameSlots, hasSlots } = controllerInfo;
+    const { name, nameCapitalize, controllerExtJs, nameProps, hasProps, nameEmits, hasEmits, nameSlots, hasSlots } =
+      controllerInfo;
     const componentFullName = `${moduleName}:${name}`;
     const componentName2 = 'Z' + nameCapitalize;
     const _contentImports_parts: string[] = [];
     if (hasEmits) _contentImports_parts.push(nameEmits);
     if (hasSlots) _contentImports_parts.push(nameSlots);
     if (_contentImports_parts.length > 0) {
-      contentImports.push(`import { ${_contentImports_parts.join(', ')} } from '../component/${name}/controller.jsx';`);
+      contentImports.push(
+        `import { ${_contentImports_parts.join(', ')} } from '../component/${name}/controller${controllerExtJs}';`,
+      );
     }
     contentImports2.push(`export { default as ${componentName2} } from './component/${name}.vue';`);
     contentImports2.push(`import { default as ${componentName2} } from './component/${name}.vue';`);

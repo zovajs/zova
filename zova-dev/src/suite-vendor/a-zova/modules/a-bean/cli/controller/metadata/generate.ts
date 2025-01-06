@@ -33,12 +33,14 @@ function _parseControllerInfo(
   globFile: IGlobBeanFile,
 ): IControllerInfo | undefined {
   const { fileContent, fileNameJSRelative } = globFile;
-  const matches = fileNameJSRelative.match(/..\/(.+?)\/(.+?)\/controller/);
+  const matches = fileNameJSRelative.match(/..\/(.+?)\/(.+?)\/controller(.jsx?)$/);
   if (!matches) return;
   const type = matches[1];
   if (!['page', 'component'].includes(type)) return;
   const name = matches[2];
   const nameCapitalize = toUpperCaseFirstChar(name);
+  const controllerExtJs = matches[3];
+  const controllerExtTs = controllerExtJs.replace('.js', '.ts');
   // props
   const nameProps = `Controller${nameCapitalize}Props`;
   const hasProps = fileContent.includes(nameProps);
@@ -71,6 +73,8 @@ function _parseControllerInfo(
     type,
     name,
     nameCapitalize,
+    controllerExtJs,
+    controllerExtTs,
     nameProps,
     hasProps,
     nameEmits,

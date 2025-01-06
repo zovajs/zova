@@ -19,13 +19,16 @@ export function generateMetaPage(
   const contentRecords2: string[] = [];
   for (const [globFile, controllerInfo] of globFiles) {
     const { className } = globFile;
-    const { name, nameSchemaParams, hasSchemaParams, nameSchemaQuery, hasSchemaQuery } = controllerInfo;
+    const { name, controllerExtJs, nameSchemaParams, hasSchemaParams, nameSchemaQuery, hasSchemaQuery } =
+      controllerInfo;
     // import
     const _contentImports_parts: string[] = [];
     if (hasSchemaParams) _contentImports_parts.push(nameSchemaParams);
     if (hasSchemaQuery) _contentImports_parts.push(nameSchemaQuery);
     if (_contentImports_parts.length > 0) {
-      contentImports.push(`import { ${_contentImports_parts.join(', ')} } from '../page/${name}/controller.jsx';`);
+      contentImports.push(
+        `import { ${_contentImports_parts.join(', ')} } from '../page/${name}/controller${controllerExtJs}';`,
+      );
     }
     // controller.tsx
     const { routePath, routeName } = _extractRoutePathOrName(options, globFile, controllerInfo);

@@ -24,11 +24,13 @@ function _generateFileVuePage(
   _globFile: IGlobBeanFile,
   controllerInfo: IControllerInfo,
 ) {
-  const { name, nameCapitalize, importRender, importStyle } = controllerInfo;
+  const { name, nameCapitalize, controllerExtJs, importRender, importStyle } = controllerInfo;
   const contentImports: string[] = [];
   // controller
   contentImports.push("import { useControllerPage } from 'zova';");
-  contentImports.push(`import { ControllerPage${nameCapitalize} } from '../../page/${name}/controller.jsx';`);
+  contentImports.push(
+    `import { ControllerPage${nameCapitalize} } from '../../page/${name}/controller${controllerExtJs}';`,
+  );
   // render
   if (importRender) {
     contentImports.push(importRender);
@@ -58,6 +60,7 @@ function _generateFileVueComponent(
   const {
     name,
     nameCapitalize,
+    controllerExtJs,
     nameProps,
     hasProps,
     nameEmits,
@@ -71,7 +74,7 @@ function _generateFileVueComponent(
   // controller
   contentImports.push(`import { useController${hasProps ? '' : ', PropsBase'} } from 'zova';`);
   contentImports.push(
-    `import { Controller${nameCapitalize}${hasProps ? `, ${nameProps}` : ''}${hasEmits ? `, ${nameEmits}` : ''}${!hasProps && hasSlots ? `, ${nameSlots}` : ''} } from '../../component/${name}/controller.jsx';`,
+    `import { Controller${nameCapitalize}${hasProps ? `, ${nameProps}` : ''}${hasEmits ? `, ${nameEmits}` : ''}${!hasProps && hasSlots ? `, ${nameSlots}` : ''} } from '../../component/${name}/controller${controllerExtJs}';`,
   );
   // render
   if (importRender) {
