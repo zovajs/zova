@@ -54,9 +54,10 @@ useControllerPage(ControllerPage${nameCapitalize}, ${importRender ? `RenderPage$
 
 function _generateFileVueComponent(
   _options: IMetadataCustomGenerateOptions,
-  _globFile: IGlobBeanFile,
+  globFile: IGlobBeanFile,
   controllerInfo: IControllerInfo,
 ) {
+  const { className } = globFile;
   const {
     name,
     nameCapitalize,
@@ -67,14 +68,18 @@ function _generateFileVueComponent(
     hasEmits,
     nameSlots,
     hasSlots,
+    hasGeneric,
     importRender,
     importStyle,
   } = controllerInfo;
   const contentImports: string[] = [];
+  const namePropsGeneric = hasGeneric ? `${nameProps}<T>` : nameProps;
+  const nameEmitsGeneric = hasGeneric ? `${nameEmits}<T>` : nameEmits;
+  const nameSlotsGeneric = hasGeneric ? `${nameSlots}<T>` : nameSlots;
   // controller
   contentImports.push(`import { useController${hasProps ? '' : ', PropsBase'} } from 'zova';`);
   contentImports.push(
-    `import { Controller${nameCapitalize}${hasProps ? `, ${nameProps}` : ''}${hasEmits ? `, ${nameEmits}` : ''}${!hasProps && hasSlots ? `, ${nameSlots}` : ''} } from '../../component/${name}/controller${controllerExtJs}';`,
+    `import { ${className}${hasProps ? `, ${nameProps}` : ''}${hasEmits ? `, ${nameEmits}` : ''}${!hasProps && hasSlots ? `, ${nameSlots}` : ''} } from '../../component/${name}/controller${controllerExtJs}';`,
   );
   // render
   if (importRender) {
@@ -87,21 +92,21 @@ function _generateFileVueComponent(
   // props
   let contentProps = '';
   if (hasProps) {
-    contentProps = `const props = withDefaults(defineProps<${nameProps}>(), Controller${nameCapitalize}.$propsDefault);`;
+    contentProps = `const props = withDefaults(defineProps<${namePropsGeneric}>(), Controller${nameCapitalize}.$propsDefault);`;
   } else {
-    contentProps = `const props = defineProps<PropsBase<Controller${nameCapitalize}${hasSlots ? `, ${nameSlots}` : ''}>>();`;
+    contentProps = `const props = defineProps<PropsBase<Controller${nameCapitalize}${hasSlots ? `, ${nameSlotsGeneric}` : ''}>>();`;
   }
   // emits
   let contentEmits = '';
   if (hasEmits) {
-    contentEmits = `const emit = defineEmits<${nameEmits}>();`;
+    contentEmits = `const emit = defineEmits<${nameEmitsGeneric}>();`;
   }
   // content
   const content = `<template>
   <template></template>
 </template>
 
-<script setup lang="ts">
+<script setup lang="ts"${hasGeneric ? ' generic="T"' : ''}>
 ${contentImports.join('\n')}
 ${contentProps}
 ${contentEmits}
