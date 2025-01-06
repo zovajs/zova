@@ -1,6 +1,9 @@
 import { BeanControllerPageBase, onControllerMounted } from 'zova';
 import { Controller } from 'zova-module-a-bean';
 import { ControllerCard } from '../../.metadata/index.jsx';
+import { nextTick } from 'vue';
+import { ZPage } from 'zova-module-home-base';
+import { ZCard } from '../../index.js';
 
 @Controller()
 export class ControllerPageComponent extends BeanControllerPageBase {
@@ -12,5 +15,49 @@ export class ControllerPageComponent extends BeanControllerPageBase {
     onControllerMounted(() => {
       // this.inputRef?.focus();
     });
+  }
+
+  protected render() {
+    return (
+      <ZPage>
+        <ZCard
+          controllerRef={ref => {
+            this.cardRef = ref;
+            console.log('cardRef.$props: ', this.cardRef?.$props);
+          }}
+          header="header"
+          content={this.resetTime.toString()}
+          footer="footer"
+          onReset={time => {
+            this.resetTime = time;
+          }}
+          v-slots={{
+            header: () => {
+              return <div>this is a header slot from parent</div>;
+            },
+            default: () => {
+              return <div>this is a default slot from parent</div>;
+            },
+            footer: () => {
+              return <div>this is a footer slot from parent</div>;
+            },
+          }}
+        ></ZCard>
+        <label>Input: </label>
+        <input
+          type="text"
+          class="input input-bordered w-full max-w-xs"
+          ref={ref => {
+            if (this.inputRef !== ref) {
+              this.inputRef = ref as any;
+              nextTick(() => {
+                this.inputRef?.focus();
+              });
+            }
+          }}
+          value={this.resetTime.toString()}
+        ></input>
+      </ZPage>
+    );
   }
 }

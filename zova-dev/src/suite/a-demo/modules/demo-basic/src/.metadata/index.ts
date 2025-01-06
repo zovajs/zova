@@ -253,9 +253,6 @@ declare module 'zova-module-demo-basic' {
 }
 /** components: end */
 /** render: begin */
-export * from '../component/card/render.jsx';
-export * from '../page/component/render.jsx';
-export * from '../page/legacy/render.jsx';
 export * from '../page/locale/render.jsx';
 export * from '../page/pinia/render.jsx';
 export * from '../page/routeParams/render.jsx';
@@ -267,21 +264,6 @@ export * from '../page/style/render.jsx';
 import 'zova';
 declare module 'zova' {}
 declare module 'zova-module-demo-basic' {
-  export interface RenderCard {
-    /** @internal */
-    get scope(): ScopeModuleDemoBasic;
-  }
-
-  export interface RenderPageComponent {
-    /** @internal */
-    get scope(): ScopeModuleDemoBasic;
-  }
-
-  export interface RenderPageLegacy {
-    /** @internal */
-    get scope(): ScopeModuleDemoBasic;
-  }
-
   export interface RenderPageLocale {
     /** @internal */
     get scope(): ScopeModuleDemoBasic;
@@ -319,9 +301,6 @@ declare module 'zova-module-demo-basic' {
 }
 /** render: end */
 /** render: begin */
-import { RenderCard } from '../component/card/render.jsx';
-import { RenderPageComponent } from '../page/component/render.jsx';
-import { RenderPageLegacy } from '../page/legacy/render.jsx';
 import { RenderPageLocale } from '../page/locale/render.jsx';
 import { RenderPagePinia } from '../page/pinia/render.jsx';
 import { RenderPageRouteParams } from '../page/routeParams/render.jsx';
@@ -332,9 +311,6 @@ import { RenderPageStyle } from '../page/style/render.jsx';
 import 'zova';
 declare module 'zova' {
   export interface IBeanRecordLocal {
-    'demo-basic.render.card': RenderCard;
-    'demo-basic.render.pageComponent': RenderPageComponent;
-    'demo-basic.render.pageLegacy': RenderPageLegacy;
     'demo-basic.render.pageLocale': RenderPageLocale;
     'demo-basic.render.pagePinia': RenderPagePinia;
     'demo-basic.render.pageRouteParams': RenderPageRouteParams;
@@ -347,9 +323,6 @@ declare module 'zova' {
 /** render: end */
 /** renders: begin */
 declare module 'zova-module-demo-basic' {
-  export interface RenderCard extends ControllerCard {}
-  export interface RenderPageComponent extends ControllerPageComponent {}
-  export interface RenderPageLegacy extends StylePageLegacy {}
   export interface RenderPageLocale extends ControllerPageLocale {}
   export interface RenderPagePinia extends StylePagePinia {}
   export interface RenderPageRouteParams extends StylePageRouteParams {}
@@ -360,7 +333,6 @@ declare module 'zova-module-demo-basic' {
 }
 /** renders: end */
 /** style: begin */
-export * from '../page/legacy/style.js';
 export * from '../page/pinia/style.js';
 export * from '../page/routeParams/style.js';
 export * from '../page/routeQuery/style.js';
@@ -370,11 +342,6 @@ export * from '../page/style/style.js';
 import 'zova';
 declare module 'zova' {}
 declare module 'zova-module-demo-basic' {
-  export interface StylePageLegacy {
-    /** @internal */
-    get scope(): ScopeModuleDemoBasic;
-  }
-
   export interface StylePagePinia {
     /** @internal */
     get scope(): ScopeModuleDemoBasic;
@@ -402,7 +369,6 @@ declare module 'zova-module-demo-basic' {
 }
 /** style: end */
 /** style: begin */
-import { StylePageLegacy } from '../page/legacy/style.js';
 import { StylePagePinia } from '../page/pinia/style.js';
 import { StylePageRouteParams } from '../page/routeParams/style.js';
 import { StylePageRouteQuery } from '../page/routeQuery/style.js';
@@ -411,7 +377,6 @@ import { StylePageStyle } from '../page/style/style.js';
 import 'zova';
 declare module 'zova' {
   export interface IBeanRecordLocal {
-    'demo-basic.style.pageLegacy': StylePageLegacy;
     'demo-basic.style.pagePinia': StylePagePinia;
     'demo-basic.style.pageRouteParams': StylePageRouteParams;
     'demo-basic.style.pageRouteQuery': StylePageRouteQuery;
@@ -422,7 +387,6 @@ declare module 'zova' {
 /** style: end */
 /** styles: begin */
 declare module 'zova-module-demo-basic' {
-  export interface StylePageLegacy extends ControllerPageLegacy {}
   export interface StylePagePinia extends ControllerPagePinia {}
   export interface StylePageRouteParams extends ControllerPageRouteParams {}
   export interface StylePageRouteQuery extends ControllerPageRouteQuery {}
