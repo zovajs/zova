@@ -11,6 +11,7 @@ declare module '@cabloy/cli' {
     componentName: string;
     renderName: string;
     renderNameCapitalize: string;
+    renderClassName: string;
     nameMeta: NameMeta;
   }
 }
@@ -35,12 +36,13 @@ export class CliRefactorAnotherRender extends BeanCliBase {
     // nameMeta
     argv.nameMeta = this.helper.parseNameMeta(componentName, ['component', 'page']);
     argv.renderNameCapitalize = this.helper.firstCharToUpperCase(argv.renderName);
+    argv.renderClassName = `Render${argv.nameMeta.directory === 'page' ? 'Page' : ''}${argv.renderNameCapitalize}`;
     // directory
     const componentDir = path.join(targetDir, 'src', argv.nameMeta.original);
     if (!fs.existsSync(componentDir)) {
       throw new Error(`component not exists: ${componentDir}`);
     }
-    const renderFile = path.join(componentDir, `${argv.renderName}.tsx`);
+    const renderFile = path.join(componentDir, `render.${argv.renderName}.tsx`);
     if (fs.existsSync(renderFile)) {
       throw new Error(`render exists: ${renderFile}`);
     }
