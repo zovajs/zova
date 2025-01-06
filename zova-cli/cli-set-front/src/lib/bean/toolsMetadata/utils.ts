@@ -39,7 +39,7 @@ export async function globAllTsFiles(moduleName: string, modulePath: string): Pr
     const matches = fileContent.match(/\s@([^\(]+)[\s\S]*?export class ([\S]+)/);
     if (!matches) continue;
     let className = matches[2];
-    const pos = fileContent.indexOf('<');
+    const pos = className.indexOf('<');
     if (pos > -1) {
       className = className.substring(0, pos);
     }
