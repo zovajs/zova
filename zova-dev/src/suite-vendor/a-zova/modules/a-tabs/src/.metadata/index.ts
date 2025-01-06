@@ -71,58 +71,6 @@ declare module 'zova-module-a-tabs' {
   }
 }
 /** components: end */
-/** render: begin */
-export * from '../component/routerViewTabs/render.jsx';
-
-import 'zova';
-declare module 'zova' {}
-declare module 'zova-module-a-tabs' {
-  export interface RenderRouterViewTabs {
-    /** @internal */
-    get scope(): ScopeModuleATabs;
-  }
-}
-/** render: end */
-/** render: begin */
-import { RenderRouterViewTabs } from '../component/routerViewTabs/render.jsx';
-import 'zova';
-declare module 'zova' {
-  export interface IBeanRecordLocal {
-    'a-tabs.render.routerViewTabs': RenderRouterViewTabs;
-  }
-}
-/** render: end */
-/** renders: begin */
-declare module 'zova-module-a-tabs' {
-  export interface RenderRouterViewTabs extends StyleRouterViewTabs {}
-}
-/** renders: end */
-/** style: begin */
-export * from '../component/routerViewTabs/style.js';
-
-import 'zova';
-declare module 'zova' {}
-declare module 'zova-module-a-tabs' {
-  export interface StyleRouterViewTabs {
-    /** @internal */
-    get scope(): ScopeModuleATabs;
-  }
-}
-/** style: end */
-/** style: begin */
-import { StyleRouterViewTabs } from '../component/routerViewTabs/style.js';
-import 'zova';
-declare module 'zova' {
-  export interface IBeanRecordLocal {
-    'a-tabs.style.routerViewTabs': StyleRouterViewTabs;
-  }
-}
-/** style: end */
-/** styles: begin */
-declare module 'zova-module-a-tabs' {
-  export interface StyleRouterViewTabs extends ControllerRouterViewTabs {}
-}
-/** styles: end */
 /** scope: begin */
 import { BeanScopeBase, BeanScopeUtil } from 'zova';
 import { Scope } from 'zova-module-a-bean';

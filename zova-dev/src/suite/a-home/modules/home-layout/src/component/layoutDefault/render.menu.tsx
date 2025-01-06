@@ -1,14 +1,11 @@
 import { BeanRenderBase } from 'zova';
-import { Local } from 'zova-module-a-bean';
-import { StyleLayoutDefault } from './style.js';
 import { __ThisModule__ } from '../../.metadata/this.js';
 import { JSX } from 'vue/jsx-runtime';
 import { ServiceMenuEntity } from '../../service/menu.js';
 import { ZEssentialLink } from '../../.metadata/index.js';
+import { Render } from 'zova-module-a-bean';
 
-export interface RenderMenu extends StyleLayoutDefault {}
-
-@Local()
+@Render()
 export class RenderMenu extends BeanRenderBase {
   _renderMenuItem(item: ServiceMenuEntity) {
     const titleLocale = this.app.meta.locale.getText(__ThisModule__, undefined, item.title);

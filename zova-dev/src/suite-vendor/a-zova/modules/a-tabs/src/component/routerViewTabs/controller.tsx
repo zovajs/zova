@@ -1,8 +1,7 @@
+import { ComponentInternalInstance, KeepAlive, nextTick, Transition } from 'vue';
+import { RouteLocationNormalizedLoaded, RouterView } from 'vue-router';
 import { BeanControllerBase, cast, Use } from 'zova';
 import { Controller } from 'zova-module-a-bean';
-import { RouterViewSlotParams } from './render.jsx';
-import { RouteLocationNormalizedLoaded } from 'vue-router';
-import { nextTick } from 'vue';
 import { ModelTabs } from '../../model/tabs.js';
 
 export interface ControllerRouterViewTabsSlots {}
@@ -10,6 +9,11 @@ export interface ControllerRouterViewTabsSlots {}
 export interface ControllerRouterViewTabsProps {}
 
 export type ControllerRouterViewTabsEmits = {};
+
+export interface RouterViewSlotParams {
+  Component: ComponentInternalInstance;
+  route: RouteLocationNormalizedLoaded;
+}
 
 @Controller()
 export class ControllerRouterViewTabs extends BeanControllerBase {
@@ -54,5 +58,21 @@ export class ControllerRouterViewTabs extends BeanControllerBase {
       this.$$modelTabs.addTab(tab);
     });
     return { componentKey };
+  }
+
+  protected render() {
+    const slots = {
+      default: component => {
+        const { componentKey } = this._handleComponent(component);
+        return (
+          <Transition>
+            <KeepAlive include={this.$$modelTabs.keepAliveInclude}>
+              <component.Component key={componentKey}></component.Component>
+            </KeepAlive>
+          </Transition>
+        );
+      },
+    };
+    return <RouterView v-slots={slots}></RouterView>;
   }
 }

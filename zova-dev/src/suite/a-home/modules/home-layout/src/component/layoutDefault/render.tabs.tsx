@@ -1,14 +1,11 @@
 import { BeanRenderBase, ClientOnly, ZovaIcon, icon } from 'zova';
-import { Local } from 'zova-module-a-bean';
 import { __ThisModule__ } from '../../.metadata/this.js';
-import { StyleLayoutDefault } from './style.js';
 import { JSX } from 'vue/jsx-runtime';
 import { withModifiers } from 'vue';
 import { ZRouterViewTabs } from 'zova-module-a-tabs';
+import { Render } from 'zova-module-a-bean';
 
-export interface RenderTabs extends StyleLayoutDefault {}
-
-@Local()
+@Render()
 export class RenderTabs extends BeanRenderBase {
   public render() {
     const domTabs: JSX.Element[] = [];

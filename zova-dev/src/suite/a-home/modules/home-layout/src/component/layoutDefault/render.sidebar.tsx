@@ -1,11 +1,8 @@
 import { BeanRenderBase, Use } from 'zova';
-import { Local } from 'zova-module-a-bean';
-import { StyleLayoutDefault } from './style.js';
 import type { RenderLayoutDefault } from './render.jsx';
+import { Render } from 'zova-module-a-bean';
 
-export interface RenderSidebar extends StyleLayoutDefault {}
-
-@Local()
+@Render()
 export class RenderSidebar extends BeanRenderBase {
   @Use()
   $$r: RenderLayoutDefault;

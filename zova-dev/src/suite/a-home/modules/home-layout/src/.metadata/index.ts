@@ -49,83 +49,6 @@ declare module 'zova' {
   }
 }
 /** model: end */
-/** local: begin */
-export * from '../component/layoutDefault/renderContent.jsx';
-export * from '../component/layoutDefault/renderHeader.jsx';
-export * from '../component/layoutDefault/renderLocale.jsx';
-export * from '../component/layoutDefault/renderMenu.jsx';
-export * from '../component/layoutDefault/renderSidebar.jsx';
-export * from '../component/layoutDefault/renderTabs.jsx';
-export * from '../component/layoutDefault/renderTheme.jsx';
-export * from '../component/layoutDefault/renderUser.jsx';
-
-import 'zova';
-declare module 'zova' {}
-declare module 'zova-module-home-layout' {
-  export interface RenderContent {
-    /** @internal */
-    get scope(): ScopeModuleHomeLayout;
-  }
-
-  export interface RenderHeader {
-    /** @internal */
-    get scope(): ScopeModuleHomeLayout;
-  }
-
-  export interface RenderLocale {
-    /** @internal */
-    get scope(): ScopeModuleHomeLayout;
-  }
-
-  export interface RenderMenu {
-    /** @internal */
-    get scope(): ScopeModuleHomeLayout;
-  }
-
-  export interface RenderSidebar {
-    /** @internal */
-    get scope(): ScopeModuleHomeLayout;
-  }
-
-  export interface RenderTabs {
-    /** @internal */
-    get scope(): ScopeModuleHomeLayout;
-  }
-
-  export interface RenderTheme {
-    /** @internal */
-    get scope(): ScopeModuleHomeLayout;
-  }
-
-  export interface RenderUser {
-    /** @internal */
-    get scope(): ScopeModuleHomeLayout;
-  }
-}
-/** local: end */
-/** local: begin */
-import { RenderContent } from '../component/layoutDefault/renderContent.jsx';
-import { RenderHeader } from '../component/layoutDefault/renderHeader.jsx';
-import { RenderLocale } from '../component/layoutDefault/renderLocale.jsx';
-import { RenderMenu } from '../component/layoutDefault/renderMenu.jsx';
-import { RenderSidebar } from '../component/layoutDefault/renderSidebar.jsx';
-import { RenderTabs } from '../component/layoutDefault/renderTabs.jsx';
-import { RenderTheme } from '../component/layoutDefault/renderTheme.jsx';
-import { RenderUser } from '../component/layoutDefault/renderUser.jsx';
-import 'zova';
-declare module 'zova' {
-  export interface IBeanRecordLocal {
-    'home-layout.local.renderContent': RenderContent;
-    'home-layout.local.renderHeader': RenderHeader;
-    'home-layout.local.renderLocale': RenderLocale;
-    'home-layout.local.renderMenu': RenderMenu;
-    'home-layout.local.renderSidebar': RenderSidebar;
-    'home-layout.local.renderTabs': RenderTabs;
-    'home-layout.local.renderTheme': RenderTheme;
-    'home-layout.local.renderUser': RenderUser;
-  }
-}
-/** local: end */
 /** controller: begin */
 export * from '../component/essentialLink/controller.jsx';
 export * from '../component/layoutDefault/controller.jsx';
@@ -222,14 +145,50 @@ declare module 'zova-module-home-layout' {
 }
 /** components: end */
 /** render: begin */
-export * from '../component/essentialLink/render.jsx';
+export * from '../component/layoutDefault/render.content.jsx';
+export * from '../component/layoutDefault/render.header.jsx';
+export * from '../component/layoutDefault/render.locale.jsx';
+export * from '../component/layoutDefault/render.menu.jsx';
+export * from '../component/layoutDefault/render.sidebar.jsx';
+export * from '../component/layoutDefault/render.tabs.jsx';
+export * from '../component/layoutDefault/render.theme.jsx';
 export * from '../component/layoutDefault/render.jsx';
-export * from '../component/layoutEmpty/render.jsx';
+export * from '../component/layoutDefault/render.user.jsx';
 
 import 'zova';
 declare module 'zova' {}
 declare module 'zova-module-home-layout' {
-  export interface RenderEssentialLink {
+  export interface RenderContent {
+    /** @internal */
+    get scope(): ScopeModuleHomeLayout;
+  }
+
+  export interface RenderHeader {
+    /** @internal */
+    get scope(): ScopeModuleHomeLayout;
+  }
+
+  export interface RenderLocale {
+    /** @internal */
+    get scope(): ScopeModuleHomeLayout;
+  }
+
+  export interface RenderMenu {
+    /** @internal */
+    get scope(): ScopeModuleHomeLayout;
+  }
+
+  export interface RenderSidebar {
+    /** @internal */
+    get scope(): ScopeModuleHomeLayout;
+  }
+
+  export interface RenderTabs {
+    /** @internal */
+    get scope(): ScopeModuleHomeLayout;
+  }
+
+  export interface RenderTheme {
     /** @internal */
     get scope(): ScopeModuleHomeLayout;
   }
@@ -239,30 +198,48 @@ declare module 'zova-module-home-layout' {
     get scope(): ScopeModuleHomeLayout;
   }
 
-  export interface RenderLayoutEmpty {
+  export interface RenderUser {
     /** @internal */
     get scope(): ScopeModuleHomeLayout;
   }
 }
 /** render: end */
 /** render: begin */
-import { RenderEssentialLink } from '../component/essentialLink/render.jsx';
+import { RenderContent } from '../component/layoutDefault/render.content.jsx';
+import { RenderHeader } from '../component/layoutDefault/render.header.jsx';
+import { RenderLocale } from '../component/layoutDefault/render.locale.jsx';
+import { RenderMenu } from '../component/layoutDefault/render.menu.jsx';
+import { RenderSidebar } from '../component/layoutDefault/render.sidebar.jsx';
+import { RenderTabs } from '../component/layoutDefault/render.tabs.jsx';
+import { RenderTheme } from '../component/layoutDefault/render.theme.jsx';
 import { RenderLayoutDefault } from '../component/layoutDefault/render.jsx';
-import { RenderLayoutEmpty } from '../component/layoutEmpty/render.jsx';
+import { RenderUser } from '../component/layoutDefault/render.user.jsx';
 import 'zova';
 declare module 'zova' {
   export interface IBeanRecordLocal {
-    'home-layout.render.essentialLink': RenderEssentialLink;
+    'home-layout.render.content': RenderContent;
+    'home-layout.render.header': RenderHeader;
+    'home-layout.render.locale': RenderLocale;
+    'home-layout.render.menu': RenderMenu;
+    'home-layout.render.sidebar': RenderSidebar;
+    'home-layout.render.tabs': RenderTabs;
+    'home-layout.render.theme': RenderTheme;
     'home-layout.render.layoutDefault': RenderLayoutDefault;
-    'home-layout.render.layoutEmpty': RenderLayoutEmpty;
+    'home-layout.render.user': RenderUser;
   }
 }
 /** render: end */
 /** renders: begin */
 declare module 'zova-module-home-layout' {
-  export interface RenderEssentialLink extends ControllerEssentialLink {}
+  export interface RenderContent extends StyleLayoutDefault {}
+  export interface RenderHeader extends StyleLayoutDefault {}
+  export interface RenderLocale extends StyleLayoutDefault {}
+  export interface RenderMenu extends StyleLayoutDefault {}
+  export interface RenderSidebar extends StyleLayoutDefault {}
+  export interface RenderTabs extends StyleLayoutDefault {}
+  export interface RenderTheme extends StyleLayoutDefault {}
   export interface RenderLayoutDefault extends StyleLayoutDefault {}
-  export interface RenderLayoutEmpty extends ControllerLayoutEmpty {}
+  export interface RenderUser extends StyleLayoutDefault {}
 }
 /** renders: end */
 /** style: begin */

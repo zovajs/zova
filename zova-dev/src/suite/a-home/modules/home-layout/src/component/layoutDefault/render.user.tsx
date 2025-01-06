@@ -1,10 +1,7 @@
 import { BeanRenderBase, iconh } from 'zova';
-import { Local } from 'zova-module-a-bean';
-import { StyleLayoutDefault } from './style.js';
+import { Render } from 'zova-module-a-bean';
 
-export interface RenderUser extends StyleLayoutDefault {}
-
-@Local()
+@Render()
 export class RenderUser extends BeanRenderBase {
   public render() {
     return (

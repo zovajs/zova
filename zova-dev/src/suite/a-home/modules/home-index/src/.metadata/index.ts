@@ -35,58 +35,6 @@ export const pageNameSchemas = {};
 declare module 'zova-module-home-index' {}
 /** pages: end */
 
-/** render: begin */
-export * from '../page/index/render.jsx';
-
-import 'zova';
-declare module 'zova' {}
-declare module 'zova-module-home-index' {
-  export interface RenderPageIndex {
-    /** @internal */
-    get scope(): ScopeModuleHomeIndex;
-  }
-}
-/** render: end */
-/** render: begin */
-import { RenderPageIndex } from '../page/index/render.jsx';
-import 'zova';
-declare module 'zova' {
-  export interface IBeanRecordLocal {
-    'home-index.render.pageIndex': RenderPageIndex;
-  }
-}
-/** render: end */
-/** renders: begin */
-declare module 'zova-module-home-index' {
-  export interface RenderPageIndex extends StylePageIndex {}
-}
-/** renders: end */
-/** style: begin */
-export * from '../page/index/style.js';
-
-import 'zova';
-declare module 'zova' {}
-declare module 'zova-module-home-index' {
-  export interface StylePageIndex {
-    /** @internal */
-    get scope(): ScopeModuleHomeIndex;
-  }
-}
-/** style: end */
-/** style: begin */
-import { StylePageIndex } from '../page/index/style.js';
-import 'zova';
-declare module 'zova' {
-  export interface IBeanRecordLocal {
-    'home-index.style.pageIndex': StylePageIndex;
-  }
-}
-/** style: end */
-/** styles: begin */
-declare module 'zova-module-home-index' {
-  export interface StylePageIndex extends ControllerPageIndex {}
-}
-/** styles: end */
 /** scope: begin */
 import { BeanScopeBase, BeanScopeUtil } from 'zova';
 import { Scope } from 'zova-module-a-bean';

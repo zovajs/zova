@@ -103,58 +103,6 @@ export const pageNameSchemas = {};
 declare module 'zova-module-home-user' {}
 /** pages: end */
 
-/** render: begin */
-export * from '../page/login/render.jsx';
-
-import 'zova';
-declare module 'zova' {}
-declare module 'zova-module-home-user' {
-  export interface RenderPageLogin {
-    /** @internal */
-    get scope(): ScopeModuleHomeUser;
-  }
-}
-/** render: end */
-/** render: begin */
-import { RenderPageLogin } from '../page/login/render.jsx';
-import 'zova';
-declare module 'zova' {
-  export interface IBeanRecordLocal {
-    'home-user.render.pageLogin': RenderPageLogin;
-  }
-}
-/** render: end */
-/** renders: begin */
-declare module 'zova-module-home-user' {
-  export interface RenderPageLogin extends StylePageLogin {}
-}
-/** renders: end */
-/** style: begin */
-export * from '../page/login/style.js';
-
-import 'zova';
-declare module 'zova' {}
-declare module 'zova-module-home-user' {
-  export interface StylePageLogin {
-    /** @internal */
-    get scope(): ScopeModuleHomeUser;
-  }
-}
-/** style: end */
-/** style: begin */
-import { StylePageLogin } from '../page/login/style.js';
-import 'zova';
-declare module 'zova' {
-  export interface IBeanRecordLocal {
-    'home-user.style.pageLogin': StylePageLogin;
-  }
-}
-/** style: end */
-/** styles: begin */
-declare module 'zova-module-home-user' {
-  export interface StylePageLogin extends ControllerPageLogin {}
-}
-/** styles: end */
 /** locale: begin */
 import locale_en_us from '../config/locale/en-us.js';
 import locale_zh_cn from '../config/locale/zh-cn.js';
