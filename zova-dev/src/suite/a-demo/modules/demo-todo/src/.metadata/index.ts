@@ -83,6 +83,15 @@ import { ControllerPageItemSchemaParams, ControllerPageItemSchemaQuery } from '.
 export * from '../routes.js';
 import { TypePageParamsQuery } from 'zova';
 import { zz } from 'zova';
+export namespace NSControllerPageItem {
+  export const paramsSchema = ControllerPageItemSchemaParams;
+  export type ParamsInput = zz.input<typeof ControllerPageItemSchemaParams>;
+  export type ParamsOutput = zz.output<typeof ControllerPageItemSchemaParams>;
+
+  export const querySchema = ControllerPageItemSchemaQuery;
+  export type QueryInput = zz.input<typeof ControllerPageItemSchemaQuery>;
+  export type QueryOutput = zz.output<typeof ControllerPageItemSchemaQuery>;
+}
 import 'zova';
 declare module 'zova' {
   export interface IPagePathRecord {
@@ -104,15 +113,6 @@ declare module 'zova-module-demo-todo' {
     $params: NSControllerPageItem.ParamsOutput;
     $query: NSControllerPageItem.QueryOutput;
   }
-}
-export namespace NSControllerPageItem {
-  export const paramsSchema = ControllerPageItemSchemaParams;
-  export type ParamsInput = zz.input<typeof ControllerPageItemSchemaParams>;
-  export type ParamsOutput = zz.output<typeof ControllerPageItemSchemaParams>;
-
-  export const querySchema = ControllerPageItemSchemaQuery;
-  export type QueryInput = zz.input<typeof ControllerPageItemSchemaQuery>;
-  export type QueryOutput = zz.output<typeof ControllerPageItemSchemaQuery>;
 }
 /** pages: end */
 

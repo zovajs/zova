@@ -101,7 +101,6 @@ declare module 'zova' {
 export const pagePathSchemas = {};
 export const pageNameSchemas = {};
 declare module 'zova-module-home-user' {}
-
 /** pages: end */
 
 /** render: begin */

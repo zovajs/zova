@@ -97,6 +97,7 @@ ${contentImports.join('\n')}
 export * from '../routes.js';
 ${contentNameRecords.length > 0 ? "import { TypePageParamsQuery } from 'zova';" : ''}
 ${contentRecords2.length > 0 ? "import { zz } from 'zova';" : ''}
+${contentRecords2.join('\n')}
 import 'zova';
 declare module 'zova' {
 export interface IPagePathRecord {
@@ -115,7 +116,6 @@ ${contentNameSchemas.join('\n')}
 declare module 'zova-module-${moduleName}' {
   ${contentRecords.join('\n')} 
 }
-${contentRecords2.join('\n')} 
 /** pages: end */
 `;
   return content;

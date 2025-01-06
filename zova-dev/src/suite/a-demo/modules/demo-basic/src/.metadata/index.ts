@@ -149,6 +149,33 @@ import {
 export * from '../routes.js';
 import { TypePageParamsQuery } from 'zova';
 import { zz } from 'zova';
+export namespace NSControllerPageRouteParams {
+  export const paramsSchema = ControllerPageRouteParamsSchemaParams;
+  export type ParamsInput = zz.input<typeof ControllerPageRouteParamsSchemaParams>;
+  export type ParamsOutput = zz.output<typeof ControllerPageRouteParamsSchemaParams>;
+
+  export const querySchema = ControllerPageRouteParamsSchemaQuery;
+  export type QueryInput = zz.input<typeof ControllerPageRouteParamsSchemaQuery>;
+  export type QueryOutput = zz.output<typeof ControllerPageRouteParamsSchemaQuery>;
+}
+export namespace NSControllerPageRouteQuery {
+  export const paramsSchema = ControllerPageRouteQuerySchemaParams;
+  export type ParamsInput = zz.input<typeof ControllerPageRouteQuerySchemaParams>;
+  export type ParamsOutput = zz.output<typeof ControllerPageRouteQuerySchemaParams>;
+
+  export const querySchema = ControllerPageRouteQuerySchemaQuery;
+  export type QueryInput = zz.input<typeof ControllerPageRouteQuerySchemaQuery>;
+  export type QueryOutput = zz.output<typeof ControllerPageRouteQuerySchemaQuery>;
+}
+export namespace NSControllerPageRouteQueryB {
+  export const paramsSchema = ControllerPageRouteQueryBSchemaParams;
+  export type ParamsInput = zz.input<typeof ControllerPageRouteQueryBSchemaParams>;
+  export type ParamsOutput = zz.output<typeof ControllerPageRouteQueryBSchemaParams>;
+
+  export const querySchema = ControllerPageRouteQueryBSchemaQuery;
+  export type QueryInput = zz.input<typeof ControllerPageRouteQueryBSchemaQuery>;
+  export type QueryOutput = zz.output<typeof ControllerPageRouteQueryBSchemaQuery>;
+}
 import 'zova';
 declare module 'zova' {
   export interface IPagePathRecord {
@@ -195,33 +222,6 @@ declare module 'zova-module-demo-basic' {
     $params: NSControllerPageRouteQueryB.ParamsOutput;
     $query: NSControllerPageRouteQueryB.QueryOutput;
   }
-}
-export namespace NSControllerPageRouteParams {
-  export const paramsSchema = ControllerPageRouteParamsSchemaParams;
-  export type ParamsInput = zz.input<typeof ControllerPageRouteParamsSchemaParams>;
-  export type ParamsOutput = zz.output<typeof ControllerPageRouteParamsSchemaParams>;
-
-  export const querySchema = ControllerPageRouteParamsSchemaQuery;
-  export type QueryInput = zz.input<typeof ControllerPageRouteParamsSchemaQuery>;
-  export type QueryOutput = zz.output<typeof ControllerPageRouteParamsSchemaQuery>;
-}
-export namespace NSControllerPageRouteQuery {
-  export const paramsSchema = ControllerPageRouteQuerySchemaParams;
-  export type ParamsInput = zz.input<typeof ControllerPageRouteQuerySchemaParams>;
-  export type ParamsOutput = zz.output<typeof ControllerPageRouteQuerySchemaParams>;
-
-  export const querySchema = ControllerPageRouteQuerySchemaQuery;
-  export type QueryInput = zz.input<typeof ControllerPageRouteQuerySchemaQuery>;
-  export type QueryOutput = zz.output<typeof ControllerPageRouteQuerySchemaQuery>;
-}
-export namespace NSControllerPageRouteQueryB {
-  export const paramsSchema = ControllerPageRouteQueryBSchemaParams;
-  export type ParamsInput = zz.input<typeof ControllerPageRouteQueryBSchemaParams>;
-  export type ParamsOutput = zz.output<typeof ControllerPageRouteQueryBSchemaParams>;
-
-  export const querySchema = ControllerPageRouteQueryBSchemaQuery;
-  export type QueryInput = zz.input<typeof ControllerPageRouteQueryBSchemaQuery>;
-  export type QueryOutput = zz.output<typeof ControllerPageRouteQueryBSchemaQuery>;
 }
 /** pages: end */
 
