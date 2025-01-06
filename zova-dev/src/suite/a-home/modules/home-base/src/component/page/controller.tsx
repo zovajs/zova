@@ -14,5 +14,15 @@ export interface ControllerPageSlots {
 export class ControllerPage extends BeanControllerBase {
   static $propsDefault = {};
 
-  protected async __init__() {}
+  cPage: string;
+
+  protected async __init__() {
+    this.cPage = this.$style({
+      padding: '16px',
+    });
+  }
+
+  protected render() {
+    return <div class={this.cPage}>{this.$slots.default?.()}</div>;
+  }
 }
