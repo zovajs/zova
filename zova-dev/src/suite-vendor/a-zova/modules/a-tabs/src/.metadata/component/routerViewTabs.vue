@@ -8,7 +8,7 @@ import {
   ControllerRouterViewTabs,
   ControllerRouterViewTabsProps,
   ControllerRouterViewTabsEmits,
-} from '../../component/routerViewTabs/controller.jsx';
+} from '../../component/routerViewTabs/controller.js';
 import { RenderRouterViewTabs } from '../../component/routerViewTabs/render.jsx';
 import { StyleRouterViewTabs } from '../../component/routerViewTabs/style.js';
 const props = withDefaults(defineProps<ControllerRouterViewTabsProps>(), ControllerRouterViewTabs.$propsDefault);
