@@ -1,5 +1,7 @@
 module.exports = {
-  file: 'controller.ts',
+  file: ({ argv }) => {
+    return argv.controllerFileName;
+  },
   parseOptions: { language: 'plain' },
   async transform({ cli, ast }) {
     if (ast.includes('export interface Props<')) return;
