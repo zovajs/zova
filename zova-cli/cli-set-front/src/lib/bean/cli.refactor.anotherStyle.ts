@@ -11,6 +11,7 @@ declare module '@cabloy/cli' {
     componentName: string;
     styleName: string;
     styleNameCapitalize: string;
+    styleClassName: string;
     controllerClassName: string;
     nameMeta: NameMeta;
   }
@@ -36,17 +37,18 @@ export class CliRefactorAnotherStyle extends BeanCliBase {
     // nameMeta
     argv.nameMeta = this.helper.parseNameMeta(componentName, ['component', 'page']);
     argv.styleNameCapitalize = this.helper.firstCharToUpperCase(argv.styleName);
+    argv.styleClassName = `Style${argv.nameMeta.directory === 'page' ? 'Page' : ''}${argv.renderNameCapitalize}`;
     argv.controllerClassName = `Controller${argv.nameMeta.directory === 'page' ? 'Page' : ''}${argv.nameMeta.shortCapitalize}`;
     // directory
     const componentDir = path.join(targetDir, 'src', argv.nameMeta.original);
     if (!fs.existsSync(componentDir)) {
       throw new Error(`component not exists: ${componentDir}`);
     }
-    const styleFile = path.join(componentDir, `${argv.styleName}.ts`);
+    const styleFile = path.join(componentDir, `style.${argv.styleName}.ts`);
     if (fs.existsSync(styleFile)) {
       throw new Error(`style exists: ${styleFile}`);
     }
-    // render file must exists
+    // style file must exists
     const styleFileFirst = path.join(componentDir, 'style.ts');
     if (!fs.existsSync(styleFileFirst)) {
       await this.helper.invokeCli([':refactor:firstStyle', argv.componentName, `--module=${moduleName}`], {

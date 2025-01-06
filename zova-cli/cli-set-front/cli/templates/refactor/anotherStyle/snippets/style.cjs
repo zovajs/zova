@@ -8,12 +8,12 @@ module.exports = {
     }
     ast = ast
       .replace(
-        "import { ScopeModule } from '../../.metadata/this.js';",
-        `import { ScopeModule } from '../../.metadata/this.js';\nimport { ${argv.styleNameCapitalize} } from './${argv.styleName}.js';`,
+        "from 'zova-module-a-bean';",
+        `from 'zova-module-a-bean';\nimport { ${argv.styleClassName} } from './style.${argv.styleName}.js';`,
       )
       .replace(
-        'extends BeanStyleBase<ScopeModule> {',
-        `extends BeanStyleBase<ScopeModule> {\n  @Use()\n  $$$$${argv.styleName}: ${argv.styleNameCapitalize};\n`,
+        'extends BeanStyleBase {',
+        `extends BeanStyleBase {\n  @Use()\n  $$$$style${argv.styleNameCapitalize}: ${argv.styleClassName};\n`,
       );
     // ok
     return ast;
