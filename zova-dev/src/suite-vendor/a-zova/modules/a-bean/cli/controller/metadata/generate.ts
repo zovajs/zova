@@ -32,7 +32,7 @@ function _parseControllerInfo(
   options: IMetadataCustomGenerateOptions,
   globFile: IGlobBeanFile,
 ): IControllerInfo | undefined {
-  const { fileContent, fileNameJSRelative } = globFile;
+  const { className, fileContent, fileNameJSRelative } = globFile;
   const matches = fileNameJSRelative.match(/..\/(.+?)\/(.+?)\/controller(.jsx?)$/);
   if (!matches) return;
   const type = matches[1];
@@ -42,22 +42,25 @@ function _parseControllerInfo(
   const controllerExtJs = matches[3];
   const controllerExtTs = controllerExtJs.replace('.js', '.ts');
   // props
-  const nameProps = `Controller${nameCapitalize}Props`;
+  const nameProps = `${className}Props`;
   const hasProps = fileContent.includes(nameProps);
   // emits
-  const nameEmits = `Controller${nameCapitalize}Emits`;
+  const nameEmits = `${className}Emits`;
   const hasEmits = fileContent.includes(nameEmits);
   // slots
-  const nameSlots = `Controller${nameCapitalize}Slots`;
+  const nameSlots = `${className}Slots`;
   const hasSlots = fileContent.includes(nameSlots);
   // model
   const hasModel = fileContent.includes("(e: 'update:");
   const hasModelValue = fileContent.includes("(e: 'update:modelValue'");
+  // generic
+  const matchGeneric = fileContent.match(/interface [^<]*Props<(.*?)> \{/);
+  const hasGeneric = !!matchGeneric;
   // schemaParams
-  const nameSchemaParams = `ControllerPage${nameCapitalize}SchemaParams`;
+  const nameSchemaParams = `${className}SchemaParams`;
   const hasSchemaParams = fileContent.includes(nameSchemaParams);
   // schemaQuery
-  const nameSchemaQuery = `ControllerPage${nameCapitalize}SchemaQuery`;
+  const nameSchemaQuery = `${className}SchemaQuery`;
   const hasSchemaQuery = fileContent.includes(nameSchemaQuery);
   // render
   const fileRender = path.join(options.modulePath, `src/${type}/${name}/render.tsx`);
@@ -86,6 +89,7 @@ function _parseControllerInfo(
     hasSlots,
     hasModel,
     hasModelValue,
+    hasGeneric,
     nameSchemaParams,
     hasSchemaParams,
     nameSchemaQuery,
