@@ -37,7 +37,7 @@ export class CliRefactorAnotherStyle extends BeanCliBase {
     // nameMeta
     argv.nameMeta = this.helper.parseNameMeta(componentName, ['component', 'page']);
     argv.styleNameCapitalize = this.helper.firstCharToUpperCase(argv.styleName);
-    argv.styleClassName = `Style${argv.nameMeta.directory === 'page' ? 'Page' : ''}${argv.renderNameCapitalize}`;
+    argv.styleClassName = `Style${argv.nameMeta.directory === 'page' ? 'Page' : ''}${argv.styleNameCapitalize}`;
     argv.controllerClassName = `Controller${argv.nameMeta.directory === 'page' ? 'Page' : ''}${argv.nameMeta.shortCapitalize}`;
     // directory
     const componentDir = path.join(targetDir, 'src', argv.nameMeta.original);
