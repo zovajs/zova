@@ -5,7 +5,7 @@ module.exports = {
   parseOptions: { language: 'plain' },
   async transform({ ast, argv }) {
     if (ast.includes(`${argv.controllerClassName}Props`)) throw new Error('Props exists');
-    const matchGeneric = ast.match(/interface [^<]*Props<(.*?)> \{/);
+    const matchGeneric = ast.match(/interface [^<]*Emits<(.*?)> \{/);
     const hasGeneric = !!matchGeneric;
     const genericT = hasGeneric ? '<T = unknown>' : '';
     // Props
