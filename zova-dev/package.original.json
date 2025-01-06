@@ -57,7 +57,7 @@
     "sass": "^1.81.0",
     "typescript": "5.6.2",
     "vite": "^5.4.11",
-    "vue-tsc": "^2.1.10",
+    "vue-tsc": "^2.2.0",
     "zova-openapi": "workspace:^",
     "zova-vite": "workspace:^"
   },
