@@ -11,15 +11,13 @@ module.exports = {
     // check if exists
     if (ast.includes(`${argv.controllerClassName}SchemaParams`)) throw new Error('Params exists');
     // zz
-    if (!ast.match(/import \{[^\}]*zz[^\}]*\} from 'zova';/)) {
-      ast = ast.replace(/import \{ ([^\}]*) \} from 'zova';/, (_, $1) => {
-        return `import { ${$1}, zz } from 'zova';`;
-      });
+    if (!ast.includes("import { z } from 'zod';")) {
+      ast = `import { z } from 'zod';\n${ast}`;
     }
     // export
     ast = ast.replace(
       '@Controller',
-      `export const ${argv.controllerClassName}SchemaParams = zz.object({});\n\n@Controller`,
+      `export const ${argv.controllerClassName}SchemaParams = z.object({});\n\n@Controller`,
     );
     // ok
     return ast;
