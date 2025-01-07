@@ -68,8 +68,8 @@ export class CliRefactorRenameComponent extends BeanCliBase {
     let content = (await fse.readFile(routesFile)).toString();
     //
     content = content.replace(
-      `import ${argv.nameMeta.shortCapitalize} from './page/${argv.nameMeta.short}/index.vue';`,
-      `import ${argv.componentNameNewCapitalize} from './page/${argv.componentNameNew}/index.vue';`,
+      `import ${argv.nameMeta.shortCapitalize} from './.metadata/page/${argv.nameMeta.short}.vue';`,
+      `import ${argv.componentNameNewCapitalize} from './.metadata/page/${argv.componentNameNew}.vue';`,
     );
     //
     const ast = gogocode(content);
@@ -102,13 +102,21 @@ export class CliRefactorRenameComponent extends BeanCliBase {
   async _renameFiles(componentDir: string) {
     const { argv } = this.context;
     //
+    const typeMiddleFix = argv.nameMeta.directory === 'page' ? 'Page' : '';
+    //
     const replaces: Array<[string, string]> = [];
     replaces.push([
-      `Controller${argv.nameMeta.directory === 'page' ? 'Page' : ''}${argv.nameMeta.shortCapitalize}`,
-      `Controller${argv.nameMeta.directory === 'page' ? 'Page' : ''}${argv.componentNameNewCapitalize}`,
+      `Controller${typeMiddleFix}${argv.nameMeta.shortCapitalize}`,
+      `Controller${typeMiddleFix}${argv.componentNameNewCapitalize}`,
     ]);
-    replaces.push([`Render${argv.nameMeta.shortCapitalize}`, `Render${argv.componentNameNewCapitalize}`]);
-    replaces.push([`Style${argv.nameMeta.shortCapitalize}`, `Style${argv.componentNameNewCapitalize}`]);
+    replaces.push([
+      `Render${typeMiddleFix}${argv.nameMeta.shortCapitalize}`,
+      `Render${typeMiddleFix}${argv.componentNameNewCapitalize}`,
+    ]);
+    replaces.push([
+      `Style${typeMiddleFix}${argv.nameMeta.shortCapitalize}`,
+      `Style${typeMiddleFix}${argv.componentNameNewCapitalize}`,
+    ]);
     //
     const files = eggBornUtils.tools.globbySync('*', {
       cwd: componentDir,
