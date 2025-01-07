@@ -13,6 +13,7 @@ import initLocale from './command/init.locale.js';
 import initError from './command/init.error.js';
 import initLegacy from './command/init.legacy.js';
 import initMonkey from './command/init.monkey.js';
+import initMain from './command/init.main.js';
 import refactorPageQuery from './command/refactor.pageQuery.js';
 import refactorPageParams from './command/refactor.pageParams.js';
 import refactorComponentGeneric from './command/refactor.componentGeneric.js';
@@ -52,6 +53,7 @@ export const commands = {
     error: initError,
     legacy: initLegacy,
     monkey: initMonkey,
+    main: initMain,
   },
   refactor: {
     pageQuery: refactorPageQuery,

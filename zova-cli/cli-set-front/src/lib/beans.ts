@@ -16,6 +16,7 @@ import { CliInitLocale } from './bean/cli.init.locale.js';
 import { CliInitError } from './bean/cli.init.error.js';
 import { CliInitLegacy } from './bean/cli.init.legacy.js';
 import { CliInitMonkey } from './bean/cli.init.monkey.js';
+import { CliInitMain } from './bean/cli.init.main.js';
 import { CliRefactorPageQuery } from './bean/cli.refactor.pageQuery.js';
 import { CliRefactorPageParams } from './bean/cli.refactor.pageParams.js';
 import { CliRefactorComponentGeneric } from './bean/cli.refactor.componentGeneric.js';
@@ -47,6 +48,7 @@ export const beans = {
   'init.error': CliInitError,
   'init.legacy': CliInitLegacy,
   'init.monkey': CliInitMonkey,
+  'init.main': CliInitMain,
   'refactor.pageQuery': CliRefactorPageQuery,
   'refactor.pageParams': CliRefactorPageParams,
   'refactor.componentGeneric': CliRefactorComponentGeneric,
