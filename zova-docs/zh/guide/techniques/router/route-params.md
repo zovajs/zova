@@ -17,12 +17,12 @@ Zova 对路由`Params`进行了强化，提供了 Typescript 类型化支持
 `src/suite/a-demo/modules/demo-basic/src/page/user/controller.ts`
 
 ```typescript{2}
-export const ParamsSchema = zz.object({
-  id: zz.number().optional().default(0),
+export const ParamsSchema = z.object({
+  id: z.number().optional().default(0),
 });
 ```
 
-- 使用`zz`定义了一个`object`，包含字段：`id`
+- 使用`z`定义了一个`object`，包含字段：`id`
 
 ## 路由name
 

@@ -4,7 +4,7 @@ import { Controller } from 'zova-module-a-bean';
 import { ZPage } from 'zova-module-home-base';
 
 export const ControllerPageRouteParamsSchemaParams = z.object({
-  id: zz.number().optional().default(0),
+  id: z.number().optional().default(0),
 });
 export const ControllerPageRouteParamsSchemaQuery = z.object({});
 

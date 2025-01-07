@@ -23,14 +23,14 @@ Zova 对路由`Query`进行了强化，提供了 Typescript 类型化支持
 `src/suite/a-demo/modules/demo-basic/src/page/user/controller.ts`
 
 ```typescript{2-3}
-export const QuerySchema = zz.object({
-  name: zz.string().optional(),
-  age: zz.number().optional(),
+export const QuerySchema = z.object({
+  name: z.string().optional(),
+  age: z.number().optional(),
 });
 ```
 
-- Zova 对[zod](https://zod.dev)进行了封装，提供了增强版的`zz`对象
-- 使用`zz`定义了一个`object`，包含两个字段：`name`和`age`
+- Zova 对[zod](https://zod.dev)进行了封装，提供了增强版的`z`对象
+- 使用`z`定义了一个`object`，包含两个字段：`name`和`age`
 
 ## 使用Query
 

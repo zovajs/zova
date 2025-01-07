@@ -17,12 +17,12 @@ Define Params in `controller.ts`:
 `src/suite/a-demo/modules/demo-basic/src/page/user/controller.ts`
 
 ```typescript{2}
-export const ParamsSchema = zz.object({
-  id: zz.number().optional().default(0),
+export const ParamsSchema = z.object({
+  id: z.number().optional().default(0),
 });
 ```
 
-- An `object` is defined using `zz`, containing the field: `id`
+- An `object` is defined using `z`, containing the field: `id`
 
 ## Route name
 

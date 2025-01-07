@@ -23,14 +23,14 @@ Define Query in `controller.ts`:
 `src/suite/a-demo/modules/demo-basic/src/page/user/controller.ts`
 
 ```typescript{2-3}
-export const QuerySchema = zz.object({
-  name: zz.string().optional(),
-  age: zz.number().optional(),
+export const QuerySchema = z.object({
+  name: z.string().optional(),
+  age: z.number().optional(),
 });
 ```
 
-- Zova encapsulates [zod](https://zod.dev) and provides an enhanced version of `zz` object
-- An `object` is defined using `zz`, containing two fields: `name` and `age`
+- Zova encapsulates [zod](https://zod.dev) and provides an enhanced version of `z` object
+- An `object` is defined using `z`, containing two fields: `name` and `age`
 
 ## Use Query
 

@@ -82,15 +82,15 @@ declare module 'zova' {
 import { ControllerPageItemSchemaParams, ControllerPageItemSchemaQuery } from '../page/item/controller.jsx';
 export * from '../routes.js';
 import { TypePageParamsQuery } from 'zova';
-import { zz } from 'zova';
+import { z } from 'zod';
 export namespace NSControllerPageItem {
   export const paramsSchema = ControllerPageItemSchemaParams;
-  export type ParamsInput = zz.input<typeof ControllerPageItemSchemaParams>;
-  export type ParamsOutput = zz.output<typeof ControllerPageItemSchemaParams>;
+  export type ParamsInput = z.input<typeof ControllerPageItemSchemaParams>;
+  export type ParamsOutput = z.output<typeof ControllerPageItemSchemaParams>;
 
   export const querySchema = ControllerPageItemSchemaQuery;
-  export type QueryInput = zz.input<typeof ControllerPageItemSchemaQuery>;
-  export type QueryOutput = zz.output<typeof ControllerPageItemSchemaQuery>;
+  export type QueryInput = z.input<typeof ControllerPageItemSchemaQuery>;
+  export type QueryOutput = z.output<typeof ControllerPageItemSchemaQuery>;
 }
 import 'zova';
 declare module 'zova' {

@@ -78,14 +78,14 @@ export function generateMetaPage(
     const _contentRecords2_parts: string[] = [];
     if (hasSchemaParams) {
       _contentRecords2_parts.push(`export const paramsSchema = ${nameSchemaParams};
-        export type ParamsInput = zz.input<typeof ${nameSchemaParams}>;
-        export type ParamsOutput = zz.output<typeof ${nameSchemaParams}>;
+        export type ParamsInput = z.input<typeof ${nameSchemaParams}>;
+        export type ParamsOutput = z.output<typeof ${nameSchemaParams}>;
       `);
     }
     if (hasSchemaQuery) {
       _contentRecords2_parts.push(`export const querySchema = ${nameSchemaQuery};
-        export type QueryInput = zz.input<typeof ${nameSchemaQuery}>;
-        export type QueryOutput = zz.output<typeof ${nameSchemaQuery}>;
+        export type QueryInput = z.input<typeof ${nameSchemaQuery}>;
+        export type QueryOutput = z.output<typeof ${nameSchemaQuery}>;
       `);
     }
     if (_contentRecords2_parts.length > 0) {
