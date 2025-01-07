@@ -1,14 +1,15 @@
-import { BeanControllerPageBase, getBeanName, zz } from 'zova';
+import { BeanControllerPageBase, getBeanName } from 'zova';
 import { Controller } from 'zova-module-a-bean';
 import { ScopeModule } from '../../.metadata/this.js';
+import { z } from 'zod';
 
-export const ParamsSchema = zz.object({});
-export type ParamsInput = zz.input<typeof ParamsSchema>;
-export type ParamsOutput = zz.output<typeof ParamsSchema>;
+export const ParamsSchema = z.object({});
+export type ParamsInput = z.input<typeof ParamsSchema>;
+export type ParamsOutput = z.output<typeof ParamsSchema>;
 
-export const QuerySchema = zz.object({});
-export type QueryInput = zz.input<typeof QuerySchema>;
-export type QueryOutput = zz.output<typeof QuerySchema>;
+export const QuerySchema = z.object({});
+export type QueryInput = z.input<typeof QuerySchema>;
+export type QueryOutput = z.output<typeof QuerySchema>;
 
 @Controller()
 export class ControllerPageStyle extends BeanControllerPageBase<ScopeModule, QueryOutput, ParamsOutput> {

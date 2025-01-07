@@ -99,7 +99,7 @@ export function generateMetaPage(
 ${contentImports.join('\n')}
 export * from '../routes.js';
 ${contentNameRecords.length > 0 ? "import { TypePageParamsQuery } from 'zova';" : ''}
-${contentRecords2.length > 0 ? "import { zz } from 'zova';" : ''}
+${contentRecords2.length > 0 ? "import { z } from 'zod';" : ''}
 ${contentRecords2.join('\n')}
 import 'zova';
 declare module 'zova' {

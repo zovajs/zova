@@ -1,11 +1,12 @@
-import { BeanControllerPageBase, zz } from 'zova';
+import { z } from 'zod';
+import { BeanControllerPageBase } from 'zova';
 import { Controller } from 'zova-module-a-bean';
 import { ZPage } from 'zova-module-home-base';
 
-export const ControllerPageRouteParamsSchemaParams = zz.object({
+export const ControllerPageRouteParamsSchemaParams = z.object({
   id: zz.number().optional().default(0),
 });
-export const ControllerPageRouteParamsSchemaQuery = zz.object({});
+export const ControllerPageRouteParamsSchemaQuery = z.object({});
 
 @Controller()
 export class ControllerPageRouteParams extends BeanControllerPageBase {

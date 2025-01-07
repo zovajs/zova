@@ -1,13 +1,14 @@
-import { BeanControllerPageBase, Use, useComputed, zz } from 'zova';
+import { BeanControllerPageBase, Use, useComputed } from 'zova';
 import { Controller } from 'zova-module-a-bean';
 import { ModelTodo } from '../../model/todo.js';
 import { ServiceTodoGetParams } from '../../service/todo.js';
 import { ZPage } from 'zova-module-home-base';
+import { z } from 'zod';
 
-export const ControllerPageItemSchemaParams = zz.object({
-  id: zz.string(),
+export const ControllerPageItemSchemaParams = z.object({
+  id: z.string(),
 });
-export const ControllerPageItemSchemaQuery = zz.object({});
+export const ControllerPageItemSchemaQuery = z.object({});
 
 @Controller()
 export class ControllerPageItem extends BeanControllerPageBase {

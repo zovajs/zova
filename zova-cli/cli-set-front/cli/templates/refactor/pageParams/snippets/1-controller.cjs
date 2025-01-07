@@ -1,7 +1,3 @@
-const __snippet_export = `export const ParamsSchema = zz.object({});
-export type ParamsInput = zz.input<typeof ParamsSchema>;
-export type ParamsOutput = zz.output<typeof ParamsSchema>;\n`;
-
 module.exports = {
   file: ({ argv }) => {
     return argv.controllerFileName;
@@ -10,7 +6,7 @@ module.exports = {
   async transform({ ast, argv }) {
     // check if exists
     if (ast.includes(`${argv.controllerClassName}SchemaParams`)) throw new Error('Params exists');
-    // zz
+    // z
     if (!ast.includes("import { z } from 'zod';")) {
       ast = `import { z } from 'zod';\n${ast}`;
     }
