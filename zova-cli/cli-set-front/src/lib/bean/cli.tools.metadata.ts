@@ -9,7 +9,7 @@ import { generateMetadataCustom } from './toolsMetadata/generateMetadataCustom.j
 import { generateIcons } from './toolsMetadata/generateIcons.js';
 import { generateConfig, generateConstant, generateError, generateLocale } from './toolsMetadata/generateConfig.js';
 import { generateScope } from './toolsMetadata/generateScope.js';
-import { generateMonkey } from './toolsMetadata/generateMonkey.js';
+import { generateMonkey, generateMain } from './toolsMetadata/generateMonkey.js';
 import { globAllTsFiles } from './toolsMetadata/utils.js';
 import { getOnionMetasMeta, getOnionScenesMeta } from '@cabloy/module-info';
 import { toUpperCaseFirstChar } from '@cabloy/word-utils';
@@ -132,6 +132,8 @@ export class CliToolsMetadata extends BeanCliBase {
     content += contentErrors;
     // monkey
     content += await generateMonkey(modulePath);
+    // main
+    content += await generateMain(modulePath);
     // scope
     content += await generateScope(moduleName, relativeNameCapitalize, scopeResources, {
       config: contentConfig,

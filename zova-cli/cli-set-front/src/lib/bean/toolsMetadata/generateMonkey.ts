@@ -11,3 +11,14 @@ export * from '../monkey.js';
 `;
   return content;
 }
+
+export async function generateMain(modulePath: string) {
+  const monkeyFile = path.join(modulePath, 'src/main.ts');
+  if (!fse.existsSync(monkeyFile)) return '';
+  // combine
+  const content = `/** main: begin */
+export * from '../main.js';
+/** main: end */
+`;
+  return content;
+}
