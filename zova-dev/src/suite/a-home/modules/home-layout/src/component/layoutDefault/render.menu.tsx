@@ -8,7 +8,7 @@ import { Render } from 'zova-module-a-bean';
 @Render()
 export class RenderMenu extends BeanRenderBase {
   _renderMenuItem(item: ServiceMenuEntity) {
-    const titleLocale = this.app.meta.locale.getText(false, __ThisModule__, undefined, item.title);
+    const titleLocale = this.$text(item.title);
     if (item.separator) {
       return <li></li>;
     }
