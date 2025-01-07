@@ -14,9 +14,10 @@ export class AppModule extends BeanSimple {
   /** @internal */
   public async initialize(modulesMeta: PluginZovaModulesMeta) {
     this.modulesMeta = modulesMeta;
-    await this._loadAllMonkeysAndSyncs();
-    await this._requireAllMonkeys();
-    await this._requireAllSyncs();
+    await this._loadAllMonkeysAndSyncsAndPreloads();
+    await this._requireAllSpecifics('preload');
+    await this._requireAllSpecifics('monkey');
+    await this._requireAllSpecifics('sync');
   }
 
   get<K extends TypeBeanScopeRecordKeys>(moduleName: K, forceLoad?: boolean): IModule | undefined;
@@ -75,13 +76,13 @@ export class AppModule extends BeanSimple {
     return !!moduleRepo;
   }
 
-  private async _loadAllMonkeysAndSyncs() {
+  private async _loadAllMonkeysAndSyncsAndPreloads() {
     const promises: Promise<IModuleResource>[] = [];
     const moduleNames: string[] = [];
     for (const moduleName of this.modulesMeta.moduleNames) {
       const module = this.modulesMeta.modules[moduleName];
       const info = module.info;
-      if (info.capabilities?.monkey || info.capabilities?.sync) {
+      if (info.capabilities?.monkey || info.capabilities?.sync || info.capabilities?.preload) {
         const moduleResource = module.resource as any;
         if (typeof moduleResource === 'function') {
           promises.push(moduleResource());
@@ -96,19 +97,10 @@ export class AppModule extends BeanSimple {
     }
   }
 
-  private async _requireAllMonkeys() {
+  private async _requireAllSpecifics(capabilityName: 'preload' | 'monkey' | 'sync') {
     for (const moduleName of this.modulesMeta.moduleNames) {
       const module = this.modulesMeta.modules[moduleName];
-      if (module.info.capabilities?.monkey) {
-        await this._install(moduleName, module);
-      }
-    }
-  }
-
-  private async _requireAllSyncs() {
-    for (const moduleName of this.modulesMeta.moduleNames) {
-      const module = this.modulesMeta.modules[moduleName];
-      if (module.info.capabilities?.sync) {
+      if (module.info.capabilities?.[capabilityName]) {
         await this._install(moduleName, module);
       }
     }
