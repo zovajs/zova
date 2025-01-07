@@ -7,7 +7,8 @@
       "a-api": "5.0.0",
       "a-router": "5.0.0",
       "a-model": "5.0.0",
-      "a-style": "5.0.0"
+      "a-style": "5.0.0",
+      "a-zod": "5.0.0"
     },
     "globalDependencies": {
       "@cabloy/module-info": true,
