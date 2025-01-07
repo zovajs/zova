@@ -6,9 +6,7 @@
     "capabilities": {
       "monkey": true
     },
-    "dependencies": {
-      "a-zova": "5.0.0"
-    },
+    "dependencies": {},
     "onions": {
       "service": {
         "sceneIsolate": true,
