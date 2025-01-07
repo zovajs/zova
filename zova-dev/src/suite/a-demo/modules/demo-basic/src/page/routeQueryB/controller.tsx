@@ -1,23 +1,24 @@
-import { BeanControllerPageBase, zz } from 'zova';
+import { BeanControllerPageBase } from 'zova';
 import { Controller } from 'zova-module-a-bean';
 import { ZPage } from 'zova-module-home-base';
+import { z } from 'zod';
 
-export const ControllerPageRouteQueryBSchemaParams = zz.object({});
+export const ControllerPageRouteQueryBSchemaParams = z.object({});
 
-export const ControllerPageRouteQueryBSchemaQuery = zz.object({
-  tabName: zz.string().optional().default('boolean'),
-  private: zz.boolean().optional(),
-  user: zz
-    .json({
-      name: zz.string(),
-      age: zz.number(),
+export const ControllerPageRouteQueryBSchemaQuery = z.object({
+  tabName: z.string().optional().default('boolean'),
+  private: z.boolean().optional(),
+  user: z
+    .object({
+      name: z.string(),
+      age: z.number(),
     })
     .optional(),
-  todos: zz
+  todos: z
     .array(
-      zz.object({
-        title: zz.string(),
-        done: zz.boolean(),
+      z.object({
+        title: z.string(),
+        done: z.boolean(),
       }),
     )
     .optional(),

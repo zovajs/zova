@@ -1,3 +1,5 @@
+export const LocaleModuleNameSeparator = '::';
+
 export interface IModuleLocale {
   (...args: any[]): string;
   locale: <T extends keyof ILocalInfos>(locale: T, ...args: any[]) => string;

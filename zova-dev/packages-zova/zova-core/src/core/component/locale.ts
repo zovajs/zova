@@ -1,7 +1,12 @@
 import * as localeutil from '@cabloy/localeutil';
 import { BeanSimple } from '../../bean/beanSimple.js';
 import { TypeModuleResourceLocaleModules, TypeModuleResourceLocales } from '../../types/interface/module.js';
-import { ILocalInfos, IModuleLocale, IModuleLocaleText } from '../../bean/resource/locale/type.js';
+import {
+  ILocalInfos,
+  IModuleLocale,
+  IModuleLocaleText,
+  LocaleModuleNameSeparator,
+} from '../../bean/resource/locale/type.js';
 import { ZovaLocaleOptionalMap } from '../app/locale.js';
 import { ref, Ref } from 'vue';
 
@@ -56,14 +61,14 @@ export class AppLocale extends BeanSimple {
   public createLocaleText(moduleScope?: string): IModuleLocaleText {
     const self = this;
     const getText = function (text: string, ...args: any[]): string {
-      return self.getText(moduleScope, undefined, text, ...args);
+      return self.getText(false, moduleScope, undefined, text, ...args);
     };
     getText.locale = function <T extends keyof ILocalInfos>(
       locale: T | undefined,
       text: string,
       ...args: any[]
     ): string {
-      return self.getText(moduleScope, locale, text, ...args);
+      return self.getText(false, moduleScope, locale, text, ...args);
     };
     return getText;
   }
@@ -72,27 +77,29 @@ export class AppLocale extends BeanSimple {
   public createScopeLocaleText(moduleScope: string, text: string): IModuleLocale {
     const self = this;
     const getText = function (...args: any[]): string {
-      return self.getText(moduleScope, undefined, text, ...args);
+      return self.getText(false, moduleScope, undefined, text, ...args);
     };
     getText.locale = function <T extends keyof ILocalInfos>(locale: T | undefined, ...args: any[]): string {
-      return self.getText(moduleScope, locale, text, ...args);
+      return self.getText(false, moduleScope, locale, text, ...args);
     };
     return getText;
   }
 
   public getText<T extends keyof ILocalInfos>(
+    supportCustomMessage: boolean,
     moduleScope: string | undefined,
     locale: T | undefined,
     key: string,
     ...args: any[]
   ): string {
     if (!key) return key;
-    const pos = key.indexOf(':');
+    const pos = key.indexOf(LocaleModuleNameSeparator);
     if (pos > -1) {
       moduleScope = key.substring(0, pos);
-      key = key.substring(pos + 1);
+      key = key.substring(pos + LocaleModuleNameSeparator.length);
     }
     return localeutil.getLocaleText(
+      supportCustomMessage,
       moduleScope ? this.localeModules[moduleScope] : undefined,
       this.locales,
       locale || this.current,

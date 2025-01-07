@@ -13,7 +13,7 @@ export class RenderTabs extends BeanRenderBase {
       const className = tab.key === this.$$modelTabs.tabCurrentKey ? 'tab tab-active text-primary' : 'tab';
       const menuItem = this.$$modelMenu.findMenuItem(tab.key);
       if (!menuItem) continue;
-      const titleLocal = this.app.meta.locale.getText(__ThisModule__, undefined, menuItem?.title || '');
+      const titleLocal = this.app.meta.locale.getText(false, __ThisModule__, undefined, menuItem?.title || '');
       const domTab = (
         <a
           key={tab.key}
