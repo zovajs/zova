@@ -12,6 +12,7 @@
     },
     "globalDependencies": {
       "@cabloy/module-info": true,
+      "@cabloy/utils": true,
       "@cabloy/word-utils": true
     },
     "globalDependenciesDev": {
@@ -48,6 +49,7 @@
   },
   "dependencies": {
     "@cabloy/module-info": "^1.2.3",
+    "@cabloy/utils": "^1.0.1",
     "@cabloy/word-utils": "^1.0.10"
   },
   "devDependencies": {

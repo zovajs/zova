@@ -50,18 +50,6 @@ export function isUuid(str: string): boolean {
   return length === 36 || length === 32;
 }
 
-export function isNilOrEmptyString(str?: string | undefined | null): str is null | undefined | '' {
-  return str === undefined || str === null || str === '';
-}
-
-export async function sleep(ms: number) {
-  return new Promise(reslove => {
-    window.setTimeout(() => {
-      reslove(null);
-    }, ms);
-  });
-}
-
 export function deepExtend<T = any>(...args): T {
   return extend(true, ...args);
 }
