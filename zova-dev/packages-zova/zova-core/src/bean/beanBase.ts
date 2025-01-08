@@ -1,4 +1,4 @@
-import { RendererNode } from 'vue';
+import { RendererNode, WatchHandle } from 'vue';
 import { BeanBaseSimple, SymbolModuleBelong } from './beanBaseSimple.js';
 import { IBeanScopeRecord, TypeBeanScopeRecordKeys } from './type.js';
 import { AppEvent } from '../core/component/event.js';
@@ -6,6 +6,7 @@ import { IModuleLocaleText } from './resource/index.js';
 import { SSRMetaOptions } from '../types/interface/ssr.js';
 import { useMeta } from '../core/context/useMeta.js';
 import { CtxSSR } from '../core/context/ssr.js';
+import { getVueDecoratorValue } from './vueDecorators/utils.js';
 
 const SymbolText = Symbol('SymbolText');
 
@@ -53,6 +54,13 @@ export class BeanBase extends BeanBaseSimple {
       return this.app.bean.scope(this[SymbolModuleBelong]);
     }
     return this.app.bean.scope(moduleScope);
+  }
+
+  protected $watchHandle(prop: string | Function, index?: number): WatchHandle {
+    if (typeof prop === 'function') {
+      prop = prop.name;
+    }
+    return getVueDecoratorValue(this, prop, index ?? 0);
   }
 
   // need not
