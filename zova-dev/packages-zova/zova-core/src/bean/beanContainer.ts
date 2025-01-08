@@ -20,6 +20,8 @@ import { cast } from '../types/utils/cast.js';
 import { IInjectRecord } from '../types/interface/inject.js';
 import { SymbolBeanFullName, SymbolInited } from './beanBaseSimple.js';
 import { useComputed } from '../vue/computed.js';
+import { isPromise } from 'node:util/types';
+import { toLowerCaseFirstChar } from '@cabloy/word-utils';
 
 const SymbolVueDecorators = Symbol('Bean#SymbolVueDecorators');
 const SymbolBeanContainerParent = Symbol('Bean#BeanContainerParent');
@@ -560,8 +562,15 @@ export class BeanContainer {
         get() {
           const values = self._getVueDecoratorValues(beanInstance);
           if (!values[prop]) {
-            values[prop] = function (...args) {
-              return descriptor.value.apply(beanInstance, args);
+            values[prop] = function (...args: any[]) {
+              const returnValue = descriptor.value.apply(beanInstance, args);
+              if (isPromise(returnValue)) {
+                return returnValue.then(returnValue => {
+                  return __emitHandler(returnValue, args, beanInstance, prop, decoratorVueOptions);
+                });
+              } else {
+                return __emitHandler(returnValue, args, beanInstance, prop, decoratorVueOptions);
+              }
             };
           }
           return values[prop];
@@ -1064,4 +1073,30 @@ function __methodTypeOfDescriptor(descriptorInfo) {
     return methodType;
   }
   return null;
+}
+
+function __emitHandler(
+  returnValue: any,
+  args: any[],
+  beanInstance,
+  prop: string,
+  decoratorVueOptions: IDecoratorVueOptions,
+) {
+  // eventName
+  let eventName = decoratorVueOptions.options;
+  if (!eventName) {
+    if (prop.startsWith('emit')) {
+      eventName = toLowerCaseFirstChar(prop.substring('emit'.length));
+    } else {
+      eventName = prop;
+    }
+  }
+  // emit
+  if (returnValue === undefined) {
+    beanInstance['$emit'](eventName, ...args);
+  } else {
+    beanInstance['$emit'](eventName, returnValue, ...args);
+  }
+  // return
+  return returnValue;
 }
