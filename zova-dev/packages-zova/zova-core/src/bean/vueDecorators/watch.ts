@@ -10,7 +10,7 @@ export function watch(
   const { descriptor, options } = vueElement;
   // getter
   let getter;
-  if(options?.path){
-    getter=
+  if (options?.path) {
+    ///getter=
   }
 }

@@ -1,5 +1,5 @@
 import { isClass } from '../utils/isClass.js';
-import { isNilOrEmptyString, ZovaApplication, ZovaContext } from '../core/index.js';
+import { ZovaApplication, ZovaContext } from '../core/index.js';
 import {
   Constructable,
   DecoratorVueElements,
@@ -20,6 +20,7 @@ import { cast } from '../types/utils/cast.js';
 import { IInjectRecord } from '../types/interface/inject.js';
 import { SymbolBeanFullName, SymbolInited } from './beanBaseSimple.js';
 import { vueDecorators } from './vueDecorators/index.js';
+import { isNilOrEmptyString } from '@cabloy/utils';
 
 const SymbolBeanContainerParent = Symbol('Bean#BeanContainerParent');
 const SymbolProxyMagic = Symbol('Bean#ProxyMagic');

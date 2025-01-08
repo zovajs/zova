@@ -1,7 +1,7 @@
 import { toLowerCaseFirstChar } from '@cabloy/word-utils';
-import { isPromise } from '../../core/app/utilsShared.js';
 import { IDecoratorVueElement } from '../../decorator/vue/types.js';
 import { getVueDecoratorValue } from './utils.js';
+import { isPromise } from '@cabloy/utils';
 
 export function emit(
   beanInstance,
