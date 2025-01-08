@@ -1,5 +1,5 @@
 import { isClass } from '../utils/isClass.js';
-import { isNilOrEmptyString, ZovaApplication, ZovaContext } from '../core/index.js';
+import { isNilOrEmptyString, isPromise, ZovaApplication, ZovaContext } from '../core/index.js';
 import {
   Constructable,
   DecoratorVue,
@@ -20,7 +20,6 @@ import { cast } from '../types/utils/cast.js';
 import { IInjectRecord } from '../types/interface/inject.js';
 import { SymbolBeanFullName, SymbolInited } from './beanBaseSimple.js';
 import { useComputed } from '../vue/computed.js';
-import { isPromise } from 'node:util/types';
 import { toLowerCaseFirstChar } from '@cabloy/word-utils';
 
 const SymbolVueDecorators = Symbol('Bean#SymbolVueDecorators');
