@@ -52,6 +52,15 @@ export class CliRefactorRenameComponent extends BeanCliBase {
 
   async _renameDir(componentDir: string, targetDir: string) {
     const { argv } = this.context;
+    // delete old vue
+    const componentVueOld = path.join(
+      targetDir,
+      'src/.metadata',
+      argv.nameMeta.directory === 'page' ? 'page' : 'component',
+      `${argv.nameMeta.short}.vue`,
+    );
+    await fse.remove(componentVueOld);
+    // rename
     const componentDirNew = path.join(
       targetDir,
       'src',
