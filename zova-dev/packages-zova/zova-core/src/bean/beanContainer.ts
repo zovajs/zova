@@ -542,7 +542,7 @@ export class BeanContainer {
           const values = self._getVueDecoratorValues(beanInstance);
           if (!values[prop]) {
             values[prop] = useComputed(() => {
-              descriptor.get?.apply(beanInstance);
+              return descriptor.get?.apply(beanInstance);
             });
           }
           return values[prop];
