@@ -553,6 +553,20 @@ export class BeanContainer {
           return true;
         },
       });
+    } else if (type === 'emit') {
+      Object.defineProperty(beanInstance, prop, {
+        enumerable: false,
+        configurable: true,
+        get() {
+          const values = self._getVueDecoratorValues(beanInstance);
+          if (!values[prop]) {
+            values[prop] = function (...args) {
+              return descriptor.value.apply(beanInstance, args);
+            };
+          }
+          return values[prop];
+        },
+      });
     }
   }
 
