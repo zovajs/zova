@@ -527,11 +527,11 @@ export class BeanContainer {
     if (!vues) return;
     for (const prop in vues) {
       const decoratorVueOptions = vues[prop];
-      this._injectVueDecorator(beanInstance, prop, decoratorVueOptions);
+      this._injectVueDecorator(beanInstance, beanFullName, prop, decoratorVueOptions);
     }
   }
 
-  private _injectVueDecorator(beanInstance, prop: string, decoratorVueOptions: IDecoratorVueOptions) {
+  private _injectVueDecorator(beanInstance, beanFullName, prop: string, decoratorVueOptions: IDecoratorVueOptions) {
     const self = this;
     const { type, descriptor } = decoratorVueOptions;
     if (type === 'computed') {
@@ -546,6 +546,11 @@ export class BeanContainer {
             });
           }
           return values[prop];
+        },
+        set(value) {
+          if (!descriptor.set) throw new Error(`setter method not found: ${beanFullName}:${prop}`);
+          descriptor.set.call(beanInstance, value);
+          return true;
         },
       });
     }
