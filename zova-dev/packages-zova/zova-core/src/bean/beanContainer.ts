@@ -2,13 +2,15 @@ import { isClass } from '../utils/isClass.js';
 import { isNilOrEmptyString, ZovaApplication, ZovaContext } from '../core/index.js';
 import {
   Constructable,
+  DecoratorVue,
   Functionable,
   IDecoratorBeanOptionsBase,
   IDecoratorUseOptions,
   IDecoratorUseOptionsBase,
+  IDecoratorVueOptions,
 } from '../decorator/index.js';
 import { appResource } from '../core/resource.js';
-import { MetadataKey } from '../core/metadata.js';
+import { appMetadata, MetadataKey } from '../core/metadata.js';
 import { IBeanRecord, IBeanScopeRecord, IControllerData, TypeBeanScopeRecordKeys } from './type.js';
 import { BeanBase } from './beanBase.js';
 import { BeanSimple } from './beanSimple.js';
@@ -17,6 +19,7 @@ import { markRaw, reactive, shallowReactive, provide as composableProvide, injec
 import { cast } from '../types/utils/cast.js';
 import { IInjectRecord } from '../types/interface/inject.js';
 import { SymbolBeanFullName, SymbolInited } from './beanBaseSimple.js';
+import { useComputed } from '../vue/computed.js';
 
 const SymbolBeanContainerParent = Symbol('Bean#BeanContainerParent');
 const SymbolProxyMagic = Symbol('Bean#ProxyMagic');
@@ -493,6 +496,8 @@ export class BeanContainer {
   }
 
   private async _initBeanInstance(beanFullName, beanInstance, args) {
+    // inject vue decorators
+    this._injectVueDecorators(beanInstance, beanFullName);
     // inject
     await this._injectBeanInstance(beanInstance, beanFullName);
     // init
@@ -512,6 +517,26 @@ export class BeanContainer {
     }
     // ok
     return beanInstance;
+  }
+
+  private _injectVueDecorators(beanInstance, beanFullName) {
+    const beanOptions = appResource.getBean(beanFullName);
+    if (!beanOptions) return;
+    const vues = appMetadata.getMetadata(DecoratorVue, beanOptions.beanClass.prototype);
+    if (!vues) return;
+    for (const prop in vues) {
+      const decoratorVueOptions = vues[prop];
+      this._injectVueDecorator(beanInstance, prop, decoratorVueOptions);
+    }
+  }
+
+  private _injectVueDecorator(beanInstance, prop: string, decoratorVueOptions: IDecoratorVueOptions) {
+    const { type, descriptor } = decoratorVueOptions;
+    if (type === 'computed') {
+      beanInstance[prop] = useComputed(() => {
+        descriptor.get?.apply(beanInstance);
+      });
+    }
   }
 
   private async _injectBeanInstance(beanInstance, beanFullName) {
