@@ -1,7 +1,7 @@
-export const DecoratorVue = Symbol('Decorator#Vue');
+export const DecoratorVueElements = Symbol('Decorator#Vue');
 
 export type TypeDecoratorVue = 'computed' | 'emit' | 'watch';
-export interface IDecoratorVueOptions<OPTIONS = any> {
+export interface IDecoratorVueElement<OPTIONS = any> {
   type: TypeDecoratorVue;
   descriptor: PropertyDescriptor;
   options?: OPTIONS;

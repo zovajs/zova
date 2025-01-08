@@ -2,12 +2,12 @@ import { isClass } from '../utils/isClass.js';
 import { isNilOrEmptyString, ZovaApplication, ZovaContext } from '../core/index.js';
 import {
   Constructable,
-  DecoratorVue,
+  DecoratorVueElements,
   Functionable,
   IDecoratorBeanOptionsBase,
   IDecoratorUseOptions,
   IDecoratorUseOptionsBase,
-  IDecoratorVueOptions,
+  IDecoratorVueElement,
 } from '../decorator/index.js';
 import { appResource } from '../core/resource.js';
 import { appMetadata, MetadataKey } from '../core/metadata.js';
@@ -496,8 +496,8 @@ export class BeanContainer {
   }
 
   private async _initBeanInstance(beanFullName, beanInstance, args) {
-    // inject vue decorators
-    this._injectVueDecorators(beanInstance, beanFullName);
+    // inject vue elements
+    this._injectVueElements(beanInstance, beanFullName);
     // inject
     await this._injectBeanInstance(beanInstance, beanFullName);
     // init
@@ -519,21 +519,23 @@ export class BeanContainer {
     return beanInstance;
   }
 
-  private _injectVueDecorators(beanInstance, beanFullName) {
+  private _injectVueElements(beanInstance, beanFullName) {
     const beanOptions = appResource.getBean(beanFullName);
     if (!beanOptions) return;
-    const vues = appMetadata.getMetadata(DecoratorVue, beanOptions.beanClass.prototype);
+    const vues = appMetadata.getMetadata(DecoratorVueElements, beanOptions.beanClass.prototype);
     if (!vues) return;
     for (const prop in vues) {
-      const decoratorVueOptions = vues[prop];
-      this._injectVueDecorator(beanInstance, beanFullName, prop, decoratorVueOptions);
+      const vueElements = vues[prop];
+      for (let index = 0; index < vueElements.length; index++) {
+        this._injectVueElement(beanInstance, beanFullName, prop, vueElements[index], index);
+      }
     }
   }
 
-  private _injectVueDecorator(beanInstance, beanFullName, prop: string, decoratorVueOptions: IDecoratorVueOptions) {
-    const decoratorHandler = vueDecorators[decoratorVueOptions.type];
+  private _injectVueElement(beanInstance, beanFullName, prop: string, vueElement: IDecoratorVueElement, index: number) {
+    const decoratorHandler = vueDecorators[vueElement.type];
     if (decoratorHandler) {
-      decoratorHandler(beanInstance, beanFullName, prop, decoratorVueOptions);
+      decoratorHandler(beanInstance, beanFullName, prop, vueElement, index);
     }
   }
 

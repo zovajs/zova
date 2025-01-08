@@ -8,3 +8,12 @@ export function getVueDecoratorValues(beanInstance) {
   }
   return beanInstance[SymbolVueDecorators];
 }
+
+export function getVueDecoratorValue(beanInstance, prop: string, index: number, fn: Function) {
+  const key = `${prop}:${index}`;
+  const values = getVueDecoratorValues(beanInstance);
+  if (!values[key]) {
+    values[key] = fn();
+  }
+  return values[key];
+}
