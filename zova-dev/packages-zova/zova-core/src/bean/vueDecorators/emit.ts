@@ -3,7 +3,7 @@ import { isPromise } from '../../core/app/utilsShared.js';
 import { IDecoratorVueOptions } from '../../decorator/vue/types.js';
 import { getVueDecoratorValues } from './utils.js';
 
-export function computed(beanInstance, _beanFullName: string, prop: string, decoratorVueOptions: IDecoratorVueOptions) {
+export function emit(beanInstance, _beanFullName: string, prop: string, decoratorVueOptions: IDecoratorVueOptions) {
   const { descriptor } = decoratorVueOptions;
   Object.defineProperty(beanInstance, prop, {
     enumerable: false,
