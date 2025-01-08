@@ -2,13 +2,14 @@ import { getProperty } from '@cabloy/utils';
 import { IDecoratorVueElement, IDecoratorVueWatchOptions } from '../../decorator/vue/types.js';
 import { toLowerCaseFirstChar } from '@cabloy/word-utils';
 import { watch as vueWatch } from 'vue';
+import { getVueDecoratorValue } from './utils.js';
 
 export function watch(
   beanInstance,
   _beanFullName: string,
   prop: string,
   vueElement: IDecoratorVueElement<IDecoratorVueWatchOptions>,
-  _index: number,
+  index: number,
 ) {
   const { descriptor, options } = vueElement;
   // getter
@@ -33,11 +34,13 @@ export function watch(
     };
   }
   // watch
-  vueWatch(
-    getter,
-    (newValue, oldValue) => {
-      descriptor.value.call(beanInstance, newValue, oldValue);
-    },
-    options?.watchOptions,
-  );
+  getVueDecoratorValue(beanInstance, prop, index, () => {
+    return vueWatch(
+      getter,
+      (newValue, oldValue) => {
+        descriptor.value.call(beanInstance, newValue, oldValue);
+      },
+      options?.watchOptions,
+    );
+  });
 }
