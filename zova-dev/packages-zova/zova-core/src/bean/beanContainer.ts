@@ -498,7 +498,9 @@ export class BeanContainer {
 
   private async _initBeanInstance(beanFullName, beanInstance, args) {
     // inject vue elements
-    this._injectVueElements(beanInstance, beanFullName);
+    this.runWithInstanceScopeOrAppContext(() => {
+      this._injectVueElements(beanInstance, beanFullName);
+    });
     // inject
     await this._injectBeanInstance(beanInstance, beanFullName);
     // init
