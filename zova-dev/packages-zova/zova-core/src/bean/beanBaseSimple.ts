@@ -1,6 +1,8 @@
+import { WatchHandle } from 'vue';
 import { appResource } from '../core/resource.js';
 import { StateLock } from '../utils/stateLock.js';
 import { BeanSimple } from './beanSimple.js';
+import { getVueDecoratorValue } from './vueDecorators/utils.js';
 
 export const SymbolBeanFullName = Symbol('SymbolBeanFullName');
 export const SymbolModuleBelong = Symbol('SymbolModuleBelong');
@@ -27,5 +29,12 @@ export class BeanBaseSimple extends BeanSimple {
     const moduleName = appResource._getModuleName(this[SymbolBeanFullName]);
     if (!moduleName) throw new Error(`not found module name: ${this[SymbolBeanFullName]}`);
     return moduleName;
+  }
+
+  protected $watchHandle(prop: string | Function, index?: number): WatchHandle {
+    if (typeof prop === 'function') {
+      prop = prop.name;
+    }
+    return getVueDecoratorValue(this, prop, index ?? 0);
   }
 }

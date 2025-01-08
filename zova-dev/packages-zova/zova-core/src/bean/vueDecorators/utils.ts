@@ -9,10 +9,10 @@ export function getVueDecoratorValues(beanInstance) {
   return beanInstance[SymbolVueDecorators];
 }
 
-export function getVueDecoratorValue(beanInstance, prop: string, index: number, fn: Function) {
+export function getVueDecoratorValue(beanInstance, prop: string, index: number, fn?: Function) {
   const key = `${prop}:${index}`;
   const values = getVueDecoratorValues(beanInstance);
-  if (!values[key]) {
+  if (!values[key] && fn) {
     values[key] = fn();
   }
   return values[key];
