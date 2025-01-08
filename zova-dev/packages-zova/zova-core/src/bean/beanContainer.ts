@@ -1,5 +1,5 @@
 import { isClass } from '../utils/isClass.js';
-import { isNilOrEmptyString, isPromise, ZovaApplication, ZovaContext } from '../core/index.js';
+import { isNilOrEmptyString, ZovaApplication, ZovaContext } from '../core/index.js';
 import {
   Constructable,
   DecoratorVue,
@@ -19,10 +19,8 @@ import { markRaw, reactive, shallowReactive, provide as composableProvide, injec
 import { cast } from '../types/utils/cast.js';
 import { IInjectRecord } from '../types/interface/inject.js';
 import { SymbolBeanFullName, SymbolInited } from './beanBaseSimple.js';
-import { useComputed } from '../vue/computed.js';
-import { toLowerCaseFirstChar } from '@cabloy/word-utils';
+import { vueDecorators } from './vueDecorators/index.js';
 
-const SymbolVueDecorators = Symbol('Bean#SymbolVueDecorators');
 const SymbolBeanContainerParent = Symbol('Bean#BeanContainerParent');
 const SymbolProxyMagic = Symbol('Bean#ProxyMagic');
 export const BeanContainerInstances = Symbol('Bean#Instances');
@@ -533,56 +531,10 @@ export class BeanContainer {
   }
 
   private _injectVueDecorator(beanInstance, beanFullName, prop: string, decoratorVueOptions: IDecoratorVueOptions) {
-    const self = this;
-    const { type, descriptor } = decoratorVueOptions;
-    if (type === 'computed') {
-      Object.defineProperty(beanInstance, prop, {
-        enumerable: false,
-        configurable: true,
-        get() {
-          const values = self._getVueDecoratorValues(beanInstance);
-          if (!values[prop]) {
-            values[prop] = useComputed(() => {
-              return descriptor.get?.apply(beanInstance);
-            });
-          }
-          return values[prop];
-        },
-        set(value) {
-          if (!descriptor.set) throw new Error(`setter method not found: ${beanFullName}:${prop}`);
-          descriptor.set.call(beanInstance, value);
-          return true;
-        },
-      });
-    } else if (type === 'emit') {
-      Object.defineProperty(beanInstance, prop, {
-        enumerable: false,
-        configurable: true,
-        get() {
-          const values = self._getVueDecoratorValues(beanInstance);
-          if (!values[prop]) {
-            values[prop] = function (...args: any[]) {
-              const returnValue = descriptor.value.apply(beanInstance, args);
-              if (isPromise(returnValue)) {
-                return returnValue.then(returnValue => {
-                  return __emitHandler(returnValue, args, beanInstance, prop, decoratorVueOptions);
-                });
-              } else {
-                return __emitHandler(returnValue, args, beanInstance, prop, decoratorVueOptions);
-              }
-            };
-          }
-          return values[prop];
-        },
-      });
+    const decoratorHandler = vueDecorators[decoratorVueOptions.type];
+    if (decoratorHandler) {
+      decoratorHandler(beanInstance, beanFullName, prop, decoratorVueOptions);
     }
-  }
-
-  private _getVueDecoratorValues(beanInstance) {
-    if (!beanInstance[SymbolVueDecorators]) {
-      beanInstance[SymbolVueDecorators] = shallowReactive({});
-    }
-    return beanInstance[SymbolVueDecorators];
   }
 
   private async _injectBeanInstance(beanInstance, beanFullName) {
@@ -1072,30 +1024,4 @@ function __methodTypeOfDescriptor(descriptorInfo) {
     return methodType;
   }
   return null;
-}
-
-function __emitHandler(
-  returnValue: any,
-  args: any[],
-  beanInstance,
-  prop: string,
-  decoratorVueOptions: IDecoratorVueOptions,
-) {
-  // eventName
-  let eventName = decoratorVueOptions.options;
-  if (!eventName) {
-    if (prop.startsWith('emit')) {
-      eventName = toLowerCaseFirstChar(prop.substring('emit'.length));
-    } else {
-      eventName = prop;
-    }
-  }
-  // emit
-  if (returnValue === undefined) {
-    beanInstance['$emit'](eventName, ...args);
-  } else {
-    beanInstance['$emit'](eventName, returnValue, ...args);
-  }
-  // return
-  return returnValue;
 }
