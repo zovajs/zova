@@ -21,6 +21,7 @@ import { IInjectRecord } from '../types/interface/inject.js';
 import { SymbolBeanFullName, SymbolInited } from './beanBaseSimple.js';
 import { useComputed } from '../vue/computed.js';
 
+const SymbolVueDecorators = Symbol('Bean#SymbolVueDecorators');
 const SymbolBeanContainerParent = Symbol('Bean#BeanContainerParent');
 const SymbolProxyMagic = Symbol('Bean#ProxyMagic');
 export const BeanContainerInstances = Symbol('Bean#Instances');
@@ -531,12 +532,30 @@ export class BeanContainer {
   }
 
   private _injectVueDecorator(beanInstance, prop: string, decoratorVueOptions: IDecoratorVueOptions) {
+    const self = this;
     const { type, descriptor } = decoratorVueOptions;
     if (type === 'computed') {
-      beanInstance[prop] = useComputed(() => {
-        descriptor.get?.apply(beanInstance);
+      Object.defineProperty(beanInstance, prop, {
+        enumerable: false,
+        configurable: true,
+        get() {
+          const values = self._getVueDecoratorValues(beanInstance);
+          if (!values[prop]) {
+            values[prop] = useComputed(() => {
+              descriptor.get?.apply(beanInstance);
+            });
+          }
+          return values[prop];
+        },
       });
     }
+  }
+
+  private _getVueDecoratorValues(beanInstance) {
+    if (!beanInstance[SymbolVueDecorators]) {
+      beanInstance[SymbolVueDecorators] = shallowReactive({});
+    }
+    return beanInstance[SymbolVueDecorators];
   }
 
   private async _injectBeanInstance(beanInstance, beanFullName) {
