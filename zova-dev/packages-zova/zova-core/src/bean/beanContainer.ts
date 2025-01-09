@@ -181,11 +181,15 @@ export class BeanContainer {
     return this[BeanContainerInstances][key] as T;
   }
 
-  async _getBean<T>(A: Constructable<T>, markReactive?: boolean): Promise<T>;
-  async _getBean<K extends keyof IBeanRecord>(beanFullName: K, markReactive?: boolean): Promise<IBeanRecord[K]>;
-  // async _getBean<T>(beanFullName: string, markReactive?: boolean): Promise<T>;
-  async _getBean<T>(beanFullName: Constructable<T> | string, markReactive?: boolean): Promise<T> {
-    return await this._getBeanSelector(beanFullName as any, markReactive);
+  async _getBean<T>(A: Constructable<T>, markReactive?: boolean, ...args): Promise<T>;
+  async _getBean<K extends keyof IBeanRecord>(
+    beanFullName: K,
+    markReactive?: boolean,
+    ...args
+  ): Promise<IBeanRecord[K]>;
+  // async _getBean<T>(beanFullName: string, markReactive?: boolean, ...args): Promise<T>;
+  async _getBean<T>(beanFullName: Constructable<T> | string, markReactive?: boolean, ...args): Promise<T> {
+    return await this._getBeanSelectorInner(true, null, undefined, beanFullName, markReactive, false, ...args);
   }
 
   async _getBeanSelector<T>(A: Constructable<T>, markReactive?: boolean, selector?: string, ...args): Promise<T>;
@@ -202,7 +206,7 @@ export class BeanContainer {
     selector?: string,
     ...args
   ): Promise<T> {
-    return await this._getBeanSelectorInner(true, null, undefined, beanFullName, markReactive, selector, args);
+    return await this._getBeanSelectorInner(true, null, undefined, beanFullName, markReactive, true, selector, ...args);
   }
 
   _getBeanSelectorInnerSync<T>(
@@ -229,7 +233,7 @@ export class BeanContainer {
     beanComposable: Functionable | undefined,
     beanFullName: Constructable<T> | string | undefined,
     markReactive?: boolean,
-    selector?: string,
+    withSelector?: boolean,
     ...args
   ): Promise<T> {
     // fullName
