@@ -17,6 +17,6 @@ export function WatchEffect(watchEffectOptions?: WatchEffectOptions): MethodDeco
   return createVueDecorator('watchEffect', { watchEffectOptions });
 }
 
-export function Raw(): MethodDecorator {
-  return createVueDecorator('raw');
+export function Raw(): PropertyDecorator {
+  return createVueDecorator('raw') as PropertyDecorator;
 }
