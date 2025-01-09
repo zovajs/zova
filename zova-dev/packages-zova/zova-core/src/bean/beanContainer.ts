@@ -8,6 +8,7 @@ import {
   IDecoratorUseOptions,
   IDecoratorUseOptionsBase,
   IDecoratorVueElement,
+  IInjectSelectorInfo,
 } from '../decorator/index.js';
 import { appResource } from '../core/resource.js';
 import { appMetadata, MetadataKey } from '../core/metadata.js';
@@ -560,6 +561,7 @@ export class BeanContainer {
         targetBeanFullName = appResource.getBeanFullName(useOptions.beanClass);
       }
       const targetBeanInstance = await this._injectBeanInstanceProp(
+        beanInstance,
         targetBeanComposable,
         targetBeanFullName,
         useOptions,
@@ -575,6 +577,7 @@ export class BeanContainer {
   }
 
   private async _injectBeanInstanceProp(
+    beanInstance,
     targetBeanComposable: Functionable | undefined,
     targetBeanFullName: string | undefined,
     useOptions: IDecoratorUseOptionsBase,
@@ -614,8 +617,8 @@ export class BeanContainer {
     const injectionScope = useOptions.injectionScope ?? targetOptions!.containerScope ?? 'ctx';
     // options: markReactive: default is true
     const markReactive = useOptions.markReactive ?? targetOptions!.markReactive ?? true;
-    // options: selector: maybe empty string
-    const selector = useOptions.selector;
+    // options: selectorInfo
+    const selectorInfo = __prepareInjectSelectorInfo(beanInstance, useOptions);
     // recordProp
     //const recordProp = useOptions.name || useOptions.prop;
     const recordProp = useOptions.prop;
@@ -628,8 +631,8 @@ export class BeanContainer {
         targetBeanComposable,
         targetBeanFullName,
         markReactive,
-        true,
-        selector,
+        selectorInfo.withSelector,
+        ...selectorInfo.args,
       );
       await this._injectBeanInstanceProp_appBean(recordProp, targetBeanComposable, targetBeanFullName, targetInstance);
     } else if (injectionScope === 'ctx') {
@@ -639,8 +642,8 @@ export class BeanContainer {
         targetBeanComposable,
         targetBeanFullName,
         markReactive,
-        true,
-        selector,
+        selectorInfo.withSelector,
+        ...selectorInfo.args,
       );
     } else if (injectionScope === 'new') {
       // not record prop
@@ -651,7 +654,8 @@ export class BeanContainer {
         targetBeanComposable,
         targetBeanFullName,
         markReactive,
-        false,
+        selectorInfo.withSelector,
+        ...selectorInfo.args,
       );
     }
     return targetInstance;
@@ -1042,4 +1046,23 @@ function __getSelectorKey(beanFullName: string, withSelector?: boolean, selector
   if (!withSelector) return beanFullName;
   const isSelectorValid = !isNilOrEmptyString(selector);
   return !isSelectorValid ? beanFullName : `${beanFullName}#${selector}`;
+}
+
+function __prepareInjectSelectorInfo(beanInstance, useOptions: IDecoratorUseOptionsBase): IInjectSelectorInfo {
+  const selector = useOptions.selector;
+  let withSelector = true;
+  let args = [selector];
+  const fnGet = useOptions.descriptor?.get;
+  if (fnGet) {
+    const res = fnGet.call(beanInstance);
+    if (res) {
+      withSelector = res[0];
+      if (withSelector) {
+        args = [selector, ...res[1]];
+      } else {
+        args = res[1];
+      }
+    }
+  }
+  return { withSelector, args };
 }

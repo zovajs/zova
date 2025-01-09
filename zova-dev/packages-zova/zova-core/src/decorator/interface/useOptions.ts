@@ -36,3 +36,8 @@ export interface IDecoratorUseComposableOptions {
 export interface IDecoratorUseScopeOptions {
   module?: keyof IBeanScopeRecord;
 }
+
+export interface IInjectSelectorInfo {
+  withSelector: boolean;
+  args: any[];
+}
