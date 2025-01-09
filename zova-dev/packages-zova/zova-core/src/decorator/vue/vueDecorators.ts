@@ -24,3 +24,11 @@ export function Raw(): PropertyDecorator {
 export function Shallow(): PropertyDecorator {
   return createVueDecorator('shallow') as PropertyDecorator;
 }
+
+export function Readonly(): PropertyDecorator {
+  return createVueDecorator('readonly') as PropertyDecorator;
+}
+
+export function ShallowReadonly(): PropertyDecorator {
+  return createVueDecorator('shallowReadonly') as PropertyDecorator;
+}
