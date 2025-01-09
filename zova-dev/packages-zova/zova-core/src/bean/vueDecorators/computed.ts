@@ -4,7 +4,7 @@ import { getVueDecoratorValue } from './utils.js';
 
 export function computed(
   beanInstance,
-  beanFullName: string,
+  _beanFullName: string,
   prop: string,
   vueElement: IDecoratorVueElement,
   index: number,
@@ -15,15 +15,21 @@ export function computed(
     configurable: true,
     get() {
       return getVueDecoratorValue(beanInstance, prop, index, () => {
-        return useComputed(() => {
-          return descriptor.get?.apply(beanInstance);
-        });
+        if (!descriptor.set) {
+          return useComputed(() => {
+            return descriptor.get?.apply(beanInstance);
+          });
+        } else {
+          return useComputed({
+            get() {
+              return descriptor.get?.apply(beanInstance);
+            },
+            set(value) {
+              descriptor.set!.call(beanInstance, value);
+            },
+          });
+        }
       });
-    },
-    set(value) {
-      if (!descriptor.set) throw new Error(`setter method not found: ${beanFullName}:${prop}`);
-      descriptor.set.call(beanInstance, value);
-      return true;
     },
   });
 }
