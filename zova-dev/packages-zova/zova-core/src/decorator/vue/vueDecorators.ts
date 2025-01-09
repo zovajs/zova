@@ -20,3 +20,7 @@ export function WatchEffect(watchEffectOptions?: WatchEffectOptions): MethodDeco
 export function Raw(): PropertyDecorator {
   return createVueDecorator('raw') as PropertyDecorator;
 }
+
+export function Shallow(): PropertyDecorator {
+  return createVueDecorator('shallow') as PropertyDecorator;
+}
