@@ -3,10 +3,10 @@ import { appMetadata, MetadataKey } from '../../core/metadata.js';
 import { appResource } from '../../core/resource.js';
 import { Constructable, IDecoratorUseOptions } from '../index.js';
 
-export function Use(options?: IDecoratorUseOptions): PropertyDecorator;
-export function Use<T extends keyof IBeanRecord>(beanFullName?: T): PropertyDecorator;
-export function Use(options?: IDecoratorUseOptions | string): PropertyDecorator {
-  return function (target: object, prop: MetadataKey) {
+export function Use(options?: IDecoratorUseOptions): PropertyDecorator & MethodDecorator;
+export function Use<T extends keyof IBeanRecord>(beanFullName?: T): PropertyDecorator & MethodDecorator;
+export function Use(options?: IDecoratorUseOptions | string): PropertyDecorator & MethodDecorator {
+  return function (target: object, prop: MetadataKey, descriptor?: PropertyDescriptor) {
     if (!options) options = {};
     if (typeof options === 'string') {
       options = { beanFullName: options } as unknown as IDecoratorUseOptions;
@@ -18,6 +18,7 @@ export function Use(options?: IDecoratorUseOptions | string): PropertyDecorator 
       ...options,
       prop,
       beanClass,
+      descriptor,
     });
     // chech beanClass
     if (process.env.CLIENT && process.env.NODE_ENV === 'development') {

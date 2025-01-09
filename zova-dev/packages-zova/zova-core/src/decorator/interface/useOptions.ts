@@ -14,6 +14,7 @@ export interface IDecoratorUseOptionsBase<T = unknown> {
   selector?: string;
   injectionScope?: InjectionScope;
   markReactive?: boolean;
+  descriptor?: PropertyDescriptor;
 }
 
 export interface IDecoratorUseOptions {
