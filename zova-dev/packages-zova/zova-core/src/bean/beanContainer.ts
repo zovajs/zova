@@ -22,6 +22,7 @@ import { IInjectRecord } from '../types/interface/inject.js';
 import { SymbolBeanFullName, SymbolInited } from './beanBaseSimple.js';
 import { vueDecorators } from './vueDecorators/index.js';
 import { isNilOrEmptyString } from '@cabloy/utils';
+import { useRef } from '../vue/ref.js';
 
 const SymbolBeanContainerParent = Symbol('Bean#BeanContainerParent');
 const SymbolProxyMagic = Symbol('Bean#ProxyMagic');
@@ -1054,13 +1055,21 @@ function __prepareInjectSelectorInfo(beanInstance, useOptions: IDecoratorUseOpti
   let args = [selector];
   const fnGet = useOptions.descriptor?.get;
   if (fnGet) {
-    const res = fnGet.call(beanInstance);
+    const res: IInjectSelectorInfo = fnGet.call(beanInstance);
     if (res) {
-      withSelector = res[0];
-      if (withSelector) {
-        args = [selector, ...res[1]];
+      let _args;
+      if (res.markReactive) {
+        _args = res.args.map(item => {
+          return useRef(() => item);
+        });
       } else {
-        args = res[1];
+        _args = res.args;
+      }
+      withSelector = res.withSelector;
+      if (withSelector) {
+        args = [selector, ..._args];
+      } else {
+        args = _args;
       }
     }
   }

@@ -36,3 +36,25 @@ export function Use(options?: IDecoratorUseOptions | string): PropertyDecorator 
     }
   };
 }
+
+export function usePrepareArg(fn: () => any, withSelector?: boolean, markReactive?: boolean): any {
+  withSelector = withSelector ?? false;
+  markReactive = markReactive ?? true;
+  const arg = fn();
+  return {
+    withSelector,
+    markReactive,
+    args: [arg],
+  };
+}
+
+export function usePrepareArgs(fn: () => any[], withSelector?: boolean, markReactive?: boolean): any {
+  withSelector = withSelector ?? false;
+  markReactive = markReactive ?? true;
+  const args = fn() ?? [];
+  return {
+    withSelector,
+    markReactive,
+    args,
+  };
+}
