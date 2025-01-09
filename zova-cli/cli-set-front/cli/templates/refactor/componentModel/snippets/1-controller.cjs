@@ -8,6 +8,12 @@ module.exports = {
     const localName = modelName === 'modelValue' ? modelName : `model${cli.helper.firstCharToUpperCase(modelName)}`;
     const eventName = `update:${modelName}`;
     if (ast.includes(`e: '${eventName}'`)) throw new Error('Model exists');
+    // @Model
+    if (!ast.match(/import \{[^\}]*Model[^\}]*\} from 'zova';/)) {
+      ast = ast.replace(/import \{ ([^\}]*) \} from 'zova';/, (_, $1) => {
+        return `import { ${$1}, Model } from 'zova';`;
+      });
+    }
     // Props
     ast = ast.replace(/interface [^<]*Props([^\{]*) \{/, $0 => {
       return `${$0}\n  ${modelName}?: number;`;
@@ -22,10 +28,7 @@ module.exports = {
     });
     // localName
     ast = ast.replace(/protected async __init__/, $0 => {
-      return `${localName}: number;\n\n    ${$0}`;
-    });
-    ast = ast.replace(/protected async __init__([^\{]*) \{/, $0 => {
-      return `${$0}\n      this.${localName} = this.$useModel(${modelName === 'modelValue' ? '' : `'${modelName}'`});`;
+      return `@Model()\n${localName}: number;\n\n    ${$0}`;
     });
     // ok
     return ast;
