@@ -541,7 +541,7 @@ export class BeanContainer {
   private _injectVueElement(beanInstance, beanFullName, prop: string, vueElement: IDecoratorVueElement, index: number) {
     const decoratorHandler = vueDecorators[vueElement.type];
     if (decoratorHandler) {
-      decoratorHandler(beanInstance, beanFullName, prop, vueElement, index);
+      decoratorHandler.call(this, beanInstance, beanFullName, prop, vueElement, index);
     }
   }
 

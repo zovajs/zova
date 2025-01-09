@@ -4,14 +4,17 @@ import { DefineModelOptions } from '../type.js';
 import { getVueDecoratorValue } from './utils.js';
 import { toLowerCaseFirstChar } from '@cabloy/word-utils';
 import { cast } from '../../types/utils/cast.js';
+import { BeanContainer } from '../beanContainer.js';
 
 export function model(
+  this: BeanContainer,
   beanInstance,
   _beanFullName: string,
   prop: string,
   vueElement: IDecoratorVueElement<IDecoratorVueModelOptions>,
   index: number,
 ) {
+  const self = this;
   const { descriptor } = vueElement;
   Object.defineProperty(beanInstance, prop, {
     enumerable: false,
@@ -43,7 +46,9 @@ export function model(
             return descriptor.set!.call(beanInstance, value);
           };
         }
-        return useModel(beanInstance.$props, modelName, useModelOptions);
+        return self.runWithInstanceScopeOrAppContext(() => {
+          return useModel(beanInstance.$props, modelName, useModelOptions);
+        });
       });
     },
   });
