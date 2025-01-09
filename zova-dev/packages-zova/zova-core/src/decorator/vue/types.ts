@@ -10,7 +10,8 @@ export type TypeDecoratorVue =
   | 'raw'
   | 'shallow'
   | 'readonly'
-  | 'shallowReadonly';
+  | 'shallowReadonly'
+  | 'model';
 export interface IDecoratorVueElement<OPTIONS = any> {
   type: TypeDecoratorVue;
   descriptor: PropertyDescriptor;

@@ -18,17 +18,21 @@ export function WatchEffect(watchEffectOptions?: WatchEffectOptions): MethodDeco
 }
 
 export function Raw(): PropertyDecorator {
-  return createVueDecorator('raw') as PropertyDecorator;
+  return createVueDecorator('raw');
 }
 
 export function Shallow(): PropertyDecorator {
-  return createVueDecorator('shallow') as PropertyDecorator;
+  return createVueDecorator('shallow');
 }
 
 export function Readonly(): PropertyDecorator {
-  return createVueDecorator('readonly') as PropertyDecorator;
+  return createVueDecorator('readonly');
 }
 
 export function ShallowReadonly(): PropertyDecorator {
-  return createVueDecorator('shallowReadonly') as PropertyDecorator;
+  return createVueDecorator('shallowReadonly');
+}
+
+export function Model(): PropertyDecorator {
+  return createVueDecorator('model');
 }

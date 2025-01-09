@@ -4,7 +4,7 @@ import { DecoratorVueElements, IDecoratorVueElement, TypeDecoratorVue } from './
 export function createVueDecorator<OPTIONS>(
   type: TypeDecoratorVue,
   options?: OPTIONS,
-): PropertyDecorator | MethodDecorator {
+): PropertyDecorator & MethodDecorator {
   return function (target: object, prop: MetadataKey, descriptor?: PropertyDescriptor) {
     const vues = appMetadata.getOwnMetadataMap<MetadataKey, IDecoratorVueElement<OPTIONS>[]>(
       DecoratorVueElements,
