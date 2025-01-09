@@ -25,7 +25,7 @@
     "overrides": {}
   },
   "devDependencies": {
-    "@cabloy/lint": "^4.0.19",
+    "@cabloy/lint": "^4.0.20",
     "@types/mocha": "^10.0.6",
     "@types/node": "^22.10.2",
     "ts-node": "^10.9.2",
