@@ -1,8 +1,8 @@
-import { markRaw } from 'vue';
+import { markRaw, toRaw } from 'vue';
 import { IDecoratorVueElement } from '../../decorator/vue/types.js';
 import { getVueDecoratorValue, setVueDecoratorValue } from './utils.js';
 
-export function raw(
+export function shallow(
   beanInstance,
   _beanFullName: string,
   prop: string,
@@ -15,11 +15,11 @@ export function raw(
     configurable: true,
     get() {
       return getVueDecoratorValue(beanInstance, prop, index, () => {
-        return initialValue && typeof initialValue === 'object' ? markRaw(initialValue) : initialValue;
+        return initialValue && typeof initialValue === 'object' ? markRaw(toRaw(initialValue)) : initialValue;
       });
     },
     set(value) {
-      setVueDecoratorValue(beanInstance, prop, index, markRaw(value));
+      setVueDecoratorValue(beanInstance, prop, index, markRaw(toRaw(value)));
       return true;
     },
   });
