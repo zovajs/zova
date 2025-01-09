@@ -47,3 +47,13 @@ export function usePrepareArg(fn: () => any, withSelector?: boolean, markReactiv
     args: [arg],
   };
 }
+
+export function usePrepareArgs(fns: Array<() => any>, withSelector?: boolean, markReactive?: boolean): any {
+  withSelector = withSelector ?? false;
+  markReactive = markReactive ?? true;
+  const args = fns.map(fn => (markReactive ? useRef(fn) : fn()));
+  return {
+    withSelector,
+    args,
+  };
+}
