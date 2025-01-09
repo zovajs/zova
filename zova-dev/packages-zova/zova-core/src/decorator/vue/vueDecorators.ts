@@ -33,6 +33,6 @@ export function ShallowReadonly(): PropertyDecorator {
   return createVueDecorator('shallowReadonly');
 }
 
-export function Model(): PropertyDecorator {
-  return createVueDecorator('model');
+export function Model(modelName?: string): PropertyDecorator {
+  return createVueDecorator('model', { modelName });
 }

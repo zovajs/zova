@@ -30,3 +30,7 @@ export interface IDecoratorVueWatchOptions {
 export interface IDecoratorVueWatchEffectOptions {
   watchEffectOptions?: WatchEffectOptions;
 }
+
+export interface IDecoratorVueModelOptions {
+  modelName?: string;
+}
