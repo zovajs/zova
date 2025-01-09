@@ -1,4 +1,4 @@
-import { markRaw, toRaw } from 'vue';
+import { shallowReactive } from 'vue';
 import { IDecoratorVueElement } from '../../decorator/vue/types.js';
 import { getVueDecoratorValue, setVueDecoratorValue } from './utils.js';
 
@@ -15,11 +15,11 @@ export function shallow(
     configurable: true,
     get() {
       return getVueDecoratorValue(beanInstance, prop, index, () => {
-        return initialValue && typeof initialValue === 'object' ? markRaw(toRaw(initialValue)) : initialValue;
+        return initialValue && typeof initialValue === 'object' ? shallowReactive(initialValue) : initialValue;
       });
     },
     set(value) {
-      setVueDecoratorValue(beanInstance, prop, index, markRaw(toRaw(value)));
+      setVueDecoratorValue(beanInstance, prop, index, shallowReactive(value));
       return true;
     },
   });
