@@ -220,10 +220,7 @@ export class BeanContainer {
       // not found
       return null!;
     }
-    // same as _getBean if selector is undefined/null/'', as as to get the same bean instance
-    //   not use !selector which maybe is 0
-    const isSelectorValid = !isNilOrEmptyString(selector);
-    const key = !isSelectorValid ? fullName : `${fullName}#${selector}`;
+    const key = __getSelectorKey(fullName, true, selector);
     return this[BeanContainerInstances][key] as T;
   }
 
@@ -242,16 +239,9 @@ export class BeanContainer {
       // not found
       return null!;
     }
-    // same as _getBean if selector is undefined/null/'', as as to get the same bean instance
-    //   not use !selector which maybe is 0
-    const isSelectorValid = !isNilOrEmptyString(selector);
-    const key = !isSelectorValid ? fullName : `${fullName}#${selector}`;
+    const key = __getSelectorKey(fullName, withSelector, args[0]);
     if (this[BeanContainerInstances][key] === undefined && newBeanForce) {
-      if (isSelectorValid) {
-        await this._newBeanInner(true, recordProp, null, beanComposable, fullName, markReactive, selector, ...args);
-      } else {
-        await this._newBeanInner(true, recordProp, null, beanComposable, fullName, markReactive, undefined, ...args);
-      }
+      await this._newBeanInner(true, recordProp, null, beanComposable, fullName, markReactive, withSelector, ...args);
     }
     return this[BeanContainerInstances][key] as T;
   }
@@ -275,7 +265,7 @@ export class BeanContainer {
   ): Promise<IBeanRecord[K]>;
   // async _newBean<T>(beanFullName: string, markReactive?: boolean, ...args): Promise<T>;
   async _newBean<T>(beanFullName: Constructable<T> | string, markReactive?: boolean, ...args): Promise<T> {
-    return await this._newBeanInner(false, null, null, undefined, beanFullName, markReactive, ...args);
+    return await this._newBeanInner(false, null, null, undefined, beanFullName, markReactive, false, ...args);
   }
 
   async _newBeanSelector<T>(A: Constructable<T>, markReactive?: boolean, selector?: string, ...args): Promise<T>;
@@ -303,6 +293,7 @@ export class BeanContainer {
     beanComposable: Functionable | undefined,
     beanFullName: Constructable<T> | string | undefined,
     markReactive?: boolean,
+    withSelector?: boolean,
     ...args
   ): Promise<T> {
     // bean composable
@@ -317,6 +308,7 @@ export class BeanContainer {
         args,
         false,
         markReactive,
+        withSelector,
       );
     }
     // bean options
@@ -334,6 +326,7 @@ export class BeanContainer {
           args,
           false,
           markReactive,
+          withSelector,
         );
       }
       // throw new Error(`bean not found: ${beanFullName}`);
@@ -351,6 +344,7 @@ export class BeanContainer {
       beanOptions.aop,
       // default is true: same as inject prop
       markReactive ?? beanOptions.markReactive ?? true,
+      withSelector,
     );
   }
 
@@ -414,6 +408,7 @@ export class BeanContainer {
     args: any[],
     aop: boolean | undefined,
     markReactive: boolean | undefined,
+    withSelector?: boolean,
   ): Promise<T> {
     // prepare
     const beanInstance = this._prepareBeanInstance(beanComposable, beanFullName, beanClass, args, aop, markReactive);
@@ -426,7 +421,8 @@ export class BeanContainer {
       // fullName
       const fullName = await this._getBeanFullNameByComposableOrClass(beanComposable, beanFullName);
       if (fullName) {
-        this[BeanContainerInstances][fullName] = beanInstance;
+        const key = __getSelectorKey(fullName, withSelector, args[0]);
+        this[BeanContainerInstances][key] = beanInstance;
       }
       // always record for app/ctx bean
       if (recordProp) {
@@ -632,6 +628,7 @@ export class BeanContainer {
         targetBeanComposable,
         targetBeanFullName,
         markReactive,
+        true,
         selector,
       );
       await this._injectBeanInstanceProp_appBean(recordProp, targetBeanComposable, targetBeanFullName, targetInstance);
@@ -642,6 +639,7 @@ export class BeanContainer {
         targetBeanComposable,
         targetBeanFullName,
         markReactive,
+        true,
         selector,
       );
     } else if (injectionScope === 'new') {
@@ -653,7 +651,7 @@ export class BeanContainer {
         targetBeanComposable,
         targetBeanFullName,
         markReactive,
-        selector,
+        false,
       );
     }
     return targetInstance;
@@ -1036,4 +1034,12 @@ function __methodTypeOfDescriptor(descriptorInfo) {
     return methodType;
   }
   return null;
+}
+
+// same as _getBean if selector is undefined/null/'', as as to get the same bean instance
+//   not use !selector which maybe is 0
+function __getSelectorKey(beanFullName: string, withSelector?: boolean, selector?: any) {
+  if (!withSelector) return beanFullName;
+  const isSelectorValid = !isNilOrEmptyString(selector);
+  return !isSelectorValid ? beanFullName : `${beanFullName}#${selector}`;
 }

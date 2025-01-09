@@ -116,12 +116,13 @@ async function _useController(
       undefined,
       controllerBeanFullName,
       true,
+      false,
     );
     if (styleBeanFullName) {
-      await ctx.bean._newBeanInner(true, BeanStyleIdentifier, undefined, undefined, styleBeanFullName, true);
+      await ctx.bean._newBeanInner(true, BeanStyleIdentifier, undefined, undefined, styleBeanFullName, true, false);
     }
     if (renderBeanFullName) {
-      await ctx.bean._newBeanInner(true, BeanRenderIdentifier, undefined, undefined, renderBeanFullName, true);
+      await ctx.bean._newBeanInner(true, BeanRenderIdentifier, undefined, undefined, renderBeanFullName, true, false);
     }
     // must touch inited on server/client, force router.use effect
     ctx.meta.state.inited.touch();
