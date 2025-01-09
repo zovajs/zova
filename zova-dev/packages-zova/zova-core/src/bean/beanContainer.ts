@@ -188,19 +188,21 @@ export class BeanContainer {
     return await this._getBeanSelector(beanFullName as any, markReactive);
   }
 
-  async _getBeanSelector<T>(A: Constructable<T>, markReactive?: boolean, selector?: string): Promise<T>;
+  async _getBeanSelector<T>(A: Constructable<T>, markReactive?: boolean, selector?: string, ...args): Promise<T>;
   async _getBeanSelector<K extends keyof IBeanRecord>(
     beanFullName: K,
     markReactive?: boolean,
     selector?: string,
+    ...args
   ): Promise<IBeanRecord[K]>;
   // async _getBeanSelector<T>(beanFullName: string, markReactive?: boolean, selector?: string): Promise<T>;
   async _getBeanSelector<T>(
     beanFullName: Constructable<T> | string,
     markReactive?: boolean,
     selector?: string,
+    ...args
   ): Promise<T> {
-    return await this._getBeanSelectorInner(true, null, undefined, beanFullName, markReactive, selector);
+    return await this._getBeanSelectorInner(true, null, undefined, beanFullName, markReactive, selector, args);
   }
 
   _getBeanSelectorInnerSync<T>(
@@ -228,6 +230,7 @@ export class BeanContainer {
     beanFullName: Constructable<T> | string | undefined,
     markReactive?: boolean,
     selector?: string,
+    ...args
   ): Promise<T> {
     // fullName
     const fullName = await this._getBeanFullNameByComposableOrClass(beanComposable, beanFullName);
@@ -241,9 +244,9 @@ export class BeanContainer {
     const key = !isSelectorValid ? fullName : `${fullName}#${selector}`;
     if (this[BeanContainerInstances][key] === undefined && newBeanForce) {
       if (isSelectorValid) {
-        await this._newBeanInner(true, recordProp, null, beanComposable, fullName, markReactive, selector);
+        await this._newBeanInner(true, recordProp, null, beanComposable, fullName, markReactive, selector, ...args);
       } else {
-        await this._newBeanInner(true, recordProp, null, beanComposable, fullName, markReactive);
+        await this._newBeanInner(true, recordProp, null, beanComposable, fullName, markReactive, undefined, ...args);
       }
     }
     return this[BeanContainerInstances][key] as T;
