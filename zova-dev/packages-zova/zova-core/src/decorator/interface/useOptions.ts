@@ -39,6 +39,5 @@ export interface IDecoratorUseScopeOptions {
 
 export interface IInjectSelectorInfo {
   withSelector: boolean;
-  markReactive?: boolean;
   args: any[];
 }

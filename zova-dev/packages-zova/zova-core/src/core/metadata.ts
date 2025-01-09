@@ -49,6 +49,14 @@ export class AppMetadata {
   getDesignType(target: object, prop?: MetadataKey) {
     return this.getMetadata('design:type', target as any, prop);
   }
+
+  getDesignParamtypes(target: object, prop?: MetadataKey) {
+    return this.getMetadata('design:paramtypes', target, prop);
+  }
+
+  getDesignReturntype(target: object, prop?: MetadataKey) {
+    return this.getMetadata('design:returntype', target, prop);
+  }
 }
 
 export const appMetadata = new AppMetadata();

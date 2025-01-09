@@ -22,7 +22,6 @@ import { IInjectRecord } from '../types/interface/inject.js';
 import { SymbolBeanFullName, SymbolInited } from './beanBaseSimple.js';
 import { vueDecorators } from './vueDecorators/index.js';
 import { isNilOrEmptyString } from '@cabloy/utils';
-import { useRef } from '../vue/ref.js';
 
 const SymbolBeanContainerParent = Symbol('Bean#BeanContainerParent');
 const SymbolProxyMagic = Symbol('Bean#ProxyMagic');
@@ -569,10 +568,10 @@ export class BeanContainer {
       );
       if (targetBeanInstance) {
         targetBeanInstance.__v_isShallow_patch = true;
-        beanInstance[key] = targetBeanInstance;
+        __defineProperty(beanInstance, key, targetBeanInstance);
         delete targetBeanInstance.__v_isShallow_patch;
       } else {
-        beanInstance[key] = targetBeanInstance;
+        __defineProperty(beanInstance, key, targetBeanInstance);
       }
     }
   }
@@ -1057,21 +1056,23 @@ function __prepareInjectSelectorInfo(beanInstance, useOptions: IDecoratorUseOpti
   if (fnGet) {
     const res: IInjectSelectorInfo = fnGet.call(beanInstance);
     if (res) {
-      let _args;
-      if (res.markReactive) {
-        _args = res.args.map(item => {
-          return useRef(() => item);
-        });
-      } else {
-        _args = res.args;
-      }
       withSelector = res.withSelector;
       if (withSelector) {
-        args = [selector, ..._args];
+        args = [selector, ...res.args];
       } else {
-        args = _args;
+        args = res.args;
       }
     }
   }
   return { withSelector, args };
+}
+
+function __defineProperty(obj, prop, value) {
+  Object.defineProperty(obj, prop, {
+    enumerable: false,
+    configurable: true,
+    get() {
+      return value;
+    },
+  });
 }
