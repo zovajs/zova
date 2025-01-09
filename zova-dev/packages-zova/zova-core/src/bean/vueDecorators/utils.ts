@@ -17,3 +17,9 @@ export function getVueDecoratorValue(beanInstance, prop: string, index: number, 
   }
   return values[key];
 }
+
+export function setVueDecoratorValue(beanInstance, prop: string, index: number, value: any) {
+  const key = `${prop}:${index}`;
+  const values = getVueDecoratorValues(beanInstance);
+  values[key] = value;
+}

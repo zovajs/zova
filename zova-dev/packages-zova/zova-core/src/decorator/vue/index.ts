@@ -1,3 +1,3 @@
 export * from './createVueDecorator.js';
 export * from './types.js';
-export * from './vueElements.js';
+export * from './vueDecorators.js';
