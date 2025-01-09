@@ -6,7 +6,7 @@ export function Computed(): MethodDecorator {
 }
 
 export function Emit(eventName?: string): MethodDecorator {
-  return createVueDecorator('emit', eventName);
+  return createVueDecorator('emit', { eventName });
 }
 
 export function Watch(path?: string, watchOptions?: WatchOptions): MethodDecorator {

@@ -9,6 +9,10 @@ export interface IDecoratorVueElement<OPTIONS = any> {
   options?: OPTIONS;
 }
 
+export interface IDecoratorVueEmitOptions {
+  eventName?: string;
+}
+
 export interface IDecoratorVueWatchOptions {
   path?: string;
   watchOptions?: WatchOptions;

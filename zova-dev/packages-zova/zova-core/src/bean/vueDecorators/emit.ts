@@ -1,5 +1,5 @@
 import { toLowerCaseFirstChar } from '@cabloy/word-utils';
-import { IDecoratorVueElement } from '../../decorator/vue/types.js';
+import { IDecoratorVueElement, IDecoratorVueEmitOptions } from '../../decorator/vue/types.js';
 import { getVueDecoratorValue } from './utils.js';
 import { isPromise } from '@cabloy/utils';
 
@@ -31,9 +31,15 @@ export function emit(
   });
 }
 
-function __emitHandler(returnValue: any, args: any[], beanInstance, prop: string, vueElement: IDecoratorVueElement) {
+function __emitHandler(
+  returnValue: any,
+  args: any[],
+  beanInstance,
+  prop: string,
+  vueElement: IDecoratorVueElement<IDecoratorVueEmitOptions>,
+) {
   // eventName
-  let eventName = vueElement.options;
+  let eventName = vueElement.options?.eventName;
   if (!eventName) {
     if (prop.startsWith('emit')) {
       eventName = toLowerCaseFirstChar(prop.substring('emit'.length));
