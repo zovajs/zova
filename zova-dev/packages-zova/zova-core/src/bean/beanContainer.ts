@@ -10,6 +10,7 @@ import {
   IDecoratorVueElement,
   IInjectSelectorInfo,
   IUsePrepareArgResult,
+  TypeDecoratorUseOptionsInitArg,
 } from '../decorator/index.js';
 import { appResource } from '../core/resource.js';
 import { appMetadata, MetadataKey } from '../core/metadata.js';
@@ -22,7 +23,7 @@ import { cast } from '../types/utils/cast.js';
 import { IInjectRecord } from '../types/interface/inject.js';
 import { SymbolBeanFullName, SymbolInited } from './beanBaseSimple.js';
 import { vueDecorators } from './vueDecorators/index.js';
-import { isNilOrEmptyString } from '@cabloy/utils';
+import { getProperty, isNil, isNilOrEmptyString } from '@cabloy/utils';
 import { useRef } from '../vue/ref.js';
 
 const SymbolBeanContainerParent = Symbol('Bean#BeanContainerParent');
@@ -1051,20 +1052,72 @@ function __getSelectorKey(beanFullName: string, withSelector?: boolean, selector
 }
 
 function __prepareInjectSelectorInfo(beanInstance, useOptions: IDecoratorUseOptionsBase): IInjectSelectorInfo {
-  const selector = useOptions.selector;
   let withSelector = true;
   let args: any[] = [];
-  const fnGet = useOptions.descriptor?.get;
-  if (fnGet) {
-    const res: IUsePrepareArgResult = fnGet.call(beanInstance);
-    if (res) {
-      withSelector = res.withSelector ?? selector !== undefined;
-      const markReactive = res.markReactive ?? true;
-      args = res.fns.map(fn => (markReactive ? useRef(fn) : fn()));
-    }
+  let selectorInfo = __prepareInjectSelectorInfo_descriptor(beanInstance, useOptions);
+  if (!selectorInfo) {
+    selectorInfo = __prepareInjectSelectorInfo_init(beanInstance, useOptions);
   }
-  if (withSelector) args = [selector, ...args];
+  if (selectorInfo) {
+    withSelector = selectorInfo.withSelector;
+    args = selectorInfo.args;
+  }
+  return { withSelector, args: withSelector ? [useOptions.selector, ...args] : args };
+}
+
+function __prepareInjectSelectorInfo_descriptor(
+  beanInstance,
+  useOptions: IDecoratorUseOptionsBase,
+): IInjectSelectorInfo | undefined {
+  const fnGet = useOptions.descriptor?.get;
+  if (!fnGet) return;
+  const res: IUsePrepareArgResult = fnGet.call(beanInstance);
+  if (!res) return;
+  const withSelector = res.withSelector ?? useOptions.selector !== undefined;
+  const markReactive = res.markReactive ?? true;
+  const args = res.fns.map(fn => (markReactive ? useRef(fn) : fn()));
   return { withSelector, args };
+}
+
+function __prepareInjectSelectorInfo_init(
+  beanInstance,
+  useOptions: IDecoratorUseOptionsBase,
+): IInjectSelectorInfo | undefined {
+  const init = useOptions.init;
+  if (!init) return;
+  const withSelector = init.withSelector ?? useOptions.selector !== undefined;
+  const markReactive = init.markReactive ?? true;
+  const _args = init.args ?? [init.arg];
+  if (!_args) return;
+  const args = _args.map(arg =>
+    markReactive
+      ? useRef(() => __prepareInjectSelectorInfo_init_arg(beanInstance, arg))
+      : __prepareInjectSelectorInfo_init_arg(beanInstance, arg),
+  );
+  return { withSelector, args };
+}
+
+function __prepareInjectSelectorInfo_init_arg(beanInstance, arg: TypeDecoratorUseOptionsInitArg): any {
+  if (isNil(arg)) return arg;
+  if (Array.isArray(arg)) {
+    return arg.map(item => __prepareInjectSelectorInfo_init_argInner(beanInstance, item));
+  } else if (typeof arg === 'object') {
+    const res = {};
+    for (const key in arg) {
+      res[key] = __prepareInjectSelectorInfo_init_argInner(beanInstance, arg[key]);
+    }
+    return res;
+  }
+  // others
+  return __prepareInjectSelectorInfo_init_argInner(beanInstance, arg);
+}
+
+function __prepareInjectSelectorInfo_init_argInner(beanInstance, arg: TypeDecoratorUseOptionsInitArg): any {
+  if (typeof arg !== 'string') return arg;
+  if (arg.startsWith('##')) {
+    return arg.substring('##'.length);
+  }
+  return getProperty(beanInstance, arg, '.');
 }
 
 function __defineProperty(obj, prop, value) {

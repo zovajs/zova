@@ -14,6 +14,7 @@ export interface IDecoratorUseOptionsBase<T = unknown> {
   selector?: string;
   injectionScope?: InjectionScope;
   markReactive?: boolean;
+  init?: IDecoratorUseOptionsInit;
   descriptor?: PropertyDescriptor;
 }
 
@@ -23,6 +24,7 @@ export interface IDecoratorUseOptions {
   selector?: string;
   injectionScope?: InjectionScope;
   markReactive?: boolean;
+  init?: IDecoratorUseOptionsInit;
 }
 
 export interface IDecoratorUseComposableOptions {
@@ -31,13 +33,20 @@ export interface IDecoratorUseComposableOptions {
   selector?: string;
   injectionScope?: InjectionScope;
   markReactive?: boolean;
+  init?: IDecoratorUseOptionsInit;
 }
 
 export interface IDecoratorUseScopeOptions {
   module?: keyof IBeanScopeRecord;
 }
 
-export interface IDecoratorUseOptionsInit {}
+export type TypeDecoratorUseOptionsInitArg = any | any[] | Record<string, any>;
+export interface IDecoratorUseOptionsInit {
+  withSelector?: boolean;
+  markReactive?: boolean;
+  arg?: TypeDecoratorUseOptionsInitArg;
+  args?: TypeDecoratorUseOptionsInitArg[];
+}
 
 export interface IUsePrepareArgResult {
   withSelector?: boolean;
