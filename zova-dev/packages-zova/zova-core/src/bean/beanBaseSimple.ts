@@ -8,7 +8,7 @@ export const SymbolModuleName = Symbol('SymbolModuleName');
 export const SymbolInited = Symbol('SymbolInited');
 
 export class BeanBaseSimple extends BeanSimple {
-  protected [SymbolBeanFullName]: string;
+  private [SymbolBeanFullName]: string;
   // @ts-ignore: ignore
   private [SymbolInited]: StateLock;
 
