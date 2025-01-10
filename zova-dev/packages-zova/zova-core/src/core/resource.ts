@@ -82,8 +82,11 @@ export class AppResource extends BeanSimple {
     return beanOptions;
   }
 
-  getBeanFullName<T>(A: Constructable<T>): string | undefined {
-    return appMetadata.getOwnMetadata(DecoratorBeanFullName, A);
+  getBeanFullName(beanFullName: string): string;
+  getBeanFullName<T>(A: Constructable<T>): string | undefined;
+  getBeanFullName(beanFullName) {
+    if (typeof beanFullName === 'string') return beanFullName;
+    return appMetadata.getOwnMetadata(DecoratorBeanFullName, beanFullName);
   }
 
   getBeanFullNameOfComposable(beanComposable: Functionable | undefined): string | undefined {
