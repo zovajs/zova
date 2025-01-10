@@ -568,10 +568,10 @@ export class BeanContainer {
       );
       if (targetBeanInstance) {
         targetBeanInstance.__v_isShallow_patch = true;
-        __defineProperty(beanInstance, key, targetBeanInstance);
+        __setPropertyValue(beanInstance, key, targetBeanInstance);
         delete targetBeanInstance.__v_isShallow_patch;
       } else {
-        __defineProperty(beanInstance, key, targetBeanInstance);
+        __setPropertyValue(beanInstance, key, targetBeanInstance);
       }
     }
   }
@@ -1043,14 +1043,4 @@ function __getSelectorKey(beanFullName: string, withSelector?: boolean, selector
   if (!withSelector) return beanFullName;
   const isSelectorValid = !isNilOrEmptyString(selector);
   return !isSelectorValid ? beanFullName : `${beanFullName}#${selector}`;
-}
-
-function __defineProperty(obj, prop, value) {
-  Object.defineProperty(obj, prop, {
-    enumerable: false,
-    configurable: true,
-    get() {
-      return value;
-    },
-  });
 }
