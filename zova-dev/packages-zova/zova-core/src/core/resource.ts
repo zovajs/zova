@@ -82,11 +82,15 @@ export class AppResource extends BeanSimple {
     return beanOptions;
   }
 
-  getBeanFullName(beanFullName: string): string;
-  getBeanFullName<T>(A: Constructable<T>): string | undefined;
+  getBeanFullName<T>(A: Constructable<T> | undefined): string | undefined;
+  getBeanFullName<K extends keyof IBeanRecord>(beanFullName: K): K | undefined;
+  getBeanFullName(beanFullName: string): string | undefined;
   getBeanFullName(beanFullName) {
-    if (typeof beanFullName === 'string') return beanFullName;
-    return appMetadata.getOwnMetadata(DecoratorBeanFullName, beanFullName);
+    if (!beanFullName) return beanFullName;
+    if (typeof beanFullName === 'function' && isClass(beanFullName)) {
+      return appMetadata.getOwnMetadata(DecoratorBeanFullName, beanFullName);
+    }
+    return beanFullName;
   }
 
   getBeanFullNameOfComposable(beanComposable: Functionable | undefined): string | undefined {
@@ -100,13 +104,8 @@ export class AppResource extends BeanSimple {
   getBean<T>(A: Constructable<T>): IDecoratorBeanOptionsBase<T> | undefined;
   getBean<K extends keyof IBeanRecord>(beanFullName: K): IDecoratorBeanOptionsBase<IBeanRecord[K]> | undefined;
   getBean<T>(beanFullName: string): IDecoratorBeanOptionsBase<T> | undefined;
-  getBean<T>(beanFullName: Constructable<T> | string): IDecoratorBeanOptionsBase<T> | undefined {
-    let fullName: string | undefined;
-    if (typeof beanFullName === 'function' && isClass(beanFullName)) {
-      fullName = appMetadata.getOwnMetadata(DecoratorBeanFullName, beanFullName);
-    } else {
-      fullName = beanFullName as string;
-    }
+  getBean<T>(beanFullName): IDecoratorBeanOptionsBase<T> | undefined {
+    const fullName = this.getBeanFullName(beanFullName);
     if (!fullName) return null!;
     return this.beans[fullName] as IDecoratorBeanOptionsBase<T>;
   }
