@@ -9,6 +9,7 @@ import {
   IDecoratorUseOptionsBase,
   IDecoratorVueElement,
   IInjectSelectorInfo,
+  IUsePrepareArgResult,
 } from '../decorator/index.js';
 import { appResource } from '../core/resource.js';
 import { appMetadata, MetadataKey } from '../core/metadata.js';
@@ -22,6 +23,7 @@ import { IInjectRecord } from '../types/interface/inject.js';
 import { SymbolBeanFullName, SymbolInited } from './beanBaseSimple.js';
 import { vueDecorators } from './vueDecorators/index.js';
 import { isNilOrEmptyString } from '@cabloy/utils';
+import { useRef } from '../vue/ref.js';
 
 const SymbolBeanContainerParent = Symbol('Bean#BeanContainerParent');
 const SymbolProxyMagic = Symbol('Bean#ProxyMagic');
@@ -1051,19 +1053,17 @@ function __getSelectorKey(beanFullName: string, withSelector?: boolean, selector
 function __prepareInjectSelectorInfo(beanInstance, useOptions: IDecoratorUseOptionsBase): IInjectSelectorInfo {
   const selector = useOptions.selector;
   let withSelector = true;
-  let args = [selector];
+  let args: any[] = [];
   const fnGet = useOptions.descriptor?.get;
   if (fnGet) {
-    const res: IInjectSelectorInfo = fnGet.call(beanInstance);
+    const res: IUsePrepareArgResult = fnGet.call(beanInstance);
     if (res) {
-      withSelector = res.withSelector;
-      if (withSelector) {
-        args = [selector, ...res.args];
-      } else {
-        args = res.args;
-      }
+      withSelector = res.withSelector ?? selector !== undefined;
+      const markReactive = res.markReactive ?? true;
+      args = res.fns.map(fn => (markReactive ? useRef(fn) : fn()));
     }
   }
+  if (withSelector) args = [selector, ...args];
   return { withSelector, args };
 }
 

@@ -37,6 +37,14 @@ export interface IDecoratorUseScopeOptions {
   module?: keyof IBeanScopeRecord;
 }
 
+export interface IDecoratorUseOptionsInit {}
+
+export interface IUsePrepareArgResult {
+  withSelector?: boolean;
+  markReactive?: boolean;
+  fns: Function[];
+}
+
 export interface IInjectSelectorInfo {
   withSelector: boolean;
   args: any[];

@@ -1,7 +1,6 @@
 import { IBeanRecord } from '../../bean/type.js';
 import { appMetadata, MetadataKey } from '../../core/metadata.js';
 import { appResource } from '../../core/resource.js';
-import { useRef } from '../../vue/ref.js';
 import { Constructable, IDecoratorUseOptions } from '../index.js';
 
 export function Use(options?: IDecoratorUseOptions): PropertyDecorator & MethodDecorator;
@@ -39,21 +38,17 @@ export function Use(options?: IDecoratorUseOptions | string): PropertyDecorator 
 }
 
 export function usePrepareArg(fn: () => any, withSelector?: boolean, markReactive?: boolean): any {
-  withSelector = withSelector ?? false;
-  markReactive = markReactive ?? true;
-  const arg = markReactive ? useRef(fn) : fn();
   return {
     withSelector,
-    args: [arg],
+    markReactive,
+    fns: [fn],
   };
 }
 
 export function usePrepareArgs(fns: Array<() => any>, withSelector?: boolean, markReactive?: boolean): any {
-  withSelector = withSelector ?? false;
-  markReactive = markReactive ?? true;
-  const args = fns.map(fn => (markReactive ? useRef(fn) : fn()));
   return {
     withSelector,
-    args,
+    markReactive,
+    fns,
   };
 }
