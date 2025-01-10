@@ -941,16 +941,13 @@ export class BeanContainer {
   }
 
   private __composeForPropAdapter = (_context, chain) => {
-    const [aopKey, methodName] = chain;
+    const [aopKey, fn] = chain;
     // SymbolProxyMagic
     if (aopKey === SymbolProxyMagic) return null;
     // chain
-    const aop = this._getBeanSyncOnly(aopKey);
-    if (!aop) throw new Error(`aop not found: ${chain}`);
-    if (!aop[methodName]) return null;
     return {
-      receiver: aop,
-      fn: aop[methodName],
+      receiver: undefined,
+      fn,
     };
   };
 
