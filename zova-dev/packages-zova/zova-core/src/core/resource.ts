@@ -83,8 +83,8 @@ export class AppResource extends BeanSimple {
   }
 
   getBeanFullName<T>(A: Constructable<T> | undefined): string | undefined;
-  getBeanFullName<K extends keyof IBeanRecord>(beanFullName: K): K | undefined;
-  getBeanFullName(beanFullName: string): string | undefined;
+  getBeanFullName<K extends keyof IBeanRecord>(beanFullName: K | undefined): K | undefined;
+  getBeanFullName(beanFullName: string | undefined): string | undefined;
   getBeanFullName(beanFullName) {
     if (!beanFullName) return beanFullName;
     if (typeof beanFullName === 'function' && isClass(beanFullName)) {
