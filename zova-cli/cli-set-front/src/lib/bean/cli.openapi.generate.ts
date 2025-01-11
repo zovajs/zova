@@ -14,8 +14,8 @@ declare module '@cabloy/cli' {
 }
 
 interface INodeActionInfo {
-  service: string;
-  serviceLower: string;
+  api: string;
+  apiLower: string;
   action: string;
   operationId: string;
   node: ts.PropertySignature;
@@ -82,7 +82,7 @@ export class CliOpenapiGenerate extends BeanCliBase {
     const moduleConfig = extend(true, {}, config.default, config.modules[moduleInfo.relativeName]);
     const cache = await this._outputFiles(moduleConfig, moduleInfo, module, __caches);
     // generate
-    await this._generateServices(cache.ast, moduleConfig, moduleInfo, module);
+    await this._generateApis(cache.ast, moduleConfig, moduleInfo, module);
     // tools.metadata
     await this.helper.invokeCli([':tools:metadata', moduleInfo.relativeName], { cwd: argv.projectPath });
   }
@@ -102,20 +102,20 @@ export class CliOpenapiGenerate extends BeanCliBase {
       cache = __caches[moduleConfig.source] = { ast, contents };
     }
     // output: openapi/types.ts
-    const outputFile = path.join(module.root, 'src/service/openapi/types.ts');
+    const outputFile = path.join(module.root, 'src/api/openapi/types.ts');
     await fse.outputFile(outputFile, cache.contents);
     await this.helper.formatFile({ fileName: outputFile });
     // output: openapi/schemas.ts
-    const schemasFile = path.join(module.root, 'src/service/openapi/schemas.ts');
+    const schemasFile = path.join(module.root, 'src/api/openapi/schemas.ts');
     const contentSchemas = this._generateSchemas(cache.ast);
     await fse.outputFile(schemasFile, contentSchemas || 'export {}');
     await this.helper.formatFile({ fileName: schemasFile });
     // output: openapi/baseURL.ts
-    const baseURLFile = path.join(module.root, 'src/service/openapi/baseURL.ts');
+    const baseURLFile = path.join(module.root, 'src/api/openapi/baseURL.ts');
     await fse.outputFile(baseURLFile, `export const ApiBaseURL = '${moduleConfig.baseURL || ''}';`);
     await this.helper.formatFile({ fileName: baseURLFile });
     // output: openapi/index.ts
-    const indexFile = path.join(module.root, 'src/service/openapi/index.ts');
+    const indexFile = path.join(module.root, 'src/api/openapi/index.ts');
     await fse.outputFile(
       indexFile,
       "export * from './baseURL.js';\nexport * from './schemas.js';\nexport * from './types.js';",
@@ -150,21 +150,21 @@ export class CliOpenapiGenerate extends BeanCliBase {
     return contentSchemas;
   }
 
-  async _generateServices(
+  async _generateApis(
     ast: ts.Node[],
     moduleConfig: ZovaOpenapiConfigModule,
     _moduleInfo: IModuleInfo,
     module: IModule,
   ) {
-    const nodeServices = this._getNodeServices(ast, moduleConfig);
-    if (!nodeServices) return;
-    for (const serviceName in nodeServices) {
-      const serviceNameLower = toLowerCaseFirstChar(serviceName);
-      const nodeService = nodeServices[serviceName];
-      const serviceFile = path.join(module.root, `src/service/${serviceNameLower}.ts`);
-      const serviceContent = this._generateService(ast, serviceName, nodeService);
-      await fse.outputFile(serviceFile, serviceContent);
-      await this.helper.formatFile({ fileName: serviceFile });
+    const nodeApis = this._getNodeApis(ast, moduleConfig);
+    if (!nodeApis) return;
+    for (const apiName in nodeApis) {
+      const apiNameLower = toLowerCaseFirstChar(apiName);
+      const nodeApi = nodeApis[apiName];
+      const apiFile = path.join(module.root, `src/api/${apiNameLower}.ts`);
+      const apiContent = this._generateApi(ast, apiName, nodeApi);
+      await fse.outputFile(apiFile, apiContent);
+      await this.helper.formatFile({ fileName: apiFile });
     }
   }
 
@@ -174,14 +174,14 @@ export class CliOpenapiGenerate extends BeanCliBase {
     // contentTypes
     const contentTypes: string[] = [];
     contentTypes.push(`\n/** ${nodeActionInfo.operationId} */`);
-    // name: ServiceAction
-    const nameServiceAction = `Service${nodeActionInfo.service}${nodeActionInfo.action}`;
+    // name: ApiAction
+    const nameApiAction = `Api${nodeActionInfo.api}${nodeActionInfo.action}`;
     // name: path
-    const nameRequestPath = `Service${nameServiceAction}Path`;
+    const nameRequestPath = `Api${nameApiAction}Path`;
     contentTypes.push(`export const ${nameRequestPath} = '${pathInfo.path}';`);
     contentTypes.push(`export type ${nameRequestPath} = '${pathInfo.path}' `);
     // name: method
-    const nameRequestMethod = `Service${nameServiceAction}Method`;
+    const nameRequestMethod = `Api${nameApiAction}Method`;
     contentTypes.push(`export type ${nameRequestMethod} = '${pathInfo.method}';`);
     // name: params/query/headers
     const parametersInfo: Record<string, { name: string; question: boolean }> = {};
@@ -191,7 +191,7 @@ export class CliOpenapiGenerate extends BeanCliBase {
       const key2 = key === 'path' ? 'params' : key === 'header' ? 'headers' : key;
       const key2Upper = toUpperCaseFirstChar(key2);
       const info = {
-        name: `Service${nameServiceAction}Request${key2Upper}`,
+        name: `Api${nameApiAction}Request${key2Upper}`,
         question: nodeTypeInfoParameters[key].question,
       };
       parametersInfo[key2] = info;
@@ -203,7 +203,7 @@ export class CliOpenapiGenerate extends BeanCliBase {
     let nameRequestBody = '';
     let nameRequestBodyQuestion: boolean = true;
     if (!_isNodeNever(nodeActionInfo.nodeTypeInfo['requestBody'].nodeType)) {
-      nameRequestBody = `Service${nameServiceAction}RequestBody`;
+      nameRequestBody = `Api${nameApiAction}RequestBody`;
       nameRequestBodyQuestion = nodeActionInfo.nodeTypeInfo['requestBody'].question;
       const nodeRequestBodyInfo = _parseNodeType(nodeActionInfo.nodeTypeInfo['requestBody'].nodeType)!;
       const nodeRequestBodyContentInfo = _parseNodeType(nodeRequestBodyInfo['content'].nodeType)!;
@@ -212,7 +212,7 @@ export class CliOpenapiGenerate extends BeanCliBase {
       contentTypes.push(`export type ${nameRequestBody} = ${typeRequestBody};`);
     }
     // name: response body
-    const nameResponseBody = `Service${nameServiceAction}ResponseBody`;
+    const nameResponseBody = `Api${nameApiAction}ResponseBody`;
     contentTypes.push(
       `export type ${nameResponseBody} = paths[${nameRequestPath}][${nameRequestMethod}]['responses']['200']['content']['application/json']['data'];`,
     );
@@ -262,11 +262,11 @@ export class CliOpenapiGenerate extends BeanCliBase {
     return [contentTypes.join('\n'), contentSignature];
   }
 
-  _generateService(ast: ts.Node[], serviceName: string, nodeService: Record<string, INodeActionInfo>) {
+  _generateApi(ast: ts.Node[], apiName: string, nodeApi: Record<string, INodeActionInfo>) {
     const contentTypes: string[] = [];
     const contentSignatures: string[] = [];
-    for (const actionName in nodeService) {
-      const nodeActionInfo = nodeService[actionName];
+    for (const actionName in nodeApi) {
+      const nodeActionInfo = nodeApi[actionName];
       const contentAction = this._generateAction(ast, nodeActionInfo);
       contentTypes.push(contentAction[0]);
       contentSignatures.push(contentAction[1]);
@@ -278,48 +278,48 @@ export class CliOpenapiGenerate extends BeanCliBase {
     if (contentTypes2.includes('paths[')) importsType.push('type paths');
     const contentImportsType =
       importsType.length > 0 ? `import { ${importsType.join(', ')} } from './openapi/index.js';` : '';
-    const serviceContent = `import { BeanServiceBase, IApiActionOptions, Service } from 'zova-module-a-api';
+    const apiContent = `import { Api, BeanApiBase, IApiActionOptions } from 'zova-module-a-api';
 ${contentImportsType}
 
 ${contentTypes2}
 
-@Service()
-export class Service${serviceName} extends BeanServiceBase {
+@Api()
+export class Api${apiName} extends BeanApiBase {
   ${contentSignatures.join('\n')}
 }
 `;
-    return serviceContent;
+    return apiContent;
   }
 
-  _getNodeServices(ast: ts.Node[], moduleConfig: ZovaOpenapiConfigModule) {
+  _getNodeApis(ast: ts.Node[], moduleConfig: ZovaOpenapiConfigModule) {
     const nodeOperations = ast.find(node => ts.isInterfaceDeclaration(node) && node.name.text === 'operations') as
       | ts.InterfaceDeclaration
       | undefined;
     if (!nodeOperations) return;
-    const services: Record<string, Record<string, INodeActionInfo>> = {};
+    const apis: Record<string, Record<string, INodeActionInfo>> = {};
     for (let index = 0; index < nodeOperations.members.length; index++) {
       const node = nodeOperations.members[index];
       if (!ts.isPropertySignature(node)) continue;
       const operationId = (<ts.Identifier>node.name).text;
       if (!_checkOperationIdEnabled(moduleConfig, operationId)) continue;
-      let [service, action] = operationId.toString().split('_');
+      let [api, action] = operationId.toString().split('_');
       if (!action) {
-        action = service;
-        service = 'default';
+        action = api;
+        api = 'default';
       }
-      if (!services[service]) {
-        services[service] = {};
+      if (!apis[api]) {
+        apis[api] = {};
       }
-      services[service][action] = {
-        service,
-        serviceLower: toLowerCaseFirstChar(service),
+      apis[api][action] = {
+        api,
+        apiLower: toLowerCaseFirstChar(api),
         action,
         operationId,
         node,
         nodeTypeInfo: _parseNodeType(node.type as ts.TypeLiteralNode)!,
       };
     }
-    return services;
+    return apis;
   }
 }
 
