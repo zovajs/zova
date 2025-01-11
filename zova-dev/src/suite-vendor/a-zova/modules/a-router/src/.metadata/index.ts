@@ -22,27 +22,27 @@ declare module 'zova' {
   }
 }
 /** bean: end */
-/** local: begin */
-export * from '../bean/local.router.js';
+/** service: begin */
+export * from '../bean/service.router.js';
 
 import 'zova';
 declare module 'zova' {}
 declare module 'zova-module-a-router' {
-  export interface LocalRouter {
+  export interface ServiceRouter {
     /** @internal */
     get scope(): ScopeModuleARouter;
   }
 }
-/** local: end */
-/** local: begin */
-import { LocalRouter } from '../bean/local.router.js';
+/** service: end */
+/** service: begin */
+import { ServiceRouter } from '../bean/service.router.js';
 import 'zova';
 declare module 'zova' {
   export interface IBeanRecordLocal {
-    'a-router.local.router': LocalRouter;
+    'a-router.service.router': ServiceRouter;
   }
 }
-/** local: end */
+/** service: end */
 /** config: begin */
 export * from '../config/config.js';
 import { config } from '../config/config.js';

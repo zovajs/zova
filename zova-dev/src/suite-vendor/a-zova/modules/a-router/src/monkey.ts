@@ -16,7 +16,7 @@ import * as ModuleInfo from '@cabloy/module-info';
 import { useRoute } from 'vue-router';
 import { BeanRouter } from './bean/bean.router.js';
 import { getRealRouteName } from './utils.js';
-import { LocalRouter } from './bean/local.router.js';
+import { ServiceRouter } from './bean/service.router.js';
 import { IModule } from '@cabloy/module-info';
 
 export class Monkey
@@ -25,7 +25,7 @@ export class Monkey
 {
   private _moduleSelf: IModule;
   private _beanRouter: BeanRouter;
-  localRouter: LocalRouter;
+  serviceRouter: ServiceRouter;
 
   constructor(moduleSelf: IModule) {
     super();
@@ -42,7 +42,7 @@ export class Monkey
 
   async appInitialize() {
     // router
-    this.localRouter = await this.bean._newBean(LocalRouter, false);
+    this.serviceRouter = await this.bean._newBean(ServiceRouter, false);
   }
   async appInitialized() {
     // emit event

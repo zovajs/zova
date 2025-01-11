@@ -14,27 +14,27 @@ declare module 'zova' {
   }
 }
 /** bean: end */
-/** local: begin */
-export * from '../bean/local.pinia.js';
+/** service: begin */
+export * from '../bean/service.pinia.js';
 
 import 'zova';
 declare module 'zova' {}
 declare module 'zova-module-a-pinia' {
-  export interface LocalPinia {
+  export interface ServicePinia {
     /** @internal */
     get scope(): ScopeModuleAPinia;
   }
 }
-/** local: end */
-/** local: begin */
-import { LocalPinia } from '../bean/local.pinia.js';
+/** service: end */
+/** service: begin */
+import { ServicePinia } from '../bean/service.pinia.js';
 import 'zova';
 declare module 'zova' {
   export interface IBeanRecordLocal {
-    'a-pinia.local.pinia': LocalPinia;
+    'a-pinia.service.pinia': ServicePinia;
   }
 }
-/** local: end */
+/** service: end */
 /** monkey: begin */
 export * from '../monkey.js';
 /** monkey: end */

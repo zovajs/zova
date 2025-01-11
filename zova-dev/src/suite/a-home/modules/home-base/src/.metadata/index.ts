@@ -40,35 +40,35 @@ declare module 'zova' {
   }
 }
 /** theme: end */
-/** local: begin */
-export * from '../bean/local.router.js';
-export * from '../bean/local.ssr.js';
+/** service: begin */
+export * from '../bean/service.router.js';
+export * from '../bean/service.ssr.js';
 
 import 'zova';
 declare module 'zova' {}
 declare module 'zova-module-home-base' {
-  export interface LocalRouter {
+  export interface ServiceRouter {
     /** @internal */
     get scope(): ScopeModuleHomeBase;
   }
 
-  export interface LocalSSR {
+  export interface ServiceSSR {
     /** @internal */
     get scope(): ScopeModuleHomeBase;
   }
 }
-/** local: end */
-/** local: begin */
-import { LocalRouter } from '../bean/local.router.js';
-import { LocalSSR } from '../bean/local.ssr.js';
+/** service: end */
+/** service: begin */
+import { ServiceRouter } from '../bean/service.router.js';
+import { ServiceSSR } from '../bean/service.ssr.js';
 import 'zova';
 declare module 'zova' {
   export interface IBeanRecordLocal {
-    'home-base.local.router': LocalRouter;
-    'home-base.local.sSR': LocalSSR;
+    'home-base.service.router': ServiceRouter;
+    'home-base.service.sSR': ServiceSSR;
   }
 }
-/** local: end */
+/** service: end */
 /** controller: begin */
 export * from '../component/page/controller.jsx';
 export * from '../page/errorNotFound/controller.jsx';

@@ -1,18 +1,18 @@
 import { BeanBase, BeanContainer, BeanSimple, IMonkeyAppInitialize, IMonkeyBeanInit } from 'zova';
-import { LocalRouter } from './bean/local.router.js';
-import { LocalSSR } from './bean/local.ssr.js';
+import { ServiceRouter } from './bean/service.router.js';
+import { ServiceSsr } from './bean/service.ssr.js';
 import { __ThisModule__ } from './.metadata/this.js';
 
 export class Monkey extends BeanSimple implements IMonkeyAppInitialize, IMonkeyBeanInit {
-  localRouter: LocalRouter;
-  localSSR: LocalSSR;
+  serviceRouter: ServiceRouter;
+  serviceSsr: ServiceSsr;
 
   async appInitialize() {
     // router
-    this.localRouter = await this.bean._newBean(LocalRouter, false);
+    this.serviceRouter = await this.bean._newBean(ServiceRouter, false);
     // ssr
-    this.localSSR = await this.bean._newBean(LocalSSR, false);
-    await this.localSSR.initialize();
+    this.serviceSsr = await this.bean._newBean(ServiceSsr, false);
+    await this.serviceSsr.initialize();
   }
   async beanInit(bean: BeanContainer, beanInstance: BeanBase) {
     const self = this;
@@ -29,7 +29,7 @@ export class Monkey extends BeanSimple implements IMonkeyAppInitialize, IMonkeyB
       enumerable: false,
       configurable: true,
       get() {
-        return self.localSSR.styleCache;
+        return self.serviceSsr.styleCache;
       },
     });
   }

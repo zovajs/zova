@@ -1,14 +1,14 @@
 import { BeanBase, BeanContainer, BeanSimple, IMonkeyAppInitialize, IMonkeyBeanInit } from 'zova';
-import { LocalStorage } from './bean/local.storage.js';
+import { ServiceStorage } from './bean/service.storage.js';
 import { useQueryClient } from '@tanstack/vue-query';
 import { markRaw } from 'vue';
 
 export class Monkey extends BeanSimple implements IMonkeyAppInitialize, IMonkeyBeanInit {
-  storage: LocalStorage;
+  storage: ServiceStorage;
 
   async appInitialize() {
     // storage
-    this.storage = await this.bean._newBean(LocalStorage, false);
+    this.storage = await this.bean._newBean(ServiceStorage, false);
   }
 
   async beanInit(bean: BeanContainer, beanInstance: BeanBase) {

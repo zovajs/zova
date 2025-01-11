@@ -1,8 +1,8 @@
-import { BeanBase, Local } from 'zova';
-import { ScopeModule } from '../.metadata/this.js';
+import { BeanBase } from 'zova';
+import { Service } from 'zova-module-a-bean';
 
 @Service()
-export class ServiceSSR extends BeanBase<ScopeModule> {
+export class ServiceSsr extends BeanBase {
   public async initialize() {
     // ssr theme
     if (process.env.SERVER) {

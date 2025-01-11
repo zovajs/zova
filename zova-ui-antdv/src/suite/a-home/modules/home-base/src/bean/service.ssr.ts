@@ -1,9 +1,9 @@
-import { BeanBase, Local } from 'zova';
-import { ScopeModule } from '../.metadata/this.js';
+import { BeanBase } from 'zova';
 import { createCache, extractStyle } from 'ant-design-vue';
+import { Service } from 'zova-module-a-bean';
 
 @Service()
-export class ServiceSSR extends BeanBase<ScopeModule> {
+export class ServiceSsr extends BeanBase {
   styleCache: ReturnType<typeof createCache>;
 
   public async initialize() {

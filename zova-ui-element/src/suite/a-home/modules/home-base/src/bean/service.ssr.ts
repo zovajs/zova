@@ -1,9 +1,9 @@
-import { BeanBase, Local } from 'zova';
-import { ScopeModule } from '../.metadata/this.js';
+import { BeanBase } from 'zova';
 import { ID_INJECTION_KEY, ZINDEX_INJECTION_KEY } from 'element-plus';
+import { Service } from 'zova-module-a-bean';
 
 @Service()
-export class ServiceSSR extends BeanBase<ScopeModule> {
+export class ServiceSsr extends BeanBase {
   public async initialize() {
     // provide id
     if (process.env.SSR) {

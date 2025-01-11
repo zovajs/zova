@@ -2,7 +2,7 @@
 
 ## YouTube Channel
 
-- [A more elegant ioc than nestjs: Local Service](https://www.youtube.com/watch?v=ZqkehqDHq68)
+- [A more elegant ioc than nestjs: Service](https://www.youtube.com/watch?v=ZqkehqDHq68)
 - [A more elegant ioc than nestjs: Config](https://www.youtube.com/watch?v=dqE34enuRzo)
 - [A more elegant ioc than nestjs: I18n
   ](https://www.youtube.com/watch?v=JlTy5rXeiGY)
