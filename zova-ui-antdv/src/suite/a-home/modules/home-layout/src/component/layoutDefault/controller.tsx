@@ -1,11 +1,11 @@
-import { BeanControllerBase, Use, PropsBase, useComputed, iconh, RequiredSome } from 'zova';
+import { BeanControllerBase, Use, PropsBase, useComputed, iconh } from 'zova';
 import { Controller } from 'zova-module-a-bean';
 import { ModelMenu } from '../../bean/model.menu.js';
 import { RouteLocationNormalizedLoaded, useRoute } from 'vue-router';
 import * as TreeLodash from 'tree-lodash';
 import { Tree } from 'tree-lodash/dist/esm/types.js';
 import { MenuItemGroupType } from 'ant-design-vue/es/menu/src/interface.js';
-import { ServiceMenuEntity } from '../../service/menu.js';
+import { ApiMenuEntity } from '../../api/menu.js';
 
 export interface Props extends PropsBase<ControllerLayoutDefault, Slots> {}
 
@@ -14,12 +14,7 @@ export type Emits = {};
 export interface Slots {}
 
 @Controller()
-export class ControllerLayoutDefault extends BeanControllerBase<
-  unknown,
-  RequiredSome<Props, keyof typeof ControllerLayoutDefault.$propsDefault>,
-  Emits,
-  Slots
-> {
+export class ControllerLayoutDefault extends BeanControllerBase {
   static $propsDefault = {};
 
   @Use()
@@ -54,7 +49,7 @@ export class ControllerLayoutDefault extends BeanControllerBase<
     // if (queryMenus.error) throw queryMenus.error;
   }
 
-  private _prepareMenuItems(menuItemsSrc: ServiceMenuEntity[]): MenuItemGroupType {
+  private _prepareMenuItems(menuItemsSrc: ApiMenuEntity[]): MenuItemGroupType {
     const tree: Tree<'children'> = {
       key: '',
       children: menuItemsSrc,
@@ -73,7 +68,7 @@ export class ControllerLayoutDefault extends BeanControllerBase<
     }) as MenuItemGroupType;
   }
 
-  private _calcActiveMenuItemKeys(menuItemsSrc: ServiceMenuEntity[], route: RouteLocationNormalizedLoaded) {
+  private _calcActiveMenuItemKeys(menuItemsSrc: ApiMenuEntity[], route: RouteLocationNormalizedLoaded) {
     const tree: Tree<'children'> = {
       key: '',
       children: menuItemsSrc,
@@ -84,7 +79,7 @@ export class ControllerLayoutDefault extends BeanControllerBase<
     return menuItem ? [menuItem.key] : [];
   }
 
-  private _calcActiveMenuSubKeys(menuItemsSrc: ServiceMenuEntity[]) {
+  private _calcActiveMenuSubKeys(menuItemsSrc: ApiMenuEntity[]) {
     const tree: Tree<'children'> = {
       key: '',
       children: menuItemsSrc,
@@ -96,7 +91,7 @@ export class ControllerLayoutDefault extends BeanControllerBase<
   }
 
   onMenuItemClick(event) {
-    const data: ServiceMenuEntity = event.item.data;
+    const data: ApiMenuEntity = event.item.data;
     if (data.href) {
       window.open(data.href);
     } else {

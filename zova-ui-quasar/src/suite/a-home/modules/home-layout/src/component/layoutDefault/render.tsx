@@ -14,13 +14,12 @@ import {
   QToolbarTitle,
 } from 'quasar';
 import { JSX } from 'vue/jsx-runtime';
-import { ScopeModule } from '../../.metadata/this.js';
 import { RouterView } from 'vue-router';
-import { ServiceMenuEntity } from '../../service/menu.js';
+import { ApiMenuEntity } from '../../api/menu.js';
 
 @Render()
-export class RenderLayoutDefault extends BeanRenderBase<ScopeModule> {
-  _renderMenuItem(item: ServiceMenuEntity) {
+export class RenderLayoutDefault extends BeanRenderBase {
+  _renderMenuItem(item: ApiMenuEntity) {
     if (item.separator) {
       return <QSeparator spaced></QSeparator>;
     }

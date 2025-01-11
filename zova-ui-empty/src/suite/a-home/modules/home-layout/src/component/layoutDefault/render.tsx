@@ -1,14 +1,13 @@
 import { BeanRenderBase } from 'zova';
 import { Render } from 'zova-module-a-bean';
 import { JSX } from 'vue/jsx-runtime';
-import { ScopeModule } from '../../.metadata/this.js';
 import EssentialLink from '../essentialLink/index.vue';
 import { RouterView } from 'vue-router';
-import { ServiceMenuEntity } from '../../service/menu.js';
+import { ApiMenuEntity } from '../../api/menu.js';
 
 @Render()
-export class RenderLayoutDefault extends BeanRenderBase<ScopeModule> {
-  _renderMenuItem(item: ServiceMenuEntity) {
+export class RenderLayoutDefault extends BeanRenderBase {
+  _renderMenuItem(item: ApiMenuEntity) {
     if (item.separator) {
       return <div class="menu-separator"> - - - </div>;
     }

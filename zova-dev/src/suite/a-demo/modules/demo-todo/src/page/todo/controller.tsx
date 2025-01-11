@@ -1,7 +1,7 @@
 import { BeanControllerPageBase, Use, uuid } from 'zova';
 import { Controller } from 'zova-module-a-bean';
 import { ModelTodo } from '../../model/todo.js';
-import { ServiceTodoEntity, ServiceTodoGetParams } from '../../service/todo.js';
+import { ApiTodoEntity, ApiTodoGetParams } from '../../api/todo.js';
 import { withModifiers } from 'vue';
 import { RouterLink } from 'vue-router';
 import { ZPage } from 'zova-module-home-base';
@@ -11,7 +11,7 @@ export class ControllerPageTodo extends BeanControllerPageBase {
   @Use()
   $$modelTodo: ModelTodo;
   newTitle: string;
-  currentTodo?: ServiceTodoGetParams;
+  currentTodo?: ApiTodoGetParams;
 
   protected async __init__() {
     // todos
@@ -30,12 +30,12 @@ export class ControllerPageTodo extends BeanControllerPageBase {
     this.newTitle = '';
   }
 
-  async completeTodo(item: ServiceTodoEntity) {
+  async completeTodo(item: ApiTodoEntity) {
     const todo = { ...item, title: `${item.title}!`, done: true };
     await this.$$modelTodo.update().mutateAsync(todo);
   }
 
-  async deleteTodo(item: ServiceTodoEntity) {
+  async deleteTodo(item: ApiTodoEntity) {
     await this.$$modelTodo.delete().mutateAsync({ id: item.id });
   }
 

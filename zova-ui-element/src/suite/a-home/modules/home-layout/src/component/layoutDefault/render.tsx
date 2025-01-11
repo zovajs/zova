@@ -13,12 +13,11 @@ import {
 } from 'element-plus';
 import { JSX } from 'vue/jsx-runtime';
 import { RouterView } from 'vue-router';
-import { ServiceMenuEntity } from '../../service/menu.js';
-import { ScopeModule } from '../../.metadata/this.js';
+import { ApiMenuEntity } from '../../api/menu.js';
 
 @Render()
-export class RenderLayoutDefault extends BeanRenderBase<ScopeModule> {
-  _renderMenuItem(item: ServiceMenuEntity) {
+export class RenderLayoutDefault extends BeanRenderBase {
+  _renderMenuItem(item: ApiMenuEntity) {
     // folder
     if (item.folder) {
       const slots = {
@@ -59,7 +58,7 @@ export class RenderLayoutDefault extends BeanRenderBase<ScopeModule> {
       ></ElMenuItem>
     );
   }
-  _renderMenuItems(items: ServiceMenuEntity[] | undefined) {
+  _renderMenuItems(items: ApiMenuEntity[] | undefined) {
     if (!items) return [];
     const domItems: JSX.Element[] = [];
     for (let index = 0; index < items.length; index++) {

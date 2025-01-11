@@ -9,8 +9,8 @@ declare module 'zova' {
 }
 /** beans: end */
 /** service: begin */
-export * from '../service/example.js';
-import { ServiceExample } from '../service/example.js';
+export * from '../api/example.js';
+import { ApiExample } from '../service/example.js';
 export interface IModuleService {
   example: ServiceExample;
 }

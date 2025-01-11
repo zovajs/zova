@@ -1,13 +1,13 @@
 import { BeanRenderBase } from 'zova';
 import { __ThisModule__ } from '../../.metadata/this.js';
 import { JSX } from 'vue/jsx-runtime';
-import { ServiceMenuEntity } from '../../service/menu.js';
+import { ApiMenuEntity } from '../../api/menu.js';
 import { ZEssentialLink } from '../../.metadata/index.js';
 import { Render } from 'zova-module-a-bean';
 
 @Render()
 export class RenderMenu extends BeanRenderBase {
-  _renderMenuItem(item: ServiceMenuEntity) {
+  _renderMenuItem(item: ApiMenuEntity) {
     const titleLocale = this.$text(item.title);
     if (item.separator) {
       return <li></li>;
@@ -27,7 +27,7 @@ export class RenderMenu extends BeanRenderBase {
     );
   }
 
-  _renderMenuItems(items?: ServiceMenuEntity[]) {
+  _renderMenuItems(items?: ApiMenuEntity[]) {
     if (!items) return;
     const domItems: JSX.Element[] = [];
     for (const item of items) {

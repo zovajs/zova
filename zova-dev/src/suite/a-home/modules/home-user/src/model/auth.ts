@@ -1,11 +1,11 @@
 import { Use } from 'zova';
 import { BeanModelBase, Model } from 'zova-module-a-model';
 import { ModelUser } from './user.js';
-import { ServiceAuthJWT, ServiceAuthLoginParams, ServiceAuthLoginResult } from '../service/auth.js';
+import { ApiAuthJWT, ApiAuthLoginParams, ApiAuthLoginResult } from '../api/auth.js';
 
 @Model()
 export class ModelAuth extends BeanModelBase {
-  jwt?: ServiceAuthJWT;
+  jwt?: ApiAuthJWT;
   token?: string;
   @Use()
   $$modelUser: ModelUser;
@@ -20,7 +20,7 @@ export class ModelAuth extends BeanModelBase {
   }
 
   login() {
-    return this.$useMutationExisting<ServiceAuthLoginResult, ServiceAuthLoginParams>({
+    return this.$useMutationExisting<ApiAuthLoginResult, ApiAuthLoginParams>({
       mutationKey: ['login'],
       mutationFn: async params => {
         return this.scope.service.auth.login(params);
@@ -66,13 +66,13 @@ export class ModelAuth extends BeanModelBase {
     }
   }
 
-  private _setUser(data: ServiceAuthLoginResult) {
+  private _setUser(data: ApiAuthLoginResult) {
     this.$$modelUser.user = data.user;
     this.jwt = data.jwt;
     this.token = this._getTokenFromJwt(this.jwt);
   }
 
-  private _getTokenFromJwt(jwt?: ServiceAuthJWT) {
+  private _getTokenFromJwt(jwt?: ApiAuthJWT) {
     if (!jwt) return undefined;
     return jwt.expireTime - Date.now() > 120 * 1000 ? jwt.accessToken : jwt.refreshToken;
   }

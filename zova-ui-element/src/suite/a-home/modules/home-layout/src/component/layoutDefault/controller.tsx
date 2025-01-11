@@ -1,11 +1,10 @@
-import { BeanControllerBase, Use, PropsBase, useComputed, RequiredSome } from 'zova';
+import { BeanControllerBase, Use, PropsBase, useComputed } from 'zova';
 import { Controller } from 'zova-module-a-bean';
 import { ModelMenu } from '../../bean/model.menu.js';
 import { RouteLocationNormalizedLoaded, useRoute } from 'vue-router';
 import * as TreeLodash from 'tree-lodash';
 import { Tree } from 'tree-lodash/dist/esm/types.js';
-import { ScopeModule } from '../../.metadata/this.js';
-import { ServiceMenuEntity } from '../../service/menu.js';
+import { ApiMenuEntity } from '../../api/menu.js';
 
 export interface Props extends PropsBase<ControllerLayoutDefault, Slots> {}
 
@@ -14,12 +13,7 @@ export type Emits = {};
 export interface Slots {}
 
 @Controller()
-export class ControllerLayoutDefault extends BeanControllerBase<
-  ScopeModule,
-  RequiredSome<Props, keyof typeof ControllerLayoutDefault.$propsDefault>,
-  Emits,
-  Slots
-> {
+export class ControllerLayoutDefault extends BeanControllerBase {
   static $propsDefault = {};
 
   @Use()
@@ -48,7 +42,7 @@ export class ControllerLayoutDefault extends BeanControllerBase<
     if (queryMenus.error) throw queryMenus.error;
   }
 
-  private _calcActiveMenuItemKey(menuItemsSrc: ServiceMenuEntity[], route: RouteLocationNormalizedLoaded) {
+  private _calcActiveMenuItemKey(menuItemsSrc: ApiMenuEntity[], route: RouteLocationNormalizedLoaded) {
     const tree: Tree<'children'> = {
       key: '',
       children: menuItemsSrc,
@@ -59,7 +53,7 @@ export class ControllerLayoutDefault extends BeanControllerBase<
     return menuItem?.key;
   }
 
-  private _calcActiveMenuSubKeys(menuItemsSrc: ServiceMenuEntity[]) {
+  private _calcActiveMenuSubKeys(menuItemsSrc: ApiMenuEntity[]) {
     const tree: Tree<'children'> = {
       key: '',
       children: menuItemsSrc,

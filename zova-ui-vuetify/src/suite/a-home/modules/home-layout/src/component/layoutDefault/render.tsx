@@ -16,11 +16,11 @@ import {
 import { JSX } from 'vue/jsx-runtime';
 import EssentialLink from '../essentialLink/index.vue';
 import { RouterView } from 'vue-router';
-import { ServiceMenuEntity } from '../../service/menu.js';
+import { ApiMenuEntity } from '../../api/menu.js';
 
 @Render()
 export class RenderLayoutDefault extends BeanRenderBase {
-  _renderMenuItem(item: ServiceMenuEntity) {
+  _renderMenuItem(item: ApiMenuEntity) {
     if (item.separator) {
       return <VDivider></VDivider>;
     }

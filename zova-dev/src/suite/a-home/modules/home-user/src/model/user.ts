@@ -1,11 +1,11 @@
 import { Use } from 'zova';
 import { BeanModelBase, Model } from 'zova-module-a-model';
 import { ModelAuth } from 'zova-module-home-user';
-import { ServiceUserEntity } from '../service/user.js';
+import { ApiUserEntity } from '../api/user.js';
 
 @Model()
 export class ModelUser extends BeanModelBase {
-  user?: ServiceUserEntity;
+  user?: ApiUserEntity;
   @Use()
   $$modelAuth: ModelAuth;
 

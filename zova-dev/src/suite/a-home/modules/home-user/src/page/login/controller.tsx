@@ -1,6 +1,6 @@
 import { BeanControllerPageBase, Use } from 'zova';
 import { Controller } from 'zova-module-a-bean';
-import { ServiceAuthLoginParams } from '../../service/auth.js';
+import { ApiAuthLoginParams } from '../../api/auth.js';
 import { ModelAuth } from '../../model/auth.js';
 import { withModifiers } from 'vue';
 
@@ -9,7 +9,7 @@ export class ControllerPageLogin extends BeanControllerPageBase {
   @Use()
   $$modelAuth: ModelAuth;
 
-  user: ServiceAuthLoginParams = {
+  user: ApiAuthLoginParams = {
     username: 'admin',
     password: '',
   };

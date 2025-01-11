@@ -12,15 +12,15 @@ Enter the name of service according to the prompt, such as `menu`. The VSCode ex
 
 Take the module `home-layout` as an example, and get the menu by calling the Api `/home/layout/menu/select`. Then, you can define the Api service as follows:
 
-`src/suite/a-home/modules/home-layout/src/service/menu.ts`
+`src/suite/a-home/modules/home-layout/src/api/menu.ts`
 
 ```typescript
 import { ZovaApplication } from 'zova';
-import { ServiceMenuEntity } from '../interface/menu.js';
+import { ApiMenuEntity } from '../interface/menu.js';
 
 export default (app: ZovaApplication) => {
   return {
-    select: () => app.meta.$fetch.get<any, ServiceMenuEntity[]>('/home/layout/menu/select'),
+    select: () => app.meta.$fetch.get<any, ApiMenuEntity[]>('/home/layout/menu/select'),
   };
 };
 ```
