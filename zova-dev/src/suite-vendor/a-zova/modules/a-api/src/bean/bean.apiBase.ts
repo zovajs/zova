@@ -2,7 +2,7 @@ import { BeanBase } from 'zova';
 import { Virtual } from 'zova-module-a-bean';
 
 @Virtual()
-export class BeanServiceBase extends BeanBase {
+export class BeanApiBase extends BeanBase {
   $pathTranslate(pathName: string, pathParams?: Record<string, any>): string {
     return this.app.util.apiServiceActionPathTranslate(pathName, pathParams);
   }

@@ -1,4 +1,4 @@
-import { BeanServiceBase, Service } from 'zova-module-a-api';
+import { Api, BeanApiBase } from 'zova-module-a-api';
 import { ServiceUserEntity } from './user.js';
 
 export interface ServiceAuthJWT {
@@ -17,8 +17,8 @@ export interface ServiceAuthLoginResult {
   jwt?: ServiceAuthJWT;
 }
 
-@Service()
-export class ServiceAuth extends BeanServiceBase {
+@Api()
+export class ServiceAuth extends BeanApiBase {
   login(params: ServiceAuthLoginParams) {
     return this.$fetch.post<any, ServiceAuthLoginResult, ServiceAuthLoginParams>('/home/user/login', params);
   }
