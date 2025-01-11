@@ -1,4 +1,4 @@
-import { BeanServiceBase, IApiServiceActionOptions, Service } from 'zova-module-a-api';
+import { BeanServiceBase, IApiActionOptions, Service } from 'zova-module-a-api';
 import { ApiBaseURL, type components, type paths } from './openapi/index.js';
 
 /** Onion_index */
@@ -68,7 +68,7 @@ export type ServiceServiceOnionecho5ResponseBody =
 
 @Service()
 export class ServiceOnion extends BeanServiceBase {
-  index(options?: IApiServiceActionOptions) {
+  index(options?: IApiActionOptions) {
     return this.$fetch.get<any, ServiceServiceOnionindexResponseBody>(
       ServiceServiceOnionindexPath,
       this.$configPrepare(ApiBaseURL, options),
@@ -79,7 +79,7 @@ export class ServiceOnion extends BeanServiceBase {
     body: ServiceServiceOnionechoRequestBody,
     options?: {
       query?: ServiceServiceOnionechoRequestQuery;
-    } & IApiServiceActionOptions,
+    } & IApiActionOptions,
   ) {
     return this.$fetch.post<any, ServiceServiceOnionechoResponseBody>(
       ServiceServiceOnionechoPath,
@@ -93,7 +93,7 @@ export class ServiceOnion extends BeanServiceBase {
     options: {
       params: ServiceServiceOnionecho2RequestParams;
       query: ServiceServiceOnionecho2RequestQuery;
-    } & IApiServiceActionOptions,
+    } & IApiActionOptions,
   ) {
     return this.$fetch.post<any, ServiceServiceOnionecho2ResponseBody>(
       this.$pathTranslate(ServiceServiceOnionecho2Path, options.params),
@@ -107,7 +107,7 @@ export class ServiceOnion extends BeanServiceBase {
       params: ServiceServiceOnionecho3RequestParams;
       query?: ServiceServiceOnionecho3RequestQuery;
       headers: ServiceServiceOnionecho3RequestHeaders;
-    } & IApiServiceActionOptions,
+    } & IApiActionOptions,
   ) {
     return this.$fetch.get<any, ServiceServiceOnionecho3ResponseBody>(
       this.$pathTranslate(ServiceServiceOnionecho3Path, options.params),
@@ -115,7 +115,7 @@ export class ServiceOnion extends BeanServiceBase {
     );
   }
 
-  echo4(body?: ServiceServiceOnionecho4RequestBody | undefined, options?: IApiServiceActionOptions) {
+  echo4(body?: ServiceServiceOnionecho4RequestBody | undefined, options?: IApiActionOptions) {
     return this.$fetch.post<any, ServiceServiceOnionecho4ResponseBody>(
       ServiceServiceOnionecho4Path,
       body,
@@ -126,7 +126,7 @@ export class ServiceOnion extends BeanServiceBase {
   echo5(
     options?: {
       query?: ServiceServiceOnionecho5RequestQuery;
-    } & IApiServiceActionOptions,
+    } & IApiActionOptions,
   ) {
     return this.$fetch.get<any, ServiceServiceOnionecho5ResponseBody>(
       ServiceServiceOnionecho5Path,

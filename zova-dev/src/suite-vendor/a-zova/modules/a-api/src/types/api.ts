@@ -1,7 +1,7 @@
-export interface IApiServiceActionOptions {}
+export interface IApiActionOptions {}
 
 declare module 'zova' {
   export interface IBeanSceneRecord {
-    service: never;
+    api: never;
   }
 }

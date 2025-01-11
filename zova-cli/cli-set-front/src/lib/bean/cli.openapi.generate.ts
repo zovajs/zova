@@ -227,8 +227,8 @@ export class CliOpenapiGenerate extends BeanCliBase {
     }
     const contentOptions2 =
       contentOptions.length > 0
-        ? `options${_q(contentOptionsQuestion)}: {\n${contentOptions.join('\n')}\n} & IApiServiceActionOptions,`
-        : `options${_q(contentOptionsQuestion)}: IApiServiceActionOptions,`;
+        ? `options${_q(contentOptionsQuestion)}: {\n${contentOptions.join('\n')}\n} & IApiActionOptions,`
+        : `options${_q(contentOptionsQuestion)}: IApiActionOptions,`;
     // content: request body
     let contentRequestBody = '';
     if (!['get', 'delete'].includes(pathInfo.method)) {
@@ -278,7 +278,7 @@ export class CliOpenapiGenerate extends BeanCliBase {
     if (contentTypes2.includes('paths[')) importsType.push('type paths');
     const contentImportsType =
       importsType.length > 0 ? `import { ${importsType.join(', ')} } from './openapi/index.js';` : '';
-    const serviceContent = `import { BeanServiceBase, IApiServiceActionOptions, Service } from 'zova-module-a-api';
+    const serviceContent = `import { BeanServiceBase, IApiActionOptions, Service } from 'zova-module-a-api';
 ${contentImportsType}
 
 ${contentTypes2}
