@@ -6,8 +6,8 @@ export default async function (options: IMetadataCustomGenerateOptions): Promise
   const { modulePath } = options;
   const contentExports: string[] = [];
   // openapi
-  if (fse.existsSync(path.join(modulePath, 'src/service/openapi/index.ts'))) {
-    contentExports.push("export * from '../service/openapi/index.js';");
+  if (fse.existsSync(path.join(modulePath, 'src/api/openapi/index.ts'))) {
+    contentExports.push("export * from '../api/openapi/index.js';");
   }
   // combine
   const content = `/** openapi: begin */
