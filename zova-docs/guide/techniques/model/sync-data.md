@@ -39,7 +39,7 @@ The following demonstrates storing user information in localstorage, and the sta
 
 ```typescript
 export class ModelUser extends BeanModelBase {
-  user?: ServiceUserEntity;
+  user?: ApiUserEntity;
 
   protected async __init__() {
     this.user = this.$useQueryLocal({

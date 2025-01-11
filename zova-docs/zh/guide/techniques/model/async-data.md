@@ -100,12 +100,12 @@ export class ControllerPageTodo {
 ```typescript
 @Model()
 export class ModelTodo {
-  get(params?: ServiceTodoGetParams) {
+  get(params?: ApiTodoGetParams) {
     if (!params) return undefined;
     return this.$useQueryExisting({
       queryKey: ['get', params.id],
       queryFn: async () => {
-        return this.scope.service.todo.get(params);
+        return this.scope.api.todo.get(params);
       },
     });
   }
@@ -150,10 +150,10 @@ export class RenderTodo {
 @Model()
 export class ModelTodo {
   insert() {
-    return this.$useMutationExisting<void, ServiceTodoIntertParams>({
+    return this.$useMutationExisting<void, ApiTodoIntertParams>({
       mutationKey: ['insert'],
       mutationFn: async params => {
-        return this.scope.service.todo.insert(params);
+        return this.scope.api.todo.insert(params);
       },
       onSuccess: () => {
         this.$invalidateQueries({ queryKey: ['select'] });
@@ -194,10 +194,10 @@ async addTodo() {
 @Model()
 export class ModelTodo {
   update() {
-    return this.$useMutationExisting<void, ServiceTodoUpdateParams>({
+    return this.$useMutationExisting<void, ApiTodoUpdateParams>({
       mutationKey: ['update'],
       mutationFn: async params => {
-        return this.scope.service.todo.update(params);
+        return this.scope.api.todo.update(params);
       },
       onSuccess: (_data, params) => {
         this.$invalidateQueries({ queryKey: ['select'] });
@@ -216,7 +216,7 @@ export class ModelTodo {
 ### 如何使用
 
 ```typescript
-async completeTodo(item: ServiceTodoEntity) {
+async completeTodo(item: ApiTodoEntity) {
   const todo = { ...item, done: true };
   await this.$$modelTodo.update().mutateAsync(todo);
 }
@@ -235,10 +235,10 @@ async completeTodo(item: ServiceTodoEntity) {
 @Model()
 export class ModelTodo {
   delete() {
-    return this.$useMutationExisting<void, ServiceTodoDeleteParams>({
+    return this.$useMutationExisting<void, ApiTodoDeleteParams>({
       mutationKey: ['delete'],
       mutationFn: async params => {
-        return this.scope.service.todo.delete(params);
+        return this.scope.api.todo.delete(params);
       },
       onSuccess: (_data, params) => {
         this.$invalidateQueries({ queryKey: ['select'] });
@@ -257,7 +257,7 @@ export class ModelTodo {
 ### 如何使用
 
 ```typescript
-async deleteTodo(item: ServiceTodoEntity) {
+async deleteTodo(item: ApiTodoEntity) {
   await this.$$modelTodo.delete().mutateAsync({ id: item.id });
 }
 ```

@@ -9,12 +9,12 @@ Zova provides a module `home-base`, which provides a basic `Fetch` code skeleton
 
 For example, load menu data:
 
-`src/suite/a-home/modules/home-layout/src/service/menu.ts`
+`src/suite/a-home/modules/home-layout/src/api/menu.ts`
 
 ```typescript
 export default (app: ZovaApplication) => {
   return {
-    select: () => app.meta.$fetch.get<any, ServiceMenuEntity[]>('/home/layout/menu/select'),
+    select: () => app.meta.$fetch.get<any, ApiMenuEntity[]>('/home/layout/menu/select'),
   };
 };
 ```

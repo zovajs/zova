@@ -7,6 +7,6 @@ declare module 'zova' {
   }
   export interface BeanBase {
     $fetch: BeanFetch;
-    $service: IModuleApi;
+    $api: IModuleApi;
   }
 }

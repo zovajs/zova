@@ -43,7 +43,7 @@ Create a Mutation object and return it directly if it already exists
 @Model()
 export class ModelTodo {
   insert() {
-    return this.$useMutationExisting<void, ServiceTodoIntertParams>({
+    return this.$useMutationExisting<void, ApiTodoIntertParams>({
       mutationKey: ['insert'],
       mutationFn: async params => {
         return this.scope.service.todo.insert(params);
@@ -98,7 +98,7 @@ Create a Query object based on localstorage
 
 ```typescript
 export class ModelUser extends BeanModelBase {
-  user?: ServiceUserEntity;
+  user?: ApiUserEntity;
 
   protected async __init__() {
     this.user = this.$useQueryLocal({

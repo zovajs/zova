@@ -8,7 +8,7 @@ In actual projects, we often encounter cross-module resource access scenarios. S
 
 ## Modular system and task description
 
-The front and back ends of the Cabloy5 full-stack framework adopt a modular system. A Cabloy5 project consists of multiple business modules. Each business module can contain resources related to its own business, such as: Service service, Config configuration, international language resources, Error exception, middleware, scheduled tasks, message queue, System startup items, etc.
+The front and back ends of the Cabloy5 full-stack framework adopt a modular system. A Cabloy5 project consists of multiple business modules. Each business module can contain resources related to its own business, such as: Api service, Config configuration, international language resources, Error exception, middleware, scheduled tasks, message queue, System startup items, etc.
 
 Here, we create a new business module `test-work` and access the resources provided by `demo-basic` in `test-work`
 

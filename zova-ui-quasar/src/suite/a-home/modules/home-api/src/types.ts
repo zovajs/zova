@@ -1,4 +1,4 @@
-import { IModuleService } from './.metadata/index.jsx';
+import { IModuleApi } from './.metadata/index.jsx';
 import { BeanFetch } from './bean/bean.api.js';
 
 declare module 'zova' {
@@ -7,6 +7,6 @@ declare module 'zova' {
   }
   export interface BeanBase {
     $fetch: BeanFetch;
-    $service: IModuleService;
+    $api: IModuleApi;
   }
 }

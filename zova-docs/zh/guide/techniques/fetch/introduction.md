@@ -9,12 +9,12 @@ Zova 提供了一个模块`home-base`，该模块基于[axios](https://axios-htt
 
 比如，获取菜单数据：
 
-`src/suite/a-home/modules/home-layout/src/service/menu.ts`
+`src/suite/a-home/modules/home-layout/src/api/menu.ts`
 
 ```typescript
 export default (app: ZovaApplication) => {
   return {
-    select: () => app.meta.$fetch.get<any, ServiceMenuEntity[]>('/home/layout/menu/select'),
+    select: () => app.meta.$fetch.get<any, ApiMenuEntity[]>('/home/layout/menu/select'),
   };
 };
 ```

@@ -43,10 +43,10 @@ export class ModelTodo {
 @Model()
 export class ModelTodo {
   insert() {
-    return this.$useMutationExisting<void, ServiceTodoIntertParams>({
+    return this.$useMutationExisting<void, ApiTodoIntertParams>({
       mutationKey: ['insert'],
       mutationFn: async params => {
-        return this.scope.service.todo.insert(params);
+        return this.scope.api.todo.insert(params);
       },
       onSuccess: () => {
         this.$invalidateQueries({ queryKey: ['select'] });
@@ -98,7 +98,7 @@ this.$invalidateQueries({ queryKey: ['get', params.id] });
 
 ```typescript
 export class ModelUser extends BeanModelBase {
-  user?: ServiceUserEntity;
+  user?: ApiUserEntity;
 
   protected async __init__() {
     this.user = this.$useQueryLocal({

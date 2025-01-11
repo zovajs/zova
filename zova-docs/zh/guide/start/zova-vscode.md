@@ -10,7 +10,7 @@ An extension offering commands and tools to make your experience with Zova more 
 - Module
 - Page
 - Component
-- Service
+- Api
 - Mock
 
 ### Zova Bean

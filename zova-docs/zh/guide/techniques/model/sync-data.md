@@ -39,7 +39,7 @@ export class ModelUser extends BeanModelBase {}
 
 ```typescript
 export class ModelUser extends BeanModelBase {
-  user?: ServiceUserEntity;
+  user?: ApiUserEntity;
 
   protected async __init__() {
     this.user = this.$useQueryLocal({
