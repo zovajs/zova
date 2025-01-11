@@ -1,4 +1,4 @@
-import { BeanApiBase, IApiActionOptions, Api } from 'zova-module-a-api';
+import { Api, BeanApiBase, IApiActionOptions } from 'zova-module-a-api';
 import { ApiBaseURL, type components, type paths } from './openapi/index.js';
 
 /** Onion_index */
