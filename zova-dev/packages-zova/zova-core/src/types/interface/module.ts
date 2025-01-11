@@ -11,7 +11,6 @@ export type TypeModuleResourceLocaleModules = Record<string, TypeModuleResourceL
 export type TypeModuleResourceErrors = Record<number, string>;
 export type TypeModuleResourceErrorModules = Record<string, TypeModuleResourceErrors>;
 export type TypeModuleResourceComponents = Record<string, Component>;
-export type TypeModuleResourceServices = Record<string, (app: ZovaApplication) => object>;
 export type TypeModuleResourceConfig = (app: ZovaApplication, meta?: ZovaConfigMeta) => object | Promise<object>;
 
 export interface IModuleResource {
@@ -23,7 +22,6 @@ export interface IModuleResource {
   constants: unknown;
   icons: TypeModuleResourceIcons;
   components: TypeModuleResourceComponents;
-  services: TypeModuleResourceServices;
 }
 
 export const SymbolInstalled = Symbol('SymbolInstalled');

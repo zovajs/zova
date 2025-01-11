@@ -1,10 +1,5 @@
 import { BeanModelBase, Model } from 'zova-module-a-model';
-import {
-  ServiceTodoDeleteParams,
-  ServiceTodoGetParams,
-  ServiceTodoIntertParams,
-  ServiceTodoUpdateParams,
-} from '../service/todo.js';
+import { ApiTodoDeleteParams, ApiTodoGetParams, ApiTodoIntertParams, ApiTodoUpdateParams } from '../api/todo.js';
 
 @Model()
 export class ModelTodo extends BeanModelBase {
@@ -12,26 +7,26 @@ export class ModelTodo extends BeanModelBase {
     return this.$useQueryExisting({
       queryKey: ['select'],
       queryFn: async () => {
-        return this.scope.service.todo.select();
+        return this.scope.api.todo.select();
       },
     });
   }
 
-  get(params?: ServiceTodoGetParams) {
+  get(params?: ApiTodoGetParams) {
     if (!params) return undefined;
     return this.$useQueryExisting({
       queryKey: ['get', params.id],
       queryFn: async () => {
-        return this.scope.service.todo.get(params);
+        return this.scope.api.todo.get(params);
       },
     });
   }
 
   insert() {
-    return this.$useMutationExisting<void, ServiceTodoIntertParams>({
+    return this.$useMutationExisting<void, ApiTodoIntertParams>({
       mutationKey: ['insert'],
       mutationFn: async params => {
-        return this.scope.service.todo.insert(params);
+        return this.scope.api.todo.insert(params);
       },
       onSuccess: () => {
         this.$invalidateQueries({ queryKey: ['select'] });
@@ -40,10 +35,10 @@ export class ModelTodo extends BeanModelBase {
   }
 
   update() {
-    return this.$useMutationExisting<void, ServiceTodoUpdateParams>({
+    return this.$useMutationExisting<void, ApiTodoUpdateParams>({
       mutationKey: ['update'],
       mutationFn: async params => {
-        return this.scope.service.todo.update(params);
+        return this.scope.api.todo.update(params);
       },
       onSuccess: (_data, params) => {
         this.$invalidateQueries({ queryKey: ['select'] });
@@ -53,10 +48,10 @@ export class ModelTodo extends BeanModelBase {
   }
 
   delete() {
-    return this.$useMutationExisting<void, ServiceTodoDeleteParams>({
+    return this.$useMutationExisting<void, ApiTodoDeleteParams>({
       mutationKey: ['delete'],
       mutationFn: async params => {
-        return this.scope.service.todo.delete(params);
+        return this.scope.api.todo.delete(params);
       },
       onSuccess: (_data, params) => {
         this.$invalidateQueries({ queryKey: ['select'] });
