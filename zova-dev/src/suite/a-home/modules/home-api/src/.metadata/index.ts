@@ -1,5 +1,6 @@
 /** api: begin */
 export * from '../api/home.js';
+export * from '../api/onion.js';
 
 import 'zova';
 declare module 'zova' {}
@@ -8,12 +9,19 @@ declare module 'zova-module-home-api' {
     /** @internal */
     get scope(): ScopeModuleHomeApi;
   }
+
+  export interface ApiOnion {
+    /** @internal */
+    get scope(): ScopeModuleHomeApi;
+  }
 }
 /** api: end */
 /** api: begin */
 import { ApiHome } from '../api/home.js';
+import { ApiOnion } from '../api/onion.js';
 export interface IModuleApi {
   home: ApiHome;
+  onion: ApiOnion;
 }
 /** api: end */
 /** api: begin */
@@ -22,6 +30,7 @@ import 'zova';
 declare module 'zova' {
   export interface IBeanRecordGeneral {
     'home-api.api.home': ApiHome;
+    'home-api.api.onion': ApiOnion;
   }
 }
 /** api: end */
