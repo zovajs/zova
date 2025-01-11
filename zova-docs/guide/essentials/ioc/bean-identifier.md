@@ -25,7 +25,7 @@ Assume that a store bean `userInfo` is defined in the module `demo-basic` and th
 ```typescript{1,5-6,9-10}
 import type { StoreUserInfo } from 'zova-module-demo-basic';
 
-@Local()
+@Controller()
 export class ControllerPageCounter {
   @Use('demo-basic.store.userInfo')
   $$userInfo: StoreUserInfo;
@@ -46,7 +46,7 @@ In order to simplify the code, we can still use the `Class-type-based` code styl
 ```typescript{1,5-6,9-10}
 import { StoreUserInfo } from 'zova-module-demo-basic';
 
-@Local()
+@Controller()
 export class ControllerPageCounter {
   @Use()
   $$userInfo: StoreUserInfo;

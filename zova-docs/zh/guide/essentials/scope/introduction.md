@@ -10,14 +10,11 @@
 
 所有 bean 都继承自基类`BeanBase`，`BeanBase`支持传入范型参数`ScopeModule`。当传入范型参数`ScopeModule`之后就可以直接获取到当前 bean 所属模块的`Scope`实例
 
-以`testA.ts`为例：
+以`service.testA.ts`为例：
 
-```typescript{2,5,7}
-import { BeanBase, Local } from 'zova';
-import { ScopeModule } from '../.metadata/this.js';
-
-@Local()
-export class TestA extends BeanBase<ScopeModule> {
+```typescript
+@Service()
+export class ServiceTestA extends BeanBase {
   protected async __init__() {
     console.log(this.scope);
   }
@@ -34,7 +31,7 @@ export class TestA extends BeanBase<ScopeModule> {
 | constant | 模块的常量定义   |
 | locale   | 模块的I18n国际化 |
 | error    | 模块的错误异常   |
-| service  | 模块的Api服务    |
+| api      | 模块的Api资源    |
 
 ## 跨模块访问Scope实例
 

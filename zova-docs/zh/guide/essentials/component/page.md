@@ -64,7 +64,7 @@ useControllerPage(ControllerPageCounter, RenderCounter, StyleCounter);
 ## controller.ts
 
 ```typescript
-@Local()
+@Controller()
 export class ControllerPageCounter {
   count: number = 0;
 
@@ -78,14 +78,14 @@ export class ControllerPageCounter {
 }
 ```
 
-1. 使用`@Local`将`controller`定义为 local bean，从而注册在 IOC 容器中
+1. 定义一个 controller bean
 2. 定义一个响应式属性：`count`，类型为`number`
 3. 直接用原生 js 代码来修改`count`的值
 
 ## render.tsx
 
 ```typescript
-@Local()
+@Render()
 export class RenderCounter {
   render() {
     return (
@@ -99,18 +99,18 @@ export class RenderCounter {
 }
 ```
 
-1. 使用`@Local`将`render`定义为 local bean，从而注册在 IOC 容器中
+1. 定义一个 render bean
 2. 在`render`方法中使用`tsx`语法书写渲染逻辑
 3. 直接用原生 js 代码来获取`count`的值
 
 ## style.ts
 
 ```typescript
-@Local()
+@Style()
 export class StyleCounter {}
 ```
 
-1. 使用`@Local`将`style`定义为 local bean，从而注册在 IOC 容器中
+1. 定义一个 style bean
 2. 支持强大的 css-in-js 能力，参见：[CSS-in-JS: Style & Theme](../../techniques/css-in-js/introduction.md)
 
 ## 页面参数

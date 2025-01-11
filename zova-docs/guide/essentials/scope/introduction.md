@@ -10,14 +10,11 @@ The reason is to prioritize the use of the `dependency lookup` strategy, resulti
 
 All beans inherit from the base class `BeanBase`, and `BeanBase` supports passing in the generic parameter `ScopeModule`. When the generic parameter `ScopeModule` is passed in, the `Scope` instance of the module to which the current bean belongs can be directly obtained
 
-Take `testA.ts` as an example：
+Take `service.testA.ts` as an example：
 
-```typescript{2,5,7}
-import { BeanBase, Local } from 'zova';
-import { ScopeModule } from '../.metadata/this.js';
-
-@Local()
-export class TestA extends BeanBase<ScopeModule> {
+```typescript
+@Service()
+export class ServiceTestA extends BeanBase {
   protected async __init__() {
     console.log(this.scope);
   }

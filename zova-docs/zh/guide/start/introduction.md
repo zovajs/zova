@@ -91,11 +91,11 @@ export class RenderCounter {
 
 ### 1. 逻辑抽离
 
-将`count`逻辑抽离出来，创建一个`Counter`Bean
+将`count`逻辑抽离出来，创建一个`Service`Bean
 
 ```typescript
-@Local()
-export class Counter {
+@Service()
+export class ServiceCounter {
   count: number = 0;
 
   increment() {
@@ -113,7 +113,7 @@ export class Counter {
 ```typescript
 export class ControllerPageCounter {
   @Use()
-  $$counter: Counter;
+  $$counter: ServiceCounter;
 }
 ```
 

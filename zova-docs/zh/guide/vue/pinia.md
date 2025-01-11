@@ -79,10 +79,9 @@ export class StoreCounter extends BeanPiniaStoreBase {
 `src/suite/a-demo/modules/demo-basic/src/page/pinia/controller.ts`
 
 ```typescript
-import { Local, Use } from 'zova';
 import { StoreCounter } from '../../bean/store.counter.js';
 
-@Local()
+@Controller()
 export class ControllerPagePinia {
   @Use()
   $$counter: StoreCounter;
@@ -96,6 +95,6 @@ export class ControllerPagePinia {
 }
 ```
 
-- line 6: 使用@Use 装饰器函数
-- line 7: 声明一个变量，类型为 StoreCounter
+- line 5: 使用@Use 装饰器函数
+- line 6: 声明一个变量，类型为 StoreCounter
 - 接下来就可以直接访问$$counter 的属性和方法，有完整的 Typescript 类型提示

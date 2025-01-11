@@ -7,7 +7,7 @@
 ```typescript
 import { ClientOnly } from 'zova';
 
-@Local()
+@Render()
 export class RenderTabs {
   render() {
     return (

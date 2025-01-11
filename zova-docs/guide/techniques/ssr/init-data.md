@@ -11,7 +11,7 @@ The following takes the page component `todo` of the module `demo-todo` as an ex
 ```typescript
 import { ModelTodo } from '../../bean/model.todo.js';
 
-@Local()
+@Controller()
 export class ControllerPageTodo {
   @Use()
   $$modelTodo: ModelTodo;

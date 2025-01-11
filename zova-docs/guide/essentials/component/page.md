@@ -64,7 +64,7 @@ useControllerPage(ControllerPageCounter, RenderCounter, StyleCounter);
 ## controller.ts
 
 ```typescript
-@Local()
+@Controller()
 export class ControllerPageCounter {
   count: number = 0;
 
@@ -78,14 +78,14 @@ export class ControllerPageCounter {
 }
 ```
 
-1. Define `controller` as a local bean using `@Local` to register it in the ioc container
+1. Define a controller bean
 2. Define a reactive state `count` of type `number`
 3. Directly modify the value of `count` by vanilla javascript
 
 ## render.tsx
 
 ```typescript
-@Local()
+@Render()
 export class RenderCounter {
   render() {
     return (
@@ -99,18 +99,18 @@ export class RenderCounter {
 }
 ```
 
-1. Define `render` as a local bean using `@Local` to register it in the ioc container
+1. Define a render bean
 2. Write rendering logic using the `tsx` syntax in the `render` method
 3. Directly obtain the value of `count` by vanilla javascript
 
 ## style.ts
 
 ```typescript
-@Local()
+@Style()
 export class StyleCounter {}
 ```
 
-1. Define `style` as a local bean using `@Local` to register it in the ioc container
+1. Define a style bean
 2. Support powerful `css-in-js` capabilities, see: [CSS-in-JS: Style & Theme](../../techniques/css-in-js/introduction.md)
 
 ## Page Parameters

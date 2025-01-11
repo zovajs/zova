@@ -34,10 +34,9 @@ Take the existing page component of module `demo-basic` as an example:
 `src/suite/a-demo/modules/demo-basic/src/page/state/controller.ts`
 
 ```typescript
-import { BeanControllerPageBase, Local, type ReturnTypeComposable, UseComposable } from 'zova';
 import { useMouse } from './mouse.js';
 
-@Local()
+@Controller()
 export class ControllerPageState extends BeanControllerPageBase {
   @UseComposable(useMouse)
   $$mouse: ReturnTypeComposable<typeof useMouse>;
@@ -50,7 +49,7 @@ export class ControllerPageState extends BeanControllerPageBase {
 `src/suite/a-demo/modules/demo-basic/src/page/state/render.tsx`
 
 ```typescript
-@Local()
+@Controller()
 export class RenderState extends BeanRenderBase {
   render() {
     return (

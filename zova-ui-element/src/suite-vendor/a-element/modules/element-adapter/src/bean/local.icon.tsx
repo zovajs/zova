@@ -1,13 +1,13 @@
-import { BeanBase, ZovaIcon, getZovaIcon, Local, useApp } from 'zova';
+import { BeanBase, ZovaIcon, getZovaIcon, useApp } from 'zova';
 import { useNamespace } from 'element-plus/es/hooks/use-namespace/index.mjs';
 import { addUnit } from 'element-plus/es/utils/dom/style.mjs';
 import { isUndefined } from 'element-plus/es/utils/types.mjs';
 import { Text, computed, createVNode, mergeProps, onServerPrefetch, unref } from 'vue';
-import { ScopeModule } from '../.metadata/this.js';
 import { ElIcon } from 'element-plus';
+import { Service } from 'zova-module-a-bean';
 
-@Local()
-export class LocalIcon extends BeanBase<ScopeModule> {
+@Service()
+export class ServiceIcon extends BeanBase {
   public async initialize() {
     this._patchSetup();
   }

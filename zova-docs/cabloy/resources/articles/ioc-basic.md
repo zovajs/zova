@@ -19,18 +19,16 @@ TS-based backend frameworks typically provide dependency containers to achieve i
 
 ### 1. Create a Service
 
-In Cabloy5, local bean is equivalent to the concept of service in NestJS. Here is an example of creating a local bean
+In Cabloy5, local bean is equivalent to the concept of service in NestJS. Here is an example of creating a service bean
 
 ```javascript
-@Local()
-export class LocalHome {
+@Service()
+export class ServiceHome {
   async echo() {
     return `Hello World!`;
   }
 }
 ```
-
-1. LocalHome is declared as a local bean with `@Local`
 
 ### 2. Dependency injection for Service
 

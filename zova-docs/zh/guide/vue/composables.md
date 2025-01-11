@@ -34,23 +34,22 @@ export function useMouse() {
 `src/suite/a-demo/modules/demo-basic/src/page/state/controller.ts`
 
 ```typescript
-import { BeanControllerPageBase, Local, type ReturnTypeComposable, UseComposable } from 'zova';
 import { useMouse } from './mouse.js';
 
-@Local()
+@Controller()
 export class ControllerPageState extends BeanControllerPageBase {
   @UseComposable(useMouse)
   $$mouse: ReturnTypeComposable<typeof useMouse>;
 }
 ```
 
-- line 6: 使用@UseComposable 装饰器函数，传入需要使用的 composable
-- line 7: 声明变量$$mouse，并通过类型工具 ReturnTypeComposable 生成 composable 的类型
+- line 5: 使用@UseComposable 装饰器函数，传入需要使用的 composable
+- line 6: 声明变量$$mouse，并通过类型工具 ReturnTypeComposable 生成 composable 的类型
 
 `src/suite/a-demo/modules/demo-basic/src/page/state/render.tsx`
 
 ```typescript
-@Local()
+@Render()
 export class RenderState extends BeanRenderBase {
   render() {
     return (

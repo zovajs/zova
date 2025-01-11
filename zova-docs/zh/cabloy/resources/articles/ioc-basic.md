@@ -19,30 +19,26 @@
 
 ### 1\. 创建一个Service
 
-在 Cabloy5 中，local bean 相当于 nestjs 中 service 的概念，下面创建一个 local bean
-
 ```javascript
-@Local()
-export class LocalHome {
+@Service()
+export class ServiceHome {
   async echo() {
     return `Hello World!`;
   }
 }
 ```
 
-1. 通过`@Local`声明 LocalHome 是一个 local bean
-
 ### 2\. Service的依赖注入
 
-接下来，在 Controller 中采用依赖注入的方式来使用 LocalHome
+接下来，在 Controller 中采用依赖注入的方式来使用 ServiceHome
 
 ```javascript
-import { LocalHome } from '../local/home.js';
+import { ServiceHome } from '../service/home.js';
 
 @Controller()
 export class ControllerHome {
   @Use()
-  home: LocalHome;
+  home: ServiceHome;
 
   async echo() {
     const res = await this.home.echo({
@@ -62,7 +58,7 @@ export class ControllerHome {
 ```javascript
 export class ControllerHome {
   async echo() {
-    const res = await this.scope.local.home.echo({
+    const res = await this.scope.service.home.echo({
       user: this.ctx.state.user.op,
     });
     this.ctx.success(res);
@@ -70,7 +66,7 @@ export class ControllerHome {
 }
 ```
 
-1. 不需要导入 LocalHome，直接在代码中使用`this.scope.local`来访问容器中的 local bean 实例
+1. 不需要导入 ServiceHome，直接在代码中使用`this.scope.service`来访问容器中的 service bean 实例
 
 看一下动画演示，提供了完整的类型智能提示：
 

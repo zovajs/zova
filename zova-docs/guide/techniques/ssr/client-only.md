@@ -7,7 +7,7 @@ If some components only support client-side rendering, you can wrap them with `C
 ```typescript
 import { ClientOnly } from 'zova';
 
-@Local()
+@Render()
 export class RenderTabs {
   render() {
     return (

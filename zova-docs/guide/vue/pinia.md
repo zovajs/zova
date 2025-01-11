@@ -79,10 +79,9 @@ You can use store bean in any module. Here we take the existing page component o
 `src/suite/a-demo/modules/demo-basic/src/page/pinia/controller.ts`
 
 ```typescript
-import { Local, Use } from 'zova';
 import { StoreCounter } from '../../bean/store.counter.js';
 
-@Local()
+@Controller()
 export class ControllerPagePinia {
   @Use()
   $$counter: StoreCounter;

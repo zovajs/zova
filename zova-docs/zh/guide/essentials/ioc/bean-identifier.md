@@ -25,7 +25,7 @@
 ```typescript{1,5-6,9-10}
 import type { StoreUserInfo } from 'zova-module-demo-basic';
 
-@Local()
+@Controller()
 export class ControllerPageCounter {
   @Use('demo-basic.store.userInfo')
   $$userInfo: StoreUserInfo;
@@ -46,7 +46,7 @@ export class ControllerPageCounter {
 ```typescript{1,5-6,9-10}
 import { StoreUserInfo } from 'zova-module-demo-basic';
 
-@Local()
+@Controller()
 export class ControllerPageCounter {
   @Use()
   $$userInfo: StoreUserInfo;

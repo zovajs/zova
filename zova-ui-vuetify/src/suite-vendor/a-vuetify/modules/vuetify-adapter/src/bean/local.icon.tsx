@@ -1,5 +1,4 @@
-import { BeanBase, getZovaIcon, Local, useApp } from 'zova';
-import { ScopeModule } from '../.metadata/this.js';
+import { BeanBase, getZovaIcon, useApp } from 'zova';
 import { VIcon } from 'vuetify/components';
 import { computed, onServerPrefetch, ref, toRef } from 'vue';
 import { provideTheme } from 'vuetify/lib/composables/theme.mjs';
@@ -8,9 +7,10 @@ import { useSize } from 'vuetify/lib/composables/size.mjs';
 import { useTextColor } from 'vuetify/lib/composables/color.mjs';
 import { convertToUnit, flattenFragments } from 'vuetify/lib/util/index.mjs';
 import { VSvgIconZova } from '../component/svg.js';
+import { Service } from 'zova-module-a-bean';
 
-@Local()
-export class LocalIcon extends BeanBase<ScopeModule> {
+@Service()
+export class ServiceIcon extends BeanBase {
   public async initialize() {
     this._patchSetup();
   }

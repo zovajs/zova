@@ -82,11 +82,11 @@ export class RenderCounter {
 
 ### 1. Logic Reuse
 
-Create a `Counter` Bean to implement the logic of `count`
+Create a `Service` Bean to implement the logic of `count`
 
 ```typescript
-@Local()
-export class Counter {
+@Service()
+export class ServiceCounter {
   count: number = 0;
 
   increment() {
@@ -104,7 +104,7 @@ export class Counter {
 ```typescript
 export class ControllerPageCounter {
   @Use()
-  $$counter: Counter;
+  $$counter: ServiceCounter;
 }
 ```
 
