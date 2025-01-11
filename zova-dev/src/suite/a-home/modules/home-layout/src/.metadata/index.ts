@@ -1,30 +1,30 @@
-/** service: begin */
-export * from '../service/menu.js';
+/** api: begin */
+export * from '../api/menu.js';
 
 import 'zova';
 declare module 'zova' {}
 declare module 'zova-module-home-layout' {
-  export interface ServiceMenu {
+  export interface ApiMenu {
     /** @internal */
     get scope(): ScopeModuleHomeLayout;
   }
 }
-/** service: end */
-/** service: begin */
-import { ServiceMenu } from '../service/menu.js';
-export interface IModuleService {
-  menu: ServiceMenu;
+/** api: end */
+/** api: begin */
+import { ApiMenu } from '../api/menu.js';
+export interface IModuleApi {
+  menu: ApiMenu;
 }
-/** service: end */
-/** service: begin */
+/** api: end */
+/** api: begin */
 
 import 'zova';
 declare module 'zova' {
   export interface IBeanRecordGeneral {
-    'home-layout.service.menu': ServiceMenu;
+    'home-layout.api.menu': ApiMenu;
   }
 }
-/** service: end */
+/** api: end */
 /** openapi: begin */
 
 /** openapi: end */
@@ -291,7 +291,7 @@ export interface ScopeModuleHomeLayout {
   util: BeanScopeUtil;
   config: TypeModuleConfig<typeof config>;
   locale: TypeModuleLocales<(typeof locales)[TypeLocaleBase]>;
-  service: IModuleService;
+  api: IModuleApi;
 }
 
 import 'zova';

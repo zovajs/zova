@@ -1,39 +1,39 @@
-/** service: begin */
-export * from '../service/auth.js';
-export * from '../service/user.js';
+/** api: begin */
+export * from '../api/auth.js';
+export * from '../api/user.js';
 
 import 'zova';
 declare module 'zova' {}
 declare module 'zova-module-home-user' {
-  export interface ServiceAuth {
+  export interface ApiAuth {
     /** @internal */
     get scope(): ScopeModuleHomeUser;
   }
 
-  export interface ServiceUser {
+  export interface ApiUser {
     /** @internal */
     get scope(): ScopeModuleHomeUser;
   }
 }
-/** service: end */
-/** service: begin */
-import { ServiceAuth } from '../service/auth.js';
-import { ServiceUser } from '../service/user.js';
-export interface IModuleService {
-  auth: ServiceAuth;
-  user: ServiceUser;
+/** api: end */
+/** api: begin */
+import { ApiAuth } from '../api/auth.js';
+import { ApiUser } from '../api/user.js';
+export interface IModuleApi {
+  auth: ApiAuth;
+  user: ApiUser;
 }
-/** service: end */
-/** service: begin */
+/** api: end */
+/** api: begin */
 
 import 'zova';
 declare module 'zova' {
   export interface IBeanRecordGeneral {
-    'home-user.service.auth': ServiceAuth;
-    'home-user.service.user': ServiceUser;
+    'home-user.api.auth': ApiAuth;
+    'home-user.api.user': ApiUser;
   }
 }
-/** service: end */
+/** api: end */
 /** openapi: begin */
 
 /** openapi: end */
@@ -121,7 +121,7 @@ export class ScopeModuleHomeUser extends BeanScopeBase {}
 export interface ScopeModuleHomeUser {
   util: BeanScopeUtil;
   locale: TypeModuleLocales<(typeof locales)[TypeLocaleBase]>;
-  service: IModuleService;
+  api: IModuleApi;
 }
 
 import 'zova';

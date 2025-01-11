@@ -1,30 +1,30 @@
-/** service: begin */
-export * from '../service/todo.js';
+/** api: begin */
+export * from '../api/todo.js';
 
 import 'zova';
 declare module 'zova' {}
 declare module 'zova-module-demo-todo' {
-  export interface ServiceTodo {
+  export interface ApiTodo {
     /** @internal */
     get scope(): ScopeModuleDemoTodo;
   }
 }
-/** service: end */
-/** service: begin */
-import { ServiceTodo } from '../service/todo.js';
-export interface IModuleService {
-  todo: ServiceTodo;
+/** api: end */
+/** api: begin */
+import { ApiTodo } from '../api/todo.js';
+export interface IModuleApi {
+  todo: ApiTodo;
 }
-/** service: end */
-/** service: begin */
+/** api: end */
+/** api: begin */
 
 import 'zova';
 declare module 'zova' {
   export interface IBeanRecordGeneral {
-    'demo-todo.service.todo': ServiceTodo;
+    'demo-todo.api.todo': ApiTodo;
   }
 }
-/** service: end */
+/** api: end */
 /** openapi: begin */
 
 /** openapi: end */
@@ -125,7 +125,7 @@ export class ScopeModuleDemoTodo extends BeanScopeBase {}
 
 export interface ScopeModuleDemoTodo {
   util: BeanScopeUtil;
-  service: IModuleService;
+  api: IModuleApi;
 }
 
 import 'zova';

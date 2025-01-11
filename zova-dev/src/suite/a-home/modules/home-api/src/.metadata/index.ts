@@ -1,32 +1,32 @@
-/** service: begin */
-export * from '../service/home.js';
+/** api: begin */
+export * from '../api/home.js';
 
 import 'zova';
 declare module 'zova' {}
 declare module 'zova-module-home-api' {
-  export interface ServiceHome {
+  export interface ApiHome {
     /** @internal */
     get scope(): ScopeModuleHomeApi;
   }
 }
-/** service: end */
-/** service: begin */
-import { ServiceHome } from '../service/home.js';
-export interface IModuleService {
-  home: ServiceHome;
+/** api: end */
+/** api: begin */
+import { ApiHome } from '../api/home.js';
+export interface IModuleApi {
+  home: ApiHome;
 }
-/** service: end */
-/** service: begin */
+/** api: end */
+/** api: begin */
 
 import 'zova';
 declare module 'zova' {
   export interface IBeanRecordGeneral {
-    'home-api.service.home': ServiceHome;
+    'home-api.api.home': ApiHome;
   }
 }
-/** service: end */
+/** api: end */
 /** openapi: begin */
-export * from '../service/openapi/index.js';
+export * from '../api/openapi/index.js';
 /** openapi: end */
 /** bean: begin */
 export * from '../bean/bean.fetch.js';
@@ -58,7 +58,7 @@ export class ScopeModuleHomeApi extends BeanScopeBase {}
 
 export interface ScopeModuleHomeApi {
   util: BeanScopeUtil;
-  service: IModuleService;
+  api: IModuleApi;
 }
 
 import 'zova';
