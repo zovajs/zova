@@ -1,5 +1,5 @@
 import { IModuleService } from './.metadata/index.jsx';
-import { BeanApi } from './bean/bean.api.js';
+import { BeanFetch } from './bean/bean.fetch.js';
 
 declare module 'zova' {
   export interface AppMeta {

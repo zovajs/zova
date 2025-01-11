@@ -4,25 +4,25 @@ import { markRaw } from 'vue';
 import { ModelAuth } from 'zova-module-home-user';
 import { Bean } from 'zova-module-a-bean';
 
-const SymbolApi = Symbol('SymbolApi');
+const SymbolFetch = Symbol('SymbolFetch');
 
-export interface BeanApi extends AxiosInstance {}
+export interface BeanFetch extends AxiosInstance {}
 
 @Bean()
-export class BeanApi extends BeanBase {
+export class BeanFetch extends BeanBase {
   @Use()
   $$modelAuth: ModelAuth;
 
-  private [SymbolApi]: AxiosInstance;
+  private [SymbolFetch]: AxiosInstance;
 
   protected async __init__() {
     const baseURL = this.app.util.getApiBaseURL();
-    this[SymbolApi] = markRaw(axios.create({ baseURL }));
-    this._addInterceptors(this[SymbolApi]);
+    this[SymbolFetch] = markRaw(axios.create({ baseURL }));
+    this._addInterceptors(this[SymbolFetch]);
   }
 
   protected __get__(prop) {
-    return this[SymbolApi] && this[SymbolApi][prop];
+    return this[SymbolFetch] && this[SymbolFetch][prop];
   }
 
   private _addInterceptors(api: AxiosInstance) {
