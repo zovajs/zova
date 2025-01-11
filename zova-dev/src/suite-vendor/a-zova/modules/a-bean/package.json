@@ -43,6 +43,11 @@
         "beanGeneral": false,
         "optionsNone": true,
         "metadataCustom": "cli/style/metadata/generate.ts"
+      },
+      "aop": {
+        "optionsGlobalInterfaceName": "IDecoratorAopOptions",
+        "optionsGlobalInterfaceFrom": "zova-module-a-bean",
+        "boilerplate": "cli/aop/boilerplate"
       }
     }
   },

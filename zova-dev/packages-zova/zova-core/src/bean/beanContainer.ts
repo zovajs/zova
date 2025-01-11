@@ -26,6 +26,7 @@ import { isNilOrEmptyString } from '@cabloy/utils';
 const SymbolBeanContainerParent = Symbol('Bean#BeanContainerParent');
 const SymbolProxyMagic = Symbol('Bean#ProxyMagic');
 export const BeanContainerInstances = Symbol('Bean#Instances');
+export const SymbolProxyDisable = Symbol('Bean#SymbolProxyDisable');
 
 export interface BeanContainer {}
 
@@ -342,7 +343,7 @@ export class BeanContainer {
       beanOptions.beanFullName,
       beanOptions.beanClass as Constructable<T>,
       args,
-      beanOptions.aop,
+      cast(beanOptions.scene) === 'aop',
       // default is true: same as inject prop
       markReactive ?? beanOptions.markReactive ?? true,
       withSelector,
@@ -860,7 +861,7 @@ export class BeanContainer {
     if (host.__aopChains__) return host.__aopChains__;
     // chains
     let chains: MetadataKey[] = [];
-    if (beanOptions && !beanOptions.aop) {
+    if (!beanInstance[SymbolProxyDisable] && beanOptions && cast(beanOptions.scene) !== 'aop') {
       const aops = appResource.findAopsMatched(beanOptions.beanFullName);
       if (aops) {
         chains = chains.concat(aops);

@@ -16,9 +16,6 @@ export interface IDecoratorBeanOptionsBase<T = unknown, OPTIONS = unknown> {
   beanClass: Constructable<T>;
   containerScope?: ContainerScope;
   markReactive?: boolean;
-  // todo: remove
-  aop?: boolean;
-  aopMatch?: string | RegExp | (string | RegExp)[];
   virtual?: boolean;
   moduleBelong?: string;
   options?: OPTIONS;

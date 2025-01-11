@@ -71,7 +71,7 @@ export function configDefault() {
   };
 }
 
-export type ZovaConfig = {
+export interface ZovaConfig {
   meta: ZovaConfigMeta;
   env: ZovaConfigEnv;
   api: {
@@ -107,6 +107,6 @@ export type ZovaConfig = {
   };
   routes: ZovaConfigRoutes;
   modules: IBeanScopeConfig;
-};
+}
 
 export type ZovaConfigOptional = PowerPartial<ZovaConfig>;
