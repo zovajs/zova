@@ -111,8 +111,8 @@ function sidebarGuide(): DefaultTheme.SidebarItem[] {
           link: 'introduction',
         },
         {
-          text: 'API',
-          base: '/guide/techniques/api/',
+          text: 'Fetch',
+          base: '/guide/techniques/fetch/',
           link: 'introduction',
         },
         {

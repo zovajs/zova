@@ -20,10 +20,10 @@ export interface ServiceAuthLoginResult {
 @Service()
 export class ServiceAuth extends BeanServiceBase {
   login(params: ServiceAuthLoginParams) {
-    return this.$api.post<any, ServiceAuthLoginResult, ServiceAuthLoginParams>('/home/user/login', params);
+    return this.$fetch.post<any, ServiceAuthLoginResult, ServiceAuthLoginParams>('/home/user/login', params);
   }
 
   logout() {
-    return this.$api.post<any, void, void>('/home/user/logout');
+    return this.$fetch.post<any, void, void>('/home/user/logout');
   }
 }

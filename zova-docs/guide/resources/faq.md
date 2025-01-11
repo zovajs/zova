@@ -7,5 +7,5 @@ It is recommended that the variable names of bean instances injected through the
 | Prefix | Examples                | Description                                                                                    |
 | ------ | ----------------------- | ---------------------------------------------------------------------------------------------- |
 | $$     | this.$$counter          | Bean instances injected via @Use decorator                                                     |
-| $      | this.$api, this.$router | Members inherited through the base class `BeanBase`, provide commonly used system capabilities |
+| $      | this.$fetch, this.$router | Members inherited through the base class `BeanBase`, provide commonly used system capabilities |
 | none   | this.count              | Members of the current bean instance                                                           |

@@ -3,10 +3,10 @@ import { BeanApi } from './bean/bean.api.js';
 
 declare module 'zova' {
   export interface AppMeta {
-    $api: BeanApi;
+    $fetch: BeanFetch;
   }
   export interface BeanBase {
-    $api: BeanApi;
+    $fetch: BeanFetch;
     $service: IModuleService;
   }
 }

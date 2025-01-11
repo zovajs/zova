@@ -7,6 +7,6 @@ export interface ServiceExampleEchoResult {
 @Service()
 export class ServiceExample extends BeanServiceBase {
   echo() {
-    return this.$api.get<any, ServiceExampleEchoResult>('/example/echo');
+    return this.$fetch.get<any, ServiceExampleEchoResult>('/example/echo');
   }
 }

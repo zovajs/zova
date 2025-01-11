@@ -12,7 +12,7 @@ export type ServiceServiceHomeindexResponseBody =
 export class ServiceHome extends BeanServiceBase {
   /** @description Home */
   index(options?: IApiServiceActionOptions) {
-    return this.$api.get<any, ServiceServiceHomeindexResponseBody>(
+    return this.$fetch.get<any, ServiceServiceHomeindexResponseBody>(
       ServiceServiceHomeindexPath,
       this.$configPrepare(ApiBaseURL, options),
     );

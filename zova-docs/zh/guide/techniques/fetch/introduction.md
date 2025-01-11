@@ -1,11 +1,11 @@
-# API
+# Fetch
 
-Zova 提供了一个模块`home-base`，该模块基于[axios](https://axios-http.com)提供了基本的`API`代码骨架。可以在此基础上添加自定义的 API 逻辑，甚至也可以直接替换掉`axios`底层库
+Zova 提供了一个模块`home-base`，该模块基于[axios](https://axios-http.com)提供了基本的`Fetch`代码骨架。可以在此基础上添加自定义的 API 逻辑，甚至也可以直接替换掉`axios`底层库
 
-## $api
+## $fetch
 
-- Zova 在`BeanBase`基类中注入了`$api`对象，从而可以在任何 bean 实例中通过`this.$api`访问`axios`实例
-- Zova 同时在`app.meta`中注入了`$api`对象，从而可以在 bean 实例的外部访问`axios`实例
+- Zova 在`BeanBase`基类中注入了`$fetch`对象，从而可以在任何 bean 实例中通过`this.$fetch`访问`axios`实例
+- Zova 同时在`app.meta`中注入了`$fetch`对象，从而可以在 bean 实例的外部访问`axios`实例
 
 比如，获取菜单数据：
 
@@ -14,7 +14,7 @@ Zova 提供了一个模块`home-base`，该模块基于[axios](https://axios-htt
 ```typescript
 export default (app: ZovaApplication) => {
   return {
-    select: () => app.meta.$api.get<any, ServiceMenuEntity[]>('/home/layout/menu/select'),
+    select: () => app.meta.$fetch.get<any, ServiceMenuEntity[]>('/home/layout/menu/select'),
   };
 };
 ```

@@ -254,7 +254,7 @@ export class CliOpenapiGenerate extends BeanCliBase {
       ${contentRequestBody}
       ${contentOptions2}
     ) {
-      return this.$api.${pathInfo.method}<any, ${nameResponseBody}>(
+      return this.$fetch.${pathInfo.method}<any, ${nameResponseBody}>(
         ${contentPathTranslate} ${contentRequestBody ? 'body,' : ''} 
         this.$configPrepare(ApiBaseURL, options),
       );

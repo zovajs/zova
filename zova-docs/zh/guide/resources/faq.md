@@ -7,5 +7,5 @@
 | 前缀 | 举例                    | 说明                                           |
 | ---- | ----------------------- | ---------------------------------------------- |
 | $$   | this.$$counter          | 通过 @Use 装饰器注入的 bean 实例               |
-| $    | this.$api, this.$router | 通过基类BeanBase继承的成员，提供常用的系统能力 |
+| $    | this.$fetch, this.$router | 通过基类BeanBase继承的成员，提供常用的系统能力 |
 | 无   | this.count              | 当前bean实例的成员                             |

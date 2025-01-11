@@ -7,6 +7,6 @@ export interface Service<%=argv.nameMeta.fullCapitalize%>EchoResult {
 @Service()
 export class Service<%=argv.nameMeta.fullCapitalize%> extends BeanServiceBase {
   echo() {
-    return this.$api.get<any, Service<%=argv.nameMeta.fullCapitalize%>EchoResult>('/<%=argv.serviceName%>/echo');
+    return this.$fetch.get<any, Service<%=argv.nameMeta.fullCapitalize%>EchoResult>('/<%=argv.serviceName%>/echo');
   }
 }

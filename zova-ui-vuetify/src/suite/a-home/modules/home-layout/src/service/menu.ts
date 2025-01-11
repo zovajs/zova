@@ -13,6 +13,6 @@ export interface ServiceMenuEntity {
 @Service()
 export class ServiceMenu extends BeanServiceBase {
   select() {
-    return this.$api.get<any, ServiceMenuEntity[]>('/home/layout/menu/select');
+    return this.$fetch.get<any, ServiceMenuEntity[]>('/home/layout/menu/select');
   }
 }

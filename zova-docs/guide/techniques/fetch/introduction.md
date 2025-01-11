@@ -1,11 +1,11 @@
-# API
+# Fetch
 
-Zova provides a module `home-base`, which provides a basic `API` code skeleton based on [axios](https://axios-http.com). Custom API logic can be added on this basis, or even the `axios` underlying library can be directly replaced
+Zova provides a module `home-base`, which provides a basic `Fetch` code skeleton based on [axios](https://axios-http.com). Custom API logic can be added on this basis, or even the `axios` underlying library can be directly replaced
 
-## $api
+## $fetch
 
-- Zova injects the `$api` object into the `BeanBase` base class, so that the `axios` instance can be obtained through `this.$api` in any bean instance
-- Zova also injects the `$api` object in `app.meta`, so that the `axios` instance can be accessed outside the bean instance
+- Zova injects the `$fetch` object into the `BeanBase` base class, so that the `axios` instance can be obtained through `this.$fetch` in any bean instance
+- Zova also injects the `$fetch` object in `app.meta`, so that the `axios` instance can be accessed outside the bean instance
 
 For example, load menu data:
 
@@ -14,7 +14,7 @@ For example, load menu data:
 ```typescript
 export default (app: ZovaApplication) => {
   return {
-    select: () => app.meta.$api.get<any, ServiceMenuEntity[]>('/home/layout/menu/select'),
+    select: () => app.meta.$fetch.get<any, ServiceMenuEntity[]>('/home/layout/menu/select'),
   };
 };
 ```

@@ -43,7 +43,7 @@
 
 | 名称                                                    | 说明                                 |
 | ------------------------------------------------------- | ------------------------------------ |
-| [$api](../../techniques/api/introduction.md)            | 由模块`home-base`提供的api对象       |
+| [$fetch](../../techniques/api/introduction.md)            | 由模块`home-base`提供的api对象       |
 | [$scopeBase](../../essentials/scope/introduction.md)    | 由模块`home-base`提供的scope对象     |
 | [$css](../../techniques/css-in-js/css.md)           | 由模块`home-base`提供的全局样式对象  |
 | [$pinia](../../vue/pinia.md)                            | 由模块`a-pinia`提供的pinia对象       |

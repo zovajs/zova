@@ -24,7 +24,7 @@ export class Monkey extends BeanSimple implements IMonkeyAppInitialize, IMonkeyM
   async appInitialize() {
     // api
     const scopeSelf: ScopeModule = await this.bean.getScope(__ThisModule__);
-    this.app.meta.$api = await this.bean._getBean(scopeSelf.config.defaultBeanApi, false);
+    this.app.meta.$fetch = await this.bean._getBean(scopeSelf.config.defaultBeanApi, false);
   }
 
   async moduleLoading(_module: IModule) {}
@@ -49,12 +49,12 @@ export class Monkey extends BeanSimple implements IMonkeyAppInitialize, IMonkeyM
 
   async beanInit(bean: BeanContainer, beanInstance: BeanBase) {
     const self = this;
-    // $api
-    bean.defineProperty(beanInstance, '$api', {
+    // $fetch
+    bean.defineProperty(beanInstance, '$fetch', {
       enumerable: false,
       configurable: true,
       get() {
-        return self.app.meta.$api;
+        return self.app.meta.$fetch;
       },
     });
     // $service

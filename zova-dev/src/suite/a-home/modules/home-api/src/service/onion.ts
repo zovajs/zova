@@ -69,7 +69,7 @@ export type ServiceServiceOnionecho5ResponseBody =
 @Service()
 export class ServiceOnion extends BeanServiceBase {
   index(options?: IApiServiceActionOptions) {
-    return this.$api.get<any, ServiceServiceOnionindexResponseBody>(
+    return this.$fetch.get<any, ServiceServiceOnionindexResponseBody>(
       ServiceServiceOnionindexPath,
       this.$configPrepare(ApiBaseURL, options),
     );
@@ -81,7 +81,7 @@ export class ServiceOnion extends BeanServiceBase {
       query?: ServiceServiceOnionechoRequestQuery;
     } & IApiServiceActionOptions,
   ) {
-    return this.$api.post<any, ServiceServiceOnionechoResponseBody>(
+    return this.$fetch.post<any, ServiceServiceOnionechoResponseBody>(
       ServiceServiceOnionechoPath,
       body,
       this.$configPrepare(ApiBaseURL, options),
@@ -95,7 +95,7 @@ export class ServiceOnion extends BeanServiceBase {
       query: ServiceServiceOnionecho2RequestQuery;
     } & IApiServiceActionOptions,
   ) {
-    return this.$api.post<any, ServiceServiceOnionecho2ResponseBody>(
+    return this.$fetch.post<any, ServiceServiceOnionecho2ResponseBody>(
       this.$pathTranslate(ServiceServiceOnionecho2Path, options.params),
       body,
       this.$configPrepare(ApiBaseURL, options),
@@ -109,14 +109,14 @@ export class ServiceOnion extends BeanServiceBase {
       headers: ServiceServiceOnionecho3RequestHeaders;
     } & IApiServiceActionOptions,
   ) {
-    return this.$api.get<any, ServiceServiceOnionecho3ResponseBody>(
+    return this.$fetch.get<any, ServiceServiceOnionecho3ResponseBody>(
       this.$pathTranslate(ServiceServiceOnionecho3Path, options.params),
       this.$configPrepare(ApiBaseURL, options),
     );
   }
 
   echo4(body?: ServiceServiceOnionecho4RequestBody | undefined, options?: IApiServiceActionOptions) {
-    return this.$api.post<any, ServiceServiceOnionecho4ResponseBody>(
+    return this.$fetch.post<any, ServiceServiceOnionecho4ResponseBody>(
       ServiceServiceOnionecho4Path,
       body,
       this.$configPrepare(ApiBaseURL, options),
@@ -128,7 +128,7 @@ export class ServiceOnion extends BeanServiceBase {
       query?: ServiceServiceOnionecho5RequestQuery;
     } & IApiServiceActionOptions,
   ) {
-    return this.$api.get<any, ServiceServiceOnionecho5ResponseBody>(
+    return this.$fetch.get<any, ServiceServiceOnionecho5ResponseBody>(
       ServiceServiceOnionecho5Path,
       this.$configPrepare(ApiBaseURL, options),
     );

@@ -8,6 +8,6 @@ export interface ServiceUserEntity {
 @Service()
 export class ServiceUser extends BeanServiceBase {
   getUserInfo() {
-    return this.$api.get<any, ServiceUserEntity>('/home/user/info');
+    return this.$fetch.get<any, ServiceUserEntity>('/home/user/info');
   }
 }
