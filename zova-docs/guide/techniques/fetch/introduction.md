@@ -19,11 +19,11 @@ export default (app: ZovaApplication) => {
 };
 ```
 
-## home-base.bean.api
+## home-api.bean.fetch
 
-The module `home-base` provides an `home-base.bean.api` bean, in which custom logic can be added directly
+The module `home-base` provides an `home-api.bean.fetch` bean, in which custom logic can be added directly
 
-`src/suite/a-home/modules/home-base/src/bean/bean.api.ts`
+`src/suite/a-home/modules/home-api/src/bean/bean.fetch.ts`
 
 ```typescript{7}
 export class BeanFetch {

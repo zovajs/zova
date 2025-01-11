@@ -19,11 +19,11 @@ export default (app: ZovaApplication) => {
 };
 ```
 
-## home-base.bean.api
+## home-api.bean.fetch
 
-模块`home-base`提供了一个`home-base.bean.api`bean，可以直接在里面添加自定义逻辑
+模块`home-api`提供了一个`home-api.bean.fetch`bean，可以直接在里面添加自定义逻辑
 
-`src/suite/a-home/modules/home-base/src/bean/bean.api.ts`
+`src/suite/a-home/modules/home-api/src/bean/bean.fetch.ts`
 
 ```typescript{7}
 export class BeanFetch {
