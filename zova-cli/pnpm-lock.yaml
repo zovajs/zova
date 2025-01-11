@@ -9,8 +9,8 @@ importers:
   .:
     devDependencies:
       '@cabloy/lint':
-        specifier: ^4.0.19
-        version: 4.0.19(typescript@5.5.4)
+        specifier: ^4.0.20
+        version: 4.0.20(typescript@5.5.4)
       '@types/mocha':
         specifier: ^10.0.6
         version: 10.0.10
@@ -30,8 +30,8 @@ importers:
   cli:
     dependencies:
       '@cabloy/cli':
-        specifier: ^2.1.5
-        version: 2.1.5(vue@3.5.13(typescript@5.7.2))
+        specifier: ^2.1.6
+        version: 2.1.6(vue@3.5.13(typescript@5.7.2))
       zova-cli-set-front:
         specifier: ^1.1.199
         version: link:../cli-set-front
@@ -39,8 +39,8 @@ importers:
   cli-set-front:
     dependencies:
       '@cabloy/cli':
-        specifier: ^2.1.5
-        version: 2.1.5(vue@3.5.13(typescript@5.7.2))
+        specifier: ^2.1.6
+        version: 2.1.6(vue@3.5.13(typescript@5.7.2))
       '@cabloy/extend':
         specifier: ^3.0.12
         version: 3.0.12
@@ -227,8 +227,8 @@ packages:
     resolution: {integrity: sha512-Z/yiTPj+lDVnF7lWeKCIJzaIkI0vYO87dMpZ4bg4TDrFe4XXLFWL1TbXU27gBP3QccxV9mZICCrnjnYlJjXHOA==}
     engines: {node: '>=6.9.0'}
 
-  '@cabloy/cli@2.1.5':
-    resolution: {integrity: sha512-gyXNuaGv5FwfSLMXXxiDfyPrcCVlrW/LypbP6wMumlO6fnMD9EWWORZ7/7ygOkdo4SKfwEkBoeqcbAC3F83bBg==}
+  '@cabloy/cli@2.1.6':
+    resolution: {integrity: sha512-LpNkDla7VotSBCyKxDtV/nlZAAYIUQ8egf58K1kY+Mgx2oeI6WwsHW3YofoBL0YqeMLV6gObOBJ7RcNxpRSZ0A==}
 
   '@cabloy/dotenv@1.0.9':
     resolution: {integrity: sha512-dvBNwJmC4s3CYZ0auTy7MncZlbinHItdarXH5F9ZO6AkhYnV7aSw4FBadg6U3Sb2JFtS4YZ/Xbr5LrjZXnRzRQ==}
@@ -236,20 +236,23 @@ packages:
   '@cabloy/extend@3.0.12':
     resolution: {integrity: sha512-jTOozWZWyFrJM/gJftOW+DggCvjmBHfZJrmm8HBR+44RMSuDU3ea+KE93N6n58tQf99aCplcTMZHqzy0Y2RlFg==}
 
-  '@cabloy/lint@4.0.19':
-    resolution: {integrity: sha512-ILYBixAr1yp558c+oBm+ALiGV6hhisOUPm1nuTDRqICbkr2IlSmcFZF679KA9sU/wIlY1bkUkxTTnSX4+9HqYA==}
+  '@cabloy/lint@4.0.20':
+    resolution: {integrity: sha512-/7Kuna4bRhqNwG6hDPsS29hgJCW9a+HREnWOEsREnfQG21HlOzCHCTvT3QzYlcQzspIuEkgJeqpa/c8hayAXew==}
+
+  '@cabloy/module-glob@5.1.11':
+    resolution: {integrity: sha512-fQdVDhDwr0Umah7YgAtLqPGnmmopGm+Z4i2YnAMKfw2y68qZ4SaegWSOGiiFXgWF+xQAf0vGez/36AqcJAcD7w==}
 
   '@cabloy/module-glob@5.1.8':
     resolution: {integrity: sha512-UB+vRLtx50yLB2kcj4GKM2I2KqlBmaRX4U2jIBdgVy7GQl7mXis4u/eAnerdodyjw/6LSfQbbKDyudl4d9qM7Q==}
-
-  '@cabloy/module-glob@5.1.9':
-    resolution: {integrity: sha512-fB+tSp/PYAG+30Wqydahu3ZoB/DnBCJUP2OVMJD95MP1zPUwwZmmBOouJAmlX2NgP/ok4j7zpYVc+XGZXOr7qA==}
 
   '@cabloy/module-info@1.2.5':
     resolution: {integrity: sha512-kyl8jik1mDsGTiG85zJ2Oj5fNYMOruSpbFZjY9WwFgTI6bqqVwniIvlyuYFQFWNLUVYkvvFB0diJrLt+Lk4PEA==}
 
   '@cabloy/process-helper@1.0.12':
     resolution: {integrity: sha512-STpc2zNxGlRZvl1z+WhIQAvc1y44YwB8i+hMwCb4aB31LNRhi7FjdjoEeTVFWw/lODzM0LhnmEw3yL4RmkjQdg==}
+
+  '@cabloy/utils@1.0.2':
+    resolution: {integrity: sha512-ct5+FpzseuiHdaTGsIRG3uPMl/l/U+eimBX7EThqIU5j6tLUeMxnQWbLVwg2/QAVh/gjSliiH9QJ/MNtlLamBA==}
 
   '@cabloy/vite-plugin-babel@1.1.3':
     resolution: {integrity: sha512-OW9J2q9ze0hLvBQOPwjzX/CPMs3PszDc6rbJP6BgNFfdLkoebkWkkZuCB03CCOl35kOdPIRKs/tjxQDxd6WSzw==}
@@ -3986,9 +3989,9 @@ snapshots:
       '@babel/helper-string-parser': 7.25.9
       '@babel/helper-validator-identifier': 7.25.9
 
-  '@cabloy/cli@2.1.5(vue@3.5.13(typescript@5.7.2))':
+  '@cabloy/cli@2.1.6(vue@3.5.13(typescript@5.7.2))':
     dependencies:
-      '@cabloy/module-glob': 5.1.9
+      '@cabloy/module-glob': 5.1.11
       '@cabloy/module-info': 1.2.5
       '@cabloy/process-helper': 1.0.12
       '@cabloy/word-utils': 1.0.10
@@ -4025,7 +4028,7 @@ snapshots:
 
   '@cabloy/extend@3.0.12': {}
 
-  '@cabloy/lint@4.0.19(typescript@5.5.4)':
+  '@cabloy/lint@4.0.20(typescript@5.5.4)':
     dependencies:
       '@typescript-eslint/eslint-plugin': 7.18.0(@typescript-eslint/parser@7.18.0(eslint@8.57.1)(typescript@5.5.4))(eslint@8.57.1)(typescript@5.5.4)
       '@typescript-eslint/parser': 7.18.0(eslint@8.57.1)(typescript@5.5.4)
@@ -4041,19 +4044,20 @@ snapshots:
       - supports-color
       - typescript
 
-  '@cabloy/module-glob@5.1.8':
+  '@cabloy/module-glob@5.1.11':
     dependencies:
       '@cabloy/module-info': 1.2.5
+      '@cabloy/utils': 1.0.2
       boxen: 4.2.0
+      chalk: 3.0.0
       egg-born-utils: 1.2.1
     transitivePeerDependencies:
       - proxy-agent
 
-  '@cabloy/module-glob@5.1.9':
+  '@cabloy/module-glob@5.1.8':
     dependencies:
       '@cabloy/module-info': 1.2.5
       boxen: 4.2.0
-      chalk: 3.0.0
       egg-born-utils: 1.2.1
     transitivePeerDependencies:
       - proxy-agent
@@ -4063,6 +4067,8 @@ snapshots:
       stack-utils: 2.0.6
 
   '@cabloy/process-helper@1.0.12': {}
+
+  '@cabloy/utils@1.0.2': {}
 
   '@cabloy/vite-plugin-babel@1.1.3(@babel/core@7.26.0)(vite@5.4.11(@types/node@20.17.9)(terser@5.36.0))':
     dependencies:
