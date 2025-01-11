@@ -24,7 +24,7 @@ export class Monkey extends BeanSimple implements IMonkeyAppInitialize, IMonkeyM
   async appInitialize() {
     // api
     const scopeSelf: ScopeModule = await this.bean.getScope(__ThisModule__);
-    this.app.meta.$fetch = await this.bean._getBean(scopeSelf.config.defaultBeanApi, false);
+    this.app.meta.$fetch = await this.bean._getBean(scopeSelf.config.defaultBeanFetch, false);
   }
 
   async moduleLoading(_module: IModule) {}

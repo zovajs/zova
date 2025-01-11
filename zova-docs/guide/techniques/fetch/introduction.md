@@ -26,17 +26,17 @@ The module `home-base` provides an `home-base.bean.api` bean, in which custom lo
 `src/suite/a-home/modules/home-base/src/bean/bean.api.ts`
 
 ```typescript{7}
-export class BeanApi {
-  private [SymbolApi]: AxiosInstance;
+export class BeanFetch {
+  private [SymbolFetch]: AxiosInstance;
 
   protected async __init__() {
     const baseURL = this.app.util.getApiBaseURL();
-    this[SymbolApi] = markRaw(axios.create({ baseURL }));
+    this[SymbolFetch] = markRaw(axios.create({ baseURL }));
     // your custom logic maybe here
   }
 
   protected __get__(prop) {
-    return this[SymbolApi] && this[SymbolApi][prop];
+    return this[SymbolFetch] && this[SymbolFetch][prop];
   }
 }
 ```

@@ -33,11 +33,11 @@ config.admin.development.ssr.mine.ts
 
 ```typescript{5}
 export class StoreApi {
-  private [SymbolApi]: AxiosInstance;
+  private [SymbolFetch]: AxiosInstance;
 
   protected async __init__() {
     const baseURL = `${this.app.config.api.baseURL || ''}${this.app.config.api.prefix || ''}/`;
-    this[SymbolApi] = markRaw(axios.create({ baseURL }));
+    this[SymbolFetch] = markRaw(axios.create({ baseURL }));
   }
 }
 ```

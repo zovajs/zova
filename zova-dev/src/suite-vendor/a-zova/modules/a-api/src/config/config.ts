@@ -2,7 +2,7 @@ import { IBeanScopeRecord, TypeBeanRecordGeneralSelectorSpecificNameKeys, ZovaAp
 
 export const config = (_app: ZovaApplication) => {
   return {
-    defaultBeanApi: 'home-api.bean.api' as TypeBeanRecordGeneralSelectorSpecificNameKeys<'bean', 'api'>,
+    defaultBeanFetch: 'home-api.bean.fetch' as TypeBeanRecordGeneralSelectorSpecificNameKeys<'bean', 'fetch'>,
     defaultModuleServices: 'home-api' as keyof IBeanScopeRecord,
   };
 };

@@ -2,22 +2,22 @@ import { Bean, BeanBase } from 'zova';
 import axios, { AxiosInstance } from 'axios';
 import { markRaw } from 'vue';
 
-const SymbolApi = Symbol('SymbolApi');
+const SymbolFetch = Symbol('SymbolFetch');
 
-export interface BeanApi extends AxiosInstance {}
+export interface BeanFetch extends AxiosInstance {}
 
 @Bean()
-export class BeanApi extends BeanBase {
-  private [SymbolApi]: AxiosInstance;
+export class BeanFetch extends BeanBase {
+  private [SymbolFetch]: AxiosInstance;
 
   protected async __init__() {
     const baseURL = this.app.util.getApiBaseURL();
-    this[SymbolApi] = markRaw(axios.create({ baseURL }));
-    this._addInterceptors(this[SymbolApi]);
+    this[SymbolFetch] = markRaw(axios.create({ baseURL }));
+    this._addInterceptors(this[SymbolFetch]);
   }
 
   protected __get__(prop) {
-    return this[SymbolApi] && this[SymbolApi][prop];
+    return this[SymbolFetch] && this[SymbolFetch][prop];
   }
 
   private _addInterceptors(api: AxiosInstance) {
