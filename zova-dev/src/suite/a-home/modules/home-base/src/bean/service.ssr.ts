@@ -2,7 +2,7 @@ import { BeanBase } from 'zova';
 import { Service } from 'zova-module-a-bean';
 
 @Service()
-export class ServiceSSR extends BeanBase {
+export class ServiceSsr extends BeanBase {
   public async initialize() {
     // ssr hydrated
     if (process.env.CLIENT) {
