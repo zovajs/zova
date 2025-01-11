@@ -102,6 +102,7 @@ export function createConfigUtils(
   }
 
   async function __loadModulesMeta() {
+    const meta = getEnvMeta(configMeta);
     // modules
     __modulesMeta = await glob({
       projectMode: 'zova',
@@ -109,6 +110,7 @@ export function createConfigUtils(
       disabledModules: __getDisabledModules(),
       disabledSuites: process.env.PROJECT_DISABLED_SUITES,
       log: false,
+      meta,
     });
     return __modulesMeta;
   }
