@@ -52,7 +52,7 @@ declare module 'zova-module-home-base' {
     get scope(): ScopeModuleHomeBase;
   }
 
-  export interface ServiceSSR {
+  export interface ServiceSsr {
     /** @internal */
     get scope(): ScopeModuleHomeBase;
   }
@@ -60,12 +60,12 @@ declare module 'zova-module-home-base' {
 /** service: end */
 /** service: begin */
 import { ServiceRouter } from '../bean/service.router.js';
-import { ServiceSSR } from '../bean/service.ssr.js';
+import { ServiceSsr } from '../bean/service.ssr.js';
 import 'zova';
 declare module 'zova' {
   export interface IBeanRecordLocal {
     'home-base.service.router': ServiceRouter;
-    'home-base.service.sSR': ServiceSSR;
+    'home-base.service.ssr': ServiceSsr;
   }
 }
 /** service: end */
