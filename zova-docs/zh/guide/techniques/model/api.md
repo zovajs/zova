@@ -11,7 +11,7 @@ export class ModelTodo {
     return this.$useQueryExisting({
       queryKey: ['select'],
       queryFn: async () => {
-        return this.scope.service.todo.select();
+        return this.scope.api.todo.select();
       },
     });
   }

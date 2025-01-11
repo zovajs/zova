@@ -11,7 +11,7 @@ export class ModelTodo {
     return this.$useQueryExisting({
       queryKey: ['select'],
       queryFn: async () => {
-        return this.scope.service.todo.select();
+        return this.scope.api.todo.select();
       },
     });
   }
@@ -46,7 +46,7 @@ export class ModelTodo {
     return this.$useMutationExisting<void, ApiTodoIntertParams>({
       mutationKey: ['insert'],
       mutationFn: async params => {
-        return this.scope.service.todo.insert(params);
+        return this.scope.api.todo.insert(params);
       },
       onSuccess: () => {
         this.$invalidateQueries({ queryKey: ['select'] });

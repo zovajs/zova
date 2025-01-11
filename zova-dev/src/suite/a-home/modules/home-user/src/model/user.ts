@@ -36,7 +36,7 @@ export class ModelUser extends BeanModelBase {
     return this.$useQueryExisting({
       queryKey: ['user'],
       queryFn: async () => {
-        return await this.scope.service.user.getUserInfo();
+        return await this.scope.api.user.getUserInfo();
       },
     });
   }

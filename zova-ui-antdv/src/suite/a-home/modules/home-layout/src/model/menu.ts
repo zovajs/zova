@@ -8,7 +8,7 @@ export class ModelMenu extends BeanModelBase<ScopeModule> {
     return this.$useQueryExisting({
       queryKey: ['select'],
       queryFn: async () => {
-        const data = await this.scope.service.menu.select();
+        const data = await this.scope.api.menu.select();
         return data.filter(item => {
           if (item.children) {
             item.children = item.children.filter(item => {
