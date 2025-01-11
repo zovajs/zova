@@ -37,7 +37,7 @@
   "author": "zhennann",
   "license": "MIT",
   "dependencies": {
-    "@cabloy/cli": "^2.1.5",
+    "@cabloy/cli": "^2.1.6",
     "@cabloy/extend": "^3.0.12",
     "@cabloy/module-info": "^1.2.5",
     "@cabloy/word-utils": "^1.0.10",
