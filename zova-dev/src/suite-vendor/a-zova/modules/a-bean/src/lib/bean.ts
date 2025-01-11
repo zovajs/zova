@@ -8,8 +8,8 @@ export function Virtual(): ClassDecorator {
   return createBeanDecorator('bean', undefined, undefined, undefined, undefined, true);
 }
 
-export function Local(): ClassDecorator {
-  return createBeanDecorator('local', 'ctx');
+export function Service(): ClassDecorator {
+  return createBeanDecorator('service', 'ctx');
 }
 
 export function Store(): ClassDecorator {

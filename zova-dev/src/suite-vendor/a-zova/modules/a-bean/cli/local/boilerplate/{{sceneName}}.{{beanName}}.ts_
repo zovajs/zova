@@ -1,7 +1,0 @@
-import { BeanBase } from 'zova';
-import { Local } from 'zova-module-a-bean';
-
-@Local()
-export class Local<%=argv.beanNameCapitalize%> extends BeanBase {
-  protected async __init__() {}
-}

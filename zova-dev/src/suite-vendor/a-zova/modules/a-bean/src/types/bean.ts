@@ -3,7 +3,7 @@ declare module 'zova' {
   export interface IBeanSceneRecord {
     bean: never;
     scope: never;
-    local: never;
+    service: never;
     store: never;
     tool: never;
     data: never;
