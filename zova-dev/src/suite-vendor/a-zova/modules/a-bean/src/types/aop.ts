@@ -1,5 +1,5 @@
 import { IBeanRecord, OmitNever } from 'zova';
-import { IOnionOptionsDeps, IOnionOptionsEnable, IOnionOptionsMatch, ServiceOnion } from './onion';
+import { IOnionOptionsDeps, IOnionOptionsEnable, IOnionOptionsMatch } from './onion';
 
 export interface IAopRecord {}
 
@@ -10,7 +10,8 @@ export interface IDecoratorAopOptions
 
 declare module 'zova-module-a-bean' {
   export interface BeanOnion {
-    aop: ServiceOnion<IDecoratorAopOptions, keyof IAopRecord>;
+    // todo:
+    // aop: ServiceOnion<IDecoratorAopOptions, keyof IAopRecord>;
   }
 }
 
