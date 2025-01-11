@@ -45,8 +45,8 @@ const svgUseRE = /^svguse:/;
 const ionRE = /^ion-/;
 const faRE = /^(fa-(sharp|solid|regular|light|brands|duotone|thin)|[lf]a[srlbdk]?) /;
 
-@Local()
-export class LocalIcon extends BeanBase<ScopeModule> {
+@Service()
+export class ServiceIcon extends BeanBase<ScopeModule> {
   public async initialize() {
     this._patchSetup();
     this._patchIconMap();

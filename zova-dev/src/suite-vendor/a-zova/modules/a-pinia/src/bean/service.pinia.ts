@@ -1,9 +1,9 @@
 import { BeanBase } from 'zova';
-import { Local } from 'zova-module-a-bean';
+import { Service } from 'zova-module-a-bean';
 import { createPinia, Pinia } from 'pinia';
 
-@Local()
-export class LocalPinia extends BeanBase {
+@Service()
+export class ServicePinia extends BeanBase {
   pinia: Pinia;
 
   protected async __init__() {

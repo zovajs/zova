@@ -1,9 +1,9 @@
 import { BeanBase, deepExtend } from 'zova';
-import { Local } from 'zova-module-a-bean';
+import { Service } from 'zova-module-a-bean';
 import { dehydrate, hydrate, QueryClient, VueQueryPlugin, VueQueryPluginOptions } from '@tanstack/vue-query';
 
-@Local()
-export class LocalStorage extends BeanBase {
+@Service()
+export class ServiceStorage extends BeanBase {
   protected async __init__() {
     // options
     let options = this.scope.config.queryClientConfig.defaultOptions;

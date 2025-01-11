@@ -1,8 +1,8 @@
 import { BeanBase } from 'zova';
-import { Local } from 'zova-module-a-bean';
+import { Service } from 'zova-module-a-bean';
 
-@Local()
-export class LocalSSR extends BeanBase {
+@Service()
+export class ServiceSSR extends BeanBase {
   public async initialize() {
     // ssr hydrated
     if (process.env.CLIENT) {
