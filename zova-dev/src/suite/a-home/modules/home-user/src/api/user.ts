@@ -1,13 +1,13 @@
-import { BeanServiceBase, Service } from 'zova-module-a-api';
+import { BeanApiBase, Api } from 'zova-module-a-api';
 
-export interface ServiceUserEntity {
+export interface ApiUserEntity {
   username?: string;
   avatar?: string;
 }
 
-@Service()
-export class ServiceUser extends BeanServiceBase {
+@Api()
+export class ApiUser extends BeanApiBase {
   getUserInfo() {
-    return this.$fetch.get<any, ServiceUserEntity>('/home/user/info');
+    return this.$fetch.get<any, ApiUserEntity>('/home/user/info');
   }
 }

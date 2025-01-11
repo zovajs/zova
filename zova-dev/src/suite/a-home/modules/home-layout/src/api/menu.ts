@@ -1,6 +1,6 @@
-import { BeanServiceBase, Service } from 'zova-module-a-api';
+import { BeanApiBase, Api } from 'zova-module-a-api';
 
-export interface ServiceMenuEntity {
+export interface ApiMenuEntity {
   title: string;
   caption?: string;
   icon?: string;
@@ -8,12 +8,12 @@ export interface ServiceMenuEntity {
   to?: { name?: string } | string;
   folder?: boolean;
   separator?: boolean;
-  children?: ServiceMenuEntity[];
+  children?: ApiMenuEntity[];
 }
 
-@Service()
-export class ServiceMenu extends BeanServiceBase {
+@Api()
+export class ApiMenu extends BeanApiBase {
   select() {
-    return this.$fetch.get<any, ServiceMenuEntity[]>('/home/layout/menu/select');
+    return this.$fetch.get<any, ApiMenuEntity[]>('/home/layout/menu/select');
   }
 }

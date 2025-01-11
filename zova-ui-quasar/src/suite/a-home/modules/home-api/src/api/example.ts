@@ -1,12 +1,12 @@
-import { BeanServiceBase, Service } from 'zova-module-a-api';
+import { BeanApiBase, Api } from 'zova-module-a-api';
 
-export interface ServiceExampleEchoResult {
+export interface ApiExampleEchoResult {
   message: string;
 }
 
-@Service()
-export class ServiceExample extends BeanServiceBase {
+@Api()
+export class ApiExample extends BeanApiBase {
   echo() {
-    return this.$fetch.get<any, ServiceExampleEchoResult>('/example/echo');
+    return this.$fetch.get<any, ApiExampleEchoResult>('/example/echo');
   }
 }

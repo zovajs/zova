@@ -1,34 +1,34 @@
-import { BeanServiceBase, Service } from 'zova-module-a-api';
+import { BeanApiBase, Api } from 'zova-module-a-api';
 
-export interface ServiceTodoEntity {
+export interface ApiTodoEntity {
   id: string;
   title: string;
   done: boolean;
 }
 
-export interface ServiceTodoGetParams {
+export interface ApiTodoGetParams {
   id: string;
 }
 
-export type ServiceTodoDeleteParams = ServiceTodoGetParams;
-export type ServiceTodoIntertParams = ServiceTodoEntity;
-export type ServiceTodoUpdateParams = ServiceTodoEntity;
+export type ApiTodoDeleteParams = ApiTodoGetParams;
+export type ApiTodoIntertParams = ApiTodoEntity;
+export type ApiTodoUpdateParams = ApiTodoEntity;
 
-@Service()
-export class ServiceTodo extends BeanServiceBase {
+@Api()
+export class ApiTodo extends BeanApiBase {
   select() {
-    return this.$fetch.get<any, ServiceTodoEntity[]>('/demo/todo/select');
+    return this.$fetch.get<any, ApiTodoEntity[]>('/demo/todo/select');
   }
-  get(params: ServiceTodoGetParams) {
-    return this.$fetch.get<any, ServiceTodoEntity>('/demo/todo/get', { params });
+  get(params: ApiTodoGetParams) {
+    return this.$fetch.get<any, ApiTodoEntity>('/demo/todo/get', { params });
   }
-  insert(params: ServiceTodoIntertParams) {
-    return this.$fetch.post<any, void, ServiceTodoIntertParams>('/demo/todo/insert', params);
+  insert(params: ApiTodoIntertParams) {
+    return this.$fetch.post<any, void, ApiTodoIntertParams>('/demo/todo/insert', params);
   }
-  update(params: ServiceTodoUpdateParams) {
-    return this.$fetch.post<any, void, ServiceTodoUpdateParams>('/demo/todo/update', params);
+  update(params: ApiTodoUpdateParams) {
+    return this.$fetch.post<any, void, ApiTodoUpdateParams>('/demo/todo/update', params);
   }
-  delete(params: ServiceTodoDeleteParams) {
-    return this.$fetch.post<any, void, ServiceTodoDeleteParams>('/demo/todo/delete', params);
+  delete(params: ApiTodoDeleteParams) {
+    return this.$fetch.post<any, void, ApiTodoDeleteParams>('/demo/todo/delete', params);
   }
 }
