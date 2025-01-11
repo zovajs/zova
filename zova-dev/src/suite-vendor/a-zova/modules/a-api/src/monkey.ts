@@ -14,7 +14,7 @@ import { IModule } from '@cabloy/module-info';
 
 export class Monkey extends BeanSimple implements IMonkeyAppInitialize, IMonkeyModule, IMonkeyBeanInit {
   private _moduleSelf: IModule;
-  private _defaultModuleService: keyof IBeanScopeRecord;
+  private _defaultModuleApi: keyof IBeanScopeRecord;
 
   constructor(moduleSelf: IModule) {
     super();
@@ -29,20 +29,20 @@ export class Monkey extends BeanSimple implements IMonkeyAppInitialize, IMonkeyM
 
   async moduleLoading(_module: IModule) {}
   async moduleLoaded(module: IModule) {
-    // load services
-    const onions = appResource.scenes['service']?.[module.info.relativeName];
+    // load apis
+    const onions = appResource.scenes['api']?.[module.info.relativeName];
     if (onions) {
       const scope = this.bean.scope(module.info.relativeName) as any;
       for (const beanFullName in onions) {
         const beanOptions = onions[beanFullName];
-        scope.service[beanOptions.name] = await this.bean._getBean(beanFullName as any, true);
+        scope.api[beanOptions.name] = await this.bean._getBean(beanFullName as any, true);
       }
     }
     // self
     if (this._moduleSelf === module) {
       const scopeSelf: ScopeModule = await this.bean.getScope(__ThisModule__);
-      this._defaultModuleService = scopeSelf.config.defaultModuleServices;
-      await this.app.meta.module.use(this._defaultModuleService);
+      this._defaultModuleApi = scopeSelf.config.defaultModuleApi;
+      await this.app.meta.module.use(this._defaultModuleApi);
     }
   }
   async configLoaded(_module: IModule, _config) {}
@@ -57,12 +57,12 @@ export class Monkey extends BeanSimple implements IMonkeyAppInitialize, IMonkeyM
         return self.app.meta.$fetch;
       },
     });
-    // $service
-    bean.defineProperty(beanInstance, '$service', {
+    // $api
+    bean.defineProperty(beanInstance, '$api', {
       enumerable: false,
       configurable: true,
       get() {
-        return cast(self.app.bean.scope(self._defaultModuleService)).service;
+        return cast(self.app.bean.scope(self._defaultModuleApi)).api;
       },
     });
   }
