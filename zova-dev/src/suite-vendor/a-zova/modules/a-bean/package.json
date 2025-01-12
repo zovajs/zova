@@ -3,6 +3,9 @@
   "version": "5.0.0",
   "title": "a-bean",
   "zovaModule": {
+    "capabilities": {
+      "preload": true
+    },
     "onions": {
       "bean": {
         "beanGeneral": true,

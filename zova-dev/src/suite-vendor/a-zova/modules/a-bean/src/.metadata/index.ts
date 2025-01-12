@@ -26,6 +26,9 @@ import 'zova';
 declare module 'zova' {}
 declare module 'zova-module-a-bean' {}
 /** service: end */
+/** main: begin */
+export * from '../main.js';
+/** main: end */
 /** scope: begin */
 import { BeanScopeBase, BeanScopeUtil } from 'zova';
 import { Scope } from '../lib/scope.js';
