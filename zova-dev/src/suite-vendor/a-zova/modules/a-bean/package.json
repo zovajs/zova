@@ -47,7 +47,8 @@
       "aop": {
         "optionsGlobalInterfaceName": "IDecoratorAopOptions",
         "optionsGlobalInterfaceFrom": "zova-module-a-bean",
-        "boilerplate": "cli/aop/boilerplate"
+        "boilerplate": "cli/aop/boilerplate",
+        "metadataCustom": "cli/aop/metadata/generate.ts"
       }
     }
   },

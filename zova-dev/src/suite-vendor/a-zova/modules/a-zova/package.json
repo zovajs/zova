@@ -14,7 +14,8 @@
       "@cabloy/deps": true,
       "@cabloy/module-info": true,
       "@cabloy/utils": true,
-      "@cabloy/word-utils": true
+      "@cabloy/word-utils": true,
+      "cel-js": true
     },
     "globalDependenciesDev": {
       "@cabloy/cli": true,
@@ -52,7 +53,8 @@
     "@cabloy/deps": "^1.0.8",
     "@cabloy/module-info": "^1.2.3",
     "@cabloy/utils": "^1.0.2",
-    "@cabloy/word-utils": "^1.0.10"
+    "@cabloy/word-utils": "^1.0.10",
+    "cel-js": "^0.3.0"
   },
   "devDependencies": {
     "@cabloy/cli": "^2.1.6",

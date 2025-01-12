@@ -2,6 +2,18 @@
   "name": "zova-module-demo-basic",
   "version": "5.0.0",
   "title": "demo-basic",
+  "zovaModule": {
+    "capabilities": {
+      "aops": {
+        "home": {
+          "match": "home-index.controller.pageHome"
+        },
+        "home3": {
+          "match": "/.*/"
+        }
+      }
+    }
+  },
   "type": "module",
   "exports": {
     ".": {

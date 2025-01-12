@@ -1,4 +1,5 @@
-import { getProperty, isNil } from '@cabloy/utils';
+import { isNil } from '@cabloy/utils';
+import { evaluate } from 'cel-js';
 import { IBeanRecord } from '../../bean/type.js';
 import { appMetadata, MetadataKey } from '../../core/metadata.js';
 import { appResource } from '../../core/resource.js';
@@ -128,5 +129,5 @@ function __prepareInjectSelectorInfo_init_argInner(beanInstance, arg: TypeDecora
   if (arg.startsWith('##')) {
     return arg.substring('##'.length);
   }
-  return getProperty(beanInstance, arg, '.');
+  return evaluate(arg, beanInstance);
 }
