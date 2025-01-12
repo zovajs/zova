@@ -27,9 +27,3 @@ export interface IDecoratorBeanOptionsBase<T = unknown, OPTIONS = unknown> {
 export interface IDecoratorBeanInfoOptions {
   module: string;
 }
-
-// todo: remove
-export interface IDecoratorAopOptions {
-  name?: string;
-  match: string | RegExp | (string | RegExp)[];
-}
