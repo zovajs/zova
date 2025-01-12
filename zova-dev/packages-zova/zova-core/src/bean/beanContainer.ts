@@ -470,6 +470,29 @@ export class BeanContainer {
     return beanInstance;
   }
 
+  private _prepareBeanInstanceSimple(
+    beanComposable: Functionable | undefined,
+    beanFullName,
+    beanClass,
+    args,
+    markReactive,
+  ) {
+    // prepare
+    let beanInstance = this._prepareBeanInstanceCommon(beanComposable, beanFullName, beanClass, args, markReactive);
+    // aop: proxy
+    const beanInstanceProxy = this._patchBeanInstanceSimple(beanFullName || beanClass, beanInstance);
+    if (beanInstanceProxy) {
+      // reactive
+      if (markReactive) {
+        beanInstance = reactive(beanInstanceProxy);
+      } else {
+        beanInstance = markRaw(beanInstanceProxy);
+      }
+    }
+    // ok
+    return beanInstance;
+  }
+
   private _prepareBeanInstanceCommon(
     beanComposable: Functionable | undefined,
     beanFullName,
@@ -775,6 +798,16 @@ export class BeanContainer {
     return this._newBeanProxy(beanFullNameOrBeanClass, beanInstance);
   }
 
+  private _patchBeanInstanceSimple(beanFullNameOrBeanClass, beanInstance) {
+    if (!beanFullNameOrBeanClass) return undefined;
+    // aop chains
+    const _aopChains = this._prepareAopChainsSimple(beanFullNameOrBeanClass, beanInstance);
+    // no aop
+    if (_aopChains.length === 0) return undefined;
+    // aop
+    return this._newBeanProxy(beanFullNameOrBeanClass, beanInstance);
+  }
+
   private _newBeanProxy(beanFullName, beanInstance) {
     const self = this;
     const proxy = new Proxy(beanInstance, {
@@ -888,6 +921,23 @@ export class BeanContainer {
         chains = chains.concat(aops);
       }
     }
+    // magic self
+    if (__hasMagicMothod(beanInstance)) {
+      chains.push(SymbolProxyMagic);
+    }
+    // hold
+    host.__aopChains__ = chains;
+    return chains;
+  }
+
+  private _prepareAopChainsSimple(beanFullNameOrBeanClass, beanInstance) {
+    if (!beanFullNameOrBeanClass) return [];
+    // beanFullName maybe class
+    const beanOptions = appResource.getBean(beanFullNameOrBeanClass);
+    const host = beanOptions || beanFullNameOrBeanClass;
+    if (host.__aopChains__) return host.__aopChains__;
+    // chains
+    const chains: MetadataKey[] = [];
     // magic self
     if (__hasMagicMothod(beanInstance)) {
       chains.push(SymbolProxyMagic);
