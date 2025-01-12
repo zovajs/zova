@@ -20,11 +20,26 @@ declare module 'zova' {
 }
 /** bean: end */
 /** service: begin */
+export * from '../bean/service.aop.js';
 export * from '../bean/service.onion_.js';
 
 import 'zova';
 declare module 'zova' {}
-declare module 'zova-module-a-bean' {}
+declare module 'zova-module-a-bean' {
+  export interface ServiceAop {
+    /** @internal */
+    get scope(): ScopeModuleABean;
+  }
+}
+/** service: end */
+/** service: begin */
+import { ServiceAop } from '../bean/service.aop.js';
+import 'zova';
+declare module 'zova' {
+  export interface IBeanRecordGeneral {
+    'a-bean.service.aop': ServiceAop;
+  }
+}
 /** service: end */
 /** main: begin */
 export * from '../main.js';

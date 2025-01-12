@@ -882,7 +882,8 @@ export class BeanContainer {
     // chains
     let chains: MetadataKey[] = [];
     if (!beanInstance[SymbolProxyDisable] && beanOptions && cast(beanOptions.scene) !== 'aop') {
-      const aops = appResource.findAopsMatched(beanOptions.beanFullName);
+      const beanAop = (await this.app.bean._getBean('a-bean.service.aop' as never)) as any;
+      const aops = await beanAop.findAopsMatched(beanOptions.beanFullName);
       if (aops) {
         chains = chains.concat(aops);
       }
