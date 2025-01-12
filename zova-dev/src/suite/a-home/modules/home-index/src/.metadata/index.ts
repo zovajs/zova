@@ -1,21 +1,21 @@
 /** controller: begin */
-export * from '../page/index/controller.jsx';
+export * from '../page/home/controller.jsx';
 
 import 'zova';
 declare module 'zova' {}
 declare module 'zova-module-home-index' {
-  export interface ControllerPageIndex {
+  export interface ControllerPageHome {
     /** @internal */
     get scope(): ScopeModuleHomeIndex;
   }
 }
 /** controller: end */
 /** controller: begin */
-import { ControllerPageIndex } from '../page/index/controller.jsx';
+import { ControllerPageHome } from '../page/home/controller.jsx';
 import 'zova';
 declare module 'zova' {
   export interface IBeanRecordLocal {
-    'home-index.controller.pageIndex': ControllerPageIndex;
+    'home-index.controller.pageHome': ControllerPageHome;
   }
 }
 /** controller: end */
