@@ -250,7 +250,7 @@ export class BeanContainer {
 
   _newBeanSimple<T>(A: Constructable<T>, markReactive: boolean, ...args): T {
     // prepare
-    const beanInstance = this._prepareBeanInstance(undefined, A, A, args, false, markReactive);
+    const beanInstance = this._prepareBeanInstanceSimple(undefined, A, A, args, markReactive);
     // init
     if (beanInstance.__init__) {
       beanInstance.__init__(...args);
@@ -413,7 +413,14 @@ export class BeanContainer {
     withSelector?: boolean,
   ): Promise<T> {
     // prepare
-    const beanInstance = this._prepareBeanInstance(beanComposable, beanFullName, beanClass, args, aop, markReactive);
+    const beanInstance = await this._prepareBeanInstance(
+      beanComposable,
+      beanFullName,
+      beanClass,
+      args,
+      markReactive,
+      aop,
+    );
     // special for controller
     if (controllerData) {
       beanInstance.__initControllerData(controllerData);
@@ -439,12 +446,35 @@ export class BeanContainer {
     return beanInstance;
   }
 
-  private _prepareBeanInstance(
+  private async _prepareBeanInstance(
     beanComposable: Functionable | undefined,
     beanFullName,
     beanClass,
     args,
+    markReactive,
     aop,
+  ) {
+    // prepare
+    let beanInstance = this._prepareBeanInstanceSimple(beanComposable, beanFullName, beanClass, args, markReactive);
+    // aop: proxy
+    const beanInstanceProxy = await this._patchBeanInstance(beanFullName || beanClass, beanInstance, aop);
+    if (beanInstanceProxy) {
+      // reactive
+      if (markReactive) {
+        beanInstance = reactive(beanInstanceProxy);
+      } else {
+        beanInstance = markRaw(beanInstanceProxy);
+      }
+    }
+    // ok
+    return beanInstance;
+  }
+
+  private _prepareBeanInstanceSimple(
+    beanComposable: Functionable | undefined,
+    beanFullName,
+    beanClass,
+    args,
     markReactive,
   ) {
     // create
@@ -480,16 +510,6 @@ export class BeanContainer {
       beanInstance = reactive(beanInstance);
     } else {
       beanInstance = markRaw(beanInstance);
-    }
-    // aop: proxy
-    const beanInstanceProxy = this._patchBeanInstance(beanFullName || beanClass, beanInstance, aop);
-    if (beanInstanceProxy) {
-      // reactive
-      if (markReactive) {
-        beanInstance = reactive(beanInstanceProxy);
-      } else {
-        beanInstance = markRaw(beanInstanceProxy);
-      }
     }
     // ok
     return beanInstance;
@@ -743,12 +763,12 @@ export class BeanContainer {
     }
   }
 
-  private _patchBeanInstance(beanFullNameOrBeanClass, beanInstance, aop) {
+  private async _patchBeanInstance(beanFullNameOrBeanClass, beanInstance, aop) {
     if (!beanFullNameOrBeanClass) return undefined;
     // not aop on aop
     if (aop) return undefined;
     // aop chains
-    const _aopChains = this._prepareAopChains(beanFullNameOrBeanClass, beanInstance);
+    const _aopChains = await this._prepareAopChains(beanFullNameOrBeanClass, beanInstance);
     // no aop
     if (_aopChains.length === 0) return undefined;
     // aop
@@ -853,7 +873,7 @@ export class BeanContainer {
     return methodProxy;
   }
 
-  private _prepareAopChains(beanFullNameOrBeanClass, beanInstance) {
+  private async _prepareAopChains(beanFullNameOrBeanClass, beanInstance) {
     if (!beanFullNameOrBeanClass) return [];
     // beanFullName maybe class
     const beanOptions = appResource.getBean(beanFullNameOrBeanClass);
