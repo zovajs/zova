@@ -49,7 +49,7 @@
     "_prepublishOnly": "npm run tsc:publish"
   },
   "dependencies": {
-    "@cabloy/deps": "^1.0.7",
+    "@cabloy/deps": "^1.0.8",
     "@cabloy/module-info": "^1.2.3",
     "@cabloy/utils": "^1.0.2",
     "@cabloy/word-utils": "^1.0.10"

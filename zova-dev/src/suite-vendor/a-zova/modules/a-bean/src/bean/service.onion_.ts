@@ -1,5 +1,5 @@
 import { getOnionScenesMeta, OnionSceneMeta } from '@cabloy/module-info';
-import { BeanBase, SymbolProxyDisable, ZovaContext } from 'zova';
+import { BeanBase, cast, SymbolProxyDisable } from 'zova';
 import { Service } from '../lib/bean.js';
 import {
   IOnionExecuteCustom,
@@ -9,6 +9,7 @@ import {
   IOnionSlice,
 } from '../types/onion.js';
 import { BeanOnion } from './bean.onion.js';
+import { ISwapDepsItem, swapDeps } from '@cabloy/deps';
 
 const SymbolOnionsEnabled = Symbol('SymbolOnionsEnabled');
 const SymbolOnionsEnabledWrapped = Symbol('SymbolOnionsEnabledWrapped');
