@@ -99,6 +99,11 @@ export class ServiceOnion<OPTIONS, ONIONNAME extends string> extends BeanBase {
           .options as IOnionOptionsDeps<string>;
         return onionOptions.dependencies as any;
       },
+      dependents: item => {
+        const onionOptions = cast<IOnionSlice<OPTIONS, ONIONNAME>>(item).beanOptions
+          .options as IOnionOptionsDeps<string>;
+        return onionOptions.dependents as any;
+      },
     });
   }
 

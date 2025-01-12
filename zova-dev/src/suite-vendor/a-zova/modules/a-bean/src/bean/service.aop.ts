@@ -1,6 +1,15 @@
 import { evaluate } from '@cabloy/utils';
-import { appResource, BeanBase, Constructable, deepExtend, IBeanRecord, SymbolProxyDisable, Use } from 'zova';
-import { BeanOnion, Service } from 'zova-module-a-bean';
+import { appResource, BeanBase, cast, Constructable, deepExtend, IBeanRecord, SymbolProxyDisable, Use } from 'zova';
+import { Service } from '../lib/bean.js';
+import { BeanOnion } from './bean.onion.js';
+import { IAopRecord, IDecoratorAopOptions } from '../types/aop.js';
+import { swapDeps } from '@cabloy/deps';
+
+interface IAopMatchResult {
+  name: keyof IAopRecord;
+  beanFullName: string;
+  options: IDecoratorAopOptions;
+}
 
 @Service()
 export class ServiceAop extends BeanBase {
@@ -28,7 +37,7 @@ export class ServiceAop extends BeanBase {
 
   _collectModulesMatched(beanFullName: string) {
     const moduleNames: string[] = [];
-    const aopsMatched: string[] = [];
+    const aopsMatched: IAopMatchResult[] = [];
     for (const moduleName in this.app.meta.module.modulesMeta.modules) {
       const module = this.app.meta.module.modulesMeta.modules[moduleName];
       const aops = module.info.capabilities?.aops;
@@ -55,10 +64,25 @@ export class ServiceAop extends BeanBase {
         // check
         if (this.$$beanOnion.checkOnionOptionsEnabled(aopOptions, beanFullName)) {
           moduleNames.push(moduleName);
-          aopsMatched.push(`${moduleName}.aop.${aopName}`);
+          aopsMatched.push({
+            name: onionName,
+            beanFullName: `${moduleName}.aop.${aopName}`,
+            options: aopOptions,
+          } as any);
         }
       }
     }
-    return { moduleNames, aopsMatched };
+    // swap
+    swapDeps(aopsMatched, {
+      name: 'name',
+      dependencies: item => {
+        return cast<IAopMatchResult>(item).options.dependencies as any;
+      },
+      dependents: item => {
+        return cast<IAopMatchResult>(item).options.dependents as any;
+      },
+    });
+    // ok
+    return { moduleNames, aopsMatched: aopsMatched.map(item => item.beanFullName) };
   }
 }
