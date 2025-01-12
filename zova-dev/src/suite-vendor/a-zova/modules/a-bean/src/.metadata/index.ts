@@ -24,21 +24,7 @@ export * from '../bean/service.onion_.js';
 
 import 'zova';
 declare module 'zova' {}
-declare module 'zova-module-a-bean' {
-  export interface ServiceOnion {
-    /** @internal */
-    get scope(): ScopeModuleABean;
-  }
-}
-/** service: end */
-/** service: begin */
-import { ServiceOnion } from '../bean/service.onion_.js';
-import 'zova';
-declare module 'zova' {
-  export interface IBeanRecordGeneral {
-    'a-bean.service.onion': ServiceOnion;
-  }
-}
+declare module 'zova-module-a-bean' {}
 /** service: end */
 /** scope: begin */
 import { BeanScopeBase, BeanScopeUtil } from 'zova';

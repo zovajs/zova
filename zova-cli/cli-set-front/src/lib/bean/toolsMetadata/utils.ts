@@ -27,7 +27,8 @@ export async function globAllTsFiles(moduleName: string, modulePath: string): Pr
   for (const file of files) {
     const fileName = path.basename(file);
     if (fileName.startsWith('_')) continue;
-    const isIgnore = fileName.endsWith('_');
+    const parts = fileName.split('.').slice(0, -1);
+    const isIgnore = checkIgnoreOfParts(parts);
     const fileNameJS = fileName.replace('.ts', '.js').replace('.tsx', '.jsx');
     const fileNameJSRelative = path
       .relative(pathMetadata, file)
@@ -36,13 +37,9 @@ export async function globAllTsFiles(moduleName: string, modulePath: string): Pr
       .replace('.tsx', '.jsx');
     const fileContent = fse.readFileSync(file).toString();
     const isVirtual = fileContent.includes('@Virtual()');
-    const matches = fileContent.match(/\s@([\S]+)\([\s\S]*?\)\sexport class ([\S]+)/);
+    const matches = fileContent.match(/\s@([\S]+)\([\s\S]*?\)\sexport class ([^ \n<]+)/);
     if (!matches) continue;
-    let className = matches[2];
-    const pos = className.indexOf('<');
-    if (pos > -1) {
-      className = className.substring(0, pos);
-    }
+    const className = matches[2];
     const sceneNameCapitalize = isVirtual ? 'Bean' : matches[1];
     const sceneName = toLowerCaseFirstChar(sceneNameCapitalize);
     const beanName = parseBeanName(className, sceneName);
