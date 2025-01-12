@@ -9,7 +9,7 @@
           "match": "home-index.controller.pageHome"
         },
         "home3": {
-          "match": "/.*/"
+          "match": "home-index.controller.pageHome"
         }
       }
     }
