@@ -455,7 +455,7 @@ export class BeanContainer {
     aop,
   ) {
     // prepare
-    let beanInstance = this._prepareBeanInstanceSimple(beanComposable, beanFullName, beanClass, args, markReactive);
+    let beanInstance = this._prepareBeanInstanceCommon(beanComposable, beanFullName, beanClass, args, markReactive);
     // aop: proxy
     const beanInstanceProxy = await this._patchBeanInstance(beanFullName || beanClass, beanInstance, aop);
     if (beanInstanceProxy) {
@@ -470,7 +470,7 @@ export class BeanContainer {
     return beanInstance;
   }
 
-  private _prepareBeanInstanceSimple(
+  private _prepareBeanInstanceCommon(
     beanComposable: Functionable | undefined,
     beanFullName,
     beanClass,
