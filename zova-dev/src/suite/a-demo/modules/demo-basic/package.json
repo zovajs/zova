@@ -9,7 +9,7 @@
           "match": "home-index.controller.pageHome"
         },
         "home3": {
-          "match": "home-index.controller.pageHome"
+          "match": "/home-index\\.controller\\.pageHome/"
         }
       }
     }

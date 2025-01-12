@@ -16,8 +16,20 @@ export default async function (options: IMetadataCustomGenerateOptions): Promise
     if (!matches) throw new Error(`aop options parser error: ${beanNameFull}`);
     const aopOptions = evaluate(matches[1]);
     nodeAops[beanName] = {};
-    if (aopOptions.match) nodeAops[beanName].match = aopOptions.match;
-    if (aopOptions.ignore) nodeAops[beanName].ignore = aopOptions.ignore;
+    for (const key of ['enable', 'meta']) {
+      if (aopOptions[key] !== undefined) nodeAops[beanName][key] = aopOptions[key];
+    }
+    for (const key of ['match', 'ignore']) {
+      if (aopOptions[key] !== undefined) {
+        let value = aopOptions[key];
+        if (Array.isArray(value)) {
+          value = value.map(item => (typeof item === 'string' ? item : item.toString()));
+        } else {
+          value = typeof value === 'string' ? value : value.toString();
+        }
+        nodeAops[beanName][key] = value;
+      }
+    }
   }
   await cli.helper.saveJSONFile(pkgFile, pkg);
   // ok
