@@ -252,6 +252,40 @@ declare module 'zova-module-demo-basic' {
   }
 }
 /** components: end */
+/** aop: begin */
+export * from '../bean/aop.home.jsx';
+export * from '../bean/aop.home3.jsx';
+
+import { IDecoratorAopOptions } from 'zova-module-a-bean';
+declare module 'zova-module-a-bean' {
+  export interface IAopRecord {
+    'demo-basic:home': IDecoratorAopOptions;
+    'demo-basic:home3': IDecoratorAopOptions;
+  }
+}
+declare module 'zova-module-demo-basic' {
+  export interface AopHome {
+    /** @internal */
+    get scope(): ScopeModuleDemoBasic;
+  }
+
+  export interface AopHome3 {
+    /** @internal */
+    get scope(): ScopeModuleDemoBasic;
+  }
+}
+/** aop: end */
+/** aop: begin */
+import { AopHome } from '../bean/aop.home.jsx';
+import { AopHome3 } from '../bean/aop.home3.jsx';
+import 'zova';
+declare module 'zova' {
+  export interface IBeanRecordLocal {
+    'demo-basic.aop.home': AopHome;
+    'demo-basic.aop.home3': AopHome3;
+  }
+}
+/** aop: end */
 /** locale: begin */
 import locale_en_us from '../config/locale/en-us.js';
 import locale_zh_cn from '../config/locale/zh-cn.js';

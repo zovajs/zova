@@ -1,5 +1,5 @@
 import { BeanBase } from 'zova';
-import { Aop } from 'vona-module-a-bean';
+import { Aop } from 'zova-module-a-bean';
 
 @Aop({ match: 'some-bean-name' })
 export class Aop<%=argv.beanNameCapitalize%> extends BeanBase {}
