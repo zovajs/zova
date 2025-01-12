@@ -913,12 +913,18 @@ export class BeanContainer {
     const host = beanOptions || beanFullNameOrBeanClass;
     if (host.__aopChains__) return host.__aopChains__;
     // chains
-    let chains: MetadataKey[] = [];
+    let chains: (MetadataKey | BeanBase)[] = [];
     if (!beanInstance[SymbolProxyDisable] && beanOptions && cast(beanOptions.scene) !== 'aop') {
-      const beanAop = (await this.app.bean._getBean('a-bean.service.aop' as never)) as any;
+      const beanAop = (await this.app.bean._getBean('a-bean.service.aop' as never, false)) as any;
       const aops = await beanAop.findAopsMatched(beanOptions.beanFullName);
       if (aops) {
-        chains = chains.concat(aops);
+        // load aops
+        const aopInstances: BeanBase[] = [];
+        for (const aopKey of aops) {
+          // only one app instance
+          aopInstances[aopKey] = await this.app.bean._getBean(aopKey, true);
+        }
+        chains = chains.concat(aopInstances);
       }
     }
     // magic self
@@ -972,7 +978,7 @@ export class BeanContainer {
       if (aopKey === SymbolProxyMagic) {
         chains.push([aopKey, methodName]);
       } else {
-        const aop: any = this._getBeanSyncOnly(aopKey as string);
+        const aop: BeanBase = aopKey;
         if (aop[methodName]) {
           let fn;
           if (methodType === 'get') {

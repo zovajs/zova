@@ -77,7 +77,6 @@ export class AppModule extends BeanSimple {
   }
 
   private async _loadAllMonkeysAndSyncsAndPreloads() {
-    const promises: Promise<IModuleResource>[] = [];
     const moduleNames: string[] = [];
     for (const moduleName of this.modulesMeta.moduleNames) {
       const module = this.modulesMeta.modules[moduleName];
@@ -85,14 +84,27 @@ export class AppModule extends BeanSimple {
       if (info.capabilities?.monkey || info.capabilities?.sync || info.capabilities?.preload) {
         const moduleResource = module.resource as any;
         if (typeof moduleResource === 'function') {
-          promises.push(moduleResource());
           moduleNames.push(moduleName);
         }
       }
     }
+    await this.loadModules(moduleNames);
+  }
+
+  public async loadModules(moduleNames: string[]) {
+    const promises: Promise<IModuleResource>[] = [];
+    const moduleNamesLoading: string[] = [];
+    for (const moduleName of moduleNames) {
+      const module = this.modulesMeta.modules[moduleName];
+      const moduleResource = module.resource as any;
+      if (typeof moduleResource === 'function') {
+        promises.push(moduleResource());
+        moduleNamesLoading.push(moduleName);
+      }
+    }
     const modulesResource = await Promise.all(promises);
     for (let i = 0; i < modulesResource.length; i++) {
-      const moduleName = moduleNames[i];
+      const moduleName = moduleNamesLoading[i];
       this.modulesMeta.modules[moduleName].resource = modulesResource[i];
     }
   }
