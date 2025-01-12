@@ -1,5 +1,5 @@
-import { getOnionScenesMeta, OnionSceneMeta } from '@cabloy/module-info';
-import { BeanBase, cast, SymbolProxyDisable } from 'zova';
+import { getOnionScenesMeta, IModule, OnionSceneMeta } from '@cabloy/module-info';
+import { appResource, BeanBase, cast, SymbolProxyDisable } from 'zova';
 import { Service } from '../lib/bean.js';
 import {
   IOnionExecuteCustom,
@@ -140,7 +140,8 @@ export class ServiceOnion<OPTIONS, ONIONNAME extends string> extends BeanBase {
 
   private _loadOnionsAll() {
     const onionsAll: IOnionSlice<OPTIONS, ONIONNAME>[] = [];
-    for (const module of this.app.meta.modulesArray) {
+    for (const moduleName of this.app.meta.module.modulesMeta.moduleNames) {
+      const module = this.app.meta.module.modulesMeta.modules[moduleName];
       this._loadOnionsAll_fromMetadata(onionsAll, module);
     }
     return onionsAll;
