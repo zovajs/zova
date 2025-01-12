@@ -38,6 +38,7 @@ export class ServiceAop extends BeanBase {
         for (const key of ['match', 'ignore']) {
           // value
           let value = aopOptions[key];
+          if (value === undefined) continue;
           if (Array.isArray(value)) {
             value = value.map(item => (typeof item === 'string' && item.startsWith('/') ? evaluate(item) : item));
           } else {
@@ -54,7 +55,7 @@ export class ServiceAop extends BeanBase {
         // check
         if (this.$$beanOnion.checkOnionOptionsEnabled(aopOptions, beanFullName)) {
           moduleNames.push(moduleName);
-          aopsMatched.push(`${moduleName}.aop:${aopName}`);
+          aopsMatched.push(`${moduleName}.aop.${aopName}`);
         }
       }
     }
