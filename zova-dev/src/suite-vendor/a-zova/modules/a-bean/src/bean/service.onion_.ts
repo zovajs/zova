@@ -1,7 +1,13 @@
 import { getOnionScenesMeta, OnionSceneMeta } from '@cabloy/module-info';
-import { BeanBase, SymbolProxyDisable } from 'zova';
+import { BeanBase, SymbolProxyDisable, ZovaContext } from 'zova';
 import { Service } from '../lib/bean.js';
-import { IOnionOptionsEnable, IOnionOptionsMatch, IOnionSlice } from '../types/onion.js';
+import {
+  IOnionExecuteCustom,
+  IOnionOptionsDeps,
+  IOnionOptionsEnable,
+  IOnionOptionsMatch,
+  IOnionSlice,
+} from '../types/onion.js';
 import { BeanOnion } from './bean.onion.js';
 
 const SymbolOnionsEnabled = Symbol('SymbolOnionsEnabled');
@@ -72,117 +78,12 @@ export class ServiceOnion<OPTIONS, ONIONNAME extends string> extends BeanBase {
     return this._cacheOnionsGlobal;
   }
 
-  private _composeOnionsHandler(
-    ctx: VonaContext,
-    fnStart?: Function | Function[],
-    fnMid?: Function | Function[],
-    fnEnd?: Function | Function[],
-    executeCustom?: IOnionExecuteCustom,
-  ) {
-    const beanFullName = ctx.getControllerBeanFullName();
-    const handlerName = ctx.getHandler()?.name;
-    const key = beanFullName ? `${beanFullName}:${handlerName}` : '';
-    if (!this._cacheOnionsHandler[key]) {
-      let onions: Function[] = [];
-      if (fnStart) onions = onions.concat(fnStart);
-      // onions: global
-      onions = onions.concat(this._composeOnionsGlobal(executeCustom));
-      if (fnMid) onions = onions.concat(fnMid);
-      // onions: handler
-      const onionsLocal = this._collectOnionsHandler(ctx);
-      for (const item of onionsLocal) {
-        onions.push(this._wrapOnion(item, executeCustom));
-      }
-      if (fnEnd) onions = onions.concat(fnEnd);
-      this._cacheOnionsHandler[key] = onions;
-    }
-    return this._cacheOnionsHandler[key];
-  }
-
-  public _collectOnionsHandler(ctx: VonaContext) {
-    if (!ctx.getController()) return [];
-    // onionsLocal: controller
-    const controllerOnionsLocal = appMetadata.getMetadata<Record<string, string[]>>(
-      SymbolUseOnionLocal,
-      ctx.getController()!,
-    )?.[this.sceneName] as string[];
-    // onionsLocal: action
-    const onionsLocal: IOnionSlice<OPTIONS, ONIONNAME>[] = [];
-    const actionOnionsLocal = appMetadata.getMetadata<Record<string, string[]>>(
-      SymbolUseOnionLocal,
-      ctx.getControllerPrototype()!,
-      ctx.getHandlerName()!,
-    )?.[this.sceneName] as string[];
-    const onionsLocalAll: string[] = [];
-    if (actionOnionsLocal) {
-      actionOnionsLocal.forEach(item => {
-        if (!onionsLocalAll.includes(item)) onionsLocalAll.push(item);
-      });
-    }
-    if (controllerOnionsLocal) {
-      controllerOnionsLocal.forEach(item => {
-        if (!onionsLocalAll.includes(item)) onionsLocalAll.push(item);
-      });
-    }
-    for (const onionName of onionsLocalAll) {
-      const item = this.onionsNormal[onionName];
-      if (!item) throw new Error(`${this.sceneName} not found: ${onionName}`);
-      onionsLocal.push(item);
-    }
-    return onionsLocal;
-  }
-
   getOnionSlice(onionName: ONIONNAME): IOnionSlice<OPTIONS, ONIONNAME> {
     return this.onionsNormal[onionName];
   }
 
   getOnionOptions<OPTIONS>(onionName: ONIONNAME): OPTIONS | undefined {
     return this.getOnionSlice(onionName).beanOptions.options as OPTIONS | undefined;
-  }
-
-  getOnionOptionsDynamic<OPTIONS>(onionName: ONIONNAME): OPTIONS | undefined {
-    const item = this.getOnionSlice(onionName);
-    return this.combineOnionOptions(item);
-  }
-
-  combineOnionOptions(item: IOnionSlice<OPTIONS, ONIONNAME>) {
-    const ctx = this.ctx;
-    // optionsPrimitive
-    const optionsPrimitive = item.beanOptions.optionsPrimitive;
-    // options: meta/config
-    const optionsMetaAndConfig = item.beanOptions.options;
-    // options: instance config
-    const optionsInstanceConfig = ctx.instance ? ctx.config.onions[item.beanOptions.scene]?.[item.name] : undefined;
-    // options: route
-    //    not use route options for argument pipe
-    let optionsRoute;
-    if (!cast(item).argumentPipe && this.sceneMeta.optionsRoute) {
-      const route = ctx.route?.route;
-      optionsRoute = route?.meta?.[item.beanOptions.beanFullName];
-    }
-    // options: argument pipe
-    const optionsArgumentPipe = this.sceneMeta.optionsArgumentPipe ? cast(item).argumentPipe?.options : undefined;
-    // options: dynamic
-    let optionsDynamic;
-    if (this.sceneMeta.optionsDynamic) {
-      optionsDynamic = ctx.onionsDynamic?.[item.beanOptions.scene]?.[item.name];
-    }
-    // final options
-    let options;
-    if (optionsPrimitive) {
-      options = optionsDynamic ?? optionsArgumentPipe ?? optionsRoute ?? optionsInstanceConfig ?? optionsMetaAndConfig;
-    } else {
-      options = deepExtend(
-        {},
-        optionsMetaAndConfig,
-        optionsInstanceConfig,
-        optionsRoute,
-        optionsArgumentPipe,
-        optionsDynamic,
-      );
-    }
-    // ok
-    return options;
   }
 
   private _handleDependents(onions: IOnionSlice<OPTIONS, ONIONNAME>[]) {
