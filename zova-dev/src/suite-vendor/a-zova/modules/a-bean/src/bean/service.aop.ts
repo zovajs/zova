@@ -5,13 +5,24 @@ import { Service } from 'zova-module-a-bean';
 export class ServiceAop extends BeanBase {
   protected [SymbolProxyDisable]: boolean = true;
 
-  findAopsMatched<T>(A: Constructable<T>): string[] | undefined;
-  findAopsMatched<K extends keyof IBeanRecord>(beanFullName: K): string[] | undefined;
-  findAopsMatched(beanFullName: string): string[] | undefined;
-  findAopsMatched<T>(beanFullName: Constructable<T> | string): string[] | undefined {
+  async findAopsMatched<T>(A: Constructable<T>): Promise<string[] | undefined>;
+  async findAopsMatched<K extends keyof IBeanRecord>(beanFullName: K): Promise<string[] | undefined>;
+  async findAopsMatched(beanFullName: string): Promise<string[] | undefined>;
+  async findAopsMatched<T>(beanFullName: Constructable<T> | string): Promise<string[] | undefined> {
     // beanOptions
     const beanOptions = appResource.getBean(beanFullName as any);
     if (!beanOptions) return;
+    // beanFullName
+    beanFullName = beanOptions.beanFullName;
+    //
+
     return;
+  }
+
+  _collectModulesMatched(beanFullName: string) {
+    const moduleNames: string[] = [];
+    for (const moduleName in this.app.meta.module.modulesMeta.modules) {
+      const module = this.app.meta.module.modulesMeta.modules[moduleName];
+    }
   }
 }

@@ -30,7 +30,7 @@
   "author": "zhennann",
   "license": "MIT",
   "dependencies": {
-    "@cabloy/module-info": "^1.2.3",
+    "@cabloy/module-info": "^1.2.6",
     "@cabloy/word-utils": "^1.0.10"
   },
   "devDependencies": {
