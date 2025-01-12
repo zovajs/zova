@@ -8,7 +8,7 @@ import { TypeBeanScopeRecordKeys } from '../../bean/type.js';
 import { deepExtend } from '../app/util.js';
 
 export class AppModule extends BeanSimple {
-  private modulesMeta: PluginZovaModulesMeta;
+  public modulesMeta: PluginZovaModulesMeta;
   private modules: Record<string, IModule> = shallowReactive({});
 
   /** @internal */
