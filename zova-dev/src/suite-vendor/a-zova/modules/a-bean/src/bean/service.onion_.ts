@@ -1,13 +1,7 @@
 import { getOnionScenesMeta, IModule, OnionSceneMeta } from '@cabloy/module-info';
-import { appResource, BeanBase, cast, SymbolProxyDisable } from 'zova';
+import { appResource, BeanBase, cast, deepExtend, SymbolProxyDisable } from 'zova';
 import { Service } from '../lib/bean.js';
-import {
-  IOnionExecuteCustom,
-  IOnionOptionsDeps,
-  IOnionOptionsEnable,
-  IOnionOptionsMatch,
-  IOnionSlice,
-} from '../types/onion.js';
+import { IOnionOptionsDeps, IOnionOptionsEnable, IOnionOptionsMatch, IOnionSlice } from '../types/onion.js';
 import { BeanOnion } from './bean.onion.js';
 import { ISwapDepsItem, swapDeps } from '@cabloy/deps';
 
@@ -62,21 +56,6 @@ export class ServiceOnion<OPTIONS, ONIONNAME extends string> extends BeanBase {
       });
     }
     return this[SymbolOnionsEnabledWrapped][selector];
-  }
-
-  public get composedOnionsGlobal() {
-    return this._composeOnionsGlobal();
-  }
-
-  private _composeOnionsGlobal(executeCustom?: IOnionExecuteCustom) {
-    if (!this._cacheOnionsGlobal) {
-      const onions: Function[] = [];
-      for (const item of this.onionsGlobal) {
-        onions.push(this._wrapOnion(item, executeCustom));
-      }
-      this._cacheOnionsGlobal = onions;
-    }
-    return this._cacheOnionsGlobal;
   }
 
   getOnionSlice(onionName: ONIONNAME): IOnionSlice<OPTIONS, ONIONNAME> {
@@ -154,54 +133,17 @@ export class ServiceOnion<OPTIONS, ONIONNAME extends string> extends BeanBase {
       const beanOptions = onions[key];
       const name = key.replace(`.${this.sceneName}.`, ':') as ONIONNAME;
       // options
-      const optionsConfig = this.app.config.onions[beanOptions.scene]?.[name];
+      const optionsConfig = this.app.config.onions[this.sceneName]?.[name];
       if (beanOptions.optionsPrimitive) {
         beanOptions.options = optionsConfig === undefined ? beanOptions.options : optionsConfig;
       } else {
         beanOptions.options = deepExtend({}, beanOptions.options, optionsConfig);
       }
       // push
-      // todo: remove options/as any
       onionsAll.push({
         name,
-        options: beanOptions.options as any,
         beanOptions: beanOptions as any,
-      } as any);
+      });
     }
-  }
-
-  /** internal */
-  public _wrapOnion(item: IOnionSlice<OPTIONS, ONIONNAME>, executeCustom?: IOnionExecuteCustom) {
-    const sceneName = this.sceneName;
-    const fn = (data: any, next: Next) => {
-      // optionsPrimitive
-      const optionsPrimitive = item.beanOptions.optionsPrimitive;
-      // options
-      const options = this.combineOnionOptions(item);
-      // enable match ignore dependencies
-      if (!optionsPrimitive && !this.bean.onion.checkOnionOptionsEnabled(options, this._getRoutePathForMatch())) {
-        return next(data);
-      }
-      // execute
-      const beanFullName = item.beanOptions.beanFullName;
-      const beanInstance = this.app.bean._getBean(beanFullName as any);
-      if (!beanInstance) {
-        throw new Error(`${sceneName} bean not found: ${beanFullName}`);
-      }
-      if (executeCustom) {
-        return executeCustom(beanInstance, data, options, next);
-      }
-      return cast(beanInstance).execute(options, next);
-    };
-    fn._name = item.name;
-    return fn;
-  }
-
-  private _getRoutePathForMatch() {
-    const routePathRaw: string | undefined = this.ctx.route?.routePathRaw;
-    if (!routePathRaw) return;
-    return routePathRaw.startsWith('//')
-      ? '/' + this.ctx.path
-      : this.ctx.path.substring(this.app.config.globalPrefix.length);
   }
 }
