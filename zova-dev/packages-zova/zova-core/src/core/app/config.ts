@@ -68,6 +68,7 @@ export function configDefault() {
       name: {},
     },
     modules: {},
+    onions: {},
   };
 }
 

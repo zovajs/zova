@@ -7,7 +7,7 @@ export class ServiceAop extends BeanBase {
   protected [SymbolProxyDisable]: boolean = true;
 
   @Use()
-  beanOnion: BeanOnion;
+  $$beanOnion: BeanOnion;
 
   async findAopsMatched<T>(A: Constructable<T>): Promise<string[] | undefined>;
   async findAopsMatched<K extends keyof IBeanRecord>(beanFullName: K): Promise<string[] | undefined>;
@@ -34,7 +34,7 @@ export class ServiceAop extends BeanBase {
       const aops = module.info.capabilities?.aops;
       if (!aops) continue;
       for (const aopName in aops) {
-        const aopOptions = aops[aopName];
+        let aopOptions = aops[aopName];
         for (const key of ['match', 'ignore']) {
           // value
           let value = aopOptions[key];
@@ -44,17 +44,17 @@ export class ServiceAop extends BeanBase {
             value = typeof value === 'string' && value.startsWith('/') ? evaluate(value) : value;
           }
           aopOptions[key] = value;
-          // extend config
-          const onionName = `${moduleName}:${aopName}`;
-          const optionsConfig = this.app.config.onions['aop']?.[onionName];
-          if (optionsConfig) {
-            value = deepExtend({}, value, optionsConfig);
-          }
-          // check
-          if (this.beanOnion.checkOnionOptionsEnabled(value, beanFullName)) {
-            moduleNames.push(moduleName);
-            aopsMatched.push(`${moduleName}.aop:${aopName}`);
-          }
+        }
+        // extend config
+        const onionName = `${moduleName}:${aopName}`;
+        const optionsConfig = this.app.config.onions['aop']?.[onionName];
+        if (optionsConfig) {
+          aopOptions = deepExtend({}, aopOptions, optionsConfig);
+        }
+        // check
+        if (this.$$beanOnion.checkOnionOptionsEnabled(aopOptions, beanFullName)) {
+          moduleNames.push(moduleName);
+          aopsMatched.push(`${moduleName}.aop:${aopName}`);
         }
       }
     }
