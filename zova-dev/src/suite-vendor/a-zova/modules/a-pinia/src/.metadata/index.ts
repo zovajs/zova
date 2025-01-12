@@ -30,7 +30,7 @@ declare module 'zova-module-a-pinia' {
 import { ServicePinia } from '../bean/service.pinia.js';
 import 'zova';
 declare module 'zova' {
-  export interface IBeanRecordLocal {
+  export interface IBeanRecordGeneral {
     'a-pinia.service.pinia': ServicePinia;
   }
 }

@@ -38,7 +38,7 @@ declare module 'zova-module-a-router' {
 import { ServiceRouter } from '../bean/service.router.js';
 import 'zova';
 declare module 'zova' {
-  export interface IBeanRecordLocal {
+  export interface IBeanRecordGeneral {
     'a-router.service.router': ServiceRouter;
   }
 }

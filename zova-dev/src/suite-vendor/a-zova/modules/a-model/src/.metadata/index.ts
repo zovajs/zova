@@ -30,7 +30,7 @@ declare module 'zova-module-a-model' {
 import { ServiceStorage } from '../bean/service.storage.js';
 import 'zova';
 declare module 'zova' {
-  export interface IBeanRecordLocal {
+  export interface IBeanRecordGeneral {
     'a-model.service.storage': ServiceStorage;
   }
 }

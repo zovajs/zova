@@ -15,7 +15,7 @@
         "boilerplate": "cli/data/boilerplate"
       },
       "service": {
-        "beanGeneral": false,
+        "beanGeneral": true,
         "optionsNone": true,
         "boilerplate": "cli/service/boilerplate"
       },

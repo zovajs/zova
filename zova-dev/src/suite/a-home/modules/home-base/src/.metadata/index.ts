@@ -63,7 +63,7 @@ import { ServiceRouter } from '../bean/service.router.js';
 import { ServiceSsr } from '../bean/service.ssr.js';
 import 'zova';
 declare module 'zova' {
-  export interface IBeanRecordLocal {
+  export interface IBeanRecordGeneral {
     'home-base.service.router': ServiceRouter;
     'home-base.service.ssr': ServiceSsr;
   }
