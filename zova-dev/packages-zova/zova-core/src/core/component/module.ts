@@ -92,6 +92,7 @@ export class AppModule extends BeanSimple {
   }
 
   public async loadModules(moduleNames: string[]) {
+    if (moduleNames.length === 0) return;
     const promises: Promise<IModuleResource>[] = [];
     const moduleNamesLoading: string[] = [];
     for (const moduleName of moduleNames) {
