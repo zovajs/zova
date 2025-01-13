@@ -26,6 +26,7 @@ import { isNilOrEmptyString } from '@cabloy/utils';
 const SymbolBeanContainerParent = Symbol('Bean#BeanContainerParent');
 const SymbolProxyMagic = Symbol('Bean#ProxyMagic');
 const SymbolCacheAopChains = Symbol('Bean#SymbolCacheAopChains');
+const SymbolCacheAopChainsKey = Symbol('Bean#SymbolCacheAopChainsKey');
 export const BeanContainerInstances = Symbol('Bean#Instances');
 export const SymbolProxyDisable = Symbol('Bean#SymbolProxyDisable');
 
@@ -987,9 +988,11 @@ export class BeanContainer {
   ) {
     const chainsKey = `__aopChains_${methodName}__`;
     const beanOptions = appResource.getBean(beanFullName);
-    const host = beanOptions || beanFullName;
-    if (!host.__aopChainsKey__) host.__aopChainsKey__ = {};
-    if (host.__aopChainsKey__[chainsKey]) return host.__aopChainsKey__[chainsKey];
+    const cacheKey = beanOptions?.beanFullName || beanFullName;
+    const host = this._aopCacheHost();
+    if (!host[SymbolCacheAopChainsKey]) host[SymbolCacheAopChainsKey] = {};
+    if (!host[SymbolCacheAopChainsKey][cacheKey]) host[SymbolCacheAopChainsKey][cacheKey] = {};
+    if (host[SymbolCacheAopChainsKey][cacheKey][chainsKey]) return host[SymbolCacheAopChainsKey][cacheKey][chainsKey];
     const _aopChains = this._getAopChains(beanFullName);
     const chains: [MetadataKey, string][] = [];
     for (const aopKey of _aopChains) {
@@ -1032,7 +1035,7 @@ export class BeanContainer {
         }
       }
     }
-    host.__aopChainsKey__[chainsKey] = chains;
+    host[SymbolCacheAopChainsKey][cacheKey][chainsKey] = chains;
     return chains;
   }
 
