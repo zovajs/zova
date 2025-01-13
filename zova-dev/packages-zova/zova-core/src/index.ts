@@ -1,3 +1,5 @@
+import '@cabloy/set';
+import '@cabloy/json5';
 export * from './bean/index.js';
 export * from './components/index.js';
 export * from './core/index.js';
