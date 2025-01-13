@@ -30,7 +30,7 @@ export class ServiceAop extends BeanBase {
     // collect
     const { moduleNames, aopsMatched } = this._collectModulesMatched(beanFullName);
     // load modules
-    await this.app.meta.module.loadModules(moduleNames);
+    await this.app.meta.module.loadModules(Set.unique(moduleNames));
     // ok
     return aopsMatched;
   }

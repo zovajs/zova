@@ -41,7 +41,7 @@
   "dependencies": {
     "@cabloy/compose": "^2.0.0",
     "@cabloy/extend": "^3.0.5",
-    "@cabloy/json5": "^1.0.7",
+    "@cabloy/json5": "^1.0.8",
     "@cabloy/localeutil": "^2.0.0",
     "@cabloy/module-info": "^1.2.6",
     "@cabloy/set": "^1.0.7",
