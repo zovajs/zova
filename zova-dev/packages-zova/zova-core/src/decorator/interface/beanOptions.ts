@@ -10,7 +10,7 @@ export interface IDecoratorBeanOptionsBase<T = unknown, OPTIONS = unknown> {
    */
   beanFullName: string;
   module: string;
-  scene?: keyof IBeanSceneRecord;
+  scene: keyof IBeanSceneRecord;
   name: string;
   beanClass: Constructable<T>;
   containerScope?: ContainerScope;
