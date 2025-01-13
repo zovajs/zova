@@ -811,7 +811,7 @@ export class BeanContainer {
   private _newBeanProxy(beanFullName, beanInstance) {
     const self = this;
     const proxy = new Proxy(beanInstance, {
-      get(target, prop, _receiver) {
+      get(target, prop, receiver) {
         if (typeof prop === 'symbol') {
           return target[prop];
         }
@@ -827,7 +827,14 @@ export class BeanContainer {
         if (!methodType) {
           const methodName = `__get_${prop}__`;
           const methodNameMagic = '__get__';
-          const _aopChainsProp = self._getAopChainsProp(beanFullName, methodName, methodNameMagic, 'get', prop);
+          const _aopChainsProp = self._getAopChainsProp(
+            receiver,
+            beanFullName,
+            methodName,
+            methodNameMagic,
+            'get',
+            prop,
+          );
           if (_aopChainsProp.length === 0) return target[prop];
           // aop
           return self.__composeForProp(_aopChainsProp)(undefined, () => {
@@ -839,9 +846,9 @@ export class BeanContainer {
           });
         }
         // method
-        return self._getInstanceMethodProxy(beanFullName, target, prop);
+        return self._getInstanceMethodProxy(receiver, beanFullName, target, prop);
       },
-      set(target, prop, value, _receiver) {
+      set(target, prop, value, receiver) {
         if (typeof prop === 'symbol') {
           target[prop] = value;
           return true;
@@ -858,7 +865,7 @@ export class BeanContainer {
         }
         const methodName = `__set_${prop}__`;
         const methodNameMagic = '__set__';
-        const _aopChainsProp = self._getAopChainsProp(beanFullName, methodName, methodNameMagic, 'set', prop);
+        const _aopChainsProp = self._getAopChainsProp(receiver, beanFullName, methodName, methodNameMagic, 'set', prop);
         if (_aopChainsProp.length === 0) {
           target[prop] = value;
           return true;
@@ -882,14 +889,14 @@ export class BeanContainer {
     return proxy;
   }
 
-  private _getInstanceMethodProxy(beanFullName, beanInstance, prop) {
+  private _getInstanceMethodProxy(receiver, beanFullName, beanInstance, prop) {
     const self = this;
     // not aop magic methods
     if (__isInnerMethod(prop)) {
       return beanInstance[prop];
     }
     // aop chains
-    const _aopChainsProp = this._getAopChainsProp(beanFullName, prop, undefined, 'method', prop);
+    const _aopChainsProp = this._getAopChainsProp(receiver, beanFullName, prop, undefined, 'method', prop);
     if (_aopChainsProp.length === 0) return beanInstance[prop];
     // proxy
     const methodProxyKey = `__aopproxy_method_${prop}__`;
@@ -961,6 +968,7 @@ export class BeanContainer {
   }
 
   private _getAopChainsProp(
+    receiver,
     beanFullName,
     methodName,
     methodNameMagic,
@@ -983,15 +991,15 @@ export class BeanContainer {
           let fn;
           if (methodType === 'get') {
             fn = function (_, next) {
-              return aop[methodName](next);
+              return aop[methodName](next, receiver);
             };
           } else if (methodType === 'set') {
             fn = function (value, next) {
-              return aop[methodName](value, next);
+              return aop[methodName](value, next, receiver);
             };
           } else if (methodType === 'method') {
             fn = function (args, next) {
-              return aop[methodName](args, next);
+              return aop[methodName](args, next, receiver);
             };
           }
           chains.push([aopKey, fn]);
@@ -999,15 +1007,15 @@ export class BeanContainer {
           let fn;
           if (methodType === 'get') {
             fn = function (_, next) {
-              return aop[methodNameMagic](prop, next);
+              return aop[methodNameMagic](prop, next, receiver);
             };
           } else if (methodType === 'set') {
             fn = function (value, next) {
-              return aop[methodNameMagic](prop, value, next);
+              return aop[methodNameMagic](prop, value, next, receiver);
             };
           } else if (methodType === 'method') {
             fn = function (args, next) {
-              return aop[methodNameMagic](args, next);
+              return aop[methodNameMagic](args, next, receiver);
             };
           }
           chains.push([aopKey, fn]);
