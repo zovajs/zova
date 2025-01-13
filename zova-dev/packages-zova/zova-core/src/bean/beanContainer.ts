@@ -25,6 +25,7 @@ import { isNilOrEmptyString } from '@cabloy/utils';
 
 const SymbolBeanContainerParent = Symbol('Bean#BeanContainerParent');
 const SymbolProxyMagic = Symbol('Bean#ProxyMagic');
+const SymbolCacheAopChains = Symbol('Bean#SymbolCacheAopChains');
 export const BeanContainerInstances = Symbol('Bean#Instances');
 export const SymbolProxyDisable = Symbol('Bean#SymbolProxyDisable');
 
@@ -917,8 +918,10 @@ export class BeanContainer {
     if (!beanFullNameOrBeanClass) return [];
     // beanFullName maybe class
     const beanOptions = appResource.getBean(beanFullNameOrBeanClass);
-    const host = beanOptions || beanFullNameOrBeanClass;
-    if (host.__aopChains__) return host.__aopChains__;
+    const cacheKey = beanOptions?.beanFullName || beanFullNameOrBeanClass;
+    const host = this._aopCacheHost();
+    if (!host[SymbolCacheAopChains]) host[SymbolCacheAopChains] = {};
+    if (host[SymbolCacheAopChains][cacheKey]) return host[SymbolCacheAopChains][cacheKey];
     // chains
     let chains: (MetadataKey | BeanBase)[] = [];
     if (!beanInstance[SymbolProxyDisable] && beanOptions && cast(beanOptions.scene) !== 'aop') {
@@ -939,7 +942,7 @@ export class BeanContainer {
       chains.push(SymbolProxyMagic);
     }
     // hold
-    host.__aopChains__ = chains;
+    host[SymbolCacheAopChains][cacheKey] = chains;
     return chains;
   }
 
@@ -947,8 +950,10 @@ export class BeanContainer {
     if (!beanFullNameOrBeanClass) return [];
     // beanFullName maybe class
     const beanOptions = appResource.getBean(beanFullNameOrBeanClass);
-    const host = beanOptions || beanFullNameOrBeanClass;
-    if (host.__aopChains__) return host.__aopChains__;
+    const cacheKey = beanOptions?.beanFullName || beanFullNameOrBeanClass;
+    const host = this._aopCacheHost();
+    if (!host[SymbolCacheAopChains]) host[SymbolCacheAopChains] = {};
+    if (host[SymbolCacheAopChains][cacheKey]) return host[SymbolCacheAopChains][cacheKey];
     // chains
     const chains: MetadataKey[] = [];
     // magic self
@@ -956,15 +961,20 @@ export class BeanContainer {
       chains.push(SymbolProxyMagic);
     }
     // hold
-    host.__aopChains__ = chains;
+    host[SymbolCacheAopChains][cacheKey] = chains;
     return chains;
   }
 
   private _getAopChains(beanFullName) {
     // beanFullName maybe class
     const beanOptions = appResource.getBean(beanFullName);
-    const host = beanOptions || beanFullName;
-    return host.__aopChains__;
+    const cacheKey = beanOptions?.beanFullName || beanFullName;
+    const host = this._aopCacheHost();
+    return host[SymbolCacheAopChains]?.[cacheKey] || [];
+  }
+
+  private _aopCacheHost() {
+    return this.app ? this.app.ctx : this.ctx;
   }
 
   private _getAopChainsProp(
