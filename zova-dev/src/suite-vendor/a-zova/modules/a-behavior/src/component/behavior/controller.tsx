@@ -1,6 +1,6 @@
-import { createVNode } from 'vue';
+import { Component, ComponentInternalInstance, createVNode } from 'vue';
 import { JSX } from 'vue/jsx-runtime';
-import { BeanControllerBase } from 'zova';
+import { BeanControllerBase, cast } from 'zova';
 import { ZTest3 } from 'zova-module-a-b';
 import { Controller } from 'zova-module-a-bean';
 
@@ -13,20 +13,19 @@ export class ControllerBehavior extends BeanControllerBase {
   protected async __init__() {}
 
   protected render() {
-    return createVNode(ZTest3, this.$attrs, [this.$slots.default?.()]);
-    // return (
-    //   <div>
-    //     <ZTest3 {...this.$attrs}></ZTest3>
-    //     {this.$slots.default?.()}
-    //   </div>
-    // );
-    // const vnode = this.$slots.default?.();
-    // if (!vnode) return;
-    // return vnode;
+    return createInnerComp(ZTest3, this.ctx.instance);
   }
-  // protected render() {
-  //   const vnode = this.$slots.default?.();
-  //   if (!vnode) return;
-  //   return withDirectives(vnode[0], [[vModelText, 3]]);
-  // }
+}
+
+function createInnerComp(comp: Component, parent: ComponentInternalInstance) {
+  const { ref, props, children } = parent.vnode;
+  const vnode = createVNode(comp, props, children);
+  // ensure inner component inherits the async wrapper's ref owner
+  vnode.ref = ref;
+  // pass the custom element callback on to the inner comp
+  // and remove it from the async wrapper
+  cast(vnode).ce = cast(parent.vnode).ce;
+  delete cast(parent.vnode).ce;
+
+  return vnode;
 }
