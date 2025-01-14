@@ -4,8 +4,8 @@
 
 <script setup lang="ts">
 import { useController, PropsBase } from 'zova';
-import { ControllerBehavior, ControllerBehaviorSlots } from '../../component/behavior/controller.jsx';
-const props = defineProps<PropsBase<ControllerBehavior, ControllerBehaviorSlots>>();
+import { ControllerBehavior } from '../../component/behavior/controller.jsx';
+const props = defineProps<PropsBase<ControllerBehavior>>();
 
 useController(props, undefined, ControllerBehavior, undefined, undefined);
 </script>

@@ -21,7 +21,7 @@ declare module 'zova' {
 /** controller: end */
 
 /** components: begin */
-import { ControllerBehaviorSlots } from '../component/behavior/controller.jsx';
+
 export { default as ZBehavior } from './component/behavior.vue';
 import { default as ZBehavior } from './component/behavior.vue';
 export const components = {
@@ -33,11 +33,7 @@ declare module 'zova' {
     'a-behavior:behavior': ControllerBehavior;
   }
 }
-declare module 'zova-module-a-behavior' {
-  export interface ControllerBehavior {
-    $slots: ControllerBehaviorSlots;
-  }
-}
+declare module 'zova-module-a-behavior' {}
 /** components: end */
 /** scope: begin */
 import { BeanScopeBase, BeanScopeUtil } from 'zova';

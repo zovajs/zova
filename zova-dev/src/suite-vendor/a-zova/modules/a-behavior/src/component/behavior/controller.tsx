@@ -1,12 +1,7 @@
 import { Component, ComponentInternalInstance, createVNode } from 'vue';
-import { JSX } from 'vue/jsx-runtime';
 import { BeanControllerBase, cast } from 'zova';
 import { ZTest3 } from 'zova-module-a-b';
 import { Controller } from 'zova-module-a-bean';
-
-export interface ControllerBehaviorSlots {
-  default?: () => JSX.Element;
-}
 
 @Controller()
 export class ControllerBehavior extends BeanControllerBase {
