@@ -5,7 +5,7 @@ export function UseBehavior<T extends keyof IBehaviorRecord>(
   options?: Partial<IBehaviorRecord[T]>,
 ): IBehaviorItem {
   return {
-    behaviorName,
+    name: behaviorName,
     options,
   };
 }

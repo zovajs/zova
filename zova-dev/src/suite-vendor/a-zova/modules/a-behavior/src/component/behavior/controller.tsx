@@ -1,7 +1,8 @@
 import { createVNode } from 'vue';
-import { BeanControllerBase, cast, SymbolControllerRefDisable } from 'zova';
+import { BeanControllerBase, cast, SymbolControllerRefDisable, Use } from 'zova';
 import { Controller } from 'zova-module-a-bean';
 import { IBehaviorItem, IBehaviorTag } from '../../types/behavior.js';
+import { BeanBehavior } from '../../bean/bean.behavior.js';
 
 export interface ControllerBehaviorProps {
   behaviorTag: IBehaviorTag;
@@ -13,10 +14,20 @@ export class ControllerBehavior extends BeanControllerBase {
   static $propsDefault = {};
   protected [SymbolControllerRefDisable]: boolean = true;
 
-  protected async __init__() {}
+  @Use()
+  $$beanBehavior: BeanBehavior;
+  composer: (context: any, next?: any) => any;
+
+  protected async __init__() {
+    await this._loadBehaviors();
+  }
 
   protected render() {
     return this._createInnerComp();
+  }
+
+  private async _loadBehaviors() {
+    this.composer = (await this.$$beanBehavior.loadAndComposeBehaviors(this.$props.behaviors)) as any;
   }
 
   private _createInnerComp() {

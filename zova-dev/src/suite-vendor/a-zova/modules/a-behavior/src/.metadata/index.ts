@@ -1,3 +1,24 @@
+/** bean: begin */
+export * from '../bean/bean.behavior.js';
+
+import 'zova';
+declare module 'zova' {}
+declare module 'zova-module-a-behavior' {
+  export interface BeanBehavior {
+    /** @internal */
+    get scope(): ScopeModuleABehavior;
+  }
+}
+/** bean: end */
+/** bean: begin */
+import { BeanBehavior } from '../bean/bean.behavior.js';
+import 'zova';
+declare module 'zova' {
+  export interface IBeanRecordGeneral {
+    'a-behavior.bean.behavior': BeanBehavior;
+  }
+}
+/** bean: end */
 /** controller: begin */
 export * from '../component/behavior/controller.jsx';
 

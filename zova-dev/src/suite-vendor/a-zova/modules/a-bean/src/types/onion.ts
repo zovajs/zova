@@ -33,6 +33,11 @@ export interface IOnionSlice<OPTIONS = unknown, ONIONNAME = string, T = unknown>
   beanOptions: IDecoratorBeanOptionsBase<T, OPTIONS>;
 }
 
+export interface IOnionItem<OPTIONS = unknown, ONIONNAME = string> {
+  name: ONIONNAME;
+  options?: Partial<OPTIONS>;
+}
+
 export interface ConfigOnions {}
 
 declare module 'zova' {
