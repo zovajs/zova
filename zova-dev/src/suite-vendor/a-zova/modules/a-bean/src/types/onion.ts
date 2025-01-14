@@ -4,7 +4,11 @@ import { ZovaOnionOptionsMeta } from '@cabloy/module-info';
 export const SymbolUseOnionLocal = Symbol('SymbolUseOnionLocal');
 export const SymbolUseOnionOptions = Symbol('SymbolUseOnionOptions');
 
-export type IOnionExecuteCustom = (beanInstance: any, data: any, options: any, next: Function) => any;
+export type IOnionExecuteCustom<OPTIONS, ONIONNAME> = (
+  onionSlice: IOnionSlice<OPTIONS, ONIONNAME>,
+  data: any,
+  next: Function,
+) => any;
 
 export type TypeUseOnionGlobalBaseOptions<T> = Omit<T, 'global' | 'dependencies' | 'dependents' | 'ignore' | 'match'>;
 

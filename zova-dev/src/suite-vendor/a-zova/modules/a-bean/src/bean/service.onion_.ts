@@ -1,4 +1,4 @@
-import { appResource, BeanSimple, deepExtend, SymbolProxyDisable } from 'zova';
+import { appResource, BeanSimple, deepExtend, Next, SymbolProxyDisable } from 'zova';
 import { compose as _compose } from '@cabloy/compose';
 import {
   IOnionExecuteCustom,
@@ -83,7 +83,7 @@ export class ServiceOnion<OPTIONS, ONIONNAME extends string> extends BeanSimple 
     }) as unknown as IOnionSlice<OPTIONS, ONIONNAME>[];
   }
 
-  compose(onions: IOnionSlice<OPTIONS, ONIONNAME>[], executeCustom?: IOnionExecuteCustom) {
+  compose(onions: IOnionSlice<OPTIONS, ONIONNAME>[], executeCustom: IOnionExecuteCustom<OPTIONS, ONIONNAME>) {
     // fns
     const fns: Function[] = [];
     for (const item of onions) {
@@ -117,5 +117,14 @@ export class ServiceOnion<OPTIONS, ONIONNAME extends string> extends BeanSimple 
         beanOptions.options = deepExtend({}, beanOptions.options, optionsConfig);
       }
     }
+  }
+
+  /** internal */
+  public _wrapOnion(item: IOnionSlice<OPTIONS, ONIONNAME>, executeCustom: IOnionExecuteCustom<OPTIONS, ONIONNAME>) {
+    const fn = (data: any, next: Next) => {
+      return executeCustom(item, data, next);
+    };
+    fn._name = item.name;
+    return fn;
   }
 }

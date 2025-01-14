@@ -1047,7 +1047,7 @@ export class BeanContainer {
     return {
       receiver: undefined,
       fn,
-    };
+    } as any;
   };
 
   private __composeForProp(chains) {
