@@ -7,6 +7,7 @@ export const SymbolUseOnionOptions = Symbol('SymbolUseOnionOptions');
 export type IOnionExecuteCustom<OPTIONS, ONIONNAME> = (
   onionSlice: IOnionSlice<OPTIONS, ONIONNAME>,
   data: any,
+  options: OPTIONS,
   next: Function,
 ) => any;
 
@@ -35,6 +36,7 @@ export interface IOnionOptionsBase<T extends string> extends IOnionOptionsEnable
 export interface IOnionSlice<OPTIONS = unknown, ONIONNAME = string, T = unknown> {
   name: ONIONNAME;
   beanOptions: IDecoratorBeanOptionsBase<T, OPTIONS>;
+  beanInstance?: T;
 }
 
 export interface IOnionItem<OPTIONS = unknown, ONIONNAME = string> {

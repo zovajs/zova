@@ -4,7 +4,11 @@ import { IOnionItem, IOnionOptionsEnable, ServiceOnion } from 'zova-module-a-bea
 export interface IBehaviorTag {
   component: string | Component;
   name?: string;
-  type?: string;
+}
+
+export interface IBehaviorComposeData {
+  behaviorTag: IBehaviorTag;
+  method: 'props' | 'render';
 }
 
 export type IBehaviorItem = IOnionItem<IDecoratorBehaviorOptions, keyof IBehaviorRecord>;

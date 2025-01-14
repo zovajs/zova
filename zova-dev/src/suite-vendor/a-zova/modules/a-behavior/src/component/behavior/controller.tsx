@@ -1,7 +1,7 @@
 import { createVNode } from 'vue';
 import { BeanControllerBase, cast, SymbolControllerRefDisable, Use } from 'zova';
 import { Controller } from 'zova-module-a-bean';
-import { IBehaviorItem, IBehaviorTag } from '../../types/behavior.js';
+import { IBehaviorComposeData, IBehaviorItem, IBehaviorTag } from '../../types/behavior.js';
 import { BeanBehavior } from '../../bean/bean.behavior.js';
 
 export interface ControllerBehaviorProps {
@@ -20,6 +20,7 @@ export class ControllerBehavior extends BeanControllerBase {
 
   protected async __init__() {
     await this._loadBehaviors();
+    // todo: watch
   }
 
   protected render() {
@@ -27,13 +28,19 @@ export class ControllerBehavior extends BeanControllerBase {
   }
 
   private async _loadBehaviors() {
-    this.composer = (await this.$$beanBehavior.loadAndComposeBehaviors(this.$props.behaviors)) as any;
+    this.composer = await this.$$beanBehavior.loadAndComposeBehaviors(this.$props.behaviors);
   }
 
   private _createInnerComp() {
     const parent = this.ctx.instance;
     const { ref, props, children } = parent.vnode;
-    const propsNew = Object.assign({}, props, { behaviorTag: undefined, behaviors: undefined });
+    const composeData: IBehaviorComposeData = { behaviorTag: this.$props.behaviorTag, method: 'props' };
+    const propsNew = this.composer(composeData, () => {
+      const propsNew = Object.assign({}, props);
+      delete propsNew['behaviorTag'];
+      delete propsNew['behaviors'];
+      return propsNew;
+    });
     const vnode = createVNode(this.$props.behaviorTag.component, propsNew, children);
     // ensure inner component inherits the async wrapper's ref owner
     vnode.ref = ref;

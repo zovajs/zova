@@ -1,6 +1,6 @@
-import { BeanBase, Use } from 'zova';
+import { BeanBase, cast, Use } from 'zova';
 import { Bean, BeanOnion } from 'zova-module-a-bean';
-import { IBehaviorItem } from '../types/behavior.js';
+import { IBehaviorComposeData, IBehaviorItem } from '../types/behavior.js';
 
 @Bean()
 export class BeanBehavior extends BeanBase {
@@ -11,7 +11,16 @@ export class BeanBehavior extends BeanBase {
 
   public async loadAndComposeBehaviors(behaviors: IBehaviorItem | IBehaviorItem[]) {
     if (!Array.isArray(behaviors)) behaviors = [behaviors];
+    // load onions
     const onions = await this.$$beanOnion.behavior.loadOnions(behaviors);
-    console.log(onions);
+    // create behaviors
+    for (const onion of onions) {
+      onion.beanInstance = await this.bean._newBean(onion.beanOptions.beanFullName as any, true);
+    }
+    // compose
+    return this.$$beanOnion.behavior.compose(onions, (onionSlice, data: IBehaviorComposeData, options, next) => {
+      if (!cast(onionSlice.beanInstance)[data.method]) return next();
+      return cast(onionSlice.beanInstance)[data.method](options, data.behaviorTag, next);
+    });
   }
 }

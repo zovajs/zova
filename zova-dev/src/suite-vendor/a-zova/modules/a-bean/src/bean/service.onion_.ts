@@ -90,7 +90,7 @@ export class ServiceOnion<OPTIONS, ONIONNAME extends string> extends BeanSimple 
       fns.push(this._wrapOnion(item, executeCustom));
     }
     // compose
-    return _compose(onions);
+    return _compose(fns);
   }
 
   async _loadModulesAndOptions(moduleNames: string[]) {
@@ -122,7 +122,7 @@ export class ServiceOnion<OPTIONS, ONIONNAME extends string> extends BeanSimple 
   /** internal */
   public _wrapOnion(item: IOnionSlice<OPTIONS, ONIONNAME>, executeCustom: IOnionExecuteCustom<OPTIONS, ONIONNAME>) {
     const fn = (data: any, next: Next) => {
-      return executeCustom(item, data, next);
+      return executeCustom(item, data, item.beanOptions.options!, next);
     };
     fn._name = item.name;
     return fn;
