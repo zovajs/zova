@@ -1,0 +1,7 @@
+import { BeanBase } from 'zova';
+import { Behavior, IDecoratorBehaviorOptions } from 'zova-module-a-behavior';
+
+export interface IBehaviorOptions<%=argv.beanNameCapitalize%> extends IDecoratorBehaviorOptions {}
+
+@Behavior<IBehaviorOptions<%=argv.beanNameCapitalize%>>()
+export class Behavior<%=argv.beanNameCapitalize%> extends BeanBase {}

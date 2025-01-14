@@ -3,7 +3,13 @@
   "version": "5.0.0",
   "title": "a-behavior",
   "zovaModule": {
-    "onions": {}
+    "onions": {
+      "behavior": {
+        "optionsGlobalInterfaceName": "IDecoratorBehaviorOptions",
+        "optionsGlobalInterfaceFrom": "zova-module-a-behavior",
+        "boilerplate": "cli/behavior/boilerplate"
+      }
+    }
   },
   "type": "module",
   "exports": {
