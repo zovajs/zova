@@ -1,7 +1,21 @@
-import { BeanBase } from 'zova';
-import { Behavior, IDecoratorBehaviorOptions } from 'zova-module-a-behavior';
+import { BeanBase, NextSync } from 'zova';
+import {
+  Behavior,
+  IBehaviorProps,
+  IBehaviorRender,
+  IBehaviorTag,
+  IDecoratorBehaviorOptions,
+} from 'zova-module-a-behavior';
 
 export interface IBehaviorOptions<%=argv.beanNameCapitalize%> extends IDecoratorBehaviorOptions {}
 
 @Behavior<IBehaviorOptions<%=argv.beanNameCapitalize%>>()
-export class Behavior<%=argv.beanNameCapitalize%> extends BeanBase {}
+export class Behavior<%=argv.beanNameCapitalize%> extends BeanBase implements IBehaviorProps, IBehaviorRender {
+  props(_options: IBehaviorOptions<%=argv.beanNameCapitalize%>, _behaviorTag: IBehaviorTag, next: NextSync) {
+    return next();
+  }
+
+  render(_options: IBehaviorOptions<%=argv.beanNameCapitalize%>, _behaviorTag: IBehaviorTag, next: NextSync) {
+    return next();
+  }
+}
