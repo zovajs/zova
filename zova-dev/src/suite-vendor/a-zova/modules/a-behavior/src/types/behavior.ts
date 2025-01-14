@@ -1,5 +1,8 @@
-import { NextSync, OmitNever } from 'zova';
+import { OmitNever } from 'zova';
 import { IOnionItem, IOnionOptionsEnable, ServiceOnion } from 'zova-module-a-bean';
+
+export type NextBehaviorProps<PROPS> = () => PROPS;
+export type NextBehaviorRender = () => VNode;
 
 export interface IBehaviorTag {
   component: string | Component;
@@ -15,12 +18,12 @@ export type IBehaviorItem = IOnionItem<IDecoratorBehaviorOptions, keyof IBehavio
 
 export interface IBehaviorRecord {}
 
-export interface IBehaviorProps {
-  props(options: IDecoratorBehaviorOptions, behaviorTag: IBehaviorTag, next: NextSync): any;
+export interface IBehaviorProps<PROPS> {
+  props(options: IDecoratorBehaviorOptions, behaviorTag: IBehaviorTag, next: NextBehaviorProps<PROPS>): PROPS;
 }
 
-export interface IBehaviorRender {
-  render(options: IDecoratorBehaviorOptions, behaviorTag: IBehaviorTag, next: NextSync): any;
+export interface IBehaviorRender<PROPS> {
+  render(props: PROPS, options: IDecoratorBehaviorOptions, behaviorTag: IBehaviorTag, next: NextBehaviorRender): VNode;
 }
 
 export interface IDecoratorBehaviorOptions extends IOnionOptionsEnable {}
@@ -43,7 +46,7 @@ declare module 'zova' {
 
 import 'vue';
 import 'vue/jsx-runtime';
-import { Component } from 'vue';
+import { Component, VNode } from 'vue';
 
 declare module 'vue' {
   export interface InputHTMLAttributes {
