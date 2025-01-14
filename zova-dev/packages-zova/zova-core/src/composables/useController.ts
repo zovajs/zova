@@ -15,6 +15,7 @@ import {
   BeanStyleIdentifier,
   IBeanRecord,
   IControllerData,
+  SymbolControllerRefDisable,
 } from '../bean/type.js';
 
 export function useControllerPage<M, R, S>(
@@ -148,9 +149,9 @@ async function _useController(
 
 function setControllerRef(ctx: ZovaContext, on: boolean) {
   const controller = ctx.bean?._getBeanSyncOnly(BeanControllerIdentifier) as any;
-  if (!controller) return;
+  if (!controller || controller[SymbolControllerRefDisable]) return;
   // instanceScope useless for emit, because emiter and receiver not the same instance
-  if (controller.$props?.controllerRef) {
-    controller.$props.controllerRef(on ? controller : undefined);
+  if (controller.$attrs?.controllerRef) {
+    controller.$attrs.controllerRef(on ? controller : undefined);
   }
 }

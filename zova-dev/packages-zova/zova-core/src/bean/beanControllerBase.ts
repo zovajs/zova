@@ -23,12 +23,12 @@ export class BeanControllerBase extends BeanBase {
     this.$emit = controllerData.context.emit;
     this.$attrs = controllerData.context.attrs as Data;
     this.$slots = useRef(() => {
-      const propSlots = cast(this.$props).slots;
+      const attrSlots = cast(this.$attrs).slots;
       const contextSlots = controllerData.context.slots;
-      if (!propSlots) {
+      if (!attrSlots) {
         return contextSlots;
       } else {
-        return contextSlots ? Object.assign({}, propSlots, contextSlots) : propSlots;
+        return contextSlots ? Object.assign({}, attrSlots, contextSlots) : attrSlots;
       }
     });
     this.app.meta.module._monkeyModuleSync('controllerDataInit', undefined, controllerData, this);

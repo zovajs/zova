@@ -31,7 +31,7 @@ export class ControllerPageComponent extends BeanControllerPageBase {
           onReset={time => {
             this.resetTime = time;
           }}
-          v-slots={{
+          slots={{
             header: () => {
               return <div>this is a header slot from parent</div>;
             },
