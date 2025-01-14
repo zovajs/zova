@@ -11,9 +11,9 @@ import {
   ElMenuItem,
   ElSubMenu,
 } from 'element-plus';
-import { JSX } from 'vue/jsx-runtime';
 import { RouterView } from 'vue-router';
 import { ApiMenuEntity } from '../../api/menu.js';
+import { VNode } from 'vue';
 
 @Render()
 export class RenderLayoutDefault extends BeanRenderBase {
@@ -60,7 +60,7 @@ export class RenderLayoutDefault extends BeanRenderBase {
   }
   _renderMenuItems(items: ApiMenuEntity[] | undefined) {
     if (!items) return [];
-    const domItems: JSX.Element[] = [];
+    const domItems: VNode[] = [];
     for (let index = 0; index < items.length; index++) {
       const item = items[index];
       domItems.push(this._renderMenuItem(item));

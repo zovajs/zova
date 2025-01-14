@@ -1,6 +1,6 @@
 import { BeanControllerBase, PropsBase, RequiredSome } from 'zova';
 import { Controller } from 'zova-module-a-bean';
-import { JSX } from 'vue/jsx-runtime';
+import { VNode } from 'vue';
 
 export interface Props extends PropsBase<ControllerCard, Slots> {
   header?: string;
@@ -13,9 +13,9 @@ export type Emits = {
 };
 
 export interface Slots {
-  header?(): JSX.Element;
-  default?(): JSX.Element;
-  footer?(): JSX.Element;
+  header?(): VNode;
+  default?(): VNode;
+  footer?(): VNode;
 }
 
 @Controller()

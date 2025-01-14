@@ -1,9 +1,9 @@
 import { BeanRenderBase } from 'zova';
 import { __ThisModule__ } from '../../.metadata/this.js';
-import { JSX } from 'vue/jsx-runtime';
 import { ApiMenuEntity } from '../../api/menu.js';
 import { ZEssentialLink } from '../../.metadata/index.js';
 import { Render } from 'zova-module-a-bean';
+import { VNode } from 'vue';
 
 @Render()
 export class RenderMenu extends BeanRenderBase {
@@ -29,7 +29,7 @@ export class RenderMenu extends BeanRenderBase {
 
   _renderMenuItems(items?: ApiMenuEntity[]) {
     if (!items) return;
-    const domItems: JSX.Element[] = [];
+    const domItems: VNode[] = [];
     for (const item of items) {
       domItems.push(this._renderMenuItem(item));
     }

@@ -13,7 +13,7 @@ import {
   VSpacer,
   VToolbarTitle,
 } from 'vuetify/components';
-import { JSX } from 'vue/jsx-runtime';
+import { VNode } from 'vue';
 import EssentialLink from '../essentialLink/index.vue';
 import { RouterView } from 'vue-router';
 import { ApiMenuEntity } from '../../api/menu.js';
@@ -41,7 +41,7 @@ export class RenderLayoutDefault extends BeanRenderBase {
   _renderMenu() {
     const queryMenus = this.$$modelMenu.select();
     if (queryMenus.isLoading || !queryMenus.data) return;
-    const domItems: JSX.Element[] = [];
+    const domItems: VNode[] = [];
     for (const item of queryMenus.data) {
       domItems.push(this._renderMenuItem(item));
     }

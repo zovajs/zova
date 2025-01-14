@@ -13,9 +13,9 @@ import {
   QToolbar,
   QToolbarTitle,
 } from 'quasar';
-import { JSX } from 'vue/jsx-runtime';
 import { RouterView } from 'vue-router';
 import { ApiMenuEntity } from '../../api/menu.js';
+import { VNode } from 'vue';
 
 @Render()
 export class RenderLayoutDefault extends BeanRenderBase {
@@ -40,7 +40,7 @@ export class RenderLayoutDefault extends BeanRenderBase {
   _renderMenu() {
     const queryMenus = this.$$modelMenu.select();
     if (queryMenus.isLoading || !queryMenus.data) return;
-    const domItems: JSX.Element[] = [];
+    const domItems: VNode[] = [];
     for (const item of queryMenus.data) {
       domItems.push(this._renderMenuItem(item));
     }

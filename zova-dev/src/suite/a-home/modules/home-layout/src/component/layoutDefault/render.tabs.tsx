@@ -1,14 +1,13 @@
 import { BeanRenderBase, ClientOnly, ZovaIcon, icon } from 'zova';
 import { __ThisModule__ } from '../../.metadata/this.js';
-import { JSX } from 'vue/jsx-runtime';
-import { withModifiers } from 'vue';
+import { VNode, withModifiers } from 'vue';
 import { ZRouterViewTabs } from 'zova-module-a-tabs';
 import { Render } from 'zova-module-a-bean';
 
 @Render()
 export class RenderTabs extends BeanRenderBase {
   public render() {
-    const domTabs: JSX.Element[] = [];
+    const domTabs: VNode[] = [];
     for (const tab of this.$$modelTabs.tabs) {
       const className = tab.key === this.$$modelTabs.tabCurrentKey ? 'tab tab-active text-primary' : 'tab';
       const menuItem = this.$$modelMenu.findMenuItem(tab.key);
