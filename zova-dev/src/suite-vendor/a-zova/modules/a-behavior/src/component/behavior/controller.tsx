@@ -16,7 +16,7 @@ export class ControllerBehavior extends BeanControllerBase {
 
   @Use()
   $$beanBehavior: BeanBehavior;
-  composer: (context: any, next?: any) => any;
+  composer: (context: IBehaviorComposeData, next?: any) => any;
 
   protected async __init__() {
     await this._loadBehaviors();
@@ -34,14 +34,17 @@ export class ControllerBehavior extends BeanControllerBase {
   private _createInnerComp() {
     const parent = this.ctx.instance;
     const { ref, props, children } = parent.vnode;
-    const composeData: IBehaviorComposeData = { behaviorTag: this.$props.behaviorTag, method: 'props' };
-    const propsNew = this.composer(composeData, () => {
+    // props
+    const propsNew = this.composer({ behaviorTag: this.$props.behaviorTag, method: 'props' }, () => {
       const propsNew = Object.assign({}, props);
       delete propsNew['behaviorTag'];
       delete propsNew['behaviors'];
       return propsNew;
     });
-    const vnode = createVNode(this.$props.behaviorTag.component, propsNew, children);
+    // render
+    const vnode = this.composer({ behaviorTag: this.$props.behaviorTag, method: 'render' }, () => {
+      return createVNode(this.$props.behaviorTag.component, propsNew, children);
+    });
     // ensure inner component inherits the async wrapper's ref owner
     vnode.ref = ref;
     // pass the custom element callback on to the inner comp

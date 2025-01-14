@@ -1,4 +1,4 @@
-import { OmitNever } from 'zova';
+import { NextSync, OmitNever } from 'zova';
 import { IOnionItem, IOnionOptionsEnable, ServiceOnion } from 'zova-module-a-bean';
 
 export interface IBehaviorTag {
@@ -14,6 +14,14 @@ export interface IBehaviorComposeData {
 export type IBehaviorItem = IOnionItem<IDecoratorBehaviorOptions, keyof IBehaviorRecord>;
 
 export interface IBehaviorRecord {}
+
+export interface IBehaviorProps {
+  props(options: IDecoratorBehaviorOptions, behaviorTag: IBehaviorTag, next: NextSync): any;
+}
+
+export interface IBehaviorRender {
+  render(options: IDecoratorBehaviorOptions, behaviorTag: IBehaviorTag, next: NextSync): any;
+}
 
 export interface IDecoratorBehaviorOptions extends IOnionOptionsEnable {}
 
