@@ -2,6 +2,9 @@ import { /*template,*/ NodePath, types as t, type PluginPass } from '@babel/core
 import htmlTags from 'html-tags';
 import svgTags from 'svg-tags';
 
+export const FRAGMENT = 'Fragment';
+export const KEEP_ALIVE = 'KeepAlive';
+
 /**
  * Get tag (first attribute for h) from JSXOpeningElement
  * @param path JSXElement
@@ -17,12 +20,12 @@ export const getTag = (
     const { name } = namePath.node;
     if (!htmlTags.includes(name as htmlTags.htmlTags) && !svgTags.includes(name)) {
       return name === FRAGMENT
-        ? createIdentifier(state, FRAGMENT)
+        ? t.identifier(FRAGMENT)
         : path.scope.hasBinding(name)
           ? t.identifier(name)
-          : state.opts.isCustomElement?.(name)
+          : (<any>state.opts).isCustomElement?.(name)
             ? t.stringLiteral(name)
-            : t.callExpression(createIdentifier(state, 'resolveComponent'), [t.stringLiteral(name)]);
+            : t.callExpression(t.identifier('resolveComponent'), [t.stringLiteral(name)]);
     }
 
     return t.stringLiteral(name);
@@ -32,4 +35,36 @@ export const getTag = (
     return transformJSXMemberExpression(namePath);
   }
   throw new Error(`getTag: ${namePath.type} is not supported`);
+};
+
+export const shouldTransformedToSlots = (tag: string) =>
+  !(tag.match(RegExp(`^_?${FRAGMENT}\\d*$`)) || tag === KEEP_ALIVE);
+
+export const transformJSXMemberExpression = (path: NodePath<t.JSXMemberExpression>): t.MemberExpression => {
+  const objectPath = path.node.object;
+  const propertyPath = path.node.property;
+  const transformedObject = t.isJSXMemberExpression(objectPath)
+    ? transformJSXMemberExpression(path.get('object') as NodePath<t.JSXMemberExpression>)
+    : t.isJSXIdentifier(objectPath)
+      ? t.identifier(objectPath.name)
+      : t.nullLiteral();
+  const transformedProperty = t.identifier(propertyPath.name);
+  return t.memberExpression(transformedObject, transformedProperty);
+};
+
+export const checkIsComponent = (path: NodePath<t.JSXOpeningElement>, state: PluginPass): boolean => {
+  const namePath = path.get('name');
+
+  if (namePath.isJSXMemberExpression()) {
+    return shouldTransformedToSlots(namePath.node.property.name); // For withCtx
+  }
+
+  const tag = (namePath as NodePath<t.JSXIdentifier>).node.name;
+
+  return (
+    !(<any>state.opts).isCustomElement?.(tag) &&
+    shouldTransformedToSlots(tag) &&
+    !htmlTags.includes(tag as htmlTags.htmlTags) &&
+    !svgTags.includes(tag)
+  );
 };
