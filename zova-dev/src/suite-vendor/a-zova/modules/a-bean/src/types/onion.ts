@@ -1,4 +1,3 @@
-import { IDecoratorBeanOptionsBase } from 'zova';
 import { ZovaOnionOptionsMeta } from '@cabloy/module-info';
 
 export const SymbolUseOnionLocal = Symbol('SymbolUseOnionLocal');
@@ -35,7 +34,8 @@ export interface IOnionOptionsBase<T extends string> extends IOnionOptionsEnable
 
 export interface IOnionSlice<OPTIONS = unknown, ONIONNAME = string, T = unknown> {
   name: ONIONNAME;
-  beanOptions: IDecoratorBeanOptionsBase<T, OPTIONS>;
+  options: OPTIONS;
+  beanFullName: string;
   beanInstance?: T;
 }
 

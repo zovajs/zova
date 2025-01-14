@@ -63,13 +63,22 @@ export class ServiceOnion<OPTIONS, ONIONNAME extends string> extends BeanSimple 
     if (!Array.isArray(onionItems)) onionItems = [onionItems];
     // load modules
     const moduleNames = onionItems.map(item => item.name.split(':')[0]);
-    await this._loadModulesAndOptions(moduleNames);
+    await this._loadModules(moduleNames);
     // onion slices
     const onionSlices: IOnionSlice<OPTIONS, ONIONNAME>[] = [];
     for (const item of onionItems) {
       const beanFullName = item.name.replace(':', `.${this.sceneName}.`);
-      const beanOptions = appResource.getBean(beanFullName);
-      onionSlices.push({ name: item.name, beanOptions: beanOptions as any });
+      const beanOptions = appResource.getBean(beanFullName)!;
+      // options
+      const optionsConfig = this.app.config.onions[this.sceneName]?.[item.name];
+      let options;
+      if (beanOptions.optionsPrimitive) {
+        options =
+          item.options !== undefined ? item.options : optionsConfig !== undefined ? optionsConfig : beanOptions.options;
+      } else {
+        options = deepExtend({}, beanOptions.options, optionsConfig, item.options);
+      }
+      onionSlices.push({ name: item.name, options, beanFullName });
     }
     // filter
     return this.getOnionsEnabled(onionSlices, selector);
@@ -78,7 +87,7 @@ export class ServiceOnion<OPTIONS, ONIONNAME extends string> extends BeanSimple 
   getOnionsEnabled(onions: IOnionSlice<OPTIONS, ONIONNAME>[], selector?: string) {
     if (!selector) selector = '';
     return onions.filter(onionSlice => {
-      const onionOptions = onionSlice.beanOptions.options as IOnionOptionsEnable & IOnionOptionsMatch<string>;
+      const onionOptions = onionSlice.options as IOnionOptionsEnable & IOnionOptionsMatch<string>;
       return this.beanOnion.checkOnionOptionsEnabled(onionOptions, selector);
     }) as unknown as IOnionSlice<OPTIONS, ONIONNAME>[];
   }
@@ -93,36 +102,16 @@ export class ServiceOnion<OPTIONS, ONIONNAME extends string> extends BeanSimple 
     return _compose(fns);
   }
 
-  async _loadModulesAndOptions(moduleNames: string[]) {
+  async _loadModules(moduleNames: string[]) {
     // load modules
     moduleNames = Set.unique(moduleNames).filter(item => !!this.app.meta.module.get(item, false));
     await this.app.meta.module.loadModules(moduleNames);
-    // load options
-    for (const moduleName of moduleNames) {
-      this._loadOnionsOptions(moduleName);
-    }
-  }
-
-  _loadOnionsOptions(moduleName: string) {
-    const onions = appResource.scenes[this.sceneName]?.[moduleName];
-    if (!onions) return;
-    for (const key in onions) {
-      const beanOptions = onions[key];
-      const name = key.replace(`.${this.sceneName}.`, ':') as ONIONNAME;
-      // options
-      const optionsConfig = this.app.config.onions[this.sceneName]?.[name];
-      if (beanOptions.optionsPrimitive) {
-        beanOptions.options = optionsConfig === undefined ? beanOptions.options : optionsConfig;
-      } else {
-        beanOptions.options = deepExtend({}, beanOptions.options, optionsConfig);
-      }
-    }
   }
 
   /** internal */
   public _wrapOnion(item: IOnionSlice<OPTIONS, ONIONNAME>, executeCustom: IOnionExecuteCustom<OPTIONS, ONIONNAME>) {
     const fn = (data: any, next: Next) => {
-      return executeCustom(item, data, item.beanOptions.options!, next);
+      return executeCustom(item, data, item.options!, next);
     };
     fn._name = item.name;
     return fn;

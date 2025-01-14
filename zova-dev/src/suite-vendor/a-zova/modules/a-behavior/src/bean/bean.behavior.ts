@@ -15,7 +15,7 @@ export class BeanBehavior extends BeanBase {
     const onions = await this.$$beanOnion.behavior.loadOnions(behaviors);
     // create behaviors
     for (const onion of onions) {
-      onion.beanInstance = await this.bean._newBean(onion.beanOptions.beanFullName as any, true);
+      onion.beanInstance = await this.bean._newBean(onion.beanFullName as any, true);
     }
     // compose
     return this.$$beanOnion.behavior.compose(onions, (onionSlice, data: IBehaviorComposeData, options, next) => {
