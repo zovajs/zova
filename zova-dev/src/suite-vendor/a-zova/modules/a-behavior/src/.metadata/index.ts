@@ -20,6 +20,7 @@ declare module 'zova' {
 }
 /** controller: end */
 
+import { RequiredSome } from 'zova';
 /** components: begin */
 
 export { default as ZBehavior } from './component/behavior.vue';
@@ -33,7 +34,15 @@ declare module 'zova' {
     'a-behavior:behavior': ControllerBehavior;
   }
 }
-declare module 'zova-module-a-behavior' {}
+declare module 'zova-module-a-behavior' {
+  export interface ControllerBehaviorProps {
+    controllerRef?: (ref: ControllerBehavior) => void;
+  }
+
+  export interface ControllerBehavior {
+    $props: RequiredSome<ControllerBehaviorProps, keyof typeof ControllerBehavior.$propsDefault>;
+  }
+}
 /** components: end */
 /** scope: begin */
 import { BeanScopeBase, BeanScopeUtil } from 'zova';

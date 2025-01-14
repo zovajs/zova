@@ -1,6 +1,12 @@
 import { OmitNever } from 'zova';
 import { ServiceOnion } from 'zova-module-a-bean';
 
+export interface IBehaviorTag {
+  component: string | Component;
+  name?: string;
+  type?: string;
+}
+
 export interface IBehaviorItem {
   behaviorName: keyof IBehaviorRecord;
   options?: Partial<IDecoratorBehaviorOptions>;
@@ -28,6 +34,7 @@ declare module 'zova' {
 
 import 'vue';
 import 'vue/jsx-runtime';
+import { Component } from 'vue';
 
 declare module 'vue' {
   export interface InputHTMLAttributes {
