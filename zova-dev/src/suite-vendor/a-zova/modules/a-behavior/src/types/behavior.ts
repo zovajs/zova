@@ -1,5 +1,5 @@
 import { OmitNever } from 'zova';
-import { IOnionItem, ServiceOnion } from 'zova-module-a-bean';
+import { IOnionItem, IOnionOptionsEnable, ServiceOnion } from 'zova-module-a-bean';
 
 export interface IBehaviorTag {
   component: string | Component;
@@ -11,7 +11,7 @@ export type IBehaviorItem = IOnionItem<IDecoratorBehaviorOptions, keyof IBehavio
 
 export interface IBehaviorRecord {}
 
-export interface IDecoratorBehaviorOptions {}
+export interface IDecoratorBehaviorOptions extends IOnionOptionsEnable {}
 
 declare module 'zova-module-a-bean' {
   export interface BeanOnion {

@@ -11,6 +11,7 @@
       "a-zod": "5.0.0"
     },
     "globalDependencies": {
+      "@cabloy/compose": true,
       "@cabloy/deps": true,
       "@cabloy/json5": true,
       "@cabloy/module-info": true,
@@ -52,6 +53,7 @@
     "_prepublishOnly": "npm run tsc:publish"
   },
   "dependencies": {
+    "@cabloy/compose": "^2.0.1",
     "@cabloy/deps": "^1.0.9",
     "@cabloy/json5": "^1.0.8",
     "@cabloy/module-info": "^1.2.6",

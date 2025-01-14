@@ -17,7 +17,7 @@ export class BeanOnion extends BeanBase {
 
   protected __get__(prop: string) {
     if (!this.__instances[prop]) {
-      this.__instances[prop] = this.bean._getBeanSelector(ServiceOnion, false, prop, this);
+      this.__instances[prop] = this.bean._newBeanSimple(ServiceOnion, false, prop, this);
     }
     return this.__instances[prop];
   }

@@ -11,6 +11,7 @@ export class BeanBehavior extends BeanBase {
 
   public async loadAndComposeBehaviors(behaviors: IBehaviorItem | IBehaviorItem[]) {
     if (!Array.isArray(behaviors)) behaviors = [behaviors];
-    await this.$$beanOnion.behavior.loadOnions(behaviors);
+    const onions = await this.$$beanOnion.behavior.loadOnions(behaviors);
+    console.log(onions);
   }
 }

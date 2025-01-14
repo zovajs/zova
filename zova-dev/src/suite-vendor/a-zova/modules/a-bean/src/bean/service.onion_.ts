@@ -1,14 +1,18 @@
-import { IModule } from '@cabloy/module-info';
-import { appResource, BeanBase, deepExtend, SymbolProxyDisable } from 'zova';
-import { Service } from '../lib/bean.js';
-import { IOnionItem } from '../types/onion.js';
+import { appResource, BeanSimple, deepExtend, SymbolProxyDisable } from 'zova';
+import { compose as _compose } from '@cabloy/compose';
+import {
+  IOnionExecuteCustom,
+  IOnionItem,
+  IOnionOptionsEnable,
+  IOnionOptionsMatch,
+  IOnionSlice,
+} from '../types/onion.js';
 import { BeanOnion } from './bean.onion.js';
 
 // const SymbolOnionsEnabled = Symbol('SymbolOnionsEnabled');
 // const SymbolOnionsEnabledWrapped = Symbol('SymbolOnionsEnabledWrapped');
 
-@Service()
-export class ServiceOnion<OPTIONS, ONIONNAME extends string> extends BeanBase {
+export class ServiceOnion<OPTIONS, ONIONNAME extends string> extends BeanSimple {
   protected [SymbolProxyDisable]: boolean = true;
   protected beanOnion: BeanOnion;
   sceneName: string;
@@ -55,22 +59,52 @@ export class ServiceOnion<OPTIONS, ONIONNAME extends string> extends BeanBase {
   //   return this.getOnionSlice(onionName).beanOptions.options as OPTIONS | undefined;
   // }
 
-  async loadOnions(onionItems: IOnionItem<OPTIONS, ONIONNAME> | IOnionItem<OPTIONS, ONIONNAME>[]) {
+  async loadOnions(onionItems: IOnionItem<OPTIONS, ONIONNAME> | IOnionItem<OPTIONS, ONIONNAME>[], selector?: string) {
     if (!Array.isArray(onionItems)) onionItems = [onionItems];
     // load modules
-    const moduleNames = Set.unique(
-      onionItems.map(item => item.name.split(':')[0]).filter(item => !!this.app.meta.module.get(item, false)),
-    );
+    const moduleNames = onionItems.map(item => item.name.split(':')[0]);
+    await this._loadModulesAndOptions(moduleNames);
+    // onion slices
+    const onionSlices: IOnionSlice<OPTIONS, ONIONNAME>[] = [];
+    for (const item of onionItems) {
+      const beanFullName = item.name.replace(':', `.${this.sceneName}.`);
+      const beanOptions = appResource.getBean(beanFullName);
+      onionSlices.push({ name: item.name, beanOptions: beanOptions as any });
+    }
+    // filter
+    return this.getOnionsEnabled(onionSlices, selector);
+  }
+
+  getOnionsEnabled(onions: IOnionSlice<OPTIONS, ONIONNAME>[], selector?: string) {
+    if (!selector) selector = '';
+    return onions.filter(onionSlice => {
+      const onionOptions = onionSlice.beanOptions.options as IOnionOptionsEnable & IOnionOptionsMatch<string>;
+      return this.beanOnion.checkOnionOptionsEnabled(onionOptions, selector);
+    }) as unknown as IOnionSlice<OPTIONS, ONIONNAME>[];
+  }
+
+  compose(onions: IOnionSlice<OPTIONS, ONIONNAME>[], executeCustom?: IOnionExecuteCustom) {
+    // fns
+    const fns: Function[] = [];
+    for (const item of onions) {
+      fns.push(this._wrapOnion(item, executeCustom));
+    }
+    // compose
+    return _compose(onions);
+  }
+
+  async _loadModulesAndOptions(moduleNames: string[]) {
+    // load modules
+    moduleNames = Set.unique(moduleNames).filter(item => !!this.app.meta.module.get(item, false));
     await this.app.meta.module.loadModules(moduleNames);
     // load options
     for (const moduleName of moduleNames) {
-      const module = this.app.meta.module.modulesMeta.modules[moduleName];
-      this._loadOnionsOptions(module);
+      this._loadOnionsOptions(moduleName);
     }
   }
 
-  _loadOnionsOptions(module: IModule) {
-    const onions = appResource.scenes[this.sceneName]?.[module.info.relativeName];
+  _loadOnionsOptions(moduleName: string) {
+    const onions = appResource.scenes[this.sceneName]?.[moduleName];
     if (!onions) return;
     for (const key in onions) {
       const beanOptions = onions[key];
