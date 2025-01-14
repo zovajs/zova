@@ -43,10 +43,19 @@ function createVisitor(context: ContextInfo) {
         }
       }
       if (behaviors) {
-        const namePath = path.get('openingElement').get('name');
-        if (t.isJSXIdentifier(namePath.node)) {
-          namePath.node.name = 'ZBehavior__';
+        const nodePath = path.get('openingElement');
+        // path.get('openingElement').node.name.name
+        if (t.isJSXIdentifier(nodePath.node.name)) {
           context.behaviors = true;
+          nodePath.node.name.name = 'ZBehavior__';
+          const props = [t.objectProperty(t.identifier('component'), tag)];
+          if (t.isStringLiteral(tag)) {
+            props.push(t.objectProperty(t.identifier('name'), t.stringLiteral(tag.value)));
+          }
+          const objectExpression = t.objectExpression(props);
+          nodePath.node.attributes.push(
+            t.jsxAttribute(t.jsxIdentifier('behaviorTag'), t.jsxExpressionContainer(objectExpression)),
+          );
         }
       }
       console.log(tag, isComponent);
