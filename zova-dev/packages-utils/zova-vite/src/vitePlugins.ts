@@ -53,6 +53,7 @@ export function generateVitePlugins(
         include: /\.[jt]sx$/,
         babelPlugins: [
           ['babel-plugin-zova-component'],
+          ['babel-plugin-zova-behavior'],
           ['babel-plugin-zova-bean-module'],
           ['babel-plugin-zova-bean-use'],
           ['babel-plugin-transform-typescript-metadata'],

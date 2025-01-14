@@ -30,6 +30,9 @@
       "path": "packages-utils/babel-plugin-zova-bean-use"
     },
     {
+      "path": "packages-utils/babel-plugin-zova-behavior"
+    },
+    {
       "path": "packages-utils/babel-plugin-zova-component"
     },
     {

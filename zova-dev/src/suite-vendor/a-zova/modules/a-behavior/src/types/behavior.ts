@@ -1,6 +1,11 @@
 import { OmitNever } from 'zova';
 import { ServiceOnion } from 'zova-module-a-bean';
 
+export interface IBehaviorItem {
+  behaviorName: keyof IBehaviorRecord;
+  options?: Partial<IDecoratorBehaviorOptions>;
+}
+
 export interface IBehaviorRecord {}
 
 export interface IDecoratorBehaviorOptions {}
@@ -26,7 +31,7 @@ import 'vue/jsx-runtime';
 
 declare module 'vue' {
   export interface InputHTMLAttributes {
-    behavior?: number;
+    behaviors?: IBehaviorItem | IBehaviorItem[];
   }
 }
 
@@ -34,7 +39,7 @@ declare module 'vue/jsx-runtime' {
   namespace JSX {
     // need define class/style in IntrinsicAttributes
     export interface IntrinsicAttributes {
-      behavior?: number;
+      behaviors?: IBehaviorItem | IBehaviorItem[];
     }
   }
 }

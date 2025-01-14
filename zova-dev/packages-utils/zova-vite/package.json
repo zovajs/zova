@@ -47,6 +47,7 @@
     "babel-plugin-transform-typescript-metadata": "^0.3.2",
     "babel-plugin-zova-bean-module": "^1.0.32",
     "babel-plugin-zova-bean-use": "^1.0.3",
+    "babel-plugin-zova-behavior": "^1.0.0",
     "babel-plugin-zova-component": "^1.0.3",
     "chalk": "^3.0.0",
     "esbuild": "^0.23.0",
