@@ -1042,12 +1042,12 @@ export class BeanContainer {
   private __composeForPropAdapter = (_context, chain) => {
     const [aopKey, fn] = chain;
     // SymbolProxyMagic
-    if (aopKey === SymbolProxyMagic) return null;
+    if (aopKey === SymbolProxyMagic) return;
     // chain
     return {
       receiver: undefined,
       fn,
-    } as any;
+    };
   };
 
   private __composeForProp(chains) {
