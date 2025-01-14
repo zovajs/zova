@@ -20,7 +20,11 @@ export class BeanBehavior extends BeanBase {
     // compose
     return this.$$beanOnion.behavior.compose(onions, (onionSlice, data: IBehaviorComposeData, options, next) => {
       if (!cast(onionSlice.beanInstance)[data.method]) return next();
-      return cast(onionSlice.beanInstance)[data.method](options, data.behaviorTag, next);
+      if (data.method === 'props') {
+        return cast(onionSlice.beanInstance)[data.method](options, data.behaviorTag, next);
+      } else {
+        return cast(onionSlice.beanInstance)[data.method](data.props, options, data.behaviorTag, next);
+      }
     });
   }
 }

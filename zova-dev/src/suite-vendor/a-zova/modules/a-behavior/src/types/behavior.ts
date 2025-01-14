@@ -12,6 +12,7 @@ export interface IBehaviorTag {
 export interface IBehaviorComposeData {
   behaviorTag: IBehaviorTag;
   method: 'props' | 'render';
+  props?: any;
 }
 
 export type IBehaviorItem = IOnionItem<IDecoratorBehaviorOptions, keyof IBehaviorRecord>;

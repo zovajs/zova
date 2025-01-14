@@ -42,7 +42,7 @@ export class ControllerBehavior extends BeanControllerBase {
       return propsNew;
     });
     // render
-    const vnode = this.composer({ behaviorTag: this.$props.behaviorTag, method: 'render' }, () => {
+    const vnode = this.composer({ behaviorTag: this.$props.behaviorTag, method: 'render', props: propsNew }, () => {
       return createVNode(this.$props.behaviorTag.component, propsNew, children);
     });
     // ensure inner component inherits the async wrapper's ref owner
