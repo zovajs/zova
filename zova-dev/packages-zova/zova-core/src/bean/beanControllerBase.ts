@@ -6,11 +6,6 @@ import { useRef } from '../vue/ref.js';
 
 type Data = Record<string, unknown>;
 
-export interface PropsBase<CONTROLLER = unknown, SLOTS = unknown> {
-  controllerRef?: (ref: CONTROLLER) => void;
-  slots?: SLOTS;
-}
-
 export type IComponentOptions = Parameters<typeof defineOptions>[0];
 
 export class BeanControllerBase extends BeanBase {
