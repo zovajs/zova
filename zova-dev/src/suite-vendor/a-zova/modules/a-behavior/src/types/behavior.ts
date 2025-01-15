@@ -1,5 +1,5 @@
 import { OmitNever } from 'zova';
-import { IOnionItem, IOnionOptionsEnable, ServiceOnion } from 'zova-module-a-bean';
+import { IOnionOptionsEnable, ServiceOnion } from 'zova-module-a-bean';
 
 export type NextBehaviorProps<PROPS> = () => PROPS;
 export type NextBehaviorRender = () => VNode;
@@ -15,7 +15,9 @@ export interface IBehaviorComposeData {
   props?: any;
 }
 
-export type IBehaviorItem = IOnionItem<IDecoratorBehaviorOptions, keyof IBehaviorRecord>;
+export type IBehaviorItem = {
+  [prop in keyof IBehaviorRecord]?: Partial<IBehaviorRecord[prop]>;
+};
 
 export interface IBehaviorRecord {}
 
