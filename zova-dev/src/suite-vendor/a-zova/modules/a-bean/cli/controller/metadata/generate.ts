@@ -41,6 +41,10 @@ function _parseControllerInfo(
   const nameCapitalize = toUpperCaseFirstChar(name);
   const controllerExtJs = matches[3];
   const controllerExtTs = controllerExtJs.replace('.js', '.ts');
+  // componentOptions
+  const componentOptionsMatched = fileContent.match(/static \$componentOptions[^=]* = (\{[\s\S]*?\});/);
+  const componentOptions = componentOptionsMatched ? componentOptionsMatched[1] : '';
+  const hasComponentOptions = !!componentOptionsMatched;
   // props
   const nameProps = `${className}Props`;
   const hasProps = fileContent.includes(nameProps);
@@ -81,6 +85,8 @@ function _parseControllerInfo(
     nameCapitalize,
     controllerExtJs,
     controllerExtTs,
+    componentOptions,
+    hasComponentOptions,
     nameProps,
     hasProps,
     nameEmits,

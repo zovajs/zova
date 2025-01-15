@@ -1,5 +1,5 @@
 import { createVNode } from 'vue';
-import { BeanControllerBase, cast, SymbolControllerRefDisable, Use } from 'zova';
+import { BeanControllerBase, cast, IComponentOptions, SymbolControllerRefDisable, Use } from 'zova';
 import { Controller } from 'zova-module-a-bean';
 import { IBehaviorComposeData, IBehaviors, IBehaviorTag } from '../../types/behavior.js';
 import { BeanBehavior } from '../../bean/bean.behavior.js';
@@ -12,6 +12,7 @@ export interface ControllerBehaviorProps {
 @Controller()
 export class ControllerBehavior extends BeanControllerBase {
   static $propsDefault = {};
+  static $componentOptions: IComponentOptions = { inheritAttrs: false };
   protected [SymbolControllerRefDisable]: boolean = true;
 
   @Use()

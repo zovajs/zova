@@ -1,4 +1,4 @@
-import { useModel } from 'vue';
+import { useModel, defineOptions } from 'vue';
 import { BeanBase } from './beanBase.js';
 import { IControllerData } from './type.js';
 import { cast } from '../types/utils/cast.js';
@@ -10,6 +10,8 @@ export interface PropsBase<CONTROLLER = unknown, SLOTS = unknown> {
   controllerRef?: (ref: CONTROLLER) => void;
   slots?: SLOTS;
 }
+
+export type IComponentOptions = Parameters<typeof defineOptions>[0];
 
 export class BeanControllerBase extends BeanBase {
   public $props: unknown;

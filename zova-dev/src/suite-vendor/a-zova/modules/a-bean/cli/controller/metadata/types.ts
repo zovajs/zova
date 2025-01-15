@@ -4,6 +4,8 @@ export interface IControllerInfo {
   nameCapitalize: string;
   controllerExtJs: string;
   controllerExtTs: string;
+  componentOptions: string;
+  hasComponentOptions: boolean;
   nameProps: string;
   hasProps: boolean;
   nameEmits: string;
