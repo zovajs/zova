@@ -9,6 +9,8 @@ import {
 } from '../types/onion.js';
 import { BeanOnion } from './bean.onion.js';
 import { swapDeps } from '@cabloy/deps';
+import { getOnionScenesMeta, OnionSceneMeta } from '@cabloy/module-info';
+import { evaluate } from '@cabloy/utils';
 
 // const SymbolOnionsEnabled = Symbol('SymbolOnionsEnabled');
 // const SymbolOnionsEnabledWrapped = Symbol('SymbolOnionsEnabledWrapped');
@@ -17,6 +19,7 @@ export class ServiceOnion<OPTIONS, ONIONNAME extends string> extends BeanSimple 
   protected [SymbolProxyDisable]: boolean = true;
   protected beanOnion: BeanOnion;
   sceneName: string;
+  sceneMeta: OnionSceneMeta;
 
   // private [SymbolOnionsEnabled]: Record<string, IOnionSlice<OPTIONS, ONIONNAME>[]> = {};
   // private [SymbolOnionsEnabledWrapped]: Record<string, Function[]> = {};
@@ -24,6 +27,7 @@ export class ServiceOnion<OPTIONS, ONIONNAME extends string> extends BeanSimple 
   protected __init__(sceneName: string, beanOnion: BeanOnion) {
     this.beanOnion = beanOnion;
     this.sceneName = sceneName;
+    this.sceneMeta = getOnionScenesMeta(this.app.meta.module.modulesMeta.modules)[this.sceneName];
   }
 
   // getOnionsEnabled(selector?: string) {
@@ -59,6 +63,44 @@ export class ServiceOnion<OPTIONS, ONIONNAME extends string> extends BeanSimple 
   // getOnionOptions<OPTIONS>(onionName: ONIONNAME): OPTIONS | undefined {
   //   return this.getOnionSlice(onionName).beanOptions.options as OPTIONS | undefined;
   // }
+
+  async collectOnionsFromPackage(selector?: string) {
+    const onionsMatched: IOnionItem<OPTIONS, ONIONNAME>[] = [];
+    for (const moduleName in this.app.meta.module.modulesMeta.modules) {
+      const module = this.app.meta.module.modulesMeta.modules[moduleName];
+      const nodeItems = module.info.onionsMeta?.onionsConfig?.[this.sceneName];
+      if (!nodeItems) continue;
+      for (const itemName in nodeItems) {
+        let itemOptions = nodeItems[itemName];
+        for (const key of ['match', 'ignore']) {
+          // value
+          let value = itemOptions[key];
+          if (value === undefined) continue;
+          if (Array.isArray(value)) {
+            value = value.map(item => (typeof item === 'string' && item.startsWith('/') ? evaluate(item) : item));
+          } else {
+            value = typeof value === 'string' && value.startsWith('/') ? evaluate(value) : value;
+          }
+          itemOptions[key] = value;
+        }
+        // extend config
+        const onionName = `${moduleName}:${itemName}`;
+        const optionsConfig = this.app.config.onions[this.sceneName]?.[onionName];
+        if (optionsConfig) {
+          itemOptions = deepExtend({}, itemOptions, optionsConfig);
+        }
+        // check
+        if (this.beanOnion.checkOnionOptionsEnabled(itemOptions, selector)) {
+          onionsMatched.push({
+            name: onionName,
+            options: itemOptions,
+          } as any);
+        }
+      }
+    }
+    // ok
+    return onionsMatched;
+  }
 
   async loadOnions(onionItems: IOnionItem<OPTIONS, ONIONNAME> | IOnionItem<OPTIONS, ONIONNAME>[], selector?: string) {
     if (!Array.isArray(onionItems)) onionItems = [onionItems];
