@@ -1,6 +1,6 @@
 import { BeanBase, cast, Use } from 'zova';
 import { Bean, BeanOnion, IOnionItem } from 'zova-module-a-bean';
-import { IBehaviorComposeData, IBehaviorItem, IBehaviorRecord, IDecoratorBehaviorOptions } from '../types/behavior.js';
+import { IBehaviorComposeData, IBehaviorRecord, IBehaviors, IDecoratorBehaviorOptions } from '../types/behavior.js';
 
 @Bean()
 export class BeanBehavior extends BeanBase {
@@ -9,15 +9,9 @@ export class BeanBehavior extends BeanBase {
 
   protected async __init__() {}
 
-  public async loadAndComposeBehaviors(behaviors: IBehaviorItem | IBehaviorItem[]) {
-    if (!Array.isArray(behaviors)) behaviors = [behaviors];
+  public async loadAndComposeBehaviors(behaviors: IBehaviors) {
     // onionItems
-    const onionItems: IOnionItem<IDecoratorBehaviorOptions, keyof IBehaviorRecord>[] = [];
-    for (const behaviorItem of behaviors) {
-      for (const key in behaviorItem) {
-        onionItems.push({ name: key as unknown as keyof IBehaviorRecord, options: behaviorItem[key] });
-      }
-    }
+    const onionItems = this._prepareOnionItems(behaviors);
     // load onions
     const onions = await this.$$beanOnion.behavior.loadOnions(onionItems);
     // create behaviors
@@ -33,5 +27,20 @@ export class BeanBehavior extends BeanBase {
         return cast(onionSlice.beanInstance)[data.method](data.props, options, data.behaviorTag, next);
       }
     });
+  }
+
+  private _prepareOnionItems(behaviors: IBehaviors) {
+    if (!Array.isArray(behaviors)) behaviors = [behaviors];
+    const onionItems: IOnionItem<IDecoratorBehaviorOptions, keyof IBehaviorRecord>[] = [];
+    for (const behaviorItem of behaviors) {
+      if (typeof behaviorItem === 'string') {
+        onionItems.push({ name: behaviorItem as unknown as keyof IBehaviorRecord, options: undefined });
+      } else if (typeof behaviorItem === 'object') {
+        for (const key in behaviorItem) {
+          onionItems.push({ name: key as unknown as keyof IBehaviorRecord, options: behaviorItem[key] });
+        }
+      }
+    }
+    return onionItems;
   }
 }

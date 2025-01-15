@@ -1,12 +1,12 @@
 import { createVNode } from 'vue';
 import { BeanControllerBase, cast, SymbolControllerRefDisable, Use } from 'zova';
 import { Controller } from 'zova-module-a-bean';
-import { IBehaviorComposeData, IBehaviorItem, IBehaviorTag } from '../../types/behavior.js';
+import { IBehaviorComposeData, IBehaviors, IBehaviorTag } from '../../types/behavior.js';
 import { BeanBehavior } from '../../bean/bean.behavior.js';
 
 export interface ControllerBehaviorProps {
   behaviorTag: IBehaviorTag;
-  behaviors: IBehaviorItem | IBehaviorItem[];
+  behaviors: IBehaviors;
 }
 
 @Controller()

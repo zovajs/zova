@@ -19,6 +19,8 @@ export type IBehaviorItem = {
   [prop in keyof IBehaviorRecord]?: Partial<IBehaviorRecord[prop]>;
 };
 
+export type IBehaviors = keyof IBehaviorRecord | IBehaviorItem | (keyof IBehaviorRecord | IBehaviorItem)[];
+
 export interface IBehaviorRecord {}
 
 export interface IBehaviorProps<PROPS> {
@@ -53,7 +55,7 @@ import { Component, VNode } from 'vue';
 
 declare module 'vue' {
   export interface InputHTMLAttributes {
-    behaviors?: keyof IBehaviorRecord | IBehaviorItem | (keyof IBehaviorRecord | IBehaviorItem)[];
+    behaviors?: IBehaviors;
   }
 }
 
@@ -61,7 +63,7 @@ declare module 'vue/jsx-runtime' {
   namespace JSX {
     // need define class/style in IntrinsicAttributes
     export interface IntrinsicAttributes {
-      behaviors?: keyof IBehaviorRecord | IBehaviorItem | (keyof IBehaviorRecord | IBehaviorItem)[];
+      behaviors?: IBehaviors;
     }
   }
 }
