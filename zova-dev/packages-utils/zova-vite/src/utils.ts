@@ -50,6 +50,7 @@ export function generateConfigDefine(env) {
 export function setModuleAlias() {
   // alias
   const alias = {
+    '@vue/babel-plugin-jsx': getAbsolutePathOfModule('@cabloy/vue-babel-plugin-jsx'),
     '@vue/compiler-sfc': getAbsolutePathOfModule('@cabloy/vue-compiler-sfc'),
     '@vue/runtime-core': getAbsolutePathOfModule('@cabloy/vue-runtime-core'),
     '@vue/reactivity': getAbsolutePathOfModule('@cabloy/vue-reactivity'),
@@ -69,6 +70,11 @@ export function getAbsolutePathOfModule(id: string, postfix: string = 'index.js'
     modulePath = modulePath.substring(0, modulePath.length - postfix.length - 1);
   }
   return modulePath;
+}
+
+export function requireModule(id: string) {
+  const require = createRequire(import.meta.url);
+  return require(id);
 }
 
 export async function copyTemplateFile(fileSrc: URL | string, fileDest: string, variables?) {

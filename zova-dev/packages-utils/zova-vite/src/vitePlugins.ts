@@ -1,11 +1,11 @@
 import babel from '@cabloy/vite-plugin-babel';
 // import vitePluginChecker from 'vite-plugin-checker';
-import vueJsxPlugin from '@vitejs/plugin-vue-jsx';
 import { vitePluginFakeServer } from 'vite-plugin-fake-server-turbo';
 import { ZovaViteConfigOptions, ZovaVitePlugin } from './types.js';
 import { glob } from '@cabloy/module-glob';
 import path from 'node:path';
 import fse from 'fs-extra';
+import { requireModule } from './utils.js';
 
 export function generateVitePlugins(
   configOptions: ZovaViteConfigOptions,
@@ -46,6 +46,7 @@ export function generateVitePlugins(
   }
 
   function __getVitePluginTsx() {
+    const vueJsxPlugin = requireModule('@vitejs/plugin-vue-jsx');
     return [
       '@vitejs/plugin-vue-jsx',
       vueJsxPlugin,

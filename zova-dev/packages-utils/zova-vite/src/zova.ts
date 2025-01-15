@@ -23,12 +23,12 @@ export async function generateZovaViteMeta(
   const server = __getConfigServer();
   // build
   const build = __getConfigBuild();
-  // vitePlugins
-  const vitePlugins = generateVitePlugins(configOptions, modulesMeta);
   // alias
   const alias = Object.assign({}, setModuleAlias(), {
     '@': path.join(configOptions.appDir, 'src/legacy'),
   });
+  // vitePlugins
+  const vitePlugins = generateVitePlugins(configOptions, modulesMeta);
   // viteConfig
   const viteConfig = {
     root: configOptions.appDir,
