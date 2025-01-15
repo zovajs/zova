@@ -26,6 +26,7 @@ const __ZovaManualChunkVendors = [
       '@vue/reactivity',
       'vue/jsx-runtime',
       '@cabloy/vue-runtime-core',
+      '@cabloy/vue-runtime-dom',
       '@cabloy/vue-reactivity',
     ],
     output: 'vue',

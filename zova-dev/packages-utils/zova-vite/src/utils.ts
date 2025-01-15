@@ -53,6 +53,7 @@ export function setModuleAlias() {
     '@vue/babel-plugin-jsx': getAbsolutePathOfModule('@cabloy/vue-babel-plugin-jsx'),
     '@vue/compiler-sfc': getAbsolutePathOfModule('@cabloy/vue-compiler-sfc'),
     '@vue/runtime-core': getAbsolutePathOfModule('@cabloy/vue-runtime-core'),
+    '@vue/runtime-dom': getAbsolutePathOfModule('@cabloy/vue-runtime-dom'),
     '@vue/reactivity': getAbsolutePathOfModule('@cabloy/vue-reactivity'),
     'vue-router': getAbsolutePathOfModule('@cabloy/vue-router'),
   };

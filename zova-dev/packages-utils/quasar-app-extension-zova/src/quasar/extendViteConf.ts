@@ -82,6 +82,7 @@ export function extendViteConf(context: ConfigContext) {
           '@vue/reactivity',
           '@cabloy/vue-reactivity',
           '@cabloy/vue-runtime-core',
+          '@cabloy/vue-runtime-dom',
         ],
       });
     }
