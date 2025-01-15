@@ -53,7 +53,7 @@ import { Component, VNode } from 'vue';
 
 declare module 'vue' {
   export interface InputHTMLAttributes {
-    behaviors?: IBehaviorItem | IBehaviorItem[];
+    behaviors?: keyof IBehaviorRecord | IBehaviorItem | (keyof IBehaviorRecord | IBehaviorItem)[];
   }
 }
 
@@ -61,7 +61,7 @@ declare module 'vue/jsx-runtime' {
   namespace JSX {
     // need define class/style in IntrinsicAttributes
     export interface IntrinsicAttributes {
-      behaviors?: IBehaviorItem | IBehaviorItem[];
+      behaviors?: keyof IBehaviorRecord | IBehaviorItem | (keyof IBehaviorRecord | IBehaviorItem)[];
     }
   }
 }
