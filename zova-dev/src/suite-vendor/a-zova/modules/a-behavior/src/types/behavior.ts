@@ -9,6 +9,8 @@ export interface IBehaviorTag {
   name?: string;
 }
 
+export type TypeComposer = (context: IBehaviorComposeData, next?: any) => any;
+
 export interface IBehaviorComposeData {
   behaviorTag: IBehaviorTag;
   method: 'props' | 'render';
@@ -28,7 +30,7 @@ export interface IBehaviorProps<PROPS> {
 }
 
 export interface IBehaviorRender<PROPS> {
-  render(props: PROPS, options: IDecoratorBehaviorOptions, behaviorTag: IBehaviorTag, next: NextBehaviorRender): VNode;
+  render(options: IDecoratorBehaviorOptions, behaviorTag: IBehaviorTag, props: PROPS, next: NextBehaviorRender): VNode;
 }
 
 export interface IDecoratorBehaviorOptions extends IOnionOptionsEnable {}

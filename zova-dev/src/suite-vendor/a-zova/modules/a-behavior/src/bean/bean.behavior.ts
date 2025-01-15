@@ -1,6 +1,16 @@
 import { BeanBase, cast, Use } from 'zova';
 import { Bean, BeanOnion, IOnionItem } from 'zova-module-a-bean';
-import { IBehaviorComposeData, IBehaviorRecord, IBehaviors, IDecoratorBehaviorOptions } from '../types/behavior.js';
+import {
+  IBehaviorComposeData,
+  IBehaviorRecord,
+  IBehaviors,
+  IBehaviorTag,
+  IDecoratorBehaviorOptions,
+  NextBehaviorProps,
+  NextBehaviorRender,
+  TypeComposer,
+} from '../types/behavior.js';
+import { VNode } from 'vue';
 
 @Bean()
 export class BeanBehavior extends BeanBase {
@@ -27,6 +37,19 @@ export class BeanBehavior extends BeanBase {
         return cast(onionSlice.beanInstance)[data.method](data.props, options, data.behaviorTag, next);
       }
     });
+  }
+
+  public composeProps<PROPS>(composer: TypeComposer, behaviorTag: IBehaviorTag, next: NextBehaviorProps<PROPS>): PROPS {
+    return composer({ behaviorTag, method: 'props' }, next);
+  }
+
+  public composeRender<PROPS>(
+    composer: TypeComposer,
+    behaviorTag: IBehaviorTag,
+    props: PROPS,
+    next: NextBehaviorRender,
+  ): VNode {
+    return composer({ behaviorTag, method: 'render', props }, next);
   }
 
   private _prepareOnionItems(behaviors: IBehaviors) {

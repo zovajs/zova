@@ -28,9 +28,9 @@ export class Behavior<%=argv.beanNameCapitalize%>
   }
 
   render(
-    _props: IBehaviorProps<%=argv.beanNameCapitalize%>,
     _options: IBehaviorOptions<%=argv.beanNameCapitalize%>,
     _behaviorTag: IBehaviorTag,
+    _props: IBehaviorProps<%=argv.beanNameCapitalize%>,
     next: NextBehaviorRender,
   ): VNode {
     return next();
