@@ -9,14 +9,14 @@ export default async function (options: IMetadataCustomGenerateOptions): Promise
   if (globFiles.length === 0) return '';
   const pkgFile = path.join(modulePath, 'package.json');
   const pkg = await cli.helper.loadJSONFile(pkgFile);
-  const nodeCapabilities = getPropertyObject<{}>(pkg, 'zovaModule.capabilities')!;
-  const nodeAops = (nodeCapabilities['aops'] = {});
+  const nodeOnionsConfig = getPropertyObject<{}>(pkg, 'zovaModule.onionsConfig')!;
+  const nodeAops = (nodeOnionsConfig['aop'] = {});
   for (const { beanName, beanNameFull, fileContent } of globFiles) {
     const matches = fileContent.match(/@Aop\((\{[\s\S]*?\})\)\s*?export class/);
     if (!matches) throw new Error(`aop options parser error: ${beanNameFull}`);
     const aopOptions = evaluate(matches[1]);
     nodeAops[beanName] = {};
-    for (const key of ['enable', 'meta', 'dependencies', 'dependents']) {
+    for (const key of ['enable', 'meta']) {
       if (aopOptions[key] !== undefined) nodeAops[beanName][key] = aopOptions[key];
     }
     for (const key of ['match', 'ignore']) {

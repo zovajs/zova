@@ -3,13 +3,12 @@
   "version": "5.0.0",
   "title": "demo-basic",
   "zovaModule": {
-    "capabilities": {
-      "aops": {
+    "onionsConfig": {
+      "aop": {
         "home": {
           "match": "home-index.controller.pageHome"
         },
         "home3": {
-          "dependencies": "demo-basic:home",
           "match": "/home-index\\.controller\\.pageHome/"
         }
       }
