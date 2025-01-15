@@ -1,4 +1,4 @@
-import { appResource, BeanSimple, deepExtend, Next, SymbolProxyDisable } from 'zova';
+import { appResource, BeanSimple, cast, deepExtend, Next, SymbolProxyDisable } from 'zova';
 import { compose as _compose } from '@cabloy/compose';
 import {
   IOnionExecuteCustom,
@@ -8,6 +8,7 @@ import {
   IOnionSlice,
 } from '../types/onion.js';
 import { BeanOnion } from './bean.onion.js';
+import { swapDeps } from '@cabloy/deps';
 
 // const SymbolOnionsEnabled = Symbol('SymbolOnionsEnabled');
 // const SymbolOnionsEnabledWrapped = Symbol('SymbolOnionsEnabledWrapped');
@@ -80,6 +81,16 @@ export class ServiceOnion<OPTIONS, ONIONNAME extends string> extends BeanSimple 
       }
       onionSlices.push({ name: item.name, options, beanFullName });
     }
+    // swap
+    swapDeps(onionSlices, {
+      name: 'name',
+      dependencies: item => {
+        return cast(cast<IOnionSlice<OPTIONS, ONIONNAME>>(item).options).dependencies;
+      },
+      dependents: item => {
+        return cast(cast<IOnionSlice<OPTIONS, ONIONNAME>>(item).options).dependents;
+      },
+    });
     // filter
     return this.getOnionsEnabled(onionSlices, selector);
   }
