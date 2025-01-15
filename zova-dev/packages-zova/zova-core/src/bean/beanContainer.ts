@@ -931,9 +931,9 @@ export class BeanContainer {
       if (aops) {
         // load aops
         const aopInstances: BeanBase[] = [];
-        for (const aopKey of aops) {
+        for (const aop of aops) {
           // singleton
-          aopInstances.push(await this.app.bean._getBean(aopKey, true));
+          aopInstances.push(await this.app.bean._getBean(aop.beanFullName, true));
         }
         chains = chains.concat(aopInstances);
       }

@@ -1,15 +1,8 @@
-import { evaluate } from '@cabloy/utils';
-import { appResource, BeanBase, cast, Constructable, deepExtend, IBeanRecord, SymbolProxyDisable, Use } from 'zova';
+import { appResource, BeanBase, Constructable, IBeanRecord, SymbolProxyDisable, Use } from 'zova';
 import { Service } from '../lib/bean.js';
 import { BeanOnion } from './bean.onion.js';
 import { IAopRecord, IDecoratorAopOptions } from '../types/aop.js';
-import { swapDeps } from '@cabloy/deps';
-
-interface IAopMatchResult {
-  name: keyof IAopRecord;
-  beanFullName: string;
-  options: IDecoratorAopOptions;
-}
+import { IOnionSlice } from '../types/onion.js';
 
 @Service()
 export class ServiceAop extends BeanBase {
@@ -18,20 +11,22 @@ export class ServiceAop extends BeanBase {
   @Use()
   $$beanOnion: BeanOnion;
 
-  async findAopsMatched<T>(A: Constructable<T>): Promise<string[] | undefined>;
-  async findAopsMatched<K extends keyof IBeanRecord>(beanFullName: K): Promise<string[] | undefined>;
-  async findAopsMatched(beanFullName: string): Promise<string[] | undefined>;
-  async findAopsMatched<T>(beanFullName: Constructable<T> | string): Promise<string[] | undefined> {
+  async findAopsMatched<T>(
+    A: Constructable<T>,
+  ): Promise<IOnionSlice<IDecoratorAopOptions, keyof IAopRecord>[] | undefined>;
+  async findAopsMatched<K extends keyof IBeanRecord>(
+    beanFullName: K,
+  ): Promise<IOnionSlice<IDecoratorAopOptions, keyof IAopRecord>[] | undefined>;
+  async findAopsMatched(
+    beanFullName: string,
+  ): Promise<IOnionSlice<IDecoratorAopOptions, keyof IAopRecord>[] | undefined>;
+  async findAopsMatched<T>(
+    beanFullName: Constructable<T> | string,
+  ): Promise<IOnionSlice<IDecoratorAopOptions, keyof IAopRecord>[] | undefined> {
     // beanOptions
     const beanOptions = appResource.getBean(beanFullName as any);
     if (!beanOptions) return;
-    // beanFullName
-    beanFullName = beanOptions.beanFullName;
-    // collect
-    const { moduleNames, aopsMatched } = this._collectModulesMatched(beanFullName);
-    // load modules
-    await this.app.meta.module.loadModules(Set.unique(moduleNames));
-    // ok
-    return aopsMatched;
+    // loadOnions
+    return await this.$$beanOnion.aop.loadOnionsFromPackage(beanOptions.beanFullName);
   }
 }

@@ -22,7 +22,6 @@ export type IAppResourceRecord = Record<string, IDecoratorBeanOptionsBase>;
 export class AppResource extends BeanSimple {
   beans: Record<string, IDecoratorBeanOptionsBase> = {};
   scenes: Record<string, Record<string, IAppResourceRecord>> = {};
-  aops: Record<string, IDecoratorBeanOptionsBase> = {};
 
   addUse(target: object, options: IDecoratorUseOptionsBase) {
     const uses = appMetadata.getOwnMetadataMap(DecoratorUse, target);
@@ -36,15 +35,6 @@ export class AppResource extends BeanSimple {
 
   getUses(target: object): Record<MetadataKey, IDecoratorUseOptionsBase> | undefined {
     return appMetadata.getMetadata(DecoratorUse, target);
-  }
-
-  addAop<T>(options: Partial<IDecoratorBeanOptionsBase<T>>) {
-    // bean
-    const beanOptions = this.addBean(options);
-    // aop
-    this.aops[beanOptions.beanFullName] = beanOptions;
-    // ok
-    return beanOptions;
   }
 
   addBean<T>(options: Partial<IDecoratorBeanOptionsBase<T>>) {
@@ -183,10 +173,6 @@ export class AppResource extends BeanSimple {
   _getModuleName<T>(beanFullName: Constructable<T> | string): string | undefined {
     const beanOptions = this.getBean(beanFullName as any);
     return beanOptions?.module;
-  }
-
-  findAopsMatched(_beanFullName: string): any[] {
-    return [];
   }
 }
 
