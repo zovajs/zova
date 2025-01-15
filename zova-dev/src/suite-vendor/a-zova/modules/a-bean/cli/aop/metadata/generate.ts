@@ -16,7 +16,7 @@ export default async function (options: IMetadataCustomGenerateOptions): Promise
     if (!matches) throw new Error(`aop options parser error: ${beanNameFull}`);
     const aopOptions = evaluate(matches[1]);
     nodeAops[beanName] = {};
-    for (const key of ['enable', 'meta']) {
+    for (const key of ['enable', 'meta', 'dependencies', 'dependents']) {
       if (aopOptions[key] !== undefined) nodeAops[beanName][key] = aopOptions[key];
     }
     for (const key of ['match', 'ignore']) {

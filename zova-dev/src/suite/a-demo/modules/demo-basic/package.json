@@ -9,6 +9,7 @@
           "match": "home-index.controller.pageHome"
         },
         "home3": {
+          "dependencies": "demo-basic:home",
           "match": "/home-index\\.controller\\.pageHome/"
         }
       }
