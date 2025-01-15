@@ -38,6 +38,7 @@ export class ServiceOnion<OPTIONS, ONIONNAME extends string> extends BeanSimple 
   }
 
   private _initOnionsAll() {
+    this.onionsAll = [];
     for (const moduleName in this.app.meta.module.modulesMeta.modules) {
       const module = this.app.meta.module.modulesMeta.modules[moduleName];
       const nodeItems = module.info.onionsMeta?.onionsConfig?.[this.sceneName];
@@ -129,6 +130,7 @@ export class ServiceOnion<OPTIONS, ONIONNAME extends string> extends BeanSimple 
     selector?: string,
   ): Promise<IOnionSlice<OPTIONS, ONIONNAME>[]> {
     if (!Array.isArray(onionItems)) onionItems = [onionItems];
+    if (onionItems.length === 0) return [];
     // load modules
     const moduleNames = onionItems.map(item => item.name.split(':')[0]);
     await this._loadModules(moduleNames);
@@ -158,6 +160,7 @@ export class ServiceOnion<OPTIONS, ONIONNAME extends string> extends BeanSimple 
 
   getOnionsEnabled(onions: IOnionItem<OPTIONS, ONIONNAME>[], selector?: string) {
     if (!selector) selector = '';
+    if (!onions) return [];
     return onions.filter(onionItem => {
       const onionOptions = onionItem.options as IOnionOptionsEnable & IOnionOptionsMatch<string>;
       return this.beanOnion.checkOnionOptionsEnabled(onionOptions, selector);
@@ -176,7 +179,7 @@ export class ServiceOnion<OPTIONS, ONIONNAME extends string> extends BeanSimple 
 
   async _loadModules(moduleNames: string[]) {
     // load modules
-    moduleNames = Set.unique(moduleNames).filter(item => !!this.app.meta.module.get(item, false));
+    moduleNames = Set.unique(moduleNames).filter(item => !this.app.meta.module.get(item, false));
     await this.app.meta.module.loadModules(moduleNames);
   }
 
