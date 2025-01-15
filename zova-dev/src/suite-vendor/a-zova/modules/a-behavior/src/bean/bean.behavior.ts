@@ -6,11 +6,8 @@ import {
   IBehaviors,
   IBehaviorTag,
   IDecoratorBehaviorOptions,
-  NextBehaviorProps,
-  NextBehaviorRender,
-  TypeComposer,
 } from '../types/behavior.js';
-import { VNode } from 'vue';
+import { Composer } from '../lib/composer.js';
 
 @Bean()
 export class BeanBehavior extends BeanBase {
@@ -19,7 +16,7 @@ export class BeanBehavior extends BeanBase {
 
   protected async __init__() {}
 
-  public async loadAndComposeBehaviors(behaviors: IBehaviors) {
+  public async createComposer(behaviors: IBehaviors, behaviorTag: IBehaviorTag): Promise<Composer> {
     // onionItems
     const onionItems = this._prepareOnionItems(behaviors);
     // load onions
@@ -29,27 +26,18 @@ export class BeanBehavior extends BeanBase {
       onion.beanInstance = await this.bean._newBean(onion.beanFullName as any, true);
     }
     // compose
-    return this.$$beanOnion.behavior.compose(onions, (onionSlice, data: IBehaviorComposeData, options, next) => {
-      if (!cast(onionSlice.beanInstance)[data.method]) return next();
-      if (data.method === 'props') {
-        return cast(onionSlice.beanInstance)[data.method](options, data.behaviorTag, next);
-      } else {
-        return cast(onionSlice.beanInstance)[data.method](data.props, options, data.behaviorTag, next);
-      }
-    });
-  }
-
-  public composeProps<PROPS>(composer: TypeComposer, behaviorTag: IBehaviorTag, next: NextBehaviorProps<PROPS>): PROPS {
-    return composer({ behaviorTag, method: 'props' }, next);
-  }
-
-  public composeRender<PROPS>(
-    composer: TypeComposer,
-    behaviorTag: IBehaviorTag,
-    props: PROPS,
-    next: NextBehaviorRender,
-  ): VNode {
-    return composer({ behaviorTag, method: 'render', props }, next);
+    const composer = this.$$beanOnion.behavior.compose(
+      onions,
+      (onionSlice, data: IBehaviorComposeData, options, next) => {
+        if (!cast(onionSlice.beanInstance)[data.method]) return next();
+        if (data.method === 'props') {
+          return cast(onionSlice.beanInstance)[data.method](options, data.behaviorTag, next);
+        } else {
+          return cast(onionSlice.beanInstance)[data.method](data.props, options, data.behaviorTag, next);
+        }
+      },
+    );
+    return this.bean._newBeanSimple(Composer, false, composer, behaviorTag);
   }
 
   private _prepareOnionItems(behaviors: IBehaviors) {
