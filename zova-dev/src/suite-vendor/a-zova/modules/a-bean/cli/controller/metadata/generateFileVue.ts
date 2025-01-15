@@ -77,9 +77,9 @@ function _generateFileVueComponent(
   const contentImports: string[] = [];
   const namePropsGeneric = hasGeneric ? `${nameProps}<T>` : nameProps;
   const nameEmitsGeneric = hasGeneric ? `${nameEmits}<T>` : nameEmits;
-  const nameSlotsGeneric = hasGeneric ? `${nameSlots}<T>` : nameSlots;
+  // const nameSlotsGeneric = hasGeneric ? `${nameSlots}<T>` : nameSlots;
   // controller
-  contentImports.push(`import { useController${hasProps ? '' : ', PropsBase'} } from 'zova';`);
+  contentImports.push("import { useController } from 'zova';");
   contentImports.push(
     `import { ${className}${hasProps ? `, ${nameProps}` : ''}${hasEmits ? `, ${nameEmits}` : ''}${!hasProps && hasSlots ? `, ${nameSlots}` : ''} } from '../../component/${name}/controller${controllerExtJs}';`,
   );
@@ -99,8 +99,6 @@ function _generateFileVueComponent(
   let contentProps = '';
   if (hasProps) {
     contentProps = `const props = withDefaults(defineProps<${namePropsGeneric}>(), Controller${nameCapitalize}.$propsDefault);`;
-  } else {
-    contentProps = `const props = defineProps<PropsBase<Controller${nameCapitalize}${hasSlots ? `, ${nameSlotsGeneric}` : ''}>>();`;
   }
   // emits
   let contentEmits = '';
@@ -116,7 +114,7 @@ function _generateFileVueComponent(
 ${contentImports.join('\n')}
 ${contentProps}
 ${contentEmits}
-useController(props, ${hasEmits ? 'emit' : 'undefined'}, Controller${nameCapitalize}, ${importRender ? `Render${nameCapitalize}` : undefined}, ${importStyle ? `Style${nameCapitalize}` : undefined});
+useController(${hasProps ? 'props' : 'undefined'}, ${hasEmits ? 'emit' : 'undefined'}, Controller${nameCapitalize}, ${importRender ? `Render${nameCapitalize}` : undefined}, ${importStyle ? `Style${nameCapitalize}` : undefined});
 </script>
 `;
   return content;
