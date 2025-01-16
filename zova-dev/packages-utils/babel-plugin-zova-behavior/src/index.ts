@@ -71,9 +71,9 @@ function createVisitor(context: ContextInfo) {
         if (t.isJSXIdentifier(nodePath.node.name)) {
           context.behaviors = true;
           nodePath.node.name.name = 'ZBehavior__';
-          const props = [t.objectProperty(t.stringLiteral('component'), tag)];
+          const props = [t.objectProperty(t.identifier('component'), tag)];
           if (t.isStringLiteral(tag)) {
-            props.push(t.objectProperty(t.stringLiteral('name'), t.stringLiteral(tag.value)));
+            props.push(t.objectProperty(t.identifier('name'), t.stringLiteral(tag.value)));
           }
           const objectExpression = t.objectExpression(props);
           nodePath.node.attributes.push(
