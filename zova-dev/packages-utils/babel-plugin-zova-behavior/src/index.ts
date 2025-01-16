@@ -42,10 +42,10 @@ function createVisitor(context: ContextInfo) {
         const propName = (<t.JSXIdentifier>attr.name).name;
         if (propName === 'behaviors') {
           const expression = (<t.JSXExpressionContainer>attr.value)?.expression;
-          if (t.isObjectExpression(expression)) {
-            behaviors.push(expression);
-          } else if (t.isArrayExpression(expression)) {
+          if (t.isArrayExpression(expression)) {
             behaviors.push(...expression.elements);
+          } else {
+            behaviors.push(expression);
           }
           nodePath.node.attributes.splice(index, 1);
         } else if (propName.startsWith('bs-')) {

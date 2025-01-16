@@ -34,11 +34,20 @@ export class BeanBehavior extends BeanBase {
   }
 
   private _prepareOnionItems(behaviors: IBehaviors) {
-    if (!Array.isArray(behaviors)) behaviors = [behaviors];
     const onionItems: IOnionItem<IDecoratorBehaviorOptions, keyof IBehaviorRecord>[] = [];
+    return this._prepareOnionItemsInner(onionItems, behaviors);
+  }
+
+  private _prepareOnionItemsInner(
+    onionItems: IOnionItem<IDecoratorBehaviorOptions, keyof IBehaviorRecord>[],
+    behaviors: IBehaviors,
+  ) {
+    if (!Array.isArray(behaviors)) behaviors = [behaviors];
     for (const behaviorItem of behaviors) {
       if (typeof behaviorItem === 'string') {
         onionItems.push({ name: behaviorItem as unknown as keyof IBehaviorRecord, options: undefined });
+      } else if (Array.isArray(behaviorItem)) {
+        this._prepareOnionItemsInner(onionItems, behaviorItem);
       } else if (typeof behaviorItem === 'object') {
         for (const key in behaviorItem) {
           let options = behaviorItem[key];
