@@ -10,7 +10,7 @@ export interface IBehaviorTag {
   name?: string;
 }
 
-export type TypeComposer = (context: any, next?: any) => any;
+export type TypeComposer = (props: any, next?: any) => any;
 
 export type IBehaviorItem = {
   [prop in keyof IBehaviorRecord]?: Partial<IBehaviorRecord[prop]>;
@@ -19,14 +19,6 @@ export type IBehaviorItem = {
 export type IBehaviors = keyof IBehaviorRecord | IBehaviorItem | (keyof IBehaviorRecord | IBehaviorItem)[];
 
 export interface IBehaviorRecord {}
-
-export interface IBehaviorProps<PROPS> {
-  props(options: IDecoratorBehaviorOptions, behaviorTag: IBehaviorTag, next: NextBehaviorProps<PROPS>): PROPS;
-}
-
-export interface IBehaviorRender<PROPS> {
-  render(options: IDecoratorBehaviorOptions, behaviorTag: IBehaviorTag, props: PROPS, next: NextBehaviorRender): VNode;
-}
 
 export interface IBehaviorExecute<PROPS_INPUT = unknown, PROPS_OUTPUT = PROPS_INPUT> {
   execute(
