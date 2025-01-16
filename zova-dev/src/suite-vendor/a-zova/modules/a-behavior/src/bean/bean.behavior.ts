@@ -1,5 +1,5 @@
 import { BeanBase, cast, Use } from 'zova';
-import { Bean, BeanOnion, IOnionItem, IOnionSliceInstance } from 'zova-module-a-bean';
+import { Bean, BeanOnion, IOnionItem } from 'zova-module-a-bean';
 import {
   IBehaviorExecute,
   IBehaviorRecord,
@@ -20,24 +20,16 @@ export class BeanBehavior extends BeanBase {
     // onionItems
     const onionItems = this._prepareOnionItems(behaviors);
     // load onions
-    const onions = await this.$$beanOnion.behavior.loadOnions(onionItems);
+    const onionSlices = await this.$$beanOnion.behavior.loadOnions(onionItems);
     // create behaviors
-    const onionInstances: IOnionSliceInstance<IDecoratorBehaviorOptions, keyof IBehaviorRecord, IBehaviorExecute>[] =
-      [];
-    for (const item of onions) {
-      onionInstances.push({
-        ...item,
-        beanInstance: await this.bean._getBean(item.beanFullName as any, true),
-      });
+    for (const onionSlice of onionSlices) {
+      onionSlice.beanInstance = await this.bean._getBean(onionSlice.beanFullName as any, true);
     }
     // compose
-    const composer = this.$$beanOnion.behavior.compose(
-      onionInstances,
-      (onionSliceInstance, props: any, options, next) => {
-        const beanInstance = cast<IBehaviorExecute>(onionSliceInstance.beanInstance);
-        return beanInstance.execute(props, options, behaviorTag, next as any);
-      },
-    );
+    const composer = this.$$beanOnion.behavior.compose(onionSlices, (onionSlice, props: any, next) => {
+      const beanInstance = cast<IBehaviorExecute>(onionSlice.beanInstance);
+      return beanInstance.execute(props, onionSlice.options, behaviorTag, next as any);
+    });
     return this.bean._newBeanSimple(Composer, false, composer);
   }
 

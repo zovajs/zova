@@ -187,7 +187,7 @@ export class ServiceOnion<OPTIONS, ONIONNAME extends string> extends BeanSimple 
   /** internal */
   public _wrapOnion(item: IOnionSlice<OPTIONS, ONIONNAME>, executeCustom: IOnionExecuteCustom<OPTIONS, ONIONNAME>) {
     const fn = (data: any, next: Next) => {
-      return executeCustom(item, data, item.options!, next);
+      return executeCustom(item, data, next);
     };
     fn._name = item.name;
     return fn;

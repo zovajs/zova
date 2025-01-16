@@ -4,9 +4,8 @@ export const SymbolUseOnionLocal = Symbol('SymbolUseOnionLocal');
 export const SymbolUseOnionOptions = Symbol('SymbolUseOnionOptions');
 
 export type IOnionExecuteCustom<OPTIONS, ONIONNAME> = (
-  onionSliceInstance: IOnionSliceInstance<OPTIONS, ONIONNAME>,
+  onionSlice: IOnionSlice<OPTIONS, ONIONNAME>,
   data: any,
-  options: OPTIONS,
   next: Function,
 ) => any;
 
@@ -32,14 +31,10 @@ export interface IOnionOptionsMeta extends ZovaOnionOptionsMeta {}
 
 export interface IOnionOptionsBase<T extends string> extends IOnionOptionsEnable, IOnionOptionsMatch<T> {}
 
-export interface IOnionSlice<OPTIONS = unknown, ONIONNAME = string> {
+export interface IOnionSlice<OPTIONS = unknown, ONIONNAME = string, T = unknown> {
   name: ONIONNAME;
   options: OPTIONS;
   beanFullName: string;
-}
-
-export interface IOnionSliceInstance<OPTIONS = unknown, ONIONNAME = string, T = unknown>
-  extends IOnionSlice<OPTIONS, ONIONNAME> {
   beanInstance?: T;
 }
 
