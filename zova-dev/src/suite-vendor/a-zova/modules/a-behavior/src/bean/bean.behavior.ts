@@ -41,7 +41,10 @@ export class BeanBehavior extends BeanBase {
         onionItems.push({ name: behaviorItem as unknown as keyof IBehaviorRecord, options: undefined });
       } else if (typeof behaviorItem === 'object') {
         for (const key in behaviorItem) {
-          onionItems.push({ name: key as unknown as keyof IBehaviorRecord, options: behaviorItem[key] });
+          let options = behaviorItem[key];
+          if (options === false) continue;
+          if (options === true) options = undefined;
+          onionItems.push({ name: key as unknown as keyof IBehaviorRecord, options });
         }
       }
     }
