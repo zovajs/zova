@@ -97,6 +97,7 @@ export class AppModule extends BeanSimple {
     const moduleNamesLoading: string[] = [];
     for (const moduleName of moduleNames) {
       const module = this.modulesMeta.modules[moduleName];
+      if (!module) throw new Error(`module not found: ${moduleName}`);
       const moduleResource = module.resource as any;
       if (typeof moduleResource === 'function') {
         promises.push(moduleResource());
