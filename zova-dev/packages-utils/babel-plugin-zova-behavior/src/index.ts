@@ -34,16 +34,25 @@ function createVisitor(context: ContextInfo) {
     JSXElement(path: NodePath<t.JSXElement>, state: PluginPass) {
       const nodePath = path.get('openingElement');
       const { tag } = buildProps(path, state);
-      let behaviors: boolean = false;
-      for (const attr of nodePath.node.attributes) {
+      const behaviorExpressions = t.arrayExpression();
+      for (let index = nodePath.node.attributes.length - 1; index >= 0; index--) {
+        const attr = nodePath.node.attributes[index];
         if (!t.isJSXAttribute(attr)) continue;
         const propName = attr.name.name;
         if (propName === 'behaviors') {
-          behaviors = true;
-          break;
+          const expression = (<t.JSXExpressionContainer>attr.value)?.expression;
+          if (t.isObjectExpression(expression)) {
+            behaviorExpressions.elements.push(expression);
+          } else if (t.isArrayExpression(expression)) {
+            behaviorExpressions.elements.push(...expression.elements);
+          }
+          nodePath.node.attributes.splice(index, 1);
         }
       }
-      if (behaviors) {
+      if (behaviorExpressions.elements.length > 0) {
+        nodePath.node.attributes.push(
+          t.jsxAttribute(t.jsxIdentifier('behaviors'), t.jsxExpressionContainer(behaviorExpressions)),
+        );
         // path.get('openingElement').node.name.name
         if (t.isJSXIdentifier(nodePath.node.name)) {
           context.behaviors = true;
