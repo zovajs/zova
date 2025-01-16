@@ -1,4 +1,4 @@
-import { createVNode } from 'vue';
+import { createVNode, watch } from 'vue';
 import { BeanControllerBase, cast, IComponentOptions, SymbolControllerRefDisable, Use } from 'zova';
 import { Controller } from 'zova-module-a-bean';
 import { IBehaviors, IBehaviorTag } from '../../types/behavior.js';
@@ -22,7 +22,15 @@ export class ControllerBehavior extends BeanControllerBase {
 
   protected async __init__() {
     await this._loadBehaviors();
-    // todo: watch
+    // watch
+    watch(
+      () => {
+        return this.$props.behaviors;
+      },
+      async () => {
+        await this._loadBehaviors();
+      },
+    );
   }
 
   protected render() {
