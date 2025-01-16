@@ -138,7 +138,8 @@ export class ServiceOnion<OPTIONS, ONIONNAME extends string> extends BeanSimple 
     const onionSlices: IOnionSlice<OPTIONS, ONIONNAME>[] = [];
     for (const item of onionItems) {
       const beanFullName = item.name.replace(':', `.${this.sceneName}.`);
-      const beanOptions = appResource.getBean(beanFullName)!;
+      const beanOptions = appResource.getBean(beanFullName);
+      if (!beanOptions) throw new Error(`behavior not found: ${beanFullName}`);
       // options
       const optionsConfig = this.app.config.onions[this.sceneName]?.[item.name];
       let options;
