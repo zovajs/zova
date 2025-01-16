@@ -2,36 +2,28 @@ import { VNode } from 'vue';
 import { BeanBase } from 'zova';
 import {
   Behavior,
-  IBehaviorProps,
-  IBehaviorRender,
+  IBehaviorExecute,
   IBehaviorTag,
   IDecoratorBehaviorOptions,
-  NextBehaviorProps,
-  NextBehaviorRender,
+  NextBehavior,
 } from 'zova-module-a-behavior';
 
-export interface IBehaviorProps<%=argv.beanNameCapitalize%> {}
+export interface IBehaviorPropsInput<%=argv.beanNameCapitalize%> {}
+
+export interface IBehaviorPropsOutput<%=argv.beanNameCapitalize%> {}
 
 export interface IBehaviorOptions<%=argv.beanNameCapitalize%> extends IDecoratorBehaviorOptions {}
 
 @Behavior<IBehaviorOptions<%=argv.beanNameCapitalize%>>()
 export class Behavior<%=argv.beanNameCapitalize%>
   extends BeanBase
-  implements IBehaviorProps<IBehaviorProps<%=argv.beanNameCapitalize%>>, IBehaviorRender<IBehaviorProps<%=argv.beanNameCapitalize%>>
+  implements IBehaviorExecute<IBehaviorPropsInput<%=argv.beanNameCapitalize%>, IBehaviorPropsOutput<%=argv.beanNameCapitalize%>>
 {
-  props(
+  execute(
+    _props: IBehaviorPropsInput<%=argv.beanNameCapitalize%>,
     _options: IBehaviorOptions<%=argv.beanNameCapitalize%>,
     _behaviorTag: IBehaviorTag,
-    next: NextBehaviorProps<IBehaviorProps<%=argv.beanNameCapitalize%>>,
-  ): IBehaviorProps<%=argv.beanNameCapitalize%> {
-    return next();
-  }
-
-  render(
-    _options: IBehaviorOptions<%=argv.beanNameCapitalize%>,
-    _behaviorTag: IBehaviorTag,
-    _props: IBehaviorProps<%=argv.beanNameCapitalize%>,
-    next: NextBehaviorRender,
+    next: NextBehavior<IBehaviorPropsOutput<%=argv.beanNameCapitalize%>>,
   ): VNode {
     return next();
   }
