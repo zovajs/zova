@@ -1,6 +1,7 @@
 import { /*template,*/ types as t, type PluginPass } from '@babel/core';
 import type { NodePath, Visitor } from '@babel/traverse';
 import { getTag } from './utils.js';
+import { parseFirstWord } from '@cabloy/word-utils';
 
 // interface ComponentFindInfo {
 //   import: ImportInfo;
@@ -34,32 +35,45 @@ function createVisitor(context: ContextInfo) {
     JSXElement(path: NodePath<t.JSXElement>, state: PluginPass) {
       const nodePath = path.get('openingElement');
       const { tag } = buildProps(path, state);
-      const behaviorExpressions = t.arrayExpression();
+      const behaviors: any[] = [];
       for (let index = nodePath.node.attributes.length - 1; index >= 0; index--) {
         const attr = nodePath.node.attributes[index];
-        if (!t.isJSXAttribute(attr)) continue;
-        const propName = attr.name.name;
+        if (!t.isJSXAttribute(attr) || !t.isJSXIdentifier(attr.name)) continue;
+        const propName = (<t.JSXIdentifier>attr.name).name;
         if (propName === 'behaviors') {
           const expression = (<t.JSXExpressionContainer>attr.value)?.expression;
           if (t.isObjectExpression(expression)) {
-            behaviorExpressions.elements.push(expression);
+            behaviors.push(expression);
           } else if (t.isArrayExpression(expression)) {
-            behaviorExpressions.elements.push(...expression.elements);
+            behaviors.push(...expression.elements);
           }
           nodePath.node.attributes.splice(index, 1);
+        } else if (propName.startsWith('bs-')) {
+          const onionName = _parseBehaviorName(propName);
+          if (onionName) {
+            if (!attr.value || t.isStringLiteral(attr.value)) {
+              behaviors.push(t.stringLiteral(onionName));
+            } else if (t.isJSXExpressionContainer(attr.value)) {
+              const objectExpression = t.objectExpression([
+                t.objectProperty(t.stringLiteral(onionName), attr.value.expression as t.ObjectExpression),
+              ]);
+              behaviors.push(objectExpression);
+            }
+            nodePath.node.attributes.splice(index, 1);
+          }
         }
       }
-      if (behaviorExpressions.elements.length > 0) {
+      if (behaviors.length > 0) {
         nodePath.node.attributes.push(
-          t.jsxAttribute(t.jsxIdentifier('behaviors'), t.jsxExpressionContainer(behaviorExpressions)),
+          t.jsxAttribute(t.jsxIdentifier('behaviors'), t.jsxExpressionContainer(t.arrayExpression(behaviors))),
         );
         // path.get('openingElement').node.name.name
         if (t.isJSXIdentifier(nodePath.node.name)) {
           context.behaviors = true;
           nodePath.node.name.name = 'ZBehavior__';
-          const props = [t.objectProperty(t.identifier('component'), tag)];
+          const props = [t.objectProperty(t.stringLiteral('component'), tag)];
           if (t.isStringLiteral(tag)) {
-            props.push(t.objectProperty(t.identifier('name'), t.stringLiteral(tag.value)));
+            props.push(t.objectProperty(t.stringLiteral('name'), t.stringLiteral(tag.value)));
           }
           const objectExpression = t.objectExpression(props);
           nodePath.node.attributes.push(
@@ -69,6 +83,21 @@ function createVisitor(context: ContextInfo) {
       }
     },
   };
+}
+
+// bs-providerId-moduleName-beanName
+function _parseBehaviorName(propName): string | undefined {
+  let moduleName;
+  const parts = propName.split('-');
+  const beanName = parts[parts.length - 1];
+  if (parts.length === 2) {
+    moduleName = 'a-' + parseFirstWord(beanName);
+  } else if (parts.length === 3) {
+    moduleName = 'a-' + parts[1];
+  } else if (parts.length === 4) {
+    moduleName = `${parts[1]}-${parts[2]}`;
+  }
+  if (moduleName) return `${moduleName}:${beanName}`;
 }
 
 function insertImport(path: NodePath<t.Program>) {
