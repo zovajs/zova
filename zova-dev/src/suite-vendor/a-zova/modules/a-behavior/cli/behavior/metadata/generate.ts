@@ -9,7 +9,7 @@ export default async function (options: IMetadataCustomGenerateOptions): Promise
     if (isIgnore) continue;
     const behaviorAttrName = _combineBehaviorAttrName(moduleName, beanName);
     const beanNameCapitalize = toUpperCaseFirstChar(beanName);
-    contentRecords.push(`'${behaviorAttrName}'?: IBehaviorOptions${beanNameCapitalize} | '' | true;`);
+    contentRecords.push(`'${behaviorAttrName}'?: IBehaviorOptions${beanNameCapitalize} | '' | boolean;`);
   }
   // combine
   const content = `/** behaviors: begin */
