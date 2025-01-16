@@ -30,7 +30,7 @@ export class BeanBehavior extends BeanBase {
       const beanInstance = cast<IBehaviorExecute>(onionSlice.beanInstance);
       return beanInstance.execute(props, options, behaviorTag, next as any);
     });
-    return this.bean._newBeanSimple(Composer, false, composer, behaviorTag);
+    return this.bean._newBeanSimple(Composer, false, composer);
   }
 
   private _prepareOnionItems(behaviors: IBehaviors) {
