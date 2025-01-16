@@ -3,19 +3,14 @@ import { IOnionOptionsEnable, ServiceOnion } from 'zova-module-a-bean';
 
 export type NextBehaviorProps<PROPS> = () => PROPS;
 export type NextBehaviorRender = () => VNode;
+export type NextBehavior<PROPS_OUTPUT = unknown> = (props?: PROPS_OUTPUT) => VNode;
 
 export interface IBehaviorTag {
   component: string | Component;
   name?: string;
 }
 
-export type TypeComposer = (context: IBehaviorComposeData, next?: any) => any;
-
-export interface IBehaviorComposeData {
-  behaviorTag: IBehaviorTag;
-  method: 'props' | 'render';
-  props?: any;
-}
+export type TypeComposer = (context: any, next?: any) => any;
 
 export type IBehaviorItem = {
   [prop in keyof IBehaviorRecord]?: Partial<IBehaviorRecord[prop]>;
@@ -31,6 +26,15 @@ export interface IBehaviorProps<PROPS> {
 
 export interface IBehaviorRender<PROPS> {
   render(options: IDecoratorBehaviorOptions, behaviorTag: IBehaviorTag, props: PROPS, next: NextBehaviorRender): VNode;
+}
+
+export interface IBehaviorExecute<PROPS_INPUT = unknown, PROPS_OUTPUT = PROPS_INPUT> {
+  execute(
+    props: PROPS_INPUT,
+    options: IDecoratorBehaviorOptions,
+    behaviorTag: IBehaviorTag,
+    next: NextBehavior<PROPS_OUTPUT>,
+  ): VNode;
 }
 
 export interface IDecoratorBehaviorOptions extends IOnionOptionsEnable {}

@@ -1,7 +1,7 @@
 import { BeanBase, cast, Use } from 'zova';
 import { Bean, BeanOnion, IOnionItem } from 'zova-module-a-bean';
 import {
-  IBehaviorComposeData,
+  IBehaviorExecute,
   IBehaviorRecord,
   IBehaviors,
   IBehaviorTag,
@@ -26,17 +26,10 @@ export class BeanBehavior extends BeanBase {
       onion.beanInstance = await this.bean._newBean(onion.beanFullName as any, true);
     }
     // compose
-    const composer = this.$$beanOnion.behavior.compose(
-      onions,
-      (onionSlice, data: IBehaviorComposeData, options, next) => {
-        if (!cast(onionSlice.beanInstance)[data.method]) return next();
-        if (data.method === 'props') {
-          return cast(onionSlice.beanInstance)[data.method](options, data.behaviorTag, next);
-        } else {
-          return cast(onionSlice.beanInstance)[data.method](data.props, options, data.behaviorTag, next);
-        }
-      },
-    );
+    const composer = this.$$beanOnion.behavior.compose(onions, (onionSlice, props: any, options, next) => {
+      const beanInstance = cast<IBehaviorExecute>(onionSlice.beanInstance);
+      return beanInstance.execute(props, options, behaviorTag, next as any);
+    });
     return this.bean._newBeanSimple(Composer, false, composer, behaviorTag);
   }
 

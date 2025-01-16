@@ -37,14 +37,11 @@ export class ControllerBehavior extends BeanControllerBase {
     const parent = this.ctx.instance;
     const { ref, props, children } = parent.vnode;
     // props
-    const propsNew = this.composer.props(() => {
-      const propsNew = Object.assign({}, props);
-      delete propsNew['behaviorTag'];
-      delete propsNew['behaviors'];
-      return propsNew;
-    });
+    const propsNew = Object.assign({}, props);
+    delete propsNew['behaviorTag'];
+    delete propsNew['behaviors'];
     // render
-    const vnode = this.composer.render(propsNew, () => {
+    const vnode = this.composer.execute(propsNew, propsNew => {
       return createVNode(this.$props.behaviorTag.component, propsNew, children);
     });
     // ensure inner component inherits the async wrapper's ref owner
