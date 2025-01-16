@@ -22,7 +22,6 @@ export class ControllerBehavior extends BeanControllerBase {
 
   protected async __init__() {
     await this._loadBehaviors();
-    // watch
     watch(
       () => {
         return this.$props.behaviors;
