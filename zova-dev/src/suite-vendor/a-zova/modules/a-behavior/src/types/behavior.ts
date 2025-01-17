@@ -20,15 +20,6 @@ export type IBehaviors = keyof IBehaviorRecord | IBehaviorItem | (keyof IBehavio
 
 export interface IBehaviorRecord {}
 
-export interface IBehaviorExecute<PROPS_INPUT = unknown, PROPS_OUTPUT = PROPS_INPUT> {
-  execute(
-    props: PROPS_INPUT,
-    options: IDecoratorBehaviorOptions,
-    behaviorTag: IBehaviorTag,
-    next: NextBehavior<PROPS_OUTPUT>,
-  ): VNode;
-}
-
 export interface IDecoratorBehaviorOptions extends IOnionOptionsEnable {}
 
 declare module 'zova-module-a-bean' {

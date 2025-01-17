@@ -1,5 +1,6 @@
 /** bean: begin */
 export * from '../bean/bean.behavior.js';
+export * from '../bean/bean.behaviorBase.js';
 
 import 'zova';
 declare module 'zova' {}
@@ -12,10 +13,12 @@ declare module 'zova-module-a-behavior' {
 /** bean: end */
 /** bean: begin */
 import { BeanBehavior } from '../bean/bean.behavior.js';
+import { BeanBehaviorBase } from '../bean/bean.behaviorBase.js';
 import 'zova';
 declare module 'zova' {
   export interface IBeanRecordGeneral {
     'a-behavior.bean.behavior': BeanBehavior;
+    'a-behavior.bean.behaviorBase': BeanBehaviorBase;
   }
 }
 /** bean: end */
