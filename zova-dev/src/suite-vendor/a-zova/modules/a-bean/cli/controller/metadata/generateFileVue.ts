@@ -62,7 +62,6 @@ function _generateFileVueComponent(
     name,
     nameCapitalize,
     controllerExtJs,
-    componentOptions,
     hasComponentOptions,
     nameProps,
     hasProps,
@@ -93,7 +92,7 @@ function _generateFileVueComponent(
   }
   // componentOptions
   if (hasComponentOptions) {
-    contentImports.push(`defineOptions(${componentOptions});`);
+    contentImports.push(`defineOptions(Controller${nameCapitalize}.$componentOptions);`);
   }
   // props
   let contentProps = '';
