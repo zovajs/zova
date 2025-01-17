@@ -6,6 +6,7 @@ import { generateBeanGenerals } from './toolsMetadata/generateBeanGenerals.js';
 import { generateScopeResources } from './toolsMetadata/generateScopeResources.js';
 import { generateScopeResourcesMeta } from './toolsMetadata/generateScopeResourcesMeta.js';
 import { generateMetadataCustom } from './toolsMetadata/generateMetadataCustom.js';
+import { generateOptionsPackage } from './toolsMetadata/generateOptionsPackage.js';
 import { generateIcons } from './toolsMetadata/generateIcons.js';
 import { generateConfig, generateConstant, generateError, generateLocale } from './toolsMetadata/generateConfig.js';
 import { generateScope } from './toolsMetadata/generateScope.js';
@@ -116,6 +117,8 @@ export class CliToolsMetadata extends BeanCliBase {
         content += await generateMetadataCustom(this, globFilesScene, sceneName, sceneMeta, moduleName, modulePath);
       }
     }
+    // onions: optionsPackage
+    content += await generateOptionsPackage(this, globFiles, onionScenesMeta, moduleName, modulePath);
     // icons
     content += await generateIcons(moduleName, modulePath);
     // config
