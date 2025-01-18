@@ -1,6 +1,6 @@
 import { IBeanRecord, OmitNever } from 'zova';
 import { IOnionOptionsDeps, IOnionOptionsEnable, IOnionOptionsMatch } from './onion';
-import { ServiceOnion } from '../bean/service.onion_.js';
+import { ServiceOnion } from '../service/onion_.js';
 
 export interface IAopRecord {}
 

@@ -16,7 +16,7 @@ import * as ModuleInfo from '@cabloy/module-info';
 import { useRoute } from 'vue-router';
 import { BeanRouter } from './bean/bean.router.js';
 import { getRealRouteName } from './utils.js';
-import { ServiceRouter } from './bean/service.router.js';
+import { ServiceRouter } from './service/router.js';
 import { IModule } from '@cabloy/module-info';
 
 export class Monkey

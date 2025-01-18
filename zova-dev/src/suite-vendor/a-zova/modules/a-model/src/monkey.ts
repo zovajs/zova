@@ -1,5 +1,5 @@
 import { BeanBase, BeanContainer, BeanSimple, IMonkeyAppInitialize, IMonkeyBeanInit } from 'zova';
-import { ServiceStorage } from './bean/service.storage.js';
+import { ServiceStorage } from './service/storage.js';
 import { useQueryClient } from '@tanstack/vue-query';
 import { markRaw } from 'vue';
 
