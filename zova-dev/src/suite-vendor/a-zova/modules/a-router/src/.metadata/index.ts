@@ -23,7 +23,7 @@ declare module 'zova' {
 }
 /** bean: end */
 /** service: begin */
-export * from '../bean/service.router.js';
+export * from '../service/router.js';
 
 import 'zova';
 declare module 'zova' {}
@@ -35,7 +35,7 @@ declare module 'zova-module-a-router' {
 }
 /** service: end */
 /** service: begin */
-import { ServiceRouter } from '../bean/service.router.js';
+import { ServiceRouter } from '../service/router.js';
 import 'zova';
 declare module 'zova' {
   export interface IBeanRecordGeneral {

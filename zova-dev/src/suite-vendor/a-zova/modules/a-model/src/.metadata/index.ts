@@ -15,7 +15,7 @@ declare module 'zova' {
 }
 /** bean: end */
 /** service: begin */
-export * from '../bean/service.storage.js';
+export * from '../service/storage.js';
 
 import 'zova';
 declare module 'zova' {}
@@ -27,7 +27,7 @@ declare module 'zova-module-a-model' {
 }
 /** service: end */
 /** service: begin */
-import { ServiceStorage } from '../bean/service.storage.js';
+import { ServiceStorage } from '../service/storage.js';
 import 'zova';
 declare module 'zova' {
   export interface IBeanRecordGeneral {

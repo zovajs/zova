@@ -20,8 +20,7 @@ declare module 'zova' {
 }
 /** bean: end */
 /** service: begin */
-export * from '../bean/service.aop.js';
-export * from '../bean/service.onion_.js';
+export * from '../service/aop.js';
 
 import 'zova';
 declare module 'zova' {}
@@ -33,7 +32,7 @@ declare module 'zova-module-a-bean' {
 }
 /** service: end */
 /** service: begin */
-import { ServiceAop } from '../bean/service.aop.js';
+import { ServiceAop } from '../service/aop.js';
 import 'zova';
 declare module 'zova' {
   export interface IBeanRecordGeneral {

@@ -41,8 +41,8 @@ declare module 'zova' {
 }
 /** theme: end */
 /** service: begin */
-export * from '../bean/service.router.js';
-export * from '../bean/service.ssr.js';
+export * from '../service/router.js';
+export * from '../service/ssr.js';
 
 import 'zova';
 declare module 'zova' {}
@@ -59,8 +59,8 @@ declare module 'zova-module-home-base' {
 }
 /** service: end */
 /** service: begin */
-import { ServiceRouter } from '../bean/service.router.js';
-import { ServiceSsr } from '../bean/service.ssr.js';
+import { ServiceRouter } from '../service/router.js';
+import { ServiceSsr } from '../service/ssr.js';
 import 'zova';
 declare module 'zova' {
   export interface IBeanRecordGeneral {

@@ -15,7 +15,7 @@ declare module 'zova' {
 }
 /** bean: end */
 /** service: begin */
-export * from '../bean/service.pinia.js';
+export * from '../service/pinia.js';
 
 import 'zova';
 declare module 'zova' {}
@@ -27,7 +27,7 @@ declare module 'zova-module-a-pinia' {
 }
 /** service: end */
 /** service: begin */
-import { ServicePinia } from '../bean/service.pinia.js';
+import { ServicePinia } from '../service/pinia.js';
 import 'zova';
 declare module 'zova' {
   export interface IBeanRecordGeneral {
