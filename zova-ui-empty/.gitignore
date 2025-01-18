@@ -13,6 +13,7 @@ vite.config.ts.timestamp-*
 distMockServer
 
 # zova core related directories
+.temp-dynamic-*
 .zova
 .quasar
 /quasar.config.*.temporary.compiled*
