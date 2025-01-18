@@ -12,10 +12,12 @@ import { BeanOnion } from '../bean/bean.onion.js';
 import { ISwapDepsItem, swapDeps } from '@cabloy/deps';
 import { getOnionScenesMeta, OnionSceneMeta } from '@cabloy/module-info';
 import { evaluate } from '@cabloy/utils';
+import { Service } from '../lib/bean.js';
 
 // const SymbolOnionsEnabled = Symbol('SymbolOnionsEnabled');
 // const SymbolOnionsEnabledWrapped = Symbol('SymbolOnionsEnabledWrapped');
 
+@Service()
 export class ServiceOnion<OPTIONS, ONIONNAME extends string> extends BeanSimple {
   protected [SymbolProxyDisable]: boolean = true;
   protected beanOnion: BeanOnion;

@@ -21,6 +21,7 @@ declare module 'zova' {
 /** bean: end */
 /** service: begin */
 export * from '../service/aop.js';
+export * from '../service/onion_.js';
 
 import 'zova';
 declare module 'zova' {}
