@@ -8,7 +8,7 @@ import {
   IOnionOptionsMatch,
   IOnionSlice,
 } from '../types/onion.js';
-import { BeanOnion } from './bean.onion.js';
+import { BeanOnion } from '../bean/bean.onion.js';
 import { ISwapDepsItem, swapDeps } from '@cabloy/deps';
 import { getOnionScenesMeta, OnionSceneMeta } from '@cabloy/module-info';
 import { evaluate } from '@cabloy/utils';

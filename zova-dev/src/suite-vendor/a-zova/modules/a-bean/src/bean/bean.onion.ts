@@ -1,5 +1,5 @@
 import { BeanBase, SymbolProxyDisable } from 'zova';
-import { ServiceOnion } from './service.onion_.js';
+import { ServiceOnion } from '../service/onion_.js';
 import { Bean } from '../lib/bean.js';
 import {
   IOnionOptionsEnable,

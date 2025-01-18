@@ -1,6 +1,6 @@
 import { appResource, BeanBase, Constructable, IBeanRecord, SymbolProxyDisable, Use } from 'zova';
 import { Service } from '../lib/bean.js';
-import { BeanOnion } from './bean.onion.js';
+import { BeanOnion } from '../bean/bean.onion.js';
 import { IAopRecord, IDecoratorAopOptions } from '../types/aop.js';
 import { IOnionSlice } from '../types/onion.js';
 
