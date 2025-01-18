@@ -1,4 +1,5 @@
-import { IGlobBeanFile, IMetadataCustomGenerateOptions } from '@cabloy/module-info';
+import { IGlobBeanFile } from '@cabloy/module-info';
+import { IMetadataCustomGenerateOptions } from '@cabloy/cli';
 import { toUpperCaseFirstChar } from '@cabloy/word-utils';
 import path from 'node:path';
 import fse from 'fs-extra';

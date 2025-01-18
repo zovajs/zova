@@ -1,4 +1,5 @@
-import { IGlobBeanFile, IMetadataCustomGenerateOptions } from '@cabloy/module-info';
+import { IGlobBeanFile } from '@cabloy/module-info';
+import { IMetadataCustomGenerateOptions } from '@cabloy/cli';
 import { IControllerInfo } from './types.js';
 
 export function generateMetaComponent(
