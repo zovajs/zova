@@ -1,3 +1,28 @@
+/** interceptor: begin */
+export * from '../bean/interceptor.body.js';
+import { IInterceptorOptionsBody } from '../bean/interceptor.body.js';
+import 'zova';
+declare module 'zova-module-a-fetch' {
+  export interface IInterceptorRecord {
+    'a-fetch:body': IInterceptorOptionsBody;
+  }
+}
+declare module 'zova-module-a-fetch' {
+  export interface InterceptorBody {
+    /** @internal */
+    get scope(): ScopeModuleAFetch;
+  }
+}
+/** interceptor: end */
+/** interceptor: begin */
+import { InterceptorBody } from '../bean/interceptor.body.js';
+import 'zova';
+declare module 'zova' {
+  export interface IBeanRecordLocal {
+    'a-fetch.interceptor.body': InterceptorBody;
+  }
+}
+/** interceptor: end */
 /** bean: begin */
 export * from '../bean/bean.fetch.js';
 

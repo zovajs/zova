@@ -25,9 +25,10 @@ export async function generateOptionsPackage(
     const sceneMeta = onionScenesMeta[sceneName];
     if (!sceneMeta.optionsPackage) continue;
     changed = true;
-    const matches = fileContent.match(new RegExp(`@${sceneNameCapitalize}\\((\\{[\\s\\S]*?\\})\\)\\s*?export class`));
+    const matches = fileContent.match(new RegExp(`@${sceneNameCapitalize}[\\S]*?\\(([\\s\\S]*?)\\)\\s*?export class`));
     if (!matches) throw new Error(`${sceneName} options parser error: ${beanNameFull}`);
-    const onionOptions = evaluate(matches[1]);
+    const onionOptionsStr = matches[1];
+    const onionOptions = onionOptionsStr ? evaluate(matches[1]) : {};
     const nodeScene = getCacheNodeScene(sceneName);
     nodeScene[beanName] = {};
     for (const key of ['enable', 'meta', 'dependencies', 'dependents']) {

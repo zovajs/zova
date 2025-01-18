@@ -23,6 +23,11 @@
           "output": "axios"
         }
       ]
+    },
+    "onionsConfig": {
+      "interceptor": {
+        "body": {}
+      }
     }
   },
   "type": "module",
