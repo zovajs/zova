@@ -13,6 +13,7 @@ declare module '@cabloy/cli' {
     beanName: string;
     beanNameCapitalize: string;
     moduleResourceName: string;
+    fileName: string;
   }
 }
 
@@ -42,16 +43,19 @@ export class CliCreateBean extends BeanCliBase {
     let beanName = argv.beanName;
     let beanDir;
     if (beanName.includes('/')) {
+      // service in component/page
       const pos = beanName.lastIndexOf('/');
       const subDir = beanName.substring(0, pos);
       beanDir = path.join(targetDir, `src/${subDir}`);
       beanName = argv.beanName = beanName.substring(pos + 1);
+      argv.fileName = `${sceneName}.${beanName}`;
     } else {
       beanDir = path.join(targetDir, onionSceneMeta.sceneIsolate ? `src/${sceneName}` : 'src/bean');
+      argv.fileName = onionSceneMeta.sceneIsolate ? beanName : `${sceneName}.${beanName}`;
     }
     argv.beanNameCapitalize = this.helper.firstCharToUpperCase(beanName);
     // file
-    const beanFile = path.join(beanDir, onionSceneMeta.sceneIsolate ? `${beanName}.ts` : `${sceneName}.${beanName}.ts`);
+    const beanFile = path.join(beanDir, `${argv.fileName}.ts`);
     if (fs.existsSync(beanFile)) {
       throw new Error(`${sceneName} bean exists: ${beanName}`);
     }

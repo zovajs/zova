@@ -18,6 +18,7 @@
         "boilerplate": "cli/data/boilerplate"
       },
       "service": {
+        "sceneIsolate": true,
         "beanGeneral": true,
         "optionsNone": true,
         "boilerplate": "cli/service/boilerplate"
