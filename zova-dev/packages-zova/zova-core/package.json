@@ -43,7 +43,7 @@
     "@cabloy/extend": "^3.0.5",
     "@cabloy/json5": "^1.0.8",
     "@cabloy/localeutil": "^2.0.0",
-    "@cabloy/module-info": "^1.2.9",
+    "@cabloy/module-info": "^1.2.10",
     "@cabloy/set": "^1.0.7",
     "@cabloy/utils": "^1.0.3",
     "@cabloy/vue-compiler-sfc": "^3.5.14",

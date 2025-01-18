@@ -56,14 +56,14 @@
     "@cabloy/compose": "^2.0.3",
     "@cabloy/deps": "^1.0.9",
     "@cabloy/json5": "^1.0.8",
-    "@cabloy/module-info": "^1.2.9",
+    "@cabloy/module-info": "^1.2.10",
     "@cabloy/set": "^1.0.7",
     "@cabloy/utils": "^1.0.3",
     "@cabloy/word-utils": "^1.0.10",
     "cel-js": "^0.3.0"
   },
   "devDependencies": {
-    "@cabloy/cli": "^2.1.8",
+    "@cabloy/cli": "^2.1.9",
     "fs-extra": "^11.2.0"
   },
   "gitHead": "73721393c1ea9a95539948d57ad692f2c004d7c7"
