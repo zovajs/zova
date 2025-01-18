@@ -56,7 +56,7 @@
     "@cabloy/compose": "^2.0.3",
     "@cabloy/deps": "^1.0.9",
     "@cabloy/json5": "^1.0.8",
-    "@cabloy/module-info": "^1.2.8",
+    "@cabloy/module-info": "^1.2.9",
     "@cabloy/set": "^1.0.7",
     "@cabloy/utils": "^1.0.3",
     "@cabloy/word-utils": "^1.0.10",

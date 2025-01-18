@@ -39,7 +39,7 @@
   "dependencies": {
     "@cabloy/cli": "^2.1.8",
     "@cabloy/extend": "^3.0.12",
-    "@cabloy/module-info": "^1.2.8",
+    "@cabloy/module-info": "^1.2.9",
     "@cabloy/utils": "^1.0.3",
     "@cabloy/word-utils": "^1.0.10",
     "compressing": "^1.10.0",

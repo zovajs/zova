@@ -2,7 +2,7 @@ module.exports = {
   file: ({ argv }) => {
     return argv.controllerFileName;
   },
-  parseOptions: { language: 'plain' },
+  language: 'plain',
   async transform({ ast }) {
     // Props
     ast = ast.replace(/(interface [^<]*Props) \{/, (_, $1) => {

@@ -1,6 +1,6 @@
 module.exports = {
   file: 'render.tsx',
-  parseOptions: { language: 'plain' },
+  language: 'plain',
   async transform({ ast, argv }) {
     const res = ast.match(/import {.*? Use[ ,].*?} from 'zova';/);
     if (!res) {

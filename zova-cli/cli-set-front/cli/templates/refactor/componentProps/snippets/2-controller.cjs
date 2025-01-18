@@ -2,7 +2,7 @@ module.exports = {
   file: ({ argv }) => {
     return argv.controllerFileName;
   },
-  parseOptions: { language: 'plain' },
+  language: 'plain',
   async transform({ ast, argv }) {
     if (ast.includes(`${argv.controllerClassName}Props`)) throw new Error('Props exists');
     const matchGeneric = ast.match(/interface [^<]*Emits<(.*?)> \{/);

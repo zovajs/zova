@@ -2,7 +2,7 @@ module.exports = {
   file: ({ argv }) => {
     return argv.controllerFileName;
   },
-  parseOptions: { language: 'plain' },
+  language: 'plain',
   async transform({ ast, argv }) {
     // check if exists
     if (ast.includes(`${argv.controllerClassName}SchemaQuery`)) throw new Error('Query exists');
