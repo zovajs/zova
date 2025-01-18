@@ -1,6 +1,6 @@
-import { IGlobBeanFile, IMetadataCustomGenerateOptions } from '@cabloy/module-info';
+import { IGlobBeanFile } from '@cabloy/module-info';
 import { IControllerInfo } from './types.js';
-import { BeanCliBase } from '@cabloy/cli';
+import { IMetadataCustomGenerateOptions } from '@cabloy/cli';
 import path from 'node:path';
 import fse from 'fs-extra';
 
@@ -9,7 +9,7 @@ export async function generateFileVue(
   globFile: IGlobBeanFile,
   controllerInfo: IControllerInfo,
 ) {
-  const cli = options.cli as BeanCliBase;
+  const cli = options.cli;
   const fileDest = path.join(options.modulePath, `src/.metadata/${controllerInfo.type}/${controllerInfo.name}.vue`);
   const content =
     controllerInfo.type === 'page'

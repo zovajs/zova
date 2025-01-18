@@ -1,8 +1,8 @@
 import fse from 'fs-extra';
-import { IGlobBeanFile, IMetadataCustomGenerateOptions } from '@cabloy/module-info';
+import { IGlobBeanFile } from '@cabloy/module-info';
 import { IControllerInfo } from './types.js';
 import path from 'node:path';
-import { BeanCliBase } from '@cabloy/cli';
+import { IMetadataCustomGenerateOptions } from '@cabloy/cli';
 
 export function generateMetaPage(
   options: IMetadataCustomGenerateOptions,
@@ -129,7 +129,7 @@ function _extractRoutePathOrName(
   _globFile: IGlobBeanFile,
   controllerInfo: IControllerInfo,
 ) {
-  const cli = options.cli as BeanCliBase;
+  const cli = options.cli;
   const targetFile = path.join(options.modulePath, 'src/routes.ts');
   const content = fse.readFileSync(targetFile).toString('utf8');
   const ast = cli.helper.gogocode(content);
