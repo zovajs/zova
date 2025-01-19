@@ -3,6 +3,8 @@ import { ZovaOnionOptionsMeta } from '@cabloy/module-info';
 export const SymbolUseOnionLocal = Symbol('SymbolUseOnionLocal');
 export const SymbolUseOnionOptions = Symbol('SymbolUseOnionOptions');
 
+export type TypeComposer = (context: any, next?: any) => any;
+
 export type IOnionExecuteCustom<OPTIONS, ONIONNAME> = (
   onionSlice: IOnionSlice<OPTIONS, ONIONNAME>,
   data: any,

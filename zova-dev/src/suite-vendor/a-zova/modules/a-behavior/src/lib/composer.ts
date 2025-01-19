@@ -1,6 +1,7 @@
 import { BeanSimple } from 'zova';
-import { NextBehavior, TypeComposer } from '../types/behavior.js';
+import { NextBehavior } from '../types/behavior.js';
 import { VNode } from 'vue';
+import { TypeComposer } from 'zova-module-a-bean';
 
 export class Composer extends BeanSimple {
   private _composer: TypeComposer;
