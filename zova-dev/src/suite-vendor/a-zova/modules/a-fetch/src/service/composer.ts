@@ -42,19 +42,17 @@ export class ServiceComposer extends BeanBase {
     this._composerRequest = this.$$beanOnion.interceptor.compose(
       onionSlices,
       (onionSlice, config: AxiosRequestConfig, next) => {
+        // options
         const options = this._combineOnionOptions(config, onionSlice);
         // enable match ignore
         if (!this.$$beanOnion.checkOnionOptionsEnabled(options, config.url)) {
           return next(config);
         }
+        // onRequest
         const beanInstance = cast<BeanInterceptorBase>(onionSlice.beanInstance);
-        return beanInstance.onRequest(config, next as any);
+        return beanInstance.onRequest(config, options, next as any);
       },
     );
-    this._composerRequestError = this.$$beanOnion.interceptor.compose(onionSlices, (onionSlice, error: any, next) => {
-      const beanInstance = cast<BeanInterceptorBase>(onionSlice.beanInstance);
-      return beanInstance.onRequestError(error, next as any);
-    });
   }
 
   private _combineOnionOptions(
