@@ -28,7 +28,7 @@ export class BeanFetch extends BeanBase {
   private _addInterceptors(api: AxiosInstance) {
     // request
     api.interceptors.request.use(
-      config => {
+      async config => {
         if (this.app.config.api.jwt) {
           config.headers.Authorization = `Bearer ${this.$$modelAuth.jwtAuthorization || ''}`;
         }
