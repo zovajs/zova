@@ -22,6 +22,38 @@ export interface IBeanFetchOptions {
 
 export interface IInterceptorRecord {}
 
+export interface IInterceptorRequest {
+  onRequest(
+    _config: AxiosRequestConfig,
+    _options: IDecoratorInterceptorOptions,
+    _next: NextInterceptorRequest,
+  ): Promise<AxiosRequestConfig>;
+}
+
+export interface IInterceptorRequestError {
+  onRequestError(
+    _error: AxiosError,
+    _options: IDecoratorInterceptorOptions,
+    _next: NextInterceptorError,
+  ): Promise<AxiosError>;
+}
+
+export interface IInterceptorResponse {
+  onResponse(
+    _response: AxiosResponse,
+    _options: IDecoratorInterceptorOptions,
+    _next: NextInterceptorResponse,
+  ): Promise<AxiosResponse>;
+}
+
+export interface IInterceptorResponseError {
+  onResponseError(
+    _error: AxiosError,
+    _options: IDecoratorInterceptorOptions,
+    _next: NextInterceptorError,
+  ): Promise<AxiosError>;
+}
+
 export interface IDecoratorInterceptorOptions
   extends IOnionOptionsEnable,
     IOnionOptionsMatch<string>,

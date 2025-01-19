@@ -1,7 +1,13 @@
 import { BeanBase, cast, deepExtend, Use } from 'zova';
 import { BeanOnion, IOnionItem, IOnionSlice, Service, TypeComposer } from 'zova-module-a-bean';
-import { IDecoratorInterceptorOptions, IInterceptorRecord } from '../types/interceptor.js';
-import { BeanInterceptorBase } from '../bean/bean.interceptorBase.js';
+import {
+  IDecoratorInterceptorOptions,
+  IInterceptorRecord,
+  IInterceptorRequest,
+  IInterceptorRequestError,
+  IInterceptorResponse,
+  IInterceptorResponseError,
+} from '../types/interceptor.js';
 import { AxiosError, AxiosRequestConfig, AxiosResponse } from 'axios';
 
 @Service()
@@ -65,7 +71,8 @@ export class ServiceComposer extends BeanBase {
           return next(config);
         }
         // execute
-        const beanInstance = cast<BeanInterceptorBase>(onionSlice.beanInstance);
+        const beanInstance = cast<IInterceptorRequest>(onionSlice.beanInstance);
+        if (!beanInstance.onRequest) return next(config);
         return beanInstance.onRequest(config, options, next as any);
       },
     );
@@ -80,7 +87,8 @@ export class ServiceComposer extends BeanBase {
           return next(error);
         }
         // execute
-        const beanInstance = cast<BeanInterceptorBase>(onionSlice.beanInstance);
+        const beanInstance = cast<IInterceptorRequestError>(onionSlice.beanInstance);
+        if (!beanInstance.onRequestError) return next(error);
         return beanInstance.onRequestError(error, options, next as any);
       },
     );
@@ -95,7 +103,8 @@ export class ServiceComposer extends BeanBase {
           return next(response);
         }
         // execute
-        const beanInstance = cast<BeanInterceptorBase>(onionSlice.beanInstance);
+        const beanInstance = cast<IInterceptorResponse>(onionSlice.beanInstance);
+        if (!beanInstance.onResponse) return next(response);
         return beanInstance.onResponse(response, options, next as any);
       },
     );
@@ -110,7 +119,8 @@ export class ServiceComposer extends BeanBase {
           return next(error);
         }
         // execute
-        const beanInstance = cast<BeanInterceptorBase>(onionSlice.beanInstance);
+        const beanInstance = cast<IInterceptorResponseError>(onionSlice.beanInstance);
+        if (!beanInstance.onResponseError) return next(error);
         return beanInstance.onResponseError(error, options, next as any);
       },
     );
