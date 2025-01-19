@@ -5,8 +5,9 @@ import {
   IDecoratorInterceptorOptions,
   NextInterceptorRequest,
   NextInterceptorRequestError,
+  NextInterceptorResponse,
 } from '../types/interceptor.js';
-import { AxiosError, AxiosRequestConfig } from 'axios';
+import { AxiosError, AxiosRequestConfig, AxiosResponse } from 'axios';
 
 @Virtual()
 export class BeanInterceptorBase<
@@ -26,11 +27,11 @@ export class BeanInterceptorBase<
     throw new Error('Not Implemented');
   }
 
-  async onRequestError(
-    _error: AxiosError,
-    _options: T,
-    _next: NextInterceptorRequestError,
-  ): Promise<AxiosRequestConfig> {
+  async onRequestError(_error: AxiosError, _options: T, _next: NextInterceptorRequestError): Promise<AxiosError> {
+    throw new Error('Not Implemented');
+  }
+
+  async onResponse(_response: AxiosResponse, _options: T, _next: NextInterceptorResponse): Promise<AxiosResponse> {
     throw new Error('Not Implemented');
   }
 }

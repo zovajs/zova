@@ -7,10 +7,11 @@ import {
   ServiceOnion,
 } from 'zova-module-a-bean';
 import { BeanFetch } from '../bean/bean.fetch.js';
-import { AxiosError, AxiosRequestConfig, CreateAxiosDefaults } from 'axios';
+import { AxiosError, AxiosRequestConfig, AxiosResponse, CreateAxiosDefaults } from 'axios';
 
-export type NextInterceptorRequest = (config: AxiosRequestConfig) => Promise<AxiosRequestConfig>;
-export type NextInterceptorRequestError = (error: AxiosError) => Promise<AxiosError>;
+export type NextInterceptorRequest = (config?: AxiosRequestConfig) => Promise<AxiosRequestConfig>;
+export type NextInterceptorRequestError = (error?: AxiosError) => Promise<AxiosError>;
+export type NextInterceptorResponse = (response?: AxiosResponse) => Promise<AxiosResponse>;
 
 export interface IBeanFetchOptions {
   axiosConfig?: CreateAxiosDefaults;

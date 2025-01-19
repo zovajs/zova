@@ -2,7 +2,7 @@ import { BeanBase, cast, deepExtend, Use } from 'zova';
 import { BeanOnion, IOnionItem, IOnionSlice, Service, TypeComposer } from 'zova-module-a-bean';
 import { IDecoratorInterceptorOptions, IInterceptorRecord } from '../types/interceptor.js';
 import { BeanInterceptorBase } from '../bean/bean.interceptorBase.js';
-import { AxiosError, AxiosRequestConfig } from 'axios';
+import { AxiosError, AxiosRequestConfig, AxiosResponse } from 'axios';
 
 @Service()
 export class ServiceComposer extends BeanBase {
@@ -66,6 +66,21 @@ export class ServiceComposer extends BeanBase {
         // onRequest
         const beanInstance = cast<BeanInterceptorBase>(onionSlice.beanInstance);
         return beanInstance.onRequestError(error, options, next as any);
+      },
+    );
+    this._composerResponse = this.$$beanOnion.interceptor.compose(
+      onionSlices,
+      (onionSlice, response: AxiosResponse, next) => {
+        const config = response.config;
+        // options
+        const options = this._combineOnionOptions(onionSlice, config);
+        // enable match ignore
+        if (!this.$$beanOnion.checkOnionOptionsEnabled(options, config?.url)) {
+          return next(response);
+        }
+        // onRequest
+        const beanInstance = cast<BeanInterceptorBase>(onionSlice.beanInstance);
+        return beanInstance.onResponse(response, options, next as any);
       },
     );
   }
