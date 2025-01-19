@@ -28,5 +28,12 @@
     "tsc:publish": "npm run clean && tsc -b",
     "_prepublishOnly": "npm run tsc:publish"
   },
-  "dependencies": {}
+  "dependencies": {},
+  "zovaModule": {
+    "onionsConfig": {
+      "interceptor": {
+        "body": {}
+      }
+    }
+  }
 }
