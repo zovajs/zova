@@ -132,8 +132,8 @@ export class ServiceComposer extends BeanBase {
   ) {
     // options: dynamic
     let optionsDynamic;
-    if (config?.interceptorsDynamic) {
-      optionsDynamic = config?.interceptorsDynamic[item.name];
+    if (config?.interceptors) {
+      optionsDynamic = config?.interceptors[item.name];
     }
     // final options
     const options = optionsDynamic ? deepExtend({}, item.options, optionsDynamic) : item.options;

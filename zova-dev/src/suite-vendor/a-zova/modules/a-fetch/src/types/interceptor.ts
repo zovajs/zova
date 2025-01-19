@@ -86,6 +86,6 @@ declare module 'zova' {
 
 declare module 'axios' {
   export interface AxiosRequestConfig {
-    interceptorsDynamic?: PowerPartial<IInterceptorRecord>;
+    interceptors?: PowerPartial<IInterceptorRecord>;
   }
 }

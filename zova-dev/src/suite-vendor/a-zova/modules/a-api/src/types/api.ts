@@ -2,7 +2,7 @@ import { PowerPartial } from 'zova';
 import { IInterceptorRecord } from 'zova-module-a-fetch';
 
 export interface IApiActionOptions {
-  interceptorsDynamic?: PowerPartial<IInterceptorRecord>;
+  interceptors?: PowerPartial<IInterceptorRecord>;
 }
 
 declare module 'zova' {
