@@ -1,4 +1,4 @@
-import { OmitNever } from 'zova';
+import { OmitNever, PowerPartial } from 'zova';
 import {
   IOnionItem,
   IOnionOptionsDeps,
@@ -45,5 +45,11 @@ declare module 'zova' {
   }
   export interface BeanBase {
     $fetch: BeanFetch;
+  }
+}
+
+declare module 'axios' {
+  export interface AxiosRequestConfig {
+    interceptorsDynamic?: PowerPartial<IInterceptorRecord>;
   }
 }

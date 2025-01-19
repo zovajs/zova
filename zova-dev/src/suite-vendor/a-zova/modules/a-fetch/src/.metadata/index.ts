@@ -22,6 +22,27 @@ declare module 'zova' {
   }
 }
 /** bean: end */
+/** service: begin */
+export * from '../service/composer.js';
+
+import 'zova';
+declare module 'zova' {}
+declare module 'zova-module-a-fetch' {
+  export interface ServiceComposer {
+    /** @internal */
+    get scope(): ScopeModuleAFetch;
+  }
+}
+/** service: end */
+/** service: begin */
+import { ServiceComposer } from '../service/composer.js';
+import 'zova';
+declare module 'zova' {
+  export interface IBeanRecordGeneral {
+    'a-fetch.service.composer': ServiceComposer;
+  }
+}
+/** service: end */
 /** config: begin */
 export * from '../config/config.js';
 import { config } from '../config/config.js';

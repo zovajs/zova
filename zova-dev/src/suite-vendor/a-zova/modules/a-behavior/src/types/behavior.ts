@@ -10,8 +10,6 @@ export interface IBehaviorTag {
   name?: string;
 }
 
-export type TypeComposer = (props: any, next?: any) => any;
-
 export type IBehaviorItem = {
   [prop in keyof IBehaviorRecord]?: Partial<IBehaviorRecord[prop]>;
 };

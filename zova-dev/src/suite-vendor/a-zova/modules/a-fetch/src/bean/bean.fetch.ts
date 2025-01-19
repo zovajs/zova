@@ -2,8 +2,9 @@ import { BeanBase, deepExtend, Use } from 'zova';
 import axios, { AxiosInstance } from 'axios';
 import { markRaw } from 'vue';
 import { ModelAuth } from 'zova-module-home-user';
-import { Bean, BeanOnion, IOnionItem, IOnionSlice } from 'zova-module-a-bean';
-import { IBeanFetchOptions, IDecoratorInterceptorOptions, IInterceptorRecord } from '../types/interceptor.js';
+import { Bean } from 'zova-module-a-bean';
+import { IBeanFetchOptions } from '../types/interceptor.js';
+import { ServiceComposer } from '../service/composer.js';
 
 const SymbolFetch = Symbol('SymbolFetch');
 
@@ -13,12 +14,7 @@ export interface BeanFetch extends AxiosInstance {}
 export class BeanFetch extends BeanBase {
   @Use()
   $$modelAuth: ModelAuth;
-  @Use()
-  $$beanOnion: BeanOnion;
-  // private _composerRequest: TypeComposer;
-  // private _composerRequestError: TypeComposer;
-  // private _composerResponse: TypeComposer;
-  // private _composerResponseError: TypeComposer;
+  private _composer: ServiceComposer;
 
   private [SymbolFetch]: AxiosInstance;
 
@@ -31,7 +27,7 @@ export class BeanFetch extends BeanBase {
       options?.axiosConfig,
     );
     // composer
-    await this._createComposer(options?.onionItems);
+    this._composer = await this.bean._newBean(ServiceComposer, true, options?.onionItems);
     // axios
     this[SymbolFetch] = markRaw(axios.create(axiosConfig));
     this._addInterceptors(this[SymbolFetch]);
@@ -39,34 +35,6 @@ export class BeanFetch extends BeanBase {
 
   protected __get__(prop) {
     return this[SymbolFetch] && this[SymbolFetch][prop];
-  }
-
-  private async _createComposer(
-    onionItems?:
-      | IOnionItem<IDecoratorInterceptorOptions, keyof IInterceptorRecord>
-      | IOnionItem<IDecoratorInterceptorOptions, keyof IInterceptorRecord>[],
-  ) {
-    // onionSlices
-    let onionSlices: IOnionSlice<IDecoratorInterceptorOptions, keyof IInterceptorRecord>[];
-    if (onionItems) {
-      onionSlices = await this.$$beanOnion.interceptor.loadOnions(onionItems);
-    } else {
-      onionSlices = await this.$$beanOnion.interceptor.loadOnionsFromPackage();
-    }
-    // create interceptors
-    for (const onionSlice of onionSlices) {
-      onionSlice.beanInstance = await this.bean._newBean(onionSlice.beanFullName as any, true, this);
-    }
-    // compose
-    // this._composerRequest = this.$$beanOnion.interceptor.compose(onionSlices, (onionSlice, config: any, next) => {
-    //   const options = {};
-    //   const beanInstance = cast<BeanInterceptorBase>(onionSlice.beanInstance);
-    //   return beanInstance.onRequest(config, next as any);
-    // });
-    // this._composerRequestError = this.$$beanOnion.interceptor.compose(onionSlices, (onionSlice, error: any, next) => {
-    //   const beanInstance = cast<BeanInterceptorBase>(onionSlice.beanInstance);
-    //   return beanInstance.onRequestError(error, next as any);
-    // });
   }
 
   private _addInterceptors(api: AxiosInstance) {

@@ -25,6 +25,7 @@ export class AppUtil extends BeanSimple {
       baseURL: baseURL || this.getApiBaseURL(false),
       params: options?.query,
       headers: options?.headers,
+      interceptorsDynamic: options?.interceptorsDynamic,
     };
   }
 }
