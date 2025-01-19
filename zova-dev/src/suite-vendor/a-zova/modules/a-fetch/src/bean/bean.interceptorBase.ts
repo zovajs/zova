@@ -1,8 +1,12 @@
 import { BeanBase } from 'zova';
 import { Virtual } from 'zova-module-a-bean';
 import { BeanFetch } from './bean.fetch.js';
-import { IDecoratorInterceptorOptions, NextInterceptorRequest } from '../types/interceptor.js';
-import { AxiosRequestConfig } from 'axios';
+import {
+  IDecoratorInterceptorOptions,
+  NextInterceptorRequest,
+  NextInterceptorRequestError,
+} from '../types/interceptor.js';
+import { AxiosError, AxiosRequestConfig } from 'axios';
 
 @Virtual()
 export class BeanInterceptorBase<
@@ -18,6 +22,14 @@ export class BeanInterceptorBase<
     _config: AxiosRequestConfig,
     _options: T,
     _next: NextInterceptorRequest,
+  ): Promise<AxiosRequestConfig> {
+    throw new Error('Not Implemented');
+  }
+
+  async onRequestError(
+    _error: AxiosError,
+    _options: T,
+    _next: NextInterceptorRequestError,
   ): Promise<AxiosRequestConfig> {
     throw new Error('Not Implemented');
   }

@@ -2,7 +2,7 @@ import { BeanBase, cast, deepExtend, Use } from 'zova';
 import { BeanOnion, IOnionItem, IOnionSlice, Service, TypeComposer } from 'zova-module-a-bean';
 import { IDecoratorInterceptorOptions, IInterceptorRecord } from '../types/interceptor.js';
 import { BeanInterceptorBase } from '../bean/bean.interceptorBase.js';
-import { AxiosRequestConfig } from 'axios';
+import { AxiosError, AxiosRequestConfig } from 'axios';
 
 @Service()
 export class ServiceComposer extends BeanBase {
@@ -43,7 +43,7 @@ export class ServiceComposer extends BeanBase {
       onionSlices,
       (onionSlice, config: AxiosRequestConfig, next) => {
         // options
-        const options = this._combineOnionOptions(config, onionSlice);
+        const options = this._combineOnionOptions(onionSlice, config);
         // enable match ignore
         if (!this.$$beanOnion.checkOnionOptionsEnabled(options, config.url)) {
           return next(config);
@@ -53,16 +53,31 @@ export class ServiceComposer extends BeanBase {
         return beanInstance.onRequest(config, options, next as any);
       },
     );
+    this._composerRequestError = this.$$beanOnion.interceptor.compose(
+      onionSlices,
+      (onionSlice, error: AxiosError, next) => {
+        const config = error.config;
+        // options
+        const options = this._combineOnionOptions(onionSlice, config);
+        // enable match ignore
+        if (!this.$$beanOnion.checkOnionOptionsEnabled(options, config?.url)) {
+          return next(error);
+        }
+        // onRequest
+        const beanInstance = cast<BeanInterceptorBase>(onionSlice.beanInstance);
+        return beanInstance.onRequestError(error, options, next as any);
+      },
+    );
   }
 
   private _combineOnionOptions(
-    config: AxiosRequestConfig,
     item: IOnionSlice<IDecoratorInterceptorOptions, keyof IInterceptorRecord>,
+    config?: AxiosRequestConfig,
   ) {
     // options: dynamic
     let optionsDynamic;
-    if (config.interceptorsDynamic) {
-      optionsDynamic = config.interceptorsDynamic[item.name];
+    if (config?.interceptorsDynamic) {
+      optionsDynamic = config?.interceptorsDynamic[item.name];
     }
     // final options
     const options = optionsDynamic ? deepExtend({}, item.options, optionsDynamic) : item.options;
