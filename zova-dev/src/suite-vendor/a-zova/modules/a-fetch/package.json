@@ -6,6 +6,9 @@
     "capabilities": {
       "monkey": true
     },
+    "globalDependencies": {
+      "axios": true
+    },
     "onions": {
       "interceptor": {
         "optionsPackage": true,
