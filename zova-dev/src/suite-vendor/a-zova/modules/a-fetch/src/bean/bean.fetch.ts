@@ -1,7 +1,6 @@
-import { BeanBase, deepExtend, Use } from 'zova';
+import { BeanBase, deepExtend } from 'zova';
 import axios, { AxiosInstance } from 'axios';
 import { markRaw } from 'vue';
-import { ModelAuth } from 'zova-module-home-user';
 import { Bean } from 'zova-module-a-bean';
 import { IBeanFetchOptions } from '../types/interceptor.js';
 import { ServiceComposer } from '../service/composer.js';
@@ -12,8 +11,6 @@ export interface BeanFetch extends AxiosInstance {}
 
 @Bean()
 export class BeanFetch extends BeanBase {
-  @Use()
-  $$modelAuth: ModelAuth;
   private _composer: ServiceComposer;
 
   private [SymbolFetch]: AxiosInstance;
@@ -42,10 +39,6 @@ export class BeanFetch extends BeanBase {
     api.interceptors.request.use(
       async config => {
         return await this._composer.executeRequest(config);
-        // if (this.app.config.api.jwt) {
-        //   config.headers.Authorization = `Bearer ${this.$$modelAuth.jwtAuthorization || ''}`;
-        // }
-        // return config;
       },
       async _error => {
         const error = await this._composer.executeRequestError(_error);

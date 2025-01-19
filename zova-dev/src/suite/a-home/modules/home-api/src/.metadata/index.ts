@@ -37,6 +37,31 @@ declare module 'zova' {
 /** openapi: begin */
 export * from '../api/openapi/index.js';
 /** openapi: end */
+/** service: begin */
+export * from '../service/jwtAdapter.js';
+
+import 'zova';
+declare module 'zova-module-a-bean' {
+  export interface IServiceRecord {
+    'home-api:jwtAdapter': never;
+  }
+}
+declare module 'zova-module-home-api' {
+  export interface ServiceJwtAdapter {
+    /** @internal */
+    get scope(): ScopeModuleHomeApi;
+  }
+}
+/** service: end */
+/** service: begin */
+import { ServiceJwtAdapter } from '../service/jwtAdapter.js';
+import 'zova';
+declare module 'zova' {
+  export interface IBeanRecordGeneral {
+    'home-api.service.jwtAdapter': ServiceJwtAdapter;
+  }
+}
+/** service: end */
 /** scope: begin */
 import { BeanScopeBase, BeanScopeUtil } from 'zova';
 import { Scope } from 'zova-module-a-bean';

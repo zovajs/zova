@@ -33,8 +33,12 @@ declare module 'zova' {
   }
 }
 /** interceptor: end */
+/** config: begin */
+export * from '../config/config.js';
+import { config } from '../config/config.js';
+/** config: end */
 /** scope: begin */
-import { BeanScopeBase, BeanScopeUtil } from 'zova';
+import { BeanScopeBase, BeanScopeUtil, TypeModuleConfig } from 'zova';
 import { Scope } from 'zova-module-a-bean';
 
 @Scope()
@@ -42,12 +46,17 @@ export class ScopeModuleAInterceptor extends BeanScopeBase {}
 
 export interface ScopeModuleAInterceptor {
   util: BeanScopeUtil;
+  config: TypeModuleConfig<typeof config>;
 }
 
 import 'zova';
 declare module 'zova' {
   export interface IBeanScopeRecord {
     'a-interceptor': ScopeModuleAInterceptor;
+  }
+
+  export interface IBeanScopeConfig {
+    'a-interceptor': ReturnType<typeof config>;
   }
 }
 

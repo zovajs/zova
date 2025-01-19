@@ -20,7 +20,8 @@
       "service": {
         "sceneIsolate": true,
         "beanGeneral": true,
-        "optionsNone": true,
+        "optionsNone": false,
+        "optionsGlobalInterfaceFrom": "zova-module-a-bean",
         "boilerplate": "cli/service/boilerplate"
       },
       "store": {
