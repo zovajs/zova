@@ -1,7 +1,7 @@
 import { Api, BeanApiBase } from 'zova-module-a-api';
 import { ApiUserEntity } from './user.js';
 
-export interface ApiAuthJWT {
+export interface ApiAuthJwt {
   accessToken: string;
   refreshToken: string;
   expireTime: number;
@@ -14,7 +14,7 @@ export interface ApiAuthLoginParams {
 
 export interface ApiAuthLoginResult {
   user?: ApiUserEntity;
-  jwt?: ApiAuthJWT;
+  jwt?: ApiAuthJwt;
 }
 
 @Api()

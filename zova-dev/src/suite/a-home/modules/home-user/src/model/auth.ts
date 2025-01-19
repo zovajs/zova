@@ -1,11 +1,11 @@
 import { Use } from 'zova';
 import { BeanModelBase, Model } from 'zova-module-a-model';
 import { ModelUser } from './user.js';
-import { ApiAuthJWT, ApiAuthLoginParams, ApiAuthLoginResult } from '../api/auth.js';
+import { ApiAuthJwt, ApiAuthLoginParams, ApiAuthLoginResult } from '../api/auth.js';
 
 @Model()
 export class ModelAuth extends BeanModelBase {
-  jwt?: ApiAuthJWT;
+  jwt?: ApiAuthJwt;
   token?: string;
   @Use()
   $$modelUser: ModelUser;
@@ -72,7 +72,7 @@ export class ModelAuth extends BeanModelBase {
     this.token = this._getTokenFromJwt(this.jwt);
   }
 
-  private _getTokenFromJwt(jwt?: ApiAuthJWT) {
+  private _getTokenFromJwt(jwt?: ApiAuthJwt) {
     if (!jwt) return undefined;
     return jwt.expireTime - Date.now() > 120 * 1000 ? jwt.accessToken : jwt.refreshToken;
   }
