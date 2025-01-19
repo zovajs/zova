@@ -1,6 +1,20 @@
 import { OmitNever } from 'zova';
-import { IOnionOptionsDeps, IOnionOptionsEnable, IOnionOptionsMatch, ServiceOnion } from 'zova-module-a-bean';
+import {
+  IOnionItem,
+  IOnionOptionsDeps,
+  IOnionOptionsEnable,
+  IOnionOptionsMatch,
+  ServiceOnion,
+} from 'zova-module-a-bean';
 import { BeanFetch } from '../bean/bean.fetch.js';
+import { CreateAxiosDefaults } from 'axios';
+
+export interface IBeanFetchOptions {
+  axiosConfig?: CreateAxiosDefaults;
+  onionItems?:
+    | IOnionItem<IDecoratorInterceptorOptions, keyof IInterceptorRecord>
+    | IOnionItem<IDecoratorInterceptorOptions, keyof IInterceptorRecord>[];
+}
 
 export interface IInterceptorRecord {}
 

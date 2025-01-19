@@ -1,8 +1,9 @@
-import { BeanBase, Use } from 'zova';
+import { BeanBase, deepExtend, Use } from 'zova';
 import axios, { AxiosInstance } from 'axios';
 import { markRaw } from 'vue';
 import { ModelAuth } from 'zova-module-home-user';
-import { Bean } from 'zova-module-a-bean';
+import { Bean, BeanOnion, IOnionSlice } from 'zova-module-a-bean';
+import { IBeanFetchOptions, IDecoratorInterceptorOptions, IInterceptorRecord } from '../types/interceptor.js';
 
 const SymbolFetch = Symbol('SymbolFetch');
 
@@ -12,12 +13,32 @@ export interface BeanFetch extends AxiosInstance {}
 export class BeanFetch extends BeanBase {
   @Use()
   $$modelAuth: ModelAuth;
+  @Use()
+  $$beanOnion: BeanOnion;
 
   private [SymbolFetch]: AxiosInstance;
 
-  protected async __init__() {
-    const baseURL = this.app.util.getApiBaseURL();
-    this[SymbolFetch] = markRaw(axios.create({ baseURL }));
+  protected async __init__(options?: IBeanFetchOptions) {
+    // axiosConfig
+    const axiosConfig = deepExtend(
+      {},
+      { baseURL: this.app.util.getApiBaseURL() },
+      this.scope.config.axios.config,
+      options?.axiosConfig,
+    );
+    // onionSlices
+    let onionSlices: IOnionSlice<IDecoratorInterceptorOptions, keyof IInterceptorRecord>[];
+    if (options?.onionItems) {
+      onionSlices = await this.$$beanOnion.interceptor.loadOnions(options?.onionItems);
+    } else {
+      onionSlices = await this.$$beanOnion.interceptor.loadOnionsFromPackage();
+    }
+    // create interceptors
+    for (const onionSlice of onionSlices) {
+      onionSlice.beanInstance = await this.bean._newBean(onionSlice.beanFullName as any, true, this);
+    }
+    // axios
+    this[SymbolFetch] = markRaw(axios.create(axiosConfig));
     this._addInterceptors(this[SymbolFetch]);
   }
 

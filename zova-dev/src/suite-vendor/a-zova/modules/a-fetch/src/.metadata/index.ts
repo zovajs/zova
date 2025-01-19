@@ -22,11 +22,15 @@ declare module 'zova' {
   }
 }
 /** bean: end */
+/** config: begin */
+export * from '../config/config.js';
+import { config } from '../config/config.js';
+/** config: end */
 /** monkey: begin */
 export * from '../monkey.js';
 /** monkey: end */
 /** scope: begin */
-import { BeanScopeBase, BeanScopeUtil } from 'zova';
+import { BeanScopeBase, BeanScopeUtil, TypeModuleConfig } from 'zova';
 import { Scope } from 'zova-module-a-bean';
 
 @Scope()
@@ -34,12 +38,17 @@ export class ScopeModuleAFetch extends BeanScopeBase {}
 
 export interface ScopeModuleAFetch {
   util: BeanScopeUtil;
+  config: TypeModuleConfig<typeof config>;
 }
 
 import 'zova';
 declare module 'zova' {
   export interface IBeanScopeRecord {
     'a-fetch': ScopeModuleAFetch;
+  }
+
+  export interface IBeanScopeConfig {
+    'a-fetch': ReturnType<typeof config>;
   }
 }
 
