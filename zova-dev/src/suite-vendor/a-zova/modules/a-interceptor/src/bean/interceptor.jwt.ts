@@ -10,7 +10,7 @@ import { IJwtAdapter } from '../types/jwt.js';
 
 export interface IInterceptorOptionsJwt extends IDecoratorInterceptorOptions {}
 
-@Interceptor<IInterceptorOptionsJwt>()
+@Interceptor<IInterceptorOptionsJwt>({ dependencies: 'a-interceptor:body' })
 export class InterceptorJwt extends BeanInterceptorBase implements IInterceptorRequest {
   private _beanJwtAdapter: IJwtAdapter;
 
