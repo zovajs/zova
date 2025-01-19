@@ -32,7 +32,8 @@
   "zovaModule": {
     "onionsConfig": {
       "interceptor": {
-        "body": {}
+        "body": {},
+        "jwt": {}
       }
     }
   }
