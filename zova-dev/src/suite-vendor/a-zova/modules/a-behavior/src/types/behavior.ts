@@ -1,8 +1,6 @@
 import { OmitNever } from 'zova';
 import { IOnionOptionsEnable, ServiceOnion } from 'zova-module-a-bean';
 
-export type NextBehaviorProps<PROPS> = () => PROPS;
-export type NextBehaviorRender = () => VNode;
 export type NextBehavior<PROPS_OUTPUT = unknown> = (props?: PROPS_OUTPUT) => VNode;
 
 export interface IBehaviorTag {
