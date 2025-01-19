@@ -22,6 +22,18 @@ export class ServiceComposer extends BeanBase {
     await this._createComposer(onionItems);
   }
 
+  public executeRequest(config: AxiosRequestConfig) {
+    return this._composerRequest(config);
+  }
+
+  public executeRequestError(error: AxiosError) {
+    return this._composerRequestError(error);
+  }
+
+  public executeResponse(response: AxiosResponse) {
+    return this._composerResponse(response);
+  }
+
   private async _createComposer(
     onionItems?:
       | IOnionItem<IDecoratorInterceptorOptions, keyof IInterceptorRecord>
@@ -48,7 +60,7 @@ export class ServiceComposer extends BeanBase {
         if (!this.$$beanOnion.checkOnionOptionsEnabled(options, config.url)) {
           return next(config);
         }
-        // onRequest
+        // execute
         const beanInstance = cast<BeanInterceptorBase>(onionSlice.beanInstance);
         return beanInstance.onRequest(config, options, next as any);
       },
@@ -63,7 +75,7 @@ export class ServiceComposer extends BeanBase {
         if (!this.$$beanOnion.checkOnionOptionsEnabled(options, config?.url)) {
           return next(error);
         }
-        // onRequest
+        // execute
         const beanInstance = cast<BeanInterceptorBase>(onionSlice.beanInstance);
         return beanInstance.onRequestError(error, options, next as any);
       },
@@ -78,9 +90,24 @@ export class ServiceComposer extends BeanBase {
         if (!this.$$beanOnion.checkOnionOptionsEnabled(options, config?.url)) {
           return next(response);
         }
-        // onRequest
+        // execute
         const beanInstance = cast<BeanInterceptorBase>(onionSlice.beanInstance);
         return beanInstance.onResponse(response, options, next as any);
+      },
+    );
+    this._composerResponseError = this.$$beanOnion.interceptor.compose(
+      onionSlices,
+      (onionSlice, error: AxiosError, next) => {
+        const config = error.config;
+        // options
+        const options = this._combineOnionOptions(onionSlice, config);
+        // enable match ignore
+        if (!this.$$beanOnion.checkOnionOptionsEnabled(options, config?.url)) {
+          return next(error);
+        }
+        // execute
+        const beanInstance = cast<BeanInterceptorBase>(onionSlice.beanInstance);
+        return beanInstance.onResponseError(error, options, next as any);
       },
     );
   }

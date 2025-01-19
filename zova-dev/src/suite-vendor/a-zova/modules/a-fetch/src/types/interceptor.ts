@@ -10,8 +10,8 @@ import { BeanFetch } from '../bean/bean.fetch.js';
 import { AxiosError, AxiosRequestConfig, AxiosResponse, CreateAxiosDefaults } from 'axios';
 
 export type NextInterceptorRequest = (config?: AxiosRequestConfig) => Promise<AxiosRequestConfig>;
-export type NextInterceptorRequestError = (error?: AxiosError) => Promise<AxiosError>;
 export type NextInterceptorResponse = (response?: AxiosResponse) => Promise<AxiosResponse>;
+export type NextInterceptorError = (error?: AxiosError) => Promise<AxiosError>;
 
 export interface IBeanFetchOptions {
   axiosConfig?: CreateAxiosDefaults;
