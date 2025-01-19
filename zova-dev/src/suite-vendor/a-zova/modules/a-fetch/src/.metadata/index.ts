@@ -34,11 +34,6 @@ declare module 'zova-module-a-fetch' {
     /** @internal */
     get scope(): ScopeModuleAFetch;
   }
-
-  export interface BeanInterceptorBase {
-    /** @internal */
-    get scope(): ScopeModuleAFetch;
-  }
 }
 /** bean: end */
 /** bean: begin */
@@ -52,6 +47,9 @@ declare module 'zova' {
   }
 }
 /** bean: end */
+/** monkey: begin */
+export * from '../monkey.js';
+/** monkey: end */
 /** scope: begin */
 import { BeanScopeBase, BeanScopeUtil } from 'zova';
 import { Scope } from 'zova-module-a-bean';

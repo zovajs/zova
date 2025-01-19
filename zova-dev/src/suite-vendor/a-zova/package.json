@@ -19,7 +19,8 @@
     "zova-module-a-meta": "workspace:^",
     "zova-module-a-zod": "workspace:^",
     "zova-module-a-behavior": "workspace:^",
-    "zova-module-a-fetch": "workspace:^"
+    "zova-module-a-fetch": "workspace:^",
+    "zova-module-a-interceptor": "workspace:^"
   },
   "gitHead": "73721393c1ea9a95539948d57ad692f2c004d7c7"
 }
