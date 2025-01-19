@@ -69,7 +69,7 @@ export class BeanFetch extends BeanBase {
         // return response.data.data;
       },
       async _error => {
-        const error = await this._composer.executeRequestError(_error);
+        const error = await this._composer.executeResponseError(_error);
         if (error instanceof Error) return Promise.reject(error);
         return error;
         // if (error.response) {

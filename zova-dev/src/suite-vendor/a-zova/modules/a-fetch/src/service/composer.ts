@@ -34,6 +34,10 @@ export class ServiceComposer extends BeanBase {
     return this._composerResponse(response);
   }
 
+  public executeResponseError(error: AxiosError) {
+    return this._composerResponseError(error);
+  }
+
   private async _createComposer(
     onionItems?:
       | IOnionItem<IDecoratorInterceptorOptions, keyof IInterceptorRecord>
