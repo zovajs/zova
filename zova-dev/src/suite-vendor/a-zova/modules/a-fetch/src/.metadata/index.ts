@@ -25,6 +25,7 @@ declare module 'zova' {
 /** interceptor: end */
 /** bean: begin */
 export * from '../bean/bean.fetch.js';
+export * from '../bean/bean.interceptorBase.js';
 
 import 'zova';
 declare module 'zova' {}
@@ -33,14 +34,21 @@ declare module 'zova-module-a-fetch' {
     /** @internal */
     get scope(): ScopeModuleAFetch;
   }
+
+  export interface BeanInterceptorBase {
+    /** @internal */
+    get scope(): ScopeModuleAFetch;
+  }
 }
 /** bean: end */
 /** bean: begin */
 import { BeanFetch } from '../bean/bean.fetch.js';
+import { BeanInterceptorBase } from '../bean/bean.interceptorBase.js';
 import 'zova';
 declare module 'zova' {
   export interface IBeanRecordGeneral {
     'a-fetch.bean.fetch': BeanFetch;
+    'a-fetch.bean.interceptorBase': BeanInterceptorBase;
   }
 }
 /** bean: end */
