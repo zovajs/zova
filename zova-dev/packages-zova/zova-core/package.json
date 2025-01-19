@@ -39,7 +39,7 @@
     "prepublishOnly": "npm run tsc:publish"
   },
   "dependencies": {
-    "@cabloy/compose": "^2.0.3",
+    "@cabloy/compose": "^2.0.4",
     "@cabloy/extend": "^3.0.5",
     "@cabloy/json5": "^1.0.8",
     "@cabloy/localeutil": "^2.0.0",
