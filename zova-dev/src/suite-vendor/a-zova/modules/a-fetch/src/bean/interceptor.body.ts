@@ -1,7 +1,7 @@
 import { BeanBase } from 'zova';
-import { Interceptor } from 'zova-module-a-fetch';
+import { IDecoratorInterceptorOptions, Interceptor } from 'zova-module-a-fetch';
 
-export interface IInterceptorOptionsBody extends IDecoratorBehaviorOptions {}
+export interface IInterceptorOptionsBody extends IDecoratorInterceptorOptions {}
 
 @Interceptor<IInterceptorOptionsBody>()
 export class InterceptorBody extends BeanBase {}

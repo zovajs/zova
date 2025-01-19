@@ -8,6 +8,18 @@
     },
     "globalDependencies": {
       "zod": true
+    },
+    "bundle": {
+      "vendors": [
+        {
+          "match": [
+            "@cabloy/zod-errors-custom",
+            "@cabloy/zod-query",
+            "zod/lib"
+          ],
+          "output": "zod"
+        }
+      ]
     }
   },
   "type": "module",

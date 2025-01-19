@@ -37,27 +37,6 @@ declare module 'zova' {
 /** openapi: begin */
 export * from '../api/openapi/index.js';
 /** openapi: end */
-/** bean: begin */
-export * from '../bean/bean.fetch.js';
-
-import 'zova';
-declare module 'zova' {}
-declare module 'zova-module-home-api' {
-  export interface BeanFetch {
-    /** @internal */
-    get scope(): ScopeModuleHomeApi;
-  }
-}
-/** bean: end */
-/** bean: begin */
-import { BeanFetch } from '../bean/bean.fetch.js';
-import 'zova';
-declare module 'zova' {
-  export interface IBeanRecordGeneral {
-    'home-api.bean.fetch': BeanFetch;
-  }
-}
-/** bean: end */
 /** scope: begin */
 import { BeanScopeBase, BeanScopeUtil } from 'zova';
 import { Scope } from 'zova-module-a-bean';

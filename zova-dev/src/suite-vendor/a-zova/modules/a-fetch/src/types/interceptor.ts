@@ -1,5 +1,6 @@
 import { OmitNever } from 'zova';
 import { IOnionOptionsDeps, IOnionOptionsEnable, IOnionOptionsMatch, ServiceOnion } from 'zova-module-a-bean';
+import { BeanFetch } from '../bean/bean.fetch.js';
 
 export interface IInterceptorRecord {}
 
@@ -21,5 +22,14 @@ declare module 'zova' {
 
   export interface IBeanSceneRecord {
     interceptor: never;
+  }
+}
+
+declare module 'zova' {
+  export interface AppMeta {
+    $fetch: BeanFetch;
+  }
+  export interface BeanBase {
+    $fetch: BeanFetch;
   }
 }
