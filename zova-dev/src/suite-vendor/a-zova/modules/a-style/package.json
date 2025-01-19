@@ -34,12 +34,7 @@
       "vendors": [
         {
           "match": [
-            "csx"
-          ],
-          "output": "typestyle"
-        },
-        {
-          "match": [
+            "csx",
             "typestyle"
           ],
           "output": "typestyle"
