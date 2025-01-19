@@ -57,26 +57,11 @@ export class BeanFetch extends BeanBase {
     api.interceptors.response.use(
       async response => {
         return await this._composer.executeResponse(response);
-        // const contentType = response.headers['content-type'];
-        // if (!contentType || contentType.indexOf('application/json') === -1) return response;
-        // if (response.data.code !== 0) {
-        //   const error = new Error();
-        //   error.code = response.data.code;
-        //   error.message = response.data.message;
-        //   return Promise.reject(error);
-        // }
-        // // return data
-        // return response.data.data;
       },
       async _error => {
         const error = await this._composer.executeResponseError(_error);
         if (error instanceof Error) return Promise.reject(error);
         return error;
-        // if (error.response) {
-        //   error.code = (error.response.data && error.response.data.code) || error.response.status;
-        //   error.message = (error.response.data && error.response.data.message) || error.response.statusText;
-        // }
-        // return Promise.reject(error);
       },
     );
   }

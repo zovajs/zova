@@ -1,16 +1,19 @@
-import { AxiosResponse } from 'axios';
+import { AxiosError, AxiosResponse } from 'axios';
+import { cast } from 'zova';
 import {
   BeanInterceptorBase,
   IDecoratorInterceptorOptions,
   IInterceptorResponse,
+  IInterceptorResponseError,
   Interceptor,
+  NextInterceptorError,
   NextInterceptorResponse,
 } from 'zova-module-a-fetch';
 
 export interface IInterceptorOptionsBody extends IDecoratorInterceptorOptions {}
 
 @Interceptor<IInterceptorOptionsBody>()
-export class InterceptorBody extends BeanInterceptorBase implements IInterceptorResponse {
+export class InterceptorBody extends BeanInterceptorBase implements IInterceptorResponse, IInterceptorResponseError {
   async onResponse(
     response: AxiosResponse,
     _options: IInterceptorOptionsBody,
@@ -27,5 +30,18 @@ export class InterceptorBody extends BeanInterceptorBase implements IInterceptor
     }
     // return data
     return response.data.data;
+  }
+
+  async onResponseError(
+    error: AxiosError,
+    _options: IInterceptorOptionsBody,
+    next: NextInterceptorError,
+  ): Promise<AxiosError> {
+    error = await next();
+    if (error.response) {
+      error.code = cast(error.response.data)?.code ?? error.response.status;
+      error.message = cast(error.response.data)?.message ?? error.response.statusText;
+    }
+    return error;
   }
 }
