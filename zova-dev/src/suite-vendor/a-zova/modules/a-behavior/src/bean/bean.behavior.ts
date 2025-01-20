@@ -21,6 +21,7 @@ export class BeanBehavior extends BeanBase {
       onionSlice.beanInstance = await this.bean._newBean(
         onionSlice.beanFullName as any,
         true,
+        this,
         onionSlice.options,
         behaviorTag,
       );

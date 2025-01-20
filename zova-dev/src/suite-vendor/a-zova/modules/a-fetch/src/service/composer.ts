@@ -58,7 +58,12 @@ export class ServiceComposer extends BeanBase {
     }
     // create interceptors
     for (const onionSlice of onionSlices) {
-      onionSlice.beanInstance = await this.bean._newBean(onionSlice.beanFullName as any, true, this);
+      onionSlice.beanInstance = await this.bean._newBean(
+        onionSlice.beanFullName as any,
+        true,
+        this,
+        onionSlice.options,
+      );
     }
     // compose
     this._composerRequest = this.$$beanOnion.interceptor.compose(

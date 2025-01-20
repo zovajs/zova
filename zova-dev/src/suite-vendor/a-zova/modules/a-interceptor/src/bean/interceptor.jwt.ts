@@ -8,7 +8,9 @@ import {
 } from 'zova-module-a-fetch';
 import { IJwtAdapter } from '../types/jwt.js';
 
-export interface IInterceptorOptionsJwt extends IDecoratorInterceptorOptions {}
+export interface IInterceptorOptionsJwt extends IDecoratorInterceptorOptions {
+  jwtAdapter?: string;
+}
 
 @Interceptor<IInterceptorOptionsJwt>({ dependencies: 'a-interceptor:body' })
 export class InterceptorJwt extends BeanInterceptorBase implements IInterceptorRequest {
