@@ -17,6 +17,11 @@ export class ServiceRouter extends BeanRouterBase {
         match = match.aliasOf;
       } else {
         match = to.matched[to.matched.length - 1];
+        // prepareCheck
+        if (!(await this._prepareCheck(match?.path))) {
+          // redirect again
+          return to.fullPath;
+        }
         // legacy
         const legacyRoute = this.$$router._findLegacyRoute(match?.name, match?.path);
         if (legacyRoute) return;
@@ -51,6 +56,24 @@ export class ServiceRouter extends BeanRouterBase {
       // redirect again
       return to.fullPath;
     });
+  }
+
+  // if 404 then check if module loaded
+  private async _prepareCheck(pathMatched: string | undefined, pathTo: string): Promise<boolean> {
+    if (pathMatched === '/:catchAll(.*)*') {
+      const moduleInfo = ModuleInfo.parseInfo(ModuleInfo.parseName(pathTo));
+      if (
+        moduleInfo &&
+        this.app.meta.module.exists(moduleInfo.relativeName) &&
+        !this.app.meta.module.get(moduleInfo.relativeName, false)
+      ) {
+        // use module
+        await this.app.meta.module.use(moduleInfo.relativeName);
+        // redirect again
+        return false;
+      }
+    }
+    return true;
   }
 
   private async _forceLoadModule(
