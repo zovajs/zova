@@ -18,7 +18,7 @@ export class ServiceRouter extends BeanRouterBase {
       } else {
         match = to.matched[to.matched.length - 1];
         // prepareCheck
-        if (!(await this._prepareCheck(match?.path))) {
+        if (!(await this._prepareCheck(match?.path, to.path))) {
           // redirect again
           return to.fullPath;
         }
