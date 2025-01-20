@@ -1,4 +1,5 @@
 import { extend } from '@cabloy/extend';
+import DeepEqual from 'deep-equal';
 import { BeanSimple } from '../../bean/beanSimple.js';
 import { uuid as _uuid } from '../../utils/uuid.js';
 
@@ -57,4 +58,8 @@ export function isUuid(str: string): boolean {
 
 export function deepExtend<T = any>(...args): T {
   return extend(true, ...args);
+}
+
+export function deepEqual(actual: unknown, expected: unknown, opts?: { strict?: boolean }): boolean {
+  return DeepEqual(actual, expected, opts);
 }

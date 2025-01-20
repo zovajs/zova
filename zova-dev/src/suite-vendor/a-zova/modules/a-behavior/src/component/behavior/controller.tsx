@@ -1,5 +1,5 @@
 import { createVNode } from 'vue';
-import { BeanControllerBase, cast, IComponentOptions, SymbolControllerRefDisable, Use, Watch } from 'zova';
+import { BeanControllerBase, cast, deepEqual, IComponentOptions, SymbolControllerRefDisable, Use, Watch } from 'zova';
 import { Controller } from 'zova-module-a-bean';
 import { IBehaviors, IBehaviorTag } from '../../types/behavior.js';
 import { BeanBehavior } from '../../bean/bean.behavior.js';
@@ -22,7 +22,7 @@ export class ControllerBehavior extends BeanControllerBase {
 
   @Watch('$props.behaviors')
   watchBehaviors(newValue, oldValue) {
-    if (JSON.stringify(newValue) === JSON.stringify(oldValue)) return;
+    if (deepEqual(newValue, oldValue)) return;
     this._loadBehaviors();
   }
 
