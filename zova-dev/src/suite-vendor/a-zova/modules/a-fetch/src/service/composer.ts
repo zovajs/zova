@@ -9,9 +9,11 @@ import {
   IInterceptorResponseError,
 } from '../types/interceptor.js';
 import { AxiosError, AxiosRequestConfig, AxiosResponse } from 'axios';
+import { BeanFetch } from '../bean/bean.fetch.js';
 
 @Service()
 export class ServiceComposer extends BeanBase {
+  protected $beanFetch: BeanFetch;
   @Use()
   $$beanOnion: BeanOnion;
 
@@ -21,10 +23,12 @@ export class ServiceComposer extends BeanBase {
   private _composerResponseError: TypeComposer;
 
   protected async __init__(
+    beanFetch: BeanFetch,
     onionItems?:
       | IOnionItem<IDecoratorInterceptorOptions, keyof IInterceptorRecord>
       | IOnionItem<IDecoratorInterceptorOptions, keyof IInterceptorRecord>[],
   ) {
+    this.$beanFetch = beanFetch;
     await this._createComposer(onionItems);
   }
 
@@ -61,7 +65,7 @@ export class ServiceComposer extends BeanBase {
       onionSlice.beanInstance = await this.bean._newBean(
         onionSlice.beanFullName as any,
         true,
-        this,
+        this.$beanFetch,
         onionSlice.options,
       );
     }

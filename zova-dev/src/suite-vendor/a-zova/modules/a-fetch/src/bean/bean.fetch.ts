@@ -24,7 +24,7 @@ export class BeanFetch extends BeanBase {
       options?.axiosConfig,
     );
     // composer
-    this._composer = await this.bean._newBean(ServiceComposer, true, options?.onionItems);
+    this._composer = await this.bean._newBean(ServiceComposer, true, this, options?.onionItems);
     // axios
     this[SymbolFetch] = markRaw(axios.create(axiosConfig));
     this._addInterceptors(this[SymbolFetch]);

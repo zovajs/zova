@@ -13,7 +13,10 @@ import {
 export interface IInterceptorOptionsBody extends IDecoratorInterceptorOptions {}
 
 @Interceptor<IInterceptorOptionsBody>()
-export class InterceptorBody extends BeanInterceptorBase implements IInterceptorResponse, IInterceptorResponseError {
+export class InterceptorBody
+  extends BeanInterceptorBase<IInterceptorOptionsBody>
+  implements IInterceptorResponse, IInterceptorResponseError
+{
   async onResponse(
     response: AxiosResponse,
     _options: IInterceptorOptionsBody,

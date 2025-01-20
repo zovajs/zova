@@ -13,7 +13,7 @@ export interface IInterceptorOptionsJwt extends IDecoratorInterceptorOptions {
 }
 
 @Interceptor<IInterceptorOptionsJwt>({ dependencies: 'a-interceptor:body' })
-export class InterceptorJwt extends BeanInterceptorBase implements IInterceptorRequest {
+export class InterceptorJwt extends BeanInterceptorBase<IInterceptorOptionsJwt> implements IInterceptorRequest {
   private _beanJwtAdapter: IJwtAdapter;
 
   protected async __init__() {

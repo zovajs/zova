@@ -3,4 +3,4 @@ import { BeanInterceptorBase, IDecoratorInterceptorOptions, Interceptor } from '
 export interface IInterceptorOptions<%=argv.beanNameCapitalize%> extends IDecoratorInterceptorOptions {}
 
 @Interceptor<IInterceptorOptions<%=argv.beanNameCapitalize%>>()
-export class Interceptor<%=argv.beanNameCapitalize%> extends BeanInterceptorBase {}
+export class Interceptor<%=argv.beanNameCapitalize%> extends BeanInterceptorBase<IInterceptorOptions<%=argv.beanNameCapitalize%>> {}
