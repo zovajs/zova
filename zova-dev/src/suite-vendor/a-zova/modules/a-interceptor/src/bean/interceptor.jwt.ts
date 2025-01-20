@@ -1,5 +1,6 @@
 import { AxiosRequestConfig } from 'axios';
 import {
+  BeanFetch,
   BeanInterceptorBase,
   IDecoratorInterceptorOptions,
   IInterceptorRequest,
@@ -16,9 +17,12 @@ export interface IInterceptorOptionsJwt extends IDecoratorInterceptorOptions {
 export class InterceptorJwt extends BeanInterceptorBase<IInterceptorOptionsJwt> implements IInterceptorRequest {
   private _beanJwtAdapter: IJwtAdapter;
 
-  protected async __init__() {
-    const beanFullName = this.scope.config.jwtAdapter.replace(':', '.service.');
-    this._beanJwtAdapter = await this.bean._newBean(beanFullName as any, true);
+  protected async __init__(beanFetch: BeanFetch, options: IInterceptorOptionsJwt) {
+    super.__init__(beanFetch, options);
+    const jwtAdapter = options.jwtAdapter || this.scope.config.jwtAdapter;
+    const beanFullName = jwtAdapter.replace(':', '.service.');
+    // singleton
+    this._beanJwtAdapter = await this.app.bean._getBean(beanFullName as any, true);
   }
 
   async onRequest(
