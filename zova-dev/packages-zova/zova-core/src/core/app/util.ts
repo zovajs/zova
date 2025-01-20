@@ -21,12 +21,16 @@ export class AppUtil extends BeanSimple {
   }
 
   apiActionConfigPrepare(baseURL?: string, options?: any) {
-    return {
-      baseURL: baseURL || this.getApiBaseURL(false),
-      params: options?.query,
-      headers: options?.headers,
-      interceptors: options?.interceptors,
-    };
+    return Object.assign(
+      {
+        baseURL: baseURL || this.getApiBaseURL(false),
+      },
+      options,
+      {
+        params: options?.query,
+        query: undefined,
+      },
+    );
   }
 }
 
