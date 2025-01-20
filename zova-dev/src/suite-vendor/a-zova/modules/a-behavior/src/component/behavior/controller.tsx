@@ -21,7 +21,8 @@ export class ControllerBehavior extends BeanControllerBase {
   $$beanBehavior: BeanBehavior;
 
   @Watch('$props.behaviors')
-  watchBehaviors() {
+  watchBehaviors(newValue, oldValue) {
+    if (JSON.stringify(newValue) === JSON.stringify(oldValue)) return;
     this._loadBehaviors();
   }
 
