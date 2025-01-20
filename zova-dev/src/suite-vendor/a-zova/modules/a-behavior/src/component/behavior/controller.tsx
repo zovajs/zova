@@ -37,7 +37,11 @@ export class ControllerBehavior extends BeanControllerBase {
   }
 
   private async _loadBehaviors() {
-    this.composer = await this.$$beanBehavior.createComposer(this.$props.behaviors, this.$props.behaviorTag);
+    try {
+      this.composer = await this.$$beanBehavior.createComposer(this.$props.behaviors, this.$props.behaviorTag);
+    } catch (err: any) {
+      if (err.code !== 600) throw err;
+    }
   }
 
   private _createInnerComp() {
