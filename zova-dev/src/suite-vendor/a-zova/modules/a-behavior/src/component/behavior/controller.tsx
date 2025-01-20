@@ -1,5 +1,5 @@
-import { createVNode, watch } from 'vue';
-import { BeanControllerBase, cast, IComponentOptions, SymbolControllerRefDisable, Use } from 'zova';
+import { createVNode } from 'vue';
+import { BeanControllerBase, cast, IComponentOptions, SymbolControllerRefDisable, Use, Watch } from 'zova';
 import { Controller } from 'zova-module-a-bean';
 import { IBehaviors, IBehaviorTag } from '../../types/behavior.js';
 import { BeanBehavior } from '../../bean/bean.behavior.js';
@@ -15,21 +15,18 @@ export class ControllerBehavior extends BeanControllerBase {
   static $propsDefault = {};
   static $componentOptions: IComponentOptions = { inheritAttrs: false };
   protected [SymbolControllerRefDisable]: boolean = true;
+  private composer: Composer;
 
   @Use()
   $$beanBehavior: BeanBehavior;
-  composer: Composer;
+
+  @Watch('$props.behaviors')
+  watchBehaviors() {
+    this._loadBehaviors();
+  }
 
   protected async __init__() {
     await this._loadBehaviors();
-    watch(
-      () => {
-        return this.$props.behaviors;
-      },
-      async () => {
-        await this._loadBehaviors();
-      },
-    );
   }
 
   protected render() {
@@ -37,11 +34,7 @@ export class ControllerBehavior extends BeanControllerBase {
   }
 
   private async _loadBehaviors() {
-    try {
-      this.composer = await this.$$beanBehavior.createComposer(this.$props.behaviors, this.$props.behaviorTag);
-    } catch (err: any) {
-      if (err.code !== 600) throw err;
-    }
+    this.composer = await this.$$beanBehavior.createComposer(this.$props.behaviors, this.$props.behaviorTag);
   }
 
   private _createInnerComp() {
