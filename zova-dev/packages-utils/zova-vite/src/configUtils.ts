@@ -32,6 +32,7 @@ const __ZovaManualChunkVendors = [
     output: 'vue',
   },
   { match: ['vue-router', '@cabloy/vue-router'], output: 'vue-router' },
+  { match: ['@cabloy/zod-errors-custom', '@cabloy/zod-query', 'zod/lib'], output: 'zod' },
   {
     match: [
       'reflect-metadata',
@@ -41,6 +42,9 @@ const __ZovaManualChunkVendors = [
       'packages-zova/zova-core',
       'zova-shared',
       'packages-zova/zova-shared',
+      'packages-utils/word-utils',
+      'packages-utils/mutate-on-copy',
+      'mutate-on-copy',
     ],
     output: 'zova',
   },
