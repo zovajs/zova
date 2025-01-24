@@ -50,6 +50,7 @@ const __ZovaManualChunkVendors = [
   },
   { match: ['pinia'], output: 'pinia' },
   { match: ['~commonjsHelpers.js'], output: 'commonjsHelper' },
+  { match: ['~plugin-vue:export-helper'], output: 'vue' },
 ];
 
 export function createConfigUtils(
