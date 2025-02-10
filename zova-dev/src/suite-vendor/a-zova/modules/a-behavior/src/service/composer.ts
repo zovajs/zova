@@ -27,6 +27,12 @@ export class ServiceComposer extends BeanBase {
   }
 
   public async load(behaviors: IBehaviors) {
+    await this.renderFreezeScope(async () => {
+      await this._loadInner(behaviors);
+    });
+  }
+
+  private async _loadInner(behaviors: IBehaviors) {
     // onionItems
     const onionItems = this._prepareOnionItems(behaviors);
     // load onions
