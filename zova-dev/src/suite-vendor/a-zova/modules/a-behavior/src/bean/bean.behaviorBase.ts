@@ -6,12 +6,11 @@ import { BeanBehavior } from './bean.behavior.js';
 
 @Virtual()
 export class BeanBehaviorBase<
-  T extends IDecoratorBehaviorOptions = IDecoratorBehaviorOptions,
+  OPTIONS extends IDecoratorBehaviorOptions = IDecoratorBehaviorOptions,
   PROPS_INPUT = unknown,
   PROPS_OUTPUT = PROPS_INPUT,
 > extends BeanBase {
-  protected $options: T;
-  protected $behaviorTag: IBehaviorTag;
+  protected $options: OPTIONS;
 
   @Use({ injectionScope: 'host' })
   $$beanBehavior: BeanBehavior;
@@ -19,9 +18,8 @@ export class BeanBehaviorBase<
   @Use({ injectionScope: 'host' })
   $$behaviorTag: IBehaviorTag;
 
-  protected async __init__(options: T, behaviorTag: IBehaviorTag) {
+  protected async __init__(options: OPTIONS) {
     this.$options = options;
-    this.$behaviorTag = behaviorTag;
   }
 
   execute(_props: PROPS_INPUT, _next: NextBehavior<PROPS_OUTPUT>): VNode {
