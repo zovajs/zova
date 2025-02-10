@@ -23,7 +23,7 @@ export class BehaviorRoot extends BeanBehaviorBase<
 
   protected async __init__(options: IBehaviorOptionsRoot) {
     super.__init__(options);
-    this.composer = await this.$$beanBehavior.createComposer(options.behaviors);
+    this.composer = await this.createComposer(options.behaviors);
   }
 
   protected __dispose__() {

@@ -1,8 +1,9 @@
 import { BeanBase, Use } from 'zova';
 import { Virtual } from 'zova-module-a-bean';
-import { type IBehaviorTag, IDecoratorBehaviorOptions, NextBehavior } from '../types/behavior.js';
+import { IBehaviors, type IBehaviorTag, IDecoratorBehaviorOptions, NextBehavior } from '../types/behavior.js';
 import { VNode } from 'vue';
 import { BeanBehavior } from './bean.behavior.js';
+import { ServiceComposer } from '../service/composer.js';
 
 @Virtual()
 export class BeanBehaviorBase<
@@ -24,6 +25,10 @@ export class BeanBehaviorBase<
 
   protected async onOptionsChange(options: OPTIONS) {
     this.$options = options;
+  }
+
+  protected async createComposer(behaviors: IBehaviors): Promise<ServiceComposer> {
+    return await this.$$beanBehavior.createComposer(behaviors);
   }
 
   protected render(_props: PROPS_INPUT, next: NextBehavior<PROPS_OUTPUT>): VNode {
