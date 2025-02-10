@@ -68,6 +68,28 @@ declare module 'zova-module-a-behavior' {
   }
 }
 /** components: end */
+/** behavior: begin */
+export * from '../bean/behavior.root_.js';
+
+import 'zova';
+declare module 'zova-module-a-behavior' {}
+declare module 'zova-module-a-behavior' {}
+/** behavior: end */
+/** behaviors: begin */
+import 'vue';
+import 'vue/jsx-runtime';
+
+declare module 'vue' {
+  export interface InputHTMLAttributes {}
+}
+
+declare module 'vue/jsx-runtime' {
+  namespace JSX {
+    // need define class/style in IntrinsicAttributes
+    export interface IntrinsicAttributes {}
+  }
+}
+/** behaviors: end */
 /** scope: begin */
 import { BeanScopeBase, BeanScopeUtil } from 'zova';
 import { Scope } from 'zova-module-a-bean';
