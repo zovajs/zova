@@ -4,6 +4,7 @@ import { Controller } from 'zova-module-a-bean';
 import { IBehaviors, IBehaviorTag } from '../../types/behavior.js';
 import { BeanBehavior } from '../../bean/bean.behavior.js';
 import { Composer } from '../../lib/composer.js';
+import { UseBehavior } from '../../lib/useBehavior.js';
 
 export interface ControllerBehaviorProps {
   behaviorTag: IBehaviorTag;
@@ -35,7 +36,10 @@ export class ControllerBehavior extends BeanControllerBase {
   }
 
   private async _loadBehaviors() {
-    this.composer = await this.$$beanBehavior.createComposer(this.$props.behaviors, this.$props.behaviorTag);
+    this.composer = await this.$$beanBehavior.createComposer(
+      UseBehavior('a-behavior:root' as any, this.$props.behaviors as any),
+      this.$props.behaviorTag,
+    );
   }
 
   private _createInnerComp() {
