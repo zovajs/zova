@@ -29,6 +29,31 @@ export const PluginFreeze = {
           self[SymbolRenderFreezeSnapshot] = undefined;
         }
       },
+      methods: {
+        renderFreeze(freeze: boolean) {
+          const self = this;
+          if (freeze) {
+            if (self[SymbolRenderFreezeCounter].value === 0) {
+              self.__renderFreeze_snapshot = undefined;
+            }
+            self[SymbolRenderFreezeCounter].value++;
+          } else {
+            self[SymbolRenderFreezeCounter].value--;
+            if (self[SymbolRenderFreezeCounter].value === 0) {
+              self.__renderFreeze_snapshot = undefined;
+            }
+          }
+        },
+        async renderFreezeBegin(cb: Function) {
+          const self = this;
+          try {
+            self.renderFreeze(true);
+            await cb();
+          } finally {
+            self.renderFreeze(false);
+          }
+        },
+      },
     });
   },
 };
