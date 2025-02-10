@@ -28,6 +28,7 @@ export class ControllerBehavior extends BeanControllerBase {
   }
 
   protected async __init__() {
+    this.bean._setBean('$$behaviorTag', this.$props.behaviorTag);
     await this._loadBehaviors();
   }
 

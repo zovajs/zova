@@ -160,7 +160,9 @@ export class BeanContainer {
     return this.scope(moduleScope);
   }
 
-  _setBean(key: string, instance: any) {}
+  _setBean<T>(key: string, instance: T) {
+    this[BeanContainerInstances][key] = instance;
+  }
 
   _getBeanSync<K extends keyof IBeanRecord>(
     beanFullName: K,
