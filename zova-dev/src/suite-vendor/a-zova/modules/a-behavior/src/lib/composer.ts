@@ -1,7 +1,7 @@
-import { BeanSimple, cast } from 'zova';
+import { BeanSimple, cast, deepEqual } from 'zova';
 import { IBehaviorRecord, IBehaviors, IDecoratorBehaviorOptions, NextBehavior } from '../types/behavior.js';
 import { VNode } from 'vue';
-import { BeanOnion, IOnionItem, TypeComposer } from 'zova-module-a-bean';
+import { BeanOnion, IOnionItem, IOnionSlice, TypeComposer } from 'zova-module-a-bean';
 import { BeanBehaviorBase } from '../bean/bean.behaviorBase.js';
 
 const SymbolSliceOptionsOriginal = Symbol('SymbolSliceOptionsOriginal');
@@ -9,9 +9,18 @@ const SymbolSliceOptionsOriginal = Symbol('SymbolSliceOptionsOriginal');
 export class Composer extends BeanSimple {
   private _composer: TypeComposer;
   private _beanOnion: BeanOnion;
+  private _onionSlicesOriginal?: IOnionSlice<IDecoratorBehaviorOptions, keyof IBehaviorRecord, BeanBehaviorBase>[];
 
   protected async __init__(beanOnion: BeanOnion) {
     this._beanOnion = beanOnion;
+  }
+
+  public dispose() {
+    if (this._onionSlicesOriginal) {
+      for (const onionSlice of this._onionSlicesOriginal) {
+        cast(onionSlice.beanInstance)?.dispose?.();
+      }
+    }
   }
 
   public async load(behaviors: IBehaviors) {
@@ -21,9 +30,29 @@ export class Composer extends BeanSimple {
     const onionSlices = await this._beanOnion.behavior.loadOnions<BeanBehaviorBase>(onionItems);
     // create behaviors
     for (const onionSlice of onionSlices) {
-      onionSlice.beanInstance = await this.bean._newBean(onionSlice.beanFullName as any, true, onionSlice.options);
-      onionSlice.beanInstance![SymbolSliceOptionsOriginal] = onionSlice.options;
+      const onionSliceOriginal = this._onionSlicesOriginal?.find(item => item.beanFullName === onionSlice.beanFullName);
+      if (onionSliceOriginal) {
+        onionSlice.beanInstance = onionSliceOriginal.beanInstance;
+        if (!deepEqual(onionSlice.beanInstance![SymbolSliceOptionsOriginal], onionSlice.options)) {
+          await cast(onionSlice.beanInstance).onOptionsChange(onionSlice.options);
+          onionSlice.beanInstance![SymbolSliceOptionsOriginal] = onionSlice.options;
+        }
+      } else {
+        onionSlice.beanInstance = await this.bean._newBean(onionSlice.beanFullName as any, true, onionSlice.options);
+        onionSlice.beanInstance![SymbolSliceOptionsOriginal] = onionSlice.options;
+      }
     }
+    // dispose original behaviors
+    if (this._onionSlicesOriginal) {
+      for (const onionSlice of this._onionSlicesOriginal) {
+        const exists = onionSlices.find(item => item.beanFullName === onionSlice.beanFullName);
+        if (!exists) {
+          cast(onionSlice.beanInstance)?.dispose?.();
+        }
+      }
+    }
+    // save
+    this._onionSlicesOriginal = onionSlices;
     // compose
     this._composer = this._beanOnion.behavior.compose(onionSlices, (onionSlice, props: any, next) => {
       const beanInstance = cast<BeanBehaviorBase>(onionSlice.beanInstance);

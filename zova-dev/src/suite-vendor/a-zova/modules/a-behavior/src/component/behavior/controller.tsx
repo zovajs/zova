@@ -24,25 +24,27 @@ export class ControllerBehavior extends BeanControllerBase {
   @Watch('$props.behaviors')
   watchBehaviors(newValue, oldValue) {
     if (deepEqual(newValue, oldValue)) return;
-    this._loadBehaviors();
+    this.composer.load(this.$props.behaviors);
   }
 
   protected async __init__() {
     this.bean._setBean('$$behaviorTag', this.$props.behaviorTag);
-    await this._loadBehaviors();
-  }
-
-  protected render() {
-    return this._createInnerComp();
-  }
-
-  private async _loadBehaviors() {
     this.composer = await this.$$beanBehavior.createComposer(
       UseBehavior('a-behavior:root' as any, { behaviors: this.$props.behaviors }),
     );
   }
 
-  private _createInnerComp() {
+  protected __dispose__() {
+    if (this.composer) {
+      this.composer.dispose();
+    }
+  }
+
+  protected render() {
+    return this._renderInner();
+  }
+
+  private _renderInner() {
     const parent = this.ctx.instance;
     const { ref, props, children } = parent.vnode;
     // props

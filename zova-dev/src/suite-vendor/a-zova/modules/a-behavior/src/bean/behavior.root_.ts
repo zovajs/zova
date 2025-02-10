@@ -25,9 +25,13 @@ export class BehaviorRoot extends BeanBehaviorBase<
     this.composer = await this.$$beanBehavior.createComposer(options.behaviors);
   }
 
+  protected __dispose__() {
+    this.composer?.dispose();
+  }
+
   protected async onOptionsChange(options: IBehaviorOptionsRoot) {
     await super.onOptionsChange(options);
-    this.composer = await this.$$beanBehavior.createComposer(options.behaviors);
+    await this.composer.load(options.behaviors);
   }
 
   protected render(props: IBehaviorPropsInputRoot, next: NextBehavior<IBehaviorPropsOutputRoot>): VNode {
