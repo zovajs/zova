@@ -26,7 +26,7 @@ export class BeanBehaviorBase<
     this.$options = options;
   }
 
-  protected render(_props: PROPS_INPUT, _next: NextBehavior<PROPS_OUTPUT>): VNode {
-    throw new Error('Not Implemented');
+  protected render(_props: PROPS_INPUT, next: NextBehavior<PROPS_OUTPUT>): VNode {
+    return next();
   }
 }
