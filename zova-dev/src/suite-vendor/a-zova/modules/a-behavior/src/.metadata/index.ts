@@ -22,6 +22,31 @@ declare module 'zova' {
   }
 }
 /** bean: end */
+/** service: begin */
+export * from '../service/composer.js';
+
+import 'zova';
+declare module 'zova-module-a-bean' {
+  export interface IServiceRecord {
+    'a-behavior:composer': never;
+  }
+}
+declare module 'zova-module-a-behavior' {
+  export interface ServiceComposer {
+    /** @internal */
+    get scope(): ScopeModuleABehavior;
+  }
+}
+/** service: end */
+/** service: begin */
+import { ServiceComposer } from '../service/composer.js';
+import 'zova';
+declare module 'zova' {
+  export interface IBeanRecordGeneral {
+    'a-behavior.service.composer': ServiceComposer;
+  }
+}
+/** service: end */
 /** controller: begin */
 export * from '../component/behavior/controller.jsx';
 

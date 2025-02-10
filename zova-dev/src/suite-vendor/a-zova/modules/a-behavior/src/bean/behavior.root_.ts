@@ -2,7 +2,8 @@ import { VNode } from 'vue';
 import { IBehaviors, IDecoratorBehaviorOptions, NextBehavior } from '../types/behavior.js';
 import { Behavior } from '../lib/behavior.js';
 import { BeanBehaviorBase } from './bean.behaviorBase.js';
-import { Composer } from '../lib/composer.js';
+import { ServiceComposer } from '../service/composer.js';
+import { disposeInstance } from 'zova';
 
 export interface IBehaviorPropsInputRoot {}
 
@@ -18,7 +19,7 @@ export class BehaviorRoot extends BeanBehaviorBase<
   IBehaviorPropsInputRoot,
   IBehaviorPropsOutputRoot
 > {
-  private composer: Composer;
+  private composer: ServiceComposer;
 
   protected async __init__(options: IBehaviorOptionsRoot) {
     super.__init__(options);
@@ -26,7 +27,7 @@ export class BehaviorRoot extends BeanBehaviorBase<
   }
 
   protected __dispose__() {
-    this.composer?.dispose();
+    disposeInstance(this.composer);
   }
 
   protected async onOptionsChange(options: IBehaviorOptionsRoot) {

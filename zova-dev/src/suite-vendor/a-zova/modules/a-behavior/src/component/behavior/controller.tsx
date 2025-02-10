@@ -1,10 +1,19 @@
 import { createVNode } from 'vue';
-import { BeanControllerBase, cast, deepEqual, IComponentOptions, SymbolControllerRefDisable, Use, Watch } from 'zova';
+import {
+  BeanControllerBase,
+  cast,
+  deepEqual,
+  disposeInstance,
+  IComponentOptions,
+  SymbolControllerRefDisable,
+  Use,
+  Watch,
+} from 'zova';
 import { Controller } from 'zova-module-a-bean';
 import { IBehaviors, IBehaviorTag } from '../../types/behavior.js';
 import { BeanBehavior } from '../../bean/bean.behavior.js';
-import { Composer } from '../../lib/composer.js';
 import { UseBehavior } from '../../lib/useBehavior.js';
+import { ServiceComposer } from '../../service/composer.js';
 
 export interface ControllerBehaviorProps {
   behaviorTag: IBehaviorTag;
@@ -16,7 +25,7 @@ export class ControllerBehavior extends BeanControllerBase {
   static $propsDefault = {};
   static $componentOptions: IComponentOptions = { inheritAttrs: false };
   protected [SymbolControllerRefDisable]: boolean = true;
-  private composer: Composer;
+  private composer: ServiceComposer;
 
   @Use()
   $$beanBehavior: BeanBehavior;
@@ -35,7 +44,7 @@ export class ControllerBehavior extends BeanControllerBase {
   }
 
   protected __dispose__() {
-    this.composer?.dispose();
+    disposeInstance(this.composer);
   }
 
   private _getBehaviorRoot() {

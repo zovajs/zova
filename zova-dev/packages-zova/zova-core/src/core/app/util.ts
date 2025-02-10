@@ -63,3 +63,7 @@ export function deepExtend<T = any>(...args): T {
 export function deepEqual(actual: unknown, expected: unknown, opts?: { strict?: boolean }): boolean {
   return DeepEqual(actual, expected, opts);
 }
+
+export function disposeInstance(instance: any) {
+  instance?.__dispose__?.();
+}
