@@ -18,7 +18,7 @@ export class Composer extends BeanSimple {
   public dispose() {
     if (this._onionSlicesOriginal) {
       for (const onionSlice of this._onionSlicesOriginal) {
-        cast(onionSlice.beanInstance)?.dispose?.();
+        cast(onionSlice.beanInstance)?.__dispose__?.();
       }
     }
   }
@@ -33,21 +33,20 @@ export class Composer extends BeanSimple {
       const onionSliceOriginal = this._onionSlicesOriginal?.find(item => item.beanFullName === onionSlice.beanFullName);
       if (onionSliceOriginal) {
         onionSlice.beanInstance = onionSliceOriginal.beanInstance;
-        if (!deepEqual(onionSlice.beanInstance![SymbolSliceOptionsOriginal], onionSlice.options)) {
+        if (!deepEqual(onionSliceOriginal[SymbolSliceOptionsOriginal], onionSlice.options)) {
           await cast(onionSlice.beanInstance).onOptionsChange(onionSlice.options);
-          onionSlice.beanInstance![SymbolSliceOptionsOriginal] = onionSlice.options;
         }
       } else {
         onionSlice.beanInstance = await this.bean._newBean(onionSlice.beanFullName as any, true, onionSlice.options);
-        onionSlice.beanInstance![SymbolSliceOptionsOriginal] = onionSlice.options;
       }
+      onionSlice[SymbolSliceOptionsOriginal] = onionSlice.options;
     }
     // dispose original behaviors
     if (this._onionSlicesOriginal) {
       for (const onionSlice of this._onionSlicesOriginal) {
         const exists = onionSlices.find(item => item.beanFullName === onionSlice.beanFullName);
         if (!exists) {
-          cast(onionSlice.beanInstance)?.dispose?.();
+          cast(onionSlice.beanInstance)?.__dispose__?.();
         }
       }
     }
