@@ -1,8 +1,10 @@
 import { BeanBase, cast, Use } from 'zova';
 import { Bean, BeanOnion, IOnionItem } from 'zova-module-a-bean';
-import { IBehaviorRecord, IBehaviors, IBehaviorTag, IDecoratorBehaviorOptions } from '../types/behavior.js';
+import { IBehaviorRecord, IBehaviors, IDecoratorBehaviorOptions } from '../types/behavior.js';
 import { Composer } from '../lib/composer.js';
 import { BeanBehaviorBase } from './bean.behaviorBase.js';
+
+const SymbolSliceOptionsOriginal = Symbol('SymbolSliceOptionsOriginal');
 
 @Bean()
 export class BeanBehavior extends BeanBase {
@@ -11,19 +13,15 @@ export class BeanBehavior extends BeanBase {
 
   protected async __init__() {}
 
-  public async createComposer(behaviors: IBehaviors, behaviorTag: IBehaviorTag): Promise<Composer> {
+  public async createComposer(behaviors: IBehaviors): Promise<Composer> {
     // onionItems
     const onionItems = this._prepareOnionItems(behaviors);
     // load onions
-    const onionSlices = await this.$$beanOnion.behavior.loadOnions(onionItems);
+    const onionSlices = await this.$$beanOnion.behavior.loadOnions<BeanBehaviorBase>(onionItems);
     // create behaviors
     for (const onionSlice of onionSlices) {
-      onionSlice.beanInstance = await this.bean._newBean(
-        onionSlice.beanFullName as any,
-        true,
-        onionSlice.options,
-        behaviorTag,
-      );
+      onionSlice.beanInstance = await this.bean._newBean(onionSlice.beanFullName as any, true, onionSlice.options);
+      onionSlice.beanInstance![SymbolSliceOptionsOriginal] = onionSlice.options;
     }
     // compose
     const composer = this.$$beanOnion.behavior.compose(onionSlices, (onionSlice, props: any, next) => {

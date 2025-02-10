@@ -127,17 +127,17 @@ export class ServiceOnion<OPTIONS, ONIONNAME extends string> extends BeanSimple 
     return await this.loadOnions(onionItems, selector);
   }
 
-  async loadOnions(
+  async loadOnions<T>(
     onionItems: IOnionItem<OPTIONS, ONIONNAME> | IOnionItem<OPTIONS, ONIONNAME>[],
     selector?: string,
-  ): Promise<IOnionSlice<OPTIONS, ONIONNAME>[]> {
+  ): Promise<IOnionSlice<OPTIONS, ONIONNAME, T>[]> {
     if (!Array.isArray(onionItems)) onionItems = [onionItems];
     if (onionItems.length === 0) return [];
     // load modules
     const moduleNames = onionItems.map(item => item.name.split(':')[0]);
     await this._loadModules(moduleNames);
     // onion slices
-    const onionSlices: IOnionSlice<OPTIONS, ONIONNAME>[] = [];
+    const onionSlices: IOnionSlice<OPTIONS, ONIONNAME, T>[] = [];
     for (const item of onionItems) {
       const beanFullName = item.name.replace(':', `.${this.sceneName}.`);
       const beanOptions = appResource.getBean(beanFullName);
@@ -161,13 +161,16 @@ export class ServiceOnion<OPTIONS, ONIONNAME extends string> extends BeanSimple 
     return this.getOnionsEnabled(onionSlices, selector);
   }
 
-  getOnionsEnabled(onions: IOnionItem<OPTIONS, ONIONNAME>[], selector?: string) {
+  getOnionsEnabled<T>(
+    onions: IOnionItem<OPTIONS, ONIONNAME>[],
+    selector?: string,
+  ): IOnionSlice<OPTIONS, ONIONNAME, T>[] {
     if (!selector) selector = '';
     if (!onions) return [];
     return onions.filter(onionItem => {
       const onionOptions = onionItem.options as IOnionOptionsEnable & IOnionOptionsMatch<string>;
       return this.beanOnion.checkOnionOptionsEnabled(onionOptions, selector);
-    }) as unknown as IOnionSlice<OPTIONS, ONIONNAME>[];
+    }) as unknown as IOnionSlice<OPTIONS, ONIONNAME, T>[];
   }
 
   compose(onions: IOnionSlice<OPTIONS, ONIONNAME>[], executeCustom: IOnionExecuteCustom<OPTIONS, ONIONNAME>) {
