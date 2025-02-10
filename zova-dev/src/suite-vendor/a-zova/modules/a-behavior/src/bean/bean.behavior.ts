@@ -26,7 +26,7 @@ export class BeanBehavior extends BeanBase {
     // compose
     const composer = this.$$beanOnion.behavior.compose(onionSlices, (onionSlice, props: any, next) => {
       const beanInstance = cast<BeanBehaviorBase>(onionSlice.beanInstance);
-      return beanInstance.render(props, next as any);
+      return cast(beanInstance).render(props, next as any);
     });
     return this.bean._newBeanSimple(Composer, false, composer);
   }

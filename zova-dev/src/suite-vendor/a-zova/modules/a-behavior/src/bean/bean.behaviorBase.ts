@@ -22,7 +22,11 @@ export class BeanBehaviorBase<
     this.$options = options;
   }
 
-  render(_props: PROPS_INPUT, _next: NextBehavior<PROPS_OUTPUT>): VNode {
+  protected async onOptionsChange(options: OPTIONS) {
+    this.$options = options;
+  }
+
+  protected render(_props: PROPS_INPUT, _next: NextBehavior<PROPS_OUTPUT>): VNode {
     throw new Error('Not Implemented');
   }
 }
