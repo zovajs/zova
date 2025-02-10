@@ -12,6 +12,7 @@ export const PluginFreeze = {
         const self = this;
         const instance = this._;
         self[SymbolRenderFreezeCounter] = ref(0);
+        self[SymbolRenderFreezeSnapshot] = undefined;
         self[SymbolRenderOriginal] = instance[renderMethod];
         instance[renderMethod] = function (this, ...args) {
           if (self[SymbolRenderFreezeCounter].value === 0) {
@@ -34,13 +35,13 @@ export const PluginFreeze = {
           const self = this;
           if (freeze) {
             if (self[SymbolRenderFreezeCounter].value === 0) {
-              self.__renderFreeze_snapshot = undefined;
+              self[SymbolRenderFreezeSnapshot] = undefined;
             }
             self[SymbolRenderFreezeCounter].value++;
           } else {
             self[SymbolRenderFreezeCounter].value--;
             if (self[SymbolRenderFreezeCounter].value === 0) {
-              self.__renderFreeze_snapshot = undefined;
+              self[SymbolRenderFreezeSnapshot] = undefined;
             }
           }
         },
