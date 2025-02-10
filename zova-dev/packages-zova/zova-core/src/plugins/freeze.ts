@@ -46,7 +46,7 @@ export const PluginFreeze = {
             }
           }
         },
-        async renderFreezeBegin<RESULT>(fn: FunctionAsync<RESULT>): Promise<RESULT> {
+        async renderFreezeScope<RESULT>(fn: FunctionAsync<RESULT>): Promise<RESULT> {
           const self = this;
           try {
             self.renderFreeze(true);

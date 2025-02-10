@@ -7,6 +7,8 @@ import { SSRMetaOptions } from '../types/interface/ssr.js';
 import { useMeta } from '../core/context/useMeta.js';
 import { CtxSSR } from '../core/context/ssr.js';
 import { getVueDecoratorValue } from './vueDecorators/utils.js';
+import { cast } from '../types/utils/cast.js';
+import { FunctionAsync } from '../decorator/type/functionable.js';
 
 const SymbolText = Symbol('SymbolText');
 
@@ -61,6 +63,14 @@ export class BeanBase extends BeanBaseSimple {
       prop = prop.name;
     }
     return getVueDecoratorValue(this, prop, index ?? 0);
+  }
+
+  protected renderFreeze(freeze: boolean) {
+    return cast(this.ctx.instance).ctx.renderFreeze(freeze);
+  }
+
+  protected async renderFreezeScope<RESULT>(fn: FunctionAsync<RESULT>): Promise<RESULT> {
+    return await cast(this.ctx.instance).ctx.renderFreezeScope(fn);
   }
 
   // need not
