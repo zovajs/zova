@@ -15,7 +15,7 @@ export class BehaviorRoot extends BeanBehaviorBase<
   IBehaviorPropsInputRoot,
   IBehaviorPropsOutputRoot
 > {
-  execute(_props: IBehaviorPropsInputRoot, next: NextBehavior<IBehaviorPropsOutputRoot>): VNode {
+  render(_props: IBehaviorPropsInputRoot, next: NextBehavior<IBehaviorPropsOutputRoot>): VNode {
     return next();
   }
 }

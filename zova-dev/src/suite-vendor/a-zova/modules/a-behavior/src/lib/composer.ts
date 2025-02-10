@@ -10,7 +10,7 @@ export class Composer extends BeanSimple {
     this._composer = composer;
   }
 
-  public execute<PROPS_INPUT, PROPS_OUTPUT = PROPS_INPUT>(props: PROPS_INPUT, next: NextBehavior<PROPS_OUTPUT>): VNode {
+  public render<PROPS_INPUT, PROPS_OUTPUT = PROPS_INPUT>(props: PROPS_INPUT, next: NextBehavior<PROPS_OUTPUT>): VNode {
     return this._composer(props, next);
   }
 }
