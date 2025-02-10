@@ -13,7 +13,7 @@ export class Behavior<%=argv.beanNameCapitalize%> extends BeanBehaviorBase<
   IBehaviorPropsInput<%=argv.beanNameCapitalize%>,
   IBehaviorPropsOutput<%=argv.beanNameCapitalize%>
 > {
-  render(_props: IBehaviorPropsInput<%=argv.beanNameCapitalize%>, next: NextBehavior<IBehaviorPropsOutput<%=argv.beanNameCapitalize%>>): VNode {
+  protected render(_props: IBehaviorPropsInput<%=argv.beanNameCapitalize%>, next: NextBehavior<IBehaviorPropsOutput<%=argv.beanNameCapitalize%>>): VNode {
     return next();
   }
 }
