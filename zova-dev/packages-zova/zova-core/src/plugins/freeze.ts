@@ -1,4 +1,5 @@
 import { App, ref } from 'vue';
+import { FunctionAsync } from '../decorator/type/functionable.js';
 
 const SymbolRenderOriginal = Symbol('SymbolRenderOriginal');
 const SymbolRenderFreezeCounter = Symbol('SymbolRenderFreezeCounter');
@@ -45,11 +46,11 @@ export const PluginFreeze = {
             }
           }
         },
-        async renderFreezeBegin(cb: Function) {
+        async renderFreezeBegin<RESULT>(fn: FunctionAsync<RESULT>): Promise<RESULT> {
           const self = this;
           try {
             self.renderFreeze(true);
-            await cb();
+            return await fn();
           } finally {
             self.renderFreeze(false);
           }
