@@ -35,9 +35,7 @@ export class ControllerBehavior extends BeanControllerBase {
   }
 
   protected __dispose__() {
-    if (this.composer) {
-      this.composer.dispose();
-    }
+    this.composer?.dispose();
   }
 
   protected render() {
