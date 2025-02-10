@@ -62,7 +62,7 @@ export class BeanContainer {
     for (const prop in beanInstances) {
       if (prop.startsWith('$$')) continue;
       const beanInstance = cast(beanInstances[prop]);
-      if (beanInstance.__dispose__) {
+      if (beanInstance && beanInstance.__dispose__) {
         this.app.meta.module._monkeyModule('beanDispose', undefined, this, beanInstance);
         this.runWithInstanceScopeOrAppContext(() => {
           beanInstance.__dispose__();
@@ -160,6 +160,8 @@ export class BeanContainer {
     return this.scope(moduleScope);
   }
 
+  _setBean(key: string, instance: any) {}
+
   _getBeanSync<K extends keyof IBeanRecord>(
     beanFullName: K,
     markReactive?: boolean,
@@ -168,14 +170,14 @@ export class BeanContainer {
   _getBeanSync<T>(key: string, markReactive?: boolean, forceLoad?: boolean): T | undefined;
   _getBeanSync<T>(key: string, markReactive?: boolean, forceLoad?: boolean): T | undefined {
     const beanInstance: any = this[BeanContainerInstances][key];
-    if (!beanInstance) {
+    if (beanInstance === undefined) {
       // bean not loaded, so async load to raise the next call
       if (forceLoad !== false) {
         this._getBean(key as any, markReactive);
       }
       return undefined;
     }
-    if (beanInstance[SymbolInited] && !beanInstance[SymbolInited].state) {
+    if (beanInstance && beanInstance[SymbolInited] && !beanInstance[SymbolInited].state) {
       return undefined;
     }
     return beanInstance as T;
