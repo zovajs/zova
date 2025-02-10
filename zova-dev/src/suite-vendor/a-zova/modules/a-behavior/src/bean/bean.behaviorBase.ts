@@ -1,4 +1,4 @@
-import { BeanBase } from 'zova';
+import { BeanBase, Use } from 'zova';
 import { Virtual } from 'zova-module-a-bean';
 import { IBehaviorTag, IDecoratorBehaviorOptions, NextBehavior } from '../types/behavior.js';
 import { VNode } from 'vue';
@@ -10,12 +10,13 @@ export class BeanBehaviorBase<
   PROPS_INPUT = unknown,
   PROPS_OUTPUT = PROPS_INPUT,
 > extends BeanBase {
-  protected $beanBehavior: BeanBehavior;
   protected $options: T;
   protected $behaviorTag: IBehaviorTag;
 
-  protected async __init__(beanBehavior: BeanBehavior, options: T, behaviorTag: IBehaviorTag) {
-    this.$beanBehavior = beanBehavior;
+  @Use({ injectionScope: 'host' })
+  $$beanBehavior: BeanBehavior;
+
+  protected async __init__(options: T, behaviorTag: IBehaviorTag) {
     this.$options = options;
     this.$behaviorTag = behaviorTag;
   }
