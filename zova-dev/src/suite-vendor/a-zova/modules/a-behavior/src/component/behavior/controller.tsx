@@ -22,20 +22,22 @@ export class ControllerBehavior extends BeanControllerBase {
   $$beanBehavior: BeanBehavior;
 
   @Watch('$props.behaviors')
-  watchBehaviors(newValue, oldValue) {
+  async watchBehaviors(newValue, oldValue) {
     if (deepEqual(newValue, oldValue)) return;
-    this.composer.load(this.$props.behaviors);
+    await this.composer.load(this._getBehaviorRoot());
   }
 
   protected async __init__() {
     this.bean._setBean('$$behaviorTag', this.$props.behaviorTag);
-    this.composer = await this.$$beanBehavior.createComposer(
-      UseBehavior('a-behavior:root' as any, { behaviors: this.$props.behaviors }),
-    );
+    this.composer = await this.$$beanBehavior.createComposer(this._getBehaviorRoot());
   }
 
   protected __dispose__() {
     this.composer?.dispose();
+  }
+
+  private _getBehaviorRoot() {
+    return UseBehavior('a-behavior:root' as any, { behaviors: this.$props.behaviors });
   }
 
   protected render() {
