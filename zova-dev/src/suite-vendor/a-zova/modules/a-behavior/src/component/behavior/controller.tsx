@@ -33,9 +33,9 @@ export class ControllerBehavior extends BeanControllerBase {
   @Watch('$props.behaviors')
   async watchBehaviors(newValue, oldValue) {
     if (deepEqual(newValue, oldValue)) return;
-    await this.renderFreezeScope(async () => {
-      await this.composer.load(this._getBehaviorRoot());
-    });
+    //await this.renderFreezeScope(async () => {
+    await this.composer.load(this._getBehaviorRoot());
+    //});
   }
 
   protected async __init__() {

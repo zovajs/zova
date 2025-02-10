@@ -1,4 +1,4 @@
-import { BeanBase, cast, deepEqual, disposeInstance } from 'zova';
+import { BeanBase, cast, deepEqual, disposeInstance, Use } from 'zova';
 import { IBehaviorRecord, IBehaviors, IDecoratorBehaviorOptions, NextBehavior } from '../types/behavior.js';
 import { VNode } from 'vue';
 import { BeanOnion, IOnionItem, IOnionSlice, Service, TypeComposer } from 'zova-module-a-bean';
@@ -9,11 +9,12 @@ const SymbolSliceOptionsOriginal = Symbol('SymbolSliceOptionsOriginal');
 @Service()
 export class ServiceComposer extends BeanBase {
   private _composer: TypeComposer;
-  private _beanOnion: BeanOnion;
   private _onionSlicesOriginal?: IOnionSlice<IDecoratorBehaviorOptions, keyof IBehaviorRecord, BeanBehaviorBase>[];
 
-  protected async __init__(beanOnion: BeanOnion, behaviors: IBehaviors) {
-    this._beanOnion = beanOnion;
+  @Use()
+  $$beanOnion: BeanOnion;
+
+  protected async __init__(behaviors: IBehaviors) {
     await this.load(behaviors);
   }
 
@@ -29,7 +30,7 @@ export class ServiceComposer extends BeanBase {
     // onionItems
     const onionItems = this._prepareOnionItems(behaviors);
     // load onions
-    const onionSlices = await this._beanOnion.behavior.loadOnions<BeanBehaviorBase>(onionItems);
+    const onionSlices = await this.$$beanOnion.behavior.loadOnions<BeanBehaviorBase>(onionItems);
     // create behaviors
     for (const onionSlice of onionSlices) {
       const onionSliceOriginal = this._onionSlicesOriginal?.find(item => item.beanFullName === onionSlice.beanFullName);
@@ -55,7 +56,7 @@ export class ServiceComposer extends BeanBase {
     // save
     this._onionSlicesOriginal = onionSlices;
     // compose
-    this._composer = this._beanOnion.behavior.compose(onionSlices, (onionSlice, props: any, next) => {
+    this._composer = this.$$beanOnion.behavior.compose(onionSlices, (onionSlice, props: any, next) => {
       const beanInstance = cast<BeanBehaviorBase>(onionSlice.beanInstance);
       return cast(beanInstance).render(props, next as any);
     });
