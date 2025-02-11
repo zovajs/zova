@@ -1,4 +1,4 @@
-import { BeanAopBase } from 'zova';
+import { BeanAopBase, polyfillDispose } from 'zova';
 import { Aop } from 'zova-module-a-bean';
 import { ControllerPageHome } from 'zova-module-home-index';
 
@@ -11,7 +11,7 @@ export class AopHome extends BeanAopBase {
   ) {
     await next();
     receiver.message += '!';
-    Object.getPrototypeOf(receiver)['__dispose__'] = () => {};
+    polyfillDispose(receiver);
   }
 
   protected __dispose__(_args: [], next: Function, receiver: ControllerPageHome) {
