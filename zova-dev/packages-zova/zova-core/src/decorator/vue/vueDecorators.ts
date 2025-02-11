@@ -36,3 +36,7 @@ export function ShallowReadonly(): PropertyDecorator {
 export function Model(modelName?: string): PropertyDecorator {
   return createVueDecorator('model', { modelName });
 }
+
+export function ControllerMounted(): MethodDecorator {
+  return createVueDecorator('controllerMounted');
+}

@@ -5,6 +5,7 @@ import { raw } from './raw.js';
 import { shallow } from './shallow.js';
 import { watch } from './watch.js';
 import { watchEffect } from './watchEffect.js';
+import { controllerMounted } from './controllerMounted.js';
 
 export const vueDecorators = {
   computed,
@@ -14,4 +15,5 @@ export const vueDecorators = {
   raw,
   shallow,
   model,
+  controllerMounted,
 };
