@@ -22,6 +22,7 @@ import { IInjectRecord } from '../types/interface/inject.js';
 import { SymbolBeanFullName, SymbolInited } from './beanBaseSimple.js';
 import { vueDecorators } from './vueDecorators/index.js';
 import { isNilOrEmptyString } from '@cabloy/utils';
+import { BeanAopBase } from './beanAopBase.js';
 
 const SymbolBeanContainerParent = Symbol('Bean#BeanContainerParent');
 const SymbolProxyMagic = Symbol('Bean#ProxyMagic');
@@ -561,7 +562,7 @@ export class BeanContainer {
     if (this.app) {
       await this.app.meta.module._monkeyModule('beanInit', undefined, this, beanInstance);
     }
-    if (beanInstance.__init__) {
+    if (!(beanInstance instanceof BeanAopBase) && beanInstance.__init__) {
       await this.runWithInstanceScopeOrAppContext(async () => {
         await beanInstance.__init__(...args);
       });
@@ -1113,8 +1114,8 @@ function __isInnerMethod(prop) {
   return [
     '__get__',
     '__set__',
-    '__init__',
-    '__dispose__',
+    // '__init__',
+    // '__dispose__',
     'then',
     '__v_skip',
     '__v_isReactive',
