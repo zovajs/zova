@@ -63,7 +63,7 @@ export class BeanContainer {
     for (const prop in beanInstances) {
       if (prop.startsWith('$$')) continue;
       const beanInstance = cast(beanInstances[prop]);
-      if (beanInstance && beanInstance.__dispose__) {
+      if (beanInstance && !(beanInstance instanceof BeanAopBase) && beanInstance.__dispose__) {
         this.app.meta.module._monkeyModule('beanDispose', undefined, this, beanInstance);
         this.runWithInstanceScopeOrAppContext(() => {
           beanInstance.__dispose__();
