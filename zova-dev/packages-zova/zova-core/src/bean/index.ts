@@ -1,6 +1,6 @@
 export * from './resource/index.js';
 export * from './scope/index.js';
-export * from './BeanAopBase.js';
+export * from './beanAopBase.js';
 export * from './beanBase.js';
 export * from './beanBaseSimple.js';
 export * from './beanContainer.js';
