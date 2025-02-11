@@ -1007,7 +1007,7 @@ export class BeanContainer {
           chains.push([aopKey, methodName]);
         }
       } else {
-        const aop: BeanBase = aopKey;
+        const aop: BeanAopBase = aopKey;
         if (aop[methodName]) {
           let fn;
           if (methodType === 'get') {
