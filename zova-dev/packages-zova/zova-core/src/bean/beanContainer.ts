@@ -860,36 +860,36 @@ export class BeanContainer {
       },
       set(target, prop, value, receiver) {
         if (typeof prop === 'symbol') {
-          target[prop] = value;
+          Reflect.set(target, prop, value, receiver);
           return true;
         }
         if (__isInnerMethod(prop)) {
-          target[prop] = value;
+          Reflect.set(target, prop, value, receiver);
           return true;
         }
         // descriptorInfo
         const descriptorInfo = __getPropertyDescriptor(target, prop);
         if (!__checkAopOfDescriptorInfo(descriptorInfo)) {
-          target[prop] = value;
+          Reflect.set(target, prop, value, receiver);
           return true;
         }
         const methodName = `__set_${prop}__`;
         const methodNameMagic = '__set__';
         const _aopChainsProp = self._getAopChainsProp(receiver, beanFullName, methodName, methodNameMagic, 'set', prop);
         if (_aopChainsProp.length === 0) {
-          target[prop] = value;
+          Reflect.set(target, prop, value, receiver);
           return true;
         }
         // aop
         return self.__composeForProp(_aopChainsProp)(value, value => {
           if (!descriptorInfo && target.__set__) {
-            const res = target.__set__(prop, value);
+            const res = Reflect.apply(target.__set__, receiver, [prop, value, target]);
             if (res === undefined) throw new Error('__set__ must return true/false');
             if (!res) {
-              target[prop] = value;
+              Reflect.set(target, prop, value, receiver);
             }
           } else {
-            target[prop] = value;
+            Reflect.set(target, prop, value, receiver);
           }
           // ok: prop be set
           return true;
