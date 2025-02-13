@@ -61,7 +61,7 @@
     "devalue": "^5.0.0",
     "reflect-metadata": "^0.2.2",
     "vue": "^3.5.6",
-    "vue-plugin-render-freeze": "^2.0.1",
+    "vue-plugin-render-freeze": "^2.0.2",
     "zova-shared": "^1.0.7"
   },
   "gitHead": "c90e59abc1bf445154a3fb32856f83783dc0eb39"
