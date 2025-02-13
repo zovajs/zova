@@ -820,19 +820,21 @@ export class BeanContainer {
     const proxy = new Proxy(beanInstance, {
       get(target, prop, receiver) {
         if (typeof prop === 'symbol') {
-          return target[prop];
+          return Reflect.get(target, prop, receiver);
         }
         if (__isInnerMethod(prop)) {
-          if (prop === '__v_isShallow' && target.__v_isShallow_patch) return target.__v_isShallow_patch;
-          return target[prop];
+          if (prop === '__v_isShallow' && target.__v_isShallow_patch) {
+            return Reflect.get(target, '__v_isShallow_patch', receiver);
+          }
+          return Reflect.get(target, prop, receiver);
         }
         // descriptorInfo
         const descriptorInfo = __getPropertyDescriptor(target, prop);
-        if (!__checkAopOfDescriptorInfo(descriptorInfo)) return target[prop];
+        if (!__checkAopOfDescriptorInfo(descriptorInfo)) return Reflect.get(target, prop, receiver);
         const methodType = __methodTypeOfDescriptor(descriptorInfo);
         // get prop
         if (!methodType) {
-          if (__isLifeCycleMethod(prop)) return target[prop];
+          if (__isLifeCycleMethod(prop)) return Reflect.get(target, prop, receiver);
           const methodName = `__get_${prop}__`;
           const methodNameMagic = '__get__';
           const _aopChainsProp = self._getAopChainsProp(
@@ -843,13 +845,13 @@ export class BeanContainer {
             'get',
             prop,
           );
-          if (_aopChainsProp.length === 0) return target[prop];
+          if (_aopChainsProp.length === 0) return Reflect.get(target, prop, receiver);
           // aop
           return self.__composeForProp(_aopChainsProp)(undefined, () => {
             if (!descriptorInfo && target.__get__) {
-              return target.__get__(prop);
+              return Reflect.apply(target.__get__, receiver, [prop, target]);
             } else {
-              return target[prop];
+              return Reflect.get(target, prop, receiver);
             }
           });
         }
