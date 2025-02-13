@@ -903,11 +903,11 @@ export class BeanContainer {
     const self = this;
     // not aop magic methods
     if (__isInnerMethod(prop)) {
-      return target[prop];
+      return Reflect.get(target, prop, receiver);
     }
     // aop chains
     const _aopChainsProp = this._getAopChainsProp(receiver, beanFullName, prop, undefined, 'method', prop);
-    if (_aopChainsProp.length === 0) return target[prop];
+    if (_aopChainsProp.length === 0) return Reflect.get(target, prop, receiver);
     // proxy
     const methodProxyKey = `__aopproxy_method_${prop}__`;
     if (target[methodProxyKey]) return target[methodProxyKey];
@@ -915,7 +915,7 @@ export class BeanContainer {
       apply(target, thisArg, args) {
         // aop
         return self.__composeForProp(_aopChainsProp)(args, args => {
-          return target.apply(thisArg, args);
+          return Reflect.apply(target, thisArg, args);
         });
       },
     });
