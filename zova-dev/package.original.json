@@ -19,7 +19,8 @@
     "build:githubpages": "npm run prerun && quasar build --mode spa --flavor githubpages",
     "prerun": "npm run zova :tools:deps && tsc -b && npm run tsc",
     "tsc": "vue-tsc --noEmit --project tsconfig.vue-tsc.json",
-    "lint": "eslint . --fix --ignore-path .gitignore"
+    "lint": "eslint",
+    "lint:fix": "eslint --fix"
   },
   "keywords": ["vue3", "ioc", "zova"],
   "repository": {
@@ -51,6 +52,7 @@
     "@types/node": "^22.10.2",
     "@vitejs/plugin-vue": "^5.2.0",
     "concurrently": "^8.2.2",
+    "eslint": "^9.20.1",
     "openapi-typescript": "^7.4.4",
     "quasar-app-extension-zova": "workspace:^",
     "sass": "^1.81.0",
