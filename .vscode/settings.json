@@ -1,7 +1,8 @@
 {
   "editor.tabSize": 2,
-  "editor.formatOnSave": true,
-  // "editor.formatOnSave": false,
+  // "editor.formatOnSave": true,
+  "editor.formatOnSave": false,
+  "editor.formatOnPaste": false,
   "files.eol": "\n",
   // typescript
   "typescript.disableAutomaticTypeAcquisition": false,
@@ -18,9 +19,10 @@
   "tailwindCSS.experimental.classRegex": [["classes\\(([^)]*)\\)", "(?:'|\"|`)([^']*)(?:'|\"|`)"]],
   // eslint
   "editor.codeActionsOnSave": {
-    "source.fixAll.eslint": "explicit"
+    "source.fixAll.eslint": "explicit",
+    "source.fixAll.stylelint": "explicit"
   },
-  "eslint.validate": ["javascript", "javascriptreact", "typescript", "vue"],
+  "eslint.validate": ["javascript", "javascriptreact", "typescript", "typescriptreact", "vue"],
   // prettier
   "prettier.singleQuote": true,
   "prettier.jsxSingleQuote": false,
