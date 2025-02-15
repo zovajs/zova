@@ -1,22 +1,23 @@
 {
   "name": "zova",
-  "private": true,
   "type": "module",
+  "private": true,
   "description": "A vue3 framework with ioc",
   "author": "zhennann",
+  "license": "MIT",
+  "homepage": "https://github.com/cabloy/zova#readme",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/cabloy/zova.git"
+  },
+  "bugs": {
+    "url": "https://github.com/cabloy/zova/issues"
+  },
   "keywords": [
     "vue3",
     "ioc",
     "zova"
   ],
-  "repository": {
-    "type": "git",
-    "url": "git+https://github.com/cabloy/zova.git"
-  },
-  "homepage": "https://github.com/cabloy/zova#readme",
-  "bugs": {
-    "url": "https://github.com/cabloy/zova/issues"
-  },
   "engines": {
     "node": ">=22.12.0"
   },
@@ -27,27 +28,26 @@
     "docs:build": "vitepress build zova-docs",
     "docs:preview": "vitepress preview zova-docs"
   },
-  "pnpm": {
-    "overrides": {}
-  },
   "dependencies": {
     "zova": "^5"
   },
   "devDependencies": {
-    "@cabloy/lint": "^5.0.1",
+    "@cabloy/lint": "^5.0.2",
     "@cabloy/process-helper": "^1.0.4",
+    "@types/fs-extra": "^11.0.4",
     "@types/mocha": "^10.0.6",
     "@types/node": "^22.10.2",
-    "@types/fs-extra": "^11.0.4",
     "eslint": "^9.20.1",
     "lerna": "=8.1.2",
     "minimist": "^1.2.8",
+    "textlint": "^14.2.0",
+    "textlint-rule-ja-space-between-half-and-full-width": "^2.4.2",
     "ts-node": "^10.9.2",
     "typedoc": "^0.25.13",
     "typescript": "5.6.2",
-    "vitepress": "^1.1.4",
-    "textlint": "^14.2.0",
-    "textlint-rule-ja-space-between-half-and-full-width": "^2.4.2"
+    "vitepress": "^1.1.4"
   },
-  "license": "MIT"
+  "pnpm": {
+    "overrides": {}
+  }
 }
