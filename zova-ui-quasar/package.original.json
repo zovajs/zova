@@ -44,7 +44,7 @@
     "zova": "^5.0.237"
   },
   "devDependencies": {
-    "@cabloy/lint": "^4.0.20",
+    "@cabloy/lint": "^5.0.0",
     "@quasar/app-vite": "2.0.0-beta.18",
     "@types/node": "^22.10.2",
     "autoprefixer": "^10.4.20",
