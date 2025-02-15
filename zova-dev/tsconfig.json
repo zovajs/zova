@@ -2,23 +2,9 @@
   "extends": "./tsconfig.base.json",
   "compilerOptions": {
     "composite": false,
-    "declarationMap": false,
-    "declaration": false
+    "declaration": false,
+    "declarationMap": false
   },
-  "exclude": [
-    "**/dist/**",
-    "./dist",
-    "./distMockServer",
-    "./.quasar",
-    "./.zova",
-    "./node_modules",
-    "./src-capacitor",
-    "./src-cordova",
-    "./quasar.config.*.temporary.compiled*",
-    "./packages-utils/zova-vite/templates",
-    "./src/boot/app",
-    "./src/boot/main.ts"
-  ],
   "references": [
     {
       "path": "packages-utils/mutate-on-copy"
@@ -53,5 +39,19 @@
     {
       "path": "packages-utils/quasar-app-extension-zova"
     }
+  ],
+  "exclude": [
+    "**/dist/**",
+    "./dist",
+    "./distMockServer",
+    "./.quasar",
+    "./.zova",
+    "./node_modules",
+    "./src-capacitor",
+    "./src-cordova",
+    "./quasar.config.*.temporary.compiled*",
+    "./packages-utils/zova-vite/templates",
+    "./src/boot/app",
+    "./src/boot/main.ts"
   ]
 }
