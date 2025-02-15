@@ -1,4 +1,4 @@
-import { ZovaApplication } from 'zova';
+import type { ZovaApplication } from 'zova';
 
 export const config = (_app: ZovaApplication) => {
   return {
