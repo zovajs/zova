@@ -1,12 +1,26 @@
 {
   "name": "zova-ui-antdv",
+  "type": "module",
   "version": "5.0.355",
   "description": "A vue3 antdv framework with ioc",
   "publishConfig": {
     "access": "public"
   },
   "author": "zhennann <zhen.nann@icloud.com>",
-  "type": "module",
+  "license": "MIT",
+  "homepage": "https://github.com/cabloy/zova#readme",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/cabloy/zova.git"
+  },
+  "bugs": {
+    "url": "https://github.com/cabloy/zova/issues"
+  },
+  "keywords": [
+    "vue3",
+    "ioc",
+    "zova"
+  ],
   "scripts": {
     "dev": "npm run dev:ssr:admin",
     "build": "npm run build:ssr:admin",
@@ -23,46 +37,33 @@
     "tsc": "vue-tsc --noEmit --project tsconfig.vue-tsc.json",
     "lint": "eslint . --fix --ignore-path .gitignore"
   },
-  "keywords": [
-    "vue3",
-    "ioc",
-    "zova"
-  ],
-  "repository": {
-    "type": "git",
-    "url": "git+https://github.com/cabloy/zova.git"
-  },
-  "homepage": "https://github.com/cabloy/zova#readme",
-  "bugs": {
-    "url": "https://github.com/cabloy/zova/issues"
-  },
   "dependencies": {
     "ant-design-vue": "^4.2.5",
     "compression": "^1.7.4",
     "connect": "^3.7.0",
     "cors": "^2.8.5",
+    "csx": "^10.0.2",
     "express": "^4.21.0",
+    "mutate-on-copy": "^1.0.1",
     "quasar": "^2.17.0",
+    "typestyle": "^2.4.0",
     "vue": "^3.5.10",
     "vue-router": "^4.4.5",
     "zova": "^5.0.237",
-    "zova-module-demo-basic": "workspace:^",
-    "zova-module-home-api": "workspace:^",
+    "zova-module-a-api": "^5.0.0",
     "zova-module-a-model": "^5.0.37",
+    "zova-module-a-pinia": "^5.0.35",
     "zova-module-a-router": "^5.0.71",
     "zova-module-a-style": "^5.0.47",
     "zova-module-a-zova": "^5.0.49",
+    "zova-module-demo-basic": "workspace:^",
+    "zova-module-home-api": "workspace:^",
+    "zova-module-antdv-adapter": "workspace:^",
     "zova-module-home-base": "workspace:^",
     "zova-module-home-icon": "workspace:^",
     "zova-module-home-index": "workspace:^",
     "zova-module-home-layout": "workspace:^",
-    "zova-module-antdv-adapter": "workspace:^",
-    "zova-module-a-api": "^5.0.0",
-    "zova-module-a-pinia": "^5.0.35",
-    "zova-module-a-tabs": "^5.0.29",
-    "mutate-on-copy": "^1.0.1",
-    "csx": "^10.0.2",
-    "typestyle": "^2.4.0"
+    "zova-module-a-tabs": "^5.0.29"
   },
   "devDependencies": {
     "@cabloy/lint": "^5.0.6",
@@ -70,6 +71,7 @@
     "@types/node": "^22.10.2",
     "@vitejs/plugin-vue": "^5.1.4",
     "concurrently": "^8.2.2",
+    "eslint": "^9.20.1",
     "openapi-typescript": "^7.4.4",
     "quasar-app-extension-zova": "^1.1.184",
     "sass": "^1.79.4",
@@ -79,6 +81,5 @@
     "zova-openapi": "^1.0.0",
     "zova-vite": "^1.0.182"
   },
-  "license": "MIT",
   "gitHead": "c90e59abc1bf445154a3fb32856f83783dc0eb39"
 }
