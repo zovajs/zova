@@ -3,7 +3,8 @@
   "compilerOptions": {
     "composite": false,
     "declaration": false,
-    "declarationMap": false
+    "declarationMap": false,
+    "verbatimModuleSyntax": false
   },
   "references": [
     {

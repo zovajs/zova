@@ -1,6 +1,4 @@
 {
   "extends": "@cabloy/lint/front/tsconfig.base.cjs",
-  "compilerOptions": {
-    "verbatimModuleSyntax": true
-  }
+  "compilerOptions": {}
 }
