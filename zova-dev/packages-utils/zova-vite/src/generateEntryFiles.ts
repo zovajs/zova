@@ -25,6 +25,7 @@ export async function generateEntryFiles(
     // check config
     let configDir = path.join(configOptions.appDir, 'src/front/config');
     if (!fse.existsSync(configDir)) {
+      // eslint-disable-next-line
       console.log(chalk.red('path not found: src/front/config\n'));
       process.exit(0);
     }
