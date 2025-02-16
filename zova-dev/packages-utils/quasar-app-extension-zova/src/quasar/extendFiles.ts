@@ -16,12 +16,12 @@ export function extendFiles(api: IndexAPI, flavor: string) {
 
   async function patchTemplates() {
     // app.js
-    fse.copyFileSync(resolveTemplatePath('entry/app.js'), api.resolve.cli('templates/entry/app.js'));
+    fse.copyFileSync(resolveTemplatePath('entry/app.js_'), api.resolve.cli('templates/entry/app.js'));
     // client-entry.js
-    fse.copyFileSync(resolveTemplatePath('entry/client-entry.js'), api.resolve.cli('templates/entry/client-entry.js'));
+    fse.copyFileSync(resolveTemplatePath('entry/client-entry.js_'), api.resolve.cli('templates/entry/client-entry.js'));
     // server-entry.mjs
     fse.copyFileSync(
-      resolveTemplatePath('entry/server-entry.mjs'),
+      resolveTemplatePath('entry/server-entry.mjs_'),
       api.resolve.cli('templates/entry/server-entry.mjs'),
     );
     // ssr: middlewares/env.ts
