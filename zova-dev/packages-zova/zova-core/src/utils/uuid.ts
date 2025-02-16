@@ -4,7 +4,7 @@
 
 let buf;
 let bufIdx = 0;
-const hexBytes = Array.from({ length: 256 });
+const hexBytes: any[] = Array.from({ length: 256 });
 
 // Pre-calculate toString(16) for speed
 for (let i = 0; i < 256; i++) {
