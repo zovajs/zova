@@ -46,9 +46,9 @@ import { Scope } from 'zova-module-a-bean';
 /** locale: begin */
 import locale_en_us from '../config/locale/en-us.js';
 import locale_zh_cn from '../config/locale/zh-cn.js';
-import { default as ZEssentialLink } from './component/essentialLink.vue';
-import { default as ZLayoutDefault } from './component/layoutDefault.vue';
-import { default as ZLayoutEmpty } from './component/layoutEmpty.vue';
+import ZEssentialLink from './component/essentialLink.vue';
+import ZLayoutDefault from './component/layoutDefault.vue';
+import ZLayoutEmpty from './component/layoutEmpty.vue';
 /** api: begin */
 import 'zova';
 import 'zova';

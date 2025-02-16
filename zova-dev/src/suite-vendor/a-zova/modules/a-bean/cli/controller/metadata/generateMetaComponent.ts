@@ -41,7 +41,7 @@ export function generateMetaComponent(
       );
     }
     contentImports2.push(`export { default as ${componentName2} } from './component/${name}.vue';`);
-    contentImports2.push(`import { default as ${componentName2} } from './component/${name}.vue';`);
+    contentImports2.push(`import ${componentName2} from './component/${name}.vue';`);
     contentComponents.push(`'${name}': ${componentName2},`);
     contentRecords.push(`'${componentFullName}': ${className};`);
     if (hasProps) {
