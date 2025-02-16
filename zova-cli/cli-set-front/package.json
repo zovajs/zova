@@ -1,11 +1,19 @@
 {
   "name": "zova-cli-set-front",
+  "type": "module",
   "version": "1.1.199",
   "description": "zova cli-set-front",
   "publishConfig": {
     "access": "public"
   },
-  "type": "module",
+  "author": "zhennann",
+  "license": "MIT",
+  "keywords": [
+    "egg",
+    "egg-born",
+    "framework",
+    "zova"
+  ],
   "exports": {
     ".": {
       "types": [
@@ -28,16 +36,8 @@
     "tsc:publish": "npm run clean && tsc -b",
     "prepublishOnly": "npm run tsc:publish"
   },
-  "keywords": [
-    "egg",
-    "egg-born",
-    "framework",
-    "zova"
-  ],
-  "author": "zhennann",
-  "license": "MIT",
   "dependencies": {
-    "@cabloy/cli": "^2.1.10",
+    "@cabloy/cli": "^3.0.0",
     "@cabloy/extend": "^3.0.12",
     "@cabloy/module-info": "^1.2.10",
     "@cabloy/utils": "^1.0.3",
