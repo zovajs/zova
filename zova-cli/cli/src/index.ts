@@ -1,1 +1,1 @@
-export * from './start.js';
+export * from './start.ts';

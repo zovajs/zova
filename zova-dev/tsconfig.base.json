@@ -4,7 +4,9 @@
     "paths": {
       "@/*": ["./src/legacy/*"]
     },
+    "allowImportingTsExtensions": false,
     "noEmit": true,
+    "rewriteRelativeImportExtensions": false,
     "verbatimModuleSyntax": false
   }
 }

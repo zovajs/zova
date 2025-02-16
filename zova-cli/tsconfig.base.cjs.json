@@ -1,3 +1,8 @@
 {
-  "extends": "@cabloy/lint/api/tsconfig.base.cjs"
+  "extends": "@cabloy/lint/api/tsconfig.base.cjs",
+  "compilerOptions": {
+    "allowImportingTsExtensions": true,
+    "rewriteRelativeImportExtensions": true,
+    "verbatimModuleSyntax": true
+  }
 }
