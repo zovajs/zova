@@ -13,8 +13,8 @@ importers:
         version: 5.0.98(typescript@5.6.2)(vue@3.4.27(typescript@5.6.2))
     devDependencies:
       '@cabloy/lint':
-        specifier: ^5.0.4
-        version: 5.0.4(@typescript-eslint/utils@8.24.0(eslint@9.20.1)(typescript@5.6.2))(@vue/compiler-sfc@3.4.27)(eslint@9.20.1)(typescript@5.6.2)
+        specifier: ^5.0.6
+        version: 5.0.6(@typescript-eslint/utils@8.24.0(eslint@9.20.1)(typescript@5.6.2))(@vue/compiler-sfc@3.4.27)(eslint@9.20.1)(typescript@5.6.2)
       '@cabloy/process-helper':
         specifier: ^1.0.4
         version: 1.0.4
@@ -215,8 +215,8 @@ packages:
   '@cabloy/last-word@1.0.13':
     resolution: {integrity: sha512-6/A4UHmLwEDxf2b93EoPTP5vn193pHafvWSOwkQJUGuhlihFWMLwOjNCle7TQSz2fiH+HdYWijXI5xJkfUwlOQ==}
 
-  '@cabloy/lint@5.0.4':
-    resolution: {integrity: sha512-KqyyUL64AVMeY0Iqocxp2xaiV7REbqkA3DbjpFlEH8c+/ii7VZEHN7j5jbF06tDnqJ5jGqv1DmlmoJORLPTghg==}
+  '@cabloy/lint@5.0.6':
+    resolution: {integrity: sha512-Sd0x76ayXSmPftlkdHC6Su4ZcHTiT/isplvG9g2CV3ik8gak0Z9lb/VNWAYhISi8AK9/dq+2j7I7w8+iPamAaQ==}
 
   '@cabloy/localeutil@1.0.4':
     resolution: {integrity: sha512-ZNcb/v9qCvFlyvdOrag8VcBRkvEqnJZTZWYr2qnf3NFWQDzUBFxVd8LBOYjOJmPd2efGZHM/+nAk21KyJ2mkLw==}
@@ -4670,7 +4670,7 @@ snapshots:
 
   '@cabloy/last-word@1.0.13': {}
 
-  '@cabloy/lint@5.0.4(@typescript-eslint/utils@8.24.0(eslint@9.20.1)(typescript@5.6.2))(@vue/compiler-sfc@3.4.27)(eslint@9.20.1)(typescript@5.6.2)':
+  '@cabloy/lint@5.0.6(@typescript-eslint/utils@8.24.0(eslint@9.20.1)(typescript@5.6.2))(@vue/compiler-sfc@3.4.27)(eslint@9.20.1)(typescript@5.6.2)':
     dependencies:
       '@antfu/eslint-config': 4.2.1(@eslint/json@0.10.0)(@typescript-eslint/utils@8.24.0(eslint@9.20.1)(typescript@5.6.2))(@vue/compiler-sfc@3.4.27)(eslint@9.20.1)(typescript@5.6.2)
       '@eslint/json': 0.10.0

@@ -4,6 +4,7 @@
     "composite": false,
     "declaration": false,
     "declarationMap": false,
+    "noEmit": true,
     "verbatimModuleSyntax": false
   },
   "references": [

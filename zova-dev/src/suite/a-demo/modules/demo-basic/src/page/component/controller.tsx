@@ -43,8 +43,7 @@ export class ControllerPageComponent extends BeanControllerPageBase {
               return <div>this is a footer slot from parent</div>;
             },
           }}
-        >
-        </ZCard>
+        ></ZCard>
         <label>Input: </label>
         <input
           type="text"
