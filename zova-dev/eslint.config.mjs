@@ -10,6 +10,7 @@ export default EslintConfig({
     'distMockServer',
     'src-capacitor',
     'src-cordova',
+    '.quasar',
     '.zova',
     '.assets',
   ],

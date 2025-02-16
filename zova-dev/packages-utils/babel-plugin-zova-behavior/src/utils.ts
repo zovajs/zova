@@ -7,38 +7,6 @@ import svgTags from 'svg-tags';
 export const FRAGMENT = 'Fragment';
 export const KEEP_ALIVE = 'KeepAlive';
 
-/**
- * Get tag (first attribute for h) from JSXOpeningElement
- * @param path JSXElement
- * @param state State
- * @returns Identifier | StringLiteral | MemberExpression | CallExpression
- */
-export const getTag = (
-  path: NodePath<t.JSXElement>,
-  state: PluginPass,
-): t.Identifier | t.CallExpression | t.StringLiteral | t.MemberExpression => {
-  const namePath = path.get('openingElement').get('name');
-  if (namePath.isJSXIdentifier()) {
-    const { name } = namePath.node;
-    if (!htmlTags.includes(name as htmlTags.htmlTags) && !svgTags.includes(name)) {
-      return name === FRAGMENT
-        ? t.identifier(FRAGMENT)
-        : path.scope.hasBinding(name)
-          ? t.identifier(name)
-          : (<any>state.opts).isCustomElement?.(name)
-              ? t.stringLiteral(name)
-              : t.callExpression(t.identifier('resolveComponent'), [t.stringLiteral(name)]);
-    }
-
-    return t.stringLiteral(name);
-  }
-
-  if (namePath.isJSXMemberExpression()) {
-    return transformJSXMemberExpression(namePath);
-  }
-  throw new Error(`getTag: ${namePath.type} is not supported`);
-};
-
 export const shouldTransformedToSlots = (tag: string) =>
   !(tag.match(new RegExp(`^_?${FRAGMENT}\\d*$`)) || tag === KEEP_ALIVE);
 
@@ -69,4 +37,36 @@ export const checkIsComponent = (path: NodePath<t.JSXOpeningElement>, state: Plu
     !htmlTags.includes(tag as htmlTags.htmlTags) &&
     !svgTags.includes(tag)
   );
+};
+
+/**
+ * Get tag (first attribute for h) from JSXOpeningElement
+ * @param path JSXElement
+ * @param state State
+ * @returns Identifier | StringLiteral | MemberExpression | CallExpression
+ */
+export const getTag = (
+  path: NodePath<t.JSXElement>,
+  state: PluginPass,
+): t.Identifier | t.CallExpression | t.StringLiteral | t.MemberExpression => {
+  const namePath = path.get('openingElement').get('name');
+  if (namePath.isJSXIdentifier()) {
+    const { name } = namePath.node;
+    if (!htmlTags.includes(name as htmlTags.htmlTags) && !svgTags.includes(name)) {
+      return name === FRAGMENT
+        ? t.identifier(FRAGMENT)
+        : path.scope.hasBinding(name)
+          ? t.identifier(name)
+          : (<any>state.opts).isCustomElement?.(name)
+              ? t.stringLiteral(name)
+              : t.callExpression(t.identifier('resolveComponent'), [t.stringLiteral(name)]);
+    }
+
+    return t.stringLiteral(name);
+  }
+
+  if (namePath.isJSXMemberExpression()) {
+    return transformJSXMemberExpression(namePath);
+  }
+  throw new Error(`getTag: ${namePath.type} is not supported`);
 };

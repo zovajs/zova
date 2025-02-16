@@ -1,4 +1,4 @@
-import { shallowRef } from 'vue';
+import { getCurrentInstance, shallowRef } from 'vue';
 import { IN_BROWSER } from '../util/index.mjs';
 // Composables
 import { useDisplay } from './display.mjs';

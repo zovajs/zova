@@ -14,10 +14,15 @@ export function printBanner(_context: ConfigContext, flavor: string) {
   };
 
   function _print(mode: string, appMode: string) {
+    // eslint-disable-next-line
     console.log(chalk.yellow('\n============ Zova Meta ============'));
+    // eslint-disable-next-line
     console.log(`vite mode ......... ${chalk.cyan(mode)}`);
+    // eslint-disable-next-line
     console.log(`app mode .......... ${chalk.cyan(appMode)}`);
+    // eslint-disable-next-line
     console.log(`flavor ............ ${chalk.cyan(flavor)}`);
+    // eslint-disable-next-line
     console.log('\n');
   }
 }

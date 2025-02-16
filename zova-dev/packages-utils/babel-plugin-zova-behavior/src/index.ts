@@ -109,7 +109,7 @@ function insertImport(path: NodePath<t.Program>) {
   path.get('body')[0].insertBefore(nodeImport);
 }
 
-const buildProps = (path: NodePath<t.JSXElement>, state: PluginPass) => {
+function buildProps(path: NodePath<t.JSXElement>, state: PluginPass) {
   const tag = getTag(path, state);
   return {
     tag,

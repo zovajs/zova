@@ -57,6 +57,7 @@ export class ViteNode {
         : this.renderApp;
     if (updates.size) {
       const time = Math.round((performance.now() - start) * 1000) / 1000;
+      // eslint-disable-next-line
       console.info(`Vite server hmr ${updates.size} files`, time ? `in ${time}ms` : '');
     }
     return this.renderApp;

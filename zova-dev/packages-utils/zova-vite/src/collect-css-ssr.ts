@@ -23,6 +23,7 @@ const moduleIsStyle = (mod: ModuleNode) =>
 function getCssContent(mod) {
   if (mod.ssrModule) return mod.ssrModule.default;
   const __vite_ssr_exports__ = { default: '' };
+  // eslint-disable-next-line
   eval(mod.ssrTransformResult.code);
   return __vite_ssr_exports__.default;
 }
