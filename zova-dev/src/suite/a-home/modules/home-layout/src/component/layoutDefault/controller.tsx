@@ -1,12 +1,12 @@
+import type { ModelTabs, ModelTabsOptions, ScopeModuleATabs } from 'zova-module-a-tabs';
+import type { ModelAuth, ModelUser } from 'zova-module-home-user';
+import type { ModelMenu } from '../../model/menu.js';
 import { BeanControllerBase, Use, UseScope } from 'zova';
 import { Controller } from 'zova-module-a-bean';
-import { ModelMenu } from '../../model/menu.js';
-import { ModelAuth, ModelUser } from 'zova-module-home-user';
-import { ModelTabs, ModelTabsOptions, ScopeModuleATabs } from 'zova-module-a-tabs';
 
 export interface ControllerLayoutDefaultProps {}
 
-export type ControllerLayoutDefaultEmits = {};
+export interface ControllerLayoutDefaultEmits {}
 
 export interface ControllerLayoutDefaultSlots {}
 
@@ -19,10 +19,13 @@ export class ControllerLayoutDefault extends BeanControllerBase {
 
   @Use()
   $$modelMenu: ModelMenu;
+
   @Use()
   $$modelAuth: ModelAuth;
+
   @Use()
   $$modelUser: ModelUser;
+
   @Use()
   $$modelTabs: ModelTabs;
 

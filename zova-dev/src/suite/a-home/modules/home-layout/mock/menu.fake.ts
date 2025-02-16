@@ -6,7 +6,7 @@ const __MenuData = [
     caption: '',
     icon: '::home',
     to: '/',
-    //to: '/home/index',
+    // to: '/home/index',
   },
   {
     folder: true,
@@ -83,7 +83,7 @@ const __MenuData = [
         caption: 'Model: Unified Data Source',
         icon: '',
         to: '/todo',
-        //to: '/demo/todo/todo',
+        // to: '/demo/todo/todo',
       },
     ],
   },

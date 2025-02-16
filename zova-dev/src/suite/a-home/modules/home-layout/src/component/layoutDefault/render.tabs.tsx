@@ -1,8 +1,8 @@
-import { BeanRenderBase, ClientOnly, ZovaIcon, icon } from 'zova';
-import { __ThisModule__ } from '../../.metadata/this.js';
-import { VNode, withModifiers } from 'vue';
-import { ZRouterViewTabs } from 'zova-module-a-tabs';
+import type { VNode } from 'vue';
+import { withModifiers } from 'vue';
+import { BeanRenderBase, ClientOnly, icon, ZovaIcon } from 'zova';
 import { Render } from 'zova-module-a-bean';
+import { ZRouterViewTabs } from 'zova-module-a-tabs';
 
 @Render()
 export class RenderTabs extends BeanRenderBase {
@@ -33,7 +33,8 @@ export class RenderTabs extends BeanRenderBase {
               onClick={withModifiers(() => {
                 this.$$modelTabs.deleteTab(tab);
               }, ['stop'])}
-            ></ZovaIcon>
+            >
+            </ZovaIcon>
           )}
         </a>
       );

@@ -1,8 +1,8 @@
+import type { ApiAuthLoginParams } from '../../api/auth.js';
+import type { ModelAuth } from '../../model/auth.js';
+import { withModifiers } from 'vue';
 import { BeanControllerPageBase, Use } from 'zova';
 import { Controller } from 'zova-module-a-bean';
-import { ApiAuthLoginParams } from '../../api/auth.js';
-import { ModelAuth } from '../../model/auth.js';
-import { withModifiers } from 'vue';
 
 @Controller()
 export class ControllerPageLogin extends BeanControllerPageBase {
@@ -78,7 +78,7 @@ export class ControllerPageLogin extends BeanControllerPageBase {
                   </label>
                 </div>
 
-                <button type="submit" class={'btn mt-2 w-full btn-primary'}>
+                <button type="submit" class="btn mt-2 w-full btn-primary">
                   {this.scope.locale.Login()}
                 </button>
               </form>

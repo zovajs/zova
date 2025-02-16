@@ -1,14 +1,16 @@
-import { ComponentInternalInstance, KeepAlive, nextTick, Transition } from 'vue';
-import { RouteLocationNormalizedLoaded, RouterView } from 'vue-router';
+import type { ComponentInternalInstance } from 'vue';
+import type { RouteLocationNormalizedLoaded } from 'vue-router';
+import type { ModelTabs } from '../../model/tabs.js';
+import { KeepAlive, nextTick, Transition } from 'vue';
+import { RouterView } from 'vue-router';
 import { BeanControllerBase, cast, Use } from 'zova';
 import { Controller } from 'zova-module-a-bean';
-import { ModelTabs } from '../../model/tabs.js';
 
 export interface ControllerRouterViewTabsSlots {}
 
 export interface ControllerRouterViewTabsProps {}
 
-export type ControllerRouterViewTabsEmits = {};
+export interface ControllerRouterViewTabsEmits {}
 
 export interface RouterViewSlotParams {
   Component: ComponentInternalInstance;
