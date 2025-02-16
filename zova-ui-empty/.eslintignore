@@ -1,8 +1,0 @@
-**/dist
-/distMockServer
-/src-capacitor
-/src-cordova
-/.zova
-/node_modules
-.eslintrc.cjs
-vite.config.ts.timestamp-*
