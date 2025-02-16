@@ -1,27 +1,31 @@
 /** locale: end */
 /** scope: begin */
-import type { BeanScopeUtil, TypeLocaleBase, TypeModuleLocales } from 'zova';
+import {
+  BeanScopeBase,
+  BeanScopeUtil,
+  TypeLocaleBase,
+  TypeModuleLocales,
+} from 'zova';
+import { Scope } from 'zova-module-a-bean';
 /** api: end */
 /** api: begin */
-import type { ApiAuth } from '../api/auth.js';
-import type { ApiUser } from '../api/user.js';
-/** model: end */
-/** model: begin */
-import type { ModelAuth } from '../model/auth.js';
+import { ApiAuth } from '../api/auth.js';
 /** api: end */
 /** api: begin */
 
-import type { ModelUser } from '../model/user.js';
+import { ApiUser } from '../api/user.js';
+
+/** locale: begin */
+import locale_en_us from '../config/locale/en-us.js';
+import locale_zh_cn from '../config/locale/zh-cn.js';
+/** model: end */
+/** model: begin */
+import { ModelAuth } from '../model/auth.js';
+import { ModelUser } from '../model/user.js';
 
 /** controller: end */
 /** controller: begin */
-import type { ControllerPageLogin } from '../page/login/controller.jsx';
-import { BeanScopeBase } from 'zova';
-import { Scope } from 'zova-module-a-bean';
-/** locale: begin */
-import locale_en_us from '../config/locale/en-us.js';
-
-import locale_zh_cn from '../config/locale/zh-cn.js';
+import { ControllerPageLogin } from '../page/login/controller.jsx';
 /** api: begin */
 import 'zova';
 import 'zova';
@@ -136,7 +140,9 @@ declare module 'zova' {
   }
 }
 
-export function locale<K extends keyof (typeof locales)[TypeLocaleBase]>(key: K): `home-user::${K}` {
+export function locale<K extends keyof (typeof locales)[TypeLocaleBase]>(
+  key: K,
+): `home-user::${K}` {
   return `home-user::${key}`;
 }
 /** scope: end */

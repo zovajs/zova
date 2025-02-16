@@ -1,27 +1,29 @@
-import type { z } from 'zod';
-import type { TypePageParamsQuery } from 'zova';
+import { z } from 'zod';
+import { TypePageParamsQuery } from 'zova';
 /** api: end */
 /** api: begin */
 
 /** scope: begin */
-import type { BeanScopeUtil } from 'zova';
+import { BeanScopeBase, BeanScopeUtil } from 'zova';
+
+import { Scope } from 'zova-module-a-bean';
 /** api: end */
 /** api: begin */
-import type { ApiTodo } from '../api/todo.js';
-
+import { ApiTodo } from '../api/todo.js';
 /** model: end */
 /** model: begin */
-import type { ModelTodo } from '../model/todo.js';
+import { ModelTodo } from '../model/todo.js';
+
 /** controller: end */
 /** controller: begin */
-import type { ControllerPageItem } from '../page/item/controller.jsx';
-import type { ControllerPageTodo } from '../page/todo/controller.jsx';
-
-import { BeanScopeBase } from 'zova';
-import { Scope } from 'zova-module-a-bean';
+import { ControllerPageItem } from '../page/item/controller.jsx';
 /** controller: end */
 /** pages: begin */
-import { ControllerPageItemSchemaParams, ControllerPageItemSchemaQuery } from '../page/item/controller.jsx';
+import {
+  ControllerPageItemSchemaParams,
+  ControllerPageItemSchemaQuery,
+} from '../page/item/controller.jsx';
+import { ControllerPageTodo } from '../page/todo/controller.jsx';
 /** api: begin */
 import 'zova';
 import 'zova';
@@ -106,7 +108,10 @@ declare module 'zova' {
     '/demo/todo/todo': undefined;
   }
   export interface IPageNameRecord {
-    'demo-todo:item': TypePageParamsQuery<NSControllerPageItem.QueryInput, NSControllerPageItem.ParamsInput>;
+    'demo-todo:item': TypePageParamsQuery<
+      NSControllerPageItem.QueryInput,
+      NSControllerPageItem.ParamsInput
+    >;
   }
 }
 export const pagePathSchemas = {};

@@ -1,6 +1,5 @@
 /** scope: begin */
-import type { BeanScopeUtil } from 'zova';
-import { BeanScopeBase } from 'zova';
+import { BeanScopeBase, BeanScopeUtil } from 'zova';
 import { Scope } from 'zova-module-a-bean';
 
 import 'zova';

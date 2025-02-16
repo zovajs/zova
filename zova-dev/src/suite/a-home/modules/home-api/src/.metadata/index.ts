@@ -1,19 +1,18 @@
 /** service: end */
 /** scope: begin */
-import type { BeanScopeUtil } from 'zova';
+import { BeanScopeBase, BeanScopeUtil } from 'zova';
+import { Scope } from 'zova-module-a-bean';
 /** api: end */
 /** api: begin */
-import type { ApiHome } from '../api/home.js';
-import type { ApiOnion } from '../api/onion.js';
+import { ApiHome } from '../api/home.js';
+/** api: end */
+/** api: begin */
+
+import { ApiOnion } from '../api/onion.js';
+
 /** service: end */
 /** service: begin */
-import type { ServiceJwtAdapter } from '../service/jwtAdapter.js';
-/** api: end */
-/** api: begin */
-
-import { BeanScopeBase } from 'zova';
-
-import { Scope } from 'zova-module-a-bean';
+import { ServiceJwtAdapter } from '../service/jwtAdapter.js';
 /** api: begin */
 import 'zova';
 import 'zova';

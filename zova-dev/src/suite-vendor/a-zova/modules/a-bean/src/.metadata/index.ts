@@ -1,15 +1,14 @@
 /** service: end */
 /** scope: begin */
-import type { BeanScopeUtil } from 'zova';
+import { BeanScopeBase, BeanScopeUtil } from 'zova';
 /** bean: end */
 /** bean: begin */
-import type { BeanOnion } from '../bean/bean.onion.js';
+import { BeanOnion } from '../bean/bean.onion.js';
+import { Scope } from '../lib/scope.js';
+
 /** service: end */
 /** service: begin */
-import type { ServiceAop } from '../service/aop.js';
-import { BeanScopeBase } from 'zova';
-
-import { Scope } from '../lib/scope.js';
+import { ServiceAop } from '../service/aop.js';
 /** bean: begin */
 import 'zova';
 import 'zova';
@@ -35,7 +34,11 @@ declare module 'zova' {
 /** service: begin */
 export * from '../service/aop.js';
 export * from '../service/onion_.js';
-declare module 'zova' {}
+declare module 'zova-module-a-bean' {
+  export interface IServiceRecord {
+    'a-bean:aop': never;
+  }
+}
 declare module 'zova-module-a-bean' {
   export interface ServiceAop {
     /** @internal */

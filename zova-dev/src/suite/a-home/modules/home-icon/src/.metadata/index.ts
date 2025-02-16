@@ -1,7 +1,6 @@
 /** icons: end */
 /** scope: begin */
-import type { BeanScopeUtil } from 'zova';
-import { BeanScopeBase } from 'zova';
+import { BeanScopeBase, BeanScopeUtil } from 'zova';
 import { Scope } from 'zova-module-a-bean';
 /** icons: begin */
 import icon_auth from './icons/groups/auth.svg';

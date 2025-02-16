@@ -1,59 +1,73 @@
+import { RequiredSome } from 'zova';
 /** locale: end */
 /** scope: begin */
-import type { BeanScopeUtil, TypeLocaleBase, TypeModuleConfig, TypeModuleLocales } from 'zova';
-import type { RequiredSome } from 'zova';
+import {
+  BeanScopeBase,
+  BeanScopeUtil,
+  TypeLocaleBase,
+  TypeModuleConfig,
+  TypeModuleLocales,
+} from 'zova';
 /** api: end */
 /** api: begin */
 
+import { Scope } from 'zova-module-a-bean';
+
 /** api: end */
 /** api: begin */
-import type { ApiMenu } from '../api/menu.js';
-
+import { ApiMenu } from '../api/menu.js';
 /** controller: end */
 /** controller: begin */
-import type { ControllerEssentialLink } from '../component/essentialLink/controller.jsx';
+import { ControllerEssentialLink } from '../component/essentialLink/controller.jsx';
 /** components: begin */
-import type { ControllerEssentialLinkEmits, ControllerEssentialLinkSlots } from '../component/essentialLink/controller.jsx';
-import type { ControllerLayoutDefault } from '../component/layoutDefault/controller.jsx';
+import {
+  ControllerEssentialLinkEmits,
+  ControllerEssentialLinkSlots,
+} from '../component/essentialLink/controller.jsx';
 
-import type { ControllerLayoutDefaultEmits, ControllerLayoutDefaultSlots } from '../component/layoutDefault/controller.jsx';
+import { ControllerLayoutDefault } from '../component/layoutDefault/controller.jsx';
+import {
+  ControllerLayoutDefaultEmits,
+  ControllerLayoutDefaultSlots,
+} from '../component/layoutDefault/controller.jsx';
 /** render: end */
 /** render: begin */
-import type { RenderContent } from '../component/layoutDefault/render.content.jsx';
-import type { RenderHeader } from '../component/layoutDefault/render.header.jsx';
-import type { RenderLayoutDefault } from '../component/layoutDefault/render.jsx';
-import type { RenderLocale } from '../component/layoutDefault/render.locale.jsx';
+import { RenderContent } from '../component/layoutDefault/render.content.jsx';
+import { RenderHeader } from '../component/layoutDefault/render.header.jsx';
+import { RenderLayoutDefault } from '../component/layoutDefault/render.jsx';
 /** controller: end */
 
-import type { RenderMenu } from '../component/layoutDefault/render.menu.jsx';
-import type { RenderSidebar } from '../component/layoutDefault/render.sidebar.jsx';
-import type { RenderTabs } from '../component/layoutDefault/render.tabs.jsx';
-import type { RenderTheme } from '../component/layoutDefault/render.theme.jsx';
-import type { RenderUser } from '../component/layoutDefault/render.user.jsx';
+import { RenderLocale } from '../component/layoutDefault/render.locale.jsx';
+import { RenderMenu } from '../component/layoutDefault/render.menu.jsx';
+import { RenderSidebar } from '../component/layoutDefault/render.sidebar.jsx';
+import { RenderTabs } from '../component/layoutDefault/render.tabs.jsx';
+import { RenderTheme } from '../component/layoutDefault/render.theme.jsx';
+import { RenderUser } from '../component/layoutDefault/render.user.jsx';
 /** style: end */
 /** style: begin */
-import type { StyleLayoutDefault } from '../component/layoutDefault/style.js';
-import type { ControllerLayoutEmpty } from '../component/layoutEmpty/controller.jsx';
-import type { ControllerLayoutEmptyEmits, ControllerLayoutEmptySlots } from '../component/layoutEmpty/controller.jsx';
+import { StyleLayoutDefault } from '../component/layoutDefault/style.js';
+import { ControllerLayoutEmpty } from '../component/layoutEmpty/controller.jsx';
 
-import type { config } from '../config/config.js';
-/** model: end */
-/** model: begin */
-import type { ModelMenu } from '../model/menu.js';
-import { BeanScopeBase } from 'zova';
-import { Scope } from 'zova-module-a-bean';
+import {
+  ControllerLayoutEmptyEmits,
+  ControllerLayoutEmptySlots,
+} from '../component/layoutEmpty/controller.jsx';
+import { config } from '../config/config.js';
 /** config: end */
 /** locale: begin */
 import locale_en_us from '../config/locale/en-us.js';
 import locale_zh_cn from '../config/locale/zh-cn.js';
+/** model: end */
+/** model: begin */
+import { ModelMenu } from '../model/menu.js';
 import ZEssentialLink from './component/essentialLink.vue';
 import ZLayoutDefault from './component/layoutDefault.vue';
 import ZLayoutEmpty from './component/layoutEmpty.vue';
 /** api: begin */
 import 'zova';
 import 'zova';
-
 import 'zova';
+
 import 'zova';
 import 'zova';
 import 'zova';
@@ -150,7 +164,10 @@ declare module 'zova-module-home-layout' {
   }
 
   export interface ControllerEssentialLink {
-    $props: RequiredSome<ControllerEssentialLinkProps, keyof typeof ControllerEssentialLink.$propsDefault>;
+    $props: RequiredSome<
+      ControllerEssentialLinkProps,
+      keyof typeof ControllerEssentialLink.$propsDefault
+    >;
     $emit: ControllerEssentialLinkEmits;
     $slots: ControllerEssentialLinkSlots;
   }
@@ -160,7 +177,10 @@ declare module 'zova-module-home-layout' {
   }
 
   export interface ControllerLayoutDefault {
-    $props: RequiredSome<ControllerLayoutDefaultProps, keyof typeof ControllerLayoutDefault.$propsDefault>;
+    $props: RequiredSome<
+      ControllerLayoutDefaultProps,
+      keyof typeof ControllerLayoutDefault.$propsDefault
+    >;
     $emit: ControllerLayoutDefaultEmits;
     $slots: ControllerLayoutDefaultSlots;
   }
@@ -170,7 +190,10 @@ declare module 'zova-module-home-layout' {
   }
 
   export interface ControllerLayoutEmpty {
-    $props: RequiredSome<ControllerLayoutEmptyProps, keyof typeof ControllerLayoutEmpty.$propsDefault>;
+    $props: RequiredSome<
+      ControllerLayoutEmptyProps,
+      keyof typeof ControllerLayoutEmpty.$propsDefault
+    >;
     $emit: ControllerLayoutEmptyEmits;
     $slots: ControllerLayoutEmptySlots;
   }
@@ -313,7 +336,9 @@ declare module 'zova' {
   }
 }
 
-export function locale<K extends keyof (typeof locales)[TypeLocaleBase]>(key: K): `home-layout::${K}` {
+export function locale<K extends keyof (typeof locales)[TypeLocaleBase]>(
+  key: K,
+): `home-layout::${K}` {
   return `home-layout::${key}`;
 }
 /** scope: end */

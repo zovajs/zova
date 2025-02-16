@@ -1,12 +1,11 @@
 /** monkey: end */
 /** scope: begin */
-import type { BeanScopeUtil, TypeModuleConfig } from 'zova';
+import { BeanScopeBase, BeanScopeUtil, TypeModuleConfig } from 'zova';
+import { Scope } from 'zova-module-a-bean';
 /** bean: end */
 /** bean: begin */
-import type { BeanApiBase } from '../bean/bean.apiBase.js';
-import type { config } from '../config/config.js';
-import { BeanScopeBase } from 'zova';
-import { Scope } from 'zova-module-a-bean';
+import { BeanApiBase } from '../bean/bean.apiBase.js';
+import { config } from '../config/config.js';
 /** bean: begin */
 import 'zova';
 import 'zova';

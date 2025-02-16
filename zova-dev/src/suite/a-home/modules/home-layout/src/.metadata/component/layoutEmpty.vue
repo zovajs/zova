@@ -8,7 +8,10 @@ import {
   ControllerLayoutEmpty,
 } from '../../component/layoutEmpty/controller.jsx';
 
-const props = withDefaults(defineProps<ControllerLayoutEmptyProps>(), ControllerLayoutEmpty.$propsDefault);
+const props = withDefaults(
+  defineProps<ControllerLayoutEmptyProps>(),
+  ControllerLayoutEmpty.$propsDefault,
+);
 const emit = defineEmits<ControllerLayoutEmptyEmits>();
 useController(props, emit, ControllerLayoutEmpty, undefined, undefined);
 </script>

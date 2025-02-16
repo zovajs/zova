@@ -1,61 +1,68 @@
-import type { z } from 'zod';
+import { z } from 'zod';
+import { TypePageParamsQuery } from 'zova';
+import { RequiredSome } from 'zova';
+
 /** locale: end */
 /** scope: begin */
-import type { BeanScopeUtil, TypeLocaleBase, TypeModuleLocales } from 'zova';
-import type { TypePageParamsQuery } from 'zova';
+import {
+  BeanScopeBase,
+  BeanScopeUtil,
+  TypeLocaleBase,
+  TypeModuleLocales,
+} from 'zova';
+import { IDecoratorAopOptions } from 'zova-module-a-bean';
+import { Scope } from 'zova-module-a-bean';
 
-import type { RequiredSome } from 'zova';
-import type { IDecoratorAopOptions } from 'zova-module-a-bean';
-import type { AopHome3 } from '../bean/aop.home3.jsx';
-
+import { AopHome3 } from '../bean/aop.home3.jsx';
 /** aop: end */
 /** aop: begin */
-import type { AopHome } from '../bean/aop.home.jsx';
+import { AopHome } from '../bean/aop.home.jsx';
 /** store: end */
 /** store: begin */
-import type { StoreCounter } from '../bean/store.counter.js';
+import { StoreCounter } from '../bean/store.counter.js';
 /** theme: end */
 /** theme: begin */
-import type { ThemeOrange } from '../bean/theme.orange.js';
+import { ThemeOrange } from '../bean/theme.orange.js';
 /** controller: end */
 /** controller: begin */
-import type { ControllerCard } from '../component/card/controller.jsx';
+import { ControllerCard } from '../component/card/controller.jsx';
 /** components: begin */
-import type { ControllerCardEmits, ControllerCardSlots } from '../component/card/controller.jsx';
-import type { ControllerPageComponent } from '../page/component/controller.jsx';
-import type { ControllerPageLegacy } from '../page/legacy/controller.jsx';
-import type { ControllerPageLocale } from '../page/locale/controller.jsx';
-import type { ControllerPagePinia } from '../page/pinia/controller.jsx';
-import type { ControllerPageRouteParams } from '../page/routeParams/controller.jsx';
-import type { ControllerPageRouteQuery } from '../page/routeQuery/controller.jsx';
-import type { ControllerPageRouteQueryB } from '../page/routeQueryB/controller.jsx';
-import type { ControllerPageState } from '../page/state/controller.jsx';
-import type { ControllerPageStyle } from '../page/style/controller.jsx';
-import { BeanScopeBase } from 'zova';
-import { Scope } from 'zova-module-a-bean';
+import {
+  ControllerCardEmits,
+  ControllerCardSlots,
+} from '../component/card/controller.jsx';
 /** aop: end */
 /** locale: begin */
 import locale_en_us from '../config/locale/en-us.js';
 import locale_zh_cn from '../config/locale/zh-cn.js';
-/** pages: end */
-
+import { ControllerPageComponent } from '../page/component/controller.jsx';
+import { ControllerPageLegacy } from '../page/legacy/controller.jsx';
+import { ControllerPageLocale } from '../page/locale/controller.jsx';
+import { ControllerPagePinia } from '../page/pinia/controller.jsx';
+import { ControllerPageRouteParams } from '../page/routeParams/controller.jsx';
 /** controller: end */
 /** pages: begin */
 import {
   ControllerPageRouteParamsSchemaParams,
   ControllerPageRouteParamsSchemaQuery,
 } from '../page/routeParams/controller.jsx';
+import { ControllerPageRouteQuery } from '../page/routeQuery/controller.jsx';
 import {
   ControllerPageRouteQuerySchemaParams,
   ControllerPageRouteQuerySchemaQuery,
 } from '../page/routeQuery/controller.jsx';
+import { ControllerPageRouteQueryB } from '../page/routeQueryB/controller.jsx';
 import {
   ControllerPageRouteQueryBSchemaParams,
   ControllerPageRouteQueryBSchemaQuery,
 } from '../page/routeQueryB/controller.jsx';
-import { default as ZCard } from './component/card.vue';
+/** pages: end */
 
+import { ControllerPageState } from '../page/state/controller.jsx';
+import { ControllerPageStyle } from '../page/style/controller.jsx';
+import ZCard from './component/card.vue';
 import 'zova';
+
 import 'zova';
 import 'zova';
 import 'zova';
@@ -179,30 +186,48 @@ declare module 'zova' {
 export * from '../page/state/controller.jsx';
 export namespace NSControllerPageRouteParams {
   export const paramsSchema = ControllerPageRouteParamsSchemaParams;
-  export type ParamsInput = z.input<typeof ControllerPageRouteParamsSchemaParams>;
-  export type ParamsOutput = z.output<typeof ControllerPageRouteParamsSchemaParams>;
+  export type ParamsInput = z.input<
+    typeof ControllerPageRouteParamsSchemaParams
+  >;
+  export type ParamsOutput = z.output<
+    typeof ControllerPageRouteParamsSchemaParams
+  >;
 
   export const querySchema = ControllerPageRouteParamsSchemaQuery;
   export type QueryInput = z.input<typeof ControllerPageRouteParamsSchemaQuery>;
-  export type QueryOutput = z.output<typeof ControllerPageRouteParamsSchemaQuery>;
+  export type QueryOutput = z.output<
+    typeof ControllerPageRouteParamsSchemaQuery
+  >;
 }
 export namespace NSControllerPageRouteQuery {
   export const paramsSchema = ControllerPageRouteQuerySchemaParams;
-  export type ParamsInput = z.input<typeof ControllerPageRouteQuerySchemaParams>;
-  export type ParamsOutput = z.output<typeof ControllerPageRouteQuerySchemaParams>;
+  export type ParamsInput = z.input<
+    typeof ControllerPageRouteQuerySchemaParams
+  >;
+  export type ParamsOutput = z.output<
+    typeof ControllerPageRouteQuerySchemaParams
+  >;
 
   export const querySchema = ControllerPageRouteQuerySchemaQuery;
   export type QueryInput = z.input<typeof ControllerPageRouteQuerySchemaQuery>;
-  export type QueryOutput = z.output<typeof ControllerPageRouteQuerySchemaQuery>;
+  export type QueryOutput = z.output<
+    typeof ControllerPageRouteQuerySchemaQuery
+  >;
 }
 export namespace NSControllerPageRouteQueryB {
   export const paramsSchema = ControllerPageRouteQueryBSchemaParams;
-  export type ParamsInput = z.input<typeof ControllerPageRouteQueryBSchemaParams>;
-  export type ParamsOutput = z.output<typeof ControllerPageRouteQueryBSchemaParams>;
+  export type ParamsInput = z.input<
+    typeof ControllerPageRouteQueryBSchemaParams
+  >;
+  export type ParamsOutput = z.output<
+    typeof ControllerPageRouteQueryBSchemaParams
+  >;
 
   export const querySchema = ControllerPageRouteQueryBSchemaQuery;
   export type QueryInput = z.input<typeof ControllerPageRouteQueryBSchemaQuery>;
-  export type QueryOutput = z.output<typeof ControllerPageRouteQueryBSchemaQuery>;
+  export type QueryOutput = z.output<
+    typeof ControllerPageRouteQueryBSchemaQuery
+  >;
 }
 declare module 'zova' {
   export interface IPagePathRecord {
@@ -266,7 +291,10 @@ declare module 'zova-module-demo-basic' {
   }
 
   export interface ControllerCard {
-    $props: RequiredSome<ControllerCardProps, keyof typeof ControllerCard.$propsDefault>;
+    $props: RequiredSome<
+      ControllerCardProps,
+      keyof typeof ControllerCard.$propsDefault
+    >;
     $emit: ControllerCardEmits;
     $slots: ControllerCardSlots;
   }
@@ -319,7 +347,9 @@ declare module 'zova' {
   }
 }
 
-export function locale<K extends keyof (typeof locales)[TypeLocaleBase]>(key: K): `demo-basic::${K}` {
+export function locale<K extends keyof (typeof locales)[TypeLocaleBase]>(
+  key: K,
+): `demo-basic::${K}` {
   return `demo-basic::${key}`;
 }
 /** scope: end */

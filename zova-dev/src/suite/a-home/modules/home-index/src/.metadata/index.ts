@@ -1,10 +1,9 @@
 /** scope: begin */
-import type { BeanScopeUtil } from 'zova';
+import { BeanScopeBase, BeanScopeUtil } from 'zova';
+import { Scope } from 'zova-module-a-bean';
 /** controller: end */
 /** controller: begin */
-import type { ControllerPageHome } from '../page/home/controller.jsx';
-import { BeanScopeBase } from 'zova';
-import { Scope } from 'zova-module-a-bean';
+import { ControllerPageHome } from '../page/home/controller.jsx';
 
 /** controller: begin */
 import 'zova';

@@ -1,11 +1,10 @@
 /** monkey: end */
 /** scope: begin */
-import type { BeanScopeUtil } from 'zova';
+import { BeanScopeBase, BeanScopeUtil } from 'zova';
+import { Scope } from 'zova-module-a-bean';
 /** meta: end */
 /** meta: begin */
-import type { MetaThemeHandler } from '../bean/meta.themeHandler.js';
-import { BeanScopeBase } from 'zova';
-import { Scope } from 'zova-module-a-bean';
+import { MetaThemeHandler } from '../bean/meta.themeHandler.js';
 /** meta: begin */
 import 'zova';
 import 'zova';

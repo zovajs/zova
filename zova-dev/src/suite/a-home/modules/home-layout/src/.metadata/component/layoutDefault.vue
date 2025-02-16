@@ -10,9 +10,18 @@ import {
 import { RenderLayoutDefault } from '../../component/layoutDefault/render.jsx';
 import { StyleLayoutDefault } from '../../component/layoutDefault/style.js';
 
-const props = withDefaults(defineProps<ControllerLayoutDefaultProps>(), ControllerLayoutDefault.$propsDefault);
+const props = withDefaults(
+  defineProps<ControllerLayoutDefaultProps>(),
+  ControllerLayoutDefault.$propsDefault,
+);
 const emit = defineEmits<ControllerLayoutDefaultEmits>();
-useController(props, emit, ControllerLayoutDefault, RenderLayoutDefault, StyleLayoutDefault);
+useController(
+  props,
+  emit,
+  ControllerLayoutDefault,
+  RenderLayoutDefault,
+  StyleLayoutDefault,
+);
 </script>
 
 <template>

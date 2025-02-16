@@ -1,7 +1,11 @@
 /** main: end */
 /** scope: begin */
-import type { BeanScopeUtil, TypeLocaleBase, TypeModuleLocales } from 'zova';
-import { BeanScopeBase } from 'zova';
+import {
+  BeanScopeBase,
+  BeanScopeUtil,
+  TypeLocaleBase,
+  TypeModuleLocales,
+} from 'zova';
 import { Scope } from 'zova-module-a-bean';
 /** locale: begin */
 import locale_en_us from '../config/locale/en-us.js';
@@ -34,7 +38,9 @@ declare module 'zova' {
   }
 }
 
-export function locale<K extends keyof (typeof locales)[TypeLocaleBase]>(key: K): `a-zod::${K}` {
+export function locale<K extends keyof (typeof locales)[TypeLocaleBase]>(
+  key: K,
+): `a-zod::${K}` {
   return `a-zod::${key}`;
 }
 /** scope: end */

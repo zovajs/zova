@@ -1,22 +1,21 @@
-import type { RequiredSome } from 'zova';
+import { RequiredSome } from 'zova';
 /** behaviors: end */
 /** scope: begin */
-import type { BeanScopeUtil } from 'zova';
+import { BeanScopeBase, BeanScopeUtil } from 'zova';
+import { Scope } from 'zova-module-a-bean';
 /** bean: end */
 /** bean: begin */
-import type { BeanBehavior } from '../bean/bean.behavior.js';
-import type { BeanBehaviorBase } from '../bean/bean.behaviorBase.js';
+import { BeanBehavior } from '../bean/bean.behavior.js';
+
+import { BeanBehaviorBase } from '../bean/bean.behaviorBase.js';
 /** controller: end */
 /** controller: begin */
-import type { ControllerBehavior } from '../component/behavior/controller.jsx';
-
+import { ControllerBehavior } from '../component/behavior/controller.jsx';
 /** service: end */
 /** service: begin */
-import type { ServiceComposer } from '../service/composer.js';
-import { BeanScopeBase } from 'zova';
-import { Scope } from 'zova-module-a-bean';
+import { ServiceComposer } from '../service/composer.js';
 
-import { default as ZBehavior } from './component/behavior.vue';
+import ZBehavior from './component/behavior.vue';
 /** bean: begin */
 import 'zova';
 import 'zova';
@@ -104,7 +103,10 @@ declare module 'zova-module-a-behavior' {
   }
 
   export interface ControllerBehavior {
-    $props: RequiredSome<ControllerBehaviorProps, keyof typeof ControllerBehavior.$propsDefault>;
+    $props: RequiredSome<
+      ControllerBehaviorProps,
+      keyof typeof ControllerBehavior.$propsDefault
+    >;
   }
 }
 export { default as ZBehavior } from './component/behavior.vue';

@@ -1,17 +1,16 @@
 /** monkey: end */
 /** scope: begin */
-import type { BeanScopeUtil, TypeModuleConfig } from 'zova';
+import { BeanScopeBase, BeanScopeUtil, TypeModuleConfig } from 'zova';
+import { Scope } from 'zova-module-a-bean';
 /** bean: end */
 /** bean: begin */
-import type { BeanFetch } from '../bean/bean.fetch.js';
-import type { BeanInterceptorBase } from '../bean/bean.interceptorBase.js';
-import type { config } from '../config/config.js';
+import { BeanFetch } from '../bean/bean.fetch.js';
+import { BeanInterceptorBase } from '../bean/bean.interceptorBase.js';
+
+import { config } from '../config/config.js';
 /** service: end */
 /** service: begin */
-import type { ServiceComposer } from '../service/composer.js';
-
-import { BeanScopeBase } from 'zova';
-import { Scope } from 'zova-module-a-bean';
+import { ServiceComposer } from '../service/composer.js';
 /** bean: begin */
 import 'zova';
 import 'zova';
@@ -38,7 +37,11 @@ declare module 'zova' {
 /** service: end */
 /** config: begin */
 export * from '../config/config.js';
-declare module 'zova' {}
+declare module 'zova-module-a-bean' {
+  export interface IServiceRecord {
+    'a-fetch:composer': never;
+  }
+}
 declare module 'zova-module-a-fetch' {
   export interface ServiceComposer {
     /** @internal */

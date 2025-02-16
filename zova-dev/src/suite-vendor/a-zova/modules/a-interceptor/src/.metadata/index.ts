@@ -1,16 +1,15 @@
 /** config: end */
 /** scope: begin */
-import type { BeanScopeUtil, TypeModuleConfig } from 'zova';
+import { BeanScopeBase, BeanScopeUtil, TypeModuleConfig } from 'zova';
+import { Scope } from 'zova-module-a-bean';
 /** interceptor: begin */
-import type { IInterceptorOptionsBody } from '../bean/interceptor.body.js';
+import { IInterceptorOptionsBody } from '../bean/interceptor.body.js';
 /** interceptor: end */
 /** interceptor: begin */
-import type { InterceptorBody } from '../bean/interceptor.body.js';
-import type { IInterceptorOptionsJwt } from '../bean/interceptor.jwt.js';
-import type { InterceptorJwt } from '../bean/interceptor.jwt.js';
-import type { config } from '../config/config.js';
-import { BeanScopeBase } from 'zova';
-import { Scope } from 'zova-module-a-bean';
+import { InterceptorBody } from '../bean/interceptor.body.js';
+import { IInterceptorOptionsJwt } from '../bean/interceptor.jwt.js';
+import { InterceptorJwt } from '../bean/interceptor.jwt.js';
+import { config } from '../config/config.js';
 import 'zova';
 import 'zova';
 

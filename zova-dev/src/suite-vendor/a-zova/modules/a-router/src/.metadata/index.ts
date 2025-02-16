@@ -1,17 +1,16 @@
 /** monkey: end */
 /** scope: begin */
-import type { BeanScopeUtil, TypeModuleConfig } from 'zova';
+import { BeanScopeBase, BeanScopeUtil, TypeModuleConfig } from 'zova';
+import { Scope } from 'zova-module-a-bean';
 /** bean: end */
 /** bean: begin */
-import type { BeanRouter } from '../bean/bean.router.js';
-import type { BeanRouterBase } from '../bean/bean.routerBase.js';
-import type { config } from '../config/config.js';
+import { BeanRouter } from '../bean/bean.router.js';
+import { BeanRouterBase } from '../bean/bean.routerBase.js';
+
+import { config } from '../config/config.js';
 /** service: end */
 /** service: begin */
-import type { ServiceRouter } from '../service/router.js';
-
-import { BeanScopeBase } from 'zova';
-import { Scope } from 'zova-module-a-bean';
+import { ServiceRouter } from '../service/router.js';
 /** bean: begin */
 import 'zova';
 import 'zova';
@@ -38,7 +37,11 @@ declare module 'zova' {
 /** service: end */
 /** config: begin */
 export * from '../config/config.js';
-declare module 'zova' {}
+declare module 'zova-module-a-bean' {
+  export interface IServiceRecord {
+    'a-router:router': never;
+  }
+}
 declare module 'zova-module-a-router' {
   export interface ServiceRouter {
     /** @internal */

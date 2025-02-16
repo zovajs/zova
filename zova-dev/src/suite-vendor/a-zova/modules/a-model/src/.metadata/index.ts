@@ -1,16 +1,15 @@
 /** monkey: end */
 /** scope: begin */
-import type { BeanScopeUtil, TypeModuleConfig } from 'zova';
+import { BeanScopeBase, BeanScopeUtil, TypeModuleConfig } from 'zova';
+import { Scope } from 'zova-module-a-bean';
 /** bean: end */
 /** bean: begin */
-import type { BeanModelBase } from '../bean/bean.modelBase.js';
-import type { config } from '../config/config.js';
+import { BeanModelBase } from '../bean/bean.modelBase.js';
+
+import { config } from '../config/config.js';
 /** service: end */
 /** service: begin */
-import type { ServiceStorage } from '../service/storage.js';
-
-import { BeanScopeBase } from 'zova';
-import { Scope } from 'zova-module-a-bean';
+import { ServiceStorage } from '../service/storage.js';
 /** bean: begin */
 import 'zova';
 import 'zova';
@@ -30,7 +29,11 @@ declare module 'zova' {
 /** service: end */
 /** config: begin */
 export * from '../config/config.js';
-declare module 'zova' {}
+declare module 'zova-module-a-bean' {
+  export interface IServiceRecord {
+    'a-model:storage': never;
+  }
+}
 declare module 'zova-module-a-model' {
   export interface ServiceStorage {
     /** @internal */

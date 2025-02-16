@@ -1,15 +1,14 @@
 /** monkey: end */
 /** scope: begin */
-import type { BeanScopeUtil } from 'zova';
+import { BeanScopeBase, BeanScopeUtil } from 'zova';
+import { Scope } from 'zova-module-a-bean';
 /** bean: end */
 /** bean: begin */
-import type { BeanPiniaStoreBase } from '../bean/bean.piniaStoreBase.js';
+import { BeanPiniaStoreBase } from '../bean/bean.piniaStoreBase.js';
+
 /** service: end */
 /** service: begin */
-import type { ServicePinia } from '../service/pinia.js';
-import { BeanScopeBase } from 'zova';
-
-import { Scope } from 'zova-module-a-bean';
+import { ServicePinia } from '../service/pinia.js';
 /** bean: begin */
 import 'zova';
 import 'zova';
@@ -29,7 +28,11 @@ declare module 'zova' {
 /** service: end */
 /** monkey: begin */
 export * from '../monkey.js';
-declare module 'zova' {}
+declare module 'zova-module-a-bean' {
+  export interface IServiceRecord {
+    'a-pinia:pinia': never;
+  }
+}
 declare module 'zova-module-a-pinia' {
   export interface ServicePinia {
     /** @internal */
