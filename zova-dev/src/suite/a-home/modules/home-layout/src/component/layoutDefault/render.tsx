@@ -1,13 +1,13 @@
-import type { RenderContent } from './render.content.jsx';
-import type { RenderHeader } from './render.header.jsx';
-import type { RenderLocale } from './render.locale.jsx';
-import type { RenderMenu } from './render.menu.jsx';
-import type { RenderSidebar } from './render.sidebar.jsx';
-import type { RenderTabs } from './render.tabs.jsx';
-import type { RenderTheme } from './render.theme.jsx';
-import type { RenderUser } from './render.user.jsx';
 import { BeanRenderBase, Use } from 'zova';
 import { Render } from 'zova-module-a-bean';
+import { RenderContent } from './render.content.jsx';
+import { RenderHeader } from './render.header.jsx';
+import { RenderLocale } from './render.locale.jsx';
+import { RenderMenu } from './render.menu.jsx';
+import { RenderSidebar } from './render.sidebar.jsx';
+import { RenderTabs } from './render.tabs.jsx';
+import { RenderTheme } from './render.theme.jsx';
+import { RenderUser } from './render.user.jsx';
 
 @Render()
 export class RenderLayoutDefault extends BeanRenderBase {

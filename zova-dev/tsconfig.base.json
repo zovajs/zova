@@ -4,6 +4,7 @@
     "paths": {
       "@/*": ["./src/legacy/*"]
     },
-    "noEmit": true
+    "noEmit": true,
+    "verbatimModuleSyntax": false
   }
 }

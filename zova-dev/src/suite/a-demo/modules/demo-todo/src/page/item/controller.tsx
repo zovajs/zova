@@ -1,9 +1,9 @@
 import type { ApiTodoGetParams } from '../../api/todo.js';
-import type { ModelTodo } from '../../model/todo.js';
 import { z } from 'zod';
 import { BeanControllerPageBase, Use, useComputed } from 'zova';
 import { Controller } from 'zova-module-a-bean';
 import { ZPage } from 'zova-module-home-base';
+import { ModelTodo } from '../../model/todo.js';
 
 export const ControllerPageItemSchemaParams = z.object({
   id: z.string(),

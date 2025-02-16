@@ -1,8 +1,8 @@
 import type { ApiAuthLoginParams } from '../../api/auth.js';
-import type { ModelAuth } from '../../model/auth.js';
 import { withModifiers } from 'vue';
 import { BeanControllerPageBase, Use } from 'zova';
 import { Controller } from 'zova-module-a-bean';
+import { ModelAuth } from '../../model/auth.js';
 
 @Controller()
 export class ControllerPageLogin extends BeanControllerPageBase {

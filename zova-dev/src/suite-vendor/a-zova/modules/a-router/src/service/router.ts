@@ -1,7 +1,7 @@
-import type { BeanRouter } from '../bean/bean.router.js';
 import * as ModuleInfo from '@cabloy/module-info';
 import { Use } from 'zova';
 import { Service } from 'zova-module-a-bean';
+import { BeanRouter } from '../bean/bean.router.js';
 import { BeanRouterBase } from '../bean/bean.routerBase.js';
 
 @Service()

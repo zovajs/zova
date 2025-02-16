@@ -1,7 +1,6 @@
 import type {
   IComponentOptions,
 } from 'zova';
-import type { BeanBehavior } from '../../bean/bean.behavior.js';
 import type { ServiceComposer } from '../../service/composer.js';
 import type { IBehaviors, IBehaviorTag } from '../../types/behavior.js';
 import { createVNode } from 'vue';
@@ -15,6 +14,7 @@ import {
   Watch,
 } from 'zova';
 import { Controller } from 'zova-module-a-bean';
+import { BeanBehavior } from '../../bean/bean.behavior.js';
 import { UseBehavior } from '../../lib/useBehavior.js';
 
 export interface ControllerBehaviorProps {

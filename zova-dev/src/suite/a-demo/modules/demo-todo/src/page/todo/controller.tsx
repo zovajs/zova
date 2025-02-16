@@ -1,10 +1,10 @@
 import type { ApiTodoEntity, ApiTodoGetParams } from '../../api/todo.js';
-import type { ModelTodo } from '../../model/todo.js';
 import { withModifiers } from 'vue';
 import { RouterLink } from 'vue-router';
 import { BeanControllerPageBase, Use, uuid } from 'zova';
 import { Controller } from 'zova-module-a-bean';
 import { ZPage } from 'zova-module-home-base';
+import { ModelTodo } from '../../model/todo.js';
 
 @Controller()
 export class ControllerPageTodo extends BeanControllerPageBase {

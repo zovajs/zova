@@ -1,5 +1,5 @@
 {
-  "extends": "./tsconfig.base.json",
+  "extends": "./tsconfig.base.esm",
   "compilerOptions": {
     "composite": false,
     "declaration": false,

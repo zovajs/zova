@@ -1,8 +1,9 @@
-import type { ModelTabs, ModelTabsOptions, ScopeModuleATabs } from 'zova-module-a-tabs';
-import type { ModelAuth, ModelUser } from 'zova-module-home-user';
-import type { ModelMenu } from '../../model/menu.js';
+import type { ModelTabsOptions } from 'zova-module-a-tabs';
 import { BeanControllerBase, Use, UseScope } from 'zova';
 import { Controller } from 'zova-module-a-bean';
+import { ModelTabs, ScopeModuleATabs } from 'zova-module-a-tabs';
+import { ModelAuth, ModelUser } from 'zova-module-home-user';
+import { ModelMenu } from '../../model/menu.js';
 
 export interface ControllerLayoutDefaultProps {}
 

@@ -6,7 +6,7 @@
     "jsxImportSource": "vue",
     "lib": ["esnext", "dom"],
     "module": "ESNext",
-    "moduleResolution": "Bundler",
+    "moduleResolution": "bundler",
     "types": ["vite/client", "node"],
     "verbatimModuleSyntax": true
   }
