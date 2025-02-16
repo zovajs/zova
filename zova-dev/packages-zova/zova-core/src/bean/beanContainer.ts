@@ -506,7 +506,7 @@ export class BeanContainer {
   private _prepareBeanInstanceCommon(
     beanComposable: Functionable | undefined,
     beanFullName,
-    beanClass,
+    BeanClass,
     args,
     markReactive,
   ) {
@@ -515,10 +515,10 @@ export class BeanContainer {
     if (beanComposable) {
       beanInstance = this._createBeanComposableInstance(beanComposable, args);
     } else {
-      if (beanClass.prototype.__init__) {
-        beanInstance = new beanClass();
+      if (BeanClass.prototype.__init__) {
+        beanInstance = new BeanClass();
       } else {
-        beanInstance = new beanClass(...args);
+        beanInstance = new BeanClass(...args);
       }
     }
     // app/ctx

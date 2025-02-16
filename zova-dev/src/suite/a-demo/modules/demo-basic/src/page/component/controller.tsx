@@ -23,6 +23,7 @@ export class ControllerPageComponent extends BeanControllerPageBase {
         <ZCard
           controllerRef={ref => {
             this.cardRef = ref;
+            // eslint-disable-next-line
             console.log('cardRef.$props: ', this.cardRef?.$props);
           }}
           header="header"

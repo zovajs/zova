@@ -119,8 +119,6 @@ export class AppResource extends BeanSimple {
     // skip prefix: Bean
     if (beanClassName.toLowerCase().startsWith('bean')) {
       beanClassName = beanClassName.substring('bean'.length);
-    } else {
-      beanClassName = beanClassName;
     }
     // name
     if (!name) {

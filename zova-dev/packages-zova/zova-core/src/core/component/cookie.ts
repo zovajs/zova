@@ -41,16 +41,14 @@ export class AppCookie extends BeanSimple {
       // if it's a Date Object
       if (Object.prototype.toString.call(opts.expires) === '[object Date]') {
         expire = cast<Date>(opts.expires).toUTCString();
-      }
-      // if it's a String (eg. "15m", "1h", "13d", "1d 15m", "31s")
+      } else if (typeof opts.expires === 'string') {
+        // if it's a String (eg. "15m", "1h", "13d", "1d 15m", "31s")
       // possible units: d (days), h (hours), m (minutes), s (seconds)
-      else if (typeof opts.expires === 'string') {
         expire = parseExpireString(opts.expires);
-      }
-      // otherwise it must be a Number (defined in days)
-      else {
+      } else {
+        // otherwise it must be a Number (defined in days)
         expireValue = Number.parseFloat(opts.expires.toString());
-        expire = isNaN(expireValue) === false ? getString(expireValue * 864e5) : opts.expires;
+        expire = Number.isNaN(expireValue) === false ? getString(expireValue * 864e5) : opts.expires;
       }
     }
 

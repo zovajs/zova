@@ -134,6 +134,7 @@ function _extractRoutePathOrName(
   const content = fse.readFileSync(targetFile).toString('utf8');
   const ast = cli.helper.gogocode(content);
   if (!ast || !ast.find) {
+    // eslint-disable-next-line
     console.log(targetFile);
   }
   const astNode = ast.find('export const routes: IModuleRoute[] = [$_$]');
