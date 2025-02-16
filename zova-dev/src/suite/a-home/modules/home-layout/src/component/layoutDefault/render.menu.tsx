@@ -1,9 +1,8 @@
+import type { VNode } from 'vue';
+import type { ApiMenuEntity } from '../../api/menu.js';
 import { BeanRenderBase } from 'zova';
-import { __ThisModule__ } from '../../.metadata/this.js';
-import { ApiMenuEntity } from '../../api/menu.js';
-import { ZEssentialLink } from '../../.metadata/index.js';
 import { Render } from 'zova-module-a-bean';
-import { VNode } from 'vue';
+import { ZEssentialLink } from '../../.metadata/index.js';
 
 @Render()
 export class RenderMenu extends BeanRenderBase {

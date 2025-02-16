@@ -1,5 +1,5 @@
+import type { ApiMenuEntity } from '../api/menu.js';
 import { BeanModelBase, Model } from 'zova-module-a-model';
-import { ApiMenuEntity } from '../api/menu.js';
 
 @Model()
 export class ModelMenu extends BeanModelBase {

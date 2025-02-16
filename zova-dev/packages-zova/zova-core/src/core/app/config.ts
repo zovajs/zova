@@ -1,11 +1,11 @@
-import { ZovaConfigMeta } from '@cabloy/module-info';
-import {
-  ZovaConfigEnv,
+import type { ZovaConfigMeta } from '@cabloy/module-info';
+import type {
   IBeanScopeConfig,
+  IBeanScopeRecord,
   ILocalInfos,
   PowerPartial,
   TypeComponentLayoutRecord,
-  IBeanScopeRecord,
+  ZovaConfigEnv,
   ZovaConfigRoutes,
 } from '../../index.js';
 

@@ -1,14 +1,17 @@
-import * as localeutil from '@cabloy/localeutil';
-import { BeanSimple } from '../../bean/beanSimple.js';
-import { TypeModuleResourceLocaleModules, TypeModuleResourceLocales } from '../../types/interface/module.js';
-import {
+import type { Ref } from 'vue';
+import type {
   ILocalInfos,
   IModuleLocale,
   IModuleLocaleText,
+} from '../../bean/resource/locale/type.js';
+import type { TypeModuleResourceLocaleModules, TypeModuleResourceLocales } from '../../types/interface/module.js';
+import type { ZovaLocaleOptionalMap } from '../app/locale.js';
+import * as localeutil from '@cabloy/localeutil';
+import { ref } from 'vue';
+import { BeanSimple } from '../../bean/beanSimple.js';
+import {
   LocaleModuleNameSeparator,
 } from '../../bean/resource/locale/type.js';
-import { ZovaLocaleOptionalMap } from '../app/locale.js';
-import { ref, Ref } from 'vue';
 
 const SymbolLocaleCurrent = Symbol('SymbolLocaleCurrent');
 

@@ -1,12 +1,15 @@
-import { App, markRaw } from 'vue';
-import { BeanContainer } from '../../bean/beanContainer.js';
-import { AppMeta } from './meta.js';
-import { PluginZovaOptions } from '../../types/interface/pluginZova.js';
-import { ZovaConfig, configDefault } from './config.js';
-import { ZovaConstant, constantDefault } from './constant.js';
+import type { App } from 'vue';
+import type { BeanContainer } from '../../bean/beanContainer.js';
+import type { TypeModuleResourceConfig } from '../../types/interface/module.js';
+import type { PluginZovaOptions } from '../../types/interface/pluginZova.js';
+import type { ZovaContext } from '../context/context.js';
+import type { ZovaConfig } from './config.js';
+import type { ZovaConstant } from './constant.js';
+import { markRaw } from 'vue';
 import { cast } from '../../types/utils/cast.js';
-import { ZovaContext } from '../context/context.js';
-import { TypeModuleResourceConfig } from '../../types/interface/module.js';
+import { configDefault } from './config.js';
+import { constantDefault } from './constant.js';
+import { AppMeta } from './meta.js';
 import { AppUtil, deepExtend } from './util.js';
 
 export class ZovaApplication {

@@ -1,7 +1,7 @@
+import type { AxiosRequestConfig } from 'axios';
+import type { IApiActionOptions } from '../types/api.js';
 import { BeanBase } from 'zova';
 import { Virtual } from 'zova-module-a-bean';
-import { IApiActionOptions } from '../types/api.js';
-import { AxiosRequestConfig } from 'axios';
 
 @Virtual()
 export class BeanApiBase extends BeanBase {

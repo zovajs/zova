@@ -1,4 +1,4 @@
-import { OmitNever } from 'zova';
+import type { OmitNever } from 'zova';
 
 export interface IMetaRecord {}
 

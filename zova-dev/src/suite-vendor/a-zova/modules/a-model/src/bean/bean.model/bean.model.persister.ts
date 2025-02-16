@@ -1,10 +1,11 @@
-import { QueryMetaPersister, resolveMaxAgeTime } from '../../types/index.js';
+import type { Query, QueryKey } from '@tanstack/vue-query';
+import type { QueryMetaPersister } from '../../types/index.js';
 import { experimental_createPersister } from '@tanstack/query-persist-client-core';
-import { Query, QueryKey } from '@tanstack/vue-query';
 import localforage from 'localforage';
 import { SymbolBeanFullName } from 'zova';
-import { BeanModelLast } from './bean.model.last.js';
 import { CookieWrapper } from '../../common/cookieWrapper.js';
+import { resolveMaxAgeTime } from '../../types/index.js';
+import { BeanModelLast } from './bean.model.last.js';
 
 export class BeanModelPersister extends BeanModelLast {
   $persisterLoad<T>(queryKey: QueryKey): T | undefined {

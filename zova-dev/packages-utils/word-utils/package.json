@@ -5,6 +5,12 @@
   "publishConfig": {
     "access": "public"
   },
+  "author": "zhennann",
+  "license": "MIT",
+  "keywords": [
+    "framework",
+    "zova"
+  ],
   "exports": {
     ".": {
       "types": "./dist/esm/index.d.ts",
@@ -24,12 +30,6 @@
     "build": "rollup -c",
     "prepublishOnly": "npm run build"
   },
-  "keywords": [
-    "framework",
-    "zova"
-  ],
-  "author": "zhennann",
-  "license": "MIT",
   "devDependencies": {
     "@rollup/plugin-typescript": "^12.1.1",
     "rollup": "^4.24.0"

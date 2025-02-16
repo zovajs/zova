@@ -1,6 +1,6 @@
-import { ConfigContext } from './types.js';
-import { QuasarConf } from '@quasar/app-vite/types/configuration/conf.js';
-import { IndexAPI } from '@quasar/app-vite';
+import type { IndexAPI } from '@quasar/app-vite';
+import type { QuasarConf } from '@quasar/app-vite/types/configuration/conf.js';
+import type { ConfigContext } from './types.js';
 import chalk from 'chalk';
 
 export function printBanner(_context: ConfigContext, flavor: string) {
@@ -15,9 +15,9 @@ export function printBanner(_context: ConfigContext, flavor: string) {
 
   function _print(mode: string, appMode: string) {
     console.log(chalk.yellow('\n============ Zova Meta ============'));
-    console.log('vite mode ......... ' + chalk.cyan(mode));
-    console.log('app mode .......... ' + chalk.cyan(appMode));
-    console.log('flavor ............ ' + chalk.cyan(flavor));
+    console.log(`vite mode ......... ${chalk.cyan(mode)}`);
+    console.log(`app mode .......... ${chalk.cyan(appMode)}`);
+    console.log(`flavor ............ ${chalk.cyan(flavor)}`);
     console.log('\n');
   }
 }

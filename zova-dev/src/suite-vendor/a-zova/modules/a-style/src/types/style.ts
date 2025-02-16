@@ -1,7 +1,8 @@
-import { style } from 'typestyle';
+import type { style } from 'typestyle';
+import type { IBeanRecord } from 'zova';
+import type { BeanTheme } from '../bean/bean.theme.js';
 import 'zova';
-import { BeanTheme } from '../bean/bean.theme.js';
-import { IBeanRecord } from 'zova';
+
 declare module 'zova' {
   export interface BeanBase {
     $style: typeof style;

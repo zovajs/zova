@@ -1,3 +1,8 @@
+import type {
+  IBeanRecord,
+  IControllerData,
+} from '../bean/type.js';
+import type { Constructable } from '../decorator/index.js';
 import {
   getCurrentInstance,
   onBeforeUnmount,
@@ -7,16 +12,13 @@ import {
   useAttrs,
   useSlots,
 } from 'vue';
-import { Constructable } from '../decorator/index.js';
-import { ZovaContext } from '../core/context/index.js';
 import {
   BeanControllerIdentifier,
   BeanRenderIdentifier,
   BeanStyleIdentifier,
-  IBeanRecord,
-  IControllerData,
   SymbolControllerRefDisable,
 } from '../bean/type.js';
+import { ZovaContext } from '../core/context/index.js';
 
 export function useControllerPage<M, R, S>(
   controllerBeanFullName: Constructable<M>,
@@ -29,7 +31,7 @@ export function useControllerPage<
   SK extends keyof IBeanRecord,
 >(controllerBeanFullName: MK, renderBeanFullName?: RK, styleBeanFullName?: SK);
 // not use type string for typed params
-//export function useControllerPage(controllerBeanFullName: string, renderBeanFullName?: string, styleBeanFullName?: string);
+// export function useControllerPage(controllerBeanFullName: string, renderBeanFullName?: string, styleBeanFullName?: string);
 export function useControllerPage(
   controllerBeanFullName: Constructable | string,
   renderBeanFullName?: Constructable | string,

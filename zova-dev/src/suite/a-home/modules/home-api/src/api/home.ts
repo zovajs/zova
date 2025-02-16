@@ -1,5 +1,7 @@
-import { Api, BeanApiBase, IApiActionOptions } from 'zova-module-a-api';
-import { ApiBaseURL, type paths } from './openapi/index.js';
+import type { IApiActionOptions } from 'zova-module-a-api';
+import type { paths } from './openapi/index.js';
+import { Api, BeanApiBase } from 'zova-module-a-api';
+import { ApiBaseURL } from './openapi/index.js';
 
 /** Home_index */
 export const ApiApiHomeindexPath = '/';

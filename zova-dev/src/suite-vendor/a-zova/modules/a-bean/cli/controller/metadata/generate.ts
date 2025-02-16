@@ -1,12 +1,12 @@
-import fse from 'fs-extra';
-import { IGlobBeanFile } from '@cabloy/module-info';
-import { IMetadataCustomGenerateOptions } from '@cabloy/cli';
-import { toUpperCaseFirstChar } from '@cabloy/word-utils';
+import type { IMetadataCustomGenerateOptions } from '@cabloy/cli';
+import type { IGlobBeanFile } from '@cabloy/module-info';
+import type { IControllerInfo } from './types.js';
 import path from 'node:path';
-import { IControllerInfo } from './types.js';
+import { toUpperCaseFirstChar } from '@cabloy/word-utils';
+import fse from 'fs-extra';
+import { generateFileVue } from './generateFileVue.js';
 import { generateMetaComponent } from './generateMetaComponent.js';
 import { generateMetaPage } from './generateMetaPage.js';
-import { generateFileVue } from './generateFileVue.js';
 
 export default async function (options: IMetadataCustomGenerateOptions): Promise<string> {
   const { globFiles } = options;

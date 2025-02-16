@@ -1,7 +1,8 @@
-import { BeanBase, BeanContainer, BeanSimple, IMonkeyAppInitialize, IMonkeyBeanInit } from 'zova';
+import type { BeanBase, BeanContainer, IMonkeyAppInitialize, IMonkeyBeanInit } from 'zova';
+import { BeanSimple } from 'zova';
+import { __ThisModule__ } from './.metadata/this.js';
 import { ServiceRouter } from './service/router.js';
 import { ServiceSsr } from './service/ssr.js';
-import { __ThisModule__ } from './.metadata/this.js';
 
 export class Monkey extends BeanSimple implements IMonkeyAppInitialize, IMonkeyBeanInit {
   serviceRouter: ServiceRouter;
@@ -14,6 +15,7 @@ export class Monkey extends BeanSimple implements IMonkeyAppInitialize, IMonkeyB
     this.serviceSsr = await this.bean._newBean(ServiceSsr, false);
     await this.serviceSsr.initialize();
   }
+
   async beanInit(bean: BeanContainer, beanInstance: BeanBase) {
     const self = this;
     // $scopeBase

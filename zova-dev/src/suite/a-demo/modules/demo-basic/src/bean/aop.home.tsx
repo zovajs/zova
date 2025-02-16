@@ -1,6 +1,6 @@
+import type { ControllerPageHome } from 'zova-module-home-index';
 import { BeanAopBase, polyfillDispose } from 'zova';
 import { Aop } from 'zova-module-a-bean';
-import { ControllerPageHome } from 'zova-module-home-index';
 
 @Aop({ match: 'home-index.controller.pageHome' })
 export class AopHome extends BeanAopBase {

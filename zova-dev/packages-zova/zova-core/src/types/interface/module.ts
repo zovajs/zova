@@ -1,9 +1,9 @@
-import { IModuleInfo } from '@cabloy/module-info';
-import { ZovaApplication } from '../../core/app/application.js';
-import { IModuleMain, IMonkeyModule, IMonkeyController, IMonkeySystem } from './monkey.js';
-import { StateLock } from '../../utils/stateLock.js';
-import { Component } from 'vue';
-import { ZovaConfigMeta } from '@cabloy/module-info';
+import type { IModuleInfo } from '@cabloy/module-info';
+import type { ZovaConfigMeta } from '@cabloy/module-info';
+import type { Component } from 'vue';
+import type { ZovaApplication } from '../../core/app/application.js';
+import type { StateLock } from '../../utils/stateLock.js';
+import type { IModuleMain, IMonkeyController, IMonkeyModule, IMonkeySystem } from './monkey.js';
 
 export type TypeModuleResourceIcons = Record<string, string>;
 export type TypeModuleResourceLocales = Record<string, object>;

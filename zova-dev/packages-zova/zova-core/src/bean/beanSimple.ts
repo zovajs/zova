@@ -1,5 +1,5 @@
-import { ZovaApplication } from '../core/app/index.js';
-import { ZovaContext } from '../core/context/index.js';
+import type { ZovaApplication } from '../core/app/index.js';
+import type { ZovaContext } from '../core/context/index.js';
 
 export class BeanSimple {
   protected app: ZovaApplication;

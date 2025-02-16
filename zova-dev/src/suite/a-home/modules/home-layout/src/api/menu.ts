@@ -1,4 +1,4 @@
-import { BeanApiBase, Api } from 'zova-module-a-api';
+import { Api, BeanApiBase } from 'zova-module-a-api';
 
 export interface ApiMenuEntity {
   title: string;

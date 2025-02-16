@@ -1,7 +1,4 @@
-import { BeanBase, SymbolProxyDisable } from 'zova';
-import { ServiceOnion } from '../service/onion_.js';
-import { Bean } from '../lib/bean.js';
-import {
+import type {
   IOnionOptionsEnable,
   IOnionOptionsMatch,
   IOnionOptionsMeta,
@@ -9,6 +6,9 @@ import {
 } from '../types/onion.js';
 import { checkMeta } from '@cabloy/utils';
 import { matchSelector } from '@cabloy/word-utils';
+import { BeanBase, SymbolProxyDisable } from 'zova';
+import { Bean } from '../lib/bean.js';
+import { ServiceOnion } from '../service/onion_.js';
 
 @Bean()
 export class BeanOnion extends BeanBase {

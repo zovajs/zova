@@ -1,15 +1,15 @@
+import type { RouteRecordRaw } from 'vue-router';
+import type { IModuleLocaleText } from '../../bean/resource/locale/type.js';
+import type { Constructable } from '../../decorator/type/constructable.js';
+import type { IMonkeyController, IMonkeyModule, IMonkeySystem } from '../../types/interface/monkey.js';
 import { BeanSimple } from '../../bean/beanSimple.js';
 import { AppIcon } from '../../bean/resource/icon/icon.js';
-import { IModuleLocaleText } from '../../bean/resource/locale/type.js';
-import { Constructable } from '../../decorator/type/constructable.js';
-import { IMonkeyModule, IMonkeyController, IMonkeySystem } from '../../types/interface/monkey.js';
+import { AppComponent } from '../component/component.js';
+import { AppCookie } from '../component/cookie.js';
 import { AppError } from '../component/error.js';
 import { AppEvent } from '../component/event.js';
-import { AppComponent } from '../component/component.js';
 import { AppLocale } from '../component/locale.js';
 import { AppModule } from '../component/module.js';
-import { AppCookie } from '../component/cookie.js';
-import { RouteRecordRaw } from 'vue-router';
 
 export class AppMeta extends BeanSimple {
   module: AppModule;

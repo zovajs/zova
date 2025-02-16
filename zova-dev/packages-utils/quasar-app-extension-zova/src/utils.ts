@@ -11,5 +11,5 @@ export async function loadJSONFile(fileName: string) {
 }
 
 export async function saveJSONFile(fileName: string, json: object) {
-  await fse.writeFile(fileName, JSON.stringify(json, null, 2) + '\n');
+  await fse.writeFile(fileName, `${JSON.stringify(json, null, 2)}\n`);
 }

@@ -1,6 +1,4 @@
-import { compose } from '@cabloy/compose';
-import { BeanSimple } from '../../bean/beanSimple.js';
-import {
+import type {
   IEventRecord,
   NextEvent,
   TypeEventHandler,
@@ -8,6 +6,8 @@ import {
   TypeEventHandlersMap,
   TypeEventOff,
 } from '../../types/interface/event.js';
+import { compose } from '@cabloy/compose';
+import { BeanSimple } from '../../bean/beanSimple.js';
 import { cast } from '../../types/utils/cast.js';
 
 const __adapter = (_context, chain) => {
@@ -53,8 +53,8 @@ export class AppEvent extends BeanSimple {
       typeof nextOrDefault === 'function'
         ? cast<NextEvent<IEventRecord[K]['data'], IEventRecord[K]['result']>>(nextOrDefault)
         : async (): Promise<IEventRecord[K]['result']> => {
-            return nextOrDefault! as IEventRecord[K]['result'][K];
-          };
+          return nextOrDefault! as IEventRecord[K]['result'][K];
+        };
     return await compose(eventHandlers.concat(), __adapter)(data, next);
   }
 

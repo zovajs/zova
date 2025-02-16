@@ -1,10 +1,10 @@
-import parseArgs from 'minimist';
-import path from 'node:path';
+import type { ZovaConfigMeta, ZovaMetaAppMode, ZovaMetaFlavor } from '@cabloy/module-info';
 import { createRequire } from 'node:module';
-import moduleAlias from 'module-alias';
+import path from 'node:path';
 import fse from 'fs-extra';
 import compileTemplate from 'lodash/template.js';
-import { ZovaConfigMeta, ZovaMetaAppMode, ZovaMetaFlavor } from '@cabloy/module-info';
+import parseArgs from 'minimist';
+import moduleAlias from 'module-alias';
 
 export function getFlavor(offset: number = 2): ZovaMetaFlavor {
   return getEnvFromCli('FLAVOR', 'flavor', 'admin', offset) as ZovaMetaFlavor;

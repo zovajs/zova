@@ -1,6 +1,6 @@
+import type { VNode } from 'vue';
 import { BeanControllerBase } from 'zova';
 import { Controller } from 'zova-module-a-bean';
-import { VNode } from 'vue';
 
 export interface ControllerCardProps {
   header?: string;
@@ -8,9 +8,9 @@ export interface ControllerCardProps {
   footer?: string;
 }
 
-export type ControllerCardEmits = {
+export interface ControllerCardEmits {
   (e: 'reset', time: Date): void;
-};
+}
 
 export interface ControllerCardSlots {
   header?(): VNode;

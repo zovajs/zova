@@ -1,5 +1,5 @@
+import type { IDecoratorVueElement, IDecoratorVueWatchOptions } from '../../decorator/vue/types.js';
 import { getProperty } from '@cabloy/utils';
-import { IDecoratorVueElement, IDecoratorVueWatchOptions } from '../../decorator/vue/types.js';
 import { toLowerCaseFirstChar } from '@cabloy/word-utils';
 import { watch as vueWatch } from 'vue';
 import { getVueDecoratorValue } from './utils.js';

@@ -1,5 +1,6 @@
 {
   "name": "zova-module-a-router",
+  "type": "module",
   "version": "5.0.71",
   "title": "a-router",
   "zovaModule": {
@@ -10,7 +11,12 @@
       "a-model": "5.0.0"
     }
   },
-  "type": "module",
+  "description": "router",
+  "author": "zhennann",
+  "license": "MIT",
+  "keywords": [
+    "Zova Module"
+  ],
   "exports": {
     ".": {
       "types": [
@@ -22,12 +28,6 @@
     },
     "./*": "./*"
   },
-  "description": "router",
-  "keywords": [
-    "Zova Module"
-  ],
-  "author": "zhennann",
-  "license": "MIT",
   "files": [
     "dist",
     "src"

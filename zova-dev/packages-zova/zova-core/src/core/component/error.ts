@@ -1,7 +1,7 @@
-import { ComponentPublicInstance } from 'vue';
+import type { ComponentPublicInstance } from 'vue';
+import type { IErrorObject } from '../../bean/resource/error/errorObject.js';
+import type { ErrorSSR, IModuleError, OnErrorHandler } from '../../bean/resource/error/type.js';
 import { ErrorClass } from '../../bean/resource/error/errorClass.js';
-import { IErrorObject } from '../../bean/resource/error/errorObject.js';
-import { ErrorSSR, IModuleError, OnErrorHandler } from '../../bean/resource/error/type.js';
 
 const SymbolErrorHandlers = Symbol('SymbolErrorHandlers');
 const SymbolErrorSSR = Symbol('SymbolErrorSSR');

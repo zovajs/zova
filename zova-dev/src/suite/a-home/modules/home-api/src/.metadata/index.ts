@@ -1,8 +1,29 @@
+/** service: end */
+/** scope: begin */
+import type { BeanScopeUtil } from 'zova';
+/** api: end */
 /** api: begin */
-export * from '../api/home.js';
-export * from '../api/onion.js';
+import type { ApiHome } from '../api/home.js';
+import type { ApiOnion } from '../api/onion.js';
+/** service: end */
+/** service: begin */
+import type { ServiceJwtAdapter } from '../service/jwtAdapter.js';
+/** api: end */
+/** api: begin */
+
+import { BeanScopeBase } from 'zova';
+
+import { Scope } from 'zova-module-a-bean';
+/** api: begin */
+import 'zova';
+import 'zova';
+import 'zova';
+import 'zova';
 
 import 'zova';
+
+export * from '../api/home.js';
+export * from '../api/onion.js';
 declare module 'zova' {}
 declare module 'zova-module-home-api' {
   export interface ApiHome {
@@ -15,18 +36,10 @@ declare module 'zova-module-home-api' {
     get scope(): ScopeModuleHomeApi;
   }
 }
-/** api: end */
-/** api: begin */
-import { ApiHome } from '../api/home.js';
-import { ApiOnion } from '../api/onion.js';
 export interface IModuleApi {
   home: ApiHome;
   onion: ApiOnion;
 }
-/** api: end */
-/** api: begin */
-
-import 'zova';
 declare module 'zova' {
   export interface IBeanRecordGeneral {
     'home-api.api.home': ApiHome;
@@ -39,8 +52,6 @@ export * from '../api/openapi/index.js';
 /** openapi: end */
 /** service: begin */
 export * from '../service/jwtAdapter.js';
-
-import 'zova';
 declare module 'zova-module-a-bean' {
   export interface IServiceRecord {
     'home-api:jwtAdapter': never;
@@ -52,19 +63,11 @@ declare module 'zova-module-home-api' {
     get scope(): ScopeModuleHomeApi;
   }
 }
-/** service: end */
-/** service: begin */
-import { ServiceJwtAdapter } from '../service/jwtAdapter.js';
-import 'zova';
 declare module 'zova' {
   export interface IBeanRecordGeneral {
     'home-api.service.jwtAdapter': ServiceJwtAdapter;
   }
 }
-/** service: end */
-/** scope: begin */
-import { BeanScopeBase, BeanScopeUtil } from 'zova';
-import { Scope } from 'zova-module-a-bean';
 
 @Scope()
 export class ScopeModuleHomeApi extends BeanScopeBase {}
@@ -73,8 +76,6 @@ export interface ScopeModuleHomeApi {
   util: BeanScopeUtil;
   api: IModuleApi;
 }
-
-import 'zova';
 declare module 'zova' {
   export interface IBeanScopeRecord {
     'home-api': ScopeModuleHomeApi;

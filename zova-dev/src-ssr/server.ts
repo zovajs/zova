@@ -5,18 +5,18 @@
  * Runs in Node context.
  */
 
+import compression from 'compression';
 /**
  * Make sure to yarn add / npm install (in your project root)
  * anything you import here (except for express and compression).
  */
 import express from 'express';
-import compression from 'compression';
 import {
   ssrClose,
   ssrCreate,
   ssrListen,
-  ssrServeStaticContent,
   ssrRenderPreloadTag,
+  ssrServeStaticContent,
 } from 'quasar/wrappers';
 
 /**
@@ -59,7 +59,7 @@ export const listen = ssrListen(({ app, devHttpsApp, port }) => {
   const server = devHttpsApp || app;
   return server.listen(port, () => {
     if (process.env.PROD) {
-      console.log('Server listening at port ' + port);
+      console.log(`Server listening at port ${port}`);
     }
   });
 });

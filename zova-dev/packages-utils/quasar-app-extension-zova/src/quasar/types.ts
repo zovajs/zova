@@ -1,5 +1,5 @@
-import { ZovaConfigMeta } from '@cabloy/module-info';
-import { ZovaViteConfigOptions, ZovaViteConfigResult } from 'zova-vite';
+import type { ZovaConfigMeta } from '@cabloy/module-info';
+import type { ZovaViteConfigOptions, ZovaViteConfigResult } from 'zova-vite';
 
 export interface ConfigContext {
   configMeta?: ZovaConfigMeta;

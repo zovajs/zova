@@ -1,10 +1,10 @@
-import { IGlobBeanFile } from '@cabloy/module-info';
-import { IMetadataCustomGenerateOptions } from '@cabloy/cli';
-import { IControllerInfo } from './types.js';
+import type { IMetadataCustomGenerateOptions } from '@cabloy/cli';
+import type { IGlobBeanFile } from '@cabloy/module-info';
+import type { IControllerInfo } from './types.js';
 
 export function generateMetaComponent(
   options: IMetadataCustomGenerateOptions,
-  // eslint-disable-next-line no-undef
+
   globFiles: [IGlobBeanFile, IControllerInfo][],
 ) {
   if (globFiles.length === 0) return '';
@@ -31,7 +31,7 @@ export function generateMetaComponent(
       hasGeneric,
     } = controllerInfo;
     const componentFullName = `${moduleName}:${name}`;
-    const componentName2 = 'Z' + nameCapitalize;
+    const componentName2 = `Z${nameCapitalize}`;
     const _contentImports_parts: string[] = [];
     if (hasEmits) _contentImports_parts.push(nameEmits);
     if (hasSlots) _contentImports_parts.push(nameSlots);

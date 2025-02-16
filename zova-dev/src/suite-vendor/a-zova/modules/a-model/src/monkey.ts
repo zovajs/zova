@@ -1,7 +1,8 @@
-import { BeanBase, BeanContainer, BeanSimple, IMonkeyAppInitialize, IMonkeyBeanInit } from 'zova';
-import { ServiceStorage } from './service/storage.js';
+import type { BeanBase, BeanContainer, IMonkeyAppInitialize, IMonkeyBeanInit } from 'zova';
 import { useQueryClient } from '@tanstack/vue-query';
 import { markRaw } from 'vue';
+import { BeanSimple } from 'zova';
+import { ServiceStorage } from './service/storage.js';
 
 export class Monkey extends BeanSimple implements IMonkeyAppInitialize, IMonkeyBeanInit {
   storage: ServiceStorage;

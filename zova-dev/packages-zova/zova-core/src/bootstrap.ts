@@ -1,4 +1,4 @@
-import { App } from 'vue';
+import type { App } from 'vue';
 import { PluginFreeze } from 'vue-plugin-render-freeze';
 import { PluginBean } from './plugins/bean.js';
 

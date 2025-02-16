@@ -1,6 +1,6 @@
-import path from 'path';
+import type { IMetadataCustomGenerateOptions } from '@cabloy/cli';
+import path from 'node:path';
 import fse from 'fs-extra';
-import { IMetadataCustomGenerateOptions } from '@cabloy/cli';
 
 export default async function (options: IMetadataCustomGenerateOptions): Promise<string> {
   const { modulePath } = options;

@@ -1,6 +1,6 @@
-import { DefaultError, QueryKey, UseQueryOptions } from '@tanstack/vue-query';
-import { Ref, UnwrapRef } from 'vue';
-import { Functionable } from 'zova';
+import type { DefaultError, QueryKey, UseQueryOptions } from '@tanstack/vue-query';
+import type { Ref, UnwrapRef } from 'vue';
+import type { Functionable } from 'zova';
 
 export type NonUndefinedGuard<T> = T extends undefined ? never : T;
 

@@ -1,7 +1,18 @@
+/** monkey: end */
+/** scope: begin */
+import type { BeanScopeUtil } from 'zova';
+/** meta: end */
 /** meta: begin */
-export * from '../bean/meta.themeHandler.js';
+import type { MetaThemeHandler } from '../bean/meta.themeHandler.js';
+import { BeanScopeBase } from 'zova';
+import { Scope } from 'zova-module-a-bean';
+/** meta: begin */
+import 'zova';
+import 'zova';
 
 import 'zova';
+
+export * from '../bean/meta.themeHandler.js';
 declare module 'zova' {
   export interface IMetaRecord {
     'devui-adapter:themeHandler': never;
@@ -13,10 +24,6 @@ declare module 'zova-module-devui-adapter' {
     get scope(): ScopeModuleDevuiAdapter;
   }
 }
-/** meta: end */
-/** meta: begin */
-import { MetaThemeHandler } from '../bean/meta.themeHandler.js';
-import 'zova';
 declare module 'zova' {
   export interface IBeanRecordGeneral {
     'devui-adapter.meta.themeHandler': MetaThemeHandler;
@@ -25,10 +32,6 @@ declare module 'zova' {
 /** meta: end */
 /** monkey: begin */
 export * from '../monkey.js';
-/** monkey: end */
-/** scope: begin */
-import { BeanScopeBase, BeanScopeUtil } from 'zova';
-import { Scope } from 'zova-module-a-bean';
 
 @Scope()
 export class ScopeModuleDevuiAdapter extends BeanScopeBase {}
@@ -36,8 +39,6 @@ export class ScopeModuleDevuiAdapter extends BeanScopeBase {}
 export interface ScopeModuleDevuiAdapter {
   util: BeanScopeUtil;
 }
-
-import 'zova';
 declare module 'zova' {
   export interface IBeanScopeRecord {
     'devui-adapter': ScopeModuleDevuiAdapter;

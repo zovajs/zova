@@ -1,13 +1,15 @@
-import { AxiosRequestConfig } from 'axios';
-import {
+import type { AxiosRequestConfig } from 'axios';
+import type {
   BeanFetch,
-  BeanInterceptorBase,
   IDecoratorInterceptorOptions,
   IInterceptorRequest,
-  Interceptor,
   NextInterceptorRequest,
 } from 'zova-module-a-fetch';
-import { IJwtAdapter } from '../types/jwt.js';
+import type { IJwtAdapter } from '../types/jwt.js';
+import {
+  BeanInterceptorBase,
+  Interceptor,
+} from 'zova-module-a-fetch';
 
 export interface IInterceptorOptionsJwt extends IDecoratorInterceptorOptions {
   jwtAdapter?: string;

@@ -1,6 +1,7 @@
+import type { CookieOptions } from '../../types/index.js';
 // from: quasar/ui/src/plugins/Cookies.js
 import { BeanSimple } from '../../bean/beanSimple.js';
-import { cast, CookieOptions } from '../../types/index.js';
+import { cast } from '../../types/index.js';
 
 export class AppCookie extends BeanSimple {
   getItem(key: string): string | undefined;
@@ -10,10 +11,10 @@ export class AppCookie extends BeanSimple {
     const cookies = cookieSource.cookie ? cookieSource.cookie.split('; ') : [];
     const l = cookies.length;
     let result: Record<string, string> | undefined = key ? undefined : {};
-    let i = 0,
-      parts,
-      name,
-      cookie;
+    let i = 0;
+    let parts;
+    let name;
+    let cookie;
 
     for (; i < l; i++) {
       parts = cookies[i].split('=');
@@ -48,7 +49,7 @@ export class AppCookie extends BeanSimple {
       }
       // otherwise it must be a Number (defined in days)
       else {
-        expireValue = parseFloat(opts.expires.toString());
+        expireValue = Number.parseFloat(opts.expires.toString());
         expire = isNaN(expireValue) === false ? getString(expireValue * 864e5) : opts.expires;
       }
     }
@@ -57,13 +58,13 @@ export class AppCookie extends BeanSimple {
 
     const cookie = [
       keyValue,
-      expire !== void 0 ? '; Expires=' + expire : '', // use expires attribute, max-age is not supported by IE
-      opts.path ? '; Path=' + opts.path : '',
-      opts.domain ? '; Domain=' + opts.domain : '',
-      opts.sameSite ? '; SameSite=' + opts.sameSite : '',
+      expire !== void 0 ? `; Expires=${expire}` : '', // use expires attribute, max-age is not supported by IE
+      opts.path ? `; Path=${opts.path}` : '',
+      opts.domain ? `; Domain=${opts.domain}` : '',
+      opts.sameSite ? `; SameSite=${opts.sameSite}` : '',
       opts.httpOnly ? '; HttpOnly' : '',
       opts.secure ? '; Secure' : '',
-      opts.other ? '; ' + opts.other : '',
+      opts.other ? `; ${opts.other}` : '',
     ].join('');
 
     if (process.env.SERVER) {
@@ -113,7 +114,7 @@ function decode(string) {
 }
 
 function stringifyCookieValue(value) {
-  return encode(value === Object(value) ? JSON.stringify(value) : '' + value);
+  return encode(value === Object(value) ? JSON.stringify(value) : `${value}`);
 }
 
 function read(string) {

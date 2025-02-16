@@ -1,7 +1,7 @@
+import { z } from 'zod';
 import { BeanControllerPageBase } from 'zova';
 import { Controller } from 'zova-module-a-bean';
 import { ZPage } from 'zova-module-home-base';
-import { z } from 'zod';
 
 export const ControllerPageRouteQueryBSchemaParams = z.object({});
 
@@ -27,7 +27,7 @@ export const ControllerPageRouteQueryBSchemaQuery = z.object({
 @Controller()
 export class ControllerPageRouteQueryB extends BeanControllerPageBase {
   togglePrivate() {
-    const _private = this.$query.private ? false : true;
+    const _private = !this.$query.private;
     const query = { ...this.$query, private: _private };
     const url = this.$router.resolvePath('/demo/basic/routeQueryB', query);
     this.$router.push(url);

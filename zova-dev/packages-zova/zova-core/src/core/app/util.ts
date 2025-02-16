@@ -35,7 +35,7 @@ export class AppUtil extends BeanSimple {
   }
 }
 
-const PATH_PARAM_RE = /\{([^{}\/]+)\}/g;
+const PATH_PARAM_RE = /\{([^{}/]+)\}/g;
 export function defaultPathSerializer(pathName: string, pathParams?: Record<string, any>): string {
   if (!pathParams) return pathName;
   return pathName.replace(PATH_PARAM_RE, (_, _part) => {
@@ -70,5 +70,5 @@ export function disposeInstance(instance: any) {
 
 export function polyfillDispose(instance: any) {
   if (!instance || instance.__dispose__) return;
-  Object.getPrototypeOf(instance)['__dispose__'] = () => {};
+  Object.getPrototypeOf(instance).__dispose__ = () => {};
 }

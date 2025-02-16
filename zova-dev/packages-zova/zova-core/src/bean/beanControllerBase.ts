@@ -1,8 +1,9 @@
-import { useModel, defineOptions } from 'vue';
-import { BeanBase } from './beanBase.js';
-import { IControllerData } from './type.js';
+import type { defineOptions } from 'vue';
+import type { IControllerData } from './type.js';
+import { useModel } from 'vue';
 import { cast } from '../types/utils/cast.js';
 import { useRef } from '../vue/ref.js';
+import { BeanBase } from './beanBase.js';
 
 type Data = Record<string, unknown>;
 

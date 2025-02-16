@@ -1,6 +1,6 @@
+import type { IThemeHandler, IThemeHandlerApplyParams } from 'zova-module-a-style';
 import { BeanBase } from 'zova';
 import { Meta } from 'zova-module-a-meta';
-import { IThemeHandler, IThemeHandlerApplyParams } from 'zova-module-a-style';
 
 const __Themes = { 'demo-basic.theme.orange': 'orange', 'home-base.theme.default': '' };
 

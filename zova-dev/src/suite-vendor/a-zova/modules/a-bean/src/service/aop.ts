@@ -1,8 +1,9 @@
-import { appResource, BeanBase, Constructable, IBeanRecord, SymbolProxyDisable, Use } from 'zova';
+import type { Constructable, IBeanRecord } from 'zova';
+import type { BeanOnion } from '../bean/bean.onion.js';
+import type { IAopRecord, IDecoratorAopOptions } from '../types/aop.js';
+import type { IOnionSlice } from '../types/onion.js';
+import { appResource, BeanBase, SymbolProxyDisable, Use } from 'zova';
 import { Service } from '../lib/bean.js';
-import { BeanOnion } from '../bean/bean.onion.js';
-import { IAopRecord, IDecoratorAopOptions } from '../types/aop.js';
-import { IOnionSlice } from '../types/onion.js';
 
 @Service()
 export class ServiceAop extends BeanBase {

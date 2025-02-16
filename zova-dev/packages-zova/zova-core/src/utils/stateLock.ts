@@ -1,6 +1,5 @@
 import { reactive, watch } from 'vue';
 
-// eslint-disable-next-line
 let __counter = 0;
 
 export class StateLock {

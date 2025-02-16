@@ -1,4 +1,4 @@
-import { ZovaOnionOptionsMeta } from '@cabloy/module-info';
+import type { ZovaOnionOptionsMeta } from '@cabloy/module-info';
 
 export const SymbolUseOnionLocal = Symbol('SymbolUseOnionLocal');
 export const SymbolUseOnionOptions = Symbol('SymbolUseOnionOptions');

@@ -1,6 +1,6 @@
+import type { StoreCounter } from '../../bean/store.counter.js';
 import { BeanControllerPageBase, Use } from 'zova';
 import { Controller } from 'zova-module-a-bean';
-import { StoreCounter } from '../../bean/store.counter.js';
 import { ZPage } from 'zova-module-home-base';
 
 @Controller()

@@ -1,5 +1,5 @@
-import { SSRContext } from 'zova';
-import { App } from 'vue';
+import type { App } from 'vue';
+import type { SSRContext } from 'zova';
 
 import '../css/tailwind.css';
 import '../css/settings.scss';

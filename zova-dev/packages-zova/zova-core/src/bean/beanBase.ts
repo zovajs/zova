@@ -1,14 +1,14 @@
-import { RendererNode, WatchHandle } from 'vue';
-import { BeanBaseSimple, SymbolModuleBelong } from './beanBaseSimple.js';
-import { IBeanScopeRecord, TypeBeanScopeRecordKeys } from './type.js';
-import { AppEvent } from '../core/component/event.js';
-import { IModuleLocaleText } from './resource/index.js';
-import { SSRMetaOptions } from '../types/interface/ssr.js';
+import type { RendererNode, WatchHandle } from 'vue';
+import type { AppEvent } from '../core/component/event.js';
+import type { CtxSSR } from '../core/context/ssr.js';
+import type { FunctionAsync } from '../decorator/type/functionable.js';
+import type { SSRMetaOptions } from '../types/interface/ssr.js';
+import type { IModuleLocaleText } from './resource/index.js';
+import type { IBeanScopeRecord, TypeBeanScopeRecordKeys } from './type.js';
 import { useMeta } from '../core/context/useMeta.js';
-import { CtxSSR } from '../core/context/ssr.js';
-import { getVueDecoratorValue } from './vueDecorators/utils.js';
 import { cast } from '../types/utils/cast.js';
-import { FunctionAsync } from '../decorator/type/functionable.js';
+import { BeanBaseSimple, SymbolModuleBelong } from './beanBaseSimple.js';
+import { getVueDecoratorValue } from './vueDecorators/utils.js';
 
 const SymbolText = Symbol('SymbolText');
 

@@ -1,17 +1,17 @@
-import { ZovaViteConfigChunkVendor, ZovaViteConfigOptions } from './types.js';
-import path from 'path';
-import * as dotenv from '@cabloy/dotenv';
-import { getEnvMeta } from './utils.js';
-import { glob } from '@cabloy/module-glob';
-import { IBundleVendor, ZovaConfigMeta } from '@cabloy/module-info';
+import type { IBundleVendor, ZovaConfigMeta } from '@cabloy/module-info';
+import type { ZovaViteConfigChunkVendor, ZovaViteConfigOptions } from './types.js';
 import crypto from 'node:crypto';
+import path from 'node:path';
+import * as dotenv from '@cabloy/dotenv';
+import { glob } from '@cabloy/module-glob';
+import { getEnvMeta } from './utils.js';
 
 const __ModuleLibs = [
-  /src\/module\/([^\/]*?)\//,
-  /src\/module-vendor\/([^\/]*?)\//,
-  /src\/suite\/.*\/modules\/([^\/]*?)\//,
-  /src\/suite-vendor\/.*\/modules\/([^\/]*?)\//,
-  /\/zova-module-([^\/]*?)\//,
+  /src\/module\/([^/]*)\//,
+  /src\/module-vendor\/([^/]*)\//,
+  /src\/suite\/.*\/modules\/([^/]*)\//,
+  /src\/suite-vendor\/.*\/modules\/([^/]*)\//,
+  /\/zova-module-([^/]*)\//,
 ];
 
 const __ZovaManualChunkVendors = [
@@ -57,10 +57,10 @@ export function createConfigUtils(
   configMeta: ZovaConfigMeta,
   configOptions: ZovaViteConfigOptions,
 ): {
-  loadEnvs: () => { [name: string]: string };
-  loadModulesMeta: () => ReturnType<typeof glob>;
-  configManualChunk: (id: string) => string;
-} {
+    loadEnvs: () => { [name: string]: string };
+    loadModulesMeta: () => ReturnType<typeof glob>;
+    configManualChunk: (id: string) => string;
+  } {
   let __zovaManualChunkVendors_runtime: ZovaViteConfigChunkVendor[];
   let __zovaManualChunkVendors_runtime_modulesBefore: ZovaViteConfigChunkVendor[];
   let __modulesMeta: Awaited<ReturnType<typeof glob>>;
@@ -132,8 +132,8 @@ export function createConfigUtils(
 
   function __configManualChunk_adjustId(id: string) {
     //
-    id = id.replace(/\\/gi, '/');
-    const appDir = configOptions.appDir.replace(/\\/gi, '/');
+    id = id.replace(/\\/g, '/');
+    const appDir = configOptions.appDir.replace(/\\/g, '/');
     //
     let index = id.indexOf(appDir);
     if (index > -1) {
@@ -157,7 +157,7 @@ export function createConfigUtils(
 
   function _configManualChunk_Obfuscation(output: string) {
     if (!__chunkNameHashes[output]) {
-      __chunkNameHashes[output] = 'Chunk-' + crypto.createHash('sha1').update(output).digest('hex').slice(0, 6);
+      __chunkNameHashes[output] = `Chunk-${crypto.createHash('sha1').update(output).digest('hex').slice(0, 6)}`;
     }
     return __chunkNameHashes[output];
   }
@@ -232,7 +232,7 @@ export function createConfigUtils(
       return item.match.some(item => {
         if (typeof item === 'string') {
           const matchItem = item[0] === '~' ? item.substring(1) : `/${item}/`;
-          return id.indexOf(matchItem) > -1;
+          return id.includes(matchItem);
         }
         return item.test(id);
       });

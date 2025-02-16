@@ -2,8 +2,8 @@
   "extends": "../../tsconfig.base.cjs.json",
   "compilerOptions": {
     "rootDir": "src",
-    "outDir": "dist/cjs",
-    "module": "NodeNext"
+    "module": "NodeNext",
+    "outDir": "dist/cjs"
   },
   "include": ["src/**/*"]
 }

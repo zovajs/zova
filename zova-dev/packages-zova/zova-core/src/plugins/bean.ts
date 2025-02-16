@@ -1,5 +1,5 @@
-import { App } from 'vue';
-import { ZovaContext } from '../core/index.js';
+import type { App } from 'vue';
+import type { ZovaContext } from '../core/index.js';
 
 export const PluginBean = {
   install(app: App) {

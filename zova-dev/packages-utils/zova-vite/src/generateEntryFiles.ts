@@ -1,11 +1,11 @@
-import fse from 'fs-extra';
-import { glob } from '@cabloy/module-glob';
-import chalk from 'chalk';
+import type { glob } from '@cabloy/module-glob';
+import type { ZovaConfigMeta } from '@cabloy/module-info';
+import type { ZovaViteConfigOptions } from './types.js';
 import path from 'node:path';
-import { copyTemplateFile, getEnvMeta, resolveTemplatePath } from './utils.js';
 import { getEnvFiles } from '@cabloy/dotenv';
-import { ZovaViteConfigOptions } from './types.js';
-import { ZovaConfigMeta } from '@cabloy/module-info';
+import chalk from 'chalk';
+import fse from 'fs-extra';
+import { copyTemplateFile, getEnvMeta, resolveTemplatePath } from './utils.js';
 
 export async function generateEntryFiles(
   configMeta: ZovaConfigMeta,
@@ -79,9 +79,9 @@ export async function generateEntryFiles(
     await copyTemplateFile(fileSrc, fileDest, { modules, moduleNames });
   }
 
-  //import tmp from 'tmp';
-  //import { build as esBuild } from 'esbuild';
-  //import { pathToFileURL } from 'node:url';
+  // import tmp from 'tmp';
+  // import { build as esBuild } from 'esbuild';
+  // import { pathToFileURL } from 'node:url';
 
   // function _pathToHref(fileName: string): string {
   //   return Path.sep === '\\' ? pathToFileURL(fileName).href : fileName;

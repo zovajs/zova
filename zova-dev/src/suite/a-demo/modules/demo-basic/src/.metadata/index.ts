@@ -1,7 +1,73 @@
+import type { z } from 'zod';
+/** locale: end */
+/** scope: begin */
+import type { BeanScopeUtil, TypeLocaleBase, TypeModuleLocales } from 'zova';
+import type { TypePageParamsQuery } from 'zova';
+
+import type { RequiredSome } from 'zova';
+import type { IDecoratorAopOptions } from 'zova-module-a-bean';
+import type { AopHome3 } from '../bean/aop.home3.jsx';
+
+/** aop: end */
+/** aop: begin */
+import type { AopHome } from '../bean/aop.home.jsx';
+/** store: end */
+/** store: begin */
+import type { StoreCounter } from '../bean/store.counter.js';
+/** theme: end */
 /** theme: begin */
-export * from '../bean/theme.orange.js';
+import type { ThemeOrange } from '../bean/theme.orange.js';
+/** controller: end */
+/** controller: begin */
+import type { ControllerCard } from '../component/card/controller.jsx';
+/** components: begin */
+import type { ControllerCardEmits, ControllerCardSlots } from '../component/card/controller.jsx';
+import type { ControllerPageComponent } from '../page/component/controller.jsx';
+import type { ControllerPageLegacy } from '../page/legacy/controller.jsx';
+import type { ControllerPageLocale } from '../page/locale/controller.jsx';
+import type { ControllerPagePinia } from '../page/pinia/controller.jsx';
+import type { ControllerPageRouteParams } from '../page/routeParams/controller.jsx';
+import type { ControllerPageRouteQuery } from '../page/routeQuery/controller.jsx';
+import type { ControllerPageRouteQueryB } from '../page/routeQueryB/controller.jsx';
+import type { ControllerPageState } from '../page/state/controller.jsx';
+import type { ControllerPageStyle } from '../page/style/controller.jsx';
+import { BeanScopeBase } from 'zova';
+import { Scope } from 'zova-module-a-bean';
+/** aop: end */
+/** locale: begin */
+import locale_en_us from '../config/locale/en-us.js';
+import locale_zh_cn from '../config/locale/zh-cn.js';
+/** pages: end */
+
+/** controller: end */
+/** pages: begin */
+import {
+  ControllerPageRouteParamsSchemaParams,
+  ControllerPageRouteParamsSchemaQuery,
+} from '../page/routeParams/controller.jsx';
+import {
+  ControllerPageRouteQuerySchemaParams,
+  ControllerPageRouteQuerySchemaQuery,
+} from '../page/routeQuery/controller.jsx';
+import {
+  ControllerPageRouteQueryBSchemaParams,
+  ControllerPageRouteQueryBSchemaQuery,
+} from '../page/routeQueryB/controller.jsx';
+import { default as ZCard } from './component/card.vue';
 
 import 'zova';
+import 'zova';
+import 'zova';
+import 'zova';
+import 'zova';
+import 'zova';
+import 'zova';
+import 'zova';
+import 'zova';
+
+import 'zova';
+
+export * from '../bean/aop.home3.jsx';
 declare module 'zova' {}
 declare module 'zova-module-demo-basic' {
   export interface ThemeOrange {
@@ -9,20 +75,14 @@ declare module 'zova-module-demo-basic' {
     get scope(): ScopeModuleDemoBasic;
   }
 }
-/** theme: end */
-/** theme: begin */
-import { ThemeOrange } from '../bean/theme.orange.js';
-import 'zova';
 declare module 'zova' {
   export interface IBeanRecordGeneral {
     'demo-basic.theme.orange': ThemeOrange;
   }
 }
-/** theme: end */
-/** store: begin */
-export * from '../bean/store.counter.js';
-
-import 'zova';
+/** components: end */
+/** aop: begin */
+export * from '../bean/aop.home.jsx';
 declare module 'zova' {}
 declare module 'zova-module-demo-basic' {
   export interface StoreCounter {
@@ -30,15 +90,16 @@ declare module 'zova-module-demo-basic' {
     get scope(): ScopeModuleDemoBasic;
   }
 }
-/** store: end */
-/** store: begin */
-import { StoreCounter } from '../bean/store.counter.js';
-import 'zova';
 declare module 'zova' {
   export interface IBeanRecordGeneral {
     'demo-basic.store.counter': StoreCounter;
   }
 }
+/** theme: end */
+/** store: begin */
+export * from '../bean/store.counter.js';
+/** theme: begin */
+export * from '../bean/theme.orange.js';
 /** store: end */
 /** controller: begin */
 export * from '../component/card/controller.jsx';
@@ -49,10 +110,6 @@ export * from '../page/pinia/controller.jsx';
 export * from '../page/routeParams/controller.jsx';
 export * from '../page/routeQuery/controller.jsx';
 export * from '../page/routeQueryB/controller.jsx';
-export * from '../page/state/controller.jsx';
-export * from '../page/style/controller.jsx';
-
-import 'zova';
 declare module 'zova' {}
 declare module 'zova-module-demo-basic' {
   export interface ControllerCard {
@@ -105,19 +162,6 @@ declare module 'zova-module-demo-basic' {
     get scope(): ScopeModuleDemoBasic;
   }
 }
-/** controller: end */
-/** controller: begin */
-import { ControllerCard } from '../component/card/controller.jsx';
-import { ControllerPageComponent } from '../page/component/controller.jsx';
-import { ControllerPageLegacy } from '../page/legacy/controller.jsx';
-import { ControllerPageLocale } from '../page/locale/controller.jsx';
-import { ControllerPagePinia } from '../page/pinia/controller.jsx';
-import { ControllerPageRouteParams } from '../page/routeParams/controller.jsx';
-import { ControllerPageRouteQuery } from '../page/routeQuery/controller.jsx';
-import { ControllerPageRouteQueryB } from '../page/routeQueryB/controller.jsx';
-import { ControllerPageState } from '../page/state/controller.jsx';
-import { ControllerPageStyle } from '../page/style/controller.jsx';
-import 'zova';
 declare module 'zova' {
   export interface IBeanRecordLocal {
     'demo-basic.controller.card': ControllerCard;
@@ -132,23 +176,7 @@ declare module 'zova' {
     'demo-basic.controller.pageStyle': ControllerPageStyle;
   }
 }
-/** controller: end */
-/** pages: begin */
-import {
-  ControllerPageRouteParamsSchemaParams,
-  ControllerPageRouteParamsSchemaQuery,
-} from '../page/routeParams/controller.jsx';
-import {
-  ControllerPageRouteQuerySchemaParams,
-  ControllerPageRouteQuerySchemaQuery,
-} from '../page/routeQuery/controller.jsx';
-import {
-  ControllerPageRouteQueryBSchemaParams,
-  ControllerPageRouteQueryBSchemaQuery,
-} from '../page/routeQueryB/controller.jsx';
-export * from '../routes.js';
-import { TypePageParamsQuery } from 'zova';
-import { z } from 'zod';
+export * from '../page/state/controller.jsx';
 export namespace NSControllerPageRouteParams {
   export const paramsSchema = ControllerPageRouteParamsSchemaParams;
   export type ParamsInput = z.input<typeof ControllerPageRouteParamsSchemaParams>;
@@ -176,7 +204,6 @@ export namespace NSControllerPageRouteQueryB {
   export type QueryInput = z.input<typeof ControllerPageRouteQueryBSchemaQuery>;
   export type QueryOutput = z.output<typeof ControllerPageRouteQueryBSchemaQuery>;
 }
-import 'zova';
 declare module 'zova' {
   export interface IPagePathRecord {
     '/demo/basic/component': undefined;
@@ -223,17 +250,10 @@ declare module 'zova-module-demo-basic' {
     $query: NSControllerPageRouteQueryB.QueryOutput;
   }
 }
-/** pages: end */
-
-import { RequiredSome } from 'zova';
-/** components: begin */
-import { ControllerCardEmits, ControllerCardSlots } from '../component/card/controller.jsx';
-export { default as ZCard } from './component/card.vue';
-import { default as ZCard } from './component/card.vue';
+export * from '../page/style/controller.jsx';
 export const components = {
   card: ZCard,
 };
-import 'zova';
 declare module 'zova' {
   export interface IComponentRecord {
     'demo-basic:card': ControllerCard;
@@ -251,12 +271,8 @@ declare module 'zova-module-demo-basic' {
     $slots: ControllerCardSlots;
   }
 }
-/** components: end */
-/** aop: begin */
-export * from '../bean/aop.home.jsx';
-export * from '../bean/aop.home3.jsx';
-
-import { IDecoratorAopOptions } from 'zova-module-a-bean';
+export * from '../routes.js';
+export { default as ZCard } from './component/card.vue';
 declare module 'zova-module-a-bean' {
   export interface IAopRecord {
     'demo-basic:home': IDecoratorAopOptions;
@@ -274,29 +290,16 @@ declare module 'zova-module-demo-basic' {
     get scope(): ScopeModuleDemoBasic;
   }
 }
-/** aop: end */
-/** aop: begin */
-import { AopHome } from '../bean/aop.home.jsx';
-import { AopHome3 } from '../bean/aop.home3.jsx';
-import 'zova';
 declare module 'zova' {
   export interface IBeanRecordLocal {
     'demo-basic.aop.home': AopHome;
     'demo-basic.aop.home3': AopHome3;
   }
 }
-/** aop: end */
-/** locale: begin */
-import locale_en_us from '../config/locale/en-us.js';
-import locale_zh_cn from '../config/locale/zh-cn.js';
 export const locales = {
   'en-us': locale_en_us,
   'zh-cn': locale_zh_cn,
 };
-/** locale: end */
-/** scope: begin */
-import { BeanScopeBase, BeanScopeUtil, TypeModuleLocales, TypeLocaleBase } from 'zova';
-import { Scope } from 'zova-module-a-bean';
 
 @Scope()
 export class ScopeModuleDemoBasic extends BeanScopeBase {}
@@ -306,7 +309,6 @@ export interface ScopeModuleDemoBasic {
   locale: TypeModuleLocales<(typeof locales)[TypeLocaleBase]>;
 }
 
-import 'zova';
 declare module 'zova' {
   export interface IBeanScopeRecord {
     'demo-basic': ScopeModuleDemoBasic;

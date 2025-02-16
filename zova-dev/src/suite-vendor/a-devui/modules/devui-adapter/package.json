@@ -1,5 +1,6 @@
 {
   "name": "zova-module-devui-adapter",
+  "type": "module",
   "version": "5.0.33",
   "title": "devui-adapter",
   "zovaModule": {
@@ -10,7 +11,11 @@
       "a-zova": "5.0.0"
     }
   },
-  "type": "module",
+  "description": "devui",
+  "author": "zhennann",
+  "keywords": [
+    "Zova Module"
+  ],
   "exports": {
     ".": {
       "types": [
@@ -22,11 +27,6 @@
     },
     "./*": "./*"
   },
-  "description": "devui",
-  "keywords": [
-    "Zova Module"
-  ],
-  "author": "zhennann",
   "files": [
     "dist"
   ],

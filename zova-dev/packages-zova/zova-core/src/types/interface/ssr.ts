@@ -1,4 +1,4 @@
-import { ComponentInternalInstance, VNode } from 'vue';
+import type { ComponentInternalInstance, VNode } from 'vue';
 
 export interface SSRContext {
   _meta: SSRContextMeta;

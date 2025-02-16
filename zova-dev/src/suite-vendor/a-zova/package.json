@@ -1,26 +1,26 @@
 {
   "name": "zova-suite-a-zova",
+  "type": "module",
   "version": "5.0.128",
   "title": "a-zova",
-  "type": "module",
   "description": "zova",
   "author": "zhennann",
   "license": "MIT",
   "files": [],
   "dependencies": {
+    "zova-module-a-api": "workspace:^",
+    "zova-module-a-bean": "workspace:^",
+    "zova-module-a-behavior": "workspace:^",
+    "zova-module-a-fetch": "workspace:^",
+    "zova-module-a-interceptor": "workspace:^",
+    "zova-module-a-meta": "workspace:^",
     "zova-module-a-model": "workspace:^",
     "zova-module-a-pinia": "workspace:^",
     "zova-module-a-router": "workspace:^",
     "zova-module-a-style": "workspace:^",
     "zova-module-a-tabs": "workspace:^",
-    "zova-module-a-zova": "workspace:^",
-    "zova-module-a-api": "workspace:^",
-    "zova-module-a-bean": "workspace:^",
-    "zova-module-a-meta": "workspace:^",
     "zova-module-a-zod": "workspace:^",
-    "zova-module-a-behavior": "workspace:^",
-    "zova-module-a-fetch": "workspace:^",
-    "zova-module-a-interceptor": "workspace:^"
+    "zova-module-a-zova": "workspace:^"
   },
   "gitHead": "73721393c1ea9a95539948d57ad692f2c004d7c7"
 }

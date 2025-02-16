@@ -1,6 +1,6 @@
-import { MetadataKey } from '../../core/metadata.js';
+import type { MetadataKey } from '../../core/metadata.js';
+import type { Functionable, IDecoratorUseComposableOptions } from '../index.js';
 import { appResource } from '../../core/resource.js';
-import { Functionable, IDecoratorUseComposableOptions } from '../index.js';
 
 export function UseComposable(
   options: IDecoratorUseComposableOptions | Functionable,

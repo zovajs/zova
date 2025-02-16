@@ -1,5 +1,5 @@
-import { ZovaApplication } from 'zova';
-import { IServiceRecord } from 'zova-module-a-bean';
+import type { ZovaApplication } from 'zova';
+import type { IServiceRecord } from 'zova-module-a-bean';
 
 export const config = (_app: ZovaApplication) => {
   return {

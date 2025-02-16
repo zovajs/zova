@@ -1,4 +1,4 @@
-import { IBehaviorItem, IBehaviorRecord } from '../types/behavior.js';
+import type { IBehaviorItem, IBehaviorRecord } from '../types/behavior.js';
 
 export function UseBehavior<T extends keyof IBehaviorRecord>(
   behaviorName: T,

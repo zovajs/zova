@@ -1,6 +1,8 @@
-import { appResource, BeanSimple, cast, deepExtend, Next, SymbolProxyDisable } from 'zova';
-import { compose as _compose } from '@cabloy/compose';
-import {
+import type { ISwapDepsItem } from '@cabloy/deps';
+import type { OnionSceneMeta } from '@cabloy/module-info';
+import type { Next } from 'zova';
+import type { BeanOnion } from '../bean/bean.onion.js';
+import type {
   IOnionExecuteCustom,
   IOnionItem,
   IOnionOptionsDeps,
@@ -8,10 +10,11 @@ import {
   IOnionOptionsMatch,
   IOnionSlice,
 } from '../types/onion.js';
-import { BeanOnion } from '../bean/bean.onion.js';
-import { ISwapDepsItem, swapDeps } from '@cabloy/deps';
-import { getOnionScenesMeta, OnionSceneMeta } from '@cabloy/module-info';
+import { compose as _compose } from '@cabloy/compose';
+import { swapDeps } from '@cabloy/deps';
+import { getOnionScenesMeta } from '@cabloy/module-info';
 import { evaluate } from '@cabloy/utils';
+import { appResource, BeanSimple, cast, deepExtend, SymbolProxyDisable } from 'zova';
 import { Service } from '../lib/bean.js';
 
 // const SymbolOnionsEnabled = Symbol('SymbolOnionsEnabled');

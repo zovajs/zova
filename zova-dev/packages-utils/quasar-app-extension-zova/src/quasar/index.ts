@@ -5,15 +5,15 @@
  * Docs: https://quasar.dev/app-extensions/development-guide/index-api
  */
 
-import { IndexAPI } from '@quasar/app-vite';
+import type { IndexAPI } from '@quasar/app-vite';
+import type { ConfigContext } from './types.js';
+import { getFlavor } from 'zova-vite';
+import { extendAfterBuild } from './extendAfterBuild.js';
 import { extendFiles } from './extendFiles.js';
 import { extendQuasarConf } from './extendQuasarConf.js';
-import { extendViteConf } from './extendViteConf.js';
-import { ConfigContext } from './types.js';
-import { getFlavor } from 'zova-vite';
-import { printBanner } from './printBanner.js';
-import { extendAfterBuild } from './extendAfterBuild.js';
 import { extendSSRWebserverConf } from './extendSSRWebserverConf.js';
+import { extendViteConf } from './extendViteConf.js';
+import { printBanner } from './printBanner.js';
 
 export async function quasar(api: IndexAPI) {
   // flavor

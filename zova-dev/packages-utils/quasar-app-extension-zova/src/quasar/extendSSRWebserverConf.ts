@@ -1,6 +1,6 @@
-import { BuildOptions } from 'esbuild';
-import { ConfigContext } from './types.js';
-import { IndexAPI } from '@quasar/app-vite';
+import type { IndexAPI } from '@quasar/app-vite';
+import type { BuildOptions } from 'esbuild';
+import type { ConfigContext } from './types.js';
 
 export function extendSSRWebserverConf(_context: ConfigContext) {
   return function extendSSRWebserverConf(conf: BuildOptions, _api: IndexAPI) {

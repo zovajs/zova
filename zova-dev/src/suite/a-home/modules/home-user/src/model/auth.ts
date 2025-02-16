@@ -1,7 +1,7 @@
+import type { ApiAuthJwt, ApiAuthLoginParams, ApiAuthLoginResult } from '../api/auth.js';
+import type { ModelUser } from './user.js';
 import { Use } from 'zova';
 import { BeanModelBase, Model } from 'zova-module-a-model';
-import { ModelUser } from './user.js';
-import { ApiAuthJwt, ApiAuthLoginParams, ApiAuthLoginResult } from '../api/auth.js';
 
 @Model()
 export class ModelAuth extends BeanModelBase {

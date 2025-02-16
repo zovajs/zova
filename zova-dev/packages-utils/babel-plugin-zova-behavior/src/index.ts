@@ -1,7 +1,8 @@
-import { /*template,*/ types as t, type PluginPass } from '@babel/core';
+import type { PluginPass } from '@babel/core';
 import type { NodePath, Visitor } from '@babel/traverse';
-import { getTag } from './utils.js';
+import { /* template, */ types as t } from '@babel/core';
 import { parseFirstWord } from '@cabloy/word-utils';
+import { getTag } from './utils.js';
 
 // interface ComponentFindInfo {
 //   import: ImportInfo;
@@ -91,9 +92,9 @@ function _parseBehaviorName(propName): string | undefined {
   const parts = propName.split('-');
   const beanName = parts[parts.length - 1];
   if (parts.length === 2) {
-    moduleName = 'a-' + parseFirstWord(beanName);
+    moduleName = `a-${parseFirstWord(beanName)}`;
   } else if (parts.length === 3) {
-    moduleName = 'a-' + parts[1];
+    moduleName = `a-${parts[1]}`;
   } else if (parts.length === 4) {
     moduleName = `${parts[1]}-${parts[2]}`;
   }

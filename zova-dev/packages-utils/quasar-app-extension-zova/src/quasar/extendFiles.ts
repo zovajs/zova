@@ -1,8 +1,8 @@
+import type { IndexAPI } from '@quasar/app-vite';
+import path from 'node:path';
 import fse from 'fs-extra';
-import { IndexAPI } from '@quasar/app-vite';
 import { getAbsolutePathOfModule } from 'zova-vite';
 import { resolveTemplatePath } from '../utils.js';
-import path from 'node:path';
 
 export function extendFiles(api: IndexAPI, flavor: string) {
   return async function extendFiles() {

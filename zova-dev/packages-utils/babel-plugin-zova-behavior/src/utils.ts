@@ -1,4 +1,6 @@
-import { /*template,*/ NodePath, types as t, type PluginPass } from '@babel/core';
+import type { /* template, */ NodePath } from '@babel/core';
+import type { PluginPass } from '@babel/core';
+import { types as t } from '@babel/core';
 import htmlTags from 'html-tags';
 import svgTags from 'svg-tags';
 
@@ -24,8 +26,8 @@ export const getTag = (
         : path.scope.hasBinding(name)
           ? t.identifier(name)
           : (<any>state.opts).isCustomElement?.(name)
-            ? t.stringLiteral(name)
-            : t.callExpression(t.identifier('resolveComponent'), [t.stringLiteral(name)]);
+              ? t.stringLiteral(name)
+              : t.callExpression(t.identifier('resolveComponent'), [t.stringLiteral(name)]);
     }
 
     return t.stringLiteral(name);
@@ -38,7 +40,7 @@ export const getTag = (
 };
 
 export const shouldTransformedToSlots = (tag: string) =>
-  !(tag.match(RegExp(`^_?${FRAGMENT}\\d*$`)) || tag === KEEP_ALIVE);
+  !(tag.match(new RegExp(`^_?${FRAGMENT}\\d*$`)) || tag === KEEP_ALIVE);
 
 export const transformJSXMemberExpression = (path: NodePath<t.JSXMemberExpression>): t.MemberExpression => {
   const objectPath = path.node.object;

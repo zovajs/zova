@@ -1,4 +1,4 @@
-import { IconGroup } from './iconGroup.js';
+import type { IconGroup } from './iconGroup.js';
 
 export interface IIconRecord {}
 export type TypeIcon = keyof IIconRecord;

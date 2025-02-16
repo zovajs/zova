@@ -18,7 +18,7 @@ const moduleIsStyle = (mod: ModuleNode) =>
     mod?.file?.endsWith('.scss') ||
     mod?.file?.endsWith('.css') ||
     mod?.id?.includes('vue&type=style')) &&
-  (mod?.ssrModule || mod?.ssrTransformResult);
+    (mod?.ssrModule || mod?.ssrTransformResult);
 
 function getCssContent(mod) {
   if (mod.ssrModule) return mod.ssrModule.default;

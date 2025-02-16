@@ -1,7 +1,7 @@
+import type { ControllerCard } from '../../.metadata/index.jsx';
+import { nextTick } from 'vue';
 import { BeanControllerPageBase, onControllerMounted } from 'zova';
 import { Controller } from 'zova-module-a-bean';
-import { ControllerCard } from '../../.metadata/index.jsx';
-import { nextTick } from 'vue';
 import { ZPage } from 'zova-module-home-base';
 import { ZCard } from '../../index.js';
 
@@ -42,7 +42,8 @@ export class ControllerPageComponent extends BeanControllerPageBase {
               return <div>this is a footer slot from parent</div>;
             },
           }}
-        ></ZCard>
+        >
+        </ZCard>
         <label>Input: </label>
         <input
           type="text"
@@ -56,7 +57,8 @@ export class ControllerPageComponent extends BeanControllerPageBase {
             }
           }}
           value={this.resetTime.toString()}
-        ></input>
+        >
+        </input>
       </ZPage>
     );
   }

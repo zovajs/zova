@@ -2,9 +2,9 @@
  * Based on the work of https://github.com/jchook/uuid-random
  */
 
-let buf,
-  bufIdx = 0;
-const hexBytes = new Array(256);
+let buf;
+let bufIdx = 0;
+const hexBytes = Array.from({ length: 256 });
 
 // Pre-calculate toString(16) for speed
 for (let i = 0; i < 256; i++) {
@@ -56,29 +56,29 @@ export function uuid() {
   }
 
   const b = Array.prototype.slice.call(buf, bufIdx, (bufIdx += 16));
-  b[6] = (b[6] & 0x0f) | 0x40;
-  b[8] = (b[8] & 0x3f) | 0x80;
+  b[6] = (b[6] & 0x0F) | 0x40;
+  b[8] = (b[8] & 0x3F) | 0x80;
 
   return (
-    hexBytes[b[0]] +
+    `${hexBytes[b[0]] +
     hexBytes[b[1]] +
     hexBytes[b[2]] +
-    hexBytes[b[3]] +
-    '-' +
-    hexBytes[b[4]] +
-    hexBytes[b[5]] +
-    '-' +
-    hexBytes[b[6]] +
-    hexBytes[b[7]] +
-    '-' +
-    hexBytes[b[8]] +
-    hexBytes[b[9]] +
-    '-' +
-    hexBytes[b[10]] +
-    hexBytes[b[11]] +
-    hexBytes[b[12]] +
-    hexBytes[b[13]] +
-    hexBytes[b[14]] +
-    hexBytes[b[15]]
+    hexBytes[b[3]]
+    }-${
+      hexBytes[b[4]]
+    }${hexBytes[b[5]]
+    }-${
+      hexBytes[b[6]]
+    }${hexBytes[b[7]]
+    }-${
+      hexBytes[b[8]]
+    }${hexBytes[b[9]]
+    }-${
+      hexBytes[b[10]]
+    }${hexBytes[b[11]]
+    }${hexBytes[b[12]]
+    }${hexBytes[b[13]]
+    }${hexBytes[b[14]]
+    }${hexBytes[b[15]]}`
   );
 }

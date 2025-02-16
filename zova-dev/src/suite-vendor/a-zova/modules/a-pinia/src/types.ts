@@ -1,9 +1,10 @@
-import { Functionable } from 'zova';
-import { Pinia, StateTree } from 'pinia';
+import type { Pinia, StateTree } from 'pinia';
+import type { Functionable } from 'zova';
+
+import 'zova';
 
 export type PiniaStore<P extends Functionable> = ReturnType<P>;
 
-import 'zova';
 declare module 'zova' {
   export interface BeanBase {
     $pinia: Pinia;

@@ -1,6 +1,6 @@
-import { AxiosRequestConfig } from 'axios';
-import { PowerPartial } from 'zova';
-import { IInterceptorRecord } from 'zova-module-a-fetch';
+import type { AxiosRequestConfig } from 'axios';
+import type { PowerPartial } from 'zova';
+import type { IInterceptorRecord } from 'zova-module-a-fetch';
 
 export interface IApiActionOptions extends AxiosRequestConfig {
   interceptors?: PowerPartial<IInterceptorRecord>;

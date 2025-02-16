@@ -1,9 +1,9 @@
-import { generateZovaViteMeta } from 'zova-vite';
+import type { ZovaConfigMeta, ZovaMetaFlavor } from '@cabloy/module-info';
+import type { IndexAPI } from '@quasar/app-vite';
+import type { QuasarConf } from '@quasar/app-vite/types/configuration/conf.js';
+import type { ConfigContext } from './types.js';
 import { mergeConfig } from 'vite';
-import { ConfigContext } from './types.js';
-import { QuasarConf } from '@quasar/app-vite/types/configuration/conf.js';
-import { IndexAPI } from '@quasar/app-vite';
-import { ZovaConfigMeta, ZovaMetaFlavor } from '@cabloy/module-info';
+import { generateZovaViteMeta } from 'zova-vite';
 
 export function extendQuasarConf(context: ConfigContext, flavor: ZovaMetaFlavor) {
   return async function extendQuasarConf(conf: QuasarConf, api: IndexAPI) {
@@ -32,7 +32,7 @@ export function extendQuasarConf(context: ConfigContext, flavor: ZovaMetaFlavor)
     conf.build = mergeConfig(conf.build || {}, {
       alias: zovaViteMeta.viteConfig.resolve.alias,
       // not set env here
-      //env: zovaViteMeta.env,
+      // env: zovaViteMeta.env,
     });
     // build: publicPath
     conf.build.publicPath = process.env.APP_PUBLIC_PATH;

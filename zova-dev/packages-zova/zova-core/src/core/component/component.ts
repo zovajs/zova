@@ -1,6 +1,6 @@
+import type { Component, ComponentCustomOptions } from 'vue';
+import type { TypeModuleResourceComponents } from '../../types/interface/module.js';
 import { BeanSimple } from '../../bean/beanSimple.js';
-import { TypeModuleResourceComponents } from '../../types/interface/module.js';
-import { Component, ComponentCustomOptions } from 'vue';
 
 export class AppComponent extends BeanSimple {
   /** @internal */

@@ -1,5 +1,6 @@
 {
   "name": "zova-module-a-meta",
+  "type": "module",
   "version": "5.0.0",
   "title": "a-meta",
   "zovaModule": {
@@ -10,7 +11,11 @@
       }
     }
   },
-  "type": "module",
+  "description": "",
+  "author": "",
+  "keywords": [
+    "Zova Module"
+  ],
   "exports": {
     ".": {
       "types": [
@@ -22,15 +27,10 @@
     },
     "./*": "./*"
   },
-  "description": "",
-  "keywords": [
-    "Zova Module"
-  ],
-  "author": "",
   "files": [
-    "mock",
+    "cli",
     "dist",
-    "cli"
+    "mock"
   ],
   "scripts": {
     "clean": "tsc -b --clean",

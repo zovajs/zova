@@ -1,7 +1,7 @@
-import { ViteNodeServer } from 'vite-node/server';
+import type { ViteDevServer } from 'vite';
 import { ViteNodeRunner } from 'vite-node/client';
+import { ViteNodeServer } from 'vite-node/server';
 import { installSourcemapsSupport } from 'vite-node/source-map';
-import { ViteDevServer } from 'vite';
 
 export class ViteNode {
   server: ViteDevServer;
@@ -14,6 +14,7 @@ export class ViteNode {
     this.server = server;
     this.serverEntryFile = serverEntryFile;
   }
+
   async attachServer() {
     // this is need to initialize the plugins
     await this.server.pluginContainer.buildStart({});
@@ -25,6 +26,7 @@ export class ViteNode {
     });
     return this.node;
   }
+
   createRunner() {
     // create vite-node runner
     this.runner = new ViteNodeRunner({
@@ -42,6 +44,7 @@ export class ViteNode {
     });
     return this.runner;
   }
+
   async loadRender() {
     // invalidates
     const updates = this.runner.moduleCache.invalidateDepTree(ViteNode.invalidates);

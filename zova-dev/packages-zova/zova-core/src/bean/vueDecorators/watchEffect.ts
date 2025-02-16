@@ -1,4 +1,4 @@
-import { IDecoratorVueElement, IDecoratorVueWatchEffectOptions } from '../../decorator/vue/types.js';
+import type { IDecoratorVueElement, IDecoratorVueWatchEffectOptions } from '../../decorator/vue/types.js';
 import { watchEffect as vueWatchEffect } from 'vue';
 import { getVueDecoratorValue } from './utils.js';
 

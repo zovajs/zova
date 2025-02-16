@@ -1,7 +1,7 @@
+import type { IDecoratorInterceptorOptions } from '../types/interceptor.js';
+import type { BeanFetch } from './bean.fetch.js';
 import { BeanBase } from 'zova';
 import { Virtual } from 'zova-module-a-bean';
-import { BeanFetch } from './bean.fetch.js';
-import { IDecoratorInterceptorOptions } from '../types/interceptor.js';
 
 @Virtual()
 export class BeanInterceptorBase<

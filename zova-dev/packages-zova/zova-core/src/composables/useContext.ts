@@ -1,5 +1,5 @@
+import type { ZovaContext } from '../core/context/context.js';
 import { getCurrentInstance } from 'vue';
-import { ZovaContext } from '../core/context/context.js';
 
 export function useContext(): ZovaContext {
   const instance = getCurrentInstance();

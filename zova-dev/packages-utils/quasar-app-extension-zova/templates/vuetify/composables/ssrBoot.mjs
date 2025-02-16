@@ -1,5 +1,5 @@
 // Utilities
-import { computed, onMounted, readonly, shallowRef, getCurrentInstance } from 'vue';
+import { computed, getCurrentInstance, onMounted, readonly, shallowRef } from 'vue';
 
 // Composables
 export function useSsrBoot() {
@@ -10,7 +10,8 @@ export function useSsrBoot() {
     zova.ctx.meta.ssr.onHydrated(() => {
       isBooted.value = true;
     });
-  } else {
+  }
+  else {
     onMounted(() => {
       window.requestAnimationFrame(() => {
         isBooted.value = true;
@@ -29,4 +30,4 @@ export function useSsrBoot() {
     isBooted: readonly(isBooted),
   };
 }
-//# sourceMappingURL=ssrBoot.mjs.map
+// # sourceMappingURL=ssrBoot.mjs.map

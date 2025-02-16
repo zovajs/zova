@@ -1,8 +1,9 @@
-import { BeanBase, deepExtend } from 'zova';
-import axios, { AxiosInstance } from 'axios';
+import type { AxiosInstance } from 'axios';
+import type { IBeanFetchOptions } from '../types/interceptor.js';
+import axios from 'axios';
 import { markRaw } from 'vue';
+import { BeanBase, deepExtend } from 'zova';
 import { Bean } from 'zova-module-a-bean';
-import { IBeanFetchOptions } from '../types/interceptor.js';
 import { ServiceComposer } from '../service/composer.js';
 
 const SymbolFetch = Symbol('SymbolFetch');

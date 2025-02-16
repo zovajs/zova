@@ -1,6 +1,7 @@
-import { BeanBase, cast, deepExtend, Use } from 'zova';
-import { BeanOnion, IOnionItem, IOnionSlice, Service, TypeComposer } from 'zova-module-a-bean';
-import {
+import type { AxiosError, AxiosRequestConfig, AxiosResponse } from 'axios';
+import type { BeanOnion, IOnionItem, IOnionSlice, TypeComposer } from 'zova-module-a-bean';
+import type { BeanFetch } from '../bean/bean.fetch.js';
+import type {
   IDecoratorInterceptorOptions,
   IInterceptorRecord,
   IInterceptorRequest,
@@ -8,8 +9,8 @@ import {
   IInterceptorResponse,
   IInterceptorResponseError,
 } from '../types/interceptor.js';
-import { AxiosError, AxiosRequestConfig, AxiosResponse } from 'axios';
-import { BeanFetch } from '../bean/bean.fetch.js';
+import { BeanBase, cast, deepExtend, Use } from 'zova';
+import { Service } from 'zova-module-a-bean';
 
 @Service()
 export class ServiceComposer extends BeanBase {

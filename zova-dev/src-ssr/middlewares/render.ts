@@ -1,5 +1,5 @@
-import { Request, Response } from 'express';
-import { RenderError } from '@quasar/app-vite';
+import type { RenderError } from '@quasar/app-vite';
+import type { Request, Response } from 'express';
 import { ssrMiddleware } from 'quasar/wrappers';
 
 // This middleware should execute as last one

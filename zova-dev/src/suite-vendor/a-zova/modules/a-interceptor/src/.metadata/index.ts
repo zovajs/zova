@@ -1,9 +1,23 @@
+/** config: end */
+/** scope: begin */
+import type { BeanScopeUtil, TypeModuleConfig } from 'zova';
 /** interceptor: begin */
+import type { IInterceptorOptionsBody } from '../bean/interceptor.body.js';
+/** interceptor: end */
+/** interceptor: begin */
+import type { InterceptorBody } from '../bean/interceptor.body.js';
+import type { IInterceptorOptionsJwt } from '../bean/interceptor.jwt.js';
+import type { InterceptorJwt } from '../bean/interceptor.jwt.js';
+import type { config } from '../config/config.js';
+import { BeanScopeBase } from 'zova';
+import { Scope } from 'zova-module-a-bean';
+import 'zova';
+import 'zova';
+
+import 'zova';
+
 export * from '../bean/interceptor.body.js';
 export * from '../bean/interceptor.jwt.js';
-import { IInterceptorOptionsBody } from '../bean/interceptor.body.js';
-import { IInterceptorOptionsJwt } from '../bean/interceptor.jwt.js';
-import 'zova';
 declare module 'zova-module-a-fetch' {
   export interface IInterceptorRecord {
     'a-interceptor:body': IInterceptorOptionsBody;
@@ -21,11 +35,6 @@ declare module 'zova-module-a-interceptor' {
     get scope(): ScopeModuleAInterceptor;
   }
 }
-/** interceptor: end */
-/** interceptor: begin */
-import { InterceptorBody } from '../bean/interceptor.body.js';
-import { InterceptorJwt } from '../bean/interceptor.jwt.js';
-import 'zova';
 declare module 'zova' {
   export interface IBeanRecordLocal {
     'a-interceptor.interceptor.body': InterceptorBody;
@@ -35,11 +44,6 @@ declare module 'zova' {
 /** interceptor: end */
 /** config: begin */
 export * from '../config/config.js';
-import { config } from '../config/config.js';
-/** config: end */
-/** scope: begin */
-import { BeanScopeBase, BeanScopeUtil, TypeModuleConfig } from 'zova';
-import { Scope } from 'zova-module-a-bean';
 
 @Scope()
 export class ScopeModuleAInterceptor extends BeanScopeBase {}
@@ -48,8 +52,6 @@ export interface ScopeModuleAInterceptor {
   util: BeanScopeUtil;
   config: TypeModuleConfig<typeof config>;
 }
-
-import 'zova';
 declare module 'zova' {
   export interface IBeanScopeRecord {
     'a-interceptor': ScopeModuleAInterceptor;

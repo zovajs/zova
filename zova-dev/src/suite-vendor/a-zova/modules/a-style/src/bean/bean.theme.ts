@@ -1,8 +1,9 @@
-import { cast, IBeanRecord } from 'zova';
-import { IThemeBase, IThemeHandler } from '../types/index.js';
-import { BeanModelBase } from 'zova-module-a-model';
+import type { IBeanRecord } from 'zova';
+import type { IThemeBase, IThemeHandler } from '../types/index.js';
 import { watch } from 'vue';
+import { cast } from 'zova';
 import { Bean } from 'zova-module-a-bean';
+import { BeanModelBase } from 'zova-module-a-model';
 
 export type ThemeDarkMode = 'auto' | boolean;
 

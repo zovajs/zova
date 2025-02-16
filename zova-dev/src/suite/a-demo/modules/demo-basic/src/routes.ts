@@ -1,13 +1,13 @@
+import type { IModuleRoute } from 'zova-module-a-router';
+import Component from './.metadata/page/component.vue';
 import Legacy from './.metadata/page/legacy.vue';
-import RouteQueryB from './.metadata/page/routeQueryB.vue';
+import Locale from './.metadata/page/locale.vue';
+import Pinia from './.metadata/page/pinia.vue';
 import RouteParams from './.metadata/page/routeParams.vue';
 import RouteQuery from './.metadata/page/routeQuery.vue';
-import Pinia from './.metadata/page/pinia.vue';
-import Style from './.metadata/page/style.vue';
-import Locale from './.metadata/page/locale.vue';
-import Component from './.metadata/page/component.vue';
+import RouteQueryB from './.metadata/page/routeQueryB.vue';
 import State from './.metadata/page/state.vue';
-import { IModuleRoute } from 'zova-module-a-router';
+import Style from './.metadata/page/style.vue';
 
 export const routes: IModuleRoute[] = [
   { path: 'state', component: State },

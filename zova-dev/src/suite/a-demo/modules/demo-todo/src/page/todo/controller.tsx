@@ -1,15 +1,16 @@
-import { BeanControllerPageBase, Use, uuid } from 'zova';
-import { Controller } from 'zova-module-a-bean';
-import { ModelTodo } from '../../model/todo.js';
-import { ApiTodoEntity, ApiTodoGetParams } from '../../api/todo.js';
+import type { ApiTodoEntity, ApiTodoGetParams } from '../../api/todo.js';
+import type { ModelTodo } from '../../model/todo.js';
 import { withModifiers } from 'vue';
 import { RouterLink } from 'vue-router';
+import { BeanControllerPageBase, Use, uuid } from 'zova';
+import { Controller } from 'zova-module-a-bean';
 import { ZPage } from 'zova-module-home-base';
 
 @Controller()
 export class ControllerPageTodo extends BeanControllerPageBase {
   @Use()
   $$modelTodo: ModelTodo;
+
   newTitle: string;
   currentTodo?: ApiTodoGetParams;
 
@@ -47,7 +48,8 @@ export class ControllerPageTodo extends BeanControllerPageBase {
         {todoCurrent?.data && (
           <div role="alert" class="alert alert-success">
             <div>
-              Current:{' '}
+              Current:
+              {' '}
               <RouterLink to={this.$router.resolveName('demo-todo:item', { params: { id: todoCurrent?.data?.id } })}>
                 {todoCurrent?.data?.title}
               </RouterLink>

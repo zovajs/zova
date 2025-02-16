@@ -1,9 +1,9 @@
+import type { ApiTodoGetParams } from '../../api/todo.js';
+import type { ModelTodo } from '../../model/todo.js';
+import { z } from 'zod';
 import { BeanControllerPageBase, Use, useComputed } from 'zova';
 import { Controller } from 'zova-module-a-bean';
-import { ModelTodo } from '../../model/todo.js';
-import { ApiTodoGetParams } from '../../api/todo.js';
 import { ZPage } from 'zova-module-home-base';
-import { z } from 'zod';
 
 export const ControllerPageItemSchemaParams = z.object({
   id: z.string(),
@@ -14,6 +14,7 @@ export const ControllerPageItemSchemaQuery = z.object({});
 export class ControllerPageItem extends BeanControllerPageBase {
   @Use()
   $$modelTodo: ModelTodo;
+
   currentTodo?: ApiTodoGetParams;
 
   protected async __init__() {
@@ -28,7 +29,10 @@ export class ControllerPageItem extends BeanControllerPageBase {
       <ZPage>
         {todoCurrent?.data && (
           <div role="alert" class="alert alert-info">
-            <div>Current: {todoCurrent?.data?.title}</div>
+            <div>
+              Current:
+              {todoCurrent?.data?.title}
+            </div>
           </div>
         )}
         {!!todoCurrent?.error && (

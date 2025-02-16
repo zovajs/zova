@@ -1,15 +1,18 @@
-import {
-  appResource,
+import type { IModule } from '@cabloy/module-info';
+import type {
   BeanBase,
   BeanContainer,
-  BeanSimple,
-  cast,
   IBeanScopeRecord,
   IMonkeyBeanInit,
   IMonkeyModule,
 } from 'zova';
-import { __ThisModule__, ScopeModule } from './.metadata/this.js';
-import { IModule } from '@cabloy/module-info';
+import type { ScopeModule } from './.metadata/this.js';
+import {
+  appResource,
+  BeanSimple,
+  cast,
+} from 'zova';
+import { __ThisModule__ } from './.metadata/this.js';
 
 export class Monkey extends BeanSimple implements IMonkeyModule, IMonkeyBeanInit {
   private _moduleSelf: IModule;
@@ -23,7 +26,7 @@ export class Monkey extends BeanSimple implements IMonkeyModule, IMonkeyBeanInit
   async moduleLoading(_module: IModule) {}
   async moduleLoaded(module: IModule) {
     // load apis
-    const onions = appResource.scenes['api']?.[module.info.relativeName];
+    const onions = appResource.scenes.api?.[module.info.relativeName];
     if (onions) {
       const scope = this.bean.scope(module.info.relativeName) as any;
       for (const beanFullName in onions) {
@@ -38,6 +41,7 @@ export class Monkey extends BeanSimple implements IMonkeyModule, IMonkeyBeanInit
       await this.app.meta.module.use(this._defaultModuleApi);
     }
   }
+
   async configLoaded(_module: IModule, _config) {}
 
   async beanInit(bean: BeanContainer, beanInstance: BeanBase) {

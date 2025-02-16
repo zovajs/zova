@@ -1,19 +1,21 @@
+import type {
+  IComponentOptions,
+} from 'zova';
+import type { BeanBehavior } from '../../bean/bean.behavior.js';
+import type { ServiceComposer } from '../../service/composer.js';
+import type { IBehaviors, IBehaviorTag } from '../../types/behavior.js';
 import { createVNode } from 'vue';
 import {
   BeanControllerBase,
   cast,
   deepEqual,
   disposeInstance,
-  IComponentOptions,
   SymbolControllerRefDisable,
   Use,
   Watch,
 } from 'zova';
 import { Controller } from 'zova-module-a-bean';
-import { IBehaviors, IBehaviorTag } from '../../types/behavior.js';
-import { BeanBehavior } from '../../bean/bean.behavior.js';
 import { UseBehavior } from '../../lib/useBehavior.js';
-import { ServiceComposer } from '../../service/composer.js';
 
 export interface ControllerBehaviorProps {
   behaviorTag: IBehaviorTag;
@@ -58,8 +60,8 @@ export class ControllerBehavior extends BeanControllerBase {
     const { ref, props, children } = parent.vnode;
     // props
     const propsNew = Object.assign({}, props);
-    delete propsNew['behaviorTag'];
-    delete propsNew['behaviors'];
+    delete propsNew.behaviorTag;
+    delete propsNew.behaviors;
     // render
     const vnode = this.composer.render(propsNew, propsNew => {
       return createVNode(this.$props.behaviorTag.component, propsNew, children);

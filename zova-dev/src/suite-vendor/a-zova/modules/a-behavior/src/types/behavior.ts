@@ -1,5 +1,9 @@
-import { OmitNever } from 'zova';
-import { IOnionOptionsEnable, ServiceOnion } from 'zova-module-a-bean';
+import type { Component, VNode } from 'vue';
+import type { OmitNever } from 'zova';
+
+import type { IOnionOptionsEnable, ServiceOnion } from 'zova-module-a-bean';
+import 'vue';
+import 'vue/jsx-runtime';
 
 export type NextBehavior<PROPS_OUTPUT = unknown> = (props?: PROPS_OUTPUT) => VNode;
 
@@ -33,10 +37,6 @@ declare module 'zova' {
     behavior: never;
   }
 }
-
-import 'vue';
-import 'vue/jsx-runtime';
-import { Component, VNode } from 'vue';
 
 declare module 'vue' {
   export interface InputHTMLAttributes {

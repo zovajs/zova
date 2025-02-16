@@ -1,8 +1,8 @@
-import fse from 'fs-extra';
-import { IGlobBeanFile } from '@cabloy/module-info';
-import { IControllerInfo } from './types.js';
+import type { IMetadataCustomGenerateOptions } from '@cabloy/cli';
+import type { IGlobBeanFile } from '@cabloy/module-info';
+import type { IControllerInfo } from './types.js';
 import path from 'node:path';
-import { IMetadataCustomGenerateOptions } from '@cabloy/cli';
+import fse from 'fs-extra';
 
 export function generateMetaPage(
   options: IMetadataCustomGenerateOptions,

@@ -1,14 +1,16 @@
-import {
+import type {
   DefaultError,
   MutationKey,
   MutationObserverOptions,
   QueryClient,
   UseMutationReturnType,
+} from '@tanstack/vue-query';
+import type { UnwrapNestedRefs } from 'vue';
+import type { MaybeRefDeep } from '../../common/types.js';
+import {
   hashKey,
   useMutation,
 } from '@tanstack/vue-query';
-import { MaybeRefDeep } from '../../common/types.js';
-import { UnwrapNestedRefs } from 'vue';
 import { cast } from 'zova';
 import { BeanModelUseQuery } from './bean.model.useQuery.js';
 

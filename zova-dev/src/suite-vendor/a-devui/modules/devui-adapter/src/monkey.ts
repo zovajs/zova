@@ -1,5 +1,6 @@
-import { BeanSimple, IMonkeyAppInitialize } from 'zova';
-import { ScopeModuleAStyle } from 'zova-module-a-style';
+import type { IMonkeyAppInitialize } from 'zova';
+import type { ScopeModuleAStyle } from 'zova-module-a-style';
+import { BeanSimple } from 'zova';
 
 export class Monkey extends BeanSimple implements IMonkeyAppInitialize {
   async appInitialize() {

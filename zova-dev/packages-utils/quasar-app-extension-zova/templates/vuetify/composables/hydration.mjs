@@ -1,11 +1,13 @@
+import { shallowRef } from 'vue';
+import { IN_BROWSER } from '../util/index.mjs';
 // Composables
-import { useDisplay } from "./display.mjs"; // Utilities
-import { onMounted, shallowRef } from 'vue';
-import { IN_BROWSER } from "../util/index.mjs";
+import { useDisplay } from './display.mjs';
+// Utilities
 export function useHydration() {
-  if (!IN_BROWSER) return shallowRef(false);
+  if (!IN_BROWSER)
+    return shallowRef(false);
   const {
-    ssr
+    ssr,
   } = useDisplay();
   if (ssr) {
     const isMounted = shallowRef(false);
@@ -15,8 +17,9 @@ export function useHydration() {
       isMounted.value = true;
     });
     return isMounted;
-  } else {
+  }
+  else {
     return shallowRef(true);
   }
 }
-//# sourceMappingURL=hydration.mjs.map
+// # sourceMappingURL=hydration.mjs.map

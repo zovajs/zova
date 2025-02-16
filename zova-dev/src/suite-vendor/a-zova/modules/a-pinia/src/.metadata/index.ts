@@ -1,23 +1,34 @@
-/** bean: begin */
-export * from '../bean/bean.piniaStoreBase.js';
-
-import 'zova';
-declare module 'zova' {}
-declare module 'zova-module-a-pinia' {}
+/** monkey: end */
+/** scope: begin */
+import type { BeanScopeUtil } from 'zova';
 /** bean: end */
 /** bean: begin */
-import { BeanPiniaStoreBase } from '../bean/bean.piniaStoreBase.js';
+import type { BeanPiniaStoreBase } from '../bean/bean.piniaStoreBase.js';
+/** service: end */
+/** service: begin */
+import type { ServicePinia } from '../service/pinia.js';
+import { BeanScopeBase } from 'zova';
+
+import { Scope } from 'zova-module-a-bean';
+/** bean: begin */
 import 'zova';
+import 'zova';
+import 'zova';
+import 'zova';
+
+import 'zova';
+
+export * from '../bean/bean.piniaStoreBase.js';
+declare module 'zova' {}
+declare module 'zova-module-a-pinia' {}
 declare module 'zova' {
   export interface IBeanRecordGeneral {
     'a-pinia.bean.piniaStoreBase': BeanPiniaStoreBase;
   }
 }
-/** bean: end */
-/** service: begin */
-export * from '../service/pinia.js';
-
-import 'zova';
+/** service: end */
+/** monkey: begin */
+export * from '../monkey.js';
 declare module 'zova' {}
 declare module 'zova-module-a-pinia' {
   export interface ServicePinia {
@@ -25,22 +36,14 @@ declare module 'zova-module-a-pinia' {
     get scope(): ScopeModuleAPinia;
   }
 }
-/** service: end */
-/** service: begin */
-import { ServicePinia } from '../service/pinia.js';
-import 'zova';
 declare module 'zova' {
   export interface IBeanRecordGeneral {
     'a-pinia.service.pinia': ServicePinia;
   }
 }
-/** service: end */
-/** monkey: begin */
-export * from '../monkey.js';
-/** monkey: end */
-/** scope: begin */
-import { BeanScopeBase, BeanScopeUtil } from 'zova';
-import { Scope } from 'zova-module-a-bean';
+/** bean: end */
+/** service: begin */
+export * from '../service/pinia.js';
 
 @Scope()
 export class ScopeModuleAPinia extends BeanScopeBase {}
@@ -48,8 +51,6 @@ export class ScopeModuleAPinia extends BeanScopeBase {}
 export interface ScopeModuleAPinia {
   util: BeanScopeUtil;
 }
-
-import 'zova';
 declare module 'zova' {
   export interface IBeanScopeRecord {
     'a-pinia': ScopeModuleAPinia;

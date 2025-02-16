@@ -1,5 +1,6 @@
 {
   "name": "zova-module-a-fetch",
+  "type": "module",
   "version": "5.0.0",
   "title": "a-fetch",
   "zovaModule": {
@@ -28,7 +29,11 @@
       ]
     }
   },
-  "type": "module",
+  "description": "",
+  "author": "",
+  "keywords": [
+    "Zova Module"
+  ],
   "exports": {
     ".": {
       "types": [
@@ -40,16 +45,11 @@
     },
     "./*": "./*"
   },
-  "description": "",
-  "keywords": [
-    "Zova Module"
-  ],
-  "author": "",
   "files": [
-    "mock",
+    "cli",
     "dist",
-    "src",
-    "cli"
+    "mock",
+    "src"
   ],
   "scripts": {
     "clean": "tsc -b --clean",

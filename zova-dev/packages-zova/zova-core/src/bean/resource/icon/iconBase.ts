@@ -1,9 +1,9 @@
+import type { AppIcon } from './icon.js';
+import type { IIconInfo, IIconMeta, TypeIconModules, TypeIconSymbols } from './types.js';
 import { reactive } from 'vue';
-import { BeanSimple } from '../../beanSimple.js';
-import { IIconInfo, IIconMeta, TypeIconModules, TypeIconSymbols } from './types.js';
-import { IconGroup } from './iconGroup.js';
-import { AppIcon } from './icon.js';
 import { cast } from '../../../types/utils/cast.js';
+import { BeanSimple } from '../../beanSimple.js';
+import { IconGroup } from './iconGroup.js';
 
 const XMLNS = 'http://www.w3.org/2000/svg';
 const XMLNS_LINK = 'http://www.w3.org/1999/xlink';
@@ -156,9 +156,9 @@ export class AppIconBase extends BeanSimple {
     const posB = svg.indexOf('</symbol>', pos);
     const posA = svg.lastIndexOf('<symbol', pos);
     return svg.substring(posA, posB + '</symbol>'.length);
-    //const symbolPattern = new RegExp(`<symbol.*?id=['"]${symbolId}['"].*?>.*?</symbol>`);
-    //const matched = symbolPattern.exec(svg || '');
-    //return matched && matched[0];
+    // const symbolPattern = new RegExp(`<symbol.*?id=['"]${symbolId}['"].*?>.*?</symbol>`);
+    // const matched = symbolPattern.exec(svg || '');
+    // return matched && matched[0];
   }
 
   protected _getIconModule(moduleName: string) {
@@ -178,7 +178,7 @@ export class AppIconBase extends BeanSimple {
     const module = parts[0] || this.app.config.icon.defaultModule;
     const group = parts[1] || 'default';
     const name = parts[2] || '';
-    if (module.indexOf('-') === -1 || !name) {
+    if (!module.includes('-') || !name) {
       return;
     }
     return {

@@ -5,6 +5,14 @@
   "publishConfig": {
     "access": "public"
   },
+  "author": "zhennann",
+  "license": "MIT",
+  "keywords": [
+    "egg",
+    "egg-born",
+    "framework",
+    "zova"
+  ],
   "exports": {
     ".": {
       "types": "./dist/index.d.ts",
@@ -21,14 +29,6 @@
     "tsc:publish": "npm run clean && tsc -b",
     "prepublishOnly": "npm run tsc:publish"
   },
-  "keywords": [
-    "egg",
-    "egg-born",
-    "framework",
-    "zova"
-  ],
-  "author": "zhennann",
-  "license": "MIT",
   "dependencies": {
     "@cabloy/module-info": "^1.2.10",
     "@cabloy/word-utils": "^1.0.10"

@@ -1,5 +1,5 @@
-import { ComponentPublicInstance } from 'vue';
-import { IErrorObject } from './errorObject.js';
+import type { ComponentPublicInstance } from 'vue';
+import type { IErrorObject } from './errorObject.js';
 
 export interface IModuleError {
   throw(...args: any[]): never;

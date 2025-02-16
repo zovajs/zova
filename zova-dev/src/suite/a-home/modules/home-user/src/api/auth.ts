@@ -1,5 +1,5 @@
+import type { ApiUserEntity } from './user.js';
 import { Api, BeanApiBase } from 'zova-module-a-api';
-import { ApiUserEntity } from './user.js';
 
 export interface ApiAuthJwt {
   accessToken: string;

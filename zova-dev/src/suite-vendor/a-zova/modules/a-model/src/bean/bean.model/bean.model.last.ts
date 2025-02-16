@@ -1,6 +1,7 @@
+import type { ScopeModule } from '../../.metadata/this.js';
+import type { BeanModelBase } from '../bean.modelBase.js';
 import { BeanBase, cast } from 'zova';
-import { BeanModelBase } from '../bean.modelBase.js';
-import { ScopeModule, __ThisModule__ } from '../../.metadata/this.js';
+import { __ThisModule__ } from '../../.metadata/this.js';
 
 export class BeanModelLast extends BeanBase {
   get self() {

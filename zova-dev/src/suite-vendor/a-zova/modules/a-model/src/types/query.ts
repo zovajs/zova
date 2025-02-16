@@ -1,5 +1,4 @@
-import 'zova';
-import {
+import type {
   DefaultError,
   DehydratedState,
   Query,
@@ -9,7 +8,9 @@ import {
   useQuery,
   useQueryClient,
 } from '@tanstack/vue-query';
-import { UnwrapNestedRefs } from 'vue';
+import type { UnwrapNestedRefs } from 'vue';
+import 'zova';
+
 declare module 'zova' {
   export interface BeanBase {
     $queryClient: ReturnType<typeof useQueryClient>;

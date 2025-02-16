@@ -1,13 +1,15 @@
-import { AxiosError, AxiosResponse } from 'axios';
-import { cast } from 'zova';
-import {
-  BeanInterceptorBase,
+import type { AxiosError, AxiosResponse } from 'axios';
+import type {
   IDecoratorInterceptorOptions,
   IInterceptorResponse,
   IInterceptorResponseError,
-  Interceptor,
   NextInterceptorError,
   NextInterceptorResponse,
+} from 'zova-module-a-fetch';
+import { cast } from 'zova';
+import {
+  BeanInterceptorBase,
+  Interceptor,
 } from 'zova-module-a-fetch';
 
 export interface IInterceptorOptionsBody extends IDecoratorInterceptorOptions {}
@@ -15,8 +17,7 @@ export interface IInterceptorOptionsBody extends IDecoratorInterceptorOptions {}
 @Interceptor<IInterceptorOptionsBody>()
 export class InterceptorBody
   extends BeanInterceptorBase<IInterceptorOptionsBody>
-  implements IInterceptorResponse, IInterceptorResponseError
-{
+  implements IInterceptorResponse, IInterceptorResponseError {
   async onResponse(
     response: AxiosResponse,
     _options: IInterceptorOptionsBody,
@@ -24,7 +25,7 @@ export class InterceptorBody
   ): Promise<AxiosResponse> {
     response = await next();
     const contentType = response.headers['content-type'];
-    if (!contentType || contentType.indexOf('application/json') === -1) return response;
+    if (!contentType || !contentType.includes('application/json')) return response;
     if (response.data.code !== 0) {
       const error = new Error();
       error.code = response.data.code;

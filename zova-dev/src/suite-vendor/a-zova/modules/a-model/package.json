@@ -1,5 +1,6 @@
 {
   "name": "zova-module-a-model",
+  "type": "module",
   "version": "5.0.37",
   "title": "a-model",
   "zovaModule": {
@@ -34,7 +35,12 @@
       ]
     }
   },
-  "type": "module",
+  "description": "core",
+  "author": "zhennann",
+  "license": "MIT",
+  "keywords": [
+    "Zova Module"
+  ],
   "exports": {
     ".": {
       "types": [
@@ -46,16 +52,10 @@
     },
     "./*": "./*"
   },
-  "description": "core",
-  "keywords": [
-    "Zova Module"
-  ],
-  "author": "zhennann",
-  "license": "MIT",
   "files": [
+    "cli",
     "dist",
-    "src",
-    "cli"
+    "src"
   ],
   "scripts": {
     "clean": "tsc -b --clean",

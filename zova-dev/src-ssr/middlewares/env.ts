@@ -1,6 +1,6 @@
+import { readFileSync } from 'node:fs';
 import path, { dirname } from 'node:path';
 import { fileURLToPath } from 'node:url';
-import { readFileSync } from 'node:fs';
 import { ssrMiddleware } from 'quasar/wrappers';
 
 // This middleware should execute as first one

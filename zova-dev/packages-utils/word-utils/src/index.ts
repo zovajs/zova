@@ -42,7 +42,7 @@ export function skipPrefix(str?: string, prefix?: string, toLowerCase?: boolean)
   if (!prefix) {
     word = str;
   } else {
-    const prefix2 = prefix.replace(/\./gi, '');
+    const prefix2 = prefix.replace(/\./g, '');
     if (str.toLowerCase().startsWith(prefix2.toLowerCase())) {
       word = str.substring(prefix2.length);
     } else {
@@ -101,7 +101,7 @@ export function stringToCapitalize(str: string[] | string, separator?: string): 
 export function replaceTemplate(content: string | undefined, scope?: object | undefined): string | undefined {
   if (!content) return content;
   if (!scope) return content;
-  return content.toString().replace(/(\\)?{{ *([\w\.]+) *}}/g, (block, skip, key) => {
+  return content.toString().replace(/(\\)?\{\{ *([\w.]+) *\}\}/g, (block, skip, key) => {
     if (skip) {
       return block.substring(skip.length);
     }
@@ -142,9 +142,9 @@ export function matchSelector<T extends string = string>(match: TypeMatchSelecto
 }
 
 export function hashCode(input?: string): string {
-  let hash = 0,
-    i,
-    chr;
+  let hash = 0;
+  let i;
+  let chr;
   if (!input) return '';
   for (i = 0; i < input.length; i++) {
     chr = input.charCodeAt(i);

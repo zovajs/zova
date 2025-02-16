@@ -1,5 +1,7 @@
-import { Api, BeanApiBase, IApiActionOptions } from 'zova-module-a-api';
-import { ApiBaseURL, type components, type paths } from './openapi/index.js';
+import type { IApiActionOptions } from 'zova-module-a-api';
+import type { components, paths } from './openapi/index.js';
+import { Api, BeanApiBase } from 'zova-module-a-api';
+import { ApiBaseURL } from './openapi/index.js';
 
 /** Onion_index */
 export const ApiApiOnionindexPath = '/api/';
@@ -13,10 +15,10 @@ export const ApiApiOnionechoPath = '/echo';
 export type ApiApiOnionechoPath = '/echo';
 export type ApiApiOnionechoMethod = 'post';
 export type ApiApiOnionechoRequestQuery = paths[ApiApiOnionechoPath][ApiApiOnionechoMethod]['parameters']['query'];
-export type ApiApiOnionechoRequestBody = {
+export interface ApiApiOnionechoRequestBody {
   /** @description User Id */
   id: number;
-};
+}
 export type ApiApiOnionechoResponseBody =
   paths[ApiApiOnionechoPath][ApiApiOnionechoMethod]['responses']['200']['content']['application/json']['data'];
 
@@ -26,10 +28,10 @@ export type ApiApiOnionecho2Path = '/api/vona/test/onion/echo2/{userId}/{userNam
 export type ApiApiOnionecho2Method = 'post';
 export type ApiApiOnionecho2RequestParams = paths[ApiApiOnionecho2Path][ApiApiOnionecho2Method]['parameters']['path'];
 export type ApiApiOnionecho2RequestQuery = paths[ApiApiOnionecho2Path][ApiApiOnionecho2Method]['parameters']['query'];
-export type ApiApiOnionecho2RequestBody = {
+export interface ApiApiOnionecho2RequestBody {
   /** @description User Id */
   id: number;
-};
+}
 export type ApiApiOnionecho2ResponseBody =
   paths[ApiApiOnionecho2Path][ApiApiOnionecho2Method]['responses']['200']['content']['application/json']['data'];
 

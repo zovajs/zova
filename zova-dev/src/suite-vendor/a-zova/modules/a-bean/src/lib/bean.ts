@@ -1,5 +1,5 @@
+import type { IDecoratorAopOptions } from '../types/aop.js';
 import { createBeanDecorator } from 'zova';
-import { IDecoratorAopOptions } from '../types/aop.js';
 
 export function Bean(): ClassDecorator {
   return createBeanDecorator('bean', 'ctx');

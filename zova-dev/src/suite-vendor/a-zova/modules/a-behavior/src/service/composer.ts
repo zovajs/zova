@@ -1,8 +1,9 @@
+import type { VNode } from 'vue';
+import type { BeanOnion, IOnionItem, IOnionSlice, TypeComposer } from 'zova-module-a-bean';
+import type { BeanBehaviorBase } from '../bean/bean.behaviorBase.js';
+import type { IBehaviorRecord, IBehaviors, IDecoratorBehaviorOptions, NextBehavior } from '../types/behavior.js';
 import { BeanBase, cast, deepEqual, disposeInstance, Use } from 'zova';
-import { IBehaviorRecord, IBehaviors, IDecoratorBehaviorOptions, NextBehavior } from '../types/behavior.js';
-import { VNode } from 'vue';
-import { BeanOnion, IOnionItem, IOnionSlice, Service, TypeComposer } from 'zova-module-a-bean';
-import { BeanBehaviorBase } from '../bean/bean.behaviorBase.js';
+import { Service } from 'zova-module-a-bean';
 
 const SymbolSliceOptionsOriginal = Symbol('SymbolSliceOptionsOriginal');
 

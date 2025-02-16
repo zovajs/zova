@@ -1,6 +1,7 @@
+import type { IThemeApplyParams, IThemeApplyResult, IThemeBase } from 'zova-module-a-style';
+import type { ThemeToken } from 'zova-module-home-base';
 import { BeanBase } from 'zova';
-import { IThemeApplyParams, IThemeApplyResult, IThemeBase, Theme } from 'zova-module-a-style';
-import { ThemeToken } from 'zova-module-home-base';
+import { Theme } from 'zova-module-a-style';
 
 @Theme()
 export class ThemeOrange extends BeanBase implements IThemeBase {

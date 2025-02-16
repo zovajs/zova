@@ -1,13 +1,13 @@
-import { OmitNever, PowerPartial } from 'zova';
-import {
+import type { AxiosError, AxiosRequestConfig, AxiosResponse, CreateAxiosDefaults } from 'axios';
+import type { OmitNever, PowerPartial } from 'zova';
+import type {
   IOnionItem,
   IOnionOptionsDeps,
   IOnionOptionsEnable,
   IOnionOptionsMatch,
   ServiceOnion,
 } from 'zova-module-a-bean';
-import { BeanFetch } from '../bean/bean.fetch.js';
-import { AxiosError, AxiosRequestConfig, AxiosResponse, CreateAxiosDefaults } from 'axios';
+import type { BeanFetch } from '../bean/bean.fetch.js';
 
 export type NextInterceptorRequest = (config?: AxiosRequestConfig) => Promise<AxiosRequestConfig>;
 export type NextInterceptorResponse = (response?: AxiosResponse) => Promise<AxiosResponse>;
@@ -56,8 +56,8 @@ export interface IInterceptorResponseError {
 
 export interface IDecoratorInterceptorOptions
   extends IOnionOptionsEnable,
-    IOnionOptionsMatch<string>,
-    IOnionOptionsDeps<keyof IInterceptorRecord> {}
+  IOnionOptionsMatch<string>,
+  IOnionOptionsDeps<keyof IInterceptorRecord> {}
 
 declare module 'zova-module-a-bean' {
   export interface BeanOnion {

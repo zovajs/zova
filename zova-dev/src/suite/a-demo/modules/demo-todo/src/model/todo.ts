@@ -1,5 +1,5 @@
+import type { ApiTodoDeleteParams, ApiTodoGetParams, ApiTodoIntertParams, ApiTodoUpdateParams } from '../api/todo.js';
 import { BeanModelBase, Model } from 'zova-module-a-model';
-import { ApiTodoDeleteParams, ApiTodoGetParams, ApiTodoIntertParams, ApiTodoUpdateParams } from '../api/todo.js';
 
 @Model()
 export class ModelTodo extends BeanModelBase {

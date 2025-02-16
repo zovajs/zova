@@ -1,9 +1,10 @@
-import { App } from 'vue';
-import { ZovaApplication, ZovaContext } from '../core/index.js';
-import { PluginZovaOptions } from '../types/interface/pluginZova.js';
+import type { App } from 'vue';
+import type { ZovaContext } from '../core/index.js';
+import type { PluginZovaOptions } from '../types/interface/pluginZova.js';
 import { BeanContainerInstances } from '../bean/beanContainer.js';
-import { cast } from '../types/index.js';
 import { BeanControllerIdentifier, BeanRenderIdentifier, BeanStyleIdentifier } from '../bean/type.js';
+import { ZovaApplication } from '../core/index.js';
+import { cast } from '../types/index.js';
 
 export const PluginZova = {
   async install(

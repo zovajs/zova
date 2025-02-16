@@ -1,7 +1,7 @@
-import { QuasarConf } from '@quasar/app-vite/types/configuration/conf.js';
-import { IndexAPI } from '@quasar/app-vite';
+import type { IndexAPI } from '@quasar/app-vite';
+import type { QuasarConf } from '@quasar/app-vite/types/configuration/conf.js';
+import type { ConfigContext } from './types.js';
 import path from 'node:path';
-import { ConfigContext } from './types.js';
 import { loadJSONFile, saveJSONFile } from '../utils.js';
 
 export function extendAfterBuild(context: ConfigContext, _flavor: string) {

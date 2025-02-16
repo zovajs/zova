@@ -1,4 +1,4 @@
-import {
+import type {
   DataTag,
   DefaultError,
   InvalidateOptions,
@@ -9,8 +9,8 @@ import {
   SetDataOptions,
   Updater,
 } from '@tanstack/vue-query';
+import type { MaybeRefDeep, NoUnknown } from '../../common/types.js';
 import localforage from 'localforage';
-import { MaybeRefDeep, NoUnknown } from '../../common/types.js';
 import { cast } from 'zova';
 import { BeanModelCookie } from './bean.model.cookie.js';
 

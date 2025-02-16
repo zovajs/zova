@@ -1,7 +1,51 @@
+import type { RequiredSome } from 'zova';
+/** monkey: end */
+/** scope: begin */
+import type { BeanScopeUtil, TypeLocaleBase, TypeModuleLocales } from 'zova';
+/** css: end */
 /** css: begin */
-export * from '../bean/css.default.js';
+import type { CssDefault } from '../bean/css.default.js';
+/** theme: end */
+/** theme: begin */
+import type { ThemeDefault } from '../bean/theme.default.js';
+
+/** controller: end */
+/** controller: begin */
+import type { ControllerPage } from '../component/page/controller.jsx';
+/** components: begin */
+import type { ControllerPageEmits, ControllerPageSlots } from '../component/page/controller.jsx';
+import type { ControllerPageErrorNotFound } from '../page/errorNotFound/controller.jsx';
+
+/** service: end */
+/** service: begin */
+import type { ServiceRouter } from '../service/router.js';
+import type { ServiceSsr } from '../service/ssr.js';
+import { BeanScopeBase } from 'zova';
+import { Scope } from 'zova-module-a-bean';
+
+/** components: end */
+/** locale: begin */
+import locale_en_us from '../config/locale/en-us.js';
+import locale_zh_cn from '../config/locale/zh-cn.js';
+import { default as ZPage } from './component/page.vue';
+/** css: begin */
+import 'zova';
 
 import 'zova';
+/** pages: end */
+
+import 'zova';
+import 'zova';
+import 'zova';
+import 'zova';
+import 'zova';
+import 'zova';
+import 'zova';
+import 'zova';
+
+import 'zova';
+
+export * from '../bean/css.default.js';
 declare module 'zova' {}
 declare module 'zova-module-home-base' {
   export interface CssDefault {
@@ -9,10 +53,6 @@ declare module 'zova-module-home-base' {
     get scope(): ScopeModuleHomeBase;
   }
 }
-/** css: end */
-/** css: begin */
-import { CssDefault } from '../bean/css.default.js';
-import 'zova';
 declare module 'zova' {
   export interface IBeanRecordGeneral {
     'home-base.css.default': CssDefault;
@@ -21,8 +61,6 @@ declare module 'zova' {
 /** css: end */
 /** theme: begin */
 export * from '../bean/theme.default.js';
-
-import 'zova';
 declare module 'zova' {}
 declare module 'zova-module-home-base' {
   export interface ThemeDefault {
@@ -30,21 +68,17 @@ declare module 'zova-module-home-base' {
     get scope(): ScopeModuleHomeBase;
   }
 }
-/** theme: end */
-/** theme: begin */
-import { ThemeDefault } from '../bean/theme.default.js';
-import 'zova';
 declare module 'zova' {
   export interface IBeanRecordGeneral {
     'home-base.theme.default': ThemeDefault;
   }
 }
-/** theme: end */
-/** service: begin */
-export * from '../service/router.js';
-export * from '../service/ssr.js';
-
-import 'zova';
+/** service: end */
+/** controller: begin */
+export * from '../component/page/controller.jsx';
+/** locale: end */
+/** monkey: begin */
+export * from '../monkey.js';
 declare module 'zova' {}
 declare module 'zova-module-home-base' {
   export interface ServiceRouter {
@@ -57,23 +91,14 @@ declare module 'zova-module-home-base' {
     get scope(): ScopeModuleHomeBase;
   }
 }
-/** service: end */
-/** service: begin */
-import { ServiceRouter } from '../service/router.js';
-import { ServiceSsr } from '../service/ssr.js';
-import 'zova';
 declare module 'zova' {
   export interface IBeanRecordGeneral {
     'home-base.service.router': ServiceRouter;
     'home-base.service.ssr': ServiceSsr;
   }
 }
-/** service: end */
-/** controller: begin */
-export * from '../component/page/controller.jsx';
 export * from '../page/errorNotFound/controller.jsx';
-
-import 'zova';
+export * from '../routes.js';
 declare module 'zova' {}
 declare module 'zova-module-home-base' {
   export interface ControllerPage {
@@ -86,11 +111,6 @@ declare module 'zova-module-home-base' {
     get scope(): ScopeModuleHomeBase;
   }
 }
-/** controller: end */
-/** controller: begin */
-import { ControllerPage } from '../component/page/controller.jsx';
-import { ControllerPageErrorNotFound } from '../page/errorNotFound/controller.jsx';
-import 'zova';
 declare module 'zova' {
   export interface IBeanRecordLocal {
     'home-base.controller.page': ControllerPage;
@@ -100,9 +120,9 @@ declare module 'zova' {
 /** controller: end */
 /** pages: begin */
 
-export * from '../routes.js';
-
-import 'zova';
+/** theme: end */
+/** service: begin */
+export * from '../service/router.js';
 declare module 'zova' {
   export interface IPagePathRecord {
     '/home/base//:catchAll(.*)*': undefined;
@@ -112,17 +132,10 @@ declare module 'zova' {
 export const pagePathSchemas = {};
 export const pageNameSchemas = {};
 declare module 'zova-module-home-base' {}
-/** pages: end */
-
-import { RequiredSome } from 'zova';
-/** components: begin */
-import { ControllerPageEmits, ControllerPageSlots } from '../component/page/controller.jsx';
-export { default as ZPage } from './component/page.vue';
-import { default as ZPage } from './component/page.vue';
+export * from '../service/ssr.js';
 export const components = {
   page: ZPage,
 };
-import 'zova';
 declare module 'zova' {
   export interface IComponentRecord {
     'home-base:page': ControllerPage;
@@ -140,21 +153,11 @@ declare module 'zova-module-home-base' {
     $slots: ControllerPageSlots;
   }
 }
-/** components: end */
-/** locale: begin */
-import locale_en_us from '../config/locale/en-us.js';
-import locale_zh_cn from '../config/locale/zh-cn.js';
 export const locales = {
   'en-us': locale_en_us,
   'zh-cn': locale_zh_cn,
 };
-/** locale: end */
-/** monkey: begin */
-export * from '../monkey.js';
-/** monkey: end */
-/** scope: begin */
-import { BeanScopeBase, BeanScopeUtil, TypeModuleLocales, TypeLocaleBase } from 'zova';
-import { Scope } from 'zova-module-a-bean';
+export { default as ZPage } from './component/page.vue';
 
 @Scope()
 export class ScopeModuleHomeBase extends BeanScopeBase {}
@@ -163,8 +166,6 @@ export interface ScopeModuleHomeBase {
   util: BeanScopeUtil;
   locale: TypeModuleLocales<(typeof locales)[TypeLocaleBase]>;
 }
-
-import 'zova';
 declare module 'zova' {
   export interface IBeanScopeRecord {
     'home-base': ScopeModuleHomeBase;

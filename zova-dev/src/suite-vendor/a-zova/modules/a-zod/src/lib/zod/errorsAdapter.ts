@@ -1,4 +1,4 @@
-import { ZovaApplication } from 'zova';
+import type { ZovaApplication } from 'zova';
 import { setErrorMapDefault, setErrorMapSchema } from '@cabloy/zod-errors-custom';
 
 export function errorsAdapter(app: ZovaApplication) {

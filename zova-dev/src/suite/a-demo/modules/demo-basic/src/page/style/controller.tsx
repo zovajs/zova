@@ -54,7 +54,7 @@ export class ControllerPageStyle extends BeanControllerPageBase {
                 onChange={async e => {
                   const target = e.target as HTMLSelectElement;
                   const value = target.value;
-                  const darkMode = value === 'auto' ? value : value === 'true' ? true : false;
+                  const darkMode = value === 'auto' ? value : value === 'true';
                   this.$theme.darkMode = darkMode;
                 }}
               >
@@ -64,13 +64,16 @@ export class ControllerPageStyle extends BeanControllerPageBase {
                 <option value={true} selected={this.$theme.darkMode === true}>
                   Dark
                 </option>
-                <option value={'auto'} selected={this.$theme.darkMode === 'auto'}>
+                <option value="auto" selected={this.$theme.darkMode === 'auto'}>
                   Auto
                 </option>
               </select>
             </div>
             <hr></hr>
-            <div style={{ color: this.$token.color.primary }}>theme: {this.$theme.name}</div>
+            <div style={{ color: this.$token.color.primary }}>
+              theme:
+              {this.$theme.name}
+            </div>
             <div>
               <select
                 class="select select-bordered w-full max-w-xs"

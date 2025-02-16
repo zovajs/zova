@@ -1,7 +1,7 @@
-import { toLowerCaseFirstChar } from '@cabloy/word-utils';
-import { IDecoratorVueElement, IDecoratorVueEmitOptions } from '../../decorator/vue/types.js';
-import { getVueDecoratorValue } from './utils.js';
+import type { IDecoratorVueElement, IDecoratorVueEmitOptions } from '../../decorator/vue/types.js';
 import { isPromise } from '@cabloy/utils';
+import { toLowerCaseFirstChar } from '@cabloy/word-utils';
+import { getVueDecoratorValue } from './utils.js';
 
 export function emit(
   beanInstance,
@@ -49,9 +49,9 @@ function __emitHandler(
   }
   // emit
   if (returnValue === undefined) {
-    beanInstance['$emit'](eventName, ...args);
+    beanInstance.$emit(eventName, ...args);
   } else {
-    beanInstance['$emit'](eventName, returnValue, ...args);
+    beanInstance.$emit(eventName, returnValue, ...args);
   }
   // return
   return returnValue;

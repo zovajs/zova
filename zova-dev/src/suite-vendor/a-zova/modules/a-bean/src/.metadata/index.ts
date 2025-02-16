@@ -1,7 +1,24 @@
+/** service: end */
+/** scope: begin */
+import type { BeanScopeUtil } from 'zova';
+/** bean: end */
 /** bean: begin */
-export * from '../bean/bean.onion.js';
+import type { BeanOnion } from '../bean/bean.onion.js';
+/** service: end */
+/** service: begin */
+import type { ServiceAop } from '../service/aop.js';
+import { BeanScopeBase } from 'zova';
+
+import { Scope } from '../lib/scope.js';
+/** bean: begin */
+import 'zova';
+import 'zova';
+import 'zova';
+import 'zova';
 
 import 'zova';
+
+export * from '../bean/bean.onion.js';
 declare module 'zova' {}
 declare module 'zova-module-a-bean' {
   export interface BeanOnion {
@@ -9,10 +26,6 @@ declare module 'zova-module-a-bean' {
     get scope(): ScopeModuleABean;
   }
 }
-/** bean: end */
-/** bean: begin */
-import { BeanOnion } from '../bean/bean.onion.js';
-import 'zova';
 declare module 'zova' {
   export interface IBeanRecordGeneral {
     'a-bean.bean.onion': BeanOnion;
@@ -22,8 +35,6 @@ declare module 'zova' {
 /** service: begin */
 export * from '../service/aop.js';
 export * from '../service/onion_.js';
-
-import 'zova';
 declare module 'zova' {}
 declare module 'zova-module-a-bean' {
   export interface ServiceAop {
@@ -31,19 +42,11 @@ declare module 'zova-module-a-bean' {
     get scope(): ScopeModuleABean;
   }
 }
-/** service: end */
-/** service: begin */
-import { ServiceAop } from '../service/aop.js';
-import 'zova';
 declare module 'zova' {
   export interface IBeanRecordGeneral {
     'a-bean.service.aop': ServiceAop;
   }
 }
-/** service: end */
-/** scope: begin */
-import { BeanScopeBase, BeanScopeUtil } from 'zova';
-import { Scope } from '../lib/scope.js';
 
 @Scope()
 export class ScopeModuleABean extends BeanScopeBase {}
@@ -51,8 +54,6 @@ export class ScopeModuleABean extends BeanScopeBase {}
 export interface ScopeModuleABean {
   util: BeanScopeUtil;
 }
-
-import 'zova';
 declare module 'zova' {
   export interface IBeanScopeRecord {
     'a-bean': ScopeModuleABean;

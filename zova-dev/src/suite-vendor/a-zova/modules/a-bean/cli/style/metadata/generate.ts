@@ -1,5 +1,5 @@
-import { IGlobBeanFile } from '@cabloy/module-info';
-import { IMetadataCustomGenerateOptions } from '@cabloy/cli';
+import type { IMetadataCustomGenerateOptions } from '@cabloy/cli';
+import type { IGlobBeanFile } from '@cabloy/module-info';
 import { toUpperCaseFirstChar } from '@cabloy/word-utils';
 
 export interface IControllerInfo {

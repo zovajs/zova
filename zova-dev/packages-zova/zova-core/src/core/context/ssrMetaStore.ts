@@ -1,8 +1,9 @@
+import type { SSRContext, SSRMetaOptions, SSRMetaOptionsWrapper } from '../../types/index.js';
 // from: quasar/ui/src/plugins/Meta.js
 import { extend } from '@cabloy/extend';
 import * as devalue from 'devalue';
 import { BeanSimple } from '../../bean/beanSimple.js';
-import { cast, SSRContext, SSRMetaOptions, SSRMetaOptionsWrapper } from '../../types/index.js';
+import { cast } from '../../types/index.js';
 
 export class CtxSSRMetaStore extends BeanSimple {
   private _updateId: number = 0;
@@ -90,8 +91,8 @@ function normalize(meta) {
     ['meta', 'content'],
     ['link', 'href'],
   ].forEach(type => {
-    const metaType = meta[type[0]],
-      metaProp = type[1];
+    const metaType = meta[type[0]];
+    const metaProp = type[1];
 
     for (const name in metaType) {
       const metaLink = metaType[name];
@@ -128,8 +129,8 @@ function htmlFilter(name) {
 }
 
 function diff(meta, other) {
-  const add: any = {},
-    remove: any = {};
+  const add: any = {};
+  const remove: any = {};
 
   if (meta === void 0) {
     return { add: other, remove };
@@ -140,8 +141,8 @@ function diff(meta, other) {
   }
 
   ['meta', 'link', 'script', 'htmlAttr', 'bodyAttr'].forEach(type => {
-    const old = meta[type],
-      cur = other[type];
+    const old = meta[type];
+    const cur = other[type];
     remove[type] = [];
 
     if (old === void 0 || old === null) {
@@ -239,7 +240,7 @@ function getHead(meta) {
 
       output += `<${type} ${attrs.join(' ')} data-qmeta="${att}">`;
       if (type === 'script') {
-        output += (metaType[att].innerHTML || '') + '</script>';
+        output += `${metaType[att].innerHTML || ''}</script>`;
       }
     }
   });
@@ -290,7 +291,7 @@ function injectServerMeta(ssrContext: SSRContext) {
     .map(name => `${name}:${data.bodyStyle![name]};`)
     .join('');
   if (bodyStyle) {
-    ctx.bodyAttrs += (ctx.bodyAttrs.length !== 0 ? ' ' : '') + `style="${bodyStyle}"`;
+    ctx.bodyAttrs += `${ctx.bodyAttrs.length !== 0 ? ' ' : ''}style="${bodyStyle}"`;
   }
 
   const _bodyClass = ctx.bodyClasses.split(' ').filter(item => !!item);
@@ -305,10 +306,10 @@ function injectServerMeta(ssrContext: SSRContext) {
   data.title = '\'"`';
 
   ctx.endingHeadTags +=
-    Object.keys(data.noscript!)
+    `${Object.keys(data.noscript!)
       .map(name => `<noscript data-qmeta="${name}">${data.noscript![name]}</noscript>`)
-      .join('') +
-    `<script${nonce} id="ssr-meta-init">window.__Q_META__=${delete data.bodyStyle && delete data.bodyClass && delete data.noscript && devalue.uneval(data)}</script>`;
+      .join('')
+    }<script${nonce} id="ssr-meta-init">window.__Q_META__=${delete data.bodyStyle && delete data.bodyClass && delete data.noscript && devalue.uneval(data)}</script>`;
 
   let ssr_local_themedark =
     process.env.SSR_COOKIE_THEMEDARK === 'true'

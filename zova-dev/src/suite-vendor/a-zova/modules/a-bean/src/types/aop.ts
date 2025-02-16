@@ -1,13 +1,13 @@
-import { IBeanRecord, OmitNever } from 'zova';
-import { IOnionOptionsDeps, IOnionOptionsEnable, IOnionOptionsMatch } from './onion';
-import { ServiceOnion } from '../service/onion_.js';
+import type { IBeanRecord, OmitNever } from 'zova';
+import type { ServiceOnion } from '../service/onion_.js';
+import type { IOnionOptionsDeps, IOnionOptionsEnable, IOnionOptionsMatch } from './onion';
 
 export interface IAopRecord {}
 
 export interface IDecoratorAopOptions
   extends IOnionOptionsEnable,
-    IOnionOptionsMatch<keyof IBeanRecord>,
-    IOnionOptionsDeps<keyof IAopRecord> {}
+  IOnionOptionsMatch<keyof IBeanRecord>,
+  IOnionOptionsDeps<keyof IAopRecord> {}
 
 declare module 'zova-module-a-bean' {
   export interface BeanOnion {

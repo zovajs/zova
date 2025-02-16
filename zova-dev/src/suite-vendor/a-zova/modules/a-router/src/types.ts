@@ -1,13 +1,14 @@
+import type { RouteComponent, RouteLocationNormalizedLoaded, RouteRecordRaw } from 'vue-router';
 // @ts-ignore ignore
-import { TypeComponentLayoutRecord, IPageNameRecord, IPagePathRecord, TypePageSchemas } from 'zova';
-import { RouteComponent, RouteLocationNormalizedLoaded, RouteRecordRaw } from 'vue-router';
-import { BeanRouter } from './bean/bean.router.js';
+import type { IPageNameRecord, IPagePathRecord, TypeComponentLayoutRecord, TypePageSchemas } from 'zova';
+import type { BeanRouter } from './bean/bean.router.js';
+
+import 'vue-router';
 
 export type Lazy<T> = () => Promise<T>;
 export type IModuleRouteComponent = RouteComponent | Lazy<RouteComponent>;
 export type IModuleRoute = RouteRecordRaw;
 
-import 'vue-router';
 declare module 'vue-router' {
   interface RouteMeta {
     absolute?: boolean;

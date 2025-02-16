@@ -1,4 +1,4 @@
-import { IBeanSceneRecord } from '../decorator/interface/beanOptions.js';
+import type { IBeanSceneRecord } from '../decorator/interface/beanOptions.js';
 
 export interface IBeanRecordGeneral {}
 export interface IBeanRecordLocal {}
@@ -50,7 +50,7 @@ export function getBeanName<K extends keyof IBeanRecord>(beanFullName: K): K {
   return beanFullName;
 }
 
-export type DefineModelOptions<T = any> = {
+export interface DefineModelOptions<T = any> {
   get?: (v: T) => any;
   set?: (v: T) => any;
-};
+}

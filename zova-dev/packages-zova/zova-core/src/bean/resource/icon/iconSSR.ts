@@ -1,5 +1,5 @@
+import type { IIconMeta } from './types.js';
 import { AppIconBase } from './iconBase.js';
-import { IIconMeta } from './types.js';
 
 export class AppIconSSR extends AppIconBase {
   private _iconSSR: Record<string, Record<string, Record<string, string>>> = {};

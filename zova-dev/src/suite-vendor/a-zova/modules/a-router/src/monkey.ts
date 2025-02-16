@@ -1,28 +1,29 @@
-import {
+import type { IModule } from '@cabloy/module-info';
+import type {
   BeanBase,
   BeanContainer,
-  BeanControllerPageBase,
-  BeanSimple,
-  IMonkeyModule,
-  IMonkeyController,
   IControllerData,
-  TypePageSchema,
-  useComputed,
   IMonkeyAppInitialize,
   IMonkeyAppInitialized,
   IMonkeyAppReady,
+  IMonkeyController,
+  IMonkeyModule,
+  TypePageSchema,
 } from 'zova';
+import type { BeanRouter } from './bean/bean.router.js';
 import * as ModuleInfo from '@cabloy/module-info';
 import { useRoute } from 'vue-router';
-import { BeanRouter } from './bean/bean.router.js';
-import { getRealRouteName } from './utils.js';
+import {
+  BeanControllerPageBase,
+  BeanSimple,
+  useComputed,
+} from 'zova';
 import { ServiceRouter } from './service/router.js';
-import { IModule } from '@cabloy/module-info';
+import { getRealRouteName } from './utils.js';
 
 export class Monkey
   extends BeanSimple
-  implements IMonkeyAppInitialize, IMonkeyAppInitialized, IMonkeyAppReady, IMonkeyModule, IMonkeyController
-{
+  implements IMonkeyAppInitialize, IMonkeyAppInitialized, IMonkeyAppReady, IMonkeyModule, IMonkeyController {
   private _moduleSelf: IModule;
   private _beanRouter: BeanRouter;
   serviceRouter: ServiceRouter;
@@ -44,10 +45,12 @@ export class Monkey
     // router
     this.serviceRouter = await this.bean._newBean(ServiceRouter, false);
   }
+
   async appInitialized() {
     // emit event
     await this.app.meta.event.emit('a-router:routerGuards', this._beanRouter);
   }
+
   async appReady() {
     // use router
     this.app.vue.use(this._beanRouter);
@@ -61,6 +64,7 @@ export class Monkey
       await this._beanRouter.isReady();
     }
   }
+
   async beanInit(bean: BeanContainer, beanInstance: BeanBase) {
     bean.defineProperty(beanInstance, '$router', {
       enumerable: false,
@@ -70,16 +74,19 @@ export class Monkey
       },
     });
   }
+
   async moduleLoading(module: IModule) {
     if (this._moduleSelf === module) return;
     const beanRouter = await this.getBeanRouter();
     beanRouter._registerRoutes(module);
   }
+
   async moduleLoaded(_module: IModule) {}
   async configLoaded(_module: IModule, _config) {}
   controllerDataPrepare(controllerData: IControllerData) {
     controllerData.context.route = useRoute();
   }
+
   controllerDataInit(controllerData: IControllerData, controller: BeanBase) {
     // only for controller page
     if (!(controller instanceof BeanControllerPageBase)) return;

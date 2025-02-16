@@ -1,4 +1,4 @@
-import { TypeModuleResourceErrorModules } from '../../../types/interface/module.js';
+import type { TypeModuleResourceErrorModules } from '../../../types/interface/module.js';
 import { BeanSimple } from '../../beanSimple.js';
 import { errorsInternal } from './errorInternal.js';
 
@@ -20,11 +20,13 @@ export class ErrorClass extends BeanSimple {
     if (body.code < 500) err.status = body.code;
     throw err;
   }
+
   // code/message,args
   parseFail(module, code, ...args) {
     if (typeof code === 'object') return code;
     return this.parseCode(module, 1, code, ...args);
   }
+
   // parseCode
   parseCode(module, codeDefault, code, ...args) {
     const ebError = this.errors[module];

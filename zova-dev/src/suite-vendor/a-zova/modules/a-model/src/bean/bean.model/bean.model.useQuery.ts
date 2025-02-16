@@ -1,19 +1,21 @@
-import {
+import type {
   DefaultError,
-  QueryKey,
-  useQuery,
+  Query,
   QueryClient,
-  UseQueryReturnType,
+  QueryKey,
   UseQueryDefinedReturnType,
   UseQueryOptions,
-  Query,
-  hashKey,
+  UseQueryReturnType,
 } from '@tanstack/vue-query';
-import { UnwrapNestedRefs } from 'vue';
+import type { UnwrapNestedRefs } from 'vue';
+import type { DefinedInitialQueryOptions, UndefinedInitialQueryOptions } from '../../common/types.js';
+import {
+  hashKey,
+  useQuery,
+} from '@tanstack/vue-query';
 import { deepExtend, useCustomRef } from 'zova';
-import { DefinedInitialQueryOptions, UndefinedInitialQueryOptions } from '../../common/types.js';
-import { BeanModelQuery } from './bean.model.query.js';
 import { resolveStaleTime } from '../../types/index.js';
+import { BeanModelQuery } from './bean.model.query.js';
 
 const SymbolUseQueries = Symbol('SymbolUseQueries');
 

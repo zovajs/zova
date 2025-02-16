@@ -1,7 +1,7 @@
+import { classes } from 'typestyle';
+import { RouterLink } from 'vue-router';
 import { BeanControllerPageBase } from 'zova';
 import { Controller } from 'zova-module-a-bean';
-import { RouterLink } from 'vue-router';
-import { classes } from 'typestyle';
 
 @Controller()
 export class ControllerPageErrorNotFound extends BeanControllerPageBase {

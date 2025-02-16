@@ -1,6 +1,8 @@
-import { generateConfigDefine, ZovaViteConfigResult } from 'zova-vite';
-import { mergeConfig, UserConfig as ViteUserConfig, createLogger } from 'vite';
-import { ConfigContext } from './types.js';
+import type { UserConfig as ViteUserConfig } from 'vite';
+import type { ZovaViteConfigResult } from 'zova-vite';
+import type { ConfigContext } from './types.js';
+import { createLogger, mergeConfig } from 'vite';
+import { generateConfigDefine } from 'zova-vite';
 import { viteNodePlugin } from './viteNodePlugin.js';
 
 const __SvgIconPattern = /\.metadata\/icons\/groups\/.*?\.svg/;

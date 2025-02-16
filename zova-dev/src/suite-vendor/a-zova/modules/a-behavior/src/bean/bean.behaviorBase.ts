@@ -1,9 +1,10 @@
+import type { VNode } from 'vue';
+import type { ServiceComposer } from '../service/composer.js';
+import type { IBehaviors, IDecoratorBehaviorOptions, NextBehavior } from '../types/behavior.js';
+import type { IBehaviorTag } from '../types/behavior.js';
+import type { BeanBehavior } from './bean.behavior.js';
 import { BeanBase, Use } from 'zova';
 import { Virtual } from 'zova-module-a-bean';
-import { IBehaviors, type IBehaviorTag, IDecoratorBehaviorOptions, NextBehavior } from '../types/behavior.js';
-import { VNode } from 'vue';
-import { BeanBehavior } from './bean.behavior.js';
-import { ServiceComposer } from '../service/composer.js';
 
 @Virtual()
 export class BeanBehaviorBase<

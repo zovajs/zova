@@ -1,7 +1,7 @@
-import { IModule } from '@cabloy/module-info';
-import { BeanBase } from '../../bean/beanBase.js';
-import { BeanContainer } from '../../bean/beanContainer.js';
-import { IControllerData } from '../../bean/type.js';
+import type { IModule } from '@cabloy/module-info';
+import type { BeanBase } from '../../bean/beanBase.js';
+import type { BeanContainer } from '../../bean/beanContainer.js';
+import type { IControllerData } from '../../bean/type.js';
 
 export type TypeMonkeyName = keyof IMonkeyModule | keyof IMonkeySystem | keyof IMonkeyController;
 
@@ -19,12 +19,12 @@ export interface IMonkeyModule {
 
 export interface IMonkeySystem
   extends IMonkeyAppInitialize,
-    IMonkeyAppInitialized,
-    IMonkeyAppReady,
-    IMonkeyBeanInit,
-    IMonkeyBeanInited,
-    IMonkeyBeanDispose,
-    IMonkeyBeanDisposed {}
+  IMonkeyAppInitialized,
+  IMonkeyAppReady,
+  IMonkeyBeanInit,
+  IMonkeyBeanInited,
+  IMonkeyBeanDispose,
+  IMonkeyBeanDisposed {}
 
 export interface IMonkeyController {
   controllerDataPrepare(controllerData: IControllerData);

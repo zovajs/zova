@@ -1,7 +1,8 @@
+import type { BeanRouter } from 'zova-module-a-router';
+import type { ModelAuth } from 'zova-module-home-user';
 import { Use } from 'zova';
 import { Service } from 'zova-module-a-bean';
-import { BeanRouter, BeanRouterBase } from 'zova-module-a-router';
-import { ModelAuth } from 'zova-module-home-user';
+import { BeanRouterBase } from 'zova-module-a-router';
 
 @Service()
 export class ServiceRouter extends BeanRouterBase {

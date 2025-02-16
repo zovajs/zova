@@ -1,7 +1,7 @@
+import { z } from 'zod';
 import { BeanControllerPageBase } from 'zova';
 import { Controller } from 'zova-module-a-bean';
 import { ZPage } from 'zova-module-home-base';
-import { z } from 'zod';
 
 export const ControllerPageRouteQuerySchemaParams = z.object({});
 

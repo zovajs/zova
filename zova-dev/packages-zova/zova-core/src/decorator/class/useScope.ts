@@ -1,7 +1,7 @@
-import { IBeanScopeRecord } from '../../bean/type.js';
-import { MetadataKey } from '../../core/metadata.js';
+import type { IBeanScopeRecord } from '../../bean/type.js';
+import type { MetadataKey } from '../../core/metadata.js';
+import type { IDecoratorUseScopeOptions } from '../index.js';
 import { appResource } from '../../core/resource.js';
-import { IDecoratorUseScopeOptions } from '../index.js';
 
 export function UseScope(options: IDecoratorUseScopeOptions): PropertyDecorator;
 export function UseScope<T extends keyof IBeanScopeRecord>(module?: T): PropertyDecorator;

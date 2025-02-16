@@ -1,6 +1,7 @@
+import { RouterLink } from 'vue-router';
 import { BeanControllerBase, ZovaIcon } from 'zova';
 import { Controller } from 'zova-module-a-bean';
-import { RouterLink } from 'vue-router';
+
 export interface ControllerEssentialLinkProps {
   title: string;
   caption?: string;
@@ -9,7 +10,7 @@ export interface ControllerEssentialLinkProps {
   to?: { name?: string } | string;
 }
 
-export type ControllerEssentialLinkEmits = {};
+export interface ControllerEssentialLinkEmits {}
 
 export interface ControllerEssentialLinkSlots {}
 

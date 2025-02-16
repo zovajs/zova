@@ -1,4 +1,4 @@
-import { WatchEffectOptions, WatchOptions } from 'vue';
+import type { WatchEffectOptions, WatchOptions } from 'vue';
 
 export const DecoratorVueElements = Symbol('Decorator#Vue');
 

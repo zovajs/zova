@@ -1,4 +1,4 @@
-import { IModuleApi } from './.metadata/index.jsx';
+import type { IModuleApi } from './.metadata/index.jsx';
 
 declare module 'zova' {
   export interface BeanBase {

@@ -1,13 +1,13 @@
-import { z } from 'zod';
+import type { z } from 'zod';
 
 export interface ZovaConfigRoutes {}
 export interface IPagePathRecord {}
 export interface IPageNameRecord {}
 
-export type TypePageParamsQuery<Q = unknown, P = unknown> = {
+export interface TypePageParamsQuery<Q = unknown, P = unknown> {
   query?: Q;
   params?: P;
-};
+}
 
-export type TypePageSchema = { params?: z.ZodTypeAny; query: z.ZodTypeAny };
+export interface TypePageSchema { params?: z.ZodTypeAny; query: z.ZodTypeAny }
 export type TypePageSchemas = Record<string, TypePageSchema>;

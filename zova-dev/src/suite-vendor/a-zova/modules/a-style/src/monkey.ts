@@ -1,15 +1,19 @@
-import { style, createTypeStyle, TypeStyle } from 'typestyle';
-import {
+import type { TypeStyle } from 'typestyle';
+import type {
   BeanBase,
   BeanContainer,
-  BeanSimple,
   IMonkeyAppInitialize,
   IMonkeyAppInitialized,
   IMonkeyBeanInit,
+} from 'zova';
+import type { ScopeModule } from './.metadata/this.js';
+import { createTypeStyle, style } from 'typestyle';
+import {
+  BeanSimple,
   SymbolModuleName,
   useComputed,
 } from 'zova';
-import { ScopeModule, __ThisModule__ } from './.metadata/this.js';
+import { __ThisModule__ } from './.metadata/this.js';
 import { BeanTheme } from './bean/bean.theme.js';
 
 export class Monkey extends BeanSimple implements IMonkeyAppInitialize, IMonkeyAppInitialized, IMonkeyBeanInit {
@@ -32,6 +36,7 @@ export class Monkey extends BeanSimple implements IMonkeyAppInitialize, IMonkeyA
       });
     }
   }
+
   async appInitialized() {
     // theme
     this._beanTheme = await this.bean._getBean(BeanTheme, true);
@@ -39,6 +44,7 @@ export class Monkey extends BeanSimple implements IMonkeyAppInitialize, IMonkeyA
     const scope: ScopeModule = await this.bean.getScope(__ThisModule__);
     this._beanCssDefault = await this.bean._getBean(scope.config.defaultCss, true);
   }
+
   async beanInit(bean: BeanContainer, beanInstance: BeanBase) {
     const self = this;
     bean.defineProperty(beanInstance, '$style', {

@@ -1,8 +1,8 @@
-import { RendererNode } from 'vue';
+import type { RendererNode } from 'vue';
 import { BeanSimple } from '../../bean/beanSimple.js';
-import { CtxState } from './state.js';
 import { CtxComponent } from './component.js';
 import { CtxSSR } from './ssr.js';
+import { CtxState } from './state.js';
 
 export class CtxMeta extends BeanSimple {
   state: CtxState;

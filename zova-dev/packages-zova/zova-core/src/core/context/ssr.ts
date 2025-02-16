@@ -1,18 +1,19 @@
-import { ComponentInternalInstance, normalizeClass, normalizeStyle, Ref, ref, useSSRContext, VNode } from 'vue';
-import { defu } from 'defu';
-import { BeanSimple } from '../../bean/beanSimple.js';
-import { Functionable } from '../../decorator/index.js';
-import {
+import type { ComponentInternalInstance, Ref, VNode } from 'vue';
+import type { ErrorSSR } from '../../bean/index.js';
+import type { Functionable } from '../../decorator/index.js';
+import type {
   OnHydratePropHasMismatch,
   OnHydratePropHasMismatchResult,
   SSRContext,
   SSRContextState,
   SSRContextStateDefer,
 } from '../../types/interface/ssr.js';
+import { includeBooleanAttr, isBooleanAttr, isString, stringifyStyle } from '@vue/shared';
+import { defu } from 'defu';
+import { normalizeClass, normalizeStyle, ref, useSSRContext } from 'vue';
+import { BeanSimple } from '../../bean/beanSimple.js';
 import { cast } from '../../types/utils/cast.js';
 import { CtxSSRMetaStore } from './ssrMetaStore.js';
-import { includeBooleanAttr, isBooleanAttr, isString, stringifyStyle } from '@vue/shared';
-import { ErrorSSR } from '../../bean/index.js';
 
 const SymbolIsRuntimeSsrPreHydration = Symbol('SymbolIsRuntimeSsrPreHydration');
 const SymbolSSRContext = Symbol('SymbolSSRContext');
@@ -144,6 +145,7 @@ export class CtxSSR extends BeanSimple {
       return fn();
     }
   }
+
   redirect(url: string): void;
   redirect(status: number, url: string): void;
   redirect(status: number | string, url?: string) {
@@ -168,7 +170,7 @@ export class CtxSSR extends BeanSimple {
   ): OnHydratePropHasMismatchResult {
     // expected
     let ignore = false;
-    let expected: string | undefined = undefined;
+    let expected: string | undefined;
     if (key === 'class') {
       ignore = true;
       if (clientValue !== undefined) {
@@ -272,7 +274,7 @@ export class CtxSSR extends BeanSimple {
 
   /** @internal */
   public _hydratingInstanceRecord(instance: ComponentInternalInstance) {
-    if (this[SymbolInstanceUpdates].indexOf(instance) === -1) {
+    if (!this[SymbolInstanceUpdates].includes(instance)) {
       this[SymbolInstanceUpdates].push(instance);
       return true;
     }

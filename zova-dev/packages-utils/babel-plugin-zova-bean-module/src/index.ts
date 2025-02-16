@@ -1,5 +1,6 @@
-import { /*template,*/ types as t, type PluginPass } from '@babel/core';
+import type { PluginPass } from '@babel/core';
 import type { NodePath, Visitor } from '@babel/traverse';
+import { /* template, */ types as t } from '@babel/core';
 import { parseInfoFromPath } from '@cabloy/module-info';
 
 interface ContextInfo {
@@ -83,6 +84,6 @@ function __createDecoratorNode(beanInfo) {
 function __checkIfValid(fileName?: string | null) {
   if (!fileName) return false;
   return !['src/boot/app/', '.zova/app/'].some(item => {
-    return fileName.indexOf(item) > -1;
+    return fileName.includes(item);
   });
 }

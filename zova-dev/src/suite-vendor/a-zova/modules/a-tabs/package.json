@@ -1,8 +1,13 @@
 {
   "name": "zova-module-a-tabs",
+  "type": "module",
   "version": "5.0.29",
   "title": "a-tabs",
-  "type": "module",
+  "description": "tabs",
+  "author": "zhennann",
+  "keywords": [
+    "Zova Module"
+  ],
   "exports": {
     ".": {
       "types": [
@@ -14,14 +19,9 @@
     },
     "./*": "./*"
   },
-  "description": "tabs",
-  "keywords": [
-    "Zova Module"
-  ],
-  "author": "zhennann",
   "files": [
-    "mock",
     "dist",
+    "mock",
     "src"
   ],
   "scripts": {},

@@ -1,9 +1,9 @@
-import { IModule } from '@cabloy/module-info';
-import { IMonkeyModule, IMonkeySystem, IMonkeyController } from './monkey.js';
-import { Constructable } from '../../decorator/index.js';
-import { ZovaLocaleOptionalMap } from '../../core/app/locale.js';
-import { RouteRecordRaw } from 'vue-router';
-import { TypeModuleResourceConfig } from './module.js';
+import type { IModule } from '@cabloy/module-info';
+import type { RouteRecordRaw } from 'vue-router';
+import type { ZovaLocaleOptionalMap } from '../../core/app/locale.js';
+import type { Constructable } from '../../decorator/index.js';
+import type { TypeModuleResourceConfig } from './module.js';
+import type { IMonkeyController, IMonkeyModule, IMonkeySystem } from './monkey.js';
 
 export interface PluginZovaModulesMeta {
   modules: Record<string, IModule>;

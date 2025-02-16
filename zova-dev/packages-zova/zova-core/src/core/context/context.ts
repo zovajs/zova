@@ -1,8 +1,9 @@
-import { ComponentInternalInstance, markRaw } from 'vue';
-import { ZovaApplication } from '../app/application.js';
+import type { ComponentInternalInstance } from 'vue';
+import type { ZovaApplication } from '../app/application.js';
+import { markRaw } from 'vue';
 import { BeanContainer } from '../../bean/beanContainer.js';
-import { CtxMeta } from './meta.js';
 import { cast } from '../../types/utils/cast.js';
+import { CtxMeta } from './meta.js';
 import { CtxUtil } from './util.js';
 
 export class ZovaContext {
@@ -11,7 +12,7 @@ export class ZovaContext {
   bean: BeanContainer;
   util: CtxUtil;
   meta: CtxMeta;
-  //config: ContextConfig;
+  // config: ContextConfig;
 
   constructor(instance: ComponentInternalInstance) {
     markRaw(this);

@@ -1,4 +1,4 @@
-import { ZovaApplication } from '../../../core/app/application.js';
+import type { ZovaApplication } from '../../../core/app/application.js';
 
 export type TypeModuleConfig<T extends (app: ZovaApplication) => object> = ReturnType<T>;
 

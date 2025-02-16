@@ -1,6 +1,6 @@
+import type { RenderLayoutDefault } from './render.jsx';
 import { BeanRenderBase, Use } from 'zova';
 import { Render } from 'zova-module-a-bean';
-import type { RenderLayoutDefault } from './render.jsx';
 
 @Render()
 export class RenderContent extends BeanRenderBase {

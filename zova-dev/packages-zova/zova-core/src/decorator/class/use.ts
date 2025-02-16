@@ -1,10 +1,6 @@
-import { isNil } from '@cabloy/utils';
-import { evaluate } from 'cel-js';
-import { IBeanRecord } from '../../bean/type.js';
-import { appMetadata, MetadataKey } from '../../core/metadata.js';
-import { appResource } from '../../core/resource.js';
-import { useRef } from '../../vue/ref.js';
-import {
+import type { IBeanRecord } from '../../bean/type.js';
+import type { MetadataKey } from '../../core/metadata.js';
+import type {
   Constructable,
   IDecoratorUseOptions,
   IDecoratorUseOptionsBase,
@@ -12,6 +8,11 @@ import {
   IUsePrepareArgResult,
   TypeDecoratorUseOptionsInitArg,
 } from '../index.js';
+import { isNil } from '@cabloy/utils';
+import { evaluate } from 'cel-js';
+import { appMetadata } from '../../core/metadata.js';
+import { appResource } from '../../core/resource.js';
+import { useRef } from '../../vue/ref.js';
 
 export function Use(options?: IDecoratorUseOptions): PropertyDecorator & MethodDecorator;
 export function Use<T extends keyof IBeanRecord>(beanFullName?: T): PropertyDecorator & MethodDecorator;

@@ -1,5 +1,6 @@
 {
   "name": "zova-module-a-zova",
+  "type": "module",
   "version": "5.0.49",
   "title": "a-zova",
   "zovaModule": {
@@ -26,7 +27,12 @@
       "fs-extra": true
     }
   },
-  "type": "module",
+  "description": "zova",
+  "author": "zhennann",
+  "license": "MIT",
+  "keywords": [
+    "Zova Module"
+  ],
   "exports": {
     ".": {
       "types": [
@@ -38,12 +44,6 @@
     },
     "./*": "./*"
   },
-  "description": "zova",
-  "keywords": [
-    "Zova Module"
-  ],
-  "author": "zhennann",
-  "license": "MIT",
   "files": [
     "dist",
     "src"

@@ -1,10 +1,11 @@
-import { IModule, IModuleInfo } from '@cabloy/module-info';
+import type { IModule, IModuleInfo } from '@cabloy/module-info';
+import type { TypeBeanScopeRecordKeys } from '../../bean/type.js';
+import type { IModuleResource, PluginZovaModulesMeta, TypeMonkeyName } from '../../types/index.js';
 import * as ModuleInfo from '@cabloy/module-info';
-import { BeanSimple } from '../../bean/beanSimple.js';
 import { shallowReactive } from 'vue';
-import { IModuleResource, PluginZovaModulesMeta, SymbolInstalled, TypeMonkeyName } from '../../types/index.js';
+import { BeanSimple } from '../../bean/beanSimple.js';
+import { SymbolInstalled } from '../../types/index.js';
 import { StateLock } from '../../utils/stateLock.js';
-import { TypeBeanScopeRecordKeys } from '../../bean/type.js';
 import { deepExtend } from '../app/util.js';
 
 export class AppModule extends BeanSimple {

@@ -1,28 +1,31 @@
-import { isClass } from '../utils/isClass.js';
-import { ZovaApplication, ZovaContext } from '../core/index.js';
-import {
-  __prepareInjectSelectorInfo,
+import type { ZovaApplication, ZovaContext } from '../core/index.js';
+import type { MetadataKey } from '../core/metadata.js';
+import type {
   Constructable,
-  DecoratorVueElements,
   Functionable,
   IDecoratorBeanOptionsBase,
   IDecoratorUseOptions,
   IDecoratorUseOptionsBase,
   IDecoratorVueElement,
 } from '../decorator/index.js';
-import { appResource } from '../core/resource.js';
-import { appMetadata, MetadataKey } from '../core/metadata.js';
-import { IBeanRecord, IBeanScopeRecord, IControllerData, TypeBeanScopeRecordKeys } from './type.js';
-import { BeanBase } from './beanBase.js';
-import { BeanSimple } from './beanSimple.js';
+import type { IInjectRecord } from '../types/interface/inject.js';
+import type { IBeanRecord, IBeanScopeRecord, IControllerData, TypeBeanScopeRecordKeys } from './type.js';
 import { compose } from '@cabloy/compose';
-import { markRaw, reactive, shallowReactive, provide as composableProvide, inject as composableInject } from 'vue';
-import { cast } from '../types/utils/cast.js';
-import { IInjectRecord } from '../types/interface/inject.js';
-import { SymbolBeanFullName, SymbolInited } from './beanBaseSimple.js';
-import { vueDecorators } from './vueDecorators/index.js';
 import { isNilOrEmptyString } from '@cabloy/utils';
+import { inject as composableInject, provide as composableProvide, markRaw, reactive, shallowReactive } from 'vue';
+import { appMetadata } from '../core/metadata.js';
+import { appResource } from '../core/resource.js';
+import {
+  __prepareInjectSelectorInfo,
+  DecoratorVueElements,
+} from '../decorator/index.js';
+import { cast } from '../types/utils/cast.js';
+import { isClass } from '../utils/isClass.js';
 import { BeanAopBase } from './beanAopBase.js';
+import { BeanBase } from './beanBase.js';
+import { SymbolBeanFullName, SymbolInited } from './beanBaseSimple.js';
+import { BeanSimple } from './beanSimple.js';
+import { vueDecorators } from './vueDecorators/index.js';
 
 const SymbolBeanContainerParent = Symbol('Bean#BeanContainerParent');
 const SymbolProxyMagic = Symbol('Bean#ProxyMagic');
@@ -546,7 +549,7 @@ export class BeanContainer {
   }
 
   private _createBeanComposableInstance(beanComposable, args) {
-    return this.runWithInstanceScopeOrAppContext(function () {
+    return this.runWithInstanceScopeOrAppContext(() => {
       return beanComposable(...args);
     });
   }
@@ -671,7 +674,7 @@ export class BeanContainer {
     // options: selectorInfo
     const selectorInfo = __prepareInjectSelectorInfo(beanInstance, useOptions);
     // recordProp
-    //const recordProp = useOptions.name || useOptions.prop;
+    // const recordProp = useOptions.name || useOptions.prop;
     const recordProp = useOptions.prop;
     // targetInstance
     let targetInstance;

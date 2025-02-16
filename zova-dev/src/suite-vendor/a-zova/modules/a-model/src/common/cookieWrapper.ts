@@ -1,7 +1,9 @@
-import { Query } from '@tanstack/vue-query';
-import { BeanSimple, CookieOptions } from 'zova';
-import { QueryMetaPersister, resolveMaxAgeTime } from '../types/index.js';
+import type { Query } from '@tanstack/vue-query';
+import type { CookieOptions } from 'zova';
+import type { QueryMetaPersister } from '../types/index.js';
+import { BeanSimple } from 'zova';
 import { __ThisModule__ } from '../.metadata/this.js';
+import { resolveMaxAgeTime } from '../types/index.js';
 
 export class CookieWrapper extends BeanSimple {
   options: QueryMetaPersister;

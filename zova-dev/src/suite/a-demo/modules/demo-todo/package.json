@@ -1,8 +1,13 @@
 {
   "name": "zova-module-demo-todo",
+  "type": "module",
   "version": "5.0.0",
   "title": "demo-todo",
-  "type": "module",
+  "description": "todo",
+  "author": "zhennann",
+  "keywords": [
+    "Zova Module"
+  ],
   "exports": {
     ".": {
       "types": [
@@ -14,14 +19,9 @@
     },
     "./*": "./*"
   },
-  "description": "todo",
-  "keywords": [
-    "Zova Module"
-  ],
-  "author": "zhennann",
   "files": [
-    "mock",
-    "dist"
+    "dist",
+    "mock"
   ],
   "scripts": {},
   "dependencies": {}

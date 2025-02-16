@@ -1,16 +1,17 @@
-import { isClass } from '../utils/isClass.js';
-import {
+import type { IBeanRecord } from '../bean/type.js';
+import type {
   Constructable,
   Functionable,
   IDecoratorBeanInfoOptions,
   IDecoratorBeanOptionsBase,
   IDecoratorUseOptionsBase,
 } from '../decorator/index.js';
-import { MetadataKey, appMetadata } from './metadata.js';
-import { IBeanRecord } from '../bean/type.js';
-import { BeanSimple } from '../bean/beanSimple.js';
+import type { MetadataKey } from './metadata.js';
 import { parseLastWord, skipLastWord, skipPrefix, splitWords } from '@cabloy/word-utils';
+import { BeanSimple } from '../bean/beanSimple.js';
+import { isClass } from '../utils/isClass.js';
 import { uuid } from '../utils/uuid.js';
+import { appMetadata } from './metadata.js';
 
 export const DecoratorBeanFullName = Symbol('Decorator#BeanFullName');
 export const DecoratorBeanInfo = Symbol('Decorator#BeanInfo');
@@ -101,7 +102,7 @@ export class AppResource extends BeanSimple {
   _fixClassName(className: string) {
     const ch = className.charAt(className.length - 1);
     if (ch === '2') return className.substring(0, className.length - 1);
-    //if (ch >= '0' && ch <= '9') return className.substring(0, className.length - 1);
+    // if (ch >= '0' && ch <= '9') return className.substring(0, className.length - 1);
     return className;
   }
 
