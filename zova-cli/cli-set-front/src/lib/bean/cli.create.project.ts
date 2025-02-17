@@ -1,5 +1,6 @@
 import type { CmdOptions } from '@cabloy/cli';
 import fs from 'node:fs';
+import { createRequire } from 'node:module';
 import os from 'node:os';
 import path from 'node:path';
 import { BeanCliBase } from '@cabloy/cli';
@@ -99,6 +100,7 @@ export class CliCreateProject extends BeanCliBase {
     } catch (err) {
       if (withFallback) {
         await this.console.log(`use fallback from ${packageName}`);
+        const require = createRequire(import.meta.url);
         return require(`${packageName}/package.json`);
       }
       throw err;
