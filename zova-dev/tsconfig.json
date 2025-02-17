@@ -2,9 +2,11 @@
   "extends": "./tsconfig.base.esm",
   "compilerOptions": {
     "composite": false,
+    "allowImportingTsExtensions": false,
     "declaration": false,
     "declarationMap": false,
     "noEmit": true,
+    "rewriteRelativeImportExtensions": false,
     "verbatimModuleSyntax": false
   },
   "references": [
