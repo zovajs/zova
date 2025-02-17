@@ -1,8 +1,3 @@
 {
-  "extends": "@cabloy/lint/front/tsconfig.base.cjs",
-  "compilerOptions": {
-    "allowImportingTsExtensions": true,
-    "rewriteRelativeImportExtensions": true,
-    "verbatimModuleSyntax": true
-  }
+  "extends": "@cabloy/lint/front/tsconfig.base.cjs"
 }

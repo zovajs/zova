@@ -1,3 +1,10 @@
 {
-  "extends": "@cabloy/lint/api/tsconfig.base.esm"
+  "extends": "@cabloy/lint/api/tsconfig.base.esm",
+  "compilerOptions": {
+    "target": "esnext",
+    "module": "nodenext",
+    "allowImportingTsExtensions": true,
+    "rewriteRelativeImportExtensions": true,
+    "verbatimModuleSyntax": true
+  }
 }
