@@ -1,11 +1,11 @@
 import type { glob } from '@cabloy/module-glob';
-import type { ZovaViteConfigOptions, ZovaVitePlugin } from './types.js';
+import type { ZovaViteConfigOptions, ZovaVitePlugin } from './types.ts';
 import path from 'node:path';
 import babel from '@cabloy/vite-plugin-babel';
 import fse from 'fs-extra';
 // import vitePluginChecker from 'vite-plugin-checker';
 import { vitePluginFakeServer } from 'vite-plugin-fake-server-turbo';
-import { requireModule } from './utils.js';
+import { requireModule } from './utils.ts';
 
 export function generateVitePlugins(
   configOptions: ZovaViteConfigOptions,

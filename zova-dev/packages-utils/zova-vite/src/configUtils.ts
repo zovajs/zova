@@ -1,10 +1,10 @@
 import type { IBundleVendor, ZovaConfigMeta } from '@cabloy/module-info';
-import type { ZovaViteConfigChunkVendor, ZovaViteConfigOptions } from './types.js';
+import type { ZovaViteConfigChunkVendor, ZovaViteConfigOptions } from './types.ts';
 import crypto from 'node:crypto';
 import path from 'node:path';
 import * as dotenv from '@cabloy/dotenv';
 import { glob } from '@cabloy/module-glob';
-import { getEnvMeta } from './utils.js';
+import { getEnvMeta } from './utils.ts';
 
 const __ModuleLibs = [
   /src\/module\/([^/]*)\//,

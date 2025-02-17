@@ -1,3 +1,3 @@
-import { setModuleAlias } from './utils.js';
+import { setModuleAlias } from './utils.ts';
 
 setModuleAlias();

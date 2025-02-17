@@ -1,11 +1,11 @@
 import type { glob } from '@cabloy/module-glob';
 import type { ZovaConfigMeta } from '@cabloy/module-info';
-import type { ZovaViteConfigOptions } from './types.js';
+import type { ZovaViteConfigOptions } from './types.ts';
 import path from 'node:path';
 import { getEnvFiles } from '@cabloy/dotenv';
 import chalk from 'chalk';
 import fse from 'fs-extra';
-import { copyTemplateFile, getEnvMeta, resolveTemplatePath } from './utils.js';
+import { copyTemplateFile, getEnvMeta, resolveTemplatePath } from './utils.ts';
 
 export async function generateEntryFiles(
   configMeta: ZovaConfigMeta,

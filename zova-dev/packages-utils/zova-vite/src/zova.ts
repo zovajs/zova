@@ -1,11 +1,11 @@
 import type { ZovaConfigMeta } from '@cabloy/module-info';
 import type { CommonServerOptions } from 'vite';
-import type { ZovaViteConfigOptions, ZovaViteConfigResult } from './types.js';
+import type { ZovaViteConfigOptions, ZovaViteConfigResult } from './types.ts';
 import path from 'node:path';
-import { createConfigUtils } from './configUtils.js';
-import { generateEntryFiles } from './generateEntryFiles.js';
-import { setModuleAlias } from './utils.js';
-import { generateVitePlugins } from './vitePlugins.js';
+import { createConfigUtils } from './configUtils.ts';
+import { generateEntryFiles } from './generateEntryFiles.ts';
+import { setModuleAlias } from './utils.ts';
+import { generateVitePlugins } from './vitePlugins.ts';
 
 const __SvgIconPattern = /\.metadata\/icons\/groups\/.*?\.svg/;
 
