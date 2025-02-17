@@ -299,7 +299,7 @@ export class Api${apiName} extends BeanApiBase {
     for (let index = 0; index < nodeOperations.members.length; index++) {
       const node = nodeOperations.members[index];
       if (!ts.isPropertySignature(node)) continue;
-      const operationId = (<ts.Identifier>node.name).text;
+      const operationId = (node.name as ts.Identifier).text;
       if (!_checkOperationIdEnabled(moduleConfig, operationId)) continue;
       let [api, action] = operationId.toString().split('_');
       if (!action) {
@@ -333,15 +333,15 @@ function _getRequestPathInfo(ast: ts.Node[], nodeActionInfo: INodeActionInfo) {
   const nodePath = nodePaths.members.find(node => {
     if (!ts.isPropertySignature(node)) return false;
     if (!node.type || !ts.isTypeLiteralNode(node.type)) return false;
-    path = (<ts.StringLiteral>node.name).text;
+    path = (node.name as ts.StringLiteral).text;
     const nodeMethod = node.type.members.find(item => {
       if (!ts.isPropertySignature(item)) return false;
       if (!item.type || !ts.isIndexedAccessTypeNode(item.type)) return false;
-      const operationId = (<ts.StringLiteral>(<ts.LiteralTypeNode>item.type.indexType).literal).text;
+      const operationId = ((item.type.indexType as ts.LiteralTypeNode).literal as ts.StringLiteral).text;
       if (operationId !== nodeActionInfo.operationId) return false;
-      method = (<ts.Identifier>item.name).text;
+      method = (item.name as ts.Identifier).text;
       // comment
-      const nodeComments = (<any>item).emitNode?.leadingComments;
+      const nodeComments = (item as any).emitNode?.leadingComments;
       if (nodeComments) {
         comments = nodeComments.map(nodeComment => nodeComment.text);
       }
@@ -358,8 +358,8 @@ function _parseNodeType(nodeType?: ts.TypeLiteralNode | ts.InterfaceDeclaration)
   const nodeTypeInfo: TypeNodeTypeInfo = {};
   nodeType.members.forEach(node => {
     if (!ts.isPropertySignature(node)) return;
-    const name = (<ts.Identifier>node.name).text;
-    const value = <ts.TypeLiteralNode>node.type;
+    const name = (node.name as ts.Identifier).text;
+    const value = node.type as ts.TypeLiteralNode;
     nodeTypeInfo[name] = {
       question: !!node.questionToken,
       nodeType: value,
