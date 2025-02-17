@@ -1,10 +1,11 @@
-import { BeanCliBase, CmdOptions, NameMeta } from '@cabloy/cli';
-import { IModuleInfo } from '@cabloy/module-info';
-import path from 'path';
-import fs from 'fs';
-import { __ThisSetName__ } from '../this.js';
+import type { CmdOptions, NameMeta } from '@cabloy/cli';
+import type { IModuleInfo } from '@cabloy/module-info';
+import type { ZovaConfigMeta } from 'zova-shared';
+import fs from 'node:fs';
+import path from 'node:path';
+import { BeanCliBase } from '@cabloy/cli';
 import { createConfigUtils } from 'zova-vite';
-import { ZovaConfigMeta } from 'zova-shared';
+import { __ThisSetName__ } from '../this.js';
 
 declare module '@cabloy/cli' {
   interface ICommandArgv {

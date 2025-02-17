@@ -1,6 +1,6 @@
-import path from 'node:path';
+import type { IModule } from '@cabloy/module-info';
 import fs from 'node:fs';
-import { IModule } from '@cabloy/module-info';
+import path from 'node:path';
 
 export function getControllerFileName(module: IModule, type: 'page' | 'component', beanName) {
   const controllerFile = path.join(module.root, `src/${type}/${beanName}/controller.ts`);
