@@ -85,18 +85,18 @@ export class CliRefactorRenameComponent extends BeanCliBase {
     const astNode = ast.find('export const routes: IModuleRoute[] = [$_$]');
     const astMatches = astNode.match[0];
     const astMatch = astMatches.find(item => {
-      return (<any>item.node).properties.some(prop => {
+      return (item.node as any).properties.some(prop => {
         return prop.key.name === 'component' && prop.value.name === argv.nameMeta.shortCapitalize;
       });
     });
     if (!astMatch) {
       throw new Error(`page route not found: ${argv.nameMeta.shortCapitalize}`);
     }
-    const astPropComponent = (<any>astMatch?.node).properties.find(prop => {
+    const astPropComponent = (astMatch?.node as any).properties.find(prop => {
       return prop.key.name === 'component';
     });
     astPropComponent.value.name = argv.componentNameNewCapitalize;
-    const astPropPath = (<any>astMatch?.node).properties.find(prop => {
+    const astPropPath = (astMatch?.node as any).properties.find(prop => {
       return prop.key.name === 'path';
     });
     if (astPropPath && astPropPath.value.value) {
