@@ -99,7 +99,7 @@ export function createConfigUtils(
       },
     );
     for (const key of ['NODE_ENV', 'META_FLAVOR', 'META_MODE', 'META_APP_MODE', 'DEV', 'PROD', 'SSR']) {
-      if (<any>res[key] !== false) {
+      if (res[key] as any !== false) {
         process.env[key] = res[key];
       }
     }

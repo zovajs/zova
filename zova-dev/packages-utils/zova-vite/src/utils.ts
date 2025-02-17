@@ -2,7 +2,7 @@ import type { ZovaConfigMeta, ZovaMetaAppMode, ZovaMetaFlavor } from '@cabloy/mo
 import { createRequire } from 'node:module';
 import path from 'node:path';
 import fse from 'fs-extra';
-import compileTemplate from 'lodash/template.ts';
+import compileTemplate from 'lodash/template.js';
 import parseArgs from 'minimist';
 import moduleAlias from 'module-alias';
 

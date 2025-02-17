@@ -60,11 +60,11 @@ export const collectCss = (mods: ModuleNode[] | Set<ModuleNode>, styles = new Ma
  * and remove the initial styled attached to the head
  */
 export const removeCssHotReloaded = () => {
-  if (!(<any>import.meta).hot) {
+  if (!(import.meta as any).hot) {
     return;
   }
 
-  (<any>import.meta).hot.on('vite:beforeUpdate', module => {
+  (import.meta as any).hot.on('vite:beforeUpdate', module => {
     module.updates.forEach(update => {
       const moduleStyle = document.querySelector(`[vite-module-id="${hashCode(update.acceptedPath)}"]`);
 
