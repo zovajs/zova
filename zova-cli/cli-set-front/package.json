@@ -20,9 +20,9 @@
         "./dist/index.d.ts",
         "./src/index.ts"
       ],
-      "import": "./dist/index.js",
-      "require": "./dist/index.js",
-      "default": "./src/index.ts"
+      "import": "./src/index.ts",
+      "require": "./src/index.ts",
+      "default": "./dist/index.js"
     },
     "./package.json": "./package.json"
   },
