@@ -3,8 +3,8 @@ import type { IModuleInfo } from '@cabloy/module-info';
 import fs from 'node:fs';
 import path from 'node:path';
 import { BeanCliBase } from '@cabloy/cli';
-import { getControllerFileName } from '../common/utils.js';
-import { __ThisSetName__ } from '../this.js';
+import { getControllerFileName } from '../common/utils.ts';
+import { __ThisSetName__ } from '../this.ts';
 
 declare module '@cabloy/cli' {
   interface ICommandArgv {

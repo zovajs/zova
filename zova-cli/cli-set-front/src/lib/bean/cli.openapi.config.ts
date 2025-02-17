@@ -1,5 +1,5 @@
 import { BeanCliBase } from '@cabloy/cli';
-import { __ThisSetName__ } from '../this.js';
+import { __ThisSetName__ } from '../this.ts';
 
 declare module '@cabloy/cli' {
   interface ICommandArgv {}

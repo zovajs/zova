@@ -3,7 +3,7 @@ import fs from 'node:fs';
 import path from 'node:path';
 import { BeanCliBase } from '@cabloy/cli';
 import { getOnionMetasMeta, getOnionScenesMeta } from '@cabloy/module-info';
-import { __ThisSetName__ } from '../this.js';
+import { __ThisSetName__ } from '../this.ts';
 
 declare module '@cabloy/cli' {
   interface ICommandArgv {

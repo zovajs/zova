@@ -8,7 +8,7 @@ import compressing from 'compressing';
 import fse from 'fs-extra';
 import { rimraf } from 'rimraf';
 import urllib from 'urllib';
-// import { __ThisSetName__ } from '../this.js';
+// import { __ThisSetName__ } from '../this.ts';
 
 declare module '@cabloy/cli' {
   interface ICommandArgv {
