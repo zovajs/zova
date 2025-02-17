@@ -33,8 +33,8 @@ importers:
   cli:
     dependencies:
       '@cabloy/cli':
-        specifier: ^3.0.3
-        version: 3.0.3(vue@3.5.13(typescript@5.7.3))
+        specifier: ^3.0.4
+        version: 3.0.4(vue@3.5.13(typescript@5.7.3))
       zova-cli-set-front:
         specifier: ^1.1.199
         version: link:../cli-set-front
@@ -42,8 +42,8 @@ importers:
   cli-set-front:
     dependencies:
       '@cabloy/cli':
-        specifier: ^3.0.3
-        version: 3.0.3(vue@3.5.13(typescript@5.7.3))
+        specifier: ^3.0.4
+        version: 3.0.4(vue@3.5.13(typescript@5.7.3))
       '@cabloy/extend':
         specifier: ^3.0.12
         version: 3.0.12
@@ -291,8 +291,8 @@ packages:
     resolution: {integrity: sha512-L6mZmwFDK6Cjh1nRCLXpa6no13ZIioJDz7mdkzHv399pThrTa/k0nUlNaenOeh2kWu/iaOQYElEpKPUswUa9Vg==}
     engines: {node: '>=6.9.0'}
 
-  '@cabloy/cli@3.0.3':
-    resolution: {integrity: sha512-Pv48qsOg2mM4hvIXWVCPe9GywIUXKwp32FslriL0ZxjrMGi/lFILbddONG0XhPKiU1oqJVSPUCbO7Ti+OLGZhw==}
+  '@cabloy/cli@3.0.4':
+    resolution: {integrity: sha512-R6SvbaOrV988chVdqYthnPQPGPw/dQC1n8DPO0QCBj68i89+om9gzGH3eTs9+rdNSkQEGdfTbEeYhn1uHbW/VA==}
 
   '@cabloy/dotenv@1.0.9':
     resolution: {integrity: sha512-dvBNwJmC4s3CYZ0auTy7MncZlbinHItdarXH5F9ZO6AkhYnV7aSw4FBadg6U3Sb2JFtS4YZ/Xbr5LrjZXnRzRQ==}
@@ -312,8 +312,8 @@ packages:
   '@cabloy/module-info@1.2.10':
     resolution: {integrity: sha512-UKvWVWTmbk+/R/B3AzEGCqyY234o1u6tMxK+V7dH7m3cciZ871iFsGq9/GtYeXra/a+69etkb4z353fIN5vGdg==}
 
-  '@cabloy/process-helper@2.0.2':
-    resolution: {integrity: sha512-2ESvdVQNo4oSfJwCHxvW6+rg6zxiPa+xBp39aPMIlVkAOHOAohOHEOkhJIxgwmMCQjB+LKcjZ5wItl8OkUgDtA==}
+  '@cabloy/process-helper@2.0.3':
+    resolution: {integrity: sha512-nSNw8gV0KneeKSZeBurQrEi85BrIkgXgocFXulLd+CZ9hrrNvGuPgTfpVlqiW8FxeOcPPaRsuQ6XoFJq7FqhbA==}
 
   '@cabloy/utils@1.0.3':
     resolution: {integrity: sha512-JeBikgZ8AIdFKzKS9VbFfxmZSOjRTD50p9tL3mzVnqp1S4Se2aPELKpLWXFS1gWxQ/vAXTpcV2tahvlnOc7slg==}
@@ -4645,12 +4645,12 @@ snapshots:
       '@babel/helper-string-parser': 7.25.9
       '@babel/helper-validator-identifier': 7.25.9
 
-  '@cabloy/cli@3.0.3(vue@3.5.13(typescript@5.7.3))':
+  '@cabloy/cli@3.0.4(vue@3.5.13(typescript@5.7.3))':
     dependencies:
       '@babel/parser': 7.26.5
       '@cabloy/module-glob': 5.1.12
       '@cabloy/module-info': 1.2.10
-      '@cabloy/process-helper': 2.0.2
+      '@cabloy/process-helper': 2.0.3
       '@cabloy/word-utils': 1.0.10
       '@npmcli/config': 8.3.4
       '@zhennann/common-bin': 4.0.0
@@ -4738,7 +4738,7 @@ snapshots:
     dependencies:
       stack-utils: 2.0.6
 
-  '@cabloy/process-helper@2.0.2': {}
+  '@cabloy/process-helper@2.0.3': {}
 
   '@cabloy/utils@1.0.3': {}
 

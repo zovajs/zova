@@ -1,2 +1,2 @@
-export * from './lib/beans.js';
-export * from './lib/commands.js';
+export * from './lib/beans.ts';
+export * from './lib/commands.ts';
