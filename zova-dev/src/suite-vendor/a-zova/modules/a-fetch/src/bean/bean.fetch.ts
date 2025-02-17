@@ -14,7 +14,7 @@ export interface BeanFetch extends AxiosInstance {}
 export class BeanFetch extends BeanBase {
   private _composer: ServiceComposer;
 
-  private [SymbolFetch]: AxiosInstance;
+  protected [SymbolFetch]: AxiosInstance;
 
   protected async __init__(options?: IBeanFetchOptions) {
     // axiosConfig
