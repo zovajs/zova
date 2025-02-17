@@ -1,7 +1,7 @@
+import path from 'node:path';
 import { BeanCliBase } from '@cabloy/cli';
-import fse from 'fs-extra';
-import path from 'path';
 import eggBornUtils from 'egg-born-utils';
+import fse from 'fs-extra';
 import SVGCompiler from 'svg-baker';
 import { optimize } from 'svgo';
 
@@ -65,7 +65,7 @@ export class CliToolsIcon extends BeanCliBase {
     const jsFile = path.join(modulePath, 'src/config/index.ts');
     let jsContent = (await fse.readFile(jsFile)).toString();
     const jsExport = "export * from './icons.js';";
-    if (jsContent.indexOf(jsExport) === -1) {
+    if (!jsContent.includes(jsExport)) {
       jsContent = jsContent.replace("export * from './constants.js';", `export * from './constants.js';\n${jsExport}`);
     }
     await fse.writeFile(jsFile, jsContent);
@@ -94,7 +94,7 @@ declare module 'zova' {
     const jsFile = path.join(modulePath, 'src/resource/index.ts');
     let jsContent = (await fse.readFile(jsFile)).toString();
     const jsExport = "export * from './icons.js';";
-    if (jsContent.indexOf(jsExport) === -1) {
+    if (!jsContent.includes(jsExport)) {
       jsContent = jsContent.replace(
         "export * from './components.js';",
         `export * from './components.js';\n${jsExport}`,

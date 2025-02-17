@@ -1,7 +1,7 @@
-import { BeanCliBase, IMetadataCustomGenerateOptions } from '@cabloy/cli';
-import { toUpperCaseFirstChar } from '@cabloy/word-utils';
-import { IGlobBeanFile, OnionSceneMeta } from '@cabloy/module-info';
+import type { BeanCliBase, IMetadataCustomGenerateOptions } from '@cabloy/cli';
+import type { IGlobBeanFile, OnionSceneMeta } from '@cabloy/module-info';
 import path from 'node:path';
+import { toUpperCaseFirstChar } from '@cabloy/word-utils';
 
 export async function generateMetadataCustom(
   cli: BeanCliBase,

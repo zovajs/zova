@@ -1,4 +1,4 @@
-import { OpenAPITSOptions } from 'openapi-typescript';
+import type { OpenAPITSOptions } from 'openapi-typescript';
 
 export default function () {
   return {

@@ -1,6 +1,6 @@
-const __snippet_declare = "import <%=argv.nameMeta.fullCapitalize%> from './.metadata/page/<%=argv.pageName%>.vue';\n";
-const __snippet_body =
-  '{ path: \'<%=argv.moduleInfo.name!==argv.pageName?argv.pageName:""%>\', component: <%=argv.nameMeta.fullCapitalize%> },';
+const __snippet_declare = 'import <%=argv.nameMeta.fullCapitalize%> from \'./.metadata/page/<%=argv.pageName%>.vue\';\n';
+const __snippet_body
+  = '{ path: \'<%=argv.moduleInfo.name!==argv.pageName?argv.pageName:""%>\', component: <%=argv.nameMeta.fullCapitalize%> },';
 
 module.exports = {
   file: 'src/routes.ts',
@@ -15,7 +15,8 @@ export const routes: IModuleRoute[] = [];
     code = await cli.template.renderContent({ content: __snippet_body });
     if (!ast.has('export const routes: IModuleRoute[] = [$_$]')) {
       ast.replace('export const routes: IModuleRoute[] = []', `export const routes: IModuleRoute[] = [${code}]`);
-    } else {
+    }
+    else {
       ast.replace(
         'export const routes: IModuleRoute[] = [$_$]',
         `export const routes: IModuleRoute[] = [$_$, \n ${code}]`,

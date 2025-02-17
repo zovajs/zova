@@ -1,6 +1,6 @@
-import path from 'path';
-import fse from 'fs-extra';
+import path from 'node:path';
 import eggBornUtils from 'egg-born-utils';
+import fse from 'fs-extra';
 
 export async function generateConfig(modulePath: string) {
   const configFile = path.join(modulePath, 'src/config/config.ts');
@@ -35,7 +35,7 @@ export async function generateLocale(modulePath: string) {
   const contentLocales: string[] = [];
   for (const file of files) {
     const localeName = path.basename(file.substring(0, file.length - '.ts'.length));
-    const className = 'locale_' + localeName.replace('-', '_');
+    const className = `locale_${localeName.replace('-', '_')}`;
     contentImports.push(`import ${className} from '../config/locale/${localeName}.js';`);
     contentLocales.push(`'${localeName}': ${className},`);
   }

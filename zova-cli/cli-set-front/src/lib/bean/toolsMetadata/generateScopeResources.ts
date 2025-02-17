@@ -1,5 +1,5 @@
+import type { IGlobBeanFile, OnionSceneMeta } from '@cabloy/module-info';
 import { toUpperCaseFirstChar } from '@cabloy/word-utils';
-import { IGlobBeanFile, OnionSceneMeta } from '@cabloy/module-info';
 
 export async function generateScopeResources(
   globFiles: IGlobBeanFile[],

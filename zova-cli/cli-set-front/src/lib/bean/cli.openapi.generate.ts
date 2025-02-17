@@ -1,13 +1,12 @@
-import { BeanCliBase } from '@cabloy/cli';
-import fse from 'fs-extra';
-import { __ThisSetName__ } from '../this.js';
+import type { IModule, IModuleInfo } from '@cabloy/module-info';
+import type { ZovaOpenapiConfig, ZovaOpenapiConfigModule } from 'zova-openapi';
 import path from 'node:path';
+import { BeanCliBase } from '@cabloy/cli';
+import { extend } from '@cabloy/extend';
+import { matchSelector, toLowerCaseFirstChar, toUpperCaseFirstChar } from '@cabloy/word-utils';
+import fse from 'fs-extra';
 import openapiTS, { astToString } from 'openapi-typescript';
 import ts from 'typescript';
-import { matchSelector, toLowerCaseFirstChar, toUpperCaseFirstChar } from '@cabloy/word-utils';
-import { ZovaOpenapiConfig, ZovaOpenapiConfigModule } from 'zova-openapi';
-import { extend } from '@cabloy/extend';
-import { IModule, IModuleInfo } from '@cabloy/module-info';
 
 declare module '@cabloy/cli' {
   interface ICommandArgv {}
@@ -130,17 +129,17 @@ export class CliOpenapiGenerate extends BeanCliBase {
       | undefined;
     if (!nodeComponents) return '';
     const nodeTypeInfoComponents = _parseNodeType(nodeComponents)!;
-    if (!nodeTypeInfoComponents['schemas']) return '';
-    const nodeTypeInfoSchemas = _parseNodeType(nodeTypeInfoComponents['schemas'].nodeType)!;
+    if (!nodeTypeInfoComponents.schemas) return '';
+    const nodeTypeInfoSchemas = _parseNodeType(nodeTypeInfoComponents.schemas.nodeType)!;
     const typeSchemas: string[] = [];
     for (const key in nodeTypeInfoSchemas) {
       const schemaName =
-        'ApiSchema' +
-        key
-          .replaceAll('.', '-')
-          .split('-')
-          .map(item => toUpperCaseFirstChar(item))
-          .join('');
+        `ApiSchema${
+          key
+            .replaceAll('.', '-')
+            .split('-')
+            .map(item => toUpperCaseFirstChar(item))
+            .join('')}`;
       typeSchemas.push(`export type ${schemaName} = components["schemas"]["${key}"];`);
     }
     let contentSchemas = typeSchemas.join('\n');
@@ -185,7 +184,7 @@ export class CliOpenapiGenerate extends BeanCliBase {
     contentTypes.push(`export type ${nameRequestMethod} = '${pathInfo.method}';`);
     // name: params/query/headers
     const parametersInfo: Record<string, { name: string; question: boolean }> = {};
-    const nodeTypeInfoParameters = _parseNodeType(nodeActionInfo.nodeTypeInfo['parameters'].nodeType)!;
+    const nodeTypeInfoParameters = _parseNodeType(nodeActionInfo.nodeTypeInfo.parameters.nodeType)!;
     for (const key of ['path', 'query', 'header']) {
       if (_isNodeNever(nodeTypeInfoParameters[key].nodeType)) continue;
       const key2 = key === 'path' ? 'params' : key === 'header' ? 'headers' : key;
@@ -202,11 +201,11 @@ export class CliOpenapiGenerate extends BeanCliBase {
     // name: request body
     let nameRequestBody = '';
     let nameRequestBodyQuestion: boolean = true;
-    if (!_isNodeNever(nodeActionInfo.nodeTypeInfo['requestBody'].nodeType)) {
+    if (!_isNodeNever(nodeActionInfo.nodeTypeInfo.requestBody.nodeType)) {
       nameRequestBody = `Api${nameApiAction}RequestBody`;
-      nameRequestBodyQuestion = nodeActionInfo.nodeTypeInfo['requestBody'].question;
-      const nodeRequestBodyInfo = _parseNodeType(nodeActionInfo.nodeTypeInfo['requestBody'].nodeType)!;
-      const nodeRequestBodyContentInfo = _parseNodeType(nodeRequestBodyInfo['content'].nodeType)!;
+      nameRequestBodyQuestion = nodeActionInfo.nodeTypeInfo.requestBody.question;
+      const nodeRequestBodyInfo = _parseNodeType(nodeActionInfo.nodeTypeInfo.requestBody.nodeType)!;
+      const nodeRequestBodyContentInfo = _parseNodeType(nodeRequestBodyInfo.content.nodeType)!;
       const nodeRequestBodyApplicationJson = nodeRequestBodyContentInfo['application/json'];
       const typeRequestBody = astToString(nodeRequestBodyApplicationJson.nodeType);
       contentTypes.push(`export type ${nameRequestBody} = ${typeRequestBody};`);
@@ -243,7 +242,7 @@ export class CliOpenapiGenerate extends BeanCliBase {
       }
     }
     // content: path translate
-    const contentPathTranslate = parametersInfo['params']
+    const contentPathTranslate = parametersInfo.params
       ? `this.$pathTranslate(${nameRequestPath}, options${_q(contentOptionsQuestion)}.params),`
       : `${nameRequestPath},`;
     // content: comment

@@ -1,4 +1,4 @@
-import { CmdOptions } from '@cabloy/cli';
+import type { CmdOptions } from '@cabloy/cli';
 import { CliCreateComponentBase } from '../common/cliCreateComponent.js';
 
 export class CliCreateComponent extends CliCreateComponentBase {

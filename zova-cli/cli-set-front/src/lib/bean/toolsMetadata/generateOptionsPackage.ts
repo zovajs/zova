@@ -1,7 +1,7 @@
-import { BeanCliBase } from '@cabloy/cli';
-import { IGlobBeanFile, OnionScenesMeta } from '@cabloy/module-info';
-import { evaluate, getPropertyObject } from '@cabloy/utils';
+import type { BeanCliBase } from '@cabloy/cli';
+import type { IGlobBeanFile, OnionScenesMeta } from '@cabloy/module-info';
 import path from 'node:path';
+import { evaluate, getPropertyObject } from '@cabloy/utils';
 
 export async function generateOptionsPackage(
   cli: BeanCliBase,

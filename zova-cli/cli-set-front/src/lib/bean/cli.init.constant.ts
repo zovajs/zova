@@ -1,7 +1,7 @@
+import path from 'node:path';
 import { BeanCliBase } from '@cabloy/cli';
 import fse from 'fs-extra';
 import { __ThisSetName__ } from '../this.js';
-import path from 'node:path';
 
 declare module '@cabloy/cli' {
   interface ICommandArgv {}

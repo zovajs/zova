@@ -1,4 +1,4 @@
-import { IGlobBeanFile, OnionSceneMeta } from '@cabloy/module-info';
+import type { IGlobBeanFile, OnionSceneMeta } from '@cabloy/module-info';
 
 export async function generateBeanGenerals(
   globFiles: IGlobBeanFile[],

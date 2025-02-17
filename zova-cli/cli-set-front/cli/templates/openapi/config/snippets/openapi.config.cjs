@@ -1,6 +1,6 @@
-const __snippet_declare = "import <%=argv.nameMeta.fullCapitalize%> from './page/<%=argv.pageName%>/index.vue';\n";
-const __snippet_body =
-  '{ path: \'<%=argv.moduleInfo.name!==argv.pageName?argv.pageName:""%>\', component: <%=argv.nameMeta.fullCapitalize%> },';
+const __snippet_declare = 'import <%=argv.nameMeta.fullCapitalize%> from \'./page/<%=argv.pageName%>/index.vue\';\n';
+const __snippet_body
+  = '{ path: \'<%=argv.moduleInfo.name!==argv.pageName?argv.pageName:""%>\', component: <%=argv.nameMeta.fullCapitalize%> },';
 
 module.exports = {
   file: 'openapi.config.ts',
@@ -16,7 +16,7 @@ export default function (): ZovaOpenapiConfig {
   };
 }
 `,
-  async transform({ cli: cli, ast, argv }) {
+  async transform({ cli, ast, argv }) {
     const moduleNames = argv._;
     for (const moduleName of moduleNames) {
       if (!ast.has(`return { modules: { '${moduleName}':{$$$0}, $$$1}, $$$2}`)) {

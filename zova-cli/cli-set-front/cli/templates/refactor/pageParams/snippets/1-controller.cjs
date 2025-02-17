@@ -5,9 +5,10 @@ module.exports = {
   language: 'plain',
   async transform({ ast, argv }) {
     // check if exists
-    if (ast.includes(`${argv.controllerClassName}SchemaParams`)) throw new Error('Params exists');
+    if (ast.includes(`${argv.controllerClassName}SchemaParams`))
+      throw new Error('Params exists');
     // z
-    if (!ast.includes("import { z } from 'zod';")) {
+    if (!ast.includes('import { z } from \'zod\';')) {
       ast = `import { z } from 'zod';\n${ast}`;
     }
     // export

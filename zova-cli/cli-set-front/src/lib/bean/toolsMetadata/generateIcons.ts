@@ -1,4 +1,4 @@
-import path from 'path';
+import path from 'node:path';
 import eggBornUtils from 'egg-born-utils';
 import fse from 'fs-extra';
 import SVGCompiler from 'svg-baker';

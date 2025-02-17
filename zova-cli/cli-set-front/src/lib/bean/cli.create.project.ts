@@ -1,12 +1,13 @@
-import { BeanCliBase, CmdOptions } from '@cabloy/cli';
-import os from 'node:os';
+import type { CmdOptions } from '@cabloy/cli';
 import fs from 'node:fs';
-import fse from 'fs-extra';
+import os from 'node:os';
 import path from 'node:path';
-import urllib from 'urllib';
-import { rimraf } from 'rimraf';
+import { BeanCliBase } from '@cabloy/cli';
 import compressing from 'compressing';
-//import { __ThisSetName__ } from '../this.js';
+import fse from 'fs-extra';
+import { rimraf } from 'rimraf';
+import urllib from 'urllib';
+// import { __ThisSetName__ } from '../this.js';
 
 declare module '@cabloy/cli' {
   interface ICommandArgv {
@@ -42,8 +43,8 @@ export class CliCreateProject extends BeanCliBase {
     fse.copySync(templateDir, targetDir);
     // remove LICENSE
     fse.removeSync(path.join(targetDir, 'LICENSE'));
-    //// copy package.json
-    //fse.copyFileSync(path.join(targetDir, 'package.original.json'), path.join(targetDir, 'package.json'));
+    /// / copy package.json
+    // fse.copyFileSync(path.join(targetDir, 'package.original.json'), path.join(targetDir, 'package.json'));
     // // render project boilerplate
     // await this.template.renderBoilerplateAndSnippets({
     //   targetDir,

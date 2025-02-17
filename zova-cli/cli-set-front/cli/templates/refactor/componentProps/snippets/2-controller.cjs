@@ -4,7 +4,8 @@ module.exports = {
   },
   language: 'plain',
   async transform({ ast, argv }) {
-    if (ast.includes(`${argv.controllerClassName}Props`)) throw new Error('Props exists');
+    if (ast.includes(`${argv.controllerClassName}Props`))
+      throw new Error('Props exists');
     const matchGeneric = ast.match(/interface [^<]*Emits<(.*?)> \{/);
     const hasGeneric = !!matchGeneric;
     const genericT = hasGeneric ? '<T = unknown>' : '';

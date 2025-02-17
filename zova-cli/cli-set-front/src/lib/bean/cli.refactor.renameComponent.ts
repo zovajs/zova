@@ -1,10 +1,10 @@
-import { BeanCliBase, NameMeta } from '@cabloy/cli';
-import path from 'path';
-import fse from 'fs-extra';
-import { IModuleInfo } from '@cabloy/module-info';
+import type { NameMeta } from '@cabloy/cli';
+import type { IModuleInfo } from '@cabloy/module-info';
+import path from 'node:path';
+import { BeanCliBase } from '@cabloy/cli';
 import eggBornUtils from 'egg-born-utils';
+import fse from 'fs-extra';
 import gogocode from 'gogocode';
-import { __ThisSetName__ } from '../this.js';
 
 declare module '@cabloy/cli' {
   interface ICommandArgv {
