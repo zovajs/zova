@@ -14,19 +14,40 @@
   ],
   "exports": {
     ".": {
-      "types": "./dist/index.d.ts",
+      "types": [
+        "./src/index.ts",
+        "./dist/index.d.ts"
+      ],
+      "import": "./src/index.ts",
+      "require": "./src/index.ts",
       "default": "./dist/index.js"
     },
-    "./*": "./*"
+    "./package.json": "./package.json"
   },
   "files": [
     "dist/**/*.d.ts",
     "dist/**/*.js"
   ],
+  "clean-package": {
+    "indent": 2,
+    "remove": [
+      "clean-package",
+      "devDependencies",
+      "scripts",
+      "exports.\\..import",
+      "exports.\\..require"
+    ]
+  },
   "scripts": {
     "lint": "eslint .",
-    "clean": "tsc -b --clean",
-    "tsc:publish": "npm run clean && tsc -b",
-    "prepublishOnly": "npm run tsc:publish"
+    "clean": "rimraf dist tsconfig.tsbuildinfo",
+    "tsc:publish": "npm run clean && tsc",
+    "prepublishOnly": "npm run tsc:publish",
+    "prepack": "clean-package",
+    "postpack": "clean-package restore"
+  },
+  "devDependencies": {
+    "clean-package": "^2.2.0",
+    "rimraf": "^6.0.1"
   }
 }
