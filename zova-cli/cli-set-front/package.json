@@ -42,7 +42,7 @@
     "@cabloy/extend": "^3.0.12",
     "@cabloy/module-info": "^1.2.10",
     "@cabloy/utils": "^1.0.3",
-    "@cabloy/word-utils": "^1.0.10",
+    "@cabloy/word-utils": "^2.0.0",
     "compressing": "^1.10.0",
     "egg-born-utils": "^1.2.0",
     "fs-extra": "^11.2.0",

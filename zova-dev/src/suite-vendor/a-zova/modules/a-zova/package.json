@@ -60,7 +60,7 @@
     "@cabloy/module-info": "^1.2.10",
     "@cabloy/set": "^1.0.7",
     "@cabloy/utils": "^1.0.3",
-    "@cabloy/word-utils": "^1.0.10",
+    "@cabloy/word-utils": "^2.0.0",
     "cel-js": "^0.3.0"
   },
   "devDependencies": {
