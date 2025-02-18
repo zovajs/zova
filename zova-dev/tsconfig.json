@@ -30,9 +30,6 @@
     },
     {
       "path": "packages-utils/zova-openapi"
-    },
-    {
-      "path": "packages-utils/zova-vite"
     }
   ],
   "exclude": [
@@ -47,6 +44,7 @@
     "./quasar.config.*.temporary.compiled*",
     "./packages-utils/zova-vite/templates",
     "./src/boot/app",
-    "./src/boot/main.ts"
+    "./src/boot/main.ts",
+    "./packages-utils"
   ]
 }
