@@ -8,9 +8,9 @@
     "./.zova",
     "./node_modules",
     "vite.config.ts",
-    "./packages-zova",
-    "./packages-utils",
     "./src/boot/app",
-    "./src/boot/main.ts"
+    "./src/boot/main.ts",
+    "./packages-utils",
+    "./packages-zova"
   ]
 }
