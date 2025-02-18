@@ -14,12 +14,6 @@
       "path": "packages-utils/mutate-on-copy"
     },
     {
-      "path": "packages-utils/babel-plugin-zova-bean-module"
-    },
-    {
-      "path": "packages-utils/babel-plugin-zova-bean-use"
-    },
-    {
       "path": "packages-utils/babel-plugin-zova-behavior"
     },
     {
@@ -36,12 +30,6 @@
     },
     {
       "path": "packages-utils/zova-openapi"
-    },
-    {
-      "path": "packages-utils/zova-vite"
-    },
-    {
-      "path": "packages-utils/quasar-app-extension-zova"
     }
   ],
   "exclude": [

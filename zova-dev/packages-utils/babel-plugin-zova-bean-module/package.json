@@ -1,5 +1,6 @@
 {
   "name": "babel-plugin-zova-bean-module",
+  "type": "module",
   "version": "1.0.32",
   "description": "babel-plugin-zova-bean-module",
   "publishConfig": {
@@ -15,19 +16,36 @@
   ],
   "exports": {
     ".": {
-      "types": "./dist/index.d.ts",
+      "types": [
+        "./src/index.ts",
+        "./dist/index.d.ts"
+      ],
+      "import": "./src/index.ts",
+      "require": "./src/index.ts",
       "default": "./dist/index.js"
     },
-    "./*": "./*"
+    "./package.json": "./package.json"
   },
   "files": [
     "dist"
   ],
+  "clean-package": {
+    "indent": 2,
+    "remove": [
+      "clean-package",
+      "devDependencies",
+      "scripts",
+      "exports.\\..import",
+      "exports.\\..require"
+    ]
+  },
   "scripts": {
     "lint": "eslint .",
-    "clean": "tsc -b --clean",
-    "tsc:publish": "npm run clean && tsc -b",
-    "prepublishOnly": "npm run tsc:publish"
+    "clean": "rimraf dist tsconfig.tsbuildinfo",
+    "tsc:publish": "npm run clean && tsc",
+    "prepublishOnly": "npm run tsc:publish",
+    "prepack": "clean-package",
+    "postpack": "clean-package restore"
   },
   "dependencies": {
     "@cabloy/module-info": "^1.2.10",
@@ -35,7 +53,9 @@
   },
   "devDependencies": {
     "@types/babel__core": "^7.20.5",
-    "@types/babel__traverse": "^7.20.5"
+    "@types/babel__traverse": "^7.20.5",
+    "clean-package": "^2.2.0",
+    "rimraf": "^6.0.1"
   },
   "gitHead": "19504afb5d86e9c8a3ab865099813a2cef2493bb"
 }
