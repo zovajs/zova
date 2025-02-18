@@ -32,7 +32,7 @@ export const checkIsComponent = (path: NodePath<t.JSXOpeningElement>, state: Plu
   const tag = (namePath as NodePath<t.JSXIdentifier>).node.name;
 
   return (
-    !(<any>state.opts).isCustomElement?.(tag) &&
+    !(state.opts as any).isCustomElement?.(tag) &&
     shouldTransformedToSlots(tag) &&
     !htmlTags.includes(tag as htmlTags.htmlTags) &&
     !svgTags.includes(tag)
@@ -57,7 +57,7 @@ export const getTag = (
         ? t.identifier(FRAGMENT)
         : path.scope.hasBinding(name)
           ? t.identifier(name)
-          : (<any>state.opts).isCustomElement?.(name)
+          : (state.opts as any).isCustomElement?.(name)
               ? t.stringLiteral(name)
               : t.callExpression(t.identifier('resolveComponent'), [t.stringLiteral(name)]);
     }
