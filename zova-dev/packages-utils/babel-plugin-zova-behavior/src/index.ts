@@ -2,7 +2,7 @@ import type { PluginPass } from '@babel/core';
 import type { NodePath, Visitor } from '@babel/traverse';
 import { /* template, */ types as t } from '@babel/core';
 import { parseFirstWord } from '@cabloy/word-utils';
-import { getTag } from './utils.js';
+import { getTag } from './utils.ts';
 
 // interface ComponentFindInfo {
 //   import: ImportInfo;
@@ -40,9 +40,9 @@ function createVisitor(context: ContextInfo) {
       for (let index = nodePath.node.attributes.length - 1; index >= 0; index--) {
         const attr = nodePath.node.attributes[index];
         if (!t.isJSXAttribute(attr) || !t.isJSXIdentifier(attr.name)) continue;
-        const propName = (<t.JSXIdentifier>attr.name).name;
+        const propName = (attr.name as t.JSXIdentifier).name;
         if (propName === 'behaviors') {
-          const expression = (<t.JSXExpressionContainer>attr.value)?.expression;
+          const expression = (attr.value as t.JSXExpressionContainer)?.expression;
           if (t.isArrayExpression(expression)) {
             behaviors.push(...expression.elements);
           } else {
