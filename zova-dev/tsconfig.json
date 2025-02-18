@@ -11,15 +11,6 @@
   },
   "references": [
     {
-      "path": "packages-utils/mutate-on-copy"
-    },
-    {
-      "path": "packages-utils/babel-plugin-zova-behavior"
-    },
-    {
-      "path": "packages-utils/babel-plugin-zova-component"
-    },
-    {
       "path": "packages-zova/zova-shared"
     },
     {
