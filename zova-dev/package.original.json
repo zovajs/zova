@@ -4,7 +4,7 @@
   "author": "zhennann <zhen.nann@icloud.com>",
   "type": "module",
   "scripts": {
-    "zova": "cd ../zova-cli && tsc -b && cd ../zova-dev && node ../zova-cli/cli/dist/bin/zova.js",
+    "zova": "node ../zova-cli/cli/src/bin/zova.ts",
     "dev": "npm run dev:ssr:admin",
     "build": "npm run build:ssr:admin",
     "preview": "npm run preview:ssr",
@@ -17,7 +17,7 @@
     "build:spa": "npm run prerun && quasar build --mode spa --flavor admin",
     "preview:spa": "vite preview --outDir=dist/spa",
     "build:githubpages": "npm run prerun && quasar build --mode spa --flavor githubpages",
-    "prerun": "npm run zova :tools:deps && tsc -b && npm run tsc",
+    "prerun": "npm run zova :tools:deps && npm run tsc",
     "tsc": "vue-tsc --noEmit --project tsconfig.vue-tsc.json",
     "lint": "eslint",
     "lint:fix": "eslint --fix"
