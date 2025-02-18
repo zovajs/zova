@@ -2,6 +2,7 @@ import type { IBeanRecord } from '../bean/type.js';
 import type {
   Constructable,
   Functionable,
+  IBeanSceneRecord,
   IDecoratorBeanInfoOptions,
   IDecoratorBeanOptionsBase,
   IDecoratorUseOptionsBase,
@@ -55,7 +56,7 @@ export class AppResource extends BeanSimple {
     const beanOptions = {
       ...options,
       module,
-      scene: scene as keyof IBeanRecord,
+      scene: scene as keyof IBeanSceneRecord,
       name,
       beanFullName,
       moduleBelong,

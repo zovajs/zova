@@ -59,7 +59,7 @@ export class CtxSSR extends BeanSimple {
         delete cast(window).__INITIAL_STATE_DEFER__;
         document.getElementById('ssr-state-defer-init')?.remove();
       } else {
-        this[SymbolSSRStateDefer] = {};
+        this[SymbolSSRStateDefer] = {} as any;
       }
     }
     // onHydratePropHasMismatch

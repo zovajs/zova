@@ -31,7 +31,7 @@ declare module 'zova' {
   }
 
   export interface IControllerDataContext {
-    route: RouteLocationNormalizedLoaded;
+    route?: RouteLocationNormalizedLoaded;
   }
 
   export interface IModuleResource {
