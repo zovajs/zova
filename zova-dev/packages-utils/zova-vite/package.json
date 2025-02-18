@@ -45,8 +45,9 @@
     "postpack": "clean-package restore"
   },
   "dependencies": {
-    "@babel/plugin-proposal-decorators": "^7.24.1",
-    "@babel/plugin-transform-class-properties": "^7.24.1",
+    "@babel/plugin-proposal-decorators": "^7.25.9",
+    "@babel/plugin-transform-class-properties": "^7.25.9",
+    "@babel/plugin-transform-typescript":"^7.26.8",
     "@cabloy/dotenv": "^1.0.2",
     "@cabloy/extend": "^3.0.5",
     "@cabloy/module-glob": "^5.1.12",
