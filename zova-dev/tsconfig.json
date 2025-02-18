@@ -27,9 +27,6 @@
     },
     {
       "path": "packages-zova/zova"
-    },
-    {
-      "path": "packages-utils/zova-openapi"
     }
   ],
   "exclude": [
