@@ -39,7 +39,7 @@
   "scripts": {
     "lint": "eslint .",
     "clean": "rimraf dist tsconfig.tsbuildinfo",
-    "tsc:publish": "npm run clean && tsc -b",
+    "tsc:publish": "npm run clean && tsc",
     "prepublishOnly": "npm run tsc:publish",
     "prepack": "clean-package",
     "postpack": "clean-package restore"
