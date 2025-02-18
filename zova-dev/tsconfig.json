@@ -10,15 +10,6 @@
     "verbatimModuleSyntax": false
   },
   "references": [
-    {
-      "path": "packages-zova/zova-shared"
-    },
-    {
-      "path": "packages-zova/zova-core"
-    },
-    {
-      "path": "packages-zova/zova"
-    }
   ],
   "exclude": [
     "**/dist/**",
@@ -30,9 +21,9 @@
     "./src-capacitor",
     "./src-cordova",
     "./quasar.config.*.temporary.compiled*",
-    "./packages-utils/zova-vite/templates",
     "./src/boot/app",
     "./src/boot/main.ts",
-    "./packages-utils"
+    "./packages-utils",
+    "./packages-zova"
   ]
 }
