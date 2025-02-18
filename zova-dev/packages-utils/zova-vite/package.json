@@ -19,9 +19,10 @@
         "./dist/index.d.ts"
       ],
       "import": "./src/index.ts",
+      "require": "./src/index.ts",
       "default": "./dist/index.js"
     },
-    "./*": "./*"
+    "./package.json": "./package.json"
   },
   "files": [
     "dist",
@@ -33,7 +34,8 @@
       "clean-package",
       "devDependencies",
       "scripts",
-      "exports.\\..import"
+      "exports.\\..import",
+      "exports.\\..require"
     ]
   },
   "scripts": {
@@ -47,7 +49,7 @@
   "dependencies": {
     "@babel/plugin-proposal-decorators": "^7.25.9",
     "@babel/plugin-transform-class-properties": "^7.25.9",
-    "@babel/plugin-transform-typescript":"^7.26.8",
+    "@babel/plugin-transform-typescript": "^7.26.8",
     "@cabloy/dotenv": "^1.0.2",
     "@cabloy/extend": "^3.0.5",
     "@cabloy/module-glob": "^5.1.12",

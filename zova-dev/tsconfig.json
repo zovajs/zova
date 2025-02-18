@@ -30,6 +30,12 @@
     },
     {
       "path": "packages-utils/zova-openapi"
+    },
+    {
+      "path": "packages-utils/zova-vite"
+    },
+    {
+      "path": "packages-utils/quasar-app-extension-zova"
     }
   ],
   "exclude": [
