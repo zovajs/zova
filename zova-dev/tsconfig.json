@@ -33,9 +33,6 @@
     },
     {
       "path": "packages-utils/zova-vite"
-    },
-    {
-      "path": "packages-utils/quasar-app-extension-zova"
     }
   ],
   "exclude": [

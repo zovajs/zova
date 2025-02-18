@@ -75,3 +75,4 @@ env/.env*.mine
 !/src/module-vendor/.gitkeep
 
 !/packages-utils/word-utils/dist
+!/packages-utils/quasar-app-extension-zova/dist
