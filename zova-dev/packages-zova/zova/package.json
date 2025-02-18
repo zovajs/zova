@@ -23,25 +23,45 @@
   ],
   "exports": {
     ".": {
-      "types": "./dist/index.d.ts",
+      "types": [
+        "./src/index.ts",
+        "./dist/index.d.ts"
+      ],
+      "import": "./src/index.ts",
+      "require": "./src/index.ts",
       "default": "./dist/index.js"
     },
-    "./*": "./*"
+    "./package.json": "./package.json"
   },
   "files": [
-    "dist",
-    "src"
+    "dist"
   ],
+  "clean-package": {
+    "indent": 2,
+    "remove": [
+      "clean-package",
+      "devDependencies",
+      "scripts",
+      "exports.\\..import",
+      "exports.\\..require"
+    ]
+  },
   "scripts": {
     "lint": "eslint .",
-    "clean": "tsc -b --clean",
-    "tsc:publish": "npm run clean && tsc -b",
-    "prepublishOnly": "npm run tsc:publish"
+    "clean": "rimraf dist tsconfig.tsbuildinfo",
+    "tsc:publish": "npm run clean && tsc",
+    "prepublishOnly": "npm run tsc:publish",
+    "prepack": "clean-package",
+    "postpack": "clean-package restore"
   },
   "dependencies": {
     "zova-core": "^5.0.185",
     "zova-shared": "^1.0.7",
     "zova-suite-a-zova": "^5.0.128"
+  },
+  "devDependencies": {
+    "clean-package": "^2.2.0",
+    "rimraf": "^6.0.1"
   },
   "gitHead": "c90e59abc1bf445154a3fb32856f83783dc0eb39"
 }
