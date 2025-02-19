@@ -82,7 +82,7 @@ export class Monkey extends BeanSimple implements IMonkeyAppInitialize, IMonkeyA
   _patchStyle(beanInstance: BeanBase, props, ...args) {
     if (process.env.DEV) {
       if (props && typeof props === 'object') {
-        props = Object.assign({ $debugName: beanInstance[SymbolBeanFullName] }, props);
+        props = Object.assign({ $debugName: beanInstance[SymbolBeanFullName].replaceAll('.', '_') }, props);
       }
     }
     if (this._styleInstance) {
