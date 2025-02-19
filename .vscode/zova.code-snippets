@@ -15,4 +15,26 @@
     "body": ["protected __dispose__() {", "  $0", "}"],
     "description": "__dispose__",
   },
+  "aop.__init__": {
+    "scope": "typescript,typescriptreact",
+    "prefix": "aopinit",
+    "body": [
+      "protected async __init__(_args: Parameters<any>, next: Function, _receiver: any) {",
+      "  await next();",
+      "  $0",
+      "}"
+    ],
+    "description": "aop.__init__"
+  },
+  "aop.__dispose__": {
+    "scope": "typescript,typescriptreact",
+    "prefix": "aopdispose",
+    "body": [
+      "protected __dispose__(_args: [], next: Function, _receiver: any) {",
+      "  next();",
+      "  $0",
+      "}"
+    ],
+    "description": "aop.__dispose__"
+  }
 }
