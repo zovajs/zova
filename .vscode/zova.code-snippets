@@ -36,5 +36,16 @@
       "}"
     ],
     "description": "aop.__dispose__"
+  },
+  "aop.action": {
+    "scope": "typescript,typescriptreact",
+    "prefix": "aopaction",
+    "body": [
+      "async action(_args: Parameters<any>, next: Function, _receiver: any) {",
+      "  $0",
+      "  return await next();",
+      "}"
+    ],
+    "description": "aop.action"
   }
 }
