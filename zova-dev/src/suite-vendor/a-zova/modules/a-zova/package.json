@@ -64,7 +64,7 @@
     "cel-js": "^0.3.1"
   },
   "devDependencies": {
-    "@cabloy/cli": "^3.0.4",
+    "@cabloy/cli": "^3.0.5",
     "fs-extra": "^11.2.0"
   },
   "gitHead": "73721393c1ea9a95539948d57ad692f2c004d7c7"

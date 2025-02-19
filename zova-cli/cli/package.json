@@ -24,7 +24,6 @@
     },
     "./*": "./*"
   },
-  "main": "dist/index.js",
   "bin": {
     "zova": "dist/bin/zova.js"
   },
@@ -50,7 +49,7 @@
     "postpack": "clean-package restore"
   },
   "dependencies": {
-    "@cabloy/cli": "^3.0.4",
+    "@cabloy/cli": "^3.0.5",
     "zova-cli-set-front": "^1.1.199"
   },
   "devDependencies": {

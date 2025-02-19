@@ -49,7 +49,7 @@
     "postpack": "clean-package restore"
   },
   "dependencies": {
-    "@cabloy/cli": "^3.0.4",
+    "@cabloy/cli": "^3.0.5",
     "@cabloy/extend": "^3.0.12",
     "@cabloy/module-info": "^1.2.10",
     "@cabloy/utils": "^1.0.3",
