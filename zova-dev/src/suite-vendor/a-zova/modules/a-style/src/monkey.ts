@@ -10,7 +10,7 @@ import type { ScopeModule } from './.metadata/this.js';
 import { createTypeStyle, style } from 'typestyle';
 import {
   BeanSimple,
-  SymbolModuleName,
+  SymbolBeanFullName,
   useComputed,
 } from 'zova';
 import { __ThisModule__ } from './.metadata/this.js';
@@ -82,7 +82,7 @@ export class Monkey extends BeanSimple implements IMonkeyAppInitialize, IMonkeyA
   _patchStyle(beanInstance: BeanBase, props, ...args) {
     if (process.env.DEV) {
       if (props && typeof props === 'object') {
-        props = Object.assign({ $debugName: beanInstance[SymbolModuleName] }, props);
+        props = Object.assign({ $debugName: beanInstance[SymbolBeanFullName] }, props);
       }
     }
     if (this._styleInstance) {
