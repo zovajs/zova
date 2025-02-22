@@ -7,7 +7,11 @@ interface ContextInfo {
   needBeanInfo: boolean;
 }
 
-export default function () {
+export interface PluginZovaBeanModuleOptions {
+  brandName: 'zova' | 'vona';
+}
+
+export default function (_plugin: any, options: PluginZovaBeanModuleOptions) {
   const visitor: Visitor<PluginPass> = {
     Program(path: NodePath<t.Program>, state) {
       const beanInfo = __parseBeanInfo(state);
@@ -20,7 +24,7 @@ export default function () {
       path.traverse(createVisitor(context, beanInfo));
       // insertImport
       if (context.needBeanInfo) {
-        insertImport(path);
+        insertImport(path, options);
       }
     },
   };
@@ -39,10 +43,10 @@ function createVisitor(context: ContextInfo, beanInfo) {
   };
 }
 
-function insertImport(path: NodePath<t.Program>) {
+function insertImport(path: NodePath<t.Program>, options: PluginZovaBeanModuleOptions) {
   const nodeImport = t.importDeclaration(
     [t.importSpecifier(t.identifier('__z_BeanInfo'), t.stringLiteral('BeanInfo'))],
-    t.stringLiteral('zova'),
+    t.stringLiteral(options.brandName),
   );
   path.get('body')[0].insertBefore(nodeImport);
 }
@@ -83,7 +87,7 @@ function __createDecoratorNode(beanInfo) {
 
 function __checkIfValid(fileName?: string | null) {
   if (!fileName) return false;
-  return !['src/boot/app/', '.zova/app/'].some(item => {
+  return !['src/boot/app/', '.zova/app/', 'src/backend/', '.vona/'].some(item => {
     return fileName.includes(item);
   });
 }
