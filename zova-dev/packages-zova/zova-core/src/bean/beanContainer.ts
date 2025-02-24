@@ -27,12 +27,12 @@ import { SymbolBeanFullName, SymbolInited } from './beanBaseSimple.js';
 import { BeanSimple } from './beanSimple.js';
 import { vueDecorators } from './vueDecorators/index.js';
 
-const SymbolBeanContainerParent = Symbol('Bean#BeanContainerParent');
-const SymbolProxyMagic = Symbol('Bean#ProxyMagic');
-const SymbolCacheAopChains = Symbol('Bean#SymbolCacheAopChains');
-const SymbolCacheAopChainsKey = Symbol('Bean#SymbolCacheAopChainsKey');
-export const BeanContainerInstances = Symbol('Bean#Instances');
-export const SymbolProxyDisable = Symbol('Bean#SymbolProxyDisable');
+const SymbolBeanContainerParent = Symbol('SymbolBeanContainerParent');
+const SymbolProxyMagic = Symbol('SymbolProxyMagic');
+const SymbolCacheAopChains = Symbol('SymbolCacheAopChains');
+const SymbolCacheAopChainsKey = Symbol('SymbolCacheAopChainsKey');
+const SymbolBeanContainerInstances = Symbol('SymbolBeanContainerInstances');
+export const SymbolProxyDisable = Symbol('SymbolProxyDisable');
 
 export interface BeanContainer {}
 
@@ -41,7 +41,7 @@ export class BeanContainer {
   private ctx: ZovaContext;
 
   // fullName / uuid / propName
-  private [BeanContainerInstances]: Record<MetadataKey, unknown> = shallowReactive({});
+  private [SymbolBeanContainerInstances]: Record<MetadataKey, unknown> = shallowReactive({});
 
   static create(app: ZovaApplication, ctx: ZovaContext | null) {
     const beanContainer = new BeanContainer(app, ctx);
@@ -62,7 +62,7 @@ export class BeanContainer {
 
   /** @internal */
   public dispose() {
-    const beanInstances = this[BeanContainerInstances];
+    const beanInstances = this[SymbolBeanContainerInstances];
     for (const prop in beanInstances) {
       if (prop.startsWith('$$')) continue;
       const beanInstance = cast(beanInstances[prop]);
@@ -74,7 +74,7 @@ export class BeanContainer {
         this.app.meta.module._monkeyModule('beanDisposed', undefined, this, beanInstance);
       }
     }
-    this[BeanContainerInstances] = shallowReactive({});
+    this[SymbolBeanContainerInstances] = shallowReactive({});
     this[SymbolBeanContainerParent] = undefined;
   }
 
@@ -165,7 +165,7 @@ export class BeanContainer {
   }
 
   _setBean<T>(key: string, instance: T) {
-    this[BeanContainerInstances][key] = instance;
+    this[SymbolBeanContainerInstances][key] = instance;
   }
 
   _getBeanSync<K extends keyof IBeanRecord>(
@@ -175,7 +175,7 @@ export class BeanContainer {
   ): IBeanRecord[K] | undefined;
   _getBeanSync<T>(key: string, markReactive?: boolean, forceLoad?: boolean): T | undefined;
   _getBeanSync<T>(key: string, markReactive?: boolean, forceLoad?: boolean): T | undefined {
-    const beanInstance: any = this[BeanContainerInstances][key];
+    const beanInstance: any = this[SymbolBeanContainerInstances][key];
     if (beanInstance === undefined) {
       // bean not loaded, so async load to raise the next call
       if (forceLoad !== false) {
@@ -190,7 +190,7 @@ export class BeanContainer {
   }
 
   _getBeanSyncOnly<T>(key: MetadataKey): T {
-    return this[BeanContainerInstances][key] as T;
+    return this[SymbolBeanContainerInstances][key] as T;
   }
 
   async _getBean<T>(A: Constructable<T>, markReactive?: boolean, ...args): Promise<T>;
@@ -233,7 +233,7 @@ export class BeanContainer {
       return null!;
     }
     const key = __getSelectorKey(fullName, true, selector);
-    return this[BeanContainerInstances][key] as T;
+    return this[SymbolBeanContainerInstances][key] as T;
   }
 
   async _getBeanSelectorInner<T>(
@@ -252,10 +252,10 @@ export class BeanContainer {
       return null!;
     }
     const key = __getSelectorKey(fullName, withSelector, args[0]);
-    if (this[BeanContainerInstances][key] === undefined && newBeanForce) {
+    if (this[SymbolBeanContainerInstances][key] === undefined && newBeanForce) {
       await this._newBeanInner(true, recordProp, null, beanComposable, fullName, markReactive, withSelector, ...args);
     }
-    return this[BeanContainerInstances][key] as T;
+    return this[SymbolBeanContainerInstances][key] as T;
   }
 
   _newBeanSimple<T>(A: Constructable<T>, markReactive: boolean, ...args): T {
@@ -441,7 +441,7 @@ export class BeanContainer {
       const fullName = await this._getBeanFullNameByComposableOrClass(beanComposable, beanFullName);
       if (fullName) {
         const key = __getSelectorKey(fullName, withSelector, args[0]);
-        this[BeanContainerInstances][key] = beanInstance;
+        this[SymbolBeanContainerInstances][key] = beanInstance;
       }
       // always record for app/ctx bean
       if (recordProp) {
@@ -648,11 +648,11 @@ export class BeanContainer {
     }
     // 1. use name
     if (useOptions.name) {
-      return this[BeanContainerInstances][useOptions.name];
+      return this[SymbolBeanContainerInstances][useOptions.name];
     }
     // 2. use prop
     if (!targetBeanComposable && !targetBeanFullName) {
-      return this[BeanContainerInstances][useOptions.prop];
+      return this[SymbolBeanContainerInstances][useOptions.prop];
     }
     // 3. targetBeanFullName
     let targetOptions: Pick<IDecoratorBeanOptionsBase, 'containerScope' | 'markReactive'> | undefined;
@@ -1070,11 +1070,11 @@ export class BeanContainer {
   }
 
   private __recordProp(recordProp, fullName: string | undefined, beanInstance, throwError: boolean) {
-    if (this[BeanContainerInstances][recordProp] !== undefined && throwError) {
+    if (this[SymbolBeanContainerInstances][recordProp] !== undefined && throwError) {
       throw new Error(`prop exsits: ${recordProp.toString()}, ${fullName}`);
     }
-    if (this[BeanContainerInstances][recordProp] === undefined) {
-      this[BeanContainerInstances][recordProp] = beanInstance;
+    if (this[SymbolBeanContainerInstances][recordProp] === undefined) {
+      this[SymbolBeanContainerInstances][recordProp] = beanInstance;
     }
   }
 }
