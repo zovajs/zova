@@ -1,7 +1,7 @@
 import type { App } from 'vue';
 import type { ZovaContext } from '../core/index.js';
 import type { PluginZovaOptions } from '../types/interface/pluginZova.js';
-import { BeanContainerInstances } from '../bean/beanContainer.js';
+import { SymbolBeanContainerInstances } from '../bean/beanContainer.js';
 import { BeanControllerIdentifier, BeanRenderIdentifier, BeanStyleIdentifier } from '../bean/type.js';
 import { ZovaApplication } from '../core/index.js';
 import { cast } from '../types/index.js';
@@ -20,13 +20,13 @@ export const PluginZova = {
   async update(app: ZovaApplication, ctxRoot: ZovaContext) {
     const bean = cast(app.bean);
     bean.ctx = ctxRoot;
-    for (const key in bean[BeanContainerInstances]) {
-      bean[BeanContainerInstances][key].ctx = ctxRoot;
+    for (const key in bean[SymbolBeanContainerInstances]) {
+      bean[SymbolBeanContainerInstances][key].ctx = ctxRoot;
     }
-    delete bean[BeanContainerInstances][BeanControllerIdentifier];
-    delete bean[BeanContainerInstances][BeanRenderIdentifier];
-    delete bean[BeanContainerInstances][BeanStyleIdentifier];
-    Object.assign(bean[BeanContainerInstances], ctxRoot.bean[BeanContainerInstances]);
+    delete bean[SymbolBeanContainerInstances][BeanControllerIdentifier];
+    delete bean[SymbolBeanContainerInstances][BeanRenderIdentifier];
+    delete bean[SymbolBeanContainerInstances][BeanStyleIdentifier];
+    Object.assign(bean[SymbolBeanContainerInstances], ctxRoot.bean[SymbolBeanContainerInstances]);
     ctxRoot.bean = bean;
     ctxRoot.app = app;
   },

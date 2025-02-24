@@ -31,7 +31,7 @@ const SymbolBeanContainerParent = Symbol('SymbolBeanContainerParent');
 const SymbolProxyMagic = Symbol('SymbolProxyMagic');
 const SymbolCacheAopChains = Symbol('SymbolCacheAopChains');
 const SymbolCacheAopChainsKey = Symbol('SymbolCacheAopChainsKey');
-const SymbolBeanContainerInstances = Symbol('SymbolBeanContainerInstances');
+export const SymbolBeanContainerInstances = Symbol('SymbolBeanContainerInstances');
 export const SymbolProxyDisable = Symbol('SymbolProxyDisable');
 
 export interface BeanContainer {}
@@ -774,11 +774,11 @@ export class BeanContainer {
   ) {
     // 1. use name
     if (useOptions.name) {
-      return beanContainerParent[BeanContainerInstances][useOptions.name];
+      return beanContainerParent[SymbolBeanContainerInstances][useOptions.name];
     }
     // 2. use prop
     if (!targetBeanComposable && !targetBeanFullName) {
-      return beanContainerParent[BeanContainerInstances][recordProp!];
+      return beanContainerParent[SymbolBeanContainerInstances][recordProp!];
     }
     // 3. targetBeanFullName
     return beanContainerParent._getBeanSelectorInnerSync(targetBeanComposable, targetBeanFullName, useOptions.selector);
