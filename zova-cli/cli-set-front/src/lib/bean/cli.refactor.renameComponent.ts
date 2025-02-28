@@ -2,8 +2,8 @@ import type { NameMeta } from '@cabloy/cli';
 import type { IModuleInfo } from '@cabloy/module-info';
 import path from 'node:path';
 import { BeanCliBase } from '@cabloy/cli';
-import eggBornUtils from 'egg-born-utils';
 import fse from 'fs-extra';
+import { globbySync } from 'globby';
 import gogocode from 'gogocode';
 
 declare module '@cabloy/cli' {
@@ -127,7 +127,7 @@ export class CliRefactorRenameComponent extends BeanCliBase {
       `Style${typeMiddleFix}${argv.componentNameNewCapitalize}`,
     ]);
     //
-    const files = eggBornUtils.tools.globbySync('*', {
+    const files = globbySync('*', {
       cwd: componentDir,
       onlyFiles: true,
     });
