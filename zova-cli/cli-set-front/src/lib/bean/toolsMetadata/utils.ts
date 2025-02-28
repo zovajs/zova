@@ -1,8 +1,8 @@
 import type { IGlobBeanFile, OnionSceneMeta } from '@cabloy/module-info';
 import path from 'node:path';
 import { skipPrefix, stringToCapitalize, toLowerCaseFirstChar, toUpperCaseFirstChar } from '@cabloy/word-utils';
-import eggBornUtils from 'egg-born-utils';
 import fse from 'fs-extra';
+import { globby } from 'globby';
 
 export function checkIgnoreOfParts(parts: string[]) {
   const indexLast = parts.length - 1;
@@ -19,23 +19,23 @@ export function getScopeModuleName(moduleName: string) {
 
 export async function globAllTsFiles(moduleName: string, modulePath: string): Promise<IGlobBeanFile[]> {
   const result: IGlobBeanFile[] = [];
-  const pattern = `${modulePath}/src/**/*.ts(x)?`;
-  const files = await eggBornUtils.tools.globbyAsync(pattern);
+  const files = await globby('src/**/*.ts(x)?', { cwd: modulePath });
   if (files.length === 0) return result;
   files.sort();
   const pathMetadata = path.join(modulePath, 'src/.metadata');
   for (const file of files) {
+    const filePath = path.join(modulePath, file);
     const fileName = path.basename(file);
     if (fileName.startsWith('_')) continue;
     const parts = fileName.split('.').slice(0, -1);
     const isIgnore = checkIgnoreOfParts(parts);
     const fileNameJS = fileName.replace('.ts', '.js').replace('.tsx', '.jsx');
     const fileNameJSRelative = path
-      .relative(pathMetadata, file)
+      .relative(pathMetadata, filePath)
       .replace(/\\/g, '/')
       .replace('.ts', '.js')
       .replace('.tsx', '.jsx');
-    const fileContent = fse.readFileSync(file).toString();
+    const fileContent = fse.readFileSync(filePath).toString();
     const isVirtual = fileContent.includes('@Virtual()');
     const matches = fileContent.match(/\s@([^\s<]+)\S*?\([\s\S]*?\)\sexport class ([^ \n<]+)/);
     if (!matches) continue;
@@ -47,7 +47,7 @@ export async function globAllTsFiles(moduleName: string, modulePath: string): Pr
     result.push({
       sceneName,
       sceneNameCapitalize,
-      file,
+      file: filePath,
       fileContent,
       fileName,
       fileNameJS,

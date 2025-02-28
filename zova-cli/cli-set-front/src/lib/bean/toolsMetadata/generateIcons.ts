@@ -1,6 +1,6 @@
 import path from 'node:path';
-import eggBornUtils from 'egg-born-utils';
 import fse from 'fs-extra';
+import { globby } from 'globby';
 import SVGCompiler from 'svg-baker';
 import { optimize } from 'svgo';
 
@@ -55,24 +55,25 @@ export interface IIconRecord {
 }
 
 async function _resolveGroups(iconsSrc: string) {
-  const groupPaths = await eggBornUtils.tools.globbyAsync(`${iconsSrc}/*`, { onlyDirectories: true });
+  const groupPaths = await globby('*', { cwd: iconsSrc, onlyDirectories: true });
   groupPaths.sort();
   return groupPaths.map(item => {
     return {
-      name: path.basename(item),
+      name: item,
+      iconNames: [] as string[],
     };
   });
 }
 
 async function _generateIconsGroup(modulePath: string, iconsSrc: string, moduleName: string, groupName: string) {
   // icons
-  const files = await eggBornUtils.tools.globbyAsync(`${iconsSrc}/${groupName}/*.svg`);
+  const files = await globby(`${groupName}/*.svg`, { cwd: iconsSrc });
   files.sort();
   const iconNames = files.map(item => path.basename(item, '.svg'));
   // symbols
   const symbols: string[] = [];
   for (let index = 0; index < files.length; index++) {
-    const file = files[index];
+    const file = path.join(iconsSrc, files[index]);
     const iconName = iconNames[index];
     const symbol = await _combineSymbol(file, moduleName, groupName, iconName);
     symbols.push(symbol);

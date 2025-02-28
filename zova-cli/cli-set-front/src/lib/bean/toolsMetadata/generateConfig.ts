@@ -1,6 +1,6 @@
 import path from 'node:path';
-import eggBornUtils from 'egg-born-utils';
 import fse from 'fs-extra';
+import { globby } from 'globby';
 
 export async function generateConfig(modulePath: string) {
   const configFile = path.join(modulePath, 'src/config/config.ts');
@@ -27,14 +27,13 @@ import { constants } from '../config/constants.js';
 }
 
 export async function generateLocale(modulePath: string) {
-  const pattern = `${modulePath}/src/config/locale/*.ts`;
-  const files = await eggBornUtils.tools.globbyAsync(pattern);
+  const files = await globby('src/config/locale/*.ts', { cwd: modulePath });
   if (files.length === 0) return '';
   files.sort();
   const contentImports: string[] = [];
   const contentLocales: string[] = [];
   for (const file of files) {
-    const localeName = path.basename(file.substring(0, file.length - '.ts'.length));
+    const localeName = path.basename(file, '.ts');
     const className = `locale_${localeName.replace('-', '_')}`;
     contentImports.push(`import ${className} from '../config/locale/${localeName}.js';`);
     contentLocales.push(`'${localeName}': ${className},`);
