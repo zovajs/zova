@@ -3,7 +3,7 @@
   "title": "zova cli",
   "type": "module",
   "private": true,
-  "description": "A Node.js full-stack framework with workflow engine, based on koa + egg + vue + framework7",
+  "description": "A Node.js full-stack framework with workflow engine",
   "author": "zhennann",
   "license": "MIT",
   "homepage": "https://github.com/cabloy/zova#readme",
