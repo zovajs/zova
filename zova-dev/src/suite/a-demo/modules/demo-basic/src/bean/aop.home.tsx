@@ -1,5 +1,5 @@
 import type { ControllerPageHome } from 'zova-module-home-index';
-import { BeanAopBase, polyfillDispose } from 'zova';
+import { BeanAopBase, NextSync, polyfillDispose } from 'zova';
 import { Aop } from 'zova-module-a-bean';
 
 @Aop({ match: 'home-index.controller.pageHome' })
@@ -14,12 +14,12 @@ export class AopHome extends BeanAopBase {
     polyfillDispose(receiver);
   }
 
-  protected __dispose__(_args: [], next: Function, receiver: ControllerPageHome) {
+  protected __dispose__(_args: [], next: NextSync, receiver: ControllerPageHome) {
     receiver.message = receiver.message.substring(0, receiver.message.length - 1);
     next();
   }
 
-  render(_args: [], next: Function) {
+  render(_args: [], next: NextSync) {
     const result = next();
     return <div class="aop-home">{result}</div>;
   }
