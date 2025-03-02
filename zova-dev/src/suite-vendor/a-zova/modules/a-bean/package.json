@@ -55,6 +55,11 @@
         "optionsGlobalInterfaceName": "IDecoratorAopOptions",
         "optionsGlobalInterfaceFrom": "zova-module-a-bean",
         "boilerplate": "cli/aop/boilerplate"
+      },
+      "aopMethod": {
+        "optionsGlobalInterfaceName": "IDecoratorAopMethodOptions",
+        "optionsGlobalInterfaceFrom": "vona-module-a-bean",
+        "boilerplate": "cli/aopMethod/boilerplate"
       }
     }
   },
