@@ -1,4 +1,5 @@
 import type { IDecoratorAopOptions } from '../types/aop.js';
+import type { IDecoratorAopMethodOptions } from '../types/aopMethod.js';
 import { createBeanDecorator } from 'zova';
 
 export function Bean(): ClassDecorator {
@@ -38,5 +39,9 @@ export function Style(): ClassDecorator {
 }
 
 export function Aop(options: IDecoratorAopOptions): ClassDecorator {
-  return createBeanDecorator('aop', 'ctx', true, options);
+  return createBeanDecorator('aop', 'app', true, options);
+}
+
+export function AopMethod<T extends IDecoratorAopMethodOptions>(options?: T): ClassDecorator {
+  return createBeanDecorator('aopMethod', 'app', true, options);
 }
