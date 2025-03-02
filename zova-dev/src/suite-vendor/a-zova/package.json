@@ -13,6 +13,7 @@
     "zova-module-a-behavior": "workspace:^",
     "zova-module-a-fetch": "workspace:^",
     "zova-module-a-interceptor": "workspace:^",
+    "zova-module-a-logger": "workspace:^",
     "zova-module-a-meta": "workspace:^",
     "zova-module-a-model": "workspace:^",
     "zova-module-a-pinia": "workspace:^",

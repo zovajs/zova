@@ -1,8 +1,11 @@
 {
-  "name": "zova-module-<%=argv.name%>",
-  "version": "5.0.0",
-  "title": "<%=argv.moduleInfo.relativeName%>",
+  "name": "zova-module-a-logger",
   "type": "module",
+  "version": "5.0.0",
+  "title": "a-logger",
+  "description": "",
+  "author": "",
+  "keywords": ["Zova Module"],
   "exports": {
     ".": {
       "types": ["./src/index.ts", "./dist/index.d.ts"],
@@ -11,10 +14,7 @@
     },
     "./*": "./*"
   },
-  "description": "<%=argv.description%>",
-  "keywords": ["Zova Module"],
-  "author": "<%=argv.author%>",
-  "files": ["mock", "dist"],
+  "files": ["dist", "mock"],
   "scripts": {
     "clean": "tsc -b --clean",
     "tsc:publish": "npm run clean && tsc -b",
