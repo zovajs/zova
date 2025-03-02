@@ -1,5 +1,5 @@
 export * from './beanAopBase.js';
-export * from './beanAopMethodBase.ts';
+export * from './beanAopMethodBase.js';
 export * from './beanBase.js';
 export * from './beanBaseSimple.js';
 export * from './beanContainer.js';
