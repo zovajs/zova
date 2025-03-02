@@ -6,9 +6,14 @@
   "zovaModule": {
     "dependencies": {
       "a-api": "5.0.0",
+      "a-bean": "5.0.0",
+      "a-behavior": "5.0.0",
       "a-fetch": "5.0.0",
-      "a-router": "5.0.0",
+      "a-interceptor": "5.0.0",
+      "a-logger": "5.0.0",
+      "a-meta": "5.0.0",
       "a-model": "5.0.0",
+      "a-router": "5.0.0",
       "a-style": "5.0.0",
       "a-zod": "5.0.0"
     },
