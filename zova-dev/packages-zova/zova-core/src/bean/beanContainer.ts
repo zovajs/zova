@@ -1042,7 +1042,7 @@ export class BeanContainer {
               };
             } else if (methodType === 'method') {
               fn = function (args, next) {
-                return aop[methodNameMagic](args, next, receiver);
+                return aop[methodNameMagic](prop, args, next, receiver);
               };
             }
             chains.push([aopKey, fn]);
