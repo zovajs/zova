@@ -13,11 +13,11 @@ importers:
         version: 5.0.98(typescript@5.7.3)(vue@3.4.27(typescript@5.7.3))
     devDependencies:
       '@cabloy/lint':
-        specifier: ^5.0.6
-        version: 5.0.6(@typescript-eslint/utils@8.24.0(eslint@9.20.1)(typescript@5.7.3))(@vue/compiler-sfc@3.4.27)(eslint@9.20.1)(typescript@5.7.3)
+        specifier: ^5.0.8
+        version: 5.0.8(@typescript-eslint/utils@8.24.0(eslint@9.20.1)(typescript@5.7.3))(@vue/compiler-sfc@3.4.27)(eslint@9.20.1)(typescript@5.7.3)
       '@cabloy/process-helper':
-        specifier: ^1.0.4
-        version: 1.0.4
+        specifier: ^2.0.3
+        version: 2.0.3
       '@types/fs-extra':
         specifier: ^11.0.4
         version: 11.0.4
@@ -215,8 +215,8 @@ packages:
   '@cabloy/last-word@1.0.13':
     resolution: {integrity: sha512-6/A4UHmLwEDxf2b93EoPTP5vn193pHafvWSOwkQJUGuhlihFWMLwOjNCle7TQSz2fiH+HdYWijXI5xJkfUwlOQ==}
 
-  '@cabloy/lint@5.0.6':
-    resolution: {integrity: sha512-Sd0x76ayXSmPftlkdHC6Su4ZcHTiT/isplvG9g2CV3ik8gak0Z9lb/VNWAYhISi8AK9/dq+2j7I7w8+iPamAaQ==}
+  '@cabloy/lint@5.0.8':
+    resolution: {integrity: sha512-PboKkOSCgYkaSBpTfaJNUO97tORiXCPjWRh8poKU/TJjonQ7AoGL3QN8lRuSSyBtzuMtmgTlYYRQ50Va6g2SoQ==}
 
   '@cabloy/localeutil@1.0.4':
     resolution: {integrity: sha512-ZNcb/v9qCvFlyvdOrag8VcBRkvEqnJZTZWYr2qnf3NFWQDzUBFxVd8LBOYjOJmPd2efGZHM/+nAk21KyJ2mkLw==}
@@ -224,8 +224,8 @@ packages:
   '@cabloy/module-info@1.0.16':
     resolution: {integrity: sha512-NNqxo3FA+UL0xsIIAkphsszXk3KYnz3D1tqA24R58UaRr957iX7BvpVHq9Fd1sP4W9a6F+j5H5pEzdiyLvh9dQ==}
 
-  '@cabloy/process-helper@1.0.4':
-    resolution: {integrity: sha512-w3HBtxHWTisyfdlkfz77CacBkfrypuInLd/qSwu34QWTSlvKBxFouVUARlmvjOFn5nWVNdr37BnP2BwnWeo7YA==}
+  '@cabloy/process-helper@2.0.3':
+    resolution: {integrity: sha512-nSNw8gV0KneeKSZeBurQrEi85BrIkgXgocFXulLd+CZ9hrrNvGuPgTfpVlqiW8FxeOcPPaRsuQ6XoFJq7FqhbA==}
 
   '@cabloy/vue-runtime-core@3.4.32':
     resolution: {integrity: sha512-XMd/G0dZH3YRzQFzHvqzoNtar+rKXHzN4k2aMB7JKnuCDVieBdmQMZoyZzExwPHMsfbOUcCEblhUJ+wFUO+AYg==}
@@ -4670,7 +4670,7 @@ snapshots:
 
   '@cabloy/last-word@1.0.13': {}
 
-  '@cabloy/lint@5.0.6(@typescript-eslint/utils@8.24.0(eslint@9.20.1)(typescript@5.7.3))(@vue/compiler-sfc@3.4.27)(eslint@9.20.1)(typescript@5.7.3)':
+  '@cabloy/lint@5.0.8(@typescript-eslint/utils@8.24.0(eslint@9.20.1)(typescript@5.7.3))(@vue/compiler-sfc@3.4.27)(eslint@9.20.1)(typescript@5.7.3)':
     dependencies:
       '@antfu/eslint-config': 4.2.1(@eslint/json@0.10.0)(@typescript-eslint/utils@8.24.0(eslint@9.20.1)(typescript@5.7.3))(@vue/compiler-sfc@3.4.27)(eslint@9.20.1)(typescript@5.7.3)
       '@eslint/json': 0.10.0
@@ -4707,7 +4707,7 @@ snapshots:
     dependencies:
       stack-utils: 2.0.6
 
-  '@cabloy/process-helper@1.0.4': {}
+  '@cabloy/process-helper@2.0.3': {}
 
   '@cabloy/vue-runtime-core@3.4.32':
     dependencies:

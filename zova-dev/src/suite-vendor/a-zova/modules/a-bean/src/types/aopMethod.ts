@@ -3,7 +3,7 @@ import type { ServiceOnion } from '../service/onion_.js';
 import type { IOnionOptionsEnable } from './onion.js';
 
 export const SymbolDecoratorUseAopMethod = Symbol('SymbolDecoratorUseAopMethod');
-export interface IUseAopMethodPropMetadata<T extends keyof IAopMethodRecord = never> {
+export interface IUseAopMethodPropMetadata<T extends keyof IAopMethodRecord = any> {
   beanInstance?: any;
   onionName?: T;
   options?: Partial<IAopMethodRecord[T]>;
