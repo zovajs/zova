@@ -1,47 +1,69 @@
+import { isUndefined } from '@cabloy/utils';
 import 'reflect-metadata';
 
 export type MetadataKey = symbol | string;
 
 export class AppMetadata {
-  defineMetadata<V>(metadataKey: MetadataKey, metadataValue: V, target: object) {
-    Reflect.defineMetadata(metadataKey, metadataValue, target);
+  defineMetadata<V>(metadataKey: MetadataKey, metadataValue: V, target: object, prop?: MetadataKey) {
+    if (isUndefined(prop)) {
+      Reflect.defineMetadata(metadataKey, metadataValue, target);
+    } else {
+      Reflect.defineMetadata(metadataKey, metadataValue, target, prop);
+    }
   }
 
-  getOwnMetadata<V>(metadataKey: MetadataKey, target: object): V | undefined {
-    return Reflect.getOwnMetadata(metadataKey, target);
+  getOwnMetadata<V>(metadataKey: MetadataKey, target: object, prop?: MetadataKey): V | undefined {
+    if (isUndefined(prop)) return Reflect.getOwnMetadata(metadataKey, target);
+    return Reflect.getOwnMetadata(metadataKey, target, prop);
   }
 
   getMetadata<V>(metadataKey: MetadataKey, target: object, prop?: MetadataKey): V | undefined {
-    if (prop) {
-      return Reflect.getMetadata(metadataKey, target, prop);
-    }
-    return Reflect.getMetadata(metadataKey, target);
+    if (isUndefined(prop)) return Reflect.getMetadata(metadataKey, target);
+    return Reflect.getMetadata(metadataKey, target, prop);
   }
 
-  getOwnMetadataArray<Entry>(metadataKey: MetadataKey, target: object): Array<Entry> {
-    let own: Array<Entry> | undefined = this.getOwnMetadata(metadataKey, target);
+  getOwnMetadataArray<Entry>(
+    inherit: boolean,
+    metadataKey: MetadataKey,
+    target: object,
+    prop?: MetadataKey,
+  ): Array<Entry> {
+    let own: Array<Entry> | undefined = this.getOwnMetadata(metadataKey, target, prop);
     if (!own) {
-      const parent: Array<Entry> | undefined = this.getMetadata(metadataKey, target);
-      if (parent) {
-        own = parent.slice();
-      } else {
+      if (!inherit) {
         own = [];
+      } else {
+        const parent: Array<Entry> | undefined = this.getMetadata(metadataKey, target, prop);
+        if (parent) {
+          own = parent.slice();
+        } else {
+          own = [];
+        }
       }
-      this.defineMetadata(metadataKey, own, target);
+      this.defineMetadata(metadataKey, own, target, prop);
     }
     return own;
   }
 
-  getOwnMetadataMap<K extends PropertyKey, V>(metadataKey: MetadataKey, target): Record<K, V> {
-    let own: Record<K, V> | undefined = this.getOwnMetadata(metadataKey, target);
+  getOwnMetadataMap<K extends PropertyKey, V>(
+    inherit: boolean,
+    metadataKey: MetadataKey,
+    target: object,
+    prop?: MetadataKey,
+  ): Record<K, V> {
+    let own: Record<K, V> | undefined = this.getOwnMetadata(metadataKey, target, prop);
     if (!own) {
-      const parent: Record<K, V> | undefined = this.getMetadata(metadataKey, target);
-      if (parent) {
-        own = Object.assign({}, parent);
-      } else {
+      if (!inherit) {
         own = {} as Record<K, V>;
+      } else {
+        const parent: Record<K, V> | undefined = this.getMetadata(metadataKey, target, prop);
+        if (parent) {
+          own = Object.assign({}, parent);
+        } else {
+          own = {} as Record<K, V>;
+        }
       }
-      this.defineMetadata(metadataKey, own, target);
+      this.defineMetadata(metadataKey, own, target, prop);
     }
     return own;
   }
