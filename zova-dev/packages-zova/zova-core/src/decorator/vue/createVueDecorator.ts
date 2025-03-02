@@ -1,7 +1,7 @@
 import type { MetadataKey } from '../../core/metadata.js';
 import type { IDecoratorVueElement, TypeDecoratorVue } from './types.js';
 import { appMetadata } from '../../core/metadata.js';
-import { DecoratorVueElements } from './types.js';
+import { SymbolDecoratorVueElements } from './types.js';
 
 export function createVueDecorator<OPTIONS>(
   type: TypeDecoratorVue,
@@ -9,7 +9,8 @@ export function createVueDecorator<OPTIONS>(
 ): PropertyDecorator & MethodDecorator {
   return function (target: object, prop: MetadataKey, descriptor?: PropertyDescriptor) {
     const vues = appMetadata.getOwnMetadataMap<MetadataKey, IDecoratorVueElement<OPTIONS>[]>(
-      DecoratorVueElements,
+      true,
+      SymbolDecoratorVueElements,
       target,
     );
     if (!vues[prop]) vues[prop] = [];

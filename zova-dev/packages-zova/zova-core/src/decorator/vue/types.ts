@@ -1,6 +1,6 @@
 import type { WatchEffectOptions, WatchOptions } from 'vue';
 
-export const DecoratorVueElements = Symbol('Decorator#Vue');
+export const SymbolDecoratorVueElements = Symbol('SymbolDecoratorVueElements');
 
 export type TypeDecoratorVue =
   | 'computed'

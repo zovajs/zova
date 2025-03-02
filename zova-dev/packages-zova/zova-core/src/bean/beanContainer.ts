@@ -17,7 +17,7 @@ import { appMetadata } from '../core/metadata.js';
 import { appResource } from '../core/resource.js';
 import {
   __prepareInjectSelectorInfo,
-  DecoratorVueElements,
+  SymbolDecoratorVueElements,
 } from '../decorator/index.js';
 import { cast } from '../types/utils/cast.js';
 import { isClass } from '../utils/isClass.js';
@@ -584,7 +584,7 @@ export class BeanContainer {
   private _injectVueElements(beanInstance, beanFullName) {
     const beanOptions = appResource.getBean(beanFullName);
     if (!beanOptions) return;
-    const vues = appMetadata.getMetadata(DecoratorVueElements, beanOptions.beanClass.prototype);
+    const vues = appMetadata.getMetadata(SymbolDecoratorVueElements, beanOptions.beanClass.prototype);
     if (!vues) return;
     for (const prop in vues) {
       const vueElements = vues[prop];
