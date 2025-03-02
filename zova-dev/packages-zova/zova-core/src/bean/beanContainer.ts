@@ -1066,7 +1066,8 @@ export class BeanContainer {
     return chains;
   }
 
-  private _getAopChainsProp_aopMethods(chains, aopKey, aopMethods, methodType, receiver, prop: string) {
+  private _getAopChainsProp_aopMethods(chains, aopKey, aopMethodsAll, methodType, receiver, prop: string) {
+    const aopMethods = aopMethodsAll[prop];
     if (!aopMethods) return;
     for (const aopMethod of aopMethods) {
       let fn;
