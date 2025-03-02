@@ -10,13 +10,14 @@ import type {
 import type { MetadataKey } from './metadata.js';
 import { parseLastWord, skipLastWord, skipPrefix, splitWords } from '@cabloy/word-utils';
 import { BeanSimple } from '../bean/beanSimple.js';
+import { registerMappedClassMetadataKey } from '../mappedClass/utils.js';
 import { isClass } from '../utils/isClass.js';
 import { uuid } from '../utils/uuid.js';
 import { appMetadata } from './metadata.js';
 
 export const DecoratorBeanFullName = Symbol('Decorator#BeanFullName');
 export const DecoratorBeanInfo = Symbol('Decorator#BeanInfo');
-export const DecoratorUse = Symbol('Decorator#Use');
+export const SymbolDecoratorUse = Symbol('SymbolDecoratorUse');
 export const DecoratorBeanFullNameOfComposable = Symbol('Decorator#BeanFullNameOfComposable');
 
 export type IAppResourceRecord = Record<string, IDecoratorBeanOptionsBase>;
@@ -26,7 +27,8 @@ export class AppResource extends BeanSimple {
   scenes: Record<string, Record<string, IAppResourceRecord>> = {};
 
   addUse(target: object, options: IDecoratorUseOptionsBase) {
-    const uses = appMetadata.getOwnMetadataMap(DecoratorUse, target);
+    registerMappedClassMetadataKey(target, SymbolDecoratorUse);
+    const uses = appMetadata.getOwnMetadataMap(true, SymbolDecoratorUse, target);
     uses[options.prop] = options;
     if (process.env.NODE_ENV === 'development') {
       if (typeof options.prop === 'string' && !options.prop.startsWith('$$')) {
@@ -36,7 +38,7 @@ export class AppResource extends BeanSimple {
   }
 
   getUses(target: object): Record<MetadataKey, IDecoratorUseOptionsBase> | undefined {
-    return appMetadata.getMetadata(DecoratorUse, target);
+    return appMetadata.getMetadata(SymbolDecoratorUse, target);
   }
 
   addBean<T>(options: Partial<IDecoratorBeanOptionsBase<T>>) {
