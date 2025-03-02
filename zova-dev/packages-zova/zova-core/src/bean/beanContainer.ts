@@ -954,8 +954,9 @@ export class BeanContainer {
     // aop method
     if (!beanInstance[SymbolProxyDisable] && beanOptions) {
       const beanAop = (await this.app.bean._getBean('a-bean.service.aop' as never, false)) as any;
-      if (await beanAop.hasAopMethods(beanOptions?.beanFullName)) {
-        chains.push(SymbolProxyAopMethod);
+      const aopMethods = await beanAop.findAopMethodsMatched(beanOptions?.beanFullName);
+      if (aopMethods) {
+        chains.push([SymbolProxyAopMethod, aopMethods] as any);
       }
     }
     // magic self
@@ -1020,8 +1021,8 @@ export class BeanContainer {
         if (!__isLifeCycleMethod(methodName)) {
           chains.push([aopKey, methodName]);
         }
-      } else if (aopKey === SymbolProxyAopMethod) {
-        this._getAopChainsProp_aopMethods(chains, aopKey, beanFullName, methodType, receiver, prop);
+      } else if (Array.isArray(aopKey) && aopKey[0] === SymbolProxyAopMethod) {
+        this._getAopChainsProp_aopMethods(chains, aopKey, aopKey[1], methodType, receiver, prop);
       } else {
         const aop: BeanAopBase = aopKey;
         if (aop[methodName]) {
@@ -1065,9 +1066,8 @@ export class BeanContainer {
     return chains;
   }
 
-  private _getAopChainsProp_aopMethods(chains, aopKey, beanFullName, methodType, receiver, prop: string) {
-    const beanAop = this.app.bean._getBeanSyncOnly('a-aspect.service.aop' as never) as any;
-    const aopMethods = beanAop.findAopMethodsMatched(beanFullName, prop);
+  private _getAopChainsProp_aopMethods(chains, aopKey, aopMethods, methodType, receiver, prop: string) {
+    if (!aopMethods) return;
     for (const aopMethod of aopMethods) {
       let fn;
       if (methodType === 'get') {

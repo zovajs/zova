@@ -69,6 +69,6 @@ export class ServiceAop extends BeanBase {
       }
       aopMethodsMatchedAll[prop] = aopMethodsMatched;
     }
-    return aopMethodsMatchedAll;
+    return Object.keys(aopMethodsMatchedAll).length === 0 ? undefined : aopMethodsMatchedAll;
   }
 }
