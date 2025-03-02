@@ -29,6 +29,7 @@ import { vueDecorators } from './vueDecorators/index.js';
 
 const SymbolBeanContainerParent = Symbol('SymbolBeanContainerParent');
 const SymbolProxyMagic = Symbol('SymbolProxyMagic');
+const SymbolProxyAopMethod = Symbol('SymbolProxyAopMethod');
 const SymbolCacheAopChains = Symbol('SymbolCacheAopChains');
 const SymbolCacheAopChainsKey = Symbol('SymbolCacheAopChainsKey');
 export const SymbolBeanContainerInstances = Symbol('SymbolBeanContainerInstances');
@@ -936,6 +937,7 @@ export class BeanContainer {
     if (host[SymbolCacheAopChains][cacheKey]) return host[SymbolCacheAopChains][cacheKey];
     // chains
     let chains: (MetadataKey | BeanBase)[] = [];
+    // aop
     if (!beanInstance[SymbolProxyDisable] && beanOptions && cast(beanOptions.scene) !== 'aop') {
       const beanAop = (await this.app.bean._getBean('a-bean.service.aop' as never, false)) as any;
       const aops = await beanAop.findAopsMatched(beanOptions.beanFullName);
@@ -947,6 +949,13 @@ export class BeanContainer {
           aopInstances.push(await this.app.bean._getBean(aop.beanFullName, true));
         }
         chains = chains.concat(aopInstances);
+      }
+    }
+    // aop method
+    if (!beanInstance[SymbolProxyDisable] && beanOptions) {
+      const beanAop = (await this.app.bean._getBean('a-bean.service.aop' as never, false)) as any;
+      if (await beanAop.hasAopMethods(beanOptions?.beanFullName)) {
+        chains.push(SymbolProxyAopMethod);
       }
     }
     // magic self
@@ -1011,6 +1020,8 @@ export class BeanContainer {
         if (!__isLifeCycleMethod(methodName)) {
           chains.push([aopKey, methodName]);
         }
+      } else if (aopKey === SymbolProxyAopMethod) {
+        this._getAopChainsProp_aopMethods(chains, aopKey, beanFullName, methodType, receiver, prop);
       } else {
         const aop: BeanAopBase = aopKey;
         if (aop[methodName]) {
@@ -1052,6 +1063,31 @@ export class BeanContainer {
     }
     host[SymbolCacheAopChainsKey][cacheKey][chainsKey] = chains;
     return chains;
+  }
+
+  private _getAopChainsProp_aopMethods(chains, aopKey, beanFullName, methodType, receiver, prop: string) {
+    const beanAop = this.app.bean._getBeanSyncOnly('a-aspect.service.aop' as never) as any;
+    const aopMethods = beanAop.findAopMethodsMatched(beanFullName, prop);
+    for (const aopMethod of aopMethods) {
+      let fn;
+      if (methodType === 'get') {
+        fn = function (_, next) {
+          if (!aopMethod.beanInstance.get) throw new Error(`get property accessor not exists: ${aopMethod.onionName}`);
+          return aopMethod.beanInstance.get(aopMethod.options, next, receiver, prop);
+        };
+      } else if (methodType === 'set') {
+        fn = function (value, next) {
+          if (!aopMethod.beanInstance.set) throw new Error(`set property accessor not exists: ${aopMethod.onionName}`);
+          return aopMethod.beanInstance.set(aopMethod.options, value, next, receiver, prop);
+        };
+      } else if (methodType === 'method') {
+        fn = function (args, next) {
+          if (!aopMethod.beanInstance.execute) throw new Error(`execute method not exists: ${aopMethod.onionName}`);
+          return aopMethod.beanInstance.execute(aopMethod.options, args, next, receiver, prop);
+        };
+      }
+      chains.push([aopKey, fn]);
+    }
   }
 
   private __composeForPropAdapter = (_context, chain) => {
