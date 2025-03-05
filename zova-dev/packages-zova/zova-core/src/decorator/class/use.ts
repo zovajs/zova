@@ -8,7 +8,7 @@ import type {
   IUsePrepareArgResult,
   TypeDecoratorUseOptionsInitArg,
 } from '../index.js';
-import { evaluate, isNil } from '@cabloy/utils';
+import { evaluateExpressions } from '@cabloy/utils';
 import { appMetadata } from '../../core/metadata.js';
 import { appResource } from '../../core/resource.js';
 import { useRef } from '../../vue/ref.js';
@@ -110,20 +110,5 @@ function __prepareInjectSelectorInfo_init(
 }
 
 function __prepareInjectSelectorInfo_init_arg(beanInstance, arg: TypeDecoratorUseOptionsInitArg): any {
-  if (isNil(arg)) return arg;
-  if (Array.isArray(arg)) {
-    return arg.map(item => __prepareInjectSelectorInfo_init_argInner(beanInstance, item));
-  } else if (typeof arg === 'object') {
-    const res = {};
-    for (const key in arg) {
-      res[key] = __prepareInjectSelectorInfo_init_argInner(beanInstance, arg[key]);
-    }
-    return res;
-  }
-  // others
-  return __prepareInjectSelectorInfo_init_argInner(beanInstance, arg);
-}
-
-function __prepareInjectSelectorInfo_init_argInner(beanInstance, arg: TypeDecoratorUseOptionsInitArg): any {
-  return evaluate(arg, beanInstance);
+  return evaluateExpressions(arg, beanInstance);
 }
