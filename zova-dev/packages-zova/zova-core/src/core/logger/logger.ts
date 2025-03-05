@@ -1,6 +1,5 @@
 import type { AppLoggerClient } from './loggerClient.js';
 import type { ILoggerClientChildRecord, ILoggerClientRecord, ILoggerOptionsClientInfo, LoggerLevel, TypeLoggerOptions } from './types.js';
-import { isEmptyObject } from '@cabloy/utils';
 import { BeanSimple } from '../../bean/beanSimple.js';
 
 const SymbolLoggerInstances = Symbol('SymbolLoggerInstances');
