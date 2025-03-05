@@ -1,22 +1,6 @@
 import { isEmptyObject } from '@cabloy/utils';
 import { npmConfigSetLevels } from './types.js';
 
-const LOGGERLEVEL = Symbol('LOGGERLEVEL');
-const LOGGERMESSAGE = Symbol('LOGGERMESSAGE');
-const LOGGERSPLAT = Symbol('LOGGERSPLAT');
-
-export interface TransformableInfo {
-  level: string;
-  message: unknown;
-  [LOGGERLEVEL]?: string;
-  [LOGGERMESSAGE]?: unknown;
-  [LOGGERSPLAT]?: unknown;
-  [key: string | symbol]: unknown;
-}
-
-export type TransformFunction = (info: TransformableInfo, opts?: unknown) => TransformableInfo | boolean;
-export type FormatWrap = (opts?: object) => LoggerFormat;
-
 function isValidFormat(fmt) {
   if (typeof fmt.transform !== 'function') {
     throw new TypeError([
@@ -50,22 +34,6 @@ function LoggerFormatCascade(formats) {
 export function loggerFormatCombine(...formats) {
   const combinedFormat = loggerFormat(LoggerFormatCascade(formats));
   return combinedFormat();
-}
-
-export class LoggerFormat {
-  transform?: TransformFunction;
-  options?: object;
-
-  constructor(transform?: TransformFunction, opts?: object) {
-    this.transform = transform;
-    this.options = opts;
-  }
-}
-
-export function loggerFormat(transform?: TransformFunction): FormatWrap {
-  return (opts?: object) => {
-    return new LoggerFormat(transform, opts);
-  };
 }
 
 export class LoggerFormatPrintf {
