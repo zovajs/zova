@@ -8,8 +8,7 @@ import type {
   IUsePrepareArgResult,
   TypeDecoratorUseOptionsInitArg,
 } from '../index.js';
-import { isNil } from '@cabloy/utils';
-import { evaluate } from 'cel-js';
+import { evaluate, isNil } from '@cabloy/utils';
 import { appMetadata } from '../../core/metadata.js';
 import { appResource } from '../../core/resource.js';
 import { useRef } from '../../vue/ref.js';
@@ -126,9 +125,5 @@ function __prepareInjectSelectorInfo_init_arg(beanInstance, arg: TypeDecoratorUs
 }
 
 function __prepareInjectSelectorInfo_init_argInner(beanInstance, arg: TypeDecoratorUseOptionsInitArg): any {
-  if (typeof arg !== 'string') return arg;
-  if (arg.startsWith('##')) {
-    return arg.substring('##'.length);
-  }
   return evaluate(arg, beanInstance);
 }
