@@ -94,25 +94,3 @@ export function getLoggerClientLevel(clientName: keyof ILoggerClientRecord): Log
   if (level === 'true' || !level) return 'info';
   return level as LoggerLevel;
 }
-
-export const formatLoggerFilter = Winston.format((info, opts: any) => {
-  const level = opts.level;
-  if (!level) return false;
-  if (opts.strict) {
-    if (Winston.config.npm.levels[info.level] === Winston.config.npm.levels[level]) return info;
-    return false;
-  }
-  if (Winston.config.npm.levels[info.level] <= Winston.config.npm.levels[level] || (opts.silly && info.level === 'silly')) return info;
-  return false;
-});
-
-export const formatLoggerConsole = () => {
-  return Winston.format.printf(({ timestamp, level, stack, message, name, durationMs, ...meta }) => {
-    const textName = name ? ` ${chalk.cyan(`[${name}]`)}` : '';
-    const textMeta = !isEmptyObject(meta) ? ` ${JSON.stringify(meta)}` : '';
-    const textMessage = message ? ` ${message}` : '';
-    const textDurationMs = durationMs !== undefined ? ` ${chalk.cyan(`+${durationMs}ms`)}` : '';
-    const textStack = stack ? `\n${stack}` : '';
-    return `${timestamp} ${level}${textName}${textMeta}${textMessage}${textDurationMs}${textStack}`;
-  });
-};

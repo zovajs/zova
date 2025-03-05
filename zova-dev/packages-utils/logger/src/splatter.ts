@@ -95,6 +95,6 @@ class Splatter {
   }
 }
 
-export function splatter(opts) {
+export function splatter(opts?) {
   return new Splatter(opts);
 }
