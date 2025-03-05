@@ -6,8 +6,11 @@ import type { IBeanScopeConfig, IBeanScopeRecord } from '../../bean/type.js';
 import type { ZovaConfigEnv } from '../../types/utils/env.js';
 import type { PowerPartial } from '../../types/utils/powerPartial.js';
 import type { ConfigLogger } from '../logger/types.js';
+import { combineLoggerDefault } from '../logger/loggerDefault.js';
 
 export function configDefault() {
+  // logger
+  const logger = combineLoggerDefault();
   return {
     meta: {
       flavor: process.env.META_FLAVOR,
@@ -40,7 +43,7 @@ export function configDefault() {
         bodyReadyObserver: process.env.SSR_BODYREADYOBSERVER === 'true',
       },
     },
-    logger: {},
+    logger,
     icon: {
       defaultModule: 'home-icon',
     },

@@ -1,10 +1,12 @@
+import type { LoggerFormat } from './format.js';
+
 export interface ILoggerOptionsClientInfo {
   clientName: keyof ILoggerClientRecord;
   level: LoggerLevel | undefined;
 }
 
 export interface LoggerOptions {
-  level?: string;
+  format?: LoggerFormat;
 }
 
 export type TypeLoggerOptions = LoggerOptions | ((clientInfo: ILoggerOptionsClientInfo) => LoggerOptions);
@@ -21,3 +23,13 @@ export interface ConfigLogger {
 }
 
 export type LoggerLevel = 'error' | 'warn' | 'info' | 'http' | 'verbose' | 'debug' | 'silly';
+
+export const npmConfigSetLevels = {
+  error: 0,
+  warn: 1,
+  info: 2,
+  http: 3,
+  verbose: 4,
+  debug: 5,
+  silly: 6,
+};
