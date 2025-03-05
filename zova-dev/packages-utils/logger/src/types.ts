@@ -1,8 +1,8 @@
 import type { Format } from './format.ts';
 
-const LEVEL = Symbol('LEVEL');
-const MESSAGE = Symbol('MESSAGE');
-const SPLAT = Symbol('SPLAT');
+export const LEVEL = Symbol('LEVEL');
+export const MESSAGE = Symbol('MESSAGE');
+export const SPLAT = Symbol('SPLAT');
 
 export interface TransformableInfo {
   level: string;
