@@ -58,6 +58,7 @@ async function _closeLogger(logger: Logger) {
 }
 
 export function getLoggerClientLevel(clientName: keyof ILoggerClientRecord): LoggerLevel | undefined {
+  if (process.env.PROD) return; // disable on prod
   const envName = `LOGGER_CLIENT_${clientName.toUpperCase()}`;
   const level = process.env[envName];
   if (level === 'false') return;
