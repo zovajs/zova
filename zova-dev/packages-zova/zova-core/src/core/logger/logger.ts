@@ -36,7 +36,7 @@ export class AppLogger extends BeanSimple {
     const configNode = deepExtend(
       {},
       this._prepareConfigClient(clientName, this.app.config.logger.default),
-      this._prepareConfigClient(clientName, configClient),
+      this._prepareConfigClient(clientName, configClient as unknown as TypeLoggerOptions),
     );
     const logger = new Logger(configNode);
     return logger;

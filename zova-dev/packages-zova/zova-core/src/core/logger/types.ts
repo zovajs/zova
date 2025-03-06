@@ -1,4 +1,5 @@
 import type { LoggerLevel, LoggerOptions } from '@cabloy/logger';
+import type { PowerPartial } from 'zova';
 
 export type { LoggerLevel } from '@cabloy/logger';
 
@@ -17,5 +18,5 @@ export interface ILoggerClientChildRecord {}
 
 export interface ConfigLogger {
   default: TypeLoggerOptions;
-  clients: Record<keyof ILoggerClientRecord, TypeLoggerOptions>;
+  clients: Record<keyof ILoggerClientRecord, PowerPartial<TypeLoggerOptions>>;
 }
