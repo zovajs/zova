@@ -60,7 +60,12 @@ export class AopMethodLog extends BeanAopMethodBase implements IAopMethodExecute
     const message = `${receiver[SymbolBeanFullName]}#${prop}`;
     const logger = this.app.meta.logger.child(options.childName, options.clientName);
     // begin
-    options.args !== false && logger.log(options.level, `${message} args: ${JSON.stringify(_args)}`, context ? { context } : undefined);
+    if (options.args !== false) {
+      const info: any = { level: options.level, message };
+      if (context) info.context = context;
+      if (_args.length > 0)info.args = _args;
+      logger.log(info);
+    }
     const profiler = logger.startTimer();
     // next
     try {
