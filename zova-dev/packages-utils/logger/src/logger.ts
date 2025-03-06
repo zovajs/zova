@@ -23,6 +23,30 @@ export class Logger {
     return new Logger(this.options, defaultMeta);
   }
 
+  error(msg?: any, ...splat) {
+    return this.log('error', msg, ...splat);
+  }
+
+  warn(msg?: any, ...splat) {
+    return this.log('warn', msg, ...splat);
+  }
+
+  info(msg?: any, ...splat) {
+    return this.log('info', msg, ...splat);
+  }
+
+  http(msg?: any, ...splat) {
+    return this.log('http', msg, ...splat);
+  }
+
+  verbose(msg?: any, ...splat) {
+    return this.log('verbose', msg, ...splat);
+  }
+
+  silly(msg?: any, ...splat) {
+    return this.log('silly', msg, ...splat);
+  }
+
   log(level: LoggerLevel | LogInfo, msg?: any, ...splat) {
     // Optimize for the hotpath of logging JSON literals
     if (arguments.length === 1) {
