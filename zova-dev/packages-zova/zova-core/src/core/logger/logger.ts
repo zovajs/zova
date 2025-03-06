@@ -30,6 +30,14 @@ export class AppLogger extends BeanSimple {
     return logger.child({ name: childName });
   }
 
+  getLevel(clientName?: keyof ILoggerClientRecord): LoggerLevel | undefined {
+    return getLoggerClientLevel(clientName);
+  }
+
+  setLevel(level: LoggerLevel | boolean, clientName?: keyof ILoggerClientRecord) {
+    setLoggerClientLevel(level, clientName);
+  }
+
   private _createClient(clientName: keyof ILoggerClientRecord): Logger {
     const configClient = this.app.config.logger.clients[clientName];
     if (!configClient) throw new Error(`logger client not found: ${clientName}`);
@@ -57,11 +65,19 @@ async function _closeLogger(logger: Logger) {
   (logger as any).__closed__ = true;
 }
 
-export function getLoggerClientLevel(clientName: keyof ILoggerClientRecord): LoggerLevel | undefined {
+export function getLoggerClientLevel(clientName?: keyof ILoggerClientRecord): LoggerLevel | undefined {
+  clientName = clientName || 'default';
   if (process.env.PROD) return; // disable on prod
   const envName = `LOGGER_CLIENT_${clientName.toUpperCase()}`;
   const level = process.env[envName];
   if (level === 'false') return;
   if (level === 'true' || !level) return 'info';
   return level as LoggerLevel;
+}
+
+export function setLoggerClientLevel(level: LoggerLevel | boolean, clientName?: keyof ILoggerClientRecord) {
+  clientName = clientName || 'default';
+  if (process.env.PROD) return; // disable on prod
+  const envName = `LOGGER_CLIENT_${clientName.toUpperCase()}`;
+  process.env[envName] = level.toString();
 }
