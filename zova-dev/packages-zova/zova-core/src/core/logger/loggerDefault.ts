@@ -1,6 +1,6 @@
 import type { ZovaApplication } from '../app/application.js';
 import type { ConfigLogger } from './types.js';
-import { combine, errors, splatter, timestamp } from '@cabloy/logger';
+import { colorizer, combine, errors, splatter, timestamp } from '@cabloy/logger';
 import { formatLoggerConsole, formatLoggerFilter } from './format.js';
 
 export function combineLoggerDefault() {
@@ -12,6 +12,7 @@ export function combineLoggerDefault() {
           errors({ stack: true }),
           timestamp(),
           formatLoggerFilter({ level: clientInfo.level, silly: true }),
+          colorizer(),
           formatLoggerConsole(),
         ),
       };

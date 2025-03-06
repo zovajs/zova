@@ -1,4 +1,5 @@
 export * from './cascade.js';
+export * from './colorize.js';
 export * from './combine.js';
 export * from './errors.js';
 export * from './format.js';
