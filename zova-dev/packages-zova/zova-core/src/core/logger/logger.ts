@@ -46,7 +46,7 @@ export class AppLogger extends BeanSimple {
     if (typeof configClient !== 'function') return configClient;
     return configClient.call(this.app, {
       clientName,
-      level: getLoggerClientLevel(clientName),
+      level: () => getLoggerClientLevel(clientName),
     });
   }
 }
