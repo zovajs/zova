@@ -20,8 +20,10 @@ export enum NpmConfigSetLevels {
   error = 0,
   warn = 1,
   info = 2,
-  debug = 3,
-  silly = 4,
+  http = 3,
+  verbose = 4,
+  debug = 5,
+  silly = 6,
 };
 
-export type LoggerLevel = 'error' | 'warn' | 'info' | 'debug' | 'silly';
+export type LoggerLevel = 'error' | 'warn' | 'info' | 'http' | 'verbose' | 'debug' | 'silly';
