@@ -1,3 +1,9 @@
+/**
+ *
+ * (C) 2010 Charlie Robbins
+ * MIT LICENCE
+ */
+
 import { format } from './format.js';
 import { LEVEL, MESSAGE } from './types.js';
 

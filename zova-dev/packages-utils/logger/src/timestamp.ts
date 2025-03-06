@@ -1,3 +1,9 @@
+/**
+ *
+ * (C) 2010 Charlie Robbins
+ * MIT LICENCE
+ */
+
 import fecha from 'fecha';
 import { format } from './format.js';
 

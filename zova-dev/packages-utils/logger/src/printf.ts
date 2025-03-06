@@ -1,3 +1,9 @@
+/**
+ *
+ * (C) 2010 Charlie Robbins
+ * MIT LICENCE
+ */
+
 import { MESSAGE } from './types.js';
 
 export class Printf {

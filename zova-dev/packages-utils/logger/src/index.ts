@@ -4,6 +4,7 @@ export * from './errors.js';
 export * from './format.js';
 export * from './logger.js';
 export * from './printf.js';
+export * from './profiler.js';
 export * from './splatter.js';
 export * from './timestamp.js';
 export * from './types.js';

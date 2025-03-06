@@ -1,3 +1,9 @@
+/**
+ *
+ * (C) 2010 Charlie Robbins
+ * MIT LICENCE
+ */
+
 import { cascade } from './cascade.js';
 import { format } from './format.js';
 

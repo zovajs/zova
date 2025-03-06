@@ -1,3 +1,9 @@
+/**
+ *
+ * (C) 2010 Charlie Robbins
+ * MIT LICENCE
+ */
+
 import type { LoggerLevel, LoggerOptions, LogInfo } from './types.js';
 import { LEVEL, SPLAT } from './types.js';
 
@@ -78,6 +84,10 @@ export class Logger {
   write(logInfo: LogInfo) {
     const message = this.options.format.transform(logInfo, this.options.format.options);
     console.log(message);
+  }
+
+  startTimer() {
+    return new Profiler(this);
   }
 
   _addDefaultMeta(logInfo: LogInfo) {

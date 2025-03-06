@@ -1,3 +1,9 @@
+/**
+ *
+ * (C) 2010 Charlie Robbins
+ * MIT LICENCE
+ */
+
 import { getText } from '@cabloy/localeutil';
 import { SPLAT } from './types.js';
 

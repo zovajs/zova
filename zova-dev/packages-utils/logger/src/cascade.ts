@@ -1,3 +1,9 @@
+/**
+ *
+ * (C) 2010 Charlie Robbins
+ * MIT LICENCE
+ */
+
 function isValidFormat(fmt) {
   if (typeof fmt.transform !== 'function') {
     throw new TypeError([
