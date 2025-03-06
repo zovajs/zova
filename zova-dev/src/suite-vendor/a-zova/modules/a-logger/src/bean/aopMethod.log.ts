@@ -87,16 +87,16 @@ export class AopMethodLog extends BeanAopMethodBase implements IAopMethodExecute
   }
 
   _logResult(profiler: Profiler, context: any, res: any, options: IAopMethodOptionsLog, message: string) {
-    const textResult = res !== undefined ? ` result: ${JSON.stringify(res)}` : '';
-    const info: any = { level: options.level, message: `${message}${textResult}` };
+    const info: any = { level: options.level, message };
     if (context) info.context = context;
+    if (res !== undefined)info.result = res;
     profiler.done(info);
   }
 
   _logError(profiler: Profiler, context: any, err: Error, _options: IAopMethodOptionsLog, message: string) {
-    const textError = ` error: ${err.message}`;
-    const info: any = { level: 'error', message: `${message}${textError}` };
+    const info: any = { level: 'error', message };
     if (context) info.context = context;
+    if (err) info.error = err;
     profiler.done(info);
   }
 }
