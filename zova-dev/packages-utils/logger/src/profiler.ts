@@ -5,7 +5,6 @@
  */
 
 import type { Logger } from './logger.js';
-import { LEVEL } from './types.js';
 
 export class Profiler {
   logger: Logger;
@@ -24,9 +23,8 @@ export class Profiler {
 
     const info = typeof args[args.length - 1] === 'object' ? args.pop() : {};
     info.level = info.level || 'info';
-    info[LEVEL] = info.level;
     info.durationMs = (Date.now()) - this.start;
 
-    return this.logger.write(info);
+    return this.logger.log(info);
   }
 };
