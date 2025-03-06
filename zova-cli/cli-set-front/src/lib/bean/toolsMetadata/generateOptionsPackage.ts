@@ -1,7 +1,7 @@
 import type { BeanCliBase } from '@cabloy/cli';
 import type { IGlobBeanFile, OnionScenesMeta } from '@cabloy/module-info';
 import path from 'node:path';
-import { evaluate, getPropertyObject } from '@cabloy/utils';
+import { evaluateSimple, getPropertyObject } from '@cabloy/utils';
 
 export async function generateOptionsPackage(
   cli: BeanCliBase,
@@ -28,7 +28,7 @@ export async function generateOptionsPackage(
     const matches = fileContent.match(new RegExp(`@${sceneNameCapitalize}[\\S]*?\\(([\\s\\S]*?)\\)\\s*?export class`));
     if (!matches) throw new Error(`${sceneName} options parser error: ${beanNameFull}`);
     const onionOptionsStr = matches[1];
-    const onionOptions = onionOptionsStr ? evaluate(matches[1]) : {};
+    const onionOptions = onionOptionsStr ? evaluateSimple(matches[1]) : {};
     const nodeScene = getCacheNodeScene(sceneName);
     nodeScene[beanName] = {};
     for (const key of ['enable', 'meta', 'dependencies', 'dependents']) {

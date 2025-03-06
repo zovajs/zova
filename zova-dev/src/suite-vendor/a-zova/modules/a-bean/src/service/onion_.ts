@@ -13,7 +13,7 @@ import type {
 import { compose as _compose } from '@cabloy/compose';
 import { swapDeps } from '@cabloy/deps';
 import { getOnionScenesMeta } from '@cabloy/module-info';
-import { evaluate } from '@cabloy/utils';
+import { evaluateSimple } from '@cabloy/utils';
 import { appResource, BeanSimple, cast, deepExtend, SymbolProxyDisable } from 'zova';
 import { Service } from '../lib/bean.js';
 
@@ -55,9 +55,9 @@ export class ServiceOnion<OPTIONS, ONIONNAME extends string> extends BeanSimple 
           let value = itemOptions[key];
           if (value === undefined) continue;
           if (Array.isArray(value)) {
-            value = value.map(item => (typeof item === 'string' && item.startsWith('/') ? evaluate(item) : item));
+            value = value.map(item => (typeof item === 'string' && item.startsWith('/') ? evaluateSimple(item) : item));
           } else {
-            value = typeof value === 'string' && value.startsWith('/') ? evaluate(value) : value;
+            value = typeof value === 'string' && value.startsWith('/') ? evaluateSimple(value) : value;
           }
           itemOptions[key] = value;
         }
