@@ -5,10 +5,10 @@ export const formatLoggerFilter = format((info, opts: any) => {
   const level = opts.level;
   if (!level) return false;
   if (opts.strict) {
-    if (NpmConfigSetLevels[info.level] === NpmConfigSetLevels[level]) return info;
+    if (NpmConfigSetLevels[info.level as string] === NpmConfigSetLevels[level]) return info;
     return false;
   }
-  if (NpmConfigSetLevels[info.level] <= NpmConfigSetLevels[level] || (opts.silly && info.level === 'silly')) return info;
+  if (NpmConfigSetLevels[info.level as string] <= NpmConfigSetLevels[level] || (opts.silly && info.level === 'silly')) return info;
   return false;
 });
 

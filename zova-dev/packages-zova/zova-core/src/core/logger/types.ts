@@ -1,5 +1,7 @@
 import type { LoggerLevel, LoggerOptions } from '@cabloy/logger';
 
+export type { LoggerLevel } from '@cabloy/logger';
+
 export interface ILoggerOptionsClientInfo {
   clientName: keyof ILoggerClientRecord;
   level: LoggerLevel | undefined;

@@ -5,9 +5,9 @@ export const MESSAGE = Symbol('MESSAGE');
 export const SPLAT = Symbol('SPLAT');
 
 export interface TransformableInfo {
-  level: string;
+  level: LoggerLevel;
   message: unknown;
-  [LEVEL]?: string;
+  [LEVEL]?: LoggerLevel;
   [MESSAGE]?: unknown;
   [SPLAT]?: unknown;
   [key: string | symbol]: unknown;
@@ -29,5 +29,9 @@ export enum NpmConfigSetLevels {
 export type LoggerLevel = 'error' | 'warn' | 'info' | 'http' | 'verbose' | 'debug' | 'silly';
 
 export interface LoggerOptions {
-  format?: Format;
+  format: Format;
+}
+
+export interface LogInfo extends TransformableInfo {
+  name?: string;
 }

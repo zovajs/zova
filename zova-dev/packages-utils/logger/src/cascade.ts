@@ -12,7 +12,7 @@ function isValidFormat(fmt) {
 
 export function cascade(formats) {
   if (!formats.every(isValidFormat)) {
-    return;
+    throw new Error('have not valid format');
   }
 
   return info => {

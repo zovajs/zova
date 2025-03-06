@@ -1,4 +1,4 @@
-import type { ILoggerClientChildRecord, LoggerLevel, Next, NextSync } from 'zova';
+import type { ILoggerClientChildRecord, ILoggerClientRecord, LoggerLevel, Next, NextSync } from 'zova';
 import type { IAopMethodExecute, IDecoratorAopMethodOptions } from 'zova-module-a-bean';
 import { BeanAopMethodBase, SymbolBeanFullName } from 'zova';
 import { AopMethod } from 'zova-module-a-bean';
@@ -6,6 +6,7 @@ import { AopMethod } from 'zova-module-a-bean';
 export interface IAopMethodOptionsLog extends IDecoratorAopMethodOptions {
   level: LoggerLevel;
   childName?: keyof ILoggerClientChildRecord;
+  clientName?: keyof ILoggerClientRecord;
   auto?: boolean;
   args?: boolean;
   result?: boolean;

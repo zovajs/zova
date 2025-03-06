@@ -1,16 +1,16 @@
 import type { FormatWrap, TransformFunction } from './types.js';
 
 export class Format {
-  transform?: TransformFunction;
+  transform: TransformFunction;
   options?: object;
 
-  constructor(transform?: TransformFunction, opts?: object) {
+  constructor(transform: TransformFunction, opts?: object) {
     this.transform = transform;
     this.options = opts;
   }
 }
 
-export function format(transform?: TransformFunction): FormatWrap {
+export function format(transform: TransformFunction): FormatWrap {
   return (opts?: object) => {
     return new Format(transform, opts);
   };
