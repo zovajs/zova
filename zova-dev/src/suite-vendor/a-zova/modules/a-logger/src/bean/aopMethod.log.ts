@@ -1,5 +1,6 @@
-import type { ILoggerClientChildRecord, ILoggerClientRecord, LoggerLevel, Next, NextSync } from 'zova';
+import type { ILoggerClientChildRecord, ILoggerClientRecord, Next, NextSync } from 'zova';
 import type { IAopMethodExecute, IDecoratorAopMethodOptions } from 'zova-module-a-bean';
+import { LoggerLevel, Profiler } from '@cabloy/logger';
 import { evaluateExpressions } from '@cabloy/utils';
 import { BeanAopMethodBase, SymbolBeanFullName } from 'zova';
 import { AopMethod } from 'zova-module-a-bean';
@@ -85,14 +86,14 @@ export class AopMethodLog extends BeanAopMethodBase implements IAopMethodExecute
     return evaluateExpressions(options.context, receiver);
   }
 
-  _logResult(profiler: winston.Profiler, context: any, res: any, options: IAopMethodOptionsLog, message: string) {
+  _logResult(profiler: Profiler, context: any, res: any, options: IAopMethodOptionsLog, message: string) {
     const textResult = res !== undefined ? ` result: ${JSON.stringify(res)}` : '';
     const info: any = { level: options.level, message: `${message}${textResult}` };
     if (context) info.context = context;
     profiler.done(info);
   }
 
-  _logError(profiler: winston.Profiler, context: any, err: Error, _options: IAopMethodOptionsLog, message: string) {
+  _logError(profiler: Profiler, context: any, err: Error, _options: IAopMethodOptionsLog, message: string) {
     const textError = ` error: ${err.message}`;
     const info: any = { level: 'error', message: `${message}${textError}` };
     if (context) info.context = context;
