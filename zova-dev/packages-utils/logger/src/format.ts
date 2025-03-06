@@ -1,5 +1,5 @@
 /**
- *
+ * Refactored by zhennann
  * (C) 2010 Charlie Robbins
  * MIT LICENCE
  */

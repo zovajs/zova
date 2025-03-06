@@ -1,10 +1,11 @@
 /**
- *
+ * Refactored by zhennann
  * (C) 2010 Charlie Robbins
  * MIT LICENCE
  */
 
 import type { LoggerLevel, LoggerOptions, LogInfo } from './types.js';
+import { Profiler } from './profiler.js';
 import { LEVEL, SPLAT } from './types.js';
 
 const formatRegExp = /%[scdjifoO%]/g;

@@ -1,16 +1,16 @@
 /**
- *
+ * Refactored by zhennann
  * (C) 2010 Charlie Robbins
  * MIT LICENCE
  */
 
 import type { Logger } from './logger.js';
 
-class Profiler {
+export class Profiler {
   logger: Logger;
   start: number;
 
-  constructor(logger) {
+  constructor(logger: Logger) {
     this.logger = logger;
     this.start = Date.now();
   }
@@ -28,5 +28,3 @@ class Profiler {
     return this.logger.write(info);
   }
 };
-
-module.exports = Profiler;
