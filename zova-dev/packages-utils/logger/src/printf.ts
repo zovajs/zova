@@ -1,4 +1,4 @@
-import { MESSAGE } from './types.ts';
+import { MESSAGE } from './types.js';
 
 export class Printf {
   template: any;

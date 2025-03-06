@@ -28,4 +28,6 @@ export enum NpmConfigSetLevels {
 
 export type LoggerLevel = 'error' | 'warn' | 'info' | 'http' | 'verbose' | 'debug' | 'silly';
 
-// export interface LoggerOptions {}
+export interface LoggerOptions {
+  format?: Format;
+}

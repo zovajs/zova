@@ -1,7 +1,11 @@
-export class Logger {
-  defaultRequestMetadata: object;
+import type { LoggerOptions } from './types.js';
 
-  constructor(defaultRequestMetadata: object) {
+export class Logger {
+  options: LoggerOptions;
+  defaultRequestMetadata?: object;
+
+  constructor(options: LoggerOptions, defaultRequestMetadata?: object) {
+    this.options = options;
     this.defaultRequestMetadata = defaultRequestMetadata;
   }
 

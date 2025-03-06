@@ -1,12 +1,8 @@
-import type { Format, LoggerLevel } from '@cabloy/logger';
+import type { LoggerLevel, LoggerOptions } from '@cabloy/logger';
 
 export interface ILoggerOptionsClientInfo {
   clientName: keyof ILoggerClientRecord;
   level: LoggerLevel | undefined;
-}
-
-export interface LoggerOptions {
-  format?: Format;
 }
 
 export type TypeLoggerOptions = LoggerOptions | ((clientInfo: ILoggerOptionsClientInfo) => LoggerOptions);

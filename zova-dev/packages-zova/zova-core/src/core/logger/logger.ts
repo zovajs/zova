@@ -1,6 +1,8 @@
-import type { Logger } from '@cabloy/logger';
-import type { ILoggerClientChildRecord, ILoggerClientRecord, ILoggerOptionsClientInfo, LoggerLevel, TypeLoggerOptions } from './types.js';
+import type { LoggerLevel } from '@cabloy/logger';
+import type { ILoggerClientChildRecord, ILoggerClientRecord, TypeLoggerOptions } from './types.js';
+import { Logger } from '@cabloy/logger';
 import { BeanSimple } from '../../bean/beanSimple.js';
+import { deepExtend } from '../app/util.js';
 
 const SymbolLoggerInstances = Symbol('SymbolLoggerInstances');
 
@@ -28,7 +30,7 @@ export class AppLogger extends BeanSimple {
     return logger.child({ name: childName });
   }
 
-  private _createClient(clientName: keyof ILoggerClientRecord): AppLoggerClient {
+  private _createClient(clientName: keyof ILoggerClientRecord): Logger {
     const configClient = this.app.config.logger.clients[clientName];
     if (!configClient) throw new Error(`logger client not found: ${clientName}`);
     const configNode = deepExtend(
@@ -36,43 +38,16 @@ export class AppLogger extends BeanSimple {
       this._prepareConfigClient(clientName, this.app.config.logger.default),
       this._prepareConfigClient(clientName, configClient),
     );
-    const logger = Winston.createLogger(configNode);
-    logger.on('error', err => {
-      console.error(err);
-    });
+    const logger = new Logger(configNode);
     return logger;
   }
 
   private _prepareConfigClient(clientName: keyof ILoggerClientRecord, configClient: TypeLoggerOptions) {
     if (typeof configClient !== 'function') return configClient;
-    return configClient.call(this.app, Winston, {
+    return configClient.call(this.app, {
       clientName,
       level: getLoggerClientLevel(clientName),
     });
-  }
-
-  public createTransportFile(
-    fileName: string,
-    clientInfo: ILoggerOptionsClientInfo,
-    options: Winston.transports.FileTransportOptions | DailyRotateFile.DailyRotateFileTransportOptions,
-  ) {
-    const configRotate = this.app.config.logger.rotate;
-    let optionsFile;
-    if (configRotate.enable) {
-      optionsFile = configRotate.options.call(this, fileName, Winston, clientInfo);
-    } else {
-      optionsFile = { filename: `${fileName}.log` };
-    }
-    const _options = deepExtend({ dirname: this.app.config.server.loggerDir }, optionsFile, options);
-    if (configRotate.enable) {
-      const transport = new DailyRotateFile(_options);
-      transport.on('error', err => {
-        console.error(err);
-      });
-      return transport;
-    } else {
-      return new Winston.transports.File(_options);
-    }
   }
 }
 

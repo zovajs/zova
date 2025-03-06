@@ -1,4 +1,4 @@
-import type { FormatWrap, TransformFunction } from './types.ts';
+import type { FormatWrap, TransformFunction } from './types.js';
 
 export class Format {
   transform?: TransformFunction;

@@ -1,5 +1,5 @@
 import fecha from 'fecha';
-import { format } from './format.ts';
+import { format } from './format.js';
 
 export const timestamp = format((info, opts: any = {}) => {
   if (opts.format) {

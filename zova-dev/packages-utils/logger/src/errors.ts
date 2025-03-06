@@ -1,14 +1,13 @@
-import { format } from "./format.ts";
-import { LEVEL, MESSAGE } from "./types.ts";
+import { format } from './format.js';
+import { LEVEL, MESSAGE } from './types.js';
 
-
-export const errors= format((einfo, { stack, cause }:any) => {
+export const errors = format((einfo, { stack, cause }: any) => {
   if (einfo instanceof Error) {
     const info = Object.assign({}, einfo, {
       level: einfo.level,
       [LEVEL]: einfo[LEVEL] || einfo.level,
       message: einfo.message,
-      [MESSAGE]: einfo[MESSAGE] || einfo.message
+      [MESSAGE]: einfo[MESSAGE] || einfo.message,
     });
 
     if (stack) info.stack = einfo.stack;
