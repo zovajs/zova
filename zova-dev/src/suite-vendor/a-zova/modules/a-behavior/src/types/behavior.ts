@@ -36,6 +36,10 @@ declare module 'zova' {
   export interface IBeanSceneRecord {
     behavior: never;
   }
+
+  export interface ILoggerClientChildRecord {
+    behavior: never;
+  }
 }
 
 declare module 'vue' {

@@ -14,6 +14,7 @@ import {
   Watch,
 } from 'zova';
 import { Controller } from 'zova-module-a-bean';
+import { Log } from 'zova-module-a-logger';
 import { BeanBehavior } from '../../bean/bean.behavior.js';
 import { UseBehavior } from '../../lib/useBehavior.js';
 
@@ -47,6 +48,7 @@ export class ControllerBehavior extends BeanControllerBase {
     disposeInstance(this.composer);
   }
 
+  @Log({ args: false, childName: 'behavior' }) // level: 'debug'
   private _getBehaviorRoot() {
     return UseBehavior('a-behavior:root' as any, { behaviors: this.$props.behaviors });
   }
