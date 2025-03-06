@@ -15,7 +15,7 @@ export const formatLoggerFilter = format((info, opts: any) => {
 export const formatLoggerConsole = () => {
   return print(({ timestamp, level, stack, message, name, durationMs, ...meta }) => {
     const textName = name ? ` ${colorize('verbose', `[${name}]`)}` : '';
-    const textMessage = message ? ` ${message}` : '';
+    const textMessage = ` ${message}`;
     const textDurationMs = durationMs !== undefined ? ` ${colorize('verbose', `+${durationMs}ms`)}` : '';
     const textStack = stack ? `\n${stack}` : '';
     const result: any[] = [`${timestamp} ${level}${textName}${textMessage}${textDurationMs}${textStack}`];
