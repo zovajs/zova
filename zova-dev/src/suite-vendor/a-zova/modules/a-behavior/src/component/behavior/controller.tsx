@@ -48,7 +48,7 @@ export class ControllerBehavior extends BeanControllerBase {
     disposeInstance(this.composer);
   }
 
-  @Log({ args: false, childName: 'behavior' }) // level: 'debug'
+  @Log({ args: false, childName: 'behavior', level: 'debug' })
   private _getBehaviorRoot() {
     return UseBehavior('a-behavior:root' as any, { behaviors: this.$props.behaviors });
   }
