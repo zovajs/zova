@@ -67,7 +67,7 @@ export class AopMethodLog extends BeanAopMethodBase implements IAopMethodExecute
     if (options.args !== false) {
       const info: any = { level: options.level, message };
       if (context) info.context = context;
-      if (_args.length > 0)info.args = _args;
+      if (_args.length > 0) info.args = _args;
       logger.log(info);
     }
     const profiler = logger.startTimer();
