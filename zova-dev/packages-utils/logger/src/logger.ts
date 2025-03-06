@@ -84,6 +84,7 @@ export class Logger {
 
   write(logInfo: LogInfo) {
     const info = this.options.format.transform(logInfo, this.options.format.options);
+    if (!info) return;
     const message = info[MESSAGE];
     if (Array.isArray(message)) {
       // eslint-disable-next-line

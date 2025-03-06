@@ -1,6 +1,7 @@
 import type { RendererNode, WatchHandle } from 'vue';
 import type { AppEvent } from '../core/component/event.js';
 import type { CtxSSR } from '../core/context/ssr.js';
+import type { ILoggerClientChildRecord } from '../core/logger/types.js';
 import type { FunctionAsync } from '../decorator/type/functionable.js';
 import type { SSRMetaOptions } from '../types/interface/ssr.js';
 import type { IModuleLocaleText } from './resource/index.js';
@@ -25,6 +26,14 @@ export class BeanBase extends BeanBaseSimple {
       this[SymbolText] = this.app.meta.locale.createLocaleText(this[SymbolModuleBelong]);
     }
     return this[SymbolText];
+  }
+
+  protected get logger() {
+    return this.app.meta.logger.get();
+  }
+
+  protected loggerChild(childName: keyof ILoggerClientChildRecord) {
+    return this.app.meta.logger.child(childName);
   }
 
   protected get $event(): AppEvent {
