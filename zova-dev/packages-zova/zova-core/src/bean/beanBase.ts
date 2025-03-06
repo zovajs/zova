@@ -28,11 +28,11 @@ export class BeanBase extends BeanBaseSimple {
     return this[SymbolText];
   }
 
-  protected get logger() {
+  protected get $logger() {
     return this.app.meta.logger.get();
   }
 
-  protected loggerChild(childName: keyof ILoggerClientChildRecord) {
+  protected $loggerChild(childName: keyof ILoggerClientChildRecord) {
     return this.app.meta.logger.child(childName);
   }
 
@@ -74,11 +74,11 @@ export class BeanBase extends BeanBaseSimple {
     return getVueDecoratorValue(this, prop, index ?? 0);
   }
 
-  protected renderFreeze(freeze: boolean) {
+  protected $renderFreeze(freeze: boolean) {
     return cast(this.ctx.instance).ctx.renderFreeze(freeze);
   }
 
-  protected async renderFreezeScope<RESULT>(fn: FunctionAsync<RESULT>): Promise<RESULT> {
+  protected async $renderFreezeScope<RESULT>(fn: FunctionAsync<RESULT>): Promise<RESULT> {
     return await cast(this.ctx.instance).ctx.renderFreezeScope(fn);
   }
 

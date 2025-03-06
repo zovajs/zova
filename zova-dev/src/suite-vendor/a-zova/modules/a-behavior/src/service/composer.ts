@@ -27,7 +27,7 @@ export class ServiceComposer extends BeanBase {
   }
 
   public async load(behaviors: IBehaviors) {
-    await this.renderFreezeScope(async () => {
+    await this.$renderFreezeScope(async () => {
       await this._loadInner(behaviors);
     });
   }
