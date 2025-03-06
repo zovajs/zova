@@ -1,7 +1,5 @@
-'use strict';
-
+import { getText } from '@cabloy/localeutil';
 import { SPLAT } from './types.ts';
-import { getText } from './utils.ts';
 
 const formatRegExp = /%[scdjifoO%]/g;
 const escapedPercent = /%%/g;

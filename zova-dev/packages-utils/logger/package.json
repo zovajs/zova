@@ -46,6 +46,7 @@
     "postpack": "clean-package restore"
   },
   "dependencies": {
+    "@cabloy/localeutil": "^2.0.0",
     "fecha": "^4.2.3"
   },
   "devDependencies": {
