@@ -1,3 +1,9 @@
+/**
+ * Refactored by zhennann
+ * (C) 2010 Charlie Robbins
+ * MIT LICENCE
+ */
+
 import { LEVEL, MESSAGE } from './types.js';
 
 const codes = {
