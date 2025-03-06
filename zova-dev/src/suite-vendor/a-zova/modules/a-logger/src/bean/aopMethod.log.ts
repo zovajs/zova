@@ -1,5 +1,5 @@
 import type { ILoggerClientChildRecord, ILoggerClientRecord, Next, NextSync } from 'zova';
-import type { IAopMethodExecute, IDecoratorAopMethodOptions } from 'zova-module-a-bean';
+import type { IAopMethodExecute, IAopMethodGet, IAopMethodSet, IDecoratorAopMethodOptions } from 'zova-module-a-bean';
 import { LoggerLevel, Profiler } from '@cabloy/logger';
 import { evaluateExpressions } from '@cabloy/utils';
 import { BeanAopMethodBase, SymbolBeanFullName } from 'zova';
@@ -18,8 +18,8 @@ export interface IAopMethodOptionsLog extends IDecoratorAopMethodOptions {
 @AopMethod<IAopMethodOptionsLog>({
   level: 'info',
 })
-export class AopMethodLog extends BeanAopMethodBase implements IAopMethodExecute {
-  get(options: IAopMethodOptionsLog, next: NextSync, receiver: any, prop: string): string {
+export class AopMethodLog extends BeanAopMethodBase implements IAopMethodGet, IAopMethodSet, IAopMethodExecute {
+  get(options: IAopMethodOptionsLog, next: NextSync, receiver: any, prop: string): any {
     const context = this._getContext(options, receiver);
     const message = `${receiver[SymbolBeanFullName]}#get ${prop}`;
     const logger = this.app.meta.logger.child(options.childName, options.clientName);
@@ -37,7 +37,7 @@ export class AopMethodLog extends BeanAopMethodBase implements IAopMethodExecute
     }
   }
 
-  set(options: IAopMethodOptionsLog, value: string, next: NextSync, receiver: any, prop: string): boolean {
+  set(options: IAopMethodOptionsLog, value: any, next: NextSync, receiver: any, prop: string): boolean {
     const context = this._getContext(options, receiver);
     const message = `${receiver[SymbolBeanFullName]}#set ${prop}`;
     const logger = this.app.meta.logger.child(options.childName, options.clientName);
