@@ -15,10 +15,17 @@ export const formatLoggerFilter = format((info, opts: any) => {
 export const formatLoggerConsole = () => {
   return print(({ timestamp, level, stack, message, name, durationMs, ...meta }) => {
     const textName = name ? ` ${colorize('verbose', `[${name}]`)}` : '';
-    const textMeta = !isEmptyObject(meta) ? ` ${JSON.stringify(meta)}` : '';
     const textMessage = message ? ` ${message}` : '';
     const textDurationMs = durationMs !== undefined ? ` ${colorize('verbose', `+${durationMs}ms`)}` : '';
     const textStack = stack ? `\n${stack}` : '';
-    return `${timestamp} ${level}${textName}${textMeta}${textMessage}${textDurationMs}${textStack}`;
+    const result: any[] = [`${timestamp} ${level}${textName}${textMessage}${textDurationMs}${textStack}`];
+    if (!isEmptyObject(meta)) {
+      const meta2 = {};
+      for (const key in meta) {
+        meta2[key] = meta[key];
+      }
+      result.push(meta2);
+    }
+    return result;
   });
 };
