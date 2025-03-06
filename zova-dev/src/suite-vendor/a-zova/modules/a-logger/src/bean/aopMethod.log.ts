@@ -21,7 +21,7 @@ export interface IAopMethodOptionsLog extends IDecoratorAopMethodOptions {
 export class AopMethodLog extends BeanAopMethodBase implements IAopMethodGet, IAopMethodSet, IAopMethodExecute {
   get(options: IAopMethodOptionsLog, next: NextSync, receiver: any, prop: string): any {
     const context = this._getContext(options, receiver);
-    const message = `${receiver[SymbolBeanFullName]}#get ${prop}`;
+    const message = `${receiver[SymbolBeanFullName]}#${prop}(get)`;
     const logger = this.app.meta.logger.child(options.childName, options.clientName);
     // begin
     (!options.auto) && logger.log(options.level, message, context ? { context } : undefined);
@@ -39,7 +39,7 @@ export class AopMethodLog extends BeanAopMethodBase implements IAopMethodGet, IA
 
   set(options: IAopMethodOptionsLog, value: any, next: NextSync, receiver: any, prop: string): boolean {
     const context = this._getContext(options, receiver);
-    const message = `${receiver[SymbolBeanFullName]}#set ${prop}`;
+    const message = `${receiver[SymbolBeanFullName]}#${prop}(set)`;
     const logger = this.app.meta.logger.child(options.childName, options.clientName);
     // begin
     const info: any = { level: options.level, message };
