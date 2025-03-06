@@ -2,6 +2,7 @@ export * from './cascade.ts';
 export * from './combine.ts';
 export * from './errors.ts';
 export * from './format.ts';
+export * from './logger.ts';
 export * from './printf.ts';
 export * from './splatter.ts';
 export * from './timestamp.ts';

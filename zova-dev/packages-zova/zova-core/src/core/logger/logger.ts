@@ -1,11 +1,11 @@
-import type { AppLoggerClient } from './loggerClient.js';
+import type { Logger } from '@cabloy/logger';
 import type { ILoggerClientChildRecord, ILoggerClientRecord, ILoggerOptionsClientInfo, LoggerLevel, TypeLoggerOptions } from './types.js';
 import { BeanSimple } from '../../bean/beanSimple.js';
 
 const SymbolLoggerInstances = Symbol('SymbolLoggerInstances');
 
 export class AppLogger extends BeanSimple {
-  private [SymbolLoggerInstances]: Record<keyof ILoggerClientRecord, AppLoggerClient> = {} as any;
+  private [SymbolLoggerInstances]: Record<keyof ILoggerClientRecord, Logger> = {} as any;
 
   public async dispose() {
     for (const key in this[SymbolLoggerInstances]) {
@@ -76,14 +76,10 @@ export class AppLogger extends BeanSimple {
   }
 }
 
-async function _closeLogger(logger: Winston.Logger) {
-  return new Promise(resolve => {
-    if ((logger as any).__closed__) return resolve(true);
-    logger.end(() => {
-      (logger as any).__closed__ = true;
-      resolve(true);
-    });
-  });
+async function _closeLogger(logger: Logger) {
+  if ((logger as any).__closed__) return;
+  await logger.end();
+  (logger as any).__closed__ = true;
 }
 
 export function getLoggerClientLevel(clientName: keyof ILoggerClientRecord): LoggerLevel | undefined {
