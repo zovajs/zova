@@ -43,6 +43,10 @@ export class Logger {
     return this.log('verbose', msg, ...splat);
   }
 
+  debug(msg?: any, ...splat) {
+    return this.log('debug', msg, ...splat);
+  }
+
   silly(msg?: any, ...splat) {
     return this.log('silly', msg, ...splat);
   }
