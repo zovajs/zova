@@ -6,7 +6,7 @@
 
 import type { LoggerLevel, LoggerOptions, LogInfo } from './types.js';
 import { Profiler } from './profiler.js';
-import { LEVEL, SPLAT } from './types.js';
+import { LEVEL, MESSAGE, SPLAT } from './types.js';
 
 const formatRegExp = /%[scdjifoO%]/g;
 
@@ -83,8 +83,15 @@ export class Logger {
   }
 
   write(logInfo: LogInfo) {
-    const message = this.options.format.transform(logInfo, this.options.format.options);
-    console.log(message);
+    const info = this.options.format.transform(logInfo, this.options.format.options);
+    const message = info[MESSAGE];
+    if (Array.isArray(message)) {
+      // eslint-disable-next-line
+      console.log(...message);
+    } else {
+      // eslint-disable-next-line
+      console.log(message);
+    }
   }
 
   startTimer() {
