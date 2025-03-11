@@ -27,6 +27,7 @@ let allColors = {
   verbose: 'cyan',
   debug: 'blue',
   silly: 'magenta',
+  tip: 'gray',
 };
 
 export function colorize(color, text) {
