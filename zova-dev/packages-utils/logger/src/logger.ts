@@ -20,7 +20,8 @@ export class Logger {
   }
 
   child(defaultMeta: object): Logger {
-    return new Logger(this.options, defaultMeta);
+    const defaultMetaNew = Object.assign({}, this.defaultMeta, defaultMeta);
+    return new Logger(this.options, defaultMetaNew);
   }
 
   error(msg?: any, ...splat) {

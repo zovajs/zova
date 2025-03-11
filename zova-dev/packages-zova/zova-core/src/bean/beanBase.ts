@@ -1,3 +1,4 @@
+import type { Logger } from '@cabloy/logger';
 import type { RendererNode, WatchHandle } from 'vue';
 import type { AppEvent } from '../core/component/event.js';
 import type { CtxSSR } from '../core/context/ssr.js';
@@ -8,12 +9,18 @@ import type { IModuleLocaleText } from './resource/index.js';
 import type { IBeanScopeRecord, TypeBeanScopeRecordKeys } from './type.js';
 import { useMeta } from '../core/context/useMeta.js';
 import { cast } from '../types/utils/cast.js';
-import { BeanBaseSimple, SymbolModuleBelong } from './beanBaseSimple.js';
+import { BeanBaseSimple, SymbolBeanFullName, SymbolModuleBelong } from './beanBaseSimple.js';
 import { getVueDecoratorValue } from './vueDecorators/utils.js';
 
 const SymbolText = Symbol('SymbolText');
+const SymbolLogger = Symbol('SymbolLogger');
+const SymbolLoggerChildren = Symbol('SymbolLoggerChildren');
 
 export class BeanBase extends BeanBaseSimple {
+  private [SymbolText]: IModuleLocaleText;
+  private [SymbolLogger]: Logger;
+  private [SymbolLoggerChildren]: Record<string, Logger> = {};
+
   protected get $el(): RendererNode {
     if (!this.ctx) {
       throw new Error('$el can not be used inside global bean.');
@@ -29,11 +36,22 @@ export class BeanBase extends BeanBaseSimple {
   }
 
   protected get $logger() {
-    return this.app.meta.logger.get();
+    if (!this[SymbolLogger]) {
+      this[SymbolLogger] = this.app.meta.logger.get().child({ beanFullName: this[SymbolBeanFullName] });
+    }
+    return this[SymbolLogger];
   }
 
   protected $loggerChild(childName: keyof ILoggerClientChildRecord) {
-    return this.app.meta.logger.child(childName);
+    if (!this[SymbolLoggerChildren][childName]) {
+      this[SymbolLoggerChildren][childName] = this.$logger.child({ name: childName });
+      // this[SymbolLoggerChildren][childName] = this.app.meta.logger.get().child({
+      //   beanFullName: this[SymbolBeanFullName],
+      //   name: childName,
+      // });
+    }
+    return this[SymbolLoggerChildren][childName];
+    // return this.app.meta.logger.child(childName);
   }
 
   protected get $event(): AppEvent {
