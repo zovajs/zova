@@ -1,4 +1,3 @@
-import type { IBeanRecord } from '../../bean/type.js';
 import type { Constructable } from '../index.js';
 import type { ContainerScope } from '../index.js';
 
@@ -9,7 +8,7 @@ export interface IDecoratorBeanOptionsBase<T = unknown, OPTIONS = unknown> {
    * global: module.scene.name
    * others: undefined: use beanClass
    */
-  beanFullName: keyof IBeanRecord;
+  beanFullName: string; // not use keyof IBeanRecord;
   module: string;
   scene: keyof IBeanSceneRecord;
   name: string;
