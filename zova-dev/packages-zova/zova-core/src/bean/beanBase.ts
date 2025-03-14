@@ -6,7 +6,6 @@ import type { ILoggerClientChildRecord } from '../core/logger/types.js';
 import type { FunctionAsync } from '../decorator/type/functionable.js';
 import type { SSRMetaOptions } from '../types/interface/ssr.js';
 import type { IModuleLocaleText } from './resource/index.js';
-import type { IBeanScopeRecord, TypeBeanScopeRecordKeys } from './type.js';
 import { useMeta } from '../core/context/useMeta.js';
 import { cast } from '../types/utils/cast.js';
 import { BeanBaseSimple, SymbolBeanFullName, SymbolModuleBelong } from './beanBaseSimple.js';
@@ -68,16 +67,7 @@ export class BeanBase extends BeanBaseSimple {
   // protected __dispose__() {}
 
   public get scope(): unknown {
-    return this.getScope();
-  }
-
-  protected getScope<K extends TypeBeanScopeRecordKeys>(moduleScope: K): IBeanScopeRecord[K];
-  protected getScope(): unknown;
-  protected getScope(moduleScope?: string) {
-    if (!moduleScope) {
-      return this.app.bean.scope(this[SymbolModuleBelong]);
-    }
-    return this.app.bean.scope(moduleScope);
+    return this.app.bean.scope(this[SymbolModuleBelong]);
   }
 
   protected $watchHandle(prop: string | Function, index?: number): WatchHandle {

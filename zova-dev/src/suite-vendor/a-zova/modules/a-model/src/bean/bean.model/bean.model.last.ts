@@ -9,6 +9,6 @@ export class BeanModelLast extends BeanBase {
   }
 
   get scopeSelf(): ScopeModule {
-    return this.getScope(__ThisModule__);
+    return this.bean.scope(__ThisModule__);
   }
 }
