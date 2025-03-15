@@ -17,6 +17,7 @@ import { appMetadata } from './metadata.js';
 
 export const DecoratorBeanFullName = Symbol('Decorator#BeanFullName');
 export const SymbolDecoratorBeanInfo = Symbol('SymbolDecoratorBeanInfo');
+export const SymbolDecoratorProxyDisable = Symbol('SymbolDecoratorProxyDisable');
 export const SymbolDecoratorUse = Symbol('SymbolDecoratorUse');
 export const DecoratorBeanFullNameOfComposable = Symbol('Decorator#BeanFullNameOfComposable');
 

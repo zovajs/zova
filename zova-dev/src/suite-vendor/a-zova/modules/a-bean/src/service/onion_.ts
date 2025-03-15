@@ -14,15 +14,15 @@ import { compose as _compose } from '@cabloy/compose';
 import { swapDeps } from '@cabloy/deps';
 import { getOnionScenesMeta } from '@cabloy/module-info';
 import { evaluateSimple } from '@cabloy/utils';
-import { appResource, BeanSimple, cast, deepExtend, SymbolProxyDisable } from 'zova';
+import { appResource, BeanSimple, cast, deepExtend, ProxyDisable } from 'zova';
 import { Service } from '../lib/bean.js';
 
 // const SymbolOnionsEnabled = Symbol('SymbolOnionsEnabled');
 // const SymbolOnionsEnabledWrapped = Symbol('SymbolOnionsEnabledWrapped');
 
+@ProxyDisable()
 @Service()
 export class ServiceOnion<OPTIONS, ONIONNAME extends string> extends BeanSimple {
-  protected [SymbolProxyDisable]: boolean = true;
   protected beanOnion: BeanOnion;
   sceneName: string;
   sceneMeta: OnionSceneMeta;

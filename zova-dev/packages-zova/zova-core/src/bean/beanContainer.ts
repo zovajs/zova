@@ -14,7 +14,7 @@ import { compose } from '@cabloy/compose';
 import { isNilOrEmptyString } from '@cabloy/utils';
 import { inject as composableInject, provide as composableProvide, markRaw, reactive, shallowReactive } from 'vue';
 import { appMetadata } from '../core/metadata.js';
-import { appResource } from '../core/resource.js';
+import { appResource, SymbolDecoratorProxyDisable } from '../core/resource.js';
 import {
   __prepareInjectSelectorInfo,
   SymbolDecoratorVueElements,
@@ -33,7 +33,6 @@ const SymbolProxyAopMethod = Symbol('SymbolProxyAopMethod');
 const SymbolCacheAopChains = Symbol('SymbolCacheAopChains');
 const SymbolCacheAopChainsKey = Symbol('SymbolCacheAopChainsKey');
 export const SymbolBeanContainerInstances = Symbol('SymbolBeanContainerInstances');
-export const SymbolProxyDisable = Symbol('SymbolProxyDisable');
 
 export interface BeanContainer {}
 
@@ -932,13 +931,16 @@ export class BeanContainer {
     // beanFullName maybe class
     const beanOptions = appResource.getBean(beanFullNameOrBeanClass);
     const cacheKey = beanOptions?.beanFullName || beanFullNameOrBeanClass;
+    // ProxyDisable
+    const proxyDisable = beanOptions?.beanClass ? appMetadata.getMetadata<boolean>(SymbolDecoratorProxyDisable, beanOptions?.beanClass) : false;
+    // host
     const host = this._aopCacheHost();
     if (!host[SymbolCacheAopChains]) host[SymbolCacheAopChains] = {};
     if (host[SymbolCacheAopChains][cacheKey]) return host[SymbolCacheAopChains][cacheKey];
     // chains
     let chains: (MetadataKey | BeanBase)[] = [];
     // aop
-    if (!beanInstance[SymbolProxyDisable] && beanOptions && cast(beanOptions.scene) !== 'aop') {
+    if (!proxyDisable && beanOptions && cast(beanOptions.scene) !== 'aop') {
       const beanAop = (await this.app.bean._getBean('a-bean.service.aop' as never, false)) as any;
       const aops = await beanAop.findAopsMatched(beanOptions.beanFullName);
       if (aops) {
@@ -952,7 +954,7 @@ export class BeanContainer {
       }
     }
     // aop method
-    if (!beanInstance[SymbolProxyDisable] && beanOptions) {
+    if (!proxyDisable && beanOptions) {
       const beanAop = (await this.app.bean._getBean('a-bean.service.aop' as never, false)) as any;
       const aopMethods = await beanAop.findAopMethodsMatched(beanOptions?.beanFullName);
       if (aopMethods) {
@@ -960,7 +962,7 @@ export class BeanContainer {
       }
     }
     // magic self
-    if (__hasMagicMothod(beanInstance)) {
+    if (__hasMagicMethod(beanInstance)) {
       chains.push(SymbolProxyMagic);
     }
     // hold
@@ -979,7 +981,7 @@ export class BeanContainer {
     // chains
     const chains: MetadataKey[] = [];
     // magic self
-    if (__hasMagicMothod(beanInstance)) {
+    if (__hasMagicMethod(beanInstance)) {
       chains.push(SymbolProxyMagic);
     }
     // hold
@@ -1153,7 +1155,7 @@ function __setPropertyValue(obj, prop, value) {
   });
 }
 
-function __hasMagicMothod(instance) {
+function __hasMagicMethod(instance) {
   return !!instance.__get__ || !!instance.__set__;
 }
 

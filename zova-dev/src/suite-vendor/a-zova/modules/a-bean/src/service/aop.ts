@@ -1,17 +1,16 @@
 import type { BeanAopMethodBase, Constructable, IBeanRecord } from 'zova';
 import type { IAopRecord, IDecoratorAopOptions } from '../types/aop.js';
 import type { IOnionItem, IOnionSlice } from '../types/onion.js';
-import { appMetadata, appResource, BeanBase, SymbolProxyDisable, Use } from 'zova';
+import { appMetadata, appResource, BeanBase, ProxyDisable, Use } from 'zova';
 import { BeanOnion } from '../bean/bean.onion.js';
 import { Service } from '../lib/bean.js';
 import { IAopMethodRecord, IDecoratorAopMethodOptions, IUseAopMethodPropMetadata, SymbolDecoratorUseAopMethod } from '../types/aopMethod.js';
 
 type AopMethodsMatchedAll = Record<string, IUseAopMethodPropMetadata[]>;
 
+@ProxyDisable()
 @Service()
 export class ServiceAop extends BeanBase {
-  protected [SymbolProxyDisable]: boolean = true;
-
   @Use()
   $$beanOnion: BeanOnion;
 

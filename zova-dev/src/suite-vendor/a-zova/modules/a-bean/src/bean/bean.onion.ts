@@ -6,13 +6,13 @@ import type {
 } from '../types/onion.js';
 import { checkMeta } from '@cabloy/utils';
 import { matchSelector } from '@cabloy/word-utils';
-import { BeanBase, SymbolProxyDisable } from 'zova';
+import { BeanBase, ProxyDisable } from 'zova';
 import { Bean } from '../lib/bean.js';
 import { ServiceOnion } from '../service/onion_.js';
 
+@ProxyDisable()
 @Bean()
 export class BeanOnion extends BeanBase {
-  protected [SymbolProxyDisable]: boolean = true;
   private __instances: Record<string, any> = {};
 
   protected __get__(prop: string) {
