@@ -16,7 +16,7 @@ import { uuid } from '../utils/uuid.js';
 import { appMetadata } from './metadata.js';
 
 export const DecoratorBeanFullName = Symbol('Decorator#BeanFullName');
-export const DecoratorBeanInfo = Symbol('Decorator#BeanInfo');
+export const SymbolDecoratorBeanInfo = Symbol('SymbolDecoratorBeanInfo');
 export const SymbolDecoratorUse = Symbol('SymbolDecoratorUse');
 export const DecoratorBeanFullNameOfComposable = Symbol('Decorator#BeanFullNameOfComposable');
 
@@ -46,7 +46,7 @@ export class AppResource extends BeanSimple {
     // name
     const { scene, name } = this._parseSceneAndBeanName(beanClass!, options.scene, options.name);
     // beanInfo
-    const beanInfo = appMetadata.getMetadata<IDecoratorBeanInfoOptions>(DecoratorBeanInfo, beanClass!);
+    const beanInfo = appMetadata.getMetadata<IDecoratorBeanInfoOptions>(SymbolDecoratorBeanInfo, beanClass!);
     // module
     const module = beanInfo?.module;
     if (!module) throw new Error(`module name not parsed for bean: ${scene}.${name}`);
