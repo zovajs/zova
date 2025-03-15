@@ -841,7 +841,6 @@ export class BeanContainer {
           const methodName = `__get_${prop}__`;
           const methodNameMagic = '__get__';
           const _aopChainsProp = self._getAopChainsProp(
-            receiver,
             beanFullName,
             methodName,
             methodNameMagic,
@@ -850,7 +849,7 @@ export class BeanContainer {
           );
           if (_aopChainsProp.length === 0) return Reflect.get(target, prop, receiver);
           // aop
-          return self.__composeForProp(_aopChainsProp)(undefined, () => {
+          return self.__composeForProp(_aopChainsProp)([receiver, undefined], ([receiver, _]) => {
             if (!descriptorInfo && target.__get__) {
               return Reflect.apply(target.__get__, receiver, [prop, target]);
             } else {
@@ -878,13 +877,13 @@ export class BeanContainer {
         }
         const methodName = `__set_${prop}__`;
         const methodNameMagic = '__set__';
-        const _aopChainsProp = self._getAopChainsProp(receiver, beanFullName, methodName, methodNameMagic, 'set', prop);
+        const _aopChainsProp = self._getAopChainsProp(beanFullName, methodName, methodNameMagic, 'set', prop);
         if (_aopChainsProp.length === 0) {
           Reflect.set(target, prop, value, receiver);
           return true;
         }
         // aop
-        return self.__composeForProp(_aopChainsProp)(value, value => {
+        return self.__composeForProp(_aopChainsProp)([receiver, value], ([receiver, value]) => {
           if (!descriptorInfo && target.__set__) {
             const res = Reflect.apply(target.__set__, receiver, [prop, value, target]);
             if (res === undefined) throw new Error('__set__ must return true/false');
@@ -909,7 +908,7 @@ export class BeanContainer {
       return Reflect.get(target, prop, receiver);
     }
     // aop chains
-    const _aopChainsProp = this._getAopChainsProp(receiver, beanFullName, prop, undefined, 'method', prop);
+    const _aopChainsProp = this._getAopChainsProp(beanFullName, prop, undefined, 'method', prop);
     if (_aopChainsProp.length === 0) return Reflect.get(target, prop, receiver);
     // proxy
     const methodProxyKey = `__aopproxy_method_${prop}__`;
@@ -917,7 +916,7 @@ export class BeanContainer {
     const methodProxy = new Proxy(target[prop], {
       apply(target, thisArg, args) {
         // aop
-        return self.__composeForProp(_aopChainsProp)(args, args => {
+        return self.__composeForProp(_aopChainsProp)([thisArg, args], ([thisArg, args]) => {
           return Reflect.apply(target, thisArg, args);
         });
       },
@@ -1002,7 +1001,6 @@ export class BeanContainer {
   }
 
   private _getAopChainsProp(
-    receiver,
     beanFullName,
     methodName,
     methodNameMagic,
@@ -1024,21 +1022,21 @@ export class BeanContainer {
           chains.push([aopKey, methodName]);
         }
       } else if (Array.isArray(aopKey) && aopKey[0] === SymbolProxyAopMethod) {
-        this._getAopChainsProp_aopMethods(chains, aopKey, aopKey[1], methodType, receiver, prop);
+        this._getAopChainsProp_aopMethods(chains, aopKey, aopKey[1], methodType, prop);
       } else {
         const aop: BeanAopBase = aopKey;
         if (aop[methodName]) {
           let fn;
           if (methodType === 'get') {
-            fn = function (_, next) {
+            fn = function ([receiver, _], next) {
               return aop[methodName](next, receiver);
             };
           } else if (methodType === 'set') {
-            fn = function (value, next) {
+            fn = function ([receiver, value], next) {
               return aop[methodName](value, next, receiver);
             };
           } else if (methodType === 'method') {
-            fn = function (args, next) {
+            fn = function ([receiver, args], next) {
               return aop[methodName](args, next, receiver);
             };
           }
@@ -1047,15 +1045,15 @@ export class BeanContainer {
           if (!__isLifeCycleMethod(methodName)) {
             let fn;
             if (methodType === 'get') {
-              fn = function (_, next) {
+              fn = function ([receiver, _], next) {
                 return aop[methodNameMagic](prop, next, receiver);
               };
             } else if (methodType === 'set') {
-              fn = function (value, next) {
+              fn = function ([receiver, value], next) {
                 return aop[methodNameMagic](prop, value, next, receiver);
               };
             } else if (methodType === 'method') {
-              fn = function (args, next) {
+              fn = function ([receiver, args], next) {
                 return aop[methodNameMagic](prop, args, next, receiver);
               };
             }
@@ -1068,23 +1066,23 @@ export class BeanContainer {
     return chains;
   }
 
-  private _getAopChainsProp_aopMethods(chains, aopKey, aopMethodsAll, methodType, receiver, prop: string) {
+  private _getAopChainsProp_aopMethods(chains, aopKey, aopMethodsAll, methodType, prop: string) {
     const aopMethods = aopMethodsAll[prop];
     if (!aopMethods) return;
     for (const aopMethod of aopMethods) {
       let fn;
       if (methodType === 'get') {
-        fn = function (_, next) {
+        fn = function ([receiver, _], next) {
           if (!aopMethod.beanInstance.get) throw new Error(`get property accessor not exists: ${aopMethod.onionName}`);
           return aopMethod.beanInstance.get(aopMethod.options, next, receiver, prop);
         };
       } else if (methodType === 'set') {
-        fn = function (value, next) {
+        fn = function ([receiver, value], next) {
           if (!aopMethod.beanInstance.set) throw new Error(`set property accessor not exists: ${aopMethod.onionName}`);
           return aopMethod.beanInstance.set(aopMethod.options, value, next, receiver, prop);
         };
       } else if (methodType === 'method') {
-        fn = function (args, next) {
+        fn = function ([receiver, args], next) {
           if (!aopMethod.beanInstance.execute) throw new Error(`execute method not exists: ${aopMethod.onionName}`);
           return aopMethod.beanInstance.execute(aopMethod.options, args, next, receiver, prop);
         };
