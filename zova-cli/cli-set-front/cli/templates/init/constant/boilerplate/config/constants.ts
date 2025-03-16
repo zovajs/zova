@@ -1,1 +1,1 @@
-export const constants = null;
+export const constants = {} as const;

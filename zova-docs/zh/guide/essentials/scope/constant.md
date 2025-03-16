@@ -20,7 +20,7 @@ export const constants = {
     male: 1,
     female: 2,
   },
-};
+} as const;
 ```
 
 - 直接定义所需要的常量即可，系统会自动提取 Constant 的类型信息

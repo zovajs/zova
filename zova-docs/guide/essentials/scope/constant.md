@@ -20,7 +20,7 @@ export const constants = {
     male: 1,
     female: 2,
   },
-};
+} as const;
 ```
 
 - Just define the required constants directly, and the system will automatically extract the type information of constants
