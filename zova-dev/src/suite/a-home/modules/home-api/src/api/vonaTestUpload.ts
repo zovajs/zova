@@ -52,7 +52,7 @@ export class ApiVonaTestUpload extends BeanApiBase {
   ) {
     return this.$fetch.post<any, ApiApiVonaTestUploadfieldsResponseBody>(
       ApiApiVonaTestUploadfieldsPath,
-      body,
+      this.$formData(body),
       this.$configPrepare(ApiBaseURL, options),
     );
   }
@@ -63,7 +63,7 @@ export class ApiVonaTestUpload extends BeanApiBase {
   ) {
     return this.$fetch.post<any, ApiApiVonaTestUploadfileResponseBody>(
       ApiApiVonaTestUploadfilePath,
-      body,
+      this.$formData(body),
       this.$configPrepare(ApiBaseURL, options),
     );
   }
