@@ -23,7 +23,7 @@ export interface ApiApiVonaTestUploadfileRequestBody {
   /** @default zhennann */
   name?: string;
   /** Format: binary */
-  welcome: object;
+  welcome: Blob;
 }
 export type ApiApiVonaTestUploadfileResponseBody = paths[ApiApiVonaTestUploadfilePath][ApiApiVonaTestUploadfileMethod]['responses']['200']['content']['application/json']['data'];
 
@@ -33,14 +33,14 @@ export type ApiApiVonaTestUploadfilesPath = '/api/vona/test/upload/files';
 export type ApiApiVonaTestUploadfilesMethod = 'post';
 export interface ApiApiVonaTestUploadfilesRequestBody {
   /** Format: binary */
-  welcome2: object;
+  welcome2: Blob;
   /**
      * Format: binary
      * @description single file
      */
-  welcome1: object;
+  welcome1: Blob;
   /** @description more files */
-  files: object[];
+  files: Blob[];
 }
 export type ApiApiVonaTestUploadfilesResponseBody = paths[ApiApiVonaTestUploadfilesPath][ApiApiVonaTestUploadfilesMethod]['responses']['200']['content']['application/json']['data'];
 

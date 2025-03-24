@@ -390,6 +390,13 @@ function _checkOperationIdEnabled(moduleConfig: ZovaOpenapiConfigModule, selecto
   );
 }
 
+/**
+ * https://github.com/openapi-ts/openapi-typescript/issues/1214
+ * https://openapi-ts.dev/node#example-blob-types
+*/
+const BLOB = ts.factory.createTypeReferenceNode(ts.factory.createIdentifier('Blob')); // `Blob`
+const NULL = ts.factory.createLiteralTypeNode(ts.factory.createNull()); // `null`
+
 function _patchOpenapiTSOptions(options?: OpenAPITSOptions) {
   const transformCustom = options?.transform;
   return Object.assign({}, options, {
@@ -399,11 +406,13 @@ function _patchOpenapiTSOptions(options?: OpenAPITSOptions) {
         if (res !== undefined) return res;
       }
       if (schemaObject.format === 'binary') {
-        if (metadata.path.endsWith('multipart/form-data')) {
-          return schemaObject.nullable ? 'File | null' : 'File';
-        }
-        if (metadata.path.endsWith('application/octet-stream')) {
-          return schemaObject.nullable ? 'Blob | null' : 'Blob';
+        if (metadata.path.includes('multipart~1form-data') || metadata.path.includes('application~1octet-stream')) {
+          return {
+            schema: schemaObject.nullable
+              ? ts.factory.createUnionTypeNode([BLOB, NULL])
+              : BLOB,
+            questionToken: schemaObject.nullable,
+          };
         }
       }
       return undefined;

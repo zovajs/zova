@@ -770,7 +770,7 @@ export interface operations {
           /** @default zhennann */
           name?: string;
           /** Format: binary */
-          welcome: string;
+          welcome: Blob;
         };
       };
     };
@@ -800,14 +800,14 @@ export interface operations {
       content: {
         'multipart/form-data': {
           /** Format: binary */
-          welcome2: string;
+          welcome2: Blob;
           /**
                      * Format: binary
                      * @description single file
                      */
-          welcome1: string;
+          welcome1: Blob;
           /** @description more files */
-          files: string[];
+          files: Blob[];
         };
       };
     };
