@@ -206,7 +206,7 @@ export class CliOpenapiGenerate extends BeanCliBase {
       nameRequestBodyQuestion = nodeActionInfo.nodeTypeInfo.requestBody.question;
       const nodeRequestBodyInfo = _parseNodeType(nodeActionInfo.nodeTypeInfo.requestBody.nodeType)!;
       const nodeRequestBodyContentInfo = _parseNodeType(nodeRequestBodyInfo.content.nodeType)!;
-      const nodeRequestBodyApplicationJson = nodeRequestBodyContentInfo['application/json'];
+      const nodeRequestBodyApplicationJson = nodeRequestBodyContentInfo['application/json'] ?? nodeRequestBodyContentInfo['multipart/form-data'];
       const typeRequestBody = astToString(nodeRequestBodyApplicationJson.nodeType);
       contentTypes.push(`export type ${nameRequestBody} = ${typeRequestBody};`);
     }
