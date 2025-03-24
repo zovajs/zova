@@ -74,7 +74,7 @@ export class ApiVonaTestUpload extends BeanApiBase {
   ) {
     return this.$fetch.post<any, ApiApiVonaTestUploadfilesResponseBody>(
       ApiApiVonaTestUploadfilesPath,
-      body,
+      this.$formData(body),
       this.$configPrepare(ApiBaseURL, options),
     );
   }

@@ -12,4 +12,19 @@ export class BeanApiBase extends BeanBase {
   $configPrepare(baseURL?: string, options?: IApiActionOptions): AxiosRequestConfig {
     return this.app.util.apiActionConfigPrepare(baseURL, options);
   }
+
+  $formData(body: object) {
+    const formData = new FormData();
+    for (const key in body) {
+      const value = body[key];
+      if (Array.isArray(value)) {
+        for (const item of value) {
+          formData.append(key, item);
+        }
+      } else {
+        formData.append(key, value);
+      }
+    }
+    return formData;
+  }
 }
