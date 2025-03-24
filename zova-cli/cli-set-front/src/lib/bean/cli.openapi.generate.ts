@@ -253,13 +253,15 @@ export class CliOpenapiGenerate extends BeanCliBase {
     // content: comment
     const contentComments =
       pathInfo.comments && pathInfo.comments.length > 0 ? `/*${pathInfo.comments.join()}*/\n` : '';
+    // content: body
+    const contentBodyParams = isUpload ? 'this.$formData(body)' : 'body';
     // content: signature
     const contentSignature = `${contentComments}${nodeActionInfo.action}(
       ${contentRequestBody}
       ${contentOptions2}
     ) {
       return this.$fetch.${pathInfo.method}<any, ${nameResponseBody}>(
-        ${contentPathTranslate} ${contentRequestBody ? 'body,' : ''} 
+        ${contentPathTranslate} ${contentRequestBody ? `${contentBodyParams},` : ''} 
         this.$configPrepare(ApiBaseURL, options),
       );
     }\n`;
