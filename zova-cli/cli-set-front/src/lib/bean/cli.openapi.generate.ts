@@ -201,12 +201,17 @@ export class CliOpenapiGenerate extends BeanCliBase {
     // name: request body
     let nameRequestBody = '';
     let nameRequestBodyQuestion: boolean = true;
+    let isUpload = false;
     if (!_isNodeNever(nodeActionInfo.nodeTypeInfo.requestBody.nodeType)) {
       nameRequestBody = `Api${nameApiAction}RequestBody`;
       nameRequestBodyQuestion = nodeActionInfo.nodeTypeInfo.requestBody.question;
       const nodeRequestBodyInfo = _parseNodeType(nodeActionInfo.nodeTypeInfo.requestBody.nodeType)!;
       const nodeRequestBodyContentInfo = _parseNodeType(nodeRequestBodyInfo.content.nodeType)!;
       const nodeRequestBodyApplicationJson = nodeRequestBodyContentInfo['application/json'] ?? nodeRequestBodyContentInfo['multipart/form-data'];
+      isUpload = !!nodeRequestBodyContentInfo['multipart/form-data'];
+      if (isUpload) {
+        _patchUpload(nodeRequestBodyApplicationJson.nodeType);
+      }
       const typeRequestBody = astToString(nodeRequestBodyApplicationJson.nodeType);
       contentTypes.push(`export type ${nameRequestBody} = ${typeRequestBody};`);
     }
@@ -383,4 +388,30 @@ function _checkOperationIdEnabled(moduleConfig: ZovaOpenapiConfigModule, selecto
     (moduleConfig.match && matchSelector(moduleConfig.match, selector)) ||
     (moduleConfig.ignore && !matchSelector(moduleConfig.ignore, selector))
   );
+}
+
+function _createTypeNodeFromString(type: string): ts.TypeNode {
+  const sourceFile = ts.createSourceFile('source.ts', `type A = ${type};`, ts.ScriptTarget.Latest);
+  const statement = sourceFile.statements[0];
+  return (statement as any).type;
+}
+
+function _patchUpload(nodeType: ts.TypeLiteralNode) {
+  for (let index = 0; index < nodeType.members.length; index++) {
+    const node = nodeType.members[index];
+    if (!ts.isPropertySignature(node) || !node.type) continue;
+    if (ts.isArrayTypeNode(node.type)) {
+      // todo: no comments: 'Format: binary'
+      (node.type as any).elementType = _createTypeNodeFromString('object');
+    } else {
+      // comment
+      const nodeComments = (node as any).emitNode?.leadingComments;
+      if (nodeComments) {
+        const isBinary = nodeComments.some(nodeComment => nodeComment.text.includes('Format: binary'));
+        if (isBinary) {
+          (node as any).type = _createTypeNodeFromString('object');
+        }
+      }
+    }
+  }
 }

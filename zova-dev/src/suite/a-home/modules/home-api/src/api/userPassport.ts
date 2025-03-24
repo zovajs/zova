@@ -7,7 +7,7 @@ export const ApiApiUserPassportrefreshAuthTokenPath = '/api/user/passport/refres
 export type ApiApiUserPassportrefreshAuthTokenPath = '/api/user/passport/refreshAuthToken';
 export type ApiApiUserPassportrefreshAuthTokenMethod = 'post';
 export interface ApiApiUserPassportrefreshAuthTokenRequestBody {
-  refreshToken: object;
+  refreshToken: string;
 }
 export type ApiApiUserPassportrefreshAuthTokenResponseBody = paths[ApiApiUserPassportrefreshAuthTokenPath][ApiApiUserPassportrefreshAuthTokenMethod]['responses']['200']['content']['application/json']['data'];
 
@@ -16,7 +16,7 @@ export const ApiApiUserPassportcreateAuthTokenFromOauthCodePath = '/api/user/pas
 export type ApiApiUserPassportcreateAuthTokenFromOauthCodePath = '/api/user/passport/createAuthTokenFromOauthCode';
 export type ApiApiUserPassportcreateAuthTokenFromOauthCodeMethod = 'post';
 export interface ApiApiUserPassportcreateAuthTokenFromOauthCodeRequestBody {
-  code: object;
+  code: string;
 }
 export type ApiApiUserPassportcreateAuthTokenFromOauthCodeResponseBody = paths[ApiApiUserPassportcreateAuthTokenFromOauthCodePath][ApiApiUserPassportcreateAuthTokenFromOauthCodeMethod]['responses']['200']['content']['application/json']['data'];
 
