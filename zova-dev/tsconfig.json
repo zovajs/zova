@@ -12,6 +12,7 @@
   "references": [
   ],
   "exclude": [
+    "**/cli/**",
     "**/dist/**",
     "./dist",
     "./distMockServer",

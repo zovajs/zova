@@ -2,6 +2,7 @@
   "extends": "./tsconfig.json",
   "compilerOptions": {},
   "exclude": [
+    "**/cli/**",
     "**/dist/**",
     "./dist",
     "./distMockServer",
