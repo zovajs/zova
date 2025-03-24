@@ -1,4 +1,5 @@
 import type { IModule, IModuleInfo } from '@cabloy/module-info';
+import type { OpenAPITSOptions } from 'openapi-typescript';
 import type { ZovaOpenapiConfig, ZovaOpenapiConfigModule } from 'zova-openapi';
 import path from 'node:path';
 import { BeanCliBase } from '@cabloy/cli';
@@ -96,7 +97,7 @@ export class CliOpenapiGenerate extends BeanCliBase {
     // cache
     let cache = __caches[moduleConfig.source];
     if (!cache) {
-      const ast = await openapiTS(moduleConfig.source, moduleConfig.options);
+      const ast = await openapiTS(moduleConfig.source, _patchOpenapiTSOptions(moduleConfig.options));
       const contents = astToString(ast);
       cache = __caches[moduleConfig.source] = { ast, contents };
     }
@@ -209,9 +210,6 @@ export class CliOpenapiGenerate extends BeanCliBase {
       const nodeRequestBodyContentInfo = _parseNodeType(nodeRequestBodyInfo.content.nodeType)!;
       const nodeRequestBodyApplicationJson = nodeRequestBodyContentInfo['application/json'] ?? nodeRequestBodyContentInfo['multipart/form-data'];
       isUpload = !!nodeRequestBodyContentInfo['multipart/form-data'];
-      if (isUpload) {
-        _patchUpload(nodeRequestBodyApplicationJson.nodeType);
-      }
       const typeRequestBody = astToString(nodeRequestBodyApplicationJson.nodeType);
       contentTypes.push(`export type ${nameRequestBody} = ${typeRequestBody};`);
     }
@@ -392,28 +390,49 @@ function _checkOperationIdEnabled(moduleConfig: ZovaOpenapiConfigModule, selecto
   );
 }
 
-function _createTypeNodeFromString(type: string): ts.TypeNode {
-  const sourceFile = ts.createSourceFile('source.ts', `type A = ${type};`, ts.ScriptTarget.Latest);
-  const statement = sourceFile.statements[0];
-  return (statement as any).type;
-}
-
-function _patchUpload(nodeType: ts.TypeLiteralNode) {
-  for (let index = 0; index < nodeType.members.length; index++) {
-    const node = nodeType.members[index];
-    if (!ts.isPropertySignature(node) || !node.type) continue;
-    if (ts.isArrayTypeNode(node.type)) {
-      // todo: no comments: 'Format: binary'
-      (node.type as any).elementType = _createTypeNodeFromString('object');
-    } else {
-      // comment
-      const nodeComments = (node as any).emitNode?.leadingComments;
-      if (nodeComments) {
-        const isBinary = nodeComments.some(nodeComment => nodeComment.text.includes('Format: binary'));
-        if (isBinary) {
-          (node as any).type = _createTypeNodeFromString('object');
+function _patchOpenapiTSOptions(options?: OpenAPITSOptions) {
+  const transformCustom = options?.transform;
+  return Object.assign({}, options, {
+    transform(schemaObject, metadata) {
+      if (transformCustom) {
+        const res = transformCustom(schemaObject, metadata);
+        if (res !== undefined) return res;
+      }
+      if (schemaObject.format === 'binary') {
+        if (metadata.path.endsWith('multipart/form-data')) {
+          return schemaObject.nullable ? 'File | null' : 'File';
+        }
+        if (metadata.path.endsWith('application/octet-stream')) {
+          return schemaObject.nullable ? 'Blob | null' : 'Blob';
         }
       }
-    }
-  }
+      return undefined;
+    },
+  });
 }
+
+// function _createTypeNodeFromString(type: string): ts.TypeNode {
+//   const sourceFile = ts.createSourceFile('source.ts', `type A = ${type};`, ts.ScriptTarget.Latest);
+//   const statement = sourceFile.statements[0];
+//   return (statement as any).type;
+// }
+
+// function _patchUpload(nodeType: ts.TypeLiteralNode) {
+//   for (let index = 0; index < nodeType.members.length; index++) {
+//     const node = nodeType.members[index];
+//     if (!ts.isPropertySignature(node) || !node.type) continue;
+//     if (ts.isArrayTypeNode(node.type)) {
+//       // todo: no comments: 'Format: binary'
+//       (node.type as any).elementType = _createTypeNodeFromString('object');
+//     } else {
+//       // comment
+//       const nodeComments = (node as any).emitNode?.leadingComments;
+//       if (nodeComments) {
+//         const isBinary = nodeComments.some(nodeComment => nodeComment.text.includes('Format: binary'));
+//         if (isBinary) {
+//           (node as any).type = _createTypeNodeFromString('object');
+//         }
+//       }
+//     }
+//   }
+// }
