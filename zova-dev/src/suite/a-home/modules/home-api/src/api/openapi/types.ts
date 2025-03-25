@@ -734,6 +734,7 @@ export interface operations {
     requestBody: {
       content: {
         'multipart/form-data': {
+          checkes: string[];
           /**
                      * @description your name
                      * @default zhennann
@@ -799,6 +800,8 @@ export interface operations {
     requestBody: {
       content: {
         'multipart/form-data': {
+          /** @description images */
+          images: Blob[];
           /** Format: binary */
           welcome2: Blob;
           /**
@@ -807,7 +810,7 @@ export interface operations {
                      */
           welcome1: Blob;
           /** @description more files */
-          files: Blob[];
+          blobs: Blob[];
         };
       };
     };
