@@ -112,7 +112,7 @@ export class CliOpenapiGenerate extends BeanCliBase {
     await this.helper.formatFile({ fileName: schemasFile });
     // output: openapi/baseURL.ts
     const baseURLFile = path.join(module.root, 'src/api/openapi/baseURL.ts');
-    await fse.outputFile(baseURLFile, `export const ApiBaseURL = '${moduleConfig.baseURL || ''}';`);
+    await fse.outputFile(baseURLFile, `export const ApiBaseURL = process.env.OPENAPI_BASE_URL_${module.name.replace('-', '_')} || process.env.OPENAPI_BASE_URL_DEFAULT;`);
     await this.helper.formatFile({ fileName: baseURLFile });
     // output: openapi/index.ts
     const indexFile = path.join(module.root, 'src/api/openapi/index.ts');
