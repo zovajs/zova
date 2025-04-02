@@ -65,6 +65,10 @@ export function extendViteConf(context: ConfigContext) {
     } else {
       // env: special for dist files
       const define = generateConfigDefine({
+        NODE_ENV: env.NODE_ENV,
+        META_FLAVOR: env.META_FLAVOR,
+        META_MODE: env.META_MODE,
+        META_APP_MODE: env.META_APP_MODE,
         SERVER: env.SERVER,
         CLIENT: env.CLIENT,
         DEV: env.DEV,
