@@ -111,10 +111,10 @@ export function extendFiles(api: IndexAPI, flavor: string) {
     fse.writeFileSync(fileSrc, contentNew);
   }
 
-  // ssr-prod-webserver.mjs
+  // ssr-prod-webserver.js
   async function _handleSSRProdWebserver() {
-    const fileSrc = api.resolve.cli('templates/entry/ssr-prod-webserver.mjs');
-    const fileSrcBak = api.resolve.cli('templates/entry/ssr-prod-webserver-origin.mjs');
+    const fileSrc = api.resolve.cli('templates/entry/ssr-prod-webserver.js');
+    const fileSrcBak = api.resolve.cli('templates/entry/ssr-prod-webserver-origin.js');
     copyTemplateIfNeed(fileSrc, fileSrcBak);
     const content = fse.readFileSync(fileSrcBak).toString();
     const contentNew = content.replace(
