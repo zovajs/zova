@@ -57,7 +57,7 @@
     "quasar-app-extension-zova": "workspace:^",
     "sass": "^1.81.0",
     "typescript": "5.7.3",
-    "vite": "^5.4.11",
+    "vite": "^6.2.4",
     "vue-tsc": "^2.2.0",
     "zova-openapi": "workspace:^",
     "zova-vite": "workspace:^"

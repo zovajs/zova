@@ -1,3 +1,4 @@
+import type { IndexAPI } from '@quasar/app-vite';
 import type { UserConfig as ViteUserConfig } from 'vite';
 import type { ZovaViteConfigResult } from 'zova-vite';
 import type { ConfigContext } from './types.js';
@@ -8,7 +9,7 @@ import { viteNodePlugin } from './viteNodePlugin.js';
 const __SvgIconPattern = /\.metadata\/icons\/groups\/.*?\.svg/;
 
 export function extendViteConf(context: ConfigContext) {
-  return function extendViteConf(conf: ViteUserConfig, opts) {
+  return function extendViteConf(conf: ViteUserConfig, opts, _api: IndexAPI) {
     const zovaViteMeta = context.zovaViteMeta as ZovaViteConfigResult;
     // conf.build override zovaViteMeta.viteConfig.build
     const minify = conf.build?.minify;

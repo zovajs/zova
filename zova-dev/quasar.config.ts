@@ -1,11 +1,11 @@
 /* eslint-env node */
 
 // Configuration for your app
-// https://v2.quasar.dev/quasar-cli-vite/quasar-config-js
+// https://v2.quasar.dev/quasar-cli-vite/quasar-config-file
 
-import { configure } from 'quasar/wrappers';
+import { defineConfig } from '@quasar/app-vite/wrappers';
 
-export default configure(_ctx => {
+export default defineConfig(_ctx => {
   return {
     build: {
       // extendViteConf(_viteConf) {},
