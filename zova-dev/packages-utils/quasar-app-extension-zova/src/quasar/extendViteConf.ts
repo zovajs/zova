@@ -4,7 +4,6 @@ import type { ZovaViteConfigResult } from 'zova-vite';
 import type { ConfigContext } from './types.js';
 import { createLogger, mergeConfig } from 'vite';
 import { generateConfigDefine } from 'zova-vite';
-import { viteNodePlugin } from './viteNodePlugin.js';
 
 const __SvgIconPattern = /\.metadata\/icons\/groups\/.*?\.svg/;
 
@@ -95,8 +94,6 @@ export function extendViteConf(context: ConfigContext) {
     }
     // ssr: vite-node
     if (opts.isServer && context.configMeta?.mode === 'development' && process.env.SSR_VITE_NODE === 'true') {
-      // invalidates
-      conf.plugins!.push(viteNodePlugin());
       // optimizeDeps
       conf.optimizeDeps = mergeConfig(conf.optimizeDeps || {}, {
         noDiscovery: true,

@@ -51,7 +51,7 @@ export function extendFiles(api, flavor) {
     // html-template
     async function _handleSSRHtmlTemplate() {
         const fileSrc = api.resolve.cli('lib/utils/html-template.js');
-        const fileSrcBak = api.resolve.cli('lib/utils/html-template-bak.js');
+        const fileSrcBak = api.resolve.cli('lib/utils/html-template-origin.js');
         copyTemplateIfNeed(fileSrc, fileSrcBak);
         const content = fse.readFileSync(fileSrcBak).toString();
         const contentNew = content
@@ -67,37 +67,17 @@ export function extendFiles(api, flavor) {
     // ssr-devserver.js
     async function _handleSSRDevServer() {
         const fileSrc = api.resolve.cli('lib/modes/ssr/ssr-devserver.js');
-        const fileSrcBak = api.resolve.cli('lib/modes/ssr/ssr-devserver-bak.js');
+        const fileSrcBak = api.resolve.cli('lib/modes/ssr/ssr-devserver-origin.js');
         copyTemplateIfNeed(fileSrc, fileSrcBak);
         const content = fse.readFileSync(fileSrcBak).toString();
         const contentNew = content
             .replace("import { green } from 'kolorist'", `import { green } from 'kolorist'
-        import { ViteNode } from 'quasar-app-extension-zova'
         import { collectCss, renderTeleports } from 'zova-vite'
         import * as path from 'node:path'`)
-            .replace("const autoRemove = 'document.currentScript.remove()'", `const autoRemove = 'document.currentScript.remove()'
-        let viteNode`)
-            .replace('const viteServer = this.#viteServer = await createServer(await quasarSsrConfig.viteServer(quasarConf))', `const viteServer = this.#viteServer = await createServer(await quasarSsrConfig.viteServer(quasarConf))
-    if(process.env.SSR_VITE_NODE === 'true'){
-      viteNode = new ViteNode(viteServer, this.#pathMap.serverEntryFile)
-      await viteNode.attachServer()
-      viteNode.createRunner()
-    }`)
-            .replace('const renderApp = await viteServer.ssrLoadModule(this.#pathMap.serverEntryFile)', `let renderApp;
-        if(process.env.SSR_VITE_NODE === 'true'){
-          renderApp = await viteNode.loadRender();
-        }else{
-          renderApp = await viteServer.ssrLoadModule(this.#pathMap.serverEntryFile)
-        }`)
-            .replace('await viteServer.ssrLoadModule(serverEntry)', `if (process.env.SSR_VITE_NODE === 'true') {
-      await viteNode.loadRender();
-    } else {
-      await viteServer.ssrLoadModule(serverEntry)
-    }`)
             .replace('let html = renderTemplate(ssrContext)', `ssrContext._meta.endingHeadTags += collectCss(
           [viteServer.moduleGraph.getModuleById(this.#pathMap.serverEntryFile.replaceAll('\\\\','/'))].concat(
           [...(ssrContext.modules||[])]
-            .map((componentPath) => this.#viteServer.moduleGraph.getModuleById(
+            .map((componentPath) => viteServer.moduleGraph.getModuleById(
               path.resolve(componentPath).replaceAll('\\\\','/'),
           )))
         )
@@ -106,10 +86,10 @@ export function extendFiles(api, flavor) {
             .replace('<div id="q-app">${ runtimePageContent }</div>', '<div id="q-app">${ runtimePageContent }</div>${ renderTeleports(ssrContext.teleports) }');
         fse.writeFileSync(fileSrc, contentNew);
     }
-    // ssr-prod-webserver.mjs
+    // ssr-prod-webserver.js
     async function _handleSSRProdWebserver() {
-        const fileSrc = api.resolve.cli('templates/entry/ssr-prod-webserver.mjs');
-        const fileSrcBak = api.resolve.cli('templates/entry/ssr-prod-webserver-bak.mjs');
+        const fileSrc = api.resolve.cli('templates/entry/ssr-prod-webserver.js');
+        const fileSrcBak = api.resolve.cli('templates/entry/ssr-prod-webserver-origin.js');
         copyTemplateIfNeed(fileSrc, fileSrcBak);
         const content = fse.readFileSync(fileSrcBak).toString();
         const contentNew = content.replace("import { join, basename, isAbsolute } from 'node:path'", "import 'zova-vite/dist/ssrEntry.js'\nimport { join, basename, isAbsolute } from 'node:path'");
