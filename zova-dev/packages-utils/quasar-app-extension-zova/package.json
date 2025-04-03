@@ -43,7 +43,6 @@
     "esbuild": "^0.25.2",
     "fs-extra": "^11.2.0",
     "vite": "^6.2.4",
-    "vite-node": "^2.0.5",
     "zova-openapi": "^1.0.0",
     "zova-shared": "^1.0.7",
     "zova-vite": "^1.0.182"

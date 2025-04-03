@@ -56,7 +56,7 @@ export class BeanModelQuery extends BeanModelCookie {
   }
 
   $invalidateQueries(
-    filters?: MaybeRefDeep<InvalidateQueryFilters>,
+    filters?: InvalidateQueryFilters,
     options?: MaybeRefDeep<InvalidateOptions>,
   ): Promise<void> {
     if (!filters) filters = {};
