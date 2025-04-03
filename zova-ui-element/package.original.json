@@ -45,7 +45,7 @@
   },
   "devDependencies": {
     "@cabloy/lint": "^5.0.8",
-    "@quasar/app-vite": "2.0.0-beta.18",
+    "@quasar/app-vite": "2.2.0",
     "@types/node": "^22.10.2",
     "@vitejs/plugin-vue": "^5.0.5",
     "concurrently": "^8.2.2",

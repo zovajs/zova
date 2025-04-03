@@ -45,7 +45,7 @@
   },
   "devDependencies": {
     "@cabloy/lint": "^5.0.8",
-    "@quasar/app-vite": "2.0.0-beta.18",
+    "@quasar/app-vite": "2.2.0",
     "@types/node": "^22.10.2",
     "autoprefixer": "^10.4.20",
     "concurrently": "^8.2.2",
