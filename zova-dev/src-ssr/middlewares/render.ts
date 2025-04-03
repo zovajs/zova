@@ -1,12 +1,12 @@
 import type { RenderError } from '@quasar/app-vite';
 import type { Request, Response } from 'express';
-import { ssrMiddleware } from 'quasar/wrappers';
+import { defineSsrMiddleware } from '@quasar/app-vite/wrappers';
 
 // This middleware should execute as last one
 // since it captures everything and tries to
 // render the page with Vue
 
-export default ssrMiddleware(({ app, resolve, render, serve }) => {
+export default defineSsrMiddleware(({ app, resolve, render, serve }) => {
   // we capture any other Express route and hand it
   // over to Vue and Vue Router to render our page
   app.get(resolve.urlPath('*'), (req: Request, res: Response) => {
@@ -51,7 +51,9 @@ export default ssrMiddleware(({ app, resolve, render, serve }) => {
           // create a route (/src/routes) for an error page and redirect to it
           res.status(500).send('500 | Internal Server Error');
 
-          console.error(err.stack);
+          if (process.env.DEV) {
+            console.error(err.stack);
+          }
         }
       });
   });
