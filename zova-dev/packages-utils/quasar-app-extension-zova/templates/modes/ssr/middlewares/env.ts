@@ -1,12 +1,12 @@
 import { readFileSync } from 'node:fs';
 import path, { dirname } from 'node:path';
 import { fileURLToPath } from 'node:url';
-import { ssrMiddleware } from 'quasar/wrappers';
+import { defineSsrMiddleware } from '@quasar/app-vite/wrappers';
 
 // This middleware should execute as first one
 // since it prepare the process.env variables
 
-export default ssrMiddleware(({ app: _app, resolve: _resolve, render: _render, serve: _serve }) => {
+export default defineSsrMiddleware(({ app: _app, resolve: _resolve, render: _render, serve: _serve }) => {
   if (process.env.PROD) {
     const __filename = fileURLToPath(import.meta.url);
     const __dirname = dirname(__filename);
