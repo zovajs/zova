@@ -1,7 +1,6 @@
-import type { App } from 'vue';
-import type { SSRContext } from 'zova';
+import { defineBoot } from '@quasar/app-vite/wrappers';
 
 import '../css/tailwind.css';
 import '../css/settings.scss';
 
-export default (_app: App, _ssrContext: SSRContext) => {};
+export default defineBoot(({ app: _app, ssrContext: _ssrContext }) => {});

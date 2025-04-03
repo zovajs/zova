@@ -23,7 +23,6 @@
     "./src-cordova",
     "./quasar.config.*.temporary.compiled*",
     "./src/boot/app",
-    "./src/boot/main.ts",
     "./packages-utils",
     "./packages-zova"
   ]

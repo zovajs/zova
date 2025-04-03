@@ -1,6 +1,6 @@
-import type { App } from 'vue';
+import { defineBoot } from '@quasar/app-vite/wrappers';
 import { bootstrap } from 'zova';
 
-export default async function ({ app }: { app: App }) {
+export default defineBoot(async ({ app }) => {
   await bootstrap({ app });
-}
+});
