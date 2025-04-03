@@ -78,9 +78,8 @@ export function extendViteConf(context: ConfigContext) {
       conf.define = mergeConfig(conf.define || {}, define);
     }
     // ssr
-    if (opts.isServer && (context.configMeta?.mode === 'production' || process.env.SSR_VITE_NODE === 'true')) {
+    if (opts.isServer && (context.configMeta?.mode !== 'production')) {
       conf.ssr = mergeConfig(conf.ssr || {}, {
-        noExternal: true,
         external: [
           'vue',
           'pinia',
