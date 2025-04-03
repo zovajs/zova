@@ -1,6 +1,5 @@
 import type { IndexAPI } from '@quasar/app-vite';
-import type { QuasarConf } from '@quasar/app-vite/types/configuration/conf.js';
-import type { ConfigContext } from './types.js';
+import type { ConfigContext, QuasarConf } from './types.js';
 import path from 'node:path';
 import { loadJSONFile, saveJSONFile } from '../utils.js';
 
