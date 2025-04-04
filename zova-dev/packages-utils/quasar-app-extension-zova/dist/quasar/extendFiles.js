@@ -83,7 +83,8 @@ export function extendFiles(api, flavor) {
         )
 
         let html = renderTemplate(ssrContext)`)
-            .replace('<div id="q-app">${ runtimePageContent }</div>', '<div id="q-app">${ runtimePageContent }</div>${ renderTeleports(ssrContext.teleports) }');
+            .replace('<div id="q-app">${ runtimePageContent }</div>', '<div id="q-app">${ runtimePageContent }</div>${ renderTeleports(ssrContext.teleports) }')
+            .replace('viteServer.ssrFixStacktrace(err)', 'console.error(err);\nviteServer.ssrFixStacktrace(err)');
         fse.writeFileSync(fileSrc, contentNew);
     }
     // ssr-prod-webserver.js

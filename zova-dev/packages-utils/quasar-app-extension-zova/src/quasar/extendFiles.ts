@@ -107,6 +107,10 @@ export function extendFiles(api: IndexAPI, flavor: string) {
       .replace(
         '<div id="q-app">${ runtimePageContent }</div>',
         '<div id="q-app">${ runtimePageContent }</div>${ renderTeleports(ssrContext.teleports) }',
+      )
+      .replace(
+        'viteServer.ssrFixStacktrace(err)',
+        'console.error(err);\nviteServer.ssrFixStacktrace(err)',
       );
     fse.writeFileSync(fileSrc, contentNew);
   }
