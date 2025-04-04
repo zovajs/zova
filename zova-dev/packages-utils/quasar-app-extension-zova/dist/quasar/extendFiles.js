@@ -109,3 +109,4 @@ export function extendFiles(api, flavor) {
         fse.copyFileSync(resolveTemplatePath('vuetify/composables/ssrBoot.mjs'), path.join(modulePath, 'lib/composables/ssrBoot.mjs'));
     }
 }
+//# sourceMappingURL=extendFiles.js.map

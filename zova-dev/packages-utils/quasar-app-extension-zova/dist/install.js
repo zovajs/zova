@@ -6,3 +6,4 @@
 export default function (_api) {
     //
 }
+//# sourceMappingURL=install.js.map

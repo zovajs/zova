@@ -6,3 +6,4 @@
 export default function (_api) {
     //
 }
+//# sourceMappingURL=uninstall.js.map

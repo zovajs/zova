@@ -39,3 +39,4 @@
 
  */
 export default function (_api: any): never[];
+//# sourceMappingURL=prompts.d.ts.map

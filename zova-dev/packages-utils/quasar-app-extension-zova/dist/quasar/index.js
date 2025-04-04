@@ -36,3 +36,4 @@ export async function quasar(api) {
         extendAfterBuild(context, flavor)(quasarConf, api);
     });
 }
+//# sourceMappingURL=index.js.map

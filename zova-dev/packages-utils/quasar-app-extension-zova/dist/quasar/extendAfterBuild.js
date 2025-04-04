@@ -30,3 +30,4 @@ export function extendAfterBuild(context, _flavor) {
         await saveJSONFile(pkgFile, pkg);
     }
 }
+//# sourceMappingURL=extendAfterBuild.js.map

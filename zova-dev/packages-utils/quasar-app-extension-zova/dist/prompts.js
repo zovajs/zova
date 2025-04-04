@@ -41,3 +41,4 @@
 export default function (_api) {
     return [];
 }
+//# sourceMappingURL=prompts.js.map

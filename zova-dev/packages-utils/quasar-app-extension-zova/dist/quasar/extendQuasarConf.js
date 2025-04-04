@@ -63,3 +63,4 @@ export function extendQuasarConf(context, flavor) {
         });
     };
 }
+//# sourceMappingURL=extendQuasarConf.js.map

@@ -3,3 +3,4 @@ export function extendSSRWebserverConf(_context) {
         conf.minify = process.env.BUILD_MINIFY === 'true';
     };
 }
+//# sourceMappingURL=extendSSRWebserverConf.js.map

@@ -1,3 +1,4 @@
 import type { IndexAPI } from '@quasar/app-vite';
 import type { ConfigContext, QuasarConf } from './types.js';
 export declare function extendAfterBuild(context: ConfigContext, _flavor: string): (conf: QuasarConf, api: IndexAPI) => Promise<void>;
+//# sourceMappingURL=extendAfterBuild.d.ts.map

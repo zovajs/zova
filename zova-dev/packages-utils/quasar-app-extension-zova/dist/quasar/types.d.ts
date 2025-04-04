@@ -7,3 +7,4 @@ export interface ConfigContext {
     zovaViteMeta?: ZovaViteConfigResult;
 }
 export type QuasarConf = Awaited<ReturnType<ReturnType<typeof defineConfig>>>;
+//# sourceMappingURL=types.d.ts.map
