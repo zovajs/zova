@@ -80,15 +80,24 @@ export function extendViteConf(context: ConfigContext) {
     // ssr
     if (opts.isServer && (context.configMeta?.mode !== 'production')) {
       conf.ssr = mergeConfig(conf.ssr || {}, {
-        external: [
-          'vue',
-          'pinia',
-          '@vue/runtime-core',
-          '@vue/reactivity',
-          '@cabloy/vue-reactivity',
-          '@cabloy/vue-runtime-core',
-          '@cabloy/vue-runtime-dom',
-        ],
+        // external: [
+        //   'vue',
+        //   'pinia',
+        //   '@vue/runtime-core',
+        //   '@vue/reactivity',
+        //   '@cabloy/vue-reactivity',
+        //   '@cabloy/vue-runtime-core',
+        //   '@cabloy/vue-runtime-dom',
+        // ],
+        // noExternal:[
+        //     'vue',
+        //          'pinia',
+        //          '@vue/runtime-core',
+        //          '@vue/reactivity',
+        //          '@cabloy/vue-reactivity',
+        //          '@cabloy/vue-runtime-core',
+        //          '@cabloy/vue-runtime-dom',
+        //  ],
       });
     }
     // ssr: vite-node

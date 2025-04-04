@@ -19,10 +19,10 @@ export function extendFiles(api: IndexAPI, flavor: string) {
     fse.copyFileSync(resolveTemplatePath('entry/app.js_'), api.resolve.cli('templates/entry/app.js'));
     // client-entry.js
     fse.copyFileSync(resolveTemplatePath('entry/client-entry.js_'), api.resolve.cli('templates/entry/client-entry.js'));
-    // server-entry.mjs
+    // server-entry.js
     fse.copyFileSync(
-      resolveTemplatePath('entry/server-entry.mjs_'),
-      api.resolve.cli('templates/entry/server-entry.mjs'),
+      resolveTemplatePath('entry/server-entry.js_'),
+      api.resolve.cli('templates/entry/server-entry.js'),
     );
     // ssr: middlewares/env.ts
     fse.copyFileSync(resolveTemplatePath('modes/ssr/middlewares/env.ts'), api.resolve.ssr('middlewares/env.ts'));
@@ -30,7 +30,7 @@ export function extendFiles(api: IndexAPI, flavor: string) {
     await _handleSSRHtmlTemplate();
     // ssr: ssr-devserver.js
     await _handleSSRDevServer();
-    // ssr: ssr-prod-webserver.mjs
+    // ssr: ssr-prod-webserver.js
     await _handleSSRProdWebserver();
   }
 
