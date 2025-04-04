@@ -71,6 +71,8 @@
     "@cabloy/word-utils": "workspace:^",
     "@types/js-cookie": "^3.0.6",
     "@vue/reactivity": "^3.5.6",
+    "@vue/runtime-core": "^3.5.6",
+    "@vue/runtime-dom": "^3.5.6",
     "@vue/shared": "^3.5.6",
     "deep-equal": "^2.2.3",
     "defu": "^6.1.4",
