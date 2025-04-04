@@ -45,7 +45,6 @@ declare global {
       // @ts-ignore ignore
       // MODE: string | undefined;
       // others: if needed, set env var type as 'true' | 'false'
-      // SSR_VITE_NODE: 'true' | 'false';
     }
   }
 }
