@@ -110,7 +110,7 @@ export function extendFiles(api: IndexAPI, flavor: string) {
       )
       .replace(
         'viteServer.ssrFixStacktrace(err)',
-        'console.error(err);\nviteServer.ssrFixStacktrace(err)',
+        'console.error(err)',
       );
     fse.writeFileSync(fileSrc, contentNew);
   }
