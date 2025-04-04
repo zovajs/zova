@@ -50,12 +50,12 @@ export function generateConfigDefine(env) {
 export function setModuleAlias() {
   // alias
   const alias = {
-    '@vue/babel-plugin-jsx': getAbsolutePathOfModule('@cabloy/vue-babel-plugin-jsx'),
-    '@vue/compiler-sfc': getAbsolutePathOfModule('@cabloy/vue-compiler-sfc'),
-    '@vue/runtime-core': getAbsolutePathOfModule('@cabloy/vue-runtime-core'),
-    '@vue/runtime-dom': getAbsolutePathOfModule('@cabloy/vue-runtime-dom'),
-    '@vue/reactivity': getAbsolutePathOfModule('@cabloy/vue-reactivity'),
-    'vue-router': getAbsolutePathOfModule('@cabloy/vue-router'),
+    '@vue/babel-plugin-jsx': '@cabloy/vue-babel-plugin-jsx',
+    '@vue/compiler-sfc': '@cabloy/vue-compiler-sfc',
+    '@vue/runtime-core': '@cabloy/vue-runtime-core',
+    '@vue/runtime-dom': '@cabloy/vue-runtime-dom',
+    '@vue/reactivity': '@cabloy/vue-reactivity',
+    'vue-router': '@cabloy/vue-router',
   };
   for (const key in alias) {
     moduleAlias.addAlias(key, alias[key]);

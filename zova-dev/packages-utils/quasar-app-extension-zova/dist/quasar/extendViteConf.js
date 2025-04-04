@@ -74,35 +74,25 @@ export function extendViteConf(context) {
             conf.define = mergeConfig(conf.define || {}, define);
         }
         // ssr
-        if (opts.isServer && (context.configMeta?.mode !== 'production')) {
+        if (opts.isServer && (context.configMeta?.mode === 'development')) {
             conf.ssr = mergeConfig(conf.ssr || {}, {
-            // external: [
-            //   'vue',
-            //   'pinia',
-            //   '@vue/runtime-core',
-            //   '@vue/reactivity',
-            //   '@cabloy/vue-reactivity',
-            //   '@cabloy/vue-runtime-core',
-            //   '@cabloy/vue-runtime-dom',
-            // ],
-            // noExternal:[
-            //     'vue',
-            //          'pinia',
-            //          '@vue/runtime-core',
-            //          '@vue/reactivity',
-            //          '@cabloy/vue-reactivity',
-            //          '@cabloy/vue-runtime-core',
-            //          '@cabloy/vue-runtime-dom',
-            //  ],
+                external: [
+                    'vue',
+                    'pinia',
+                    '@vue/runtime-core',
+                    '@vue/reactivity',
+                    '@vue/runtime-dom',
+                    '@cabloy/vue-reactivity',
+                    '@cabloy/vue-runtime-core',
+                    '@cabloy/vue-runtime-dom',
+                ],
+                optimizeDeps: {
+                    noDiscovery: false,
+                },
             });
         }
-        // ssr: vite-node
-        if (opts.isServer && context.configMeta?.mode === 'development' && process.env.SSR_VITE_NODE === 'true') {
-            // optimizeDeps
-            conf.optimizeDeps = mergeConfig(conf.optimizeDeps || {}, {
-                noDiscovery: true,
-            });
-            // logger
+        // ssr: logger
+        if (opts.isServer && context.configMeta?.mode === 'development') {
             const logger = createLogger();
             const loggerWarn = logger.warn;
             logger.warn = (msg, options) => {
