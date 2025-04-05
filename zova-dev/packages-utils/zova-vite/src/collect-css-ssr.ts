@@ -31,10 +31,11 @@ function getCssContent(mod) {
   return __vite_ssr_exports__.default;
 }
 
-/**
- * Collect SSR CSS for Vite
- */
 export const collectCss = (mods: ModuleNode[] | Set<ModuleNode>, styles = new Map(), checkedMods = new Set()) => {
+  return _collectCss(mods, styles, checkedMods);
+};
+
+function _collectCss(mods: ModuleNode[] | Set<ModuleNode>, styles = new Map(), checkedMods = new Set()) {
   let result = '';
 
   mods.forEach(mod => {
@@ -45,7 +46,7 @@ export const collectCss = (mods: ModuleNode[] | Set<ModuleNode>, styles = new Ma
     if (mod?.importedModules?.size > 0 && !checkedMods.has(mod.id)) {
       checkedMods.add(mod.id);
 
-      collectCss(mod.importedModules, styles, checkedMods);
+      _collectCss(mod.importedModules, styles, checkedMods);
     }
   });
 
