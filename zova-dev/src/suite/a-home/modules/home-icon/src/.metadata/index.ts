@@ -277,10 +277,12 @@ export class ScopeModuleHomeIcon extends BeanScopeBase {}
 export interface ScopeModuleHomeIcon {
   util: BeanScopeUtil;
 }
+
 declare module 'zova' {
   export interface IBeanScopeRecord {
     'home-icon': ScopeModuleHomeIcon;
   }
+
 }
 
 /** scope: end */
