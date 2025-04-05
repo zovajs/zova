@@ -88,6 +88,8 @@ export class AppIconBase extends BeanSimple {
     const icons = module.resource.icons;
     const groupUrl = icons[groupName];
     if (!groupUrl) return;
+    // inline
+    if (groupUrl.startsWith('data:image/svg+xml')) throw new Error('inline svg not supported');
     // fetch
     let svg;
     if (process.env.SERVER && process.env.DEV) {
