@@ -131,6 +131,9 @@ export function extendFiles(api: IndexAPI, flavor: string) {
     ).replace(
       "import { renderToString } from 'vue/server-renderer'",
       "import { renderToString } from '@cabloy/vue-server-renderer'",
+    ).replace(
+      "import serverEntry from './server/server-entry.js'",
+      "import serverEntry from './server-entry.js'",
     );
     fse.writeFileSync(fileSrc, contentNew);
   }

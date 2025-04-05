@@ -94,7 +94,7 @@ export function extendFiles(api, flavor) {
         const fileSrcBak = api.resolve.cli('templates/entry/ssr-prod-webserver-origin.js');
         copyTemplateIfNeed(fileSrc, fileSrcBak);
         const content = fse.readFileSync(fileSrcBak).toString();
-        const contentNew = content.replace("import { join, basename, isAbsolute } from 'node:path'", "import 'zova-vite/dist/ssrEntry.js'\nimport { join, basename, isAbsolute } from 'node:path'").replace("import { renderToString } from 'vue/server-renderer'", "import { renderToString } from '@cabloy/vue-server-renderer'");
+        const contentNew = content.replace("import { join, basename, isAbsolute } from 'node:path'", "import 'zova-vite/dist/ssrEntry.js'\nimport { join, basename, isAbsolute } from 'node:path'").replace("import { renderToString } from 'vue/server-renderer'", "import { renderToString } from '@cabloy/vue-server-renderer'").replace("import serverEntry from './server/server-entry.js'", "import serverEntry from './server-entry.js'");
         fse.writeFileSync(fileSrc, contentNew);
     }
     async function prepareVuetify() {
