@@ -128,6 +128,9 @@ export function extendFiles(api: IndexAPI, flavor: string) {
     const contentNew = content.replace(
       "import { join, basename, isAbsolute } from 'node:path'",
       "import 'zova-vite/dist/ssrEntry.js'\nimport { join, basename, isAbsolute } from 'node:path'",
+    ).replace(
+      "import { renderToString } from 'vue/server-renderer'",
+      "import { renderToString } from '@cabloy/vue-server-renderer'",
     );
     fse.writeFileSync(fileSrc, contentNew);
   }
