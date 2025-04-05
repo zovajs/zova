@@ -43,16 +43,6 @@ const appPrefetch = typeof App.preFetch === 'function'
     )
 <% } %>
 
-<%
-  const bootEntries = boot.filter(asset => asset.server !== false)
-  if (bootEntries.length !== 0) { %>
-const bootFunctions = await Promise.all([
-  <% bootEntries.forEach((asset, index) => { %>
-  import('<%= asset.path %>')<%= index < bootEntries.length - 1 ? ',' : '' %>
-  <% }) %>
-]).then(bootFiles => bootFiles.map(entry => entry.default).filter(entry => typeof entry === 'function'))
-<% } %>
-
 // This is where we perform data-prefetching to determine the
 // state of our application before actually rendering it.
 // Since data fetching is async, this function is expected to
@@ -61,6 +51,16 @@ export default async ssrContext => {
     const {
       app
     } = await createQuasarApp(createApp, ssrContext)
+
+    <%
+      const bootEntries = boot.filter(asset => asset.server !== false)
+      if (bootEntries.length !== 0) { %>
+    const bootFunctions = await Promise.all([
+      <% bootEntries.forEach((asset, index) => { %>
+      import('<%= asset.path %>')<%= index < bootEntries.length - 1 ? ',' : '' %>
+      <% }) %>
+    ]).then(bootFiles => bootFiles.map(entry => entry.default).filter(entry => typeof entry === 'function'))
+    <% } %>
 
     <% if (bootEntries.length !== 0) { %>
     
