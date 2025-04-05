@@ -1,4 +1,4 @@
-import type { IDecoratorVueElement, IDecoratorVueModelOptions } from '../../decorator/vue/types.js';
+import type { IDecoratorVueElement, IDecoratorVueModelOptions } from '../../decorator/vueExtra/types.js';
 import type { BeanContainer } from '../beanContainer.js';
 import type { DefineModelOptions } from '../type.js';
 import { toLowerCaseFirstChar } from '@cabloy/word-utils';

@@ -1,5 +1,5 @@
-import type { IDecoratorVueElement } from '../../decorator/vue/types.js';
-import { useComputed } from '../../vue/computed.js';
+import type { IDecoratorVueElement } from '../../decorator/vueExtra/types.js';
+import { useComputed } from '../../vueExtra/computed.js';
 import { getVueDecoratorValue } from './utils.js';
 
 export function computed(

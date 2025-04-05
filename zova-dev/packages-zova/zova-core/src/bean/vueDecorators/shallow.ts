@@ -1,4 +1,4 @@
-import type { IDecoratorVueElement } from '../../decorator/vue/types.js';
+import type { IDecoratorVueElement } from '../../decorator/vueExtra/types.js';
 import { shallowReactive } from 'vue';
 import { getVueDecoratorValue, setVueDecoratorValue } from './utils.js';
 

@@ -1,4 +1,4 @@
-import type { IDecoratorVueElement, IDecoratorVueWatchOptions } from '../../decorator/vue/types.js';
+import type { IDecoratorVueElement, IDecoratorVueWatchOptions } from '../../decorator/vueExtra/types.js';
 import { onControllerMounted } from '../../composables/onControllerMounted.js';
 
 export function controllerMounted(

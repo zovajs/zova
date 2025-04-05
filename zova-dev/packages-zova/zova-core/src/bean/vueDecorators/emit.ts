@@ -1,4 +1,4 @@
-import type { IDecoratorVueElement, IDecoratorVueEmitOptions } from '../../decorator/vue/types.js';
+import type { IDecoratorVueElement, IDecoratorVueEmitOptions } from '../../decorator/vueExtra/types.js';
 import { isPromise } from '@cabloy/utils';
 import { toLowerCaseFirstChar } from '@cabloy/word-utils';
 import { getVueDecoratorValue } from './utils.js';

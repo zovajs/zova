@@ -11,7 +11,7 @@ import type {
 import { evaluateExpressions } from '@cabloy/utils';
 import { appMetadata } from '../../core/metadata.js';
 import { appResource } from '../../core/resource.js';
-import { useRef } from '../../vue/ref.js';
+import { useRef } from '../../vueExtra/ref.js';
 
 export function Use(options?: IDecoratorUseOptions): PropertyDecorator & MethodDecorator;
 export function Use<T extends keyof IBeanRecord>(beanFullName?: T): PropertyDecorator & MethodDecorator;
