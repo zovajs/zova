@@ -1,5 +1,7 @@
 import type { ModuleNode } from 'vite';
 
+export const SymbolCssResult = Symbol('vite-ssr-css-result');
+
 const hashCode = (moduleId: string) => {
   let hash = 0;
   let i;
@@ -21,6 +23,7 @@ const moduleIsStyle = (mod: ModuleNode) =>
     (mod?.ssrModule || mod?.ssrTransformResult);
 
 function getCssContent(mod) {
+  if (mod._ssrModule?.[SymbolCssResult]) return mod._ssrModule[SymbolCssResult];
   if (mod.ssrModule) return mod.ssrModule.default;
   const __vite_ssr_exports__ = { default: '' };
   // eslint-disable-next-line
