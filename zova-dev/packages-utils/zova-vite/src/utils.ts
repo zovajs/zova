@@ -19,7 +19,7 @@ export function getEnvMeta(configMeta: ZovaConfigMeta) {
 }
 
 export function getOutDir() {
-  return process.env.BUILD_OUTDIR || `dist/${process.env.META_APP_MODE}`;
+  return process.env.BUILD_OUTDIR || `dist/${process.env.META_APP_MODE || getAppMode()}`;
 }
 
 export function getEnvFromCli(

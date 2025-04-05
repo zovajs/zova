@@ -184,9 +184,6 @@ export function extendFilesThree(api: IndexAPI, _flavor: string) {
     copyTemplateIfNeed(fileSrc, fileSrcBak);
     const content = fse.readFileSync(fileSrcBak).toString();
     const contentNew = content.replace(
-      "import { join, basename, isAbsolute } from 'node:path'",
-      "import 'zova-vite/dist/ssrEntry.js'\nimport { join, basename, isAbsolute } from 'node:path'",
-    ).replace(
       "import { renderToString } from 'vue/server-renderer'",
       "import { renderToString } from '@cabloy/vue-server-renderer'",
     ).replace(

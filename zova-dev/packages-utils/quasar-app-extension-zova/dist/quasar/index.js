@@ -16,8 +16,8 @@ export async function quasar(api) {
     const flavor = getFlavor();
     // files
     await extendFilesOne(api, flavor)();
-    // files
     await extendFilesTwo(api, flavor)();
+    await extendFilesThree(api, flavor)();
     // context
     const context = { configMeta: undefined, configOptions: undefined, zovaViteMeta: undefined };
     // config
@@ -30,8 +30,6 @@ export async function quasar(api) {
     });
     // before build
     api.beforeBuild(async (api, { quasarConf }) => {
-        // files
-        await extendFilesThree(api, flavor)();
         printBanner(context, flavor)(quasarConf, api);
     });
     // after build
