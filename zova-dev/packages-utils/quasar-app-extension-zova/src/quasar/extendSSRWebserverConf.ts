@@ -7,5 +7,6 @@ export function extendSSRWebserverConf(_context: ConfigContext) {
     conf.minify = process.env.BUILD_MINIFY === 'true';
     conf.bundle = true;
     conf.external = [];
+    conf.banner = { js: 'import { createRequire } from \'module\';const require = createRequire(import.meta.url);' };
   };
 }
