@@ -1,7 +1,7 @@
 import type { IndexAPI } from '@quasar/app-vite';
 import type { ConfigContext, QuasarConf } from './types.js';
 import path from 'node:path';
-import { loadJSONFile, saveJSONFile } from '../utils.js';
+import { saveJSONFile } from '../utils.js';
 
 export function extendAfterBuild(context: ConfigContext, _flavor: string) {
   return async function extendAfterBuild(conf: QuasarConf, api: IndexAPI) {
@@ -9,8 +9,6 @@ export function extendAfterBuild(context: ConfigContext, _flavor: string) {
     if (appMode === 'ssr') {
       // env
       await generateEnvJson(conf);
-      // package.json
-      await patchPackage(conf);
     }
   };
 
@@ -23,15 +21,15 @@ export function extendAfterBuild(context: ConfigContext, _flavor: string) {
     await saveJSONFile(envFile, env);
   }
 
-  async function patchPackage(conf: QuasarConf) {
-    const pkgFile = path.join(conf.build!.distDir!, 'package.json');
-    const pkg = await loadJSONFile(pkgFile);
-    const deps = pkg.dependencies;
-    for (const key in deps) {
-      if (key.startsWith('zova-module-')) {
-        delete deps[key];
-      }
-    }
-    await saveJSONFile(pkgFile, pkg);
-  }
+  // async function patchPackage(conf: QuasarConf) {
+  //   const pkgFile = path.join(conf.build!.distDir!, 'package.json');
+  //   const pkg = await loadJSONFile(pkgFile);
+  //   const deps = pkg.dependencies;
+  //   for (const key in deps) {
+  //     if (key.startsWith('zova-module-')) {
+  //       delete deps[key];
+  //     }
+  //   }
+  //   await saveJSONFile(pkgFile, pkg);
+  // }
 }

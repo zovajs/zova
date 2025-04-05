@@ -8,6 +8,7 @@ export async function loadJSONFile(fileName) {
     return JSON.parse(pkgContent);
 }
 export async function saveJSONFile(fileName, json) {
-    await fse.writeFile(fileName, `${JSON.stringify(json, null, 2)}\n`);
+    // should use sync, but not known why
+    fse.outputFileSync(fileName, `${JSON.stringify(json, null, 2)}\n`);
 }
 //# sourceMappingURL=utils.js.map
