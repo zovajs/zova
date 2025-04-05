@@ -55,6 +55,7 @@ export function setModuleAlias() {
     '@vue/runtime-core': '@cabloy/vue-runtime-core',
     '@vue/runtime-dom': '@cabloy/vue-runtime-dom',
     '@vue/reactivity': '@cabloy/vue-reactivity',
+    '@vue/server-renderer': '@cabloy/vue-server-renderer',
     'vue-router': '@cabloy/vue-router',
   };
   for (const key in alias) {

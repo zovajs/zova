@@ -82,9 +82,11 @@ export function extendViteConf(context) {
                     '@vue/runtime-core',
                     '@vue/reactivity',
                     '@vue/runtime-dom',
+                    '@vue/server-renderer',
                     '@cabloy/vue-reactivity',
                     '@cabloy/vue-runtime-core',
                     '@cabloy/vue-runtime-dom',
+                    '@cabloy/vue-server-renderer',
                 ],
                 optimizeDeps: {
                     noDiscovery: false,

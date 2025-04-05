@@ -68,6 +68,7 @@
     "@cabloy/vue-router": "^4.4.8",
     "@cabloy/vue-runtime-core": "^3.5.18",
     "@cabloy/vue-runtime-dom": "^3.5.13",
+    "@cabloy/vue-server-renderer": "^3.5.18",
     "@cabloy/word-utils": "workspace:^",
     "@types/js-cookie": "^3.0.6",
     "@vue/reactivity": "^3.5.6",

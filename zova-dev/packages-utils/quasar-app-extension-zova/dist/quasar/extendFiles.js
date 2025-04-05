@@ -84,7 +84,8 @@ export function extendFiles(api, flavor) {
 
         let html = renderTemplate(ssrContext)`)
             .replace('<div id="q-app">${ runtimePageContent }</div>', '<div id="q-app">${ runtimePageContent }</div>${ renderTeleports(ssrContext.teleports) }')
-            .replace('viteServer.ssrFixStacktrace(err)', 'console.error(err)');
+            .replace('viteServer.ssrFixStacktrace(err)', 'console.error(err)')
+            .replace("getPackage('vue/server-renderer'", "getPackage('@cabloy/vue-server-renderer'");
         fse.writeFileSync(fileSrc, contentNew);
     }
     // ssr-prod-webserver.js

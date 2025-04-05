@@ -111,6 +111,10 @@ export function extendFiles(api: IndexAPI, flavor: string) {
       .replace(
         'viteServer.ssrFixStacktrace(err)',
         'console.error(err)',
+      )
+      .replace(
+        "getPackage('vue/server-renderer'",
+        "getPackage('@cabloy/vue-server-renderer'",
       );
     fse.writeFileSync(fileSrc, contentNew);
   }
