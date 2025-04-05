@@ -53,14 +53,6 @@ export function extendFilesTwo(api: IndexAPI, _flavor: string) {
     await _handleSSRDevServer();
     // ssr: ssr-builder.js
     await _handleSSRBuilder();
-    // ssr: ssr-prod-webserver.js
-    await _handleSSRProdWebserver();
-  }
-
-  function copyTemplateIfNeed(fileSrc, fileDest) {
-    if (!fse.existsSync(fileDest)) {
-      fse.copyFileSync(fileSrc, fileDest);
-    }
   }
 
   // html-template
@@ -156,6 +148,35 @@ export function extendFilesTwo(api: IndexAPI, _flavor: string) {
     fse.writeFileSync(fileSrc, contentNew);
   }
 
+  async function prepareVuetify() {
+    let modulePath;
+    try {
+      modulePath = getAbsolutePathOfModule('vuetify', 'lib/framework.mjs');
+    } catch (_) {}
+    if (!modulePath) return;
+    // copy
+    fse.copyFileSync(
+      resolveTemplatePath('vuetify/composables/hydration.mjs'),
+      path.join(modulePath, 'lib/composables/hydration.mjs'),
+    );
+    fse.copyFileSync(
+      resolveTemplatePath('vuetify/composables/ssrBoot.mjs'),
+      path.join(modulePath, 'lib/composables/ssrBoot.mjs'),
+    );
+  }
+}
+
+export function extendFilesThree(api: IndexAPI, _flavor: string) {
+  return async function extendFiles() {
+    // patch templates
+    await patchTemplates();
+  };
+
+  async function patchTemplates() {
+    // ssr: ssr-prod-webserver.js
+    await _handleSSRProdWebserver();
+  }
+
   // ssr-prod-webserver.js
   async function _handleSSRProdWebserver() {
     const fileSrc = api.resolve.cli('templates/entry/ssr-prod-webserver.js');
@@ -173,23 +194,6 @@ export function extendFilesTwo(api: IndexAPI, _flavor: string) {
       `import serverEntry from 'app/${getOutDir()}/server/server-entry.js'`,
     );
     fse.writeFileSync(fileSrc, contentNew);
-  }
-
-  async function prepareVuetify() {
-    let modulePath;
-    try {
-      modulePath = getAbsolutePathOfModule('vuetify', 'lib/framework.mjs');
-    } catch (_) {}
-    if (!modulePath) return;
-    // copy
-    fse.copyFileSync(
-      resolveTemplatePath('vuetify/composables/hydration.mjs'),
-      path.join(modulePath, 'lib/composables/hydration.mjs'),
-    );
-    fse.copyFileSync(
-      resolveTemplatePath('vuetify/composables/ssrBoot.mjs'),
-      path.join(modulePath, 'lib/composables/ssrBoot.mjs'),
-    );
   }
 }
 

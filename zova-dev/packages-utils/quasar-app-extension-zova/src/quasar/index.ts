@@ -9,7 +9,7 @@ import type { IndexAPI } from '@quasar/app-vite';
 import type { ConfigContext } from './types.js';
 import { getFlavor } from 'zova-vite';
 import { extendAfterBuild } from './extendAfterBuild.js';
-import { extendFilesOne, extendFilesTwo } from './extendFiles.js';
+import { extendFilesOne, extendFilesThree, extendFilesTwo } from './extendFiles.js';
 import { extendQuasarConf } from './extendQuasarConf.js';
 import { extendSSRWebserverConf } from './extendSSRWebserverConf.js';
 import { extendViteConf } from './extendViteConf.js';

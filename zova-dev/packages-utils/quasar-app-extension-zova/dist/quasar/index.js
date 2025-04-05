@@ -6,7 +6,7 @@
  */
 import { getFlavor } from 'zova-vite';
 import { extendAfterBuild } from './extendAfterBuild.js';
-import { extendFilesOne, extendFilesTwo } from './extendFiles.js';
+import { extendFilesOne, extendFilesThree, extendFilesTwo } from './extendFiles.js';
 import { extendQuasarConf } from './extendQuasarConf.js';
 import { extendSSRWebserverConf } from './extendSSRWebserverConf.js';
 import { extendViteConf } from './extendViteConf.js';
@@ -16,20 +16,22 @@ export async function quasar(api) {
     const flavor = getFlavor();
     // files
     await extendFilesOne(api, flavor)();
+    // files
+    await extendFilesTwo(api, flavor)();
     // context
     const context = { configMeta: undefined, configOptions: undefined, zovaViteMeta: undefined };
     // config
     api.extendQuasarConf(extendQuasarConf(context, flavor));
     api.extendViteConf(extendViteConf(context));
     api.extendSSRWebserverConf(extendSSRWebserverConf(context));
-    // files
-    await extendFilesTwo(api, flavor)();
     // before dev
     api.beforeDev(async (api, { quasarConf }) => {
         printBanner(context, flavor)(quasarConf, api);
     });
     // before build
     api.beforeBuild(async (api, { quasarConf }) => {
+        // files
+        await extendFilesThree(api, flavor)();
         printBanner(context, flavor)(quasarConf, api);
     });
     // after build

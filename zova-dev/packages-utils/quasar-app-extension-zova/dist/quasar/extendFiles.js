@@ -46,13 +46,6 @@ export function extendFilesTwo(api, _flavor) {
         await _handleSSRDevServer();
         // ssr: ssr-builder.js
         await _handleSSRBuilder();
-        // ssr: ssr-prod-webserver.js
-        await _handleSSRProdWebserver();
-    }
-    function copyTemplateIfNeed(fileSrc, fileDest) {
-        if (!fse.existsSync(fileDest)) {
-            fse.copyFileSync(fileSrc, fileDest);
-        }
     }
     // html-template
     async function _handleSSRHtmlTemplate() {
@@ -108,15 +101,6 @@ export function extendFilesTwo(api, _flavor) {
             .replace("'render-template.js',", "this.ctx.appPaths.resolve.entry('render-template.js'),");
         fse.writeFileSync(fileSrc, contentNew);
     }
-    // ssr-prod-webserver.js
-    async function _handleSSRProdWebserver() {
-        const fileSrc = api.resolve.cli('templates/entry/ssr-prod-webserver.js');
-        const fileSrcBak = api.resolve.cli('templates/entry/ssr-prod-webserver-origin.js');
-        copyTemplateIfNeed(fileSrc, fileSrcBak);
-        const content = fse.readFileSync(fileSrcBak).toString();
-        const contentNew = content.replace("import { join, basename, isAbsolute } from 'node:path'", "import 'zova-vite/dist/ssrEntry.js'\nimport { join, basename, isAbsolute } from 'node:path'").replace("import { renderToString } from 'vue/server-renderer'", "import { renderToString } from '@cabloy/vue-server-renderer'").replace("import serverEntry from './server/server-entry.js'", `import serverEntry from 'app/${getOutDir()}/server/server-entry.js'`);
-        fse.writeFileSync(fileSrc, contentNew);
-    }
     async function prepareVuetify() {
         let modulePath;
         try {
@@ -128,6 +112,25 @@ export function extendFilesTwo(api, _flavor) {
         // copy
         fse.copyFileSync(resolveTemplatePath('vuetify/composables/hydration.mjs'), path.join(modulePath, 'lib/composables/hydration.mjs'));
         fse.copyFileSync(resolveTemplatePath('vuetify/composables/ssrBoot.mjs'), path.join(modulePath, 'lib/composables/ssrBoot.mjs'));
+    }
+}
+export function extendFilesThree(api, _flavor) {
+    return async function extendFiles() {
+        // patch templates
+        await patchTemplates();
+    };
+    async function patchTemplates() {
+        // ssr: ssr-prod-webserver.js
+        await _handleSSRProdWebserver();
+    }
+    // ssr-prod-webserver.js
+    async function _handleSSRProdWebserver() {
+        const fileSrc = api.resolve.cli('templates/entry/ssr-prod-webserver.js');
+        const fileSrcBak = api.resolve.cli('templates/entry/ssr-prod-webserver-origin.js');
+        copyTemplateIfNeed(fileSrc, fileSrcBak);
+        const content = fse.readFileSync(fileSrcBak).toString();
+        const contentNew = content.replace("import { join, basename, isAbsolute } from 'node:path'", "import 'zova-vite/dist/ssrEntry.js'\nimport { join, basename, isAbsolute } from 'node:path'").replace("import { renderToString } from 'vue/server-renderer'", "import { renderToString } from '@cabloy/vue-server-renderer'").replace("import serverEntry from './server/server-entry.js'", `import serverEntry from 'app/${getOutDir()}/server/server-entry.js'`);
+        fse.writeFileSync(fileSrc, contentNew);
     }
 }
 function copyTemplateIfNeed(fileSrc, fileDest) {
