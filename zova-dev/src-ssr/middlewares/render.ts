@@ -57,4 +57,9 @@ export default defineSsrMiddleware(({ app, resolve, render, serve }) => {
         }
       });
   });
+  if (process.env.DEV) {
+    process.on('uncaughtException', err => {
+      console.error(err);
+    });
+  }
 });
