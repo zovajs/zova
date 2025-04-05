@@ -41,7 +41,7 @@ export function extendViteConf(context: ConfigContext) {
     if (opts.isServer) {
       conf.build.assetsInlineLimit = (filePath: string) => {
         if (__SvgIconPattern.test(filePath)) {
-          return Infinity as any;
+          return false;
         }
       };
     }
