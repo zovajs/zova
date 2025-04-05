@@ -51,9 +51,8 @@ export default defineSsrMiddleware(({ app, resolve, render, serve }) => {
           // create a route (/src/routes) for an error page and redirect to it
           res.status(500).send('500 | Internal Server Error');
 
-          if (process.env.DEV) {
-            console.error(err.stack);
-          }
+          // should log error on dev/prod
+          console.error(err.stack);
         }
       });
   });
