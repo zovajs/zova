@@ -18,6 +18,10 @@ export function getEnvMeta(configMeta: ZovaConfigMeta) {
   return { flavor: configMeta.flavor, mode: configMeta.mode, appMode: configMeta.appMode, mine: 'mine' };
 }
 
+export function getOutDir() {
+  return process.env.BUILD_OUTDIR || `dist/${process.env.META_APP_MODE}`;
+}
+
 export function getEnvFromCli(
   cliEnvName: string,
   cliArgName: string,

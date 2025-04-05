@@ -1,15 +1,36 @@
 import type { IndexAPI } from '@quasar/app-vite';
 import path from 'node:path';
 import fse from 'fs-extra';
-import { getAbsolutePathOfModule } from 'zova-vite';
+import { getAbsolutePathOfModule, getOutDir } from 'zova-vite';
 import { resolveTemplatePath } from '../utils.js';
 
-export function extendFiles(api: IndexAPI, flavor: string) {
+export function extendFilesOne(api: IndexAPI, flavor: string) {
+  return async function extendFiles() {
+    // prepare templates
+    await prepareTemplates();
+  };
+
+  async function prepareTemplates() {
+    // ssr
+    if ((<any>api.ctx.mode).ssr) {
+      // prod
+      if (api.ctx.prod) {
+        copyTemplateIfNeed(resolveTemplatePath('env/.env.ssr.production'), api.resolve.app('env/.env.ssr.production'));
+      }
+      // admin/front
+      if (flavor === 'admin') {
+        copyTemplateIfNeed(resolveTemplatePath('env/.env.ssr.admin'), api.resolve.app('env/.env.ssr.admin'));
+      } else if (flavor === 'front') {
+        copyTemplateIfNeed(resolveTemplatePath('env/.env.ssr.front'), api.resolve.app('env/.env.ssr.front'));
+      }
+    }
+  }
+}
+
+export function extendFilesTwo(api: IndexAPI, _flavor: string) {
   return async function extendFiles() {
     // patch templates
     await patchTemplates();
-    // prepare templates
-    await prepareTemplates();
     // prepare vuetify
     await prepareVuetify();
   };
@@ -30,24 +51,10 @@ export function extendFiles(api: IndexAPI, flavor: string) {
     await _handleSSRHtmlTemplate();
     // ssr: ssr-devserver.js
     await _handleSSRDevServer();
+    // ssr: ssr-builder.js
+    await _handleSSRBuilder();
     // ssr: ssr-prod-webserver.js
     await _handleSSRProdWebserver();
-  }
-
-  async function prepareTemplates() {
-    // ssr
-    if ((<any>api.ctx.mode).ssr) {
-      // prod
-      if (api.ctx.prod) {
-        copyTemplateIfNeed(resolveTemplatePath('env/.env.ssr.production'), api.resolve.app('env/.env.ssr.production'));
-      }
-      // admin/front
-      if (flavor === 'admin') {
-        copyTemplateIfNeed(resolveTemplatePath('env/.env.ssr.admin'), api.resolve.app('env/.env.ssr.admin'));
-      } else if (flavor === 'front') {
-        copyTemplateIfNeed(resolveTemplatePath('env/.env.ssr.front'), api.resolve.app('env/.env.ssr.front'));
-      }
-    }
   }
 
   function copyTemplateIfNeed(fileSrc, fileDest) {
@@ -119,6 +126,36 @@ export function extendFiles(api: IndexAPI, flavor: string) {
     fse.writeFileSync(fileSrc, contentNew);
   }
 
+  // ssr-devserver.js
+  async function _handleSSRBuilder() {
+    const fileSrc = api.resolve.cli('lib/modes/ssr/ssr-builder.js');
+    const fileSrcBak = api.resolve.cli('lib/modes/ssr/ssr-builder-origin.js');
+    copyTemplateIfNeed(fileSrc, fileSrcBak);
+    const content = fse.readFileSync(fileSrcBak).toString();
+    const contentNew = content
+      .replace(
+        'await this.#buildWebserver()',
+        '',
+      )
+      .replace(
+        'await this.#copyWebserverFiles()',
+        '',
+      )
+      .replace(
+        'await this.#writePackageJson()',
+        '',
+      )
+      .replace(
+        "await this.buildWithVite('SSR Server', viteServerConfig)",
+        "await this.buildWithVite('SSR Server', viteServerConfig)\nawait this.#buildWebserver()",
+      )
+      .replace(
+        "'render-template.js',",
+        "this.ctx.appPaths.resolve.entry('render-template.js'),",
+      );
+    fse.writeFileSync(fileSrc, contentNew);
+  }
+
   // ssr-prod-webserver.js
   async function _handleSSRProdWebserver() {
     const fileSrc = api.resolve.cli('templates/entry/ssr-prod-webserver.js');
@@ -133,7 +170,7 @@ export function extendFiles(api: IndexAPI, flavor: string) {
       "import { renderToString } from '@cabloy/vue-server-renderer'",
     ).replace(
       "import serverEntry from './server/server-entry.js'",
-      "import serverEntry from './server-entry.js'",
+      `import serverEntry from 'app/${getOutDir()}/server/server-entry.js'`,
     );
     fse.writeFileSync(fileSrc, contentNew);
   }
@@ -153,5 +190,11 @@ export function extendFiles(api: IndexAPI, flavor: string) {
       resolveTemplatePath('vuetify/composables/ssrBoot.mjs'),
       path.join(modulePath, 'lib/composables/ssrBoot.mjs'),
     );
+  }
+}
+
+function copyTemplateIfNeed(fileSrc, fileDest) {
+  if (!fse.existsSync(fileDest)) {
+    fse.copyFileSync(fileSrc, fileDest);
   }
 }

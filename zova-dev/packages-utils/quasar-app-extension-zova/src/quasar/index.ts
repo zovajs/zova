@@ -9,7 +9,7 @@ import type { IndexAPI } from '@quasar/app-vite';
 import type { ConfigContext } from './types.js';
 import { getFlavor } from 'zova-vite';
 import { extendAfterBuild } from './extendAfterBuild.js';
-import { extendFiles } from './extendFiles.js';
+import { extendFilesOne, extendFilesTwo } from './extendFiles.js';
 import { extendQuasarConf } from './extendQuasarConf.js';
 import { extendSSRWebserverConf } from './extendSSRWebserverConf.js';
 import { extendViteConf } from './extendViteConf.js';
@@ -19,7 +19,9 @@ export async function quasar(api: IndexAPI) {
   // flavor
   const flavor = getFlavor();
   // files
-  await extendFiles(api, flavor)();
+  await extendFilesOne(api, flavor)();
+  // files
+  await extendFilesTwo(api, flavor)();
   // context
   const context = { configMeta: undefined, configOptions: undefined, zovaViteMeta: undefined } as ConfigContext;
   // config
@@ -32,6 +34,8 @@ export async function quasar(api: IndexAPI) {
   });
   // before build
   api.beforeBuild(async (api, { quasarConf }) => {
+    // files
+    await extendFilesThree(api, flavor)();
     printBanner(context, flavor)(quasarConf, api);
   });
   // after build

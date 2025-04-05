@@ -4,7 +4,7 @@ import type { ZovaViteConfigOptions, ZovaViteConfigResult } from './types.ts';
 import path from 'node:path';
 import { createConfigUtils } from './configUtils.ts';
 import { generateEntryFiles } from './generateEntryFiles.ts';
-import { setModuleAlias } from './utils.ts';
+import { getOutDir, setModuleAlias } from './utils.ts';
 import { generateVitePlugins } from './vitePlugins.ts';
 
 const __SvgIconPattern = /\.metadata\/icons\/groups\/.*?\.svg/;
@@ -80,7 +80,7 @@ export async function generateZovaViteMeta(
   }
 
   function __getConfigBuild() {
-    const outDir = path.join(configOptions.appDir, process.env.BUILD_OUTDIR || `dist/${process.env.META_APP_MODE}`);
+    const outDir = getOutDir();
     const build = {
       outDir,
       rollupOptions: {
