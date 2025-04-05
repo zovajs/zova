@@ -104,9 +104,9 @@ export class AppResource extends BeanSimple {
   }
 
   _fixClassName(className: string) {
-    const ch = className.charAt(className.length - 1);
-    if (ch === '2') return className.substring(0, className.length - 1);
-    // if (ch >= '0' && ch <= '9') return className.substring(0, className.length - 1);
+    while (className.endsWith('2')) {
+      className = className.substring(0, className.length - 1);
+    }
     return className;
   }
 
