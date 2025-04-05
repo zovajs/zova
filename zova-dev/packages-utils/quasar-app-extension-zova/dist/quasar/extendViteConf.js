@@ -93,6 +93,13 @@ export function extendViteConf(context) {
                 },
             });
         }
+        // ssr
+        if (opts.isServer && (context.configMeta?.mode === 'production')) {
+            conf.ssr = mergeConfig(conf.ssr || {}, {
+                target: 'node',
+            });
+            conf.ssr.noExternal = true;
+        }
         // ssr: logger
         if (opts.isServer && context.configMeta?.mode === 'development') {
             const logger = createLogger();
