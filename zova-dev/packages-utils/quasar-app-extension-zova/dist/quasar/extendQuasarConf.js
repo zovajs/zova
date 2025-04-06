@@ -46,7 +46,7 @@ export function extendQuasarConf(context, flavor) {
         // devServer
         conf.devServer = mergeConfig(conf.devServer || {}, zovaViteMeta.viteConfig.server);
         // ssr: middlewares
-        const ssrMiddlewares = ['env'].concat(conf.ssr?.middlewares || []).concat('render');
+        const ssrMiddlewares = [mode === 'production' ? 'env' : ''].concat(conf.ssr?.middlewares || []).concat('render');
         // ssr
         conf.ssr = mergeConfig(conf.ssr || {}, {
             middlewares: ssrMiddlewares,
