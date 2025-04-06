@@ -5,6 +5,7 @@ import type { ConfigContext } from './types.js';
 export function extendSSRWebserverConf(_context: ConfigContext) {
   return function extendSSRWebserverConf(conf: BuildOptions, _api: IndexAPI) {
     conf.minify = process.env.BUILD_MINIFY === 'true';
+    conf.keepNames = true;
     conf.bundle = true;
     conf.external = [];
     conf.banner = { js: 'import { createRequire } from \'module\';const require = createRequire(import.meta.url);' };
