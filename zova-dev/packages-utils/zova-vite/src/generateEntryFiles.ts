@@ -5,12 +5,13 @@ import path from 'node:path';
 import { getEnvFiles } from '@cabloy/dotenv';
 import chalk from 'chalk';
 import fse from 'fs-extra';
-import { copyTemplateFile, getEnvMeta, resolveTemplatePath } from './utils.ts';
+import { copyTemplateFile, getEnvMeta, resolveTemplatePath, saveJSONFile } from './utils.ts';
 
 export async function generateEntryFiles(
   configMeta: ZovaConfigMeta,
   configOptions: ZovaViteConfigOptions,
   modulesMeta: Awaited<ReturnType<typeof glob>>,
+  env: Record<string, string>,
 ) {
   // config
   await __generateConfig();
@@ -18,6 +19,8 @@ export async function generateEntryFiles(
   await __generateModulesMeta();
   // app component
   await __generateAppComponent();
+  // env json
+  await __generateEnvJson();
 
   //////////////////////////////
 
@@ -78,6 +81,16 @@ export async function generateEntryFiles(
     const fileDest = path.join(configOptions.appDir, configOptions.runtimeDir, 'modules-meta.ts');
     await fse.ensureDir(path.join(configOptions.appDir, configOptions.runtimeDir));
     await copyTemplateFile(fileSrc, fileDest, { modules, moduleNames });
+  }
+
+  async function __generateEnvJson() {
+    if (configMeta.mode !== 'production') return;
+    const env2 = Object.assign({}, env, {
+      SERVER: true,
+      CLIENT: false,
+    });
+    const envFile = path.join(configOptions.appDir, configOptions.runtimeDir, '.env.json');
+    await saveJSONFile(envFile, env2);
   }
 
   // import tmp from 'tmp';

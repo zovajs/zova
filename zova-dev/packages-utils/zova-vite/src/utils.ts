@@ -95,3 +95,12 @@ export async function copyTemplateFile(fileSrc: URL | string, fileDest: string, 
   const contentDest = template(variables);
   await fse.writeFile(fileDest, contentDest, 'utf-8');
 }
+
+export async function loadJSONFile(fileName: URL | string) {
+  const pkgContent = (await fse.readFile(fileName)).toString();
+  return JSON.parse(pkgContent);
+}
+
+export async function saveJSONFile(fileName: URL | string, json: object) {
+  await fse.writeFile(fileName, `${JSON.stringify(json, null, 2)}\n`);
+}

@@ -42,7 +42,7 @@ export async function generateZovaViteMeta(
     },
   };
   // generateEntryFiles
-  await generateEntryFiles(configMeta, configOptions, modulesMeta);
+  await generateEntryFiles(configMeta, configOptions, modulesMeta, env);
   // ok
   return {
     env,
