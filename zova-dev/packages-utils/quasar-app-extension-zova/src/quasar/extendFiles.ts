@@ -175,6 +175,8 @@ export function extendFilesThree(api: IndexAPI, _flavor: string) {
   async function patchTemplates() {
     // ssr: ssr-prod-webserver.js
     await _handleSSRProdWebserver();
+    // ssr: ssr-prod-handler.js
+    await _handleSSRProdHandler();
   }
 
   // ssr-prod-webserver.js
@@ -192,6 +194,14 @@ export function extendFilesThree(api: IndexAPI, _flavor: string) {
       'process.env.SSR_PROD_PORT',
     );
     fse.writeFileSync(fileSrc, contentNew);
+  }
+
+  // ssr-prod-handler.js
+  async function _handleSSRProdHandler() {
+    fse.copyFileSync(
+      resolveTemplatePath('entry/ssr-prod-handler.js_'),
+      (api.resolve as any).entry('ssr-prod-handler.js'),
+    );
   }
 }
 
