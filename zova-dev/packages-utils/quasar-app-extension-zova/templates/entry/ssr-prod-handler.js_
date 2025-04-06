@@ -1,7 +1,6 @@
 import { renderToString } from '@cabloy/vue-server-renderer';
 import env from 'app/.zova/.env.json';
 import serverEntry from 'app/dist/ssr/server/server-entry.js';
-import { renderPreloadTag } from 'app/src-ssr/server';
 import renderTemplate from './render-template.js';
 
-export { env, renderPreloadTag, renderTemplate, renderToString, serverEntry };
+export { env, renderTemplate, renderToString, serverEntry };

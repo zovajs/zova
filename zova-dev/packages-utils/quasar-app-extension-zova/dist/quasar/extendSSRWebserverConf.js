@@ -7,8 +7,8 @@ export function extendSSRWebserverConf(_context) {
         conf.external = [];
         conf.banner = { js: 'import { createRequire } from \'module\';const require = createRequire(import.meta.url);' };
         conf.entryPoints = [
-            { in: api.resolve.entry('ssr-prod-webserver.js'), out: 'index.js' },
-            { in: api.resolve.entry('ssr-prod-handler.js'), out: 'entry.js' },
+            { in: api.resolve.entry('ssr-prod-webserver.js'), out: 'index' },
+            { in: api.resolve.entry('ssr-prod-handler.js'), out: 'entry' },
         ];
         conf.outdir = getOutDir();
         delete conf.outfile;
