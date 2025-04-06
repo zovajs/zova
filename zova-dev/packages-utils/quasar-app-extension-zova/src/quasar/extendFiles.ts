@@ -179,10 +179,8 @@ export function extendFilesThree(api: IndexAPI, _flavor: string) {
 
   // ssr-prod-webserver.js
   async function _handleSSRProdWebserver() {
-    const fileSrc = api.resolve.cli('templates/entry/ssr-prod-webserver.js');
-    const fileSrcBak = api.resolve.cli('templates/entry/ssr-prod-webserver-origin.js');
-    copyTemplateIfNeed(fileSrc, fileSrcBak);
-    const content = fse.readFileSync(fileSrcBak).toString();
+    const fileSrc = (api.resolve as any).entry('ssr-prod-webserver.js');
+    const content = fse.readFileSync(fileSrc).toString();
     const contentNew = content.replace(
       "import { renderToString } from 'vue/server-renderer'",
       "import { renderToString } from '@cabloy/vue-server-renderer'",

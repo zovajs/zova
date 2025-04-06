@@ -21,7 +21,6 @@ export async function quasar(api: IndexAPI) {
   // files
   await extendFilesOne(api, flavor)();
   await extendFilesTwo(api, flavor)();
-  await extendFilesThree(api, flavor)();
   // context
   const context = { configMeta: undefined, configOptions: undefined, zovaViteMeta: undefined } as ConfigContext;
   // config
@@ -30,15 +29,15 @@ export async function quasar(api: IndexAPI) {
   api.extendSSRWebserverConf(extendSSRWebserverConf(context));
   // before dev
   api.beforeDev(async (api, { quasarConf }) => {
-    printBanner(context, flavor)(quasarConf, api);
+    printBanner(context, flavor, true)(quasarConf, api);
   });
   // before build
-  api.beforeBuild(async (api, { quasarConf }) => {
-    printBanner(context, flavor)(quasarConf, api);
+  api.beforeBuild(async _api => {
+    await extendFilesThree(api, flavor)();
   });
   // after build
   api.afterBuild(async (api, { quasarConf }) => {
-    printBanner(context, flavor)(quasarConf, api);
+    printBanner(context, flavor, false)(quasarConf, api);
     extendAfterBuild(context, flavor)(quasarConf, api);
   });
 }
