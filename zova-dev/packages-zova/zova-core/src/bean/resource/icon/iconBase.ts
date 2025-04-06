@@ -92,10 +92,18 @@ export class AppIconBase extends BeanSimple {
     if (groupUrl.startsWith('data:image/svg+xml')) throw new Error('inline svg not supported');
     // fetch
     let svg;
-    if (process.env.SERVER && process.env.DEV) {
+    if (process.env.SERVER) {
       const path = await import('node:path');
       const fs = await import('node:fs/promises');
-      svg = await fs.readFile(path.join(process.cwd(), groupUrl), { encoding: 'utf8' });
+      let filePath: string;
+      if (process.env.DEV) {
+        filePath = path.join(process.cwd(), groupUrl);
+      } else {
+        const { fileURLToPath } = await import('node:url');
+        const rootFolder = fileURLToPath(new URL('.', import.meta.url));
+        filePath = path.join(rootFolder, 'client', groupUrl);
+      }
+      svg = await fs.readFile(filePath, { encoding: 'utf8' });
     } else {
       const res = await fetch(groupUrl);
       if (!res.ok) return;
