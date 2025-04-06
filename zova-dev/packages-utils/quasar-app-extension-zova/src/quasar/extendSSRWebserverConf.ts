@@ -12,7 +12,7 @@ export function extendSSRWebserverConf(_context: ConfigContext) {
     conf.banner = { js: 'import { createRequire } from \'module\';const require = createRequire(import.meta.url);' };
     conf.entryPoints = [
       { in: (api.resolve as any).entry('ssr-prod-webserver.js'), out: 'index' },
-      { in: (api.resolve as any).entry('ssr-prod-handler.js'), out: 'entry' },
+      { in: (api.resolve as any).entry('ssr-prod-handler.js'), out: 'handler' },
     ];
     conf.outdir = getOutDir();
     delete conf.outfile;
