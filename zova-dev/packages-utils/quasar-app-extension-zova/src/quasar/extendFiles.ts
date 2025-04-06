@@ -187,6 +187,9 @@ export function extendFilesThree(api: IndexAPI, _flavor: string) {
     ).replace(
       "import serverEntry from './server/server-entry.js'",
       `import serverEntry from 'app/${getOutDir()}/server/server-entry.js'`,
+    ).replace(
+      'process.env.PORT',
+      'process.env.SSR_PROD_PORT',
     );
     fse.writeFileSync(fileSrc, contentNew);
   }
