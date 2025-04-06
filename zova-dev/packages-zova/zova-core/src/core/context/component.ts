@@ -24,6 +24,7 @@ export class CtxComponent extends BeanSimple {
       return render.render();
     };
     instance.type.ssrRender = null;
+    instance.ssrRender = null;
   }
 
   /** @internal */
