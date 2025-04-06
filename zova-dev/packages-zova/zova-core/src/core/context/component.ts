@@ -21,9 +21,13 @@ export class CtxComponent extends BeanSimple {
         // throw new Error('render bean not found');
       }
       // need not use ctx.util.instanceScope, since ctx.instance = getCurrentInstance()
-      return self.ctx.util.instanceScope(() => {
+      if (process.env.SERVER && process.env.PROD) {
+        return self.ctx.util.instanceScope(() => {
+          return render.render();
+        });
+      } else {
         return render.render();
-      });
+      }
     };
     instance.type.ssrRender = null;
     instance.ssrRender = null;
