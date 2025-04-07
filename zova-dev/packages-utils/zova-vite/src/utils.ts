@@ -43,10 +43,14 @@ export function resolveTemplatePath(file: string) {
   return new URL(path.join('../templates', file), import.meta.url);
 }
 
-export function generateConfigDefine(env) {
+export function generateConfigDefine(env, translates?: string[]) {
   const acc = {};
   for (const key in env) {
-    acc[`process.env.${key}`] = JSON.stringify(env[key]);
+    if (!translates || translates.includes(key)) {
+      acc[`process.env.${key}`] = JSON.stringify(env[key]);
+    } else {
+      acc[`process.env.${key}`] = `process.env.ZOVA_${key}`;
+    }
   }
   return acc;
 }

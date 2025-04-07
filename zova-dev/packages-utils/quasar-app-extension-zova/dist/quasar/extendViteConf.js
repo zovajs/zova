@@ -60,17 +60,7 @@ export function extendViteConf(context) {
         }
         else {
             // env: special for dist files
-            const define = generateConfigDefine({
-                NODE_ENV: env.NODE_ENV,
-                META_FLAVOR: env.META_FLAVOR,
-                META_MODE: env.META_MODE,
-                META_APP_MODE: env.META_APP_MODE,
-                SERVER: env.SERVER,
-                CLIENT: env.CLIENT,
-                DEV: env.DEV,
-                PROD: env.PROD,
-                SSR: env.SSR,
-            });
+            const define = generateConfigDefine(env, ['NODE_ENV', 'META_FLAVOR', 'META_MODE', 'META_APP_MODE', 'SERVER', 'CLIENT', 'DEV', 'PROD', 'SSR']);
             conf.define = mergeConfig(conf.define || {}, define);
         }
         // ssr
