@@ -1,6 +1,6 @@
-const __snippet_declare = 'import <%=argv.nameMeta.fullCapitalize%> from \'./.metadata/page/<%=argv.pageName%>.vue\';\n';
+const __snippet_declare = 'import { ZPage<%=argv.nameMeta.fullCapitalize%> } from \'./.metadata/page/<%=argv.pageName%>.js\';\n';
 const __snippet_body
-  = '{ path: \'<%=argv.moduleInfo.name!==argv.pageName?argv.pageName:""%>\', component: <%=argv.nameMeta.fullCapitalize%> },';
+  = '{ path: \'<%=argv.moduleInfo.name!==argv.pageName?argv.pageName:""%>\', component: ZPage<%=argv.nameMeta.fullCapitalize%> },';
 
 module.exports = {
   file: 'src/routes.ts',
