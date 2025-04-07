@@ -25,6 +25,9 @@ export class ModelUser extends BeanModelBase {
       const queryUser = this.getUserInfo();
       await queryUser.suspense();
       if (queryUser.isError) {
+        if (process.env.DEV) {
+          console.error(queryUser.error);
+        }
         this.$ssr.redirect('/login');
       }
       this.user = queryUser.data;
