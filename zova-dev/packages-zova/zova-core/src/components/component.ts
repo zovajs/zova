@@ -1,7 +1,7 @@
 import { defineAsyncComponent } from 'vue';
 import { useApp } from '../composables/useApp.js';
 
-export function createZovaComponent(module, name) {
+export function createZovaComponentAsync(module, name) {
   return defineAsyncComponent(() => {
     return new Promise(resolve => {
       const app = useApp();

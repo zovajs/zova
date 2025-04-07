@@ -101,7 +101,7 @@ function removeImports(context: ContextInfo) {
 
 function insertImport(path: NodePath<t.Program>) {
   const nodeImport = t.importDeclaration(
-    [t.importSpecifier(t.identifier('__z_createZovaComponent'), t.stringLiteral('createZovaComponent'))],
+    [t.importSpecifier(t.identifier('__z_createZovaComponentAsync'), t.stringLiteral('createZovaComponentAsync'))],
     t.stringLiteral('zova'),
   );
   path.get('body')[0].insertBefore(nodeImport);
@@ -113,7 +113,7 @@ function insertComponents(path: NodePath<t.Program>, context: ContextInfo) {
       const nodeComponent = t.variableDeclaration('const', [
         t.variableDeclarator(
           t.identifier(component.localName),
-          t.callExpression(t.identifier('__z_createZovaComponent'), [
+          t.callExpression(t.identifier('__z_createZovaComponentAsync'), [
             t.stringLiteral(_import.moduleInfo.relativeName),
             t.stringLiteral(parseRealComponentName(component.importName)),
           ]),
