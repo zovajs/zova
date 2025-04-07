@@ -13,11 +13,14 @@ import 'zova';
 
 export * from '../bean/meta.themeHandler.js';
 declare module 'zova' {
+
   export interface IMetaRecord {
     'devui-adapter:themeHandler': never;
   }
+
 }
 declare module 'zova-module-devui-adapter' {
+
   export interface MetaThemeHandler {
     /** @internal */
     get scope(): ScopeModuleDevuiAdapter;
@@ -38,10 +41,12 @@ export class ScopeModuleDevuiAdapter extends BeanScopeBase {}
 export interface ScopeModuleDevuiAdapter {
   util: BeanScopeUtil;
 }
+
 declare module 'zova' {
   export interface IBeanScopeRecord {
     'devui-adapter': ScopeModuleDevuiAdapter;
   }
+
 }
 
 /** scope: end */

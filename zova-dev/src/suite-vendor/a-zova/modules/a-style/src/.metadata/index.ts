@@ -13,8 +13,11 @@ import 'zova';
 import 'zova';
 
 export * from '../bean/bean.theme.js';
-declare module 'zova' {}
+declare module 'zova' {
+
+}
 declare module 'zova-module-a-style' {
+
   export interface BeanTheme {
     /** @internal */
     get scope(): ScopeModuleAStyle;
@@ -39,6 +42,7 @@ export interface ScopeModuleAStyle {
   util: BeanScopeUtil;
   config: TypeModuleConfig<typeof config>;
 }
+
 declare module 'zova' {
   export interface IBeanScopeRecord {
     'a-style': ScopeModuleAStyle;
@@ -47,6 +51,7 @@ declare module 'zova' {
   export interface IBeanScopeConfig {
     'a-style': ReturnType<typeof config>;
   }
+
 }
 
 /** scope: end */

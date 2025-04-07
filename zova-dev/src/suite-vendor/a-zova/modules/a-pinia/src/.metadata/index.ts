@@ -18,8 +18,12 @@ import 'zova';
 import 'zova';
 
 export * from '../bean/bean.piniaStoreBase.js';
-declare module 'zova' {}
-declare module 'zova-module-a-pinia' {}
+declare module 'zova' {
+
+}
+declare module 'zova-module-a-pinia' {
+
+}
 declare module 'zova' {
   export interface IBeanRecordGeneral {
     'a-pinia.bean.piniaStoreBase': BeanPiniaStoreBase;
@@ -29,11 +33,14 @@ declare module 'zova' {
 /** monkey: begin */
 export * from '../monkey.js';
 declare module 'zova-module-a-bean' {
+
   export interface IServiceRecord {
     'a-pinia:pinia': never;
   }
+
 }
 declare module 'zova-module-a-pinia' {
+
   export interface ServicePinia {
     /** @internal */
     get scope(): ScopeModuleAPinia;
@@ -54,10 +61,12 @@ export class ScopeModuleAPinia extends BeanScopeBase {}
 export interface ScopeModuleAPinia {
   util: BeanScopeUtil;
 }
+
 declare module 'zova' {
   export interface IBeanScopeRecord {
     'a-pinia': ScopeModuleAPinia;
   }
+
 }
 
 /** scope: end */

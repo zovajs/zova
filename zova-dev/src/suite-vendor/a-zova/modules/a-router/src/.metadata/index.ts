@@ -21,8 +21,11 @@ import 'zova';
 
 export * from '../bean/bean.router.js';
 export * from '../bean/bean.routerBase.js';
-declare module 'zova' {}
+declare module 'zova' {
+
+}
 declare module 'zova-module-a-router' {
+
   export interface BeanRouter {
     /** @internal */
     get scope(): ScopeModuleARouter;
@@ -38,11 +41,14 @@ declare module 'zova' {
 /** config: begin */
 export * from '../config/config.js';
 declare module 'zova-module-a-bean' {
+
   export interface IServiceRecord {
     'a-router:router': never;
   }
+
 }
 declare module 'zova-module-a-router' {
+
   export interface ServiceRouter {
     /** @internal */
     get scope(): ScopeModuleARouter;
@@ -67,6 +73,7 @@ export interface ScopeModuleARouter {
   util: BeanScopeUtil;
   config: TypeModuleConfig<typeof config>;
 }
+
 declare module 'zova' {
   export interface IBeanScopeRecord {
     'a-router': ScopeModuleARouter;
@@ -75,6 +82,7 @@ declare module 'zova' {
   export interface IBeanScopeConfig {
     'a-router': ReturnType<typeof config>;
   }
+
 }
 
 /** scope: end */

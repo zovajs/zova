@@ -21,8 +21,11 @@ import 'zova';
 
 export * from '../bean/bean.fetch.js';
 export * from '../bean/bean.interceptorBase.js';
-declare module 'zova' {}
+declare module 'zova' {
+
+}
 declare module 'zova-module-a-fetch' {
+
   export interface BeanFetch {
     /** @internal */
     get scope(): ScopeModuleAFetch;
@@ -38,11 +41,14 @@ declare module 'zova' {
 /** config: begin */
 export * from '../config/config.js';
 declare module 'zova-module-a-bean' {
+
   export interface IServiceRecord {
     'a-fetch:composer': never;
   }
+
 }
 declare module 'zova-module-a-fetch' {
+
   export interface ServiceComposer {
     /** @internal */
     get scope(): ScopeModuleAFetch;
@@ -67,6 +73,7 @@ export interface ScopeModuleAFetch {
   util: BeanScopeUtil;
   config: TypeModuleConfig<typeof config>;
 }
+
 declare module 'zova' {
   export interface IBeanScopeRecord {
     'a-fetch': ScopeModuleAFetch;
@@ -75,6 +82,7 @@ declare module 'zova' {
   export interface IBeanScopeConfig {
     'a-fetch': ReturnType<typeof config>;
   }
+
 }
 
 /** scope: end */

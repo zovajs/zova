@@ -1,13 +1,7 @@
 import { RequiredSome } from 'zova';
 /** locale: end */
 /** scope: begin */
-import {
-  BeanScopeBase,
-  BeanScopeUtil,
-  TypeLocaleBase,
-  TypeModuleConfig,
-  TypeModuleLocales,
-} from 'zova';
+import { BeanScopeBase, BeanScopeUtil, TypeLocaleBase, TypeModuleConfig, TypeModuleLocales } from 'zova';
 /** api: end */
 /** api: begin */
 
@@ -20,38 +14,28 @@ import { ApiMenu } from '../api/menu.js';
 /** controller: begin */
 import { ControllerEssentialLink } from '../component/essentialLink/controller.jsx';
 /** components: begin */
-import {
-  ControllerEssentialLinkEmits,
-  ControllerEssentialLinkSlots,
-} from '../component/essentialLink/controller.jsx';
-
+import { ControllerEssentialLinkEmits, ControllerEssentialLinkSlots } from '../component/essentialLink/controller.jsx';
 import { ControllerLayoutDefault } from '../component/layoutDefault/controller.jsx';
-import {
-  ControllerLayoutDefaultEmits,
-  ControllerLayoutDefaultSlots,
-} from '../component/layoutDefault/controller.jsx';
+import { ControllerLayoutDefaultEmits, ControllerLayoutDefaultSlots } from '../component/layoutDefault/controller.jsx';
+/** controller: end */
+
 /** render: end */
 /** render: begin */
 import { RenderContent } from '../component/layoutDefault/render.content.jsx';
 import { RenderHeader } from '../component/layoutDefault/render.header.jsx';
 import { RenderLayoutDefault } from '../component/layoutDefault/render.jsx';
-/** controller: end */
-
 import { RenderLocale } from '../component/layoutDefault/render.locale.jsx';
 import { RenderMenu } from '../component/layoutDefault/render.menu.jsx';
 import { RenderSidebar } from '../component/layoutDefault/render.sidebar.jsx';
 import { RenderTabs } from '../component/layoutDefault/render.tabs.jsx';
 import { RenderTheme } from '../component/layoutDefault/render.theme.jsx';
+
 import { RenderUser } from '../component/layoutDefault/render.user.jsx';
 /** style: end */
 /** style: begin */
 import { StyleLayoutDefault } from '../component/layoutDefault/style.js';
 import { ControllerLayoutEmpty } from '../component/layoutEmpty/controller.jsx';
-
-import {
-  ControllerLayoutEmptyEmits,
-  ControllerLayoutEmptySlots,
-} from '../component/layoutEmpty/controller.jsx';
+import { ControllerLayoutEmptyEmits, ControllerLayoutEmptySlots } from '../component/layoutEmpty/controller.jsx';
 import { config } from '../config/config.js';
 /** config: end */
 /** locale: begin */
@@ -63,6 +47,7 @@ import { ModelMenu } from '../model/menu.js';
 import ZEssentialLink from './component/essentialLink.vue';
 import ZLayoutDefault from './component/layoutDefault.vue';
 import ZLayoutEmpty from './component/layoutEmpty.vue';
+
 /** api: begin */
 import 'zova';
 import 'zova';
@@ -80,8 +65,11 @@ import 'zova';
 import 'zova';
 
 export * from '../api/menu.js';
-declare module 'zova' {}
+declare module 'zova' {
+
+}
 declare module 'zova-module-home-layout' {
+
   export interface ApiMenu {
     /** @internal */
     get scope(): ScopeModuleHomeLayout;
@@ -98,28 +86,18 @@ declare module 'zova' {
 /** api: end */
 /** openapi: begin */
 
-/** model: end */
+/** openapi: end */
 /** controller: begin */
 export * from '../component/essentialLink/controller.jsx';
-declare module 'zova' {}
-declare module 'zova-module-home-layout' {
-  export interface ModelMenu {
-    /** @internal */
-    get scope(): ScopeModuleHomeLayout;
-  }
-}
-declare module 'zova' {
-  export interface IBeanRecordGeneral {
-    'home-layout.model.menu': ModelMenu;
-  }
-}
 export * from '../component/layoutDefault/controller.jsx';
 /** components: end */
 /** render: begin */
 export * from '../component/layoutDefault/render.content.jsx';
-export * from '../component/layoutDefault/render.header.jsx';
-declare module 'zova' {}
+declare module 'zova' {
+
+}
 declare module 'zova-module-home-layout' {
+
   export interface ControllerEssentialLink {
     /** @internal */
     get scope(): ScopeModuleHomeLayout;
@@ -142,9 +120,9 @@ declare module 'zova' {
     'home-layout.controller.layoutEmpty': ControllerLayoutEmpty;
   }
 }
+export * from '../component/layoutDefault/render.header.jsx';
 export * from '../component/layoutDefault/render.jsx';
 export * from '../component/layoutDefault/render.locale.jsx';
-export * from '../component/layoutDefault/render.menu.jsx';
 export const components = {
   essentialLink: ZEssentialLink,
   layoutDefault: ZLayoutDefault,
@@ -164,10 +142,7 @@ declare module 'zova-module-home-layout' {
   }
 
   export interface ControllerEssentialLink {
-    $props: RequiredSome<
-      ControllerEssentialLinkProps,
-      keyof typeof ControllerEssentialLink.$propsDefault
-    >;
+    $props: RequiredSome<ControllerEssentialLinkProps, keyof typeof ControllerEssentialLink.$propsDefault>;
     $emit: ControllerEssentialLinkEmits;
     $slots: ControllerEssentialLinkSlots;
   }
@@ -177,10 +152,7 @@ declare module 'zova-module-home-layout' {
   }
 
   export interface ControllerLayoutDefault {
-    $props: RequiredSome<
-      ControllerLayoutDefaultProps,
-      keyof typeof ControllerLayoutDefault.$propsDefault
-    >;
+    $props: RequiredSome<ControllerLayoutDefaultProps, keyof typeof ControllerLayoutDefault.$propsDefault>;
     $emit: ControllerLayoutDefaultEmits;
     $slots: ControllerLayoutDefaultSlots;
   }
@@ -190,14 +162,12 @@ declare module 'zova-module-home-layout' {
   }
 
   export interface ControllerLayoutEmpty {
-    $props: RequiredSome<
-      ControllerLayoutEmptyProps,
-      keyof typeof ControllerLayoutEmpty.$propsDefault
-    >;
+    $props: RequiredSome<ControllerLayoutEmptyProps, keyof typeof ControllerLayoutEmpty.$propsDefault>;
     $emit: ControllerLayoutEmptyEmits;
     $slots: ControllerLayoutEmptySlots;
   }
 }
+export * from '../component/layoutDefault/render.menu.jsx';
 export * from '../component/layoutDefault/render.sidebar.jsx';
 export * from '../component/layoutDefault/render.tabs.jsx';
 export * from '../component/layoutDefault/render.theme.jsx';
@@ -206,15 +176,17 @@ export * from '../component/layoutDefault/render.user.jsx';
 /** style: begin */
 export * from '../component/layoutDefault/style.js';
 export * from '../component/layoutEmpty/controller.jsx';
-/** styles: end */
+/** model: end */
 /** config: begin */
 export * from '../config/config.js';
-/** openapi: end */
+/** styles: end */
 /** model: begin */
 export * from '../model/menu.js';
-export { default as ZEssentialLink } from './component/essentialLink.vue';
-declare module 'zova' {}
+declare module 'zova' {
+
+}
 declare module 'zova-module-home-layout' {
+
   export interface RenderContent {
     /** @internal */
     get scope(): ScopeModuleHomeLayout;
@@ -286,9 +258,13 @@ declare module 'zova-module-home-layout' {
   export interface RenderLayoutDefault extends StyleLayoutDefault {}
   export interface RenderUser extends StyleLayoutDefault {}
 }
-export { default as ZLayoutDefault } from './component/layoutDefault.vue';
-declare module 'zova' {}
+export { default as ZEssentialLink } from './component/essentialLink.vue';
+
+declare module 'zova' {
+
+}
 declare module 'zova-module-home-layout' {
+
   export interface StyleLayoutDefault {
     /** @internal */
     get scope(): ScopeModuleHomeLayout;
@@ -304,6 +280,24 @@ declare module 'zova' {
 /** styles: begin */
 declare module 'zova-module-home-layout' {
   export interface StyleLayoutDefault extends ControllerLayoutDefault {}
+}
+export { default as ZLayoutDefault } from './component/layoutDefault.vue';
+
+declare module 'zova' {
+
+}
+declare module 'zova-module-home-layout' {
+
+  export interface ModelMenu {
+    /** @internal */
+    get scope(): ScopeModuleHomeLayout;
+  }
+}
+
+declare module 'zova' {
+  export interface IBeanRecordGeneral {
+    'home-layout.model.menu': ModelMenu;
+  }
 }
 export { default as ZLayoutEmpty } from './component/layoutEmpty.vue';
 
@@ -336,9 +330,7 @@ declare module 'zova' {
   }
 }
 
-export function locale<K extends keyof (typeof locales)[TypeLocaleBase]>(
-  key: K,
-): `home-layout::${K}` {
+export function locale<K extends keyof (typeof locales)[TypeLocaleBase]>(key: K): `home-layout::${K}` {
   return `home-layout::${key}`;
 }
 /** scope: end */

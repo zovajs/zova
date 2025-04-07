@@ -18,12 +18,15 @@ import 'zova';
 export * from '../bean/interceptor.body.js';
 export * from '../bean/interceptor.jwt.js';
 declare module 'zova-module-a-fetch' {
+
   export interface IInterceptorRecord {
     'a-interceptor:body': IInterceptorOptionsBody;
     'a-interceptor:jwt': IInterceptorOptionsJwt;
   }
+
 }
 declare module 'zova-module-a-interceptor' {
+
   export interface InterceptorBody {
     /** @internal */
     get scope(): ScopeModuleAInterceptor;
@@ -51,6 +54,7 @@ export interface ScopeModuleAInterceptor {
   util: BeanScopeUtil;
   config: TypeModuleConfig<typeof config>;
 }
+
 declare module 'zova' {
   export interface IBeanScopeRecord {
     'a-interceptor': ScopeModuleAInterceptor;
@@ -59,6 +63,7 @@ declare module 'zova' {
   export interface IBeanScopeConfig {
     'a-interceptor': ReturnType<typeof config>;
   }
+
 }
 
 /** scope: end */

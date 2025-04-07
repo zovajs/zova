@@ -19,8 +19,12 @@ import 'zova';
 import 'zova';
 
 export * from '../bean/bean.modelBase.js';
-declare module 'zova' {}
-declare module 'zova-module-a-model' {}
+declare module 'zova' {
+
+}
+declare module 'zova-module-a-model' {
+
+}
 declare module 'zova' {
   export interface IBeanRecordGeneral {
     'a-model.bean.modelBase': BeanModelBase;
@@ -30,11 +34,14 @@ declare module 'zova' {
 /** config: begin */
 export * from '../config/config.js';
 declare module 'zova-module-a-bean' {
+
   export interface IServiceRecord {
     'a-model:storage': never;
   }
+
 }
 declare module 'zova-module-a-model' {
+
   export interface ServiceStorage {
     /** @internal */
     get scope(): ScopeModuleAModel;
@@ -59,6 +66,7 @@ export interface ScopeModuleAModel {
   util: BeanScopeUtil;
   config: TypeModuleConfig<typeof config>;
 }
+
 declare module 'zova' {
   export interface IBeanScopeRecord {
     'a-model': ScopeModuleAModel;
@@ -67,6 +75,7 @@ declare module 'zova' {
   export interface IBeanScopeConfig {
     'a-model': ReturnType<typeof config>;
   }
+
 }
 
 /** scope: end */

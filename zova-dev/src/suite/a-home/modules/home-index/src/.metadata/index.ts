@@ -15,8 +15,11 @@ import 'zova';
 import 'zova';
 
 export * from '../page/home/controller.jsx';
-declare module 'zova' {}
+declare module 'zova' {
+
+}
 declare module 'zova-module-home-index' {
+
   export interface ControllerPageHome {
     /** @internal */
     get scope(): ScopeModuleHomeIndex;
@@ -35,11 +38,19 @@ declare module 'zova' {
   export interface IPagePathRecord {
     '/home/index': undefined;
   }
-  export interface IPageNameRecord {}
+  export interface IPageNameRecord {
+
+  }
 }
-export const pagePathSchemas = {};
-export const pageNameSchemas = {};
-declare module 'zova-module-home-index' {}
+export const pagePathSchemas = {
+
+};
+export const pageNameSchemas = {
+
+};
+declare module 'zova-module-home-index' {
+
+}
 
 @Scope()
 export class ScopeModuleHomeIndex extends BeanScopeBase {}
@@ -47,10 +58,12 @@ export class ScopeModuleHomeIndex extends BeanScopeBase {}
 export interface ScopeModuleHomeIndex {
   util: BeanScopeUtil;
 }
+
 declare module 'zova' {
   export interface IBeanScopeRecord {
     'home-index': ScopeModuleHomeIndex;
   }
+
 }
 
 /** scope: end */

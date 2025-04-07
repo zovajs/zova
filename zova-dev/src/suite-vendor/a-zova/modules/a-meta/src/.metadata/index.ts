@@ -10,10 +10,12 @@ export class ScopeModuleAMeta extends BeanScopeBase {}
 export interface ScopeModuleAMeta {
   util: BeanScopeUtil;
 }
+
 declare module 'zova' {
   export interface IBeanScopeRecord {
     'a-meta': ScopeModuleAMeta;
   }
+
 }
 
 /** scope: end */

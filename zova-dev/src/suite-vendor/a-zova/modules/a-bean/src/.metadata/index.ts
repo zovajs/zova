@@ -18,8 +18,11 @@ import 'zova';
 import 'zova';
 
 export * from '../bean/bean.onion.js';
-declare module 'zova' {}
+declare module 'zova' {
+
+}
 declare module 'zova-module-a-bean' {
+
   export interface BeanOnion {
     /** @internal */
     get scope(): ScopeModuleABean;
@@ -35,11 +38,14 @@ declare module 'zova' {
 export * from '../service/aop.js';
 export * from '../service/onion_.js';
 declare module 'zova-module-a-bean' {
+
   export interface IServiceRecord {
     'a-bean:aop': never;
   }
+
 }
 declare module 'zova-module-a-bean' {
+
   export interface ServiceAop {
     /** @internal */
     get scope(): ScopeModuleABean;
@@ -57,10 +63,12 @@ export class ScopeModuleABean extends BeanScopeBase {}
 export interface ScopeModuleABean {
   util: BeanScopeUtil;
 }
+
 declare module 'zova' {
   export interface IBeanScopeRecord {
     'a-bean': ScopeModuleABean;
   }
+
 }
 
 /** scope: end */
