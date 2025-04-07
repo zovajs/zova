@@ -1,6 +1,8 @@
 import { getOutDir } from 'zova-vite';
-export function extendSSRWebserverConf(_context) {
+export function extendSSRWebserverConf(context) {
     return function extendSSRWebserverConf(conf, api) {
+        if (context.configMeta?.mode !== 'production')
+            return;
         conf.minify = process.env.BUILD_MINIFY === 'true';
         conf.keepNames = true;
         conf.bundle = true;

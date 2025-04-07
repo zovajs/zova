@@ -3,8 +3,9 @@ import type { BuildOptions } from 'esbuild';
 import type { ConfigContext } from './types.js';
 import { getOutDir } from 'zova-vite';
 
-export function extendSSRWebserverConf(_context: ConfigContext) {
+export function extendSSRWebserverConf(context: ConfigContext) {
   return function extendSSRWebserverConf(conf: BuildOptions, api: IndexAPI) {
+    if (context.configMeta?.mode !== 'production') return;
     conf.minify = process.env.BUILD_MINIFY === 'true';
     conf.keepNames = true;
     conf.bundle = true;
