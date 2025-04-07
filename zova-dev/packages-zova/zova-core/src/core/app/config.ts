@@ -31,7 +31,7 @@ export function configDefault() {
       prod: process.env.PROD,
     },
     api: {
-      baseURL: process.env.API_BASE_URL,
+      baseURL: process.env.SERVER ? process.env.SSR_API_BASE_URL : process.env.API_BASE_URL,
       prefix: process.env.API_PREFIX,
       jwt: process.env.API_JWT !== 'false',
     },

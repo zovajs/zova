@@ -5,12 +5,7 @@ import { uuid as _uuid } from '../../utils/uuid.js';
 
 export class AppUtil extends BeanSimple {
   getApiBaseURL(useApiPrefix: boolean = true) {
-    let baseURL;
-    if (process.env.SERVER) {
-      baseURL = process.env.SSR_API_BASE_URL;
-    } else {
-      baseURL = this.app.config.api.baseURL || '';
-    }
+    let baseURL = this.app.config.api.baseURL || '';
     if (useApiPrefix) {
       baseURL = `${baseURL}${this.app.config.api.prefix || ''}`;
     }
