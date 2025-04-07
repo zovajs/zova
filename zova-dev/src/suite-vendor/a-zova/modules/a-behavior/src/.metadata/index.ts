@@ -37,8 +37,11 @@ import 'zova';
 
 export * from '../bean/bean.behavior.js';
 export * from '../bean/bean.behaviorBase.js';
-declare module 'zova' {}
+declare module 'zova' {
+
+}
 declare module 'zova-module-a-behavior' {
+
   export interface BeanBehavior {
     /** @internal */
     get scope(): ScopeModuleABehavior;
@@ -54,11 +57,14 @@ declare module 'zova' {
 /** behavior: begin */
 export * from '../bean/behavior.root_.js';
 declare module 'zova-module-a-bean' {
+
   export interface IServiceRecord {
     'a-behavior:composer': never;
   }
+
 }
 declare module 'zova-module-a-behavior' {
+
   export interface ServiceComposer {
     /** @internal */
     get scope(): ScopeModuleABehavior;
@@ -72,8 +78,11 @@ declare module 'zova' {
 /** service: end */
 /** controller: begin */
 export * from '../component/behavior/controller.jsx';
-declare module 'zova' {}
+declare module 'zova' {
+
+}
 declare module 'zova-module-a-behavior' {
+
   export interface ControllerBehavior {
     /** @internal */
     get scope(): ScopeModuleABehavior;
@@ -100,27 +109,33 @@ declare module 'zova' {
 declare module 'zova-module-a-behavior' {
   export interface ControllerBehaviorProps {
     controllerRef?: (ref: ControllerBehavior) => void;
+
   }
 
   export interface ControllerBehavior {
-    $props: RequiredSome<
-      ControllerBehaviorProps,
-      keyof typeof ControllerBehavior.$propsDefault
-    >;
+    $props: RequiredSome<ControllerBehaviorProps, keyof typeof ControllerBehavior.$propsDefault>;
   }
 }
 export { default as ZBehavior } from './component/behavior.vue';
-declare module 'zova-module-a-behavior' {}
-declare module 'zova-module-a-behavior' {}
+declare module 'zova-module-a-behavior' {
+
+}
+declare module 'zova-module-a-behavior' {
+
+}
 
 declare module 'vue' {
-  export interface InputHTMLAttributes {}
+  export interface InputHTMLAttributes {
+
+  }
 }
 
 declare module 'vue/jsx-runtime' {
   namespace JSX {
     // need define class/style in IntrinsicAttributes
-    export interface IntrinsicAttributes {}
+    export interface IntrinsicAttributes {
+
+    }
   }
 }
 
@@ -130,10 +145,12 @@ export class ScopeModuleABehavior extends BeanScopeBase {}
 export interface ScopeModuleABehavior {
   util: BeanScopeUtil;
 }
+
 declare module 'zova' {
   export interface IBeanScopeRecord {
     'a-behavior': ScopeModuleABehavior;
   }
+
 }
 
 /** scope: end */

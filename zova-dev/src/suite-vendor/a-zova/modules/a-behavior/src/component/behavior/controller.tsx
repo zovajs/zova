@@ -50,7 +50,7 @@ export class ControllerBehavior extends BeanControllerBase {
 
   @Log({ args: false, childName: 'behavior', level: 'debug' })
   private _getBehaviorRoot() {
-    return UseBehavior('a-behavior:root' as any, { behaviors: this.$props.behaviors });
+    return UseBehavior('a-behavior:root' as never, { behaviors: this.$props.behaviors } as any);
   }
 
   protected render() {

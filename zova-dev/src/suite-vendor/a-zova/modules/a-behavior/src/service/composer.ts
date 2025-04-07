@@ -81,8 +81,8 @@ export class ServiceComposer extends BeanBase {
     onionItems: IOnionItem<IDecoratorBehaviorOptions, keyof IBehaviorRecord>[],
     behaviors: IBehaviors,
   ) {
-    if (!Array.isArray(behaviors)) behaviors = [behaviors];
-    for (const behaviorItem of behaviors) {
+    const behaviors2 = Array.isArray(behaviors) ? behaviors : [behaviors];
+    for (const behaviorItem of behaviors2) {
       if (typeof behaviorItem === 'string') {
         onionItems.push({ name: behaviorItem as unknown as keyof IBehaviorRecord, options: undefined });
       } else if (Array.isArray(behaviorItem)) {
