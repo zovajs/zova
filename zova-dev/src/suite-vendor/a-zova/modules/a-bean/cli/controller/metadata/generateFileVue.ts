@@ -10,7 +10,13 @@ export async function generateFileVue(
   controllerInfo: IControllerInfo,
 ) {
   const cli = options.cli;
-  const fileDest = path.join(options.modulePath, `src/.metadata/${controllerInfo.type}/${controllerInfo.name}.vue`);
+  // todo: 重新放到一起
+  let fileDest;
+  if (controllerInfo.type === 'page') {
+    fileDest = path.join(options.modulePath, `src/.metadata/${controllerInfo.type}/${controllerInfo.name}.ts`);
+  } else {
+    fileDest = path.join(options.modulePath, `src/.metadata/${controllerInfo.type}/${controllerInfo.name}.vue`);
+  }
   const content =
     controllerInfo.type === 'page'
       ? _generateFileVuePage(options, globFile, controllerInfo)
@@ -24,31 +30,16 @@ function _generateFileVuePage(
   _globFile: IGlobBeanFile,
   controllerInfo: IControllerInfo,
 ) {
-  const { name, nameCapitalize, controllerExtJs, importRender, importStyle } = controllerInfo;
+  const { name, nameCapitalize, controllerExtJs } = controllerInfo;
   const contentImports: string[] = [];
   // controller
-  contentImports.push("import { useControllerPage } from 'zova';");
+  contentImports.push("import { createZovaComponentPage } from 'zova';");
   contentImports.push(
     `import { ControllerPage${nameCapitalize} } from '../../page/${name}/controller${controllerExtJs}';`,
   );
-  // render
-  if (importRender) {
-    contentImports.push(importRender);
-  }
-  // style
-  if (importStyle) {
-    contentImports.push(importStyle);
-  }
+  contentImports.push(`export const ZPage${nameCapitalize} = createZovaComponentPage(ControllerPage${nameCapitalize});`);
   // content
-  const content = `<template>
-  <template></template>
-</template>
-
-<script setup lang="ts">
-${contentImports.join('\n')}
-useControllerPage(ControllerPage${nameCapitalize}, ${importRender ? `RenderPage${nameCapitalize}` : undefined}, ${importStyle ? `StylePage${nameCapitalize}` : undefined});
-</script>
-`;
+  const content = `${contentImports.join('\n')}\n`;
   return content;
 }
 
