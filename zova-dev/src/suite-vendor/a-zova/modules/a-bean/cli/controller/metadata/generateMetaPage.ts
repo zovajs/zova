@@ -140,7 +140,7 @@ function _extractRoutePathOrName(
   const astNode = ast.find('export const routes: IModuleRoute[] = [$_$]');
   const astMatches = astNode.match[0];
   const astMatch = astMatches.find(item => {
-    return (<any>item.node).properties.some(prop => {
+    return (item.node as any).properties.some(prop => {
       return prop.key.name === 'component' && (prop.value.name === controllerInfo.nameCapitalize || prop.value.name === `ZPage${controllerInfo.nameCapitalize}`);
     });
   });
