@@ -54,7 +54,7 @@ export function extendViteConf(context) {
             // process.env.CLIENT = env.CLIENT; // should not set if false
         }
         // define
-        if (opts.isClient) {
+        if (opts.isClient || context.configMeta?.mode === 'development') {
             const define = generateConfigDefine(env);
             conf.define = mergeConfig(conf.define || {}, define);
         }
