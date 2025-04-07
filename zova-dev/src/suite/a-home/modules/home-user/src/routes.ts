@@ -1,11 +1,11 @@
 import type { IModuleRoute } from 'zova-module-a-router';
-import Login from './.metadata/page/login.vue';
+import { ZPageLogin } from './.metadata/page/login.js';
 
 export const routes: IModuleRoute[] = [
   //
   {
     path: 'login',
-    component: Login,
+    component: ZPageLogin,
     meta: {
       layout: 'empty',
       requiresAuth: false,

@@ -1,7 +1,7 @@
 import type { IModuleRoute } from 'zova-module-a-router';
-import Home from './.metadata/page/home.vue';
+import { ZPageHome } from './.metadata/page/home.js';
 
 export const routes: IModuleRoute[] = [
   //
-  { path: '', component: Home },
+  { path: '', component: ZPageHome },
 ];

@@ -1,8 +1,8 @@
 import type { IModuleRoute } from 'zova-module-a-router';
-import Item from './.metadata/page/item.vue';
-import Todo from './.metadata/page/todo.vue';
+import { ZPageItem } from './.metadata/page/item.js';
+import { ZPageTodo } from './.metadata/page/todo.js';
 
 export const routes: IModuleRoute[] = [
-  { path: 'todo', component: Todo },
-  { name: 'item', path: 'item/:id', component: Item },
+  { path: 'todo', component: ZPageTodo },
+  { name: 'item', path: 'item/:id', component: ZPageItem },
 ];
