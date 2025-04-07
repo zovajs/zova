@@ -13,9 +13,18 @@ export function createZovaComponentAsync(module, name) {
   });
 }
 
+// export function createZovaComponent(controller: any) {
+//   return defineComponent(props => {
+//     useController(controller, props);
+//     return () => {
+//       return createVNode('template');
+//     };
+//   });
+// }
+
 export function createZovaComponentPage(controller: any) {
   return defineComponent(() => {
-    useControllerPage(controller, undefined, undefined);
+    useControllerPage(controller);
     return () => {
       return createVNode('template');
     };
