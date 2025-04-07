@@ -23,6 +23,7 @@ export async function generateOptionsPackage(
   }
   for (const { sceneName, sceneNameCapitalize, beanName, beanNameFull, fileContent } of globFiles) {
     const sceneMeta = onionScenesMeta[sceneName];
+    if (!sceneMeta) throw new Error(`sceneMeta not exists: ${sceneName}`);
     if (!sceneMeta.optionsPackage) continue;
     changed = true;
     const matches = fileContent.match(new RegExp(`@${sceneNameCapitalize}[\\S]*?\\(([\\s\\S]*?)\\)\\s*?export class`));
