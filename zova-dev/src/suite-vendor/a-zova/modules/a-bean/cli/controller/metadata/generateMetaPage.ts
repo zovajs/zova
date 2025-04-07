@@ -141,7 +141,7 @@ function _extractRoutePathOrName(
   const astMatches = astNode.match[0];
   const astMatch = astMatches.find(item => {
     return (<any>item.node).properties.some(prop => {
-      return prop.key.name === 'component' && prop.value.name === controllerInfo.nameCapitalize;
+      return prop.key.name === 'component' && (prop.value.name === controllerInfo.nameCapitalize || prop.value.name === `ZPage${controllerInfo.nameCapitalize}`);
     });
   });
   if (!astMatch) {

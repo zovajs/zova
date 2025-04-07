@@ -13,8 +13,12 @@ import 'zova';
 import 'zova';
 
 export * from '../bean/bean.apiBase.js';
-declare module 'zova' {}
-declare module 'zova-module-a-api' {}
+declare module 'zova' {
+
+}
+declare module 'zova-module-a-api' {
+
+}
 declare module 'zova' {
   export interface IBeanRecordGeneral {
     'a-api.bean.apiBase': BeanApiBase;
@@ -34,6 +38,7 @@ export interface ScopeModuleAApi {
   util: BeanScopeUtil;
   config: TypeModuleConfig<typeof config>;
 }
+
 declare module 'zova' {
   export interface IBeanScopeRecord {
     'a-api': ScopeModuleAApi;
@@ -42,6 +47,7 @@ declare module 'zova' {
   export interface IBeanScopeConfig {
     'a-api': ReturnType<typeof config>;
   }
+
 }
 
 /** scope: end */
