@@ -1,3 +1,4 @@
+import type { BeanControllerBase } from '../../bean/beanControllerBase.js';
 import { BeanSimple } from '../../bean/beanSimple.js';
 import { BeanControllerIdentifier, BeanRenderIdentifier } from '../../bean/type.js';
 import { cast } from '../../types/utils/cast.js';
@@ -40,10 +41,11 @@ export class CtxComponent extends BeanSimple {
     this._bean_render_original = null;
   }
 
-  private _getRender() {
-    const render = this.bean._getBeanSyncOnly<any>(BeanControllerIdentifier);
+  private _getRender(): any {
+    const render = this.bean._getBeanSyncOnly<BeanControllerBase>(BeanControllerIdentifier);
     if (!render) return;
-    if (render.render) return render;
+    render.__updateControllerProps?.();
+    if ((render as any).render) return render;
     return this.bean._getBeanSyncOnly(BeanRenderIdentifier);
   }
 }
