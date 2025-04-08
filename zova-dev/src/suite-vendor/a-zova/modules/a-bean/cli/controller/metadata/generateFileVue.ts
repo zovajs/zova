@@ -126,13 +126,17 @@ function _generateFileVueComponent(
   const contentRecords2: string[] = [];
   if (hasProps) {
     const namePropsGeneric = hasGeneric ? `${nameProps}<${generic}>` : nameProps;
-    contentRecords2.push(`export interface ${namePropsGeneric} {
+    contentRecords2.push(`// eslint-disable-next-line
+  export interface ${namePropsGeneric} {
         controllerRef?: (ref: ${className}) => void;
       }
       `);
   }
   const _contentRecords_parts: string[] = [];
-  if (hasProps) _contentRecords_parts.push(`$props: RequiredSome<${nameProps}, keyof typeof ${className}.$propsDefault>;`);
+  if (hasProps) {
+    contentImports.push('import type { RequiredSome } from \'zova\';');
+    _contentRecords_parts.push(`$props: RequiredSome<${nameProps}, keyof typeof ${className}.$propsDefault>;`);
+  }
   if (hasModel) {
     _contentRecords_parts.push(
       `$useModel<K extends keyof ${nameProps}>(name: K, options?: DefineModelOptions<${nameProps}[K]>): RequiredSome<${nameProps}, keyof typeof ${className}.$propsDefault>[K];`,
