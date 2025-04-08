@@ -16,19 +16,11 @@ export function generateMetaPage(
   const contentPathSchemas: string[] = [];
   const contentNameSchemas: string[] = [];
   const contentRecords: string[] = [];
-  const contentRecords2: string[] = [];
   for (const [globFile, controllerInfo] of globFiles) {
     const { className } = globFile;
-    const { name, controllerExtJs, nameSchemaParams, hasSchemaParams, nameSchemaQuery, hasSchemaQuery } =
-      controllerInfo;
-    // import
-    const _contentImports_parts: string[] = [];
-    if (hasSchemaParams) _contentImports_parts.push(nameSchemaParams);
-    if (hasSchemaQuery) _contentImports_parts.push(nameSchemaQuery);
-    if (_contentImports_parts.length > 0) {
-      contentImports.push(
-        `import { ${_contentImports_parts.join(', ')} } from '../page/${name}/controller${controllerExtJs}';`,
-      );
+    const { name, hasSchemaParams, hasSchemaQuery } = controllerInfo;
+    if (hasSchemaParams || hasSchemaQuery) {
+      contentImports.push(`import { NS${className} } from './page/${name}.js';`);
     }
     // controller.tsx
     const { routePath, routeName } = _extractRoutePathOrName(options, globFile, controllerInfo);
@@ -74,33 +66,12 @@ export function generateMetaPage(
         ${_contentRecords_parts.join('\n')}
       }`);
     }
-    //
-    const _contentRecords2_parts: string[] = [];
-    if (hasSchemaParams) {
-      _contentRecords2_parts.push(`export const paramsSchema = ${nameSchemaParams};
-        export type ParamsInput = z.input<typeof ${nameSchemaParams}>;
-        export type ParamsOutput = z.output<typeof ${nameSchemaParams}>;
-      `);
-    }
-    if (hasSchemaQuery) {
-      _contentRecords2_parts.push(`export const querySchema = ${nameSchemaQuery};
-        export type QueryInput = z.input<typeof ${nameSchemaQuery}>;
-        export type QueryOutput = z.output<typeof ${nameSchemaQuery}>;
-      `);
-    }
-    if (_contentRecords2_parts.length > 0) {
-      contentRecords2.push(`export namespace NS${className} {
-        ${_contentRecords2_parts.join('\n')}
-      }`);
-    }
   }
   // combine
   const content = `/** pages: begin */
 ${contentImports.join('\n')}
 export * from '../routes.js';
 ${contentNameRecords.length > 0 ? "import { TypePageParamsQuery } from 'zova';" : ''}
-${contentRecords2.length > 0 ? "import { z } from 'zod';" : ''}
-${contentRecords2.join('\n')}
 import 'zova';
 declare module 'zova' {
 export interface IPagePathRecord {
