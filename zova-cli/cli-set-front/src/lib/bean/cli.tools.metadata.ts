@@ -152,7 +152,7 @@ export class CliToolsMetadata extends BeanCliBase {
     }
     // save
     await fse.writeFile(metaIndexFile, content);
-    // await this.helper.formatFile({ fileName: metaIndexFile, logPrefix: 'format: ' });
+    await this.helper.formatFile({ fileName: metaIndexFile, logPrefix: 'format: ' });
     // generate this
     await this._generateThis(moduleName, relativeNameCapitalize, modulePath);
     // index

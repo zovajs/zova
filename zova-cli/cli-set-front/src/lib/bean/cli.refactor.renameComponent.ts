@@ -57,7 +57,7 @@ export class CliRefactorRenameComponent extends BeanCliBase {
       targetDir,
       'src/.metadata',
       argv.nameMeta.directory === 'page' ? 'page' : 'component',
-      `${argv.nameMeta.short}.vue`,
+      `${argv.nameMeta.short}.ts`,
     );
     await fse.remove(componentVueOld);
     // rename
@@ -77,8 +77,8 @@ export class CliRefactorRenameComponent extends BeanCliBase {
     let content = (await fse.readFile(routesFile)).toString();
     //
     content = content.replace(
-      `import ${argv.nameMeta.shortCapitalize} from './.metadata/page/${argv.nameMeta.short}.vue';`,
-      `import ${argv.componentNameNewCapitalize} from './.metadata/page/${argv.componentNameNew}.vue';`,
+      `import { ZPage${argv.nameMeta.shortCapitalize} } from './.metadata/page/${argv.nameMeta.short}.js';`,
+      `import { ZPage${argv.componentNameNewCapitalize} } from './.metadata/page/${argv.componentNameNew}.js';`,
     );
     //
     const ast = gogocode(content);
@@ -86,7 +86,7 @@ export class CliRefactorRenameComponent extends BeanCliBase {
     const astMatches = astNode.match[0];
     const astMatch = astMatches.find(item => {
       return (item.node as any).properties.some(prop => {
-        return prop.key.name === 'component' && prop.value.name === argv.nameMeta.shortCapitalize;
+        return prop.key.name === 'component' && prop.value.name === `ZPage${argv.nameMeta.shortCapitalize}`;
       });
     });
     if (!astMatch) {
@@ -95,7 +95,7 @@ export class CliRefactorRenameComponent extends BeanCliBase {
     const astPropComponent = (astMatch?.node as any).properties.find(prop => {
       return prop.key.name === 'component';
     });
-    astPropComponent.value.name = argv.componentNameNewCapitalize;
+    astPropComponent.value.name = `ZPage${argv.componentNameNewCapitalize}`;
     const astPropPath = (astMatch?.node as any).properties.find(prop => {
       return prop.key.name === 'path';
     });
