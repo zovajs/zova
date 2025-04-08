@@ -1,4 +1,4 @@
-import type { defineOptions } from 'vue';
+import type { defineOptions, VNode } from 'vue';
 import type { IControllerData } from './type.js';
 import { useModel } from 'vue';
 import { cast } from '../types/utils/cast.js';
@@ -9,10 +9,14 @@ type Data = Record<string, unknown>;
 
 export type IComponentOptions = Parameters<typeof defineOptions>[0];
 
+export interface ISlotsDefault {
+  default?(): VNode;
+}
+
 export class BeanControllerBase extends BeanBase {
   public $props: unknown;
   public $emit: unknown;
-  public $slots: unknown;
+  public $slots: ISlotsDefault;
   public $attrs: Data;
 
   /** @internal */

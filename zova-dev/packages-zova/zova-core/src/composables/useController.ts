@@ -9,7 +9,7 @@ import {
   onServerPrefetch,
   onUnmounted,
   queuePostFlushCb,
-  useAttrs,
+  shallowReactive,
   useSlots,
 } from 'vue';
 import {
@@ -66,18 +66,19 @@ export function useController<MK extends keyof IBeanRecord, RK extends keyof IBe
 //   styleBeanFullName?: string,
 // );
 export function useController(
-  props: unknown | undefined,
+  propsDefault: unknown | undefined,
   emit: unknown | undefined,
   controllerBeanFullName: Constructable | string,
   renderBeanFullName?: Constructable | string,
   styleBeanFullName?: Constructable | string,
 ) {
-  // attrs
-  const attrs = useAttrs();
+  // props
+  const instance = getCurrentInstance()!;
+  const props = _initProps(instance.vnode.props, propsDefault);
   // slots
   const slots = useSlots();
   // controllerData
-  const controllerData = { props, context: { attrs, slots, emit } };
+  const controllerData = { props, context: { slots, emit } };
   // use controller
   _useController(controllerData, controllerBeanFullName, renderBeanFullName, styleBeanFullName);
 }
@@ -156,4 +157,11 @@ function setControllerRef(ctx: ZovaContext, on: boolean) {
   if (controller.$attrs?.controllerRef) {
     controller.$attrs.controllerRef(on ? controller : undefined);
   }
+}
+
+function _initProps(props: unknown | undefined, propsDefault: unknown | undefined) {
+  if (propsDefault) {
+    props = Object.assign({}, propsDefault, props);
+  }
+  return process.env.SERVER ? props : shallowReactive(props as any);
 }
