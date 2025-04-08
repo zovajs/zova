@@ -90,23 +90,27 @@ function _generateFileVueComponent(
     hasComponentOptions,
     nameProps,
     hasProps,
-    nameEmits,
-    hasEmits,
-    nameSlots,
-    hasSlots,
     hasGeneric,
+    generic,
+    genericKeys,
     importRender,
     importStyle,
   } = controllerInfo;
   const contentImports: string[] = [];
-  const namePropsGeneric = hasGeneric ? `${nameProps}<T>` : nameProps;
-  const nameEmitsGeneric = hasGeneric ? `${nameEmits}<T>` : nameEmits;
-  // const nameSlotsGeneric = hasGeneric ? `${nameSlots}<T>` : nameSlots;
+  const functionGeneric = hasGeneric ? `<${generic}>` : '';
+  const namePropsGeneric = hasGeneric ? `${nameProps}<${genericKeys?.join(',')}>` : nameProps;
+  const componentOptions = hasComponentOptions ? `Controller${nameCapitalize}.$componentOptions,` : '';
   // controller
+  contentImports.push("import { defineComponent } from 'vue'");
   contentImports.push("import { useController } from 'zova';");
   contentImports.push(
-    `import { ${className}${hasProps ? `, ${nameProps}` : ''}${hasEmits ? `, ${nameEmits}` : ''}${!hasProps && hasSlots ? `, ${nameSlots}` : ''} } from '../../component/${name}/controller${controllerExtJs}';`,
+    `import { ${className} } from '../../component/${name}/controller${controllerExtJs}';`,
   );
+  if (hasProps) {
+    contentImports.push(
+      `import type { ${nameProps} } from '../../component/${name}/controller${controllerExtJs}';`,
+    );
+  }
   // render
   if (importRender) {
     contentImports.push(importRender);
@@ -115,31 +119,16 @@ function _generateFileVueComponent(
   if (importStyle) {
     contentImports.push(importStyle);
   }
-  // componentOptions
-  if (hasComponentOptions) {
-    contentImports.push(`defineOptions(Controller${nameCapitalize}.$componentOptions);`);
-  }
-  // props
-  let contentProps = '';
-  if (hasProps) {
-    contentProps = `const props = withDefaults(defineProps<${namePropsGeneric}>(), Controller${nameCapitalize}.$propsDefault);`;
-  }
-  // emits
-  let contentEmits = '';
-  if (hasEmits) {
-    contentEmits = `const emit = defineEmits<${nameEmitsGeneric}>();`;
-  }
   // content
-  const content = `<template>
-  <template></template>
-</template>
-
-<script setup lang="ts"${hasGeneric ? ' generic="T"' : ''}>
-${contentImports.join('\n')}
-${contentProps}
-${contentEmits}
-useController(${hasProps ? 'props' : 'undefined'}, ${hasEmits ? 'emit' : 'undefined'}, Controller${nameCapitalize}, ${importRender ? `Render${nameCapitalize}` : undefined}, ${importStyle ? `Style${nameCapitalize}` : undefined});
-</script>
+  const content = `${contentImports.join('\n')}
+export const Z${nameCapitalize} = defineComponent(
+  ${functionGeneric}(_props: ${namePropsGeneric}) => {
+    useController(Controller${nameCapitalize}, ${importRender ? `Render${nameCapitalize}` : undefined}, ${importStyle ? `Style${nameCapitalize}` : undefined});
+    return () => {
+      return null;
+    };
+  },${componentOptions}
+);
 `;
   return content;
 }
