@@ -21,6 +21,11 @@ export class BeanControllerBase extends BeanBase {
     this.app.meta.module._monkeyModuleSync('controllerDataInit', undefined, controllerData, this);
   }
 
+  /** @internal */
+  public __updateControllerProps() {
+    Object.assign(this.$props as any, this.ctx.instance.vnode.props);
+  }
+
   public $useModel(name?, options?) {
     if (typeof name === 'object') {
       options = name;
@@ -32,8 +37,6 @@ export class BeanControllerBase extends BeanBase {
 }
 
 function _initProps(props: unknown | undefined, propsDefault: unknown | undefined) {
-  if (propsDefault) {
-    props = Object.assign({}, propsDefault, props);
-  }
+  props = Object.assign({}, propsDefault, props);
   return process.env.SERVER ? props : shallowReactive(props as any);
 }
