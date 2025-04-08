@@ -9,7 +9,7 @@ export function generateMetaComponent(
 ) {
   if (globFiles.length === 0) return '';
   const { moduleName } = options;
-  const contentImports2: string[] = [];
+  const contentImports: string[] = [];
   const contentComponents: string[] = [];
   const contentRecords: string[] = [];
   for (const [globFile, controllerInfo] of globFiles) {
@@ -20,14 +20,14 @@ export function generateMetaComponent(
     } = controllerInfo;
     const componentFullName = `${moduleName}:${name}`;
     const componentName2 = `Z${nameCapitalize}`;
-    contentImports2.push(`export * from './component/${name}.js';`);
-    contentImports2.push(`import { ${componentName2} } from './component/${name}.js';`);
+    contentImports.push(`export * from './component/${name}.js';`);
+    contentImports.push(`import { ${componentName2} } from './component/${name}.js';`);
     contentComponents.push(`'${name}': ${componentName2},`);
     contentRecords.push(`'${componentFullName}': ${className};`);
   }
   // combine
   let content = `/** components: begin */
-${contentImports2.join('\n')}
+${contentImports.join('\n')}
 export const components = {
   ${contentComponents.join('\n')}
 };
