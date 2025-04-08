@@ -19,6 +19,7 @@ export function generateMetaPage(
   for (const [globFile, controllerInfo] of globFiles) {
     const { className } = globFile;
     const { name, hasSchemaParams, hasSchemaQuery } = controllerInfo;
+    contentImports.push(`export * from './page/${name}.js';`);
     if (hasSchemaParams || hasSchemaQuery) {
       contentImports.push(`import { NS${className} } from './page/${name}.js';`);
     }

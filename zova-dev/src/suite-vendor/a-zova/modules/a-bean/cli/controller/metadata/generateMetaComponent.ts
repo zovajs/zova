@@ -9,7 +9,6 @@ export function generateMetaComponent(
 ) {
   if (globFiles.length === 0) return '';
   const { moduleName } = options;
-  const contentImports: string[] = [];
   const contentImports2: string[] = [];
   const contentComponents: string[] = [];
   const contentRecords: string[] = [];
@@ -18,30 +17,16 @@ export function generateMetaComponent(
     const {
       name,
       nameCapitalize,
-      controllerExtJs,
-      nameEmits,
-      hasEmits,
-      nameSlots,
-      hasSlots,
     } = controllerInfo;
     const componentFullName = `${moduleName}:${name}`;
     const componentName2 = `Z${nameCapitalize}`;
-    const _contentImports_parts: string[] = [];
-    if (hasEmits) _contentImports_parts.push(nameEmits);
-    if (hasSlots) _contentImports_parts.push(nameSlots);
-    if (_contentImports_parts.length > 0) {
-      contentImports.push(
-        `import { ${_contentImports_parts.join(', ')} } from '../component/${name}/controller${controllerExtJs}';`,
-      );
-    }
-    contentImports2.push(`export { default as ${componentName2} } from './component/${name}.vue';`);
-    contentImports2.push(`import ${componentName2} from './component/${name}.vue';`);
+    contentImports2.push(`export * from './component/${name}.js';`);
+    contentImports2.push(`import { ${componentName2} } from './component/${name}.js';`);
     contentComponents.push(`'${name}': ${componentName2},`);
     contentRecords.push(`'${componentFullName}': ${className};`);
   }
   // combine
   let content = `/** components: begin */
-${contentImports.join('\n')}
 ${contentImports2.join('\n')}
 export const components = {
   ${contentComponents.join('\n')}
