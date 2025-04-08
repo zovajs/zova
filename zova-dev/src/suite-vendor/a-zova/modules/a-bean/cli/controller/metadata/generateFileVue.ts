@@ -78,10 +78,11 @@ function _generateFileVuePage(
 }
 
 function _generateFileVueComponent(
-  _options: IMetadataCustomGenerateOptions,
+  options: IMetadataCustomGenerateOptions,
   globFile: IGlobBeanFile,
   controllerInfo: IControllerInfo,
 ) {
+  const { moduleName } = options;
   const { className } = globFile;
   const {
     name,
@@ -91,6 +92,8 @@ function _generateFileVueComponent(
     nameProps,
     hasProps,
     hasGeneric,
+    hasModel,
+    hasModelValue,
     generic,
     genericKeys,
     importRender,
@@ -119,8 +122,42 @@ function _generateFileVueComponent(
   if (importStyle) {
     contentImports.push(importStyle);
   }
+  // combine
+  const contentRecords2: string[] = [];
+  if (hasProps) {
+    const namePropsGeneric = hasGeneric ? `${nameProps}<${generic}>` : nameProps;
+    contentRecords2.push(`export interface ${namePropsGeneric} {
+        controllerRef?: (ref: ${className}) => void;
+      }
+      `);
+  }
+  const _contentRecords_parts: string[] = [];
+  if (hasProps) _contentRecords_parts.push(`$props: RequiredSome<${nameProps}, keyof typeof ${className}.$propsDefault>;`);
+  if (hasModel) {
+    _contentRecords_parts.push(
+      `$useModel<K extends keyof ${nameProps}>(name: K, options?: DefineModelOptions<${nameProps}[K]>): RequiredSome<${nameProps}, keyof typeof ${className}.$propsDefault>[K];`,
+    );
+    if (hasModelValue) {
+      _contentRecords_parts.push(
+        `$useModel(options?: DefineModelOptions<${nameProps}['modelValue']>): RequiredSome<${nameProps}, keyof typeof ${className}.$propsDefault>['modelValue'];`,
+      );
+    }
+  }
+  if (_contentRecords_parts.length > 0) {
+    contentRecords2.push(`export interface ${className} {
+      ${_contentRecords_parts.join('\n')}
+    }`);
+  }
+  const contentCombine = contentRecords2.length > 0
+    ? `
+declare module 'zova-module-${moduleName}' {
+  ${contentRecords2.join('\n')} 
+}
+`
+    : '';
   // content
   const content = `${contentImports.join('\n')}
+${contentCombine}
 export const Z${nameCapitalize} = defineComponent(
   ${functionGeneric}(_props: ${namePropsGeneric}) => {
     useController(Controller${nameCapitalize}, ${importRender ? `Render${nameCapitalize}` : undefined}, ${importStyle ? `Style${nameCapitalize}` : undefined});

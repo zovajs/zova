@@ -13,22 +13,16 @@ export function generateMetaComponent(
   const contentImports2: string[] = [];
   const contentComponents: string[] = [];
   const contentRecords: string[] = [];
-  const contentRecords2: string[] = [];
   for (const [globFile, controllerInfo] of globFiles) {
     const { className } = globFile;
     const {
       name,
       nameCapitalize,
       controllerExtJs,
-      nameProps,
-      hasProps,
       nameEmits,
       hasEmits,
       nameSlots,
       hasSlots,
-      hasModel,
-      hasModelValue,
-      hasGeneric,
     } = controllerInfo;
     const componentFullName = `${moduleName}:${name}`;
     const componentName2 = `Z${nameCapitalize}`;
@@ -44,35 +38,6 @@ export function generateMetaComponent(
     contentImports2.push(`import ${componentName2} from './component/${name}.vue';`);
     contentComponents.push(`'${name}': ${componentName2},`);
     contentRecords.push(`'${componentFullName}': ${className};`);
-    if (hasProps) {
-      const namePropsGeneric = hasGeneric && hasSlots ? `${nameProps}<T>` : nameProps;
-      const nameSlotsGeneric = hasGeneric ? `${nameSlots}<T>` : nameSlots;
-      contentRecords2.push(`export interface ${namePropsGeneric} {
-        controllerRef?: (ref: ${className}) => void;
-        ${hasSlots ? `slots?: ${nameSlotsGeneric};` : ''} 
-      }
-      `);
-    }
-    const _contentRecords_parts: string[] = [];
-    if (hasProps)
-      _contentRecords_parts.push(`$props: RequiredSome<${nameProps}, keyof typeof ${className}.$propsDefault>;`);
-    if (hasEmits) _contentRecords_parts.push(`$emit: ${nameEmits};`);
-    if (hasSlots) _contentRecords_parts.push(`$slots: ${nameSlots};`);
-    if (hasModel) {
-      _contentRecords_parts.push(
-        `$useModel<K extends keyof ${nameProps}>(name: K, options?: DefineModelOptions<${nameProps}[K]>): RequiredSome<${nameProps}, keyof typeof ${className}.$propsDefault>[K];`,
-      );
-      if (hasModelValue) {
-        _contentRecords_parts.push(
-          `$useModel(options?: DefineModelOptions<${nameProps}['modelValue']>): RequiredSome<${nameProps}, keyof typeof ${className}.$propsDefault>['modelValue'];`,
-        );
-      }
-    }
-    if (_contentRecords_parts.length > 0) {
-      contentRecords2.push(`export interface ${className} {
-        ${_contentRecords_parts.join('\n')}
-      }`);
-    }
   }
   // combine
   let content = `/** components: begin */
@@ -87,9 +52,6 @@ export interface IComponentRecord {
   ${contentRecords.join('\n')}
 }
 }
-declare module 'zova-module-${moduleName}' {
-  ${contentRecords2.join('\n')} 
-}  
 /** components: end */
 `;
   // RequiredSome / DefineModelOptions
