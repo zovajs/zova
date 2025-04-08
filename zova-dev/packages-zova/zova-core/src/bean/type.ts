@@ -31,13 +31,10 @@ export interface IBeanScopeLocale {}
 export type TypeBeanScopeLocaleKeys = keyof IBeanScopeLocale;
 
 export interface IControllerDataContext {
-  attrs?: unknown;
-  emit?: unknown;
   slots?: object;
 }
 
 export interface IControllerData {
-  props?: unknown;
   context: IControllerDataContext;
 }
 
