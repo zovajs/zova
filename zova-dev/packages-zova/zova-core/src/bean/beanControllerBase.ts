@@ -1,11 +1,7 @@
 import type { defineOptions, VNode } from 'vue';
 import type { IControllerData } from './type.js';
-import { useModel } from 'vue';
-import { cast } from '../types/utils/cast.js';
-import { useRef } from '../vueExtra/ref.js';
+import { shallowReactive, useModel } from 'vue';
 import { BeanBase } from './beanBase.js';
-
-type Data = Record<string, unknown>;
 
 export type IComponentOptions = Parameters<typeof defineOptions>[0];
 
@@ -15,24 +11,13 @@ export interface ISlotsDefault {
 
 export class BeanControllerBase extends BeanBase {
   public $props: unknown;
-  public $emit: unknown;
   public $slots: ISlotsDefault;
-  public $attrs: Data;
 
   /** @internal */
   public __initControllerData(controllerData: IControllerData) {
-    this.$props = controllerData.props;
-    this.$emit = controllerData.context.emit;
-    this.$attrs = controllerData.context.attrs as Data;
-    this.$slots = useRef(() => {
-      const attrSlots = cast(this.$attrs).slots;
-      const contextSlots = controllerData.context.slots;
-      if (!attrSlots) {
-        return contextSlots;
-      } else {
-        return contextSlots ? Object.assign({}, attrSlots, contextSlots) : attrSlots;
-      }
-    });
+    // props
+    this.$props = _initProps(this.ctx.instance.vnode.props, Object.getPrototypeOf(this).constructor.$propsDefault);
+    this.$slots = controllerData.context.slots as any;
     this.app.meta.module._monkeyModuleSync('controllerDataInit', undefined, controllerData, this);
   }
 
@@ -44,4 +29,11 @@ export class BeanControllerBase extends BeanBase {
     if (!name) name = 'modelValue';
     return useModel(this.$props as any, name, options);
   }
+}
+
+function _initProps(props: unknown | undefined, propsDefault: unknown | undefined) {
+  if (propsDefault) {
+    props = Object.assign({}, propsDefault, props);
+  }
+  return process.env.SERVER ? props : shallowReactive(props as any);
 }
