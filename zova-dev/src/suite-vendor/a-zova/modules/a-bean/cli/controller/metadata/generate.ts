@@ -61,6 +61,8 @@ function _parseControllerInfo(
   // generic
   const matchGeneric = fileContent.match(/interface [^<]*Props<(.*?)> \{/);
   const hasGeneric = !!matchGeneric;
+  const generic = matchGeneric && matchGeneric[1];
+  const genericKeys = matchGeneric && matchGeneric[1].split(',').map(item => item.trim().split(' ')[0]);
   // schemaParams
   const nameSchemaParams = `${className}SchemaParams`;
   const hasSchemaParams = fileContent.includes(nameSchemaParams);
@@ -97,6 +99,8 @@ function _parseControllerInfo(
     hasModel,
     hasModelValue,
     hasGeneric,
+    generic,
+    genericKeys,
     nameSchemaParams,
     hasSchemaParams,
     nameSchemaQuery,

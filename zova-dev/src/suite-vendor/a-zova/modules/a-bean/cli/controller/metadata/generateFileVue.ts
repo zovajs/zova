@@ -10,13 +10,7 @@ export async function generateFileVue(
   controllerInfo: IControllerInfo,
 ) {
   const cli = options.cli;
-  // todo: 重新放到一起
-  let fileDest;
-  if (controllerInfo.type === 'page') {
-    fileDest = path.join(options.modulePath, `src/.metadata/${controllerInfo.type}/${controllerInfo.name}.ts`);
-  } else {
-    fileDest = path.join(options.modulePath, `src/.metadata/${controllerInfo.type}/${controllerInfo.name}.vue`);
-  }
+  const fileDest = path.join(options.modulePath, `src/.metadata/${controllerInfo.type}/${controllerInfo.name}.ts`);
   const content =
     controllerInfo.type === 'page'
       ? _generateFileVuePage(options, globFile, controllerInfo)

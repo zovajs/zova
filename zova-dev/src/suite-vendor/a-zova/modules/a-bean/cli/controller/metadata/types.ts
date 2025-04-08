@@ -15,6 +15,8 @@ export interface IControllerInfo {
   hasModel: boolean;
   hasModelValue: boolean;
   hasGeneric: boolean;
+  generic?: string | null;
+  genericKeys?: string[] | null;
   nameSchemaParams: string;
   hasSchemaParams: boolean;
   nameSchemaQuery: string;
