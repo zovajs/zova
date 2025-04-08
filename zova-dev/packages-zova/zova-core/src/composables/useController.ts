@@ -43,15 +43,11 @@ export function useControllerPage(
 }
 
 export function useController<M, R, S>(
-  props: unknown | undefined,
-  emit: unknown | undefined,
   controllerBeanFullName: Constructable<M>,
   renderBeanFullName?: Constructable<R>,
   styleBeanFullName?: Constructable<S>,
 );
 export function useController<MK extends keyof IBeanRecord, RK extends keyof IBeanRecord, SK extends keyof IBeanRecord>(
-  props: unknown | undefined,
-  emit: unknown | undefined,
   controllerBeanFullName: MK,
   renderBeanFullName?: RK,
   styleBeanFullName?: SK,
@@ -65,8 +61,6 @@ export function useController<MK extends keyof IBeanRecord, RK extends keyof IBe
 //   styleBeanFullName?: string,
 // );
 export function useController(
-  _propsDefault: unknown | undefined,
-  emit: unknown | undefined,
   controllerBeanFullName: Constructable | string,
   renderBeanFullName?: Constructable | string,
   styleBeanFullName?: Constructable | string,
@@ -74,7 +68,7 @@ export function useController(
   // slots
   const slots = useSlots();
   // controllerData
-  const controllerData = { props: _propsDefault, context: { slots, emit } };
+  const controllerData = { context: { slots } };
   // use controller
   _useController(controllerData, controllerBeanFullName, renderBeanFullName, styleBeanFullName);
 }
