@@ -1,4 +1,5 @@
-import { createVNode, defineAsyncComponent, defineComponent } from 'vue';
+import type { Constructable } from '../decorator/type/constructable.js';
+import { defineAsyncComponent, defineComponent } from 'vue';
 import { useApp } from '../composables/useApp.js';
 import { useControllerPage } from '../composables/useController.js';
 
@@ -22,11 +23,11 @@ export function createZovaComponentAsync(module, name) {
 //   });
 // }
 
-export function createZovaComponentPage(controller: any) {
+export function createZovaComponentPage<M, R, S>(controller: Constructable<M>, render?: Constructable<R>, style?: Constructable<S>) {
   return defineComponent(() => {
-    useControllerPage(controller);
+    useControllerPage(controller, render, style);
     return () => {
-      return createVNode('template');
+      return null;
     };
   });
 }

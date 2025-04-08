@@ -30,14 +30,23 @@ function _generateFileVuePage(
   _globFile: IGlobBeanFile,
   controllerInfo: IControllerInfo,
 ) {
-  const { name, nameCapitalize, controllerExtJs } = controllerInfo;
+  const { name, nameCapitalize, controllerExtJs, importRender, importStyle } = controllerInfo;
   const contentImports: string[] = [];
   // controller
   contentImports.push("import { createZovaComponentPage } from 'zova';");
   contentImports.push(
     `import { ControllerPage${nameCapitalize} } from '../../page/${name}/controller${controllerExtJs}';`,
   );
-  contentImports.push(`export const ZPage${nameCapitalize} = createZovaComponentPage(ControllerPage${nameCapitalize});`);
+  // render
+  if (importRender) {
+    contentImports.push(importRender);
+  }
+  // style
+  if (importStyle) {
+    contentImports.push(importStyle);
+  }
+  // export
+  contentImports.push(`export const ZPage${nameCapitalize} = createZovaComponentPage(ControllerPage${nameCapitalize}, ${importRender ? `RenderPage${nameCapitalize}` : undefined}, ${importStyle ? `StylePage${nameCapitalize}` : undefined});`);
   // content
   const content = `${contentImports.join('\n')}\n`;
   return content;
