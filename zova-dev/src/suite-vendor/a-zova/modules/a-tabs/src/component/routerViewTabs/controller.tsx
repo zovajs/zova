@@ -6,11 +6,7 @@ import { BeanControllerBase, cast, Use } from 'zova';
 import { Controller } from 'zova-module-a-bean';
 import { ModelTabs } from '../../model/tabs.js';
 
-export interface ControllerRouterViewTabsSlots {}
-
 export interface ControllerRouterViewTabsProps {}
-
-export interface ControllerRouterViewTabsEmits {}
 
 export interface RouterViewSlotParams {
   Component: ComponentInternalInstance;

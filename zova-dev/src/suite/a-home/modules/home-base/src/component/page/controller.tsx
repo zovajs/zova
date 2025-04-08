@@ -1,14 +1,7 @@
-import type { VNode } from 'vue';
 import { BeanControllerBase } from 'zova';
 import { Controller } from 'zova-module-a-bean';
 
 export interface ControllerPageProps {}
-
-export interface ControllerPageEmits {}
-
-export interface ControllerPageSlots {
-  default?(): VNode;
-}
 
 @Controller()
 export class ControllerPage extends BeanControllerBase {

@@ -10,10 +10,6 @@ export interface ControllerEssentialLinkProps {
   to?: { name?: string } | string;
 }
 
-export interface ControllerEssentialLinkEmits {}
-
-export interface ControllerEssentialLinkSlots {}
-
 @Controller()
 export class ControllerEssentialLink extends BeanControllerBase {
   static $propsDefault = {

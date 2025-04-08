@@ -7,10 +7,6 @@ import { ModelMenu } from '../../model/menu.js';
 
 export interface ControllerLayoutDefaultProps {}
 
-export interface ControllerLayoutDefaultEmits {}
-
-export interface ControllerLayoutDefaultSlots {}
-
 @Controller()
 export class ControllerLayoutDefault extends BeanControllerBase {
   static $propsDefault = {};
