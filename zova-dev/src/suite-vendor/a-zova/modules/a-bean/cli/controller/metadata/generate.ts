@@ -68,18 +68,12 @@ function _parseControllerInfo(
   const fileRenderFirst = path.join(options.modulePath, `src/${type}/${name}/render.tsx`);
   const hasRenderFirst = fse.existsSync(fileRenderFirst);
   const classNameRenderFirst = `Render${type === 'page' ? 'Page' : ''}${nameCapitalize}`;
-  let importRenderFirst = '';
-  if (hasRenderFirst) {
-    importRenderFirst = `import { ${classNameRenderFirst} } from '../../${type}/${name}/render.jsx';`;
-  }
+  const importRenderFirst = `import { ${classNameRenderFirst} } from '../../${type}/${name}/render.jsx';`;
   // style
   const fileStyleFirst = path.join(options.modulePath, `src/${type}/${name}/style.ts`);
   const hasStyleFirst = fse.existsSync(fileStyleFirst);
   const classNameStyleFirst = `Style${type === 'page' ? 'Page' : ''}${nameCapitalize}`;
-  let importStyleFirst = '';
-  if (hasStyleFirst) {
-    importStyleFirst = `import { ${classNameStyleFirst} } from '../../${type}/${name}/style.js';`;
-  }
+  const importStyleFirst = `import { ${classNameStyleFirst} } from '../../${type}/${name}/style.js';`;
   // ok
   return {
     type,

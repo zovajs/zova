@@ -8,7 +8,17 @@ export function generateFilePage(
   controllerInfo: IControllerInfo,
 ) {
   const { className } = globFile;
-  const { name, nameCapitalize, controllerExtJs, importRender, importStyle } = controllerInfo;
+  const {
+    name,
+    nameCapitalize,
+    controllerExtJs,
+    importRenderFirst,
+    hasRenderFirst,
+    classNameRenderFirst,
+    importStyleFirst,
+    hasStyleFirst,
+    classNameStyleFirst,
+  } = controllerInfo;
   const { nameSchemaParams, hasSchemaParams, nameSchemaQuery, hasSchemaQuery } = controllerInfo;
   const contentImports: string[] = [];
   // controller
@@ -17,12 +27,12 @@ export function generateFilePage(
     `import { ControllerPage${nameCapitalize} } from '../../page/${name}/controller${controllerExtJs}';`,
   );
   // render
-  if (importRender) {
-    contentImports.push(importRender);
+  if (hasRenderFirst) {
+    contentImports.push(importRenderFirst);
   }
   // style
-  if (importStyle) {
-    contentImports.push(importStyle);
+  if (hasStyleFirst) {
+    contentImports.push(importStyleFirst);
   }
   // params/query
   const _contentImports_parts: string[] = [];
@@ -54,7 +64,7 @@ export function generateFilePage(
     }`);
   }
   // export page
-  contentImports.push(`export const ZPage${nameCapitalize} = createZovaComponentPage(ControllerPage${nameCapitalize}, ${importRender ? `RenderPage${nameCapitalize}` : undefined}, ${importStyle ? `StylePage${nameCapitalize}` : undefined});`);
+  contentImports.push(`export const ZPage${nameCapitalize} = createZovaComponentPage(${className}, ${hasRenderFirst ? classNameRenderFirst : undefined}, ${hasStyleFirst ? classNameStyleFirst : undefined});`);
   // content
   const content = `${contentImports.join('\n')}\n`;
   return content;

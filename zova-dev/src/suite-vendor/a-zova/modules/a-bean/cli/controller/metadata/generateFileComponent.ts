@@ -22,8 +22,12 @@ export function generateFileComponent(
     hasModelValue,
     generic,
     genericKeys,
-    importRender,
-    importStyle,
+    importRenderFirst,
+    hasRenderFirst,
+    classNameRenderFirst,
+    importStyleFirst,
+    hasStyleFirst,
+    classNameStyleFirst,
   } = controllerInfo;
   const contentImports: string[] = [];
   const genericDeclare = hasGeneric ? `<${generic}>` : '';
@@ -49,12 +53,12 @@ export function generateFileComponent(
     `import { ${className} } from '../../component/${name}/controller${controllerExtJs}';`,
   );
   // render
-  if (importRender) {
-    contentImports.push(importRender);
+  if (hasRenderFirst) {
+    contentImports.push(importRenderFirst);
   }
   // style
-  if (importStyle) {
-    contentImports.push(importStyle);
+  if (hasStyleFirst) {
+    contentImports.push(importStyleFirst);
   }
   // TypeControllerPublicProps
   let contentTypeControllerPublicProps = `type TypeControllerPublicProps${genericDeclare} = {
@@ -113,7 +117,7 @@ export function generateFileComponent(
   // component
   const contentComponent = `export const Z${nameCapitalize} = defineComponent(
     ${genericDeclare}(_props: TypeControllerPublicProps${genericArguments}) => {
-      useController(Controller${nameCapitalize}, ${importRender ? `Render${nameCapitalize}` : undefined}, ${importStyle ? `Style${nameCapitalize}` : undefined});
+      useController(${className}, ${hasRenderFirst ? classNameRenderFirst : undefined}, ${hasStyleFirst ? classNameStyleFirst : undefined});
       return () => {};
     },
     prepareComponentOptions(${componentOptions}),
