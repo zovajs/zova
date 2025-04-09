@@ -9,25 +9,6 @@ export interface IControllerInfo {
   controllerClassName: string;
 }
 
-export default async function (options: IMetadataCustomGenerateOptions): Promise<string> {
-  const { moduleName, globFiles } = options;
-  const contentRecords: string[] = [];
-  for (const globFile of globFiles) {
-    if (globFile.isIgnore) continue;
-    const { className } = globFile;
-    const controllerInfo = _parseControllerInfo(options, globFile);
-    if (!controllerInfo) continue;
-    contentRecords.push(`export interface ${className} extends ${controllerInfo.controllerClassName} {}`);
-  }
-  const content = `/** styles: begin */
-declare module 'zova-module-${moduleName}' {
-  ${contentRecords.join('\n')} 
-}  
-/** styles: end */
-`;
-  return content;
-}
-
 function _parseControllerInfo(
   _options: IMetadataCustomGenerateOptions,
   globFile: IGlobBeanFile,

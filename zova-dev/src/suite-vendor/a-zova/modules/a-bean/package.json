@@ -42,13 +42,11 @@
       },
       "render": {
         "beanGeneral": false,
-        "optionsNone": true,
-        "metadataCustom": "cli/render/metadata/generate.ts"
+        "optionsNone": true
       },
       "style": {
         "beanGeneral": false,
-        "optionsNone": true,
-        "metadataCustom": "cli/style/metadata/generate.ts"
+        "optionsNone": true
       },
       "aop": {
         "optionsPackage": true,

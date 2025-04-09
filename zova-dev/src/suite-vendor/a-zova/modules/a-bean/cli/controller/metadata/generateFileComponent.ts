@@ -123,6 +123,7 @@ export function generateFileComponent(
       export interface ${className}${genericDeclare} {
         ${contentControllerInterfaceMethods.join('\n')}
       }
+      ${contentControllerInterfaceRecords.join('\n')}
     }`;
   }
   // component
