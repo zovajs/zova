@@ -108,13 +108,13 @@ export function generateFileComponent(
   }
   const contentControllerInterfaceRecords: string[] = [];
   if (hasStyleFirst) {
-    contentControllerInterfaceRecords.push(`export interface ${classNameStyleFirst} extends ${className} {}`);
+    contentControllerInterfaceRecords.push(`export interface ${classNameStyleFirst}${genericDeclare} extends ${className}${genericArguments} {}`);
   }
   if (hasRenderFirst) {
     if (hasStyleFirst) {
-      contentControllerInterfaceRecords.push(`export interface ${classNameRenderFirst} extends ${classNameStyleFirst} {}`);
+      contentControllerInterfaceRecords.push(`export interface ${classNameRenderFirst}${genericDeclare} extends ${classNameStyleFirst}${genericArguments} {}`);
     } else {
-      contentControllerInterfaceRecords.push(`export interface ${classNameRenderFirst} extends ${className} {}`);
+      contentControllerInterfaceRecords.push(`export interface ${classNameRenderFirst}${genericDeclare} extends ${className}${genericArguments} {}`);
     }
   }
   let contentControllerInterface = '';
