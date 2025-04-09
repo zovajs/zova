@@ -135,7 +135,7 @@ function _generateFileVueComponent(
   const _contentRecords_parts: string[] = [];
   if (hasProps) {
     contentImports.push('import type { RequiredSome } from \'zova\';');
-    _contentRecords_parts.push(`$props: RequiredSome<${nameProps}, keyof typeof ${className}.$propsDefault>;`);
+    _contentRecords_parts.push(`// @ts-ignore ignore\n    $props: RequiredSome<${nameProps}, keyof typeof ${className}.$propsDefault>;`);
   }
   if (hasModel) {
     _contentRecords_parts.push(
