@@ -1,7 +1,7 @@
 import type { RequiredSome } from 'zova';
 import type { ControllerCardProps } from '../../component/card/controller.jsx';
 import { defineComponent } from 'vue';
-import { useController } from 'zova';
+import { prepareComponentOptions, useController } from 'zova';
 import { ControllerCard } from '../../component/card/controller.jsx';
 
 declare module 'zova-module-demo-basic' {
@@ -18,8 +18,7 @@ declare module 'zova-module-demo-basic' {
 export const ZCard = defineComponent(
   (_props: ControllerCardProps) => {
     useController(ControllerCard, undefined, undefined);
-    return () => {
-      return null;
-    };
+    return () => {};
   },
+  prepareComponentOptions(),
 );

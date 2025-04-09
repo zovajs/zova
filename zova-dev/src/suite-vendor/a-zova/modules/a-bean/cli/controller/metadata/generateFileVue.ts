@@ -165,9 +165,7 @@ ${contentCombine}
 export const Z${nameCapitalize} = defineComponent(
   ${functionGeneric}(_props: ${namePropsGeneric}) => {
     useController(Controller${nameCapitalize}, ${importRender ? `Render${nameCapitalize}` : undefined}, ${importStyle ? `Style${nameCapitalize}` : undefined});
-    return () => {
-      return null;
-    };
+    return () => {};
   },
   prepareComponentOptions(${componentOptions}),
 );

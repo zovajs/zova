@@ -1,4 +1,4 @@
-import type { ComponentOptions } from 'vue';
+import type { IComponentOptions } from '../bean/type.js';
 import type { Constructable } from '../decorator/type/constructable.js';
 import { defineAsyncComponent, defineComponent } from 'vue';
 import { useApp } from '../composables/useApp.js';
@@ -24,6 +24,6 @@ export function createZovaComponentPage<M, R, S>(controller: Constructable<M>, r
   });
 }
 
-export function prepareComponentOptions(componentOptions?: ComponentOptions) {
+export function prepareComponentOptions(componentOptions?: IComponentOptions) {
   return Object.assign({ inheritAttrs: ['class', 'style'] }, componentOptions);
 }

@@ -1,5 +1,5 @@
 import type { LoggerLevel, LoggerOptions } from '@cabloy/logger';
-import type { PowerPartial } from 'zova';
+import type { PowerPartial } from '../../types/utils/powerPartial.js';
 
 export interface ILoggerOptionsClientInfo {
   clientName: keyof ILoggerClientRecord;

@@ -1,7 +1,7 @@
 import type { RequiredSome } from 'zova';
 import type { ControllerLayoutEmptyProps } from '../../component/layoutEmpty/controller.jsx';
 import { defineComponent } from 'vue';
-import { useController } from 'zova';
+import { prepareComponentOptions, useController } from 'zova';
 import { ControllerLayoutEmpty } from '../../component/layoutEmpty/controller.jsx';
 
 declare module 'zova-module-home-layout' {
@@ -18,8 +18,7 @@ declare module 'zova-module-home-layout' {
 export const ZLayoutEmpty = defineComponent(
   (_props: ControllerLayoutEmptyProps) => {
     useController(ControllerLayoutEmpty, undefined, undefined);
-    return () => {
-      return null;
-    };
+    return () => {};
   },
+  prepareComponentOptions(),
 );

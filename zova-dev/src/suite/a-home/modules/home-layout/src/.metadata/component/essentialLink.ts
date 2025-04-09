@@ -1,7 +1,7 @@
 import type { RequiredSome } from 'zova';
 import type { ControllerEssentialLinkProps } from '../../component/essentialLink/controller.jsx';
 import { defineComponent } from 'vue';
-import { useController } from 'zova';
+import { prepareComponentOptions, useController } from 'zova';
 import { ControllerEssentialLink } from '../../component/essentialLink/controller.jsx';
 
 declare module 'zova-module-home-layout' {
@@ -18,8 +18,7 @@ declare module 'zova-module-home-layout' {
 export const ZEssentialLink = defineComponent(
   (_props: ControllerEssentialLinkProps) => {
     useController(ControllerEssentialLink, undefined, undefined);
-    return () => {
-      return null;
-    };
+    return () => {};
   },
+  prepareComponentOptions(),
 );

@@ -1,7 +1,7 @@
 import type { RequiredSome } from 'zova';
 import type { ControllerPageProps } from '../../component/page/controller.jsx';
 import { defineComponent } from 'vue';
-import { useController } from 'zova';
+import { prepareComponentOptions, useController } from 'zova';
 import { ControllerPage } from '../../component/page/controller.jsx';
 
 declare module 'zova-module-home-base' {
@@ -18,8 +18,7 @@ declare module 'zova-module-home-base' {
 export const ZPage = defineComponent(
   (_props: ControllerPageProps) => {
     useController(ControllerPage, undefined, undefined);
-    return () => {
-      return null;
-    };
+    return () => {};
   },
+  prepareComponentOptions(),
 );

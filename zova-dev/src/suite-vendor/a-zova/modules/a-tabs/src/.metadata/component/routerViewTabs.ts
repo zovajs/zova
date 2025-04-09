@@ -1,7 +1,7 @@
 import type { RequiredSome } from 'zova';
 import type { ControllerRouterViewTabsProps } from '../../component/routerViewTabs/controller.jsx';
 import { defineComponent } from 'vue';
-import { useController } from 'zova';
+import { prepareComponentOptions, useController } from 'zova';
 import { ControllerRouterViewTabs } from '../../component/routerViewTabs/controller.jsx';
 
 declare module 'zova-module-a-tabs' {
@@ -18,8 +18,7 @@ declare module 'zova-module-a-tabs' {
 export const ZRouterViewTabs = defineComponent(
   (_props: ControllerRouterViewTabsProps) => {
     useController(ControllerRouterViewTabs, undefined, undefined);
-    return () => {
-      return null;
-    };
+    return () => {};
   },
+  prepareComponentOptions(),
 );
