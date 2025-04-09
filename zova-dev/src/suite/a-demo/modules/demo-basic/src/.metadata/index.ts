@@ -1,10 +1,9 @@
 import { TypePageParamsQuery } from 'zova';
-import { RequiredSome } from 'zova';
 /** locale: end */
 /** scope: begin */
 import { BeanScopeBase, BeanScopeUtil, TypeLocaleBase, TypeModuleLocales } from 'zova';
-
 import { IDecoratorAopOptions } from 'zova-module-a-bean';
+
 import { Scope } from 'zova-module-a-bean';
 import { AopHome3 } from '../bean/aop.home3.jsx';
 /** aop: end */
@@ -19,8 +18,6 @@ import { ThemeOrange } from '../bean/theme.orange.js';
 /** controller: end */
 /** controller: begin */
 import { ControllerCard } from '../component/card/controller.jsx';
-/** components: begin */
-import { ControllerCardEmits, ControllerCardSlots } from '../component/card/controller.jsx';
 /** theme: end */
 /** locale: begin */
 import locale_en_us from '../config/locale/en-us.js';
@@ -32,13 +29,9 @@ import { ControllerPagePinia } from '../page/pinia/controller.jsx';
 import { ControllerPageRouteParams } from '../page/routeParams/controller.jsx';
 import { ControllerPageRouteQuery } from '../page/routeQuery/controller.jsx';
 import { ControllerPageRouteQueryB } from '../page/routeQueryB/controller.jsx';
-/** pages: end */
-
 import { ControllerPageState } from '../page/state/controller.jsx';
 import { ControllerPageStyle } from '../page/style/controller.jsx';
-import ZCard from './component/card.vue';
-/** controller: end */
-/** pages: begin */
+import { ZCard } from './component/card.js';
 import { NSControllerPageRouteParams } from './page/routeParams.js';
 
 import { NSControllerPageRouteQuery } from './page/routeQuery.js';
@@ -159,6 +152,18 @@ declare module 'zova' {
   }
 }
 export * from '../page/routeQueryB/controller.jsx';
+export * from '../page/state/controller.jsx';
+export * from '../page/style/controller.jsx';
+export * from '../routes.js';
+/** components: begin */
+export * from './component/card.js';
+/** controller: end */
+/** pages: begin */
+export * from './page/component.js';
+export * from './page/legacy.js';
+export * from './page/locale.js';
+export * from './page/pinia.js';
+export * from './page/routeParams.js';
 declare module 'zova' {
   export interface IPagePathRecord {
     '/demo/basic/component': undefined;
@@ -202,7 +207,9 @@ declare module 'zova-module-demo-basic' {
     $query: NSControllerPageRouteQueryB.QueryOutput;
   }
 }
-export * from '../page/state/controller.jsx';
+/** pages: end */
+
+export * from './page/routeQuery.js';
 export const components = {
   card: ZCard,
 };
@@ -211,20 +218,8 @@ declare module 'zova' {
     'demo-basic:card': ControllerCard;
   }
 }
-declare module 'zova-module-demo-basic' {
-  export interface ControllerCardProps {
-    controllerRef?: (ref: ControllerCard) => void;
-    slots?: ControllerCardSlots;
-  }
-
-  export interface ControllerCard {
-    $props: RequiredSome<ControllerCardProps, keyof typeof ControllerCard.$propsDefault>;
-    $emit: ControllerCardEmits;
-    $slots: ControllerCardSlots;
-  }
-}
-export * from '../page/style/controller.jsx';
-export * from '../routes.js';
+export * from './page/routeQueryB.js';
+export * from './page/state.js';
 declare module 'zova-module-a-bean' {
 
   export interface IAopRecord {
@@ -251,7 +246,7 @@ declare module 'zova' {
     'demo-basic.aop.home3': AopHome3;
   }
 }
-export { default as ZCard } from './component/card.vue';
+export * from './page/style.js';
 declare module 'zova' {
 
 }

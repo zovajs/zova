@@ -30,10 +30,10 @@ declare module 'zova' {
     'home-index.controller.pageHome': ControllerPageHome;
   }
 }
+export * from '../routes.js';
 /** controller: end */
 /** pages: begin */
-
-export * from '../routes.js';
+export * from './page/home.js';
 declare module 'zova' {
   export interface IPagePathRecord {
     '/home/index': undefined;

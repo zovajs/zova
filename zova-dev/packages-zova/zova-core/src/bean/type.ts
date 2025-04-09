@@ -1,3 +1,4 @@
+import type { defineOptions, VNode } from 'vue';
 import type { IBeanSceneRecord } from '../decorator/interface/beanOptions.js';
 
 export interface IBeanRecordGeneral {}
@@ -50,4 +51,12 @@ export function getBeanName<K extends keyof IBeanRecord>(beanFullName: K): K {
 export interface DefineModelOptions<T = any> {
   get?: (v: T) => any;
   set?: (v: T) => any;
+}
+
+export type IComponentOptions = Parameters<typeof defineOptions>[0];
+
+export type ISlot = () => VNode;
+
+export interface ISlotsDefault {
+  default?: ISlot;
 }

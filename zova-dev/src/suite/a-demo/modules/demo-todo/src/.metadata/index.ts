@@ -17,8 +17,6 @@ import { ModelTodo } from '../model/todo.js';
 /** controller: begin */
 import { ControllerPageItem } from '../page/item/controller.jsx';
 import { ControllerPageTodo } from '../page/todo/controller.jsx';
-/** controller: end */
-/** pages: begin */
 import { NSControllerPageItem } from './page/item.js';
 /** api: begin */
 import 'zova';
@@ -81,6 +79,10 @@ declare module 'zova' {
   }
 }
 export * from '../page/todo/controller.jsx';
+export * from '../routes.js';
+/** controller: end */
+/** pages: begin */
+export * from './page/item.js';
 declare module 'zova' {
   export interface IPagePathRecord {
     '/demo/todo/todo': undefined;
@@ -106,7 +108,7 @@ declare module 'zova-module-demo-todo' {
 }
 /** pages: end */
 
-export * from '../routes.js';
+export * from './page/todo.js';
 declare module 'zova' {
 
 }

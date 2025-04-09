@@ -1,4 +1,3 @@
-import { RequiredSome } from 'zova';
 /** monkey: end */
 /** scope: begin */
 import { BeanScopeBase, BeanScopeUtil, TypeLocaleBase, TypeModuleLocales } from 'zova';
@@ -6,28 +5,24 @@ import { Scope } from 'zova-module-a-bean';
 /** css: end */
 /** css: begin */
 import { CssDefault } from '../bean/css.default.js';
-
 /** theme: end */
 /** theme: begin */
 import { ThemeDefault } from '../bean/theme.default.js';
+
 /** controller: end */
 /** controller: begin */
 import { ControllerPage } from '../component/page/controller.jsx';
-/** components: begin */
-import { ControllerPageEmits, ControllerPageSlots } from '../component/page/controller.jsx';
 /** theme: end */
 /** locale: begin */
 import locale_en_us from '../config/locale/en-us.js';
-
 import locale_zh_cn from '../config/locale/zh-cn.js';
-/** pages: end */
-
 import { ControllerPageErrorNotFound } from '../page/errorNotFound/controller.jsx';
+
 /** service: end */
 /** service: begin */
 import { ServiceRouter } from '../service/router.js';
 import { ServiceSsr } from '../service/ssr.js';
-import ZPage from './component/page.vue';
+import { ZPage } from './component/page.js';
 
 /** components: end */
 /** css: begin */
@@ -102,10 +97,8 @@ declare module 'zova' {
     'home-base.controller.pageErrorNotFound': ControllerPageErrorNotFound;
   }
 }
-/** controller: end */
-/** pages: begin */
-
 export * from '../page/errorNotFound/controller.jsx';
+export * from '../routes.js';
 declare module 'zova' {
   export interface IPagePathRecord {
     '/home/base//:catchAll(.*)*': undefined;
@@ -123,7 +116,10 @@ export const pageNameSchemas = {
 declare module 'zova-module-home-base' {
 
 }
-export * from '../routes.js';
+/** pages: end */
+
+/** service: begin */
+export * from '../service/router.js';
 export const components = {
   page: ZPage,
 };
@@ -132,20 +128,7 @@ declare module 'zova' {
     'home-base:page': ControllerPage;
   }
 }
-declare module 'zova-module-home-base' {
-  export interface ControllerPageProps {
-    controllerRef?: (ref: ControllerPage) => void;
-    slots?: ControllerPageSlots;
-  }
-
-  export interface ControllerPage {
-    $props: RequiredSome<ControllerPageProps, keyof typeof ControllerPage.$propsDefault>;
-    $emit: ControllerPageEmits;
-    $slots: ControllerPageSlots;
-  }
-}
-/** service: begin */
-export * from '../service/router.js';
+export * from '../service/ssr.js';
 declare module 'zova' {
 
 }
@@ -161,7 +144,8 @@ declare module 'zova' {
     'home-base.css.default': CssDefault;
   }
 }
-export * from '../service/ssr.js';
+/** components: begin */
+export * from './component/page.js';
 declare module 'zova' {
 
 }
@@ -181,7 +165,9 @@ export const locales = {
   'en-us': locale_en_us,
   'zh-cn': locale_zh_cn,
 };
-export { default as ZPage } from './component/page.vue';
+/** controller: end */
+/** pages: begin */
+export * from './page/errorNotFound.js';
 
 @Scope()
 export class ScopeModuleHomeBase extends BeanScopeBase {}

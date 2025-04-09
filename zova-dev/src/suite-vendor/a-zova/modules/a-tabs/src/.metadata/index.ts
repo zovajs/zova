@@ -1,19 +1,14 @@
-import { RequiredSome } from 'zova';
 /** model: end */
 /** scope: begin */
 import { BeanScopeBase, BeanScopeUtil } from 'zova';
 import { Scope } from 'zova-module-a-bean';
 /** controller: end */
-
-/** controller: end */
 /** controller: begin */
 import { ControllerRouterViewTabs } from '../component/routerViewTabs/controller.jsx';
-/** components: begin */
-import { ControllerRouterViewTabsEmits, ControllerRouterViewTabsSlots } from '../component/routerViewTabs/controller.jsx';
 /** model: end */
 /** model: begin */
 import { ModelTabs } from '../model/tabs.js';
-import ZRouterViewTabs from './component/routerViewTabs.vue';
+import { ZRouterViewTabs } from './component/routerViewTabs.js';
 
 /** controller: begin */
 import 'zova';
@@ -40,6 +35,8 @@ declare module 'zova' {
     'a-tabs.controller.routerViewTabs': ControllerRouterViewTabs;
   }
 }
+/** controller: end */
+
 /** components: end */
 /** model: begin */
 export * from '../model/tabs.js';
@@ -51,19 +48,8 @@ declare module 'zova' {
     'a-tabs:routerViewTabs': ControllerRouterViewTabs;
   }
 }
-declare module 'zova-module-a-tabs' {
-  export interface ControllerRouterViewTabsProps {
-    controllerRef?: (ref: ControllerRouterViewTabs) => void;
-    slots?: ControllerRouterViewTabsSlots;
-  }
-
-  export interface ControllerRouterViewTabs {
-    $props: RequiredSome<ControllerRouterViewTabsProps, keyof typeof ControllerRouterViewTabs.$propsDefault>;
-    $emit: ControllerRouterViewTabsEmits;
-    $slots: ControllerRouterViewTabsSlots;
-  }
-}
-export { default as ZRouterViewTabs } from './component/routerViewTabs.vue';
+/** components: begin */
+export * from './component/routerViewTabs.js';
 declare module 'zova' {
 
 }

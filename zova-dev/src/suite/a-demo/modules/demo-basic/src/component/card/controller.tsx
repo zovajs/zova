@@ -1,21 +1,13 @@
-import type { VNode } from 'vue';
-import { BeanControllerBase } from 'zova';
+import { BeanControllerBase, ISlot } from 'zova';
 import { Controller } from 'zova-module-a-bean';
 
 export interface ControllerCardProps {
   header?: string;
   content?: string;
   footer?: string;
-}
-
-export interface ControllerCardEmits {
-  (e: 'reset', time: Date): void;
-}
-
-export interface ControllerCardSlots {
-  header?(): VNode;
-  default?(): VNode;
-  footer?(): VNode;
+  onReset?: (time: Date) => void;
+  slotHeader?: ISlot;
+  slotFooter?: ISlot;
 }
 
 @Controller()
@@ -30,7 +22,7 @@ export class ControllerCard extends BeanControllerBase {
         <button
           class="btn btn-primary"
           onClick={() => {
-            this.$emit('reset', new Date());
+            this.$props.onReset?.(new Date());
           }}
         >
           Reset Time
@@ -39,7 +31,7 @@ export class ControllerCard extends BeanControllerBase {
           <div style={{ backgroundColor: 'teal' }}>
             <div>
               <div>Slot:</div>
-              {this.$slots.header?.()}
+              {this.$props.slotHeader?.()}
             </div>
             <div>{`Prop: ${this.$props.header}`}</div>
           </div>
@@ -53,7 +45,7 @@ export class ControllerCard extends BeanControllerBase {
           <div style={{ backgroundColor: 'green' }}>
             <div>
               <div>Slot</div>
-              {this.$slots.footer?.()}
+              {this.$props.slotFooter?.()}
             </div>
             <div>{`Prop: ${this.$props.footer}`}</div>
           </div>

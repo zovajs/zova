@@ -32,18 +32,15 @@ export class ControllerPageComponent extends BeanControllerPageBase {
           onReset={time => {
             this.resetTime = time;
           }}
-          slots={{
-            header: () => {
-              return <div>this is a header slot from parent</div>;
-            },
-            default: () => {
-              return <div>this is a default slot from parent</div>;
-            },
-            footer: () => {
-              return <div>this is a footer slot from parent</div>;
-            },
+          slotHeader={() => {
+            return <div>this is a header slot from parent</div>;
           }}
-        ></ZCard>
+          slotFooter={() => {
+            return <div>this is a footer slot from parent</div>;
+          }}
+        >
+          <div>this is a default slot from parent</div>
+        </ZCard>
         <label>Input: </label>
         <input
           type="text"

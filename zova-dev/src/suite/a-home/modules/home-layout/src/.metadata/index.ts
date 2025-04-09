@@ -1,24 +1,18 @@
-import { RequiredSome } from 'zova';
 /** locale: end */
 /** scope: begin */
 import { BeanScopeBase, BeanScopeUtil, TypeLocaleBase, TypeModuleConfig, TypeModuleLocales } from 'zova';
+import { Scope } from 'zova-module-a-bean';
 /** api: end */
 /** api: begin */
-
-import { Scope } from 'zova-module-a-bean';
 
 /** api: end */
 /** api: begin */
 import { ApiMenu } from '../api/menu.js';
+
 /** controller: end */
 /** controller: begin */
 import { ControllerEssentialLink } from '../component/essentialLink/controller.jsx';
-/** components: begin */
-import { ControllerEssentialLinkEmits, ControllerEssentialLinkSlots } from '../component/essentialLink/controller.jsx';
 import { ControllerLayoutDefault } from '../component/layoutDefault/controller.jsx';
-import { ControllerLayoutDefaultEmits, ControllerLayoutDefaultSlots } from '../component/layoutDefault/controller.jsx';
-/** controller: end */
-
 /** render: end */
 /** render: begin */
 import { RenderContent } from '../component/layoutDefault/render.content.jsx';
@@ -28,14 +22,13 @@ import { RenderLocale } from '../component/layoutDefault/render.locale.jsx';
 import { RenderMenu } from '../component/layoutDefault/render.menu.jsx';
 import { RenderSidebar } from '../component/layoutDefault/render.sidebar.jsx';
 import { RenderTabs } from '../component/layoutDefault/render.tabs.jsx';
-import { RenderTheme } from '../component/layoutDefault/render.theme.jsx';
 
+import { RenderTheme } from '../component/layoutDefault/render.theme.jsx';
 import { RenderUser } from '../component/layoutDefault/render.user.jsx';
 /** style: end */
 /** style: begin */
 import { StyleLayoutDefault } from '../component/layoutDefault/style.js';
 import { ControllerLayoutEmpty } from '../component/layoutEmpty/controller.jsx';
-import { ControllerLayoutEmptyEmits, ControllerLayoutEmptySlots } from '../component/layoutEmpty/controller.jsx';
 import { config } from '../config/config.js';
 /** config: end */
 /** locale: begin */
@@ -44,9 +37,9 @@ import locale_zh_cn from '../config/locale/zh-cn.js';
 /** model: end */
 /** model: begin */
 import { ModelMenu } from '../model/menu.js';
-import ZEssentialLink from './component/essentialLink.vue';
-import ZLayoutDefault from './component/layoutDefault.vue';
-import ZLayoutEmpty from './component/layoutEmpty.vue';
+import { ZEssentialLink } from './component/essentialLink.js';
+import { ZLayoutDefault } from './component/layoutDefault.js';
+import { ZLayoutEmpty } from './component/layoutEmpty.js';
 
 /** api: begin */
 import 'zova';
@@ -120,6 +113,8 @@ declare module 'zova' {
     'home-layout.controller.layoutEmpty': ControllerLayoutEmpty;
   }
 }
+/** controller: end */
+
 export * from '../component/layoutDefault/render.header.jsx';
 export * from '../component/layoutDefault/render.jsx';
 export * from '../component/layoutDefault/render.locale.jsx';
@@ -133,38 +128,6 @@ declare module 'zova' {
     'home-layout:essentialLink': ControllerEssentialLink;
     'home-layout:layoutDefault': ControllerLayoutDefault;
     'home-layout:layoutEmpty': ControllerLayoutEmpty;
-  }
-}
-declare module 'zova-module-home-layout' {
-  export interface ControllerEssentialLinkProps {
-    controllerRef?: (ref: ControllerEssentialLink) => void;
-    slots?: ControllerEssentialLinkSlots;
-  }
-
-  export interface ControllerEssentialLink {
-    $props: RequiredSome<ControllerEssentialLinkProps, keyof typeof ControllerEssentialLink.$propsDefault>;
-    $emit: ControllerEssentialLinkEmits;
-    $slots: ControllerEssentialLinkSlots;
-  }
-  export interface ControllerLayoutDefaultProps {
-    controllerRef?: (ref: ControllerLayoutDefault) => void;
-    slots?: ControllerLayoutDefaultSlots;
-  }
-
-  export interface ControllerLayoutDefault {
-    $props: RequiredSome<ControllerLayoutDefaultProps, keyof typeof ControllerLayoutDefault.$propsDefault>;
-    $emit: ControllerLayoutDefaultEmits;
-    $slots: ControllerLayoutDefaultSlots;
-  }
-  export interface ControllerLayoutEmptyProps {
-    controllerRef?: (ref: ControllerLayoutEmpty) => void;
-    slots?: ControllerLayoutEmptySlots;
-  }
-
-  export interface ControllerLayoutEmpty {
-    $props: RequiredSome<ControllerLayoutEmptyProps, keyof typeof ControllerLayoutEmpty.$propsDefault>;
-    $emit: ControllerLayoutEmptyEmits;
-    $slots: ControllerLayoutEmptySlots;
   }
 }
 export * from '../component/layoutDefault/render.menu.jsx';
@@ -258,7 +221,8 @@ declare module 'zova-module-home-layout' {
   export interface RenderLayoutDefault extends StyleLayoutDefault {}
   export interface RenderUser extends StyleLayoutDefault {}
 }
-export { default as ZEssentialLink } from './component/essentialLink.vue';
+/** components: begin */
+export * from './component/essentialLink.js';
 
 declare module 'zova' {
 
@@ -281,7 +245,7 @@ declare module 'zova' {
 declare module 'zova-module-home-layout' {
   export interface StyleLayoutDefault extends ControllerLayoutDefault {}
 }
-export { default as ZLayoutDefault } from './component/layoutDefault.vue';
+export * from './component/layoutDefault.js';
 
 declare module 'zova' {
 
@@ -299,7 +263,7 @@ declare module 'zova' {
     'home-layout.model.menu': ModelMenu;
   }
 }
-export { default as ZLayoutEmpty } from './component/layoutEmpty.vue';
+export * from './component/layoutEmpty.js';
 
 export const locales = {
   'en-us': locale_en_us,

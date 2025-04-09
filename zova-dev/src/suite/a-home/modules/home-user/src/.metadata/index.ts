@@ -81,10 +81,10 @@ declare module 'zova' {
     'home-user.controller.pageLogin': ControllerPageLogin;
   }
 }
-/** controller: end */
-/** pages: begin */
-
 export * from '../model/user.js';
+/** openapi: end */
+/** controller: begin */
+export * from '../page/login/controller.jsx';
 declare module 'zova' {
   export interface IPagePathRecord {
     '/home/user/login': undefined;
@@ -104,10 +104,10 @@ declare module 'zova-module-home-user' {
 }
 /** pages: end */
 
-/** openapi: end */
-/** controller: begin */
-export * from '../page/login/controller.jsx';
 export * from '../routes.js';
+/** controller: end */
+/** pages: begin */
+export * from './page/login.js';
 declare module 'zova' {
 
 }

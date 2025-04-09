@@ -1,13 +1,6 @@
-import type { defineOptions, VNode } from 'vue';
-import type { IControllerData } from './type.js';
+import type { IControllerData, ISlotsDefault } from './type.js';
 import { shallowReactive, useModel } from 'vue';
 import { BeanBase } from './beanBase.js';
-
-export type IComponentOptions = Parameters<typeof defineOptions>[0];
-
-export interface ISlotsDefault {
-  default?(): VNode;
-}
 
 export class BeanControllerBase extends BeanBase {
   public $props: unknown;
