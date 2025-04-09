@@ -106,6 +106,17 @@ export function generateFileComponent(
   if (hasModelValue) {
     contentControllerInterfaceMethods.push(`$useModel(options?: DefineModelOptions<TypeModelArguments${genericArguments}['modelValue']>): ControllerInnerProps${genericArguments}['modelValue'];`);
   }
+  const contentControllerInterfaceRecords: string[] = [];
+  if (hasStyleFirst) {
+    contentControllerInterfaceRecords.push(`export interface ${classNameStyleFirst} extends ${className} {}`);
+  }
+  if (hasRenderFirst) {
+    if (hasStyleFirst) {
+      contentControllerInterfaceRecords.push(`export interface ${classNameRenderFirst} extends ${classNameStyleFirst} {}`);
+    } else {
+      contentControllerInterfaceRecords.push(`export interface ${classNameRenderFirst} extends ${className} {}`);
+    }
+  }
   let contentControllerInterface = '';
   if (hasProps || hasModels) {
     contentControllerInterface = `declare module 'zova-module-${moduleName}' {
