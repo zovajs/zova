@@ -44,7 +44,7 @@ export class CliRefactorComponentModel extends BeanCliBase {
     if (!fs.existsSync(componentDir)) {
       throw new Error(`component not exists: ${componentDir}`);
     }
-    // props emits
+    // props
     for (const cmd of ['componentProps']) {
       try {
         await this.helper.invokeCli([`:refactor:${cmd}`, componentName, `--module=${moduleName}`], {

@@ -49,15 +49,9 @@ function _parseControllerInfo(
   // props
   const nameProps = `${className}Props`;
   const hasProps = fileContent.includes(nameProps);
-  // emits
-  const nameEmits = `${className}Emits`;
-  const hasEmits = fileContent.includes(nameEmits);
-  // slots
-  const nameSlots = `${className}Slots`;
-  const hasSlots = fileContent.includes(nameSlots);
   // model
-  const hasModel = fileContent.includes("(e: 'update:");
-  const hasModelValue = fileContent.includes("(e: 'update:modelValue'");
+  const hasModel = fileContent.includes(`Controller${nameCapitalize}Models`);
+  const hasModelValue = fileContent.includes('vModel');
   // generic
   const matchGeneric = fileContent.match(/interface [^<]*Props<(.*?)> \{/);
   const hasGeneric = !!matchGeneric;
@@ -92,10 +86,6 @@ function _parseControllerInfo(
     hasComponentOptions,
     nameProps,
     hasProps,
-    nameEmits,
-    hasEmits,
-    nameSlots,
-    hasSlots,
     hasModel,
     hasModelValue,
     hasGeneric,

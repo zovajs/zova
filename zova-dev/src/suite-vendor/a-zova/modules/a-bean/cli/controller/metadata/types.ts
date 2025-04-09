@@ -8,10 +8,6 @@ export interface IControllerInfo {
   hasComponentOptions: boolean;
   nameProps: string;
   hasProps: boolean;
-  nameEmits: string;
-  hasEmits: boolean;
-  nameSlots: string;
-  hasSlots: boolean;
   hasModel: boolean;
   hasModelValue: boolean;
   hasGeneric: boolean;

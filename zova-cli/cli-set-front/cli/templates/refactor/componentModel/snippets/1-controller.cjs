@@ -16,7 +16,7 @@ module.exports = {
       ast = ast.replace('@Controller', `export interface ${argv.controllerClassName}Models${genericT} {}\n\n@Controller`);
     }
     // exits
-    if (ast.includes(`'${typeName}'?: `) || ast.includes(`'${typeName}': `)) {
+    if (ast.includes(`'${typeName}'`)) {
       throw new Error('Model exists');
     }
     // Model
