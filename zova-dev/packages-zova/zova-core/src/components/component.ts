@@ -1,3 +1,4 @@
+import type { ComponentOptions } from 'vue';
 import type { Constructable } from '../decorator/type/constructable.js';
 import { defineAsyncComponent, defineComponent } from 'vue';
 import { useApp } from '../composables/useApp.js';
@@ -14,15 +15,6 @@ export function createZovaComponentAsync(module, name) {
   });
 }
 
-// export function createZovaComponent(controller: any) {
-//   return defineComponent(props => {
-//     useController(controller, props);
-//     return () => {
-//       return createVNode('template');
-//     };
-//   });
-// }
-
 export function createZovaComponentPage<M, R, S>(controller: Constructable<M>, render?: Constructable<R>, style?: Constructable<S>) {
   return defineComponent(() => {
     useControllerPage(controller, render, style);
@@ -30,4 +22,8 @@ export function createZovaComponentPage<M, R, S>(controller: Constructable<M>, r
       return null;
     };
   });
+}
+
+export function prepareComponentOptions(componentOptions?: ComponentOptions) {
+  return Object.assign({ inheritAttrs: ['class', 'style'] }, componentOptions);
 }

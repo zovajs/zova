@@ -102,10 +102,10 @@ function _generateFileVueComponent(
   const contentImports: string[] = [];
   const functionGeneric = hasGeneric ? `<${generic}>` : '';
   const namePropsGeneric = hasGeneric ? `${nameProps}<${genericKeys?.join(',')}>` : nameProps;
-  const componentOptions = hasComponentOptions ? `Controller${nameCapitalize}.$componentOptions,` : '';
+  const componentOptions = hasComponentOptions ? `Controller${nameCapitalize}.$componentOptions` : '';
   // controller
   contentImports.push("import { defineComponent } from 'vue'");
-  contentImports.push("import { useController } from 'zova';");
+  contentImports.push("import { prepareComponentOptions, useController } from 'zova';");
   contentImports.push(
     `import { ${className} } from '../../component/${name}/controller${controllerExtJs}';`,
   );
@@ -168,7 +168,8 @@ export const Z${nameCapitalize} = defineComponent(
     return () => {
       return null;
     };
-  },${componentOptions}
+  },
+  prepareComponentOptions(${componentOptions}),
 );
 `;
   return content;
