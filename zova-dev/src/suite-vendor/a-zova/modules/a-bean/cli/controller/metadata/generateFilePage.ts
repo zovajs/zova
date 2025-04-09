@@ -1,0 +1,61 @@
+import type { IMetadataCustomGenerateOptions } from '@cabloy/cli';
+import type { IGlobBeanFile } from '@cabloy/module-info';
+import type { IControllerInfo } from './types.ts';
+
+export function generateFilePage(
+  _options: IMetadataCustomGenerateOptions,
+  globFile: IGlobBeanFile,
+  controllerInfo: IControllerInfo,
+) {
+  const { className } = globFile;
+  const { name, nameCapitalize, controllerExtJs, importRender, importStyle } = controllerInfo;
+  const { nameSchemaParams, hasSchemaParams, nameSchemaQuery, hasSchemaQuery } = controllerInfo;
+  const contentImports: string[] = [];
+  // controller
+  contentImports.push("import { createZovaComponentPage } from 'zova';");
+  contentImports.push(
+    `import { ControllerPage${nameCapitalize} } from '../../page/${name}/controller${controllerExtJs}';`,
+  );
+  // render
+  if (importRender) {
+    contentImports.push(importRender);
+  }
+  // style
+  if (importStyle) {
+    contentImports.push(importStyle);
+  }
+  // params/query
+  const _contentImports_parts: string[] = [];
+  if (hasSchemaParams) _contentImports_parts.push(nameSchemaParams);
+  if (hasSchemaQuery) _contentImports_parts.push(nameSchemaQuery);
+  if (_contentImports_parts.length > 0) {
+    contentImports.push(
+      `import { ${_contentImports_parts.join(', ')} } from '../../page/${name}/controller${controllerExtJs}';`,
+    );
+  }
+  //
+  const _contentRecords2_parts: string[] = [];
+  if (hasSchemaParams) {
+    _contentRecords2_parts.push(`export const paramsSchema = ${nameSchemaParams};
+      export type ParamsInput = z.input<typeof ${nameSchemaParams}>;
+      export type ParamsOutput = z.output<typeof ${nameSchemaParams}>;
+    `);
+  }
+  if (hasSchemaQuery) {
+    _contentRecords2_parts.push(`export const querySchema = ${nameSchemaQuery};
+      export type QueryInput = z.input<typeof ${nameSchemaQuery}>;
+      export type QueryOutput = z.output<typeof ${nameSchemaQuery}>;
+    `);
+  }
+  if (_contentRecords2_parts.length > 0) {
+    contentImports.push('import { z } from \'zod\';');
+    contentImports.push(`export namespace NS${className} {
+      ${_contentRecords2_parts.join('\n')}
+    }`);
+  }
+  // export page
+  contentImports.push(`export const ZPage${nameCapitalize} = createZovaComponentPage(ControllerPage${nameCapitalize}, ${importRender ? `RenderPage${nameCapitalize}` : undefined}, ${importStyle ? `StylePage${nameCapitalize}` : undefined});`);
+  // content
+  const content = `${contentImports.join('\n')}\n`;
+  return content;
+}
