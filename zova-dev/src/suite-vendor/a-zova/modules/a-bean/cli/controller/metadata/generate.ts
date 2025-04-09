@@ -65,16 +65,20 @@ function _parseControllerInfo(
   const nameSchemaQuery = `${className}SchemaQuery`;
   const hasSchemaQuery = fileContent.includes(nameSchemaQuery);
   // render
-  const fileRender = path.join(options.modulePath, `src/${type}/${name}/render.tsx`);
-  let importRender = '';
-  if (fse.existsSync(fileRender)) {
-    importRender = `import { Render${type === 'page' ? 'Page' : ''}${nameCapitalize} } from '../../${type}/${name}/render.jsx';`;
+  const fileRenderFirst = path.join(options.modulePath, `src/${type}/${name}/render.tsx`);
+  const hasRenderFirst = fse.existsSync(fileRenderFirst);
+  const classNameRenderFirst = `Render${type === 'page' ? 'Page' : ''}${nameCapitalize}`;
+  let importRenderFirst = '';
+  if (hasRenderFirst) {
+    importRenderFirst = `import { ${classNameRenderFirst} } from '../../${type}/${name}/render.jsx';`;
   }
   // style
-  const fileStyle = path.join(options.modulePath, `src/${type}/${name}/style.ts`);
-  let importStyle = '';
-  if (fse.existsSync(fileStyle)) {
-    importStyle = `import { Style${type === 'page' ? 'Page' : ''}${nameCapitalize} } from '../../${type}/${name}/style.js';`;
+  const fileStyleFirst = path.join(options.modulePath, `src/${type}/${name}/style.ts`);
+  const hasStyleFirst = fse.existsSync(fileStyleFirst);
+  const classNameStyleFirst = `Style${type === 'page' ? 'Page' : ''}${nameCapitalize}`;
+  let importStyleFirst = '';
+  if (hasStyleFirst) {
+    importStyleFirst = `import { ${classNameStyleFirst} } from '../../${type}/${name}/style.js';`;
   }
   // ok
   return {
@@ -97,9 +101,13 @@ function _parseControllerInfo(
     hasSchemaParams,
     nameSchemaQuery,
     hasSchemaQuery,
-    fileRender,
-    importRender,
-    fileStyle,
-    importStyle,
+    fileRenderFirst,
+    hasRenderFirst,
+    classNameRenderFirst,
+    importRenderFirst,
+    fileStyleFirst,
+    hasStyleFirst,
+    classNameStyleFirst,
+    importStyleFirst,
   };
 }

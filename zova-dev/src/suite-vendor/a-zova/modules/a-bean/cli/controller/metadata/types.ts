@@ -18,8 +18,12 @@ export interface IControllerInfo {
   hasSchemaParams: boolean;
   nameSchemaQuery: string;
   hasSchemaQuery: boolean;
-  fileRender: string;
-  importRender: string;
-  fileStyle: string;
-  importStyle: string;
+  fileRenderFirst: string;
+  hasRenderFirst: boolean;
+  classNameRenderFirst: string;
+  importRenderFirst: string;
+  fileStyleFirst: string;
+  hasStyleFirst: boolean;
+  classNameStyleFirst: string;
+  importStyleFirst: string;
 }
