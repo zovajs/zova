@@ -4,7 +4,7 @@ import type { IControllerInfo } from './types.js';
 import path from 'node:path';
 import fse from 'fs-extra';
 
-export async function generateFileVue(
+export async function generateFile(
   options: IMetadataCustomGenerateOptions,
   globFile: IGlobBeanFile,
   controllerInfo: IControllerInfo,

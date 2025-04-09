@@ -4,7 +4,7 @@ import type { IControllerInfo } from './types.ts';
 import path from 'node:path';
 import { toUpperCaseFirstChar } from '@cabloy/word-utils';
 import fse from 'fs-extra';
-import { generateFileVue } from './generateFileVue.ts';
+import { generateFile } from './generateFile.ts';
 import { generateMetaComponent } from './generateMetaComponent.ts';
 import { generateMetaPage } from './generateMetaPage.ts';
 
@@ -16,7 +16,7 @@ export default async function (options: IMetadataCustomGenerateOptions): Promise
     if (globFile.isIgnore) continue;
     const controllerInfo = _parseControllerInfo(options, globFile);
     if (!controllerInfo) continue;
-    await generateFileVue(options, globFile, controllerInfo);
+    await generateFile(options, globFile, controllerInfo);
     if (controllerInfo.type === 'page') {
       globFilesPage.push([globFile, controllerInfo]);
     } else {
