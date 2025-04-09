@@ -18,9 +18,7 @@ export function createZovaComponentAsync(module, name) {
 export function createZovaComponentPage<M, R, S>(controller: Constructable<M>, render?: Constructable<R>, style?: Constructable<S>) {
   return defineComponent(() => {
     useControllerPage(controller, render, style);
-    return () => {
-      return null;
-    };
+    return () => {};
   });
 }
 
