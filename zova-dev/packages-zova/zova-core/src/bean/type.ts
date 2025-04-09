@@ -64,6 +64,5 @@ export interface ISlotsDefault {
 
 export type TypePropValueFromModel<T> = T extends 'vModel' ? 'modelValue' : T extends `vModel:${string}_${string}` ? never : T extends `vModel:${infer ARG}` ? ARG : never;
 export type TypePropUpdateFromModel<T> = T extends 'vModel' ? 'onUpdate:modelValue' : T extends `vModel:${string}_${string}` ? never : T extends `vModel:${infer ARG}` ? `onUpdate:${ARG}` : never;
-
 // @ts-ignore ignore
 export type TypeControllerInnerProps<PROPS, PROPSDEFAULT> = RequiredSome<PROPS, PROPSDEFAULT>;
