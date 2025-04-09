@@ -50,8 +50,9 @@ function _parseControllerInfo(
   const nameProps = `${className}Props`;
   const hasProps = fileContent.includes(nameProps);
   // model
-  const hasModel = fileContent.includes(`Controller${nameCapitalize}Models`);
-  const hasModelValue = fileContent.includes('vModel');
+  const nameModels = `${className}Models`;
+  const hasModels = fileContent.includes(nameModels);
+  const hasModelValue = fileContent.includes("'vModel'");
   // generic
   const matchGeneric = fileContent.match(/interface [^<]*Props<(.*?)> \{/);
   const hasGeneric = !!matchGeneric;
@@ -86,7 +87,8 @@ function _parseControllerInfo(
     hasComponentOptions,
     nameProps,
     hasProps,
-    hasModel,
+    nameModels,
+    hasModels,
     hasModelValue,
     hasGeneric,
     generic,

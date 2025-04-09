@@ -17,7 +17,8 @@ export function generateFileComponent(
     nameProps,
     hasProps,
     hasGeneric,
-    hasModel,
+    nameModels,
+    hasModels,
     hasModelValue,
     generic,
     genericKeys,
@@ -25,20 +26,28 @@ export function generateFileComponent(
     importStyle,
   } = controllerInfo;
   const contentImports: string[] = [];
-  const functionGeneric = hasGeneric ? `<${generic}>` : '';
-  const namePropsGeneric = hasGeneric ? `${nameProps}<${genericKeys?.join(',')}>` : nameProps;
+  const genericDeclare = hasGeneric ? `<${generic}>` : '';
+  const genericArguments = hasGeneric ? `<${genericKeys?.join(',')}>` : '';
   const componentOptions = hasComponentOptions ? `Controller${nameCapitalize}.$componentOptions` : '';
-  // controller
+  // import
+  const _contentImportTypeZova: string[] = [];
+  if (hasModels) _contentImportTypeZova.push('DefineModelOptions', 'TypePropUpdateFromModel', 'TypePropValueFromModel');
+  if (hasProps) _contentImportTypeZova.push('TypeControllerInnerProps');
+  if (_contentImportTypeZova.length > 0) {
+    contentImports.push(`import type { ${_contentImportTypeZova.join(', ')} } from 'zova';`);
+  }
+  const _contentImportTypeController: string[] = [];
+  if (hasModels) _contentImportTypeController.push(nameModels);
+  if (hasProps)_contentImportTypeController.push(nameProps);
+  if (_contentImportTypeController.length > 0) {
+    contentImports.push(`import type { ${_contentImportTypeController.join(', ')} } from '../../component/${name}/controller${controllerExtJs}';`);
+  }
   contentImports.push("import { defineComponent } from 'vue'");
   contentImports.push("import { prepareComponentOptions, useController } from 'zova';");
+  // controller
   contentImports.push(
     `import { ${className} } from '../../component/${name}/controller${controllerExtJs}';`,
   );
-  if (hasProps) {
-    contentImports.push(
-      `import type { ${nameProps} } from '../../component/${name}/controller${controllerExtJs}';`,
-    );
-  }
   // render
   if (importRender) {
     contentImports.push(importRender);
@@ -47,53 +56,75 @@ export function generateFileComponent(
   if (importStyle) {
     contentImports.push(importStyle);
   }
-  // combine
-  const contentRecords2: string[] = [];
+  // TypeControllerPublicProps
+  let contentTypeControllerPublicProps = `type TypeControllerPublicProps${genericDeclare} = {
+    controllerRef?: (ref: ${className}${genericArguments}) => void;
+  }`;
   if (hasProps) {
-    const namePropsGeneric = hasGeneric ? `${nameProps}<${generic}>` : nameProps;
-    contentRecords2.push(`// eslint-disable-next-line
-  export interface ${namePropsGeneric} {
-        controllerRef?: (ref: ${className}) => void;
-      }
-      `);
+    contentTypeControllerPublicProps += ` & ${nameProps}${genericArguments}`;
   }
-  const _contentRecords_parts: string[] = [];
+  if (hasModels) {
+    contentTypeControllerPublicProps += ` & ${nameModels}${genericArguments} &
+{
+  [KEY in keyof ${nameModels}${genericArguments} as TypePropValueFromModel<KEY>]: ${nameModels}${genericArguments}[KEY];
+} &
+{
+  [KEY in keyof ${nameModels}${genericArguments} as TypePropUpdateFromModel<KEY>]: (value: ${nameModels}${genericArguments}[KEY]) => void;
+};`;
+  }
+  // TypeModelArguments
+  let contentTypeModelArguments = '';
+  if (hasModels) {
+    contentTypeModelArguments = `type TypeModelArguments${genericDeclare} = {
+      [KEY in keyof ${nameModels}${genericArguments} as TypePropValueFromModel<KEY>]: ${nameModels}${genericArguments}[KEY];
+    };`;
+  }
+  // ControllerInnerProps
+  let contentControllerInnerProps = '';
   if (hasProps) {
-    contentImports.push('import type { RequiredSome } from \'zova\';');
-    _contentRecords_parts.push(`// @ts-ignore ignore\n    $props: RequiredSome<${nameProps}, keyof typeof ${className}.$propsDefault>;`);
-  }
-  if (hasModel) {
-    _contentRecords_parts.push(
-      `$useModel<K extends keyof ${nameProps}>(name: K, options?: DefineModelOptions<${nameProps}[K]>): RequiredSome<${nameProps}, keyof typeof ${className}.$propsDefault>[K];`,
-    );
-    if (hasModelValue) {
-      _contentRecords_parts.push(
-        `$useModel(options?: DefineModelOptions<${nameProps}['modelValue']>): RequiredSome<${nameProps}, keyof typeof ${className}.$propsDefault>['modelValue'];`,
-      );
+    let contentControllerInnerProps_models = '';
+    if (hasModels) {
+      contentControllerInnerProps_models = ` & {
+        [KEY in keyof ${nameModels}${genericArguments} as TypePropValueFromModel<KEY>]: ${nameModels}${genericArguments}[KEY];
+      }`;
     }
+    contentControllerInnerProps = `type ControllerInnerProps${genericDeclare} =
+      TypeControllerInnerProps<${nameProps}${genericArguments}${contentControllerInnerProps_models}, keyof typeof ${className}.$propsDefault>;`;
   }
-  if (_contentRecords_parts.length > 0) {
-    contentRecords2.push(`export interface ${className} {
-      ${_contentRecords_parts.join('\n')}
-    }`);
+  // Controller
+  const contentControllerInterfaceMethods: string[] = [];
+  if (hasProps) {
+    contentControllerInterfaceMethods.push(`$props: ControllerInnerProps${genericArguments};`);
   }
-  const contentCombine = contentRecords2.length > 0
-    ? `
-declare module 'zova-module-${moduleName}' {
-  ${contentRecords2.join('\n')} 
-}
-`
-    : '';
+  if (hasModels) {
+    contentControllerInterfaceMethods.push(`$useModel<K extends keyof TypeModelArguments${genericArguments}>(name: K, options?: DefineModelOptions<TypeModelArguments${genericArguments}[K]>): ControllerInnerProps${genericArguments}[K];`);
+  }
+  if (hasModelValue) {
+    contentControllerInterfaceMethods.push(`$useModel(options?: DefineModelOptions<TypeModelArguments${genericArguments}['modelValue']>): ControllerInnerProps${genericArguments}['modelValue'];`);
+  }
+  let contentControllerInterface = '';
+  if (hasProps || hasModels) {
+    contentControllerInterface = `declare module 'zova-module-${moduleName}' {
+      export interface ${className}${genericDeclare} {
+        ${contentControllerInterfaceMethods.join('\n')}
+      }
+    }`;
+  }
+  // component
+  const contentComponent = `export const Z${nameCapitalize} = defineComponent(
+    ${genericDeclare}(_props: TypeControllerPublicProps${genericArguments}) => {
+      useController(Controller${nameCapitalize}, ${importRender ? `Render${nameCapitalize}` : undefined}, ${importStyle ? `Style${nameCapitalize}` : undefined});
+      return () => {};
+    },
+    prepareComponentOptions(${componentOptions}),
+  );`;
   // content
   const content = `${contentImports.join('\n')}
-${contentCombine}
-export const Z${nameCapitalize} = defineComponent(
-  ${functionGeneric}(_props: ${namePropsGeneric}) => {
-    useController(Controller${nameCapitalize}, ${importRender ? `Render${nameCapitalize}` : undefined}, ${importStyle ? `Style${nameCapitalize}` : undefined});
-    return () => {};
-  },
-  prepareComponentOptions(${componentOptions}),
-);
+${contentTypeControllerPublicProps}
+${contentTypeModelArguments}
+${contentControllerInnerProps}
+${contentControllerInterface}
+${contentComponent}
 `;
   return content;
 }
