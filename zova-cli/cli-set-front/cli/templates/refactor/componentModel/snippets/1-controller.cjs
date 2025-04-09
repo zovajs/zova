@@ -6,23 +6,29 @@ module.exports = {
   async transform({ cli, ast, argv }) {
     const modelName = argv.modelName;
     const localName = modelName === 'modelValue' ? modelName : `model${cli.helper.firstCharToUpperCase(modelName)}`;
-    const eventName = `update:${modelName}`;
-    if (ast.includes(`e: '${eventName}'`))
+    const typeName = modelName === 'modelValue' ? 'vModel' : `vModel:${modelName}`;
+    // models
+    if (!ast.includes(`${argv.controllerClassName}Models`)) {
+      const matchGeneric = ast.match(/interface [^<]*Props<(.*?)> \{/);
+      const hasGeneric = !!matchGeneric;
+      const generic = matchGeneric && matchGeneric[1];
+      const genericT = hasGeneric ? `<${generic}>` : '';
+      ast = ast.replace('@Controller', `export interface ${argv.controllerClassName}Models${genericT} {}\n\n@Controller`);
+    }
+    // exits
+    if (ast.includes(`'${typeName}'?: `) || ast.includes(`'${typeName}': `)) {
       throw new Error('Model exists');
+    }
+    // Model
+    ast = ast.replace(/interface [^<]*Models([^{]*) \{/, ($0) => {
+      return `${$0}\n  '${typeName}'?: number;`;
+    });
     // @Model
     if (!ast.match(/import \{[^}]*Model[^}]*\} from 'zova';/)) {
       ast = ast.replace(/import \{ ([^}]*) \} from 'zova';/, (_, $1) => {
         return `import { ${$1}, Model } from 'zova';`;
       });
     }
-    // Props
-    ast = ast.replace(/interface [^<]*Props([^{]*) \{/, ($0) => {
-      return `${$0}\n  ${modelName}?: number;`;
-    });
-    // Emits
-    ast = ast.replace(/interface [^<]*Emits([^{]*) \{/, ($0) => {
-      return `${$0}\n  (e: '${eventName}', value: number): void;`;
-    });
     // propsDefault
     ast = ast.replace(/static \$propsDefault([^{]*) = \{/, ($0) => {
       return `${$0}\n  ${modelName}: 0,`;

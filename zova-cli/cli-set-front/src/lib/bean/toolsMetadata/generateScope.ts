@@ -15,7 +15,7 @@ export async function generateScope(
   // basic
   contentImports.push('BeanScopeBase');
   // util
-  contentImports.push('BeanScopeUtil');
+  contentImports.push('type BeanScopeUtil');
   contentRecords.push('util: BeanScopeUtil;');
   //
   if (options.config) {
