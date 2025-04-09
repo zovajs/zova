@@ -144,7 +144,8 @@ function setControllerRef(ctx: ZovaContext, on: boolean) {
   const controller = ctx.bean?._getBeanSyncOnly(BeanControllerIdentifier) as any;
   if (!controller || controller[SymbolControllerRefDisable]) return;
   // instanceScope useless for emit, because emiter and receiver not the same instance
-  if (controller.$attrs?.controllerRef) {
-    controller.$attrs.controllerRef(on ? controller : undefined);
+  const controllerRef = controller.ctx.instance.vnode.props?.controllerRef;
+  if (controllerRef) {
+    controllerRef(on ? controller : undefined);
   }
 }
