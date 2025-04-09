@@ -1,5 +1,6 @@
 import type { defineOptions, VNode } from 'vue';
 import type { IBeanSceneRecord } from '../decorator/interface/beanOptions.js';
+import type { RequiredSome } from '../types/utils/requiredSome.js';
 
 export interface IBeanRecordGeneral {}
 export interface IBeanRecordLocal {}
@@ -60,3 +61,9 @@ export type ISlot = () => VNode;
 export interface ISlotsDefault {
   default?: ISlot;
 }
+
+export type TypePropValueFromModel<T> = T extends 'vModel' ? 'modelValue' : T extends `vModel:${string}_${string}` ? never : T extends `vModel:${infer ARG}` ? ARG : never;
+export type TypePropUpdateFromModel<T> = T extends 'vModel' ? 'onUpdate:modelValue' : T extends `vModel:${string}_${string}` ? never : T extends `vModel:${infer ARG}` ? `onUpdate:${ARG}` : never;
+
+// @ts-ignore ignore
+export type TypeControllerInnerProps<PROPS, PROPSDEFAULT> = RequiredSome<PROPS, PROPSDEFAULT>;
