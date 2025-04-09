@@ -1,10 +1,10 @@
 import type { IMetadataCustomGenerateOptions } from '@cabloy/cli';
 import type { IGlobBeanFile } from '@cabloy/module-info';
-import type { IControllerInfo } from './types.js';
+import type { IControllerInfo } from './types.ts';
 import path from 'node:path';
 import fse from 'fs-extra';
-import { generateFileComponent } from './generateFileComponent.js';
-import { generateFilePage } from './generateFilePage.js';
+import { generateFileComponent } from './generateFileComponent.ts';
+import { generateFilePage } from './generateFilePage.ts';
 
 export async function generateFile(
   options: IMetadataCustomGenerateOptions,

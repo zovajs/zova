@@ -1,6 +1,6 @@
 import type { IMetadataCustomGenerateOptions } from '@cabloy/cli';
 import type { IGlobBeanFile } from '@cabloy/module-info';
-import type { IControllerInfo } from './types.js';
+import type { IControllerInfo } from './types.ts';
 import path from 'node:path';
 import fse from 'fs-extra';
 
