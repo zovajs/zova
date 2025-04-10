@@ -1,5 +1,6 @@
 import type { IControllerData, ISlotsDefault } from './type.js';
-import { shallowReactive, useModel } from 'vue';
+import { shallowReactive } from 'vue';
+import { useModel } from '../vueExtra/useModel.js';
 import { BeanBase } from './beanBase.js';
 
 export class BeanControllerBase extends BeanBase {

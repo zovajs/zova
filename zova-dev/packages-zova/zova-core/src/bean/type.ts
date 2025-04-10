@@ -1,4 +1,4 @@
-import type { defineOptions, VNode } from 'vue';
+import type { defineOptions, Ref, VNode } from 'vue';
 import type { IBeanSceneRecord } from '../decorator/interface/beanOptions.js';
 import type { RequiredSome } from '../types/utils/requiredSome.js';
 
@@ -49,9 +49,15 @@ export function getBeanName<K extends keyof IBeanRecord>(beanFullName: K): K {
   return beanFullName;
 }
 
-export interface DefineModelOptions<T = any> {
-  get?: (v: T) => any;
-  set?: (v: T) => any;
+export type ModelRef<T, M extends PropertyKey = string, G = T, S = T> = Ref<
+  G,
+  S
+> &
+  [ModelRef<T, M, G, S>, Record<M, true | undefined>]
+
+export type DefineModelOptions<T = any, G = T, S = T> = {
+  get?: (v: T) => G
+  set?: (v: S) => any
 }
 
 export type IComponentOptions = Parameters<typeof defineOptions>[0];
