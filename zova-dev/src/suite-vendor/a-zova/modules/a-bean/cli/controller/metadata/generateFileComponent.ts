@@ -25,9 +25,13 @@ export function generateFileComponent(
     importRenderFirst,
     hasRenderFirst,
     classNameRenderFirst,
+    classNameRenderOthers,
+    importRenderOthers,
     importStyleFirst,
     hasStyleFirst,
     classNameStyleFirst,
+    classNameStyleOthers,
+    importStyleOthers,
   } = controllerInfo;
   const contentImports: string[] = [];
   const genericDeclare = hasGeneric ? `<${generic}>` : '';
@@ -56,10 +60,12 @@ export function generateFileComponent(
   if (hasRenderFirst) {
     contentImports.push(importRenderFirst);
   }
+  contentImports.push(...importRenderOthers);
   // style
   if (hasStyleFirst) {
     contentImports.push(importStyleFirst);
   }
+  contentImports.push(...importStyleOthers);
   // TypeControllerPublicProps
   const typeControllerPublicPropsName = `TypeController${nameCapitalize}PublicProps`;
   let contentTypeControllerPublicProps = `export type ${typeControllerPublicPropsName}${genericDeclare} = {
