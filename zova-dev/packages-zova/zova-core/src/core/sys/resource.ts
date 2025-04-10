@@ -1,4 +1,4 @@
-import type { IBeanRecord } from '../bean/type.js';
+import type { IBeanRecord } from '../../bean/type.js';
 import type {
   Constructable,
   Functionable,
@@ -6,13 +6,12 @@ import type {
   IDecoratorBeanInfoOptions,
   IDecoratorBeanOptionsBase,
   IDecoratorUseOptionsBase,
-} from '../decorator/index.js';
+} from '../../decorator/index.js';
 import type { MetadataKey } from './metadata.js';
 import { parseLastWord, skipLastWord, skipPrefix, splitWords } from '@cabloy/word-utils';
-import { BeanSimple } from '../bean/beanSimple.js';
-import { registerMappedClassMetadataKey } from '../mappedClass/utils.js';
-import { isClass } from '../utils/isClass.js';
-import { uuid } from '../utils/uuid.js';
+import { registerMappedClassMetadataKey } from '../../mappedClass/utils.js';
+import { isClass } from '../../utils/isClass.js';
+import { uuid } from '../../utils/uuid.js';
 import { appMetadata } from './metadata.js';
 
 export const DecoratorBeanFullName = Symbol('Decorator#BeanFullName');
@@ -23,7 +22,7 @@ export const DecoratorBeanFullNameOfComposable = Symbol('Decorator#BeanFullNameO
 
 export type IAppResourceRecord = Record<string, IDecoratorBeanOptionsBase>;
 
-export class AppResource extends BeanSimple {
+export class AppResource {
   beans: Record<string, IDecoratorBeanOptionsBase> = {};
   scenes: Record<string, Record<string, IAppResourceRecord>> = {};
 
