@@ -1,4 +1,4 @@
-import type { MetadataKey } from '../../core/metadata.js';
+import type { MetadataKey } from '../../core/sys/metadata.js';
 import type { Functionable, IDecoratorUseComposableOptions } from '../index.js';
 import { appResource } from '../../core/resource.js';
 

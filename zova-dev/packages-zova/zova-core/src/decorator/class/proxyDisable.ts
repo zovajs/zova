@@ -1,4 +1,4 @@
-import { appMetadata } from '../../core/metadata.js';
+import { appMetadata } from '../../core/sys/metadata.js';
 import { SymbolDecoratorProxyDisable } from '../../core/resource.js';
 
 export function ProxyDisable(): ClassDecorator {

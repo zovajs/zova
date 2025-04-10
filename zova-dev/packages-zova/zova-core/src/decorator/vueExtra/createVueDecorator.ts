@@ -1,6 +1,6 @@
-import type { MetadataKey } from '../../core/metadata.js';
+import type { MetadataKey } from '../../core/sys/metadata.js';
 import type { IDecoratorVueElement, TypeDecoratorVue } from './types.js';
-import { appMetadata } from '../../core/metadata.js';
+import { appMetadata } from '../../core/sys/metadata.js';
 import { SymbolDecoratorVueElements } from './types.js';
 
 export function createVueDecorator<OPTIONS>(

@@ -1,7 +1,7 @@
-import type { MetadataKey } from '../core/metadata.js';
+import type { MetadataKey } from '../core/sys/metadata.js';
 import type { Constructable } from '../decorator/index.js';
 import type { IMappedClassMetadataOptions, MappedClassMetadataKeys } from './type.js';
-import { appMetadata } from '../core/metadata.js';
+import { appMetadata } from '../core/sys/metadata.js';
 import { SymbolMappedClassMetadataKeys } from './type.js';
 
 export function registerMappedClassMetadataKey(

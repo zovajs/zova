@@ -1,5 +1,5 @@
 import type { IBeanRecord } from '../../bean/type.js';
-import type { MetadataKey } from '../../core/metadata.js';
+import type { MetadataKey } from '../../core/sys/metadata.js';
 import type {
   Constructable,
   IDecoratorUseOptions,
@@ -9,7 +9,7 @@ import type {
   TypeDecoratorUseOptionsInitArg,
 } from '../index.js';
 import { evaluateExpressions } from '@cabloy/utils';
-import { appMetadata } from '../../core/metadata.js';
+import { appMetadata } from '../../core/sys/metadata.js';
 import { appResource } from '../../core/resource.js';
 import { useRef } from '../../vueExtra/ref.js';
 

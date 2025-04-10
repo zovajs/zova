@@ -1,5 +1,5 @@
 import type { IBeanRecord, IBeanScopeRecord } from '../../bean/type.js';
-import type { MetadataKey } from '../../core/metadata.js';
+import type { MetadataKey } from '../../core/sys/metadata.js';
 import type { Constructable } from '../type/constructable.js';
 import type { Functionable } from '../type/functionable.js';
 import type { InjectionScope } from '../type/injectionScope.js';
