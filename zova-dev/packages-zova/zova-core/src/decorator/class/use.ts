@@ -10,7 +10,7 @@ import type {
 } from '../index.js';
 import { evaluateExpressions } from '@cabloy/utils';
 import { appMetadata } from '../../core/sys/metadata.js';
-import { appResource } from '../../core/resource.js';
+import { appResource } from '../../core/sys/resource.js';
 import { useRef } from '../../vueExtra/ref.js';
 
 export function Use(options?: IDecoratorUseOptions): PropertyDecorator & MethodDecorator;
