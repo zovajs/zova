@@ -63,14 +63,12 @@ export function useModel(
         ) {
           return;
         }
+        // local update
+        localValue = value;
+        trigger();
+        // update
         const rawProps = i.vnode!.props;
-        if (rawProps && `onUpdate:${name}` in rawProps) {
-          rawProps[`onUpdate:${name}`](emittedValue);
-        } else {
-          // no v-model, local update
-          localValue = value;
-          trigger();
-        }
+        rawProps?.[`onUpdate:${name}`]?.(emittedValue);
         // #10279: if the local value is converted via a setter but the value
         // emitted to parent was the same, the parent will not trigger any
         // updates and there will be no prop sync. However the local input state
