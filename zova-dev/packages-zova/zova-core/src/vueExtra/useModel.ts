@@ -1,6 +1,7 @@
 import type { Ref } from '@vue/reactivity';
 import type { BeanBase } from '../bean/beanBase.js';
 import type { DefineModelOptions, ModelRef } from '../bean/type.js';
+import { isNil } from '@cabloy/utils';
 import { customRef } from '@vue/reactivity';
 import { camelize, EMPTY_OBJ, hasChanged, hyphenate } from '@vue/shared';
 import { getCurrentInstance, watchSyncEffect } from 'vue';
@@ -28,6 +29,9 @@ export function useModel(
     throw new Error('useModel() called without active instance.');
   }
 
+  const propsDefault = Object.getPrototypeOf(this).constructor.$propsDefault;
+  const propType = typeof propsDefault[name];
+
   const camelizedName = camelize(name);
 
   const modifiers = getModelModifiers(props, camelizedName);
@@ -48,11 +52,11 @@ export function useModel(
     return {
       get() {
         track();
-        return options.get ? options.get(localValue) : localValue;
+        return coerceValueType(propType, options.get ? options.get(localValue) : localValue);
       },
 
       set(value) {
-        const emittedValue = options.set ? options.set(value) : value;
+        const emittedValue = coerceValueType(propType, options.set ? options.set(value) : value);
         if (
           !hasChanged(emittedValue, localValue) &&
           !(prevSetValue !== EMPTY_OBJ && hasChanged(value, prevSetValue))
@@ -110,3 +114,25 @@ export function getModelModifiers(
       props[`${camelize(modelName)}Modifiers`] ||
       props[`${hyphenate(modelName)}Modifiers`];
 };
+
+export function coerceValueType(type: string, value: any) {
+  if (['undefined', 'null'].includes(type)) return value;
+  if (isNil(value)) return value;
+  if ((typeof value as any) === type) return value;
+  let _value;
+  if (type === 'number') {
+    if (Number.isNaN(value)) {
+      _value = value;
+    } else {
+      _value = Number(value);
+    }
+  } else if (type === 'boolean') {
+    _value = (value === 'false' || value === '0') ? false : Boolean(value);
+  } else if (type === 'string') {
+    _value = String(value);
+  } else {
+    _value = value;
+  }
+  // ok
+  return _value;
+}
