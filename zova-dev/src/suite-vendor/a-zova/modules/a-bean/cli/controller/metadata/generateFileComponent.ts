@@ -61,7 +61,8 @@ export function generateFileComponent(
     contentImports.push(importStyleFirst);
   }
   // TypeControllerPublicProps
-  let contentTypeControllerPublicProps = `type TypeControllerPublicProps${genericDeclare} = {
+  const typeControllerPublicPropsName = `TypeController${nameCapitalize}PublicProps`;
+  let contentTypeControllerPublicProps = `export type ${typeControllerPublicPropsName}${genericDeclare} = {
     controllerRef?: (ref: ${className}${genericArguments}) => void;
   }`;
   if (hasProps) {
@@ -128,7 +129,7 @@ export function generateFileComponent(
   }
   // component
   const contentComponent = `export const Z${nameCapitalize} = defineComponent(
-    ${genericDeclare}(_props: TypeControllerPublicProps${genericArguments}) => {
+    ${genericDeclare}(_props: ${typeControllerPublicPropsName}${genericArguments}) => {
       useController(${className}, ${hasRenderFirst ? classNameRenderFirst : undefined}, ${hasStyleFirst ? classNameStyleFirst : undefined});
       return () => {};
     },
