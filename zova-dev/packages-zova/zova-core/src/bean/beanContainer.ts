@@ -525,6 +525,8 @@ export class BeanContainer {
     }
     // app/ctx
     if (beanInstance instanceof BeanSimple) {
+      // sys
+      (<any>beanInstance).sys = this.sys;
       // app
       Object.defineProperty(beanInstance, 'app', {
         enumerable: false,
