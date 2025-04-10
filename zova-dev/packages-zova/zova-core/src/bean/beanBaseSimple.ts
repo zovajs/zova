@@ -1,4 +1,4 @@
-import { appResource } from '../core/resource.js';
+import { appResource } from '../core/sys/resource.js';
 import { StateLock } from '../utils/stateLock.js';
 import { BeanSimple } from './beanSimple.js';
 

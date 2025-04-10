@@ -1,5 +1,5 @@
 import type { ZovaApplication, ZovaContext } from '../core/index.js';
-import type { MetadataKey } from '../core/metadata.js';
+import type { MetadataKey } from '../core/sys/metadata.js';
 import type {
   Constructable,
   Functionable,
@@ -13,8 +13,8 @@ import type { IBeanRecord, IBeanScopeRecord, IControllerData, TypeBeanScopeRecor
 import { compose } from '@cabloy/compose';
 import { isNilOrEmptyString } from '@cabloy/utils';
 import { inject as composableInject, provide as composableProvide, markRaw, reactive, shallowReactive } from 'vue';
-import { appMetadata } from '../core/metadata.js';
-import { appResource, SymbolDecoratorProxyDisable } from '../core/resource.js';
+import { appMetadata } from '../core/sys/metadata.js';
+import { appResource, SymbolDecoratorProxyDisable } from '../core/sys/resource.js';
 import {
   __prepareInjectSelectorInfo,
   SymbolDecoratorVueElements,
