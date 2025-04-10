@@ -3,7 +3,7 @@ import type { ZovaConfigMeta } from '@cabloy/module-info';
 import type { Component } from 'vue';
 import type { ZovaApplication } from '../../core/app/application.js';
 import type { StateLock } from '../../utils/stateLock.js';
-import type { IModuleMain, IMonkeyController, IMonkeyModule, IMonkeySystem } from './monkey.js';
+import type { IModuleMain, IMonkeyApp, IMonkeyController, IMonkeyModule } from './monkey.js';
 
 export type TypeModuleResourceIcons = Record<string, string>;
 export type TypeModuleResourceLocales = Record<string, object>;
@@ -15,7 +15,7 @@ export type TypeModuleResourceConfig = (app: ZovaApplication, meta?: ZovaConfigM
 
 export interface IModuleResource {
   Main: new () => IModuleMain;
-  Monkey: new () => IMonkeyModule & IMonkeySystem & IMonkeyController;
+  Monkey: new () => IMonkeyModule & IMonkeyApp & IMonkeyController;
   locales: TypeModuleResourceLocales;
   Errors: TypeModuleResourceErrors;
   config: TypeModuleResourceConfig;
@@ -33,6 +33,6 @@ declare module '@cabloy/module-info' {
     resource: IModuleResource; // IModuleResource | Promise<IModuleResource>;
     info: IModuleInfo;
     mainInstance: IModuleMain;
-    monkeyInstance: IMonkeyModule & IMonkeySystem & IMonkeyController;
+    monkeyInstance: IMonkeyModule & IMonkeyApp & IMonkeyController;
   }
 }

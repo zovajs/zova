@@ -1,7 +1,6 @@
-import type { RouteRecordRaw } from 'vue-router';
 import type { IModuleLocaleText } from '../../bean/resource/locale/type.js';
 import type { Constructable } from '../../decorator/type/constructable.js';
-import type { IMonkeyController, IMonkeyModule, IMonkeySystem } from '../../types/interface/monkey.js';
+import type { IMonkeyApp, IMonkeyController, IMonkeyModule } from '../../types/interface/monkey.js';
 import { BeanSimple } from '../../bean/beanSimple.js';
 import { AppIcon } from '../../bean/resource/icon/icon.js';
 import { AppComponent } from '../component/component.js';
@@ -24,7 +23,7 @@ export class AppMeta extends BeanSimple {
   text: IModuleLocaleText;
 
   /** @internal */
-  public appMonkey?: IMonkeyModule & IMonkeySystem & IMonkeyController;
+  public appMonkey?: IMonkeyModule & IMonkeyApp & IMonkeyController;
 
   protected __init__() {
     this.module = this.app.bean._newBeanSimple(AppModule, false);
@@ -40,7 +39,7 @@ export class AppMeta extends BeanSimple {
 
   /** @internal */
   public async initialize(
-    AppMonkey?: Constructable<IMonkeyModule & IMonkeySystem & IMonkeyController>,
+    AppMonkey?: Constructable<IMonkeyModule & IMonkeyApp & IMonkeyController>,
   ) {
     if (AppMonkey) {
       this.appMonkey = this.bean._newBeanSimple(AppMonkey, false);

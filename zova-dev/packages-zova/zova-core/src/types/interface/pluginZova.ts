@@ -3,7 +3,7 @@ import type { RouteRecordRaw } from 'vue-router';
 import type { ZovaLocaleOptionalMap } from '../../core/app/locale.js';
 import type { Constructable } from '../../decorator/index.js';
 import type { TypeModuleResourceConfig } from './module.js';
-import type { IMonkeyController, IMonkeyModule, IMonkeySystem } from './monkey.js';
+import type { IMonkeyApp, IMonkeyController, IMonkeyModule } from './monkey.js';
 
 export interface PluginZovaModulesMeta {
   modules: Record<string, IModule>;
@@ -14,6 +14,6 @@ export interface PluginZovaOptions {
   modulesMeta: PluginZovaModulesMeta;
   locales: ZovaLocaleOptionalMap;
   config: TypeModuleResourceConfig[];
-  AppMonkey?: Constructable<IMonkeyModule & IMonkeySystem & IMonkeyController>;
+  AppMonkey?: Constructable<IMonkeyModule & IMonkeyApp & IMonkeyController>;
   legacyRoutes?: RouteRecordRaw[];
 }
