@@ -13,4 +13,5 @@ export namespace NSControllerPageRouteQueryB {
   export type QueryOutput = z.output<typeof ControllerPageRouteQueryBSchemaQuery>;
 
 }
+
 export const ZPageRouteQueryB = createZovaComponentPage(ControllerPageRouteQueryB, undefined, undefined);

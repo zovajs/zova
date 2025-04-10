@@ -14,8 +14,8 @@ declare module 'zova-module-a-tabs' {
   export interface ControllerRouterViewTabs {
     $props: ControllerInnerProps;
   }
-
 }
+
 export const ZRouterViewTabs = defineComponent(
   (_props: TypeControllerRouterViewTabsPublicProps) => {
     useController(ControllerRouterViewTabs, undefined, undefined);

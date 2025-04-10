@@ -14,8 +14,8 @@ declare module 'zova-module-home-layout' {
   export interface ControllerLayoutEmpty {
     $props: ControllerInnerProps;
   }
-
 }
+
 export const ZLayoutEmpty = defineComponent(
   (_props: TypeControllerLayoutEmptyPublicProps) => {
     useController(ControllerLayoutEmpty, undefined, undefined);

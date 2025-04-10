@@ -16,6 +16,8 @@ declare module 'zova-module-home-layout' {
   export interface ControllerLayoutDefault {
     $props: ControllerInnerProps;
   }
+}
+declare module 'zova-module-home-layout' {
   export interface StyleLayoutDefault extends ControllerLayoutDefault {}
   export interface RenderLayoutDefault extends StyleLayoutDefault {}
   export interface RenderContent extends StyleLayoutDefault {}

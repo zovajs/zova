@@ -14,8 +14,8 @@ declare module 'zova-module-a-behavior' {
   export interface ControllerBehavior {
     $props: ControllerInnerProps;
   }
-
 }
+
 export const ZBehavior = defineComponent(
   (_props: TypeControllerBehaviorPublicProps) => {
     useController(ControllerBehavior, undefined, undefined);

@@ -14,8 +14,8 @@ declare module 'zova-module-home-base' {
   export interface ControllerPage {
     $props: ControllerInnerProps;
   }
-
 }
+
 export const ZPage = defineComponent(
   (_props: TypeControllerPagePublicProps) => {
     useController(ControllerPage, undefined, undefined);

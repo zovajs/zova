@@ -13,4 +13,5 @@ export namespace NSControllerPageItem {
   export type QueryOutput = z.output<typeof ControllerPageItemSchemaQuery>;
 
 }
+
 export const ZPageItem = createZovaComponentPage(ControllerPageItem, undefined, undefined);

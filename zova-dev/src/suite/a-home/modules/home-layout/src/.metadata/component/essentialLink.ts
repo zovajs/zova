@@ -14,8 +14,8 @@ declare module 'zova-module-home-layout' {
   export interface ControllerEssentialLink {
     $props: ControllerInnerProps;
   }
-
 }
+
 export const ZEssentialLink = defineComponent(
   (_props: TypeControllerEssentialLinkPublicProps) => {
     useController(ControllerEssentialLink, undefined, undefined);

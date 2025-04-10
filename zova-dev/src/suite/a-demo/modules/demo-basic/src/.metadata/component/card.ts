@@ -14,8 +14,8 @@ declare module 'zova-module-demo-basic' {
   export interface ControllerCard {
     $props: ControllerInnerProps;
   }
-
 }
+
 export const ZCard = defineComponent(
   (_props: TypeControllerCardPublicProps) => {
     useController(ControllerCard, undefined, undefined);
