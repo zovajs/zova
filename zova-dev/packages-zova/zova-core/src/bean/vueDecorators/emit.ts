@@ -1,6 +1,6 @@
 import type { IDecoratorVueElement, IDecoratorVueEmitOptions } from '../../decorator/vueExtra/types.js';
 import { isPromise } from '@cabloy/utils';
-import { toLowerCaseFirstChar } from '@cabloy/word-utils';
+import { toLowerCaseFirstChar, toUpperCaseFirstChar } from '@cabloy/word-utils';
 import { getVueDecoratorValue } from './utils.js';
 
 export function emit(
@@ -47,11 +47,15 @@ function __emitHandler(
       eventName = prop;
     }
   }
+  // func
+  const propName = `on${toUpperCaseFirstChar(eventName)}`;
+  const func = beanInstance.$props?.[propName];
+  if (!func) return;
   // emit
   if (returnValue === undefined) {
-    beanInstance.$emit(eventName, ...args);
+    func(...args);
   } else {
-    beanInstance.$emit(eventName, returnValue, ...args);
+    func(returnValue, ...args);
   }
   // return
   return returnValue;
