@@ -10,7 +10,7 @@ export class ZovaSys {
   config: ZovaConfig;
 
   constructor() {
-    this.bean = BeanContainer.create(null!, null);
+    this.bean = BeanContainer.create(this, null!, null);
     this.util = this.bean._newBeanSimple(SysUtil, false);
     this.meta = this.bean._newBeanSimple(SysMeta, false);
     this.meta.initialize();

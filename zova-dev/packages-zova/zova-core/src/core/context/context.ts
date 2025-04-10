@@ -3,6 +3,7 @@ import type { ZovaApplication } from '../app/application.js';
 import { markRaw } from 'vue';
 import { BeanContainer } from '../../bean/beanContainer.js';
 import { cast } from '../../types/utils/cast.js';
+import { sys } from '../sys/sys.js';
 import { CtxMeta } from './meta.js';
 import { CtxUtil } from './util.js';
 
@@ -19,7 +20,7 @@ export class ZovaContext {
     instance.zova = this;
     this.instance = instance;
     this.app = instance.appContext.app.zova;
-    this.bean = BeanContainer.create(this.app, this);
+    this.bean = BeanContainer.create(sys, this.app, this);
     this.util = this.bean._newBeanSimple(CtxUtil, false);
     this.meta = this.bean._newBeanSimple(CtxMeta, false);
     this.meta.initialize();

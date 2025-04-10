@@ -1,4 +1,4 @@
-import type { ZovaApplication, ZovaContext } from '../core/index.js';
+import type { ZovaApplication, ZovaContext, ZovaSys } from '../core/index.js';
 import type { MetadataKey } from '../core/sys/metadata.js';
 import type {
   Constructable,
@@ -37,14 +37,15 @@ export const SymbolBeanContainerInstances = Symbol('SymbolBeanContainerInstances
 export interface BeanContainer {}
 
 export class BeanContainer {
+  private sys: ZovaSys;
   private app: ZovaApplication;
   private ctx: ZovaContext;
 
   // fullName / uuid / propName
   private [SymbolBeanContainerInstances]: Record<MetadataKey, unknown> = shallowReactive({});
 
-  static create(app: ZovaApplication, ctx: ZovaContext | null) {
-    const beanContainer = new BeanContainer(app, ctx);
+  static create(sys: ZovaSys, app: ZovaApplication, ctx: ZovaContext | null) {
+    const beanContainer = new BeanContainer(sys, app, ctx);
     const proxy = new Proxy(beanContainer, {
       get(obj, prop) {
         if (typeof prop === 'symbol') return obj[prop];
@@ -55,7 +56,8 @@ export class BeanContainer {
     return markRaw(proxy);
   }
 
-  protected constructor(app: ZovaApplication, ctx: ZovaContext | null) {
+  protected constructor(sys: ZovaSys, app: ZovaApplication, ctx: ZovaContext | null) {
+    this.sys = sys;
     this.app = app;
     this.ctx = ctx as any;
   }
@@ -528,7 +530,7 @@ export class BeanContainer {
         enumerable: false,
         configurable: true,
         get: () => {
-          return this.ctx.app;
+          return this.ctx?.app;
         },
       });
       // ctx: always set even if is null, so as to prevent magic method __get__ take effect.
@@ -996,7 +998,7 @@ export class BeanContainer {
   }
 
   private _aopCacheHost() {
-    return this.app ? this.app.ctx : this.ctx;
+    return (this.app ? this.app.ctx : this.ctx) || this.sys;
   }
 
   private _getAopChainsProp(
