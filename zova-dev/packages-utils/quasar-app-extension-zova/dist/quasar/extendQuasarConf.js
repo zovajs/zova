@@ -58,7 +58,7 @@ export function extendQuasarConf(context, flavor) {
         });
         // sourceFiles
         conf.sourceFiles = mergeConfig(conf.sourceFiles || {}, {
-            rootComponent: 'src/boot/app/index.vue',
+            rootComponent: 'src/boot/app/index.js',
             router: 'src/boot/router',
         });
     };
