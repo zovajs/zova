@@ -1,3 +1,3 @@
 import { BeanSimple } from '../../bean/beanSimple.js';
 
-export class AppUtil extends BeanSimple {}
+export class SysMeta extends BeanSimple {}

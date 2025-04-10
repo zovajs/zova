@@ -7,10 +7,11 @@ import type { ZovaConfig } from './config.js';
 import type { ZovaConstant } from './constant.js';
 import { markRaw } from 'vue';
 import { cast } from '../../types/utils/cast.js';
+import { deepExtend } from '../sys/util.js';
 import { configDefault } from './config.js';
 import { constantDefault } from './constant.js';
 import { AppMeta } from './meta.js';
-import { AppUtil, deepExtend } from './util.js';
+import { AppUtil } from './util.js';
 
 export class ZovaApplication {
   private _reloadDelayTimer: number = 0;
