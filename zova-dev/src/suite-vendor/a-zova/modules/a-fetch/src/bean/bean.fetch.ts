@@ -20,7 +20,7 @@ export class BeanFetch extends BeanBase {
     // axiosConfig
     const axiosConfig = deepExtend(
       {},
-      { baseURL: this.app.util.getApiBaseURL() },
+      { baseURL: this.sys.util.getApiBaseURL() },
       this.scope.config.axios.config,
       options?.axiosConfig,
     );

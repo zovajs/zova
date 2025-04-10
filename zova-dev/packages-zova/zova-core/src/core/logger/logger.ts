@@ -2,7 +2,7 @@ import type { LoggerLevel } from '@cabloy/logger';
 import type { ILoggerClientChildRecord, ILoggerClientRecord, TypeLoggerOptions } from './types.js';
 import { Logger } from '@cabloy/logger';
 import { BeanSimple } from '../../bean/beanSimple.js';
-import { deepExtend } from '../app/util.js';
+import { deepExtend } from '../sys/util.js';
 
 const SymbolLoggerInstances = Symbol('SymbolLoggerInstances');
 
