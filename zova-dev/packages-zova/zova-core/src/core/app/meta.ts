@@ -25,8 +25,6 @@ export class AppMeta extends BeanSimple {
 
   /** @internal */
   public appMonkey?: IMonkeyModule & IMonkeySystem & IMonkeyController;
-  /** @internal */
-  public legacyRoutes?: RouteRecordRaw[];
 
   protected __init__() {
     this.module = this.app.bean._newBeanSimple(AppModule, false);
@@ -43,11 +41,9 @@ export class AppMeta extends BeanSimple {
   /** @internal */
   public async initialize(
     AppMonkey?: Constructable<IMonkeyModule & IMonkeySystem & IMonkeyController>,
-    legacyRoutes?: RouteRecordRaw[],
   ) {
     if (AppMonkey) {
       this.appMonkey = this.bean._newBeanSimple(AppMonkey, false);
     }
-    this.legacyRoutes = legacyRoutes;
   }
 }
