@@ -60,12 +60,10 @@ export function generateFileComponent(
   if (hasRenderFirst) {
     contentImports.push(importRenderFirst);
   }
-  contentImports.push(...importRenderOthers);
   // style
   if (hasStyleFirst) {
     contentImports.push(importStyleFirst);
   }
-  contentImports.push(...importStyleOthers);
   // TypeControllerPublicProps
   const typeControllerPublicPropsName = `TypeController${nameCapitalize}PublicProps`;
   let contentTypeControllerPublicProps = `export type ${typeControllerPublicPropsName}${genericDeclare} = {
@@ -117,12 +115,22 @@ export function generateFileComponent(
   if (hasStyleFirst) {
     contentControllerInterfaceRecords.push(`export interface ${classNameStyleFirst}${genericDeclare} extends ${className}${genericArguments} {}`);
   }
+  for(const item of classNameStyleOthers){
+    contentControllerInterfaceRecords.push(`export interface ${item}${genericDeclare} extends ${className}${genericArguments} {}`); 
+  }
   if (hasRenderFirst) {
     if (hasStyleFirst) {
       contentControllerInterfaceRecords.push(`export interface ${classNameRenderFirst}${genericDeclare} extends ${classNameStyleFirst}${genericArguments} {}`);
     } else {
       contentControllerInterfaceRecords.push(`export interface ${classNameRenderFirst}${genericDeclare} extends ${className}${genericArguments} {}`);
     }
+  }
+  for(const item of classNameRenderOthers){
+    if (hasStyleFirst) {
+      contentControllerInterfaceRecords.push(`export interface ${item}${genericDeclare} extends ${classNameStyleFirst}${genericArguments} {}`);
+    } else {
+      contentControllerInterfaceRecords.push(`export interface ${item}${genericDeclare} extends ${className}${genericArguments} {}`);
+    } 
   }
   let contentControllerInterface = '';
   if (hasProps || hasModels) {

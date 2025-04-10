@@ -3,15 +3,7 @@ import type { ControllerLayoutDefaultProps } from '../../component/layoutDefault
 import { defineComponent } from 'vue';
 import { prepareComponentOptions, useController } from 'zova';
 import { ControllerLayoutDefault } from '../../component/layoutDefault/controller.jsx';
-import { RenderContent } from '../../component/layoutDefault/render.content.jsx';
-import { RenderHeader } from '../../component/layoutDefault/render.header.jsx';
 import { RenderLayoutDefault } from '../../component/layoutDefault/render.jsx';
-import { RenderLocale } from '../../component/layoutDefault/render.locale.jsx';
-import { RenderMenu } from '../../component/layoutDefault/render.menu.jsx';
-import { RenderSidebar } from '../../component/layoutDefault/render.sidebar.jsx';
-import { RenderTabs } from '../../component/layoutDefault/render.tabs.jsx';
-import { RenderTheme } from '../../component/layoutDefault/render.theme.jsx';
-import { RenderUser } from '../../component/layoutDefault/render.user.jsx';
 import { StyleLayoutDefault } from '../../component/layoutDefault/style.js';
 
 export type TypeControllerLayoutDefaultPublicProps = {
@@ -26,6 +18,14 @@ declare module 'zova-module-home-layout' {
   }
   export interface StyleLayoutDefault extends ControllerLayoutDefault {}
   export interface RenderLayoutDefault extends StyleLayoutDefault {}
+  export interface RenderContent extends StyleLayoutDefault {}
+  export interface RenderHeader extends StyleLayoutDefault {}
+  export interface RenderLocale extends StyleLayoutDefault {}
+  export interface RenderMenu extends StyleLayoutDefault {}
+  export interface RenderSidebar extends StyleLayoutDefault {}
+  export interface RenderTabs extends StyleLayoutDefault {}
+  export interface RenderTheme extends StyleLayoutDefault {}
+  export interface RenderUser extends StyleLayoutDefault {}
 }
 export const ZLayoutDefault = defineComponent(
   (_props: TypeControllerLayoutDefaultPublicProps) => {
