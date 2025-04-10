@@ -47,7 +47,7 @@ export function model(
           };
         }
         return self.runWithInstanceScopeOrAppContext(() => {
-          return useModel(beanInstance.$props, modelName, useModelOptions);
+          return useModel.call(beanInstance, beanInstance.$props, modelName, useModelOptions);
         });
       });
     },

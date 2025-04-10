@@ -1,4 +1,5 @@
 import type { Ref } from '@vue/reactivity';
+import type { BeanBase } from '../bean/beanBase.js';
 import type { DefineModelOptions, ModelRef } from '../bean/type.js';
 import { customRef } from '@vue/reactivity';
 import { camelize, EMPTY_OBJ, hasChanged, hyphenate } from '@vue/shared';
@@ -11,11 +12,13 @@ export function useModel<
   G = T[K],
   S = T[K],
 >(
+  this: BeanBase,
   props: T,
   name: K,
   options?: DefineModelOptions<T[K], G, S>,
 ): ModelRef<T[K], M, G, S>;
 export function useModel(
+  this: BeanBase,
   props: Record<string, any>,
   name: string,
   options: DefineModelOptions = EMPTY_OBJ,

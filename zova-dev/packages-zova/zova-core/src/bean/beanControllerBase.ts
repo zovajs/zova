@@ -26,7 +26,7 @@ export class BeanControllerBase extends BeanBase {
       name = 'modelValue';
     }
     if (!name) name = 'modelValue';
-    return useModel(this.$props as any, name, options);
+    return useModel.call(this, this.$props as any, name, options);
   }
 }
 
