@@ -53,11 +53,11 @@ export type ModelRef<T, M extends PropertyKey = string, G = T, S = T> = Ref<
   G,
   S
 > &
-  [ModelRef<T, M, G, S>, Record<M, true | undefined>]
+[ModelRef<T, M, G, S>, Record<M, true | undefined>];
 
-export type DefineModelOptions<T = any, G = T, S = T> = {
-  get?: (v: T) => G
-  set?: (v: S) => any
+export interface DefineModelOptions<T = any, G = T, S = T> {
+  get?: (v: T) => G;
+  set?: (v: S) => any;
 }
 
 export type IComponentOptions = Parameters<typeof defineOptions>[0];
