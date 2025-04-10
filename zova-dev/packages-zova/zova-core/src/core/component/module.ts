@@ -6,7 +6,7 @@ import { shallowReactive } from 'vue';
 import { BeanSimple } from '../../bean/beanSimple.js';
 import { SymbolInstalled } from '../../types/index.js';
 import { StateLock } from '../../utils/stateLock.js';
-import { deepExtend } from '../app/util.js';
+import { deepExtend } from '../sys/util.js';
 
 export class AppModule extends BeanSimple {
   public modulesMeta: PluginZovaModulesMeta;

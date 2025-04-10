@@ -13,6 +13,7 @@ export class ZovaSys {
     this.bean = BeanContainer.create(null!, null);
     this.util = this.bean._newBeanSimple(SysUtil, false);
     this.meta = this.bean._newBeanSimple(SysMeta, false);
+    this.meta.initialize();
   }
 }
 
