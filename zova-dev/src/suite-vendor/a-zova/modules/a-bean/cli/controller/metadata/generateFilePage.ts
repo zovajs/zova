@@ -1,12 +1,14 @@
 import type { IMetadataCustomGenerateOptions } from '@cabloy/cli';
 import type { IGlobBeanFile } from '@cabloy/module-info';
 import type { IControllerInfo } from './types.ts';
+import { combineContentRenderAndStyle } from './utils.ts';
 
 export function generateFilePage(
-  _options: IMetadataCustomGenerateOptions,
+  options: IMetadataCustomGenerateOptions,
   globFile: IGlobBeanFile,
   controllerInfo: IControllerInfo,
 ) {
+  const { moduleName } = options;
   const { className } = globFile;
   const {
     name,
@@ -63,9 +65,12 @@ export function generateFilePage(
       ${_contentRecords2_parts.join('\n')}
     }`);
   }
-  // export page
-  contentImports.push(`export const ZPage${nameCapitalize} = createZovaComponentPage(${className}, ${hasRenderFirst ? classNameRenderFirst : undefined}, ${hasStyleFirst ? classNameStyleFirst : undefined});`);
+  // page
+  const contentPage = `export const ZPage${nameCapitalize} = createZovaComponentPage(${className}, ${hasRenderFirst ? classNameRenderFirst : undefined}, ${hasStyleFirst ? classNameStyleFirst : undefined});`;
   // content
-  const content = `${contentImports.join('\n')}\n`;
+  const content = `${contentImports.join('\n')}
+  ${combineContentRenderAndStyle(controllerInfo, moduleName, className, '', '')}
+  ${contentPage}
+  `;
   return content;
 }

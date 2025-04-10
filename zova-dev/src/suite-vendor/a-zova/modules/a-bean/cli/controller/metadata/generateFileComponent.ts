@@ -1,6 +1,7 @@
 import type { IMetadataCustomGenerateOptions } from '@cabloy/cli';
 import type { IGlobBeanFile } from '@cabloy/module-info';
 import type { IControllerInfo } from './types.ts';
+import { combineContentRenderAndStyle } from './utils.ts';
 
 export function generateFileComponent(
   options: IMetadataCustomGenerateOptions,
@@ -25,13 +26,9 @@ export function generateFileComponent(
     importRenderFirst,
     hasRenderFirst,
     classNameRenderFirst,
-    classNameRenderOthers,
-    importRenderOthers,
     importStyleFirst,
     hasStyleFirst,
     classNameStyleFirst,
-    classNameStyleOthers,
-    importStyleOthers,
   } = controllerInfo;
   const contentImports: string[] = [];
   const genericDeclare = hasGeneric ? `<${generic}>` : '';
@@ -111,34 +108,12 @@ export function generateFileComponent(
   if (hasModelValue) {
     contentControllerInterfaceMethods.push(`$useModel(options?: DefineModelOptions<TypeModelArguments${genericArguments}['modelValue']>): ControllerInnerProps${genericArguments}['modelValue'];`);
   }
-  const contentControllerInterfaceRecords: string[] = [];
-  if (hasStyleFirst) {
-    contentControllerInterfaceRecords.push(`export interface ${classNameStyleFirst}${genericDeclare} extends ${className}${genericArguments} {}`);
-  }
-  for(const item of classNameStyleOthers){
-    contentControllerInterfaceRecords.push(`export interface ${item}${genericDeclare} extends ${className}${genericArguments} {}`); 
-  }
-  if (hasRenderFirst) {
-    if (hasStyleFirst) {
-      contentControllerInterfaceRecords.push(`export interface ${classNameRenderFirst}${genericDeclare} extends ${classNameStyleFirst}${genericArguments} {}`);
-    } else {
-      contentControllerInterfaceRecords.push(`export interface ${classNameRenderFirst}${genericDeclare} extends ${className}${genericArguments} {}`);
-    }
-  }
-  for(const item of classNameRenderOthers){
-    if (hasStyleFirst) {
-      contentControllerInterfaceRecords.push(`export interface ${item}${genericDeclare} extends ${classNameStyleFirst}${genericArguments} {}`);
-    } else {
-      contentControllerInterfaceRecords.push(`export interface ${item}${genericDeclare} extends ${className}${genericArguments} {}`);
-    } 
-  }
   let contentControllerInterface = '';
   if (hasProps || hasModels) {
     contentControllerInterface = `declare module 'zova-module-${moduleName}' {
       export interface ${className}${genericDeclare} {
         ${contentControllerInterfaceMethods.join('\n')}
       }
-      ${contentControllerInterfaceRecords.join('\n')}
     }`;
   }
   // component
@@ -155,6 +130,7 @@ ${contentTypeControllerPublicProps}
 ${contentTypeModelArguments}
 ${contentControllerInnerProps}
 ${contentControllerInterface}
+${combineContentRenderAndStyle(controllerInfo, moduleName, className, genericDeclare, genericArguments)}
 ${contentComponent}
 `;
   return content;
