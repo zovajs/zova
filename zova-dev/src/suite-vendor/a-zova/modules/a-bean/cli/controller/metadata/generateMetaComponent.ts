@@ -26,7 +26,7 @@ export function generateMetaComponent(
     contentRecords.push(`'${componentFullName}': ${className};`);
   }
   // combine
-  let content = `/** components: begin */
+  const content = `/** components: begin */
 ${contentImports.join('\n')}
 export const components = {
   ${contentComponents.join('\n')}
@@ -39,13 +39,5 @@ export interface IComponentRecord {
 }
 /** components: end */
 `;
-  // RequiredSome / DefineModelOptions
-  const _imports_parts: string[] = [];
-  ['RequiredSome', 'DefineModelOptions'].forEach(item => {
-    if (content.includes(item)) _imports_parts.push(item);
-  });
-  if (_imports_parts.length > 0) {
-    content = `import { ${_imports_parts.join(', ')} } from 'zova';\n${content}`;
-  }
   return content;
 }
