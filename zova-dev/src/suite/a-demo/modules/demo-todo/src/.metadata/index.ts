@@ -1,12 +1,13 @@
+import type { BeanScopeUtil } from 'zova';
 import { TypePageParamsQuery } from 'zova';
-/** model: end */
-/** scope: begin */
-import { BeanScopeBase, BeanScopeUtil } from 'zova';
 /** api: end */
 /** api: begin */
 
-import { Scope } from 'zova-module-a-bean';
+/** model: end */
+/** scope: begin */
+import { BeanScopeBase } from 'zova';
 
+import { Scope } from 'zova-module-a-bean';
 /** api: end */
 /** api: begin */
 import { ApiTodo } from '../api/todo.js';
@@ -20,8 +21,8 @@ import { ControllerPageTodo } from '../page/todo/controller.jsx';
 import { NSControllerPageItem } from './page/item.js';
 /** api: begin */
 import 'zova';
-import 'zova';
 
+import 'zova';
 import 'zova';
 import 'zova';
 import 'zova';

@@ -1,6 +1,7 @@
+import type { BeanScopeUtil } from 'zova';
 /** monkey: end */
 /** scope: begin */
-import { BeanScopeBase, BeanScopeUtil } from 'zova';
+import { BeanScopeBase } from 'zova';
 import { Scope } from 'zova-module-a-bean';
 /** meta: end */
 /** meta: begin */

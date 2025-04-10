@@ -1,6 +1,7 @@
+import type { BeanScopeUtil } from 'zova';
 /** model: end */
 /** scope: begin */
-import { BeanScopeBase, BeanScopeUtil } from 'zova';
+import { BeanScopeBase } from 'zova';
 import { Scope } from 'zova-module-a-bean';
 /** controller: end */
 /** controller: begin */
@@ -8,8 +9,8 @@ import { ControllerRouterViewTabs } from '../component/routerViewTabs/controller
 /** model: end */
 /** model: begin */
 import { ModelTabs } from '../model/tabs.js';
-import { ZRouterViewTabs } from './component/routerViewTabs.js';
 
+import { ZRouterViewTabs } from './component/routerViewTabs.js';
 /** controller: begin */
 import 'zova';
 import 'zova';

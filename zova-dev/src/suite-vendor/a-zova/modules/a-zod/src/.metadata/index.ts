@@ -1,6 +1,7 @@
+import type { BeanScopeUtil } from 'zova';
 /** main: end */
 /** scope: begin */
-import { BeanScopeBase, BeanScopeUtil, TypeLocaleBase, TypeModuleLocales } from 'zova';
+import { BeanScopeBase, TypeLocaleBase, TypeModuleLocales } from 'zova';
 import { Scope } from 'zova-module-a-bean';
 /** locale: begin */
 import locale_en_us from '../config/locale/en-us.js';

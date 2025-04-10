@@ -1,27 +1,28 @@
+import type { BeanScopeUtil } from 'zova';
 /** behaviors: end */
 /** scope: begin */
-import { BeanScopeBase, BeanScopeUtil } from 'zova';
+import { BeanScopeBase } from 'zova';
 import { Scope } from 'zova-module-a-bean';
 /** bean: end */
 /** bean: begin */
 import { BeanBehavior } from '../bean/bean.behavior.js';
-import { BeanBehaviorBase } from '../bean/bean.behaviorBase.js';
 
+import { BeanBehaviorBase } from '../bean/bean.behaviorBase.js';
 /** controller: end */
 /** controller: begin */
 import { ControllerBehavior } from '../component/behavior/controller.jsx';
 /** service: end */
 /** service: begin */
 import { ServiceComposer } from '../service/composer.js';
-import { ZBehavior } from './component/behavior.js';
 
+import { ZBehavior } from './component/behavior.js';
 /** bean: begin */
 import 'zova';
 import 'zova';
 import 'zova';
 import 'zova';
-import 'zova';
 
+import 'zova';
 import 'zova';
 import 'zova';
 import 'zova';

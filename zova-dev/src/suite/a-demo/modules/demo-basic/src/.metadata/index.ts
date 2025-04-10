@@ -1,9 +1,10 @@
+import type { BeanScopeUtil } from 'zova';
 import { TypePageParamsQuery } from 'zova';
 /** locale: end */
 /** scope: begin */
-import { BeanScopeBase, BeanScopeUtil, TypeLocaleBase, TypeModuleLocales } from 'zova';
-import { IDecoratorAopOptions } from 'zova-module-a-bean';
+import { BeanScopeBase, TypeLocaleBase, TypeModuleLocales } from 'zova';
 
+import { IDecoratorAopOptions } from 'zova-module-a-bean';
 import { Scope } from 'zova-module-a-bean';
 import { AopHome3 } from '../bean/aop.home3.jsx';
 /** aop: end */
@@ -32,13 +33,13 @@ import { ControllerPageRouteQueryB } from '../page/routeQueryB/controller.jsx';
 import { ControllerPageState } from '../page/state/controller.jsx';
 import { ControllerPageStyle } from '../page/style/controller.jsx';
 import { ZCard } from './component/card.js';
-import { NSControllerPageRouteParams } from './page/routeParams.js';
 
+import { NSControllerPageRouteParams } from './page/routeParams.js';
 import { NSControllerPageRouteQuery } from './page/routeQuery.js';
 import { NSControllerPageRouteQueryB } from './page/routeQueryB.js';
 import 'zova';
-import 'zova';
 
+import 'zova';
 import 'zova';
 import 'zova';
 import 'zova';

@@ -1,25 +1,26 @@
+import type { BeanScopeUtil } from 'zova';
 /** locale: end */
 /** scope: begin */
-import { BeanScopeBase, BeanScopeUtil, TypeLocaleBase, TypeModuleLocales } from 'zova';
+import { BeanScopeBase, TypeLocaleBase, TypeModuleLocales } from 'zova';
 import { Scope } from 'zova-module-a-bean';
 /** api: end */
 /** api: begin */
-import { ApiAuth } from '../api/auth.js';
+
 /** api: end */
 /** api: begin */
+import { ApiAuth } from '../api/auth.js';
 
 import { ApiUser } from '../api/user.js';
-
 /** model: end */
 /** locale: begin */
 import locale_en_us from '../config/locale/en-us.js';
 import locale_zh_cn from '../config/locale/zh-cn.js';
+
 /** model: end */
 /** model: begin */
 import { ModelAuth } from '../model/auth.js';
 
 import { ModelUser } from '../model/user.js';
-
 /** controller: end */
 /** controller: begin */
 import { ControllerPageLogin } from '../page/login/controller.jsx';

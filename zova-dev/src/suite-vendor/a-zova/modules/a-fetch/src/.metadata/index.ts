@@ -1,12 +1,13 @@
+import type { BeanScopeUtil } from 'zova';
 /** monkey: end */
 /** scope: begin */
-import { BeanScopeBase, BeanScopeUtil, TypeModuleConfig } from 'zova';
+import { BeanScopeBase, TypeModuleConfig } from 'zova';
 import { Scope } from 'zova-module-a-bean';
 /** bean: end */
 /** bean: begin */
 import { BeanFetch } from '../bean/bean.fetch.js';
-import { BeanInterceptorBase } from '../bean/bean.interceptorBase.js';
 
+import { BeanInterceptorBase } from '../bean/bean.interceptorBase.js';
 import { config } from '../config/config.js';
 /** service: end */
 /** service: begin */

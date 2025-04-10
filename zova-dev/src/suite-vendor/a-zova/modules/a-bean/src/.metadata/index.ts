@@ -1,11 +1,12 @@
+import type { BeanScopeUtil } from 'zova';
 /** service: end */
 /** scope: begin */
-import { BeanScopeBase, BeanScopeUtil } from 'zova';
+import { BeanScopeBase } from 'zova';
 /** bean: end */
 /** bean: begin */
 import { BeanOnion } from '../bean/bean.onion.js';
-import { Scope } from '../lib/scope.js';
 
+import { Scope } from '../lib/scope.js';
 /** service: end */
 /** service: begin */
 import { ServiceAop } from '../service/aop.js';

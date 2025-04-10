@@ -1,22 +1,23 @@
-import type { RequiredSome } from 'zova';
+import type { TypeControllerInnerProps } from 'zova';
 import type { ControllerRouterViewTabsProps } from '../../component/routerViewTabs/controller.jsx';
 import { defineComponent } from 'vue';
 import { prepareComponentOptions, useController } from 'zova';
 import { ControllerRouterViewTabs } from '../../component/routerViewTabs/controller.jsx';
 
+export type TypeControllerRouterViewTabsPublicProps = {
+  controllerRef?: (ref: ControllerRouterViewTabs) => void;
+} & ControllerRouterViewTabsProps;
+
+type ControllerInnerProps =
+      TypeControllerInnerProps<ControllerRouterViewTabsProps, keyof typeof ControllerRouterViewTabs.$propsDefault>;
 declare module 'zova-module-a-tabs' {
-
-  export interface ControllerRouterViewTabsProps {
-    controllerRef?: (ref: ControllerRouterViewTabs) => void;
-  }
-
   export interface ControllerRouterViewTabs {
-    $props: RequiredSome<ControllerRouterViewTabsProps, keyof typeof ControllerRouterViewTabs.$propsDefault>;
+    $props: ControllerInnerProps;
   }
-}
 
+}
 export const ZRouterViewTabs = defineComponent(
-  (_props: ControllerRouterViewTabsProps) => {
+  (_props: TypeControllerRouterViewTabsPublicProps) => {
     useController(ControllerRouterViewTabs, undefined, undefined);
     return () => {};
   },

@@ -1,6 +1,7 @@
+import type { BeanScopeUtil } from 'zova';
 /** service: end */
 /** scope: begin */
-import { BeanScopeBase, BeanScopeUtil } from 'zova';
+import { BeanScopeBase } from 'zova';
 import { Scope } from 'zova-module-a-bean';
 /** api: end */
 /** api: begin */
@@ -9,12 +10,12 @@ import { ApiBTest1 } from '../api/bTest1.js';
 import { ApiCabloyTestPassport } from '../api/cabloyTestPassport.js';
 import { ApiHome } from '../api/home.js';
 import { ApiOnion } from '../api/onion.js';
-import { ApiUserPassport } from '../api/userPassport.js';
 /** api: end */
 /** api: begin */
 
-import { ApiVonaTestUpload } from '../api/vonaTestUpload.js';
+import { ApiUserPassport } from '../api/userPassport.js';
 
+import { ApiVonaTestUpload } from '../api/vonaTestUpload.js';
 /** service: end */
 /** service: begin */
 import { ServiceJwtAdapter } from '../service/jwtAdapter.js';

@@ -87,5 +87,7 @@
     "tsc:publish": "npm run clean && tsc -b",
     "_prepublishOnly": "npm run tsc:publish"
   },
-  "dependencies": {}
+  "dependencies": {
+    "globby": "^14.1.0"
+  }
 }

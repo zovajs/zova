@@ -1,6 +1,7 @@
+import type { BeanScopeUtil } from 'zova';
 /** icons: end */
 /** scope: begin */
-import { BeanScopeBase, BeanScopeUtil } from 'zova';
+import { BeanScopeBase } from 'zova';
 import { Scope } from 'zova-module-a-bean';
 /** icons: begin */
 import icon_auth from './icons/groups/auth.svg';
@@ -11,10 +12,10 @@ import icon_emoji from './icons/groups/emoji.svg';
 import icon_flow from './icons/groups/flow.svg';
 import icon_login from './icons/groups/login.svg';
 import icon_outline from './icons/groups/outline.svg';
+
 import icon_role from './icons/groups/role.svg';
 
 import icon_social from './icons/groups/social.svg';
-
 import icon_tools from './icons/groups/tools.svg';
 import 'zova';
 

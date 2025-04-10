@@ -1,14 +1,15 @@
+import type { BeanScopeUtil } from 'zova';
 /** monkey: end */
 /** scope: begin */
-import { BeanScopeBase, BeanScopeUtil, TypeLocaleBase, TypeModuleLocales } from 'zova';
+import { BeanScopeBase, TypeLocaleBase, TypeModuleLocales } from 'zova';
 import { Scope } from 'zova-module-a-bean';
 /** css: end */
 /** css: begin */
 import { CssDefault } from '../bean/css.default.js';
+
 /** theme: end */
 /** theme: begin */
 import { ThemeDefault } from '../bean/theme.default.js';
-
 /** controller: end */
 /** controller: begin */
 import { ControllerPage } from '../component/page/controller.jsx';
@@ -16,20 +17,20 @@ import { ControllerPage } from '../component/page/controller.jsx';
 /** locale: begin */
 import locale_en_us from '../config/locale/en-us.js';
 import locale_zh_cn from '../config/locale/zh-cn.js';
-import { ControllerPageErrorNotFound } from '../page/errorNotFound/controller.jsx';
 
+import { ControllerPageErrorNotFound } from '../page/errorNotFound/controller.jsx';
 /** service: end */
 /** service: begin */
 import { ServiceRouter } from '../service/router.js';
 import { ServiceSsr } from '../service/ssr.js';
-import { ZPage } from './component/page.js';
 
+import { ZPage } from './component/page.js';
 /** components: end */
 /** css: begin */
 import 'zova';
 import 'zova';
-import 'zova';
 
+import 'zova';
 import 'zova';
 import 'zova';
 import 'zova';

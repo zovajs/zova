@@ -1,6 +1,7 @@
+import type { BeanScopeUtil } from 'zova';
 /** config: end */
 /** scope: begin */
-import { BeanScopeBase, BeanScopeUtil, TypeModuleConfig } from 'zova';
+import { BeanScopeBase, TypeModuleConfig } from 'zova';
 import { Scope } from 'zova-module-a-bean';
 /** interceptor: begin */
 import { IInterceptorOptionsBody } from '../bean/interceptor.body.js';

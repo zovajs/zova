@@ -1,6 +1,7 @@
+import type { BeanScopeUtil } from 'zova';
 /** aopMethod: end */
 /** scope: begin */
-import { BeanScopeBase, BeanScopeUtil } from 'zova';
+import { BeanScopeBase } from 'zova';
 import { Scope } from 'zova-module-a-bean';
 /** aopMethod: begin */
 import { IAopMethodOptionsLog } from '../bean/aopMethod.log.js';

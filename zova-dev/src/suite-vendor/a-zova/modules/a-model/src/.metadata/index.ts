@@ -1,11 +1,12 @@
+import type { BeanScopeUtil } from 'zova';
 /** monkey: end */
 /** scope: begin */
-import { BeanScopeBase, BeanScopeUtil, TypeModuleConfig } from 'zova';
+import { BeanScopeBase, TypeModuleConfig } from 'zova';
 import { Scope } from 'zova-module-a-bean';
+
 /** bean: end */
 /** bean: begin */
 import { BeanModelBase } from '../bean/bean.modelBase.js';
-
 import { config } from '../config/config.js';
 /** service: end */
 /** service: begin */

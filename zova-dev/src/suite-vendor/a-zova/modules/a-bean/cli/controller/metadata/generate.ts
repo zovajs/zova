@@ -4,6 +4,7 @@ import type { IControllerInfo } from './types.ts';
 import path from 'node:path';
 import { toUpperCaseFirstChar } from '@cabloy/word-utils';
 import fse from 'fs-extra';
+import { globbySync } from 'globby';
 import { generateFile } from './generateFile.ts';
 import { generateMetaComponent } from './generateMetaComponent.ts';
 import { generateMetaPage } from './generateMetaPage.ts';
@@ -69,6 +70,10 @@ function _parseControllerInfo(
   const hasRenderFirst = fse.existsSync(fileRenderFirst);
   const classNameRenderFirst = `Render${type === 'page' ? 'Page' : ''}${nameCapitalize}`;
   const importRenderFirst = `import { ${classNameRenderFirst} } from '../../${type}/${name}/render.jsx';`;
+  const fileRenderOthers = globbySync(`src/${type}/${name}/render.*.tsx`, { cwd: options.modulePath });
+  const nameRenderOthers: string[] = fileRenderOthers.map(item => /render\.(.*)\.tsx/.exec(item)![1]);
+  const classNameRenderOthers: string[] = nameRenderOthers.map(item => `Render${type === 'page' ? 'Page' : ''}${toUpperCaseFirstChar(item)}`);
+  const importRenderOthers: string[] = nameRenderOthers.map(item => `import { ${`Render${type === 'page' ? 'Page' : ''}${toUpperCaseFirstChar(item)}`} } from '../../${type}/${name}/render.${item}.jsx';`);
   // style
   const fileStyleFirst = path.join(options.modulePath, `src/${type}/${name}/style.ts`);
   const hasStyleFirst = fse.existsSync(fileStyleFirst);
@@ -95,10 +100,16 @@ function _parseControllerInfo(
     hasSchemaParams,
     nameSchemaQuery,
     hasSchemaQuery,
+    // render
     fileRenderFirst,
     hasRenderFirst,
     classNameRenderFirst,
     importRenderFirst,
+    fileRenderOthers,
+    nameRenderOthers,
+    classNameRenderOthers,
+    importRenderOthers,
+    // style
     fileStyleFirst,
     hasStyleFirst,
     classNameStyleFirst,
