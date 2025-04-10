@@ -79,6 +79,10 @@ function _parseControllerInfo(
   const hasStyleFirst = fse.existsSync(fileStyleFirst);
   const classNameStyleFirst = `Style${type === 'page' ? 'Page' : ''}${nameCapitalize}`;
   const importStyleFirst = `import { ${classNameStyleFirst} } from '../../${type}/${name}/style.js';`;
+  const fileStyleOthers = globbySync(`src/${type}/${name}/style.*.ts`, { cwd: options.modulePath });
+  const nameStyleOthers: string[] = fileRenderOthers.map(item => /style\.(.*)\.ts/.exec(item)![1]);
+  const classNameStyleOthers: string[] = nameRenderOthers.map(item => `Style${type === 'page' ? 'Page' : ''}${toUpperCaseFirstChar(item)}`);
+  const importStyleOthers: string[] = nameRenderOthers.map(item => `import { ${`Style${type === 'page' ? 'Page' : ''}${toUpperCaseFirstChar(item)}`} } from '../../${type}/${name}/style.${item}.js';`);
   // ok
   return {
     type,
@@ -114,5 +118,9 @@ function _parseControllerInfo(
     hasStyleFirst,
     classNameStyleFirst,
     importStyleFirst,
+    fileStyleOthers,
+    nameStyleOthers,
+    classNameStyleOthers,
+    importStyleOthers,
   };
 }

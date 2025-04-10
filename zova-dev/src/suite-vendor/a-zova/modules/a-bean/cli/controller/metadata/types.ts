@@ -32,4 +32,8 @@ export interface IControllerInfo {
   hasStyleFirst: boolean;
   classNameStyleFirst: string;
   importStyleFirst: string;
+  fileStyleOthers: string[];
+  nameStyleOthers: string[];
+  classNameStyleOthers: string[];
+  importStyleOthers: string[];
 }
