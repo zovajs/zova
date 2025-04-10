@@ -27,7 +27,6 @@ export function useModel(
 
   const camelizedName = camelize(name);
 
-  const hyphenatedName = hyphenate(name);
   const modifiers = getModelModifiers(props, camelizedName);
 
   const res = customRef((track, trigger) => {
