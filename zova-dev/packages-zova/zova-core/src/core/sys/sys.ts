@@ -1,8 +1,12 @@
+import type { TypeModuleResourceConfig } from '../../types/interface/module.js';
 import type { PluginZovaOptions } from '../../types/interface/pluginZova.js';
-import type { ZovaConfig } from '../app/config.js';
+import type { ZovaConfig } from './config.js';
+import type { ZovaConstant } from './constant.js';
 import { BeanContainer } from '../../bean/beanContainer.js';
+import { configDefault } from './config.js';
+import { constantDefault } from './constant.js';
 import { SysMeta } from './meta.js';
-import { SysUtil } from './util.js';
+import { deepExtend, SysUtil } from './util.js';
 
 const SymbolSysInitializePromise = Symbol('SymbolSysInitializePromise');
 
@@ -12,6 +16,7 @@ export class ZovaSys {
   util: SysUtil;
   meta: SysMeta;
   config: ZovaConfig;
+  constant: ZovaConstant;
 
   constructor() {
     this.bean = BeanContainer.create(this, null!, null);
@@ -28,27 +33,35 @@ export class ZovaSys {
     return this[SymbolSysInitializePromise];
   }
 
-  private async _initializeInner({ modulesMeta, locales, config, AppMonkey, legacyRoutes }: PluginZovaOptions) {
-    // monkey
-    await this.meta.initialize(legacyRoutes);
-    // component
-    await this.meta.component.initialize();
-    // locales
-    await this.meta.locale.initialize(locales);
-    // errors
-    await this.meta.error.initialize();
-    // config
+  private async _initializeInner({ config }: PluginZovaOptions) {
+    // // monkey
+    // await this.meta.initialize(legacyRoutes);
+    // // component
+    // await this.meta.component.initialize();
+    // // locales
+    // await this.meta.locale.initialize(locales);
+    // // errors
+    // await this.meta.error.initialize();
+    // // config
     this.config = await this._combineConfig(config);
     // constant
     this.constant = constantDefault;
-    // module
-    await this.meta.module.initialize(modulesMeta);
-    // monkey: appInitialize
-    await this.meta.module._monkeyModule('appInitialize');
-    // monkey: appInitialized
-    await this.meta.module._monkeyModule('appInitialized');
-    // monkey: appReady
-    await this.meta.module._monkeyModule('appReady');
+    // // module
+    // await this.meta.module.initialize(modulesMeta);
+    // // monkey: appInitialize
+    // await this.meta.module._monkeyModule('appInitialize');
+    // // monkey: appInitialized
+    // await this.meta.module._monkeyModule('appInitialized');
+    // // monkey: appReady
+    // await this.meta.module._monkeyModule('appReady');
+  }
+
+  private async _combineConfig(config: TypeModuleResourceConfig[]): Promise<ZovaConfig> {
+    const _config = deepExtend({}, configDefault());
+    for (const configFn of config) {
+      deepExtend(_config, await configFn(this, _config.meta));
+    }
+    return _config;
   }
 }
 
