@@ -37,7 +37,7 @@ export class SysOnion extends BeanBase {
   }
 
   public checkOnionOptionsMeta(meta?: IOnionOptionsMeta) {
-    return checkMeta(meta, this.app.meta);
+    return checkMeta(meta, this.sys.config.meta);
   }
 }
 
