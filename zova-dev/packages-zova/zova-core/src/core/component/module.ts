@@ -1,6 +1,6 @@
 import type { IModule, IModuleInfo } from '@cabloy/module-info';
 import type { TypeBeanScopeRecordKeys } from '../../bean/type.js';
-import type { IModuleResource, TypeMonkeyName } from '../../types/index.js';
+import type { IModuleMain, IModuleResource, IMonkeyApp, IMonkeyController, IMonkeyModule, TypeMonkeyName } from '../../types/index.js';
 import * as ModuleInfo from '@cabloy/module-info';
 import { shallowReactive } from 'vue';
 import { BeanSimple } from '../../bean/beanSimple.js';
@@ -10,6 +10,8 @@ import { deepExtend } from '../sys/util.js';
 
 export class AppModule extends BeanSimple {
   private modules: Record<string, IModule> = shallowReactive({});
+  private modulesMain: Record<string, IModuleMain> = {};
+  private modulesMonkey: Record<string, IMonkeyModule & IMonkeyApp & IMonkeyController> = {};
 
   /** @internal */
   public async initialize() {

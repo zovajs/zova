@@ -1,6 +1,6 @@
 import type { IModule, IModuleInfo } from '@cabloy/module-info';
 import type { TypeBeanScopeRecordKeys } from '../../bean/type.js';
-import type { IModuleResource, PluginZovaModulesMeta, TypeMonkeyName } from '../../types/index.js';
+import type { IModuleMainSys, IModuleResource, IMonkeyModule, IMonkeySys, PluginZovaModulesMeta, TypeMonkeyName } from '../../types/index.js';
 import * as ModuleInfo from '@cabloy/module-info';
 import { shallowReactive } from 'vue';
 import { BeanSimple } from '../../bean/beanSimple.js';
@@ -11,6 +11,8 @@ import { deepExtend } from '../sys/util.js';
 export class SysModule extends BeanSimple {
   public modulesMeta: PluginZovaModulesMeta;
   private modules: Record<string, IModule> = shallowReactive({});
+  private modulesMain: Record<string, IModuleMainSys> = {};
+  private modulesMonkey: Record<string, IMonkeyModule & IMonkeySys> = {};
 
   /** @internal */
   public async initialize(modulesMeta: PluginZovaModulesMeta) {
@@ -19,6 +21,9 @@ export class SysModule extends BeanSimple {
     await this._requireAllSpecifics('preload');
     await this._requireAllSpecifics('monkey');
     await this._requireAllSpecifics('sync');
+    if (process.env.SERVER) {
+      await this._requireAllOthers();
+    }
   }
 
   get<K extends TypeBeanScopeRecordKeys>(moduleName: K): IModule | undefined;
@@ -57,7 +62,8 @@ export class SysModule extends BeanSimple {
     for (const moduleName of this.modulesMeta.moduleNames) {
       const module = this.modulesMeta.modules[moduleName];
       const info = module.info;
-      if (info.capabilities?.monkey || info.capabilities?.sync || info.capabilities?.preload) {
+      const shouldLoad = process.env.SERVER || (info.capabilities?.monkey || info.capabilities?.sync || info.capabilities?.preload);
+      if (shouldLoad) {
         const moduleResource = module.resource as any;
         if (typeof moduleResource === 'function') {
           moduleNames.push(moduleName);
@@ -96,6 +102,17 @@ export class SysModule extends BeanSimple {
     }
   }
 
+  private async _requireAllOthers() {
+    for (const moduleName of this.modulesMeta.moduleNames) {
+      const module = this.modulesMeta.modules[moduleName];
+      const info = module.info;
+      const shouldInstall = (!info.capabilities?.monkey && !info.capabilities?.sync && !info.capabilities?.preload);
+      if (shouldInstall) {
+        await this._install(moduleName, module);
+      }
+    }
+  }
+
   private async _install(moduleName: string, moduleRepo: IModule) {
     // check
     if (this.modules[moduleName]) {
@@ -105,11 +122,11 @@ export class SysModule extends BeanSimple {
       // wait
       await module[SymbolInstalled].wait();
       // scope: should after [SymbolInstalled].touch
-      await this.app.bean._getBean(`${moduleName}.scope.module` as any, false);
+      await this.sys.bean._getBean(`${moduleName}.scope.module` as any, false);
       return;
     }
-    // clone for ssr
-    const module = Object.assign({}, moduleRepo);
+    // state
+    const module = moduleRepo;
     module[SymbolInstalled] = StateLock.create();
     // record
     this.modules[moduleName] = module;
@@ -118,7 +135,7 @@ export class SysModule extends BeanSimple {
     // installed
     module[SymbolInstalled].touch();
     // scope: should after [SymbolInstalled].touch
-    await this.app.bean._getBean(`${moduleName}.scope.module` as any, false);
+    await this.sys.bean._getBean(`${moduleName}.scope.module` as any, false);
     // monkey: moduleLoaded
     await this._monkeyModule('moduleLoaded', module);
   }

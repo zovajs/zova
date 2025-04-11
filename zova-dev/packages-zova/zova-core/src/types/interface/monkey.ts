@@ -8,6 +8,11 @@ export type TypeMonkeyName = keyof IMonkeyModule | keyof IMonkeySys | keyof IMon
 export interface IModuleMain {
   moduleLoading(): Promise<void>;
   moduleLoaded(): Promise<void>;
+}
+
+export interface IModuleMainSys {
+  moduleLoading(): Promise<void>;
+  moduleLoaded(): Promise<void>;
   configLoaded(config: any): Promise<void>;
 }
 
