@@ -111,6 +111,7 @@ export class BeanContainer {
   }
 
   runWithInstanceScopeOrAppContext(fn, tracking?: boolean) {
+    if (this.containerType === 'sys') return fn();
     if (this.ctx) {
       return this.ctx.util.instanceScope(fn, tracking);
     } else {
@@ -582,16 +583,20 @@ export class BeanContainer {
     // inject
     await this._injectBeanInstance(beanInstance, beanFullName);
     // init
-    if (this.app) {
-      await this.app.meta.module._monkeyModule('beanInit', undefined, this, beanInstance);
+    if (this.containerType === 'sys') {
+      await this.sys.meta.module._monkeyModule('beanInit', undefined, this, beanInstance);
+    } else {
+      await this.app?.meta.module._monkeyModule('beanInit', undefined, this, beanInstance);
     }
     if (!(beanInstance instanceof BeanAopBase) && beanInstance.__init__) {
       await this.runWithInstanceScopeOrAppContext(async () => {
         await beanInstance.__init__(...args);
       });
     }
-    if (this.app) {
-      await this.app.meta.module._monkeyModule('beanInited', undefined, this, beanInstance);
+    if (this.containerType === 'sys') {
+      await this.sys.meta.module._monkeyModule('beanInited', undefined, this, beanInstance);
+    } else {
+      await this.app?.meta.module._monkeyModule('beanInited', undefined, this, beanInstance);
     }
     if (beanInstance[SymbolInited]) {
       beanInstance[SymbolInited].touch();
@@ -698,7 +703,18 @@ export class BeanContainer {
     const recordProp = useOptions.prop;
     // targetInstance
     let targetInstance;
-    if (injectionScope === 'app') {
+    if (injectionScope === 'sys') {
+      targetInstance = await this.sys.bean._getBeanSelectorInner(
+        true,
+        null,
+        targetBeanComposable,
+        targetBeanFullName,
+        markReactive,
+        selectorInfo.withSelector,
+        ...selectorInfo.args,
+      );
+      await this._injectBeanInstanceProp_appBean(recordProp, targetBeanComposable, targetBeanFullName, targetInstance);
+    } else if (injectionScope === 'app') {
       targetInstance = await this.app.bean._getBeanSelectorInner(
         true,
         null,
