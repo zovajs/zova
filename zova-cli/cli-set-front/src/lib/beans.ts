@@ -13,7 +13,9 @@ import { CliInitIcon } from './bean/cli.init.icon.ts';
 import { CliInitLegacy } from './bean/cli.init.legacy.ts';
 import { CliInitLocale } from './bean/cli.init.locale.ts';
 import { CliInitMain } from './bean/cli.init.main.ts';
+import { CliInitMainSys } from './bean/cli.init.mainSys.ts';
 import { CliInitMonkey } from './bean/cli.init.monkey.ts';
+import { CliInitMonkeySys } from './bean/cli.init.monkeySys.ts';
 import { CliOpenapiConfig } from './bean/cli.openapi.config.ts';
 import { CliOpenapiGenerate } from './bean/cli.openapi.generate.ts';
 import { CliRefactorAnotherRender } from './bean/cli.refactor.anotherRender.ts';
@@ -48,7 +50,9 @@ export const beans = {
   'init.error': CliInitError,
   'init.legacy': CliInitLegacy,
   'init.monkey': CliInitMonkey,
+  'init.monkeySys': CliInitMonkeySys,
   'init.main': CliInitMain,
+  'init.mainSys': CliInitMainSys,
   'refactor.pageQuery': CliRefactorPageQuery,
   'refactor.pageParams': CliRefactorPageParams,
   'refactor.componentGeneric': CliRefactorComponentGeneric,

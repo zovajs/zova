@@ -13,7 +13,9 @@ import initIcon from './command/init.icon.ts';
 import initLegacy from './command/init.legacy.ts';
 import initLocale from './command/init.locale.ts';
 import initMain from './command/init.main.ts';
+import initMainSys from './command/init.mainSys.ts';
 import initMonkey from './command/init.monkey.ts';
+import initMonkeySys from './command/init.monkeySys.ts';
 import openapiConfig from './command/openapi.config.ts';
 import openapiGenerate from './command/openapi.generate.ts';
 import refactorAnotherRender from './command/refactor.anotherRender.ts';
@@ -53,7 +55,9 @@ export const commands = {
     error: initError,
     legacy: initLegacy,
     monkey: initMonkey,
+    monkeySys: initMonkeySys,
     main: initMain,
+    mainSys: initMainSys,
   },
   refactor: {
     pageQuery: refactorPageQuery,
