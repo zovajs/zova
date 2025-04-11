@@ -6,7 +6,6 @@ import { shallowReactive } from 'vue';
 import { BeanSimple } from '../../bean/beanSimple.js';
 import { SymbolInstalled } from '../../types/index.js';
 import { StateLock } from '../../utils/stateLock.js';
-import { deepExtend } from '../sys/util.js';
 
 export class AppModule extends BeanSimple {
   private modules: Record<string, IModuleApp> = shallowReactive({});
@@ -180,25 +179,28 @@ export class AppModule extends BeanSimple {
   /** @internal */
   public _monkeyModuleSync(monkeyName: TypeMonkeyName, moduleTarget?: IModule, ...monkeyData: any[]) {
     // self: main
-    if (moduleTarget && moduleTarget.mainInstance && moduleTarget.mainInstance[monkeyName]) {
-      // @ts-ignore ignore
-      this.app.vue.runWithContext(() => {
-        moduleTarget.mainInstance[monkeyName](...monkeyData);
-      });
+    if (moduleTarget) {
+      const mainInstance = this.mainInstances[moduleTarget.info.relativeName];
+      if (mainInstance && mainInstance[monkeyName]) {
+        // @ts-ignore ignore
+        this.app.vue.runWithContext(async () => {
+          mainInstance[monkeyName](...monkeyData);
+        });
+      }
     }
     // module monkey
-    for (const key of this.modulesMeta.moduleNames) {
-      const moduleMonkey: IModule = this.modulesMeta.modules[key];
+    for (const key of this.sys.meta.module.modulesMeta.moduleNames) {
+      const moduleMonkey: IModule = this.sys.meta.module.modulesMeta.modules[key];
       if (moduleMonkey.info.capabilities?.monkey) {
-        const module = this.modules[key];
-        if (module && module.monkeyInstance && module.monkeyInstance[monkeyName]) {
-          this.app.vue.runWithContext(() => {
+        const monkeyInstance = this.monkeyInstances[key];
+        if (monkeyInstance && monkeyInstance[monkeyName]) {
+          this.app.vue.runWithContext(async () => {
             if (moduleTarget === undefined) {
               // @ts-ignore ignore
-              module.monkeyInstance[monkeyName](...monkeyData);
+              monkeyInstance[monkeyName](...monkeyData);
             } else {
               // @ts-ignore ignore
-              module.monkeyInstance[monkeyName](moduleTarget, ...monkeyData);
+              monkeyInstance[monkeyName](moduleTarget, ...monkeyData);
             }
           });
         }
@@ -207,7 +209,7 @@ export class AppModule extends BeanSimple {
     // app monkey
     const appMonkey = this.app.meta.appMonkey;
     if (appMonkey && appMonkey[monkeyName]) {
-      this.app.vue.runWithContext(() => {
+      this.app.vue.runWithContext(async () => {
         if (moduleTarget === undefined) {
           // @ts-ignore ignore
           appMonkey[monkeyName](...monkeyData);
