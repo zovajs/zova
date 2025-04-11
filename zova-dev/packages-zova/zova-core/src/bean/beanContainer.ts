@@ -89,7 +89,7 @@ export class BeanContainer {
 
   get containerType(): ContainerType {
     if (!this.ctx) return 'sys';
-    if (!this.app || this === this.app.bean) return 'app';
+    if (!this.app || this.ctx.bean === this.app.bean) return 'app';
     return 'ctx';
   }
 
