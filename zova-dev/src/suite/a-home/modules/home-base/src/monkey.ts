@@ -1,6 +1,6 @@
 import type { BeanBase, BeanContainer, IMonkeyAppInitialize, IMonkeyBeanInit } from 'zova';
 import { BeanSimple } from 'zova';
-import { __ThisModule__ } from './.metadata/this.js';
+import { definePropertyScopeBase } from './lib/utils.js';
 import { ServiceRouter } from './service/router.js';
 import { ServiceSsr } from './service/ssr.js';
 
@@ -17,14 +17,6 @@ export class Monkey extends BeanSimple implements IMonkeyAppInitialize, IMonkeyB
   }
 
   async beanInit(bean: BeanContainer, beanInstance: BeanBase) {
-    const self = this;
-    // $scopeBase
-    bean.defineProperty(beanInstance, '$scopeBase', {
-      enumerable: false,
-      configurable: true,
-      get() {
-        return self.app.bean.scope(__ThisModule__);
-      },
-    });
+    definePropertyScopeBase(bean, beanInstance);
   }
 }

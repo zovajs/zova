@@ -1,5 +1,5 @@
 import type { BeanScopeUtil } from 'zova';
-/** monkey: end */
+/** monkeySys: end */
 /** scope: begin */
 import { BeanScopeBase, TypeLocaleBase, TypeModuleLocales } from 'zova';
 import { Scope } from 'zova-module-a-bean';
@@ -98,8 +98,10 @@ declare module 'zova' {
     'home-base.controller.pageErrorNotFound': ControllerPageErrorNotFound;
   }
 }
+/** monkey: end */
+/** monkeySys: begin */
+export * from '../monkeySys.js';
 export * from '../page/errorNotFound/controller.jsx';
-export * from '../routes.js';
 declare module 'zova' {
   export interface IPagePathRecord {
     '/home/base//:catchAll(.*)*': undefined;
@@ -119,8 +121,7 @@ declare module 'zova-module-home-base' {
 }
 /** pages: end */
 
-/** service: begin */
-export * from '../service/router.js';
+export * from '../routes.js';
 export const components = {
   page: ZPage,
 };
@@ -129,7 +130,8 @@ declare module 'zova' {
     'home-base:page': ControllerPage;
   }
 }
-export * from '../service/ssr.js';
+/** service: begin */
+export * from '../service/router.js';
 declare module 'zova' {
 
 }
@@ -145,8 +147,7 @@ declare module 'zova' {
     'home-base.css.default': CssDefault;
   }
 }
-/** components: begin */
-export * from './component/page.js';
+export * from '../service/ssr.js';
 declare module 'zova' {
 
 }
@@ -166,6 +167,8 @@ export const locales = {
   'en-us': locale_en_us,
   'zh-cn': locale_zh_cn,
 };
+/** components: begin */
+export * from './component/page.js';
 /** controller: end */
 /** pages: begin */
 export * from './page/errorNotFound.js';
