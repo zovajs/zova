@@ -32,19 +32,17 @@ export class ZovaSys {
     return this[SymbolSysInitializePromise];
   }
 
-  private async _initializeInner({ locales, config, SysMonkey, legacyRoutes }: PluginZovaOptions) {
+  private async _initializeInner({ modulesMeta, locales, config, SysMonkey, legacyRoutes }: PluginZovaOptions) {
     // monkey
     await this.meta.initialize(SysMonkey, legacyRoutes);
     // locales
     await this.meta.locale.initialize(locales);
-    // // errors
-    // await this.meta.error.initialize();
     // // config
     this.config = await this._combineConfig(config);
     // constant
     this.constant = constantDefault;
-    // // module
-    // await this.meta.module.initialize(modulesMeta);
+    // module
+    await this.meta.module.initialize(modulesMeta);
     // // monkey: appInitialize
     // await this.meta.module._monkeyModule('appInitialize');
     // // monkey: appInitialized

@@ -3,8 +3,10 @@ import type { Constructable } from '../../decorator/type/constructable.js';
 import type { IMonkeyModule, IMonkeySys } from '../../types/interface/monkey.js';
 import { BeanSimple } from '../../bean/beanSimple.js';
 import { SysLocale } from './locale.js';
+import { SysModule } from './module.js';
 
 export class SysMeta extends BeanSimple {
+  module: SysModule;
   locale: SysLocale;
 
   /** @internal */
@@ -14,6 +16,7 @@ export class SysMeta extends BeanSimple {
   public legacyRoutes?: RouteRecordRaw[];
 
   protected __init__() {
+    this.module = this.app.bean._newBeanSimple(SysModule, false);
     this.locale = this.app.bean._newBeanSimple(SysLocale, false);
   }
 

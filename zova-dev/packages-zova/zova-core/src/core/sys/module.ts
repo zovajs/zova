@@ -1,6 +1,6 @@
 import type { IModule, IModuleInfo } from '@cabloy/module-info';
 import type { TypeBeanScopeRecordKeys } from '../../bean/type.js';
-import type { IModuleResource, TypeMonkeyName } from '../../types/index.js';
+import type { IModuleResource, PluginZovaModulesMeta, TypeMonkeyName } from '../../types/index.js';
 import * as ModuleInfo from '@cabloy/module-info';
 import { shallowReactive } from 'vue';
 import { BeanSimple } from '../../bean/beanSimple.js';
@@ -8,21 +8,23 @@ import { SymbolInstalled } from '../../types/index.js';
 import { StateLock } from '../../utils/stateLock.js';
 import { deepExtend } from '../sys/util.js';
 
-export class AppModule extends BeanSimple {
+export class SysModule extends BeanSimple {
+  public modulesMeta: PluginZovaModulesMeta;
   private modules: Record<string, IModule> = shallowReactive({});
 
   /** @internal */
-  public async initialize() {
+  public async initialize(modulesMeta: PluginZovaModulesMeta) {
+    this.modulesMeta = modulesMeta;
     await this._loadAllMonkeysAndSyncsAndPreloads();
     await this._requireAllSpecifics('preload');
     await this._requireAllSpecifics('monkey');
     await this._requireAllSpecifics('sync');
   }
 
-  get<K extends TypeBeanScopeRecordKeys>(moduleName: K, forceLoad?: boolean): IModule | undefined;
-  get(moduleName: string, forceLoad?: boolean): IModule | undefined;
-  get(moduleName: IModuleInfo, forceLoad?: boolean): IModule | undefined;
-  get(moduleName: string | IModuleInfo, forceLoad?: boolean): IModule | undefined {
+  get<K extends TypeBeanScopeRecordKeys>(moduleName: K): IModule | undefined;
+  get(moduleName: string): IModule | undefined;
+  get(moduleName: IModuleInfo): IModule | undefined;
+  get(moduleName: string | IModuleInfo): IModule | undefined {
     // module info
     if (!moduleName) return undefined;
     const moduleInfo = typeof moduleName === 'string' ? ModuleInfo.parseInfo(moduleName) : moduleName;
@@ -30,10 +32,6 @@ export class AppModule extends BeanSimple {
     // get
     const module = this.modules[moduleInfo.relativeName];
     if (!module) {
-      // module not loaded, so async use to raise the next call
-      if (forceLoad !== false) {
-        this.use(moduleInfo.relativeName);
-      }
       return undefined;
     }
     if (!module[SymbolInstalled] || !module[SymbolInstalled].state) {
@@ -42,32 +40,16 @@ export class AppModule extends BeanSimple {
     return module;
   }
 
-  async use<K extends TypeBeanScopeRecordKeys>(moduleName: K): Promise<IModule>;
-  async use(moduleName: string): Promise<IModule>;
-  async use(moduleName: IModuleInfo): Promise<IModule>;
-  async use(moduleName?: string | IModuleInfo): Promise<IModule> {
-    // module info
-    if (!moduleName) throw new Error('should specify the module name');
-    const moduleInfo = typeof moduleName === 'string' ? ModuleInfo.parseInfo(moduleName) : moduleName;
-    if (!moduleInfo) throw new Error(`invalid module name: ${moduleName}`);
-    const relativeName = moduleInfo.relativeName;
-    // should not try check get directly
-    // const module = this.getOnly(relativeName);
-    // if (module) return module;
-    // module
-    const moduleRepo = this.modulesMeta.modules[relativeName];
-    if (!moduleRepo) throw new Error(`module not exists: ${relativeName}`);
-    // install
-    await this._install(relativeName, moduleRepo);
-    // ok
-    return moduleRepo;
-  }
-
   exists<K extends TypeBeanScopeRecordKeys>(moduleName: K): boolean;
   exists(moduleName: string): boolean;
   exists(moduleName: IModuleInfo): boolean;
   exists(moduleName: string | IModuleInfo): boolean {
-    return this.sys.meta.module.exists(moduleName as any);
+    // module info
+    if (!moduleName) return false;
+    const moduleInfo = typeof moduleName === 'string' ? ModuleInfo.parseInfo(moduleName) : moduleName;
+    if (!moduleInfo) throw new Error(`invalid module name: ${moduleName}`);
+    const moduleRepo = this.modulesMeta.modules[moduleInfo.relativeName];
+    return !!moduleRepo;
   }
 
   private async _loadAllMonkeysAndSyncsAndPreloads() {
