@@ -4,8 +4,6 @@ import type {
   IModuleLocale,
   IModuleLocaleText,
 } from '../../bean/resource/locale/type.js';
-import type { TypeModuleResourceLocaleModules, TypeModuleResourceLocales } from '../../types/interface/module.js';
-import type { ZovaLocaleOptionalMap } from '../app/locale.js';
 import * as localeutil from '@cabloy/localeutil';
 import { ref } from 'vue';
 import { BeanSimple } from '../../bean/beanSimple.js';
@@ -17,9 +15,6 @@ const SymbolLocaleCurrent = Symbol('SymbolLocaleCurrent');
 
 export class AppLocale extends BeanSimple {
   private [SymbolLocaleCurrent]: Ref<string | undefined> = ref();
-  /** @internal */
-  public locales: TypeModuleResourceLocales = {};
-  public localeModules: TypeModuleResourceLocaleModules = {};
 
   get current(): keyof ILocalInfos {
     let locale = this[SymbolLocaleCurrent].value;
@@ -35,30 +30,7 @@ export class AppLocale extends BeanSimple {
   }
 
   /** @internal */
-  public async initialize(locales: ZovaLocaleOptionalMap) {
-    for (const locale in locales) {
-      const moduleMap = locales[locale].modules;
-      for (const moduleName in moduleMap) {
-        this._registerLocale(moduleName, locale, moduleMap[moduleName]);
-      }
-    }
-  }
-
-  /** @internal */
-  public _registerLocales(moduleName: string, locales: TypeModuleResourceLocales) {
-    if (!locales) return;
-    for (const locale in locales) {
-      this._registerLocale(moduleName, locale, locales[locale]);
-    }
-  }
-
-  private _registerLocale(moduleName: string, locale: string, moduleLocales: object) {
-    // locales
-    this.locales[locale] = Object.assign({}, moduleLocales, this.locales[locale]);
-    // localeModules
-    if (!this.localeModules[moduleName]) this.localeModules[moduleName] = {};
-    this.localeModules[moduleName][locale] = Object.assign({}, moduleLocales, this.localeModules[moduleName][locale]);
-  }
+  public async initialize() {}
 
   /** @internal */
   public createLocaleText(moduleScope?: string): IModuleLocaleText {
@@ -103,8 +75,8 @@ export class AppLocale extends BeanSimple {
     }
     return localeutil.getLocaleText(
       supportCustomMessage,
-      moduleScope ? this.localeModules[moduleScope] : undefined,
-      this.locales,
+      moduleScope ? this.sys.meta.locale.localeModules[moduleScope] : undefined,
+      this.sys.meta.locale.locales,
       locale || this.current,
       key,
       ...args,
