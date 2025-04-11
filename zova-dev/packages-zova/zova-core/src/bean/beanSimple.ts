@@ -9,7 +9,7 @@ export class BeanSimple {
   protected ctx: ZovaContext;
 
   protected get bean() {
-    return this.ctx.bean;
+    return this.ctx ? this.ctx.bean : this.sys.bean;
   }
 
   protected get containerType(): ContainerType {

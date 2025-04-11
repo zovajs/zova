@@ -7,15 +7,18 @@ import type {
 import { checkMeta } from '@cabloy/utils';
 import { matchSelector } from '@cabloy/word-utils';
 import { BeanBase, ProxyDisable } from 'zova';
-import { Bean } from '../lib/bean.js';
+import { Sys } from '../lib/bean.js';
 import { ServiceOnion } from '../service/onion_.js';
 
 @ProxyDisable()
-@Bean()
-export class BeanOnion extends BeanBase {
+@Sys()
+export class SysOnion extends BeanBase {
   private __instances: Record<string, any> = {};
 
   protected __get__(prop: string) {
+    if (process.env.DEV && this.containerType !== 'sys') {
+      return new Error('should in sys container');
+    }
     if (!this.__instances[prop]) {
       this.__instances[prop] = this.bean._newBeanSimple(ServiceOnion, false, prop, this);
     }

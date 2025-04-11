@@ -1,6 +1,7 @@
 export {};
 declare module 'zova' {
   export interface IBeanSceneRecord {
+    sys: never;
     bean: never;
     scope: never;
     service: never;
