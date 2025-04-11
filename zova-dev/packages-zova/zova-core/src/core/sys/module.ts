@@ -45,6 +45,27 @@ export class SysModule extends BeanSimple {
     return module;
   }
 
+  async use<K extends TypeBeanScopeRecordKeys>(moduleName: K): Promise<IModule>;
+  async use(moduleName: string): Promise<IModule>;
+  async use(moduleName: IModuleInfo): Promise<IModule>;
+  async use(moduleName?: string | IModuleInfo): Promise<IModule> {
+    // module info
+    if (!moduleName) throw new Error('should specify the module name');
+    const moduleInfo = typeof moduleName === 'string' ? ModuleInfo.parseInfo(moduleName) : moduleName;
+    if (!moduleInfo) throw new Error(`invalid module name: ${moduleName}`);
+    const relativeName = moduleInfo.relativeName;
+    // should not try check get directly
+    // const module = this.getOnly(relativeName);
+    // if (module) return module;
+    // module
+    const moduleRepo = this.modulesMeta.modules[relativeName];
+    if (!moduleRepo) throw new Error(`module not exists: ${relativeName}`);
+    // install
+    await this._install(relativeName, moduleRepo);
+    // ok
+    return moduleRepo;
+  }
+
   exists<K extends TypeBeanScopeRecordKeys>(moduleName: K): boolean;
   exists(moduleName: string): boolean;
   exists(moduleName: IModuleInfo): boolean;

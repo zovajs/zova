@@ -169,7 +169,7 @@ export class BeanContainer {
       return await this.app.bean.getScope(moduleScope);
     }
     // module: load
-    await this.app.meta.module.use(moduleScope);
+    await this._useModule(moduleScope);
     return this.scope(moduleScope);
   }
 
@@ -414,7 +414,7 @@ export class BeanContainer {
     // module: name
     const parts = beanFullName.split('.');
     // module: load
-    await this.app.meta.module.use(parts[0]);
+    await this._useModule(parts[0]);
     // get
     return appResource.getBean(beanFullName);
   }
@@ -1113,6 +1113,14 @@ export class BeanContainer {
     }
     if (this[SymbolBeanContainerInstances][recordProp] === undefined) {
       this[SymbolBeanContainerInstances][recordProp] = beanInstance;
+    }
+  }
+
+  private async _useModule(moduleName: string) {
+    if (this.containerType === 'sys') {
+      await this.sys.meta.module.use(moduleName);
+    } else {
+      await this.app.meta.module.use(moduleName);
     }
   }
 }
