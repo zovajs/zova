@@ -23,15 +23,15 @@ export class AppLocale extends BeanSimple {
 
   get current(): keyof ILocalInfos {
     let locale = this[SymbolLocaleCurrent].value;
-    if (!locale) locale = this.app.meta.cookie.getItem(this.app.config.locale.storeKey);
-    if (!locale) locale = this.app.config.locale.default;
+    if (!locale) locale = this.app.meta.cookie.getItem(this.sys.config.locale.storeKey);
+    if (!locale) locale = this.sys.config.locale.default;
     return locale as keyof ILocalInfos;
   }
 
   set current(value: keyof ILocalInfos) {
     if (this[SymbolLocaleCurrent].value === value) return;
     this[SymbolLocaleCurrent].value = value;
-    this.app.meta.cookie.setItem(this.app.config.locale.storeKey, value);
+    this.app.meta.cookie.setItem(this.sys.config.locale.storeKey, value);
   }
 
   /** @internal */

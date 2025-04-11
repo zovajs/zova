@@ -22,7 +22,7 @@ export class MetaThemeHandler extends BeanBase implements IThemeHandler {
       }
     } else {
       // server
-      if (!this.app.config.ssr.cookieThemeDark) {
+      if (!this.sys.config.ssr.cookieThemeDark) {
         this.$useMeta({ bodyAttr: { [`data-ssr-theme-dark-${dark}`]: themeName } });
       } else {
         this.$useMeta({ bodyAttr: { 'data-theme': themeName } });

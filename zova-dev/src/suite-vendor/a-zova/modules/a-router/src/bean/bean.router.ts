@@ -41,14 +41,14 @@ export class BeanRouter extends BeanBase {
   private _createRouter() {
     const createHistory = process.env.SERVER
       ? createMemoryHistory
-      : this.app.config.env.appRouterMode === 'history'
+      : this.sys.config.env.appRouterMode === 'history'
         ? createWebHistory
         : createWebHashHistory;
 
     return createRouter({
       scrollBehavior: () => ({ left: 0, top: 0 }),
       routes: [],
-      history: createHistory(this.app.config.env.appRouterBase),
+      history: createHistory(this.sys.config.env.appRouterBase),
     });
   }
 
@@ -142,7 +142,7 @@ export class BeanRouter extends BeanBase {
       }
     }
     // config route
-    const configRoute = name ? this.app.config.routes.name[name] : this.app.config.routes.path[path!];
+    const configRoute = name ? this.sys.config.routes.name[name] : this.sys.config.routes.path[path!];
     if (configRoute) {
       route = deepExtend({}, route, configRoute);
     }
@@ -167,9 +167,9 @@ export class BeanRouter extends BeanBase {
       routeData = { ...route, name, path, component, meta };
     } else {
       if (layout === undefined || layout === 'default') {
-        layout = this.app.config.layout.component.default;
+        layout = this.sys.config.layout.component.default;
       } else if (layout === 'empty') {
-        layout = this.app.config.layout.component.empty;
+        layout = this.sys.config.layout.component.empty;
       }
       routeNameParent = `$:${name}`;
       routeData = {
@@ -191,12 +191,12 @@ export class BeanRouter extends BeanBase {
   }
 
   private _loadConfigRoutes() {
-    const routesPath = this.app.config.routes.path;
+    const routesPath = this.sys.config.routes.path;
     for (const key in routesPath) {
       const route = routesPath[key];
       this._loadConfigRoute({ ...route, path: key, name: `$:${key}` });
     }
-    const routesName = this.app.config.routes.name;
+    const routesName = this.sys.config.routes.name;
     for (const key in routesName) {
       const route = routesName[key];
       this._loadConfigRoute({ ...route, path: route.path || route.alias, name: key });
@@ -221,7 +221,7 @@ export class BeanRouter extends BeanBase {
     path: string | undefined,
   ): IModuleRoute | undefined {
     name = this.getRealRouteName(name);
-    return name ? this.app.config.routes.name[name] : this.app.config.routes.path[path!];
+    return name ? this.sys.config.routes.name[name] : this.sys.config.routes.path[path!];
   }
 
   /** @internal */

@@ -1,6 +1,3 @@
-import { BeanRenderBase } from 'zova';
-import { Render } from 'zova-module-a-bean';
-import EssentialLink from '../../component/essentialLink/index.vue';
 import {
   QBtn,
   QDrawer,
@@ -13,9 +10,12 @@ import {
   QToolbar,
   QToolbarTitle,
 } from 'quasar';
-import { RouterView } from 'vue-router';
-import { ApiMenuEntity } from '../../api/menu.js';
 import { VNode } from 'vue';
+import { RouterView } from 'vue-router';
+import { BeanRenderBase } from 'zova';
+import { Render } from 'zova-module-a-bean';
+import { ApiMenuEntity } from '../../api/menu.js';
+import EssentialLink from '../../component/essentialLink/index.vue';
 
 @Render()
 export class RenderLayoutDefault extends BeanRenderBase {
@@ -37,6 +37,7 @@ export class RenderLayoutDefault extends BeanRenderBase {
       />
     );
   }
+
   _renderMenu() {
     const queryMenus = this.$$modelMenu.select();
     if (queryMenus.isLoading || !queryMenus.data) return;
@@ -60,7 +61,7 @@ export class RenderLayoutDefault extends BeanRenderBase {
           </QToolbar>
         </QHeader>
 
-        <QDrawer v-model={this.leftDrawerOpen} breakpoint={this.app.config.layout.sidebar.breakpoint} bordered>
+        <QDrawer v-model={this.leftDrawerOpen} breakpoint={this.sys.config.layout.sidebar.breakpoint} bordered>
           {this._renderMenu()}
         </QDrawer>
 

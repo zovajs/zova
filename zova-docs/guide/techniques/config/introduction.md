@@ -29,14 +29,14 @@ config.admin.development.ssr.mine.ts
 
 ## Use global config
 
-The global config object can be obtained directly through `this.app.config` in any bean instance
+The global config object can be obtained directly through `this.sys.config` in any bean instance
 
 ```typescript{5}
 export class StoreApi {
   private [SymbolFetch]: AxiosInstance;
 
   protected async __init__() {
-    const baseURL = `${this.app.config.api.baseURL || ''}${this.app.config.api.prefix || ''}/`;
+    const baseURL = `${this.sys.config.api.baseURL || ''}${this.sys.config.api.prefix || ''}/`;
     this[SymbolFetch] = markRaw(axios.create({ baseURL }));
   }
 }

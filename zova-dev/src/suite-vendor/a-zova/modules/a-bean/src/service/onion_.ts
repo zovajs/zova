@@ -63,7 +63,7 @@ export class ServiceOnion<OPTIONS, ONIONNAME extends string> extends BeanSimple 
         }
         // extend config
         const onionName = `${moduleName}:${itemName}`;
-        const optionsConfig = this.app.config.onions[this.sceneName]?.[onionName];
+        const optionsConfig = this.sys.config.onions[this.sceneName]?.[onionName];
         if (optionsConfig) {
           itemOptions = deepExtend({}, itemOptions, optionsConfig);
         }
@@ -146,7 +146,7 @@ export class ServiceOnion<OPTIONS, ONIONNAME extends string> extends BeanSimple 
       const beanOptions = appResource.getBean(beanFullName);
       if (!beanOptions) throw new Error(`behavior not found: ${beanFullName}`);
       // options
-      const optionsConfig = this.app.config.onions[this.sceneName]?.[item.name];
+      const optionsConfig = this.sys.config.onions[this.sceneName]?.[item.name];
       let options;
       if (beanOptions.optionsPrimitive) {
         options =

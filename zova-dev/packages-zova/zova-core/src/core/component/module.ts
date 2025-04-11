@@ -201,12 +201,12 @@ export class AppModule extends BeanSimple {
   private async _registerConfig(module: IModule) {
     if (!module.resource.config) return;
     // config
-    const config = await module.resource.config(this.app, this.app.config.meta);
+    const config = await module.resource.config(this.app, this.sys.config.meta);
     // monkey
     await this._monkeyModule('configLoaded', module, config);
     // extend
     const relativeName = module.info.relativeName;
-    this.app.config.modules[relativeName] = deepExtend({}, config, this.app.config.modules[relativeName]);
+    this.sys.config.modules[relativeName] = deepExtend({}, config, this.sys.config.modules[relativeName]);
   }
 
   /** @internal */

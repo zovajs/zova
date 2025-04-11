@@ -1,6 +1,6 @@
-import { Bean, BeanBase } from 'zova';
 import axios, { AxiosInstance } from 'axios';
 import { markRaw } from 'vue';
+import { Bean, BeanBase } from 'zova';
 
 const SymbolFetch = Symbol('SymbolFetch');
 
@@ -24,7 +24,7 @@ export class BeanFetch extends BeanBase {
     // request
     api.interceptors.request.use(
       config => {
-        if (this.app.config.api.jwt) {
+        if (this.sys.config.api.jwt) {
           config.headers.Authorization = 'Bearer ';
         }
         return config;
@@ -37,7 +37,7 @@ export class BeanFetch extends BeanBase {
     api.interceptors.response.use(
       response => {
         const contentType = response.headers['content-type'];
-        if (!contentType || contentType.indexOf('application/json') === -1) return response;
+        if (!contentType || !contentType.includes('application/json')) return response;
         if (response.data.code !== 0) {
           const error = new Error();
           error.code = response.data.code;

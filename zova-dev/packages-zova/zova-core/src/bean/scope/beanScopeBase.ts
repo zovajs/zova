@@ -42,7 +42,7 @@ export class BeanScopeBase extends BeanBaseSimple {
     // config
     if (prop === 'config') {
       if (!this[BeanModuleConfig]) {
-        this[BeanModuleConfig] = this.app.config.modules[moduleBelong];
+        this[BeanModuleConfig] = this.sys.config.modules[moduleBelong];
       }
       return this[BeanModuleConfig];
     }

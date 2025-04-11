@@ -32,7 +32,7 @@ export class InterceptorJwt extends BeanInterceptorBase<IInterceptorOptionsJwt> 
     _options: IInterceptorOptionsJwt,
     next: NextInterceptorRequest,
   ): Promise<AxiosRequestConfig> {
-    if (this.app.config.api.jwt) {
+    if (this.sys.config.api.jwt) {
       const authorization = await this._beanJwtAdapter.getAuthorization();
       config.headers!.Authorization = `Bearer ${authorization || ''}`;
     }

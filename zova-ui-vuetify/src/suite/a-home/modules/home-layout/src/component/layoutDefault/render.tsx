@@ -1,5 +1,5 @@
-import { BeanRenderBase } from 'zova';
-import { Render } from 'zova-module-a-bean';
+import { VNode } from 'vue';
+import { RouterView } from 'vue-router';
 import {
   VApp,
   VAppBar,
@@ -13,10 +13,10 @@ import {
   VSpacer,
   VToolbarTitle,
 } from 'vuetify/components';
-import { VNode } from 'vue';
-import EssentialLink from '../essentialLink/index.vue';
-import { RouterView } from 'vue-router';
+import { BeanRenderBase } from 'zova';
+import { Render } from 'zova-module-a-bean';
 import { ApiMenuEntity } from '../../api/menu.js';
+import EssentialLink from '../essentialLink/index.vue';
 
 @Render()
 export class RenderLayoutDefault extends BeanRenderBase {
@@ -38,6 +38,7 @@ export class RenderLayoutDefault extends BeanRenderBase {
       />
     );
   }
+
   _renderMenu() {
     const queryMenus = this.$$modelMenu.select();
     if (queryMenus.isLoading || !queryMenus.data) return;
@@ -53,7 +54,7 @@ export class RenderLayoutDefault extends BeanRenderBase {
       <VApp>
         <VNavigationDrawer
           v-model={this.leftDrawerOpen}
-          mobileBreakpoint={this.app.config.layout.sidebar.breakpoint}
+          mobileBreakpoint={this.sys.config.layout.sidebar.breakpoint}
           width="360"
         >
           {this._renderMenu()}

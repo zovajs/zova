@@ -1,12 +1,12 @@
-import { BeanControllerBase, Use, PropsBase, useComputed, useCustomRef, RequiredSome } from 'zova';
+import { BeanControllerBase, PropsBase, RequiredSome, Use, useComputed, useCustomRef } from 'zova';
 import { Controller } from 'zova-module-a-bean';
-import { ModelMenu } from '../../bean/model.menu.js';
-import { ModelLayout } from '../../bean/model.layout.js';
 import { ScopeModule } from '../../.metadata/this.js';
+import { ModelLayout } from '../../bean/model.layout.js';
+import { ModelMenu } from '../../bean/model.menu.js';
 
 export interface Props extends PropsBase<ControllerLayoutDefault, Slots> {}
 
-export type Emits = {};
+export interface Emits {}
 
 export interface Slots {}
 
@@ -21,6 +21,7 @@ export class ControllerLayoutDefault extends BeanControllerBase<
 
   @Use()
   $$modelMenu: ModelMenu;
+
   @Use()
   $$modelLayout: ModelLayout;
 
@@ -37,7 +38,7 @@ export class ControllerLayoutDefault extends BeanControllerBase<
       } else {
         width = this.$q.screen.width || document.documentElement.clientWidth;
       }
-      return width <= this.app.config.layout.sidebar.breakpoint;
+      return width <= this.sys.config.layout.sidebar.breakpoint;
     });
     // leftDrawerOpen
     this.leftDrawerOpen = useCustomRef(() => {

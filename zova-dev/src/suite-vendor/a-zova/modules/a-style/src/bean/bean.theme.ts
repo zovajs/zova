@@ -23,7 +23,7 @@ export class BeanTheme extends BeanModelBase {
 
   protected async __init__() {
     // support admin
-    const cookieThemeName = this.app.config.ssr.cookieThemeName;
+    const cookieThemeName = this.sys.config.ssr.cookieThemeName;
     const useQueryMethodThemeName = cookieThemeName ? '$useQueryCookie' : '$useQueryLocal';
     this.name = this[useQueryMethodThemeName]({
       queryKey: ['themename'],
@@ -34,8 +34,8 @@ export class BeanTheme extends BeanModelBase {
         defaultData: this.scope.config.defaultTheme,
       },
     });
-    const cookieThemeDark = this.app.config.ssr.cookieThemeDark;
-    const cookieThemeDarkDefault = this.app.config.ssr.cookieThemeDarkDefault;
+    const cookieThemeDark = this.sys.config.ssr.cookieThemeDark;
+    const cookieThemeDarkDefault = this.sys.config.ssr.cookieThemeDarkDefault;
     const useQueryMethodThemeDark = cookieThemeDark ? '$useQueryCookie' : '$useQueryLocal';
     this.darkMode = this[useQueryMethodThemeDark]({
       queryKey: ['themedark'],
@@ -79,7 +79,7 @@ export class BeanTheme extends BeanModelBase {
 
   async _applyThemeWrapper() {
     await this._applyTheme();
-    if (process.env.SERVER && !this.app.config.ssr.cookieThemeDark) {
+    if (process.env.SERVER && !this.sys.config.ssr.cookieThemeDark) {
       this.toggleDark();
       await this._applyTheme();
     }

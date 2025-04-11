@@ -15,7 +15,7 @@ export class ServiceSsr extends BeanBase {
             document.head.appendChild(__themeDarkEl);
             document.querySelector('#__prefersColorSchemeDarkJS').remove();
           </script>`.replaceAll('\n', '');
-        if (this.app.config.ssr.optimization.bodyReadyObserver) {
+        if (this.sys.config.ssr.optimization.bodyReadyObserver) {
           this.ctx.meta.ssr.context._meta.bodyTags += `<script id="__leftDrawerOpenJS">
   window.ssr_body_ready_condition=()=>{
     const __domHeader=document.querySelector('#q-app>.v-application>.v-application__wrap>header.v-toolbar');
@@ -24,13 +24,13 @@ export class ServiceSsr extends BeanBase {
     return __domHeader && __domDrawer && __domPageContainer;
   };
   window.ssr_body_ready_callback=()=>{
-    const __belowBreakpoint=document.documentElement.clientWidth <= ${this.app.config.layout.sidebar.breakpoint};
+    const __belowBreakpoint=document.documentElement.clientWidth <= ${this.sys.config.layout.sidebar.breakpoint};
     let __leftDrawerOpen;
     if(__belowBreakpoint){
       __leftDrawerOpen=false;
     }else{
       const __leftDrawerOpenPC=window.ssr_load_local('sidebarLeftOpenPC');
-      __leftDrawerOpen=__leftDrawerOpenPC!==undefined?__leftDrawerOpenPC:${this.app.config.layout.sidebar.leftOpenPC};  
+      __leftDrawerOpen=__leftDrawerOpenPC!==undefined?__leftDrawerOpenPC:${this.sys.config.layout.sidebar.leftOpenPC};  
     }
     const __domHeader=document.querySelector('#q-app>.v-application>.v-application__wrap>header.v-toolbar');
     const __domDrawer=document.querySelector('#q-app>.v-application>.v-application__wrap>.v-navigation-drawer--left');  

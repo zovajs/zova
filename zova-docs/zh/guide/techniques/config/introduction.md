@@ -29,14 +29,14 @@ config.admin.development.ssr.mine.ts
 
 ## 访问全局config
 
-在任何 bean 实例中可以直接通过`this.app.config`访问全局 config 对象
+在任何 bean 实例中可以直接通过`this.sys.config`访问全局 config 对象
 
 ```typescript{5}
 export class StoreApi {
   private [SymbolFetch]: AxiosInstance;
 
   protected async __init__() {
-    const baseURL = `${this.app.config.api.baseURL || ''}${this.app.config.api.prefix || ''}/`;
+    const baseURL = `${this.sys.config.api.baseURL || ''}${this.sys.config.api.prefix || ''}/`;
     this[SymbolFetch] = markRaw(axios.create({ baseURL }));
   }
 }

@@ -14,7 +14,7 @@ export class MetaThemeHandler extends BeanBase implements IThemeHandler {
     for (const key in token) {
       const key2 = `--el-${key}`;
       brand[key2] = token[key];
-      //body.style.setProperty(key2, token[key]);
+      // body.style.setProperty(key2, token[key]);
     }
     const cBrandOld = this.$$modelTheme.cBrand;
     this.$$modelTheme.cBrand = this.$style({
@@ -46,7 +46,7 @@ export class MetaThemeHandler extends BeanBase implements IThemeHandler {
         htmlClass.push('dark');
       }
       const htmlClassString = htmlClass.join(' ');
-      if (!this.app.config.ssr.cookieThemeDark) {
+      if (!this.sys.config.ssr.cookieThemeDark) {
         this.$useMeta({ bodyAttr: { [`data-ssr-theme-dark-${dark}`]: htmlClassString } });
       } else {
         this.$useMeta({ htmlAttr: { class: htmlClassString } });

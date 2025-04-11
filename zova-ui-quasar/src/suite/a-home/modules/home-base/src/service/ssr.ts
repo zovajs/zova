@@ -13,14 +13,14 @@ export class ServiceSsr extends BeanBase {
     // ssr theme
     if (process.env.SERVER) {
       this.ctx.meta.ssr.context.onRendered(() => {
-        if (!this.app.config.ssr.cookieThemeDark) {
+        if (!this.sys.config.ssr.cookieThemeDark) {
           this.ctx.meta.ssr.context._meta.bodyTags += `<script id="__prefersColorSchemeDarkJS">
             document.body.classList.remove('body--light','body--dark');
             window.ssr_themedark_data.split(',').forEach(item=>document.body.classList.add(item));
             document.querySelector('#__prefersColorSchemeDarkJS').remove();
           </script>`.replaceAll('\n', '');
         }
-        if (this.app.config.ssr.optimization.bodyReadyObserver) {
+        if (this.sys.config.ssr.optimization.bodyReadyObserver) {
           this.ctx.meta.ssr.context._meta.bodyTags += `<script id="__leftDrawerOpenJS">
   window.ssr_body_ready_condition=()=>{
     const __domHeader=document.querySelector('#q-app>.q-layout>.q-header');
@@ -29,13 +29,13 @@ export class ServiceSsr extends BeanBase {
     return __domHeader && __domDrawer && __domPageContainer;
   };
   window.ssr_body_ready_callback=()=>{
-    const __belowBreakpoint=document.documentElement.clientWidth <= ${this.app.config.layout.sidebar.breakpoint};
+    const __belowBreakpoint=document.documentElement.clientWidth <= ${this.sys.config.layout.sidebar.breakpoint};
     let __leftDrawerOpen;
     if(__belowBreakpoint){
       __leftDrawerOpen=false;
     }else{
       const __leftDrawerOpenPC=window.ssr_load_local('sidebarLeftOpenPC');
-      __leftDrawerOpen=__leftDrawerOpenPC!==undefined?__leftDrawerOpenPC:${this.app.config.layout.sidebar.leftOpenPC};  
+      __leftDrawerOpen=__leftDrawerOpenPC!==undefined?__leftDrawerOpenPC:${this.sys.config.layout.sidebar.leftOpenPC};  
     }
     if(__leftDrawerOpen){
       const __domHeader=document.querySelector('#q-app>.q-layout>.q-header');

@@ -185,7 +185,7 @@ export class AppIconBase extends BeanSimple {
     if (parts.length !== 3) {
       return;
     }
-    const module = parts[0] || this.app.config.icon.defaultModule;
+    const module = parts[0] || this.sys.config.icon.defaultModule;
     const group = parts[1] || 'default';
     const name = parts[2] || '';
     if (!module.includes('-') || !name) {

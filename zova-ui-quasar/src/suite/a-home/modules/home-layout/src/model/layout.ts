@@ -8,12 +8,12 @@ export class ModelLayout extends BeanModelBase<ScopeModule> {
 
   protected async __init__() {
     this.leftDrawerOpenPC =
-      process.env.SSR && !this.app.config.ssr.optimization.bodyReadyObserver
-        ? this.app.config.layout.sidebar.leftOpenPC
+      process.env.SSR && !this.sys.config.ssr.optimization.bodyReadyObserver
+        ? this.sys.config.layout.sidebar.leftOpenPC
         : this.$useQueryLocal({
             queryKey: ['sidebarLeftOpenPC'],
             meta: {
-              defaultData: this.app.config.layout.sidebar.leftOpenPC,
+              defaultData: this.sys.config.layout.sidebar.leftOpenPC,
             },
           });
   }
