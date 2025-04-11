@@ -49,7 +49,7 @@ export class BeanScopeBase extends BeanBaseSimple {
     // constant
     if (prop === 'constant') {
       if (!this[BeanModuleConstant]) {
-        this[BeanModuleConstant] = this.app.constant.modules[moduleBelong];
+        this[BeanModuleConstant] = this.sys.constant.modules[moduleBelong];
       }
       return this[BeanModuleConstant];
     }
