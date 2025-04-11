@@ -43,9 +43,9 @@ export function Style(): ClassDecorator {
 }
 
 export function Aop(options: IDecoratorAopOptions): ClassDecorator {
-  return createBeanDecorator('aop', 'app', true, options);
+  return createBeanDecorator('aop', 'sys', true, options);
 }
 
 export function AopMethod<T extends IDecoratorAopMethodOptions>(options?: T): ClassDecorator {
-  return createBeanDecorator('aopMethod', 'app', true, options);
+  return createBeanDecorator('aopMethod', 'sys', true, options);
 }
