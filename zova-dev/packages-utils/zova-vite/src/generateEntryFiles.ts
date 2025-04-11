@@ -65,6 +65,7 @@ export async function generateEntryFiles(
       const fileSrc = resolveTemplatePath(`app/${file}`);
       const fileDest = path.join(pathDest, file.substring(0, file.length - 1));
       const vars = {
+        sysMonkey: fse.existsSync(path.join(configOptions.appDir, 'src/front/config/monkeySys.ts')),
         appMonkey: fse.existsSync(path.join(configOptions.appDir, 'src/front/config/monkey.ts')),
         legacy: fse.existsSync(path.join(configOptions.appDir, 'src/legacy')),
       };

@@ -28,7 +28,7 @@ export class ZovaApplication {
   }
 
   /** @internal */
-  public async initialize({ modulesMeta, locales, AppMonkey }: PluginZovaOptions) {
+  public async initialize({ modulesMeta, locales, SysMonkey, AppMonkey }: PluginZovaOptions) {
     // monkey
     await this.meta.initialize(AppMonkey);
     // component

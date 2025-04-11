@@ -10,13 +10,13 @@ export const PluginZova = {
   async install(
     vue: App,
     ctxRoot: ZovaContext,
-    { modulesMeta, locales, config, AppMonkey, legacyRoutes }: PluginZovaOptions,
+    { modulesMeta, locales, config, SysMonkey, AppMonkey, legacyRoutes }: PluginZovaOptions,
   ) {
     // zova sys
-    await sys.initialize({ modulesMeta, locales, config, AppMonkey, legacyRoutes });
+    await sys.initialize({ modulesMeta, locales, config, SysMonkey, AppMonkey, legacyRoutes });
     // zova app
     const app = new ZovaApplication(vue, ctxRoot);
-    await app.initialize({ modulesMeta, locales, config, AppMonkey, legacyRoutes });
+    await app.initialize({ modulesMeta, locales, config, SysMonkey, AppMonkey, legacyRoutes });
     return app;
   },
   async update(app: ZovaApplication, ctxRoot: ZovaContext) {
