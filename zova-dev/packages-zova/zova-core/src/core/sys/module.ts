@@ -113,7 +113,8 @@ export class SysModule extends BeanSimple {
     }
   }
 
-  private async _install(moduleName: string, moduleRepo: IModule) {
+  /** @internal */
+  public async _install(moduleName: string, moduleRepo: IModule) {
     // check
     if (this.modules[moduleName]) {
       const module = this.modules[moduleName];
@@ -131,7 +132,7 @@ export class SysModule extends BeanSimple {
     // record
     this.modules[moduleName] = module;
     // install
-    await this._installInner(moduleName, module, moduleRepo);
+    await this._installInner(moduleName, moduleRepo);
     // installed
     module[SymbolInstalled].touch();
     // scope: should after [SymbolInstalled].touch
@@ -140,23 +141,23 @@ export class SysModule extends BeanSimple {
     await this._monkeyModule('moduleLoaded', module);
   }
 
-  private async _installInner(moduleName: string, module: IModule, moduleRepo: IModule) {
+  private async _installInner(moduleName: string, moduleRepo: IModule) {
     // load
     if (typeof moduleRepo.resource === 'function') {
       const moduleResource = moduleRepo.resource as any;
-      module.resource = moduleRepo.resource = await moduleResource();
+      moduleRepo.resource = await moduleResource();
     }
     // main / monkey
-    if (module.resource.MainSys) {
-      this.mainInstances[moduleName] = this.app.bean._newBeanSimple(module.resource.MainSys, false, module);
+    if (moduleRepo.resource.MainSys) {
+      this.mainInstances[moduleName] = this.app.bean._newBeanSimple(moduleRepo.resource.MainSys, false, module);
     }
-    if (module.resource.MonkeySys) {
-      this.monkeyInstances[moduleName] = this.app.bean._newBeanSimple(module.resource.MonkeySys, false, module);
+    if (moduleRepo.resource.MonkeySys) {
+      this.monkeyInstances[moduleName] = this.app.bean._newBeanSimple(moduleRepo.resource.MonkeySys, false, module);
     }
     // monkey: moduleLoading
-    await this._monkeyModule('moduleLoading', module);
+    await this._monkeyModule('moduleLoading', moduleRepo);
     // register resources
-    await this._registerResources(module);
+    await this._registerResources(moduleRepo);
   }
 
   private async _registerResources(module: IModule) {

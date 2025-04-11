@@ -45,12 +45,12 @@ export class ZovaSys {
     this.constant = constantDefault;
     // module
     await this.meta.module.initialize(modulesMeta);
-    // // monkey: appInitialize
-    // await this.meta.module._monkeyModule('appInitialize');
-    // // monkey: appInitialized
-    // await this.meta.module._monkeyModule('appInitialized');
-    // // monkey: appReady
-    // await this.meta.module._monkeyModule('appReady');
+    // monkey: sysInitialize
+    await this.meta.module._monkeyModule('sysInitialize');
+    // monkey: sysInitialized
+    await this.meta.module._monkeyModule('sysInitialized');
+    // monkey: sysReady
+    await this.meta.module._monkeyModule('sysReady');
   }
 
   private async _combineConfig(config: TypeModuleResourceConfig[]): Promise<ZovaConfig> {

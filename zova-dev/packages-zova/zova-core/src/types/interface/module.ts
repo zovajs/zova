@@ -37,3 +37,8 @@ declare module '@cabloy/module-info' {
     info: IModuleInfo;
   }
 }
+
+export interface IModuleApp {
+  /** @internal */
+  [SymbolInstalled]: StateLock;
+}

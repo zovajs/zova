@@ -1,6 +1,6 @@
 import type { IModule, IModuleInfo } from '@cabloy/module-info';
 import type { TypeBeanScopeRecordKeys } from '../../bean/type.js';
-import type { IModuleMain, IModuleResource, IMonkeyApp, IMonkeyController, IMonkeyModule, TypeMonkeyName } from '../../types/index.js';
+import type { IModuleApp, IModuleMain, IMonkeyApp, IMonkeyController, IMonkeyModule, TypeMonkeyName } from '../../types/index.js';
 import * as ModuleInfo from '@cabloy/module-info';
 import { shallowReactive } from 'vue';
 import { BeanSimple } from '../../bean/beanSimple.js';
@@ -9,13 +9,12 @@ import { StateLock } from '../../utils/stateLock.js';
 import { deepExtend } from '../sys/util.js';
 
 export class AppModule extends BeanSimple {
-  private modules: Record<string, IModule> = shallowReactive({});
+  private modules: Record<string, IModuleApp> = shallowReactive({});
   private mainInstances: Record<string, IModuleMain> = {};
   private monkeyInstances: Record<string, IMonkeyModule & IMonkeyApp & IMonkeyController> = {};
 
   /** @internal */
   public async initialize() {
-    await this._loadAllMonkeysAndSyncsAndPreloads();
     await this._requireAllSpecifics('preload');
     await this._requireAllSpecifics('monkey');
     await this._requireAllSpecifics('sync');
@@ -41,7 +40,7 @@ export class AppModule extends BeanSimple {
     if (!module[SymbolInstalled] || !module[SymbolInstalled].state) {
       return undefined;
     }
-    return module;
+    return this.sys.meta.module.get(moduleName as any);
   }
 
   async use<K extends TypeBeanScopeRecordKeys>(moduleName: K): Promise<IModule>;
@@ -57,7 +56,7 @@ export class AppModule extends BeanSimple {
     // const module = this.getOnly(relativeName);
     // if (module) return module;
     // module
-    const moduleRepo = this.modulesMeta.modules[relativeName];
+    const moduleRepo = this.sys.meta.module.modulesMeta.modules[relativeName];
     if (!moduleRepo) throw new Error(`module not exists: ${relativeName}`);
     // install
     await this._install(relativeName, moduleRepo);
@@ -72,44 +71,9 @@ export class AppModule extends BeanSimple {
     return this.sys.meta.module.exists(moduleName as any);
   }
 
-  private async _loadAllMonkeysAndSyncsAndPreloads() {
-    const moduleNames: string[] = [];
-    for (const moduleName of this.modulesMeta.moduleNames) {
-      const module = this.modulesMeta.modules[moduleName];
-      const info = module.info;
-      if (info.capabilities?.monkey || info.capabilities?.sync || info.capabilities?.preload) {
-        const moduleResource = module.resource as any;
-        if (typeof moduleResource === 'function') {
-          moduleNames.push(moduleName);
-        }
-      }
-    }
-    await this.loadModules(moduleNames);
-  }
-
-  public async loadModules(moduleNames: string[]) {
-    if (moduleNames.length === 0) return;
-    const promises: Promise<IModuleResource>[] = [];
-    const moduleNamesLoading: string[] = [];
-    for (const moduleName of moduleNames) {
-      const module = this.modulesMeta.modules[moduleName];
-      if (!module) throw new Error(`module not found: ${moduleName}`);
-      const moduleResource = module.resource as any;
-      if (typeof moduleResource === 'function') {
-        promises.push(moduleResource());
-        moduleNamesLoading.push(moduleName);
-      }
-    }
-    const modulesResource = await Promise.all(promises);
-    for (let i = 0; i < modulesResource.length; i++) {
-      const moduleName = moduleNamesLoading[i];
-      this.modulesMeta.modules[moduleName].resource = modulesResource[i];
-    }
-  }
-
   private async _requireAllSpecifics(capabilityName: 'preload' | 'monkey' | 'sync') {
-    for (const moduleName of this.modulesMeta.moduleNames) {
-      const module = this.modulesMeta.modules[moduleName];
+    for (const moduleName of this.sys.meta.module.modulesMeta.moduleNames) {
+      const module = this.sys.meta.module.modulesMeta.modules[moduleName];
       if (module.info.capabilities?.[capabilityName]) {
         await this._install(moduleName, module);
       }
@@ -117,6 +81,8 @@ export class AppModule extends BeanSimple {
   }
 
   private async _install(moduleName: string, moduleRepo: IModule) {
+    // sys first
+    await this.sys.meta.module._install(moduleName, moduleRepo);
     // check
     if (this.modules[moduleName]) {
       const module = this.modules[moduleName];
@@ -129,21 +95,22 @@ export class AppModule extends BeanSimple {
       return;
     }
     // clone for ssr
-    const module = Object.assign({}, moduleRepo);
-    module[SymbolInstalled] = StateLock.create();
+    const module: IModuleApp = {
+      [SymbolInstalled]: StateLock.create(),
+    };
     // record
     this.modules[moduleName] = module;
     // install
-    await this._installInner(moduleName, module, moduleRepo);
+    await this._installInner(moduleName, moduleRepo);
     // installed
     module[SymbolInstalled].touch();
     // scope: should after [SymbolInstalled].touch
     await this.app.bean._getBean(`${moduleName}.scope.module` as any, false);
     // monkey: moduleLoaded
-    await this._monkeyModule('moduleLoaded', module);
+    await this._monkeyModule('moduleLoaded', moduleRepo);
   }
 
-  private async _installInner(_moduleName: string, module: IModule, moduleRepo: IModule) {
+  private async _installInner(_moduleName: string, moduleRepo: IModule) {
     // load
     if (typeof moduleRepo.resource === 'function') {
       const moduleResource = moduleRepo.resource as any;
