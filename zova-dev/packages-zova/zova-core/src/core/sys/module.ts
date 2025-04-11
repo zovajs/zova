@@ -199,42 +199,38 @@ export class SysModule extends BeanSimple {
   /** @internal */
   public async _monkeyModule(monkeyName: TypeMonkeyName, moduleTarget?: IModule, ...monkeyData: any[]) {
     // self: main
-    if (moduleTarget && moduleTarget.mainInstance && moduleTarget.mainInstance[monkeyName]) {
-      // @ts-ignore ignore
-      await this.app.vue.runWithContext(async () => {
-        await moduleTarget.mainInstance[monkeyName](...monkeyData);
-      });
+    if (moduleTarget) {
+      const mainInstance = this.mainInstances[moduleTarget.info.relativeName];
+      if (mainInstance && mainInstance[monkeyName]) {
+        await mainInstance[monkeyName](...monkeyData);
+      }
     }
     // module monkey
     for (const key of this.modulesMeta.moduleNames) {
       const moduleMonkey: IModule = this.modulesMeta.modules[key];
       if (moduleMonkey.info.capabilities?.monkey) {
-        const module = this.modules[key];
-        if (module && module.monkeyInstance && module.monkeyInstance[monkeyName]) {
-          await this.app.vue.runWithContext(async () => {
-            if (moduleTarget === undefined) {
-              // @ts-ignore ignore
-              await module.monkeyInstance[monkeyName](...monkeyData);
-            } else {
-              // @ts-ignore ignore
-              await module.monkeyInstance[monkeyName](moduleTarget, ...monkeyData);
-            }
-          });
+        const monkeyInstance = this.monkeyInstances[key];
+        if (monkeyInstance && monkeyInstance[monkeyName]) {
+          if (moduleTarget === undefined) {
+            // @ts-ignore ignore
+            await monkeyInstance[monkeyName](...monkeyData);
+          } else {
+            // @ts-ignore ignore
+            await monkeyInstance[monkeyName](moduleTarget, ...monkeyData);
+          }
         }
       }
     }
-    // app monkey
-    const appMonkey = this.app.meta.appMonkey;
-    if (appMonkey && appMonkey[monkeyName]) {
-      await this.app.vue.runWithContext(async () => {
-        if (moduleTarget === undefined) {
-          // @ts-ignore ignore
-          await appMonkey[monkeyName](...monkeyData);
-        } else {
-          // @ts-ignore ignore
-          await appMonkey[monkeyName](moduleTarget, ...monkeyData);
-        }
-      });
+    // sys monkey
+    const sysMonkey = this.sys.meta.sysMonkey;
+    if (sysMonkey && sysMonkey[monkeyName]) {
+      if (moduleTarget === undefined) {
+        // @ts-ignore ignore
+        await sysMonkey[monkeyName](...monkeyData);
+      } else {
+        // @ts-ignore ignore
+        await sysMonkey[monkeyName](moduleTarget, ...monkeyData);
+      }
     }
   }
 
