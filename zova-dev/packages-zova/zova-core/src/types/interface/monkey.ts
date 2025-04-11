@@ -25,7 +25,11 @@ export interface IMonkeyModule {
 export interface IMonkeySys
   extends IMonkeySysInitialize,
   IMonkeySysInitialized,
-  IMonkeySysReady {}
+  IMonkeySysReady,
+  IMonkeyBeanInit,
+  IMonkeyBeanInited,
+  IMonkeyBeanDispose,
+  IMonkeyBeanDisposed {}
 
 export interface IMonkeyApp
   extends IMonkeyAppInitialize,

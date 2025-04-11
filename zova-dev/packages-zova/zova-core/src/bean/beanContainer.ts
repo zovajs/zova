@@ -70,11 +70,17 @@ export class BeanContainer {
       if (prop.startsWith('$$')) continue;
       const beanInstance = cast(beanInstances[prop]);
       if (beanInstance && !(beanInstance instanceof BeanAopBase) && beanInstance.__dispose__) {
-        this.app.meta.module._monkeyModule('beanDispose', undefined, this, beanInstance);
-        this.runWithInstanceScopeOrAppContext(() => {
+        if (this.containerType === 'sys') {
+          this.sys.meta.module._monkeyModule('beanDispose', undefined, this, beanInstance);
           beanInstance.__dispose__();
-        });
-        this.app.meta.module._monkeyModule('beanDisposed', undefined, this, beanInstance);
+          this.sys.meta.module._monkeyModule('beanDisposed', undefined, this, beanInstance);
+        } else {
+          this.app.meta.module._monkeyModule('beanDispose', undefined, this, beanInstance);
+          this.runWithInstanceScopeOrAppContext(() => {
+            beanInstance.__dispose__();
+          });
+          this.app.meta.module._monkeyModule('beanDisposed', undefined, this, beanInstance);
+        }
       }
     }
     this[SymbolBeanContainerInstances] = shallowReactive({});
@@ -83,7 +89,7 @@ export class BeanContainer {
 
   get containerType(): ContainerType {
     if (!this.ctx) return 'sys';
-    if (this.ctx.bean === this.app.bean) return 'app';
+    if (this === this.app.bean) return 'app';
     return 'ctx';
   }
 
@@ -156,16 +162,19 @@ export class BeanContainer {
   scope<K extends TypeBeanScopeRecordKeys>(moduleScope: K): IBeanScopeRecord[K];
   scope<T>(moduleScope: string): T;
   scope<T>(moduleScope: string): T {
-    if (this !== this.app.bean) {
+    // ctx->app
+    if (this.containerType === 'ctx') {
       return this.app.bean.scope(moduleScope);
     }
+    // sys/app
     return this._getBeanSyncOnly(`${moduleScope}.scope.module`);
   }
 
   async getScope<K extends TypeBeanScopeRecordKeys>(moduleScope: K): Promise<IBeanScopeRecord[K]>;
   async getScope<T>(moduleScope: string): Promise<T>;
   async getScope<T>(moduleScope: string): Promise<T> {
-    if (this !== this.app.bean) {
+    // ctx->app
+    if (this.containerType === 'ctx') {
       return await this.app.bean.getScope(moduleScope);
     }
     // module: load
@@ -950,21 +959,21 @@ export class BeanContainer {
     let chains: (MetadataKey | BeanBase)[] = [];
     // aop
     if (!proxyDisable && beanOptions && cast(beanOptions.scene) !== 'aop') {
-      const beanAop = (await this.app.bean._getBean('a-bean.service.aop' as never, false)) as any;
+      const beanAop = (await this.sys.bean._getBean('a-bean.service.aop' as never, false)) as any;
       const aops = await beanAop.findAopsMatched(beanOptions.beanFullName);
       if (aops) {
         // load aops
         const aopInstances: BeanBase[] = [];
         for (const aop of aops) {
           // singleton
-          aopInstances.push(await this.app.bean._getBean(aop.beanFullName, true));
+          aopInstances.push(await this.sys.bean._getBean(aop.beanFullName, true));
         }
         chains = chains.concat(aopInstances);
       }
     }
     // aop method
     if (!proxyDisable && beanOptions) {
-      const beanAop = (await this.app.bean._getBean('a-bean.service.aop' as never, false)) as any;
+      const beanAop = (await this.sys.bean._getBean('a-bean.service.aop' as never, false)) as any;
       const aopMethods = await beanAop.findAopMethodsMatched(beanOptions?.beanFullName);
       if (aopMethods) {
         chains.push([SymbolProxyAopMethod, aopMethods] as any);
@@ -1007,7 +1016,7 @@ export class BeanContainer {
   }
 
   private _aopCacheHost() {
-    return (this.app ? this.app.ctx : this.ctx) || this.sys;
+    return this.sys;
   }
 
   private _getAopChainsProp(
