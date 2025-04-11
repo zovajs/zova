@@ -1,14 +1,10 @@
 import type { App } from 'vue';
 import type { BeanContainer } from '../../bean/beanContainer.js';
-import type { TypeModuleResourceConfig } from '../../types/interface/module.js';
 import type { PluginZovaOptions } from '../../types/interface/pluginZova.js';
 import type { ZovaContext } from '../context/context.js';
-import type { ZovaConfig } from './config.js';
 import type { ZovaConstant } from './constant.js';
 import { markRaw } from 'vue';
 import { cast } from '../../types/utils/cast.js';
-import { deepExtend } from '../sys/util.js';
-import { configDefault } from './config.js';
 import { constantDefault } from './constant.js';
 import { AppMeta } from './meta.js';
 
@@ -17,7 +13,6 @@ export class ZovaApplication {
   vue: App;
   bean: BeanContainer;
   meta: AppMeta;
-  config: ZovaConfig;
   constant: ZovaConstant;
   ctx: ZovaContext;
 
@@ -36,7 +31,7 @@ export class ZovaApplication {
   }
 
   /** @internal */
-  public async initialize({ modulesMeta, locales, config, AppMonkey }: PluginZovaOptions) {
+  public async initialize({ modulesMeta, locales, AppMonkey }: PluginZovaOptions) {
     // monkey
     await this.meta.initialize(AppMonkey);
     // component
@@ -45,8 +40,6 @@ export class ZovaApplication {
     await this.meta.locale.initialize(locales);
     // errors
     await this.meta.error.initialize();
-    // config
-    this.config = await this._combineConfig(config);
     // constant
     this.constant = constantDefault;
     // module
@@ -57,14 +50,6 @@ export class ZovaApplication {
     await this.meta.module._monkeyModule('appInitialized');
     // monkey: appReady
     await this.meta.module._monkeyModule('appReady');
-  }
-
-  private async _combineConfig(config: TypeModuleResourceConfig[]): Promise<ZovaConfig> {
-    const _config = deepExtend({}, configDefault());
-    for (const configFn of config) {
-      deepExtend(_config, await configFn(this, _config.meta));
-    }
-    return _config;
   }
 
   public reload() {
