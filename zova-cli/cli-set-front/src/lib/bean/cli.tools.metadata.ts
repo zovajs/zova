@@ -7,7 +7,7 @@ import { generateBeanGenerals } from './toolsMetadata/generateBeanGenerals.ts';
 import { generateConfig, generateConstant, generateError, generateLocale } from './toolsMetadata/generateConfig.ts';
 import { generateIcons } from './toolsMetadata/generateIcons.ts';
 import { generateMetadataCustom } from './toolsMetadata/generateMetadataCustom.ts';
-import { generateMain, generateMonkey } from './toolsMetadata/generateMonkey.ts';
+import { generateMain, generateMainSys, generateMonkey, generateMonkeySys } from './toolsMetadata/generateMonkey.ts';
 import { generateOnions } from './toolsMetadata/generateOnions.ts';
 import { generateOptionsPackage } from './toolsMetadata/generateOptionsPackage.ts';
 import { generateScope } from './toolsMetadata/generateScope.ts';
@@ -133,10 +133,12 @@ export class CliToolsMetadata extends BeanCliBase {
     // error
     const contentErrors = await generateError(modulePath);
     content += contentErrors;
-    // monkey
+    // monkey/monkeySys
     content += await generateMonkey(modulePath);
-    // main
+    content += await generateMonkeySys(modulePath);
+    // main/mainSys
     content += await generateMain(modulePath);
+    content += await generateMainSys(modulePath);
     // scope
     content += await generateScope(moduleName, relativeNameCapitalize, scopeResources, {
       config: contentConfig,
