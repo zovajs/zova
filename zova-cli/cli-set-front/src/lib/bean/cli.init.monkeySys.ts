@@ -23,16 +23,16 @@ export class CliInitMonkeySys extends BeanCliBase {
     }
     // target dir
     const targetDir = await this.helper.ensureDir(_module.root);
-    const monkeyFile = path.join(targetDir, 'src/monkey.ts');
+    const monkeyFile = path.join(targetDir, 'src/monkeySys.ts');
     if (fse.existsSync(monkeyFile)) {
-      throw new Error(`monkey exists: ${moduleName}`);
+      throw new Error(`monkeySys exists: ${moduleName}`);
     }
     // render boilerplate
     await this.template.renderBoilerplateAndSnippets({
       targetDir: path.join(targetDir, 'src'),
       setName: __ThisSetName__,
       snippetsPath: null,
-      boilerplatePath: 'init/monkey/boilerplate',
+      boilerplatePath: 'init/monkeySys/boilerplate',
     });
     // set zovaModule.capabilities.monkey: true
     await this._setPackageInfo(targetDir);

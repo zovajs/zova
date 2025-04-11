@@ -23,16 +23,16 @@ export class CliInitMainSys extends BeanCliBase {
     }
     // target dir
     const targetDir = await this.helper.ensureDir(_module.root);
-    const mainFile = path.join(targetDir, 'src/main.ts');
+    const mainFile = path.join(targetDir, 'src/mainSys.ts');
     if (fse.existsSync(mainFile)) {
-      throw new Error(`main exists: ${moduleName}`);
+      throw new Error(`mainSys exists: ${moduleName}`);
     }
     // render boilerplate
     await this.template.renderBoilerplateAndSnippets({
       targetDir: path.join(targetDir, 'src'),
       setName: __ThisSetName__,
       snippetsPath: null,
-      boilerplatePath: 'init/main/boilerplate',
+      boilerplatePath: 'init/mainSys/boilerplate',
     });
     // tools.metadata
     await this.helper.invokeCli([':tools:metadata', moduleName], { cwd: argv.projectPath });

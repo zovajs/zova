@@ -12,6 +12,17 @@ export * from '../monkey.js';
   return content;
 }
 
+export async function generateMonkeySys(modulePath: string) {
+  const monkeyFile = path.join(modulePath, 'src/monkeySys.ts');
+  if (!fse.existsSync(monkeyFile)) return '';
+  // combine
+  const content = `/** monkeySys: begin */
+export * from '../monkeySys.js';
+/** monkeySys: end */
+`;
+  return content;
+}
+
 export async function generateMain(modulePath: string) {
   const monkeyFile = path.join(modulePath, 'src/main.ts');
   if (!fse.existsSync(monkeyFile)) return '';
@@ -19,6 +30,17 @@ export async function generateMain(modulePath: string) {
   const content = `/** main: begin */
 export * from '../main.js';
 /** main: end */
+`;
+  return content;
+}
+
+export async function generateMainSys(modulePath: string) {
+  const monkeyFile = path.join(modulePath, 'src/mainSys.ts');
+  if (!fse.existsSync(monkeyFile)) return '';
+  // combine
+  const content = `/** mainSys: begin */
+export * from '../mainSys.js';
+/** mainSys: end */
 `;
   return content;
 }
