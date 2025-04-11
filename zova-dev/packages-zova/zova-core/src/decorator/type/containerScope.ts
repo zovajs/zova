@@ -1,1 +1,2 @@
-export type ContainerScope = 'app' | 'ctx' | 'new';
+export type ContainerScope = 'sys' | 'app' | 'ctx' | 'new';
+export type ContainerType = 'sys' | 'app' | 'ctx';
