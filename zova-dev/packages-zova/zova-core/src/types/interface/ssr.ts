@@ -17,6 +17,7 @@ export interface SSRContext {
   onRendered: (fn: () => void) => void;
   rendered: () => void;
   __qMetaList: SSRMetaOptions[];
+  modules: Set<string>;
 }
 
 export interface SSRContextMeta {
