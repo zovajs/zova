@@ -26,7 +26,7 @@ export interface IAopMethodExecute {
 export interface IDecoratorAopMethodOptions extends IOnionOptionsEnable {}
 
 declare module 'zova-module-a-bean' {
-  export interface BeanOnion {
+  export interface SysOnion {
     aopMethod: ServiceOnion<IDecoratorAopMethodOptions, keyof IAopMethodRecord>;
   }
 }

@@ -10,7 +10,7 @@ export interface IDecoratorAopOptions
   IOnionOptionsDeps<keyof IAopRecord> {}
 
 declare module 'zova-module-a-bean' {
-  export interface BeanOnion {
+  export interface SysOnion {
     aop: ServiceOnion<IDecoratorAopOptions, keyof IAopRecord>;
   }
 }

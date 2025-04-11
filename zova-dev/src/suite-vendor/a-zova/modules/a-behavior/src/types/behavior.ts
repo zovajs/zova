@@ -23,7 +23,7 @@ export interface IBehaviorRecord {}
 export interface IDecoratorBehaviorOptions extends IOnionOptionsEnable {}
 
 declare module 'zova-module-a-bean' {
-  export interface BeanOnion {
+  export interface SysOnion {
     behavior: ServiceOnion<IDecoratorBehaviorOptions, keyof IBehaviorRecord>;
   }
 }

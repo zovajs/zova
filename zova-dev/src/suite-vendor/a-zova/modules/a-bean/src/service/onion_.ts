@@ -1,7 +1,6 @@
 import type { ISwapDepsItem } from '@cabloy/deps';
 import type { OnionSceneMeta } from '@cabloy/module-info';
 import type { Next } from 'zova';
-import type { BeanOnion } from '../bean/bean.onion.js';
 import type {
   IOnionExecuteCustom,
   IOnionItem,
@@ -15,6 +14,7 @@ import { swapDeps } from '@cabloy/deps';
 import { getOnionScenesMeta } from '@cabloy/module-info';
 import { evaluateSimple } from '@cabloy/utils';
 import { appResource, BeanSimple, cast, deepExtend, ProxyDisable } from 'zova';
+import { SysOnion } from '../bean/sys.onion.js';
 import { Service } from '../lib/bean.js';
 
 // const SymbolOnionsEnabled = Symbol('SymbolOnionsEnabled');
@@ -23,7 +23,7 @@ import { Service } from '../lib/bean.js';
 @ProxyDisable()
 @Service()
 export class ServiceOnion<OPTIONS, ONIONNAME extends string> extends BeanSimple {
-  protected beanOnion: BeanOnion;
+  protected sysOnion: SysOnion;
   sceneName: string;
   sceneMeta: OnionSceneMeta;
 
@@ -32,13 +32,13 @@ export class ServiceOnion<OPTIONS, ONIONNAME extends string> extends BeanSimple 
   // private [SymbolOnionsEnabled]: Record<string, IOnionSlice<OPTIONS, ONIONNAME>[]> = {};
   // private [SymbolOnionsEnabledWrapped]: Record<string, Function[]> = {};
 
-  protected __init__(sceneName: string, beanOnion: BeanOnion) {
+  protected __init__(sceneName: string, sysOnion: SysOnion) {
     if (process.env.DEV && this.$containerType !== 'sys') {
       throw new Error('should in sys container');
     }
-    this.beanOnion = beanOnion;
+    this.sysOnion = sysOnion;
     this.sceneName = sceneName;
-    this.sceneMeta = getOnionScenesMeta(this.app.meta.module.modulesMeta.modules)[this.sceneName];
+    this.sceneMeta = getOnionScenesMeta(this.sys.meta.module.modulesMeta.modules)[this.sceneName];
     if (this.sceneMeta.optionsPackage) {
       this._initOnionsAll();
       this._swapOnions(this.onionsAll);
@@ -47,8 +47,8 @@ export class ServiceOnion<OPTIONS, ONIONNAME extends string> extends BeanSimple 
 
   private _initOnionsAll() {
     this.onionsAll = [];
-    for (const moduleName in this.app.meta.module.modulesMeta.modules) {
-      const module = this.app.meta.module.modulesMeta.modules[moduleName];
+    for (const moduleName in this.sys.meta.module.modulesMeta.modules) {
+      const module = this.sys.meta.module.modulesMeta.modules[moduleName];
       const nodeItems = module.info.onionsMeta?.onionsConfig?.[this.sceneName];
       if (!nodeItems) continue;
       for (const itemName in nodeItems) {
@@ -97,7 +97,7 @@ export class ServiceOnion<OPTIONS, ONIONNAME extends string> extends BeanSimple 
   //   if (!this[SymbolOnionsEnabled][selector]) {
   //     this[SymbolOnionsEnabled][selector] = this.onionsGlobal.filter(onionSlice => {
   //       const onionOptions = onionSlice.beanOptions.options as IOnionOptionsEnable & IOnionOptionsMatch<string>;
-  //       return this.beanOnion.checkOnionOptionsEnabled(onionOptions, selector);
+  //       return this.sysOnion.checkOnionOptionsEnabled(onionOptions, selector);
   //     }) as unknown as IOnionSlice<OPTIONS, ONIONNAME>[];
   //   }
   //   return this[SymbolOnionsEnabled][selector];
@@ -175,7 +175,7 @@ export class ServiceOnion<OPTIONS, ONIONNAME extends string> extends BeanSimple 
     if (!onions) return [];
     return onions.filter(onionItem => {
       const onionOptions = onionItem.options as IOnionOptionsEnable & IOnionOptionsMatch<string>;
-      return this.beanOnion.checkOnionOptionsEnabled(onionOptions, selector);
+      return this.sysOnion.checkOnionOptionsEnabled(onionOptions, selector);
     }) as unknown as IOnionSlice<OPTIONS, ONIONNAME, T>[];
   }
 
@@ -191,8 +191,8 @@ export class ServiceOnion<OPTIONS, ONIONNAME extends string> extends BeanSimple 
 
   async _loadModules(moduleNames: string[]) {
     // load modules
-    moduleNames = Set.unique(moduleNames).filter(item => !this.app.meta.module.get(item, false));
-    await this.app.meta.module.loadModules(moduleNames);
+    moduleNames = Set.unique(moduleNames).filter(item => !this.sys.meta.module.get(item));
+    await this.sys.meta.module.loadModules(moduleNames);
   }
 
   /** internal */

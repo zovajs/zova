@@ -60,7 +60,7 @@ export interface IDecoratorInterceptorOptions
   IOnionOptionsDeps<keyof IInterceptorRecord> {}
 
 declare module 'zova-module-a-bean' {
-  export interface BeanOnion {
+  export interface SysOnion {
     interceptor: ServiceOnion<IDecoratorInterceptorOptions, keyof IInterceptorRecord>;
   }
 }

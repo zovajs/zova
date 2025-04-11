@@ -9,14 +9,14 @@ import type {
   IInterceptorResponseError,
 } from '../types/interceptor.js';
 import { BeanBase, cast, deepExtend, Use } from 'zova';
-import { BeanOnion, IOnionItem, IOnionSlice, TypeComposer } from 'zova-module-a-bean';
+import { IOnionItem, IOnionSlice, SysOnion, TypeComposer } from 'zova-module-a-bean';
 import { Service } from 'zova-module-a-bean';
 
 @Service()
 export class ServiceComposer extends BeanBase {
   protected $beanFetch: BeanFetch;
   @Use()
-  $$beanOnion: BeanOnion;
+  $$sysOnion: SysOnion;
 
   private _composerRequest: TypeComposer;
   private _composerRequestError: TypeComposer;
@@ -57,9 +57,9 @@ export class ServiceComposer extends BeanBase {
     // onionSlices
     let onionSlices: IOnionSlice<IDecoratorInterceptorOptions, keyof IInterceptorRecord>[];
     if (onionItems) {
-      onionSlices = await this.$$beanOnion.interceptor.loadOnions(onionItems);
+      onionSlices = await this.$$sysOnion.interceptor.loadOnions(onionItems);
     } else {
-      onionSlices = await this.$$beanOnion.interceptor.loadOnionsFromPackage();
+      onionSlices = await this.$$sysOnion.interceptor.loadOnionsFromPackage();
     }
     // create interceptors
     for (const onionSlice of onionSlices) {
@@ -71,13 +71,13 @@ export class ServiceComposer extends BeanBase {
       );
     }
     // compose
-    this._composerRequest = this.$$beanOnion.interceptor.compose(
+    this._composerRequest = this.$$sysOnion.interceptor.compose(
       onionSlices,
       (onionSlice, config: AxiosRequestConfig, next) => {
         // options
         const options = this._combineOnionOptions(onionSlice, config);
         // enable match ignore
-        if (!this.$$beanOnion.checkOnionOptionsEnabled(options, config.url)) {
+        if (!this.$$sysOnion.checkOnionOptionsEnabled(options, config.url)) {
           return next(config);
         }
         // execute
@@ -86,14 +86,14 @@ export class ServiceComposer extends BeanBase {
         return beanInstance.onRequest(config, options, next as any);
       },
     );
-    this._composerRequestError = this.$$beanOnion.interceptor.compose(
+    this._composerRequestError = this.$$sysOnion.interceptor.compose(
       onionSlices,
       (onionSlice, error: AxiosError, next) => {
         const config = error.config;
         // options
         const options = this._combineOnionOptions(onionSlice, config);
         // enable match ignore
-        if (!this.$$beanOnion.checkOnionOptionsEnabled(options, config?.url)) {
+        if (!this.$$sysOnion.checkOnionOptionsEnabled(options, config?.url)) {
           return next(error);
         }
         // execute
@@ -102,14 +102,14 @@ export class ServiceComposer extends BeanBase {
         return beanInstance.onRequestError(error, options, next as any);
       },
     );
-    this._composerResponse = this.$$beanOnion.interceptor.compose(
+    this._composerResponse = this.$$sysOnion.interceptor.compose(
       onionSlices,
       (onionSlice, response: AxiosResponse, next) => {
         const config = response.config;
         // options
         const options = this._combineOnionOptions(onionSlice, config);
         // enable match ignore
-        if (!this.$$beanOnion.checkOnionOptionsEnabled(options, config?.url)) {
+        if (!this.$$sysOnion.checkOnionOptionsEnabled(options, config?.url)) {
           return next(response);
         }
         // execute
@@ -118,14 +118,14 @@ export class ServiceComposer extends BeanBase {
         return beanInstance.onResponse(response, options, next as any);
       },
     );
-    this._composerResponseError = this.$$beanOnion.interceptor.compose(
+    this._composerResponseError = this.$$sysOnion.interceptor.compose(
       onionSlices,
       (onionSlice, error: AxiosError, next) => {
         const config = error.config;
         // options
         const options = this._combineOnionOptions(onionSlice, config);
         // enable match ignore
-        if (!this.$$beanOnion.checkOnionOptionsEnabled(options, config?.url)) {
+        if (!this.$$sysOnion.checkOnionOptionsEnabled(options, config?.url)) {
           return next(error);
         }
         // execute

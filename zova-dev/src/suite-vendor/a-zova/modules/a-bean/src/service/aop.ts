@@ -2,7 +2,7 @@ import type { BeanAopMethodBase, Constructable, IBeanRecord } from 'zova';
 import type { IAopRecord, IDecoratorAopOptions } from '../types/aop.js';
 import type { IOnionItem, IOnionSlice } from '../types/onion.js';
 import { appMetadata, appResource, BeanBase, ProxyDisable, Use } from 'zova';
-import { BeanOnion } from '../bean/bean.onion.js';
+import { SysOnion } from '../bean/sys.onion.js';
 import { Service } from '../lib/bean.js';
 import { IAopMethodRecord, IDecoratorAopMethodOptions, IUseAopMethodPropMetadata, SymbolDecoratorUseAopMethod } from '../types/aopMethod.js';
 
@@ -12,7 +12,7 @@ type AopMethodsMatchedAll = Record<string, IUseAopMethodPropMetadata[]>;
 @Service()
 export class ServiceAop extends BeanBase {
   @Use()
-  $$beanOnion: BeanOnion;
+  $$sysOnion: SysOnion;
 
   async findAopsMatched<T>(
     A: Constructable<T>,
@@ -33,7 +33,7 @@ export class ServiceAop extends BeanBase {
     const beanOptions = appResource.getBean(beanFullName as any);
     if (!beanOptions) return;
     // loadOnions
-    return await this.$$beanOnion.aop.loadOnionsFromPackage(beanOptions.beanFullName);
+    return await this.$$sysOnion.aop.loadOnionsFromPackage(beanOptions.beanFullName);
   }
 
   async findAopMethodsMatched<T>(A: Constructable<T>): Promise<AopMethodsMatchedAll | undefined>;
@@ -61,7 +61,7 @@ export class ServiceAop extends BeanBase {
         });
       }
       // load onions
-      const onionSlices = await this.$$beanOnion.aopMethod.loadOnions<BeanAopMethodBase>(onionItems);
+      const onionSlices = await this.$$sysOnion.aopMethod.loadOnions<BeanAopMethodBase>(onionItems);
       // aopMethodsMatched
       const aopMethodsMatched: IUseAopMethodPropMetadata[] = [];
       for (const onionSlice of onionSlices) {
