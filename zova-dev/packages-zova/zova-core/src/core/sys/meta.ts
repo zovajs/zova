@@ -6,7 +6,7 @@ export class SysMeta extends BeanSimple {
   public legacyRoutes?: RouteRecordRaw[];
 
   /** @internal */
-  public initialize(legacyRoutes?: RouteRecordRaw[]) {
+  public async initialize(legacyRoutes?: RouteRecordRaw[]) {
     this.legacyRoutes = legacyRoutes;
   }
 }

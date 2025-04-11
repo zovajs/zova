@@ -3,7 +3,7 @@ import type { BeanBase } from '../../bean/beanBase.js';
 import type { BeanContainer } from '../../bean/beanContainer.js';
 import type { IControllerData } from '../../bean/type.js';
 
-export type TypeMonkeyName = keyof IMonkeyModule | keyof IMonkeyApp | keyof IMonkeyController;
+export type TypeMonkeyName = keyof IMonkeyModule | keyof IMonkeySys | keyof IMonkeyApp | keyof IMonkeyController;
 
 export interface IModuleMain {
   moduleLoading(): Promise<void>;
@@ -17,6 +17,11 @@ export interface IMonkeyModule {
   configLoaded(module: IModule, config: any): Promise<void>;
 }
 
+export interface IMonkeySys
+  extends IMonkeySysInitialize,
+  IMonkeySysInitialized,
+  IMonkeySysReady {}
+
 export interface IMonkeyApp
   extends IMonkeyAppInitialize,
   IMonkeyAppInitialized,
@@ -29,6 +34,18 @@ export interface IMonkeyApp
 export interface IMonkeyController {
   controllerDataPrepare(controllerData: IControllerData);
   controllerDataInit(controllerData: IControllerData, controller: BeanBase);
+}
+
+export interface IMonkeySysInitialize {
+  sysInitialize(): Promise<void>;
+}
+
+export interface IMonkeySysInitialized {
+  sysInitialized(): Promise<void>;
+}
+
+export interface IMonkeySysReady {
+  sysReady(): Promise<void>;
 }
 
 export interface IMonkeyAppInitialize {

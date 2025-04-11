@@ -33,9 +33,9 @@ export class ZovaSys {
     return this[SymbolSysInitializePromise];
   }
 
-  private async _initializeInner({ config }: PluginZovaOptions) {
-    // // monkey
-    // await this.meta.initialize(legacyRoutes);
+  private async _initializeInner({ config, legacyRoutes }: PluginZovaOptions) {
+    // monkey
+    await this.meta.initialize(legacyRoutes);
     // // component
     // await this.meta.component.initialize();
     // // locales
