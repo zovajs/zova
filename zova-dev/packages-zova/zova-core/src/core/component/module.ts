@@ -110,89 +110,53 @@ export class AppModule extends BeanSimple {
     await this._monkeyModule('moduleLoaded', moduleRepo);
   }
 
-  private async _installInner(_moduleName: string, moduleRepo: IModule) {
-    // load
-    if (typeof moduleRepo.resource === 'function') {
-      const moduleResource = moduleRepo.resource as any;
-      module.resource = moduleRepo.resource = await moduleResource();
-    }
+  private async _installInner(moduleName: string, moduleRepo: IModule) {
     // main / monkey
-    if (module.resource.Main) {
-      module.mainInstance = this.app.bean._newBeanSimple(module.resource.Main, false, module);
+    if (moduleRepo.resource.Main) {
+      this.mainInstances[moduleName] = this.app.bean._newBeanSimple(moduleRepo.resource.Main, false, moduleRepo);
     }
-    if (module.resource.Monkey) {
-      module.monkeyInstance = this.app.bean._newBeanSimple(module.resource.Monkey, false, module);
+    if (moduleRepo.resource.Monkey) {
+      this.monkeyInstances[moduleName] = this.app.bean._newBeanSimple(moduleRepo.resource.Monkey, false, moduleRepo);
     }
     // monkey: moduleLoading
-    await this._monkeyModule('moduleLoading', module);
+    await this._monkeyModule('moduleLoading', moduleRepo);
     // register resources
-    await this._registerResources(module);
+    await this._registerResources(moduleRepo);
   }
 
   private async _registerResources(module: IModule) {
     this._registerComponents(module);
-    this._registerLocales(module);
-    this._registerErrors(module);
-    this._registerConstants(module);
-    await this._registerConfig(module);
   }
 
   private _registerComponents(module: IModule) {
     this.app.meta.component._registerComponents(module.info.relativeName, module.resource.components);
   }
 
-  private _registerErrors(module: IModule) {
-    if (!module.resource.Errors) return;
-    this.app.meta.error.errors[module.info.relativeName] = module.resource.Errors;
-  }
-
-  private _registerLocales(module: IModule) {
-    this.app.meta.locale._registerLocales(module.info.relativeName, module.resource.locales);
-  }
-
-  private _registerConstants(module: IModule) {
-    if (!module.resource.constants) return;
-    const relativeName = module.info.relativeName;
-    this.app.constant.modules[relativeName] = deepExtend(
-      {},
-      module.resource.constants,
-      this.app.constant.modules[relativeName],
-    );
-  }
-
-  private async _registerConfig(module: IModule) {
-    if (!module.resource.config) return;
-    // config
-    const config = await module.resource.config(this.app, this.sys.config.meta);
-    // monkey
-    await this._monkeyModule('configLoaded', module, config);
-    // extend
-    const relativeName = module.info.relativeName;
-    this.sys.config.modules[relativeName] = deepExtend({}, config, this.sys.config.modules[relativeName]);
-  }
-
   /** @internal */
   public async _monkeyModule(monkeyName: TypeMonkeyName, moduleTarget?: IModule, ...monkeyData: any[]) {
     // self: main
-    if (moduleTarget && moduleTarget.mainInstance && moduleTarget.mainInstance[monkeyName]) {
-      // @ts-ignore ignore
-      await this.app.vue.runWithContext(async () => {
-        await moduleTarget.mainInstance[monkeyName](...monkeyData);
-      });
+    if (moduleTarget) {
+      const mainInstance = this.mainInstances[moduleTarget.info.relativeName];
+      if (mainInstance && mainInstance[monkeyName]) {
+        // @ts-ignore ignore
+        await this.app.vue.runWithContext(async () => {
+          await mainInstance[monkeyName](...monkeyData);
+        });
+      }
     }
     // module monkey
-    for (const key of this.modulesMeta.moduleNames) {
-      const moduleMonkey: IModule = this.modulesMeta.modules[key];
+    for (const key of this.sys.meta.module.modulesMeta.moduleNames) {
+      const moduleMonkey: IModule = this.sys.meta.module.modulesMeta.modules[key];
       if (moduleMonkey.info.capabilities?.monkey) {
-        const module = this.modules[key];
-        if (module && module.monkeyInstance && module.monkeyInstance[monkeyName]) {
+        const monkeyInstance = this.monkeyInstances[key];
+        if (monkeyInstance && monkeyInstance[monkeyName]) {
           await this.app.vue.runWithContext(async () => {
             if (moduleTarget === undefined) {
               // @ts-ignore ignore
-              await module.monkeyInstance[monkeyName](...monkeyData);
+              await monkeyInstance[monkeyName](...monkeyData);
             } else {
               // @ts-ignore ignore
-              await module.monkeyInstance[monkeyName](moduleTarget, ...monkeyData);
+              await monkeyInstance[monkeyName](moduleTarget, ...monkeyData);
             }
           });
         }

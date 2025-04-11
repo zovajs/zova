@@ -149,10 +149,10 @@ export class SysModule extends BeanSimple {
     }
     // main / monkey
     if (moduleRepo.resource.MainSys) {
-      this.mainInstances[moduleName] = this.app.bean._newBeanSimple(moduleRepo.resource.MainSys, false, module);
+      this.mainInstances[moduleName] = this.app.bean._newBeanSimple(moduleRepo.resource.MainSys, false, moduleRepo);
     }
     if (moduleRepo.resource.MonkeySys) {
-      this.monkeyInstances[moduleName] = this.app.bean._newBeanSimple(moduleRepo.resource.MonkeySys, false, module);
+      this.monkeyInstances[moduleName] = this.app.bean._newBeanSimple(moduleRepo.resource.MonkeySys, false, moduleRepo);
     }
     // monkey: moduleLoading
     await this._monkeyModule('moduleLoading', moduleRepo);
