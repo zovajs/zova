@@ -247,32 +247,28 @@ export class SysModule extends BeanSimple {
     for (const key of this.modulesMeta.moduleNames) {
       const moduleMonkey: IModule = this.modulesMeta.modules[key];
       if (moduleMonkey.info.capabilities?.monkey) {
-        const module = this.modules[key];
-        if (module && module.monkeyInstance && module.monkeyInstance[monkeyName]) {
-          this.app.vue.runWithContext(() => {
-            if (moduleTarget === undefined) {
-              // @ts-ignore ignore
-              module.monkeyInstance[monkeyName](...monkeyData);
-            } else {
-              // @ts-ignore ignore
-              module.monkeyInstance[monkeyName](moduleTarget, ...monkeyData);
-            }
-          });
+        const monkeyInstance = this.monkeyInstances[key];
+        if (monkeyInstance && monkeyInstance[monkeyName]) {
+          if (moduleTarget === undefined) {
+            // @ts-ignore ignore
+            monkeyInstance[monkeyName](...monkeyData);
+          } else {
+            // @ts-ignore ignore
+            monkeyInstance[monkeyName](moduleTarget, ...monkeyData);
+          }
         }
       }
     }
     // app monkey
-    const appMonkey = this.app.meta.appMonkey;
-    if (appMonkey && appMonkey[monkeyName]) {
-      this.app.vue.runWithContext(() => {
-        if (moduleTarget === undefined) {
-          // @ts-ignore ignore
-          appMonkey[monkeyName](...monkeyData);
-        } else {
-          // @ts-ignore ignore
-          appMonkey[monkeyName](moduleTarget, ...monkeyData);
-        }
-      });
+    const sysMonkey = this.sys.meta.sysMonkey;
+    if (sysMonkey && sysMonkey[monkeyName]) {
+      if (moduleTarget === undefined) {
+        // @ts-ignore ignore
+        sysMonkey[monkeyName](...monkeyData);
+      } else {
+        // @ts-ignore ignore
+        sysMonkey[monkeyName](moduleTarget, ...monkeyData);
+      }
     }
   }
 }
