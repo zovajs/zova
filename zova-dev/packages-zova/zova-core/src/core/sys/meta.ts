@@ -2,12 +2,14 @@ import type { RouteRecordRaw } from 'vue-router';
 import type { Constructable } from '../../decorator/type/constructable.js';
 import type { IMonkeyModule, IMonkeySys } from '../../types/interface/monkey.js';
 import { BeanSimple } from '../../bean/beanSimple.js';
+import { SysError } from './error.js';
 import { SysLocale } from './locale.js';
 import { SysModule } from './module.js';
 
 export class SysMeta extends BeanSimple {
   module: SysModule;
   locale: SysLocale;
+  error: SysError;
 
   /** @internal */
   public sysMonkey?: IMonkeyModule & IMonkeySys;
@@ -18,6 +20,7 @@ export class SysMeta extends BeanSimple {
   protected __init__() {
     this.module = this.app.bean._newBeanSimple(SysModule, false);
     this.locale = this.app.bean._newBeanSimple(SysLocale, false);
+    this.error = this.app.bean._newBeanSimple(SysError, false);
   }
 
   /** @internal */

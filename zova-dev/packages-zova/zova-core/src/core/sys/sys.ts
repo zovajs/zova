@@ -37,6 +37,8 @@ export class ZovaSys {
     await this.meta.initialize(SysMonkey, legacyRoutes);
     // locales
     await this.meta.locale.initialize(locales);
+    // errors
+    await this.meta.error.initialize();
     // // config
     this.config = await this._combineConfig(config);
     // constant

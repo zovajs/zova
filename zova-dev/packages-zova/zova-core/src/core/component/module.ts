@@ -10,8 +10,8 @@ import { deepExtend } from '../sys/util.js';
 
 export class AppModule extends BeanSimple {
   private modules: Record<string, IModule> = shallowReactive({});
-  private modulesMain: Record<string, IModuleMain> = {};
-  private modulesMonkey: Record<string, IMonkeyModule & IMonkeyApp & IMonkeyController> = {};
+  private mainInstances: Record<string, IModuleMain> = {};
+  private monkeyInstances: Record<string, IMonkeyModule & IMonkeyApp & IMonkeyController> = {};
 
   /** @internal */
   public async initialize() {

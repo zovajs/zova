@@ -1,15 +1,9 @@
-import type { TypeModuleResourceErrorModules } from '../../../types/interface/module.js';
 import { BeanSimple } from '../../beanSimple.js';
 import { errorsInternal } from './errorInternal.js';
 
 export class ErrorClass extends BeanSimple {
   /** @internal */
-  public errors: TypeModuleResourceErrorModules;
-
-  /** @internal */
-  public async initialize() {
-    this.errors = {};
-  }
+  public async initialize() {}
 
   // code/message,args
   throw(module, code, ...args): never {

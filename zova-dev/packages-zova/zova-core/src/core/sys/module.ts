@@ -11,8 +11,8 @@ import { deepExtend } from '../sys/util.js';
 export class SysModule extends BeanSimple {
   public modulesMeta: PluginZovaModulesMeta;
   private modules: Record<string, IModule> = shallowReactive({});
-  private modulesMain: Record<string, IModuleMainSys> = {};
-  private modulesMonkey: Record<string, IMonkeyModule & IMonkeySys> = {};
+  private mainInstances: Record<string, IModuleMainSys> = {};
+  private monkeyInstances: Record<string, IMonkeyModule & IMonkeySys> = {};
 
   /** @internal */
   public async initialize(modulesMeta: PluginZovaModulesMeta) {
@@ -140,18 +140,18 @@ export class SysModule extends BeanSimple {
     await this._monkeyModule('moduleLoaded', module);
   }
 
-  private async _installInner(_moduleName: string, module: IModule, moduleRepo: IModule) {
+  private async _installInner(moduleName: string, module: IModule, moduleRepo: IModule) {
     // load
     if (typeof moduleRepo.resource === 'function') {
       const moduleResource = moduleRepo.resource as any;
       module.resource = moduleRepo.resource = await moduleResource();
     }
     // main / monkey
-    if (module.resource.Main) {
-      module.mainInstance = this.app.bean._newBeanSimple(module.resource.Main, false, module);
+    if (module.resource.MainSys) {
+      this.mainInstances[moduleName] = this.app.bean._newBeanSimple(module.resource.MainSys, false, module);
     }
-    if (module.resource.Monkey) {
-      module.monkeyInstance = this.app.bean._newBeanSimple(module.resource.Monkey, false, module);
+    if (module.resource.MonkeySys) {
+      this.monkeyInstances[moduleName] = this.app.bean._newBeanSimple(module.resource.MonkeySys, false, module);
     }
     // monkey: moduleLoading
     await this._monkeyModule('moduleLoading', module);
@@ -160,40 +160,35 @@ export class SysModule extends BeanSimple {
   }
 
   private async _registerResources(module: IModule) {
-    this._registerComponents(module);
     this._registerLocales(module);
     this._registerErrors(module);
     this._registerConstants(module);
     await this._registerConfig(module);
   }
 
-  private _registerComponents(module: IModule) {
-    this.app.meta.component._registerComponents(module.info.relativeName, module.resource.components);
-  }
-
   private _registerErrors(module: IModule) {
     if (!module.resource.Errors) return;
-    this.app.meta.error.errors[module.info.relativeName] = module.resource.Errors;
+    this.sys.meta.error.errors[module.info.relativeName] = module.resource.Errors;
   }
 
   private _registerLocales(module: IModule) {
-    this.app.meta.locale._registerLocales(module.info.relativeName, module.resource.locales);
+    this.sys.meta.locale._registerLocales(module.info.relativeName, module.resource.locales);
   }
 
   private _registerConstants(module: IModule) {
     if (!module.resource.constants) return;
     const relativeName = module.info.relativeName;
-    this.app.constant.modules[relativeName] = deepExtend(
+    this.sys.constant.modules[relativeName] = deepExtend(
       {},
       module.resource.constants,
-      this.app.constant.modules[relativeName],
+      this.sys.constant.modules[relativeName],
     );
   }
 
   private async _registerConfig(module: IModule) {
     if (!module.resource.config) return;
     // config
-    const config = await module.resource.config(this.app, this.sys.config.meta);
+    const config = await module.resource.config(this.sys, this.sys.config.meta);
     // monkey
     await this._monkeyModule('configLoaded', module, config);
     // extend
