@@ -8,6 +8,11 @@
       "preload": true
     },
     "onions": {
+      "sys": {
+        "beanGeneral": true,
+        "optionsNone": true,
+        "boilerplate": "cli/sys/boilerplate"
+      },
       "bean": {
         "beanGeneral": true,
         "optionsNone": true,
