@@ -2,10 +2,8 @@ import type { App } from 'vue';
 import type { BeanContainer } from '../../bean/beanContainer.js';
 import type { PluginZovaOptions } from '../../types/interface/pluginZova.js';
 import type { ZovaContext } from '../context/context.js';
-import type { ZovaConstant } from './constant.js';
 import { markRaw } from 'vue';
 import { cast } from '../../types/utils/cast.js';
-import { constantDefault } from './constant.js';
 import { AppMeta } from './meta.js';
 
 export class ZovaApplication {
@@ -13,7 +11,6 @@ export class ZovaApplication {
   vue: App;
   bean: BeanContainer;
   meta: AppMeta;
-  constant: ZovaConstant;
   ctx: ZovaContext;
 
   constructor(vue: App, ctxRoot: ZovaContext) {
@@ -40,8 +37,6 @@ export class ZovaApplication {
     await this.meta.locale.initialize(locales);
     // errors
     await this.meta.error.initialize();
-    // constant
-    this.constant = constantDefault;
     // module
     await this.meta.module.initialize(modulesMeta);
     // monkey: appInitialize
