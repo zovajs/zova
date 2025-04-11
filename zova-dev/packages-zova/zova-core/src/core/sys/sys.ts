@@ -22,24 +22,21 @@ export class ZovaSys {
     this.bean = BeanContainer.create(this, null!, null);
     this.util = this.bean._newBeanSimple(SysUtil, false);
     this.meta = this.bean._newBeanSimple(SysMeta, false);
-    this.meta.initialize();
   }
 
   /** @internal */
-  public async initialize({ modulesMeta, locales, config, AppMonkey, legacyRoutes }: PluginZovaOptions) {
+  public async initialize({ modulesMeta, locales, config, SysMonkey, legacyRoutes }: PluginZovaOptions) {
     if (!this[SymbolSysInitializePromise]) {
-      this[SymbolSysInitializePromise] = this._initializeInner({ modulesMeta, locales, config, AppMonkey, legacyRoutes });
+      this[SymbolSysInitializePromise] = this._initializeInner({ modulesMeta, locales, config, SysMonkey, legacyRoutes });
     }
     return this[SymbolSysInitializePromise];
   }
 
-  private async _initializeInner({ config, legacyRoutes }: PluginZovaOptions) {
+  private async _initializeInner({ locales, config, SysMonkey, legacyRoutes }: PluginZovaOptions) {
     // monkey
-    await this.meta.initialize(legacyRoutes);
-    // // component
-    // await this.meta.component.initialize();
-    // // locales
-    // await this.meta.locale.initialize(locales);
+    await this.meta.initialize(SysMonkey, legacyRoutes);
+    // locales
+    await this.meta.locale.initialize(locales);
     // // errors
     // await this.meta.error.initialize();
     // // config
