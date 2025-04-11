@@ -237,11 +237,11 @@ export class SysModule extends BeanSimple {
   /** @internal */
   public _monkeyModuleSync(monkeyName: TypeMonkeyName, moduleTarget?: IModule, ...monkeyData: any[]) {
     // self: main
-    if (moduleTarget && moduleTarget.mainInstance && moduleTarget.mainInstance[monkeyName]) {
-      // @ts-ignore ignore
-      this.app.vue.runWithContext(() => {
-        moduleTarget.mainInstance[monkeyName](...monkeyData);
-      });
+    if (moduleTarget) {
+      const mainInstance = this.mainInstances[moduleTarget.info.relativeName];
+      if (mainInstance && mainInstance[monkeyName]) {
+        mainInstance[monkeyName](...monkeyData);
+      }
     }
     // module monkey
     for (const key of this.modulesMeta.moduleNames) {
