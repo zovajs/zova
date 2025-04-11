@@ -192,6 +192,37 @@ export function extendFilesThree(api: IndexAPI, _flavor: string) {
     ).replace(
       'process.env.PORT',
       'process.env.ZOVA_SSR_PROD_PORT',
+    ).replace(
+      'ssrContext._meta.endingHeadTags +=',
+      `ssrContext._meta.endingHeadTags += renderModulesPreload_zova(ssrContext.modules, { ssrContext })\nssrContext._meta.endingHeadTags +=`
+    )
+    .replace(
+      'function renderModulesPreload',
+      `const __ssrModulesZovaCache={};
+function renderModulesPreload_zova(modules2, opts){
+  let links = "";
+  const seen = /* @__PURE__ */ new Set();
+  modules2.forEach((id) => {
+    if(!id.startsWith('@@')) return;
+    if (seen.has(id) === true) return;
+    let cache=__ssrModulesZovaCache[id];
+    if(!cache){
+      for(const key in clientManifest){
+        const prefix=\`\${id.substring(2)}-\`;
+        const postfix='.js';
+        if(key.startsWith(prefix) && key.endsWith(postfix)){
+          cache=resolveUrlPath(\`/assets/\${key}\`)
+          break;
+        }
+      }
+      __ssrModulesZovaCache[id]=cache; 
+    }
+    links += renderPreloadTag(cache, opts);
+    seen.add(id);
+  });
+  return links;
+}
+  function renderModulesPreload`
     );
     fse.writeFileSync(fileSrc, contentNew);
   }
