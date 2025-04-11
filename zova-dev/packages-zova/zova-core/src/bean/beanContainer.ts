@@ -2,6 +2,7 @@ import type { ZovaApplication, ZovaContext, ZovaSys } from '../core/index.js';
 import type { MetadataKey } from '../core/sys/metadata.js';
 import type {
   Constructable,
+  ContainerType,
   Functionable,
   IDecoratorBeanOptionsBase,
   IDecoratorUseOptions,
@@ -78,6 +79,12 @@ export class BeanContainer {
     }
     this[SymbolBeanContainerInstances] = shallowReactive({});
     this[SymbolBeanContainerParent] = undefined;
+  }
+
+  get containerType(): ContainerType {
+    if (!this.ctx) return 'sys';
+    if (this.ctx.bean === this.app.bean) return 'app';
+    return 'ctx';
   }
 
   get parent(): BeanContainer | null {

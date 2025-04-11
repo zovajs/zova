@@ -18,9 +18,9 @@ export class SysMeta extends BeanSimple {
   public legacyRoutes?: RouteRecordRaw[];
 
   protected __init__() {
-    this.module = this.app.bean._newBeanSimple(SysModule, false);
-    this.locale = this.app.bean._newBeanSimple(SysLocale, false);
-    this.error = this.app.bean._newBeanSimple(SysError, false);
+    this.module = this.bean._newBeanSimple(SysModule, false);
+    this.locale = this.bean._newBeanSimple(SysLocale, false);
+    this.error = this.bean._newBeanSimple(SysError, false);
   }
 
   /** @internal */

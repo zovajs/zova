@@ -33,7 +33,7 @@ export class ServiceOnion<OPTIONS, ONIONNAME extends string> extends BeanSimple 
   // private [SymbolOnionsEnabledWrapped]: Record<string, Function[]> = {};
 
   protected __init__(sceneName: string, sysOnion: SysOnion) {
-    if (process.env.DEV && this.$containerType !== 'sys') {
+    if (process.env.DEV && this.bean.containerType !== 'sys') {
       throw new Error('should in sys container');
     }
     this.sysOnion = sysOnion;

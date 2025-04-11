@@ -16,7 +16,7 @@ export class SysOnion extends BeanBase {
   private __instances: Record<string, any> = {};
 
   protected __get__(prop: string) {
-    if (process.env.DEV && this.$containerType !== 'sys') {
+    if (process.env.DEV && this.bean.containerType !== 'sys') {
       throw new Error('should in sys container');
     }
     if (!this.__instances[prop]) {
