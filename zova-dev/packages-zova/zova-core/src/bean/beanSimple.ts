@@ -12,7 +12,7 @@ export class BeanSimple {
     return this.ctx ? this.ctx.bean : this.sys.bean;
   }
 
-  protected get containerType(): ContainerType {
+  protected get $containerType(): ContainerType {
     if (!this.ctx) return 'sys';
     if (this.ctx.bean === this.app.bean) return 'app';
     return 'ctx';

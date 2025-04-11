@@ -26,6 +26,9 @@ export class ServiceAop extends BeanBase {
   async findAopsMatched<T>(
     beanFullName: Constructable<T> | string,
   ): Promise<IOnionSlice<IDecoratorAopOptions, keyof IAopRecord>[] | undefined> {
+    if (process.env.DEV && this.$containerType !== 'sys') {
+      throw new Error('should in sys container');
+    }
     // beanOptions
     const beanOptions = appResource.getBean(beanFullName as any);
     if (!beanOptions) return;
@@ -37,6 +40,9 @@ export class ServiceAop extends BeanBase {
   async findAopMethodsMatched<K extends keyof IBeanRecord>(beanFullName: K): Promise<AopMethodsMatchedAll | undefined>;
   async findAopMethodsMatched(beanFullName: string): Promise<AopMethodsMatchedAll | undefined>;
   async findAopMethodsMatched<T>(beanFullName: Constructable<T> | string): Promise<AopMethodsMatchedAll | undefined> {
+    if (process.env.DEV && this.$containerType !== 'sys') {
+      throw new Error('should in sys container');
+    }
     // beanOptions
     const beanOptions = appResource.getBean(beanFullName as any);
     if (!beanOptions) return;

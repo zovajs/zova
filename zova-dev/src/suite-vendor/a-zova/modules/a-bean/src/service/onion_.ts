@@ -33,6 +33,9 @@ export class ServiceOnion<OPTIONS, ONIONNAME extends string> extends BeanSimple 
   // private [SymbolOnionsEnabledWrapped]: Record<string, Function[]> = {};
 
   protected __init__(sceneName: string, beanOnion: BeanOnion) {
+    if (process.env.DEV && this.$containerType !== 'sys') {
+      throw new Error('should in sys container');
+    }
     this.beanOnion = beanOnion;
     this.sceneName = sceneName;
     this.sceneMeta = getOnionScenesMeta(this.app.meta.module.modulesMeta.modules)[this.sceneName];
