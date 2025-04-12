@@ -1,9 +1,11 @@
 import type { Router } from 'vue-router';
 import { IModule } from '@cabloy/module-info';
+import * as ModuleInfo from '@cabloy/module-info';
 import { createMemoryHistory, createRouter, createWebHashHistory, createWebHistory } from 'vue-router';
-import { BeanBase, cast, deepExtend } from 'zova';
+import { BeanBase, cast, deepExtend, IPageNameRecord, IPagePathRecord } from 'zova';
 import { Sys } from 'zova-module-a-bean';
-import { IModuleRoute } from '../types.js';
+import { IModuleRoute, IModuleRouteComponent } from '../types.js';
+import { getRealRouteName } from '../utils.js';
 
 const SymbolRouter = Symbol('SymbolRouter');
 
@@ -46,7 +48,7 @@ export class SysRouter extends BeanBase {
 
   public createAsyncComponent(component: string | IModuleRouteComponent) {
     if (typeof component !== 'string') return component;
-    return this.app.meta.component.createAsyncComponent(component);
+    return this.sys.meta.component.createAsyncComponent(component);
   }
 
   public resolveName<K extends keyof IPageNameRecord>(name: K, options?: IPageNameRecord[K]): string {
@@ -74,7 +76,7 @@ export class SysRouter extends BeanBase {
     if (!_path) return true;
     const moduleName = ModuleInfo.parseName(_path);
     if (!moduleName) return true;
-    return this.app.meta.module.exists(moduleName);
+    return this.sys.meta.module.exists(moduleName);
   }
 
   private _resolveNameOrPath(query, fn) {
@@ -126,7 +128,7 @@ export class SysRouter extends BeanBase {
     name: string | symbol | null | undefined,
     path: string | undefined,
   ): IModuleRoute | undefined {
-    const legacyRoutes = cast(this.app.meta).legacyRoutes;
+    const legacyRoutes = cast(this.sys.meta).legacyRoutes;
     if (!legacyRoutes) return;
     name = this.getRealRouteName(name);
     return legacyRoutes.find(item => {
@@ -152,7 +154,7 @@ export class SysRouter extends BeanBase {
   }
 
   private _loadLegacyRoutes() {
-    const legacyRoutes = cast(this.app.meta).legacyRoutes;
+    const legacyRoutes = cast(this.sys.meta).legacyRoutes;
     if (!legacyRoutes) return;
     for (const route of legacyRoutes) {
       this._registerRoute(route);

@@ -1,3 +1,4 @@
+export * from './component.js';
 export * from './config.js';
 export * from './constant.js';
 export * from './error.js';

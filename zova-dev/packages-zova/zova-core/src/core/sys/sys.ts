@@ -35,6 +35,8 @@ export class ZovaSys {
   private async _initializeInner({ modulesMeta, locales, config, SysMonkey, legacyRoutes }: PluginZovaOptions) {
     // monkey
     await this.meta.initialize(SysMonkey, legacyRoutes);
+    // component
+    await this.meta.component.initialize();
     // locales
     await this.meta.locale.initialize(locales);
     // errors
