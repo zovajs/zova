@@ -1,15 +1,11 @@
-import { reactive } from 'vue';
-import { BeanBase, cast } from 'zova';
+import { BeanBase } from 'zova';
 import { Sys } from 'zova-module-a-bean';
 import { IconGroup } from '../lib/iconGroup.js';
 import { IIconInfo, IIconMeta, TypeIconModules, TypeIconSymbols } from '../types/icon.js';
 
-const XMLNS = 'http://www.w3.org/2000/svg';
-const XMLNS_LINK = 'http://www.w3.org/1999/xlink';
-
 @Sys()
 export class SysIcon extends BeanBase {
-  protected _iconSymbols: TypeIconSymbols = reactive({});
+  protected _iconSymbols: TypeIconSymbols = {};
   protected _iconMoudles: TypeIconModules = {};
 
   // undefined: ignore
@@ -52,8 +48,7 @@ export class SysIcon extends BeanBase {
     const iconGroup = await this.parseIconGroup(meta.module, meta.group);
     if (!iconGroup) return undefined;
     // icon inject
-    console.log('-----id:', meta.symbolId);
-    const symbolId = this._injectIcon(meta);
+    const symbolId = meta.symbolId;
     this._iconSymbols[meta.fullName] = symbolId;
     // ok
     return { meta, symbolId };
@@ -109,52 +104,6 @@ export class SysIcon extends BeanBase {
     return svg;
   }
 
-  private _injectIcon(meta: IIconMeta): string {
-    if (process.env.SERVER) {
-      return this.self._injectIconSSR(meta);
-    }
-    //
-    const iconModule = this._getIconModule(meta.module);
-    const iconGroup = iconModule[meta.group];
-    // inject container
-    let domContainer = document.getElementById('zova-svg-container');
-    if (!domContainer) {
-      domContainer = document.createElement('div');
-      domContainer.style.position = 'absolute';
-      domContainer.style.width = '0';
-      domContainer.style.height = '0';
-      domContainer.style.display = 'none';
-      domContainer.id = 'zova-svg-container';
-      document.body.appendChild(domContainer);
-    }
-    // inject module
-    let domModule = document.getElementById(`zova-svg-module-${meta.module}`);
-    if (!domModule) {
-      domModule = document.createElement('div');
-      domModule.id = `zova-svg-module-${meta.module}`;
-      domContainer.appendChild(domModule);
-    }
-    // inject group
-    let domGroup = document.getElementById(`zova-svg-group-${meta.module}-${meta.group}`) as unknown as SVGSVGElement;
-    if (!domGroup) {
-      domGroup = document.createElementNS(XMLNS, 'svg');
-      domGroup.id = `zova-svg-group-${meta.module}-${meta.group}`;
-      domGroup.setAttribute('xmlns', XMLNS);
-      domGroup.setAttribute('xmlns:link', XMLNS_LINK);
-      domModule.appendChild(domGroup);
-    }
-    // inject icon
-    const domIcon = document.getElementById(meta.symbolId) as unknown as SVGElement;
-    if (!domIcon) {
-      const iconContent = this._extractIconContent(iconGroup.svg, meta.symbolId);
-      if (iconContent) {
-        domGroup.insertAdjacentHTML('beforeend', iconContent);
-      }
-    }
-    // ok
-    return meta.symbolId;
-  }
-
   protected _extractIconContent(svg: string | undefined, symbolId: string) {
     if (!svg) return undefined;
     let pos = svg.indexOf(`'${symbolId}'`);
@@ -182,7 +131,7 @@ export class SysIcon extends BeanBase {
     if (parts.length !== 3) {
       return;
     }
-    const module = parts[0] || this.sys.config.icon.defaultModule;
+    const module = parts[0] || this.scope.config.defaultModule;
     const group = parts[1] || 'default';
     const name = parts[2] || '';
     if (!module.includes('-') || !name) {

@@ -1,9 +1,17 @@
-import { BeanBase } from 'zova';
+import { BeanBase, Use } from 'zova';
 import { Bean } from 'zova-module-a-bean';
+import { IIconInfo } from '../types/icon.js';
+import { SysIcon } from './sys.icon.js';
+
+const XMLNS = 'http://www.w3.org/2000/svg';
+const XMLNS_LINK = 'http://www.w3.org/1999/xlink';
 
 @Bean()
 export class BeanIcon extends BeanBase {
   private _iconSSR: Record<string, Record<string, Record<string, string>>> = {};
+
+  @Use()
+  private $$sysIcon: SysIcon;
 
   protected async __init__() {
     if (process.env.SERVER) {
@@ -11,6 +19,13 @@ export class BeanIcon extends BeanBase {
         this._onRendered();
       });
     }
+  }
+
+  async parseIconInfo(iconName?: string): Promise<IIconInfo | undefined> {
+    const iconInfo = await this.$$sysIcon.parseIconInfo(iconName);
+    if (!iconInfo) return iconInfo;
+    this._injectIcon(iconInfo.meta);
+    return iconInfo;
   }
 
   private _onRendered() {
@@ -50,13 +65,58 @@ export class BeanIcon extends BeanBase {
       .join('');
   }
 
-  /** @internal */
-  public _injectIconSSR(meta: IIconMeta) {
+  private _injectIconSSR(meta: IIconMeta) {
     const iconModule = this._getIconModule(meta.module);
     const iconGroup = iconModule[meta.group];
     if (!this._iconSSR[meta.module]) this._iconSSR[meta.module] = {};
     if (!this._iconSSR[meta.module][meta.group]) this._iconSSR[meta.module][meta.group] = {};
     this._iconSSR[meta.module][meta.group][meta.symbolId] = this._extractIconContent(iconGroup.svg, meta.symbolId)!;
+    // ok
+    return meta.symbolId;
+  }
+
+  private _injectIcon(meta: IIconMeta): string {
+    if (process.env.SERVER) {
+      return this.self._injectIconSSR(meta);
+    }
+    //
+    const iconModule = this._getIconModule(meta.module);
+    const iconGroup = iconModule[meta.group];
+    // inject container
+    let domContainer = document.getElementById('zova-svg-container');
+    if (!domContainer) {
+      domContainer = document.createElement('div');
+      domContainer.style.position = 'absolute';
+      domContainer.style.width = '0';
+      domContainer.style.height = '0';
+      domContainer.style.display = 'none';
+      domContainer.id = 'zova-svg-container';
+      document.body.appendChild(domContainer);
+    }
+    // inject module
+    let domModule = document.getElementById(`zova-svg-module-${meta.module}`);
+    if (!domModule) {
+      domModule = document.createElement('div');
+      domModule.id = `zova-svg-module-${meta.module}`;
+      domContainer.appendChild(domModule);
+    }
+    // inject group
+    let domGroup = document.getElementById(`zova-svg-group-${meta.module}-${meta.group}`) as unknown as SVGSVGElement;
+    if (!domGroup) {
+      domGroup = document.createElementNS(XMLNS, 'svg');
+      domGroup.id = `zova-svg-group-${meta.module}-${meta.group}`;
+      domGroup.setAttribute('xmlns', XMLNS);
+      domGroup.setAttribute('xmlns:link', XMLNS_LINK);
+      domModule.appendChild(domGroup);
+    }
+    // inject icon
+    const domIcon = document.getElementById(meta.symbolId) as unknown as SVGElement;
+    if (!domIcon) {
+      const iconContent = this._extractIconContent(iconGroup.svg, meta.symbolId);
+      if (iconContent) {
+        domGroup.insertAdjacentHTML('beforeend', iconContent);
+      }
+    }
     // ok
     return meta.symbolId;
   }
