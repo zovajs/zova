@@ -1,3 +1,4 @@
+import { sys } from 'zova';
 import { locales } from '../../src/front/config/locales.js';
 <%=sysMonkey?"import { SysMonkey } from '../../src/front/config/monkeySys.js';":''%>
 <%=appMonkey?"import { AppMonkey } from '../../src/front/config/monkey.js';":''%>
@@ -14,4 +15,22 @@ export function getPluginZovaOptions() {
     <%=appMonkey?'AppMonkey,':''%>
     <%=legacy?'legacyRoutes,':''%>
   };
+}
+
+export async function resolveRoute(req: any) {
+  // router
+  const sysRouter = await getSysRouter();
+  // resolve
+  sysRouter.resolve(req.url);
+}
+
+let _sysRouter;
+async function getSysRouter() {
+  if (!_sysRouter) {
+    // sys
+    await sys.initialize(getPluginZovaOptions());
+    // router
+    _sysRouter = await sys.bean._getBean('a-router.sys.router', false);
+  }
+  return _sysRouter;
 }
