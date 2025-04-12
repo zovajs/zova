@@ -21,7 +21,9 @@ export async function resolveRoute(req: any) {
   // router
   const sysRouter = await getSysRouter();
   // resolve
-  sysRouter.resolve(req.url);
+  const matched = sysRouter.resolve(req.url);
+  if (!matched || matched.name === '$:/:catchAll(.*)*') return undefined;
+  return matched;
 }
 
 let _sysRouter;
