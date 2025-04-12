@@ -12,6 +12,7 @@
     "zova-module-a-bean": "workspace:^",
     "zova-module-a-behavior": "workspace:^",
     "zova-module-a-fetch": "workspace:^",
+    "zova-module-a-icon": "workspace:^",
     "zova-module-a-interceptor": "workspace:^",
     "zova-module-a-logger": "workspace:^",
     "zova-module-a-meta": "workspace:^",
