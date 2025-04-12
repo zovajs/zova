@@ -11,6 +11,7 @@
  * Boot files are your "main.js"
  **/
 import { sys } from 'zova';
+import { getPluginZovaOptions } from 'app/.zova/app/utils.js';
 import { createApp<%= metaConf.hasStore && ssr.manualStoreSsrContextInjection !== true ? ', unref' : '' %> } from 'vue'
 
 <% extras.length !== 0 && extras.filter(asset => asset).forEach(asset => { %>
@@ -77,9 +78,9 @@ export default async ssrContext => {
     return app;
 }
 
-export async function resolveRoute(req, options) {
+export async function resolveRoute(req) {
   // router
-  const sysRouter = await getSysRouter(options);
+  const sysRouter = await getSysRouter();
   // resolve
   const matched = sysRouter.resolve(req.url);
   if (!matched || matched.name === '$:/:catchAll(.*)*') return undefined;
@@ -87,10 +88,10 @@ export async function resolveRoute(req, options) {
 }
 
 let _sysRouter;
-async function getSysRouter(options) {
+async function getSysRouter() {
   if (!_sysRouter) {
     // sys
-    await sys.initialize(options);
+    await sys.initialize(getPluginZovaOptions());
     // router
     _sysRouter = await sys.bean._getBean('a-router.sys.router', false);
   }
