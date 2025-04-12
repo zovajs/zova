@@ -58,7 +58,9 @@ export class SysRouter extends BeanBase {
       options.history = createHistory(this.sys.config.env.appRouterBase);
     }
     // create
-    return createRouter(options);
+    const router = createRouter(options);
+    cast(router).__hasDevtools = true;
+    return router;
   }
 
   public createAsyncComponent(component: string | IModuleRouteComponent) {
