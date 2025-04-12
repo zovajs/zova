@@ -4,7 +4,7 @@ import type { Component } from 'vue';
 import type { ZovaSys } from '../../core/sys/sys.js';
 import type { Constructable } from '../../decorator/type/constructable.js';
 import type { StateLock } from '../../utils/stateLock.js';
-import type { IModuleMain, IModuleMainSys, IMonkeyApp, IMonkeyController, IMonkeyModule, IMonkeySys } from './monkey.js';
+import type { IModuleMain, IModuleMainSys, IMonkeyApp, IMonkeyController, IMonkeyModule, IMonkeyModuleSys, IMonkeySys } from './monkey.js';
 
 export type TypeModuleResourceIcons = Record<string, string>;
 export type TypeModuleResourceLocales = Record<string, object>;
@@ -16,7 +16,7 @@ export type TypeModuleResourceConfig = (sys: ZovaSys, meta?: ZovaConfigMeta) => 
 
 export interface IModuleResource {
   MainSys: Constructable<IModuleMainSys>;
-  MonkeySys: Constructable<IMonkeyModule & IMonkeySys>;
+  MonkeySys: Constructable<IMonkeyModuleSys & IMonkeySys>;
   Main: Constructable<IModuleMain>;
   Monkey: Constructable<IMonkeyModule & IMonkeyApp & IMonkeyController>;
   locales: TypeModuleResourceLocales;

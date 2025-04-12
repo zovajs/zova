@@ -1,6 +1,6 @@
 import type { RouteRecordRaw } from 'vue-router';
 import type { Constructable } from '../../decorator/type/constructable.js';
-import type { IMonkeyModule, IMonkeySys } from '../../types/interface/monkey.js';
+import type { IMonkeyModuleSys, IMonkeySys } from '../../types/interface/monkey.js';
 import { BeanSimple } from '../../bean/beanSimple.js';
 import { SysComponent } from './component.js';
 import { SysError } from './error.js';
@@ -14,7 +14,7 @@ export class SysMeta extends BeanSimple {
   error: SysError;
 
   /** @internal */
-  public sysMonkey?: IMonkeyModule & IMonkeySys;
+  public sysMonkey?: IMonkeyModuleSys & IMonkeySys;
 
   /** @internal */
   public legacyRoutes?: RouteRecordRaw[];
@@ -27,7 +27,7 @@ export class SysMeta extends BeanSimple {
   }
 
   /** @internal */
-  public async initialize(SysMonkey?: Constructable<IMonkeyModule & IMonkeySys>, legacyRoutes?: RouteRecordRaw[]) {
+  public async initialize(SysMonkey?: Constructable<IMonkeyModuleSys & IMonkeySys>, legacyRoutes?: RouteRecordRaw[]) {
     if (SysMonkey) {
       this.sysMonkey = this.bean._newBeanSimple(SysMonkey, false);
     }

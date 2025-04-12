@@ -1,5 +1,5 @@
 import type { BeanScopeUtil } from 'zova';
-/** monkey: end */
+/** monkeySys: end */
 /** scope: begin */
 import { BeanScopeBase, TypeModuleConfig } from 'zova';
 import { Scope } from 'zova-module-a-bean';
@@ -87,6 +87,9 @@ declare module 'zova' {
 /** config: end */
 /** monkey: begin */
 export * from '../monkey.js';
+/** monkey: end */
+/** monkeySys: begin */
+export * from '../monkeySys.js';
 /** bean: end */
 /** service: begin */
 export * from '../service/router.js';

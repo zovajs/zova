@@ -1,4 +1,3 @@
-import type { IModule } from '@cabloy/module-info';
 import type {
   BeanBase,
   BeanContainer,
@@ -7,7 +6,6 @@ import type {
   IMonkeyAppInitialized,
   IMonkeyAppReady,
   IMonkeyController,
-  IMonkeyModule,
   TypePageSchema,
 } from 'zova';
 import type { BeanRouter } from './bean/bean.router.js';
@@ -23,15 +21,9 @@ import { getRealRouteName } from './utils.js';
 
 export class Monkey
   extends BeanSimple
-  implements IMonkeyAppInitialize, IMonkeyAppInitialized, IMonkeyAppReady, IMonkeyModule, IMonkeyController {
-  private _moduleSelf: IModule;
+  implements IMonkeyAppInitialize, IMonkeyAppInitialized, IMonkeyAppReady, IMonkeyController {
   private _beanRouter: BeanRouter;
   serviceRouter: ServiceRouter;
-
-  constructor(moduleSelf: IModule) {
-    super();
-    this._moduleSelf = moduleSelf;
-  }
 
   async getBeanRouter() {
     if (!this._beanRouter) {
@@ -46,21 +38,23 @@ export class Monkey
   }
 
   async appInitialized() {
+    const beanRouter = await this.getBeanRouter();
     // emit event
-    await this.app.meta.event.emit('a-router:routerGuards', this._beanRouter);
+    await this.app.meta.event.emit('a-router:routerGuards', beanRouter);
   }
 
   async appReady() {
+    const beanRouter = await this.getBeanRouter();
     // use router
-    this.app.vue.use(this._beanRouter);
+    this.app.vue.use(beanRouter);
     // ssr
     if (process.env.SERVER) {
       // push
       const url = this.ctx.meta.ssr.context.req.url;
-      this._beanRouter.push(url);
-      await this._beanRouter.isReady();
+      beanRouter.push(url);
+      await beanRouter.isReady();
     } else if (process.env.CLIENT && this.ctx.meta.ssr.isRuntimeSsrPreHydration) {
-      await this._beanRouter.isReady();
+      await beanRouter.isReady();
     }
   }
 
@@ -74,14 +68,6 @@ export class Monkey
     });
   }
 
-  async moduleLoading(module: IModule) {
-    if (this._moduleSelf === module) return;
-    const beanRouter = await this.getBeanRouter();
-    beanRouter._registerRoutes(module);
-  }
-
-  async moduleLoaded(_module: IModule) {}
-  async configLoaded(_module: IModule, _config) {}
   controllerDataPrepare(controllerData: IControllerData) {
     controllerData.context.route = useRoute();
   }

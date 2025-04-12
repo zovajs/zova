@@ -3,7 +3,7 @@ import type { BeanBase } from '../../bean/beanBase.js';
 import type { BeanContainer } from '../../bean/beanContainer.js';
 import type { IControllerData } from '../../bean/type.js';
 
-export type TypeMonkeyName = keyof IMonkeyModule | keyof IMonkeySys | keyof IMonkeyApp | keyof IMonkeyController;
+export type TypeMonkeyName = keyof IMonkeyModuleSys | keyof IMonkeySys | keyof IMonkeyApp | keyof IMonkeyController;
 
 export interface IModuleMain {
   moduleLoading(): Promise<void>;
@@ -17,6 +17,11 @@ export interface IModuleMainSys {
 }
 
 export interface IMonkeyModule {
+  moduleLoading(module: IModule): Promise<void>;
+  moduleLoaded(module: IModule): Promise<void>;
+}
+
+export interface IMonkeyModuleSys {
   moduleLoading(module: IModule): Promise<void>;
   moduleLoaded(module: IModule): Promise<void>;
   configLoaded(module: IModule, config: any): Promise<void>;

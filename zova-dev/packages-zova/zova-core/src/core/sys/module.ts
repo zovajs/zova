@@ -1,6 +1,6 @@
 import type { IModule, IModuleInfo } from '@cabloy/module-info';
 import type { TypeBeanScopeRecordKeys } from '../../bean/type.js';
-import type { IModuleMainSys, IModuleResource, IMonkeyModule, IMonkeySys, PluginZovaModulesMeta, TypeMonkeyName } from '../../types/index.js';
+import type { IModuleMainSys, IModuleResource, IMonkeyModuleSys, IMonkeySys, PluginZovaModulesMeta, TypeMonkeyName } from '../../types/index.js';
 import * as ModuleInfo from '@cabloy/module-info';
 import { shallowReactive } from 'vue';
 import { BeanSimple } from '../../bean/beanSimple.js';
@@ -12,7 +12,7 @@ export class SysModule extends BeanSimple {
   public modulesMeta: PluginZovaModulesMeta;
   private modules: Record<string, IModule> = shallowReactive({});
   private mainInstances: Record<string, IModuleMainSys> = {};
-  private monkeyInstances: Record<string, IMonkeyModule & IMonkeySys> = {};
+  private monkeyInstances: Record<string, IMonkeyModuleSys & IMonkeySys> = {};
 
   /** @internal */
   public async initialize(modulesMeta: PluginZovaModulesMeta) {
