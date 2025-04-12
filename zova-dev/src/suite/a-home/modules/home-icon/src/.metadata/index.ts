@@ -17,7 +17,7 @@ import icon_role from './icons/groups/role.svg';
 
 import icon_social from './icons/groups/social.svg';
 import icon_tools from './icons/groups/tools.svg';
-import 'zova';
+import 'zova-module-a-icon';
 
 import 'zova';
 
@@ -34,7 +34,7 @@ export const icons = {
   social: icon_social,
   tools: icon_tools,
 };
-declare module 'zova' {
+declare module 'zova-module-a-icon' {
   export interface IIconRecord {
     ':auth:dingtalk-square': true;
     ':auth:github': true;
