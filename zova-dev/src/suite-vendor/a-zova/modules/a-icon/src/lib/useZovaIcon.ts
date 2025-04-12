@@ -1,7 +1,7 @@
-import type { ZovaApplication } from '../../../core/index.js';
-import type { IIconInfo } from './types.js';
+import type { ZovaApplication } from 'zova';
+import type { IIconInfo } from '../types/icon.js';
 import { ref, watchEffect } from 'vue';
-import { useApp } from '../../../composables/useApp.js';
+import { useApp } from 'zova';
 
 export function getZovaIcon(iconName?: string, app?: ZovaApplication): IIconInfo | undefined {
   if (!app) app = useApp();

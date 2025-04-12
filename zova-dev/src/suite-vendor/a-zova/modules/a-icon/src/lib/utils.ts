@@ -1,5 +1,5 @@
 import type { VNode } from 'vue';
-import type { IIconRecord } from './types.js';
+import type { IIconRecord } from '../types/icon.js';
 import { createVNode } from 'vue';
 import { ZovaIcon } from './zovaIcon.js';
 

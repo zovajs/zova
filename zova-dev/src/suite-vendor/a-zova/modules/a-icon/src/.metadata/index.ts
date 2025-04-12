@@ -1,7 +1,7 @@
 import type { BeanScopeUtil } from 'zova';
-/** bean: end */
+/** config: end */
 /** scope: begin */
-import { BeanScopeBase } from 'zova';
+import { BeanScopeBase, TypeModuleConfig } from 'zova';
 import { Scope } from 'zova-module-a-bean';
 
 /** bean: end */
@@ -10,6 +10,7 @@ import { BeanIcon } from '../bean/bean.icon.js';
 /** sys: end */
 /** sys: begin */
 import { SysIcon } from '../bean/sys.icon.js';
+import { config } from '../config/config.js';
 /** sys: end */
 /** bean: begin */
 import 'zova';
@@ -52,17 +53,25 @@ declare module 'zova' {
     'a-icon.bean.icon': BeanIcon;
   }
 }
+/** bean: end */
+/** config: begin */
+export * from '../config/config.js';
 
 @Scope()
 export class ScopeModuleAIcon extends BeanScopeBase {}
 
 export interface ScopeModuleAIcon {
   util: BeanScopeUtil;
+  config: TypeModuleConfig<typeof config>;
 }
 
 declare module 'zova' {
   export interface IBeanScopeRecord {
     'a-icon': ScopeModuleAIcon;
+  }
+
+  export interface IBeanScopeConfig {
+    'a-icon': ReturnType<typeof config>;
   }
 
 }

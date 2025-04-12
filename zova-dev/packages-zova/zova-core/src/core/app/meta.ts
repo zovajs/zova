@@ -2,7 +2,6 @@ import type { IModuleLocaleText } from '../../bean/resource/locale/type.js';
 import type { Constructable } from '../../decorator/type/constructable.js';
 import type { IMonkeyApp, IMonkeyController, IMonkeyModule } from '../../types/interface/monkey.js';
 import { BeanSimple } from '../../bean/beanSimple.js';
-import { AppIcon } from '../../bean/resource/icon/icon.js';
 import { AppComponent } from '../component/component.js';
 import { AppCookie } from '../component/cookie.js';
 import { AppError } from '../component/error.js';
@@ -18,7 +17,6 @@ export class AppMeta extends BeanSimple {
   error: AppError;
   logger: AppLogger;
   event: AppEvent;
-  icon: AppIcon;
   cookie: AppCookie;
   text: IModuleLocaleText;
 
@@ -32,7 +30,6 @@ export class AppMeta extends BeanSimple {
     this.locale = this.app.bean._newBeanSimple(AppLocale, false);
     this.error = this.app.bean._newBeanSimple(AppError, false);
     this.event = this.app.bean._newBeanSimple(AppEvent, false);
-    this.icon = this.app.bean._newBeanSimple(AppIcon, false);
     this.cookie = this.app.bean._newBeanSimple(AppCookie, false);
     this.text = this.locale.createLocaleText();
   }

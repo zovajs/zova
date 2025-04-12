@@ -1,6 +1,6 @@
 import { defineComponent, onServerPrefetch } from 'vue';
 import { createVNode, mergeProps } from 'vue';
-import { useApp } from '../../../composables/useApp.js';
+import { useApp } from 'zova';
 import { getZovaIcon } from './useZovaIcon.js';
 
 export const ZovaIcon = defineComponent({

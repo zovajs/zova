@@ -2,7 +2,7 @@ import type { ZovaConfigMeta } from '@cabloy/module-info';
 import type { TypeComponentLayoutRecord } from '../../bean/resource/component/type.js';
 import type { ILocalInfos } from '../../bean/resource/locale/type.js';
 import type { ZovaConfigRoutes } from '../../bean/resource/page/type.js';
-import type { IBeanScopeConfig, IBeanScopeRecord } from '../../bean/type.js';
+import type { IBeanScopeConfig } from '../../bean/type.js';
 import type { ZovaConfigEnv } from '../../types/utils/env.js';
 import type { PowerPartial } from '../../types/utils/powerPartial.js';
 import type { ConfigLogger } from '../logger/types.js';
@@ -44,9 +44,6 @@ export function configDefault() {
       },
     },
     logger,
-    icon: {
-      defaultModule: 'home-icon',
-    },
     locale: {
       default: 'en-us',
       storeKey: 'locale',
@@ -91,9 +88,6 @@ export interface ZovaConfig {
     };
   };
   logger: ConfigLogger;
-  icon: {
-    defaultModule: keyof IBeanScopeRecord;
-  };
   locale: {
     default: keyof ILocalInfos;
     storeKey: string;
