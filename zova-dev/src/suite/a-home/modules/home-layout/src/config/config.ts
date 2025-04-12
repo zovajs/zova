@@ -1,6 +1,6 @@
-import type { ZovaApplication } from 'zova';
+import type { ZovaSys } from 'zova';
 
-export const config = (_app: ZovaApplication) => {
+export const config = (_sys: ZovaSys) => {
   return {
     tabs: {
       scene: '',

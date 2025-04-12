@@ -1,10 +1,10 @@
 import type {
   TypeBeanRecordGeneralSelectorKeys,
   TypeBeanRecordGeneralSelectorSpecificNameKeys,
-  ZovaApplication,
+  ZovaSys,
 } from 'zova';
 
-export const config = (_app: ZovaApplication) => {
+export const config = (_sys: ZovaSys) => {
   return {
     defaultCss: 'home-base.css.default' as TypeBeanRecordGeneralSelectorKeys<'css'>,
     defaultTheme: 'home-base.theme.default' as TypeBeanRecordGeneralSelectorKeys<'theme'>,

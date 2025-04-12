@@ -81,9 +81,9 @@ Take a look at the animation demo, which provides complete type intelligent prom
 You can define some Config configurations for the business module separately, as follows:
 
 ```diff
-import { ZovaApplication } from '@cabloy/core';
+import { ZovaSys } from 'zova';
 
-export const config = (_app: ZovaApplication) => {
+export const config = (_sys: ZovaSys) => {
   return {
 +   prompt: 'hello world',
   };

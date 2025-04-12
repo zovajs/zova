@@ -15,7 +15,7 @@
 `src/suite/a-demo/modules/demo-basic/src/config/config.ts`
 
 ```typescript{3}
-export const config = (_app: ZovaApplication) => {
+export const config = (_sys: ZovaSys) => {
   return {
     prompt: 'Hello World',
   };

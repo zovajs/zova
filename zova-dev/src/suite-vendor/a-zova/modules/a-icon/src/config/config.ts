@@ -1,6 +1,6 @@
-import type { IBeanScopeRecord, ZovaApplication } from 'zova';
+import type { IBeanScopeRecord, ZovaSys } from 'zova';
 
-export const config = (_app: ZovaApplication) => {
+export const config = (_sys: ZovaSys) => {
   return {
     defaultModule: 'home-icon' as keyof IBeanScopeRecord,
   };
