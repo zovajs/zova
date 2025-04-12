@@ -1,7 +1,7 @@
-import type { Router } from 'vue-router';
+import type { Router, RouterOptions } from '@cabloy/vue-router';
 import { IModule } from '@cabloy/module-info';
 import * as ModuleInfo from '@cabloy/module-info';
-import { createMemoryHistory, createRouter, createWebHashHistory, createWebHistory } from 'vue-router';
+import { createMemoryHistory, createRouter, createWebHashHistory, createWebHistory } from '@cabloy/vue-router';
 import { BeanBase, cast, deepExtend, IPageNameRecord, IPagePathRecord } from 'zova';
 import { Sys } from 'zova-module-a-bean';
 import { IModuleRoute, IModuleRouteComponent } from '../types.js';
@@ -32,18 +32,33 @@ export class SysRouter extends BeanBase {
     this._loadLegacyRoutes();
   }
 
-  public createRouter() {
-    const createHistory = process.env.SERVER
-      ? createMemoryHistory
-      : this.sys.config.env.appRouterMode === 'history'
-        ? createWebHistory
-        : createWebHashHistory;
-
-    return createRouter({
-      scrollBehavior: () => ({ left: 0, top: 0 }),
-      routes: [],
-      history: createHistory(this.sys.config.env.appRouterBase),
-    });
+  public createRouter(options?: RouterOptions) {
+    options = Object.assign({}, options);
+    // matcher
+    if (!options.matcher) {
+      options.matcher = this[SymbolRouter]?.matcher;
+    }
+    // routes
+    if (!options.routes) {
+      if (!this[SymbolRouter]) {
+        options.routes = [];
+      }
+    }
+    // scrollBehavior
+    if (!options.scrollBehavior) {
+      options.scrollBehavior = () => ({ left: 0, top: 0 });
+    }
+    // history
+    if (!options.history) {
+      const createHistory = process.env.SERVER
+        ? createMemoryHistory
+        : this.sys.config.env.appRouterMode === 'history'
+          ? createWebHistory
+          : createWebHashHistory;
+      options.history = createHistory(this.sys.config.env.appRouterBase);
+    }
+    // create
+    return createRouter(options);
   }
 
   public createAsyncComponent(component: string | IModuleRouteComponent) {

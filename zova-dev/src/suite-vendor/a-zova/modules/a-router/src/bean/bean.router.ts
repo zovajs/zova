@@ -1,4 +1,4 @@
-import type { Router } from 'vue-router';
+import type { Router } from '@cabloy/vue-router';
 import { BeanBase, Use } from 'zova';
 import { Bean } from 'zova-module-a-bean';
 import { SysRouter } from 'zova-module-a-router';
@@ -19,9 +19,10 @@ export class BeanRouter extends BeanBase {
   }
 
   protected __get__(prop) {
-    const value = this.$$sysRouter?.[prop];
+    // SymbolRouter first
+    const value = this[SymbolRouter]?.[prop];
     if (value !== undefined) return value;
-    return this[SymbolRouter]?.[prop];
+    return this.$$sysRouter?.[prop];
   }
 
   protected async __init__(mainRouter?: boolean) {
