@@ -56,6 +56,7 @@ export class AppIconBase extends BeanSimple {
     const iconGroup = await this.parseIconGroup(meta.module, meta.group);
     if (!iconGroup) return undefined;
     // icon inject
+    console.log('-----id:', meta.symbolId);
     const symbolId = this._injectIcon(meta);
     this._iconSymbols[meta.fullName] = symbolId;
     // ok
