@@ -5,7 +5,7 @@ import { SysRouter } from 'zova-module-a-router';
 
 const SymbolRouter = Symbol('SymbolRouter');
 
-export interface BeanRouter extends Router {}
+export interface BeanRouter extends SysRouter {}
 
 @Bean()
 export class BeanRouter extends BeanBase {
@@ -19,7 +19,9 @@ export class BeanRouter extends BeanBase {
   }
 
   protected __get__(prop) {
-    return this[SymbolRouter] && this[SymbolRouter][prop];
+    const value = this.$$sysRouter?.[prop];
+    if (value !== undefined) return value;
+    return this[SymbolRouter]?.[prop];
   }
 
   protected async __init__(mainRouter?: boolean) {

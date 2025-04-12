@@ -645,13 +645,7 @@ export class BeanContainer {
         targetBeanFullName,
         useOptions,
       );
-      if (targetBeanInstance) {
-        targetBeanInstance.__v_isShallow_patch = true;
-        __setPropertyValue(beanInstance, key, targetBeanInstance);
-        delete targetBeanInstance.__v_isShallow_patch;
-      } else {
-        __setPropertyValue(beanInstance, key, targetBeanInstance);
-      }
+      __setPropertyValue(beanInstance, key, targetBeanInstance, true);
     }
   }
 
@@ -1199,7 +1193,10 @@ function __getPropertyDescriptorStatic(obj, prop) {
   return null;
 }
 
-function __setPropertyValue(obj, prop, value) {
+function __setPropertyValue(obj: {}, prop: string, value: any, patch: boolean) {
+  if (value && patch) {
+    value.__v_isShallow_patch = true;
+  }
   Object.defineProperty(obj, prop, {
     enumerable: false,
     configurable: true,
@@ -1207,6 +1204,9 @@ function __setPropertyValue(obj, prop, value) {
       return value;
     },
   });
+  if (value && patch) {
+    delete value.__v_isShallow_patch;
+  }
 }
 
 function __hasMagicMethod(instance) {
