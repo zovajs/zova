@@ -59,16 +59,17 @@ export async function generateEntryFiles(
     // dest
     const pathDest = path.join(configOptions.appDir, configOptions.runtimeDir, 'app');
     fse.ensureDirSync(pathDest);
+    // vars
+    const vars = {
+      sysMonkey: fse.existsSync(path.join(configOptions.appDir, 'src/front/config/monkeySys.ts')),
+      appMonkey: fse.existsSync(path.join(configOptions.appDir, 'src/front/config/monkey.ts')),
+      legacy: fse.existsSync(path.join(configOptions.appDir, 'src/legacy')),
+    };
     // src
-    const files = ['controller.tsx_'];
+    const files = ['controller.tsx_', 'utils.ts_'];
     for (const file of files) {
       const fileSrc = resolveTemplatePath(`app/${file}`);
       const fileDest = path.join(pathDest, file.substring(0, file.length - 1));
-      const vars = {
-        sysMonkey: fse.existsSync(path.join(configOptions.appDir, 'src/front/config/monkeySys.ts')),
-        appMonkey: fse.existsSync(path.join(configOptions.appDir, 'src/front/config/monkey.ts')),
-        legacy: fse.existsSync(path.join(configOptions.appDir, 'src/legacy')),
-      };
       await copyTemplateFile(fileSrc, fileDest, vars);
     }
   }
