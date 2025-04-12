@@ -150,7 +150,7 @@ export class BeanContainer {
         const innerKey = `__innerKey_${prop}`;
         if (!obj[innerKey]) {
           self.runWithInstanceScopeOrAppContext(() => {
-            obj[innerKey] = attributes.get!();
+            __setPropertyValue(obj as any, innerKey, attributes.get!(), true);
           });
         }
         return obj[innerKey];
@@ -557,7 +557,7 @@ export class BeanContainer {
     }
     // beanFullName
     if (typeof beanFullName === 'string') {
-      __setPropertyValue(beanInstance, SymbolBeanFullName, beanFullName);
+      __setPropertyValue(beanInstance, SymbolBeanFullName, beanFullName, false);
     }
     // reactive
     if (markReactive) {
@@ -950,7 +950,7 @@ export class BeanContainer {
         });
       },
     });
-    __setPropertyValue(target, methodProxyKey, methodProxy);
+    __setPropertyValue(target, methodProxyKey, methodProxy, false);
     return methodProxy;
   }
 
@@ -1193,8 +1193,8 @@ function __getPropertyDescriptorStatic(obj, prop) {
   return null;
 }
 
-function __setPropertyValue(obj: {}, prop: string, value: any, patch: boolean) {
-  if (value && patch) {
+function __setPropertyValue(obj: {}, prop: MetadataKey, value: any, patch: boolean) {
+  if (value && typeof value === 'object' && patch) {
     value.__v_isShallow_patch = true;
   }
   Object.defineProperty(obj, prop, {
@@ -1204,7 +1204,7 @@ function __setPropertyValue(obj: {}, prop: string, value: any, patch: boolean) {
       return value;
     },
   });
-  if (value && patch) {
+  if (value && typeof value === 'object' && patch) {
     delete value.__v_isShallow_patch;
   }
 }
