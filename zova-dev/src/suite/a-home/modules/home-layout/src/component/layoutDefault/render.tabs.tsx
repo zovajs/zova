@@ -1,7 +1,8 @@
 import type { VNode } from 'vue';
 import { withModifiers } from 'vue';
-import { BeanRenderBase, ClientOnly, icon, ZovaIcon } from 'zova';
+import { BeanRenderBase, ClientOnly } from 'zova';
 import { Render } from 'zova-module-a-bean';
+import { icon, ZovaIcon } from 'zova-module-a-icon';
 import { ZRouterViewTabs } from 'zova-module-a-tabs';
 
 @Render()
