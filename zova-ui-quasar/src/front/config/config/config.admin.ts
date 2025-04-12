@@ -1,6 +1,6 @@
-import { ZovaApplication, ZovaConfigOptional } from 'zova';
+import type { ZovaConfigOptional, ZovaSys } from 'zova';
 
-export default function (_app: ZovaApplication) {
+export default function (_sys: ZovaSys) {
   const config: ZovaConfigOptional = {
     layout: {
       sidebar: {
