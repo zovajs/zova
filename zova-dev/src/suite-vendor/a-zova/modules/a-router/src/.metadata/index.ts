@@ -3,16 +3,23 @@ import type { BeanScopeUtil } from 'zova';
 /** scope: begin */
 import { BeanScopeBase, TypeModuleConfig } from 'zova';
 import { Scope } from 'zova-module-a-bean';
+
 /** bean: end */
 /** bean: begin */
 import { BeanRouter } from '../bean/bean.router.js';
-
 import { BeanRouterBase } from '../bean/bean.routerBase.js';
+/** sys: end */
+/** sys: begin */
+import { SysRouter } from '../bean/sys.router.js';
 import { config } from '../config/config.js';
+
 /** service: end */
 /** service: begin */
 import { ServiceRouter } from '../service/router.js';
+/** sys: end */
 /** bean: begin */
+import 'zova';
+import 'zova';
 import 'zova';
 import 'zova';
 import 'zova';
@@ -21,7 +28,24 @@ import 'zova';
 import 'zova';
 
 export * from '../bean/bean.router.js';
+declare module 'zova' {
+
+}
+declare module 'zova-module-a-router' {
+
+  export interface SysRouter {
+    /** @internal */
+    get scope(): ScopeModuleARouter;
+  }
+}
+declare module 'zova' {
+  export interface IBeanRecordGeneral {
+    'a-router.sys.router': SysRouter;
+  }
+}
 export * from '../bean/bean.routerBase.js';
+/** sys: begin */
+export * from '../bean/sys.router.js';
 declare module 'zova' {
 
 }
