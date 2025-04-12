@@ -1,6 +1,7 @@
 import { defineComponent, onServerPrefetch } from 'vue';
 import { createVNode, mergeProps } from 'vue';
 import { useApp } from 'zova';
+import { BeanIcon } from 'zova-module-a-icon';
 import { getZovaIcon } from './useZovaIcon.js';
 
 export const ZovaIcon = defineComponent({
@@ -20,11 +21,12 @@ export const ZovaIcon = defineComponent({
       if (icon === 'none' || !icon) {
         return;
       }
-      await app.meta.icon.parseIconInfo(icon);
+      const beanIcon = await app.bean._getBean(BeanIcon);
+      await beanIcon.parseIconInfo(icon);
     });
     return () => {
       // icon info
-      const iconInfo = getZovaIcon(props.name, app);
+      const iconInfo = getZovaIcon(props.name);
       // href
       let href = props.href;
       if (!href) {

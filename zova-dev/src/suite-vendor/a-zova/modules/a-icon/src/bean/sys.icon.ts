@@ -1,3 +1,4 @@
+import { reactive } from 'vue';
 import { BeanBase } from 'zova';
 import { Sys } from 'zova-module-a-bean';
 import { IconGroup } from '../lib/iconGroup.js';
@@ -5,7 +6,7 @@ import { IIconInfo, IIconMeta, TypeIconModules, TypeIconSymbols } from '../types
 
 @Sys()
 export class SysIcon extends BeanBase {
-  protected _iconSymbols: TypeIconSymbols = {};
+  protected _iconSymbols: TypeIconSymbols = reactive({});
   protected _iconMoudles: TypeIconModules = {};
 
   // undefined: ignore

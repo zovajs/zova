@@ -1,5 +1,5 @@
 import type { BeanScopeUtil } from 'zova';
-/** config: end */
+/** monkeySys: end */
 /** scope: begin */
 import { BeanScopeBase, TypeModuleConfig } from 'zova';
 import { Scope } from 'zova-module-a-bean';
@@ -56,6 +56,9 @@ declare module 'zova' {
 /** bean: end */
 /** config: begin */
 export * from '../config/config.js';
+/** config: end */
+/** monkeySys: begin */
+export * from '../monkeySys.js';
 
 @Scope()
 export class ScopeModuleAIcon extends BeanScopeBase {}
