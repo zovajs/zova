@@ -1,7 +1,7 @@
+import { RouterView } from '@cabloy/vue-router';
+import { ElConfigProvider, ElContainer, ElMain } from 'element-plus';
 import { BeanRenderBase } from 'zova';
 import { Render } from 'zova-module-a-bean';
-import { ElConfigProvider, ElContainer, ElMain } from 'element-plus';
-import { RouterView } from 'vue-router';
 
 @Render()
 export class RenderLayoutEmpty extends BeanRenderBase {

@@ -1,4 +1,4 @@
-import { RouterLink } from 'vue-router';
+import { RouterLink } from '@cabloy/vue-router';
 import { BeanControllerBase, ZovaIcon } from 'zova';
 import { Controller } from 'zova-module-a-bean';
 

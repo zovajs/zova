@@ -1,3 +1,4 @@
+import { RouterView } from '@cabloy/vue-router';
 import {
   QBtn,
   QDrawer,
@@ -11,7 +12,6 @@ import {
   QToolbarTitle,
 } from 'quasar';
 import { VNode } from 'vue';
-import { RouterView } from 'vue-router';
 import { BeanRenderBase } from 'zova';
 import { Render } from 'zova-module-a-bean';
 import { ApiMenuEntity } from '../../api/menu.js';

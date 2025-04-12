@@ -1,5 +1,5 @@
 import type { IModule } from '@cabloy/module-info';
-import type { RouteRecordRaw } from 'vue-router';
+import type { RouteRecordRaw } from '@cabloy/vue-router';
 import type { ZovaLocaleOptionalMap } from '../../core/app/locale.js';
 import type { Constructable } from '../../decorator/index.js';
 import type { TypeModuleResourceConfig } from './module.js';

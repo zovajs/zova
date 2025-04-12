@@ -1,9 +1,9 @@
+import { RouterView } from '@cabloy/vue-router';
+import { VNode } from 'vue';
 import { BeanRenderBase } from 'zova';
 import { Render } from 'zova-module-a-bean';
-import EssentialLink from '../essentialLink/index.vue';
-import { RouterView } from 'vue-router';
 import { ApiMenuEntity } from '../../api/menu.js';
-import { VNode } from 'vue';
+import EssentialLink from '../essentialLink/index.vue';
 
 @Render()
 export class RenderLayoutDefault extends BeanRenderBase {
@@ -25,6 +25,7 @@ export class RenderLayoutDefault extends BeanRenderBase {
       />
     );
   }
+
   _renderMenu() {
     const queryMenus = this.$$modelMenu.select();
     if (queryMenus.isLoading || !queryMenus.data) return;

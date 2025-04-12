@@ -1,5 +1,5 @@
+import { RouterLink } from '@cabloy/vue-router';
 import { classes } from 'typestyle';
-import { RouterLink } from 'vue-router';
 import { BeanControllerPageBase } from 'zova';
 import { Controller } from 'zova-module-a-bean';
 

@@ -1,4 +1,4 @@
-import type { RouteRecordRaw } from 'vue-router';
+import type { RouteRecordRaw } from '@cabloy/vue-router';
 import type { Constructable } from '../../decorator/type/constructable.js';
 import type { IMonkeyModuleSys, IMonkeySys } from '../../types/interface/monkey.js';
 import { BeanSimple } from '../../bean/beanSimple.js';

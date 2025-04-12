@@ -1,5 +1,4 @@
-import { BeanRenderBase } from 'zova';
-import { Render } from 'zova-module-a-bean';
+import { RouterView } from '@cabloy/vue-router';
 import {
   ElAside,
   ElConfigProvider,
@@ -11,9 +10,10 @@ import {
   ElMenuItem,
   ElSubMenu,
 } from 'element-plus';
-import { RouterView } from 'vue-router';
-import { ApiMenuEntity } from '../../api/menu.js';
 import { VNode } from 'vue';
+import { BeanRenderBase } from 'zova';
+import { Render } from 'zova-module-a-bean';
+import { ApiMenuEntity } from '../../api/menu.js';
 
 @Render()
 export class RenderLayoutDefault extends BeanRenderBase {
@@ -58,6 +58,7 @@ export class RenderLayoutDefault extends BeanRenderBase {
       ></ElMenuItem>
     );
   }
+
   _renderMenuItems(items: ApiMenuEntity[] | undefined) {
     if (!items) return [];
     const domItems: VNode[] = [];
@@ -67,6 +68,7 @@ export class RenderLayoutDefault extends BeanRenderBase {
     }
     return domItems;
   }
+
   _renderMenu() {
     const queryMenus = this.$$modelMenu.select();
     if (queryMenus.isLoading) return;

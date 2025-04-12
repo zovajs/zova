@@ -1,5 +1,5 @@
+import { RouterView } from '@cabloy/vue-router';
 import { VNode } from 'vue';
-import { RouterView } from 'vue-router';
 import {
   VApp,
   VAppBar,

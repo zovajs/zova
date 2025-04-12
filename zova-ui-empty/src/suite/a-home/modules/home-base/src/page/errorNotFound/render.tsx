@@ -1,7 +1,7 @@
+import { RouterLink } from '@cabloy/vue-router';
 import { BeanRenderBase } from 'zova';
 import { Render } from 'zova-module-a-bean';
 import { ScopeModule } from '../../.metadata/this.js';
-import { RouterLink } from 'vue-router';
 
 @Render()
 export class RenderPageErrorNotFound extends BeanRenderBase<ScopeModule> {

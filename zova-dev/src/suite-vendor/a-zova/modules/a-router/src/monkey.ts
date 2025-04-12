@@ -10,7 +10,7 @@ import type {
 } from 'zova';
 import type { BeanRouter } from './bean/bean.router.js';
 import * as ModuleInfo from '@cabloy/module-info';
-import { useRoute } from 'vue-router';
+import { useRoute } from '@cabloy/vue-router';
 import {
   BeanControllerPageBase,
   BeanSimple,

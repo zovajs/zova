@@ -1,7 +1,7 @@
+import type { RouteLocationNormalizedLoaded } from '@cabloy/vue-router';
 import type { ComponentInternalInstance } from 'vue';
-import type { RouteLocationNormalizedLoaded } from 'vue-router';
+import { RouterView } from '@cabloy/vue-router';
 import { KeepAlive, nextTick, Transition } from 'vue';
-import { RouterView } from 'vue-router';
 import { BeanControllerBase, cast, Use } from 'zova';
 import { Controller } from 'zova-module-a-bean';
 import { ModelTabs } from '../../model/tabs.js';

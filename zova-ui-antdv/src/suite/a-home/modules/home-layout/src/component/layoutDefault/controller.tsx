@@ -1,15 +1,15 @@
-import { BeanControllerBase, Use, PropsBase, useComputed, iconh } from 'zova';
-import { Controller } from 'zova-module-a-bean';
-import { ModelMenu } from '../../bean/model.menu.js';
-import { RouteLocationNormalizedLoaded, useRoute } from 'vue-router';
+import { RouteLocationNormalizedLoaded, useRoute } from '@cabloy/vue-router';
+import { MenuItemGroupType } from 'ant-design-vue/es/menu/src/interface.js';
 import * as TreeLodash from 'tree-lodash';
 import { Tree } from 'tree-lodash/dist/esm/types.js';
-import { MenuItemGroupType } from 'ant-design-vue/es/menu/src/interface.js';
+import { BeanControllerBase, iconh, PropsBase, Use, useComputed } from 'zova';
+import { Controller } from 'zova-module-a-bean';
 import { ApiMenuEntity } from '../../api/menu.js';
+import { ModelMenu } from '../../bean/model.menu.js';
 
 export interface Props extends PropsBase<ControllerLayoutDefault, Slots> {}
 
-export type Emits = {};
+export interface Emits {}
 
 export interface Slots {}
 

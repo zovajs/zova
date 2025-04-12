@@ -1,6 +1,6 @@
+import { RouterLink } from '@cabloy/vue-router';
 import { BeanRenderBase, ZovaIcon } from 'zova';
 import { Render } from 'zova-module-a-bean';
-import { RouterLink } from 'vue-router';
 
 @Render()
 export class RenderEssentialLink extends BeanRenderBase {

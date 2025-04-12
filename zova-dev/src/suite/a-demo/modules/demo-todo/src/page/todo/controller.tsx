@@ -1,6 +1,6 @@
 import type { ApiTodoEntity, ApiTodoGetParams } from '../../api/todo.js';
+import { RouterLink } from '@cabloy/vue-router';
 import { withModifiers } from 'vue';
-import { RouterLink } from 'vue-router';
 import { BeanControllerPageBase, Use, uuid } from 'zova';
 import { Controller } from 'zova-module-a-bean';
 import { ZPage } from 'zova-module-home-base';

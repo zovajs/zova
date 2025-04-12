@@ -1,7 +1,7 @@
+import { RouterView } from '@cabloy/vue-router';
+import { ConfigProvider, Layout, StyleProvider } from 'ant-design-vue';
 import { BeanRenderBase } from 'zova';
 import { Render } from 'zova-module-a-bean';
-import { ConfigProvider, Layout, StyleProvider } from 'ant-design-vue';
-import { RouterView } from 'vue-router';
 
 @Render()
 export class RenderLayoutEmpty extends BeanRenderBase {
