@@ -1,6 +1,6 @@
 import { BeanBase, Use } from 'zova';
 import { Bean } from 'zova-module-a-bean';
-import { IIconInfo } from '../types/icon.js';
+import { IIconInfo, IIconMeta } from '../types/icon.js';
 import { SysIcon } from './sys.icon.js';
 
 const XMLNS = 'http://www.w3.org/2000/svg';
@@ -66,21 +66,21 @@ export class BeanIcon extends BeanBase {
   }
 
   private _injectIconSSR(meta: IIconMeta) {
-    const iconModule = this._getIconModule(meta.module);
+    const iconModule = this.$$sysIcon.getIconModule(meta.module);
     const iconGroup = iconModule[meta.group];
     if (!this._iconSSR[meta.module]) this._iconSSR[meta.module] = {};
     if (!this._iconSSR[meta.module][meta.group]) this._iconSSR[meta.module][meta.group] = {};
-    this._iconSSR[meta.module][meta.group][meta.symbolId] = this._extractIconContent(iconGroup.svg, meta.symbolId)!;
+    this._iconSSR[meta.module][meta.group][meta.symbolId] = this.$$sysIcon.extractIconContent(iconGroup.svg, meta.symbolId)!;
     // ok
     return meta.symbolId;
   }
 
   private _injectIcon(meta: IIconMeta): string {
     if (process.env.SERVER) {
-      return this.self._injectIconSSR(meta);
+      return this._injectIconSSR(meta);
     }
     //
-    const iconModule = this._getIconModule(meta.module);
+    const iconModule = this.$$sysIcon.getIconModule(meta.module);
     const iconGroup = iconModule[meta.group];
     // inject container
     let domContainer = document.getElementById('zova-svg-container');
@@ -112,7 +112,7 @@ export class BeanIcon extends BeanBase {
     // inject icon
     const domIcon = document.getElementById(meta.symbolId) as unknown as SVGElement;
     if (!domIcon) {
-      const iconContent = this._extractIconContent(iconGroup.svg, meta.symbolId);
+      const iconContent = this.$$sysIcon.extractIconContent(iconGroup.svg, meta.symbolId);
       if (iconContent) {
         domGroup.insertAdjacentHTML('beforeend', iconContent);
       }

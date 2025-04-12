@@ -56,7 +56,7 @@ export class SysIcon extends BeanBase {
 
   public async parseIconGroup(moduleName: string, groupName: string): Promise<string | undefined> {
     // check if exists
-    const iconModule = this._getIconModule(moduleName);
+    const iconModule = this.getIconModule(moduleName);
     if (iconModule[groupName]) {
       await iconModule[groupName].loaded.wait();
       return iconModule[groupName].svg;
@@ -104,7 +104,7 @@ export class SysIcon extends BeanBase {
     return svg;
   }
 
-  protected _extractIconContent(svg: string | undefined, symbolId: string) {
+  extractIconContent(svg: string | undefined, symbolId: string) {
     if (!svg) return undefined;
     let pos = svg.indexOf(`'${symbolId}'`);
     if (pos === -1) pos = svg.indexOf(`"${symbolId}"`);
@@ -117,7 +117,7 @@ export class SysIcon extends BeanBase {
     // return matched && matched[0];
   }
 
-  protected _getIconModule(moduleName: string) {
+  getIconModule(moduleName: string) {
     if (!this._iconMoudles[moduleName]) {
       this._iconMoudles[moduleName] = {};
     }
