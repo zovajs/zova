@@ -1,4 +1,3 @@
-import { sys } from 'zova';
 import { locales } from '../../src/front/config/locales.js';
 <%=sysMonkey?"import { SysMonkey } from '../../src/front/config/monkeySys.js';":''%>
 <%=appMonkey?"import { AppMonkey } from '../../src/front/config/monkey.js';":''%>
@@ -6,33 +5,15 @@ import { locales } from '../../src/front/config/locales.js';
 import config from '../config.js';
 import { modulesMeta } from '../modules-meta.js';
 
+const options = {
+  modulesMeta, 
+  locales,
+  config,
+  <%=sysMonkey?'SysMonkey,':''%>
+  <%=appMonkey?'AppMonkey,':''%>
+  <%=legacy?'legacyRoutes,':''%>
+};
+
 export function getPluginZovaOptions() {
-  return {
-    modulesMeta, 
-    locales,
-    config,
-    <%=sysMonkey?'SysMonkey,':''%>
-    <%=appMonkey?'AppMonkey,':''%>
-    <%=legacy?'legacyRoutes,':''%>
-  };
-}
-
-export async function resolveRoute(req: any) {
-  // router
-  const sysRouter = await getSysRouter();
-  // resolve
-  const matched = sysRouter.resolve(req.url);
-  if (!matched || matched.name === '$:/:catchAll(.*)*') return undefined;
-  return matched;
-}
-
-let _sysRouter;
-async function getSysRouter() {
-  if (!_sysRouter) {
-    // sys
-    await sys.initialize(getPluginZovaOptions());
-    // router
-    _sysRouter = await sys.bean._getBean('a-router.sys.router', false);
-  }
-  return _sysRouter;
+  return options;
 }

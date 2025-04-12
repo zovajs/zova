@@ -1,6 +1,11 @@
 import { renderToString } from '@cabloy/vue-server-renderer';
 import env from 'app/.zova/.env.json';
-import serverEntry from 'app/dist/ssr/server/server-entry.js';
+import { getPluginZovaOptions } from 'app/.zova/app/utils.js';
+import serverEntry, { resolveRoute as resolveRouteInner } from 'app/dist/ssr/server/server-entry.js';
 import renderTemplate from './render-template.js';
 
-export { env, renderTemplate, renderToString, serverEntry };
+const resolveRoute = async function (req) {
+  return await resolveRouteInner(req, getPluginZovaOptions());
+}
+
+export { env, renderTemplate, renderToString, resolveRoute, serverEntry };
