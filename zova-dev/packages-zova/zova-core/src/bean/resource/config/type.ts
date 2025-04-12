@@ -1,6 +1,6 @@
-import type { ZovaApplication } from '../../../core/app/application.js';
+import type { ZovaSys } from '../../../core/sys/sys.js';
 
-export type TypeModuleConfig<T extends (app: ZovaApplication) => object> = ReturnType<T>;
+export type TypeModuleConfig<T extends (sys: ZovaSys) => object> = ReturnType<T>;
 
 export interface IModuleConfigBroadcast {
   bean: string | { module: string; name: string };
