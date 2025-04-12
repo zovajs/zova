@@ -75,7 +75,7 @@ export class SysIcon extends BeanBase {
 
   private async _parseIconGroupInner(moduleName: string, groupName: string): Promise<string | undefined> {
     // module
-    const module = await this.app.meta.module.use(moduleName);
+    const module = await this.sys.meta.module.use(moduleName);
     if (!module) return;
     // icons
     const icons = module.resource.icons;
