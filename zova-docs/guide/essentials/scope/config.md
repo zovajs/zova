@@ -63,7 +63,7 @@ You can use `project-level` Config to override `module-level` Config
 `src/front/config/config/config.ts`
 
 ```typescript{6-8}
-export default function (_app: ZovaApplication) {
+export default function (_sys: ZovaSys) {
   const config: ZovaConfigOptional = {};
 
   // modules
