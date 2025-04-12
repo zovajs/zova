@@ -3,7 +3,6 @@ import type { IIconInfo, IIconMeta, TypeIconModules, TypeIconSymbols } from './t
 import { reactive } from 'vue';
 import { cast } from '../../../types/utils/cast.js';
 import { BeanSimple } from '../../beanSimple.js';
-import { IconGroup } from './iconGroup.js';
 
 const XMLNS = 'http://www.w3.org/2000/svg';
 const XMLNS_LINK = 'http://www.w3.org/1999/xlink';

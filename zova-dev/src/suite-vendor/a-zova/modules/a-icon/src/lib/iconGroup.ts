@@ -1,4 +1,4 @@
-import { StateLock } from '../../../utils/stateLock.js';
+import { StateLock } from 'zova';
 
 export class IconGroup {
   public svg: string | undefined;
