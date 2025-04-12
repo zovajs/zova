@@ -1,5 +1,6 @@
-import { BeanRenderBase, ClientOnly, iconh } from 'zova';
+import { BeanRenderBase, ClientOnly } from 'zova';
 import { Render } from 'zova-module-a-bean';
+import { iconh } from 'zova-module-a-icon';
 
 @Render()
 export class RenderTheme extends BeanRenderBase {

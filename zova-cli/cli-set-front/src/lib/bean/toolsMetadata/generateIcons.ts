@@ -44,8 +44,8 @@ async function _generateFileResourceIcons(groups, moduleName) {
       groupsFrontExport.push(`'${recordId}': true;`);
     }
   }
-  const jsContent = `import 'zova';
-declare module 'zova' {
+  const jsContent = `import 'zova-module-a-icon';
+declare module 'zova-module-a-icon' {
 export interface IIconRecord {
   ${groupsFrontExport.join('\n    ').trim()}
 }

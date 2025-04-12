@@ -1,5 +1,6 @@
-import { BeanRenderBase, iconh } from 'zova';
+import { BeanRenderBase } from 'zova';
 import { Render } from 'zova-module-a-bean';
+import { iconh } from 'zova-module-a-icon';
 
 @Render()
 export class RenderUser extends BeanRenderBase {
