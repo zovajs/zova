@@ -101,14 +101,14 @@ export class BeanContainer {
   }
 
   private _getParent(): BeanContainer | null {
+    if (this.containerType === 'sys') return null;
     let parent = this.ctx?.instance?.parent;
     while (parent) {
       const beanContainerParent = parent.zova?.bean;
       if (beanContainerParent) return beanContainerParent;
       parent = parent.parent;
     }
-    if (this.containerType !== 'sys') return this.sys.bean;
-    return null;
+    return this.sys.bean;
   }
 
   runWithInstanceScopeOrAppContext(fn, tracking?: boolean) {
