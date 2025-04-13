@@ -56,3 +56,5 @@ export type DeepUnwrapRef<T> = T extends UnwrapLeaf
         }
       : UnwrapRef<T>;
 export type DistributiveOmit<T, TKeyOfAny extends keyof any> = T extends any ? Omit<T, TKeyOfAny> : never;
+
+export type TypeStateType = 'local' | 'cookie' | 'mem' | 'data';
