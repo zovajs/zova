@@ -45,6 +45,8 @@ export type QueryMetaPersisterStorage = 'cookie' | 'local' | 'db' | undefined;
 
 export type QueryMetaPersisterCookieType = 'auto' | 'boolean' | 'number' | 'date' | 'string' | undefined;
 
+export type StateType = 'local' | 'cookie' | 'mem' | 'data';
+
 export type MaxAgeTime<
   TQueryFnData = unknown,
   TError = DefaultError,
