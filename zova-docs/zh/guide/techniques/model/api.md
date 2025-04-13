@@ -35,7 +35,7 @@ export class ModelTodo {
 
 - 参见: [tanstack: useQuery](https://tanstack.com/query/latest/docs/framework/vue/reference/useQuery)
 
-## $useMutationExisting
+## $useMutationData
 
 创建 Mutation 对象，如果已经存在则直接返回
 
@@ -43,7 +43,7 @@ export class ModelTodo {
 @Model()
 export class ModelTodo {
   insert() {
-    return this.$useMutationExisting<void, ApiTodoIntertParams>({
+    return this.$useMutationData<void, ApiTodoIntertParams>({
       mutationKey: ['insert'],
       mutationFn: async params => {
         return this.scope.api.todo.insert(params);

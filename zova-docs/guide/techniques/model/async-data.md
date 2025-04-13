@@ -150,7 +150,7 @@ Same as `select`
 @Model()
 export class ModelTodo {
   insert() {
-    return this.$useMutationExisting<void, ApiTodoIntertParams>({
+    return this.$useMutationData<void, ApiTodoIntertParams>({
       mutationKey: ['insert'],
       mutationFn: async params => {
         return this.scope.api.todo.insert(params);
@@ -163,7 +163,7 @@ export class ModelTodo {
 }
 ```
 
-- Invoke `$useMutationExisting` to create a Mutation object
+- Invoke `$useMutationData` to create a Mutation object
 - Pass in `mutationKey` to ensure the uniqueness of the local cache
 - Pass in `mutationFn` to perform the mutation operation
 - Listen to the `onSuccess` method, when the data is created successfully, set the `select` query to invalid in order to re-fetch the data
@@ -194,7 +194,7 @@ async addTodo() {
 @Model()
 export class ModelTodo {
   update() {
-    return this.$useMutationExisting<void, ApiTodoUpdateParams>({
+    return this.$useMutationData<void, ApiTodoUpdateParams>({
       mutationKey: ['update'],
       mutationFn: async params => {
         return this.scope.api.todo.update(params);
@@ -208,7 +208,7 @@ export class ModelTodo {
 }
 ```
 
-- Invoke `$useMutationExisting` to create a Mutation object
+- Invoke `$useMutationData` to create a Mutation object
 - Pass in `mutationKey` to ensure the uniqueness of the local cache
 - Pass in `mutationFn` to perform the mutation operation
 - Listen to the `onSuccess` method, when the data is created successfully, set the `select` and `get` queries to invalid in order to re-fetch the data
@@ -235,7 +235,7 @@ async completeTodo(item: ApiTodoEntity) {
 @Model()
 export class ModelTodo {
   delete() {
-    return this.$useMutationExisting<void, ApiTodoDeleteParams>({
+    return this.$useMutationData<void, ApiTodoDeleteParams>({
       mutationKey: ['delete'],
       mutationFn: async params => {
         return this.scope.api.todo.delete(params);
@@ -249,7 +249,7 @@ export class ModelTodo {
 }
 ```
 
-- Invoke `$useMutationExisting` to create a Mutation object
+- Invoke `$useMutationData` to create a Mutation object
 - Pass in `mutationKey` to ensure the uniqueness of the local cache
 - Pass in `mutationFn` to perform the mutation operation
 - Listen to the `onSuccess` method, when the data is created successfully, set the `select` and `get` queries to invalid in order to re-fetch the data

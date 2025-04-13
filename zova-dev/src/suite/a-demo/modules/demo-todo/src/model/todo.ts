@@ -23,7 +23,7 @@ export class ModelTodo extends BeanModelBase {
   }
 
   insert() {
-    return this.$useMutationExisting<void, ApiTodoIntertParams>({
+    return this.$useMutationData<void, ApiTodoIntertParams>({
       mutationKey: ['insert'],
       mutationFn: async params => {
         return this.scope.api.todo.insert(params);
@@ -35,7 +35,7 @@ export class ModelTodo extends BeanModelBase {
   }
 
   update() {
-    return this.$useMutationExisting<void, ApiTodoUpdateParams>({
+    return this.$useMutationData<void, ApiTodoUpdateParams>({
       mutationKey: ['update'],
       mutationFn: async params => {
         return this.scope.api.todo.update(params);
@@ -48,7 +48,7 @@ export class ModelTodo extends BeanModelBase {
   }
 
   delete() {
-    return this.$useMutationExisting<void, ApiTodoDeleteParams>({
+    return this.$useMutationData<void, ApiTodoDeleteParams>({
       mutationKey: ['delete'],
       mutationFn: async params => {
         return this.scope.api.todo.delete(params);

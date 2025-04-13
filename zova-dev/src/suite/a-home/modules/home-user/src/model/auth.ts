@@ -20,7 +20,7 @@ export class ModelAuth extends BeanModelBase {
   }
 
   login() {
-    return this.$useMutationExisting<ApiAuthLoginResult, ApiAuthLoginParams>({
+    return this.$useMutationData<ApiAuthLoginResult, ApiAuthLoginParams>({
       mutationKey: ['login'],
       mutationFn: async params => {
         return this.scope.api.auth.login(params);
@@ -35,7 +35,7 @@ export class ModelAuth extends BeanModelBase {
   }
 
   logout() {
-    return this.$useMutationExisting<void, void>({
+    return this.$useMutationData<void, void>({
       mutationKey: ['logout'],
       mutationFn: async () => {
         return this.scope.api.auth.logout();

@@ -35,7 +35,7 @@ export class ModelTodo {
 
 - See: [tanstack: useQuery](https://tanstack.com/query/latest/docs/framework/vue/reference/useQuery)
 
-## $useMutationExisting
+## $useMutationData
 
 Create a Mutation object and return it directly if it already exists
 
@@ -43,7 +43,7 @@ Create a Mutation object and return it directly if it already exists
 @Model()
 export class ModelTodo {
   insert() {
-    return this.$useMutationExisting<void, ApiTodoIntertParams>({
+    return this.$useMutationData<void, ApiTodoIntertParams>({
       mutationKey: ['insert'],
       mutationFn: async params => {
         return this.scope.api.todo.insert(params);

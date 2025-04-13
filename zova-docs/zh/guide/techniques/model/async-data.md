@@ -150,7 +150,7 @@ export class RenderTodo {
 @Model()
 export class ModelTodo {
   insert() {
-    return this.$useMutationExisting<void, ApiTodoIntertParams>({
+    return this.$useMutationData<void, ApiTodoIntertParams>({
       mutationKey: ['insert'],
       mutationFn: async params => {
         return this.scope.api.todo.insert(params);
@@ -163,7 +163,7 @@ export class ModelTodo {
 }
 ```
 
-- 调用$useMutationExisting 创建 Mutation 对象
+- 调用$useMutationData 创建 Mutation 对象
 - 传入 mutationKey，确保本地缓存的唯一性
 - 传入 mutationFn，用于执行变更操作
 - 响应 onSuccess 方法，当数据创建成功后，将`select` query 设为无效，以便重新获取数据
@@ -194,7 +194,7 @@ async addTodo() {
 @Model()
 export class ModelTodo {
   update() {
-    return this.$useMutationExisting<void, ApiTodoUpdateParams>({
+    return this.$useMutationData<void, ApiTodoUpdateParams>({
       mutationKey: ['update'],
       mutationFn: async params => {
         return this.scope.api.todo.update(params);
@@ -208,7 +208,7 @@ export class ModelTodo {
 }
 ```
 
-- 调用$useMutationExisting 创建 Mutation 对象
+- 调用$useMutationData 创建 Mutation 对象
 - 传入 mutationKey，确保本地缓存的唯一性
 - 传入 mutationFn，用于执行变更操作
 - 响应 onSuccess 方法，当数据创建成功后，将`select`和`get` query 设为无效，以便重新获取数据
@@ -235,7 +235,7 @@ async completeTodo(item: ApiTodoEntity) {
 @Model()
 export class ModelTodo {
   delete() {
-    return this.$useMutationExisting<void, ApiTodoDeleteParams>({
+    return this.$useMutationData<void, ApiTodoDeleteParams>({
       mutationKey: ['delete'],
       mutationFn: async params => {
         return this.scope.api.todo.delete(params);
@@ -249,7 +249,7 @@ export class ModelTodo {
 }
 ```
 
-- 调用$useMutationExisting 创建 Mutation 对象
+- 调用$useMutationData 创建 Mutation 对象
 - 传入 mutationKey，确保本地缓存的唯一性
 - 传入 mutationFn，用于执行变更操作
 - 响应 onSuccess 方法，当数据创建成功后，将`select`和`get` query 设为无效，以便重新获取数据

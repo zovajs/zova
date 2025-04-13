@@ -28,7 +28,7 @@ export class BeanModelUseMutation extends BeanModelUseStateGeneral {
     });
   }
 
-  $useMutationExisting<TData = unknown, TVariables = void, TContext = unknown>(
+  $useMutationData<TData = unknown, TVariables = void, TContext = unknown>(
     mutationOptions: MaybeRefDeep<MutationObserverOptions<TData, DefaultError, TVariables, TContext>>,
     queryClient?: QueryClient,
   ): UnwrapNestedRefs<UseMutationReturnType<TData, DefaultError, TVariables, TContext>> {
