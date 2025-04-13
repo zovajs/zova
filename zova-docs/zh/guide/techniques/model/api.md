@@ -1,6 +1,6 @@
 # API
 
-## $useQueryExisting
+## $useStateData
 
 创建 Query 对象，如果已经存在则直接返回
 
@@ -8,7 +8,7 @@
 @Model()
 export class ModelTodo {
   select() {
-    return this.$useQueryExisting({
+    return this.$useStateData({
       queryKey: ['select'],
       queryFn: async () => {
         return this.scope.api.todo.select();

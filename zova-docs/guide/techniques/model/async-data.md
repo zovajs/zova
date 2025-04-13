@@ -12,7 +12,7 @@ The core of TanStack Query is to manage server-side data. Below, we demonstrate 
 @Model()
 export class ModelTodo {
   select() {
-    return this.$useQueryExisting({
+    return this.$useStateData({
       queryKey: ['select'],
       queryFn: async () => {
         return this.scope.api.todo.select();
@@ -22,8 +22,8 @@ export class ModelTodo {
 }
 ```
 
-- Invoke `$useQueryExisting` to create a Query object
-  - Why not use the `$useQuery` method? Because asynchronous data is generally loaded asynchronously when needed. Therefore, we need to ensure that the same Query object is always returned when the `select` method is invoked multiple times, so the `$useQueryExisting` method must be used
+- Invoke `$useStateData` to create a Query object
+  - Why not use the `$useQuery` method? Because asynchronous data is generally loaded asynchronously when needed. Therefore, we need to ensure that the same Query object is always returned when the `select` method is invoked multiple times, so the `$useStateData` method must be used
 - Pass in `queryKey` to ensure the uniqueness of the local cache
 - Pass in `queryFn` and call this function at the appropriate time to obtain server data
   - service.todo.select: see [Api service](../../essentials/scope/service.md)
@@ -102,7 +102,7 @@ export class ControllerPageTodo {
 export class ModelTodo {
   get(params?: ApiTodoGetParams) {
     if (!params) return undefined;
-    return this.$useQueryExisting({
+    return this.$useStateData({
       queryKey: ['get', params.id],
       queryFn: async () => {
         return this.scope.api.todo.get(params);
@@ -112,7 +112,7 @@ export class ModelTodo {
 }
 ```
 
-- Invoke `$useQueryExisting` to create a Query object
+- Invoke `$useStateData` to create a Query object
 - Pass in `queryKey` to ensure the uniqueness of the local cache
   - Since it is a single piece of data, the key field value of the entry needs to be specified
 - Pass in `queryFn` and call this function at the appropriate time to obtain server data

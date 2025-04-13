@@ -4,7 +4,7 @@ import { BeanModelBase, Model } from 'zova-module-a-model';
 @Model()
 export class ModelMenu extends BeanModelBase {
   select() {
-    return this.$useQueryExisting({
+    return this.$useStateData({
       queryKey: ['select'],
       queryFn: async () => {
         const data = await this.scope.api.menu.select();

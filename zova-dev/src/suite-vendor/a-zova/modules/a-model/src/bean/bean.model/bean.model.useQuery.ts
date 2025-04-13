@@ -181,25 +181,25 @@ export class BeanModelUseQuery extends BeanModelQuery {
     // });
   }
 
-  $useQueryMem<
+  $useStateMem<
     TQueryFnData = unknown,
     TError = DefaultError,
     TData = TQueryFnData,
     TQueryKey extends QueryKey = QueryKey,
   >(options: UndefinedInitialQueryOptions<TQueryFnData, TError, TData, TQueryKey>, queryClient?: QueryClient): TData;
-  $useQueryMem<
+  $useStateMem<
     TQueryFnData = unknown,
     TError = DefaultError,
     TData = TQueryFnData,
     TQueryKey extends QueryKey = QueryKey,
   >(options: DefinedInitialQueryOptions<TQueryFnData, TError, TData, TQueryKey>, queryClient?: QueryClient): TData;
-  $useQueryMem<
+  $useStateMem<
     TQueryFnData = unknown,
     TError = DefaultError,
     TData = TQueryFnData,
     TQueryKey extends QueryKey = QueryKey,
   >(options: UseQueryOptions<TQueryFnData, TError, TData, TQueryFnData, TQueryKey>, queryClient?: QueryClient): TData;
-  $useQueryMem(options, queryClient) {
+  $useStateMem(options, queryClient) {
     options = deepExtend({}, options, {
       enabled: false,
       staleTime: Infinity,
@@ -228,7 +228,7 @@ export class BeanModelUseQuery extends BeanModelQuery {
     // });
   }
 
-  $useQueryExisting<
+  $useStateData<
     TQueryFnData = unknown,
     TError = DefaultError,
     TData = TQueryFnData,
@@ -237,7 +237,7 @@ export class BeanModelUseQuery extends BeanModelQuery {
     options: UndefinedInitialQueryOptions<TQueryFnData, TError, TData, TQueryKey>,
     queryClient?: QueryClient,
   ): UnwrapNestedRefs<UseQueryReturnType<TData, TError>>;
-  $useQueryExisting<
+  $useStateData<
     TQueryFnData = unknown,
     TError = DefaultError,
     TData = TQueryFnData,
@@ -246,7 +246,7 @@ export class BeanModelUseQuery extends BeanModelQuery {
     options: DefinedInitialQueryOptions<TQueryFnData, TError, TData, TQueryKey>,
     queryClient?: QueryClient,
   ): UnwrapNestedRefs<UseQueryDefinedReturnType<TData, TError>>;
-  $useQueryExisting<
+  $useStateData<
     TQueryFnData = unknown,
     TError = DefaultError,
     TData = TQueryFnData,
@@ -255,7 +255,7 @@ export class BeanModelUseQuery extends BeanModelQuery {
     options: UseQueryOptions<TQueryFnData, TError, TData, TQueryFnData, TQueryKey>,
     queryClient?: QueryClient,
   ): UnwrapNestedRefs<UseQueryReturnType<TData, TError>>;
-  $useQueryExisting(options, queryClient) {
+  $useStateData(options, queryClient) {
     const queryKey = this.self._forceQueryKeyPrefix(options.queryKey);
     const queryHash = hashKey(queryKey);
     if (!this[SymbolUseQueries][queryHash]) {
@@ -266,7 +266,7 @@ export class BeanModelUseQuery extends BeanModelQuery {
 
   private _handleSyncDataGet(options, queryClient, persister) {
     const queryKey = options.queryKey;
-    const query = this.$useQueryExisting(options, queryClient);
+    const query = this.$useStateData(options, queryClient);
     if (query.data === undefined) {
       if (persister) {
         const data = this.$persisterLoad(queryKey);
@@ -290,7 +290,7 @@ export class BeanModelUseQuery extends BeanModelQuery {
 
   private _handleSyncDataSet(options, queryClient, persister, value) {
     const queryKey = options.queryKey;
-    const query = this.$useQueryExisting(options, queryClient);
+    const query = this.$useStateData(options, queryClient);
     this.$setQueryData(queryKey, value, persister);
     return query;
   }

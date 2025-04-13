@@ -4,7 +4,7 @@ import { BeanModelBase, Model } from 'zova-module-a-model';
 @Model()
 export class ModelTodo extends BeanModelBase {
   select() {
-    return this.$useQueryExisting({
+    return this.$useStateData({
       queryKey: ['select'],
       queryFn: async () => {
         return this.scope.api.todo.select();
@@ -14,7 +14,7 @@ export class ModelTodo extends BeanModelBase {
 
   get(params?: ApiTodoGetParams) {
     if (!params) return undefined;
-    return this.$useQueryExisting({
+    return this.$useStateData({
       queryKey: ['get', params.id],
       queryFn: async () => {
         return this.scope.api.todo.get(params);

@@ -1,6 +1,6 @@
 # API
 
-## $useQueryExisting
+## $useStateData
 
 Create a Query object and return it directly if it already exists
 
@@ -8,7 +8,7 @@ Create a Query object and return it directly if it already exists
 @Model()
 export class ModelTodo {
   select() {
-    return this.$useQueryExisting({
+    return this.$useStateData({
       queryKey: ['select'],
       queryFn: async () => {
         return this.scope.api.todo.select();
