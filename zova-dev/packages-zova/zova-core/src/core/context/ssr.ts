@@ -146,18 +146,11 @@ export class CtxSSR extends BeanSimple {
     }
   }
 
-  redirect(url: string): void;
-  redirect(status: number, url: string): void;
-  redirect(status: number | string, url?: string) {
-    let code: number | undefined;
-    if (typeof status === 'string') {
-      url = status;
-    } else {
-      code = status;
-    }
+  redirect(url: string, status?: 301 | 302): void {
     const error = new Error() as ErrorSSR;
-    if (code !== undefined) error.code = code;
+    error.code = status ?? 302;
     error.url = url;
+    error.message = url;
     throw error;
   }
 
