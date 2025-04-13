@@ -42,7 +42,7 @@ export class ModelUser extends BeanModelBase {
   user?: ApiUserEntity;
 
   protected async __init__() {
-    this.user = this.$useQueryLocal({
+    this.user = this.$useStateLocal({
       queryKey: ['user'],
     });
   }
@@ -50,7 +50,7 @@ export class ModelUser extends BeanModelBase {
 ```
 
 - Unlike `async data` definition, `sync data` is defined directly in the initialization method `__init__`
-- Invoke `$useQueryLocal` to create a Query object
+- Invoke `$useStateLocal` to create a Query object
 - Pass in `queryKey` to ensure the uniqueness of the local cache
 
 ### How to use
@@ -75,7 +75,7 @@ export class ModelUser extends BeanModelBase {
   token?: string;
 
   protected async __init__() {
-    this.token = this.$useQueryCookie({
+    this.token = this.$useStateCookie({
       queryKey: ['token'],
     });
   }
@@ -83,7 +83,7 @@ export class ModelUser extends BeanModelBase {
 ```
 
 - Unlike `async data` definition, `sync data` is defined directly in the initialization method `__init__`
-- Invoke `$useQueryCookie` to create a Query object
+- Invoke `$useStateCookie` to create a Query object
 - Pass in `queryKey` to ensure the uniqueness of the local cache
 
 ### How to use
@@ -110,7 +110,7 @@ export class ModelTheme extends BeanModelBase {
   cBrand: string;
 
   protected async __init__() {
-    this.cBrand = this.$useQueryMem({
+    this.cBrand = this.$useStateMem({
       queryKey: ['cBrand'],
     });
   }
@@ -118,7 +118,7 @@ export class ModelTheme extends BeanModelBase {
 ```
 
 - Unlike `async data` definition, `sync data` is defined directly in the initialization method `__init__`
-- Invoke `$useQueryMem` to create a Query object
+- Invoke `$useStateMem` to create a Query object
 - Pass in `queryKey` to ensure the uniqueness of the local cache
 
 ### How to use

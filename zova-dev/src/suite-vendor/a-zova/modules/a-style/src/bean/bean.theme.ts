@@ -24,7 +24,7 @@ export class BeanTheme extends BeanModelBase {
   protected async __init__() {
     // support admin
     const cookieThemeName = this.sys.config.ssr.cookieThemeName;
-    const useQueryMethodThemeName = cookieThemeName ? '$useQueryCookie' : '$useQueryLocal';
+    const useQueryMethodThemeName = cookieThemeName ? '$useStateCookie' : '$useStateLocal';
     this.name = this[useQueryMethodThemeName]({
       queryKey: ['themename'],
       meta: {
@@ -36,7 +36,7 @@ export class BeanTheme extends BeanModelBase {
     });
     const cookieThemeDark = this.sys.config.ssr.cookieThemeDark;
     const cookieThemeDarkDefault = this.sys.config.ssr.cookieThemeDarkDefault;
-    const useQueryMethodThemeDark = cookieThemeDark ? '$useQueryCookie' : '$useQueryLocal';
+    const useQueryMethodThemeDark = cookieThemeDark ? '$useStateCookie' : '$useStateLocal';
     this.darkMode = this[useQueryMethodThemeDark]({
       queryKey: ['themedark'],
       meta: {

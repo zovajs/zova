@@ -42,7 +42,7 @@ export class ModelUser extends BeanModelBase {
   user?: ApiUserEntity;
 
   protected async __init__() {
-    this.user = this.$useQueryLocal({
+    this.user = this.$useStateLocal({
       queryKey: ['user'],
     });
   }
@@ -50,7 +50,7 @@ export class ModelUser extends BeanModelBase {
 ```
 
 - 与`异步数据`定义不同，同步数据直接在初始化方法`__init__`中定义
-- 调用$useQueryLocal 创建 Query 对象
+- 调用$useStateLocal 创建 Query 对象
 - 传入 queryKey，确保本地缓存的唯一性
 
 ### 如何使用
@@ -75,7 +75,7 @@ export class ModelUser extends BeanModelBase {
   token?: string;
 
   protected async __init__() {
-    this.token = this.$useQueryCookie({
+    this.token = this.$useStateCookie({
       queryKey: ['token'],
     });
   }
@@ -83,7 +83,7 @@ export class ModelUser extends BeanModelBase {
 ```
 
 - 与`异步数据`定义不同，同步数据直接在初始化方法`__init__`中定义
-- 调用$useQueryCookie 创建 Query 对象
+- 调用$useStateCookie 创建 Query 对象
 - 传入 queryKey，确保本地缓存的唯一性
 
 ### 如何使用
@@ -110,7 +110,7 @@ export class ModelTheme extends BeanModelBase {
   cBrand: string;
 
   protected async __init__() {
-    this.cBrand = this.$useQueryMem({
+    this.cBrand = this.$useStateMem({
       queryKey: ['cBrand'],
     });
   }
@@ -118,7 +118,7 @@ export class ModelTheme extends BeanModelBase {
 ```
 
 - 与`异步数据`定义不同，同步数据直接在初始化方法`__init__`中定义
-- 调用$useQueryMem 创建 Query 对象
+- 调用$useStateMem 创建 Query 对象
 - 传入 queryKey，确保本地缓存的唯一性
 
 ### 如何使用

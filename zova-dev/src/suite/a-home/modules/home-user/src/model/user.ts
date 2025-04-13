@@ -11,7 +11,7 @@ export class ModelUser extends BeanModelBase {
 
   protected async __init__() {
     if (process.env.CLIENT) {
-      this.user = this.$useQueryLocal({
+      this.user = this.$useStateLocal({
         queryKey: ['user'],
       });
     } else {

@@ -92,7 +92,7 @@ this.$invalidateQueries({ queryKey: ['get', params.id] });
 
 - See: [tanstack: Query Filters](https://tanstack.com/query/latest/docs/framework/vue/guides/filters#query-filters)
 
-## $useQueryLocal
+## $useStateLocal
 
 Create a Query object based on localstorage
 
@@ -101,7 +101,7 @@ export class ModelUser extends BeanModelBase {
   user?: ApiUserEntity;
 
   protected async __init__() {
-    this.user = this.$useQueryLocal({
+    this.user = this.$useStateLocal({
       queryKey: ['user'],
     });
   }
@@ -116,7 +116,7 @@ export class ModelUser extends BeanModelBase {
   - Optional
   - Extended parameters
 
-## $useQueryCookie
+## $useStateCookie
 
 Create a Query object based on cookie
 
@@ -125,7 +125,7 @@ export class ModelUser extends BeanModelBase {
   token?: string;
 
   protected async __init__() {
-    this.token = this.$useQueryCookie({
+    this.token = this.$useStateCookie({
       queryKey: ['token'],
     });
   }
@@ -140,7 +140,7 @@ export class ModelUser extends BeanModelBase {
   - Optional
   - Extended parameters
 
-## $useQueryMem
+## $useStateMem
 
 Create a Query object based on memory
 
@@ -149,7 +149,7 @@ export class ModelTheme extends BeanModelBase {
   cBrand: string;
 
   protected async __init__() {
-    this.cBrand = this.$useQueryMem({
+    this.cBrand = this.$useStateMem({
       queryKey: ['cBrand'],
     });
   }
@@ -174,7 +174,7 @@ For example, we can store the current theme's `darkMode` in a cookie. The type o
 darkMode: ThemeDarkMode; // auto/true/false
 
 protected async __init__() {
-  this.darkMode = this.$useQueryCookie({
+  this.darkMode = this.$useStateCookie({
     queryKey: ['themedark'],
     meta: {
       persister: {

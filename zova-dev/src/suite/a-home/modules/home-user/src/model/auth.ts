@@ -11,10 +11,10 @@ export class ModelAuth extends BeanModelBase {
   $$modelUser: ModelUser;
 
   protected async __init__() {
-    this.jwt = this.$useQueryLocal({
+    this.jwt = this.$useStateLocal({
       queryKey: ['jwt'],
     });
-    this.token = this.$useQueryCookie({
+    this.token = this.$useStateCookie({
       queryKey: ['token'],
     });
   }

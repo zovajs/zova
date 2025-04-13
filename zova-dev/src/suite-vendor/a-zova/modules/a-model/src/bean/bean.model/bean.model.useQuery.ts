@@ -56,25 +56,25 @@ export class BeanModelUseQuery extends BeanModelQuery {
     });
   }
 
-  $useQueryLocal<
+  $useStateLocal<
     TQueryFnData = unknown,
     TError = DefaultError,
     TData = TQueryFnData,
     TQueryKey extends QueryKey = QueryKey,
   >(options: UndefinedInitialQueryOptions<TQueryFnData, TError, TData, TQueryKey>, queryClient?: QueryClient): TData;
-  $useQueryLocal<
+  $useStateLocal<
     TQueryFnData = unknown,
     TError = DefaultError,
     TData = TQueryFnData,
     TQueryKey extends QueryKey = QueryKey,
   >(options: DefinedInitialQueryOptions<TQueryFnData, TError, TData, TQueryKey>, queryClient?: QueryClient): TData;
-  $useQueryLocal<
+  $useStateLocal<
     TQueryFnData = unknown,
     TError = DefaultError,
     TData = TQueryFnData,
     TQueryKey extends QueryKey = QueryKey,
   >(options: UseQueryOptions<TQueryFnData, TError, TData, TQueryFnData, TQueryKey>, queryClient?: QueryClient): TData;
-  $useQueryLocal(options, queryClient) {
+  $useStateLocal(options, queryClient) {
     options = deepExtend(
       {
         meta: {
@@ -118,25 +118,25 @@ export class BeanModelUseQuery extends BeanModelQuery {
     // });
   }
 
-  $useQueryCookie<
+  $useStateCookie<
     TQueryFnData = unknown,
     TError = DefaultError,
     TData = TQueryFnData,
     TQueryKey extends QueryKey = QueryKey,
   >(options: UndefinedInitialQueryOptions<TQueryFnData, TError, TData, TQueryKey>, queryClient?: QueryClient): TData;
-  $useQueryCookie<
+  $useStateCookie<
     TQueryFnData = unknown,
     TError = DefaultError,
     TData = TQueryFnData,
     TQueryKey extends QueryKey = QueryKey,
   >(options: DefinedInitialQueryOptions<TQueryFnData, TError, TData, TQueryKey>, queryClient?: QueryClient): TData;
-  $useQueryCookie<
+  $useStateCookie<
     TQueryFnData = unknown,
     TError = DefaultError,
     TData = TQueryFnData,
     TQueryKey extends QueryKey = QueryKey,
   >(options: UseQueryOptions<TQueryFnData, TError, TData, TQueryFnData, TQueryKey>, queryClient?: QueryClient): TData;
-  $useQueryCookie(options, queryClient) {
+  $useStateCookie(options, queryClient) {
     options = deepExtend(
       {
         meta: {

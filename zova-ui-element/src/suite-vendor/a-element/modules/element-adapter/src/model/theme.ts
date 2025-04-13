@@ -7,7 +7,7 @@ export class ModelTheme extends BeanModelBase<ScopeModule> {
   cBrand: string;
 
   protected async __init__() {
-    this.cBrand = this.$useQueryMem({
+    this.cBrand = this.$useStateMem({
       queryKey: ['cBrand'],
     });
   }

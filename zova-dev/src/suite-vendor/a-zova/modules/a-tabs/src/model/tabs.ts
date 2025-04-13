@@ -46,18 +46,18 @@ export class ModelTabs extends BeanModelBase {
       meta: { defaultData: [] },
     };
     if (this.tabsOptions.persister) {
-      this.tabs = this.$useQueryLocal(queryOptionsTabs);
+      this.tabs = this.$useStateLocal(queryOptionsTabs);
     } else {
-      this.tabs = this.$useQueryMem(queryOptionsTabs);
+      this.tabs = this.$useStateMem(queryOptionsTabs);
     }
     // tabCurrentKey
     const queryOptionsTabCurrentKey: UseQueryOptions<string> = {
       queryKey: [this.tabsOptions.scene, 'tabCurrentKey'],
     };
     if (this.tabsOptions.persister) {
-      this.tabCurrentKey = this.$useQueryLocal(queryOptionsTabCurrentKey);
+      this.tabCurrentKey = this.$useStateLocal(queryOptionsTabCurrentKey);
     } else {
-      this.tabCurrentKey = this.$useQueryMem(queryOptionsTabCurrentKey);
+      this.tabCurrentKey = this.$useStateMem(queryOptionsTabCurrentKey);
     }
     // computed
     this.tabCurrentIndex = useComputed(() => {

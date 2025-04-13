@@ -92,7 +92,7 @@ this.$invalidateQueries({ queryKey: ['get', params.id] });
 
 - 参见: [tanstack: Query Filters](https://tanstack.com/query/latest/docs/framework/vue/guides/filters#query-filters)
 
-## $useQueryLocal
+## $useStateLocal
 
 创建基于 localstorage 的 Query 对象
 
@@ -101,7 +101,7 @@ export class ModelUser extends BeanModelBase {
   user?: ApiUserEntity;
 
   protected async __init__() {
-    this.user = this.$useQueryLocal({
+    this.user = this.$useStateLocal({
       queryKey: ['user'],
     });
   }
@@ -116,7 +116,7 @@ export class ModelUser extends BeanModelBase {
   - Optional
   - 扩展参数
 
-## $useQueryCookie
+## $useStateCookie
 
 创建基于 cookie 的 Query 对象
 
@@ -125,7 +125,7 @@ export class ModelUser extends BeanModelBase {
   token?: string;
 
   protected async __init__() {
-    this.token = this.$useQueryCookie({
+    this.token = this.$useStateCookie({
       queryKey: ['token'],
     });
   }
@@ -140,7 +140,7 @@ export class ModelUser extends BeanModelBase {
   - Optional
   - 扩展参数
 
-## $useQueryMem
+## $useStateMem
 
 创建基于 memory 的 Query 对象
 
@@ -149,7 +149,7 @@ export class ModelTheme extends BeanModelBase {
   cBrand: string;
 
   protected async __init__() {
-    this.cBrand = this.$useQueryMem({
+    this.cBrand = this.$useStateMem({
       queryKey: ['cBrand'],
     });
   }
@@ -174,7 +174,7 @@ export class ModelTheme extends BeanModelBase {
 darkMode: ThemeDarkMode; // auto/true/false
 
 protected async __init__() {
-  this.darkMode = this.$useQueryCookie({
+  this.darkMode = this.$useStateCookie({
     queryKey: ['themedark'],
     meta: {
       persister: {
