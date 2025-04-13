@@ -1,0 +1,261 @@
+import type {
+  DefaultError,
+  Query,
+  QueryClient,
+  QueryKey,
+  UseQueryDefinedReturnType,
+  UseQueryOptions,
+  UseQueryReturnType,
+} from '@tanstack/vue-query';
+import type { UnwrapNestedRefs } from 'vue';
+import type { DefinedInitialQueryOptions, UndefinedInitialQueryOptions } from '../../common/types.js';
+import {
+  hashKey,
+} from '@tanstack/vue-query';
+import { deepExtend, useCustomRef } from 'zova';
+import { BeanModelUseQuery } from './bean.model.useQuery.js';
+
+const SymbolUseQueries = Symbol('SymbolUseQueries');
+
+export class BeanModelUseState extends BeanModelUseQuery {
+  private [SymbolUseQueries]: Record<string, unknown> = {};
+
+  $useStateLocal<
+    TQueryFnData = unknown,
+    TError = DefaultError,
+    TData = TQueryFnData,
+    TQueryKey extends QueryKey = QueryKey,
+  >(options: UndefinedInitialQueryOptions<TQueryFnData, TError, TData, TQueryKey>, queryClient?: QueryClient): TData;
+  $useStateLocal<
+    TQueryFnData = unknown,
+    TError = DefaultError,
+    TData = TQueryFnData,
+    TQueryKey extends QueryKey = QueryKey,
+  >(options: DefinedInitialQueryOptions<TQueryFnData, TError, TData, TQueryKey>, queryClient?: QueryClient): TData;
+  $useStateLocal<
+    TQueryFnData = unknown,
+    TError = DefaultError,
+    TData = TQueryFnData,
+    TQueryKey extends QueryKey = QueryKey,
+  >(options: UseQueryOptions<TQueryFnData, TError, TData, TQueryFnData, TQueryKey>, queryClient?: QueryClient): TData;
+  $useStateLocal(options, queryClient) {
+    options = deepExtend(
+      {
+        meta: {
+          persister: {
+            serializeDefault: (obj?: Query) => {
+              return this.$serializeLocal(obj);
+            },
+            deserializeDefault: (value?: string) => {
+              return this.$deserializeLocal(value);
+            },
+          },
+        },
+      },
+      options,
+      {
+        enabled: false,
+        staleTime: Infinity,
+        meta: {
+          persister: { storage: 'local', sync: true },
+        },
+      },
+    );
+    const self = this;
+    return useCustomRef(() => {
+      return {
+        get() {
+          return self._handleSyncDataGet(options, queryClient, true);
+        },
+        set(value) {
+          self._handleSyncDataSet(options, queryClient, true, value);
+        },
+      };
+    });
+  // return useComputed({
+  //   get() {
+  //     return self._handleSyncDataGet(options, queryClient, true);
+  //   },
+  //   set(value) {
+  //     self._handleSyncDataSet(options, queryClient, true, value);
+  //   },
+  // });
+  }
+
+  $useStateCookie<
+    TQueryFnData = unknown,
+    TError = DefaultError,
+    TData = TQueryFnData,
+    TQueryKey extends QueryKey = QueryKey,
+  >(options: UndefinedInitialQueryOptions<TQueryFnData, TError, TData, TQueryKey>, queryClient?: QueryClient): TData;
+  $useStateCookie<
+    TQueryFnData = unknown,
+    TError = DefaultError,
+    TData = TQueryFnData,
+    TQueryKey extends QueryKey = QueryKey,
+  >(options: DefinedInitialQueryOptions<TQueryFnData, TError, TData, TQueryKey>, queryClient?: QueryClient): TData;
+  $useStateCookie<
+    TQueryFnData = unknown,
+    TError = DefaultError,
+    TData = TQueryFnData,
+    TQueryKey extends QueryKey = QueryKey,
+  >(options: UseQueryOptions<TQueryFnData, TError, TData, TQueryFnData, TQueryKey>, queryClient?: QueryClient): TData;
+  $useStateCookie(options, queryClient) {
+    options = deepExtend(
+      {
+        meta: {
+          persister: {
+            serializeDefault: (obj?: Query) => {
+              return this.$serializeCookie(obj);
+            },
+            deserializeDefault: (value?: string) => {
+              const cookieType = options.meta.persister.cookieType;
+              return this.$deserializeCookie(this._cookieCoerce(value, cookieType));
+            },
+          },
+        },
+      },
+      options,
+      {
+        enabled: false,
+        staleTime: Infinity,
+        meta: {
+          persister: { storage: 'cookie', sync: true },
+        },
+      },
+    );
+    const self = this;
+    return useCustomRef(() => {
+      return {
+        get() {
+          return self._handleSyncDataGet(options, queryClient, true);
+        },
+        set(value) {
+          self._handleSyncDataSet(options, queryClient, true, value);
+        },
+      };
+    });
+  // return useComputed({
+  //   get() {
+  //     return self._handleSyncDataGet(options, queryClient, true);
+  //   },
+  //   set(value) {
+  //     self._handleSyncDataSet(options, queryClient, true, value);
+  //   },
+  // });
+  }
+
+  $useStateMem<
+    TQueryFnData = unknown,
+    TError = DefaultError,
+    TData = TQueryFnData,
+    TQueryKey extends QueryKey = QueryKey,
+  >(options: UndefinedInitialQueryOptions<TQueryFnData, TError, TData, TQueryKey>, queryClient?: QueryClient): TData;
+  $useStateMem<
+    TQueryFnData = unknown,
+    TError = DefaultError,
+    TData = TQueryFnData,
+    TQueryKey extends QueryKey = QueryKey,
+  >(options: DefinedInitialQueryOptions<TQueryFnData, TError, TData, TQueryKey>, queryClient?: QueryClient): TData;
+  $useStateMem<
+    TQueryFnData = unknown,
+    TError = DefaultError,
+    TData = TQueryFnData,
+    TQueryKey extends QueryKey = QueryKey,
+  >(options: UseQueryOptions<TQueryFnData, TError, TData, TQueryFnData, TQueryKey>, queryClient?: QueryClient): TData;
+  $useStateMem(options, queryClient) {
+    options = deepExtend({}, options, {
+      enabled: false,
+      staleTime: Infinity,
+      meta: {
+        persister: false,
+      },
+    });
+    const self = this;
+    return useCustomRef(() => {
+      return {
+        get() {
+          return self._handleSyncDataGet(options, queryClient, false);
+        },
+        set(value) {
+          self._handleSyncDataSet(options, queryClient, false, value);
+        },
+      };
+    });
+  // return useComputed({
+  //   get() {
+  //     return self._handleSyncDataGet(options, queryClient, false);
+  //   },
+  //   set(value) {
+  //     self._handleSyncDataSet(options, queryClient, false, value);
+  //   },
+  // });
+  }
+
+  $useStateData<
+    TQueryFnData = unknown,
+    TError = DefaultError,
+    TData = TQueryFnData,
+    TQueryKey extends QueryKey = QueryKey,
+  >(
+    options: UndefinedInitialQueryOptions<TQueryFnData, TError, TData, TQueryKey>,
+    queryClient?: QueryClient,
+  ): UnwrapNestedRefs<UseQueryReturnType<TData, TError>>;
+  $useStateData<
+    TQueryFnData = unknown,
+    TError = DefaultError,
+    TData = TQueryFnData,
+    TQueryKey extends QueryKey = QueryKey,
+  >(
+    options: DefinedInitialQueryOptions<TQueryFnData, TError, TData, TQueryKey>,
+    queryClient?: QueryClient,
+  ): UnwrapNestedRefs<UseQueryDefinedReturnType<TData, TError>>;
+  $useStateData<
+    TQueryFnData = unknown,
+    TError = DefaultError,
+    TData = TQueryFnData,
+    TQueryKey extends QueryKey = QueryKey,
+  >(
+    options: UseQueryOptions<TQueryFnData, TError, TData, TQueryFnData, TQueryKey>,
+    queryClient?: QueryClient,
+  ): UnwrapNestedRefs<UseQueryReturnType<TData, TError>>;
+  $useStateData(options, queryClient) {
+    const queryKey = this.self._forceQueryKeyPrefix(options.queryKey);
+    const queryHash = hashKey(queryKey);
+    if (!this[SymbolUseQueries][queryHash]) {
+      this[SymbolUseQueries][queryHash] = this.$useQuery(options, queryClient);
+    }
+    return this[SymbolUseQueries][queryHash];
+  }
+
+  private _handleSyncDataGet(options, queryClient, persister) {
+    const queryKey = options.queryKey;
+    const query = this.$useStateData(options, queryClient);
+    if (query.data === undefined) {
+      if (persister) {
+        const data = this.$persisterLoad(queryKey);
+        if (data !== undefined) {
+          this.$setQueryData(queryKey, data, false);
+        }
+      }
+      if (query.data === undefined) {
+        let defaultData = options.meta?.defaultData;
+        if (typeof defaultData === 'function') {
+          defaultData = defaultData();
+        }
+        if (defaultData !== undefined) {
+          // need not persister save
+          this.$setQueryData(queryKey, defaultData, false);
+        }
+      }
+    }
+    return query.data;
+  }
+
+  private _handleSyncDataSet(options, queryClient, persister, value) {
+    const queryKey = options.queryKey;
+    const query = this.$useStateData(options, queryClient);
+    this.$setQueryData(queryKey, value, persister);
+    return query;
+  }
+}

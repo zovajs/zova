@@ -12,11 +12,11 @@ import {
   useMutation,
 } from '@tanstack/vue-query';
 import { cast } from 'zova';
-import { BeanModelUseQuery } from './bean.model.useQuery.js';
+import { BeanModelUseState } from './bean.model.useState.js';
 
 const SymbolUseMutations = Symbol('SymbolUseMutations');
 
-export class BeanModelUseMutation extends BeanModelUseQuery {
+export class BeanModelUseMutation extends BeanModelUseState {
   private [SymbolUseMutations]: Record<string, unknown> = {};
 
   $useMutation<TData = unknown, TVariables = void, TContext = unknown>(
