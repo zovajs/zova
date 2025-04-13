@@ -17,58 +17,19 @@ export class BeanModelUseStateGeneral extends BeanModelUseState {
     TError = DefaultError,
     TData = TQueryFnData,
     TQueryKey extends QueryKey = QueryKey,
-  >(stateType: 'local', options: UndefinedInitialQueryOptions<TQueryFnData, TError, TData, TQueryKey>, queryClient?: QueryClient): TData;
+  >(stateType: 'local' | 'cookie' | 'mem', options: UndefinedInitialQueryOptions<TQueryFnData, TError, TData, TQueryKey>, queryClient?: QueryClient): TData;
   $useState<
     TQueryFnData = unknown,
     TError = DefaultError,
     TData = TQueryFnData,
     TQueryKey extends QueryKey = QueryKey,
-  >(stateType: 'local', options: DefinedInitialQueryOptions<TQueryFnData, TError, TData, TQueryKey>, queryClient?: QueryClient): TData;
+  >(stateType: 'local' | 'cookie' | 'mem', options: DefinedInitialQueryOptions<TQueryFnData, TError, TData, TQueryKey>, queryClient?: QueryClient): TData;
   $useState<
     TQueryFnData = unknown,
     TError = DefaultError,
     TData = TQueryFnData,
     TQueryKey extends QueryKey = QueryKey,
-  >(stateType: 'local', options: UseQueryOptions<TQueryFnData, TError, TData, TQueryFnData, TQueryKey>, queryClient?: QueryClient): TData;
-
-  $useState<
-    TQueryFnData = unknown,
-    TError = DefaultError,
-    TData = TQueryFnData,
-    TQueryKey extends QueryKey = QueryKey,
-  >(stateType: 'cookie', options: UndefinedInitialQueryOptions<TQueryFnData, TError, TData, TQueryKey>, queryClient?: QueryClient): TData;
-  $useState<
-    TQueryFnData = unknown,
-    TError = DefaultError,
-    TData = TQueryFnData,
-    TQueryKey extends QueryKey = QueryKey,
-  >(stateType: 'cookie', options: DefinedInitialQueryOptions<TQueryFnData, TError, TData, TQueryKey>, queryClient?: QueryClient): TData;
-  $useState<
-    TQueryFnData = unknown,
-    TError = DefaultError,
-    TData = TQueryFnData,
-    TQueryKey extends QueryKey = QueryKey,
-  >(stateType: 'cookie', options: UseQueryOptions<TQueryFnData, TError, TData, TQueryFnData, TQueryKey>, queryClient?: QueryClient): TData;
-
-  $useState<
-    TQueryFnData = unknown,
-    TError = DefaultError,
-    TData = TQueryFnData,
-    TQueryKey extends QueryKey = QueryKey,
-  >(stateType: 'mem', options: UndefinedInitialQueryOptions<TQueryFnData, TError, TData, TQueryKey>, queryClient?: QueryClient): TData;
-  $useState<
-    TQueryFnData = unknown,
-    TError = DefaultError,
-    TData = TQueryFnData,
-    TQueryKey extends QueryKey = QueryKey,
-  >(stateType: 'mem', options: DefinedInitialQueryOptions<TQueryFnData, TError, TData, TQueryKey>, queryClient?: QueryClient): TData;
-  $useState<
-    TQueryFnData = unknown,
-    TError = DefaultError,
-    TData = TQueryFnData,
-    TQueryKey extends QueryKey = QueryKey,
-  >(stateType: 'mem', options: UseQueryOptions<TQueryFnData, TError, TData, TQueryFnData, TQueryKey>, queryClient?: QueryClient): TData;
-
+  >(stateType: 'local' | 'cookie' | 'mem', options: UseQueryOptions<TQueryFnData, TError, TData, TQueryFnData, TQueryKey>, queryClient?: QueryClient): TData;
   $useState<
     TQueryFnData = unknown,
     TError = DefaultError,
@@ -99,7 +60,6 @@ export class BeanModelUseStateGeneral extends BeanModelUseState {
     options: UseQueryOptions<TQueryFnData, TError, TData, TQueryFnData, TQueryKey>,
     queryClient?: QueryClient,
   ): UnwrapNestedRefs<UseQueryReturnType<TData, TError>>;
-
   $useState(stateType: StateType, options, queryClient) {
     switch (stateType) {
       case 'local': return this.$useStateLocal(options, queryClient);

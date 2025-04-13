@@ -24,32 +24,36 @@ export class BeanTheme extends BeanModelBase {
   protected async __init__() {
     // support admin
     const cookieThemeName = this.sys.config.ssr.cookieThemeName;
-    const useQueryMethodThemeName = cookieThemeName ? '$useStateCookie' : '$useStateLocal';
-    this.name = this[useQueryMethodThemeName]({
-      queryKey: ['themename'],
-      meta: {
-        persister: {
-          maxAge: this.scope.config.model.themename.persister.maxAge,
+    this.name = this.$useState (
+      cookieThemeName ? 'cookie' : 'local',
+      {
+        queryKey: ['themename'],
+        meta: {
+          persister: {
+            maxAge: this.scope.config.model.themename.persister.maxAge,
+          },
+          defaultData: this.scope.config.defaultTheme,
         },
-        defaultData: this.scope.config.defaultTheme,
       },
-    });
+    );
     const cookieThemeDark = this.sys.config.ssr.cookieThemeDark;
     const cookieThemeDarkDefault = this.sys.config.ssr.cookieThemeDarkDefault;
-    const useQueryMethodThemeDark = cookieThemeDark ? '$useStateCookie' : '$useStateLocal';
-    this.darkMode = this[useQueryMethodThemeDark]({
-      queryKey: ['themedark'],
-      meta: {
-        persister: {
-          maxAge: this.scope.config.model.themename.persister.maxAge,
-          deserialize: (value, deserializeDefault) => {
-            if (cookieThemeDark && value === 'auto') value = cookieThemeDarkDefault;
-            return deserializeDefault(value);
+    this.darkMode = this.$useState(
+      cookieThemeDark ? 'cookie' : 'local',
+      {
+        queryKey: ['themedark'],
+        meta: {
+          persister: {
+            maxAge: this.scope.config.model.themename.persister.maxAge,
+            deserialize: (value, deserializeDefault) => {
+              if (cookieThemeDark && value === 'auto') value = cookieThemeDarkDefault;
+              return deserializeDefault(value);
+            },
           },
+          defaultData: cookieThemeDark ? cookieThemeDarkDefault : 'auto',
         },
-        defaultData: cookieThemeDark ? cookieThemeDarkDefault : 'auto',
       },
-    });
+    );
     this._updateDark();
 
     watch(
