@@ -28,6 +28,15 @@ export class SysUtil extends BeanSimple {
       },
     );
   }
+
+  public async resolveRoute(url: string) {
+    // router
+    const sysRouter = await this.sys.bean._getBean('a-router.sys.router' as never, false) as any;
+    // resolve
+    const matched = sysRouter.resolve(url);
+    if (!matched || matched.name === '$:/:catchAll(.*)*') return undefined;
+    return matched;
+  }
 }
 
 const PATH_PARAM_RE = /\{([^{}/]+)\}/g;

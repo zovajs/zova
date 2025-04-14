@@ -1,6 +1,5 @@
 import { renderToString } from '@cabloy/vue-server-renderer';
-import { env } from 'app/.zova/.env.js';
-import serverEntry, { resolveRoute } from 'app/dist/ssr/server/server-entry.js';
+import serverEntry, { initialize } from 'app/dist/ssr/server/server-entry.js';
 import renderTemplate from './render-template.js';
 
-export { env, renderTemplate, renderToString, resolveRoute, serverEntry };
+export { renderTemplate, renderToString, initialize };

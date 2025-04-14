@@ -78,22 +78,7 @@ export default async ssrContext => {
     return app;
 }
 
-export async function resolveRoute(req) {
-  // router
-  const sysRouter = await getSysRouter();
-  // resolve
-  const matched = sysRouter.resolve(req.url);
-  if (!matched || matched.name === '$:/:catchAll(.*)*') return undefined;
-  return matched;
-}
-
-let _sysRouter;
-async function getSysRouter() {
-  if (!_sysRouter) {
-    // sys
-    await sys.initialize(getPluginZovaOptions());
-    // router
-    _sysRouter = await sys.bean._getBean('a-router.sys.router', false);
-  }
-  return _sysRouter;
+export async function initialize(envRuntime) {
+  await sys.initialize(getPluginZovaOptions(), envRuntime);
+  return sys;
 }
