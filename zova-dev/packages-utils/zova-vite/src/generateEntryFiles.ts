@@ -89,7 +89,7 @@ export async function generateEntryFiles(
     if (configMeta.mode !== 'production') return;
     const env2 = {};
     for (const key in env) {
-      env2[`ZOVA_${key}`] = env[key];
+      env2[key] = env[key];
     }
     const envFile = path.join(configOptions.appDir, configOptions.runtimeDir, '.env.json');
     await saveJSONFile(envFile, env2);

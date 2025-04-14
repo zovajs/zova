@@ -49,7 +49,7 @@ export function generateConfigDefine(env, translates?: string[]) {
     if (!translates || translates.includes(key)) {
       acc[`process.env.${key}`] = JSON.stringify(env[key]);
     } else {
-      acc[`process.env.${key}`] = `process.env.ZOVA_${key}`;
+      acc[`process.env.${key}`] = `throw new Error('process.env.${key}->app.env.${key}')`;
     }
   }
   return acc;
