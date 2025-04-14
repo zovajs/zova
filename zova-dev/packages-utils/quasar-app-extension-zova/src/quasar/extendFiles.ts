@@ -121,7 +121,7 @@ export function extendFilesTwo(api: IndexAPI, _flavor: string) {
     fse.writeFileSync(fileSrc, contentNew);
   }
 
-  // ssr-devserver.js
+  // ssr-builder.js
   async function _handleSSRBuilder() {
     const fileSrc = api.resolve.cli('lib/modes/ssr/ssr-builder.js');
     const fileSrcBak = api.resolve.cli('lib/modes/ssr/ssr-builder-origin.js');
