@@ -2,4 +2,4 @@ import { renderToString } from '@cabloy/vue-server-renderer';
 import serverEntry, { initialize } from 'app/dist/ssr/server/server-entry.js';
 import renderTemplate from './render-template.js';
 
-export { renderTemplate, renderToString, initialize };
+export { initialize, renderTemplate, renderToString, serverEntry };
