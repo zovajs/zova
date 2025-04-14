@@ -16,6 +16,8 @@ export class ZovaSys {
   util: SysUtil;
   meta: SysMeta;
   config: ZovaConfig;
+  // eslint-disable-next-line no-undef
+  env: NodeJS.ProcessEnv;
   constant: ZovaConstant;
 
   constructor() {
@@ -25,14 +27,21 @@ export class ZovaSys {
   }
 
   /** @internal */
-  public async initialize({ modulesMeta, locales, config, SysMonkey, legacyRoutes }: PluginZovaOptions) {
+  // eslint-disable-next-line no-undef
+  public async initialize({ modulesMeta, locales, config, env, SysMonkey, legacyRoutes }: PluginZovaOptions, envRuntime?: NodeJS.ProcessEnv) {
     if (!this[SymbolSysInitializePromise]) {
-      this[SymbolSysInitializePromise] = this._initializeInner({ modulesMeta, locales, config, SysMonkey, legacyRoutes });
+      this[SymbolSysInitializePromise] = this._initializeInner({ modulesMeta, locales, config, env, SysMonkey, legacyRoutes }, envRuntime);
     }
     return this[SymbolSysInitializePromise];
   }
 
-  private async _initializeInner({ modulesMeta, locales, config, SysMonkey, legacyRoutes }: PluginZovaOptions) {
+  private async _initializeInner(
+    { modulesMeta, locales, config, env, SysMonkey, legacyRoutes }: PluginZovaOptions,
+    // eslint-disable-next-line no-undef
+    envRuntime?: Partial<NodeJS.ProcessEnv>,
+  ) {
+    // env
+    this.env = this._prepareEnv(env, envRuntime);
     // monkey
     await this.meta.initialize(SysMonkey, legacyRoutes);
     // component
@@ -56,11 +65,23 @@ export class ZovaSys {
   }
 
   private async _combineConfig(config: TypeModuleResourceConfig[]): Promise<ZovaConfig> {
-    const _config = deepExtend({}, configDefault());
+    const _config = deepExtend({}, configDefault(this.env));
     for (const configFn of config) {
       deepExtend(_config, await configFn(this, _config.meta));
     }
     return _config;
+  }
+
+  // eslint-disable-next-line no-undef
+  private _prepareEnv(env: NodeJS.ProcessEnv, envRuntime?: Partial<NodeJS.ProcessEnv>): NodeJS.ProcessEnv {
+    if (!envRuntime) return env;
+    const env2 = { ...env };
+    for (const key of Object.keys(env2)) {
+      if (envRuntime[key] !== undefined) {
+        env2[key] = envRuntime[key];
+      }
+    }
+    return env2;
   }
 }
 

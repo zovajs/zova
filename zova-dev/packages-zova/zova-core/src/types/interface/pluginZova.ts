@@ -14,6 +14,8 @@ export interface PluginZovaOptions {
   modulesMeta: PluginZovaModulesMeta;
   locales: ZovaLocaleOptionalMap;
   config: TypeModuleResourceConfig[];
+  // eslint-disable-next-line no-undef
+  env: NodeJS.ProcessEnv;
   SysMonkey?: Constructable<IMonkeyModuleSys & IMonkeySys>;
   AppMonkey?: Constructable<IMonkeyModule & IMonkeyApp & IMonkeyController>;
   legacyRoutes?: RouteRecordRaw[];
