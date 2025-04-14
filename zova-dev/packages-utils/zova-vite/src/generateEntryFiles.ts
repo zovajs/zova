@@ -97,8 +97,8 @@ export async function generateEntryFiles(
       }
     }
     // src
-    const fileSrc = resolveTemplatePath('.env.ejs');
-    const fileDest = path.join(configOptions.appDir, configOptions.runtimeDir, '.env.ts');
+    const fileSrc = resolveTemplatePath('env.ejs');
+    const fileDest = path.join(configOptions.appDir, configOptions.runtimeDir, 'env.ts');
     await copyTemplateFile(fileSrc, fileDest, { envNormal: JSON.stringify(envNormal, null, 2), envSecret: JSON.stringify(envSecret, null, 2) });
   }
 
