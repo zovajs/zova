@@ -3,7 +3,6 @@ import type { TypeComponentLayoutRecord } from '../../bean/resource/component/ty
 import type { ILocalInfos } from '../../bean/resource/locale/type.js';
 import type { ZovaConfigRoutes } from '../../bean/resource/page/type.js';
 import type { IBeanScopeConfig } from '../../bean/type.js';
-import type { ZovaConfigEnv } from '../../types/utils/env.js';
 import type { PowerPartial } from '../../types/utils/powerPartial.js';
 import type { ConfigLogger } from '../logger/types.js';
 import { combineLoggerDefault } from '../logger/loggerDefault.js';
@@ -17,19 +16,6 @@ export function configDefault(env: NodeJS.ProcessEnv) {
       flavor: env.META_FLAVOR,
       mode: env.META_MODE,
       appMode: env.META_APP_MODE,
-    },
-    env: {
-      appRouterMode: env.APP_ROUTER_MODE,
-      appRouterBase: env.APP_ROUTER_BASE,
-      appPublicPath: env.APP_PUBLIC_PATH,
-      appName: env.APP_NAME,
-      appTitle: env.APP_TITLE,
-      appVersion: env.APP_VERSION,
-      ssr: env.SSR,
-      server: env.SERVER,
-      client: env.CLIENT,
-      dev: env.DEV,
-      prod: env.PROD,
     },
     api: {
       baseURL: process.env.SERVER ? process.env.SSR_API_BASE_URL : process.env.API_BASE_URL,

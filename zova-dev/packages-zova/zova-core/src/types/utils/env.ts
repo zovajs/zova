@@ -1,17 +1,14 @@
 import type { ZovaMetaAppMode, ZovaMetaFlavor, ZovaMetaMode } from '@cabloy/module-info';
 
 export interface ZovaConfigEnv {
-  appRouterMode: 'hash' | 'history' | 'abstract' | undefined;
-  appRouterBase: string | undefined;
-  appPublicPath: string | undefined;
-  appName: string | undefined;
-  appTitle: string | undefined;
-  appVersion: string | undefined;
-  ssr: boolean;
-  server: boolean;
-  client: boolean;
-  dev: boolean;
-  prod: boolean;
+  APP_ROUTER_MODE: 'hash' | 'history' | 'abstract' | undefined;
+  APP_ROUTER_BASE: string | undefined;
+  APP_PUBLIC_PATH: string | undefined;
+  APP_NAME: string | undefined;
+  APP_TITLE: string | undefined;
+  APP_VERSION: string | undefined;
+  DEV_SERVER_HOST: string | undefined;
+  DEV_SERVER_PORT: string | undefined;
 }
 
 declare global {
@@ -21,14 +18,6 @@ declare global {
       META_FLAVOR: ZovaMetaFlavor;
       META_MODE: ZovaMetaMode;
       META_APP_MODE: ZovaMetaAppMode;
-      APP_ROUTER_MODE: 'hash' | 'history' | 'abstract' | undefined;
-      APP_ROUTER_BASE: string | undefined;
-      APP_PUBLIC_PATH: string | undefined;
-      APP_NAME: string | undefined;
-      APP_TITLE: string | undefined;
-      APP_VERSION: string | undefined;
-      DEV_SERVER_HOST: string | undefined;
-      DEV_SERVER_PORT: string | undefined;
       // compatible with quasar
       // @ts-ignore ignore
       SSR: boolean;

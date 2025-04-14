@@ -1,5 +1,6 @@
 import type { TypeModuleResourceConfig } from '../../types/interface/module.js';
 import type { PluginZovaOptions } from '../../types/interface/pluginZova.js';
+import type { ZovaConfigEnv } from '../../types/utils/env.js';
 import type { ZovaConfig } from './config.js';
 import type { ZovaConstant } from './constant.js';
 import { BeanContainer } from '../../bean/beanContainer.js';
@@ -16,8 +17,7 @@ export class ZovaSys {
   util: SysUtil;
   meta: SysMeta;
   config: ZovaConfig;
-  // eslint-disable-next-line no-undef
-  env: NodeJS.ProcessEnv;
+  env: ZovaConfigEnv;
   constant: ZovaConstant;
 
   constructor() {
