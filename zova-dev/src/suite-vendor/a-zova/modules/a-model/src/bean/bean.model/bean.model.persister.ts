@@ -140,11 +140,11 @@ export class BeanModelPersister extends BeanModelLast {
   }
 
   protected _getPersisterPrefix() {
-    return `${this.sys.config.env.appName}-query`;
+    return `${this.sys.env.APP_NAME}-query`;
   }
 
   protected _getPersisterBuster() {
-    return this.sys.config.env.appVersion;
+    return this.sys.env.APP_VERSION;
   }
 
   protected _forceQueryKeyPrefix(queryKey?: QueryKey): QueryKey {

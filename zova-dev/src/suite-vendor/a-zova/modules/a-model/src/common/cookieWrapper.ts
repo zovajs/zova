@@ -27,7 +27,7 @@ export class CookieWrapper extends BeanSimple {
       opts.expires = new Date(Date.now() + maxAge);
     }
     if (!opts.path) {
-      opts.path = `/${this.sys.config.env.appPublicPath || ''}`;
+      opts.path = `/${this.sys.env.APP_PUBLIC_PATH || ''}`;
     }
     this.app.meta.cookie.setItem(key, value, opts);
   }
