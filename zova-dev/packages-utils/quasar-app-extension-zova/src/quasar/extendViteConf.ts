@@ -59,14 +59,8 @@ export function extendViteConf(context: ConfigContext) {
       // process.env.CLIENT = env.CLIENT; // should not set if false
     }
     // define
-    if (opts.isClient || context.configMeta?.mode === 'development') {
-      const define = generateConfigDefine(env);
-      conf.define = mergeConfig(conf.define || {}, define);
-    } else {
-      // env: special for dist files
-      const define = generateConfigDefine(env, ['NODE_ENV', 'META_FLAVOR', 'META_MODE', 'META_APP_MODE', 'SERVER', 'CLIENT', 'DEV', 'PROD', 'SSR']);
-      conf.define = mergeConfig(conf.define || {}, define);
-    }
+    const define = generateConfigDefine(env, ['NODE_ENV', 'META_FLAVOR', 'META_MODE', 'META_APP_MODE', 'SERVER', 'CLIENT', 'DEV', 'PROD', 'SSR']);
+    conf.define = mergeConfig(conf.define || {}, define);
     // ssr
     if (opts.isServer && (context.configMeta?.mode === 'development')) {
       conf.ssr = mergeConfig(conf.ssr || {}, {
