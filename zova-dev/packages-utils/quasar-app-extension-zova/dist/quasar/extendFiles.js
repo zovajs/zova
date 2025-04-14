@@ -42,8 +42,6 @@ export function extendFilesTwo(api, _flavor) {
         fse.copyFileSync(resolveTemplatePath('entry/client-entry.js_'), api.resolve.cli('templates/entry/client-entry.js'));
         // server-entry.js
         fse.copyFileSync(resolveTemplatePath('entry/server-entry.js_'), api.resolve.cli('templates/entry/server-entry.js'));
-        // ssr: middlewares/env.ts
-        fse.copyFileSync(resolveTemplatePath('modes/ssr/middlewares/env.ts'), api.resolve.ssr('middlewares/env.ts'));
         // ssr: html-template.js
         await _handleSSRHtmlTemplate();
         // ssr: ssr-devserver.js
