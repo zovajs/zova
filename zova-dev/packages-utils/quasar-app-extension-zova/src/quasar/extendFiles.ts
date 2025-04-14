@@ -16,12 +16,15 @@ export function extendFilesOne(api: IndexAPI, flavor: string) {
       // prod
       if (api.ctx.prod) {
         copyTemplateIfNeed(resolveTemplatePath('env/.env.ssr.production'), api.resolve.app('env/.env.ssr.production'));
+        copyTemplateIfNeed(resolveTemplatePath('env/.env.ssr.vona.production'), api.resolve.app('env/.env.ssr.vona.production'));
       }
       // admin/front
       if (flavor === 'admin') {
         copyTemplateIfNeed(resolveTemplatePath('env/.env.ssr.admin'), api.resolve.app('env/.env.ssr.admin'));
       } else if (flavor === 'front') {
         copyTemplateIfNeed(resolveTemplatePath('env/.env.ssr.front'), api.resolve.app('env/.env.ssr.front'));
+      } else if (flavor === 'vona') {
+        copyTemplateIfNeed(resolveTemplatePath('env/.env.ssr.vona'), api.resolve.app('env/.env.ssr.vona'));
       }
     }
   }
@@ -194,9 +197,8 @@ export function extendFilesThree(api: IndexAPI, _flavor: string) {
       'process.env.ZOVA_SSR_PROD_PORT',
     ).replace(
       'ssrContext._meta.endingHeadTags +=',
-      `ssrContext._meta.endingHeadTags += renderModulesPreload_zova(ssrContext.modules, { ssrContext })\nssrContext._meta.endingHeadTags +=`
-    )
-    .replace(
+      'ssrContext._meta.endingHeadTags += renderModulesPreload_zova(ssrContext.modules, { ssrContext })\nssrContext._meta.endingHeadTags +=',
+    ).replace(
       'function renderModulesPreload',
       `const __ssrModulesZovaCache={};
 function renderModulesPreload_zova(modules2, opts){
@@ -222,7 +224,7 @@ function renderModulesPreload_zova(modules2, opts){
   });
   return links;
 }
-  function renderModulesPreload`
+  function renderModulesPreload`,
     );
     fse.writeFileSync(fileSrc, contentNew);
   }
