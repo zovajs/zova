@@ -3,31 +3,32 @@ import type { TypeComponentLayoutRecord } from '../../bean/resource/component/ty
 import type { ILocalInfos } from '../../bean/resource/locale/type.js';
 import type { ZovaConfigRoutes } from '../../bean/resource/page/type.js';
 import type { IBeanScopeConfig } from '../../bean/type.js';
+import type { ZovaConfigEnv } from '../../types/utils/env.js';
 import type { PowerPartial } from '../../types/utils/powerPartial.js';
 import type { ConfigLogger } from '../logger/types.js';
+import { cast } from '../../types/utils/cast.js';
 import { combineLoggerDefault } from '../logger/loggerDefault.js';
 
-// eslint-disable-next-line no-undef
-export function configDefault(env: NodeJS.ProcessEnv) {
+export function configDefault(env: ZovaConfigEnv) {
   // logger
   const logger = combineLoggerDefault();
   return {
     meta: {
-      flavor: env.META_FLAVOR,
-      mode: env.META_MODE,
-      appMode: env.META_APP_MODE,
+      flavor: cast(env).META_FLAVOR,
+      mode: cast(env).META_MODE,
+      appMode: cast(env).META_APP_MODE,
     },
     api: {
-      baseURL: process.env.SERVER ? process.env.SSR_API_BASE_URL : process.env.API_BASE_URL,
-      prefix: process.env.API_PREFIX,
-      jwt: process.env.API_JWT !== 'false',
+      baseURL: cast(env).SERVER ? env.SSR_API_BASE_URL : env.API_BASE_URL,
+      prefix: env.API_PREFIX,
+      jwt: env.API_JWT !== 'false',
     },
     ssr: {
-      cookieThemeName: process.env.SSR_COOKIE_THEMENAME === 'true',
-      cookieThemeDark: process.env.SSR_COOKIE_THEMEDARK === 'true',
-      cookieThemeDarkDefault: process.env.SSR_COOKIE_THEMEDARK_DEFAULT === 'true',
+      cookieThemeName: env.SSR_COOKIE_THEMENAME === 'true',
+      cookieThemeDark: env.SSR_COOKIE_THEMEDARK === 'true',
+      cookieThemeDarkDefault: env.SSR_COOKIE_THEMEDARK_DEFAULT === 'true',
       optimization: {
-        bodyReadyObserver: process.env.SSR_BODYREADYOBSERVER === 'true',
+        bodyReadyObserver: env.SSR_BODYREADYOBSERVER === 'true',
       },
     },
     logger,
@@ -60,7 +61,6 @@ export function configDefault(env: NodeJS.ProcessEnv) {
 
 export interface ZovaConfig {
   meta: ZovaConfigMeta;
-  env: ZovaConfigEnv;
   api: {
     baseURL: string;
     prefix: string;

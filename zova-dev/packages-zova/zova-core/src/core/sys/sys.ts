@@ -27,8 +27,8 @@ export class ZovaSys {
   }
 
   /** @internal */
-  // eslint-disable-next-line no-undef
-  public async initialize({ modulesMeta, locales, config, env, SysMonkey, legacyRoutes }: PluginZovaOptions, envRuntime?: NodeJS.ProcessEnv) {
+
+  public async initialize({ modulesMeta, locales, config, env, SysMonkey, legacyRoutes }: PluginZovaOptions, envRuntime?: Partial<ZovaConfigEnv>) {
     if (!this[SymbolSysInitializePromise]) {
       this[SymbolSysInitializePromise] = this._initializeInner({ modulesMeta, locales, config, env, SysMonkey, legacyRoutes }, envRuntime);
     }
@@ -37,8 +37,7 @@ export class ZovaSys {
 
   private async _initializeInner(
     { modulesMeta, locales, config, env, SysMonkey, legacyRoutes }: PluginZovaOptions,
-    // eslint-disable-next-line no-undef
-    envRuntime?: Partial<NodeJS.ProcessEnv>,
+    envRuntime?: Partial<ZovaConfigEnv>,
   ) {
     // env
     this.env = this._prepareEnv(env, envRuntime);
@@ -73,15 +72,15 @@ export class ZovaSys {
   }
 
   // eslint-disable-next-line no-undef
-  private _prepareEnv(env: NodeJS.ProcessEnv, envRuntime?: Partial<NodeJS.ProcessEnv>): NodeJS.ProcessEnv {
-    if (!envRuntime) return env;
+  private _prepareEnv(env: NodeJS.ProcessEnv, envRuntime?: Partial<ZovaConfigEnv>): ZovaConfigEnv {
+    if (!envRuntime) return env as unknown as ZovaConfigEnv;
     const env2 = { ...env };
     for (const key of Object.keys(env2)) {
       if (envRuntime[key] !== undefined) {
         env2[key] = envRuntime[key];
       }
     }
-    return env2;
+    return env2 as unknown as ZovaConfigEnv;
   }
 }
 
