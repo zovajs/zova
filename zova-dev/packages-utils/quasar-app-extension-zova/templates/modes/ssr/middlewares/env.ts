@@ -1,6 +1,6 @@
 import { defineSsrMiddleware } from '@quasar/app-vite/wrappers';
 // @ts-ignore ignore
-import env from 'app/.zova/.env.json';
+import { env } from 'app/.zova/.env.js';
 // This middleware should execute as first one
 // since it prepare the process.env variables
 
