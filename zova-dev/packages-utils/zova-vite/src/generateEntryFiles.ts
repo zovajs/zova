@@ -5,7 +5,7 @@ import path from 'node:path';
 import { getEnvFiles } from '@cabloy/dotenv';
 import chalk from 'chalk';
 import fse from 'fs-extra';
-import { copyTemplateFile, getEnvMeta, resolveTemplatePath, saveJSONFile } from './utils.ts';
+import { copyTemplateFile, getEnvMeta, resolveTemplatePath } from './utils.ts';
 
 export async function generateEntryFiles(
   configMeta: ZovaConfigMeta,
@@ -86,13 +86,20 @@ export async function generateEntryFiles(
   }
 
   async function __generateEnvJson() {
-    if (configMeta.mode !== 'production') return;
-    const env2 = {};
+    // env
+    const envNormal = {};
+    const envSecret = {};
     for (const key in env) {
-      env2[key] = env[key];
+      if (key.startsWith('SECRET_')) {
+        envSecret[key] = env[key];
+      } else {
+        envNormal[key] = env[key];
+      }
     }
-    const envFile = path.join(configOptions.appDir, configOptions.runtimeDir, '.env.json');
-    await saveJSONFile(envFile, env2);
+    // src
+    const fileSrc = resolveTemplatePath('.env.ejs');
+    const fileDest = path.join(configOptions.appDir, configOptions.runtimeDir, '.env.ts');
+    await copyTemplateFile(fileSrc, fileDest, { envNormal: JSON.stringify(envNormal, null, 2), envSecret: JSON.stringify(envSecret, null, 2) });
   }
 
   // import tmp from 'tmp';
