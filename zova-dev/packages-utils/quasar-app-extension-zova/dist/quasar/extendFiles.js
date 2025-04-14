@@ -91,7 +91,7 @@ export function extendFilesTwo(api, _flavor) {
             .replace("getPackage('vue/server-renderer'", "getPackage('@cabloy/vue-server-renderer'");
         fse.writeFileSync(fileSrc, contentNew);
     }
-    // ssr-devserver.js
+    // ssr-builder.js
     async function _handleSSRBuilder() {
         const fileSrc = api.resolve.cli('lib/modes/ssr/ssr-builder.js');
         const fileSrcBak = api.resolve.cli('lib/modes/ssr/ssr-builder-origin.js');
@@ -162,7 +162,10 @@ function renderModulesPreload_zova(modules2, opts){
     }
     // ssr-prod-handler.js
     async function _handleSSRProdHandler() {
-        fse.copyFileSync(resolveTemplatePath('entry/ssr-prod-handler.js_'), api.resolve.entry('ssr-prod-handler.js'));
+        const fileSrc = resolveTemplatePath('entry/ssr-prod-handler.js_');
+        const content = fse.readFileSync(fileSrc).toString();
+        const contentNew = content.replace('app/dist/ssr/server/server-entry.js', `app/${getOutDir()}/server/server-entry.js`);
+        fse.writeFileSync(api.resolve.entry('ssr-prod-handler.js'), contentNew);
     }
 }
 function copyTemplateIfNeed(fileSrc, fileDest) {
