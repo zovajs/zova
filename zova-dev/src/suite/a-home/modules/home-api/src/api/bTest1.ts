@@ -1,6 +1,6 @@
 import type { paths } from './openapi/index.js';
 import { Api, BeanApiBase, IApiActionOptions } from 'zova-module-a-api';
-import { ApiBaseURL } from './openapi/index.js';
+import { OpenApiBaseURL } from './openapi/index.js';
 
 /** BTest1_index */
 export const ApiApiBTest1indexPath = '/api/b/test1';
@@ -16,7 +16,7 @@ export class ApiBTest1 extends BeanApiBase {
   ) {
     return this.$fetch.get<any, ApiApiBTest1indexResponseBody>(
       ApiApiBTest1indexPath,
-      this.$configPrepare(ApiBaseURL(this.sys), options),
+      this.$configPrepare(OpenApiBaseURL(this.sys), options),
     );
   }
 }

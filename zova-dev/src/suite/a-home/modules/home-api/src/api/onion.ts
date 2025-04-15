@@ -1,6 +1,6 @@
 import type { components, paths } from './openapi/index.js';
 import { Api, BeanApiBase, IApiActionOptions } from 'zova-module-a-api';
-import { ApiBaseURL } from './openapi/index.js';
+import { OpenApiBaseURL } from './openapi/index.js';
 
 /** Onion_index */
 export const ApiApiOnionindexPath = '/api/';
@@ -69,7 +69,7 @@ export class ApiOnion extends BeanApiBase {
   ) {
     return this.$fetch.get<any, ApiApiOnionindexResponseBody>(
       ApiApiOnionindexPath,
-      this.$configPrepare(ApiBaseURL(this.sys), options),
+      this.$configPrepare(OpenApiBaseURL(this.sys), options),
     );
   }
 
@@ -82,7 +82,7 @@ export class ApiOnion extends BeanApiBase {
     return this.$fetch.post<any, ApiApiOnionechoResponseBody>(
       ApiApiOnionechoPath,
       body,
-      this.$configPrepare(ApiBaseURL(this.sys), options),
+      this.$configPrepare(OpenApiBaseURL(this.sys), options),
     );
   }
 
@@ -96,7 +96,7 @@ export class ApiOnion extends BeanApiBase {
     return this.$fetch.post<any, ApiApiOnionecho2ResponseBody>(
       this.$pathTranslate(ApiApiOnionecho2Path, options.params),
       body,
-      this.$configPrepare(ApiBaseURL(this.sys), options),
+      this.$configPrepare(OpenApiBaseURL(this.sys), options),
     );
   }
 
@@ -110,7 +110,7 @@ export class ApiOnion extends BeanApiBase {
   ) {
     return this.$fetch.get<any, ApiApiOnionecho3ResponseBody>(
       this.$pathTranslate(ApiApiOnionecho3Path, options.params),
-      this.$configPrepare(ApiBaseURL(this.sys), options),
+      this.$configPrepare(OpenApiBaseURL(this.sys), options),
     );
   }
 
@@ -121,7 +121,7 @@ export class ApiOnion extends BeanApiBase {
     return this.$fetch.post<any, ApiApiOnionecho4ResponseBody>(
       ApiApiOnionecho4Path,
       body,
-      this.$configPrepare(ApiBaseURL(this.sys), options),
+      this.$configPrepare(OpenApiBaseURL(this.sys), options),
     );
   }
 
@@ -133,7 +133,7 @@ export class ApiOnion extends BeanApiBase {
   ) {
     return this.$fetch.get<any, ApiApiOnionecho5ResponseBody>(
       ApiApiOnionecho5Path,
-      this.$configPrepare(ApiBaseURL(this.sys), options),
+      this.$configPrepare(OpenApiBaseURL(this.sys), options),
     );
   }
 
@@ -143,7 +143,7 @@ export class ApiOnion extends BeanApiBase {
   ) {
     return this.$fetch.get<any, ApiApiOnionecho6ResponseBody>(
       ApiApiOnionecho6Path,
-      this.$configPrepare(ApiBaseURL(this.sys), options),
+      this.$configPrepare(OpenApiBaseURL(this.sys), options),
     );
   }
 }

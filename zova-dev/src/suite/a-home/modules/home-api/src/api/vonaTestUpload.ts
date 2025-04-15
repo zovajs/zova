@@ -1,6 +1,6 @@
 import type { paths } from './openapi/index.js';
 import { Api, BeanApiBase, IApiActionOptions } from 'zova-module-a-api';
-import { ApiBaseURL } from './openapi/index.js';
+import { OpenApiBaseURL } from './openapi/index.js';
 
 /** VonaTestUpload_fields */
 export const ApiApiVonaTestUploadfieldsPath = '/api/vona/test/upload/fields';
@@ -56,7 +56,7 @@ export class ApiVonaTestUpload extends BeanApiBase {
     return this.$fetch.post<any, ApiApiVonaTestUploadfieldsResponseBody>(
       ApiApiVonaTestUploadfieldsPath,
       this.$formData(body),
-      this.$configPrepare(ApiBaseURL(this.sys), options),
+      this.$configPrepare(OpenApiBaseURL(this.sys), options),
     );
   }
 
@@ -67,7 +67,7 @@ export class ApiVonaTestUpload extends BeanApiBase {
     return this.$fetch.post<any, ApiApiVonaTestUploadfileResponseBody>(
       ApiApiVonaTestUploadfilePath,
       this.$formData(body),
-      this.$configPrepare(ApiBaseURL(this.sys), options),
+      this.$configPrepare(OpenApiBaseURL(this.sys), options),
     );
   }
 
@@ -78,7 +78,7 @@ export class ApiVonaTestUpload extends BeanApiBase {
     return this.$fetch.post<any, ApiApiVonaTestUploadfilesResponseBody>(
       ApiApiVonaTestUploadfilesPath,
       this.$formData(body),
-      this.$configPrepare(ApiBaseURL(this.sys), options),
+      this.$configPrepare(OpenApiBaseURL(this.sys), options),
     );
   }
 }

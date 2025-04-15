@@ -12,6 +12,14 @@ export class SysUtil extends BeanSimple {
     return baseURL;
   }
 
+  getOpenApiBaseURL(envName: string): string {
+    if (process.env.CLIENT) {
+      return this.sys.env[envName] || this.sys.env.OPENAPI_BASE_URL_DEFAULT || this.sys.env.API_BASE_URL;
+    } else {
+      return this.sys.env[envName] || this.sys.env.OPENAPI_BASE_URL_DEFAULT || this.sys.env.SSR_API_BASE_URL;
+    }
+  }
+
   apiActionPathTranslate(pathName: string, pathParams?: Record<string, any>): string {
     return defaultPathSerializer(pathName, pathParams);
   }

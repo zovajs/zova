@@ -1,6 +1,6 @@
 import type { components, paths } from './openapi/index.js';
 import { Api, BeanApiBase, IApiActionOptions } from 'zova-module-a-api';
-import { ApiBaseURL } from './openapi/index.js';
+import { OpenApiBaseURL } from './openapi/index.js';
 
 /** HomeUserPassport_current */
 export const ApiApiHomeUserPassportcurrentPath = '/api/home/user/passport/current';
@@ -72,7 +72,7 @@ export class ApiHomeUserPassport extends BeanApiBase {
   ) {
     return this.$fetch.get<any, ApiApiHomeUserPassportcurrentResponseBody>(
       ApiApiHomeUserPassportcurrentPath,
-      this.$configPrepare(ApiBaseURL(this.sys), options),
+      this.$configPrepare(OpenApiBaseURL(this.sys), options),
     );
   }
 
@@ -83,7 +83,7 @@ export class ApiHomeUserPassport extends BeanApiBase {
     return this.$fetch.post<any, ApiApiHomeUserPassportlogoutResponseBody>(
       ApiApiHomeUserPassportlogoutPath,
       body,
-      this.$configPrepare(ApiBaseURL(this.sys), options),
+      this.$configPrepare(OpenApiBaseURL(this.sys), options),
     );
   }
 
@@ -94,7 +94,7 @@ export class ApiHomeUserPassport extends BeanApiBase {
     return this.$fetch.post<any, ApiApiHomeUserPassportloginSimpleResponseBody>(
       ApiApiHomeUserPassportloginSimplePath,
       body,
-      this.$configPrepare(ApiBaseURL(this.sys), options),
+      this.$configPrepare(OpenApiBaseURL(this.sys), options),
     );
   }
 
@@ -107,7 +107,7 @@ export class ApiHomeUserPassport extends BeanApiBase {
   ) {
     return this.$fetch.get<any, ApiApiHomeUserPassportloginResponseBody>(
       this.$pathTranslate(ApiApiHomeUserPassportloginPath, options.params),
-      this.$configPrepare(ApiBaseURL(this.sys), options),
+      this.$configPrepare(OpenApiBaseURL(this.sys), options),
     );
   }
 
@@ -120,7 +120,7 @@ export class ApiHomeUserPassport extends BeanApiBase {
   ) {
     return this.$fetch.get<any, ApiApiHomeUserPassportassociateResponseBody>(
       this.$pathTranslate(ApiApiHomeUserPassportassociatePath, options.params),
-      this.$configPrepare(ApiBaseURL(this.sys), options),
+      this.$configPrepare(OpenApiBaseURL(this.sys), options),
     );
   }
 
@@ -133,7 +133,7 @@ export class ApiHomeUserPassport extends BeanApiBase {
   ) {
     return this.$fetch.get<any, ApiApiHomeUserPassportmigrateResponseBody>(
       this.$pathTranslate(ApiApiHomeUserPassportmigratePath, options.params),
-      this.$configPrepare(ApiBaseURL(this.sys), options),
+      this.$configPrepare(OpenApiBaseURL(this.sys), options),
     );
   }
 
@@ -144,7 +144,7 @@ export class ApiHomeUserPassport extends BeanApiBase {
     return this.$fetch.post<any, ApiApiHomeUserPassportrefreshAuthTokenResponseBody>(
       ApiApiHomeUserPassportrefreshAuthTokenPath,
       body,
-      this.$configPrepare(ApiBaseURL(this.sys), options),
+      this.$configPrepare(OpenApiBaseURL(this.sys), options),
     );
   }
 
@@ -155,7 +155,7 @@ export class ApiHomeUserPassport extends BeanApiBase {
     return this.$fetch.post<any, ApiApiHomeUserPassportcreatePassportJwtFromOauthCodeResponseBody>(
       ApiApiHomeUserPassportcreatePassportJwtFromOauthCodePath,
       body,
-      this.$configPrepare(ApiBaseURL(this.sys), options),
+      this.$configPrepare(OpenApiBaseURL(this.sys), options),
     );
   }
 }

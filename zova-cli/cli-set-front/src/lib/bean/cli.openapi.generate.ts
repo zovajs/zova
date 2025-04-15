@@ -116,10 +116,9 @@ export class CliOpenapiGenerate extends BeanCliBase {
     // output: openapi/baseURL.ts
     const baseURLFile = path.join(module.root, 'src/api/openapi/baseURL.ts');
     await fse.outputFile(baseURLFile, `import type { ZovaSys } from 'zova';
-import { cast } from 'zova';
 
-export const ApiBaseURL = (sys: ZovaSys) => {
-  return cast(sys.env).OPENAPI_BASE_URL_${module.name.replace('-', '_').toUpperCase()} || sys.env.OPENAPI_BASE_URL_DEFAULT;
+export const OpenApiBaseURL = (sys: ZovaSys) => {
+  return sys.util.getOpenApiBaseURL('OPENAPI_BASE_URL_${module.name.replace('-', '_').toUpperCase()}');
 };
 `);
     await this.helper.formatFile({ fileName: baseURLFile });
@@ -269,7 +268,7 @@ export const ApiBaseURL = (sys: ZovaSys) => {
     ) {
       return this.$fetch.${pathInfo.method}<any, ${nameResponseBody}>(
         ${contentPathTranslate} ${contentRequestBody ? `${contentBodyParams},` : ''} 
-        this.$configPrepare(ApiBaseURL(this.sys), options),
+        this.$configPrepare(OpenApiBaseURL(this.sys), options),
       );
     }\n`;
     return [contentTypes.join('\n'), contentSignature];
@@ -286,7 +285,7 @@ export const ApiBaseURL = (sys: ZovaSys) => {
     }
     const contentTypes2 = contentTypes.join('\n');
     const importsType: string[] = [];
-    if (contentSignatures.length > 0) importsType.push('ApiBaseURL');
+    if (contentSignatures.length > 0) importsType.push('OpenApiBaseURL');
     if (contentTypes2.includes('components["schemas"]')) importsType.push('type components');
     if (contentTypes2.includes('paths[')) importsType.push('type paths');
     const contentImportsType =
