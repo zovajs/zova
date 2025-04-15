@@ -5,7 +5,9 @@ import { Service } from 'zova-module-a-bean';
 
 @Service()
 export class ServiceStorage extends BeanBase {
-  protected async __init__() {
+  private _queryClient: QueryClient;
+
+  async moduleLoaded() {
     // options
     let options = this.scope.config.queryClientConfig.defaultOptions;
     if (process.env.SERVER) {
@@ -14,26 +16,29 @@ export class ServiceStorage extends BeanBase {
       });
     }
     // queryClient
-    const queryClient = new QueryClient({
+    const queryClient = this._queryClient = new QueryClient({
       defaultOptions: options,
     });
     // use plugin
     const vueQueryPluginOptions: VueQueryPluginOptions = { queryClient };
     this.app.vue.use(VueQueryPlugin, vueQueryPluginOptions);
+  }
+
+  async appInitialize() {
     // onRendered
     if (process.env.SERVER) {
       this.ctx.meta.ssr.context.onRendered(() => {
-        this.ctx.meta.ssr.stateDefer.query = dehydrate(queryClient, {
+        this.ctx.meta.ssr.stateDefer.query = dehydrate(this._queryClient, {
           shouldDehydrateMutation: () => {
             return false;
           },
         });
-        queryClient.clear();
+        this._queryClient.clear();
       });
     }
     // client
     if (process.env.CLIENT && this.ctx.meta.ssr.isRuntimeSsrPreHydration) {
-      hydrate(queryClient, this.ctx.meta.ssr.stateDefer.query);
+      hydrate(this._queryClient, this.ctx.meta.ssr.stateDefer.query);
     }
   }
 }
