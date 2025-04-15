@@ -16,7 +16,7 @@ export class ApiCabloyTestPassport extends BeanApiBase {
   ) {
     return this.$fetch.get<any, ApiApiCabloyTestPassportisAuthenticatedResponseBody>(
       ApiApiCabloyTestPassportisAuthenticatedPath,
-      this.$configPrepare(ApiBaseURL, options),
+      this.$configPrepare(ApiBaseURL(this.sys), options),
     );
   }
 }

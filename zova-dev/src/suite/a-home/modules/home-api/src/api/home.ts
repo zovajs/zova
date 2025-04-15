@@ -17,7 +17,7 @@ export class ApiHome extends BeanApiBase {
   ) {
     return this.$fetch.get<any, ApiApiHomeindexResponseBody>(
       ApiApiHomeindexPath,
-      this.$configPrepare(ApiBaseURL, options),
+      this.$configPrepare(ApiBaseURL(this.sys), options),
     );
   }
 }

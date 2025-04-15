@@ -16,7 +16,7 @@ export class ApiBTest1 extends BeanApiBase {
   ) {
     return this.$fetch.get<any, ApiApiBTest1indexResponseBody>(
       ApiApiBTest1indexPath,
-      this.$configPrepare(ApiBaseURL, options),
+      this.$configPrepare(ApiBaseURL(this.sys), options),
     );
   }
 }

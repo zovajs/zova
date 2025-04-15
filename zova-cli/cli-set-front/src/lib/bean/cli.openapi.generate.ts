@@ -268,7 +268,7 @@ export const ApiBaseURL = (sys: ZovaSys) => {
     ) {
       return this.$fetch.${pathInfo.method}<any, ${nameResponseBody}>(
         ${contentPathTranslate} ${contentRequestBody ? `${contentBodyParams},` : ''} 
-        this.$configPrepare(ApiBaseURL, options),
+        this.$configPrepare(ApiBaseURL(this.sys), options),
       );
     }\n`;
     return [contentTypes.join('\n'), contentSignature];
