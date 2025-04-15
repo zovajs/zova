@@ -2,7 +2,7 @@ import type { ModelTabsOptions } from 'zova-module-a-tabs';
 import { BeanControllerBase, Use, UseScope } from 'zova';
 import { Controller } from 'zova-module-a-bean';
 import { ModelTabs, ScopeModuleATabs } from 'zova-module-a-tabs';
-import { ModelAuth, ModelUser } from 'zova-module-home-user';
+import { ModelPassport } from 'zova-module-home-user';
 import { ModelMenu } from '../../model/menu.js';
 
 export interface ControllerLayoutDefaultProps {}
@@ -18,10 +18,7 @@ export class ControllerLayoutDefault extends BeanControllerBase {
   $$modelMenu: ModelMenu;
 
   @Use()
-  $$modelAuth: ModelAuth;
-
-  @Use()
-  $$modelUser: ModelUser;
+  $$modelPassport: ModelPassport;
 
   @Use()
   $$modelTabs: ModelTabs;
@@ -33,7 +30,7 @@ export class ControllerLayoutDefault extends BeanControllerBase {
     await this._initTabs();
     // user
     if (process.env.SERVER) {
-      await this.$$modelUser.ensureUser();
+      await this.$$modelPassport.ensurePassport();
     }
     // menu
     const queryMenus = this.$$modelMenu.select();

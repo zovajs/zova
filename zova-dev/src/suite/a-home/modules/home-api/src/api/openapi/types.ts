@@ -1,4 +1,20 @@
 export interface paths {
+  '/api/home/user/passport/current': {
+    parameters: {
+      query?: never;
+      header?: never;
+      path?: never;
+      cookie?: never;
+    };
+    get: operations['HomeUserPassport_current'];
+    put?: never;
+    post?: never;
+    delete?: never;
+    options?: never;
+    head?: never;
+    patch?: never;
+    trace?: never;
+  };
   '/api/home/user/passport/logout': {
     parameters: {
       query?: never;
@@ -95,7 +111,7 @@ export interface paths {
     patch?: never;
     trace?: never;
   };
-  '/api/home/user/passport/createPassportFromOauthCode': {
+  '/api/home/user/passport/createPassportJwtFromOauthCode': {
     parameters: {
       query?: never;
       header?: never;
@@ -104,7 +120,7 @@ export interface paths {
     };
     get?: never;
     put?: never;
-    post: operations['HomeUserPassport_createPassportFromOauthCode'];
+    post: operations['HomeUserPassport_createPassportJwtFromOauthCode'];
     delete?: never;
     options?: never;
     head?: never;
@@ -337,14 +353,17 @@ export interface components {
     'home-user.dto.auth': {
       id: string | number;
     };
+    'home-user.dto.passport': {
+      user: components['schemas']['home-user.entity.user'];
+      auth: components['schemas']['home-user.dto.auth'];
+    };
     'a-jwt.dto.jwtToken': {
       accessToken: string;
       refreshToken: string;
       expiresIn: number;
     };
-    'home-user.dto.passport': {
-      user: components['schemas']['home-user.entity.user'];
-      auth: components['schemas']['home-user.dto.auth'];
+    'home-user.dto.passportJwt': {
+      passport: components['schemas']['home-user.dto.passport'];
       jwt: components['schemas']['a-jwt.dto.jwtToken'];
     };
     'a-authsimple.dto.authSimple': {
@@ -367,6 +386,29 @@ export interface components {
 }
 export type $defs = Record<string, never>;
 export interface operations {
+  HomeUserPassport_current: {
+    parameters: {
+      query?: never;
+      header?: never;
+      path?: never;
+      cookie?: never;
+    };
+    requestBody?: never;
+    responses: {
+      200: {
+        headers: {
+          [name: string]: unknown;
+        };
+        content: {
+          'application/json': {
+            code: string;
+            message: string;
+            data?: components['schemas']['home-user.dto.passport'];
+          };
+        };
+      };
+    };
+  };
   HomeUserPassport_logout: {
     parameters: {
       query?: never;
@@ -411,7 +453,7 @@ export interface operations {
           'application/json': {
             code: string;
             message: string;
-            data: components['schemas']['home-user.dto.passport'];
+            data: components['schemas']['home-user.dto.passportJwt'];
           };
         };
       };
@@ -440,7 +482,7 @@ export interface operations {
           'application/json': {
             code: string;
             message: string;
-            data: components['schemas']['home-user.dto.passport'];
+            data: components['schemas']['home-user.dto.passportJwt'];
           };
         };
       };
@@ -469,7 +511,7 @@ export interface operations {
           'application/json': {
             code: string;
             message: string;
-            data: components['schemas']['home-user.dto.passport'];
+            data: components['schemas']['home-user.dto.passportJwt'];
           };
         };
       };
@@ -498,7 +540,7 @@ export interface operations {
           'application/json': {
             code: string;
             message: string;
-            data: components['schemas']['home-user.dto.passport'];
+            data: components['schemas']['home-user.dto.passportJwt'];
           };
         };
       };
@@ -533,7 +575,7 @@ export interface operations {
       };
     };
   };
-  HomeUserPassport_createPassportFromOauthCode: {
+  HomeUserPassport_createPassportJwtFromOauthCode: {
     parameters: {
       query?: never;
       header?: never;
@@ -556,7 +598,7 @@ export interface operations {
           'application/json': {
             code: string;
             message: string;
-            data: components['schemas']['home-user.dto.passport'];
+            data: components['schemas']['home-user.dto.passportJwt'];
           };
         };
       };

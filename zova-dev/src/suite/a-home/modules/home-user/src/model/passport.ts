@@ -1,16 +1,18 @@
+import { catchError } from '@cabloy/utils';
 import { BeanModelBase, Model } from 'zova-module-a-model';
-import { ApiApiHomeUserPassportloginResponseBody, ApiApiHomeUserPassportloginSimpleRequestBody } from 'zova-module-home-api';
+import { ApiApiHomeUserPassportcurrentResponseBody, ApiApiHomeUserPassportloginResponseBody, ApiApiHomeUserPassportloginSimpleRequestBody } from 'zova-module-home-api';
 
 @Model()
 export class ModelPassport extends BeanModelBase {
-  passport?: ApiApiHomeUserPassportloginResponseBody;
+  passport?: ApiApiHomeUserPassportcurrentResponseBody;
   accessToken?: string;
   expireTime?: number;
 
   protected async __init__() {
-    this.passport = this.$useStateLocal({
-      queryKey: ['passport'],
-    });
+    this.passport = this.$useState(
+      process.env.CLIENT ? 'local' : 'mem',
+      { queryKey: ['passport'] },
+    );
     this.accessToken = this.$useStateCookie({
       queryKey: ['token'],
     });
@@ -62,12 +64,30 @@ export class ModelPassport extends BeanModelBase {
     return this.passport?.user;
   }
 
+  async ensurePassport() {
+    if (process.env.CLIENT) return this.passport;
+    if (!this.passport && this.isAuthenticated) {
+      const [passport, error] = await catchError(() => {
+        return this.$api.homeUserPassport.current();
+      });
+      if (error) {
+        if (process.env.DEV) {
+          console.error(error);
+        }
+        this.$ssr.redirect('/login');
+      }
+      this.passport = passport;
+    }
+    return this.passport;
+  }
+
   private _setPassport(data?: ApiApiHomeUserPassportloginResponseBody) {
-    this.passport = data;
     if (data) {
+      this.passport = data.passport;
       this.expireTime = Date.now() + (data.jwt.expiresIn - this.scope.config.passport.accessToken.expireTimeDelay) * 1000;
       this.accessToken = data.jwt.accessToken;
     } else {
+      this.passport = undefined;
       this.expireTime = undefined;
       this.accessToken = undefined;
     }
