@@ -37,10 +37,10 @@ export class ModelPassport extends BeanModelBase {
   }
 
   logout() {
-    return this.$useMutationData<unknown, undefined>({
+    return this.$useMutationData<void, void>({
       mutationKey: ['logout'],
       mutationFn: async () => {
-        return this.$api.homeUserPassport.logout();
+        await this.$api.homeUserPassport.logout();
       },
       onSuccess: () => {
         // clear

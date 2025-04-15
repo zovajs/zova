@@ -1,13 +1,13 @@
 import { defineFakeRoute } from 'vite-plugin-fake-server-turbo/client';
 
-const __users = [{ username: 'admin', password: '123456', avatar: ':emoji:flower' }];
+const __users = [{ name: 'admin', password: '123456', avatar: ':emoji:flower' }];
 
 export default defineFakeRoute([
   {
     url: '/home/user/passport/login',
     method: 'post',
     response: req => {
-      const user = __users.find(item => item.username === req.body.username);
+      const user = __users.find(item => item.name === req.body.username);
       if (!user) {
         return { code: 403, message: 'Error' };
       }
@@ -16,15 +16,15 @@ export default defineFakeRoute([
         message: 'Success',
         data: {
           user: {
-            username: user.username,
+            name: user.name,
             avatar: user.avatar,
           },
           auth: {
             id: 1,
           },
           jwt: {
-            accessToken: `accessToken-${user.username}`,
-            refreshToken: `refreshToken-${user.username}`,
+            accessToken: `accessToken-${user.name}`,
+            refreshToken: `refreshToken-${user.name}`,
             expiresIn: 2 * 3600,
           },
         },

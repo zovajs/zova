@@ -28,7 +28,7 @@ export class ControllerLayoutDefault extends BeanControllerBase {
   protected async __init__() {
     // tabs
     await this._initTabs();
-    // user
+    // passport
     if (process.env.SERVER) {
       await this.$$modelPassport.ensurePassport();
     }

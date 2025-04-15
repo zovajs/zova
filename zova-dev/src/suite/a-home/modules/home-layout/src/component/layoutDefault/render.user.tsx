@@ -9,14 +9,14 @@ export class RenderUser extends BeanRenderBase {
       <li>
         <details>
           <summary>
-            {this.$$modelUser.user?.username}
-            {iconh(this.$$modelUser.user?.avatar as any)}
+            {this.$$modelPassport.user?.name}
+            {iconh(this.$$modelPassport.user?.avatar as any)}
           </summary>
           <ul class="bg-base-100 rounded-t-none p-2 w-32">
             <li>
               <a
                 onClick={() => {
-                  this.$$modelAuth.logout().mutate();
+                  this.$$modelPassport.logout().mutate();
                 }}
               >
                 {this.scope.locale.Logout()}
