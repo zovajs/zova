@@ -32,6 +32,30 @@ export default defineFakeRoute([
     },
   },
   {
+    url: '/home/user/passport/current',
+    method: 'get',
+    response: req => {
+      const name = req.headers.authorization?.substring('Bearer accessToken-'.length);
+      const user = __users.find(item => item.name === name);
+      if (!user) {
+        return { code: 403, message: 'Error' };
+      }
+      return {
+        code: 0,
+        message: 'Success',
+        data: {
+          user: {
+            name: user.name,
+            avatar: user.avatar,
+          },
+          auth: {
+            id: 1,
+          },
+        },
+      };
+    },
+  },
+  {
     url: '/home/user/passport/logout',
     method: 'post',
     response: _req => {
