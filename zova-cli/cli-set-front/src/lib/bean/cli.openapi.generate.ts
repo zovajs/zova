@@ -7,6 +7,7 @@ import { extend } from '@cabloy/extend';
 import { matchSelector, toLowerCaseFirstChar, toUpperCaseFirstChar } from '@cabloy/word-utils';
 import fse from 'fs-extra';
 import openapiTS, { astToString } from 'openapi-typescript';
+import { rimraf } from 'rimraf';
 import ts from 'typescript';
 
 declare module '@cabloy/cli' {
@@ -101,6 +102,8 @@ export class CliOpenapiGenerate extends BeanCliBase {
       const contents = astToString(ast);
       cache = __caches[moduleConfig.source] = { ast, contents };
     }
+    // rimraf
+    await rimraf(path.join(module.root, 'src/api'));
     // output: openapi/types.ts
     const outputFile = path.join(module.root, 'src/api/openapi/types.ts');
     await fse.outputFile(outputFile, cache.contents);
