@@ -4,7 +4,7 @@ import { BeanFetch } from './bean/bean.fetch.js';
 
 export class Monkey extends BeanSimple implements IMonkeyAppInitialize, IMonkeyBeanInit {
   async appInitialize() {
-    // $fetch
+    // $fetch: should in appInitialize, because should init many interceptors
     this.app.meta.$fetch = await this.bean._getBean(BeanFetch, false);
   }
 
