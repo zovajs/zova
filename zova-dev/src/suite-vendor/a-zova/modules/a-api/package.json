@@ -7,7 +7,9 @@
     "capabilities": {
       "monkey": true
     },
-    "dependencies": {},
+    "dependencies": {
+      "a-fetch": "5.0.0"
+    },
     "onions": {
       "api": {
         "sceneIsolate": true,
