@@ -110,7 +110,11 @@ export class SysModule extends BeanSimple {
     const modulesResource = await Promise.all(promises);
     for (let i = 0; i < modulesResource.length; i++) {
       const moduleName = moduleNamesLoading[i];
-      this.modulesMeta.modules[moduleName].resource = modulesResource[i];
+      const module = this.modulesMeta.modules[moduleName];
+      module.resource = modulesResource[i];
+      if (module.resource.MonkeySys) {
+        this.monkeyInstances[moduleName] = this.sys.bean._newBeanSimple(module.resource.MonkeySys, false, module);
+      }
     }
   }
 
@@ -168,12 +172,9 @@ export class SysModule extends BeanSimple {
       const moduleResource = moduleRepo.resource as any;
       moduleRepo.resource = await moduleResource();
     }
-    // main / monkey
+    // main
     if (moduleRepo.resource.MainSys) {
       this.mainInstances[moduleName] = this.sys.bean._newBeanSimple(moduleRepo.resource.MainSys, false, moduleRepo);
-    }
-    if (moduleRepo.resource.MonkeySys) {
-      this.monkeyInstances[moduleName] = this.sys.bean._newBeanSimple(moduleRepo.resource.MonkeySys, false, moduleRepo);
     }
     // monkey: moduleLoading
     await this._monkeyModule('moduleLoading', moduleRepo);
