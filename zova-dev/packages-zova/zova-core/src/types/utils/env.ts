@@ -17,6 +17,8 @@ export interface ZovaConfigEnv {
   SSR_COOKIE_THEMEDARK: string | undefined;
   SSR_COOKIE_THEMEDARK_DEFAULT: string | undefined;
   SSR_BODYREADYOBSERVER: string | undefined;
+  OPENAPI_BASE_URL_DEFAULT: string | undefined;
+  OPENAPI_BASE_URL_HOME_API: string | undefined;
 }
 
 declare global {

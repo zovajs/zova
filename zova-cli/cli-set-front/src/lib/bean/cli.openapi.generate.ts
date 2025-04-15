@@ -115,7 +115,12 @@ export class CliOpenapiGenerate extends BeanCliBase {
     await this.helper.formatFile({ fileName: schemasFile });
     // output: openapi/baseURL.ts
     const baseURLFile = path.join(module.root, 'src/api/openapi/baseURL.ts');
-    await fse.outputFile(baseURLFile, `export const ApiBaseURL = process.env.OPENAPI_BASE_URL_${module.name.replace('-', '_').toUpperCase()} || process.env.OPENAPI_BASE_URL_DEFAULT;`);
+    await fse.outputFile(baseURLFile, `import type { ZovaSys } from 'zova';
+
+export const ApiBaseURL = (sys: ZovaSys) => {
+  return sys.env.OPENAPI_BASE_URL_${module.name.replace('-', '_').toUpperCase()} || sys.env.OPENAPI_BASE_URL_DEFAULT;
+};
+`);
     await this.helper.formatFile({ fileName: baseURLFile });
     // output: openapi/index.ts
     const indexFile = path.join(module.root, 'src/api/openapi/index.ts');
