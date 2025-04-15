@@ -12,9 +12,7 @@ import locale_en_us from '../config/locale/en-us.js';
 import locale_zh_cn from '../config/locale/zh-cn.js';
 /** model: end */
 /** model: begin */
-import { ModelAuth } from '../model/auth.js';
 import { ModelPassport } from '../model/passport.js';
-import { ModelUser } from '../model/user.js';
 /** controller: end */
 /** controller: begin */
 import { ControllerPageLogin } from '../page/login/controller.jsx';
@@ -45,8 +43,9 @@ declare module 'zova' {
   }
 }
 /** model: begin */
-export * from '../model/auth.js';
 export * from '../model/passport.js';
+/** controller: begin */
+export * from '../page/login/controller.jsx';
 declare module 'zova' {
   export interface IPagePathRecord {
     '/home/user/login': undefined;
@@ -66,35 +65,20 @@ declare module 'zova-module-home-user' {
 }
 /** pages: end */
 
-export * from '../model/user.js';
-/** controller: begin */
-export * from '../page/login/controller.jsx';
 export * from '../routes.js';
 declare module 'zova' {
 
 }
 declare module 'zova-module-home-user' {
 
-  export interface ModelAuth {
-    /** @internal */
-    get scope(): ScopeModuleHomeUser;
-  }
-
   export interface ModelPassport {
-    /** @internal */
-    get scope(): ScopeModuleHomeUser;
-  }
-
-  export interface ModelUser {
     /** @internal */
     get scope(): ScopeModuleHomeUser;
   }
 }
 declare module 'zova' {
   export interface IBeanRecordGeneral {
-    'home-user.model.auth': ModelAuth;
     'home-user.model.passport': ModelPassport;
-    'home-user.model.user': ModelUser;
   }
 }
 /** controller: end */

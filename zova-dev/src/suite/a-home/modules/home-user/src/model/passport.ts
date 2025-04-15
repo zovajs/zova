@@ -58,6 +58,10 @@ export class ModelPassport extends BeanModelBase {
     return this.isAuthenticated ? this.accessToken : undefined;
   }
 
+  get user() {
+    return this.passport?.user;
+  }
+
   private _setPassport(data?: ApiApiHomeUserPassportloginResponseBody) {
     this.passport = data;
     if (data) {
