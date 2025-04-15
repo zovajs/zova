@@ -334,6 +334,9 @@ export interface components {
       avatar?: string;
       locale?: string;
     };
+    'home-user.dto.auth': {
+      id: string | number;
+    };
     'a-jwt.dto.jwtToken': {
       accessToken: string;
       refreshToken: string;
@@ -341,7 +344,7 @@ export interface components {
     };
     'home-user.dto.passport': {
       user: components['schemas']['home-user.entity.user'];
-      auth?: unknown;
+      auth: components['schemas']['home-user.dto.auth'];
       jwt: components['schemas']['a-jwt.dto.jwtToken'];
     };
     'a-authsimple.dto.authSimple': {

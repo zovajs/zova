@@ -3,69 +3,29 @@ import type { BeanScopeUtil } from 'zova';
 /** scope: begin */
 import { BeanScopeBase, TypeLocaleBase, TypeModuleLocales } from 'zova';
 import { Scope } from 'zova-module-a-bean';
-/** api: end */
-/** api: begin */
 
-/** api: end */
-/** api: begin */
-import { ApiAuth } from '../api/auth.js';
-
-import { ApiUser } from '../api/user.js';
 /** model: end */
 /** locale: begin */
 import locale_en_us from '../config/locale/en-us.js';
-import locale_zh_cn from '../config/locale/zh-cn.js';
 
+import locale_zh_cn from '../config/locale/zh-cn.js';
 /** model: end */
 /** model: begin */
 import { ModelAuth } from '../model/auth.js';
-
+import { ModelPassport } from '../model/passport.js';
 import { ModelUser } from '../model/user.js';
 /** controller: end */
 /** controller: begin */
 import { ControllerPageLogin } from '../page/login/controller.jsx';
-/** api: begin */
-import 'zova';
-import 'zova';
-import 'zova';
-import 'zova';
-import 'zova';
-import 'zova';
-import 'zova';
-
-import 'zova';
-
-export * from '../api/auth.js';
-export * from '../api/user.js';
-declare module 'zova' {
-
-}
-declare module 'zova-module-home-user' {
-
-  export interface ApiAuth {
-    /** @internal */
-    get scope(): ScopeModuleHomeUser;
-  }
-
-  export interface ApiUser {
-    /** @internal */
-    get scope(): ScopeModuleHomeUser;
-  }
-}
-export interface IModuleApi {
-  auth: ApiAuth;
-  user: ApiUser;
-}
-declare module 'zova' {
-  export interface IBeanRecordGeneral {
-    'home-user.api.auth': ApiAuth;
-    'home-user.api.user': ApiUser;
-  }
-}
-/** api: end */
-/** openapi: begin */
-
 /** model: begin */
+import 'zova';
+import 'zova';
+import 'zova';
+import 'zova';
+import 'zova';
+
+import 'zova';
+
 export * from '../model/auth.js';
 declare module 'zova' {
 
@@ -82,10 +42,8 @@ declare module 'zova' {
     'home-user.controller.pageLogin': ControllerPageLogin;
   }
 }
+export * from '../model/passport.js';
 export * from '../model/user.js';
-/** openapi: end */
-/** controller: begin */
-export * from '../page/login/controller.jsx';
 declare module 'zova' {
   export interface IPagePathRecord {
     '/home/user/login': undefined;
@@ -105,6 +63,8 @@ declare module 'zova-module-home-user' {
 }
 /** pages: end */
 
+/** controller: begin */
+export * from '../page/login/controller.jsx';
 export * from '../routes.js';
 /** controller: end */
 /** pages: begin */
@@ -119,6 +79,11 @@ declare module 'zova-module-home-user' {
     get scope(): ScopeModuleHomeUser;
   }
 
+  export interface ModelPassport {
+    /** @internal */
+    get scope(): ScopeModuleHomeUser;
+  }
+
   export interface ModelUser {
     /** @internal */
     get scope(): ScopeModuleHomeUser;
@@ -127,6 +92,7 @@ declare module 'zova-module-home-user' {
 declare module 'zova' {
   export interface IBeanRecordGeneral {
     'home-user.model.auth': ModelAuth;
+    'home-user.model.passport': ModelPassport;
     'home-user.model.user': ModelUser;
   }
 }
@@ -141,7 +107,6 @@ export class ScopeModuleHomeUser extends BeanScopeBase {}
 export interface ScopeModuleHomeUser {
   util: BeanScopeUtil;
   locale: TypeModuleLocales<(typeof locales)[TypeLocaleBase]>;
-  api: IModuleApi;
 }
 
 declare module 'zova' {
