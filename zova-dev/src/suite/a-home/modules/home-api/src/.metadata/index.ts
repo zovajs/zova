@@ -9,6 +9,7 @@ import { ApiAuthPassport } from '../api/authPassport.js';
 import { ApiBTest1 } from '../api/bTest1.js';
 import { ApiCabloyTestPassport } from '../api/cabloyTestPassport.js';
 import { ApiHome } from '../api/home.js';
+import { ApiHomeUserPassport } from '../api/homeUserPassport.js';
 import { ApiOnion } from '../api/onion.js';
 /** api: end */
 /** api: begin */
@@ -31,6 +32,7 @@ export * from '../api/authPassport.js';
 export * from '../api/bTest1.js';
 export * from '../api/cabloyTestPassport.js';
 export * from '../api/home.js';
+export * from '../api/homeUserPassport.js';
 export * from '../api/onion.js';
 /** api: end */
 /** openapi: begin */
@@ -61,6 +63,11 @@ declare module 'zova-module-home-api' {
     get scope(): ScopeModuleHomeApi;
   }
 
+  export interface ApiHomeUserPassport {
+    /** @internal */
+    get scope(): ScopeModuleHomeApi;
+  }
+
   export interface ApiOnion {
     /** @internal */
     get scope(): ScopeModuleHomeApi;
@@ -81,6 +88,7 @@ export interface IModuleApi {
   bTest1: ApiBTest1;
   cabloyTestPassport: ApiCabloyTestPassport;
   home: ApiHome;
+  homeUserPassport: ApiHomeUserPassport;
   onion: ApiOnion;
   userPassport: ApiUserPassport;
   vonaTestUpload: ApiVonaTestUpload;
@@ -91,6 +99,7 @@ declare module 'zova' {
     'home-api.api.bTest1': ApiBTest1;
     'home-api.api.cabloyTestPassport': ApiCabloyTestPassport;
     'home-api.api.home': ApiHome;
+    'home-api.api.homeUserPassport': ApiHomeUserPassport;
     'home-api.api.onion': ApiOnion;
     'home-api.api.userPassport': ApiUserPassport;
     'home-api.api.vonaTestUpload': ApiVonaTestUpload;

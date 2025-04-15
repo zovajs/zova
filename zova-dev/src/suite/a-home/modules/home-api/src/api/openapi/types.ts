@@ -1,53 +1,5 @@
 export interface paths {
-  '/api/auth/passport/login/{module}/{providerName}/{clientName?}': {
-    parameters: {
-      query?: never;
-      header?: never;
-      path?: never;
-      cookie?: never;
-    };
-    get: operations['AuthPassport_login'];
-    put?: never;
-    post?: never;
-    delete?: never;
-    options?: never;
-    head?: never;
-    patch?: never;
-    trace?: never;
-  };
-  '/api/auth/passport/associate/{module}/{providerName}/{clientName?}': {
-    parameters: {
-      query?: never;
-      header?: never;
-      path?: never;
-      cookie?: never;
-    };
-    get: operations['AuthPassport_associate'];
-    put?: never;
-    post?: never;
-    delete?: never;
-    options?: never;
-    head?: never;
-    patch?: never;
-    trace?: never;
-  };
-  '/api/auth/passport/migrate/{module}/{providerName}/{clientName?}': {
-    parameters: {
-      query?: never;
-      header?: never;
-      path?: never;
-      cookie?: never;
-    };
-    get: operations['AuthPassport_migrate'];
-    put?: never;
-    post?: never;
-    delete?: never;
-    options?: never;
-    head?: never;
-    patch?: never;
-    trace?: never;
-  };
-  '/api/user/passport/refreshAuthToken': {
+  '/api/home/user/passport/logout': {
     parameters: {
       query?: never;
       header?: never;
@@ -56,14 +8,14 @@ export interface paths {
     };
     get?: never;
     put?: never;
-    post: operations['UserPassport_refreshAuthToken'];
+    post: operations['HomeUserPassport_logout'];
     delete?: never;
     options?: never;
     head?: never;
     patch?: never;
     trace?: never;
   };
-  '/api/user/passport/createAuthTokenFromOauthCode': {
+  '/api/home/user/passport/login': {
     parameters: {
       query?: never;
       header?: never;
@@ -72,7 +24,87 @@ export interface paths {
     };
     get?: never;
     put?: never;
-    post: operations['UserPassport_createAuthTokenFromOauthCode'];
+    post: operations['HomeUserPassport_loginSimple'];
+    delete?: never;
+    options?: never;
+    head?: never;
+    patch?: never;
+    trace?: never;
+  };
+  '/api/home/user/passport/login/{module}/{providerName}/{clientName?}': {
+    parameters: {
+      query?: never;
+      header?: never;
+      path?: never;
+      cookie?: never;
+    };
+    get: operations['HomeUserPassport_login'];
+    put?: never;
+    post?: never;
+    delete?: never;
+    options?: never;
+    head?: never;
+    patch?: never;
+    trace?: never;
+  };
+  '/api/home/user/passport/associate/{module}/{providerName}/{clientName?}': {
+    parameters: {
+      query?: never;
+      header?: never;
+      path?: never;
+      cookie?: never;
+    };
+    get: operations['HomeUserPassport_associate'];
+    put?: never;
+    post?: never;
+    delete?: never;
+    options?: never;
+    head?: never;
+    patch?: never;
+    trace?: never;
+  };
+  '/api/home/user/passport/migrate/{module}/{providerName}/{clientName?}': {
+    parameters: {
+      query?: never;
+      header?: never;
+      path?: never;
+      cookie?: never;
+    };
+    get: operations['HomeUserPassport_migrate'];
+    put?: never;
+    post?: never;
+    delete?: never;
+    options?: never;
+    head?: never;
+    patch?: never;
+    trace?: never;
+  };
+  '/api/home/user/passport/refreshAuthToken': {
+    parameters: {
+      query?: never;
+      header?: never;
+      path?: never;
+      cookie?: never;
+    };
+    get?: never;
+    put?: never;
+    post: operations['HomeUserPassport_refreshAuthToken'];
+    delete?: never;
+    options?: never;
+    head?: never;
+    patch?: never;
+    trace?: never;
+  };
+  '/api/home/user/passport/createPassportFromOauthCode': {
+    parameters: {
+      query?: never;
+      header?: never;
+      path?: never;
+      cookie?: never;
+    };
+    get?: never;
+    put?: never;
+    post: operations['HomeUserPassport_createPassportFromOauthCode'];
     delete?: never;
     options?: never;
     head?: never;
@@ -292,10 +324,29 @@ export interface paths {
 export type webhooks = Record<string, never>;
 export interface components {
   schemas: {
+    'home-user.entity.user': {
+      createdAt: string;
+      updatedAt: string;
+      deleted: boolean;
+      iid: number;
+      id: string | number;
+      name: string;
+      avatar?: string;
+      locale?: string;
+    };
     'a-jwt.dto.jwtToken': {
       accessToken: string;
       refreshToken: string;
       expiresIn: number;
+    };
+    'home-user.dto.passport': {
+      user: components['schemas']['home-user.entity.user'];
+      auth?: unknown;
+      jwt: components['schemas']['a-jwt.dto.jwtToken'];
+    };
+    'a-authsimple.dto.authSimple': {
+      username: string;
+      password: string;
     };
     /** @description User */
     'vona-test.dto.user': {
@@ -313,10 +364,60 @@ export interface components {
 }
 export type $defs = Record<string, never>;
 export interface operations {
-  AuthPassport_login: {
+  HomeUserPassport_logout: {
     parameters: {
-      query: {
-        redirect: string;
+      query?: never;
+      header?: never;
+      path?: never;
+      cookie?: never;
+    };
+    requestBody?: never;
+    responses: {
+      200: {
+        headers: {
+          [name: string]: unknown;
+        };
+        content: {
+          'application/json': {
+            code: string;
+            message: string;
+            data?: unknown;
+          };
+        };
+      };
+    };
+  };
+  HomeUserPassport_loginSimple: {
+    parameters: {
+      query?: never;
+      header?: never;
+      path?: never;
+      cookie?: never;
+    };
+    requestBody: {
+      content: {
+        'application/json': components['schemas']['a-authsimple.dto.authSimple'];
+      };
+    };
+    responses: {
+      200: {
+        headers: {
+          [name: string]: unknown;
+        };
+        content: {
+          'application/json': {
+            code: string;
+            message: string;
+            data: components['schemas']['home-user.dto.passport'];
+          };
+        };
+      };
+    };
+  };
+  HomeUserPassport_login: {
+    parameters: {
+      query?: {
+        redirect?: string;
       };
       header?: never;
       path: {
@@ -336,16 +437,16 @@ export interface operations {
           'application/json': {
             code: string;
             message: string;
-            data?: unknown;
+            data: components['schemas']['home-user.dto.passport'];
           };
         };
       };
     };
   };
-  AuthPassport_associate: {
+  HomeUserPassport_associate: {
     parameters: {
-      query: {
-        redirect: string;
+      query?: {
+        redirect?: string;
       };
       header?: never;
       path: {
@@ -365,16 +466,16 @@ export interface operations {
           'application/json': {
             code: string;
             message: string;
-            data?: unknown;
+            data: components['schemas']['home-user.dto.passport'];
           };
         };
       };
     };
   };
-  AuthPassport_migrate: {
+  HomeUserPassport_migrate: {
     parameters: {
-      query: {
-        redirect: string;
+      query?: {
+        redirect?: string;
       };
       header?: never;
       path: {
@@ -394,13 +495,13 @@ export interface operations {
           'application/json': {
             code: string;
             message: string;
-            data?: unknown;
+            data: components['schemas']['home-user.dto.passport'];
           };
         };
       };
     };
   };
-  UserPassport_refreshAuthToken: {
+  HomeUserPassport_refreshAuthToken: {
     parameters: {
       query?: never;
       header?: never;
@@ -429,7 +530,7 @@ export interface operations {
       };
     };
   };
-  UserPassport_createAuthTokenFromOauthCode: {
+  HomeUserPassport_createPassportFromOauthCode: {
     parameters: {
       query?: never;
       header?: never;
@@ -452,7 +553,7 @@ export interface operations {
           'application/json': {
             code: string;
             message: string;
-            data: components['schemas']['a-jwt.dto.jwtToken'];
+            data: components['schemas']['home-user.dto.passport'];
           };
         };
       };

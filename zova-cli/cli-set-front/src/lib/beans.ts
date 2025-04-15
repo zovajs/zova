@@ -31,7 +31,6 @@ import { CliRefactorPageParams } from './bean/cli.refactor.pageParams.ts';
 import { CliRefactorPageQuery } from './bean/cli.refactor.pageQuery.ts';
 import { CliRefactorRenameComponent } from './bean/cli.refactor.renameComponent.ts';
 import { CliToolsDeps } from './bean/cli.tools.deps.ts';
-import { CliToolsIcon } from './bean/cli.tools.icon.ts';
 import { CliToolsMetadata } from './bean/cli.tools.metadata.ts';
 
 export const beans = {
@@ -65,7 +64,6 @@ export const beans = {
   'refactor.componentSlots': CliRefactorComponentSlots,
   'refactor.componentModel': CliRefactorComponentModel,
   'refactor.renameComponent': CliRefactorRenameComponent,
-  'tools.icon': CliToolsIcon,
   'tools.metadata': CliToolsMetadata,
   'tools.deps': CliToolsDeps,
   'openapi.config': CliOpenapiConfig,
