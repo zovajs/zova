@@ -9,10 +9,9 @@ export class ModelPassport extends BeanModelBase {
   expireTime?: number;
 
   protected async __init__() {
-    this.passport = this.$useState(
-      process.env.CLIENT ? 'local' : 'mem',
-      { queryKey: ['passport'] },
-    );
+    this.passport = process.env.CLIENT
+      ? this.$useStateLocal({ queryKey: ['passport'] })
+      : undefined;
     this.accessToken = this.$useStateCookie({
       queryKey: ['token'],
     });
