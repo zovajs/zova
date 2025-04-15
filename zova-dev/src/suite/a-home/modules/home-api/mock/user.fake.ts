@@ -25,7 +25,7 @@ export default defineFakeRoute([
           jwt: {
             accessToken: `accessToken-${user.username}`,
             refreshToken: `refreshToken-${user.username}`,
-            expireTime: Date.now() + 2 * 3600 * 1000,
+            expiresIn: 2 * 3600,
           },
         },
       };
