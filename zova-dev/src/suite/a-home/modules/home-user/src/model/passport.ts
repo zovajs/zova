@@ -11,7 +11,7 @@ export class ModelPassport extends BeanModelBase {
   protected async __init__() {
     this.passport = process.env.CLIENT
       ? this.$useStateLocal({ queryKey: ['passport'] })
-      : undefined;
+      : this.$useStateMem({ queryKey: ['passport'] });
     this.accessToken = this.$useStateCookie({
       queryKey: ['token'],
     });
