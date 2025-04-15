@@ -14,7 +14,6 @@ export class AppModule extends BeanSimple {
 
   /** @internal */
   public async initialize() {
-    await this._loadAllMonkeysAndSyncsAndPreloads();
     await this._requireAllSpecifics('preload');
     await this._requireAllSpecifics('monkey');
     await this._requireAllSpecifics('sync');
@@ -71,15 +70,6 @@ export class AppModule extends BeanSimple {
     return this.sys.meta.module.exists(moduleName as any);
   }
 
-  private async _loadAllMonkeysAndSyncsAndPreloads() {
-    for (const moduleName of this.sys.meta.module.modulesMeta.moduleNames) {
-      const module = this.sys.meta.module.modulesMeta.modules[moduleName];
-      if (module.resource.Monkey) {
-        this.monkeyInstances[moduleName] = this.app.bean._newBeanSimple(module.resource.Monkey, false, module);
-      }
-    }
-  }
-
   private async _requireAllSpecifics(capabilityName: 'preload' | 'monkey' | 'sync') {
     for (const moduleName of this.sys.meta.module.modulesMeta.moduleNames) {
       const module = this.sys.meta.module.modulesMeta.modules[moduleName];
@@ -125,9 +115,12 @@ export class AppModule extends BeanSimple {
   }
 
   private async _installInner(moduleName: string, moduleRepo: IModule) {
-    // main
+    // main / monkey
     if (moduleRepo.resource.Main) {
       this.mainInstances[moduleName] = this.app.bean._newBeanSimple(moduleRepo.resource.Main, false, moduleRepo);
+    }
+    if (moduleRepo.resource.Monkey) {
+      this.monkeyInstances[moduleName] = this.app.bean._newBeanSimple(moduleRepo.resource.Monkey, false, moduleRepo);
     }
     // monkey: moduleLoading
     await this._monkeyModule('moduleLoading', moduleRepo);
