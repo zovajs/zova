@@ -19,7 +19,7 @@ export function configDefault(env: ZovaConfigEnv) {
       appMode: cast(env).META_APP_MODE,
     },
     api: {
-      baseURL: cast(env).SERVER ? (env.SSR_API_BASE_URL || env.API_BASE_URL) : env.API_BASE_URL,
+      baseURL: process.env.SERVER ? (env.SSR_API_BASE_URL || env.API_BASE_URL) : env.API_BASE_URL,
       prefix: env.API_PREFIX,
       jwt: env.API_JWT !== 'false',
     },
