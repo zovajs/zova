@@ -4,6 +4,9 @@ import { Sys } from 'zova-module-a-bean';
 import { IconGroup } from '../lib/iconGroup.js';
 import { IIconInfo, IIconMeta, TypeIconModules, TypeIconSymbols } from '../types/icon.js';
 
+const XMLNS = 'http://www.w3.org/2000/svg';
+const XMLNS_LINK = 'http://www.w3.org/1999/xlink';
+
 @Sys()
 export class SysIcon extends BeanBase {
   protected _iconSymbols: TypeIconSymbols = reactive({});
@@ -49,8 +52,8 @@ export class SysIcon extends BeanBase {
     const iconGroup = await this.parseIconGroup(meta.module, meta.group);
     if (!iconGroup) return undefined;
     // icon inject
-    const symbolId = meta.symbolId;
-    this._iconSymbols[meta.fullName] = symbolId;
+    this._injectIconClient(meta);
+    const symbolId = this._iconSymbols[meta.fullName] = meta.symbolId;
     // ok
     return { meta, symbolId };
   }
@@ -103,6 +106,48 @@ export class SysIcon extends BeanBase {
       svg = await res.text();
     }
     return svg;
+  }
+
+  private _injectIconClient(meta: IIconMeta) {
+    if (process.env.SERVER) return;
+    // client
+    const iconModule = this.getIconModule(meta.module);
+    const iconGroup = iconModule[meta.group];
+    // inject container
+    let domContainer = document.getElementById('zova-svg-container');
+    if (!domContainer) {
+      domContainer = document.createElement('div');
+      domContainer.style.position = 'absolute';
+      domContainer.style.width = '0';
+      domContainer.style.height = '0';
+      domContainer.style.display = 'none';
+      domContainer.id = 'zova-svg-container';
+      document.body.appendChild(domContainer);
+    }
+    // inject module
+    let domModule = document.getElementById(`zova-svg-module-${meta.module}`);
+    if (!domModule) {
+      domModule = document.createElement('div');
+      domModule.id = `zova-svg-module-${meta.module}`;
+      domContainer.appendChild(domModule);
+    }
+    // inject group
+    let domGroup = document.getElementById(`zova-svg-group-${meta.module}-${meta.group}`) as unknown as SVGSVGElement;
+    if (!domGroup) {
+      domGroup = document.createElementNS(XMLNS, 'svg');
+      domGroup.id = `zova-svg-group-${meta.module}-${meta.group}`;
+      domGroup.setAttribute('xmlns', XMLNS);
+      domGroup.setAttribute('xmlns:link', XMLNS_LINK);
+      domModule.appendChild(domGroup);
+    }
+    // inject icon
+    const domIcon = document.getElementById(meta.symbolId) as unknown as SVGElement;
+    if (!domIcon) {
+      const iconContent = this.extractIconContent(iconGroup.svg, meta.symbolId);
+      if (iconContent) {
+        domGroup.insertAdjacentHTML('beforeend', iconContent);
+      }
+    }
   }
 
   extractIconContent(svg: string | undefined, symbolId: string) {
