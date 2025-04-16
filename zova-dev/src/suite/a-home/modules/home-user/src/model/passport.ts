@@ -27,7 +27,7 @@ export class ModelPassport extends BeanModelBase {
       },
       onSuccess: data => {
         // save
-        this._setPassport(data);
+        this._setPassportJwt(data);
         // page: home
         this.$router.replace('/');
       },
@@ -43,7 +43,7 @@ export class ModelPassport extends BeanModelBase {
       onSuccess: () => {
         // clear
         this.$clear(); // not await
-        this._setPassport();
+        this._setPassportJwt();
         // page: login
         this.$router.replace('/login');
       },
@@ -69,7 +69,9 @@ export class ModelPassport extends BeanModelBase {
   }
 
   async refreshAuthToken(refreshToken: string): Promise<IJwtInfo> {
-    return await this.$api.homeUserPassport.refreshAuthToken({ refreshToken });
+    const jwt = await this.$api.homeUserPassport.refreshAuthToken({ refreshToken });
+    this._setJwt(jwt);
+    return (await this.getJwtInfo())!;
   }
 
   async ensurePassport() {
@@ -89,14 +91,25 @@ export class ModelPassport extends BeanModelBase {
     return this.passport;
   }
 
-  private _setPassport(data?: ApiApiHomeUserPassportloginResponseBody) {
-    if (data) {
-      this.passport = data.passport;
-      this.jwt = data.jwt;
-      this.expireTime = Date.now() + (data.jwt.expiresIn - this.scope.config.passport.accessToken.expireTimeDelay) * 1000;
-      this.accessToken = data.jwt.accessToken;
+  private _setPassportJwt(data?: ApiApiHomeUserPassportloginResponseBody) {
+    this._setPassport(data?.passport);
+    this._setJwt(data?.jwt);
+  }
+
+  private _setPassport(passport?: ApiApiHomeUserPassportloginResponseBody['passport']) {
+    if (passport) {
+      this.passport = passport;
     } else {
       this.passport = undefined;
+    }
+  }
+
+  private _setJwt(jwt?: ApiApiHomeUserPassportloginResponseBody['jwt']) {
+    if (jwt) {
+      this.jwt = jwt;
+      this.expireTime = Date.now() + (jwt.expiresIn - this.scope.config.passport.accessToken.expireTimeDelay) * 1000;
+      this.accessToken = jwt.accessToken;
+    } else {
       this.jwt = undefined;
       this.expireTime = undefined;
       this.accessToken = undefined;
