@@ -3,18 +3,28 @@ import { BeanInterceptorBase, IDecoratorInterceptorOptions, IInterceptorResponse
 
 export interface IInterceptorOptionsMock extends IDecoratorInterceptorOptions {}
 
-@Interceptor<IInterceptorOptionsMock>({ meta: { mode: 'development' } })
+@Interceptor<IInterceptorOptionsMock>()
 export class InterceptorMock extends BeanInterceptorBase<IInterceptorOptionsMock> implements IInterceptorResponseError {
   async onResponseError(
     error: AxiosError,
     _options: IDecoratorInterceptorOptions,
     next: NextInterceptorError,
   ): Promise<AxiosError> {
-    if (error.code === 'ERR_NETWORK' || error.status === 404) {
-      const config = error.config!;
-      const baseURL = `http://localhost:${this.sys.env.DEV_SERVER_PORT}${this.sys.env.API_PREFIX}`;
-      if (config.baseURL && (config.baseURL !== baseURL && config.baseURL !== this.sys.env.API_PREFIX)) {
-        return await this.$fetch.request(Object.assign({}, config, { baseURL: this.sys.env.API_PREFIX }));
+    if (this.sys.env.MOCK_ENABLED === 'true') {
+      if (process.env.DEV || (process.env.PROD && this.sys.env.MOCK_BUILD === 'true')) {
+        if (error.code === 'ERR_NETWORK' || error.status === 404) {
+          const config = error.config!;
+          if (config.baseURL) {
+            const port = process.env.DEV ? this.sys.env.DEV_SERVER_PORT : this.sys.env.MOCK_BUILD_PORT;
+            let baseURL = `http://localhost:${port}`;
+            if (config.baseURL.endsWith(this.sys.env.API_PREFIX!)) {
+              baseURL = `${baseURL}${this.sys.env.API_PREFIX}`;
+            }
+            if (config.baseURL !== baseURL && config.baseURL !== this.sys.env.API_PREFIX) {
+              return await this.$fetch.request(Object.assign({}, config, { baseURL }));
+            }
+          }
+        }
       }
     }
     return next();
