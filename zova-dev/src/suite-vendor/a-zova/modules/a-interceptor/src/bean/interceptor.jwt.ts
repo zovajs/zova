@@ -6,6 +6,7 @@ import type {
   NextInterceptorRequest,
 } from 'zova-module-a-fetch';
 import type { IJwtAdapter } from '../types/jwt.js';
+import { isNil } from '@cabloy/utils';
 import {
   BeanInterceptorBase,
   Interceptor,
@@ -30,18 +31,33 @@ export class InterceptorJwt extends BeanInterceptorBase<IInterceptorOptionsJwt> 
 
   async onRequest(
     config: AxiosRequestConfig,
-    _options: IInterceptorOptionsJwt,
+    options: IInterceptorOptionsJwt,
     next: NextInterceptorRequest,
   ): Promise<AxiosRequestConfig> {
-    if (!this.sys.config.api.jwt) return next();
-    let jwtInfo = await this._beanJwtAdapter.getJwtInfo();
-    if (jwtInfo) {
-      if (process.env.CLIENT && (jwtInfo.expireTime && jwtInfo.expireTime < Date.now())) {
-        if (!jwtInfo.refreshToken) throw new Error('no refreshToken');
-        jwtInfo = await this._beanJwtAdapter.refreshAuthToken(jwtInfo.refreshToken);
-      }
-      config.headers!.Authorization = `Bearer ${jwtInfo?.accessToken || ''}`;
+    const accessToken = await this.prepareAccessToken(options.authToken);
+    if (accessToken) {
+      config.headers!.Authorization = `Bearer ${accessToken}`;
     }
     return next(config);
+  }
+
+  async prepareAccessToken(authToken: string | boolean | undefined): Promise<string | undefined> {
+    if (!this.sys.config.api.jwt) return;
+    if (isNil(authToken)) authToken = this.scope.config.authToken.default;
+    // authToken: false
+    if (authToken === false) return;
+    // authToken: string
+    if (typeof authToken === 'string') return authToken;
+    // authToken: true
+    let jwtInfo = await this._beanJwtAdapter.getJwtInfo();
+    if (!jwtInfo) return;
+    // accessToken
+    if (process.env.SERVER || (!jwtInfo.expireTime || jwtInfo.expireTime > Date.now())) {
+      return jwtInfo?.accessToken;
+    }
+    // refreshToken
+    if (!jwtInfo.refreshToken) throw new Error('no refreshToken');
+    jwtInfo = await this._beanJwtAdapter.refreshAuthToken(jwtInfo.refreshToken);
+    return jwtInfo.accessToken;
   }
 }
