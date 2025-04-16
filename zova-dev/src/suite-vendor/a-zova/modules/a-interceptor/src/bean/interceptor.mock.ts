@@ -14,12 +14,9 @@ export class InterceptorMock extends BeanInterceptorBase<IInterceptorOptionsMock
       const config = error.config!;
       const baseURL = `http://localhost:${this.sys.env.DEV_SERVER_PORT}${this.sys.env.API_PREFIX}`;
       if (config.baseURL && (config.baseURL !== baseURL && config.baseURL !== this.sys.env.API_PREFIX)) {
-        // try mock
-        const res = await this.$fetch.request(Object.assign({}, config, { baseURL: this.sys.env.API_PREFIX }));
-        return res as any;
+        return await this.$fetch.request(Object.assign({}, config, { baseURL: this.sys.env.API_PREFIX }));
       }
     }
-    error = await next();
-    return error;
+    return next();
   }
 }
