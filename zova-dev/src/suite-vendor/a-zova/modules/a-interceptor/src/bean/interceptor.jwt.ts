@@ -32,9 +32,14 @@ export class InterceptorJwt extends BeanInterceptorBase<IInterceptorOptionsJwt> 
     _options: IInterceptorOptionsJwt,
     next: NextInterceptorRequest,
   ): Promise<AxiosRequestConfig> {
-    if (this.sys.config.api.jwt) {
-      const authorization = await this._beanJwtAdapter.getAuthorization();
-      config.headers!.Authorization = `Bearer ${authorization || ''}`;
+    if (!this.sys.config.api.jwt) return next();
+    let jwtInfo = await this._beanJwtAdapter.getJwtInfo();
+    if (jwtInfo) {
+      if (process.env.CLIENT && (!jwtInfo.expireTime || jwtInfo.expireTime < Date.now())) {
+        if (!jwtInfo.refreshToken) throw new Error('no refreshToken');
+        jwtInfo = await this._beanJwtAdapter.refreshAuthToken(jwtInfo.refreshToken);
+      }
+      config.headers!.Authorization = `Bearer ${jwtInfo?.accessToken || ''}`;
     }
     return next(config);
   }

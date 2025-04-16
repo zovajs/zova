@@ -1,10 +1,12 @@
 import { catchError } from '@cabloy/utils';
+import { IJwtInfo } from 'zova-module-a-interceptor';
 import { BeanModelBase, Model } from 'zova-module-a-model';
-import { ApiApiHomeUserPassportcurrentResponseBody, ApiApiHomeUserPassportloginResponseBody, ApiApiHomeUserPassportloginSimpleRequestBody } from 'zova-module-home-api';
+import { ApiApiHomeUserPassportloginResponseBody, ApiApiHomeUserPassportloginSimpleRequestBody } from 'zova-module-home-api';
 
 @Model()
 export class ModelPassport extends BeanModelBase {
-  passport?: ApiApiHomeUserPassportcurrentResponseBody;
+  passport?: ApiApiHomeUserPassportloginResponseBody['passport'];
+  jwt?: ApiApiHomeUserPassportloginResponseBody['jwt'];
   accessToken?: string;
   expireTime?: number;
 
@@ -12,12 +14,9 @@ export class ModelPassport extends BeanModelBase {
     this.passport = process.env.CLIENT
       ? this.$useStateLocal({ queryKey: ['passport'] })
       : this.$useStateMem({ queryKey: ['passport'] });
-    this.accessToken = this.$useStateCookie({
-      queryKey: ['token'],
-    });
-    this.expireTime = this.$useStateCookie({
-      queryKey: ['expireTime'],
-    });
+    this.jwt = this.$useStateLocal({ queryKey: ['jwt'] });
+    this.expireTime = this.$useStateLocal({ queryKey: ['expireTime'] });
+    this.accessToken = this.$useStateCookie({ queryKey: ['token'] });
   }
 
   loginSimple() {
@@ -55,12 +54,22 @@ export class ModelPassport extends BeanModelBase {
     return !!this.accessToken && !!this.expireTime && this.expireTime > Date.now();
   }
 
-  get jwtAuthorization(): string | undefined {
-    return this.isAuthenticated ? this.accessToken : undefined;
-  }
-
   get user() {
     return this.passport?.user;
+  }
+
+  async getJwtInfo(): Promise<IJwtInfo | undefined> {
+    if (!this.accessToken) return undefined;
+    return {
+      accessToken: this.accessToken,
+      refreshToken: this.jwt?.refreshToken,
+      expiresIn: this.jwt?.expiresIn,
+      expireTime: this.expireTime,
+    };
+  }
+
+  async refreshAuthToken(refreshToken: string): Promise<IJwtInfo> {
+    return await this.$api.homeUserPassport.refreshAuthToken({ refreshToken });
   }
 
   async ensurePassport() {
@@ -83,10 +92,12 @@ export class ModelPassport extends BeanModelBase {
   private _setPassport(data?: ApiApiHomeUserPassportloginResponseBody) {
     if (data) {
       this.passport = data.passport;
+      this.jwt = data.jwt;
       this.expireTime = Date.now() + (data.jwt.expiresIn - this.scope.config.passport.accessToken.expireTimeDelay) * 1000;
       this.accessToken = data.jwt.accessToken;
     } else {
       this.passport = undefined;
+      this.jwt = undefined;
       this.expireTime = undefined;
       this.accessToken = undefined;
     }

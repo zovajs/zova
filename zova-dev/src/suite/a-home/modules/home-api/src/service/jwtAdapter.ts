@@ -1,4 +1,4 @@
-import type { IJwtAdapter } from 'zova-module-a-interceptor';
+import type { IJwtAdapter, IJwtInfo } from 'zova-module-a-interceptor';
 import { BeanBase, Use } from 'zova';
 import { Service } from 'zova-module-a-bean';
 import { ModelPassport } from 'zova-module-home-user';
@@ -10,7 +10,11 @@ export class ServiceJwtAdapter extends BeanBase implements IJwtAdapter {
 
   protected async __init__() {}
 
-  async getAuthorization(): Promise<string | undefined> {
-    return this.$$modelPassport.jwtAuthorization;
+  async getJwtInfo(): Promise<IJwtInfo | undefined> {
+    return await this.$$modelPassport.getJwtInfo();
+  }
+
+  async refreshAuthToken(refreshToken: string): Promise<IJwtInfo> {
+    return await this.$$modelPassport.refreshAuthToken(refreshToken);
   }
 }
