@@ -100,7 +100,7 @@ export function generateVitePlugins(
         watch: true,
         logger,
         basename,
-        enableDev: !build,
+        enableDev: process.env.MOCK_ENABLED === 'true',
         enableProd: !build,
         build,
         cors,
