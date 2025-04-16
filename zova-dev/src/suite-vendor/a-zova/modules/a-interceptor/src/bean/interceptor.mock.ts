@@ -12,7 +12,7 @@ export class InterceptorMock extends BeanInterceptorBase<IInterceptorOptionsMock
   ): Promise<AxiosError> {
     if (this.sys.env.MOCK_ENABLED === 'true') {
       if (process.env.DEV || (process.env.PROD && this.sys.env.MOCK_BUILD === 'true')) {
-        if (error.code === 'ERR_NETWORK' || error.status === 404) {
+        if (['ECONNREFUSED', 'ERR_NETWORK', '404'].includes(error.code!) || error.status === 404) {
           const config = error.config!;
           if (config.baseURL) {
             const port = process.env.DEV ? this.sys.env.DEV_SERVER_PORT : this.sys.env.MOCK_BUILD_PORT;
