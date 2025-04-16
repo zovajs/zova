@@ -67,4 +67,24 @@ export default defineFakeRoute([
       };
     },
   },
+  {
+    url: '/home/user/passport/refreshAuthToken',
+    method: 'post',
+    response: req => {
+      const name = req.body.refreshToken.substring('refreshToken-'.length);
+      const user = __users.find(item => item.name === name);
+      if (!user) {
+        return { code: 403, message: 'Error' };
+      }
+      return {
+        code: 0,
+        message: 'Success',
+        data: {
+          accessToken: `accessToken-${user.name}`,
+          refreshToken: `refreshToken-${user.name}`,
+          expiresIn: 2 * 3600,
+        },
+      };
+    },
+  },
 ]);
