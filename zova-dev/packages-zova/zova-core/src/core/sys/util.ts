@@ -25,15 +25,19 @@ export class SysUtil extends BeanSimple {
   }
 
   apiActionConfigPrepare(baseURL?: string, options?: any) {
-    return Object.assign(
+    const optionsCustom: any = {
+      params: options?.query,
+      query: undefined,
+    };
+    if (options?.authToken !== undefined) {
+      optionsCustom.interceptors = { 'a-interceptor:jwt': { authToken: options?.authToken } };
+    }
+    return deepExtend(
       {
         baseURL: baseURL || this.getApiBaseURL(false),
       },
       options,
-      {
-        params: options?.query,
-        query: undefined,
-      },
+      optionsCustom,
     );
   }
 
