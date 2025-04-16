@@ -13,6 +13,7 @@ import {
 
 export interface IInterceptorOptionsJwt extends IDecoratorInterceptorOptions {
   jwtAdapter?: string;
+  authToken?: boolean | string;
 }
 
 @Interceptor<IInterceptorOptionsJwt>({ dependencies: 'a-interceptor:body' })
@@ -35,7 +36,7 @@ export class InterceptorJwt extends BeanInterceptorBase<IInterceptorOptionsJwt> 
     if (!this.sys.config.api.jwt) return next();
     let jwtInfo = await this._beanJwtAdapter.getJwtInfo();
     if (jwtInfo) {
-      if (process.env.CLIENT && (!jwtInfo.expireTime || jwtInfo.expireTime < Date.now())) {
+      if (process.env.CLIENT && (jwtInfo.expireTime && jwtInfo.expireTime < Date.now())) {
         if (!jwtInfo.refreshToken) throw new Error('no refreshToken');
         jwtInfo = await this._beanJwtAdapter.refreshAuthToken(jwtInfo.refreshToken);
       }
