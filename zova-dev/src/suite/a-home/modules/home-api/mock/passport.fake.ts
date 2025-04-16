@@ -15,12 +15,14 @@ export default defineFakeRoute([
         code: 0,
         message: 'Success',
         data: {
-          user: {
-            name: user.name,
-            avatar: user.avatar,
-          },
-          auth: {
-            id: 1,
+          passport: {
+            user: {
+              name: user.name,
+              avatar: user.avatar,
+            },
+            auth: {
+              id: 1,
+            },
           },
           jwt: {
             accessToken: `accessToken-${user.name}`,
