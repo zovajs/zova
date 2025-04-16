@@ -38,11 +38,7 @@
         "jwt": {
           "dependencies": "a-interceptor:body"
         },
-        "mock": {
-          "meta": {
-            "mode": "development"
-          }
-        }
+        "mock": {}
       }
     }
   }
