@@ -19,6 +19,9 @@ export interface ZovaConfigEnv {
   SSR_BODYREADYOBSERVER: string | undefined;
   OPENAPI_BASE_URL_DEFAULT: string | undefined;
   OPENAPI_BASE_URL_HOME_API: string | undefined;
+  MOCK_ENABLED: string | undefined;
+  MOCK_BUILD: string | undefined;
+  MOCK_BUILD_PORT: string | undefined;
 }
 
 declare global {
