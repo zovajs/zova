@@ -14,7 +14,7 @@ import {
 
 export interface IInterceptorOptionsBody extends IDecoratorInterceptorOptions {}
 
-@Interceptor<IInterceptorOptionsBody>()
+@Interceptor<IInterceptorOptionsBody>({ dependencies: 'a-interceptor:mock' })
 export class InterceptorBody
   extends BeanInterceptorBase<IInterceptorOptionsBody>
   implements IInterceptorResponse, IInterceptorResponseError {
