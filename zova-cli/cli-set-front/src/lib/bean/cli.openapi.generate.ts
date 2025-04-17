@@ -194,6 +194,14 @@ export const OpenApiBaseURL = (sys: ZovaSys) => {
     // name: params/query/headers
     const parametersInfo: Record<string, { name: string; question: boolean }> = {};
     const nodeTypeInfoParameters = _parseNodeType(nodeActionInfo.nodeTypeInfo.parameters.nodeType)!;
+    // authToken
+    let contentAuthToken = '';
+    if (nodeTypeInfoParameters.header) {
+      const nodeTypeInfoParametersHeader = _parseNodeType(nodeTypeInfoParameters.header.nodeType)!;
+      if (nodeTypeInfoParametersHeader?.Authorization) {
+        contentAuthToken = ', true';
+      }
+    }
     for (const key of ['path', 'query', 'header']) {
       if (_isNodeNever(nodeTypeInfoParameters[key].nodeType)) continue;
       const key2 = key === 'path' ? 'params' : key === 'header' ? 'headers' : key;
@@ -268,7 +276,7 @@ export const OpenApiBaseURL = (sys: ZovaSys) => {
     ) {
       return this.$fetch.${pathInfo.method}<any, ${nameResponseBody}>(
         ${contentPathTranslate} ${contentRequestBody ? `${contentBodyParams},` : ''} 
-        this.$configPrepare(OpenApiBaseURL(this.sys), options),
+        this.$configPrepare(OpenApiBaseURL(this.sys), options${contentAuthToken}),
       );
     }\n`;
     return [contentTypes.join('\n'), contentSignature];
@@ -367,7 +375,7 @@ function _getRequestPathInfo(ast: ts.Node[], nodeActionInfo: INodeActionInfo) {
 }
 
 function _parseNodeType(nodeType?: ts.TypeLiteralNode | ts.InterfaceDeclaration) {
-  if (!nodeType) return;
+  if (!nodeType || !nodeType.members) return;
   const nodeTypeInfo: TypeNodeTypeInfo = {};
   nodeType.members.forEach(node => {
     if (!ts.isPropertySignature(node)) return;

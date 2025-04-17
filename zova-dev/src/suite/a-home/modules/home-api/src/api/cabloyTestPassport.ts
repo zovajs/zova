@@ -19,7 +19,7 @@ export class ApiCabloyTestPassport extends BeanApiBase {
   ) {
     return this.$fetch.get<any, ApiApiCabloyTestPassportisAuthenticatedResponseBody>(
       ApiApiCabloyTestPassportisAuthenticatedPath,
-      this.$configPrepare(OpenApiBaseURL(this.sys), options),
+      this.$configPrepare(OpenApiBaseURL(this.sys), options, true),
     );
   }
 }

@@ -146,7 +146,7 @@ export class ApiOnion extends BeanApiBase {
   ) {
     return this.$fetch.get<any, ApiApiOnionecho6ResponseBody>(
       ApiApiOnionecho6Path,
-      this.$configPrepare(OpenApiBaseURL(this.sys), options),
+      this.$configPrepare(OpenApiBaseURL(this.sys), options, true),
     );
   }
 }
