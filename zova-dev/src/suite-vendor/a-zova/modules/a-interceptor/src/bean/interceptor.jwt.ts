@@ -67,18 +67,18 @@ export class InterceptorJwt extends BeanInterceptorBase<IInterceptorOptionsJwt> 
       if (authToken === true) this.app.throw(403);
       return;
     }
-    jwtInfo = await this._beanJwtAdapter.refreshAuthToken(jwtInfo.refreshToken);
+    jwtInfo = await this._refreshAuthToken(jwtInfo.refreshToken);
     return jwtInfo.accessToken;
   }
 
-  async _refreshAuthToken(refreshToken: string) {
+  private async _refreshAuthToken(refreshToken: string) {
     if (!this._refreshAuthTokenPromise) {
       this._refreshAuthTokenPromise = this._refreshAuthTokenInner(refreshToken);
     }
     return await this._refreshAuthTokenPromise;
   }
 
-  async _refreshAuthTokenInner(refreshToken: string) {
+  private async _refreshAuthTokenInner(refreshToken: string) {
     try {
       return await this._beanJwtAdapter.refreshAuthToken(refreshToken);
     } finally {
