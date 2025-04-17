@@ -5,7 +5,7 @@ import type {
   IInterceptorRequest,
   NextInterceptorRequest,
 } from 'zova-module-a-fetch';
-import type { IJwtAdapter } from '../types/jwt.js';
+import type { IJwtAdapter, IJwtInfo } from '../types/jwt.js';
 import {
   BeanInterceptorBase,
   Interceptor,
@@ -19,6 +19,7 @@ export interface IInterceptorOptionsJwt extends IDecoratorInterceptorOptions {
 @Interceptor<IInterceptorOptionsJwt>({ dependencies: 'a-interceptor:body' })
 export class InterceptorJwt extends BeanInterceptorBase<IInterceptorOptionsJwt> implements IInterceptorRequest {
   private _beanJwtAdapter: IJwtAdapter;
+  private _refreshAuthTokenPromise?: Promise<IJwtInfo>;
 
   protected async __init__(beanFetch: BeanFetch, options: IInterceptorOptionsJwt) {
     super.__init__(beanFetch, options);
@@ -68,5 +69,20 @@ export class InterceptorJwt extends BeanInterceptorBase<IInterceptorOptionsJwt> 
     }
     jwtInfo = await this._beanJwtAdapter.refreshAuthToken(jwtInfo.refreshToken);
     return jwtInfo.accessToken;
+  }
+
+  async _refreshAuthToken(refreshToken: string) {
+    if (!this._refreshAuthTokenPromise) {
+      this._refreshAuthTokenPromise = this._refreshAuthTokenInner(refreshToken);
+    }
+    return await this._refreshAuthTokenPromise;
+  }
+
+  async _refreshAuthTokenInner(refreshToken: string) {
+    try {
+      return await this._beanJwtAdapter.refreshAuthToken(refreshToken);
+    } finally {
+      this._refreshAuthTokenPromise = undefined;
+    }
   }
 }
