@@ -43,6 +43,7 @@ export class InterceptorJwt extends BeanInterceptorBase<IInterceptorOptionsJwt> 
 
   async prepareAccessToken(authToken: string | boolean | undefined): Promise<string | undefined> {
     if (!this.sys.config.api.jwt) return;
+    // use default in scope.config rather than IInterceptorOptionsJwt.options
     const authTokenCurrent = authToken ?? this.scope.config.authToken.default;
     // authToken: false
     if (authTokenCurrent === false) return;
