@@ -1,5 +1,6 @@
 import type { App } from 'vue';
 import type { BeanContainer } from '../../bean/beanContainer.js';
+import type { HttpStatus } from '../../types/enum/httpStatus.js';
 import type { PluginZovaOptions } from '../../types/interface/pluginZova.js';
 import type { ZovaContext } from '../context/context.js';
 import { markRaw } from 'vue';
@@ -63,6 +64,10 @@ export class ZovaApplication {
         this.reload();
       }, 100);
     }
+  }
+
+  public throw(code: HttpStatus | number | string, ...args: any[]): never {
+    return this.meta.error.throw(undefined, code, ...args);
   }
 }
 

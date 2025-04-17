@@ -43,14 +43,17 @@ export class InterceptorJwt extends BeanInterceptorBase<IInterceptorOptionsJwt> 
 
   async prepareAccessToken(authToken: string | boolean | undefined): Promise<string | undefined> {
     if (!this.sys.config.api.jwt) return;
-    if (isNil(authToken)) authToken = this.scope.config.authToken.default;
+    const authTokenCurrent = authToken ?? this.scope.config.authToken.default;
     // authToken: false
-    if (authToken === false) return;
+    if (authTokenCurrent === false) return;
     // authToken: string
-    if (typeof authToken === 'string') return authToken;
+    if (typeof authTokenCurrent === 'string') return authTokenCurrent;
     // authToken: true
     let jwtInfo = await this._beanJwtAdapter.getJwtInfo();
-    if (!jwtInfo) return;
+    if (!jwtInfo) {
+      if (authToken === true) this.app.throw(403);
+      return;
+    }
     // accessToken
     if (process.env.SERVER || (!jwtInfo.expireTime || jwtInfo.expireTime > Date.now())) {
       return jwtInfo?.accessToken;
