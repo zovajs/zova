@@ -32,7 +32,7 @@ export class SysUtil extends BeanSimple {
     };
     authToken = options?.authToken === undefined ? authToken : options?.authToken;
     if (authToken !== undefined) {
-      optionsCustom.interceptors = { 'a-interceptor:jwt': { authToken: options?.authToken } };
+      optionsCustom.interceptors = { 'a-interceptor:jwt': { authToken } };
     }
     return deepExtend(
       {
