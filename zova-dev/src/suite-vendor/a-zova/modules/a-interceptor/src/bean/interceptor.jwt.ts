@@ -6,7 +6,6 @@ import type {
   NextInterceptorRequest,
 } from 'zova-module-a-fetch';
 import type { IJwtAdapter } from '../types/jwt.js';
-import { isNil } from '@cabloy/utils';
 import {
   BeanInterceptorBase,
   Interceptor,
@@ -56,10 +55,17 @@ export class InterceptorJwt extends BeanInterceptorBase<IInterceptorOptionsJwt> 
     }
     // accessToken
     if (process.env.SERVER || (!jwtInfo.expireTime || jwtInfo.expireTime > Date.now())) {
-      return jwtInfo?.accessToken;
+      if (!jwtInfo.accessToken) {
+        if (authToken === true) this.app.throw(403);
+        return;
+      }
+      return jwtInfo.accessToken;
     }
     // refreshToken
-    if (!jwtInfo.refreshToken) throw new Error('no refreshToken');
+    if (!jwtInfo.refreshToken) {
+      if (authToken === true) this.app.throw(403);
+      return;
+    }
     jwtInfo = await this._beanJwtAdapter.refreshAuthToken(jwtInfo.refreshToken);
     return jwtInfo.accessToken;
   }
