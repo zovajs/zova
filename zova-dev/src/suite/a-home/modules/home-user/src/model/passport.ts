@@ -23,7 +23,7 @@ export class ModelPassport extends BeanModelBase {
     return this.$useMutationData<ApiApiHomeUserPassportloginResponseBody, ApiApiHomeUserPassportloginSimpleRequestBody>({
       mutationKey: ['login'],
       mutationFn: async params => {
-        return this.$api.homeUserPassport.loginSimple(params);
+        return this.$api.homeUserPassport.loginSimple(params, { authToken: false });
       },
       onSuccess: data => {
         // save
@@ -69,7 +69,7 @@ export class ModelPassport extends BeanModelBase {
   }
 
   async refreshAuthToken(refreshToken: string): Promise<IJwtInfo> {
-    const jwt = await this.$api.homeUserPassport.refreshAuthToken({ refreshToken });
+    const jwt = await this.$api.homeUserPassport.refreshAuthToken({ refreshToken }, { authToken: false });
     this._setJwt(jwt);
     return (await this.getJwtInfo())!;
   }
