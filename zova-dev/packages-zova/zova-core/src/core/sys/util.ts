@@ -1,3 +1,4 @@
+import type { TypeAuthToken } from '../../types/utils/auth.js';
 import { extend } from '@cabloy/extend';
 import DeepEqual from 'deep-equal';
 import { BeanSimple } from '../../bean/beanSimple.js';
@@ -24,12 +25,13 @@ export class SysUtil extends BeanSimple {
     return defaultPathSerializer(pathName, pathParams);
   }
 
-  apiActionConfigPrepare(baseURL?: string, options?: any) {
+  apiActionConfigPrepare(baseURL?: string, options?: any, authToken?: TypeAuthToken) {
     const optionsCustom: any = {
       params: options?.query,
       query: undefined,
     };
-    if (options?.authToken !== undefined) {
+    authToken = options?.authToken === undefined ? authToken : options?.authToken;
+    if (authToken !== undefined) {
       optionsCustom.interceptors = { 'a-interceptor:jwt': { authToken: options?.authToken } };
     }
     return deepExtend(

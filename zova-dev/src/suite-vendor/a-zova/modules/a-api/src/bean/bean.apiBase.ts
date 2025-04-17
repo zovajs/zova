@@ -1,6 +1,6 @@
 import type { AxiosRequestConfig } from 'axios';
 import type { IApiActionOptions } from '../types/api.js';
-import { BeanBase } from 'zova';
+import { BeanBase, TypeAuthToken } from 'zova';
 import { Virtual } from 'zova-module-a-bean';
 
 @Virtual()
@@ -9,8 +9,8 @@ export class BeanApiBase extends BeanBase {
     return this.sys.util.apiActionPathTranslate(pathName, pathParams);
   }
 
-  $configPrepare(baseURL?: string, options?: IApiActionOptions): AxiosRequestConfig {
-    return this.sys.util.apiActionConfigPrepare(baseURL, options);
+  $configPrepare(baseURL?: string, options?: IApiActionOptions, authToken?: TypeAuthToken): AxiosRequestConfig {
+    return this.sys.util.apiActionConfigPrepare(baseURL, options, authToken);
   }
 
   $formData(body: object) {
