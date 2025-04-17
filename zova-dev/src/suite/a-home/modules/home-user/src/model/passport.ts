@@ -51,7 +51,8 @@ export class ModelPassport extends BeanModelBase {
   }
 
   get isAuthenticated(): boolean {
-    return !!this.accessToken && !!this.expireTime && this.expireTime > Date.now();
+    return !!this.passport;
+    // return !!this.accessToken && !!this.expireTime && this.expireTime > Date.now();
   }
 
   get user() {
@@ -76,7 +77,7 @@ export class ModelPassport extends BeanModelBase {
 
   async ensurePassport() {
     if (process.env.CLIENT) return this.passport;
-    if (!this.passport && this.isAuthenticated) {
+    if (!this.isAuthenticated && this.accessToken) {
       const [passport, error] = await catchError(() => {
         return this.$api.homeUserPassport.current();
       });

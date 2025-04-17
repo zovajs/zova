@@ -12,7 +12,10 @@ export class ServiceRouter extends BeanRouterBase {
   protected onRouterGuards(router: BeanRouter) {
     router.beforeEach(async to => {
       if (to.meta.requiresAuth !== false && !this.$$modelPassport.isAuthenticated) {
-        return '/login';
+        await this.$$modelPassport.ensurePassport();
+        if (!this.$$modelPassport.isAuthenticated) {
+          return '/login';
+        }
       }
     });
   }
