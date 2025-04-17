@@ -389,7 +389,9 @@ export interface operations {
   HomeUserPassport_current: {
     parameters: {
       query?: never;
-      header?: never;
+      header?: {
+        Authorization?: string;
+      };
       path?: never;
       cookie?: never;
     };
@@ -412,7 +414,9 @@ export interface operations {
   HomeUserPassport_logout: {
     parameters: {
       query?: never;
-      header?: never;
+      header?: {
+        Authorization?: string;
+      };
       path?: never;
       cookie?: never;
     };
@@ -493,7 +497,9 @@ export interface operations {
       query?: {
         redirect?: string;
       };
-      header?: never;
+      header?: {
+        Authorization?: string;
+      };
       path: {
         clientName: string;
         providerName: string;
@@ -522,7 +528,9 @@ export interface operations {
       query?: {
         redirect?: string;
       };
-      header?: never;
+      header?: {
+        Authorization?: string;
+      };
       path: {
         clientName: string;
         providerName: string;
@@ -653,7 +661,9 @@ export interface operations {
   CabloyTestPassport_isAuthenticated: {
     parameters: {
       query?: never;
-      header?: never;
+      header?: {
+        Authorization?: string;
+      };
       path?: never;
       cookie?: never;
     };
@@ -850,7 +860,9 @@ export interface operations {
   Onion_echo6: {
     parameters: {
       query?: never;
-      header?: never;
+      header?: {
+        Authorization?: string;
+      };
       path?: never;
       cookie?: never;
     };

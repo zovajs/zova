@@ -59,6 +59,7 @@ export type ApiApiOnionecho5ResponseBody = paths[ApiApiOnionecho5Path][ApiApiOni
 export const ApiApiOnionecho6Path = '/api/vona/test/onion/echo6';
 export type ApiApiOnionecho6Path = '/api/vona/test/onion/echo6';
 export type ApiApiOnionecho6Method = 'get';
+export type ApiApiOnionecho6RequestHeaders = paths[ApiApiOnionecho6Path][ApiApiOnionecho6Method]['parameters']['header'];
 export type ApiApiOnionecho6ResponseBody = paths[ApiApiOnionecho6Path][ApiApiOnionecho6Method]['responses']['200']['content']['application/json']['data'];
 
 @Api()
@@ -139,7 +140,9 @@ export class ApiOnion extends BeanApiBase {
 
   echo6(
 
-    options?: IApiActionOptions,
+    options?: {
+      headers?: ApiApiOnionecho6RequestHeaders;
+    } & IApiActionOptions,
   ) {
     return this.$fetch.get<any, ApiApiOnionecho6ResponseBody>(
       ApiApiOnionecho6Path,

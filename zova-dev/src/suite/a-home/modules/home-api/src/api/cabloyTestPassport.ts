@@ -6,13 +6,16 @@ import { OpenApiBaseURL } from './openapi/index.js';
 export const ApiApiCabloyTestPassportisAuthenticatedPath = '/api/cabloy/test/passport/isAuthenticated';
 export type ApiApiCabloyTestPassportisAuthenticatedPath = '/api/cabloy/test/passport/isAuthenticated';
 export type ApiApiCabloyTestPassportisAuthenticatedMethod = 'get';
+export type ApiApiCabloyTestPassportisAuthenticatedRequestHeaders = paths[ApiApiCabloyTestPassportisAuthenticatedPath][ApiApiCabloyTestPassportisAuthenticatedMethod]['parameters']['header'];
 export type ApiApiCabloyTestPassportisAuthenticatedResponseBody = paths[ApiApiCabloyTestPassportisAuthenticatedPath][ApiApiCabloyTestPassportisAuthenticatedMethod]['responses']['200']['content']['application/json']['data'];
 
 @Api()
 export class ApiCabloyTestPassport extends BeanApiBase {
   isAuthenticated(
 
-    options?: IApiActionOptions,
+    options?: {
+      headers?: ApiApiCabloyTestPassportisAuthenticatedRequestHeaders;
+    } & IApiActionOptions,
   ) {
     return this.$fetch.get<any, ApiApiCabloyTestPassportisAuthenticatedResponseBody>(
       ApiApiCabloyTestPassportisAuthenticatedPath,

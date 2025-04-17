@@ -6,12 +6,14 @@ import { OpenApiBaseURL } from './openapi/index.js';
 export const ApiApiHomeUserPassportcurrentPath = '/api/home/user/passport/current';
 export type ApiApiHomeUserPassportcurrentPath = '/api/home/user/passport/current';
 export type ApiApiHomeUserPassportcurrentMethod = 'get';
+export type ApiApiHomeUserPassportcurrentRequestHeaders = paths[ApiApiHomeUserPassportcurrentPath][ApiApiHomeUserPassportcurrentMethod]['parameters']['header'];
 export type ApiApiHomeUserPassportcurrentResponseBody = paths[ApiApiHomeUserPassportcurrentPath][ApiApiHomeUserPassportcurrentMethod]['responses']['200']['content']['application/json']['data'];
 
 /** HomeUserPassport_logout */
 export const ApiApiHomeUserPassportlogoutPath = '/api/home/user/passport/logout';
 export type ApiApiHomeUserPassportlogoutPath = '/api/home/user/passport/logout';
 export type ApiApiHomeUserPassportlogoutMethod = 'post';
+export type ApiApiHomeUserPassportlogoutRequestHeaders = paths[ApiApiHomeUserPassportlogoutPath][ApiApiHomeUserPassportlogoutMethod]['parameters']['header'];
 export type ApiApiHomeUserPassportlogoutResponseBody = paths[ApiApiHomeUserPassportlogoutPath][ApiApiHomeUserPassportlogoutMethod]['responses']['200']['content']['application/json']['data'];
 
 /** HomeUserPassport_loginSimple */
@@ -36,6 +38,7 @@ export type ApiApiHomeUserPassportassociatePath = '/api/home/user/passport/assoc
 export type ApiApiHomeUserPassportassociateMethod = 'get';
 export type ApiApiHomeUserPassportassociateRequestParams = paths[ApiApiHomeUserPassportassociatePath][ApiApiHomeUserPassportassociateMethod]['parameters']['path'];
 export type ApiApiHomeUserPassportassociateRequestQuery = paths[ApiApiHomeUserPassportassociatePath][ApiApiHomeUserPassportassociateMethod]['parameters']['query'];
+export type ApiApiHomeUserPassportassociateRequestHeaders = paths[ApiApiHomeUserPassportassociatePath][ApiApiHomeUserPassportassociateMethod]['parameters']['header'];
 export type ApiApiHomeUserPassportassociateResponseBody = paths[ApiApiHomeUserPassportassociatePath][ApiApiHomeUserPassportassociateMethod]['responses']['200']['content']['application/json']['data'];
 
 /** HomeUserPassport_migrate */
@@ -44,6 +47,7 @@ export type ApiApiHomeUserPassportmigratePath = '/api/home/user/passport/migrate
 export type ApiApiHomeUserPassportmigrateMethod = 'get';
 export type ApiApiHomeUserPassportmigrateRequestParams = paths[ApiApiHomeUserPassportmigratePath][ApiApiHomeUserPassportmigrateMethod]['parameters']['path'];
 export type ApiApiHomeUserPassportmigrateRequestQuery = paths[ApiApiHomeUserPassportmigratePath][ApiApiHomeUserPassportmigrateMethod]['parameters']['query'];
+export type ApiApiHomeUserPassportmigrateRequestHeaders = paths[ApiApiHomeUserPassportmigratePath][ApiApiHomeUserPassportmigrateMethod]['parameters']['header'];
 export type ApiApiHomeUserPassportmigrateResponseBody = paths[ApiApiHomeUserPassportmigratePath][ApiApiHomeUserPassportmigrateMethod]['responses']['200']['content']['application/json']['data'];
 
 /** HomeUserPassport_refreshAuthToken */
@@ -68,7 +72,9 @@ export type ApiApiHomeUserPassportcreatePassportJwtFromOauthCodeResponseBody = p
 export class ApiHomeUserPassport extends BeanApiBase {
   current(
 
-    options?: IApiActionOptions,
+    options?: {
+      headers?: ApiApiHomeUserPassportcurrentRequestHeaders;
+    } & IApiActionOptions,
   ) {
     return this.$fetch.get<any, ApiApiHomeUserPassportcurrentResponseBody>(
       ApiApiHomeUserPassportcurrentPath,
@@ -78,7 +84,9 @@ export class ApiHomeUserPassport extends BeanApiBase {
 
   logout(
     body?: undefined,
-    options?: IApiActionOptions,
+    options?: {
+      headers?: ApiApiHomeUserPassportlogoutRequestHeaders;
+    } & IApiActionOptions,
   ) {
     return this.$fetch.post<any, ApiApiHomeUserPassportlogoutResponseBody>(
       ApiApiHomeUserPassportlogoutPath,
@@ -116,6 +124,7 @@ export class ApiHomeUserPassport extends BeanApiBase {
     options: {
       params: ApiApiHomeUserPassportassociateRequestParams;
       query?: ApiApiHomeUserPassportassociateRequestQuery;
+      headers?: ApiApiHomeUserPassportassociateRequestHeaders;
     } & IApiActionOptions,
   ) {
     return this.$fetch.get<any, ApiApiHomeUserPassportassociateResponseBody>(
@@ -129,6 +138,7 @@ export class ApiHomeUserPassport extends BeanApiBase {
     options: {
       params: ApiApiHomeUserPassportmigrateRequestParams;
       query?: ApiApiHomeUserPassportmigrateRequestQuery;
+      headers?: ApiApiHomeUserPassportmigrateRequestHeaders;
     } & IApiActionOptions,
   ) {
     return this.$fetch.get<any, ApiApiHomeUserPassportmigrateResponseBody>(
