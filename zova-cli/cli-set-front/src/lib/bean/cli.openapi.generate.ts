@@ -1,5 +1,5 @@
 import type { IModule, IModuleInfo } from '@cabloy/module-info';
-import type { OpenAPITSOptions } from 'openapi-typescript';
+import type { OpenAPITSOptions, SchemaObject, TransformNodeOptions } from 'openapi-typescript';
 import type { ZovaOpenapiConfig, ZovaOpenapiConfigModule } from 'zova-openapi';
 import path from 'node:path';
 import { BeanCliBase } from '@cabloy/cli';
@@ -407,14 +407,15 @@ const NULL = ts.factory.createLiteralTypeNode(ts.factory.createNull()); // `null
 
 function _patchOpenapiTSOptions(options?: OpenAPITSOptions) {
   const transformCustom = options?.transform;
+  const postTransformCustom = options?.postTransform;
   return Object.assign({}, options, {
-    transform(schemaObject, metadata) {
+    transform(schemaObject: SchemaObject, options: TransformNodeOptions) {
       if (transformCustom) {
-        const res = transformCustom(schemaObject, metadata);
+        const res = transformCustom(schemaObject, options);
         if (res !== undefined) return res;
       }
       if (schemaObject.format === 'binary') {
-        if (metadata.path.includes('multipart~1form-data') || metadata.path.includes('application~1octet-stream')) {
+        if (options.path?.includes('multipart~1form-data') || options.path?.includes('application~1octet-stream')) {
           return {
             schema: schemaObject.nullable
               ? ts.factory.createUnionTypeNode([BLOB, NULL])
@@ -424,6 +425,12 @@ function _patchOpenapiTSOptions(options?: OpenAPITSOptions) {
         }
       }
       return undefined;
+    },
+    postTransform(type: ts.TypeNode, options: TransformNodeOptions): ts.TypeNode | undefined {
+      if (postTransformCustom) {
+        const res = postTransformCustom(type, options);
+        if (res !== undefined) return res;
+      }
     },
   });
 }
