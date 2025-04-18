@@ -36,6 +36,10 @@ export function extendViteConf(context: ConfigContext) {
           port: 24679,
         },
       });
+    } else {
+      conf.server = mergeConfig(conf.server || {}, {
+        hmr: true,
+      });
     }
     // assetsInlineLimit
     if (opts.isServer) {

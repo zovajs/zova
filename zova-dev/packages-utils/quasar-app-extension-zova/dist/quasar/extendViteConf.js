@@ -31,6 +31,11 @@ export function extendViteConf(context) {
                 },
             });
         }
+        else {
+            conf.server = mergeConfig(conf.server || {}, {
+                hmr: true,
+            });
+        }
         // assetsInlineLimit
         if (opts.isServer) {
             conf.build.assetsInlineLimit = (filePath) => {
