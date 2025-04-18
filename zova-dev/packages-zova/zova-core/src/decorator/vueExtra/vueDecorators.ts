@@ -37,6 +37,10 @@ export function Model(modelName?: string): PropertyDecorator {
   return createVueDecorator('model', { modelName });
 }
 
+export function ControllerCreated(): MethodDecorator {
+  return createVueDecorator('controllerCreated');
+}
+
 export function ControllerMounted(): MethodDecorator {
   return createVueDecorator('controllerMounted');
 }

@@ -1,4 +1,5 @@
 import { computed } from './computed.js';
+import { controllerCreated } from './controllerCreated.js';
 import { controllerMounted } from './controllerMounted.js';
 import { emit } from './emit.js';
 import { model } from './model.js';
@@ -15,5 +16,6 @@ export const vueDecorators = {
   raw,
   shallow,
   model,
+  controllerCreated,
   controllerMounted,
 };

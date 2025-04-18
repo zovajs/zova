@@ -1,7 +1,7 @@
 import type { IDecoratorVueElement, IDecoratorVueWatchOptions } from '../../decorator/vueExtra/types.js';
-import { onControllerMounted } from '../../composables/onControllerMounted.js';
+import { onControllerCreated } from '../../composables/onControllerCreated.js';
 
-export function controllerMounted(
+export function controllerCreated(
   beanInstance,
   _beanFullName: string,
   _prop: string,
@@ -9,7 +9,7 @@ export function controllerMounted(
   _index: number,
 ) {
   const { descriptor } = vueElement;
-  onControllerMounted(() => {
+  onControllerCreated(() => {
     return descriptor.value.call(beanInstance);
   });
 }

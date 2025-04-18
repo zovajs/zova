@@ -12,6 +12,7 @@ export type TypeDecoratorVue =
   | 'readonly'
   | 'shallowReadonly'
   | 'model'
+  | 'controllerCreated'
   | 'controllerMounted';
 
 export interface IDecoratorVueElement<OPTIONS = any> {
