@@ -1,9 +1,8 @@
-import type { FunctionAsync } from '../decorator/type/functionable.js';
 import { useContext } from './useContext.js';
 
 export const SymbolCreatedFns = Symbol('SymbolCreatedFns');
 
-export async function onControllerCreated(fn: FunctionAsync<void>) {
+export async function onControllerCreated(fn: any) {
   const ctx = useContext();
   if (!ctx) {
     throw new Error('run in the invalid context');
