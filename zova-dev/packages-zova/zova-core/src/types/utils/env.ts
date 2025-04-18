@@ -7,7 +7,7 @@ export interface ZovaConfigEnv {
   APP_NAME: string | undefined;
   APP_TITLE: string | undefined;
   APP_VERSION: string | undefined;
-  DEV_SERVER_HOST: string | undefined;
+  DEV_SERVER_HOSTNAME: string | undefined;
   DEV_SERVER_PORT: string | undefined;
   SSR_API_BASE_URL: string | undefined;
   API_BASE_URL: string | undefined;

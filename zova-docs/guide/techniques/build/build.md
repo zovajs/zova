@@ -10,7 +10,7 @@ $ npm run dev
 
 | Name            | Description                                                                                    |
 | --------------- | ---------------------------------------------------------------------------------------------- |
-| DEV_SERVER_HOST | Dev server host [Vite: server.host](https://vitejs.dev/config/server-options.html#server-host) |
+| DEV_SERVER_HOSTNAME | Dev server host [Vite: server.host](https://vitejs.dev/config/server-options.html#server-host) |
 | DEV_SERVER_PORT | Dev server port                                                                                |
 
 ## Build

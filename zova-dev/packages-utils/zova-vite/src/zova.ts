@@ -66,11 +66,11 @@ export async function generateZovaViteMeta(
       proxy,
     };
     // devServerHost
-    if (process.env.DEV_SERVER_HOST) {
-      if (process.env.DEV_SERVER_HOST === 'true') {
+    if (process.env.DEV_SERVER_HOSTNAME) {
+      if (process.env.DEV_SERVER_HOSTNAME === 'true') {
         server.host = true;
       } else {
-        server.host = process.env.DEV_SERVER_HOST;
+        server.host = process.env.DEV_SERVER_HOSTNAME;
       }
     }
     if (process.env.DEV_SERVER_PORT) {

@@ -98,7 +98,7 @@ $ npm run build:ssr:admin
 
 | 名称            | 说明                                                                                          |
 | --------------- | --------------------------------------------------------------------------------------------- |
-| DEV_SERVER_HOST | 开发服务的host [Vite: server.host](https://vitejs.dev/config/server-options.html#server-host) |
+| DEV_SERVER_HOSTNAME | 开发服务的host [Vite: server.host](https://vitejs.dev/config/server-options.html#server-host) |
 | DEV_SERVER_PORT | 开发服务的port                                                                                |
 
 ### 构建

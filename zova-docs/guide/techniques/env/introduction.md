@@ -98,7 +98,7 @@ To further achieve out-of-box functionality, Zova provides several built-in env 
 
 | Name            | Description                                                                                    |
 | --------------- | ---------------------------------------------------------------------------------------------- |
-| DEV_SERVER_HOST | Dev server host [Vite: server.host](https://vitejs.dev/config/server-options.html#server-host) |
+| DEV_SERVER_HOSTNAME | Dev server host [Vite: server.host](https://vitejs.dev/config/server-options.html#server-host) |
 | DEV_SERVER_PORT | Dev server port                                                                                |
 
 ### Build
