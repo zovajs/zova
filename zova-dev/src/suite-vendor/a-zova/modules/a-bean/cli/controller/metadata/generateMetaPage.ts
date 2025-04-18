@@ -12,7 +12,7 @@ export function generateMetaPage(
   const { moduleName } = options;
   const contentImports: string[] = [];
   const contentPathRecords: string[] = [];
-  const contentNameRecords: string[] = [];
+  const contentPathSchemaRecords: string[] = [];
   const contentPathSchemas: string[] = [];
   const contentNameSchemas: string[] = [];
   const contentRecords: string[] = [];
@@ -29,21 +29,24 @@ export function generateMetaPage(
     const routePathFull = routePath
       ? `/${moduleName.replace('-', '/')}/${routePath}`
       : `/${moduleName.replace('-', '/')}`;
-    const routeNameFull = `${moduleName}:${routeName}`;
-    //
     if (!routeName) {
-      if (hasSchemaQuery) {
-        contentPathRecords.push(`'${routePathFull}': NS${className}.QueryInput;`);
-      } else {
-        contentPathRecords.push(`'${routePathFull}': undefined;`); // for type of route path
-      }
+      contentPathRecords.push(_combineContentPathRecord(routePathFull, className));
+      contentPathRecords.push(_combineContentPathSchemaRecord(hasSchemaQuery, routePathFull, className));
     } else {
-      if (hasSchemaQuery || hasSchemaParams) {
-        contentNameRecords.push(
-          `'${routeNameFull}': TypePageParamsQuery<${hasSchemaQuery ? `NS${className}.QueryInput` : 'unknown'}, ${hasSchemaParams ? `NS${className}.ParamsInput` : 'unknown'}>;`,
-        );
-      }
+      const apiPath1 = routePathFull.replace(/(:[^/]+)/g, (_, _part) => {
+        return ':_string_';
+      });
+      const apiPath2 = routePathFull.replace(/(\/:[^/]+)/g, (_, part) => {
+        return `:_${part.substring(2)}_`;
+      });
+      const apiPath3 = routePathFull.replace(/(:[^/]+)/g, (_, _part) => {
+        return '${string}';
+      });
+      contentPathRecords.push(_combineContentPathRecord(apiPath1, apiPath2));
+      contentPathRecords.push(_combineContentPathRecord(routePathFull, apiPath3));
+      contentPathSchemaRecords.push(_combineContentPathSchemaRecord(hasSchemaQuery, routePathFull, className));
     }
+    // schema
     if (!routeName) {
       if (hasSchemaQuery) {
         contentPathSchemas.push(`'${routePathFull}': {
@@ -51,6 +54,7 @@ export function generateMetaPage(
         },`);
       }
     } else {
+      const routeNameFull = `${moduleName}:${routeName}`;
       if (hasSchemaQuery || hasSchemaParams) {
         contentNameSchemas.push(`'${routeNameFull}': {
           ${hasSchemaParams ? `params: NS${className}.paramsSchema,` : ''}
@@ -72,14 +76,13 @@ export function generateMetaPage(
   const content = `/** pages: begin */
 ${contentImports.join('\n')}
 export * from '../routes.js';
-${contentNameRecords.length > 0 ? "import { TypePageParamsQuery } from 'zova';" : ''}
 import 'zova';
 declare module 'zova' {
 export interface IPagePathRecord {
   ${contentPathRecords.join('\n')}
 }
-export interface IPageNameRecord {
-  ${contentNameRecords.join('\n')}
+export interface IPagePathSchemaRecord {
+  ${contentPathSchemaRecords.join('\n')}
 }
 }
 export const pagePathSchemas = {
@@ -128,4 +131,16 @@ function _extractRoutePathOrName(
   });
   const routeName = astPropName?.value.value;
   return { routePath, routeName };
+}
+
+function _combineContentPathRecord(key: string, value: string) {
+  return `'${key}': ${value};`;
+}
+
+function _combineContentPathSchemaRecord(hasSchemaQuery: boolean, routePathFull: string, className: string) {
+  if (hasSchemaQuery) {
+    return `'${routePathFull}': NS${className}.QueryInput;`;
+  } else {
+    return `'${routePathFull}': undefined;`; // for type of route path
+  }
 }

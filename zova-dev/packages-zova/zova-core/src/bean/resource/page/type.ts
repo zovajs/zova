@@ -2,6 +2,7 @@ import type { z } from 'zod';
 
 export interface ZovaConfigRoutes {}
 export interface IPagePathRecord {}
+export interface IPagePathSchemaRecord {}
 export interface IPageNameRecord {}
 
 export interface TypePageParamsQuery<Q = unknown, P = unknown> {
