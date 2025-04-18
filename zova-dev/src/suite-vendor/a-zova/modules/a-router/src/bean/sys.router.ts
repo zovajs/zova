@@ -1,4 +1,4 @@
-import type { Router, RouterOptions } from '@cabloy/vue-router';
+import type { RouteLocationResolvedGeneric, Router, RouterOptions } from '@cabloy/vue-router';
 import { IModule } from '@cabloy/module-info';
 import * as ModuleInfo from '@cabloy/module-info';
 import { createMemoryHistory, createRouter, createWebHashHistory, createWebHistory } from '@cabloy/vue-router';
@@ -71,6 +71,22 @@ export class SysRouter extends BeanBase {
     return this._combineQueries(url, query);
   }
 
+  public async resolveRoute(url: string): Promise<RouteLocationResolvedGeneric | undefined> {
+    const pagePath = this.sys.util.getPagePathFromAbsoluteUrl(url);
+    await this.ensureRouteModule(pagePath);
+    let route = this._vueRouterSys.resolve(pagePath);
+    if (!route || route.name === '$:/:catchAll(.*)*') return;
+    // aliasOf
+    const matchItem = route.matched.find(item => item.aliasOf);
+    if (matchItem) {
+      route = matchItem.aliasOf as unknown as RouteLocationResolvedGeneric;
+    }
+    // 404
+    if (route.name === '$:/:catchAll(.*)*') return;
+    // ok
+    return route;
+  }
+
   public checkPathValid(to?: { name?: string; path?: string } | string): boolean {
     const _name = to && typeof to === 'object' ? to.name : undefined;
     const _path = to && typeof to === 'object' ? (to.name ?? to.path) : to;
@@ -81,6 +97,18 @@ export class SysRouter extends BeanBase {
     const moduleName = ModuleInfo.parseName(_path);
     if (!moduleName) return true;
     return this.sys.meta.module.exists(moduleName);
+  }
+
+  public async ensureRouteModule(pagePath: string) {
+    const moduleName = ModuleInfo.parseName(pagePath);
+    if (moduleName) {
+      if (this.sys.meta.module.exists(moduleName)) {
+        const module = this.sys.meta.module.get(moduleName);
+        if (!module) {
+          await this.sys.meta.module.use(moduleName);
+        }
+      }
+    }
   }
 
   private _combineQueries(pagePath: string, query: any) {

@@ -13,6 +13,15 @@ export class SysUtil extends BeanSimple {
     return `${prefix}${path || ''}`;
   }
 
+  getPagePathFromAbsoluteUrl(url: string) {
+    const { pathname } = new URL(url);
+    const prefix = this.sys.env.APP_PUBLIC_PATH ? `/${this.sys.env.APP_PUBLIC_PATH}` : '';
+    if (pathname.startsWith(prefix)) {
+      return pathname.substring(prefix.length);
+    }
+    return pathname;
+  }
+
   getApiBaseURL(useApiPrefix: boolean = true) {
     let baseURL = this.sys.config.api.baseURL || '';
     if (useApiPrefix) {
@@ -51,13 +60,11 @@ export class SysUtil extends BeanSimple {
     );
   }
 
-  public async resolveRoute(url: string) {
+  public async resolveRoute(url: string): Promise<any | undefined> {
     // router
     const sysRouter = await this.sys.bean._getBean('a-router.sys.router' as never, false) as any;
     // resolve
-    const matched = sysRouter.resolve(url);
-    if (!matched || matched.name === '$:/:catchAll(.*)*') return undefined;
-    return matched;
+    return await sysRouter.resolveRoute(url);
   }
 }
 
