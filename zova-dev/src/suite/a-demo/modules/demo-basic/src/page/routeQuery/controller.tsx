@@ -44,7 +44,7 @@ export class ControllerPageRouteQuery extends BeanControllerPageBase {
             onClick={() => {
               const name = this.$query.name === 'tom' ? 'kevin' : 'tom';
               const age = (this.$query.age ?? 0) + 1;
-              const url = this.$router.resolvePath('/demo/basic/routeQuery', {
+              const url = this.$router.getPagePath('/demo/basic/routeQuery', {
                 name,
                 age,
               });

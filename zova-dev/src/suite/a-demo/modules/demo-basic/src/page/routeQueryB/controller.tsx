@@ -29,14 +29,14 @@ export class ControllerPageRouteQueryB extends BeanControllerPageBase {
   togglePrivate() {
     const _private = !this.$query.private;
     const query = { ...this.$query, private: _private };
-    const url = this.$router.resolvePath('/demo/basic/routeQueryB', query);
+    const url = this.$router.getPagePath('/demo/basic/routeQueryB', query);
     this.$router.push(url);
   }
 
   toggleUser() {
     const user = this.$query.user?.name === 'tom' ? { name: 'kevin', age: 18 } : { name: 'tom', age: 6 };
     const query = { ...this.$query, user };
-    const url = this.$router.resolvePath('/demo/basic/routeQueryB', query);
+    const url = this.$router.getPagePath('/demo/basic/routeQueryB', query);
     this.$router.push(url);
   }
 
