@@ -4,7 +4,7 @@ import * as ModuleInfo from '@cabloy/module-info';
 import { createMemoryHistory, createRouter, createWebHashHistory, createWebHistory } from '@cabloy/vue-router';
 import { BeanBase, cast, deepExtend, IPageNameRecord, IPagePathRecord } from 'zova';
 import { Sys } from 'zova-module-a-bean';
-import { IModuleRoute, IModuleRouteComponent } from '../types.js';
+import { IModuleRoute, IModuleRouteComponent, IPagePathSchemaRecord } from '../types.js';
 import { getRealRouteName } from '../utils.js';
 
 export interface SysRouter extends Router {}
@@ -82,7 +82,10 @@ export class SysRouter extends BeanBase {
     });
   }
 
-  public;
+  public getPagePath<K extends keyof IPagePathRecord>(path: IPagePathRecord[K], query?: IPagePathSchemaRecord[K], absolute?: boolean) {
+    const url = absolute ? this.sys.util.getAbsolutePagePath(path) : path;
+    return this._combineQueries(url, query);
+  }
 
   public checkPathValid(to?: { name?: string; path?: string } | string): boolean {
     const _name = to && typeof to === 'object' ? to.name : undefined;
@@ -96,31 +99,26 @@ export class SysRouter extends BeanBase {
     return this.sys.meta.module.exists(moduleName);
   }
 
-  private _resolveNameOrPath(query, fn) {
-    const query1 = {};
-    const query2: any = [];
+  private _combineQueries(pagePath: string, query: any) {
+    const query2: any[] = [];
+    const strs: string[] = [];
     if (query) {
       for (const key in query) {
         const value = query[key];
         if (value && typeof value === 'object') {
           query2.push([key, value]);
         } else {
-          query1[key] = value;
+          strs.push(`${encodeURIComponent(key)}=${encodeURIComponent(value)}`);
         }
       }
     }
-    // resolve
-    const fullPath = fn(query1);
     // query2
-    const query2str = query2
-      .map(([key, value]) => {
-        return `${encodeURIComponent(key)}=${encodeURIComponent(JSON.stringify(value))}`;
-      })
-      .join('&');
+    for (const [key, value] of query2) {
+      strs.push(`${encodeURIComponent(key)}=${encodeURIComponent(JSON.stringify(value))}`);
+    }
+    const queryStr = strs.join('&');
     // join
-    if (!query2str) return fullPath;
-    const join = Object.keys(query1).length > 0 ? '&' : '?';
-    return `${fullPath}${join}${query2str}`;
+    return queryStr ? `${pagePath}?${queryStr}` : pagePath;
   }
 
   /** @internal */
