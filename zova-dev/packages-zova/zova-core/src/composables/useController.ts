@@ -123,8 +123,8 @@ async function _useController(
     if (process.env.CLIENT) {
       ctx.util.instanceScope(() => {
         queuePostFlushCb(() => {
-          ctx.meta.state.mounted.touch();
           setControllerRef(ctx, true);
+          ctx.meta.hooks.invokeHook('mounted');
         });
       });
     }

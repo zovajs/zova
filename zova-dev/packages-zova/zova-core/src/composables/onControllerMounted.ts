@@ -1,12 +1,9 @@
 import { useContext } from './useContext.js';
 
-export async function onControllerMounted(fn: any) {
+export function onControllerMounted(fn: any) {
   const ctx = useContext();
   if (!ctx) {
     throw new Error('run in the invalid context');
   }
-  await ctx.meta.state.mounted.wait();
-  if (fn) {
-    return await ctx.util.instanceScope(fn);
-  }
+  ctx.meta.hooks.onMounted(fn);
 }
