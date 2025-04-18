@@ -30,6 +30,10 @@ export function configDefault(env: ZovaConfigEnv) {
       optimization: {
         bodyReadyObserver: env.SSR_BODYREADYOBSERVER === 'true',
       },
+      server: {
+        protocol: env.SSR_PROD_PROTOCOL,
+        host: env.SSR_PROD_HOST || `localhost:${env.SSR_PROD_PORT}`,
+      },
     },
     logger,
     locale: {
@@ -72,6 +76,10 @@ export interface ZovaConfig {
     cookieThemeDarkDefault: boolean;
     optimization: {
       bodyReadyObserver: boolean;
+    };
+    server: {
+      protocol: string;
+      host: string;
     };
   };
   logger: ConfigLogger;

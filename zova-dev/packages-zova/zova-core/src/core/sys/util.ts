@@ -5,6 +5,14 @@ import { BeanSimple } from '../../bean/beanSimple.js';
 import { uuid as _uuid } from '../../utils/uuid.js';
 
 export class SysUtil extends BeanSimple {
+  getAbsolutePagePath(path?: string) {
+    let prefix = `${this.sys.config.ssr.server.protocol}://${this.sys.config.ssr.server.host}`;
+    if (this.sys.env.APP_PUBLIC_PATH) {
+      prefix = `${prefix}/${this.sys.env.APP_PUBLIC_PATH}`;
+    }
+    return `${prefix}${path || ''}`;
+  }
+
   getApiBaseURL(useApiPrefix: boolean = true) {
     let baseURL = this.sys.config.api.baseURL || '';
     if (useApiPrefix) {

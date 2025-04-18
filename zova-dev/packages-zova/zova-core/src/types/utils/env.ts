@@ -17,6 +17,9 @@ export interface ZovaConfigEnv {
   SSR_COOKIE_THEMEDARK: string | undefined;
   SSR_COOKIE_THEMEDARK_DEFAULT: string | undefined;
   SSR_BODYREADYOBSERVER: string | undefined;
+  SSR_PROD_PORT: string | undefined;
+  SSR_PROD_PROTOCOL: string | undefined;
+  SSR_PROD_HOST: string | undefined;
   OPENAPI_BASE_URL_DEFAULT: string | undefined;
   OPENAPI_BASE_URL_HOME_API: string | undefined;
   MOCK_ENABLED: string | undefined;
