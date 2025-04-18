@@ -7,25 +7,23 @@ import { Sys } from 'zova-module-a-bean';
 import { IModuleRoute, IModuleRouteComponent } from '../types.js';
 import { getRealRouteName } from '../utils.js';
 
-const SymbolRouter = Symbol('SymbolRouter');
-
 export interface SysRouter extends Router {}
 
 @Sys()
 export class SysRouter extends BeanBase {
-  [SymbolRouter]: Router;
+  private _vueRouterSys: Router;
 
   get router(): Router {
-    return this[SymbolRouter];
+    return this._vueRouterSys;
   }
 
   protected __get__(prop) {
-    return this[SymbolRouter] && this[SymbolRouter][prop];
+    return this._vueRouterSys && this._vueRouterSys[prop];
   }
 
   protected async __init__() {
     // create router
-    this[SymbolRouter] = this.createRouter();
+    this._vueRouterSys = this.createRouter();
     // config.routes
     this._loadConfigRoutes();
     // legacy routes
@@ -36,11 +34,11 @@ export class SysRouter extends BeanBase {
     options = Object.assign({}, options);
     // matcher
     if (!options.matcher) {
-      options.matcher = this[SymbolRouter]?.matcher;
+      options.matcher = this._vueRouterSys?.matcher;
     }
     // routes
     if (!options.routes) {
-      if (!this[SymbolRouter]) {
+      if (!this._vueRouterSys) {
         options.routes = [];
       }
     }
@@ -72,14 +70,14 @@ export class SysRouter extends BeanBase {
     const params = cast(options)?.params;
     const query = cast(options)?.query;
     return this._resolveNameOrPath(query, query => {
-      const route = this[SymbolRouter].resolve({ name, params, query });
+      const route = this._vueRouterSys.resolve({ name, params, query });
       return route.fullPath;
     });
   }
 
   public resolvePath<K extends keyof IPagePathRecord>(path: K, query?: IPagePathRecord[K]): string {
     return this._resolveNameOrPath(query, query => {
-      const route = this[SymbolRouter].resolve({ path, query });
+      const route = this._vueRouterSys.resolve({ path, query });
       return route.fullPath;
     });
   }
