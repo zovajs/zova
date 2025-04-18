@@ -1,7 +1,7 @@
 import type { IndexAPI } from '@quasar/app-vite';
 import path from 'node:path';
 import fse from 'fs-extra';
-import { getAbsolutePathOfModule, getOutDir } from 'zova-vite';
+import { copyTemplateFile, getAbsolutePathOfModule, getOutDir } from 'zova-vite';
 import { resolveTemplatePath } from '../utils.js';
 
 export function extendFilesOne(api: IndexAPI, flavor: string) {
@@ -230,12 +230,8 @@ function renderModulesPreload_zova(modules2, opts){
   // ssr-prod-handler.js
   async function _handleSSRProdHandler() {
     const fileSrc = resolveTemplatePath('entry/ssr-prod-handler.js_');
-    const content = fse.readFileSync(fileSrc).toString();
-    const contentNew = content.replace(
-      'app/dist/ssr/server/server-entry.js',
-      `app/${getOutDir()}/server/server-entry.js`,
-    );
-    fse.writeFileSync((api.resolve as any).entry('ssr-prod-handler.js'), contentNew);
+    const fileDest = (api.resolve as any).entry('ssr-prod-handler.js');
+    await copyTemplateFile(fileSrc, fileDest, { outDir: getOutDir() });
   }
 }
 
