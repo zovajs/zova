@@ -3,7 +3,8 @@
   "compilerOptions": {},
   "exclude": [
     "./dist",
-    "./distMockServer",
+    "./dist-releases",
+    "./dist-mock",
     "./.zova",
     "./node_modules",
     "vite.config.ts",

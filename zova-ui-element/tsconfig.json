@@ -7,7 +7,8 @@
   },
   "exclude": [
     "./dist",
-    "./distMockServer",
+    "./dist-releases",
+    "./dist-mock",
     "./.quasar",
     "./.zova",
     "./node_modules",

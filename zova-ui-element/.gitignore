@@ -10,7 +10,8 @@ miniprogram_npm
 vite.config.ts.timestamp-*
 
 **/dist
-distMockServer
+dist-releases
+dist-mock
 
 # zova core related directories
 .temp-dynamic-*

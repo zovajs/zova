@@ -86,7 +86,7 @@ export function generateVitePlugins(
       process.env.MOCK_BUILD === 'true'
         ? {
             port: Number(process.env.MOCK_BUILD_PORT || 8888),
-            outDir: process.env.MOCK_BUILD_OUTPUT || 'distMockServer',
+            outDir: process.env.MOCK_BUILD_OUTPUT || 'dist-mock',
           }
         : false;
     const cors = process.env.MOCK_BUILD_CORS === 'true';
