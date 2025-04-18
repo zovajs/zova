@@ -168,7 +168,7 @@ export function extendFilesTwo(api: IndexAPI, _flavor: string) {
   }
 }
 
-export function extendFilesThree(_conf: QuasarConf, api: IndexAPI, _flavor: string) {
+export function extendFilesThree(conf: QuasarConf, api: IndexAPI, _flavor: string) {
   return async function extendFiles() {
     // patch templates
     await patchTemplates();
@@ -183,56 +183,16 @@ export function extendFilesThree(_conf: QuasarConf, api: IndexAPI, _flavor: stri
 
   // ssr-prod-webserver.js
   async function _handleSSRProdWebserver() {
-    const fileSrc = (api.resolve as any).entry('ssr-prod-webserver.js');
-    const content = fse.readFileSync(fileSrc).toString();
-    const contentNew = content.replace(
-      "import { renderToString } from 'vue/server-renderer'",
-      "import { renderToString } from '@cabloy/vue-server-renderer'",
-    ).replace(
-      "import serverEntry from './server/server-entry.js'",
-      `import serverEntry from 'app/${getOutDir()}/server/server-entry.js'`,
-    ).replace(
-      'process.env.PORT',
-      'process.env.SSR_PROD_PORT',
-    ).replace(
-      'ssrContext._meta.endingHeadTags +=',
-      'ssrContext._meta.endingHeadTags += renderModulesPreload_zova(ssrContext.modules, { ssrContext })\nssrContext._meta.endingHeadTags +=',
-    ).replace(
-      'function renderModulesPreload',
-      `const __ssrModulesZovaCache={};
-function renderModulesPreload_zova(modules2, opts){
-  let links = "";
-  const seen = /* @__PURE__ */ new Set();
-  modules2.forEach((id) => {
-    if(!id.startsWith('@@')) return;
-    if (seen.has(id) === true) return;
-    let cache=__ssrModulesZovaCache[id];
-    if(!cache){
-      for(const key in clientManifest){
-        const prefix=\`\${id.substring(2)}-\`;
-        const postfix='.js';
-        if(key.startsWith(prefix) && key.endsWith(postfix)){
-          cache=resolveUrlPath(\`/assets/\${key}\`)
-          break;
-        }
-      }
-      __ssrModulesZovaCache[id]=cache; 
-    }
-    links += renderPreloadTag(cache, opts);
-    seen.add(id);
-  });
-  return links;
-}
-  function renderModulesPreload`,
-    );
-    fse.writeFileSync(fileSrc, contentNew);
+    const fileSrc = resolveTemplatePath('entry/ssr-prod-webserver.js_');
+    const fileDest = (api.resolve as any).entry('ssr-prod-webserver.js');
+    await copyTemplateFile(fileSrc, fileDest, Object.assign({}, conf, { __outDir__: getOutDir() }));
   }
 
   // ssr-prod-handler.js
   async function _handleSSRProdHandler() {
     const fileSrc = resolveTemplatePath('entry/ssr-prod-handler.js_');
     const fileDest = (api.resolve as any).entry('ssr-prod-handler.js');
-    await copyTemplateFile(fileSrc, fileDest, { outDir: getOutDir() });
+    await copyTemplateFile(fileSrc, fileDest, { __outDir__: getOutDir() });
   }
 }
 
