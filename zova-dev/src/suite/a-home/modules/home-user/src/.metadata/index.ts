@@ -3,7 +3,6 @@ import type { BeanScopeUtil } from 'zova';
 /** scope: begin */
 import { BeanScopeBase, TypeLocaleBase, TypeModuleConfig, TypeModuleLocales } from 'zova';
 import { Scope } from 'zova-module-a-bean';
-
 import { config } from '../config/config.js';
 
 /** config: end */
@@ -46,12 +45,12 @@ declare module 'zova' {
 export * from '../model/passport.js';
 /** controller: begin */
 export * from '../page/login/controller.jsx';
-declare module 'zova' {
+declare module 'zova-module-a-router' {
   export interface IPagePathRecord {
-    '/home/user/login': undefined;
-  }
-  export interface IPageNameRecord {
-
+    '/home/user/login': {
+      path: '/home/user/login';
+      schema: undefined;
+    };
   }
 }
 export const pagePathSchemas = {

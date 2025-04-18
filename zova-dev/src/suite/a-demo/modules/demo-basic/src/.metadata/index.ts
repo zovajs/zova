@@ -187,7 +187,7 @@ declare module 'zova-module-a-router' {
       schema: NSControllerPageRouteParams.QueryInput;
     };
     '/demo/basic/routeParams/:id?': {
-      path: '/demo/basic/routeParams/${string}';
+      path: `/demo/basic/routeParams/${string}`;
       schema: NSControllerPageRouteParams.QueryInput;
     };
     '/demo/basic/routeQuery': {

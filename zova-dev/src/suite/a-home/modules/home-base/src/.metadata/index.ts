@@ -17,7 +17,6 @@ import { ControllerPage } from '../component/page/controller.jsx';
 /** locale: begin */
 import locale_en_us from '../config/locale/en-us.js';
 import locale_zh_cn from '../config/locale/zh-cn.js';
-
 import { ControllerPageErrorNotFound } from '../page/errorNotFound/controller.jsx';
 /** service: end */
 /** service: begin */
@@ -102,12 +101,12 @@ declare module 'zova' {
 /** monkeySys: begin */
 export * from '../monkeySys.js';
 export * from '../page/errorNotFound/controller.jsx';
-declare module 'zova' {
+declare module 'zova-module-a-router' {
   export interface IPagePathRecord {
-    '/home/base//:catchAll(.*)*': undefined;
-  }
-  export interface IPageNameRecord {
-
+    '/home/base//:catchAll(.*)*': {
+      path: '/home/base//:catchAll(.*)*';
+      schema: undefined;
+    };
   }
 }
 export const pagePathSchemas = {

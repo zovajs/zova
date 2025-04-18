@@ -1,13 +1,12 @@
 import type { BeanScopeUtil } from 'zova';
-import { TypePageParamsQuery } from 'zova';
-/** api: end */
-/** api: begin */
-
 /** model: end */
 /** scope: begin */
 import { BeanScopeBase } from 'zova';
+/** api: end */
+/** api: begin */
 
 import { Scope } from 'zova-module-a-bean';
+
 /** api: end */
 /** api: begin */
 import { ApiTodo } from '../api/todo.js';
@@ -84,12 +83,20 @@ export * from '../routes.js';
 /** controller: end */
 /** pages: begin */
 export * from './page/item.js';
-declare module 'zova' {
+declare module 'zova-module-a-router' {
   export interface IPagePathRecord {
-    '/demo/todo/todo': undefined;
-  }
-  export interface IPageNameRecord {
-    'demo-todo:item': TypePageParamsQuery<NSControllerPageItem.QueryInput, NSControllerPageItem.ParamsInput>;
+    '/demo/todo/item/:_string_': {
+      path: '/demo/todo/item:_id_';
+      schema: NSControllerPageItem.QueryInput;
+    };
+    '/demo/todo/item/:id': {
+      path: `/demo/todo/item/${string}`;
+      schema: NSControllerPageItem.QueryInput;
+    };
+    '/demo/todo/todo': {
+      path: '/demo/todo/todo';
+      schema: undefined;
+    };
   }
 }
 export const pagePathSchemas = {
