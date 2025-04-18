@@ -9,6 +9,6 @@
   "dependencies": {
     "connect": "latest",
     "cors": "latest",
-    "vite-plugin-fake-server-turbo": "^3.0.5"
+    "vite-plugin-fake-server-turbo": "^3.0.6"
   }
 }
