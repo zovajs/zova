@@ -60,11 +60,9 @@ export class SysUtil extends BeanSimple {
     );
   }
 
-  public async resolveRoute(url: string): Promise<any | undefined> {
-    // router
+  public async resolveRoute(url: string, checkAliasOf?: boolean): Promise<any | undefined> {
     const sysRouter = await this.sys.bean._getBean('a-router.sys.router' as never, false) as any;
-    // resolve
-    return await sysRouter.resolveRoute(url);
+    return await sysRouter.resolveRoute(url, checkAliasOf);
   }
 }
 

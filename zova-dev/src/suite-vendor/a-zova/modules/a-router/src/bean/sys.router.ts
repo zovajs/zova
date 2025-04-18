@@ -71,18 +71,20 @@ export class SysRouter extends BeanBase {
     return this._combineQueries(url, query);
   }
 
-  public async resolveRoute(url: string): Promise<RouteLocationResolvedGeneric | undefined> {
+  public async resolveRoute(url: string, checkAliasOf?: boolean): Promise<RouteLocationResolvedGeneric | undefined> {
     const pagePath = this.sys.util.getPagePathFromAbsoluteUrl(url);
     await this.ensureRouteModule(pagePath);
     let route = this._vueRouterSys.resolve(pagePath);
     if (!route || route.name === '$:/:catchAll(.*)*') return;
     // aliasOf
-    const matchItem = route.matched.find(item => item.aliasOf);
-    if (matchItem) {
-      route = matchItem.aliasOf as unknown as RouteLocationResolvedGeneric;
+    if (checkAliasOf) {
+      const matchItem = route.matched.find(item => item.aliasOf);
+      if (matchItem) {
+        route = matchItem.aliasOf as unknown as RouteLocationResolvedGeneric;
+      }
+      // 404
+      if (route.name === '$:/:catchAll(.*)*') return;
     }
-    // 404
-    if (route.name === '$:/:catchAll(.*)*') return;
     // ok
     return route;
   }
