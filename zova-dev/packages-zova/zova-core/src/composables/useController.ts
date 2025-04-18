@@ -11,6 +11,7 @@ import {
   queuePostFlushCb,
   useSlots,
 } from 'vue';
+import { onControllerCreated, SymbolCreatedFns } from 'zova';
 import {
   BeanControllerIdentifier,
   BeanRenderIdentifier,
@@ -131,12 +132,15 @@ async function _useController(
   }
 
   // load
+  onControllerCreated(() => {
+    return __load();
+  });
   if (process.env.SERVER) {
     onServerPrefetch(() => {
-      return __load();
+      return onControllerCreatedInvoke(ctx);
     });
   } else {
-    __load();
+    onControllerCreatedInvoke(ctx);
   }
 }
 
@@ -148,4 +152,12 @@ function setControllerRef(ctx: ZovaContext, on: boolean) {
   if (controllerRef) {
     controllerRef(on ? controller : undefined);
   }
+}
+
+async function onControllerCreatedInvoke(ctx: ZovaContext) {
+  const fns = ctx[SymbolCreatedFns];
+  for (const fn of fns) {
+    await ctx.util.instanceScope(fn);
+  }
+  ctx[SymbolCreatedFns] = undefined;
 }
