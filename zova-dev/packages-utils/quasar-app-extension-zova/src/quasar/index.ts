@@ -32,8 +32,8 @@ export async function quasar(api: IndexAPI) {
     printBanner(context, flavor, true)(quasarConf, api);
   });
   // before build
-  api.beforeBuild(async _api => {
-    await extendFilesThree(api, flavor)();
+  api.beforeBuild(async (api, { quasarConf }) => {
+    await extendFilesThree(quasarConf, api, flavor)();
   });
   // after build
   api.afterBuild(async (api, { quasarConf }) => {

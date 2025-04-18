@@ -1,4 +1,5 @@
 import type { IndexAPI } from '@quasar/app-vite';
+import type { QuasarConf } from './types.js';
 import path from 'node:path';
 import fse from 'fs-extra';
 import { copyTemplateFile, getAbsolutePathOfModule, getOutDir } from 'zova-vite';
@@ -167,7 +168,7 @@ export function extendFilesTwo(api: IndexAPI, _flavor: string) {
   }
 }
 
-export function extendFilesThree(api: IndexAPI, _flavor: string) {
+export function extendFilesThree(_conf: QuasarConf, api: IndexAPI, _flavor: string) {
   return async function extendFiles() {
     // patch templates
     await patchTemplates();
