@@ -12,7 +12,6 @@ export function generateMetaPage(
   const { moduleName } = options;
   const contentImports: string[] = [];
   const contentPathRecords: string[] = [];
-  const contentPathSchemaRecords: string[] = [];
   const contentPathSchemas: string[] = [];
   const contentNameSchemas: string[] = [];
   const contentRecords: string[] = [];
@@ -30,8 +29,7 @@ export function generateMetaPage(
       ? `/${moduleName.replace('-', '/')}/${routePath}`
       : `/${moduleName.replace('-', '/')}`;
     if (!routeName) {
-      contentPathRecords.push(_combineContentPathRecord(routePathFull, routePathFull));
-      contentPathSchemaRecords.push(_combineContentPathSchemaRecord(hasSchemaQuery, routePathFull, className));
+      contentPathRecords.push(_combineContentPathRecord(routePathFull, `'${routePathFull}'`, hasSchemaQuery, className));
     } else {
       const apiPath1 = routePathFull.replace(/(:[^/]+)/g, (_, _part) => {
         return ':_string_';
@@ -42,9 +40,8 @@ export function generateMetaPage(
       const apiPath3 = routePathFull.replace(/(:[^/]+)/g, (_, _part) => {
         return '${string}';
       });
-      contentPathRecords.push(_combineContentPathRecord(apiPath1, apiPath2));
-      contentPathRecords.push(_combineContentPathRecord(routePathFull, apiPath3));
-      contentPathSchemaRecords.push(_combineContentPathSchemaRecord(hasSchemaQuery, routePathFull, className));
+      contentPathRecords.push(_combineContentPathRecord(apiPath1, `'${apiPath2}'`, hasSchemaQuery, className));
+      contentPathRecords.push(_combineContentPathRecord(routePathFull, `\`${apiPath3}\``, hasSchemaQuery, className));
     }
     // schema
     if (!routeName) {
@@ -80,9 +77,6 @@ import 'zova';
 declare module 'zova-module-a-router' {
 export interface IPagePathRecord {
   ${contentPathRecords.join('\n')}
-}
-export interface IPagePathSchemaRecord {
-  ${contentPathSchemaRecords.join('\n')}
 }
 }
 export const pagePathSchemas = {
@@ -133,14 +127,9 @@ function _extractRoutePathOrName(
   return { routePath, routeName };
 }
 
-function _combineContentPathRecord(key: string, value: string) {
-  return `'${key}': '${value}';`;
-}
-
-function _combineContentPathSchemaRecord(hasSchemaQuery: boolean, routePathFull: string, className: string) {
-  if (hasSchemaQuery) {
-    return `'${routePathFull}': NS${className}.QueryInput;`;
-  } else {
-    return `'${routePathFull}': undefined;`; // for type of route path
-  }
+function _combineContentPathRecord(key: string, value: string, hasSchemaQuery: boolean, className: string) {
+  return `'${key}': {
+    path: ${value},
+    schema: ${hasSchemaQuery ? `NS${className}.QueryInput` : 'undefined'},
+  };`;
 }

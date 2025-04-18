@@ -2,9 +2,9 @@ import type { Router, RouterOptions } from '@cabloy/vue-router';
 import { IModule } from '@cabloy/module-info';
 import * as ModuleInfo from '@cabloy/module-info';
 import { createMemoryHistory, createRouter, createWebHashHistory, createWebHistory } from '@cabloy/vue-router';
-import { BeanBase, cast, deepExtend, IPageNameRecord, IPagePathRecord } from 'zova';
+import { BeanBase, cast, deepExtend } from 'zova';
 import { Sys } from 'zova-module-a-bean';
-import { IModuleRoute, IModuleRouteComponent, IPagePathSchemaRecord } from '../types.js';
+import { IModuleRoute, IModuleRouteComponent, IPagePathRecord } from '../types.js';
 import { getRealRouteName } from '../utils.js';
 
 export interface SysRouter extends Router {}
@@ -66,23 +66,7 @@ export class SysRouter extends BeanBase {
     return this.sys.meta.component.createAsyncComponent(component);
   }
 
-  public resolveName<K extends keyof IPageNameRecord>(name: K, options?: IPageNameRecord[K]): string {
-    const params = cast(options)?.params;
-    const query = cast(options)?.query;
-    return this._resolveNameOrPath(query, query => {
-      const route = this._vueRouterSys.resolve({ name, params, query });
-      return route.fullPath;
-    });
-  }
-
-  public resolvePath<K extends keyof IPagePathRecord>(path: K, query?: IPagePathRecord[K]): string {
-    return this._resolveNameOrPath(query, query => {
-      const route = this._vueRouterSys.resolve({ path, query });
-      return route.fullPath;
-    });
-  }
-
-  public getPagePath<K extends keyof IPagePathRecord>(path: IPagePathRecord[K], query?: IPagePathSchemaRecord[K], absolute?: boolean) {
+  public getPagePath<K extends keyof IPagePathRecord>(path: IPagePathRecord[K]['path'], query?: IPagePathRecord[K]['schema'], absolute?: boolean) {
     const url = absolute ? this.sys.util.getAbsolutePagePath(path) : path;
     return this._combineQueries(url, query);
   }

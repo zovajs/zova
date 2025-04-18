@@ -166,27 +166,46 @@ export * from './page/pinia.js';
 export * from './page/routeParams.js';
 declare module 'zova-module-a-router' {
   export interface IPagePathRecord {
-    '/demo/basic/component': '/demo/basic/component';
-    '/demo/basic/legacy': '/demo/basic/legacy';
-    '/demo/basic/locale': '/demo/basic/locale';
-    '/demo/basic/pinia': '/demo/basic/pinia';
-    '/demo/basic/routeParams/:_string_': '/demo/basic/routeParams:_id?_';
-    '/demo/basic/routeParams/:id?': '/demo/basic/routeParams/${string}';
-    '/demo/basic/routeQuery': '/demo/basic/routeQuery';
-    '/demo/basic/routeQueryB': '/demo/basic/routeQueryB';
-    '/demo/basic/state': '/demo/basic/state';
-    '/demo/basic/style': '/demo/basic/style';
-  }
-  export interface IPagePathSchemaRecord {
-    '/demo/basic/component': undefined;
-    '/demo/basic/legacy': undefined;
-    '/demo/basic/locale': undefined;
-    '/demo/basic/pinia': undefined;
-    '/demo/basic/routeParams/:id?': NSControllerPageRouteParams.QueryInput;
-    '/demo/basic/routeQuery': NSControllerPageRouteQuery.QueryInput;
-    '/demo/basic/routeQueryB': NSControllerPageRouteQueryB.QueryInput;
-    '/demo/basic/state': undefined;
-    '/demo/basic/style': undefined;
+    '/demo/basic/component': {
+      path: '/demo/basic/component';
+      schema: undefined;
+    };
+    '/demo/basic/legacy': {
+      path: '/demo/basic/legacy';
+      schema: undefined;
+    };
+    '/demo/basic/locale': {
+      path: '/demo/basic/locale';
+      schema: undefined;
+    };
+    '/demo/basic/pinia': {
+      path: '/demo/basic/pinia';
+      schema: undefined;
+    };
+    '/demo/basic/routeParams/:_string_': {
+      path: '/demo/basic/routeParams:_id?_';
+      schema: NSControllerPageRouteParams.QueryInput;
+    };
+    '/demo/basic/routeParams/:id?': {
+      path: '/demo/basic/routeParams/${string}';
+      schema: NSControllerPageRouteParams.QueryInput;
+    };
+    '/demo/basic/routeQuery': {
+      path: '/demo/basic/routeQuery';
+      schema: NSControllerPageRouteQuery.QueryInput;
+    };
+    '/demo/basic/routeQueryB': {
+      path: '/demo/basic/routeQueryB';
+      schema: NSControllerPageRouteQueryB.QueryInput;
+    };
+    '/demo/basic/state': {
+      path: '/demo/basic/state';
+      schema: undefined;
+    };
+    '/demo/basic/style': {
+      path: '/demo/basic/style';
+      schema: undefined;
+    };
   }
 }
 export const pagePathSchemas = {
