@@ -5,6 +5,7 @@ import { BeanScopeBase, TypeLocaleBase, TypeModuleLocales } from 'zova';
 import { IDecoratorAopOptions } from 'zova-module-a-bean';
 
 import { Scope } from 'zova-module-a-bean';
+import { TypePagePathSchema } from 'zova-module-a-router';
 import { AopHome3 } from '../bean/aop.home3.jsx';
 /** aop: end */
 /** aop: begin */
@@ -31,12 +32,11 @@ import { ControllerPageRouteQuery } from '../page/routeQuery/controller.jsx';
 import { ControllerPageRouteQueryB } from '../page/routeQueryB/controller.jsx';
 import { ControllerPageState } from '../page/state/controller.jsx';
 import { ControllerPageStyle } from '../page/style/controller.jsx';
-import { ZCard } from './component/card.js';
 
+import { ZCard } from './component/card.js';
 import { NSControllerPageRouteParams } from './page/routeParams.js';
 import { NSControllerPageRouteQuery } from './page/routeQuery.js';
 import { NSControllerPageRouteQueryB } from './page/routeQueryB.js';
-import 'zova';
 
 import 'zova';
 import 'zova';
@@ -47,6 +47,7 @@ import 'zova';
 import 'zova';
 import 'zova';
 
+import 'zova';
 import 'zova';
 
 export * from '../bean/aop.home3.jsx';
@@ -166,46 +167,16 @@ export * from './page/pinia.js';
 export * from './page/routeParams.js';
 declare module 'zova-module-a-router' {
   export interface IPagePathRecord {
-    '/demo/basic/component': {
-      path: '/demo/basic/component';
-      schema: undefined;
-    };
-    '/demo/basic/legacy': {
-      path: '/demo/basic/legacy';
-      schema: undefined;
-    };
-    '/demo/basic/locale': {
-      path: '/demo/basic/locale';
-      schema: undefined;
-    };
-    '/demo/basic/pinia': {
-      path: '/demo/basic/pinia';
-      schema: undefined;
-    };
-    '/demo/basic/routeParams/:_string_': {
-      path: '/demo/basic/routeParams:_id?_';
-      schema: NSControllerPageRouteParams.QueryInput;
-    };
-    '/demo/basic/routeParams/:id?': {
-      path: `/demo/basic/routeParams/${string}`;
-      schema: NSControllerPageRouteParams.QueryInput;
-    };
-    '/demo/basic/routeQuery': {
-      path: '/demo/basic/routeQuery';
-      schema: NSControllerPageRouteQuery.QueryInput;
-    };
-    '/demo/basic/routeQueryB': {
-      path: '/demo/basic/routeQueryB';
-      schema: NSControllerPageRouteQueryB.QueryInput;
-    };
-    '/demo/basic/state': {
-      path: '/demo/basic/state';
-      schema: undefined;
-    };
-    '/demo/basic/style': {
-      path: '/demo/basic/style';
-      schema: undefined;
-    };
+    '/demo/basic/component': TypePagePathSchema<'/demo/basic/component', undefined>;
+    '/demo/basic/legacy': TypePagePathSchema<'/demo/basic/legacy', undefined>;
+    '/demo/basic/locale': TypePagePathSchema<'/demo/basic/locale', undefined>;
+    '/demo/basic/pinia': TypePagePathSchema<'/demo/basic/pinia', undefined>;
+    '/demo/basic/routeParams/:_string_': TypePagePathSchema<'/demo/basic/routeParams:_id?_', NSControllerPageRouteParams.QueryInput>;
+    '/demo/basic/routeParams/:id?': TypePagePathSchema<`/demo/basic/routeParams/${string}`, NSControllerPageRouteParams.QueryInput>;
+    '/demo/basic/routeQuery': TypePagePathSchema<'/demo/basic/routeQuery', NSControllerPageRouteQuery.QueryInput>;
+    '/demo/basic/routeQueryB': TypePagePathSchema<'/demo/basic/routeQueryB', NSControllerPageRouteQueryB.QueryInput>;
+    '/demo/basic/state': TypePagePathSchema<'/demo/basic/state', undefined>;
+    '/demo/basic/style': TypePagePathSchema<'/demo/basic/style', undefined>;
   }
 }
 export const pagePathSchemas = {

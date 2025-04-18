@@ -73,6 +73,7 @@ export function generateMetaPage(
   const content = `/** pages: begin */
 ${contentImports.join('\n')}
 export * from '../routes.js';
+${contentPathRecords.length > 0 ? "import { TypePagePathSchema } from 'zova-module-a-router';" : ''}
 import 'zova';
 declare module 'zova-module-a-router' {
 export interface IPagePathRecord {
@@ -128,8 +129,9 @@ function _extractRoutePathOrName(
 }
 
 function _combineContentPathRecord(key: string, value: string, hasSchemaQuery: boolean, className: string) {
-  return `'${key}': {
-    path: ${value},
-    schema: ${hasSchemaQuery ? `NS${className}.QueryInput` : 'undefined'},
-  };`;
+  return `'${key}': TypePagePathSchema<${value},${hasSchemaQuery ? `NS${className}.QueryInput` : 'undefined'}>;`;
+  // return `'${key}': {
+  //   path: ${value},
+  //   schema: ${hasSchemaQuery ? `NS${className}.QueryInput` : 'undefined'},
+  // };`;
 }
