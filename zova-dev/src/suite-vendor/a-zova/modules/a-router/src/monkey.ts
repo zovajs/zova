@@ -6,9 +6,9 @@ import type {
   IMonkeyAppInitialized,
   IMonkeyAppReady,
   IMonkeyController,
-  TypePageSchema,
 } from 'zova';
 import type { BeanRouter } from './bean/bean.router.js';
+import type { TypePageSchema } from './types.js';
 import * as ModuleInfo from '@cabloy/module-info';
 import { useRoute } from '@cabloy/vue-router';
 import {

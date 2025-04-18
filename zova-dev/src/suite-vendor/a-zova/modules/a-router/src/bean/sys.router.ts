@@ -82,6 +82,8 @@ export class SysRouter extends BeanBase {
     });
   }
 
+  public;
+
   public checkPathValid(to?: { name?: string; path?: string } | string): boolean {
     const _name = to && typeof to === 'object' ? to.name : undefined;
     const _path = to && typeof to === 'object' ? (to.name ?? to.path) : to;

@@ -164,7 +164,7 @@ export * from './page/legacy.js';
 export * from './page/locale.js';
 export * from './page/pinia.js';
 export * from './page/routeParams.js';
-declare module 'zova' {
+declare module 'zova-module-a-router' {
   export interface IPagePathRecord {
     '/demo/basic/component': '/demo/basic/component';
     '/demo/basic/legacy': '/demo/basic/legacy';

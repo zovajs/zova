@@ -77,7 +77,7 @@ export function generateMetaPage(
 ${contentImports.join('\n')}
 export * from '../routes.js';
 import 'zova';
-declare module 'zova' {
+declare module 'zova-module-a-router' {
 export interface IPagePathRecord {
   ${contentPathRecords.join('\n')}
 }

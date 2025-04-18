@@ -1,6 +1,7 @@
 import type { RouteComponent, RouteLocationNormalizedLoaded, RouteRecordRaw } from '@cabloy/vue-router';
+import type { z } from 'zod';
 // @ts-ignore ignore
-import type { IPageNameRecord, IPagePathRecord, TypeComponentLayoutRecord, TypePageSchemas } from 'zova';
+import type { IPageNameRecord, IPagePathRecord, TypeComponentLayoutRecord } from 'zova';
 import type { BeanRouter } from './bean/bean.router.js';
 
 import 'vue-router';
@@ -56,3 +57,9 @@ declare module 'zova' {
   //   'a-router:routerGuards': void;
   // }
 }
+
+export interface IPagePathRecord {}
+export interface IPagePathSchemaRecord {}
+
+export interface TypePageSchema { params?: z.ZodTypeAny; query: z.ZodTypeAny }
+export type TypePageSchemas = Record<string, TypePageSchema>;
