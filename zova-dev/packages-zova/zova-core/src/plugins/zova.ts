@@ -1,6 +1,5 @@
 import type { App } from 'vue';
 import type { ZovaContext } from '../core/index.js';
-import type { ZovaConfigEnv } from '../types/index.js';
 import type { PluginZovaOptions } from '../types/interface/pluginZova.js';
 import { SymbolBeanContainerInstances } from '../bean/beanContainer.js';
 import { BeanControllerIdentifier, BeanRenderIdentifier, BeanStyleIdentifier } from '../bean/type.js';
@@ -14,10 +13,7 @@ export const PluginZova = {
     { modulesMeta, locales, config, env, SysMonkey, AppMonkey, legacyRoutes }: PluginZovaOptions,
   ) {
     // zova sys
-    await sys.initialize(
-      { modulesMeta, locales, config, env, SysMonkey, AppMonkey, legacyRoutes },
-      process.env.SERVER ? process.env as unknown as ZovaConfigEnv : undefined,
-    );
+    await sys.initialize({ modulesMeta, locales, config, env, SysMonkey, AppMonkey, legacyRoutes });
     // zova app
     const app = new ZovaApplication(vue, ctxRoot);
     await app.initialize({ modulesMeta, locales, config, env, SysMonkey, AppMonkey, legacyRoutes });
