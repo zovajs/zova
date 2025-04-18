@@ -29,7 +29,7 @@
     "dev:ssr:front": "npm run prerun && quasar dev --mode ssr --flavor front",
     "build:ssr:admin": "npm run prerun && quasar build --mode ssr --flavor admin",
     "build:ssr:front": "npm run prerun && quasar build --mode ssr --flavor front",
-    "preview:ssr": "concurrently \"cd ./dist-mock && node index.js\" \"node ./dist/ssr/index.js\"",
+    "preview:ssr": "concurrently \"node ./dist-mock/index.js\" \"node ./dist/ssr/index.js\"",
     "dev:spa": "npm run prerun && quasar dev --mode spa --flavor admin",
     "build:spa": "npm run prerun && quasar build --mode spa --flavor admin",
     "preview:spa": "vite preview --outDir=dist/spa",

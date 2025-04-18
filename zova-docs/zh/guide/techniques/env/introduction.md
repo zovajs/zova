@@ -43,7 +43,7 @@ $ npm run build:ssr:admin
   "preview": "npm run preview:ssr",
   "dev:ssr:admin": "npm run prerun && quasar dev --mode ssr --flavor admin",
   "build:ssr:admin": "npm run prerun && quasar build --mode ssr --flavor admin",
-  "preview:ssr": "concurrently \"cd ./dist-mock && node index.js\" \"node ./dist/ssr/index.js\"",
+  "preview:ssr": "concurrently \"node ./dist-mock/index.js\" \"node ./dist/ssr/index.js\"",
 },
 ```
 
