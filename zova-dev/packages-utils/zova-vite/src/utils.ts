@@ -22,6 +22,10 @@ export function getOutDir() {
   return process.env.BUILD_OUTDIR || `dist/${process.env.META_APP_MODE}-${process.env.META_FLAVOR}`;
 }
 
+export function getOutReleasesDir() {
+  return `dist-releases/${process.env.META_APP_MODE}-${process.env.META_FLAVOR}-${process.env.APP_VERSION}`;
+}
+
 export function getEnvFromCli(
   cliEnvName: string,
   cliArgName: string,
