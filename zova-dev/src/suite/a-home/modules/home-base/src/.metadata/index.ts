@@ -3,10 +3,11 @@ import type { BeanScopeUtil } from 'zova';
 /** scope: begin */
 import { BeanScopeBase, TypeLocaleBase, TypeModuleLocales } from 'zova';
 import { Scope } from 'zova-module-a-bean';
+import { TypePagePathSchema } from 'zova-module-a-router';
+
 /** css: end */
 /** css: begin */
 import { CssDefault } from '../bean/css.default.js';
-
 /** theme: end */
 /** theme: begin */
 import { ThemeDefault } from '../bean/theme.default.js';
@@ -103,10 +104,7 @@ export * from '../monkeySys.js';
 export * from '../page/errorNotFound/controller.jsx';
 declare module 'zova-module-a-router' {
   export interface IPagePathRecord {
-    '/home/base//:catchAll(.*)*': {
-      path: '/home/base//:catchAll(.*)*';
-      schema: undefined;
-    };
+    '/home/base//:catchAll(.*)*': TypePagePathSchema<'/home/base//:catchAll(.*)*', undefined>;
   }
 }
 export const pagePathSchemas = {

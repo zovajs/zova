@@ -7,6 +7,7 @@ import { BeanScopeBase } from 'zova';
 
 import { Scope } from 'zova-module-a-bean';
 
+import { TypePagePathSchema } from 'zova-module-a-router';
 /** api: end */
 /** api: begin */
 import { ApiTodo } from '../api/todo.js';
@@ -85,18 +86,9 @@ export * from '../routes.js';
 export * from './page/item.js';
 declare module 'zova-module-a-router' {
   export interface IPagePathRecord {
-    '/demo/todo/item/:_string_': {
-      path: '/demo/todo/item:_id_';
-      schema: NSControllerPageItem.QueryInput;
-    };
-    '/demo/todo/item/:id': {
-      path: `/demo/todo/item/${string}`;
-      schema: NSControllerPageItem.QueryInput;
-    };
-    '/demo/todo/todo': {
-      path: '/demo/todo/todo';
-      schema: undefined;
-    };
+    '/demo/todo/item/:_string_': TypePagePathSchema<'/demo/todo/item:_id_', NSControllerPageItem.QueryInput>;
+    '/demo/todo/item/:id': TypePagePathSchema<`/demo/todo/item/${string}`, NSControllerPageItem.QueryInput>;
+    '/demo/todo/todo': TypePagePathSchema<'/demo/todo/todo', undefined>;
   }
 }
 export const pagePathSchemas = {

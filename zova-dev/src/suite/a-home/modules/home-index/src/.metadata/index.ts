@@ -2,6 +2,7 @@ import type { BeanScopeUtil } from 'zova';
 /** scope: begin */
 import { BeanScopeBase } from 'zova';
 import { Scope } from 'zova-module-a-bean';
+import { TypePagePathSchema } from 'zova-module-a-router';
 /** controller: end */
 /** controller: begin */
 import { ControllerPageHome } from '../page/home/controller.jsx';
@@ -36,10 +37,7 @@ export * from '../routes.js';
 export * from './page/home.js';
 declare module 'zova-module-a-router' {
   export interface IPagePathRecord {
-    '/home/index': {
-      path: '/home/index';
-      schema: undefined;
-    };
+    '/home/index': TypePagePathSchema<'/home/index', undefined>;
   }
 }
 export const pagePathSchemas = {

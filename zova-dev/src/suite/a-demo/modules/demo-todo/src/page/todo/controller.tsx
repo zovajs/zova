@@ -50,7 +50,7 @@ export class ControllerPageTodo extends BeanControllerPageBase {
             <div>
               Current:
               {' '}
-              <RouterLink to={this.$router.getPagePath('').resolveName('demo-todo:item', { params: { id: todoCurrent?.data?.id } })}>
+              <RouterLink to={this.$router.getPagePath(`/demo/todo/item/${todoCurrent?.data?.id}`)}>
                 {todoCurrent?.data?.title}
               </RouterLink>
             </div>

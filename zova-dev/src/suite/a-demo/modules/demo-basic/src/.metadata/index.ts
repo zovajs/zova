@@ -32,22 +32,22 @@ import { ControllerPageRouteQuery } from '../page/routeQuery/controller.jsx';
 import { ControllerPageRouteQueryB } from '../page/routeQueryB/controller.jsx';
 import { ControllerPageState } from '../page/state/controller.jsx';
 import { ControllerPageStyle } from '../page/style/controller.jsx';
-
 import { ZCard } from './component/card.js';
+
 import { NSControllerPageRouteParams } from './page/routeParams.js';
 import { NSControllerPageRouteQuery } from './page/routeQuery.js';
 import { NSControllerPageRouteQueryB } from './page/routeQueryB.js';
-
-import 'zova';
-import 'zova';
-import 'zova';
-import 'zova';
-import 'zova';
-import 'zova';
-import 'zova';
 import 'zova';
 
 import 'zova';
+import 'zova';
+import 'zova';
+import 'zova';
+import 'zova';
+import 'zova';
+import 'zova';
+import 'zova';
+
 import 'zova';
 
 export * from '../bean/aop.home3.jsx';
