@@ -1,10 +1,9 @@
 import type { BeanScopeUtil } from 'zova';
-import { TypePageParamsQuery } from 'zova';
 /** locale: end */
 /** scope: begin */
 import { BeanScopeBase, TypeLocaleBase, TypeModuleLocales } from 'zova';
-
 import { IDecoratorAopOptions } from 'zova-module-a-bean';
+
 import { Scope } from 'zova-module-a-bean';
 import { AopHome3 } from '../bean/aop.home3.jsx';
 /** aop: end */
@@ -167,17 +166,27 @@ export * from './page/pinia.js';
 export * from './page/routeParams.js';
 declare module 'zova' {
   export interface IPagePathRecord {
+    '/demo/basic/component': '/demo/basic/component';
+    '/demo/basic/legacy': '/demo/basic/legacy';
+    '/demo/basic/locale': '/demo/basic/locale';
+    '/demo/basic/pinia': '/demo/basic/pinia';
+    '/demo/basic/routeParams/:_string_': '/demo/basic/routeParams:_id?_';
+    '/demo/basic/routeParams/:id?': '/demo/basic/routeParams/${string}';
+    '/demo/basic/routeQuery': '/demo/basic/routeQuery';
+    '/demo/basic/routeQueryB': '/demo/basic/routeQueryB';
+    '/demo/basic/state': '/demo/basic/state';
+    '/demo/basic/style': '/demo/basic/style';
+  }
+  export interface IPagePathSchemaRecord {
     '/demo/basic/component': undefined;
     '/demo/basic/legacy': undefined;
     '/demo/basic/locale': undefined;
     '/demo/basic/pinia': undefined;
+    '/demo/basic/routeParams/:id?': NSControllerPageRouteParams.QueryInput;
     '/demo/basic/routeQuery': NSControllerPageRouteQuery.QueryInput;
     '/demo/basic/routeQueryB': NSControllerPageRouteQueryB.QueryInput;
     '/demo/basic/state': undefined;
     '/demo/basic/style': undefined;
-  }
-  export interface IPageNameRecord {
-    'demo-basic:routeParams': TypePageParamsQuery<NSControllerPageRouteParams.QueryInput, NSControllerPageRouteParams.ParamsInput>;
   }
 }
 export const pagePathSchemas = {

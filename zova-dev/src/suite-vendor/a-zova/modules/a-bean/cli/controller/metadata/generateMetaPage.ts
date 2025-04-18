@@ -30,8 +30,8 @@ export function generateMetaPage(
       ? `/${moduleName.replace('-', '/')}/${routePath}`
       : `/${moduleName.replace('-', '/')}`;
     if (!routeName) {
-      contentPathRecords.push(_combineContentPathRecord(routePathFull, className));
-      contentPathRecords.push(_combineContentPathSchemaRecord(hasSchemaQuery, routePathFull, className));
+      contentPathRecords.push(_combineContentPathRecord(routePathFull, routePathFull));
+      contentPathSchemaRecords.push(_combineContentPathSchemaRecord(hasSchemaQuery, routePathFull, className));
     } else {
       const apiPath1 = routePathFull.replace(/(:[^/]+)/g, (_, _part) => {
         return ':_string_';
@@ -134,7 +134,7 @@ function _extractRoutePathOrName(
 }
 
 function _combineContentPathRecord(key: string, value: string) {
-  return `'${key}': ${value};`;
+  return `'${key}': '${value}';`;
 }
 
 function _combineContentPathSchemaRecord(hasSchemaQuery: boolean, routePathFull: string, className: string) {
