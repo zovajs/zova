@@ -12,6 +12,15 @@ export class ControllerPageApp extends BeanControllerPageBase {
     } else {
       await this.updateApp(app.zova);
     }
+    this.$useMeta({
+      title: this.sys.env.APP_TITLE,
+      meta: {
+        description: {
+          name: 'description',
+          content: this.sys.env.APP_DESCRIPTION
+        },
+      }
+    })
   }
 
   protected render() {
