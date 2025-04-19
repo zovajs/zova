@@ -9,13 +9,11 @@
 以 input element 为例：
 
 ```typescript
-import { onControllerMounted } from 'zova';
-
 export class ControllerPageComponent {
   inputRef: HTMLInputElement | null;
 
   protected async __init__() {
-    onControllerMounted(() => {
+    this.$onMounted(() => {
       this.inputRef?.focus();
     });
   }
@@ -23,7 +21,7 @@ export class ControllerPageComponent {
 ```
 
 - 声明变量 inputRef
-- 响应 onControllerMounted 事件，执行 focus 方法
+- 响应 onMounted 事件，执行 focus 方法
 
 ```typescript
 export class RenderComponent {
@@ -52,7 +50,7 @@ export class ControllerPageComponent {
   btnRef: InstanceType<typeof QBtn> | null;
 
   protected async __init__() {
-    onControllerMounted(() => {
+    this.$onMounted(() => {
       this.btnRef?.click();
     });
   }
@@ -60,7 +58,7 @@ export class ControllerPageComponent {
 ```
 
 - 声明变量 btnRef
-- 响应 onControllerMounted 事件，执行 click 方法
+- 响应 onMounted 事件，执行 click 方法
 
 ```typescript
 export class RenderComponent {
@@ -89,7 +87,7 @@ export class RenderComponent {
 先在父组件的`controller.ts`中声明变量：
 
 ```typescript
-import { ControllerCard } from '../../.metadata/index.js';
+import type { ControllerCard } from '../../.metadata/index.js';
 
 export class ControllerPageComponent {
   cardRef: ControllerCard;

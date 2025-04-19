@@ -50,13 +50,11 @@ export class Counter {
 Since the Bean container bound to the component is loaded asynchronously, if you want to execute some initialization logic after the Bean container is loaded, you need to listen to the `onControllerMounted` event. If the initialization logic does not depend on the loading status of the Bean container, you can use the `onMounted`
 
 ```typescript
-import { onControllerMounted } from 'zova';
-
 export class ControllerPageComponent {
   inputRef: HTMLInputElement | null;
 
   protected async __init__() {
-    onControllerMounted(() => {
+    this.$onMounted(() => {
       this.inputRef?.focus();
     });
   }
@@ -64,7 +62,7 @@ export class ControllerPageComponent {
 ```
 
 ```typescript
-import { ref, onMounted, onUnmounted } from 'vue';
+import { onMounted, onUnmounted, ref } from 'vue';
 
 export function useMouse() {
   const x = ref(0);

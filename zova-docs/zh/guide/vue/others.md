@@ -50,13 +50,11 @@ export class Counter {
 由于与组件绑定的 Bean 容器是异步加载的，所以，如果要在 Bean 容器加载完毕后执行一些初始化逻辑，需要响应`onControllerMounted`事件。如果初始化逻辑不依赖 Bean 容器的加载状态，则可以使用`onMounted`
 
 ```typescript
-import { onControllerMounted } from 'zova';
-
 export class ControllerPageComponent {
   inputRef: HTMLInputElement | null;
 
   protected async __init__() {
-    onControllerMounted(() => {
+    this.$onMounted(() => {
       this.inputRef?.focus();
     });
   }
@@ -64,7 +62,7 @@ export class ControllerPageComponent {
 ```
 
 ```typescript
-import { ref, onMounted, onUnmounted } from 'vue';
+import { onMounted, onUnmounted, ref } from 'vue';
 
 export function useMouse() {
   const x = ref(0);

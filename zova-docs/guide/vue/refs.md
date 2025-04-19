@@ -9,13 +9,11 @@ If it is an Html Element or a regular Vue component (without using an ioc contai
 Take `input` element as an example:
 
 ```typescript
-import { onControllerMounted } from 'zova';
-
 export class ControllerPageComponent {
   inputRef: HTMLInputElement | null;
 
   protected async __init__() {
-    onControllerMounted(() => {
+    this.$onMounted(() => {
       this.inputRef?.focus();
     });
   }
@@ -23,7 +21,7 @@ export class ControllerPageComponent {
 ```
 
 - Declare variable `inputRef`
-- Listen to `onControllerMounted` event and call `focus` method
+- Listen to `onMounted` event and call `focus` method
 
 ```typescript
 export class RenderComponent {
@@ -52,7 +50,7 @@ export class ControllerPageComponent {
   btnRef: InstanceType<typeof QBtn> | null;
 
   protected async __init__() {
-    onControllerMounted(() => {
+    this.$onMounted(() => {
       this.btnRef?.click();
     });
   }
@@ -60,7 +58,7 @@ export class ControllerPageComponent {
 ```
 
 - Declare variable `btnRef`
-- Listen to `onControllerMounted` event and call `click` method
+- Listen to `onMounted` event and call `click` method
 
 ```typescript
 export class RenderComponent {
@@ -89,7 +87,7 @@ For Vue components that use the ioc container, you cannot use `Template Ref`, bu
 First declare a variable in `controller.ts` of the parent component:
 
 ```typescript
-import { ControllerCard } from '../../.metadata/index.js';
+import type { ControllerCard } from '../../.metadata/index.js';
 
 export class ControllerPageComponent {
   cardRef: ControllerCard;

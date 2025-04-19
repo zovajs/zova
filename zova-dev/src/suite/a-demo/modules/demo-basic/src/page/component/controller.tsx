@@ -1,6 +1,6 @@
 import type { ControllerCard } from '../../.metadata/index.jsx';
 import { nextTick } from 'vue';
-import { BeanControllerPageBase, onControllerMounted } from 'zova';
+import { BeanControllerPageBase } from 'zova';
 import { Controller } from 'zova-module-a-bean';
 import { ZPage } from 'zova-module-home-base';
 import { ZCard } from '../../index.js';
@@ -12,7 +12,7 @@ export class ControllerPageComponent extends BeanControllerPageBase {
   inputRef?: HTMLInputElement;
 
   protected async __init__() {
-    onControllerMounted(() => {
+    this.$onMounted(() => {
       // this.inputRef?.focus();
     });
   }
