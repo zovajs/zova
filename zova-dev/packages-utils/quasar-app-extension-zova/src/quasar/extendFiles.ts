@@ -149,12 +149,12 @@ export function extendFilesTwo(api: IndexAPI, _flavor: string) {
       )
       .replace('async #writeRenderTemplate (clientDir) {', `_patchIndexHtml(html){
     return html
-      .replace(/<title>.*?<\/title>/,'')
+      .replace(/<title>.*?<\\/title>/,'')
       .replace(/<meta name="description"[^>]*?>/,'')
-      .replace(/<link([^>]*?)href="(\/[^>]*?)>/g,
-        (_,a,b)=>{return \`<link\${a}href="{{ ssrContext._meta.ssrBaseUrl }}\${b}>\`})
-      .replace(/<script([^>]*?)src="(\/[^>]*?)><\/script>/g,
-        (_,a,b)=>{return \`<script\${a}src="{{ ssrContext._meta.ssrBaseUrl }}\${b}></script>\`}) ;
+      .replace(/<link([^>]*?)href="(\\/[^>]*?)>/g,
+        (_,a,b)=>{return \`<link\${a}href="{{ ssrContext._meta.baseUrl }}\${b}>\`})
+      .replace(/<script([^>]*?)src="(\\/[^>]*?)><\\/script>/g,
+        (_,a,b)=>{return \`<script\${a}src="{{ ssrContext._meta.baseUrl }}\${b}></script>\`}) ;
   }
         async #writeRenderTemplate (clientDir) {`)
       .replace('const html = this.readFile(htmlFile);', 'const html = this._patchIndexHtml(this.readFile(htmlFile));');
