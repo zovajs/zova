@@ -45,7 +45,7 @@ export async function generateEntryFiles(
       for (let index = 1; index < parts.length - 1; index++) {
         constName += parts[index].charAt(0).toUpperCase() + parts[index].substring(1);
       }
-      imports.push(`import ${constName} from '../src/front/config/config/${filename}';`);
+      imports.push(`import ${constName} from '../src/front/config/config/${filename.replace('.ts', '.js')}';`);
       constNames.push(constName);
     }
     const contentDest = `${imports.join('\n')}\nexport default [${constNames.join(', ')}];`;
