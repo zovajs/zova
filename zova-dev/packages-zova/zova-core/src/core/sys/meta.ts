@@ -6,12 +6,14 @@ import { SysComponent } from './component.js';
 import { SysError } from './error.js';
 import { SysLocale } from './locale.js';
 import { SysModule } from './module.js';
+import { SysSSR } from './ssr.js';
 
 export class SysMeta extends BeanSimple {
   module: SysModule;
   component: SysComponent;
   locale: SysLocale;
   error: SysError;
+  ssr: SysSSR;
 
   /** @internal */
   public sysMonkey?: IMonkeyModuleSys & IMonkeySys;
@@ -24,6 +26,7 @@ export class SysMeta extends BeanSimple {
     this.component = this.bean._newBeanSimple(SysComponent, false);
     this.locale = this.bean._newBeanSimple(SysLocale, false);
     this.error = this.bean._newBeanSimple(SysError, false);
+    this.ssr = this.bean._newBeanSimple(SysSSR, false);
   }
 
   /** @internal */
