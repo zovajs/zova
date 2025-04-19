@@ -122,7 +122,7 @@ async function render (ssrContext) {
     // sys
     const sys = await initialize(process.env);
     // resolve route
-    const matched = await sys.util.resolveRoute(ssrContext.req.url);
+    const matched = await sys.meta.ssr.resolveRoute(ssrContext.req.url, true, false);
     if (!matched) {
       const err = new Error('not found');
       err.code = err.status = 404;
