@@ -146,7 +146,18 @@ export function extendFilesTwo(api: IndexAPI, _flavor: string) {
       .replace(
         "'render-template.js',",
         "this.ctx.appPaths.resolve.entry('render-template.js'),",
-      );
+      )
+      .replace('async #writeRenderTemplate (clientDir) {', `_patchIndexHtml(html){
+    return html
+      .replace(/<title>.*?<\/title>/,'')
+      .replace(/<meta name="description"[^>]*?>/,'')
+      .replace(/<link([^>]*?)href="(\/[^>]*?)>/g,
+        (_,a,b)=>{return \`<link\${a}href="{{ ssrContext._meta.ssrBaseUrl }}\${b}>\`})
+      .replace(/<script([^>]*?)src="(\/[^>]*?)><\/script>/g,
+        (_,a,b)=>{return \`<script\${a}src="{{ ssrContext._meta.ssrBaseUrl }}\${b}></script>\`}) ;
+  }
+        async #writeRenderTemplate (clientDir) {`)
+      .replace('const html = this.readFile(htmlFile);', 'const html = this._patchIndexHtml(this.readFile(htmlFile));');
     fse.writeFileSync(fileSrc, contentNew);
   }
 
