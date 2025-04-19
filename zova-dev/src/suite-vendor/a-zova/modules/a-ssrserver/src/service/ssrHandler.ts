@@ -81,8 +81,6 @@ export class ServiceSsrHandler extends BeanBase {
     ssrContext._meta.endingHeadTags += this._renderModulesPreload_zova(cast(ssrContext).modules, { ssrContext });
     ssrContext._meta.endingHeadTags += this._renderModulesPreload(cast(ssrContext).modules, { ssrContext });
 
-    ssrContext._meta.baseUrl = this.sys.util.getAbsoluteUrlFromPagePath();
-
     const html = renderTemplate(ssrContext);
 
     // todo: ssg
