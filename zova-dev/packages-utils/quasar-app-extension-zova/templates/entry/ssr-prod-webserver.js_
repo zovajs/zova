@@ -6,7 +6,6 @@
 
 import { join, isAbsolute } from 'node:path'
 import { pathToFileURL } from 'node:url';
-import { readFileSync } from 'node:fs'
 import { fileURLToPath } from 'node:url'
 <% if (metaConf.hasStore && ssr.manualStoreSerialization !== true) { %>
 import serialize from 'serialize-javascript'
@@ -53,7 +52,7 @@ async function ensureReady() {
     if (!_handlerPromise) {
       _handlerPromise = _prepareHandler();
     }
-    _ssrHandler = await this._handlerPromise;
+    _ssrHandler = await _handlerPromise;
   }
   return _ssrHandler;
 }
@@ -76,7 +75,7 @@ function pathToHref(fileName) {
   // return Path.sep === '\\' ? pathToFileURL(fileName).href : fileName;
 }
 
-async function render (ssrContext) {
+async function render ({req, res}) {
   const ssrHandler = await ensureReady();
   const html= await ssrHandler.render(req, res);
   if(!html) {
