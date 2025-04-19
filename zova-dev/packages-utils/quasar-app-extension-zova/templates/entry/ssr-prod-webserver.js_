@@ -4,16 +4,15 @@
  * DO NOT EDIT.
  **/
 
-import { join, basename, isAbsolute } from 'node:path'
+import { join, isAbsolute } from 'node:path'
 import { pathToFileURL } from 'node:url';
 import { readFileSync } from 'node:fs'
 import { fileURLToPath } from 'node:url'
-import { renderToString } from '@cabloy/vue-server-renderer'
 <% if (metaConf.hasStore && ssr.manualStoreSerialization !== true) { %>
 import serialize from 'serialize-javascript'
 <% } %>
 
-import { create, listen, renderPreloadTag, serveStaticContent } from 'app/src-ssr/server'
+import { create, listen, serveStaticContent } from 'app/src-ssr/server'
 import injectMiddlewares from './ssr-middlewares'
 
 const port = process.env.SSR_PROD_PORT || <%= ssr.prodPort %>
@@ -27,72 +26,11 @@ const resolveUrlPath = publicPath === '/'
 const rootFolder = fileURLToPath(new URL('.', import.meta.url))
 const publicFolder = join(rootFolder, 'client')
 
-const clientManifest = JSON.parse(
-  readFileSync(join(rootFolder, './quasar.manifest.json'),
-  'utf-8'
-  )
-)
-
 function resolvePublicFolder () {
   const dir = join(...arguments)
   return isAbsolute(dir) === true
     ? dir
     : join(publicFolder, dir)
-}
-
-const __ssrModulesZovaCache={};
-function renderModulesPreload_zova(modules2, opts){
-  let links = "";
-  const seen = /* @__PURE__ */ new Set();
-  modules2.forEach((id) => {
-    if(!id.startsWith('@@')) return;
-    if (seen.has(id) === true) return;
-    let cache=__ssrModulesZovaCache[id];
-    if(!cache){
-      for(const key in clientManifest){
-        const prefix=id.substring(2) + '-';
-        const postfix='.js';
-        if(key.startsWith(prefix) && key.endsWith(postfix)){
-          cache=resolveUrlPath('/assets/' + key)
-          break;
-        }
-      }
-      __ssrModulesZovaCache[id]=cache; 
-    }
-    links += renderPreloadTag(cache, opts);
-    seen.add(id);
-  });
-  return links;
-}
-
-function renderModulesPreload (modules, opts) {
-  let links = ''
-  const seen = new Set()
-
-  modules.forEach(id => {
-    const files = clientManifest[id]
-    if (files === void 0) return
-
-    files.forEach(file => {
-      if (seen.has(file) === true) return
-
-      seen.add(file)
-      const filename = basename(file)
-
-      if (clientManifest[filename] !== void 0) {
-        for (const depFile of clientManifest[filename]) {
-          if (seen.has(depFile) === false) {
-            links += renderPreloadTag(depFile, opts)
-            seen.add(depFile)
-          }
-        }
-      }
-
-      links += renderPreloadTag(file, opts)
-    })
-  })
-
-  return links
 }
 
 <% if (metaConf.hasStore && ssr.manualStoreSerialization !== true) { %>
