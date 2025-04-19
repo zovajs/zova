@@ -56,12 +56,6 @@ export class BeanBase extends BeanBaseSimple {
     return this.ctx.meta.ssr;
   }
 
-  protected $useMeta(options: SSRMetaOptions | (() => SSRMetaOptions)) {
-    this.ctx.util.instanceScope(() => {
-      useMeta(this.ctx, options);
-    });
-  }
-
   // need not
   // protected async __init__() {}
   // protected __dispose__() {}
@@ -83,6 +77,20 @@ export class BeanBase extends BeanBaseSimple {
 
   protected async $renderFreezeScope<RESULT>(fn: FunctionAsync<RESULT>): Promise<RESULT> {
     return await cast(this.ctx.instance).ctx.renderFreezeScope(fn);
+  }
+
+  protected $onCreated(fn: any) {
+    this.ctx.meta.hooks.onCreated(fn);
+  }
+
+  protected $onMounted(fn: any) {
+    this.ctx.meta.hooks.onMounted(fn);
+  }
+
+  protected $useMeta(options: SSRMetaOptions | (() => SSRMetaOptions)) {
+    this.ctx.util.instanceScope(() => {
+      useMeta(this.ctx, options);
+    });
   }
 
   // need not
