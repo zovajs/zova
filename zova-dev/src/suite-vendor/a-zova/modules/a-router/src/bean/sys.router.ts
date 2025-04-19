@@ -67,7 +67,7 @@ export class SysRouter extends BeanBase {
   }
 
   public getPagePath<K extends keyof IPagePathRecord>(path: IPagePathRecord[K]['path'], query?: IPagePathRecord[K]['schema'], absolute?: boolean) {
-    const url = absolute ? this.sys.util.getAbsolutePagePath(path) : path;
+    const url = absolute ? this.sys.util.getAbsoluteUrlFromPagePath(path) : path;
     return this._combineQueries(url, query);
   }
 

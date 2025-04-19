@@ -7,6 +7,14 @@ import { Service } from 'zova-module-a-bean';
 import { SysRouter } from 'zova-module-a-router';
 import { TypeEventGetFullPathResult } from '../types/ssr.js';
 
+const jsRE = /\.js$/;
+const cssRE = /\.css$/;
+const woffRE = /\.woff$/;
+const woff2RE = /\.woff2$/;
+const gifRE = /\.gif$/;
+const jpgRE = /\.jpe?g$/;
+const pngRE = /\.png$/;
+
 @Service()
 export class ServiceSsrHandler extends BeanBase {
   private _siteAssetDir: string;
@@ -119,13 +127,13 @@ export class ServiceSsrHandler extends BeanBase {
         if (this._clientManifest[filename] !== void 0) {
           for (const depFile of this._clientManifest[filename]) {
             if (seen.has(depFile) === false) {
-              links += renderPreloadTag(depFile, opts);
+              links += this._renderPreloadTag(depFile, opts);
               seen.add(depFile);
             }
           }
         }
 
-        links += renderPreloadTag(file, opts);
+        links += this._renderPreloadTag(file, opts);
       });
     });
 
@@ -150,7 +158,7 @@ export class ServiceSsrHandler extends BeanBase {
         }
         this._ssrModulesZovaCache[id] = cache;
       }
-      links += renderPreloadTag(cache, opts);
+      links += this._renderPreloadTag(cache, opts);
       seen.add(id);
     });
     return links;
@@ -161,47 +169,40 @@ export class ServiceSsrHandler extends BeanBase {
     if (publicPath) publicPath = `/${publicPath}`;
     return publicPath + url;
   }
+
+  private _renderPreloadTag(file: string, _opts) {
+    file = this.sys.util.getAbsoluteUrlFromPagePath(file);
+    if (jsRE.test(file) === true) {
+      return `<link rel="modulepreload" href="${file}" crossorigin>`;
+    }
+
+    if (cssRE.test(file) === true) {
+      return `<link rel="stylesheet" href="${file}" crossorigin>`;
+    }
+
+    if (woffRE.test(file) === true) {
+      return `<link rel="preload" href="${file}" as="font" type="font/woff" crossorigin>`;
+    }
+
+    if (woff2RE.test(file) === true) {
+      return `<link rel="preload" href="${file}" as="font" type="font/woff2" crossorigin>`;
+    }
+
+    if (gifRE.test(file) === true) {
+      return `<link rel="preload" href="${file}" as="image" type="image/gif" crossorigin>`;
+    }
+
+    if (jpgRE.test(file) === true) {
+      return `<link rel="preload" href="${file}" as="image" type="image/jpeg" crossorigin>`;
+    }
+
+    if (pngRE.test(file) === true) {
+      return `<link rel="preload" href="${file}" as="image" type="image/png" crossorigin>`;
+    }
+
+    return '';
+  }
 }
-
-const jsRE = /\.js$/;
-const cssRE = /\.css$/;
-const woffRE = /\.woff$/;
-const woff2RE = /\.woff2$/;
-const gifRE = /\.gif$/;
-const jpgRE = /\.jpe?g$/;
-const pngRE = /\.png$/;
-
-function renderPreloadTag(file, _opts) {
-  if (jsRE.test(file) === true) {
-    return `<link rel="modulepreload" href="${file}" crossorigin>`;
-  }
-
-  if (cssRE.test(file) === true) {
-    return `<link rel="stylesheet" href="${file}" crossorigin>`;
-  }
-
-  if (woffRE.test(file) === true) {
-    return `<link rel="preload" href="${file}" as="font" type="font/woff" crossorigin>`;
-  }
-
-  if (woff2RE.test(file) === true) {
-    return `<link rel="preload" href="${file}" as="font" type="font/woff2" crossorigin>`;
-  }
-
-  if (gifRE.test(file) === true) {
-    return `<link rel="preload" href="${file}" as="image" type="image/gif" crossorigin>`;
-  }
-
-  if (jpgRE.test(file) === true) {
-    return `<link rel="preload" href="${file}" as="image" type="image/jpeg" crossorigin>`;
-  }
-
-  if (pngRE.test(file) === true) {
-    return `<link rel="preload" href="${file}" as="image" type="image/png" crossorigin>`;
-  }
-
-  return '';
-};
 
 export function pathToHref(fileName: string): string {
   return pathToFileURL(fileName).href;
