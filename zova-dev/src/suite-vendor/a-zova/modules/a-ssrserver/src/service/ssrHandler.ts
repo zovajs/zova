@@ -103,7 +103,7 @@ export class ServiceSsrHandler extends BeanBase {
   private async _prepareHandler() {
     // handler
     const fileHandler = path.join(this._siteAssetDir, 'handler.js');
-    const handlerInstance = await import(pathToHref(fileHandler));
+    const handlerInstance = await import(/* @vite-ignore */pathToHref(fileHandler));
     // clientManifest
     const fileManifest = path.join(this._siteAssetDir, 'quasar.manifest.json');
     const contentManifest = await fse.readFile(fileManifest, { encoding: 'utf-8' });

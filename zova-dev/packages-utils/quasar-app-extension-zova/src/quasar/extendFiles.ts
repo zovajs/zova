@@ -116,6 +116,10 @@ export function extendFilesTwo(api: IndexAPI, _flavor: string) {
       .replace(
         "getPackage('vue/server-renderer'",
         "getPackage('@cabloy/vue-server-renderer'",
+      )
+      .replace(
+        'const renderApp = await viteModuleRunner.import(this.#pathMap.serverEntryFile)',
+        'const renderApp = await viteModuleRunner.import(this.#pathMap.serverEntryFile)\nawait renderApp.initialize();',
       );
     fse.writeFileSync(fileSrc, contentNew);
   }
