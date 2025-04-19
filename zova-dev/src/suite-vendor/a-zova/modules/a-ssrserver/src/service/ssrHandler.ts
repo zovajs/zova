@@ -2,7 +2,7 @@ import type http from 'node:http';
 import path, { basename } from 'node:path';
 import { pathToFileURL } from 'node:url';
 import fse from 'fs-extra';
-import { BeanBase, cast, ZovaConfigEnv } from 'zova';
+import { BeanBase, cast, ZovaSys } from 'zova';
 import { Service } from 'zova-module-a-bean';
 import { TypeEventGetFullPathResult } from '../types/ssr.js';
 
@@ -12,7 +12,7 @@ export class ServiceSsrHandler extends BeanBase {
   private _siteAssetDir: string;
   private _handlerPromise: Promise<any>;
   private _handlerInstance: any;
-  private _zovaSys: any;
+  private _zovaSys: ZovaSys;
   private _clientManifest: any;
   private _ssrModulesZovaCache: any = {};
 
@@ -21,9 +21,13 @@ export class ServiceSsrHandler extends BeanBase {
     this._siteAssetDir = siteAssetDir;
   }
 
+  protected __dispose__() {
+    this.dispose();
+  }
+
   public dispose() {
     this._handlerInstance = undefined;
-    this._zovaSys = undefined;
+    this._zovaSys = undefined as any;
   }
 
   async getFullPath(filename: string): Promise<TypeEventGetFullPathResult> {
@@ -40,7 +44,7 @@ export class ServiceSsrHandler extends BeanBase {
 
   public async render(req: http.IncomingMessage, res: http.ServerResponse<http.IncomingMessage>) {
     // resolve route
-    const route = await this._zovaSys.meta.ssr.resolveRoute(req.url, true, false);
+    const route = await this._zovaSys.meta.ssr.resolveRoute(req.url!, true, false);
     if (!route) return;
     // handler
     const { serverEntry, renderToString, renderTemplate } = this._handlerInstance;
@@ -158,8 +162,7 @@ export class ServiceSsrHandler extends BeanBase {
   }
 
   private _resolveUrlPath(url: string) {
-    const env: ZovaConfigEnv = this._zovaSys.env;
-    let publicPath = env.APP_PUBLIC_PATH;
+    let publicPath = this._zovaSys.env.APP_PUBLIC_PATH;
     if (publicPath) publicPath = `/${publicPath}`;
     return publicPath + url;
   }
