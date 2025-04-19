@@ -14,7 +14,13 @@ export class SysUtil extends BeanSimple {
   }
 
   getPagePathFromAbsoluteUrl(url: string) {
-    const { pathname } = new URL(url);
+    let pathname: string;
+    if (url.startsWith('http://') || url.startsWith('https://')) {
+      const _url = new URL(url);
+      pathname = _url.pathname;
+    } else {
+      pathname = url;
+    }
     const prefix = this.sys.env.APP_PUBLIC_PATH ? `/${this.sys.env.APP_PUBLIC_PATH}` : '';
     if (pathname.startsWith(prefix)) {
       return pathname.substring(prefix.length);
