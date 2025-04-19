@@ -21,7 +21,7 @@ export class ControllerPageApp extends BeanControllerPageBase {
             content: this.sys.env.APP_DESCRIPTION
           },
         },
-        'htmlAttr':{
+        'htmlAttr': {
           'lang': this.app.meta.locale.current,
         }
       }

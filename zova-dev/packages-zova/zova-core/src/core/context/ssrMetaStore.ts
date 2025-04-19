@@ -124,8 +124,9 @@ function bodyFilter(name) {
   return ['class', 'style'].includes(name) === false;
 }
 
-function htmlFilter(name) {
-  return ['lang', 'dir'].includes(name) === false;
+function htmlFilter(_name) {
+  return true;
+  // return ['lang', 'dir'].includes(name) === false;
 }
 
 function diff(meta, other) {
