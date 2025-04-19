@@ -31,12 +31,9 @@ export class ServiceSsrHandler extends BeanBase {
   }
 
   async getFullPath(filename: string): Promise<TypeEventGetFullPathResult> {
-    if (filename === '') filename = 'index';
+    if (filename === '') filename = 'index.html';
     // assets
-    let fileAsset = path.join(this._siteAssetDir, 'client', filename);
-    if (await fse.exists(fileAsset)) return fileAsset;
-    // ssg
-    fileAsset = path.join(this._siteAssetDir, 'client', filename, '.html');
+    const fileAsset = path.join(this._siteAssetDir, 'client', filename);
     if (await fse.exists(fileAsset)) return fileAsset;
     // not found
     return undefined;
