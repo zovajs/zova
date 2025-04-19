@@ -14,7 +14,7 @@ export class CtxSSRMetaStore extends BeanSimple {
     if (process.env.SERVER) {
       const ssrContext = this.ctx.meta.ssr.context;
       ssrContext.__qMetaList = [];
-      if (process.env.SSR_BODYREADYOBSERVER === 'true') {
+      if (this.sys.env.SSR_BODYREADYOBSERVER === 'true') {
         ssrContext.__qMetaList.push({
           bodyStyle: { display: 'none' },
         });
@@ -32,9 +32,9 @@ export class CtxSSRMetaStore extends BeanSimple {
 
   private _onRenderedLast() {
     const ssrContext = this.ctx.meta.ssr.context;
-    injectContextState(ssrContext);
-    injectContextStateDefer(ssrContext);
-    injectServerMeta(ssrContext);
+    this._injectContextState(ssrContext);
+    this._injectContextStateDefer(ssrContext);
+    this._injectServerMeta(ssrContext);
   }
 
   addMetaOptions(metaOptionsWrapper: SSRMetaOptionsWrapper) {
@@ -78,6 +78,146 @@ export class CtxSSRMetaStore extends BeanSimple {
 
     apply(diff(this._currentClientMeta, data));
     this._currentClientMeta = data;
+  }
+
+  private _injectServerMeta(ssrContext: SSRContext) {
+    const data: SSRMetaOptions = {
+      title: '',
+      titleTemplate: undefined,
+      meta: {},
+      link: {},
+      htmlAttr: {},
+      bodyAttr: {},
+      bodyStyle: {},
+      bodyClass: {},
+      noscript: {},
+    };
+
+    const list = ssrContext.__qMetaList;
+
+    for (let i = 0; i < list.length; i++) {
+      extend(true, data, list[i]);
+    }
+
+    normalize(data);
+
+    const nonce = ssrContext.nonce !== void 0 ? ` nonce="${ssrContext.nonce}"` : '';
+
+    const ctx = ssrContext._meta;
+
+    const htmlAttr = Object.keys(data.htmlAttr!).filter(htmlFilter);
+
+    if (htmlAttr.length !== 0) {
+      ctx.htmlAttrs += (ctx.htmlAttrs.length !== 0 ? ' ' : '') + htmlAttr.map(getAttr(data.htmlAttr)).join(' ');
+    }
+
+    ctx.headTags += getHead(data);
+
+    const bodyAttr = Object.keys(data.bodyAttr!).filter(bodyFilter);
+
+    if (bodyAttr.length !== 0) {
+      ctx.bodyAttrs += (ctx.bodyAttrs.length !== 0 ? ' ' : '') + bodyAttr.map(getAttr(data.bodyAttr)).join(' ');
+    }
+
+    const bodyStyle = Object.keys(data.bodyStyle!)
+      .filter(name => !!data.bodyStyle![name])
+      .map(name => `${name}:${data.bodyStyle![name]};`)
+      .join('');
+    if (bodyStyle) {
+      ctx.bodyAttrs += `${ctx.bodyAttrs.length !== 0 ? ' ' : ''}style="${bodyStyle}"`;
+    }
+
+    const _bodyClass = ctx.bodyClasses.split(' ').filter(item => !!item);
+    const bodyClass = {};
+    _bodyClass.forEach(item => (bodyClass[item] = true));
+    extend(true, bodyClass, data.bodyClass);
+    ctx.bodyClasses = Object.keys(bodyClass)
+      .filter(name => bodyClass[name])
+      .map(name => name)
+      .join(' ');
+
+    data.title = '\'"`';
+
+    ctx.endingHeadTags +=
+      `${Object.keys(data.noscript!)
+        .map(name => `<noscript data-qmeta="${name}">${data.noscript![name]}</noscript>`)
+        .join('')
+      }<script${nonce} id="ssr-meta-init">window.__Q_META__=${delete data.bodyStyle && delete data.bodyClass && delete data.noscript && devalue.uneval(data)}</script>`;
+
+    let ssr_local_themedark =
+    this.sys.env.SSR_COOKIE_THEMEDARK === 'true'
+      ? `let ssr_cookie_themedark=document.cookie.split('; ')?.find(item=>item.indexOf('themedark=')>-1)?.split('=')[1];
+        ssr_cookie_themedark=ssr_cookie_themedark==='true'?true:ssr_cookie_themedark==='false'?false:${this.sys.env.SSR_COOKIE_THEMEDARK_DEFAULT};
+        window.ssr_themedark=window.ssr_cookie_themedark=ssr_cookie_themedark;`
+      : `let ssr_local_themedark=window.ssr_load_local('themedark');
+        if(ssr_local_themedark===undefined || ssr_local_themedark==='auto'){
+          ssr_local_themedark=window.matchMedia('(prefers-color-scheme: dark)').matches;
+        }
+        window.ssr_themedark=window.ssr_local_themedark=ssr_local_themedark;`;
+    ssr_local_themedark += `Object.defineProperty(window, 'ssr_themedark_data', {
+          get: () => {
+            let _data=document.body.getAttribute('data-ssr-theme-dark-'+window.ssr_themedark);
+            if(_data===undefined || _data===null){
+              _data=window.__INITIAL_STATE__ && window.__INITIAL_STATE__['data-ssr-theme-dark-'+window.ssr_themedark];
+            }
+            return _data;
+          },
+        });`;
+    const ssr_local_themename =
+    this.sys.env.SSR_COOKIE_THEMENAME === 'true' ? '' : "window.ssr_local_themename=window.ssr_load_local('themename');";
+    ctx.endingHeadTags += `<script id="ssr-prefers-color-schema-dark">
+        window.ssr_load_local=function(key){
+          const __ssr_local=localStorage.getItem(key);
+          return __ssr_local?JSON.parse(__ssr_local):undefined;
+        };
+        ${ssr_local_themedark}
+        ${ssr_local_themename}
+        document.querySelector('#ssr-prefers-color-schema-dark').remove();
+    </script>`.replaceAll('\n', '');
+
+    if (this.sys.env.SSR_BODYREADYOBSERVER === 'true') {
+      ctx.bodyTags += `<script id="ssr-body-ready-observer">
+        window.ssr_bodyReadyObserverClear=()=>{
+          if(window.ssr_bodyReadyObserver){
+            window.ssr_body_ready_condition=undefined;
+            window.ssr_body_ready_callback=undefined;
+            window.ssr_bodyReadyObserver.disconnect();
+            window.ssr_bodyReadyObserver=undefined;
+            document.body.style.display='block';
+            document.querySelector('#ssr-body-ready-observer').remove();
+          }
+        };
+        window.ssr_bodyReadyObserver = new MutationObserver(() => {
+          if(window.ssr_body_ready_condition && window.ssr_body_ready_condition()){
+            window.ssr_body_ready_callback(); 
+            window.ssr_bodyReadyObserverClear();
+          }
+        });
+        window.ssr_bodyReadyObserver.observe(document.body, {
+          subtree: true,
+          childList: true,
+        });
+        document.addEventListener("DOMContentLoaded", () => {
+          window.ssr_bodyReadyObserverClear();
+        });
+      </script>`.replaceAll('\n', '');
+    }
+  }
+
+  private _injectContextState(ssrContext: SSRContext) {
+    const ctx = ssrContext._meta;
+
+    const nonce = ssrContext.nonce !== void 0 ? ` nonce="${ssrContext.nonce}"` : '';
+
+    ctx.endingHeadTags += `<script${nonce} id="ssr-state-init">window.__INITIAL_STATE__=${devalue.uneval(ssrContext.state)}</script>`;
+  }
+
+  private _injectContextStateDefer(ssrContext: SSRContext) {
+    const ctx = ssrContext._meta;
+
+    const nonce = ssrContext.nonce !== void 0 ? ` nonce="${ssrContext.nonce}"` : '';
+
+    ctx.endingBodyTags += `<script${nonce} id="ssr-state-defer-init">window.__INITIAL_STATE_DEFER__=${devalue.uneval(ssrContext.stateDefer)}</script>`;
   }
 }
 
@@ -246,144 +386,4 @@ function getHead(meta) {
     }
   });
   return output;
-}
-
-function injectServerMeta(ssrContext: SSRContext) {
-  const data: SSRMetaOptions = {
-    title: '',
-    titleTemplate: undefined,
-    meta: {},
-    link: {},
-    htmlAttr: {},
-    bodyAttr: {},
-    bodyStyle: {},
-    bodyClass: {},
-    noscript: {},
-  };
-
-  const list = ssrContext.__qMetaList;
-
-  for (let i = 0; i < list.length; i++) {
-    extend(true, data, list[i]);
-  }
-
-  normalize(data);
-
-  const nonce = ssrContext.nonce !== void 0 ? ` nonce="${ssrContext.nonce}"` : '';
-
-  const ctx = ssrContext._meta;
-
-  const htmlAttr = Object.keys(data.htmlAttr!).filter(htmlFilter);
-
-  if (htmlAttr.length !== 0) {
-    ctx.htmlAttrs += (ctx.htmlAttrs.length !== 0 ? ' ' : '') + htmlAttr.map(getAttr(data.htmlAttr)).join(' ');
-  }
-
-  ctx.headTags += getHead(data);
-
-  const bodyAttr = Object.keys(data.bodyAttr!).filter(bodyFilter);
-
-  if (bodyAttr.length !== 0) {
-    ctx.bodyAttrs += (ctx.bodyAttrs.length !== 0 ? ' ' : '') + bodyAttr.map(getAttr(data.bodyAttr)).join(' ');
-  }
-
-  const bodyStyle = Object.keys(data.bodyStyle!)
-    .filter(name => !!data.bodyStyle![name])
-    .map(name => `${name}:${data.bodyStyle![name]};`)
-    .join('');
-  if (bodyStyle) {
-    ctx.bodyAttrs += `${ctx.bodyAttrs.length !== 0 ? ' ' : ''}style="${bodyStyle}"`;
-  }
-
-  const _bodyClass = ctx.bodyClasses.split(' ').filter(item => !!item);
-  const bodyClass = {};
-  _bodyClass.forEach(item => (bodyClass[item] = true));
-  extend(true, bodyClass, data.bodyClass);
-  ctx.bodyClasses = Object.keys(bodyClass)
-    .filter(name => bodyClass[name])
-    .map(name => name)
-    .join(' ');
-
-  data.title = '\'"`';
-
-  ctx.endingHeadTags +=
-    `${Object.keys(data.noscript!)
-      .map(name => `<noscript data-qmeta="${name}">${data.noscript![name]}</noscript>`)
-      .join('')
-    }<script${nonce} id="ssr-meta-init">window.__Q_META__=${delete data.bodyStyle && delete data.bodyClass && delete data.noscript && devalue.uneval(data)}</script>`;
-
-  let ssr_local_themedark =
-    process.env.SSR_COOKIE_THEMEDARK === 'true'
-      ? `let ssr_cookie_themedark=document.cookie.split('; ')?.find(item=>item.indexOf('themedark=')>-1)?.split('=')[1];
-      ssr_cookie_themedark=ssr_cookie_themedark==='true'?true:ssr_cookie_themedark==='false'?false:${process.env.SSR_COOKIE_THEMEDARK_DEFAULT};
-      window.ssr_themedark=window.ssr_cookie_themedark=ssr_cookie_themedark;`
-      : `let ssr_local_themedark=window.ssr_load_local('themedark');
-      if(ssr_local_themedark===undefined || ssr_local_themedark==='auto'){
-        ssr_local_themedark=window.matchMedia('(prefers-color-scheme: dark)').matches;
-      }
-      window.ssr_themedark=window.ssr_local_themedark=ssr_local_themedark;`;
-  ssr_local_themedark += `Object.defineProperty(window, 'ssr_themedark_data', {
-        get: () => {
-          let _data=document.body.getAttribute('data-ssr-theme-dark-'+window.ssr_themedark);
-          if(_data===undefined || _data===null){
-            _data=window.__INITIAL_STATE__ && window.__INITIAL_STATE__['data-ssr-theme-dark-'+window.ssr_themedark];
-          }
-          return _data;
-        },
-      });`;
-  const ssr_local_themename =
-    process.env.SSR_COOKIE_THEMENAME === 'true' ? '' : "window.ssr_local_themename=window.ssr_load_local('themename');";
-  ctx.endingHeadTags += `<script id="ssr-prefers-color-schema-dark">
-      window.ssr_load_local=function(key){
-        const __ssr_local=localStorage.getItem(key);
-        return __ssr_local?JSON.parse(__ssr_local):undefined;
-      };
-      ${ssr_local_themedark}
-      ${ssr_local_themename}
-      document.querySelector('#ssr-prefers-color-schema-dark').remove();
-  </script>`.replaceAll('\n', '');
-
-  if (process.env.SSR_BODYREADYOBSERVER === 'true') {
-    ctx.bodyTags += `<script id="ssr-body-ready-observer">
-      window.ssr_bodyReadyObserverClear=()=>{
-        if(window.ssr_bodyReadyObserver){
-          window.ssr_body_ready_condition=undefined;
-          window.ssr_body_ready_callback=undefined;
-          window.ssr_bodyReadyObserver.disconnect();
-          window.ssr_bodyReadyObserver=undefined;
-          document.body.style.display='block';
-          document.querySelector('#ssr-body-ready-observer').remove();
-        }
-      };
-      window.ssr_bodyReadyObserver = new MutationObserver(() => {
-        if(window.ssr_body_ready_condition && window.ssr_body_ready_condition()){
-          window.ssr_body_ready_callback(); 
-          window.ssr_bodyReadyObserverClear();
-        }
-      });
-      window.ssr_bodyReadyObserver.observe(document.body, {
-        subtree: true,
-        childList: true,
-      });
-      document.addEventListener("DOMContentLoaded", () => {
-        window.ssr_bodyReadyObserverClear();
-      });
-    </script>`.replaceAll('\n', '');
-  }
-}
-
-function injectContextState(ssrContext: SSRContext) {
-  const ctx = ssrContext._meta;
-
-  const nonce = ssrContext.nonce !== void 0 ? ` nonce="${ssrContext.nonce}"` : '';
-
-  ctx.endingHeadTags += `<script${nonce} id="ssr-state-init">window.__INITIAL_STATE__=${devalue.uneval(ssrContext.state)}</script>`;
-}
-
-function injectContextStateDefer(ssrContext: SSRContext) {
-  const ctx = ssrContext._meta;
-
-  const nonce = ssrContext.nonce !== void 0 ? ` nonce="${ssrContext.nonce}"` : '';
-
-  ctx.endingBodyTags += `<script${nonce} id="ssr-state-defer-init">window.__INITIAL_STATE_DEFER__=${devalue.uneval(ssrContext.stateDefer)}</script>`;
 }
