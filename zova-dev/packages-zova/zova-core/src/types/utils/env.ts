@@ -6,6 +6,7 @@ export interface ZovaConfigEnv {
   APP_PUBLIC_PATH: string | undefined;
   APP_NAME: string | undefined;
   APP_TITLE: string | undefined;
+  APP_DESCRIPTION: string | undefined;
   APP_VERSION: string | undefined;
   DEV_SERVER_HOSTNAME: string | undefined;
   DEV_SERVER_PORT: string | undefined;
