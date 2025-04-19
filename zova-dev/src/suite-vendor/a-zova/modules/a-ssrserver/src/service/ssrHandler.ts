@@ -2,22 +2,23 @@ import type http from 'node:http';
 import path, { basename } from 'node:path';
 import { pathToFileURL } from 'node:url';
 import fse from 'fs-extra';
-import { BeanBase, cast, ZovaSys } from 'zova';
+import { BeanBase, cast, Use } from 'zova';
 import { Service } from 'zova-module-a-bean';
+import { SysRouter } from 'zova-module-a-router';
 import { TypeEventGetFullPathResult } from '../types/ssr.js';
 
 @Service()
 export class ServiceSsrHandler extends BeanBase {
-  private _siteEnv: any;
   private _siteAssetDir: string;
   private _handlerPromise: Promise<any>;
   private _handlerInstance: any;
-  private _zovaSys: ZovaSys;
   private _clientManifest: any;
   private _ssrModulesZovaCache: any = {};
 
-  protected __init__(siteEnv: any, siteAssetDir: string) {
-    this._siteEnv = siteEnv;
+  @Use()
+  $$sysRouter: SysRouter;
+
+  protected __init__(siteAssetDir: string) {
     this._siteAssetDir = siteAssetDir;
   }
 
@@ -27,7 +28,6 @@ export class ServiceSsrHandler extends BeanBase {
 
   public dispose() {
     this._handlerInstance = undefined;
-    this._zovaSys = undefined as any;
   }
 
   async getFullPath(filename: string): Promise<TypeEventGetFullPathResult> {
@@ -44,7 +44,7 @@ export class ServiceSsrHandler extends BeanBase {
 
   public async render(req: http.IncomingMessage, res: http.ServerResponse<http.IncomingMessage>) {
     // resolve route
-    const route = await this._zovaSys.meta.ssr.resolveRoute(req.url!, true, false);
+    const route = await this.$$sysRouter.resolveRoute(req.url!, true, false);
     if (!route) return;
     // handler
     const { serverEntry, renderToString, renderTemplate } = this._handlerInstance;
@@ -97,8 +97,6 @@ export class ServiceSsrHandler extends BeanBase {
     // handler
     const fileHandler = path.join(this._siteAssetDir, 'handler.js');
     const handlerInstance = await import(pathToHref(fileHandler));
-    // initialize
-    this._zovaSys = await handlerInstance.initialize(this._siteEnv);
     // clientManifest
     const fileManifest = path.join(this._siteAssetDir, 'quasar.manifest.json');
     const contentManifest = await fse.readFile(fileManifest, { encoding: 'utf-8' });
@@ -162,7 +160,7 @@ export class ServiceSsrHandler extends BeanBase {
   }
 
   private _resolveUrlPath(url: string) {
-    let publicPath = this._zovaSys.env.APP_PUBLIC_PATH;
+    let publicPath = this.sys.env.APP_PUBLIC_PATH;
     if (publicPath) publicPath = `/${publicPath}`;
     return publicPath + url;
   }
