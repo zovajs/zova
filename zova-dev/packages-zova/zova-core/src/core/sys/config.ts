@@ -37,7 +37,7 @@ export function configDefault(env: ZovaConfigEnv) {
     },
     logger,
     locale: {
-      default: 'en-us',
+      default: env.APP_LOCALE_DEFAULT,
       storeKey: 'locale',
       items: {
         'en-us': 'English',
