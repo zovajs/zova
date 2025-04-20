@@ -42,6 +42,7 @@ export class InterceptorBody
     next: NextInterceptorError,
   ): Promise<AxiosError> {
     error = await next();
+    if (!(error instanceof Error)) return error;
     if (error.response) {
       error.code = cast(error.response.data)?.code ?? error.response.status;
       error.message = cast(error.response.data)?.message ?? error.response.statusText;

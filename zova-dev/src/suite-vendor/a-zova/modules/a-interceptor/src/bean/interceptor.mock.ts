@@ -10,6 +10,7 @@ export class InterceptorMock extends BeanInterceptorBase<IInterceptorOptionsMock
     _options: IDecoratorInterceptorOptions,
     next: NextInterceptorError,
   ): Promise<AxiosError> {
+    if (!(error instanceof Error)) return next();
     if (this.sys.env.MOCK_ENABLED === 'true') {
       if (process.env.DEV || (process.env.PROD && this.sys.env.MOCK_BUILD === 'true')) {
         if (['ECONNREFUSED', 'ERR_NETWORK', '404'].includes(error.code!) || error.status === 404) {

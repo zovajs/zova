@@ -93,6 +93,10 @@ export class BeanBase extends BeanBaseSimple {
     });
   }
 
+  protected $errorHandler(err: unknown, info?: string): Error {
+    return this.app.vue.config.errorHandler!(err, this.ctx.instance as any, info!) as any;
+  }
+
   // need not
   // public dispose() {
   //   const self = cast(this);

@@ -14,11 +14,14 @@ export class AppError extends ErrorClass {
   public async initialize() {
     await super.initialize();
     this.app.vue.config.errorHandler = (err, instance, info) => {
-      if (this[SymbolErrorHandlers].length === 0) {
-        console.error(err);
-      } else {
-        this[SymbolErrorHandlers].forEach(fn => fn(err, instance, info));
-      }
+      this.ctx.util.instanceScope(() => {
+        if (this[SymbolErrorHandlers].length === 0) {
+          console.error(err);
+        } else {
+          this[SymbolErrorHandlers].forEach(fn => fn(err, instance, info));
+        }
+      });
+      return err;
     };
     if (process.env.SERVER) {
       this.onErrorHandler((err, instance, info) => {
