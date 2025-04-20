@@ -59,7 +59,9 @@ export class InterceptorJwt extends BeanInterceptorBase<IInterceptorOptionsJwt> 
     // authToken: true
     let jwtInfo = await this._beanJwtAdapter.getJwtInfo();
     if (!jwtInfo) {
-      if (authToken === true) this.app.throw(403);
+      if (authToken === true) {
+        this.app.throw(401); // 401 rather than 403
+      }
       return;
     }
     // accessToken
