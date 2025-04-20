@@ -27,6 +27,7 @@ export function configDefault(env: ZovaConfigEnv) {
       routerBase: env.APP_ROUTER_BASE,
       publicPath: env.APP_PUBLIC_PATH,
       pageLogin: env.APP_PAGE_LOGIN,
+      pageHome: env.APP_PAGE_HOME,
     },
     api: {
       baseURL: process.env.SERVER ? (env.SSR_API_BASE_URL || env.API_BASE_URL) : env.API_BASE_URL,
@@ -84,6 +85,7 @@ export interface ZovaConfig {
     routerBase: string;
     publicPath: string;
     pageLogin: string;
+    pageHome: string;
   };
   api: {
     baseURL: string;

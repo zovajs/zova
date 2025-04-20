@@ -147,14 +147,6 @@ export class CtxSSR extends BeanSimple {
     }
   }
 
-  redirect(url: string, status?: 301 | 302): never {
-    const error = new Error() as ErrorSSR;
-    error.code = status ?? 302;
-    error.url = url;
-    error.message = url;
-    throw error;
-  }
-
   private _onHydratePropHasMismatchDefault(
     el: Element,
     key: string,

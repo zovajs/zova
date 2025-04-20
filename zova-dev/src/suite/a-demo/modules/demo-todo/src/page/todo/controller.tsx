@@ -18,7 +18,6 @@ export class ControllerPageTodo extends BeanControllerPageBase {
     // todos
     const queryTodos = this.$$modelTodo.select();
     await queryTodos.suspense();
-    if (queryTodos.error) throw queryTodos.error;
   }
 
   async addTodo() {

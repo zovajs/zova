@@ -18,10 +18,14 @@ export class AppError extends ErrorClass {
         if (process.env.SERVER) {
           this[SymbolErrorSSR] = err as ErrorSSR;
         } else {
-          // only log error in client
-          console.error(err);
-          if (err.code === 401) {
-            cast(this.app.meta).$router.replace(this.sys.config.app.pageLogin);
+          if ([301, 302].includes(Number(err.code))) {
+            cast(this.app.meta).$router.replace(cast<ErrorSSR>(err).url);
+          } else {
+            // only log error in client
+            console.error(err);
+            if (err.code === 401) {
+              this.app.gotoLogin();
+            }
           }
         }
         return err;

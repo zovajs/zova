@@ -1,10 +1,12 @@
 import type { App } from 'vue';
 import type { BeanContainer } from '../../bean/beanContainer.js';
+import type { ErrorSSR } from '../../bean/resource/error/type.js';
 import type { HttpStatus } from '../../types/enum/httpStatus.js';
 import type { PluginZovaOptions } from '../../types/interface/pluginZova.js';
 import type { ZovaContext } from '../context/context.js';
 import { markRaw } from 'vue';
 import { cast } from '../../types/utils/cast.js';
+import { sys } from '../sys/sys.js';
 import { AppMeta } from './meta.js';
 
 export class ZovaApplication {
@@ -68,6 +70,23 @@ export class ZovaApplication {
 
   public throw(code: HttpStatus | number | string, ...args: any[]): never {
     return this.meta.error.throw(undefined, code, ...args);
+  }
+
+  public redirect(pagePath: string, status?: 301 | 302): never {
+    const error = new Error() as ErrorSSR;
+    error.code = status ?? 302;
+    error.url = pagePath;
+    error.message = pagePath;
+    throw error;
+  }
+
+  // todo: add redirect
+  public gotoLogin(_redirect?: string) {
+    return this.redirect(sys.config.app.pageLogin);
+  }
+
+  public gotoHome() {
+    return this.redirect(sys.config.app.pageHome);
   }
 }
 

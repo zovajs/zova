@@ -45,7 +45,7 @@ export class ModelPassport extends BeanModelBase {
         this.$clear(); // not await
         this._setPassportJwt();
         // page: login
-        this.$router.replace(this.sys.config.app.pageLogin);
+        this.app.gotoLogin();
       },
     });
   }
@@ -85,7 +85,7 @@ export class ModelPassport extends BeanModelBase {
         if (process.env.DEV) {
           console.error(error);
         }
-        this.$ssr.redirect(this.sys.config.app.pageLogin);
+        this.app.gotoLogin();
       }
       this.passport = passport;
     }

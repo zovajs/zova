@@ -10,6 +10,7 @@ export interface ZovaConfigEnv {
   APP_PUBLIC_PATH: string | undefined;
   APP_LOCALE_DEFAULT: string | undefined;
   APP_PAGE_LOGIN: string | undefined;
+  APP_PAGE_HOME: string | undefined;
   DEV_SERVER_HOSTNAME: string | undefined;
   DEV_SERVER_PORT: string | undefined;
   SSR_API_BASE_URL: string | undefined;
