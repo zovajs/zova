@@ -79,7 +79,7 @@ export default defineFakeRoute([
       const name = req.body.refreshToken.substring('refreshToken-'.length);
       const user = __users.find(item => item.name === name);
       if (!user) {
-        return { code: 403, message: 'Error' };
+        return { code: 401, message: 'Error' };
       }
       return {
         code: 0,
