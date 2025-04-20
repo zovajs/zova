@@ -1,7 +1,8 @@
 import type { ComponentPublicInstance } from 'vue';
 import type { IErrorObject } from '../../bean/resource/error/errorObject.js';
-import type { ErrorSSR, IModuleError, OnErrorHandler } from '../../bean/resource/error/type.js';
+import type { ErrorSSR, IErrorInstanceInfo, IModuleError, OnErrorHandler } from '../../bean/resource/error/type.js';
 import { ErrorClass } from '../../bean/resource/error/errorClass.js';
+import { SymbolErrorInstanceInfo } from '../../bean/resource/error/type.js';
 
 const SymbolErrorHandlers = Symbol('SymbolErrorHandlers');
 const SymbolErrorSSR = Symbol('SymbolErrorSSR');
@@ -24,6 +25,18 @@ export class AppError extends ErrorClass {
       });
       return err;
     };
+    // unhandledrejection
+    if (process.env.CLIENT) {
+      window.addEventListener('unhandledrejection', (event: PromiseRejectionEvent) => {
+        const { reason } = event;
+        if (reason instanceof Error) {
+          const errorInfo: IErrorInstanceInfo = reason[SymbolErrorInstanceInfo];
+          this.app.vue.config.errorHandler!(reason, errorInfo?.instance as any, errorInfo?.info || 'unhandledrejection');
+        }
+      });
+    }
+    // todo: init client
+    // init: ssr
     if (process.env.SERVER) {
       this.onErrorHandler((err, instance, info) => {
         this._onErrorHandlerSSR(err, instance, info);

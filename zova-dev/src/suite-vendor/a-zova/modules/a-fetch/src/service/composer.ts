@@ -8,7 +8,7 @@ import type {
   IInterceptorResponse,
   IInterceptorResponseError,
 } from '../types/interceptor.js';
-import { BeanBase, cast, deepExtend, Use } from 'zova';
+import { BeanBase, cast, deepExtend, SymbolErrorInstanceInfo, Use } from 'zova';
 import { IOnionItem, IOnionSlice, SysOnion, TypeComposer } from 'zova-module-a-bean';
 import { Service } from 'zova-module-a-bean';
 
@@ -45,11 +45,15 @@ export class ServiceComposer extends BeanBase {
     return this._composerResponse(response);
   }
 
-  public executeResponseError(error: AxiosError) {
-    return this._composerResponseError(error, async (error: Error) => {
-      if (!(error instanceof Error)) return error;
-      return await this.$errorHandler(error);
-    });
+  public async executeResponseError(error: AxiosError) {
+    error = await this._composerResponseError(error);
+    if (error instanceof Error) {
+      error[SymbolErrorInstanceInfo] = {
+        instance: this.ctx.instance,
+        info: 'executeResponseError',
+      };
+    }
+    return error;
   }
 
   private async _createComposer(

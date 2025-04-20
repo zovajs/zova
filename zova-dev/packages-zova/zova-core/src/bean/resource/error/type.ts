@@ -1,6 +1,13 @@
 import type { ComponentPublicInstance } from 'vue';
 import type { IErrorObject } from './errorObject.js';
 
+export const SymbolErrorInstanceInfo = Symbol('SymbolErrorInstanceInfo');
+
+export interface IErrorInstanceInfo {
+  instance?: ComponentPublicInstance | null;
+  info?: string;
+}
+
 export interface IModuleError {
   throw(...args: any[]): never;
   parseFail(...args: any[]): IErrorObject;
