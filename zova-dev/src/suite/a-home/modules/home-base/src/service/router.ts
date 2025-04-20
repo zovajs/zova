@@ -14,7 +14,7 @@ export class ServiceRouter extends BeanRouterBase {
       if (to.meta.requiresAuth !== false && !this.$$modelPassport.isAuthenticated) {
         await this.$$modelPassport.ensurePassport();
         if (!this.$$modelPassport.isAuthenticated) {
-          return '/login';
+          return this.sys.config.app.pageLogin;
         }
       }
     });
