@@ -18,6 +18,16 @@ export function configDefault(env: ZovaConfigEnv) {
       mode: cast(env).META_MODE,
       appMode: cast(env).META_APP_MODE,
     },
+    app: {
+      name: env.APP_NAME,
+      title: env.APP_TITLE,
+      description: env.APP_DESCRIPTION,
+      version: env.APP_VERSION,
+      routerMode: env.APP_ROUTER_MODE,
+      routerBase: env.APP_ROUTER_BASE,
+      publicPath: env.APP_PUBLIC_PATH,
+      pageLogin: env.APP_PAGE_LOGIN,
+    },
     api: {
       baseURL: process.env.SERVER ? (env.SSR_API_BASE_URL || env.API_BASE_URL) : env.API_BASE_URL,
       prefix: env.API_PREFIX,
@@ -65,6 +75,16 @@ export function configDefault(env: ZovaConfigEnv) {
 
 export interface ZovaConfig {
   meta: ZovaConfigMeta;
+  app: {
+    name: string;
+    title: string;
+    description: string;
+    version: string;
+    routerMode: 'hash' | 'history' | 'abstract' | undefined;
+    routerBase: string;
+    publicPath: string;
+    pageLogin: string;
+  };
   api: {
     baseURL: string;
     prefix: string;
