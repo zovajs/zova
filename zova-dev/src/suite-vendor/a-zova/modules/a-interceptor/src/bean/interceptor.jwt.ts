@@ -34,9 +34,16 @@ export class InterceptorJwt extends BeanInterceptorBase<IInterceptorOptionsJwt> 
     options: IInterceptorOptionsJwt,
     next: NextInterceptorRequest,
   ): Promise<AxiosRequestConfig> {
-    const accessToken = await this.prepareAccessToken(options.authToken);
-    if (accessToken) {
-      config.headers!.Authorization = `Bearer ${accessToken}`;
+    try {
+      const accessToken = await this.prepareAccessToken(options.authToken);
+      if (accessToken) {
+        config.headers!.Authorization = `Bearer ${accessToken}`;
+      }
+    } catch (error: any) {
+      error.config = config;
+      error.request = undefined;
+      error.response = undefined;
+      throw error;
     }
     return next(config);
   }
