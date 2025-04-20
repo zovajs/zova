@@ -1,46 +1,47 @@
-import type { ComponentPublicInstance } from 'vue';
 import type { IErrorObject } from '../../bean/resource/error/errorObject.js';
-import type { ErrorSSR, IErrorInstanceInfo, IModuleError, OnErrorHandler } from '../../bean/resource/error/type.js';
+import type { ErrorSSR, IErrorInstanceInfo, IModuleError } from '../../bean/resource/error/type.js';
 import { ErrorClass } from '../../bean/resource/error/errorClass.js';
 import { SymbolErrorInstanceInfo } from '../../bean/resource/error/type.js';
+import { cast } from '../../types/utils/cast.js';
 
-const SymbolErrorHandlers = Symbol('SymbolErrorHandlers');
 const SymbolErrorSSR = Symbol('SymbolErrorSSR');
 
 export class AppError extends ErrorClass {
-  private [SymbolErrorHandlers]: OnErrorHandler[] = [];
   private [SymbolErrorSSR]?: ErrorSSR;
 
   /** @internal */
   public async initialize() {
     await super.initialize();
-    // todo: should emit async event
+    // errorHandler
     this.app.vue.config.errorHandler = async (err, instance, info) => {
-      this.ctx.util.instanceScope(() => {
-        if (this[SymbolErrorHandlers].length === 0) {
-          console.error(err);
+      return await this.app.meta.event.emit('app:errorHandler', { err: err as Error, instance, info }, async ({ err }) => {
+        if (process.env.SERVER) {
+          this[SymbolErrorSSR] = err as ErrorSSR;
         } else {
-          this[SymbolErrorHandlers].forEach(fn => fn(err, instance, info));
+          if (err.code === 401) {
+            cast(this.app.meta).$router.replace(this.sys.config.app.pageLogin);
+          }
         }
+        console.error(err);
+        return err;
       });
-      return err;
     };
     // unhandledrejection
     if (process.env.CLIENT) {
-      window.addEventListener('unhandledrejection', (event: PromiseRejectionEvent) => {
+      window.addEventListener('unhandledrejection', async (event: PromiseRejectionEvent) => {
         const { reason } = event;
         if (reason instanceof Error) {
           const errorInfo: IErrorInstanceInfo = reason[SymbolErrorInstanceInfo];
-          this.app.vue.config.errorHandler!(reason, errorInfo?.instance as any, errorInfo?.info || 'unhandledrejection');
+          try {
+            await this.app.vue.config.errorHandler!(reason, errorInfo?.instance as any, errorInfo?.info || 'unhandledrejection');
+          } catch (err) {
+            console.error(err);
+          }
         }
       });
     }
-    // todo: init client
-    // init: ssr
+    // ssr
     if (process.env.SERVER) {
-      this.onErrorHandler((err, instance, info) => {
-        this._onErrorHandlerSSR(err, instance, info);
-      });
       this.ctx.meta.ssr.context.onRendered(() => {
         if (this[SymbolErrorSSR]) {
           throw this[SymbolErrorSSR];
@@ -60,13 +61,5 @@ export class AppError extends ErrorClass {
         return self.parseFail(moduleScope, errorCode, ...args);
       },
     };
-  }
-
-  public onErrorHandler(fn: OnErrorHandler) {
-    this[SymbolErrorHandlers].push(fn);
-  }
-
-  private _onErrorHandlerSSR(err: unknown, _instance: ComponentPublicInstance | null, _info: string) {
-    this[SymbolErrorSSR] = err as ErrorSSR;
   }
 }
