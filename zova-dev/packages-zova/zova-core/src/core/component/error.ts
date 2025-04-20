@@ -18,11 +18,12 @@ export class AppError extends ErrorClass {
         if (process.env.SERVER) {
           this[SymbolErrorSSR] = err as ErrorSSR;
         } else {
+          // only log error in client
+          console.error(err);
           if (err.code === 401) {
             cast(this.app.meta).$router.replace(this.sys.config.app.pageLogin);
           }
         }
-        console.error(err);
         return err;
       });
     };
