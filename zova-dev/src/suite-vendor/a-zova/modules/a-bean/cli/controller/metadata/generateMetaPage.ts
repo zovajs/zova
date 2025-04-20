@@ -11,6 +11,7 @@ export function generateMetaPage(
   if (globFiles.length === 0) return '';
   const { moduleName } = options;
   const contentImports: string[] = [];
+  const contentNameRecords: string[] = [];
   const contentPathRecords: string[] = [];
   const contentPathSchemas: string[] = [];
   const contentNameSchemas: string[] = [];
@@ -28,9 +29,11 @@ export function generateMetaPage(
     const routePathFull = routePath
       ? `/${moduleName.replace('-', '/')}/${routePath}`
       : `/${moduleName.replace('-', '/')}`;
+    const routeNameFull = `${moduleName}:${routeName}`;
     if (!routeName) {
       contentPathRecords.push(_combineContentPathRecord(routePathFull, `'${routePathFull}'`, hasSchemaQuery, className));
     } else {
+      //
       const apiPath1 = routePathFull.replace(/(:[^/]+)/g, (_, _part) => {
         return ':_string_';
       });
@@ -42,6 +45,10 @@ export function generateMetaPage(
       });
       contentPathRecords.push(_combineContentPathRecord(apiPath1, `'${apiPath2}'`, hasSchemaQuery, className));
       contentPathRecords.push(_combineContentPathRecord(routePathFull, `\`${apiPath3}\``, hasSchemaQuery, className));
+      //
+      contentNameRecords.push(
+        `'${routeNameFull}': undefined;`,
+      );
     }
     // schema
     if (!routeName) {
@@ -51,7 +58,6 @@ export function generateMetaPage(
         },`);
       }
     } else {
-      const routeNameFull = `${moduleName}:${routeName}`;
       if (hasSchemaQuery || hasSchemaParams) {
         contentNameSchemas.push(`'${routeNameFull}': {
           ${hasSchemaParams ? `params: NS${className}.paramsSchema,` : ''}
@@ -78,6 +84,9 @@ import 'zova';
 declare module 'zova-module-a-router' {
 export interface IPagePathRecord {
   ${contentPathRecords.join('\n')}
+}
+export interface IPageNameRecord {
+  ${contentNameRecords.join('\n')}
 }
 }
 export const pagePathSchemas = {

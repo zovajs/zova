@@ -90,6 +90,9 @@ declare module 'zova-module-a-router' {
     '/demo/todo/item/:id': TypePagePathSchema<`/demo/todo/item/${string}`, NSControllerPageItem.QueryInput>;
     '/demo/todo/todo': TypePagePathSchema<'/demo/todo/todo', undefined>;
   }
+  export interface IPageNameRecord {
+    'demo-todo:item': undefined;
+  }
 }
 export const pagePathSchemas = {
 
