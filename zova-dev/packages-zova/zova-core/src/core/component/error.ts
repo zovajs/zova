@@ -13,7 +13,8 @@ export class AppError extends ErrorClass {
   /** @internal */
   public async initialize() {
     await super.initialize();
-    this.app.vue.config.errorHandler = (err, instance, info) => {
+    // todo: should emit async event
+    this.app.vue.config.errorHandler = async (err, instance, info) => {
       this.ctx.util.instanceScope(() => {
         if (this[SymbolErrorHandlers].length === 0) {
           console.error(err);

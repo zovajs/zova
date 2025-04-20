@@ -46,9 +46,9 @@ export class ServiceComposer extends BeanBase {
   }
 
   public executeResponseError(error: AxiosError) {
-    return this._composerResponseError(error, (error: Error) => {
+    return this._composerResponseError(error, async (error: Error) => {
       if (!(error instanceof Error)) return error;
-      return this.$errorHandler(error);
+      return await this.$errorHandler(error);
     });
   }
 
