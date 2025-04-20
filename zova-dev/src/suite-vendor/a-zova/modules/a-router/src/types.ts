@@ -22,6 +22,9 @@ declare module '@cabloy/vue-router' {
 }
 
 declare module 'zova' {
+  export interface AppMeta {
+    $router: BeanRouter;
+  }
   export interface BeanBase {
     $router: BeanRouter;
   }

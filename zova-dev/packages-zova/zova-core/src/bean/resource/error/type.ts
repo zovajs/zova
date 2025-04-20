@@ -8,6 +8,12 @@ export interface IErrorInstanceInfo {
   info?: string;
 }
 
+export interface IErrorHandlerEventData {
+  err: Error;
+  instance?: ComponentPublicInstance | null;
+  info?: string;
+}
+
 export interface IModuleError {
   throw(...args: any[]): never;
   parseFail(...args: any[]): IErrorObject;
@@ -17,8 +23,12 @@ export type TypeModuleErrors<T> = {
   [prop in string & keyof T]: IModuleError;
 };
 
-export type OnErrorHandler = (err: unknown, instance: ComponentPublicInstance | null, info: string) => void;
-
 export interface ErrorSSR extends Error {
   url?: string;
+}
+
+declare module 'zova-core' {
+  export interface IEventRecord {
+    'app:errorHandler': { data: IErrorHandlerEventData; result: Error };
+  }
 }

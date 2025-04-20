@@ -1,6 +1,6 @@
 import type {
   IEventRecord,
-  NextEvent,
+  NextEventStrict,
   TypeEventHandler,
   TypeEventHandlers,
   TypeEventHandlersMap,
@@ -37,13 +37,13 @@ export class AppEvent extends BeanSimple {
 
   async emit<K extends keyof IEventRecord>(
     eventName: K,
-    data?: IEventRecord[K]['data'],
-    nextOrDefault?: NextEvent<IEventRecord[K]['data'], IEventRecord[K]['result']> | IEventRecord[K]['result'],
+    data: IEventRecord[K]['data'],
+    nextOrDefault?: NextEventStrict<IEventRecord[K]['data'], IEventRecord[K]['result']> | IEventRecord[K]['result'],
   ): Promise<IEventRecord[K]['result']> {
     const eventHandlers = this.getEventHandlers(eventName);
     if (eventHandlers.length === 0) {
       return typeof nextOrDefault === 'function'
-        ? ((await cast<NextEvent<IEventRecord[K]['data'], IEventRecord[K]['result']>>(nextOrDefault)(
+        ? ((await cast<NextEventStrict<IEventRecord[K]['data'], IEventRecord[K]['result']>>(nextOrDefault)(
             data,
           )) as IEventRecord[K]['result'])
         : (nextOrDefault! as IEventRecord[K]['result']);
@@ -51,9 +51,9 @@ export class AppEvent extends BeanSimple {
     // invoke
     const next =
       typeof nextOrDefault === 'function'
-        ? cast<NextEvent<IEventRecord[K]['data'], IEventRecord[K]['result']>>(nextOrDefault)
+        ? cast<NextEventStrict<IEventRecord[K]['data'], IEventRecord[K]['result']>>(nextOrDefault)
         : async (): Promise<IEventRecord[K]['result']> => {
-          return nextOrDefault! as IEventRecord[K]['result'][K];
+          return nextOrDefault! as IEventRecord[K]['result'];
         };
     return await compose(eventHandlers.concat(), __adapter)(data, next);
   }
