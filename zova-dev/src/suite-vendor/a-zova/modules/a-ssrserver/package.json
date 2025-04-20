@@ -5,6 +5,9 @@
   "title": "a-ssrserver",
   "zovaModule": {
     "capabilities": {
+      "meta": {
+        "appMode": "ssr"
+      },
       "server": true
     }
   },
