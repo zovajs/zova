@@ -30,6 +30,7 @@ export class AppError extends ErrorClass {
     // unhandledrejection
     if (process.env.CLIENT) {
       window.addEventListener('unhandledrejection', async (event: PromiseRejectionEvent) => {
+        event.preventDefault();
         const { reason } = event;
         if (reason instanceof Error) {
           const errorInfo: IErrorInstanceInfo = reason[SymbolErrorInstanceInfo];
