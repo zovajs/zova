@@ -35,7 +35,6 @@ export class ControllerLayoutDefault extends BeanControllerBase {
     // menu
     const queryMenus = this.$$modelMenu.select();
     await queryMenus.suspense();
-    if (queryMenus.error) throw queryMenus.error;
   }
 
   private async _initTabs() {
