@@ -111,7 +111,11 @@ export default defineFakeRoute([
   {
     url: '/home/layout/menu/select',
     method: 'get',
-    response: () => {
+    response: req => {
+      const name = getNameFromAuthorizationHeader(req);
+      if (!name) {
+        return { code: 401, message: 'Error menu/select' };
+      }
       return {
         code: 0,
         message: 'Success',
@@ -120,3 +124,10 @@ export default defineFakeRoute([
     },
   },
 ]);
+
+function getNameFromAuthorizationHeader(req: any): string | undefined {
+  if (!req.headers.authorization) return undefined;
+  const token = req.headers.authorization.split(' ')[1];
+  if (!token) return undefined;
+  return token.substring('accessToken-'.length);
+}

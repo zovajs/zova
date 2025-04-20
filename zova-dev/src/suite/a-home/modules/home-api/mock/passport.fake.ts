@@ -37,7 +37,7 @@ export default defineFakeRoute([
     url: '/home/user/passport/current',
     method: 'get',
     response: req => {
-      const name = req.headers.authorization?.substring('Bearer accessToken-'.length);
+      const name = getNameFromAuthorizationHeader(req);
       const user = __users.find(item => item.name === name);
       if (!user) {
         return { code: 403, message: 'Error' };
@@ -60,7 +60,12 @@ export default defineFakeRoute([
   {
     url: '/home/user/passport/logout',
     method: 'post',
-    response: _req => {
+    response: req => {
+      const name = getNameFromAuthorizationHeader(req);
+      const user = __users.find(item => item.name === name);
+      if (!user) {
+        return { code: 403, message: 'Error' };
+      }
       return {
         code: 0,
         message: 'Success',
@@ -88,3 +93,10 @@ export default defineFakeRoute([
     },
   },
 ]);
+
+function getNameFromAuthorizationHeader(req: any): string | undefined {
+  if (!req.headers.authorization) return undefined;
+  const token = req.headers.authorization.split(' ')[1];
+  if (!token) return undefined;
+  return token.substring('accessToken-'.length);
+}

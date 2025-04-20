@@ -24,7 +24,7 @@ declare module 'zova' {
 declare module '@tanstack/vue-query' {
   export interface Register {
     queryMeta: MyQueryMeta;
-    mutationMeta: MyQueryMeta;
+    mutationMeta: MyMutationMeta;
   }
 }
 
@@ -34,6 +34,10 @@ export interface MyQueryMeta extends Record<string, unknown> {
   defaultData?: (() => any) | any;
   ssr?: QueryMetaSSR;
   persister?: QueryMetaPersister | boolean;
+}
+
+export interface MyMutationMeta extends MyQueryMeta {
+  disableErrorEffect?: boolean;
 }
 
 export interface QueryMetaSSR {
