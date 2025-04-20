@@ -38,11 +38,8 @@ export class AppError extends ErrorClass {
         const { reason } = event;
         if (reason instanceof Error) {
           const errorInfo: IErrorInstanceInfo = reason[SymbolErrorInstanceInfo];
-          try {
-            await (this.app.vue.config.errorHandler!(reason, errorInfo?.instance as any, errorInfo?.info || 'unhandledrejection') as unknown as Promise<Error>);
-          } catch (err) {
-            console.error(err);
-          }
+          // should not catch error
+          await (this.app.vue.config.errorHandler!(reason, errorInfo?.instance as any, errorInfo?.info || 'unhandledrejection') as unknown as Promise<Error>);
         }
       });
     }

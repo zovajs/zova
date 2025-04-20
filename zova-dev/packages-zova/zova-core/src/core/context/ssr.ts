@@ -1,5 +1,4 @@
 import type { ComponentInternalInstance, Ref, VNode } from 'vue';
-import type { ErrorSSR } from '../../bean/index.js';
 import type { Functionable } from '../../decorator/index.js';
 import type {
   OnHydratePropHasMismatch,
