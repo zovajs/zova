@@ -30,14 +30,20 @@ declare module '@tanstack/vue-query' {
 
 export type { UseQueryOptions } from '@tanstack/vue-query';
 
-export interface MyQueryMeta extends Record<string, unknown> {
+export interface MyQueryMetaBase extends Record<string, unknown> {
   defaultData?: (() => any) | any;
   ssr?: QueryMetaSSR;
   persister?: QueryMetaPersister | boolean;
   disableErrorEffect?: boolean;
 }
 
-export interface MyMutationMeta extends MyQueryMeta {}
+export interface MyQueryMeta extends MyQueryMetaBase {
+  errorMessage?: ((error, query) => string) | string;
+}
+
+export interface MyMutationMeta extends MyQueryMetaBase {
+  errorMessage?: ((error, variables, context) => string) | string;
+}
 
 export interface QueryMetaSSR {
   /** default is true */

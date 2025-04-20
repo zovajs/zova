@@ -39,8 +39,12 @@ export class BeanModelUseMutation extends BeanModelUseStateGeneral {
     if (!this[SymbolUseMutations][mutationHash]) {
       const optionsDefault: any = {};
       if (!cast(mutationOptions).meta?.disableErrorEffect) {
-        optionsDefault.onError = (error, _variables, _context) => {
-          this.$errorHandler(error, 'useMutationData');
+        optionsDefault.onError = (error, variables, context) => {
+          let errorMessage = cast(mutationOptions).meta?.errorMessage;
+          if (typeof errorMessage === 'function') {
+            errorMessage = errorMessage(error, variables, context);
+          }
+          this.$errorHandler(error, errorMessage ?? 'useMutationData');
         };
       }
       mutationOptions = Object.assign(optionsDefault, mutationOptions, { mutationKey });

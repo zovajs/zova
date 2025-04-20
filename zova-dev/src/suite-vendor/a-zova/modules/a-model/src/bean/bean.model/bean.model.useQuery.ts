@@ -31,8 +31,12 @@ export class BeanModelUseQuery extends BeanModelQuery {
     const persister = this._createPersister(options.meta?.persister);
     const optionsDefault: any = {};
     if (!cast(options).meta?.disableErrorEffect) {
-      optionsDefault.throwOnError = (error, _query) => {
-        this.$errorHandler(error, 'useQuery');
+      optionsDefault.throwOnError = (error, query) => {
+        let errorMessage = cast(options).meta?.errorMessage;
+        if (typeof errorMessage === 'function') {
+          errorMessage = errorMessage(error, query);
+        }
+        this.$errorHandler(error, errorMessage ?? 'useQuery');
         return false;
       };
     }
