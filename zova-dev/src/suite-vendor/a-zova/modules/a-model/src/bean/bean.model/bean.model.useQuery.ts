@@ -9,6 +9,7 @@ import type {
 import type { UnwrapNestedRefs } from 'vue';
 import type { DefinedInitialQueryOptions, UndefinedInitialQueryOptions } from '../../common/types.js';
 import { useQuery } from '@tanstack/vue-query';
+import { cast } from 'zova';
 import { resolveStaleTime } from '../../types/index.js';
 import { BeanModelQuery } from './bean.model.query.js';
 
@@ -28,7 +29,14 @@ export class BeanModelUseQuery extends BeanModelQuery {
   $useQuery(options, queryClient) {
     const queryKey = this.self._forceQueryKeyPrefix(options.queryKey);
     const persister = this._createPersister(options.meta?.persister);
-    options = { ...options, queryKey, persister };
+    const optionsDefault: any = {};
+    if (!cast(options).meta?.disableErrorEffect) {
+      optionsDefault.throwOnError = (error, _query) => {
+        this.$errorHandler(error, 'useQuery');
+        return false;
+      };
+    }
+    options = Object.assign(optionsDefault, options, { queryKey, persister });
     // staleTime
     const sync = typeof options.meta?.persister === 'object' && options.meta?.persister?.sync;
     if (sync !== true) {

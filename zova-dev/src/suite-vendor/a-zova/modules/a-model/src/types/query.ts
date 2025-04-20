@@ -34,11 +34,10 @@ export interface MyQueryMeta extends Record<string, unknown> {
   defaultData?: (() => any) | any;
   ssr?: QueryMetaSSR;
   persister?: QueryMetaPersister | boolean;
-}
-
-export interface MyMutationMeta extends MyQueryMeta {
   disableErrorEffect?: boolean;
 }
+
+export interface MyMutationMeta extends MyQueryMeta {}
 
 export interface QueryMetaSSR {
   /** default is true */
