@@ -40,7 +40,7 @@ export default defineFakeRoute([
       const name = getNameFromAuthorizationHeader(req);
       const user = __users.find(item => item.name === name);
       if (!user) {
-        return { code: 403, message: 'Error' };
+        return { code: 401, message: 'Error' };
       }
       return {
         code: 0,
