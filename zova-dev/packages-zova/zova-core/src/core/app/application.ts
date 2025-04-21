@@ -51,6 +51,10 @@ export class ZovaApplication {
     await this.meta.module._monkeyModule('appReady');
   }
 
+  public get sys() {
+    return sys;
+  }
+
   public reload() {
     window.location.reload();
   }
