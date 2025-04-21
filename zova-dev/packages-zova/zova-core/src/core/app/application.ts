@@ -94,7 +94,7 @@ export class ZovaApplication {
   }
 
   public gotoLogin(returnTo?: string) {
-    returnTo = returnTo ?? cast(this.meta).$router.currentRoute?.fullPath;
+    returnTo = returnTo ?? this.getCurrentPagePath();
     const pageLogin = sys.config.router.pageLogin;
     const pagePath = returnTo === sys.config.router.pageHome
       ? pageLogin
@@ -107,6 +107,13 @@ export class ZovaApplication {
   public gotoReturnTo(returnTo?: string) {
     const pagePath = returnTo ?? cast(this.meta).$router.currentRoute?.query?.[sys.config.router.keyReturnTo] ?? sys.config.router.pageHome;
     return this.gotoPage(pagePath);
+  }
+
+  public getCurrentPagePath(){
+    if(process.env.SERVER){
+      return sys.util.getPagePathFromAbsoluteUrl(this.ctx.meta.ssr.context.req.url);
+    }
+    return cast(this.meta).$router.currentRoute?.fullPath;
   }
 }
 

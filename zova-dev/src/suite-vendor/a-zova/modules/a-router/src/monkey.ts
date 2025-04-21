@@ -50,7 +50,7 @@ export class Monkey
     // ssr
     if (process.env.SERVER) {
       // push
-      const pagePath = this.sys.util.getPagePathFromAbsoluteUrl(this.ctx.meta.ssr.context.req.url);
+      const pagePath = this.app.getCurrentPagePath();
       beanRouter.push(pagePath);
       await beanRouter.isReady();
     } else if (process.env.CLIENT && this.ctx.meta.ssr.isRuntimeSsrPreHydration) {

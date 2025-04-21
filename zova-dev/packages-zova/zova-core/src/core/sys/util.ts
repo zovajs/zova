@@ -14,18 +14,18 @@ export class SysUtil extends BeanSimple {
   }
 
   getPagePathFromAbsoluteUrl(url: string) {
-    let pathname: string;
+    let pagePath: string;
     if (url.startsWith('http://') || url.startsWith('https://')) {
       const _url = new URL(url);
-      pathname = _url.pathname;
+      pagePath = _url.pathname + _url.search;
     } else {
-      pathname = url;
+      pagePath = url;
     }
     const prefix = this.sys.env.APP_PUBLIC_PATH ? `/${this.sys.env.APP_PUBLIC_PATH}` : '';
-    if (pathname.startsWith(prefix)) {
-      return pathname.substring(prefix.length);
+    if (pagePath.startsWith(prefix)) {
+      return pagePath.substring(prefix.length);
     }
-    return pathname;
+    return pagePath;
   }
 
   getApiBaseURL(useApiPrefix: boolean = true) {
