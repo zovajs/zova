@@ -21,8 +21,12 @@ const modules = {};
     const importClause=`${module.info.capabilities?.server?'if(process.env.SERVER) {\n':''}modules['${module.info.relativeName}'] = { resource: () => import('${module.info.fullName}'), info: ${JSON.stringify(module.info,null,2)}};\n${module.info.capabilities?.server?'}\n':''}`;
     print(importClause);
 }%>
-let moduleNames = <%=JSON.stringify(moduleNames)%>;
-moduleNames = moduleNames.filter(item=>!!modules[item]);
+const moduleNames: string[] = [];
+<% for (const relativeName of moduleNames) {
+  const module=modules[relativeName];
+  const moduleNameClause=`${module.info.capabilities?.server?'if(process.env.SERVER) {\n':''}moduleNames.push('${relativeName}');\n${module.info.capabilities?.server?'}\n':''}`;
+  print(moduleNameClause);
+}%>
 <%
 const clause=`export const modulesMeta = { modules, moduleNames } as PluginZovaModulesMeta;`;
 %>
