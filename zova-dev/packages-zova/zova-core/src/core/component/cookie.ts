@@ -99,7 +99,10 @@ export class AppCookie extends BeanSimple {
   }
 
   removeItem(key: string, opts?: CookieOptions): void {
-    this.setItem(key, '', { expires: -1, ...opts });
+    this.setItem(key, '', Object.assign({
+      expires: -1,
+      path: `/${this.sys.config.app.publicPath}`,
+    }, opts));
   }
 }
 
