@@ -6,10 +6,10 @@ import { uuid as _uuid } from '../../utils/uuid.js';
 
 export class SysUtil extends BeanSimple {
   getAbsoluteUrlFromPagePath(path?: string) {
-    const prefix = process.env.DEV ? `http://${this.sys.env.DEV_SERVER_HOSTNAME || 'localhost'}:${this.sys.env.DEV_SERVER_PORT}` : `${this.sys.config.ssr.server.protocol}://${this.sys.config.ssr.server.host}`;
-    // if (this.sys.env.APP_PUBLIC_PATH) {
-    //   prefix = `${prefix}/${this.sys.env.APP_PUBLIC_PATH}`;
-    // }
+    let prefix = process.env.DEV ? `http://${this.sys.env.DEV_SERVER_HOSTNAME || 'localhost'}:${this.sys.env.DEV_SERVER_PORT}` : `${this.sys.config.ssr.server.protocol}://${this.sys.config.ssr.server.host}`;
+    if (this.sys.env.APP_PUBLIC_PATH) {
+      prefix = `${prefix}/${this.sys.env.APP_PUBLIC_PATH}`;
+    }
     return `${prefix}${path || ''}`;
   }
 
@@ -21,10 +21,10 @@ export class SysUtil extends BeanSimple {
     } else {
       pathname = url;
     }
-    // const prefix = this.sys.env.APP_PUBLIC_PATH ? `/${this.sys.env.APP_PUBLIC_PATH}` : '';
-    // if (pathname.startsWith(prefix)) {
-    //   return pathname.substring(prefix.length);
-    // }
+    const prefix = this.sys.env.APP_PUBLIC_PATH ? `/${this.sys.env.APP_PUBLIC_PATH}` : '';
+    if (pathname.startsWith(prefix)) {
+      return pathname.substring(prefix.length);
+    }
     return pathname;
   }
 
