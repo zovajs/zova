@@ -5,15 +5,15 @@ import { BeanSimple } from '../../bean/beanSimple.js';
 import { uuid as _uuid } from '../../utils/uuid.js';
 
 export class SysUtil extends BeanSimple {
-  getAbsoluteUrlFromPagePath(path?: string, disableHost?: boolean) {
-    let prefix = disableHost ? '' : (process.env.DEV ? `http://${this.sys.env.DEV_SERVER_HOSTNAME || 'localhost'}:${this.sys.env.DEV_SERVER_PORT}` : `${this.sys.config.ssr.server.protocol}://${this.sys.config.ssr.server.host}`);
-    if (this.sys.env.APP_PUBLIC_PATH) {
+  getAbsoluteUrlFromPagePath(path?: string, ignoreHost?: boolean, ignorePublicPath?: boolean) {
+    let prefix = ignoreHost ? '' : (process.env.DEV ? `http://${this.sys.env.DEV_SERVER_HOSTNAME || 'localhost'}:${this.sys.env.DEV_SERVER_PORT}` : `${this.sys.config.ssr.server.protocol}://${this.sys.config.ssr.server.host}`);
+    if (!ignorePublicPath && this.sys.env.APP_PUBLIC_PATH) {
       prefix = `${prefix}/${this.sys.env.APP_PUBLIC_PATH}`;
     }
     return `${prefix}${path || ''}`;
   }
 
-  getPagePathFromAbsoluteUrl(url: string) {
+  getPagePathFromAbsoluteUrl(url: string, ignorePublicPath?: boolean) {
     let pagePath: string;
     if (url.startsWith('http://') || url.startsWith('https://')) {
       const _url = new URL(url);
@@ -21,9 +21,11 @@ export class SysUtil extends BeanSimple {
     } else {
       pagePath = url;
     }
-    const prefix = this.sys.env.APP_PUBLIC_PATH ? `/${this.sys.env.APP_PUBLIC_PATH}` : '';
-    if (pagePath.startsWith(prefix)) {
-      return pagePath.substring(prefix.length);
+    if (!ignorePublicPath && this.sys.env.APP_PUBLIC_PATH) {
+      const prefix = `/${this.sys.env.APP_PUBLIC_PATH}`;
+      if (pagePath.startsWith(prefix)) {
+        pagePath = pagePath.substring(prefix.length);
+      }
     }
     return pagePath;
   }

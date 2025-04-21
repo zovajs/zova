@@ -176,7 +176,7 @@ export class ServiceSsrHandler extends BeanBase {
   }
 
   private _renderPreloadTag(file: string, _opts) {
-    file = this.sys.util.getAbsoluteUrlFromPagePath(file);
+    file = this.sys.util.getAbsoluteUrlFromPagePath(file, false, true);
     if (jsRE.test(file) === true) {
       return `<link rel="modulepreload" href="${file}" crossorigin>`;
     }
