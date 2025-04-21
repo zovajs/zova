@@ -26,6 +26,7 @@ export type TypeModuleErrors<T> = {
 };
 
 export interface ErrorSSR extends Error {
+  pagePath?: string;
   url?: string;
 }
 

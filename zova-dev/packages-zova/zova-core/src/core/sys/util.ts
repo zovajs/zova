@@ -5,8 +5,8 @@ import { BeanSimple } from '../../bean/beanSimple.js';
 import { uuid as _uuid } from '../../utils/uuid.js';
 
 export class SysUtil extends BeanSimple {
-  getAbsoluteUrlFromPagePath(path?: string) {
-    let prefix = process.env.DEV ? `http://${this.sys.env.DEV_SERVER_HOSTNAME || 'localhost'}:${this.sys.env.DEV_SERVER_PORT}` : `${this.sys.config.ssr.server.protocol}://${this.sys.config.ssr.server.host}`;
+  getAbsoluteUrlFromPagePath(path?: string, disableHost?: boolean) {
+    let prefix = disableHost ? '' : (process.env.DEV ? `http://${this.sys.env.DEV_SERVER_HOSTNAME || 'localhost'}:${this.sys.env.DEV_SERVER_PORT}` : `${this.sys.config.ssr.server.protocol}://${this.sys.config.ssr.server.host}`);
     if (this.sys.env.APP_PUBLIC_PATH) {
       prefix = `${prefix}/${this.sys.env.APP_PUBLIC_PATH}`;
     }
