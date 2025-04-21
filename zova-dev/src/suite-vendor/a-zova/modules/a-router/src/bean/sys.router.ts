@@ -1,6 +1,7 @@
 import type { RouteLocationResolvedGeneric, Router, RouterOptions } from '@cabloy/vue-router';
 import { IModule } from '@cabloy/module-info';
 import * as ModuleInfo from '@cabloy/module-info';
+import { combineQueries } from '@cabloy/utils';
 import { createMemoryHistory, createRouter, createWebHashHistory, createWebHistory } from '@cabloy/vue-router';
 import { BeanBase, cast, deepExtend } from 'zova';
 import { Sys } from 'zova-module-a-bean';
@@ -69,7 +70,7 @@ export class SysRouter extends BeanBase {
 
   public getPagePath<K extends keyof IPagePathRecord>(path: IPagePathRecord[K]['path'], query?: IPagePathRecord[K]['schema'], absolute?: boolean) {
     const url = absolute ? this.sys.util.getAbsoluteUrlFromPagePath(path) : path;
-    return this._combineQueries(url, query);
+    return combineQueries(url, query);
   }
 
   public async resolveRoute(url: string, check404?: boolean, checkAliasOf?: boolean): Promise<RouteLocationResolvedGeneric | undefined> {
@@ -118,28 +119,6 @@ export class SysRouter extends BeanBase {
       }
     }
     return route;
-  }
-
-  private _combineQueries(pagePath: string, query: any) {
-    const query2: any[] = [];
-    const strs: string[] = [];
-    if (query) {
-      for (const key in query) {
-        const value = query[key];
-        if (value && typeof value === 'object') {
-          query2.push([key, value]);
-        } else {
-          strs.push(`${encodeURIComponent(key)}=${encodeURIComponent(value)}`);
-        }
-      }
-    }
-    // query2
-    for (const [key, value] of query2) {
-      strs.push(`${encodeURIComponent(key)}=${encodeURIComponent(JSON.stringify(value))}`);
-    }
-    const queryStr = strs.join('&');
-    // join
-    return queryStr ? `${pagePath}?${queryStr}` : pagePath;
   }
 
   /** @internal */
