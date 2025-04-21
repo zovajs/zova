@@ -1,6 +1,7 @@
 import type http from 'node:http';
 import path, { basename } from 'node:path';
 import { pathToFileURL } from 'node:url';
+import { catchError } from '@cabloy/utils';
 import fse from 'fs-extra';
 import { BeanBase, cast, Use } from 'zova';
 import { Service } from 'zova-module-a-bean';
@@ -63,7 +64,11 @@ export class ServiceSsrHandler extends BeanBase {
     };
     // render
     const renderFn = await serverEntry(ssrContext);
-    const runtimePageContent = await renderToString(renderFn, ssrContext);
+    const [runtimePageContent, err] = await catchError(() => {
+      return renderToString(renderFn, ssrContext);
+    });
+    const error = ssrContext._meta.renderError ?? err;
+    if (error) throw error;
 
     onRenderedList.forEach(fn => {
       fn();

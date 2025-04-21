@@ -1,4 +1,5 @@
 import type { ComponentInternalInstance, VNode } from 'vue';
+import type { ErrorSSR } from '../../bean/resource/error/type.js';
 
 export interface SSRContext {
   _meta: SSRContextMeta;
@@ -29,6 +30,7 @@ export interface SSRContextMeta {
   bodyTags: string;
   endingBodyTags: string;
   baseUrl: string;
+  renderError: ErrorSSR;
 }
 
 export interface SSRContextState {}
