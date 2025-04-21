@@ -37,14 +37,15 @@ export class AppError extends ErrorClass {
     };
     // unhandledrejection
     if (process.env.CLIENT) {
-      window.addEventListener('unhandledrejection', async (event: PromiseRejectionEvent) => {
+      window.addEventListener('unhandledrejection', (event: PromiseRejectionEvent) => {
         event.preventDefault();
-        const { reason } = event;
-        if (reason instanceof Error) {
-          const errorInfo: IErrorInstanceInfo = reason[SymbolErrorInstanceInfo];
-          // should not catch error
-          await (this.app.vue.config.errorHandler!(reason, errorInfo?.instance as any, errorInfo?.info || 'unhandledrejection') as unknown as Promise<Error>);
-        }
+        this._handleUnhandledError(event.reason, 'unhandledrejection');
+        return false;
+      });
+      window.addEventListener('error', (event: ErrorEvent) => {
+        event.preventDefault();
+        this._handleUnhandledError(event.error, 'unhandlederror');
+        return false;
       });
     }
     // ssr
@@ -68,5 +69,13 @@ export class AppError extends ErrorClass {
         return self.parseFail(moduleScope, errorCode, ...args);
       },
     };
+  }
+
+  private async _handleUnhandledError(error: Error, infoDefault: string) {
+    if (error instanceof Error) {
+      const errorInfo: IErrorInstanceInfo = error[SymbolErrorInstanceInfo];
+      // should not catch error
+      await (this.app.vue.config.errorHandler!(error, errorInfo?.instance as any, errorInfo?.info || infoDefault) as unknown as Promise<Error>);
+    }
   }
 }
