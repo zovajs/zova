@@ -4,6 +4,7 @@ import type { ErrorSSR } from '../../bean/resource/error/type.js';
 import type { HttpStatus } from '../../types/enum/httpStatus.js';
 import type { PluginZovaOptions } from '../../types/interface/pluginZova.js';
 import type { ZovaContext } from '../context/context.js';
+import { combineQueries } from '@cabloy/utils';
 import { markRaw } from 'vue';
 import { cast } from '../../types/utils/cast.js';
 import { sys } from '../sys/sys.js';
@@ -81,13 +82,20 @@ export class ZovaApplication {
     throw error;
   }
 
-  // todo: add returnTo
-  public gotoLogin(returnTo?: string) {
-    return this.redirect(sys.config.router.pageLogin);
-  }
-
   public gotoHome() {
     return this.redirect(sys.config.router.pageHome);
+  }
+
+  public gotoLogin(returnTo?: string) {
+    const pagePath = combineQueries(sys.config.router.pageLogin, {
+      [sys.config.router.keyReturnTo]: returnTo ?? cast(this.meta).$router.currentRoute?.value.fullPath,
+    });
+    return this.redirect(pagePath);
+  }
+
+  public gotoReturnTo(returnTo?: string) {
+    const pagePath = returnTo ?? cast(this.meta).$router.currentRoute?.value.query?.[sys.config.router.keyReturnTo] ?? sys.config.router.pageHome;
+    return this.redirect(pagePath);
   }
 }
 

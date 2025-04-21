@@ -28,8 +28,8 @@ export class ModelPassport extends BeanModelBase {
       onSuccess: data => {
         // save
         this._setPassportJwt(data);
-        // page: home
-        this.app.gotoHome();
+        // page: returnTo
+        this.app.gotoReturnTo();
       },
     });
   }
