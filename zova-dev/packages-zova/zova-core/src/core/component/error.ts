@@ -15,19 +15,23 @@ export class AppError extends ErrorClass {
     // errorHandler
     this.app.vue.config.errorHandler = async (err, instance, info) => {
       return await this.app.meta.event.emit('app:errorHandler', { err: err as Error, instance, info }, async ({ err }) => {
+        // server
         if (process.env.SERVER) {
           this[SymbolErrorSSR] = err as ErrorSSR;
-        } else {
-          if ([301, 302].includes(Number(err.code))) {
-            cast(this.app.meta).$router.replace(cast<ErrorSSR>(err).url);
-          } else {
-            // only log error in client
-            console.error(err);
-            if (err.code === 401) {
-              this.app.gotoLogin();
-            }
-          }
+          return undefined;
         }
+        // client
+        if ([301, 302].includes(Number(err.code))) {
+          cast(this.app.meta).$router.replace(cast<ErrorSSR>(err).url);
+          return undefined;
+        }
+        // only log error in client
+        console.error(err);
+        if (err.code === 401) {
+          this.app.gotoLogin();
+          return undefined;
+        }
+        // not handled
         return err;
       });
     };

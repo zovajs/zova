@@ -5,7 +5,7 @@ import type { CtxSSR } from '../core/context/ssr.js';
 import type { ILoggerClientChildRecord } from '../core/logger/types.js';
 import type { FunctionAsync } from '../decorator/type/functionable.js';
 import type { SSRMetaOptions } from '../types/interface/ssr.js';
-import type { IModuleLocaleText } from './resource/index.js';
+import type { IErrorHandlerEventResult, IModuleLocaleText } from './resource/index.js';
 import { useMeta } from '../core/context/useMeta.js';
 import { cast } from '../types/utils/cast.js';
 import { BeanBaseSimple, SymbolBeanFullName, SymbolModuleBelong } from './beanBaseSimple.js';
@@ -93,8 +93,8 @@ export class BeanBase extends BeanBaseSimple {
     });
   }
 
-  protected async $errorHandler(err: unknown, info?: string): Promise<Error> {
-    return await (this.app.vue.config.errorHandler!(err, this.ctx.instance as any, info!) as unknown as Promise<Error>);
+  protected async $errorHandler(err: unknown, info?: string): Promise<IErrorHandlerEventResult> {
+    return await (this.app.vue.config.errorHandler!(err, this.ctx.instance as any, info!) as unknown as Promise<IErrorHandlerEventResult>);
   }
 
   // need not

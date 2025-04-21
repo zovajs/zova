@@ -14,6 +14,8 @@ export interface IErrorHandlerEventData {
   info?: string;
 }
 
+export type IErrorHandlerEventResult = Error | undefined;
+
 export interface IModuleError {
   throw(...args: any[]): never;
   parseFail(...args: any[]): IErrorObject;
@@ -29,6 +31,6 @@ export interface ErrorSSR extends Error {
 
 declare module 'zova-core' {
   export interface IEventRecord {
-    'app:errorHandler': { data: IErrorHandlerEventData; result: Error };
+    'app:errorHandler': { data: IErrorHandlerEventData; result: IErrorHandlerEventResult };
   }
 }
