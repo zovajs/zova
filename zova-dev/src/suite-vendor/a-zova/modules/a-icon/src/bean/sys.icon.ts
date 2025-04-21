@@ -86,11 +86,11 @@ export class SysIcon extends BeanBase {
     if (!groupUrl) return;
     // inline
     if (groupUrl.startsWith('data:image/svg+xml')) throw new Error('inline svg not supported');
-    // publicPath
-    groupUrl = this.sys.util.getPagePathFromAbsoluteUrl(groupUrl);
     // fetch
     let svg;
     if (process.env.SERVER) {
+      // publicPath
+      groupUrl = this.sys.util.getPagePathFromAbsoluteUrl(groupUrl);
       const path = await import('node:path');
       const fs = await import('node:fs/promises');
       let filePath: string;
