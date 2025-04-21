@@ -139,6 +139,7 @@ async function _useController(
       return ctx.meta.hooks.invokeHook('created');
     });
   } else {
+    // not await, same as onServerPrefetch
     ctx.meta.hooks.invokeHook('created');
   }
 }
