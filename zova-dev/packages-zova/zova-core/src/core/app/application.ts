@@ -82,8 +82,15 @@ export class ZovaApplication {
     throw error;
   }
 
+  public gotoPage(pagePath: string, forceRedirect?: boolean) {
+    if (process.env.SERVER || forceRedirect) {
+      return this.redirect(pagePath);
+    }
+    cast(this.meta).$router.replace(pagePath);
+  }
+
   public gotoHome() {
-    return this.redirect(sys.config.router.pageHome);
+    return this.gotoPage(sys.config.router.pageHome);
   }
 
   public gotoLogin(returnTo?: string) {
@@ -94,12 +101,12 @@ export class ZovaApplication {
       : combineQueries(pageLogin, {
           [sys.config.router.keyReturnTo]: returnTo,
         });
-    return this.redirect(pagePath);
+    return this.gotoPage(pagePath);
   }
 
   public gotoReturnTo(returnTo?: string) {
     const pagePath = returnTo ?? cast(this.meta).$router.currentRoute?.query?.[sys.config.router.keyReturnTo] ?? sys.config.router.pageHome;
-    return this.redirect(pagePath);
+    return this.gotoPage(pagePath);
   }
 }
 

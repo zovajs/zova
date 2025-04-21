@@ -22,7 +22,7 @@ export class AppError extends ErrorClass {
         }
         // client
         if ([301, 302].includes(Number(err.code))) {
-          cast(this.app.meta).$router.replace(cast<ErrorSSR>(err).pagePath);
+          this.app.gotoPage(cast<ErrorSSR>(err).pagePath!);
           return undefined;
         }
         // only log error in client

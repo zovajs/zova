@@ -1,4 +1,3 @@
-import { catchError } from '@cabloy/utils';
 import { IJwtInfo } from 'zova-module-a-interceptor';
 import { BeanModelBase, Model } from 'zova-module-a-model';
 import { ApiApiHomeUserPassportloginResponseBody, ApiApiHomeUserPassportloginSimpleRequestBody } from 'zova-module-home-api';
@@ -78,16 +77,7 @@ export class ModelPassport extends BeanModelBase {
   async ensurePassport() {
     if (process.env.CLIENT) return this.passport;
     if (!this.isAuthenticated && this.accessToken) {
-      const [passport, error] = await catchError(() => {
-        return this.$api.homeUserPassport.current();
-      });
-      if (error) {
-        if (process.env.DEV) {
-          console.error(error);
-        }
-        this.app.gotoLogin();
-      }
-      this.passport = passport;
+      this.passport = await this.$api.homeUserPassport.current();
     }
     return this.passport;
   }
