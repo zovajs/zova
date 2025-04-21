@@ -29,7 +29,7 @@ export class ModelPassport extends BeanModelBase {
         // save
         this._setPassportJwt(data);
         // page: home
-        this.$router.replace('/');
+        this.app.gotoHome();
       },
     });
   }
