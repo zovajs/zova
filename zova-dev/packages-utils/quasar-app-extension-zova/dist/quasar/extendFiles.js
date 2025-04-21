@@ -87,7 +87,16 @@ export function extendFilesTwo(api, _flavor) {
             .replace('<div id="q-app">${ runtimePageContent }</div>', '<div id="q-app">${ runtimePageContent }</div>${ renderTeleports(ssrContext.teleports) }')
             .replace('viteServer.ssrFixStacktrace(err)', 'console.error(err)')
             .replace("getPackage('vue/server-renderer'", "getPackage('@cabloy/vue-server-renderer'")
-            .replace('const renderApp = await viteModuleRunner.import(this.#pathMap.serverEntryFile)', 'const renderApp = await viteModuleRunner.import(this.#pathMap.serverEntryFile)\nawait renderApp.initialize();');
+            .replace('const renderApp = await viteModuleRunner.import(this.#pathMap.serverEntryFile)', 'const renderApp = await viteModuleRunner.import(this.#pathMap.serverEntryFile)\nawait renderApp.initialize();')
+            .replace('const runtimePageContent = await vueRenderToString(app, ssrContext)', `let runtimePageContent;
+        let err2;
+        try {
+          runtimePageContent = await vueRenderToString(app, ssrContext);
+        } catch (err) {
+          err2 = err;
+        }
+        const error = ssrContext._meta.renderError ?? err2;
+        if (error) throw error;`);
         fse.writeFileSync(fileSrc, contentNew);
     }
     // ssr-builder.js

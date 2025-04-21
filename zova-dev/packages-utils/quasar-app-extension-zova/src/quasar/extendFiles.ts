@@ -120,6 +120,18 @@ export function extendFilesTwo(api: IndexAPI, _flavor: string) {
       .replace(
         'const renderApp = await viteModuleRunner.import(this.#pathMap.serverEntryFile)',
         'const renderApp = await viteModuleRunner.import(this.#pathMap.serverEntryFile)\nawait renderApp.initialize();',
+      )
+      .replace(
+        'const runtimePageContent = await vueRenderToString(app, ssrContext)',
+        `let runtimePageContent;
+        let err2;
+        try {
+          runtimePageContent = await vueRenderToString(app, ssrContext);
+        } catch (err) {
+          err2 = err;
+        }
+        const error = ssrContext._meta.renderError ?? err2;
+        if (error) throw error;`,
       );
     fse.writeFileSync(fileSrc, contentNew);
   }
