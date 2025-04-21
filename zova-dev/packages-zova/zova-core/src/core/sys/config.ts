@@ -9,10 +9,10 @@ import type { ConfigLogger } from '../logger/types.js';
 import { cast } from '../../types/utils/cast.js';
 import { combineLoggerDefault } from '../logger/loggerDefault.js';
 
-export function configDefault(env: ZovaConfigEnv) {
+export function configDefault(env: ZovaConfigEnv): PowerPartial<ZovaConfig> {
   // logger
   const logger = combineLoggerDefault();
-  return {
+  const config: PowerPartial<ZovaConfig> = {
     meta: {
       flavor: cast(env).META_FLAVOR,
       mode: cast(env).META_MODE,
@@ -23,10 +23,13 @@ export function configDefault(env: ZovaConfigEnv) {
       title: env.APP_TITLE,
       description: env.APP_DESCRIPTION,
       version: env.APP_VERSION,
-      routerMode: env.APP_ROUTER_MODE,
       publicPath: env.APP_PUBLIC_PATH,
-      pageLogin: env.APP_PAGE_LOGIN,
-      pageHome: env.APP_PAGE_HOME,
+    },
+    router: {
+      mode: env.ROUTER_MODE,
+      pageHome: env.ROUTER_PAGE_HOME,
+      pageLogin: env.ROUTER_PAGE_LOGIN,
+      keyReturnTo: env.ROUTER_KEY_RETURNTO,
     },
     api: {
       baseURL: process.env.SERVER ? (env.SSR_API_BASE_URL || env.API_BASE_URL) : env.API_BASE_URL,
@@ -47,7 +50,7 @@ export function configDefault(env: ZovaConfigEnv) {
     },
     logger,
     locale: {
-      default: env.APP_LOCALE_DEFAULT,
+      default: env.APP_LOCALE_DEFAULT as keyof ILocalInfos | undefined,
       storeKey: 'locale',
       items: {
         'en-us': 'English',
@@ -56,8 +59,8 @@ export function configDefault(env: ZovaConfigEnv) {
     },
     layout: {
       component: {
-        default: 'home-layout:layoutDefault',
-        empty: 'home-layout:layoutEmpty',
+        default: 'home-layout:layoutDefault' as keyof TypeComponentLayoutRecord,
+        empty: 'home-layout:layoutEmpty' as keyof TypeComponentLayoutRecord,
       },
       sidebar: {
         leftOpenPC: true,
@@ -69,8 +72,9 @@ export function configDefault(env: ZovaConfigEnv) {
       name: {},
     },
     modules: {},
-    onions: {},
   };
+  cast(config).onions = {};
+  return config;
 }
 
 export interface ZovaConfig {
@@ -80,10 +84,13 @@ export interface ZovaConfig {
     title: string;
     description: string;
     version: string;
-    routerMode: 'hash' | 'history' | 'abstract' | undefined;
     publicPath: string;
-    pageLogin: string;
+  };
+  router: {
+    mode: 'hash' | 'history' | 'abstract' | undefined;
     pageHome: string;
+    pageLogin: string;
+    keyReturnTo: string;
   };
   api: {
     baseURL: string;

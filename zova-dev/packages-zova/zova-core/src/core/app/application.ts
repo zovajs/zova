@@ -81,13 +81,13 @@ export class ZovaApplication {
     throw error;
   }
 
-  // todo: add redirect
-  public gotoLogin(_redirect?: string) {
-    return this.redirect(sys.config.app.pageLogin);
+  // todo: add returnTo
+  public gotoLogin(returnTo?: string) {
+    return this.redirect(sys.config.router.pageLogin);
   }
 
   public gotoHome() {
-    return this.redirect(sys.config.app.pageHome);
+    return this.redirect(sys.config.router.pageHome);
   }
 }
 
