@@ -74,8 +74,7 @@ export class SysRouter extends BeanBase {
 
   public async resolveRoute(url: string, check404?: boolean, checkAliasOf?: boolean): Promise<RouteLocationResolvedGeneric | undefined> {
     const pagePath = this.sys.util.getPagePathFromAbsoluteUrl(url);
-    await this.ensureRouteModule(pagePath);
-    let route = this._vueRouterSys.resolve(pagePath);
+    let route = await this.ensureRoute(pagePath);
     if (check404 && route.name === '$:/:catchAll(.*)*') return;
     // aliasOf
     if (checkAliasOf) {
@@ -102,16 +101,23 @@ export class SysRouter extends BeanBase {
     return this.sys.meta.module.exists(moduleName);
   }
 
-  public async ensureRouteModule(pagePath: string) {
+  public async ensureRoute(pagePath: string) {
+    // try to resolve, support alias route
+    let route = this._vueRouterSys.resolve(pagePath);
+    if (route && route.name !== '$:/:catchAll(.*)*') return route;
+    // try to load module
     const moduleName = ModuleInfo.parseName(pagePath);
     if (moduleName) {
       if (this.sys.meta.module.exists(moduleName)) {
         const module = this.sys.meta.module.get(moduleName);
         if (!module) {
           await this.sys.meta.module.use(moduleName);
+          // try to resolve again
+          route = this._vueRouterSys.resolve(pagePath);
         }
       }
     }
+    return route;
   }
 
   private _combineQueries(pagePath: string, query: any) {
