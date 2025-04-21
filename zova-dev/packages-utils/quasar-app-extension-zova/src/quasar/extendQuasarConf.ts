@@ -37,7 +37,7 @@ export function extendQuasarConf(context: ConfigContext, flavor: ZovaMetaFlavor)
     conf.build.publicPath = process.env.APP_PUBLIC_PATH;
     // build: vueRouterMode/vueRouterBase
     conf.build.vueRouterMode = process.env.APP_ROUTER_MODE as any;
-    conf.build.vueRouterBase = process.env.APP_ROUTER_BASE;
+    conf.build.vueRouterBase = process.env.APP_PUBLIC_PATH;
     // build: vitePlugins
     const vitePlugins = zovaViteMeta.vitePlugins.map(item => {
       return [item[1], item[2], item[3]];

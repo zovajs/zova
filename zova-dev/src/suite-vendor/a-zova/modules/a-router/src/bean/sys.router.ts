@@ -53,7 +53,7 @@ export class SysRouter extends BeanBase {
         : this.sys.env.APP_ROUTER_MODE === 'history'
           ? createWebHistory
           : createWebHashHistory;
-      options.history = createHistory(this.sys.env.APP_ROUTER_BASE);
+      options.history = createHistory(this.sys.config.app.routerBase);
     }
     // create
     const router = createRouter(options);

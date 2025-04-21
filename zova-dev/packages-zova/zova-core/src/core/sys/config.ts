@@ -24,7 +24,7 @@ export function configDefault(env: ZovaConfigEnv) {
       description: env.APP_DESCRIPTION,
       version: env.APP_VERSION,
       routerMode: env.APP_ROUTER_MODE,
-      routerBase: env.APP_ROUTER_BASE,
+      routerBase: env.APP_PUBLIC_PATH,
       publicPath: env.APP_PUBLIC_PATH,
       pageLogin: env.APP_PAGE_LOGIN,
       pageHome: env.APP_PAGE_HOME,
