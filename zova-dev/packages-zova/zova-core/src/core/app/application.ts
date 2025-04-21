@@ -80,9 +80,9 @@ export class ZovaApplication {
   public redirect(pagePath: string, status?: 301 | 302): never {
     const error = new Error() as ErrorSSR;
     error.code = status ?? 302;
-    error.message = pagePath;
     error.pagePath = pagePath;
     error.url = sys.util.getAbsoluteUrlFromPagePath(pagePath, true);
+    error.message = process.env.SERVER ? error.url : error.pagePath;
     throw error;
   }
 
