@@ -4,11 +4,7 @@ import { ErrorClass } from '../../bean/resource/error/errorClass.js';
 import { SymbolErrorInstanceInfo } from '../../bean/resource/error/type.js';
 import { cast } from '../../types/utils/cast.js';
 
-const SymbolErrorSSR = Symbol('SymbolErrorSSR');
-
 export class AppError extends ErrorClass {
-  private [SymbolErrorSSR]?: ErrorSSR;
-
   /** @internal */
   public async initialize() {
     await super.initialize();
@@ -17,7 +13,15 @@ export class AppError extends ErrorClass {
       return await this.app.meta.event.emit('app:errorHandler', { err: err as Error, instance, info }, async ({ err }) => {
         // server
         if (process.env.SERVER) {
-          this[SymbolErrorSSR] = err as ErrorSSR;
+          if (err.code === 401) {
+            try {
+              this.app.gotoLogin();
+            } catch (err) {
+              this.ctx.meta.ssr.context._meta.renderError = err as ErrorSSR;
+            }
+          } else {
+            this.ctx.meta.ssr.context._meta.renderError = err as ErrorSSR;
+          }
           return undefined;
         }
         // client
@@ -46,14 +50,6 @@ export class AppError extends ErrorClass {
         event.preventDefault();
         this._handleUnhandledError(event.error, 'unhandlederror');
         return false;
-      });
-    }
-    // ssr
-    if (process.env.SERVER) {
-      this.ctx.meta.ssr.context.onRendered(() => {
-        if (this[SymbolErrorSSR]) {
-          throw this[SymbolErrorSSR];
-        }
       });
     }
   }
