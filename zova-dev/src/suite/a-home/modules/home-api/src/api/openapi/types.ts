@@ -143,6 +143,22 @@ export interface paths {
     patch?: never;
     trace?: never;
   };
+  '/api/home/base/menu': {
+    parameters: {
+      query?: never;
+      header?: never;
+      path?: never;
+      cookie?: never;
+    };
+    get: operations['HomeBaseMenu_retrieveMenus'];
+    put?: never;
+    post?: never;
+    delete?: never;
+    options?: never;
+    head?: never;
+    patch?: never;
+    trace?: never;
+  };
   '/': {
     parameters: {
       query?: never;
@@ -369,6 +385,26 @@ export interface components {
     'a-authsimple.dto.authSimple': {
       username: string;
       password: string;
+    };
+    'a-menu.dto.menuItem': {
+      title?: string;
+      caption?: string;
+      icon?: string;
+      link?: string;
+      external?: boolean;
+      target?: string;
+      group?: string | string[];
+    };
+    'a-menu.dto.menuGroup': {
+      name: string;
+      title?: string;
+      caption?: string;
+      icon?: string;
+      collapsed?: boolean;
+    };
+    'a-menu.dto.menus': {
+      items?: components['schemas']['a-menu.dto.menuItem'][];
+      groups?: components['schemas']['a-menu.dto.menuGroup'][];
     };
     /** @description User */
     'test-vona.dto.user': {
@@ -630,6 +666,31 @@ export interface operations {
             code: string;
             message: string;
             data?: unknown;
+          };
+        };
+      };
+    };
+  };
+  HomeBaseMenu_retrieveMenus: {
+    parameters: {
+      query?: never;
+      header?: {
+        Authorization?: string;
+      };
+      path?: never;
+      cookie?: never;
+    };
+    requestBody?: never;
+    responses: {
+      200: {
+        headers: {
+          [name: string]: unknown;
+        };
+        content: {
+          'application/json': {
+            code: string;
+            message: string;
+            data: components['schemas']['a-menu.dto.menus'];
           };
         };
       };
