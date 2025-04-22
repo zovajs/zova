@@ -6,15 +6,15 @@ import { Scope } from 'zova-module-a-bean';
 /** api: end */
 /** api: begin */
 import { ApiBTest1 } from '../api/bTest1.js';
-import { ApiCabloyTestPassport } from '../api/cabloyTestPassport.js';
 import { ApiHome } from '../api/home.js';
 import { ApiHomeUserPassport } from '../api/homeUserPassport.js';
+import { ApiOnion } from '../api/onion.js';
 /** api: end */
 /** api: begin */
 
-import { ApiOnion } from '../api/onion.js';
+import { ApiTestCabloyPassport } from '../api/testCabloyPassport.js';
 
-import { ApiVonaTestUpload } from '../api/vonaTestUpload.js';
+import { ApiTestVonaUpload } from '../api/testVonaUpload.js';
 /** service: end */
 /** service: begin */
 import { ServiceJwtAdapter } from '../service/jwtAdapter.js';
@@ -27,24 +27,19 @@ import 'zova';
 import 'zova';
 
 export * from '../api/bTest1.js';
-export * from '../api/cabloyTestPassport.js';
 export * from '../api/home.js';
 export * from '../api/homeUserPassport.js';
 export * from '../api/onion.js';
 /** api: end */
 /** openapi: begin */
 export * from '../api/openapi/index.js';
+export * from '../api/testCabloyPassport.js';
 declare module 'zova' {
 
 }
 declare module 'zova-module-home-api' {
 
   export interface ApiBTest1 {
-    /** @internal */
-    get scope(): ScopeModuleHomeApi;
-  }
-
-  export interface ApiCabloyTestPassport {
     /** @internal */
     get scope(): ScopeModuleHomeApi;
   }
@@ -64,30 +59,35 @@ declare module 'zova-module-home-api' {
     get scope(): ScopeModuleHomeApi;
   }
 
-  export interface ApiVonaTestUpload {
+  export interface ApiTestCabloyPassport {
+    /** @internal */
+    get scope(): ScopeModuleHomeApi;
+  }
+
+  export interface ApiTestVonaUpload {
     /** @internal */
     get scope(): ScopeModuleHomeApi;
   }
 }
 export interface IModuleApi {
   bTest1: ApiBTest1;
-  cabloyTestPassport: ApiCabloyTestPassport;
   home: ApiHome;
   homeUserPassport: ApiHomeUserPassport;
   onion: ApiOnion;
-  vonaTestUpload: ApiVonaTestUpload;
+  testCabloyPassport: ApiTestCabloyPassport;
+  testVonaUpload: ApiTestVonaUpload;
 }
 declare module 'zova' {
   export interface IBeanRecordGeneral {
     'home-api.api.bTest1': ApiBTest1;
-    'home-api.api.cabloyTestPassport': ApiCabloyTestPassport;
     'home-api.api.home': ApiHome;
     'home-api.api.homeUserPassport': ApiHomeUserPassport;
     'home-api.api.onion': ApiOnion;
-    'home-api.api.vonaTestUpload': ApiVonaTestUpload;
+    'home-api.api.testCabloyPassport': ApiTestCabloyPassport;
+    'home-api.api.testVonaUpload': ApiTestVonaUpload;
   }
 }
-export * from '../api/vonaTestUpload.js';
+export * from '../api/testVonaUpload.js';
 /** openapi: end */
 /** service: begin */
 export * from '../service/jwtAdapter.js';

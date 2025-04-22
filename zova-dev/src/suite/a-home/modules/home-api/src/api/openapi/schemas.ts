@@ -6,4 +6,4 @@ export type ApiSchemaHomeUserDtoPassport = components['schemas']['home-user.dto.
 export type ApiSchemaAJwtDtoJwtToken = components['schemas']['a-jwt.dto.jwtToken'];
 export type ApiSchemaHomeUserDtoPassportJwt = components['schemas']['home-user.dto.passportJwt'];
 export type ApiSchemaAAuthsimpleDtoAuthSimple = components['schemas']['a-authsimple.dto.authSimple'];
-export type ApiSchemaVonaTestDtoUser = components['schemas']['vona-test.dto.user'];
+export type ApiSchemaTestVonaDtoUser = components['schemas']['test-vona.dto.user'];

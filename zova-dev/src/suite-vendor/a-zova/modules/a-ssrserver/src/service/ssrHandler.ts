@@ -6,7 +6,7 @@ import fse from 'fs-extra';
 import { BeanBase, cast, Use } from 'zova';
 import { Service } from 'zova-module-a-bean';
 import { SysRouter } from 'zova-module-a-router';
-import { TypeEventGetFullPathResult } from '../types/ssr.js';
+import { TypeEventResolvePathResult } from '../types/ssr.js';
 
 const jsRE = /\.js$/;
 const cssRE = /\.css$/;
@@ -39,7 +39,7 @@ export class ServiceSsrHandler extends BeanBase {
     this._handlerInstance = undefined;
   }
 
-  async getFullPath(filename: string): Promise<TypeEventGetFullPathResult> {
+  async resolvePath(filename: string): Promise<TypeEventResolvePathResult> {
     if (filename === '') filename = 'index.html';
     // assets
     const fileAsset = path.join(this._siteAssetDir, 'client', filename);

@@ -160,14 +160,14 @@ export interface paths {
     patch?: never;
     trace?: never;
   };
-  '/api/cabloy/test/passport/isAuthenticated': {
+  '/api/test/cabloy/passport/isAuthenticated': {
     parameters: {
       query?: never;
       header?: never;
       path?: never;
       cookie?: never;
     };
-    get: operations['CabloyTestPassport_isAuthenticated'];
+    get: operations['TestCabloyPassport_isAuthenticated'];
     put?: never;
     post?: never;
     delete?: never;
@@ -208,7 +208,7 @@ export interface paths {
     patch?: never;
     trace?: never;
   };
-  '/api/vona/test/onion/echo2/{userId}/{userName}': {
+  '/api/test/vona/onion/echo2/{userId}/{userName}': {
     parameters: {
       query?: never;
       header?: never;
@@ -224,7 +224,7 @@ export interface paths {
     patch?: never;
     trace?: never;
   };
-  '/api/vona/test/onion/echo3/{userId}': {
+  '/api/test/vona/onion/echo3/{userId}': {
     parameters: {
       query?: never;
       header?: never;
@@ -240,7 +240,7 @@ export interface paths {
     patch?: never;
     trace?: never;
   };
-  '/api/vona/test/onion/echo4': {
+  '/api/test/vona/onion/echo4': {
     parameters: {
       query?: never;
       header?: never;
@@ -256,7 +256,7 @@ export interface paths {
     patch?: never;
     trace?: never;
   };
-  '/api/vona/test/onion/echo5': {
+  '/api/test/vona/onion/echo5': {
     parameters: {
       query?: never;
       header?: never;
@@ -272,7 +272,7 @@ export interface paths {
     patch?: never;
     trace?: never;
   };
-  '/api/vona/test/onion/echo6': {
+  '/api/test/vona/onion/echo6': {
     parameters: {
       query?: never;
       header?: never;
@@ -288,7 +288,7 @@ export interface paths {
     patch?: never;
     trace?: never;
   };
-  '/api/vona/test/upload/fields': {
+  '/api/test/vona/upload/fields': {
     parameters: {
       query?: never;
       header?: never;
@@ -297,14 +297,14 @@ export interface paths {
     };
     get?: never;
     put?: never;
-    post: operations['VonaTestUpload_fields'];
+    post: operations['TestVonaUpload_fields'];
     delete?: never;
     options?: never;
     head?: never;
     patch?: never;
     trace?: never;
   };
-  '/api/vona/test/upload/file': {
+  '/api/test/vona/upload/file': {
     parameters: {
       query?: never;
       header?: never;
@@ -313,14 +313,14 @@ export interface paths {
     };
     get?: never;
     put?: never;
-    post: operations['VonaTestUpload_file'];
+    post: operations['TestVonaUpload_file'];
     delete?: never;
     options?: never;
     head?: never;
     patch?: never;
     trace?: never;
   };
-  '/api/vona/test/upload/files': {
+  '/api/test/vona/upload/files': {
     parameters: {
       query?: never;
       header?: never;
@@ -329,7 +329,7 @@ export interface paths {
     };
     get?: never;
     put?: never;
-    post: operations['VonaTestUpload_files'];
+    post: operations['TestVonaUpload_files'];
     delete?: never;
     options?: never;
     head?: never;
@@ -371,7 +371,7 @@ export interface components {
       password: string;
     };
     /** @description User */
-    'vona-test.dto.user': {
+    'test-vona.dto.user': {
       /** @description User Id */
       id: string | number;
       name: string;
@@ -658,7 +658,7 @@ export interface operations {
       };
     };
   };
-  CabloyTestPassport_isAuthenticated: {
+  TestCabloyPassport_isAuthenticated: {
     parameters: {
       query?: never;
       header?: {
@@ -770,7 +770,7 @@ export interface operations {
           'application/json': {
             code: string;
             message: string;
-            data: components['schemas']['vona-test.dto.user'];
+            data: components['schemas']['test-vona.dto.user'];
           };
         };
       };
@@ -814,7 +814,7 @@ export interface operations {
     };
     requestBody?: {
       content: {
-        'application/json': components['schemas']['vona-test.dto.user'][];
+        'application/json': components['schemas']['test-vona.dto.user'][];
       };
     };
     responses: {
@@ -826,7 +826,7 @@ export interface operations {
           'application/json': {
             code: string;
             message: string;
-            data: components['schemas']['vona-test.dto.user'][];
+            data: components['schemas']['test-vona.dto.user'][];
           };
         };
       };
@@ -882,7 +882,7 @@ export interface operations {
       };
     };
   };
-  VonaTestUpload_fields: {
+  TestVonaUpload_fields: {
     parameters: {
       query?: never;
       header?: never;
@@ -916,7 +916,7 @@ export interface operations {
       };
     };
   };
-  VonaTestUpload_file: {
+  TestVonaUpload_file: {
     parameters: {
       query?: never;
       header?: never;
@@ -948,7 +948,7 @@ export interface operations {
       };
     };
   };
-  VonaTestUpload_files: {
+  TestVonaUpload_files: {
     parameters: {
       query?: never;
       header?: never;

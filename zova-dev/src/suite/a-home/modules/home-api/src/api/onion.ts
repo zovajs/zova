@@ -20,8 +20,8 @@ export interface ApiApiOnionechoRequestBody {
 export type ApiApiOnionechoResponseBody = paths[ApiApiOnionechoPath][ApiApiOnionechoMethod]['responses']['200']['content']['application/json']['data'];
 
 /** Onion_echo2 */
-export const ApiApiOnionecho2Path = '/api/vona/test/onion/echo2/{userId}/{userName}';
-export type ApiApiOnionecho2Path = '/api/vona/test/onion/echo2/{userId}/{userName}';
+export const ApiApiOnionecho2Path = '/api/test/vona/onion/echo2/{userId}/{userName}';
+export type ApiApiOnionecho2Path = '/api/test/vona/onion/echo2/{userId}/{userName}';
 export type ApiApiOnionecho2Method = 'post';
 export type ApiApiOnionecho2RequestParams = paths[ApiApiOnionecho2Path][ApiApiOnionecho2Method]['parameters']['path'];
 export type ApiApiOnionecho2RequestQuery = paths[ApiApiOnionecho2Path][ApiApiOnionecho2Method]['parameters']['query'];
@@ -32,8 +32,8 @@ export interface ApiApiOnionecho2RequestBody {
 export type ApiApiOnionecho2ResponseBody = paths[ApiApiOnionecho2Path][ApiApiOnionecho2Method]['responses']['200']['content']['application/json']['data'];
 
 /** Onion_echo3 */
-export const ApiApiOnionecho3Path = '/api/vona/test/onion/echo3/{userId}';
-export type ApiApiOnionecho3Path = '/api/vona/test/onion/echo3/{userId}';
+export const ApiApiOnionecho3Path = '/api/test/vona/onion/echo3/{userId}';
+export type ApiApiOnionecho3Path = '/api/test/vona/onion/echo3/{userId}';
 export type ApiApiOnionecho3Method = 'get';
 export type ApiApiOnionecho3RequestParams = paths[ApiApiOnionecho3Path][ApiApiOnionecho3Method]['parameters']['path'];
 export type ApiApiOnionecho3RequestQuery = paths[ApiApiOnionecho3Path][ApiApiOnionecho3Method]['parameters']['query'];
@@ -41,23 +41,23 @@ export type ApiApiOnionecho3RequestHeaders = paths[ApiApiOnionecho3Path][ApiApiO
 export type ApiApiOnionecho3ResponseBody = paths[ApiApiOnionecho3Path][ApiApiOnionecho3Method]['responses']['200']['content']['application/json']['data'];
 
 /** Onion_echo4 */
-export const ApiApiOnionecho4Path = '/api/vona/test/onion/echo4';
-export type ApiApiOnionecho4Path = '/api/vona/test/onion/echo4';
+export const ApiApiOnionecho4Path = '/api/test/vona/onion/echo4';
+export type ApiApiOnionecho4Path = '/api/test/vona/onion/echo4';
 export type ApiApiOnionecho4Method = 'post';
-export type ApiApiOnionecho4RequestBody = components['schemas']['vona-test.dto.user'][]
+export type ApiApiOnionecho4RequestBody = components['schemas']['test-vona.dto.user'][]
 ;
 export type ApiApiOnionecho4ResponseBody = paths[ApiApiOnionecho4Path][ApiApiOnionecho4Method]['responses']['200']['content']['application/json']['data'];
 
 /** Onion_echo5 */
-export const ApiApiOnionecho5Path = '/api/vona/test/onion/echo5';
-export type ApiApiOnionecho5Path = '/api/vona/test/onion/echo5';
+export const ApiApiOnionecho5Path = '/api/test/vona/onion/echo5';
+export type ApiApiOnionecho5Path = '/api/test/vona/onion/echo5';
 export type ApiApiOnionecho5Method = 'get';
 export type ApiApiOnionecho5RequestQuery = paths[ApiApiOnionecho5Path][ApiApiOnionecho5Method]['parameters']['query'];
 export type ApiApiOnionecho5ResponseBody = paths[ApiApiOnionecho5Path][ApiApiOnionecho5Method]['responses']['200']['content']['application/json']['data'];
 
 /** Onion_echo6 */
-export const ApiApiOnionecho6Path = '/api/vona/test/onion/echo6';
-export type ApiApiOnionecho6Path = '/api/vona/test/onion/echo6';
+export const ApiApiOnionecho6Path = '/api/test/vona/onion/echo6';
+export type ApiApiOnionecho6Path = '/api/test/vona/onion/echo6';
 export type ApiApiOnionecho6Method = 'get';
 export type ApiApiOnionecho6RequestHeaders = paths[ApiApiOnionecho6Path][ApiApiOnionecho6Method]['parameters']['header'];
 export type ApiApiOnionecho6ResponseBody = paths[ApiApiOnionecho6Path][ApiApiOnionecho6Method]['responses']['200']['content']['application/json']['data'];

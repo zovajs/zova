@@ -1,1 +1,1 @@
-export type TypeEventGetFullPathResult = string | true | undefined;
+export type TypeEventResolvePathResult = string | true | undefined;
