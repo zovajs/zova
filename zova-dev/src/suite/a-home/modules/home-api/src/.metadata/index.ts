@@ -7,6 +7,7 @@ import { Scope } from 'zova-module-a-bean';
 /** api: begin */
 import { ApiBTest1 } from '../api/bTest1.js';
 import { ApiHome } from '../api/home.js';
+import { ApiHomeBaseMenu } from '../api/homeBaseMenu.js';
 import { ApiHomeUserPassport } from '../api/homeUserPassport.js';
 import { ApiOnion } from '../api/onion.js';
 /** api: end */
@@ -28,6 +29,7 @@ import 'zova';
 
 export * from '../api/bTest1.js';
 export * from '../api/home.js';
+export * from '../api/homeBaseMenu.js';
 export * from '../api/homeUserPassport.js';
 export * from '../api/onion.js';
 /** api: end */
@@ -45,6 +47,11 @@ declare module 'zova-module-home-api' {
   }
 
   export interface ApiHome {
+    /** @internal */
+    get scope(): ScopeModuleHomeApi;
+  }
+
+  export interface ApiHomeBaseMenu {
     /** @internal */
     get scope(): ScopeModuleHomeApi;
   }
@@ -72,6 +79,7 @@ declare module 'zova-module-home-api' {
 export interface IModuleApi {
   bTest1: ApiBTest1;
   home: ApiHome;
+  homeBaseMenu: ApiHomeBaseMenu;
   homeUserPassport: ApiHomeUserPassport;
   onion: ApiOnion;
   testCabloyPassport: ApiTestCabloyPassport;
@@ -81,6 +89,7 @@ declare module 'zova' {
   export interface IBeanRecordGeneral {
     'home-api.api.bTest1': ApiBTest1;
     'home-api.api.home': ApiHome;
+    'home-api.api.homeBaseMenu': ApiHomeBaseMenu;
     'home-api.api.homeUserPassport': ApiHomeUserPassport;
     'home-api.api.onion': ApiOnion;
     'home-api.api.testCabloyPassport': ApiTestCabloyPassport;

@@ -387,6 +387,7 @@ export interface components {
       password: string;
     };
     'a-menu.dto.menuItem': {
+      id: string;
       title?: string;
       caption?: string;
       icon?: string;
@@ -396,7 +397,7 @@ export interface components {
       group?: string | string[];
     };
     'a-menu.dto.menuGroup': {
-      name: string;
+      id: string;
       title?: string;
       caption?: string;
       icon?: string;

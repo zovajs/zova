@@ -1,11 +1,10 @@
-import type { ApiMenuEntity } from '../api/menu.js';
 import { BeanModelBase, Model } from 'zova-module-a-model';
 
 @Model()
 export class ModelMenu extends BeanModelBase {
-  select() {
+  retrieveMenus() {
     return this.$useStateData({
-      queryKey: ['select'],
+      queryKey: ['retrieveMenus'],
       queryFn: async () => {
         const data = await this.scope.api.menu.select();
         return data.filter(item => {
