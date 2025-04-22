@@ -392,10 +392,11 @@ export interface components {
       caption?: string;
       icon?: string;
       order?: number;
+      group?: string | string[];
+      separator?: boolean;
       link?: string;
       external?: boolean;
       target?: string;
-      group?: string | string[];
     };
     'a-menu.dto.menuGroup': {
       id: string;
@@ -403,6 +404,7 @@ export interface components {
       caption?: string;
       icon?: string;
       order?: number;
+      group?: string | string[];
       collapsed?: boolean;
     };
     'a-menu.dto.menus': {
