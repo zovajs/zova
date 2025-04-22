@@ -2,14 +2,7 @@ import type { BeanScopeUtil } from 'zova';
 /** locale: end */
 /** scope: begin */
 import { BeanScopeBase, TypeLocaleBase, TypeModuleConfig, TypeModuleLocales } from 'zova';
-/** api: end */
-/** api: begin */
-
 import { Scope } from 'zova-module-a-bean';
-
-/** api: end */
-/** api: begin */
-import { ApiMenu } from '../api/menu.js';
 /** controller: end */
 /** controller: begin */
 import { ControllerEssentialLink } from '../component/essentialLink/controller.jsx';
@@ -20,9 +13,9 @@ import { RenderContent } from '../component/layoutDefault/render.content.jsx';
 import { RenderHeader } from '../component/layoutDefault/render.header.jsx';
 import { RenderLayoutDefault } from '../component/layoutDefault/render.jsx';
 import { RenderLocale } from '../component/layoutDefault/render.locale.jsx';
+
 import { RenderMenu } from '../component/layoutDefault/render.menu.jsx';
 import { RenderSidebar } from '../component/layoutDefault/render.sidebar.jsx';
-
 import { RenderTabs } from '../component/layoutDefault/render.tabs.jsx';
 import { RenderTheme } from '../component/layoutDefault/render.theme.jsx';
 import { RenderUser } from '../component/layoutDefault/render.user.jsx';
@@ -38,50 +31,24 @@ import locale_zh_cn from '../config/locale/zh-cn.js';
 /** model: end */
 /** model: begin */
 import { ModelMenu } from '../model/menu.js';
+
 import { ZEssentialLink } from './component/essentialLink.js';
 import { ZLayoutDefault } from './component/layoutDefault.js';
-
 import { ZLayoutEmpty } from './component/layoutEmpty.js';
-/** api: begin */
-import 'zova';
-import 'zova';
 
-import 'zova';
-import 'zova';
-import 'zova';
-import 'zova';
-import 'zova';
-import 'zova';
-import 'zova';
-import 'zova';
-import 'zova';
-
-import 'zova';
-
-export * from '../api/menu.js';
-declare module 'zova' {
-
-}
-declare module 'zova-module-home-layout' {
-
-  export interface ApiMenu {
-    /** @internal */
-    get scope(): ScopeModuleHomeLayout;
-  }
-}
-export interface IModuleApi {
-  menu: ApiMenu;
-}
-declare module 'zova' {
-  export interface IBeanRecordGeneral {
-    'home-layout.api.menu': ApiMenu;
-  }
-}
-/** api: end */
-/** openapi: begin */
-
-/** openapi: end */
 /** controller: begin */
+import 'zova';
+import 'zova';
+import 'zova';
+import 'zova';
+import 'zova';
+import 'zova';
+import 'zova';
+import 'zova';
+import 'zova';
+
+import 'zova';
+
 export * from '../component/essentialLink/controller.jsx';
 export * from '../component/layoutDefault/controller.jsx';
 /** components: end */
@@ -255,7 +222,6 @@ export interface ScopeModuleHomeLayout {
   util: BeanScopeUtil;
   config: TypeModuleConfig<typeof config>;
   locale: TypeModuleLocales<(typeof locales)[TypeLocaleBase]>;
-  api: IModuleApi;
 }
 
 declare module 'zova' {

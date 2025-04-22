@@ -391,6 +391,7 @@ export interface components {
       title?: string;
       caption?: string;
       icon?: string;
+      order?: number;
       link?: string;
       external?: boolean;
       target?: string;
@@ -401,6 +402,7 @@ export interface components {
       title?: string;
       caption?: string;
       icon?: string;
+      order?: number;
       collapsed?: boolean;
     };
     'a-menu.dto.menus': {
