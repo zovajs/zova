@@ -33,7 +33,7 @@ export class ControllerLayoutDefault extends BeanControllerBase {
       await this.$$modelPassport.ensurePassport();
     }
     // menu
-    const queryMenus = this.$$modelMenu.select();
+    const queryMenus = this.$$modelMenu.retrieveMenus();
     await queryMenus.suspense();
   }
 
@@ -44,18 +44,18 @@ export class ControllerLayoutDefault extends BeanControllerBase {
       max: configTabs.max,
       persister: configTabs.persister,
       getAffixTabs: () => {
-        if (!this.$$modelMenu.select().data) return;
+        if (!this.$$modelMenu.retrieveMenus().data) return;
         return [{ key: '/', affix: true }];
       },
       getTabInfo: async tab => {
-        const queryMenu = this.$$modelMenu.select();
+        const queryMenu = this.$$modelMenu.retrieveMenus();
         if (!queryMenu.data && !queryMenu.isError) {
           await queryMenu.suspense();
         }
         if (queryMenu.isError) {
           throw queryMenu.error;
         }
-        const menuItem = this.$$modelMenu.findMenuItem(tab.key);
+        const menuItem = this.$$modelMenu.findMenuItem({ link: tab.key });
         if (!menuItem) return undefined;
         return { title: menuItem.title, icon: menuItem.icon };
       },

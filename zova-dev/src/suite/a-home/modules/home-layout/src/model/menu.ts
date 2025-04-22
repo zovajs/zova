@@ -1,8 +1,22 @@
+import { useComputed } from 'zova-core';
 import { BeanModelBase, Model } from 'zova-module-a-model';
 import { ApiSchemaAMenuDtoMenuItem } from 'zova-module-home-api';
 
 @Model()
 export class ModelMenu extends BeanModelBase {
+  menuTree: any;
+
+  protected async __init__() {
+    this.menuTree = useComputed(() => {
+      const queryMenus = this.retrieveMenus();
+      if (!queryMenus.data) return;
+      const items = queryMenus.data.items?.filter(item => {
+        return { ...item, title: `${item.title}!!` };
+      });
+      return { ...queryMenus.data, items };
+    });
+  }
+
   retrieveMenus() {
     return this.$useStateData({
       queryKey: ['retrieveMenus'],

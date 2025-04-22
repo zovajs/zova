@@ -11,7 +11,7 @@ export class RenderTabs extends BeanRenderBase {
     const domTabs: VNode[] = [];
     for (const tab of this.$$modelTabs.tabs) {
       const className = tab.key === this.$$modelTabs.tabCurrentKey ? 'tab tab-active text-primary' : 'tab';
-      const menuItem = this.$$modelMenu.findMenuItem(tab.key);
+      const menuItem = this.$$modelMenu.findMenuItem({ link: tab.key });
       if (!menuItem) continue;
       const titleLocal = this.$text(menuItem?.title || '');
       const domTab = (
