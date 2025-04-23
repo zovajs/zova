@@ -143,7 +143,7 @@ export interface paths {
     patch?: never;
     trace?: never;
   };
-  '/api/home/base/menu/{publicPath}': {
+  '/api/home/base/menu/{publicPath?}': {
     parameters: {
       query?: never;
       header?: never;

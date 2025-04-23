@@ -55,11 +55,11 @@ importers:
         specifier: ^3.0.12
         version: 3.0.12
       '@cabloy/module-info':
-        specifier: ^1.3.1
-        version: 1.3.1
+        specifier: ^1.3.5
+        version: 1.3.5
       '@cabloy/utils':
-        specifier: ^1.0.6
-        version: 1.0.6
+        specifier: ^1.0.9
+        version: 1.0.9
       '@cabloy/word-utils':
         specifier: ^2.0.0
         version: 2.0.0
@@ -76,7 +76,7 @@ importers:
         specifier: ^1.0.55
         version: 1.0.55(vue@3.5.13(typescript@5.7.3))
       openapi-typescript:
-        specifier: ^7.4.4
+        specifier: ^7.6.1
         version: 7.6.1(typescript@5.7.3)
       rimraf:
         specifier: ^5.0.5
@@ -311,11 +311,17 @@ packages:
   '@cabloy/module-info@1.3.1':
     resolution: {integrity: sha512-Vlya4yiiP/UCvj+IY7KtsTpq5ompBT7lq1bP8jKS8HTWmc+YdRRLY96vEmuu1KbO50zHtMtl+1bnLyqNreRSNw==}
 
+  '@cabloy/module-info@1.3.5':
+    resolution: {integrity: sha512-xphkPzxq/QygiYKJq2oay2Vz3Ltaj/wDhSFCcAtWdfxN+t1v+jssaC5JORyXvdF9Bx2hiPi0vmaJYIaNoT9Jiw==}
+
   '@cabloy/process-helper@2.0.4':
     resolution: {integrity: sha512-8WXKwdR9PuxQls7YrJ+yECklQD+9RRGTETRPb+V3VTZCePV6tFYS1lOOhzVkAoUoEZkGm1f36cG1CISY7dvYmA==}
 
   '@cabloy/utils@1.0.6':
     resolution: {integrity: sha512-u0ipVzZg0hoD5iMm8SCkQhAE3XskWjEsOO901GtdWaV0yRKWeXxfvyvLLTiK4Nwtk/k1r9IkBPUnFTrVLzADqg==}
+
+  '@cabloy/utils@1.0.9':
+    resolution: {integrity: sha512-wvqAzQh2hdwlD38A8adv4vlAmSFJ/G6yPbJCWrZuLMpBgeajrzcffCaGvfEOABWddygimhyVx1dE9SJ7TbQ8LQ==}
 
   '@cabloy/vite-plugin-babel@1.1.3':
     resolution: {integrity: sha512-OW9J2q9ze0hLvBQOPwjzX/CPMs3PszDc6rbJP6BgNFfdLkoebkWkkZuCB03CCOl35kOdPIRKs/tjxQDxd6WSzw==}
@@ -4814,8 +4820,8 @@ snapshots:
 
   '@cabloy/module-glob@5.2.0':
     dependencies:
-      '@cabloy/module-info': 1.3.1
-      '@cabloy/utils': 1.0.6
+      '@cabloy/module-info': 1.3.5
+      '@cabloy/utils': 1.0.9
       boxen: 4.2.0
       chalk: 3.0.0
       fs-extra: 11.3.0
@@ -4824,9 +4830,15 @@ snapshots:
 
   '@cabloy/module-info@1.3.1': {}
 
+  '@cabloy/module-info@1.3.5': {}
+
   '@cabloy/process-helper@2.0.4': {}
 
   '@cabloy/utils@1.0.6':
+    dependencies:
+      cel-js: 0.3.1
+
+  '@cabloy/utils@1.0.9':
     dependencies:
       cel-js: 0.3.1
 
@@ -5868,7 +5880,7 @@ snapshots:
 
   babel-plugin-zova-bean-module@1.1.1:
     dependencies:
-      '@cabloy/module-info': 1.3.1
+      '@cabloy/module-info': 1.3.5
       '@cabloy/word-utils': 2.0.0
 
   babel-plugin-zova-bean-use@1.0.3: {}
@@ -9446,7 +9458,7 @@ snapshots:
       '@cabloy/dotenv': 1.0.9
       '@cabloy/extend': 3.0.12
       '@cabloy/module-glob': 5.2.0
-      '@cabloy/module-info': 1.3.1
+      '@cabloy/module-info': 1.3.5
       '@cabloy/vite-plugin-babel': 1.1.3(@babel/core@7.26.9)(vite@5.4.14(@types/node@20.17.22)(terser@5.39.0))
       '@cabloy/vue-reactivity': 3.5.16
       '@cabloy/vue-router': 4.4.8(vue@3.5.13(typescript@5.7.3))
