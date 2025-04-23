@@ -6,7 +6,7 @@ import { createMemoryHistory, createRouter, createWebHashHistory, createWebHisto
 import { BeanBase, cast, deepExtend } from 'zova';
 import { Sys } from 'zova-module-a-bean';
 import { IModuleRoute, IModuleRouteComponent, IPagePathRecord } from '../types.js';
-import { getRealRouteName } from '../utils.js';
+import { getRealRouteName, isRouterName } from '../utils.js';
 
 export interface SysRouter extends Router {}
 
@@ -153,6 +153,10 @@ export class SysRouter extends BeanBase {
 
   getRealRouteName(name?: string | symbol | null): string | undefined {
     return getRealRouteName(name);
+  }
+
+  isRouterName(name?: string): boolean {
+    return isRouterName(name);
   }
 
   private _loadConfigRoutes() {

@@ -6,7 +6,7 @@ const __MenuItems = [
   { group: 'basic', title: 'Component', caption: 'props, emits, slots', icon: '', link: '/demo/basic/component' },
   { group: 'basic', title: 'Route Query', caption: 'Typesafe', icon: '', link: '/demo/basic/routeQuery' },
   { group: 'basic', title: 'Route Query(2)', caption: 'boolean, json, array', icon: '', link: '/demo/basic/routeQueryB' },
-  { group: 'basic', title: 'Route Params', caption: 'Typesafe', icon: '', link: '/demo/basic/routeParams' },
+  { group: 'basic', title: 'Route Params', caption: 'Typesafe', icon: '', link: 'demo-basic:routeParams' },
   { group: 'basic', title: 'Locale', caption: 'I18n', icon: '', link: '/demo/basic/locale' },
   { group: 'basic', title: 'CSS-in-JS', caption: 'Style & Theme', icon: '', link: '/demo/basic/style' },
   { group: 'basic', title: 'Pinia', caption: '', icon: '', link: '/demo/basic/pinia' },

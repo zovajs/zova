@@ -34,7 +34,7 @@ export class ModelMenu extends BeanModelBase {
   findMenuItem(search: { id?: string; link?: string }): ApiSchemaAMenuDtoMenuItem | undefined {
     const menus = this.retrieveMenus().data;
     if (!menus || !menus.items) return;
-    return menus.items.find(item => item.id === search.id || item.link === search.link);
+    return menus.items.find(item => (item.id && search.id && item.id === search.id) || item.link === search.link);
   }
 
   private _prepareMenuTree(menus: ApiSchemaAMenuDtoMenus, groupId?: string): TypeMenuTree {

@@ -4,3 +4,7 @@ export function getRealRouteName(name?: string | symbol | null): string | undefi
   if (name.startsWith('$:')) return undefined;
   return name;
 }
+
+export function isRouterName(name?: string): boolean {
+  return !!name && name.includes(':') && !name.includes('/');
+}
