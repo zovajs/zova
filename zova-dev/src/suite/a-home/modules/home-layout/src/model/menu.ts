@@ -22,8 +22,8 @@ export class ModelMenu extends BeanModelBase {
     return this.$useStateData({
       queryKey: ['retrieveMenus'],
       queryFn: async () => {
-        const data = await this.$api.homeBaseMenu.retrieveMenus();
-        const items = data.items?.filter(item => {
+        const data = await this.$api.homeBaseMenu.retrieveMenus({ params: { publicPath: this.sys.config.app.publicPath } });
+        const items = data.menus?.filter(item => {
           return !item.external || this.$router.checkPathValid(item.link);
         });
         return { ...data, items };
@@ -39,9 +39,9 @@ export class ModelMenu extends BeanModelBase {
 
   private _prepareMenuTree(menus: ApiSchemaAMenuDtoMenus, groupId?: string): TypeMenuTree {
     let children: TypeMenuItem[] = [];
-    if (menus.items) {
+    if (menus.menus) {
       children = children.concat(
-        menus.items?.filter(item => item.group === groupId || (Array.isArray(item.group) && item.group.includes(groupId!))).map(item => {
+        menus.menus?.filter(item => item.group === groupId || (Array.isArray(item.group) && item.group.includes(groupId!))).map(item => {
           return { ...item, folder: false };
         }),
       );

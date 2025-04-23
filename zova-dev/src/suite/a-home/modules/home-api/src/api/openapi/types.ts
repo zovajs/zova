@@ -143,7 +143,7 @@ export interface paths {
     patch?: never;
     trace?: never;
   };
-  '/api/home/base/menu': {
+  '/api/home/base/menu/{publicPath}': {
     parameters: {
       query?: never;
       header?: never;
@@ -408,7 +408,7 @@ export interface components {
       collapsed?: boolean;
     };
     'a-menu.dto.menus': {
-      items?: components['schemas']['a-menu.dto.menuItem'][];
+      menus?: components['schemas']['a-menu.dto.menuItem'][];
       groups?: components['schemas']['a-menu.dto.menuGroup'][];
     };
     /** @description User */
@@ -682,7 +682,9 @@ export interface operations {
       header?: {
         Authorization?: string;
       };
-      path?: never;
+      path: {
+        publicPath: string;
+      };
       cookie?: never;
     };
     requestBody?: never;
