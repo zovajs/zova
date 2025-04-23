@@ -1,5 +1,6 @@
 import type { IErrorObject } from '../../bean/resource/error/errorObject.js';
 import type { ErrorSSR, IErrorInstanceInfo, IModuleError } from '../../bean/resource/error/type.js';
+import { HttpStatus } from 'zova';
 import { ErrorClass } from '../../bean/resource/error/errorClass.js';
 import { SymbolErrorInstanceInfo } from '../../bean/resource/error/type.js';
 import { cast } from '../../types/utils/cast.js';
@@ -29,12 +30,18 @@ export class AppError extends ErrorClass {
           this.app.gotoPage(cast<ErrorSSR>(err).pagePath!);
           return undefined;
         }
-        // only log error in client
-        console.error(err);
+        // COMPONENT_UNMOUNTED
+        if (err.code === HttpStatus.COMPONENT_UNMOUNTED) {
+          // do nothing
+          return undefined;
+        }
+        // 401
         if (err.code === 401) {
           this.app.gotoLogin();
           return undefined;
         }
+        // only log error in client
+        console.error(err);
         // not handled
         return err;
       });
