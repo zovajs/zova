@@ -20,6 +20,10 @@ export class ControllerPageApp extends BeanControllerPageBase {
             name: 'description',
             content: this.sys.env.APP_DESCRIPTION
           },
+          viewport: {
+            name: 'viewport',
+            content: this.sys.env.APP_META_VIEWPORT
+          },
         },
         'htmlAttr': {
           'lang': this.app.meta.locale.current,

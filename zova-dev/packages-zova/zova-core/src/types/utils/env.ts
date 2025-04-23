@@ -5,6 +5,7 @@ export interface ZovaConfigEnv {
   APP_TITLE: string | undefined;
   APP_DESCRIPTION: string | undefined;
   APP_VERSION: string | undefined;
+  APP_META_VIEWPORT: string | undefined;
   APP_PUBLIC_PATH: string | undefined;
   APP_LOCALE_DEFAULT: string | undefined;
   ROUTER_MODE: 'hash' | 'history' | 'abstract' | undefined;
