@@ -25,7 +25,7 @@ export interface ModelTabsOptions {
   max?: number;
   persister?: boolean;
   getAffixTabs: () => RouteTab[] | undefined;
-  getTabInfo: (tab: RouteTab) => Promise<RouteTabInfo | undefined>;
+  getTabInfo: (tab: RouteTab) => RouteTabInfo | undefined;
 }
 
 @Model()
@@ -92,7 +92,7 @@ export class ModelTabs extends BeanModelBase {
 
   async _addTab(tab: RouteTab): Promise<boolean> {
     // must perform await before findTab
-    const tabInfo = await this.tabsOptions.getTabInfo(tab);
+    const tabInfo = this.tabsOptions.getTabInfo(tab);
     if (!tabInfo) return false;
     // max
     if (this.tabsOptions.max === 0 && !tab.affix) return false;

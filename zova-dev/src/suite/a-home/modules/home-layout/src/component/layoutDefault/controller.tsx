@@ -47,14 +47,9 @@ export class ControllerLayoutDefault extends BeanControllerBase {
         if (!this.$$modelMenu.retrieveMenus().data) return;
         return [{ key: '/', affix: true }];
       },
-      getTabInfo: async tab => {
+      getTabInfo: tab => {
         const queryMenu = this.$$modelMenu.retrieveMenus();
-        if (!queryMenu.data && !queryMenu.isError) {
-          await queryMenu.suspense();
-        }
-        if (queryMenu.isError) {
-          throw queryMenu.error;
-        }
+        if (!queryMenu.data || queryMenu.isError) return undefined;
         const menuItem = this.$$modelMenu.findMenuItem({ link: tab.key });
         if (!menuItem) return undefined;
         return { title: menuItem.title, icon: menuItem.icon };
