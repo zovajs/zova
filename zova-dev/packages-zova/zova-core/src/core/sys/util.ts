@@ -52,8 +52,8 @@ export class SysUtil extends BeanSimple {
 
   apiActionConfigPrepare(baseURL?: string, options?: any, authToken?: TypeAuthToken) {
     const optionsCustom: any = {
-      params: options?.query,
-      query: undefined,
+      params: options?.query ?? null,
+      query: null,
     };
     authToken = options?.authToken === undefined ? authToken : options?.authToken;
     if (authToken !== undefined) {
@@ -74,7 +74,7 @@ export function defaultPathSerializer(pathName: string, pathParams?: Record<stri
   if (!pathParams) return pathName;
   return pathName.replace(PATH_PARAM_RE, (_, _part) => {
     const value = pathParams?.[_part];
-    if (value === undefined || value === null) return `{${_part}}`;
+    if (value === undefined || value === null) return '';
     if (typeof value === 'object') return encodeURIComponent(JSON.stringify(value));
     return encodeURIComponent(value);
   });
