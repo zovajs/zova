@@ -1,6 +1,6 @@
 import type { ZovaConfigMeta } from '@cabloy/module-info';
 import type { TypeComponentLayoutRecord } from '../../bean/resource/component/type.js';
-import type { ILocalInfos } from '../../bean/resource/locale/type.js';
+import type { ILocaleInfos } from '../../bean/resource/locale/type.js';
 import type { ZovaConfigRoutes } from '../../bean/resource/page/type.js';
 import type { IBeanScopeConfig } from '../../bean/type.js';
 import type { ZovaConfigEnv } from '../../types/utils/env.js';
@@ -50,7 +50,7 @@ export function configDefault(env: ZovaConfigEnv): PowerPartial<ZovaConfig> {
     },
     logger,
     locale: {
-      default: env.APP_LOCALE_DEFAULT as keyof ILocalInfos | undefined,
+      default: env.APP_LOCALE_DEFAULT as keyof ILocaleInfos | undefined,
       storeKey: 'locale',
       items: {
         'en-us': 'English',
@@ -111,9 +111,9 @@ export interface ZovaConfig {
   };
   logger: ConfigLogger;
   locale: {
-    default: keyof ILocalInfos;
+    default: keyof ILocaleInfos;
     storeKey: string;
-    items: Record<keyof ILocalInfos, string>;
+    items: Record<keyof ILocaleInfos, string>;
   };
   layout: {
     component: {
