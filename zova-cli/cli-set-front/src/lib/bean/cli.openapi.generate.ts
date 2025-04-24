@@ -6,7 +6,7 @@ import { BeanCliBase } from '@cabloy/cli';
 import { extend } from '@cabloy/extend';
 import { matchSelector, toLowerCaseFirstChar, toUpperCaseFirstChar } from '@cabloy/word-utils';
 import fse from 'fs-extra';
-import openapiTS, { astToString, BOOLEAN, NUMBER, STRING } from 'openapi-typescript';
+import openapiTS, { astToString, UNDEFINED } from 'openapi-typescript';
 import { rimraf } from 'rimraf';
 import ts from 'typescript';
 
@@ -433,20 +433,7 @@ function _patchOpenapiTSOptions(options?: OpenAPITSOptions) {
           };
         }
       }
-      // path param
-      const paramMatched = options.path?.match(/parameters\/path\/([^/]+)$/);
-      if (paramMatched) {
-        const paramName = paramMatched[1];
-        if (options.path?.includes(`{${paramName}?}`)) {
-          const tsNode = _createPrimitiveTsType(schemaObject);
-          if (tsNode) {
-            return {
-              schema: tsNode,
-              questionToken: true,
-            };
-          }
-        }
-      }
+
       // default
       return undefined;
     },
@@ -455,22 +442,14 @@ function _patchOpenapiTSOptions(options?: OpenAPITSOptions) {
         const res = postTransformCustom(type, options);
         if (res !== undefined) return res;
       }
+      // path param
+      const paramMatched = options.path?.match(/parameters\/path\/([^/]+)$/);
+      if (paramMatched) {
+        const paramName = paramMatched[1];
+        if (options.path?.includes(`{${paramName}?}`)) {
+          return ts.factory.createUnionTypeNode([type, UNDEFINED]);
+        }
+      }
     },
   });
-}
-
-function _createPrimitiveTsType(schemaObject: SchemaObject) {
-  if (schemaObject.type === 'null') {
-    return NULL;
-  }
-  if (schemaObject.type === 'string') {
-    return STRING;
-  }
-  if (schemaObject.type === 'number' || schemaObject.type === 'integer') {
-    return NUMBER;
-  }
-  if (schemaObject.type === 'boolean') {
-    return BOOLEAN;
-  }
-  return undefined;
 }
