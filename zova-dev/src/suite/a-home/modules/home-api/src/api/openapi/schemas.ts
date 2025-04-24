@@ -9,4 +9,7 @@ export type ApiSchemaAAuthsimpleDtoAuthSimple = components['schemas']['a-authsim
 export type ApiSchemaAMenuDtoMenuItem = components['schemas']['a-menu.dto.menuItem'];
 export type ApiSchemaAMenuDtoMenuGroup = components['schemas']['a-menu.dto.menuGroup'];
 export type ApiSchemaAMenuDtoMenus = components['schemas']['a-menu.dto.menus'];
+export type ApiSchemaTestSsrDtoTestDetail = components['schemas']['test-ssr.dto.testDetail'];
+export type ApiSchemaTestSsrDtoTestResult = components['schemas']['test-ssr.dto.testResult'];
+export type ApiSchemaTestSsrDtoTestBody = components['schemas']['test-ssr.dto.testBody'];
 export type ApiSchemaTestVonaDtoUser = components['schemas']['test-vona.dto.user'];

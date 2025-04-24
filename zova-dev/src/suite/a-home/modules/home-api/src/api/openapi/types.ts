@@ -192,6 +192,22 @@ export interface paths {
     patch?: never;
     trace?: never;
   };
+  '/api/test/ssr/toolOne/test/{id?}': {
+    parameters: {
+      query?: never;
+      header?: never;
+      path?: never;
+      cookie?: never;
+    };
+    get?: never;
+    put?: never;
+    post: operations['TestSsrToolOne_test'];
+    delete?: never;
+    options?: never;
+    head?: never;
+    patch?: never;
+    trace?: never;
+  };
   '/api/': {
     parameters: {
       query?: never;
@@ -410,6 +426,24 @@ export interface components {
     'a-menu.dto.menus': {
       menus?: components['schemas']['a-menu.dto.menuItem'][];
       groups?: components['schemas']['a-menu.dto.menuGroup'][];
+    };
+    'test-ssr.dto.testDetail': {
+      name: string;
+      price: number;
+      quantity: number;
+      amount: number;
+    };
+    'test-ssr.dto.testResult': {
+      id: string | number;
+      name: string;
+      married: boolean;
+      details: components['schemas']['test-ssr.dto.testDetail'][];
+    };
+    'test-ssr.dto.testBody': {
+      id: string | number;
+      name: string;
+      married: boolean;
+      details: components['schemas']['test-ssr.dto.testDetail'][];
     };
     /** @description User */
     'test-vona.dto.user': {
@@ -746,6 +780,39 @@ export interface operations {
             code: string;
             message: string;
             data: boolean;
+          };
+        };
+      };
+    };
+  };
+  TestSsrToolOne_test: {
+    parameters: {
+      query: {
+        name: string;
+      };
+      header?: {
+        Authorization?: string;
+      };
+      path: {
+        id: ((string | undefined) | (number | undefined)) | undefined;
+      };
+      cookie?: never;
+    };
+    requestBody: {
+      content: {
+        'application/json': components['schemas']['test-ssr.dto.testBody'];
+      };
+    };
+    responses: {
+      200: {
+        headers: {
+          [name: string]: unknown;
+        };
+        content: {
+          'application/json': {
+            code: string;
+            message: string;
+            data: components['schemas']['test-ssr.dto.testResult'];
           };
         };
       };

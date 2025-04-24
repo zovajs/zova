@@ -1,11 +1,13 @@
-import { BeanControllerPageBase } from 'zova';
+import { BeanControllerPageBase, Use } from 'zova';
 import { Controller } from 'zova-module-a-bean';
+import { ModelTest } from '../../model/test.js';
 
 @Controller()
 export class ControllerPageToolOne extends BeanControllerPageBase {
-  protected async __init__() {}
+  @Use()
+  $$modelTest: ModelTest;
 
-  protected render() {
-    return <div>tool one</div>;
+  protected async __init__() {
+
   }
 }
