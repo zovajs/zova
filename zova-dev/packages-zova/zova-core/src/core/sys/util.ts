@@ -51,14 +51,21 @@ export class SysUtil extends BeanSimple {
   }
 
   apiActionConfigPrepare(baseURL?: string, options?: any, authToken?: TypeAuthToken) {
+    // custom
     const optionsCustom: any = {
       params: options?.query,
       query: undefined,
     };
+    // authToken
     authToken = options?.authToken === undefined ? authToken : options?.authToken;
     if (authToken !== undefined) {
       optionsCustom.interceptors = { 'a-interceptor:jwt': { authToken } };
     }
+    // openapiSchema
+    if (options?.openapiSchema) {
+      optionsCustom.interceptors = { 'a-interceptor:basic': { openapiSchema: options?.openapiSchema } };
+    }
+    // extend
     return deepExtend(
       {
         baseURL: baseURL || this.getApiBaseURL(false),

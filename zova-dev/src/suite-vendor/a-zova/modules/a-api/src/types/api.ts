@@ -5,6 +5,7 @@ import type { IInterceptorRecord } from 'zova-module-a-fetch';
 export interface IApiActionOptions extends AxiosRequestConfig {
   interceptors?: PowerPartial<IInterceptorRecord>;
   authToken?: boolean | string;
+  openapiSchema?: boolean;
 }
 
 declare module 'zova' {

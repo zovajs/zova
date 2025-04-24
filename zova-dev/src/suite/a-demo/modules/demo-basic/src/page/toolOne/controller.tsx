@@ -8,6 +8,9 @@ export class ControllerPageToolOne extends BeanControllerPageBase {
   $$modelTest: ModelTest;
 
   protected async __init__() {
-
+    const data = await this.$api.testSsrToolOne.test(undefined as any, {
+      openapiSchema: true,
+    } as any);
+    console.log('openapi schema: ', data);
   }
 }
