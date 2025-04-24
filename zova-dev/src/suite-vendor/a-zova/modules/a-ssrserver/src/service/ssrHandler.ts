@@ -3,7 +3,7 @@ import path, { basename } from 'node:path';
 import { pathToFileURL } from 'node:url';
 import { catchError } from '@cabloy/utils';
 import fse from 'fs-extra';
-import { BeanBase, cast, Use } from 'zova';
+import { BeanBase, cast, TypeSsrSitePerformAction, Use } from 'zova';
 import { Service } from 'zova-module-a-bean';
 import { SysRouter } from 'zova-module-a-router';
 import { TypeEventResolvePathResult } from '../types/ssr.js';
@@ -48,7 +48,7 @@ export class ServiceSsrHandler extends BeanBase {
     return undefined;
   }
 
-  public async render(req: http.IncomingMessage, res: http.ServerResponse<http.IncomingMessage>) {
+  public async render(req: http.IncomingMessage, res: http.ServerResponse<http.IncomingMessage>, performAction: TypeSsrSitePerformAction) {
     // resolve route
     const pagePath = this.sys.util.getPagePathFromAbsoluteUrl(req.url!);
     const route = await this.$$sysRouter.resolveRoute(pagePath, true, false);
@@ -60,6 +60,7 @@ export class ServiceSsrHandler extends BeanBase {
     const ssrContext = {
       req,
       res,
+      performAction,
       _meta: {} as any,
       onRendered: fn => { onRenderedList.push(fn); },
     };

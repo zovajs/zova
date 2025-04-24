@@ -7,6 +7,7 @@ export interface SSRContext {
   stateDefer: SSRContextStateDefer;
   req: Request;
   res: Response;
+  performAction?: TypeSsrSitePerformAction;
   /** The global "nonce" attribute to use */
   nonce?: string;
   /**
@@ -78,4 +79,14 @@ export interface SSREnv {
   ssr: boolean;
   server: boolean;
   client: boolean;
+}
+
+export type TypeSsrSitePerformAction = (data: ISsrSitePerformActionOptions) => Promise<any>;
+export type TypeSsrSitePerformActionMethod = 'get' | 'post' | 'delete' | 'put' | 'patch';
+export interface ISsrSitePerformActionOptions {
+  method: TypeSsrSitePerformActionMethod;
+  path: string;
+  query?: object;
+  body?: any;
+  headers?: object;
 }
