@@ -6,6 +6,7 @@ import type {
   SSRContext,
   SSRContextState,
   SSRContextStateDefer,
+  TypeSsrSitePerformAction,
 } from '../../types/interface/ssr.js';
 import { includeBooleanAttr, isBooleanAttr, isString, stringifyStyle } from '@vue/shared';
 import { defu } from 'defu';
@@ -112,6 +113,11 @@ export class CtxSSR extends BeanSimple {
       }
     }
     return this[SymbolSSRStateDefer];
+  }
+
+  getPerformAction(baseURL?: string): TypeSsrSitePerformAction | undefined {
+    if (process.env.SERVER && baseURL === this.sys.env.SSR_API_BASE_URL) return this.context.performAction;
+    return undefined;
   }
 
   private _initContext() {

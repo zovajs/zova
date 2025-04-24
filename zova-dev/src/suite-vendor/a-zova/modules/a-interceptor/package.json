@@ -38,7 +38,8 @@
         "jwt": {
           "dependencies": "a-interceptor:body"
         },
-        "mock": {}
+        "mock": {},
+        "performAction": {}
       }
     }
   }
