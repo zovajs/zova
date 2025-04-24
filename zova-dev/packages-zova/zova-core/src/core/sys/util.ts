@@ -52,8 +52,8 @@ export class SysUtil extends BeanSimple {
 
   apiActionConfigPrepare(baseURL?: string, options?: any, authToken?: TypeAuthToken) {
     const optionsCustom: any = {
-      params: options?.query ?? null,
-      query: null,
+      params: options?.query,
+      query: undefined,
     };
     authToken = options?.authToken === undefined ? authToken : options?.authToken;
     if (authToken !== undefined) {
