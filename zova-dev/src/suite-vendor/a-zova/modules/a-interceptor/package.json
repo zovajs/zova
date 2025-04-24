@@ -33,13 +33,16 @@
     "onionsConfig": {
       "interceptor": {
         "body": {
-          "dependencies": "a-interceptor:mock"
+          "dependencies": "a-interceptor:performAction"
         },
         "jwt": {
           "dependencies": "a-interceptor:body"
         },
+        "locale": {},
         "mock": {},
-        "performAction": {}
+        "performAction": {
+          "dependencies": "a-interceptor:mock"
+        }
       }
     }
   }

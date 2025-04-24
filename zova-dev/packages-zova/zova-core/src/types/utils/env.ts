@@ -8,6 +8,7 @@ export interface ZovaConfigEnv {
   APP_META_VIEWPORT: string | undefined;
   APP_PUBLIC_PATH: string | undefined;
   APP_LOCALE_DEFAULT: string | undefined;
+  APP_LOCALE_HEADER_KEY: string | undefined;
   ROUTER_MODE: 'hash' | 'history' | 'abstract' | undefined;
   ROUTER_PAGE_HOME: string | undefined;
   ROUTER_PAGE_LOGIN: string | undefined;

@@ -22,7 +22,6 @@ export class ModelMenu extends BeanModelBase {
     return this.$useStateData({
       queryKey: ['retrieveMenus'],
       queryFn: async () => {
-        console.log('-----publicPath', this.sys.config.app.publicPath);
         const data = await this.$api.homeBaseMenu.retrieveMenus({ params: { publicPath: this.sys.config.app.publicPath } });
         const items = data.menus?.filter(item => {
           return !item.external || this.$router.checkPathValid(item.link);
