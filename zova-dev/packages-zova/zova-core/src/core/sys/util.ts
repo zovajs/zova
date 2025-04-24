@@ -72,7 +72,8 @@ export class SysUtil extends BeanSimple {
 const PATH_PARAM_RE = /\{([^{}/]+)\}/g;
 export function defaultPathSerializer(pathName: string, pathParams?: Record<string, any>): string {
   if (!pathParams) return pathName;
-  return pathName.replace(PATH_PARAM_RE, (_, _part) => {
+  return pathName.replace(PATH_PARAM_RE, (_, _part: string) => {
+    if (_part.includes('?'))_part = _part.substring(0, _part.length - 1);
     const value = pathParams?.[_part];
     if (value === undefined || value === null) return '';
     if (typeof value === 'object') return encodeURIComponent(JSON.stringify(value));
