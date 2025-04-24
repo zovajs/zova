@@ -3,8 +3,8 @@ import { Api, BeanApiBase, IApiActionOptions } from 'zova-module-a-api';
 import { OpenApiBaseURL } from './openapi/index.js';
 
 /** HomeBaseMenu_retrieveMenus */
-export const ApiApiHomeBaseMenuretrieveMenusPath = '/api/home/base/menu/{publicPath}';
-export type ApiApiHomeBaseMenuretrieveMenusPath = '/api/home/base/menu/{publicPath}';
+export const ApiApiHomeBaseMenuretrieveMenusPath = '/api/home/base/menu/{publicPath?}';
+export type ApiApiHomeBaseMenuretrieveMenusPath = '/api/home/base/menu/{publicPath?}';
 export type ApiApiHomeBaseMenuretrieveMenusMethod = 'get';
 export type ApiApiHomeBaseMenuretrieveMenusRequestParams = paths[ApiApiHomeBaseMenuretrieveMenusPath][ApiApiHomeBaseMenuretrieveMenusMethod]['parameters']['path'];
 export type ApiApiHomeBaseMenuretrieveMenusRequestHeaders = paths[ApiApiHomeBaseMenuretrieveMenusPath][ApiApiHomeBaseMenuretrieveMenusMethod]['parameters']['header'];

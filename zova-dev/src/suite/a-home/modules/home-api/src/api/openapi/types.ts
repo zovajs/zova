@@ -143,7 +143,7 @@ export interface paths {
     patch?: never;
     trace?: never;
   };
-  '/api/home/base/menu/{publicPath}': {
+  '/api/home/base/menu/{publicPath?}': {
     parameters: {
       query?: never;
       header?: never;
@@ -511,7 +511,7 @@ export interface operations {
       };
       header?: never;
       path: {
-        clientName: string;
+        clientName: string | undefined;
         providerName: string;
         module: string;
       };
@@ -542,7 +542,7 @@ export interface operations {
         Authorization?: string;
       };
       path: {
-        clientName: string;
+        clientName: string | undefined;
         providerName: string;
         module: string;
       };
@@ -573,7 +573,7 @@ export interface operations {
         Authorization?: string;
       };
       path: {
-        clientName: string;
+        clientName: string | undefined;
         providerName: string;
         module: string;
       };
@@ -683,7 +683,7 @@ export interface operations {
         Authorization?: string;
       };
       path: {
-        publicPath: string;
+        publicPath: string | undefined;
       };
       cookie?: never;
     };
