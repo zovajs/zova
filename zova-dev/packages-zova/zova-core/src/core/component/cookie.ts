@@ -34,6 +34,7 @@ export class AppCookie extends BeanSimple {
 
   setItem(key: string, value: string, opts?: CookieOptions): void {
     opts = opts || {};
+    opts.path = opts.path || `/${this.sys.config.app.publicPath}`;
 
     let expire, expireValue;
 
@@ -101,7 +102,6 @@ export class AppCookie extends BeanSimple {
   removeItem(key: string, opts?: CookieOptions): void {
     this.setItem(key, '', Object.assign({
       expires: -1,
-      path: `/${this.sys.config.app.publicPath}`,
     }, opts));
   }
 }
