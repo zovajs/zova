@@ -433,7 +433,6 @@ function _patchOpenapiTSOptions(options?: OpenAPITSOptions) {
           };
         }
       }
-
       // default
       return undefined;
     },
