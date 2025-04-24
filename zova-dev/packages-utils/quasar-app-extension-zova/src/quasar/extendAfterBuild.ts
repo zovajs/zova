@@ -12,9 +12,11 @@ export function extendAfterBuild(context: ConfigContext, _flavor: string) {
     // remove zova/runtime
     fse.removeSync(path.join(context.configOptions!.appDir, context.configOptions!.runtimeDir));
     // copy
+    const outReleasesDir = path.join(context.configOptions!.appDir, getOutReleasesDir());
+    fse.removeSync(outReleasesDir);
     fse.copySync(
       path.join(context.configOptions!.appDir, outDir),
-      path.join(context.configOptions!.appDir, getOutReleasesDir()),
+      outReleasesDir,
     );
   };
 }
