@@ -4,7 +4,7 @@ import { BeanInterceptorBase, IDecoratorInterceptorOptions, IInterceptorRequest,
 
 export interface IInterceptorOptionsPerformAction extends IDecoratorInterceptorOptions {}
 
-@Interceptor<IInterceptorOptionsPerformAction>({ dependencies: 'a-interceptor:jwt' })
+@Interceptor<IInterceptorOptionsPerformAction>({ dependencies: 'a-interceptor:mock' })
 export class InterceptorPerformAction extends BeanInterceptorBase<IInterceptorOptionsPerformAction> implements IInterceptorRequest {
   async onRequest(
     config: AxiosRequestConfig,
@@ -13,18 +13,14 @@ export class InterceptorPerformAction extends BeanInterceptorBase<IInterceptorOp
   ): Promise<AxiosRequestConfig> {
     const performAction = this.ctx.meta.ssr.getPerformAction(config.baseURL);
     if (!performAction) return next();
-    try {
-      const data: ISsrSitePerformActionOptions = {
-        method: config.method as any,
-        path: config.url!,
-        query: config.params,
-        body: config.data,
-        headers: config.headers,
-      };
-      return await performAction(data);
-    } catch (error: any) {
-      error.config = config;
-      throw error;
-    }
+    const data: ISsrSitePerformActionOptions = {
+      method: config.method as any,
+      path: config.url!,
+      query: config.params,
+      body: config.data,
+      headers: config.headers,
+    };
+    const result = await performAction(data);
+    throw result;
   }
 }

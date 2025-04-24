@@ -34,8 +34,6 @@ export class InterceptorJwt extends BeanInterceptorBase<IInterceptorOptionsJwt> 
     options: IInterceptorOptionsJwt,
     next: NextInterceptorRequest,
   ): Promise<AxiosRequestConfig> {
-    const performAction = this.ctx.meta.ssr.getPerformAction(config.baseURL);
-    if (performAction) return next();
     try {
       const accessToken = await this.prepareAccessToken(options.authToken);
       if (accessToken) {
