@@ -82,65 +82,9 @@ export function extendFilesTwo(api: IndexAPI, _flavor: string) {
 
   // ssr-devserver.js
   async function _handleSSRDevServer() {
-    const fileSrc = api.resolve.cli('lib/modes/ssr/ssr-devserver.js');
-    const fileSrcBak = api.resolve.cli('lib/modes/ssr/ssr-devserver-origin.js');
-    copyTemplateIfNeed(fileSrc, fileSrcBak);
-    const content = fse.readFileSync(fileSrcBak).toString();
-    const contentNew = content
-      .replace(
-        "import { green } from 'kolorist'",
-        `import { green } from 'kolorist'
-        import { collectCss, renderTeleports } from 'zova-vite'
-        import * as path from 'node:path'`,
-      )
-      .replace(
-        'let html = renderTemplate(ssrContext)',
-        `ssrContext._meta.endingHeadTags += collectCss(
-          [viteServer.moduleGraph.getModuleById(this.#pathMap.serverEntryFile.replaceAll('\\\\','/'))].concat(
-          [...(ssrContext.modules||[])]
-            .map((componentPath) => viteServer.moduleGraph.getModuleById(
-              path.resolve(componentPath).replaceAll('\\\\','/'),
-          )))
-        )
-
-        let html = renderTemplate(ssrContext)`,
-      )
-      .replace(
-        '<div id="q-app">${ runtimePageContent }</div>',
-        '<div id="q-app">${ runtimePageContent }</div>${ renderTeleports(ssrContext.teleports) }',
-      )
-      .replace(
-        'viteServer.ssrFixStacktrace(err)',
-        'console.error(err)',
-      )
-      .replace(
-        "getPackage('vue/server-renderer'",
-        "getPackage('@cabloy/vue-server-renderer'",
-      )
-      .replace(
-        'const renderApp = await viteModuleRunner.import(this.#pathMap.serverEntryFile)',
-        'const renderApp = await viteModuleRunner.import(this.#pathMap.serverEntryFile)\nawait renderApp.initialize();',
-      )
-      .replace('onRenderedList.forEach(fn => { fn() })', '')
-      .replace(
-        'const runtimePageContent = await vueRenderToString(app, ssrContext)',
-        `let runtimePageContent;
-        let err2;
-        try {
-          runtimePageContent = await vueRenderToString(app, ssrContext);
-        } catch (err) {
-          err2 = err;
-        }
-        const error = ssrContext._meta.renderError ?? err2;
-        onRenderedList.forEach(fn => { fn(error) })
-        const context = ssrContext._meta.context;
-        if (context) {
-          ssrContext._meta.context.bean.dispose();
-          ssrContext._meta.context.dispose();
-        }
-        if (error) throw error;`,
-      );
-    fse.writeFileSync(fileSrc, contentNew);
+    const fileSrc = resolveTemplatePath('entry/ssr-devserver.js_');
+    const fileDest = api.resolve.cli('lib/modes/ssr/ssr-devserver.js');
+    await copyTemplateFile(fileSrc, fileDest, {});
   }
 
   // ssr-builder.js

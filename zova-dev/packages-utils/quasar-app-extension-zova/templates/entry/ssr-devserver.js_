@@ -6,6 +6,8 @@ import chokidar from 'chokidar'
 import debounce from 'lodash/debounce.js'
 import serialize from 'serialize-javascript'
 import { green } from 'kolorist'
+import { collectCss, renderTeleports } from 'zova-vite'
+import * as path from 'node:path'
 
 import { AppDevserver } from '../../app-devserver.js'
 import { getPackage } from '../../utils/get-package.js'
@@ -177,7 +179,7 @@ export class QuasarModeDevserver extends AppDevserver {
     }
 
     if (vueRenderToString === null) {
-      const { renderToString } = await getPackage('vue/server-renderer', quasarConf.ctx.appPaths.appDir)
+      const { renderToString } = await getPackage('@cabloy/vue-server-renderer', quasarConf.ctx.appPaths.appDir)
       vueRenderToString = renderToString
     }
 
@@ -234,25 +236,40 @@ export class QuasarModeDevserver extends AppDevserver {
       try {
         const renderApp = await viteModuleRunner.import(this.#pathMap.serverEntryFile)
 
+        await renderApp.initialize()
+
         const app = await renderApp.default(ssrContext)
-        const runtimePageContent = await vueRenderToString(app, ssrContext)
 
-        onRenderedList.forEach(fn => { fn() })
-
-        // maintain compatibility with some well-known Vue plugins
-        // like @vue/apollo-ssr:
-        typeof ssrContext.rendered === 'function' && ssrContext.rendered()
+        let runtimePageContent;
+        let err2;
+        try {
+          runtimePageContent = await vueRenderToString(app, ssrContext);
+        } catch (err) {
+          err2 = err;
+        }
+        const error = ssrContext._meta.renderError ?? err2;
+        onRenderedList.forEach(fn => { fn(error) })
+        ssrContext.rendered(error);
+        if (error) throw error;
 
         if (ssrContext.state !== void 0 && quasarConf.ssr.manualStoreSerialization !== true) {
           ssrContext._meta.headTags = renderStoreState(ssrContext) + ssrContext._meta.headTags
         }
+
+        ssrContext._meta.endingHeadTags += collectCss(
+          [viteServer.moduleGraph.getModuleById(this.#pathMap.serverEntryFile.replaceAll('\\\\','/'))].concat(
+          [...(ssrContext.modules||[])]
+            .map((componentPath) => viteServer.moduleGraph.getModuleById(
+              path.resolve(componentPath).replaceAll('\\\\','/'),
+          )))
+        )
 
         let html = renderTemplate(ssrContext)
 
         html = await viteClient.transformIndexHtml(ssrContext.req.url, html, ssrContext.req.url)
         html = html.replace(
           entryPointMarkup,
-          `<div id="q-app">${ runtimePageContent }</div>`
+          `<div id="q-app">${ runtimePageContent }</div>${ renderTeleports(ssrContext.teleports) }`
         )
 
         logServerMessage('Rendered', ssrContext.req.url, `${ Date.now() - startTime }ms`)
@@ -260,7 +277,8 @@ export class QuasarModeDevserver extends AppDevserver {
         return html
       }
       catch (err) {
-        viteServer.ssrFixStacktrace(err)
+        console.error(err)
+        // viteServer.ssrFixStacktrace(err)
         throw err
       }
     }
