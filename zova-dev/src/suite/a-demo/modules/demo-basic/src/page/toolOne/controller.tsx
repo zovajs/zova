@@ -4,7 +4,7 @@ import { Controller } from 'zova-module-a-bean';
 import { ModelTest } from '../../model/test.js';
 
 export const ControllerPageToolOneSchemaQuery = z.object({
-  api: z.string(),
+  api: z.string().optional(),
 });
 
 @Controller()
@@ -13,6 +13,7 @@ export class ControllerPageToolOne extends BeanControllerPageBase {
   $$modelTest: ModelTest;
 
   protected async __init__() {
+    if (!this.$query.api) return;
     const api = this.sys.config.api.prefix + this.$query.api;
     const data = await this.$fetch.post<any, any>(
       this.sys.util.apiActionPathTranslate(api),
