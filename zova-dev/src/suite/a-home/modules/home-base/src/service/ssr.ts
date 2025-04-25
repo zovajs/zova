@@ -28,7 +28,7 @@ export class ServiceSsr extends BeanBase {
         if (err.code === 401) {
           const cause = err.message === 'jwt expired' ? 'expired' : undefined;
           if (cause === 'expired') {
-            this.ctx.meta.ssr.context._meta.renderError = 'hello world';
+            this._errorHandlerJwtExpired();
             return undefined;
           }
         }
@@ -38,5 +38,9 @@ export class ServiceSsr extends BeanBase {
         _eventErrorHandler();
       });
     }
+  }
+
+  private _errorHandlerJwtExpired() {
+    return this.app.gotoPage('/home/base/errorExpired', { returnTo: true });
   }
 }
