@@ -5,7 +5,7 @@ import { ZovaIcon } from 'zova-module-a-icon';
 
 export interface ControllerEssentialLinkProps {
   title: string;
-  caption?: string;
+  description?: string;
   icon?: string;
   href?: string;
   to?: string;
@@ -14,7 +14,7 @@ export interface ControllerEssentialLinkProps {
 @Controller()
 export class ControllerEssentialLink extends BeanControllerBase {
   static $propsDefault = {
-    caption: '',
+    description: '',
     icon: '',
   };
 
@@ -23,7 +23,7 @@ export class ControllerEssentialLink extends BeanControllerBase {
       <ZovaIcon name={this.$props.icon} height={24} width={24}></ZovaIcon>,
       <div>
         <div>{this.$props.title}</div>
-        {this.$props.caption && <div class="text-gray-400">{this.$props.caption}</div>}
+        {this.$props.description && <div class="text-gray-400">{this.$props.description}</div>}
       </div>,
     ];
     if (this.$props.href) {
