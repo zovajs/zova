@@ -84,7 +84,7 @@ export function extendFilesTwo(api: IndexAPI, _flavor: string) {
   async function _handleSSRDevServer() {
     const fileSrc = resolveTemplatePath('entry/ssr-devserver.js_');
     const fileDest = api.resolve.cli('lib/modes/ssr/ssr-devserver.js');
-    await copyTemplateFile(fileSrc, fileDest, {});
+    fse.copyFileSync(fileSrc, fileDest);
   }
 
   // ssr-builder.js
