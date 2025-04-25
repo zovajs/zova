@@ -66,7 +66,7 @@ export class ServiceSsrHandler extends BeanBase {
     };
     // render
     const renderFn = await serverEntry(ssrContext);
-    const [runtimePageContent, err] = await catchError(() => {
+    let [runtimePageContent, err] = await catchError(() => {
       return renderToString(renderFn, ssrContext);
     });
 
@@ -75,7 +75,10 @@ export class ServiceSsrHandler extends BeanBase {
       fn(error);
     });
     cast(ssrContext).rendered(error);
-    if (error) throw error;
+    if (error) {
+      if (error instanceof Error) throw error;
+      runtimePageContent = error;
+    }
 
     ssrContext._meta.runtimePageContent = runtimePageContent;
 

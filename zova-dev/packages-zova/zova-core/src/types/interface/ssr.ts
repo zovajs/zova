@@ -31,7 +31,7 @@ export interface SSRContextMeta {
   bodyTags: string;
   endingBodyTags: string;
   baseUrl: string;
-  renderError: ErrorSSR;
+  renderError: ErrorSSR | string;
 }
 
 export interface SSRContextState {}

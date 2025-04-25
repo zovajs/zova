@@ -250,7 +250,10 @@ export class QuasarModeDevserver extends AppDevserver {
         const error = ssrContext._meta.renderError ?? err2;
         onRenderedList.forEach(fn => { fn(error) })
         ssrContext.rendered(error);
-        if (error) throw error;
+        if (error) {
+          if (error instanceof Error) throw error;
+          runtimePageContent = error;
+        }
 
         if (ssrContext.state !== void 0 && quasarConf.ssr.manualStoreSerialization !== true) {
           ssrContext._meta.headTags = renderStoreState(ssrContext) + ssrContext._meta.headTags

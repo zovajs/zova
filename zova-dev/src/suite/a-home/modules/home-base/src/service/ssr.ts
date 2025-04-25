@@ -28,7 +28,7 @@ export class ServiceSsr extends BeanBase {
         if (err.code === 401) {
           const cause = err.message === 'jwt expired' ? 'expired' : undefined;
           if (cause === 'expired') {
-            this.app.gotoLogin(undefined, cause);
+            this.ctx.meta.ssr.context._meta.renderError = 'hello world';
             return undefined;
           }
         }
