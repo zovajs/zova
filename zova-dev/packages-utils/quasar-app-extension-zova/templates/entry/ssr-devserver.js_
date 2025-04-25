@@ -252,7 +252,7 @@ export class QuasarModeDevserver extends AppDevserver {
         ssrContext.rendered(error);
         if (error) {
           if (error instanceof Error) throw error;
-          runtimePageContent = error;
+          return error;
         }
 
         if (ssrContext.state !== void 0 && quasarConf.ssr.manualStoreSerialization !== true) {
