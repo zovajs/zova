@@ -69,6 +69,13 @@ export class ServiceSsrHandler extends BeanBase {
     const [runtimePageContent, err] = await catchError(() => {
       return renderToString(renderFn, ssrContext);
     });
+
+    const context = ssrContext._meta.context;
+    if (context) {
+      ssrContext._meta.context.bean.dispose();
+      ssrContext._meta.context.dispose();
+    }
+
     const error = ssrContext._meta.renderError ?? err;
     if (error) throw error;
 
