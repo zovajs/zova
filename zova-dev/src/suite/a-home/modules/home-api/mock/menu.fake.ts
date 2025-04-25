@@ -17,9 +17,9 @@ const __MenuItems = [
   { group: 'zova', title: 'Github', caption: 'github.com/cabloy', icon: ':social:github', external: true, link: 'https://github.com/cabloy/zova' },
 ];
 const __MenuGroups = [
-  { order: 1, id: 'basic', title: 'Basic' },
-  { order: 2, id: 'business', title: 'Business' },
-  { order: 3, id: 'zova', title: 'Zova' },
+  { order: 1, name: 'basic', title: 'Basic' },
+  { order: 2, name: 'business', title: 'Business' },
+  { order: 3, name: 'zova', title: 'Zova' },
 ];
 const __MenuData = { menus: __MenuItems, groups: __MenuGroups };
 
