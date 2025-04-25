@@ -67,14 +67,14 @@ export class InterceptorJwt extends BeanInterceptorBase<IInterceptorOptionsJwt> 
     // accessToken
     if (process.env.SERVER || (!jwtInfo.expireTime || jwtInfo.expireTime > Date.now())) {
       if (!jwtInfo.accessToken) {
-        if (authToken === true) this.app.throw(403);
+        if (authToken === true) this.app.throw(401);
         return;
       }
       return jwtInfo.accessToken;
     }
     // refreshToken
     if (!jwtInfo.refreshToken) {
-      if (authToken === true) this.app.throw(403);
+      if (authToken === true) this.app.throw(401);
       return;
     }
     jwtInfo = await this._refreshAuthToken(jwtInfo.refreshToken);
