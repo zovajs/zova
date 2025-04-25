@@ -38,7 +38,7 @@ export function generateMetaPage(
         return ':_string_';
       });
       const apiPath2 = routePathFull.replace(/(\/:[^/]+)/g, (_, part) => {
-        return `:_${part.substring(2)}_`;
+        return `:{${part.substring(2)}}`;
       });
       const apiPath3 = routePathFull.replace(/(:[^/]+)/g, (_, _part) => {
         return '${string}';

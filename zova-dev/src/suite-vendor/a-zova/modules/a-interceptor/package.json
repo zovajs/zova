@@ -39,7 +39,7 @@
           "dependencies": "a-interceptor:performAction"
         },
         "jwt": {
-          "dependencies": "a-interceptor:locale"
+          "dependencies": "a-interceptor:basic"
         },
         "mock": {},
         "performAction": {

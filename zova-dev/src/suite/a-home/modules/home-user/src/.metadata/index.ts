@@ -50,6 +50,9 @@ declare module 'zova-module-a-router' {
   export interface IPagePathRecord {
     '/home/user/login': TypePagePathSchema<'/home/user/login', undefined>;
   }
+  export interface IPageNameRecord {
+
+  }
 }
 export const pagePathSchemas = {
 

@@ -196,7 +196,7 @@ declare module 'zova-module-a-router' {
     '/demo/basic/legacy': TypePagePathSchema<'/demo/basic/legacy', undefined>;
     '/demo/basic/locale': TypePagePathSchema<'/demo/basic/locale', undefined>;
     '/demo/basic/pinia': TypePagePathSchema<'/demo/basic/pinia', undefined>;
-    '/demo/basic/routeParams/:_string_': TypePagePathSchema<'/demo/basic/routeParams:_id?_', NSControllerPageRouteParams.QueryInput>;
+    '/demo/basic/routeParams/:_string_': TypePagePathSchema<'/demo/basic/routeParams:{id?}', NSControllerPageRouteParams.QueryInput>;
     '/demo/basic/routeParams/:id?': TypePagePathSchema<`/demo/basic/routeParams/${string}`, NSControllerPageRouteParams.QueryInput>;
     '/demo/basic/routeQuery': TypePagePathSchema<'/demo/basic/routeQuery', NSControllerPageRouteQuery.QueryInput>;
     '/demo/basic/routeQueryB': TypePagePathSchema<'/demo/basic/routeQueryB', NSControllerPageRouteQueryB.QueryInput>;

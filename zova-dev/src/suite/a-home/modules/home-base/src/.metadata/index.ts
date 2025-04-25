@@ -106,6 +106,9 @@ declare module 'zova-module-a-router' {
   export interface IPagePathRecord {
     '/home/base//:catchAll(.*)*': TypePagePathSchema<'/home/base//:catchAll(.*)*', undefined>;
   }
+  export interface IPageNameRecord {
+
+  }
 }
 export const pagePathSchemas = {
 

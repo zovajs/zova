@@ -1,5 +1,6 @@
 import type { TypeAuthToken } from '../../types/utils/auth.js';
 import { extend } from '@cabloy/extend';
+import { defaultPathSerializer } from '@cabloy/utils';
 import DeepEqual from 'deep-equal';
 import { BeanSimple } from '../../bean/beanSimple.js';
 import { uuid as _uuid } from '../../utils/uuid.js';
@@ -74,18 +75,6 @@ export class SysUtil extends BeanSimple {
       optionsCustom,
     );
   }
-}
-
-const PATH_PARAM_RE = /\{([^{}/]+)\}/g;
-export function defaultPathSerializer(pathName: string, pathParams?: Record<string, any>): string {
-  pathParams = pathParams ?? {};
-  return pathName.replace(PATH_PARAM_RE, (_, _part: string) => {
-    if (_part.includes('?'))_part = _part.substring(0, _part.length - 1);
-    const value = pathParams?.[_part];
-    if (value === undefined || value === null) return '';
-    if (typeof value === 'object') return encodeURIComponent(JSON.stringify(value));
-    return encodeURIComponent(value);
-  });
 }
 
 export function uuid(): string {
