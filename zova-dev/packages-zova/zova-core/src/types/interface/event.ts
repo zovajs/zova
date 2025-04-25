@@ -16,7 +16,9 @@ export interface TypeEventHandler<D, R> {
   (data: D, next: Next): Promise<R>;
 }
 
-export type NextEvent<D = unknown, R = unknown> = (data?: D) => Promise<R>;
-export type NextEventStrict<D = unknown, R = unknown> = (data: D) => Promise<R>;
+export type NextEvent<DATA = unknown, RESULT = unknown> = (data?: DATA) => Promise<RESULT>;
+export type NextEventStrict<DATA = unknown, RESULT = unknown> = (data: DATA) => Promise<RESULT>;
+export type NextEventSync<DATA = unknown, RESULT = unknown> = (data?: DATA) => RESULT;
+export type NextEventSyncStrict<DATA = unknown, RESULT = unknown> = (data: DATA) => RESULT;
 
 export interface IEventRecord {}

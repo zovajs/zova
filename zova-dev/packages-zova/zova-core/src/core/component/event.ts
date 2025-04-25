@@ -1,6 +1,7 @@
 import type {
   IEventRecord,
   NextEventStrict,
+  NextEventSyncStrict,
   TypeEventHandler,
   TypeEventHandlers,
   TypeEventHandlersMap,
@@ -48,6 +49,21 @@ export class AppEvent extends BeanSimple {
           return nextOrDefault! as IEventRecord[K]['result'];
         };
     return await compose(eventHandlers.concat(), __adapter)(data, next);
+  }
+
+  emitSync<K extends keyof IEventRecord>(
+    eventName: K,
+    data: IEventRecord[K]['data'],
+    nextOrDefault?: NextEventSyncStrict<IEventRecord[K]['data'], IEventRecord[K]['result']> | IEventRecord[K]['result'],
+  ): IEventRecord[K]['result'] {
+    const eventHandlers = this.getEventHandlers(eventName);
+    const next =
+      typeof nextOrDefault === 'function'
+        ? cast<NextEventSyncStrict<IEventRecord[K]['data'], IEventRecord[K]['result']>>(nextOrDefault)
+        : (): IEventRecord[K]['result'] => {
+            return nextOrDefault!;
+          };
+    return compose(eventHandlers.concat(), __adapter)(data, next);
   }
 
   on<K extends keyof IEventRecord>(
