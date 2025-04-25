@@ -26,8 +26,7 @@ export class ServiceSsr extends BeanBase {
     if (process.env.SERVER) {
       const _eventErrorHandler = this.app.meta.event.on('app:errorHandler', ({ err }, next) => {
         if (err.code === 401) {
-          const cause = err.message === 'jwt expired' ? 'expired' : undefined;
-          if (cause === 'expired') {
+          if (err.message === 'jwt expired') {
             this._errorHandlerJwtExpired();
             return undefined;
           }
