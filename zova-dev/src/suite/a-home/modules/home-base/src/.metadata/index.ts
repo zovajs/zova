@@ -24,8 +24,9 @@ import { ControllerPageErrorNotFound } from '../page/errorNotFound/controller.js
 /** service: begin */
 import { ServiceRouter } from '../service/router.js';
 import { ServiceSsr } from '../service/ssr.js';
-
 import { ZPage } from './component/page.js';
+
+import { NSControllerPageErrorExpired } from './page/errorExpired.js';
 /** components: end */
 /** css: begin */
 import 'zova';
@@ -113,7 +114,7 @@ export * from '../page/errorNotFound/controller.jsx';
 export * from '../routes.js';
 declare module 'zova-module-a-router' {
   export interface IPagePathRecord {
-    '/home/base/errorExpired': TypePagePathSchema<'/home/base/errorExpired', undefined>;
+    '/home/base/errorExpired': TypePagePathSchema<'/home/base/errorExpired', NSControllerPageErrorExpired.QueryInput>;
     '/home/base//:catchAll(.*)*': TypePagePathSchema<'/home/base//:catchAll(.*)*', undefined>;
   }
   export interface IPageNameRecord {
@@ -121,13 +122,17 @@ declare module 'zova-module-a-router' {
   }
 }
 export const pagePathSchemas = {
-
+  '/home/base/errorExpired': {
+    query: NSControllerPageErrorExpired.querySchema,
+  },
 };
 export const pageNameSchemas = {
 
 };
 declare module 'zova-module-home-base' {
-
+  export interface ControllerPageErrorExpired {
+    $query: NSControllerPageErrorExpired.QueryOutput;
+  }
 }
 /** pages: end */
 
