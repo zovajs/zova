@@ -1,5 +1,6 @@
 import type { IErrorObject } from '../../bean/resource/error/errorObject.js';
 import type { ErrorSSR, IErrorInstanceInfo, IModuleError } from '../../bean/resource/error/type.js';
+import { isNavigationFailure } from '@cabloy/vue-router';
 import { HttpStatus } from 'zova';
 import { ErrorClass } from '../../bean/resource/error/errorClass.js';
 import { SymbolErrorInstanceInfo } from '../../bean/resource/error/type.js';
@@ -14,7 +15,10 @@ export class AppError extends ErrorClass {
       return await this.app.meta.event.emit('app:errorHandler', { err: err as Error, instance, info }, async ({ err }) => {
         // server
         if (process.env.SERVER) {
-          if (err.code === 401) {
+          if (isNavigationFailure(err)) {
+            // do nothing
+            return undefined;
+          } else if (err.code === 401) {
             try {
               const cause = err.message === 'jwt expired' ? 'expired' : undefined;
               this.app.gotoLogin(undefined, cause);
