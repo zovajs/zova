@@ -18,6 +18,7 @@ import { ControllerPage } from '../component/page/controller.jsx';
 /** locale: begin */
 import locale_en_us from '../config/locale/en-us.js';
 import locale_zh_cn from '../config/locale/zh-cn.js';
+import { ControllerPageErrorExpired } from '../page/errorExpired/controller.jsx';
 import { ControllerPageErrorNotFound } from '../page/errorNotFound/controller.jsx';
 /** service: end */
 /** service: begin */
@@ -77,12 +78,20 @@ export * from '../component/page/controller.jsx';
 /** locale: end */
 /** monkey: begin */
 export * from '../monkey.js';
+/** monkey: end */
+/** monkeySys: begin */
+export * from '../monkeySys.js';
 declare module 'zova' {
 
 }
 declare module 'zova-module-home-base' {
 
   export interface ControllerPage {
+    /** @internal */
+    get scope(): ScopeModuleHomeBase;
+  }
+
+  export interface ControllerPageErrorExpired {
     /** @internal */
     get scope(): ScopeModuleHomeBase;
   }
@@ -95,15 +104,16 @@ declare module 'zova-module-home-base' {
 declare module 'zova' {
   export interface IBeanRecordLocal {
     'home-base.controller.page': ControllerPage;
+    'home-base.controller.pageErrorExpired': ControllerPageErrorExpired;
     'home-base.controller.pageErrorNotFound': ControllerPageErrorNotFound;
   }
 }
-/** monkey: end */
-/** monkeySys: begin */
-export * from '../monkeySys.js';
+export * from '../page/errorExpired/controller.jsx';
 export * from '../page/errorNotFound/controller.jsx';
+export * from '../routes.js';
 declare module 'zova-module-a-router' {
   export interface IPagePathRecord {
+    '/home/base/errorExpired': TypePagePathSchema<'/home/base/errorExpired', undefined>;
     '/home/base//:catchAll(.*)*': TypePagePathSchema<'/home/base//:catchAll(.*)*', undefined>;
   }
   export interface IPageNameRecord {
@@ -121,7 +131,8 @@ declare module 'zova-module-home-base' {
 }
 /** pages: end */
 
-export * from '../routes.js';
+/** service: begin */
+export * from '../service/router.js';
 export const components = {
   page: ZPage,
 };
@@ -130,8 +141,7 @@ declare module 'zova' {
     'home-base:page': ControllerPage;
   }
 }
-/** service: begin */
-export * from '../service/router.js';
+export * from '../service/ssr.js';
 declare module 'zova' {
 
 }
@@ -147,7 +157,8 @@ declare module 'zova' {
     'home-base.css.default': CssDefault;
   }
 }
-export * from '../service/ssr.js';
+/** components: begin */
+export * from './component/page.js';
 declare module 'zova' {
 
 }
@@ -167,10 +178,9 @@ export const locales = {
   'en-us': locale_en_us,
   'zh-cn': locale_zh_cn,
 };
-/** components: begin */
-export * from './component/page.js';
 /** controller: end */
 /** pages: begin */
+export * from './page/errorExpired.js';
 export * from './page/errorNotFound.js';
 
 @Scope()
