@@ -31,25 +31,25 @@ export class ModelMenu extends BeanModelBase {
     });
   }
 
-  findMenuItem(search: { id?: string; link?: string }): ApiSchemaAMenuDtoMenuItem | undefined {
+  findMenuItem(search: { name?: string; link?: string }): ApiSchemaAMenuDtoMenuItem | undefined {
     const menus = this.retrieveMenus().data;
     if (!menus || !menus.items) return;
-    return menus.items.find(item => (item.id && search.id && item.id === search.id) || item.link === search.link);
+    return menus.items.find(item => (item.name && search.name && item.name === search.name) || item.link === search.link);
   }
 
-  private _prepareMenuTree(menus: ApiSchemaAMenuDtoMenus, groupId?: string): TypeMenuTree {
+  private _prepareMenuTree(menus: ApiSchemaAMenuDtoMenus, groupName?: string): TypeMenuTree {
     let children: TypeMenuItem[] = [];
     if (menus.menus) {
       children = children.concat(
-        menus.menus?.filter(item => item.group === groupId || (Array.isArray(item.group) && item.group.includes(groupId!))).map(item => {
+        menus.menus?.filter(item => item.group === groupName || (Array.isArray(item.group) && item.group.includes(groupName!))).map(item => {
           return { ...item, folder: false };
         }),
       );
     }
     if (menus.groups) {
-      const groups = menus.groups.filter(item => item.group === groupId || (Array.isArray(item.group) && item.group.includes(groupId!)))
+      const groups = menus.groups.filter(item => item.group === groupName || (Array.isArray(item.group) && item.group.includes(groupName!)))
         .map(menuGroup => {
-          return Object.assign({}, menuGroup, { folder: true, children: this._prepareMenuTree(menus, menuGroup.id) });
+          return Object.assign({}, menuGroup, { folder: true, children: this._prepareMenuTree(menus, menuGroup.name) });
         });
       children = children.concat(groups);
     }
