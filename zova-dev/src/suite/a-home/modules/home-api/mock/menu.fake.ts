@@ -21,11 +21,11 @@ const __MenuGroups = [
   { order: 2, id: 'business', title: 'Business' },
   { order: 3, id: 'zova', title: 'Zova' },
 ];
-const __MenuData = { items: __MenuItems, groups: __MenuGroups };
+const __MenuData = { menus: __MenuItems, groups: __MenuGroups };
 
 export default defineFakeRoute([
   {
-    url: '/home/base/menu',
+    url: '/home/base/menu/:id',
     method: 'get',
     response: req => {
       const name = getNameFromAuthorizationHeader(req);
