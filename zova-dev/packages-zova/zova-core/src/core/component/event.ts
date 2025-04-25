@@ -41,14 +41,6 @@ export class AppEvent extends BeanSimple {
     nextOrDefault?: NextEventStrict<IEventRecord[K]['data'], IEventRecord[K]['result']> | IEventRecord[K]['result'],
   ): Promise<IEventRecord[K]['result']> {
     const eventHandlers = this.getEventHandlers(eventName);
-    if (eventHandlers.length === 0) {
-      return typeof nextOrDefault === 'function'
-        ? ((await cast<NextEventStrict<IEventRecord[K]['data'], IEventRecord[K]['result']>>(nextOrDefault)(
-            data,
-          )) as IEventRecord[K]['result'])
-        : (nextOrDefault! as IEventRecord[K]['result']);
-    }
-    // invoke
     const next =
       typeof nextOrDefault === 'function'
         ? cast<NextEventStrict<IEventRecord[K]['data'], IEventRecord[K]['result']>>(nextOrDefault)
