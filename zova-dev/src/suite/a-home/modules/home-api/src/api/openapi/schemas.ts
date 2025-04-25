@@ -6,6 +6,7 @@ export type ApiSchemaHomeUserDtoPassport = components['schemas']['home-user.dto.
 export type ApiSchemaAJwtDtoJwtToken = components['schemas']['a-jwt.dto.jwtToken'];
 export type ApiSchemaHomeUserDtoPassportJwt = components['schemas']['home-user.dto.passportJwt'];
 export type ApiSchemaAAuthsimpleDtoAuthSimple = components['schemas']['a-authsimple.dto.authSimple'];
+export type ApiSchemaAMenuDtoMenuItemMeta = components['schemas']['a-menu.dto.menuItemMeta'];
 export type ApiSchemaAMenuDtoMenuItem = components['schemas']['a-menu.dto.menuItem'];
 export type ApiSchemaAMenuDtoMenuGroup = components['schemas']['a-menu.dto.menuGroup'];
 export type ApiSchemaAMenuDtoMenus = components['schemas']['a-menu.dto.menus'];

@@ -402,6 +402,7 @@ export interface components {
       username: string;
       password: string;
     };
+    'a-menu.dto.menuItemMeta': Record<string, never>;
     'a-menu.dto.menuItem': {
       name: string;
       title?: string;
@@ -413,7 +414,7 @@ export interface components {
       link?: string;
       external?: boolean;
       target?: string;
-      meta?: unknown;
+      meta?: components['schemas']['a-menu.dto.menuItemMeta'];
     };
     'a-menu.dto.menuGroup': {
       name: string;

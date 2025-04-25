@@ -1,3 +1,4 @@
+import { combineQueries } from '@cabloy/utils';
 import { useComputed } from 'zova-core';
 import { BeanModelBase, Model } from 'zova-module-a-model';
 import { ApiSchemaAMenuDtoMenuGroup, ApiSchemaAMenuDtoMenuItem, ApiSchemaAMenuDtoMenus } from 'zova-module-home-api';
@@ -23,18 +24,25 @@ export class ModelMenu extends BeanModelBase {
       queryKey: ['retrieveMenus'],
       queryFn: async () => {
         const data = await this.$api.homeBaseMenu.retrieveMenus({ params: { publicPath: this.sys.config.app.publicPath } });
-        const items = data.menus?.filter(item => {
+        const menus = data.menus?.filter(item => {
           return !item.external || this.$router.checkPathValid(item.link);
+        }).map(item => {
+          if (item.meta?.api) {
+            return { ...item, link: combineQueries(item.link!, { api: item.meta.api }) };
+          } else if (item.meta?.controller) {
+            return { ...item, link: combineQueries(item.link!, { controller: item.meta.controller }) };
+          }
+          return item;
         });
-        return { ...data, items };
+        return { ...data, menus };
       },
     });
   }
 
   findMenuItem(search: { name?: string; link?: string }): ApiSchemaAMenuDtoMenuItem | undefined {
     const menus = this.retrieveMenus().data;
-    if (!menus || !menus.items) return;
-    return menus.items.find(item => (item.name && search.name && item.name === search.name) || item.link === search.link);
+    if (!menus || !menus.menus) return;
+    return menus.menus.find(item => (item.name && search.name && item.name === search.name) || item.link === search.link);
   }
 
   private _prepareMenuTree(menus: ApiSchemaAMenuDtoMenus, groupName?: string): TypeMenuTree {
