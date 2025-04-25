@@ -97,14 +97,17 @@ export class ZovaApplication {
     return this.gotoPage(sys.config.router.pageHome);
   }
 
-  public gotoLogin(returnTo?: string) {
+  public gotoLogin(returnTo?: string, cause?: string) {
     returnTo = returnTo ?? this.getCurrentPagePath();
+    const query: any = {};
+    if (returnTo !== sys.config.router.pageHome) {
+      query[sys.config.router.keyReturnTo] = returnTo;
+    }
+    if (cause) {
+      query.cause = cause;
+    }
     const pageLogin = sys.config.router.pageLogin;
-    const pagePath = returnTo === sys.config.router.pageHome
-      ? pageLogin
-      : combineQueries(pageLogin, {
-          [sys.config.router.keyReturnTo]: returnTo,
-        });
+    const pagePath = combineQueries(pageLogin, query);
     return this.gotoPage(pagePath);
   }
 
