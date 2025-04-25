@@ -30,11 +30,15 @@ export class CtxSSRMetaStore extends BeanSimple {
     }
   }
 
-  private _onRenderedLast() {
-    const ssrContext = this.ctx.meta.ssr.context;
-    this._injectContextState(ssrContext);
-    this._injectContextStateDefer(ssrContext);
-    this._injectServerMeta(ssrContext);
+  private _onRenderedLast(err?: Error) {
+    if (!err) {
+      const ssrContext = this.ctx.meta.ssr.context;
+      this._injectContextState(ssrContext);
+      this._injectContextStateDefer(ssrContext);
+      this._injectServerMeta(ssrContext);
+    }
+    this.ctx.bean.dispose();
+    this.ctx.dispose();
   }
 
   addMetaOptions(metaOptionsWrapper: SSRMetaOptionsWrapper) {

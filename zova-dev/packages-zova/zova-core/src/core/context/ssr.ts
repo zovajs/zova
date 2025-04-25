@@ -131,7 +131,6 @@ export class CtxSSR extends BeanSimple {
       bodyTags: '',
       endingBodyTags: '',
       baseUrl: this.sys.util.getAbsoluteUrlFromPagePath(),
-      context: this.ctx,
     });
     ssrContext.state = ssrContext.state || {};
     ssrContext.stateDefer = ssrContext.stateDefer || {};

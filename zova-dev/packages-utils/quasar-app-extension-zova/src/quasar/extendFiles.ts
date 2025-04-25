@@ -121,6 +121,7 @@ export function extendFilesTwo(api: IndexAPI, _flavor: string) {
         'const renderApp = await viteModuleRunner.import(this.#pathMap.serverEntryFile)',
         'const renderApp = await viteModuleRunner.import(this.#pathMap.serverEntryFile)\nawait renderApp.initialize();',
       )
+      .replace('onRenderedList.forEach(fn => { fn() })', '')
       .replace(
         'const runtimePageContent = await vueRenderToString(app, ssrContext)',
         `let runtimePageContent;
@@ -131,6 +132,12 @@ export function extendFilesTwo(api: IndexAPI, _flavor: string) {
           err2 = err;
         }
         const error = ssrContext._meta.renderError ?? err2;
+        onRenderedList.forEach(fn => { fn(error) })
+        const context = ssrContext._meta.context;
+        if (context) {
+          ssrContext._meta.context.bean.dispose();
+          ssrContext._meta.context.dispose();
+        }
         if (error) throw error;`,
       );
     fse.writeFileSync(fileSrc, contentNew);

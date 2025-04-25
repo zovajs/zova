@@ -88,6 +88,7 @@ export function extendFilesTwo(api, _flavor) {
             .replace('viteServer.ssrFixStacktrace(err)', 'console.error(err)')
             .replace("getPackage('vue/server-renderer'", "getPackage('@cabloy/vue-server-renderer'")
             .replace('const renderApp = await viteModuleRunner.import(this.#pathMap.serverEntryFile)', 'const renderApp = await viteModuleRunner.import(this.#pathMap.serverEntryFile)\nawait renderApp.initialize();')
+            .replace('onRenderedList.forEach(fn => { fn() })', '')
             .replace('const runtimePageContent = await vueRenderToString(app, ssrContext)', `let runtimePageContent;
         let err2;
         try {
@@ -96,6 +97,12 @@ export function extendFilesTwo(api, _flavor) {
           err2 = err;
         }
         const error = ssrContext._meta.renderError ?? err2;
+        onRenderedList.forEach(fn => { fn(error) })
+        const context = ssrContext._meta.context;
+        if (context) {
+          ssrContext._meta.context.bean.dispose();
+          ssrContext._meta.context.dispose();
+        }
         if (error) throw error;`);
         fse.writeFileSync(fileSrc, contentNew);
     }

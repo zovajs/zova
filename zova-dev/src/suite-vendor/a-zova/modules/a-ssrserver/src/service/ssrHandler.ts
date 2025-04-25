@@ -70,22 +70,12 @@ export class ServiceSsrHandler extends BeanBase {
       return renderToString(renderFn, ssrContext);
     });
 
-    const context = ssrContext._meta.context;
-    if (context) {
-      ssrContext._meta.context.bean.dispose();
-      ssrContext._meta.context.dispose();
-    }
-
     const error = ssrContext._meta.renderError ?? err;
-    if (error) throw error;
-
     onRenderedList.forEach(fn => {
-      fn();
+      fn(error);
     });
-
-    // maintain compatibility with some well-known Vue plugins
-    // like @vue/apollo-ssr:
-    typeof cast(ssrContext).rendered === 'function' && cast(ssrContext).rendered();
+    cast(ssrContext).rendered(error);
+    if (error) throw error;
 
     ssrContext._meta.runtimePageContent = runtimePageContent;
 

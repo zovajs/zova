@@ -16,7 +16,7 @@ export interface SSRContext {
    * to access ssrContext again after it has been fully processed.
    * Example: ssrContext.onRendered(() => { ... })
    */
-  onRendered: (fn: () => void) => void;
+  onRendered: (fn: (err?: Error) => void) => void;
   rendered: () => void;
   __qMetaList: SSRMetaOptions[];
   modules: Set<string>;
