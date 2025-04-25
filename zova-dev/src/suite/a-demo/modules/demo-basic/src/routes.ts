@@ -10,4 +10,19 @@ import { ZPageState } from './.metadata/page/state.js';
 import { ZPageStyle } from './.metadata/page/style.js';
 import { ZPageToolOne } from './.metadata/page/toolOne.js';
 
-export const routes: IModuleRoute[] = [{ path: 'state', component: ZPageState }, { path: 'component', component: ZPageComponent }, { path: 'locale', component: ZPageLocale }, { path: 'style', component: ZPageStyle }, { path: 'pinia', component: ZPagePinia }, { path: 'routeQuery', component: ZPageRouteQuery }, { name: 'routeParams', path: 'routeParams/:id?', component: ZPageRouteParams }, { path: 'routeQueryB', component: ZPageRouteQueryB }, { path: 'legacy', component: ZPageLegacy }, { path: 'toolOne', component: ZPageToolOne }];
+export const routes: IModuleRoute[] = [
+  { path: 'state', component: ZPageState },
+  { path: 'component', component: ZPageComponent },
+  { path: 'locale', component: ZPageLocale },
+  { path: 'style', component: ZPageStyle },
+  { path: 'pinia', component: ZPagePinia },
+  { path: 'routeQuery', component: ZPageRouteQuery },
+  { name: 'routeParams', path: 'routeParams/:id?', component: ZPageRouteParams },
+  { path: 'routeQueryB', component: ZPageRouteQueryB },
+  { path: 'legacy', component: ZPageLegacy },
+  { path: 'toolOne', component: ZPageToolOne, meta: {
+    componentKey: route => {
+      return route.fullPath;
+    },
+  } },
+];
