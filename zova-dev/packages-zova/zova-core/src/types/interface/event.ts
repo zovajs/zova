@@ -1,4 +1,4 @@
-import type { Next } from '../../decorator/type/functionable.js';
+import type { NextGeneral } from '../../decorator/type/functionable.js';
 
 export type TypeEventOff = () => void;
 
@@ -13,7 +13,7 @@ export interface TypeEventHandlerWrapper<D, R> {
 }
 
 export interface TypeEventHandler<D, R> {
-  (data: D, next: Next): Promise<R>;
+  (data: D, next: NextGeneral): Promise<R> | R;
 }
 
 export type NextEvent<DATA = unknown, RESULT = unknown> = (data?: DATA) => Promise<RESULT>;

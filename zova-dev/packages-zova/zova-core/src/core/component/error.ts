@@ -20,8 +20,7 @@ export class AppError extends ErrorClass {
             return undefined;
           } else if (err.code === 401) {
             try {
-              const cause = err.message === 'jwt expired' ? 'expired' : undefined;
-              this.app.gotoLogin(undefined, cause);
+              this.app.gotoLogin();
             } catch (err) {
               this.ctx.meta.ssr.context._meta.renderError = err as ErrorSSR;
             }

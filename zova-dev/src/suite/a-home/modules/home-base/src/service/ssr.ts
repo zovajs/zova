@@ -24,8 +24,14 @@ export class ServiceSsr extends BeanBase {
     }
     // ssr errorHandler
     if (process.env.SERVER) {
-      const _eventErrorHandler = this.app.meta.event.on('app:errorHandler', (_data, next) => {
-        console.log('---------1');
+      const _eventErrorHandler = this.app.meta.event.on('app:errorHandler', ({ err }, next) => {
+        if (err.code === 401) {
+          const cause = err.message === 'jwt expired' ? 'expired' : undefined;
+          if (cause === 'expired') {
+            this.app.gotoLogin(undefined, cause);
+            return undefined;
+          }
+        }
         return next();
       });
       this.ctx.meta.ssr.context.onRendered((_err?: Error) => {
