@@ -12,7 +12,8 @@ export class BeanIcon extends BeanBase {
 
   protected async __init__() {
     if (process.env.SERVER) {
-      this.ctx.meta.ssr.context.onRendered(() => {
+      this.ctx.meta.ssr.context.onRendered((err?: Error) => {
+        if (err) return;
         this._onRendered();
       });
     }

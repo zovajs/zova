@@ -12,7 +12,8 @@ export class ServiceSsr extends BeanBase {
     }
     // ssr theme
     if (process.env.SERVER) {
-      this.ctx.meta.ssr.context.onRendered(() => {
+      this.ctx.meta.ssr.context.onRendered((err?: Error) => {
+        if (err) return;
         if (!this.sys.config.ssr.cookieThemeDark) {
           this.ctx.meta.ssr.context._meta.bodyTags += `<script id="__prefersColorSchemeDarkJS">
             document.body.setAttribute('data-theme', window.ssr_themedark_data);

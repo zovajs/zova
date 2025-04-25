@@ -12,8 +12,10 @@ export class ServicePinia extends BeanBase {
     this.app.vue.use(this.pinia);
     // onRendered
     if (process.env.SERVER) {
-      this.ctx.meta.ssr.context.onRendered(() => {
-        this.ctx.meta.ssr.stateDefer.pinia = this.pinia.state.value;
+      this.ctx.meta.ssr.context.onRendered((err?: Error) => {
+        if (!err) {
+          this.ctx.meta.ssr.stateDefer.pinia = this.pinia.state.value;
+        }
         this.pinia.state.value = {};
       });
     }

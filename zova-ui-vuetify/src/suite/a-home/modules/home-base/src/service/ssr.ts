@@ -6,7 +6,8 @@ export class ServiceSsr extends BeanBase {
   public async initialize() {
     // ssr theme
     if (process.env.SERVER) {
-      this.ctx.meta.ssr.context.onRendered(() => {
+      this.ctx.meta.ssr.context.onRendered((err?: Error) => {
+        if (err) return;
         this.ctx.meta.ssr.context._meta.bodyTags += `<script id="__prefersColorSchemeDarkJS">
             const __themeDarkStyle=window.ssr_themedark_data;
             const __themeDarkEl=document.createElement('style');

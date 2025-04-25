@@ -24,7 +24,8 @@ export class Monkey extends BeanSimple implements IMonkeyAppInitialize, IMonkeyA
   async appInitialize() {
     if (process.env.SERVER) {
       this._styleInstance = createTypeStyle();
-      this.ctx.meta.ssr.context.onRendered(() => {
+      this.ctx.meta.ssr.context.onRendered((err?: Error) => {
+        if (err) return;
         const styles = this._styleInstance.getStyles();
         this.ctx.meta.ssr.context._meta.endingHeadTags += `<style id="styles-target">${styles}</style>`;
       });

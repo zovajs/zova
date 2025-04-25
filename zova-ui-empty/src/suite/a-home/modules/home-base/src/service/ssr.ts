@@ -12,7 +12,7 @@ export class ServiceSsr extends BeanBase {
     }
     // ssr theme
     if (process.env.SERVER) {
-      this.ctx.meta.ssr.context.onRendered(() => {});
+      this.ctx.meta.ssr.context.onRendered((_err?: Error) => {});
     }
   }
 }

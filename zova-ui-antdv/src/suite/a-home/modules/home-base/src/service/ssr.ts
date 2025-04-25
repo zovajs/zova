@@ -1,5 +1,5 @@
-import { BeanBase } from 'zova';
 import { createCache, extractStyle } from 'ant-design-vue';
+import { BeanBase } from 'zova';
 import { Service } from 'zova-module-a-bean';
 
 @Service()
@@ -10,7 +10,8 @@ export class ServiceSsr extends BeanBase {
     // ssr style
     this.styleCache = createCache();
     if (process.env.SERVER) {
-      this.ctx.meta.ssr.context.onRendered(() => {
+      this.ctx.meta.ssr.context.onRendered((err?: Error) => {
+        if (err) return;
         const styles = extractStyle(this.styleCache);
         this.ctx.meta.ssr.context._meta.endingHeadTags += styles;
       });

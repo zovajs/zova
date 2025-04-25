@@ -27,12 +27,14 @@ export class ServiceStorage extends BeanBase {
   async appInitialize() {
     // onRendered
     if (process.env.SERVER) {
-      this.ctx.meta.ssr.context.onRendered(() => {
-        this.ctx.meta.ssr.stateDefer.query = dehydrate(this._queryClient, {
-          shouldDehydrateMutation: () => {
-            return false;
-          },
-        });
+      this.ctx.meta.ssr.context.onRendered((err?: Error) => {
+        if (!err) {
+          this.ctx.meta.ssr.stateDefer.query = dehydrate(this._queryClient, {
+            shouldDehydrateMutation: () => {
+              return false;
+            },
+          });
+        }
         this._queryClient.clear();
       });
     }
