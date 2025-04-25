@@ -24,9 +24,9 @@ export class ServiceSsr extends BeanBase {
     }
     // ssr errorHandler
     if (process.env.SERVER) {
-      const _eventErrorHandler = this.app.meta.event.on('app:errorHandler', async (_data, next) => {
+      const _eventErrorHandler = this.app.meta.event.on('app:errorHandler', (_data, next) => {
         console.log('---------1');
-        return await next();
+        return next();
       });
       this.ctx.meta.ssr.context.onRendered((_err?: Error) => {
         _eventErrorHandler();

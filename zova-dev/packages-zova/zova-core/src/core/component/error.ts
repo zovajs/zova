@@ -11,8 +11,8 @@ export class AppError extends ErrorClass {
   public async initialize() {
     await super.initialize();
     // errorHandler
-    this.app.vue.config.errorHandler = async (err, instance, info) => {
-      return await this.app.meta.event.emit('app:errorHandler', { err: err as Error, instance, info }, async ({ err }) => {
+    this.app.vue.config.errorHandler = (err, instance, info) => {
+      return this.app.meta.event.emitSync('app:errorHandler', { err: err as Error, instance, info }, ({ err }) => {
         // server
         if (process.env.SERVER) {
           if (isNavigationFailure(err)) {
@@ -79,11 +79,11 @@ export class AppError extends ErrorClass {
     };
   }
 
-  private async _handleUnhandledError(error: Error, infoDefault: string) {
+  private _handleUnhandledError(error: Error, infoDefault: string) {
     if (error instanceof Error) {
       const errorInfo: IErrorInstanceInfo = error[SymbolErrorInstanceInfo];
       // should not catch error
-      await (this.app.vue.config.errorHandler!(error, errorInfo?.instance as any, errorInfo?.info || infoDefault) as unknown as Promise<Error>);
+      this.app.vue.config.errorHandler!(error, errorInfo?.instance as any, errorInfo?.info || infoDefault) as unknown as Error;
     }
   }
 }

@@ -93,8 +93,8 @@ export class BeanBase extends BeanBaseSimple {
     });
   }
 
-  protected async $errorHandler(err: unknown, info?: string): Promise<IErrorHandlerEventResult> {
-    return await (this.app?.vue.config.errorHandler!(err, this.ctx.instance as any, info!) as unknown as Promise<IErrorHandlerEventResult>);
+  protected $errorHandler(err: unknown, info?: string): IErrorHandlerEventResult {
+    return this.app?.vue.config.errorHandler!(err, this.ctx.instance as any, info!) as unknown as IErrorHandlerEventResult;
   }
 
   // need not
