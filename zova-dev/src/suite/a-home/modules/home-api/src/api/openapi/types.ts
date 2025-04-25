@@ -403,9 +403,9 @@ export interface components {
       password: string;
     };
     'a-menu.dto.menuItem': {
-      id: string;
+      name: string;
       title?: string;
-      caption?: string;
+      description?: string;
       icon?: string;
       order?: number;
       group?: string | string[];
@@ -413,11 +413,12 @@ export interface components {
       link?: string;
       external?: boolean;
       target?: string;
+      meta?: unknown;
     };
     'a-menu.dto.menuGroup': {
-      id: string;
+      name: string;
       title?: string;
-      caption?: string;
+      description?: string;
       icon?: string;
       order?: number;
       group?: string | string[];
