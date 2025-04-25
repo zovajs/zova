@@ -1,4 +1,5 @@
 import type { App } from 'vue';
+import type { IGotoPageOptions } from 'zova';
 import type { BeanContainer } from '../../bean/beanContainer.js';
 import type { ErrorSSR } from '../../bean/resource/error/type.js';
 import type { HttpStatus } from '../../types/enum/httpStatus.js';
@@ -86,10 +87,22 @@ export class ZovaApplication {
     throw error;
   }
 
-  public gotoPage(pagePath: string, forceRedirect?: boolean) {
-    if (process.env.SERVER || forceRedirect) {
+  public gotoPage(pagePath: string, options?: IGotoPageOptions) {
+    const query = options?.query ?? {};
+    // returnTo
+    if (options?.returnTo) {
+      const returnTo = typeof options?.returnTo === 'string' ? options?.returnTo : this.getCurrentPagePath();
+      if (returnTo !== sys.config.router.pageHome) {
+        query[sys.config.router.keyReturnTo] = returnTo;
+      }
+    }
+    // combineQueries
+    pagePath = combineQueries(pagePath, query);
+    // redirect
+    if (process.env.SERVER || options?.forceRedirect) {
       return this.redirect(pagePath);
     }
+    // replace
     cast(this.meta).$router.replace(pagePath);
   }
 
@@ -98,17 +111,11 @@ export class ZovaApplication {
   }
 
   public gotoLogin(returnTo?: string, cause?: string) {
-    returnTo = returnTo ?? this.getCurrentPagePath();
     const query: any = {};
-    if (returnTo !== sys.config.router.pageHome) {
-      query[sys.config.router.keyReturnTo] = returnTo;
-    }
     if (cause) {
       query.cause = cause;
     }
-    const pageLogin = sys.config.router.pageLogin;
-    const pagePath = combineQueries(pageLogin, query);
-    return this.gotoPage(pagePath);
+    return this.gotoPage(sys.config.router.pageLogin, { query, returnTo: returnTo ?? true });
   }
 
   public gotoReturnTo(returnTo?: string) {
