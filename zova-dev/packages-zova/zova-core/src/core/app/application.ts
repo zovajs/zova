@@ -128,7 +128,7 @@ export class ZovaApplication {
 
   public getCurrentPagePath() {
     if (process.env.SERVER) {
-      return sys.util.getPagePathFromAbsoluteUrl(this.ctx.meta.ssr.context.req.url);
+      return this.ctx.meta.ssr.context.pagePath ?? sys.util.getPagePathFromAbsoluteUrl(this.ctx.meta.ssr.context.req.url);
     }
     return cast(this.meta).$router.currentRoute?.fullPath;
   }
