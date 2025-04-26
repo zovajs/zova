@@ -34,7 +34,8 @@ export class AppCookie extends BeanSimple {
 
   setItem(key: string, value: string, opts?: CookieOptions): void {
     opts = opts || {};
-    opts.path = opts.path || `/${this.sys.config.app.publicPath}`;
+    // only / , same as localstorage/indexdb
+    opts.path = opts.path || '/';
 
     let expire, expireValue;
 
