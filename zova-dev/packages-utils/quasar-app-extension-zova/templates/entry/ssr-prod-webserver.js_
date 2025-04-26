@@ -77,7 +77,7 @@ function pathToHref(fileName) {
 
 async function render ({req, res}) {
   const ssrHandler = await ensureReady();
-  const html = await ssrHandler.render(req, res);
+  const html = await ssrHandler.render({req, res});
   if(!html) {
     const err = new Error('not found');
     err.code = err.status = 404;

@@ -120,6 +120,11 @@ export class CtxSSR extends BeanSimple {
     return undefined;
   }
 
+  getPageData(): any | undefined {
+    if (process.env.SERVER) return this.context.pageData;
+    return undefined;
+  }
+
   private _initContext() {
     const ssrContext = this[SymbolSSRContext];
     ssrContext._meta = defu(ssrContext._meta, {

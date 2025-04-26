@@ -7,6 +7,8 @@ export interface SSRContext {
   stateDefer: SSRContextStateDefer;
   req: Request;
   res: Response;
+  pagePath?: string;
+  pageData?: any;
   performAction?: TypeSsrSitePerformAction;
   /** The global "nonce" attribute to use */
   nonce?: string;

@@ -1,12 +1,11 @@
-import type http from 'node:http';
 import path, { basename } from 'node:path';
 import { pathToFileURL } from 'node:url';
 import { catchError } from '@cabloy/utils';
 import fse from 'fs-extra';
-import { BeanBase, cast, TypeSsrSitePerformAction, Use } from 'zova';
+import { BeanBase, cast, Use } from 'zova';
 import { Service } from 'zova-module-a-bean';
 import { SysRouter } from 'zova-module-a-router';
-import { TypeEventResolvePathResult } from '../types/ssr.js';
+import { ISsrHandlerRenderOptionsInner, TypeEventResolvePathResult } from '../types/ssr.js';
 
 const jsRE = /\.js$/;
 const cssRE = /\.css$/;
@@ -48,9 +47,9 @@ export class ServiceSsrHandler extends BeanBase {
     return undefined;
   }
 
-  public async render(req: http.IncomingMessage, res: http.ServerResponse<http.IncomingMessage>, performAction: TypeSsrSitePerformAction) {
+  public async render(options: ISsrHandlerRenderOptionsInner) {
     // resolve route
-    const pagePath = this.sys.util.getPagePathFromAbsoluteUrl(req.url!);
+    const pagePath = options.pagePath ?? this.sys.util.getPagePathFromAbsoluteUrl(options.req.url!);
     const route = await this.$$sysRouter.resolveRoute(pagePath, true, false);
     if (!route) return;
     // handler
@@ -58,9 +57,7 @@ export class ServiceSsrHandler extends BeanBase {
     // ssrContext
     const onRenderedList: Function[] = [];
     const ssrContext = {
-      req,
-      res,
-      performAction,
+      ...options,
       _meta: {} as any,
       onRendered: fn => { onRenderedList.push(fn); },
     };
