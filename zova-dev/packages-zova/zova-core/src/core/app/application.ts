@@ -113,6 +113,7 @@ export class ZovaApplication {
   }
 
   public gotoLogin(returnTo?: string, cause?: string) {
+    if (!returnTo && cast(this.meta).$router.currentRoute?.path === sys.config.router.pageLogin) return;
     const query: any = {};
     if (cause) {
       query.cause = cause;
