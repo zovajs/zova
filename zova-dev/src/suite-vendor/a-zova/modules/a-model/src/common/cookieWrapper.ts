@@ -26,9 +26,6 @@ export class CookieWrapper extends BeanSimple {
       if (maxAge === Infinity) maxAge = 1000 * 60 * 60 * 24 * 365;
       opts.expires = new Date(Date.now() + maxAge);
     }
-    if (!opts.path) {
-      opts.path = `/${this.sys.env.APP_PUBLIC_PATH || ''}`;
-    }
     this.app.meta.cookie.setItem(key, value, opts);
   }
 
