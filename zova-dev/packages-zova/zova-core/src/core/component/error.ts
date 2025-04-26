@@ -13,41 +13,11 @@ export class AppError extends ErrorClass {
     // errorHandler
     this.app.vue.config.errorHandler = (err, instance, info) => {
       return this.app.meta.event.emitSync('app:errorHandler', { err: err as Error, instance, info }, ({ err }) => {
-        // server
         if (process.env.SERVER) {
-          if (isNavigationFailure(err)) {
-            // do nothing
-            return undefined;
-          } else if (err.code === 401) {
-            try {
-              this.app.gotoLogin();
-            } catch (err) {
-              this.ctx.meta.ssr.context._meta.renderError = err as ErrorSSR;
-            }
-          } else {
-            this.ctx.meta.ssr.context._meta.renderError = err as ErrorSSR;
-          }
-          return undefined;
+          return this._errorHandlerDefaultServer(err);
+        } else {
+          return this._errorHandlerDefaultClient(err);
         }
-        // client
-        if ([301, 302].includes(Number(err.code))) {
-          this.app.gotoPage(cast<ErrorSSR>(err).pagePath!);
-          return undefined;
-        }
-        // COMPONENT_UNMOUNTED
-        if (err.code === HttpStatus.COMPONENT_UNMOUNTED) {
-          // do nothing
-          return undefined;
-        }
-        // 401
-        if (err.code === 401) {
-          this.app.gotoLogin();
-          return undefined;
-        }
-        // only log error in client
-        console.error(err);
-        // not handled
-        return err;
       });
     };
     // unhandledrejection
@@ -84,5 +54,47 @@ export class AppError extends ErrorClass {
       // should not catch error
       this.app.vue.config.errorHandler!(error, errorInfo?.instance as any, errorInfo?.info || infoDefault) as unknown as Error;
     }
+  }
+
+  private _errorHandlerDefaultServer(err: Error) {
+    if (!process.env.SERVER) return err;
+    if (isNavigationFailure(err)) {
+      if (!this.ctx.meta.ssr.context._meta.renderError) {
+        this.ctx.meta.ssr.context._meta.renderError = err as ErrorSSR;
+      }
+      return undefined;
+    } else if (err.code === 401) {
+      try {
+        this.app.gotoLogin();
+      } catch (err) {
+        this.ctx.meta.ssr.context._meta.renderError = err as ErrorSSR;
+      }
+    } else {
+      this.ctx.meta.ssr.context._meta.renderError = err as ErrorSSR;
+    }
+    return undefined;
+  }
+
+  private _errorHandlerDefaultClient(err: Error) {
+    if (!process.env.CLIENT) return err;
+    // client
+    if ([301, 302].includes(Number(err.code))) {
+      this.app.gotoPage(cast<ErrorSSR>(err).pagePath!);
+      return undefined;
+    }
+    // COMPONENT_UNMOUNTED
+    if (err.code === HttpStatus.COMPONENT_UNMOUNTED) {
+      // do nothing
+      return undefined;
+    }
+    // 401
+    if (err.code === 401) {
+      this.app.gotoLogin();
+      return undefined;
+    }
+    // only log error in client
+    console.error(err);
+    // not handled
+    return err;
   }
 }
