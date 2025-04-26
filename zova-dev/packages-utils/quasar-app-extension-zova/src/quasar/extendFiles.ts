@@ -17,7 +17,7 @@ export function extendFilesOne(api: IndexAPI, flavor: string) {
       // prod
       if (api.ctx.prod) {
         copyTemplateIfNeed(resolveTemplatePath('env/.env.ssr.production'), api.resolve.app('env/.env.ssr.production'));
-        copyTemplateIfNeed(resolveTemplatePath('env/.env.ssr.vona.production'), api.resolve.app('env/.env.ssr.vona.production'));
+        copyTemplateIfNeed(resolveTemplatePath('env/.env.ssr.vonaHome.production'), api.resolve.app('env/.env.ssr.vonaHome.production'));
       }
       // admin/front
       if (flavor === 'admin') {
@@ -25,7 +25,7 @@ export function extendFilesOne(api: IndexAPI, flavor: string) {
       } else if (flavor === 'front') {
         copyTemplateIfNeed(resolveTemplatePath('env/.env.ssr.front'), api.resolve.app('env/.env.ssr.front'));
       } else if (flavor === 'vona') {
-        copyTemplateIfNeed(resolveTemplatePath('env/.env.ssr.vona'), api.resolve.app('env/.env.ssr.vona'));
+        copyTemplateIfNeed(resolveTemplatePath('env/.env.ssr.vonaHome'), api.resolve.app('env/.env.ssr.vonaHome'));
       }
     }
   }
