@@ -1,4 +1,4 @@
-import { BeanBase } from 'zova';
+import { BeanBase, cast } from 'zova';
 import { Service } from 'zova-module-a-bean';
 
 @Service()
@@ -24,22 +24,23 @@ export class ServiceSsr extends BeanBase {
     }
     // ssr errorHandler
     if (process.env.SERVER) {
-      const _eventErrorHandler = this.app.meta.event.on('app:errorHandler', ({ err }, next) => {
-        if (err.code === 401) {
-          if (err.message === 'jwt expired') {
-            this._errorHandlerJwtExpired();
-            return undefined;
-          }
-        }
-        return next();
-      });
-      this.ctx.meta.ssr.context.onRendered((_err?: Error) => {
-        _eventErrorHandler();
-      });
+      this._ssrErrorHandler();
     }
   }
 
-  private _errorHandlerJwtExpired() {
-    return this.app.gotoPage('/home/base/errorExpired', { returnTo: true });
+  private _ssrErrorHandler() {
+    if (!process.env.SERVER) return;
+    const _eventErrorHandler = this.app.meta.event.on('app:errorHandler', ({ err }, next) => {
+      if (err.code === 401) {
+        if (err.message === 'jwt expired') {
+          this.app.gotoPage('/home/base/errorExpired', { returnTo: true });
+          return undefined;
+        }
+      }
+      return next();
+    });
+    this.ctx.meta.ssr.context.onRendered((_err?: Error) => {
+      _eventErrorHandler();
+    });
   }
 }
