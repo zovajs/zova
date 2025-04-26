@@ -1,4 +1,4 @@
-import { BeanBase, cast } from 'zova';
+import { BeanBase } from 'zova';
 import { Service } from 'zova-module-a-bean';
 
 @Service()
