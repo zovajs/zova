@@ -6,7 +6,7 @@ import type { HttpStatus } from '../../types/enum/httpStatus.js';
 import type { PluginZovaOptions } from '../../types/interface/pluginZova.js';
 import type { ZovaContext } from '../context/context.js';
 import { combineQueries } from '@cabloy/utils';
-import { markRaw } from 'vue';
+import { markRaw, nextTick } from 'vue';
 import { cast } from '../../types/utils/cast.js';
 import { sys } from '../sys/sys.js';
 import { AppMeta } from './meta.js';
@@ -103,7 +103,9 @@ export class ZovaApplication {
       return this.redirect(pagePath);
     }
     // replace
-    cast(this.meta).$router.replace(pagePath);
+    nextTick(() => {
+      cast(this.meta).$router.replace(pagePath);
+    });
   }
 
   public gotoHome() {
