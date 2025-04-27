@@ -1,16 +1,16 @@
 import { z } from 'zod';
 import { BeanControllerPageBase, Use } from 'zova';
 import { Controller } from 'zova-module-a-bean';
-import { ModelTestSchema } from '../../model/testSchema.js';
+import { ModelTest } from '../../model/test.js';
 
-export const ControllerPageToolOneSchemaSchemaQuery = z.object({
+export const ControllerPageToolOneSchemaQuery = z.object({
   api: z.string().optional(),
 });
 
 @Controller()
-export class ControllerPageToolOneSchema extends BeanControllerPageBase {
+export class ControllerPageToolOne extends BeanControllerPageBase {
   @Use()
-  $$modelTestSchema: ModelTestSchema;
+  $$modelTest: ModelTest;
 
   protected async __init__() {
     if (!this.$query.api) return;

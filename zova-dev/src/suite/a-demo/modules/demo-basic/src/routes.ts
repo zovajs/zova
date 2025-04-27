@@ -8,7 +8,7 @@ import { ZPageRouteQuery } from './.metadata/page/routeQuery.js';
 import { ZPageRouteQueryB } from './.metadata/page/routeQueryB.js';
 import { ZPageState } from './.metadata/page/state.js';
 import { ZPageStyle } from './.metadata/page/style.js';
-import { ZPageToolOneSchema } from './.metadata/page/toolOneSchema.js';
+import { ZPageToolOne } from './.metadata/page/toolOne.js';
 
 export const routes: IModuleRoute[] = [
   { path: 'state', component: ZPageState },
@@ -20,7 +20,7 @@ export const routes: IModuleRoute[] = [
   { name: 'routeParams', path: 'routeParams/:id?', component: ZPageRouteParams },
   { path: 'routeQueryB', component: ZPageRouteQueryB },
   { path: 'legacy', component: ZPageLegacy },
-  { path: 'toolOneSchema', component: ZPageToolOneSchema, meta: {
+  { path: 'toolOne', component: ZPageToolOne, meta: {
     componentKey: route => {
       return route.fullPath;
     },

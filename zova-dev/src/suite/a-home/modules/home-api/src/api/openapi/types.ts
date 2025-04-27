@@ -192,7 +192,7 @@ export interface paths {
     patch?: never;
     trace?: never;
   };
-  '/api/test/ssr/toolOne/testSchema/{id?}': {
+  '/api/test/ssr/toolOne/test/{id?}': {
     parameters: {
       query?: never;
       header?: never;
@@ -201,7 +201,7 @@ export interface paths {
     };
     get?: never;
     put?: never;
-    post: operations['TestSsrToolOne_testSchema'];
+    post: operations['TestSsrToolOne_test'];
     delete?: never;
     options?: never;
     head?: never;
@@ -803,7 +803,7 @@ export interface operations {
       };
     };
   };
-  TestSsrToolOne_testSchema: {
+  TestSsrToolOne_test: {
     parameters: {
       query: {
         name: string;
@@ -841,9 +841,7 @@ export interface operations {
       query: {
         name: string;
       };
-      header?: {
-        Authorization?: string;
-      };
+      header?: never;
       path: {
         id: ((string | undefined) | (number | undefined)) | undefined;
       };
