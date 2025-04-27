@@ -19,8 +19,10 @@ export class ModelPageRoute extends BeanModelBase {
       }
     } else {
       this._pageDataInner = this.getPageData(this.pagePath);
-      const route = useRoute();
       this.pageData = useComputed(() => {
+        const route = this.ctx.util.instanceScope(() => {
+          return useRoute();
+        });
         return this.getPageData(route.fullPath);
       });
     }
