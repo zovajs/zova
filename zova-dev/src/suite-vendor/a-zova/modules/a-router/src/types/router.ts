@@ -1,7 +1,7 @@
 import type { RouteComponent, RouteLocationNormalizedLoaded, RouteRecordRaw } from '@cabloy/vue-router';
 import type { z } from 'zod';
 import type { TypeComponentLayoutRecord } from 'zova';
-import type { BeanRouter } from './bean/bean.router.js';
+import type { BeanRouter } from '../bean/bean.router.js';
 
 import 'vue-router';
 

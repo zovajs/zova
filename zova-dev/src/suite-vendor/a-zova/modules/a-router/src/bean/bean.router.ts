@@ -29,6 +29,11 @@ export class BeanRouter extends BeanBase {
     if (!mainRouter) {
       // emit event
       await this.app.meta.event.emit('a-router:routerGuards', this);
+    } else {
+      if (process.env.CLIENT && this.ctx.meta.ssr.isRuntimeSsrPreHydration) {
+        // const routerHistory = this._vueRouterApp[SymbolRouterHistory];
+        // routerHistory.push('/login');
+      }
     }
   }
 }
