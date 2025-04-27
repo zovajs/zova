@@ -1,7 +1,7 @@
 import type { Router } from '@cabloy/vue-router';
 import { BeanBase, Use } from 'zova';
 import { Bean } from 'zova-module-a-bean';
-import { SysRouter } from 'zova-module-a-router';
+import { SysRouter } from './sys.router.js';
 
 export interface BeanRouter extends SysRouter {}
 
@@ -29,11 +29,6 @@ export class BeanRouter extends BeanBase {
     if (!mainRouter) {
       // emit event
       await this.app.meta.event.emit('a-router:routerGuards', this);
-    } else {
-      if (process.env.CLIENT && this.ctx.meta.ssr.isRuntimeSsrPreHydration) {
-        // const routerHistory = this._vueRouterApp[SymbolRouterHistory];
-        // routerHistory.push('/login');
-      }
     }
   }
 }
