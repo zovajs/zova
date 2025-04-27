@@ -16,6 +16,7 @@ export class ModelPageRoute extends BeanModelBase {
         this.pagePath = pagePath;
         this._pageDataInner = this.getPageData(this.pagePath);
         this._pageDataInner = this.$ssr.context.pageData;
+        this.pageData = this._pageDataInner;
       }
     } else {
       this._pageDataInner = this.getPageData(this.pagePath);

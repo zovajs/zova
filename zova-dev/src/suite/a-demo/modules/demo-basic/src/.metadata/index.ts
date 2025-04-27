@@ -39,13 +39,15 @@ import { ControllerPageToolOne } from '../page/toolOne/controller.jsx';
 /** render: end */
 /** render: begin */
 import { RenderPageToolOne } from '../page/toolOne/render.jsx';
-
+import { ControllerPageToolTwo } from '../page/toolTwo/controller.jsx';
 import { ZCard } from './component/card.js';
+
 import { NSControllerPageRouteParams } from './page/routeParams.js';
 import { NSControllerPageRouteQuery } from './page/routeQuery.js';
-
 import { NSControllerPageRouteQueryB } from './page/routeQueryB.js';
+
 import { NSControllerPageToolOne } from './page/toolOne.js';
+import { NSControllerPageToolTwo } from './page/toolTwo.js';
 import 'zova';
 import 'zova';
 
@@ -100,6 +102,7 @@ export * from '../page/locale/controller.jsx';
 export * from '../page/pinia/controller.jsx';
 export * from '../page/routeParams/controller.jsx';
 export * from '../page/routeQuery/controller.jsx';
+export * from '../page/routeQueryB/controller.jsx';
 declare module 'zova' {
 
 }
@@ -159,6 +162,11 @@ declare module 'zova-module-demo-basic' {
     /** @internal */
     get scope(): ScopeModuleDemoBasic;
   }
+
+  export interface ControllerPageToolTwo {
+    /** @internal */
+    get scope(): ScopeModuleDemoBasic;
+  }
 }
 declare module 'zova' {
   export interface IBeanRecordLocal {
@@ -173,15 +181,16 @@ declare module 'zova' {
     'demo-basic.controller.pageState': ControllerPageState;
     'demo-basic.controller.pageStyle': ControllerPageStyle;
     'demo-basic.controller.pageToolOne': ControllerPageToolOne;
+    'demo-basic.controller.pageToolTwo': ControllerPageToolTwo;
   }
 }
-export * from '../page/routeQueryB/controller.jsx';
 export * from '../page/state/controller.jsx';
 export * from '../page/style/controller.jsx';
 export * from '../page/toolOne/controller.jsx';
 /** components: end */
 /** render: begin */
 export * from '../page/toolOne/render.jsx';
+export * from '../page/toolTwo/controller.jsx';
 export * from '../routes.js';
 /** components: begin */
 export * from './component/card.js';
@@ -191,6 +200,7 @@ export * from './page/component.js';
 export * from './page/legacy.js';
 export * from './page/locale.js';
 export * from './page/pinia.js';
+export * from './page/routeParams.js';
 declare module 'zova-module-a-router' {
   export interface IPagePathRecord {
     '/demo/basic/component': TypePagePathSchema<'/demo/basic/component', undefined>;
@@ -204,6 +214,7 @@ declare module 'zova-module-a-router' {
     '/demo/basic/state': TypePagePathSchema<'/demo/basic/state', undefined>;
     '/demo/basic/style': TypePagePathSchema<'/demo/basic/style', undefined>;
     '/demo/basic/toolOne': TypePagePathSchema<'/demo/basic/toolOne', NSControllerPageToolOne.QueryInput>;
+    '/demo/basic/toolTwo': TypePagePathSchema<'/demo/basic/toolTwo', NSControllerPageToolTwo.QueryInput>;
   }
   export interface IPageNameRecord {
     'demo-basic:routeParams': undefined;
@@ -218,6 +229,9 @@ export const pagePathSchemas = {
   },
   '/demo/basic/toolOne': {
     query: NSControllerPageToolOne.querySchema,
+  },
+  '/demo/basic/toolTwo': {
+    query: NSControllerPageToolTwo.querySchema,
   },
 };
 export const pageNameSchemas = {
@@ -242,10 +256,14 @@ declare module 'zova-module-demo-basic' {
   export interface ControllerPageToolOne {
     $query: NSControllerPageToolOne.QueryOutput;
   }
+  export interface ControllerPageToolTwo {
+    $params: NSControllerPageToolTwo.ParamsOutput;
+    $query: NSControllerPageToolTwo.QueryOutput;
+  }
 }
 /** pages: end */
 
-export * from './page/routeParams.js';
+export * from './page/routeQuery.js';
 export const components = {
   card: ZCard,
 };
@@ -254,7 +272,7 @@ declare module 'zova' {
     'demo-basic:card': ControllerCard;
   }
 }
-export * from './page/routeQuery.js';
+export * from './page/routeQueryB.js';
 declare module 'zova' {
 
 }
@@ -270,8 +288,8 @@ declare module 'zova' {
     'demo-basic.render.pageToolOne': RenderPageToolOne;
   }
 }
-export * from './page/routeQueryB.js';
 export * from './page/state.js';
+export * from './page/style.js';
 declare module 'zova-module-a-bean' {
 
   export interface IAopRecord {
@@ -298,7 +316,7 @@ declare module 'zova' {
     'demo-basic.aop.home3': AopHome3;
   }
 }
-export * from './page/style.js';
+export * from './page/toolOne.js';
 declare module 'zova' {
 
 }
@@ -314,7 +332,7 @@ declare module 'zova' {
     'demo-basic.model.test': ModelTest;
   }
 }
-export * from './page/toolOne.js';
+export * from './page/toolTwo.js';
 declare module 'zova' {
 
 }
