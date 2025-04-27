@@ -1,6 +1,7 @@
 import type { Router } from '@cabloy/vue-router';
 import { BeanBase, Use } from 'zova';
 import { Bean } from 'zova-module-a-bean';
+import { ModelPageRoute } from '../model/pageRoute.js';
 import { SysRouter } from './sys.router.js';
 
 export interface BeanRouter extends SysRouter {}
@@ -11,6 +12,9 @@ export class BeanRouter extends BeanBase {
 
   @Use()
   $$sysRouter: SysRouter;
+
+  @Use()
+  $$modelPageRoute: ModelPageRoute;
 
   get router(): Router {
     return this._vueRouterApp;

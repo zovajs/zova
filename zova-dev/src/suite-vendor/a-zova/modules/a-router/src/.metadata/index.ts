@@ -13,11 +13,17 @@ import { BeanRouterBase } from '../bean/bean.routerBase.js';
 import { SysRouter } from '../bean/sys.router.js';
 import { config } from '../config/config.js';
 
+/** model: end */
+/** model: begin */
+import { ModelPageRoute } from '../model/pageRoute.js';
 /** service: end */
 /** service: begin */
 import { ServiceRouter } from '../service/router.js';
 /** sys: end */
 /** bean: begin */
+import 'zova';
+
+import 'zova';
 import 'zova';
 import 'zova';
 import 'zova';
@@ -62,7 +68,7 @@ declare module 'zova' {
     'a-router.bean.routerBase': BeanRouterBase;
   }
 }
-/** service: end */
+/** model: end */
 /** config: begin */
 export * from '../config/config.js';
 declare module 'zova-module-a-bean' {
@@ -82,6 +88,24 @@ declare module 'zova-module-a-router' {
 declare module 'zova' {
   export interface IBeanRecordGeneral {
     'a-router.service.router': ServiceRouter;
+  }
+}
+/** service: end */
+/** model: begin */
+export * from '../model/pageRoute.js';
+declare module 'zova' {
+
+}
+declare module 'zova-module-a-router' {
+
+  export interface ModelPageRoute {
+    /** @internal */
+    get scope(): ScopeModuleARouter;
+  }
+}
+declare module 'zova' {
+  export interface IBeanRecordGeneral {
+    'a-router.model.pageRoute': ModelPageRoute;
   }
 }
 /** config: end */

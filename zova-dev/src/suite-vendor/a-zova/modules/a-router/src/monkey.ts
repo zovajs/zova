@@ -17,6 +17,7 @@ import {
   useComputed,
 } from 'zova';
 import { ServiceRouter } from './service/router.js';
+import { SymbolRouterHistory } from './types/utils.js';
 import { getRealRouteName } from './utils.js';
 
 export class Monkey
@@ -45,6 +46,14 @@ export class Monkey
 
   async appReady() {
     const beanRouter = await this.getBeanRouter();
+    // pagePath
+    if (process.env.CLIENT && this.ctx.meta.ssr.isRuntimeSsrPreHydration) {
+      const pagePath = beanRouter.$$modelPageRoute.pagePath;
+      if (pagePath) {
+        const routerHistory = beanRouter.router[SymbolRouterHistory];
+        routerHistory.push(pagePath);
+      }
+    }
     // use router
     this.app.vue.use(beanRouter);
     // ssr
