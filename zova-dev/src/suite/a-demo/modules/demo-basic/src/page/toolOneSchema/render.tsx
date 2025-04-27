@@ -2,9 +2,9 @@ import { BeanRenderBase } from 'zova';
 import { Render } from 'zova-module-a-bean';
 
 @Render()
-export class RenderPageToolOne extends BeanRenderBase {
+export class RenderPageToolOneSchema extends BeanRenderBase {
   public render() {
-    const queryTest = this.$$modelTest.test();
+    const queryTest = this.$$modelTestSchema.testSchema();
     return <div>{queryTest.data?.name}</div>;
   }
 }

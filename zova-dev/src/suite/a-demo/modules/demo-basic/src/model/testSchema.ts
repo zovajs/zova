@@ -1,12 +1,12 @@
 import { BeanModelBase, Model } from 'zova-module-a-model';
 
 @Model()
-export class ModelTest extends BeanModelBase {
-  test() {
+export class ModelTestSchema extends BeanModelBase {
+  testSchema() {
     return this.$useStateData({
-      queryKey: ['test'],
+      queryKey: ['testSchema'],
       queryFn: async () => {
-        const data = await this.$api.testSsrToolOne.test({ id: 1, name: 'Tom', married: true, details: [] }, {
+        const data = await this.$api.testSsrToolOne.testSchema({ id: 1, name: 'Tom', married: true, details: [] }, {
           params: { id: 1 },
           query: { name: 'Tom' },
         });

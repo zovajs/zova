@@ -192,7 +192,7 @@ export interface paths {
     patch?: never;
     trace?: never;
   };
-  '/api/test/ssr/toolOne/test/{id?}': {
+  '/api/test/ssr/toolOne/testSchema/{id?}': {
     parameters: {
       query?: never;
       header?: never;
@@ -201,7 +201,23 @@ export interface paths {
     };
     get?: never;
     put?: never;
-    post: operations['TestSsrToolOne_test'];
+    post: operations['TestSsrToolOne_testSchema'];
+    delete?: never;
+    options?: never;
+    head?: never;
+    patch?: never;
+    trace?: never;
+  };
+  '/api/test/ssr/toolOne/testRender/{id?}': {
+    parameters: {
+      query?: never;
+      header?: never;
+      path?: never;
+      cookie?: never;
+    };
+    get: operations['TestSsrToolOne_testRender'];
+    put?: never;
+    post?: never;
     delete?: never;
     options?: never;
     head?: never;
@@ -787,7 +803,7 @@ export interface operations {
       };
     };
   };
-  TestSsrToolOne_test: {
+  TestSsrToolOne_testSchema: {
     parameters: {
       query: {
         name: string;
@@ -805,6 +821,35 @@ export interface operations {
         'application/json': components['schemas']['test-ssr.dto.testBody'];
       };
     };
+    responses: {
+      200: {
+        headers: {
+          [name: string]: unknown;
+        };
+        content: {
+          'application/json': {
+            code: string;
+            message: string;
+            data: components['schemas']['test-ssr.dto.testResult'];
+          };
+        };
+      };
+    };
+  };
+  TestSsrToolOne_testRender: {
+    parameters: {
+      query: {
+        name: string;
+      };
+      header?: {
+        Authorization?: string;
+      };
+      path: {
+        id: ((string | undefined) | (number | undefined)) | undefined;
+      };
+      cookie?: never;
+    };
+    requestBody?: never;
     responses: {
       200: {
         headers: {

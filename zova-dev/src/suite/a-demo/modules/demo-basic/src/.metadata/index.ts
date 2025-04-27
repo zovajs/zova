@@ -25,7 +25,7 @@ import locale_en_us from '../config/locale/en-us.js';
 import locale_zh_cn from '../config/locale/zh-cn.js';
 /** model: end */
 /** model: begin */
-import { ModelTest } from '../model/test.js';
+import { ModelTestSchema } from '../model/testSchema.js';
 import { ControllerPageComponent } from '../page/component/controller.jsx';
 import { ControllerPageLegacy } from '../page/legacy/controller.jsx';
 import { ControllerPageLocale } from '../page/locale/controller.jsx';
@@ -35,17 +35,17 @@ import { ControllerPageRouteQuery } from '../page/routeQuery/controller.jsx';
 import { ControllerPageRouteQueryB } from '../page/routeQueryB/controller.jsx';
 import { ControllerPageState } from '../page/state/controller.jsx';
 import { ControllerPageStyle } from '../page/style/controller.jsx';
-import { ControllerPageToolOne } from '../page/toolOne/controller.jsx';
+import { ControllerPageToolOneSchema } from '../page/toolOneSchema/controller.jsx';
 /** render: end */
 /** render: begin */
-import { RenderPageToolOne } from '../page/toolOne/render.jsx';
+import { RenderPageToolOneSchema } from '../page/toolOneSchema/render.jsx';
 
 import { ZCard } from './component/card.js';
 import { NSControllerPageRouteParams } from './page/routeParams.js';
 import { NSControllerPageRouteQuery } from './page/routeQuery.js';
 
 import { NSControllerPageRouteQueryB } from './page/routeQueryB.js';
-import { NSControllerPageToolOne } from './page/toolOne.js';
+import { NSControllerPageToolOneSchema } from './page/toolOneSchema.js';
 import 'zova';
 import 'zova';
 
@@ -93,7 +93,7 @@ export * from '../bean/theme.orange.js';
 export * from '../component/card/controller.jsx';
 /** aop: end */
 /** model: begin */
-export * from '../model/test.js';
+export * from '../model/testSchema.js';
 export * from '../page/component/controller.jsx';
 export * from '../page/legacy/controller.jsx';
 export * from '../page/locale/controller.jsx';
@@ -155,7 +155,7 @@ declare module 'zova-module-demo-basic' {
     get scope(): ScopeModuleDemoBasic;
   }
 
-  export interface ControllerPageToolOne {
+  export interface ControllerPageToolOneSchema {
     /** @internal */
     get scope(): ScopeModuleDemoBasic;
   }
@@ -172,16 +172,16 @@ declare module 'zova' {
     'demo-basic.controller.pageRouteQueryB': ControllerPageRouteQueryB;
     'demo-basic.controller.pageState': ControllerPageState;
     'demo-basic.controller.pageStyle': ControllerPageStyle;
-    'demo-basic.controller.pageToolOne': ControllerPageToolOne;
+    'demo-basic.controller.pageToolOneSchema': ControllerPageToolOneSchema;
   }
 }
 export * from '../page/routeQueryB/controller.jsx';
 export * from '../page/state/controller.jsx';
 export * from '../page/style/controller.jsx';
-export * from '../page/toolOne/controller.jsx';
+export * from '../page/toolOneSchema/controller.jsx';
 /** components: end */
 /** render: begin */
-export * from '../page/toolOne/render.jsx';
+export * from '../page/toolOneSchema/render.jsx';
 export * from '../routes.js';
 /** components: begin */
 export * from './component/card.js';
@@ -203,7 +203,7 @@ declare module 'zova-module-a-router' {
     '/demo/basic/routeQueryB': TypePagePathSchema<'/demo/basic/routeQueryB', NSControllerPageRouteQueryB.QueryInput>;
     '/demo/basic/state': TypePagePathSchema<'/demo/basic/state', undefined>;
     '/demo/basic/style': TypePagePathSchema<'/demo/basic/style', undefined>;
-    '/demo/basic/toolOne': TypePagePathSchema<'/demo/basic/toolOne', NSControllerPageToolOne.QueryInput>;
+    '/demo/basic/toolOneSchema': TypePagePathSchema<'/demo/basic/toolOneSchema', NSControllerPageToolOneSchema.QueryInput>;
   }
   export interface IPageNameRecord {
     'demo-basic:routeParams': undefined;
@@ -216,8 +216,8 @@ export const pagePathSchemas = {
   '/demo/basic/routeQueryB': {
     query: NSControllerPageRouteQueryB.querySchema,
   },
-  '/demo/basic/toolOne': {
-    query: NSControllerPageToolOne.querySchema,
+  '/demo/basic/toolOneSchema': {
+    query: NSControllerPageToolOneSchema.querySchema,
   },
 };
 export const pageNameSchemas = {
@@ -239,8 +239,8 @@ declare module 'zova-module-demo-basic' {
     $params: NSControllerPageRouteQueryB.ParamsOutput;
     $query: NSControllerPageRouteQueryB.QueryOutput;
   }
-  export interface ControllerPageToolOne {
-    $query: NSControllerPageToolOne.QueryOutput;
+  export interface ControllerPageToolOneSchema {
+    $query: NSControllerPageToolOneSchema.QueryOutput;
   }
 }
 /** pages: end */
@@ -260,14 +260,14 @@ declare module 'zova' {
 }
 declare module 'zova-module-demo-basic' {
 
-  export interface RenderPageToolOne {
+  export interface RenderPageToolOneSchema {
     /** @internal */
     get scope(): ScopeModuleDemoBasic;
   }
 }
 declare module 'zova' {
   export interface IBeanRecordLocal {
-    'demo-basic.render.pageToolOne': RenderPageToolOne;
+    'demo-basic.render.pageToolOneSchema': RenderPageToolOneSchema;
   }
 }
 export * from './page/routeQueryB.js';
@@ -304,17 +304,17 @@ declare module 'zova' {
 }
 declare module 'zova-module-demo-basic' {
 
-  export interface ModelTest {
+  export interface ModelTestSchema {
     /** @internal */
     get scope(): ScopeModuleDemoBasic;
   }
 }
 declare module 'zova' {
   export interface IBeanRecordGeneral {
-    'demo-basic.model.test': ModelTest;
+    'demo-basic.model.testSchema': ModelTestSchema;
   }
 }
-export * from './page/toolOne.js';
+export * from './page/toolOneSchema.js';
 declare module 'zova' {
 
 }
