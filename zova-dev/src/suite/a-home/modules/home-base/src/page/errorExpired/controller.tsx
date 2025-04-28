@@ -23,7 +23,7 @@ export class ControllerPageErrorExpired extends BeanControllerPageBase {
     const jwtInfo = await this.$$jwtAdapter.getJwtInfo();
     const refreshToken = jwtInfo?.refreshToken;
     if (!refreshToken) {
-      this.app.$gotoPage(this.sys.config.router.pageLogin, { returnTo: this.$query.returnTo });
+      this.app.$gotoPage(this.sys.env.ROUTER_PAGE_LOGIN, { returnTo: this.$query.returnTo });
       return;
     }
     await this.$$jwtAdapter.refreshAuthToken(refreshToken);

@@ -88,10 +88,3 @@ export interface TypePagePathSchema<P = unknown, S = unknown> {
   path: P;
   schema: S;
 }
-
-export interface IModuleConfigRouter {
-  mode: 'hash' | 'history' | 'abstract' | undefined;
-  pageHome: string;
-  pageLogin: string;
-  keyReturnTo: string;
-}

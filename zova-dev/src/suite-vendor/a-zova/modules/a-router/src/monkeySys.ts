@@ -46,8 +46,8 @@ export class MonkeySys extends BeanSimple implements IMonkeyModuleSys, IMonkeySy
       // returnTo
       if (options?.returnTo) {
         const returnTo = typeof options?.returnTo === 'string' ? options?.returnTo : app.$getCurrentPagePath();
-        if (returnTo !== app.sys.config.router.pageHome) {
-          query[app.sys.config.router.keyReturnTo] = returnTo;
+        if (returnTo !== app.sys.env.ROUTER_PAGE_HOME) {
+          query[app.sys.env.ROUTER_KEY_RETURNTO] = returnTo;
         }
       }
       // combineQueries
@@ -62,18 +62,18 @@ export class MonkeySys extends BeanSimple implements IMonkeyModuleSys, IMonkeySy
       });
     };
     app.$gotoHome = () => {
-      return app.$gotoPage(app.sys.config.router.pageHome);
+      return app.$gotoPage(app.sys.env.ROUTER_PAGE_HOME);
     };
     app.$gotoLogin = (returnTo?: string, cause?: string) => {
-      if (!returnTo && cast(app.meta.$router.currentRoute)?.path === app.sys.config.router.pageLogin) return;
+      if (!returnTo && cast(app.meta.$router.currentRoute)?.path === app.sys.env.ROUTER_PAGE_LOGIN) return;
       const query: any = {};
       if (cause) {
         query.cause = cause;
       }
-      return app.$gotoPage(app.sys.config.router.pageLogin, { query, returnTo: returnTo ?? true });
+      return app.$gotoPage(app.sys.env.ROUTER_PAGE_LOGIN, { query, returnTo: returnTo ?? true });
     };
     app.$gotoReturnTo = (returnTo?: string) => {
-      const pagePath = returnTo ?? cast(app.meta.$router.currentRoute)?.query?.[app.sys.config.router.keyReturnTo] ?? app.sys.config.router.pageHome;
+      const pagePath = returnTo ?? cast(app.meta.$router.currentRoute)?.query?.[app.sys.env.ROUTER_KEY_RETURNTO] ?? app.sys.env.ROUTER_PAGE_HOME;
       return app.$gotoPage(pagePath);
     };
     app.$getCurrentPagePath = (): string | undefined => {
