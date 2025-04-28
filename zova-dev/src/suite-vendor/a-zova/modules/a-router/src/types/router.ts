@@ -61,6 +61,13 @@ declare module 'zova' {
     'a-router:routerGuards': { data: BeanRouter; result: void };
   }
 
+  export interface ZovaConfigEnv {
+    ROUTER_MODE: 'hash' | 'history' | 'abstract' | undefined;
+    ROUTER_PAGE_HOME: string;
+    ROUTER_PAGE_LOGIN: string;
+    ROUTER_KEY_RETURNTO: string;
+  }
+
   // export interface IEventRecord {
   //   'a-router:routerGuards': BeanRouter;
   // }
@@ -80,4 +87,11 @@ export type TypePageSchemas = Record<string, TypePageSchema>;
 export interface TypePagePathSchema<P = unknown, S = unknown> {
   path: P;
   schema: S;
+}
+
+export interface IModuleConfigRouter {
+  mode: 'hash' | 'history' | 'abstract' | undefined;
+  pageHome: string;
+  pageLogin: string;
+  keyReturnTo: string;
 }

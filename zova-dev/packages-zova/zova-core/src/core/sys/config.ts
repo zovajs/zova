@@ -25,12 +25,6 @@ export function configDefault(env: ZovaConfigEnv): PowerPartial<ZovaConfig> {
       version: env.APP_VERSION,
       publicPath: env.APP_PUBLIC_PATH,
     },
-    router: {
-      mode: env.ROUTER_MODE,
-      pageHome: env.ROUTER_PAGE_HOME,
-      pageLogin: env.ROUTER_PAGE_LOGIN,
-      keyReturnTo: env.ROUTER_KEY_RETURNTO,
-    },
     api: {
       baseURL: process.env.SERVER ? (env.SSR_API_BASE_URL || env.API_BASE_URL) : env.API_BASE_URL,
       prefix: env.API_PREFIX,
@@ -79,12 +73,6 @@ export interface ZovaConfig {
     description: string;
     version: string;
     publicPath: string;
-  };
-  router: {
-    mode: 'hash' | 'history' | 'abstract' | undefined;
-    pageHome: string;
-    pageLogin: string;
-    keyReturnTo: string;
   };
   api: {
     baseURL: string;

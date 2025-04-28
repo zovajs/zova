@@ -9,10 +9,6 @@ export interface ZovaConfigEnv {
   APP_PUBLIC_PATH: string | undefined;
   APP_LOCALE_DEFAULT: string | undefined;
   APP_LOCALE_HEADER_KEY: string | undefined;
-  ROUTER_MODE: 'hash' | 'history' | 'abstract' | undefined;
-  ROUTER_PAGE_HOME: string | undefined;
-  ROUTER_PAGE_LOGIN: string | undefined;
-  ROUTER_KEY_RETURNTO: string | undefined;
   DEV_SERVER_HOSTNAME: string | undefined;
   DEV_SERVER_PORT: string | undefined;
   SSR_API_BASE_URL: string | undefined;
