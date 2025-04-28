@@ -64,7 +64,7 @@ async function _prepareHandler() {
   // initialize
   const zovaSys = await handlerInstance.initialize(process.env);
   // ssr handler
-  const ssrHandler = await zovaSys.meta.ssr.getSsrHandler(rootFolder);
+  const ssrHandler = await zovaSys.meta.$getSsrHandler(rootFolder);
   await ssrHandler.ensureReady();
   // ok
   return ssrHandler;
