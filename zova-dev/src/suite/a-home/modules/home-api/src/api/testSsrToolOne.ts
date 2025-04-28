@@ -13,14 +13,6 @@ export type ApiApiTestSsrToolOnetestRequestBody = components['schemas']['test-ss
 ;
 export type ApiApiTestSsrToolOnetestResponseBody = paths[ApiApiTestSsrToolOnetestPath][ApiApiTestSsrToolOnetestMethod]['responses']['200']['content']['application/json']['data'];
 
-/** TestSsrToolOne_testRender */
-export const ApiApiTestSsrToolOnetestRenderPath = '/api/test/ssr/toolOne/testRender/{id?}';
-export type ApiApiTestSsrToolOnetestRenderPath = '/api/test/ssr/toolOne/testRender/{id?}';
-export type ApiApiTestSsrToolOnetestRenderMethod = 'get';
-export type ApiApiTestSsrToolOnetestRenderRequestParams = paths[ApiApiTestSsrToolOnetestRenderPath][ApiApiTestSsrToolOnetestRenderMethod]['parameters']['path'];
-export type ApiApiTestSsrToolOnetestRenderRequestQuery = paths[ApiApiTestSsrToolOnetestRenderPath][ApiApiTestSsrToolOnetestRenderMethod]['parameters']['query'];
-export type ApiApiTestSsrToolOnetestRenderResponseBody = paths[ApiApiTestSsrToolOnetestRenderPath][ApiApiTestSsrToolOnetestRenderMethod]['responses']['200']['content']['application/json']['data'];
-
 @Api()
 export class ApiTestSsrToolOne extends BeanApiBase {
   test(
@@ -35,19 +27,6 @@ export class ApiTestSsrToolOne extends BeanApiBase {
       this.$pathTranslate(ApiApiTestSsrToolOnetestPath, options.params),
       body,
       this.$configPrepare(OpenApiBaseURL(this.sys), options, true),
-    );
-  }
-
-  testRender(
-
-    options: {
-      params: ApiApiTestSsrToolOnetestRenderRequestParams;
-      query: ApiApiTestSsrToolOnetestRenderRequestQuery;
-    } & IApiActionOptions,
-  ) {
-    return this.$fetch.get<any, ApiApiTestSsrToolOnetestRenderResponseBody>(
-      this.$pathTranslate(ApiApiTestSsrToolOnetestRenderPath, options.params),
-      this.$configPrepare(OpenApiBaseURL(this.sys), options),
     );
   }
 }

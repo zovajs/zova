@@ -11,10 +11,11 @@ import { ApiHomeBaseMenu } from '../api/homeBaseMenu.js';
 import { ApiHomeUserPassport } from '../api/homeUserPassport.js';
 import { ApiOnion } from '../api/onion.js';
 import { ApiTestCabloyPassport } from '../api/testCabloyPassport.js';
+import { ApiTestSsrToolOne } from '../api/testSsrToolOne.js';
 /** api: end */
 /** api: begin */
 
-import { ApiTestSsrToolOne } from '../api/testSsrToolOne.js';
+import { ApiTestSsrToolTwo } from '../api/testSsrToolTwo.js';
 
 import { ApiTestVonaUpload } from '../api/testVonaUpload.js';
 /** service: end */
@@ -38,6 +39,7 @@ export * from '../api/onion.js';
 export * from '../api/openapi/index.js';
 export * from '../api/testCabloyPassport.js';
 export * from '../api/testSsrToolOne.js';
+export * from '../api/testSsrToolTwo.js';
 declare module 'zova' {
 
 }
@@ -78,6 +80,11 @@ declare module 'zova-module-home-api' {
     get scope(): ScopeModuleHomeApi;
   }
 
+  export interface ApiTestSsrToolTwo {
+    /** @internal */
+    get scope(): ScopeModuleHomeApi;
+  }
+
   export interface ApiTestVonaUpload {
     /** @internal */
     get scope(): ScopeModuleHomeApi;
@@ -91,6 +98,7 @@ export interface IModuleApi {
   onion: ApiOnion;
   testCabloyPassport: ApiTestCabloyPassport;
   testSsrToolOne: ApiTestSsrToolOne;
+  testSsrToolTwo: ApiTestSsrToolTwo;
   testVonaUpload: ApiTestVonaUpload;
 }
 declare module 'zova' {
@@ -102,6 +110,7 @@ declare module 'zova' {
     'home-api.api.onion': ApiOnion;
     'home-api.api.testCabloyPassport': ApiTestCabloyPassport;
     'home-api.api.testSsrToolOne': ApiTestSsrToolOne;
+    'home-api.api.testSsrToolTwo': ApiTestSsrToolTwo;
     'home-api.api.testVonaUpload': ApiTestVonaUpload;
   }
 }
