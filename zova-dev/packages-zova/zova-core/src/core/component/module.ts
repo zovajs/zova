@@ -107,11 +107,6 @@ export class AppModule extends BeanSimple {
     await this.app.bean._getBean(`${moduleName}.scope.module` as any, false);
     // monkey: moduleLoaded
     await this._monkeyModule('moduleLoaded', moduleRepo);
-    // ssrContext.modules
-    if (process.env.SERVER && process.env.PROD) {
-      if (!this.ctx.meta.ssr.context.modules) this.ctx.meta.ssr.context.modules = new Set();
-      this.ctx.meta.ssr.context.modules.add(`@@${moduleName}`);
-    }
   }
 
   private async _installInner(moduleName: string, moduleRepo: IModule) {
