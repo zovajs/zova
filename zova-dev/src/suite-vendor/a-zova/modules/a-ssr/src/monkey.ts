@@ -3,7 +3,7 @@ import type { SSRMetaOptions } from './types/ssr.js';
 import { BeanSimple, cast } from 'zova';
 import { useMeta } from './lib/useMeta.js';
 
-export class Monkey extends BeanSimple implements IMonkeyAppContextInitialize, IMonkeyBeanInit {
+export class Monkey extends BeanSimple implements IMonkeyAppContextInitialize, IMonkeyAppInitialize, IMonkeyBeanInit {
   appContextInitialize(ctx: ZovaContext): void {
     ctx.meta.$ssr = ctx.app.ctx.meta.$ssr;
   }

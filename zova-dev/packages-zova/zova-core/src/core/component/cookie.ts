@@ -7,7 +7,7 @@ export class AppCookie extends BeanSimple {
   getItem(key: string): string | undefined;
   getItem(key?: undefined | null): Record<string, string>;
   getItem(key?: string | undefined | null): Record<string, string> | string | undefined {
-    const cookieSource = cast(process.env.SERVER ? this.ctx.meta.ssr.context.req.headers : document);
+    const cookieSource = cast(process.env.SERVER ? cast(this.ctx.meta).$ssr.context.req.headers : document);
     const cookies = cookieSource.cookie ? cookieSource.cookie.split('; ') : [];
     const l = cookies.length;
     let result: Record<string, string> | undefined = key ? undefined : {};
@@ -68,8 +68,8 @@ export class AppCookie extends BeanSimple {
     ].join('');
 
     if (process.env.SERVER) {
-      const req = this.ctx.meta.ssr.context.req;
-      const res = this.ctx.meta.ssr.context.res;
+      const req = cast(this.ctx.meta).$ssr.context.req;
+      const res = cast(this.ctx.meta).$ssr.context.res;
       const reqAny = cast(req);
       const resAny = cast(res);
       if (reqAny.qCookies) {
