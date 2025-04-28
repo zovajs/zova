@@ -9,7 +9,9 @@ declare module 'zova' {
   export interface BeanBase {
     $pinia: Pinia;
   }
+}
 
+declare module 'zova-module-a-ssr' {
   export interface SSRContextStateDefer {
     pinia: Record<string, StateTree>;
   }

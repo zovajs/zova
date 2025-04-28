@@ -48,7 +48,7 @@ export class BeanModelUseQuery extends BeanModelQuery {
       const queryCache = this.$queryFind({ queryKey });
       const queryCacheExists = queryCache?.state.data !== undefined;
       options.staleTime = query => {
-        if (process.env.CLIENT && this.ctx.meta.ssr.isRuntimeSsrPreHydration && queryCacheExists) {
+        if (process.env.CLIENT && this.ctx.meta.$ssr?.isRuntimeSsrPreHydration && queryCacheExists) {
           return resolveStaleTime(this.scopeSelf.config.query.staleTime.ssr, query);
         }
         return resolveStaleTime(staleTime, query);

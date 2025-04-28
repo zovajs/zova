@@ -1,6 +1,6 @@
 import { AxiosRequestConfig } from 'axios';
-import { ISsrSitePerformActionOptions } from 'zova';
 import { BeanInterceptorBase, IDecoratorInterceptorOptions, IInterceptorRequest, Interceptor, NextInterceptorRequest } from 'zova-module-a-fetch';
+import { ISsrSitePerformActionOptions } from 'zova-module-a-ssr';
 
 export interface IInterceptorOptionsPerformAction extends IDecoratorInterceptorOptions {}
 
@@ -11,7 +11,8 @@ export class InterceptorPerformAction extends BeanInterceptorBase<IInterceptorOp
     _options: IInterceptorOptionsPerformAction,
     next: NextInterceptorRequest,
   ): Promise<AxiosRequestConfig> {
-    const performAction = this.ctx.meta.ssr.getPerformAction(config.baseURL);
+    if (process.env.CLIENT) return next();
+    const performAction = this.ctx.meta.$ssr.getPerformAction(config.baseURL);
     if (!performAction) return next();
     const data: ISsrSitePerformActionOptions = {
       method: config.method as any,

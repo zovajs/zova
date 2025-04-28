@@ -12,7 +12,7 @@ export class BeanIcon extends BeanBase {
 
   protected async __init__() {
     if (process.env.SERVER) {
-      this.ctx.meta.ssr.context.onRendered((err?: Error) => {
+      this.ctx.meta.$ssr.context.onRendered((err?: Error) => {
         if (err) return;
         this._onRendered();
       });
@@ -27,7 +27,7 @@ export class BeanIcon extends BeanBase {
   }
 
   private _onRendered() {
-    this.ctx.meta.ssr.context._meta.bodyTags += this._renderSSRContainer();
+    this.ctx.meta.$ssr.context._meta.bodyTags += this._renderSSRContainer();
   }
 
   private _renderSSRContainer() {
