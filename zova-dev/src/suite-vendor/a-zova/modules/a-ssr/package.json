@@ -40,5 +40,8 @@
     "tsc:publish": "npm run clean && tsc -b",
     "_prepublishOnly": "npm run tsc:publish"
   },
-  "dependencies": {}
+  "dependencies": {
+    "defu": "^6.1.4",
+    "devalue": "^5.0.0"
+  }
 }

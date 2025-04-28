@@ -1,5 +1,5 @@
 import type { ComponentInternalInstance, Ref, VNode } from 'vue';
-import type { Functionable } from '../../decorator/index.js';
+import type { Functionable } from 'zova';
 import type {
   OnHydratePropHasMismatch,
   OnHydratePropHasMismatchResult,
@@ -7,12 +7,11 @@ import type {
   SSRContextState,
   SSRContextStateDefer,
   TypeSsrSitePerformAction,
-} from '../../types/interface/ssr.js';
+} from '../types/ssr.js';
 import { includeBooleanAttr, isBooleanAttr, isString, stringifyStyle } from '@vue/shared';
 import { defu } from 'defu';
 import { normalizeClass, normalizeStyle, ref, useSSRContext } from 'vue';
-import { BeanSimple } from '../../bean/beanSimple.js';
-import { cast } from '../../types/utils/cast.js';
+import { BeanSimple, cast } from 'zova';
 import { CtxSSRMetaStore } from './ssrMetaStore.js';
 
 const SymbolIsRuntimeSsrPreHydration = Symbol('SymbolIsRuntimeSsrPreHydration');
@@ -72,7 +71,7 @@ export class CtxSSR extends BeanSimple {
     this.metaStore = this.bean._newBeanSimple(CtxSSRMetaStore, false);
     // fix: flash on page load
     if (process.env.DEV && process.env.CLIENT && this.isRuntimeSsrPreHydration) {
-      this.ctx.meta.ssr.onHydrated(() => {
+      this.ctx.meta.$ssr.onHydrated(() => {
         document.querySelectorAll('style[vite-css-module-id]').forEach(node => node.remove());
       });
     }
@@ -145,7 +144,7 @@ export class CtxSSR extends BeanSimple {
   }
 
   handleDirectOrOnHydrated(fn: Functionable) {
-    if (process.env.CLIENT && this.ctx.meta.ssr.isRuntimeSsrPreHydration) {
+    if (process.env.CLIENT && this.ctx.meta.$ssr.isRuntimeSsrPreHydration) {
       this.onHydrated(fn);
     } else {
       return fn();

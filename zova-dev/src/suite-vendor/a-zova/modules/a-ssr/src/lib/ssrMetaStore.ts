@@ -1,9 +1,8 @@
-import type { SSRContext, SSRMetaOptions, SSRMetaOptionsWrapper } from '../../types/index.js';
+import type { SSRContext, SSRMetaOptions, SSRMetaOptionsWrapper } from '../types/ssr.js';
 // from: quasar/ui/src/plugins/Meta.js
 import { extend } from '@cabloy/extend';
 import * as devalue from 'devalue';
-import { BeanSimple } from '../../bean/beanSimple.js';
-import { cast } from '../../types/index.js';
+import { BeanSimple, cast } from 'zova';
 
 export class CtxSSRMetaStore extends BeanSimple {
   private _updateId: number = 0;
@@ -12,7 +11,7 @@ export class CtxSSRMetaStore extends BeanSimple {
 
   protected __init__() {
     if (process.env.SERVER) {
-      const ssrContext = this.ctx.meta.ssr.context;
+      const ssrContext = this.ctx.meta.$ssr.context;
       ssrContext.__qMetaList = [];
       if (this.sys.env.SSR_BODYREADYOBSERVER === 'true') {
         ssrContext.__qMetaList.push({
@@ -24,7 +23,7 @@ export class CtxSSRMetaStore extends BeanSimple {
         ssrContext.rendered = () => {};
       };
     }
-    if (process.env.CLIENT && this.ctx.meta.ssr.isRuntimeSsrPreHydration) {
+    if (process.env.CLIENT && this.ctx.meta.$ssr.isRuntimeSsrPreHydration) {
       this._currentClientMeta = cast(window).__Q_META__;
       document.getElementById('ssr-meta-init')?.remove();
     }
@@ -32,7 +31,7 @@ export class CtxSSRMetaStore extends BeanSimple {
 
   private _onRenderedLast(err?: Error) {
     if (!err) {
-      const ssrContext = this.ctx.meta.ssr.context;
+      const ssrContext = this.ctx.meta.$ssr.context;
       this._injectContextState(ssrContext);
       this._injectContextStateDefer(ssrContext);
       this._injectServerMeta(ssrContext);
