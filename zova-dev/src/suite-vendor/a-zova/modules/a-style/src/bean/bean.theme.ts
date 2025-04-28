@@ -1,9 +1,10 @@
 import type { IBeanRecord } from 'zova';
 import type { IThemeBase, IThemeHandler } from '../types/index.js';
 import { watch } from 'vue';
-import { cast } from 'zova';
+import { cast, UseScope } from 'zova';
 import { Bean } from 'zova-module-a-bean';
 import { BeanModelBase } from 'zova-module-a-model';
+import { ScopeModuleASsr } from 'zova-module-a-ssr';
 
 export type ThemeDarkMode = 'auto' | boolean;
 
@@ -21,9 +22,12 @@ export class BeanTheme extends BeanModelBase {
   private _mediaDark?: MediaQueryList;
   private _onMediaDarkChange?;
 
+  @UseScope()
+  $$scopeSsr: ScopeModuleASsr;
+
   protected async __init__() {
     // support admin
-    const cookieThemeName = this.sys.config.ssr.cookieThemeName;
+    const cookieThemeName = this.$$scopeSsr.config.cookieThemeName;
     this.name = this.$useState (
       cookieThemeName ? 'cookie' : 'local',
       {
@@ -36,8 +40,8 @@ export class BeanTheme extends BeanModelBase {
         },
       },
     );
-    const cookieThemeDark = this.sys.config.ssr.cookieThemeDark;
-    const cookieThemeDarkDefault = this.sys.config.ssr.cookieThemeDarkDefault;
+    const cookieThemeDark = this.$$scopeSsr.config.cookieThemeDark;
+    const cookieThemeDarkDefault = this.$$scopeSsr.config.cookieThemeDarkDefault;
     this.darkMode = this.$useState(
       cookieThemeDark ? 'cookie' : 'local',
       {
@@ -83,7 +87,7 @@ export class BeanTheme extends BeanModelBase {
 
   async _applyThemeWrapper() {
     await this._applyTheme();
-    if (process.env.SERVER && !this.sys.config.ssr.cookieThemeDark) {
+    if (process.env.SERVER && !this.$$scopeSsr.config.cookieThemeDark) {
       this.toggleDark();
       await this._applyTheme();
     }

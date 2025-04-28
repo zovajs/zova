@@ -108,4 +108,11 @@ declare module 'zova' {
     $ssr: CtxSSR;
     $useMeta(options: SSRMetaOptions | (() => SSRMetaOptions)): void;
   }
+
+  export interface ZovaConfigEnv {
+    SSR_COOKIE_THEMENAME: string | undefined;
+    SSR_COOKIE_THEMEDARK: string | undefined;
+    SSR_COOKIE_THEMEDARK_DEFAULT: string | undefined;
+    SSR_BODYREADYOBSERVER: string | undefined;
+  }
 }

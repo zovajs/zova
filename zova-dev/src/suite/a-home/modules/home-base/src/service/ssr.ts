@@ -1,8 +1,12 @@
-import { BeanBase } from 'zova';
+import { BeanBase, UseScope } from 'zova';
 import { Service } from 'zova-module-a-bean';
+import { ScopeModuleASsr } from 'zova-module-a-ssr';
 
 @Service()
 export class ServiceSsr extends BeanBase {
+  @UseScope()
+  $$scopeSsr: ScopeModuleASsr;
+
   public async initialize() {
     // ssr hydrated
     if (process.env.CLIENT) {
@@ -14,7 +18,7 @@ export class ServiceSsr extends BeanBase {
     if (process.env.SERVER) {
       this.ctx.meta.$ssr.context.onRendered((err?: Error) => {
         if (err) return;
-        if (!this.sys.config.ssr.cookieThemeDark) {
+        if (!this.$$scopeSsr.config.cookieThemeDark) {
           this.ctx.meta.$ssr.context._meta.bodyTags += `<script id="__prefersColorSchemeDarkJS">
             document.body.setAttribute('data-theme', window.ssr_themedark_data);
             document.querySelector('#__prefersColorSchemeDarkJS').remove();

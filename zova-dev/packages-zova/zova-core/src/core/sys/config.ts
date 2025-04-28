@@ -37,12 +37,6 @@ export function configDefault(env: ZovaConfigEnv): PowerPartial<ZovaConfig> {
       jwt: env.API_JWT !== 'false',
     },
     ssr: {
-      cookieThemeName: env.SSR_COOKIE_THEMENAME === 'true',
-      cookieThemeDark: env.SSR_COOKIE_THEMEDARK === 'true',
-      cookieThemeDarkDefault: env.SSR_COOKIE_THEMEDARK_DEFAULT === 'true',
-      optimization: {
-        bodyReadyObserver: env.SSR_BODYREADYOBSERVER === 'true',
-      },
       server: {
         protocol: env.SSR_PROD_PROTOCOL,
         host: env.SSR_PROD_HOST || `localhost:${env.SSR_PROD_PORT}`,
@@ -98,12 +92,6 @@ export interface ZovaConfig {
     jwt: boolean;
   };
   ssr: {
-    cookieThemeName: boolean;
-    cookieThemeDark: boolean;
-    cookieThemeDarkDefault: boolean;
-    optimization: {
-      bodyReadyObserver: boolean;
-    };
     server: {
       protocol: string;
       host: string;
