@@ -7,21 +7,30 @@
     "capabilities": {
       "meta": {
         "appMode": "ssr"
-      }
+      },
+      "monkey": true
     }
   },
   "description": "",
   "author": "",
-  "keywords": ["Zova Module"],
+  "keywords": [
+    "Zova Module"
+  ],
   "exports": {
     ".": {
-      "types": ["./src/index.ts", "./dist/index.d.ts"],
+      "types": [
+        "./src/index.ts",
+        "./dist/index.d.ts"
+      ],
       "import": "./src/index.ts",
       "default": "./dist/index.js"
     },
     "./*": "./*"
   },
-  "files": ["dist", "mock"],
+  "files": [
+    "dist",
+    "mock"
+  ],
   "scripts": {
     "clean": "tsc -b --clean",
     "tsc:publish": "npm run clean && tsc -b",

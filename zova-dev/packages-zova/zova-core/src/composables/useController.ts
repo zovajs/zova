@@ -18,6 +18,7 @@ import {
   SymbolControllerRefDisable,
 } from '../bean/type.js';
 import { ZovaContext } from '../core/context/index.js';
+import { sys } from '../core/sys/sys.js';
 
 export function useControllerPage<M, R, S>(
   controllerBeanFullName: Constructable<M>,
@@ -81,6 +82,12 @@ async function _useController(
 ) {
   // ctx
   const ctx = new ZovaContext(getCurrentInstance()!);
+  // ctx: monkey
+  if (ctx.app) {
+    await ctx.app.meta.module._monkeyModule('appContextInitialize', undefined, ctx);
+  } else {
+    await sys.meta.module._monkeyModule('sysContextInitialize', undefined, ctx);
+  }
   // monkey
   if (ctx.app) {
     ctx.app.meta.module._monkeyModuleSync('controllerDataPrepare', undefined, controllerData);

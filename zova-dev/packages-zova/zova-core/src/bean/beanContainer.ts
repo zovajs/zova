@@ -71,15 +71,15 @@ export class BeanContainer {
       const beanInstance = cast(beanInstances[prop]);
       if (beanInstance && !(beanInstance instanceof BeanAopBase) && beanInstance.__dispose__) {
         if (this.containerType === 'sys') {
-          this.sys.meta.module._monkeyModule('beanDispose', undefined, this, beanInstance);
+          this.sys.meta.module._monkeyModuleSync('beanDispose', undefined, this, beanInstance);
           beanInstance.__dispose__();
-          this.sys.meta.module._monkeyModule('beanDisposed', undefined, this, beanInstance);
+          this.sys.meta.module._monkeyModuleSync('beanDisposed', undefined, this, beanInstance);
         } else {
-          this.app.meta.module._monkeyModule('beanDispose', undefined, this, beanInstance);
+          this.app.meta.module._monkeyModuleSync('beanDispose', undefined, this, beanInstance);
           this.runWithInstanceScopeOrAppContext(() => {
             beanInstance.__dispose__();
           });
-          this.app.meta.module._monkeyModule('beanDisposed', undefined, this, beanInstance);
+          this.app.meta.module._monkeyModuleSync('beanDisposed', undefined, this, beanInstance);
         }
       }
     }
