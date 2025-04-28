@@ -49,12 +49,12 @@ export interface IMonkeyApp
   IMonkeyBeanDisposed {}
 
 export interface IMonkeyController {
-  controllerDataPrepare(controllerData: IControllerData);
-  controllerDataInit(controllerData: IControllerData, controller: BeanBase);
+  controllerDataPrepare(controllerData: IControllerData): void;
+  controllerDataInit(controllerData: IControllerData, controller: BeanBase): void;
 }
 
 export interface IMonkeySysContextInitialize {
-  sysContextInitialize(ctx: ZovaContext): Promise<void>;
+  sysContextInitialize(ctx: ZovaContext): void;
 }
 
 export interface IMonkeySysInitialize {
@@ -70,7 +70,7 @@ export interface IMonkeySysReady {
 }
 
 export interface IMonkeyAppContextInitialize {
-  appContextInitialize(ctx: ZovaContext): Promise<void>;
+  appContextInitialize(ctx: ZovaContext): void;
 }
 
 export interface IMonkeyAppInitialize {

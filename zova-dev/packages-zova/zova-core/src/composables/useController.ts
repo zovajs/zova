@@ -84,9 +84,9 @@ async function _useController(
   const ctx = new ZovaContext(getCurrentInstance()!);
   // ctx: monkey
   if (ctx.app) {
-    await ctx.app.meta.module._monkeyModule('appContextInitialize', undefined, ctx);
+    ctx.app.meta.module._monkeyModuleSync('appContextInitialize', undefined, ctx);
   } else {
-    await sys.meta.module._monkeyModule('sysContextInitialize', undefined, ctx);
+    sys.meta.module._monkeyModuleSync('sysContextInitialize', undefined, ctx);
   }
   // monkey
   if (ctx.app) {
