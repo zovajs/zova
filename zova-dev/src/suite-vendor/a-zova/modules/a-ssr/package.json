@@ -8,7 +8,8 @@
       "meta": {
         "appMode": "ssr"
       },
-      "monkey": true
+      "monkey": true,
+      "preload": true
     },
     "dependencies": {
       "a-zova": "5.0.0"

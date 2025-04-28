@@ -25,11 +25,6 @@ export type TypeModuleErrors<T> = {
   [prop in string & keyof T]: IModuleError;
 };
 
-export interface ErrorSSR extends Error {
-  pagePath?: string;
-  url?: string;
-}
-
 declare module 'zova-core' {
   export interface IEventRecord {
     'app:errorHandler': { data: IErrorHandlerEventData; result: IErrorHandlerEventResult };
