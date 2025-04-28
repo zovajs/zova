@@ -48,7 +48,7 @@ export * from '../model/passport.js';
 export * from '../page/login/controller.jsx';
 declare module 'zova-module-a-router' {
   export interface IPagePathRecord {
-    '/home/user/login': TypePagePathSchema<'/home/user/login', undefined>;
+    '/home/user/login': TypePagePathSchema<undefined, undefined>;
   }
   export interface IPageNameRecord {
 

@@ -86,9 +86,8 @@ export * from '../routes.js';
 export * from './page/item.js';
 declare module 'zova-module-a-router' {
   export interface IPagePathRecord {
-    '/demo/todo/item/:_string_': TypePagePathSchema<'/demo/todo/item:{id}', NSControllerPageItem.QueryInput>;
-    '/demo/todo/item/:id': TypePagePathSchema<`/demo/todo/item/${string}`, NSControllerPageItem.QueryInput>;
-    '/demo/todo/todo': TypePagePathSchema<'/demo/todo/todo', undefined>;
+    '/demo/todo/item/:id': TypePagePathSchema<NSControllerPageItem.ParamsInput, NSControllerPageItem.QueryInput>;
+    '/demo/todo/todo': TypePagePathSchema<undefined, undefined>;
   }
   export interface IPageNameRecord {
     'demo-todo:item': undefined;

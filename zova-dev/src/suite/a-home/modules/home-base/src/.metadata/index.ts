@@ -114,8 +114,8 @@ export * from '../page/errorNotFound/controller.jsx';
 export * from '../routes.js';
 declare module 'zova-module-a-router' {
   export interface IPagePathRecord {
-    '/home/base/errorExpired': TypePagePathSchema<'/home/base/errorExpired', NSControllerPageErrorExpired.QueryInput>;
-    '/home/base//:catchAll(.*)*': TypePagePathSchema<'/home/base//:catchAll(.*)*', undefined>;
+    '/home/base/errorExpired': TypePagePathSchema<undefined, NSControllerPageErrorExpired.QueryInput>;
+    '/home/base//:catchAll(.*)*': TypePagePathSchema<undefined, undefined>;
   }
   export interface IPageNameRecord {
 

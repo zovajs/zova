@@ -36,7 +36,9 @@ export class ControllerPageRouteParams extends BeanControllerPageBase {
             class="btn btn-primary"
             onClick={() => {
               const id = this.$params.id + 1;
-              const url = this.$router.getPagePath(`/demo/basic/routeParams/${id}`);
+              const url = this.$router.getPagePath('/demo/basic/routeParams/:id?', {
+                params: { id },
+              });
               this.$router.push(url);
             }}
           >

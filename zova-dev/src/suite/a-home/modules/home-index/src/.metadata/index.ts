@@ -37,7 +37,7 @@ export * from '../routes.js';
 export * from './page/home.js';
 declare module 'zova-module-a-router' {
   export interface IPagePathRecord {
-    '/home/index': TypePagePathSchema<'/home/index', undefined>;
+    '/home/index': TypePagePathSchema<undefined, undefined>;
   }
   export interface IPageNameRecord {
 
