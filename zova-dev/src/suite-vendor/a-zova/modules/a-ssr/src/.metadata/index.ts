@@ -1,4 +1,4 @@
-/** monkeySys: begin */
+/** monkey: begin */
 import type { BeanScopeUtil } from 'zova';
 /** monkeySys: end */
 /** scope: begin */
@@ -7,6 +7,9 @@ import { Scope } from 'zova-module-a-bean';
 
 import 'zova';
 
+export * from '../monkey.js';
+/** monkey: end */
+/** monkeySys: begin */
 export * from '../monkeySys.js';
 
 @Scope()
