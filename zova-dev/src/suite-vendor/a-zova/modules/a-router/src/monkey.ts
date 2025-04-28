@@ -7,6 +7,7 @@ import type {
   IMonkeyAppReady,
   IMonkeyController,
 } from 'zova';
+import type { ErrorSSR } from 'zova-module-a-ssr';
 import type { BeanRouter } from './bean/bean.router.js';
 import type { TypePageSchema } from './types/router.js';
 import * as ModuleInfo from '@cabloy/module-info';
@@ -14,6 +15,7 @@ import { useRoute } from '@cabloy/vue-router';
 import {
   BeanControllerPageBase,
   BeanSimple,
+  HttpStatus,
   useComputed,
 } from 'zova';
 import { ServiceRouter } from './service/router.js';
@@ -36,6 +38,10 @@ export class Monkey
   async appInitialize() {
     // router
     this.serviceRouter = await this.bean._newBean(ServiceRouter, false);
+    //  ssr errorHandler
+    if (process.env.CLIENT) {
+      this._ssrErrorHandler();
+    }
   }
 
   async appInitialized() {
@@ -112,5 +118,37 @@ export class Monkey
       if (!schemas?.query) throw new Error(`page query schema not found: ${schemaKey}`);
       return schemas.query.parse(route.query);
     });
+  }
+
+  private _ssrErrorHandler() {
+    if (!process.env.CLIENT) return;
+    this.app.meta.event.on('app:errorHandler', (_data, next) => {
+      const err = next();
+      if (!err || !(err instanceof Error)) return err;
+      return this._errorHandlerDefaultClient(err);
+    });
+  }
+
+  private _errorHandlerDefaultClient(err: ErrorSSR) {
+    if (!process.env.CLIENT) return err;
+    // client
+    if ([301, 302].includes(Number(err.code))) {
+      this.app.$gotoPage(err.pagePath!);
+      return undefined;
+    }
+    // COMPONENT_UNMOUNTED
+    if (err.code === HttpStatus.COMPONENT_UNMOUNTED) {
+      // do nothing
+      return undefined;
+    }
+    // 401
+    if (err.code === 401) {
+      this.app.$gotoLogin();
+      return undefined;
+    }
+    // only log error in client
+    console.error(err);
+    // not handled
+    return err;
   }
 }
