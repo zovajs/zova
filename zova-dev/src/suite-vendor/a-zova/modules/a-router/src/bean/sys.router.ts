@@ -1,7 +1,7 @@
 import type { RouteLocationResolvedGeneric, Router, RouterOptions } from '@cabloy/vue-router';
 import { IModule } from '@cabloy/module-info';
 import * as ModuleInfo from '@cabloy/module-info';
-import { combineParamsAndQuery, combineQueries, defaultPathSerializer } from '@cabloy/utils';
+import { combineParamsAndQuery } from '@cabloy/utils';
 import { createMemoryHistory, createRouter, createWebHashHistory, createWebHistory } from '@cabloy/vue-router';
 import { BeanBase, cast, deepExtend } from 'zova';
 import { Sys } from 'zova-module-a-bean';
