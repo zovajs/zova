@@ -1,7 +1,7 @@
 import type { BeanScopeUtil } from 'zova';
 /** monkeySys: end */
 /** scope: begin */
-import { BeanScopeBase, TypeModuleConfig } from 'zova';
+import { BeanScopeBase } from 'zova';
 import { Scope } from 'zova-module-a-bean';
 
 /** bean: end */
@@ -11,19 +11,18 @@ import { BeanRouterBase } from '../bean/bean.routerBase.js';
 /** sys: end */
 /** sys: begin */
 import { SysRouter } from '../bean/sys.router.js';
-import { config } from '../config/config.js';
-
 /** model: end */
 /** model: begin */
 import { ModelPageRoute } from '../model/pageRoute.js';
+
 /** service: end */
 /** service: begin */
 import { ServiceRouter } from '../service/router.js';
 /** sys: end */
 /** bean: begin */
 import 'zova';
-
 import 'zova';
+
 import 'zova';
 import 'zova';
 import 'zova';
@@ -68,9 +67,9 @@ declare module 'zova' {
     'a-router.bean.routerBase': BeanRouterBase;
   }
 }
-/** model: end */
-/** config: begin */
-export * from '../config/config.js';
+/** service: end */
+/** model: begin */
+export * from '../model/pageRoute.js';
 declare module 'zova-module-a-bean' {
 
   export interface IServiceRecord {
@@ -90,9 +89,9 @@ declare module 'zova' {
     'a-router.service.router': ServiceRouter;
   }
 }
-/** service: end */
-/** model: begin */
-export * from '../model/pageRoute.js';
+/** model: end */
+/** monkey: begin */
+export * from '../monkey.js';
 declare module 'zova' {
 
 }
@@ -108,9 +107,6 @@ declare module 'zova' {
     'a-router.model.pageRoute': ModelPageRoute;
   }
 }
-/** config: end */
-/** monkey: begin */
-export * from '../monkey.js';
 /** monkey: end */
 /** monkeySys: begin */
 export * from '../monkeySys.js';
@@ -123,16 +119,11 @@ export class ScopeModuleARouter extends BeanScopeBase {}
 
 export interface ScopeModuleARouter {
   util: BeanScopeUtil;
-  config: TypeModuleConfig<typeof config>;
 }
 
 declare module 'zova' {
   export interface IBeanScopeRecord {
     'a-router': ScopeModuleARouter;
-  }
-
-  export interface IBeanScopeConfig {
-    'a-router': ReturnType<typeof config>;
   }
 
 }
