@@ -106,5 +106,6 @@ declare module 'zova' {
 
   export interface BeanBase {
     $ssr: CtxSSR;
+    $useMeta(options: SSRMetaOptions | (() => SSRMetaOptions)): void;
   }
 }

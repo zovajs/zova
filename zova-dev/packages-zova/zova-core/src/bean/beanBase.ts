@@ -3,9 +3,7 @@ import type { RendererNode, WatchHandle } from 'vue';
 import type { AppEvent } from '../core/component/event.js';
 import type { ILoggerClientChildRecord } from '../core/logger/types.js';
 import type { FunctionAsync } from '../decorator/type/functionable.js';
-import type { SSRMetaOptions } from '../types/interface/ssr.js';
 import type { IErrorHandlerEventResult, IModuleLocaleText } from './resource/index.js';
-import { useMeta } from '../core/context/useMeta.js';
 import { cast } from '../types/utils/cast.js';
 import { BeanBaseSimple, SymbolBeanFullName, SymbolModuleBelong } from './beanBaseSimple.js';
 import { getVueDecoratorValue } from './vueDecorators/utils.js';
@@ -80,12 +78,6 @@ export class BeanBase extends BeanBaseSimple {
 
   protected $onMounted(fn: any) {
     this.ctx.meta.hooks.onMounted(fn);
-  }
-
-  protected $useMeta(options: SSRMetaOptions | (() => SSRMetaOptions)) {
-    this.ctx.util.instanceScope(() => {
-      useMeta(this.ctx, options);
-    });
   }
 
   protected $errorHandler(err: unknown, info?: string): IErrorHandlerEventResult {
