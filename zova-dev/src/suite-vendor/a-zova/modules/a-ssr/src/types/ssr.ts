@@ -3,6 +3,6 @@ import 'zova';
 
 declare module 'zova' {
   export interface CtxMeta {
-    ssr: CtxSSR;
+    $ssr: CtxSSR;
   }
 }
