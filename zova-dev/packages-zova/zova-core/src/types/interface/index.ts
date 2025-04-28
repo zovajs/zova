@@ -1,4 +1,3 @@
-export * from './application.js';
 export * from './component.js';
 export * from './cookie.js';
 export * from './event.js';

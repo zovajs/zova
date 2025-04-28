@@ -2,6 +2,7 @@ import type { IModule } from '@cabloy/module-info';
 import type { BeanBase } from '../../bean/beanBase.js';
 import type { BeanContainer } from '../../bean/beanContainer.js';
 import type { IControllerData } from '../../bean/type.js';
+import type { ZovaApplication } from '../../core/app/application.js';
 import type { ZovaContext } from '../../core/context/context.js';
 
 export type TypeMonkeyName = keyof IMonkeyModuleSys | keyof IMonkeySys | keyof IMonkeyApp | keyof IMonkeyController;
@@ -29,7 +30,8 @@ export interface IMonkeyModuleSys {
 }
 
 export interface IMonkeySys
-  extends IMonkeySysContextInitialize,
+  extends IMonkeySysApplicationInitialize,
+  IMonkeySysContextInitialize,
   IMonkeySysInitialize,
   IMonkeySysInitialized,
   IMonkeySysReady,
@@ -51,6 +53,10 @@ export interface IMonkeyApp
 export interface IMonkeyController {
   controllerDataPrepare(controllerData: IControllerData): void;
   controllerDataInit(controllerData: IControllerData, controller: BeanBase): void;
+}
+
+export interface IMonkeySysApplicationInitialize {
+  sysApplicationInitialize(app: ZovaApplication): void;
 }
 
 export interface IMonkeySysContextInitialize {

@@ -3,6 +3,7 @@ import type { z } from 'zod';
 import type { TypeComponentLayoutRecord } from 'zova';
 import type { BeanRouter } from '../bean/bean.router.js';
 
+import type { IGotoPageOptions } from './utils.js';
 import 'vue-router';
 
 export type Lazy<T> = () => Promise<T>;
@@ -22,6 +23,15 @@ declare module '@cabloy/vue-router' {
 }
 
 declare module 'zova' {
+  export interface ZovaApplication {
+    $redirect(pagePath: string, status?: 301 | 302): never;
+    $gotoPage(pagePath: string, options?: IGotoPageOptions): void;
+    $gotoHome(): void;
+    $gotoLogin(returnTo?: string, cause?: string): void;
+    $gotoReturnTo(returnTo?: string): void;
+    $getCurrentPagePath(): string | undefined;
+  }
+
   export interface AppMeta {
     $router: BeanRouter;
   }
