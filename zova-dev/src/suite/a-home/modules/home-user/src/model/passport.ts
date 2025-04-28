@@ -28,7 +28,7 @@ export class ModelPassport extends BeanModelBase {
         // save
         this._setPassportJwt(data);
         // page: returnTo
-        this.app.gotoReturnTo();
+        this.app.$gotoReturnTo();
       },
     });
   }
@@ -44,7 +44,7 @@ export class ModelPassport extends BeanModelBase {
         this.$clear(); // not await
         this._setPassportJwt();
         // page: login
-        this.app.gotoLogin();
+        this.app.$gotoLogin();
       },
     });
   }

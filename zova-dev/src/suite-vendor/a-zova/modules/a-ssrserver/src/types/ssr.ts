@@ -1,5 +1,5 @@
 import type http from 'node:http';
-import type { TypeSsrSitePerformAction } from 'zova';
+import type { TypeSsrSitePerformAction } from 'zova-module-a-ssr';
 
 export type TypeEventResolvePathResult = string | true | undefined;
 

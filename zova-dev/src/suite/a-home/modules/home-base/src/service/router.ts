@@ -21,7 +21,7 @@ export class ServiceRouter extends BeanRouterBase {
           return false;
         }
         if (!this.$$modelPassport.isAuthenticated) {
-          this.app.gotoLogin(to.fullPath);
+          this.app.$gotoLogin(to.fullPath);
           return false;
         }
       }
