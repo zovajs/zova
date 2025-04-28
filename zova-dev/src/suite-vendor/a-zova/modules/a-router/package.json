@@ -8,8 +8,7 @@
       "monkey": true
     },
     "dependencies": {
-      "a-model": "5.0.0",
-      "a-zova": "5.0.0"
+      "a-model": "5.0.0"
     }
   },
   "description": "router",

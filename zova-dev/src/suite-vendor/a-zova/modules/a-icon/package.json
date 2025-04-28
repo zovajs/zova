@@ -32,9 +32,6 @@
   "zovaModule": {
     "capabilities": {
       "monkey": true
-    },
-    "dependencies": {
-      "a-zova": "5.0.0"
     }
   }
 }

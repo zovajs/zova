@@ -1,18 +1,19 @@
 import type { BeanScopeUtil } from 'zova';
-/** service: end */
+/** monkeySys: end */
 /** scope: begin */
 import { BeanScopeBase } from 'zova';
 import { Scope } from 'zova-module-a-bean';
 /** service: end */
 /** service: begin */
 import { ServiceSsrHandler } from '../service/ssrHandler.js';
-/** service: begin */
+/** service: end */
+/** monkeySys: begin */
 import 'zova';
 import 'zova';
 
 import 'zova';
 
-export * from '../service/ssrHandler.js';
+export * from '../monkeySys.js';
 declare module 'zova-module-a-bean' {
 
   export interface IServiceRecord {
@@ -32,6 +33,8 @@ declare module 'zova' {
     'a-ssrserver.service.ssrHandler': ServiceSsrHandler;
   }
 }
+/** service: begin */
+export * from '../service/ssrHandler.js';
 
 @Scope()
 export class ScopeModuleASsrserver extends BeanScopeBase {}
