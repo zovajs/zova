@@ -5,11 +5,7 @@
   "title": "a-ssr",
   "zovaModule": {
     "capabilities": {
-      "monkey": true,
-      "preload": true
-    },
-    "dependencies": {
-      "a-zova": "5.0.0"
+      "monkey": true
     }
   },
   "description": "",

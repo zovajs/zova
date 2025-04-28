@@ -33,7 +33,11 @@ export class ServiceSsr extends BeanBase {
     const _eventErrorHandler = this.app.meta.event.on('app:errorHandler', ({ err }, next) => {
       if (err.code === 401) {
         if (err.message === 'jwt expired') {
-          this.app.$gotoPage('/home/base/errorExpired', { returnTo: true });
+          try {
+            this.app.$gotoPage('/home/base/errorExpired', { returnTo: true });
+          } catch (err: any) {
+            this.ctx.meta.$ssr.context._meta.renderError = err;
+          }
           return undefined;
         }
       }
