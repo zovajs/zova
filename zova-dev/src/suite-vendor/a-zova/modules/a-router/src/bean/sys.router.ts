@@ -1,7 +1,7 @@
 import type { RouteLocationResolvedGeneric, Router, RouterOptions } from '@cabloy/vue-router';
 import { IModule } from '@cabloy/module-info';
 import * as ModuleInfo from '@cabloy/module-info';
-import { combineQueries, defaultPathSerializer } from '@cabloy/utils';
+import { combineParamsAndQuery, combineQueries, defaultPathSerializer } from '@cabloy/utils';
 import { createMemoryHistory, createRouter, createWebHashHistory, createWebHistory } from '@cabloy/vue-router';
 import { BeanBase, cast, deepExtend } from 'zova';
 import { Sys } from 'zova-module-a-bean';
@@ -71,8 +71,7 @@ export class SysRouter extends BeanBase {
   }
 
   public getPagePath<K extends keyof IPagePathRecord>(path: K, options?: IPagePathRecord[K], absolute?: boolean) {
-    let pagePath = path.replace(/:([^/]+)/g, '{$1}');
-    pagePath = combineQueries(defaultPathSerializer(pagePath, options?.params), options?.query);
+    const pagePath = combineParamsAndQuery(path, { params: options?.params, query: options?.query });
     return absolute ? this.sys.util.getAbsoluteUrlFromPagePath(pagePath) : pagePath;
   }
 
