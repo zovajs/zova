@@ -20,7 +20,7 @@ export class ServicePinia extends BeanBase {
       });
     }
     // client
-    if (process.env.CLIENT && this.ctx.meta.$ssr?.isRuntimeSsrPreHydration) {
+    if (process.env.CLIENT && this.ctx.meta.$ssr.isRuntimeSsrPreHydration) {
       this.pinia.state.value = this.ctx.meta.$ssr.stateDefer.pinia;
     }
   }

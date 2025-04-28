@@ -39,7 +39,7 @@ export class ServiceStorage extends BeanBase {
       });
     }
     // client
-    if (process.env.CLIENT && this.ctx.meta.$ssr?.isRuntimeSsrPreHydration) {
+    if (process.env.CLIENT && this.ctx.meta.$ssr.isRuntimeSsrPreHydration) {
       hydrate(this._queryClient, this.ctx.meta.$ssr.stateDefer.query);
     }
   }

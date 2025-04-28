@@ -30,7 +30,7 @@ export class Monkey extends BeanSimple implements IMonkeyAppInitialize, IMonkeyA
         this.ctx.meta.$ssr.context._meta.endingHeadTags += `<style id="styles-target">${styles}</style>`;
       });
     }
-    if (process.env.CLIENT && this.ctx.meta.$ssr?.isRuntimeSsrPreHydration) {
+    if (process.env.CLIENT && this.ctx.meta.$ssr.isRuntimeSsrPreHydration) {
       this._styleInstance = createTypeStyle();
       this.ctx.meta.$ssr.onHydrated(() => {
         this._styleInstance.setStylesTarget(document.getElementById('styles-target')!);

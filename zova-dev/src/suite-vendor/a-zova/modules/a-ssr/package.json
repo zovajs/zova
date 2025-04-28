@@ -5,9 +5,6 @@
   "title": "a-ssr",
   "zovaModule": {
     "capabilities": {
-      "meta": {
-        "appMode": "ssr"
-      },
       "monkey": true,
       "preload": true
     },
