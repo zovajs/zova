@@ -1,7 +1,6 @@
 import type { Logger } from '@cabloy/logger';
 import type { RendererNode, WatchHandle } from 'vue';
 import type { AppEvent } from '../core/component/event.js';
-import type { CtxSSR } from '../core/context/ssr.js';
 import type { ILoggerClientChildRecord } from '../core/logger/types.js';
 import type { FunctionAsync } from '../decorator/type/functionable.js';
 import type { SSRMetaOptions } from '../types/interface/ssr.js';
@@ -50,10 +49,6 @@ export class BeanBase extends BeanBaseSimple {
 
   protected get $event(): AppEvent {
     return this.app.meta.event;
-  }
-
-  protected get $ssr(): CtxSSR {
-    return this.ctx.meta.ssr;
   }
 
   // need not
