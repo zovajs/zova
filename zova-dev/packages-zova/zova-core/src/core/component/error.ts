@@ -9,7 +9,9 @@ export class AppError extends ErrorClass {
     await super.initialize();
     // errorHandler
     this.app.vue.config.errorHandler = (err, instance, info) => {
-      return this.app.meta.event.emitSync('app:errorHandler', { err: err as Error, instance, info });
+      return this.app.meta.event.emitSync('app:errorHandler', { err: err as Error, instance, info }, data => {
+        return data.err;
+      });
     };
     // unhandledrejection
     if (process.env.CLIENT) {
