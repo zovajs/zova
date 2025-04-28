@@ -1,11 +1,19 @@
-import type { BeanBase, BeanContainer, IMonkeyAppContextInitialize, IMonkeyBeanInit, ZovaContext } from 'zova';
+import type { BeanBase, BeanContainer, IMonkeyAppContextInitialize, IMonkeyAppInitialize, IMonkeyBeanInit, ZovaContext } from 'zova';
 import type { SSRMetaOptions } from './types/ssr.js';
+import { isNavigationFailure } from '@cabloy/vue-router';
 import { BeanSimple, cast } from 'zova';
 import { useMeta } from './lib/useMeta.js';
 
 export class Monkey extends BeanSimple implements IMonkeyAppContextInitialize, IMonkeyAppInitialize, IMonkeyBeanInit {
   appContextInitialize(ctx: ZovaContext): void {
     ctx.meta.$ssr = ctx.app.ctx.meta.$ssr;
+  }
+
+  async appInitialize() {
+    // ssr errorHandler
+    if (process.env.SERVER) {
+      this._ssrErrorHandler();
+    }
   }
 
   async beanInit(bean: BeanContainer, beanInstance: BeanBase) {
@@ -31,5 +39,36 @@ export class Monkey extends BeanSimple implements IMonkeyAppContextInitialize, I
         };
       },
     });
+  }
+
+  private _ssrErrorHandler() {
+    if (!process.env.SERVER) return;
+    const _eventErrorHandler = this.app.meta.event.on('app:errorHandler', (_data, next) => {
+      const err = next();
+      if (!err || !(err instanceof Error)) return err;
+      return this._errorHandlerDefaultServer(err);
+    });
+    this.ctx.meta.$ssr.context.onRendered((_err?: Error) => {
+      _eventErrorHandler();
+    });
+  }
+
+  private _errorHandlerDefaultServer(err: Error) {
+    if (!process.env.SERVER) return err;
+    if (isNavigationFailure(err)) {
+      if (!this.ctx.meta.$ssr.context._meta.renderError) {
+        this.ctx.meta.$ssr.context._meta.renderError = err;
+      }
+      return undefined;
+    } else if (err.code === 401) {
+      try {
+        this.app.$gotoLogin();
+      } catch (err: any) {
+        this.ctx.meta.$ssr.context._meta.renderError = err;
+      }
+    } else {
+      this.ctx.meta.$ssr.context._meta.renderError = err;
+    }
+    return undefined;
   }
 }

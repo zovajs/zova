@@ -1,6 +1,5 @@
 import type { IErrorObject } from '../../bean/resource/error/errorObject.js';
-import type { ErrorSSR, IErrorInstanceInfo, IModuleError } from '../../bean/resource/error/type.js';
-import { isNavigationFailure } from '@cabloy/vue-router';
+import type { IErrorInstanceInfo, IModuleError } from '../../bean/resource/error/type.js';
 import { HttpStatus } from 'zova';
 import { ErrorClass } from '../../bean/resource/error/errorClass.js';
 import { SymbolErrorInstanceInfo } from '../../bean/resource/error/type.js';
@@ -13,9 +12,7 @@ export class AppError extends ErrorClass {
     // errorHandler
     this.app.vue.config.errorHandler = (err, instance, info) => {
       return this.app.meta.event.emitSync('app:errorHandler', { err: err as Error, instance, info }, ({ err }) => {
-        if (process.env.SERVER) {
-          return this._errorHandlerDefaultServer(err);
-        } else {
+        if (process.env.CLIENT) {
           return this._errorHandlerDefaultClient(err);
         }
       });
@@ -56,30 +53,11 @@ export class AppError extends ErrorClass {
     }
   }
 
-  private _errorHandlerDefaultServer(err: Error) {
-    if (!process.env.SERVER) return err;
-    if (isNavigationFailure(err)) {
-      if (!this.ctx.meta.ssr.context._meta.renderError) {
-        this.ctx.meta.ssr.context._meta.renderError = err as ErrorSSR;
-      }
-      return undefined;
-    } else if (err.code === 401) {
-      try {
-        this.app.gotoLogin();
-      } catch (err) {
-        this.ctx.meta.ssr.context._meta.renderError = err as ErrorSSR;
-      }
-    } else {
-      this.ctx.meta.ssr.context._meta.renderError = err as ErrorSSR;
-    }
-    return undefined;
-  }
-
   private _errorHandlerDefaultClient(err: Error) {
     if (!process.env.CLIENT) return err;
     // client
     if ([301, 302].includes(Number(err.code))) {
-      this.app.gotoPage(cast<ErrorSSR>(err).pagePath!);
+      cast(this.app).$gotoPage(cast(err).pagePath!);
       return undefined;
     }
     // COMPONENT_UNMOUNTED
@@ -89,7 +67,7 @@ export class AppError extends ErrorClass {
     }
     // 401
     if (err.code === 401) {
-      this.app.gotoLogin();
+      cast(this.app).$gotoLogin();
       return undefined;
     }
     // only log error in client
