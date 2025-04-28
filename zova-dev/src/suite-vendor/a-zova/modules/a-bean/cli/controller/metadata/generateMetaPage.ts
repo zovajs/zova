@@ -31,20 +31,21 @@ export function generateMetaPage(
       : `/${moduleName.replace('-', '/')}`;
     const routeNameFull = `${moduleName}:${routeName}`;
     if (!routeName) {
-      contentPathRecords.push(_combineContentPathRecord(routePathFull, `'${routePathFull}'`, hasSchemaQuery, className));
+      contentPathRecords.push(_combineContentPathRecord(routePathFull, hasSchemaParams, hasSchemaQuery, className));
     } else {
       //
-      const apiPath1 = routePathFull.replace(/(:[^/]+)/g, (_, _part) => {
-        return ':_string_';
-      });
-      const apiPath2 = routePathFull.replace(/(\/:[^/]+)/g, (_, part) => {
-        return `:{${part.substring(2)}}`;
-      });
-      const apiPath3 = routePathFull.replace(/(:[^/]+)/g, (_, _part) => {
-        return '${string}';
-      });
-      contentPathRecords.push(_combineContentPathRecord(apiPath1, `'${apiPath2}'`, hasSchemaQuery, className));
-      contentPathRecords.push(_combineContentPathRecord(routePathFull, `\`${apiPath3}\``, hasSchemaQuery, className));
+      // const apiPath1 = routePathFull.replace(/(:[^/]+)/g, (_, _part) => {
+      //   return ':_string_';
+      // });
+      // const apiPath2 = routePathFull.replace(/(\/:[^/]+)/g, (_, part) => {
+      //   return `:{${part.substring(2)}}`;
+      // });
+      // const apiPath3 = routePathFull.replace(/(:[^/]+)/g, (_, _part) => {
+      //   return '${string}';
+      // });
+      // contentPathRecords.push(_combineContentPathRecord(apiPath1, `'${apiPath2}'`, hasSchemaQuery, className));
+      // contentPathRecords.push(_combineContentPathRecord(routePathFull, `\`${apiPath3}\``, hasSchemaQuery, className));
+      contentPathRecords.push(_combineContentPathRecord(routePathFull, hasSchemaParams, hasSchemaQuery, className));
       //
       contentNameRecords.push(
         `'${routeNameFull}': undefined;`,
@@ -137,8 +138,8 @@ function _extractRoutePathOrName(
   return { routePath, routeName };
 }
 
-function _combineContentPathRecord(key: string, value: string, hasSchemaQuery: boolean, className: string) {
-  return `'${key}': TypePagePathSchema<${value},${hasSchemaQuery ? `NS${className}.QueryInput` : 'undefined'}>;`;
+function _combineContentPathRecord(key: string, hasSchemaParams, hasSchemaQuery: boolean, className: string) {
+  return `'${key}': TypePagePathSchema<${hasSchemaParams ? `NS${className}.ParamsInput` : 'undefined'},${hasSchemaQuery ? `NS${className}.QueryInput` : 'undefined'}>;`;
   // return `'${key}': {
   //   path: ${value},
   //   schema: ${hasSchemaQuery ? `NS${className}.QueryInput` : 'undefined'},

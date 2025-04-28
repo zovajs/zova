@@ -203,21 +203,21 @@ export * from './page/pinia.js';
 export * from './page/routeParams.js';
 declare module 'zova-module-a-router' {
   export interface IPagePathRecord {
-    '/demo/basic/component': TypePagePathSchema<'/demo/basic/component', undefined>;
-    '/demo/basic/legacy': TypePagePathSchema<'/demo/basic/legacy', undefined>;
-    '/demo/basic/locale': TypePagePathSchema<'/demo/basic/locale', undefined>;
-    '/demo/basic/pinia': TypePagePathSchema<'/demo/basic/pinia', undefined>;
-    '/demo/basic/routeParams/:_string_': TypePagePathSchema<'/demo/basic/routeParams:{id?}', NSControllerPageRouteParams.QueryInput>;
-    '/demo/basic/routeParams/:id?': TypePagePathSchema<`/demo/basic/routeParams/${string}`, NSControllerPageRouteParams.QueryInput>;
-    '/demo/basic/routeQuery': TypePagePathSchema<'/demo/basic/routeQuery', NSControllerPageRouteQuery.QueryInput>;
-    '/demo/basic/routeQueryB': TypePagePathSchema<'/demo/basic/routeQueryB', NSControllerPageRouteQueryB.QueryInput>;
-    '/demo/basic/state': TypePagePathSchema<'/demo/basic/state', undefined>;
-    '/demo/basic/style': TypePagePathSchema<'/demo/basic/style', undefined>;
-    '/demo/basic/toolOne': TypePagePathSchema<'/demo/basic/toolOne', NSControllerPageToolOne.QueryInput>;
-    '/demo/basic/toolTwo': TypePagePathSchema<'/demo/basic/toolTwo', NSControllerPageToolTwo.QueryInput>;
+    '/demo/basic/component': TypePagePathSchema<undefined, undefined>;
+    '/demo/basic/legacy': TypePagePathSchema<undefined, undefined>;
+    '/demo/basic/locale': TypePagePathSchema<undefined, undefined>;
+    '/demo/basic/pinia': TypePagePathSchema<undefined, undefined>;
+    '/demo/basic/routeParams/:id?': TypePagePathSchema<NSControllerPageRouteParams.ParamsInput, NSControllerPageRouteParams.QueryInput>;
+    '/demo/basic/routeQuery': TypePagePathSchema<NSControllerPageRouteQuery.ParamsInput, NSControllerPageRouteQuery.QueryInput>;
+    '/demo/basic/routeQueryB': TypePagePathSchema<NSControllerPageRouteQueryB.ParamsInput, NSControllerPageRouteQueryB.QueryInput>;
+    '/demo/basic/state': TypePagePathSchema<undefined, undefined>;
+    '/demo/basic/style': TypePagePathSchema<undefined, undefined>;
+    '/demo/basic/toolOne': TypePagePathSchema<undefined, NSControllerPageToolOne.QueryInput>;
+    '/demo/basic/toolTwo/:id?': TypePagePathSchema<NSControllerPageToolTwo.ParamsInput, NSControllerPageToolTwo.QueryInput>;
   }
   export interface IPageNameRecord {
     'demo-basic:routeParams': undefined;
+    'demo-basic:toolTwo': undefined;
   }
 }
 export const pagePathSchemas = {
@@ -230,14 +230,15 @@ export const pagePathSchemas = {
   '/demo/basic/toolOne': {
     query: NSControllerPageToolOne.querySchema,
   },
-  '/demo/basic/toolTwo': {
-    query: NSControllerPageToolTwo.querySchema,
-  },
 };
 export const pageNameSchemas = {
   'demo-basic:routeParams': {
     params: NSControllerPageRouteParams.paramsSchema,
     query: NSControllerPageRouteParams.querySchema,
+  },
+  'demo-basic:toolTwo': {
+    params: NSControllerPageToolTwo.paramsSchema,
+    query: NSControllerPageToolTwo.querySchema,
   },
 };
 declare module 'zova-module-demo-basic' {

@@ -84,7 +84,7 @@ export interface IPagePathSchemaRecord {}
 export interface TypePageSchema { params?: z.ZodTypeAny; query: z.ZodTypeAny }
 export type TypePageSchemas = Record<string, TypePageSchema>;
 
-export interface TypePagePathSchema<P = unknown, S = unknown> {
-  path: P;
-  schema: S;
+export interface TypePagePathSchema<PARAMS = unknown, QUERY = unknown> {
+  params?: PARAMS;
+  query?: QUERY;
 }
