@@ -38,7 +38,9 @@ export class ControllerPageApp extends BeanControllerPageBase {
 
   protected async initApp(app: App) {
     // install
-    await PluginZova.install(app, this.ctx, getPluginZovaOptions());
+    const appZova = await PluginZova.install(app, this.ctx, getPluginZovaOptions());
+    // monkey: beanInit
+    await appZova.meta.module._monkeyModule('beanInit', undefined, appZova.bean, this);
   }
 
   protected async updateApp(app: ZovaApplication) {
