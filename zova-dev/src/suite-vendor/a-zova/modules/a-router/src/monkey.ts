@@ -47,7 +47,7 @@ export class Monkey
   async appReady() {
     const beanRouter = await this.getBeanRouter();
     // pagePath
-    if (process.env.CLIENT && this.ctx.meta.ssr.isRuntimeSsrPreHydration) {
+    if (process.env.CLIENT && this.ctx.meta.$ssr?.isRuntimeSsrPreHydration) {
       const pagePath = beanRouter.$$modelPageRoute.pagePath;
       if (pagePath) {
         const routerHistory = beanRouter.router[SymbolRouterHistory];
@@ -59,10 +59,10 @@ export class Monkey
     // ssr
     if (process.env.SERVER) {
       // push
-      const pagePath = this.app.getCurrentPagePath();
+      const pagePath = this.app.$getCurrentPagePath()!;
       beanRouter.push(pagePath);
       await beanRouter.isReady();
-    } else if (process.env.CLIENT && this.ctx.meta.ssr.isRuntimeSsrPreHydration) {
+    } else if (process.env.CLIENT && this.ctx.meta.$ssr?.isRuntimeSsrPreHydration) {
       await beanRouter.isReady();
     }
   }

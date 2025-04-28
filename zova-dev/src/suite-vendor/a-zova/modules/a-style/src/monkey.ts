@@ -24,15 +24,15 @@ export class Monkey extends BeanSimple implements IMonkeyAppInitialize, IMonkeyA
   async appInitialize() {
     if (process.env.SERVER) {
       this._styleInstance = createTypeStyle();
-      this.ctx.meta.ssr.context.onRendered((err?: Error) => {
+      this.ctx.meta.$ssr.context.onRendered((err?: Error) => {
         if (err) return;
         const styles = this._styleInstance.getStyles();
-        this.ctx.meta.ssr.context._meta.endingHeadTags += `<style id="styles-target">${styles}</style>`;
+        this.ctx.meta.$ssr.context._meta.endingHeadTags += `<style id="styles-target">${styles}</style>`;
       });
     }
-    if (process.env.CLIENT && this.ctx.meta.ssr.isRuntimeSsrPreHydration) {
+    if (process.env.CLIENT && this.ctx.meta.$ssr?.isRuntimeSsrPreHydration) {
       this._styleInstance = createTypeStyle();
-      this.ctx.meta.ssr.onHydrated(() => {
+      this.ctx.meta.$ssr.onHydrated(() => {
         this._styleInstance.setStylesTarget(document.getElementById('styles-target')!);
       });
     }
