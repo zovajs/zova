@@ -1,6 +1,7 @@
 import { z } from 'zod';
 import { BeanControllerPageBase, Use } from 'zova';
 import { Controller } from 'zova-module-a-bean';
+import { SysSdk } from 'zova-module-a-openapi';
 import { ModelTest } from '../../model/test.js';
 
 export const ControllerPageToolOneSchemaParams = z.object({
@@ -17,15 +18,11 @@ export class ControllerPageToolOne extends BeanControllerPageBase {
   @Use()
   $$modelTest: ModelTest;
 
+  @Use()
+  $$sysSdk: SysSdk;
+
   protected async __init__() {
     console.log('api: ', this.$query.api);
-    if (!this.$query.api) return;
-    const api = this.sys.util.getApiPath(this.$query.api)!;
-    const data = await this.$fetch.post<any, any>(
-      this.sys.util.apiActionPathTranslate(api),
-      undefined,
-      this.sys.util.apiActionConfigPrepare(undefined, { openapiSchema: true }),
-    );
-    console.log('openapi schema: ', data);
+    await this.$$sysSdk.loadSdk(this.$fetch, this.$query.api);
   }
 }

@@ -5,6 +5,11 @@ import { Render } from 'zova-module-a-bean';
 export class RenderPageToolOne extends BeanRenderBase {
   public render() {
     const queryTest = this.$$modelTest.test();
-    return <div>{queryTest.data?.name}</div>;
+    return (
+      <div>
+        <div>{queryTest.data?.name}</div>
+        <div></div>
+      </div>
+    );
   }
 }
