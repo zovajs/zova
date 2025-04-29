@@ -11,6 +11,7 @@ export const ControllerPageToolOneSchemaParams = z.object({
 export const ControllerPageToolOneSchemaQuery = z.object({
   name: z.string().optional(),
   api: z.string().optional(),
+  apiMethod: z.string().optional(),
 });
 
 @Controller()
@@ -22,7 +23,6 @@ export class ControllerPageToolOne extends BeanControllerPageBase {
   $$sysSdk: SysSdk;
 
   protected async __init__() {
-    console.log('api: ', this.$query.api);
-    await this.$$sysSdk.loadSdk(this.$fetch, this.$query.api);
+    await this.$$sysSdk.loadSdk(this.$fetch, this.$query.api, this.$query.apiMethod);
   }
 }

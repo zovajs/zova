@@ -1,4 +1,4 @@
-import type { OpenAPIObject, PathsObject, ReferenceObject, SchemaObject } from 'openapi3-ts/oas31';
+import type { OpenAPIObject, PathItemObject, PathsObject, ReferenceObject, SchemaObject } from 'openapi3-ts/oas31';
 import { shallowReactive } from 'vue';
 import { BeanBase } from 'zova';
 import { Sys } from 'zova-module-a-bean';
@@ -16,12 +16,19 @@ export class SysSdk extends BeanBase {
     this.paths = shallowReactive({});
   }
 
-  async loadSdk($fetch: BeanFetch, api?: string) {
-    if (!api) return;
-    const apiPath = this.sys.util.getApiPath(api)!;
-    if (this.paths[apiPath]) return;
-    const data = await $fetch.post<any, OpenAPIObject>(
-      this.sys.util.apiActionPathTranslate(apiPath),
+  getSdk(_api?: string): PathItemObject | undefined {
+    if (!_api) return;
+    const api = this.sys.util.getApiPath(_api)!;
+    return this.paths[api];
+  }
+
+  async loadSdk($fetch: BeanFetch, _api?: string, _apiMethod?: string): Promise<PathItemObject | undefined> {
+    if (!_api) return;
+    const api = this.sys.util.getApiPath(_api)!;
+    if (this.paths[api]) return this.paths[api];
+    const apiMethod = _apiMethod ?? 'get';
+    const data = await $fetch[apiMethod]<any, OpenAPIObject>(
+      this.sys.util.apiActionPathTranslate(api),
       undefined,
       this.sys.util.apiActionConfigPrepare(undefined, { openapiSchema: true }),
     );
@@ -40,7 +47,7 @@ export class SysSdk extends BeanBase {
         this.paths[path] = paths[key];
       }
     }
-    console.log(this.schemas);
-    console.log(this.paths);
+    // ok
+    return this.paths[api];
   }
 }
