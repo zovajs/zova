@@ -18,19 +18,15 @@ export class RenderMenu extends BeanRenderBase {
     if (item.separator) {
       return <li></li>;
     }
-    const to: any = { query: {} };
+    let to: any;
     if (!item.external) {
+      to = {};
       if (this.$router.isRouterName(item.link)) {
         to.path = item.link;
       } else {
         to.name = item.link;
       }
-      if (item.meta?.api) {
-        to.query.api = item.meta?.api;
-      }
-      if (item.meta?.controller) {
-        to.query.controller = item.meta?.controller;
-      }
+      if (item.meta?.query) to.query = item.meta?.query;
     }
     return (
       <li key={item.title}>
