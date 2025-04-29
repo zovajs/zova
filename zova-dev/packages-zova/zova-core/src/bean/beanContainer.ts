@@ -33,6 +33,7 @@ const SymbolProxyMagic = Symbol('SymbolProxyMagic');
 const SymbolProxyAopMethod = Symbol('SymbolProxyAopMethod');
 const SymbolCacheAopChains = Symbol('SymbolCacheAopChains');
 const SymbolCacheAopChainsKey = Symbol('SymbolCacheAopChainsKey');
+const SymbolGetBeanSelectorInnerPromises = Symbol('SymbolGetBeanSelectorInnerPromises');
 export const SymbolBeanContainerInstances = Symbol('SymbolBeanContainerInstances');
 
 export interface BeanContainer {}
@@ -44,6 +45,8 @@ export class BeanContainer {
 
   // fullName / uuid / propName
   private [SymbolBeanContainerInstances]: Record<MetadataKey, unknown> = shallowReactive({});
+
+  private [SymbolGetBeanSelectorInnerPromises]: Record<string, Promise<any>> = {};
 
   static create(sys: ZovaSys, app: ZovaApplication, ctx: ZovaContext | null) {
     const beanContainer = new BeanContainer(sys, app, ctx);
@@ -85,6 +88,7 @@ export class BeanContainer {
     }
     this[SymbolBeanContainerInstances] = shallowReactive({});
     this[SymbolBeanContainerParent] = undefined;
+    this[SymbolGetBeanSelectorInnerPromises] = {};
   }
 
   get containerType(): ContainerType {
@@ -273,9 +277,24 @@ export class BeanContainer {
     }
     const key = __getSelectorKey(fullName, withSelector, args[0]);
     if (this[SymbolBeanContainerInstances][key] === undefined && newBeanForce) {
-      await this._newBeanInner(true, recordProp, null, beanComposable, fullName, markReactive, withSelector, ...args);
+      if (!this[SymbolGetBeanSelectorInnerPromises][key]) {
+        this[SymbolGetBeanSelectorInnerPromises][key] =
+          this._getBeanSelectorInnerPromise(recordProp, beanComposable, fullName, markReactive, withSelector, ...args);
+      }
+      await this[SymbolGetBeanSelectorInnerPromises][key];
     }
     return this[SymbolBeanContainerInstances][key] as T;
+  }
+
+  private async _getBeanSelectorInnerPromise<T>(
+    recordProp: MetadataKey | null,
+    beanComposable: Functionable | undefined,
+    fullName: Constructable<T> | string | undefined,
+    markReactive?: boolean,
+    withSelector?: boolean,
+    ...args
+  ): Promise<T> {
+    return await this._newBeanInner(true, recordProp, null, beanComposable, fullName, markReactive, withSelector, ...args);
   }
 
   _newBeanSimple<T>(A: Constructable<T>, markReactive: boolean, ...args): T {
