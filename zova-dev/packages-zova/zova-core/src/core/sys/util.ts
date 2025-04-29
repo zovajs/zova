@@ -47,6 +47,16 @@ export class SysUtil extends BeanSimple {
     }
   }
 
+  getApiPath(path: string | undefined) {
+    if (!path) return path;
+    if (path.startsWith('//')) {
+      path = path.substring(1);
+    } else {
+      path = this.sys.config.api.prefix + path;
+    }
+    return path;
+  }
+
   apiActionPathTranslate(pathName: string, pathParams?: Record<string, any>): string {
     return defaultPathSerializer(pathName, pathParams);
   }

@@ -18,6 +18,7 @@
     "zova-module-a-logger": "workspace:^",
     "zova-module-a-meta": "workspace:^",
     "zova-module-a-model": "workspace:^",
+    "zova-module-a-openapi": "workspace:^",
     "zova-module-a-pinia": "workspace:^",
     "zova-module-a-router": "workspace:^",
     "zova-module-a-ssr": "workspace:^",

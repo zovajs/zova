@@ -20,7 +20,7 @@ export class ControllerPageToolOne extends BeanControllerPageBase {
   protected async __init__() {
     console.log('api: ', this.$query.api);
     if (!this.$query.api) return;
-    const api = this.sys.config.api.prefix + this.$query.api;
+    const api = this.sys.util.getApiPath(this.$query.api)!;
     const data = await this.$fetch.post<any, any>(
       this.sys.util.apiActionPathTranslate(api),
       undefined,
