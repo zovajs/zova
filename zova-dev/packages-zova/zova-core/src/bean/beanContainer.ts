@@ -46,7 +46,7 @@ export class BeanContainer {
   // fullName / uuid / propName
   private [SymbolBeanContainerInstances]: Record<MetadataKey, unknown> = shallowReactive({});
 
-  private [SymbolGetBeanSelectorInnerPromises]: Record<string, Promise<any>> = {};
+  private [SymbolGetBeanSelectorInnerPromises]: Record<string, Promise<any> | undefined> = {};
 
   static create(sys: ZovaSys, app: ZovaApplication, ctx: ZovaContext | null) {
     const beanContainer = new BeanContainer(sys, app, ctx);
@@ -282,6 +282,9 @@ export class BeanContainer {
           this._getBeanSelectorInnerPromise(recordProp, beanComposable, fullName, markReactive, withSelector, ...args);
       }
       await this[SymbolGetBeanSelectorInnerPromises][key];
+    }
+    if (this[SymbolBeanContainerInstances][key] && this[SymbolGetBeanSelectorInnerPromises][key]) {
+      this[SymbolGetBeanSelectorInnerPromises][key] = undefined;
     }
     return this[SymbolBeanContainerInstances][key] as T;
   }
