@@ -22,9 +22,9 @@ export class RenderMenu extends BeanRenderBase {
     if (!item.external) {
       to = {};
       if (this.$router.isRouterName(item.link)) {
-        to.path = item.link;
-      } else {
         to.name = item.link;
+      } else {
+        to.path = item.link;
       }
       if (item.meta?.params) to.params = item.meta?.params;
       if (item.meta?.query) to.query = item.meta?.query;
