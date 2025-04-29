@@ -212,11 +212,12 @@ declare module 'zova-module-a-router' {
     '/demo/basic/routeQueryB': TypePagePathSchema<NSControllerPageRouteQueryB.ParamsInput, NSControllerPageRouteQueryB.QueryInput>;
     '/demo/basic/state': TypePagePathSchema<undefined, undefined>;
     '/demo/basic/style': TypePagePathSchema<undefined, undefined>;
-    '/demo/basic/toolOne': TypePagePathSchema<undefined, NSControllerPageToolOne.QueryInput>;
+    '/demo/basic/toolOne/:id?': TypePagePathSchema<NSControllerPageToolOne.ParamsInput, NSControllerPageToolOne.QueryInput>;
     '/demo/basic/toolTwo/:id?': TypePagePathSchema<NSControllerPageToolTwo.ParamsInput, NSControllerPageToolTwo.QueryInput>;
   }
   export interface IPageNameRecord {
     'demo-basic:routeParams': undefined;
+    'demo-basic:toolOne': undefined;
     'demo-basic:toolTwo': undefined;
   }
 }
@@ -227,14 +228,15 @@ export const pagePathSchemas = {
   '/demo/basic/routeQueryB': {
     query: NSControllerPageRouteQueryB.querySchema,
   },
-  '/demo/basic/toolOne': {
-    query: NSControllerPageToolOne.querySchema,
-  },
 };
 export const pageNameSchemas = {
   'demo-basic:routeParams': {
     params: NSControllerPageRouteParams.paramsSchema,
     query: NSControllerPageRouteParams.querySchema,
+  },
+  'demo-basic:toolOne': {
+    params: NSControllerPageToolOne.paramsSchema,
+    query: NSControllerPageToolOne.querySchema,
   },
   'demo-basic:toolTwo': {
     params: NSControllerPageToolTwo.paramsSchema,
@@ -255,6 +257,7 @@ declare module 'zova-module-demo-basic' {
     $query: NSControllerPageRouteQueryB.QueryOutput;
   }
   export interface ControllerPageToolOne {
+    $params: NSControllerPageToolOne.ParamsOutput;
     $query: NSControllerPageToolOne.QueryOutput;
   }
   export interface ControllerPageToolTwo {
