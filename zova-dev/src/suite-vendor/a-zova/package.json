@@ -11,6 +11,7 @@
     "zova-module-a-api": "workspace:^",
     "zova-module-a-bean": "workspace:^",
     "zova-module-a-behavior": "workspace:^",
+    "zova-module-a-boundary": "workspace:^",
     "zova-module-a-fetch": "workspace:^",
     "zova-module-a-icon": "workspace:^",
     "zova-module-a-interceptor": "workspace:^",
