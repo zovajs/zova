@@ -36,8 +36,13 @@ export class MonkeySys extends BeanSimple implements IMonkeyModuleSys, IMonkeySy
     app.$redirect = (pagePath: string, status?: 301 | 302): never => {
       const error = new Error() as ErrorSSR;
       error.code = status ?? 302;
-      error.pagePath = pagePath;
-      error.url = app.sys.util.getAbsoluteUrlFromPagePath(pagePath, true);
+      if (pagePath.startsWith('http://') || pagePath.startsWith('https://')) {
+        error.pagePath = pagePath;
+        error.url = pagePath;
+      } else {
+        error.pagePath = pagePath;
+        error.url = app.sys.util.getAbsoluteUrlFromPagePath(pagePath, true);
+      }
       error.message = process.env.SERVER ? error.url : error.pagePath;
       throw error;
     };
@@ -58,7 +63,11 @@ export class MonkeySys extends BeanSimple implements IMonkeyModuleSys, IMonkeySy
       }
       // replace
       nextTick(() => {
-        app.meta.$router.replace(pagePath);
+        if (pagePath.startsWith('http://') || pagePath.startsWith('https://')) {
+          window.location.replace(pagePath);
+        } else {
+          app.meta.$router.replace(pagePath);
+        }
       });
     };
     app.$gotoHome = () => {
