@@ -1,4 +1,4 @@
-import { RouteLocationRaw, RouterLink } from '@cabloy/vue-router';
+import { RouterLink } from '@cabloy/vue-router';
 import { BeanControllerBase } from 'zova';
 import { Controller } from 'zova-module-a-bean';
 import { ZovaIcon } from 'zova-module-a-icon';
@@ -8,7 +8,7 @@ export interface ControllerEssentialLinkProps {
   description?: string;
   icon?: string;
   href?: string;
-  to?: string;
+  to?: string | object;
 }
 
 @Controller()
@@ -40,12 +40,7 @@ export class ControllerEssentialLink extends BeanControllerBase {
         </a>
       );
     }
-    let to: RouteLocationRaw = this.$props.to;
-
-    if (this.$router.isRouterName(to)) {
-      to = { name: to };
-    }
-    return <RouterLink to={to}>{domContent}</RouterLink>;
+    return <RouterLink to={this.$props.to}>{domContent}</RouterLink>;
   }
 
   protected render() {

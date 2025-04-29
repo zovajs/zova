@@ -18,6 +18,20 @@ export class RenderMenu extends BeanRenderBase {
     if (item.separator) {
       return <li></li>;
     }
+    const to: any = { query: {} };
+    if (!item.external) {
+      if (this.$router.isRouterName(item.link)) {
+        to.path = item.link;
+      } else {
+        to.name = item.link;
+      }
+      if (item.meta?.api) {
+        to.query.api = item.meta?.api;
+      }
+      if (item.meta?.controller) {
+        to.query.controller = item.meta?.controller;
+      }
+    }
     return (
       <li key={item.title}>
         <ZEssentialLink
@@ -25,7 +39,7 @@ export class RenderMenu extends BeanRenderBase {
           description={item.description}
           icon={item.icon}
           href={item.external ? item.link : undefined}
-          to={!item.external ? item.link : undefined}
+          to={to}
         />
       </li>
     );

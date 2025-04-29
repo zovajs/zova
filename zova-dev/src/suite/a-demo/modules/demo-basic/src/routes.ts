@@ -25,11 +25,6 @@ export const routes: IModuleRoute[] = [
     name: 'toolOne',
     path: 'toolOne/:id?',
     component: ZPageToolOne,
-    meta: {
-      componentKey: route => {
-        return route.fullPath;
-      },
-    },
   },
   {
     name: 'toolTwo',
