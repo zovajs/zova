@@ -5,11 +5,11 @@ import { Render } from 'zova-module-a-bean';
 export class RenderPageToolOne extends BeanRenderBase {
   public render() {
     const queryTest = this.$$modelTest.test();
-    const sdk = this.$$sysSdk.getSdk(this.$query.api);
+    const sdk = this.$$sysSdk.getSdk(this.$query.api, this.$query.apiMethod);
     return (
       <div>
         <div>{queryTest.data?.name}</div>
-        <div>{Object.keys(sdk?.post?.responses || {})}</div>
+        <div>{Object.keys(sdk?.responses || {})}</div>
       </div>
     );
   }
