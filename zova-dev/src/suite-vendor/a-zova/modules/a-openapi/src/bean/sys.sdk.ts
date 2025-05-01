@@ -1,4 +1,4 @@
-import type { OpenAPIObject, OperationObject, PathItemObject, PathsObject, ReferenceObject, SchemaObject } from 'openapi3-ts/oas31';
+import type { OpenAPIObject, OperationObject, PathsObject, ReferenceObject, SchemaObject } from 'openapi3-ts/oas31';
 import { shallowReactive } from 'vue';
 import { BeanBase } from 'zova';
 import { Sys } from 'zova-module-a-bean';
