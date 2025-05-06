@@ -6,6 +6,7 @@ export class RenderPageToolOne extends BeanRenderBase {
   public render() {
     const queryTest = this.$$modelTest.test();
     const sdk = this.$$sysSdk.getSdk(this.$query.api, this.$query.apiMethod);
+    console.log(this.$query);
     return (
       <div>
         <div>{queryTest.data?.name}</div>
