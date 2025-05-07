@@ -45,42 +45,44 @@ export class CliOpenapiGenerate extends BeanCliBase {
     if (!fse.existsSync(configFile)) {
       throw new Error('Please generate config first!');
     }
-    await this.helper.importDynamic(configFile, async instance => {
-      const config = (await instance.default()) as ZovaOpenapiConfig;
-      const moduleNames = this._prepareModuleNames(config);
-      if (moduleNames.length === 0) {
-        throw new Error('Please generate config first!');
-      }
-      const total = moduleNames.length;
-      const __caches: TypeAstCaches = {};
-      for (let index = 0; index < total; index++) {
-        const moduleName = moduleNames[index];
-        // log
-        await this.console.log({
-          total,
-          progress: index,
-          text: moduleName,
-        });
-        // generate res
-        const moduleInfo = this.helper.parseModuleInfo(moduleName);
-        const module = this.helper.findModule(moduleName);
-        await this._generateOpenapi(config, moduleInfo, module, __caches);
-      }
-    });
-  }
-
-  _prepareModuleNames(config: ZovaOpenapiConfig) {
-    const { argv } = this.context;
-    const moduleNames = argv._;
+    const configInstance = await this.helper.importDynamic(configFile);
+    const config = (await configInstance.default()) as ZovaOpenapiConfig;
+    // modules: not vendor/node_modules
+    let moduleNames = argv._;
     if (moduleNames.length === 0) {
-      return Object.keys(config.modules);
+      moduleNames = this.modulesMeta.modulesArray
+        .filter(item => !item.info.node_modules && !item.info.vendor)
+        .map(item => item.info.relativeName);
     }
-    return Object.keys(config.modules).filter(item => moduleNames.includes(item));
+    if (moduleNames.length === 0) return;
+    // loop
+    const total = moduleNames.length;
+    const __caches: TypeAstCaches = {};
+    for (let index = 0; index < total; index++) {
+      const moduleName = moduleNames[index];
+      // log
+      await this.console.log({
+        total,
+        progress: index,
+        text: moduleName,
+      });
+      // generate res
+      const moduleInfo = this.helper.parseModuleInfo(moduleName);
+      const module = this.helper.findModule(moduleName);
+      await this._generateOpenapi(config, moduleInfo, module, __caches);
+    }
   }
 
   async _generateOpenapi(config: ZovaOpenapiConfig, moduleInfo: IModuleInfo, module: IModule, __caches: TypeAstCaches) {
     const { argv } = this.context;
-    const moduleConfig = extend(true, {}, config.default, config.modules[moduleInfo.relativeName]);
+    // config file
+    const configFile = path.join(module.root, 'cli/openapi.config.ts');
+    if (!fse.existsSync(configFile)) {
+      throw new Error(`Please generate config of ${moduleInfo.relativeName} first!`);
+    }
+    const configInstance = await this.helper.importDynamic(configFile);
+    const moduleConfigCli = (await configInstance.default()) as ZovaOpenapiConfigModule;
+    const moduleConfig = extend(true, {}, config.default, moduleConfigCli, config.modules[moduleInfo.relativeName]);
     const cache = await this._outputFiles(moduleConfig, moduleInfo, module, __caches);
     // generate
     await this._generateApis(cache.ast, moduleConfig, moduleInfo, module);

@@ -72,7 +72,7 @@
     "@cabloy/word-utils": "^2.0.0"
   },
   "devDependencies": {
-    "@cabloy/cli": "^3.0.10",
+    "@cabloy/cli": "^3.0.11",
     "fs-extra": "^11.2.0",
     "zova-openapi": "workspace:^"
   },
