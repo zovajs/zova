@@ -1,5 +1,8 @@
+import { evaluateSimple } from '@cabloy/utils';
+import { jsonSchemaToZod } from 'json-schema-to-zod';
 import { mutate } from 'mutate-on-copy';
 import { ReferenceObject, SchemaObject } from 'openapi3-ts/oas31';
+import { z } from 'zod';
 import { Use } from 'zova';
 import { BeanModelBase, Model } from 'zova-module-a-model';
 import { SysSdk } from '../bean/sys.sdk.js';
@@ -29,6 +32,16 @@ export class ModelSdk extends BeanModelBase {
     const api2 = this.sys.util.getApiPath(api)!;
     const apiMethod2 = apiMethod ?? 'get';
     return this.sdks[api2]?.[apiMethod2];
+  }
+
+  getSchema(schemaName: string): SchemaObject | ReferenceObject {
+    return this.schemas[schemaName];
+  }
+
+  getZodSchema(schemaName: string): z.ZodAny {
+    const schema = this.getSchema(schemaName);
+    const code = jsonSchemaToZod(schema);
+    return evaluateSimple(code, { z });
   }
 
   async loadSdk(api?: string, apiMethod?: string): Promise<IOpenapiSdkItem | undefined> {
