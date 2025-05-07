@@ -47,7 +47,7 @@ export class CliOpenapiConfig extends BeanCliBase {
       snippetsPath: null,
       boilerplatePath: 'openapi/config/boilerplate/module',
     });
-    // files
+    // files: cli
     await this._setPackageInfo(targetDir);
   }
 
