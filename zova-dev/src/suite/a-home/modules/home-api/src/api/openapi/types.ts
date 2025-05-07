@@ -199,7 +199,7 @@ export interface paths {
       path?: never;
       cookie?: never;
     };
-    get?: never;
+    get: operations['TestSsrToolOne_testGet'];
     put?: never;
     post: operations['TestSsrToolOne_test'];
     delete?: never;
@@ -388,8 +388,10 @@ export interface paths {
 export type webhooks = Record<string, never>;
 export interface components {
   schemas: {
-    'home-user.dto.auth': {
-      id: string | number;
+    'a-ssrcabloy.dto.errorData': {
+      request?: unknown;
+      appInfo?: unknown;
+      meta?: unknown;
     };
     'home-user.entity.user': {
       createdAt: string;
@@ -400,6 +402,9 @@ export interface components {
       name: string;
       avatar?: string;
       locale?: string;
+    };
+    'home-user.dto.auth': {
+      id: string | number;
     };
     'home-user.dto.passport': {
       user: components['schemas']['home-user.entity.user'];
@@ -418,16 +423,12 @@ export interface components {
       username: string;
       password: string;
     };
-    'a-menu.dto.menuGroup': {
-      name: string;
-      title?: string;
-      description?: string;
-      icon?: string;
-      order?: number;
-      group?: string | string[];
-      collapsed?: boolean;
+    'a-menu.dto.menuItemMetaParams': Record<string, never>;
+    'a-menu.dto.menuItemMetaQuery': Record<string, never>;
+    'a-menu.dto.menuItemMeta': {
+      params?: components['schemas']['a-menu.dto.menuItemMetaParams'];
+      query?: components['schemas']['a-menu.dto.menuItemMetaQuery'];
     };
-    'a-menu.dto.menuItemMeta': Record<string, never>;
     'a-menu.dto.menuItem': {
       name: string;
       title?: string;
@@ -441,15 +442,18 @@ export interface components {
       target?: string;
       meta?: components['schemas']['a-menu.dto.menuItemMeta'];
     };
+    'a-menu.dto.menuGroup': {
+      name: string;
+      title?: string;
+      description?: string;
+      icon?: string;
+      order?: number;
+      group?: string | string[];
+      collapsed?: boolean;
+    };
     'a-menu.dto.menus': {
       menus?: components['schemas']['a-menu.dto.menuItem'][];
       groups?: components['schemas']['a-menu.dto.menuGroup'][];
-    };
-    /** @description sss */
-    'a-ssrcabloy.dto.errorData': {
-      request?: unknown;
-      appInfo?: unknown;
-      meta?: unknown;
     };
     'test-ssr.dto.testDetail': {
       name: string;
@@ -469,23 +473,12 @@ export interface components {
       married: boolean;
       details: components['schemas']['test-ssr.dto.testDetail'][];
     };
-    'test-ssr.dto.testParams': {
-      id?: string | number;
-    };
-    'test-ssr.dto.testQuery': {
-      name: string;
-    };
     /** @description User */
     'test-vona.dto.user': {
       /** @description User Id */
       id: string | number;
       name: string;
       married: boolean;
-    };
-    'test-vona.dto.profile': {
-      id: number;
-      /** Format: email */
-      email: string;
     };
   };
   responses: never;
@@ -815,6 +808,35 @@ export interface operations {
             code: string;
             message: string;
             data: boolean;
+          };
+        };
+      };
+    };
+  };
+  TestSsrToolOne_testGet: {
+    parameters: {
+      query: {
+        name: string;
+      };
+      header?: {
+        Authorization?: string;
+      };
+      path: {
+        id: ((string | undefined) | (number | undefined)) | undefined;
+      };
+      cookie?: never;
+    };
+    requestBody?: never;
+    responses: {
+      200: {
+        headers: {
+          [name: string]: unknown;
+        };
+        content: {
+          'application/json': {
+            code: string;
+            message: string;
+            data?: unknown;
           };
         };
       };
