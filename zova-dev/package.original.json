@@ -4,6 +4,7 @@
   "author": "zhennann <zhen.nann@icloud.com>",
   "type": "module",
   "scripts": {
+    "init": "pnpm install --no-frozen-lockfile && npm run zova :tools:deps && pnpm install --no-frozen-lockfile",
     "zova": "node ../zova-cli/cli/src/bin/zova.ts",
     "dev": "npm run dev:ssr:admin",
     "build": "npm run build:ssr:admin",
@@ -29,7 +30,6 @@
     "preview:spa": "vite preview --outDir=dist/spa-admin",
     "build:githubpages": "npm run prerun && quasar build --mode spa --flavor githubpages",
     "prerun": "npm run zova :tools:deps && npm run tsc",
-    "init": "pnpm install && npm run zova :tools:deps && pnpm install",
     "tsc": "vue-tsc --noEmit --project tsconfig.vue-tsc.json",
     "lint": "eslint",
     "lint:fix": "eslint --fix"

@@ -21,6 +21,7 @@
     "_prepublishOnly": "npm run tsc:publish"
   },
   "dependencies": {
+    "json-schema-to-zod": "^2.6.1",
     "openapi3-ts": "^4.4.0"
   }
 }
