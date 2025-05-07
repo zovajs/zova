@@ -1,29 +1,30 @@
-import type { OpenAPIObject, OperationObject, PathsObject, ReferenceObject, SchemaObject } from 'openapi3-ts/oas31';
+import type { OpenAPIObject, ReferenceObject, SchemaObject } from 'openapi3-ts/oas31';
 import { shallowReactive } from 'vue';
 import { BeanBase } from 'zova';
 import { Sys } from 'zova-module-a-bean';
 import { BeanFetch } from 'zova-module-a-fetch';
+import { IOpenapiSdkItem } from '../types/sdk.js';
 
 const PATH_PARAM_RE = /\{([^{}/]+)\}/g;
 
 @Sys()
 export class SysSdk extends BeanBase {
   schemas: Record<string, SchemaObject | ReferenceObject>;
-  paths: PathsObject;
+  paths: Record<string, Record<string, IOpenapiSdkItem>>;
 
   protected async __init__() {
     this.schemas = shallowReactive({});
     this.paths = shallowReactive({});
   }
 
-  getSdk(api: string | undefined, apiMethod: string | undefined): OperationObject | undefined {
+  getSdk(api: string | undefined, apiMethod: string | undefined): IOpenapiSdkItem | undefined {
     if (!api) return;
     const api2 = this.sys.util.getApiPath(api)!;
     const apiMethod2 = apiMethod ?? 'get';
     return this.paths[api2]?.[apiMethod2];
   }
 
-  async loadSdk($fetch: BeanFetch, api?: string, apiMethod?: string): Promise<OperationObject | undefined> {
+  async loadSdk($fetch: BeanFetch, api?: string, apiMethod?: string): Promise<IOpenapiSdkItem | undefined> {
     if (!api) return;
     const api2 = this.sys.util.getApiPath(api)!;
     const apiMethod2 = apiMethod ?? 'get';
@@ -34,10 +35,12 @@ export class SysSdk extends BeanBase {
       this.sys.util.apiActionConfigPrepare(undefined, { openapiSchema: true }),
     );
     // schemas
+    const schemaNames: string[] = [];
     const schemas = data.components?.schemas;
     if (schemas) {
       for (const key in schemas) {
         this.schemas[key] = schemas[key];
+        schemaNames.push(key);
       }
     }
     // paths
@@ -47,7 +50,10 @@ export class SysSdk extends BeanBase {
         const path = key.replace(PATH_PARAM_RE, ':$1');
         if (!this.paths[path]) this.paths[path] = shallowReactive({});
         for (const method in paths[key]) {
-          this.paths[path][method] = paths[key][method];
+          this.paths[path][method] = {
+            schemas: schemaNames,
+            operationObject: paths[key][method],
+          };
         }
       }
     }
