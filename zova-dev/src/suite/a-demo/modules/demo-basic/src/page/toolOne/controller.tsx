@@ -1,7 +1,7 @@
 import { z } from 'zod';
 import { BeanControllerPageBase, Use } from 'zova';
 import { Controller } from 'zova-module-a-bean';
-import { SysSdk } from 'zova-module-a-openapi';
+import { ModelSdk } from 'zova-module-a-openapi';
 import { ModelTest } from '../../model/test.js';
 
 export const ControllerPageToolOneSchemaParams = z.object({
@@ -20,9 +20,9 @@ export class ControllerPageToolOne extends BeanControllerPageBase {
   $$modelTest: ModelTest;
 
   @Use()
-  $$sysSdk: SysSdk;
+  $$modelSdk: ModelSdk;
 
   protected async __init__() {
-    await this.$$sysSdk.loadSdk(this.$fetch, this.$query.api, this.$query.apiMethod);
+    await this.$$modelSdk.loadSdk(this.$query.api, this.$query.apiMethod);
   }
 }

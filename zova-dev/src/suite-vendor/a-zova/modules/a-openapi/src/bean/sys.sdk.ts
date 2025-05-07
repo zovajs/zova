@@ -52,6 +52,6 @@ export class SysSdk extends BeanBase {
       }
     }
     // ok
-    return this.paths[api][apiMethod2];
+    return this.paths[api2][apiMethod2];
   }
 }
