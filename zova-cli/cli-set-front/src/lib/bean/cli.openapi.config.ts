@@ -21,13 +21,15 @@ export class CliOpenapiConfig extends BeanCliBase {
       await this._generateModuleConfig(moduleName);
     }
     // project config
+    const configFile = path.join(argv.projectPath, 'openapi.config.ts');
+    if (fse.existsSync(configFile)) return;
     // render boilerplate
-    // await this.template.renderBoilerplateAndSnippets({
-    //   targetDir: argv.projectPath,
-    //   setName: __ThisSetName__,
-    //   snippetsPath: 'openapi/config/snippets',
-    //   boilerplatePath: null,
-    // });
+    await this.template.renderBoilerplateAndSnippets({
+      targetDir: argv.projectPath,
+      setName: __ThisSetName__,
+      snippetsPath: null,
+      boilerplatePath: 'openapi/config/boilerplate/project',
+    });
   }
 
   async _generateModuleConfig(moduleName: string) {
