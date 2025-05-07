@@ -49,7 +49,7 @@
     "postpack": "clean-package restore"
   },
   "dependencies": {
-    "@cabloy/cli": "^3.0.9",
+    "@cabloy/cli": "^3.0.10",
     "zova-cli-set-front": "^1.1.199"
   },
   "devDependencies": {

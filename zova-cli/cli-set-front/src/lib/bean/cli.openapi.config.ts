@@ -1,4 +1,6 @@
+import path from 'node:path';
 import { BeanCliBase } from '@cabloy/cli';
+import fse from 'fs-extra';
 import { __ThisSetName__ } from '../this.ts';
 
 declare module '@cabloy/cli' {
@@ -14,12 +16,36 @@ export class CliOpenapiConfig extends BeanCliBase {
     if (moduleNames.length === 0) {
       moduleNames.push('home-api');
     }
+    // module config
+    for (const moduleName of moduleNames) {
+      await this._generateModuleConfig(moduleName);
+    }
+    // project config
+    // render boilerplate
+    // await this.template.renderBoilerplateAndSnippets({
+    //   targetDir: argv.projectPath,
+    //   setName: __ThisSetName__,
+    //   snippetsPath: 'openapi/config/snippets',
+    //   boilerplatePath: null,
+    // });
+  }
+
+  async _generateModuleConfig(moduleName: string) {
+    // check if exists
+    const _module = this.helper.findModule(moduleName);
+    if (!_module) {
+      throw new Error(`module does not exist: ${moduleName}`);
+    }
+    // target dir
+    const targetDir = await this.helper.ensureDir(_module.root);
+    const configFile = path.join(targetDir, 'cli/openapi.config.ts');
+    if (fse.existsSync(configFile)) return;
     // render boilerplate
     await this.template.renderBoilerplateAndSnippets({
-      targetDir: argv.projectPath,
+      targetDir: path.join(targetDir, 'cli'),
       setName: __ThisSetName__,
-      snippetsPath: 'openapi/config/snippets',
-      boilerplatePath: null,
+      snippetsPath: null,
+      boilerplatePath: 'openapi/config/boilerplate/module',
     });
   }
 }
