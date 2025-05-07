@@ -51,7 +51,11 @@ export class CliOpenapiGenerate extends BeanCliBase {
     let moduleNames = argv._;
     if (moduleNames.length === 0) {
       moduleNames = this.modulesMeta.modulesArray
-        .filter(item => !item.info.node_modules && !item.info.vendor)
+        .filter(item => {
+          if (item.info.node_modules || item.info.vendor) return false;
+          const configFile = path.join(item.root, 'cli/openapi.config.ts');
+          return fse.existsSync(configFile);
+        })
         .map(item => item.info.relativeName);
     }
     if (moduleNames.length === 0) return;
