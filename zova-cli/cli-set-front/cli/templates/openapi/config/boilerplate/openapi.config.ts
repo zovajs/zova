@@ -1,8 +1,10 @@
-import type { OpenAPITSOptions } from 'openapi-typescript';
+import type { ZovaOpenapiConfig } from 'zova-openapi';
 
-export default function () {
+export default function (): ZovaOpenapiConfig {
   return {
-    source: 'path/to/openapi.json',
-    options: {},
-  } as { source: string; options: OpenAPITSOptions };
+    default: {
+      source: 'path/to/openapi.json',
+    },
+    modules: {},
+  };
 }
