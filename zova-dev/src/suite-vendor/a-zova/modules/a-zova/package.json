@@ -32,7 +32,8 @@
     },
     "globalDependenciesDev": {
       "@cabloy/cli": true,
-      "fs-extra": true
+      "fs-extra": true,
+      "zova-openapi": true
     }
   },
   "description": "zova",
@@ -72,7 +73,8 @@
   },
   "devDependencies": {
     "@cabloy/cli": "^3.0.9",
-    "fs-extra": "^11.2.0"
+    "fs-extra": "^11.2.0",
+    "zova-openapi": "workspace:^"
   },
   "gitHead": "73721393c1ea9a95539948d57ad692f2c004d7c7"
 }

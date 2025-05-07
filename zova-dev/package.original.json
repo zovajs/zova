@@ -70,7 +70,6 @@
     "typescript": "5.7.3",
     "vite": "^6.2.4",
     "vue-tsc": "^2.2.0",
-    "zova-openapi": "workspace:^",
     "zova-vite": "workspace:^"
   },
   "license": "MIT"
