@@ -8,8 +8,10 @@ export interface ZovaOpenapiConfigModuleBase {
 }
 
 export interface ZovaOpenapiConfigModule extends ZovaOpenapiConfigModuleBase {
-  match?: TypeOpenapiConfigMatchRule;
-  ignore?: TypeOpenapiConfigMatchRule;
+  operations?: {
+    match?: TypeOpenapiConfigMatchRule;
+    ignore?: TypeOpenapiConfigMatchRule;
+  };
 }
 
 export interface ZovaOpenapiConfig {
