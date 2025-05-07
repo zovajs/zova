@@ -58,7 +58,7 @@ export class CliOpenapiConfig extends BeanCliBase {
     const pkg = await this.helper.loadJSONFile(pkgFile);
     if (!pkg.files) pkg.files = [];
     let changed;
-    // monkey
+    // cli
     if (!pkg.files.includes('cli')) {
       pkg.files.push('cli');
       changed = true;
