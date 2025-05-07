@@ -29,6 +29,7 @@
     "preview:spa": "vite preview --outDir=dist/spa-admin",
     "build:githubpages": "npm run prerun && quasar build --mode spa --flavor githubpages",
     "prerun": "npm run zova :tools:deps && npm run tsc",
+    "init": "pnpm install && npm run zova :tools:deps && pnpm install",
     "tsc": "vue-tsc --noEmit --project tsconfig.vue-tsc.json",
     "lint": "eslint",
     "lint:fix": "eslint --fix"
