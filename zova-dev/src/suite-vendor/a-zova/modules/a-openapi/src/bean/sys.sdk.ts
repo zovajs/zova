@@ -16,20 +16,20 @@ export class SysSdk extends BeanBase {
     this.paths = shallowReactive({});
   }
 
-  getSdk(_api: string | undefined, _apiMethod: string | undefined): OperationObject | undefined {
-    if (!_api) return;
-    const api = this.sys.util.getApiPath(_api)!;
-    const apiMethod = _apiMethod ?? 'get';
-    return this.paths[api]?.[apiMethod];
+  getSdk(api: string | undefined, apiMethod: string | undefined): OperationObject | undefined {
+    if (!api) return;
+    const api2 = this.sys.util.getApiPath(api)!;
+    const apiMethod2 = apiMethod ?? 'get';
+    return this.paths[api2]?.[apiMethod2];
   }
 
-  async loadSdk($fetch: BeanFetch, _api?: string, _apiMethod?: string): Promise<OperationObject | undefined> {
-    if (!_api) return;
-    const api = this.sys.util.getApiPath(_api)!;
-    const apiMethod = _apiMethod ?? 'get';
-    if (this.paths[api]?.[apiMethod]) return this.paths[api][apiMethod];
-    const data = await $fetch[apiMethod]<any, OpenAPIObject>(
-      this.sys.util.apiActionPathTranslate(api),
+  async loadSdk($fetch: BeanFetch, api?: string, apiMethod?: string): Promise<OperationObject | undefined> {
+    if (!api) return;
+    const api2 = this.sys.util.getApiPath(api)!;
+    const apiMethod2 = apiMethod ?? 'get';
+    if (this.paths[api2]?.[apiMethod2]) return this.paths[api2][apiMethod2];
+    const data = await $fetch[apiMethod2]<any, OpenAPIObject>(
+      this.sys.util.apiActionPathTranslate(api2),
       undefined,
       this.sys.util.apiActionConfigPrepare(undefined, { openapiSchema: true }),
     );
@@ -52,6 +52,6 @@ export class SysSdk extends BeanBase {
       }
     }
     // ok
-    return this.paths[api][apiMethod];
+    return this.paths[api][apiMethod2];
   }
 }

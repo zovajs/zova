@@ -6,12 +6,13 @@ import { Scope } from 'zova-module-a-bean';
 /** api: end */
 /** api: begin */
 import { ApiHome } from '../api/home.js';
+import { ApiHomeBaseMenu } from '../api/homeBaseMenu.js';
 /** api: end */
 /** api: begin */
 
-import { ApiHomeBaseMenu } from '../api/homeBaseMenu.js';
-
 import { ApiHomeUserPassport } from '../api/homeUserPassport.js';
+
+import { ApiTestSsrToolOne } from '../api/testSsrToolOne.js';
 /** service: end */
 /** service: begin */
 import { ServiceJwtAdapter } from '../service/jwtAdapter.js';
@@ -26,6 +27,9 @@ import 'zova';
 export * from '../api/home.js';
 export * from '../api/homeBaseMenu.js';
 export * from '../api/homeUserPassport.js';
+/** api: end */
+/** openapi: begin */
+export * from '../api/openapi/index.js';
 declare module 'zova' {
 
 }
@@ -45,22 +49,27 @@ declare module 'zova-module-home-api' {
     /** @internal */
     get scope(): ScopeModuleHomeApi;
   }
+
+  export interface ApiTestSsrToolOne {
+    /** @internal */
+    get scope(): ScopeModuleHomeApi;
+  }
 }
 export interface IModuleApi {
   home: ApiHome;
   homeBaseMenu: ApiHomeBaseMenu;
   homeUserPassport: ApiHomeUserPassport;
+  testSsrToolOne: ApiTestSsrToolOne;
 }
 declare module 'zova' {
   export interface IBeanRecordGeneral {
     'home-api.api.home': ApiHome;
     'home-api.api.homeBaseMenu': ApiHomeBaseMenu;
     'home-api.api.homeUserPassport': ApiHomeUserPassport;
+    'home-api.api.testSsrToolOne': ApiTestSsrToolOne;
   }
 }
-/** api: end */
-/** openapi: begin */
-export * from '../api/openapi/index.js';
+export * from '../api/testSsrToolOne.js';
 /** openapi: end */
 /** service: begin */
 export * from '../service/jwtAdapter.js';
