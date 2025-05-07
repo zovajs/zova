@@ -47,5 +47,23 @@ export class CliOpenapiConfig extends BeanCliBase {
       snippetsPath: null,
       boilerplatePath: 'openapi/config/boilerplate/module',
     });
+    // files
+    await this._setPackageInfo(targetDir);
+  }
+
+  async _setPackageInfo(modulePath: string) {
+    const pkgFile = path.join(modulePath, 'package.json');
+    const pkg = await this.helper.loadJSONFile(pkgFile);
+    if (!pkg.files) pkg.files = [];
+    let changed;
+    // monkey
+    if (!pkg.files.includes('cli')) {
+      pkg.files.push('cli');
+      changed = true;
+    }
+    // save
+    if (changed) {
+      await this.helper.saveJSONFile(pkgFile, pkg);
+    }
   }
 }
