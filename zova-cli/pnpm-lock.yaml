@@ -94,8 +94,8 @@ importers:
         specifier: ^4.6.11
         version: 4.6.11
       zova-openapi:
-        specifier: ^1.0.1
-        version: 1.0.1(typescript@5.7.3)
+        specifier: ^1.0.3
+        version: 1.0.3(typescript@5.7.3)
       zova-shared:
         specifier: ^1.0.7
         version: 1.0.7
@@ -4563,8 +4563,8 @@ packages:
     resolution: {integrity: sha512-rVksvsnNCdJ/ohGc6xgPwyN8eheCxsiLM8mxuE/t/mOVqJewPuO1miLpTHQiRgTKCLexL4MeAFVagts7HmNZ2Q==}
     engines: {node: '>=10'}
 
-  zova-openapi@1.0.1:
-    resolution: {integrity: sha512-y2LIri0rmdzLzdEVwz2HyJe/JL13z1pTR21ezdvlr2zJ9Tl/dMX+yphyFvnMosiDjedpXbTAwEzznK30ao6PYQ==}
+  zova-openapi@1.0.3:
+    resolution: {integrity: sha512-Sizuxq8tv+IN9gbPp3HxpKZfBYmponufzfx8fDNVN9kCBc72jbQ5ftptU1kZ3afhdS2mHCON6rkNixC0l2RcHw==}
 
   zova-shared@1.0.7:
     resolution: {integrity: sha512-vTJSY9t7+nQq2Geg5kWVCVpP+TThooYf0Z+Bs1amxfJKj0M2rO1iDZ3howOm85Hw71QpqGbpDzLbZhR/V8sO6Q==}
@@ -9592,7 +9592,7 @@ snapshots:
 
   yocto-queue@0.1.0: {}
 
-  zova-openapi@1.0.1(typescript@5.7.3):
+  zova-openapi@1.0.3(typescript@5.7.3):
     dependencies:
       openapi-typescript: 7.6.1(typescript@5.7.3)
     transitivePeerDependencies:

@@ -62,7 +62,7 @@
     "svgo": "^3.2.0",
     "typescript": "5.7.3",
     "urllib": "^4.6.11",
-    "zova-openapi": "^1.0.1",
+    "zova-openapi": "^1.0.3",
     "zova-shared": "^1.0.7",
     "zova-vite": "^1.0.182"
   },

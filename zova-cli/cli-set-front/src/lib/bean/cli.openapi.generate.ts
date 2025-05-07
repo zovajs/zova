@@ -405,10 +405,10 @@ function _q(question: boolean) {
 
 function _checkOperationIdEnabled(moduleConfig: ZovaOpenapiConfigModule, selector?: string) {
   if (!selector) return false;
-  if (!moduleConfig.match && !moduleConfig.ignore) return true;
+  if (!moduleConfig.operations?.match && !moduleConfig.operations?.ignore) return true;
   return (
-    (moduleConfig.match && matchSelector(moduleConfig.match, selector)) ||
-    (moduleConfig.ignore && !matchSelector(moduleConfig.ignore, selector))
+    (moduleConfig.operations?.match && matchSelector(moduleConfig.operations?.match, selector)) ||
+    (moduleConfig.operations?.ignore && !matchSelector(moduleConfig.operations?.ignore, selector))
   );
 }
 
