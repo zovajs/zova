@@ -10,25 +10,29 @@ const PATH_PARAM_RE = /\{([^{}/]+)\}/g;
 @Sys()
 export class SysSdk extends BeanBase {
   schemas: Record<string, SchemaObject | ReferenceObject>;
-  paths: Record<string, Record<string, IOpenapiSdkItem>>;
+  sdks: Record<string, Record<string, IOpenapiSdkItem>>;
 
   protected async __init__() {
     this.schemas = shallowReactive({});
-    this.paths = shallowReactive({});
+    this.sdks = shallowReactive({});
   }
 
   getSdk(api: string | undefined, apiMethod: string | undefined): IOpenapiSdkItem | undefined {
     if (!api) return;
     const api2 = this.sys.util.getApiPath(api)!;
     const apiMethod2 = apiMethod ?? 'get';
-    return this.paths[api2]?.[apiMethod2];
+    return this.sdks[api2]?.[apiMethod2];
+  }
+
+  getSchema(schemaName: string): SchemaObject | ReferenceObject {
+    return this.schemas[schemaName];
   }
 
   async loadSdk($fetch: BeanFetch, api?: string, apiMethod?: string): Promise<IOpenapiSdkItem | undefined> {
     if (!api) return;
     const api2 = this.sys.util.getApiPath(api)!;
     const apiMethod2 = apiMethod ?? 'get';
-    if (this.paths[api2]?.[apiMethod2]) return this.paths[api2][apiMethod2];
+    if (this.sdks[api2]?.[apiMethod2]) return this.sdks[api2][apiMethod2];
     const data = await $fetch[apiMethod2]<any, OpenAPIObject>(
       this.sys.util.apiActionPathTranslate(api2),
       undefined,
@@ -48,9 +52,9 @@ export class SysSdk extends BeanBase {
     if (paths) {
       for (const key in paths) {
         const path = key.replace(PATH_PARAM_RE, ':$1');
-        if (!this.paths[path]) this.paths[path] = shallowReactive({});
+        if (!this.sdks[path]) this.sdks[path] = shallowReactive({});
         for (const method in paths[key]) {
-          this.paths[path][method] = {
+          this.sdks[path][method] = {
             schemas: schemaNames,
             operationObject: paths[key][method],
           };
@@ -58,6 +62,6 @@ export class SysSdk extends BeanBase {
       }
     }
     // ok
-    return this.paths[api2][apiMethod2];
+    return this.sdks[api2][apiMethod2];
   }
 }
