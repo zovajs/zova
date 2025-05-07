@@ -23,6 +23,9 @@ export class ControllerPageToolOne extends BeanControllerPageBase {
   $$modelSdk: ModelSdk;
 
   protected async __init__() {
-    await this.$$modelSdk.loadSdk(this.$query.api, this.$query.apiMethod);
+    if (this.$query.api) {
+      const { suspense } = this.$$modelSdk.getSdk(this.$query.api, this.$query.apiMethod)!;
+      await suspense();
+    }
   }
 }

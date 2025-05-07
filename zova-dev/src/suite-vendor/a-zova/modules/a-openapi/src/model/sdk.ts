@@ -24,6 +24,7 @@ export class ModelSdk extends BeanModelBase {
           const { suspense } = this.getSchema(schemaName);
           await suspense();
         }
+        return sdk;
       },
     });
   }
