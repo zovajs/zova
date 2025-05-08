@@ -1,7 +1,9 @@
 import { z } from 'zod';
 import { BeanControllerPageBase, Use } from 'zova';
 import { Controller } from 'zova-module-a-bean';
+import { ReturnTypeUseForm } from 'zova-module-a-form';
 import { ModelSdk } from 'zova-module-a-openapi';
+import { ApiSchemaTestSsrDtoTestBody } from 'zova-module-home-api';
 import { ModelTest } from '../../model/test.js';
 
 export const ControllerPageToolOneSchemaParams = z.object({
@@ -16,6 +18,8 @@ export const ControllerPageToolOneSchemaQuery = z.object({
 
 @Controller()
 export class ControllerPageToolOne extends BeanControllerPageBase {
+  form: ReturnTypeUseForm<Partial<ApiSchemaTestSsrDtoTestBody>>;
+
   @Use()
   $$modelTest: ModelTest;
 
@@ -24,8 +28,17 @@ export class ControllerPageToolOne extends BeanControllerPageBase {
 
   protected async __init__() {
     if (this.$query.api) {
-      const { suspense } = this.$$modelSdk.getSdk(this.$query.api, this.$query.apiMethod)!;
-      await suspense();
+      // sdk
+      const querySdk = this.$$modelSdk.getSdk(this.$query.api, this.$query.apiMethod)!;
+      await querySdk.suspense();
+      console.log('sdk: ', querySdk.data);
+      // form
+      this.form = this.$useForm({
+        defaultValues: { name: 'sss' } as Partial<ApiSchemaTestSsrDtoTestBody>,
+        onSubmit: async ({ value }) => {
+          console.log('submit: ', JSON.stringify(value));
+        },
+      });
     }
   }
 }
