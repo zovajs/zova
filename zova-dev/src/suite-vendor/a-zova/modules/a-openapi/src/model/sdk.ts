@@ -38,10 +38,18 @@ export class ModelSdk extends BeanModelBase {
     });
   }
 
-  getZodSchema(schemaName: string): z.ZodAny | undefined {
-    const { data } = this.getSchema(schemaName);
-    if (!data) return;
-    const code = jsonSchemaToZod(data);
-    return evaluateSimple(code, { z });
+  getZodSchema(schemaName: string) {
+    return this.$useStateData({
+      queryKey: ['zodSchema', schemaName],
+      queryFn: async () => {
+        const data = this.$$sysSdk.getSchema(schemaName);
+        const code = jsonSchemaToZod(data);
+        return evaluateSimple(code, { z });
+      },
+      meta: {
+        ssr: { dehydrate: false },
+        persister: false,
+      },
+    });
   }
 }
