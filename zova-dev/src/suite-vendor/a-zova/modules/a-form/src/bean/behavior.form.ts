@@ -16,7 +16,8 @@ export class BehaviorForm extends BeanBehaviorBase<
   IBehaviorPropsInputForm,
   IBehaviorPropsOutputForm
 > {
-  protected async __init__() {
+  protected async __init__(options: IBehaviorOptionsForm) {
+    super.__init__(options);
     this.bean._setBean('$$form', this.$options.form);
   }
 
