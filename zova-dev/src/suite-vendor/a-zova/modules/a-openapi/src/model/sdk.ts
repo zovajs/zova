@@ -21,8 +21,15 @@ export class ModelSdk extends BeanModelBase {
         const sdk = await this.$$sysSdk.loadSdk(this.$fetch, api, apiMethod);
         if (!sdk) throw new Error('load sdk error');
         for (const schemaName of sdk.schemas) {
-          const { suspense } = this.getSchema(schemaName);
-          await suspense();
+          if (process.env.SERVER) {
+            const querySchema = this.getSchema(schemaName);
+            await querySchema.suspense();
+            const queryZodSchema = this.getZodSchema(schemaName);
+            await queryZodSchema.suspense();
+          } else {
+            this.$invalidateQueries({ queryKey: ['schema', schemaName] });
+            this.$invalidateQueries({ queryKey: ['zodSchema', schemaName] });
+          }
         }
         return sdk;
       },
@@ -35,6 +42,7 @@ export class ModelSdk extends BeanModelBase {
       queryFn: async () => {
         return this.$$sysSdk.getSchema(schemaName);
       },
+      staleTime: Infinity,
     });
   }
 
@@ -46,6 +54,7 @@ export class ModelSdk extends BeanModelBase {
         const code = jsonSchemaToZod(data);
         return evaluateSimple(code, { z });
       },
+      staleTime: Infinity,
       meta: {
         ssr: { dehydrate: false },
         persister: false,
