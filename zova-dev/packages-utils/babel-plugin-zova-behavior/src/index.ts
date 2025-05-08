@@ -80,6 +80,15 @@ function createVisitor(context: ContextInfo) {
           nodePath.node.attributes.push(
             t.jsxAttribute(t.jsxIdentifier('behaviorTag'), t.jsxExpressionContainer(objectExpression)),
           );
+          // -> ()=>{}
+          const children = (nodePath.container as any)?.children;
+          if (children && children.length > 0) {
+            const expressionArray = t.arrayExpression();
+            expressionArray.elements = (nodePath.container as any)?.children;
+            const expressionSlot = t.arrowFunctionExpression([], expressionArray);
+            const expressionSlotContainer = t.jsxExpressionContainer(expressionSlot);
+            (nodePath.container as any).children = [expressionSlotContainer];
+          }
         }
       }
     },

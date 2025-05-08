@@ -1,5 +1,6 @@
 import type { BeanBase, BeanContainer, IMonkeyBeanInit, ZovaContext } from 'zova';
 import { useForm } from '@tanstack/vue-form';
+import { markRaw } from 'vue';
 import { BeanSimple, cast } from 'zova';
 
 export class Monkey extends BeanSimple implements IMonkeyBeanInit {
@@ -19,7 +20,7 @@ export class Monkey extends BeanSimple implements IMonkeyBeanInit {
   _patchUseForm(beanInstance: BeanBase, ...args) {
     const ctx = cast(beanInstance).ctx as ZovaContext;
     return ctx.util.instanceScope(() => {
-      return useForm(...args);
+      return markRaw(useForm(...args));
     });
   }
 }
