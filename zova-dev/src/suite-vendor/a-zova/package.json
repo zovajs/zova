@@ -13,6 +13,7 @@
     "zova-module-a-behavior": "workspace:^",
     "zova-module-a-boundary": "workspace:^",
     "zova-module-a-fetch": "workspace:^",
+    "zova-module-a-form": "workspace:^",
     "zova-module-a-icon": "workspace:^",
     "zova-module-a-interceptor": "workspace:^",
     "zova-module-a-logger": "workspace:^",
