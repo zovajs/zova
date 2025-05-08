@@ -5,8 +5,12 @@ import { Use } from 'zova';
 import { BeanModelBase, Model } from 'zova-module-a-model';
 import { SysSdk } from '../bean/sys.sdk.js';
 
+const SymbolZodSchemas = Symbol('SymbolZodSchemas');
+
 @Model()
 export class ModelSdk extends BeanModelBase {
+  private [SymbolZodSchemas]: Record<string, unknown> = {};
+
   @Use()
   $$sysSdk: SysSdk;
 
@@ -24,12 +28,10 @@ export class ModelSdk extends BeanModelBase {
           if (process.env.SERVER) {
             const querySchema = this.getSchema(schemaName);
             await querySchema.suspense();
-            const queryZodSchema = this.getZodSchema(schemaName);
-            await queryZodSchema.suspense();
           } else {
             this.$invalidateQueries({ queryKey: ['schema', schemaName] });
-            this.$invalidateQueries({ queryKey: ['zodSchema', schemaName] });
           }
+          this[SymbolZodSchemas] = {};
         }
         return sdk;
       },
@@ -47,18 +49,13 @@ export class ModelSdk extends BeanModelBase {
   }
 
   getZodSchema(schemaName: string) {
-    return this.$useStateData({
-      queryKey: ['zodSchema', schemaName],
-      queryFn: async () => {
-        const data = this.$$sysSdk.getSchema(schemaName);
-        const code = jsonSchemaToZod(data);
-        return evaluateSimple(code, { z });
-      },
-      staleTime: Infinity,
-      meta: {
-        ssr: { dehydrate: false },
-        persister: false,
-      },
-    });
+    if (!this[SymbolZodSchemas][schemaName]) {
+      const { data } = this.getSchema(schemaName);
+      if (!data) return;
+      const code = jsonSchemaToZod(data);
+      const zodSchema = evaluateSimple(code, { z });
+      this[SymbolZodSchemas][schemaName] = zodSchema;
+    }
+    return this[SymbolZodSchemas][schemaName];
   }
 }
