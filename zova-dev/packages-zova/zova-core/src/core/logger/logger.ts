@@ -1,12 +1,13 @@
 import type { LoggerLevel } from '@cabloy/logger';
 import type { ILoggerClientChildRecord, ILoggerClientRecord, TypeLoggerOptions } from './types.js';
 import { Logger } from '@cabloy/logger';
+import { sys } from 'zova';
 import { BeanSimple } from '../../bean/beanSimple.js';
 import { deepExtend } from '../sys/util.js';
 
 const SymbolLoggerInstances = Symbol('SymbolLoggerInstances');
 
-export class AppLogger extends BeanSimple {
+export class SysLogger extends BeanSimple {
   private [SymbolLoggerInstances]: Record<keyof ILoggerClientRecord, Logger> = {} as any;
 
   public async dispose() {
@@ -52,7 +53,7 @@ export class AppLogger extends BeanSimple {
 
   private _prepareConfigClient(clientName: keyof ILoggerClientRecord, configClient: TypeLoggerOptions) {
     if (typeof configClient !== 'function') return configClient;
-    return configClient.call(this.app, {
+    return configClient.call(this.sys, {
       clientName,
       level: () => getLoggerClientLevel(clientName),
     });
@@ -69,7 +70,7 @@ export function getLoggerClientLevel(clientName?: keyof ILoggerClientRecord): Lo
   clientName = clientName || 'default';
   if (process.env.PROD) return; // disable on prod
   const envName = `LOGGER_CLIENT_${clientName.toUpperCase()}`;
-  const level = process.env[envName];
+  const level = sys.env[envName];
   if (level === 'false') return;
   if (level === 'true' || !level) return 'info';
   return level as LoggerLevel;
@@ -79,5 +80,5 @@ export function setLoggerClientLevel(level: LoggerLevel | boolean, clientName?: 
   clientName = clientName || 'default';
   if (process.env.PROD) return; // disable on prod
   const envName = `LOGGER_CLIENT_${clientName.toUpperCase()}`;
-  process.env[envName] = level.toString();
+  sys.env[envName] = level.toString();
 }

@@ -22,7 +22,7 @@ export class AopMethodLog extends BeanAopMethodBase implements IAopMethodGet, IA
   get(options: IAopMethodOptionsLog, next: NextSync, receiver: any, prop: string): any {
     const context = this._getContext(options, receiver);
     const message = `${receiver[SymbolBeanFullName]}#${prop}(get)`;
-    const logger = this.app.meta.logger.child(options.childName, options.clientName);
+    const logger = this.sys.meta.logger.child(options.childName, options.clientName);
     // begin
     (!options.auto) && logger.log(options.level, message, context ? { context } : undefined);
     const profiler = logger.startTimer();
@@ -40,7 +40,7 @@ export class AopMethodLog extends BeanAopMethodBase implements IAopMethodGet, IA
   set(options: IAopMethodOptionsLog, value: any, next: NextSync, receiver: any, prop: string): boolean {
     const context = this._getContext(options, receiver);
     const message = `${receiver[SymbolBeanFullName]}#${prop}(set)`;
-    const logger = this.app.meta.logger.child(options.childName, options.clientName);
+    const logger = this.sys.meta.logger.child(options.childName, options.clientName);
     // begin
     const info: any = { level: options.level, message };
     if (context) info.context = context;
@@ -62,7 +62,7 @@ export class AopMethodLog extends BeanAopMethodBase implements IAopMethodGet, IA
   execute(options: IAopMethodOptionsLog, _args: [], next: Next | NextSync, receiver: any, prop: string): Promise<any> | any {
     const context = this._getContext(options, receiver);
     const message = `${receiver[SymbolBeanFullName]}#${prop}`;
-    const logger = this.app.meta.logger.child(options.childName, options.clientName);
+    const logger = this.sys.meta.logger.child(options.childName, options.clientName);
     // begin
     if (options.args !== false) {
       const info: any = { level: options.level, message };

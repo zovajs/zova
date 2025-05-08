@@ -8,14 +8,12 @@ import { AppError } from '../component/error.js';
 import { AppEvent } from '../component/event.js';
 import { AppLocale } from '../component/locale.js';
 import { AppModule } from '../component/module.js';
-import { AppLogger } from '../logger/logger.js';
 
 export class AppMeta extends BeanSimple {
   module: AppModule;
   component: AppComponent;
   locale: AppLocale;
   error: AppError;
-  logger: AppLogger;
   event: AppEvent;
   cookie: AppCookie;
   text: IModuleLocaleText;
@@ -26,7 +24,6 @@ export class AppMeta extends BeanSimple {
   protected __init__() {
     this.module = this.app.bean._newBeanSimple(AppModule, false);
     this.component = this.app.bean._newBeanSimple(AppComponent, false);
-    this.logger = this.app.bean._newBeanSimple(AppLogger, false);
     this.locale = this.app.bean._newBeanSimple(AppLocale, false);
     this.error = this.app.bean._newBeanSimple(AppError, false);
     this.event = this.app.bean._newBeanSimple(AppEvent, false);

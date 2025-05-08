@@ -33,7 +33,7 @@ export class BeanBase extends BeanBaseSimple {
 
   protected get $logger() {
     if (!this[SymbolLogger]) {
-      this[SymbolLogger] = this.app.meta.logger.get().child({ beanFullName: this[SymbolBeanFullName] });
+      this[SymbolLogger] = this.sys.meta.logger.get().child({ beanFullName: this[SymbolBeanFullName] });
     }
     return this[SymbolLogger];
   }

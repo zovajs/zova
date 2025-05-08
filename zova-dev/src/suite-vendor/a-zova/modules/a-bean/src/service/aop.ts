@@ -65,7 +65,7 @@ export class ServiceAop extends BeanBase {
       // aopMethodsMatched
       const aopMethodsMatched: IUseAopMethodPropMetadata[] = [];
       for (const onionSlice of onionSlices) {
-        const beanInstance = await this.app.bean._getBean(onionSlice.beanFullName as any, true);
+        const beanInstance = await this.sys.bean._getBean(onionSlice.beanFullName as any, true);
         aopMethodsMatched.push({
           onionName: onionSlice.name,
           beanInstance,
