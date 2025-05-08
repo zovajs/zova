@@ -7,6 +7,7 @@ export class RenderPageToolOne extends BeanRenderBase {
     return (
       <div>
         <form bs-form={{ form: this.form }}>
+          <input bs-formItem={{ name: 'name' }}></input>
           <this.form.Field name="name">
             {
               ({ field }) => {
