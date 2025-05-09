@@ -24,6 +24,10 @@ export class BehaviorForm extends BeanBehaviorBase<
     this.bean._setBean('$$behaviorForm', this);
   }
 
+  public get form() {
+    return this.$options.form!;
+  }
+
   protected render(props: IBehaviorPropsInputForm, next: NextBehavior<IBehaviorPropsOutputForm>): VNode {
     if (!this.$options.form) return createCommentVNode();
     if (!props.onSubmit && this.$options.onSubmit !== false) {
