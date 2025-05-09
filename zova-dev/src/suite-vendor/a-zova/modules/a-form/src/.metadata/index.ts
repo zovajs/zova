@@ -1,5 +1,5 @@
 import type { BeanScopeUtil } from 'zova';
-/** monkey: end */
+/** behaviors: end */
 /** scope: begin */
 import { BeanScopeBase } from 'zova';
 import { Scope } from 'zova-module-a-bean';
@@ -64,9 +64,6 @@ declare module 'vue/jsx-runtime' {
     }
   }
 }
-/** behaviors: end */
-/** monkey: begin */
-export * from '../monkey.js';
 
 @Scope()
 export class ScopeModuleAForm extends BeanScopeBase {}

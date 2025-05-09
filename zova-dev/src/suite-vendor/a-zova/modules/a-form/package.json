@@ -28,13 +28,5 @@
     "tsc:publish": "npm run clean && tsc -b",
     "_prepublishOnly": "npm run tsc:publish"
   },
-  "dependencies": {},
-  "zovaModule": {
-    "capabilities": {
-      "monkey": true
-    },
-    "dependencies": {
-      "a-zova": "5.0.0"
-    }
-  }
+  "dependencies": {}
 }

@@ -49,9 +49,3 @@ export type TypeBehaviorFormOptions<
    TFormOnServer,
    TSubmitMeta
  >;
-
-declare module 'zova' {
-  export interface BeanBase {
-    $useForm: typeof useForm;
-  }
-}
