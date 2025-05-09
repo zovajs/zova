@@ -15,8 +15,8 @@ export class RenderPageToolOne extends BeanRenderBase {
               validators: {
                 onChange: z.string().min(3),
               },
+              behaviorModel: true,
             }}
-
           ></input>
           <this.form.Field name="name">
             {
