@@ -1,6 +1,6 @@
 import { createCommentVNode, VNode } from 'vue';
 import { BeanBehaviorBase, Behavior, IDecoratorBehaviorOptions, NextBehavior } from 'zova-module-a-behavior';
-import { ReturnTypeUseForm } from '../types/form.js';
+import { TypeForm } from '../types/form.js';
 
 export interface IBehaviorPropsInputForm {
   onSubmit?: ((payload: Event) => void);
@@ -9,7 +9,7 @@ export interface IBehaviorPropsInputForm {
 export interface IBehaviorPropsOutputForm {}
 
 export interface IBehaviorOptionsForm<TFormData = unknown> extends IDecoratorBehaviorOptions {
-  form?: ReturnTypeUseForm<TFormData>;
+  form?: TypeForm<TFormData>;
   onSubmit?: ((payload: Event) => void) | boolean;
 }
 

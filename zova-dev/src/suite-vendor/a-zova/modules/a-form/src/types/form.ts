@@ -1,6 +1,6 @@
 import type { DeepKeys, DeepValue, FieldAsyncValidateOrFn, FieldOptions, FieldValidateOrFn, FormAsyncValidateOrFn, FormOptions, FormValidateOrFn, useField, useForm } from '@tanstack/vue-form';
 
-export type ReturnTypeUseForm<
+export type TypeForm<
   TFormData = unknown,
   TFormOnMount extends undefined | FormValidateOrFn<TFormData> = undefined | FormValidateOrFn<TFormData>,
   TFormOnChange extends undefined | FormValidateOrFn<TFormData> = undefined | FormValidateOrFn<TFormData>,
@@ -50,7 +50,7 @@ export type TypeBehaviorFormOptions<
    TSubmitMeta
  >;
 
-export type ReturnTypeUseFormField<
+export type TypeFormField<
   TParentData = unknown,
   TName extends DeepKeys<TParentData> = DeepKeys<TParentData>,
   TData extends DeepValue<TParentData, TName> = DeepValue<TParentData, TName>,

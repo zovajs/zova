@@ -1,4 +1,4 @@
-import type { BehaviorFormField, ReturnTypeUseFormField } from 'zova-module-a-form';
+import type { BehaviorFormField, TypeFormField } from 'zova-module-a-form';
 import defu from 'defu';
 import { VNode } from 'vue';
 import { Use } from 'zova';
@@ -37,7 +37,7 @@ export class BehaviorFormFieldModel extends BeanBehaviorBase<
     return props;
   }
 
-  private _patchProps_input(field: ReturnTypeUseFormField, props: IBehaviorPropsInputFormFieldModel) {
+  private _patchProps_input(field: TypeFormField, props: IBehaviorPropsInputFormFieldModel) {
     return defu(props, {
       name: field.api.name,
       value: field.state.value,

@@ -1,7 +1,7 @@
 import { z } from 'zod';
 import { Use } from 'zova';
 import { Controller } from 'zova-module-a-bean';
-import { BeanControllerPageFormBase, ReturnTypeUseForm } from 'zova-module-a-form';
+import { BeanControllerPageFormBase, TypeForm } from 'zova-module-a-form';
 import { ModelSdk } from 'zova-module-a-openapi';
 import { ApiSchemaTestSsrDtoTestBody } from 'zova-module-home-api';
 import { ModelTest } from '../../model/test.js';
@@ -18,7 +18,7 @@ export const ControllerPageToolOneSchemaQuery = z.object({
 
 @Controller()
 export class ControllerPageToolOne extends BeanControllerPageFormBase {
-  form: ReturnTypeUseForm<Partial<ApiSchemaTestSsrDtoTestBody>>;
+  form: TypeForm<Partial<ApiSchemaTestSsrDtoTestBody>>;
 
   @Use()
   $$modelTest: ModelTest;
