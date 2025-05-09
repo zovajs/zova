@@ -35,6 +35,11 @@ export class BehaviorFormField extends BeanBehaviorBase<
     this.bean._setBean('$$formField', this.$$formField);
   }
 
+  protected async onOptionsChange(options: IBehaviorOptionsFormField) {
+    super.onOptionsChange(options);
+    this.$$formField.api.update({ ...options, form: this.$$behaviorForm.form });
+  }
+
   protected render(props: IBehaviorPropsInputFormField, next: NextBehavior<IBehaviorPropsOutputFormField>): VNode {
     props = this._patchProps(props);
     return next(props);
@@ -55,9 +60,9 @@ export class BehaviorFormField extends BeanBehaviorBase<
       onInput: (e: Event) => {
         field.api.handleChange((e.target as HTMLInputElement).value);
       },
-      onBlur:(_e:Event)=>{
+      onBlur: (_e: Event) => {
         field.api.handleBlur();
-      }
+      },
     });
   }
 }

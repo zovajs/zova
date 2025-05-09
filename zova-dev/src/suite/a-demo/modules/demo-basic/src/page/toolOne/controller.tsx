@@ -26,6 +26,8 @@ export class ControllerPageToolOne extends BeanControllerPageFormBase {
   @Use()
   $$modelSdk: ModelSdk;
 
+  fieldName: string = 'name';
+
   protected async __init__() {
     if (this.$query.api) {
       // sdk
@@ -39,6 +41,9 @@ export class ControllerPageToolOne extends BeanControllerPageFormBase {
           console.log('submit: ', JSON.stringify(value));
         },
       });
+      // setInterval(()=>{
+      //   this.fieldName=this.fieldName==='name'?'married':'name';
+      // },1000)
     }
   }
 }
