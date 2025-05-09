@@ -85,3 +85,6 @@ export class ZovaSys {
 }
 
 export const sys = new ZovaSys();
+if (process.env.CLIENT) {
+  window.sys = sys;
+}
