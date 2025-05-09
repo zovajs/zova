@@ -1,21 +1,16 @@
 import type { BehaviorForm } from './behavior.form.js';
 import { useField } from '@tanstack/vue-form';
-import defu from 'defu';
 import { VNode } from 'vue';
-import { Use } from 'zova-core';
-import { BeanBehaviorBase, Behavior, IDecoratorBehaviorOptions, NextBehavior } from 'zova-module-a-behavior';
+import { disposeInstance, Use } from 'zova';
+import { BeanBehaviorBase, Behavior, IBehaviors, IDecoratorBehaviorOptions, NextBehavior, ServiceComposer } from 'zova-module-a-behavior';
 import { ReturnTypeUseFormField, TypeBehaviorFormFieldOptions } from '../types/form.js';
 
-export interface IBehaviorPropsInputFormField {
-  name?: string;
-  value?: any;
-  onInput?: (e: Event) => void;
-  onBlur?: (e: Event) => void;
-}
+export interface IBehaviorPropsInputFormField {}
 
 export interface IBehaviorPropsOutputFormField {}
 
 export interface IBehaviorOptionsFormField<TParentData = unknown> extends IDecoratorBehaviorOptions, TypeBehaviorFormFieldOptions<TParentData> {
+  behaviorModel?: IBehaviors | boolean;
 }
 
 @Behavior<IBehaviorOptionsFormField>()
@@ -25,19 +20,43 @@ export class BehaviorFormField extends BeanBehaviorBase<
   IBehaviorPropsOutputFormField
 > {
   private _field: ReturnTypeUseFormField;
+  private _composer?: ServiceComposer;
 
   @Use({ injectionScope: 'host' })
   $$behaviorForm: BehaviorForm;
 
   protected async __init__(options: IBehaviorOptionsFormField) {
     super.__init__(options);
-    this._field = useField({ ...options, form: this.$$behaviorForm.form });
+    // provide
     this.bean._setBean('$$behaviorFormField', this);
+    // field
+    this._field = useField({ ...options, form: this.$$behaviorForm.form });
+    // behaviors
+    const behaviors = this._prepareBehaviors(options);
+    if (behaviors) {
+      this._composer = await this.createComposer(behaviors);
+    }
+  }
+
+  protected __dispose__() {
+    this._disposeComposer();
   }
 
   protected async onOptionsChange(options: IBehaviorOptionsFormField) {
     super.onOptionsChange(options);
+    // field
     this._field.api.update({ ...options, form: this.$$behaviorForm.form });
+    // behaviors
+    const behaviors = this._prepareBehaviors(options);
+    if (behaviors) {
+      if (!this._composer) {
+        this._composer = await this.createComposer(behaviors);
+      } else {
+        await this._composer.load(behaviors);
+      }
+    } else {
+      this._disposeComposer();
+    }
   }
 
   public get field() {
@@ -45,28 +64,20 @@ export class BehaviorFormField extends BeanBehaviorBase<
   }
 
   protected render(props: IBehaviorPropsInputFormField, next: NextBehavior<IBehaviorPropsOutputFormField>): VNode {
-    props = this._patchProps(props);
-    return next(props);
+    if (!this._composer) return next();
+    return this._composer.render(props, next);
   }
 
-  private _patchProps(props: IBehaviorPropsInputFormField) {
-    const field = this.field;
-    if (this.$$behaviorTag.component === 'input') {
-      return this._patchProps_input(field, props);
+  private _disposeComposer() {
+    if (this._composer) {
+      disposeInstance(this._composer);
+      this._composer = undefined;
     }
-    return props;
   }
 
-  private _patchProps_input(field: ReturnTypeUseFormField, props: IBehaviorPropsInputFormField) {
-    return defu(props, {
-      name: field.api.name,
-      value: field.state.value,
-      onInput: (e: Event) => {
-        field.api.handleChange((e.target as HTMLInputElement).value);
-      },
-      onBlur: (_e: Event) => {
-        field.api.handleBlur();
-      },
-    });
+  private _prepareBehaviors(options: IBehaviorOptionsFormField): IBehaviors | undefined {
+    if (options.behaviorModel === false) return undefined;
+    if (!options.behaviorModel || options.behaviorModel === true) return 'a-form:formFieldModel';
+    return options.behaviorModel;
   }
 }

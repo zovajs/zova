@@ -10,6 +10,8 @@ import { IBehaviorOptionsForm } from '../bean/behavior.form.js';
 import { BehaviorForm } from '../bean/behavior.form.js';
 import { IBehaviorOptionsFormField } from '../bean/behavior.formField.js';
 import { BehaviorFormField } from '../bean/behavior.formField.js';
+import { IBehaviorOptionsFormFieldModel } from '../bean/behavior.formFieldModel.js';
+import { BehaviorFormFieldModel } from '../bean/behavior.formFieldModel.js';
 import 'zova';
 import 'zova';
 /** behavior: end */
@@ -21,11 +23,13 @@ import 'zova';
 
 export * from '../bean/behavior.form.js';
 export * from '../bean/behavior.formField.js';
+export * from '../bean/behavior.formFieldModel.js';
 declare module 'zova-module-a-behavior' {
 
   export interface IBehaviorRecord {
     'a-form:form': IBehaviorOptionsForm;
     'a-form:formField': IBehaviorOptionsFormField;
+    'a-form:formFieldModel': IBehaviorOptionsFormFieldModel;
   }
 
 }
@@ -40,11 +44,17 @@ declare module 'zova-module-a-form' {
     /** @internal */
     get scope(): ScopeModuleAForm;
   }
+
+  export interface BehaviorFormFieldModel {
+    /** @internal */
+    get scope(): ScopeModuleAForm;
+  }
 }
 declare module 'zova' {
   export interface IBeanRecordLocal {
     'a-form.behavior.form': BehaviorForm;
     'a-form.behavior.formField': BehaviorFormField;
+    'a-form.behavior.formFieldModel': BehaviorFormFieldModel;
   }
 }
 
@@ -52,6 +62,7 @@ declare module 'vue' {
   export interface InputHTMLAttributes {
     'bs-form'?: IBehaviorOptionsForm | '' | boolean;
     'bs-formField'?: IBehaviorOptionsFormField | '' | boolean;
+    'bs-formFieldModel'?: IBehaviorOptionsFormFieldModel | '' | boolean;
   }
 }
 
@@ -61,6 +72,7 @@ declare module 'vue/jsx-runtime' {
     export interface IntrinsicAttributes {
       'bs-form'?: IBehaviorOptionsForm | '' | boolean;
       'bs-formField'?: IBehaviorOptionsFormField | '' | boolean;
+      'bs-formFieldModel'?: IBehaviorOptionsFormFieldModel | '' | boolean;
     }
   }
 }
