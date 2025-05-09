@@ -34,7 +34,6 @@
     "_prepublishOnly": "npm run tsc:publish"
   },
   "dependencies": {
-    "defu": "^6.1.4",
     "devalue": "^5.0.0"
   }
 }

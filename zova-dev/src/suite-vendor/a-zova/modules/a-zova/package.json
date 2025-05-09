@@ -30,7 +30,8 @@
       "@cabloy/set": true,
       "@cabloy/utils": true,
       "@cabloy/word-utils": true,
-      "@tanstack/vue-form": true
+      "@tanstack/vue-form": true,
+      "defu": true
     },
     "globalDependenciesDev": {
       "@cabloy/cli": true,
@@ -72,7 +73,8 @@
     "@cabloy/set": "^1.0.7",
     "@cabloy/utils": "^1.0.12",
     "@cabloy/word-utils": "^2.0.0",
-    "@tanstack/vue-form": "^1.9.0"
+    "@tanstack/vue-form": "^1.9.0",
+    "defu": "^6.1.4"
   },
   "devDependencies": {
     "@cabloy/cli": "^3.0.11",

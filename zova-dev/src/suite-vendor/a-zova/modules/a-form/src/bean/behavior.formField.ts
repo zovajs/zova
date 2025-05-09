@@ -8,6 +8,7 @@ import { ReturnTypeUseFormField, TypeBehaviorFormFieldOptions } from '../types/f
 export interface IBehaviorPropsInputFormField {
   name?: string;
   value?: any;
+  onInput?: (e: Event) => void;
 }
 
 export interface IBehaviorPropsOutputFormField {}
@@ -52,6 +53,9 @@ export class BehaviorFormField extends BeanBehaviorBase<
     }
     if (!props.value) {
       propsPatch.value = field.state.value;
+    }
+    if (!props.onInput) {
+      // propsPatch.onInput=
     }
     return Object.assign({}, props, propsPatch);
   }
