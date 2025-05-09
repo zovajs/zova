@@ -30,17 +30,20 @@ export class BehaviorForm extends BeanBehaviorBase<
 
   protected render(props: IBehaviorPropsInputForm, next: NextBehavior<IBehaviorPropsOutputForm>): VNode {
     if (!this.$options.form) return createCommentVNode();
-    if (!props.onSubmit && this.$options.onSubmit !== false) {
-      props = Object.assign({}, props, {
-        onSubmit: typeof this.$options.onSubmit === 'function'
-          ? this.$options.onSubmit
-          : (e: Event) => {
-              e.preventDefault();
-              e.stopPropagation();
-              this.$options.form?.handleSubmit();
-            },
-      });
-    }
+    props = this._patchProps(props);
     return next(props);
+  }
+
+  private _patchProps(props: IBehaviorPropsInputForm) {
+    if (props.onSubmit || this.$options.onSubmit === false) return props;
+    return Object.assign({}, props, {
+      onSubmit: typeof this.$options.onSubmit === 'function'
+        ? this.$options.onSubmit
+        : (e: Event) => {
+            e.preventDefault();
+            e.stopPropagation();
+            this.$options.form?.handleSubmit();
+          },
+    });
   }
 }
