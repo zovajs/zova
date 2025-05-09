@@ -24,20 +24,24 @@ export class BehaviorFormField extends BeanBehaviorBase<
   IBehaviorPropsInputFormField,
   IBehaviorPropsOutputFormField
 > {
+  private _field: ReturnTypeUseFormField;
+
   @Use({ injectionScope: 'host' })
   $$behaviorForm: BehaviorForm;
 
-  $$formField: ReturnTypeUseFormField;
-
   protected async __init__(options: IBehaviorOptionsFormField) {
     super.__init__(options);
-    this.$$formField = useField({ ...options, form: this.$$behaviorForm.form });
-    this.bean._setBean('$$formField', this.$$formField);
+    this._field = useField({ ...options, form: this.$$behaviorForm.form });
+    this.bean._setBean('$$behaviorFormField', this);
   }
 
   protected async onOptionsChange(options: IBehaviorOptionsFormField) {
     super.onOptionsChange(options);
-    this.$$formField.api.update({ ...options, form: this.$$behaviorForm.form });
+    this._field.api.update({ ...options, form: this.$$behaviorForm.form });
+  }
+
+  public get field() {
+    return this._field;
   }
 
   protected render(props: IBehaviorPropsInputFormField, next: NextBehavior<IBehaviorPropsOutputFormField>): VNode {
@@ -46,7 +50,7 @@ export class BehaviorFormField extends BeanBehaviorBase<
   }
 
   private _patchProps(props: IBehaviorPropsInputFormField) {
-    const field = this.$$formField;
+    const field = this.field;
     if (this.$$behaviorTag.component === 'input') {
       return this._patchProps_input(field, props);
     }

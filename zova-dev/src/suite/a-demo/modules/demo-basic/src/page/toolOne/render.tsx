@@ -8,12 +8,15 @@ export class RenderPageToolOne extends BeanRenderBase {
     return (
       <div>
         <form bs-form={{ form: this.form }}>
-          <input bs-formField={{
-            name: this.fieldName,
-            validators: {
-              onChange: z.string().min(3),
-            },
-          }}
+          <input
+            bs-demo-basic-formFieldLayout={{ label: `${this.scope.locale.YourName()}:` }}
+            bs-formField={{
+              name: 'name',
+              validators: {
+                onChange: z.string().min(3),
+              },
+            }}
+
           ></input>
           <this.form.Field name="name">
             {

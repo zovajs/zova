@@ -10,6 +10,10 @@ import { AopHome3 } from '../bean/aop.home3.jsx';
 /** aop: end */
 /** aop: begin */
 import { AopHome } from '../bean/aop.home.jsx';
+import { IBehaviorOptionsFormFieldLayout } from '../bean/behavior.formFieldLayout.jsx';
+/** behavior: end */
+/** behavior: begin */
+import { BehaviorFormFieldLayout } from '../bean/behavior.formFieldLayout.jsx';
 /** store: end */
 /** store: begin */
 import { StoreCounter } from '../bean/store.counter.js';
@@ -39,17 +43,21 @@ import { ControllerPageToolOne } from '../page/toolOne/controller.jsx';
 /** render: end */
 /** render: begin */
 import { RenderPageToolOne } from '../page/toolOne/render.jsx';
+
 import { ControllerPageToolTwo } from '../page/toolTwo/controller.jsx';
 import { ZCard } from './component/card.js';
-
 import { NSControllerPageRouteParams } from './page/routeParams.js';
+
 import { NSControllerPageRouteQuery } from './page/routeQuery.js';
 import { NSControllerPageRouteQueryB } from './page/routeQueryB.js';
-
 import { NSControllerPageToolOne } from './page/toolOne.js';
 import { NSControllerPageToolTwo } from './page/toolTwo.js';
 import 'zova';
 import 'zova';
+import 'zova';
+import 'zova';
+import 'zova';
+import 'zova';
 
 import 'zova';
 import 'zova';
@@ -57,8 +65,10 @@ import 'zova';
 
 import 'zova';
 import 'zova';
-import 'zova';
-import 'zova';
+/** behavior: end */
+/** behaviors: begin */
+import 'vue';
+import 'vue/jsx-runtime';
 import 'zova';
 import 'zova';
 import 'zova';
@@ -85,6 +95,9 @@ declare module 'zova' {
 /** render: end */
 /** aop: begin */
 export * from '../bean/aop.home.jsx';
+/** aop: end */
+/** behavior: begin */
+export * from '../bean/behavior.formFieldLayout.jsx';
 /** store: begin */
 export * from '../bean/store.counter.js';
 /** model: end */
@@ -93,7 +106,7 @@ export * from '../bean/theme.orange.js';
 /** store: end */
 /** controller: begin */
 export * from '../component/card/controller.jsx';
-/** aop: end */
+/** behaviors: end */
 /** model: begin */
 export * from '../model/test.js';
 export * from '../page/component/controller.jsx';
@@ -102,7 +115,6 @@ export * from '../page/locale/controller.jsx';
 export * from '../page/pinia/controller.jsx';
 export * from '../page/routeParams/controller.jsx';
 export * from '../page/routeQuery/controller.jsx';
-export * from '../page/routeQueryB/controller.jsx';
 declare module 'zova' {
 
 }
@@ -184,6 +196,7 @@ declare module 'zova' {
     'demo-basic.controller.pageToolTwo': ControllerPageToolTwo;
   }
 }
+export * from '../page/routeQueryB/controller.jsx';
 export * from '../page/state/controller.jsx';
 export * from '../page/style/controller.jsx';
 export * from '../page/toolOne/controller.jsx';
@@ -200,7 +213,6 @@ export * from './page/component.js';
 export * from './page/legacy.js';
 export * from './page/locale.js';
 export * from './page/pinia.js';
-export * from './page/routeParams.js';
 declare module 'zova-module-a-router' {
   export interface IPagePathRecord {
     '/demo/basic/component': TypePagePathSchema<undefined, undefined>;
@@ -267,7 +279,7 @@ declare module 'zova-module-demo-basic' {
 }
 /** pages: end */
 
-export * from './page/routeQuery.js';
+export * from './page/routeParams.js';
 export const components = {
   card: ZCard,
 };
@@ -276,7 +288,7 @@ declare module 'zova' {
     'demo-basic:card': ControllerCard;
   }
 }
-export * from './page/routeQueryB.js';
+export * from './page/routeQuery.js';
 declare module 'zova' {
 
 }
@@ -292,8 +304,8 @@ declare module 'zova' {
     'demo-basic.render.pageToolOne': RenderPageToolOne;
   }
 }
+export * from './page/routeQueryB.js';
 export * from './page/state.js';
-export * from './page/style.js';
 declare module 'zova-module-a-bean' {
 
   export interface IAopRecord {
@@ -318,6 +330,41 @@ declare module 'zova' {
   export interface IBeanRecordLocal {
     'demo-basic.aop.home': AopHome;
     'demo-basic.aop.home3': AopHome3;
+  }
+}
+export * from './page/style.js';
+declare module 'zova-module-a-behavior' {
+
+  export interface IBehaviorRecord {
+    'demo-basic:formFieldLayout': IBehaviorOptionsFormFieldLayout;
+  }
+
+}
+declare module 'zova-module-demo-basic' {
+
+  export interface BehaviorFormFieldLayout {
+    /** @internal */
+    get scope(): ScopeModuleDemoBasic;
+  }
+}
+declare module 'zova' {
+  export interface IBeanRecordLocal {
+    'demo-basic.behavior.formFieldLayout': BehaviorFormFieldLayout;
+  }
+}
+
+declare module 'vue' {
+  export interface InputHTMLAttributes {
+    'bs-demo-basic-formFieldLayout'?: IBehaviorOptionsFormFieldLayout | '' | boolean;
+  }
+}
+
+declare module 'vue/jsx-runtime' {
+  namespace JSX {
+    // need define class/style in IntrinsicAttributes
+    export interface IntrinsicAttributes {
+      'bs-demo-basic-formFieldLayout'?: IBehaviorOptionsFormFieldLayout | '' | boolean;
+    }
   }
 }
 export * from './page/toolOne.js';
