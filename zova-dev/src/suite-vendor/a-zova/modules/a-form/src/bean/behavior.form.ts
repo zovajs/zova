@@ -21,12 +21,7 @@ export class BehaviorForm extends BeanBehaviorBase<
 > {
   protected async __init__(options: IBehaviorOptionsForm) {
     super.__init__(options);
-    this.bean._setBean('$$form', this.$options.form);
-  }
-
-  protected async onOptionsChange(options: IBehaviorOptionsForm) {
-    super.onOptionsChange(options);
-    this.bean._setBean('$$form', this.$options.form);
+    this.bean._setBean('$$behaviorForm', this);
   }
 
   protected render(props: IBehaviorPropsInputForm, next: NextBehavior<IBehaviorPropsOutputForm>): VNode {
