@@ -1,5 +1,6 @@
 import type { BehaviorForm } from './behavior.form.js';
 import { useField } from '@tanstack/vue-form';
+import defu from 'defu';
 import { VNode } from 'vue';
 import { Use } from 'zova-core';
 import { BeanBehaviorBase, Behavior, IDecoratorBehaviorOptions, NextBehavior } from 'zova-module-a-behavior';
@@ -9,6 +10,7 @@ export interface IBehaviorPropsInputFormField {
   name?: string;
   value?: any;
   onInput?: (e: Event) => void;
+  onBlur?: (e: Event) => void;
 }
 
 export interface IBehaviorPropsOutputFormField {}
@@ -47,16 +49,15 @@ export class BehaviorFormField extends BeanBehaviorBase<
   }
 
   private _patchProps_input(field: ReturnTypeUseFormField, props: IBehaviorPropsInputFormField) {
-    const propsPatch: IBehaviorPropsInputFormField = {};
-    if (!props.name) {
-      propsPatch.name = field.api.name;
-    }
-    if (!props.value) {
-      propsPatch.value = field.state.value;
-    }
-    if (!props.onInput) {
-      // propsPatch.onInput=
-    }
-    return Object.assign({}, props, propsPatch);
+    return defu(props, {
+      name: field.api.name,
+      value: field.state.value,
+      onInput: (e: Event) => {
+        field.api.handleChange((e.target as HTMLInputElement).value);
+      },
+      onBlur:(_e:Event)=>{
+        field.api.handleBlur();
+      }
+    });
   }
 }
