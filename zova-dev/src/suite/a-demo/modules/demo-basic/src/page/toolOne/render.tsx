@@ -8,7 +8,7 @@ export class RenderPageToolOne extends BeanRenderBase {
     return (
       <div>
         <form bs-form={{ form: this.form }}>
-          <input bs-formItem={{
+          <input bs-formField={{
             name: 'name',
             validators: {
               onChange: z.string().min(3),

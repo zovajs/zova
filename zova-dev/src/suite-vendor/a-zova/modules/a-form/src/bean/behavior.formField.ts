@@ -18,7 +18,7 @@ export class BehaviorFormField extends BeanBehaviorBase<
   IBehaviorPropsInputFormField,
   IBehaviorPropsOutputFormField
 > {
-  @Use()
+  @Use({ injectionScope: 'host' })
   $$behaviorForm: BehaviorForm;
 
   $$formField: ReturnTypeUseFormField;
