@@ -35,15 +35,16 @@ export class BehaviorForm extends BeanBehaviorBase<
   }
 
   private _patchProps(props: IBehaviorPropsInputForm) {
-    if (props.onSubmit || this.$options.onSubmit === false) return props;
-    return Object.assign({}, props, {
-      onSubmit: typeof this.$options.onSubmit === 'function'
+    const propsPatch: IBehaviorPropsInputForm = {};
+    if (!props.onSubmit && this.$options.onSubmit !== false) {
+      propsPatch.onSubmit = typeof this.$options.onSubmit === 'function'
         ? this.$options.onSubmit
         : (e: Event) => {
             e.preventDefault();
             e.stopPropagation();
             this.$options.form?.handleSubmit();
-          },
-    });
+          };
+    }
+    return Object.assign({}, props, propsPatch);
   }
 }
