@@ -1,5 +1,5 @@
 import { z } from 'zod';
-import {  Use } from 'zova';
+import { Use } from 'zova';
 import { Controller } from 'zova-module-a-bean';
 import { BeanControllerPageFormBase, ReturnTypeUseForm } from 'zova-module-a-form';
 import { ModelSdk } from 'zova-module-a-openapi';
@@ -34,7 +34,7 @@ export class ControllerPageToolOne extends BeanControllerPageFormBase {
       console.log('sdk: ', querySdk.data);
       // form
       this.form = this.$useForm({
-        defaultValues: { name: 'sss' } as Partial<ApiSchemaTestSsrDtoTestBody>,
+        defaultValues: { name: 'ss' } as Partial<ApiSchemaTestSsrDtoTestBody>,
         onSubmit: async ({ value }) => {
           console.log('submit: ', JSON.stringify(value));
         },

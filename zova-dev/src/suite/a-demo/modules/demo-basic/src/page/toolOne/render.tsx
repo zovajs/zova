@@ -1,3 +1,4 @@
+import { z } from 'zod';
 import { BeanRenderBase } from 'zova';
 import { Render } from 'zova-module-a-bean';
 
@@ -7,7 +8,13 @@ export class RenderPageToolOne extends BeanRenderBase {
     return (
       <div>
         <form bs-form={{ form: this.form }}>
-          <input bs-formItem={{ name: 'name' }}></input>
+          <input bs-formItem={{
+            name: 'name',
+            validators: {
+              onChange: z.string().min(3),
+            },
+          }}
+          ></input>
           <this.form.Field name="name">
             {
               ({ field }) => {
