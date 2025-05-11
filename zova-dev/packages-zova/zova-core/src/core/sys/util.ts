@@ -1,8 +1,10 @@
+import type { IBeanScopeRecord, TypeBeanScopeRecordKeys } from '../../bean/type.js';
 import type { TypeAuthToken } from '../../types/utils/auth.js';
 import { extend } from '@cabloy/extend';
 import { defaultPathSerializer } from '@cabloy/utils';
 import DeepEqual from 'deep-equal';
 import { BeanSimple } from '../../bean/beanSimple.js';
+import { cast } from '../../types/utils/cast.js';
 import { uuid as _uuid } from '../../utils/uuid.js';
 
 export class SysUtil extends BeanSimple {
@@ -84,6 +86,20 @@ export class SysUtil extends BeanSimple {
       options,
       optionsCustom,
     );
+  }
+
+  // @ts-ignore ignore config
+  getModuleConfigSafe<K extends TypeBeanScopeRecordKeys>(moduleName: K): IBeanScopeRecord[K]['config'] {
+    const module = this.sys.meta.module.get(moduleName);
+    if (module) {
+      const scope = this.sys.bean.scope(moduleName);
+      return cast(scope).config;
+    }
+    let config = this.sys.config.modules[moduleName as any];
+    if (!config) {
+      config = this.sys.config.modules[moduleName as any] = {} as any;
+    }
+    return config;
   }
 }
 
