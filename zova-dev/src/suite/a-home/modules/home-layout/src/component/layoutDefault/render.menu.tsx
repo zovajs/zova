@@ -26,7 +26,9 @@ export class RenderMenu extends BeanRenderBase {
       } else {
         to.path = item.link;
       }
-      if (item.meta?.params) to.params = item.meta?.params;
+      if (item.meta?.params && to.name) {
+        to.params = item.meta?.params;
+      }
       if (item.meta?.query) to.query = item.meta?.query;
     }
     return (

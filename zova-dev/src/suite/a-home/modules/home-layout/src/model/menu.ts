@@ -23,7 +23,13 @@ export class ModelMenu extends BeanModelBase {
       queryKey: ['retrieveMenus'],
       queryFn: async () => {
         const data = await this.$api.homeBaseMenu.retrieveMenus({ params: { publicPath: this.sys.config.app.publicPath } });
-        const menus = data.menus?.filter(item => {
+        const menus = data.menus?.map(item => {
+          if (item.link && !this.$router.isRouterName(item.link) && item.meta?.params) {
+            const link = this.sys.util.apiActionPathTranslate(item.link, item.meta?.params);
+            return { ...item, link };
+          }
+          return item;
+        })?.filter(item => {
           return !item.external || this.$router.checkPathValid(item.link);
         });
         return { ...data, menus };
