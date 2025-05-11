@@ -7,7 +7,7 @@
   "author": "zhennann",
   "dependencies": {
     "zova-module-devui-adapter": "^5.0.33",
-    "zova-module-devui-form": "workspace:^"
+    "zova-module-devui-restform": "workspace:^"
   },
   "gitHead": "73721393c1ea9a95539948d57ad692f2c004d7c7"
 }
