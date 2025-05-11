@@ -156,6 +156,7 @@ export const OpenApiBaseURL = (sys: ZovaSys) => {
             .map(item => toUpperCaseFirstChar(item))
             .join('')}`;
       typeSchemas.push(`export type ${schemaName} = components["schemas"]["${key}"];`);
+      typeSchemas.push(`export type ${schemaName}Partial = Partial<${schemaName}>;`);
     }
     let contentSchemas = typeSchemas.join('\n');
     if (contentSchemas.includes('components["schemas"]')) {

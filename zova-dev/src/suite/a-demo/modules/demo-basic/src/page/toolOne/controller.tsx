@@ -3,7 +3,7 @@ import { Use } from 'zova';
 import { Controller } from 'zova-module-a-bean';
 import { BeanControllerPageFormBase, TypeForm } from 'zova-module-a-form';
 import { ModelSdk } from 'zova-module-a-openapi';
-import { ApiSchemaTestSsrDtoTestBody } from 'zova-module-home-api';
+import { ApiSchemaTestSsrDtoTestBodyPartial } from 'zova-module-home-api';
 import { ModelTest } from '../../model/test.js';
 
 export const ControllerPageToolOneSchemaParams = z.object({
@@ -18,7 +18,7 @@ export const ControllerPageToolOneSchemaQuery = z.object({
 
 @Controller()
 export class ControllerPageToolOne extends BeanControllerPageFormBase {
-  form: TypeForm<Partial<ApiSchemaTestSsrDtoTestBody>>;
+  form: TypeForm<ApiSchemaTestSsrDtoTestBodyPartial>;
 
   @Use()
   $$modelTest: ModelTest;
@@ -36,7 +36,7 @@ export class ControllerPageToolOne extends BeanControllerPageFormBase {
       console.log('sdk: ', querySdk.data);
       // form
       this.form = this.$useForm({
-        defaultValues: { name: 'ss' } as Partial<ApiSchemaTestSsrDtoTestBody>,
+        defaultValues: { name: 'ss' } as ApiSchemaTestSsrDtoTestBodyPartial,
         onSubmit: async ({ value }) => {
           console.log('submit: ', JSON.stringify(value));
         },

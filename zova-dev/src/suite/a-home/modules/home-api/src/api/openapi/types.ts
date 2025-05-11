@@ -127,6 +127,38 @@ export interface paths {
     patch?: never;
     trace?: never;
   };
+  '/api/b/product': {
+    parameters: {
+      query?: never;
+      header?: never;
+      path?: never;
+      cookie?: never;
+    };
+    get: operations['BProduct_findAll'];
+    put?: never;
+    post: operations['BProduct_create'];
+    delete?: never;
+    options?: never;
+    head?: never;
+    patch?: never;
+    trace?: never;
+  };
+  '/api/b/product/{id}': {
+    parameters: {
+      query?: never;
+      header?: never;
+      path?: never;
+      cookie?: never;
+    };
+    get: operations['BProduct_findOne'];
+    put?: never;
+    post?: never;
+    delete: operations['BProduct_remove'];
+    options?: never;
+    head?: never;
+    patch: operations['BProduct_update'];
+    trace?: never;
+  };
   '/api/b/test1': {
     parameters: {
       query?: never;
@@ -190,6 +222,38 @@ export interface paths {
     options?: never;
     head?: never;
     patch?: never;
+    trace?: never;
+  };
+  '/api/test/rest/product': {
+    parameters: {
+      query?: never;
+      header?: never;
+      path?: never;
+      cookie?: never;
+    };
+    get: operations['TestRestProduct_findAll'];
+    put?: never;
+    post: operations['TestRestProduct_create'];
+    delete?: never;
+    options?: never;
+    head?: never;
+    patch?: never;
+    trace?: never;
+  };
+  '/api/test/rest/product/{id}': {
+    parameters: {
+      query?: never;
+      header?: never;
+      path?: never;
+      cookie?: never;
+    };
+    get: operations['TestRestProduct_findOne'];
+    put?: never;
+    post?: never;
+    delete: operations['TestRestProduct_remove'];
+    options?: never;
+    head?: never;
+    patch: operations['TestRestProduct_update'];
     trace?: never;
   };
   '/api/test/ssr/toolOne/test/{id?}': {
@@ -423,6 +487,23 @@ export interface components {
       username: string;
       password: string;
     };
+    'a-b.entity.product': {
+      createdAt: string;
+      updatedAt: string;
+      deleted: boolean;
+      iid: number;
+      id: string | number;
+      /** @description Name */
+      name: string;
+      /** @description Description */
+      description?: string;
+    };
+    'a-b.dto.productCreate': {
+      /** @description Name */
+      name: string;
+      /** @description Description */
+      description?: string;
+    };
     'a-menu.dto.menuItemMetaParams': Record<string, never>;
     'a-menu.dto.menuItemMetaQuery': Record<string, never>;
     'a-menu.dto.menuItemMeta': {
@@ -455,6 +536,31 @@ export interface components {
       menus?: components['schemas']['a-menu.dto.menuItem'][];
       groups?: components['schemas']['a-menu.dto.menuGroup'][];
     };
+    'test-rest.entity.product': {
+      createdAt: string;
+      updatedAt: string;
+      deleted: boolean;
+      iid: number;
+      id: string | number;
+      /** @description Name */
+      name: string;
+      /** @description Description */
+      description?: string;
+      price: number;
+      /** @default 0 */
+      quantity: number;
+      amount: number;
+    };
+    'test-rest.dto.productCreate': {
+      /** @description Name */
+      name: string;
+      /** @description Description */
+      description?: string;
+      price: number;
+      /** @default 0 */
+      quantity: number;
+      amount: number;
+    };
     'test-ssr.dto.testDetail': {
       name: string;
       price: number;
@@ -463,12 +569,20 @@ export interface components {
     };
     'test-ssr.dto.testResult': {
       id: string | number;
+      /**
+             * @description test
+             * @default tom
+             */
       name: string;
       married: boolean;
       details: components['schemas']['test-ssr.dto.testDetail'][];
     };
     'test-ssr.dto.testBody': {
       id: string | number;
+      /**
+             * @description test
+             * @default tom
+             */
       name: string;
       married: boolean;
       details: components['schemas']['test-ssr.dto.testDetail'][];
@@ -715,6 +829,145 @@ export interface operations {
       };
     };
   };
+  BProduct_findAll: {
+    parameters: {
+      query?: never;
+      header?: {
+        Authorization?: string;
+      };
+      path?: never;
+      cookie?: never;
+    };
+    requestBody?: never;
+    responses: {
+      200: {
+        headers: {
+          [name: string]: unknown;
+        };
+        content: {
+          'application/json': {
+            code: string;
+            message: string;
+            data: components['schemas']['a-b.entity.product'][];
+          };
+        };
+      };
+    };
+  };
+  BProduct_create: {
+    parameters: {
+      query?: never;
+      header?: {
+        Authorization?: string;
+      };
+      path?: never;
+      cookie?: never;
+    };
+    requestBody: {
+      content: {
+        'application/json': components['schemas']['a-b.dto.productCreate'];
+      };
+    };
+    responses: {
+      200: {
+        headers: {
+          [name: string]: unknown;
+        };
+        content: {
+          'application/json': {
+            code: string;
+            message: string;
+            data: components['schemas']['a-b.entity.product'];
+          };
+        };
+      };
+    };
+  };
+  BProduct_findOne: {
+    parameters: {
+      query?: never;
+      header?: {
+        Authorization?: string;
+      };
+      path: {
+        id: unknown;
+      };
+      cookie?: never;
+    };
+    requestBody?: never;
+    responses: {
+      200: {
+        headers: {
+          [name: string]: unknown;
+        };
+        content: {
+          'application/json': {
+            code: string;
+            message: string;
+            data: components['schemas']['a-b.entity.product'];
+          };
+        };
+      };
+    };
+  };
+  BProduct_remove: {
+    parameters: {
+      query?: never;
+      header?: {
+        Authorization?: string;
+      };
+      path: {
+        id: unknown;
+      };
+      cookie?: never;
+    };
+    requestBody?: never;
+    responses: {
+      200: {
+        headers: {
+          [name: string]: unknown;
+        };
+        content: {
+          'application/json': {
+            code: string;
+            message: string;
+            data?: unknown;
+          };
+        };
+      };
+    };
+  };
+  BProduct_update: {
+    parameters: {
+      query?: never;
+      header?: {
+        Authorization?: string;
+      };
+      path: {
+        id: unknown;
+      };
+      cookie?: never;
+    };
+    requestBody?: {
+      content: {
+        'application/json': unknown;
+      };
+    };
+    responses: {
+      200: {
+        headers: {
+          [name: string]: unknown;
+        };
+        content: {
+          'application/json': {
+            code: string;
+            message: string;
+            data?: unknown;
+          };
+        };
+      };
+    };
+  };
   BTest1_index: {
     parameters: {
       query?: never;
@@ -808,6 +1061,145 @@ export interface operations {
             code: string;
             message: string;
             data: boolean;
+          };
+        };
+      };
+    };
+  };
+  TestRestProduct_findAll: {
+    parameters: {
+      query?: never;
+      header?: {
+        Authorization?: string;
+      };
+      path?: never;
+      cookie?: never;
+    };
+    requestBody?: never;
+    responses: {
+      200: {
+        headers: {
+          [name: string]: unknown;
+        };
+        content: {
+          'application/json': {
+            code: string;
+            message: string;
+            data: components['schemas']['test-rest.entity.product'][];
+          };
+        };
+      };
+    };
+  };
+  TestRestProduct_create: {
+    parameters: {
+      query?: never;
+      header?: {
+        Authorization?: string;
+      };
+      path?: never;
+      cookie?: never;
+    };
+    requestBody: {
+      content: {
+        'application/json': components['schemas']['test-rest.dto.productCreate'];
+      };
+    };
+    responses: {
+      200: {
+        headers: {
+          [name: string]: unknown;
+        };
+        content: {
+          'application/json': {
+            code: string;
+            message: string;
+            data: components['schemas']['test-rest.entity.product'];
+          };
+        };
+      };
+    };
+  };
+  TestRestProduct_findOne: {
+    parameters: {
+      query?: never;
+      header?: {
+        Authorization?: string;
+      };
+      path: {
+        id: unknown;
+      };
+      cookie?: never;
+    };
+    requestBody?: never;
+    responses: {
+      200: {
+        headers: {
+          [name: string]: unknown;
+        };
+        content: {
+          'application/json': {
+            code: string;
+            message: string;
+            data: components['schemas']['test-rest.entity.product'];
+          };
+        };
+      };
+    };
+  };
+  TestRestProduct_remove: {
+    parameters: {
+      query?: never;
+      header?: {
+        Authorization?: string;
+      };
+      path: {
+        id: unknown;
+      };
+      cookie?: never;
+    };
+    requestBody?: never;
+    responses: {
+      200: {
+        headers: {
+          [name: string]: unknown;
+        };
+        content: {
+          'application/json': {
+            code: string;
+            message: string;
+            data?: unknown;
+          };
+        };
+      };
+    };
+  };
+  TestRestProduct_update: {
+    parameters: {
+      query?: never;
+      header?: {
+        Authorization?: string;
+      };
+      path: {
+        id: unknown;
+      };
+      cookie?: never;
+    };
+    requestBody?: {
+      content: {
+        'application/json': unknown;
+      };
+    };
+    responses: {
+      200: {
+        headers: {
+          [name: string]: unknown;
+        };
+        content: {
+          'application/json': {
+            code: string;
+            message: string;
+            data?: unknown;
           };
         };
       };
