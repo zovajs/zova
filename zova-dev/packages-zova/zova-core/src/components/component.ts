@@ -1,24 +1,7 @@
 import type { IComponentOptions } from '../bean/type.js';
 import type { Constructable } from '../decorator/type/constructable.js';
-import { defineAsyncComponent, defineComponent } from 'vue';
-import { useApp } from '../composables/useApp.js';
+import { defineComponent } from 'vue';
 import { useControllerPage } from '../composables/useController.js';
-
-export function createZovaComponentAsync(module: string, name?: string) {
-  return defineAsyncComponent(() => {
-    return new Promise(resolve => {
-      const app = useApp();
-      if (module.includes(':')) {
-        const parts = module.split(':');
-        module = parts[0];
-        name = parts[1];
-      }
-      app.meta.module.use(module).then(_module => {
-        resolve(_module.resource.components[name!] as any);
-      });
-    });
-  });
-}
 
 export function createZovaComponentPage<M, R, S>(controller: Constructable<M>, render?: Constructable<R>, style?: Constructable<S>) {
   return defineComponent(() => {
