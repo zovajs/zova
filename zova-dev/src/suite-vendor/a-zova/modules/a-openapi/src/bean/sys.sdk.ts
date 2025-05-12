@@ -38,7 +38,7 @@ export class SysSdk extends BeanBase {
     );
     // schemas
     const schemaNames: string[] = [];
-    const schemas = data.components?.schemas;
+    const schemas = data.doc.components?.schemas;
     if (schemas) {
       for (const key in schemas) {
         this.schemas[key] = schemas[key];
@@ -46,7 +46,7 @@ export class SysSdk extends BeanBase {
       }
     }
     // paths
-    const paths = data.paths;
+    const paths = data.doc.paths;
     if (paths) {
       for (const key in paths) {
         const path = key.replace(PATH_PARAM_RE, ':$1');
@@ -55,6 +55,7 @@ export class SysSdk extends BeanBase {
           this.sdks[path][method] = {
             schemas: schemaNames,
             operationObject: paths[key][method],
+            meta: data.meta,
           };
         }
       }
