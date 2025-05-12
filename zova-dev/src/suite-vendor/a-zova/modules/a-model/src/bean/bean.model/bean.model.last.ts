@@ -4,6 +4,8 @@ import { BeanBase, cast } from 'zova';
 import { __ThisModule__ } from '../../.metadata/this.js';
 
 export class BeanModelLast extends BeanBase {
+  public scene?: string;
+
   get self() {
     return cast<BeanModelBase>(this);
   }
