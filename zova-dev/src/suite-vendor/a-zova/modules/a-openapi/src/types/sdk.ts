@@ -4,3 +4,5 @@ export interface IOpenapiSdkItem {
   schemas: string[];
   operationObject: OperationObject;
 }
+
+export type TypeRequestMethod = 'get' | 'post' | 'put' | 'delete' | 'patch' | 'options' | 'head';

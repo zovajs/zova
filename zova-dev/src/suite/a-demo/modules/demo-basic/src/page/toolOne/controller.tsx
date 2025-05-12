@@ -31,7 +31,7 @@ export class ControllerPageToolOne extends BeanControllerPageFormBase {
   protected async __init__() {
     if (this.$query.api) {
       // sdk
-      const querySdk = this.$$modelSdk.getSdk(this.$query.api, this.$query.apiMethod)!;
+      const querySdk = this.$$modelSdk.getSdk(this.$query.api, this.$query.apiMethod as any)!;
       await querySdk.suspense();
       console.log('sdk: ', querySdk.data);
       // form

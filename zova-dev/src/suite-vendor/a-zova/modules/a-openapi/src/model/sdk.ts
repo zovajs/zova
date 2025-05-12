@@ -4,6 +4,7 @@ import { z } from 'zod';
 import { Use } from 'zova';
 import { BeanModelBase, Model } from 'zova-module-a-model';
 import { SysSdk } from '../bean/sys.sdk.js';
+import { TypeRequestMethod } from '../types/sdk.js';
 
 @Model()
 export class ModelSdk extends BeanModelBase {
@@ -12,7 +13,7 @@ export class ModelSdk extends BeanModelBase {
 
   protected async __init__() {}
 
-  getSdk(api: string | undefined, apiMethod: string | undefined) {
+  getSdk(api: string | undefined, apiMethod: TypeRequestMethod | undefined) {
     if (!api) return;
     const [api2, apiMethod2] = this.$$sysSdk.prepareInfo(api, apiMethod);
     return this.$useStateData({

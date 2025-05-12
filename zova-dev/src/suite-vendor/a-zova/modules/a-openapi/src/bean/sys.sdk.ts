@@ -3,7 +3,7 @@ import { shallowReactive } from 'vue';
 import { BeanBase } from 'zova';
 import { Sys } from 'zova-module-a-bean';
 import { BeanFetch } from 'zova-module-a-fetch';
-import { IOpenapiSdkItem } from '../types/sdk.js';
+import { IOpenapiSdkItem, TypeRequestMethod } from '../types/sdk.js';
 
 const PATH_PARAM_RE = /\{([^{}/]+)\}/g;
 
@@ -27,7 +27,7 @@ export class SysSdk extends BeanBase {
     return this.schemas[schemaName];
   }
 
-  async loadSdk($fetch: BeanFetch, api?: string, apiMethod?: string): Promise<IOpenapiSdkItem | undefined> {
+  async loadSdk($fetch: BeanFetch, api?: string, apiMethod?: TypeRequestMethod): Promise<IOpenapiSdkItem | undefined> {
     if (!api) return;
     const [api2, apiMethod2] = this.prepareInfo(api, apiMethod);
     if (this.sdks[api2]?.[apiMethod2]) return this.sdks[api2][apiMethod2];
