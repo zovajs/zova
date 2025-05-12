@@ -18,7 +18,14 @@ export const routes: IModuleRoute[] = [
   { path: 'style', component: ZPageStyle },
   { path: 'pinia', component: ZPagePinia },
   { path: 'routeQuery', component: ZPageRouteQuery },
-  { name: 'routeParams', path: 'routeParams/:id?', component: ZPageRouteParams },
+  {
+    name: 'routeParams',
+    path: 'routeParams/:id?',
+    component: ZPageRouteParams,
+    meta: {
+      componentKeyMode: 'nameOnly',
+    },
+  },
   { path: 'routeQueryB', component: ZPageRouteQueryB },
   { path: 'legacy', component: ZPageLegacy },
   {
