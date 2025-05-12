@@ -33,9 +33,20 @@ export class ControllerRouterViewTabs extends BeanControllerBase {
   _handleRouteProp(route: RouteLocationNormalizedLoaded, prop) {
     let value = route.meta[prop];
     if (typeof value === 'function') {
-      value = value(route);
+      value = value.call(this.app, route);
     }
     return value;
+  }
+
+  __handleRoutePropComponentKey(route: RouteLocationNormalizedLoaded, name: string) {
+    const componentKey = this._handleRouteProp(route, 'componentKey');
+    if (componentKey) return componentKey;
+    // path
+    if (!route.name) return name;
+    // name: nameOnly
+    if (route.meta.componentKeyMode === 'nameOnly') return name;
+    // name: withParams
+    return route.path;
   }
 
   _handleComponent(component: RouterViewSlotParams) {
@@ -44,7 +55,7 @@ export class ControllerRouterViewTabs extends BeanControllerBase {
     // name
     const name = this._handleComponentName(component);
     // componentKey
-    const componentKey = this._handleRouteProp(component.route, 'componentKey') || name;
+    const componentKey = this.__handleRoutePropComponentKey(component.route, name);
     // tabKey
     const tabKey = this._handleRouteProp(component.route, 'tabKey') || componentKey;
     // keepAlive

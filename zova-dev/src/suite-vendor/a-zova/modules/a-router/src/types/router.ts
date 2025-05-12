@@ -1,6 +1,6 @@
 import type { RouteComponent, RouteLocationNormalizedLoaded, RouteRecordRaw } from '@cabloy/vue-router';
 import type { z } from 'zod';
-import type { TypeComponentLayoutRecord } from 'zova';
+import type { TypeComponentLayoutRecord, ZovaApplication } from 'zova';
 import type { BeanRouter } from '../bean/bean.router.js';
 
 import type { IGotoPageOptions } from './utils.js';
@@ -10,15 +10,18 @@ export type Lazy<T> = () => Promise<T>;
 export type IModuleRouteComponent = RouteComponent | Lazy<RouteComponent>;
 export type IModuleRoute = RouteRecordRaw;
 
+export type TypeComponentKeyMode = 'nameOnly' | 'withParams';
+
 declare module '@cabloy/vue-router' {
   interface RouteMeta {
     absolute?: boolean;
     layout?: keyof TypeComponentLayoutRecord | 'empty' | 'default' | false | IModuleRouteComponent;
     requiresAuth?: boolean;
     name?: string;
-    componentKey?: ((route: RouteLocationNormalizedLoaded) => string) | string;
-    tabKey?: ((route: RouteLocationNormalizedLoaded) => string) | string;
-    keepAlive?: ((route: RouteLocationNormalizedLoaded) => boolean) | boolean;
+    componentKeyMode?: TypeComponentKeyMode;
+    componentKey?: ((this: ZovaApplication, route: RouteLocationNormalizedLoaded) => string) | string;
+    tabKey?: ((this: ZovaApplication, route: RouteLocationNormalizedLoaded) => string) | string;
+    keepAlive?: ((this: ZovaApplication, route: RouteLocationNormalizedLoaded) => boolean) | boolean;
   }
 }
 
