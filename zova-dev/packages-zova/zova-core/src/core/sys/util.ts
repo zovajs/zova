@@ -49,14 +49,14 @@ export class SysUtil extends BeanSimple {
     }
   }
 
-  getApiPath(path: string | undefined) {
-    if (!path) return path;
+  getApiPath<K extends (string | undefined) = string | undefined>(path: K): K extends string ? string : undefined {
+    if (!path) return path as any;
     if (path.startsWith('//')) {
-      path = path.substring(1);
+      path = path.substring(1) as any;
     } else {
-      path = this.sys.config.api.prefix + path;
+      path = this.sys.config.api.prefix + path as any;
     }
-    return path;
+    return path as any;
   }
 
   apiActionPathTranslate(pathName: string, pathParams?: Record<string, any>): string {
