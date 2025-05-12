@@ -16,7 +16,7 @@ export interface IInterceptorOptionsJwt extends IDecoratorInterceptorOptions {
   authToken?: boolean | string;
 }
 
-@Interceptor<IInterceptorOptionsJwt>({ dependencies: 'a-interceptor:basic' })
+@Interceptor<IInterceptorOptionsJwt>({ dependencies: 'a-interceptor:body' })
 export class InterceptorJwt extends BeanInterceptorBase<IInterceptorOptionsJwt> implements IInterceptorRequest {
   private _beanJwtAdapter: IJwtAdapter;
   private _refreshAuthTokenPromise?: Promise<IJwtInfo>;

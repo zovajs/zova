@@ -5,7 +5,7 @@ export interface IInterceptorOptionsBasic extends IDecoratorInterceptorOptions {
   openapiSchema?: boolean;
 }
 
-@Interceptor<IInterceptorOptionsBasic>({ dependencies: 'a-interceptor:body' })
+@Interceptor<IInterceptorOptionsBasic>({ dependencies: 'a-interceptor:mock' })
 export class InterceptorBasic extends BeanInterceptorBase<IInterceptorOptionsBasic> {
   async onRequest(
     config: AxiosRequestConfig,
