@@ -1,5 +1,6 @@
 import type { Query, QueryKey } from '@tanstack/vue-query';
 import type { QueryMetaPersister } from '../../types/index.js';
+import { isNil } from '@cabloy/utils';
 import { experimental_createPersister } from '@tanstack/query-persist-client-core';
 import localforage from 'localforage';
 import { SymbolBeanFullName } from 'zova';
@@ -149,8 +150,17 @@ export class BeanModelPersister extends BeanModelLast {
 
   protected _forceQueryKeyPrefix(queryKey?: QueryKey): QueryKey {
     if (!queryKey) queryKey = [];
-    const prefix = queryKey[0];
-    if (prefix && typeof prefix === 'string' && prefix.split('.').length === 3) return queryKey;
-    return [this[SymbolBeanFullName]].concat(queryKey as any);
+    if (!this._prefixIsBeanFullName(queryKey[0])) {
+      const prefixes = [this[SymbolBeanFullName]];
+      if (!isNil(this.selector)) {
+        prefixes.push(this.selector);
+      }
+      queryKey = prefixes.concat(queryKey as any);
+    }
+    return queryKey;
+  }
+
+  private _prefixIsBeanFullName(prefix?: any) {
+    return (prefix && typeof prefix === 'string' && prefix.split('.').length === 3);
   }
 }
