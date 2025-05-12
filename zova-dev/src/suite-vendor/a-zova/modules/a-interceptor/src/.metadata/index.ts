@@ -4,12 +4,12 @@ import type { BeanScopeUtil } from 'zova';
 import { BeanScopeBase, TypeModuleConfig } from 'zova';
 import { Scope } from 'zova-module-a-bean';
 /** interceptor: begin */
-import { IInterceptorOptionsBasic } from '../bean/interceptor.basic.js';
+import { IInterceptorOptionsBody } from '../bean/interceptor.body.js';
 /** interceptor: end */
 /** interceptor: begin */
-import { InterceptorBasic } from '../bean/interceptor.basic.js';
-import { IInterceptorOptionsBody } from '../bean/interceptor.body.js';
 import { InterceptorBody } from '../bean/interceptor.body.js';
+import { IInterceptorOptionsHeaders } from '../bean/interceptor.headers.js';
+import { InterceptorHeaders } from '../bean/interceptor.headers.js';
 import { IInterceptorOptionsJwt } from '../bean/interceptor.jwt.js';
 import { InterceptorJwt } from '../bean/interceptor.jwt.js';
 import { IInterceptorOptionsMock } from '../bean/interceptor.mock.js';
@@ -22,16 +22,16 @@ import 'zova';
 
 import 'zova';
 
-export * from '../bean/interceptor.basic.js';
 export * from '../bean/interceptor.body.js';
+export * from '../bean/interceptor.headers.js';
 export * from '../bean/interceptor.jwt.js';
 export * from '../bean/interceptor.mock.js';
 export * from '../bean/interceptor.performAction.js';
 declare module 'zova-module-a-fetch' {
 
   export interface IInterceptorRecord {
-    'a-interceptor:basic': IInterceptorOptionsBasic;
     'a-interceptor:body': IInterceptorOptionsBody;
+    'a-interceptor:headers': IInterceptorOptionsHeaders;
     'a-interceptor:jwt': IInterceptorOptionsJwt;
     'a-interceptor:mock': IInterceptorOptionsMock;
     'a-interceptor:performAction': IInterceptorOptionsPerformAction;
@@ -40,12 +40,12 @@ declare module 'zova-module-a-fetch' {
 }
 declare module 'zova-module-a-interceptor' {
 
-  export interface InterceptorBasic {
+  export interface InterceptorBody {
     /** @internal */
     get scope(): ScopeModuleAInterceptor;
   }
 
-  export interface InterceptorBody {
+  export interface InterceptorHeaders {
     /** @internal */
     get scope(): ScopeModuleAInterceptor;
   }
@@ -67,8 +67,8 @@ declare module 'zova-module-a-interceptor' {
 }
 declare module 'zova' {
   export interface IBeanRecordLocal {
-    'a-interceptor.interceptor.basic': InterceptorBasic;
     'a-interceptor.interceptor.body': InterceptorBody;
+    'a-interceptor.interceptor.headers': InterceptorHeaders;
     'a-interceptor.interceptor.jwt': InterceptorJwt;
     'a-interceptor.interceptor.mock': InterceptorMock;
     'a-interceptor.interceptor.performAction': InterceptorPerformAction;

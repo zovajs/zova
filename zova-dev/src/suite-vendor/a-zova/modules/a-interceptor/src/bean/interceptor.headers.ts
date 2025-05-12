@@ -1,15 +1,15 @@
 import { AxiosRequestConfig } from 'axios';
 import { BeanInterceptorBase, IDecoratorInterceptorOptions, Interceptor, NextInterceptorRequest } from 'zova-module-a-fetch';
 
-export interface IInterceptorOptionsBasic extends IDecoratorInterceptorOptions {
+export interface IInterceptorOptionsHeaders extends IDecoratorInterceptorOptions {
   openapiSchema?: boolean;
 }
 
-@Interceptor<IInterceptorOptionsBasic>({ dependencies: 'a-interceptor:mock' })
-export class InterceptorBasic extends BeanInterceptorBase<IInterceptorOptionsBasic> {
+@Interceptor<IInterceptorOptionsHeaders>({ dependencies: 'a-interceptor:mock' })
+export class InterceptorHeaders extends BeanInterceptorBase<IInterceptorOptionsHeaders> {
   async onRequest(
     config: AxiosRequestConfig,
-    options: IInterceptorOptionsBasic,
+    options: IInterceptorOptionsHeaders,
     next: NextInterceptorRequest,
   ): Promise<AxiosRequestConfig> {
     // locale

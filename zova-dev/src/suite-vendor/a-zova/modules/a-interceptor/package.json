@@ -32,18 +32,18 @@
   "zovaModule": {
     "onionsConfig": {
       "interceptor": {
-        "basic": {
-          "dependencies": "a-interceptor:body"
-        },
         "body": {
           "dependencies": "a-interceptor:performAction"
         },
+        "headers": {
+          "dependencies": "a-interceptor:mock"
+        },
         "jwt": {
-          "dependencies": "a-interceptor:basic"
+          "dependencies": "a-interceptor:body"
         },
         "mock": {},
         "performAction": {
-          "dependencies": "a-interceptor:mock"
+          "dependencies": "a-interceptor:basic"
         }
       }
     }
