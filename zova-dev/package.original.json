@@ -25,6 +25,7 @@
     "preview:ssr:vonaCabloy": "concurrently \"node ./dist-mock/index.js\" \"node ./dist/ssr-vonaCabloy/index.js\"",
     "preview:ssr:vona2": "concurrently \"node ./dist-mock/index.js\" \"node ./dist/ssr-vona2/index.js\"",
     "dev:spa": "npm run prerun && quasar dev --mode spa --flavor admin",
+    "dev:spa:vonaHome": "npm run prerun && quasar dev --mode spa --flavor vonaHome",
     "dev:spa:vona2": "npm run prerun && quasar dev --mode spa --flavor vona2",
     "build:spa": "npm run prerun && quasar build --mode spa --flavor admin",
     "preview:spa": "vite preview --outDir=dist/spa-admin",
