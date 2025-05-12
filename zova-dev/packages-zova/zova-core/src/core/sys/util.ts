@@ -76,7 +76,7 @@ export class SysUtil extends BeanSimple {
     }
     // openapiSchema
     if (options?.openapiSchema) {
-      optionsCustom.interceptors = { 'a-interceptor:basic': { openapiSchema: options?.openapiSchema } };
+      optionsCustom.interceptors = { 'a-interceptor:headers': { openapiSchema: options?.openapiSchema } };
     }
     // extend
     return deepExtend(
