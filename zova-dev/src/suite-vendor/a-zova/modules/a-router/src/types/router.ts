@@ -1,4 +1,4 @@
-import type { RouteComponent, RouteLocationNormalizedLoaded, RouteRecordRaw } from '@cabloy/vue-router';
+import type { RouteComponent, RouteLocationMatched, RouteLocationNormalizedLoaded, RouteRecordRaw } from '@cabloy/vue-router';
 import type { z } from 'zod';
 import type { TypeComponentLayoutRecord, ZovaApplication } from 'zova';
 import type { BeanRouter } from '../bean/bean.router.js';
@@ -69,6 +69,11 @@ declare module 'zova' {
     ROUTER_PAGE_HOME: string;
     ROUTER_PAGE_LOGIN: string;
     ROUTER_KEY_RETURNTO: string;
+  }
+
+  export interface BeanControllerPageBase {
+    $route: RouteLocationNormalizedLoaded;
+    $routeMatched: RouteLocationMatched;
   }
 
   // export interface IEventRecord {

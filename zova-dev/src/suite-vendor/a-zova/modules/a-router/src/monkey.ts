@@ -1,3 +1,4 @@
+import type { RouteLocationMatched, RouteLocationNormalizedLoadedGeneric } from '@cabloy/vue-router';
 import type {
   BeanBase,
   BeanContainer,
@@ -11,16 +12,16 @@ import type { ErrorSSR } from 'zova-module-a-ssr';
 import type { BeanRouter } from './bean/bean.router.js';
 import type { TypePageSchema } from './types/router.js';
 import * as ModuleInfo from '@cabloy/module-info';
-import { useRoute } from '@cabloy/vue-router';
+import { routerViewLocationKey } from '@cabloy/vue-router';
+import { inject } from 'vue';
 import {
   BeanControllerPageBase,
   BeanSimple,
   HttpStatus,
-  useComputed,
 } from 'zova';
 import { ServiceRouter } from './service/router.js';
 import { SymbolRouterHistory } from './types/utils.js';
-import { getRealRouteName } from './utils.js';
+import { getRealRouteName, getRouteMatched } from './utils.js';
 
 export class Monkey
   extends BeanSimple
@@ -84,14 +85,34 @@ export class Monkey
   }
 
   controllerDataPrepare(controllerData: IControllerData) {
-    controllerData.context.route = useRoute();
+    controllerData.context.route = inject(routerViewLocationKey)?.value;
   }
 
   controllerDataInit(controllerData: IControllerData, controller: BeanBase) {
     // only for controller page
     if (!(controller instanceof BeanControllerPageBase)) return;
     const route = controllerData.context.route;
+    this._initControllerRoute(route, controller);
+  }
+
+  controllerDataUpdate(controller: BeanBase) {
+    // only for controller page
+    if (!(controller instanceof BeanControllerPageBase)) return;
+    const route = inject(routerViewLocationKey)?.value;
+    this._initControllerRoute(route, controller);
+  }
+
+  private _initControllerRoute(route: RouteLocationNormalizedLoadedGeneric | undefined, controller: BeanControllerPageBase) {
     if (!route) return;
+    const routeMatched = getRouteMatched(route);
+    // check if the same
+    if (controller.$routeMatched && !this._checkIfRouteSame(routeMatched, controller.$routeMatched)) return;
+    // check if changed
+    const changed = !controller.$route || controller.$route.fullPath !== route.fullPath;
+    if (!changed) return;
+    controller.$route = route;
+    controller.$routeMatched = routeMatched;
+    // update $params/$query
     const routeName = getRealRouteName(route.name);
     const schemaKey = routeName || String(route.path);
     let schemas: TypePageSchema | undefined;
@@ -110,17 +131,14 @@ export class Monkey
     } else {
       schemas = module.resource.pagePathSchemas?.[schemaKey];
     }
-    controller.$params = useComputed(() => {
-      if (!schemas?.params) throw new Error(`page params schema not found: ${schemaKey}`);
-      return schemas.params.parse(route.params);
-    });
-    controller.$query = useComputed(() => {
-      if (!schemas?.query) throw new Error(`page query schema not found: ${schemaKey}`);
-      return schemas.query.parse(route.query);
-    });
+    if (!schemas?.params) throw new Error(`page params schema not found: ${schemaKey}`);
+    controller.$params = schemas.params.parse(route.params);
+    if (!schemas?.query) throw new Error(`page query schema not found: ${schemaKey}`);
+    controller.$query = schemas.query.parse(route.query);
   }
 
-  controllerDataUpdate(_controller: BeanBase) {
+  private _checkIfRouteSame(route1: RouteLocationMatched, route2: RouteLocationMatched) {
+    return ((route1.name && route1.name === route2.name) || route1.path === route2.path);
   }
 
   private _ssrErrorHandler() {

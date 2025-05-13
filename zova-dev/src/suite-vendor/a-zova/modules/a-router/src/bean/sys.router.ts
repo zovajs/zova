@@ -1,4 +1,4 @@
-import type { RouteLocationResolvedGeneric, Router, RouterOptions } from '@cabloy/vue-router';
+import type { RouteLocationMatched, RouteLocationNormalizedLoaded, RouteLocationResolvedGeneric, Router, RouterOptions } from '@cabloy/vue-router';
 import { IModule } from '@cabloy/module-info';
 import * as ModuleInfo from '@cabloy/module-info';
 import { combineParamsAndQuery } from '@cabloy/utils';
@@ -151,6 +151,10 @@ export class SysRouter extends BeanBase {
     return legacyRoutes.find(item => {
       return name ? item.name === name : item.path === path;
     });
+  }
+
+  getRouteMatched(route: RouteLocationNormalizedLoaded): RouteLocationMatched {
+    return this.getRouteMatched(route);
   }
 
   getRealRouteName(name?: string | symbol | null): string | undefined {
