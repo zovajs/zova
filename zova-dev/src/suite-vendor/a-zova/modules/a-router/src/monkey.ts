@@ -131,10 +131,12 @@ export class Monkey
     } else {
       schemas = module.resource.pagePathSchemas?.[schemaKey];
     }
-    if (!schemas?.params) throw new Error(`page params schema not found: ${schemaKey}`);
-    controller.$params = schemas.params.parse(route.params);
-    if (!schemas?.query) throw new Error(`page query schema not found: ${schemaKey}`);
-    controller.$query = schemas.query.parse(route.query);
+    if (schemas?.params) {
+      controller.$params = schemas.params.parse(route.params);
+    }
+    if (schemas?.query) {
+      controller.$query = schemas.query.parse(route.query);
+    }
   }
 
   private _checkIfRouteSame(route1: RouteLocationMatched, route2: RouteLocationMatched) {
