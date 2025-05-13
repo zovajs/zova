@@ -120,6 +120,9 @@ export class Monkey
     });
   }
 
+  controllerDataUpdate(_controller: BeanBase) {
+  }
+
   private _ssrErrorHandler() {
     if (!process.env.CLIENT) return;
     this.app.meta.event.on('app:errorHandler', (_data, next) => {
