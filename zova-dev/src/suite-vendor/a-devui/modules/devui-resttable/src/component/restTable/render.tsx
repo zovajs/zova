@@ -10,10 +10,12 @@ export class RenderRestTable extends BeanRenderBase {
         <table class="table">
           <thead>
             <tr>
-              {this.table.getFlatHeaders().map(header=>{
-                return <th key={header.id}>
-                  <FlexRender render={header.column.columnDef.header} props={header.getContext()}></FlexRender>
+              {this.table.getFlatHeaders().map(header => {
+                return (
+                  <th key={header.id}>
+                    <FlexRender render={header.column.columnDef.header} props={header.getContext()}></FlexRender>
                   </th>
+                );
               })}
               <th></th>
             </tr>
