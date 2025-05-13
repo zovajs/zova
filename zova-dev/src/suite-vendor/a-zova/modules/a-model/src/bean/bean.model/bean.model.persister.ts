@@ -161,6 +161,7 @@ export class BeanModelPersister extends BeanModelLast {
   }
 
   private _prefixIsBeanFullName(prefix?: any) {
-    return (prefix && typeof prefix === 'string' && prefix.split('.').length === 3);
+    return prefix === this[SymbolBeanFullName];
+    // return (prefix && typeof prefix === 'string' && prefix.split('.').length === 3);
   }
 }
