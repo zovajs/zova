@@ -22,9 +22,10 @@
       "vendors": [
         {
           "match": [
-            "@tanstack"
+            "@tanstack/query-persist-client-core",
+            "@tanstack/vue-query"
           ],
-          "output": "tanstack"
+          "output": "tanstack-query"
         },
         {
           "match": [
