@@ -3,6 +3,21 @@
   "type": "module",
   "version": "5.0.0",
   "title": "a-form",
+  "zovaModule": {
+    "globalDependencies": {
+      "@tanstack/vue-form": true
+    },
+    "bundle": {
+      "vendors": [
+        {
+          "match": [
+            "@tanstack/vue-form"
+          ],
+          "output": "tanstack-form"
+        }
+      ]
+    }
+  },
   "description": "",
   "author": "",
   "keywords": [
@@ -28,5 +43,7 @@
     "tsc:publish": "npm run clean && tsc -b",
     "_prepublishOnly": "npm run tsc:publish"
   },
-  "dependencies": {}
+  "dependencies": {
+    "@tanstack/vue-form": "^1.9.0"
+  }
 }
