@@ -1,5 +1,5 @@
 import type { Logger } from '@cabloy/logger';
-import type { RendererNode, WatchHandle } from 'vue';
+import type { ComputedGetter, DebuggerOptions, RendererNode, WatchHandle, WritableComputedOptions } from 'vue';
 import type { AppEvent } from '../core/component/event.js';
 import type { ILoggerClientChildRecord } from '../core/logger/types.js';
 import type { FunctionAsync } from '../decorator/type/functionable.js';
@@ -7,6 +7,7 @@ import type { IErrorHandlerEventResult, IModuleLocaleText } from './resource/ind
 import { markRaw } from 'vue';
 import { createZovaComponentAsync } from '../components/createZovaComponentAsync.js';
 import { cast } from '../types/utils/cast.js';
+import { useComputed } from '../vueExtra/computed.js';
 import { BeanBaseSimple, SymbolBeanFullName, SymbolModuleBelong } from './beanBaseSimple.js';
 import { getVueDecoratorValue } from './vueDecorators/utils.js';
 
@@ -86,6 +87,14 @@ export class BeanBase extends BeanBaseSimple {
 
   protected $errorHandler(err: unknown, info?: string): IErrorHandlerEventResult {
     return this.app?.vue.config.errorHandler!(err, this.ctx.instance as any, info!) as unknown as IErrorHandlerEventResult;
+  }
+
+  protected $useComputed<T>(getter: ComputedGetter<T>, debugOptions?: DebuggerOptions): T;
+  protected $useComputed<T>(options: WritableComputedOptions<T>, debugOptions?: DebuggerOptions): T;
+  protected $useComputed(options, debugOptions) {
+    return this.ctx.util.instanceScope(() => {
+      return useComputed(options, debugOptions);
+    });
   }
 
   protected $zovaComponent(module: string, name?: string) {

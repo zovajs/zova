@@ -1,5 +1,5 @@
 import type { ControllerPageResource } from 'zova-module-a-rest';
-import { Use, useComputed } from 'zova';
+import { Use } from 'zova';
 import { Controller } from 'zova-module-a-bean';
 import { BeanControllerTableBase, TypeColumn, TypeTable } from 'zova-module-a-table';
 
@@ -22,7 +22,7 @@ export class ControllerRestPage extends BeanControllerTableBase {
   }
 
   private _createColumns() {
-    this.columns = useComputed(() => {
+    this.columns = this.$useComputed(() => {
       return [];
     });
   }
