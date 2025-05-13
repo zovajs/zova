@@ -22,7 +22,17 @@ export class RenderRestTable extends BeanRenderBase {
           </thead>
           <tbody>
             {this.table.getRowModel().rows.map(row => {
-              return <tr key={row.id}></tr>;
+              return (
+                <tr key={row.id}>
+                  {row.getVisibleCells().map(cell => {
+                    return (
+                      <td key={cell.id}>
+                        <FlexRender render={cell.column.columnDef.cell} props={cell.getContext()}></FlexRender>
+                      </td>
+                    );
+                  })}
+                </tr>
+              );
             })}
           </tbody>
         </table>
