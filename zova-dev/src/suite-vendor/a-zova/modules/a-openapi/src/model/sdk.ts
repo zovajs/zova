@@ -6,6 +6,8 @@ import { BeanModelBase, Model } from 'zova-module-a-model';
 import { SysSdk } from '../bean/sys.sdk.js';
 import { TypeRequestMethod } from '../types/sdk.js';
 
+const __schemaRefPrefix = '#/components/schemas/';
+
 @Model()
 export class ModelSdk extends BeanModelBase {
   @Use()
@@ -38,6 +40,9 @@ export class ModelSdk extends BeanModelBase {
   }
 
   getSchema(schemaName: string) {
+    if (schemaName.startsWith(__schemaRefPrefix)) {
+      schemaName = schemaName.substring(__schemaRefPrefix.length);
+    }
     return this.$useStateData({
       queryKey: ['schema', schemaName],
       queryFn: async () => {

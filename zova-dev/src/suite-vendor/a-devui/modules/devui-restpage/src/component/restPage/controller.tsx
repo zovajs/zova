@@ -1,4 +1,5 @@
 import type { ControllerPageResource } from 'zova-module-a-rest';
+import { createColumnHelper } from '@tanstack/vue-table';
 import { Use } from 'zova';
 import { Controller } from 'zova-module-a-bean';
 import { BeanControllerTableBase, TypeColumn, TypeTable } from 'zova-module-a-table';
@@ -27,8 +28,15 @@ export class ControllerRestPage extends BeanControllerTableBase {
       if (!querySdkBootstrap.data) return [];
       const schema = this.$$restResource.getSchemaOfTableRow(querySdkBootstrap.data.operationObject);
       if (!schema) return [];
-      const columnHelper = createColumnHelper<Person>();
-      return [];
+      const columnHelper = createColumnHelper();
+      const columns: TypeColumn[] = [];
+      for (const key in schema.properties!) {
+        // const property = schema.properties[key];
+        columns.push(columnHelper.accessor(key as any, {
+          cell: info => info.getValue(),
+        }));
+      }
+      return columns;
     });
   }
 
