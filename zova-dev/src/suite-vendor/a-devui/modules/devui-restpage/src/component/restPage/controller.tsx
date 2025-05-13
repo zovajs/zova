@@ -8,11 +8,8 @@ export class ControllerRestPage extends BeanControllerBase {
   $$restResource: ControllerPageResource;
 
   protected async __init__() {
-    // sdkFindAll
-    const querySdkFindMany = this.$$restResource.getQuerySdkFindMany();
-    await querySdkFindMany.suspense();
     // dataFindAll
-    const queryDataFindMany = this.$$restResource.getQueryDataFindMany();
-    await queryDataFindMany.suspense();
+    const queryDataFindAll = this.$$restResource.getQueryDataFindAll();
+    await queryDataFindAll.suspense();
   }
 }
