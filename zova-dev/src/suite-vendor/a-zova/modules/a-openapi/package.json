@@ -3,6 +3,22 @@
   "type": "module",
   "version": "5.0.0",
   "title": "a-openapi",
+  "zovaModule": {
+    "globalDependencies": {
+      "openapi3-ts": true
+    },
+    "bundle": {
+      "vendors": [
+        {
+          "match": [
+            "json-schema-to-zod",
+            "openapi3-ts"
+          ],
+          "output": "openapi3"
+        }
+      ]
+    }
+  },
   "description": "",
   "author": "",
   "keywords": ["Zova Module"],
@@ -21,6 +37,7 @@
     "_prepublishOnly": "npm run tsc:publish"
   },
   "dependencies": {
-    "json-schema-to-zod": "^2.6.1"
+    "json-schema-to-zod": "^2.6.1",
+    "openapi3-ts": "^4.4.0"
   }
 }
