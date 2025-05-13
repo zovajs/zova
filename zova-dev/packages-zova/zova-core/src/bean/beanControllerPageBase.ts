@@ -11,4 +11,9 @@ export class BeanControllerPageBase extends BeanBase {
       this.app.meta.module._monkeyModuleSync('controllerDataInit', undefined, controllerData, this);
     }
   }
+
+  /** @internal */
+  public __updateControllerData() {
+    this.app.meta.module._monkeyModuleSync('controllerDataUpdate', undefined, this);
+  }
 }

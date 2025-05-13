@@ -18,6 +18,7 @@ export class BeanControllerBase extends BeanBase {
   /** @internal */
   public __updateControllerData() {
     Object.assign(this.$props as any, this.ctx.instance.vnode.props);
+    this.app.meta.module._monkeyModuleSync('controllerDataUpdate', undefined, this);
   }
 
   public $useModel(name?, options?) {

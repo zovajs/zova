@@ -53,6 +53,7 @@ export interface IMonkeyApp
 export interface IMonkeyController {
   controllerDataPrepare(controllerData: IControllerData): void;
   controllerDataInit(controllerData: IControllerData, controller: BeanBase): void;
+  controllerDataUpdate(controller: BeanBase): void;
 }
 
 export interface IMonkeySysApplicationInitialize {
