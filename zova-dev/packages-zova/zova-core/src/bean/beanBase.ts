@@ -1,15 +1,17 @@
 import type { Logger } from '@cabloy/logger';
-import type { ComputedGetter, DebuggerOptions, RendererNode, WatchHandle, WritableComputedOptions } from 'vue';
+import type { ComputedGetter, DebuggerOptions, MultiWatchSources, RendererNode, WatchCallback, WatchEffect, WatchEffectOptions, WatchHandle, WatchOptions, WatchSource, WritableComputedOptions } from 'vue';
 import type { AppEvent } from '../core/component/event.js';
 import type { ILoggerClientChildRecord } from '../core/logger/types.js';
 import type { FunctionAsync } from '../decorator/type/functionable.js';
 import type { IErrorHandlerEventResult, IModuleLocaleText } from './resource/index.js';
-import { markRaw } from 'vue';
+import { markRaw, watch, watchEffect, watchPostEffect, watchSyncEffect } from 'vue';
 import { createZovaComponentAsync } from '../components/createZovaComponentAsync.js';
 import { cast } from '../types/utils/cast.js';
 import { useComputed } from '../vueExtra/computed.js';
 import { BeanBaseSimple, SymbolBeanFullName, SymbolModuleBelong } from './beanBaseSimple.js';
 import { getVueDecoratorValue } from './vueDecorators/utils.js';
+import { MapSources, MaybeUndefined } from '../vueExtra/watch.js';
+import { ReactiveMarker } from '@vue/reactivity';
 
 const SymbolText = Symbol('SymbolText');
 const SymbolLogger = Symbol('SymbolLogger');
@@ -94,6 +96,34 @@ export class BeanBase extends BeanBaseSimple {
   protected $useComputed(options, debugOptions) {
     return this.ctx.util.instanceScope(() => {
       return useComputed(options, debugOptions);
+    });
+  }
+
+  protected $watchEffect(effect: WatchEffect, options?: WatchEffectOptions): WatchHandle {
+    return this.ctx.util.instanceScope(() => {
+      return watchEffect(effect, options);
+    });
+  }
+
+  protected $watchPostEffect(effect: WatchEffect, options?: DebuggerOptions): WatchHandle {
+    return this.ctx.util.instanceScope(() => {
+      return watchPostEffect(effect, options);
+    });
+  }
+
+  protected $watchSyncEffect(effect: WatchEffect, options?: DebuggerOptions): WatchHandle {
+    return this.ctx.util.instanceScope(() => {
+      return watchSyncEffect(effect, options);
+    });
+  }
+
+  protected $watch<T, Immediate extends Readonly<boolean> = false>(
+    source: WatchSource<T>, cb: WatchCallback<T, MaybeUndefined<T, Immediate>>, options?: WatchOptions<Immediate>): WatchHandle;
+  protected $watch<T extends Readonly<MultiWatchSources>, Immediate extends Readonly<boolean> = false>(sources: readonly [...T] | T, cb: [T] extends [ReactiveMarker] ? WatchCallback<T, MaybeUndefined<T, Immediate>> : WatchCallback<MapSources<T, false>, MapSources<T, Immediate>>, options?: WatchOptions<Immediate>): WatchHandle;
+  protected $watch<T extends MultiWatchSources, Immediate extends Readonly<boolean> = false>(sources: [...T], cb: WatchCallback<MapSources<T, false>, MapSources<T, Immediate>>, options?: WatchOptions<Immediate>): WatchHandle;
+  protected $watch<T extends object, Immediate extends Readonly<boolean> = false>(source: T, cb: WatchCallback<T, MaybeUndefined<T, Immediate>>, options?: WatchOptions<Immediate>): WatchHandle {
+    return this.ctx.util.instanceScope(() => {
+      return watch(source, cb, options);
     });
   }
 
