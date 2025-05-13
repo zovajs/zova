@@ -1,58 +1,13 @@
-import type { FormApi, FormAsyncValidateOrFn, FormOptions, FormValidateOrFn, VueFormApi } from '@tanstack/vue-form';
-import { useForm } from '@tanstack/vue-form';
+import type { RowData, Table } from '@tanstack/table-core';
+import type { TableOptionsWithReactiveData } from '@tanstack/vue-table';
+import { useVueTable } from '@tanstack/vue-table';
 import { markRaw } from 'vue';
 import { BeanControllerPageBase } from 'zova';
 
 export class BeanControllerPageTableBase extends BeanControllerPageBase {
-  public $useForm<
-    TParentData,
-    TFormOnMount extends undefined | FormValidateOrFn<TParentData>,
-    TFormOnChange extends undefined | FormValidateOrFn<TParentData>,
-    TFormOnChangeAsync extends undefined | FormAsyncValidateOrFn<TParentData>,
-    TFormOnBlur extends undefined | FormValidateOrFn<TParentData>,
-    TFormOnBlurAsync extends undefined | FormAsyncValidateOrFn<TParentData>,
-    TFormOnSubmit extends undefined | FormValidateOrFn<TParentData>,
-    TFormOnSubmitAsync extends undefined | FormAsyncValidateOrFn<TParentData>,
-    TFormOnServer extends undefined | FormAsyncValidateOrFn<TParentData>,
-    TSubmitMeta,
-  >(opts?: FormOptions<
-    TParentData,
-    TFormOnMount,
-    TFormOnChange,
-    TFormOnChangeAsync,
-    TFormOnBlur,
-    TFormOnBlurAsync,
-    TFormOnSubmit,
-    TFormOnSubmitAsync,
-    TFormOnServer,
-    TSubmitMeta
-  >,
-  ):
-    FormApi<
-      TParentData,
-      TFormOnMount,
-      TFormOnChange,
-      TFormOnChangeAsync,
-      TFormOnBlur,
-      TFormOnBlurAsync,
-      TFormOnSubmit,
-      TFormOnSubmitAsync,
-      TFormOnServer,
-      TSubmitMeta
-    > & VueFormApi<
-      TParentData,
-      TFormOnMount,
-      TFormOnChange,
-      TFormOnChangeAsync,
-      TFormOnBlur,
-      TFormOnBlurAsync,
-      TFormOnSubmit,
-      TFormOnSubmitAsync,
-      TFormOnServer,
-      TSubmitMeta
-    > {
+  public $useTable<TData extends RowData>(initialOptions: TableOptionsWithReactiveData<TData>): Table<TData> {
     return this.ctx.util.instanceScope(() => {
-      return markRaw(useForm(opts));
+      return markRaw(useVueTable(initialOptions));
     });
   }
 }

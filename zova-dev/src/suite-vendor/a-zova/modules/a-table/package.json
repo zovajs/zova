@@ -21,6 +21,7 @@
     "_prepublishOnly": "npm run tsc:publish"
   },
   "dependencies": {
+    "@tanstack/table-core": "^8.21.3",
     "@tanstack/vue-table": "^8.21.3"
   }
 }
