@@ -1,6 +1,5 @@
 import type { OperationObject } from 'openapi3-ts/oas31';
-
-export interface IOpenapiSchemaMeta {}
+import type { IOpenapiSchemaMeta } from './schema.js';
 
 export interface IOpenapiSdkItem {
   schemas: string[];

@@ -1,8 +1,9 @@
-import type { OpenAPIObject, ReferenceObject, SchemaObject } from 'openapi3-ts/oas31';
+import type { ReferenceObject, SchemaObject } from 'openapi3-ts/oas31';
 import { shallowReactive } from 'vue';
 import { BeanBase } from 'zova';
 import { Sys } from 'zova-module-a-bean';
 import { BeanFetch } from 'zova-module-a-fetch';
+import { IOpenapiSchema } from '../types/schema.js';
 import { IOpenapiSdkItem, TypeRequestMethod } from '../types/sdk.js';
 
 const PATH_PARAM_RE = /\{([^{}/]+)\}/g;
@@ -36,7 +37,7 @@ export class SysSdk extends BeanBase {
       params.push(undefined);
     }
     params.push(this.sys.util.apiActionConfigPrepare(undefined, { openapiSchema: true }));
-    const data = await $fetch[apiMethod2]<any, OpenAPIObject>(...params);
+    const data: IOpenapiSchema = await $fetch[apiMethod2](...params);
     // schemas
     const schemaNames: string[] = [];
     const schemas = data.doc.components?.schemas;
