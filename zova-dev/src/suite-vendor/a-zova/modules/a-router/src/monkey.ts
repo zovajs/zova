@@ -113,8 +113,8 @@ export class Monkey
     controller.$route = route;
     controller.$routeMatched = routeMatched;
     // update $params/$query
-    const routeName = getRealRouteName(route.name);
-    const schemaKey = routeName || String(route.path);
+    const routeName = getRealRouteName(routeMatched.name);
+    const schemaKey = routeName || String(routeMatched.path);
     let schemas: TypePageSchema | undefined;
     const moduleInfo = ModuleInfo.parseInfo(ModuleInfo.parseName(schemaKey));
     if (!moduleInfo) {
