@@ -4,6 +4,12 @@ import { Render } from 'zova-module-a-bean';
 @Render()
 export class RenderRestPage extends BeanRenderBase {
   public render() {
-    return <div>page</div>;
+    const queryDataFindAll = this.$$restResource.getQueryDataFindAll();
+    const ComponentRestTable = this.$zovaComponent(this.$$restResource.defaultRestTable);
+    return (
+      <div>
+        <ComponentRestTable></ComponentRestTable>
+      </div>
+    );
   }
 }
