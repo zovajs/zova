@@ -45,7 +45,7 @@ export class CtxComponent extends BeanSimple {
   private _getRender(): any {
     const render = this.bean._getBeanSyncOnly<BeanControllerBase>(BeanControllerIdentifier);
     if (!render) return;
-    render.__updateControllerProps?.();
+    render.__updateControllerData?.();
     if ((render as any).render) return render;
     return this.bean._getBeanSyncOnly(BeanRenderIdentifier);
   }
