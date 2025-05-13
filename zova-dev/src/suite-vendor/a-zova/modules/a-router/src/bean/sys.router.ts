@@ -7,7 +7,7 @@ import { BeanBase, cast, deepExtend } from 'zova';
 import { Sys } from 'zova-module-a-bean';
 import { IModuleRoute, IModuleRouteComponent, IPagePathRecord } from '../types/router.js';
 import { SymbolRouterHistory } from '../types/utils.js';
-import { getRealRouteName, isRouterName } from '../utils.js';
+import { getRealRouteName, getRouteMatched, isRouterName } from '../utils.js';
 
 export interface SysRouter extends Router {}
 
@@ -153,8 +153,8 @@ export class SysRouter extends BeanBase {
     });
   }
 
-  getRouteMatched(route: RouteLocationNormalizedLoaded): RouteLocationMatched {
-    return this.getRouteMatched(route);
+  getRouteMatched(route: RouteLocationNormalizedLoaded): RouteLocationMatched | undefined {
+    return getRouteMatched(route);
   }
 
   getRealRouteName(name?: string | symbol | null): string | undefined {

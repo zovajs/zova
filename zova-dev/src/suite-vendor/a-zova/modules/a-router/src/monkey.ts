@@ -105,6 +105,7 @@ export class Monkey
   private _initControllerRoute(route: RouteLocationNormalizedLoadedGeneric | undefined, controller: BeanControllerPageBase) {
     if (!route) return;
     const routeMatched = getRouteMatched(route);
+    if (!routeMatched) return;
     // check if the same
     if (controller.$routeMatched && !this._checkIfRouteSame(routeMatched, controller.$routeMatched)) return;
     // check if changed

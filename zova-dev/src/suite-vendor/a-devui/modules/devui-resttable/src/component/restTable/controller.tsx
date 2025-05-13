@@ -1,4 +1,4 @@
-import { createColumnHelper } from '@tanstack/vue-table';
+import { createColumnHelper, getCoreRowModel } from '@tanstack/vue-table';
 import { SchemaObject } from 'openapi3-ts/oas31';
 import { Controller } from 'zova-module-a-bean';
 import { BeanControllerTableBase, TypeColumn, TypeTable } from 'zova-module-a-table';
@@ -46,6 +46,7 @@ export class ControllerRestTable extends BeanControllerTableBase {
         return self.$props.data || [];
       },
       columns: this.columns as any,
+      getCoreRowModel: getCoreRowModel(),
     } as any);
   }
 }

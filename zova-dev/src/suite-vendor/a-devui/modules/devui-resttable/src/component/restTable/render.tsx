@@ -21,6 +21,9 @@ export class RenderRestTable extends BeanRenderBase {
             </tr>
           </thead>
           <tbody>
+            {this.table.getRowModel().rows.map(row => {
+              return <tr key={row.id}></tr>;
+            })}
           </tbody>
         </table>
       </div>

@@ -1,13 +1,13 @@
 import type { RouteLocationMatched, RouteLocationNormalizedLoaded } from '@cabloy/vue-router';
 
-export function getRouteMatched(route: RouteLocationNormalizedLoaded): RouteLocationMatched {
+export function getRouteMatched(route: RouteLocationNormalizedLoaded): RouteLocationMatched | undefined {
   let match = route.matched.find(item => item.aliasOf);
   if (match) {
     match = match.aliasOf;
   } else {
     match = route.matched[route.matched.length - 1];
   }
-  return match!;
+  return match;
 }
 
 export function getRealRouteName(name?: string | symbol | null): string | undefined {
