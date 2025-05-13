@@ -1,14 +1,9 @@
 import type { ControllerPageResource } from 'zova-module-a-rest';
-import { createColumnHelper } from '@tanstack/vue-table';
-import { Use } from 'zova';
+import { BeanControllerBase, Use } from 'zova';
 import { Controller } from 'zova-module-a-bean';
-import { BeanControllerTableBase, TypeColumn, TypeTable } from 'zova-module-a-table';
 
 @Controller()
-export class ControllerRestPage extends BeanControllerTableBase {
-  table: TypeTable;
-  columns: TypeColumn[];
-
+export class ControllerRestPage extends BeanControllerBase {
   @Use({ injectionScope: 'host' })
   $$restResource: ControllerPageResource;
 
@@ -16,38 +11,5 @@ export class ControllerRestPage extends BeanControllerTableBase {
     // dataFindAll
     const queryDataFindAll = this.$$restResource.getQueryDataFindAll();
     await queryDataFindAll.suspense();
-    // columns
-    this._createColumns();
-    // table
-    this._createTable();
-  }
-
-  private _createColumns() {
-    this.columns = this.$useComputed(() => {
-      const querySdkBootstrap = this.$$restResource.getQuerySdkBootstrap();
-      if (!querySdkBootstrap.data) return [];
-      const schema = this.$$restResource.getSchemaOfTableRow(querySdkBootstrap.data.operationObject);
-      if (!schema) return [];
-      const columnHelper = createColumnHelper();
-      const columns: TypeColumn[] = [];
-      for (const key in schema.properties!) {
-        // const property = schema.properties[key];
-        columns.push(columnHelper.accessor(key as any, {
-          cell: info => info.getValue(),
-        }));
-      }
-      return columns;
-    });
-  }
-
-  private _createTable() {
-    const self = this;
-    this.table = this.$useTable({
-      get data() {
-        const queryDataFindAll = self.$$restResource.getQueryDataFindAll();
-        return queryDataFindAll.data || [];
-      },
-      columns: this.columns as any,
-    } as any);
   }
 }

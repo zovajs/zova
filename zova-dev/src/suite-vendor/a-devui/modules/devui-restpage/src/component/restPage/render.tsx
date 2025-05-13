@@ -10,7 +10,6 @@ export class RenderRestPage extends BeanRenderBase {
     const queryDataFindAll = this.$$restResource.getQueryDataFindAll();
     return (
       <div>
-        <div>{this.columns}</div>
         <ComponentRestTable data={queryDataFindAll.data} schema={schema}></ComponentRestTable>
       </div>
     );
