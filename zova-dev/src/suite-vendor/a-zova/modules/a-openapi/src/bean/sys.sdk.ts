@@ -1,4 +1,4 @@
-import type { ReferenceObject, SchemaObject } from 'openapi3-ts/oas31';
+import type { SchemaObject } from 'openapi3-ts/oas31';
 import { shallowReactive } from 'vue';
 import { BeanBase } from 'zova';
 import { Sys } from 'zova-module-a-bean';
@@ -10,7 +10,7 @@ const PATH_PARAM_RE = /\{([^{}/]+)\}/g;
 
 @Sys()
 export class SysSdk extends BeanBase {
-  schemas: Record<string, SchemaObject | ReferenceObject>;
+  schemas: Record<string, SchemaObject>;
   sdks: Record<string, Record<string, IOpenapiSdkItem>>;
 
   protected async __init__() {
@@ -24,7 +24,7 @@ export class SysSdk extends BeanBase {
     return this.sdks[api2]?.[apiMethod2];
   }
 
-  getSchema(schemaName: string): SchemaObject | ReferenceObject {
+  getSchema(schemaName: string): SchemaObject {
     return this.schemas[schemaName];
   }
 
@@ -43,7 +43,7 @@ export class SysSdk extends BeanBase {
     const schemas = data.doc.components?.schemas;
     if (schemas) {
       for (const key in schemas) {
-        this.schemas[key] = schemas[key];
+        this.schemas[key] = schemas[key] as unknown as SchemaObject;
         schemaNames.push(key);
       }
     }

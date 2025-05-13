@@ -3,6 +3,23 @@
   "type": "module",
   "version": "5.0.0",
   "title": "a-table",
+  "zovaModule": {
+    "globalDependencies": {
+      "@tanstack/table-core": true,
+      "@tanstack/vue-table": true
+    },
+    "bundle": {
+      "vendors": [
+        {
+          "match": [
+            "@tanstack/table-core",
+            "@tanstack/vue-table"
+          ],
+          "output": "tanstack-table"
+        }
+      ]
+    }
+  },
   "description": "",
   "author": "",
   "keywords": ["Zova Module"],

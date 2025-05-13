@@ -32,7 +32,8 @@
       "@cabloy/utils": true,
       "@cabloy/word-utils": true,
       "@tanstack/vue-form": true,
-      "defu": true
+      "defu": true,
+      "openapi3-ts": true
     },
     "globalDependenciesDev": {
       "@cabloy/cli": true,
@@ -75,7 +76,8 @@
     "@cabloy/utils": "^1.0.13",
     "@cabloy/word-utils": "^2.0.0",
     "@tanstack/vue-form": "^1.9.0",
-    "defu": "^6.1.4"
+    "defu": "^6.1.4",
+    "openapi3-ts": "^4.4.0"
   },
   "devDependencies": {
     "@cabloy/cli": "^3.0.11",

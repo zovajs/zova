@@ -23,6 +23,11 @@ export class ControllerRestPage extends BeanControllerTableBase {
 
   private _createColumns() {
     this.columns = this.$useComputed(() => {
+      const querySdkBootstrap = this.$$restResource.getQuerySdkBootstrap();
+      if (!querySdkBootstrap.data) return [];
+      const schema = this.$$restResource.getSchemaOfTableRow(querySdkBootstrap.data.operationObject);
+      if (!schema) return [];
+      const columnHelper = createColumnHelper<Person>();
       return [];
     });
   }
