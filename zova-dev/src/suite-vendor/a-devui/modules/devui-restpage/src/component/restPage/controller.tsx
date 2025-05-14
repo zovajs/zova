@@ -7,11 +7,7 @@ export class ControllerRestPage extends BeanControllerBase {
   @Use({ injectionScope: 'host' })
   $$restResource: ControllerPageResource;
 
-  protected async __init__() {
-    // dataFindAll
-    const queryDataFindAll = this.$$restResource.getQueryDataFindAll();
-    await queryDataFindAll.suspense();
-  }
+  protected async __init__() {}
 
   onOperationCreate() {
     console.log('sss');
