@@ -6,17 +6,17 @@ export class RenderWrapperForm extends BeanRenderBase {
   public render() {
     // form
     const ComponentRestForm = this.$zovaComponent(this.$$restResource.defaultRestForm);
-    console.log('-------visible:', this.$props.formVisible, this.modelFormVisible);
-    console.log(this.schema);
+    console.log(this.formData);
     return (
       <div>
         <input type="checkbox" value={this.modelFormVisible} class="modal-toggle" />
-        <dialog id={this.formId} class="modal" onClose={() => { this.modelFormVisible = false; }}>
+        <dialog id={this.formDomId} class="modal" open={this.modelFormVisible} onClose={() => { this.modelFormVisible = false; }}>
           <div class="modal-box">
             <h3 class="font-bold text-lg">Hello!</h3>
             <p class="py-4">
               {this.modelFormVisible && (
                 <ComponentRestForm
+                  data={this.formData}
                   schema={this.schema}
                   formMeta={this.$props.formMeta}
                 ></ComponentRestForm>

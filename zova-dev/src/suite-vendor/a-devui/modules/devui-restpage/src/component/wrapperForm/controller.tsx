@@ -1,6 +1,6 @@
 import { SchemaObject } from 'openapi3-ts/oas31';
 import { useId } from 'vue';
-import { BeanControllerBase, cast, Model, Use } from 'zova';
+import { BeanControllerBase, Model, Use } from 'zova';
 import { Controller } from 'zova-module-a-bean';
 import { IFormMeta } from 'zova-module-a-form';
 import { ControllerPageResource } from 'zova-module-a-rest';
@@ -19,9 +19,10 @@ export class ControllerWrapperForm extends BeanControllerBase {
     formVisible: false,
   };
 
-  formId: string;
+  formDomId: string;
   schemaCreate?: SchemaObject;
   schema?: SchemaObject;
+  formData?: any;
 
   @Use({ injectionScope: 'host' })
   $$restResource: ControllerPageResource;
@@ -30,7 +31,7 @@ export class ControllerWrapperForm extends BeanControllerBase {
   modelFormVisible: boolean;
 
   protected async __init__() {
-    this.formId = useId();
+    this.formDomId = useId();
     this.schemaCreate = this.$useComputed(() => {
       const querySdkCreate = this.$$restResource.getQuerySdkCreate();
       return this.$$restResource.getSchemaOfFormCreate(querySdkCreate.data?.operationObject);
@@ -41,10 +42,12 @@ export class ControllerWrapperForm extends BeanControllerBase {
         if (formMeta.editMode === 'create') return this.schemaCreate;
       }
     });
-  }
-
-  showModal() {
-    const dialog = cast<HTMLDialogElement | undefined>(document.getElementById(this.formId));
-    dialog?.showModal();
+    this.formData = this.$useComputed(() => {
+      const formMeta = this.$props.formMeta;
+      if (formMeta.formMode === 'edit' && formMeta.editMode === 'create') {
+        const queryData = this.$$restResource.getQueryDataDefaultValue(this.schemaCreate);
+        return queryData?.data;
+      }
+    });
   }
 }

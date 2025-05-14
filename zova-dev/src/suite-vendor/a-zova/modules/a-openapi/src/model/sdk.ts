@@ -4,7 +4,7 @@ import { z } from 'zod';
 import { Use } from 'zova';
 import { BeanModelBase, Model } from 'zova-module-a-model';
 import { SysSdk } from '../bean/sys.sdk.js';
-import { TypeRequestMethod } from '../types/sdk.js';
+import { SymbolOpenapiSchemaName, TypeRequestMethod } from '../types/sdk.js';
 
 const __schemaRefPrefix = '#/components/schemas/';
 
@@ -46,7 +46,11 @@ export class ModelSdk extends BeanModelBase {
     return this.$useStateData({
       queryKey: ['schema', schemaName],
       queryFn: async () => {
-        return this.$$sysSdk.getSchema(schemaName);
+        const schema = this.$$sysSdk.getSchema(schemaName);
+        if (schema && !schema[SymbolOpenapiSchemaName]) {
+          schema[SymbolOpenapiSchemaName] = schemaName;
+        }
+        return schema;
       },
       staleTime: Infinity,
     });
@@ -59,7 +63,25 @@ export class ModelSdk extends BeanModelBase {
         const querySchema = this.getSchema(schemaName);
         if (!querySchema.data) return null;
         const code = jsonSchemaToZod(querySchema.data);
-        return evaluateSimple(code, { z });
+        const zodSchema = evaluateSimple(code, { z });
+        this.$invalidateQueries({ queryKey: ['schemaDefaultValue', schemaName] });
+        return zodSchema;
+      },
+      staleTime: Infinity,
+      meta: {
+        ssr: { dehydrate: false },
+        persister: false,
+      },
+    });
+  }
+
+  getDataDefaultValue(schemaName: string) {
+    return this.$useStateData({
+      queryKey: ['schemaDefaultValue', schemaName],
+      queryFn: async () => {
+        const queryZodSchema = this.getZodSchema(schemaName);
+        if (!queryZodSchema.data) return null;
+        return queryZodSchema.data.parse({});
       },
       staleTime: Infinity,
       meta: {
