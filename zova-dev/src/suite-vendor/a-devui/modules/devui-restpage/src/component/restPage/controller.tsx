@@ -12,4 +12,8 @@ export class ControllerRestPage extends BeanControllerBase {
     const queryDataFindAll = this.$$restResource.getQueryDataFindAll();
     await queryDataFindAll.suspense();
   }
+
+  onOperationCreate() {
+    console.log('sss');
+  }
 }

@@ -1,11 +1,13 @@
 import { createColumnHelper, getCoreRowModel } from '@tanstack/vue-table';
 import { SchemaObject } from 'openapi3-ts/oas31';
+import { FunctionAsync } from 'zova';
 import { Controller } from 'zova-module-a-bean';
 import { BeanControllerTableBase, TypeColumn, TypeTable } from 'zova-module-a-table';
 
 export interface ControllerRestTableProps<T extends any[] = any[]> {
   data?: T;
   schema?: SchemaObject;
+  onOperationCreate: FunctionAsync;
 }
 
 @Controller()
@@ -51,6 +53,6 @@ export class ControllerRestTable extends BeanControllerTableBase {
   }
 
   operationCreate() {
-
+    return this.$props.onOperationCreate();
   }
 }

@@ -1,13 +1,19 @@
 import type { BeanScopeUtil } from 'zova';
-/** components: end */
+/** render: end */
 /** scope: begin */
 import { BeanScopeBase } from 'zova';
 import { Scope } from 'zova-module-a-bean';
 /** controller: end */
 /** controller: begin */
 import { ControllerRestForm } from '../component/restForm/controller.jsx';
+/** render: end */
+/** render: begin */
+import { RenderRestForm } from '../component/restForm/render.jsx';
+
 import { ZRestForm } from './component/restForm.js';
 /** controller: begin */
+import 'zova';
+import 'zova';
 import 'zova';
 import 'zova';
 import 'zova';
@@ -32,14 +38,32 @@ declare module 'zova' {
 }
 /** controller: end */
 
-/** components: begin */
-export * from './component/restForm.js';
+/** components: end */
+/** render: begin */
+export * from '../component/restForm/render.jsx';
 export const components = {
   restForm: ZRestForm,
 };
 declare module 'zova' {
   export interface IComponentRecord {
     'devui-restform:restForm': ControllerRestForm;
+  }
+}
+/** components: begin */
+export * from './component/restForm.js';
+declare module 'zova' {
+
+}
+declare module 'zova-module-devui-restform' {
+
+  export interface RenderRestForm {
+    /** @internal */
+    get scope(): ScopeModuleDevuiRestform;
+  }
+}
+declare module 'zova' {
+  export interface IBeanRecordLocal {
+    'devui-restform.render.restForm': RenderRestForm;
   }
 }
 
