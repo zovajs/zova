@@ -11,9 +11,6 @@ export class RenderRestPage extends BeanRenderBase {
           <ZWrapperForm
             vModel:formVisible={this.formVisible}
             formMeta={this.formMeta}
-            controllerRef={ref => {
-              this.wrapperFormRef = ref;
-            }}
           ></ZWrapperForm>
         </ClientOnly>
         <ZWrapperTable onOperationCreate={() => this.onOperationCreate()}></ZWrapperTable>

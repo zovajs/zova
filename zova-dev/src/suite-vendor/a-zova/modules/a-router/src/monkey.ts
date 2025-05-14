@@ -13,7 +13,7 @@ import type { BeanRouter } from './bean/bean.router.js';
 import type { TypePageSchema } from './types/router.js';
 import * as ModuleInfo from '@cabloy/module-info';
 import { routerViewLocationKey } from '@cabloy/vue-router';
-import { inject } from 'vue';
+import { inject, shallowReactive } from 'vue';
 import {
   BeanControllerPageBase,
   BeanSimple,
@@ -133,10 +133,22 @@ export class Monkey
       schemas = module.resource.pagePathSchemas?.[schemaKey];
     }
     if (schemas?.params) {
-      controller.$params = schemas.params.parse(route.params);
+      const params = schemas.params.parse(route.params);
+      if (!controller.$params) {
+        controller.$params = process.env.SERVER ? params : shallowReactive(params as any);
+      } else {
+        // hold the same $params ref
+        Object.assign(controller.$params as any, params);
+      }
     }
     if (schemas?.query) {
-      controller.$query = schemas.query.parse(route.query);
+      const query = schemas.query.parse(route.query);
+      if (!controller.$query) {
+        controller.$query = process.env.SERVER ? query : shallowReactive(query as any);
+      } else {
+        // hold the same $query ref
+        Object.assign(controller.$query as any, query);
+      }
     }
   }
 
