@@ -8,7 +8,10 @@ export class RenderRestPage extends BeanRenderBase {
     return (
       <div>
         <ClientOnly>
-          <ZWrapperForm></ZWrapperForm>
+          <ZWrapperForm controllerRef={ref => {
+            this.wrapperFormRef = ref;
+          }}
+          ></ZWrapperForm>
         </ClientOnly>
         <ZWrapperTable onOperationCreate={() => this.onOperationCreate()}></ZWrapperTable>
       </div>
