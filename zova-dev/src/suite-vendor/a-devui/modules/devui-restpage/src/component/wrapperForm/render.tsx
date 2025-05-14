@@ -13,7 +13,7 @@ export class RenderWrapperForm extends BeanRenderBase {
           <div class="modal-box">
             <h3 class="font-bold text-lg">Hello!</h3>
             <p class="py-4">
-              {this.modelFormVisible && (
+              {this.modelFormVisible && !!this.formData && (
                 <ComponentRestForm
                   data={this.formData}
                   schema={this.schema}

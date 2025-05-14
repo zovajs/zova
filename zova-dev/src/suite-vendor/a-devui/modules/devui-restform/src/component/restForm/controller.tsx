@@ -1,7 +1,6 @@
 import { SchemaObject } from 'openapi3-ts/oas31';
-import { BeanControllerBase } from 'zova';
 import { Controller } from 'zova-module-a-bean';
-import { IFormMeta } from 'zova-module-a-form';
+import { BeanControllerFormBase, IFormMeta, TypeForm } from 'zova-module-a-form';
 
 export interface ControllerRestFormProps<T extends {} = {}> {
   data?: T;
@@ -10,8 +9,17 @@ export interface ControllerRestFormProps<T extends {} = {}> {
 }
 
 @Controller()
-export class ControllerRestForm extends BeanControllerBase {
+export class ControllerRestForm extends BeanControllerFormBase {
   static $propsDefault = {};
 
-  protected async __init__() {}
+  form: TypeForm;
+
+  protected async __init__() {
+    this.form = this.$useForm({
+      defaultValues: this.$props.data as any,
+      onSubmit: async ({ value }) => {
+        console.log('submit: ', JSON.stringify(value));
+      },
+    });
+  }
 }
