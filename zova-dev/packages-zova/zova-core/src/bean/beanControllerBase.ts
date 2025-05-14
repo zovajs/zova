@@ -12,14 +12,14 @@ export class BeanControllerBase extends BeanBase {
     // slots
     this.$slots = controllerData.context.slots as any;
     // props
-    this.$props = this.__initControllerProps(this.ctx.instance.vnode.props);
+    this.__initControllerProps(this.ctx.instance.vnode.props);
     this.app.meta.module._monkeyModuleSync('controllerDataInit', undefined, controllerData, this);
   }
 
   /** @internal */
   public __updateControllerData() {
     // props
-    this.$props = this.__initControllerProps(this.ctx.instance.vnode.props);
+    this.__initControllerProps(this.ctx.instance.vnode.props);
     this.app.meta.module._monkeyModuleSync('controllerDataUpdate', undefined, this);
   }
 
@@ -35,6 +35,11 @@ export class BeanControllerBase extends BeanBase {
   private __initControllerProps(props: unknown | undefined) {
     const propsDefault = Object.getPrototypeOf(this).constructor.$propsDefault;
     props = Object.assign({}, propsDefault, props);
-    return process.env.SERVER ? props : shallowReactive(props as any);
+    if (!this.$props) {
+      this.$props = process.env.SERVER ? props : shallowReactive(props as any);
+    } else {
+      // hold the same $props ref
+      Object.assign(this.$props as any, props);
+    }
   }
 }
