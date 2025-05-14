@@ -8,6 +8,7 @@ export class RenderWrapperForm extends BeanRenderBase {
     const ComponentRestForm = this.$zovaComponent(this.$$restResource.defaultRestForm);
     const querySdkFindOne = this.$$restResource.getQuerySdkFindOne();
     const schemaFormCreate = this.$$restResource.getSchemaOfFormCreate(querySdkFindOne.data?.operationObject);
+    if (!this.formVisible) return;
     return <ComponentRestForm schema={schemaFormCreate}></ComponentRestForm>;
   }
 }
