@@ -4,10 +4,15 @@ import { Controller } from 'zova-module-a-bean';
 import { IFormMeta } from 'zova-module-a-form';
 import { ControllerPageResource } from 'zova-module-a-rest';
 
+export interface ControllerWrapperFormProps {
+  formMeta: IFormMeta;
+}
+
 @Controller()
 export class ControllerWrapperForm extends BeanControllerBase {
+  static $propsDefault = {};
+
   formId: string;
-  formMeta: IFormMeta = {};
 
   @Use({ injectionScope: 'host' })
   $$restResource: ControllerPageResource;
