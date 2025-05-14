@@ -81,7 +81,14 @@ export class ModelSdk extends BeanModelBase {
       queryFn: async () => {
         const queryZodSchema = this.getZodSchema(schemaName);
         if (!queryZodSchema.data) return null;
-        return queryZodSchema.data.parse({});
+        const mask = {};
+        Object.keys(queryZodSchema.data.shape).forEach(key => {
+          const fieldSchema = queryZodSchema.data.shape[key];
+          if (fieldSchema.constructor.name === 'ZodDefault') {
+            mask[key] = true;
+          }
+        });
+        return queryZodSchema.data.pick(mask).parse({});
       },
       staleTime: Infinity,
       meta: {
