@@ -1,7 +1,7 @@
 import type { BeanScopeUtil } from 'zova';
-/** render: end */
+/** locale: end */
 /** scope: begin */
-import { BeanScopeBase } from 'zova';
+import { BeanScopeBase, TypeLocaleBase, TypeModuleLocales } from 'zova';
 import { Scope } from 'zova-module-a-bean';
 /** controller: end */
 /** controller: begin */
@@ -10,6 +10,10 @@ import { ControllerRestTable } from '../component/restTable/controller.jsx';
 /** render: begin */
 import { RenderRestTable } from '../component/restTable/render.jsx';
 
+/** render: end */
+/** locale: begin */
+import locale_en_us from '../config/locale/en-us.js';
+import locale_zh_cn from '../config/locale/zh-cn.js';
 import { ZRestTable } from './component/restTable.js';
 /** controller: begin */
 import 'zova';
@@ -66,12 +70,17 @@ declare module 'zova' {
     'devui-resttable.render.restTable': RenderRestTable;
   }
 }
+export const locales = {
+  'en-us': locale_en_us,
+  'zh-cn': locale_zh_cn,
+};
 
 @Scope()
 export class ScopeModuleDevuiResttable extends BeanScopeBase {}
 
 export interface ScopeModuleDevuiResttable {
   util: BeanScopeUtil;
+  locale: TypeModuleLocales<(typeof locales)[TypeLocaleBase]>;
 }
 
 declare module 'zova' {
@@ -79,6 +88,12 @@ declare module 'zova' {
     'devui-resttable': ScopeModuleDevuiResttable;
   }
 
+  export interface IBeanScopeLocale {
+    'devui-resttable': (typeof locales)[TypeLocaleBase];
+  }
 }
 
+export function locale<K extends keyof (typeof locales)[TypeLocaleBase]>(key: K): `devui-resttable::${K}` {
+  return `devui-resttable::${key}`;
+}
 /** scope: end */

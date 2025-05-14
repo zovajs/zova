@@ -49,4 +49,8 @@ export class ControllerRestTable extends BeanControllerTableBase {
       getCoreRowModel: getCoreRowModel(),
     } as any);
   }
+
+  operationCreate() {
+
+  }
 }

@@ -7,6 +7,17 @@ export class RenderRestTable extends BeanRenderBase {
   public render() {
     return (
       <div class="overflow-x-auto">
+        <div>
+          <button
+            class="btn btn-primary"
+            type="button"
+            onClick={() => {
+              this.operationCreate();
+            }}
+          >
+            {this.scope.locale.Create()}
+          </button>
+        </div>
         <table class="table">
           <thead>
             <tr>
@@ -17,7 +28,7 @@ export class RenderRestTable extends BeanRenderBase {
                   </th>
                 );
               })}
-              <th></th>
+              <th>{this.scope.locale.Operations()}</th>
             </tr>
           </thead>
           <tbody>
