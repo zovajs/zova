@@ -2,7 +2,7 @@ import { BeanRenderBase } from 'zova';
 import { Render } from 'zova-module-a-bean';
 
 @Render()
-export class RenderTable extends BeanRenderBase {
+export class RenderWrapperTable extends BeanRenderBase {
   public render() {
     // table
     const ComponentRestTable = this.$zovaComponent(this.$$restResource.defaultRestTable);

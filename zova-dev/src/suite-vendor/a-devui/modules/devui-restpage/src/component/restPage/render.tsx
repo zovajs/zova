@@ -1,6 +1,6 @@
 import { BeanRenderBase, ClientOnly } from 'zova';
 import { Render } from 'zova-module-a-bean';
-import { ZTable } from '../../.metadata/index.js';
+import { ZWrapperTable } from '../../.metadata/index.js';
 
 @Render()
 export class RenderRestPage extends BeanRenderBase {
@@ -13,7 +13,7 @@ export class RenderRestPage extends BeanRenderBase {
     return (
       <div>
         <ClientOnly><ComponentRestForm schema={schemaFormCreate}></ComponentRestForm></ClientOnly>
-        <ZTable onOperationCreate={() => this.onOperationCreate()}></ZTable>
+        <ZWrapperTable onOperationCreate={() => this.onOperationCreate()}></ZWrapperTable>
       </div>
     );
   }

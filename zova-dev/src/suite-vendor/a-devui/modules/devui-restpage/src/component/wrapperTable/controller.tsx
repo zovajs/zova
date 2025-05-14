@@ -2,12 +2,12 @@ import { BeanControllerBase, Functionable, Use } from 'zova';
 import { Controller } from 'zova-module-a-bean';
 import { ControllerPageResource } from 'zova-module-a-rest';
 
-export interface ControllerTableProps {
+export interface ControllerWrapperTableProps {
   onOperationCreate: Functionable;
 }
 
 @Controller()
-export class ControllerTable extends BeanControllerBase {
+export class ControllerWrapperTable extends BeanControllerBase {
   static $propsDefault = {};
 
   @Use({ injectionScope: 'host' })
