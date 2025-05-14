@@ -6,7 +6,6 @@ export class RenderWrapperForm extends BeanRenderBase {
   public render() {
     // form
     const ComponentRestForm = this.$zovaComponent(this.$$restResource.defaultRestForm);
-    console.log(this.formData);
     return (
       <div>
         <input type="checkbox" value={this.modelFormVisible} class="modal-toggle" />
