@@ -10,10 +10,11 @@ import { ControllerRestPage } from '../component/restPage/controller.jsx';
 /** render: begin */
 import { RenderRestPage } from '../component/restPage/render.jsx';
 import { ControllerWrapperForm } from '../component/wrapperForm/controller.jsx';
+import { RenderWrapperForm } from '../component/wrapperForm/render.jsx';
 import { ControllerWrapperTable } from '../component/wrapperTable/controller.jsx';
 import { RenderWrapperTable } from '../component/wrapperTable/render.jsx';
-import { ZRestPage } from './component/restPage.js';
 
+import { ZRestPage } from './component/restPage.js';
 import { ZWrapperForm } from './component/wrapperForm.js';
 import { ZWrapperTable } from './component/wrapperTable.js';
 /** controller: begin */
@@ -59,10 +60,9 @@ declare module 'zova' {
 }
 /** controller: end */
 
+export * from '../component/wrapperForm/render.jsx';
 export * from '../component/wrapperTable/controller.jsx';
 export * from '../component/wrapperTable/render.jsx';
-/** components: begin */
-export * from './component/restPage.js';
 export const components = {
   restPage: ZRestPage,
   wrapperForm: ZWrapperForm,
@@ -75,6 +75,8 @@ declare module 'zova' {
     'devui-restpage:wrapperTable': ControllerWrapperTable;
   }
 }
+/** components: begin */
+export * from './component/restPage.js';
 export * from './component/wrapperForm.js';
 export * from './component/wrapperTable.js';
 declare module 'zova' {
@@ -87,6 +89,11 @@ declare module 'zova-module-devui-restpage' {
     get scope(): ScopeModuleDevuiRestpage;
   }
 
+  export interface RenderWrapperForm {
+    /** @internal */
+    get scope(): ScopeModuleDevuiRestpage;
+  }
+
   export interface RenderWrapperTable {
     /** @internal */
     get scope(): ScopeModuleDevuiRestpage;
@@ -95,6 +102,7 @@ declare module 'zova-module-devui-restpage' {
 declare module 'zova' {
   export interface IBeanRecordLocal {
     'devui-restpage.render.restPage': RenderRestPage;
+    'devui-restpage.render.wrapperForm': RenderWrapperForm;
     'devui-restpage.render.wrapperTable': RenderWrapperTable;
   }
 }

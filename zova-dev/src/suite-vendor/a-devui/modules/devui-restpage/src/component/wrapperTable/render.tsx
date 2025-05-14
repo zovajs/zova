@@ -10,13 +10,11 @@ export class RenderWrapperTable extends BeanRenderBase {
     const schemaTableRow = this.$$restResource.getSchemaOfTableRow(querySdkBootstrap.data?.operationObject);
     const queryDataFindAll = this.$$restResource.getQueryDataFindAll();
     return (
-      <div>
-        <ComponentRestTable
-          data={queryDataFindAll.data}
-          schema={schemaTableRow}
-          onOperationCreate={() => this.onOperationCreate()}
-        ></ComponentRestTable>
-      </div>
+      <ComponentRestTable
+        data={queryDataFindAll.data}
+        schema={schemaTableRow}
+        onOperationCreate={() => this.onOperationCreate()}
+      ></ComponentRestTable>
     );
   }
 }

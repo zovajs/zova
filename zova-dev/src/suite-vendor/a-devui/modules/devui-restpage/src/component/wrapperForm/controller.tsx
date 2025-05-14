@@ -1,11 +1,11 @@
-import { BeanControllerBase } from 'zova';
+import { BeanControllerBase, Use } from 'zova';
 import { Controller } from 'zova-module-a-bean';
+import { ControllerPageResource } from 'zova-module-a-rest';
 
 @Controller()
 export class ControllerWrapperForm extends BeanControllerBase {
-  protected async __init__() {}
+  @Use({ injectionScope: 'host' })
+  $$restResource: ControllerPageResource;
 
-  protected render() {
-    return null;
-  }
+  protected async __init__() {}
 }
