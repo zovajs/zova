@@ -1,6 +1,7 @@
 import { createCommentVNode, VNode } from 'vue';
 import { BeanBehaviorBase, Behavior, IDecoratorBehaviorOptions, NextBehavior } from 'zova-module-a-behavior';
 import { TypeForm } from '../types/form.js';
+import { IFormMeta } from '../types/formMeta.js';
 
 export interface IBehaviorPropsInputForm {
   onSubmit?: ((payload: Event) => void);
@@ -10,6 +11,7 @@ export interface IBehaviorPropsOutputForm {}
 
 export interface IBehaviorOptionsForm<TFormData = unknown> extends IDecoratorBehaviorOptions {
   form?: TypeForm<TFormData>;
+  formMeta?: IFormMeta;
   onSubmit?: ((payload: Event) => void) | boolean;
 }
 
@@ -26,6 +28,10 @@ export class BehaviorForm extends BeanBehaviorBase<
 
   public get form() {
     return this.$options.form!;
+  }
+
+  public get formMeta() {
+    return this.$options.formMeta;
   }
 
   protected render(props: IBehaviorPropsInputForm, next: NextBehavior<IBehaviorPropsOutputForm>): VNode {
