@@ -10,9 +10,10 @@ export class RenderRestForm extends BeanRenderBase {
     const children: VNode[] = [];
     const properties = schema.properties!;
     for (const key in properties) {
-      // const property = properties[key];
+      const property = properties[key];
       children.push(
         <input
+          bs-devui-restform-formFieldLayout={{ label: property.description || key }}
           bs-formField={{
             name: key,
             validators: {
@@ -29,7 +30,7 @@ export class RenderRestForm extends BeanRenderBase {
     if (!this.$props.schema) return;
     return (
       <form bs-form={{ form: this.form }}>
-        {this._renderSchema(this.$props.schema)}
+        <>{this._renderSchema(this.$props.schema)}</>
       </form>
     );
   }
