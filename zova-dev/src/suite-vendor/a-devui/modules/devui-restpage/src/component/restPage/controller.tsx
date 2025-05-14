@@ -8,6 +8,7 @@ import { ControllerWrapperForm } from '../wrapperForm/controller.jsx';
 export class ControllerRestPage extends BeanControllerBase {
   // form
   wrapperFormRef?: ControllerWrapperForm;
+  formVisible: boolean = false;
   formMode?: TypeFormMode;
   editMode?: TypeEditMode;
   formMeta: IFormMeta;
@@ -24,6 +25,6 @@ export class ControllerRestPage extends BeanControllerBase {
   onOperationCreate() {
     this.formMode = 'edit';
     this.editMode = 'create';
-    this.wrapperFormRef?.showModal();
+    this.formVisible = true;
   }
 }

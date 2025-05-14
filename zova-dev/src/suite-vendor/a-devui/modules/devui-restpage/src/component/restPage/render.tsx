@@ -9,6 +9,7 @@ export class RenderRestPage extends BeanRenderBase {
       <div>
         <ClientOnly>
           <ZWrapperForm
+            vModel:formVisible={this.formVisible}
             formMeta={this.formMeta}
             controllerRef={ref => {
               this.wrapperFormRef = ref;
