@@ -34,7 +34,7 @@ export class RenderRestTable extends BeanRenderBase {
           <tbody>
             {this.table.getRowModel().rows.map(row => {
               return (
-                <tr key={row.id}>
+                <tr key={row.getValue('id')}>
                   {row.getVisibleCells().map(cell => {
                     return (
                       <td key={cell.id}>
