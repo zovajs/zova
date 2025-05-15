@@ -20,10 +20,12 @@ export class RenderRestForm extends BeanRenderBase {
             onChange: z.string().min(3),
           },
         },
-        [behaviorFormFieldLayout]: { label: property.description || key },
+        [behaviorFormFieldLayout]: {
+          label: property.description || key,
+        },
       };
       children.push(
-        <input behaviors={behaviors}></input>,
+        <input behaviors={behaviors} class="input input-bordered"></input>,
       );
     }
     return children;

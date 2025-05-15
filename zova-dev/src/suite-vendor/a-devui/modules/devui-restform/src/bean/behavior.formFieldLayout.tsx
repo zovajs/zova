@@ -3,12 +3,14 @@ import { VNode } from 'vue';
 import { Use } from 'zova';
 import { BeanBehaviorBase, Behavior, IDecoratorBehaviorOptions, NextBehavior } from 'zova-module-a-behavior';
 
-export interface IBehaviorPropsInputFormFieldLayout {}
+export interface IBehaviorPropsInputFormFieldLayout {
+  class?: any;
+}
 
 export interface IBehaviorPropsOutputFormFieldLayout {}
 
 export interface IBehaviorOptionsFormFieldLayout extends IDecoratorBehaviorOptions {
-  label: string;
+  label?: string | false;
 }
 
 @Behavior<IBehaviorOptionsFormFieldLayout>()
@@ -20,20 +22,25 @@ export class BehaviorFormFieldLayout extends BeanBehaviorBase<
   @Use({ injectionScope: 'host' })
   $$behaviorFormField: BehaviorFormField;
 
-  protected render(_props: IBehaviorPropsInputFormFieldLayout, next: NextBehavior<IBehaviorPropsOutputFormFieldLayout>): VNode {
+  protected render(props: IBehaviorPropsInputFormFieldLayout, next: NextBehavior<IBehaviorPropsOutputFormFieldLayout>): VNode {
     // const field = this.$$behaviorFormField.field;
-    const vnode = next();
+    props = this._patchProps(props);
+    const vnode = next(props);
     return (
       <label class="form-control w-full max-w-xs">
-        <div class="label">
-          <span class="label-text">{this.$options.label}</span>
-        </div>
+        {!!this.$options.label && (
+          <div class="label">
+            <span class="label-text">{this.$options.label}</span>
+          </div>
+        )}
         {vnode}
 
       </label>
     );
   }
-}
 
-// <label htmlFor={field.api.name}>{this.$options.label}</label>
-//        {vnode}
+  private _patchProps(props: IBehaviorPropsInputFormFieldLayout) {
+    const propsPatch: IBehaviorPropsInputFormFieldLayout = {};
+    return Object.assign({}, props, propsPatch);
+  }
+}

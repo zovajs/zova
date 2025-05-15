@@ -1,5 +1,4 @@
 import type { BehaviorFormField, TypeFormField } from 'zova-module-a-form';
-import defu from 'defu';
 import { VNode } from 'vue';
 import { Use } from 'zova';
 import { BeanBehaviorBase, Behavior, IDecoratorBehaviorOptions, NextBehavior } from 'zova-module-a-behavior';
@@ -38,7 +37,7 @@ export class BehaviorFormFieldModel extends BeanBehaviorBase<
   }
 
   private _patchProps_input(field: TypeFormField, props: IBehaviorPropsInputFormFieldModel) {
-    return defu(props, {
+    return Object.assign({
       name: field.api.name,
       value: field.state.value,
       onInput: (e: Event) => {
@@ -47,6 +46,6 @@ export class BehaviorFormFieldModel extends BeanBehaviorBase<
       onBlur: (_e: Event) => {
         field.api.handleBlur();
       },
-    } satisfies IBehaviorPropsInputFormFieldModel);
+    } satisfies IBehaviorPropsInputFormFieldModel, props);
   }
 }
