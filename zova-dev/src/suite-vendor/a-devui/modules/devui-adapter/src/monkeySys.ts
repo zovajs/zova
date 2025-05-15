@@ -1,7 +1,6 @@
 import type { IMonkeySysInitialize } from 'zova';
 import type { IRestConfig } from 'zova-module-a-rest';
-import defu from 'defu';
-import { BeanSimple } from 'zova';
+import { BeanSimple, deepExtend } from 'zova';
 
 export class MonkeySys extends BeanSimple implements IMonkeySysInitialize {
   async sysInitialize() {
@@ -12,12 +11,12 @@ export class MonkeySys extends BeanSimple implements IMonkeySysInitialize {
     }
     // rest
     const scopeRestConfig = this.sys.util.getModuleConfigSafe('a-rest');
-    defu(scopeRestConfig.rest, {
+    scopeRestConfig.rest = deepExtend({
       components: {
         page: 'devui-restpage:restPage',
         table: 'devui-resttable:restTable',
         form: 'devui-restform:restForm',
       },
-    } satisfies IRestConfig);
+    } satisfies IRestConfig, scopeRestConfig.rest);
   }
 }
