@@ -1,4 +1,5 @@
 import type { DeepKeys, DeepValue, FieldAsyncValidateOrFn, FieldOptions, FieldValidateOrFn, FormAsyncValidateOrFn, FormOptions, FormValidateOrFn, useField, useForm } from '@tanstack/vue-form';
+import type { UnwrapNestedRefs } from 'vue';
 
 export type TypeForm<
   TFormData = unknown,
@@ -72,7 +73,7 @@ export type TypeFormField<
   TFormOnSubmitAsync extends undefined | FormAsyncValidateOrFn<TParentData> = undefined | FormAsyncValidateOrFn<TParentData>,
   TFormOnServer extends undefined | FormAsyncValidateOrFn<TParentData> = undefined | FormAsyncValidateOrFn<TParentData>,
   TParentSubmitMeta = never,
-> = ReturnType<typeof useField<
+> = UnwrapNestedRefs<ReturnType<typeof useField<
   TParentData,
   TName,
   TData,
@@ -92,7 +93,7 @@ export type TypeFormField<
   TFormOnSubmitAsync,
   TFormOnServer,
   TParentSubmitMeta
->>;
+>>>;
 
 export type TypeBehaviorFormFieldOptions<
   TParentData = unknown,
