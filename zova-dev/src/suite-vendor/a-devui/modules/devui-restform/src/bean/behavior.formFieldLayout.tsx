@@ -1,4 +1,5 @@
-import type { BehaviorFormField } from 'zova-module-a-form';
+import type { BehaviorFormField, TypeFormField } from 'zova-module-a-form';
+import { classes } from 'typestyle';
 import { VNode } from 'vue';
 import { Use } from 'zova';
 import { BeanBehaviorBase, Behavior, IDecoratorBehaviorOptions, NextBehavior } from 'zova-module-a-behavior';
@@ -11,6 +12,7 @@ export interface IBehaviorPropsOutputFormFieldLayout {}
 
 export interface IBehaviorOptionsFormFieldLayout extends IDecoratorBehaviorOptions {
   label?: string | false;
+  bordered?: boolean;
 }
 
 @Behavior<IBehaviorOptionsFormFieldLayout>()
@@ -40,7 +42,22 @@ export class BehaviorFormFieldLayout extends BeanBehaviorBase<
   }
 
   private _patchProps(props: IBehaviorPropsInputFormFieldLayout) {
+    const field = this.$$behaviorFormField.field;
+    props = this._patchProps_general(field, props);
+    if (this.$$behaviorTag.component === 'input') {
+      return this._patchProps_input(field, props);
+    }
+    return props;
+  }
+
+  private _patchProps_general(_field: TypeFormField, props: IBehaviorPropsInputFormFieldLayout) {
     const propsPatch: IBehaviorPropsInputFormFieldLayout = {};
+    return Object.assign({}, props, propsPatch);
+  }
+
+  private _patchProps_input(_field: TypeFormField, props: IBehaviorPropsInputFormFieldLayout) {
+    const propsPatch: IBehaviorPropsInputFormFieldLayout = {};
+    propsPatch.class = classes(props.class, 'input', this.$options.bordered && 'input-bordered');
     return Object.assign({}, props, propsPatch);
   }
 }

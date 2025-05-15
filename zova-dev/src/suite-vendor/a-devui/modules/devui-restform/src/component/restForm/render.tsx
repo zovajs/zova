@@ -22,10 +22,11 @@ export class RenderRestForm extends BeanRenderBase {
         },
         [behaviorFormFieldLayout]: {
           label: property.description || key,
+          bordered: true,
         },
       };
       children.push(
-        <input behaviors={behaviors} class="input input-bordered"></input>,
+        <input behaviors={behaviors}></input>,
       );
     }
     return children;
