@@ -19,7 +19,7 @@ export class RenderWrapperForm extends BeanRenderBase {
                 schema={this.schema}
                 formMeta={this.$props.formMeta}
                 formBehaviors={this.$props.formBehaviors}
-                onSubmit={data => this.$props.onSubmit?.(data)}
+                onSubmit={data => this.onSubmit(data)}
               ></ComponentRestForm>
             )}
           </p>

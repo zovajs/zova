@@ -1,8 +1,9 @@
+import { sleep } from '@cabloy/utils';
 import { SchemaObject } from 'openapi3-ts/oas31';
 import { useId } from 'vue';
 import { BeanControllerBase, Model, Use } from 'zova';
 import { Controller } from 'zova-module-a-bean';
-import { IFormBehaviors, IFormMeta, TypeFormOnSubmit } from 'zova-module-a-form';
+import { IFormBehaviors, IFormMeta, TypeFormOnSubmit, TypeFormOnSubmitData } from 'zova-module-a-form';
 import { ControllerPageResource } from 'zova-module-a-rest';
 import { ControllerRestForm } from 'zova-module-devui-restform';
 
@@ -56,5 +57,18 @@ export class ControllerWrapperForm extends BeanControllerBase {
         return queryData?.data;
       }
     });
+  }
+
+  async onSubmit(data: TypeFormOnSubmitData) {
+    try {
+      this.loading = true;
+      await sleep(5000);
+      await this.$props.onSubmit?.(data);
+      this.modelFormVisible = false;
+    } catch (err) {
+      console.log(err);
+    } finally {
+      this.loading = false;
+    }
   }
 }

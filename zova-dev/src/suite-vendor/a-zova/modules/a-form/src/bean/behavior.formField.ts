@@ -59,7 +59,7 @@ export class BehaviorFormField extends BeanBehaviorBase<
     }
   }
 
-  public get field() {
+  public get field(): TypeFormField {
     return this._field;
   }
 
