@@ -30,7 +30,7 @@ export class BehaviorFormField extends BeanBehaviorBase<
     // provide
     this.bean._setBean('$$behaviorFormField', this);
     // field
-    this._field = useField({ ...options, form: this.$$behaviorForm.form });
+    this._field = useField({ ...options, form: this.$$behaviorForm.form }) as any;
     // behaviors
     const behaviors = this._prepareBehaviors(options);
     if (behaviors) {

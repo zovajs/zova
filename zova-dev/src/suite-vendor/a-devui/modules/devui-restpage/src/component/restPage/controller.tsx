@@ -30,7 +30,7 @@ export class ControllerRestPage extends BeanControllerBase {
     this.formVisible = true;
   }
 
-  onSubmit(data: TypeFormOnSubmitData){
-    console.log('--submit--:',data);
+  onSubmit(data: TypeFormOnSubmitData) {
+    console.log('--submit--:', data);
   }
 }
