@@ -135,6 +135,18 @@ export class BeanBase extends BeanBaseSimple {
     });
   }
 
+  protected $onControllerCreated(fn: any) {
+    return this.ctx.util.instanceScope(() => {
+      return this.ctx.meta.hooks.onCreated(fn);
+    });
+  }
+
+  protected $controllerMounted(fn: any) {
+    return this.ctx.util.instanceScope(() => {
+      return this.ctx.meta.hooks.onMounted(fn);
+    });
+  }
+
   protected $zovaComponent(module: string, name?: string) {
     const componentName = module.includes(':') ? module : `${module}:${name}`;
     if (!this[SymbolZovaComponents][componentName]) {
