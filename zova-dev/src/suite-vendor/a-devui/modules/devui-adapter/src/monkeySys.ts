@@ -1,4 +1,6 @@
 import type { IMonkeySysInitialize } from 'zova';
+import type { IRestConfig } from 'zova-module-a-rest';
+import defu from 'defu';
 import { BeanSimple } from 'zova';
 
 export class MonkeySys extends BeanSimple implements IMonkeySysInitialize {
@@ -10,14 +12,12 @@ export class MonkeySys extends BeanSimple implements IMonkeySysInitialize {
     }
     // rest
     const scopeRestConfig = this.sys.util.getModuleConfigSafe('a-rest');
-    if (!scopeRestConfig.defaultRestPage) {
-      scopeRestConfig.defaultRestPage = 'devui-restpage:restPage';
-    }
-    if (!scopeRestConfig.defaultRestTable) {
-      scopeRestConfig.defaultRestTable = 'devui-resttable:restTable';
-    }
-    if (!scopeRestConfig.defaultRestForm) {
-      scopeRestConfig.defaultRestForm = 'devui-restform:restForm';
-    }
+    defu(scopeRestConfig.rest, {
+      components: {
+        page: 'devui-restpage:restPage',
+        table: 'devui-resttable:restTable',
+        form: 'devui-restform:restForm',
+      },
+    } satisfies IRestConfig);
   }
 }
