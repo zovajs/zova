@@ -1,3 +1,4 @@
+import { classes } from 'typestyle';
 import { BeanRenderBase } from 'zova';
 import { Render } from 'zova-module-a-bean';
 
@@ -7,7 +8,7 @@ export class RenderWrapperForm extends BeanRenderBase {
     // form
     const ComponentRestForm = this.$zovaComponent(this.$$restResource.componentRestForm);
     return (
-      <dialog id={this.formDomId} class="modal" open={this.modelFormVisible} onClose={() => {this.modelFormVisible = false; }}>
+      <dialog id={this.formDomId} class="modal" open={this.modelFormVisible} onClose={() => { this.modelFormVisible = false; }}>
         <div class="modal-box">
           <h3 class="font-bold text-lg">Hello!</h3>
           <p class="py-4">
@@ -23,8 +24,9 @@ export class RenderWrapperForm extends BeanRenderBase {
             )}
           </p>
           <div class="modal-action">
+            {this.loading && <span class="loading loading-spinner text-primary"></span>}
             <button
-              class="btn btn-primary"
+              class={classes('btn btn-primary', this.loading && 'btn-disabled')}
               onClick={() => {
                 return this.controllerRestForm.submit();
               }}

@@ -29,6 +29,8 @@ export class ControllerWrapperForm extends BeanControllerBase {
 
   controllerRestForm: ControllerRestForm;
 
+  loading: boolean;
+
   @Use({ injectionScope: 'host' })
   $$restResource: ControllerPageResource;
 

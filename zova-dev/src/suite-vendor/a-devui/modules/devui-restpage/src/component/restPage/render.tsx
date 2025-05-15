@@ -13,7 +13,7 @@ export class RenderRestPage extends BeanRenderBase {
             formMeta={this.formMeta}
             formBehaviors={this.formBehaviors}
             onSubmit={data => {
-              this.onSubmit(data);
+              return this.onSubmit(data);
             }}
           ></ZWrapperForm>
         </ClientOnly>
