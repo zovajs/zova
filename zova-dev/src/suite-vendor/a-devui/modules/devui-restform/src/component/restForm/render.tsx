@@ -12,14 +12,15 @@ export class RenderRestForm extends BeanRenderBase {
     const properties = schema.properties!;
     for (const key in properties) {
       const property = properties[key];
+      const behaviorFormFieldLayout = (this.$props.formBehaviors?.formFieldLayout || 'devui-restform:formFieldLayout') as 'devui-restform:formFieldLayout';
       const behaviors: IBehaviorItem = {
-        'devui-restform:formFieldLayout': { label: property.description || key },
         'a-form:formField': {
           name: key,
           validators: {
             onChange: z.string().min(3),
           },
         },
+        [behaviorFormFieldLayout]: { label: property.description || key },
       };
       children.push(
         <input behaviors={behaviors}></input>,

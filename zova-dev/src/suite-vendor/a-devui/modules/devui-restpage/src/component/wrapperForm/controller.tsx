@@ -2,11 +2,12 @@ import { SchemaObject } from 'openapi3-ts/oas31';
 import { useId } from 'vue';
 import { BeanControllerBase, Model, Use } from 'zova';
 import { Controller } from 'zova-module-a-bean';
-import { IFormMeta } from 'zova-module-a-form';
+import { IFormBehaviors, IFormMeta } from 'zova-module-a-form';
 import { ControllerPageResource } from 'zova-module-a-rest';
 
 export interface ControllerWrapperFormProps {
   formMeta: IFormMeta;
+  formBehaviors?: IFormBehaviors;
 }
 
 export interface ControllerWrapperFormModels {

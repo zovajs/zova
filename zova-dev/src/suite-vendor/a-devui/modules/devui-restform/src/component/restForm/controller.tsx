@@ -1,11 +1,12 @@
 import { SchemaObject } from 'openapi3-ts/oas31';
 import { Controller } from 'zova-module-a-bean';
-import { BeanControllerFormBase, IFormMeta, TypeForm } from 'zova-module-a-form';
+import { BeanControllerFormBase, IFormBehaviors, IFormMeta, TypeForm } from 'zova-module-a-form';
 
 export interface ControllerRestFormProps<T extends {} = {}> {
   data?: T;
   schema?: SchemaObject;
   formMeta?: IFormMeta;
+  formBehaviors?: IFormBehaviors;
 }
 
 @Controller()
