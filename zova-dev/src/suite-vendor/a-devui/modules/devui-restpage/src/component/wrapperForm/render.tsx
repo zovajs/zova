@@ -8,7 +8,6 @@ export class RenderWrapperForm extends BeanRenderBase {
     const ComponentRestForm = this.$zovaComponent(this.$$restResource.defaultRestForm);
     return (
       <div>
-        <input type="checkbox" value={this.modelFormVisible} class="modal-toggle" />
         <dialog id={this.formDomId} class="modal" open={this.modelFormVisible} onClose={() => { this.modelFormVisible = false; }}>
           <div class="modal-box">
             <h3 class="font-bold text-lg">Hello!</h3>
