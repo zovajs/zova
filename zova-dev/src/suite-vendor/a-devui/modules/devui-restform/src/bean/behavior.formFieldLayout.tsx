@@ -1,6 +1,7 @@
 import type { BehaviorFormField, TypeFormField } from 'zova-module-a-form';
 import { classes } from 'typestyle';
 import { VNode } from 'vue';
+import { z } from 'zod';
 import { Use } from 'zova';
 import { BeanBehaviorBase, Behavior, IDecoratorBehaviorOptions, NextBehavior } from 'zova-module-a-behavior';
 
@@ -25,9 +26,10 @@ export class BehaviorFormFieldLayout extends BeanBehaviorBase<
   $$behaviorFormField: BehaviorFormField;
 
   protected render(props: IBehaviorPropsInputFormFieldLayout, next: NextBehavior<IBehaviorPropsOutputFormFieldLayout>): VNode {
-    // const field = this.$$behaviorFormField.field;
+    const field = this.$$behaviorFormField.field;
     props = this._patchProps(props);
     const vnode = next(props);
+    const error = field.state.meta.errors[0] as z.ZodError | undefined;
     return (
       <label class="form-control w-full max-w-xs">
         {!!this.$options.label && (
@@ -36,7 +38,11 @@ export class BehaviorFormFieldLayout extends BeanBehaviorBase<
           </div>
         )}
         {vnode}
-
+        {!field.state.meta.isValid && (
+          <div class="label">
+            <span class="label-text-alt">{error?.message}</span>
+          </div>
+        )}
       </label>
     );
   }
