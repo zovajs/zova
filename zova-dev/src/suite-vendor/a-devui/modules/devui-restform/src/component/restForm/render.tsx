@@ -1,6 +1,5 @@
 import { ReferenceObject, SchemaObject } from 'openapi3-ts/oas31';
 import { VNode } from 'vue';
-import { z } from 'zod';
 import { BeanRenderBase } from 'zova';
 import { Render } from 'zova-module-a-bean';
 import { IBehaviorItem } from 'zova-module-a-behavior';
@@ -23,10 +22,11 @@ export class RenderRestForm extends BeanRenderBase {
   }
 
   private _prepareBehaviorFormField(behaviors: IBehaviorItem, key: string, _property: SchemaObject | ReferenceObject) {
+    const zodSchemaField = this.zodSchema?.shape[key];
     behaviors['a-form:formField'] = {
       name: key,
       validators: {
-        onChange: z.string().min(3),
+        onChange: zodSchemaField,
       },
     };
   }
