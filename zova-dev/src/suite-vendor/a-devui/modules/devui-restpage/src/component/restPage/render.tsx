@@ -12,6 +12,9 @@ export class RenderRestPage extends BeanRenderBase {
             vModel:formVisible={this.formVisible}
             formMeta={this.formMeta}
             formBehaviors={this.formBehaviors}
+            onSubmit={data => {
+              this.onSubmit(data);
+            }}
           ></ZWrapperForm>
         </ClientOnly>
         <ZWrapperTable onOperationCreate={() => this.onOperationCreate()}></ZWrapperTable>

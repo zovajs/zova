@@ -50,7 +50,10 @@ export class RenderRestForm extends BeanRenderBase {
         zodSchema: this.zodSchema,
       }}
       >
-        <>{this._renderSchema(this.$props.schema)}</>
+        <>
+          {this._renderSchema(this.$props.schema)}
+          <button type="submit" class="hidden"></button>
+        </>
       </form>
     );
   }

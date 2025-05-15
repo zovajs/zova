@@ -1,4 +1,4 @@
-import type { DeepKeys, DeepValue, FieldAsyncValidateOrFn, FieldOptions, FieldValidateOrFn, FormAsyncValidateOrFn, FormOptions, FormValidateOrFn, useField, useForm } from '@tanstack/vue-form';
+import type { DeepKeys, DeepValue, FieldAsyncValidateOrFn, FieldOptions, FieldValidateOrFn, FormApi, FormAsyncValidateOrFn, FormOptions, FormValidateOrFn, useField, useForm } from '@tanstack/vue-form';
 import type { UnwrapNestedRefs } from 'vue';
 
 export type TypeForm<
@@ -121,3 +121,56 @@ export type TypeBehaviorFormFieldOptions<
    TOnSubmit,
    TOnSubmitAsync
  >;
+
+export interface TypeFormOnSubmitData<
+  TFormData = unknown,
+  TFormOnMount extends undefined | FormValidateOrFn<TFormData> = undefined | FormValidateOrFn<TFormData>,
+  TFormOnChange extends undefined | FormValidateOrFn<TFormData> = undefined | FormValidateOrFn<TFormData>,
+  TFormOnChangeAsync extends undefined | FormAsyncValidateOrFn<TFormData> = undefined | FormAsyncValidateOrFn<TFormData>,
+  TFormOnBlur extends undefined | FormValidateOrFn<TFormData> = undefined | FormValidateOrFn<TFormData>,
+  TFormOnBlurAsync extends undefined | FormAsyncValidateOrFn<TFormData> = undefined | FormAsyncValidateOrFn<TFormData>,
+  TFormOnSubmit extends undefined | FormValidateOrFn<TFormData> = undefined | FormValidateOrFn<TFormData>,
+  TFormOnSubmitAsync extends undefined | FormAsyncValidateOrFn<TFormData> = undefined | FormAsyncValidateOrFn<TFormData>,
+  TFormOnServer extends undefined | FormAsyncValidateOrFn<TFormData> = undefined | FormAsyncValidateOrFn<TFormData>,
+  TSubmitMeta = never,
+> {
+  value: TFormData;
+  formApi: FormApi<
+    TFormData,
+    TFormOnMount,
+    TFormOnChange,
+    TFormOnChangeAsync,
+    TFormOnBlur,
+    TFormOnBlurAsync,
+    TFormOnSubmit,
+    TFormOnSubmitAsync,
+    TFormOnServer,
+    TSubmitMeta
+  >;
+  meta: TSubmitMeta;
+}
+
+export type TypeFormOnSubmit<
+  TFormData = unknown,
+  TFormOnMount extends undefined | FormValidateOrFn<TFormData> = undefined | FormValidateOrFn<TFormData>,
+  TFormOnChange extends undefined | FormValidateOrFn<TFormData> = undefined | FormValidateOrFn<TFormData>,
+  TFormOnChangeAsync extends undefined | FormAsyncValidateOrFn<TFormData> = undefined | FormAsyncValidateOrFn<TFormData>,
+  TFormOnBlur extends undefined | FormValidateOrFn<TFormData> = undefined | FormValidateOrFn<TFormData>,
+  TFormOnBlurAsync extends undefined | FormAsyncValidateOrFn<TFormData> = undefined | FormAsyncValidateOrFn<TFormData>,
+  TFormOnSubmit extends undefined | FormValidateOrFn<TFormData> = undefined | FormValidateOrFn<TFormData>,
+  TFormOnSubmitAsync extends undefined | FormAsyncValidateOrFn<TFormData> = undefined | FormAsyncValidateOrFn<TFormData>,
+  TFormOnServer extends undefined | FormAsyncValidateOrFn<TFormData> = undefined | FormAsyncValidateOrFn<TFormData>,
+  TSubmitMeta = never,
+>
+ = (props: TypeFormOnSubmitData<
+   TFormData,
+   TFormOnMount,
+   TFormOnChange,
+   TFormOnChangeAsync,
+   TFormOnBlur,
+   TFormOnBlurAsync,
+   TFormOnSubmit,
+   TFormOnSubmitAsync,
+   TFormOnServer,
+   TSubmitMeta
+ >) => any | Promise<any>;
