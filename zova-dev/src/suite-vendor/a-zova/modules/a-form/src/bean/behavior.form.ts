@@ -1,5 +1,7 @@
+import { SchemaObject } from 'openapi3-ts/oas31';
 import { createCommentVNode, VNode } from 'vue';
 import { BeanBehaviorBase, Behavior, IDecoratorBehaviorOptions, NextBehavior } from 'zova-module-a-behavior';
+import { IFormBehaviors } from '../types/behavior.js';
 import { TypeForm } from '../types/form.js';
 import { IFormMeta } from '../types/formMeta.js';
 
@@ -12,6 +14,8 @@ export interface IBehaviorPropsOutputForm {}
 export interface IBehaviorOptionsForm<TFormData = unknown> extends IDecoratorBehaviorOptions {
   form?: TypeForm<TFormData>;
   formMeta?: IFormMeta;
+  formBehaviors?: IFormBehaviors;
+  schema?: SchemaObject;
   onSubmit?: ((payload: Event) => void) | boolean;
 }
 
@@ -32,6 +36,14 @@ export class BehaviorForm extends BeanBehaviorBase<
 
   public get formMeta() {
     return this.$options.formMeta;
+  }
+
+  public get formBehaviors() {
+    return this.$options.formBehaviors;
+  }
+
+  public get schema() {
+    return this.$options.schema;
   }
 
   protected render(props: IBehaviorPropsInputForm, next: NextBehavior<IBehaviorPropsOutputForm>): VNode {

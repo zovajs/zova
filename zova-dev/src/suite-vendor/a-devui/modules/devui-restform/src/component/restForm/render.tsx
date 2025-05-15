@@ -12,7 +12,7 @@ export class RenderRestForm extends BeanRenderBase {
     const properties = schema.properties!;
     for (const key in properties) {
       const property = properties[key];
-      const behaviorFormFieldLayout = (this.$props.formBehaviors?.formFieldLayout || 'devui-restform:formFieldLayout') as 'devui-restform:formFieldLayout';
+      const behaviorFormFieldLayout = this.formBehaviors.formFieldLayout as 'devui-restform:formFieldLayout';
       const behaviors: IBehaviorItem = {
         'a-form:formField': {
           name: key,
@@ -32,7 +32,13 @@ export class RenderRestForm extends BeanRenderBase {
   public render() {
     if (!this.$props.schema) return;
     return (
-      <form bs-form={{ form: this.form }}>
+      <form bs-form={{
+        form: this.form,
+        formMeta: this.$props.formMeta,
+        formBehaviors: this.formBehaviors,
+        schema: this.$props.schema,
+      }}
+      >
         <>{this._renderSchema(this.$props.schema)}</>
       </form>
     );

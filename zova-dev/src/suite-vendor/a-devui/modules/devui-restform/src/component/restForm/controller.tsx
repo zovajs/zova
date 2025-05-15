@@ -14,6 +14,7 @@ export class ControllerRestForm extends BeanControllerFormBase {
   static $propsDefault = {};
 
   form: TypeForm;
+  formBehaviors: IFormBehaviors;
 
   protected async __init__() {
     this.form = this.$useForm({
@@ -21,6 +22,11 @@ export class ControllerRestForm extends BeanControllerFormBase {
       onSubmit: async ({ value }) => {
         console.log('submit: ', JSON.stringify(value));
       },
+    });
+    this.formBehaviors = this.$useComputed(() => {
+      return Object.assign({
+        formFieldLayout: 'devui-restform:formFieldLayout',
+      }, this.$props.formBehaviors);
     });
   }
 }
