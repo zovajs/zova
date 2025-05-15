@@ -1,7 +1,7 @@
 import type { BeanScopeUtil } from 'zova';
-/** render: end */
+/** locale: end */
 /** scope: begin */
-import { BeanScopeBase } from 'zova';
+import { BeanScopeBase, TypeLocaleBase, TypeModuleLocales } from 'zova';
 import { Scope } from 'zova-module-a-bean';
 /** controller: end */
 /** controller: begin */
@@ -14,6 +14,10 @@ import { RenderWrapperForm } from '../component/wrapperForm/render.jsx';
 import { ControllerWrapperTable } from '../component/wrapperTable/controller.jsx';
 import { RenderWrapperTable } from '../component/wrapperTable/render.jsx';
 
+/** render: end */
+/** locale: begin */
+import locale_en_us from '../config/locale/en-us.js';
+import locale_zh_cn from '../config/locale/zh-cn.js';
 import { ZRestPage } from './component/restPage.js';
 import { ZWrapperForm } from './component/wrapperForm.js';
 import { ZWrapperTable } from './component/wrapperTable.js';
@@ -106,12 +110,17 @@ declare module 'zova' {
     'devui-restpage.render.wrapperTable': RenderWrapperTable;
   }
 }
+export const locales = {
+  'en-us': locale_en_us,
+  'zh-cn': locale_zh_cn,
+};
 
 @Scope()
 export class ScopeModuleDevuiRestpage extends BeanScopeBase {}
 
 export interface ScopeModuleDevuiRestpage {
   util: BeanScopeUtil;
+  locale: TypeModuleLocales<(typeof locales)[TypeLocaleBase]>;
 }
 
 declare module 'zova' {
@@ -119,6 +128,12 @@ declare module 'zova' {
     'devui-restpage': ScopeModuleDevuiRestpage;
   }
 
+  export interface IBeanScopeLocale {
+    'devui-restpage': (typeof locales)[TypeLocaleBase];
+  }
 }
 
+export function locale<K extends keyof (typeof locales)[TypeLocaleBase]>(key: K): `devui-restpage::${K}` {
+  return `devui-restpage::${key}`;
+}
 /** scope: end */

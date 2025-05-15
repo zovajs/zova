@@ -22,7 +22,7 @@ export class RenderWrapperForm extends BeanRenderBase {
             </p>
             <div class="modal-action">
               <form method="dialog">
-                <button class="btn">Close</button>
+                <button class="btn">{this.scope.locale.Close()}</button>
               </form>
             </div>
           </div>
