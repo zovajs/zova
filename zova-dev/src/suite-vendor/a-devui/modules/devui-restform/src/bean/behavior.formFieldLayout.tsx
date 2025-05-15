@@ -21,13 +21,19 @@ export class BehaviorFormFieldLayout extends BeanBehaviorBase<
   $$behaviorFormField: BehaviorFormField;
 
   protected render(_props: IBehaviorPropsInputFormFieldLayout, next: NextBehavior<IBehaviorPropsOutputFormFieldLayout>): VNode {
-    const field = this.$$behaviorFormField.field;
+    // const field = this.$$behaviorFormField.field;
     const vnode = next();
     return (
-      <>
-        <label htmlFor={field.api.name}>{this.$options.label}</label>
+      <label class="form-control w-full max-w-xs">
+        <div class="label">
+          <span class="label-text">{this.$options.label}</span>
+        </div>
         {vnode}
-      </>
+
+      </label>
     );
   }
 }
+
+// <label htmlFor={field.api.name}>{this.$options.label}</label>
+//        {vnode}
