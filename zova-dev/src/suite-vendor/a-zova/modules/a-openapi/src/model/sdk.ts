@@ -1,9 +1,8 @@
-import { evaluateSimple } from '@cabloy/utils';
-import { jsonSchemaToZod } from 'json-schema-to-zod';
 import { z } from 'zod';
 import { Use } from 'zova';
 import { BeanModelBase, Model } from 'zova-module-a-model';
 import { SysSdk } from '../bean/sys.sdk.js';
+import { schemaToZodSchema } from '../lib/schema.js';
 import { SymbolOpenapiSchemaName, TypeRequestMethod } from '../types/sdk.js';
 
 const __schemaRefPrefix = '#/components/schemas/';
@@ -62,8 +61,7 @@ export class ModelSdk extends BeanModelBase {
       queryFn: async () => {
         const querySchema = this.getSchema(schemaName);
         if (!querySchema.data) return null;
-        const code = jsonSchemaToZod(querySchema.data);
-        const zodSchema = evaluateSimple(code, { z });
+        const zodSchema = schemaToZodSchema(querySchema.data);
         this.$invalidateQueries({ queryKey: ['schemaDefaultValue', schemaName] });
         return zodSchema;
       },
@@ -82,13 +80,14 @@ export class ModelSdk extends BeanModelBase {
         const queryZodSchema = this.getZodSchema(schemaName);
         if (!queryZodSchema.data) return null;
         const mask = {};
-        Object.keys(queryZodSchema.data.shape).forEach(key => {
-          const fieldSchema = queryZodSchema.data.shape[key];
+        const zodSchema = queryZodSchema.data as unknown as z.AnyZodObject;
+        Object.keys(zodSchema.shape).forEach(key => {
+          const fieldSchema = zodSchema.shape[key];
           if (fieldSchema.constructor.name === 'ZodDefault') {
             mask[key] = true;
           }
         });
-        return queryZodSchema.data.pick(mask).parse({});
+        return zodSchema.pick(mask).parse({});
       },
       staleTime: Infinity,
       meta: {
