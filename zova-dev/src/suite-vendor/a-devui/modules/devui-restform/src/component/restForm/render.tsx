@@ -3,6 +3,7 @@ import { VNode } from 'vue';
 import { z } from 'zod';
 import { BeanRenderBase } from 'zova';
 import { Render } from 'zova-module-a-bean';
+import { IBehaviorItem } from 'zova-module-a-behavior';
 
 @Render()
 export class RenderRestForm extends BeanRenderBase {
@@ -11,16 +12,17 @@ export class RenderRestForm extends BeanRenderBase {
     const properties = schema.properties!;
     for (const key in properties) {
       const property = properties[key];
+      const behaviors: IBehaviorItem = {
+        'devui-restform:formFieldLayout': { label: property.description || key },
+        'a-form:formField': {
+          name: key,
+          validators: {
+            onChange: z.string().min(3),
+          },
+        },
+      };
       children.push(
-        <input
-          bs-devui-restform-formFieldLayout={{ label: property.description || key }}
-          bs-formField={{
-            name: key,
-            validators: {
-              onChange: z.string().min(3),
-            },
-          }}
-        ></input>,
+        <input behaviors={behaviors}></input>,
       );
     }
     return children;
