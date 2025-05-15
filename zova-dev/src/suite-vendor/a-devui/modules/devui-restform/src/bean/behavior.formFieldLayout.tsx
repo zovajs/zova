@@ -40,7 +40,7 @@ export class BehaviorFormFieldLayout extends BeanBehaviorBase<
         {vnode}
         {!field.state.meta.isValid && (
           <div class="label">
-            <span class="label-text-alt">{error?.message}</span>
+            <span class="label-text-alt text-error">{error?.message}</span>
           </div>
         )}
       </label>
