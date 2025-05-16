@@ -16,8 +16,9 @@ export class RenderRestForm extends BeanRenderBase {
       const behaviors: IBehaviorItem = {};
       this._prepareBehaviorFormField(behaviors, key, property);
       this._prepareBehaviorFormFieldLayout(behaviors, key, property);
+      const Component = 'input';
       children.push(
-        <input behaviors={behaviors}></input>,
+        <Component behaviors={behaviors}></Component>,
       );
     }
     return children;
