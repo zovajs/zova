@@ -19,6 +19,7 @@ export interface IBehaviorOptionsForm<TFormData = unknown> extends IDecoratorBeh
   formMeta?: IFormMeta;
   formBehaviors?: IFormBehaviors;
   schema?: SchemaObject;
+  auto?: boolean;
   onSubmit?: ((payload: Event) => void) | boolean;
 }
 
@@ -53,6 +54,10 @@ export class BehaviorForm<TFormData = unknown> extends BeanBehaviorBase<
 
   public get schema() {
     return this.$options.schema;
+  }
+
+  public get auto() {
+    return this.schema && this.$options.auto !== false;
   }
 
   public getFieldSchema<K extends DeepKeys<TFormData>>(name: K) {
