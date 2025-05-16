@@ -3,6 +3,7 @@ import { VNode } from 'vue';
 import { BeanRenderBase } from 'zova';
 import { Render } from 'zova-module-a-bean';
 import { IBehaviorItem } from 'zova-module-a-behavior';
+import { IFormFieldLayoutOptions } from 'zova-module-a-form';
 
 @Render()
 export class RenderRestForm extends BeanRenderBase {
@@ -33,11 +34,12 @@ export class RenderRestForm extends BeanRenderBase {
   }
 
   private _prepareBehaviorFormFieldLayout(behaviors: IBehaviorItem, key: string, property: SchemaObject | ReferenceObject) {
-    const behaviorFormFieldLayout = this.formBehaviors.formFieldLayout as 'devui-restform:formFieldLayout';
+    const behaviorFormFieldLayout = this.formBehaviors.formFieldLayout;
+    if (!behaviorFormFieldLayout) return;
     behaviors[behaviorFormFieldLayout] = {
       label: property.description || key,
       bordered: true,
-    };
+    } satisfies IFormFieldLayoutOptions;
   }
 
   public render() {
