@@ -6,7 +6,8 @@ import { IBehaviorItem } from 'zova-module-a-behavior';
 
 @Render()
 export class RenderRestForm extends BeanRenderBase {
-  private _renderSchema(schema: SchemaObject) {
+  private _renderSchema(schema?: SchemaObject) {
+    if (!schema) return;
     const children: VNode[] = [];
     const properties = schema.properties!;
     for (const key in properties) {
@@ -40,7 +41,6 @@ export class RenderRestForm extends BeanRenderBase {
   }
 
   public render() {
-    if (!this.$props.schema) return;
     const children = this.$slots.default
       ? this.$slots.default()
       : (
