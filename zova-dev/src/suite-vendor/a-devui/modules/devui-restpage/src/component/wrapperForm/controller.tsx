@@ -10,7 +10,7 @@ import { ControllerRestForm } from 'zova-module-devui-restform';
 export interface ControllerWrapperFormProps {
   formMeta: IFormMeta;
   formBehaviors?: IFormBehaviors;
-  getMutationSubmit?: () => DataMutation;
+  getMutationSubmit?: () => DataMutation | undefined;
 }
 
 export interface ControllerWrapperFormModels {
@@ -58,8 +58,8 @@ export class ControllerWrapperForm extends BeanControllerBase {
   }
 
   async onSubmit(data: TypeFormOnSubmitData) {
-    const mutationSubmit = this.$props.getMutationSubmit!();
-    mutationSubmit.mutate(data.value as any, { onSuccess: () => {
+    const mutationSubmit = this.$props.getMutationSubmit?.();
+    mutationSubmit?.mutate(data.value as any, { onSuccess: () => {
       this.modelFormVisible = false;
     } });
   }
