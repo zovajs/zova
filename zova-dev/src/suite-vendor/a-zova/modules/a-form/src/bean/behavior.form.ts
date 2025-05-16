@@ -3,6 +3,7 @@ import { SchemaObject } from 'openapi3-ts/oas31';
 import { createCommentVNode, VNode } from 'vue';
 import { z } from 'zod';
 import { BeanBehaviorBase, Behavior, IDecoratorBehaviorOptions, NextBehavior } from 'zova-module-a-behavior';
+import { schemaToZodSchema } from 'zova-module-a-openapi';
 import { IFormBehaviors } from '../types/behavior.js';
 import { TypeForm } from '../types/form.js';
 import { IFormMeta } from '../types/formMeta.js';
@@ -18,7 +19,6 @@ export interface IBehaviorOptionsForm<TFormData = unknown> extends IDecoratorBeh
   formMeta?: IFormMeta;
   formBehaviors?: IFormBehaviors;
   schema?: SchemaObject;
-  zodSchema?: z.AnyZodObject;
   onSubmit?: ((payload: Event) => void) | boolean;
 }
 
@@ -28,9 +28,15 @@ export class BehaviorForm<TFormData = unknown> extends BeanBehaviorBase<
   IBehaviorPropsInputForm,
   IBehaviorPropsOutputForm
 > {
+  zodSchema: z.AnyZodObject | undefined;
+
   protected async __init__(options: IBehaviorOptionsForm) {
     super.__init__(options);
     this.bean._setBean('$$behaviorForm', this);
+    this.zodSchema = this.$useComputed(() => {
+      if (!this.schema) return;
+      return schemaToZodSchema<z.AnyZodObject>(this.schema);
+    });
   }
 
   public get form() {
@@ -47,10 +53,6 @@ export class BehaviorForm<TFormData = unknown> extends BeanBehaviorBase<
 
   public get schema() {
     return this.$options.schema;
-  }
-
-  public get zodSchema() {
-    return this.$options.zodSchema;
   }
 
   public getFieldSchema<K extends DeepKeys<TFormData>>(name: K) {
