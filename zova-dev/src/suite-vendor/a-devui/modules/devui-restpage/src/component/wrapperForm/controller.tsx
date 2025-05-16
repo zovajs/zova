@@ -32,6 +32,9 @@ export class ControllerWrapperForm extends BeanControllerBase {
 
   loading: boolean;
 
+  dialogErrorOpened: boolean;
+  dialogErrorMessage: string;
+
   @Use({ injectionScope: 'host' })
   $$restResource: ControllerPageResource;
 
@@ -62,11 +65,14 @@ export class ControllerWrapperForm extends BeanControllerBase {
   async onSubmit(data: TypeFormOnSubmitData) {
     try {
       this.loading = true;
+      console.log(data.formApi.state);
+      throw new Error('ssss');
       await sleep(1000);
       await this.$props.onSubmit?.(data);
       this.modelFormVisible = false;
-    } catch (err) {
-      console.log(err);
+    } catch (err: any) {
+      this.dialogErrorOpened = true;
+      this.dialogErrorMessage = err.message;
     } finally {
       this.loading = false;
     }

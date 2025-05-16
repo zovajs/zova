@@ -8,37 +8,76 @@ export class RenderWrapperForm extends BeanRenderBase {
     // form
     const ComponentRestForm = this.$zovaComponent(this.$$restResource.componentRestForm);
     return (
-      <dialog id={this.formDomId} class="modal" open={this.modelFormVisible} onClose={() => { this.modelFormVisible = false; }}>
-        <div class="modal-box">
-          <h3 class="font-bold text-lg">Hello!</h3>
-          <p class="py-4">
-            {this.modelFormVisible && !!this.formData && (
-              <ComponentRestForm
-                controllerRef={ref => { this.controllerRestForm = ref; }}
-                data={this.formData}
-                schema={this.schema}
-                formMeta={this.$props.formMeta}
-                formBehaviors={this.$props.formBehaviors}
-                onSubmit={data => this.onSubmit(data)}
-              ></ComponentRestForm>
-            )}
-          </p>
-          <div class="modal-action">
-            {this.loading && <span class="loading loading-spinner text-primary"></span>}
-            <button
-              class={classes('btn btn-primary', this.loading && 'btn-disabled')}
-              onClick={() => {
-                return this.controllerRestForm.submit();
-              }}
-            >
-              {this.scope.locale.Submit()}
-            </button>
-            <form method="dialog">
-              <button class="btn">{this.scope.locale.Close()}</button>
-            </form>
+      <div>
+        <dialog id={this.formDomId} class="modal" open={this.modelFormVisible} onClose={() => { this.modelFormVisible = false; }}>
+          <div class="modal-box">
+            <h3 class="font-bold text-lg">Hello!</h3>
+            <p class="py-4">
+              {this.modelFormVisible && !!this.formData && (
+                <ComponentRestForm
+                  controllerRef={ref => { this.controllerRestForm = ref; }}
+                  data={this.formData}
+                  schema={this.schema}
+                  formMeta={this.$props.formMeta}
+                  formBehaviors={this.$props.formBehaviors}
+                  onSubmit={data => this.onSubmit(data)}
+                ></ComponentRestForm>
+              )}
+            </p>
+            <div class="modal-action">
+              {this.loading && <span class="loading loading-spinner text-primary"></span>}
+              <button
+                class={classes('btn btn-primary', this.loading && 'btn-disabled')}
+                onClick={() => {
+                  return this.controllerRestForm.submit();
+                }}
+              >
+                {this.scope.locale.Submit()}
+              </button>
+              <button
+                class="btn"
+                onClick={() => {
+                  this.modelFormVisible = false;
+                }}
+              >
+                {this.scope.locale.Close()}
+              </button>
+            </div>
           </div>
-        </div>
-      </dialog>
+        </dialog>
+        <dialog class="modal" open={this.dialogErrorOpened} onClose={() => { this.dialogErrorOpened = false; }}>
+          <div class="modal-box">
+            <p class="py-4">
+              <div role="alert" class="alert alert-error">
+                <svg
+                  xmlns="http://www.w3.org/2000/svg"
+                  class="h-6 w-6 shrink-0 stroke-current"
+                  fill="none"
+                  viewBox="0 0 24 24"
+                >
+                  <path
+                    strokeLinecap="round"
+                    strokeLinejoin="round"
+                    strokeWidth="2"
+                    d="M10 14l2-2m0 0l2-2m-2 2l-2-2m2 2l2 2m7-2a9 9 0 11-18 0 9 9 0 0118 0z"
+                  />
+                </svg>
+                <span>{this.dialogErrorMessage}</span>
+                <div>
+                  <button
+                    class="btn btn-sm"
+                    onClick={() => {
+                      this.dialogErrorOpened = false;
+                    }}
+                  >
+                    {this.scope.locale.Close()}
+                  </button>
+                </div>
+              </div>
+            </p>
+          </div>
+        </dialog>
+      </div>
     );
   }
 }
