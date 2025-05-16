@@ -6,7 +6,7 @@ import { IBehaviorItem } from 'zova-module-a-behavior';
 import { IFormFieldLayoutOptions } from 'zova-module-a-form';
 
 @Render()
-export class RenderRestForm extends BeanRenderBase {
+export class RenderForm extends BeanRenderBase {
   private _renderSchema(schema?: SchemaObject) {
     if (!schema) return;
     const children: VNode[] = [];

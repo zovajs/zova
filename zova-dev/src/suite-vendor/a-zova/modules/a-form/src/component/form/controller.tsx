@@ -4,7 +4,7 @@ import { Controller } from 'zova-module-a-bean';
 import { BeanControllerFormBase, IFormBehaviors, IFormFieldLayoutOptions, IFormFieldOptions, IFormMeta, TypeForm, TypeFormOnSubmit } from 'zova-module-a-form';
 import { schemaToZodSchema } from 'zova-module-a-openapi';
 
-export interface ControllerRestFormProps<T extends {} = {}> {
+export interface ControllerFormProps<T extends {} = {}> {
   data?: T;
   schema?: SchemaObject;
   formMeta?: IFormMeta;
@@ -15,7 +15,7 @@ export interface ControllerRestFormProps<T extends {} = {}> {
 }
 
 @Controller()
-export class ControllerRestForm extends BeanControllerFormBase {
+export class ControllerForm extends BeanControllerFormBase {
   static $propsDefault = {};
 
   form: TypeForm;

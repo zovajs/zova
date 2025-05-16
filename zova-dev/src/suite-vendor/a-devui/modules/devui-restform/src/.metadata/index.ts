@@ -3,25 +3,11 @@ import type { BeanScopeUtil } from 'zova';
 /** scope: begin */
 import { BeanScopeBase } from 'zova';
 import { Scope } from 'zova-module-a-bean';
+/** behavior: begin */
 import { IBehaviorOptionsFormFieldLayout } from '../bean/behavior.formFieldLayout.jsx';
 /** behavior: end */
 /** behavior: begin */
 import { BehaviorFormFieldLayout } from '../bean/behavior.formFieldLayout.jsx';
-
-/** controller: end */
-/** controller: begin */
-import { ControllerRestForm } from '../component/restForm/controller.jsx';
-/** render: end */
-/** render: begin */
-import { RenderRestForm } from '../component/restForm/render.jsx';
-import { ZRestForm } from './component/restForm.js';
-/** render: end */
-/** behavior: begin */
-import 'zova';
-import 'zova';
-import 'zova';
-import 'zova';
-import 'zova';
 import 'zova';
 import 'zova';
 /** behavior: end */
@@ -32,56 +18,6 @@ import 'vue/jsx-runtime';
 import 'zova';
 
 export * from '../bean/behavior.formFieldLayout.jsx';
-declare module 'zova' {
-
-}
-declare module 'zova-module-devui-restform' {
-
-  export interface ControllerRestForm {
-    /** @internal */
-    get scope(): ScopeModuleDevuiRestform;
-  }
-}
-declare module 'zova' {
-  export interface IBeanRecordLocal {
-    'devui-restform.controller.restForm': ControllerRestForm;
-  }
-}
-/** controller: end */
-
-/** controller: begin */
-export * from '../component/restForm/controller.jsx';
-export const components = {
-  restForm: ZRestForm,
-};
-declare module 'zova' {
-  export interface IComponentRecord {
-    'devui-restform:restForm': ControllerRestForm;
-  }
-  export interface IZovaComponentRecord {
-    'devui-restform:restForm': typeof ZRestForm;
-  }
-}
-/** components: end */
-/** render: begin */
-export * from '../component/restForm/render.jsx';
-declare module 'zova' {
-
-}
-declare module 'zova-module-devui-restform' {
-
-  export interface RenderRestForm {
-    /** @internal */
-    get scope(): ScopeModuleDevuiRestform;
-  }
-}
-declare module 'zova' {
-  export interface IBeanRecordLocal {
-    'devui-restform.render.restForm': RenderRestForm;
-  }
-}
-/** components: begin */
-export * from './component/restForm.js';
 declare module 'zova-module-a-behavior' {
 
   export interface IBehaviorRecord {

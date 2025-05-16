@@ -1,12 +1,11 @@
 import { classes } from 'typestyle';
 import { BeanRenderBase } from 'zova';
 import { Render } from 'zova-module-a-bean';
+import { ZForm } from 'zova-module-a-form';
 
 @Render()
 export class RenderWrapperForm extends BeanRenderBase {
   public render() {
-    // form
-    const ComponentRestForm = this.$zovaComponent(this.$$restResource.componentRestForm);
     // mutation
     const mutationSubmit = this.$props.getMutationSubmit?.();
     return (
@@ -16,14 +15,14 @@ export class RenderWrapperForm extends BeanRenderBase {
             <h3 class="font-bold text-lg">Hello!</h3>
             <p class="py-4">
               {this.modelFormVisible && !!this.formData && (
-                <ComponentRestForm
+                <ZForm
                   controllerRef={ref => { this.controllerRestForm = ref; }}
                   data={this.formData}
                   schema={this.schema}
                   formMeta={this.$props.formMeta}
                   formBehaviors={this.$props.formBehaviors}
                   onSubmit={data => this.onSubmit(data)}
-                ></ComponentRestForm>
+                ></ZForm>
               )}
             </p>
             <div class="modal-action">

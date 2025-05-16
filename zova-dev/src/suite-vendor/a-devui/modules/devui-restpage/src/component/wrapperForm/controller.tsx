@@ -2,10 +2,9 @@ import { SchemaObject } from 'openapi3-ts/oas31';
 import { useId } from 'vue';
 import { BeanControllerBase, Model, Use } from 'zova';
 import { Controller } from 'zova-module-a-bean';
-import { IFormBehaviors, IFormMeta, TypeFormOnSubmitData } from 'zova-module-a-form';
+import { ControllerForm, IFormBehaviors, IFormMeta, TypeFormOnSubmitData } from 'zova-module-a-form';
 import { DataMutation } from 'zova-module-a-model';
 import { ControllerPageResource } from 'zova-module-a-rest';
-import { ControllerRestForm } from 'zova-module-devui-restform';
 
 export interface ControllerWrapperFormProps {
   formMeta: IFormMeta;
@@ -28,7 +27,7 @@ export class ControllerWrapperForm extends BeanControllerBase {
   schema?: SchemaObject;
   formData?: any;
 
-  controllerRestForm: ControllerRestForm;
+  controllerRestForm: ControllerForm;
 
   @Use({ injectionScope: 'host' })
   $$restResource: ControllerPageResource;
