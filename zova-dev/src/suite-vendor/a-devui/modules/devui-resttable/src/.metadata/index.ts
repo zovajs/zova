@@ -52,6 +52,9 @@ declare module 'zova' {
   export interface IComponentRecord {
     'devui-resttable:restTable': ControllerRestTable;
   }
+  export interface IZovaComponentRecord {
+    'devui-resttable:restTable': typeof ZRestTable;
+  }
 }
 /** components: begin */
 export * from './component/restTable.js';

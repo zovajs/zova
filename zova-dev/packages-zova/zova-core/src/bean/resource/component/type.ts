@@ -1,5 +1,7 @@
 export type TypeModuleComponents<T> = T;
 
+export interface IZovaComponentRecord {}
+
 export interface IComponentRecord {}
 
 export type TypeComponentRecordSelector<PREFIX extends string> = {

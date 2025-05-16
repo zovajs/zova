@@ -12,6 +12,7 @@ export function generateMetaComponent(
   const contentImports: string[] = [];
   const contentComponents: string[] = [];
   const contentRecords: string[] = [];
+  const contentRecords2: string[] = [];
   for (const [globFile, controllerInfo] of globFiles) {
     const { className } = globFile;
     const {
@@ -24,6 +25,7 @@ export function generateMetaComponent(
     contentImports.push(`import { ${componentName2} } from './component/${name}.js';`);
     contentComponents.push(`'${name}': ${componentName2},`);
     contentRecords.push(`'${componentFullName}': ${className};`);
+    contentRecords2.push(`'${componentFullName}': typeof ${componentName2};`);
   }
   // combine
   const content = `/** components: begin */
@@ -35,6 +37,9 @@ import 'zova';
 declare module 'zova' {
 export interface IComponentRecord {
   ${contentRecords.join('\n')}
+}
+export interface IZovaComponentRecord {
+  ${contentRecords2.join('\n')}
 }
 }
 /** components: end */
