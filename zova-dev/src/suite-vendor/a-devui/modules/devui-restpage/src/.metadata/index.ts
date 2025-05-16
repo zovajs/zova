@@ -78,6 +78,11 @@ declare module 'zova' {
     'devui-restpage:wrapperForm': ControllerWrapperForm;
     'devui-restpage:wrapperTable': ControllerWrapperTable;
   }
+  export interface IZovaComponentRecord {
+    'devui-restpage:restPage': typeof ZRestPage;
+    'devui-restpage:wrapperForm': typeof ZWrapperForm;
+    'devui-restpage:wrapperTable': typeof ZWrapperTable;
+  }
 }
 /** components: begin */
 export * from './component/restPage.js';

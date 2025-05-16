@@ -5,7 +5,7 @@ import type { AppEvent } from '../core/component/event.js';
 import type { ILoggerClientChildRecord } from '../core/logger/types.js';
 import type { FunctionAsync } from '../decorator/type/functionable.js';
 import type { MapSources, MaybeUndefined } from '../vueExtra/watch.js';
-import type { IErrorHandlerEventResult, IModuleLocaleText } from './resource/index.js';
+import type { IErrorHandlerEventResult, IModuleLocaleText, IZovaComponentRecord } from './resource/index.js';
 import { markRaw, watch, watchEffect, watchPostEffect, watchSyncEffect } from 'vue';
 import { createZovaComponentAsync } from '../components/createZovaComponentAsync.js';
 import { cast } from '../types/utils/cast.js';
@@ -147,6 +147,8 @@ export class BeanBase extends BeanBaseSimple {
     });
   }
 
+  protected $zovaComponent<K extends keyof IZovaComponentRecord>(componentName: K): IZovaComponentRecord[K];
+  protected $zovaComponent(module: string, name: string);
   protected $zovaComponent(module: string, name?: string) {
     const componentName = module.includes(':') ? module : `${module}:${name}`;
     if (!this[SymbolZovaComponents][componentName]) {

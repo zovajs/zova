@@ -58,6 +58,9 @@ declare module 'zova' {
   export interface IComponentRecord {
     'devui-restform:restForm': ControllerRestForm;
   }
+  export interface IZovaComponentRecord {
+    'devui-restform:restForm': typeof ZRestForm;
+  }
 }
 /** components: end */
 /** render: begin */
