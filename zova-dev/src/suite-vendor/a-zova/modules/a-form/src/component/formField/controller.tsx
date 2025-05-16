@@ -1,6 +1,6 @@
+import type { BehaviorForm } from '../../bean/behavior.form.jsx';
 import { BeanControllerBase, Use } from 'zova';
 import { Controller } from 'zova-module-a-bean';
-import { BehaviorForm } from '../../bean/behavior.form.jsx';
 import { IFormBehaviors } from '../../types/behavior.js';
 import { IFormFieldLayoutOptionsBase, IFormFieldOptions } from '../../types/formField.js';
 
