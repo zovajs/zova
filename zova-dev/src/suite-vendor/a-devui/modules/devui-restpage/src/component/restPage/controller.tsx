@@ -2,6 +2,7 @@ import type { ControllerPageResource } from 'zova-module-a-rest';
 import { BeanControllerBase, Use } from 'zova';
 import { Controller } from 'zova-module-a-bean';
 import { IFormBehaviors, IFormMeta, TypeEditMode, TypeFormMode } from 'zova-module-a-form';
+import { DataMutation } from 'zova-module-a-model';
 
 @Controller()
 export class ControllerRestPage extends BeanControllerBase {
@@ -30,10 +31,10 @@ export class ControllerRestPage extends BeanControllerBase {
     this.formVisible = true;
   }
 
-  getMutationSubmit() {
+  getMutationSubmit(): DataMutation | undefined {
     if (this.formMode !== 'edit') return;
     if (this.editMode === 'create') {
-      return this.$$restResource.getMutationCreate();
+      return this.$$restResource.getMutationCreate() as any;
     }
   }
 }
