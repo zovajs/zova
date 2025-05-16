@@ -65,8 +65,6 @@ export class ControllerWrapperForm extends BeanControllerBase {
   async onSubmit(data: TypeFormOnSubmitData) {
     try {
       this.loading = true;
-      console.log(data.formApi.state);
-      throw new Error('ssss');
       await sleep(1000);
       await this.$props.onSubmit?.(data);
       this.modelFormVisible = false;
