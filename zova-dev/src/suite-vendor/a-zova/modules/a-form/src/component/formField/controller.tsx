@@ -1,7 +1,7 @@
 import { BeanControllerBase } from 'zova';
 import { Controller } from 'zova-module-a-bean';
 
-export interface ControllerFormFieldProps {}
+export interface ControllerFormFieldProps<TParentData = unknown> {}
 
 @Controller()
 export class ControllerFormField extends BeanControllerBase {

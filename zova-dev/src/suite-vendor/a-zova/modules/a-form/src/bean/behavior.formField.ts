@@ -3,7 +3,7 @@ import { useField } from '@tanstack/vue-form';
 import { VNode } from 'vue';
 import { disposeInstance, Use } from 'zova';
 import { BeanBehaviorBase, Behavior, IBehaviors, IDecoratorBehaviorOptions, NextBehavior, ServiceComposer } from 'zova-module-a-behavior';
-import { TypeBehaviorFormFieldOptions, TypeFormField } from '../types/form.js';
+import { TypeFormField } from '../types/form.js';
 import { IFormFieldOptions } from '../types/formField.js';
 
 export interface IBehaviorPropsInputFormField {}
@@ -11,7 +11,7 @@ export interface IBehaviorPropsInputFormField {}
 export interface IBehaviorPropsOutputFormField {}
 
 export interface IBehaviorOptionsFormField<TParentData = unknown>
-  extends IDecoratorBehaviorOptions, TypeBehaviorFormFieldOptions<TParentData>, IFormFieldOptions {}
+  extends IDecoratorBehaviorOptions, IFormFieldOptions<TParentData> {}
 
 @Behavior<IBehaviorOptionsFormField>()
 export class BehaviorFormField extends BeanBehaviorBase<

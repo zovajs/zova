@@ -5,7 +5,7 @@ import { schemaToZodSchema } from 'zova-module-a-openapi';
 import { BeanControllerFormBase } from '../../lib/beanControllerFormBase.js';
 import { IFormBehaviors } from '../../types/behavior.js';
 import { TypeForm, TypeFormOnSubmit } from '../../types/form.js';
-import { IFormFieldLayoutOptions, IFormFieldOptions } from '../../types/formField.js';
+import { IFormFieldLayoutOptionsBase, IFormFieldOptionsBase } from '../../types/formField.js';
 import { IFormMeta } from '../../types/formMeta.js';
 
 export interface ControllerFormProps<T extends {} = {}> {
@@ -14,8 +14,8 @@ export interface ControllerFormProps<T extends {} = {}> {
   formMeta?: IFormMeta;
   formBehaviors?: IFormBehaviors;
   onSubmit?: TypeFormOnSubmit<T>;
-  formField?: IFormFieldOptions;
-  formFieldLayout?: IFormFieldLayoutOptions;
+  formField?: IFormFieldOptionsBase;
+  formFieldLayout?: IFormFieldLayoutOptionsBase;
 }
 
 @Controller()

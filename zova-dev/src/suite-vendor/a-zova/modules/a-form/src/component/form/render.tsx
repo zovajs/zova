@@ -3,7 +3,7 @@ import { VNode } from 'vue';
 import { BeanRenderBase } from 'zova';
 import { Render } from 'zova-module-a-bean';
 import { IBehaviorItem } from 'zova-module-a-behavior';
-import { IFormFieldLayoutOptions } from '../../types/formField.js';
+import { IFormFieldLayoutOptionsBase } from '../../types/formField.js';
 
 @Render()
 export class RenderForm extends BeanRenderBase {
@@ -40,7 +40,7 @@ export class RenderForm extends BeanRenderBase {
     if (!behaviorFormFieldLayout) return;
     behaviors[behaviorFormFieldLayout] = Object.assign({ bordered: true }, this.$props.formFieldLayout, {
       label: property.description || key,
-    } satisfies IFormFieldLayoutOptions);
+    } satisfies IFormFieldLayoutOptionsBase);
   }
 
   public render() {
