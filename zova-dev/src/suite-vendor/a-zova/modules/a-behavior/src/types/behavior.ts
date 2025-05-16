@@ -27,6 +27,11 @@ export type TypeBehaviorRecordSelector<PREFIX extends string> = {
 };
 export type TypeBehaviorRecordSelectorKeys<PREFIX extends string> = keyof TypeBehaviorRecordSelector<PREFIX>;
 
+export type TypeBehaviorRecordSelectorStrict<PREFIX extends string> = {
+  [K in keyof IBehaviorRecord as K extends `${string}:${PREFIX}` ? K : never]: IBehaviorRecord[K];
+};
+export type TypeBehaviorRecordSelectorKeysStrict<PREFIX extends string> = keyof TypeBehaviorRecordSelectorStrict<PREFIX>;
+
 declare module 'zova-module-a-bean' {
   export interface SysOnion {
     behavior: ServiceOnion<IDecoratorBehaviorOptions, keyof IBehaviorRecord>;

@@ -1,5 +1,6 @@
-import type { TypeBehaviorRecordSelectorKeys } from 'zova-module-a-behavior';
+import type { TypeBehaviorRecordSelectorKeysStrict } from 'zova-module-a-behavior';
 
 export interface IFormBehaviors {
-  formFieldLayout?: TypeBehaviorRecordSelectorKeys<'formFieldLayout'>;
+  formFieldLayout?: TypeBehaviorRecordSelectorKeysStrict<'formFieldLayout'>;
+  formField?: TypeBehaviorRecordSelectorKeysStrict<'formField'>;
 }
