@@ -62,7 +62,7 @@ export class ControllerWrapperForm extends BeanControllerBase {
   async onSubmit(data: TypeFormOnSubmitData) {
     try {
       this.loading = true;
-      await sleep(5000);
+      await sleep(1000);
       await this.$props.onSubmit?.(data);
       this.modelFormVisible = false;
     } catch (err) {

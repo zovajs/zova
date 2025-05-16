@@ -39,6 +39,6 @@ export class ControllerRestForm extends BeanControllerFormBase {
   }
 
   public submit() {
-    this.form.handleSubmit();
+    return this.form.handleSubmit();
   }
 }
