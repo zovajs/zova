@@ -7,6 +7,8 @@ export class RenderWrapperForm extends BeanRenderBase {
   public render() {
     // form
     const ComponentRestForm = this.$zovaComponent(this.$$restResource.componentRestForm);
+    // mutation
+    const mutationSubmit = this.$props.getMutationSubmit?.();
     return (
       <div>
         <dialog id={this.formDomId} class="modal" open={this.modelFormVisible} onClose={() => { this.modelFormVisible = false; }}>
@@ -25,9 +27,9 @@ export class RenderWrapperForm extends BeanRenderBase {
               )}
             </p>
             <div class="modal-action">
-              {this.loading && <span class="loading loading-spinner text-primary"></span>}
+              {mutationSubmit?.isPending && <span class="loading loading-spinner text-primary"></span>}
               <button
-                class={classes('btn btn-primary', this.loading && 'btn-disabled')}
+                class={classes('btn btn-primary', mutationSubmit?.isPending && 'btn-disabled')}
                 onClick={() => {
                   return this.controllerRestForm.submit();
                 }}
@@ -45,7 +47,7 @@ export class RenderWrapperForm extends BeanRenderBase {
             </div>
           </div>
         </dialog>
-        <dialog class="modal" open={this.dialogErrorOpened} onClose={() => { this.dialogErrorOpened = false; }}>
+        <dialog class="modal" open={mutationSubmit?.isError} onClose={() => { mutationSubmit?.reset(); }}>
           <div class="modal-box">
             <p class="py-4">
               <div role="alert" class="alert alert-error">
@@ -62,12 +64,12 @@ export class RenderWrapperForm extends BeanRenderBase {
                     d="M10 14l2-2m0 0l2-2m-2 2l-2-2m2 2l2 2m7-2a9 9 0 11-18 0 9 9 0 0118 0z"
                   />
                 </svg>
-                <span>{this.dialogErrorMessage}</span>
+                <span>{mutationSubmit?.error?.message}</span>
                 <div>
                   <button
                     class="btn btn-sm"
                     onClick={() => {
-                      this.dialogErrorOpened = false;
+                      mutationSubmit?.reset();
                     }}
                   >
                     {this.scope.locale.Close()}

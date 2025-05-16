@@ -58,7 +58,7 @@ export class ControllerWrapperForm extends BeanControllerBase {
   }
 
   async onSubmit(data: TypeFormOnSubmitData) {
-    const mutationSubmit: DataMutation = this.$props.getMutationSubmit!();
+    const mutationSubmit = this.$props.getMutationSubmit!();
     mutationSubmit.mutate(data.value as any, { onSuccess: () => {
       this.modelFormVisible = false;
     } });
