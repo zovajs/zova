@@ -1,7 +1,8 @@
 import { BeanControllerBase } from 'zova';
 import { Controller } from 'zova-module-a-bean';
+import { IFormFieldLayoutOptionsBase, IFormFieldOptions } from '../../types/formField.js';
 
-export interface ControllerFormFieldProps<TParentData = unknown> {}
+export interface ControllerFormFieldProps<TParentData = unknown> extends IFormFieldOptions<TParentData>, IFormFieldLayoutOptionsBase {}
 
 @Controller()
 export class ControllerFormField extends BeanControllerBase {
