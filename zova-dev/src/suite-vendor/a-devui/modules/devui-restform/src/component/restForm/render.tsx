@@ -41,6 +41,14 @@ export class RenderRestForm extends BeanRenderBase {
 
   public render() {
     if (!this.$props.schema) return;
+    const children = this.$slots.default
+      ? this.$slots.default()
+      : (
+          <>
+            {this._renderSchema(this.$props.schema)}
+            <button type="submit" class="hidden"></button>
+          </>
+        );
     return (
       <form bs-form={{
         form: this.form,
@@ -50,10 +58,7 @@ export class RenderRestForm extends BeanRenderBase {
         zodSchema: this.zodSchema,
       }}
       >
-        <>
-          {this._renderSchema(this.$props.schema)}
-          <button type="submit" class="hidden"></button>
-        </>
+        <>{children}</>
       </form>
     );
   }

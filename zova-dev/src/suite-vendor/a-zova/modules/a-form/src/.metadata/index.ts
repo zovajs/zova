@@ -4,10 +4,10 @@ import type { BeanScopeUtil } from 'zova';
 import { BeanScopeBase } from 'zova';
 import { Scope } from 'zova-module-a-bean';
 /** behavior: begin */
-import { IBehaviorOptionsForm } from '../bean/behavior.form.js';
+import { IBehaviorOptionsForm } from '../bean/behavior.form.jsx';
 /** behavior: end */
 /** behavior: begin */
-import { BehaviorForm } from '../bean/behavior.form.js';
+import { BehaviorForm } from '../bean/behavior.form.jsx';
 import { IBehaviorOptionsFormField } from '../bean/behavior.formField.js';
 import { BehaviorFormField } from '../bean/behavior.formField.js';
 import { IBehaviorOptionsFormFieldModel } from '../bean/behavior.formFieldModel.js';
@@ -21,7 +21,7 @@ import 'vue/jsx-runtime';
 
 import 'zova';
 
-export * from '../bean/behavior.form.js';
+export * from '../bean/behavior.form.jsx';
 export * from '../bean/behavior.formField.js';
 export * from '../bean/behavior.formFieldModel.js';
 declare module 'zova-module-a-behavior' {

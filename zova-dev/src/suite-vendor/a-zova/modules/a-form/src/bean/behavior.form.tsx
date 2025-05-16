@@ -19,7 +19,7 @@ export interface IBehaviorOptionsForm<TFormData = unknown> extends IDecoratorBeh
   formMeta?: IFormMeta;
   formBehaviors?: IFormBehaviors;
   schema?: SchemaObject;
-  auto?: boolean;
+  zodSchema?: z.AnyZodObject;
   onSubmit?: ((payload: Event) => void) | boolean;
 }
 
@@ -35,6 +35,7 @@ export class BehaviorForm<TFormData = unknown> extends BeanBehaviorBase<
     super.__init__(options);
     this.bean._setBean('$$behaviorForm', this);
     this.zodSchema = this.$useComputed(() => {
+      if (this.$options.zodSchema) return this.$options.zodSchema;
       if (!this.schema) return;
       return schemaToZodSchema<z.AnyZodObject>(this.schema);
     });
@@ -54,10 +55,6 @@ export class BehaviorForm<TFormData = unknown> extends BeanBehaviorBase<
 
   public get schema() {
     return this.$options.schema;
-  }
-
-  public get auto() {
-    return this.schema && this.$options.auto !== false;
   }
 
   public getFieldSchema<K extends DeepKeys<TFormData>>(name: K) {
