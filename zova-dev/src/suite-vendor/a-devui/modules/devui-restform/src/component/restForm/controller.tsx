@@ -1,7 +1,7 @@
 import { SchemaObject } from 'openapi3-ts/oas31';
 import { z } from 'zod';
 import { Controller } from 'zova-module-a-bean';
-import { BeanControllerFormBase, IFormBehaviors, IFormMeta, TypeForm, TypeFormOnSubmit } from 'zova-module-a-form';
+import { BeanControllerFormBase, IFormBehaviors, IFormFieldLayoutOptions, IFormFieldOptions, IFormMeta, TypeForm, TypeFormOnSubmit } from 'zova-module-a-form';
 import { schemaToZodSchema } from 'zova-module-a-openapi';
 
 export interface ControllerRestFormProps<T extends {} = {}> {
@@ -10,6 +10,8 @@ export interface ControllerRestFormProps<T extends {} = {}> {
   formMeta?: IFormMeta;
   formBehaviors?: IFormBehaviors;
   onSubmit?: TypeFormOnSubmit<T>;
+  formField?: IFormFieldOptions;
+  formFieldLayout?: IFormFieldLayoutOptions;
 }
 
 @Controller()

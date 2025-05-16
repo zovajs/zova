@@ -25,21 +25,21 @@ export class RenderRestForm extends BeanRenderBase {
 
   private _prepareBehaviorFormField(behaviors: IBehaviorItem, key: string, _property: SchemaObject | ReferenceObject) {
     const zodSchemaField = this.zodSchema?.shape[key];
-    behaviors['a-form:formField'] = {
+    behaviors['a-form:formField'] = Object.assign({
       name: key,
       validators: {
         onChange: zodSchemaField,
       },
-    };
+    }, this.$props.formField);
   }
 
   private _prepareBehaviorFormFieldLayout(behaviors: IBehaviorItem, key: string, property: SchemaObject | ReferenceObject) {
     const behaviorFormFieldLayout = this.formBehaviors.formFieldLayout;
     if (!behaviorFormFieldLayout) return;
-    behaviors[behaviorFormFieldLayout] = {
+    behaviors[behaviorFormFieldLayout] = Object.assign({
       label: property.description || key,
       bordered: true,
-    } satisfies IFormFieldLayoutOptions;
+    } satisfies IFormFieldLayoutOptions, this.$props.formFieldLayout);
   }
 
   public render() {
