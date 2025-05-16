@@ -3,7 +3,7 @@ import { VNode } from 'vue';
 import { BeanRenderBase } from 'zova';
 import { Render } from 'zova-module-a-bean';
 import { IBehaviorItem } from 'zova-module-a-behavior';
-import { IFormFieldLayoutOptions } from 'zova-module-a-form';
+import { IFormFieldLayoutOptions } from '../../types/formField.js';
 
 @Render()
 export class RenderForm extends BeanRenderBase {
