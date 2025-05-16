@@ -1,16 +1,16 @@
-import { sleep } from '@cabloy/utils';
 import { SchemaObject } from 'openapi3-ts/oas31';
 import { useId } from 'vue';
 import { BeanControllerBase, Model, Use } from 'zova';
 import { Controller } from 'zova-module-a-bean';
-import { IFormBehaviors, IFormMeta, TypeFormOnSubmit, TypeFormOnSubmitData } from 'zova-module-a-form';
+import { IFormBehaviors, IFormMeta, TypeFormOnSubmitData } from 'zova-module-a-form';
+import { DataMutation } from 'zova-module-a-model';
 import { ControllerPageResource } from 'zova-module-a-rest';
 import { ControllerRestForm } from 'zova-module-devui-restform';
 
 export interface ControllerWrapperFormProps {
   formMeta: IFormMeta;
   formBehaviors?: IFormBehaviors;
-  onSubmit?: TypeFormOnSubmit;
+  getMutationSubmit?: () => DataMutation;
 }
 
 export interface ControllerWrapperFormModels {
@@ -29,11 +29,6 @@ export class ControllerWrapperForm extends BeanControllerBase {
   formData?: any;
 
   controllerRestForm: ControllerRestForm;
-
-  loading: boolean;
-
-  dialogErrorOpened: boolean;
-  dialogErrorMessage: string;
 
   @Use({ injectionScope: 'host' })
   $$restResource: ControllerPageResource;
@@ -63,16 +58,9 @@ export class ControllerWrapperForm extends BeanControllerBase {
   }
 
   async onSubmit(data: TypeFormOnSubmitData) {
-    try {
-      this.loading = true;
-      await sleep(1000);
-      await this.$props.onSubmit?.(data);
+    const mutationSubmit: DataMutation = this.$props.getMutationSubmit!();
+    mutationSubmit.mutate(data.value as any, { onSuccess: () => {
       this.modelFormVisible = false;
-    } catch (err: any) {
-      this.dialogErrorOpened = true;
-      this.dialogErrorMessage = err.message;
-    } finally {
-      this.loading = false;
-    }
+    } });
   }
 }
