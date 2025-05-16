@@ -1,9 +1,8 @@
-import { ReferenceObject, SchemaObject } from 'openapi3-ts/oas31';
+import { SchemaObject } from 'openapi3-ts/oas31';
 import { VNode } from 'vue';
 import { BeanRenderBase } from 'zova';
 import { Render } from 'zova-module-a-bean';
-import { IBehaviorItem } from 'zova-module-a-behavior';
-import { IFormFieldLayoutOptionsBase } from '../../types/formField.js';
+import { ZFormField } from '../../.metadata/index.js';
 
 @Render()
 export class RenderForm extends BeanRenderBase {
@@ -11,36 +10,12 @@ export class RenderForm extends BeanRenderBase {
     if (!schema) return;
     const children: VNode[] = [];
     const properties = schema.properties!;
-    for (const key in properties) {
-      const property = properties[key];
-      const behaviors: IBehaviorItem = {};
-      this._prepareBehaviorFormField(behaviors, key, property);
-      this._prepareBehaviorFormFieldLayout(behaviors, key, property);
-      const Component = 'input';
+    for (const name in properties) {
       children.push(
-        <Component behaviors={behaviors}></Component>,
+        <ZFormField key={name} name={name}></ZFormField>,
       );
     }
     return children;
-  }
-
-  private _prepareBehaviorFormField(behaviors: IBehaviorItem, key: string, _property: SchemaObject | ReferenceObject) {
-    const behaviorFormField = this.formBehaviors.formField ?? 'a-form:formField';
-    const zodSchemaField = this.zodSchema?.shape[key];
-    behaviors[behaviorFormField] = Object.assign({}, this.$props.formField, {
-      name: key,
-      validators: {
-        onChange: zodSchemaField,
-      },
-    });
-  }
-
-  private _prepareBehaviorFormFieldLayout(behaviors: IBehaviorItem, key: string, property: SchemaObject | ReferenceObject) {
-    const behaviorFormFieldLayout = this.formBehaviors.formFieldLayout;
-    if (!behaviorFormFieldLayout) return;
-    behaviors[behaviorFormFieldLayout] = Object.assign({ bordered: true }, this.$props.formFieldLayout, {
-      label: property.description || key,
-    } satisfies IFormFieldLayoutOptionsBase);
   }
 
   public render() {

@@ -2,7 +2,7 @@ import type { IBehaviors } from 'zova-module-a-behavior';
 import type { TypeBehaviorFormFieldOptions } from './form.js';
 
 export interface IFormFieldLayoutOptionsBase {
-  label: string;
+  label?: string;
   bordered?: boolean;
 }
 
