@@ -6,6 +6,7 @@ import { BeanBehaviorBase, Behavior, IDecoratorBehaviorOptions, NextBehavior } f
 import { schemaToZodSchema } from 'zova-module-a-openapi';
 import { IFormBehaviors } from '../types/behavior.js';
 import { TypeForm } from '../types/form.js';
+import { IFormFieldLayoutOptionsBase, IFormFieldOptionsBase } from '../types/formField.js';
 import { IFormMeta } from '../types/formMeta.js';
 
 export interface IBehaviorPropsInputForm {
@@ -20,7 +21,9 @@ export interface IBehaviorOptionsForm<TFormData = unknown> extends IDecoratorBeh
   formBehaviors?: IFormBehaviors;
   schema?: SchemaObject;
   zodSchema?: z.AnyZodObject;
-  onSubmit?: ((payload: Event) => void) | boolean;
+  onFormSubmit?: ((payload: Event) => void) | boolean;
+  formField?: IFormFieldOptionsBase;
+  formFieldLayout?: IFormFieldLayoutOptionsBase;
 }
 
 @Behavior<IBehaviorOptionsForm>()
@@ -57,6 +60,14 @@ export class BehaviorForm<TFormData = unknown> extends BeanBehaviorBase<
     return this.$options.schema;
   }
 
+  public get formField() {
+    return this.$options.formField;
+  }
+
+  public get formFieldLayout() {
+    return this.$options.formFieldLayout;
+  }
+
   public getFieldSchema<K extends DeepKeys<TFormData>>(name: K) {
     return this.schema?.properties?.[name as any];
   }
@@ -73,9 +84,9 @@ export class BehaviorForm<TFormData = unknown> extends BeanBehaviorBase<
 
   private _patchProps(props: IBehaviorPropsInputForm) {
     const propsPatch: IBehaviorPropsInputForm = {};
-    if (!props.onSubmit && this.$options.onSubmit !== false) {
-      propsPatch.onSubmit = typeof this.$options.onSubmit === 'function'
-        ? this.$options.onSubmit
+    if (!props.onSubmit && this.$options.onFormSubmit !== false) {
+      propsPatch.onSubmit = typeof this.$options.onFormSubmit === 'function'
+        ? this.$options.onFormSubmit
         : (e: Event) => {
             e.preventDefault();
             e.stopPropagation();
