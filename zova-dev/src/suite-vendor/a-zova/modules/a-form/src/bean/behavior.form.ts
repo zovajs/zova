@@ -1,3 +1,4 @@
+import { DeepKeys } from '@tanstack/table-core';
 import { SchemaObject } from 'openapi3-ts/oas31';
 import { createCommentVNode, VNode } from 'vue';
 import { z } from 'zod';
@@ -22,7 +23,7 @@ export interface IBehaviorOptionsForm<TFormData = unknown> extends IDecoratorBeh
 }
 
 @Behavior<IBehaviorOptionsForm>()
-export class BehaviorForm extends BeanBehaviorBase<
+export class BehaviorForm<TFormData = unknown> extends BeanBehaviorBase<
   IBehaviorOptionsForm,
   IBehaviorPropsInputForm,
   IBehaviorPropsOutputForm
@@ -50,6 +51,14 @@ export class BehaviorForm extends BeanBehaviorBase<
 
   public get zodSchema() {
     return this.$options.zodSchema;
+  }
+
+  public getFieldSchema<K extends DeepKeys<TFormData>>(name: K) {
+    return this.schema?.properties?.[name as any];
+  }
+
+  public getFieldZodSchema<K extends DeepKeys<TFormData>>(name: K) {
+    return this.zodSchema?.shape[name];
   }
 
   protected render(props: IBehaviorPropsInputForm, next: NextBehavior<IBehaviorPropsOutputForm>): VNode {

@@ -63,6 +63,14 @@ export class BehaviorFormField extends BeanBehaviorBase<
     return this._field;
   }
 
+  public get fieldSchema() {
+    return this.$$behaviorForm.getFieldSchema(this.$options.name);
+  }
+
+  public get fieldZodSchema() {
+    return this.$$behaviorForm.getFieldZodSchema(this.$options.name);
+  }
+
   protected render(props: IBehaviorPropsInputFormField, next: NextBehavior<IBehaviorPropsOutputFormField>): VNode {
     if (!this._composer) return next();
     return this._composer.render(props, next);
