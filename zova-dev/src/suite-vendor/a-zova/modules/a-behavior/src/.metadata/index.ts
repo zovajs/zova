@@ -103,6 +103,9 @@ declare module 'zova' {
   export interface IComponentRecord {
     'a-behavior:behavior': ControllerBehavior;
   }
+  export interface IZovaComponentRecord {
+    'a-behavior:behavior': typeof ZBehavior;
+  }
 }
 /** components: begin */
 export * from './component/behavior.js';

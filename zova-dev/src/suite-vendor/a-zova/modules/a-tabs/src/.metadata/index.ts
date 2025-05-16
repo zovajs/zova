@@ -48,6 +48,9 @@ declare module 'zova' {
   export interface IComponentRecord {
     'a-tabs:routerViewTabs': ControllerRouterViewTabs;
   }
+  export interface IZovaComponentRecord {
+    'a-tabs:routerViewTabs': typeof ZRouterViewTabs;
+  }
 }
 /** components: begin */
 export * from './component/routerViewTabs.js';

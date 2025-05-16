@@ -97,6 +97,11 @@ declare module 'zova' {
     'home-layout:layoutDefault': ControllerLayoutDefault;
     'home-layout:layoutEmpty': ControllerLayoutEmpty;
   }
+  export interface IZovaComponentRecord {
+    'home-layout:essentialLink': typeof ZEssentialLink;
+    'home-layout:layoutDefault': typeof ZLayoutDefault;
+    'home-layout:layoutEmpty': typeof ZLayoutEmpty;
+  }
 }
 export * from '../component/layoutDefault/render.menu.jsx';
 export * from '../component/layoutDefault/render.sidebar.jsx';

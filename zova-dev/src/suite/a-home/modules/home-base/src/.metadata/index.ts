@@ -145,6 +145,9 @@ declare module 'zova' {
   export interface IComponentRecord {
     'home-base:page': ControllerPage;
   }
+  export interface IZovaComponentRecord {
+    'home-base:page': typeof ZPage;
+  }
 }
 export * from '../service/ssr.js';
 declare module 'zova' {

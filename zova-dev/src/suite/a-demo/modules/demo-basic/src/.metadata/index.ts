@@ -287,6 +287,9 @@ declare module 'zova' {
   export interface IComponentRecord {
     'demo-basic:card': ControllerCard;
   }
+  export interface IZovaComponentRecord {
+    'demo-basic:card': typeof ZCard;
+  }
 }
 export * from './page/routeQuery.js';
 declare module 'zova' {
