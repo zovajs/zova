@@ -82,7 +82,7 @@ function createVisitor(context: ContextInfo) {
           );
           // -> ()=>{}
           const children = (nodePath.container as any)?.children;
-          if (children && children.length > 0) {
+          if (children && children.length > 0 && !_checkIfHasJsxExpression(children)) {
             const expressionArray = t.arrayExpression();
             expressionArray.elements = (nodePath.container as any)?.children;
             const expressionSlot = t.arrowFunctionExpression([], expressionArray);
@@ -93,6 +93,10 @@ function createVisitor(context: ContextInfo) {
       }
     },
   };
+}
+
+function _checkIfHasJsxExpression(children: t.JSXElement[]) {
+  return children.some(node => t.isJSXExpressionContainer(node));
 }
 
 // bs-providerId-moduleName-beanName
