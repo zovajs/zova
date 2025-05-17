@@ -4,10 +4,10 @@ import { createCommentVNode, VNode } from 'vue';
 import { z } from 'zod';
 import { BeanBehaviorBase, Behavior, IDecoratorBehaviorOptions, NextBehavior } from 'zova-module-a-behavior';
 import { schemaToZodSchema } from 'zova-module-a-openapi';
-import { IFormBehaviors } from '../types/behavior.js';
 import { TypeForm } from '../types/form.js';
 import { IFormFieldLayoutOptionsBase, IFormFieldOptionsBase } from '../types/formField.js';
 import { IFormMeta } from '../types/formMeta.js';
+import { IFormProvider } from '../types/provider.js';
 
 export interface IBehaviorPropsInputForm {
   onSubmit?: ((payload: Event) => void);
@@ -18,7 +18,7 @@ export interface IBehaviorPropsOutputForm {}
 export interface IBehaviorOptionsForm<TFormData = unknown> extends IDecoratorBehaviorOptions {
   form?: TypeForm<TFormData>;
   formMeta?: IFormMeta;
-  formBehaviors?: IFormBehaviors;
+  formProvider?: IFormProvider;
   schema?: SchemaObject;
   zodSchema?: z.AnyZodObject;
   onFormSubmit?: ((payload: Event) => void) | boolean;
@@ -52,8 +52,8 @@ export class BehaviorForm<TFormData = unknown> extends BeanBehaviorBase<
     return this.$options.formMeta;
   }
 
-  public get formBehaviors() {
-    return this.$options.formBehaviors;
+  public get formProvider() {
+    return this.$options.formProvider;
   }
 
   public get schema() {

@@ -1,25 +1,25 @@
 import type { BehaviorForm } from '../../bean/behavior.form.jsx';
-import { BeanControllerBase, Use } from 'zova';
+import { BeanControllerBase, deepExtend, Use } from 'zova';
 import { Controller } from 'zova-module-a-bean';
-import { IFormBehaviors } from '../../types/behavior.js';
 import { IFormFieldLayoutOptionsBase, IFormFieldOptions } from '../../types/formField.js';
+import { IFormProvider } from '../../types/provider.js';
 
 export interface ControllerFormFieldProps<TParentData = unknown> extends IFormFieldOptions<TParentData>, IFormFieldLayoutOptionsBase {
-  formBehaviors?: IFormBehaviors;
+  formProvider?: IFormProvider;
 }
 
 @Controller()
 export class ControllerFormField extends BeanControllerBase {
   static $propsDefault = {};
 
-  formBehaviors: IFormBehaviors;
+  formProvider: IFormProvider;
 
   @Use({ injectionScope: 'host' })
   $$behaviorForm: BehaviorForm;
 
   protected async __init__() {
-    this.formBehaviors = this.$useComputed(() => {
-      return Object.assign({}, this.$$behaviorForm.formBehaviors, this.$props.formBehaviors);
+    this.formProvider = this.$useComputed(() => {
+      return deepExtend({}, this.$$behaviorForm.formProvider, this.$props.formProvider);
     });
   }
 }

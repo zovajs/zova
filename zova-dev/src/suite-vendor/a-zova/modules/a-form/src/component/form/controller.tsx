@@ -1,5 +1,6 @@
 import { SchemaObject } from 'openapi3-ts/oas31';
 import { z } from 'zod';
+import { deepExtend } from 'zova-core';
 import { Controller } from 'zova-module-a-bean';
 import { schemaToZodSchema } from 'zova-module-a-openapi';
 import { BeanControllerFormBase } from '../../lib/beanControllerFormBase.js';
@@ -34,7 +35,7 @@ export class ControllerForm extends BeanControllerFormBase {
       },
     });
     this.formBehaviors = this.$useComputed(() => {
-      return Object.assign({
+      return deepExtend({
         formFieldLayout: 'devui-restform:formFieldLayout',
       }, this.$props.formBehaviors);
     });
