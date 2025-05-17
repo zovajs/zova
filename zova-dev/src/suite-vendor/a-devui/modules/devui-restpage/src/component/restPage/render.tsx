@@ -11,7 +11,7 @@ export class RenderRestPage extends BeanRenderBase {
           <ZWrapperForm
             vModel:formVisible={this.formVisible}
             formMeta={this.formMeta}
-            formBehaviors={this.formBehaviors}
+            formProvider={this.formProvider}
             getMutationSubmit={() => {
               return this.getMutationSubmit();
             }}

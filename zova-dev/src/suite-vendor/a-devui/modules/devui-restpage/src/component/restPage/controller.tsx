@@ -1,7 +1,7 @@
 import type { ControllerPageResource } from 'zova-module-a-rest';
 import { BeanControllerBase, Use } from 'zova';
 import { Controller } from 'zova-module-a-bean';
-import { IFormBehaviors, IFormMeta, TypeEditMode, TypeFormMode } from 'zova-module-a-form';
+import { IFormMeta, IFormProvider, TypeEditMode, TypeFormMode } from 'zova-module-a-form';
 import { DataMutation } from 'zova-module-a-model';
 
 @Controller()
@@ -11,7 +11,7 @@ export class ControllerRestPage extends BeanControllerBase {
   formMode?: TypeFormMode;
   editMode?: TypeEditMode;
   formMeta: IFormMeta;
-  formBehaviors: IFormBehaviors;
+  formProvider: IFormProvider;
 
   @Use({ injectionScope: 'host' })
   $$restResource: ControllerPageResource;
@@ -20,8 +20,8 @@ export class ControllerRestPage extends BeanControllerBase {
     this.formMeta = this.$useComputed(() => {
       return { formMode: this.formMode, editMode: this.editMode };
     });
-    this.formBehaviors = this.$useComputed(() => {
-      return this.$$restResource.formBehaviors;
+    this.formProvider = this.$useComputed(() => {
+      return this.$$restResource.formProvider || {};
     });
   }
 

@@ -2,13 +2,13 @@ import { SchemaObject } from 'openapi3-ts/oas31';
 import { useId } from 'vue';
 import { BeanControllerBase, Model, Use } from 'zova';
 import { Controller } from 'zova-module-a-bean';
-import { ControllerForm, IFormBehaviors, IFormMeta, TypeFormOnSubmitData } from 'zova-module-a-form';
+import { ControllerForm, IFormMeta, IFormProvider, TypeFormOnSubmitData } from 'zova-module-a-form';
 import { DataMutation } from 'zova-module-a-model';
 import { ControllerPageResource } from 'zova-module-a-rest';
 
 export interface ControllerWrapperFormProps {
   formMeta: IFormMeta;
-  formBehaviors?: IFormBehaviors;
+  formProvider?: IFormProvider;
   getMutationSubmit?: () => DataMutation | undefined;
 }
 
