@@ -1,19 +1,18 @@
 import { SchemaObject } from 'openapi3-ts/oas31';
 import { z } from 'zod';
-import { deepExtend } from 'zova-core';
 import { Controller } from 'zova-module-a-bean';
 import { schemaToZodSchema } from 'zova-module-a-openapi';
 import { BeanControllerFormBase } from '../../lib/beanControllerFormBase.js';
-import { IFormBehaviors } from '../../types/behavior.js';
 import { TypeForm, TypeFormOnSubmit } from '../../types/form.js';
 import { IFormFieldLayoutOptionsBase, IFormFieldOptionsBase } from '../../types/formField.js';
 import { IFormMeta } from '../../types/formMeta.js';
+import { IFormProvider } from '../../types/provider.js';
 
 export interface ControllerFormProps<T extends {} = {}> {
   data?: T;
   schema?: SchemaObject;
   formMeta?: IFormMeta;
-  formBehaviors?: IFormBehaviors;
+  formProvider?: IFormProvider;
   onSubmit?: TypeFormOnSubmit<T>;
   formField?: IFormFieldOptionsBase;
   formFieldLayout?: IFormFieldLayoutOptionsBase;
@@ -24,7 +23,7 @@ export class ControllerForm extends BeanControllerFormBase {
   static $propsDefault = {};
 
   form: TypeForm;
-  formBehaviors: IFormBehaviors;
+  formProvider: IFormProvider;
   zodSchema: z.AnyZodObject | undefined;
 
   protected async __init__() {
@@ -34,10 +33,8 @@ export class ControllerForm extends BeanControllerFormBase {
         this.$props.onSubmit?.(data as any);
       },
     });
-    this.formBehaviors = this.$useComputed(() => {
-      return deepExtend({
-        formFieldLayout: 'devui-restform:formFieldLayout',
-      }, this.$props.formBehaviors);
+    this.formProvider = this.$useComputed(() => {
+      return this.$props.formProvider || {};
     });
     this.zodSchema = this.$useComputed(() => {
       if (!this.$props.schema) return;

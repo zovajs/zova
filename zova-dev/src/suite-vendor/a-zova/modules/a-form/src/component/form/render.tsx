@@ -31,7 +31,7 @@ export class RenderForm extends BeanRenderBase {
       <form bs-form={{
         form: this.form,
         formMeta: this.$props.formMeta,
-        formBehaviors: this.formBehaviors,
+        formProvider: this.formProvider,
         schema: this.$props.schema,
         zodSchema: this.zodSchema,
         formField: this.$props.formField,
