@@ -1,4 +1,4 @@
-import { ReferenceObject, SchemaObject } from 'openapi3-ts/oas31';
+import { SchemaObject } from 'openapi3-ts/oas31';
 import { BeanRenderBase, deepExtend } from 'zova';
 import { Render } from 'zova-module-a-bean';
 import { IBehaviorItem } from 'zova-module-a-behavior';
@@ -13,7 +13,7 @@ export class RenderFormField extends BeanRenderBase {
     const behaviors: IBehaviorItem = {};
     this._prepareBehaviorFormField(behaviors, name, property);
     this._prepareBehaviorFormFieldLayout(behaviors, name, property);
-    const Component = 'input';
+    const Component = this._getFieldComponent(property);
     return <Component behaviors={behaviors}></Component>;
   }
 
@@ -22,7 +22,17 @@ export class RenderFormField extends BeanRenderBase {
     return this._renderField();
   }
 
-  private _prepareBehaviorFormField(behaviors: IBehaviorItem, name: string, _property: SchemaObject | ReferenceObject) {
+  private _getFieldComponent(property: SchemaObject) {
+    let render = property.rest?.render ?? 'text';
+    if (typeof render === 'string') {
+      render = this.formProvider.components?.[render] ?? (render.includes(':') ? render : 'input');
+    }
+    if (typeof render === 'function') return render;
+    if (render.includes(':')) return this.$zovaComponent(render as any);
+    return render;
+  }
+
+  private _prepareBehaviorFormField(behaviors: IBehaviorItem, name: string, _property: SchemaObject) {
     const behaviorFormField = this.formProvider.behaviors?.formField;
     if (!behaviorFormField) return;
     const zodSchemaField = this.$$behaviorForm.getFieldZodSchema(name);
@@ -35,7 +45,7 @@ export class RenderFormField extends BeanRenderBase {
     });
   }
 
-  private _prepareBehaviorFormFieldLayout(behaviors: IBehaviorItem, name: string, property: SchemaObject | ReferenceObject) {
+  private _prepareBehaviorFormFieldLayout(behaviors: IBehaviorItem, name: string, property: SchemaObject) {
     const behaviorFormFieldLayout = this.formProvider.behaviors?.formFieldLayout;
     if (!behaviorFormFieldLayout) return;
     behaviors[behaviorFormFieldLayout] = deepExtend({ bordered: true }, this.$$behaviorForm.formFieldLayout, this.$props as any, {

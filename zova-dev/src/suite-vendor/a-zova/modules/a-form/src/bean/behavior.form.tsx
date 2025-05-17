@@ -68,8 +68,8 @@ export class BehaviorForm<TFormData = unknown> extends BeanBehaviorBase<
     return this.$options.formFieldLayout;
   }
 
-  public getFieldSchema<K extends DeepKeys<TFormData>>(name: K) {
-    return this.schema?.properties?.[name as any];
+  public getFieldSchema<K extends DeepKeys<TFormData>>(name: K): SchemaObject | undefined {
+    return this.schema?.properties?.[name as any] as unknown as SchemaObject | undefined;
   }
 
   public getFieldZodSchema<K extends DeepKeys<TFormData>>(name: K) {

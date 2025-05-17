@@ -1,6 +1,5 @@
-import type { ComponentPublicInstance } from 'vue';
-import type { Constructable, IComponentRecord } from 'zova';
 import type { TypeBehaviorRecordSelectorKeysStrict } from 'zova-module-a-behavior';
+import type { TypeRenderComponent } from 'zova-module-a-openapi';
 
 export interface IFormProviderBehaviors {
   formField?: TypeBehaviorRecordSelectorKeysStrict<'formField'>;
@@ -18,4 +17,4 @@ export interface IFormProvider {
   behaviors?: IFormProviderBehaviors;
 }
 
-export type TypeFormProviderComponent = Constructable<ComponentPublicInstance> | (keyof IComponentRecord) | string;
+export type TypeFormProviderComponent = TypeRenderComponent;
