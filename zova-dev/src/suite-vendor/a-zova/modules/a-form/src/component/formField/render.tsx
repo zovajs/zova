@@ -31,6 +31,7 @@ export class RenderFormField extends BeanRenderBase {
       validators: {
         onChange: zodSchemaField,
       },
+      formProvider: this.formProvider,
     });
   }
 

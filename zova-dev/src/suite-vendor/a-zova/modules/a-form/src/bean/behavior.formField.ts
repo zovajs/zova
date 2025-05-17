@@ -1,17 +1,20 @@
 import type { BehaviorForm } from './behavior.form.js';
 import { useField } from '@tanstack/vue-form';
 import { VNode } from 'vue';
-import { disposeInstance, Use } from 'zova';
+import { deepExtend, disposeInstance, Use } from 'zova';
 import { BeanBehaviorBase, Behavior, IBehaviors, IDecoratorBehaviorOptions, NextBehavior, ServiceComposer } from 'zova-module-a-behavior';
 import { TypeFormField } from '../types/form.js';
 import { IFormFieldOptions } from '../types/formField.js';
+import { IFormProvider } from '../types/provider.js';
 
 export interface IBehaviorPropsInputFormField {}
 
 export interface IBehaviorPropsOutputFormField {}
 
 export interface IBehaviorOptionsFormField<TParentData = unknown>
-  extends IDecoratorBehaviorOptions, IFormFieldOptions<TParentData> {}
+  extends IDecoratorBehaviorOptions, IFormFieldOptions<TParentData> {
+  formProvider?: IFormProvider;
+}
 
 @Behavior<IBehaviorOptionsFormField>()
 export class BehaviorFormField extends BeanBehaviorBase<
@@ -71,6 +74,10 @@ export class BehaviorFormField extends BeanBehaviorBase<
     return this.$$behaviorForm.getFieldZodSchema(this.$options.name);
   }
 
+  public get formProvider(): IFormProvider {
+    return deepExtend({}, this.$$behaviorForm.formProvider, this.$options.formProvider);
+  }
+
   protected render(props: IBehaviorPropsInputFormField, next: NextBehavior<IBehaviorPropsOutputFormField>): VNode {
     if (!this._composer) return next();
     return this._composer.render(props, next);
@@ -85,7 +92,7 @@ export class BehaviorFormField extends BeanBehaviorBase<
 
   private _prepareBehaviors(options: IBehaviorOptionsFormField): IBehaviors | undefined {
     if (options.behaviorModel === false) return undefined;
-    if (!options.behaviorModel || options.behaviorModel === true) return this.$$behaviorForm.formBehaviors?.formFieldModel;
+    if (!options.behaviorModel || options.behaviorModel === true) return this.formProvider.behaviors?.formFieldModel;
     return options.behaviorModel;
   }
 }
