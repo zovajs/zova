@@ -85,7 +85,7 @@ export class BehaviorFormField extends BeanBehaviorBase<
 
   private _prepareBehaviors(options: IBehaviorOptionsFormField): IBehaviors | undefined {
     if (options.behaviorModel === false) return undefined;
-    if (!options.behaviorModel || options.behaviorModel === true) return 'a-form:formFieldModel';
+    if (!options.behaviorModel || options.behaviorModel === true) return this.$$behaviorForm.formBehaviors?.formFieldModel ?? 'a-form:formFieldModel';
     return options.behaviorModel;
   }
 }
