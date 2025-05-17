@@ -12,12 +12,21 @@ export class MonkeySys extends BeanSimple implements IMonkeySysInitialize {
     // rest
     const scopeRestConfig = this.sys.util.getModuleConfigSafe('a-rest');
     scopeRestConfig.rest = deepExtend({
-      components: {
-        page: 'devui-restpage:restPage',
-        table: 'devui-resttable:restTable',
-      },
-      behaviors: {
-        formFieldLayout: 'devui-restform:formFieldLayout',
+      provider: {
+        components: {
+          page: 'devui-restpage:restPage',
+          table: 'devui-resttable:restTable',
+        },
+        form: {
+          components: {
+            text: 'input',
+          },
+          behaviors: {
+            formField: 'a-form:formField',
+            formFieldLayout: 'devui-restform:formFieldLayout',
+            formFieldModel: 'a-form:formFieldModel',
+          },
+        },
       },
     } satisfies IRestConfig, scopeRestConfig.rest);
   }

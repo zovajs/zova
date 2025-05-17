@@ -23,7 +23,8 @@ export class RenderFormField extends BeanRenderBase {
   }
 
   private _prepareBehaviorFormField(behaviors: IBehaviorItem, name: string, _property: SchemaObject | ReferenceObject) {
-    const behaviorFormField = this.formBehaviors.formField ?? 'a-form:formField';
+    const behaviorFormField = this.formBehaviors.formField;
+    if (!behaviorFormField) return;
     const zodSchemaField = this.$$behaviorForm.getFieldZodSchema(name);
     behaviors[behaviorFormField] = Object.assign({}, this.$$behaviorForm.formField, this.$props as any, {
       name,
