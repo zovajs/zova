@@ -7,7 +7,7 @@ export class RenderWrapperForm extends BeanRenderBase {
   public render() {
     // mutation
     const mutationSubmit = this.$props.getMutationSubmit?.();
-    const ComponentForm = this.$zovaComponent(this.$$restResource.componentRestForm);
+    const ComponentForm = this.$zovaComponent(this.$$restResource.componentForm);
     return (
       <div>
         <dialog id={this.formDomId} class="modal" open={this.modelFormVisible} onClose={() => { this.modelFormVisible = false; }}>

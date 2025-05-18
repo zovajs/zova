@@ -5,16 +5,16 @@ import { Render } from 'zova-module-a-bean';
 export class RenderWrapperTable extends BeanRenderBase {
   public render() {
     // table
-    const ComponentRestTable = this.$zovaComponent(this.$$restResource.componentRestTable);
+    const ComponentTable = this.$zovaComponent(this.$$restResource.componentTable);
     const querySdkBootstrap = this.$$restResource.getQuerySdkBootstrap();
     const schemaTableRow = this.$$restResource.getSchemaOfTableRow(querySdkBootstrap.data?.operationObject);
     const queryDataFindAll = this.$$restResource.getQueryDataFindAll();
     return (
-      <ComponentRestTable
+      <ComponentTable
         data={queryDataFindAll.data}
         schema={schemaTableRow}
         onOperationCreate={() => this.onOperationCreate()}
-      ></ComponentRestTable>
+      ></ComponentTable>
     );
   }
 }
