@@ -16,8 +16,13 @@ export class ControllerTable extends BeanControllerTableBase {
   table: TypeTable;
 
   protected async __init__() {
+    this.bean._setBean('$$table', this);
     // table
     this._createTable();
+  }
+
+  public get schema() {
+    return this.$props.schema!;
   }
 
   private _createTable() {
