@@ -7,17 +7,6 @@ export class RenderTable extends BeanRenderBase {
   public render() {
     return (
       <div class="overflow-x-auto">
-        <div>
-          <button
-            class="btn btn-primary"
-            type="button"
-            onClick={() => {
-              this.onOperationCreate();
-            }}
-          >
-            {this.scope.locale.Create()}
-          </button>
-        </div>
         <table class="table">
           <thead>
             <tr>
