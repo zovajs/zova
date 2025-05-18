@@ -1,5 +1,6 @@
 import { getCoreRowModel } from '@tanstack/vue-table';
 import { SchemaObject } from 'openapi3-ts/oas31';
+import { cast } from 'zova';
 import { Controller } from 'zova-module-a-bean';
 import { BeanControllerTableBase, TypeColumn, TypeTable } from 'zova-module-a-table';
 
@@ -32,6 +33,7 @@ export class ControllerTable<T extends {} = {}> extends BeanControllerTableBase 
         return self.$props.data || [];
       },
       columns: this.$props.columns as any,
+      getRowId: row => cast(row).id,
       getCoreRowModel: getCoreRowModel(),
     });
   }
