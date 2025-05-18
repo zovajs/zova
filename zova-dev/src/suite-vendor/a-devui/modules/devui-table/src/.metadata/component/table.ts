@@ -11,12 +11,12 @@ export type TypeControllerTablePublicProps<T extends any[] = any[]> = {
 
 type ControllerInnerProps<T extends any[] = any[]> =
       TypeControllerInnerProps<ControllerTableProps<T>, keyof typeof ControllerTable.$propsDefault>;
-declare module 'zova-module-devui-resttable' {
+declare module 'zova-module-devui-table' {
   export interface ControllerTable<T extends any[] = any[]> {
     $props: ControllerInnerProps<T>;
   }
 }
-declare module 'zova-module-devui-resttable' {
+declare module 'zova-module-devui-table' {
   export interface RenderTable<T extends any[] = any[]> extends ControllerTable<T> {}
 }
 export const ZTable = defineComponent(

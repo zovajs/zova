@@ -1,8 +1,8 @@
 {
-  "name": "zova-module-devui-resttable",
+  "name": "zova-module-devui-table",
   "type": "module",
   "version": "5.0.0",
-  "title": "devui-resttable",
+  "title": "devui-table",
   "description": "",
   "author": "",
   "keywords": ["Zova Module"],

@@ -28,16 +28,16 @@ export * from '../component/table/controller.jsx';
 declare module 'zova' {
 
 }
-declare module 'zova-module-devui-resttable' {
+declare module 'zova-module-devui-table' {
 
   export interface ControllerTable {
     /** @internal */
-    get scope(): ScopeModuleDevuiResttable;
+    get scope(): ScopeModuleDevuiTable;
   }
 }
 declare module 'zova' {
   export interface IBeanRecordLocal {
-    'devui-resttable.controller.table': ControllerTable;
+    'devui-table.controller.table': ControllerTable;
   }
 }
 /** controller: end */
@@ -50,10 +50,10 @@ export const components = {
 };
 declare module 'zova' {
   export interface IComponentRecord {
-    'devui-resttable:table': ControllerTable;
+    'devui-table:table': ControllerTable;
   }
   export interface IZovaComponentRecord {
-    'devui-resttable:table': typeof ZTable;
+    'devui-table:table': typeof ZTable;
   }
 }
 /** components: begin */
@@ -61,16 +61,16 @@ export * from './component/table.js';
 declare module 'zova' {
 
 }
-declare module 'zova-module-devui-resttable' {
+declare module 'zova-module-devui-table' {
 
   export interface RenderTable {
     /** @internal */
-    get scope(): ScopeModuleDevuiResttable;
+    get scope(): ScopeModuleDevuiTable;
   }
 }
 declare module 'zova' {
   export interface IBeanRecordLocal {
-    'devui-resttable.render.table': RenderTable;
+    'devui-table.render.table': RenderTable;
   }
 }
 export const locales = {
@@ -79,24 +79,24 @@ export const locales = {
 };
 
 @Scope()
-export class ScopeModuleDevuiResttable extends BeanScopeBase {}
+export class ScopeModuleDevuiTable extends BeanScopeBase {}
 
-export interface ScopeModuleDevuiResttable {
+export interface ScopeModuleDevuiTable {
   util: BeanScopeUtil;
   locale: TypeModuleLocales<(typeof locales)[TypeLocaleBase]>;
 }
 
 declare module 'zova' {
   export interface IBeanScopeRecord {
-    'devui-resttable': ScopeModuleDevuiResttable;
+    'devui-table': ScopeModuleDevuiTable;
   }
 
   export interface IBeanScopeLocale {
-    'devui-resttable': (typeof locales)[TypeLocaleBase];
+    'devui-table': (typeof locales)[TypeLocaleBase];
   }
 }
 
-export function locale<K extends keyof (typeof locales)[TypeLocaleBase]>(key: K): `devui-resttable::${K}` {
-  return `devui-resttable::${key}`;
+export function locale<K extends keyof (typeof locales)[TypeLocaleBase]>(key: K): `devui-table::${K}` {
+  return `devui-table::${key}`;
 }
 /** scope: end */
