@@ -1,13 +1,13 @@
 import { classes } from 'typestyle';
 import { BeanRenderBase } from 'zova';
 import { Render } from 'zova-module-a-bean';
-import { ZForm } from 'zova-module-a-form';
 
 @Render()
 export class RenderWrapperForm extends BeanRenderBase {
   public render() {
     // mutation
     const mutationSubmit = this.$props.getMutationSubmit?.();
+    const ComponentForm = this.$zovaComponent(this.$$restResource.componentRestForm);
     return (
       <div>
         <dialog id={this.formDomId} class="modal" open={this.modelFormVisible} onClose={() => { this.modelFormVisible = false; }}>
@@ -15,14 +15,14 @@ export class RenderWrapperForm extends BeanRenderBase {
             <h3 class="font-bold text-lg">Hello!</h3>
             <p class="py-4">
               {this.modelFormVisible && !!this.formData && (
-                <ZForm
+                <ComponentForm
                   controllerRef={ref => { this.controllerRestForm = ref; }}
                   data={this.formData}
                   schema={this.schema}
                   formMeta={this.$props.formMeta}
                   formProvider={this.$props.formProvider}
                   onSubmit={data => this.onSubmit(data)}
-                ></ZForm>
+                ></ComponentForm>
               )}
             </p>
             <div class="modal-action">

@@ -17,6 +17,7 @@ export class MonkeySys extends BeanSimple implements IMonkeySysInitialize {
         components: {
           page: 'devui-restpage:restPage',
           table: 'devui-resttable:restTable',
+          form: 'a-form:form',
         },
       },
     } satisfies IRestConfig, scopeRestConfig.rest);
@@ -24,6 +25,7 @@ export class MonkeySys extends BeanSimple implements IMonkeySysInitialize {
     const scopeFormConfig = this.sys.util.getModuleConfigSafe('a-form');
     scopeFormConfig.formProvider = deepExtend({
       components: {
+        formField: 'a-form:formField',
         text: 'input',
       },
       behaviors: {
