@@ -3,9 +3,9 @@ import { SchemaObject } from 'openapi3-ts/oas31';
 import { Controller } from 'zova-module-a-bean';
 import { BeanControllerTableBase, TypeColumn, TypeTable } from 'zova-module-a-table';
 
-export interface ControllerTableProps<T extends any[] = any[]> {
+export interface ControllerTableProps<T extends {} = {}> {
   columns?: TypeColumn<T>[];
-  data?: T;
+  data?: T[];
   schema?: SchemaObject;
 }
 

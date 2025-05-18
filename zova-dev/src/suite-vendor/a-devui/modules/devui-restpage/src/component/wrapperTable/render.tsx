@@ -20,6 +20,7 @@ export class RenderWrapperTable extends BeanRenderBase {
           </button>
         </div>
         <ComponentTable
+          columns={this.columns}
           data={this.data}
           schema={this.schema}
         ></ComponentTable>
