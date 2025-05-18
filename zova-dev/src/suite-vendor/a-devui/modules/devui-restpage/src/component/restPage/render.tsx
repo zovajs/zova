@@ -17,7 +17,7 @@ export class RenderRestPage extends BeanRenderBase {
             }}
           ></ZWrapperForm>
         </ClientOnly>
-        <ZWrapperTable onOperationCreate={() => this.onOperationCreate()}></ZWrapperTable>
+        <ZWrapperTable onActionCreate={() => this.onActionCreate()}></ZWrapperTable>
       </div>
     );
   }

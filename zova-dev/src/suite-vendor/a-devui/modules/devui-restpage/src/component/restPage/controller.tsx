@@ -25,7 +25,7 @@ export class ControllerRestPage extends BeanControllerBase {
     });
   }
 
-  onOperationCreate() {
+  onActionCreate() {
     this.formMode = 'edit';
     this.editMode = 'create';
     this.formVisible = true;

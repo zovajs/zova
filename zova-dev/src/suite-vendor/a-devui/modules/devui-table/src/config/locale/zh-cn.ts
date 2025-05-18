@@ -1,3 +1,3 @@
 export default {
-  Operations: '操作',
+  TableActions: '操作',
 };

@@ -5,7 +5,7 @@ import { ControllerPageResource } from 'zova-module-a-rest';
 import { TypeColumn } from 'zova-module-a-table';
 
 export interface ControllerWrapperTableProps {
-  onOperationCreate: Functionable;
+  onActionCreate: Functionable;
 }
 
 @Controller()
@@ -52,7 +52,7 @@ export class ControllerWrapperTable extends BeanControllerBase {
     });
   }
 
-  onOperationCreate() {
-    return this.$props.onOperationCreate();
+  onActionCreate() {
+    return this.$props.onActionCreate();
   }
 }

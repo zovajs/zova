@@ -1,3 +1,3 @@
 export default {
-  Operations: 'Operations',
+  TableActions: 'Actions',
 };
