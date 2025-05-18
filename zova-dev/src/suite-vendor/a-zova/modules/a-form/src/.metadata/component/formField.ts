@@ -5,22 +5,22 @@ import { prepareComponentOptions, useController } from 'zova';
 import { ControllerFormField } from '../../component/formField/controller.jsx';
 import { RenderFormField } from '../../component/formField/render.jsx';
 
-export type TypeControllerFormFieldPublicProps<_T = unknown> = {
-  controllerRef?: (ref: ControllerFormField<_T>) => void;
-} & ControllerFormFieldProps<_T>;
+export type TypeControllerFormFieldPublicProps = {
+  controllerRef?: (ref: ControllerFormField) => void;
+} & ControllerFormFieldProps;
 
-type ControllerInnerProps<_T = unknown> =
-      TypeControllerInnerProps<ControllerFormFieldProps<_T>, keyof typeof ControllerFormField.$propsDefault>;
+type ControllerInnerProps =
+      TypeControllerInnerProps<ControllerFormFieldProps, keyof typeof ControllerFormField.$propsDefault>;
 declare module 'zova-module-a-form' {
-  export interface ControllerFormField<_T = unknown> {
-    $props: ControllerInnerProps<_T>;
+  export interface ControllerFormField {
+    $props: ControllerInnerProps;
   }
 }
 declare module 'zova-module-a-form' {
-  export interface RenderFormField<_T = unknown> extends ControllerFormField<_T> {}
+  export interface RenderFormField extends ControllerFormField {}
 }
 export const ZFormField = defineComponent(
-  <_T = unknown>(_props: TypeControllerFormFieldPublicProps<_T>) => {
+  (_props: TypeControllerFormFieldPublicProps) => {
     useController(ControllerFormField, RenderFormField, undefined);
     return () => {};
   },

@@ -1,7 +1,7 @@
 import type { BeanScopeUtil } from 'zova';
-/** behaviors: end */
+/** config: end */
 /** scope: begin */
-import { BeanScopeBase } from 'zova';
+import { BeanScopeBase, TypeModuleConfig } from 'zova';
 import { Scope } from 'zova-module-a-bean';
 import { IBehaviorOptionsForm } from '../bean/behavior.form.jsx';
 /** behavior: end */
@@ -20,6 +20,7 @@ import { ControllerForm } from '../component/form/controller.jsx';
 import { RenderForm } from '../component/form/render.jsx';
 import { ControllerFormField } from '../component/formField/controller.jsx';
 import { RenderFormField } from '../component/formField/render.jsx';
+import { config } from '../config/config.js';
 import { ZForm } from './component/form.js';
 import { ZFormField } from './component/formField.js';
 /** render: end */
@@ -106,9 +107,11 @@ declare module 'zova' {
   }
 }
 export * from '../component/formField/render.jsx';
+/** behaviors: end */
+/** config: begin */
+export * from '../config/config.js';
 /** components: begin */
 export * from './component/form.js';
-export * from './component/formField.js';
 declare module 'zova-module-a-behavior' {
 
   export interface IBehaviorRecord {
@@ -161,17 +164,23 @@ declare module 'vue/jsx-runtime' {
     }
   }
 }
+export * from './component/formField.js';
 
 @Scope()
 export class ScopeModuleAForm extends BeanScopeBase {}
 
 export interface ScopeModuleAForm {
   util: BeanScopeUtil;
+  config: TypeModuleConfig<typeof config>;
 }
 
 declare module 'zova' {
   export interface IBeanScopeRecord {
     'a-form': ScopeModuleAForm;
+  }
+
+  export interface IBeanScopeConfig {
+    'a-form': ReturnType<typeof config>;
   }
 
 }
