@@ -3,6 +3,7 @@ import type { ZovaViteConfigOptions, ZovaVitePlugin } from './types.ts';
 import path from 'node:path';
 import babel from '@cabloy/vite-plugin-babel';
 import fse from 'fs-extra';
+import devtoolsJson from 'vite-plugin-devtools-json';
 // import vitePluginChecker from 'vite-plugin-checker';
 import { vitePluginFakeServer } from 'vite-plugin-fake-server-turbo';
 import { requireModule } from './utils.ts';
@@ -18,6 +19,7 @@ export function generateVitePlugins(
   if (process.env.MOCK_ENABLED === 'true') {
     vitePlugins.push(__getVitePluginMock(configOptions, modulesMeta));
   }
+  vitePlugins.push(__getVitePluginDevtoolsJson());
   vitePlugins.push(__getVitePluginCss());
   // vitePlugins.push(__getVitePluginChecker(configOptions));
   return vitePlugins;
@@ -64,6 +66,15 @@ export function generateVitePlugins(
           ['@babel/plugin-transform-class-properties', { loose: true }],
         ],
       },
+      undefined,
+    ] as ZovaVitePlugin;
+  }
+
+  function __getVitePluginDevtoolsJson() {
+    return [
+      'vite-plugin-devtools-json',
+      devtoolsJson,
+      {},
       undefined,
     ] as ZovaVitePlugin;
   }
