@@ -4,14 +4,14 @@ import { Functionable } from 'zova';
 import { Controller } from 'zova-module-a-bean';
 import { BeanControllerTableBase, TypeColumn, TypeTable } from 'zova-module-a-table';
 
-export interface ControllerRestTableProps<T extends any[] = any[]> {
+export interface ControllerTableProps<T extends any[] = any[]> {
   data?: T;
   schema?: SchemaObject;
   onOperationCreate: Functionable;
 }
 
 @Controller()
-export class ControllerRestTable extends BeanControllerTableBase {
+export class ControllerTable extends BeanControllerTableBase {
   static $propsDefault = {};
 
   table: TypeTable;

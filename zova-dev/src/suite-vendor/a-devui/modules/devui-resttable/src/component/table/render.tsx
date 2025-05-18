@@ -3,7 +3,7 @@ import { BeanRenderBase } from 'zova';
 import { Render } from 'zova-module-a-bean';
 
 @Render()
-export class RenderRestTable extends BeanRenderBase {
+export class RenderTable extends BeanRenderBase {
   public render() {
     return (
       <div class="overflow-x-auto">

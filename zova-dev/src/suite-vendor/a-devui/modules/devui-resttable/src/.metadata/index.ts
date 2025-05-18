@@ -5,16 +5,16 @@ import { BeanScopeBase, TypeLocaleBase, TypeModuleLocales } from 'zova';
 import { Scope } from 'zova-module-a-bean';
 /** controller: end */
 /** controller: begin */
-import { ControllerRestTable } from '../component/restTable/controller.jsx';
+import { ControllerTable } from '../component/table/controller.jsx';
 /** render: end */
 /** render: begin */
-import { RenderRestTable } from '../component/restTable/render.jsx';
+import { RenderTable } from '../component/table/render.jsx';
 
 /** render: end */
 /** locale: begin */
 import locale_en_us from '../config/locale/en-us.js';
 import locale_zh_cn from '../config/locale/zh-cn.js';
-import { ZRestTable } from './component/restTable.js';
+import { ZTable } from './component/table.js';
 /** controller: begin */
 import 'zova';
 import 'zova';
@@ -24,53 +24,53 @@ import 'zova';
 
 import 'zova';
 
-export * from '../component/restTable/controller.jsx';
+export * from '../component/table/controller.jsx';
 declare module 'zova' {
 
 }
 declare module 'zova-module-devui-resttable' {
 
-  export interface ControllerRestTable {
+  export interface ControllerTable {
     /** @internal */
     get scope(): ScopeModuleDevuiResttable;
   }
 }
 declare module 'zova' {
   export interface IBeanRecordLocal {
-    'devui-resttable.controller.restTable': ControllerRestTable;
+    'devui-resttable.controller.table': ControllerTable;
   }
 }
 /** controller: end */
 
 /** components: end */
 /** render: begin */
-export * from '../component/restTable/render.jsx';
+export * from '../component/table/render.jsx';
 export const components = {
-  restTable: ZRestTable,
+  table: ZTable,
 };
 declare module 'zova' {
   export interface IComponentRecord {
-    'devui-resttable:restTable': ControllerRestTable;
+    'devui-resttable:table': ControllerTable;
   }
   export interface IZovaComponentRecord {
-    'devui-resttable:restTable': typeof ZRestTable;
+    'devui-resttable:table': typeof ZTable;
   }
 }
 /** components: begin */
-export * from './component/restTable.js';
+export * from './component/table.js';
 declare module 'zova' {
 
 }
 declare module 'zova-module-devui-resttable' {
 
-  export interface RenderRestTable {
+  export interface RenderTable {
     /** @internal */
     get scope(): ScopeModuleDevuiResttable;
   }
 }
 declare module 'zova' {
   export interface IBeanRecordLocal {
-    'devui-resttable.render.restTable': RenderRestTable;
+    'devui-resttable.render.table': RenderTable;
   }
 }
 export const locales = {
