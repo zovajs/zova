@@ -23,7 +23,7 @@ export class RenderTable extends BeanRenderBase {
           <tbody>
             {this.table.getRowModel().rows.map(row => {
               return (
-                <tr key={row.getValue('id')}>
+                <tr key={row.id}>
                   {row.getVisibleCells().map(cell => {
                     return (
                       <td key={cell.id}>

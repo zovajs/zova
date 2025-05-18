@@ -10,10 +10,10 @@ export interface ControllerTableProps<T extends {} = {}> {
 }
 
 @Controller()
-export class ControllerTable extends BeanControllerTableBase {
+export class ControllerTable<T extends {} = {}> extends BeanControllerTableBase {
   static $propsDefault = {};
 
-  table: TypeTable;
+  table: TypeTable<T>;
 
   protected async __init__() {
     this.bean._setBean('$$table', this);
@@ -33,6 +33,6 @@ export class ControllerTable extends BeanControllerTableBase {
       },
       columns: this.$props.columns as any,
       getCoreRowModel: getCoreRowModel(),
-    } as any);
+    });
   }
 }

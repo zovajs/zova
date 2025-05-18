@@ -45,7 +45,7 @@ export class ControllerWrapperTable extends BeanControllerBase {
         // const property = schema.properties[key];
         columns.push(columnHelper.accessor(key as any, {
           id: key,
-          cell: info => info.getValue(),
+          cell: props => props.getValue(),
         }));
       }
       return columns;
