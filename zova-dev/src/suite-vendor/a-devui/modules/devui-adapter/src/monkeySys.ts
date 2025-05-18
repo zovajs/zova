@@ -15,8 +15,8 @@ export class MonkeySys extends BeanSimple implements IMonkeySysInitialize {
     scopeRestConfig.rest = deepExtend({
       provider: {
         components: {
-          page: 'devui-restpage:restPage',
-          table: 'devui-resttable:restTable',
+          restPage: 'devui-restpage:restPage',
+          table: 'devui-table:table',
           form: 'a-form:form',
         },
       },
