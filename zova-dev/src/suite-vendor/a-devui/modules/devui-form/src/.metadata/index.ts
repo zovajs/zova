@@ -21,26 +21,26 @@ export * from '../bean/behavior.formFieldLayout.jsx';
 declare module 'zova-module-a-behavior' {
 
   export interface IBehaviorRecord {
-    'devui-restform:formFieldLayout': IBehaviorOptionsFormFieldLayout;
+    'devui-form:formFieldLayout': IBehaviorOptionsFormFieldLayout;
   }
 
 }
-declare module 'zova-module-devui-restform' {
+declare module 'zova-module-devui-form' {
 
   export interface BehaviorFormFieldLayout {
     /** @internal */
-    get scope(): ScopeModuleDevuiRestform;
+    get scope(): ScopeModuleDevuiForm;
   }
 }
 declare module 'zova' {
   export interface IBeanRecordLocal {
-    'devui-restform.behavior.formFieldLayout': BehaviorFormFieldLayout;
+    'devui-form.behavior.formFieldLayout': BehaviorFormFieldLayout;
   }
 }
 
 declare module 'vue' {
   export interface InputHTMLAttributes {
-    'bs-devui-restform-formFieldLayout'?: IBehaviorOptionsFormFieldLayout | '' | boolean;
+    'bs-devui-form-formFieldLayout'?: IBehaviorOptionsFormFieldLayout | '' | boolean;
   }
 }
 
@@ -48,21 +48,21 @@ declare module 'vue/jsx-runtime' {
   namespace JSX {
     // need define class/style in IntrinsicAttributes
     export interface IntrinsicAttributes {
-      'bs-devui-restform-formFieldLayout'?: IBehaviorOptionsFormFieldLayout | '' | boolean;
+      'bs-devui-form-formFieldLayout'?: IBehaviorOptionsFormFieldLayout | '' | boolean;
     }
   }
 }
 
 @Scope()
-export class ScopeModuleDevuiRestform extends BeanScopeBase {}
+export class ScopeModuleDevuiForm extends BeanScopeBase {}
 
-export interface ScopeModuleDevuiRestform {
+export interface ScopeModuleDevuiForm {
   util: BeanScopeUtil;
 }
 
 declare module 'zova' {
   export interface IBeanScopeRecord {
-    'devui-restform': ScopeModuleDevuiRestform;
+    'devui-form': ScopeModuleDevuiForm;
   }
 
 }

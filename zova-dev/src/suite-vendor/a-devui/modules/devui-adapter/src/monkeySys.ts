@@ -30,7 +30,7 @@ export class MonkeySys extends BeanSimple implements IMonkeySysInitialize {
       },
       behaviors: {
         formField: 'a-form:formField',
-        formFieldLayout: 'devui-restform:formFieldLayout',
+        formFieldLayout: 'devui-form:formFieldLayout',
         formFieldModel: 'a-form:formFieldModel',
       },
     } satisfies IFormProvider, scopeFormConfig.formProvider);

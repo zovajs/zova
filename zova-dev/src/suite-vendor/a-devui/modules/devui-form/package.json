@@ -1,8 +1,8 @@
 {
-  "name": "zova-module-devui-restform",
+  "name": "zova-module-devui-form",
   "type": "module",
   "version": "5.0.0",
-  "title": "devui-restform",
+  "title": "devui-form",
   "description": "",
   "author": "",
   "keywords": ["Zova Module"],
