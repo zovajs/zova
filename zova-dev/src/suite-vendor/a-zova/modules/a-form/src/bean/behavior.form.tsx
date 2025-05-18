@@ -21,9 +21,9 @@ export interface IBehaviorOptionsForm<TFormData = unknown> extends IDecoratorBeh
   formProvider?: IFormProvider;
   schema?: SchemaObject;
   zodSchema?: z.AnyZodObject;
-  onFormSubmit?: ((payload: Event) => void) | boolean;
   formField?: IFormFieldOptionsBase;
   formFieldLayout?: IFormFieldLayoutOptionsBase;
+  onFormSubmit?: ((payload: Event) => void) | boolean;
 }
 
 @Behavior<IBehaviorOptionsForm>()

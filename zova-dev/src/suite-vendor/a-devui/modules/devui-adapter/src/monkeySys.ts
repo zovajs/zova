@@ -22,7 +22,7 @@ export class MonkeySys extends BeanSimple implements IMonkeySysInitialize {
     } satisfies IRestConfig, scopeRestConfig.rest);
     // form
     const scopeFormConfig = this.sys.util.getModuleConfigSafe('a-form');
-    scopeFormConfig.provider = deepExtend({
+    scopeFormConfig.formProvider = deepExtend({
       components: {
         text: 'input',
       },
@@ -31,6 +31,6 @@ export class MonkeySys extends BeanSimple implements IMonkeySysInitialize {
         formFieldLayout: 'devui-restform:formFieldLayout',
         formFieldModel: 'a-form:formFieldModel',
       },
-    } satisfies IFormProvider, scopeFormConfig.provider);
+    } satisfies IFormProvider, scopeFormConfig.formProvider);
   }
 }

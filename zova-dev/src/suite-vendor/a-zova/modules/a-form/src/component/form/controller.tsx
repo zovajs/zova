@@ -1,5 +1,6 @@
 import { SchemaObject } from 'openapi3-ts/oas31';
 import { z } from 'zod';
+import { deepExtend } from 'zova-core';
 import { Controller } from 'zova-module-a-bean';
 import { schemaToZodSchema } from 'zova-module-a-openapi';
 import { BeanControllerFormBase } from '../../lib/beanControllerFormBase.js';
@@ -13,9 +14,9 @@ export interface ControllerFormProps<T extends {} = {}> {
   schema?: SchemaObject;
   formMeta?: IFormMeta;
   formProvider?: IFormProvider;
-  onSubmit?: TypeFormOnSubmit<T>;
   formField?: IFormFieldOptionsBase;
   formFieldLayout?: IFormFieldLayoutOptionsBase;
+  onSubmit?: TypeFormOnSubmit<T>;
 }
 
 @Controller()
@@ -34,7 +35,7 @@ export class ControllerForm extends BeanControllerFormBase {
       },
     });
     this.formProvider = this.$useComputed(() => {
-      return this.$props.formProvider || {};
+      return deepExtend({}, this.scope.config.formProvider, this.$props.formProvider);
     });
     this.zodSchema = this.$useComputed(() => {
       if (!this.$props.schema) return;
