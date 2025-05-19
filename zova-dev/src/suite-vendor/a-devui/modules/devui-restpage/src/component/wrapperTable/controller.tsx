@@ -63,7 +63,7 @@ export class ControllerWrapperTable<T extends {} = {}> extends BeanControllerTab
       _features: [TableFeatureSchema],
       get schema() { return self.schema; },
       get data() { return self.data || []; },
-      get columns() { return this.columns; },
+      get columns() { return self.columns; },
       getRowId: row => cast(row).id,
       getCoreRowModel: getCoreRowModel(),
     });
