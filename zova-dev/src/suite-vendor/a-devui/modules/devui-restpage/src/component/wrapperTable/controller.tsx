@@ -45,7 +45,6 @@ export class ControllerWrapperTable<T extends {} = {}> extends BeanControllerTab
       const columns: TypeColumn[] = [];
       const properties = this.schema.properties!;
       for (const key in properties) {
-        // const property = schema.properties[key];
         columns.push(columnHelper.accessor(key as any, {
           id: key,
           header: props => {
@@ -62,13 +61,9 @@ export class ControllerWrapperTable<T extends {} = {}> extends BeanControllerTab
     const self = this;
     this.table = this.$useTable({
       _features: [TableFeatureSchema],
-      get schema() {
-        return self.schema;
-      },
-      get data() {
-        return self.data || [];
-      },
-      columns: this.columns,
+      get schema() { return self.schema; },
+      get data() { return self.data || []; },
+      get columns() { return this.columns; },
       getRowId: row => cast(row).id,
       getCoreRowModel: getCoreRowModel(),
     });
