@@ -1,4 +1,4 @@
-import { BeanTableCellFormatBase, TableCellFormat } from 'zova-module-a-table';
+import { BeanTableCellFormatBase, IDecoratorTableCellFormatOptions, TableCellFormat } from 'zova-module-a-table';
 
 export interface ITableCellFormatOptionsFallback extends IDecoratorTableCellFormatOptions {}
 
