@@ -6,9 +6,11 @@ import { Scope } from 'zova-module-a-bean';
 /** bean: end */
 /** bean: begin */
 import { BeanTableCellFormatBase } from '../bean/bean.tableCellFormatBase.js';
-import { ITableCellFormatOptionsFallback } from '../bean/tableCellFormat.fallback.js';
+import { ITableCellFormatOptionsCurrency } from '../bean/tableCellFormat.currency.js';
 /** tableCellFormat: end */
 /** tableCellFormat: begin */
+import { TableCellFormatCurrency } from '../bean/tableCellFormat.currency.js';
+import { ITableCellFormatOptionsFallback } from '../bean/tableCellFormat.fallback.js';
 import { TableCellFormatFallback } from '../bean/tableCellFormat.fallback.js';
 /** bean: begin */
 import 'zova';
@@ -32,15 +34,22 @@ declare module 'zova' {
 }
 /** bean: end */
 /** tableCellFormat: begin */
+export * from '../bean/tableCellFormat.currency.js';
 export * from '../bean/tableCellFormat.fallback.js';
 declare module 'zova-module-a-table' {
 
   export interface ITableCellFormatRecord {
+    'a-table:currency': ITableCellFormatOptionsCurrency;
     'a-table:fallback': ITableCellFormatOptionsFallback;
   }
 
 }
 declare module 'zova-module-a-table' {
+
+  export interface TableCellFormatCurrency {
+    /** @internal */
+    get scope(): ScopeModuleATable;
+  }
 
   export interface TableCellFormatFallback {
     /** @internal */
@@ -49,6 +58,7 @@ declare module 'zova-module-a-table' {
 }
 declare module 'zova' {
   export interface IBeanRecordLocal {
+    'a-table.tableCellFormat.currency': TableCellFormatCurrency;
     'a-table.tableCellFormat.fallback': TableCellFormatFallback;
   }
 }
