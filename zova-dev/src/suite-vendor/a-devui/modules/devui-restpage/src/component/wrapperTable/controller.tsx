@@ -1,28 +1,31 @@
-import { createColumnHelper } from '@tanstack/table-core';
-import { BeanControllerBase, Functionable, Use } from 'zova';
+import { createColumnHelper, getCoreRowModel } from '@tanstack/table-core';
+import { cast, Functionable, Use } from 'zova';
 import { Controller } from 'zova-module-a-bean';
 import { ControllerPageResource } from 'zova-module-a-rest';
-import { TypeColumn } from 'zova-module-a-table';
+import { BeanControllerTableBase, TableFeatureSchema, TypeColumn, TypeTable } from 'zova-module-a-table';
 
-export interface ControllerWrapperTableProps {
+export interface ControllerWrapperTableProps<_T extends {} = {}> {
   onActionCreate: Functionable;
 }
 
 @Controller()
-export class ControllerWrapperTable extends BeanControllerBase {
+export class ControllerWrapperTable<T extends {} = {}> extends BeanControllerTableBase {
   static $propsDefault = {};
 
-  columns: TypeColumn[];
+  table: TypeTable<T>;
+  columns: TypeColumn<T>[];
 
   @Use({ injectionScope: 'host' })
   $$restResource: ControllerPageResource;
 
   protected async __init__() {
-    // columns
-    this._createColumns();
     // dataFindAll
     const queryDataFindAll = this.$$restResource.getQueryDataFindAll();
     await queryDataFindAll.suspense();
+    // columns
+    this._createColumns();
+    // table
+    this._createTable();
   }
 
   get data() {
@@ -51,7 +54,23 @@ export class ControllerWrapperTable extends BeanControllerBase {
           cell: props => props.getValue(),
         }));
       }
-      return columns;
+      return columns as TypeColumn<T>[];
+    });
+  }
+
+  private _createTable() {
+    const self = this;
+    this.table = this.$useTable({
+      _features: [TableFeatureSchema],
+      get schema() {
+        return self.schema;
+      },
+      get data() {
+        return self.data || [];
+      },
+      columns: this.columns,
+      getRowId: row => cast(row).id,
+      getCoreRowModel: getCoreRowModel(),
     });
   }
 
