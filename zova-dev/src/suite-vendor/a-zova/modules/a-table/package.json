@@ -29,7 +29,10 @@
     },
     "onionsConfig": {
       "tableCellFormat": {
-        "currency": {},
+        "currency": {
+          "dependencies": "a-table:fallback",
+          "match": "currency"
+        },
         "fallback": {}
       }
     }
