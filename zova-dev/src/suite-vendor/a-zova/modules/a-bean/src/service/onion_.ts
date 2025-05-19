@@ -127,16 +127,18 @@ export class ServiceOnion<OPTIONS, ONIONNAME extends string> extends BeanSimple 
   //   return this.getOnionSlice(onionName).beanOptions.options as OPTIONS | undefined;
   // }
 
-  async loadOnionsFromPackage(selector?: string): Promise<IOnionSlice<OPTIONS, ONIONNAME>[]> {
+  async loadOnionsFromPackage(selector?: string | boolean, matchThis?: any, ...matchArgs: any[]): Promise<IOnionSlice<OPTIONS, ONIONNAME>[]> {
     // onionItems
-    const onionItems = this.getOnionsEnabled(this.onionsAll, selector);
+    const onionItems = this.getOnionsEnabled(this.onionsAll, selector, matchThis, ...matchArgs);
     // loadOnions
-    return await this.loadOnions(onionItems, selector);
+    return await this.loadOnions(onionItems, selector, matchThis, ...matchArgs);
   }
 
   async loadOnions<T>(
     onionItems: IOnionItem<OPTIONS, ONIONNAME> | IOnionItem<OPTIONS, ONIONNAME>[],
-    selector?: string,
+    selector?: string | boolean,
+    matchThis?: any,
+    ...matchArgs: any[]
   ): Promise<IOnionSlice<OPTIONS, ONIONNAME, T>[]> {
     if (!Array.isArray(onionItems)) onionItems = [onionItems];
     if (onionItems.length === 0) return [];
@@ -165,7 +167,7 @@ export class ServiceOnion<OPTIONS, ONIONNAME extends string> extends BeanSimple 
     // swap
     this._swapOnions(onionSlices);
     // filter
-    return this.getOnionsEnabled(onionSlices, selector);
+    return this.getOnionsEnabled(onionSlices, selector, matchThis, ...matchArgs);
   }
 
   getOnionsEnabled<T>(
