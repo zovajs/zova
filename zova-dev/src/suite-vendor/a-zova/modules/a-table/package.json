@@ -18,6 +18,14 @@
           "output": "tanstack-table"
         }
       ]
+    },
+    "onions": {
+      "tableCellFormat": {
+        "optionsPackage": true,
+        "optionsGlobalInterfaceName": "IDecoratorTableCellFormatOptions",
+        "optionsGlobalInterfaceFrom": "zova-module-a-table",
+        "boilerplate": "cli/tableCellFormat/boilerplate"
+      }
     }
   },
   "description": "",
