@@ -4,5 +4,5 @@ import { BeanTableCellFormatBase } from './bean.tableCellFormatBase.js';
 
 export interface ITableCellFormatOptionsCurrency extends IDecoratorTableCellFormatOptions {}
 
-@TableCellFormat<ITableCellFormatOptionsCurrency>()
+@TableCellFormat<ITableCellFormatOptionsCurrency>({ dependencies: 'a-table:fallback', match: 'currency' })
 export class TableCellFormatCurrency extends BeanTableCellFormatBase<ITableCellFormatOptionsCurrency> {}
