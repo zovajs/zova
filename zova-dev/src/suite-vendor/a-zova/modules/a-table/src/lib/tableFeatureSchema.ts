@@ -1,27 +1,26 @@
-import type { TableFeature } from '@tanstack/table-core';
+import type { RowData, Table, TableFeature } from '@tanstack/table-core';
+import type { SchemaObject } from 'openapi3-ts/oas31';
+import type { TableFeatureSchemaOptions } from '../types/tableFeatureSchema.js';
+import { getProperty } from '@cabloy/utils';
 
 export const TableFeatureSchema: TableFeature<any> = {
-  
 
-  // if you need to add a default column definition...
-  // getDefaultColumnDef: <TData extends RowData>(): Partial<ColumnDef<TData>> => {
-  //   return { meta: {} } //use meta instead of directly adding to the columnDef to avoid typescript stuff that's hard to workaround
-  // },
+  getDefaultOptions: <TData extends RowData>(
+    _table: Table<TData>,
+  ): TableFeatureSchemaOptions<TData> => {
+    return {
+      schema: undefined,
+    } as TableFeatureSchemaOptions<TData>;
+  },
 
   // define the new feature's table instance methods
   createTable: <TData extends RowData>(table: Table<TData>): void => {
-    table.setDensity = updater => {
-      const safeUpdater: Updater<DensityState> = old => {
-        let newState = functionalUpdate(updater, old);
-        return newState;
-      };
-      return table.options.onDensityChange?.(safeUpdater);
-    };
-    table.toggleDensity = value => {
-      table.setDensity(old => {
-        if (value) return value;
-        return old === 'lg' ? 'md' : old === 'md' ? 'sm' : 'lg'; // cycle through the 3 options
-      });
+    table.getProperty = (accessorKey: string): SchemaObject | undefined => {
+      const schema = table.options.schema;
+      if (!schema) return undefined;
+      const property = getProperty(schema.properties, accessorKey);
+      if (!property) return undefined;
+      return property as SchemaObject;
     };
   },
 
