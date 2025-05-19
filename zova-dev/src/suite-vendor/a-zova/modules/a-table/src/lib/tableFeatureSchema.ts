@@ -18,9 +18,7 @@ export const TableFeatureSchema: TableFeature<any> = {
     table.getProperty = (accessorKey: string): SchemaObject | undefined => {
       const schema = table.options.schema;
       if (!schema) return undefined;
-      const property = getProperty(schema.properties, accessorKey);
-      if (!property) return undefined;
-      return property as SchemaObject;
+      return getProperty<SchemaObject>(schema.properties, accessorKey);
     };
   },
 
