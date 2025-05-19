@@ -8,6 +8,7 @@ import type {
   IOnionOptionsEnable,
   IOnionOptionsMatch,
   IOnionSlice,
+  TypeOnionOptionsMatchRule,
 } from '../types/onion.js';
 import { compose as _compose } from '@cabloy/compose';
 import { swapDeps } from '@cabloy/deps';
@@ -174,7 +175,7 @@ export class ServiceOnion<OPTIONS, ONIONNAME extends string> extends BeanSimple 
     if (!selector) selector = '';
     if (!onions) return [];
     return onions.filter(onionItem => {
-      const onionOptions = onionItem.options as IOnionOptionsEnable & IOnionOptionsMatch<string>;
+      const onionOptions = onionItem.options as IOnionOptionsEnable & IOnionOptionsMatch<TypeOnionOptionsMatchRule<string>>;
       return this.sysOnion.checkOnionOptionsEnabled(onionOptions, selector);
     }) as unknown as IOnionSlice<OPTIONS, ONIONNAME, T>[];
   }

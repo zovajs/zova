@@ -132,11 +132,17 @@ function _getProperty(obj, name, sep, forceObject) {
   return obj;
 }
 
-export type TypeMatchSelectorRule<T> = T | RegExp | (T | RegExp)[];
+export type TypeMatchSelectorFunction = (this: any, ...args: any[]) => boolean;
+export type TypeMatchSelectorRule<T> = T | RegExp | TypeMatchSelectorFunction;
+export type TypeMatchSelectorRules<T> = (TypeMatchSelectorRule<T>)[] | TypeMatchSelectorRule<T>;
 
-export function matchSelector<T extends string = string>(match: TypeMatchSelectorRule<T>, selector: string) {
+export function matchSelector<T>(match: TypeMatchSelectorRules<T>, selector: string | boolean, matchThis?: any, ...matchArgs: any[]) {
   if (!Array.isArray(match)) {
-    return (typeof match === 'string' && match === selector) || (match instanceof RegExp && match.test(selector));
+    return (
+      (typeof match === 'string' && typeof selector === 'string' && match === selector) ||
+      (match instanceof RegExp && typeof selector === 'string' && match.test(selector)) ||
+      (typeof match === 'function' && (match as any).call(matchThis, selector, ...matchArgs))
+    );
   }
   return match.some(item => matchSelector(item, selector));
 }

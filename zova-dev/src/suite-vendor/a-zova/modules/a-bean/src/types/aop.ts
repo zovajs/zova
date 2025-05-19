@@ -6,7 +6,7 @@ export interface IAopRecord {}
 
 export interface IDecoratorAopOptions
   extends IOnionOptionsEnable,
-  IOnionOptionsMatch<keyof IBeanRecord>,
+  IOnionOptionsMatch<keyof IBeanRecord | RegExp>,
   IOnionOptionsDeps<keyof IAopRecord> {}
 
 declare module 'zova-module-a-bean' {

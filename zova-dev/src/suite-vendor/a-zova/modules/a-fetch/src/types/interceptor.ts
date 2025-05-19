@@ -6,6 +6,7 @@ import type {
   IOnionOptionsEnable,
   IOnionOptionsMatch,
   ServiceOnion,
+  TypeOnionOptionsMatchRule,
 } from 'zova-module-a-bean';
 import type { BeanFetch } from '../bean/bean.fetch.js';
 
@@ -56,7 +57,7 @@ export interface IInterceptorResponseError {
 
 export interface IDecoratorInterceptorOptions
   extends IOnionOptionsEnable,
-  IOnionOptionsMatch<string>,
+  IOnionOptionsMatch<TypeOnionOptionsMatchRule<string>>,
   IOnionOptionsDeps<keyof IInterceptorRecord> {}
 
 declare module 'zova-module-a-bean' {

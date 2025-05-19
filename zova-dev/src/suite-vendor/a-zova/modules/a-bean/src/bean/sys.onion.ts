@@ -2,7 +2,7 @@ import type {
   IOnionOptionsEnable,
   IOnionOptionsMatch,
   IOnionOptionsMeta,
-  TypeOnionOptionsMatchRule,
+  TypeOnionOptionsMatchRules,
 } from '../types/onion.js';
 import { checkMeta } from '@cabloy/utils';
 import { matchSelector } from '@cabloy/word-utils';
@@ -25,14 +25,19 @@ export class SysOnion extends BeanBase {
     return this.__instances[prop];
   }
 
-  public checkOnionOptionsEnabled(options: IOnionOptionsEnable & IOnionOptionsMatch<string>, selector?: string) {
+  public checkOnionOptionsEnabled(
+    options: IOnionOptionsEnable & IOnionOptionsMatch<any>,
+    selector?: string | boolean,
+    matchThis?: any,
+    ...matchArgs: any[]
+  ) {
     if (options.enable === false) return false;
     if (!this.checkOnionOptionsMeta(options.meta)) return false;
     if (!selector) return true;
     if (!options.match && !options.ignore) return true;
     return (
-      (options.match && __onionMatchSelector(options.match, selector)) ||
-      (options.ignore && !__onionMatchSelector(options.ignore, selector))
+      (options.match && __onionMatchSelector(options.match, selector, matchThis, ...matchArgs)) ||
+      (options.ignore && !__onionMatchSelector(options.ignore, selector, matchThis, ...matchArgs))
     );
   }
 
@@ -41,6 +46,6 @@ export class SysOnion extends BeanBase {
   }
 }
 
-function __onionMatchSelector(match: TypeOnionOptionsMatchRule<string>, selector: string) {
-  return matchSelector(match, selector);
+function __onionMatchSelector(match: TypeOnionOptionsMatchRules<string>, selector: string | boolean, matchThis: any, ...matchArgs: any[]) {
+  return matchSelector(match, selector, matchThis, ...matchArgs);
 }

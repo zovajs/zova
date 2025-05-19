@@ -18,15 +18,13 @@ export interface IOnionOptionsEnable {
   meta?: IOnionOptionsMeta;
 }
 
-export type TypeOnionOptionsMatchRule<T> = T | RegExp | (T | RegExp)[];
-export type TypeOnionOptionsMatchRuleStrict<T> = T | T[];
-export interface IOnionOptionsMatch<T extends string> {
-  match?: TypeOnionOptionsMatchRule<T>;
-  ignore?: TypeOnionOptionsMatchRule<T>;
-}
-export interface IOnionOptionsMatchStrict<T extends string> {
-  match?: TypeOnionOptionsMatchRuleStrict<T>;
-  ignore?: TypeOnionOptionsMatchRuleStrict<T>;
+export type TypeOnionOptionsMatchFunction = (this: any, ...args: any[]) => boolean;
+export type TypeOnionOptionsMatchRule<T> = T | RegExp | TypeOnionOptionsMatchFunction;
+export type TypeOnionOptionsMatchRules<T> = (TypeOnionOptionsMatchRule<T>)[] | TypeOnionOptionsMatchRule<T>;
+
+export interface IOnionOptionsMatch<T> {
+  match?: T[] | T;
+  ignore?: T[] | T;
 }
 
 export interface IOnionOptionsDeps<T> {
@@ -36,7 +34,7 @@ export interface IOnionOptionsDeps<T> {
 
 export interface IOnionOptionsMeta extends ZovaOnionOptionsMeta {}
 
-export interface IOnionOptionsBase<T extends string> extends IOnionOptionsEnable, IOnionOptionsMatch<T> {}
+export interface IOnionOptionsBase<T extends string> extends IOnionOptionsEnable, IOnionOptionsMatch<TypeOnionOptionsMatchRule<T>> {}
 
 export interface IOnionSlice<OPTIONS = unknown, ONIONNAME = string, T = unknown> {
   name: ONIONNAME;
