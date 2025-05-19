@@ -1,4 +1,4 @@
-import type { RowData, Table, TableFeature } from '@tanstack/table-core';
+import type { Cell, Column, Header, Row, RowData, Table, TableFeature } from '@tanstack/table-core';
 import type { SchemaObject } from 'openapi3-ts/oas31';
 import type { TableFeatureSchemaOptions } from '../types/tableFeatureSchema.js';
 import { getProperty } from '@cabloy/utils';
@@ -13,7 +13,6 @@ export const TableFeatureSchema: TableFeature<any> = {
     } as TableFeatureSchemaOptions<TData>;
   },
 
-  // define the new feature's table instance methods
   createTable: <TData extends RowData>(table: Table<TData>): void => {
     table.getProperty = (accessorKey: string): SchemaObject | undefined => {
       const schema = table.options.schema;
@@ -22,12 +21,33 @@ export const TableFeatureSchema: TableFeature<any> = {
     };
   },
 
-  // if you need to add row instance APIs...
-  // createRow: <TData extends RowData>(row, table): void => {},
-  // if you need to add cell instance APIs...
-  // createCell: <TData extends RowData>(cell, column, row, table): void => {},
-  // if you need to add column instance APIs...
-  // createColumn: <TData extends RowData>(column, table): void => {},
-  // if you need to add header instance APIs...
-  // createHeader: <TData extends RowData>(header, table): void => {},
+  createRow: <TData extends RowData>(row: Row<TData>, table: Table<TData>): void => {
+    row.getProperty = (accessorKey: string): SchemaObject | undefined => {
+      return table.getProperty(accessorKey);
+    };
+  },
+
+  createColumn: <TData extends RowData>(column: Column<TData>, table: Table<TData>): void => {
+    Object.defineProperty(column, 'property', {
+      get() {
+        return table.getProperty(column.id);
+      },
+    });
+  },
+
+  createHeader: <TData extends RowData>(header: Header<TData, unknown>, table: Table<TData>): void => {
+    Object.defineProperty(header, 'property', {
+      get() {
+        return table.getProperty(header.column.id);
+      },
+    });
+  },
+
+  createCell: <TData extends RowData>(cell: Cell<TData, unknown>, column: Column<TData>, _row: Row<TData>, table: Table<TData>): void => {
+    Object.defineProperty(cell, 'property', {
+      get() {
+        return table.getProperty(column.id);
+      },
+    });
+  },
 };
