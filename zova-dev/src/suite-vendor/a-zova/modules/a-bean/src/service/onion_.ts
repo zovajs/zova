@@ -170,13 +170,15 @@ export class ServiceOnion<OPTIONS, ONIONNAME extends string> extends BeanSimple 
 
   getOnionsEnabled<T>(
     onions: IOnionItem<OPTIONS, ONIONNAME>[],
-    selector?: string,
+    _selector?: string | boolean,
+    matchThis?: any,
+    ...matchArgs: any[]
   ): IOnionSlice<OPTIONS, ONIONNAME, T>[] {
-    if (!selector) selector = '';
+    // const selector = typeof _selector === 'string' ? _selector : '';
     if (!onions) return [];
     return onions.filter(onionItem => {
       const onionOptions = onionItem.options as IOnionOptionsEnable & IOnionOptionsMatch<TypeOnionOptionsMatchRule<string>>;
-      return this.sysOnion.checkOnionOptionsEnabled(onionOptions, selector);
+      return this.sysOnion.checkOnionOptionsEnabled(onionOptions, _selector, matchThis, ...matchArgs);
     }) as unknown as IOnionSlice<OPTIONS, ONIONNAME, T>[];
   }
 
