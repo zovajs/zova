@@ -56,7 +56,7 @@ export class ControllerWrapperTable<T extends {} = {}> extends BeanControllerTab
           header: props => {
             return props.header.property?.description || key;
           },
-          cell: props => props.getValue(),
+          cell: props => props.cell.formatRender(),
         }));
       }
       return columns as TypeColumn<T>[];

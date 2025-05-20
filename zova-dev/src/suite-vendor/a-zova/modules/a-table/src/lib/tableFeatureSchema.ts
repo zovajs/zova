@@ -2,7 +2,7 @@ import type { Cell, Column, Header, Row, RowData, Table, TableFeature } from '@t
 import type { SchemaObject } from 'openapi3-ts/oas31';
 import type { TableFeatureSchemaOptions } from '../types/tableFeatureSchema.js';
 import { getProperty } from '@cabloy/utils';
-import { deepExtend } from 'zova-core';
+import { deepExtend } from 'zova';
 
 const SymbolPropertiesCache = Symbol('SymbolPropertiesCache');
 
