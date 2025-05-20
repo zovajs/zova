@@ -13,7 +13,7 @@ import type {
 import { compose as _compose } from '@cabloy/compose';
 import { swapDeps } from '@cabloy/deps';
 import { getOnionScenesMeta } from '@cabloy/module-info';
-import { evaluateSimple } from '@cabloy/utils';
+import { evaluate, evaluateSimple, parse } from '@cabloy/utils';
 import { appResource, BeanSimple, cast, deepExtend, ProxyDisable } from 'zova';
 import { SysOnion } from '../bean/sys.onion.js';
 import { Service } from '../lib/bean.js';
@@ -79,8 +79,23 @@ export class ServiceOnion<OPTIONS, ONIONNAME extends string> extends BeanSimple 
     }
   }
 
-  private _prepareMatchRule(value: any) {
-    return typeof value === 'string' && value.startsWith('/') ? evaluateSimple(value) : value;
+  private _prepareMatchRule(rule: any) {
+    if (typeof rule === 'string' && rule.startsWith('/')) {
+      return evaluateSimple(rule);
+    }
+    if (typeof rule === 'string' && this.sceneMeta.optionsMatchCeljs) {
+      if (rule.startsWith('##')) {
+        return rule.substring('##'.length);
+      } else {
+        const parseResult = parse(rule);
+        if (!parseResult.isSuccess) return rule;
+        return (_selector, property) => {
+          return evaluate(parseResult.cst, property);
+        };
+      }
+    }
+    // others
+    return rule;
   }
 
   private _swapOnions(onions: IOnionItem<OPTIONS, ONIONNAME>[]) {
