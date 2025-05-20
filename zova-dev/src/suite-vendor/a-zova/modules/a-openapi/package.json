@@ -37,6 +37,7 @@
     "_prepublishOnly": "npm run tsc:publish"
   },
   "dependencies": {
+    "@zhennann/currency": "^2.0.0",
     "json-schema-to-zod": "^2.6.1",
     "openapi3-ts": "^4.4.0"
   }
