@@ -2,7 +2,7 @@ import { createColumnHelper, getCoreRowModel } from '@tanstack/table-core';
 import { cast, Functionable, Use } from 'zova';
 import { Controller } from 'zova-module-a-bean';
 import { ControllerPageResource } from 'zova-module-a-rest';
-import { BeanControllerTableBase, ServiceTableCellFormat, TableFeatureSchema, TypeColumn, TypeTable, TypeTableCellFormatsMatched } from 'zova-module-a-table';
+import { BeanControllerTableBase, ServiceTableCellFormat, TableFeatureFormat, TableFeatureSchema, TypeColumn, TypeTable, TypeTableCellFormatsMatched } from 'zova-module-a-table';
 
 export interface ControllerWrapperTableProps<_T extends {} = {}> {
   onActionCreate: Functionable;
@@ -26,6 +26,8 @@ export class ControllerWrapperTable<T extends {} = {}> extends BeanControllerTab
     // dataFindAll
     const queryDataFindAll = this.$$restResource.getQueryDataFindAll();
     await queryDataFindAll.suspense();
+    // scheam
+    await this._loadSchema();
     // columns
     this._createColumns();
     // formats
@@ -39,9 +41,16 @@ export class ControllerWrapperTable<T extends {} = {}> extends BeanControllerTab
     return queryDataFindAll.data;
   }
 
+  async _loadSchema() {
+    const querySdkBootstrap = this.$$restResource.getQuerySdkBootstrap();
+    const querySchema = this.$$restResource.getQuerySchemaOfTableRow(querySdkBootstrap.data?.operationObject);
+    await querySchema?.suspense();
+  }
+
   get schema() {
     const querySdkBootstrap = this.$$restResource.getQuerySdkBootstrap();
-    return this.$$restResource.getSchemaOfTableRow(querySdkBootstrap.data?.operationObject);
+    const querySchema = this.$$restResource.getQuerySchemaOfTableRow(querySdkBootstrap.data?.operationObject);
+    return querySchema?.data;
   }
 
   private _createColumns() {
@@ -70,8 +79,9 @@ export class ControllerWrapperTable<T extends {} = {}> extends BeanControllerTab
   private _createTable() {
     const self = this;
     this.table = this.$useTable({
-      _features: [TableFeatureSchema],
+      _features: [TableFeatureSchema, TableFeatureFormat],
       get schema() { return self.schema; },
+      get formats() { return self.formats; },
       get data() { return self.data || []; },
       get columns() { return self.columns; },
       getRowId: row => cast(row).id,

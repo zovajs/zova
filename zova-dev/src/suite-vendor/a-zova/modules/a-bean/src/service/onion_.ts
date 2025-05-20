@@ -89,8 +89,8 @@ export class ServiceOnion<OPTIONS, ONIONNAME extends string> extends BeanSimple 
       } else {
         const parseResult = parse(rule);
         if (!parseResult.isSuccess) return rule;
-        return (_selector, property) => {
-          return evaluate(parseResult.cst, property);
+        return (selector, property) => {
+          return evaluate(parseResult.cst, { selector, property });
         };
       }
     }

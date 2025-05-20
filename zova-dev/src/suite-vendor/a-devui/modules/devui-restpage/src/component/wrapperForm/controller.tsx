@@ -39,7 +39,8 @@ export class ControllerWrapperForm extends BeanControllerBase {
     this.formDomId = useId();
     this.schemaCreate = this.$useComputed(() => {
       const querySdkCreate = this.$$restResource.getQuerySdkCreate();
-      return this.$$restResource.getSchemaOfFormCreate(querySdkCreate.data?.operationObject);
+      const querySchema = this.$$restResource.getQuerySchemaOfFormCreate(querySdkCreate.data?.operationObject);
+      return querySchema?.data;
     });
     this.schema = this.$useComputed(() => {
       const formMeta = this.$props.formMeta;
