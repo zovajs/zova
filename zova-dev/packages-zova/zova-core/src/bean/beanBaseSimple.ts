@@ -1,3 +1,4 @@
+import type { IDecoratorBeanOptionsBase } from '../decorator/interface/beanOptions.js';
 import { appResource } from '../core/sys/resource.js';
 import { StateLock } from '../utils/stateLock.js';
 import { BeanSimple } from './beanSimple.js';
@@ -27,5 +28,22 @@ export class BeanBaseSimple extends BeanSimple {
     const moduleName = appResource._getModuleName(this[SymbolBeanFullName]);
     if (!moduleName) throw new Error(`not found module name: ${this[SymbolBeanFullName]}`);
     return moduleName;
+  }
+
+  protected get $beanFullName() {
+    return this[SymbolBeanFullName];
+  }
+
+  protected get $beanOptions(): IDecoratorBeanOptionsBase {
+    return appResource.getBean(this[SymbolBeanFullName])!;
+  }
+
+  protected get $onionName() {
+    const parts = this.$beanFullName.split('.');
+    return `${parts[0]}:${parts[2]}`;
+  }
+
+  protected get $onionOptions(): unknown | undefined {
+    return this.$beanOptions.options;
   }
 }

@@ -2,5 +2,5 @@ import type { IDecoratorTableCellFormatOptions } from '../types/tableCellFormat.
 import { createBeanDecorator } from 'zova';
 
 export function TableCellFormat<T extends IDecoratorTableCellFormatOptions>(options?: T): ClassDecorator {
-  return createBeanDecorator('tableCellFormat', 'new', true, options);
+  return createBeanDecorator('tableCellFormat', 'sys', true, options);
 }
