@@ -8,6 +8,6 @@ export class ServiceTableCellFormat extends BeanBase {
   $$sysOnion: SysOnion;
 
   async loadTableCellFormatsMatched(_schema: SchemaObject, _propertiesCustom: Record<string, SchemaObject>) {
-    // const properties = [];
+    // const properties:Record<string, = [];
   }
 }

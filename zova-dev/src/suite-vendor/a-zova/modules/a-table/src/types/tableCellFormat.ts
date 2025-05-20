@@ -7,6 +7,10 @@ export type NextTableCellFormat = (props?: CellContext<{}, unknown>) => VNode | 
 
 export interface ITableCellFormatRecord {}
 
+export interface ITableCellFormatRender {
+  render(props: CellContext<{}, unknown>, options: IDecoratorTableCellFormatOptions, next: NextTableCellFormat): VNode | string;
+}
+
 export interface IDecoratorTableCellFormatOptions
   extends IOnionOptionsEnable,
   IOnionOptionsMatch<string>,
