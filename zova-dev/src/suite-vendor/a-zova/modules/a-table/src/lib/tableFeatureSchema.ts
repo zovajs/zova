@@ -20,12 +20,13 @@ export const TableFeatureSchema: TableFeature<any> = {
     table.getProperty = (accessorKey: string): SchemaObject | undefined => {
       const schema = table.options.schema;
       if (!schema) return undefined;
-      if (!table[SymbolPropertiesCache]) {
+      if (!table[SymbolPropertiesCache]) table[SymbolPropertiesCache] = {};
+      if (!table[SymbolPropertiesCache][accessorKey]) {
         const property = getProperty<SchemaObject>(schema.properties, accessorKey);
         if (!property) return undefined;
-        table[SymbolPropertiesCache] = property.rest?.table ? deepExtend({}, property, { rest: property.rest?.table }) : property;
+        table[SymbolPropertiesCache][accessorKey] = property.rest?.table ? deepExtend({}, property, { rest: property.rest?.table }) : property;
       }
-      return table[SymbolPropertiesCache];
+      return table[SymbolPropertiesCache][accessorKey];
     };
   },
 
