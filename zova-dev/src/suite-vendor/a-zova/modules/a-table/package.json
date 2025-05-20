@@ -22,6 +22,7 @@
     "onions": {
       "tableCellFormat": {
         "optionsPackage": true,
+        "optionsMatchCeljs": true,
         "optionsGlobalInterfaceName": "IDecoratorTableCellFormatOptions",
         "optionsGlobalInterfaceFrom": "zova-module-a-table",
         "boilerplate": "cli/tableCellFormat/boilerplate"

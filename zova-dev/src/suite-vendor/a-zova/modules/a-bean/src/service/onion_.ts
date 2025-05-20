@@ -59,9 +59,9 @@ export class ServiceOnion<OPTIONS, ONIONNAME extends string> extends BeanSimple 
           let value = itemOptions[key];
           if (value === undefined) continue;
           if (Array.isArray(value)) {
-            value = value.map(item => (typeof item === 'string' && item.startsWith('/') ? evaluateSimple(item) : item));
+            value = value.map(item => this._prepareMatchRule(item));
           } else {
-            value = typeof value === 'string' && value.startsWith('/') ? evaluateSimple(value) : value;
+            value = this._prepareMatchRule(value);
           }
           itemOptions[key] = value;
         }
@@ -77,6 +77,10 @@ export class ServiceOnion<OPTIONS, ONIONNAME extends string> extends BeanSimple 
         } as any);
       }
     }
+  }
+
+  private _prepareMatchRule(value: any) {
+    return typeof value === 'string' && value.startsWith('/') ? evaluateSimple(value) : value;
   }
 
   private _swapOnions(onions: IOnionItem<OPTIONS, ONIONNAME>[]) {
