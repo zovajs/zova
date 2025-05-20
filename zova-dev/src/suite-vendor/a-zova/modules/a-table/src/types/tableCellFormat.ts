@@ -1,7 +1,9 @@
 import type { CellContext } from '@tanstack/table-core';
 import type { VNode } from 'vue';
 import type { OmitNever } from 'zova';
-import type { IOnionOptionsDeps, IOnionOptionsEnable, IOnionOptionsMatch, ServiceOnion } from 'zova-module-a-bean';
+import type { IOnionOptionsDeps, IOnionOptionsEnable, IOnionOptionsMatch, ServiceOnion, TypeComposer } from 'zova-module-a-bean';
+
+export type TypeTableCellFormatsMatched = Record<string, TypeComposer | undefined>;
 
 export type NextTableCellFormat = (props?: CellContext<{}, unknown>) => VNode | string;
 

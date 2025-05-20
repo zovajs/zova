@@ -2,7 +2,7 @@ import { createColumnHelper, getCoreRowModel } from '@tanstack/table-core';
 import { cast, Functionable, Use } from 'zova';
 import { Controller } from 'zova-module-a-bean';
 import { ControllerPageResource } from 'zova-module-a-rest';
-import { BeanControllerTableBase, TableFeatureSchema, TypeColumn, TypeTable } from 'zova-module-a-table';
+import { BeanControllerTableBase, ServiceTableCellFormat, TableFeatureSchema, TypeColumn, TypeTable, TypeTableCellFormatsMatched } from 'zova-module-a-table';
 
 export interface ControllerWrapperTableProps<_T extends {} = {}> {
   onActionCreate: Functionable;
@@ -12,11 +12,15 @@ export interface ControllerWrapperTableProps<_T extends {} = {}> {
 export class ControllerWrapperTable<T extends {} = {}> extends BeanControllerTableBase {
   static $propsDefault = {};
 
-  table: TypeTable<T>;
   columns: TypeColumn<T>[];
+  formats: TypeTableCellFormatsMatched;
+  table: TypeTable<T>;
 
   @Use({ injectionScope: 'host' })
   $$restResource: ControllerPageResource;
+
+  @Use()
+  $$serviceTableCellFormat: ServiceTableCellFormat;
 
   protected async __init__() {
     // dataFindAll
@@ -24,6 +28,8 @@ export class ControllerWrapperTable<T extends {} = {}> extends BeanControllerTab
     await queryDataFindAll.suspense();
     // columns
     this._createColumns();
+    // formats
+    await this._createFormats();
     // table
     this._createTable();
   }
@@ -55,6 +61,10 @@ export class ControllerWrapperTable<T extends {} = {}> extends BeanControllerTab
       }
       return columns as TypeColumn<T>[];
     });
+  }
+
+  private async _createFormats() {
+    this.formats = await this.$$serviceTableCellFormat.loadTableCellFormatsMatched(this.schema);
   }
 
   private _createTable() {

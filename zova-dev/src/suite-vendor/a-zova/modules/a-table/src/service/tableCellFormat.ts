@@ -1,7 +1,7 @@
 import { SchemaObject } from 'openapi3-ts/oas31';
 import { BeanBase, cast, deepExtend, Use } from 'zova';
 import { Service, SysOnion, TypeComposer } from 'zova-module-a-bean';
-import { ITableCellFormatRender } from '../types/tableCellFormat.js';
+import { ITableCellFormatRender, TypeTableCellFormatsMatched } from '../types/tableCellFormat.js';
 
 @Service()
 export class ServiceTableCellFormat extends BeanBase {
@@ -10,9 +10,9 @@ export class ServiceTableCellFormat extends BeanBase {
 
   async loadTableCellFormatsMatched(
     schema: SchemaObject | undefined,
-    propertiesCustom: Record<string, SchemaObject> | undefined,
-  ): Promise<Record<string, TypeComposer | undefined>> {
-    const properties: Record<string, TypeComposer | undefined> = {};
+    propertiesCustom?: Record<string, SchemaObject>,
+  ): Promise<TypeTableCellFormatsMatched> {
+    const properties: TypeTableCellFormatsMatched = {};
     if (schema?.properties) {
       for (const key in schema.properties) {
         const property = schema.properties[key] as SchemaObject;
