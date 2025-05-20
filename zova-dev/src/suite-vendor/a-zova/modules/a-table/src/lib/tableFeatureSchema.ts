@@ -2,6 +2,9 @@ import type { Cell, Column, Header, Row, RowData, Table, TableFeature } from '@t
 import type { SchemaObject } from 'openapi3-ts/oas31';
 import type { TableFeatureSchemaOptions } from '../types/tableFeatureSchema.js';
 import { getProperty } from '@cabloy/utils';
+import { deepExtend } from 'zova-core';
+
+const SymbolPropertiesCache = Symbol('SymbolPropertiesCache');
 
 export const TableFeatureSchema: TableFeature<any> = {
 
@@ -17,7 +20,12 @@ export const TableFeatureSchema: TableFeature<any> = {
     table.getProperty = (accessorKey: string): SchemaObject | undefined => {
       const schema = table.options.schema;
       if (!schema) return undefined;
-      return getProperty<SchemaObject>(schema.properties, accessorKey);
+      if (!table[SymbolPropertiesCache]) {
+        const property = getProperty<SchemaObject>(schema.properties, accessorKey);
+        if (!property) return undefined;
+        table[SymbolPropertiesCache] = property.rest?.table ? deepExtend({}, property, { rest: property.rest?.table }) : property;
+      }
+      return table[SymbolPropertiesCache];
     };
   },
 
