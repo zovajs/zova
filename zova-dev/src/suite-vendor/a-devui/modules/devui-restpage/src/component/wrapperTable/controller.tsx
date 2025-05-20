@@ -4,7 +4,6 @@ import { Controller } from 'zova-module-a-bean';
 import { ControllerPageResource } from 'zova-module-a-rest';
 import { BeanControllerTableBase, ServiceTableCellFormat, TableFeatureFormat, TableFeatureSchema, TypeColumn, TypeTable, TypeTableCellFormatsMatched } from 'zova-module-a-table';
 
-
 export interface ControllerWrapperTableProps<T extends {} = {}> {
   __ignore__?: T;
   onActionCreate: Functionable;
@@ -88,6 +87,7 @@ export class ControllerWrapperTable<T extends {} = {}> extends BeanControllerTab
       get columns() { return self.columns; },
       getRowId: row => cast(row).id,
       getCoreRowModel: getCoreRowModel(),
+      renderFallbackValue: '--',
     });
   }
 
