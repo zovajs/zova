@@ -65,6 +65,7 @@
   },
   "dependencies": {
     "@tanstack/table-core": "^8.21.3",
-    "@tanstack/vue-table": "^8.21.3"
+    "@tanstack/vue-table": "^8.21.3",
+    "@zhennann/currency": "^2.0.0"
   }
 }
