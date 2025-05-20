@@ -32,7 +32,7 @@
       "tableCellFormat": {
         "currency": {
           "dependencies": "a-table:fallback",
-          "match": "!!(property.rest && property.rest.currency)"
+          "match": "!!context.rest?.currency"
         },
         "fallback": {}
       }
