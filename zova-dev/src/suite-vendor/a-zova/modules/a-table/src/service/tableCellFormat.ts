@@ -1,5 +1,5 @@
 import { SchemaObject } from 'openapi3-ts/oas31';
-import { BeanBase, cast, Use } from 'zova';
+import { BeanBase, cast, deepExtend, Use } from 'zova';
 import { Service, SysOnion, TypeComposer } from 'zova-module-a-bean';
 import { ITableCellFormatRender } from '../types/tableCellFormat.js';
 
@@ -30,6 +30,9 @@ export class ServiceTableCellFormat extends BeanBase {
 
   async _cretePropertyComposer(property?: SchemaObject): Promise<TypeComposer | undefined> {
     if (!property) return undefined;
+    if (property.rest?.table) {
+      property = deepExtend({}, property, { rest: property.rest?.table });
+    }
     const onionSlices = await this.$$sysOnion.tableCellFormat.loadOnionsFromPackage(true, undefined, property);
     if (!onionSlices || onionSlices.length === 0) return undefined;
     for (const onionSlice of onionSlices) {
