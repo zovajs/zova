@@ -3,6 +3,8 @@ import type { IGlobBeanFile, OnionScenesMeta } from '@cabloy/module-info';
 import path from 'node:path';
 import { evaluateSimple, getPropertyObject } from '@cabloy/utils';
 
+export const OnionMatchPrefixRegexp = 'regexp://';
+
 export async function generateOptionsPackage(
   cli: BeanCliBase,
   globFiles: IGlobBeanFile[],
@@ -39,9 +41,9 @@ export async function generateOptionsPackage(
       if (onionOptions[key] !== undefined) {
         let value = onionOptions[key];
         if (Array.isArray(value)) {
-          value = value.map(item => (typeof item === 'string' ? item : item.toString()));
+          value = value.map(item => __prepareMatchRule(item));
         } else {
-          value = typeof value === 'string' ? value : value.toString();
+          value = __prepareMatchRule(value);
         }
         nodeScene[beanName][key] = value;
       }
@@ -52,4 +54,11 @@ export async function generateOptionsPackage(
   }
   // ok
   return '';
+}
+
+function __prepareMatchRule(rule: any) {
+  if (rule instanceof RegExp) {
+    return OnionMatchPrefixRegexp + rule.toString();
+  }
+  return String(rule);
 }

@@ -1,15 +1,7 @@
 import type { ISwapDepsItem } from '@cabloy/deps';
 import type { OnionSceneMeta } from '@cabloy/module-info';
 import type { Next } from 'zova';
-import type {
-  IOnionExecuteCustom,
-  IOnionItem,
-  IOnionOptionsDeps,
-  IOnionOptionsEnable,
-  IOnionOptionsMatch,
-  IOnionSlice,
-  TypeOnionOptionsMatchRule,
-} from '../types/onion.js';
+import type { IOnionExecuteCustom, IOnionItem, IOnionOptionsDeps, IOnionOptionsEnable, IOnionOptionsMatch, IOnionSlice, TypeOnionOptionsMatchRule } from '../types/onion.js';
 import { compose as _compose } from '@cabloy/compose';
 import { swapDeps } from '@cabloy/deps';
 import { getOnionScenesMeta } from '@cabloy/module-info';
@@ -17,6 +9,12 @@ import { createFunction, evaluateSimple } from '@cabloy/utils';
 import { appResource, BeanSimple, cast, deepExtend, ProxyDisable } from 'zova';
 import { SysOnion } from '../bean/sys.onion.js';
 import { Service } from '../lib/bean.js';
+import {
+
+  OnionMatchPrefixRegexp,
+  OnionMatchPrefixStaticString,
+
+} from '../types/onion.js';
 
 // const SymbolOnionsEnabled = Symbol('SymbolOnionsEnabled');
 // const SymbolOnionsEnabledWrapped = Symbol('SymbolOnionsEnabledWrapped');
@@ -80,12 +78,12 @@ export class ServiceOnion<OPTIONS, ONIONNAME extends string> extends BeanSimple 
   }
 
   private _prepareMatchRule(rule: any) {
-    if (typeof rule === 'string' && rule.startsWith('/')) {
-      return evaluateSimple(rule);
+    if (typeof rule === 'string' && rule.startsWith(OnionMatchPrefixRegexp)) {
+      return evaluateSimple(rule.substring(OnionMatchPrefixRegexp.length));
     }
     if (typeof rule === 'string' && this.sceneMeta.optionsMatchExpression) {
-      if (rule.startsWith('##')) {
-        return rule.substring('##'.length);
+      if (rule.startsWith(OnionMatchPrefixStaticString)) {
+        return rule.substring(OnionMatchPrefixStaticString.length);
       } else {
         const fn = createFunction(rule, ['selector', 'context']);
         return (selector, context) => {
