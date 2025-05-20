@@ -11,7 +11,7 @@
         },
         "home3": {
           "dependencies": "demo-basic:home",
-          "match": "/home-index\\.controller\\.pageHome/"
+          "match": "regexp:///home-index\\.controller\\.pageHome/"
         }
       }
     }
