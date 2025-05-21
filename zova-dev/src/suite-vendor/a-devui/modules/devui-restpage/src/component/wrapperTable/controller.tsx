@@ -2,7 +2,7 @@ import { createColumnHelper, getCoreRowModel } from '@tanstack/table-core';
 import { cast, Functionable, Use } from 'zova';
 import { Controller } from 'zova-module-a-bean';
 import { ControllerPageResource } from 'zova-module-a-rest';
-import { BeanControllerTableBase, ServiceTableCellFormat, TableFeatureFormat, TableFeatureSchema, TypeColumn, TypeTable, TypeTableCellFormatsMatched } from 'zova-module-a-table';
+import { BeanControllerTableBase, BeanTableFeatureBase, ServiceTableCellFormat, ServiceTableFeature, TypeColumn, TypeTable, TypeTableCellFormatsMatched } from 'zova-module-a-table';
 
 export interface ControllerWrapperTableProps<T extends {} = {}> {
   __ignore__?: T;
@@ -14,6 +14,7 @@ export class ControllerWrapperTable<T extends {} = {}> extends BeanControllerTab
   static $propsDefault = {};
 
   columns: TypeColumn<T>[];
+  features: BeanTableFeatureBase[] | undefined;
   formats: TypeTableCellFormatsMatched;
   table: TypeTable<T>;
 
@@ -23,6 +24,9 @@ export class ControllerWrapperTable<T extends {} = {}> extends BeanControllerTab
   @Use()
   $$serviceTableCellFormat: ServiceTableCellFormat;
 
+  @Use()
+  $$serviceTableFeature: ServiceTableFeature;
+
   protected async __init__() {
     // dataFindAll
     const queryDataFindAll = this.$$restResource.getQueryDataFindAll();
@@ -31,6 +35,8 @@ export class ControllerWrapperTable<T extends {} = {}> extends BeanControllerTab
     await this._loadSchema();
     // columns
     this._createColumns();
+    // features
+    await this._createFeatures();
     // formats
     await this._createFormats();
     // table
@@ -73,6 +79,10 @@ export class ControllerWrapperTable<T extends {} = {}> extends BeanControllerTab
     });
   }
 
+  private async _createFeatures() {
+    this.features = await this.$$serviceTableFeature.loadTableFeatures();
+  }
+
   private async _createFormats() {
     this.formats = await this.$$serviceTableCellFormat.loadTableCellFormatsMatched(this.schema);
   }
@@ -80,7 +90,7 @@ export class ControllerWrapperTable<T extends {} = {}> extends BeanControllerTab
   private _createTable() {
     const self = this;
     this.table = this.$useTable({
-      _features: [TableFeatureSchema, TableFeatureFormat],
+      _features: this.features,
       get schema() { return self.schema; },
       get formats() { return self.formats; },
       get data() { return self.data || []; },
