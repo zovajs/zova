@@ -9,14 +9,20 @@ export class RenderActions<T extends {} = {}> extends BeanRenderBase {
     return (
       <div class="flex gap-2">
         <button class="btn btn-outline btn-primary">
-          <ZovaIcon name={icon('::draft')} height={24}></ZovaIcon>
+          <ZovaIcon
+            name={icon('::draft')}
+            height={24}
+            onClick={() => {
+              this.onActionRow('update', props.row);
+            }}
+          ></ZovaIcon>
         </button>
         <button class="btn btn-outline btn-error">
           <ZovaIcon
             name={icon('::delete')}
             height={24}
             onClick={() => {
-              this.onActionRow('update', props.row);
+              this.onActionRow('delete', props.row);
             }}
           ></ZovaIcon>
         </button>
