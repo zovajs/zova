@@ -7,6 +7,7 @@ import { DataMutation } from 'zova-module-a-model';
 import { ControllerPageResource } from 'zova-module-a-rest';
 
 export interface ControllerWrapperFormProps {
+  formData?: any;
   formMeta: IFormMeta;
   formProvider?: IFormProvider;
   getMutationSubmit?: () => DataMutation | undefined;
@@ -24,6 +25,7 @@ export class ControllerWrapperForm extends BeanControllerBase {
 
   formDomId: string;
   schemaCreate?: SchemaObject;
+  schemaUpdate?: SchemaObject;
   schema?: SchemaObject;
   formData?: any;
 
@@ -42,17 +44,28 @@ export class ControllerWrapperForm extends BeanControllerBase {
       const querySchema = this.$$restResource.getQuerySchemaOfFormCreate(querySdkCreate.data?.operationObject);
       return querySchema?.data;
     });
+    this.schemaUpdate = this.$useComputed(() => {
+      const querySdkUpdate = this.$$restResource.getQuerySdkUpdate();
+      const querySchema = this.$$restResource.getQuerySchemaOfFormUpdate(querySdkUpdate.data?.operationObject);
+      return querySchema?.data;
+    });
     this.schema = this.$useComputed(() => {
       const formMeta = this.$props.formMeta;
       if (formMeta.formMode === 'edit') {
         if (formMeta.editMode === 'create') return this.schemaCreate;
+        if (formMeta.editMode === 'update') return this.schemaUpdate;
       }
     });
     this.formData = this.$useComputed(() => {
       const formMeta = this.$props.formMeta;
       if (formMeta.formMode === 'edit' && formMeta.editMode === 'create') {
-        const queryData = this.$$restResource.getQueryDataDefaultValue(this.schemaCreate);
-        return queryData?.data;
+        if (formMeta.editMode === 'create') {
+          const queryData = this.$$restResource.getQueryDataDefaultValue(this.schemaCreate);
+          return queryData?.data;
+        }
+        if (formMeta.editMode === 'update') {
+          return this.$props.formData;
+        }
       }
     });
   }

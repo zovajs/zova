@@ -9,7 +9,7 @@ import { TypeResourceActionRowRecord, TypeResourceActionTableRecord } from 'zova
 @Controller()
 export class ControllerRestPage extends BeanControllerBase {
   // form
-  rowUpdate?: Row<any>;
+  rowCurrent?: Row<any>;
   formVisible: boolean = false;
   formMode?: TypeFormMode;
   editMode?: TypeEditMode;
@@ -38,7 +38,7 @@ export class ControllerRestPage extends BeanControllerBase {
 
   async onActionRow(action: keyof TypeResourceActionRowRecord, row: Row<any>) {
     if (action === 'update') {
-      this.rowUpdate = row;
+      this.rowCurrent = row;
       this.formMode = 'edit';
       this.editMode = 'update';
       this.formVisible = true;
