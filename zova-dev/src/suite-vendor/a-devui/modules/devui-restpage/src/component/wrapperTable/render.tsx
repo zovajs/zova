@@ -13,7 +13,7 @@ export class RenderWrapperTable extends BeanRenderBase {
             class="btn btn-primary"
             type="button"
             onClick={() => {
-              this.onActionCreate();
+              this.onActionTable('create');
             }}
           >
             {this.scope.locale.Create()}

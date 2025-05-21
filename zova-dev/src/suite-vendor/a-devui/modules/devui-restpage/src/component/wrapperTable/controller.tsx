@@ -1,13 +1,14 @@
-import { createColumnHelper, getCoreRowModel } from '@tanstack/table-core';
-import { cast, Functionable, Use } from 'zova';
+import { createColumnHelper, getCoreRowModel, Row } from '@tanstack/table-core';
+import { cast, Use } from 'zova';
 import { Controller } from 'zova-module-a-bean';
+import { TypeResourceActionRowRecord, TypeResourceActionTableRecord } from 'zova-module-a-openapi';
 import { ControllerPageResource } from 'zova-module-a-rest';
 import { BeanControllerTableBase, BeanTableFeatureBase, ServiceTableCellFormat, ServiceTableFeature, TypeColumn, TypeTable, TypeTableCellFormatsMatched } from 'zova-module-a-table';
 import { RenderActions } from './render.actions.jsx';
 
 export interface ControllerWrapperTableProps<T extends {} = {}> {
-  __ignore__?: T;
-  onActionCreate: Functionable;
+  onActionTable: (action: keyof TypeResourceActionTableRecord) => void;
+  onActionRow: (action: keyof TypeResourceActionRowRecord, row: Row<T>) => void;
 }
 
 @Controller()
@@ -82,7 +83,7 @@ export class ControllerWrapperTable<T extends {} = {}> extends BeanControllerTab
       columns.push(columnHelper.display({
         id: 'actions',
         header: () => this.scope.locale.TableActions(),
-        cell: props => this.$$renderActions.renderActions(props),
+        cell: props => this.$$renderActions.renderActions(props as any),
       }));
       return columns as TypeColumn<T>[];
     });
@@ -110,7 +111,11 @@ export class ControllerWrapperTable<T extends {} = {}> extends BeanControllerTab
     });
   }
 
-  onActionCreate() {
-    return this.$props.onActionCreate();
+  onActionTable(action: keyof TypeResourceActionTableRecord): void {
+    return this.$props.onActionTable(action);
+  }
+
+  onActionRow(action: keyof TypeResourceActionRowRecord, row: Row<T>): void {
+    return this.$props.onActionRow(action, row);
   }
 }
