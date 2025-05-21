@@ -1,9 +1,35 @@
-import { CellContext } from '@tanstack/table-core';
-import { VNode } from 'vue';
-import { BeanBase } from 'zova';
-import { IDecoratorTableFeatureOptions, TableFeature } from 'zova-module-a-table';
+import { RowData } from '@tanstack/table-core';
+import { BeanTableFeatureBase, IDecoratorTableFeatureOptions, TableFeature } from 'zova-module-a-table';
+
+export interface TableFeature<%=argv.beanNameCapitalize%>Options<_TData extends RowData> {}
+
+export interface TableFeature<%=argv.beanNameCapitalize%>Instance<_TData extends RowData> {}
+
+export interface TableFeature<%=argv.beanNameCapitalize%>Row<_TData extends RowData> {}
+
+export interface TableFeature<%=argv.beanNameCapitalize%>Column<_TData extends RowData, _TValue> {}
+
+export interface TableFeature<%=argv.beanNameCapitalize%>Header<_TData extends RowData, _TValue> {}
+
+export interface TableFeature<%=argv.beanNameCapitalize%>Cell<_TData extends RowData, _TValue> {}
+
+declare module '@tanstack/vue-table' {
+
+  export interface TableOptionsResolved<TData extends RowData>
+    extends TableFeature<%=argv.beanNameCapitalize%>Options<TData> {}
+
+  export interface Table<TData extends RowData> extends TableFeature<%=argv.beanNameCapitalize%>Instance<TData> {}
+
+  export interface Row<TData extends RowData> extends TableFeature<%=argv.beanNameCapitalize%>Row<TData> {}
+
+  export interface Column<TData extends RowData, TValue> extends TableFeature<%=argv.beanNameCapitalize%>Column<TData, TValue> {}
+
+  export interface Header<TData extends RowData, TValue> extends TableFeature<%=argv.beanNameCapitalize%>Header<TData, TValue> {}
+
+  export interface Cell<TData extends RowData, TValue> extends TableFeature<%=argv.beanNameCapitalize%>Cell<TData, TValue> {}
+}
 
 export interface ITableFeatureOptions<%=argv.beanNameCapitalize%> extends IDecoratorTableFeatureOptions {}
 
 @TableFeature<ITableFeatureOptions<%=argv.beanNameCapitalize%>>()
-export class TableFeature<%=argv.beanNameCapitalize%> extends BeanBase {}
+export class TableFeature<%=argv.beanNameCapitalize%> extends BeanTableFeatureBase {}

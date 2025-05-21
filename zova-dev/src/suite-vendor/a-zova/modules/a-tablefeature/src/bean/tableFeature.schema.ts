@@ -40,7 +40,6 @@ declare module '@tanstack/vue-table' {
   export interface Header<TData extends RowData, TValue> extends TableFeatureSchemaHeader<TData, TValue> {}
 
   export interface Cell<TData extends RowData, TValue> extends TableFeatureSchemaCell<TData, TValue> {}
-
 }
 
 export interface ITableFeatureOptionsSchema extends IDecoratorTableFeatureOptions {}
