@@ -56,5 +56,8 @@ export class ControllerRestPage extends BeanControllerBase {
     if (this.editMode === 'create') {
       return this.$$restResource.getMutationCreate() as any;
     }
+    if (this.editMode === 'update') {
+      return this.$$restResource.getMutationUpdate(this.rowCurrent?.original.id) as any;
+    }
   }
 }
