@@ -9,6 +9,7 @@ import { TypeResourceActionRowRecord, TypeResourceActionTableRecord } from 'zova
 @Controller()
 export class ControllerRestPage extends BeanControllerBase {
   // form
+  rowUpdate?: Row<any>;
   formVisible: boolean = false;
   formMode?: TypeFormMode;
   editMode?: TypeEditMode;
@@ -29,13 +30,18 @@ export class ControllerRestPage extends BeanControllerBase {
 
   onActionTable(action: keyof TypeResourceActionTableRecord): void {
     if (action === 'create') {
-      this.onActionCreate();
+      this.formMode = 'edit';
+      this.editMode = 'create';
+      this.formVisible = true;
     }
   }
 
-  async onActionRow(action: keyof TypeResourceActionRowRecord, row: Row<any>): void {
+  async onActionRow(action: keyof TypeResourceActionRowRecord, row: Row<any>) {
     if (action === 'update') {
-      console.log('update');
+      this.rowUpdate = row;
+      this.formMode = 'edit';
+      this.editMode = 'update';
+      this.formVisible = true;
     } else if (action === 'delete') {
       // eslint-disable-next-line no-alert
       if (window.confirm(this.scope.locale.DeleteConfirm())) {
@@ -43,12 +49,6 @@ export class ControllerRestPage extends BeanControllerBase {
         await mutation.mutateAsync();
       }
     }
-  }
-
-  onActionCreate() {
-    this.formMode = 'edit';
-    this.editMode = 'create';
-    this.formVisible = true;
   }
 
   getMutationSubmit(): DataMutation | undefined {
