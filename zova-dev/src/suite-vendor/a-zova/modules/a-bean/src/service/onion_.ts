@@ -9,15 +9,12 @@ import { createFunction, evaluateSimple } from '@cabloy/utils';
 import { appResource, BeanSimple, cast, deepExtend, ProxyDisable } from 'zova';
 import { SysOnion } from '../bean/sys.onion.js';
 import { Service } from '../lib/bean.js';
-import {
-
-  OnionMatchPrefixRegexp,
-  OnionMatchPrefixStaticString,
-
-} from '../types/onion.js';
+import { OnionMatchPrefixRegexp, OnionMatchPrefixStaticString } from '../types/onion.js';
 
 // const SymbolOnionsEnabled = Symbol('SymbolOnionsEnabled');
 // const SymbolOnionsEnabledWrapped = Symbol('SymbolOnionsEnabledWrapped');
+
+const SymbolOnionOptionsInited = Symbol('SymbolOnionOptionsInited');
 
 @ProxyDisable()
 @Service()
@@ -167,15 +164,27 @@ export class ServiceOnion<OPTIONS, ONIONNAME extends string> extends BeanSimple 
       const beanFullName = item.name.replace(':', `.${this.sceneName}.`);
       const beanOptions = appResource.getBean(beanFullName);
       if (!beanOptions) throw new Error(`behavior not found: ${beanFullName}`);
-      // options
+      // optionsConfig
       const optionsConfig = this.sys.config.onions[this.sceneName]?.[item.name];
+      // beanOptions.options
+      if (!beanOptions[SymbolOnionOptionsInited]) {
+        beanOptions[SymbolOnionOptionsInited] = true;
+        if (optionsConfig !== undefined) {
+          if (beanOptions.optionsPrimitive) {
+            beanOptions.options = optionsConfig;
+          } else {
+            beanOptions.options = deepExtend({}, beanOptions.options, optionsConfig);
+          }
+        }
+      }
+      // options
       let options;
       if (beanOptions.optionsPrimitive) {
-        options =
-          item.options !== undefined ? item.options : optionsConfig !== undefined ? optionsConfig : beanOptions.options;
+        options = item.options !== undefined ? item.options : beanOptions.options;
       } else {
-        options = deepExtend({}, beanOptions.options, optionsConfig, item.options);
+        options = item.options !== undefined ? deepExtend({}, beanOptions.options, item.options) : beanOptions.options;
       }
+      // ok
       onionSlices.push({ name: item.name, options, beanFullName });
     }
     // optionsPackage
