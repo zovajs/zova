@@ -34,7 +34,10 @@
   "zovaModule": {
     "onionsConfig": {
       "tableCellFormat": {
-        "currency": {},
+        "currency": {
+          "dependencies": "a-tableformat:fallback",
+          "match": "!!context.rest?.currency"
+        },
         "fallback": {}
       }
     }
