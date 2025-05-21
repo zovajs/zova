@@ -1,8 +1,10 @@
 import type { ControllerPageResource } from 'zova-module-a-rest';
+import { Row } from '@tanstack/table-core';
 import { BeanControllerBase, Use } from 'zova';
 import { Controller } from 'zova-module-a-bean';
 import { IFormMeta, IFormProvider, TypeEditMode, TypeFormMode } from 'zova-module-a-form';
 import { DataMutation } from 'zova-module-a-model';
+import { TypeResourceActionRowRecord, TypeResourceActionTableRecord } from 'zova-module-a-openapi';
 
 @Controller()
 export class ControllerRestPage extends BeanControllerBase {
@@ -23,6 +25,20 @@ export class ControllerRestPage extends BeanControllerBase {
     this.formProvider = this.$useComputed(() => {
       return this.$$restResource.formProvider || {};
     });
+  }
+
+  onActionTable(action: keyof TypeResourceActionTableRecord): void {
+    if (action === 'create') {
+      this.onActionCreate();
+    }
+  }
+
+  onActionRow(action: keyof TypeResourceActionRowRecord, _row: Row<any>): void {
+    if (action === 'update') {
+      console.log('update');
+    } else if (action === 'delete') {
+      console.log('delete');
+    }
   }
 
   onActionCreate() {

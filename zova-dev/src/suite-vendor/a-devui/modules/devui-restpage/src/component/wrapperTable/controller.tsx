@@ -7,8 +7,8 @@ import { BeanControllerTableBase, BeanTableFeatureBase, ServiceTableCellFormat, 
 import { RenderActions } from './render.actions.jsx';
 
 export interface ControllerWrapperTableProps<T extends {} = {}> {
-  onActionTable: (action: keyof TypeResourceActionTableRecord) => void;
-  onActionRow: (action: keyof TypeResourceActionRowRecord, row: Row<T>) => void;
+  onActionTable?: (action: keyof TypeResourceActionTableRecord) => void;
+  onActionRow?: (action: keyof TypeResourceActionRowRecord, row: Row<T>) => void;
 }
 
 @Controller()
@@ -112,10 +112,10 @@ export class ControllerWrapperTable<T extends {} = {}> extends BeanControllerTab
   }
 
   onActionTable(action: keyof TypeResourceActionTableRecord): void {
-    return this.$props.onActionTable(action);
+    return this.$props.onActionTable?.(action);
   }
 
   onActionRow(action: keyof TypeResourceActionRowRecord, row: Row<T>): void {
-    return this.$props.onActionRow(action, row);
+    return this.$props.onActionRow?.(action, row);
   }
 }
