@@ -12,8 +12,9 @@ import { RenderRestPage } from '../component/restPage/render.jsx';
 import { ControllerWrapperForm } from '../component/wrapperForm/controller.jsx';
 import { RenderWrapperForm } from '../component/wrapperForm/render.jsx';
 import { ControllerWrapperTable } from '../component/wrapperTable/controller.jsx';
-import { RenderWrapperTable } from '../component/wrapperTable/render.jsx';
+import { RenderActions } from '../component/wrapperTable/render.actions.jsx';
 
+import { RenderWrapperTable } from '../component/wrapperTable/render.jsx';
 /** render: end */
 /** locale: begin */
 import locale_en_us from '../config/locale/en-us.js';
@@ -66,7 +67,7 @@ declare module 'zova' {
 
 export * from '../component/wrapperForm/render.jsx';
 export * from '../component/wrapperTable/controller.jsx';
-export * from '../component/wrapperTable/render.jsx';
+export * from '../component/wrapperTable/render.actions.jsx';
 export const components = {
   restPage: ZRestPage,
   wrapperForm: ZWrapperForm,
@@ -84,6 +85,7 @@ declare module 'zova' {
     'devui-restpage:wrapperTable': typeof ZWrapperTable;
   }
 }
+export * from '../component/wrapperTable/render.jsx';
 /** components: begin */
 export * from './component/restPage.js';
 export * from './component/wrapperForm.js';
@@ -103,6 +105,11 @@ declare module 'zova-module-devui-restpage' {
     get scope(): ScopeModuleDevuiRestpage;
   }
 
+  export interface RenderActions {
+    /** @internal */
+    get scope(): ScopeModuleDevuiRestpage;
+  }
+
   export interface RenderWrapperTable {
     /** @internal */
     get scope(): ScopeModuleDevuiRestpage;
@@ -112,6 +119,7 @@ declare module 'zova' {
   export interface IBeanRecordLocal {
     'devui-restpage.render.restPage': RenderRestPage;
     'devui-restpage.render.wrapperForm': RenderWrapperForm;
+    'devui-restpage.render.actions': RenderActions;
     'devui-restpage.render.wrapperTable': RenderWrapperTable;
   }
 }

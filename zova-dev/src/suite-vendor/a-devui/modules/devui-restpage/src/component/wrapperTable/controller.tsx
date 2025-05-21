@@ -3,6 +3,7 @@ import { cast, Functionable, Use } from 'zova';
 import { Controller } from 'zova-module-a-bean';
 import { ControllerPageResource } from 'zova-module-a-rest';
 import { BeanControllerTableBase, BeanTableFeatureBase, ServiceTableCellFormat, ServiceTableFeature, TypeColumn, TypeTable, TypeTableCellFormatsMatched } from 'zova-module-a-table';
+import { RenderActions } from './render.actions.jsx';
 
 export interface ControllerWrapperTableProps<T extends {} = {}> {
   __ignore__?: T;
@@ -26,6 +27,9 @@ export class ControllerWrapperTable<T extends {} = {}> extends BeanControllerTab
 
   @Use()
   $$serviceTableFeature: ServiceTableFeature;
+
+  @Use()
+  $$renderActions: RenderActions;
 
   protected async __init__() {
     // dataFindAll
@@ -75,6 +79,10 @@ export class ControllerWrapperTable<T extends {} = {}> extends BeanControllerTab
           cell: props => props.cell.formatRender(),
         }));
       }
+      columns.push(columnHelper.display({
+        id: 'actions',
+        cell: props => this.$$renderActions.renderActions(props),
+      }));
       return columns as TypeColumn<T>[];
     });
   }
