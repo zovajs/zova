@@ -21,6 +21,7 @@
       "a-ssr": "5.0.0",
       "a-style": "5.0.0",
       "a-table": "5.0.0",
+      "a-tableformat": "5.0.0",
       "a-zod": "5.0.0"
     },
     "globalDependencies": {
