@@ -1,0 +1,9 @@
+import { CellContext } from '@tanstack/table-core';
+import { VNode } from 'vue';
+import { BeanBase } from 'zova';
+import { IDecoratorTableFeatureOptions, TableFeature } from 'zova-module-a-table';
+
+export interface ITableFeatureOptions<%=argv.beanNameCapitalize%> extends IDecoratorTableFeatureOptions {}
+
+@TableFeature<ITableFeatureOptions<%=argv.beanNameCapitalize%>>()
+export class TableFeature<%=argv.beanNameCapitalize%> extends BeanBase {}
