@@ -3,4 +3,5 @@ export default {
   Create: 'Create',
   Submit: 'Submit',
   TableActions: 'Actions',
+  DeleteConfirm: 'Are you sure you want to delete this item?',
 };

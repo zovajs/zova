@@ -33,11 +33,15 @@ export class ControllerRestPage extends BeanControllerBase {
     }
   }
 
-  onActionRow(action: keyof TypeResourceActionRowRecord, _row: Row<any>): void {
+  async onActionRow(action: keyof TypeResourceActionRowRecord, row: Row<any>): void {
     if (action === 'update') {
       console.log('update');
     } else if (action === 'delete') {
-      console.log('delete');
+      // eslint-disable-next-line no-alert
+      if (window.confirm(this.scope.locale.DeleteConfirm())) {
+        const mutation = this.$$restResource.getMutationDelete(row.id);
+        await mutation.mutateAsync();
+      }
     }
   }
 
