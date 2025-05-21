@@ -27,15 +27,6 @@
         "optionsGlobalInterfaceFrom": "zova-module-a-table",
         "boilerplate": "cli/tableCellFormat/boilerplate"
       }
-    },
-    "onionsConfig": {
-      "tableCellFormat": {
-        "currency": {
-          "dependencies": "a-table:fallback",
-          "match": "!!context.rest?.currency"
-        },
-        "fallback": {}
-      }
     }
   },
   "description": "",
