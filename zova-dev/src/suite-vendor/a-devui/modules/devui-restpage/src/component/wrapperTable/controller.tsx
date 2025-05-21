@@ -81,6 +81,7 @@ export class ControllerWrapperTable<T extends {} = {}> extends BeanControllerTab
       }
       columns.push(columnHelper.display({
         id: 'actions',
+        header: () => this.scope.locale.TableActions(),
         cell: props => this.$$renderActions.renderActions(props),
       }));
       return columns as TypeColumn<T>[];

@@ -17,7 +17,6 @@ export class RenderTable extends BeanRenderBase {
                   </th>
                 );
               })}
-              <th>{this.scope.locale.TableActions()}</th>
             </tr>
           </thead>
           <tbody>
