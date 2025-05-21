@@ -169,12 +169,10 @@ export class ServiceOnion<OPTIONS, ONIONNAME extends string> extends BeanSimple 
       // beanOptions.options
       if (!beanOptions[SymbolOnionOptionsInited]) {
         beanOptions[SymbolOnionOptionsInited] = true;
-        if (optionsConfig !== undefined) {
-          if (beanOptions.optionsPrimitive) {
-            beanOptions.options = optionsConfig;
-          } else {
-            beanOptions.options = deepExtend({}, beanOptions.options, optionsConfig);
-          }
+        if (beanOptions.optionsPrimitive) {
+          beanOptions.options = optionsConfig === undefined ? beanOptions.options : optionsConfig;
+        } else {
+          beanOptions.options = deepExtend({}, beanOptions.options, optionsConfig);
         }
       }
       // options
