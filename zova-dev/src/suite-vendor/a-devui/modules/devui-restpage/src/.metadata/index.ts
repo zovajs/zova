@@ -14,6 +14,7 @@ import { RenderWrapperForm } from '../component/wrapperForm/render.jsx';
 import { ControllerWrapperTable } from '../component/wrapperTable/controller.jsx';
 import { RenderActions } from '../component/wrapperTable/render.actions.jsx';
 
+import { RenderCreate } from '../component/wrapperTable/render.create.jsx';
 import { RenderWrapperTable } from '../component/wrapperTable/render.jsx';
 /** render: end */
 /** locale: begin */
@@ -85,6 +86,7 @@ declare module 'zova' {
     'devui-restpage:wrapperTable': typeof ZWrapperTable;
   }
 }
+export * from '../component/wrapperTable/render.create.jsx';
 export * from '../component/wrapperTable/render.jsx';
 /** components: begin */
 export * from './component/restPage.js';
@@ -110,6 +112,11 @@ declare module 'zova-module-devui-restpage' {
     get scope(): ScopeModuleDevuiRestpage;
   }
 
+  export interface RenderCreate {
+    /** @internal */
+    get scope(): ScopeModuleDevuiRestpage;
+  }
+
   export interface RenderWrapperTable {
     /** @internal */
     get scope(): ScopeModuleDevuiRestpage;
@@ -120,6 +127,7 @@ declare module 'zova' {
     'devui-restpage.render.restPage': RenderRestPage;
     'devui-restpage.render.wrapperForm': RenderWrapperForm;
     'devui-restpage.render.actions': RenderActions;
+    'devui-restpage.render.create': RenderCreate;
     'devui-restpage.render.wrapperTable': RenderWrapperTable;
   }
 }

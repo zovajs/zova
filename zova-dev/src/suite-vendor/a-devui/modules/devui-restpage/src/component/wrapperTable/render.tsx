@@ -1,23 +1,19 @@
-import { BeanRenderBase } from 'zova';
+import { BeanRenderBase, Use } from 'zova';
 import { Render } from 'zova-module-a-bean';
+import { RenderCreate } from './render.create.jsx';
 
 @Render()
 export class RenderWrapperTable extends BeanRenderBase {
+  @Use()
+  $$renderCreate: RenderCreate;
+
   public render() {
     // table
     const ComponentTable = this.$zovaComponent(this.$$restResource.componentTable);
     return (
       <div>
         <div>
-          <button
-            class="btn btn-primary"
-            type="button"
-            onClick={() => {
-              this.onActionTable('create');
-            }}
-          >
-            {this.scope.locale.Create()}
-          </button>
+          {this.$$renderCreate.render()}
         </div>
         <ComponentTable
           table={this.table}
