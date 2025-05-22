@@ -74,6 +74,10 @@ export class BehaviorFormField extends BeanBehaviorBase<
     return this.$$behaviorForm.getFieldZodSchema(this.$options.name);
   }
 
+  public get formMeta() {
+    return this.$$behaviorForm.formMeta;
+  }
+
   public get formProvider(): IFormProvider {
     return deepExtend({}, this.$$behaviorForm.formProvider, this.$options.formProvider);
   }
