@@ -27,14 +27,16 @@ export class RenderWrapperForm extends BeanRenderBase {
             </p>
             <div class="modal-action">
               {mutationSubmit?.isPending && <span class="loading loading-spinner text-primary"></span>}
-              <button
-                class={classes('btn btn-primary', mutationSubmit?.isPending && 'btn-disabled')}
-                onClick={() => {
-                  return this.controllerRestForm.submit();
-                }}
-              >
-                {this.scope.locale.Submit()}
-              </button>
+              {this.formMeta.formMode === 'edit' && (
+                <button
+                  class={classes('btn btn-primary', mutationSubmit?.isPending && 'btn-disabled')}
+                  onClick={() => {
+                    return this.controllerRestForm.submit();
+                  }}
+                >
+                  {this.scope.locale.Submit()}
+                </button>
+              )}
               <button
                 class="btn"
                 onClick={() => {
