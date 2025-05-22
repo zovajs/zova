@@ -13,10 +13,13 @@ export interface ITableCellFormatRender {
   render(props: CellContext<{}, unknown>, options: IDecoratorTableCellFormatOptions, next: NextTableCellFormat): VNode | string;
 }
 
+export type TypeTableCellFormatType = 'vnode' | 'fallback' | 'value';
 export interface IDecoratorTableCellFormatOptions
   extends IOnionOptionsEnable,
   IOnionOptionsMatch<string>,
-  IOnionOptionsDeps<keyof ITableCellFormatRecord> {}
+  IOnionOptionsDeps<keyof ITableCellFormatRecord> {
+  type: TypeTableCellFormatType;
+}
 
 declare module 'zova-module-a-bean' {
   export interface SysOnion {

@@ -5,7 +5,7 @@ import { IDecoratorTableCellFormatOptions, ITableCellFormatRender, NextTableCell
 
 export interface ITableCellFormatOptionsFallback extends IDecoratorTableCellFormatOptions {}
 
-@TableCellFormat<ITableCellFormatOptionsFallback>()
+@TableCellFormat<ITableCellFormatOptionsFallback>({ type: 'fallback' })
 export class TableCellFormatFallback extends BeanBase implements ITableCellFormatRender {
   render(props: CellContext<{}, unknown>, _options: ITableCellFormatOptionsFallback, next: NextTableCellFormat): VNode | string {
     const res = next();
