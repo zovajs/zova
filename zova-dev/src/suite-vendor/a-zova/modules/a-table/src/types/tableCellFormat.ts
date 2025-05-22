@@ -18,7 +18,7 @@ export interface IDecoratorTableCellFormatOptions
   extends IOnionOptionsEnable,
   IOnionOptionsMatch<string>,
   IOnionOptionsDeps<keyof ITableCellFormatRecord> {
-  type: TypeTableCellFormatType;
+  type?: TypeTableCellFormatType;
 }
 
 declare module 'zova-module-a-bean' {
