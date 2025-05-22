@@ -28,7 +28,7 @@ export class ControllerRestPage extends BeanControllerBase {
     });
   }
 
-  onActionTable(action: keyof TypeResourceActionTableRecord): void {
+  async onActionTable(action: keyof TypeResourceActionTableRecord) {
     if (action === 'create') {
       this.formMode = 'edit';
       this.editMode = 'create';
