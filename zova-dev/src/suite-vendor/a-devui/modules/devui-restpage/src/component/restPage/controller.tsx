@@ -20,6 +20,8 @@ export class ControllerRestPage extends BeanControllerBase {
   $$restResource: ControllerPageResource;
 
   protected async __init__() {
+    // $$restPage
+    this.bean._setBean('$$restPage', this);
     this.formMeta = this.$useComputed(() => {
       return { formMode: this.formMode, editMode: this.editMode };
     });

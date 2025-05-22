@@ -4,11 +4,11 @@ import { Controller } from 'zova-module-a-bean';
 import { TypeResourceActionRowRecord, TypeResourceActionTableRecord } from 'zova-module-a-openapi';
 import { ControllerPageResource } from 'zova-module-a-rest';
 import { BeanControllerTableBase, BeanTableFeatureBase, ServiceTableCellFormat, ServiceTableFeature, TypeColumn, TypeTable, TypeTableCellFormatsMatched } from 'zova-module-a-table';
+import { ControllerRestPage } from '../restPage/controller.jsx';
 import { RenderActions } from './render.actions.jsx';
 
 export interface ControllerWrapperTableProps<T extends {} = {}> {
-  onActionTable?: (action: keyof TypeResourceActionTableRecord) => void;
-  onActionRow?: (action: keyof TypeResourceActionRowRecord, row: Row<T>) => void;
+  __ignore__?: T;
 }
 
 @Controller()
@@ -22,6 +22,9 @@ export class ControllerWrapperTable<T extends {} = {}> extends BeanControllerTab
 
   @Use({ injectionScope: 'host' })
   $$restResource: ControllerPageResource;
+
+  @Use({ injectionScope: 'host' })
+  $$restPage: ControllerRestPage;
 
   @Use()
   $$serviceTableCellFormat: ServiceTableCellFormat;
@@ -111,11 +114,11 @@ export class ControllerWrapperTable<T extends {} = {}> extends BeanControllerTab
     });
   }
 
-  onActionTable(action: keyof TypeResourceActionTableRecord): void {
-    return this.$props.onActionTable?.(action);
+  async onActionTable(action: keyof TypeResourceActionTableRecord) {
+    return this.$$restPage.onActionTable(action);
   }
 
-  onActionRow(action: keyof TypeResourceActionRowRecord, row: Row<T>): void {
-    return this.$props.onActionRow?.(action, row);
+  async onActionRow(action: keyof TypeResourceActionRowRecord, row: Row<T>) {
+    return this.$$restPage.onActionRow(action, row);
   }
 }
