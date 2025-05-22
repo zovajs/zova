@@ -9,7 +9,7 @@ export interface ITableCellFormatOptionsFallback extends IDecoratorTableCellForm
 export class TableCellFormatFallback extends BeanBase implements ITableCellFormatRender {
   render(props: CellContext<{}, unknown>, _options: ITableCellFormatOptionsFallback, next: NextTableCellFormat): VNode | string {
     const res = next();
-    if (res === undefined || res === null) return props.table.options.renderFallbackValue;
+    if (res === undefined || res === null || res === '') return props.table.options.renderFallbackValue;
     return res;
   }
 }
