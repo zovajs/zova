@@ -5,9 +5,10 @@ import { Controller } from 'zova-module-a-bean';
 import { IFormMeta, IFormProvider, TypeEditMode, TypeFormMode } from 'zova-module-a-form';
 import { DataMutation } from 'zova-module-a-model';
 import { TypeResourceActionRowRecord, TypeResourceActionTableRecord } from 'zova-module-a-openapi';
+import { ITableActionHandler } from 'zova-module-a-table';
 
 @Controller()
-export class ControllerRestPage extends BeanControllerBase {
+export class ControllerRestPage extends BeanControllerBase implements ITableActionHandler {
   // form
   rowCurrent?: Row<any>;
   formVisible: boolean = false;

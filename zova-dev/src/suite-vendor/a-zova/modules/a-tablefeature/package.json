@@ -33,6 +33,7 @@
     "onionsConfig": {
       "tableFeature": {
         "format": {},
+        "restPage": {},
         "schema": {}
       }
     }

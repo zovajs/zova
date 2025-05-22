@@ -104,6 +104,7 @@ export class ControllerWrapperTable<T extends {} = {}> extends BeanControllerTab
     const self = this;
     this.table = this.$useTable({
       _features: this.features,
+      get restPage() { return self.$$restPage; },
       get schema() { return self.schema; },
       get formats() { return self.formats; },
       get data() { return self.data || []; },
