@@ -40,7 +40,12 @@ export class ControllerRestPage extends BeanControllerBase implements ITableActi
   }
 
   async onActionRow(action: keyof TypeResourceActionRowRecord, row: Row<any>) {
-    if (action === 'update') {
+    if (action === 'view') {
+      this.rowCurrent = row;
+      this.formMode = 'view';
+      this.editMode = undefined;
+      this.formVisible = true;
+    } else if (action === 'update') {
       this.rowCurrent = row;
       this.formMode = 'edit';
       this.editMode = 'update';
