@@ -6,7 +6,7 @@ import { IDecoratorTableCellFormatOptions, ITableCellFormatRender, NextTableCell
 
 export interface ITableCellFormatOptionsCurrency extends IDecoratorTableCellFormatOptions {}
 
-@TableCellFormat<ITableCellFormatOptionsCurrency>({ dependencies: 'a-tableformat:fallback', match: '!!context.rest?.currency' })
+@TableCellFormat<ITableCellFormatOptionsCurrency>({ match: '!!context.rest?.currency' })
 export class TableCellFormatCurrency extends BeanBase implements ITableCellFormatRender {
   render(props: CellContext<{}, unknown>, _options: ITableCellFormatOptionsCurrency, next: NextTableCellFormat): VNode | string {
     const value = next();
