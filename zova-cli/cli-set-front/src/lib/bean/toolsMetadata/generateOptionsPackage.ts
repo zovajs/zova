@@ -34,7 +34,7 @@ export async function generateOptionsPackage(
     const onionOptions = onionOptionsStr ? evaluateSimple(matches[1]) : {};
     const nodeScene = getCacheNodeScene(sceneName);
     nodeScene[beanName] = {};
-    for (const key of ['enable', 'meta', 'dependencies', 'dependents']) {
+    for (const key of ['enable', 'meta', 'dependencies', 'dependents', 'type']) {
       if (onionOptions[key] !== undefined) nodeScene[beanName][key] = onionOptions[key];
     }
     for (const key of ['match', 'ignore']) {

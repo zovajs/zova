@@ -35,9 +35,12 @@
     "onionsConfig": {
       "tableCellFormat": {
         "currency": {
+          "type": "value",
           "match": "!!context.rest?.currency"
         },
-        "fallback": {}
+        "fallback": {
+          "type": "fallback"
+        }
       }
     }
   }
