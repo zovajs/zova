@@ -1,10 +1,10 @@
+import type { ControllerPageResource } from 'zova-module-a-rest';
+import type { ControllerRestPage } from '../restPage/controller.jsx';
 import { createColumnHelper, getCoreRowModel, Row } from '@tanstack/table-core';
 import { cast, Use } from 'zova';
 import { Controller } from 'zova-module-a-bean';
 import { TypeResourceActionRowRecord, TypeResourceActionTableRecord } from 'zova-module-a-openapi';
-import { ControllerPageResource } from 'zova-module-a-rest';
 import { BeanControllerTableBase, BeanTableFeatureBase, ServiceTableCellFormat, ServiceTableFeature, TypeColumn, TypeTable, TypeTableCellFormatsMatched } from 'zova-module-a-table';
-import { ControllerRestPage } from '../restPage/controller.jsx';
 import { RenderActions } from './render.actions.jsx';
 
 export interface ControllerWrapperTableProps<T extends {} = {}> {

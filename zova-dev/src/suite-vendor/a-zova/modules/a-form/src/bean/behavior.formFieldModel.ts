@@ -1,9 +1,9 @@
+import type { BehaviorFormField } from './behavior.formField.js';
 import { VNode } from 'vue';
 import { Use } from 'zova';
 import { BeanBehaviorBase, Behavior, IDecoratorBehaviorOptions, NextBehavior } from 'zova-module-a-behavior';
 import { TypeFormField } from '../types/form.js';
 import { IFormMeta } from '../types/formMeta.js';
-import { BehaviorFormField } from './behavior.formField.js';
 
 export interface IBehaviorPropsInputFormFieldModel {
   name?: string;
