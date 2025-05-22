@@ -8,7 +8,17 @@ export interface ITableCellFormatOptionsActionView extends IDecoratorTableCellFo
 @TableCellFormat<ITableCellFormatOptionsActionView>({ type: 'vnode', match: 'context.rest?.render==="actionView"' })
 export class TableCellFormatActionView extends BeanBase implements ITableCellFormatRender {
   render(_props: CellContext<{}, unknown>, _options: ITableCellFormatOptionsActionView, next: NextTableCellFormat): VNode | string {
-    return 'actionView';
-    return next();
+    const value = next();
+    return (
+      <a
+        class="hover:text-blue-500"
+        href="#"
+        onClick={() => {
+          console.log('sss');
+        }}
+      >
+        {value}
+      </a>
+    );
   }
 }

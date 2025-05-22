@@ -1,8 +1,8 @@
 {
-  "name": "zova-module-a-tableformat",
+  "name": "zova-module-devui-tableformat",
   "type": "module",
   "version": "5.0.0",
-  "title": "a-tableformat",
+  "title": "devui-tableformat",
   "description": "",
   "author": "",
   "keywords": [
@@ -28,18 +28,13 @@
     "tsc:publish": "npm run clean && tsc -b",
     "_prepublishOnly": "npm run tsc:publish"
   },
-  "dependencies": {
-    "@zhennann/currency": "^2.0.0"
-  },
+  "dependencies": {},
   "zovaModule": {
     "onionsConfig": {
       "tableCellFormat": {
-        "currency": {
-          "type": "value",
-          "match": "!!context.rest?.currency"
-        },
-        "fallback": {
-          "type": "fallback"
+        "actionView": {
+          "type": "vnode",
+          "match": "context.rest?.render===\"actionView\""
         }
       }
     }
