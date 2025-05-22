@@ -50,7 +50,7 @@
   },
   "dependencies": {
     "@cabloy/zod-errors-custom": "^1.0.3",
-    "@cabloy/zod-query": "^1.0.2",
+    "@cabloy/zod-query": "^1.0.3",
     "zod": "^3.23.8"
   }
 }
