@@ -114,7 +114,7 @@ export class ControllerWrapperTable<T extends {} = {}> extends BeanControllerTab
   }
 
   private async _createFormats() {
-    this.formats = await this.$$serviceTableCellFormat.loadTableCellFormatsMatched(this.schema);
+    this.formats = await this.$$serviceTableCellFormat.loadTableCellFormatsMatched(this.properties);
   }
 
   private _createTable() {
