@@ -14,8 +14,6 @@ import { OnionMatchPrefixRegexp, OnionMatchPrefixStaticString } from '../types/o
 // const SymbolOnionsEnabled = Symbol('SymbolOnionsEnabled');
 // const SymbolOnionsEnabledWrapped = Symbol('SymbolOnionsEnabledWrapped');
 
-const SymbolOnionOptionsInited = Symbol('SymbolOnionOptionsInited');
-
 const __tableCellFormatTypes = ['vnode', 'fallback', 'value'] as const;
 
 @ProxyDisable()
@@ -177,17 +175,6 @@ export class ServiceOnion<OPTIONS, ONIONNAME extends string> extends BeanSimple 
       const beanFullName = item.name.replace(':', `.${this.sceneName}.`);
       const beanOptions = appResource.getBean(beanFullName);
       if (!beanOptions) throw new Error(`behavior not found: ${beanFullName}`);
-      // optionsConfig
-      const optionsConfig = this.sys.config.onions[this.sceneName]?.[item.name];
-      // beanOptions.options
-      if (!beanOptions[SymbolOnionOptionsInited]) {
-        beanOptions[SymbolOnionOptionsInited] = true;
-        if (beanOptions.optionsPrimitive) {
-          beanOptions.options = optionsConfig === undefined ? beanOptions.options : optionsConfig;
-        } else {
-          beanOptions.options = deepExtend({}, beanOptions.options, optionsConfig);
-        }
-      }
       // options
       let options;
       if (beanOptions.optionsPrimitive) {

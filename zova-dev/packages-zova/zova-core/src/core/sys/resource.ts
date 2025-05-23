@@ -15,6 +15,7 @@ import { isClass } from '../../utils/isClass.js';
 import { uuid } from '../../utils/uuid.js';
 import { appMetadata } from './metadata.js';
 import { getSys } from './sysFake.js';
+import { deepExtend } from './util.js';
 
 export const DecoratorBeanFullName = Symbol('Decorator#BeanFullName');
 export const SymbolDecoratorBeanInfo = Symbol('SymbolDecoratorBeanInfo');
@@ -44,7 +45,7 @@ export class AppResource {
   }
 
   addBean<T>(beanOptions: Partial<IDecoratorBeanOptionsBase<T>>) {
-    const { beanClass, virtual } = beanOptions;
+    const { beanClass, virtual, options, optionsPrimitive } = beanOptions;
     // name
     const { scene, name } = this._parseSceneAndBeanName(beanClass!, beanOptions.scene, beanOptions.name);
     // beanInfo
@@ -57,6 +58,8 @@ export class AppResource {
     // moduleBelong
     const moduleBelong = this._parseModuleBelong(module, beanClass, virtual);
     // options
+    const options2 = this._prepareOnionOptions(options, optionsPrimitive, scene, `${module}:${name}`);
+    // beanOptions2
     const beanOptions2 = {
       ...beanOptions,
       module,
@@ -64,6 +67,7 @@ export class AppResource {
       name,
       beanFullName,
       moduleBelong,
+      options: options2,
     } as IDecoratorBeanOptionsBase<T>;
     // record
     this.beans[beanFullName] = beanOptions2;
@@ -177,6 +181,16 @@ export class AppResource {
   _getModuleName<T>(beanFullName: Constructable<T> | string): string | undefined {
     const beanOptions = this.getBean(beanFullName as any);
     return beanOptions?.module;
+  }
+
+  _prepareOnionOptions(options: unknown, optionsPrimitive: boolean | undefined, scene: any, name: string) {
+    const sys = getSys();
+    const optionsConfig = cast(sys.config).onions[scene]?.[name];
+    if (optionsPrimitive) {
+      return optionsConfig === undefined ? options : optionsConfig;
+    } else {
+      return deepExtend({}, options, optionsConfig);
+    }
   }
 }
 
