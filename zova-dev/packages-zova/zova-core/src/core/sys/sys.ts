@@ -7,6 +7,7 @@ import { BeanContainer } from '../../bean/beanContainer.js';
 import { configDefault } from './config.js';
 import { constantDefault } from './constant.js';
 import { SysMeta } from './meta.js';
+import { setSys } from './sysFake.js';
 import { deepExtend, SysUtil } from './util.js';
 
 const SymbolSysInitializePromise = Symbol('SymbolSysInitializePromise');
@@ -85,6 +86,7 @@ export class ZovaSys {
 }
 
 export const sys = new ZovaSys();
+setSys(sys);
 if (process.env.CLIENT) {
   window.sys = sys;
 }
