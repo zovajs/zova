@@ -10,13 +10,13 @@ export class ServiceTableCellFormat extends BeanBase {
   $$sysOnion: SysOnion;
 
   async loadTableCellFormatsMatched(properties: TypeSchemaProperties | undefined): Promise<TypeTableCellFormatsMatched> {
-    const result: TypeTableCellFormatsMatched = {};
+    const formats: TypeTableCellFormatsMatched = {};
     if (properties) {
       for (const [key, property] of properties) {
-        result[key] = await this._cretePropertyComposer(property);
+        formats[key] = await this._cretePropertyComposer(property);
       }
     }
-    return result;
+    return formats;
   }
 
   async _cretePropertyComposer(property?: SchemaObject): Promise<TypeComposer | undefined> {
