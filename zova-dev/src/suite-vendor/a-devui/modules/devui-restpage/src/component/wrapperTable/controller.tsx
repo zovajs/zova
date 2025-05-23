@@ -79,7 +79,7 @@ export class ControllerWrapperTable<T extends {} = {}> extends BeanControllerTab
     // filter
     for (const key in properties) {
       let property = properties[key] as SchemaObject;
-      property = deepExtend({ key }, property, { rest: property.rest?.table });
+      property = deepExtend({ key }, property, { rest: property.rest?.table ?? {} });
       if (property.rest?.visible !== false) {
         result.push(property);
       }
