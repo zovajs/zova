@@ -1,6 +1,7 @@
 import type { ControllerPageResource } from 'zova-module-a-rest';
 import type { ControllerRestPage } from '../restPage/controller.jsx';
 import { createColumnHelper, getCoreRowModel, Row } from '@tanstack/table-core';
+import { SchemaObject } from 'openapi3-ts/oas31';
 import { cast, Use } from 'zova';
 import { Controller } from 'zova-module-a-bean';
 import { TypeResourceActionRowRecord, TypeResourceActionTableRecord } from 'zova-module-a-openapi';
@@ -15,6 +16,7 @@ export interface ControllerWrapperTableProps<T extends {} = {}> {
 export class ControllerWrapperTable<T extends {} = {}> extends BeanControllerTableBase {
   static $propsDefault = {};
 
+  properties: SchemaObject[] | undefined;
   columns: TypeColumn<T>[];
   features: BeanTableFeatureBase[] | undefined;
   formats: TypeTableCellFormatsMatched;
@@ -41,6 +43,8 @@ export class ControllerWrapperTable<T extends {} = {}> extends BeanControllerTab
     await queryDataFindAll.suspense();
     // scheam
     await this._loadSchema();
+    // properties
+    this._loadProperties();
     // columns
     this._createColumns();
     // features
@@ -56,25 +60,38 @@ export class ControllerWrapperTable<T extends {} = {}> extends BeanControllerTab
     return queryDataFindAll.data;
   }
 
-  async _loadSchema() {
-    const querySdkBootstrap = this.$$restResource.getQuerySdkBootstrap();
-    const querySchema = this.$$restResource.getQuerySchemaOfTableRow(querySdkBootstrap.data?.operationObject);
-    await querySchema?.suspense();
-  }
-
   get schema() {
     const querySdkBootstrap = this.$$restResource.getQuerySdkBootstrap();
     const querySchema = this.$$restResource.getQuerySchemaOfTableRow(querySdkBootstrap.data?.operationObject);
     return querySchema?.data;
   }
 
+  async _loadSchema() {
+    const querySdkBootstrap = this.$$restResource.getQuerySdkBootstrap();
+    const querySchema = this.$$restResource.getQuerySchemaOfTableRow(querySdkBootstrap.data?.operationObject);
+    await querySchema?.suspense();
+  }
+
+  _loadProperties() {
+    if (!this.schema) return;
+    const properties = this.schema.properties!;
+    const result: SchemaObject[] = [];
+    for (const key in properties) {
+      const property = properties[key] as SchemaObject;
+      const visible = property.rest?.table?.visible ?? property.rest?.visible ?? true;
+      if (visible) {
+        result.push(property);
+      }
+    }
+    this.properties = result;
+  }
+
   private _createColumns() {
     this.columns = this.$useComputed(() => {
-      if (!this.schema) return [];
+      if (!this.properties) return [];
       const columnHelper = createColumnHelper();
       const columns: TypeColumn[] = [];
-      const properties = this.schema.properties!;
-      for (const key in properties) {
+      for (const key in this.properties) {
         columns.push(columnHelper.accessor(key as any, {
           id: key,
           header: props => {
