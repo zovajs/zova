@@ -1,4 +1,5 @@
 import type { CurrencyOptions } from '@zhennann/currency';
+import type { SchemaObject } from 'openapi3-ts/oas31';
 import type { ComponentPublicInstance } from 'vue';
 import type { Constructable, IComponentRecord } from 'zova';
 import type { TypeResourceActionRowRecordRender } from './actions.js';
@@ -27,3 +28,5 @@ declare module 'openapi3-ts/oas31' {
 
 export type TypeRenderComponent =
   Constructable<ComponentPublicInstance> | (keyof IComponentRecord) | keyof TypeResourceActionRowRecordRender | 'text' | 'textarea' | 'currency' | 'date' | 'datetime' | 'time' | 'select' | 'checkbox' | 'radio' | 'switch' | 'image' | 'file' | 'color' | 'password' | 'email' | 'url' | 'input';
+
+export type TypeSchemaProperties = Array<[string, SchemaObject]>;

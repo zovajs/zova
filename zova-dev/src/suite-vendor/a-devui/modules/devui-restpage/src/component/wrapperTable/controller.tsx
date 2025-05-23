@@ -4,7 +4,7 @@ import { createColumnHelper, getCoreRowModel, Row } from '@tanstack/table-core';
 import { SchemaObject } from 'openapi3-ts/oas31';
 import { cast, Use } from 'zova';
 import { Controller } from 'zova-module-a-bean';
-import { TypeResourceActionRowRecord, TypeResourceActionTableRecord } from 'zova-module-a-openapi';
+import { TypeResourceActionRowRecord, TypeResourceActionTableRecord, TypeSchemaProperties } from 'zova-module-a-openapi';
 import { BeanControllerTableBase, BeanTableFeatureBase, ServiceTableCellFormat, ServiceTableFeature, TypeColumn, TypeTable, TypeTableCellFormatsMatched } from 'zova-module-a-table';
 import { RenderActions } from './render.actions.jsx';
 
@@ -16,7 +16,7 @@ export interface ControllerWrapperTableProps<T extends {} = {}> {
 export class ControllerWrapperTable<T extends {} = {}> extends BeanControllerTableBase {
   static $propsDefault = {};
 
-  properties: SchemaObject[] | undefined;
+  properties: TypeSchemaProperties | undefined;
   columns: TypeColumn<T>[];
   features: BeanTableFeatureBase[] | undefined;
   formats: TypeTableCellFormatsMatched;
@@ -75,12 +75,12 @@ export class ControllerWrapperTable<T extends {} = {}> extends BeanControllerTab
   _loadProperties() {
     if (!this.schema) return;
     const properties = this.schema.properties!;
-    const result: SchemaObject[] = [];
+    const result: TypeSchemaProperties = [];
     for (const key in properties) {
       const property = properties[key] as SchemaObject;
       const visible = property.rest?.table?.visible ?? property.rest?.visible ?? true;
       if (visible) {
-        result.push(property);
+        result.push([key, property]);
       }
     }
     this.properties = result;
@@ -91,7 +91,7 @@ export class ControllerWrapperTable<T extends {} = {}> extends BeanControllerTab
       if (!this.properties) return [];
       const columnHelper = createColumnHelper();
       const columns: TypeColumn[] = [];
-      for (const key in this.properties) {
+      for (const [key] of this.properties) {
         columns.push(columnHelper.accessor(key as any, {
           id: key,
           header: props => {
