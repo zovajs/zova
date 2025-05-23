@@ -10,9 +10,11 @@ import type {
 import type { MetadataKey } from './metadata.js';
 import { parseLastWord, skipLastWord, skipPrefix, splitWords } from '@cabloy/word-utils';
 import { registerMappedClassMetadataKey } from '../../mappedClass/utils.js';
+import { cast } from '../../types/utils/cast.js';
 import { isClass } from '../../utils/isClass.js';
 import { uuid } from '../../utils/uuid.js';
 import { appMetadata } from './metadata.js';
+import { getSys } from './sysFake.js';
 
 export const DecoratorBeanFullName = Symbol('Decorator#BeanFullName');
 export const SymbolDecoratorBeanInfo = Symbol('SymbolDecoratorBeanInfo');
@@ -41,10 +43,10 @@ export class AppResource {
     return appMetadata.getMetadata(SymbolDecoratorUse, target);
   }
 
-  addBean<T>(options: Partial<IDecoratorBeanOptionsBase<T>>) {
-    const { beanClass, virtual } = options;
+  addBean<T>(beanOptions: Partial<IDecoratorBeanOptionsBase<T>>) {
+    const { beanClass, virtual } = beanOptions;
     // name
-    const { scene, name } = this._parseSceneAndBeanName(beanClass!, options.scene, options.name);
+    const { scene, name } = this._parseSceneAndBeanName(beanClass!, beanOptions.scene, beanOptions.name);
     // beanInfo
     const beanInfo = appMetadata.getMetadata<IDecoratorBeanInfoOptions>(SymbolDecoratorBeanInfo, beanClass!);
     // module
@@ -55,8 +57,8 @@ export class AppResource {
     // moduleBelong
     const moduleBelong = this._parseModuleBelong(module, beanClass, virtual);
     // options
-    const beanOptions = {
-      ...options,
+    const beanOptions2 = {
+      ...beanOptions,
       module,
       scene: scene as keyof IBeanSceneRecord,
       name,
@@ -64,14 +66,14 @@ export class AppResource {
       moduleBelong,
     } as IDecoratorBeanOptionsBase<T>;
     // record
-    this.beans[beanFullName] = beanOptions;
+    this.beans[beanFullName] = beanOptions2;
     if (!this.scenes[scene!]) this.scenes[scene!] = {};
     if (!this.scenes[scene!][module]) this.scenes[scene!][module] = {};
-    this.scenes[scene!][module][beanFullName] = beanOptions;
+    this.scenes[scene!][module][beanFullName] = beanOptions2;
     // set metadata
-    appMetadata.defineMetadata(DecoratorBeanFullName, beanFullName, beanOptions.beanClass);
+    appMetadata.defineMetadata(DecoratorBeanFullName, beanFullName, beanOptions2.beanClass);
     // ok
-    return beanOptions;
+    return beanOptions2;
   }
 
   getBeanFullName<T>(A: Constructable<T> | undefined): string | undefined;
