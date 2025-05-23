@@ -1,18 +1,17 @@
-import { SchemaObject } from 'openapi3-ts/oas31';
 import { VNode } from 'vue';
 import { BeanRenderBase } from 'zova';
 import { Render } from 'zova-module-a-bean';
 
 @Render()
 export class RenderForm extends BeanRenderBase {
-  private _renderSchema(schema?: SchemaObject) {
-    if (!schema) return;
+  private _renderSchema() {
+    if (!this.properties) return;
     const children: VNode[] = [];
-    const properties = schema.properties!;
-    for (const name in properties) {
+    for (const property of this.properties) {
+      const key = property.key!;
       const ComponentFormField = this.$zovaComponent(this.formProvider.components!.formField!);
       children.push(
-        <ComponentFormField key={name} name={name}></ComponentFormField>,
+        <ComponentFormField key={key} name={key}></ComponentFormField>,
       );
     }
     return children;
@@ -23,7 +22,7 @@ export class RenderForm extends BeanRenderBase {
       ? this.$slots.default()
       : (
           <>
-            {this._renderSchema(this.$props.schema)}
+            {this._renderSchema()}
             <button type="submit" class="hidden"></button>
           </>
         );
@@ -34,6 +33,7 @@ export class RenderForm extends BeanRenderBase {
         formProvider: this.formProvider,
         schema: this.$props.schema,
         zodSchema: this.zodSchema,
+        properties: this.properties,
         formField: this.$props.formField,
         formFieldLayout: this.$props.formFieldLayout,
       }}

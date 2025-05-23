@@ -2,7 +2,7 @@ import { SchemaObject } from 'openapi3-ts/oas31';
 import { z } from 'zod';
 import { deepExtend } from 'zova-core';
 import { Controller } from 'zova-module-a-bean';
-import { schemaToZodSchema } from 'zova-module-a-openapi';
+import { loadSchemaProperties, schemaToZodSchema } from 'zova-module-a-openapi';
 import { BeanControllerFormBase } from '../../lib/beanControllerFormBase.js';
 import { TypeForm, TypeFormOnSubmit } from '../../types/form.js';
 import { IFormFieldLayoutOptionsBase, IFormFieldOptionsBase } from '../../types/formField.js';
@@ -26,6 +26,7 @@ export class ControllerForm extends BeanControllerFormBase {
   form: TypeForm;
   formProvider: IFormProvider;
   zodSchema: z.AnyZodObject | undefined;
+  properties: SchemaObject[] | undefined;
 
   protected async __init__() {
     this.form = this.$useForm({
@@ -40,6 +41,9 @@ export class ControllerForm extends BeanControllerFormBase {
     this.zodSchema = this.$useComputed(() => {
       if (!this.$props.schema) return;
       return schemaToZodSchema<z.AnyZodObject>(this.$props.schema);
+    });
+    this.properties = this.$useComputed(() => {
+      return loadSchemaProperties(this.$props.schema, 'form');
     });
   }
 

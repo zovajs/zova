@@ -3,7 +3,7 @@ import { SchemaObject } from 'openapi3-ts/oas31';
 import { createCommentVNode, VNode } from 'vue';
 import { z } from 'zod';
 import { BeanBehaviorBase, Behavior, IDecoratorBehaviorOptions, NextBehavior } from 'zova-module-a-behavior';
-import { schemaToZodSchema } from 'zova-module-a-openapi';
+import { loadSchemaProperties, schemaToZodSchema } from 'zova-module-a-openapi';
 import { TypeForm } from '../types/form.js';
 import { IFormFieldLayoutOptionsBase, IFormFieldOptionsBase } from '../types/formField.js';
 import { IFormMeta } from '../types/formMeta.js';
@@ -21,6 +21,7 @@ export interface IBehaviorOptionsForm<TFormData = unknown> extends IDecoratorBeh
   formProvider?: IFormProvider;
   schema?: SchemaObject;
   zodSchema?: z.AnyZodObject;
+  properties?: SchemaObject[];
   formField?: IFormFieldOptionsBase;
   formFieldLayout?: IFormFieldLayoutOptionsBase;
   onFormSubmit?: ((payload: Event) => void) | boolean;
@@ -32,7 +33,8 @@ export class BehaviorForm<TFormData = unknown> extends BeanBehaviorBase<
   IBehaviorPropsInputForm,
   IBehaviorPropsOutputForm
 > {
-  zodSchema: z.AnyZodObject | undefined;
+  zodSchema?: z.AnyZodObject;
+  properties?: SchemaObject[];
 
   protected async __init__(options: IBehaviorOptionsForm) {
     super.__init__(options);
@@ -41,6 +43,11 @@ export class BehaviorForm<TFormData = unknown> extends BeanBehaviorBase<
       if (this.$options.zodSchema) return this.$options.zodSchema;
       if (!this.schema) return;
       return schemaToZodSchema<z.AnyZodObject>(this.schema);
+    });
+    this.properties = this.$useComputed(() => {
+      if (this.$options.properties) return this.$options.properties;
+      if (!this.schema) return;
+      return loadSchemaProperties(this.schema, 'form');
     });
   }
 
@@ -66,6 +73,11 @@ export class BehaviorForm<TFormData = unknown> extends BeanBehaviorBase<
 
   public get formFieldLayout() {
     return this.$options.formFieldLayout;
+  }
+
+  public getProperty<K extends DeepKeys<TFormData>>(name: K): SchemaObject | undefined {
+    if (!this.properties) return;
+    return this.properties.find(item => item.key === name);
   }
 
   public getFieldSchema<K extends DeepKeys<TFormData>>(name: K): SchemaObject | undefined {

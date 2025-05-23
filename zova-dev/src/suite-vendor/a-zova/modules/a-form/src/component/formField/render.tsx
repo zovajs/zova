@@ -8,7 +8,7 @@ import { IFormFieldLayoutOptionsBase } from '../../types/formField.js';
 export class RenderFormField extends BeanRenderBase {
   public _renderField() {
     const name = this.$props.name;
-    const property = this.$$behaviorForm.getFieldSchema(name);
+    const property = this.$$behaviorForm.getProperty(name);
     if (!property) return;
     const behaviors: IBehaviorItem = {};
     this._prepareBehaviorFormField(behaviors, name, property);
