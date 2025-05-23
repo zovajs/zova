@@ -112,8 +112,8 @@ export class ServiceOnion<OPTIONS, ONIONNAME extends string> extends BeanSimple 
   private _sortOnions(onions: IOnionItem<OPTIONS, ONIONNAME>[]) {
     if (this.sceneName === 'tableCellFormat') {
       onions.sort((a, b) => {
-        const aType = cast(a.options)?.type ?? 'value';
-        const bType = cast(b.options)?.type ?? 'value';
+        const aType = cast(a.options)?.type ?? 'vnode';
+        const bType = cast(b.options)?.type ?? 'vnode';
         return __tableCellFormatTypes.indexOf(aType) - __tableCellFormatTypes.indexOf(bType);
       });
     }
