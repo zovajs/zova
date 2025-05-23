@@ -2,9 +2,6 @@ import type { Cell, Column, Header, Row, RowData, Table, TableFeature } from '@t
 import type { SchemaObject } from 'openapi3-ts/oas31';
 import type { TableFeatureSchemaOptions } from '../types/tableFeatureSchema.js';
 import { getProperty } from '@cabloy/utils';
-import { deepExtend } from 'zova';
-
-const SymbolPropertiesCache = Symbol('SymbolPropertiesCache');
 
 export const TableFeatureSchema: TableFeature<any> = {
 
@@ -20,13 +17,7 @@ export const TableFeatureSchema: TableFeature<any> = {
     table.getProperty = (accessorKey: string): SchemaObject | undefined => {
       const schema = table.options.schema;
       if (!schema) return undefined;
-      if (!table[SymbolPropertiesCache]) table[SymbolPropertiesCache] = {};
-      if (!table[SymbolPropertiesCache][accessorKey]) {
-        const property = getProperty<SchemaObject>(schema.properties, accessorKey);
-        if (!property) return undefined;
-        table[SymbolPropertiesCache][accessorKey] = property.rest?.table ? deepExtend({}, property, { rest: property.rest?.table }) : property;
-      }
-      return table[SymbolPropertiesCache][accessorKey];
+      return getProperty<SchemaObject>(schema.properties, accessorKey);
     };
   },
 

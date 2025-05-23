@@ -2,9 +2,9 @@ import type { ControllerPageResource } from 'zova-module-a-rest';
 import type { ControllerRestPage } from '../restPage/controller.jsx';
 import { createColumnHelper, getCoreRowModel, Row } from '@tanstack/table-core';
 import { SchemaObject } from 'openapi3-ts/oas31';
-import { cast, Use } from 'zova';
+import { cast, deepExtend, Use } from 'zova';
 import { Controller } from 'zova-module-a-bean';
-import { TypeResourceActionRowRecord, TypeResourceActionTableRecord, TypeSchemaProperties } from 'zova-module-a-openapi';
+import { TypeResourceActionRowRecord, TypeResourceActionTableRecord } from 'zova-module-a-openapi';
 import { BeanControllerTableBase, BeanTableFeatureBase, ServiceTableCellFormat, ServiceTableFeature, TypeColumn, TypeTable, TypeTableCellFormatsMatched } from 'zova-module-a-table';
 import { RenderActions } from './render.actions.jsx';
 
@@ -16,7 +16,7 @@ export interface ControllerWrapperTableProps<T extends {} = {}> {
 export class ControllerWrapperTable<T extends {} = {}> extends BeanControllerTableBase {
   static $propsDefault = {};
 
-  properties: TypeSchemaProperties | undefined;
+  properties: SchemaObject[] | undefined;
   columns: TypeColumn<T>[];
   features: BeanTableFeatureBase[] | undefined;
   formats: TypeTableCellFormatsMatched;
@@ -75,12 +75,13 @@ export class ControllerWrapperTable<T extends {} = {}> extends BeanControllerTab
   _loadProperties() {
     if (!this.schema) return;
     const properties = this.schema.properties!;
-    const result: TypeSchemaProperties = [];
+    const result: SchemaObject[] = [];
+    // filter
     for (const key in properties) {
-      const property = properties[key] as SchemaObject;
-      const visible = property.rest?.table?.visible ?? property.rest?.visible ?? true;
-      if (visible) {
-        result.push([key, property]);
+      let property = properties[key] as SchemaObject;
+      property = deepExtend({ key }, property, { rest: property.rest?.table });
+      if (property.rest?.visible !== false) {
+        result.push(property);
       }
     }
     this.properties = result;
@@ -91,7 +92,8 @@ export class ControllerWrapperTable<T extends {} = {}> extends BeanControllerTab
       if (!this.properties) return [];
       const columnHelper = createColumnHelper();
       const columns: TypeColumn[] = [];
-      for (const [key] of this.properties) {
+      for (const property of this.properties) {
+        const key = property.key!;
         columns.push(columnHelper.accessor(key as any, {
           id: key,
           header: props => {
