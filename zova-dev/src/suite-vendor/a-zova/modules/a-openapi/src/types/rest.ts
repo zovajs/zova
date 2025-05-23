@@ -10,6 +10,7 @@ export interface ISchemaObjectExtensionFieldRest {
   render?: TypeRenderComponent;
   currency?: CurrencyOptions | boolean;
   visible?: boolean;
+  order?: number;
   table?: Omit<ISchemaObjectExtensionFieldRest, 'table' | 'form'>;
   form?: Omit<ISchemaObjectExtensionFieldRest, 'table' | 'form'>;
 }
