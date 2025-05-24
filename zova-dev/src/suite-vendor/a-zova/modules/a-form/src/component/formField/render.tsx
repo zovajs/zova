@@ -49,7 +49,7 @@ export class RenderFormField extends BeanRenderBase {
     const behaviorFormFieldLayout = this.formProvider.behaviors?.formFieldLayout;
     if (!behaviorFormFieldLayout) return;
     behaviors[behaviorFormFieldLayout] = deepExtend({ bordered: true }, this.$$behaviorForm.formFieldLayout, this.$props as any, {
-      label: property.description || name,
+      label: this.$props.label ?? property.description ?? name,
     } satisfies IFormFieldLayoutOptionsBase);
   }
 }
