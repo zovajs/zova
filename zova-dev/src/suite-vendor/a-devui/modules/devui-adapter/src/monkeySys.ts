@@ -1,6 +1,6 @@
 import type { IMonkeySysInitialize } from 'zova';
 import type { IFormProvider } from 'zova-module-a-form';
-import type { IRestConfig } from 'zova-module-a-rest';
+import type { IRestConfig } from 'zova-module-rest-resource';
 import { BeanSimple, deepExtend } from 'zova';
 
 export class MonkeySys extends BeanSimple implements IMonkeySysInitialize {
@@ -11,7 +11,7 @@ export class MonkeySys extends BeanSimple implements IMonkeySysInitialize {
       scopeStyleConfig.defaultThemeHandler = 'devui-adapter.meta.themeHandler';
     }
     // rest
-    const scopeRestConfig = this.sys.util.getModuleConfigSafe('a-rest');
+    const scopeRestConfig = this.sys.util.getModuleConfigSafe('rest-resource');
     scopeRestConfig.rest = deepExtend({
       provider: {
         components: {

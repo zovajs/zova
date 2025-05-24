@@ -1,4 +1,4 @@
-import type { ControllerPageResource } from 'zova-module-a-rest';
+import type { ControllerPageResource } from 'zova-module-rest-resource';
 import type { ControllerRestPage } from '../restPage/controller.jsx';
 import { createColumnHelper, getCoreRowModel, Row } from '@tanstack/table-core';
 import { SchemaObject } from 'openapi3-ts/oas31';

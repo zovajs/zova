@@ -1,4 +1,4 @@
-import type { ControllerPageResource } from 'zova-module-a-rest';
+import type { ControllerPageResource } from 'zova-module-rest-resource';
 import { SchemaObject } from 'openapi3-ts/oas31';
 import { useId } from 'vue';
 import { BeanControllerBase, Model, Use } from 'zova';

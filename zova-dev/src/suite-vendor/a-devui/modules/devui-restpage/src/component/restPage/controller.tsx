@@ -1,4 +1,4 @@
-import type { ControllerPageResource } from 'zova-module-a-rest';
+import type { ControllerPageResource } from 'zova-module-rest-resource';
 import { Row } from '@tanstack/table-core';
 import { BeanControllerBase, Use } from 'zova';
 import { Controller } from 'zova-module-a-bean';
