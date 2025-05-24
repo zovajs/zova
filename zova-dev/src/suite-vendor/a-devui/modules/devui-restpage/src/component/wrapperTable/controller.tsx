@@ -41,8 +41,6 @@ export class ControllerWrapperTable<T extends {} = {}> extends BeanControllerTab
     // dataFindAll
     const queryDataFindAll = this.$$restResource.getQueryDataFindAll();
     await queryDataFindAll.suspense();
-    // scheam
-    await this._loadSchema();
     // properties
     this._loadProperties();
     // columns
@@ -61,15 +59,7 @@ export class ControllerWrapperTable<T extends {} = {}> extends BeanControllerTab
   }
 
   get schema() {
-    const querySdkBootstrap = this.$$restResource.getQuerySdkBootstrap();
-    const querySchema = this.$$restResource.getQuerySchemaOfTableRow(querySdkBootstrap.data?.operationObject);
-    return querySchema?.data;
-  }
-
-  async _loadSchema() {
-    const querySdkBootstrap = this.$$restResource.getQuerySdkBootstrap();
-    const querySchema = this.$$restResource.getQuerySchemaOfTableRow(querySdkBootstrap.data?.operationObject);
-    await querySchema?.suspense();
+    return this.$$restResource.schemaBootstrap;
   }
 
   _loadProperties() {
