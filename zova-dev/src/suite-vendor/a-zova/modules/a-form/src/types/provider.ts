@@ -18,3 +18,9 @@ export interface IFormProvider {
   components?: IFormProviderComponents;
   behaviors?: IFormProviderBehaviors;
 }
+
+declare module 'zova-module-a-openapi'{
+  export interface IOpenApiOptionsRestResourceForm {
+    provider?: IFormProvider;
+  }
+}

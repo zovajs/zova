@@ -3,7 +3,10 @@ import type { TypeComponentRecordSelectorKeysStrict } from 'zova';
 export interface IOpenApiOptionsRestResource {
   permissions?: IOpenApiOptionsRestResourcePermissions;
   provider?: IOpenApiOptionsRestResourceProvider;
+  form?: IOpenApiOptionsRestResourceForm;
 }
+
+export interface IOpenApiOptionsRestResourceForm {}
 
 export interface IOpenApiOptionsRestResourcePermissions {
   create?: boolean;

@@ -1,8 +1,8 @@
 import { SchemaObject } from 'openapi3-ts/oas31';
 import { z } from 'zod';
-import { deepExtend } from 'zova-core';
+import { deepExtend, UseScope } from 'zova';
 import { Controller } from 'zova-module-a-bean';
-import { loadSchemaProperties, schemaToZodSchema } from 'zova-module-a-openapi';
+import { loadSchemaProperties, schemaToZodSchema, ScopeModuleAOpenapi } from 'zova-module-a-openapi';
 import { BeanControllerFormBase } from '../../lib/beanControllerFormBase.js';
 import { TypeForm, TypeFormOnSubmit } from '../../types/form.js';
 import { IFormFieldLayoutOptionsBase, IFormFieldOptionsBase } from '../../types/formField.js';
@@ -28,6 +28,9 @@ export class ControllerForm extends BeanControllerFormBase {
   zodSchema: z.AnyZodObject | undefined;
   properties: SchemaObject[] | undefined;
 
+  @UseScope()
+  $$scopeModuleAOpenapi: ScopeModuleAOpenapi;
+
   protected async __init__() {
     this.form = this.$useForm({
       defaultValues: this.$props.data as any,
@@ -36,7 +39,7 @@ export class ControllerForm extends BeanControllerFormBase {
       },
     });
     this.formProvider = this.$useComputed(() => {
-      return deepExtend({}, this.scope.config.formProvider, this.$props.formProvider);
+      return deepExtend({}, this.$$scopeModuleAOpenapi.config.restResource.form?.provider, this.$props.formProvider);
     });
     this.zodSchema = this.$useComputed(() => {
       if (!this.$props.schema) return;

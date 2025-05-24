@@ -1,5 +1,4 @@
 import type { IMonkeySysInitialize } from 'zova';
-import type { IFormProvider } from 'zova-module-a-form';
 import type { IOpenApiOptionsRestResource } from 'zova-module-a-openapi';
 import { BeanSimple, deepExtend } from 'zova';
 
@@ -20,19 +19,19 @@ export class MonkeySys extends BeanSimple implements IMonkeySysInitialize {
           form: 'a-form:form',
         },
       },
+      form: {
+        provider: {
+          components: {
+            formField: 'a-form:formField',
+            text: 'input',
+          },
+          behaviors: {
+            formField: 'a-form:formField',
+            formFieldLayout: 'devui-form:formFieldLayout',
+            formFieldModel: 'a-form:formFieldModel',
+          },
+        },
+      },
     } satisfies IOpenApiOptionsRestResource, scopeRestConfig.restResource);
-    // form
-    const scopeFormConfig = this.sys.util.getModuleConfigSafe('a-form');
-    scopeFormConfig.formProvider = deepExtend({
-      components: {
-        formField: 'a-form:formField',
-        text: 'input',
-      },
-      behaviors: {
-        formField: 'a-form:formField',
-        formFieldLayout: 'devui-form:formFieldLayout',
-        formFieldModel: 'a-form:formFieldModel',
-      },
-    } satisfies IFormProvider, scopeFormConfig.formProvider);
   }
 }
