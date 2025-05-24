@@ -1,12 +1,13 @@
 import type { BeanScopeUtil } from 'zova';
-/** model: end */
+/** config: end */
 /** scope: begin */
-import { BeanScopeBase } from 'zova';
+import { BeanScopeBase, TypeModuleConfig } from 'zova';
 import { Scope } from 'zova-module-a-bean';
 
 /** sys: end */
 /** sys: begin */
 import { SysSdk } from '../bean/sys.sdk.js';
+import { config } from '../config/config.js';
 /** model: end */
 /** model: begin */
 import { ModelSdk } from '../model/sdk.js';
@@ -34,9 +35,9 @@ declare module 'zova' {
     'a-openapi.sys.sdk': SysSdk;
   }
 }
-/** sys: end */
-/** model: begin */
-export * from '../model/sdk.js';
+/** model: end */
+/** config: begin */
+export * from '../config/config.js';
 declare module 'zova' {
 
 }
@@ -52,17 +53,25 @@ declare module 'zova' {
     'a-openapi.model.sdk': ModelSdk;
   }
 }
+/** sys: end */
+/** model: begin */
+export * from '../model/sdk.js';
 
 @Scope()
 export class ScopeModuleAOpenapi extends BeanScopeBase {}
 
 export interface ScopeModuleAOpenapi {
   util: BeanScopeUtil;
+  config: TypeModuleConfig<typeof config>;
 }
 
 declare module 'zova' {
   export interface IBeanScopeRecord {
     'a-openapi': ScopeModuleAOpenapi;
+  }
+
+  export interface IBeanScopeConfig {
+    'a-openapi': ReturnType<typeof config>;
   }
 
 }

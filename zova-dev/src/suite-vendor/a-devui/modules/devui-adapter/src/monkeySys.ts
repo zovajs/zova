@@ -1,6 +1,6 @@
 import type { IMonkeySysInitialize } from 'zova';
 import type { IFormProvider } from 'zova-module-a-form';
-import type { IRestConfig } from 'zova-module-rest-resource';
+import type { IOpenApiOptionsRestResource } from 'zova-module-a-openapi';
 import { BeanSimple, deepExtend } from 'zova';
 
 export class MonkeySys extends BeanSimple implements IMonkeySysInitialize {
@@ -11,8 +11,8 @@ export class MonkeySys extends BeanSimple implements IMonkeySysInitialize {
       scopeStyleConfig.defaultThemeHandler = 'devui-adapter.meta.themeHandler';
     }
     // rest
-    const scopeRestConfig = this.sys.util.getModuleConfigSafe('rest-resource');
-    scopeRestConfig.rest = deepExtend({
+    const scopeRestConfig = this.sys.util.getModuleConfigSafe('a-openapi');
+    scopeRestConfig.restResource = deepExtend({
       provider: {
         components: {
           restPage: 'devui-restpage:restPage',
@@ -20,7 +20,7 @@ export class MonkeySys extends BeanSimple implements IMonkeySysInitialize {
           form: 'a-form:form',
         },
       },
-    } satisfies IRestConfig, scopeRestConfig.rest);
+    } satisfies IOpenApiOptionsRestResource, scopeRestConfig.restResource);
     // form
     const scopeFormConfig = this.sys.util.getModuleConfigSafe('a-form');
     scopeFormConfig.formProvider = deepExtend({
