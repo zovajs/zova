@@ -81,11 +81,13 @@ export class ControllerWrapperTable<T extends {} = {}> extends BeanControllerTab
           cell: props => props.cell.formatRender(),
         }));
       }
-      columns.push(columnHelper.display({
-        id: 'actions',
-        header: () => this.scope.locale.TableActions(),
-        cell: props => this.$$renderActions.renderActions(props as any),
-      }));
+      if (this.$$restResource.permissions?.row?.update || this.$$restResource.permissions?.row?.delete) {
+        columns.push(columnHelper.display({
+          id: 'actions',
+          header: () => this.scope.locale.TableActions(),
+          cell: props => this.$$renderActions.renderActions(props as any),
+        }));
+      }
       return columns as TypeColumn<T>[];
     });
   }
