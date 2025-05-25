@@ -1,6 +1,6 @@
 import type { SchemaObject } from 'openapi3-ts/oas31';
 import { shallowReactive } from 'vue';
-import { BeanBase } from 'zova';
+import { BeanBase, ILocaleInfos } from 'zova';
 import { Sys } from 'zova-module-a-bean';
 import { BeanFetch } from 'zova-module-a-fetch';
 import { IOpenapiSchema } from '../types/schema.js';
@@ -10,10 +10,12 @@ const PATH_PARAM_RE = /\{([^{}/]+)\}/g;
 
 @Sys()
 export class SysSdk extends BeanBase {
+  private locale: keyof ILocaleInfos;
   schemas: Record<string, SchemaObject>;
   sdks: Record<string, Record<string, IOpenapiSdkItem>>;
 
-  protected async __init__() {
+  protected async __init__(locale: keyof ILocaleInfos) {
+    this.locale = locale;
     this.schemas = shallowReactive({});
     this.sdks = shallowReactive({});
   }
@@ -36,7 +38,10 @@ export class SysSdk extends BeanBase {
     if (!['get', 'delete'].includes(apiMethod2)) {
       params.push(undefined);
     }
-    params.push(this.sys.util.apiActionConfigPrepare(undefined, { openapiSchema: true }));
+    params.push(this.sys.util.apiActionConfigPrepare(undefined, {
+      openapiSchema: true,
+      headers: { 'x-vona-locale': this.locale },
+    }));
     const data: IOpenapiSchema = await $fetch[apiMethod2](...params);
     // schemas
     const schemaNames: string[] = [];

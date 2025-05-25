@@ -1,5 +1,5 @@
 import { z } from 'zod';
-import { Use } from 'zova';
+import { Use, usePrepareArg } from 'zova';
 import { BeanModelBase, Model } from 'zova-module-a-model';
 import { SysSdk } from '../bean/sys.sdk.js';
 import { schemaToZodSchema } from '../lib/schema.js';
@@ -9,8 +9,13 @@ const __schemaRefPrefix = '#/components/schemas/';
 
 @Model()
 export class ModelSdk extends BeanModelBase {
-  @Use()
-  $$sysSdk: SysSdk;
+  @Use({ beanFullName: 'a-openapi.sys.sdk' })
+  get $$sysSdk(): SysSdk {
+    return usePrepareArg(
+      this.app.meta.locale.current,
+      true,
+    );
+  }
 
   protected async __init__() {}
 
