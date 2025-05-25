@@ -1,5 +1,5 @@
 import { z } from 'zod';
-import { Use, usePrepareArg } from 'zova';
+import { ILocaleInfos, Use, usePrepareArg } from 'zova';
 import { BeanModelBase, Model } from 'zova-module-a-model';
 import { SysSdk } from '../bean/sys.sdk.js';
 import { schemaToZodSchema } from '../lib/schema.js';
@@ -12,12 +12,15 @@ export class ModelSdk extends BeanModelBase {
   @Use({ beanFullName: 'a-openapi.sys.sdk' })
   get $$sysSdk(): SysSdk {
     return usePrepareArg(
-      this.app.meta.locale.current,
+      this.selector,
       true,
     );
   }
 
-  protected async __init__() {}
+  protected async __init__(locale: keyof ILocaleInfos) {
+    super.__init__(locale);
+    if (!locale) throw new Error('locale not specified');
+  }
 
   getSdk(api: string | undefined, apiMethod: TypeRequestMethod | undefined) {
     if (!api) return;

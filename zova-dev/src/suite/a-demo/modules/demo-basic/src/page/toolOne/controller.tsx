@@ -1,5 +1,5 @@
 import { z } from 'zod';
-import { Use } from 'zova';
+import { Use, usePrepareArg } from 'zova';
 import { Controller } from 'zova-module-a-bean';
 import { BeanControllerPageFormBase, TypeForm } from 'zova-module-a-form';
 import { ModelSdk } from 'zova-module-a-openapi';
@@ -23,8 +23,13 @@ export class ControllerPageToolOne extends BeanControllerPageFormBase {
   @Use()
   $$modelTest: ModelTest;
 
-  @Use()
-  $$modelSdk: ModelSdk;
+  @Use({ beanFullName: 'a-openapi.model.sdk' })
+  get $$modelSdk(): ModelSdk {
+    return usePrepareArg(
+      this.app.meta.locale.current,
+      true,
+    );
+  }
 
   fieldName: string = 'name';
 
