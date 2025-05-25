@@ -12,6 +12,10 @@ export class MonkeySys extends BeanSimple implements IMonkeySysInitialize {
     // rest
     const scopeRestConfig = this.sys.util.getModuleConfigSafe('a-openapi');
     scopeRestConfig.restResource = deepExtend({
+      permissions: {
+        table: { create: true },
+        row: { update: true, delete: true },
+      },
       provider: {
         components: {
           restPage: 'devui-restpage:restPage',
