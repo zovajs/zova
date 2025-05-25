@@ -10,8 +10,8 @@ export interface IOpenApiOptionsRestResource {
 export interface IOpenApiOptionsRestResourceForm {}
 
 export interface IOpenApiOptionsRestResourcePermissions {
-  table: TypeOpenApiOptionsRestResourcePermissionsTable;
-  row: TypeOpenApiOptionsRestResourcePermissionsRow;
+  table?: TypeOpenApiOptionsRestResourcePermissionsTable;
+  row?: TypeOpenApiOptionsRestResourcePermissionsRow;
 }
 
 export type TypeOpenApiOptionsRestResourcePermissionsTable = {
