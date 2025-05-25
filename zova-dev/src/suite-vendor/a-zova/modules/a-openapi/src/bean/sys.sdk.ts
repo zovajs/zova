@@ -34,14 +34,19 @@ export class SysSdk extends BeanBase {
     if (!api) return;
     const [api2, apiMethod2] = this.prepareInfo(api, apiMethod);
     if (this.sdks[api2]?.[apiMethod2]) return this.sdks[api2][apiMethod2];
+    // params
     const params: any[] = [this.sys.util.apiActionPathTranslate(api2)];
+    // body
     if (!['get', 'delete'].includes(apiMethod2)) {
       params.push(undefined);
     }
-    params.push(this.sys.util.apiActionConfigPrepare(undefined, {
-      openapiSchema: true,
-      headers: { 'x-vona-locale': this.locale },
-    }));
+    // options
+    const options = { openapiSchema: true, headers: {} };
+    const localeKey = this.sys.env.APP_LOCALE_HEADER_KEY;
+    if (localeKey) {
+      options.headers[localeKey] = this.locale;
+    }
+    params.push(this.sys.util.apiActionConfigPrepare(undefined, options));
     const data: IOpenapiSchema = await $fetch[apiMethod2](...params);
     // schemas
     const schemaNames: string[] = [];
