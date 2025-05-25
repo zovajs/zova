@@ -1,4 +1,5 @@
 import type { TypeComponentRecordSelectorKeysStrict } from 'zova';
+import type { TypeResourceActionRowRecord, TypeResourceActionTableRecord } from './actions.js';
 
 export interface IOpenApiOptionsRestResource {
   permissions?: IOpenApiOptionsRestResourcePermissions;
@@ -9,10 +10,17 @@ export interface IOpenApiOptionsRestResource {
 export interface IOpenApiOptionsRestResourceForm {}
 
 export interface IOpenApiOptionsRestResourcePermissions {
-  create?: boolean;
-  update?: boolean;
-  delete?: boolean;
+  table: TypeOpenApiOptionsRestResourcePermissionsTable;
+  row: TypeOpenApiOptionsRestResourcePermissionsRow;
 }
+
+export type TypeOpenApiOptionsRestResourcePermissionsTable = {
+  [key in keyof TypeResourceActionTableRecord]?: boolean;
+};
+
+export type TypeOpenApiOptionsRestResourcePermissionsRow = {
+  [key in keyof TypeResourceActionRowRecord]?: boolean;
+};
 
 export interface IOpenApiOptionsRestResourceProvider {
   components?: IOpenApiOptionsRestResourceProviderComponents;
