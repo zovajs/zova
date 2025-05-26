@@ -2,8 +2,9 @@ import { DeepKeys } from '@tanstack/table-core';
 import { SchemaObject } from 'openapi3-ts/oas31';
 import { createCommentVNode, VNode } from 'vue';
 import { z } from 'zod';
+import { deepExtend, UseScope } from 'zova';
 import { BeanBehaviorBase, Behavior, IDecoratorBehaviorOptions, NextBehavior } from 'zova-module-a-behavior';
-import { loadSchemaProperties, schemaToZodSchema } from 'zova-module-a-openapi';
+import { loadSchemaProperties, schemaToZodSchema, ScopeModuleAOpenapi } from 'zova-module-a-openapi';
 import { TypeForm } from '../types/form.js';
 import { IFormFieldLayoutOptionsBase, IFormFieldOptionsBase } from '../types/formField.js';
 import { IFormMeta } from '../types/formMeta.js';
@@ -36,6 +37,9 @@ export class BehaviorForm<TFormData = unknown> extends BeanBehaviorBase<
   zodSchema?: z.AnyZodObject;
   properties?: SchemaObject[];
 
+  @UseScope()
+  $$scopeModuleAOpenapi: ScopeModuleAOpenapi;
+
   protected async __init__(options: IBehaviorOptionsForm) {
     super.__init__(options);
     this.bean._setBean('$$behaviorForm', this);
@@ -60,7 +64,7 @@ export class BehaviorForm<TFormData = unknown> extends BeanBehaviorBase<
   }
 
   public get formProvider() {
-    return this.$options.formProvider;
+    return deepExtend({}, this.$$scopeModuleAOpenapi.config.restResource.form?.provider, this.$options.formProvider);
   }
 
   public get schema() {

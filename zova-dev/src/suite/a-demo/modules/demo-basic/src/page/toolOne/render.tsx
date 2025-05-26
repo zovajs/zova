@@ -1,6 +1,7 @@
 import { z } from 'zod';
 import { BeanRenderBase } from 'zova';
 import { Render } from 'zova-module-a-bean';
+import { ZFormField } from 'zova-module-a-form';
 
 @Render()
 export class RenderPageToolOne extends BeanRenderBase {
@@ -32,6 +33,9 @@ export class RenderPageToolOne extends BeanRenderBase {
               }
             }
           </this.form.Field>
+          <ZFormField name="name">
+            <span>name</span>
+          </ZFormField>
           <button type="submit">Submit</button>
         </form>
       </div>
