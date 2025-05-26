@@ -16,7 +16,7 @@ export class ApiTodo extends BeanApiBase {
   }
 
   findOne(id: string) {
-    return this.$fetch.get<any, ApiTodoEntity>('/demo/todo/{id}', { params: { id } });
+    return this.$fetch.get<any, ApiTodoEntity>(this.$pathTranslate('/demo/todo/{id}', { id }));
   }
 
   create(body: ApiTodoIntertBody) {
@@ -24,10 +24,10 @@ export class ApiTodo extends BeanApiBase {
   }
 
   update(id: string, body: ApiTodoUpdateBody) {
-    return this.$fetch.patch<any, void, ApiTodoUpdateBody>('/demo/todo/{id}', body, { params: { id } });
+    return this.$fetch.patch<any, void, ApiTodoUpdateBody>(this.$pathTranslate('/demo/todo/{id}', { id }), body);
   }
 
   delete(id: string) {
-    return this.$fetch.delete<any, void>('/demo/todo/{id}', { params: { id } });
+    return this.$fetch.delete<any, void>(this.$pathTranslate('/demo/todo/{id}', { id }));
   }
 }

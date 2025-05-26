@@ -25,7 +25,7 @@ const __MenuData = { menus: __MenuItems, groups: __MenuGroups };
 
 export default defineFakeRoute([
   {
-    url: '/home/base/menu/{:id}',
+    url: '/home/base/menu/{:publicPath}',
     method: 'get',
     response: req => {
       const name = getNameFromAuthorizationHeader(req);
