@@ -20,14 +20,14 @@ export class ApiTodo extends BeanApiBase {
   }
 
   create(body: ApiTodoIntertBody) {
-    return this.$fetch.post<any, void, ApiTodoIntertBody>('/demo/todo/insert', body);
+    return this.$fetch.post<any, void, ApiTodoIntertBody>('/demo/todo', body);
   }
 
   update(id: string, body: ApiTodoUpdateBody) {
-    return this.$fetch.patch<any, void, ApiTodoUpdateBody>('/demo/todo/update', body, { params: { id } });
+    return this.$fetch.patch<any, void, ApiTodoUpdateBody>('/demo/todo/{id}', body, { params: { id } });
   }
 
   delete(id: string) {
-    return this.$fetch.delete<any, void>('/demo/todo/delete', { params: { id } });
+    return this.$fetch.delete<any, void>('/demo/todo/{id}', { params: { id } });
   }
 }
