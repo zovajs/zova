@@ -3,11 +3,11 @@ import { BeanModelBase, Model } from 'zova-module-a-model';
 
 @Model()
 export class ModelTodo extends BeanModelBase {
-  select() {
+  findAll() {
     return this.$useStateData({
-      queryKey: ['select'],
+      queryKey: ['findAll'],
       queryFn: async () => {
-        return this.scope.api.todo.select();
+        return this.scope.api.todo.findAll();
       },
     });
   }

@@ -7,7 +7,7 @@ let todos = [
 
 export default defineFakeRoute([
   {
-    url: '/demo/todo/select',
+    url: '/demo/todo/findAll',
     method: 'get',
     response: _req => {
       return {

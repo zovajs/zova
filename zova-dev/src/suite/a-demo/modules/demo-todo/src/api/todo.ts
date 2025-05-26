@@ -16,8 +16,8 @@ export type ApiTodoUpdateParams = ApiTodoEntity;
 
 @Api()
 export class ApiTodo extends BeanApiBase {
-  select() {
-    return this.$fetch.get<any, ApiTodoEntity[]>('/demo/todo/select');
+  findAll() {
+    return this.$fetch.get<any, ApiTodoEntity[]>('/demo/todo/findAll');
   }
 
   get(params: ApiTodoGetParams) {
