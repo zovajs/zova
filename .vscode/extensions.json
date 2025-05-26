@@ -1,7 +1,6 @@
 {
   "recommendations": [
     "cabloy.zova-vscode",
-    "vscodevim.vim",
     "dbaeumer.vscode-eslint",
     "Vue.volar",
     "csstools.postcss",
