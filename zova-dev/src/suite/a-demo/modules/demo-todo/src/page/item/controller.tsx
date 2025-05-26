@@ -1,6 +1,5 @@
-import type { ApiTodoGetParams } from '../../api/todo.js';
 import { z } from 'zod';
-import { BeanControllerPageBase, Use, useComputed } from 'zova';
+import { BeanControllerPageBase, Use } from 'zova';
 import { Controller } from 'zova-module-a-bean';
 import { ZPage } from 'zova-module-home-base';
 import { ModelTodo } from '../../model/todo.js';
@@ -15,16 +14,16 @@ export class ControllerPageItem extends BeanControllerPageBase {
   @Use()
   $$modelTodo: ModelTodo;
 
-  currentTodo?: ApiTodoGetParams;
+  currentTodoId?: string;
 
   protected async __init__() {
-    this.currentTodo = useComputed(() => {
-      return { id: this.$params.id };
+    this.currentTodoId = this.$useComputed(() => {
+      return this.$params.id;
     });
   }
 
   protected render() {
-    const todoCurrent = this.$$modelTodo.get(this.currentTodo);
+    const todoCurrent = this.$$modelTodo.findOne(this.currentTodoId);
     return (
       <ZPage>
         {todoCurrent?.data && (

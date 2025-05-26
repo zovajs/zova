@@ -7,7 +7,7 @@ let todos = [
 
 export default defineFakeRoute([
   {
-    url: '/demo/todo/findAll',
+    url: '/demo/todo',
     method: 'get',
     response: _req => {
       return {
@@ -18,10 +18,10 @@ export default defineFakeRoute([
     },
   },
   {
-    url: '/demo/todo/get',
+    url: '/demo/todo/{:id}',
     method: 'get',
     response: req => {
-      const data = todos.find(item => item.id === req.query.id);
+      const data = todos.find(item => item.id === req.params.id);
       if (!data) return { code: 404, message: 'Not Found' };
       return {
         code: 0,
@@ -31,7 +31,7 @@ export default defineFakeRoute([
     },
   },
   {
-    url: '/demo/todo/insert',
+    url: '/demo/todo',
     method: 'post',
     response: req => {
       todos = [req.body as any].concat(todos);
@@ -42,11 +42,11 @@ export default defineFakeRoute([
     },
   },
   {
-    url: '/demo/todo/update',
-    method: 'post',
+    url: '/demo/todo/{:id}',
+    method: 'patch',
     response: req => {
       todos = todos.concat();
-      const index = todos.findIndex(item => item.id === req.body.id);
+      const index = todos.findIndex(item => item.id === req.params.id);
       if (index > -1) {
         todos.splice(index, 1, req.body as any);
       }
@@ -57,11 +57,11 @@ export default defineFakeRoute([
     },
   },
   {
-    url: '/demo/todo/delete',
-    method: 'post',
+    url: '/demo/todo/{:id}',
+    method: 'delete',
     response: req => {
       todos = todos.concat();
-      const index = todos.findIndex(item => item.id === req.body.id);
+      const index = todos.findIndex(item => item.id === req.params.id);
       if (index > -1) {
         todos.splice(index, 1);
       }

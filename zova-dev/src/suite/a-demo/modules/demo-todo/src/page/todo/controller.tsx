@@ -1,4 +1,4 @@
-import type { ApiTodoEntity, ApiTodoGetParams } from '../../api/todo.js';
+import type { ApiTodoEntity } from '../../api/todo.js';
 import { RouterLink } from '@cabloy/vue-router';
 import { withModifiers } from 'vue';
 import { BeanControllerPageBase, Use, uuid } from 'zova';
@@ -12,7 +12,7 @@ export class ControllerPageTodo extends BeanControllerPageBase {
   $$modelTodo: ModelTodo;
 
   newTitle: string;
-  currentTodo?: ApiTodoGetParams;
+  currentTodoId?: string;
 
   protected async __init__() {
     // todos
@@ -26,21 +26,21 @@ export class ControllerPageTodo extends BeanControllerPageBase {
       title: this.newTitle,
       done: false,
     };
-    await this.$$modelTodo.insert().mutateAsync(todo);
+    await this.$$modelTodo.create().mutateAsync(todo);
     this.newTitle = '';
   }
 
   async completeTodo(item: ApiTodoEntity) {
     const todo = { ...item, title: `${item.title}!`, done: true };
-    await this.$$modelTodo.update().mutateAsync(todo);
+    await this.$$modelTodo.update(item.id).mutateAsync(todo);
   }
 
   async deleteTodo(item: ApiTodoEntity) {
-    await this.$$modelTodo.delete().mutateAsync({ id: item.id });
+    await this.$$modelTodo.delete(item.id).mutateAsync();
   }
 
   protected render() {
-    const queryTodoCurrent = this.$$modelTodo.get(this.currentTodo);
+    const queryTodoCurrent = this.$$modelTodo.findOne(this.currentTodoId);
     const queryTodos = this.$$modelTodo.findAll();
     return (
       <ZPage>
@@ -94,7 +94,7 @@ export class ControllerPageTodo extends BeanControllerPageBase {
                         class="link link-primary"
                         href="#"
                         onClick={withModifiers(() => {
-                          this.currentTodo = { id: item.id };
+                          this.currentTodoId = item.id;
                         }, ['prevent'])}
                       >
                         {item.title}

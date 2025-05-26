@@ -1,4 +1,4 @@
-import type { ApiTodoDeleteParams, ApiTodoGetParams, ApiTodoIntertParams, ApiTodoUpdateParams } from '../api/todo.js';
+import type { ApiTodoIntertBody, ApiTodoUpdateBody } from '../api/todo.js';
 import { BeanModelBase, Model } from 'zova-module-a-model';
 
 @Model()
@@ -12,50 +12,50 @@ export class ModelTodo extends BeanModelBase {
     });
   }
 
-  get(params?: ApiTodoGetParams) {
-    if (!params) return undefined;
+  findOne(id?: string) {
+    if (!id) return undefined;
     return this.$useStateData({
-      queryKey: ['get', params.id],
+      queryKey: ['findOne', id],
       queryFn: async () => {
-        return this.scope.api.todo.get(params);
+        return this.scope.api.todo.findOne(id);
       },
     });
   }
 
-  insert() {
-    return this.$useMutationData<void, ApiTodoIntertParams>({
-      mutationKey: ['insert'],
-      mutationFn: async params => {
-        return this.scope.api.todo.insert(params);
+  create() {
+    return this.$useMutationData<void, ApiTodoIntertBody>({
+      mutationKey: ['create'],
+      mutationFn: async body => {
+        return this.scope.api.todo.create(body);
       },
       onSuccess: () => {
-        this.$invalidateQueries({ queryKey: ['select'] });
+        this.$invalidateQueries({ queryKey: ['findAll'] });
       },
     });
   }
 
-  update() {
-    return this.$useMutationData<void, ApiTodoUpdateParams>({
-      mutationKey: ['update'],
-      mutationFn: async params => {
-        return this.scope.api.todo.update(params);
+  update(id: string) {
+    return this.$useMutationData<void, ApiTodoUpdateBody>({
+      mutationKey: ['update', id],
+      mutationFn: async body => {
+        return this.scope.api.todo.update(id, body);
       },
-      onSuccess: (_data, params) => {
-        this.$invalidateQueries({ queryKey: ['select'] });
-        this.$invalidateQueries({ queryKey: ['get', params.id] });
+      onSuccess: (_data, _params) => {
+        this.$invalidateQueries({ queryKey: ['findAll'] });
+        this.$invalidateQueries({ queryKey: ['findOne', id] });
       },
     });
   }
 
-  delete() {
-    return this.$useMutationData<void, ApiTodoDeleteParams>({
-      mutationKey: ['delete'],
-      mutationFn: async params => {
-        return this.scope.api.todo.delete(params);
+  delete(id: string) {
+    return this.$useMutationData<void>({
+      mutationKey: ['delete', id],
+      mutationFn: async () => {
+        return this.scope.api.todo.delete(id);
       },
-      onSuccess: (_data, params) => {
-        this.$invalidateQueries({ queryKey: ['select'] });
-        this.$invalidateQueries({ queryKey: ['get', params.id] });
+      onSuccess: (_data, _params) => {
+        this.$invalidateQueries({ queryKey: ['findAll'] });
+        this.$invalidateQueries({ queryKey: ['findOne', id] });
       },
     });
   }
