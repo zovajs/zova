@@ -16,7 +16,7 @@ export class ControllerPageTodo extends BeanControllerPageBase {
 
   protected async __init__() {
     // todos
-    const queryTodos = this.$$modelTodo.select();
+    const queryTodos = this.$$modelTodo.findAll();
     await queryTodos.suspense();
   }
 
@@ -40,24 +40,24 @@ export class ControllerPageTodo extends BeanControllerPageBase {
   }
 
   protected render() {
-    const todoCurrent = this.$$modelTodo.get(this.currentTodo);
-    const todos = this.$$modelTodo.select();
+    const queryTodoCurrent = this.$$modelTodo.get(this.currentTodo);
+    const queryTodos = this.$$modelTodo.findAll();
     return (
       <ZPage>
-        {todoCurrent?.data && (
+        {queryTodoCurrent?.data && (
           <div role="alert" class="alert alert-success">
             <div>
               Current:
               {' '}
-              <RouterLink to={this.$router.getPagePath('/demo/todo/item/:id', { params: { id: todoCurrent?.data?.id } })}>
-                {todoCurrent?.data?.title}
+              <RouterLink to={this.$router.getPagePath('/demo/todo/item/:id', { params: { id: queryTodoCurrent?.data?.id } })}>
+                {queryTodoCurrent?.data?.title}
               </RouterLink>
             </div>
           </div>
         )}
-        {!!todoCurrent?.error && (
+        {!!queryTodoCurrent?.error && (
           <div role="alert" class="alert alert-error">
-            <span>{todoCurrent?.error?.message}</span>
+            <span>{queryTodoCurrent?.error?.message}</span>
           </div>
         )}
         <form>
@@ -86,7 +86,7 @@ export class ControllerPageTodo extends BeanControllerPageBase {
               </tr>
             </thead>
             <tbody>
-              {todos.data?.map(item => {
+              {queryTodos.data?.map(item => {
                 return (
                   <tr>
                     <td>
