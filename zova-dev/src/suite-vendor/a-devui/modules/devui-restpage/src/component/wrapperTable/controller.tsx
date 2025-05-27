@@ -76,7 +76,7 @@ export class ControllerWrapperTable<T extends {} = {}> extends BeanControllerTab
         columns.push(columnHelper.accessor(key as any, {
           id: key,
           header: props => {
-            return props.header.property?.description || key;
+            return props.header.property?.title || key;
           },
           cell: props => props.cell.formatRender(),
         }));
