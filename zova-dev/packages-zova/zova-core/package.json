@@ -41,7 +41,6 @@
     "remove": [
       "clean-package",
       "devDependencies",
-      "scripts",
       "exports.\\..import",
       "exports.\\..require"
     ]
