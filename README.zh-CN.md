@@ -105,10 +105,8 @@ $ npm run dev
 
 ## 联系方式
 
-- [Twitter](https://twitter.com/zhennann2024)
-- [微信](./zova-docs/zh/assets/img/wx-zhennann.jpg)
-
-![微信](./zova-docs/zh/assets/img/wx-zhennann.jpg)
+- [Twitter](https://x.com/zhennann2024)
+- [B站：濮水代码](https://space.bilibili.com/454737998)
 
 ## 致谢
 

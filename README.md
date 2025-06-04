@@ -105,8 +105,8 @@ $ npm run dev
 
 ## Stay In Touch
 
-- [Twitter](https://twitter.com/zhennann2024)
-- [Wechat](./zova-docs/zh/assets/img/wx-zhennann.jpg)
+- [Twitter](https://x.com/zhennann2024)
+- [Bilibili](https://space.bilibili.com/454737998)
 
 ## Thanks
 
