@@ -49,7 +49,7 @@ export class AppResource {
     // name
     const { scene, name } = this._parseSceneAndBeanName(beanClass!, beanOptions.scene, beanOptions.name);
     // beanInfo
-    const beanInfo = appMetadata.getMetadata<IDecoratorBeanInfoOptions>(SymbolDecoratorBeanInfo, beanClass!);
+    const beanInfo = appMetadata.getOwnMetadata<IDecoratorBeanInfoOptions>(SymbolDecoratorBeanInfo, beanClass!);
     // module
     const module = beanInfo?.module;
     if (!module) throw new Error(`module name not parsed for bean: ${scene}.${name}`);
