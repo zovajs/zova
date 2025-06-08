@@ -4,7 +4,7 @@ import type {
   IOnionOptionsMeta,
   TypeOnionOptionsMatchRules,
 } from '../types/onion.js';
-import { checkMeta } from '@cabloy/utils';
+import { checkMeta, isNil } from '@cabloy/utils';
 import { matchSelector } from '@cabloy/word-utils';
 import { BeanBase, ProxyDisable } from 'zova';
 import { Sys } from '../lib/bean.js';
@@ -33,11 +33,11 @@ export class SysOnion extends BeanBase {
   ) {
     if (options.enable === false) return false;
     if (!this.checkOnionOptionsMeta(options.meta)) return false;
-    if (!selector) return true;
-    if (!options.match && !options.ignore) return true;
+    if (isNil(selector) || selector === false) return true;
+    if (isNil(options.match) && isNil(options.ignore)) return true;
     return (
-      (options.match && __onionMatchSelector(options.match, selector, matchThis, ...matchArgs)) ||
-      (options.ignore && !__onionMatchSelector(options.ignore, selector, matchThis, ...matchArgs))
+      (!isNil(options.match) && __onionMatchSelector(options.match, selector, matchThis, ...matchArgs)) ||
+      (!isNil(options.ignore) && !__onionMatchSelector(options.ignore, selector, matchThis, ...matchArgs))
     );
   }
 
