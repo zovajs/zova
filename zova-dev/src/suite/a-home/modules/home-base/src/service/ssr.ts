@@ -2,6 +2,8 @@ import { BeanBase, UseScope } from 'zova';
 import { Service } from 'zova-module-a-bean';
 import { ScopeModuleASsr } from 'zova-module-a-ssr';
 
+export const ErrorMessageJwtExpired = 'jwt expired';
+
 @Service()
 export class ServiceSsr extends BeanBase {
   @UseScope()
@@ -36,7 +38,7 @@ export class ServiceSsr extends BeanBase {
     if (!process.env.SERVER) return;
     const _eventErrorHandler = this.app.meta.event.on('app:errorHandler', ({ err }, next) => {
       if (err.code === 401) {
-        if (err.message === 'jwt expired') {
+        if (err.message === ErrorMessageJwtExpired) {
           try {
             this.app.$gotoPage('/home/base/errorExpired', { returnTo: true });
           } catch (err: any) {
