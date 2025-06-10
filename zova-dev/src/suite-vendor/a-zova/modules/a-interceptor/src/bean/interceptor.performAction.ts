@@ -1,4 +1,6 @@
+import { catchError } from '@cabloy/utils';
 import { AxiosRequestConfig } from 'axios';
+import { cast } from 'zova';
 import { BeanInterceptorBase, IDecoratorInterceptorOptions, IInterceptorRequest, Interceptor, NextInterceptorRequest } from 'zova-module-a-fetch';
 import { ISsrSitePerformActionOptions } from 'zova-module-a-ssr';
 
@@ -21,7 +23,13 @@ export class InterceptorPerformAction extends BeanInterceptorBase<IInterceptorOp
       body: config.data,
       headers: config.headers,
     };
-    const result = await performAction(data);
+    const [result, error] = await catchError(() => {
+      return performAction(data);
+    });
+    if (error) {
+      cast(error).config = config;
+      throw error;
+    }
     throw result;
   }
 }
