@@ -2,10 +2,10 @@
 
 ## Cli升级
 
-Cli 提供大量命令行工具，用于创建各类源文件骨架，建议保持更新
+Cli提供大量命令行工具，用于创建各类源文件骨架，建议保持更新
 
 ```bash
-$ pnpm add -g zova-cli
+$ pnpm add -g zova-cli@latest
 ```
 
 ## 框架升级
