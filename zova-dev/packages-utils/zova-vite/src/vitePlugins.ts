@@ -6,7 +6,7 @@ import fse from 'fs-extra';
 import devtoolsJson from 'vite-plugin-devtools-json';
 // import vitePluginChecker from 'vite-plugin-checker';
 import { vitePluginFakeServer } from 'vite-plugin-fake-server-turbo';
-import { requireModule } from './utils.ts';
+import { getAbsolutePathOfModule, requireModule } from './utils.ts';
 import { cssCollectPlugin } from './vitePluginCssCollect.ts';
 
 export function generateVitePlugins(
@@ -27,6 +27,12 @@ export function generateVitePlugins(
   //////////////////////////////
 
   function __getVitePluginTs() {
+    const babelPluginZovaBeanModule = getAbsolutePathOfModule('babel-plugin-zova-bean-module', '');
+    const babelPluginZovaBeanUse = getAbsolutePathOfModule('babel-plugin-zova-bean-use', '');
+    const babelPluginTransformTypescriptMetadata = getAbsolutePathOfModule('babel-plugin-transform-typescript-metadata', '');
+    const babelPluginProposalDecorators = getAbsolutePathOfModule('@babel/plugin-proposal-decorators', '');
+    const babelPluginTransformClassProperties = getAbsolutePathOfModule('@babel/plugin-transform-class-properties', '');
+    const babelPluginTransformTypescript = getAbsolutePathOfModule('@babel/plugin-transform-typescript', '');
     return [
       'vite-plugin-babel',
       babel,
@@ -36,12 +42,12 @@ export function generateVitePlugins(
           babelrc: false,
           configFile: false,
           plugins: [
-            ['babel-plugin-zova-bean-module', { brandName: 'zova' }],
-            ['babel-plugin-zova-bean-use'],
-            ['babel-plugin-transform-typescript-metadata'],
-            ['@babel/plugin-proposal-decorators', { version: 'legacy' }],
-            ['@babel/plugin-transform-class-properties', { loose: true }],
-            ['@babel/plugin-transform-typescript'],
+            [babelPluginZovaBeanModule, { brandName: 'zova' }],
+            [babelPluginZovaBeanUse],
+            [babelPluginTransformTypescriptMetadata],
+            [babelPluginProposalDecorators, { version: 'legacy' }],
+            [babelPluginTransformClassProperties, { loose: true }],
+            [babelPluginTransformTypescript],
           ],
         },
       },
@@ -51,19 +57,26 @@ export function generateVitePlugins(
 
   function __getVitePluginTsx() {
     const vueJsxPlugin = requireModule('@vitejs/plugin-vue-jsx');
+    const babelPluginZovaComponent = getAbsolutePathOfModule('babel-plugin-zova-component', '');
+    const babelPluginZovaBehavior = getAbsolutePathOfModule('babel-plugin-zova-behavior', '');
+    const babelPluginZovaBeanModule = getAbsolutePathOfModule('babel-plugin-zova-bean-module', '');
+    const babelPluginZovaBeanUse = getAbsolutePathOfModule('babel-plugin-zova-bean-use', '');
+    const babelPluginTransformTypescriptMetadata = getAbsolutePathOfModule('babel-plugin-transform-typescript-metadata', '');
+    const babelPluginProposalDecorators = getAbsolutePathOfModule('@babel/plugin-proposal-decorators', '');
+    const babelPluginTransformClassProperties = getAbsolutePathOfModule('@babel/plugin-transform-class-properties', '');
     return [
       '@vitejs/plugin-vue-jsx',
       vueJsxPlugin,
       {
         include: /\.[jt]sx$/,
         babelPlugins: [
-          ['babel-plugin-zova-component'],
-          ['babel-plugin-zova-behavior'],
-          ['babel-plugin-zova-bean-module', { brandName: 'zova' }],
-          ['babel-plugin-zova-bean-use'],
-          ['babel-plugin-transform-typescript-metadata'],
-          ['@babel/plugin-proposal-decorators', { version: 'legacy' }],
-          ['@babel/plugin-transform-class-properties', { loose: true }],
+          [babelPluginZovaComponent],
+          [babelPluginZovaBehavior],
+          [babelPluginZovaBeanModule, { brandName: 'zova' }],
+          [babelPluginZovaBeanUse],
+          [babelPluginTransformTypescriptMetadata],
+          [babelPluginProposalDecorators, { version: 'legacy' }],
+          [babelPluginTransformClassProperties, { loose: true }],
         ],
       },
       undefined,
