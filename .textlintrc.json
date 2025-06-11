@@ -2,6 +2,8 @@
   "plugins": {},
   "filters": {},
   "rules": {
-    "ja-space-between-half-and-full-width": true
+    "ja-space-between-half-and-full-width": {
+      "space": "always"
+    }
   }
 }
