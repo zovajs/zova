@@ -1,4 +1,5 @@
-import { DefaultTheme, defineConfig } from 'vitepress';
+import type { DefaultTheme } from 'vitepress';
+import { defineConfig } from 'vitepress';
 
 export const zh = defineConfig({
   lang: 'zh-CN',
@@ -13,10 +14,10 @@ export const zh = defineConfig({
     },
     footer: {
       message: '基于 MIT 许可发布',
-      copyright: `版权所有 © 2016-present Zova`,
+      copyright: '版权所有 © 2016-present Zova',
     },
     socialLinks: [
-      { icon: 'github', link: 'https://github.com/cabloy/zova' },
+      { icon: 'github', link: 'https://github.com/zovajs/zova' },
       { icon: 'x', link: 'https://twitter.com/zhennann2024' },
       { icon: 'youtube', link: 'https://www.youtube.com/@cabloyjs' },
     ],

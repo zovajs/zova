@@ -5,8 +5,8 @@ Zova uses TanStack Query's data management mechanism to manage synchronous data,
 Below, we demonstrate how to manage user data in Model
 
 - For complete code examples, see:
-  - [home-user](https://github.com/cabloy/zova/blob/main/zova-dev/src/suite/a-home/modules/home-user/src/bean/model.user.ts)
-  - [a-style](https://github.com/cabloy/zova/blob/main/zova-dev/src/suite-vendor/a-zova/modules/a-style/src/bean/bean.theme.ts)
+  - [home-user](https://github.com/zovajs/zova/blob/main/zova-dev/src/suite/a-home/modules/home-user/src/bean/model.user.ts)
+  - [a-style](https://github.com/zovajs/zova/blob/main/zova-dev/src/suite-vendor/a-zova/modules/a-style/src/bean/bean.theme.ts)
 
 ## Create Model Bean
 

@@ -15,7 +15,7 @@ hero:
       link: /guide/start/why
     - theme: alt
       text: Github
-      link: https://github.com/cabloy/zova
+      link: https://github.com/zovajs/zova
 
 features:
   - title: Vue+React+Angular

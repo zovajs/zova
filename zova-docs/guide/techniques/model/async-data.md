@@ -2,7 +2,7 @@
 
 The core of TanStack Query is to manage server-side data. Below, we demonstrate how to implement CRUD functionality in Model
 
-- For complete code examples, please see: [demo-todo](https://github.com/cabloy/zova/blob/main/zova-dev/src/suite/a-demo/modules/demo-todo/src/bean/model.todo.ts)
+- For complete code examples, please see: [demo-todo](https://github.com/zovajs/zova/blob/main/zova-dev/src/suite/a-demo/modules/demo-todo/src/bean/model.todo.ts)
 
 ## Data Query: select
 
