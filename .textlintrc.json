@@ -1,0 +1,7 @@
+{
+  "plugins": {},
+  "filters": {},
+  "rules": {
+    "ja-space-between-half-and-full-width": true
+  }
+}
