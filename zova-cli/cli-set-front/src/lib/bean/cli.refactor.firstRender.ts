@@ -3,6 +3,7 @@ import type { IModuleInfo } from '@cabloy/module-info';
 import fs from 'node:fs';
 import path from 'node:path';
 import { BeanCliBase } from '@cabloy/cli';
+import fse from 'fs-extra';
 import { __ThisSetName__ } from '../this.ts';
 
 declare module '@cabloy/cli' {
@@ -55,6 +56,14 @@ export class CliRefactorFirstRender extends BeanCliBase {
       snippetsPath: null,
       boilerplatePath: 'refactor/firstRender/boilerplate',
     });
+    // controller render
+    let controllerFile = path.join(componentDir, 'controller.tsx');
+    if (!fs.existsSync(controllerFile)) {
+      controllerFile = path.join(componentDir, 'controller.ts');
+    }
+    let controllerContent = (await fse.readFile(controllerFile)).toString();
+    controllerContent = controllerContent.replace('protected render() {', 'protected _render() {');
+    await fse.writeFile(controllerFile, controllerContent);
     // tools.metadata
     await this.helper.invokeCli([':tools:metadata', moduleName], { cwd: argv.projectPath });
   }
