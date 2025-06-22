@@ -81,8 +81,8 @@ function __prepareInjectSelectorInfo_descriptor(
   if (!res) return;
   const withSelector = res.withSelector ?? false;
   const markReactive = res.markReactive ?? true;
-  const args = res.args.map(arg => {
-    return typeof arg === 'function' ? (markReactive ? useRef(arg) : arg()) : arg;
+  const args = res.args.map((arg, index) => {
+    return typeof arg === 'function' ? (markReactive && (!withSelector || index > 0) ? useRef(arg) : arg()) : arg;
   });
   return { withSelector, args };
 }
@@ -97,14 +97,15 @@ function __prepareInjectSelectorInfo_init(
   const markReactive = init.markReactive ?? true;
   const _args = init.args ?? [init.arg];
   if (!_args) return;
-  const args = _args.map(arg =>
-    markReactive
-      ? useRef(() => __prepareInjectSelectorInfo_init_arg(beanInstance, arg))
-      : __prepareInjectSelectorInfo_init_arg(beanInstance, arg),
+  const args = _args.map((arg, index) =>
+    __prepareInjectSelectorInfo_init_arg(beanInstance, arg, markReactive && (!withSelector || index > 0)),
   );
   return { withSelector, args };
 }
 
-function __prepareInjectSelectorInfo_init_arg(beanInstance, arg: TypeDecoratorUseOptionsInitArg): any {
+function __prepareInjectSelectorInfo_init_arg(beanInstance, arg: TypeDecoratorUseOptionsInitArg, reactive: boolean): any {
+  if (reactive && evaluateExpressions(arg, beanInstance, undefined, true)) {
+    return useRef(() => evaluateExpressions(arg, beanInstance));
+  }
   return evaluateExpressions(arg, beanInstance);
 }
