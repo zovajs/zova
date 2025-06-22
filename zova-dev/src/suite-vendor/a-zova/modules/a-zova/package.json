@@ -78,7 +78,7 @@
     "defu": "^6.1.4"
   },
   "devDependencies": {
-    "@cabloy/cli": "^3.0.33",
+    "@cabloy/cli": "^3.0.34",
     "fs-extra": "^11.2.0",
     "zova-openapi": "workspace:^"
   },
