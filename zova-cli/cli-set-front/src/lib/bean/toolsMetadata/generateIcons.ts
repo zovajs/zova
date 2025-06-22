@@ -1,7 +1,6 @@
 import path from 'node:path';
 import fse from 'fs-extra';
 import { globby } from 'globby';
-import SVGCompiler from 'svg-baker';
 import { optimize } from 'svgo';
 
 export async function generateIcons(moduleName: string, modulePath: string) {
@@ -97,13 +96,10 @@ async function _combineSymbol(file, moduleName, groupName, iconName): Promise<st
   // optimize
   const { data } = await optimize(content, {});
   content = data || content;
-  // symbol
-  const svgSymbol = await new SVGCompiler().addSymbol({
-    id: _getSymbolId(moduleName, groupName, iconName),
-    content,
-    path: file,
-  });
-  content = svgSymbol.render();
+  content = content.replace(/<svg(.*?)>/, (_, $1) => {
+    const $2 = $1.replace(/ width=".*?"/, '').replace(/ height=".*?"/, '');
+    return `<symbol id="${_getSymbolId(moduleName, groupName, iconName)}"${$2}>`;
+  }).replace('</svg>', '</symbol>');
   return content;
 }
 
@@ -116,3 +112,11 @@ function _getRecordId(moduleName: string, groupName: string, iconName: string) {
   if (groupName === 'default') groupName = '';
   return `${moduleName}:${groupName}:${iconName}`;
 }
+
+// import SVGCompiler from 'svg-baker';
+// const svgSymbol = await new SVGCompiler().addSymbol({
+//   id: _getSymbolId(moduleName, groupName, iconName),
+//   content,
+//   path: file,
+// });
+// content = svgSymbol.render();
