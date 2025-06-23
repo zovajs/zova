@@ -68,6 +68,10 @@ export function __prepareInjectSelectorInfo(beanInstance, useOptions: IDecorator
   if (!selectorInfo) {
     selectorInfo = __prepareInjectSelectorInfo_init(beanInstance, useOptions);
   }
+  if (!selectorInfo && useOptions.selector) {
+    const selector = evaluateExpressions(useOptions.selector, beanInstance);
+    return { withSelector: true, args: [selector] };
+  }
   return selectorInfo ?? { withSelector: false, args: [] };
 }
 

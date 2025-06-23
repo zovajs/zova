@@ -680,12 +680,14 @@ export class BeanContainer {
   ) {
     // 0. host/skipSelf
     if (useOptions.injectionScope && ['host', 'skipSelf'].includes(useOptions.injectionScope)) {
+      const selectorInfo = __prepareInjectSelectorInfo(beanInstance, useOptions);
+      const useOptions2 = selectorInfo.withSelector ? Object.assign({}, useOptions, { selector: selectorInfo.args[0] }) : useOptions;
       return this._getBeanFromHostInner(
         true,
         useOptions.prop,
         targetBeanComposable,
         targetBeanFullName,
-        useOptions as IDecoratorUseOptions,
+        useOptions2 as IDecoratorUseOptions,
       );
     }
     // 1. use name
