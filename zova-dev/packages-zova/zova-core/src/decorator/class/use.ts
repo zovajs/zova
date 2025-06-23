@@ -8,7 +8,7 @@ import type {
   IUsePrepareArgResult,
   TypeDecoratorUseOptionsInitArg,
 } from '../index.js';
-import { evaluateExpressions } from '@cabloy/utils';
+import { evaluateExpressions, isNilOrEmptyString } from '@cabloy/utils';
 import { appMetadata } from '../../core/sys/metadata.js';
 import { appResource } from '../../core/sys/resource.js';
 import { useRef } from '../../vueExtra/ref.js';
@@ -68,7 +68,7 @@ export function __prepareInjectSelectorInfo(beanInstance, useOptions: IDecorator
   if (!selectorInfo) {
     selectorInfo = __prepareInjectSelectorInfo_init(beanInstance, useOptions);
   }
-  if (!selectorInfo && useOptions.selector) {
+  if (!selectorInfo && !isNilOrEmptyString(useOptions.selector)) {
     const selector = evaluateExpressions(useOptions.selector, beanInstance);
     return { withSelector: true, args: [selector] };
   }
