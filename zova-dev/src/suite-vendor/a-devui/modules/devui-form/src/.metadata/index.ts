@@ -1,42 +1,36 @@
-import type { BeanScopeUtil } from 'zova';
-/** behaviors: end */
-/** scope: begin */
-import { BeanScopeBase } from 'zova';
-import { Scope } from 'zova-module-a-bean';
+/* eslint-disable */
 /** behavior: begin */
+export * from '../bean/behavior.formFieldLayout.jsx';
 import { IBehaviorOptionsFormFieldLayout } from '../bean/behavior.formFieldLayout.jsx';
+import 'zova';
+declare module 'zova-module-a-behavior' {
+  
+    export interface IBehaviorRecord {
+      'devui-form:formFieldLayout': IBehaviorOptionsFormFieldLayout;
+    }
+
+  
+}
+declare module 'zova-module-devui-form' {
+  
+        export interface BehaviorFormFieldLayout {
+          /** @internal */
+          get scope(): ScopeModuleDevuiForm;
+        } 
+}
 /** behavior: end */
 /** behavior: begin */
 import { BehaviorFormFieldLayout } from '../bean/behavior.formFieldLayout.jsx';
 import 'zova';
-import 'zova';
-/** behavior: end */
-/** behaviors: begin */
-import 'vue';
-import 'vue/jsx-runtime';
-
-import 'zova';
-
-export * from '../bean/behavior.formFieldLayout.jsx';
-declare module 'zova-module-a-behavior' {
-
-  export interface IBehaviorRecord {
-    'devui-form:formFieldLayout': IBehaviorOptionsFormFieldLayout;
-  }
-
-}
-declare module 'zova-module-devui-form' {
-
-  export interface BehaviorFormFieldLayout {
-    /** @internal */
-    get scope(): ScopeModuleDevuiForm;
-  }
-}
 declare module 'zova' {
   export interface IBeanRecordLocal {
     'devui-form.behavior.formFieldLayout': BehaviorFormFieldLayout;
   }
 }
+/** behavior: end */
+/** behaviors: begin */
+import 'vue';
+import 'vue/jsx-runtime';
 
 declare module 'vue' {
   export interface InputHTMLAttributes {
@@ -52,6 +46,10 @@ declare module 'vue/jsx-runtime' {
     }
   }
 }
+/** behaviors: end */
+/** scope: begin */
+import { BeanScopeBase, type BeanScopeUtil } from 'zova';
+import { Scope } from 'zova-module-a-bean';
 
 @Scope()
 export class ScopeModuleDevuiForm extends BeanScopeBase {}
@@ -60,11 +58,15 @@ export interface ScopeModuleDevuiForm {
   util: BeanScopeUtil;
 }
 
+import 'zova';
 declare module 'zova' {
   export interface IBeanScopeRecord {
     'devui-form': ScopeModuleDevuiForm;
   }
+  
+  
 
+  
 }
-
+  
 /** scope: end */

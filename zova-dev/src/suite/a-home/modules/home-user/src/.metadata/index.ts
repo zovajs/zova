@@ -1,58 +1,41 @@
-import type { BeanScopeUtil } from 'zova';
-/** locale: end */
-/** scope: begin */
-import { BeanScopeBase, TypeLocaleBase, TypeModuleConfig, TypeModuleLocales } from 'zova';
-import { Scope } from 'zova-module-a-bean';
-import { TypePagePathSchema } from 'zova-module-a-router';
-import { config } from '../config/config.js';
+/* eslint-disable */
+/** controller: begin */
+export * from '../page/login/controller.jsx';
 
-/** config: end */
-/** locale: begin */
-import locale_en_us from '../config/locale/en-us.js';
-import locale_zh_cn from '../config/locale/zh-cn.js';
-/** model: end */
-/** model: begin */
-import { ModelPassport } from '../model/passport.js';
+import 'zova';
+declare module 'zova' {
+  
+  
+}
+declare module 'zova-module-home-user' {
+  
+        export interface ControllerPageLogin {
+          /** @internal */
+          get scope(): ScopeModuleHomeUser;
+        } 
+}
 /** controller: end */
 /** controller: begin */
 import { ControllerPageLogin } from '../page/login/controller.jsx';
-/** model: end */
-/** config: begin */
 import 'zova';
-import 'zova';
-import 'zova';
-import 'zova';
-import 'zova';
-
-import 'zova';
-
-export * from '../config/config.js';
-declare module 'zova' {
-
-}
-declare module 'zova-module-home-user' {
-
-  export interface ControllerPageLogin {
-    /** @internal */
-    get scope(): ScopeModuleHomeUser;
-  }
-}
 declare module 'zova' {
   export interface IBeanRecordLocal {
     'home-user.controller.pageLogin': ControllerPageLogin;
   }
 }
-/** model: begin */
-export * from '../model/passport.js';
-/** controller: begin */
-export * from '../page/login/controller.jsx';
+/** controller: end */
+/** pages: begin */
+export * from './page/login.js';
+export * from '../routes.js';
+import { TypePagePathSchema } from 'zova-module-a-router';
+import 'zova';
 declare module 'zova-module-a-router' {
-  export interface IPagePathRecord {
-    '/home/user/login': TypePagePathSchema<undefined, undefined>;
-  }
-  export interface IPageNameRecord {
-
-  }
+export interface IPagePathRecord {
+  '/home/user/login': TypePagePathSchema<undefined,undefined>;
+}
+export interface IPageNameRecord {
+  
+}
 }
 export const pagePathSchemas = {
 
@@ -61,48 +44,66 @@ export const pageNameSchemas = {
 
 };
 declare module 'zova-module-home-user' {
-
+   
 }
 /** pages: end */
 
-export * from '../routes.js';
-declare module 'zova' {
+/** model: begin */
+export * from '../model/passport.js';
 
+import 'zova';
+declare module 'zova' {
+  
+  
 }
 declare module 'zova-module-home-user' {
-
-  export interface ModelPassport {
-    /** @internal */
-    get scope(): ScopeModuleHomeUser;
-  }
+  
+        export interface ModelPassport {
+          /** @internal */
+          get scope(): ScopeModuleHomeUser;
+        } 
 }
+/** model: end */
+/** model: begin */
+import { ModelPassport } from '../model/passport.js';
+import 'zova';
 declare module 'zova' {
   export interface IBeanRecordGeneral {
     'home-user.model.passport': ModelPassport;
   }
 }
-/** controller: end */
-/** pages: begin */
-export * from './page/login.js';
+/** model: end */
+/** config: begin */
+export * from '../config/config.js';
+import { config } from '../config/config.js';
+/** config: end */
+/** locale: begin */
+import locale_en_us from '../config/locale/en-us.js';
+import locale_zh_cn from '../config/locale/zh-cn.js';
 export const locales = {
   'en-us': locale_en_us,
-  'zh-cn': locale_zh_cn,
+'zh-cn': locale_zh_cn,
 };
+/** locale: end */
+/** scope: begin */
+import { BeanScopeBase, type BeanScopeUtil, TypeModuleConfig, TypeModuleLocales, TypeLocaleBase } from 'zova';
+import { Scope } from 'zova-module-a-bean';
 
 @Scope()
 export class ScopeModuleHomeUser extends BeanScopeBase {}
 
 export interface ScopeModuleHomeUser {
   util: BeanScopeUtil;
-  config: TypeModuleConfig<typeof config>;
-  locale: TypeModuleLocales<(typeof locales)[TypeLocaleBase]>;
+config: TypeModuleConfig<typeof config>;
+locale: TypeModuleLocales<(typeof locales)[TypeLocaleBase]>;
 }
 
+import 'zova';
 declare module 'zova' {
   export interface IBeanScopeRecord {
     'home-user': ScopeModuleHomeUser;
   }
-
+  
   export interface IBeanScopeConfig {
     'home-user': ReturnType<typeof config>;
   }
@@ -114,5 +115,5 @@ declare module 'zova' {
 
 export function locale<K extends keyof (typeof locales)[TypeLocaleBase]>(key: K): `home-user::${K}` {
   return `home-user::${key}`;
-}
+}  
 /** scope: end */

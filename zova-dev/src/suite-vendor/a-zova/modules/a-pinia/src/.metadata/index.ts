@@ -1,60 +1,60 @@
-import type { BeanScopeUtil } from 'zova';
-/** monkey: end */
-/** scope: begin */
-import { BeanScopeBase } from 'zova';
-import { Scope } from 'zova-module-a-bean';
+/* eslint-disable */
+/** bean: begin */
+export * from '../bean/bean.piniaStoreBase.js';
 
+import 'zova';
+declare module 'zova' {
+  
+  
+}
+declare module 'zova-module-a-pinia' {
+   
+}
 /** bean: end */
 /** bean: begin */
 import { BeanPiniaStoreBase } from '../bean/bean.piniaStoreBase.js';
-/** service: end */
-/** service: begin */
-import { ServicePinia } from '../service/pinia.js';
-/** bean: begin */
 import 'zova';
-import 'zova';
-import 'zova';
-import 'zova';
-
-import 'zova';
-
-export * from '../bean/bean.piniaStoreBase.js';
-declare module 'zova' {
-
-}
-declare module 'zova-module-a-pinia' {
-
-}
 declare module 'zova' {
   export interface IBeanRecordGeneral {
     'a-pinia.bean.piniaStoreBase': BeanPiniaStoreBase;
   }
 }
-/** service: end */
-/** monkey: begin */
-export * from '../monkey.js';
+/** bean: end */
+/** service: begin */
+export * from '../service/pinia.js';
+
+import 'zova';
 declare module 'zova-module-a-bean' {
+  
+    export interface IServiceRecord {
+      'a-pinia:pinia': never;
+    }
 
-  export interface IServiceRecord {
-    'a-pinia:pinia': never;
-  }
-
+  
 }
 declare module 'zova-module-a-pinia' {
-
-  export interface ServicePinia {
-    /** @internal */
-    get scope(): ScopeModuleAPinia;
-  }
+  
+        export interface ServicePinia {
+          /** @internal */
+          get scope(): ScopeModuleAPinia;
+        } 
 }
+/** service: end */
+/** service: begin */
+import { ServicePinia } from '../service/pinia.js';
+import 'zova';
 declare module 'zova' {
   export interface IBeanRecordGeneral {
     'a-pinia.service.pinia': ServicePinia;
   }
 }
-/** bean: end */
-/** service: begin */
-export * from '../service/pinia.js';
+/** service: end */
+/** monkey: begin */
+export * from '../monkey.js';
+/** monkey: end */
+/** scope: begin */
+import { BeanScopeBase, type BeanScopeUtil } from 'zova';
+import { Scope } from 'zova-module-a-bean';
 
 @Scope()
 export class ScopeModuleAPinia extends BeanScopeBase {}
@@ -63,11 +63,15 @@ export interface ScopeModuleAPinia {
   util: BeanScopeUtil;
 }
 
+import 'zova';
 declare module 'zova' {
   export interface IBeanScopeRecord {
     'a-pinia': ScopeModuleAPinia;
   }
+  
+  
 
+  
 }
-
+  
 /** scope: end */

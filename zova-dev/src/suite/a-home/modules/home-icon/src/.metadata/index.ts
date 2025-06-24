@@ -1,8 +1,4 @@
-import type { BeanScopeUtil } from 'zova';
-/** icons: end */
-/** scope: begin */
-import { BeanScopeBase } from 'zova';
-import { Scope } from 'zova-module-a-bean';
+/* eslint-disable */
 /** icons: begin */
 import icon_auth from './icons/groups/auth.svg';
 import icon_business from './icons/groups/business.svg';
@@ -12,14 +8,9 @@ import icon_emoji from './icons/groups/emoji.svg';
 import icon_flow from './icons/groups/flow.svg';
 import icon_login from './icons/groups/login.svg';
 import icon_outline from './icons/groups/outline.svg';
-
 import icon_role from './icons/groups/role.svg';
-
 import icon_social from './icons/groups/social.svg';
 import icon_tools from './icons/groups/tools.svg';
-import 'zova-module-a-icon';
-
-import 'zova';
 
 export const icons = {
   auth: icon_auth,
@@ -34,9 +25,11 @@ export const icons = {
   social: icon_social,
   tools: icon_tools,
 };
+
+import 'zova-module-a-icon';
 declare module 'zova-module-a-icon' {
-  export interface IIconRecord {
-    ':auth:dingtalk-square': true;
+export interface IIconRecord {
+  ':auth:dingtalk-square': true;
     ':auth:github': true;
     ':auth:password': true;
     ':auth:sms': true;
@@ -269,8 +262,13 @@ declare module 'zova-module-a-icon' {
     ':social:twitter': true;
     ':tools:pomotodo': true;
     ':tools:spreadsheet': true;
-  }
 }
+}
+
+/** icons: end */
+/** scope: begin */
+import { BeanScopeBase, type BeanScopeUtil } from 'zova';
+import { Scope } from 'zova-module-a-bean';
 
 @Scope()
 export class ScopeModuleHomeIcon extends BeanScopeBase {}
@@ -279,11 +277,15 @@ export interface ScopeModuleHomeIcon {
   util: BeanScopeUtil;
 }
 
+import 'zova';
 declare module 'zova' {
   export interface IBeanScopeRecord {
     'home-icon': ScopeModuleHomeIcon;
   }
+  
+  
 
+  
 }
-
+  
 /** scope: end */

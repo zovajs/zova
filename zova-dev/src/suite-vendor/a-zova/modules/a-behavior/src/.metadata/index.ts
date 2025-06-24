@@ -1,73 +1,55 @@
-import type { BeanScopeUtil } from 'zova';
-/** behaviors: end */
-/** scope: begin */
-import { BeanScopeBase } from 'zova';
-import { Scope } from 'zova-module-a-bean';
+/* eslint-disable */
+/** bean: begin */
+export * from '../bean/bean.behavior.js';
+export * from '../bean/bean.behaviorBase.js';
+
+import 'zova';
+declare module 'zova' {
+  
+  
+}
+declare module 'zova-module-a-behavior' {
+  
+        export interface BeanBehavior {
+          /** @internal */
+          get scope(): ScopeModuleABehavior;
+        } 
+}
 /** bean: end */
 /** bean: begin */
 import { BeanBehavior } from '../bean/bean.behavior.js';
-
 import { BeanBehaviorBase } from '../bean/bean.behaviorBase.js';
-/** controller: end */
-/** controller: begin */
-import { ControllerBehavior } from '../component/behavior/controller.jsx';
-/** service: end */
-/** service: begin */
-import { ServiceComposer } from '../service/composer.js';
-
-import { ZBehavior } from './component/behavior.js';
-/** bean: begin */
 import 'zova';
-import 'zova';
-import 'zova';
-import 'zova';
-
-import 'zova';
-import 'zova';
-import 'zova';
-import 'zova';
-/** behavior: end */
-/** behaviors: begin */
-import 'vue';
-import 'vue/jsx-runtime';
-
-import 'zova';
-
-export * from '../bean/bean.behavior.js';
-export * from '../bean/bean.behaviorBase.js';
-declare module 'zova' {
-
-}
-declare module 'zova-module-a-behavior' {
-
-  export interface BeanBehavior {
-    /** @internal */
-    get scope(): ScopeModuleABehavior;
-  }
-}
 declare module 'zova' {
   export interface IBeanRecordGeneral {
     'a-behavior.bean.behavior': BeanBehavior;
-    'a-behavior.bean.behaviorBase': BeanBehaviorBase;
+'a-behavior.bean.behaviorBase': BeanBehaviorBase;
   }
 }
-/** components: end */
-/** behavior: begin */
-export * from '../bean/behavior.root_.js';
+/** bean: end */
+/** service: begin */
+export * from '../service/composer.js';
+
+import 'zova';
 declare module 'zova-module-a-bean' {
+  
+    export interface IServiceRecord {
+      'a-behavior:composer': never;
+    }
 
-  export interface IServiceRecord {
-    'a-behavior:composer': never;
-  }
-
+  
 }
 declare module 'zova-module-a-behavior' {
-
-  export interface ServiceComposer {
-    /** @internal */
-    get scope(): ScopeModuleABehavior;
-  }
+  
+        export interface ServiceComposer {
+          /** @internal */
+          get scope(): ScopeModuleABehavior;
+        } 
 }
+/** service: end */
+/** service: begin */
+import { ServiceComposer } from '../service/composer.js';
+import 'zova';
 declare module 'zova' {
   export interface IBeanRecordGeneral {
     'a-behavior.service.composer': ServiceComposer;
@@ -76,16 +58,23 @@ declare module 'zova' {
 /** service: end */
 /** controller: begin */
 export * from '../component/behavior/controller.jsx';
-declare module 'zova' {
 
+import 'zova';
+declare module 'zova' {
+  
+  
 }
 declare module 'zova-module-a-behavior' {
-
-  export interface ControllerBehavior {
-    /** @internal */
-    get scope(): ScopeModuleABehavior;
-  }
+  
+        export interface ControllerBehavior {
+          /** @internal */
+          get scope(): ScopeModuleABehavior;
+        } 
 }
+/** controller: end */
+/** controller: begin */
+import { ControllerBehavior } from '../component/behavior/controller.jsx';
+import 'zova';
 declare module 'zova' {
   export interface IBeanRecordLocal {
     'a-behavior.controller.behavior': ControllerBehavior;
@@ -93,32 +82,41 @@ declare module 'zova' {
 }
 /** controller: end */
 
-/** bean: end */
-/** service: begin */
-export * from '../service/composer.js';
-export const components = {
-  behavior: ZBehavior,
-};
-declare module 'zova' {
-  export interface IComponentRecord {
-    'a-behavior:behavior': ControllerBehavior;
-  }
-  export interface IZovaComponentRecord {
-    'a-behavior:behavior': typeof ZBehavior;
-  }
-}
 /** components: begin */
 export * from './component/behavior.js';
-declare module 'zova-module-a-behavior' {
+import { ZBehavior } from './component/behavior.js';
+export const components = {
+  'behavior': ZBehavior,
+};
+import 'zova';
+declare module 'zova' {
+export interface IComponentRecord {
+  'a-behavior:behavior': ControllerBehavior;
+}
+export interface IZovaComponentRecord {
+  'a-behavior:behavior': typeof ZBehavior;
+}
+}
+/** components: end */
+/** behavior: begin */
+export * from '../bean/behavior.root_.js';
 
+import 'zova';
+declare module 'zova-module-a-behavior' {
+  
+  
 }
 declare module 'zova-module-a-behavior' {
-
+   
 }
+/** behavior: end */
+/** behaviors: begin */
+import 'vue';
+import 'vue/jsx-runtime';
 
 declare module 'vue' {
   export interface InputHTMLAttributes {
-
+    
   }
 }
 
@@ -126,10 +124,14 @@ declare module 'vue/jsx-runtime' {
   namespace JSX {
     // need define class/style in IntrinsicAttributes
     export interface IntrinsicAttributes {
-
+      
     }
   }
 }
+/** behaviors: end */
+/** scope: begin */
+import { BeanScopeBase, type BeanScopeUtil } from 'zova';
+import { Scope } from 'zova-module-a-bean';
 
 @Scope()
 export class ScopeModuleABehavior extends BeanScopeBase {}
@@ -138,11 +140,15 @@ export interface ScopeModuleABehavior {
   util: BeanScopeUtil;
 }
 
+import 'zova';
 declare module 'zova' {
   export interface IBeanScopeRecord {
     'a-behavior': ScopeModuleABehavior;
   }
+  
+  
 
+  
 }
-
+  
 /** scope: end */
