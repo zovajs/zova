@@ -34,7 +34,7 @@
       "tableCellFormat": {
         "actionView": {
           "type": "vnode",
-          "match": "context.rest?.render===\"actionView\""
+          "match": "cel://get(context,\"rest.render\")==\"actionView\""
         }
       }
     }

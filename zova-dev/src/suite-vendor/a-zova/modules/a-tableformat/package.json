@@ -36,7 +36,7 @@
       "tableCellFormat": {
         "currency": {
           "type": "value",
-          "match": "!!context.rest?.currency"
+          "match": "cel://get(context,\"rest.currency\")"
         },
         "fallback": {
           "type": "fallback"

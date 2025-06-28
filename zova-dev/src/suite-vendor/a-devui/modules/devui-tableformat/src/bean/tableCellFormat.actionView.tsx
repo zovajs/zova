@@ -5,7 +5,7 @@ import { IDecoratorTableCellFormatOptions, ITableCellFormatRender, NextTableCell
 
 export interface ITableCellFormatOptionsActionView extends IDecoratorTableCellFormatOptions {}
 
-@TableCellFormat<ITableCellFormatOptionsActionView>({ type: 'vnode', match: 'context.rest?.render==="actionView"' })
+@TableCellFormat<ITableCellFormatOptionsActionView>({ type: 'vnode', match: 'cel://get(context,"rest.render")=="actionView"' })
 export class TableCellFormatActionView extends BeanBase implements ITableCellFormatRender {
   render(props: CellContext<{}, unknown>, _options: ITableCellFormatOptionsActionView, next: NextTableCellFormat): VNode | string {
     const value = next();
