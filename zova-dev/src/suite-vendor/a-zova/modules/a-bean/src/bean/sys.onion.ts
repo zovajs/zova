@@ -4,8 +4,7 @@ import type {
   IOnionOptionsMeta,
   TypeOnionOptionsMatchRules,
 } from '../types/onion.js';
-import { checkMeta, isNil } from '@cabloy/utils';
-import { matchSelector } from '@cabloy/word-utils';
+import { checkMeta, isNil, matchSelector } from '@cabloy/utils';
 import { BeanBase, ProxyDisable } from 'zova';
 import { Sys } from '../lib/bean.js';
 import { ServiceOnion } from '../service/onion_.js';

@@ -1,10 +1,7 @@
 import type { ZovaOnionOptionsMeta } from '@cabloy/module-info';
-import { CeljsPrefix } from '@cabloy/utils';
 
 export const SymbolUseOnionLocal = Symbol('SymbolUseOnionLocal');
 export const SymbolUseOnionOptions = Symbol('SymbolUseOnionOptions');
-export const OnionMatchPrefixRegexp = 'regexp://';
-export const OnionMatchPrefixStaticString = CeljsPrefix;
 
 export type TypeComposer = (context: any, next?: any) => any;
 
