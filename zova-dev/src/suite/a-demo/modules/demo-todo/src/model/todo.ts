@@ -5,7 +5,7 @@ import { BeanModelBase, Model } from 'zova-module-a-model';
 export class ModelTodo extends BeanModelBase {
   findAll() {
     return this.$useStateData({
-      queryKey: ['findAll'],
+      queryKey: ['list'],
       queryFn: async () => {
         return this.scope.api.todo.findAll();
       },
@@ -15,7 +15,7 @@ export class ModelTodo extends BeanModelBase {
   findOne(id?: string) {
     if (!id) return undefined;
     return this.$useStateData({
-      queryKey: ['findOne', id],
+      queryKey: ['item', id],
       queryFn: async () => {
         return this.scope.api.todo.findOne(id);
       },
@@ -29,7 +29,7 @@ export class ModelTodo extends BeanModelBase {
         return this.scope.api.todo.create(body);
       },
       onSuccess: () => {
-        this.$invalidateQueries({ queryKey: ['findAll'] });
+        this.$invalidateQueries({ queryKey: ['list'] });
       },
     });
   }
@@ -41,8 +41,8 @@ export class ModelTodo extends BeanModelBase {
         return this.scope.api.todo.update(id, body);
       },
       onSuccess: (_data, _params) => {
-        this.$invalidateQueries({ queryKey: ['findAll'] });
-        this.$invalidateQueries({ queryKey: ['findOne', id] });
+        this.$invalidateQueries({ queryKey: ['list'] });
+        this.$invalidateQueries({ queryKey: ['item', id] });
       },
     });
   }
@@ -54,8 +54,8 @@ export class ModelTodo extends BeanModelBase {
         return this.scope.api.todo.delete(id);
       },
       onSuccess: (_data, _params) => {
-        this.$invalidateQueries({ queryKey: ['findAll'] });
-        this.$invalidateQueries({ queryKey: ['findOne', id] });
+        this.$invalidateQueries({ queryKey: ['list'] });
+        this.$invalidateQueries({ queryKey: ['item', id] });
       },
     });
   }
