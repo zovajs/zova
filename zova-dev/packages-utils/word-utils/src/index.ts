@@ -1,3 +1,5 @@
+import { evaluateExpressions, evaluateSimple } from '@cabloy/utils';
+
 function _parseLastWord(str?: string): string | undefined {
   if (!str) return str;
   for (let i = str.length - 1; i >= 0; i--) {
@@ -135,11 +137,17 @@ function _getProperty(obj, name, sep, forceObject) {
 export type TypeMatchSelectorFunction = (this: any, ...args: any[]) => boolean;
 export type TypeMatchSelectorRule<T> = T | RegExp | TypeMatchSelectorFunction;
 export type TypeMatchSelectorRules<T> = (TypeMatchSelectorRule<T>)[] | TypeMatchSelectorRule<T>;
+export const MatchSelectorPrefixRegexp = 'regexp://';
 
 export function matchSelector<T>(match: TypeMatchSelectorRules<T>, selector: string | boolean, matchThis?: any, ...matchArgs: any[]) {
   if (!Array.isArray(match)) {
+    // prepare
+    if (typeof match === 'string' && match.startsWith(MatchSelectorPrefixRegexp)) {
+      match = evaluateSimple(match.substring(MatchSelectorPrefixRegexp.length));
+    }
     return (
-      (typeof match === 'string' && typeof selector === 'string' && match === selector) ||
+      (typeof match === 'string' && match.startsWith('#!#') && !!evaluateExpressions(match, { selector, context: matchArgs[0], args: matchArgs })) ||
+      (typeof match === 'string' && !match.startsWith('#!#') && typeof selector === 'string' && match === selector) ||
       (match instanceof RegExp && typeof selector === 'string' && match.test(selector)) ||
       (typeof match === 'function' && (match as any).call(matchThis, selector, ...matchArgs))
     );

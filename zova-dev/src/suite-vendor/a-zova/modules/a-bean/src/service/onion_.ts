@@ -5,11 +5,9 @@ import type { IOnionExecuteCustom, IOnionItem, IOnionOptionsDeps, IOnionOptionsE
 import { compose as _compose } from '@cabloy/compose';
 import { swapDeps } from '@cabloy/deps';
 import { getOnionScenesMeta } from '@cabloy/module-info';
-import { createFunction, evaluateSimple } from '@cabloy/utils';
 import { appResource, BeanSimple, cast, deepExtend, ProxyDisable } from 'zova';
 import { SysOnion } from '../bean/sys.onion.js';
 import { Service } from '../lib/bean.js';
-import { OnionMatchPrefixRegexp, OnionMatchPrefixStaticString } from '../types/onion.js';
 
 // const SymbolOnionsEnabled = Symbol('SymbolOnionsEnabled');
 // const SymbolOnionsEnabledWrapped = Symbol('SymbolOnionsEnabledWrapped');
@@ -50,17 +48,6 @@ export class ServiceOnion<OPTIONS, ONIONNAME extends string> extends BeanSimple 
       if (!nodeItems) continue;
       for (const itemName in nodeItems) {
         let itemOptions = nodeItems[itemName];
-        for (const key of ['match', 'ignore']) {
-          // value
-          let value = itemOptions[key];
-          if (value === undefined) continue;
-          if (Array.isArray(value)) {
-            value = value.map(item => this._prepareMatchRule(item));
-          } else {
-            value = this._prepareMatchRule(value);
-          }
-          itemOptions[key] = value;
-        }
         // extend config
         const onionName = `${moduleName}:${itemName}`;
         const optionsConfig = this.sys.config.onions[this.sceneName]?.[onionName];
@@ -73,24 +60,6 @@ export class ServiceOnion<OPTIONS, ONIONNAME extends string> extends BeanSimple 
         } as any);
       }
     }
-  }
-
-  private _prepareMatchRule(rule: any) {
-    if (typeof rule === 'string' && rule.startsWith(OnionMatchPrefixRegexp)) {
-      return evaluateSimple(rule.substring(OnionMatchPrefixRegexp.length));
-    }
-    if (typeof rule === 'string' && this.sceneMeta.optionsMatchExpression) {
-      if (rule.startsWith(OnionMatchPrefixStaticString)) {
-        return rule.substring(OnionMatchPrefixStaticString.length);
-      } else {
-        const fn = createFunction(rule, ['selector', 'context']);
-        return (selector, context) => {
-          return fn(selector, context);
-        };
-      }
-    }
-    // others
-    return rule;
   }
 
   private _swapOnions(onions: IOnionItem<OPTIONS, ONIONNAME>[]) {
