@@ -49,7 +49,7 @@
     "@cabloy/cli": "^3.0.34",
     "@cabloy/extend": "^3.1.0",
     "@cabloy/module-info": "^1.3.22",
-    "@cabloy/utils": "^1.0.32",
+    "@cabloy/utils": "^1.0.33",
     "@cabloy/word-utils": "^2.0.0",
     "compressing": "^1.10.0",
     "fs-extra": "^11.2.0",
