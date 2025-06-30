@@ -2,7 +2,7 @@ import type { ILoggerClientChildRecord, ILoggerClientRecord, Next, NextSync } fr
 import type { IAopMethodExecute, IAopMethodGet, IAopMethodSet, IDecoratorAopMethodOptions } from 'zova-module-a-bean';
 import { LoggerLevel, Profiler } from '@cabloy/logger';
 import { evaluateExpressions } from '@cabloy/utils';
-import { BeanAopMethodBase, SymbolBeanFullName } from 'zova';
+import { BeanAopMethodBase, cast, SymbolBeanFullName } from 'zova';
 import { AopMethod } from 'zova-module-a-bean';
 
 export interface IAopMethodOptionsLog extends IDecoratorAopMethodOptions {
@@ -92,7 +92,7 @@ export class AopMethodLog extends BeanAopMethodBase implements IAopMethodGet, IA
   }
 
   _getContext(options: IAopMethodOptionsLog, receiver: any) {
-    return evaluateExpressions(options.context, { self: receiver });
+    return evaluateExpressions(options.context, { self: receiver, sys: cast(receiver).sys, app: cast(receiver).app, ctx: cast(receiver).ctx });
   }
 
   _logResult(profiler: Profiler, context: any, res: any, options: IAopMethodOptionsLog, message: string) {
