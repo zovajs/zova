@@ -11,11 +11,13 @@ import initConstant from './command/init.constant.ts';
 import initError from './command/init.error.ts';
 import initIcon from './command/init.icon.ts';
 import initLegacy from './command/init.legacy.ts';
+import initLib from './command/init.lib.ts';
 import initLocale from './command/init.locale.ts';
 import initMain from './command/init.main.ts';
 import initMainSys from './command/init.mainSys.ts';
 import initMonkey from './command/init.monkey.ts';
 import initMonkeySys from './command/init.monkeySys.ts';
+import initTypes from './command/init.types.ts';
 import openapiConfig from './command/openapi.config.ts';
 import openapiGenerate from './command/openapi.generate.ts';
 import refactorAnotherRender from './command/refactor.anotherRender.ts';
@@ -58,6 +60,8 @@ export const commands = {
     monkeySys: initMonkeySys,
     main: initMain,
     mainSys: initMainSys,
+    lib: initLib,
+    types: initTypes,
   },
   refactor: {
     pageQuery: refactorPageQuery,
