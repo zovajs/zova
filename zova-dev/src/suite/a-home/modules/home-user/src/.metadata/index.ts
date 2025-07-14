@@ -12,6 +12,11 @@ declare module 'zova-module-home-user' {
         export interface ControllerPageLogin {
           /** @internal */
           get scope(): ScopeModuleHomeUser;
+        }
+
+        export interface ControllerPageLogin {
+          get $beanFullName(): 'home-user.controller.pageLogin';
+          get $onionName(): 'home-user:pageLogin';
         } 
 }
 /** controller: end */
@@ -61,6 +66,11 @@ declare module 'zova-module-home-user' {
         export interface ModelPassport {
           /** @internal */
           get scope(): ScopeModuleHomeUser;
+        }
+
+        export interface ModelPassport {
+          get $beanFullName(): 'home-user.model.passport';
+          get $onionName(): 'home-user:passport';
         } 
 }
 /** model: end */
