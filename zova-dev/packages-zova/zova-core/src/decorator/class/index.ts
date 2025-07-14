@@ -4,3 +4,4 @@ export * from './proxyDisable.js';
 export * from './use.js';
 export * from './useComposable.js';
 export * from './useScope.js';
+export * from './virtual.js';

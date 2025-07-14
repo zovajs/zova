@@ -1,8 +1,9 @@
 import type { TypeEventOff } from 'zova';
 import type { BeanRouter } from './bean.router.js';
-import { BeanBase } from 'zova';
-import { Virtual } from 'zova-module-a-bean';
+import { BeanBase, Virtual } from 'zova';
+import { Bean } from 'zova-module-a-bean';
 
+@Bean()
 @Virtual()
 export class BeanRouterBase extends BeanBase {
   private _eventRouterGuards: TypeEventOff;

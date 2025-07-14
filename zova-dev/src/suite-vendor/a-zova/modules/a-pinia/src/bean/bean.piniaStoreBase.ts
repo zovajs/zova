@@ -1,8 +1,9 @@
-import { BeanBase } from 'zova';
-import { Virtual } from 'zova-module-a-bean';
+import { BeanBase, Virtual } from 'zova';
+import { Bean } from 'zova-module-a-bean';
 
 const SymbolPiniaStore = Symbol('SymbolPiniaStore');
 
+@Bean()
 @Virtual()
 export class BeanPiniaStoreBase extends BeanBase {
   [SymbolPiniaStore];

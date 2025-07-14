@@ -1,8 +1,9 @@
 import type { AxiosRequestConfig } from 'axios';
 import type { IApiActionOptions } from '../types/api.js';
-import { BeanBase, TypeAuthToken } from 'zova';
-import { Virtual } from 'zova-module-a-bean';
+import { BeanBase, TypeAuthToken, Virtual } from 'zova';
+import { Bean } from 'zova-module-a-bean';
 
+@Bean()
 @Virtual()
 export class BeanApiBase extends BeanBase {
   $pathTranslate(pathName: string, pathParams?: Record<string, any>): string {

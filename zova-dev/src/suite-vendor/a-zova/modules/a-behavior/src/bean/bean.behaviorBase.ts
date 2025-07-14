@@ -3,9 +3,10 @@ import type { ServiceComposer } from '../service/composer.js';
 import type { IBehaviors, IDecoratorBehaviorOptions, NextBehavior } from '../types/behavior.js';
 import type { IBehaviorTag } from '../types/behavior.js';
 import type { BeanBehavior } from './bean.behavior.js';
-import { BeanBase, Use } from 'zova';
-import { Virtual } from 'zova-module-a-bean';
+import { BeanBase, Use, Virtual } from 'zova';
+import { Bean } from 'zova-module-a-bean';
 
+@Bean()
 @Virtual()
 export class BeanBehaviorBase<
   OPTIONS extends IDecoratorBehaviorOptions = IDecoratorBehaviorOptions,

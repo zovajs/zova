@@ -10,10 +10,6 @@ export function Bean(): ClassDecorator {
   return createBeanDecorator('bean', 'ctx');
 }
 
-export function Virtual(): ClassDecorator {
-  return createBeanDecorator('bean', undefined, undefined, undefined, undefined, true);
-}
-
 export function Service(): ClassDecorator {
   return createBeanDecorator('service', 'ctx');
 }

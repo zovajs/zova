@@ -20,6 +20,7 @@ import { deepExtend } from './util.js';
 export const DecoratorBeanFullName = Symbol('Decorator#BeanFullName');
 export const SymbolDecoratorBeanInfo = Symbol('SymbolDecoratorBeanInfo');
 export const SymbolDecoratorProxyDisable = Symbol('SymbolDecoratorProxyDisable');
+export const SymbolDecoratorVirtual = Symbol('SymbolDecoratorVirtual');
 export const SymbolDecoratorUse = Symbol('SymbolDecoratorUse');
 export const DecoratorBeanFullNameOfComposable = Symbol('Decorator#BeanFullNameOfComposable');
 
@@ -45,7 +46,9 @@ export class AppResource {
   }
 
   addBean<T>(beanOptions: Partial<IDecoratorBeanOptionsBase<T>>) {
-    const { beanClass, virtual, options, optionsPrimitive } = beanOptions;
+    const { beanClass, options, optionsPrimitive } = beanOptions;
+    // virtual
+    const virtual = appMetadata.getOwnMetadata<boolean>(SymbolDecoratorVirtual, beanClass!);
     // name
     const { scene, name } = this._parseSceneAndBeanName(beanClass!, beanOptions.scene, beanOptions.name);
     // beanInfo

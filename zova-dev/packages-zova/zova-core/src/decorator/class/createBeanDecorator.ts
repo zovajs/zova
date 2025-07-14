@@ -9,7 +9,6 @@ export function createBeanDecorator<T>(
   markReactive?: boolean,
   options?: T,
   optionsPrimitive?: boolean,
-  virtual?: boolean,
   fn?: (target: Constructable) => void,
 ): ClassDecorator {
   return function (target) {
@@ -24,7 +23,6 @@ export function createBeanDecorator<T>(
       beanClass: target as unknown as Constructable,
       options,
       optionsPrimitive,
-      virtual,
     });
     // fn
     fn && fn(target as unknown as Constructable);
