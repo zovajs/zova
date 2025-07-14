@@ -20,9 +20,19 @@ declare module 'zova-module-a-table' {
           get scope(): ScopeModuleATable;
         }
 
+        export interface ServiceTableCellFormat {
+          get $beanFullName(): 'a-table.service.tableCellFormat';
+          get $onionName(): 'a-table:tableCellFormat';
+        }
+
         export interface ServiceTableFeature {
           /** @internal */
           get scope(): ScopeModuleATable;
+        }
+
+        export interface ServiceTableFeature {
+          get $beanFullName(): 'a-table.service.tableFeature';
+          get $onionName(): 'a-table:tableFeature';
         } 
 }
 /** service: end */

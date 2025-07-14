@@ -12,6 +12,11 @@ declare module 'zova-module-demo-basic' {
         export interface StoreCounter {
           /** @internal */
           get scope(): ScopeModuleDemoBasic;
+        }
+
+        export interface StoreCounter {
+          get $beanFullName(): 'demo-basic.store.counter';
+          get $onionName(): 'demo-basic:counter';
         } 
 }
 /** store: end */
@@ -50,9 +55,19 @@ declare module 'zova-module-demo-basic' {
           get scope(): ScopeModuleDemoBasic;
         }
 
+        export interface ControllerCard {
+          get $beanFullName(): 'demo-basic.controller.card';
+          get $onionName(): 'demo-basic:card';
+        }
+
         export interface ControllerPageComponent {
           /** @internal */
           get scope(): ScopeModuleDemoBasic;
+        }
+
+        export interface ControllerPageComponent {
+          get $beanFullName(): 'demo-basic.controller.pageComponent';
+          get $onionName(): 'demo-basic:pageComponent';
         }
 
         export interface ControllerPageLegacy {
@@ -60,9 +75,19 @@ declare module 'zova-module-demo-basic' {
           get scope(): ScopeModuleDemoBasic;
         }
 
+        export interface ControllerPageLegacy {
+          get $beanFullName(): 'demo-basic.controller.pageLegacy';
+          get $onionName(): 'demo-basic:pageLegacy';
+        }
+
         export interface ControllerPageLocale {
           /** @internal */
           get scope(): ScopeModuleDemoBasic;
+        }
+
+        export interface ControllerPageLocale {
+          get $beanFullName(): 'demo-basic.controller.pageLocale';
+          get $onionName(): 'demo-basic:pageLocale';
         }
 
         export interface ControllerPagePinia {
@@ -70,9 +95,19 @@ declare module 'zova-module-demo-basic' {
           get scope(): ScopeModuleDemoBasic;
         }
 
+        export interface ControllerPagePinia {
+          get $beanFullName(): 'demo-basic.controller.pagePinia';
+          get $onionName(): 'demo-basic:pagePinia';
+        }
+
         export interface ControllerPageRouteParams {
           /** @internal */
           get scope(): ScopeModuleDemoBasic;
+        }
+
+        export interface ControllerPageRouteParams {
+          get $beanFullName(): 'demo-basic.controller.pageRouteParams';
+          get $onionName(): 'demo-basic:pageRouteParams';
         }
 
         export interface ControllerPageRouteQuery {
@@ -80,9 +115,19 @@ declare module 'zova-module-demo-basic' {
           get scope(): ScopeModuleDemoBasic;
         }
 
+        export interface ControllerPageRouteQuery {
+          get $beanFullName(): 'demo-basic.controller.pageRouteQuery';
+          get $onionName(): 'demo-basic:pageRouteQuery';
+        }
+
         export interface ControllerPageRouteQueryB {
           /** @internal */
           get scope(): ScopeModuleDemoBasic;
+        }
+
+        export interface ControllerPageRouteQueryB {
+          get $beanFullName(): 'demo-basic.controller.pageRouteQueryB';
+          get $onionName(): 'demo-basic:pageRouteQueryB';
         }
 
         export interface ControllerPageState {
@@ -90,9 +135,19 @@ declare module 'zova-module-demo-basic' {
           get scope(): ScopeModuleDemoBasic;
         }
 
+        export interface ControllerPageState {
+          get $beanFullName(): 'demo-basic.controller.pageState';
+          get $onionName(): 'demo-basic:pageState';
+        }
+
         export interface ControllerPageStyle {
           /** @internal */
           get scope(): ScopeModuleDemoBasic;
+        }
+
+        export interface ControllerPageStyle {
+          get $beanFullName(): 'demo-basic.controller.pageStyle';
+          get $onionName(): 'demo-basic:pageStyle';
         }
 
         export interface ControllerPageToolOne {
@@ -100,9 +155,19 @@ declare module 'zova-module-demo-basic' {
           get scope(): ScopeModuleDemoBasic;
         }
 
+        export interface ControllerPageToolOne {
+          get $beanFullName(): 'demo-basic.controller.pageToolOne';
+          get $onionName(): 'demo-basic:pageToolOne';
+        }
+
         export interface ControllerPageToolTwo {
           /** @internal */
           get scope(): ScopeModuleDemoBasic;
+        }
+
+        export interface ControllerPageToolTwo {
+          get $beanFullName(): 'demo-basic.controller.pageToolTwo';
+          get $onionName(): 'demo-basic:pageToolTwo';
         } 
 }
 /** controller: end */
@@ -252,6 +317,11 @@ declare module 'zova-module-demo-basic' {
         export interface RenderPageToolOne {
           /** @internal */
           get scope(): ScopeModuleDemoBasic;
+        }
+
+        export interface RenderPageToolOne {
+          get $beanFullName(): 'demo-basic.render.pageToolOne';
+          get $onionName(): 'demo-basic:pageToolOne';
         } 
 }
 /** render: end */
@@ -285,9 +355,19 @@ declare module 'zova-module-demo-basic' {
           get scope(): ScopeModuleDemoBasic;
         }
 
+        export interface AopHome {
+          get $beanFullName(): 'demo-basic.aop.home';
+          get $onionName(): 'demo-basic:home';
+        }
+
         export interface AopHome3 {
           /** @internal */
           get scope(): ScopeModuleDemoBasic;
+        }
+
+        export interface AopHome3 {
+          get $beanFullName(): 'demo-basic.aop.home3';
+          get $onionName(): 'demo-basic:home3';
         } 
 }
 /** aop: end */
@@ -319,6 +399,11 @@ declare module 'zova-module-demo-basic' {
         export interface BehaviorFormFieldLayout {
           /** @internal */
           get scope(): ScopeModuleDemoBasic;
+        }
+
+        export interface BehaviorFormFieldLayout {
+          get $beanFullName(): 'demo-basic.behavior.formFieldLayout';
+          get $onionName(): 'demo-basic:formFieldLayout';
         } 
 }
 /** behavior: end */
@@ -363,6 +448,11 @@ declare module 'zova-module-demo-basic' {
         export interface ModelTest {
           /** @internal */
           get scope(): ScopeModuleDemoBasic;
+        }
+
+        export interface ModelTest {
+          get $beanFullName(): 'demo-basic.model.test';
+          get $onionName(): 'demo-basic:test';
         } 
 }
 /** model: end */
@@ -388,6 +478,11 @@ declare module 'zova-module-demo-basic' {
         export interface ThemeOrange {
           /** @internal */
           get scope(): ScopeModuleDemoBasic;
+        }
+
+        export interface ThemeOrange {
+          get $beanFullName(): 'demo-basic.theme.orange';
+          get $onionName(): 'demo-basic:orange';
         } 
 }
 /** theme: end */

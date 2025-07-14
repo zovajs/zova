@@ -21,9 +21,19 @@ declare module 'zova-module-a-tableformat' {
           get scope(): ScopeModuleATableformat;
         }
 
+        export interface TableCellFormatCurrency {
+          get $beanFullName(): 'a-tableformat.tableCellFormat.currency';
+          get $onionName(): 'a-tableformat:currency';
+        }
+
         export interface TableCellFormatFallback {
           /** @internal */
           get scope(): ScopeModuleATableformat;
+        }
+
+        export interface TableCellFormatFallback {
+          get $beanFullName(): 'a-tableformat.tableCellFormat.fallback';
+          get $onionName(): 'a-tableformat:fallback';
         } 
 }
 /** tableCellFormat: end */
