@@ -44,6 +44,7 @@ export async function globAllTsFiles(moduleName: string, modulePath: string): Pr
     const sceneName = toLowerCaseFirstChar(sceneNameCapitalize);
     const beanName = parseBeanName(className, sceneName);
     const beanNameFull = `${moduleName}:${beanName}`;
+    const beanNameCapitalize = toUpperCaseFirstChar(beanName);
     result.push({
       sceneName,
       sceneNameCapitalize,
@@ -55,6 +56,7 @@ export async function globAllTsFiles(moduleName: string, modulePath: string): Pr
       className,
       beanName,
       beanNameFull,
+      beanNameCapitalize,
       isIgnore,
       isVirtual,
     });
