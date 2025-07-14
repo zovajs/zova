@@ -12,11 +12,6 @@ declare module 'zova-module-devui-table' {
         export interface ControllerTable {
           /** @internal */
           get scope(): ScopeModuleDevuiTable;
-        }
-
-        export interface ControllerTable {
-          get $beanFullName(): 'devui-table.controller.table';
-          get $onionName(): 'devui-table:table';
         } 
 }
 /** controller: end */
@@ -59,11 +54,6 @@ declare module 'zova-module-devui-table' {
         export interface RenderTable {
           /** @internal */
           get scope(): ScopeModuleDevuiTable;
-        }
-
-        export interface RenderTable {
-          get $beanFullName(): 'devui-table.render.table';
-          get $onionName(): 'devui-table:table';
         } 
 }
 /** render: end */

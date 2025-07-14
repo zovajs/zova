@@ -12,11 +12,6 @@ declare module 'zova-module-a-icon' {
         export interface SysIcon {
           /** @internal */
           get scope(): ScopeModuleAIcon;
-        }
-
-        export interface SysIcon {
-          get $beanFullName(): 'a-icon.sys.icon';
-          get $onionName(): 'a-icon:icon';
         } 
 }
 /** sys: end */
@@ -42,11 +37,6 @@ declare module 'zova-module-a-icon' {
         export interface BeanIcon {
           /** @internal */
           get scope(): ScopeModuleAIcon;
-        }
-
-        export interface BeanIcon {
-          get $beanFullName(): 'a-icon.bean.icon';
-          get $onionName(): 'a-icon:icon';
         } 
 }
 /** bean: end */

@@ -12,11 +12,6 @@ declare module 'zova-module-demo-todo' {
         export interface ApiTodo {
           /** @internal */
           get scope(): ScopeModuleDemoTodo;
-        }
-
-        export interface ApiTodo {
-          get $beanFullName(): 'demo-todo.api.todo';
-          get $onionName(): 'demo-todo:todo';
         } 
 }
 /** api: end */
@@ -54,19 +49,9 @@ declare module 'zova-module-demo-todo' {
           get scope(): ScopeModuleDemoTodo;
         }
 
-        export interface ControllerPageItem {
-          get $beanFullName(): 'demo-todo.controller.pageItem';
-          get $onionName(): 'demo-todo:pageItem';
-        }
-
         export interface ControllerPageTodo {
           /** @internal */
           get scope(): ScopeModuleDemoTodo;
-        }
-
-        export interface ControllerPageTodo {
-          get $beanFullName(): 'demo-todo.controller.pageTodo';
-          get $onionName(): 'demo-todo:pageTodo';
         } 
 }
 /** controller: end */
@@ -127,11 +112,6 @@ declare module 'zova-module-demo-todo' {
         export interface ModelTodo {
           /** @internal */
           get scope(): ScopeModuleDemoTodo;
-        }
-
-        export interface ModelTodo {
-          get $beanFullName(): 'demo-todo.model.todo';
-          get $onionName(): 'demo-todo:todo';
         } 
 }
 /** model: end */

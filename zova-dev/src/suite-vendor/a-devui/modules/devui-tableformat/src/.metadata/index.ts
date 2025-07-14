@@ -16,11 +16,6 @@ declare module 'zova-module-devui-tableformat' {
         export interface TableCellFormatActionView {
           /** @internal */
           get scope(): ScopeModuleDevuiTableformat;
-        }
-
-        export interface TableCellFormatActionView {
-          get $beanFullName(): 'devui-tableformat.tableCellFormat.actionView';
-          get $onionName(): 'devui-tableformat:actionView';
         } 
 }
 /** tableCellFormat: end */

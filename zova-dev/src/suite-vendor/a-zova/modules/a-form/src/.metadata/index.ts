@@ -15,19 +15,9 @@ declare module 'zova-module-a-form' {
           get scope(): ScopeModuleAForm;
         }
 
-        export interface ControllerForm {
-          get $beanFullName(): 'a-form.controller.form';
-          get $onionName(): 'a-form:form';
-        }
-
         export interface ControllerFormField {
           /** @internal */
           get scope(): ScopeModuleAForm;
-        }
-
-        export interface ControllerFormField {
-          get $beanFullName(): 'a-form.controller.formField';
-          get $onionName(): 'a-form:formField';
         } 
 }
 /** controller: end */
@@ -80,19 +70,9 @@ declare module 'zova-module-a-form' {
           get scope(): ScopeModuleAForm;
         }
 
-        export interface RenderForm {
-          get $beanFullName(): 'a-form.render.form';
-          get $onionName(): 'a-form:form';
-        }
-
         export interface RenderFormField {
           /** @internal */
           get scope(): ScopeModuleAForm;
-        }
-
-        export interface RenderFormField {
-          get $beanFullName(): 'a-form.render.formField';
-          get $onionName(): 'a-form:formField';
         } 
 }
 /** render: end */
@@ -132,29 +112,14 @@ declare module 'zova-module-a-form' {
           get scope(): ScopeModuleAForm;
         }
 
-        export interface BehaviorForm {
-          get $beanFullName(): 'a-form.behavior.form';
-          get $onionName(): 'a-form:form';
-        }
-
         export interface BehaviorFormField {
           /** @internal */
           get scope(): ScopeModuleAForm;
         }
 
-        export interface BehaviorFormField {
-          get $beanFullName(): 'a-form.behavior.formField';
-          get $onionName(): 'a-form:formField';
-        }
-
         export interface BehaviorFormFieldModel {
           /** @internal */
           get scope(): ScopeModuleAForm;
-        }
-
-        export interface BehaviorFormFieldModel {
-          get $beanFullName(): 'a-form.behavior.formFieldModel';
-          get $onionName(): 'a-form:formFieldModel';
         } 
 }
 /** behavior: end */

@@ -16,29 +16,14 @@ declare module 'zova-module-home-layout' {
           get scope(): ScopeModuleHomeLayout;
         }
 
-        export interface ControllerEssentialLink {
-          get $beanFullName(): 'home-layout.controller.essentialLink';
-          get $onionName(): 'home-layout:essentialLink';
-        }
-
         export interface ControllerLayoutDefault {
           /** @internal */
           get scope(): ScopeModuleHomeLayout;
         }
 
-        export interface ControllerLayoutDefault {
-          get $beanFullName(): 'home-layout.controller.layoutDefault';
-          get $onionName(): 'home-layout:layoutDefault';
-        }
-
         export interface ControllerLayoutEmpty {
           /** @internal */
           get scope(): ScopeModuleHomeLayout;
-        }
-
-        export interface ControllerLayoutEmpty {
-          get $beanFullName(): 'home-layout.controller.layoutEmpty';
-          get $onionName(): 'home-layout:layoutEmpty';
         } 
 }
 /** controller: end */
@@ -105,19 +90,9 @@ declare module 'zova-module-home-layout' {
           get scope(): ScopeModuleHomeLayout;
         }
 
-        export interface RenderContent {
-          get $beanFullName(): 'home-layout.render.content';
-          get $onionName(): 'home-layout:content';
-        }
-
         export interface RenderHeader {
           /** @internal */
           get scope(): ScopeModuleHomeLayout;
-        }
-
-        export interface RenderHeader {
-          get $beanFullName(): 'home-layout.render.header';
-          get $onionName(): 'home-layout:header';
         }
 
         export interface RenderLocale {
@@ -125,19 +100,9 @@ declare module 'zova-module-home-layout' {
           get scope(): ScopeModuleHomeLayout;
         }
 
-        export interface RenderLocale {
-          get $beanFullName(): 'home-layout.render.locale';
-          get $onionName(): 'home-layout:locale';
-        }
-
         export interface RenderMenu {
           /** @internal */
           get scope(): ScopeModuleHomeLayout;
-        }
-
-        export interface RenderMenu {
-          get $beanFullName(): 'home-layout.render.menu';
-          get $onionName(): 'home-layout:menu';
         }
 
         export interface RenderSidebar {
@@ -145,19 +110,9 @@ declare module 'zova-module-home-layout' {
           get scope(): ScopeModuleHomeLayout;
         }
 
-        export interface RenderSidebar {
-          get $beanFullName(): 'home-layout.render.sidebar';
-          get $onionName(): 'home-layout:sidebar';
-        }
-
         export interface RenderTabs {
           /** @internal */
           get scope(): ScopeModuleHomeLayout;
-        }
-
-        export interface RenderTabs {
-          get $beanFullName(): 'home-layout.render.tabs';
-          get $onionName(): 'home-layout:tabs';
         }
 
         export interface RenderTheme {
@@ -165,29 +120,14 @@ declare module 'zova-module-home-layout' {
           get scope(): ScopeModuleHomeLayout;
         }
 
-        export interface RenderTheme {
-          get $beanFullName(): 'home-layout.render.theme';
-          get $onionName(): 'home-layout:theme';
-        }
-
         export interface RenderLayoutDefault {
           /** @internal */
           get scope(): ScopeModuleHomeLayout;
         }
 
-        export interface RenderLayoutDefault {
-          get $beanFullName(): 'home-layout.render.layoutDefault';
-          get $onionName(): 'home-layout:layoutDefault';
-        }
-
         export interface RenderUser {
           /** @internal */
           get scope(): ScopeModuleHomeLayout;
-        }
-
-        export interface RenderUser {
-          get $beanFullName(): 'home-layout.render.user';
-          get $onionName(): 'home-layout:user';
         } 
 }
 /** render: end */
@@ -229,11 +169,6 @@ declare module 'zova-module-home-layout' {
         export interface StyleLayoutDefault {
           /** @internal */
           get scope(): ScopeModuleHomeLayout;
-        }
-
-        export interface StyleLayoutDefault {
-          get $beanFullName(): 'home-layout.style.layoutDefault';
-          get $onionName(): 'home-layout:layoutDefault';
         } 
 }
 /** style: end */
@@ -259,11 +194,6 @@ declare module 'zova-module-home-layout' {
         export interface ModelMenu {
           /** @internal */
           get scope(): ScopeModuleHomeLayout;
-        }
-
-        export interface ModelMenu {
-          get $beanFullName(): 'home-layout.model.menu';
-          get $onionName(): 'home-layout:menu';
         } 
 }
 /** model: end */

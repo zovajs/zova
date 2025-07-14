@@ -16,29 +16,14 @@ declare module 'zova-module-devui-restpage' {
           get scope(): ScopeModuleDevuiRestpage;
         }
 
-        export interface ControllerRestPage {
-          get $beanFullName(): 'devui-restpage.controller.restPage';
-          get $onionName(): 'devui-restpage:restPage';
-        }
-
         export interface ControllerWrapperForm {
           /** @internal */
           get scope(): ScopeModuleDevuiRestpage;
         }
 
-        export interface ControllerWrapperForm {
-          get $beanFullName(): 'devui-restpage.controller.wrapperForm';
-          get $onionName(): 'devui-restpage:wrapperForm';
-        }
-
         export interface ControllerWrapperTable {
           /** @internal */
           get scope(): ScopeModuleDevuiRestpage;
-        }
-
-        export interface ControllerWrapperTable {
-          get $beanFullName(): 'devui-restpage.controller.wrapperTable';
-          get $onionName(): 'devui-restpage:wrapperTable';
         } 
 }
 /** controller: end */
@@ -101,19 +86,9 @@ declare module 'zova-module-devui-restpage' {
           get scope(): ScopeModuleDevuiRestpage;
         }
 
-        export interface RenderRestPage {
-          get $beanFullName(): 'devui-restpage.render.restPage';
-          get $onionName(): 'devui-restpage:restPage';
-        }
-
         export interface RenderWrapperForm {
           /** @internal */
           get scope(): ScopeModuleDevuiRestpage;
-        }
-
-        export interface RenderWrapperForm {
-          get $beanFullName(): 'devui-restpage.render.wrapperForm';
-          get $onionName(): 'devui-restpage:wrapperForm';
         }
 
         export interface RenderActions {
@@ -121,29 +96,14 @@ declare module 'zova-module-devui-restpage' {
           get scope(): ScopeModuleDevuiRestpage;
         }
 
-        export interface RenderActions {
-          get $beanFullName(): 'devui-restpage.render.actions';
-          get $onionName(): 'devui-restpage:actions';
-        }
-
         export interface RenderCreate {
           /** @internal */
           get scope(): ScopeModuleDevuiRestpage;
         }
 
-        export interface RenderCreate {
-          get $beanFullName(): 'devui-restpage.render.create';
-          get $onionName(): 'devui-restpage:create';
-        }
-
         export interface RenderWrapperTable {
           /** @internal */
           get scope(): ScopeModuleDevuiRestpage;
-        }
-
-        export interface RenderWrapperTable {
-          get $beanFullName(): 'devui-restpage.render.wrapperTable';
-          get $onionName(): 'devui-restpage:wrapperTable';
         } 
 }
 /** render: end */

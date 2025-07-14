@@ -24,29 +24,14 @@ declare module 'zova-module-a-tablefeature' {
           get scope(): ScopeModuleATablefeature;
         }
 
-        export interface TableFeatureFormat {
-          get $beanFullName(): 'a-tablefeature.tableFeature.format';
-          get $onionName(): 'a-tablefeature:format';
-        }
-
         export interface TableFeatureRestPage {
           /** @internal */
           get scope(): ScopeModuleATablefeature;
         }
 
-        export interface TableFeatureRestPage {
-          get $beanFullName(): 'a-tablefeature.tableFeature.restPage';
-          get $onionName(): 'a-tablefeature:restPage';
-        }
-
         export interface TableFeatureSchema {
           /** @internal */
           get scope(): ScopeModuleATablefeature;
-        }
-
-        export interface TableFeatureSchema {
-          get $beanFullName(): 'a-tablefeature.tableFeature.schema';
-          get $onionName(): 'a-tablefeature:schema';
         } 
 }
 /** tableFeature: end */

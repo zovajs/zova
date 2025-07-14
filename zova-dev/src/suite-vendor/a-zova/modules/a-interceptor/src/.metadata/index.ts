@@ -30,19 +30,9 @@ declare module 'zova-module-a-interceptor' {
           get scope(): ScopeModuleAInterceptor;
         }
 
-        export interface InterceptorBody {
-          get $beanFullName(): 'a-interceptor.interceptor.body';
-          get $onionName(): 'a-interceptor:body';
-        }
-
         export interface InterceptorHeaders {
           /** @internal */
           get scope(): ScopeModuleAInterceptor;
-        }
-
-        export interface InterceptorHeaders {
-          get $beanFullName(): 'a-interceptor.interceptor.headers';
-          get $onionName(): 'a-interceptor:headers';
         }
 
         export interface InterceptorJwt {
@@ -50,29 +40,14 @@ declare module 'zova-module-a-interceptor' {
           get scope(): ScopeModuleAInterceptor;
         }
 
-        export interface InterceptorJwt {
-          get $beanFullName(): 'a-interceptor.interceptor.jwt';
-          get $onionName(): 'a-interceptor:jwt';
-        }
-
         export interface InterceptorMock {
           /** @internal */
           get scope(): ScopeModuleAInterceptor;
         }
 
-        export interface InterceptorMock {
-          get $beanFullName(): 'a-interceptor.interceptor.mock';
-          get $onionName(): 'a-interceptor:mock';
-        }
-
         export interface InterceptorPerformAction {
           /** @internal */
           get scope(): ScopeModuleAInterceptor;
-        }
-
-        export interface InterceptorPerformAction {
-          get $beanFullName(): 'a-interceptor.interceptor.performAction';
-          get $onionName(): 'a-interceptor:performAction';
         } 
 }
 /** interceptor: end */

@@ -20,19 +20,9 @@ declare module 'zova-module-home-base' {
           get scope(): ScopeModuleHomeBase;
         }
 
-        export interface ServiceRouter {
-          get $beanFullName(): 'home-base.service.router';
-          get $onionName(): 'home-base:router';
-        }
-
         export interface ServiceSsr {
           /** @internal */
           get scope(): ScopeModuleHomeBase;
-        }
-
-        export interface ServiceSsr {
-          get $beanFullName(): 'home-base.service.ssr';
-          get $onionName(): 'home-base:ssr';
         } 
 }
 /** service: end */
@@ -64,29 +54,14 @@ declare module 'zova-module-home-base' {
           get scope(): ScopeModuleHomeBase;
         }
 
-        export interface ControllerPage {
-          get $beanFullName(): 'home-base.controller.page';
-          get $onionName(): 'home-base:page';
-        }
-
         export interface ControllerPageErrorExpired {
           /** @internal */
           get scope(): ScopeModuleHomeBase;
         }
 
-        export interface ControllerPageErrorExpired {
-          get $beanFullName(): 'home-base.controller.pageErrorExpired';
-          get $onionName(): 'home-base:pageErrorExpired';
-        }
-
         export interface ControllerPageErrorNotFound {
           /** @internal */
           get scope(): ScopeModuleHomeBase;
-        }
-
-        export interface ControllerPageErrorNotFound {
-          get $beanFullName(): 'home-base.controller.pageErrorNotFound';
-          get $onionName(): 'home-base:pageErrorNotFound';
         } 
 }
 /** controller: end */
@@ -163,11 +138,6 @@ declare module 'zova-module-home-base' {
         export interface CssDefault {
           /** @internal */
           get scope(): ScopeModuleHomeBase;
-        }
-
-        export interface CssDefault {
-          get $beanFullName(): 'home-base.css.default';
-          get $onionName(): 'home-base:default';
         } 
 }
 /** css: end */
@@ -193,11 +163,6 @@ declare module 'zova-module-home-base' {
         export interface ThemeDefault {
           /** @internal */
           get scope(): ScopeModuleHomeBase;
-        }
-
-        export interface ThemeDefault {
-          get $beanFullName(): 'home-base.theme.default';
-          get $onionName(): 'home-base:default';
         } 
 }
 /** theme: end */

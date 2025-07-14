@@ -12,11 +12,6 @@ declare module 'zova-module-home-index' {
         export interface ControllerPageHome {
           /** @internal */
           get scope(): ScopeModuleHomeIndex;
-        }
-
-        export interface ControllerPageHome {
-          get $beanFullName(): 'home-index.controller.pageHome';
-          get $onionName(): 'home-index:pageHome';
         } 
 }
 /** controller: end */

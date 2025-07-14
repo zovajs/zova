@@ -37,11 +37,6 @@ declare module 'zova-module-a-pinia' {
         export interface ServicePinia {
           /** @internal */
           get scope(): ScopeModuleAPinia;
-        }
-
-        export interface ServicePinia {
-          get $beanFullName(): 'a-pinia.service.pinia';
-          get $onionName(): 'a-pinia:pinia';
         } 
 }
 /** service: end */

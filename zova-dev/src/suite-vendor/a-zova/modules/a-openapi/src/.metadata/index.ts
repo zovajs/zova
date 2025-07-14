@@ -12,11 +12,6 @@ declare module 'zova-module-a-openapi' {
         export interface SysSdk {
           /** @internal */
           get scope(): ScopeModuleAOpenapi;
-        }
-
-        export interface SysSdk {
-          get $beanFullName(): 'a-openapi.sys.sdk';
-          get $onionName(): 'a-openapi:sdk';
         } 
 }
 /** sys: end */
@@ -42,11 +37,6 @@ declare module 'zova-module-a-openapi' {
         export interface ModelSdk {
           /** @internal */
           get scope(): ScopeModuleAOpenapi;
-        }
-
-        export interface ModelSdk {
-          get $beanFullName(): 'a-openapi.model.sdk';
-          get $onionName(): 'a-openapi:sdk';
         } 
 }
 /** model: end */

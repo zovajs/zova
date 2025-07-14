@@ -12,11 +12,6 @@ declare module 'zova-module-a-tabs' {
         export interface ControllerRouterViewTabs {
           /** @internal */
           get scope(): ScopeModuleATabs;
-        }
-
-        export interface ControllerRouterViewTabs {
-          get $beanFullName(): 'a-tabs.controller.routerViewTabs';
-          get $onionName(): 'a-tabs:routerViewTabs';
         } 
 }
 /** controller: end */
@@ -59,11 +54,6 @@ declare module 'zova-module-a-tabs' {
         export interface ModelTabs {
           /** @internal */
           get scope(): ScopeModuleATabs;
-        }
-
-        export interface ModelTabs {
-          get $beanFullName(): 'a-tabs.model.tabs';
-          get $onionName(): 'a-tabs:tabs';
         } 
 }
 /** model: end */
