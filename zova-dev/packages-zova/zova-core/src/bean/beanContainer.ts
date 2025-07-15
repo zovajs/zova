@@ -12,7 +12,7 @@ import type {
 import type { IInjectRecord } from '../types/interface/inject.js';
 import type { IBeanRecord, IBeanScopeRecord, IControllerData, TypeBeanScopeRecordKeys } from './type.js';
 import { compose } from '@cabloy/compose';
-import { isNilOrEmptyString } from '@cabloy/utils';
+import { isClass, isNilOrEmptyString } from '@cabloy/utils';
 import { inject as composableInject, provide as composableProvide, markRaw, reactive, shallowReactive } from 'vue';
 import { appMetadata } from '../core/sys/metadata.js';
 import { appResource, SymbolDecoratorProxyDisable } from '../core/sys/resource.js';
@@ -21,7 +21,6 @@ import {
   SymbolDecoratorVueElements,
 } from '../decorator/index.js';
 import { cast } from '../types/utils/cast.js';
-import { isClass } from '../utils/isClass.js';
 import { BeanAopBase } from './beanAopBase.js';
 import { BeanBase } from './beanBase.js';
 import { SymbolBeanFullName, SymbolInited } from './beanBaseSimple.js';

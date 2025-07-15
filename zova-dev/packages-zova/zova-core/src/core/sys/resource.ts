@@ -8,10 +8,10 @@ import type {
   IDecoratorUseOptionsBase,
 } from '../../decorator/index.js';
 import type { MetadataKey } from './metadata.js';
+import { isClass } from '@cabloy/utils';
 import { parseLastWord, skipLastWord, skipPrefix, splitWords } from '@cabloy/word-utils';
 import { registerMappedClassMetadataKey } from '../../mappedClass/utils.js';
 import { cast } from '../../types/utils/cast.js';
-import { isClass } from '../../utils/isClass.js';
 import { uuid } from '../../utils/uuid.js';
 import { appMetadata } from './metadata.js';
 import { getSys } from './sysFake.js';
