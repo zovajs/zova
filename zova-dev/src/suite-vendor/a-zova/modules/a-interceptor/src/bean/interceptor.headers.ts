@@ -1,4 +1,5 @@
 import { AxiosRequestConfig } from 'axios';
+import { $customKey } from 'zova-core';
 import { BeanInterceptorBase, IDecoratorInterceptorOptions, Interceptor, NextInterceptorRequest } from 'zova-module-a-fetch';
 
 export interface IInterceptorOptionsHeaders extends IDecoratorInterceptorOptions {
@@ -19,7 +20,7 @@ export class InterceptorHeaders extends BeanInterceptorBase<IInterceptorOptionsH
     }
     // openapi schema
     if (options.openapiSchema) {
-      config.headers!['x-vona-openapi-schema'] = true;
+      config.headers![$customKey('x-vona-openapi-schema')] = true;
     }
     // next
     return next(config);
