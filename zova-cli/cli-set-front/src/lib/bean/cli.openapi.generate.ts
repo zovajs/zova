@@ -162,6 +162,7 @@ export const OpenApiBaseURL = (sys: ZovaSys) => {
     if (contentSchemas.includes('components["schemas"]')) {
       contentSchemas = `import type { components } from './types.js';\n${contentSchemas}`;
     }
+    contentSchemas = `/* eslint-disable */\n${contentSchemas}`;
     return contentSchemas;
   }
 
