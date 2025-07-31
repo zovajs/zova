@@ -1,14 +1,12 @@
 import type { IMetadataCustomGenerateOptions } from '@cabloy/cli';
-import { toUpperCaseFirstChar } from '@cabloy/word-utils';
 
 export default async function (options: IMetadataCustomGenerateOptions): Promise<string> {
   const { moduleName, globFiles } = options;
   if (globFiles.length === 0) return '';
   const contentRecords: string[] = [];
-  for (const { beanName, isIgnore } of globFiles) {
+  for (const { beanName, beanNameCapitalize, isIgnore } of globFiles) {
     if (isIgnore) continue;
     const behaviorAttrName = _combineBehaviorAttrName(moduleName, beanName);
-    const beanNameCapitalize = toUpperCaseFirstChar(beanName);
     contentRecords.push(`'${behaviorAttrName}'?: IBehaviorOptions${beanNameCapitalize} | '' | boolean;`);
   }
   // combine
