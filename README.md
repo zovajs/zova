@@ -17,7 +17,7 @@ Zova is a more intuitive framework with the pros of Vue3, React and Angular, emp
 
 ## Philosophy
 
-Many frameworks use the simplest use cases to demonstrate design elegance, ignoring the coding challenges presented by business complexity. As business grows and changes, project code quickly degrades and becomes difficult to maintain. Vona, however, addresses the complexity of large-scale businesses and proposes a series of engineering solutions. This allows us to maintain elegant and intuitive code even when developing large-scale business systems, improving development efficiency and experience while facilitating subsequent code iteration and maintenance
+Some frameworks use the simplest use cases to demonstrate design elegance, ignoring the coding challenges presented by business complexity. As business grows and changes, project code quickly degrades and becomes difficult to maintain. Vona, however, addresses the complexity of large-scale businesses and proposes a series of engineering solutions. This allows us to maintain elegant and intuitive code even when developing large-scale business systems, improving development efficiency and experience while facilitating subsequent code iteration and maintenance
 
 ## With UI libraries
 
