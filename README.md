@@ -15,6 +15,10 @@ Zova is a more intuitive framework with the pros of Vue3, React and Angular, emp
 [download-image]: https://img.shields.io/npm/dm/zova?color=orange&label=npm%20downloads
 [download-url]: https://npmjs.com/package/zova
 
+## Philosophy
+
+Many frameworks use the simplest use cases to demonstrate design elegance, ignoring the coding challenges presented by business complexity. As business grows and changes, project code quickly degrades and becomes difficult to maintain. Vona, however, addresses the complexity of large-scale businesses and proposes a series of engineering solutions. This allows us to maintain elegant and intuitive code even when developing large-scale business systems, improving development efficiency and experience while facilitating subsequent code iteration and maintenance
+
 ## With UI libraries
 
 Zova can be used with any UI library and comes with built-in project templates for several UI libraries, making it easy to use out of the box, including:
