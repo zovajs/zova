@@ -16,4 +16,4 @@ args.push(bootstrapFile);
 const rawArgv = process.argv.slice(2);
 args = args.concat(rawArgv);
 
-processHelper.spawnExe({ cmd: 'tsx', args });
+processHelper.spawnCmd({ cmd: 'tsx', args });
