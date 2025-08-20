@@ -88,8 +88,7 @@ export class SysUtil extends BeanSimple {
     );
   }
 
-  // @ts-ignore ignore config
-  getModuleConfigSafe<K extends TypeBeanScopeRecordKeys>(moduleName: K): IBeanScopeRecord[K]['config'] {
+  getModuleConfigSafe<K extends TypeBeanScopeRecordKeys>(moduleName: K): IBeanScopeRecord[K] extends { config?: infer CONFIG } ? CONFIG : undefined {
     const module = this.sys.meta.module.get(moduleName);
     if (module) {
       const scope = this.sys.bean.scope(moduleName);
