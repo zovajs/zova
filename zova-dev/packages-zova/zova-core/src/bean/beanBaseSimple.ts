@@ -4,12 +4,14 @@ import { StateLock } from '../utils/stateLock.js';
 import { BeanSimple } from './beanSimple.js';
 
 export const SymbolBeanFullName = Symbol('SymbolBeanFullName');
+export const SymbolBeanInstanceKey = Symbol('SymbolBeanInstanceKey');
 export const SymbolModuleBelong = Symbol('SymbolModuleBelong');
 export const SymbolModuleName = Symbol('SymbolModuleName');
 export const SymbolInited = Symbol('SymbolInited');
 
 export class BeanBaseSimple extends BeanSimple {
   private [SymbolBeanFullName]: string;
+  private [SymbolBeanInstanceKey]: string;
   // @ts-ignore: ignore
   private [SymbolInited]: StateLock;
 
@@ -32,6 +34,10 @@ export class BeanBaseSimple extends BeanSimple {
 
   public get $beanFullName() {
     return this[SymbolBeanFullName];
+  }
+
+  public get $beanInstanceKey() {
+    return this[SymbolBeanInstanceKey];
   }
 
   protected get $beanOptions(): IDecoratorBeanOptionsBase {

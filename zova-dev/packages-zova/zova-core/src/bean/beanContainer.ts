@@ -23,7 +23,7 @@ import {
 import { cast } from '../types/utils/cast.js';
 import { BeanAopBase } from './beanAopBase.js';
 import { BeanBase } from './beanBase.js';
-import { SymbolBeanFullName, SymbolInited } from './beanBaseSimple.js';
+import { SymbolBeanFullName, SymbolBeanInstanceKey, SymbolInited } from './beanBaseSimple.js';
 import { BeanSimple } from './beanSimple.js';
 import { vueDecorators } from './vueDecorators/index.js';
 
@@ -482,6 +482,7 @@ export class BeanContainer {
       const fullName = await this._getBeanFullNameByComposableOrClass(beanComposable, beanFullName);
       if (fullName) {
         const key = __getSelectorKey(fullName, withSelector, args[0]);
+        __setPropertyValue(beanInstance, SymbolBeanInstanceKey, key, false);
         this[SymbolBeanContainerInstances][key] = beanInstance;
       }
       // always record for app/ctx bean
