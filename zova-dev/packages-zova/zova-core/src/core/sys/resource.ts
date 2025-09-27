@@ -83,7 +83,7 @@ export class AppResource {
     return beanOptions2;
   }
 
-  getBeanFullName<T>(A: Constructable<T> | undefined): keyof IBeanRecord | undefined;
+  getBeanFullName<T>(A: Constructable<T> | undefined): string | undefined;
   getBeanFullName<K extends keyof IBeanRecord>(beanFullName: K | undefined): K | undefined;
   getBeanFullName(beanFullName: string | undefined): string | undefined;
   getBeanFullName(beanFullName) {
