@@ -8,11 +8,13 @@ import { cast } from '../../types/utils/cast.js';
 import { zodEnhance } from '../../utils/zod-enhance.js';
 import { sys } from '../sys/sys.js';
 import { AppMeta } from './meta.js';
+import { AppUtil } from './util.js';
 
 export class ZovaApplication {
   private _reloadDelayTimer: number = 0;
   vue: App;
   bean: BeanContainer;
+  util: AppUtil;
   meta: AppMeta;
   ctx: ZovaContext;
 
@@ -24,6 +26,7 @@ export class ZovaApplication {
     this.bean = ctxRoot.bean;
     cast(this.bean).app = this;
     ctxRoot.app = this;
+    this.util = this.bean._newBeanSimple(AppUtil, false);
     this.meta = this.bean._newBeanSimple(AppMeta, false);
     cast(ctxRoot.instance.appContext).reload = () => {
       this.reloadDelay();
