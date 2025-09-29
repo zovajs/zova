@@ -15,8 +15,11 @@
         {
           "match": [
             "@cabloy/zod-errors-custom",
+            "@cabloy/zod-openapi",
             "@cabloy/zod-query",
-            "zod/lib"
+            "zod/locales",
+            "zod/v4",
+            "zod/index.js"
           ],
           "output": "zod"
         }
@@ -49,8 +52,9 @@
     "_prepublishOnly": "npm run tsc:publish"
   },
   "dependencies": {
-    "@cabloy/zod-errors-custom": "^1.0.3",
-    "@cabloy/zod-query": "^1.0.4",
-    "zod": "^3.25.58"
+    "@cabloy/zod-errors-custom": "^2.0.2",
+    "@cabloy/zod-openapi": "^1.0.2",
+    "@cabloy/zod-query": "^2.0.1",
+    "zod": "^4.1.5"
   }
 }
