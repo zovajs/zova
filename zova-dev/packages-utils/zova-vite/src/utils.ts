@@ -1,6 +1,7 @@
 import type { ZovaConfigMeta, ZovaMetaAppMode, ZovaMetaFlavor } from '@cabloy/module-info';
 import { createRequire } from 'node:module';
 import path from 'node:path';
+import { pathToFileURL } from 'node:url';
 import fse from 'fs-extra';
 import compileTemplate from 'lodash/template.js';
 import parseArgs from 'minimist';
@@ -113,4 +114,14 @@ export async function loadJSONFile(fileName: URL | string) {
 
 export async function saveJSONFile(fileName: URL | string, json: object) {
   await fse.writeFile(fileName, `${JSON.stringify(json, null, 2)}\n`);
+}
+
+export function copyTemplateIfNeed(fileSrc, fileDest) {
+  if (!fse.existsSync(fileDest)) {
+    fse.copyFileSync(fileSrc, fileDest);
+  }
+}
+
+export function pathToHref(fileName: string): string {
+  return pathToFileURL(fileName).href;
 }
