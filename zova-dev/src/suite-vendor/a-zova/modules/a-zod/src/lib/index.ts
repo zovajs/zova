@@ -1,1 +1,0 @@
-import '@cabloy/zod-query';

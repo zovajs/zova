@@ -4,9 +4,6 @@
   "version": "5.0.0",
   "title": "a-zod",
   "zovaModule": {
-    "capabilities": {
-      "preload": true
-    },
     "globalDependencies": {
       "zod": true
     },
