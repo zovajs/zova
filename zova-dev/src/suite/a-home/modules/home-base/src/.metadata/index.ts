@@ -189,6 +189,9 @@ export * from '../monkey.js';
 /** monkeySys: begin */
 export * from '../monkeySys.js';
 /** monkeySys: end */
+/** main: begin */
+export * from '../main.js';
+/** main: end */
 /** scope: begin */
 import { BeanScopeBase, type BeanScopeUtil, TypeModuleLocales, TypeLocaleBase } from 'zova';
 import { Scope } from 'zova-module-a-bean';
