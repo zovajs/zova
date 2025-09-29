@@ -5,6 +5,7 @@ import type { PluginZovaOptions } from '../../types/interface/pluginZova.js';
 import type { ZovaContext } from '../context/context.js';
 import { markRaw } from 'vue';
 import { cast } from '../../types/utils/cast.js';
+import { zodEnhance } from '../../utils/zod-enhance.js';
 import { sys } from '../sys/sys.js';
 import { AppMeta } from './meta.js';
 
@@ -27,6 +28,11 @@ export class ZovaApplication {
     cast(ctxRoot.instance.appContext).reload = () => {
       this.reloadDelay();
     };
+    // only support client
+    if (process.env.CLIENT) {
+      // zod
+      zodEnhance(this);
+    }
   }
 
   /** @internal */

@@ -4,6 +4,7 @@ import type { ZovaConfigEnv } from '../../types/utils/env.js';
 import type { ZovaConfig } from './config.js';
 import type { ZovaConstant } from './constant.js';
 import { BeanContainer } from '../../bean/beanContainer.js';
+import { zodEnhanceSys } from '../../utils/zod-enhance.js';
 import { configDefault } from './config.js';
 import { constantDefault } from './constant.js';
 import { SysMeta } from './meta.js';
@@ -25,6 +26,8 @@ export class ZovaSys {
     this.bean = BeanContainer.create(this, null!, null);
     this.util = this.bean._newBeanSimple(SysUtil, false);
     this.meta = this.bean._newBeanSimple(SysMeta, false);
+    // zod
+    zodEnhanceSys();
   }
 
   /** @internal */
