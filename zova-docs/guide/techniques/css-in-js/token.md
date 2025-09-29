@@ -31,7 +31,6 @@ export interface ThemeToken {
 
 The token interface type definition files of several other UI libraries are as follows:
 
-- antdv: `zova-ui-antdv/src/suite/a-home/modules/home-base/src/themeToken.ts`
 - element: `zova-ui-element/src/suite/a-home/modules/home-base/src/themeToken.ts`
 - quasar: `zova-ui-quasar/src/suite/a-home/modules/home-base/src/themeToken.ts`
 - vuetify: `zova-ui-vuetify/src/suite/a-home/modules/home-base/src/themeToken.ts`

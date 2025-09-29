@@ -67,14 +67,6 @@ $ cd ./zova-dev
 $ npm run dev
 ```
 
-## 如何做: ui-antdv
-
-```bash
-$ cd zova-ui-antdv
-$ pnpm install
-$ npm run dev
-```
-
 ## 如何做: ui-element
 
 ```bash

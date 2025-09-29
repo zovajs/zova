@@ -9,7 +9,6 @@
     "zova-dev/packages-utils/*",
     "zova-dev/src/suite-vendor/*",
     "zova-dev/src/suite-vendor/*/modules/*",
-    "zova-ui-antdv",
     "zova-ui-element",
     "zova-ui-empty",
     "zova-ui-quasar",
