@@ -1,3 +1,5 @@
+import { isNil } from '@cabloy/utils';
+import { ZodMetadata } from '@cabloy/zod-openapi';
 import { z } from 'zod';
 import { ILocaleInfos, Use, usePrepareArg } from 'zova';
 import { BeanModelBase, Model } from 'zova-module-a-model';
@@ -87,16 +89,16 @@ export class ModelSdk extends BeanModelBase {
       queryFn: async () => {
         const queryZodSchema = this.getZodSchema(schemaName);
         if (!queryZodSchema.data) return null;
-        const mask = {};
+        const defaultValues = {};
         const zodSchema = queryZodSchema.data as unknown as z.ZodObject<any>;
         Object.keys(zodSchema.shape).forEach(key => {
           const fieldSchema = zodSchema.shape[key];
-
-          if (fieldSchema.constructor.name === 'ZodDefault') {
-            mask[key] = true;
+          const value = ZodMetadata.getDefaultValue(fieldSchema);
+          if (!isNil(value)) {
+            defaultValues[key] = value;
           }
         });
-        return zodSchema.pick(mask).parse({});
+        return defaultValues;
       },
       staleTime: Infinity,
       meta: {
