@@ -25,7 +25,7 @@ export class ControllerForm extends BeanControllerFormBase {
 
   form: TypeForm;
   formProvider: IFormProvider;
-  zodSchema: z.AnyZodObject | undefined;
+  zodSchema: z.ZodObject<any> | undefined;
   properties: SchemaObject[] | undefined;
 
   @UseScope()
@@ -43,7 +43,7 @@ export class ControllerForm extends BeanControllerFormBase {
     });
     this.zodSchema = this.$useComputed(() => {
       if (!this.$props.schema) return;
-      return schemaToZodSchema<z.AnyZodObject>(this.$props.schema);
+      return schemaToZodSchema<z.ZodObject<any>>(this.$props.schema);
     });
     this.properties = this.$useComputed(() => {
       return loadSchemaProperties(this.$props.schema, 'form');

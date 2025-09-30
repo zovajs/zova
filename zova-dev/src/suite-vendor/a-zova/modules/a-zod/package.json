@@ -5,6 +5,7 @@
   "title": "a-zod",
   "zovaModule": {
     "globalDependencies": {
+      "@cabloy/zod-openapi": true,
       "zod": true
     },
     "bundle": {

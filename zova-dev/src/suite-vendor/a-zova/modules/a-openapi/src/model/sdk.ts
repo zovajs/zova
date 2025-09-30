@@ -88,9 +88,10 @@ export class ModelSdk extends BeanModelBase {
         const queryZodSchema = this.getZodSchema(schemaName);
         if (!queryZodSchema.data) return null;
         const mask = {};
-        const zodSchema = queryZodSchema.data as unknown as z.AnyZodObject;
+        const zodSchema = queryZodSchema.data as unknown as z.ZodObject<any>;
         Object.keys(zodSchema.shape).forEach(key => {
           const fieldSchema = zodSchema.shape[key];
+
           if (fieldSchema.constructor.name === 'ZodDefault') {
             mask[key] = true;
           }
