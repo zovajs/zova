@@ -6,7 +6,6 @@ import { OpenApiBaseURL } from './openapi/index.js';
 export const ApiApiHomeUserPassportcurrentPath = '/api/home/user/passport/current';
 export type ApiApiHomeUserPassportcurrentPath = '/api/home/user/passport/current';
 export type ApiApiHomeUserPassportcurrentMethod = 'get';
-export type ApiApiHomeUserPassportcurrentRequestHeaders = paths[ApiApiHomeUserPassportcurrentPath][ApiApiHomeUserPassportcurrentMethod]['parameters']['header'];
 export type ApiApiHomeUserPassportcurrentResponseBody = paths[ApiApiHomeUserPassportcurrentPath][ApiApiHomeUserPassportcurrentMethod]['responses']['200']['content']['application/json']['data'];
 
 /** HomeUserPassport_logout */
@@ -16,21 +15,29 @@ export type ApiApiHomeUserPassportlogoutMethod = 'post';
 export type ApiApiHomeUserPassportlogoutRequestHeaders = paths[ApiApiHomeUserPassportlogoutPath][ApiApiHomeUserPassportlogoutMethod]['parameters']['header'];
 export type ApiApiHomeUserPassportlogoutResponseBody = paths[ApiApiHomeUserPassportlogoutPath][ApiApiHomeUserPassportlogoutMethod]['responses']['200']['content']['application/json']['data'];
 
-/** HomeUserPassport_loginSimple */
-export const ApiApiHomeUserPassportloginSimplePath = '/api/home/user/passport/login';
-export type ApiApiHomeUserPassportloginSimplePath = '/api/home/user/passport/login';
-export type ApiApiHomeUserPassportloginSimpleMethod = 'post';
-export type ApiApiHomeUserPassportloginSimpleRequestBody = components['schemas']['a-authsimple.dto.authSimple']
+/** HomeUserPassport_register */
+export const ApiApiHomeUserPassportregisterPath = '/api/home/user/passport/register';
+export type ApiApiHomeUserPassportregisterPath = '/api/home/user/passport/register';
+export type ApiApiHomeUserPassportregisterMethod = 'post';
+export type ApiApiHomeUserPassportregisterRequestBody = components['schemas']['home-user.dto.register']
 ;
-export type ApiApiHomeUserPassportloginSimpleResponseBody = paths[ApiApiHomeUserPassportloginSimplePath][ApiApiHomeUserPassportloginSimpleMethod]['responses']['200']['content']['application/json']['data'];
+export type ApiApiHomeUserPassportregisterResponseBody = paths[ApiApiHomeUserPassportregisterPath][ApiApiHomeUserPassportregisterMethod]['responses']['200']['content']['application/json']['data'];
 
 /** HomeUserPassport_login */
-export const ApiApiHomeUserPassportloginPath = '/api/home/user/passport/login/{module}/{providerName}/{clientName?}';
-export type ApiApiHomeUserPassportloginPath = '/api/home/user/passport/login/{module}/{providerName}/{clientName?}';
-export type ApiApiHomeUserPassportloginMethod = 'get';
-export type ApiApiHomeUserPassportloginRequestParams = paths[ApiApiHomeUserPassportloginPath][ApiApiHomeUserPassportloginMethod]['parameters']['path'];
-export type ApiApiHomeUserPassportloginRequestQuery = paths[ApiApiHomeUserPassportloginPath][ApiApiHomeUserPassportloginMethod]['parameters']['query'];
+export const ApiApiHomeUserPassportloginPath = '/api/home/user/passport/login';
+export type ApiApiHomeUserPassportloginPath = '/api/home/user/passport/login';
+export type ApiApiHomeUserPassportloginMethod = 'post';
+export type ApiApiHomeUserPassportloginRequestBody = components['schemas']['home-user.dto.login']
+;
 export type ApiApiHomeUserPassportloginResponseBody = paths[ApiApiHomeUserPassportloginPath][ApiApiHomeUserPassportloginMethod]['responses']['200']['content']['application/json']['data'];
+
+/** HomeUserPassport_loginOauth */
+export const ApiApiHomeUserPassportloginOauthPath = '/api/home/user/passport/login/{module}/{providerName}/{clientName?}';
+export type ApiApiHomeUserPassportloginOauthPath = '/api/home/user/passport/login/{module}/{providerName}/{clientName?}';
+export type ApiApiHomeUserPassportloginOauthMethod = 'get';
+export type ApiApiHomeUserPassportloginOauthRequestParams = paths[ApiApiHomeUserPassportloginOauthPath][ApiApiHomeUserPassportloginOauthMethod]['parameters']['path'];
+export type ApiApiHomeUserPassportloginOauthRequestQuery = paths[ApiApiHomeUserPassportloginOauthPath][ApiApiHomeUserPassportloginOauthMethod]['parameters']['query'];
+export type ApiApiHomeUserPassportloginOauthResponseBody = paths[ApiApiHomeUserPassportloginOauthPath][ApiApiHomeUserPassportloginOauthMethod]['responses']['200']['content']['application/json']['data'];
 
 /** HomeUserPassport_associate */
 export const ApiApiHomeUserPassportassociatePath = '/api/home/user/passport/associate/{module}/{providerName}/{clientName?}';
@@ -68,17 +75,23 @@ export interface ApiApiHomeUserPassportcreatePassportJwtFromOauthCodeRequestBody
 }
 export type ApiApiHomeUserPassportcreatePassportJwtFromOauthCodeResponseBody = paths[ApiApiHomeUserPassportcreatePassportJwtFromOauthCodePath][ApiApiHomeUserPassportcreatePassportJwtFromOauthCodeMethod]['responses']['200']['content']['application/json']['data'];
 
+/** HomeUserPassport_createTempAuthToken */
+export const ApiApiHomeUserPassportcreateTempAuthTokenPath = '/api/home/user/passport/createTempAuthToken';
+export type ApiApiHomeUserPassportcreateTempAuthTokenPath = '/api/home/user/passport/createTempAuthToken';
+export type ApiApiHomeUserPassportcreateTempAuthTokenMethod = 'post';
+export type ApiApiHomeUserPassportcreateTempAuthTokenRequestQuery = paths[ApiApiHomeUserPassportcreateTempAuthTokenPath][ApiApiHomeUserPassportcreateTempAuthTokenMethod]['parameters']['query'];
+export type ApiApiHomeUserPassportcreateTempAuthTokenRequestHeaders = paths[ApiApiHomeUserPassportcreateTempAuthTokenPath][ApiApiHomeUserPassportcreateTempAuthTokenMethod]['parameters']['header'];
+export type ApiApiHomeUserPassportcreateTempAuthTokenResponseBody = paths[ApiApiHomeUserPassportcreateTempAuthTokenPath][ApiApiHomeUserPassportcreateTempAuthTokenMethod]['responses']['200']['content']['application/json']['data'];
+
 @Api()
 export class ApiHomeUserPassport extends BeanApiBase {
   current(
 
-    options?: {
-      headers?: ApiApiHomeUserPassportcurrentRequestHeaders;
-    } & IApiActionOptions,
+    options?: IApiActionOptions,
   ) {
     return this.$fetch.get<any, ApiApiHomeUserPassportcurrentResponseBody>(
       ApiApiHomeUserPassportcurrentPath,
-      this.$configPrepare(OpenApiBaseURL(this.sys), options, true),
+      this.$configPrepare(OpenApiBaseURL(this.sys), options),
     );
   }
 
@@ -95,26 +108,37 @@ export class ApiHomeUserPassport extends BeanApiBase {
     );
   }
 
-  loginSimple(
-    body: ApiApiHomeUserPassportloginSimpleRequestBody,
+  register(
+    body: ApiApiHomeUserPassportregisterRequestBody,
     options?: IApiActionOptions,
   ) {
-    return this.$fetch.post<any, ApiApiHomeUserPassportloginSimpleResponseBody>(
-      ApiApiHomeUserPassportloginSimplePath,
+    return this.$fetch.post<any, ApiApiHomeUserPassportregisterResponseBody>(
+      ApiApiHomeUserPassportregisterPath,
       body,
       this.$configPrepare(OpenApiBaseURL(this.sys), options),
     );
   }
 
   login(
+    body: ApiApiHomeUserPassportloginRequestBody,
+    options?: IApiActionOptions,
+  ) {
+    return this.$fetch.post<any, ApiApiHomeUserPassportloginResponseBody>(
+      ApiApiHomeUserPassportloginPath,
+      body,
+      this.$configPrepare(OpenApiBaseURL(this.sys), options),
+    );
+  }
+
+  loginOauth(
 
     options: {
-      params: ApiApiHomeUserPassportloginRequestParams;
-      query?: ApiApiHomeUserPassportloginRequestQuery;
+      params: ApiApiHomeUserPassportloginOauthRequestParams;
+      query?: ApiApiHomeUserPassportloginOauthRequestQuery;
     } & IApiActionOptions,
   ) {
-    return this.$fetch.get<any, ApiApiHomeUserPassportloginResponseBody>(
-      this.$pathTranslate(ApiApiHomeUserPassportloginPath, options.params),
+    return this.$fetch.get<any, ApiApiHomeUserPassportloginOauthResponseBody>(
+      this.$pathTranslate(ApiApiHomeUserPassportloginOauthPath, options.params),
       this.$configPrepare(OpenApiBaseURL(this.sys), options),
     );
   }
@@ -166,6 +190,20 @@ export class ApiHomeUserPassport extends BeanApiBase {
       ApiApiHomeUserPassportcreatePassportJwtFromOauthCodePath,
       body,
       this.$configPrepare(OpenApiBaseURL(this.sys), options),
+    );
+  }
+
+  createTempAuthToken(
+    body?: undefined,
+    options?: {
+      query?: ApiApiHomeUserPassportcreateTempAuthTokenRequestQuery;
+      headers?: ApiApiHomeUserPassportcreateTempAuthTokenRequestHeaders;
+    } & IApiActionOptions,
+  ) {
+    return this.$fetch.post<any, ApiApiHomeUserPassportcreateTempAuthTokenResponseBody>(
+      ApiApiHomeUserPassportcreateTempAuthTokenPath,
+      body,
+      this.$configPrepare(OpenApiBaseURL(this.sys), options, true),
     );
   }
 }
