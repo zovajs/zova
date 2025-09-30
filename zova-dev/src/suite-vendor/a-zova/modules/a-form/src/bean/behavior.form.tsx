@@ -21,7 +21,7 @@ export interface IBehaviorOptionsForm<TFormData = unknown> extends IDecoratorBeh
   formMeta?: IFormMeta;
   formProvider?: IFormProvider;
   schema?: SchemaObject;
-  zodSchema?: z.AnyZodObject;
+  zodSchema?: z.ZodObject<any>;
   properties?: SchemaObject[];
   formField?: IFormFieldOptionsBase;
   formFieldLayout?: IFormFieldLayoutOptionsBase;
@@ -34,7 +34,7 @@ export class BehaviorForm<TFormData = unknown> extends BeanBehaviorBase<
   IBehaviorPropsInputForm,
   IBehaviorPropsOutputForm
 > {
-  zodSchema?: z.AnyZodObject;
+  zodSchema?: z.ZodObject<any>;
   properties?: SchemaObject[];
 
   @UseScope()
@@ -46,7 +46,7 @@ export class BehaviorForm<TFormData = unknown> extends BeanBehaviorBase<
     this.zodSchema = this.$useComputed(() => {
       if (this.$options.zodSchema) return this.$options.zodSchema;
       if (!this.schema) return;
-      return schemaToZodSchema<z.AnyZodObject>(this.schema);
+      return schemaToZodSchema<z.ZodObject<any>>(this.schema);
     });
     this.properties = this.$useComputed(() => {
       if (this.$options.properties) return this.$options.properties;
