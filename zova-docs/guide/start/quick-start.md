@@ -13,7 +13,8 @@ $ npm install -g pnpm
 - install command-line tools
 
 ```bash
-$ pnpm add -g zova-cli
+$ pnpm add -g tsx@latest
+$ pnpm add -g zova-cli@latest
 ```
 
 - VS Code Extension: [Zova - Official](https://marketplace.visualstudio.com/items?itemName=cabloy.zova-vscode)

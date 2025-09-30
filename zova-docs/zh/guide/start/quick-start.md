@@ -13,7 +13,8 @@ $ npm install -g pnpm
 - 命令行工具：zova-cli
 
 ```bash
-$ pnpm add -g zova-cli
+$ pnpm add -g tsx@latest
+$ pnpm add -g zova-cli@latest
 ```
 
 - VS Code 插件：[Zova - Official](https://marketplace.visualstudio.com/items?itemName=cabloy.zova-vscode)
