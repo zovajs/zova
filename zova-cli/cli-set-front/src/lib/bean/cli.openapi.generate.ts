@@ -211,11 +211,8 @@ export const OpenApiBaseURL = (sys: ZovaSys) => {
     const nodeTypeInfoParameters = _parseNodeType(nodeActionInfo.nodeTypeInfo.parameters.nodeType)!;
     // authToken
     let contentAuthToken = '';
-    if (nodeTypeInfoParameters.header) {
-      const nodeTypeInfoParametersHeader = _parseNodeType(nodeTypeInfoParameters.header.nodeType)!;
-      if (nodeTypeInfoParametersHeader?.Authorization) {
-        contentAuthToken = ', true';
-      }
+    if (nodeActionInfo.nodeTypeInfo.authToken) {
+      contentAuthToken = ', true';
     }
     for (const key of ['path', 'query', 'header']) {
       if (_isNodeNever(nodeTypeInfoParameters[key].nodeType)) continue;

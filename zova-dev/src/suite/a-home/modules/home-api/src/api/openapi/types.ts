@@ -1738,6 +1738,7 @@ export interface operations {
         };
       };
     };
+    authToken: true;
   };
   HomeUserPassport_register: {
     parameters: {
@@ -1852,6 +1853,7 @@ export interface operations {
         };
       };
     };
+    authToken: true;
   };
   HomeUserPassport_migrate: {
     parameters: {
@@ -1883,6 +1885,7 @@ export interface operations {
         };
       };
     };
+    authToken: true;
   };
   HomeUserPassport_refreshAuthToken: {
     parameters: {
@@ -1968,6 +1971,7 @@ export interface operations {
         };
       };
     };
+    authToken: true;
   };
   Captcha_create: {
     parameters: {
@@ -2141,6 +2145,7 @@ export interface operations {
         };
       };
     };
+    authToken: true;
   };
   DemoStudent_create: {
     parameters: {
@@ -2195,6 +2200,7 @@ export interface operations {
         };
       };
     };
+    authToken: true;
   };
   DemoStudent_remove: {
     parameters: {
@@ -2222,6 +2228,7 @@ export interface operations {
         };
       };
     };
+    authToken: true;
   };
   DemoStudent_update: {
     parameters: {
@@ -2278,6 +2285,7 @@ export interface operations {
         };
       };
     };
+    authToken: true;
   };
   Home_index: {
     parameters: {
@@ -2326,6 +2334,7 @@ export interface operations {
         };
       };
     };
+    authToken: true;
   };
   TestRestProduct_findMany: {
     parameters: {
@@ -2360,6 +2369,7 @@ export interface operations {
         };
       };
     };
+    authToken: true;
   };
   TestRestProduct_create: {
     parameters: {
@@ -2389,6 +2399,7 @@ export interface operations {
         };
       };
     };
+    authToken: true;
   };
   TestRestProduct_findOne: {
     parameters: {
@@ -2416,6 +2427,7 @@ export interface operations {
         };
       };
     };
+    authToken: true;
   };
   TestRestProduct_remove: {
     parameters: {
@@ -2443,6 +2455,7 @@ export interface operations {
         };
       };
     };
+    authToken: true;
   };
   TestRestProduct_update: {
     parameters: {
@@ -2474,6 +2487,7 @@ export interface operations {
         };
       };
     };
+    authToken: true;
   };
   TestSsrToolOne_testGet: {
     parameters: {
@@ -2503,6 +2517,7 @@ export interface operations {
         };
       };
     };
+    authToken: true;
   };
   TestSsrToolOne_test: {
     parameters: {
@@ -2536,6 +2551,7 @@ export interface operations {
         };
       };
     };
+    authToken: true;
   };
   TestSsrToolTwo_test: {
     parameters: {
@@ -2615,6 +2631,7 @@ export interface operations {
         };
       };
     };
+    authToken: true;
   };
   TestVonaDtoTest_getPostDynamic: {
     parameters: {
@@ -2667,6 +2684,7 @@ export interface operations {
         };
       };
     };
+    authToken: true;
   };
   TestVonaDtoTest_getUserStats: {
     parameters: {
@@ -2719,6 +2737,7 @@ export interface operations {
         };
       };
     };
+    authToken: true;
   };
   TestVonaDtoTest_getUserStatsGroup: {
     parameters: {
@@ -2771,6 +2790,7 @@ export interface operations {
         };
       };
     };
+    authToken: true;
   };
   TestVonaDtoTest_createUser: {
     parameters: {
@@ -2800,6 +2820,7 @@ export interface operations {
         };
       };
     };
+    authToken: true;
   };
   TestVonaDtoTest_updateUser: {
     parameters: {
@@ -2831,6 +2852,7 @@ export interface operations {
         };
       };
     };
+    authToken: true;
   };
   TestVonaDtoTest_getCategoryTree: {
     parameters: {
@@ -2861,6 +2883,7 @@ export interface operations {
         };
       };
     };
+    authToken: true;
   };
   TestVonaDtoTest_getCategoryTree2: {
     parameters: {
@@ -2886,6 +2909,7 @@ export interface operations {
         };
       };
     };
+    authToken: true;
   };
   TestVonaGuardPassport_testUserName: {
     parameters: {
@@ -2911,6 +2935,7 @@ export interface operations {
         };
       };
     };
+    authToken: true;
   };
   TestVonaGuardPassport_testUserNameFail: {
     parameters: {
@@ -2936,6 +2961,7 @@ export interface operations {
         };
       };
     };
+    authToken: true;
   };
   TestVonaGuardPassport_testRoleName: {
     parameters: {
@@ -2961,6 +2987,7 @@ export interface operations {
         };
       };
     };
+    authToken: true;
   };
   TestVonaGuardPassport_testRoleNameFail: {
     parameters: {
@@ -2986,6 +3013,7 @@ export interface operations {
         };
       };
     };
+    authToken: true;
   };
   Onion_index: {
     parameters: {
@@ -3185,6 +3213,7 @@ export interface operations {
         };
       };
     };
+    authToken: true;
   };
   TestVonaOrder_create: {
     parameters: {
@@ -3214,6 +3243,7 @@ export interface operations {
         };
       };
     };
+    authToken: true;
   };
   TestVonaOrder_update: {
     parameters: {
@@ -3245,6 +3275,7 @@ export interface operations {
         };
       };
     };
+    authToken: true;
   };
   TestVonaOrder_findAll: {
     parameters: {
@@ -3279,6 +3310,7 @@ export interface operations {
         };
       };
     };
+    authToken: true;
   };
   TestVonaOrder_findMany: {
     parameters: {
@@ -3314,6 +3346,7 @@ export interface operations {
         };
       };
     };
+    authToken: true;
   };
   TestVonaPost_group: {
     parameters: {
@@ -3339,6 +3372,7 @@ export interface operations {
         };
       };
     };
+    authToken: true;
   };
   TestVonaPost_aggregate: {
     parameters: {
@@ -3364,6 +3398,7 @@ export interface operations {
         };
       };
     };
+    authToken: true;
   };
   TestVonaPost_findManyEcho: {
     parameters: {
