@@ -2145,9 +2145,7 @@ export interface operations {
   DemoStudent_create: {
     parameters: {
       query?: never;
-      header?: {
-        Authorization?: string | null;
-      };
+      header?: never;
       path?: never;
       cookie?: never;
     };
@@ -2228,9 +2226,7 @@ export interface operations {
   DemoStudent_update: {
     parameters: {
       query?: never;
-      header?: {
-        Authorization?: string | null;
-      };
+      header?: never;
       path: {
         id: unknown;
       };

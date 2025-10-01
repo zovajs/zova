@@ -4,6 +4,7 @@ import type { ZovaOpenapiConfig, ZovaOpenapiConfigModule } from 'zova-openapi';
 import path from 'node:path';
 import { BeanCliBase } from '@cabloy/cli';
 import { extend } from '@cabloy/extend';
+import { catchError } from '@cabloy/utils';
 import { matchSelector, toLowerCaseFirstChar, toUpperCaseFirstChar } from '@cabloy/word-utils';
 import fse from 'fs-extra';
 import openapiTS, { astToString, UNDEFINED } from 'openapi-typescript';
@@ -104,7 +105,13 @@ export class CliOpenapiGenerate extends BeanCliBase {
     // cache
     let cache = __caches[moduleConfig.source];
     if (!cache) {
-      const ast = await openapiTS(moduleConfig.source, _patchOpenapiTSOptions(moduleConfig.options));
+      const [ast, error] = await catchError(() => {
+        return openapiTS(moduleConfig.source!, _patchOpenapiTSOptions(moduleConfig.options));
+      });
+      if (error) {
+        error.message = `${error.message}: ${moduleConfig.source}`;
+        throw error;
+      }
       const contents = astToString(ast);
       cache = __caches[moduleConfig.source] = { ast, contents };
     }
