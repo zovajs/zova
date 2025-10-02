@@ -16,6 +16,7 @@ async function __generateOperationObject() {
   copyTemplateIfNeed(fileSrc, fileSrcBak);
   const content = fse.readFileSync(fileSrcBak).toString();
   const contentNew = content
+    .replace(', NEVER', ', NEVER, TRUE')
     .replace(
       'return type;',
       `if(operationObject.security){
