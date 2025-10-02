@@ -7,7 +7,6 @@ import { extend } from '@cabloy/extend';
 import { catchError } from '@cabloy/utils';
 import { matchSelector, toLowerCaseFirstChar, toUpperCaseFirstChar } from '@cabloy/word-utils';
 import fse from 'fs-extra';
-import openapiTS, { astToString, UNDEFINED } from 'openapi-typescript';
 import { rimraf } from 'rimraf';
 import ts from 'typescript';
 import { generateOpenapiTypescript } from '../common/generateOpenapiTypescript.ts';
@@ -63,6 +62,7 @@ export class CliOpenapiGenerate extends BeanCliBase {
     if (moduleNames.length === 0) return;
     // openapi-typescript
     await generateOpenapiTypescript();
+    const openapiTypescript = await import('openapi-typescript');
     // loop
     const total = moduleNames.length;
     const __caches: TypeAstCaches = {};
@@ -77,11 +77,11 @@ export class CliOpenapiGenerate extends BeanCliBase {
       // generate res
       const moduleInfo = this.helper.parseModuleInfo(moduleName);
       const module = this.helper.findModule(moduleName);
-      await this._generateOpenapi(config, moduleInfo, module, __caches);
+      await this._generateOpenapi(openapiTypescript, config, moduleInfo, module, __caches);
     }
   }
 
-  async _generateOpenapi(config: ZovaOpenapiConfig, moduleInfo: IModuleInfo, module: IModule, __caches: TypeAstCaches) {
+  async _generateOpenapi(openapiTypescript: any, config: ZovaOpenapiConfig, moduleInfo: IModuleInfo, module: IModule, __caches: TypeAstCaches) {
     const { argv } = this.context;
     // config file
     const configFile = path.join(module.root, 'cli/openapi.config.ts');
@@ -91,14 +91,15 @@ export class CliOpenapiGenerate extends BeanCliBase {
     const configInstance = await this.helper.importDynamic(configFile);
     const moduleConfigCli = (await configInstance.default()) as ZovaOpenapiConfigModule;
     const moduleConfig = extend(true, {}, config.default, moduleConfigCli, config.modules[moduleInfo.relativeName]);
-    const cache = await this._outputFiles(moduleConfig, moduleInfo, module, __caches);
+    const cache = await this._outputFiles(openapiTypescript, moduleConfig, moduleInfo, module, __caches);
     // generate
-    await this._generateApis(cache.ast, moduleConfig, moduleInfo, module);
+    await this._generateApis(openapiTypescript, cache.ast, moduleConfig, moduleInfo, module);
     // tools.metadata
     await this.helper.invokeCli([':tools:metadata', moduleInfo.relativeName], { cwd: argv.projectPath });
   }
 
   async _outputFiles(
+    openapiTypescript: any,
     moduleConfig: ZovaOpenapiConfigModule,
     _moduleInfo: IModuleInfo,
     module: IModule,
@@ -109,14 +110,14 @@ export class CliOpenapiGenerate extends BeanCliBase {
     let cache = __caches[moduleConfig.source];
     if (!cache) {
       const [ast, error] = await catchError(() => {
-        return openapiTS(moduleConfig.source!, _patchOpenapiTSOptions(moduleConfig.options));
+        return openapiTypescript.default(moduleConfig.source!, _patchOpenapiTSOptions(moduleConfig.options));
       });
       if (error) {
         error.message = `${error.message}: ${moduleConfig.source}`;
         throw error;
       }
-      const contents = astToString(ast);
-      cache = __caches[moduleConfig.source] = { ast, contents };
+      const contents = openapiTypescript.astToString(ast as any);
+      cache = __caches[moduleConfig.source] = { ast: ast as any, contents };
     }
     // rimraf
     await rimraf(path.join(module.root, 'src/api'));
@@ -177,6 +178,7 @@ export const OpenApiBaseURL = (sys: ZovaSys) => {
   }
 
   async _generateApis(
+    openapiTypescript: any,
     ast: ts.Node[],
     moduleConfig: ZovaOpenapiConfigModule,
     _moduleInfo: IModuleInfo,
@@ -188,13 +190,13 @@ export const OpenApiBaseURL = (sys: ZovaSys) => {
       const apiNameLower = toLowerCaseFirstChar(apiName);
       const nodeApi = nodeApis[apiName];
       const apiFile = path.join(module.root, `src/api/${apiNameLower}.ts`);
-      const apiContent = this._generateApi(ast, apiName, nodeApi);
+      const apiContent = this._generateApi(openapiTypescript, ast, apiName, nodeApi);
       await fse.outputFile(apiFile, apiContent);
       await this.helper.formatFile({ fileName: apiFile });
     }
   }
 
-  _generateAction(ast: ts.Node[], nodeActionInfo: INodeActionInfo) {
+  _generateAction(openapiTypescript: any, ast: ts.Node[], nodeActionInfo: INodeActionInfo) {
     // pathInfo
     const pathInfo = _getRequestPathInfo(ast, nodeActionInfo);
     // contentTypes
@@ -241,7 +243,7 @@ export const OpenApiBaseURL = (sys: ZovaSys) => {
       const nodeRequestBodyContentInfo = _parseNodeType(nodeRequestBodyInfo.content.nodeType)!;
       const nodeRequestBodyApplicationJson = nodeRequestBodyContentInfo['application/json'] ?? nodeRequestBodyContentInfo['multipart/form-data'];
       isUpload = !!nodeRequestBodyContentInfo['multipart/form-data'];
-      const typeRequestBody = astToString(nodeRequestBodyApplicationJson.nodeType);
+      const typeRequestBody = openapiTypescript.astToString(nodeRequestBodyApplicationJson.nodeType);
       contentTypes.push(`export type ${nameRequestBody} = ${typeRequestBody};`);
     }
     // name: response body
@@ -297,12 +299,12 @@ export const OpenApiBaseURL = (sys: ZovaSys) => {
     return [contentTypes.join('\n'), contentSignature];
   }
 
-  _generateApi(ast: ts.Node[], apiName: string, nodeApi: Record<string, INodeActionInfo>) {
+  _generateApi(openapiTypescript: any, ast: ts.Node[], apiName: string, nodeApi: Record<string, INodeActionInfo>) {
     const contentTypes: string[] = [];
     const contentSignatures: string[] = [];
     for (const actionName in nodeApi) {
       const nodeActionInfo = nodeApi[actionName];
-      const contentAction = this._generateAction(ast, nodeActionInfo);
+      const contentAction = this._generateAction(openapiTypescript, ast, nodeActionInfo);
       contentTypes.push(contentAction[0]);
       contentSignatures.push(contentAction[1]);
     }
@@ -427,6 +429,7 @@ function _checkOperationIdEnabled(moduleConfig: ZovaOpenapiConfigModule, selecto
 */
 const BLOB = ts.factory.createTypeReferenceNode(ts.factory.createIdentifier('Blob')); // `Blob`
 const NULL = ts.factory.createLiteralTypeNode(ts.factory.createNull()); // `null`
+const UNDEFINED = ts.factory.createKeywordTypeNode(ts.SyntaxKind.UndefinedKeyword);
 
 function _patchOpenapiTSOptions(options?: OpenAPITSOptions) {
   const transformCustom = options?.transform;
