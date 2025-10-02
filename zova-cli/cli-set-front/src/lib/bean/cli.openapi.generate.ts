@@ -10,6 +10,7 @@ import fse from 'fs-extra';
 import openapiTS, { astToString, UNDEFINED } from 'openapi-typescript';
 import { rimraf } from 'rimraf';
 import ts from 'typescript';
+import { generateOpenapiTypescript } from '../common/generateOpenapiTypescript.ts';
 
 declare module '@cabloy/cli' {
   interface ICommandArgv {}
@@ -60,6 +61,8 @@ export class CliOpenapiGenerate extends BeanCliBase {
         .map(item => item.info.relativeName);
     }
     if (moduleNames.length === 0) return;
+    // openapi-typescript
+    await generateOpenapiTypescript();
     // loop
     const total = moduleNames.length;
     const __caches: TypeAstCaches = {};

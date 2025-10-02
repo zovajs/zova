@@ -54,7 +54,7 @@
     "postpack": "clean-package restore"
   },
   "dependencies": {
-    "openapi-typescript": "^7.6.1"
+    "openapi-typescript": "^7.9.1"
   },
   "devDependencies": {
     "clean-package": "^2.2.0",
