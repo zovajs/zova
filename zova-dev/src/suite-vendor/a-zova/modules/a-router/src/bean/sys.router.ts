@@ -92,7 +92,7 @@ export class SysRouter extends BeanBase {
     return route;
   }
 
-  public checkPathValid(to?: { name?: string; path?: string } | string): boolean {
+  public checkPathValid(to?: { name?: string; path?: string | null | undefined } | string | null | undefined): boolean {
     const _name = to && typeof to === 'object' ? to.name : undefined;
     const _path = to && typeof to === 'object' ? (to.name ?? to.path) : to;
     // legacy
@@ -143,7 +143,7 @@ export class SysRouter extends BeanBase {
   /** @internal */
   public _findLegacyRoute(
     name: string | symbol | null | undefined,
-    path: string | undefined,
+    path: string | null | undefined,
   ): IModuleRoute | undefined {
     const legacyRoutes = cast(this.sys.meta).legacyRoutes;
     if (!legacyRoutes) return;
