@@ -161,7 +161,7 @@ export class SysRouter extends BeanBase {
     return getRealRouteName(name);
   }
 
-  isRouterName(name?: string): boolean {
+  isRouterName(name?: string | null | undefined): boolean {
     return isRouterName(name);
   }
 

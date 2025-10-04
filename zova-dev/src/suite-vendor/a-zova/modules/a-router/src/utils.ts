@@ -17,6 +17,6 @@ export function getRealRouteName(name?: string | symbol | null): string | undefi
   return name;
 }
 
-export function isRouterName(name?: string): boolean {
+export function isRouterName(name?: string | null | undefined): boolean {
   return !!name && name.includes(':') && !name.includes('/');
 }
