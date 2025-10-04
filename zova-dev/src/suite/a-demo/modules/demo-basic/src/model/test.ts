@@ -6,8 +6,8 @@ export class ModelTest extends BeanModelBase {
     return this.$useStateData({
       queryKey: ['test'],
       queryFn: async () => {
-        const data = await this.$api.testSsrToolOne.test({ id: 1, name: 'Tom', married: true, details: [] }, {
-          params: { id: 1 },
+        const data = await this.$api.testSsrToolOne.test({ id: '1', name: 'Tom', married: true, details: [] }, {
+          params: { id: '1' },
           query: { name: 'Tom' },
         });
         return data;
