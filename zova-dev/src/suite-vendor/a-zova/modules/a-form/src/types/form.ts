@@ -10,6 +10,8 @@ export type TypeForm<
   TFormOnBlurAsync extends undefined | FormAsyncValidateOrFn<TFormData> = undefined | FormAsyncValidateOrFn<TFormData>,
   TFormOnSubmit extends undefined | FormValidateOrFn<TFormData> = undefined | FormValidateOrFn<TFormData>,
   TFormOnSubmitAsync extends undefined | FormAsyncValidateOrFn<TFormData> = undefined | FormAsyncValidateOrFn<TFormData>,
+  TFormOnDynamic extends undefined | FormValidateOrFn<TFormData> = undefined | FormValidateOrFn<TFormData>,
+  TFormOnDynamicAsync extends undefined | FormAsyncValidateOrFn<TFormData> = undefined | FormAsyncValidateOrFn<TFormData>,
   TFormOnServer extends undefined | FormAsyncValidateOrFn<TFormData> = undefined | FormAsyncValidateOrFn<TFormData>,
   TSubmitMeta = never,
 >
@@ -22,6 +24,8 @@ export type TypeForm<
    TFormOnBlurAsync,
    TFormOnSubmit,
    TFormOnSubmitAsync,
+   TFormOnDynamic,
+   TFormOnDynamicAsync,
    TFormOnServer,
    TSubmitMeta
  >>;
@@ -35,6 +39,8 @@ export type TypeBehaviorFormOptions<
   TFormOnBlurAsync extends undefined | FormAsyncValidateOrFn<TFormData> = undefined | FormAsyncValidateOrFn<TFormData>,
   TFormOnSubmit extends undefined | FormValidateOrFn<TFormData> = undefined | FormValidateOrFn<TFormData>,
   TFormOnSubmitAsync extends undefined | FormAsyncValidateOrFn<TFormData> = undefined | FormAsyncValidateOrFn<TFormData>,
+  TFormOnDynamic extends undefined | FormValidateOrFn<TFormData> = undefined | FormValidateOrFn<TFormData>,
+  TFormOnDynamicAsync extends undefined | FormAsyncValidateOrFn<TFormData> = undefined | FormAsyncValidateOrFn<TFormData>,
   TFormOnServer extends undefined | FormAsyncValidateOrFn<TFormData> = undefined | FormAsyncValidateOrFn<TFormData>,
   TSubmitMeta = never,
 >
@@ -47,6 +53,8 @@ export type TypeBehaviorFormOptions<
    TFormOnBlurAsync,
    TFormOnSubmit,
    TFormOnSubmitAsync,
+   TFormOnDynamic,
+   TFormOnDynamicAsync,
    TFormOnServer,
    TSubmitMeta
  >;
@@ -64,6 +72,9 @@ export type TypeFormField<
   TOnSubmit extends undefined | FieldValidateOrFn<TParentData, TName, TData> = undefined | FieldValidateOrFn<TParentData, TName, TData>,
   TOnSubmitAsync
   extends undefined | FieldAsyncValidateOrFn<TParentData, TName, TData> = undefined | FieldAsyncValidateOrFn<TParentData, TName, TData>,
+  TOnDynamic extends undefined | FieldValidateOrFn<TParentData, TName, TData> = undefined | FieldValidateOrFn<TParentData, TName, TData>,
+  TOnDynamicAsync
+  extends undefined | FieldAsyncValidateOrFn<TParentData, TName, TData> = undefined | FieldAsyncValidateOrFn<TParentData, TName, TData>,
   TFormOnMount extends undefined | FormValidateOrFn<TParentData> = undefined | FormValidateOrFn<TParentData>,
   TFormOnChange extends undefined | FormValidateOrFn<TParentData> = undefined | FormValidateOrFn<TParentData>,
   TFormOnChangeAsync extends undefined | FormAsyncValidateOrFn<TParentData> = undefined | FormAsyncValidateOrFn<TParentData>,
@@ -71,6 +82,8 @@ export type TypeFormField<
   TFormOnBlurAsync extends undefined | FormAsyncValidateOrFn<TParentData> = undefined | FormAsyncValidateOrFn<TParentData>,
   TFormOnSubmit extends undefined | FormValidateOrFn<TParentData> = undefined | FormValidateOrFn<TParentData>,
   TFormOnSubmitAsync extends undefined | FormAsyncValidateOrFn<TParentData> = undefined | FormAsyncValidateOrFn<TParentData>,
+  TFormOnDynamic extends undefined | FormValidateOrFn<TParentData> = undefined | FormValidateOrFn<TParentData>,
+  TFormOnDynamicAsync extends undefined | FormAsyncValidateOrFn<TParentData> = undefined | FormAsyncValidateOrFn<TParentData>,
   TFormOnServer extends undefined | FormAsyncValidateOrFn<TParentData> = undefined | FormAsyncValidateOrFn<TParentData>,
   TParentSubmitMeta = never,
 > = UnwrapNestedRefs<ReturnType<typeof useField<
@@ -84,6 +97,8 @@ export type TypeFormField<
   TOnBlurAsync,
   TOnSubmit,
   TOnSubmitAsync,
+  TOnDynamic,
+  TOnDynamicAsync,
   TFormOnMount,
   TFormOnChange,
   TFormOnChangeAsync,
@@ -91,6 +106,8 @@ export type TypeFormField<
   TFormOnBlurAsync,
   TFormOnSubmit,
   TFormOnSubmitAsync,
+  TFormOnDynamic,
+  TFormOnDynamicAsync,
   TFormOnServer,
   TParentSubmitMeta
 >>>;
@@ -108,6 +125,10 @@ export type TypeBehaviorFormFieldOptions<
   TOnSubmit extends undefined | FieldValidateOrFn<TParentData, TName, TData> = undefined | FieldValidateOrFn<TParentData, TName, TData>,
   TOnSubmitAsync
   extends undefined | FieldAsyncValidateOrFn<TParentData, TName, TData> = undefined | FieldAsyncValidateOrFn<TParentData, TName, TData>,
+  TOnDynamic extends undefined | FieldValidateOrFn<TParentData, TName, TData> = undefined | FieldValidateOrFn<TParentData, TName, TData>,
+  TOnDynamicAsync
+  extends undefined | FieldAsyncValidateOrFn<TParentData, TName, TData> = undefined | FieldAsyncValidateOrFn<TParentData, TName, TData>,
+
 > =
  FieldOptions<
    TParentData,
@@ -119,7 +140,9 @@ export type TypeBehaviorFormFieldOptions<
    TOnBlur,
    TOnBlurAsync,
    TOnSubmit,
-   TOnSubmitAsync
+   TOnSubmitAsync,
+   TOnDynamic,
+   TOnDynamicAsync
  >;
 
 export interface TypeFormOnSubmitData<
@@ -131,6 +154,8 @@ export interface TypeFormOnSubmitData<
   TFormOnBlurAsync extends undefined | FormAsyncValidateOrFn<TFormData> = undefined | FormAsyncValidateOrFn<TFormData>,
   TFormOnSubmit extends undefined | FormValidateOrFn<TFormData> = undefined | FormValidateOrFn<TFormData>,
   TFormOnSubmitAsync extends undefined | FormAsyncValidateOrFn<TFormData> = undefined | FormAsyncValidateOrFn<TFormData>,
+  TFormOnDynamic extends undefined | FormValidateOrFn<TFormData> = undefined | FormValidateOrFn<TFormData>,
+  TFormOnDynamicAsync extends undefined | FormAsyncValidateOrFn<TFormData> = undefined | FormAsyncValidateOrFn<TFormData>,
   TFormOnServer extends undefined | FormAsyncValidateOrFn<TFormData> = undefined | FormAsyncValidateOrFn<TFormData>,
   TSubmitMeta = never,
 > {
@@ -144,6 +169,8 @@ export interface TypeFormOnSubmitData<
     TFormOnBlurAsync,
     TFormOnSubmit,
     TFormOnSubmitAsync,
+    TFormOnDynamic,
+    TFormOnDynamicAsync,
     TFormOnServer,
     TSubmitMeta
   >;
@@ -159,6 +186,8 @@ export type TypeFormOnSubmit<
   TFormOnBlurAsync extends undefined | FormAsyncValidateOrFn<TFormData> = undefined | FormAsyncValidateOrFn<TFormData>,
   TFormOnSubmit extends undefined | FormValidateOrFn<TFormData> = undefined | FormValidateOrFn<TFormData>,
   TFormOnSubmitAsync extends undefined | FormAsyncValidateOrFn<TFormData> = undefined | FormAsyncValidateOrFn<TFormData>,
+  TFormOnDynamic extends undefined | FormValidateOrFn<TFormData> = undefined | FormValidateOrFn<TFormData>,
+  TFormOnDynamicAsync extends undefined | FormAsyncValidateOrFn<TFormData> = undefined | FormAsyncValidateOrFn<TFormData>,
   TFormOnServer extends undefined | FormAsyncValidateOrFn<TFormData> = undefined | FormAsyncValidateOrFn<TFormData>,
   TSubmitMeta = never,
 >
@@ -171,6 +200,8 @@ export type TypeFormOnSubmit<
    TFormOnBlurAsync,
    TFormOnSubmit,
    TFormOnSubmitAsync,
+   TFormOnDynamic,
+   TFormOnDynamicAsync,
    TFormOnServer,
    TSubmitMeta
  >) => any | Promise<any>;
