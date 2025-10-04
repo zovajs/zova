@@ -1717,9 +1717,7 @@ export interface operations {
   HomeUserPassport_logout: {
     parameters: {
       query?: never;
-      header?: {
-        Authorization?: string | null;
-      };
+      header?: never;
       path?: never;
       cookie?: never;
     };
@@ -1828,9 +1826,7 @@ export interface operations {
       query?: {
         redirect?: string | null;
       };
-      header?: {
-        Authorization?: string | null;
-      };
+      header?: never;
       path: {
         module: string;
         providerName: string;
@@ -1860,9 +1856,7 @@ export interface operations {
       query?: {
         redirect?: string | null;
       };
-      header?: {
-        Authorization?: string | null;
-      };
+      header?: never;
       path: {
         module: string;
         providerName: string;
@@ -1950,9 +1944,7 @@ export interface operations {
       query?: {
         path?: string | null;
       };
-      header?: {
-        Authorization?: string | null;
-      };
+      header?: never;
       path?: never;
       cookie?: never;
     };
@@ -2124,9 +2116,7 @@ export interface operations {
         pageSize?: number;
         name?: string | null;
       };
-      header?: {
-        Authorization?: string | null;
-      };
+      header?: never;
       path?: never;
       cookie?: never;
     };
@@ -2173,15 +2163,14 @@ export interface operations {
         };
       };
     };
+    authToken: true;
   };
   DemoStudent_findOne: {
     parameters: {
       query?: never;
-      header?: {
-        Authorization?: string | null;
-      };
+      header?: never;
       path: {
-        id: unknown;
+        id: string;
       };
       cookie?: never;
     };
@@ -2205,11 +2194,9 @@ export interface operations {
   DemoStudent_remove: {
     parameters: {
       query?: never;
-      header?: {
-        Authorization?: string | null;
-      };
+      header?: never;
       path: {
-        id: unknown;
+        id: string;
       };
       cookie?: never;
     };
@@ -2235,7 +2222,7 @@ export interface operations {
       query?: never;
       header?: never;
       path: {
-        id: unknown;
+        id: string;
       };
       cookie?: never;
     };
@@ -2258,13 +2245,12 @@ export interface operations {
         };
       };
     };
+    authToken: true;
   };
   HomeBaseMenu_retrieveMenus: {
     parameters: {
       query?: never;
-      header?: {
-        Authorization?: string | null;
-      };
+      header?: never;
       path: {
         publicPath: ((string | undefined) | null) | undefined;
       };
@@ -2313,9 +2299,7 @@ export interface operations {
   TestCabloyPassport_isAuthenticated: {
     parameters: {
       query?: never;
-      header?: {
-        Authorization?: string | null;
-      };
+      header?: never;
       path?: never;
       cookie?: never;
     };
@@ -2348,9 +2332,7 @@ export interface operations {
         pageSize?: number;
         name?: string | null;
       };
-      header?: {
-        Authorization?: string | null;
-      };
+      header?: never;
       path?: never;
       cookie?: never;
     };
@@ -2374,9 +2356,7 @@ export interface operations {
   TestRestProduct_create: {
     parameters: {
       query?: never;
-      header?: {
-        Authorization?: string | null;
-      };
+      header?: never;
       path?: never;
       cookie?: never;
     };
@@ -2404,9 +2384,7 @@ export interface operations {
   TestRestProduct_findOne: {
     parameters: {
       query?: never;
-      header?: {
-        Authorization?: string | null;
-      };
+      header?: never;
       path: {
         id: unknown;
       };
@@ -2432,9 +2410,7 @@ export interface operations {
   TestRestProduct_remove: {
     parameters: {
       query?: never;
-      header?: {
-        Authorization?: string | null;
-      };
+      header?: never;
       path: {
         id: unknown;
       };
@@ -2460,9 +2436,7 @@ export interface operations {
   TestRestProduct_update: {
     parameters: {
       query?: never;
-      header?: {
-        Authorization?: string | null;
-      };
+      header?: never;
       path: {
         id: unknown;
       };
@@ -2494,9 +2468,7 @@ export interface operations {
       query: {
         name: string;
       };
-      header?: {
-        Authorization?: string | null;
-      };
+      header?: never;
       path: {
         id: ((string | undefined) | null) | undefined;
       };
@@ -2524,9 +2496,7 @@ export interface operations {
       query: {
         name: string;
       };
-      header?: {
-        Authorization?: string | null;
-      };
+      header?: never;
       path: {
         id: ((string | undefined) | null) | undefined;
       };
@@ -2610,9 +2580,7 @@ export interface operations {
   TestVonaDtoTest_getUserLazy: {
     parameters: {
       query?: never;
-      header?: {
-        Authorization?: string | null;
-      };
+      header?: never;
       path?: never;
       cookie?: never;
     };
@@ -2636,9 +2604,7 @@ export interface operations {
   TestVonaDtoTest_getPostDynamic: {
     parameters: {
       query?: never;
-      header?: {
-        Authorization?: string | null;
-      };
+      header?: never;
       path?: never;
       cookie?: never;
     };
@@ -2689,9 +2655,7 @@ export interface operations {
   TestVonaDtoTest_getUserStats: {
     parameters: {
       query?: never;
-      header?: {
-        Authorization?: string | null;
-      };
+      header?: never;
       path?: never;
       cookie?: never;
     };
@@ -2742,9 +2706,7 @@ export interface operations {
   TestVonaDtoTest_getUserStatsGroup: {
     parameters: {
       query?: never;
-      header?: {
-        Authorization?: string | null;
-      };
+      header?: never;
       path?: never;
       cookie?: never;
     };
@@ -2795,9 +2757,7 @@ export interface operations {
   TestVonaDtoTest_createUser: {
     parameters: {
       query?: never;
-      header?: {
-        Authorization?: string | null;
-      };
+      header?: never;
       path?: never;
       cookie?: never;
     };
@@ -2825,9 +2785,7 @@ export interface operations {
   TestVonaDtoTest_updateUser: {
     parameters: {
       query?: never;
-      header?: {
-        Authorization?: string | null;
-      };
+      header?: never;
       path: {
         id: unknown;
       };
@@ -2857,9 +2815,7 @@ export interface operations {
   TestVonaDtoTest_getCategoryTree: {
     parameters: {
       query?: never;
-      header?: {
-        Authorization?: string | null;
-      };
+      header?: never;
       path?: never;
       cookie?: never;
     };
@@ -2888,9 +2844,7 @@ export interface operations {
   TestVonaDtoTest_getCategoryTree2: {
     parameters: {
       query?: never;
-      header?: {
-        Authorization?: string | null;
-      };
+      header?: never;
       path?: never;
       cookie?: never;
     };
@@ -2914,9 +2868,7 @@ export interface operations {
   TestVonaGuardPassport_testUserName: {
     parameters: {
       query?: never;
-      header?: {
-        Authorization?: string | null;
-      };
+      header?: never;
       path?: never;
       cookie?: never;
     };
@@ -2940,9 +2892,7 @@ export interface operations {
   TestVonaGuardPassport_testUserNameFail: {
     parameters: {
       query?: never;
-      header?: {
-        Authorization?: string | null;
-      };
+      header?: never;
       path?: never;
       cookie?: never;
     };
@@ -2966,9 +2916,7 @@ export interface operations {
   TestVonaGuardPassport_testRoleName: {
     parameters: {
       query?: never;
-      header?: {
-        Authorization?: string | null;
-      };
+      header?: never;
       path?: never;
       cookie?: never;
     };
@@ -2992,9 +2940,7 @@ export interface operations {
   TestVonaGuardPassport_testRoleNameFail: {
     parameters: {
       query?: never;
-      header?: {
-        Authorization?: string | null;
-      };
+      header?: never;
       path?: never;
       cookie?: never;
     };
@@ -3192,9 +3138,7 @@ export interface operations {
   Onion_echo6: {
     parameters: {
       query?: never;
-      header?: {
-        Authorization?: string | null;
-      };
+      header?: never;
       path?: never;
       cookie?: never;
     };
@@ -3218,9 +3162,7 @@ export interface operations {
   TestVonaOrder_create: {
     parameters: {
       query?: never;
-      header?: {
-        Authorization?: string | null;
-      };
+      header?: never;
       path?: never;
       cookie?: never;
     };
@@ -3248,9 +3190,7 @@ export interface operations {
   TestVonaOrder_update: {
     parameters: {
       query?: never;
-      header?: {
-        Authorization?: string | null;
-      };
+      header?: never;
       path: {
         id: unknown;
       };
@@ -3289,9 +3229,7 @@ export interface operations {
         remark?: string | null;
         userName?: string | null;
       };
-      header?: {
-        Authorization?: string | null;
-      };
+      header?: never;
       path?: never;
       cookie?: never;
     };
@@ -3325,9 +3263,7 @@ export interface operations {
         remark?: string | null;
         pageSize?: number;
       };
-      header?: {
-        Authorization?: string | null;
-      };
+      header?: never;
       path?: never;
       cookie?: never;
     };
@@ -3351,9 +3287,7 @@ export interface operations {
   TestVonaPost_group: {
     parameters: {
       query?: never;
-      header?: {
-        Authorization?: string | null;
-      };
+      header?: never;
       path?: never;
       cookie?: never;
     };
@@ -3377,9 +3311,7 @@ export interface operations {
   TestVonaPost_aggregate: {
     parameters: {
       query?: never;
-      header?: {
-        Authorization?: string | null;
-      };
+      header?: never;
       path?: never;
       cookie?: never;
     };

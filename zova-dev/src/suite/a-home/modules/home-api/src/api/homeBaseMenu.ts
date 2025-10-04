@@ -7,7 +7,6 @@ export const ApiApiHomeBaseMenuretrieveMenusPath = '/api/home/base/menu/{publicP
 export type ApiApiHomeBaseMenuretrieveMenusPath = '/api/home/base/menu/{publicPath?}';
 export type ApiApiHomeBaseMenuretrieveMenusMethod = 'get';
 export type ApiApiHomeBaseMenuretrieveMenusRequestParams = paths[ApiApiHomeBaseMenuretrieveMenusPath][ApiApiHomeBaseMenuretrieveMenusMethod]['parameters']['path'];
-export type ApiApiHomeBaseMenuretrieveMenusRequestHeaders = paths[ApiApiHomeBaseMenuretrieveMenusPath][ApiApiHomeBaseMenuretrieveMenusMethod]['parameters']['header'];
 export type ApiApiHomeBaseMenuretrieveMenusResponseBody = paths[ApiApiHomeBaseMenuretrieveMenusPath][ApiApiHomeBaseMenuretrieveMenusMethod]['responses']['200']['content']['application/json']['data'];
 
 @Api()
@@ -16,7 +15,6 @@ export class ApiHomeBaseMenu extends BeanApiBase {
 
     options: {
       params: ApiApiHomeBaseMenuretrieveMenusRequestParams;
-      headers?: ApiApiHomeBaseMenuretrieveMenusRequestHeaders;
     } & IApiActionOptions,
   ) {
     return this.$fetch.get<any, ApiApiHomeBaseMenuretrieveMenusResponseBody>(
