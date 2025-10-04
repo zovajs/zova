@@ -13,6 +13,8 @@ export class BeanControllerFormBase extends BeanControllerBase {
     TFormOnBlurAsync extends undefined | FormAsyncValidateOrFn<TParentData>,
     TFormOnSubmit extends undefined | FormValidateOrFn<TParentData>,
     TFormOnSubmitAsync extends undefined | FormAsyncValidateOrFn<TParentData>,
+    TFormOnDynamic extends undefined | FormValidateOrFn<TParentData>,
+    TFormOnDynamicAsync extends undefined | FormAsyncValidateOrFn<TParentData>,
     TFormOnServer extends undefined | FormAsyncValidateOrFn<TParentData>,
     TSubmitMeta,
   >(opts?: FormOptions<
@@ -24,6 +26,8 @@ export class BeanControllerFormBase extends BeanControllerBase {
     TFormOnBlurAsync,
     TFormOnSubmit,
     TFormOnSubmitAsync,
+    TFormOnDynamic,
+    TFormOnDynamicAsync,
     TFormOnServer,
     TSubmitMeta
   >,
@@ -37,6 +41,8 @@ export class BeanControllerFormBase extends BeanControllerBase {
       TFormOnBlurAsync,
       TFormOnSubmit,
       TFormOnSubmitAsync,
+      TFormOnDynamic,
+      TFormOnDynamicAsync,
       TFormOnServer,
       TSubmitMeta
     > & VueFormApi<
@@ -48,6 +54,8 @@ export class BeanControllerFormBase extends BeanControllerBase {
       TFormOnBlurAsync,
       TFormOnSubmit,
       TFormOnSubmitAsync,
+      TFormOnDynamic,
+      TFormOnDynamicAsync,
       TFormOnServer,
       TSubmitMeta
     > {
