@@ -1,7 +1,8 @@
+import type { StoragePersisterOptions } from '@tanstack/query-persist-client-core';
 import type { Query, QueryKey } from '@tanstack/vue-query';
 import type { QueryMetaPersister } from '../../types/index.js';
 import { isNil } from '@cabloy/utils';
-import { experimental_createPersister } from '@tanstack/query-persist-client-core';
+import { experimental_createQueryPersister } from '@tanstack/query-persist-client-core';
 import localforage from 'localforage';
 import { SymbolBeanFullName } from 'zova';
 import { CookieWrapper } from '../../common/cookieWrapper.js';
@@ -95,15 +96,15 @@ export class BeanModelPersister extends BeanModelLast {
     }
   }
 
-  protected _createPersister(options?: QueryMetaPersister | boolean) {
+  protected _createPersister(options?: QueryMetaPersister | boolean): StoragePersisterOptions | undefined {
     options = this._adjustPersisterOptions(options);
     if (!options) return undefined;
-    return experimental_createPersister({
+    return experimental_createQueryPersister({
       storage: this._getPersisterStorage(options) as any,
       maxAge: options.maxAge as number,
       prefix: options.prefix,
       buster: options.buster,
-    });
+    }) as unknown as StoragePersisterOptions;
   }
 
   protected _adjustPersisterOptions(options?: QueryMetaPersister | boolean) {
