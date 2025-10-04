@@ -3,7 +3,6 @@ import type {
   DehydratedState,
   Query,
   QueryKey,
-  StaleTime,
   useMutation,
   useQuery,
   useQueryClient,
@@ -58,12 +57,17 @@ export type QueryMetaPersisterCookieType = 'auto' | 'boolean' | 'number' | 'date
 
 export type StateType = 'local' | 'cookie' | 'mem' | 'data';
 
-export type MaxAgeTime<
+export type StaleTime = number;
+export type StaleTimeFunction<TQueryFnData = unknown, TError = DefaultError, TData = TQueryFnData, TQueryKey extends QueryKey = QueryKey> =
+  StaleTime | ((query: Query<TQueryFnData, TError, TData, TQueryKey>) => StaleTime);
+
+export type MaxAgeTime = StaleTime;
+export type MaxAgeTimeFunction<
   TQueryFnData = unknown,
   TError = DefaultError,
   TData = TQueryFnData,
   TQueryKey extends QueryKey = QueryKey,
-> = StaleTime<TQueryFnData, TError, TData, TQueryKey>;
+> = StaleTimeFunction<TQueryFnData, TError, TData, TQueryKey>;
 
 export interface QueryMetaPersister {
   /** default is false */
@@ -101,9 +105,9 @@ export function resolveStaleTime<
   TData = TQueryFnData,
   TQueryKey extends QueryKey = QueryKey,
 >(
-  staleTime: undefined | StaleTime<TQueryFnData, TError, TData, TQueryKey>,
+  staleTime: undefined | StaleTimeFunction<TQueryFnData, TError, TData, TQueryKey>,
   query: Query<TQueryFnData, TError, TData, TQueryKey>,
-): number | undefined {
+): StaleTime | undefined {
   return typeof staleTime === 'function' ? staleTime(query) : staleTime;
 }
 
@@ -113,8 +117,8 @@ export function resolveMaxAgeTime<
   TData = TQueryFnData,
   TQueryKey extends QueryKey = QueryKey,
 >(
-  maxAge: undefined | MaxAgeTime<TQueryFnData, TError, TData, TQueryKey>,
+  maxAge: undefined | MaxAgeTimeFunction<TQueryFnData, TError, TData, TQueryKey>,
   query: Query<TQueryFnData, TError, TData, TQueryKey>,
-): number | undefined {
+): MaxAgeTime | undefined {
   return typeof maxAge === 'function' ? maxAge(query) : maxAge;
 }
