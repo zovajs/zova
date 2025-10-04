@@ -1,4 +1,4 @@
-import type { OpenAPITSOptions } from 'openapi-typescript';
+import type { OpenAPITSOptions } from '@cabloy/openapi-typescript';
 
 export type TypeOpenapiConfigMatchRule = string | RegExp | (string | RegExp)[];
 

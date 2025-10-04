@@ -1,5 +1,5 @@
 import type { IModule, IModuleInfo } from '@cabloy/module-info';
-import type { OpenAPITSOptions, SchemaObject, TransformNodeOptions } from 'openapi-typescript';
+import type { OpenAPITSOptions, SchemaObject, TransformNodeOptions } from '@cabloy/openapi-typescript';
 import type { ZovaOpenapiConfig, ZovaOpenapiConfigModule } from 'zova-openapi';
 import path from 'node:path';
 import { BeanCliBase } from '@cabloy/cli';
@@ -9,7 +9,6 @@ import { matchSelector, toLowerCaseFirstChar, toUpperCaseFirstChar } from '@cabl
 import fse from 'fs-extra';
 import { rimraf } from 'rimraf';
 import ts from 'typescript';
-import { generateOpenapiTypescript } from '../common/generateOpenapiTypescript.ts';
 
 declare module '@cabloy/cli' {
   interface ICommandArgv {}
@@ -61,8 +60,7 @@ export class CliOpenapiGenerate extends BeanCliBase {
     }
     if (moduleNames.length === 0) return;
     // openapi-typescript
-    await generateOpenapiTypescript();
-    const openapiTypescript = await import('openapi-typescript');
+    const openapiTypescript = await import('@cabloy/openapi-typescript');
     // loop
     const total = moduleNames.length;
     const __caches: TypeAstCaches = {};
