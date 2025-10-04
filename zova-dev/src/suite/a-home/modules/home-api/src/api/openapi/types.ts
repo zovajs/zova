@@ -940,19 +940,19 @@ export interface components {
     'test-vona.dto.postCreate': {
       title: string;
       userId: string;
-      stars?: number | null;
+      stars?: number | undefined;
     };
     'test-vona.dto.userCreate': {
       name: string;
-      age?: number | null;
-      scores?: number | null;
+      age?: number | undefined;
+      scores?: number | undefined;
       posts?: {
         title: string;
-      }[] | null;
+      }[] | undefined;
       roles?: {
         id: string;
-        deleted?: boolean | null;
-      }[] | null;
+        deleted?: boolean | undefined;
+      }[] | undefined;
     };
     'test-vona.entity.product': {
       /**
@@ -991,7 +991,7 @@ export interface components {
       user: components['schemas']['home-user.entity.user'];
       auth: components['schemas']['a-auth.dto.auth'];
       roles: components['schemas']['home-user.entity.role'][];
-    } | null;
+    } | undefined;
     /** @description User */
     'home-user.entity.user': {
       /**
@@ -1019,18 +1019,18 @@ export interface components {
       /** @description User Name */
       name: string;
       /** @description Avatar */
-      avatar?: string | null;
+      avatar?: string | undefined;
       /** @description Email */
-      email?: string | null;
+      email?: string | undefined;
       /** @description Mobile */
-      mobile?: string | null;
+      mobile?: string | undefined;
       /**
              * @description Activated
              * @default false
              */
       activated: boolean;
       /** @description Language */
-      locale?: string | null;
+      locale?: string | undefined;
     };
     'a-auth.dto.auth': {
       /** @description ID */
@@ -1132,7 +1132,7 @@ export interface components {
              */
       name: string;
       /** @description Description */
-      description?: string | null;
+      description?: string | undefined;
     };
     'demo-student.dto.studentCreate': {
       /**
@@ -1141,7 +1141,7 @@ export interface components {
              */
       name: string;
       /** @description Description */
-      description?: string | null;
+      description?: string | undefined;
     };
     'demo-student.dto.studentQueryRes': {
       list: {
@@ -1173,7 +1173,7 @@ export interface components {
                  */
         name: string;
         /** @description Description */
-        description?: string | null;
+        description?: string | undefined;
       }[];
       total: string | number;
     };
@@ -1184,37 +1184,37 @@ export interface components {
              */
       name: string;
       /** @description Description */
-      description?: string | null;
+      description?: string | undefined;
     };
     'a-menu.dto.menus': {
-      menus?: components['schemas']['a-menu.dto.menuItem'][] | null;
-      groups?: components['schemas']['a-menu.dto.menuGroup'][] | null;
+      menus?: components['schemas']['a-menu.dto.menuItem'][] | undefined;
+      groups?: components['schemas']['a-menu.dto.menuGroup'][] | undefined;
     };
     'a-menu.dto.menuItem': {
       name: string;
-      title?: string | null;
-      description?: string | null;
-      icon?: string | null;
-      order?: number | null;
-      group?: string | string[] | null;
-      separator?: boolean | null;
-      link?: string | null;
-      external?: boolean | null;
-      target?: string | null;
+      title?: string | undefined;
+      description?: string | undefined;
+      icon?: string | undefined;
+      order?: number | undefined;
+      group?: string | string[] | undefined;
+      separator?: boolean | undefined;
+      link?: string | undefined;
+      external?: boolean | undefined;
+      target?: string | undefined;
       meta?: components['schemas']['a-menu.dto.menuItemMeta'];
     };
     'a-menu.dto.menuItemMeta': {
       params?: unknown;
       query?: unknown;
-    } | null;
+    } | undefined;
     'a-menu.dto.menuGroup': {
       name: string;
-      title?: string | null;
-      description?: string | null;
-      icon?: string | null;
-      order?: number | null;
-      group?: string | string[] | null;
-      collapsed?: boolean | null;
+      title?: string | undefined;
+      description?: string | undefined;
+      icon?: string | undefined;
+      order?: number | undefined;
+      group?: string | string[] | undefined;
+      collapsed?: boolean | undefined;
     };
     /** @description Product Info */
     'test-rest.entity.product': {
@@ -1243,7 +1243,7 @@ export interface components {
       /** @description Name */
       name: string;
       /** @description Description */
-      description?: string | null;
+      description?: string | undefined;
       /** @description Price */
       price: number;
       /**
@@ -1261,7 +1261,7 @@ export interface components {
       /** @description Name */
       name: string;
       /** @description Description */
-      description?: string | null;
+      description?: string | undefined;
       /** @description Price */
       price: number;
       /**
@@ -1303,7 +1303,7 @@ export interface components {
         /** @description Name */
         name: string;
         /** @description Description */
-        description?: string | null;
+        description?: string | undefined;
         /** @description Price */
         price: number;
         /**
@@ -1323,7 +1323,7 @@ export interface components {
       /** @description Name */
       name: string;
       /** @description Description */
-      description?: string | null;
+      description?: string | undefined;
       /** @description Price */
       price: number;
       /**
@@ -1370,11 +1370,11 @@ export interface components {
     'test-vona.dto.userLazy': {
       name: string;
       user?: components['schemas']['test-vona.dto.userLazy'];
-      roles?: components['schemas']['test-vona.dto.roleLazy'][] | null;
+      roles?: components['schemas']['test-vona.dto.roleLazy'][] | undefined;
     };
     'test-vona.dto.roleLazy': {
       name: string;
-      users?: components['schemas']['test-vona.dto.userLazy'][] | null;
+      users?: components['schemas']['test-vona.dto.userLazy'][] | undefined;
     };
     'test-vona.entity.user_2c7d642ee581efa300341e343180fbb0ecdc785d': {
       /** @description ID */
@@ -1382,30 +1382,30 @@ export interface components {
       name: string;
     };
     'test-vona.entity.post_a6ba2076b5b70a3c098374cc82d418bd1ab226c3': {
-      count_all?: string | number | null;
-      count_title?: string | number | null;
-      sum_stars?: string | number | null;
+      count_all?: string | number | undefined;
+      count_title?: string | number | undefined;
+      sum_stars?: string | number | undefined;
     };
     'test-vona.entity.post_729883d7de16ce4401b26f75bebe618c8948ff64': {
       title: string;
-      count_all?: string | number | null;
-      count_title?: string | number | null;
-      sum_stars?: string | number | null;
+      count_all?: string | number | undefined;
+      count_title?: string | number | undefined;
+      sum_stars?: string | number | undefined;
     };
     'test-vona.dto.userUpdate': {
       name: string;
-      age?: number | null;
-      scores?: number | null;
+      age?: number | undefined;
+      scores?: number | undefined;
       posts?: {
         /**
                  * @description Deleted
                  * @default false
                  */
-        deleted: boolean | null;
+        deleted: boolean | undefined;
         /** @description ID */
-        id?: string | null;
+        id?: string | undefined;
         title: string;
-      }[] | null;
+      }[] | undefined;
     };
     'test-vona.entity.category_2c7d642ee581efa300341e343180fbb0ecdc785d': {
       /** @description ID */
@@ -1455,7 +1455,7 @@ export interface components {
              */
       orderNo: string;
       /** @description Remark */
-      remark?: string | null;
+      remark?: string | undefined;
       userId: string;
       user?: components['schemas']['test-vona.entity.user_2c7d642ee581efa300341e343180fbb0ecdc785d'];
       products: components['schemas']['test-vona.entity.product_bce173590aaef19772f1ae3a82196493c2633e2e'][];
@@ -1479,8 +1479,8 @@ export interface components {
              */
       orderNo: string;
       /** @description Remark */
-      remark?: string | null;
-      products?: components['schemas']['test-vona.entity.product_29731960f3f38d3572bc2f8a01a7498bfe927055'][] | null;
+      remark?: string | undefined;
+      products?: components['schemas']['test-vona.entity.product_29731960f3f38d3572bc2f8a01a7498bfe927055'][] | undefined;
     };
     'test-vona.entity.product_29731960f3f38d3572bc2f8a01a7498bfe927055': {
       /** @description Name */
@@ -1499,17 +1499,17 @@ export interface components {
              */
       orderNo: string;
       /** @description Remark */
-      remark?: string | null;
-      products?: components['schemas']['test-vona.entity.product_9cf2c6bcd41713270c34bcfce21b7b4942e3fbc6'][] | null;
+      remark?: string | undefined;
+      products?: components['schemas']['test-vona.entity.product_9cf2c6bcd41713270c34bcfce21b7b4942e3fbc6'][] | undefined;
     };
     'test-vona.entity.product_9cf2c6bcd41713270c34bcfce21b7b4942e3fbc6': {
       /**
              * @description Deleted
              * @default false
              */
-      deleted: boolean | null;
+      deleted: boolean | undefined;
       /** @description ID */
-      id?: string | null;
+      id?: string | undefined;
       /** @description Name */
       name: string;
       /** @description Price */
@@ -1549,7 +1549,7 @@ export interface components {
                  */
         orderNo: string;
         /** @description Remark */
-        remark?: string | null;
+        remark?: string | undefined;
         userId: string;
         user?: components['schemas']['test-vona.entity.user_2c7d642ee581efa300341e343180fbb0ecdc785d'];
         products: components['schemas']['test-vona.entity.product_bce173590aaef19772f1ae3a82196493c2633e2e'][];
@@ -1558,16 +1558,16 @@ export interface components {
     };
     'test-vona.dto.postGroup': {
       userId: string;
-      count_all?: string | number | null;
-      sum_stars?: string | number | null;
+      count_all?: string | number | undefined;
+      sum_stars?: string | number | undefined;
     };
     'test-vona.dto.postAggregate': {
-      count_all?: string | number | null;
-      count_stars?: string | number | null;
-      sum_stars?: string | number | null;
-      avg_stars?: string | number | null;
-      min_stars?: string | number | null;
-      max_stars?: string | number | null;
+      count_all?: string | number | undefined;
+      count_stars?: string | number | undefined;
+      sum_stars?: string | number | undefined;
+      avg_stars?: string | number | undefined;
+      min_stars?: string | number | undefined;
+      max_stars?: string | number | undefined;
     };
     'test-vona.dto.postQueryRes': {
       list: {
@@ -1595,7 +1595,7 @@ export interface components {
         id: string;
         title: string;
         userId: string;
-        stars?: number | null;
+        stars?: number | undefined;
         postContent?: {
           /** @description ID */
           id: string;
@@ -1622,9 +1622,9 @@ export interface components {
       email7: string;
       firstName: string;
       lastName: string;
-      fullName?: string | null;
-      fullName2?: string | null;
-      fullName3?: string | null;
+      fullName?: string | undefined;
+      fullName2?: string | undefined;
+      fullName3?: string | undefined;
     };
     'test-vona.dto.serializerArray': {
       /** @description Simple */
@@ -1653,9 +1653,9 @@ export interface components {
       email7: string;
       firstName: string;
       lastName: string;
-      fullName?: string | null;
-      fullName2?: string | null;
-      fullName3?: string | null;
+      fullName?: string | undefined;
+      fullName2?: string | undefined;
+      fullName3?: string | undefined;
     };
     /**
          * title
@@ -1678,9 +1678,9 @@ export interface components {
       email7: string;
       firstName: string;
       lastName: string;
-      fullName?: string | null;
-      fullName2?: string | null;
-      fullName3?: string | null;
+      fullName?: string | undefined;
+      fullName2?: string | undefined;
+      fullName3?: string | undefined;
     };
   };
   responses: never;
@@ -1795,13 +1795,13 @@ export interface operations {
   HomeUserPassport_loginOauth: {
     parameters: {
       query?: {
-        redirect?: string | null;
+        redirect?: string | undefined;
       };
       header?: never;
       path: {
         module: string;
         providerName: string;
-        clientName: ((string | undefined) | null) | undefined;
+        clientName: ((string | undefined) | undefined) | undefined;
       };
       cookie?: never;
     };
@@ -1824,13 +1824,13 @@ export interface operations {
   HomeUserPassport_associate: {
     parameters: {
       query?: {
-        redirect?: string | null;
+        redirect?: string | undefined;
       };
       header?: never;
       path: {
         module: string;
         providerName: string;
-        clientName: ((string | undefined) | null) | undefined;
+        clientName: ((string | undefined) | undefined) | undefined;
       };
       cookie?: never;
     };
@@ -1854,13 +1854,13 @@ export interface operations {
   HomeUserPassport_migrate: {
     parameters: {
       query?: {
-        redirect?: string | null;
+        redirect?: string | undefined;
       };
       header?: never;
       path: {
         module: string;
         providerName: string;
-        clientName: ((string | undefined) | null) | undefined;
+        clientName: ((string | undefined) | undefined) | undefined;
       };
       cookie?: never;
     };
@@ -1942,7 +1942,7 @@ export interface operations {
   HomeUserPassport_createTempAuthToken: {
     parameters: {
       query?: {
-        path?: string | null;
+        path?: string | undefined;
       };
       header?: never;
       path?: never;
@@ -2107,14 +2107,14 @@ export interface operations {
   DemoStudent_findMany: {
     parameters: {
       query?: {
-        columns?: string[] | null;
+        columns?: string[] | undefined;
         where?: {
           [key: string]: unknown;
-        } | null;
-        orders?: string | string[][] | null;
+        } | undefined;
+        orders?: string | string[][] | undefined;
         pageNo?: number;
         pageSize?: number;
-        name?: string | null;
+        name?: string | undefined;
       };
       header?: never;
       path?: never;
@@ -2252,7 +2252,7 @@ export interface operations {
       query?: never;
       header?: never;
       path: {
-        publicPath: ((string | undefined) | null) | undefined;
+        publicPath: ((string | undefined) | undefined) | undefined;
       };
       cookie?: never;
     };
@@ -2323,14 +2323,14 @@ export interface operations {
   TestRestProduct_findMany: {
     parameters: {
       query?: {
-        columns?: string[] | null;
+        columns?: string[] | undefined;
         where?: {
           [key: string]: unknown;
-        } | null;
-        orders?: string | string[][] | null;
+        } | undefined;
+        orders?: string | string[][] | undefined;
         pageNo?: number;
         pageSize?: number;
-        name?: string | null;
+        name?: string | undefined;
       };
       header?: never;
       path?: never;
@@ -2470,7 +2470,7 @@ export interface operations {
       };
       header?: never;
       path: {
-        id: ((string | undefined) | null) | undefined;
+        id: ((string | undefined) | undefined) | undefined;
       };
       cookie?: never;
     };
@@ -2498,7 +2498,7 @@ export interface operations {
       };
       header?: never;
       path: {
-        id: ((string | undefined) | null) | undefined;
+        id: ((string | undefined) | undefined) | undefined;
       };
       cookie?: never;
     };
@@ -2530,7 +2530,7 @@ export interface operations {
       };
       header?: never;
       path: {
-        id: ((string | undefined) | null) | undefined;
+        id: ((string | undefined) | undefined) | undefined;
       };
       cookie?: never;
     };
@@ -2643,7 +2643,7 @@ export interface operations {
               id: string;
               title: string;
               userId: string;
-              stars?: number | null;
+              stars?: number | undefined;
               user?: components['schemas']['test-vona.entity.user_2c7d642ee581efa300341e343180fbb0ecdc785d'];
             };
           };
@@ -2693,8 +2693,8 @@ export interface operations {
               /** a-orm::TableIdentity */
               id: string;
               name: string;
-              age?: number | null;
-              scores?: number | null;
+              age?: number | undefined;
+              scores?: number | undefined;
               posts?: components['schemas']['test-vona.entity.post_a6ba2076b5b70a3c098374cc82d418bd1ab226c3'];
             };
           };
@@ -2744,8 +2744,8 @@ export interface operations {
               /** a-orm::TableIdentity */
               id: string;
               name: string;
-              age?: number | null;
-              scores?: number | null;
+              age?: number | undefined;
+              scores?: number | undefined;
               posts: components['schemas']['test-vona.entity.post_729883d7de16ce4401b26f75bebe618c8948ff64'][];
             };
           };
@@ -2988,7 +2988,7 @@ export interface operations {
     parameters: {
       query?: {
         id?: number;
-        name?: number | null;
+        name?: number | undefined;
       };
       header?: never;
       path?: never;
@@ -3011,7 +3011,7 @@ export interface operations {
           'application/json': {
             code: string;
             message: string;
-            data?: string | null;
+            data?: string | undefined;
           };
         };
       };
@@ -3057,7 +3057,7 @@ export interface operations {
   Onion_echo3: {
     parameters: {
       query?: {
-        id?: number | null;
+        id?: number | undefined;
       };
       header: {
         Accept: string;
@@ -3092,7 +3092,7 @@ export interface operations {
     };
     requestBody?: {
       content: {
-        'application/json': components['schemas']['test-vona.dto.user'][] | null;
+        'application/json': components['schemas']['test-vona.dto.user'][] | undefined;
       };
     };
     responses: {
@@ -3220,14 +3220,14 @@ export interface operations {
   TestVonaOrder_findAll: {
     parameters: {
       query?: {
-        columns?: string[] | null;
+        columns?: string[] | undefined;
         where?: {
           [key: string]: unknown;
-        } | null;
-        orders?: string | string[][] | null;
-        orderNo?: string | null;
-        remark?: string | null;
-        userName?: string | null;
+        } | undefined;
+        orders?: string | string[][] | undefined;
+        orderNo?: string | undefined;
+        remark?: string | undefined;
+        userName?: string | undefined;
       };
       header?: never;
       path?: never;
@@ -3253,14 +3253,14 @@ export interface operations {
   TestVonaOrder_findMany: {
     parameters: {
       query?: {
-        columns?: string[] | null;
+        columns?: string[] | undefined;
         where?: {
           [key: string]: unknown;
-        } | null;
-        orders?: string | string[][] | null;
+        } | undefined;
+        orders?: string | string[][] | undefined;
         pageNo?: number;
-        orderNo?: string | null;
-        remark?: string | null;
+        orderNo?: string | undefined;
+        remark?: string | undefined;
         pageSize?: number;
       };
       header?: never;
@@ -3335,15 +3335,15 @@ export interface operations {
   TestVonaPost_findManyEcho: {
     parameters: {
       query?: {
-        columns?: string[] | null;
+        columns?: string[] | undefined;
         where?: {
           [key: string]: unknown;
-        } | null;
-        orders?: string | string[][] | null;
+        } | undefined;
+        orders?: string | string[][] | undefined;
         pageNo?: number;
         pageSize?: number;
-        title?: string | null;
-        userName?: string | null;
+        title?: string | undefined;
+        userName?: string | undefined;
       };
       header?: never;
       path?: never;
@@ -3368,15 +3368,15 @@ export interface operations {
   TestVonaPost_findMany: {
     parameters: {
       query?: {
-        columns?: string[] | null;
+        columns?: string[] | undefined;
         where?: {
           [key: string]: unknown;
-        } | null;
-        orders?: string | string[][] | null;
+        } | undefined;
+        orders?: string | string[][] | undefined;
         pageNo?: number;
         pageSize?: number;
-        title?: string | null;
-        userName?: string | null;
+        title?: string | undefined;
+        userName?: string | undefined;
       };
       header?: never;
       path?: never;
