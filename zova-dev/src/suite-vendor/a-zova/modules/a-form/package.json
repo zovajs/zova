@@ -44,6 +44,6 @@
     "_prepublishOnly": "npm run tsc:publish"
   },
   "dependencies": {
-    "@tanstack/vue-form": "^1.9.0"
+    "@tanstack/vue-form": "^1.23.5"
   }
 }

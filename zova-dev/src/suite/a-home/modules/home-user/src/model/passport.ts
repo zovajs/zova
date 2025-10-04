@@ -1,6 +1,6 @@
 import { IJwtInfo } from 'zova-module-a-interceptor';
 import { BeanModelBase, Model } from 'zova-module-a-model';
-import { ApiApiHomeUserPassportloginResponseBody, ApiApiHomeUserPassportloginSimpleRequestBody } from 'zova-module-home-api';
+import { ApiApiHomeUserPassportloginRequestBody, ApiApiHomeUserPassportloginResponseBody } from 'zova-module-home-api';
 
 @Model()
 export class ModelPassport extends BeanModelBase {
@@ -18,11 +18,11 @@ export class ModelPassport extends BeanModelBase {
     this.accessToken = this.$useStateCookie({ queryKey: ['token'] });
   }
 
-  loginSimple() {
-    return this.$useMutationData<ApiApiHomeUserPassportloginResponseBody, ApiApiHomeUserPassportloginSimpleRequestBody>({
+  login() {
+    return this.$useMutationData<ApiApiHomeUserPassportloginResponseBody, ApiApiHomeUserPassportloginRequestBody>({
       mutationKey: ['login'],
       mutationFn: async params => {
-        return this.$api.homeUserPassport.loginSimple(params, { authToken: false });
+        return this.$api.homeUserPassport.login(params, { authToken: false });
       },
       onSuccess: data => {
         // save

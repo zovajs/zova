@@ -1,7 +1,7 @@
 import { withModifiers } from 'vue';
 import { BeanControllerPageBase, Use } from 'zova';
 import { Controller } from 'zova-module-a-bean';
-import { ApiApiHomeUserPassportloginSimpleRequestBody } from 'zova-module-home-api';
+import { ApiApiHomeUserPassportloginRequestBody } from 'zova-module-home-api';
 import { ModelPassport } from '../../model/passport.js';
 
 @Controller()
@@ -9,13 +9,17 @@ export class ControllerPageLogin extends BeanControllerPageBase {
   @Use()
   $$modelPassport: ModelPassport;
 
-  user: ApiApiHomeUserPassportloginSimpleRequestBody = {
+  user: ApiApiHomeUserPassportloginRequestBody = {
     username: 'admin',
     password: '',
+    captcha: {
+      id: undefined as any,
+      token: undefined,
+    },
   };
 
   async login() {
-    await this.$$modelPassport.loginSimple().mutateAsync(this.user);
+    await this.$$modelPassport.login().mutateAsync(this.user);
   }
 
   _renderLandingInfo() {
