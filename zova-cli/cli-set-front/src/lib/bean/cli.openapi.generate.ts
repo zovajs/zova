@@ -428,7 +428,7 @@ function _checkOperationIdEnabled(moduleConfig: ZovaOpenapiConfigModule, selecto
  * https://openapi-ts.dev/node#example-blob-types
 */
 const BLOB = ts.factory.createTypeReferenceNode(ts.factory.createIdentifier('Blob')); // `Blob`
-const NULL = ts.factory.createLiteralTypeNode(ts.factory.createNull()); // `null`
+// const NULL = ts.factory.createLiteralTypeNode(ts.factory.createNull()); // `null`
 const UNDEFINED = ts.factory.createKeywordTypeNode(ts.SyntaxKind.UndefinedKeyword);
 
 function _patchOpenapiTSOptions(options?: OpenAPITSOptions) {
@@ -444,9 +444,10 @@ function _patchOpenapiTSOptions(options?: OpenAPITSOptions) {
       if (schemaObject.format === 'binary') {
         if (options.path?.includes('multipart~1form-data') || options.path?.includes('application~1octet-stream')) {
           return {
-            schema: schemaObject.nullable
-              ? ts.factory.createUnionTypeNode([BLOB, NULL])
-              : BLOB,
+            // schema: schemaObject.nullable
+            //   ? ts.factory.createUnionTypeNode([BLOB, NULL])
+            //   : BLOB,
+            schema: BLOB,
             questionToken: schemaObject.nullable,
           };
         }
