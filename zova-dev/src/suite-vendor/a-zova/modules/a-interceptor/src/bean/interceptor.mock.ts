@@ -3,6 +3,9 @@ import { BeanInterceptorBase, IDecoratorInterceptorOptions, IInterceptorResponse
 
 export interface IInterceptorOptionsMock extends IDecoratorInterceptorOptions {}
 
+// not include: ERR_BAD_RESPONSE
+const __ErrorsShouldBeMocked = ['ECONNREFUSED', 'ERR_NETWORK', '404'];
+
 @Interceptor<IInterceptorOptionsMock>()
 export class InterceptorMock extends BeanInterceptorBase<IInterceptorOptionsMock> implements IInterceptorResponseError {
   async onResponseError(
@@ -13,7 +16,7 @@ export class InterceptorMock extends BeanInterceptorBase<IInterceptorOptionsMock
     if (!(error instanceof Error)) return next();
     if (this.sys.env.MOCK_ENABLED === 'true') {
       if (process.env.DEV || (process.env.PROD && this.sys.env.MOCK_BUILD === 'true')) {
-        if (['ERR_BAD_RESPONSE', 'ECONNREFUSED', 'ERR_NETWORK', '404'].includes(String(error.code)) || error.status === 404) {
+        if (__ErrorsShouldBeMocked.includes(String(error.code)) || error.status === 404) {
           const config = error.config!;
           if (config.baseURL) {
             const port = process.env.DEV ? this.sys.env.DEV_SERVER_PORT : this.sys.env.MOCK_BUILD_PORT;
