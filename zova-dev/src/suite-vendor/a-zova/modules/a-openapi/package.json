@@ -11,7 +11,7 @@
       "vendors": [
         {
           "match": [
-            "json-schema-to-zod",
+            "@cabloy/json-schema-to-zod",
             "openapi3-ts"
           ],
           "output": "openapi3"
@@ -37,8 +37,8 @@
     "_prepublishOnly": "npm run tsc:publish"
   },
   "dependencies": {
+    "@cabloy/json-schema-to-zod": "^2.6.1",
     "@zhennann/currency": "^2.0.0",
-    "json-schema-to-zod": "^2.6.1",
     "openapi3-ts": "^4.5.0"
   }
 }

@@ -1,7 +1,7 @@
 import type { SchemaObject } from 'openapi3-ts/oas31';
 import type { TypeSchemaScene } from '../types/rest.js';
+import jsonSchemaToZod from '@cabloy/json-schema-to-zod';
 import { evaluateSimple } from '@cabloy/utils';
-import jsonSchemaToZod from 'json-schema-to-zod';
 import { z } from 'zod';
 import { deepExtend } from 'zova';
 import { OrderUnknownBase } from '../types/database.js';
