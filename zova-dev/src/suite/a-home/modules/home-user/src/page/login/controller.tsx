@@ -13,8 +13,8 @@ export class ControllerPageLogin extends BeanControllerPageBase {
     username: 'admin',
     password: '',
     captcha: {
-      id: undefined as any,
-      token: undefined,
+      id: '',
+      token: '',
     },
   };
 
