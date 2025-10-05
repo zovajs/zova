@@ -1,4 +1,3 @@
-import type { StoragePersisterOptions } from '@tanstack/query-persist-client-core';
 import type { Query, QueryKey } from '@tanstack/vue-query';
 import type { QueryMetaPersister } from '../../types/index.js';
 import { isNil } from '@cabloy/utils';
@@ -96,7 +95,7 @@ export class BeanModelPersister extends BeanModelLast {
     }
   }
 
-  protected _createPersister(options?: QueryMetaPersister | boolean): StoragePersisterOptions | undefined {
+  protected _createPersister(options?: QueryMetaPersister | boolean) {
     options = this._adjustPersisterOptions(options);
     if (!options) return undefined;
     return experimental_createQueryPersister({
@@ -104,7 +103,7 @@ export class BeanModelPersister extends BeanModelLast {
       maxAge: options.maxAge as number,
       prefix: options.prefix,
       buster: options.buster,
-    }) as unknown as StoragePersisterOptions;
+    }).persisterFn;
   }
 
   protected _adjustPersisterOptions(options?: QueryMetaPersister | boolean) {
