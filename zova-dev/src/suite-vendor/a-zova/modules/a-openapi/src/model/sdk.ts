@@ -1,5 +1,6 @@
 import { isNil } from '@cabloy/utils';
 import { ZodMetadata } from '@cabloy/zod-openapi';
+import { toRaw } from 'vue';
 import { z } from 'zod';
 import { ILocaleInfos, Use, usePrepareArg } from 'zova';
 import { BeanModelBase, Model } from 'zova-module-a-model';
@@ -93,7 +94,7 @@ export class ModelSdk extends BeanModelBase {
         const zodSchema = queryZodSchema.data as unknown as z.ZodObject<any>;
         Object.keys(zodSchema.shape).forEach(key => {
           const fieldSchema = zodSchema.shape[key];
-          const value = ZodMetadata.getDefaultValue(fieldSchema);
+          const value = ZodMetadata.getDefaultValue(toRaw(fieldSchema));
           if (!isNil(value)) {
             defaultValues[key] = value;
           }
