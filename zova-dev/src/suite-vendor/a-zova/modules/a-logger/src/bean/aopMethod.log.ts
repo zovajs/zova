@@ -9,7 +9,6 @@ export interface IAopMethodOptionsLog extends IDecoratorAopMethodOptions {
   level: LoggerLevel;
   childName?: keyof ILoggerClientChildRecord;
   clientName?: keyof ILoggerClientRecord;
-  auto?: boolean;
   args?: boolean;
   result?: boolean;
   context?: Record<string, any>;
@@ -24,7 +23,6 @@ export class AopMethodLog extends BeanAopMethodBase implements IAopMethodGet, IA
     const message = `${receiver[SymbolBeanFullName]}#${prop}(get)`;
     const logger = this.sys.meta.logger.child(options.childName, options.clientName);
     // begin
-    (!options.auto) && logger.log(options.level, message, context ? { context } : undefined);
     const profiler = logger.startTimer();
     // next
     try {
@@ -42,16 +40,11 @@ export class AopMethodLog extends BeanAopMethodBase implements IAopMethodGet, IA
     const message = `${receiver[SymbolBeanFullName]}#${prop}(set)`;
     const logger = this.sys.meta.logger.child(options.childName, options.clientName);
     // begin
-    const info: any = { level: options.level, message };
-    if (context) info.context = context;
-    info.value = value;
-    logger.log(info);
-    // profiler
     const profiler = logger.startTimer();
     // next
     try {
       const res = next();
-      (!options.auto) && this._logResult(profiler, context, undefined, options, message);
+      this._logValue(profiler, context, value, options, message);
       return res;
     } catch (err: any) {
       this._logError(profiler, context, err, options, message);
@@ -95,10 +88,17 @@ export class AopMethodLog extends BeanAopMethodBase implements IAopMethodGet, IA
     return evaluateExpressions(options.context, { self: receiver, sys: cast(receiver).sys, app: cast(receiver).app, ctx: cast(receiver).ctx });
   }
 
+  _logValue(profiler: Profiler, context: any, value: any, options: IAopMethodOptionsLog, message: string) {
+    const info: any = { level: options.level, message };
+    if (context) info.context = context;
+    info.value = value;
+    profiler.done(info);
+  }
+
   _logResult(profiler: Profiler, context: any, res: any, options: IAopMethodOptionsLog, message: string) {
     const info: any = { level: options.level, message };
     if (context) info.context = context;
-    if (res !== undefined)info.result = res;
+    if (res !== undefined) info.result = res;
     profiler.done(info);
   }
 

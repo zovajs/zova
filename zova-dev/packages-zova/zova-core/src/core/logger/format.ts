@@ -5,10 +5,10 @@ export const formatLoggerFilter = format((info, opts: any) => {
   const level = typeof opts.level === 'function' ? opts.level() : opts.level;
   if (!level) return false;
   if (opts.strict) {
-    if (NpmConfigSetLevels[info.level as string] === NpmConfigSetLevels[level]) return info;
+    if (NpmConfigSetLevels[info.level as string] === NpmConfigSetLevels[level]) return __formatLoggerFilterCheckInfo(info);
     return false;
   }
-  if (NpmConfigSetLevels[info.level as string] <= NpmConfigSetLevels[level] || (opts.silly && info.level === 'silly')) return info;
+  if (NpmConfigSetLevels[info.level as string] <= NpmConfigSetLevels[level] || (opts.silly && info.level === 'silly')) return __formatLoggerFilterCheckInfo(info);
   return false;
 });
 
@@ -30,3 +30,10 @@ export const formatLoggerConsole = () => {
     return result;
   });
 };
+
+function __formatLoggerFilterCheckInfo(info) {
+  if (typeof info.message === 'function') {
+    info.message = info.message();
+  }
+  return info;
+}
