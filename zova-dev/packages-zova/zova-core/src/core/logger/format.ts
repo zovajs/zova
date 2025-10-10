@@ -1,6 +1,8 @@
 import { colorize, format, NpmConfigSetLevels, print } from '@cabloy/logger';
 import { isEmptyObject } from '@cabloy/utils';
 
+const SymbolLoggerMessage = Symbol('SymbolLoggerMessage');
+
 export const formatLoggerFilter = format((info, opts: any) => {
   const level = typeof opts.level === 'function' ? opts.level() : opts.level;
   if (!level) return false;
@@ -33,7 +35,10 @@ export const formatLoggerConsole = () => {
 
 function __formatLoggerFilterCheckInfo(info) {
   if (typeof info.message === 'function') {
-    info.message = info.message();
+    if (info.message[SymbolLoggerMessage] === undefined) {
+      info.message[SymbolLoggerMessage] = info.message();
+    }
+    info.message = info.message[SymbolLoggerMessage];
   }
   return info;
 }
