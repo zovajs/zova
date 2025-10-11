@@ -2,12 +2,13 @@ import type { SchemaObject } from 'openapi3-ts/oas31';
 import type { TypeSchemaScene } from '../types/rest.js';
 import jsonSchemaToZod from '@cabloy/json-schema-to-zod';
 import { evaluateSimple } from '@cabloy/utils';
+import { toRaw } from 'vue';
 import { z } from 'zod';
 import { deepExtend } from 'zova';
 import { OrderUnknownBase } from '../types/database.js';
 
 export function schemaToZodSchema<T extends z.ZodType = z.ZodAny>(schema: SchemaObject): T {
-  const code = jsonSchemaToZod(schema);
+  const code = jsonSchemaToZod(toRaw(schema));
   return evaluateSimple(code, { z });
 }
 
