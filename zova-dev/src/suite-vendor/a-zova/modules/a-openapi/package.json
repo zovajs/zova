@@ -37,7 +37,7 @@
     "_prepublishOnly": "npm run tsc:publish"
   },
   "dependencies": {
-    "@cabloy/json-schema-to-zod": "^2.6.2",
+    "@cabloy/json-schema-to-zod": "^2.6.3",
     "@zhennann/currency": "^2.0.0",
     "openapi3-ts": "^4.5.0"
   }
