@@ -29,7 +29,7 @@ export function finalizeIssue`,
     .replace(
       'const message = unwrapMessage(iss.inst?._zod.def?.error?.(iss)) ??',
       `const msg = unwrapMessage(iss.inst?._zod.def?.error?.(iss));
-        const message = (__localeAdapterFn?__localeAdapterFn(msg):msg) ??`,
+        const message = (__localeAdapterFn?__localeAdapterFn(msg, iss):msg) ??`,
     );
   fse.writeFileSync(fileSrc, contentNew);
 }
