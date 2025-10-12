@@ -36,8 +36,8 @@ export class ModelSdk extends BeanModelBase {
             await querySchema.suspense();
             const queryZodSchema = this.getZodSchema(schemaName);
             await queryZodSchema.suspense();
-            const queryDataDefaultValue = this.getDataDefaultValue(schemaName);
-            await queryDataDefaultValue.suspense();
+            const querySchemaDefaultValue = this.getSchemaDefaultValue(schemaName);
+            await querySchemaDefaultValue.suspense();
           } else {
             this.$invalidateQueries({ queryKey: ['schema', schemaName] });
             this.$invalidateQueries({ queryKey: ['zodSchema', schemaName] });
@@ -83,7 +83,7 @@ export class ModelSdk extends BeanModelBase {
     });
   }
 
-  getDataDefaultValue(schemaName: string) {
+  getSchemaDefaultValue(schemaName: string) {
     return this.$useStateData({
       queryKey: ['schemaDefaultValue', schemaName],
       queryFn: async () => {
