@@ -70,9 +70,12 @@ export class ModelSdk extends BeanModelBase {
     return this.$useStateData({
       queryKey: ['zodSchema', schemaName],
       queryFn: async () => {
-        const querySchema = this.getSchema(schemaName);
-        if (!querySchema.data) return null;
-        const zodSchema = schemaToZodSchema(querySchema.data);
+        // const querySchema = this.getSchema(schemaName);
+        // if (!querySchema.data) return null;
+        // for get the lastest data
+        const schema = this.$$sysSdk.getSchema(schemaName);
+        if (!schema) return null;
+        const zodSchema = schemaToZodSchema(schema);
         this.$invalidateQueries({ queryKey: ['schemaDefaultValue', schemaName] });
         return zodSchema;
       },
