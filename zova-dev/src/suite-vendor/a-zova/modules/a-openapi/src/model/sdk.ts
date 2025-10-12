@@ -1,12 +1,9 @@
 import { isNil } from '@cabloy/utils';
-import { ZodMetadata } from '@cabloy/zod-openapi';
-import { toRaw } from 'vue';
-import { z } from 'zod';
 import { ILocaleInfos, Use, usePrepareArg } from 'zova';
 import { BeanModelBase, Model } from 'zova-module-a-model';
 import { SysSdk } from '../bean/sys.sdk.js';
 import { schemaToZodSchema } from '../lib/schema.js';
-import { SymbolOpenapiSchemaName, TypeRequestMethod } from '../types/sdk.js';
+import { TypeRequestMethod } from '../types/sdk.js';
 
 const __schemaRefPrefix = '#/components/schemas/';
 
@@ -39,9 +36,12 @@ export class ModelSdk extends BeanModelBase {
             await querySchema.suspense();
             const queryZodSchema = this.getZodSchema(schemaName);
             await queryZodSchema.suspense();
+            const queryDataDefaultValue = this.getDataDefaultValue(schemaName);
+            await queryDataDefaultValue.suspense();
           } else {
             this.$invalidateQueries({ queryKey: ['schema', schemaName] });
             this.$invalidateQueries({ queryKey: ['zodSchema', schemaName] });
+            this.$invalidateQueries({ queryKey: ['schemaDefaultValue', schemaName] });
           }
         }
         return sdk;
@@ -57,9 +57,6 @@ export class ModelSdk extends BeanModelBase {
       queryKey: ['schema', schemaName],
       queryFn: async () => {
         const schema = this.$$sysSdk.getSchema(schemaName);
-        if (schema && !schema[SymbolOpenapiSchemaName]) {
-          schema[SymbolOpenapiSchemaName] = schemaName;
-        }
         return schema;
       },
       staleTime: Infinity,
@@ -76,7 +73,6 @@ export class ModelSdk extends BeanModelBase {
         const schema = this.$$sysSdk.getSchema(schemaName);
         if (!schema) return null;
         const zodSchema = schemaToZodSchema(schema);
-        this.$invalidateQueries({ queryKey: ['schemaDefaultValue', schemaName] });
         return zodSchema;
       },
       staleTime: Infinity,
@@ -91,17 +87,28 @@ export class ModelSdk extends BeanModelBase {
     return this.$useStateData({
       queryKey: ['schemaDefaultValue', schemaName],
       queryFn: async () => {
-        const queryZodSchema = this.getZodSchema(schemaName);
-        if (!queryZodSchema.data) return null;
+        // const queryZodSchema = this.getZodSchema(schemaName);
+        // if (!queryZodSchema.data) return null;
+        // const zodSchema = queryZodSchema.data as unknown as z.ZodObject<any>;
+        // const zodSchema = schemaToZodSchema(schema) as unknown as z.ZodObject<any>;
+        // const defaultValues = {};
+        // Object.keys(zodSchema.shape).forEach(key => {
+        //   const fieldSchema = zodSchema.shape[key];
+        //   const value = ZodMetadata.getDefaultValue(toRaw(fieldSchema));
+        //   if (!isNil(value)) {
+        //     defaultValues[key] = value;
+        //   }
+        // });
+        // for get the lastest data
+        const schema = this.$$sysSdk.getSchema(schemaName);
+        if (!schema) return null;
         const defaultValues = {};
-        const zodSchema = queryZodSchema.data as unknown as z.ZodObject<any>;
-        Object.keys(zodSchema.shape).forEach(key => {
-          const fieldSchema = zodSchema.shape[key];
-          const value = ZodMetadata.getDefaultValue(toRaw(fieldSchema));
-          if (!isNil(value)) {
-            defaultValues[key] = value;
+        for (const key in schema.properties) {
+          const property = schema.properties[key] as any;
+          if (!isNil(property.default)) {
+            defaultValues[key] = property.default;
           }
-        });
+        }
         return defaultValues;
       },
       staleTime: Infinity,

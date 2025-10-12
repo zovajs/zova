@@ -4,7 +4,7 @@ import { BeanBase, ILocaleInfos } from 'zova';
 import { Sys } from 'zova-module-a-bean';
 import { BeanFetch } from 'zova-module-a-fetch';
 import { IOpenapiSchema } from '../types/schema.js';
-import { IOpenapiSdkItem, TypeRequestMethod } from '../types/sdk.js';
+import { IOpenapiSdkItem, SymbolOpenapiSchemaName, TypeRequestMethod } from '../types/sdk.js';
 
 const PATH_PARAM_RE = /\{([^{}/]+)\}/g;
 
@@ -53,7 +53,11 @@ export class SysSdk extends BeanBase {
     const schemas = data.doc.components?.schemas;
     if (schemas) {
       for (const key in schemas) {
-        this.schemas[key] = schemas[key] as unknown as SchemaObject;
+        const schema = schemas[key] as unknown as SchemaObject;
+        if (!schema[SymbolOpenapiSchemaName]) {
+          schema[SymbolOpenapiSchemaName] = key;
+        }
+        this.schemas[key] = schema;
         schemaNames.push(key);
       }
     }
