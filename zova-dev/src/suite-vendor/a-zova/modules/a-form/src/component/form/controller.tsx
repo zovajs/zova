@@ -32,11 +32,13 @@ export class ControllerForm extends BeanControllerFormBase {
   $$scopeModuleAOpenapi: ScopeModuleAOpenapi;
 
   protected async __init__() {
-    this.form = this.$useForm({
-      defaultValues: this.$props.data as any,
-      onSubmit: async data => {
-        this.$props.onSubmit?.(data as any);
-      },
+    this.form = this.$useComputed(() => {
+      return this.$useForm({
+        defaultValues: this.$props.data as any,
+        onSubmit: async data => {
+          await this.$props.onSubmit?.(data as any);
+        },
+      });
     });
     this.formProvider = this.$useComputed(() => {
       return deepExtend({}, this.$$scopeModuleAOpenapi.config.restResource.form?.provider, this.$props.formProvider);
