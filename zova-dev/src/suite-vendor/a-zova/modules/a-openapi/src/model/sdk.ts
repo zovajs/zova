@@ -85,7 +85,6 @@ export class ModelSdk extends BeanModelBase {
             defaultValues[key] = property.default;
           }
         }
-        console.log(defaultValues);
         return defaultValues;
       },
     });
