@@ -70,8 +70,7 @@ export class ControllerWrapperForm extends BeanControllerBase {
       }
       if (formMeta.formMode === 'edit') {
         if (formMeta.editMode === 'create') {
-          const queryData = this.$$restResource.getQueryDataDefaultValue(this.schemaCreate);
-          return queryData?.data;
+          return this.$$restResource.getQueryDataDefaultValue(this.schemaCreate);
         }
         if (formMeta.editMode === 'update') {
           return this.$props.formData;

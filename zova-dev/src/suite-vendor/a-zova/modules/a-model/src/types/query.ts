@@ -7,7 +7,7 @@ import type {
   useQuery,
   useQueryClient,
 } from '@tanstack/vue-query';
-import type { UnwrapNestedRefs } from 'vue';
+import type { DebuggerOptions, UnwrapNestedRefs } from 'vue';
 import 'zova';
 
 declare module 'zova' {
@@ -121,4 +121,12 @@ export function resolveMaxAgeTime<
   query: Query<TQueryFnData, TError, TData, TQueryKey>,
 ): MaxAgeTime | undefined {
   return typeof maxAge === 'function' ? maxAge(query) : maxAge;
+}
+
+export type UseQueryComputedFn<TDATA> = (oldValue?: TDATA) => TDATA;
+
+export interface UseQueryComputedOptions<TDATA, TQueryKey> {
+  queryKey: TQueryKey;
+  queryFn: UseQueryComputedFn<TDATA>;
+  debugOptions?: DebuggerOptions;
 }

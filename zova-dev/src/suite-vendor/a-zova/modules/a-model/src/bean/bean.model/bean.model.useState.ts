@@ -9,6 +9,7 @@ import type {
 } from '@tanstack/vue-query';
 import type { UnwrapNestedRefs } from 'vue';
 import type { DefinedInitialQueryOptions, UndefinedInitialQueryOptions } from '../../common/types.js';
+import type { UseQueryComputedOptions } from '../../types/query.js';
 import {
   hashKey,
 } from '@tanstack/vue-query';
@@ -16,9 +17,11 @@ import { deepExtend, useCustomRef } from 'zova';
 import { BeanModelUseQuery } from './bean.model.useQuery.js';
 
 const SymbolUseQueries = Symbol('SymbolUseQueries');
+const SymbolUseComputeds = Symbol('SymbolUseComputeds');
 
 export class BeanModelUseState extends BeanModelUseQuery {
   private [SymbolUseQueries]: Record<string, unknown> = {};
+  private [SymbolUseComputeds]: Record<string, unknown> = {};
 
   $useStateLocal<
     TQueryFnData = unknown,
@@ -190,6 +193,15 @@ export class BeanModelUseState extends BeanModelUseQuery {
   //     self._handleSyncDataSet(options, queryClient, false, value);
   //   },
   // });
+  }
+
+  $useStateComputed<TDATA, TQueryKey extends QueryKey>(options: UseQueryComputedOptions<TDATA, TQueryKey>): TDATA {
+    const queryKey = this.self._forceQueryKeyPrefix(options.queryKey);
+    const queryHash = hashKey(queryKey);
+    if (!this[SymbolUseComputeds][queryHash]) {
+      this[SymbolUseComputeds][queryHash] = this.$useComputed(options.queryFn, options.debugOptions);
+    }
+    return this[SymbolUseComputeds][queryHash] as unknown as TDATA;
   }
 
   $useStateData<

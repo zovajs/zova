@@ -34,14 +34,8 @@ export class ModelSdk extends BeanModelBase {
           if (process.env.SERVER) {
             const querySchema = this.getSchema(schemaName);
             await querySchema.suspense();
-            const queryZodSchema = this.getZodSchema(schemaName);
-            await queryZodSchema.suspense();
-            const querySchemaDefaultValue = this.getSchemaDefaultValue(schemaName);
-            await querySchemaDefaultValue.suspense();
           } else {
             this.$invalidateQueries({ queryKey: ['schema', schemaName] });
-            this.$invalidateQueries({ queryKey: ['zodSchema', schemaName] });
-            this.$invalidateQueries({ queryKey: ['schemaDefaultValue', schemaName] });
           }
         }
         return sdk;
@@ -64,44 +58,26 @@ export class ModelSdk extends BeanModelBase {
   }
 
   getZodSchema(schemaName: string) {
-    return this.$useStateData({
+    return this.$useStateComputed({
       queryKey: ['zodSchema', schemaName],
-      queryFn: async () => {
-        // const querySchema = this.getSchema(schemaName);
-        // if (!querySchema.data) return null;
-        // for get the lastest data
-        const schema = this.$$sysSdk.getSchema(schemaName);
-        if (!schema) return null;
-        const zodSchema = schemaToZodSchema(schema);
+      queryFn: () => {
+        const querySchema = this.getSchema(schemaName);
+        if (!querySchema.data) return null;
+        const zodSchema = schemaToZodSchema(querySchema.data);
         return zodSchema;
-      },
-      staleTime: Infinity,
-      meta: {
-        ssr: { dehydrate: false },
-        persister: false,
       },
     });
   }
 
   getSchemaDefaultValue(schemaName: string) {
-    return this.$useStateData({
+    return this.$useStateComputed({
       queryKey: ['schemaDefaultValue', schemaName],
-      queryFn: async () => {
-        // const queryZodSchema = this.getZodSchema(schemaName);
-        // if (!queryZodSchema.data) return null;
-        // const zodSchema = queryZodSchema.data as unknown as z.ZodObject<any>;
-        // const zodSchema = schemaToZodSchema(schema) as unknown as z.ZodObject<any>;
-        // const defaultValues = {};
-        // Object.keys(zodSchema.shape).forEach(key => {
-        //   const fieldSchema = zodSchema.shape[key];
-        //   const value = ZodMetadata.getDefaultValue(toRaw(fieldSchema));
-        //   if (!isNil(value)) {
-        //     defaultValues[key] = value;
-        //   }
-        // });
-        // for get the lastest data
-        const schema = this.$$sysSdk.getSchema(schemaName);
-        if (!schema) return null;
+      queryFn: () => {
+        const querySchema = this.getSchema(schemaName);
+        if (!querySchema.data) return null;
+        const schema = querySchema.data;
+        // const schema = this.$$sysSdk.getSchema(schemaName);
+        // if (!schema) return null;
         const defaultValues = {};
         for (const key in schema.properties) {
           const property = schema.properties[key] as any;
@@ -109,12 +85,8 @@ export class ModelSdk extends BeanModelBase {
             defaultValues[key] = property.default;
           }
         }
+        console.log(defaultValues);
         return defaultValues;
-      },
-      staleTime: Infinity,
-      meta: {
-        ssr: { dehydrate: false },
-        persister: false,
       },
     });
   }
