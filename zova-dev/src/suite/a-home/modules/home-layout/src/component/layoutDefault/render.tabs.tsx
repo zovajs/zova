@@ -27,7 +27,7 @@ export class RenderTabs extends BeanRenderBase {
           {titleLocal}
           {!tab.affix && (
             <ZovaIcon
-              class="tab-close hidden hover:bg-slate-400 rounded"
+              class="tab-close hidden hover:bg-slate-400 rounded-sm"
               name={icon('::close')}
               width="16"
               height="16"
