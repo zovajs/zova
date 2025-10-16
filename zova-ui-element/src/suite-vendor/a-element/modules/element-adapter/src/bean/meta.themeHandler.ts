@@ -46,7 +46,7 @@ export class MetaThemeHandler extends BeanBase implements IThemeHandler {
         htmlClass.push('dark');
       }
       const htmlClassString = htmlClass.join(' ');
-      if (!this.sys.config.ssr.cookieThemeDark) {
+      if (!this.sys.config.ssr.cookieTheme) {
         this.$useMeta({ bodyAttr: { [`data-ssr-theme-dark-${dark}`]: htmlClassString } });
       } else {
         this.$useMeta({ htmlAttr: { class: htmlClassString } });

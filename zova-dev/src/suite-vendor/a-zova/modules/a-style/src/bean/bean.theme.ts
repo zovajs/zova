@@ -26,10 +26,11 @@ export class BeanTheme extends BeanModelBase {
   $$scopeSsr: ScopeModuleASsr;
 
   protected async __init__() {
+    const cookieTheme = this.$$scopeSsr.config.cookieTheme;
+    const cookieThemeDarkDefault = this.$$scopeSsr.config.cookieThemeDarkDefault;
     // support admin
-    const cookieThemeName = this.$$scopeSsr.config.cookieThemeName;
     this.name = this.$useState (
-      cookieThemeName ? 'cookie' : 'local',
+      cookieTheme ? 'cookie' : 'local',
       {
         queryKey: ['themename'],
         meta: {
@@ -40,21 +41,19 @@ export class BeanTheme extends BeanModelBase {
         },
       },
     );
-    const cookieThemeDark = this.$$scopeSsr.config.cookieThemeDark;
-    const cookieThemeDarkDefault = this.$$scopeSsr.config.cookieThemeDarkDefault;
     this.darkMode = this.$useState(
-      cookieThemeDark ? 'cookie' : 'local',
+      cookieTheme ? 'cookie' : 'local',
       {
         queryKey: ['themedark'],
         meta: {
           persister: {
             maxAge: this.scope.config.model.themename.persister.maxAge,
             deserialize: (value, deserializeDefault) => {
-              if (cookieThemeDark && value === 'auto') value = cookieThemeDarkDefault;
+              if (cookieTheme && value === 'auto') value = cookieThemeDarkDefault;
               return deserializeDefault(value);
             },
           },
-          defaultData: cookieThemeDark ? cookieThemeDarkDefault : 'auto',
+          defaultData: cookieTheme ? cookieThemeDarkDefault : 'auto',
         },
       },
     );
@@ -87,7 +86,7 @@ export class BeanTheme extends BeanModelBase {
 
   async _applyThemeWrapper() {
     await this._applyTheme();
-    if (process.env.SERVER && !this.$$scopeSsr.config.cookieThemeDark) {
+    if (process.env.SERVER && !this.$$scopeSsr.config.cookieTheme) {
       this.toggleDark();
       await this._applyTheme();
     }
