@@ -12,7 +12,6 @@ export class MetaThemeHandler extends BeanBase implements IThemeHandler {
     // themeName
     const themeName = dark ? 'dark' : 'light';
     const colorPrimary = token.color.primary;
-    const pageBackground = token.component.page.background;
     // data-theme
     if (process.env.CLIENT) {
       // client
@@ -22,7 +21,6 @@ export class MetaThemeHandler extends BeanBase implements IThemeHandler {
       const body = window?.document?.body;
       if (body) {
         body.style.setProperty('--color-primary', colorPrimary);
-        body.style.setProperty('--color-base-100', pageBackground);
       }
     } else {
       // server
@@ -33,7 +31,6 @@ export class MetaThemeHandler extends BeanBase implements IThemeHandler {
           bodyAttr: { 'data-theme': themeName },
           bodyStyle: {
             '--color-primary': colorPrimary,
-            '--color-base-100': pageBackground,
           },
         });
       }

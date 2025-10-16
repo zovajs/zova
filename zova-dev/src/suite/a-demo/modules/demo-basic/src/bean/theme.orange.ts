@@ -15,7 +15,7 @@ export class ThemeOrange extends BeanBase implements IThemeBase {
       },
       component: {
         page: {
-          background: dark ? '#121212' : '#fff',
+          background: dark ? 'oklch(25.33% 0.016 252.42)' : '#fff',
           color: dark ? '#fff' : '#000',
         },
       },
