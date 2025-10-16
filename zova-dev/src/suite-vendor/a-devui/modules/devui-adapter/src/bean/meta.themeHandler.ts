@@ -20,10 +20,15 @@ export class MetaThemeHandler extends BeanBase implements IThemeHandler {
     // data-theme
     if (process.env.CLIENT) {
       // client
-      const body = window?.document?.body;
-      if (body) {
-        body.setAttribute('data-theme', themeName);
-      }
+      // const body = window?.document?.body;
+      // if (body) {
+      //   body.setAttribute('data-theme', themeName);
+      // }
+      this.$useMeta(() => {
+        return {
+          bodyAttr: { 'data-theme': themeName },
+        };
+      });
     } else {
       // server
       if (!this.$$scopeSsr.config.cookieThemeDark) {
