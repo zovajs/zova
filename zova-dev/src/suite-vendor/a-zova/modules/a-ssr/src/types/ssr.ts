@@ -110,8 +110,7 @@ declare module 'zova' {
   }
 
   export interface ZovaConfigEnv {
-    SSR_COOKIE_THEMENAME: string | undefined;
-    SSR_COOKIE_THEMEDARK: string | undefined;
+    SSR_COOKIE_THEME: string | undefined;
     SSR_COOKIE_THEMEDARK_DEFAULT: string | undefined;
     SSR_BODYREADYOBSERVER: string | undefined;
   }

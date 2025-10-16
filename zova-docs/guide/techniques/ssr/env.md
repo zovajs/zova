@@ -6,9 +6,8 @@ Zova SSR provides some env environment variables, which is very convenient to co
 
 | Name                         | Description                                          |
 | ---------------------------- | ---------------------------------------------------- |
-| SSR_COOKIE_THEMENAME         | Whether to enable cookie used to save ThemeName      |
-| SSR_COOKIE_THEMEDARK         | Whether to enable cookie used to save ThemeDark      |
-| SSR_COOKIE_THEMEDARK_DEFAULT | The default ThemeDark value for SSR_COOKIE_THEMEDARK |
+| SSR_COOKIE_THEME         | Whether to enable cookie used to save ThemeName/ThemeDark      |
+| SSR_COOKIE_THEMEDARK_DEFAULT | The default ThemeDark value for SSR_COOKIE_THEME |
 | SSR_BODYREADYOBSERVER        | Whether to observe the body dom loading process      |
 | SSR_API_BASE_URL             | The API BaseURL on ssr server                        |
 | SSR_PROD_PORT                | The port of ssr production server                    |

@@ -22,8 +22,11 @@ export class ServiceSsr extends BeanBase {
         if (err) return;
         if (!this.$$scopeSsr.config.cookieThemeDark) {
           this.ctx.meta.$ssr.context._meta.bodyTags += `<script id="__prefersColorSchemeDarkJS">
-            document.body.setAttribute('data-theme', window.ssr_themedark_data);
-            document.querySelector('#__prefersColorSchemeDarkJS').remove();
+          document.body.setAttribute('data-theme', window.ssr_themedark_data);
+            if(window.ssr_local_themename==='demo-basic.theme.orange'){
+              document.body.style.setProperty('--color-primary', '#f28238');
+            }
+            //document.querySelector('#__prefersColorSchemeDarkJS').remove();
           </script>`.replaceAll('\n', '');
         }
       });
