@@ -3,38 +3,39 @@ import { BeanBase, UseScope } from 'zova';
 import { Meta } from 'zova-module-a-meta';
 import { ScopeModuleASsr } from 'zova-module-a-ssr';
 
-const __Themes = { 'demo-basic.theme.orange': 'orange', 'home-base.theme.default': '' };
-
 @Meta()
 export class MetaThemeHandler extends BeanBase implements IThemeHandler {
   @UseScope()
   $$scopeSsr: ScopeModuleASsr;
 
-  async apply({ name, dark, token: _token }: IThemeHandlerApplyParams): Promise<void> {
+  async apply({ name: _name, dark, token }: IThemeHandlerApplyParams): Promise<void> {
     // themeName
-    const _names: string[] = [];
-    const _name = __Themes[name];
-    if (_name) _names.push(_name);
-    _names.push(dark ? 'dark' : 'light');
-    const themeName = _names.join('-');
+    const themeName = dark ? 'dark' : 'light';
+    const colorPrimary = token.color.primary;
+    const pageBackground = token.component.page.background;
     // data-theme
     if (process.env.CLIENT) {
       // client
-      // const body = window?.document?.body;
-      // if (body) {
-      //   body.setAttribute('data-theme', themeName);
-      // }
-      this.$useMeta(() => {
-        return {
-          bodyAttr: { 'data-theme': themeName },
-        };
+      this.$useMeta({
+        bodyAttr: { 'data-theme': themeName },
       });
+      const body = window?.document?.body;
+      if (body) {
+        body.style.setProperty('--color-primary', colorPrimary);
+        body.style.setProperty('--color-base-100', pageBackground);
+      }
     } else {
       // server
       if (!this.$$scopeSsr.config.cookieThemeDark) {
         this.$useMeta({ bodyAttr: { [`data-ssr-theme-dark-${dark}`]: themeName } });
       } else {
-        this.$useMeta({ bodyAttr: { 'data-theme': themeName } });
+        this.$useMeta({
+          bodyAttr: { 'data-theme': themeName },
+          bodyStyle: {
+            '--color-primary': colorPrimary,
+            '--color-base-100': pageBackground,
+          },
+        });
       }
     }
   }
