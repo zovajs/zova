@@ -8,7 +8,7 @@ export class ThemeDefault extends BeanBase implements IThemeBase {
   async apply({ name: _name, dark }: IThemeApplyParams): Promise<IThemeApplyResult> {
     const token: ThemeToken = {
       color: {
-        primary: '#1976d2',
+        primary: 'oklch(45% 0.24 277.023)',
       },
       var: {
         borderColor: '#297acc',
