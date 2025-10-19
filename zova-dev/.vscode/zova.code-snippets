@@ -19,7 +19,7 @@
     "scope": "typescript,typescriptreact",
     "prefix": "aopinit",
     "body": [
-      "protected async __init__(_args: Parameters<any>, next: Function, _receiver: any) {",
+      "protected __init__: AopActionInit<BeanClassSome> = async (_args, next, _receiver) => {",
       "  await next();",
       "  $0",
       "}"
@@ -30,22 +30,116 @@
     "scope": "typescript,typescriptreact",
     "prefix": "aopdispose",
     "body": [
-      "protected __dispose__(_args: [], next: Function, _receiver: any) {",
-      "  next();",
+      "protected __dispose__: AopActionDispose<BeanClassSome> = (_args, next, _receiver) => {",
       "  $0",
+      "  next();",
       "}"
     ],
     "description": "aop.__dispose__"
+  },
+  "aop.__get__": {
+    "scope": "typescript,typescriptreact",
+    "prefix": "aopget",
+    "body": [
+      "protected __get__(prop: string, next: NextSync) {",
+      "  const value = next();",
+      "  return value;",
+      "}"
+    ],
+    "description": "aop.__get__"
+  },
+  "aop.__set__": {
+    "scope": "typescript,typescriptreact",
+    "prefix": "aopset",
+    "body": [
+      "protected __set__(prop: string, value: any, next: NextSync): boolean {",
+      "  return next(value);",
+      "}"
+    ],
+    "description": "aop.__set__"
+  },
+  "aop.getter": {
+    "scope": "typescript,typescriptreact",
+    "prefix": "aopgetter",
+    "body": [
+      "protected __get_xxx__: AopActionGetter<BeanClassSome, 'xxx'> = function (next, _receiver) {",
+      "  const value = next();",
+      "  return value;",
+      "}"
+    ],
+    "description": "aop.getter"
+  },
+  "aop.setter": {
+    "scope": "typescript,typescriptreact",
+    "prefix": "aopsetter",
+    "body": [
+      "protected __set_xxx__: AopActionSetter<BeanClassSome, 'xxx'> = function (value, next, _receiver) {",
+      "  return next(value);",
+      "}"
+    ],
+    "description": "aop.setter"
   },
   "aop.action": {
     "scope": "typescript,typescriptreact",
     "prefix": "aopaction",
     "body": [
-      "async action(_args: Parameters<any>, next: Function, _receiver: any) {",
+      "action: AopAction<BeanClassSome, 'action'> = async (_args, next, _receiver) => {",
       "  $0",
       "  return await next();",
       "}"
     ],
     "description": "aop.action"
-  }
+  },
+  "aop.actionsync": {
+    "scope": "typescript,typescriptreact",
+    "prefix": "aopactionsync",
+    "body": [
+      "action: AopAction<BeanClassSome, 'action'> = (_args, next, _receiver) => {",
+      "  $0",
+      "  return next();",
+      "}"
+    ],
+    "description": "aop.actionsync"
+  },
+  "aopmethod.get": {
+    "scope": "typescript,typescriptreact",
+    "prefix": "aopmethodget",
+    "body": [
+      "get(_options: IDecoratorAopMethodOptions, next: NextSync, _receiver: any, _prop: string) {",
+      "  return next();",
+      "}"
+    ],
+    "description": "aopmethod.get"
+  },
+  "aopmethod.set": {
+    "scope": "typescript,typescriptreact",
+    "prefix": "aopmethodset",
+    "body": [
+      "set(_options: IDecoratorAopMethodOptions, value: any, next: NextSync, _receiver: any, _prop: string): boolean {",
+      "  return next(value);",
+      "}"
+    ],
+    "description": "aopmethod.set"
+  },
+  "aopmagic.get": {
+    "scope": "typescript,typescriptreact",
+    "prefix": "aopmagicget",
+    "body": [
+      "protected __get__(prop: string) {",
+      "  $0",
+      "}"
+    ],
+    "description": "aopmagic.get"
+  },
+  "aopmagic.set": {
+    "scope": "typescript,typescriptreact",
+    "prefix": "aopmagicset",
+    "body": [
+      "protected __set__(prop: string, value: any): boolean {",
+      "  $0",
+      "  return false;",
+      "}"
+    ],
+    "description": "aopmagic.set"
+  },
 }

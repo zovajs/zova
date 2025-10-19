@@ -1,5 +1,7 @@
 export type Functionable<T = void> = (...args: any[]) => T;
-export type FunctionAsync<RESULT = void> = () => Promise<RESULT>;
-export type Next = (data?: any) => Promise<any>;
-export type NextSync = (data?: any) => any;
-export type NextGeneral = (data?: any) => Promise<any> | any;
+export type FunctionAsync<RESULT> = () => Promise<RESULT>;
+export type Next<DATA = any, RESULT = any> = (data?: DATA) => Promise<RESULT>;
+export type NextSync<DATA = any, RESULT = any> = (data?: DATA) => RESULT;
+export type NextGeneral<DATA = any, RESULT = any> = (data?: DATA) => Promise<RESULT> | RESULT;
+export const functionNoop = () => {};
+export type FunctionAny = (...args: any[]) => any;
