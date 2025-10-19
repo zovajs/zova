@@ -20,7 +20,7 @@ export class BeanRouter extends BeanBase {
     return this._vueRouterApp;
   }
 
-  protected __get__(prop) {
+  protected __get__(prop: string) {
     // SymbolRouter first
     const value = this._vueRouterApp?.[prop];
     if (value !== undefined) return value;

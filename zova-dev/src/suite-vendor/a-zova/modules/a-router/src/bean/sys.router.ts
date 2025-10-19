@@ -19,7 +19,7 @@ export class SysRouter extends BeanBase {
     return this._vueRouterSys;
   }
 
-  protected __get__(prop) {
+  protected __get__(prop: string) {
     return this._vueRouterSys && this._vueRouterSys[prop];
   }
 

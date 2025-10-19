@@ -23,7 +23,7 @@ export class BeanScopeBase extends BeanBaseSimple {
     return this.app.meta.module.get(this[SymbolModuleBelong]) as unknown as IModule;
   }
 
-  protected __get__(prop) {
+  protected __get__(prop: string) {
     const moduleBelong = this[SymbolModuleBelong];
     // error
     if (prop === 'error') {

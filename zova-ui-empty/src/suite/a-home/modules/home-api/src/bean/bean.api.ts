@@ -16,7 +16,7 @@ export class BeanFetch extends BeanBase {
     this._addInterceptors(this[SymbolFetch]);
   }
 
-  protected __get__(prop) {
+  protected __get__(prop: string) {
     return this[SymbolFetch] && this[SymbolFetch][prop];
   }
 
