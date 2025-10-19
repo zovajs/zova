@@ -26,7 +26,9 @@ export class ErrorClass extends BeanSimple {
     const ebError = this.sys.meta.error.errors[module];
 
     // convert from enum
+    let text;
     if (code && typeof code === 'string') {
+      text = code;
       code = ebError[code];
     }
 
@@ -38,7 +40,7 @@ export class ErrorClass extends BeanSimple {
     if (code <= 1000) {
       message = this.app.meta.locale.getText(true, undefined, undefined, errorsInternal[code], ...args);
     } else {
-      message = this.app.meta.locale.getText(false, module, undefined, ebError[code], ...args);
+      message = this.app.meta.locale.getText(false, module, undefined, text || code, ...args);
     }
 
     code = __combineErrorCode(module, code);

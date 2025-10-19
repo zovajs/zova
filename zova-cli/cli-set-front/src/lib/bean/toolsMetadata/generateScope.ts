@@ -24,7 +24,7 @@ export async function generateScope(
   }
   if (options.errors) {
     contentImports.push('TypeModuleErrors');
-    contentRecords.push('error: TypeModuleErrors<typeof Errors>;');
+    contentRecords.push('error: TypeModuleErrors<typeof errors>;');
   }
   if (options.locales) {
     contentImports.push('TypeModuleLocales');

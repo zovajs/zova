@@ -189,8 +189,8 @@ export class SysModule extends BeanSimple {
   }
 
   private _registerErrors(module: IModule) {
-    if (!module.resource.Errors) return;
-    this.sys.meta.error.errors[module.info.relativeName] = module.resource.Errors;
+    if (!module.resource.errors) return;
+    this.sys.meta.error.errors[module.info.relativeName] = module.resource.errors;
   }
 
   private _registerLocales(module: IModule) {
