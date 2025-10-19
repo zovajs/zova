@@ -1,23 +1,19 @@
 import type { ControllerPageHome } from 'zova-module-home-index';
 import { BeanAopBase, NextSync, polyfillDispose } from 'zova';
-import { Aop } from 'zova-module-a-bean';
+import { Aop, AopActionDispose, AopActionInit } from 'zova-module-a-bean';
 
 @Aop({ match: 'home-index.controller.pageHome' })
 export class AopHome extends BeanAopBase {
-  protected async __init__(
-    _args: Parameters<ControllerPageHome['__init__']>,
-    next: Function,
-    receiver: ControllerPageHome,
-  ) {
+  protected __init__: AopActionInit<ControllerPageHome> = async (_args, next, receiver) => {
     await next();
     receiver.message += '!';
     polyfillDispose(receiver);
-  }
+  };
 
-  protected __dispose__(_args: [], next: NextSync, receiver: ControllerPageHome) {
+  protected __dispose__: AopActionDispose<ControllerPageHome> = (_args, next, receiver) => {
     receiver.message = receiver.message.substring(0, receiver.message.length - 1);
     next();
-  }
+  };
 
   render(_args: [], next: NextSync) {
     const result = next();
