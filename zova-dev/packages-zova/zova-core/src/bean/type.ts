@@ -1,7 +1,7 @@
 import type { defineOptions, Ref, VNode } from 'vue';
 import type { IBeanSceneRecord } from '../decorator/interface/beanOptions.js';
 import type { RequiredSome } from '../types/utils/requiredSome.js';
-import type { errorsInternal } from './resource/error/errorInternal.js';
+import type { TypeErrorsInternal } from './resource/error/errorInternal.js';
 
 export interface IBeanRecordGeneral {}
 export interface IBeanRecordLocal {}
@@ -40,7 +40,7 @@ export type TypeScopesErrorsHelper<ModuleName extends keyof IBeanScopeErrors> = 
   [K in keyof IBeanScopeErrors[ModuleName] as `${ModuleName}:${IBeanScopeErrors[ModuleName][K]}` ]: K
 };
 export type TypeScopesErrors = TypeScopesErrorsHelper<keyof IBeanScopeErrors>;
-export type TypeAllErrors = TypeScopesErrors & typeof errorsInternal;
+export type TypeAllErrors = TypeScopesErrors & TypeErrorsInternal;
 
 export interface IControllerDataContext {
   slots?: object;

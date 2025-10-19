@@ -1,6 +1,6 @@
 import type { App } from 'vue';
 import type { BeanContainer } from '../../bean/beanContainer.js';
-import type { HttpStatus } from '../../types/enum/httpStatus.js';
+import type { TypeErrorsInternal } from '../../bean/resource/error/errorInternal.js';
 import type { PluginZovaOptions } from '../../types/interface/pluginZova.js';
 import type { ZovaContext } from '../context/context.js';
 import { markRaw } from 'vue';
@@ -82,7 +82,7 @@ export class ZovaApplication {
     }
   }
 
-  public throw(code: HttpStatus | number | string, ...args: any[]): never {
+  public throw(code: keyof TypeErrorsInternal | number, ...args: any[]): never {
     return this.meta.error.throw(undefined, code, ...args);
   }
 }

@@ -14,11 +14,7 @@ import type { TypePageSchema } from './types/router.js';
 import * as ModuleInfo from '@cabloy/module-info';
 import { routerViewLocationKey } from '@cabloy/vue-router';
 import { inject, shallowReactive } from 'vue';
-import {
-  BeanControllerPageBase,
-  BeanSimple,
-  HttpStatus,
-} from 'zova';
+import { BeanControllerPageBase, BeanSimple } from 'zova';
 import { ServiceRouter } from './service/router.js';
 import { SymbolRouterHistory } from './types/utils.js';
 import { getRealRouteName, getRouteMatched } from './utils.js';
@@ -173,7 +169,7 @@ export class Monkey
       return undefined;
     }
     // COMPONENT_UNMOUNTED
-    if (err.code === HttpStatus.COMPONENT_UNMOUNTED) {
+    if (err.code === 600) {
       // do nothing
       return undefined;
     }

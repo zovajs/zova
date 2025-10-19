@@ -5,6 +5,7 @@ export const errorsInternal = {
   '100': 'Continue',
   '101': 'Switching Protocols',
   '102': 'Processing',
+  '103': 'Early hints',
   '200': 'OK',
   '201': 'Created',
   '202': 'Accepted',
@@ -46,7 +47,7 @@ export const errorsInternal = {
   '422': 'Unprocessable Entity',
   '423': 'Locked',
   '424': 'Failed Dependency',
-  '425': 'Unordered Collection',
+  '425': 'Too Early',
   '426': 'Upgrade Required',
   '428': 'Precondition Required',
   '429': 'Too Many Requests',
@@ -66,3 +67,6 @@ export const errorsInternal = {
   '511': 'Network Authentication Required',
   '600': 'Component Unmounted',
 };
+
+export type TypeErrorsInternal = typeof errorsInternal;
+export type TypeErrorsInternalKeys = keyof TypeErrorsInternal;
