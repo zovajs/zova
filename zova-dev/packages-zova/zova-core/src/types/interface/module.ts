@@ -9,7 +9,7 @@ import type { IModuleMain, IModuleMainSys, IMonkeyApp, IMonkeyController, IMonke
 export type TypeModuleResourceIcons = Record<string, string>;
 export type TypeModuleResourceLocales = Record<string, object>;
 export type TypeModuleResourceLocaleModules = Record<string, TypeModuleResourceLocales>;
-export type TypeModuleResourceErrors = Record<number, string>;
+export type TypeModuleResourceErrors = Record<string, number>;
 export type TypeModuleResourceErrorModules = Record<string, TypeModuleResourceErrors>;
 export type TypeModuleResourceComponents = Record<string, Component>;
 export type TypeModuleResourceConfig = (sys: ZovaSys, meta?: ZovaConfigMeta) => object | Promise<object>;
@@ -20,7 +20,7 @@ export interface IModuleResource {
   Main: Constructable<IModuleMain>;
   Monkey: Constructable<IMonkeyModule & IMonkeyApp & IMonkeyController>;
   locales: TypeModuleResourceLocales;
-  Errors: TypeModuleResourceErrors;
+  errors: TypeModuleResourceErrors;
   config: TypeModuleResourceConfig;
   constants: unknown;
   icons: TypeModuleResourceIcons;
