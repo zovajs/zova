@@ -8,11 +8,11 @@ const SymbolPiniaStore = Symbol('SymbolPiniaStore');
 export class BeanPiniaStoreBase extends BeanBase {
   [SymbolPiniaStore];
 
-  protected __get__(prop) {
+  protected __get__(prop: string) {
     return this[SymbolPiniaStore][prop];
   }
 
-  protected __set__(prop, value) {
+  protected __set__(prop: string, value: any): boolean {
     if (prop in this[SymbolPiniaStore]) {
       this[SymbolPiniaStore][prop] = value;
       return true;
