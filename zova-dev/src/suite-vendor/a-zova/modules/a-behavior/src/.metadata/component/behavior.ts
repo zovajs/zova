@@ -9,7 +9,7 @@ export type TypeControllerBehaviorPublicProps = {
 } & ControllerBehaviorProps;
 
 type ControllerInnerProps =
-      TypeControllerInnerProps<ControllerBehaviorProps, keyof typeof ControllerBehavior.$propsDefault>;
+  TypeControllerInnerProps<ControllerBehaviorProps, keyof typeof ControllerBehavior.$propsDefault>;
 declare module 'zova-module-a-behavior' {
   export interface ControllerBehavior {
     $props: ControllerInnerProps;

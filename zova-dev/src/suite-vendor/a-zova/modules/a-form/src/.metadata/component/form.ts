@@ -10,7 +10,7 @@ export type TypeControllerFormPublicProps<T extends {} = {}> = {
 } & ControllerFormProps<T>;
 
 type ControllerInnerProps<T extends {} = {}> =
-      TypeControllerInnerProps<ControllerFormProps<T>, keyof typeof ControllerForm.$propsDefault>;
+  TypeControllerInnerProps<ControllerFormProps<T>, keyof typeof ControllerForm.$propsDefault>;
 declare module 'zova-module-a-form' {
   export interface ControllerForm<T extends {} = {}> {
     $props: ControllerInnerProps<T>;
