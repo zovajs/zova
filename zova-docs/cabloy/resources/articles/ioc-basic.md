@@ -163,9 +163,9 @@ Take a look at the animation demo, which provides complete type intelligent prom
 You can define error codes for business modules
 
 ```diff
-export enum Errors {
-+ Error001 = 1001,
-}
+export const errors = {
++ Error001: 1001,
+} as const;
 ```
 
 1. Here we define an error enumeration type Error001, with the corresponding error code being 1001

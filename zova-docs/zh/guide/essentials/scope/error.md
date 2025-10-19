@@ -12,14 +12,14 @@
 
 定义 Error 分为两个步骤，以模块`demo-basic`为例：
 
-### 1. 定义Error枚举
+### 1. 定义Errors常量
 
 `src/suite/a-demo/modules/demo-basic/src/config/errors.ts`
 
 ```typescript{2}
-export enum Errors {
-  'ErrorTest' = 1001,
-}
+export const errors = {
+  ErrorTest: 1001,
+} as const;
 ```
 
 - 约定：错误码 > 1000

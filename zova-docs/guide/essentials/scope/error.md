@@ -12,14 +12,14 @@ Context Menu - [Module Path]: `Zova Init/Error`
 
 It takes two steps to define `Error`. Taking the module `demo-basic` as an example:
 
-### 1. Define Error enum
+### 1. Define Errors
 
 `src/suite/a-demo/modules/demo-basic/src/config/errors.ts`
 
 ```typescript{2}
-export enum Errors {
-  'ErrorTest' = 1001,
-}
+export const errors = {
+  ErrorTest: 1001,
+} as const;
 ```
 
 - Convention: Error Code > 1000

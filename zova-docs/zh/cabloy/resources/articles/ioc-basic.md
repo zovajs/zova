@@ -159,9 +159,9 @@ export class LocalHome {
 可以为业务模块定义错误码
 
 ```diff
-export enum Errors {
-+ Error001 = 1001,
-}
+export const errors = {
++ Error001: 1001,
+} as const;
 ```
 
 1. 这里定义了一个错误枚举类型 Error001，对应的错误码是 1001
