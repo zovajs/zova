@@ -25,6 +25,11 @@ export class ErrorClass extends BeanSimple {
   parseCode(module, codeDefault, code, ...args) {
     const ebError = this.sys.meta.error.errors[module];
 
+    // '403'->403
+    if (typeof code === 'string' && /^\d+$/.test(code)) {
+      code = Number(code);
+    }
+
     // convert from enum
     let text;
     if (code && typeof code === 'string') {
