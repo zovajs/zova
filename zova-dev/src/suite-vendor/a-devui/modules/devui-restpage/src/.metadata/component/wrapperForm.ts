@@ -18,9 +18,9 @@ type TypeModelArguments = {
   [KEY in keyof ControllerWrapperFormModels as TypePropValueFromModel<KEY>]: ControllerWrapperFormModels[KEY];
 };
 type ControllerInnerProps =
-      TypeControllerInnerProps<ControllerWrapperFormProps & {
-        [KEY in keyof ControllerWrapperFormModels as TypePropValueFromModel<KEY>]: ControllerWrapperFormModels[KEY];
-      }, keyof typeof ControllerWrapperForm.$propsDefault>;
+  TypeControllerInnerProps<ControllerWrapperFormProps & {
+    [KEY in keyof ControllerWrapperFormModels as TypePropValueFromModel<KEY>]: ControllerWrapperFormModels[KEY];
+  }, keyof typeof ControllerWrapperForm.$propsDefault>;
 declare module 'zova-module-devui-restpage' {
   export interface ControllerWrapperForm {
     $props: ControllerInnerProps;

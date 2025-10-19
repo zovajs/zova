@@ -9,7 +9,7 @@ export type TypeControllerPagePublicProps = {
 } & ControllerPageProps;
 
 type ControllerInnerProps =
-      TypeControllerInnerProps<ControllerPageProps, keyof typeof ControllerPage.$propsDefault>;
+  TypeControllerInnerProps<ControllerPageProps, keyof typeof ControllerPage.$propsDefault>;
 declare module 'zova-module-home-base' {
   export interface ControllerPage {
     $props: ControllerInnerProps;

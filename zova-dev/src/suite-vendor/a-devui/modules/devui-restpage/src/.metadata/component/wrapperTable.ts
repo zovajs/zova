@@ -10,7 +10,7 @@ export type TypeControllerWrapperTablePublicProps<T extends {} = {}> = {
 } & ControllerWrapperTableProps<T>;
 
 type ControllerInnerProps<T extends {} = {}> =
-      TypeControllerInnerProps<ControllerWrapperTableProps<T>, keyof typeof ControllerWrapperTable.$propsDefault>;
+  TypeControllerInnerProps<ControllerWrapperTableProps<T>, keyof typeof ControllerWrapperTable.$propsDefault>;
 declare module 'zova-module-devui-restpage' {
   export interface ControllerWrapperTable<T extends {} = {}> {
     $props: ControllerInnerProps<T>;

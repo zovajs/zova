@@ -10,7 +10,7 @@ export type TypeControllerTablePublicProps<T extends {} = {}> = {
 } & ControllerTableProps<T>;
 
 type ControllerInnerProps<T extends {} = {}> =
-      TypeControllerInnerProps<ControllerTableProps<T>, keyof typeof ControllerTable.$propsDefault>;
+  TypeControllerInnerProps<ControllerTableProps<T>, keyof typeof ControllerTable.$propsDefault>;
 declare module 'zova-module-devui-table' {
   export interface ControllerTable<T extends {} = {}> {
     $props: ControllerInnerProps<T>;

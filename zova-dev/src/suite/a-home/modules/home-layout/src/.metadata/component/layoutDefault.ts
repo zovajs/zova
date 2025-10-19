@@ -11,7 +11,7 @@ export type TypeControllerLayoutDefaultPublicProps = {
 } & ControllerLayoutDefaultProps;
 
 type ControllerInnerProps =
-      TypeControllerInnerProps<ControllerLayoutDefaultProps, keyof typeof ControllerLayoutDefault.$propsDefault>;
+  TypeControllerInnerProps<ControllerLayoutDefaultProps, keyof typeof ControllerLayoutDefault.$propsDefault>;
 declare module 'zova-module-home-layout' {
   export interface ControllerLayoutDefault {
     $props: ControllerInnerProps;

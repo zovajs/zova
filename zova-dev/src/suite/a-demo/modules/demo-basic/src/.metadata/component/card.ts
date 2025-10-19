@@ -9,7 +9,7 @@ export type TypeControllerCardPublicProps = {
 } & ControllerCardProps;
 
 type ControllerInnerProps =
-      TypeControllerInnerProps<ControllerCardProps, keyof typeof ControllerCard.$propsDefault>;
+  TypeControllerInnerProps<ControllerCardProps, keyof typeof ControllerCard.$propsDefault>;
 declare module 'zova-module-demo-basic' {
   export interface ControllerCard {
     $props: ControllerInnerProps;

@@ -9,7 +9,7 @@ export type TypeControllerEssentialLinkPublicProps = {
 } & ControllerEssentialLinkProps;
 
 type ControllerInnerProps =
-      TypeControllerInnerProps<ControllerEssentialLinkProps, keyof typeof ControllerEssentialLink.$propsDefault>;
+  TypeControllerInnerProps<ControllerEssentialLinkProps, keyof typeof ControllerEssentialLink.$propsDefault>;
 declare module 'zova-module-home-layout' {
   export interface ControllerEssentialLink {
     $props: ControllerInnerProps;
