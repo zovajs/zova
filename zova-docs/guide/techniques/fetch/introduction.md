@@ -35,7 +35,7 @@ export class BeanFetch {
     // your custom logic maybe here
   }
 
-  protected __get__(prop) {
+  protected __get__(prop: string) {
     return this[SymbolFetch] && this[SymbolFetch][prop];
   }
 }
