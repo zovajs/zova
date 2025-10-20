@@ -1,6 +1,7 @@
 import type { defineOptions, Ref, VNode } from 'vue';
 import type { IBeanSceneRecord } from '../decorator/interface/beanOptions.js';
 import type { RequiredSome } from '../types/utils/requiredSome.js';
+import type { TypeRecordValues } from '../types/utils/type.js';
 import type { TypeErrorsInternal } from './resource/error/errorInternal.js';
 
 export interface IBeanRecordGeneral {}
@@ -36,11 +37,14 @@ export type TypeBeanScopeLocaleKeys = keyof IBeanScopeLocale;
 export interface IBeanScopeErrors {}
 export type TypeBeanScopeErrorsKeys = keyof IBeanScopeErrors;
 
-export type TypeScopesErrorsHelper<ModuleName extends keyof IBeanScopeErrors> = {
-  [K in keyof IBeanScopeErrors[ModuleName] as `${ModuleName}:${IBeanScopeErrors[ModuleName][K]}` ]: K
+export type TypeScopesErrorsHelper<ModuleName extends keyof IBeanScopeErrors, Errors extends IBeanScopeErrors[ModuleName]> = {
+  // @ts-ignore: ignore
+  [K in keyof Errors as `${ModuleName}:${Errors[K]}` ]: K
 };
-export type TypeScopesErrors = TypeScopesErrorsHelper<keyof IBeanScopeErrors>;
-export type TypeAllErrors = TypeScopesErrors & TypeErrorsInternal;
+export type TypeScopesErrorCodes = TypeRecordValues<{
+  [ModuleName in keyof IBeanScopeErrors]: keyof TypeScopesErrorsHelper<ModuleName, IBeanScopeErrors[ModuleName]>
+}>;
+export type TypeAllErrorCodes = TypeScopesErrorCodes | keyof TypeErrorsInternal;
 
 export interface IControllerDataContext {
   slots?: object;
