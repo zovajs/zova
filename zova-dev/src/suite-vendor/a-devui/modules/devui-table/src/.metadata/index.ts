@@ -97,6 +97,8 @@ declare module 'zova' {
   export interface IBeanScopeLocale {
     'devui-table': (typeof locales)[TypeLocaleBase];
   }
+
+  
 }
 
 export function locale<K extends keyof (typeof locales)[TypeLocaleBase]>(key: K): `devui-table::${K}` {

@@ -215,6 +215,8 @@ declare module 'zova' {
   export interface IBeanScopeLocale {
     'home-base': (typeof locales)[TypeLocaleBase];
   }
+
+  
 }
 
 export function locale<K extends keyof (typeof locales)[TypeLocaleBase]>(key: K): `home-base::${K}` {

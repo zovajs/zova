@@ -155,6 +155,8 @@ declare module 'zova' {
   export interface IBeanScopeLocale {
     'devui-restpage': (typeof locales)[TypeLocaleBase];
   }
+
+  
 }
 
 export function locale<K extends keyof (typeof locales)[TypeLocaleBase]>(key: K): `devui-restpage::${K}` {

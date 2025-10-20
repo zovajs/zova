@@ -244,6 +244,8 @@ declare module 'zova' {
   export interface IBeanScopeLocale {
     'home-layout': (typeof locales)[TypeLocaleBase];
   }
+
+  
 }
 
 export function locale<K extends keyof (typeof locales)[TypeLocaleBase]>(key: K): `home-layout::${K}` {
