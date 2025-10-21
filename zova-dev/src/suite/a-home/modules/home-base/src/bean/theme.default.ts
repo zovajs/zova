@@ -1,11 +1,12 @@
-import type { IThemeApplyParams, IThemeApplyResult, IThemeBase } from 'zova-module-a-style';
+import type { IDecoratorThemeOptions, IThemeApplyParams, IThemeApplyResult, IThemeBase } from 'zova-module-a-style';
 import type { ThemeToken } from '../themeToken.js';
-import { BeanBase } from 'zova';
-import { Theme } from 'zova-module-a-style';
+import { BeanThemeBase, Theme } from 'zova-module-a-style';
+
+export interface IThemeOptionsDefault extends IDecoratorThemeOptions {}
 
 @Theme()
-export class ThemeDefault extends BeanBase implements IThemeBase {
-  async apply({ name: _name, dark }: IThemeApplyParams): Promise<IThemeApplyResult> {
+export class ThemeDefault extends BeanThemeBase implements IThemeBase {
+  async apply({ name, dark }: IThemeApplyParams): Promise<IThemeApplyResult> {
     const token: ThemeToken = {
       color: {
         primary: 'oklch(45% 0.24 277.023)',
@@ -20,6 +21,8 @@ export class ThemeDefault extends BeanBase implements IThemeBase {
         },
       },
     };
-    return { token };
+    return {
+      token: this.mergeOptionsToken({ name, dark }, token),
+    };
   }
 }

@@ -1,9 +1,12 @@
-import type { IBeanRecord, OmitNever } from 'zova';
+import type { IBeanRecord, OmitNever, PowerPartial } from 'zova';
 import type { ServiceOnion } from 'zova-module-a-bean';
+import type { ThemeToken } from 'zova-module-home-base';
 
 export interface IThemeRecord {}
 
-export interface IDecoratorThemeOptions {}
+export interface IDecoratorThemeOptions {
+  token?: (params: IThemeApplyParams) => PowerPartial<ThemeToken>;
+}
 
 declare module 'zova-module-a-bean' {
   export interface SysOnion {
@@ -31,7 +34,7 @@ export interface IThemeApplyResult {
 }
 
 export interface IThemeBase {
-  apply({ name, dark }: IThemeApplyParams): Promise<IThemeApplyResult>;
+  apply(params: IThemeApplyParams): Promise<IThemeApplyResult>;
 }
 
 export interface IThemeHandler {

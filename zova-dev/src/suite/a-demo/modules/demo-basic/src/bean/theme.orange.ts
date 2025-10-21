@@ -1,18 +1,13 @@
 import type { IDecoratorThemeOptions, IThemeApplyParams, IThemeApplyResult, IThemeBase } from 'zova-module-a-style';
 import type { ThemeToken } from 'zova-module-home-base';
-import { BeanBase, deepExtend, PowerPartial } from 'zova';
-import { Theme } from 'zova-module-a-style';
+import { BeanThemeBase, Theme } from 'zova-module-a-style';
 
-export interface IThemeOptionsOrange extends IDecoratorThemeOptions {
-  token?: (params: IThemeApplyParams) => PowerPartial<ThemeToken>;
-}
+export interface IThemeOptionsOrange extends IDecoratorThemeOptions {}
 
 @Theme<IThemeOptionsOrange>()
-export class ThemeOrange extends BeanBase implements IThemeBase {
+export class ThemeOrange extends BeanThemeBase implements IThemeBase {
   async apply({ name, dark }: IThemeApplyParams): Promise<IThemeApplyResult> {
-    const options = this.$onionOptions as IThemeOptionsOrange;
-    const tokenConfig = options.token?.({ name, dark });
-    let token: ThemeToken = {
+    const token: ThemeToken = {
       color: {
         primary: '#f28238',
       },
@@ -26,9 +21,8 @@ export class ThemeOrange extends BeanBase implements IThemeBase {
         },
       },
     };
-    if (tokenConfig) {
-      token = deepExtend(token, tokenConfig);
-    }
-    return { token };
+    return {
+      token: this.mergeOptionsToken({ name, dark }, token),
+    };
   }
 }
