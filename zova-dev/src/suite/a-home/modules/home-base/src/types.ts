@@ -9,16 +9,5 @@ declare module 'zova' {
   export interface BeanBase {
     $scopeBase: ScopeModule;
     $css: CssDefault;
-    // $token: ThemeToken;
-  }
-}
-
-declare module 'zova-module-a-style' {
-  export interface IThemeApplyResult {
-    // token: ThemeToken;
-  }
-
-  export interface IThemeHandlerApplyParams {
-    // token: ThemeToken;
   }
 }
