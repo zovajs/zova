@@ -9,6 +9,7 @@ import type {
 import type { ScopeModule } from './.metadata/this.js';
 import { createTypeStyle, style } from 'typestyle';
 import {
+  beanFullNameFromOnionName,
   BeanSimple,
   SymbolBeanFullName,
   useComputed,
@@ -43,7 +44,7 @@ export class Monkey extends BeanSimple implements IMonkeyAppInitialize, IMonkeyA
     this._beanTheme = await this.bean._getBean(BeanTheme, true);
     // css default
     const scope: ScopeModule = await this.bean.getScope(__ThisModule__);
-    this._beanCssDefault = await this.bean._getBean(scope.config.defaultCss, true);
+    this._beanCssDefault = await this.bean._getBean(beanFullNameFromOnionName(scope.config.defaultCss, 'css') as any, true);
   }
 
   async beanInit(bean: BeanContainer, beanInstance: BeanBase) {
