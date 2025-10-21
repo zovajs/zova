@@ -1,6 +1,6 @@
 import type { IThemeBase, IThemeHandler, IThemeRecord } from '../types/index.js';
 import { watch } from 'vue';
-import { beanFullNameFromOnionName, cast, UseScope } from 'zova';
+import { beanFullNameFromOnionName, cast, onionNameFromBeanFullName, UseScope } from 'zova';
 import { Bean } from 'zova-module-a-bean';
 import { BeanModelBase } from 'zova-module-a-model';
 import { ScopeModuleASsr } from 'zova-module-a-ssr';
@@ -110,7 +110,12 @@ export class BeanTheme extends BeanModelBase {
   }
 
   async _loadThemeBean(name: keyof IThemeRecord): Promise<IThemeBase | undefined> {
-    const moduleName = name.split(':')[0];
+    let parts = name.split(':');
+    if (parts.length === 1) {
+      name = onionNameFromBeanFullName(name, 'theme') as any;
+      parts = name.split(':');
+    }
+    const moduleName = parts[0];
     if (!this.app.meta.module.exists(moduleName)) return;
     return await this.bean._getBean(beanFullNameFromOnionName(name, 'theme') as any, true);
   }
