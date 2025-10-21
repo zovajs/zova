@@ -1,4 +1,4 @@
-export interface ThemeToken {
+export interface ThemeTokenCustom {
   color: {
     primary: string;
   };
@@ -11,4 +11,8 @@ export interface ThemeToken {
       color: string;
     };
   };
+}
+
+declare module 'zova-module-a-style' {
+  export interface ThemeToken extends ThemeTokenCustom {}
 }

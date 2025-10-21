@@ -1,6 +1,5 @@
 import type { IBeanRecord, OmitNever, PowerPartial } from 'zova';
 import type { ServiceOnion } from 'zova-module-a-bean';
-import type { ThemeToken } from 'zova-module-home-base';
 
 export interface IThemeRecord {}
 
@@ -22,7 +21,13 @@ declare module 'zova' {
   export interface IBeanSceneRecord {
     theme: never;
   }
+
+  export interface BeanBase {
+    $token: ThemeToken;
+  }
 }
+
+export interface ThemeToken {}
 
 export interface IThemeApplyParams {
   name: string;
@@ -30,6 +35,7 @@ export interface IThemeApplyParams {
 }
 
 export interface IThemeApplyResult {
+  token: ThemeToken;
   handler?: keyof IBeanRecord;
 }
 
@@ -44,4 +50,5 @@ export interface IThemeHandler {
 export interface IThemeHandlerApplyParams {
   name: string;
   dark: boolean;
+  token: ThemeToken;
 }
