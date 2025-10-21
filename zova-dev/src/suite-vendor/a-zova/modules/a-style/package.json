@@ -16,8 +16,8 @@
     },
     "onions": {
       "css": {
-        "beanGeneral": true,
-        "optionsNone": true,
+        "optionsGlobalInterfaceName": "IDecoratorCssOptions",
+        "optionsGlobalInterfaceFrom": "zova-module-a-style",
         "boilerplate": "cli/css/boilerplate"
       },
       "theme": {

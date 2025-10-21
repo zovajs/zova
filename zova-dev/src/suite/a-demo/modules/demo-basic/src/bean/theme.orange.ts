@@ -1,9 +1,11 @@
-import type { IThemeApplyParams, IThemeApplyResult, IThemeBase } from 'zova-module-a-style';
+import type { IDecoratorThemeOptions, IThemeApplyParams, IThemeApplyResult, IThemeBase } from 'zova-module-a-style';
 import type { ThemeToken } from 'zova-module-home-base';
 import { BeanBase } from 'zova';
 import { Theme } from 'zova-module-a-style';
 
-@Theme()
+export interface IThemeOptionsOrange extends IDecoratorThemeOptions {}
+
+@Theme<IThemeOptionsOrange>()
 export class ThemeOrange extends BeanBase implements IThemeBase {
   async apply({ name: _name, dark }: IThemeApplyParams): Promise<IThemeApplyResult> {
     const token: ThemeToken = {

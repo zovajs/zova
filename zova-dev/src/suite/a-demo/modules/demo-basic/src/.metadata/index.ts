@@ -377,10 +377,16 @@ declare module 'zova' {
 /** model: end */
 /** theme: begin */
 export * from '../bean/theme.orange.js';
+export * from '../bean/theme.red.js';
 
-import 'zova';
-declare module 'zova' {
+import { IDecoratorThemeOptions } from 'zova-module-a-style';
+declare module 'zova-module-a-style' {
   
+    export interface IThemeRecord {
+      'demo-basic:orange': IDecoratorThemeOptions;
+'demo-basic:red': IDecoratorThemeOptions;
+    }
+
   
 }
 declare module 'zova-module-demo-basic' {
@@ -388,15 +394,22 @@ declare module 'zova-module-demo-basic' {
         export interface ThemeOrange {
           /** @internal */
           get scope(): ScopeModuleDemoBasic;
+        }
+
+        export interface ThemeRed {
+          /** @internal */
+          get scope(): ScopeModuleDemoBasic;
         } 
 }
 /** theme: end */
 /** theme: begin */
 import { ThemeOrange } from '../bean/theme.orange.js';
+import { ThemeRed } from '../bean/theme.red.js';
 import 'zova';
 declare module 'zova' {
-  export interface IBeanRecordGeneral {
+  export interface IBeanRecordLocal {
     'demo-basic.theme.orange': ThemeOrange;
+'demo-basic.theme.red': ThemeRed;
   }
 }
 /** theme: end */
