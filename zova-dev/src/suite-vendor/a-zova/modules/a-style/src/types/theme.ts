@@ -1,5 +1,6 @@
-import type { IBeanRecord, OmitNever, PowerPartial } from 'zova';
+import type { OmitNever, PowerPartial } from 'zova';
 import type { ServiceOnion } from 'zova-module-a-bean';
+import type { IMetaRecord } from 'zova-module-a-meta';
 
 export interface IThemeRecord {}
 
@@ -36,7 +37,7 @@ export interface IThemeApplyParams {
 
 export interface IThemeApplyResult {
   token: ThemeToken;
-  handler?: keyof IBeanRecord;
+  handler?: keyof IMetaRecord;
 }
 
 export interface IThemeBase {

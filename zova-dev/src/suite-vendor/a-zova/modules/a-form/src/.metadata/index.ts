@@ -94,7 +94,7 @@ export * from '../bean/behavior.formFieldModel.js';
 import { IBehaviorOptionsForm } from '../bean/behavior.form.jsx';
 import { IBehaviorOptionsFormField } from '../bean/behavior.formField.js';
 import { IBehaviorOptionsFormFieldModel } from '../bean/behavior.formFieldModel.js';
-import 'zova';
+import 'zova-module-a-behavior';
 declare module 'zova-module-a-behavior' {
   
     export interface IBehaviorRecord {

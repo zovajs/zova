@@ -28,7 +28,7 @@ declare module 'zova' {
 export * from '../service/aop.js';
 export * from '../service/onion_.js';
 
-import 'zova';
+import 'zova-module-a-bean';
 declare module 'zova-module-a-bean' {
   
     export interface IServiceRecord {

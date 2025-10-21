@@ -3,7 +3,7 @@
 export * from '../service/router.js';
 export * from '../service/ssr.js';
 
-import 'zova';
+import 'zova-module-a-bean';
 declare module 'zova-module-a-bean' {
   
     export interface IServiceRecord {
@@ -128,7 +128,7 @@ export interface IZovaComponentRecord {
 /** css: begin */
 export * from '../bean/css.default.js';
 import { ICssOptionsDefault } from '../bean/css.default.js';
-import 'zova';
+import 'zova-module-a-style';
 declare module 'zova-module-a-style' {
   
     export interface ICssRecord {
@@ -157,7 +157,7 @@ declare module 'zova' {
 /** theme: begin */
 export * from '../bean/theme.default.js';
 import { IThemeOptionsDefault } from '../bean/theme.default.js';
-import 'zova';
+import 'zova-module-a-style';
 declare module 'zova-module-a-style' {
   
     export interface IThemeRecord {

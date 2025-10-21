@@ -6,7 +6,7 @@ export * from '../bean/tableFeature.schema.js';
 import { ITableFeatureOptionsFormat } from '../bean/tableFeature.format.js';
 import { ITableFeatureOptionsRestPage } from '../bean/tableFeature.restPage.js';
 import { ITableFeatureOptionsSchema } from '../bean/tableFeature.schema.js';
-import 'zova';
+import 'zova-module-a-table';
 declare module 'zova-module-a-table' {
   
     export interface ITableFeatureRecord {

@@ -305,7 +305,7 @@ declare module 'zova' {
 /** behavior: begin */
 export * from '../bean/behavior.formFieldLayout.jsx';
 import { IBehaviorOptionsFormFieldLayout } from '../bean/behavior.formFieldLayout.jsx';
-import 'zova';
+import 'zova-module-a-behavior';
 declare module 'zova-module-a-behavior' {
   
     export interface IBehaviorRecord {
@@ -378,7 +378,7 @@ declare module 'zova' {
 /** theme: begin */
 export * from '../bean/theme.orange.js';
 import { IThemeOptionsOrange } from '../bean/theme.orange.js';
-import 'zova';
+import 'zova-module-a-style';
 declare module 'zova-module-a-style' {
   
     export interface IThemeRecord {

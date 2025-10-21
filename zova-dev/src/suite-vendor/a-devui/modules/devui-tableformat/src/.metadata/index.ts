@@ -2,7 +2,7 @@
 /** tableCellFormat: begin */
 export * from '../bean/tableCellFormat.actionView.jsx';
 import { ITableCellFormatOptionsActionView } from '../bean/tableCellFormat.actionView.jsx';
-import 'zova';
+import 'zova-module-a-table';
 declare module 'zova-module-a-table' {
   
     export interface ITableCellFormatRecord {

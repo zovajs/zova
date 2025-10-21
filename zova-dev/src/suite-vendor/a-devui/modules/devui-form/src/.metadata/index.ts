@@ -2,7 +2,7 @@
 /** behavior: begin */
 export * from '../bean/behavior.formFieldLayout.jsx';
 import { IBehaviorOptionsFormFieldLayout } from '../bean/behavior.formFieldLayout.jsx';
-import 'zova';
+import 'zova-module-a-behavior';
 declare module 'zova-module-a-behavior' {
   
     export interface IBehaviorRecord {

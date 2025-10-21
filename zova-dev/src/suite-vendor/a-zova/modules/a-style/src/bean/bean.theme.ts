@@ -104,7 +104,7 @@ export class BeanTheme extends BeanModelBase {
     this.token = cast(res).token;
     const handler = res.handler ?? this.scope.config.defaultThemeHandler;
     if (handler) {
-      const themeHandler = (await this.bean._getBean(handler, true)) as unknown as IThemeHandler;
+      const themeHandler = (await this.bean._getBean(beanFullNameFromOnionName(handler, 'meta') as any, true)) as unknown as IThemeHandler;
       await themeHandler.apply({ name, dark, token: this.token } as any);
     }
   }

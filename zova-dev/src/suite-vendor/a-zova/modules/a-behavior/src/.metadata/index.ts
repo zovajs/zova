@@ -30,7 +30,7 @@ declare module 'zova' {
 /** service: begin */
 export * from '../service/composer.js';
 
-import 'zova';
+import 'zova-module-a-bean';
 declare module 'zova-module-a-bean' {
   
     export interface IServiceRecord {
@@ -101,7 +101,7 @@ export interface IZovaComponentRecord {
 /** behavior: begin */
 export * from '../bean/behavior.root_.js';
 
-import 'zova';
+import 'zova-module-a-behavior';
 declare module 'zova-module-a-behavior' {
   
   

@@ -2,7 +2,7 @@
 /** aopMethod: begin */
 export * from '../bean/aopMethod.log.js';
 import { IAopMethodOptionsLog } from '../bean/aopMethod.log.js';
-import 'zova';
+import 'zova-module-a-bean';
 declare module 'zova-module-a-bean' {
   
     export interface IAopMethodRecord {

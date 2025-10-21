@@ -63,7 +63,7 @@ export * from '../api/openapi/index.js';
 /** service: begin */
 export * from '../service/jwtAdapter.js';
 
-import 'zova';
+import 'zova-module-a-bean';
 declare module 'zova-module-a-bean' {
   
     export interface IServiceRecord {

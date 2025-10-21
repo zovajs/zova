@@ -4,7 +4,7 @@ export * from '../bean/tableCellFormat.currency.js';
 export * from '../bean/tableCellFormat.fallback.js';
 import { ITableCellFormatOptionsCurrency } from '../bean/tableCellFormat.currency.js';
 import { ITableCellFormatOptionsFallback } from '../bean/tableCellFormat.fallback.js';
-import 'zova';
+import 'zova-module-a-table';
 declare module 'zova-module-a-table' {
   
     export interface ITableCellFormatRecord {

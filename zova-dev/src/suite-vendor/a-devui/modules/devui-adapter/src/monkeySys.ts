@@ -7,7 +7,7 @@ export class MonkeySys extends BeanSimple implements IMonkeySysInitialize {
     // defaultThemeHandler
     const scopeStyleConfig = this.sys.util.getModuleConfigSafe('a-style');
     if (!scopeStyleConfig.defaultThemeHandler) {
-      scopeStyleConfig.defaultThemeHandler = 'devui-adapter.meta.themeHandler';
+      scopeStyleConfig.defaultThemeHandler = 'devui-adapter:themeHandler';
     }
     // rest
     const scopeRestConfig = this.sys.util.getModuleConfigSafe('a-openapi');

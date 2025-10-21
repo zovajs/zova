@@ -2,8 +2,8 @@
 /** meta: begin */
 export * from '../bean/meta.themeHandler.js';
 
-import 'zova';
-declare module 'zova' {
+import 'zova-module-a-meta';
+declare module 'zova-module-a-meta' {
   
     export interface IMetaRecord {
       'devui-adapter:themeHandler': never;

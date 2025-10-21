@@ -3,7 +3,7 @@
 export * from '../service/tableCellFormat.js';
 export * from '../service/tableFeature.js';
 
-import 'zova';
+import 'zova-module-a-bean';
 declare module 'zova-module-a-bean' {
   
     export interface IServiceRecord {

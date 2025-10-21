@@ -10,7 +10,7 @@ import { IInterceptorOptionsHeaders } from '../bean/interceptor.headers.js';
 import { IInterceptorOptionsJwt } from '../bean/interceptor.jwt.js';
 import { IInterceptorOptionsMock } from '../bean/interceptor.mock.js';
 import { IInterceptorOptionsPerformAction } from '../bean/interceptor.performAction.js';
-import 'zova';
+import 'zova-module-a-fetch';
 declare module 'zova-module-a-fetch' {
   
     export interface IInterceptorRecord {
