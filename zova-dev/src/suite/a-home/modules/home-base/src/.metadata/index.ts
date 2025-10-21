@@ -156,12 +156,12 @@ declare module 'zova' {
 /** css: end */
 /** theme: begin */
 export * from '../bean/theme.default.js';
-
-import { IDecoratorThemeOptions } from 'zova-module-a-style';
+import { IThemeOptionsDefault } from '../bean/theme.default.js';
+import 'zova';
 declare module 'zova-module-a-style' {
   
     export interface IThemeRecord {
-      'home-base:default': IDecoratorThemeOptions;
+      'home-base:default': IThemeOptionsDefault;
     }
 
   
