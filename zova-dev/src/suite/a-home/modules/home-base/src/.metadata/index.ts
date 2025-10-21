@@ -127,10 +127,14 @@ export interface IZovaComponentRecord {
 /** components: end */
 /** css: begin */
 export * from '../bean/css.default.js';
-
+import { ICssOptionsDefault } from '../bean/css.default.js';
 import 'zova';
-declare module 'zova' {
+declare module 'zova-module-a-style' {
   
+    export interface ICssRecord {
+      'home-base:default': ICssOptionsDefault;
+    }
+
   
 }
 declare module 'zova-module-home-base' {
@@ -145,7 +149,7 @@ declare module 'zova-module-home-base' {
 import { CssDefault } from '../bean/css.default.js';
 import 'zova';
 declare module 'zova' {
-  export interface IBeanRecordGeneral {
+  export interface IBeanRecordLocal {
     'home-base.css.default': CssDefault;
   }
 }
@@ -153,9 +157,13 @@ declare module 'zova' {
 /** theme: begin */
 export * from '../bean/theme.default.js';
 
-import 'zova';
-declare module 'zova' {
+import { IDecoratorThemeOptions } from 'zova-module-a-style';
+declare module 'zova-module-a-style' {
   
+    export interface IThemeRecord {
+      'home-base:default': IDecoratorThemeOptions;
+    }
+
   
 }
 declare module 'zova-module-home-base' {
@@ -170,7 +178,7 @@ declare module 'zova-module-home-base' {
 import { ThemeDefault } from '../bean/theme.default.js';
 import 'zova';
 declare module 'zova' {
-  export interface IBeanRecordGeneral {
+  export interface IBeanRecordLocal {
     'home-base.theme.default': ThemeDefault;
   }
 }
