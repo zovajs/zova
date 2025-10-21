@@ -1,7 +1,6 @@
-import type { IBeanRecord } from 'zova';
-import type { IThemeBase, IThemeHandler } from '../types/index.js';
+import type { IThemeBase, IThemeHandler, IThemeRecord } from '../types/index.js';
 import { watch } from 'vue';
-import { cast, UseScope } from 'zova';
+import { beanFullNameFromOnionName, cast, UseScope } from 'zova';
 import { Bean } from 'zova-module-a-bean';
 import { BeanModelBase } from 'zova-module-a-model';
 import { ScopeModuleASsr } from 'zova-module-a-ssr';
@@ -10,7 +9,7 @@ export type ThemeDarkMode = 'auto' | boolean;
 
 @Bean()
 export class BeanTheme extends BeanModelBase {
-  name: keyof IBeanRecord;
+  name: keyof IThemeRecord;
   darkMode: ThemeDarkMode; // auto/true/false
 
   private _dark: boolean;
@@ -110,10 +109,10 @@ export class BeanTheme extends BeanModelBase {
     }
   }
 
-  async _loadThemeBean(name: string): Promise<IThemeBase | undefined> {
-    const moduleName = name.split('.')[0];
+  async _loadThemeBean(name: keyof IThemeRecord): Promise<IThemeBase | undefined> {
+    const moduleName = name.split(':')[0];
     if (!this.app.meta.module.exists(moduleName)) return;
-    return await this.bean._getBean(name as any, true);
+    return await this.bean._getBean(beanFullNameFromOnionName(name, 'theme') as any, true);
   }
 
   toggleDark() {

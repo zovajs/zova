@@ -1,5 +1,6 @@
-import { $getBeanName, BeanControllerPageBase, useComputed } from 'zova';
+import { BeanControllerPageBase, useComputed } from 'zova';
 import { Controller } from 'zova-module-a-bean';
+import { $getThemeName } from 'zova-module-a-style';
 import { ZPage } from 'zova-module-home-base';
 
 @Controller()
@@ -83,14 +84,14 @@ export class ControllerPageStyle extends BeanControllerPageBase {
                 }}
               >
                 <option
-                  value={$getBeanName('home-base.theme.default')}
-                  selected={this.$theme.name === $getBeanName('home-base.theme.default')}
+                  value={$getThemeName('home-base:default')}
+                  selected={this.$theme.name === $getThemeName('home-base:default')}
                 >
                   Default
                 </option>
                 <option
-                  value={$getBeanName('demo-basic.theme.orange')}
-                  selected={this.$theme.name === $getBeanName('demo-basic.theme.orange')}
+                  value={$getThemeName('demo-basic:orange')}
+                  selected={this.$theme.name === $getThemeName('demo-basic:orange')}
                 >
                   Orange
                 </option>
