@@ -23,7 +23,7 @@ declare module 'zova-module-devui-adapter' {
 import { MetaThemeHandler } from '../bean/meta.themeHandler.js';
 import 'zova';
 declare module 'zova' {
-  export interface IBeanRecordGeneral {
+  export interface IBeanRecordLocal {
     'devui-adapter.meta.themeHandler': MetaThemeHandler;
   }
 }

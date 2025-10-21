@@ -6,8 +6,7 @@
   "zovaModule": {
     "onions": {
       "meta": {
-        "beanGeneral": true,
-        "optionsGlobalInterfaceName": ""
+        "optionsGlobalInterfaceFrom": "zova-module-a-meta"
       }
     }
   },

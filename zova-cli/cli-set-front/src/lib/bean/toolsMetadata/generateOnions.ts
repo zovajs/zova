@@ -83,7 +83,9 @@ export interface I${sceneNameCapitalize}RecordLocal {
   const content = `/** ${sceneName}: begin */
 ${contentExports.join('\n')}
 ${contentImports.join('\n')}
-${needImportOptionsGlobalInterface ? `import { ${sceneMeta.optionsGlobalInterfaceName} } from '${sceneMeta.optionsGlobalInterfaceFrom || 'zova'}';` : "import 'zova';"}
+${needImportOptionsGlobalInterface
+  ? `import { ${sceneMeta.optionsGlobalInterfaceName} } from '${sceneMeta.optionsGlobalInterfaceFrom || 'zova'}';`
+  : `import '${sceneMeta.optionsGlobalInterfaceFrom || 'zova'}';`}
 declare module '${sceneMeta.optionsGlobalInterfaceFrom || 'zova'}' {
   ${contentRecordsGlobal.length > 0 ? exportRecordsMiddlewareGlobal : ''}
   ${contentRecordsLocal.length > 0 ? exportRecordsMiddlewareLocal : ''}
