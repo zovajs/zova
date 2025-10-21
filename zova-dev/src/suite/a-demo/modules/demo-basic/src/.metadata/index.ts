@@ -378,13 +378,14 @@ declare module 'zova' {
 /** theme: begin */
 export * from '../bean/theme.orange.js';
 export * from '../bean/theme.red.js';
-
-import { IDecoratorThemeOptions } from 'zova-module-a-style';
+import { IThemeOptionsOrange } from '../bean/theme.orange.js';
+import { IThemeOptionsRed } from '../bean/theme.red.js';
+import 'zova';
 declare module 'zova-module-a-style' {
   
     export interface IThemeRecord {
-      'demo-basic:orange': IDecoratorThemeOptions;
-'demo-basic:red': IDecoratorThemeOptions;
+      'demo-basic:orange': IThemeOptionsOrange;
+'demo-basic:red': IThemeOptionsRed;
     }
 
   
