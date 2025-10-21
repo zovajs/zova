@@ -1,3 +1,5 @@
+import 'zova-module-a-style';
+
 export interface ThemeTokenCustom {
   color: {
     primary: string;
