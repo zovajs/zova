@@ -27,6 +27,7 @@ declare module 'zova-module-a-tablefeature' {
         export interface TableFeatureFormat {
           get $beanFullName(): 'a-tablefeature.tableFeature.format';
           get $onionName(): 'a-tablefeature:format';
+          get $onionOptions(): ITableFeatureOptionsFormat;
         }
 
         export interface TableFeatureRestPage {
@@ -37,6 +38,7 @@ declare module 'zova-module-a-tablefeature' {
         export interface TableFeatureRestPage {
           get $beanFullName(): 'a-tablefeature.tableFeature.restPage';
           get $onionName(): 'a-tablefeature:restPage';
+          get $onionOptions(): ITableFeatureOptionsRestPage;
         }
 
         export interface TableFeatureSchema {
@@ -47,6 +49,7 @@ declare module 'zova-module-a-tablefeature' {
         export interface TableFeatureSchema {
           get $beanFullName(): 'a-tablefeature.tableFeature.schema';
           get $onionName(): 'a-tablefeature:schema';
+          get $onionOptions(): ITableFeatureOptionsSchema;
         } 
 }
 /** tableFeature: end */

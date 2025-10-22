@@ -42,6 +42,7 @@ declare module 'zova-module-a-model' {
         export interface ServiceStorage {
           get $beanFullName(): 'a-model.service.storage';
           get $onionName(): 'a-model:storage';
+          
         } 
 }
 /** service: end */

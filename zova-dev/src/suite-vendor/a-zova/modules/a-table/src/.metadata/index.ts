@@ -23,6 +23,7 @@ declare module 'zova-module-a-table' {
         export interface ServiceTableCellFormat {
           get $beanFullName(): 'a-table.service.tableCellFormat';
           get $onionName(): 'a-table:tableCellFormat';
+          
         }
 
         export interface ServiceTableFeature {
@@ -33,6 +34,7 @@ declare module 'zova-module-a-table' {
         export interface ServiceTableFeature {
           get $beanFullName(): 'a-table.service.tableFeature';
           get $onionName(): 'a-table:tableFeature';
+          
         } 
 }
 /** service: end */

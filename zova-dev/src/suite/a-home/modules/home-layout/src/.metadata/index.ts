@@ -203,6 +203,7 @@ declare module 'zova-module-home-layout' {
         export interface ModelMenu {
           get $beanFullName(): 'home-layout.model.menu';
           get $onionName(): 'home-layout:menu';
+          get $onionOptions(): IModelOptionsMenu;
         } 
 }
 /** model: end */

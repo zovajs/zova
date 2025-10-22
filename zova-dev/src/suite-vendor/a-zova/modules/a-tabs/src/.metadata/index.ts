@@ -63,6 +63,7 @@ declare module 'zova-module-a-tabs' {
         export interface ModelTabs {
           get $beanFullName(): 'a-tabs.model.tabs';
           get $onionName(): 'a-tabs:tabs';
+          get $onionOptions(): IModelOptionsTabs;
         } 
 }
 /** model: end */

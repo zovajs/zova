@@ -17,6 +17,7 @@ declare module 'zova-module-a-bean' {
         export interface SysOnion {
           get $beanFullName(): 'a-bean.sys.onion';
           get $onionName(): 'a-bean:onion';
+          
         } 
 }
 /** sys: end */
@@ -52,6 +53,7 @@ declare module 'zova-module-a-bean' {
         export interface ServiceAop {
           get $beanFullName(): 'a-bean.service.aop';
           get $onionName(): 'a-bean:aop';
+          
         } 
 }
 /** service: end */

@@ -17,6 +17,7 @@ declare module 'zova-module-a-openapi' {
         export interface SysSdk {
           get $beanFullName(): 'a-openapi.sys.sdk';
           get $onionName(): 'a-openapi:sdk';
+          
         } 
 }
 /** sys: end */
@@ -51,6 +52,7 @@ declare module 'zova-module-a-openapi' {
         export interface ModelSdk {
           get $beanFullName(): 'a-openapi.model.sdk';
           get $onionName(): 'a-openapi:sdk';
+          get $onionOptions(): IModelOptionsSdk;
         } 
 }
 /** model: end */

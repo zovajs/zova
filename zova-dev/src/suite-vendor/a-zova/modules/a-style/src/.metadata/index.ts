@@ -17,6 +17,7 @@ declare module 'zova-module-a-style' {
         export interface BeanTheme {
           get $beanFullName(): 'a-style.bean.theme';
           get $onionName(): 'a-style:theme';
+          
         } 
 }
 /** bean: end */

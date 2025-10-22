@@ -21,6 +21,7 @@ declare module 'zova-module-devui-tableformat' {
         export interface TableCellFormatActionView {
           get $beanFullName(): 'devui-tableformat.tableCellFormat.actionView';
           get $onionName(): 'devui-tableformat:actionView';
+          get $onionOptions(): ITableCellFormatOptionsActionView;
         } 
 }
 /** tableCellFormat: end */

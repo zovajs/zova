@@ -70,6 +70,7 @@ declare module 'zova-module-home-user' {
         export interface ModelPassport {
           get $beanFullName(): 'home-user.model.passport';
           get $onionName(): 'home-user:passport';
+          get $onionOptions(): IModelOptionsPassport;
         } 
 }
 /** model: end */

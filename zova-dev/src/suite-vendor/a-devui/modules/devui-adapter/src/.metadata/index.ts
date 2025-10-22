@@ -21,6 +21,7 @@ declare module 'zova-module-devui-adapter' {
         export interface MetaThemeHandler {
           get $beanFullName(): 'devui-adapter.meta.themeHandler';
           get $onionName(): 'devui-adapter:themeHandler';
+          
         } 
 }
 /** meta: end */

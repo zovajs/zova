@@ -21,6 +21,7 @@ declare module 'zova-module-devui-form' {
         export interface BehaviorFormFieldLayout {
           get $beanFullName(): 'devui-form.behavior.formFieldLayout';
           get $onionName(): 'devui-form:formFieldLayout';
+          get $onionOptions(): IBehaviorOptionsFormFieldLayout;
         } 
 }
 /** behavior: end */

@@ -21,6 +21,7 @@ declare module 'zova-module-a-logger' {
         export interface AopMethodLog {
           get $beanFullName(): 'a-logger.aopMethod.log';
           get $onionName(): 'a-logger:log';
+          get $onionOptions(): IAopMethodOptionsLog;
         } 
 }
 /** aopMethod: end */

@@ -21,6 +21,7 @@ declare module 'zova-module-a-ssrserver' {
         export interface ServiceSsrHandler {
           get $beanFullName(): 'a-ssrserver.service.ssrHandler';
           get $onionName(): 'a-ssrserver:ssrHandler';
+          
         } 
 }
 /** service: end */

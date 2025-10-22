@@ -18,6 +18,7 @@ declare module 'zova-module-a-fetch' {
         export interface BeanFetch {
           get $beanFullName(): 'a-fetch.bean.fetch';
           get $onionName(): 'a-fetch:fetch';
+          
         } 
 }
 /** bean: end */
@@ -54,6 +55,7 @@ declare module 'zova-module-a-fetch' {
         export interface ServiceComposer {
           get $beanFullName(): 'a-fetch.service.composer';
           get $onionName(): 'a-fetch:composer';
+          
         } 
 }
 /** service: end */

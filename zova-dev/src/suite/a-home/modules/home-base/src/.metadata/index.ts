@@ -23,6 +23,7 @@ declare module 'zova-module-home-base' {
         export interface ServiceRouter {
           get $beanFullName(): 'home-base.service.router';
           get $onionName(): 'home-base:router';
+          
         }
 
         export interface ServiceSsr {
@@ -33,6 +34,7 @@ declare module 'zova-module-home-base' {
         export interface ServiceSsr {
           get $beanFullName(): 'home-base.service.ssr';
           get $onionName(): 'home-base:ssr';
+          
         } 
 }
 /** service: end */
@@ -157,6 +159,7 @@ declare module 'zova-module-home-base' {
         export interface CssDefault {
           get $beanFullName(): 'home-base.css.default';
           get $onionName(): 'home-base:default';
+          get $onionOptions(): ICssOptionsDefault;
         } 
 }
 /** css: end */
@@ -191,6 +194,7 @@ declare module 'zova-module-home-base' {
         export interface ThemeDefault {
           get $beanFullName(): 'home-base.theme.default';
           get $onionName(): 'home-base:default';
+          get $onionOptions(): IThemeOptionsDefault;
         } 
 }
 /** theme: end */

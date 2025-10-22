@@ -33,6 +33,7 @@ declare module 'zova-module-a-interceptor' {
         export interface InterceptorBody {
           get $beanFullName(): 'a-interceptor.interceptor.body';
           get $onionName(): 'a-interceptor:body';
+          get $onionOptions(): IInterceptorOptionsBody;
         }
 
         export interface InterceptorHeaders {
@@ -43,6 +44,7 @@ declare module 'zova-module-a-interceptor' {
         export interface InterceptorHeaders {
           get $beanFullName(): 'a-interceptor.interceptor.headers';
           get $onionName(): 'a-interceptor:headers';
+          get $onionOptions(): IInterceptorOptionsHeaders;
         }
 
         export interface InterceptorJwt {
@@ -53,6 +55,7 @@ declare module 'zova-module-a-interceptor' {
         export interface InterceptorJwt {
           get $beanFullName(): 'a-interceptor.interceptor.jwt';
           get $onionName(): 'a-interceptor:jwt';
+          get $onionOptions(): IInterceptorOptionsJwt;
         }
 
         export interface InterceptorMock {
@@ -63,6 +66,7 @@ declare module 'zova-module-a-interceptor' {
         export interface InterceptorMock {
           get $beanFullName(): 'a-interceptor.interceptor.mock';
           get $onionName(): 'a-interceptor:mock';
+          get $onionOptions(): IInterceptorOptionsMock;
         }
 
         export interface InterceptorPerformAction {
@@ -73,6 +77,7 @@ declare module 'zova-module-a-interceptor' {
         export interface InterceptorPerformAction {
           get $beanFullName(): 'a-interceptor.interceptor.performAction';
           get $onionName(): 'a-interceptor:performAction';
+          get $onionOptions(): IInterceptorOptionsPerformAction;
         } 
 }
 /** interceptor: end */

@@ -17,6 +17,7 @@ declare module 'zova-module-demo-todo' {
         export interface ApiTodo {
           get $beanFullName(): 'demo-todo.api.todo';
           get $onionName(): 'demo-todo:todo';
+          
         } 
 }
 /** api: end */
@@ -126,6 +127,7 @@ declare module 'zova-module-demo-todo' {
         export interface ModelTodo {
           get $beanFullName(): 'demo-todo.model.todo';
           get $onionName(): 'demo-todo:todo';
+          get $onionOptions(): IModelOptionsTodo;
         } 
 }
 /** model: end */

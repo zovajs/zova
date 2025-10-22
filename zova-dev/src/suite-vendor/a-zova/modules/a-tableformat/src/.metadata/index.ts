@@ -24,6 +24,7 @@ declare module 'zova-module-a-tableformat' {
         export interface TableCellFormatCurrency {
           get $beanFullName(): 'a-tableformat.tableCellFormat.currency';
           get $onionName(): 'a-tableformat:currency';
+          get $onionOptions(): ITableCellFormatOptionsCurrency;
         }
 
         export interface TableCellFormatFallback {
@@ -34,6 +35,7 @@ declare module 'zova-module-a-tableformat' {
         export interface TableCellFormatFallback {
           get $beanFullName(): 'a-tableformat.tableCellFormat.fallback';
           get $onionName(): 'a-tableformat:fallback';
+          get $onionOptions(): ITableCellFormatOptionsFallback;
         } 
 }
 /** tableCellFormat: end */

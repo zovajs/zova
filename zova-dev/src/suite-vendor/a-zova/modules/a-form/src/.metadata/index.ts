@@ -115,6 +115,7 @@ declare module 'zova-module-a-form' {
         export interface BehaviorForm {
           get $beanFullName(): 'a-form.behavior.form';
           get $onionName(): 'a-form:form';
+          get $onionOptions(): IBehaviorOptionsForm;
         }
 
         export interface BehaviorFormField {
@@ -125,6 +126,7 @@ declare module 'zova-module-a-form' {
         export interface BehaviorFormField {
           get $beanFullName(): 'a-form.behavior.formField';
           get $onionName(): 'a-form:formField';
+          get $onionOptions(): IBehaviorOptionsFormField;
         }
 
         export interface BehaviorFormFieldModel {
@@ -135,6 +137,7 @@ declare module 'zova-module-a-form' {
         export interface BehaviorFormFieldModel {
           get $beanFullName(): 'a-form.behavior.formFieldModel';
           get $onionName(): 'a-form:formFieldModel';
+          get $onionOptions(): IBehaviorOptionsFormFieldModel;
         } 
 }
 /** behavior: end */
