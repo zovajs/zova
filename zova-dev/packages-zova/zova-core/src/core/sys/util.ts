@@ -1,4 +1,4 @@
-import type { IBeanScopeRecord, TypeBeanScopeRecordKeys } from '../../bean/type.js';
+import type { IBeanRecord, IBeanScopeRecord, TypeBeanScopeRecordKeys } from '../../bean/type.js';
 import type { IBeanSceneRecord } from '../../decorator/interface/beanOptions.js';
 import type { TypeAuthToken } from '../../types/utils/auth.js';
 import { extend } from '@cabloy/extend';
@@ -130,8 +130,8 @@ export function polyfillDispose(instance: any) {
   Object.getPrototypeOf(instance).__dispose__ = () => {};
 }
 
-export function beanFullNameFromOnionName(onionName: string, sceneName: keyof IBeanSceneRecord): string {
-  return onionName.replace(':', `.${sceneName}.`);
+export function beanFullNameFromOnionName(onionName: string, sceneName: keyof IBeanSceneRecord): keyof IBeanRecord {
+  return onionName.replace(':', `.${sceneName}.`) as unknown as keyof IBeanRecord;
 }
 
 export function onionNameFromBeanFullName(beanFullName: string, sceneName: keyof IBeanSceneRecord): string {

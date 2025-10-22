@@ -104,7 +104,7 @@ export class BeanTheme extends BeanModelBase {
     this.token = cast(res).token;
     const handler = res.handler ?? this.scope.config.defaultThemeHandler;
     if (handler) {
-      const themeHandler = (await this.bean._getBean(beanFullNameFromOnionName(handler, 'meta') as any, true)) as unknown as IThemeHandler;
+      const themeHandler = (await this.bean._getBean(beanFullNameFromOnionName(handler, 'meta'), true)) as unknown as IThemeHandler;
       await themeHandler.apply({ name, dark, token: this.token } as any);
     }
   }
@@ -117,7 +117,7 @@ export class BeanTheme extends BeanModelBase {
     }
     const moduleName = parts[0];
     if (!this.app.meta.module.exists(moduleName)) return;
-    return await this.bean._getBean(beanFullNameFromOnionName(name, 'theme') as any, true);
+    return await this.bean._getBean(beanFullNameFromOnionName(name, 'theme'), true) as IThemeBase;
   }
 
   toggleDark() {
