@@ -103,7 +103,11 @@ export class SysModule extends BeanSimple {
       if (!module) throw new Error(`module not found: ${moduleName}`);
       const moduleResource = module.resource as any;
       if (typeof moduleResource === 'function') {
-        promises.push(moduleResource());
+        const promise = moduleResource();
+        if (process.env.SERVER && process.env.DEV) {
+          await promise;
+        }
+        promises.push(promise);
         moduleNamesLoading.push(moduleName);
       }
     }
