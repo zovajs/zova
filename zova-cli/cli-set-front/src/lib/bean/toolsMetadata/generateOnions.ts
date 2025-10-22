@@ -1,5 +1,5 @@
 import type { IGlobBeanFile, OnionSceneMeta } from '@cabloy/module-info';
-import { toUpperCaseFirstChar } from '@cabloy/word-utils';
+import { replaceTemplate, toUpperCaseFirstChar } from '@cabloy/word-utils';
 import { beanFullNameFromOnionName, extractBeanInfo, getScopeModuleName } from './utils.ts';
 
 export async function generateOnions(
@@ -24,6 +24,48 @@ export async function generateOnions(
     // const beanFullName = `${moduleName}.${sceneName}.${beanName}`;
     contentExports.push(`export * from '${fileNameJSRelative}';`);
     if (isIgnore) continue; // get scope() also can be ignored
+    // options
+    let onionOptions;
+    if (!sceneMeta.optionsNone) {
+      // fileInfo
+      const fileInfo = extractBeanInfo(sceneName, fileContent, sceneMeta);
+      // import options
+      if (fileInfo.optionsCustomInterface) {
+        contentImports.push(
+          `import { ${fileInfo.optionsCustomInterface} } from '${fileInfo.optionsCustomInterfaceFrom || fileNameJSRelative}';`,
+        );
+      }
+      // valueOptionsCustomInterface
+      let valueOptionsCustomInterface = fileInfo.optionsCustomInterface;
+      if (valueOptionsCustomInterface && sceneMeta.optionsCustomInterfaceTemplate) {
+        valueOptionsCustomInterface = replaceTemplate(
+          sceneMeta.optionsCustomInterfaceTemplate,
+          { optionsCustomInterface: valueOptionsCustomInterface },
+        );
+      }
+      // record
+      if (fileInfo.isGlobal) {
+        if (valueOptionsCustomInterface) {
+          onionOptions = valueOptionsCustomInterface;
+          contentRecordsGlobal.push(`'${beanNameFull}': ${valueOptionsCustomInterface};`);
+        } else {
+          if (sceneMeta.optionsGlobalInterfaceName) {
+            onionOptions = sceneMeta.optionsGlobalInterfaceName;
+            contentRecordsGlobal.push(`'${beanNameFull}': ${sceneMeta.optionsGlobalInterfaceName};`);
+            needImportOptionsGlobalInterface = true;
+          } else {
+            contentRecordsGlobal.push(`'${beanNameFull}': never;`);
+          }
+        }
+      } else {
+        if (valueOptionsCustomInterface) {
+          onionOptions = valueOptionsCustomInterface;
+          contentRecordsLocal.push(`'${beanNameFull}': ${valueOptionsCustomInterface};`);
+        } else {
+          contentRecordsLocal.push(`'${beanNameFull}': never;`);
+        }
+      }
+    }
     // get scope() also can be ignored
     if (!['__nothing__'].includes(sceneName) && !isVirtual) {
       contentScopes.push(`
@@ -33,39 +75,13 @@ export async function generateOnions(
         }`);
       // cannot set these types, because controller/render/style extends each other
       if (!['controller', 'render', 'style'].includes(sceneName)) {
+        const contentOnionOptions = onionOptions ? `get $onionOptions(): ${onionOptions};` : '';
         contentScopes.push(`
         export interface ${className} {
           get $beanFullName(): '${beanFullNameFromOnionName(beanNameFull, sceneName as never)}';
           get $onionName(): '${beanNameFull}';
+          ${contentOnionOptions}
         }`);
-      }
-    }
-    if (sceneMeta.optionsNone) continue;
-    // fileInfo
-    const fileInfo = extractBeanInfo(sceneName, fileContent, sceneMeta);
-    // import options
-    if (fileInfo.optionsCustomInterface) {
-      contentImports.push(
-        `import { ${fileInfo.optionsCustomInterface} } from '${fileInfo.optionsCustomInterfaceFrom || fileNameJSRelative}';`,
-      );
-    }
-    // record
-    if (fileInfo.isGlobal) {
-      if (fileInfo.optionsCustomInterface) {
-        contentRecordsGlobal.push(`'${beanNameFull}': ${fileInfo.optionsCustomInterface};`);
-      } else {
-        if (sceneMeta.optionsGlobalInterfaceName) {
-          contentRecordsGlobal.push(`'${beanNameFull}': ${sceneMeta.optionsGlobalInterfaceName};`);
-          needImportOptionsGlobalInterface = true;
-        } else {
-          contentRecordsGlobal.push(`'${beanNameFull}': never;`);
-        }
-      }
-    } else {
-      if (fileInfo.optionsCustomInterface) {
-        contentRecordsLocal.push(`'${beanNameFull}': ${fileInfo.optionsCustomInterface};`);
-      } else {
-        contentRecordsLocal.push(`'${beanNameFull}': never;`);
       }
     }
   }

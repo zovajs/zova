@@ -49,7 +49,7 @@ export class BeanBaseSimple extends BeanSimple {
     return `${parts[0]}:${parts[2]}`;
   }
 
-  protected get $onionOptions(): unknown | undefined {
+  public get $onionOptions(): unknown | undefined {
     return this.$beanOptions.options;
   }
 }
