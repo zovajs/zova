@@ -1,7 +1,10 @@
+import type { IDecoratorModelOptions } from 'zova-module-a-model';
 import type { ApiTodoIntertBody, ApiTodoUpdateBody } from '../api/todo.js';
 import { BeanModelBase, Model } from 'zova-module-a-model';
 
-@Model()
+export interface IModelOptionsTodo extends IDecoratorModelOptions {}
+
+@Model<IModelOptionsTodo>()
 export class ModelTodo extends BeanModelBase {
   findAll() {
     return this.$useStateData({

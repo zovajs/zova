@@ -1,7 +1,7 @@
 import type { ControllerPageResource } from 'zova-module-rest-resource';
 import { SchemaObject } from 'openapi3-ts/oas31';
 import { useId } from 'vue';
-import { BeanControllerBase, Model, Use } from 'zova';
+import { BeanControllerBase, ModelValue, Use } from 'zova';
 import { Controller } from 'zova-module-a-bean';
 import { ControllerForm, IFormMeta, IFormProvider, TypeFormOnSubmitData } from 'zova-module-a-form';
 import { DataMutation } from 'zova-module-a-model';
@@ -35,7 +35,7 @@ export class ControllerWrapperForm extends BeanControllerBase {
   @Use({ injectionScope: 'host' })
   $$restResource: ControllerPageResource;
 
-  @Model()
+  @ModelValue()
   modelFormVisible: boolean;
 
   protected async __init__() {

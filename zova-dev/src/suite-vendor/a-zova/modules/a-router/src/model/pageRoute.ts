@@ -1,8 +1,11 @@
+import type { IDecoratorModelOptions } from 'zova-module-a-model';
 import { useRoute } from '@cabloy/vue-router';
 import { useComputed } from 'zova';
 import { BeanModelBase, Model } from 'zova-module-a-model';
 
-@Model()
+export interface IModelOptionsPageRoute extends IDecoratorModelOptions {}
+
+@Model<IModelOptionsPageRoute>()
 export class ModelPageRoute extends BeanModelBase {
   protected _pageDataInner: any;
   pagePath?: string;

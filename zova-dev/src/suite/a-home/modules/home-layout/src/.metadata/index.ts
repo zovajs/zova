@@ -184,9 +184,13 @@ declare module 'zova' {
 /** model: begin */
 export * from '../model/menu.js';
 
-import 'zova';
-declare module 'zova' {
+import { IDecoratorModelOptions } from 'zova-module-a-model';
+declare module 'zova-module-a-model' {
   
+    export interface IModelRecord {
+      'home-layout:menu': IDecoratorModelOptions;
+    }
+
   
 }
 declare module 'zova-module-home-layout' {

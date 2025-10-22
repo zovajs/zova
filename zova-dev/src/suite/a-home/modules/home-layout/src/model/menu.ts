@@ -1,12 +1,15 @@
+import type { IDecoratorModelOptions } from 'zova-module-a-model';
+import type { ApiSchemaAMenuDtoMenuGroup, ApiSchemaAMenuDtoMenuItem, ApiSchemaAMenuDtoMenus } from 'zova-module-home-api';
 import { useComputed } from 'zova-core';
 import { BeanModelBase, Model } from 'zova-module-a-model';
-import { ApiSchemaAMenuDtoMenuGroup, ApiSchemaAMenuDtoMenuItem, ApiSchemaAMenuDtoMenus } from 'zova-module-home-api';
 
 export type TypeMenuGroup = ApiSchemaAMenuDtoMenuGroup & { folder: true; children: TypeMenuItem[] };
 export type TypeMenuItem = (ApiSchemaAMenuDtoMenuItem & { folder: false }) | TypeMenuGroup;
 export type TypeMenuTree = TypeMenuItem[];
 
-@Model()
+export interface IModelOptionsMenu extends IDecoratorModelOptions {}
+
+@Model<IModelOptionsMenu>()
 export class ModelMenu extends BeanModelBase {
   menuTree?: TypeMenuTree;
 

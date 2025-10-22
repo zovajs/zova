@@ -1,4 +1,4 @@
-import type { UseQueryOptions } from 'zova-module-a-model';
+import type { IDecoratorModelOptions, UseQueryOptions } from 'zova-module-a-model';
 import { mutate } from 'mutate-on-copy';
 import { watch } from 'vue';
 import { useComputed } from 'zova';
@@ -28,7 +28,9 @@ export interface ModelTabsOptions {
   getTabInfo: (tab: RouteTab) => RouteTabInfo | undefined;
 }
 
-@Model()
+export interface IModelOptionsTabs extends IDecoratorModelOptions {}
+
+@Model<IModelOptionsTabs>()
 export class ModelTabs extends BeanModelBase {
   tabsOptions: ModelTabsOptions;
   tabs: RouteTab[];

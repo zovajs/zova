@@ -27,9 +27,13 @@ declare module 'zova' {
 /** model: begin */
 export * from '../model/sdk.js';
 
-import 'zova';
-declare module 'zova' {
+import { IDecoratorModelOptions } from 'zova-module-a-model';
+declare module 'zova-module-a-model' {
   
+    export interface IModelRecord {
+      'a-openapi:sdk': IDecoratorModelOptions;
+    }
+
   
 }
 declare module 'zova-module-a-openapi' {

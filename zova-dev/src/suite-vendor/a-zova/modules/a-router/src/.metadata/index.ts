@@ -84,9 +84,13 @@ declare module 'zova' {
 /** model: begin */
 export * from '../model/pageRoute.js';
 
-import 'zova';
-declare module 'zova' {
+import { IDecoratorModelOptions } from 'zova-module-a-model';
+declare module 'zova-module-a-model' {
   
+    export interface IModelRecord {
+      'a-router:pageRoute': IDecoratorModelOptions;
+    }
+
   
 }
 declare module 'zova-module-a-router' {

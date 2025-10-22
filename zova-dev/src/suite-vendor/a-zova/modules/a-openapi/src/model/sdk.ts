@@ -1,13 +1,15 @@
 import { isNil } from '@cabloy/utils';
 import { ILocaleInfos, Use, usePrepareArg } from 'zova';
-import { BeanModelBase, Model } from 'zova-module-a-model';
+import { BeanModelBase, IDecoratorModelOptions, Model } from 'zova-module-a-model';
 import { SysSdk } from '../bean/sys.sdk.js';
 import { schemaToZodSchema } from '../lib/schema.js';
 import { TypeRequestMethod } from '../types/sdk.js';
 
 const __schemaRefPrefix = '#/components/schemas/';
 
-@Model()
+export interface IModelOptionsSdk extends IDecoratorModelOptions {}
+
+@Model<IModelOptionsSdk>()
 export class ModelSdk extends BeanModelBase {
   @Use({ beanFullName: 'a-openapi.sys.sdk' })
   get $$sysSdk(): SysSdk {

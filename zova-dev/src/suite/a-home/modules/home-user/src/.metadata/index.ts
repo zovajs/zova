@@ -51,9 +51,13 @@ declare module 'zova-module-home-user' {
 /** model: begin */
 export * from '../model/passport.js';
 
-import 'zova';
-declare module 'zova' {
+import { IDecoratorModelOptions } from 'zova-module-a-model';
+declare module 'zova-module-a-model' {
   
+    export interface IModelRecord {
+      'home-user:passport': IDecoratorModelOptions;
+    }
+
   
 }
 declare module 'zova-module-home-user' {

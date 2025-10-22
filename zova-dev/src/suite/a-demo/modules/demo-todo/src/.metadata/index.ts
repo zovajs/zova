@@ -101,10 +101,14 @@ $query: NSControllerPageItem.QueryOutput;
 
 /** model: begin */
 export * from '../model/todo.js';
-
-import 'zova';
-declare module 'zova' {
+import { IModelOptionsTest } from '../model/todo.js';
+import 'zova-module-a-model';
+declare module 'zova-module-a-model' {
   
+    export interface IModelRecord {
+      'demo-todo:todo': IModelOptionsTest;
+    }
+
   
 }
 declare module 'zova-module-demo-todo' {

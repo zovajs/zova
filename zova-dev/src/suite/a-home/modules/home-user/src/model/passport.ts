@@ -1,8 +1,11 @@
-import { IJwtInfo } from 'zova-module-a-interceptor';
+import type { IJwtInfo } from 'zova-module-a-interceptor';
+import type { IDecoratorModelOptions } from 'zova-module-a-model';
+import type { ApiApiHomeUserPassportloginRequestBody, ApiApiHomeUserPassportloginResponseBody } from 'zova-module-home-api';
 import { BeanModelBase, Model } from 'zova-module-a-model';
-import { ApiApiHomeUserPassportloginRequestBody, ApiApiHomeUserPassportloginResponseBody } from 'zova-module-home-api';
 
-@Model()
+export interface IModelOptionsPassport extends IDecoratorModelOptions {}
+
+@Model<IModelOptionsPassport>()
 export class ModelPassport extends BeanModelBase {
   passport?: ApiApiHomeUserPassportloginResponseBody['passport'];
   jwt?: ApiApiHomeUserPassportloginResponseBody['jwt'];
