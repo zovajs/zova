@@ -16,6 +16,11 @@ declare module 'zova-module-devui-form' {
         export interface BehaviorFormFieldLayout {
           /** @internal */
           get scope(): ScopeModuleDevuiForm;
+        }
+
+        export interface BehaviorFormFieldLayout {
+          get $beanFullName(): 'devui-form.behavior.formFieldLayout';
+          get $onionName(): 'devui-form:formFieldLayout';
         } 
 }
 /** behavior: end */

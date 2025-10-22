@@ -4,7 +4,7 @@ import { Bean } from 'zova-module-a-bean';
 import { ModelPageRoute } from '../model/pageRoute.js';
 import { SysRouter } from './sys.router.js';
 
-export interface BeanRouter extends SysRouter {}
+export interface BeanRouter extends Omit<SysRouter, '$beanFullName' | '$onionName' | '$onionOptions'> {}
 
 @Bean()
 export class BeanRouter extends BeanBase {

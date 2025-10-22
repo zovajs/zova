@@ -12,6 +12,11 @@ declare module 'zova-module-a-bean' {
         export interface SysOnion {
           /** @internal */
           get scope(): ScopeModuleABean;
+        }
+
+        export interface SysOnion {
+          get $beanFullName(): 'a-bean.sys.onion';
+          get $onionName(): 'a-bean:onion';
         } 
 }
 /** sys: end */
@@ -42,6 +47,11 @@ declare module 'zova-module-a-bean' {
         export interface ServiceAop {
           /** @internal */
           get scope(): ScopeModuleABean;
+        }
+
+        export interface ServiceAop {
+          get $beanFullName(): 'a-bean.service.aop';
+          get $onionName(): 'a-bean:aop';
         } 
 }
 /** service: end */

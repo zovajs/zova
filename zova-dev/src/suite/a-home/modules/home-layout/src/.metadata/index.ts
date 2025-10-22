@@ -198,6 +198,11 @@ declare module 'zova-module-home-layout' {
         export interface ModelMenu {
           /** @internal */
           get scope(): ScopeModuleHomeLayout;
+        }
+
+        export interface ModelMenu {
+          get $beanFullName(): 'home-layout.model.menu';
+          get $onionName(): 'home-layout:menu';
         } 
 }
 /** model: end */

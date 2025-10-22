@@ -12,6 +12,11 @@ declare module 'zova-module-demo-basic' {
         export interface StoreCounter {
           /** @internal */
           get scope(): ScopeModuleDemoBasic;
+        }
+
+        export interface StoreCounter {
+          get $beanFullName(): 'demo-basic.store.counter';
+          get $onionName(): 'demo-basic:counter';
         } 
 }
 /** store: end */
@@ -285,9 +290,19 @@ declare module 'zova-module-demo-basic' {
           get scope(): ScopeModuleDemoBasic;
         }
 
+        export interface AopHome {
+          get $beanFullName(): 'demo-basic.aop.home';
+          get $onionName(): 'demo-basic:home';
+        }
+
         export interface AopHome3 {
           /** @internal */
           get scope(): ScopeModuleDemoBasic;
+        }
+
+        export interface AopHome3 {
+          get $beanFullName(): 'demo-basic.aop.home3';
+          get $onionName(): 'demo-basic:home3';
         } 
 }
 /** aop: end */
@@ -319,6 +334,11 @@ declare module 'zova-module-demo-basic' {
         export interface BehaviorFormFieldLayout {
           /** @internal */
           get scope(): ScopeModuleDemoBasic;
+        }
+
+        export interface BehaviorFormFieldLayout {
+          get $beanFullName(): 'demo-basic.behavior.formFieldLayout';
+          get $onionName(): 'demo-basic:formFieldLayout';
         } 
 }
 /** behavior: end */
@@ -367,6 +387,11 @@ declare module 'zova-module-demo-basic' {
         export interface ModelTest {
           /** @internal */
           get scope(): ScopeModuleDemoBasic;
+        }
+
+        export interface ModelTest {
+          get $beanFullName(): 'demo-basic.model.test';
+          get $onionName(): 'demo-basic:test';
         } 
 }
 /** model: end */
@@ -396,6 +421,11 @@ declare module 'zova-module-demo-basic' {
         export interface ThemeOrange {
           /** @internal */
           get scope(): ScopeModuleDemoBasic;
+        }
+
+        export interface ThemeOrange {
+          get $beanFullName(): 'demo-basic.theme.orange';
+          get $onionName(): 'demo-basic:orange';
         } 
 }
 /** theme: end */

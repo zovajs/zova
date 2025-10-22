@@ -13,6 +13,11 @@ declare module 'zova-module-a-behavior' {
         export interface BeanBehavior {
           /** @internal */
           get scope(): ScopeModuleABehavior;
+        }
+
+        export interface BeanBehavior {
+          get $beanFullName(): 'a-behavior.bean.behavior';
+          get $onionName(): 'a-behavior:behavior';
         } 
 }
 /** bean: end */
@@ -44,6 +49,11 @@ declare module 'zova-module-a-behavior' {
         export interface ServiceComposer {
           /** @internal */
           get scope(): ScopeModuleABehavior;
+        }
+
+        export interface ServiceComposer {
+          get $beanFullName(): 'a-behavior.service.composer';
+          get $onionName(): 'a-behavior:composer';
         } 
 }
 /** service: end */

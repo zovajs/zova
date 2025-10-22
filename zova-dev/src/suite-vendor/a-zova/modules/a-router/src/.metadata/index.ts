@@ -12,6 +12,11 @@ declare module 'zova-module-a-router' {
         export interface SysRouter {
           /** @internal */
           get scope(): ScopeModuleARouter;
+        }
+
+        export interface SysRouter {
+          get $beanFullName(): 'a-router.sys.router';
+          get $onionName(): 'a-router:router';
         } 
 }
 /** sys: end */
@@ -38,6 +43,11 @@ declare module 'zova-module-a-router' {
         export interface BeanRouter {
           /** @internal */
           get scope(): ScopeModuleARouter;
+        }
+
+        export interface BeanRouter {
+          get $beanFullName(): 'a-router.bean.router';
+          get $onionName(): 'a-router:router';
         } 
 }
 /** bean: end */
@@ -69,6 +79,11 @@ declare module 'zova-module-a-router' {
         export interface ServiceRouter {
           /** @internal */
           get scope(): ScopeModuleARouter;
+        }
+
+        export interface ServiceRouter {
+          get $beanFullName(): 'a-router.service.router';
+          get $onionName(): 'a-router:router';
         } 
 }
 /** service: end */
@@ -98,6 +113,11 @@ declare module 'zova-module-a-router' {
         export interface ModelPageRoute {
           /** @internal */
           get scope(): ScopeModuleARouter;
+        }
+
+        export interface ModelPageRoute {
+          get $beanFullName(): 'a-router.model.pageRoute';
+          get $onionName(): 'a-router:pageRoute';
         } 
 }
 /** model: end */

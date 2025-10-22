@@ -58,6 +58,11 @@ declare module 'zova-module-a-tabs' {
         export interface ModelTabs {
           /** @internal */
           get scope(): ScopeModuleATabs;
+        }
+
+        export interface ModelTabs {
+          get $beanFullName(): 'a-tabs.model.tabs';
+          get $onionName(): 'a-tabs:tabs';
         } 
 }
 /** model: end */

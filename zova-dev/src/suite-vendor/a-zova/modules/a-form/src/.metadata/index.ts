@@ -112,14 +112,29 @@ declare module 'zova-module-a-form' {
           get scope(): ScopeModuleAForm;
         }
 
+        export interface BehaviorForm {
+          get $beanFullName(): 'a-form.behavior.form';
+          get $onionName(): 'a-form:form';
+        }
+
         export interface BehaviorFormField {
           /** @internal */
           get scope(): ScopeModuleAForm;
         }
 
+        export interface BehaviorFormField {
+          get $beanFullName(): 'a-form.behavior.formField';
+          get $onionName(): 'a-form:formField';
+        }
+
         export interface BehaviorFormFieldModel {
           /** @internal */
           get scope(): ScopeModuleAForm;
+        }
+
+        export interface BehaviorFormFieldModel {
+          get $beanFullName(): 'a-form.behavior.formFieldModel';
+          get $onionName(): 'a-form:formFieldModel';
         } 
 }
 /** behavior: end */

@@ -54,19 +54,9 @@ declare module 'zova-module-demo-todo' {
           get scope(): ScopeModuleDemoTodo;
         }
 
-        export interface ControllerPageItem {
-          get $beanFullName(): 'demo-todo.controller.pageItem';
-          get $onionName(): 'demo-todo:pageItem';
-        }
-
         export interface ControllerPageTodo {
           /** @internal */
           get scope(): ScopeModuleDemoTodo;
-        }
-
-        export interface ControllerPageTodo {
-          get $beanFullName(): 'demo-todo.controller.pageTodo';
-          get $onionName(): 'demo-todo:pageTodo';
         } 
 }
 /** controller: end */
