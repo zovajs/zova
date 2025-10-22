@@ -83,12 +83,12 @@ declare module 'zova' {
 /** service: end */
 /** model: begin */
 export * from '../model/pageRoute.js';
-
-import { IDecoratorModelOptions } from 'zova-module-a-model';
+import { IModelOptionsPageRoute } from '../model/pageRoute.js';
+import 'zova-module-a-model';
 declare module 'zova-module-a-model' {
   
     export interface IModelRecord {
-      'a-router:pageRoute': IDecoratorModelOptions;
+      'a-router:pageRoute': IModelOptionsPageRoute;
     }
 
   
