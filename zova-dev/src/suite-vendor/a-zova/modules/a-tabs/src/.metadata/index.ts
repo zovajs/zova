@@ -43,12 +43,12 @@ export interface IZovaComponentRecord {
 /** components: end */
 /** model: begin */
 export * from '../model/tabs.js';
-
-import { IDecoratorModelOptions } from 'zova-module-a-model';
+import { IModelOptionsTabs } from '../model/tabs.js';
+import 'zova-module-a-model';
 declare module 'zova-module-a-model' {
   
     export interface IModelRecord {
-      'a-tabs:tabs': IDecoratorModelOptions;
+      'a-tabs:tabs': IModelOptionsTabs;
     }
 
   
