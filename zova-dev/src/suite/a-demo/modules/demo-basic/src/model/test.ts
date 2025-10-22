@@ -1,4 +1,5 @@
-import { BeanModelBase, IDecoratorModelOptions, Model } from 'zova-module-a-model';
+import type { IDecoratorModelOptions } from 'zova-module-a-model';
+import { BeanModelBase, Model } from 'zova-module-a-model';
 
 export interface IModelOptionsTest extends IDecoratorModelOptions {}
 

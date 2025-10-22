@@ -352,10 +352,17 @@ declare module 'vue/jsx-runtime' {
 /** behaviors: end */
 /** model: begin */
 export * from '../model/test.js';
-
-import 'zova';
-declare module 'zova' {
+export * from '../model/test3.js';
+import { IModelOptionsTest } from '../model/test.js';
+import { IModelOptionsTest3 } from '../model/test3.js';
+import 'zova-module-a-model';
+declare module 'zova-module-a-model' {
   
+    export interface IModelRecord {
+      'demo-basic:test': IModelOptionsTest;
+'demo-basic:test3': IModelOptionsTest3;
+    }
+
   
 }
 declare module 'zova-module-demo-basic' {
@@ -363,15 +370,22 @@ declare module 'zova-module-demo-basic' {
         export interface ModelTest {
           /** @internal */
           get scope(): ScopeModuleDemoBasic;
+        }
+
+        export interface ModelTest3 {
+          /** @internal */
+          get scope(): ScopeModuleDemoBasic;
         } 
 }
 /** model: end */
 /** model: begin */
 import { ModelTest } from '../model/test.js';
+import { ModelTest3 } from '../model/test3.js';
 import 'zova';
 declare module 'zova' {
   export interface IBeanRecordGeneral {
     'demo-basic.model.test': ModelTest;
+'demo-basic.model.test3': ModelTest3;
   }
 }
 /** model: end */
