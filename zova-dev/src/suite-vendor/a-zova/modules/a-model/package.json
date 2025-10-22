@@ -15,7 +15,8 @@
       "model": {
         "sceneIsolate": true,
         "beanGeneral": true,
-        "optionsNone": true,
+        "optionsGlobalInterfaceName": "IDecoratorModelOptions",
+        "optionsGlobalInterfaceFrom": "zova-module-a-model",
         "boilerplate": "cli/model/boilerplate"
       }
     },

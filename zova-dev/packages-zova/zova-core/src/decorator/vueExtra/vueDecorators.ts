@@ -33,7 +33,7 @@ export function ShallowReadonly(): PropertyDecorator {
   return createVueDecorator('shallowReadonly');
 }
 
-export function Model(modelName?: string): PropertyDecorator {
+export function ModelValue(modelName?: string): PropertyDecorator {
   return createVueDecorator('model', { modelName });
 }
 

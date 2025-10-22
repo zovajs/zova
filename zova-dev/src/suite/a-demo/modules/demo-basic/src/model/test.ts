@@ -1,6 +1,8 @@
-import { BeanModelBase, Model } from 'zova-module-a-model';
+import { BeanModelBase, IDecoratorModelOptions, Model } from 'zova-module-a-model';
 
-@Model()
+export interface IModelOptionsTest extends IDecoratorModelOptions {}
+
+@Model<IModelOptionsTest>()
 export class ModelTest extends BeanModelBase {
   test() {
     return this.$useStateData({
