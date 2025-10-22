@@ -1,4 +1,5 @@
-import { BeanInterceptorBase, IDecoratorInterceptorOptions, Interceptor } from 'zova-module-a-fetch';
+import type { IDecoratorInterceptorOptions } from 'zova-module-a-fetch';
+import { BeanInterceptorBase, Interceptor } from 'zova-module-a-fetch';
 
 export interface IInterceptorOptions<%=argv.beanNameCapitalize%> extends IDecoratorInterceptorOptions {}
 
