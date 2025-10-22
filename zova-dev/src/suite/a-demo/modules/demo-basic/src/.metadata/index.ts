@@ -17,6 +17,7 @@ declare module 'zova-module-demo-basic' {
         export interface StoreCounter {
           get $beanFullName(): 'demo-basic.store.counter';
           get $onionName(): 'demo-basic:counter';
+          
         } 
 }
 /** store: end */
@@ -293,6 +294,7 @@ declare module 'zova-module-demo-basic' {
         export interface AopHome {
           get $beanFullName(): 'demo-basic.aop.home';
           get $onionName(): 'demo-basic:home';
+          get $onionOptions(): IDecoratorAopOptions;
         }
 
         export interface AopHome3 {
@@ -303,6 +305,7 @@ declare module 'zova-module-demo-basic' {
         export interface AopHome3 {
           get $beanFullName(): 'demo-basic.aop.home3';
           get $onionName(): 'demo-basic:home3';
+          get $onionOptions(): IDecoratorAopOptions;
         } 
 }
 /** aop: end */
@@ -339,6 +342,7 @@ declare module 'zova-module-demo-basic' {
         export interface BehaviorFormFieldLayout {
           get $beanFullName(): 'demo-basic.behavior.formFieldLayout';
           get $onionName(): 'demo-basic:formFieldLayout';
+          get $onionOptions(): IBehaviorOptionsFormFieldLayout;
         } 
 }
 /** behavior: end */
@@ -392,6 +396,7 @@ declare module 'zova-module-demo-basic' {
         export interface ModelTest {
           get $beanFullName(): 'demo-basic.model.test';
           get $onionName(): 'demo-basic:test';
+          get $onionOptions(): IModelOptionsTest;
         } 
 }
 /** model: end */
@@ -426,6 +431,7 @@ declare module 'zova-module-demo-basic' {
         export interface ThemeOrange {
           get $beanFullName(): 'demo-basic.theme.orange';
           get $onionName(): 'demo-basic:orange';
+          get $onionOptions(): IThemeOptionsOrange;
         } 
 }
 /** theme: end */
