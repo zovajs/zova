@@ -1,6 +1,6 @@
 import type { IGlobBeanFile, OnionSceneMeta } from '@cabloy/module-info';
 import { toUpperCaseFirstChar } from '@cabloy/word-utils';
-import { extractBeanInfo, getScopeModuleName } from './utils.ts';
+import { beanFullNameFromOnionName, extractBeanInfo, getScopeModuleName } from './utils.ts';
 
 export async function generateOnions(
   globFiles: IGlobBeanFile[],
@@ -32,11 +32,13 @@ export async function generateOnions(
           get scope(): ${scopeModuleName};
         }`);
       // cannot set these types, because controller/render/style extends each other
-      // contentScopes.push(`
-      //   export interface ${className} {
-      //     get $beanFullName(): '${beanFullName}';
-      //     get $onionName(): '${beanNameFull}';
-      //   }`);
+      if (!['controller', 'render', 'style'].includes(sceneName)) {
+        contentScopes.push(`
+        export interface ${className} {
+          get $beanFullName(): '${beanFullNameFromOnionName(beanNameFull, sceneName as never)}';
+          get $onionName(): '${beanNameFull}';
+        }`);
+      }
     }
     if (sceneMeta.optionsNone) continue;
     // fileInfo

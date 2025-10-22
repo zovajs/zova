@@ -90,3 +90,11 @@ export function extractBeanInfo(sceneName: string, fileContent: string, sceneMet
     : true;
   return { optionsCustomInterface, optionsCustomInterfaceFrom, isGlobal };
 }
+
+export function beanFullNameFromOnionName(onionName: string, sceneName: string): string {
+  return onionName.replace(':', `.${sceneName}.`);
+}
+
+export function onionNameFromBeanFullName(beanFullName: string, sceneName: string): string {
+  return beanFullName.replace(`.${sceneName}.`, ':');
+}
