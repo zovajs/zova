@@ -2,3 +2,18 @@ packages:
   - 'cabloy-cli'
   - 'cli'
   - 'cli-set-front'
+
+hoist: true
+hoistWorkspacePackages: true
+linkWorkspacePackages: 'deep'
+preferWorkspacePackages: true
+autoInstallPeers: true
+publicHoistPattern:
+  - '*eslint*'
+  - '*types*'
+  - 'lerna'
+  - 'cabloy'
+  - '@cabloy'
+  - '*cabloy*'
+  - '*@cabloy*'
+  - '*zova*'
