@@ -19,7 +19,7 @@
     "scope": "typescript,typescriptreact",
     "prefix": "aopinit",
     "body": [
-      "protected __init__: AopActionInit<BeanClassSome> = async (_args, next, _receiver) => {",
+      "protected __init__: AopActionInit<ClassSome> = async (_args, next, _receiver) => {",
       "  await next();",
       "  $0",
       "}"
@@ -30,7 +30,7 @@
     "scope": "typescript,typescriptreact",
     "prefix": "aopdispose",
     "body": [
-      "protected __dispose__: AopActionDispose<BeanClassSome> = (_args, next, _receiver) => {",
+      "protected __dispose__: AopActionDispose<ClassSome> = (_args, next, _receiver) => {",
       "  $0",
       "  next();",
       "}"
@@ -62,7 +62,7 @@
     "scope": "typescript,typescriptreact",
     "prefix": "aopgetter",
     "body": [
-      "protected __get_xxx__: AopActionGetter<BeanClassSome, 'xxx'> = function (next, _receiver) {",
+      "protected __get_xxx__: AopActionGetter<ClassSome, 'xxx'> = function (next, _receiver) {",
       "  const value = next();",
       "  return value;",
       "}"
@@ -73,7 +73,7 @@
     "scope": "typescript,typescriptreact",
     "prefix": "aopsetter",
     "body": [
-      "protected __set_xxx__: AopActionSetter<BeanClassSome, 'xxx'> = function (value, next, _receiver) {",
+      "protected __set_xxx__: AopActionSetter<ClassSome, 'xxx'> = function (value, next, _receiver) {",
       "  return next(value);",
       "}"
     ],
@@ -83,7 +83,7 @@
     "scope": "typescript,typescriptreact",
     "prefix": "aopaction",
     "body": [
-      "action: AopAction<BeanClassSome, 'action'> = async (_args, next, _receiver) => {",
+      "action: AopAction<ClassSome, 'action'> = async (_args, next, _receiver) => {",
       "  $0",
       "  return await next();",
       "}"
@@ -94,7 +94,7 @@
     "scope": "typescript,typescriptreact",
     "prefix": "aopactionsync",
     "body": [
-      "action: AopAction<BeanClassSome, 'action'> = (_args, next, _receiver) => {",
+      "action: AopAction<ClassSome, 'action'> = (_args, next, _receiver) => {",
       "  $0",
       "  return next();",
       "}"
