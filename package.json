@@ -2,7 +2,7 @@
   "name": "zova",
   "type": "module",
   "private": true,
-  "packageManager": "pnpm@10.0.0",
+  "packageManager": "pnpm@10.19.0",
   "description": "A vue3 framework with ioc",
   "author": "zhennann",
   "license": "MIT",

@@ -3,7 +3,7 @@
   "description": "A vue3 framework with ioc",
   "author": "zhennann <zhen.nann@icloud.com>",
   "type": "module",
-  "packageManager": "pnpm@10.0.0",
+  "packageManager": "pnpm@10.19.0",
   "scripts": {
     "init": "pnpm install --no-frozen-lockfile && npm run zova :tools:deps && pnpm install --no-frozen-lockfile && pnpm dedupe",
     "zova": "node ../zova-cli/cli/src/bin/zova.ts",

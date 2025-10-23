@@ -2,7 +2,7 @@
   "name": "zova-ui-element",
   "type": "module",
   "version": "5.0.339",
-  "packageManager": "pnpm@10.0.0",
+  "packageManager": "pnpm@10.19.0",
   "description": "A vue3 element-plus framework with ioc",
   "publishConfig": {
     "access": "public"

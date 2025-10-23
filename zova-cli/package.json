@@ -3,7 +3,7 @@
   "title": "zova cli",
   "type": "module",
   "private": true,
-  "packageManager": "pnpm@10.0.0",
+  "packageManager": "pnpm@10.19.0",
   "description": "A Node.js full-stack framework with workflow engine",
   "author": "zhennann",
   "license": "MIT",

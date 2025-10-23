@@ -2,7 +2,7 @@
   "name": "zova-ui-empty",
   "type": "module",
   "version": "5.0.333",
-  "packageManager": "pnpm@10.0.0",
+  "packageManager": "pnpm@10.19.0",
   "description": "A vue3 empty framework with ioc",
   "publishConfig": {
     "access": "public"
