@@ -2,6 +2,7 @@
   "name": "zova-ui-quasar",
   "type": "module",
   "version": "5.0.356",
+  "packageManager": "pnpm@10.0.0",
   "description": "A vue3 quasar framework with ioc",
   "publishConfig": {
     "access": "public"
