@@ -42,7 +42,6 @@
     "minimist": "^1.2.8",
     "textlint": "^14.8.0",
     "textlint-rule-ja-space-between-half-and-full-width": "^2.4.2",
-    "ts-node": "^10.9.2",
     "typedoc": "^0.25.13",
     "typescript": "5.7.3",
     "vitepress": "^1.1.4"
