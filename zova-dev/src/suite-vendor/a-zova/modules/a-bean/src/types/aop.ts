@@ -15,6 +15,10 @@ export type AopAction<T extends {}, NAME extends keyof T, RESULT = undefined> =
   // @ts-ignore ignore
   => RESULT extends undefined ? ReturnType<T[NAME]> : ReturnType<T[NAME]> extends Promise<any> ? Promise<RESULT> : RESULT;
 
+export type AopActionMethod<T extends {}> =
+  (method: keyof T, args: any[], next: AopActionNext<any[], any>, _receiver: T)
+  => any;
+
 export type AopActionGetter<T extends {}, NAME extends keyof T, RESULT = undefined> =
   // @ts-ignore ignore
   (next: AopActionNext<void, T[NAME]>, _receiver: T)

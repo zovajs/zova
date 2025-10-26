@@ -101,6 +101,17 @@
     ],
     "description": "aop.actionsync"
   },
+  "aop.actionmethod": {
+    "scope": "typescript,typescriptreact",
+    "prefix": "aopactionmethod",
+    "body": [
+      "protected __method__: AopActionMethod<ClassSome> = (_method, _args, next, _receiver) => {",
+      "  $0",
+      "  return next();",
+      "}"
+    ],
+    "description": "aop.actionmethod"
+  },
   "aopmethod.get": {
     "scope": "typescript,typescriptreact",
     "prefix": "aopmethodget",
