@@ -1095,7 +1095,8 @@ export class BeanContainer {
             };
           }
           chains.push([aopKey, fn]);
-        } else if (methodNameMagic && aop[methodNameMagic]) {
+        }
+        if (methodNameMagic && aop[methodNameMagic]) {
           if (!__isLifeCycleMethod(methodName)) {
             let fn;
             if (methodType === 'get') {
