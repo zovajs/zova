@@ -41,7 +41,7 @@
     "scope": "typescript,typescriptreact",
     "prefix": "aopget",
     "body": [
-      "protected __get__(prop: string, next: NextSync) {",
+      "protected __get__: AopActionGet<ClassSome> = (_prop, next, _receiver) => {",
       "  const value = next();",
       "  return value;",
       "}"
@@ -52,11 +52,22 @@
     "scope": "typescript,typescriptreact",
     "prefix": "aopset",
     "body": [
-      "protected __set__(prop: string, value: any, next: NextSync): boolean {",
+      "protected __set__: AopActionSet<ClassSome> = (_prop, value, next, _receiver) => {",
       "  return next(value);",
       "}"
     ],
     "description": "aop.__set__"
+  },
+  "aop.__method__": {
+    "scope": "typescript,typescriptreact",
+    "prefix": "aopmethod",
+    "body": [
+      "protected __method__: AopActionMethod<ClassSome> = (_method, _args, next, _receiver) => {",
+      "  $0",
+      "  return next();",
+      "}"
+    ],
+    "description": "aop.__method__"
   },
   "aop.getter": {
     "scope": "typescript,typescriptreact",
@@ -100,17 +111,6 @@
       "}"
     ],
     "description": "aop.actionsync"
-  },
-  "aop.actionmethod": {
-    "scope": "typescript,typescriptreact",
-    "prefix": "aopactionmethod",
-    "body": [
-      "protected __method__: AopActionMethod<ClassSome> = (_method, _args, next, _receiver) => {",
-      "  $0",
-      "  return next();",
-      "}"
-    ],
-    "description": "aop.actionmethod"
   },
   "aopmethod.get": {
     "scope": "typescript,typescriptreact",
