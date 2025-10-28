@@ -61,7 +61,7 @@ export class BeanBase extends BeanBaseSimple {
   // protected __dispose__() {}
 
   public get scope(): unknown {
-    return this.bean.scope(this[SymbolModuleBelong]);
+    return this.bean.scope(this[SymbolModuleBelong] as never);
   }
 
   protected $watchHandle(prop: string | Function, index?: number): WatchHandle {

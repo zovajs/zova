@@ -28,7 +28,7 @@ export class Monkey extends BeanSimple implements IMonkeyModule, IMonkeyBeanInit
     // load apis
     const onions = appResource.scenes.api?.[module.info.relativeName];
     if (onions) {
-      const scope = this.bean.scope(module.info.relativeName) as any;
+      const scope = this.bean.scope(module.info.relativeName as any) as any;
       for (const beanFullName in onions) {
         const beanOptions = onions[beanFullName];
         scope.api[beanOptions.name] = await this.bean._getBean(beanFullName as any, true);
