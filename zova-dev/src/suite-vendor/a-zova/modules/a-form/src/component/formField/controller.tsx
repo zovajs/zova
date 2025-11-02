@@ -1,9 +1,7 @@
 import type { BehaviorForm } from '../../bean/behavior.form.jsx';
-import { useField } from '@tanstack/vue-form';
-import { SchemaObject } from 'openapi3-ts/oas31';
 import { BeanControllerBase, deepExtend, Use } from 'zova';
 import { Controller } from 'zova-module-a-bean';
-import { TypeFormField } from '../../types/form.js';
+import { $UseBehaviorTag, BeanBehaviorsHolder, IBehaviorItem } from 'zova-module-a-behavior';
 import { IFormFieldLayoutOptionsBase, IFormFieldOptions } from '../../types/formField.js';
 import { IFormProvider } from '../../types/provider.js';
 
@@ -16,21 +14,74 @@ export class ControllerFormField extends BeanControllerBase {
   static $propsDefault = {};
 
   formProvider: IFormProvider;
-  field: TypeFormField;
 
   @Use({ injectionScope: 'host' })
   $$behaviorForm: BehaviorForm;
+
+  @Use()
+  $$beanBehaviorsHolder: BeanBehaviorsHolder;
 
   protected async __init__() {
     this.formProvider = this.$useComputed(() => {
       return deepExtend({}, this.$$behaviorForm.formProvider, this.$props.formProvider);
     });
-    const options = this.getBehaviorFormFieldOptions(this.$props.name);
-    this.field = useField({ ...options, form: this.$$behaviorForm.form }) as any;
+    await this.$$beanBehaviorsHolder.init({
+      behaviorTag: $UseBehaviorTag(this._getFieldComponent()),
+      behaviors: () => {
+        return this._getFieldBehaviors();
+      },
+    });
   }
 
-  protected getBehaviorFormFieldOptions(name: string) {
-    const zodSchemaField = this.$$behaviorForm.getFieldZodSchema(name);
+  protected render() {
+    if (this.$slots.default) return this.$slots.default(this.field);
+    return this._renderField();
+  }
+
+  private _getFieldName() {
+    return this.$props.name;
+  }
+
+  private _getFieldProperty() {
+    return this.$$behaviorForm.getProperty(this._getFieldName());
+  }
+
+  private _getFieldZodSchema() {
+    return this.$$behaviorForm.getFieldZodSchema(this._getFieldName());
+  }
+
+  private _getFieldComponent() {
+    const property = this._getFieldProperty();
+    let render = property?.rest?.render ?? 'text';
+    if (typeof render === 'string') {
+      render = this.formProvider.components?.[render] ?? (render.includes(':') ? render : 'input');
+    }
+    if (typeof render === 'function') return render;
+    if (render.includes(':')) return this.$zovaComponent(render as any);
+    return render;
+  }
+
+  private _getFieldBehaviors() {
+    const behaviors: IBehaviorItem = {};
+    this._prepareBehaviorFormField(behaviors);
+    this._prepareBehaviorFormFieldLayout(behaviors);
+    return behaviors;
+  }
+
+  private _prepareBehaviorFormField(behaviors: IBehaviorItem) {
+    const behaviorFormField = this.formProvider.behaviors?.formField;
+    if (!behaviorFormField) return;
+    behaviors[behaviorFormField] = this.getBehaviorFormFieldOptions();
+  }
+
+  private _prepareBehaviorFormFieldLayout(behaviors: IBehaviorItem) {
+    const behaviorFormFieldLayout = this.formProvider.behaviors?.formFieldLayout;
+    if (!behaviorFormFieldLayout) return;
+    behaviors[behaviorFormFieldLayout] = this.getBehaviorFormFieldLayoutOptions();
+  }
+
+  private getBehaviorFormFieldOptions() {
+    const zodSchemaField = this._getFieldZodSchema();
     return deepExtend({}, this.$$behaviorForm.formField, this.$props as any, {
       name,
       validators: {
@@ -40,7 +91,9 @@ export class ControllerFormField extends BeanControllerBase {
     });
   }
 
-  protected getBehaviorFormFieldLayoutOptions(name: string, property?: SchemaObject) {
+  private getBehaviorFormFieldLayoutOptions() {
+    const name = this._getFieldName();
+    const property = this._getFieldProperty();
     return deepExtend({ bordered: true }, this.$$behaviorForm.formFieldLayout, this.$props as any, {
       label: this.$props.label ?? property?.title ?? name,
     } satisfies IFormFieldLayoutOptionsBase);
