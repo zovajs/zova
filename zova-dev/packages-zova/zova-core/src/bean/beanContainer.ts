@@ -777,8 +777,8 @@ export class BeanContainer {
   ): IBeanRecord[K] | undefined;
   public _getBeanFromHost(beanFullName?: string | IDecoratorUseOptions, useOptions?: IDecoratorUseOptions) {
     if (typeof beanFullName !== 'string') {
-      beanFullName = undefined;
       useOptions = beanFullName;
+      beanFullName = undefined;
     }
     if (!useOptions) {
       useOptions = {};

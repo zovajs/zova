@@ -2,6 +2,7 @@ import type { BehaviorForm } from '../../bean/behavior.form.jsx';
 import { BeanControllerBase, deepExtend, Use } from 'zova';
 import { Controller } from 'zova-module-a-bean';
 import { $UseBehaviorTag, BeanBehaviorsHolder, IBehaviorItem } from 'zova-module-a-behavior';
+import { BehaviorFormField } from '../../bean/behavior.formField.js';
 import { IFormFieldLayoutOptionsBase, IFormFieldOptions } from '../../types/formField.js';
 import { IFormProvider } from '../../types/provider.js';
 
@@ -34,8 +35,9 @@ export class ControllerFormField extends BeanControllerBase {
   }
 
   protected render() {
-    if (this.$slots.default) return this.$slots.default(this.field);
-    return this._renderField();
+    const behaviorFormField: BehaviorFormField = this.bean._getBeanFromHost({ name: '$$behaviorFormField', injectionScope: 'host' });
+    if (this.$slots.default) return this.$slots.default(behaviorFormField.field);
+    // return this._renderField();
   }
 
   private _getFieldName() {
@@ -81,6 +83,7 @@ export class ControllerFormField extends BeanControllerBase {
   }
 
   private getBehaviorFormFieldOptions() {
+    const name = this._getFieldName();
     const zodSchemaField = this._getFieldZodSchema();
     return deepExtend({}, this.$$behaviorForm.formField, this.$props as any, {
       name,

@@ -3,7 +3,7 @@ import { createVNode } from 'vue';
 import { BeanBase, cast, deepEqual, disposeInstance, Use } from 'zova';
 import { Bean } from 'zova-module-a-bean';
 import { Log } from 'zova-module-a-logger';
-import { UseBehavior } from '../lib/useBehavior.js';
+import { $UseBehavior } from '../lib/useBehavior.js';
 import { ServiceComposer } from '../service/composer.js';
 import { BeanBehavior } from './bean.behavior.js';
 
@@ -53,7 +53,7 @@ export class BeanBehaviorsHolder extends BeanBase {
     if (!behaviors) {
       behaviors = this._getBehaviors();
     }
-    return UseBehavior('a-behavior:root' as never, { behaviors } as any);
+    return $UseBehavior('a-behavior:root' as never, { behaviors } as any);
   }
 
   public render() {
