@@ -12,6 +12,7 @@ import { IFormProvider } from '../../types/provider.js';
 export interface ControllerFormProps<T extends {} = {}> {
   data?: T;
   schema?: SchemaObject;
+  zodSchema?: z.ZodObject<any>;
   formMeta?: IFormMeta;
   formProvider?: IFormProvider;
   formField?: IFormFieldOptionsBase;
@@ -25,6 +26,7 @@ export class ControllerForm extends BeanControllerFormBase {
 
   form: TypeForm;
   formProvider: IFormProvider;
+  schema: SchemaObject | undefined;
   zodSchema: z.ZodObject<any> | undefined;
   properties: SchemaObject[] | undefined;
 
@@ -43,12 +45,16 @@ export class ControllerForm extends BeanControllerFormBase {
     this.formProvider = this.$useComputed(() => {
       return deepExtend({}, this.$$scopeModuleAOpenapi.config.restResource.form?.provider, this.$props.formProvider);
     });
+    this.schema = this.$useComputed(() => {
+      return this.$props.schema;
+    });
     this.zodSchema = this.$useComputed(() => {
+      if (this.$props.zodSchema) return this.$props.zodSchema;
       if (!this.$props.schema) return;
       return schemaToZodSchema<z.ZodObject<any>>(this.$props.schema);
     });
     this.properties = this.$useComputed(() => {
-      return loadSchemaProperties(this.$props.schema, 'form');
+      return loadSchemaProperties(this.schema, 'form');
     });
   }
 
