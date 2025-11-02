@@ -35,9 +35,14 @@ export class ControllerFormField extends BeanControllerBase {
   }
 
   protected render() {
-    const behaviorFormField: BehaviorFormField = this.bean._getBeanFromHost({ name: '$$behaviorFormField', injectionScope: 'host' });
-    if (this.$slots.default) return this.$slots.default(behaviorFormField.field);
-    // return this._renderField();
+    return this.$$beanBehaviorsHolder.render(
+      this.$slots.default
+        ? () => {
+            const behaviorFormField: BehaviorFormField = this.bean._getBeanFromHost({ name: '$$behaviorFormField', injectionScope: 'host' });
+            return this.$slots.default!(behaviorFormField.field);
+          }
+        : undefined,
+    );
   }
 
   private _getFieldName() {

@@ -56,7 +56,7 @@ export class BeanBehaviorsHolder extends BeanBase {
     return $UseBehavior('a-behavior:root' as never, { behaviors } as any);
   }
 
-  public render() {
+  public render(vNodeDefault?: Function) {
     const parent = this.ctx.instance;
     const { ref, props, children } = parent.vnode;
     // props
@@ -65,6 +65,7 @@ export class BeanBehaviorsHolder extends BeanBase {
     delete propsNew.behaviors;
     // render
     const vnode = this.composer.render(propsNew, propsNew => {
+      if (vNodeDefault) return vNodeDefault();
       return createVNode(this.options.behaviorTag.component, propsNew, children);
     });
     // ensure inner component inherits the async wrapper's ref owner
