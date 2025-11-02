@@ -2,6 +2,7 @@
 /** bean: begin */
 export * from '../bean/bean.behavior.js';
 export * from '../bean/bean.behaviorBase.js';
+export * from '../bean/bean.behaviorsHolder.js';
 
 import 'zova';
 declare module 'zova' {
@@ -19,17 +20,30 @@ declare module 'zova-module-a-behavior' {
           get $beanFullName(): 'a-behavior.bean.behavior';
           get $onionName(): 'a-behavior:behavior';
           
+        }
+
+        export interface BeanBehaviorsHolder {
+          /** @internal */
+          get scope(): ScopeModuleABehavior;
+        }
+
+        export interface BeanBehaviorsHolder {
+          get $beanFullName(): 'a-behavior.bean.behaviorsHolder';
+          get $onionName(): 'a-behavior:behaviorsHolder';
+          
         } 
 }
 /** bean: end */
 /** bean: begin */
 import { BeanBehavior } from '../bean/bean.behavior.js';
 import { BeanBehaviorBase } from '../bean/bean.behaviorBase.js';
+import { BeanBehaviorsHolder } from '../bean/bean.behaviorsHolder.js';
 import 'zova';
 declare module 'zova' {
   export interface IBeanRecordGeneral {
     'a-behavior.bean.behavior': BeanBehavior;
 'a-behavior.bean.behaviorBase': BeanBehaviorBase;
+'a-behavior.bean.behaviorsHolder': BeanBehaviorsHolder;
   }
 }
 /** bean: end */
