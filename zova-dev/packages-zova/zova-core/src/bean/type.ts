@@ -77,7 +77,7 @@ export interface DefineModelOptions<T = any, G = T, S = T> {
 export type IComponentOptions = Parameters<typeof defineOptions>[0];
 
 export type IEmit = () => void;
-export type ISlot = () => VNode;
+export type ISlot = (...args: any[]) => VNode;
 
 export interface ISlotsDefault {
   default?: ISlot;
