@@ -1,4 +1,8 @@
 import { createZovaComponentPage } from 'zova';
 import { ControllerPageLogin } from '../../page/login/controller.jsx';
+import { RenderPageLogin } from '../../page/login/render.jsx';
 
-export const ZPageLogin = createZovaComponentPage(ControllerPageLogin, undefined, undefined);
+declare module 'zova-module-home-user' {
+  export interface RenderPageLogin extends ControllerPageLogin {}
+}
+export const ZPageLogin = createZovaComponentPage(ControllerPageLogin, RenderPageLogin, undefined);

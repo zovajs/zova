@@ -48,6 +48,31 @@ declare module 'zova-module-home-user' {
 }
 /** pages: end */
 
+/** render: begin */
+export * from '../page/login/render.jsx';
+
+import 'zova';
+declare module 'zova' {
+  
+  
+}
+declare module 'zova-module-home-user' {
+  
+        export interface RenderPageLogin {
+          /** @internal */
+          get scope(): ScopeModuleHomeUser;
+        } 
+}
+/** render: end */
+/** render: begin */
+import { RenderPageLogin } from '../page/login/render.jsx';
+import 'zova';
+declare module 'zova' {
+  export interface IBeanRecordLocal {
+    'home-user.render.pageLogin': RenderPageLogin;
+  }
+}
+/** render: end */
 /** model: begin */
 export * from '../model/passport.js';
 import { IModelOptionsPassport } from '../model/passport.js';
