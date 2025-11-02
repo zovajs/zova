@@ -9,8 +9,8 @@ export class ControllerPageLogin extends BeanControllerPageBase {
   $$modelPassport: ModelPassport;
 
   user: ApiApiHomeUserPassportloginRequestBody = {
-    username: 'admin',
-    password: '',
+    username: process.env.DEV ? 'admin' : '',
+    password: process.env.DEV ? '123456' : '',
     captcha: {
       id: '',
       token: '',

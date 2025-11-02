@@ -1,8 +1,7 @@
 import { SchemaObject } from 'openapi3-ts/oas31';
-import { BeanRenderBase, deepExtend } from 'zova';
+import { BeanRenderBase } from 'zova';
 import { Render } from 'zova-module-a-bean';
 import { IBehaviorItem } from 'zova-module-a-behavior';
-import { IFormFieldLayoutOptionsBase } from '../../types/formField.js';
 
 @Render()
 export class RenderFormField extends BeanRenderBase {
@@ -35,21 +34,12 @@ export class RenderFormField extends BeanRenderBase {
   private _prepareBehaviorFormField(behaviors: IBehaviorItem, name: string, _property: SchemaObject) {
     const behaviorFormField = this.formProvider.behaviors?.formField;
     if (!behaviorFormField) return;
-    const zodSchemaField = this.$$behaviorForm.getFieldZodSchema(name);
-    behaviors[behaviorFormField] = deepExtend({}, this.$$behaviorForm.formField, this.$props as any, {
-      name,
-      validators: {
-        onChange: zodSchemaField,
-      },
-      formProvider: this.formProvider,
-    });
+    behaviors[behaviorFormField] = this.getBehaviorFormFieldOptions(name);
   }
 
   private _prepareBehaviorFormFieldLayout(behaviors: IBehaviorItem, name: string, property: SchemaObject) {
     const behaviorFormFieldLayout = this.formProvider.behaviors?.formFieldLayout;
     if (!behaviorFormFieldLayout) return;
-    behaviors[behaviorFormFieldLayout] = deepExtend({ bordered: true }, this.$$behaviorForm.formFieldLayout, this.$props as any, {
-      label: this.$props.label ?? property.title ?? name,
-    } satisfies IFormFieldLayoutOptionsBase);
+    behaviors[behaviorFormFieldLayout] = this.getBehaviorFormFieldLayoutOptions(name, property);
   }
 }
