@@ -8,7 +8,6 @@ export class RenderFormField extends BeanRenderBase {
   public _renderField() {
     const name = this.$props.name;
     const property = this.$$behaviorForm.getProperty(name);
-    if (!property) return;
     const behaviors: IBehaviorItem = {};
     this._prepareBehaviorFormField(behaviors, name, property);
     this._prepareBehaviorFormFieldLayout(behaviors, name, property);
@@ -17,12 +16,12 @@ export class RenderFormField extends BeanRenderBase {
   }
 
   public render() {
-    if (this.$slots.default) return this.$slots.default();
+    if (this.$slots.default) return this.$slots.default(this.field);
     return this._renderField();
   }
 
-  private _getFieldComponent(property: SchemaObject) {
-    let render = property.rest?.render ?? 'text';
+  private _getFieldComponent(property?: SchemaObject) {
+    let render = property?.rest?.render ?? 'text';
     if (typeof render === 'string') {
       render = this.formProvider.components?.[render] ?? (render.includes(':') ? render : 'input');
     }
@@ -31,13 +30,13 @@ export class RenderFormField extends BeanRenderBase {
     return render;
   }
 
-  private _prepareBehaviorFormField(behaviors: IBehaviorItem, name: string, _property: SchemaObject) {
+  private _prepareBehaviorFormField(behaviors: IBehaviorItem, name: string, _property?: SchemaObject) {
     const behaviorFormField = this.formProvider.behaviors?.formField;
     if (!behaviorFormField) return;
     behaviors[behaviorFormField] = this.getBehaviorFormFieldOptions(name);
   }
 
-  private _prepareBehaviorFormFieldLayout(behaviors: IBehaviorItem, name: string, property: SchemaObject) {
+  private _prepareBehaviorFormFieldLayout(behaviors: IBehaviorItem, name: string, property?: SchemaObject) {
     const behaviorFormFieldLayout = this.formProvider.behaviors?.formFieldLayout;
     if (!behaviorFormFieldLayout) return;
     behaviors[behaviorFormFieldLayout] = this.getBehaviorFormFieldLayoutOptions(name, property);
