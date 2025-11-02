@@ -25,11 +25,8 @@ export class ControllerFormField extends BeanControllerBase {
     this.formProvider = this.$useComputed(() => {
       return deepExtend({}, this.$$behaviorForm.formProvider, this.$props.formProvider);
     });
-    this.field = this.$useComputed(() => {
-      const name = this.$props.name;
-      const options = this.getBehaviorFormFieldOptions(name);
-      return useField({ ...options, form: this.$$behaviorForm.form }) as any;
-    });
+    const options = this.getBehaviorFormFieldOptions(this.$props.name);
+    this.field = useField({ ...options, form: this.$$behaviorForm.form }) as any;
   }
 
   protected getBehaviorFormFieldOptions(name: string) {
