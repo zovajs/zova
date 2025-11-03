@@ -1,5 +1,6 @@
 import { BeanControllerPageBase, Use } from 'zova';
 import { Controller } from 'zova-module-a-bean';
+import { TypeFormOnSubmitData } from 'zova-module-a-form';
 import { ApiApiHomeUserPassportloginRequestBody } from 'zova-module-home-api';
 import { ModelPassport } from '../../model/passport.js';
 
@@ -17,7 +18,7 @@ export class ControllerPageLogin extends BeanControllerPageBase {
     },
   };
 
-  async login() {
-    await this.$$modelPassport.login().mutateAsync(this.user);
+  async onSubmitLogin(data: TypeFormOnSubmitData<ApiApiHomeUserPassportloginRequestBody>) {
+    await this.$$modelPassport.login().mutateAsync(data.value);
   }
 }

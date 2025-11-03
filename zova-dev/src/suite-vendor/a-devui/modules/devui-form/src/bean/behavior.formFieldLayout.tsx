@@ -47,7 +47,7 @@ export class BehaviorFormFieldLayout extends BeanBehaviorBase<
     );
   }
 
-  private _patchProps(props: IBehaviorPropsInputFormFieldLayout) {
+  private _patchProps(props: IBehaviorPropsInputFormFieldLayout): IBehaviorPropsOutputFormFieldLayout {
     const field = this.$$behaviorFormField.field;
     props = this._patchProps_general(field, props);
     if (this.$$behaviorTag.component === 'input') {
@@ -56,8 +56,8 @@ export class BehaviorFormFieldLayout extends BeanBehaviorBase<
     return props;
   }
 
-  private _patchProps_general(_field: TypeFormField, props: IBehaviorPropsInputFormFieldLayout) {
-    const propsPatch: IBehaviorPropsInputFormFieldLayout = {};
+  private _patchProps_general(_field: TypeFormField, props: IBehaviorPropsInputFormFieldLayout): IBehaviorPropsOutputFormFieldLayout {
+    const propsPatch: IBehaviorPropsOutputFormFieldLayout = {};
     return Object.assign({}, props, propsPatch);
   }
 

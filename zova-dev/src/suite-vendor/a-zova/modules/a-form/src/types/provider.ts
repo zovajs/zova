@@ -1,11 +1,11 @@
 import type { TypeComponentRecordSelectorKeysStrict } from 'zova';
-import type { TypeBehaviorRecordSelectorKeysStrict } from 'zova-module-a-behavior';
+import type { TypeBehaviorRecordSelectorKeys, TypeBehaviorRecordSelectorKeysStrict } from 'zova-module-a-behavior';
 import type { TypeRenderComponentProvider } from 'zova-module-a-openapi';
 
 export interface IFormProviderBehaviors {
   formField?: TypeBehaviorRecordSelectorKeysStrict<'formField'>;
-  formFieldLayout?: TypeBehaviorRecordSelectorKeysStrict<'formFieldLayout'>;
-  formFieldModel?: TypeBehaviorRecordSelectorKeysStrict<'formFieldModel'>;
+  formFieldLayout?: TypeBehaviorRecordSelectorKeys<'formFieldLayout'>;
+  formFieldModel?: TypeBehaviorRecordSelectorKeys<'formFieldModel'>;
 }
 
 export interface IFormProviderComponents {
