@@ -65,7 +65,7 @@ export class BeanBehaviorsHolder extends BeanBase {
     delete propsNew.behaviors;
     // render
     const vnode = this.composer.render(propsNew, propsNew => {
-      if (vNodeDefault) return vNodeDefault();
+      if (vNodeDefault) return vNodeDefault(propsNew);
       return createVNode(this.options.behaviorTag.component, propsNew, children);
     });
     // ensure inner component inherits the async wrapper's ref owner

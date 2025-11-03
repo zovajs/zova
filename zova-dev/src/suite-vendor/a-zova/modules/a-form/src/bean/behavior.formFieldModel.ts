@@ -2,18 +2,19 @@ import type { BehaviorFormField } from './behavior.formField.js';
 import { VNode } from 'vue';
 import { Use } from 'zova';
 import { BeanBehaviorBase, Behavior, IDecoratorBehaviorOptions, NextBehavior } from 'zova-module-a-behavior';
+import { ControllerFormFieldProps } from '../.metadata/index.js';
 import { TypeFormField } from '../types/form.js';
 import { IFormMeta } from '../types/formMeta.js';
 
-export interface IBehaviorPropsInputFormFieldModel {
-  name?: string;
+export interface IBehaviorPropsInputFormFieldModel extends ControllerFormFieldProps {}
+
+export interface IBehaviorPropsOutputFormFieldModel extends IBehaviorPropsInputFormFieldModel {
+  name: string;
   value?: any;
   readonly?: boolean;
   onInput?: (e: Event) => void;
   onBlur?: (e: Event) => void;
 }
-
-export interface IBehaviorPropsOutputFormFieldModel {}
 
 export interface IBehaviorOptionsFormFieldModel extends IDecoratorBehaviorOptions {}
 
@@ -40,8 +41,12 @@ export class BehaviorFormFieldModel extends BeanBehaviorBase<
     return props;
   }
 
-  private _patchProps_input(formMeta: IFormMeta | undefined, field: TypeFormField, props: IBehaviorPropsInputFormFieldModel) {
-    const optionsPatch: IBehaviorPropsInputFormFieldModel = {
+  private _patchProps_input(
+    formMeta: IFormMeta | undefined,
+    field: TypeFormField,
+    props: IBehaviorPropsInputFormFieldModel,
+  ): IBehaviorPropsOutputFormFieldModel {
+    const optionsPatch: IBehaviorPropsOutputFormFieldModel = {
       name: field.api.name,
       value: field.state.value,
       onInput: (e: Event) => {

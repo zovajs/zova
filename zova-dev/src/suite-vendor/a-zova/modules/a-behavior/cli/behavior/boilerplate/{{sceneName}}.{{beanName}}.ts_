@@ -4,7 +4,7 @@ import { BeanBehaviorBase, Behavior } from 'zova-module-a-behavior';
 
 export interface IBehaviorPropsInput<%=argv.beanNameCapitalize%> {}
 
-export interface IBehaviorPropsOutput<%=argv.beanNameCapitalize%> {}
+export interface IBehaviorPropsOutput<%=argv.beanNameCapitalize%> extends IBehaviorPropsInput<%=argv.beanNameCapitalize%> {}
 
 export interface IBehaviorOptions<%=argv.beanNameCapitalize%> extends IDecoratorBehaviorOptions {}
 

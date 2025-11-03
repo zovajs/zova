@@ -37,9 +37,9 @@ export class ControllerFormField extends BeanControllerBase {
   protected render() {
     return this.$$beanBehaviorsHolder.render(
       this.$slots.default
-        ? () => {
+        ? (props: object) => {
             const behaviorFormField: BehaviorFormField = this.bean._getBeanFromHost({ name: '$$behaviorFormField', injectionScope: 'host' });
-            return this.$slots.default!(behaviorFormField.field);
+            return this.$slots.default!(behaviorFormField.field, props);
           }
         : undefined,
     );

@@ -9,7 +9,7 @@ export interface IBehaviorPropsInputFormFieldLayout {
   class?: any;
 }
 
-export interface IBehaviorPropsOutputFormFieldLayout {}
+export interface IBehaviorPropsOutputFormFieldLayout extends IBehaviorPropsInputFormFieldLayout {}
 
 export interface IBehaviorOptionsFormFieldLayout extends IDecoratorBehaviorOptions {
   label?: string | false;
@@ -61,8 +61,8 @@ export class BehaviorFormFieldLayout extends BeanBehaviorBase<
     return Object.assign({}, props, propsPatch);
   }
 
-  private _patchProps_input(field: TypeFormField, props: IBehaviorPropsInputFormFieldLayout) {
-    const propsPatch: IBehaviorPropsInputFormFieldLayout = {};
+  private _patchProps_input(field: TypeFormField, props: IBehaviorPropsInputFormFieldLayout): IBehaviorPropsOutputFormFieldLayout {
+    const propsPatch: IBehaviorPropsOutputFormFieldLayout = {};
 
     propsPatch.class = classes(props.class, 'input', this.$options.bordered && 'input-bordered', !field.state.meta.isValid && 'input-error');
     return Object.assign({}, props, propsPatch);
