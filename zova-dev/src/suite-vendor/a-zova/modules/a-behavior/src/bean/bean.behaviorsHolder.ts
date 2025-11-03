@@ -20,7 +20,7 @@ export class BeanBehaviorsHolder extends BeanBase {
   @Use()
   $$beanBehavior: BeanBehavior;
 
-  async init(options: IBehaviorsHolderOptions) {
+  public async initialize(options: IBehaviorsHolderOptions) {
     this.options = options;
     const behaviors = this.options.behaviors;
     if (typeof behaviors === 'function') {

@@ -26,7 +26,7 @@ export class ControllerFormField extends BeanControllerBase {
     this.formProvider = this.$useComputed(() => {
       return deepExtend({}, this.$$behaviorForm.formProvider, this.$props.formProvider);
     });
-    await this.$$beanBehaviorsHolder.init({
+    await this.$$beanBehaviorsHolder.initialize({
       behaviorTag: $UseBehaviorTag(this._getFieldComponent()),
       behaviors: () => {
         return this._getFieldBehaviors();
