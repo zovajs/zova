@@ -19,7 +19,7 @@ export class ControllerBehavior extends BeanControllerBase {
   $$beanBehaviorsHolder: BeanBehaviorsHolder;
 
   protected async __init__() {
-    await this.$$beanBehaviorsHolder.init({
+    await this.$$beanBehaviorsHolder.initialize({
       behaviorTag: this.$props.behaviorTag,
       behaviors: () => {
         return this.$props.behaviors;
