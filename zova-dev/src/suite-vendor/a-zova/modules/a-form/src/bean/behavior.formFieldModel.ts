@@ -35,20 +35,34 @@ export class BehaviorFormFieldModel extends BeanBehaviorBase<
   private _patchProps(props: IBehaviorPropsInputFormFieldModel) {
     const formMeta = this.$$behaviorFormField.formMeta;
     const field = this.$$behaviorFormField.field;
+    props = this._patchProps_general(formMeta, field, props);
     if (this.$$behaviorTag.component === 'input') {
       return this._patchProps_input(formMeta, field, props);
     }
     return props;
   }
 
-  private _patchProps_input(
+  private _patchProps_general(
     formMeta: IFormMeta | undefined,
     field: TypeFormField,
     props: IBehaviorPropsInputFormFieldModel,
   ): IBehaviorPropsOutputFormFieldModel {
-    const optionsPatch: IBehaviorPropsOutputFormFieldModel = {
+    const propsPatch: IBehaviorPropsOutputFormFieldModel = {
       name: field.api.name,
       value: field.state.value,
+    };
+    if (formMeta?.formMode === 'view') {
+      propsPatch.readonly = true;
+    }
+    return Object.assign(propsPatch, props);
+  }
+
+  private _patchProps_input(
+    _formMeta: IFormMeta | undefined,
+    field: TypeFormField,
+    props: IBehaviorPropsInputFormFieldModel,
+  ): IBehaviorPropsOutputFormFieldModel {
+    const propsPatch: Partial<IBehaviorPropsOutputFormFieldModel> = {
       onInput: (e: Event) => {
         field.api.handleChange((e.target as HTMLInputElement).value);
       },
@@ -56,9 +70,6 @@ export class BehaviorFormFieldModel extends BeanBehaviorBase<
         field.api.handleBlur();
       },
     };
-    if (formMeta?.formMode === 'view') {
-      optionsPatch.readonly = true;
-    }
-    return Object.assign(optionsPatch, props);
+    return Object.assign(propsPatch, props);
   }
 }
