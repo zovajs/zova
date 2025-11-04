@@ -11,7 +11,7 @@ import { IFormProvider } from '../../types/provider.js';
 
 export interface ControllerFormFieldProps<TParentData = unknown> extends IFormFieldOptions<TParentData>, IFormFieldLayoutOptionsBase {
   formProvider?: IFormProvider;
-  slotDefault?: (formState: TypeFormField<TParentData>, props: IBehaviorPropsOutputFormFieldModel & IBehaviorPropsOutputFormFieldLayoutBase) => VNode;
+  slotDefault?: (props: IBehaviorPropsOutputFormFieldModel & IBehaviorPropsOutputFormFieldLayoutBase, field: TypeFormField<TParentData>) => VNode;
 }
 
 @Controller()
@@ -43,7 +43,7 @@ export class ControllerFormField extends BeanControllerBase {
       this.$slotDefault
         ? (props: object) => {
             const behaviorFormField: BehaviorFormField = this.bean._getBeanFromHost({ name: '$$behaviorFormField', injectionScope: 'host' });
-            return this.$slotDefault!(behaviorFormField.field, props);
+            return this.$slotDefault!(props, behaviorFormField.field);
           }
         : undefined,
     );

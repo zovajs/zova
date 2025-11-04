@@ -1,4 +1,3 @@
-import type { IBehaviorPropsOutputFormFieldModel, TypeFormField } from 'zova-module-a-form';
 import { BeanRenderBase } from 'zova';
 import { Render } from 'zova-module-a-bean';
 import { ZForm, ZFormField, ZFormSubscribe } from 'zova-module-a-form';
@@ -47,7 +46,7 @@ export class RenderPageLogin extends BeanRenderBase {
       >
         <ZFormField
           name="username"
-          slotDefault={(_field, props) => {
+          slotDefault={props => {
             return (
               <>
                 <svg
@@ -73,7 +72,7 @@ export class RenderPageLogin extends BeanRenderBase {
         </ZFormField>
         <ZFormField
           name="password"
-          slotDefault={(_field, props) => {
+          slotDefault={props => {
             return (
               <>
                 <svg
