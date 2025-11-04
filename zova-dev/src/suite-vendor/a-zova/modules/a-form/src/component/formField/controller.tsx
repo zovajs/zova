@@ -45,16 +45,18 @@ export class ControllerFormField extends BeanControllerBase {
     );
   }
 
-  private _getFieldName() {
+  private _getFieldName(): string {
     return this.$props.name;
   }
 
   private _getFieldProperty() {
-    return this.$$behaviorForm.getProperty(this._getFieldName());
+    const name = this._getFieldName();
+    return this.$$behaviorForm.getProperty(name);
   }
 
   private _getFieldZodSchema() {
-    return this.$$behaviorForm.getFieldZodSchema(this._getFieldName());
+    const name = this._getFieldName();
+    return this.$$behaviorForm.getFieldZodSchema(name);
   }
 
   private _getFieldComponent() {

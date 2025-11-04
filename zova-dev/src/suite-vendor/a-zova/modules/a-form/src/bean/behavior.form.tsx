@@ -1,4 +1,5 @@
 import { DeepKeys } from '@tanstack/table-core';
+import { useStore } from '@tanstack/vue-form';
 import { SchemaObject } from 'openapi3-ts/oas31';
 import { createCommentVNode, VNode } from 'vue';
 import { z } from 'zod';
@@ -17,7 +18,7 @@ export interface IBehaviorPropsInputForm {
 export interface IBehaviorPropsOutputForm {}
 
 export interface IBehaviorOptionsForm<TFormData = unknown> extends IDecoratorBehaviorOptions {
-  form?: TypeForm<TFormData>;
+  form: TypeForm<TFormData>;
   formMeta?: IFormMeta;
   formProvider?: IFormProvider;
   schema?: SchemaObject;
@@ -37,12 +38,15 @@ export class BehaviorForm<TFormData = unknown> extends BeanBehaviorBase<
   zodSchema?: z.ZodObject<any>;
   properties?: SchemaObject[];
 
+  formState: TypeForm<TFormData>['state'];
+
   @UseScope()
   $$scopeModuleAOpenapi: ScopeModuleAOpenapi;
 
   protected async __init__(options: IBehaviorOptionsForm) {
     super.__init__(options);
     this.bean._setBean('$$behaviorForm', this);
+    this.formState = useStore(this.form.store, state => state) as any;
     this.zodSchema = this.$useComputed(() => {
       if (this.$options.zodSchema) return this.$options.zodSchema;
       if (!this.schema) return;
@@ -56,7 +60,7 @@ export class BehaviorForm<TFormData = unknown> extends BeanBehaviorBase<
   }
 
   public get form() {
-    return this.$options.form!;
+    return this.$options.form;
   }
 
   public get formMeta() {
