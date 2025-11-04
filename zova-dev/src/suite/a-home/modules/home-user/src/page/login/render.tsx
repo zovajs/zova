@@ -47,38 +47,33 @@ export class RenderPageLogin extends BeanRenderBase {
       >
         <ZFormField
           name="username"
-          formProvider={{ behaviors: { formFieldLayout: 'home-user:formFieldLayoutLogin' } }}
+          iconPrefix=":daisy:person"
           slotDefault={props => {
             return (
-              <>
-                <ZIcon name=":daisy:person" width={16}></ZIcon>
-                <input
-                  type="text"
-                  class="grow"
-                  placeholder={this.scope.locale.YourUsername()}
-                  name={props.name}
-                  value={props.value}
-                  onInput={props.onInput}
-                />
-              </>
+              <input
+                type="text"
+                class="grow"
+                placeholder={this.scope.locale.YourUsername()}
+                name={props.name}
+                value={props.value}
+                onInput={props.onInput}
+              />
             );
           }}
         >
         </ZFormField>
         <ZFormField
           name="password"
+          iconPrefix=":daisy:lock"
           slotDefault={props => {
             return (
-              <>
-                <ZIcon name=":daisy:lock" width={16}></ZIcon>
-                <input
-                  type="password"
-                  class="grow"
-                  name={props.name}
-                  value={props.value}
-                  onInput={props.onInput}
-                />
-              </>
+              <input
+                type="password"
+                class="grow"
+                name={props.name}
+                value={props.value}
+                onInput={props.onInput}
+              />
             );
           }}
         >

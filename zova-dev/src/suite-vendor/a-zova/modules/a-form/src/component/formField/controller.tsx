@@ -10,6 +10,7 @@ import { IBehaviorPropsOutputFormFieldLayoutBase, IFormFieldLayoutOptionsBase, I
 import { IFormProvider } from '../../types/provider.js';
 
 export interface ControllerFormFieldProps<TParentData = unknown> extends IFormFieldOptions<TParentData>, IFormFieldLayoutOptionsBase {
+  behaviors?: IBehaviorItem;
   formProvider?: IFormProvider;
   slotDefault?: (props: IBehaviorPropsOutputFormFieldModel & IBehaviorPropsOutputFormFieldLayoutBase, field: TypeFormField<TParentData>) => VNode;
 }
@@ -78,7 +79,7 @@ export class ControllerFormField extends BeanControllerBase {
     const behaviors: IBehaviorItem = {};
     this._prepareBehaviorFormField(behaviors);
     this._prepareBehaviorFormFieldLayout(behaviors);
-    return behaviors;
+    return this.$props.behaviors ? deepExtend(behaviors, this.$props.behaviors) : behaviors;
   }
 
   private _prepareBehaviorFormField(behaviors: IBehaviorItem) {
