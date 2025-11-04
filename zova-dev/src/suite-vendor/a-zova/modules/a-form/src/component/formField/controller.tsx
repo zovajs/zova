@@ -1,6 +1,6 @@
 import type { BehaviorForm } from '../../bean/behavior.form.jsx';
 import { VNode } from 'vue';
-import { BeanControllerBase, deepExtend, Use } from 'zova';
+import { BeanControllerBase, deepExtend, IComponentOptions, Use } from 'zova';
 import { Controller } from 'zova-module-a-bean';
 import { $UseBehaviorTag, BeanBehaviorsHolder, IBehaviorItem } from 'zova-module-a-behavior';
 import { BehaviorFormField } from '../../bean/behavior.formField.js';
@@ -18,6 +18,7 @@ export interface ControllerFormFieldProps<TParentData = unknown> extends IFormFi
 @Controller()
 export class ControllerFormField extends BeanControllerBase {
   static $propsDefault = {};
+  static $componentOptions: IComponentOptions = { inheritAttrs: false };
 
   formProvider: IFormProvider;
 

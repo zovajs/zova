@@ -1,7 +1,6 @@
 import { BeanRenderBase } from 'zova';
 import { Render } from 'zova-module-a-bean';
 import { ZForm, ZFormField, ZFormSubscribe } from 'zova-module-a-form';
-import { ZIcon } from 'zova-module-a-icon';
 
 @Render()
 export class RenderPageLogin extends BeanRenderBase {
