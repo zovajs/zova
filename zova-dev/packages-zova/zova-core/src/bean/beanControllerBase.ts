@@ -1,5 +1,6 @@
-import type { IControllerData, ISlotsDefault } from './type.js';
+import type { IControllerData, ISlot, ISlotsDefault } from './type.js';
 import { shallowReactive } from 'vue';
+import { cast } from '../types/utils/cast.js';
 import { useModel } from '../vueExtra/useModel.js';
 import { BeanBase } from './beanBase.js';
 
@@ -30,6 +31,10 @@ export class BeanControllerBase extends BeanBase {
     }
     if (!name) name = 'modelValue';
     return useModel.call(this, this.$props as any, name, options);
+  }
+
+  public get $slotDefault(): ISlot | undefined {
+    return cast(this.$props).slotDefault ?? this.$slots.default;
   }
 
   private __initControllerProps(props: unknown | undefined) {
