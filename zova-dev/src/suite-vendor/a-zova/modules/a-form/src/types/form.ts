@@ -1,4 +1,4 @@
-import type { DeepKeys, DeepValue, FieldAsyncValidateOrFn, FieldOptions, FieldValidateOrFn, FormApi, FormAsyncValidateOrFn, FormOptions, FormValidateOrFn, useField, useForm } from '@tanstack/vue-form';
+import type { DeepKeys, DeepValue, FieldAsyncValidateOrFn, FieldOptions, FieldValidateOrFn, FormApi, FormAsyncValidateOrFn, FormOptions, FormState, FormValidateOrFn, useField, useForm } from '@tanstack/vue-form';
 import type { UnwrapNestedRefs } from 'vue';
 
 export type TypeForm<
@@ -205,3 +205,29 @@ export type TypeFormOnSubmit<
    TFormOnServer,
    TSubmitMeta
  >) => any | Promise<any>;
+
+export type TypeFormState<
+  TFormData = unknown,
+  TFormOnMount extends undefined | FormValidateOrFn<TFormData> = undefined | FormValidateOrFn<TFormData>,
+  TFormOnChange extends undefined | FormValidateOrFn<TFormData> = undefined | FormValidateOrFn<TFormData>,
+  TFormOnChangeAsync extends undefined | FormAsyncValidateOrFn<TFormData> = undefined | FormAsyncValidateOrFn<TFormData>,
+  TFormOnBlur extends undefined | FormValidateOrFn<TFormData> = undefined | FormValidateOrFn<TFormData>,
+  TFormOnBlurAsync extends undefined | FormAsyncValidateOrFn<TFormData> = undefined | FormAsyncValidateOrFn<TFormData>,
+  TFormOnSubmit extends undefined | FormValidateOrFn<TFormData> = undefined | FormValidateOrFn<TFormData>,
+  TFormOnSubmitAsync extends undefined | FormAsyncValidateOrFn<TFormData> = undefined | FormAsyncValidateOrFn<TFormData>,
+  TFormOnDynamic extends undefined | FormValidateOrFn<TFormData> = undefined | FormValidateOrFn<TFormData>,
+  TFormOnDynamicAsync extends undefined | FormAsyncValidateOrFn<TFormData> = undefined | FormAsyncValidateOrFn<TFormData>,
+  TFormOnServer extends undefined | FormAsyncValidateOrFn<TFormData> = undefined | FormAsyncValidateOrFn<TFormData>,
+> = FormState<
+  TFormData,
+  TFormOnMount,
+  TFormOnChange,
+  TFormOnChangeAsync,
+  TFormOnBlur,
+  TFormOnBlurAsync,
+  TFormOnSubmit,
+  TFormOnSubmitAsync,
+  TFormOnDynamic,
+  TFormOnDynamicAsync,
+  TFormOnServer
+>;
