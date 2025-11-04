@@ -19,7 +19,7 @@ export class BehaviorFormFieldLayoutLogin extends BeanBehaviorBase<
   protected render(_props: IBehaviorPropsInputFormFieldLayoutLogin, next: NextBehavior<IBehaviorPropsOutputFormFieldLayoutLogin>): VNode {
     const vnode = next();
     return (
-      <label class="input input-bordered flex items-center gap-2">
+      <label class="input input-bordered flex items-center gap-2 w-full">
         <ZIcon class="opacity-70" name={this.$options.iconPrefix} width={16}></ZIcon>
         {vnode}
       </label>
