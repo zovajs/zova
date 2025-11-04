@@ -1,9 +1,11 @@
 import type { BehaviorForm } from '../../bean/behavior.form.jsx';
-import { BeanControllerBase, ISlot, Use } from 'zova';
+import { VNode } from 'vue';
+import { BeanControllerBase, Use } from 'zova';
 import { Controller } from 'zova-module-a-bean';
+import { TypeForm, TypeFormState } from '../../types/form.js';
 
-export interface ControllerFormSubscribeProps {
-  slotDefault?: ISlot;
+export interface ControllerFormSubscribeProps<T extends {} = {}> {
+  slotDefault?: (formState: TypeFormState<T>, form: TypeForm<T>) => VNode;
 }
 
 @Controller()

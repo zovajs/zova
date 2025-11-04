@@ -4,20 +4,20 @@ import { defineComponent } from 'vue';
 import { prepareComponentOptions, useController } from 'zova';
 import { ControllerFormSubscribe } from '../../component/formSubscribe/controller.jsx';
 
-export type TypeControllerFormSubscribePublicProps = {
-  controllerRef?: (ref: ControllerFormSubscribe) => void;
-} & ControllerFormSubscribeProps;
+export type TypeControllerFormSubscribePublicProps<_T = unknown> = {
+  controllerRef?: (ref: ControllerFormSubscribe<_T>) => void;
+} & ControllerFormSubscribeProps<_T>;
 
-type ControllerInnerProps =
-  TypeControllerInnerProps<ControllerFormSubscribeProps, keyof typeof ControllerFormSubscribe.$propsDefault>;
+type ControllerInnerProps<_T = unknown> =
+  TypeControllerInnerProps<ControllerFormSubscribeProps<_T>, keyof typeof ControllerFormSubscribe.$propsDefault>;
 declare module 'zova-module-a-form' {
-  export interface ControllerFormSubscribe {
-    $props: ControllerInnerProps;
+  export interface ControllerFormSubscribe<_T = unknown> {
+    $props: ControllerInnerProps<_T>;
   }
 }
 
 export const ZFormSubscribe = defineComponent(
-  (_props: TypeControllerFormSubscribePublicProps) => {
+  <_T = unknown>(_props: TypeControllerFormSubscribePublicProps<_T>) => {
     useController(ControllerFormSubscribe, undefined, undefined);
     return () => {};
   },
