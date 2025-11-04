@@ -16,6 +16,6 @@ export class ControllerFormSubscribe extends BeanControllerBase {
   $$behaviorForm: BehaviorForm;
 
   protected render() {
-    return this.$slots.default?.(this.$$behaviorForm.formState, this.$$behaviorForm.form);
+    return this.$slotDefault?.(this.$$behaviorForm.formState, this.$$behaviorForm.form);
   }
 }
