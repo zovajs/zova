@@ -20,7 +20,7 @@ export class BehaviorFormFieldLayoutLogin extends BeanBehaviorBase<
     const vnode = next();
     return (
       <label class="input input-bordered flex items-center gap-2">
-        <ZIcon name={this.$options.iconPrefix} width={16}></ZIcon>
+        <ZIcon class="opacity-70" name={this.$options.iconPrefix} width={16}></ZIcon>
         {vnode}
       </label>
     );
