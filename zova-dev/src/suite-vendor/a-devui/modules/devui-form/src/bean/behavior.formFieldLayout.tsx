@@ -1,20 +1,15 @@
-import type { BehaviorFormField, TypeFormField } from 'zova-module-a-form';
+import type { BehaviorFormField, IBehaviorPropsInputFormFieldLayoutBase, IBehaviorPropsOutputFormFieldLayoutBase, IFormFieldLayoutOptionsBase, TypeFormField } from 'zova-module-a-form';
 import { classes } from 'typestyle';
 import { VNode } from 'vue';
 import { z } from 'zod';
 import { Use } from 'zova';
 import { BeanBehaviorBase, Behavior, IDecoratorBehaviorOptions, NextBehavior } from 'zova-module-a-behavior';
 
-export interface IBehaviorPropsInputFormFieldLayout {
-  class?: any;
-}
+export interface IBehaviorPropsInputFormFieldLayout extends IBehaviorPropsInputFormFieldLayoutBase {}
 
-export interface IBehaviorPropsOutputFormFieldLayout extends IBehaviorPropsInputFormFieldLayout {}
+export interface IBehaviorPropsOutputFormFieldLayout extends IBehaviorPropsInputFormFieldLayout, IBehaviorPropsOutputFormFieldLayoutBase {}
 
-export interface IBehaviorOptionsFormFieldLayout extends IDecoratorBehaviorOptions {
-  label?: string | false;
-  bordered?: boolean;
-}
+export interface IBehaviorOptionsFormFieldLayout extends IDecoratorBehaviorOptions, IFormFieldLayoutOptionsBase {}
 
 @Behavior<IBehaviorOptionsFormFieldLayout>()
 export class BehaviorFormFieldLayout extends BeanBehaviorBase<

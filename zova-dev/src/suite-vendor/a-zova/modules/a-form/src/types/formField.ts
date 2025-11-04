@@ -12,3 +12,9 @@ export interface IFormFieldOptionsBase {
 
 export interface IFormFieldOptions<TParentData>
   extends TypeBehaviorFormFieldOptions<TParentData>, IFormFieldOptionsBase {}
+
+export interface IBehaviorPropsInputFormFieldLayoutBase {
+  class?: any;
+}
+
+export interface IBehaviorPropsOutputFormFieldLayoutBase extends IBehaviorPropsInputFormFieldLayoutBase {}

@@ -1,13 +1,17 @@
 import type { BehaviorForm } from '../../bean/behavior.form.jsx';
+import { VNode } from 'vue';
 import { BeanControllerBase, deepExtend, Use } from 'zova';
 import { Controller } from 'zova-module-a-bean';
 import { $UseBehaviorTag, BeanBehaviorsHolder, IBehaviorItem } from 'zova-module-a-behavior';
 import { BehaviorFormField } from '../../bean/behavior.formField.js';
-import { IFormFieldLayoutOptionsBase, IFormFieldOptions } from '../../types/formField.js';
+import { IBehaviorPropsOutputFormFieldModel } from '../../bean/behavior.formFieldModel.js';
+import { TypeFormField } from '../../types/form.js';
+import { IBehaviorPropsOutputFormFieldLayoutBase, IFormFieldLayoutOptionsBase, IFormFieldOptions } from '../../types/formField.js';
 import { IFormProvider } from '../../types/provider.js';
 
 export interface ControllerFormFieldProps<TParentData = unknown> extends IFormFieldOptions<TParentData>, IFormFieldLayoutOptionsBase {
   formProvider?: IFormProvider;
+  slotDefault?: (formState: TypeFormField<TParentData>, props: IBehaviorPropsOutputFormFieldModel & IBehaviorPropsOutputFormFieldLayoutBase) => VNode;
 }
 
 @Controller()
@@ -36,10 +40,10 @@ export class ControllerFormField extends BeanControllerBase {
 
   protected render() {
     return this.$$beanBehaviorsHolder.render(
-      this.$slots.default
+      this.$slotDefault
         ? (props: object) => {
             const behaviorFormField: BehaviorFormField = this.bean._getBeanFromHost({ name: '$$behaviorFormField', injectionScope: 'host' });
-            return this.$slots.default!(behaviorFormField.field, props);
+            return this.$slotDefault!(behaviorFormField.field, props);
           }
         : undefined,
     );
