@@ -1,7 +1,7 @@
 import type { IBehaviorPropsOutputFormFieldModel, TypeFormField } from 'zova-module-a-form';
 import { BeanRenderBase } from 'zova';
 import { Render } from 'zova-module-a-bean';
-import { ZForm, ZFormField } from 'zova-module-a-form';
+import { ZForm, ZFormField, ZFormSubscribe } from 'zova-module-a-form';
 
 @Render()
 export class RenderPageLogin extends BeanRenderBase {
@@ -100,9 +100,15 @@ export class RenderPageLogin extends BeanRenderBase {
             }
           }
         </ZFormField>
-        <button type="submit" class="btn mt-2 w-full btn-primary">
-          {this.scope.locale.Login()}
-        </button>
+        <ZFormSubscribe slotDefault={state => {
+          return (
+            <button disabled={state.isSubmitting} type="submit" class="btn mt-2 w-full btn-primary">
+              {this.scope.locale.Login()}
+            </button>
+          );
+        }}
+        >
+        </ZFormSubscribe>
       </ZForm>
     );
   }
