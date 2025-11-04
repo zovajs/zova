@@ -47,10 +47,11 @@ export class RenderPageLogin extends BeanRenderBase {
       >
         <ZFormField
           name="username"
+          formProvider={{ behaviors: { formFieldLayout: 'home-user:formFieldLayoutLogin' } }}
           slotDefault={props => {
             return (
               <>
-                <ZIcon name=":login:daisy-person" width={16}></ZIcon>
+                <ZIcon name=":daisy:person" width={16}></ZIcon>
                 <input
                   type="text"
                   class="grow"
@@ -69,7 +70,7 @@ export class RenderPageLogin extends BeanRenderBase {
           slotDefault={props => {
             return (
               <>
-                <ZIcon name=":login:daisy-lock" width={16}></ZIcon>
+                <ZIcon name=":daisy:lock" width={16}></ZIcon>
                 <input
                   type="password"
                   class="grow"

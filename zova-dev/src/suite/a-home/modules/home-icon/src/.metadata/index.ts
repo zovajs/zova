@@ -2,6 +2,7 @@
 /** icons: begin */
 import icon_auth from './icons/groups/auth.svg';
 import icon_business from './icons/groups/business.svg';
+import icon_daisy from './icons/groups/daisy.svg';
 import icon_default from './icons/groups/default.svg';
 import icon_editor from './icons/groups/editor.svg';
 import icon_emoji from './icons/groups/emoji.svg';
@@ -15,6 +16,7 @@ import icon_tools from './icons/groups/tools.svg';
 export const icons = {
   auth: icon_auth,
   business: icon_business,
+  daisy: icon_daisy,
   default: icon_default,
   editor: icon_editor,
   emoji: icon_emoji,
@@ -45,6 +47,8 @@ export interface IIconRecord {
     ':business:provider': true;
     ':business:purchase': true;
     ':business:store': true;
+    ':daisy:lock': true;
+    ':daisy:person': true;
     '::add': true;
     '::alert': true;
     '::archive': true;
@@ -203,8 +207,6 @@ export interface IIconRecord {
     ':flow:start-event-timer': true;
     ':login:call-outline': true;
     ':login:chevron-left': true;
-    ':login:daisy-lock': true;
-    ':login:daisy-person': true;
     ':login:done': true;
     ':login:lock-outline': true;
     ':login:person-outline': true;

@@ -4,6 +4,7 @@ import type { OmitNever } from 'zova';
 import type { IOnionOptionsEnable, ServiceOnion } from 'zova-module-a-bean';
 import 'vue';
 import 'vue/jsx-runtime';
+import '@vue/runtime-dom';
 
 export type NextBehavior<PROPS_OUTPUT = unknown> = (props?: PROPS_OUTPUT) => VNode;
 
@@ -62,7 +63,14 @@ declare module 'vue/jsx-runtime' {
   namespace JSX {
     // need define class/style in IntrinsicAttributes
     export interface IntrinsicAttributes {
-      behaviors?: IBehaviors;
+      bs_all?: IBehaviors;
     }
+
+  }
+}
+
+declare module '@vue/runtime-dom' {
+  export interface HTMLAttributes {
+    bs_all?: IBehaviors;
   }
 }

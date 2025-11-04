@@ -41,7 +41,7 @@ function createVisitor(context: ContextInfo) {
         const attr = nodePath.node.attributes[index];
         if (!t.isJSXAttribute(attr) || !t.isJSXIdentifier(attr.name)) continue;
         const propName = (attr.name as t.JSXIdentifier).name;
-        if (propName === 'behaviors') {
+        if (propName === 'bs_all') {
           const expression = (attr.value as t.JSXExpressionContainer)?.expression;
           if (t.isArrayExpression(expression)) {
             behaviors.push(...expression.elements);

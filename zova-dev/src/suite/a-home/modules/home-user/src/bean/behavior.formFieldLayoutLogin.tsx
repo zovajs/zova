@@ -6,7 +6,9 @@ export interface IBehaviorPropsInputFormFieldLayoutLogin {}
 
 export interface IBehaviorPropsOutputFormFieldLayoutLogin extends IBehaviorPropsInputFormFieldLayoutLogin {}
 
-export interface IBehaviorOptionsFormFieldLayoutLogin extends IDecoratorBehaviorOptions {}
+export interface IBehaviorOptionsFormFieldLayoutLogin extends IDecoratorBehaviorOptions {
+  icon: string;
+}
 
 @Behavior<IBehaviorOptionsFormFieldLayoutLogin>()
 export class BehaviorFormFieldLayoutLogin extends BeanBehaviorBase<
