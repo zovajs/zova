@@ -47,7 +47,7 @@ export class RenderPageLogin extends BeanRenderBase {
       >
         <ZFormField name="username">
           {
-            (_fields: TypeFormField, props: IBehaviorPropsOutputFormFieldModel) => {
+            (_field: TypeFormField, props: IBehaviorPropsOutputFormFieldModel) => {
               return (
                 <>
                   <svg
@@ -73,7 +73,7 @@ export class RenderPageLogin extends BeanRenderBase {
         </ZFormField>
         <ZFormField name="password">
           {
-            (_fields: TypeFormField, props: IBehaviorPropsOutputFormFieldModel) => {
+            (_field: TypeFormField, props: IBehaviorPropsOutputFormFieldModel) => {
               return (
                 <>
                   <svg
