@@ -203,6 +203,8 @@ export interface IIconRecord {
     ':flow:start-event-timer': true;
     ':login:call-outline': true;
     ':login:chevron-left': true;
+    ':login:daisy-lock': true;
+    ':login:daisy-person': true;
     ':login:done': true;
     ':login:lock-outline': true;
     ':login:person-outline': true;

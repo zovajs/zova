@@ -61,6 +61,48 @@ declare module 'zova' {
   }
 }
 /** bean: end */
+/** controller: begin */
+export * from '../component/icon/controller.jsx';
+
+import 'zova';
+declare module 'zova' {
+  
+  
+}
+declare module 'zova-module-a-icon' {
+  
+        export interface ControllerIcon {
+          /** @internal */
+          get scope(): ScopeModuleAIcon;
+        } 
+}
+/** controller: end */
+/** controller: begin */
+import { ControllerIcon } from '../component/icon/controller.jsx';
+import 'zova';
+declare module 'zova' {
+  export interface IBeanRecordLocal {
+    'a-icon.controller.icon': ControllerIcon;
+  }
+}
+/** controller: end */
+
+/** components: begin */
+export * from './component/icon.js';
+import { ZIcon } from './component/icon.js';
+export const components = {
+  'icon': ZIcon,
+};
+import 'zova';
+declare module 'zova' {
+export interface IComponentRecord {
+  'a-icon:icon': ControllerIcon;
+}
+export interface IZovaComponentRecord {
+  'a-icon:icon': typeof ZIcon;
+}
+}
+/** components: end */
 /** config: begin */
 export * from '../config/config.js';
 import { config } from '../config/config.js';

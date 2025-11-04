@@ -38,7 +38,7 @@ export class ControllerCard extends BeanControllerBase {
           <div style={{ backgroundColor: 'orange' }}>
             <div>
               <div>Slot:</div>
-              {this.$slots.default?.()}
+              {this.$slotDefault?.()}
             </div>
             <div>{`Prop: ${this.$props.content}`}</div>
           </div>

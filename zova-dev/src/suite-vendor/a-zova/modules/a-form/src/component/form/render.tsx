@@ -18,8 +18,8 @@ export class RenderForm extends BeanRenderBase {
   }
 
   public render() {
-    const children = this.$slots.default
-      ? this.$slots.default()
+    const children = this.$slotDefault
+      ? this.$slotDefault()
       : (
           <>
             {this._renderSchema()}

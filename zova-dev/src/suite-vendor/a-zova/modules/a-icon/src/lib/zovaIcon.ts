@@ -26,7 +26,7 @@ export const ZovaIcon = defineComponent({
     });
     return () => {
       // icon info
-      const iconInfo = getZovaIcon(props.name);
+      const iconInfo = getZovaIcon(props.name as any);
       // href
       let href = props.href;
       if (!href) {

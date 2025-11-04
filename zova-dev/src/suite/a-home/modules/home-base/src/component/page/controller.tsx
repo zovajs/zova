@@ -16,6 +16,6 @@ export class ControllerPage extends BeanControllerBase {
   }
 
   protected render() {
-    return <div class={this.cPage}>{this.$slots.default?.()}</div>;
+    return <div class={this.cPage}>{this.$slotDefault?.()}</div>;
   }
 }
