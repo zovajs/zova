@@ -1,6 +1,6 @@
 import { BeanRenderBase } from 'zova';
 import { Render } from 'zova-module-a-bean';
-import { iconh } from 'zova-module-a-icon';
+import { $iconh } from 'zova-module-a-icon';
 
 @Render()
 export class RenderLocale extends BeanRenderBase {
@@ -18,7 +18,7 @@ export class RenderLocale extends BeanRenderBase {
     return (
       <li>
         <details>
-          <summary>{iconh('::language')}</summary>
+          <summary>{$iconh('::language')}</summary>
           <ul class="bg-base-100 rounded-t-none p-2 w-48">
             {locales.map(item => {
               return (
@@ -28,7 +28,7 @@ export class RenderLocale extends BeanRenderBase {
                       this.app.meta.locale.current = item.name as any;
                     }}
                   >
-                    {iconh(this.app.meta.locale.current === item.name ? '::done' : '::none')}
+                    {$iconh(this.app.meta.locale.current === item.name ? '::done' : '::none')}
                     {item.title}
                   </a>
                 </li>
