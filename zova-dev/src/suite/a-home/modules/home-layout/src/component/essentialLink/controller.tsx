@@ -1,12 +1,12 @@
 import { RouterLink } from '@cabloy/vue-router';
 import { BeanControllerBase } from 'zova';
 import { Controller } from 'zova-module-a-bean';
-import { ZovaIcon } from 'zova-module-a-icon';
+import { IIconRecord, ZIcon } from 'zova-module-a-icon';
 
 export interface ControllerEssentialLinkProps {
   title: string;
   description?: string;
-  icon?: string;
+  icon?: keyof IIconRecord;
   href?: string;
   to?: string | object;
 }
@@ -20,7 +20,7 @@ export class ControllerEssentialLink extends BeanControllerBase {
 
   _renderLink() {
     const domContent = [
-      <ZovaIcon name={this.$props.icon} height={24} width={24}></ZovaIcon>,
+      <ZIcon name={this.$props.icon}></ZIcon>,
       <div>
         <div>{this.$props.title}</div>
         {this.$props.description && <div class="text-gray-400">{this.$props.description}</div>}
