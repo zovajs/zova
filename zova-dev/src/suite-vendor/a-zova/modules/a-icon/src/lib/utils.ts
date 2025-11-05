@@ -3,7 +3,7 @@ import type { IIconRecord } from '../types/icon.js';
 import { createVNode } from 'vue';
 import { ZIcon } from '../.metadata/index.js';
 
-export function $iconh<K extends keyof IIconRecord>(name: K, color?: string, size?: string | number): VNode {
+export function $iconh<K extends keyof IIconRecord>(name: K, size?: string | number, color?: string): VNode {
   return createVNode(ZIcon, {
     name,
     color,

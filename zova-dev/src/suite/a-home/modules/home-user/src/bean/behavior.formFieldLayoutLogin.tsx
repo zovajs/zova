@@ -2,7 +2,7 @@ import type { VNode } from 'vue';
 import type { IDecoratorBehaviorOptions, NextBehavior } from 'zova-module-a-behavior';
 import { BeanBehaviorBase, Behavior } from 'zova-module-a-behavior';
 import { IFormFieldLayoutOptionsBase } from 'zova-module-a-form';
-import { $iconh, ZIcon } from 'zova-module-a-icon';
+import { ZIcon } from 'zova-module-a-icon';
 
 export interface IBehaviorPropsInputFormFieldLayoutLogin {}
 
@@ -21,7 +21,6 @@ export class BehaviorFormFieldLayoutLogin extends BeanBehaviorBase<
     return (
       <label class="input input-bordered flex items-center gap-2 w-full">
         <ZIcon class="opacity-70" name={this.$options.iconPrefix} width={16}></ZIcon>
-        {$iconh('::alert')}
         {vnode}
       </label>
     );
