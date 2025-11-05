@@ -1,7 +1,7 @@
 import { CellContext } from '@tanstack/table-core';
 import { BeanRenderBase } from 'zova';
 import { Render } from 'zova-module-a-bean';
-import { icon, ZovaIcon } from 'zova-module-a-icon';
+import { ZIcon } from 'zova-module-a-icon';
 
 @Render()
 export class RenderActions<T extends {} = {}> extends BeanRenderBase {
@@ -15,7 +15,7 @@ export class RenderActions<T extends {} = {}> extends BeanRenderBase {
               this.onActionRow('update', props.row);
             }}
           >
-            <ZovaIcon name={icon('::draft')} height={24}></ZovaIcon>
+            <ZIcon name="::draft"></ZIcon>
           </button>
         )}
         {this.$$restResource.permissions?.row?.delete && (
@@ -25,7 +25,7 @@ export class RenderActions<T extends {} = {}> extends BeanRenderBase {
               this.onActionRow('delete', props.row);
             }}
           >
-            <ZovaIcon name={icon('::delete')} height={24}></ZovaIcon>
+            <ZIcon name="::delete"></ZIcon>
           </button>
         )}
       </div>

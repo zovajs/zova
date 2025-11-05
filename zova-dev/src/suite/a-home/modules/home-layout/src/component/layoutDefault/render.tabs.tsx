@@ -2,7 +2,7 @@ import type { VNode } from 'vue';
 import { withModifiers } from 'vue';
 import { BeanRenderBase, ClientOnly } from 'zova';
 import { Render } from 'zova-module-a-bean';
-import { icon, ZIcon } from 'zova-module-a-icon';
+import { ZIcon } from 'zova-module-a-icon';
 import { ZRouterViewTabs } from 'zova-module-a-tabs';
 
 @Render()
@@ -28,7 +28,7 @@ export class RenderTabs extends BeanRenderBase {
           {!tab.affix && (
             <ZIcon
               class="tab-close hidden hover:bg-slate-400 rounded-sm"
-              name={icon('::close')}
+              name="::close"
               width="16"
               height="16"
               nativeOnClick={withModifiers(() => {

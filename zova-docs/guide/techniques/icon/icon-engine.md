@@ -55,28 +55,28 @@ The icon engine provides a unified interface that can be used directly in any UI
 
 ```typescript
 import { Button } from 'ant-design-vue';
-<Button icon={iconh('::add')}></Button>
+<Button icon={$icon('::add')}></Button>
 ```
 
 ### 2. element-plus
 
 ```typescript
 import { ElButton } from 'element-plus';
-<ElButton icon={icon('::add')}></ElButton>
+<ElButton icon={$iconName('::add')}></ElButton>
 ```
 
 ### 3. quasar
 
 ```typescript
 import { QBtn } from 'quasar';
-<QBtn icon={icon('::add')}></QBtn>;
+<QBtn icon={$iconName('::add')}></QBtn>;
 ```
 
 ### 4. vuetify
 
 ```typescript
 import { VBtn } from 'vuetify/components';
-<VBtn icon={icon('::add')}></VBtn>;
+<VBtn icon={$iconName('::add')}></VBtn>;
 ```
 
 ## Create Icon

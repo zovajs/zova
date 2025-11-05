@@ -1,6 +1,6 @@
 import { BeanRenderBase, ClientOnly } from 'zova';
 import { Render } from 'zova-module-a-bean';
-import { $iconh } from 'zova-module-a-icon';
+import { $icon } from 'zova-module-a-icon';
 
 @Render()
 export class RenderTheme extends BeanRenderBase {
@@ -22,7 +22,7 @@ export class RenderTheme extends BeanRenderBase {
     return (
       <li>
         <details>
-          <summary>{$iconh('::dark-theme')}</summary>
+          <summary>{$icon('::dark-theme')}</summary>
           <ClientOnly>
             <ul class="bg-base-100 rounded-t-none p-2 w-48">
               {themes.map(item => {
@@ -33,7 +33,7 @@ export class RenderTheme extends BeanRenderBase {
                         this.$theme.darkMode = item.mode as any;
                       }}
                     >
-                      {$iconh(this.$theme.darkMode === item.mode ? '::done' : '::none')}
+                      {$icon(this.$theme.darkMode === item.mode ? '::done' : '::none')}
                       {item.title}
                     </a>
                   </li>
@@ -60,7 +60,7 @@ export class RenderTheme extends BeanRenderBase {
     return (
       <li>
         <details>
-          <summary>{$iconh(':outline:theme-outline')}</summary>
+          <summary>{$icon(':outline:theme-outline')}</summary>
           <ClientOnly>
             <ul class="bg-base-100 rounded-t-none p-2 w-48">
               {themes.map(item => {
@@ -71,7 +71,7 @@ export class RenderTheme extends BeanRenderBase {
                         this.$theme.name = item.name as any;
                       }}
                     >
-                      {$iconh(this.$theme.name === item.name ? '::done' : '::none')}
+                      {$icon(this.$theme.name === item.name ? '::done' : '::none')}
                       {item.title}
                     </a>
                   </li>
