@@ -30,8 +30,8 @@ declare module 'zova' {
   }
 }
 /** sys: end */
-/** bean: begin */
-export * from '../bean/bean.icon.js';
+/** tool: begin */
+export * from '../bean/tool.icon.js';
 
 import 'zova';
 declare module 'zova' {
@@ -40,27 +40,27 @@ declare module 'zova' {
 }
 declare module 'zova-module-a-icon' {
   
-        export interface BeanIcon {
+        export interface ToolIcon {
           /** @internal */
           get scope(): ScopeModuleAIcon;
         }
 
-        export interface BeanIcon {
-          get $beanFullName(): 'a-icon.bean.icon';
+        export interface ToolIcon {
+          get $beanFullName(): 'a-icon.tool.icon';
           get $onionName(): 'a-icon:icon';
           
         } 
 }
-/** bean: end */
-/** bean: begin */
-import { BeanIcon } from '../bean/bean.icon.js';
+/** tool: end */
+/** tool: begin */
+import { ToolIcon } from '../bean/tool.icon.js';
 import 'zova';
 declare module 'zova' {
   export interface IBeanRecordGeneral {
-    'a-icon.bean.icon': BeanIcon;
+    'a-icon.tool.icon': ToolIcon;
   }
 }
-/** bean: end */
+/** tool: end */
 /** controller: begin */
 export * from '../component/icon/controller.jsx';
 

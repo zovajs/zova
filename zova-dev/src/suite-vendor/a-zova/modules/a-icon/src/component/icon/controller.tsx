@@ -1,6 +1,6 @@
 import { BeanControllerBase, Use } from 'zova';
 import { Controller } from 'zova-module-a-bean';
-import { BeanIcon } from '../../bean/bean.icon.js';
+import { ToolIcon } from '../../bean/tool.icon.js';
 import { getZovaIcon } from '../../lib/useZovaIcon.js';
 import { IIconRecord } from '../../types/icon.js';
 
@@ -17,7 +17,7 @@ export class ControllerIcon extends BeanControllerBase {
   static $propsDefault = {};
 
   @Use()
-  $$beanIcon: BeanIcon;
+  $$toolIcon: ToolIcon;
 
   protected async __init__() {
     await this._load();
@@ -28,7 +28,7 @@ export class ControllerIcon extends BeanControllerBase {
     if (icon === 'none' as any || !icon) {
       return;
     }
-    await this.$$beanIcon.parseIconInfo(icon);
+    await this.$$toolIcon.parseIconInfo(icon);
   }
 
   protected render() {

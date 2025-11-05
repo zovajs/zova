@@ -1,10 +1,10 @@
 import { BeanBase, Use } from 'zova';
-import { Bean } from 'zova-module-a-bean';
+import { Tool } from 'zova-module-a-bean';
 import { IIconInfo, IIconMeta } from '../types/icon.js';
 import { SysIcon } from './sys.icon.js';
 
-@Bean()
-export class BeanIcon extends BeanBase {
+@Tool()
+export class ToolIcon extends BeanBase {
   private _iconSSR: Record<string, Record<string, Record<string, string>>> = {};
 
   @Use()

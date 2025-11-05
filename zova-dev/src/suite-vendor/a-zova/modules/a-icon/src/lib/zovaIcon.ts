@@ -1,7 +1,7 @@
 import { defineComponent, onServerPrefetch } from 'vue';
 import { createVNode, mergeProps } from 'vue';
 import { useApp } from 'zova';
-import { BeanIcon } from 'zova-module-a-icon';
+import { ToolIcon } from 'zova-module-a-icon';
 import { getZovaIcon } from './useZovaIcon.js';
 
 export const ZovaIcon = defineComponent({
@@ -21,7 +21,7 @@ export const ZovaIcon = defineComponent({
       if (icon === 'none' || !icon) {
         return;
       }
-      const beanIcon = await app.bean._getBean(BeanIcon);
+      const beanIcon = await app.bean._getBean(ToolIcon);
       await beanIcon.parseIconInfo(icon);
     });
     return () => {
