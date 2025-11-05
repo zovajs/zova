@@ -31,7 +31,7 @@ export class RenderTabs extends BeanRenderBase {
               name={icon('::close')}
               width="16"
               height="16"
-              onClick={withModifiers(() => {
+              nativeOnClick={withModifiers(() => {
                 this.$$modelTabs.deleteTab(tab);
               }, ['stop'])}
             >
