@@ -2,7 +2,7 @@ import type { VNode } from 'vue';
 import { withModifiers } from 'vue';
 import { BeanRenderBase, ClientOnly } from 'zova';
 import { Render } from 'zova-module-a-bean';
-import { icon, ZovaIcon } from 'zova-module-a-icon';
+import { icon, ZIcon } from 'zova-module-a-icon';
 import { ZRouterViewTabs } from 'zova-module-a-tabs';
 
 @Render()
@@ -23,10 +23,10 @@ export class RenderTabs extends BeanRenderBase {
             this.$$modelTabs.activeTab(tab);
           }}
         >
-          {!!menuItem?.icon && <ZovaIcon name={menuItem?.icon} width="24" height="24"></ZovaIcon>}
+          {!!menuItem?.icon && <ZIcon name={menuItem?.icon as any} width="24" height="24"></ZIcon>}
           {titleLocal}
           {!tab.affix && (
-            <ZovaIcon
+            <ZIcon
               class="tab-close hidden hover:bg-slate-400 rounded-sm"
               name={icon('::close')}
               width="16"
@@ -35,7 +35,7 @@ export class RenderTabs extends BeanRenderBase {
                 this.$$modelTabs.deleteTab(tab);
               }, ['stop'])}
             >
-            </ZovaIcon>
+            </ZIcon>
           )}
         </a>
       );

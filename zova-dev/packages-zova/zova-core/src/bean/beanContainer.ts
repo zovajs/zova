@@ -283,6 +283,8 @@ export class BeanContainer {
       await this[SymbolGetBeanSelectorInnerPromises][key];
     }
     if (this[SymbolBeanContainerInstances][key] && this[SymbolGetBeanSelectorInnerPromises][key]) {
+      // maybe instance exists, while promise not await complete
+      await this[SymbolGetBeanSelectorInnerPromises][key];
       this[SymbolGetBeanSelectorInnerPromises][key] = undefined;
     }
     return this[SymbolBeanContainerInstances][key] as T;
