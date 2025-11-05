@@ -11,5 +11,5 @@ export function createZovaComponentPage<M, R, S>(controller: Constructable<M>, r
 }
 
 export function prepareComponentOptions(componentOptions?: IComponentOptions) {
-  return Object.assign({ inheritAttrs: ['class', 'style'] }, componentOptions);
+  return Object.assign({ inheritAttrs: 'auto' }, componentOptions);
 }
