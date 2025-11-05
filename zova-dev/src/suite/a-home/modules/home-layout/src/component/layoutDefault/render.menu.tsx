@@ -36,7 +36,7 @@ export class RenderMenu extends BeanRenderBase {
         <ZEssentialLink
           title={titleLocale}
           description={item.description}
-          icon={item.icon}
+          icon={item.icon as any}
           href={item.external ? item.link : undefined}
           to={to}
         />
