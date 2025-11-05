@@ -1,7 +1,7 @@
-import { ZovaIcon } from 'zova';
 import { defineComponent } from 'vue';
-import { mergeProps as _mergeProps, createVNode as _createVNode } from 'vue';
+import { createVNode as _createVNode, mergeProps as _mergeProps } from 'vue';
 import { makeIconProps } from 'vuetify/lib/composables/icons.mjs';
+import { ZIcon } from 'zova';
 
 export const VSvgIconZova = defineComponent({
   name: 'VSvgIconZova',
@@ -17,7 +17,7 @@ export const VSvgIconZova = defineComponent({
         }),
         {
           default: () => [
-            _createVNode(ZovaIcon, {
+            _createVNode(ZIcon, {
               class: 'v-icon__svg',
               href: props.icon,
             }),

@@ -3,7 +3,7 @@ import { useNamespace } from 'element-plus/es/hooks/use-namespace/index.mjs';
 import { addUnit } from 'element-plus/es/utils/dom/style.mjs';
 import { isUndefined } from 'element-plus/es/utils/types.mjs';
 import { computed, createVNode, mergeProps, onServerPrefetch, Text, unref } from 'vue';
-import { $getZovaIcon, BeanBase, useApp, ZovaIcon } from 'zova';
+import { $getZovaIcon, BeanBase, useApp, ZIcon } from 'zova';
 import { Service } from 'zova-module-a-bean';
 
 @Service()
@@ -54,7 +54,7 @@ export class ServiceIcon extends BeanBase {
     if (!iconName) return slotDefault;
     const iconInfo = $getZovaIcon(iconName, this.app);
     if (iconInfo === undefined) return slotDefault;
-    return <ZovaIcon href={`#${iconInfo.symbolId}`}></ZovaIcon>;
+    return <ZIcon href={`#${iconInfo.symbolId}`}></ZIcon>;
   }
 
   private _parseNameFromSlotDefault(slots) {
