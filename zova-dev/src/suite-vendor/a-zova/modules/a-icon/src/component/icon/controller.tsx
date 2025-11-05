@@ -1,7 +1,7 @@
 import { BeanControllerBase, Use } from 'zova';
 import { Controller } from 'zova-module-a-bean';
 import { ToolIcon } from '../../bean/tool.icon.js';
-import { getZovaIcon } from '../../lib/useZovaIcon.js';
+import { $getZovaIcon } from '../../lib/useZovaIcon.js';
 import { IIconRecord } from '../../types/icon.js';
 
 export interface ControllerIconProps {
@@ -33,7 +33,7 @@ export class ControllerIcon extends BeanControllerBase {
 
   protected render() {
     // icon info
-    const iconInfo = getZovaIcon(this.$props.name);
+    const iconInfo = $getZovaIcon(this.$props.name);
     // href
     let href = this.$props.href;
     if (!href) {

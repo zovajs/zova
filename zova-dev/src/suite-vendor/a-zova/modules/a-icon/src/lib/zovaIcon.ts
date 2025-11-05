@@ -2,7 +2,7 @@ import { defineComponent, onServerPrefetch } from 'vue';
 import { createVNode, mergeProps } from 'vue';
 import { useApp } from 'zova';
 import { ToolIcon } from 'zova-module-a-icon';
-import { getZovaIcon } from './useZovaIcon.js';
+import { $getZovaIcon } from './useZovaIcon.js';
 
 export const ZovaIcon = defineComponent({
   name: 'ZovaIcon',
@@ -26,7 +26,7 @@ export const ZovaIcon = defineComponent({
     });
     return () => {
       // icon info
-      const iconInfo = getZovaIcon(props.name as any);
+      const iconInfo = $getZovaIcon(props.name as any);
       // href
       let href = props.href;
       if (!href) {

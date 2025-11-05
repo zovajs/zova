@@ -1,10 +1,10 @@
-import { BeanBase, cast, getZovaIcon, Local, useApp } from 'zova';
 import { Platform, QIcon, Quasar } from 'quasar';
-import { ScopeModule } from '../.metadata/this.js';
-
-import { h, computed, onServerPrefetch } from 'vue';
 import useSize from 'quasar/src/composables/private.use-size/use-size.js';
-import { hSlot, hMergeSlot } from 'quasar/src/utils/private.render/render.js';
+import { hMergeSlot, hSlot } from 'quasar/src/utils/private.render/render.js';
+
+import { computed, h, onServerPrefetch } from 'vue';
+import { $getZovaIcon, BeanBase, cast, Local, useApp } from 'zova';
+import { ScopeModule } from '../.metadata/this.js';
 
 const defaultViewBox = '0 0 24 24';
 
@@ -36,10 +36,10 @@ const symMap = {
   sym_s_: '-sharp',
 };
 
-const libRE = new RegExp('^(' + Object.keys(libMap).join('|') + ')');
-const matRE = new RegExp('^(' + Object.keys(matMap).join('|') + ')');
-const symRE = new RegExp('^(' + Object.keys(symMap).join('|') + ')');
-const mRE = /^[Mm]\s?[-+]?\.?\d/;
+const libRE = new RegExp(`^(${Object.keys(libMap).join('|')})`);
+const matRE = new RegExp(`^(${Object.keys(matMap).join('|')})`);
+const symRE = new RegExp(`^(${Object.keys(symMap).join('|')})`);
+const mRE = /^M\s?[-+]?\.?\d/i;
 const imgRE = /^img:/;
 const svgUseRE = /^svguse:/;
 const ionRE = /^ion-/;
@@ -67,10 +67,10 @@ export class ServiceIcon extends BeanBase<ScopeModule> {
 
       const classes = computed(
         () =>
-          'q-icon' +
-          (props.left === true ? ' on-left' : '') + // TODO Qv3: drop this
-          (props.right === true ? ' on-right' : '') +
-          (props.color !== void 0 ? ` text-${props.color}` : ''),
+          `q-icon${
+            props.left === true ? ' on-left' : '' // TODO Qv3: drop this
+          }${props.right === true ? ' on-right' : ''
+          }${props.color !== void 0 ? ` text-${props.color}` : ''}`,
       );
 
       function _computeType() {
@@ -172,10 +172,10 @@ export class ServiceIcon extends BeanBase<ScopeModule> {
         const type = { value: _computeType() };
 
         const data = {
-          class: classes.value,
-          style: sizeStyle.value,
+          'class': classes.value,
+          'style': sizeStyle.value,
           'aria-hidden': 'true',
-          role: 'presentation',
+          'role': 'presentation',
         };
 
         if (type.value.none === true) {
@@ -219,7 +219,7 @@ export class ServiceIcon extends BeanBase<ScopeModule> {
         }
 
         if (type.value.cls !== void 0) {
-          data.class += ' ' + type.value.cls;
+          data.class += ` ${type.value.cls}`;
         }
 
         return h(props.tag, data, hMergeSlot(slots.default, [type.value.content]));
@@ -229,7 +229,7 @@ export class ServiceIcon extends BeanBase<ScopeModule> {
 
   private _patchIconMap() {
     Quasar.iconSet.iconMapFn = iconName => {
-      const iconInfo = getZovaIcon(iconName, this.app);
+      const iconInfo = $getZovaIcon(iconName, this.app);
       if (iconInfo === undefined) return undefined; // system handle
       return { icon: `svguse:#${iconInfo.symbolId}` };
     };

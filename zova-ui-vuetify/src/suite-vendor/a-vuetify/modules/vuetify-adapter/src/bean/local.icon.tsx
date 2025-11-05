@@ -1,13 +1,13 @@
-import { BeanBase, getZovaIcon, useApp } from 'zova';
-import { VIcon } from 'vuetify/components';
 import { computed, onServerPrefetch, ref, toRef } from 'vue';
-import { provideTheme } from 'vuetify/lib/composables/theme.mjs';
+import { VIcon } from 'vuetify/components';
+import { useTextColor } from 'vuetify/lib/composables/color.mjs';
 import { useIcon } from 'vuetify/lib/composables/icons.mjs';
 import { useSize } from 'vuetify/lib/composables/size.mjs';
-import { useTextColor } from 'vuetify/lib/composables/color.mjs';
+import { provideTheme } from 'vuetify/lib/composables/theme.mjs';
 import { convertToUnit, flattenFragments } from 'vuetify/lib/util/index.mjs';
-import { VSvgIconZova } from '../component/svg.js';
+import { $getZovaIcon, BeanBase, useApp } from 'zova';
 import { Service } from 'zova-module-a-bean';
+import { VSvgIconZova } from '../component/svg.js';
 
 @Service()
 export class ServiceIcon extends BeanBase {
@@ -85,7 +85,7 @@ export class ServiceIcon extends BeanBase {
   }
 
   private _getIconData(iconName) {
-    const iconInfo = getZovaIcon(iconName);
+    const iconInfo = $getZovaIcon(iconName);
     if (iconInfo === undefined) return useIcon(computed(() => iconName));
     return {
       iconData: {
