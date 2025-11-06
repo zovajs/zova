@@ -1,5 +1,6 @@
 import type { IBehaviors } from 'zova-module-a-behavior';
 import type { IIconRecord } from 'zova-module-a-icon';
+import type { TypeRenderComponentProvider } from 'zova-module-a-openapi';
 import type { TypeBehaviorFormFieldOptions } from './form.js';
 
 export type HTMLInputElementType = 'text' | 'password' | 'number' | 'file' | 'hidden' | 'tel' | 'email';
@@ -13,6 +14,7 @@ export interface IFormFieldLayoutOptionsBase {
 
 export interface IFormFieldOptionsBase {
   behaviorModel?: IBehaviors | boolean;
+  render?: TypeRenderComponentProvider;
   inputType?: HTMLInputElementType;
 }
 
