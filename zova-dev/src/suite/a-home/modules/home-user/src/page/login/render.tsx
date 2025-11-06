@@ -8,7 +8,7 @@ export class RenderPageLogin extends BeanRenderBase {
     return (
       <div class="min-h-screen bg-base-200 flex items-center">
         <div class="card mx-auto w-full max-w-5xl  shadow-xl">
-          <div class="grid  md:grid-cols-2 grid-cols-1  bg-base-100 rounded-xl">
+          <div class="grid md:grid-cols-2 grid-cols-1 bg-base-100 rounded-xl">
             {this._renderLandingInfo()}
             <div class="py-24 px-10">
               <h2 class="text-2xl font-semibold mb-2 text-center">{this.scope.locale.Login()}</h2>
