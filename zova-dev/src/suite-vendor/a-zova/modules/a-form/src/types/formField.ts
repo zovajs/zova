@@ -16,6 +16,7 @@ export interface IFormFieldOptionsBase {
   behaviorModel?: IBehaviors | boolean;
   render?: TypeRenderComponentProvider;
   inputType?: HTMLInputElementType;
+  placeholder?: string;
 }
 
 export interface IFormFieldOptions<TParentData>
