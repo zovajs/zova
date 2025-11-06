@@ -61,22 +61,7 @@ export class RenderPageLogin extends BeanRenderBase {
           }}
         >
         </ZFormField>
-        <ZFormField
-          name="password"
-          iconPrefix=":daisy:lock"
-          slotDefault={props => {
-            return (
-              <input
-                type="password"
-                class="grow"
-                name={props.name}
-                value={props.value}
-                onInput={props.onInput}
-              />
-            );
-          }}
-        >
-        </ZFormField>
+        <ZFormField name="password" inputType="password" iconPrefix=":daisy:lock" class="grow"></ZFormField>
         <ZFormSubscribe slotDefault={state => {
           return (
             <button disabled={state.isSubmitting} type="submit" class="btn mt-2 w-full btn-primary">
