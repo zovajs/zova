@@ -21,10 +21,10 @@ export interface ControllerFormProps<T extends {} = {}> {
 }
 
 @Controller()
-export class ControllerForm extends BeanControllerFormBase {
+export class ControllerForm<T extends {} = {}> extends BeanControllerFormBase {
   static $propsDefault = {};
 
-  form: TypeForm;
+  form: TypeForm<T>;
   formProvider: IFormProvider;
   schema: SchemaObject | undefined;
   zodSchema: z.ZodObject<any> | undefined;
@@ -36,9 +36,15 @@ export class ControllerForm extends BeanControllerFormBase {
   protected async __init__() {
     this.form = this.$useComputed(() => {
       return this.$useForm({
-        defaultValues: this.$props.data as any,
-        onSubmit: async data => {
-          await this.$props.onSubmit?.(data as any);
+        defaultValues: this.$props.data,
+        // onSubmit: async data => {
+        //   await this.$props.onSubmit?.(data as any);
+        // },
+        validators: {
+          // onSubmitAsync: async ({ value }) => {
+          //   await this.$props.onSubmit?.(value as any);
+          //   return undefined as unknown;
+          // },
         },
       });
     });
