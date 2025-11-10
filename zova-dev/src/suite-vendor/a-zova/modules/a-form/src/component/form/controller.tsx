@@ -1,15 +1,16 @@
+import { catchError } from '@cabloy/utils';
 import { SchemaObject } from 'openapi3-ts/oas31';
 import { z } from 'zod';
 import { deepExtend, UseScope } from 'zova';
 import { Controller } from 'zova-module-a-bean';
 import { loadSchemaProperties, schemaToZodSchema, ScopeModuleAOpenapi } from 'zova-module-a-openapi';
 import { BeanControllerFormBase } from '../../lib/beanControllerFormBase.js';
-import { TypeForm, TypeFormOnSubmit } from '../../types/form.js';
+import { TypeFormOnSubmitWithMeta, TypeFormWithMeta } from '../../types/form.js';
 import { IFormFieldLayoutOptionsBase, IFormFieldOptionsBase } from '../../types/formField.js';
 import { IFormMeta } from '../../types/formMeta.js';
 import { IFormProvider } from '../../types/provider.js';
 
-export interface ControllerFormProps<T extends {} = {}> {
+export interface ControllerFormProps<T extends {} = {}, TSubmitMeta = never> {
   data?: T;
   schema?: SchemaObject;
   zodSchema?: z.ZodObject<any>;
@@ -17,14 +18,14 @@ export interface ControllerFormProps<T extends {} = {}> {
   formProvider?: IFormProvider;
   formField?: IFormFieldOptionsBase;
   formFieldLayout?: IFormFieldLayoutOptionsBase;
-  onSubmit?: TypeFormOnSubmit<T>;
+  onSubmit?: TypeFormOnSubmitWithMeta<T, TSubmitMeta>;
 }
 
 @Controller()
-export class ControllerForm<T extends {} = {}> extends BeanControllerFormBase {
+export class ControllerForm<T extends {} = {}, TSubmitMeta = never> extends BeanControllerFormBase {
   static $propsDefault = {};
 
-  form: TypeForm<T>;
+  form: TypeFormWithMeta<T, TSubmitMeta>;
   formProvider: IFormProvider;
   schema: SchemaObject | undefined;
   zodSchema: z.ZodObject<any> | undefined;
@@ -37,16 +38,12 @@ export class ControllerForm<T extends {} = {}> extends BeanControllerFormBase {
     this.form = this.$useComputed(() => {
       return this.$useForm({
         defaultValues: this.$props.data,
-        // onSubmit: async data => {
-        //   await this.$props.onSubmit?.(data as any);
-        // },
-        validators: {
-          // onSubmitAsync: async ({ value }) => {
-          //   await this.$props.onSubmit?.(value as any);
-          //   return undefined as unknown;
-          // },
+        onSubmit: async data => {
+          const [_, _error] = await catchError(() => {
+            return this.$props.onSubmit?.(data as any);
+          });
         },
-      });
+      }) as any;
     });
     this.formProvider = this.$useComputed(() => {
       return deepExtend({}, this.$$scopeModuleAOpenapi.config.restResource.form?.provider, this.$props.formProvider);
@@ -64,7 +61,7 @@ export class ControllerForm<T extends {} = {}> extends BeanControllerFormBase {
     });
   }
 
-  public submit() {
-    return this.form.handleSubmit();
+  public submit(submitMeta?: TSubmitMeta) {
+    return this.form.handleSubmit(submitMeta as any);
   }
 }

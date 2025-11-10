@@ -1,6 +1,24 @@
 import type { DeepKeys, DeepValue, FieldAsyncValidateOrFn, FieldOptions, FieldValidateOrFn, FormApi, FormAsyncValidateOrFn, FormOptions, FormState, FormValidateOrFn, useField, useForm } from '@tanstack/vue-form';
 import type { UnwrapNestedRefs } from 'vue';
 
+export type TypeFormWithMeta<
+  TFormData = unknown,
+  TSubmitMeta = never,
+> = TypeForm<
+  TFormData,
+  undefined | FormValidateOrFn<TFormData>,
+  undefined | FormValidateOrFn<TFormData>,
+  undefined | FormAsyncValidateOrFn<TFormData>,
+  undefined | FormValidateOrFn<TFormData>,
+  undefined | FormAsyncValidateOrFn<TFormData>,
+  undefined | FormValidateOrFn<TFormData>,
+  undefined | FormAsyncValidateOrFn<TFormData>,
+  undefined | FormValidateOrFn<TFormData>,
+  undefined | FormAsyncValidateOrFn<TFormData>,
+  undefined | FormAsyncValidateOrFn<TFormData>,
+  TSubmitMeta
+>;
+
 export type TypeForm<
   TFormData = unknown,
   TFormOnMount extends undefined | FormValidateOrFn<TFormData> = undefined | FormValidateOrFn<TFormData>,
@@ -176,6 +194,24 @@ export interface TypeFormOnSubmitData<
   >;
   meta: TSubmitMeta;
 }
+
+export type TypeFormOnSubmitWithMeta<
+  TFormData = unknown,
+  TSubmitMeta = never,
+> = TypeFormOnSubmit<
+  TFormData,
+  undefined | FormValidateOrFn<TFormData>,
+  undefined | FormValidateOrFn<TFormData>,
+  undefined | FormAsyncValidateOrFn<TFormData>,
+  undefined | FormValidateOrFn<TFormData>,
+  undefined | FormAsyncValidateOrFn<TFormData>,
+  undefined | FormValidateOrFn<TFormData>,
+  undefined | FormAsyncValidateOrFn<TFormData>,
+  undefined | FormValidateOrFn<TFormData>,
+  undefined | FormAsyncValidateOrFn<TFormData>,
+  undefined | FormAsyncValidateOrFn<TFormData>,
+  TSubmitMeta
+>;
 
 export type TypeFormOnSubmit<
   TFormData = unknown,
