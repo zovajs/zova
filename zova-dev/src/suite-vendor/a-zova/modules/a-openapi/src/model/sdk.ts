@@ -1,5 +1,5 @@
 import { isNil } from '@cabloy/utils';
-import { ILocaleInfos, Use, usePrepareArg } from 'zova';
+import { ILocaleRecord, Use, usePrepareArg } from 'zova';
 import { BeanModelBase, IDecoratorModelOptions, Model } from 'zova-module-a-model';
 import { SysSdk } from '../bean/sys.sdk.js';
 import { schemaToZodSchema } from '../lib/schema.js';
@@ -19,7 +19,7 @@ export class ModelSdk extends BeanModelBase {
     );
   }
 
-  protected async __init__(locale: keyof ILocaleInfos) {
+  protected async __init__(locale: keyof ILocaleRecord) {
     super.__init__(locale);
     if (!locale) throw new Error('locale not specified');
   }

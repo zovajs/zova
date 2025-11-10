@@ -1,7 +1,7 @@
-import type { ILocaleInfos } from '../bean/resource/locale/type.ts';
+import type { ILocaleRecord } from '../bean/resource/locale/type.ts';
 
 export interface ICustomKeyRecord {
-  'x-vona-locale': keyof ILocaleInfos | undefined;
+  'x-vona-locale': keyof ILocaleRecord | undefined;
   'x-vona-instance-name': string | undefined;
   'x-vona-passport-code': string | undefined;
   'x-vona-oauth-code': string | undefined;

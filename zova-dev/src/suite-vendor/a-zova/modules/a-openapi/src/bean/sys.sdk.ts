@@ -1,6 +1,6 @@
 import type { SchemaObject } from 'openapi3-ts/oas31';
 import { shallowReactive } from 'vue';
-import { BeanBase, ILocaleInfos } from 'zova';
+import { BeanBase, ILocaleRecord } from 'zova';
 import { Sys } from 'zova-module-a-bean';
 import { BeanFetch } from 'zova-module-a-fetch';
 import { IOpenapiSchema } from '../types/schema.js';
@@ -10,11 +10,11 @@ const PATH_PARAM_RE = /\{([^{}/]+)\}/g;
 
 @Sys()
 export class SysSdk extends BeanBase {
-  private locale: keyof ILocaleInfos;
+  private locale: keyof ILocaleRecord;
   schemas: Record<string, SchemaObject>;
   sdks: Record<string, Record<string, IOpenapiSdkItem>>;
 
-  protected async __init__(locale: keyof ILocaleInfos) {
+  protected async __init__(locale: keyof ILocaleRecord) {
     this.locale = locale;
     this.schemas = shallowReactive({});
     this.sdks = shallowReactive({});
