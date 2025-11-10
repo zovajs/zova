@@ -153,4 +153,16 @@
     ],
     "description": "aopmagic.set"
   },
+  "record.locale": {
+    "scope": "typescript,typescriptreact",
+    "prefix": "recordlocale",
+    "body": [
+      "declare module 'zova' {",
+      "  export interface ILocaleRecord {",
+      "    $0: never;",
+      "  }",
+      "}"
+    ],
+    "description": "record.locale"
+  },
 }
