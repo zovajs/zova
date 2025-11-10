@@ -163,6 +163,24 @@ export type TypeBehaviorFormFieldOptions<
    TOnDynamicAsync
  >;
 
+export type TypeFormOnSubmitDataWithMeta<
+  TFormData = unknown,
+  TSubmitMeta = never,
+> = TypeFormOnSubmitData<
+  TFormData,
+  undefined | FormValidateOrFn<TFormData>,
+  undefined | FormValidateOrFn<TFormData>,
+  undefined | FormAsyncValidateOrFn<TFormData>,
+  undefined | FormValidateOrFn<TFormData>,
+  undefined | FormAsyncValidateOrFn<TFormData>,
+  undefined | FormValidateOrFn<TFormData>,
+  undefined | FormAsyncValidateOrFn<TFormData>,
+  undefined | FormValidateOrFn<TFormData>,
+  undefined | FormAsyncValidateOrFn<TFormData>,
+  undefined | FormAsyncValidateOrFn<TFormData>,
+  TSubmitMeta
+>;
+
 export interface TypeFormOnSubmitData<
   TFormData = unknown,
   TFormOnMount extends undefined | FormValidateOrFn<TFormData> = undefined | FormValidateOrFn<TFormData>,

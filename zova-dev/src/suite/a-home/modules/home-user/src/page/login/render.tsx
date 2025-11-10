@@ -43,7 +43,6 @@ export class RenderPageLogin extends BeanRenderBase {
         onSubmit={data => {
           return this.onSubmitLogin(data);
         }}
-        controllerRef={ref => { this.loginRef = ref; }}
       >
         <ZFormField
           name="username"
