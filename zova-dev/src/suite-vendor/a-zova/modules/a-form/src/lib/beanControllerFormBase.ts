@@ -5,20 +5,20 @@ import { BeanControllerBase } from 'zova';
 
 export class BeanControllerFormBase extends BeanControllerBase {
   public $useForm<
-    TParentData,
-    TFormOnMount extends undefined | FormValidateOrFn<TParentData>,
-    TFormOnChange extends undefined | FormValidateOrFn<TParentData>,
-    TFormOnChangeAsync extends undefined | FormAsyncValidateOrFn<TParentData>,
-    TFormOnBlur extends undefined | FormValidateOrFn<TParentData>,
-    TFormOnBlurAsync extends undefined | FormAsyncValidateOrFn<TParentData>,
-    TFormOnSubmit extends undefined | FormValidateOrFn<TParentData>,
-    TFormOnSubmitAsync extends undefined | FormAsyncValidateOrFn<TParentData>,
-    TFormOnDynamic extends undefined | FormValidateOrFn<TParentData>,
-    TFormOnDynamicAsync extends undefined | FormAsyncValidateOrFn<TParentData>,
-    TFormOnServer extends undefined | FormAsyncValidateOrFn<TParentData>,
-    TSubmitMeta,
+    TFormData,
+    TSubmitMeta = never,
+    TFormOnMount extends undefined | FormValidateOrFn<TFormData> = undefined | FormValidateOrFn<TFormData>,
+    TFormOnChange extends undefined | FormValidateOrFn<TFormData> = undefined | FormValidateOrFn<TFormData>,
+    TFormOnChangeAsync extends undefined | FormAsyncValidateOrFn<TFormData> = undefined | FormAsyncValidateOrFn<TFormData>,
+    TFormOnBlur extends undefined | FormValidateOrFn<TFormData> = undefined | FormValidateOrFn<TFormData>,
+    TFormOnBlurAsync extends undefined | FormAsyncValidateOrFn<TFormData> = undefined | FormAsyncValidateOrFn<TFormData>,
+    TFormOnSubmit extends undefined | FormValidateOrFn<TFormData> = undefined | FormValidateOrFn<TFormData>,
+    TFormOnSubmitAsync extends undefined | FormAsyncValidateOrFn<TFormData> = undefined | FormAsyncValidateOrFn<TFormData>,
+    TFormOnDynamic extends undefined | FormValidateOrFn<TFormData> = undefined | FormValidateOrFn<TFormData>,
+    TFormOnDynamicAsync extends undefined | FormAsyncValidateOrFn<TFormData> = undefined | FormAsyncValidateOrFn<TFormData>,
+    TFormOnServer extends undefined | FormAsyncValidateOrFn<TFormData> = undefined | FormAsyncValidateOrFn<TFormData>,
   >(opts?: FormOptions<
-    TParentData,
+    TFormData,
     TFormOnMount,
     TFormOnChange,
     TFormOnChangeAsync,
@@ -33,7 +33,7 @@ export class BeanControllerFormBase extends BeanControllerBase {
   >,
   ):
     FormApi<
-      TParentData,
+      TFormData,
       TFormOnMount,
       TFormOnChange,
       TFormOnChangeAsync,
@@ -46,7 +46,7 @@ export class BeanControllerFormBase extends BeanControllerBase {
       TFormOnServer,
       TSubmitMeta
     > & VueFormApi<
-      TParentData,
+      TFormData,
       TFormOnMount,
       TFormOnChange,
       TFormOnChangeAsync,

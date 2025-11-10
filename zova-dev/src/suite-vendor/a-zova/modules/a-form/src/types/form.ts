@@ -285,3 +285,52 @@ export type TypeFormState<
   TFormOnDynamicAsync,
   TFormOnServer
 >;
+
+export type TypeFormOnShowErrorWithMeta<
+  TFormData = unknown,
+  TSubmitMeta = never,
+> = TypeFormOnShowError<
+  TFormData,
+  undefined | FormValidateOrFn<TFormData>,
+  undefined | FormValidateOrFn<TFormData>,
+  undefined | FormAsyncValidateOrFn<TFormData>,
+  undefined | FormValidateOrFn<TFormData>,
+  undefined | FormAsyncValidateOrFn<TFormData>,
+  undefined | FormValidateOrFn<TFormData>,
+  undefined | FormAsyncValidateOrFn<TFormData>,
+  undefined | FormValidateOrFn<TFormData>,
+  undefined | FormAsyncValidateOrFn<TFormData>,
+  undefined | FormAsyncValidateOrFn<TFormData>,
+  TSubmitMeta
+>;
+
+export type TypeFormOnShowError<
+  TFormData = unknown,
+  TFormOnMount extends undefined | FormValidateOrFn<TFormData> = undefined | FormValidateOrFn<TFormData>,
+  TFormOnChange extends undefined | FormValidateOrFn<TFormData> = undefined | FormValidateOrFn<TFormData>,
+  TFormOnChangeAsync extends undefined | FormAsyncValidateOrFn<TFormData> = undefined | FormAsyncValidateOrFn<TFormData>,
+  TFormOnBlur extends undefined | FormValidateOrFn<TFormData> = undefined | FormValidateOrFn<TFormData>,
+  TFormOnBlurAsync extends undefined | FormAsyncValidateOrFn<TFormData> = undefined | FormAsyncValidateOrFn<TFormData>,
+  TFormOnSubmit extends undefined | FormValidateOrFn<TFormData> = undefined | FormValidateOrFn<TFormData>,
+  TFormOnSubmitAsync extends undefined | FormAsyncValidateOrFn<TFormData> = undefined | FormAsyncValidateOrFn<TFormData>,
+  TFormOnDynamic extends undefined | FormValidateOrFn<TFormData> = undefined | FormValidateOrFn<TFormData>,
+  TFormOnDynamicAsync extends undefined | FormAsyncValidateOrFn<TFormData> = undefined | FormAsyncValidateOrFn<TFormData>,
+  TFormOnServer extends undefined | FormAsyncValidateOrFn<TFormData> = undefined | FormAsyncValidateOrFn<TFormData>,
+  TSubmitMeta = never,
+> = ({ data, error }: {
+  data: TypeFormOnSubmitData<
+    TFormData,
+    TFormOnMount,
+    TFormOnChange,
+    TFormOnChangeAsync,
+    TFormOnBlur,
+    TFormOnBlurAsync,
+    TFormOnSubmit,
+    TFormOnSubmitAsync,
+    TFormOnDynamic,
+    TFormOnDynamicAsync,
+    TFormOnServer,
+    TSubmitMeta
+  >;
+  error: Error;
+}) => void;

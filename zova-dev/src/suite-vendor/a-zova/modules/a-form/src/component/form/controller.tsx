@@ -5,7 +5,7 @@ import { deepExtend, UseScope } from 'zova';
 import { Controller } from 'zova-module-a-bean';
 import { loadSchemaProperties, schemaToZodSchema, ScopeModuleAOpenapi } from 'zova-module-a-openapi';
 import { BeanControllerFormBase } from '../../lib/beanControllerFormBase.js';
-import { TypeFormOnSubmitWithMeta, TypeFormWithMeta } from '../../types/form.js';
+import { TypeFormOnShowErrorWithMeta, TypeFormOnSubmitWithMeta, TypeFormWithMeta } from '../../types/form.js';
 import { IFormFieldLayoutOptionsBase, IFormFieldOptionsBase } from '../../types/formField.js';
 import { IFormMeta } from '../../types/formMeta.js';
 import { IFormProvider } from '../../types/provider.js';
@@ -19,6 +19,7 @@ export interface ControllerFormProps<T extends {} = {}, TSubmitMeta = never> {
   formField?: IFormFieldOptionsBase;
   formFieldLayout?: IFormFieldLayoutOptionsBase;
   onSubmit?: TypeFormOnSubmitWithMeta<T, TSubmitMeta>;
+  onShowError?: TypeFormOnShowErrorWithMeta<T, TSubmitMeta>;
 }
 
 @Controller()
@@ -36,14 +37,17 @@ export class ControllerForm<T extends {} = {}, TSubmitMeta = never> extends Bean
 
   protected async __init__() {
     this.form = this.$useComputed(() => {
-      return this.$useForm({
+      return this.$useForm<T, TSubmitMeta>({
         defaultValues: this.$props.data,
         onSubmit: async data => {
-          const [_, _error] = await catchError(() => {
-            return this.$props.onSubmit?.(data as any);
+          const [_, error] = await catchError(() => {
+            return this.$props.onSubmit?.(data);
           });
+          if (!error) return;
+          this.$props.onShowError?.({ data, error });
+          console.log(error);
         },
-      }) as any;
+      });
     });
     this.formProvider = this.$useComputed(() => {
       return deepExtend({}, this.$$scopeModuleAOpenapi.config.restResource.form?.provider, this.$props.formProvider);
