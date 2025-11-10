@@ -1,6 +1,8 @@
 import { catchError } from '@cabloy/utils';
+import { DeepKeys, determineFormLevelErrorSourceAndValue, FormValidationError, isGlobalFormValidationError, ValidationCause, ValidationError } from '@tanstack/vue-form';
 import { SchemaObject } from 'openapi3-ts/oas31';
 import { z } from 'zod';
+import { $ZodIssue } from 'zod/v4/core';
 import { deepExtend, UseScope } from 'zova';
 import { Controller } from 'zova-module-a-bean';
 import { loadSchemaProperties, schemaToZodSchema, ScopeModuleAOpenapi } from 'zova-module-a-openapi';
@@ -44,8 +46,12 @@ export class ControllerForm<TFormData extends {} = {}, TSubmitMeta = never> exte
             return this.$props.onSubmit?.(data);
           });
           if (!error) return;
-          this.$props.onShowError?.({ data, error });
-          console.log(error);
+          if (error.code === 422) {
+            this._handleError422(error);
+          } else {
+            this.$props.onShowError?.({ data, error });
+          }
+          throw error;
         },
       });
     });
@@ -67,5 +73,163 @@ export class ControllerForm<TFormData extends {} = {}, TSubmitMeta = never> exte
 
   public submit(submitMeta?: TSubmitMeta) {
     return this.form.handleSubmit(submitMeta as any);
+  }
+
+  private _handleError422(error: Error, cause: ValidationCause = 'submit') {
+    const formApi = this.form;
+
+    let hasErrored = false as boolean;
+
+    // This map will only include fields that have errors in the current validation cycle
+    const currentValidationErrorMap: any = {};
+
+    const rawError = parseIssues(error);
+    const { formError, fieldErrors } = normalizeError<TFormData>(rawError);
+
+    const errorMapKey = getErrorMapKey(cause);
+
+    for (const field of Object.keys(formApi.state.fieldMeta) as DeepKeys<TFormData>[]) {
+      if (formApi.baseStore.state.fieldMetaBase[field] === undefined) {
+        continue;
+      }
+
+      const fieldMeta = formApi.getFieldMeta(field);
+      if (!fieldMeta) continue;
+
+      const {
+        errorMap: currentErrorMap,
+        errorSourceMap: currentErrorMapSource,
+      } = fieldMeta;
+
+      const newFormValidatorError = fieldErrors?.[field];
+
+      const { newErrorValue, newSource } =
+            determineFormLevelErrorSourceAndValue({
+              newFormValidatorError,
+              isPreviousErrorFromFormValidator:
+                currentErrorMapSource?.[errorMapKey] === 'form',
+              previousErrorValue: currentErrorMap?.[errorMapKey],
+            });
+
+      if (newSource === 'form') {
+        currentValidationErrorMap[field] = {
+          ...currentValidationErrorMap[field],
+          [errorMapKey]: newFormValidatorError,
+        };
+      }
+
+      if (
+        currentErrorMap?.[errorMapKey] !== newErrorValue
+      ) {
+        formApi.setFieldMeta(field, prev => ({
+          ...prev,
+          errorMap: {
+            ...prev.errorMap,
+            [errorMapKey]: newErrorValue,
+          },
+          errorSourceMap: {
+            ...prev.errorSourceMap,
+            [errorMapKey]: newSource,
+          },
+        }));
+      }
+    }
+
+    if (formApi.state.errorMap?.[errorMapKey] !== formError) {
+      formApi.baseStore.setState(prev => ({
+        ...prev,
+        errorMap: {
+          ...prev.errorMap,
+          [errorMapKey]: formError,
+        },
+      }));
+    }
+
+    if (formError || fieldErrors) {
+      hasErrored = true;
+    }
+
+    /**
+       *  when we have an error for onSubmit in the state, we want
+       *  to clear the error as soon as the user enters a valid value in the field
+       */
+    const submitErrKey = getErrorMapKey('submit');
+    if (
+      formApi.state.errorMap?.[submitErrKey] &&
+      cause !== 'submit' &&
+      !hasErrored
+    ) {
+      formApi.baseStore.setState(prev => ({
+        ...prev,
+        errorMap: {
+          ...prev.errorMap,
+          [submitErrKey]: undefined,
+        },
+      }));
+    }
+
+    /**
+       *  when we have an error for onServer in the state, we want
+       *  to clear the error as soon as the user enters a valid value in the field
+       */
+    const serverErrKey = getErrorMapKey('server');
+    if (
+      formApi.state.errorMap?.[serverErrKey] &&
+      cause !== 'server' &&
+      !hasErrored
+    ) {
+      formApi.baseStore.setState(prev => ({
+        ...prev,
+        errorMap: {
+          ...prev.errorMap,
+          [serverErrKey]: undefined,
+        },
+      }));
+    }
+  }
+}
+
+function parseIssues(error: Error) {
+  const issues: $ZodIssue[] = typeof error.message === 'string' ? JSON.parse(error.message) : error.message;
+  const fields = {};
+  for (const issue of issues) {
+    const key = issue.path.join('.');
+    fields[key] = issue.message;
+  }
+  return { fields };
+}
+
+function normalizeError<TFormData>(rawError?: FormValidationError<unknown>): {
+  formError: ValidationError;
+  fieldErrors?: Partial<Record<DeepKeys<TFormData>, ValidationError>>;
+} {
+  if (rawError) {
+    if (isGlobalFormValidationError(rawError)) {
+      const formError = normalizeError(rawError.form).formError;
+      const fieldErrors = rawError.fields;
+      return { formError, fieldErrors } as never;
+    }
+
+    return { formError: rawError };
+  }
+
+  return { formError: undefined };
+}
+
+function getErrorMapKey(cause: ValidationCause) {
+  switch (cause) {
+    case 'submit':
+      return 'onSubmit';
+    case 'blur':
+      return 'onBlur';
+    case 'mount':
+      return 'onMount';
+    case 'server':
+      return 'onServer';
+    case 'dynamic':
+      return 'onDynamic';
+    case 'change':
+    default:
+      return 'onChange';
   }
 }
