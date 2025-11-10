@@ -5,7 +5,7 @@ import { deepExtend, UseScope } from 'zova';
 import { Controller } from 'zova-module-a-bean';
 import { loadSchemaProperties, schemaToZodSchema, ScopeModuleAOpenapi } from 'zova-module-a-openapi';
 import { BeanControllerFormBase } from '../../lib/beanControllerFormBase.js';
-import { TypeFormOnShowErrorWithMeta, TypeFormOnSubmitWithMeta, TypeFormWithMeta } from '../../types/form.js';
+import { TypeForm, TypeFormOnShowError, TypeFormOnSubmit } from '../../types/form.js';
 import { IFormFieldLayoutOptionsBase, IFormFieldOptionsBase } from '../../types/formField.js';
 import { IFormMeta } from '../../types/formMeta.js';
 import { IFormProvider } from '../../types/provider.js';
@@ -18,15 +18,15 @@ export interface ControllerFormProps<TFormData extends {} = {}, TSubmitMeta = ne
   formProvider?: IFormProvider;
   formField?: IFormFieldOptionsBase;
   formFieldLayout?: IFormFieldLayoutOptionsBase;
-  onSubmit?: TypeFormOnSubmitWithMeta<TFormData, TSubmitMeta>;
-  onShowError?: TypeFormOnShowErrorWithMeta<TFormData, TSubmitMeta>;
+  onSubmit?: TypeFormOnSubmit<TFormData, TSubmitMeta>;
+  onShowError?: TypeFormOnShowError<TFormData, TSubmitMeta>;
 }
 
 @Controller()
 export class ControllerForm<TFormData extends {} = {}, TSubmitMeta = never> extends BeanControllerFormBase {
   static $propsDefault = {};
 
-  form: TypeFormWithMeta<TFormData, TSubmitMeta>;
+  form: TypeForm<TFormData, TSubmitMeta>;
   formProvider: IFormProvider;
   schema: SchemaObject | undefined;
   zodSchema: z.ZodObject<any> | undefined;

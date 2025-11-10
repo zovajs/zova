@@ -204,7 +204,7 @@ export type TypeFormOnSubmit<
    TFormOnDynamic,
    TFormOnDynamicAsync,
    TFormOnServer
- >) => void | Promise<void>;
+ >) => any | Promise<any>;
 
 export type TypeFormState<
   TFormData = unknown,
