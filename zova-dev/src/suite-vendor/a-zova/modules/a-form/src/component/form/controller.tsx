@@ -10,23 +10,23 @@ import { IFormFieldLayoutOptionsBase, IFormFieldOptionsBase } from '../../types/
 import { IFormMeta } from '../../types/formMeta.js';
 import { IFormProvider } from '../../types/provider.js';
 
-export interface ControllerFormProps<T extends {} = {}, TSubmitMeta = never> {
-  data?: T;
+export interface ControllerFormProps<TFormData extends {} = {}, TSubmitMeta = never> {
+  data?: TFormData;
   schema?: SchemaObject;
   zodSchema?: z.ZodObject<any>;
   formMeta?: IFormMeta;
   formProvider?: IFormProvider;
   formField?: IFormFieldOptionsBase;
   formFieldLayout?: IFormFieldLayoutOptionsBase;
-  onSubmit?: TypeFormOnSubmitWithMeta<T, TSubmitMeta>;
-  onShowError?: TypeFormOnShowErrorWithMeta<T, TSubmitMeta>;
+  onSubmit?: TypeFormOnSubmitWithMeta<TFormData, TSubmitMeta>;
+  onShowError?: TypeFormOnShowErrorWithMeta<TFormData, TSubmitMeta>;
 }
 
 @Controller()
-export class ControllerForm<T extends {} = {}, TSubmitMeta = never> extends BeanControllerFormBase {
+export class ControllerForm<TFormData extends {} = {}, TSubmitMeta = never> extends BeanControllerFormBase {
   static $propsDefault = {};
 
-  form: TypeFormWithMeta<T, TSubmitMeta>;
+  form: TypeFormWithMeta<TFormData, TSubmitMeta>;
   formProvider: IFormProvider;
   schema: SchemaObject | undefined;
   zodSchema: z.ZodObject<any> | undefined;
@@ -37,7 +37,7 @@ export class ControllerForm<T extends {} = {}, TSubmitMeta = never> extends Bean
 
   protected async __init__() {
     this.form = this.$useComputed(() => {
-      return this.$useForm<T, TSubmitMeta>({
+      return this.$useForm<TFormData, TSubmitMeta>({
         defaultValues: this.$props.data,
         onSubmit: async data => {
           const [_, error] = await catchError(() => {

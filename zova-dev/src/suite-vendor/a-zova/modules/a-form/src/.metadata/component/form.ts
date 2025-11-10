@@ -5,22 +5,22 @@ import { prepareComponentOptions, useController } from 'zova';
 import { ControllerForm } from '../../component/form/controller.jsx';
 import { RenderForm } from '../../component/form/render.jsx';
 
-export type TypeControllerFormPublicProps<T extends {} = {}, TSubmitMeta = never> = {
-  controllerRef?: (ref: ControllerForm<T, TSubmitMeta>) => void;
-} & ControllerFormProps<T, TSubmitMeta>;
+export type TypeControllerFormPublicProps<TFormData extends {} = {}, TSubmitMeta = never> = {
+  controllerRef?: (ref: ControllerForm<TFormData, TSubmitMeta>) => void;
+} & ControllerFormProps<TFormData, TSubmitMeta>;
 
-type ControllerInnerProps<T extends {} = {}, TSubmitMeta = never> =
-  TypeControllerInnerProps<ControllerFormProps<T, TSubmitMeta>, keyof typeof ControllerForm.$propsDefault>;
+type ControllerInnerProps<TFormData extends {} = {}, TSubmitMeta = never> =
+  TypeControllerInnerProps<ControllerFormProps<TFormData, TSubmitMeta>, keyof typeof ControllerForm.$propsDefault>;
 declare module 'zova-module-a-form' {
-  export interface ControllerForm<T extends {} = {}, TSubmitMeta = never> {
-    $props: ControllerInnerProps<T, TSubmitMeta>;
+  export interface ControllerForm<TFormData extends {} = {}, TSubmitMeta = never> {
+    $props: ControllerInnerProps<TFormData, TSubmitMeta>;
   }
 }
 declare module 'zova-module-a-form' {
-  export interface RenderForm<T extends {} = {}, TSubmitMeta = never> extends ControllerForm<T, TSubmitMeta> {}
+  export interface RenderForm<TFormData extends {} = {}, TSubmitMeta = never> extends ControllerForm<TFormData, TSubmitMeta> {}
 }
 export const ZForm = defineComponent(
-  <T extends {} = {}, TSubmitMeta = never>(_props: TypeControllerFormPublicProps<T, TSubmitMeta>) => {
+  <TFormData extends {} = {}, TSubmitMeta = never>(_props: TypeControllerFormPublicProps<TFormData, TSubmitMeta>) => {
     useController(ControllerForm, RenderForm, undefined);
     return () => {};
   },
