@@ -7,6 +7,10 @@ export class ControllerCaptcha extends BeanControllerBase {
   protected async __init__() {}
 
   protected render() {
-    return <ZFormField name="captcha"></ZFormField>;
+    return (
+      <>
+        <ZFormField name="captcha"></ZFormField>
+      </>
+    );
   }
 }

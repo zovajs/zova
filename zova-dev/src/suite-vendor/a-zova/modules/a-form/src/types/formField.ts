@@ -10,16 +10,23 @@ export interface IFormFieldLayoutOptionsBase {
   bordered?: boolean;
   iconPrefix?: keyof IIconRecord;
   iconSuffix?: keyof IIconRecord;
+}
+
+export interface IFormFieldOptionsBase extends IFormFieldModelOptionsBase {
+  behaviorModel?: IBehaviors | boolean;
+  render?: TypeRenderComponentProvider;
+  placeholder?: string;
   validateOnDynamic?: boolean;
   validateOnChange?: boolean;
   validateOnBlur?: boolean;
 }
 
-export interface IFormFieldOptionsBase {
-  behaviorModel?: IBehaviors | boolean;
-  render?: TypeRenderComponentProvider;
-  inputType?: HTMLInputElementType;
-  placeholder?: string;
+export interface IFormFieldModelOptionsBase {
+  value?: any;
+  readonly?: boolean;
+  type?: HTMLInputElementType;
+  onInput?: (e: Event) => void;
+  onBlur?: (e: Event) => void;
 }
 
 export interface IFormFieldOptions<TParentData>

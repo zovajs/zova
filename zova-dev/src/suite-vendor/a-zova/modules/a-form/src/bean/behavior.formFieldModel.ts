@@ -4,21 +4,14 @@ import { Use } from 'zova';
 import { BeanBehaviorBase, Behavior, IDecoratorBehaviorOptions, NextBehavior } from 'zova-module-a-behavior';
 import { ControllerFormFieldProps } from '../.metadata/index.js';
 import { TypeFormField } from '../types/form.js';
-import { HTMLInputElementType } from '../types/formField.js';
+import { IFormFieldModelOptionsBase } from '../types/formField.js';
 import { IFormMeta } from '../types/formMeta.js';
 
 export interface IBehaviorPropsInputFormFieldModel extends ControllerFormFieldProps {}
 
-export interface IBehaviorPropsOutputFormFieldModel extends IBehaviorPropsInputFormFieldModel {
-  name: string;
-  value?: any;
-  readonly?: boolean;
-  type?: HTMLInputElementType;
-  onInput?: (e: Event) => void;
-  onBlur?: (e: Event) => void;
-}
+export interface IBehaviorPropsOutputFormFieldModel extends IBehaviorPropsInputFormFieldModel {}
 
-export interface IBehaviorOptionsFormFieldModel extends IDecoratorBehaviorOptions {}
+export interface IBehaviorOptionsFormFieldModel extends IDecoratorBehaviorOptions, IFormFieldModelOptionsBase {}
 
 @Behavior<IBehaviorOptionsFormFieldModel>()
 export class BehaviorFormFieldModel extends BeanBehaviorBase<
@@ -64,7 +57,7 @@ export class BehaviorFormFieldModel extends BeanBehaviorBase<
     field: TypeFormField,
     props: IBehaviorPropsInputFormFieldModel,
   ): IBehaviorPropsOutputFormFieldModel {
-    const type = props.inputType ?? 'text';
+    const type = props.type ?? 'text';
     const propsPatch: Partial<IBehaviorPropsOutputFormFieldModel> = {
       type,
       onInput: (e: Event) => {
