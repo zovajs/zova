@@ -42,7 +42,7 @@ export class ControllerForm<TFormData extends {} = {}, TSubmitMeta = never> exte
     this.form = this.$useComputed(() => {
       return this.$useForm<TFormData, TSubmitMeta>({
         defaultValues: this.$props.data,
-        validationLogic: this.$props.validateOnDynamic ? revalidateLogic(this.$props.validateOnDynamicLogic) : undefined,
+        validationLogic: this.$props.validateOnDynamic !== false ? revalidateLogic(this.$props.validateOnDynamicLogic) : undefined,
         onSubmit: async data => {
           const [_, error] = await catchError(() => {
             return this.$props.onSubmit?.(data);
