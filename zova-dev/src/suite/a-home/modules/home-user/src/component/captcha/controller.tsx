@@ -14,7 +14,10 @@ export class ControllerCaptcha extends BeanControllerBase {
   protected render() {
     return (
       <>
-        <ZFormField name="captcha.token" validators={{ onDynamic: this.zodSchema }}></ZFormField>
+        <ZFormField
+          name="captcha.token"
+          validators={{ onDynamic: this.zodSchema }}
+        ></ZFormField>
       </>
     );
   }
