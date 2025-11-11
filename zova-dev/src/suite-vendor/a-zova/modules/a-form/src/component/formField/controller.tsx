@@ -120,9 +120,9 @@ export class ControllerFormField extends BeanControllerBase {
     const validateOnBlur = this.$props.validateOnBlur;
     const validateOnChange = this.$props.validateOnChange;
     return {
-      onDynamic: validateOnDynamic && zodSchemaField,
-      onBlur: validateOnBlur && zodSchemaField,
-      onChange: validateOnChange && zodSchemaField,
+      onDynamic: validateOnDynamic ? zodSchemaField : undefined,
+      onBlur: validateOnBlur ? zodSchemaField : undefined,
+      onChange: validateOnChange ? zodSchemaField : undefined,
     };
   }
 }
