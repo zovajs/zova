@@ -3,6 +3,7 @@ import type {
   BeanBase,
   BeanContainer,
   IControllerData,
+  IErrorHandlerEventData,
   IMonkeyAppInitialize,
   IMonkeyAppInitialized,
   IMonkeyAppReady,
@@ -154,14 +155,14 @@ export class Monkey
 
   private _ssrErrorHandler() {
     if (!process.env.CLIENT) return;
-    this.app.meta.event.on('app:errorHandler', (_data, next) => {
+    this.app.meta.event.on('app:errorHandler', (data, next) => {
       const err = next();
       if (!err || !(err instanceof Error)) return err;
-      return this._errorHandlerDefaultClient(err);
+      return this._errorHandlerDefaultClient(err, data);
     });
   }
 
-  private _errorHandlerDefaultClient(err: ErrorSSR) {
+  private _errorHandlerDefaultClient(err: ErrorSSR, data: IErrorHandlerEventData) {
     if (!process.env.CLIENT) return err;
     // client
     if ([301, 302].includes(Number(err.code))) {
@@ -179,7 +180,9 @@ export class Monkey
       return undefined;
     }
     // only log error in client
-    console.error(err);
+    if (!data.info || !['useMutationData'].includes(data.info)) {
+      console.error(err);
+    }
     // not handled
     return err;
   }
