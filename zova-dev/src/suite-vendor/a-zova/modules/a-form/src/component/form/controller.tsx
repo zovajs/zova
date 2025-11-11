@@ -194,7 +194,7 @@ function parseIssues(error: Error) {
   const fields = {};
   for (const issue of issues) {
     const key = issue.path.join('.');
-    fields[key] = issue.message;
+    fields[key] = issue;
   }
   return { fields };
 }
