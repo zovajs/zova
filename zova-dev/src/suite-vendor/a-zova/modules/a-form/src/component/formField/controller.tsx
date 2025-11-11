@@ -97,16 +97,9 @@ export class ControllerFormField extends BeanControllerBase {
 
   private getBehaviorFormFieldOptions() {
     const name = this._getFieldName();
-    const zodSchemaField = this._getFieldZodSchema();
-    const validateOnBlurDefault = this.$props.validateOnBlur === undefined && this.$props.validateOnChange === undefined;
-    const validateOnBlur = this.$props.validateOnBlur ?? validateOnBlurDefault;
-    const validateOnChange = this.$props.validateOnChange;
     return deepExtend({}, this.$$behaviorForm.formField, this.$props as any, {
       name,
-      validators: {
-        onBlur: validateOnBlur && zodSchemaField,
-        onChange: validateOnChange && zodSchemaField,
-      },
+      validators: this.getBehaviorFormFieldOptionsValidators(),
       formProvider: this.formProvider,
     });
   }
@@ -117,5 +110,19 @@ export class ControllerFormField extends BeanControllerBase {
     return deepExtend({ bordered: true }, this.$$behaviorForm.formFieldLayout, this.$props as any, {
       label: this.$props.label ?? property?.title ?? name,
     } satisfies IFormFieldLayoutOptionsBase);
+  }
+
+  private getBehaviorFormFieldOptionsValidators() {
+    const zodSchemaField = this._getFieldZodSchema();
+    const validateOnDynamicDefault =
+      this.$props.validateOnDynamic === undefined && this.$props.validateOnBlur === undefined && this.$props.validateOnChange === undefined;
+    const validateOnDynamic = this.$props.validateOnDynamic ?? validateOnDynamicDefault;
+    const validateOnBlur = this.$props.validateOnBlur;
+    const validateOnChange = this.$props.validateOnChange;
+    return {
+      onDynamic: validateOnDynamic && zodSchemaField,
+      onBlur: validateOnBlur && zodSchemaField,
+      onChange: validateOnChange && zodSchemaField,
+    };
   }
 }

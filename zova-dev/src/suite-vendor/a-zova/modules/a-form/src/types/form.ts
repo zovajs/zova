@@ -262,3 +262,8 @@ export type TypeFormOnShowError<
   >;
   error: Error;
 }) => void;
+
+export interface RevalidateLogicProps {
+  mode?: 'change' | 'blur' | 'submit';
+  modeAfterSubmission?: 'change' | 'blur' | 'submit';
+}

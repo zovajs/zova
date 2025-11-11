@@ -1,5 +1,5 @@
 import { catchError } from '@cabloy/utils';
-import { DeepKeys, determineFormLevelErrorSourceAndValue, FormValidationError, isGlobalFormValidationError, ValidationCause, ValidationError } from '@tanstack/vue-form';
+import { DeepKeys, determineFormLevelErrorSourceAndValue, FormValidationError, isGlobalFormValidationError, revalidateLogic, ValidationCause, ValidationError } from '@tanstack/vue-form';
 import { SchemaObject } from 'openapi3-ts/oas31';
 import { z } from 'zod';
 import { $ZodIssue } from 'zod/v4/core';
@@ -7,7 +7,7 @@ import { deepExtend, UseScope } from 'zova';
 import { Controller } from 'zova-module-a-bean';
 import { loadSchemaProperties, schemaToZodSchema, ScopeModuleAOpenapi } from 'zova-module-a-openapi';
 import { BeanControllerFormBase } from '../../lib/beanControllerFormBase.js';
-import { TypeForm, TypeFormOnShowError, TypeFormOnSubmit } from '../../types/form.js';
+import { RevalidateLogicProps, TypeForm, TypeFormOnShowError, TypeFormOnSubmit } from '../../types/form.js';
 import { IFormFieldLayoutOptionsBase, IFormFieldOptionsBase } from '../../types/formField.js';
 import { IFormMeta } from '../../types/formMeta.js';
 import { IFormProvider } from '../../types/provider.js';
@@ -16,6 +16,8 @@ export interface ControllerFormProps<TFormData extends {} = {}, TSubmitMeta = ne
   data?: TFormData;
   schema?: SchemaObject;
   zodSchema?: z.ZodObject<any>;
+  validateOnDynamic?: boolean;
+  validateOnDynamicLogic?: RevalidateLogicProps;
   formMeta?: IFormMeta;
   formProvider?: IFormProvider;
   formField?: IFormFieldOptionsBase;
@@ -23,7 +25,6 @@ export interface ControllerFormProps<TFormData extends {} = {}, TSubmitMeta = ne
   onSubmit?: TypeFormOnSubmit<TFormData, TSubmitMeta>;
   onShowError?: TypeFormOnShowError<TFormData, TSubmitMeta>;
 }
-
 @Controller()
 export class ControllerForm<TFormData extends {} = {}, TSubmitMeta = never> extends BeanControllerFormBase {
   static $propsDefault = {};
@@ -41,6 +42,7 @@ export class ControllerForm<TFormData extends {} = {}, TSubmitMeta = never> exte
     this.form = this.$useComputed(() => {
       return this.$useForm<TFormData, TSubmitMeta>({
         defaultValues: this.$props.data,
+        validationLogic: this.$props.validateOnDynamic ? revalidateLogic(this.$props.validateOnDynamicLogic) : undefined,
         onSubmit: async data => {
           const [_, error] = await catchError(() => {
             return this.$props.onSubmit?.(data);

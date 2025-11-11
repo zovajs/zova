@@ -10,6 +10,7 @@ export interface IFormFieldLayoutOptionsBase {
   bordered?: boolean;
   iconPrefix?: keyof IIconRecord;
   iconSuffix?: keyof IIconRecord;
+  validateOnDynamic?: boolean;
   validateOnChange?: boolean;
   validateOnBlur?: boolean;
 }
