@@ -22,6 +22,9 @@ export class ControllerCaptcha extends BeanControllerBase {
           name="captcha.token"
           validators={{ onDynamic: this.zodSchema }}
         ></ZFormField>
+        <label class="flex items-center gap-2 w-full">
+          <img src="https://avatars.githubusercontent.com/u/24246985?v=4&s=120"></img>
+        </label>
       </>
     );
   }
