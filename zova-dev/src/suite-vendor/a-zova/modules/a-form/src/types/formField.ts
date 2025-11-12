@@ -16,21 +16,28 @@ export interface IFormFieldOptionsBase extends IFormFieldModelOptionsBase {
   behaviorModel?: IBehaviors | boolean;
   render?: TypeRenderComponentProvider;
   placeholder?: string;
+  readonly?: boolean;
+  type?: HTMLInputElementType;
   validateOnDynamic?: boolean;
   validateOnChange?: boolean;
   validateOnBlur?: boolean;
 }
 
-export interface IFormFieldModelOptionsBase {
-  value?: any;
+export interface IFormFieldModelOptionsBase {}
+
+export interface IFormFieldOptions<TParentData>
+  extends TypeBehaviorFormFieldOptions<TParentData>, IFormFieldOptionsBase {}
+
+export interface IBehaviorPropsInputFormFieldModelBase {
+  name: string;
   readonly?: boolean;
   type?: HTMLInputElementType;
+  value?: any;
   onInput?: (e: Event) => void;
   onBlur?: (e: Event) => void;
 }
 
-export interface IFormFieldOptions<TParentData>
-  extends TypeBehaviorFormFieldOptions<TParentData>, IFormFieldOptionsBase {}
+export interface IBehaviorPropsOutputFormFieldModelBase extends IBehaviorPropsInputFormFieldModelBase {}
 
 export interface IBehaviorPropsInputFormFieldLayoutBase {
   class?: any;

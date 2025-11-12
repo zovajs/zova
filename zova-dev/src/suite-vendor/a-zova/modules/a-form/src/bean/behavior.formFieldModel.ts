@@ -2,14 +2,13 @@ import type { BehaviorFormField } from './behavior.formField.js';
 import { VNode } from 'vue';
 import { Use } from 'zova';
 import { BeanBehaviorBase, Behavior, IDecoratorBehaviorOptions, NextBehavior } from 'zova-module-a-behavior';
-import { ControllerFormFieldProps } from '../.metadata/index.js';
 import { TypeFormField } from '../types/form.js';
-import { IFormFieldModelOptionsBase } from '../types/formField.js';
+import { IBehaviorPropsInputFormFieldModelBase, IBehaviorPropsOutputFormFieldModelBase, IFormFieldModelOptionsBase } from '../types/formField.js';
 import { IFormMeta } from '../types/formMeta.js';
 
-export interface IBehaviorPropsInputFormFieldModel extends ControllerFormFieldProps {}
+export interface IBehaviorPropsInputFormFieldModel extends IBehaviorPropsInputFormFieldModelBase {}
 
-export interface IBehaviorPropsOutputFormFieldModel extends IBehaviorPropsInputFormFieldModel {}
+export interface IBehaviorPropsOutputFormFieldModel extends IBehaviorPropsInputFormFieldModel, IBehaviorPropsOutputFormFieldModelBase {}
 
 export interface IBehaviorOptionsFormFieldModel extends IDecoratorBehaviorOptions, IFormFieldModelOptionsBase {}
 

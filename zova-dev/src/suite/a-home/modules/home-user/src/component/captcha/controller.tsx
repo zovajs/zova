@@ -1,37 +1,40 @@
-import type { ModelCaptcha } from 'zova-module-a-captcha';
 import z from 'zod';
-import { BeanControllerBase, Use, usePrepareArg } from 'zova';
+import { BeanControllerBase, Use } from 'zova';
 import { Controller } from 'zova-module-a-bean';
 import { ZFormField } from 'zova-module-a-form';
 import { ToolV } from 'zova-module-a-zod';
+import { ApiSchemaACaptchaDtoCaptchaData } from 'zova-module-home-api';
 
 @Controller()
 export class ControllerCaptcha extends BeanControllerBase {
   zodSchema: z.ZodString;
+  captchaData?: ApiSchemaACaptchaDtoCaptchaData;
 
   @Use()
   $$v: ToolV;
 
-  @Use({ beanFullName: 'a-captcha.model.captcha' })
-  get $$modelCaptcha(): ModelCaptcha {
-    return usePrepareArg('a-captchasimple:simple', true);
-  }
-
   protected async __init__() {
     this.zodSchema = this.$$v.required(z.string());
+    if (process.env.CLIENT) {
+      this.captchaData = await this.$api.captcha.create({
+        scene: 'a-captchasimple:simple',
+      });
+    }
   }
 
   protected render() {
-    const queryCaptchaData = this.$$modelCaptcha.getCaptchaData();
-    console.log(queryCaptchaData);
     return (
       <>
         <ZFormField
           name="captcha.token"
           validators={{ onDynamic: this.zodSchema }}
+          value={{
+            id: this.captchaData?.id,
+            token: this.captchaData?.token,
+          }}
         ></ZFormField>
         <label class="flex items-center gap-2 w-full">
-          <img src={queryCaptchaData.data?.payload as string}></img>
+          {this.captchaData?.payload && <img src={this.captchaData!.payload as string}></img>}
         </label>
       </>
     );
