@@ -5,7 +5,9 @@
   "version": "5.0.0",
   "description": "",
   "author": "",
-  "keywords": ["Zova Module"],
+  "keywords": [
+    "Zova Module"
+  ],
   "exports": {
     ".": {
       "types": [
