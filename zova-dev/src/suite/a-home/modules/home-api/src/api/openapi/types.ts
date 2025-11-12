@@ -1102,38 +1102,6 @@ export interface components {
       token?: unknown;
       payload?: unknown;
     };
-    /** @description Student */
-    'demo-student.entity.student': {
-      /**
-             * Format: date
-             * @description Created At
-             */
-      createdAt: string;
-      /**
-             * Format: date
-             * @description Updated At
-             */
-      updatedAt: string;
-      /**
-             * @description Deleted
-             * @default false
-             */
-      deleted: boolean;
-      /**
-             * @description Instance ID
-             * @default 0
-             */
-      iid: number;
-      /** @description ID */
-      id: string;
-      /**
-             * @description Name
-             * @default
-             */
-      name: string;
-      /** @description Description */
-      description?: string | undefined;
-    };
     'demo-student.dto.studentCreate': {
       /**
              * @description Name
@@ -1175,8 +1143,43 @@ export interface components {
         /** @description Description */
         description?: string | undefined;
       }[];
-      total: string | number;
+      total: string;
+      pageCount: number;
+      pageSize: number;
+      pageNo: number;
     };
+    /** @description Student */
+    'demo-student.entity.student': {
+      /**
+             * Format: date
+             * @description Created At
+             */
+      createdAt: string;
+      /**
+             * Format: date
+             * @description Updated At
+             */
+      updatedAt: string;
+      /**
+             * @description Deleted
+             * @default false
+             */
+      deleted: boolean;
+      /**
+             * @description Instance ID
+             * @default 0
+             */
+      iid: number;
+      /** @description ID */
+      id: string;
+      /**
+             * @description Name
+             * @default
+             */
+      name: string;
+      /** @description Description */
+      description?: string | undefined;
+    } | undefined;
     'demo-student.dto.studentUpdate': {
       /**
              * @description Name
@@ -1215,46 +1218,6 @@ export interface components {
       order?: number | undefined;
       group?: string | string[] | undefined;
       collapsed?: boolean | undefined;
-    };
-    /** @description Product Info */
-    'test-rest.entity.product': {
-      /**
-             * Format: date
-             * @description Created At
-             */
-      createdAt: string;
-      /**
-             * Format: date
-             * @description Updated At
-             */
-      updatedAt: string;
-      /**
-             * @description Deleted
-             * @default false
-             */
-      deleted: boolean;
-      /**
-             * @description Instance ID
-             * @default 0
-             */
-      iid: number;
-      /** @description ID */
-      id: string;
-      /** @description Name */
-      name: string;
-      /** @description Description */
-      description?: string | undefined;
-      /** @description Price */
-      price: number;
-      /**
-             * @description Quantity
-             * @default 0
-             */
-      quantity: number;
-      /** @description Amount */
-      amount: number;
-      /** @description Custom */
-      _custom?: unknown;
     };
     /** @description Create Product */
     'test-rest.dto.productCreate': {
@@ -1316,8 +1279,51 @@ export interface components {
         /** @description Custom */
         _custom?: unknown;
       }[];
-      total: string | number;
+      total: string;
+      pageCount: number;
+      pageSize: number;
+      pageNo: number;
     };
+    /** @description Product Info */
+    'test-rest.entity.product': {
+      /**
+             * Format: date
+             * @description Created At
+             */
+      createdAt: string;
+      /**
+             * Format: date
+             * @description Updated At
+             */
+      updatedAt: string;
+      /**
+             * @description Deleted
+             * @default false
+             */
+      deleted: boolean;
+      /**
+             * @description Instance ID
+             * @default 0
+             */
+      iid: number;
+      /** @description ID */
+      id: string;
+      /** @description Name */
+      name: string;
+      /** @description Description */
+      description?: string | undefined;
+      /** @description Price */
+      price: number;
+      /**
+             * @description Quantity
+             * @default 0
+             */
+      quantity: number;
+      /** @description Amount */
+      amount: number;
+      /** @description Custom */
+      _custom?: unknown;
+    } | undefined;
     /** @description Update Product */
     'test-rest.dto.productUpdate': {
       /** @description Name */
@@ -1382,15 +1388,15 @@ export interface components {
       name: string;
     };
     'test-vona.entity.post_a6ba2076b5b70a3c098374cc82d418bd1ab226c3': {
-      count_all?: string | number | undefined;
-      count_title?: string | number | undefined;
-      sum_stars?: string | number | undefined;
+      count_all?: string | undefined;
+      count_title?: string | undefined;
+      sum_stars?: string | undefined;
     };
     'test-vona.entity.post_729883d7de16ce4401b26f75bebe618c8948ff64': {
       title: string;
-      count_all?: string | number | undefined;
-      count_title?: string | number | undefined;
-      sum_stars?: string | number | undefined;
+      count_all?: string | undefined;
+      count_title?: string | undefined;
+      sum_stars?: string | undefined;
     };
     'test-vona.dto.userUpdate': {
       name: string;
@@ -1425,52 +1431,6 @@ export interface components {
       id: string;
       name: string;
       married: boolean;
-    };
-    'test-vona.dto.orderResult': {
-      /**
-             * Format: date
-             * @description Created At
-             */
-      createdAt: string;
-      /**
-             * Format: date
-             * @description Updated At
-             */
-      updatedAt: string;
-      /**
-             * @description Deleted
-             * @default false
-             */
-      deleted: boolean;
-      /**
-             * @description Instance ID
-             * @default 0
-             */
-      iid: number;
-      /** @description ID */
-      id: string;
-      /**
-             * @description Order No
-             * @default
-             */
-      orderNo: string;
-      /** @description Remark */
-      remark?: string | undefined;
-      userId: string;
-      user?: components['schemas']['test-vona.entity.user_2c7d642ee581efa300341e343180fbb0ecdc785d'];
-      products: components['schemas']['test-vona.entity.product_bce173590aaef19772f1ae3a82196493c2633e2e'][];
-    };
-    'test-vona.entity.product_bce173590aaef19772f1ae3a82196493c2633e2e': {
-      /** @description ID */
-      id: string;
-      /** @description Name */
-      name: string;
-      /** @description Price */
-      price: number;
-      /** @description Quantity */
-      quantity: number;
-      /** @description Amount */
-      amount: number;
     };
     'test-vona.dto.orderCreate': {
       /**
@@ -1519,6 +1479,52 @@ export interface components {
       /** @description Amount */
       amount: number;
     };
+    'test-vona.dto.orderResult': {
+      /**
+             * Format: date
+             * @description Created At
+             */
+      createdAt: string;
+      /**
+             * Format: date
+             * @description Updated At
+             */
+      updatedAt: string;
+      /**
+             * @description Deleted
+             * @default false
+             */
+      deleted: boolean;
+      /**
+             * @description Instance ID
+             * @default 0
+             */
+      iid: number;
+      /** @description ID */
+      id: string;
+      /**
+             * @description Order No
+             * @default
+             */
+      orderNo: string;
+      /** @description Remark */
+      remark?: string | undefined;
+      userId: string;
+      user?: components['schemas']['test-vona.entity.user_2c7d642ee581efa300341e343180fbb0ecdc785d'];
+      products: components['schemas']['test-vona.entity.product_bce173590aaef19772f1ae3a82196493c2633e2e'][];
+    };
+    'test-vona.entity.product_bce173590aaef19772f1ae3a82196493c2633e2e': {
+      /** @description ID */
+      id: string;
+      /** @description Name */
+      name: string;
+      /** @description Price */
+      price: number;
+      /** @description Quantity */
+      quantity: number;
+      /** @description Amount */
+      amount: number;
+    };
     'test-vona.dto.orderResultPage': {
       list: {
         /**
@@ -1554,20 +1560,23 @@ export interface components {
         user?: components['schemas']['test-vona.entity.user_2c7d642ee581efa300341e343180fbb0ecdc785d'];
         products: components['schemas']['test-vona.entity.product_bce173590aaef19772f1ae3a82196493c2633e2e'][];
       }[];
-      total: string | number;
+      total: string;
+      pageCount: number;
+      pageSize: number;
+      pageNo: number;
     };
     'test-vona.dto.postGroup': {
       userId: string;
-      count_all?: string | number | undefined;
-      sum_stars?: string | number | undefined;
+      count_all?: string | undefined;
+      sum_stars?: string | undefined;
     };
     'test-vona.dto.postAggregate': {
-      count_all?: string | number | undefined;
-      count_stars?: string | number | undefined;
-      sum_stars?: string | number | undefined;
-      avg_stars?: string | number | undefined;
-      min_stars?: string | number | undefined;
-      max_stars?: string | number | undefined;
+      count_all?: string | undefined;
+      count_stars?: string | undefined;
+      sum_stars?: string | undefined;
+      avg_stars?: string | undefined;
+      min_stars?: string | undefined;
+      max_stars?: string | undefined;
     };
     'test-vona.dto.postQueryRes': {
       list: {
@@ -1603,7 +1612,10 @@ export interface components {
         };
         user?: components['schemas']['test-vona.entity.user_2c7d642ee581efa300341e343180fbb0ecdc785d'];
       }[];
-      total: string | number;
+      total: string;
+      pageCount: number;
+      pageSize: number;
+      pageNo: number;
     };
     'test-vona.dto.serializerSimple': {
       password: string;
@@ -2158,7 +2170,7 @@ export interface operations {
           'application/json': {
             code: string;
             message: string;
-            data: components['schemas']['demo-student.entity.student'];
+            data: string;
           };
         };
       };
@@ -2184,7 +2196,7 @@ export interface operations {
           'application/json': {
             code: string;
             message: string;
-            data: components['schemas']['demo-student.entity.student'];
+            data?: components['schemas']['demo-student.entity.student'];
           };
         };
       };
@@ -2374,7 +2386,7 @@ export interface operations {
           'application/json': {
             code: string;
             message: string;
-            data: components['schemas']['test-rest.entity.product'];
+            data: string;
           };
         };
       };
@@ -2400,7 +2412,7 @@ export interface operations {
           'application/json': {
             code: string;
             message: string;
-            data: components['schemas']['test-rest.entity.product'];
+            data?: components['schemas']['test-rest.entity.product'];
           };
         };
       };
@@ -3180,7 +3192,7 @@ export interface operations {
           'application/json': {
             code: string;
             message: string;
-            data: components['schemas']['test-vona.dto.orderResult'];
+            data: string;
           };
         };
       };
