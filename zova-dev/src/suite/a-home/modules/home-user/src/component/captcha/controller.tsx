@@ -1,5 +1,5 @@
 import z from 'zod';
-import { BeanControllerBase, Use } from 'zova';
+import { BeanControllerBase, ClientOnly, Use } from 'zova';
 import { Controller } from 'zova-module-a-bean';
 import { ZFormField } from 'zova-module-a-form';
 import { ToolV } from 'zova-module-a-zod';
@@ -26,16 +26,36 @@ export class ControllerCaptcha extends BeanControllerBase {
     return (
       <>
         <ZFormField
-          name="captcha.token"
+          name="captcha"
           validators={{ onDynamic: this.zodSchema }}
-          value={{
-            id: this.captchaData?.id,
-            token: this.captchaData?.token,
+          slotDefault={(props, field) => {
+            return (
+              <input
+                type="text"
+                class="grow"
+                placeholder={this.scope.locale.InputCaptcha()}
+                name={props.name}
+                value={this.captchaData?.token}
+                onInput={(e: Event) => {
+                  const token = (e.target as HTMLInputElement).value;
+                  if (this.captchaData) {
+                    this.captchaData.token = token;
+                  }
+                  field.api.handleChange({
+                    id: this.captchaData?.id,
+                    token,
+                  });
+                }}
+                onBlur={props.onBlur}
+              ></input>
+            );
           }}
         ></ZFormField>
-        <label class="flex items-center gap-2 w-full">
-          {this.captchaData?.payload && <img src={this.captchaData!.payload as string}></img>}
-        </label>
+        <ClientOnly>
+          <label class="flex items-center gap-2 w-full">
+            {this.captchaData?.payload && <img src={this.captchaData!.payload as string}></img>}
+          </label>
+        </ClientOnly>
       </>
     );
   }

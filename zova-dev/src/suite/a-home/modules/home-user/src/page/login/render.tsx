@@ -70,7 +70,7 @@ export class RenderPageLogin extends BeanRenderBase {
           return (
             <>
               <div>{`${state.isValid}, ${state.isFormValid}`}</div>
-              <div>{`${state.isFieldsValid},${state.fieldMeta.captcha?.errors?.[0]}`}</div>
+              <div>{`${state.isFieldsValid},${state.fieldMeta.captcha?.errors?.[0]?.message}`}</div>
               <button disabled={state.isSubmitting} type="submit" class="btn mt-2 w-full btn-primary">
                 {this.scope.locale.Login()}
               </button>
