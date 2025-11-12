@@ -216,6 +216,8 @@ export const OpenApiBaseURL = (sys: ZovaSys) => {
     let contentAuthToken = '';
     if (nodeActionInfo.nodeTypeInfo.authToken) {
       contentAuthToken = ', true';
+    } else {
+      contentAuthToken = ', false';
     }
     for (const key of ['path', 'query', 'header']) {
       if (_isNodeNever(nodeTypeInfoParameters[key].nodeType)) continue;

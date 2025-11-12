@@ -19,11 +19,11 @@ export class ControllerCaptcha extends BeanControllerBase {
 
   protected async __init__() {
     this.zodSchema = this.$$v.required(z.string());
-    this.$api.captcha.create({ scene: '' });
   }
 
   protected render() {
     const queryCaptchaData = this.$$modelCaptcha.getCaptchaData();
+    console.log(queryCaptchaData);
     return (
       <>
         <ZFormField
