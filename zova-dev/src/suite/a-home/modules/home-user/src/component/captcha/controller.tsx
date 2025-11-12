@@ -30,7 +30,9 @@ export class ControllerCaptcha extends BeanControllerBase {
     this.zodSchema = this.$$v.required(z.string());
     // event
     this.eventFormSubmission = this.app.meta.event.on('a-form:formSubmission', (data, next) => {
-      this.refreshCaptchaData();
+      if (data.form.formId === this.$$behaviorForm.form.formId) {
+        this.refreshCaptchaData();
+      }
       return next();
     });
     // captcha data
