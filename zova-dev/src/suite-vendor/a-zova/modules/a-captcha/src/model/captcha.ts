@@ -5,5 +5,7 @@ export interface IModelOptionsCaptcha extends IDecoratorModelOptions {}
 
 @Model<IModelOptionsCaptcha>()
 export class ModelCaptcha extends BeanModelBase {
-  protected async __init__() {}
+  protected async __init__() {
+    // this.$api.captcha.create()
+  }
 }
