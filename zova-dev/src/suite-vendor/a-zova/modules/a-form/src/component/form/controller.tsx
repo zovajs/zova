@@ -47,13 +47,22 @@ export class ControllerForm<TFormData extends {} = {}, TSubmitMeta = never> exte
           const [_, error] = await catchError(() => {
             return this.$props.onSubmit?.(data);
           });
-          if (!error) return;
-          if (error.code === 422) {
-            this._handleError422(error);
-          } else {
-            this.$props.onShowError?.({ data, error });
+          // emit event
+          const resHandled = await this.app.meta.event.emit('a-form:formSubmission', {
+            form: this.form as any,
+            data,
+            error,
+          });
+          if (error) {
+            if (error.code === 422) {
+              this._handleError422(error);
+            } else {
+              if (!resHandled) {
+                this.$props.onShowError?.({ data, error });
+              }
+            }
+            throw error;
           }
-          throw error;
         },
       });
     });

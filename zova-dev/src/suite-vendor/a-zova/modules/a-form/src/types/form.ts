@@ -267,3 +267,15 @@ export interface RevalidateLogicProps {
   mode?: 'change' | 'blur' | 'submit';
   modeAfterSubmission?: 'change' | 'blur' | 'submit';
 }
+
+export interface IEventFormSubmission {
+  form: TypeForm;
+  data: {};
+  error?: Error;
+}
+
+declare module 'zova' {
+  export interface IEventRecord {
+    'a-form:formSubmission': { data: IEventFormSubmission; result: boolean | undefined };
+  }
+}
