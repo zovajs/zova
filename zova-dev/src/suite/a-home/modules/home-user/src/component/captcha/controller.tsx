@@ -101,7 +101,15 @@ export class ControllerCaptcha extends BeanControllerBase {
         ></ZFormField>
         <label class="flex items-center gap-2 w-full" style={{ height: '50px' }}>
           <ClientOnly>
-            {this.captchaData?.payload && <img src={this.captchaData!.payload as string}></img>}
+            {this.captchaData?.payload && (
+              <img
+                class="cursor-pointer"
+                src={this.captchaData!.payload as string}
+                onClick={() => {
+                  this.refreshCaptchaData();
+                }}
+              ></img>
+            )}
           </ClientOnly>
         </label>
       </>
