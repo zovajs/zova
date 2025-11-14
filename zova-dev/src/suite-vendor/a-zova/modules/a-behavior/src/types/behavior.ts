@@ -48,7 +48,7 @@ declare module 'zova' {
     behavior: never;
   }
 
-  export interface ILoggerClientChildRecord {
+  export interface ILoggerChildRecord {
     behavior: never;
   }
 }

@@ -2,7 +2,7 @@ import type { Logger } from '@cabloy/logger';
 import type { ReactiveMarker } from '@vue/reactivity';
 import type { ComputedGetter, DebuggerOptions, MultiWatchSources, RendererNode, WatchCallback, WatchEffect, WatchEffectOptions, WatchHandle, WatchOptions, WatchSource, WritableComputedOptions } from 'vue';
 import type { AppEvent } from '../core/component/event.js';
-import type { ILoggerClientChildRecord } from '../core/logger/types.js';
+import type { ILoggerChildRecord } from '../core/logger/types.js';
 import type { FunctionAsync } from '../decorator/type/functionable.js';
 import type { MapSources, MaybeUndefined } from '../vueExtra/watch.js';
 import type { IErrorHandlerEventResult, IModuleLocaleText, IZovaComponentRecord } from './resource/index.js';
@@ -45,7 +45,7 @@ export class BeanBase extends BeanBaseSimple {
     return this[SymbolLogger];
   }
 
-  protected $loggerChild(childName: keyof ILoggerClientChildRecord) {
+  protected $loggerChild(childName: keyof ILoggerChildRecord) {
     if (!this[SymbolLoggerChildren][childName]) {
       this[SymbolLoggerChildren][childName] = this.$logger.child({ name: childName });
     }

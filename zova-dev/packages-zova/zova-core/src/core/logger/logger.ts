@@ -1,5 +1,5 @@
 import type { LoggerLevel } from '@cabloy/logger';
-import type { ILoggerClientChildRecord, ILoggerClientRecord, TypeLoggerOptions } from './types.js';
+import type { ILoggerChildRecord, ILoggerClientRecord, TypeLoggerOptions } from './types.js';
 import { Logger } from '@cabloy/logger';
 import { BeanSimple } from '../../bean/beanSimple.js';
 import { sys } from '../sys/sys.js';
@@ -25,7 +25,7 @@ export class SysLogger extends BeanSimple {
     return this[SymbolLoggerInstances][clientName];
   }
 
-  child(childName?: keyof ILoggerClientChildRecord, clientName?: keyof ILoggerClientRecord) {
+  child(childName?: keyof ILoggerChildRecord, clientName?: keyof ILoggerClientRecord) {
     const logger = this.get(clientName);
     if (!childName) return logger;
     return logger.child({ name: childName });
