@@ -2,7 +2,7 @@ import type { Logger } from '@cabloy/logger';
 import type { ReactiveMarker } from '@vue/reactivity';
 import type { ComputedGetter, DebuggerOptions, MultiWatchSources, RendererNode, WatchCallback, WatchEffect, WatchEffectOptions, WatchHandle, WatchOptions, WatchSource, WritableComputedOptions } from 'vue';
 import type { AppEvent } from '../core/component/event.js';
-import type { ILoggerChildRecord } from '../core/logger/types.js';
+import type { ILoggerChildRecord, ILoggerClientRecord } from '../core/logger/types.js';
 import type { FunctionAsync } from '../decorator/type/functionable.js';
 import type { MapSources, MaybeUndefined } from '../vueExtra/watch.js';
 import type { IErrorHandlerEventResult, IModuleLocaleText, IZovaComponentRecord } from './resource/index.js';
@@ -10,7 +10,7 @@ import { markRaw, watch, watchEffect, watchPostEffect, watchSyncEffect } from 'v
 import { createZovaComponentAsync } from '../components/createZovaComponentAsync.js';
 import { cast } from '../types/utils/cast.js';
 import { useComputed } from '../vueExtra/computed.js';
-import { BeanBaseSimple, SymbolBeanFullName, SymbolModuleBelong } from './beanBaseSimple.js';
+import { BeanBaseSimple, SymbolModuleBelong } from './beanBaseSimple.js';
 import { getVueDecoratorValue } from './vueDecorators/utils.js';
 
 const SymbolText = Symbol('SymbolText');
@@ -20,8 +20,8 @@ const SymbolZovaComponents = Symbol('SymbolZovaComponents');
 
 export class BeanBase extends BeanBaseSimple {
   private [SymbolText]: IModuleLocaleText;
-  private [SymbolLogger]: Logger;
-  private [SymbolLoggerChildren]: Record<string, Logger> = {};
+  private [SymbolLogger]: Record<keyof ILoggerClientRecord, Logger> = {} as any;
+  private [SymbolLoggerChildren]: Record<keyof ILoggerClientRecord, Record<string, Logger>> = {} as any;
   private [SymbolZovaComponents]: Record<string, any> = {};
 
   protected get $el(): RendererNode {
@@ -39,17 +39,25 @@ export class BeanBase extends BeanBaseSimple {
   }
 
   protected get $logger() {
-    if (!this[SymbolLogger]) {
-      this[SymbolLogger] = this.sys.meta.logger.get().child({ beanFullName: this[SymbolBeanFullName] });
-    }
-    return this[SymbolLogger];
+    return this.$loggerClient('default');
   }
 
-  protected $loggerChild(childName: keyof ILoggerChildRecord) {
-    if (!this[SymbolLoggerChildren][childName]) {
-      this[SymbolLoggerChildren][childName] = this.$logger.child({ name: childName });
+  protected $loggerClient(clientName: keyof ILoggerClientRecord) {
+    if (!this[SymbolLogger][clientName]) {
+      this[SymbolLogger][clientName] = this.sys.meta.logger.get(clientName).child({ beanFullName: this.$beanFullName });
     }
-    return this[SymbolLoggerChildren][childName];
+    return this[SymbolLogger][clientName];
+  }
+
+  protected $loggerChild(childName: keyof ILoggerChildRecord, clientName: keyof ILoggerClientRecord = 'default') {
+    if (!this[SymbolLoggerChildren][clientName]) this[SymbolLoggerChildren][clientName] = {} as never;
+    if (!this[SymbolLoggerChildren][clientName][childName]) {
+      this[SymbolLoggerChildren][clientName][childName] = this.sys.meta.logger.get(clientName).child({
+        beanFullName: this.$beanFullName,
+        name: childName,
+      });
+    }
+    return this[SymbolLoggerChildren][clientName][childName];
   }
 
   protected get $event(): AppEvent {
