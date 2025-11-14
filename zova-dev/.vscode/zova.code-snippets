@@ -153,6 +153,54 @@
     ],
     "description": "aopmagic.set"
   },
+  "record.flavor": {
+    "scope": "typescript,typescriptreact",
+    "prefix": "recordflavor",
+    "body": [
+      "declare module '@cabloy/module-info' {",
+      "  export interface ZovaMetaFlavorExtend {",
+      "    $0: never;",
+      "  }",
+      "}"
+    ],
+    "description": "record.flavor"
+  },
+  "record.appmode": {
+    "scope": "typescript,typescriptreact",
+    "prefix": "recordappmode",
+    "body": [
+      "declare module '@cabloy/module-info' {",
+      "  export interface ZovaMetaAppModeExtend {",
+      "    $0: never;",
+      "  }",
+      "}"
+    ],
+    "description": "record.appmode"
+  },
+  "record.loggerclient": {
+    "scope": "typescript,typescriptreact",
+    "prefix": "recordloggerclient",
+    "body": [
+      "declare module 'zova' {",
+      "  export interface ILoggerClientRecord {",
+      "    $0: never;",
+      "  }",
+      "}"
+    ],
+    "description": "record.loggerclient"
+  },
+  "record.loggerchild": {
+    "scope": "typescript,typescriptreact",
+    "prefix": "recordloggerchild",
+    "body": [
+      "declare module 'zova' {",
+      "  export interface ILoggerChildRecord {",
+      "    $0: never;",
+      "  }",
+      "}"
+    ],
+    "description": "record.loggerchild"
+  },
   "record.locale": {
     "scope": "typescript,typescriptreact",
     "prefix": "recordlocale",
