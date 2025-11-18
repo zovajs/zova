@@ -8,6 +8,7 @@ export type HTMLInputElementType = 'text' | 'password' | 'number' | 'file' | 'hi
 export interface IFormFieldLayoutOptionsBase {
   label?: string | false;
   bordered?: boolean;
+  floating?: boolean;
   iconPrefix?: keyof IIconRecord;
   iconSuffix?: keyof IIconRecord;
 }

@@ -26,19 +26,15 @@ export class BehaviorFormFieldLayout extends BeanBehaviorBase<
     const vnode = next(props);
     const error = field.state.meta.errors[0] as z.ZodError | undefined;
     return (
-      <label class="form-control w-full max-w-xs">
-        {!!this.$options.label && (
-          <div class="label">
-            <span class="label-text">{this.$options.label}</span>
-          </div>
-        )}
+      <fieldset class="fieldset">
+        {!!this.$options.label && <legend class="fieldset-legend">{this.$options.label}</legend>}
         {vnode}
         {!field.state.meta.isValid && (
           <div class="label">
             <span class="label-text-alt text-error">{error?.message}</span>
           </div>
         )}
-      </label>
+      </fieldset>
     );
   }
 

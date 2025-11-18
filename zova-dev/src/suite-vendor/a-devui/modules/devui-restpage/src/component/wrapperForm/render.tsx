@@ -30,8 +30,9 @@ export class RenderWrapperForm extends BeanRenderBase {
               {this.formMeta.formMode === 'edit' && (
                 <button
                   class={classes('btn btn-primary', mutationSubmit?.isPending && 'btn-disabled')}
-                  onClick={() => {
-                    return this.controllerRestForm.submit();
+                  onClick={async () => {
+                    await this.controllerRestForm.submit();
+                    this.modelFormVisible = false;
                   }}
                 >
                   {this.scope.locale.Submit()}
