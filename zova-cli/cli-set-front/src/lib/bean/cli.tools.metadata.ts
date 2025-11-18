@@ -3,6 +3,7 @@ import { BeanCliBase } from '@cabloy/cli';
 import { getOnionMetasMeta, getOnionScenesMeta } from '@cabloy/module-info';
 import { toUpperCaseFirstChar } from '@cabloy/word-utils';
 import fse from 'fs-extra';
+import { loadJSONFile, saveJSONFile } from '../common/utils.ts';
 import { generateBeanGenerals } from './toolsMetadata/generateBeanGenerals.ts';
 import { generateConfig, generateConstant, generateError, generateLocale } from './toolsMetadata/generateConfig.ts';
 import { generateIcons } from './toolsMetadata/generateIcons.ts';
@@ -159,6 +160,8 @@ export class CliToolsMetadata extends BeanCliBase {
     await this._generateThis(moduleName, relativeNameCapitalize, modulePath);
     // index
     await this._generateIndex(modulePath);
+    // package
+    await this._generatePackage(modulePath);
   }
 
   async _generateThis(moduleName: string, relativeNameCapitalize: string, modulePath: string) {
@@ -200,5 +203,33 @@ export { ScopeModule${relativeNameCapitalize} as ScopeModule } from './index.js'
     // write
     await fse.writeFile(jsFile, jsContent);
     await this.helper.formatFile({ fileName: jsFile, logPrefix: 'format: ' });
+  }
+
+  async _generatePackage(modulePath: string) {
+    let pkgFile: string;
+    let pkg: any;
+    let changed: boolean | undefined;
+    async function _loadPkg() {
+      if (!pkg) {
+        pkgFile = path.join(modulePath, 'package.json');
+        pkg = await loadJSONFile(pkgFile);
+      }
+      return pkg;
+    }
+    // cli
+    const cli = path.join(modulePath, 'cli');
+    if (fse.existsSync(cli)) {
+      pkg = await _loadPkg();
+      const index = pkg.files.indexOf('cli');
+      if (index === -1) {
+        changed = true;
+        pkg.files.push('cli');
+      }
+    }
+    // save
+    if (changed) {
+      await saveJSONFile(pkgFile!, pkg);
+      await this.helper.formatFile({ fileName: pkgFile! });
+    }
   }
 }

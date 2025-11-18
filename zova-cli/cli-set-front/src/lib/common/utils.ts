@@ -21,3 +21,12 @@ export function copyTemplateIfNeed(fileSrc, fileDest) {
 export function pathToHref(fileName: string): string {
   return pathToFileURL(fileName).href;
 }
+
+export async function loadJSONFile(fileName: string) {
+  const pkgContent = (await fse.readFile(fileName)).toString();
+  return JSON.parse(pkgContent);
+}
+
+export async function saveJSONFile(fileName: string, json: object) {
+  await fse.writeFile(fileName, `${JSON.stringify(json, null, 2)}\n`);
+}
