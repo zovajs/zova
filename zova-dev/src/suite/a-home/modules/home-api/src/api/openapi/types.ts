@@ -239,6 +239,22 @@ export interface paths {
     patch?: never;
     trace?: never;
   };
+  '/api/demo/student/test': {
+    parameters: {
+      query?: never;
+      header?: never;
+      path?: never;
+      cookie?: never;
+    };
+    get: operations['DemoStudent_test'];
+    put?: never;
+    post?: never;
+    delete?: never;
+    options?: never;
+    head?: never;
+    patch?: never;
+    trace?: never;
+  };
   '/api/demo/student': {
     parameters: {
       query?: never;
@@ -1637,6 +1653,7 @@ export interface components {
       fullName?: string | undefined;
       fullName2?: string | undefined;
       fullName3?: string | undefined;
+      fullName4?: string | undefined;
     };
     'test-vona.dto.serializerArray': {
       /** @description Simple */
@@ -1668,6 +1685,7 @@ export interface components {
       fullName?: string | undefined;
       fullName2?: string | undefined;
       fullName3?: string | undefined;
+      fullName4?: string | undefined;
     };
     /**
          * title
@@ -1693,6 +1711,7 @@ export interface components {
       fullName?: string | undefined;
       fullName2?: string | undefined;
       fullName3?: string | undefined;
+      fullName4?: string | undefined;
     };
   };
   responses: never;
@@ -1725,6 +1744,7 @@ export interface operations {
         };
       };
     };
+    authToken: true;
   };
   HomeUserPassport_logout: {
     parameters: {
@@ -2096,6 +2116,29 @@ export interface operations {
       query: {
         token: string;
       };
+      header?: never;
+      path?: never;
+      cookie?: never;
+    };
+    requestBody?: never;
+    responses: {
+      200: {
+        headers: {
+          [name: string]: unknown;
+        };
+        content: {
+          'application/json': {
+            code: string;
+            message: string;
+            data?: unknown;
+          };
+        };
+      };
+    };
+  };
+  DemoStudent_test: {
+    parameters: {
+      query?: never;
       header?: never;
       path?: never;
       cookie?: never;
