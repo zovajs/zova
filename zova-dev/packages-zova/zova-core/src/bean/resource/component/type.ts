@@ -15,3 +15,4 @@ export type TypeComponentRecordSelectorStrict<PREFIX extends string> = {
 export type TypeComponentRecordSelectorKeysStrict<PREFIX extends string> = keyof TypeComponentRecordSelectorStrict<PREFIX>;
 
 export type TypeComponentLayoutRecord = TypeComponentRecordSelector<'layout'>;
+export type TypeComponentAppRecord = TypeComponentRecordSelector<'app'>;

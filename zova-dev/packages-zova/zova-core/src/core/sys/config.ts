@@ -1,5 +1,5 @@
 import type { ZovaConfigMeta } from '@cabloy/module-info';
-import type { TypeComponentLayoutRecord } from '../../bean/resource/component/type.js';
+import type { TypeComponentAppRecord, TypeComponentLayoutRecord } from '../../bean/resource/component/type.js';
 import type { ILocaleRecord } from '../../bean/resource/locale/type.js';
 import type { ZovaConfigRoutes } from '../../bean/resource/page/type.js';
 import type { IBeanScopeConfig } from '../../bean/type.js';
@@ -47,6 +47,7 @@ export function configDefault(env: ZovaConfigEnv): PowerPartial<ZovaConfig> {
     },
     layout: {
       component: {
+        app: 'a-app:app' as keyof TypeComponentAppRecord,
         default: 'home-layout:layoutDefault' as keyof TypeComponentLayoutRecord,
         empty: 'home-layout:layoutEmpty' as keyof TypeComponentLayoutRecord,
       },
@@ -93,6 +94,7 @@ export interface ZovaConfig {
   };
   layout: {
     component: {
+      app: keyof TypeComponentAppRecord;
       default: keyof TypeComponentLayoutRecord;
       empty: keyof TypeComponentLayoutRecord;
     };
