@@ -6,6 +6,7 @@
   "zovaModule": {
     "dependencies": {
       "a-api": "5.0.0",
+      "a-app": "5.0.0",
       "a-bean": "5.0.0",
       "a-behavior": "5.0.0",
       "a-boundary": "5.0.0",

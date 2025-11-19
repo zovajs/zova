@@ -9,6 +9,7 @@
   "files": [],
   "dependencies": {
     "zova-module-a-api": "workspace:^",
+    "zova-module-a-app": "^5.0.0",
     "zova-module-a-bean": "workspace:^",
     "zova-module-a-behavior": "workspace:^",
     "zova-module-a-boundary": "workspace:^",

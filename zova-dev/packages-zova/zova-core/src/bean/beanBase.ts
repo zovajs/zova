@@ -6,8 +6,7 @@ import type { ILoggerChildRecord, ILoggerClientRecord } from '../core/logger/typ
 import type { FunctionAsync } from '../decorator/type/functionable.js';
 import type { MapSources, MaybeUndefined } from '../vueExtra/watch.js';
 import type { IErrorHandlerEventResult, IModuleLocaleText, IZovaComponentRecord } from './resource/index.js';
-import { markRaw, watch, watchEffect, watchPostEffect, watchSyncEffect } from 'vue';
-import { createZovaComponentAsync } from '../components/createZovaComponentAsync.js';
+import { watch, watchEffect, watchPostEffect, watchSyncEffect } from 'vue';
 import { cast } from '../types/utils/cast.js';
 import { useComputed } from '../vueExtra/computed.js';
 import { BeanBaseSimple, SymbolModuleBelong } from './beanBaseSimple.js';
@@ -16,13 +15,11 @@ import { getVueDecoratorValue } from './vueDecorators/utils.js';
 const SymbolText = Symbol('SymbolText');
 const SymbolLogger = Symbol('SymbolLogger');
 const SymbolLoggerChildren = Symbol('SymbolLoggerChildren');
-const SymbolZovaComponents = Symbol('SymbolZovaComponents');
 
 export class BeanBase extends BeanBaseSimple {
   private [SymbolText]: IModuleLocaleText;
   private [SymbolLogger]: Record<keyof ILoggerClientRecord, Logger> = {} as any;
   private [SymbolLoggerChildren]: Record<keyof ILoggerClientRecord, Record<string, Logger>> = {} as any;
-  private [SymbolZovaComponents]: Record<string, any> = {};
 
   protected get $el(): RendererNode {
     if (!this.ctx) {
@@ -158,11 +155,7 @@ export class BeanBase extends BeanBaseSimple {
   protected $zovaComponent<K extends keyof IZovaComponentRecord>(componentName: K): IZovaComponentRecord[K];
   protected $zovaComponent(module: string, name: string);
   protected $zovaComponent(module: string, name?: string) {
-    const componentName = module.includes(':') ? module : `${module}:${name}`;
-    if (!this[SymbolZovaComponents][componentName]) {
-      this[SymbolZovaComponents][componentName] = markRaw(createZovaComponentAsync(componentName));
-    }
-    return this[SymbolZovaComponents][componentName];
+    return this.app.meta.component.getZovaComponent(module, name!);
   }
 
   // need not

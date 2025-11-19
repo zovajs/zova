@@ -33,7 +33,9 @@ export class ControllerPageApp extends BeanControllerPageBase {
   }
 
   protected render() {
-    return <router-view />;
+    const ComponentApp = this.$zovaComponent('a-b:card');
+    return <ComponentApp />
+    //return <router-view />;
   }
 
   protected async initApp(app: App) {
