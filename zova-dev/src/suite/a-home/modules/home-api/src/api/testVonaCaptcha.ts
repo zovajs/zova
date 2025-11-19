@@ -19,7 +19,7 @@ export class ApiTestVonaCaptcha extends BeanApiBase {
     return this.$fetch.post<any, ApiApiTestVonaCaptchasigninResponseBody>(
       ApiApiTestVonaCaptchasigninPath,
       body,
-      this.$configPrepare(OpenApiBaseURL(this.sys), options, false),
+      this.$configPrepare(OpenApiBaseURL(this.sys), options),
     );
   }
 }

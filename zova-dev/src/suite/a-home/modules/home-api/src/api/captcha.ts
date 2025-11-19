@@ -40,7 +40,7 @@ export class ApiCaptcha extends BeanApiBase {
     return this.$fetch.post<any, ApiApiCaptchacreateResponseBody>(
       ApiApiCaptchacreatePath,
       body,
-      this.$configPrepare(OpenApiBaseURL(this.sys), options, false),
+      this.$configPrepare(OpenApiBaseURL(this.sys), options),
     );
   }
 
@@ -51,7 +51,7 @@ export class ApiCaptcha extends BeanApiBase {
     return this.$fetch.post<any, ApiApiCaptcharefreshResponseBody>(
       ApiApiCaptcharefreshPath,
       body,
-      this.$configPrepare(OpenApiBaseURL(this.sys), options, false),
+      this.$configPrepare(OpenApiBaseURL(this.sys), options),
     );
   }
 
@@ -62,7 +62,7 @@ export class ApiCaptcha extends BeanApiBase {
     return this.$fetch.post<any, ApiApiCaptchaverifyImmediateResponseBody>(
       ApiApiCaptchaverifyImmediatePath,
       body,
-      this.$configPrepare(OpenApiBaseURL(this.sys), options, false),
+      this.$configPrepare(OpenApiBaseURL(this.sys), options),
     );
   }
 }

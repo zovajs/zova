@@ -109,7 +109,7 @@ export class ApiHomeUserPassport extends BeanApiBase {
     return this.$fetch.post<any, ApiApiHomeUserPassportregisterResponseBody>(
       ApiApiHomeUserPassportregisterPath,
       body,
-      this.$configPrepare(OpenApiBaseURL(this.sys), options, false),
+      this.$configPrepare(OpenApiBaseURL(this.sys), options),
     );
   }
 
@@ -120,7 +120,7 @@ export class ApiHomeUserPassport extends BeanApiBase {
     return this.$fetch.post<any, ApiApiHomeUserPassportloginResponseBody>(
       ApiApiHomeUserPassportloginPath,
       body,
-      this.$configPrepare(OpenApiBaseURL(this.sys), options, false),
+      this.$configPrepare(OpenApiBaseURL(this.sys), options),
     );
   }
 
@@ -133,7 +133,7 @@ export class ApiHomeUserPassport extends BeanApiBase {
   ) {
     return this.$fetch.get<any, ApiApiHomeUserPassportloginOauthResponseBody>(
       this.$pathTranslate(ApiApiHomeUserPassportloginOauthPath, options.params),
-      this.$configPrepare(OpenApiBaseURL(this.sys), options, false),
+      this.$configPrepare(OpenApiBaseURL(this.sys), options),
     );
   }
 
@@ -170,7 +170,7 @@ export class ApiHomeUserPassport extends BeanApiBase {
     return this.$fetch.post<any, ApiApiHomeUserPassportrefreshAuthTokenResponseBody>(
       ApiApiHomeUserPassportrefreshAuthTokenPath,
       body,
-      this.$configPrepare(OpenApiBaseURL(this.sys), options, false),
+      this.$configPrepare(OpenApiBaseURL(this.sys), options),
     );
   }
 
@@ -181,7 +181,7 @@ export class ApiHomeUserPassport extends BeanApiBase {
     return this.$fetch.post<any, ApiApiHomeUserPassportcreatePassportJwtFromOauthCodeResponseBody>(
       ApiApiHomeUserPassportcreatePassportJwtFromOauthCodePath,
       body,
-      this.$configPrepare(OpenApiBaseURL(this.sys), options, false),
+      this.$configPrepare(OpenApiBaseURL(this.sys), options),
     );
   }
 
