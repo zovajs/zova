@@ -46,8 +46,10 @@ export function configDefault(env: ZovaConfigEnv): PowerPartial<ZovaConfig> {
       },
     },
     layout: {
+      app: {
+        component: 'a-app:app' as keyof TypeComponentAppRecord,
+      },
       component: {
-        app: 'a-app:app' as keyof TypeComponentAppRecord,
         default: 'home-layout:layoutDefault' as keyof TypeComponentLayoutRecord,
         empty: 'home-layout:layoutEmpty' as keyof TypeComponentLayoutRecord,
       },
@@ -93,8 +95,10 @@ export interface ZovaConfig {
     items: Record<keyof ILocaleRecord, string>;
   };
   layout: {
+    app: {
+      component: keyof TypeComponentAppRecord;
+    };
     component: {
-      app: keyof TypeComponentAppRecord;
       default: keyof TypeComponentLayoutRecord;
       empty: keyof TypeComponentLayoutRecord;
     };

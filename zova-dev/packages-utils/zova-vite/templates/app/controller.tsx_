@@ -15,7 +15,7 @@ export class ControllerPageApp extends BeanControllerPageBase {
   }
 
   protected render() {
-    const ComponentApp = this.$zovaComponent(this.sys.config.layout.component.app);
+    const ComponentApp = this.$zovaComponent(this.sys.config.layout.app.component);
     return <ComponentApp />;
   }
 
