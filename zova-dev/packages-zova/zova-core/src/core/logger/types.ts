@@ -15,6 +15,6 @@ export interface ILoggerClientRecord {
 export interface ILoggerChildRecord {}
 
 export interface ConfigLogger {
-  default: TypeLoggerOptions;
+  base: TypeLoggerOptions;
   clients: Record<keyof ILoggerClientRecord, PowerPartial<TypeLoggerOptions>>;
 }

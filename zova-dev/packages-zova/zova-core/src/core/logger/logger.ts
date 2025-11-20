@@ -44,7 +44,7 @@ export class SysLogger extends BeanSimple {
     if (!configClient) throw new Error(`logger client not found: ${clientName}`);
     const configNode = deepExtend(
       {},
-      this._prepareConfigClient(clientName, this.sys.config.logger.default),
+      this._prepareConfigClient(clientName, this.sys.config.logger.base),
       this._prepareConfigClient(clientName, configClient as unknown as TypeLoggerOptions),
     );
     const logger = new Logger(configNode);

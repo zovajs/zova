@@ -1,4 +1,4 @@
-import type { ZovaConfigOptional, ZovaSys } from 'zova';
+import type { ILocaleRecord, ZovaConfigOptional, ZovaSys } from 'zova';
 import { colorizer, combine, errors, splatter, timestamp } from '@cabloy/logger';
 import { formatLoggerConsole, formatLoggerFilter } from 'zova';
 
@@ -44,7 +44,7 @@ export default function (sys: ZovaSys) {
 
   // locale
   config.locale = {
-    default: env.APP_LOCALE_DEFAULT as keyof ILocaleRecord | undefined,
+    default: env.APP_LOCALE_DEFAULT as keyof ILocaleRecord,
     storeKey: 'locale',
     items: {
       'en-us': 'English',
@@ -55,11 +55,11 @@ export default function (sys: ZovaSys) {
   // layout
   config.layout = {
     app: {
-      component: 'a-app:app' as keyof TypeComponentAppRecord,
+      component: 'a-app:app',
     },
     component: {
-      default: 'home-layout:layoutDefault' as keyof TypeComponentLayoutRecord,
-      empty: 'home-layout:layoutEmpty' as keyof TypeComponentLayoutRecord,
+      default: 'home-layout:layoutDefault',
+      empty: 'home-layout:layoutEmpty',
     },
     sidebar: {
       leftOpenPC: true,
