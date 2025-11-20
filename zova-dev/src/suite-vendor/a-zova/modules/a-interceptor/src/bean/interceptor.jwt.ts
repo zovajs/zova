@@ -77,7 +77,7 @@ export class InterceptorJwt extends BeanInterceptorBase<IInterceptorOptionsJwt> 
       if (authToken === true) this.app.throw(401);
       return;
     } else {
-      if (authToken !== true) {
+      if (authToken === false) {
         // need not refreshAuthToken, such as captcha.create
         return;
       }

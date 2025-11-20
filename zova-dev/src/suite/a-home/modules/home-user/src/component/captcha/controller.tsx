@@ -50,7 +50,7 @@ export class ControllerCaptcha extends BeanControllerBase {
   private async createCaptchaData() {
     this.captchaData = await this.$api.captcha.create({
       scene: this.$props.scene,
-    });
+    }, { authToken: false });
     this.setFieldCaptchaData();
   }
 
