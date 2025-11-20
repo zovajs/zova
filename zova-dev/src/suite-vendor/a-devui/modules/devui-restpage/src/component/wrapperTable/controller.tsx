@@ -55,11 +55,15 @@ export class ControllerWrapperTable<T extends {} = {}> extends BeanControllerTab
 
   get data() {
     const queryDataFindAll = this.$$restResource.getQueryDataFindAll();
-    return queryDataFindAll.data;
+    return queryDataFindAll.data.list;
+  }
+
+  get schemaBootstrap() {
+    return this.$$restResource.schemaBootstrap;
   }
 
   get schema() {
-    return this.$$restResource.schemaBootstrap;
+    return this.schemaBootstrap?.schemaRow;
   }
 
   _loadProperties() {
