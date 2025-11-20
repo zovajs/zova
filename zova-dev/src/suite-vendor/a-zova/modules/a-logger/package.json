@@ -3,6 +3,11 @@
   "type": "module",
   "version": "5.0.0",
   "title": "a-logger",
+  "zovaModule": {
+    "globalDependencies": {
+      "@cabloy/logger": true
+    }
+  },
   "description": "",
   "author": "",
   "keywords": ["Zova Module"],

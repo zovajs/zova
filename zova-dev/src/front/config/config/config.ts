@@ -1,7 +1,10 @@
 import type { ZovaConfigOptional, ZovaSys } from 'zova';
+import { colorizer, combine, errors, splatter, timestamp } from '@cabloy/logger';
+import { formatLoggerConsole, formatLoggerFilter } from 'zova';
 
-export default function (_sys: ZovaSys) {
+export default function (sys: ZovaSys) {
   const config: ZovaConfigOptional = {};
+  const env = sys.env;
 
   // routes
   config.routes = {
@@ -15,8 +18,79 @@ export default function (_sys: ZovaSys) {
     },
   };
 
+  // app
+  config.app = {
+    name: env.APP_NAME,
+    title: env.APP_TITLE,
+    description: env.APP_DESCRIPTION,
+    version: env.APP_VERSION,
+    publicPath: env.APP_PUBLIC_PATH,
+  };
+
+  // api
+  config.api = {
+    baseURL: process.env.SERVER ? (env.SSR_API_BASE_URL || env.API_BASE_URL) : env.API_BASE_URL,
+    prefix: env.API_PREFIX,
+    jwt: env.API_JWT !== 'false',
+  };
+
+  // ssr
+  config.ssr = {
+    server: {
+      protocol: env.SSR_PROD_PROTOCOL,
+      host: env.SSR_PROD_HOST || `localhost:${env.SSR_PROD_PORT}`,
+    },
+  };
+
+  // locale
+  config.locale = {
+    default: env.APP_LOCALE_DEFAULT as keyof ILocaleRecord | undefined,
+    storeKey: 'locale',
+    items: {
+      'en-us': 'English',
+      'zh-cn': 'Chinese',
+    },
+  };
+
+  // layout
+  config.layout = {
+    app: {
+      component: 'a-app:app' as keyof TypeComponentAppRecord,
+    },
+    component: {
+      default: 'home-layout:layoutDefault' as keyof TypeComponentLayoutRecord,
+      empty: 'home-layout:layoutEmpty' as keyof TypeComponentLayoutRecord,
+    },
+    sidebar: {
+      leftOpenPC: true,
+      breakpoint: 1023,
+    },
+  };
+
+  // logger
+  config.logger = {
+    base(this: ZovaSys, clientInfo) {
+      return {
+        format: combine(
+          splatter(),
+          errors({ stack: true }),
+          timestamp(),
+          formatLoggerFilter({ level: clientInfo.level, silly: true }),
+          colorizer(),
+          formatLoggerConsole(),
+        ),
+      };
+    },
+    clients: {
+      default: {},
+    },
+  };
+
   // modules
   config.modules = {};
+
+  // onions
+  config.onions = {};
 
   return config;
 }
