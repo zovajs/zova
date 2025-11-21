@@ -63,9 +63,8 @@ export class ControllerWrapperTable<T extends {} = {}> extends BeanControllerTab
   }
 
   get data() {
-    const queryDataFindAll = this.$$restResource.getQueryDataSelect(this.query);
-    // return queryDataFindAll.data
-    return queryDataFindAll.data.list;
+    const queryDataSelect = this.$$restResource.getQueryDataSelect(this.query);
+    return queryDataSelect.data?.list;
   }
 
   get schemaBootstrap() {

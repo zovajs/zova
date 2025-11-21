@@ -18,3 +18,11 @@ export interface ITableQuery {
   pageNo?: number;
   pageSize?: number;
 }
+
+export interface ITableRes<Entity = any> {
+  list: Entity[];
+  total: string;
+  pageCount: number;
+  pageSize: number;
+  pageNo: number;
+}
