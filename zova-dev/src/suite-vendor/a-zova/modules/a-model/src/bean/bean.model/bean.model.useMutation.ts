@@ -7,10 +7,7 @@ import type {
 } from '@tanstack/vue-query';
 import type { UnwrapNestedRefs } from 'vue';
 import type { MaybeRefDeep } from '../../common/types.js';
-import {
-  hashKey,
-  useMutation,
-} from '@tanstack/vue-query';
+import { hashKey, useMutation } from '@tanstack/vue-query';
 import { cast } from 'zova';
 import { BeanModelUseStateGeneral } from './bean.model.useStateGeneral.js';
 

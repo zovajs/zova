@@ -5,7 +5,7 @@ import { SchemaObject } from 'openapi3-ts/oas31';
 import { cast, Use } from 'zova';
 import { Controller } from 'zova-module-a-bean';
 import { loadSchemaProperties, TypeResourceActionRowRecord, TypeResourceActionTableRecord } from 'zova-module-a-openapi';
-import { BeanControllerTableBase, BeanTableFeatureBase, ServiceTableCellFormat, ServiceTableFeature, TypeColumn, TypeTable, TypeTableCellFormatsMatched } from 'zova-module-a-table';
+import { BeanControllerTableBase, BeanTableFeatureBase, ITablePaged, ITableQuery, ServiceTableCellFormat, ServiceTableFeature, TypeColumn, TypeTable, TypeTableCellFormatsMatched } from 'zova-module-a-table';
 import { RenderActions } from './render.actions.jsx';
 
 export interface ControllerWrapperTableProps<T extends {} = {}> {
@@ -21,6 +21,10 @@ export class ControllerWrapperTable<T extends {} = {}> extends BeanControllerTab
   features: BeanTableFeatureBase[] | undefined;
   formats: TypeTableCellFormatsMatched;
   table: TypeTable<T>;
+
+  queryFilterData: {};
+  queryPaged: ITablePaged;
+  query: ITableQuery;
 
   @Use({ injectionScope: 'host' })
   $$restResource: ControllerPageResource;
@@ -38,9 +42,14 @@ export class ControllerWrapperTable<T extends {} = {}> extends BeanControllerTab
   $$renderActions: RenderActions;
 
   protected async __init__() {
-    // dataFindAll
-    const queryDataFindAll = this.$$restResource.getQueryDataFindAll();
-    await queryDataFindAll.suspense();
+    // query
+    this.queryFilterData = {};
+    this.queryPaged = { pageNo: 1 };
+    this.query = this.$useComputed(() => {
+      return Object.assign({}, this.queryFilterData, this.queryPaged);
+    });
+    // load data
+    await this._loadData();
     // properties
     this._loadProperties();
     // columns
@@ -54,7 +63,8 @@ export class ControllerWrapperTable<T extends {} = {}> extends BeanControllerTab
   }
 
   get data() {
-    const queryDataFindAll = this.$$restResource.getQueryDataFindAll();
+    const queryDataFindAll = this.$$restResource.getQueryDataSelect(this.query);
+    // return queryDataFindAll.data
     return queryDataFindAll.data.list;
   }
 
@@ -64,6 +74,11 @@ export class ControllerWrapperTable<T extends {} = {}> extends BeanControllerTab
 
   get schema() {
     return this.schemaBootstrap?.schemaRow;
+  }
+
+  async _loadData() {
+    const queryDataSelect = this.$$restResource.getQueryDataSelect(this.query);
+    await queryDataSelect.suspense();
   }
 
   _loadProperties() {

@@ -8,6 +8,12 @@ import { BeanSimple } from '../../bean/beanSimple.js';
 import { cast } from '../../types/utils/cast.js';
 import { uuid as _uuid } from '../../utils/uuid.js';
 
+export interface IApiActionConfigPrepareOptions {
+  query?: {};
+  authToken?: TypeAuthToken;
+  openapiSchema?: boolean;
+}
+
 export class SysUtil extends BeanSimple {
   getAbsoluteUrlFromPagePath(path?: string, ignoreHost?: boolean, ignorePublicPath?: boolean) {
     let prefix = ignoreHost ? '' : (process.env.DEV ? `http://${this.sys.env.DEV_SERVER_HOSTNAME || 'localhost'}:${this.sys.env.DEV_SERVER_PORT}` : `${this.sys.config.ssr.server.protocol}://${this.sys.config.ssr.server.host}`);
@@ -64,7 +70,7 @@ export class SysUtil extends BeanSimple {
     return defaultPathSerializer(pathName, pathParams);
   }
 
-  apiActionConfigPrepare(baseURL?: string, options?: any, authToken?: TypeAuthToken) {
+  apiActionConfigPrepare(baseURL?: string, options?: IApiActionConfigPrepareOptions, authToken?: TypeAuthToken) {
     // custom
     const optionsCustom: any = {
       params: options?.query,
