@@ -16,7 +16,7 @@ export class RenderWrapperForm extends BeanRenderBase {
             <p class="py-4">
               {this.modelFormVisible && !!this.formData && (
                 <ComponentForm
-                  controllerRef={ref => { this.controllerRestForm = ref; }}
+                  controllerRef={ref => { this.controllerForm = ref; }}
                   data={this.formData}
                   schema={this.schema}
                   formMeta={this.$props.formMeta}
@@ -31,7 +31,7 @@ export class RenderWrapperForm extends BeanRenderBase {
                 <button
                   class={classes('btn btn-primary', mutationSubmit?.isPending && 'btn-disabled')}
                   onClick={async () => {
-                    await this.controllerRestForm.submit();
+                    await this.controllerForm.submit();
                     this.modelFormVisible = false;
                   }}
                 >

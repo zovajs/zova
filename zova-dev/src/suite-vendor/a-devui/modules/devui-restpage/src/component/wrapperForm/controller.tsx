@@ -30,7 +30,7 @@ export class ControllerWrapperForm extends BeanControllerBase {
   schema?: SchemaObject;
   formData?: any;
 
-  controllerRestForm: ControllerForm;
+  controllerForm: ControllerForm;
 
   @Use({ injectionScope: 'host' })
   $$restResource: ControllerPageResource;

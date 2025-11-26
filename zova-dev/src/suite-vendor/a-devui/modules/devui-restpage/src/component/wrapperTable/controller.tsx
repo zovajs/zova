@@ -72,12 +72,8 @@ export class ControllerWrapperTable<T extends {} = {}> extends BeanControllerTab
     return queryDataSelect.data;
   }
 
-  get schemaBootstrap() {
-    return this.$$restResource.schemaBootstrap;
-  }
-
   get schema() {
-    return this.schemaBootstrap?.schemaRow;
+    return this.$$restResource.schemaRow;
   }
 
   async _loadData() {
