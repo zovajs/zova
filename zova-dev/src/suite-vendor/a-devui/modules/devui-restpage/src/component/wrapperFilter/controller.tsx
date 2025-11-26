@@ -29,8 +29,15 @@ export class ControllerWrapperFilter extends BeanControllerBase {
     return this.$$restResource.schemaFilter;
   }
 
-  async onSubmit(data: TypeFormOnSubmitData) {
-    const dataOld = data.value as any;
+  onSubmit(data: TypeFormOnSubmitData) {
+    this._onFilter(data.value);
+  }
+
+  onReset(data: any) {
+    this._onFilter(data);
+  }
+
+  _onFilter(dataOld: any) {
     const dataNew = {};
     for (const key in dataOld) {
       const value = dataOld[key];

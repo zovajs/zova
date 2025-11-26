@@ -27,8 +27,8 @@ export class RenderWrapperFilter extends BeanRenderBase {
         <button
           class="btn"
           onClick={() => {
-            this.controllerForm.reset();
-            this.controllerForm.submit();
+            const data = this.controllerForm.reset();
+            this.onReset(data);
           }}
         >
           {this.scope.locale.Reset()}
