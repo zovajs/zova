@@ -135,6 +135,7 @@ export class ControllerWrapperTable<T extends {} = {}> extends BeanControllerTab
       getRowId: row => cast(row).id,
       getCoreRowModel: getCoreRowModel(),
       renderFallbackValue: '--',
+      manualPagination: true,
     });
   }
 
