@@ -19,8 +19,11 @@ export interface ITableQuery {
   pageSize?: number;
 }
 
-export interface ITableRes<Entity = any> {
+export interface ITableRes<Entity = any> extends ITableResPaged {
   list: Entity[];
+}
+
+export interface ITableResPaged {
   total: string;
   pageCount: number;
   pageSize: number;

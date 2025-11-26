@@ -20,6 +20,7 @@ declare module 'zova-module-devui-restpage' {
   export interface RenderWrapperTable<T extends {} = {}> extends ControllerWrapperTable<T> {}
   export interface RenderActions<T extends {} = {}> extends ControllerWrapperTable<T> {}
   export interface RenderCreate<T extends {} = {}> extends ControllerWrapperTable<T> {}
+  export interface RenderPaged<T extends {} = {}> extends ControllerWrapperTable<T> {}
 }
 export const ZWrapperTable = defineComponent(
   <T extends {} = {}>(_props: TypeControllerWrapperTablePublicProps<T>) => {

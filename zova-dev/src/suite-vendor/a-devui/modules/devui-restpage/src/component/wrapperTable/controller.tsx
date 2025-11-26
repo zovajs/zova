@@ -5,7 +5,7 @@ import { SchemaObject } from 'openapi3-ts/oas31';
 import { cast, Use } from 'zova';
 import { Controller } from 'zova-module-a-bean';
 import { loadSchemaProperties, TypeResourceActionRowRecord, TypeResourceActionTableRecord } from 'zova-module-a-openapi';
-import { BeanControllerTableBase, BeanTableFeatureBase, ITablePaged, ITableQuery, ServiceTableCellFormat, ServiceTableFeature, TypeColumn, TypeTable, TypeTableCellFormatsMatched } from 'zova-module-a-table';
+import { BeanControllerTableBase, BeanTableFeatureBase, ITablePaged, ITableQuery, ITableResPaged, ServiceTableCellFormat, ServiceTableFeature, TypeColumn, TypeTable, TypeTableCellFormatsMatched } from 'zova-module-a-table';
 import { RenderActions } from './render.actions.jsx';
 
 export interface ControllerWrapperTableProps<T extends {} = {}> {
@@ -65,6 +65,11 @@ export class ControllerWrapperTable<T extends {} = {}> extends BeanControllerTab
   get data() {
     const queryDataSelect = this.$$restResource.getQueryDataSelect(this.query);
     return queryDataSelect.data?.list;
+  }
+
+  get paged(): ITableResPaged | undefined {
+    const queryDataSelect = this.$$restResource.getQueryDataSelect(this.query);
+    return queryDataSelect.data;
   }
 
   get schemaBootstrap() {
@@ -139,5 +144,9 @@ export class ControllerWrapperTable<T extends {} = {}> extends BeanControllerTab
 
   async onActionRow(action: keyof TypeResourceActionRowRecord, row: Row<T>) {
     return this.$$restPage.onActionRow(action, row);
+  }
+
+  gotoPage(pageNo: number) {
+    this.queryPaged.pageNo = pageNo;
   }
 }
