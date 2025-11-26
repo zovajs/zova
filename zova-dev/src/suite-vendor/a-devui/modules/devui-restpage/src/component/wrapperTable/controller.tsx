@@ -135,6 +135,10 @@ export class ControllerWrapperTable<T extends {} = {}> extends BeanControllerTab
     });
   }
 
+  _onFilter(data: any) {
+    this.queryFilterData = data;
+  }
+
   async onActionTable(action: keyof TypeResourceActionTableRecord) {
     return this.$$restPage.onActionTable(action);
   }
