@@ -13,6 +13,7 @@ import { IFormMeta } from '../../types/formMeta.js';
 import { IFormProvider } from '../../types/provider.js';
 
 export interface ControllerFormProps<TFormData extends {} = {}, TSubmitMeta = never> {
+  inline?: boolean;
   data?: TFormData;
   schema?: SchemaObject;
   zodSchema?: z.ZodObject<any>;

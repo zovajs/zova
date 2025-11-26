@@ -9,6 +9,7 @@ export class RenderWrapperFilter extends BeanRenderBase {
       <>
         <ComponentForm
           controllerRef={ref => { this.controllerForm = ref; }}
+          inline={true}
           data={this.$props.formData}
           schema={this.schema}
           formMeta={this.formMeta}
