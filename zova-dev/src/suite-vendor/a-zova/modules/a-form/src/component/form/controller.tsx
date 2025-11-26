@@ -87,6 +87,10 @@ export class ControllerForm<TFormData extends {} = {}, TSubmitMeta = never> exte
     return this.form.handleSubmit(submitMeta as any);
   }
 
+  public reset(values?: TFormData, opts?: { keepDefaultValues?: boolean }) {
+    this.form.reset(values, opts);
+  }
+
   private _handleError422(error: Error, cause: ValidationCause = 'submit') {
     const formApi = this.form;
 

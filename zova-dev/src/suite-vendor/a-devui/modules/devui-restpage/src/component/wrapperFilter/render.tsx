@@ -16,6 +16,23 @@ export class RenderWrapperFilter extends BeanRenderBase {
           formProvider={this.$props.formProvider}
           onSubmit={data => this.onSubmit(data)}
         ></ComponentForm>
+        <button
+          class="btn btn-primary"
+          onClick={() => {
+            this.controllerForm.submit();
+          }}
+        >
+          {this.scope.locale.Search()}
+        </button>
+        <button
+          class="btn"
+          onClick={() => {
+            this.controllerForm.reset();
+            this.controllerForm.submit();
+          }}
+        >
+          {this.scope.locale.Reset()}
+        </button>
       </>
     );
   }

@@ -19,7 +19,7 @@ export class RenderPaged extends BeanRenderBase {
             «
           </button>
         )}
-        <button class="join-item btn">{this.paged.pageNo}</button>
+        {this.paged.pageCount > 0 && <button class="join-item btn">{this.paged.pageNo}</button>}
         {this.paged.pageNo < this.paged.pageCount && (
           <button
             class="join-item btn"
