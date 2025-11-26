@@ -40,33 +40,33 @@ export class ControllerForm<TFormData extends {} = {}, TSubmitMeta = never> exte
   $$scopeModuleAOpenapi: ScopeModuleAOpenapi;
 
   protected async __init__() {
-    this.form = this.$useComputed(() => {
-      return this.$useForm<TFormData, TSubmitMeta>({
-        defaultValues: this.$props.data,
-        validationLogic: this.$props.validateOnDynamic !== false ? revalidateLogic(this.$props.validateOnDynamicLogic) : undefined,
-        onSubmit: async data => {
-          const [_, error] = await catchError(() => {
-            return this.$props.onSubmit?.(data);
-          });
+    // not use $useComputed
+    this.form = this.$useForm<TFormData, TSubmitMeta>({
+      defaultValues: this.$props.data,
+      validationLogic: this.$props.validateOnDynamic !== false ? revalidateLogic(this.$props.validateOnDynamicLogic) : undefined,
+      onSubmit: async data => {
+        const [_, error] = await catchError(() => {
+          return this.$props.onSubmit?.(data);
+        });
           // emit event
-          const resHandled = await this.app.meta.event.emit('a-form:formSubmission', {
-            form: this.form as any,
-            data,
-            error,
-          });
-          if (error) {
-            if (error.code === 422) {
-              this._handleError422(error);
-            } else {
-              if (!resHandled) {
-                this.$props.onShowError?.({ data, error });
-              }
+        const resHandled = await this.app.meta.event.emit('a-form:formSubmission', {
+          form: this.form as any,
+          data,
+          error,
+        });
+        if (error) {
+          if (error.code === 422) {
+            this._handleError422(error);
+          } else {
+            if (!resHandled) {
+              this.$props.onShowError?.({ data, error });
             }
-            throw error;
           }
-        },
-      });
+          throw error;
+        }
+      },
     });
+
     this.formProvider = this.$useComputed(() => {
       return deepExtend({}, this.$$scopeModuleAOpenapi.config.restResource.form?.provider, this.$props.formProvider);
     });
