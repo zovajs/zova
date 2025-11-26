@@ -82,6 +82,7 @@ export interface IZovaComponentRecord {
 /** components: end */
 /** render: begin */
 export * from '../component/restPage/render.jsx';
+export * from '../component/wrapperFilter/render.jsx';
 export * from '../component/wrapperForm/render.jsx';
 export * from '../component/wrapperTable/render.actions.jsx';
 export * from '../component/wrapperTable/render.create.jsx';
@@ -96,6 +97,11 @@ declare module 'zova' {
 declare module 'zova-module-devui-restpage' {
   
         export interface RenderRestPage {
+          /** @internal */
+          get scope(): ScopeModuleDevuiRestpage;
+        }
+
+        export interface RenderWrapperFilter {
           /** @internal */
           get scope(): ScopeModuleDevuiRestpage;
         }
@@ -128,6 +134,7 @@ declare module 'zova-module-devui-restpage' {
 /** render: end */
 /** render: begin */
 import { RenderRestPage } from '../component/restPage/render.jsx';
+import { RenderWrapperFilter } from '../component/wrapperFilter/render.jsx';
 import { RenderWrapperForm } from '../component/wrapperForm/render.jsx';
 import { RenderActions } from '../component/wrapperTable/render.actions.jsx';
 import { RenderCreate } from '../component/wrapperTable/render.create.jsx';
@@ -137,6 +144,7 @@ import 'zova';
 declare module 'zova' {
   export interface IBeanRecordLocal {
     'devui-restpage.render.restPage': RenderRestPage;
+'devui-restpage.render.wrapperFilter': RenderWrapperFilter;
 'devui-restpage.render.wrapperForm': RenderWrapperForm;
 'devui-restpage.render.actions': RenderActions;
 'devui-restpage.render.create': RenderCreate;

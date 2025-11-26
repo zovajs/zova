@@ -5,7 +5,7 @@ import { Controller } from 'zova-module-a-bean';
 export class ControllerWrapperFilter extends BeanControllerBase {
   protected async __init__() {}
 
-  protected render() {
+  protected _render() {
     return (
       <div>
         <label class="input">
