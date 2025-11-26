@@ -1,3 +1,4 @@
+import { isNilOrEmptyString } from '@cabloy/utils';
 import { BeanControllerBase, Use } from 'zova';
 import { Controller } from 'zova-module-a-bean';
 import { ControllerForm, IFormMeta, IFormProvider, TypeFormOnSubmitData } from 'zova-module-a-form';
@@ -29,6 +30,14 @@ export class ControllerWrapperFilter extends BeanControllerBase {
   }
 
   async onSubmit(data: TypeFormOnSubmitData) {
-    this.$props.onFilter?.(data.value);
+    const dataOld = data.value as any;
+    const dataNew = {};
+    for (const key in dataOld) {
+      const value = dataOld[key];
+      if (!isNilOrEmptyString(value)) {
+        dataNew[key] = value;
+      }
+    }
+    this.$props.onFilter?.(dataNew);
   }
 }
