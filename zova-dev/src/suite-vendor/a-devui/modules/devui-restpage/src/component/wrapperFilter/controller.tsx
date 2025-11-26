@@ -6,6 +6,17 @@ export class ControllerWrapperFilter extends BeanControllerBase {
   protected async __init__() {}
 
   protected render() {
-    return null;
+    return (
+      <div>
+        <label class="input">
+          Path
+          <input type="text" class="grow" />
+        </label>
+        <label class="input">
+          Path
+          <input type="text" class="grow" />
+        </label>
+      </div>
+    );
   }
 }
