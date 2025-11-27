@@ -75,7 +75,12 @@ export class BehaviorFormFieldLayout extends BeanBehaviorBase<
 
   private _patchProps_input(field: TypeFormField, props: IBehaviorPropsInputFormFieldLayout): IBehaviorPropsOutputFormFieldLayout {
     const propsPatch: IBehaviorPropsOutputFormFieldLayout = {};
-    propsPatch.class = classes(props.class, 'input', this.$options.bordered && 'input-bordered', !field.state.meta.isValid && 'input-error');
+    propsPatch.class = classes(
+      props.class,
+      !this.$options.inline && 'input',
+      !this.$options.inline && this.$options.bordered && 'input-bordered',
+      !field.state.meta.isValid && 'input-error',
+    );
     return Object.assign({}, props, propsPatch);
   }
 }
