@@ -147,7 +147,8 @@ export class ControllerWrapperTable<T extends {} = {}> extends BeanControllerTab
     return this.$$restPage.onActionRow(action, row);
   }
 
-  gotoPage(pageNo: number) {
+  async gotoPage(pageNo: number) {
     this.queryPaged.pageNo = pageNo;
+    await this._loadData();
   }
 }
