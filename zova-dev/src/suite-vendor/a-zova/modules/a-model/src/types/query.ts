@@ -36,6 +36,7 @@ export interface MyQueryMetaBase extends Record<string, unknown> {
   ssr?: QueryMetaSSR;
   persister?: QueryMetaPersister | boolean;
   disableErrorEffect?: boolean;
+  disableSuspenseOnInit?: boolean;
 }
 
 export interface MyQueryMeta extends MyQueryMetaBase {

@@ -237,7 +237,9 @@ export class BeanModelUseState extends BeanModelUseQuery {
     if (!this[SymbolUseQueries][queryHash]) {
       const useQuery = this.$useQuery(options, queryClient);
       this[SymbolUseQueries][queryHash] = useQuery;
-      useQuery.suspense();
+      if (!options.meta?.disableSuspenseOnInit) {
+        useQuery.suspense();
+      }
     }
     return this[SymbolUseQueries][queryHash];
   }
