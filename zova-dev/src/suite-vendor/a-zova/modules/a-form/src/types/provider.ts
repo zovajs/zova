@@ -4,8 +4,9 @@ import type { TypeRenderComponentProvider } from 'zova-module-a-openapi';
 
 export interface IFormProviderBehaviors {
   formField?: TypeBehaviorRecordSelectorKeysStrict<'formField'>;
-  formFieldLayout?: TypeBehaviorRecordSelectorKeys<'formFieldLayout'>;
   formFieldModel?: TypeBehaviorRecordSelectorKeys<'formFieldModel'>;
+  formFieldLayout?: TypeBehaviorRecordSelectorKeys<'formFieldLayout'>;
+  formFieldLayoutFilter?: TypeBehaviorRecordSelectorKeys<'formFieldLayout'>;
 }
 
 export interface IFormProviderComponents {
