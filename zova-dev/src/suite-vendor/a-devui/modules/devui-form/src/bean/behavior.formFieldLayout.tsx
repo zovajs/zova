@@ -25,6 +25,27 @@ export class BehaviorFormFieldLayout extends BeanBehaviorBase<
     props = this._patchProps(props);
     const vnode = next(props);
     const error = field.state.meta.errors[0] as z.ZodError | undefined;
+    if (this.$options.inline) {
+      return this._renderInline(props, vnode, field, error);
+    }
+    return this._renderBlock(props, vnode, field, error);
+  }
+
+  private _renderInline(_props: IBehaviorPropsInputFormFieldLayout, vnode: VNode, field: TypeFormField, error: z.ZodError | undefined): VNode {
+    return (
+      <label class="input">
+        {this.$options.label}
+        {vnode}
+        {!field.state.meta.isValid && (
+          <div class="label">
+            <span class="label-text-alt text-error">{error?.message}</span>
+          </div>
+        )}
+      </label>
+    );
+  }
+
+  private _renderBlock(_props: IBehaviorPropsInputFormFieldLayout, vnode: VNode, field: TypeFormField, error: z.ZodError | undefined): VNode {
     return (
       <fieldset class="fieldset">
         {!!this.$options.label && <legend class="fieldset-legend">{this.$options.label}</legend>}
