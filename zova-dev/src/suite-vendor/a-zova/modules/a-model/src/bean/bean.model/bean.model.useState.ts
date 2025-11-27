@@ -235,7 +235,9 @@ export class BeanModelUseState extends BeanModelUseQuery {
     const queryKey = this.self._forceQueryKeyPrefix(options.queryKey);
     const queryHash = hashKey(queryKey);
     if (!this[SymbolUseQueries][queryHash]) {
-      this[SymbolUseQueries][queryHash] = this.$useQuery(options, queryClient);
+      const useQuery = this.$useQuery(options, queryClient);
+      this[SymbolUseQueries][queryHash] = useQuery;
+      useQuery.suspense();
     }
     return this[SymbolUseQueries][queryHash];
   }
