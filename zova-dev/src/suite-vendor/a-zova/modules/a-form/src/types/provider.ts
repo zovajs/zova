@@ -6,7 +6,6 @@ export interface IFormProviderBehaviors {
   formField?: TypeBehaviorRecordSelectorKeysStrict<'formField'>;
   formFieldModel?: TypeBehaviorRecordSelectorKeys<'formFieldModel'>;
   formFieldLayout?: TypeBehaviorRecordSelectorKeys<'formFieldLayout'>;
-  formFieldLayoutFilter?: TypeBehaviorRecordSelectorKeys<'formFieldLayout'>;
 }
 
 export interface IFormProviderComponents {
