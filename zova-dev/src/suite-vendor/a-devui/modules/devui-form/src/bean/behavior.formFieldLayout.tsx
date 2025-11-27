@@ -33,7 +33,7 @@ export class BehaviorFormFieldLayout extends BeanBehaviorBase<
 
   private _renderInline(_props: IBehaviorPropsInputFormFieldLayout, vnode: VNode, field: TypeFormField, error: z.ZodError | undefined): VNode {
     return (
-      <label class="input">
+      <label class={classes('input', !field.state.meta.isValid && 'input-error')}>
         {this.$options.label}
         {vnode}
         {!field.state.meta.isValid && (
@@ -79,7 +79,7 @@ export class BehaviorFormFieldLayout extends BeanBehaviorBase<
       props.class,
       !this.$options.inline && 'input',
       !this.$options.inline && this.$options.bordered && 'input-bordered',
-      !field.state.meta.isValid && 'input-error',
+      !this.$options.inline && !field.state.meta.isValid && 'input-error',
     );
     return Object.assign({}, props, propsPatch);
   }
