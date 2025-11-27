@@ -22,6 +22,10 @@ export class BeanBehaviorsHolder extends BeanBase {
 
   public async initialize(options: IBehaviorsHolderOptions) {
     this.options = options;
+    this.bean._setBean('$$behaviorTag', this.options.behaviorTag);
+    // composer
+    this.composer = await this.$$beanBehavior.createComposer(this._getBehaviorRoot());
+    // watch
     const behaviors = this.options.behaviors;
     if (typeof behaviors === 'function') {
       this.$watch(
@@ -32,8 +36,6 @@ export class BeanBehaviorsHolder extends BeanBase {
         },
       );
     }
-    this.bean._setBean('$$behaviorTag', this.options.behaviorTag);
-    this.composer = await this.$$beanBehavior.createComposer(this._getBehaviorRoot());
   }
 
   protected __dispose__() {
