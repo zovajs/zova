@@ -32,8 +32,9 @@ export class BehaviorFormFieldLayout extends BeanBehaviorBase<
   }
 
   private _renderInline(_props: IBehaviorPropsInputFormFieldLayout, vnode: VNode, field: TypeFormField, error: z.ZodError | undefined): VNode {
+    const className = classes('input', this.$options.bordered && 'input-bordered', !field.state.meta.isValid && 'input-error');
     return (
-      <label class={classes('input', !field.state.meta.isValid && 'input-error')}>
+      <label class={className}>
         {this.$options.label}
         {vnode}
         {!field.state.meta.isValid && (
@@ -75,12 +76,14 @@ export class BehaviorFormFieldLayout extends BeanBehaviorBase<
 
   private _patchProps_input(field: TypeFormField, props: IBehaviorPropsInputFormFieldLayout): IBehaviorPropsOutputFormFieldLayout {
     const propsPatch: IBehaviorPropsOutputFormFieldLayout = {};
-    propsPatch.class = classes(
-      props.class,
-      !this.$options.inline && 'input',
-      !this.$options.inline && this.$options.bordered && 'input-bordered',
-      !this.$options.inline && !field.state.meta.isValid && 'input-error',
-    );
+    if (!this.$options.inline) {
+      propsPatch.class = classes(
+        props.class,
+        'input',
+        this.$options.bordered && 'input-bordered',
+        !field.state.meta.isValid && 'input-error',
+      );
+    }
     return Object.assign({}, props, propsPatch);
   }
 }
