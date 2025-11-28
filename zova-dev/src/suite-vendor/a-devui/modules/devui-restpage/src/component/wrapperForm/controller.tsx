@@ -24,9 +24,6 @@ export class ControllerWrapperForm extends BeanControllerBase {
   };
 
   formDomId: string;
-  schemaView?: SchemaObject;
-  schemaCreate?: SchemaObject;
-  schemaUpdate?: SchemaObject;
   schema?: SchemaObject;
   formData?: any;
 
@@ -40,27 +37,12 @@ export class ControllerWrapperForm extends BeanControllerBase {
 
   protected async __init__() {
     this.formDomId = useId();
-    this.schemaView = this.$useComputed(() => {
-      const querySdkView = this.$$restResource.getQuerySdkView();
-      const querySchema = this.$$restResource.getQuerySchemaOfFormView(querySdkView.data?.operationObject);
-      return querySchema?.data;
-    });
-    this.schemaCreate = this.$useComputed(() => {
-      const querySdkCreate = this.$$restResource.getQuerySdkCreate();
-      const querySchema = this.$$restResource.getQuerySchemaOfFormCreate(querySdkCreate.data?.operationObject);
-      return querySchema?.data;
-    });
-    this.schemaUpdate = this.$useComputed(() => {
-      const querySdkUpdate = this.$$restResource.getQuerySdkUpdate();
-      const querySchema = this.$$restResource.getQuerySchemaOfFormUpdate(querySdkUpdate.data?.operationObject);
-      return querySchema?.data;
-    });
     this.schema = this.$useComputed(() => {
       const formMeta = this.$props.formMeta;
-      if (formMeta.formMode === 'view') return this.schemaView;
+      if (formMeta.formMode === 'view') return this.$$restResource.schemaView;
       if (formMeta.formMode === 'edit') {
-        if (formMeta.editMode === 'create') return this.schemaCreate;
-        if (formMeta.editMode === 'update') return this.schemaUpdate;
+        if (formMeta.editMode === 'create') return this.$$restResource.schemaCreate;
+        if (formMeta.editMode === 'update') return this.$$restResource.schemaUpdate;
       }
     });
     this.formData = this.$useComputed(() => {
@@ -70,7 +52,7 @@ export class ControllerWrapperForm extends BeanControllerBase {
       }
       if (formMeta.formMode === 'edit') {
         if (formMeta.editMode === 'create') {
-          return this.$$restResource.getQueryDataDefaultValue(this.schemaCreate);
+          return this.$$restResource.getQueryDataDefaultValue(this.$$restResource.schemaCreate);
         }
         if (formMeta.editMode === 'update') {
           return this.$props.formData;
