@@ -14,9 +14,14 @@ export class InterceptorHeaders extends BeanInterceptorBase<IInterceptorOptionsH
     next: NextInterceptorRequest,
   ): Promise<AxiosRequestConfig> {
     // locale
-    const key = this.sys.env.APP_LOCALE_HEADER_KEY;
-    if (key && !config.headers![key]) {
-      config.headers![key] = this.app.meta.locale.current;
+    const keyLocale = this.sys.env.APP_LOCALE_HEADER_KEY;
+    if (keyLocale && !config.headers![keyLocale]) {
+      config.headers![keyLocale] = this.app.meta.locale.current;
+    }
+    // tz
+    const keyTz = this.sys.env.APP_TZ_HEADER_KEY;
+    if (keyTz && !config.headers![keyTz]) {
+      config.headers![keyTz] = this.app.meta.locale.tz;
     }
     // openapi schema
     if (options.openapiSchema) {

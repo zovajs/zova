@@ -45,6 +45,9 @@ export interface ZovaConfig {
     storeKey: string;
     items: Record<keyof ILocaleRecord, string>;
   };
+  tz: {
+    storeKey: string;
+  };
   layout: {
     app: {
       component: keyof TypeComponentAppRecord;

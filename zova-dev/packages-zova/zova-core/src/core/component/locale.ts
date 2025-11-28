@@ -12,9 +12,11 @@ import {
 } from '../../bean/resource/locale/type.js';
 
 const SymbolLocaleCurrent = Symbol('SymbolLocaleCurrent');
+const SymbolTzCurrent = Symbol('SymbolTzCurrent');
 
 export class AppLocale extends BeanSimple {
   private [SymbolLocaleCurrent]: Ref<string | undefined> = ref();
+  private [SymbolTzCurrent]: Ref<string | undefined> = ref();
 
   get current(): keyof ILocaleRecord {
     let locale = this[SymbolLocaleCurrent].value;
@@ -27,6 +29,19 @@ export class AppLocale extends BeanSimple {
     if (this[SymbolLocaleCurrent].value === value) return;
     this[SymbolLocaleCurrent].value = value;
     this.app.meta.cookie.setItem(this.sys.config.locale.storeKey, value);
+  }
+
+  get tz(): string {
+    let tz = this[SymbolTzCurrent].value;
+    if (!tz) tz = this.app.meta.cookie.getItem(this.sys.config.tz.storeKey);
+    if (!tz) tz = Intl.DateTimeFormat().resolvedOptions().timeZone;
+    return tz;
+  }
+
+  set tz(value: string) {
+    if (this[SymbolTzCurrent].value === value) return;
+    this[SymbolTzCurrent].value = value;
+    this.app.meta.cookie.setItem(this.sys.config.tz.storeKey, value);
   }
 
   /** @internal */

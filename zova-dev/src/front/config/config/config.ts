@@ -52,6 +52,11 @@ export default function (sys: ZovaSys) {
     },
   };
 
+  // tz
+  config.tz = {
+    storeKey: 'tz',
+  };
+
   // layout
   config.layout = {
     app: {
