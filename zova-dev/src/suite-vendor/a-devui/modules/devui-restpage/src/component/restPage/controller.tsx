@@ -18,7 +18,6 @@ export class ControllerRestPage extends BeanControllerBase implements ITableActi
   formMeta: IFormMeta;
   formProvider: IFormProvider;
   rowId?: TableIdentity;
-  formData?: any;
 
   @Use({ injectionScope: 'host' })
   $$restResource: ControllerPageResource;
@@ -32,11 +31,6 @@ export class ControllerRestPage extends BeanControllerBase implements ITableActi
     });
     this.rowId = this.$useComputed(() => {
       return this.rowCurrent?.getValue('id');
-    });
-    this.formData = this.$useComputed(() => {
-      if (!this.rowId) return;
-      const queryDataGet = this.$$restResource.getQueryDataGet(this.rowId);
-      return queryDataGet.data;
     });
   }
 

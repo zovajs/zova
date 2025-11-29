@@ -1,5 +1,6 @@
 import type { ControllerPageResource } from 'zova-module-rest-resource';
 import { SchemaObject } from 'openapi3-ts/oas31';
+import { TableIdentity } from 'table-identity';
 import { useId } from 'vue';
 import { BeanControllerBase, ModelValue, Use } from 'zova';
 import { Controller } from 'zova-module-a-bean';
@@ -7,7 +8,7 @@ import { ControllerForm, IFormMeta, IFormProvider, TypeFormOnSubmitData } from '
 import { DataMutation } from 'zova-module-a-model';
 
 export interface ControllerWrapperFormProps {
-  formData?: any;
+  rowId?: TableIdentity;
   formMeta: IFormMeta;
   formProvider?: IFormProvider;
   getMutationSubmit?: () => DataMutation | undefined;
@@ -25,6 +26,7 @@ export class ControllerWrapperForm extends BeanControllerBase {
 
   formDomId: string;
   formSchema?: SchemaObject;
+  formData?: any;
 
   controllerForm: ControllerForm;
 
@@ -37,8 +39,15 @@ export class ControllerWrapperForm extends BeanControllerBase {
   protected async __init__() {
     this.formDomId = useId();
     this.formSchema = this.$useComputed(() => {
-      return this.$$restResource.getFormSchema(this.$props.formMeta);
+      return this.$$restResource.getFormSchema(this.formMeta);
     });
+    this.formData = this.$useComputed(() => {
+      return this.$$restResource.getFormData(this.formMeta, this.rowId);
+    });
+  }
+
+  get rowId() {
+    return this.$props.rowId;
   }
 
   get formMeta() {
