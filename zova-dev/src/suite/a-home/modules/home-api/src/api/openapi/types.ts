@@ -239,6 +239,22 @@ export interface paths {
     patch?: never;
     trace?: never;
   };
+  '/api/play': {
+    parameters: {
+      query?: never;
+      header?: never;
+      path?: never;
+      cookie?: never;
+    };
+    get?: never;
+    put?: never;
+    post: operations['Play_index'];
+    delete?: never;
+    options?: never;
+    head?: never;
+    patch?: never;
+    trace?: never;
+  };
   '/api/demo/student/test': {
     parameters: {
       query?: never;
@@ -247,6 +263,38 @@ export interface paths {
       cookie?: never;
     };
     get: operations['DemoStudent_test'];
+    put?: never;
+    post?: never;
+    delete?: never;
+    options?: never;
+    head?: never;
+    patch?: never;
+    trace?: never;
+  };
+  '/api/demo/student/test3': {
+    parameters: {
+      query?: never;
+      header?: never;
+      path?: never;
+      cookie?: never;
+    };
+    get: operations['DemoStudent_test3'];
+    put?: never;
+    post?: never;
+    delete?: never;
+    options?: never;
+    head?: never;
+    patch?: never;
+    trace?: never;
+  };
+  '/api/demo/student/test2': {
+    parameters: {
+      query?: never;
+      header?: never;
+      path?: never;
+      cookie?: never;
+    };
+    get: operations['DemoStudent_test2'];
     put?: never;
     post?: never;
     delete?: never;
@@ -328,6 +376,22 @@ export interface paths {
       cookie?: never;
     };
     get: operations['TestCabloyPassport_isAuthenticated'];
+    put?: never;
+    post?: never;
+    delete?: never;
+    options?: never;
+    head?: never;
+    patch?: never;
+    trace?: never;
+  };
+  '/api/test/cabloy/passport/current': {
+    parameters: {
+      query?: never;
+      header?: never;
+      path?: never;
+      cookie?: never;
+    };
+    get: operations['TestCabloyPassport_current'];
     put?: never;
     post?: never;
     delete?: never;
@@ -1047,6 +1111,8 @@ export interface components {
       activated: boolean;
       /** @description Language */
       locale?: string | undefined;
+      /** @description Timezone */
+      tz?: string | undefined;
     };
     'a-auth.dto.auth': {
       /** @description ID */
@@ -1117,6 +1183,10 @@ export interface components {
       provider: string;
       token?: unknown;
       payload?: unknown;
+    };
+    'a-play.dto.play': {
+      args: string[];
+      projectPath: string;
     };
     'demo-student.dto.studentCreate': {
       /**
@@ -1744,7 +1814,6 @@ export interface operations {
         };
       };
     };
-    authToken: true;
   };
   HomeUserPassport_logout: {
     parameters: {
@@ -2136,6 +2205,34 @@ export interface operations {
       };
     };
   };
+  Play_index: {
+    parameters: {
+      query?: never;
+      header?: never;
+      path?: never;
+      cookie?: never;
+    };
+    requestBody: {
+      content: {
+        'application/json': components['schemas']['a-play.dto.play'];
+      };
+    };
+    responses: {
+      200: {
+        headers: {
+          [name: string]: unknown;
+        };
+        content: {
+          'application/json': {
+            code: string;
+            message: string;
+            data?: unknown;
+          };
+        };
+      };
+    };
+    authToken: true;
+  };
   DemoStudent_test: {
     parameters: {
       query?: never;
@@ -2158,6 +2255,55 @@ export interface operations {
         };
       };
     };
+    authToken: true;
+  };
+  DemoStudent_test3: {
+    parameters: {
+      query?: never;
+      header?: never;
+      path?: never;
+      cookie?: never;
+    };
+    requestBody?: never;
+    responses: {
+      200: {
+        headers: {
+          [name: string]: unknown;
+        };
+        content: {
+          'application/json': {
+            code: string;
+            message: string;
+            data?: unknown;
+          };
+        };
+      };
+    };
+    authToken: true;
+  };
+  DemoStudent_test2: {
+    parameters: {
+      query?: never;
+      header?: never;
+      path?: never;
+      cookie?: never;
+    };
+    requestBody?: never;
+    responses: {
+      200: {
+        headers: {
+          [name: string]: unknown;
+        };
+        content: {
+          'application/json': {
+            code: string;
+            message: string;
+            data?: unknown;
+          };
+        };
+      };
+    };
+    authToken: true;
   };
   DemoStudent_findMany: {
     parameters: {
@@ -2375,6 +2521,30 @@ export interface operations {
     };
     authToken: true;
   };
+  TestCabloyPassport_current: {
+    parameters: {
+      query?: never;
+      header?: never;
+      path?: never;
+      cookie?: never;
+    };
+    requestBody?: never;
+    responses: {
+      200: {
+        headers: {
+          [name: string]: unknown;
+        };
+        content: {
+          'application/json': {
+            code: string;
+            message: string;
+            data?: unknown;
+          };
+        };
+      };
+    };
+    authToken: true;
+  };
   TestRestProduct_findMany: {
     parameters: {
       query?: {
@@ -2441,7 +2611,7 @@ export interface operations {
       query?: never;
       header?: never;
       path: {
-        id: unknown;
+        id: string;
       };
       cookie?: never;
     };
@@ -2467,7 +2637,7 @@ export interface operations {
       query?: never;
       header?: never;
       path: {
-        id: unknown;
+        id: string;
       };
       cookie?: never;
     };
@@ -2493,7 +2663,7 @@ export interface operations {
       query?: never;
       header?: never;
       path: {
-        id: unknown;
+        id: string;
       };
       cookie?: never;
     };

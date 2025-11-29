@@ -87,7 +87,7 @@ export class ApiHomeUserPassport extends BeanApiBase {
   ) {
     return this.$fetch.get<any, ApiApiHomeUserPassportcurrentResponseBody>(
       ApiApiHomeUserPassportcurrentPath,
-      this.$configPrepare(OpenApiBaseURL(this.sys), options, true),
+      this.$configPrepare(OpenApiBaseURL(this.sys), options),
     );
   }
 

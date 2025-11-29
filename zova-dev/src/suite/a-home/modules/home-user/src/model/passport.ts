@@ -19,6 +19,9 @@ export class ModelPassport extends BeanModelBase {
     this.jwt = this.$useStateLocal({ queryKey: ['jwt'] });
     this.expireTime = this.$useStateLocal({ queryKey: ['expireTime'] });
     this.accessToken = this.$useStateCookie({ queryKey: ['token'] });
+    if (process.env.CLIENT) {
+      this._setLocaleTz();
+    }
   }
 
   login() {
@@ -81,8 +84,28 @@ export class ModelPassport extends BeanModelBase {
     if (process.env.CLIENT) return this.passport;
     if (!this.isAuthenticated && this.accessToken) {
       this.passport = await this.$api.homeUserPassport.current();
+      this._setLocaleTz();
     }
     return this.passport;
+  }
+
+  private _setLocaleTz() {
+    const user = this.passport?.user;
+    if (!user) return;
+    // locale
+    if (user.locale) {
+      const cookieLocale = this.app.meta.cookie.getItem(this.sys.config.locale.storeKey);
+      if (!cookieLocale) {
+        this.app.meta.locale.current = user.locale as any;
+      }
+    }
+    // tz
+    if (user.tz) {
+      const cookieTz = this.app.meta.cookie.getItem(this.sys.config.tz.storeKey);
+      if (!cookieTz) {
+        this.app.meta.locale.tz = user.tz;
+      }
+    }
   }
 
   private _setPassportJwt(data?: ApiApiHomeUserPassportloginResponseBody) {
