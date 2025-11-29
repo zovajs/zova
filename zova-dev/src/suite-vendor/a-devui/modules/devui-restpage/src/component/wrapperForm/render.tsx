@@ -5,7 +5,7 @@ import { Render } from 'zova-module-a-bean';
 @Render()
 export class RenderWrapperForm extends BeanRenderBase {
   public render() {
-    const ComponentForm = this.$zovaComponent(this.$$restResource.componentForm);
+    const ComponentForm = this.$zovaComponent(this.$$beanResource.componentForm);
     return (
       <div>
         <dialog id={this.formDomId} class="modal" open={this.modelFormVisible} onClose={() => { this.modelFormVisible = false; }}>

@@ -1,4 +1,4 @@
-import type { ControllerPageResource } from 'zova-module-rest-resource';
+import type { BeanResource } from 'zova-module-rest-resource';
 import { Row } from '@tanstack/table-core';
 import { TableIdentity } from 'table-identity';
 import { BeanControllerBase, Use } from 'zova';
@@ -19,14 +19,14 @@ export class ControllerRestPage extends BeanControllerBase implements ITableActi
   rowId?: TableIdentity;
 
   @Use({ injectionScope: 'host' })
-  $$restResource: ControllerPageResource;
+  $$beanResource: BeanResource;
 
   protected async __init__() {
     this.formMeta = this.$useComputed(() => {
       return { formMode: this.formMode, editMode: this.editMode };
     });
     this.formProvider = this.$useComputed(() => {
-      return this.$$restResource.formProvider || {};
+      return this.$$beanResource.formProvider || {};
     });
     this.rowId = this.$useComputed(() => {
       return this.rowCurrent?.getValue('id');
@@ -55,7 +55,7 @@ export class ControllerRestPage extends BeanControllerBase implements ITableActi
     } else if (action === 'delete') {
       // eslint-disable-next-line no-alert
       if (window.confirm(this.scope.locale.DeleteConfirm())) {
-        const mutation = this.$$restResource.getMutationDelete(row.id);
+        const mutation = this.$$beanResource.getMutationDelete(row.id);
         await mutation.mutateAsync();
       }
     }
