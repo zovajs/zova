@@ -66,7 +66,7 @@ export class ControllerForm<TFormData extends {} = {}, TSubmitMeta = never> exte
   }
 
   public reset(values?: TFormData, opts?: { keepDefaultValues?: boolean }): TFormData {
-    this.form.reset(values, opts);
+    this.form.reset(values ?? {} as TFormData, opts);
     return this.form.state.values;
   }
 
