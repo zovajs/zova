@@ -1,9 +1,11 @@
 import type { BeanResource } from 'zova-module-rest-resource';
 import { Row } from '@tanstack/table-core';
+import { SchemaObject } from 'openapi3-ts/oas31';
 import { TableIdentity } from 'table-identity';
+import { useId } from 'vue';
 import { BeanControllerBase, Use } from 'zova';
 import { Controller } from 'zova-module-a-bean';
-import { IFormMeta, IFormProvider, TypeEditMode, TypeFormMode } from 'zova-module-a-form';
+import { ControllerForm, IFormMeta, IFormProvider, TypeEditMode, TypeFormMode } from 'zova-module-a-form';
 import { TypeResourceActionRowRecord, TypeResourceActionTableRecord } from 'zova-module-a-openapi';
 import { ITableActionHandler } from 'zova-module-a-table';
 
@@ -16,7 +18,11 @@ export class ControllerRestPage extends BeanControllerBase implements ITableActi
   editMode?: TypeEditMode;
   formMeta: IFormMeta;
   formProvider: IFormProvider;
+  formSchema?: SchemaObject;
   rowId?: TableIdentity;
+
+  formDomId: string;
+  controllerForm: ControllerForm;
 
   @Use({ injectionScope: 'host' })
   $$beanResource: BeanResource;
@@ -28,9 +34,13 @@ export class ControllerRestPage extends BeanControllerBase implements ITableActi
     this.formProvider = this.$useComputed(() => {
       return this.$$beanResource.formProvider || {};
     });
+    this.formSchema = this.$useComputed(() => {
+      return this.$$beanResource.getFormSchema(this.formMeta);
+    });
     this.rowId = this.$useComputed(() => {
       return this.rowCurrent?.getValue('id');
     });
+    this.formDomId = useId();
   }
 
   async onActionTable(action: keyof TypeResourceActionTableRecord) {

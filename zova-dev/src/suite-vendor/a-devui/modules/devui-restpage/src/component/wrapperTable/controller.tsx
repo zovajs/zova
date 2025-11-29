@@ -4,10 +4,13 @@ import { SchemaObject } from 'openapi3-ts/oas31';
 import { cast, Use } from 'zova';
 import { Controller } from 'zova-module-a-bean';
 import { loadSchemaProperties, TypeResourceActionRowRecord, TypeResourceActionTableRecord } from 'zova-module-a-openapi';
-import { BeanControllerTableBase, BeanTableFeatureBase, ITableActionHandler, ITablePaged, ITableQuery, ITableResPaged, ServiceTableCellFormat, ServiceTableFeature, TypeColumn, TypeTable, TypeTableCellFormatsMatched } from 'zova-module-a-table';
+import { BeanControllerTableBase, BeanTableFeatureBase, ITablePaged, ITableQuery, ITableResPaged, ServiceTableCellFormat, ServiceTableFeature, TypeColumn, TypeTable, TypeTableCellFormatsMatched } from 'zova-module-a-table';
 import { RenderActions } from './render.actions.jsx';
 
-export interface ControllerWrapperTableProps<T extends {} = {}> extends ITableActionHandler<T> {}
+export interface ControllerWrapperTableProps<T extends {} = {}> {
+  onActionTable?: (action: keyof TypeResourceActionTableRecord) => Promise<any> | undefined;
+  onActionRow?: (action: keyof TypeResourceActionRowRecord, row: Row<T>) => Promise<any> | undefined;
+}
 
 @Controller()
 export class ControllerWrapperTable<T extends {} = {}> extends BeanControllerTableBase {
