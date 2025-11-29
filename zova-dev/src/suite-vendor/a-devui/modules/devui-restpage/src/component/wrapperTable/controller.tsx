@@ -4,13 +4,10 @@ import { SchemaObject } from 'openapi3-ts/oas31';
 import { cast, Use } from 'zova';
 import { Controller } from 'zova-module-a-bean';
 import { loadSchemaProperties, TypeResourceActionRowRecord, TypeResourceActionTableRecord } from 'zova-module-a-openapi';
-import { BeanControllerTableBase, BeanTableFeatureBase, ITablePaged, ITableQuery, ITableResPaged, ServiceTableCellFormat, ServiceTableFeature, TypeColumn, TypeTable, TypeTableCellFormatsMatched } from 'zova-module-a-table';
+import { BeanControllerTableBase, BeanTableFeatureBase, ITableActionHandler, ITablePaged, ITableQuery, ITableResPaged, ServiceTableCellFormat, ServiceTableFeature, TypeColumn, TypeTable, TypeTableCellFormatsMatched } from 'zova-module-a-table';
 import { RenderActions } from './render.actions.jsx';
 
-export interface ControllerWrapperTableProps<T extends {} = {}> {
-  onActionTable?: (action: keyof TypeResourceActionTableRecord) => void;
-  onActionRow?: (action: keyof TypeResourceActionRowRecord, row: Row<T>) => void;
-}
+export interface ControllerWrapperTableProps<T extends {} = {}> extends ITableActionHandler<T> {}
 
 @Controller()
 export class ControllerWrapperTable<T extends {} = {}> extends BeanControllerTableBase {
@@ -122,6 +119,16 @@ export class ControllerWrapperTable<T extends {} = {}> extends BeanControllerTab
     const self = this;
     this.table = this.$useTable({
       _features: this.features,
+      get actions() {
+        return {
+          onActionTable: (action: keyof TypeResourceActionTableRecord) => {
+            return self.$props.onActionTable?.(action);
+          },
+          onActionRow: (action: keyof TypeResourceActionRowRecord, row: Row<T>) => {
+            return self.$props.onActionRow?.(action, row);
+          },
+        };
+      },
       get schema() { return self.schema; },
       get formats() { return self.formats; },
       get data() { return self.data || []; },
