@@ -3,7 +3,7 @@ import { DeepKeys, determineFormLevelErrorSourceAndValue, FormValidationError, i
 import { SchemaObject } from 'openapi3-ts/oas31';
 import { z } from 'zod';
 import { $ZodIssue } from 'zod/v4/core';
-import { deepExtend, UseScope } from 'zova';
+import { deepEqual, deepExtend, UseScope } from 'zova';
 import { Controller } from 'zova-module-a-bean';
 import { loadSchemaProperties, schemaToZodSchema, ScopeModuleAOpenapi } from 'zova-module-a-openapi';
 import { BeanControllerFormBase } from '../../lib/beanControllerFormBase.js';
@@ -55,7 +55,8 @@ export class ControllerForm<TFormData extends {} = {}, TSubmitMeta = never> exte
     this.properties = this.$useComputed(() => {
       return loadSchemaProperties(this.schema, 'form');
     });
-    this.$watch(() => this.$props.data, () => {
+    this.$watch(() => this.$props.data, (newValue, oldValue) => {
+      if (deepEqual(newValue, oldValue)) return;
       this.reset(this.$props.data);
     });
   }
