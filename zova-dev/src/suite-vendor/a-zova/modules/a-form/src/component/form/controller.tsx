@@ -1,6 +1,7 @@
 import { catchError } from '@cabloy/utils';
 import { DeepKeys, determineFormLevelErrorSourceAndValue, FormValidationError, isGlobalFormValidationError, revalidateLogic, ValidationCause, ValidationError } from '@tanstack/vue-form';
 import { SchemaObject } from 'openapi3-ts/oas31';
+import { watch } from 'vue';
 import { z } from 'zod';
 import { $ZodIssue } from 'zod/v4/core';
 import { deepExtend, UseScope } from 'zova';
@@ -40,8 +41,39 @@ export class ControllerForm<TFormData extends {} = {}, TSubmitMeta = never> exte
   $$scopeModuleAOpenapi: ScopeModuleAOpenapi;
 
   protected async __init__() {
+    this.form = this._createForm();
+    this.formProvider = this.$useComputed(() => {
+      return deepExtend({}, this.$$scopeModuleAOpenapi.config.restResource.form?.provider, this.$props.formProvider);
+    });
+    this.schema = this.$useComputed(() => {
+      return this.$props.schema;
+    });
+    this.zodSchema = this.$useComputed(() => {
+      if (this.$props.zodSchema) return this.$props.zodSchema;
+      if (!this.$props.schema) return;
+      return schemaToZodSchema<z.ZodObject<any>>(this.$props.schema);
+    });
+    this.properties = this.$useComputed(() => {
+      return loadSchemaProperties(this.schema, 'form');
+    });
+    watch(() => this.$props.data, () => {
+      console.log(this.$props.data);
+      this.reset(this.$props.data);
+    });
+  }
+
+  public submit(submitMeta?: TSubmitMeta) {
+    return this.form.handleSubmit(submitMeta as any);
+  }
+
+  public reset(values?: TFormData, opts?: { keepDefaultValues?: boolean }): TFormData {
+    this.form.reset(values, opts);
+    return this.form.state.values;
+  }
+
+  private _createForm() {
     // not use $useComputed
-    this.form = this.$useForm<TFormData, TSubmitMeta>({
+    return this.$useForm<TFormData, TSubmitMeta>({
       defaultValues: this.$props.data,
       validationLogic: this.$props.validateOnDynamic !== false ? revalidateLogic(this.$props.validateOnDynamicLogic) : undefined,
       onSubmit: async data => {
@@ -66,30 +98,6 @@ export class ControllerForm<TFormData extends {} = {}, TSubmitMeta = never> exte
         }
       },
     });
-
-    this.formProvider = this.$useComputed(() => {
-      return deepExtend({}, this.$$scopeModuleAOpenapi.config.restResource.form?.provider, this.$props.formProvider);
-    });
-    this.schema = this.$useComputed(() => {
-      return this.$props.schema;
-    });
-    this.zodSchema = this.$useComputed(() => {
-      if (this.$props.zodSchema) return this.$props.zodSchema;
-      if (!this.$props.schema) return;
-      return schemaToZodSchema<z.ZodObject<any>>(this.$props.schema);
-    });
-    this.properties = this.$useComputed(() => {
-      return loadSchemaProperties(this.schema, 'form');
-    });
-  }
-
-  public submit(submitMeta?: TSubmitMeta) {
-    return this.form.handleSubmit(submitMeta as any);
-  }
-
-  public reset(values?: TFormData, opts?: { keepDefaultValues?: boolean }): TFormData {
-    this.form.reset(values, opts);
-    return this.form.state.values;
   }
 
   private _handleError422(error: Error, cause: ValidationCause = 'submit') {
