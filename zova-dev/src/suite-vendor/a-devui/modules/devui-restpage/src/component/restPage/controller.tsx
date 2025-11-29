@@ -1,5 +1,6 @@
 import type { ControllerPageResource } from 'zova-module-rest-resource';
 import { Row } from '@tanstack/table-core';
+import { TableIdentity } from 'table-identity';
 import { BeanControllerBase, Use } from 'zova';
 import { Controller } from 'zova-module-a-bean';
 import { IFormMeta, IFormProvider, TypeEditMode, TypeFormMode } from 'zova-module-a-form';
@@ -27,6 +28,16 @@ export class ControllerRestPage extends BeanControllerBase implements ITableActi
     this.formProvider = this.$useComputed(() => {
       return this.$$restResource.formProvider || {};
     });
+  }
+
+  get rowId(): TableIdentity | undefined {
+    return this.rowCurrent?.getValue('id');
+  }
+
+  get formData() {
+    if (!this.rowId) return;
+    const queryDataGet = this.$$restResource.getQueryDataGet(this.rowId);
+    return queryDataGet.data;
   }
 
   async onActionTable(action: keyof TypeResourceActionTableRecord) {
@@ -63,7 +74,7 @@ export class ControllerRestPage extends BeanControllerBase implements ITableActi
       return this.$$restResource.getMutationCreate() as any;
     }
     if (this.editMode === 'update') {
-      return this.$$restResource.getMutationUpdate(this.rowCurrent?.original.id) as any;
+      return this.$$restResource.getMutationUpdate(this.rowId!) as any;
     }
   }
 }
