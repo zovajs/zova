@@ -7,7 +7,7 @@ export class RenderWrapperForm extends BeanRenderBase {
     const ComponentForm = this.$zovaComponent(this.$$beanResource.componentForm);
     return (
       <ComponentForm
-        controllerRef={ref => { this.$props.onControllerForm?.(ref); }}
+        controllerRef={ref => { this.$props?.onControllerForm?.(ref); }}
         data={this.formData}
         schema={this.formSchema}
         formMeta={this.formMeta}
