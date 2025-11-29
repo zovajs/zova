@@ -1,7 +1,6 @@
 import { catchError } from '@cabloy/utils';
 import { DeepKeys, determineFormLevelErrorSourceAndValue, FormValidationError, isGlobalFormValidationError, revalidateLogic, ValidationCause, ValidationError } from '@tanstack/vue-form';
 import { SchemaObject } from 'openapi3-ts/oas31';
-import { watch } from 'vue';
 import { z } from 'zod';
 import { $ZodIssue } from 'zod/v4/core';
 import { deepExtend, UseScope } from 'zova';
@@ -56,7 +55,7 @@ export class ControllerForm<TFormData extends {} = {}, TSubmitMeta = never> exte
     this.properties = this.$useComputed(() => {
       return loadSchemaProperties(this.schema, 'form');
     });
-    watch(() => this.$props.data, () => {
+    this.$watch(() => this.$props.data, () => {
       console.log(this.$props.data);
       this.reset(this.$props.data);
     });

@@ -1,6 +1,5 @@
 import type { IDecoratorModelOptions, UseQueryOptions } from 'zova-module-a-model';
 import { mutate } from 'mutate-on-copy';
-import { watch } from 'vue';
 import { useComputed } from 'zova';
 import { BeanModelBase, Model } from 'zova-module-a-model';
 
@@ -74,7 +73,7 @@ export class ModelTabs extends BeanModelBase {
       return this._getKeepAliveInclude();
     });
     // watch
-    watch(
+    this.$watch(
       this.tabsOptions.getAffixTabs,
       value => {
         this.addAffixTabs(value);

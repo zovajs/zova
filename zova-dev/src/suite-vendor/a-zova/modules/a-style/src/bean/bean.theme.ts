@@ -1,5 +1,4 @@
 import type { IThemeBase, IThemeHandler, IThemeRecord } from '../types/index.js';
-import { watch } from 'vue';
 import { beanFullNameFromOnionName, cast, onionNameFromBeanFullName, UseScope } from 'zova';
 import { Bean } from 'zova-module-a-bean';
 import { BeanModelBase } from 'zova-module-a-model';
@@ -58,7 +57,7 @@ export class BeanTheme extends BeanModelBase {
     );
     this._updateDark();
 
-    watch(
+    this.$watch(
       () => this.darkMode,
       () => {
         this._updateDark();
@@ -66,7 +65,7 @@ export class BeanTheme extends BeanModelBase {
     );
 
     if (process.env.CLIENT) {
-      watch([() => this.name, () => this._dark], () => {
+      this.$watch([() => this.name, () => this._dark], () => {
         this._applyTheme();
       });
     }

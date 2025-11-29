@@ -25,7 +25,6 @@ export class ControllerWrapperForm extends BeanControllerBase {
 
   formDomId: string;
   formSchema?: SchemaObject;
-  formData?: any;
 
   controllerForm: ControllerForm;
 
@@ -39,9 +38,6 @@ export class ControllerWrapperForm extends BeanControllerBase {
     this.formDomId = useId();
     this.formSchema = this.$useComputed(() => {
       return this.$$restResource.getFormSchema(this.$props.formMeta);
-    });
-    this.formData = this.$useComputed(() => {
-      return this.$$restResource.getFormData(this.$props.formData, this.$props.formMeta);
     });
   }
 

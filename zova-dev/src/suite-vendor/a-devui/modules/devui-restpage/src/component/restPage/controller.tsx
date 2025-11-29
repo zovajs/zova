@@ -17,6 +17,8 @@ export class ControllerRestPage extends BeanControllerBase implements ITableActi
   editMode?: TypeEditMode;
   formMeta: IFormMeta;
   formProvider: IFormProvider;
+  rowId?: TableIdentity;
+  formData?: any;
 
   @Use({ injectionScope: 'host' })
   $$restResource: ControllerPageResource;
@@ -28,16 +30,14 @@ export class ControllerRestPage extends BeanControllerBase implements ITableActi
     this.formProvider = this.$useComputed(() => {
       return this.$$restResource.formProvider || {};
     });
-  }
-
-  get rowId(): TableIdentity | undefined {
-    return this.rowCurrent?.getValue('id');
-  }
-
-  get formData() {
-    if (!this.rowId) return;
-    const queryDataGet = this.$$restResource.getQueryDataGet(this.rowId);
-    return queryDataGet.data;
+    this.rowId = this.$useComputed(() => {
+      return this.rowCurrent?.getValue('id');
+    });
+    this.formData = this.$useComputed(() => {
+      if (!this.rowId) return;
+      const queryDataGet = this.$$restResource.getQueryDataGet(this.rowId);
+      return queryDataGet.data;
+    });
   }
 
   async onActionTable(action: keyof TypeResourceActionTableRecord) {
