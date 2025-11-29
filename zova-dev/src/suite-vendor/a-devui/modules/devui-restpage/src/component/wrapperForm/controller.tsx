@@ -1,4 +1,5 @@
 import type { ControllerPageResource } from 'zova-module-rest-resource';
+import { isNil } from '@cabloy/utils';
 import { SchemaObject } from 'openapi3-ts/oas31';
 import { TableIdentity } from 'table-identity';
 import { useId } from 'vue';
@@ -42,6 +43,10 @@ export class ControllerWrapperForm extends BeanControllerBase {
     this.formData = this.$useComputed(() => {
       return this.$$restResource.getFormData(this.formMeta, this.rowId);
     });
+    // load data
+    if (process.env.SERVER) {
+      await this._loadData();
+    }
   }
 
   get rowId() {
@@ -55,5 +60,11 @@ export class ControllerWrapperForm extends BeanControllerBase {
   async onSubmit(data: TypeFormOnSubmitData) {
     const mutationSubmit = this.$$restResource.getFormMutationSubmit(this.formMeta, this.rowId);
     await mutationSubmit?.mutateAsync(data.value as any);
+  }
+
+  async _loadData() {
+    if (isNil(this.rowId)) return;
+    const queryDataGet = this.$$restResource.getQueryDataGet(this.rowId);
+    await queryDataGet.suspense();
   }
 }
