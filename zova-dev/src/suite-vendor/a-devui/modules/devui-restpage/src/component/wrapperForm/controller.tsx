@@ -24,7 +24,7 @@ export class ControllerWrapperForm extends BeanControllerBase {
   };
 
   formDomId: string;
-  schema?: SchemaObject;
+  formSchema?: SchemaObject;
   formData?: any;
 
   controllerForm: ControllerForm;
@@ -37,27 +37,11 @@ export class ControllerWrapperForm extends BeanControllerBase {
 
   protected async __init__() {
     this.formDomId = useId();
-    this.schema = this.$useComputed(() => {
-      const formMeta = this.$props.formMeta;
-      if (formMeta.formMode === 'view') return this.$$restResource.schemaView;
-      if (formMeta.formMode === 'edit') {
-        if (formMeta.editMode === 'create') return this.$$restResource.schemaCreate;
-        if (formMeta.editMode === 'update') return this.$$restResource.schemaUpdate;
-      }
+    this.formSchema = this.$useComputed(() => {
+      return this.$$restResource.getFormSchema(this.$props.formMeta);
     });
     this.formData = this.$useComputed(() => {
-      const formMeta = this.$props.formMeta;
-      if (formMeta.formMode === 'view') {
-        return this.$props.formData;
-      }
-      if (formMeta.formMode === 'edit') {
-        if (formMeta.editMode === 'create') {
-          return this.$$restResource.getQueryDataDefaultValue(this.$$restResource.schemaCreate);
-        }
-        if (formMeta.editMode === 'update') {
-          return this.$props.formData;
-        }
-      }
+      return this.$$restResource.getFormData(this.$props.formData, this.$props.formMeta);
     });
   }
 

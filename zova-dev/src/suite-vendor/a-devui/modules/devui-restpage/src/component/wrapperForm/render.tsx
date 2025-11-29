@@ -12,13 +12,13 @@ export class RenderWrapperForm extends BeanRenderBase {
       <div>
         <dialog id={this.formDomId} class="modal" open={this.modelFormVisible} onClose={() => { this.modelFormVisible = false; }}>
           <div class="modal-box">
-            <h3 class="font-bold text-lg">{this.schema?.title}</h3>
+            <h3 class="font-bold text-lg">{this.formSchema?.title}</h3>
             <p class="py-4">
               {this.modelFormVisible && !!this.formData && (
                 <ComponentForm
                   controllerRef={ref => { this.controllerForm = ref; }}
                   data={this.formData}
-                  schema={this.schema}
+                  schema={this.formSchema}
                   formMeta={this.$props.formMeta}
                   formProvider={this.$props.formProvider}
                   onSubmit={data => this.onSubmit(data)}
