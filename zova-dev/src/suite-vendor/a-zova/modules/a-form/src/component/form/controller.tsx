@@ -56,7 +56,6 @@ export class ControllerForm<TFormData extends {} = {}, TSubmitMeta = never> exte
       return loadSchemaProperties(this.schema, 'form');
     });
     this.$watch(() => this.$props.data, () => {
-      console.log(this.$props.data);
       this.reset(this.$props.data);
     });
   }
