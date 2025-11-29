@@ -56,9 +56,9 @@ export class ControllerWrapperTable<T extends {} = {}> extends BeanControllerTab
     // table
     this._createTable();
     // load data
-    if (process.env.SERVER) {
-      await this._loadData();
-    }
+    // if (process.env.SERVER) {
+    await this._loadData();
+    // }
   }
 
   get data() {

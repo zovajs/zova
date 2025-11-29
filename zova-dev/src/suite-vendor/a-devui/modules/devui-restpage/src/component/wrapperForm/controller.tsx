@@ -44,9 +44,9 @@ export class ControllerWrapperForm extends BeanControllerBase {
       return this.$$restResource.getFormData(this.formMeta, this.rowId);
     });
     // load data
-    if (process.env.SERVER) {
-      await this._loadData();
-    }
+    // if (process.env.SERVER) {
+    await this._loadData();
+    // }
   }
 
   get rowId() {
