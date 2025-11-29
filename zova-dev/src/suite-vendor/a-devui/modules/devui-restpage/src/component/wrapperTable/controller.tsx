@@ -45,8 +45,6 @@ export class ControllerWrapperTable<T extends {} = {}> extends BeanControllerTab
     this.query = this.$useComputed(() => {
       return Object.assign({}, this.queryFilterData, this.queryPaged);
     });
-    // load data
-    await this._loadData();
     // properties
     this._loadProperties();
     // columns
@@ -57,6 +55,10 @@ export class ControllerWrapperTable<T extends {} = {}> extends BeanControllerTab
     await this._createFormats();
     // table
     this._createTable();
+    // load data
+    if (process.env.SERVER) {
+      await this._loadData();
+    }
   }
 
   get data() {
