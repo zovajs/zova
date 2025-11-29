@@ -1,3 +1,4 @@
+import { ZodMetadata } from '@cabloy/zod-openapi';
 import { DeepKeys } from '@tanstack/table-core';
 import { useStore } from '@tanstack/vue-form';
 import { SchemaObject } from 'openapi3-ts/oas31';
@@ -48,9 +49,7 @@ export class BehaviorForm<TFormData = unknown> extends BeanBehaviorBase<
     this.bean._setBean('$$behaviorForm', this);
     this.formState = useStore(this.form.store, state => state) as any;
     this.zodSchema = this.$useComputed(() => {
-      if (this.$options.zodSchema) return this.$options.zodSchema;
-      if (!this.schema) return;
-      return schemaToZodSchema<z.ZodObject<any>>(this.schema);
+      return this._getZodSchema();
     });
     this.properties = this.$useComputed(() => {
       if (this.$options.properties) return this.$options.properties;
@@ -93,13 +92,27 @@ export class BehaviorForm<TFormData = unknown> extends BeanBehaviorBase<
   }
 
   public getFieldZodSchema<K extends DeepKeys<TFormData>>(name: K) {
-    return this.zodSchema?.shape[name];
+    return ZodMetadata.getFieldSchema(this.zodSchema, name as string);
   }
 
   protected render(props: IBehaviorPropsInputForm, next: NextBehavior<IBehaviorPropsOutputForm>): VNode {
     if (!this.$options.form) return createCommentVNode();
     props = this._patchProps(props);
     return next(props);
+  }
+
+  private _getZodSchema() {
+    if (this.$options.zodSchema) return this._patchZodSchema(this.$options.zodSchema);
+    if (!this.schema) return;
+    return this._patchZodSchema(schemaToZodSchema<z.ZodObject<any>>(this.schema));
+  }
+
+  private _patchZodSchema(schema: z.ZodObject<any> | z.ZodUnion<any>) {
+    if (schema.def.type === 'object') return schema;
+    if (schema.def.type === 'union') {
+      return schema.def.options.find(item => item.def.type === 'object');
+    }
+    throw new Error('invalid zod schema');
   }
 
   private _patchProps(props: IBehaviorPropsInputForm) {
