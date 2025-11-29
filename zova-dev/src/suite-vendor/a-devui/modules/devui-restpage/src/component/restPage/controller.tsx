@@ -21,8 +21,6 @@ export class ControllerRestPage extends BeanControllerBase implements ITableActi
   $$restResource: ControllerPageResource;
 
   protected async __init__() {
-    // $$restPage
-    this.bean._setBean('$$restPage', this);
     this.formMeta = this.$useComputed(() => {
       return { formMode: this.formMode, editMode: this.editMode };
     });

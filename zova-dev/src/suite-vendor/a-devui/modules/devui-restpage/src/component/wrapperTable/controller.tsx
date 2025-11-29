@@ -1,5 +1,4 @@
 import type { ControllerPageResource } from 'zova-module-rest-resource';
-import type { ControllerRestPage } from '../restPage/controller.jsx';
 import { createColumnHelper, getCoreRowModel, Row } from '@tanstack/table-core';
 import { SchemaObject } from 'openapi3-ts/oas31';
 import { cast, Use } from 'zova';
@@ -9,7 +8,8 @@ import { BeanControllerTableBase, BeanTableFeatureBase, ITablePaged, ITableQuery
 import { RenderActions } from './render.actions.jsx';
 
 export interface ControllerWrapperTableProps<T extends {} = {}> {
-  __ignore__?: T;
+  onActionTable?: (action: keyof TypeResourceActionTableRecord) => void;
+  onActionRow?: (action: keyof TypeResourceActionRowRecord, row: Row<T>) => void;
 }
 
 @Controller()
@@ -28,9 +28,6 @@ export class ControllerWrapperTable<T extends {} = {}> extends BeanControllerTab
 
   @Use({ injectionScope: 'host' })
   $$restResource: ControllerPageResource;
-
-  @Use({ injectionScope: 'host' })
-  $$restPage: ControllerRestPage;
 
   @Use()
   $$serviceTableCellFormat: ServiceTableCellFormat;
@@ -123,7 +120,6 @@ export class ControllerWrapperTable<T extends {} = {}> extends BeanControllerTab
     const self = this;
     this.table = this.$useTable({
       _features: this.features,
-      get restPage() { return self.$$restPage; },
       get schema() { return self.schema; },
       get formats() { return self.formats; },
       get data() { return self.data || []; },
@@ -140,11 +136,11 @@ export class ControllerWrapperTable<T extends {} = {}> extends BeanControllerTab
   }
 
   async onActionTable(action: keyof TypeResourceActionTableRecord) {
-    return this.$$restPage.onActionTable(action);
+    return this.$props.onActionTable?.(action);
   }
 
   async onActionRow(action: keyof TypeResourceActionRowRecord, row: Row<T>) {
-    return this.$$restPage.onActionRow(action, row);
+    return this.$props.onActionRow?.(action, row);
   }
 
   gotoPage(pageNo: number) {

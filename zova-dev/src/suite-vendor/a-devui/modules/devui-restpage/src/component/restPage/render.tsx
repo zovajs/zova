@@ -18,7 +18,10 @@ export class RenderRestPage extends BeanRenderBase {
             }}
           ></ZWrapperForm>
         </ClientOnly>
-        <ZWrapperTable></ZWrapperTable>
+        <ZWrapperTable
+          onActionTable={action => this.onActionTable(action)}
+          onActionRow={(action, row) => this.onActionRow(action, row)}
+        ></ZWrapperTable>
       </div>
     );
   }
