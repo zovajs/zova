@@ -8,6 +8,7 @@ import { BeanControllerTableBase, BeanTableFeatureBase, ITablePaged, ITableQuery
 import { RenderActions } from './render.actions.jsx';
 
 export interface ControllerWrapperTableProps<T extends {} = {}> {
+  loadImmediate?: boolean;
   onActionTable?: (action: keyof TypeResourceActionTableRecord) => Promise<any> | undefined;
   onActionRow?: (action: keyof TypeResourceActionRowRecord, row: Row<T>) => Promise<any> | undefined;
 }
@@ -56,9 +57,9 @@ export class ControllerWrapperTable<T extends {} = {}> extends BeanControllerTab
     // table
     this._createTable();
     // load data
-    // if (process.env.SERVER) {
-    await this._loadData();
-    // }
+    if (this.$props.loadImmediate) {
+      await this._loadData();
+    }
   }
 
   get data() {

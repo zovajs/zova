@@ -10,6 +10,7 @@ export interface ControllerWrapperFormProps {
   rowId?: TableIdentity;
   formMeta: IFormMeta;
   formProvider?: IFormProvider;
+  loadImmediate?: boolean;
   onControllerForm?: (ref: ControllerForm) => void;
 }
 
@@ -31,9 +32,9 @@ export class ControllerWrapperForm extends BeanControllerBase {
       return this.$$beanResource.getFormData(this.formMeta, this.rowId);
     });
     // load data
-    // if (process.env.SERVER) {
-    await this._loadData();
-    // }
+    if (this.$props.loadImmediate) {
+      await this._loadData();
+    }
   }
 
   get rowId() {
