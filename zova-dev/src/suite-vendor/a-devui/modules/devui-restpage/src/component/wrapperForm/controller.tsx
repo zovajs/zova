@@ -5,13 +5,11 @@ import { useId } from 'vue';
 import { BeanControllerBase, ModelValue, Use } from 'zova';
 import { Controller } from 'zova-module-a-bean';
 import { ControllerForm, IFormMeta, IFormProvider, TypeFormOnSubmitData } from 'zova-module-a-form';
-import { DataMutation } from 'zova-module-a-model';
 
 export interface ControllerWrapperFormProps {
   rowId?: TableIdentity;
   formMeta: IFormMeta;
   formProvider?: IFormProvider;
-  getMutationSubmit?: () => DataMutation | undefined;
 }
 
 export interface ControllerWrapperFormModels {
