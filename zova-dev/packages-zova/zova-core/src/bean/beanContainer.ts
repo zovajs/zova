@@ -559,11 +559,13 @@ export class BeanContainer {
     if (beanComposable) {
       beanInstance = this._createBeanComposableInstance(beanComposable, args);
     } else {
-      if (BeanClass.prototype.__init__) {
-        beanInstance = new BeanClass();
-      } else {
-        beanInstance = new BeanClass(...args);
-      }
+      // always passed in args
+      beanInstance = new BeanClass(...args);
+      // if (BeanClass.prototype.__init__) {
+      //   beanInstance = new BeanClass();
+      // } else {
+      //   beanInstance = new BeanClass(...args);
+      // }
     }
     // app/ctx
     if (beanInstance instanceof BeanSimple) {
