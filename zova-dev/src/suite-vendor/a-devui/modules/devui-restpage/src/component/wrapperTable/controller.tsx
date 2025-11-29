@@ -1,4 +1,4 @@
-import type { ControllerPageResource } from 'zova-module-rest-resource';
+import type { BeanResource } from 'zova-module-rest-resource';
 import { createColumnHelper, getCoreRowModel, Row } from '@tanstack/table-core';
 import { SchemaObject } from 'openapi3-ts/oas31';
 import { cast, Use } from 'zova';
@@ -24,7 +24,7 @@ export class ControllerWrapperTable<T extends {} = {}> extends BeanControllerTab
   query: ITableQuery;
 
   @Use({ injectionScope: 'host' })
-  $$restResource: ControllerPageResource;
+  $$beanResource: BeanResource;
 
   @Use()
   $$serviceTableCellFormat: ServiceTableCellFormat;
@@ -59,21 +59,21 @@ export class ControllerWrapperTable<T extends {} = {}> extends BeanControllerTab
   }
 
   get data() {
-    const queryDataSelect = this.$$restResource.getQueryDataSelect(this.query);
+    const queryDataSelect = this.$$beanResource.getQueryDataSelect(this.query);
     return queryDataSelect.data?.list;
   }
 
   get paged(): ITableResPaged | undefined {
-    const queryDataSelect = this.$$restResource.getQueryDataSelect(this.query);
+    const queryDataSelect = this.$$beanResource.getQueryDataSelect(this.query);
     return queryDataSelect.data;
   }
 
   get schema() {
-    return this.$$restResource.schemaRow;
+    return this.$$beanResource.schemaRow;
   }
 
   async _loadData() {
-    const queryDataSelect = this.$$restResource.getQueryDataSelect(this.query);
+    const queryDataSelect = this.$$beanResource.getQueryDataSelect(this.query);
     await queryDataSelect.suspense();
   }
 
@@ -96,7 +96,7 @@ export class ControllerWrapperTable<T extends {} = {}> extends BeanControllerTab
           cell: props => props.cell.formatRender(),
         }));
       }
-      if (this.$$restResource.permissions?.row?.update || this.$$restResource.permissions?.row?.delete) {
+      if (this.$$beanResource.permissions?.row?.update || this.$$beanResource.permissions?.row?.delete) {
         columns.push(columnHelper.display({
           id: 'actions',
           header: () => this.scope.locale.TableActions(),

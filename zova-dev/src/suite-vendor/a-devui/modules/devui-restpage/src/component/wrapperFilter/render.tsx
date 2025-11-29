@@ -4,7 +4,7 @@ import { Render } from 'zova-module-a-bean';
 @Render()
 export class RenderWrapperFilter extends BeanRenderBase {
   public render() {
-    const ComponentForm = this.$zovaComponent(this.$$restResource.componentForm);
+    const ComponentForm = this.$zovaComponent(this.$$beanResource.componentForm);
     return (
       <>
         <ComponentForm

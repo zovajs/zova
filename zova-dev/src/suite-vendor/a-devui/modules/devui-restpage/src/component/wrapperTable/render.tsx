@@ -14,7 +14,7 @@ export class RenderWrapperTable extends BeanRenderBase {
 
   public render() {
     // table
-    const ComponentTable = this.$zovaComponent(this.$$restResource.componentTable);
+    const ComponentTable = this.$zovaComponent(this.$$beanResource.componentTable);
     return (
       <div>
         <ZWrapperFilter

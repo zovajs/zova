@@ -8,7 +8,7 @@ export class RenderActions<T extends {} = {}> extends BeanRenderBase {
   public renderActions(props: CellContext<T, unknown>) {
     return (
       <div class="flex gap-2">
-        {this.$$restResource.permissions?.row?.update && (
+        {this.$$beanResource.permissions?.row?.update && (
           <button
             class="btn btn-outline btn-primary"
             onClick={() => {
@@ -18,7 +18,7 @@ export class RenderActions<T extends {} = {}> extends BeanRenderBase {
             <ZIcon name="::draft"></ZIcon>
           </button>
         )}
-        {this.$$restResource.permissions?.row?.delete && (
+        {this.$$beanResource.permissions?.row?.delete && (
           <button
             class="btn btn-outline btn-error"
             onClick={() => {
