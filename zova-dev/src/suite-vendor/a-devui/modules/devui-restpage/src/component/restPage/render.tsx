@@ -35,10 +35,10 @@ export class RenderRestPage extends BeanRenderBase {
             )}
           </p>
           <div class="modal-action">
-            {this.controllerForm?.form.state.isSubmitting && <span class="loading loading-spinner text-primary"></span>}
+            {this.controllerForm?.formState.isSubmitting && <span class="loading loading-spinner text-primary"></span>}
             {this.formMeta.formMode === 'edit' && (
               <button
-                class={classes('btn btn-primary', this.controllerForm?.form.state.isSubmitting && 'btn-disabled')}
+                class={classes('btn btn-primary', this.controllerForm?.formState.isSubmitting && 'btn-disabled')}
                 onClick={async () => {
                   await this.controllerForm.submit();
                   this.formVisible = false;
@@ -48,7 +48,7 @@ export class RenderRestPage extends BeanRenderBase {
               </button>
             )}
             <button
-              class="btn"
+              class={classes('btn', this.controllerForm?.formState.isSubmitting && 'btn-disabled')}
               onClick={() => {
                 this.formVisible = false;
               }}

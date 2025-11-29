@@ -1,5 +1,5 @@
 import { catchError } from '@cabloy/utils';
-import { DeepKeys, determineFormLevelErrorSourceAndValue, FormValidationError, isGlobalFormValidationError, revalidateLogic, ValidationCause, ValidationError } from '@tanstack/vue-form';
+import { DeepKeys, determineFormLevelErrorSourceAndValue, FormValidationError, isGlobalFormValidationError, revalidateLogic, useStore, ValidationCause, ValidationError } from '@tanstack/vue-form';
 import { SchemaObject } from 'openapi3-ts/oas31';
 import { z } from 'zod';
 import { $ZodIssue } from 'zod/v4/core';
@@ -31,6 +31,7 @@ export class ControllerForm<TFormData extends {} = {}, TSubmitMeta = never> exte
   static $propsDefault = {};
 
   form: TypeForm<TFormData, TSubmitMeta>;
+  formState: TypeForm<TFormData>['state'];
   formProvider: IFormProvider;
   schema: SchemaObject | undefined;
   zodSchema: z.ZodObject<any> | undefined;
@@ -41,6 +42,7 @@ export class ControllerForm<TFormData extends {} = {}, TSubmitMeta = never> exte
 
   protected async __init__() {
     this.form = this._createForm();
+    this.formState = useStore(this.form.store, state => state) as any;
     this.formProvider = this.$useComputed(() => {
       return deepExtend({}, this.$$scopeModuleAOpenapi.config.restResource.form?.provider, this.$props.formProvider);
     });
