@@ -4,7 +4,6 @@ import { TableIdentity } from 'table-identity';
 import { BeanControllerBase, Use } from 'zova';
 import { Controller } from 'zova-module-a-bean';
 import { IFormMeta, IFormProvider, TypeEditMode, TypeFormMode } from 'zova-module-a-form';
-import { DataMutation } from 'zova-module-a-model';
 import { TypeResourceActionRowRecord, TypeResourceActionTableRecord } from 'zova-module-a-openapi';
 import { ITableActionHandler } from 'zova-module-a-table';
 
@@ -59,16 +58,6 @@ export class ControllerRestPage extends BeanControllerBase implements ITableActi
         const mutation = this.$$restResource.getMutationDelete(row.id);
         await mutation.mutateAsync();
       }
-    }
-  }
-
-  getMutationSubmit(): DataMutation | undefined {
-    if (this.formMode !== 'edit') return;
-    if (this.editMode === 'create') {
-      return this.$$restResource.getMutationCreate() as any;
-    }
-    if (this.editMode === 'update') {
-      return this.$$restResource.getMutationUpdate(this.rowId!) as any;
     }
   }
 }

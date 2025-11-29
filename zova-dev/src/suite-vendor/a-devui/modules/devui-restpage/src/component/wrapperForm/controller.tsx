@@ -55,7 +55,7 @@ export class ControllerWrapperForm extends BeanControllerBase {
   }
 
   async onSubmit(data: TypeFormOnSubmitData) {
-    const mutationSubmit = this.$props.getMutationSubmit?.();
+    const mutationSubmit = this.$$restResource.getFormMutationSubmit(this.formMeta, this.rowId);
     await mutationSubmit?.mutateAsync(data.value as any);
   }
 }

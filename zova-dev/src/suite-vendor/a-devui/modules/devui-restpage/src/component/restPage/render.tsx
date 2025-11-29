@@ -13,9 +13,6 @@ export class RenderRestPage extends BeanRenderBase {
             rowId={this.rowId}
             formMeta={this.formMeta}
             formProvider={this.formProvider}
-            getMutationSubmit={() => {
-              return this.getMutationSubmit();
-            }}
           ></ZWrapperForm>
         </ClientOnly>
         <ZWrapperTable
