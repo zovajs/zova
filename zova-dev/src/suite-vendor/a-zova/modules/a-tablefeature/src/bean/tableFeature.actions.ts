@@ -1,13 +1,17 @@
-import { RowData, Table } from '@tanstack/table-core';
-import { BeanTableFeatureBase, IDecoratorTableFeatureOptions, ITableActionHandler, TableFeature } from 'zova-module-a-table';
+import { Row, RowData, Table } from '@tanstack/table-core';
+import { BeanTableFeatureBase, IDecoratorTableFeatureOptions, ITableActionHandler, ITableActionHandlerRow, ITableActionHandlerTable, TableFeature } from 'zova-module-a-table';
 
 export interface TableFeatureActionsOptions<TData extends RowData> {
   actions?: ITableActionHandler<TData>;
 }
 
-export interface TableFeatureActionsInstance<_TData extends RowData> {}
+export interface TableFeatureActionsInstance<TData extends RowData> {
+  actions?: ITableActionHandlerTable<TData>;
+}
 
-export interface TableFeatureActionsRow<_TData extends RowData> {}
+export interface TableFeatureActionsRow<TData extends RowData> {
+  actions?: ITableActionHandlerRow<TData>;
+}
 
 export interface TableFeatureActionsColumn<_TData extends RowData, _TValue> {}
 
@@ -39,5 +43,35 @@ export class TableFeatureActions extends BeanTableFeatureBase {
     return {
       actions: undefined,
     } as TableFeatureActionsOptions<TData>;
+  }
+
+  createTable<TData extends RowData>(table: Table<TData>): void {
+    Object.defineProperty(table, 'actions', {
+      get() {
+        return {
+          create: () => {
+            table.options.actions?.onActionTable?.('create');
+          },
+        };
+      },
+    });
+  }
+
+  createRow<TData extends RowData>(row: Row<TData>, table: Table<TData>): void {
+    Object.defineProperty(row, 'actions', {
+      get() {
+        return {
+          view: () => {
+            table.options.actions?.onActionRow?.('view', row);
+          },
+          update: () => {
+            table.options.actions?.onActionRow?.('update', row);
+          },
+          delete: () => {
+            table.options.actions?.onActionRow?.('delete', row);
+          },
+        };
+      },
+    });
   }
 }
