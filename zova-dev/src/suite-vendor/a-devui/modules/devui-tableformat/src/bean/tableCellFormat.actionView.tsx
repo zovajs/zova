@@ -13,8 +13,9 @@ export class TableCellFormatActionView extends BeanBase implements ITableCellFor
       <a
         class="hover:text-blue-500"
         href="#"
-        onClick={() => {
-          props.table.options.restPage?.onActionRow('view', props.row);
+        onClick={e => {
+          e.stopPropagation();
+          props.table.options.actions?.onActionRow('view', props.row);
         }}
       >
         {value}

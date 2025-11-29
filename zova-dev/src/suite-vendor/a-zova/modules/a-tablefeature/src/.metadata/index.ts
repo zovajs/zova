@@ -1,17 +1,17 @@
 /* eslint-disable */
 /** tableFeature: begin */
+export * from '../bean/tableFeature.actions.js';
 export * from '../bean/tableFeature.format.js';
-export * from '../bean/tableFeature.restPage.js';
 export * from '../bean/tableFeature.schema.js';
+import { ITableFeatureOptionsActions } from '../bean/tableFeature.actions.js';
 import { ITableFeatureOptionsFormat } from '../bean/tableFeature.format.js';
-import { ITableFeatureOptionsRestPage } from '../bean/tableFeature.restPage.js';
 import { ITableFeatureOptionsSchema } from '../bean/tableFeature.schema.js';
 import 'zova-module-a-table';
 declare module 'zova-module-a-table' {
   
     export interface ITableFeatureRecord {
-      'a-tablefeature:format': ITableFeatureOptionsFormat;
-'a-tablefeature:restPage': ITableFeatureOptionsRestPage;
+      'a-tablefeature:actions': ITableFeatureOptionsActions;
+'a-tablefeature:format': ITableFeatureOptionsFormat;
 'a-tablefeature:schema': ITableFeatureOptionsSchema;
     }
 
@@ -19,6 +19,17 @@ declare module 'zova-module-a-table' {
 }
 declare module 'zova-module-a-tablefeature' {
   
+        export interface TableFeatureActions {
+          /** @internal */
+          get scope(): ScopeModuleATablefeature;
+        }
+
+        export interface TableFeatureActions {
+          get $beanFullName(): 'a-tablefeature.tableFeature.actions';
+          get $onionName(): 'a-tablefeature:actions';
+          get $onionOptions(): ITableFeatureOptionsActions;
+        }
+
         export interface TableFeatureFormat {
           /** @internal */
           get scope(): ScopeModuleATablefeature;
@@ -28,17 +39,6 @@ declare module 'zova-module-a-tablefeature' {
           get $beanFullName(): 'a-tablefeature.tableFeature.format';
           get $onionName(): 'a-tablefeature:format';
           get $onionOptions(): ITableFeatureOptionsFormat;
-        }
-
-        export interface TableFeatureRestPage {
-          /** @internal */
-          get scope(): ScopeModuleATablefeature;
-        }
-
-        export interface TableFeatureRestPage {
-          get $beanFullName(): 'a-tablefeature.tableFeature.restPage';
-          get $onionName(): 'a-tablefeature:restPage';
-          get $onionOptions(): ITableFeatureOptionsRestPage;
         }
 
         export interface TableFeatureSchema {
@@ -54,14 +54,14 @@ declare module 'zova-module-a-tablefeature' {
 }
 /** tableFeature: end */
 /** tableFeature: begin */
+import { TableFeatureActions } from '../bean/tableFeature.actions.js';
 import { TableFeatureFormat } from '../bean/tableFeature.format.js';
-import { TableFeatureRestPage } from '../bean/tableFeature.restPage.js';
 import { TableFeatureSchema } from '../bean/tableFeature.schema.js';
 import 'zova';
 declare module 'zova' {
   export interface IBeanRecordLocal {
-    'a-tablefeature.tableFeature.format': TableFeatureFormat;
-'a-tablefeature.tableFeature.restPage': TableFeatureRestPage;
+    'a-tablefeature.tableFeature.actions': TableFeatureActions;
+'a-tablefeature.tableFeature.format': TableFeatureFormat;
 'a-tablefeature.tableFeature.schema': TableFeatureSchema;
   }
 }

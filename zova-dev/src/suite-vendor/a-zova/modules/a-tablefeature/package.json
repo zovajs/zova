@@ -32,8 +32,8 @@
   "zovaModule": {
     "onionsConfig": {
       "tableFeature": {
+        "actions": {},
         "format": {},
-        "restPage": {},
         "schema": {}
       }
     }
