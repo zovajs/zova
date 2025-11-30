@@ -6,7 +6,8 @@ import { __ThisModule__ } from '../../.metadata/this.js';
 export class BeanModelLast extends BeanBase {
   public selector?: string;
 
-  protected async __init__(selector?: string) {
+  constructor(selector?: string) {
+    super();
     this.selector = selector;
   }
 

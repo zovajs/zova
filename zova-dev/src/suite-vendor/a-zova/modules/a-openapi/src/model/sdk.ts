@@ -20,7 +20,6 @@ export class ModelSdk extends BeanModelBase {
   }
 
   protected async __init__(locale: keyof ILocaleRecord) {
-    super.__init__(locale);
     if (!locale) throw new Error('locale not specified');
   }
 
