@@ -14,9 +14,21 @@ export interface ISchemaObjectExtensionFieldRest {
   form?: Omit<ISchemaObjectExtensionFieldRest, 'table' | 'form'>;
 }
 
+export interface ISchemaObjectExtensionFieldFilterCapabilities {
+  where?: boolean;
+  // filter?: boolean;
+  order?: boolean;
+  // group?: boolean;
+}
+
+export interface ISchemaObjectExtensionFieldFilter {
+  capabilities?: ISchemaObjectExtensionFieldFilterCapabilities;
+}
+
 export interface ISchemaObjectExtensionField {
   key?: string;
   rest?: ISchemaObjectExtensionFieldRest;
+  filter?: ISchemaObjectExtensionFieldFilter;
 }
 
 declare module 'openapi3-ts/oas30' {
