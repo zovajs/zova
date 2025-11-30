@@ -28,7 +28,7 @@ export class ControllerWrapperFilter extends BeanControllerBase {
   }
 
   get schema() {
-    return this.$$beanResource.schemaFilter;
+    return this.$$beanResource.schemaWhere;
   }
 
   onSubmit(data: TypeFormOnSubmitData) {
