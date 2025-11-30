@@ -21,7 +21,8 @@ export class BeanBehaviorBase<
   @Use({ injectionScope: 'host' })
   $$behaviorTag: IBehaviorTag;
 
-  protected async __init__(options: OPTIONS) {
+  constructor(options: OPTIONS) {
+    super();
     this.$options = options;
   }
 

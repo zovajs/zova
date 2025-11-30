@@ -44,8 +44,7 @@ export class BehaviorForm<TFormData = unknown> extends BeanBehaviorBase<
   @UseScope()
   $$scopeModuleAOpenapi: ScopeModuleAOpenapi;
 
-  protected async __init__(options: IBehaviorOptionsForm) {
-    super.__init__(options);
+  protected async __init__() {
     this.bean._setBean('$$behaviorForm', this);
     this.formState = useStore(this.form.store, state => state) as any;
     this.zodSchema = this.$useComputed(() => {

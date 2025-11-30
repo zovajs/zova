@@ -29,7 +29,6 @@ export class BehaviorFormField extends BeanBehaviorBase<
   $$behaviorForm: BehaviorForm;
 
   protected async __init__(options: IBehaviorOptionsFormField) {
-    super.__init__(options);
     // provide
     this.bean._setBean('$$behaviorFormField', this);
     // field

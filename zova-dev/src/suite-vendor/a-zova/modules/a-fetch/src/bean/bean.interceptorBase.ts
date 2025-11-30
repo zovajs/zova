@@ -11,7 +11,8 @@ export class BeanInterceptorBase<
   protected $beanFetch: BeanFetch;
   protected $options: T;
 
-  protected async __init__(beanFetch: BeanFetch, options: T) {
+  constructor(beanFetch: BeanFetch, options: T) {
+    super();
     this.$beanFetch = beanFetch;
     this.$options = options;
   }

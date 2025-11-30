@@ -21,8 +21,7 @@ export class InterceptorJwt extends BeanInterceptorBase<IInterceptorOptionsJwt> 
   private _beanJwtAdapter: IJwtAdapter;
   private _refreshAuthTokenPromise?: Promise<IJwtInfo>;
 
-  protected async __init__(beanFetch: BeanFetch, options: IInterceptorOptionsJwt) {
-    super.__init__(beanFetch, options);
+  protected async __init__(_beanFetch: BeanFetch, options: IInterceptorOptionsJwt) {
     const jwtAdapter = options.jwtAdapter || this.scope.config.jwtAdapter;
     const beanFullName = jwtAdapter.replace(':', '.service.');
     // singleton
