@@ -32,11 +32,11 @@ export class BeanModelUseQuery extends BeanModelQuery {
     const optionsDefault: any = {};
     if (!cast(options).meta?.disableErrorEffect) {
       optionsDefault.throwOnError = (error, query) => {
-        let errorMessage = cast(options).meta?.errorMessage;
-        if (typeof errorMessage === 'function') {
-          errorMessage = errorMessage(error, query);
+        let errorInfo = cast(options).meta?.errorInfo;
+        if (typeof errorInfo === 'function') {
+          errorInfo = errorInfo(error, query);
         }
-        this.$errorHandler(error, errorMessage ?? 'useQuery');
+        this.$errorHandler(error, errorInfo ?? 'useQuery');
         return false;
       };
     }

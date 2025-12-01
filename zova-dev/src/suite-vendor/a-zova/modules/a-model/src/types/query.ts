@@ -40,11 +40,11 @@ export interface MyQueryMetaBase extends Record<string, unknown> {
 }
 
 export interface MyQueryMeta extends MyQueryMetaBase {
-  errorMessage?: ((error, query) => string) | string;
+  errorInfo?: ((error, query) => string) | string;
 }
 
 export interface MyMutationMeta extends MyQueryMetaBase {
-  errorMessage?: ((error, variables, context) => string) | string;
+  errorInfo?: ((error, variables, context) => string) | string;
 }
 
 export interface QueryMetaSSR {
