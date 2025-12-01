@@ -2,6 +2,7 @@ import { z } from 'zod';
 import { Use, usePrepareArg } from 'zova';
 import { Controller } from 'zova-module-a-bean';
 import { BeanControllerPageFormBase, TypeForm } from 'zova-module-a-form';
+import { $QueryAutoLoad } from 'zova-module-a-model';
 import { ModelSdk } from 'zova-module-a-openapi';
 import { ApiSchemaTestSsrDtoTestBodyPartial } from 'zova-module-home-api';
 import { ModelTest } from '../../model/test.js';
@@ -36,9 +37,8 @@ export class ControllerPageToolOne extends BeanControllerPageFormBase {
   protected async __init__() {
     if (this.$query.api) {
       // sdk
-      const querySdk = this.$$modelSdk.getSdk(this.$query.api, this.$query.apiMethod as any)!;
-      await querySdk.suspense();
-      console.log('sdk: ', querySdk.data);
+      const querySdk = await $QueryAutoLoad(() => this.$$modelSdk.getSdk(this.$query.api, this.$query.apiMethod as any));
+      console.log('sdk: ', querySdk?.data);
       // form
       this.form = this.$useForm({
         defaultValues: { name: 'ss' } as ApiSchemaTestSsrDtoTestBodyPartial,
