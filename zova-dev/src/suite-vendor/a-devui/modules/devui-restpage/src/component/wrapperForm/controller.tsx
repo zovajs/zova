@@ -11,7 +11,6 @@ export interface ControllerWrapperFormProps {
   rowId?: TableIdentity;
   formMeta: IFormMeta;
   formProvider?: IFormProvider;
-  loadImmediate?: boolean;
   onControllerForm?: (ref: ControllerForm) => void;
 }
 

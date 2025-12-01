@@ -9,7 +9,6 @@ import { BeanControllerTableBase, BeanTableFeatureBase, ITablePaged, ITableQuery
 import { RenderActions } from './render.actions.jsx';
 
 export interface ControllerWrapperTableProps<T extends {} = {}> {
-  loadImmediate?: boolean;
   onActionTable?: (action: keyof TypeResourceActionTableRecord) => Promise<any> | undefined;
   onActionRow?: (action: keyof TypeResourceActionRowRecord, row: Row<T>) => Promise<any> | undefined;
 }
