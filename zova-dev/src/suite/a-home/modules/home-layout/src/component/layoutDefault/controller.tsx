@@ -1,6 +1,7 @@
 import type { ModelTabsOptions } from 'zova-module-a-tabs';
 import { BeanControllerBase, Use, UseScope } from 'zova';
 import { Controller } from 'zova-module-a-bean';
+import { $QueryAutoLoad } from 'zova-module-a-model';
 import { ModelTabs, ScopeModuleATabs } from 'zova-module-a-tabs';
 import { ModelPassport } from 'zova-module-home-user';
 import { ModelMenu } from '../../model/menu.js';
@@ -33,8 +34,7 @@ export class ControllerLayoutDefault extends BeanControllerBase {
       await this.$$modelPassport.ensurePassport();
     }
     // menu
-    const queryMenus = this.$$modelMenu.retrieveMenus();
-    await queryMenus.suspense();
+    await $QueryAutoLoad(() => this.$$modelMenu.retrieveMenus());
   }
 
   private async _initTabs() {
