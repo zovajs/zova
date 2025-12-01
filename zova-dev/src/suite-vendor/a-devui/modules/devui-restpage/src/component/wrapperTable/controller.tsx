@@ -3,6 +3,7 @@ import { createColumnHelper, getCoreRowModel, Row } from '@tanstack/table-core';
 import { SchemaObject } from 'openapi3-ts/oas31';
 import { cast, Use } from 'zova';
 import { Controller } from 'zova-module-a-bean';
+import { $QueryAutoLoad } from 'zova-module-a-model';
 import { loadSchemaProperties, TypeResourceActionRowRecord, TypeResourceActionTableRecord } from 'zova-module-a-openapi';
 import { BeanControllerTableBase, BeanTableFeatureBase, ITablePaged, ITableQuery, ITableResPaged, ServiceTableCellFormat, ServiceTableFeature, TypeColumn, TypeTable, TypeTableCellFormatsMatched } from 'zova-module-a-table';
 import { RenderActions } from './render.actions.jsx';
@@ -57,28 +58,23 @@ export class ControllerWrapperTable<T extends {} = {}> extends BeanControllerTab
     // table
     this._createTable();
     // load data
-    if (this.$props.loadImmediate) {
-      await this._loadData();
-    }
+    await $QueryAutoLoad(() => this.queryData);
+  }
+
+  get queryData() {
+    return this.$$beanResource.getQueryDataSelect(this.query);
   }
 
   get data() {
-    const queryDataSelect = this.$$beanResource.getQueryDataSelect(this.query);
-    return queryDataSelect.data?.list;
+    return this.queryData.data?.list;
   }
 
   get paged(): ITableResPaged | undefined {
-    const queryDataSelect = this.$$beanResource.getQueryDataSelect(this.query);
-    return queryDataSelect.data;
+    return this.queryData.data;
   }
 
   get schema() {
     return this.$$beanResource.schemaRow;
-  }
-
-  async _loadData() {
-    const queryDataSelect = this.$$beanResource.getQueryDataSelect(this.query);
-    await queryDataSelect.suspense();
   }
 
   _loadProperties() {

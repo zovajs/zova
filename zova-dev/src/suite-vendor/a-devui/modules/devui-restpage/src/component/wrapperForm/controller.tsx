@@ -5,6 +5,7 @@ import { TableIdentity } from 'table-identity';
 import { BeanControllerBase, Use } from 'zova';
 import { Controller } from 'zova-module-a-bean';
 import { ControllerForm, IFormMeta, IFormProvider, TypeFormOnSubmitData } from 'zova-module-a-form';
+import { $QueryAutoLoad } from 'zova-module-a-model';
 
 export interface ControllerWrapperFormProps {
   rowId?: TableIdentity;
@@ -32,9 +33,7 @@ export class ControllerWrapperForm extends BeanControllerBase {
       return this.$$beanResource.getFormData(this.formMeta, this.rowId);
     });
     // load data
-    if (this.$props.loadImmediate) {
-      await this._loadData();
-    }
+    await $QueryAutoLoad(() => this.queryData);
   }
 
   get rowId() {
@@ -45,14 +44,13 @@ export class ControllerWrapperForm extends BeanControllerBase {
     return this.$props.formMeta;
   }
 
+  get queryData() {
+    if (isNil(this.rowId)) return;
+    return this.$$beanResource.getQueryDataGet(this.rowId);
+  }
+
   async onSubmit(data: TypeFormOnSubmitData) {
     const mutationSubmit = this.$$beanResource.getFormMutationSubmit(this.formMeta, this.rowId);
     await mutationSubmit?.mutateAsync(data.value as any);
-  }
-
-  async _loadData() {
-    if (isNil(this.rowId)) return;
-    const queryDataGet = this.$$beanResource.getQueryDataGet(this.rowId);
-    await queryDataGet.suspense();
   }
 }
