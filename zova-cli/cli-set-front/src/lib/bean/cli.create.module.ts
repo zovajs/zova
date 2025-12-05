@@ -20,6 +20,8 @@ export class CliCreateModule extends BeanCliBase {
     const { argv } = this.context;
     // super
     await super.execute();
+    // noformat
+    argv.noformat = true;
     // suite name/info
     const suiteName = argv.suite;
     if (suiteName) {
@@ -72,7 +74,9 @@ export class CliCreateModule extends BeanCliBase {
       boilerplatePath: 'create/module/boilerplate',
     });
     // tools.deps
-    await this.helper.invokeCli([':tools:deps'], { cwd: argv.projectPath });
+    if (!argv.vscode) {
+      await this.helper.invokeCli([':tools:deps'], { cwd: argv.projectPath });
+    }
     // pnpm install
     if (!argv.vscode && !argv.ci) {
       await this.helper.pnpmInstall();
