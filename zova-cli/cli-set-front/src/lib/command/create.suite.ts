@@ -17,14 +17,6 @@ export default {
           },
           required: true,
         },
-        description: {
-          type: 'input',
-          message: 'suite description',
-        },
-        author: {
-          type: 'input',
-          message: 'suite author',
-        },
       },
     },
   },

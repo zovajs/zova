@@ -30,14 +30,6 @@ export default {
           type: 'input',
           message: 'suite name',
         },
-        description: {
-          type: 'input',
-          message: 'module description',
-        },
-        author: {
-          type: 'input',
-          message: 'module author',
-        },
       },
     },
   },
