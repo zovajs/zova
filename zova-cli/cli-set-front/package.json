@@ -46,7 +46,7 @@
     "postpack": "clean-package restore"
   },
   "dependencies": {
-    "@cabloy/cli": "^3.0.64",
+    "@cabloy/cli": "^3.0.67",
     "@cabloy/extend": "^3.1.0",
     "@cabloy/module-info": "^1.3.31",
     "@cabloy/openapi-typescript": "^7.9.2",
