@@ -150,8 +150,7 @@ export class AppResource {
   }
 
   _parseModuleBelong(module, beanClass, virtual) {
-    // not set when virtual
-    if (virtual) return;
+    if (!virtual) return module;
     // check parent
     let moduleBelong;
     let parent = Object.getPrototypeOf(beanClass);
@@ -162,10 +161,6 @@ export class AppResource {
         break;
       }
       parent = Object.getPrototypeOf(parent);
-    }
-    // set to current when parent not set
-    if (!moduleBelong) {
-      moduleBelong = module;
     }
     return moduleBelong;
   }
