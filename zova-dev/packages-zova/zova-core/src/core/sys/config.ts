@@ -26,7 +26,6 @@ export interface ZovaConfig {
     title: string;
     description: string;
     version: string;
-    publicPath: string;
   };
   api: {
     baseURL: string;

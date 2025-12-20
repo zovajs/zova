@@ -24,7 +24,6 @@ export default function (sys: ZovaSys) {
     title: env.APP_TITLE,
     description: env.APP_DESCRIPTION,
     version: env.APP_VERSION,
-    publicPath: env.APP_PUBLIC_PATH,
   };
 
   // api

@@ -55,7 +55,7 @@ export class SysRouter extends BeanBase {
         : this.sys.env.ROUTER_MODE === 'history'
           ? createWebHistory
           : createWebHashHistory;
-      const routeBase = (process.env.SERVER || this.sys.env.ROUTER_MODE === 'history') ? this.sys.config.app.publicPath : undefined;
+      const routeBase = (process.env.SERVER || this.sys.env.ROUTER_MODE === 'history') ? this.sys.env.APP_PUBLIC_PATH : undefined;
       options.history = createHistory(routeBase);
     }
     // create
