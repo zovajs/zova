@@ -6,7 +6,7 @@ import { BeanFetch } from 'zova-module-a-fetch';
 import { IOpenapiSchema, IOpenapiSchemaBootstrap } from '../types/schema.js';
 import { IOpenapiSdkItem, SymbolOpenapiSchemaName, TypeRequestMethod } from '../types/sdk.js';
 
-const PATH_PARAM_RE = /\{([^{}/]+)\}/g;
+// const PATH_PARAM_RE = /\{([^{}/]+)\}/g;
 
 @Sys()
 export class SysSdk extends BeanBase {
@@ -65,16 +65,16 @@ export class SysSdk extends BeanBase {
     const paths = data.doc.paths;
     if (paths) {
       for (const key in paths) {
-        const path = key.replace(PATH_PARAM_RE, ':$1');
-        if (!this.sdks[path]) this.sdks[path] = shallowReactive({});
+        // const path = key.replace(PATH_PARAM_RE, ':$1');
+        if (!this.sdks[api2]) this.sdks[api2] = shallowReactive({});
         for (const method in paths[key]) {
-          this.sdks[path][method] = {
+          this.sdks[api2][method] = {
             schemas: schemaNames,
             operationObject: paths[key][method],
             meta: data.meta,
           };
           if ((data as IOpenapiSchemaBootstrap).api) {
-            this.sdks[path][method].api = (data as IOpenapiSchemaBootstrap).api;
+            this.sdks[api2][method].api = (data as IOpenapiSchemaBootstrap).api;
           }
         }
       }
