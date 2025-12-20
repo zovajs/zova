@@ -72,7 +72,7 @@ export class CtxSSR extends BeanSimple {
     this.metaStore = this.bean._newBeanSimple(CtxSSRMetaStore, false);
     // fix: flash on page load
     if (process.env.DEV && process.env.CLIENT && this.isRuntimeSsrPreHydration) {
-      this.ctx.meta.$ssr.onHydrated(() => {
+      this.onHydrated(() => {
         document.querySelectorAll('style[vite-css-module-id]').forEach(node => node.remove());
       });
     }
@@ -145,7 +145,7 @@ export class CtxSSR extends BeanSimple {
   }
 
   handleDirectOrOnHydrated(fn: Functionable) {
-    if (process.env.CLIENT && this.ctx.meta.$ssr.isRuntimeSsrPreHydration) {
+    if (process.env.CLIENT && this.isRuntimeSsrPreHydration) {
       this.onHydrated(fn);
     } else {
       return fn();
