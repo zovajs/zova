@@ -1,4 +1,5 @@
 import type { ComponentInternalInstance, VNode } from 'vue';
+import type { ZovaConfigEnv } from 'zova';
 import type { CtxSSR } from '../lib/ssr.js';
 import 'zova';
 
@@ -42,7 +43,9 @@ export interface SSRContextMeta {
   renderError: ErrorSSR | string;
 }
 
-export interface SSRContextState {}
+export interface SSRContextState {
+  envClient?: ZovaConfigEnv;
+}
 export interface SSRContextStateDefer {}
 
 // from: quasar/dist/types/meta.d.ts
