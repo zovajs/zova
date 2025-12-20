@@ -8,7 +8,8 @@
       "monkey": true
     },
     "dependencies": {
-      "a-model": "5.0.0"
+      "a-model": "5.0.0",
+      "a-ssr": "5.0.0"
     }
   },
   "description": "router",

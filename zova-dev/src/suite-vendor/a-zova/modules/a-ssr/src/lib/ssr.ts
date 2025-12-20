@@ -1,23 +1,16 @@
 import type { ComponentInternalInstance, Ref, VNode } from 'vue';
 import type { Functionable } from 'zova';
-import type {
-  OnHydratePropHasMismatch,
-  OnHydratePropHasMismatchResult,
-  SSRContext,
-  SSRContextState,
-  SSRContextStateDefer,
-  TypeSsrSitePerformAction,
-} from '../types/ssr.js';
+import type { SysSsrState } from '../bean/sys.ssrState.js';
+import type { OnHydratePropHasMismatch, OnHydratePropHasMismatchResult, SSRContext, TypeSsrSitePerformAction } from '../types/ssr.js';
 import { includeBooleanAttr, isBooleanAttr, isString, stringifyStyle } from '@vue/shared';
 import { defu } from 'defu';
 import { normalizeClass, normalizeStyle, ref, useSSRContext } from 'vue';
-import { BeanSimple, cast } from 'zova';
+import { BeanSimple } from 'zova';
 import { CtxSSRMetaStore } from './ssrMetaStore.js';
 
 const SymbolIsRuntimeSsrPreHydration = Symbol('SymbolIsRuntimeSsrPreHydration');
 const SymbolSSRContext = Symbol('SymbolSSRContext');
 const SymbolSSRState = Symbol('SymbolSSRState');
-const SymbolSSRStateDefer = Symbol('SymbolSSRStateDefer');
 const SymbolOnHydrateds = Symbol('SymbolOnHydrateds');
 const SymbolOnHydratePropHasMismatches = Symbol('SymbolOnHydratePropHasMismatches');
 const SymbolInstanceUpdates = Symbol('SymbolInstanceUpdates');
@@ -26,8 +19,7 @@ const SymbolHydratingCounter = Symbol('SymbolHydratingCounter');
 export class CtxSSR extends BeanSimple {
   private [SymbolIsRuntimeSsrPreHydration]: Ref<boolean> = ref(false);
   private [SymbolSSRContext]: SSRContext;
-  private [SymbolSSRState]: SSRContextState;
-  private [SymbolSSRStateDefer]: SSRContextStateDefer;
+  private [SymbolSSRState]: SysSsrState;
   private [SymbolOnHydrateds]: Functionable[] = [];
   private [SymbolOnHydratePropHasMismatches]: OnHydratePropHasMismatch[] = [];
   private [SymbolInstanceUpdates]: ComponentInternalInstance[] = [];
@@ -38,29 +30,13 @@ export class CtxSSR extends BeanSimple {
 
   /** @internal */
   public initialize() {
+    // ssr state
+    this[SymbolSSRState] = this.sys.bean._getBeanSyncOnly('a-ssr.sys.ssrState');
     // SymbolIsRuntimeSsrPreHydration
     if (process.env.SERVER) {
       this[SymbolIsRuntimeSsrPreHydration].value = true;
     } else if (process.env.CLIENT && document.body.getAttribute('data-server-rendered') !== null) {
       this[SymbolIsRuntimeSsrPreHydration].value = true;
-    }
-    // SymbolSSRState
-    if (process.env.CLIENT) {
-      if (cast(window).__INITIAL_STATE__) {
-        this[SymbolSSRState] = cast(window).__INITIAL_STATE__;
-        delete cast(window).__INITIAL_STATE__;
-        document.getElementById('ssr-state-init')?.remove();
-        Object.assign(this.sys.env, this[SymbolSSRState].envClient);
-      } else {
-        this[SymbolSSRState] = {};
-      }
-      if (cast(window).__INITIAL_STATE_DEFER__) {
-        this[SymbolSSRStateDefer] = cast(window).__INITIAL_STATE_DEFER__;
-        delete cast(window).__INITIAL_STATE_DEFER__;
-        document.getElementById('ssr-state-defer-init')?.remove();
-      } else {
-        this[SymbolSSRStateDefer] = {} as any;
-      }
     }
     // onHydratePropHasMismatch
     if (process.env.CLIENT && this.isRuntimeSsrPreHydration) {
@@ -98,21 +74,19 @@ export class CtxSSR extends BeanSimple {
   }
 
   get state() {
-    if (!this[SymbolSSRState]) {
-      if (process.env.SERVER) {
-        this[SymbolSSRState] = this.context.state;
-      }
+    if (process.env.SERVER) {
+      return this.context.state;
+    } else {
+      return this[SymbolSSRState].state;
     }
-    return this[SymbolSSRState];
   }
 
   get stateDefer() {
-    if (!this[SymbolSSRStateDefer]) {
-      if (process.env.SERVER) {
-        this[SymbolSSRStateDefer] = this.context.stateDefer;
-      }
+    if (process.env.SERVER) {
+      return this.context.stateDefer;
+    } else {
+      return this[SymbolSSRState].stateDefer;
     }
-    return this[SymbolSSRStateDefer];
   }
 
   getPerformAction(baseURL?: string): TypeSsrSitePerformAction | undefined {
