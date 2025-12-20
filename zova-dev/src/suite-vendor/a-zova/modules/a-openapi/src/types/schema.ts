@@ -9,3 +9,7 @@ export interface IOpenapiSchema {
 export interface IOpenapiSchemaMeta {
   restResource?: IOpenApiOptionsRestResource;
 }
+
+export interface IOpenapiSchemaBootstrap extends IOpenapiSchema {
+  api?: string;
+}

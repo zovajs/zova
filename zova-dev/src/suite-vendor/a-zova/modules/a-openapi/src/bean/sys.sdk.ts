@@ -3,7 +3,7 @@ import { shallowReactive } from 'vue';
 import { BeanBase, ILocaleRecord } from 'zova';
 import { Sys } from 'zova-module-a-bean';
 import { BeanFetch } from 'zova-module-a-fetch';
-import { IOpenapiSchema } from '../types/schema.js';
+import { IOpenapiSchema, IOpenapiSchemaBootstrap } from '../types/schema.js';
 import { IOpenapiSdkItem, SymbolOpenapiSchemaName, TypeRequestMethod } from '../types/sdk.js';
 
 const PATH_PARAM_RE = /\{([^{}/]+)\}/g;
@@ -47,7 +47,7 @@ export class SysSdk extends BeanBase {
       options.headers[localeKey] = this.locale;
     }
     params.push(this.sys.util.apiActionConfigPrepare(undefined, options));
-    const data: IOpenapiSchema = await $fetch[apiMethod2](...params);
+    const data: IOpenapiSchema | IOpenapiSchemaBootstrap = await $fetch[apiMethod2](...params);
     // schemas
     const schemaNames: string[] = [];
     const schemas = data.doc.components?.schemas;
@@ -73,6 +73,9 @@ export class SysSdk extends BeanBase {
             operationObject: paths[key][method],
             meta: data.meta,
           };
+          if ((data as IOpenapiSchemaBootstrap).api) {
+            this.sdks[path][method].api = (data as IOpenapiSchemaBootstrap).api;
+          }
         }
       }
     }
