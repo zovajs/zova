@@ -1,8 +1,8 @@
 import type { SSRContext, SSRMetaOptions, SSRMetaOptionsWrapper } from '../types/ssr.js';
 // from: quasar/ui/src/plugins/Meta.js
 import { extend } from '@cabloy/extend';
-import * as devalue from 'devalue';
 import { BeanSimple, cast } from 'zova';
+import { unevalPatch } from './utils.js';
 
 export class CtxSSRMetaStore extends BeanSimple {
   private _updateId: number = 0;
@@ -145,7 +145,7 @@ export class CtxSSRMetaStore extends BeanSimple {
       `${Object.keys(data.noscript!)
         .map(name => `<noscript data-qmeta="${name}">${data.noscript![name]}</noscript>`)
         .join('')
-      }<script${nonce} id="ssr-meta-init">window.__Q_META__=${delete data.bodyStyle && delete data.bodyClass && delete data.noscript && devalue.uneval(data)}</script>`;
+      }<script${nonce} id="ssr-meta-init">window.__Q_META__=${delete data.bodyStyle && delete data.bodyClass && delete data.noscript && unevalPatch(data)}</script>`;
 
     let ssr_local_themedark =
     this.sys.env.SSR_COOKIE_THEME === 'true'
@@ -212,7 +212,7 @@ export class CtxSSRMetaStore extends BeanSimple {
 
     const nonce = ssrContext.nonce !== void 0 ? ` nonce="${ssrContext.nonce}"` : '';
 
-    ctx.endingHeadTags += `<script${nonce} id="ssr-state-init">window.__INITIAL_STATE__=${devalue.uneval(ssrContext.state)}</script>`;
+    ctx.endingHeadTags += `<script${nonce} id="ssr-state-init">window.__INITIAL_STATE__=${unevalPatch(ssrContext.state)}</script>`;
   }
 
   private _injectContextStateDefer(ssrContext: SSRContext) {
@@ -220,7 +220,7 @@ export class CtxSSRMetaStore extends BeanSimple {
 
     const nonce = ssrContext.nonce !== void 0 ? ` nonce="${ssrContext.nonce}"` : '';
 
-    ctx.endingBodyTags += `<script${nonce} id="ssr-state-defer-init">window.__INITIAL_STATE_DEFER__=${devalue.uneval(ssrContext.stateDefer)}</script>`;
+    ctx.endingBodyTags += `<script${nonce} id="ssr-state-defer-init">window.__INITIAL_STATE_DEFER__=${unevalPatch(ssrContext.stateDefer)}</script>`;
   }
 }
 
