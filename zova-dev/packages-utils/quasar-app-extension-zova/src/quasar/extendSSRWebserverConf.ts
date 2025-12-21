@@ -7,6 +7,7 @@ export function extendSSRWebserverConf(context: ConfigContext) {
   return function extendSSRWebserverConf(conf: BuildOptions, api: IndexAPI) {
     if (context.configMeta?.mode !== 'production') return;
     conf.minify = process.env.BUILD_MINIFY === 'true';
+    conf.sourcemap = _normalizeSourcemap(process.env.BUILD_SOURCEMAP);
     conf.keepNames = true;
     conf.bundle = true;
     conf.external = [];
@@ -18,4 +19,11 @@ export function extendSSRWebserverConf(context: ConfigContext) {
     conf.outdir = getOutDir();
     delete conf.outfile;
   };
+}
+
+function _normalizeSourcemap(sourcemap?: boolean | 'linked' | 'inline' | 'external' | 'both' | 'true' | 'false' | '' | string): any {
+  if (sourcemap === undefined || sourcemap === '') return false;
+  if (sourcemap === 'true') return true;
+  if (sourcemap === 'false') return false;
+  return sourcemap;
 }
