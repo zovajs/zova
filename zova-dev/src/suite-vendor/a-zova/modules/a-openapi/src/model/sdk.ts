@@ -25,7 +25,7 @@ export class ModelSdk extends BeanModelBase {
 
   getSdk(api: string | undefined, apiMethod: TypeRequestMethod | undefined) {
     if (!api) return;
-    const [api2, apiMethod2] = this.$$sysSdk.prepareInfo(api, apiMethod);
+    const [api2, apiMethod2] = this.$$sysSdk.prepareApiInfo(api, apiMethod);
     return this.$useStateData({
       queryKey: ['sdk', api2, apiMethod2],
       queryFn: async () => {
