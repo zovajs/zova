@@ -37,7 +37,10 @@ export class BeanFetch extends BeanBase {
     api.interceptors.response.use(
       response => {
         const contentType = response.headers['content-type'];
-        if (!contentType || !contentType.includes('application/json')) return response;
+        if (!contentType || !contentType.includes('application/json')) {
+          response[SymbolInterceptorBodyResponseFlag] = true;
+          return response;
+        }
         if (response.data.code !== 0) {
           const error = new Error();
           error.code = response.data.code;

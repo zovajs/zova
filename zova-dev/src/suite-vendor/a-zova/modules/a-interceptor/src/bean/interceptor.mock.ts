@@ -1,5 +1,5 @@
 import { AxiosError } from 'axios';
-import { BeanInterceptorBase, IDecoratorInterceptorOptions, IInterceptorResponseError, Interceptor, NextInterceptorError } from 'zova-module-a-fetch';
+import { BeanInterceptorBase, IDecoratorInterceptorOptions, IInterceptorResponseError, Interceptor, NextInterceptorError, SymbolInterceptorBodyResponseFlag } from 'zova-module-a-fetch';
 
 export interface IInterceptorOptionsMock extends IDecoratorInterceptorOptions {}
 
@@ -25,7 +25,12 @@ export class InterceptorMock extends BeanInterceptorBase<IInterceptorOptionsMock
               baseURL = `${baseURL}${this.sys.env.API_PREFIX}`;
             }
             if (config.baseURL !== baseURL && config.baseURL !== this.sys.env.API_PREFIX) {
-              return await this.$fetch.request(Object.assign({}, config, { baseURL }));
+              const response = await this.$fetch.request(Object.assign({}, config, { baseURL }));
+              if (response && response[SymbolInterceptorBodyResponseFlag]) {
+                return response.data;
+              } else {
+                return response as any;
+              }
             }
           }
         }
