@@ -1,9 +1,10 @@
+import { OperationObject, SchemaObject } from 'openapi3-ts/oas31';
 import { z } from 'zod';
-import { Use, usePrepareArg } from 'zova';
+import { cast, Use, usePrepareArg } from 'zova';
 import { Controller } from 'zova-module-a-bean';
 import { BeanControllerPageFormBase, TypeForm } from 'zova-module-a-form';
 import { $QueryAutoLoad } from 'zova-module-a-model';
-import { ModelSdk } from 'zova-module-a-openapi';
+import { getSchemaOfRequestBody, ModelSdk } from 'zova-module-a-openapi';
 import { ApiSchemaTestSsrDtoTestBodyPartial } from 'zova-module-home-api';
 import { ModelTest } from '../../model/test.js';
 
@@ -20,6 +21,7 @@ export const ControllerPageToolOneSchemaQuery = z.object({
 @Controller()
 export class ControllerPageToolOne extends BeanControllerPageFormBase {
   form: TypeForm<ApiSchemaTestSsrDtoTestBodyPartial>;
+  public schemaUpdate?: SchemaObject;
 
   @Use()
   $$modelTest: ModelTest;
@@ -36,8 +38,13 @@ export class ControllerPageToolOne extends BeanControllerPageFormBase {
 
   protected async __init__() {
     if (this.$query.api) {
+      this.schemaUpdate = this.$useComputed(() => {
+        const querySdkUpdate = this.getQuerySdkUpdate();
+        const querySchema = this.getQuerySchemaOfFormUpdate(querySdkUpdate.data?.operationObject);
+        return querySchema?.data;
+      });
       // sdk
-      const querySdk = await $QueryAutoLoad(() => this.$$modelSdk.getSdk(this.$query.api, this.$query.apiMethod as any));
+      const querySdk = await $QueryAutoLoad(() => this.getQuerySdkUpdate());
       console.log('sdk: ', querySdk?.data);
       // form
       this.form = this.$useForm({
@@ -50,5 +57,16 @@ export class ControllerPageToolOne extends BeanControllerPageFormBase {
       //   this.fieldName=this.fieldName==='name'?'married':'name';
       // },1000)
     }
+  }
+
+  protected getQuerySdkUpdate() {
+    return this.$$modelSdk.getSdk(this.$query.api, this.$query.apiMethod as any)!;
+  }
+
+  protected getQuerySchemaOfFormUpdate(operationObject?: OperationObject) {
+    const schemaData = getSchemaOfRequestBody(operationObject);
+    const schemaName = cast(schemaData)?.$ref;
+    if (!schemaName) return;
+    return this.$$modelSdk.getSchema(schemaName);
   }
 }
