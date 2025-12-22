@@ -2,7 +2,7 @@ import { OperationObject, SchemaObject } from 'openapi3-ts/oas31';
 import { z } from 'zod';
 import { cast, Use, usePrepareArg } from 'zova';
 import { Controller } from 'zova-module-a-bean';
-import { BeanControllerPageFormBase, TypeForm } from 'zova-module-a-form';
+import { BeanControllerPageFormBase, ControllerForm, IFormMeta, TypeForm, TypeFormOnSubmitData } from 'zova-module-a-form';
 import { $QueryAutoLoad } from 'zova-module-a-model';
 import { getSchemaOfRequestBody, ModelSdk } from 'zova-module-a-openapi';
 import { ApiSchemaTestSsrDtoTestBodyPartial } from 'zova-module-home-api';
@@ -34,7 +34,10 @@ export class ControllerPageToolOne extends BeanControllerPageFormBase {
     );
   }
 
+  controllerForm: ControllerForm;
   fieldName: string = 'name';
+  formData: ApiSchemaTestSsrDtoTestBodyPartial;
+  formMeta: IFormMeta;
 
   protected async __init__() {
     if (this.$query.api) {
@@ -46,17 +49,30 @@ export class ControllerPageToolOne extends BeanControllerPageFormBase {
       // sdk
       const querySdk = await $QueryAutoLoad(() => this.getQuerySdkUpdate());
       console.log('sdk: ', querySdk?.data);
+      // form data
+      this.formData = {
+        name: 'tom',
+      };
+      this.formMeta = {
+        formMode: 'edit',
+        editMode: 'update',
+      };
       // form
       this.form = this.$useForm({
-        defaultValues: { name: 'ss' } as ApiSchemaTestSsrDtoTestBodyPartial,
+        defaultValues: this.formData,
         onSubmit: async ({ value }) => {
-          console.log('submit: ', JSON.stringify(value));
+          console.log('submit manual: ', JSON.stringify(value));
         },
       });
       // setInterval(()=>{
       //   this.fieldName=this.fieldName==='name'?'married':'name';
       // },1000)
     }
+  }
+
+  async onSubmit(data: TypeFormOnSubmitData<ApiSchemaTestSsrDtoTestBodyPartial>) {
+    console.log('submit auto: ', JSON.stringify(data.value));
+    this.formData = data.value;
   }
 
   protected getQuerySdkUpdate() {

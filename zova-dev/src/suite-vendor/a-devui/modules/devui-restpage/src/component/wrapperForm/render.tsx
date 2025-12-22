@@ -18,7 +18,6 @@ export class RenderWrapperForm extends BeanRenderBase {
           window.alert(error.message);
         }}
       ></ComponentForm>
-
     );
   }
 }
