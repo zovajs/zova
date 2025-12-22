@@ -1,10 +1,10 @@
-import type { SchemaObject } from 'openapi3-ts/oas31';
+import type { OperationObject, RequestBodyObject, SchemaObject } from 'openapi3-ts/oas31';
 import type { TypeSchemaScene } from '../types/rest.js';
 import jsonSchemaToZod from '@cabloy/json-schema-to-zod';
 import { evaluateSimple } from '@cabloy/utils';
 import { toRaw } from 'vue';
 import { z } from 'zod';
-import { deepExtend } from 'zova';
+import { cast, deepExtend } from 'zova';
 import { OrderUnknownBase } from '../types/database.js';
 
 export function schemaToZodSchema<T extends z.ZodType = z.ZodAny>(schema: SchemaObject): T {
@@ -30,4 +30,12 @@ export function loadSchemaProperties(schema: SchemaObject | undefined, scene: Ty
   });
   // ok
   return result;
+}
+
+export function getSchemaOfRequestBody(operationObject?: OperationObject): SchemaObject | undefined {
+  return cast<RequestBodyObject>(operationObject?.requestBody)?.content?.['application/json']?.schema as any;
+}
+
+export function getSchemaOfResponse(operationObject?: OperationObject): SchemaObject | undefined {
+  return operationObject?.responses?.['200']?.content?.['application/json']?.schema;
 }
