@@ -39,7 +39,7 @@ export class RenderPageToolOne extends BeanRenderBase {
 
   private _renderManual() {
     return (
-      <form bs-form={{ form: this.form }}>
+      <ZForm data={this.formData}>
         <input
           bs-demo-basic-formFieldLayout={{ label: `${this.scope.locale.YourName()}:` }}
           bs-formField={{
@@ -50,25 +50,25 @@ export class RenderPageToolOne extends BeanRenderBase {
             behaviorModel: true,
           }}
         ></input>
-        <this.form.Field name="name">
-          {
-            ({ field }) => {
-              console.log(field.state.meta);
-              return (
-                <input
-                  name={field.name}
-                  value={field.state.value}
-                  onInput={e => field.handleChange((e.target as any).value)}
-                ></input>
-              );
-            }
-          }
-        </this.form.Field>
+        <ZFormField
+          name="name"
+          slotDefault={props => {
+            return (
+              <input
+                name={props.name}
+                value={props.value}
+                onInput={props.onInput}
+                onBlur={props.onBlur}
+              ></input>
+            );
+          }}
+        >
+        </ZFormField>
         <ZFormField name="name">
           <span>name</span>
         </ZFormField>
         <button type="submit">Submit</button>
-      </form>
+      </ZForm>
     );
   }
 

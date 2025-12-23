@@ -2,7 +2,7 @@ import { OperationObject, SchemaObject } from 'openapi3-ts/oas31';
 import { z } from 'zod';
 import { cast, Use, usePrepareArg } from 'zova';
 import { Controller } from 'zova-module-a-bean';
-import { BeanControllerPageFormBase, ControllerForm, IFormMeta, TypeForm, TypeFormOnSubmitData } from 'zova-module-a-form';
+import { BeanControllerPageFormBase, ControllerForm, IFormMeta, TypeFormOnSubmitData } from 'zova-module-a-form';
 import { $QueryAutoLoad } from 'zova-module-a-model';
 import { getSchemaOfRequestBody, ModelSdk } from 'zova-module-a-openapi';
 import { ApiSchemaTestSsrDtoTestBodyPartial } from 'zova-module-home-api';
@@ -20,7 +20,7 @@ export const ControllerPageToolOneSchemaQuery = z.object({
 
 @Controller()
 export class ControllerPageToolOne extends BeanControllerPageFormBase {
-  form: TypeForm<ApiSchemaTestSsrDtoTestBodyPartial>;
+  // form: TypeForm<ApiSchemaTestSsrDtoTestBodyPartial>;
   public schemaUpdate?: SchemaObject;
 
   @Use()
@@ -58,13 +58,13 @@ export class ControllerPageToolOne extends BeanControllerPageFormBase {
         formMode: 'edit',
         editMode: 'update',
       };
-      // form
-      this.form = this.$useForm({
-        defaultValues: this.formData,
-        onSubmit: async ({ value }) => {
-          console.log('submit manual: ', JSON.stringify(value));
-        },
-      });
+      // form;
+      // this.form = this.$useForm({
+      //   defaultValues: this.formData,
+      //   onSubmit: async ({ value }) => {
+      //     console.log('submit manual: ', JSON.stringify(value));
+      //   },
+      // });
       // setInterval(()=>{
       //   this.fieldName=this.fieldName==='name'?'married':'name';
       // },1000)
