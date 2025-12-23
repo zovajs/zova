@@ -97,7 +97,7 @@ export class ControllerForm<TFormData extends {} = {}, TSubmitMeta = never> exte
 
   public getFieldExpressionEnv<K extends DeepKeys<TFormData>>(name: K): typeof celEnvBase {
     if (!this._fieldExpressionEnvs[name]) {
-      const celEnv: typeof celEnvBase = cast(celEnvBase).clone();
+      const celEnv = celEnvBase.clone();
       celEnv.registerFunction('getValue(string):dyn', name => {
         return this.form.getFieldValue(name);
       });
