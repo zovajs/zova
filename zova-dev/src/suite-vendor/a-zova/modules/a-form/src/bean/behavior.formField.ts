@@ -69,10 +69,6 @@ export class BehaviorFormField extends BeanBehaviorBase<
     return this.$$behaviorForm.getProperty(this.$options.name);
   }
 
-  public get fieldSchema() {
-    return this.$$behaviorForm.getFieldSchema(this.$options.name);
-  }
-
   public get fieldZodSchema() {
     return this.$$behaviorForm.getFieldZodSchema(this.$options.name);
   }

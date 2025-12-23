@@ -10,7 +10,10 @@ export class RenderForm extends BeanRenderBase {
     if (!this.properties) return;
     const children: VNode[] = [];
     for (const property of this.properties) {
-      children.push(this._renderField(property));
+      const child = this._renderField(property);
+      if (child) {
+        children.push(child);
+      }
     }
     return children;
   }

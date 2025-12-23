@@ -86,10 +86,6 @@ export class BehaviorForm<TFormData = unknown> extends BeanBehaviorBase<
     return this.properties.find(item => item.key === name);
   }
 
-  public getFieldSchema<K extends DeepKeys<TFormData>>(name: K): SchemaObject | undefined {
-    return this.schema?.properties?.[name as any] as unknown as SchemaObject | undefined;
-  }
-
   public getFieldZodSchema<K extends DeepKeys<TFormData>>(name: K) {
     return ZodMetadata.getFieldSchema(this.zodSchema, name as string);
   }
