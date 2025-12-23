@@ -77,6 +77,7 @@ export class ControllerFormField extends BeanControllerBase {
       render = this.formProvider.components?.[render] ?? render;
     }
     if (typeof render === 'function') return render;
+    if (typeof render === 'string' && render.includes(':')) return this.$zovaComponent(render as any);
     return render;
   }
 
