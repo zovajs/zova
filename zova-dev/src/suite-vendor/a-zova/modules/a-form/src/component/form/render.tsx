@@ -1,6 +1,7 @@
+import { evaluateExpressions } from '@cabloy/utils';
 import { SchemaObject } from 'openapi3-ts/oas31';
 import { VNode } from 'vue';
-import { BeanRenderBase } from 'zova';
+import { BeanRenderBase, cast } from 'zova';
 import { Render } from 'zova-module-a-bean';
 
 @Render()
@@ -16,6 +17,9 @@ export class RenderForm extends BeanRenderBase {
 
   private _renderField(property: SchemaObject) {
     const key = property.key!;
+    const visible = property.rest?.visible ?? cast(property.rest?.render)?.props?.vIf;
+    const visibleReal = evaluateExpressions(visible);
+    if (visibleReal === false) return;
     const ComponentFormField = this._getFieldComponent(property);
     return (
       <ComponentFormField key={key} name={key}></ComponentFormField>

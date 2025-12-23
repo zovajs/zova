@@ -48,9 +48,9 @@
   "dependencies": {
     "@cabloy/cli": "^3.0.67",
     "@cabloy/extend": "^3.1.0",
-    "@cabloy/module-info": "^1.3.31",
+    "@cabloy/module-info": "^1.3.32",
     "@cabloy/openapi-typescript": "^7.9.2",
-    "@cabloy/utils": "^1.0.37",
+    "@cabloy/utils": "^2.0.1",
     "@cabloy/word-utils": "^2.0.0",
     "compressing": "^1.10.0",
     "fs-extra": "^11.2.0",
