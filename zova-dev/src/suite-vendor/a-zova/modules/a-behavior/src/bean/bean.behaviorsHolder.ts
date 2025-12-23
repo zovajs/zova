@@ -14,7 +14,7 @@ export interface IBehaviorsHolderOptions {
 
 @Bean()
 export class BeanBehaviorsHolder extends BeanBase {
-  private options: IBehaviorsHolderOptions;
+  public options: IBehaviorsHolderOptions;
   private composer: ServiceComposer;
 
   @Use()

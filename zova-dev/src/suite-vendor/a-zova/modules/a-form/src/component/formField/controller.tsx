@@ -1,5 +1,5 @@
 import type { ControllerForm } from '../form/controller.jsx';
-import { VNode } from 'vue';
+import { createVNode, VNode } from 'vue';
 import { BeanControllerBase, deepExtend, IComponentOptions, Use } from 'zova';
 import { Controller } from 'zova-module-a-bean';
 import { $UseBehaviorTag, BeanBehaviorsHolder, IBehaviorItem } from 'zova-module-a-behavior';
@@ -41,16 +41,17 @@ export class ControllerFormField extends BeanControllerBase {
   }
 
   protected render() {
-    return this.$$beanBehaviorsHolder.render(this._renderSlotDefault());
+    return this.$$beanBehaviorsHolder.render((props: {}) => {
+      return this._renderSlotDefault(props);
+    });
   }
 
-  private _renderSlotDefault() {
-    return this.$slotDefault
-      ? (props: object) => {
-          const behaviorFormField: BehaviorFormField = this.bean._getBeanFromHost({ name: '$$behaviorFormField', injectionScope: 'host' });
-          return this.$slotDefault!(props, behaviorFormField.field);
-        }
-      : undefined;
+  private _renderSlotDefault(props: {}) {
+    if (this.$slotDefault) {
+      const behaviorFormField: BehaviorFormField = this.bean._getBeanFromHost({ name: '$$behaviorFormField', injectionScope: 'host' });
+      return this.$slotDefault!(props, behaviorFormField.field);
+    }
+    return createVNode(this.$$beanBehaviorsHolder.options.behaviorTag.component, props);
   }
 
   private _getFieldName(): string {
