@@ -41,14 +41,16 @@ export class ControllerFormField extends BeanControllerBase {
   }
 
   protected render() {
-    return this.$$beanBehaviorsHolder.render(
-      this.$slotDefault
-        ? (props: object) => {
-            const behaviorFormField: BehaviorFormField = this.bean._getBeanFromHost({ name: '$$behaviorFormField', injectionScope: 'host' });
-            return this.$slotDefault!(props, behaviorFormField.field);
-          }
-        : undefined,
-    );
+    return this.$$beanBehaviorsHolder.render(this._renderSlotDefault());
+  }
+
+  private _renderSlotDefault() {
+    return this.$slotDefault
+      ? (props: object) => {
+          const behaviorFormField: BehaviorFormField = this.bean._getBeanFromHost({ name: '$$behaviorFormField', injectionScope: 'host' });
+          return this.$slotDefault!(props, behaviorFormField.field);
+        }
+      : undefined;
   }
 
   private _getFieldName(): string {
@@ -67,12 +69,13 @@ export class ControllerFormField extends BeanControllerBase {
 
   private _getFieldComponent() {
     const property = this._getFieldProperty();
-    let render = this.$props.render ?? property?.rest?.render ?? 'text';
+    const restRender = property?.rest?.render;
+    const restRenderType = restRender && typeof restRender === 'object' ? restRender.type : restRender;
+    let render = this.$props.render ?? restRenderType ?? 'text';
     if (typeof render === 'string') {
       render = this.formProvider.components?.[render] ?? render;
     }
     if (typeof render === 'function') return render;
-    if (typeof render === 'string' && render.includes(':')) return this.$zovaComponent(render as any);
     return render;
   }
 
