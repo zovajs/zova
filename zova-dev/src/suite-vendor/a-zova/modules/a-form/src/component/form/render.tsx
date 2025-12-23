@@ -21,7 +21,7 @@ export class RenderForm extends BeanRenderBase {
   private _renderField(property: SchemaObject) {
     const key = property.key!;
     const visible = property.rest?.visible ?? cast(property.rest?.render)?.props?.vIf;
-    const visibleReal = evaluateExpressions(visible);
+    const visibleReal = this.fieldEvaluateExpressions(key, visible);
     if (visibleReal === false) return;
     const ComponentFormField = this._getFieldComponent(property);
     return (

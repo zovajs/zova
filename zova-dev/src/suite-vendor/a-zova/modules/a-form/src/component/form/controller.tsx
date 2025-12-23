@@ -1,10 +1,10 @@
-import { catchError } from '@cabloy/utils';
+import { catchError, celEnvBase, evaluateExpressions } from '@cabloy/utils';
 import { ZodMetadata } from '@cabloy/zod-openapi';
 import { DeepKeys, determineFormLevelErrorSourceAndValue, FormValidationError, isGlobalFormValidationError, revalidateLogic, useStore, ValidationCause, ValidationError } from '@tanstack/vue-form';
 import { SchemaObject } from 'openapi3-ts/oas31';
 import { z } from 'zod';
 import { $ZodIssue } from 'zod/v4/core';
-import { deepEqual, deepExtend, UseScope } from 'zova';
+import { cast, deepEqual, deepExtend, UseScope } from 'zova';
 import { Controller } from 'zova-module-a-bean';
 import { loadSchemaProperties, schemaToZodSchema, ScopeModuleAOpenapi } from 'zova-module-a-openapi';
 import { BeanControllerFormBase } from '../../lib/beanControllerFormBase.js';
@@ -37,6 +37,8 @@ export class ControllerForm<TFormData extends {} = {}, TSubmitMeta = never> exte
   schema: SchemaObject | undefined;
   zodSchema: z.ZodObject<any> | undefined;
   properties: SchemaObject[] | undefined;
+
+  private _fieldExpressionEnvs: Record<DeepKeys<TFormData>, typeof celEnvBase> = {} as any;
 
   @UseScope()
   $$scopeModuleAOpenapi: ScopeModuleAOpenapi;
@@ -91,6 +93,38 @@ export class ControllerForm<TFormData extends {} = {}, TSubmitMeta = never> exte
 
   public getFieldZodSchema<K extends DeepKeys<TFormData>>(name: K) {
     return ZodMetadata.getFieldSchema(this.zodSchema, name as string);
+  }
+
+  public getFieldExpressionEnv<K extends DeepKeys<TFormData>>(name: K): typeof celEnvBase {
+    if (!this._fieldExpressionEnvs[name]) {
+      const celEnv: typeof celEnvBase = cast(celEnvBase).clone();
+      celEnv.registerFunction('getValue(string):dyn', name => {
+        return this.form.getFieldValue(name);
+      });
+      celEnv.registerFunction('getProperty(string):dyn', name => {
+        return this.getFieldProperty(name);
+      });
+      this._fieldExpressionEnvs[name] = celEnv;
+    }
+    return this._fieldExpressionEnvs[name];
+  }
+
+  public getFieldExpressionContext<K extends DeepKeys<TFormData>>(name: K) {
+    const property = this.getFieldProperty(name);
+    const value = this.form.getFieldValue(name);
+    return {
+      name,
+      value,
+      property,
+    };
+  }
+
+  public fieldEvaluateExpressions<K extends DeepKeys<TFormData>>(name: K, expression: any) {
+    return evaluateExpressions(
+      expression,
+      this.getFieldExpressionContext(name),
+      this.getFieldExpressionEnv(name),
+    );
   }
 
   private _getZodSchema() {
