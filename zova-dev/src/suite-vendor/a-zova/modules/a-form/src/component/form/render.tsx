@@ -52,15 +52,10 @@ export class RenderForm extends BeanRenderBase {
     return (
       <form
         class={this.$props.inline ? 'inline' : ''}
-        bs-form={{
-          form: this.form,
-          formMeta: this.$props.formMeta,
-          formProvider: this.formProvider,
-          schema: this.schema,
-          zodSchema: this.zodSchema,
-          properties: this.properties,
-          formField: this.$props.formField,
-          formFieldLayout: this.$props.formFieldLayout,
+        onSubmit={(e: Event) => {
+          e.preventDefault();
+          e.stopPropagation();
+          this.form.handleSubmit();
         }}
       >
         <>{children}</>

@@ -1,4 +1,5 @@
 import { catchError } from '@cabloy/utils';
+import { ZodMetadata } from '@cabloy/zod-openapi';
 import { DeepKeys, determineFormLevelErrorSourceAndValue, FormValidationError, isGlobalFormValidationError, revalidateLogic, useStore, ValidationCause, ValidationError } from '@tanstack/vue-form';
 import { SchemaObject } from 'openapi3-ts/oas31';
 import { z } from 'zod';
@@ -41,6 +42,7 @@ export class ControllerForm<TFormData extends {} = {}, TSubmitMeta = never> exte
   $$scopeModuleAOpenapi: ScopeModuleAOpenapi;
 
   protected async __init__() {
+    this.bean._setBean('$$form', this);
     this.form = this._createForm();
     this.formState = useStore(this.form.store, state => state) as any;
     this.formProvider = this.$useComputed(() => {
@@ -50,9 +52,7 @@ export class ControllerForm<TFormData extends {} = {}, TSubmitMeta = never> exte
       return this.$props.schema;
     });
     this.zodSchema = this.$useComputed(() => {
-      if (this.$props.zodSchema) return this.$props.zodSchema;
-      if (!this.$props.schema) return;
-      return schemaToZodSchema<z.ZodObject<any>>(this.$props.schema);
+      return this._getZodSchema();
     });
     this.properties = this.$useComputed(() => {
       return loadSchemaProperties(this.schema, 'form');
@@ -70,6 +70,29 @@ export class ControllerForm<TFormData extends {} = {}, TSubmitMeta = never> exte
   public reset(values?: TFormData, opts?: { keepDefaultValues?: boolean }): TFormData {
     this.form.reset(values ?? {} as TFormData, opts);
     return this.form.state.values;
+  }
+
+  public getProperty<K extends DeepKeys<TFormData>>(name: K): SchemaObject | undefined {
+    if (!this.properties) return;
+    return this.properties.find(item => item.key === name);
+  }
+
+  public getFieldZodSchema<K extends DeepKeys<TFormData>>(name: K) {
+    return ZodMetadata.getFieldSchema(this.zodSchema, name as string);
+  }
+
+  private _getZodSchema() {
+    if (this.$props.zodSchema) return this._patchZodSchema(this.$props.zodSchema);
+    if (!this.schema) return;
+    return this._patchZodSchema(schemaToZodSchema<z.ZodObject<any>>(this.schema));
+  }
+
+  private _patchZodSchema(schema: z.ZodObject<any> | z.ZodUnion<any>) {
+    if (schema.def.type === 'object') return schema;
+    if (schema.def.type === 'union') {
+      return schema.def.options.find(item => item.def.type === 'object');
+    }
+    throw new Error('invalid zod schema');
   }
 
   private _createForm() {
