@@ -1,4 +1,4 @@
-import type { BehaviorForm } from 'zova-module-a-form';
+import type { ControllerForm } from 'zova-module-a-form';
 import z from 'zod';
 import { BeanControllerBase, ClientOnly, TypeEventOff, Use } from 'zova';
 import { Controller } from 'zova-module-a-bean';
@@ -23,14 +23,14 @@ export class ControllerCaptcha extends BeanControllerBase {
   $$v: ToolV;
 
   @Use({ injectionScope: 'host' })
-  $$behaviorForm: BehaviorForm;
+  $$form: ControllerForm;
 
   protected async __init__() {
     // zodSchema
     this.zodSchema = this.$$v.required(z.string());
     // event
     this.eventFormSubmission = this.app.meta.event.on('a-form:formSubmission', (data, next) => {
-      if (data.form.formId === this.$$behaviorForm.form.formId && data.error) {
+      if (data.form.formId === this.$$form.form.formId && data.error) {
         this.refreshCaptchaData();
       }
       return next();
@@ -63,7 +63,7 @@ export class ControllerCaptcha extends BeanControllerBase {
   }
 
   private setFieldCaptchaData() {
-    this.$$behaviorForm.form.setFieldValue(this.$props.name, {
+    this.$$form.form.setFieldValue(this.$props.name, {
       id: this.captchaData?.id,
       token: this.captchaData?.token,
     });
