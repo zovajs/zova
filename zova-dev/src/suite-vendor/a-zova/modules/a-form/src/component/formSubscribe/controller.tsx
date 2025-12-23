@@ -1,4 +1,4 @@
-import type { BehaviorForm } from '../../bean/behavior.form.jsx';
+import type { ControllerForm } from '../form/controller.jsx';
 import { VNode } from 'vue';
 import { BeanControllerBase, Use } from 'zova';
 import { Controller } from 'zova-module-a-bean';
@@ -13,9 +13,9 @@ export class ControllerFormSubscribe extends BeanControllerBase {
   static $propsDefault = {};
 
   @Use({ injectionScope: 'host' })
-  $$behaviorForm: BehaviorForm;
+  $$form: ControllerForm;
 
   protected render() {
-    return this.$slotDefault?.(this.$$behaviorForm.formState, this.$$behaviorForm.form);
+    return this.$slotDefault?.(this.$$form.formState, this.$$form.form);
   }
 }

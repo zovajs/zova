@@ -72,7 +72,19 @@ export class ControllerForm<TFormData extends {} = {}, TSubmitMeta = never> exte
     return this.form.state.values;
   }
 
-  public getProperty<K extends DeepKeys<TFormData>>(name: K): SchemaObject | undefined {
+  public get formMeta() {
+    return this.$props.formMeta;
+  }
+
+  public get formField() {
+    return this.$props.formField;
+  }
+
+  public get formFieldLayout() {
+    return this.$props.formFieldLayout;
+  }
+
+  public getFieldProperty<K extends DeepKeys<TFormData>>(name: K): SchemaObject | undefined {
     if (!this.properties) return;
     return this.properties.find(item => item.key === name);
   }

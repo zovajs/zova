@@ -1,4 +1,4 @@
-import type { BehaviorForm } from '../../bean/behavior.form.jsx';
+import type { ControllerForm } from '../form/controller.jsx';
 import { VNode } from 'vue';
 import { BeanControllerBase, deepExtend, IComponentOptions, Use } from 'zova';
 import { Controller } from 'zova-module-a-bean';
@@ -23,14 +23,14 @@ export class ControllerFormField extends BeanControllerBase {
   formProvider: IFormProvider;
 
   @Use({ injectionScope: 'host' })
-  $$behaviorForm: BehaviorForm;
+  $$form: ControllerForm;
 
   @Use()
   $$beanBehaviorsHolder: BeanBehaviorsHolder;
 
   protected async __init__() {
     this.formProvider = this.$useComputed(() => {
-      return deepExtend({}, this.$$behaviorForm.formProvider, this.$props.formProvider);
+      return deepExtend({}, this.$$form.formProvider, this.$props.formProvider);
     });
     await this.$$beanBehaviorsHolder.initialize({
       behaviorTag: $UseBehaviorTag(this._getFieldComponent()),
@@ -57,12 +57,12 @@ export class ControllerFormField extends BeanControllerBase {
 
   private _getFieldProperty() {
     const name = this._getFieldName();
-    return this.$$behaviorForm.getProperty(name);
+    return this.$$form.getFieldProperty(name);
   }
 
   private _getFieldZodSchema() {
     const name = this._getFieldName();
-    return this.$$behaviorForm.getFieldZodSchema(name);
+    return this.$$form.getFieldZodSchema(name);
   }
 
   private _getFieldComponent() {
@@ -99,7 +99,7 @@ export class ControllerFormField extends BeanControllerBase {
     const name = this._getFieldName();
     return deepExtend({
       validators: this.getBehaviorFormFieldOptionsValidators(),
-    }, this.$$behaviorForm.formField, this.$props as any, {
+    }, this.$$form.formField, this.$props as any, {
       name,
       formProvider: this.formProvider,
     });
@@ -108,7 +108,7 @@ export class ControllerFormField extends BeanControllerBase {
   private getBehaviorFormFieldLayoutOptions() {
     const name = this._getFieldName();
     const property = this._getFieldProperty();
-    return deepExtend({ bordered: true }, this.$$behaviorForm.formFieldLayout, this.$props as any, {
+    return deepExtend({ bordered: true }, this.$$form.formFieldLayout, this.$props as any, {
       label: this.$props.label ?? property?.title ?? name,
     } satisfies IFormFieldLayoutOptionsBase);
   }

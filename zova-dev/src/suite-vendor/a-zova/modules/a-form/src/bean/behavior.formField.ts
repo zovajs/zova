@@ -1,4 +1,4 @@
-import type { BehaviorForm } from './behavior.form.js';
+import type { ControllerForm } from '../component/form/controller.jsx';
 import { useField } from '@tanstack/vue-form';
 import { VNode } from 'vue';
 import { deepExtend, disposeInstance, Use } from 'zova';
@@ -26,13 +26,13 @@ export class BehaviorFormField extends BeanBehaviorBase<
   private _composer?: ServiceComposer;
 
   @Use({ injectionScope: 'host' })
-  $$behaviorForm: BehaviorForm;
+  $$form: ControllerForm;
 
   protected async __init__(options: IBehaviorOptionsFormField) {
     // provide
     this.bean._setBean('$$behaviorFormField', this);
     // field
-    this._field = useField({ ...options, form: this.$$behaviorForm.form }) as any;
+    this._field = useField({ ...options, form: this.$$form.form as any }) as any;
     // behaviors
     const behaviors = this._prepareBehaviors(options);
     if (behaviors) {
@@ -47,7 +47,7 @@ export class BehaviorFormField extends BeanBehaviorBase<
   protected async onOptionsChange(options: IBehaviorOptionsFormField) {
     super.onOptionsChange(options);
     // field
-    this._field.api.update({ ...options, form: this.$$behaviorForm.form });
+    this._field.api.update({ ...options, form: this.$$form.form as any });
     // behaviors
     const behaviors = this._prepareBehaviors(options);
     if (behaviors) {
@@ -66,19 +66,19 @@ export class BehaviorFormField extends BeanBehaviorBase<
   }
 
   public get property() {
-    return this.$$behaviorForm.getProperty(this.$options.name);
+    return this.$$form.getProperty(this.$options.name);
   }
 
   public get fieldZodSchema() {
-    return this.$$behaviorForm.getFieldZodSchema(this.$options.name);
+    return this.$$form.getFieldZodSchema(this.$options.name);
   }
 
   public get formMeta() {
-    return this.$$behaviorForm.formMeta;
+    return this.$$form.formMeta;
   }
 
   public get formProvider(): IFormProvider {
-    return deepExtend({}, this.$$behaviorForm.formProvider, this.$options.formProvider);
+    return deepExtend({}, this.$$form.formProvider, this.$options.formProvider);
   }
 
   protected render(props: IBehaviorPropsInputFormField, next: NextBehavior<IBehaviorPropsOutputFormField>): VNode {
