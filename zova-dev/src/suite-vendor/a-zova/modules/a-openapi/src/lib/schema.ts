@@ -20,9 +20,7 @@ export function loadSchemaProperties(schema: SchemaObject | undefined, scene: Ty
   for (const key in properties) {
     let property = properties[key] as SchemaObject;
     property = deepExtend({ key }, property, { rest: property.rest?.[scene] ?? {} });
-    if (property.rest?.visible !== false) {
-      result.push(property);
-    }
+    result.push(property);
   }
   // sort
   result.sort((a, b) => {

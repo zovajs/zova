@@ -39,8 +39,20 @@ declare module 'openapi3-ts/oas31' {
   export interface SchemaObject extends ISchemaObjectExtensionField {}
 }
 
-export type TypeRenderComponent =
+export type TypeRenderComponentNormal =
   Constructable<ComponentPublicInstance> | (keyof IComponentRecord) | keyof TypeResourceActionRowRecordRender | 'text' | 'textarea' | 'select' | 'checkbox' | 'radio' | 'switch' | 'image' | 'file' | 'color' | 'password' | 'email' | 'url';
+
+export interface TypeRenderComponentJsxProps {
+  children: TypeRenderComponentJsx | TypeRenderComponentJsx[];
+  [key: string]: any | undefined;
+}
+export interface TypeRenderComponentJsx {
+  type: (keyof IComponentRecord) | string;
+  key: string | null;
+  props: TypeRenderComponentJsxProps;
+};
+
+export type TypeRenderComponent = TypeRenderComponentNormal | TypeRenderComponentJsx;
 
 export type TypeRenderComponentProvider = Constructable<ComponentPublicInstance> | (keyof IComponentRecord) | 'input' | 'textarea' | 'select';
 

@@ -1,3 +1,4 @@
+import { SchemaObject } from 'openapi3-ts/oas31';
 import { VNode } from 'vue';
 import { BeanRenderBase } from 'zova';
 import { Render } from 'zova-module-a-bean';
@@ -8,13 +9,28 @@ export class RenderForm extends BeanRenderBase {
     if (!this.properties) return;
     const children: VNode[] = [];
     for (const property of this.properties) {
-      const key = property.key!;
-      const ComponentFormField = this.$zovaComponent(this.formProvider.components!.formField!);
-      children.push(
-        <ComponentFormField key={key} name={key}></ComponentFormField>,
-      );
+      children.push(this._renderField(property));
     }
     return children;
+  }
+
+  private _renderField(property: SchemaObject) {
+    const key = property.key!;
+    const ComponentFormField = this._getFieldComponent(property);
+    return (
+      <ComponentFormField key={key} name={key}></ComponentFormField>
+    );
+  }
+
+  private _getFieldComponent(property: SchemaObject) {
+    const render = property?.rest?.render ?? 'text';
+    if (typeof render === 'string' && render.includes(':')) {
+      return this.$zovaComponent(render as any);
+    }
+    if (typeof render === 'object' && typeof render.type === 'string' && render.type.includes(':')) {
+      return this.$zovaComponent(render as any);
+    }
+    return this.$zovaComponent(this.formProvider.components!.formField!);
   }
 
   public render() {
