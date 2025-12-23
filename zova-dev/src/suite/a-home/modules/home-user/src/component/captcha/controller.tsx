@@ -58,7 +58,7 @@ export class ControllerCaptcha extends BeanControllerBase {
     this.captchaData = await this.$api.captcha.refresh({
       id: this.captchaData!.id,
       scene: this.$props.scene,
-    });
+    }, { authToken: false });
     this.setFieldCaptchaData();
   }
 

@@ -44,6 +44,7 @@ export class ControllerPageToolOne extends BeanControllerPageFormBase {
       this.schemaUpdate = this.$useComputed(() => {
         const querySdkUpdate = this.getQuerySdkUpdate();
         const querySchema = this.getQuerySchemaOfFormUpdate(querySdkUpdate.data?.operationObject);
+        console.log('schema: ', querySchema?.data);
         return querySchema?.data;
       });
       // sdk
