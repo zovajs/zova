@@ -53,7 +53,7 @@ export class RenderPageLogin extends BeanRenderBase {
         <ZFormField
           name="username"
           iconPrefix=":daisy:person"
-          slotDefault={props => {
+          slotDefault={({ props }) => {
             return (
               <input
                 type="text"

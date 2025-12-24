@@ -1,4 +1,4 @@
-import type { ControllerForm } from 'zova-module-a-form';
+import type { ControllerForm, IFormFieldOptions } from 'zova-module-a-form';
 import z from 'zod';
 import { BeanControllerBase, ClientOnly, TypeEventOff, Use } from 'zova';
 import { Controller } from 'zova-module-a-bean';
@@ -6,8 +6,7 @@ import { ZFormField } from 'zova-module-a-form';
 import { ToolV } from 'zova-module-a-zod';
 import { ApiSchemaACaptchaDtoCaptchaData } from 'zova-module-home-api';
 
-export interface ControllerFormFieldCaptchaProps {
-  name: string;
+export interface ControllerFormFieldCaptchaProps extends IFormFieldOptions {
   scene: string;
 }
 
@@ -72,10 +71,10 @@ export class ControllerFormFieldCaptcha extends BeanControllerBase {
   protected render() {
     return (
       <>
-        <ZFormField
+        <ZFormField<any>
           name={this.$props.name}
           validators={{ onDynamic: this.zodSchema }}
-          slotDefault={(props, field) => {
+          slotDefault={({ props }, field) => {
             return (
               <input
                 type="text"
