@@ -60,6 +60,11 @@ export class ControllerFormField extends BeanControllerBase {
     if (this.$slotDefault) {
       return this.$slotDefault!(props, this.field);
     }
+    const restRender = this.property?.rest?.render;
+    if (restRender && typeof restRender === 'object') {
+      const celContext = this.$$form.getFieldExpressionContext(this.name);
+      return this.$$form.renderJsx(restRender, props, celContext);
+    }
     return createVNode(this.$$beanBehaviorsHolder.options.behaviorTag.component, props);
   }
 

@@ -2,7 +2,7 @@ import { catchError, celEnvBase, evaluateExpressions } from '@cabloy/utils';
 import { ZodMetadata } from '@cabloy/zod-openapi';
 import { DeepKeys, determineFormLevelErrorSourceAndValue, FormValidationError, isGlobalFormValidationError, revalidateLogic, useStore, ValidationCause, ValidationError } from '@tanstack/vue-form';
 import { SchemaObject } from 'openapi3-ts/oas31';
-import { h, VNode } from 'vue';
+import { createTextVNode, h, VNode } from 'vue';
 import { z } from 'zod';
 import { $ZodIssue } from 'zod/v4/core';
 import { deepEqual, deepExtend, UseScope } from 'zova';
@@ -186,8 +186,13 @@ export class ControllerForm<TFormData extends {} = {}, TSubmitMeta = never> exte
     if (!Array.isArray(jsxChildren)) jsxChildren = [jsxChildren];
     const children: VNode[] = [];
     for (const jsxChild of jsxChildren) {
-      const propsInit = { key: jsxChild.key }; // key will be not a celjs
-      const child = this.renderJsx(jsxChild, propsInit, celContext);
+      let child;
+      if (typeof jsxChild === 'string') {
+        child = createTextVNode(jsxChild);
+      } else {
+        const propsInit = { key: jsxChild.key }; // key will be not a celjs
+        child = this.renderJsx(jsxChild, propsInit, celContext);
+      }
       if (child) {
         if (Array.isArray(child)) {
           children.push(...child);
