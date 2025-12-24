@@ -46,7 +46,7 @@ export class ControllerFormField extends BeanControllerBase {
     return this.$$form.form;
   }
 
-  public get formField(): TypeFormField {
+  public get field(): TypeFormField {
     return this._formField;
   }
 

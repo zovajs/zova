@@ -1,4 +1,4 @@
-import type { BehaviorFormField } from './behavior.formField.js';
+import type { ControllerFormField } from '../component/formField/controller.jsx';
 import { VNode } from 'vue';
 import { Use } from 'zova';
 import { BeanBehaviorBase, Behavior, IDecoratorBehaviorOptions, NextBehavior } from 'zova-module-a-behavior';
@@ -19,7 +19,7 @@ export class BehaviorFormFieldModel extends BeanBehaviorBase<
   IBehaviorPropsOutputFormFieldModel
 > {
   @Use({ injectionScope: 'host' })
-  $$behaviorFormField: BehaviorFormField;
+  $$formField: ControllerFormField;
 
   protected render(props: IBehaviorPropsInputFormFieldModel, next: NextBehavior<IBehaviorPropsOutputFormFieldModel>): VNode {
     props = this._patchProps(props);
@@ -27,8 +27,8 @@ export class BehaviorFormFieldModel extends BeanBehaviorBase<
   }
 
   private _patchProps(props: IBehaviorPropsInputFormFieldModel) {
-    const formMeta = this.$$behaviorFormField.formMeta;
-    const field = this.$$behaviorFormField.field;
+    const formMeta = this.$$formField.formMeta;
+    const field = this.$$formField.field;
     props = this._patchProps_general(formMeta, field, props);
     if (this.$$behaviorTag.component === 'input') {
       return this._patchProps_input(formMeta, field, props);
