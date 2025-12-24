@@ -6,13 +6,13 @@ import { ZFormField } from 'zova-module-a-form';
 import { ToolV } from 'zova-module-a-zod';
 import { ApiSchemaACaptchaDtoCaptchaData } from 'zova-module-home-api';
 
-export interface ControllerCaptchaProps {
+export interface ControllerFormFieldCaptchaProps {
   name: string;
   scene: string;
 }
 
 @Controller()
-export class ControllerCaptcha extends BeanControllerBase {
+export class ControllerFormFieldCaptcha extends BeanControllerBase {
   static $propsDefault = {};
 
   zodSchema: z.ZodString;
