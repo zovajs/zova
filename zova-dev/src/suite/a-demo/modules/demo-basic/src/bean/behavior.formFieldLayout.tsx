@@ -1,4 +1,4 @@
-import type { BehaviorFormField, IFormFieldLayoutOptionsBase } from 'zova-module-a-form';
+import type { ControllerFormField, IFormFieldLayoutOptionsBase } from 'zova-module-a-form';
 import { VNode } from 'vue';
 import { Use } from 'zova';
 import { BeanBehaviorBase, Behavior, IDecoratorBehaviorOptions, NextBehavior } from 'zova-module-a-behavior';
@@ -16,10 +16,10 @@ export class BehaviorFormFieldLayout extends BeanBehaviorBase<
   IBehaviorPropsOutputFormFieldLayout
 > {
   @Use({ injectionScope: 'host' })
-  $$behaviorFormField: BehaviorFormField;
+  $$formField: ControllerFormField;
 
   protected render(_props: IBehaviorPropsInputFormFieldLayout, next: NextBehavior<IBehaviorPropsOutputFormFieldLayout>): VNode {
-    const field = this.$$behaviorFormField.field;
+    const field = this.$$formField.field;
     const vnode = next();
     return (
       <>
