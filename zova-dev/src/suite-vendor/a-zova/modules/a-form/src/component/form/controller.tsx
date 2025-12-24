@@ -129,7 +129,7 @@ export class ControllerForm<TFormData extends {} = {}, TSubmitMeta = never> exte
   public renderJsx(componentOptions: TypeRenderComponentJsx, propsInit: {}, celContext: {}) {
     // vIf
     const vIf = this.fieldEvaluateExpressions(componentOptions.props?.vIf, celContext);
-    if (!vIf) return;
+    if (vIf === false) return;
     // component
     const Component = this.normalizeComponent(componentOptions.type as TypeRenderComponent);
     // vFor
