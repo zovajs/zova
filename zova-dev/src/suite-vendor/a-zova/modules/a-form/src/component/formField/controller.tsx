@@ -8,10 +8,10 @@ import { $UseBehaviorTag, BeanBehaviorsHolder, IBehaviorItem } from 'zova-module
 import { TypeFormField } from '../../types/form.js';
 import { IFormFieldLayoutOptionsBase, IFormFieldOptions, IFormFieldRenderContext } from '../../types/formField.js';
 
-export interface ControllerFormFieldProps<TParentData = unknown> extends IFormFieldOptions<TParentData> {}
+export interface ControllerFormFieldProps<TParentData extends {} = {}> extends IFormFieldOptions<TParentData> {}
 
 @Controller()
-export class ControllerFormField<TParentData = unknown> extends BeanControllerBase {
+export class ControllerFormField<TParentData extends {} = {}> extends BeanControllerBase {
   static $propsDefault = {};
   static $componentOptions: IComponentOptions = { inheritAttrs: false };
 
