@@ -44,6 +44,10 @@ export type TypeRenderComponentNormal =
 
 export interface TypeRenderComponentJsxProps {
   children: TypeRenderComponentJsx | TypeRenderComponentJsx[];
+  vIf?: string | boolean;
+  vFor?: string | any[];
+  vEach?: string;
+  key?: string;
   [key: string]: any | undefined;
 }
 export interface TypeRenderComponentJsx {

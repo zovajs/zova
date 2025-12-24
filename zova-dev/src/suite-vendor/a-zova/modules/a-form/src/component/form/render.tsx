@@ -12,7 +12,11 @@ export class RenderForm extends BeanRenderBase {
     for (const property of this.properties) {
       const child = this._renderField(property);
       if (child) {
-        children.push(child);
+        if (Array.isArray(child)) {
+          children.push(...child);
+        } else {
+          children.push(child);
+        }
       }
     }
     return children;

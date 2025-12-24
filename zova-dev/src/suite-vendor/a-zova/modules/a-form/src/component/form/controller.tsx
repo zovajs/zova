@@ -132,6 +132,23 @@ export class ControllerForm<TFormData extends {} = {}, TSubmitMeta = never> exte
     if (!vIf) return;
     // component
     const Component = this.normalizeComponent(componentOptions.type as TypeRenderComponent);
+    // vFor
+    const vFor = this.fieldEvaluateExpressions(componentOptions.props?.vFor, celContext);
+    if (!vFor) return this._renderJsxSingle(Component, componentOptions, propsInit, celContext);
+    const children: VNode[] = [];
+    for (const item of vFor) {
+      const eachName = this.fieldEvaluateExpressions(componentOptions.props?.vEach, celContext) ?? 'each';
+      const celContextEach = { ...celContext, [eachName]: item };
+      const propsInitEach = { ...propsInit, key: this.fieldEvaluateExpressions(componentOptions.key, celContextEach) };
+      const child = this._renderJsxSingle(Component, componentOptions, propsInitEach, celContextEach);
+      if (child) {
+        children.push(child);
+      }
+    }
+    return children;
+  }
+
+  private _renderJsxSingle(Component: any, componentOptions: TypeRenderComponentJsx, propsInit: {}, celContext: {}) {
     // props
     const props = this._renderJsxProps(componentOptions.props, propsInit, celContext);
     // children
@@ -171,7 +188,11 @@ export class ControllerForm<TFormData extends {} = {}, TSubmitMeta = never> exte
       const propsInit = { key: jsxChild.key }; // key will be not a celjs
       const child = this.renderJsx(jsxChild, propsInit, celContext);
       if (child) {
-        children.push(child);
+        if (Array.isArray(child)) {
+          children.push(...child);
+        } else {
+          children.push(child);
+        }
       }
     }
     return children;
