@@ -48,8 +48,8 @@ export interface TypeRenderComponentJsxProps {
 }
 export interface TypeRenderComponentJsx {
   type: (keyof IComponentRecord) | string;
-  key: string | null;
-  props: TypeRenderComponentJsxProps;
+  key?: string | null;
+  props?: TypeRenderComponentJsxProps;
 };
 
 export type TypeRenderComponent = TypeRenderComponentNormal | TypeRenderComponentJsx;

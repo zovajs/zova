@@ -2,16 +2,17 @@ import { catchError, celEnvBase, evaluateExpressions } from '@cabloy/utils';
 import { ZodMetadata } from '@cabloy/zod-openapi';
 import { DeepKeys, determineFormLevelErrorSourceAndValue, FormValidationError, isGlobalFormValidationError, revalidateLogic, useStore, ValidationCause, ValidationError } from '@tanstack/vue-form';
 import { SchemaObject } from 'openapi3-ts/oas31';
+import { h } from 'vue';
 import { z } from 'zod';
 import { $ZodIssue } from 'zod/v4/core';
 import { deepEqual, deepExtend, UseScope } from 'zova';
 import { Controller } from 'zova-module-a-bean';
-import { loadSchemaProperties, schemaToZodSchema, ScopeModuleAOpenapi } from 'zova-module-a-openapi';
+import { loadSchemaProperties, schemaToZodSchema, ScopeModuleAOpenapi, TypeRenderComponent, TypeRenderComponentJsx } from 'zova-module-a-openapi';
 import { BeanControllerFormBase } from '../../lib/beanControllerFormBase.js';
 import { RevalidateLogicProps, TypeForm, TypeFormOnShowError, TypeFormOnSubmit } from '../../types/form.js';
 import { IFormFieldLayoutOptionsBase, IFormFieldOptionsBase } from '../../types/formField.js';
 import { IFormMeta } from '../../types/formMeta.js';
-import { IFormProvider } from '../../types/provider.js';
+import { IFormProvider, IFormProviderComponents } from '../../types/provider.js';
 
 export interface ControllerFormProps<TFormData extends {} = {}, TSubmitMeta = never> {
   inline?: boolean;
@@ -125,6 +126,22 @@ export class ControllerForm<TFormData extends {} = {}, TSubmitMeta = never> exte
       this.getFieldExpressionContext(name),
       this.getFieldExpressionEnv(name),
     );
+  }
+
+  public renderJsx(componentOptions: TypeRenderComponentJsx, propsInit: {}) {
+    const ComponentFormField = this.normalizeComponent(componentOptions.type as TypeRenderComponent);
+    return h(ComponentFormField, propsInit);
+  }
+
+  public normalizeComponent(type: TypeRenderComponent, components?: IFormProviderComponents) {
+    if (typeof type === 'object') type = (type as TypeRenderComponentJsx).type as any;
+    if (typeof type === 'string') {
+      type = components?.[type] ?? type;
+    }
+    if (typeof type === 'function') return type;
+    if (typeof type === 'string' && type.includes(':')) return this.$zovaComponent(type as any);
+    // div/QInput
+    return type;
   }
 
   private _getZodSchema() {
