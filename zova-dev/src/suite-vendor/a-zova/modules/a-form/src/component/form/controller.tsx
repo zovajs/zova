@@ -136,9 +136,10 @@ export class ControllerForm<TFormData extends {} = {}, TSubmitMeta = never> exte
     const vFor = this.fieldEvaluateExpressions(componentOptions.props?.vFor, celContext);
     if (!vFor) return this._renderJsxSingle(Component, componentOptions, propsInit, celContext);
     const children: VNode[] = [];
-    for (const item of vFor) {
+    for (let index = 0; index < vFor.length; index++) {
+      const each = vFor[index];
       const eachName = this.fieldEvaluateExpressions(componentOptions.props?.vEach, celContext) ?? 'each';
-      const celContextEach = { ...celContext, [eachName]: item };
+      const celContextEach = { ...celContext, [eachName]: each, [`${eachName}Index`]: index };
       const propsInitEach = { ...propsInit, key: this.fieldEvaluateExpressions(componentOptions.key, celContextEach) };
       const child = this._renderJsxSingle(Component, componentOptions, propsInitEach, celContextEach);
       if (child) {
