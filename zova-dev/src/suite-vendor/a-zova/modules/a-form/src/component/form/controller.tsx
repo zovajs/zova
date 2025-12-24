@@ -39,7 +39,7 @@ export class ControllerForm<TFormData extends {} = {}, TSubmitMeta = never> exte
   zodSchema: z.ZodObject<any> | undefined;
   properties: SchemaObject[] | undefined;
 
-  private _fieldExpressionEnvs: Record<DeepKeys<TFormData>, typeof celEnvBase> = {} as any;
+  private _fieldExpressionEnv: typeof celEnvBase;
 
   @UseScope()
   $$scopeModuleAOpenapi: ScopeModuleAOpenapi;
@@ -96,8 +96,8 @@ export class ControllerForm<TFormData extends {} = {}, TSubmitMeta = never> exte
     return ZodMetadata.getFieldSchema(this.zodSchema, name as string);
   }
 
-  public getFieldExpressionEnv<K extends DeepKeys<TFormData>>(name: K): typeof celEnvBase {
-    if (!this._fieldExpressionEnvs[name]) {
+  public get fieldExpressionEnv(): typeof celEnvBase {
+    if (!this._fieldExpressionEnv) {
       const celEnv = celEnvBase.clone();
       celEnv.registerFunction('getValue(string):dyn', name => {
         return this.form.getFieldValue(name);
@@ -105,9 +105,9 @@ export class ControllerForm<TFormData extends {} = {}, TSubmitMeta = never> exte
       celEnv.registerFunction('getProperty(string):dyn', name => {
         return this.getFieldProperty(name);
       });
-      this._fieldExpressionEnvs[name] = celEnv;
+      this._fieldExpressionEnv = celEnv;
     }
-    return this._fieldExpressionEnvs[name];
+    return this._fieldExpressionEnv;
   }
 
   public getFieldExpressionContext<K extends DeepKeys<TFormData>>(name: K) {
@@ -124,7 +124,7 @@ export class ControllerForm<TFormData extends {} = {}, TSubmitMeta = never> exte
     return evaluateExpressions(
       expression,
       this.getFieldExpressionContext(name),
-      this.getFieldExpressionEnv(name),
+      this.fieldExpressionEnv,
     );
   }
 
