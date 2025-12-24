@@ -158,10 +158,10 @@ export class ControllerForm<TFormData extends {} = {}, TSubmitMeta = never> exte
     return h(Component, props, children);
   }
 
-  public normalizeComponent(type: TypeRenderComponent, components?: IFormProviderComponents) {
+  public normalizeComponent(type: TypeRenderComponent) {
     if (typeof type === 'object') type = (type as TypeRenderComponentJsx).type as any;
     if (typeof type === 'string') {
-      type = components?.[type] ?? type;
+      type = this.formProvider.components?.[type] ?? type;
     }
     if (typeof type === 'function') return type;
     if (typeof type === 'string' && type.includes(':')) return this.$zovaComponent(type as any);
