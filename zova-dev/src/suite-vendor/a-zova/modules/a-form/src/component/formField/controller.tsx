@@ -7,11 +7,9 @@ import { BehaviorFormField } from '../../bean/behavior.formField.js';
 import { IBehaviorPropsOutputFormFieldModel } from '../../bean/behavior.formFieldModel.js';
 import { TypeFormField } from '../../types/form.js';
 import { IBehaviorPropsOutputFormFieldLayoutBase, IFormFieldLayoutOptionsBase, IFormFieldOptions } from '../../types/formField.js';
-import { IFormProvider } from '../../types/provider.js';
 
 export interface ControllerFormFieldProps<TParentData = unknown> extends IFormFieldOptions<TParentData>, IFormFieldLayoutOptionsBase {
   behaviors?: IBehaviorItem;
-  formProvider?: IFormProvider;
   slotDefault?: (props: IBehaviorPropsOutputFormFieldModel & IBehaviorPropsOutputFormFieldLayoutBase, field: TypeFormField<TParentData>) => VNode;
 }
 
@@ -20,8 +18,6 @@ export class ControllerFormField extends BeanControllerBase {
   static $propsDefault = {};
   static $componentOptions: IComponentOptions = { inheritAttrs: false };
 
-  formProvider: IFormProvider;
-
   @Use({ injectionScope: 'host' })
   $$form: ControllerForm;
 
@@ -29,9 +25,6 @@ export class ControllerFormField extends BeanControllerBase {
   $$beanBehaviorsHolder: BeanBehaviorsHolder;
 
   protected async __init__() {
-    this.formProvider = this.$useComputed(() => {
-      return deepExtend({}, this.$$form.formProvider, this.$props.formProvider);
-    });
     await this.$$beanBehaviorsHolder.initialize({
       behaviorTag: $UseBehaviorTag(this._getFieldComponent()),
       behaviors: () => {
@@ -52,6 +45,10 @@ export class ControllerFormField extends BeanControllerBase {
       return this.$slotDefault!(props, behaviorFormField.field);
     }
     return createVNode(this.$$beanBehaviorsHolder.options.behaviorTag.component, props);
+  }
+
+  private get formProvider() {
+    return this.$$form.formProvider;
   }
 
   private _getFieldName(): string {
