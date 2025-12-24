@@ -21,7 +21,7 @@ export interface IFormFieldOptionsBase extends IFormFieldModelOptionsBase {
   render?: TypeRenderComponentProvider;
   placeholder?: string;
   readonly?: boolean;
-  type?: HTMLInputElementType;
+  inputType?: HTMLInputElementType;
   validateOnDynamic?: boolean | z.ZodType;
   validateOnChange?: boolean | z.ZodType;
   validateOnBlur?: boolean | z.ZodType;

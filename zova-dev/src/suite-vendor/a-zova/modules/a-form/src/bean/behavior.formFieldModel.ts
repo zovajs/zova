@@ -54,9 +54,9 @@ export class BehaviorFormFieldModel extends BeanBehaviorBase<
     renderContext: IFormFieldRenderContext,
   ) {
     const propsGeneral = this._patchProps_general(formMeta, field);
-    const type = renderContext.options.type ?? 'text';
-    const propsPatch: Partial<IFormFieldRenderContextProps> = {
-      type,
+    const inputType = renderContext.options.inputType ?? 'text';
+    const propsPatch: Partial<IFormFieldRenderContextProps> & { type: string } = {
+      type: inputType,
       onInput: (e: Event) => {
         field.api.handleChange((e.target as HTMLInputElement).value);
       },
