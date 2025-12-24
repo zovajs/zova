@@ -3,6 +3,7 @@ import { z } from 'zod';
 import { BeanRenderBase } from 'zova';
 import { Render } from 'zova-module-a-bean';
 import { ZForm, ZFormField } from 'zova-module-a-form';
+import { ApiSchemaTestSsrDtoTestBodyPartial } from 'zova-module-home-api';
 
 @Render()
 export class RenderPageToolOne extends BeanRenderBase {
@@ -40,7 +41,7 @@ export class RenderPageToolOne extends BeanRenderBase {
   private _renderManual() {
     return (
       <ZForm data={this.formData}>
-        <ZFormField
+        <ZFormField<ApiSchemaTestSsrDtoTestBodyPartial>
           name="name"
           label={`${this.scope.locale.YourName()}:`}
           validateOnChange={z.string().min(3)}
