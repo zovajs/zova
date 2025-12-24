@@ -68,7 +68,7 @@ export class RenderPageLogin extends BeanRenderBase {
           }}
         >
         </ZFormField>
-        <ZFormField name="password" class="grow" type="password" iconPrefix=":daisy:lock"></ZFormField>
+        <ZFormField name="password" class="grow" inputType="password" iconPrefix=":daisy:lock"></ZFormField>
         <ZFormFieldCaptcha name="captcha" scene="a-captchasimple:simple"></ZFormFieldCaptcha>
         <ZFormSubscribe slotDefault={state => {
           return (

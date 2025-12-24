@@ -82,7 +82,7 @@ export class RenderForm extends BeanRenderBase {
           this.form.handleSubmit();
         }}
       >
-        <>{children}</>
+        {children}
       </form>
     );
   }
