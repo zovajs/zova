@@ -127,6 +127,9 @@ export class ControllerForm<TFormData extends {} = {}, TSubmitMeta = never> exte
   }
 
   public renderJsx(componentOptions: TypeRenderComponentJsx, propsInit: {}, celContext: {}) {
+    // vIf
+    const vIf = this.fieldEvaluateExpressions(componentOptions.props?.vIf, celContext);
+    if (!vIf) return;
     // component
     const Component = this.normalizeComponent(componentOptions.type as TypeRenderComponent);
     // props
@@ -167,7 +170,9 @@ export class ControllerForm<TFormData extends {} = {}, TSubmitMeta = never> exte
     for (const jsxChild of jsxChildren) {
       const propsInit = { key: jsxChild.key }; // key will be not a celjs
       const child = this.renderJsx(jsxChild, propsInit, celContext);
-      children.push(child);
+      if (child) {
+        children.push(child);
+      }
     }
     return children;
   }
