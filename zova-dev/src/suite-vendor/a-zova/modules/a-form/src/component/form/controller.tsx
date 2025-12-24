@@ -12,7 +12,7 @@ import { BeanControllerFormBase } from '../../lib/beanControllerFormBase.js';
 import { RevalidateLogicProps, TypeForm, TypeFormOnShowError, TypeFormOnSubmit } from '../../types/form.js';
 import { IFormFieldLayoutOptionsBase, IFormFieldOptionsBase } from '../../types/formField.js';
 import { IFormMeta } from '../../types/formMeta.js';
-import { IFormProvider, IFormProviderComponents } from '../../types/provider.js';
+import { IFormProvider } from '../../types/provider.js';
 
 export interface ControllerFormProps<TFormData extends {} = {}, TSubmitMeta = never> {
   inline?: boolean;
