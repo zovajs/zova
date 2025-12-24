@@ -29,7 +29,6 @@ export class BehaviorFormFieldModel extends BeanBehaviorBase<
   private _patchProps(props: IBehaviorPropsInputFormFieldModel) {
     const formMeta = this.$$formField.formMeta;
     const field = this.$$formField.field;
-    props = this._patchProps_general(formMeta, field, props);
     if (this.$$behaviorTag.component === 'input') {
       return this._patchProps_input(formMeta, field, props);
     }
@@ -39,7 +38,6 @@ export class BehaviorFormFieldModel extends BeanBehaviorBase<
   private _patchProps_general(
     formMeta: IFormMeta | undefined,
     field: TypeFormField,
-    props: IBehaviorPropsInputFormFieldModel,
   ): IBehaviorPropsOutputFormFieldModel {
     const propsPatch: IBehaviorPropsOutputFormFieldModel = {
       name: field.api.name,
@@ -48,14 +46,15 @@ export class BehaviorFormFieldModel extends BeanBehaviorBase<
     if (formMeta?.formMode === 'view') {
       propsPatch.readonly = true;
     }
-    return Object.assign(propsPatch, props);
+    return propsPatch;
   }
 
   private _patchProps_input(
-    _formMeta: IFormMeta | undefined,
+    formMeta: IFormMeta | undefined,
     field: TypeFormField,
     props: IBehaviorPropsInputFormFieldModel,
   ): IBehaviorPropsOutputFormFieldModel {
+    const propsGeneral = this._patchProps_general(formMeta, field);
     const type = props.type ?? 'text';
     const propsPatch: Partial<IBehaviorPropsOutputFormFieldModel> = {
       type,
@@ -66,6 +65,6 @@ export class BehaviorFormFieldModel extends BeanBehaviorBase<
         field.api.handleBlur();
       },
     };
-    return Object.assign(propsPatch, props);
+    return Object.assign({}, propsGeneral, propsPatch, props);
   }
 }
