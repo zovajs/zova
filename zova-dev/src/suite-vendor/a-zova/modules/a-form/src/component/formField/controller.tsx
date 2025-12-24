@@ -58,7 +58,7 @@ export class ControllerFormField extends BeanControllerBase {
 
   private _renderSlotDefault(props: {}) {
     if (this.$slotDefault) {
-      return this.$slotDefault!(props, this.formField);
+      return this.$slotDefault!(props, this.field);
     }
     return createVNode(this.$$beanBehaviorsHolder.options.behaviorTag.component, props);
   }
@@ -144,6 +144,7 @@ export class ControllerFormField extends BeanControllerBase {
     const validateOnBlur = this.$props.validateOnBlur;
     const validateOnChange = this.$props.validateOnChange;
     return {
+      name: this.name,
       form: this.$$form.form,
       validators: {
         onDynamic: _normalizeValidateSchema(validateOnDynamic, zodSchemaField),
