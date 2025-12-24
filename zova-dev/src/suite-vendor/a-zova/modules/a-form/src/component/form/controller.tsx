@@ -4,7 +4,7 @@ import { DeepKeys, determineFormLevelErrorSourceAndValue, FormValidationError, i
 import { SchemaObject } from 'openapi3-ts/oas31';
 import { z } from 'zod';
 import { $ZodIssue } from 'zod/v4/core';
-import { cast, deepEqual, deepExtend, UseScope } from 'zova';
+import { deepEqual, deepExtend, UseScope } from 'zova';
 import { Controller } from 'zova-module-a-bean';
 import { loadSchemaProperties, schemaToZodSchema, ScopeModuleAOpenapi } from 'zova-module-a-openapi';
 import { BeanControllerFormBase } from '../../lib/beanControllerFormBase.js';
