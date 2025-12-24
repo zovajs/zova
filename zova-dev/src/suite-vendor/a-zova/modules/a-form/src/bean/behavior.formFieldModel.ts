@@ -37,9 +37,8 @@ export class BehaviorFormFieldModel extends BeanBehaviorBase<
   private _patchProps_general(
     formMeta: IFormMeta | undefined,
     field: TypeFormField,
-  ): IFormFieldRenderContextProps {
-    const propsPatch: IFormFieldRenderContextProps = {
-      name: field.api.name,
+  ) {
+    const propsPatch: Partial<IFormFieldRenderContextProps> = {
       value: field.state.value,
     };
     if (formMeta?.formMode === 'view') {
