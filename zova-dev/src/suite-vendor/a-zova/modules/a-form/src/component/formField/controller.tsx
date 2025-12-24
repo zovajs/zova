@@ -1,9 +1,10 @@
 import type { ControllerForm } from '../form/controller.jsx';
+import { useField } from '@tanstack/vue-form';
 import { createVNode, VNode } from 'vue';
+import z from 'zod';
 import { BeanControllerBase, deepExtend, IComponentOptions, Use } from 'zova';
 import { Controller } from 'zova-module-a-bean';
 import { $UseBehaviorTag, BeanBehaviorsHolder, IBehaviorItem } from 'zova-module-a-behavior';
-import { BehaviorFormField } from '../../bean/behavior.formField.js';
 import { IBehaviorPropsOutputFormFieldModel } from '../../bean/behavior.formFieldModel.js';
 import { TypeFormField } from '../../types/form.js';
 import { IBehaviorPropsOutputFormFieldLayoutBase, IFormFieldLayoutOptionsBase, IFormFieldOptions } from '../../types/formField.js';
@@ -18,6 +19,8 @@ export class ControllerFormField extends BeanControllerBase {
   static $propsDefault = {};
   static $componentOptions: IComponentOptions = { inheritAttrs: false };
 
+  private _formField: TypeFormField;
+
   @Use({ injectionScope: 'host' })
   $$form: ControllerForm;
 
@@ -25,12 +28,26 @@ export class ControllerFormField extends BeanControllerBase {
   $$beanBehaviorsHolder: BeanBehaviorsHolder;
 
   protected async __init__() {
+    // provide
+    this.bean._setBean('$$formField', this);
+    // field
+    const options = this._getFormFieldOptions();
+    this._formField = useField(options as any) as any;
+    // behaviors
     await this.$$beanBehaviorsHolder.initialize({
       behaviorTag: $UseBehaviorTag(this._getFieldComponent()),
       behaviors: () => {
         return this._getFieldBehaviors();
       },
     });
+  }
+
+  public get form() {
+    return this.$$form.form;
+  }
+
+  public get formField(): TypeFormField {
+    return this._formField;
   }
 
   protected render() {
@@ -41,32 +58,33 @@ export class ControllerFormField extends BeanControllerBase {
 
   private _renderSlotDefault(props: {}) {
     if (this.$slotDefault) {
-      const behaviorFormField: BehaviorFormField = this.bean._getBeanFromHost({ name: '$$behaviorFormField', injectionScope: 'host' });
-      return this.$slotDefault!(props, behaviorFormField.field);
+      return this.$slotDefault!(props, this.formField);
     }
     return createVNode(this.$$beanBehaviorsHolder.options.behaviorTag.component, props);
   }
 
-  private get formProvider() {
-    return this.$$form.formProvider;
-  }
-
-  private _getFieldName(): string {
+  public get name() {
     return this.$props.name;
   }
 
-  private _getFieldProperty() {
-    const name = this._getFieldName();
-    return this.$$form.getFieldProperty(name);
+  public get property() {
+    return this.$$form.getFieldProperty(this.name);
   }
 
-  private _getFieldZodSchema() {
-    const name = this._getFieldName();
-    return this.$$form.getFieldZodSchema(name);
+  public get fieldZodSchema() {
+    return this.$$form.getFieldZodSchema(this.name);
+  }
+
+  public get formMeta() {
+    return this.$$form.formMeta;
+  }
+
+  public get formProvider() {
+    return this.$$form.formProvider;
   }
 
   private _getFieldComponent() {
-    const property = this._getFieldProperty();
+    const property = this.property;
     const restRender = property?.rest?.render;
     const restRenderType = restRender && typeof restRender === 'object' ? restRender.type : restRender;
     let render = this.$props.render ?? restRenderType ?? 'text';
@@ -98,22 +116,16 @@ export class ControllerFormField extends BeanControllerBase {
   }
 
   private getBehaviorFormFieldOptions() {
-    const name = this._getFieldName();
     return deepExtend(
-      {
-        validators: this.getBehaviorFormFieldOptionsValidators(),
-      },
+      {},
       this.$$form.formField,
       this.$props as any,
-      {
-        name,
-      },
     );
   }
 
   private getBehaviorFormFieldLayoutOptions() {
-    const name = this._getFieldName();
-    const property = this._getFieldProperty();
+    const name = this.name;
+    const property = this.property;
     return deepExtend(
       { bordered: true },
       this.$$form.formFieldLayout,
@@ -124,17 +136,26 @@ export class ControllerFormField extends BeanControllerBase {
     );
   }
 
-  private getBehaviorFormFieldOptionsValidators() {
-    const zodSchemaField = this._getFieldZodSchema();
+  private _getFormFieldOptions() {
+    const zodSchemaField = this.fieldZodSchema;
     const validateOnDynamicDefault =
       this.$props.validateOnDynamic === undefined && this.$props.validateOnBlur === undefined && this.$props.validateOnChange === undefined;
     const validateOnDynamic = this.$props.validateOnDynamic ?? validateOnDynamicDefault;
     const validateOnBlur = this.$props.validateOnBlur;
     const validateOnChange = this.$props.validateOnChange;
     return {
-      onDynamic: validateOnDynamic ? zodSchemaField : undefined,
-      onBlur: validateOnBlur ? zodSchemaField : undefined,
-      onChange: validateOnChange ? zodSchemaField : undefined,
+      form: this.$$form.form,
+      validators: {
+        onDynamic: _normalizeValidateSchema(validateOnDynamic, zodSchemaField),
+        onBlur: _normalizeValidateSchema(validateOnBlur, zodSchemaField),
+        onChange: _normalizeValidateSchema(validateOnChange, zodSchemaField),
+      },
     };
   }
+}
+
+function _normalizeValidateSchema(validateSchema?: boolean | z.ZodType, zodSchemaField?: z.ZodType) {
+  if (!validateSchema) return undefined;
+  if (validateSchema === true) return zodSchemaField;
+  return validateSchema;
 }

@@ -7,7 +7,7 @@ import { z } from 'zod';
 import { cast, deepExtend } from 'zova';
 import { OrderUnknownBase } from '../types/database.js';
 
-export function schemaToZodSchema<T extends z.ZodType = z.ZodAny>(schema: SchemaObject): T {
+export function schemaToZodSchema<T extends z.ZodType = z.ZodType>(schema: SchemaObject): T {
   const code = jsonSchemaToZod(toRaw(schema));
   return evaluateSimple(code, { z });
 }

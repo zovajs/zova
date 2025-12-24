@@ -40,16 +40,11 @@ export class RenderPageToolOne extends BeanRenderBase {
   private _renderManual() {
     return (
       <ZForm data={this.formData}>
-        <input
-          bs-demo-basic-formFieldLayout={{ label: `${this.scope.locale.YourName()}:` }}
-          bs-formField={{
-            name: 'name',
-            validators: {
-              onChange: z.string().min(3),
-            },
-            behaviorModel: true,
-          }}
-        ></input>
+        <ZFormField
+          name="name"
+          label={`${this.scope.locale.YourName()}:`}
+          validateOnChange={z.string().min(3)}
+        ></ZFormField>
         <ZFormField
           name="name"
           slotDefault={props => {

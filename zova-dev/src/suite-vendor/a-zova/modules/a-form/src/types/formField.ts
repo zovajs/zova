@@ -1,3 +1,4 @@
+import type z from 'zod';
 import type { IBehaviors } from 'zova-module-a-behavior';
 import type { IIconRecord } from 'zova-module-a-icon';
 import type { TypeRenderComponentProvider } from 'zova-module-a-openapi';
@@ -20,9 +21,9 @@ export interface IFormFieldOptionsBase extends IFormFieldModelOptionsBase {
   placeholder?: string;
   readonly?: boolean;
   type?: HTMLInputElementType;
-  validateOnDynamic?: boolean;
-  validateOnChange?: boolean;
-  validateOnBlur?: boolean;
+  validateOnDynamic?: boolean | z.ZodType;
+  validateOnChange?: boolean | z.ZodType;
+  validateOnBlur?: boolean | z.ZodType;
 }
 
 export interface IFormFieldModelOptionsBase {}
