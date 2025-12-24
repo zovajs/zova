@@ -7,7 +7,7 @@ import { z } from 'zod';
 import { $ZodIssue } from 'zod/v4/core';
 import { deepEqual, deepExtend, UseScope } from 'zova';
 import { Controller } from 'zova-module-a-bean';
-import { loadSchemaProperties, renderJsxPropsSystem, schemaToZodSchema, ScopeModuleAOpenapi, TypeRenderComponent, TypeRenderComponentJsx, TypeRenderComponentJsxProps } from 'zova-module-a-openapi';
+import { loadSchemaProperties, renderFieldJsxPropsSystem, schemaToZodSchema, ScopeModuleAOpenapi, TypeRenderComponent, TypeRenderComponentJsx, TypeRenderComponentJsxProps } from 'zova-module-a-openapi';
 import { BeanControllerFormBase } from '../../lib/beanControllerFormBase.js';
 import { RevalidateLogicProps, TypeForm, TypeFormOnShowError, TypeFormOnSubmit } from '../../types/form.js';
 import { IFormFieldLayoutOptionsBase, IFormFieldOptionsBase } from '../../types/formField.js';
@@ -171,7 +171,7 @@ export class ControllerForm<TFormData extends {} = {}, TSubmitMeta = never> exte
 
   private _renderJsxProps(jsxProps: TypeRenderComponentJsxProps | undefined, propsInit: {}, celContext: {}) {
     if (!jsxProps) return propsInit;
-    const keys = Object.keys(jsxProps).filter(item => !renderJsxPropsSystem.includes(item));
+    const keys = Object.keys(jsxProps).filter(item => !renderFieldJsxPropsSystem.includes(item));
     if (keys.length === 0) return propsInit;
     const props = { ...propsInit };
     for (const key of keys) {
