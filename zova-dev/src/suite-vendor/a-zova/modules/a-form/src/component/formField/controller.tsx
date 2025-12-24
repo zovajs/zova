@@ -99,20 +99,29 @@ export class ControllerFormField extends BeanControllerBase {
 
   private getBehaviorFormFieldOptions() {
     const name = this._getFieldName();
-    return deepExtend({
-      validators: this.getBehaviorFormFieldOptionsValidators(),
-    }, this.$$form.formField, this.$props as any, {
-      name,
-      formProvider: this.formProvider,
-    });
+    return deepExtend(
+      {
+        validators: this.getBehaviorFormFieldOptionsValidators(),
+      },
+      this.$$form.formField,
+      this.$props as any,
+      {
+        name,
+      },
+    );
   }
 
   private getBehaviorFormFieldLayoutOptions() {
     const name = this._getFieldName();
     const property = this._getFieldProperty();
-    return deepExtend({ bordered: true }, this.$$form.formFieldLayout, this.$props as any, {
-      label: this.$props.label ?? property?.title ?? name,
-    } satisfies IFormFieldLayoutOptionsBase);
+    return deepExtend(
+      { bordered: true },
+      this.$$form.formFieldLayout,
+      this.$props as any,
+      {
+        label: this.$props.label ?? property?.title ?? name,
+      } satisfies IFormFieldLayoutOptionsBase,
+    );
   }
 
   private getBehaviorFormFieldOptionsValidators() {
