@@ -73,7 +73,10 @@ export class ControllerFormField<TParentData extends {} = {}> extends BeanContro
     }
     const restRender = this.property?.rest?.render;
     if (restRender && typeof restRender === 'object') {
-      const celContext = this.$$form.getFieldExpressionContext(this.name);
+      const celContext = {
+        ...this.$$form.getFieldExpressionContext(this.name),
+        renderContext,
+      };
       return this.$$form.renderJsx(restRender, renderContext.props, celContext);
     }
     return createVNode(this.$$beanBehaviorsHolder.options.behaviorTag.component, renderContext.props as any);

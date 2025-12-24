@@ -3,10 +3,10 @@ import { VNode } from 'vue';
 import { Use } from 'zova';
 import { BeanBehaviorBase, Behavior, IDecoratorBehaviorOptions, NextBehavior } from 'zova-module-a-behavior';
 import { TypeFormField } from '../types/form.js';
-import { IFormFieldModelOptionsBase, IFormFieldOptions } from '../types/formField.js';
+import { IFormFieldModelOptionsBase, IFormFieldRenderContext, IFormFieldRenderContextProps } from '../types/formField.js';
 import { IFormMeta } from '../types/formMeta.js';
 
-export interface IBehaviorPropsInputFormFieldModel extends IFormFieldOptions {}
+export interface IBehaviorPropsInputFormFieldModel extends IFormFieldRenderContext {}
 
 export interface IBehaviorPropsOutputFormFieldModel extends IBehaviorPropsInputFormFieldModel {}
 
@@ -21,25 +21,24 @@ export class BehaviorFormFieldModel extends BeanBehaviorBase<
   @Use({ injectionScope: 'host' })
   $$formField: ControllerFormField;
 
-  protected render(props: IBehaviorPropsInputFormFieldModel, next: NextBehavior<IBehaviorPropsOutputFormFieldModel>): VNode {
-    props = this._patchProps(props);
-    return next(props);
+  protected render(renderContext: IFormFieldRenderContext, next: NextBehavior<IBehaviorPropsOutputFormFieldModel>): VNode {
+    this._patchProps(renderContext);
+    return next(renderContext);
   }
 
-  private _patchProps(props: IBehaviorPropsInputFormFieldModel) {
+  private _patchProps(renderContext: IFormFieldRenderContext) {
     const formMeta = this.$$formField.formMeta;
     const field = this.$$formField.field;
     if (this.$$behaviorTag.component === 'input') {
-      return this._patchProps_input(formMeta, field, props);
+      this._patchProps_input(formMeta, field, renderContext);
     }
-    return props;
   }
 
   private _patchProps_general(
     formMeta: IFormMeta | undefined,
     field: TypeFormField,
-  ): IBehaviorPropsOutputFormFieldModel {
-    const propsPatch: IBehaviorPropsOutputFormFieldModel = {
+  ): IFormFieldRenderContextProps {
+    const propsPatch: IFormFieldRenderContextProps = {
       name: field.api.name,
       value: field.state.value,
     };
@@ -52,11 +51,11 @@ export class BehaviorFormFieldModel extends BeanBehaviorBase<
   private _patchProps_input(
     formMeta: IFormMeta | undefined,
     field: TypeFormField,
-    props: IBehaviorPropsInputFormFieldModel,
-  ): IBehaviorPropsOutputFormFieldModel {
+    renderContext: IFormFieldRenderContext,
+  ) {
     const propsGeneral = this._patchProps_general(formMeta, field);
-    const type = props.type ?? 'text';
-    const propsPatch: Partial<IBehaviorPropsOutputFormFieldModel> = {
+    const type = renderContext.options.type ?? 'text';
+    const propsPatch: Partial<IFormFieldRenderContextProps> = {
       type,
       onInput: (e: Event) => {
         field.api.handleChange((e.target as HTMLInputElement).value);
@@ -65,6 +64,6 @@ export class BehaviorFormFieldModel extends BeanBehaviorBase<
         field.api.handleBlur();
       },
     };
-    return Object.assign({}, propsGeneral, propsPatch, props);
+    renderContext.props = Object.assign({}, propsGeneral, propsPatch, renderContext.props);
   }
 }
