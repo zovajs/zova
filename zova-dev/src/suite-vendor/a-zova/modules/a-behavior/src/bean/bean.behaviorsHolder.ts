@@ -58,11 +58,11 @@ export class BeanBehaviorsHolder extends BeanBase {
     return $UseBehavior('a-behavior:root' as never, { behaviors } as any);
   }
 
-  public render(vNodeDefault?: Function) {
+  public render(vNodeDefault?: Function, propsCustom?: {}) {
     const parent = this.ctx.instance;
     const { ref, props, children } = parent.vnode;
     // props
-    const propsNew = Object.assign({}, props);
+    const propsNew = Object.assign({}, propsCustom ?? props) as any;
     delete propsNew.behaviorTag;
     delete propsNew.behaviors;
     // render

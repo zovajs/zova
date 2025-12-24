@@ -1,8 +1,9 @@
+import type { VNode } from 'vue';
 import type z from 'zod';
-import type { IBehaviors } from 'zova-module-a-behavior';
+import type { IBehaviorItem, IBehaviors } from 'zova-module-a-behavior';
 import type { IIconRecord } from 'zova-module-a-icon';
 import type { TypeRenderComponentProvider } from 'zova-module-a-openapi';
-import type { TypeBehaviorFormFieldOptions } from './form.js';
+import type { TypeBehaviorFormFieldOptions, TypeFormField } from './form.js';
 
 export type HTMLInputElementType = 'text' | 'password' | 'number' | 'file' | 'hidden' | 'tel' | 'email';
 
@@ -28,8 +29,18 @@ export interface IFormFieldOptionsBase extends IFormFieldModelOptionsBase {
 
 export interface IFormFieldModelOptionsBase {}
 
-export interface IFormFieldOptions<TParentData>
-  extends TypeBehaviorFormFieldOptions<TParentData>, IFormFieldOptionsBase {}
+export interface IFormFieldOptions<TParentData = {}> extends IFormFieldRenderContextProps<TParentData> {
+  behaviors?: IBehaviorItem;
+  slotDefault?: (props: IFormFieldRenderContext<TParentData>, field: TypeFormField<TParentData>) => VNode;
+}
+
+export interface IFormFieldRenderContextProps<TParentData = {}>
+  extends TypeBehaviorFormFieldOptions<TParentData>, IFormFieldOptionsBase, IFormFieldLayoutOptionsBase {}
+
+export interface IFormFieldRenderContext<TParentData = {}> {
+  options: IFormFieldOptions<TParentData>;
+  props: IFormFieldRenderContextProps<TParentData>;
+}
 
 export interface IBehaviorPropsInputFormFieldModelBase {
   name: string;

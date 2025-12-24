@@ -1,21 +1,17 @@
 import type { ControllerForm } from '../form/controller.jsx';
 import { useField } from '@tanstack/vue-form';
-import { createVNode, VNode } from 'vue';
+import { createVNode } from 'vue';
 import z from 'zod';
 import { BeanControllerBase, deepExtend, IComponentOptions, Use } from 'zova';
 import { Controller } from 'zova-module-a-bean';
 import { $UseBehaviorTag, BeanBehaviorsHolder, IBehaviorItem } from 'zova-module-a-behavior';
-import { IBehaviorPropsOutputFormFieldModel } from '../../bean/behavior.formFieldModel.js';
 import { TypeFormField } from '../../types/form.js';
-import { IBehaviorPropsOutputFormFieldLayoutBase, IFormFieldLayoutOptionsBase, IFormFieldOptions } from '../../types/formField.js';
+import { IFormFieldLayoutOptionsBase, IFormFieldOptions, IFormFieldRenderContext } from '../../types/formField.js';
 
-export interface ControllerFormFieldProps<TParentData = unknown> extends IFormFieldOptions<TParentData>, IFormFieldLayoutOptionsBase {
-  behaviors?: IBehaviorItem;
-  slotDefault?: (props: IBehaviorPropsOutputFormFieldModel & IBehaviorPropsOutputFormFieldLayoutBase, field: TypeFormField<TParentData>) => VNode;
-}
+export interface ControllerFormFieldProps<TParentData = unknown> extends IFormFieldOptions<TParentData> {}
 
 @Controller()
-export class ControllerFormField extends BeanControllerBase {
+export class ControllerFormField<TParentData = unknown> extends BeanControllerBase {
   static $propsDefault = {};
   static $componentOptions: IComponentOptions = { inheritAttrs: false };
 
@@ -51,14 +47,20 @@ export class ControllerFormField extends BeanControllerBase {
   }
 
   protected render() {
-    return this.$$beanBehaviorsHolder.render((props: {}) => {
-      return this._renderSlotDefault(props);
-    });
+    const renderContext: IFormFieldRenderContext<TParentData> = {
+      options: this.$props as IFormFieldOptions<TParentData>,
+      props: {
+        name: this.$props.name,
+      },
+    };
+    return this.$$beanBehaviorsHolder.render((renderProps: {}) => {
+      return this._renderSlotDefault(renderProps);
+    }, renderContext);
   }
 
-  private _renderSlotDefault(props: {}) {
+  private _renderSlotDefault(renderProps: {}) {
     if (this.$slotDefault) {
-      return this.$slotDefault!(props, this.field);
+      return this.$slotDefault!(renderProps, this.field);
     }
     const restRender = this.property?.rest?.render;
     if (restRender && typeof restRender === 'object') {
