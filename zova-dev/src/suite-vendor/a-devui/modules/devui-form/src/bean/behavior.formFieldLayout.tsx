@@ -33,10 +33,11 @@ export class BehaviorFormFieldLayout extends BeanBehaviorBase<
 
   private _renderInline(renderContext: IFormFieldRenderContext, vnode: VNode, field: TypeFormField, error: z.ZodError | undefined): VNode {
     const bordered = renderContext.options.bordered;
+    const label = renderContext.options.label;
     const className = classes('input', bordered && 'input-bordered', !field.state.meta.isValid && 'input-error');
     return (
       <label class={className}>
-        {this.$options.label}
+        {label}
         {vnode}
         {!field.state.meta.isValid && (
           <div class="label">
@@ -47,10 +48,11 @@ export class BehaviorFormFieldLayout extends BeanBehaviorBase<
     );
   }
 
-  private _renderBlock(_renderContext: IFormFieldRenderContext, vnode: VNode, field: TypeFormField, error: z.ZodError | undefined): VNode {
+  private _renderBlock(renderContext: IFormFieldRenderContext, vnode: VNode, field: TypeFormField, error: z.ZodError | undefined): VNode {
+    const label = renderContext.options.label;
     return (
       <fieldset class="fieldset">
-        {!!this.$options.label && <legend class="fieldset-legend">{this.$options.label}</legend>}
+        {!!label && <legend class="fieldset-legend">{label}</legend>}
         {vnode}
         {!field.state.meta.isValid && (
           <div class="label">
