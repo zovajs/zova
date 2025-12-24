@@ -1,6 +1,6 @@
 import type { VNode } from 'vue';
 import type { IDecoratorBehaviorOptions, NextBehavior } from 'zova-module-a-behavior';
-import type { BehaviorFormField, IBehaviorPropsInputFormFieldLayoutBase, IBehaviorPropsOutputFormFieldLayoutBase, TypeFormField } from 'zova-module-a-form';
+import type { ControllerFormField, IBehaviorPropsInputFormFieldLayoutBase, IBehaviorPropsOutputFormFieldLayoutBase, TypeFormField } from 'zova-module-a-form';
 import z from 'zod';
 import { Use } from 'zova';
 import { BeanBehaviorBase, Behavior } from 'zova-module-a-behavior';
@@ -20,10 +20,10 @@ export class BehaviorFormFieldLayoutLogin extends BeanBehaviorBase<
   IBehaviorPropsOutputFormFieldLayoutLogin
 > {
   @Use({ injectionScope: 'host' })
-  $$behaviorFormField: BehaviorFormField;
+  $$formField: ControllerFormField;
 
   protected render(props: IBehaviorPropsInputFormFieldLayoutLogin, next: NextBehavior<IBehaviorPropsOutputFormFieldLayoutLogin>): VNode {
-    const field = this.$$behaviorFormField.field;
+    const field = this.$$formField.field;
     props = this._patchProps(props);
     const vnode = next(props);
     const error = field.state.meta.errors[0] as z.ZodError | undefined;
@@ -41,7 +41,7 @@ export class BehaviorFormFieldLayoutLogin extends BeanBehaviorBase<
   }
 
   private _patchProps(props: IBehaviorPropsInputFormFieldLayoutLogin): IBehaviorPropsOutputFormFieldLayoutLogin {
-    const field = this.$$behaviorFormField.field;
+    const field = this.$$formField.field;
     props = this._patchProps_general(field, props);
     if (this.$$behaviorTag.component === 'input') {
       return this._patchProps_input(field, props);
