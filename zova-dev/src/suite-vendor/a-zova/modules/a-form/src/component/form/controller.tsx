@@ -10,7 +10,7 @@ import { Controller } from 'zova-module-a-bean';
 import { loadSchemaProperties, renderFieldJsxPropsSystem, schemaToZodSchema, ScopeModuleAOpenapi, TypeRenderComponent, TypeRenderComponentJsx, TypeRenderComponentJsxProps } from 'zova-module-a-openapi';
 import { BeanControllerFormBase } from '../../lib/beanControllerFormBase.js';
 import { RevalidateLogicProps, TypeForm, TypeFormOnShowError, TypeFormOnSubmit } from '../../types/form.js';
-import { IFormFieldLayoutOptionsBase, IFormFieldOptionsBase } from '../../types/formField.js';
+import { IFormFieldLayoutOptionsBase } from '../../types/formField.js';
 import { IFormMeta } from '../../types/formMeta.js';
 import { IFormProvider } from '../../types/provider.js';
 
@@ -23,7 +23,6 @@ export interface ControllerFormProps<TFormData extends {} = {}, TSubmitMeta = ne
   validateOnDynamicLogic?: RevalidateLogicProps;
   formMeta?: IFormMeta;
   formProvider?: IFormProvider;
-  formField?: IFormFieldOptionsBase;
   formFieldLayout?: IFormFieldLayoutOptionsBase;
   onSubmit?: TypeFormOnSubmit<TFormData, TSubmitMeta>;
   onShowError?: TypeFormOnShowError<TFormData, TSubmitMeta>;
@@ -77,14 +76,6 @@ export class ControllerForm<TFormData extends {} = {}, TSubmitMeta = never> exte
 
   public get formMeta() {
     return this.$props.formMeta;
-  }
-
-  public get formField() {
-    return this.$props.formField;
-  }
-
-  public get formFieldLayout() {
-    return this.$props.formFieldLayout;
   }
 
   public getFieldProperty<K extends DeepKeys<TFormData>>(name: K): SchemaObject | undefined {

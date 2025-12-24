@@ -1,6 +1,6 @@
 import type { VNode } from 'vue';
 import type z from 'zod';
-import type { IBehaviorItem, IBehaviors } from 'zova-module-a-behavior';
+import type { IBehaviorItem } from 'zova-module-a-behavior';
 import type { IIconRecord } from 'zova-module-a-icon';
 import type { TypeRenderComponentProvider } from 'zova-module-a-openapi';
 import type { TypeBehaviorFormFieldOptions, TypeFormField } from './form.js';
@@ -17,7 +17,6 @@ export interface IFormFieldLayoutOptionsBase {
 }
 
 export interface IFormFieldOptionsBase extends IFormFieldModelOptionsBase {
-  behaviorModel?: IBehaviors | boolean;
   render?: TypeRenderComponentProvider;
   placeholder?: string;
   readonly?: boolean;

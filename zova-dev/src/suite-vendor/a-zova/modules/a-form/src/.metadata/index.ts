@@ -164,8 +164,12 @@ declare module 'vue/jsx-runtime' {
   }
 }
 /** behaviors: end */
+/** config: begin */
+export * from '../config/config.js';
+import { config } from '../config/config.js';
+/** config: end */
 /** scope: begin */
-import { BeanScopeBase, type BeanScopeUtil } from 'zova';
+import { BeanScopeBase, type BeanScopeUtil, TypeModuleConfig } from 'zova';
 import { Scope } from 'zova-module-a-bean';
 
 @Scope()
@@ -173,6 +177,7 @@ export class ScopeModuleAForm extends BeanScopeBase {}
 
 export interface ScopeModuleAForm {
   util: BeanScopeUtil;
+config: TypeModuleConfig<typeof config>;
 }
 
 import 'zova';
@@ -181,7 +186,9 @@ declare module 'zova' {
     'a-form': ScopeModuleAForm;
   }
   
-  
+  export interface IBeanScopeConfig {
+    'a-form': ReturnType<typeof config>;
+  }
 
   
 

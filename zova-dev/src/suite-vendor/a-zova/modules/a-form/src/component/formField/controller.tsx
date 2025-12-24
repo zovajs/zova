@@ -6,7 +6,7 @@ import { BeanControllerBase, deepExtend, IComponentOptions, Use } from 'zova';
 import { Controller } from 'zova-module-a-bean';
 import { $UseBehaviorTag, BeanBehaviorsHolder, IBehaviorItem } from 'zova-module-a-behavior';
 import { TypeFormField } from '../../types/form.js';
-import { IFormFieldLayoutOptionsBase, IFormFieldOptions, IFormFieldRenderContext } from '../../types/formField.js';
+import { IFormFieldOptions, IFormFieldRenderContext } from '../../types/formField.js';
 
 export interface ControllerFormFieldProps<TParentData extends {} = {}> extends IFormFieldOptions<TParentData> {}
 
@@ -47,27 +47,36 @@ export class ControllerFormField<TParentData extends {} = {}> extends BeanContro
   }
 
   protected render() {
+    const property = this.property;
+    const name = this.name;
     const renderContext: IFormFieldRenderContext<TParentData> = {
-      options: this.$props as IFormFieldOptions<TParentData>,
+      options: Object.assign(
+        {
+          bordered: this.scope.config.formFieldLayout.bordered,
+          label: property?.title ?? name,
+        },
+        this.$$form.$props.formFieldLayout,
+        this.$props as IFormFieldOptions<TParentData>,
+      ),
       props: {
-        name: this.$props.name,
+        name,
       },
     };
-    return this.$$beanBehaviorsHolder.render((renderProps: {}) => {
+    return this.$$beanBehaviorsHolder.render((renderProps: IFormFieldRenderContext<TParentData>) => {
       return this._renderSlotDefault(renderProps);
     }, renderContext);
   }
 
-  private _renderSlotDefault(renderProps: {}) {
+  private _renderSlotDefault(renderContext: IFormFieldRenderContext<TParentData>) {
     if (this.$slotDefault) {
-      return this.$slotDefault!(renderProps, this.field);
+      return this.$slotDefault!(renderContext, this.field);
     }
     const restRender = this.property?.rest?.render;
     if (restRender && typeof restRender === 'object') {
       const celContext = this.$$form.getFieldExpressionContext(this.name);
-      return this.$$form.renderJsx(restRender, props, celContext);
+      return this.$$form.renderJsx(restRender, renderContext.props, celContext);
     }
-    return createVNode(this.$$beanBehaviorsHolder.options.behaviorTag.component, props);
+    return createVNode(this.$$beanBehaviorsHolder.options.behaviorTag.component, renderContext.props as any);
   }
 
   public get name() {
@@ -113,34 +122,13 @@ export class ControllerFormField<TParentData extends {} = {}> extends BeanContro
   private _prepareBehaviorFormField(behaviors: IBehaviorItem) {
     const behaviorFormField = this.formProvider.behaviors?.formField;
     if (!behaviorFormField) return;
-    behaviors[behaviorFormField] = this.getBehaviorFormFieldOptions();
+    behaviors[behaviorFormField] = {};
   }
 
   private _prepareBehaviorFormFieldLayout(behaviors: IBehaviorItem) {
     const behaviorFormFieldLayout = this.formProvider.behaviors?.formFieldLayout;
     if (!behaviorFormFieldLayout) return;
-    behaviors[behaviorFormFieldLayout] = this.getBehaviorFormFieldLayoutOptions();
-  }
-
-  private getBehaviorFormFieldOptions() {
-    return deepExtend(
-      {},
-      this.$$form.formField,
-      this.$props as any,
-    );
-  }
-
-  private getBehaviorFormFieldLayoutOptions() {
-    const name = this.name;
-    const property = this.property;
-    return deepExtend(
-      { bordered: true },
-      this.$$form.formFieldLayout,
-      this.$props as any,
-      {
-        label: this.$props.label ?? property?.title ?? name,
-      } satisfies IFormFieldLayoutOptionsBase,
-    );
+    behaviors[behaviorFormFieldLayout] = {};
   }
 
   private _getFormFieldOptions() {
