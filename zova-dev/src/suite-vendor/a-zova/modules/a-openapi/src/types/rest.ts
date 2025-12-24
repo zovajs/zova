@@ -57,3 +57,5 @@ export type TypeRenderComponent = TypeRenderComponentNormal | TypeRenderComponen
 export type TypeRenderComponentProvider = Constructable<ComponentPublicInstance> | (keyof IComponentRecord) | 'input' | 'textarea' | 'select';
 
 export type TypeSchemaScene = 'table' | 'form';
+
+export const renderJsxPropsSystem = ['children', 'vIf', 'vFor', 'vEach', 'vKey'];

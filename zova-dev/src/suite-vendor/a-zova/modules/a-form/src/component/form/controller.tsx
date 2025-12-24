@@ -2,12 +2,12 @@ import { catchError, celEnvBase, evaluateExpressions } from '@cabloy/utils';
 import { ZodMetadata } from '@cabloy/zod-openapi';
 import { DeepKeys, determineFormLevelErrorSourceAndValue, FormValidationError, isGlobalFormValidationError, revalidateLogic, useStore, ValidationCause, ValidationError } from '@tanstack/vue-form';
 import { SchemaObject } from 'openapi3-ts/oas31';
-import { h } from 'vue';
+import { h, VNode } from 'vue';
 import { z } from 'zod';
 import { $ZodIssue } from 'zod/v4/core';
 import { deepEqual, deepExtend, UseScope } from 'zova';
 import { Controller } from 'zova-module-a-bean';
-import { loadSchemaProperties, schemaToZodSchema, ScopeModuleAOpenapi, TypeRenderComponent, TypeRenderComponentJsx } from 'zova-module-a-openapi';
+import { loadSchemaProperties, renderJsxPropsSystem, schemaToZodSchema, ScopeModuleAOpenapi, TypeRenderComponent, TypeRenderComponentJsx, TypeRenderComponentJsxProps } from 'zova-module-a-openapi';
 import { BeanControllerFormBase } from '../../lib/beanControllerFormBase.js';
 import { RevalidateLogicProps, TypeForm, TypeFormOnShowError, TypeFormOnSubmit } from '../../types/form.js';
 import { IFormFieldLayoutOptionsBase, IFormFieldOptionsBase } from '../../types/formField.js';
@@ -111,26 +111,30 @@ export class ControllerForm<TFormData extends {} = {}, TSubmitMeta = never> exte
   }
 
   public getFieldExpressionContext<K extends DeepKeys<TFormData>>(name: K) {
-    const property = this.getFieldProperty(name);
-    const value = this.form.getFieldValue(name);
     return {
       name,
-      value,
-      property,
+      value: this.form.getFieldValue(name),
+      property: this.getFieldProperty(name),
     };
   }
 
-  public fieldEvaluateExpressions<K extends DeepKeys<TFormData>>(name: K, expression: any) {
+  public fieldEvaluateExpressions(expression: any, celContext?: {}) {
     return evaluateExpressions(
       expression,
-      this.getFieldExpressionContext(name),
+      celContext,
       this.fieldExpressionEnv,
     );
   }
 
-  public renderJsx(componentOptions: TypeRenderComponentJsx, propsInit: {}) {
-    const ComponentFormField = this.normalizeComponent(componentOptions.type as TypeRenderComponent);
-    return h(ComponentFormField, propsInit);
+  public renderJsx(componentOptions: TypeRenderComponentJsx, propsInit: {}, celContext: {}) {
+    // component
+    const Component = this.normalizeComponent(componentOptions.type as TypeRenderComponent);
+    // props
+    const props = this._renderJsxProps(componentOptions.props, propsInit, celContext);
+    // children
+    const children = this._renderJsxChildren(componentOptions.props?.children, celContext);
+    // h
+    return h(Component, props, children);
   }
 
   public normalizeComponent(type: TypeRenderComponent, components?: IFormProviderComponents) {
@@ -142,6 +146,30 @@ export class ControllerForm<TFormData extends {} = {}, TSubmitMeta = never> exte
     if (typeof type === 'string' && type.includes(':')) return this.$zovaComponent(type as any);
     // div/QInput
     return type;
+  }
+
+  private _renderJsxProps(jsxProps: TypeRenderComponentJsxProps | undefined, propsInit: {}, celContext: {}) {
+    if (!jsxProps) return propsInit;
+    const keys = Object.keys(jsxProps).filter(item => !renderJsxPropsSystem.includes(item));
+    if (keys.length === 0) return propsInit;
+    const props = { ...propsInit };
+    for (const key of keys) {
+      const keyValue = this.fieldEvaluateExpressions(jsxProps[key], celContext);
+      props[key] = keyValue;
+    }
+    return props;
+  }
+
+  private _renderJsxChildren(jsxChildren: TypeRenderComponentJsx | TypeRenderComponentJsx[] | undefined, celContext: {}) {
+    if (!jsxChildren) return undefined;
+    if (!Array.isArray(jsxChildren)) jsxChildren = [jsxChildren];
+    const children: VNode[] = [];
+    for (const jsxChild of jsxChildren) {
+      const propsInit = { key: jsxChild.key }; // key will be not a celjs
+      const child = this.renderJsx(jsxChild, propsInit, celContext);
+      children.push(child);
+    }
+    return children;
   }
 
   private _getZodSchema() {
