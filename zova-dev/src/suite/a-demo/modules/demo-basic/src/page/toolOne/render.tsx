@@ -47,7 +47,7 @@ export class RenderPageToolOne extends BeanRenderBase {
         ></ZFormField>
         <ZFormField
           name="name"
-          slotDefault={props => {
+          slotDefault={({ props }) => {
             return (
               <input
                 name={props.name}

@@ -117,7 +117,7 @@ export class ControllerForm<TFormData extends {} = {}, TSubmitMeta = never> exte
     );
   }
 
-  public renderJsx(componentOptions: TypeRenderComponentJsx, propsInit: {}, celContext: {}) {
+  public renderJsx(componentOptions: TypeRenderComponentJsx, props: {}, celContext: {}) {
     // vIf
     const vIf = this.fieldEvaluateExpressions(componentOptions.props?.vIf, celContext);
     if (vIf === false) return;
@@ -125,14 +125,14 @@ export class ControllerForm<TFormData extends {} = {}, TSubmitMeta = never> exte
     const Component = this.normalizeComponent(componentOptions.type as TypeRenderComponent);
     // vFor
     const vFor = this.fieldEvaluateExpressions(componentOptions.props?.vFor, celContext);
-    if (!vFor) return this._renderJsxSingle(Component, componentOptions, propsInit, celContext);
+    if (!vFor) return this._renderJsxSingle(Component, componentOptions, props, celContext);
     const children: VNode[] = [];
     for (let index = 0; index < vFor.length; index++) {
       const each = vFor[index];
       const eachName = this.fieldEvaluateExpressions(componentOptions.props?.vEach, celContext) ?? 'each';
       const celContextEach = { ...celContext, [eachName]: each, [`${eachName}Index`]: index };
-      const propsInitEach = { ...propsInit, key: this.fieldEvaluateExpressions(componentOptions.key, celContextEach) };
-      const child = this._renderJsxSingle(Component, componentOptions, propsInitEach, celContextEach);
+      const propsEach = { ...props, key: this.fieldEvaluateExpressions(componentOptions.key, celContextEach) };
+      const child = this._renderJsxSingle(Component, componentOptions, propsEach, celContextEach);
       if (child) {
         children.push(child);
       }
@@ -140,9 +140,9 @@ export class ControllerForm<TFormData extends {} = {}, TSubmitMeta = never> exte
     return children;
   }
 
-  private _renderJsxSingle(Component: any, componentOptions: TypeRenderComponentJsx, propsInit: {}, celContext: {}) {
+  private _renderJsxSingle(Component: any, componentOptions: TypeRenderComponentJsx, props: {}, celContext: {}) {
     // props
-    const props = this._renderJsxProps(componentOptions.props, propsInit, celContext);
+    this._renderJsxProps(componentOptions.props, props, celContext);
     // children
     const children = this._renderJsxChildren(componentOptions.props?.children, celContext);
     // h
@@ -160,11 +160,10 @@ export class ControllerForm<TFormData extends {} = {}, TSubmitMeta = never> exte
     return type;
   }
 
-  private _renderJsxProps(jsxProps: TypeRenderComponentJsxProps | undefined, propsInit: {}, celContext: {}) {
-    if (!jsxProps) return propsInit;
+  private _renderJsxProps(jsxProps: TypeRenderComponentJsxProps | undefined, props: {}, celContext: {}) {
+    if (!jsxProps) return props;
     const keys = Object.keys(jsxProps).filter(item => !renderFieldJsxPropsSystem.includes(item));
-    if (keys.length === 0) return propsInit;
-    const props = { ...propsInit };
+    if (keys.length === 0) return props;
     for (const key of keys) {
       const keyValue = this.fieldEvaluateExpressions(jsxProps[key], celContext);
       props[key] = keyValue;
@@ -181,8 +180,8 @@ export class ControllerForm<TFormData extends {} = {}, TSubmitMeta = never> exte
       if (typeof jsxChild === 'string') {
         child = createTextVNode(jsxChild);
       } else {
-        const propsInit = { key: jsxChild.key }; // key will be not a celjs
-        child = this.renderJsx(jsxChild, propsInit, celContext);
+        const props = { key: jsxChild.key }; // key will be not a celjs
+        child = this.renderJsx(jsxChild, props, celContext);
       }
       if (child) {
         if (Array.isArray(child)) {

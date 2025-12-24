@@ -3,12 +3,12 @@ import { VNode } from 'vue';
 import { Use } from 'zova';
 import { BeanBehaviorBase, Behavior, IDecoratorBehaviorOptions, NextBehavior } from 'zova-module-a-behavior';
 import { TypeFormField } from '../types/form.js';
-import { IBehaviorPropsInputFormFieldModelBase, IBehaviorPropsOutputFormFieldModelBase, IFormFieldModelOptionsBase } from '../types/formField.js';
+import { IFormFieldModelOptionsBase, IFormFieldOptions } from '../types/formField.js';
 import { IFormMeta } from '../types/formMeta.js';
 
-export interface IBehaviorPropsInputFormFieldModel extends IBehaviorPropsInputFormFieldModelBase {}
+export interface IBehaviorPropsInputFormFieldModel extends IFormFieldOptions {}
 
-export interface IBehaviorPropsOutputFormFieldModel extends IBehaviorPropsInputFormFieldModel, IBehaviorPropsOutputFormFieldModelBase {}
+export interface IBehaviorPropsOutputFormFieldModel extends IBehaviorPropsInputFormFieldModel {}
 
 export interface IBehaviorOptionsFormFieldModel extends IDecoratorBehaviorOptions, IFormFieldModelOptionsBase {}
 

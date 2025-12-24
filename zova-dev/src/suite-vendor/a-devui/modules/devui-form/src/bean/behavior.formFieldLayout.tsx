@@ -1,13 +1,13 @@
-import type { ControllerFormField, IBehaviorPropsInputFormFieldLayoutBase, IBehaviorPropsOutputFormFieldLayoutBase, IFormFieldLayoutOptionsBase, TypeFormField } from 'zova-module-a-form';
+import type { ControllerFormField, IFormFieldLayoutOptionsBase, IFormFieldRenderContext, TypeFormField } from 'zova-module-a-form';
 import { classes } from 'typestyle';
 import { VNode } from 'vue';
 import { z } from 'zod';
 import { Use } from 'zova';
 import { BeanBehaviorBase, Behavior, IDecoratorBehaviorOptions, NextBehavior } from 'zova-module-a-behavior';
 
-export interface IBehaviorPropsInputFormFieldLayout extends IBehaviorPropsInputFormFieldLayoutBase {}
+export interface IBehaviorPropsInputFormFieldLayout extends IFormFieldRenderContext {}
 
-export interface IBehaviorPropsOutputFormFieldLayout extends IBehaviorPropsInputFormFieldLayout, IBehaviorPropsOutputFormFieldLayoutBase {}
+export interface IBehaviorPropsOutputFormFieldLayout extends IBehaviorPropsInputFormFieldLayout {}
 
 export interface IBehaviorOptionsFormFieldLayout extends IDecoratorBehaviorOptions, IFormFieldLayoutOptionsBase {}
 
@@ -20,19 +20,20 @@ export class BehaviorFormFieldLayout extends BeanBehaviorBase<
   @Use({ injectionScope: 'host' })
   $$formField: ControllerFormField;
 
-  protected render(props: IBehaviorPropsInputFormFieldLayout, next: NextBehavior<IBehaviorPropsOutputFormFieldLayout>): VNode {
+  protected render(renderContext: IFormFieldRenderContext, next: NextBehavior<IBehaviorPropsOutputFormFieldLayout>): VNode {
     const field = this.$$formField.field;
-    props = this._patchProps(props);
-    const vnode = next(props);
+    this._patchProps(renderContext);
+    const vnode = next(renderContext);
     const error = field.state.meta.errors[0] as z.ZodError | undefined;
-    if (this.$options.inline) {
-      return this._renderInline(props, vnode, field, error);
+    if (renderContext.options.inline) {
+      return this._renderInline(renderContext, vnode, field, error);
     }
-    return this._renderBlock(props, vnode, field, error);
+    return this._renderBlock(renderContext, vnode, field, error);
   }
 
-  private _renderInline(_props: IBehaviorPropsInputFormFieldLayout, vnode: VNode, field: TypeFormField, error: z.ZodError | undefined): VNode {
-    const className = classes('input', this.$options.bordered && 'input-bordered', !field.state.meta.isValid && 'input-error');
+  private _renderInline(renderContext: IFormFieldRenderContext, vnode: VNode, field: TypeFormField, error: z.ZodError | undefined): VNode {
+    const bordered = renderContext.options.bordered;
+    const className = classes('input', bordered && 'input-bordered', !field.state.meta.isValid && 'input-error');
     return (
       <label class={className}>
         {this.$options.label}
@@ -46,7 +47,7 @@ export class BehaviorFormFieldLayout extends BeanBehaviorBase<
     );
   }
 
-  private _renderBlock(_props: IBehaviorPropsInputFormFieldLayout, vnode: VNode, field: TypeFormField, error: z.ZodError | undefined): VNode {
+  private _renderBlock(_renderContext: IFormFieldRenderContext, vnode: VNode, field: TypeFormField, error: z.ZodError | undefined): VNode {
     return (
       <fieldset class="fieldset">
         {!!this.$options.label && <legend class="fieldset-legend">{this.$options.label}</legend>}
@@ -60,30 +61,21 @@ export class BehaviorFormFieldLayout extends BeanBehaviorBase<
     );
   }
 
-  private _patchProps(props: IBehaviorPropsInputFormFieldLayout): IBehaviorPropsOutputFormFieldLayout {
+  private _patchProps(renderContext: IFormFieldRenderContext) {
     const field = this.$$formField.field;
-    props = this._patchProps_general(field, props);
     if (this.$$behaviorTag.component === 'input') {
-      return this._patchProps_input(field, props);
+      return this._patchProps_input(field, renderContext);
     }
-    return props;
   }
 
-  private _patchProps_general(_field: TypeFormField, props: IBehaviorPropsInputFormFieldLayout): IBehaviorPropsOutputFormFieldLayout {
-    const propsPatch: IBehaviorPropsOutputFormFieldLayout = {};
-    return Object.assign({}, props, propsPatch);
-  }
-
-  private _patchProps_input(field: TypeFormField, props: IBehaviorPropsInputFormFieldLayout): IBehaviorPropsOutputFormFieldLayout {
-    const propsPatch: IBehaviorPropsOutputFormFieldLayout = {};
-    if (!this.$options.inline) {
-      propsPatch.class = classes(
-        props.class,
+  private _patchProps_input(field: TypeFormField, renderContext: IFormFieldRenderContext) {
+    if (!renderContext.options.inline) {
+      renderContext.props.class = classes(
+        renderContext.props.class,
         'input',
         this.$options.bordered && 'input-bordered',
         !field.state.meta.isValid && 'input-error',
       );
     }
-    return Object.assign({}, props, propsPatch);
   }
 }
