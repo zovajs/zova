@@ -55,7 +55,7 @@ function _parseControllerInfo(
   const hasModels = fileContent.includes(nameModels);
   const hasModelValue = fileContent.includes("'vModel'");
   // generic
-  const matchGeneric = fileContent.match(/interface [^<]*Props<(.*?)> \{/);
+  const matchGeneric = fileContent.match(/interface [^<]*Props<(.*?)> (extends|\{)/);
   const hasGeneric = !!matchGeneric;
   const generic = matchGeneric && matchGeneric[1];
   const genericKeys = matchGeneric && matchGeneric[1].split(',').map(item => item.trim().split(' ')[0]);

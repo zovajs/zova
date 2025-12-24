@@ -9,7 +9,7 @@ export type TypeControllerFormFieldPublicProps<TParentData extends {} = {}> = {
 } & ControllerFormFieldProps<TParentData>;
 
 type ControllerInnerProps<TParentData extends {} = {}> =
-      TypeControllerInnerProps<ControllerFormFieldProps<TParentData>, keyof typeof ControllerFormField.$propsDefault>;
+  TypeControllerInnerProps<ControllerFormFieldProps<TParentData>, keyof typeof ControllerFormField.$propsDefault>;
 declare module 'zova-module-a-form' {
   export interface ControllerFormField<TParentData extends {} = {}> {
     $props: ControllerInnerProps<TParentData>;
@@ -17,7 +17,7 @@ declare module 'zova-module-a-form' {
 }
 
 export const ZFormField = defineComponent(
-  <TParentData extends {} = {}> (_props: TypeControllerFormFieldPublicProps<TParentData>) => {
+  <TParentData extends {} = {}>(_props: TypeControllerFormFieldPublicProps<TParentData>) => {
     useController(ControllerFormField, undefined, undefined);
     return () => {};
   },
