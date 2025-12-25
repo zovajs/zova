@@ -2,7 +2,7 @@ import { classes } from 'typestyle';
 import { z } from 'zod';
 import { BeanRenderBase } from 'zova';
 import { Render } from 'zova-module-a-bean';
-import { ZForm, ZFormField } from 'zova-module-a-form';
+import { ZForm, ZFormField, ZFormSubscribe } from 'zova-module-a-form';
 import { ApiSchemaTestSsrDtoTestBodyPartial } from 'zova-module-home-api';
 
 @Render()
@@ -20,27 +20,34 @@ export class RenderPageToolOne extends BeanRenderBase {
             // eslint-disable-next-line no-alert
             window.alert(error.message);
           }}
+          slotFooter={(state, form) => {
+            return (
+              <div>
+                {state.isSubmitting && <span class="loading loading-spinner text-primary"></span>}
+                {this.formMeta.formMode === 'edit' && (
+                  <button
+                    class={classes('btn btn-primary', state.isSubmitting && 'btn-disabled')}
+                    onClick={async () => {
+                      await form.handleSubmit();
+                    }}
+                  >
+                    {this.scope.locale.Submit()}
+                  </button>
+                )}
+              </div>
+            );
+          }}
         ></ZForm>
-        <div>
-          {this.controllerForm?.formState.isSubmitting && <span class="loading loading-spinner text-primary"></span>}
-          {this.formMeta.formMode === 'edit' && (
-            <button
-              class={classes('btn btn-primary', this.controllerForm?.formState.isSubmitting && 'btn-disabled')}
-              onClick={async () => {
-                await this.controllerForm.submit();
-              }}
-            >
-              {this.scope.locale.Submit()}
-            </button>
-          )}
-        </div>
       </div>
     );
   }
 
   private _renderManual() {
     return (
-      <ZForm data={this.formData}>
+      <ZForm
+        data={this.formData}
+        onSubmit={data => this.onSubmit(data)}
+      >
         <ZFormField<ApiSchemaTestSsrDtoTestBodyPartial>
           name="name"
           label={`${this.scope.locale.YourName()}:`}
@@ -63,7 +70,14 @@ export class RenderPageToolOne extends BeanRenderBase {
         <ZFormField name="name">
           <span>name</span>
         </ZFormField>
-        <button type="submit">Submit</button>
+        <ZFormSubscribe slotDefault={state => {
+          return (
+            <button disabled={state.isSubmitting} type="submit" class="btn btn-primary">
+              Submit
+            </button>
+          );
+        }}
+        ></ZFormSubscribe>
       </ZForm>
     );
   }
