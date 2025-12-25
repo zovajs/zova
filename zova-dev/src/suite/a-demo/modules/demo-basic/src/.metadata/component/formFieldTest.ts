@@ -21,5 +21,5 @@ export const ZFormFieldTest = defineComponent(
     useController(ControllerFormFieldTest, undefined, undefined);
     return () => {};
   },
-  prepareComponentOptions(),
+  prepareComponentOptions(ControllerFormFieldTest.$componentOptions),
 );
