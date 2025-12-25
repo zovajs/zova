@@ -135,21 +135,25 @@ export class ControllerFormField<TParentData extends {} = {}> extends BeanContro
   }
 
   private _getFormFieldOptions() {
+    const validators = this._getFormFieldOptionsValidators();
+    return Object.assign({}, this.$props, {
+      form: this.$$form.form,
+      validators,
+    });
+  }
+
+  private _getFormFieldOptionsValidators() {
     const zodSchemaField = this.fieldZodSchema;
     const validateOnDynamicDefault =
       this.$props.validateOnDynamic === undefined && this.$props.validateOnBlur === undefined && this.$props.validateOnChange === undefined;
     const validateOnDynamic = this.$props.validateOnDynamic ?? validateOnDynamicDefault;
     const validateOnBlur = this.$props.validateOnBlur;
     const validateOnChange = this.$props.validateOnChange;
-    return {
-      name: this.name,
-      form: this.$$form.form,
-      validators: {
-        onDynamic: _normalizeValidateSchema(validateOnDynamic, zodSchemaField),
-        onBlur: _normalizeValidateSchema(validateOnBlur, zodSchemaField),
-        onChange: _normalizeValidateSchema(validateOnChange, zodSchemaField),
-      },
-    };
+    return Object.assign({}, {
+      onDynamic: _normalizeValidateSchema(validateOnDynamic, zodSchemaField),
+      onBlur: _normalizeValidateSchema(validateOnBlur, zodSchemaField),
+      onChange: _normalizeValidateSchema(validateOnChange, zodSchemaField),
+    }, this.$props.validators);
   }
 }
 
