@@ -15,7 +15,7 @@ import { IFormMeta } from '../../types/formMeta.js';
 import { IFormProvider } from '../../types/provider.js';
 
 export interface ControllerFormProps<TFormData extends {} = {}, TSubmitMeta = never> {
-  formTag: string;
+  formTag?: string;
   inline?: boolean;
   data?: TFormData;
   schema?: SchemaObject;

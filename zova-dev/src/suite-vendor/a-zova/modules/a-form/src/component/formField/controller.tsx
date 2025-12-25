@@ -49,7 +49,7 @@ export class ControllerFormField<TParentData extends {} = {}> extends BeanContro
   protected render() {
     const property = this.property;
     const name = this.name;
-    const propsTop =this._getFieldComponentPropsTop(); 
+    const propsTop = this._getFieldComponentPropsTop();
     const renderContext: IFormFieldRenderContext<TParentData> = {
       options: Object.assign(
         {
@@ -105,7 +105,7 @@ export class ControllerFormField<TParentData extends {} = {}> extends BeanContro
   }
 
   private _getFieldComponentPropsTop() {
-    if(this.$$form.renderAuto) return;
+    if (this.$$form.renderAuto) return;
     const celContext = this.$$form.getFieldExpressionContext(this.name);
     return this.$$form.getFieldComponentPropsTop(this.name, celContext);
   }
