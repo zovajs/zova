@@ -8,7 +8,7 @@ import type { TypeBehaviorFormFieldOptions, TypeFormField } from './form.js';
 export type HTMLInputElementType = 'text' | 'password' | 'number' | 'file' | 'hidden' | 'tel' | 'email';
 
 export interface IFormFieldLayoutOptionsBase {
-  classLayout?: any;
+  classContainer?: any;
   label?: string | false;
   inline?: boolean;
   bordered?: boolean;
