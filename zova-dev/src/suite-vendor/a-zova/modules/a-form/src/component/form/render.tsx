@@ -1,5 +1,5 @@
 import { SchemaObject } from 'openapi3-ts/oas31';
-import { VNode } from 'vue';
+import { h, VNode } from 'vue';
 import { BeanRenderBase, cast } from 'zova';
 import { Render } from 'zova-module-a-bean';
 import { TypeRenderComponentJsx } from 'zova-module-a-openapi';
@@ -50,26 +50,45 @@ export class RenderForm extends BeanRenderBase {
     };
   }
 
-  public render() {
-    const children = this.$slotDefault
+  private _renderChildren() {
+    const children: (VNode | undefined)[] = [];
+    children.push(this.$props.slotHeader?.(this.formState, this.form));
+    children.push(this.$props.slotFooter?.(this.formState, this.form));
+    return children;
+  }
+
+  private _renderBodyInner() {
+    const FormTag = this.$props.formTag;
+    return this.$slotDefault
       ? this.$slotDefault()
       : (
           <>
             {this._renderSchema()}
-            <button type="submit" class="hidden"></button>
+            {FormTag === 'form' && <button type="submit" class="hidden"></button>}
           </>
         );
-    return (
-      <form
-        class={this.$props.inline ? 'inline' : ''}
-        onSubmit={(e: Event) => {
-          e.preventDefault();
-          e.stopPropagation();
-          this.form.handleSubmit();
-        }}
-      >
-        {children}
-      </form>
-    );
+  }
+
+  private _renderProps() {
+    const FormTag = this.$props.formTag;
+    const props: any = {};
+    if (this.$props.inline) {
+      props.class = 'inline';
+    }
+    if (FormTag === 'form') {
+      props.onSubmit = (e: Event) => {
+        e.preventDefault();
+        e.stopPropagation();
+        this.form.handleSubmit();
+      };
+    }
+    return props;
+  }
+
+  public render() {
+    const FormTag = this.$props.formTag;
+    const props = this._renderProps();
+    const children = this._renderChildren();
+    return h(FormTag, props, children);
   }
 }

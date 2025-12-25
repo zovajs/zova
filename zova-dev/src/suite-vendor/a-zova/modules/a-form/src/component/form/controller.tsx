@@ -9,12 +9,13 @@ import { deepEqual, deepExtend, UseScope } from 'zova';
 import { Controller } from 'zova-module-a-bean';
 import { loadSchemaProperties, renderFieldJsxPropsSystem, renderFieldTopPropsSystem, schemaToZodSchema, ScopeModuleAOpenapi, TypeRenderComponent, TypeRenderComponentJsx, TypeRenderComponentJsxProps } from 'zova-module-a-openapi';
 import { BeanControllerFormBase } from '../../lib/beanControllerFormBase.js';
-import { RevalidateLogicProps, TypeForm, TypeFormOnShowError, TypeFormOnSubmit } from '../../types/form.js';
+import { RevalidateLogicProps, TypeForm, TypeFormOnShowError, TypeFormOnSubmit, TypeFormState } from '../../types/form.js';
 import { IFormFieldLayoutOptionsBase } from '../../types/formField.js';
 import { IFormMeta } from '../../types/formMeta.js';
 import { IFormProvider } from '../../types/provider.js';
 
 export interface ControllerFormProps<TFormData extends {} = {}, TSubmitMeta = never> {
+  formTag: string;
   inline?: boolean;
   data?: TFormData;
   schema?: SchemaObject;
@@ -26,10 +27,13 @@ export interface ControllerFormProps<TFormData extends {} = {}, TSubmitMeta = ne
   formFieldLayout?: IFormFieldLayoutOptionsBase;
   onSubmit?: TypeFormOnSubmit<TFormData, TSubmitMeta>;
   onShowError?: TypeFormOnShowError<TFormData, TSubmitMeta>;
+  slotHeader?: (formState: TypeFormState<TFormData>, form: TypeForm<TFormData, TSubmitMeta>) => VNode;
+  slotBody?: (formState: TypeFormState<TFormData>, form: TypeForm<TFormData, TSubmitMeta>) => VNode;
+  slotFooter?: (formState: TypeFormState<TFormData>, form: TypeForm<TFormData, TSubmitMeta>) => VNode;
 }
 @Controller()
 export class ControllerForm<TFormData extends {} = {}, TSubmitMeta = never> extends BeanControllerFormBase {
-  static $propsDefault = {};
+  static $propsDefault = { formTag: 'form' };
 
   form: TypeForm<TFormData, TSubmitMeta>;
   formState: TypeForm<TFormData>['state'];
@@ -78,7 +82,7 @@ export class ControllerForm<TFormData extends {} = {}, TSubmitMeta = never> exte
     return this.$props.formMeta;
   }
 
-  public get renderAuto(){
+  public get renderAuto() {
     return !this.$slotDefault;
   }
 

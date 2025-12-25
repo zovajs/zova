@@ -4,8 +4,8 @@ import { BeanControllerBase, Use } from 'zova';
 import { Controller } from 'zova-module-a-bean';
 import { TypeForm, TypeFormState } from '../../types/form.js';
 
-export interface ControllerFormSubscribeProps<T extends {} = {}> {
-  slotDefault?: (formState: TypeFormState<T>, form: TypeForm<T>) => VNode;
+export interface ControllerFormSubscribeProps<TFormData extends {} = {}, TSubmitMeta = never> {
+  slotDefault?: (formState: TypeFormState<TFormData>, form: TypeForm<TFormData, TSubmitMeta>) => VNode;
 }
 
 @Controller()
