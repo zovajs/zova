@@ -4,20 +4,20 @@ import { defineComponent } from 'vue';
 import { prepareComponentOptions, useController } from 'zova';
 import { ControllerFormSubscribe } from '../../component/formSubscribe/controller.jsx';
 
-export type TypeControllerFormSubscribePublicProps<T extends {} = {}> = {
-  controllerRef?: (ref: ControllerFormSubscribe<T>) => void;
-} & ControllerFormSubscribeProps<T>;
+export type TypeControllerFormSubscribePublicProps<TFormData extends {} = {}, TSubmitMeta = never> = {
+  controllerRef?: (ref: ControllerFormSubscribe<TFormData, TSubmitMeta>) => void;
+} & ControllerFormSubscribeProps<TFormData, TSubmitMeta>;
 
-type ControllerInnerProps<T extends {} = {}> =
-  TypeControllerInnerProps<ControllerFormSubscribeProps<T>, keyof typeof ControllerFormSubscribe.$propsDefault>;
+type ControllerInnerProps<TFormData extends {} = {}, TSubmitMeta = never> =
+  TypeControllerInnerProps<ControllerFormSubscribeProps<TFormData, TSubmitMeta>, keyof typeof ControllerFormSubscribe.$propsDefault>;
 declare module 'zova-module-a-form' {
-  export interface ControllerFormSubscribe<T extends {} = {}> {
-    $props: ControllerInnerProps<T>;
+  export interface ControllerFormSubscribe<TFormData extends {} = {}, TSubmitMeta = never> {
+    $props: ControllerInnerProps<TFormData, TSubmitMeta>;
   }
 }
 
 export const ZFormSubscribe = defineComponent(
-  <T extends {} = {}>(_props: TypeControllerFormSubscribePublicProps<T>) => {
+  <TFormData extends {} = {}, TSubmitMeta = never>(_props: TypeControllerFormSubscribePublicProps<TFormData, TSubmitMeta>) => {
     useController(ControllerFormSubscribe, undefined, undefined);
     return () => {};
   },

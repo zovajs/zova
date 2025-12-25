@@ -3,6 +3,7 @@ import type { ControllerFormFieldProps } from '../../component/formField/control
 import { defineComponent } from 'vue';
 import { prepareComponentOptions, useController } from 'zova';
 import { ControllerFormField } from '../../component/formField/controller.jsx';
+import { RenderFormField } from '../../component/formField/render.jsx';
 
 export type TypeControllerFormFieldPublicProps<TParentData extends {} = {}> = {
   controllerRef?: (ref: ControllerFormField<TParentData>) => void;
@@ -15,10 +16,12 @@ declare module 'zova-module-a-form' {
     $props: ControllerInnerProps<TParentData>;
   }
 }
-
+declare module 'zova-module-a-form' {
+  export interface RenderFormField<TParentData extends {} = {}> extends ControllerFormField<TParentData> {}
+}
 export const ZFormField = defineComponent(
   <TParentData extends {} = {}>(_props: TypeControllerFormFieldPublicProps<TParentData>) => {
-    useController(ControllerFormField, undefined, undefined);
+    useController(ControllerFormField, RenderFormField, undefined);
     return () => {};
   },
   prepareComponentOptions(ControllerFormField.$componentOptions),

@@ -69,6 +69,7 @@ export interface IZovaComponentRecord {
 /** components: end */
 /** render: begin */
 export * from '../component/form/render.jsx';
+export * from '../component/formField/render.jsx';
 
 import 'zova';
 declare module 'zova' {
@@ -80,15 +81,22 @@ declare module 'zova-module-a-form' {
         export interface RenderForm {
           /** @internal */
           get scope(): ScopeModuleAForm;
+        }
+
+        export interface RenderFormField {
+          /** @internal */
+          get scope(): ScopeModuleAForm;
         } 
 }
 /** render: end */
 /** render: begin */
 import { RenderForm } from '../component/form/render.jsx';
+import { RenderFormField } from '../component/formField/render.jsx';
 import 'zova';
 declare module 'zova' {
   export interface IBeanRecordLocal {
     'a-form.render.form': RenderForm;
+'a-form.render.formField': RenderFormField;
   }
 }
 /** render: end */

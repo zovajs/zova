@@ -43,6 +43,7 @@ export class RenderPageToolOne extends BeanRenderBase {
   }
 
   private _renderManual() {
+    return;
     return (
       <ZForm
         data={this.formData}
