@@ -25,6 +25,7 @@ export interface ControllerFormProps<TFormData extends {} = {}, TSubmitMeta = ne
   formMeta?: IFormMeta;
   formProvider?: IFormProvider;
   formFieldLayout?: IFormFieldLayoutOptionsBase;
+  onFormSubmit?: (e: SubmitEvent) => any;
   onSubmit?: TypeFormOnSubmit<TFormData, TSubmitMeta>;
   onShowError?: TypeFormOnShowError<TFormData, TSubmitMeta>;
   slotHeader?: (formState: TypeFormState<TFormData>, form: TypeForm<TFormData, TSubmitMeta>) => VNode;
