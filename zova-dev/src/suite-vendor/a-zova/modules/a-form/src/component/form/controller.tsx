@@ -114,7 +114,7 @@ export class ControllerForm<TFormData extends {} = {}, TSubmitMeta = never> exte
   public getFieldExpressionContext<K extends DeepKeys<TFormData>>(name: K) {
     return {
       name,
-      value: this.form.getFieldValue(name),
+      value: this.form.getFieldValue(name) ?? null,
       property: this.getFieldProperty(name),
     };
   }
@@ -217,7 +217,8 @@ export class ControllerForm<TFormData extends {} = {}, TSubmitMeta = never> exte
     for (const jsxChild of jsxChildren) {
       let child;
       if (typeof jsxChild === 'string') {
-        child = createTextVNode(jsxChild);
+        const childText = this.fieldEvaluateExpressions(jsxChild, celContext);
+        child = createTextVNode(childText);
       } else {
         const props = { key: jsxChild.key }; // key will be not a celjs
         child = this.renderJsx(jsxChild, props, celContext);

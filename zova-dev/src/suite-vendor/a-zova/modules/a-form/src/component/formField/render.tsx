@@ -39,7 +39,7 @@ export class RenderFormField<TParentData extends {} = {}> extends BeanRenderBase
     if (this.$slotDefault) {
       return this.$slotDefault!(renderContext, this.field);
     }
-    const restRender = this.property?.rest?.render;
+    const restRender = this.$props.render ?? this.property?.rest?.render;
     if (restRender && typeof restRender === 'object') {
       const celContext = {
         ...this.$$form.getFieldExpressionContext(this.name),
