@@ -169,8 +169,19 @@ export class ControllerForm<TFormData extends {} = {}, TSubmitMeta = never> exte
     // props
     this._renderJsxProps(componentOptions.props, props, celContext);
     // children
-    const children = this._renderJsxChildren(componentOptions.props?.children, celContext);
-    // h
+    let children;
+    const propsChildren = componentOptions.props?.children;
+    if (!propsChildren) {
+      children = undefined;
+    } else {
+      if (typeof Component === 'string' && Component.charAt(0) >= 'a' && Component.charAt(0) <= 'z') {
+        children = this._renderJsxChildren(componentOptions.props!.children, celContext);
+      } else {
+        children = () => {
+          return this._renderJsxChildren(componentOptions.props!.children, celContext);
+        };
+      }
+    }
     return h(Component, props, children);
   }
 
@@ -200,8 +211,7 @@ export class ControllerForm<TFormData extends {} = {}, TSubmitMeta = never> exte
     return props;
   }
 
-  private _renderJsxChildren(jsxChildren: TypeRenderComponentJsx | TypeRenderComponentJsx[] | undefined, celContext: {}) {
-    if (!jsxChildren) return undefined;
+  private _renderJsxChildren(jsxChildren: TypeRenderComponentJsx | TypeRenderComponentJsx[], celContext: {}) {
     if (!Array.isArray(jsxChildren)) jsxChildren = [jsxChildren];
     const children: VNode[] = [];
     for (const jsxChild of jsxChildren) {

@@ -14,12 +14,21 @@ export class ControllerFormFieldTest extends BeanControllerBase {
 
   protected render() {
     return (
-      <>
+      <div>
         <ZFormField
-          name={this.$props.name}
+          {...this.$props}
+          slotDefault={({ props }) => {
+            return (
+              <input
+                {...props}
+                class={this.$props.class}
+              ></input>
+            );
+          }}
         ></ZFormField>
         {this.$props.showLog && <div>{`log: ${this.$props.name}`}</div>}
-      </>
+        {this.$slotDefault?.()}
+      </div>
     );
   }
 }
