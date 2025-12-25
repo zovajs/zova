@@ -7,7 +7,7 @@ import { z } from 'zod';
 import { $ZodIssue } from 'zod/v4/core';
 import { deepEqual, deepExtend, UseScope } from 'zova';
 import { Controller } from 'zova-module-a-bean';
-import { loadSchemaProperties, renderFieldJsxPropsSystem, schemaToZodSchema, ScopeModuleAOpenapi, TypeRenderComponent, TypeRenderComponentJsx, TypeRenderComponentJsxProps } from 'zova-module-a-openapi';
+import { loadSchemaProperties, renderFieldJsxPropsSystem, renderFieldTopPropsSystem, schemaToZodSchema, ScopeModuleAOpenapi, TypeRenderComponent, TypeRenderComponentJsx, TypeRenderComponentJsxProps } from 'zova-module-a-openapi';
 import { BeanControllerFormBase } from '../../lib/beanControllerFormBase.js';
 import { RevalidateLogicProps, TypeForm, TypeFormOnShowError, TypeFormOnSubmit } from '../../types/form.js';
 import { IFormFieldLayoutOptionsBase } from '../../types/formField.js';
@@ -78,6 +78,10 @@ export class ControllerForm<TFormData extends {} = {}, TSubmitMeta = never> exte
     return this.$props.formMeta;
   }
 
+  public get renderAuto(){
+    return !this.$slotDefault;
+  }
+
   public getFieldProperty<K extends DeepKeys<TFormData>>(name: K): SchemaObject | undefined {
     if (!this.properties) return;
     return this.properties.find(item => item.key === name);
@@ -115,6 +119,21 @@ export class ControllerForm<TFormData extends {} = {}, TSubmitMeta = never> exte
       celContext,
       this.fieldExpressionEnv,
     );
+  }
+
+  public getFieldComponentPropsTop<K extends DeepKeys<TFormData>>(name: K, celContext: {}) {
+    const props = { key: name, name };
+    const property = this.getFieldProperty(name);
+    if (!property) return props;
+    const rest = property.rest;
+    if (!rest) return props;
+    const keys = Object.keys(rest).filter(item => !renderFieldTopPropsSystem.includes(item));
+    if (keys.length === 0) return props;
+    for (const key of keys) {
+      const keyValue = this.fieldEvaluateExpressions(rest[key], celContext);
+      props[key] = keyValue;
+    }
+    return props;
   }
 
   public renderJsx(componentOptions: TypeRenderComponentJsx, props: {}, celContext: {}) {
