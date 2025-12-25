@@ -32,6 +32,7 @@ declare module 'zova' {
 /** store: end */
 /** controller: begin */
 export * from '../component/card/controller.jsx';
+export * from '../component/formFieldTest/controller.jsx';
 export * from '../page/component/controller.jsx';
 export * from '../page/legacy/controller.jsx';
 export * from '../page/locale/controller.jsx';
@@ -52,6 +53,11 @@ declare module 'zova' {
 declare module 'zova-module-demo-basic' {
   
         export interface ControllerCard {
+          /** @internal */
+          get scope(): ScopeModuleDemoBasic;
+        }
+
+        export interface ControllerFormFieldTest {
           /** @internal */
           get scope(): ScopeModuleDemoBasic;
         }
@@ -114,6 +120,7 @@ declare module 'zova-module-demo-basic' {
 /** controller: end */
 /** controller: begin */
 import { ControllerCard } from '../component/card/controller.jsx';
+import { ControllerFormFieldTest } from '../component/formFieldTest/controller.jsx';
 import { ControllerPageComponent } from '../page/component/controller.jsx';
 import { ControllerPageLegacy } from '../page/legacy/controller.jsx';
 import { ControllerPageLocale } from '../page/locale/controller.jsx';
@@ -129,6 +136,7 @@ import 'zova';
 declare module 'zova' {
   export interface IBeanRecordLocal {
     'demo-basic.controller.card': ControllerCard;
+'demo-basic.controller.formFieldTest': ControllerFormFieldTest;
 'demo-basic.controller.pageComponent': ControllerPageComponent;
 'demo-basic.controller.pageLegacy': ControllerPageLegacy;
 'demo-basic.controller.pageLocale': ControllerPageLocale;
@@ -232,16 +240,21 @@ $query: NSControllerPageToolTwo.QueryOutput;
 /** components: begin */
 export * from './component/card.js';
 import { ZCard } from './component/card.js';
+export * from './component/formFieldTest.js';
+import { ZFormFieldTest } from './component/formFieldTest.js';
 export const components = {
   'card': ZCard,
+'formFieldTest': ZFormFieldTest,
 };
 import 'zova';
 declare module 'zova' {
 export interface IComponentRecord {
   'demo-basic:card': ControllerCard;
+'demo-basic:formFieldTest': ControllerFormFieldTest;
 }
 export interface IZovaComponentRecord {
   'demo-basic:card': typeof ZCard;
+'demo-basic:formFieldTest': typeof ZFormFieldTest;
 }
 }
 /** components: end */
