@@ -2,6 +2,7 @@ import { catchError, celEnvBase, evaluateExpressions } from '@cabloy/utils';
 import { ZodMetadata } from '@cabloy/zod-openapi';
 import { DeepKeys, determineFormLevelErrorSourceAndValue, FormValidationError, isGlobalFormValidationError, revalidateLogic, useStore, ValidationCause, ValidationError } from '@tanstack/vue-form';
 import { SchemaObject } from 'openapi3-ts/oas31';
+import { classes } from 'typestyle';
 import { createTextVNode, h, VNode } from 'vue';
 import { z } from 'zod';
 import { $ZodIssue } from 'zod/v4/core';
@@ -190,7 +191,11 @@ export class ControllerForm<TFormData extends {} = {}, TSubmitMeta = never> exte
     if (keys.length === 0) return props;
     for (const key of keys) {
       const keyValue = this.fieldEvaluateExpressions(jsxProps[key], celContext);
-      props[key] = keyValue;
+      if (key === 'class') {
+        props[key] = classes(props[key], keyValue);
+      } else {
+        props[key] = keyValue;
+      }
     }
     return props;
   }

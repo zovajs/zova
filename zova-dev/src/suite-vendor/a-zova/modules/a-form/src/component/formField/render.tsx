@@ -6,26 +6,33 @@ import { IFormFieldOptions, IFormFieldRenderContext } from '../../types/formFiel
 @Render()
 export class RenderFormField<TParentData extends {} = {}> extends BeanRenderBase {
   public render() {
-    const property = this.property;
-    const name = this.name;
-    const propsTop = this._getFieldComponentPropsTop();
-    const renderContext: IFormFieldRenderContext<TParentData> = {
-      options: Object.assign(
-        {
-          bordered: this.scope.config.formFieldLayout.bordered,
-          label: property?.title ?? name,
-        },
-        this.$$form.$props.formFieldLayout,
-        propsTop,
-        this.$props as IFormFieldOptions<TParentData>,
-      ),
-      props: {
-        name,
-      },
-    };
+    const renderContext = this._getRenderContext();
     return this.$$beanBehaviorsHolder.render((renderProps: IFormFieldRenderContext<TParentData>) => {
       return this._renderSlotDefault(renderProps);
     }, renderContext);
+  }
+
+  private _getRenderContext() {
+    const property = this.property;
+    const name = this.name;
+    const renderContext: IFormFieldRenderContext<TParentData> = {} as any;
+    // options
+    const propsTop = this._getFieldComponentPropsTop();
+    renderContext.options = Object.assign(
+      {
+        bordered: this.scope.config.formFieldLayout.bordered,
+        label: property?.title ?? name,
+      },
+      this.$$form.$props.formFieldLayout,
+      propsTop,
+      this.$props as IFormFieldOptions<TParentData>,
+    );
+    // props
+    renderContext.props = {
+      name,
+      class: renderContext.options.class,
+    };
+    return renderContext;
   }
 
   private _renderSlotDefault(renderContext: IFormFieldRenderContext<TParentData>) {
