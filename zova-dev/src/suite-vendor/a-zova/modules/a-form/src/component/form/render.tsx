@@ -53,6 +53,12 @@ export class RenderForm extends BeanRenderBase {
   private _renderChildren() {
     const children: (VNode | undefined)[] = [];
     children.push(this.$props.slotHeader?.(this.formState, this.form));
+    const bodyInner = this._renderBodyInner();
+    if (this.$props.slotBody) {
+      children.push(this.$props.slotBody(bodyInner, this.formState, this.form));
+    } else {
+      children.push(bodyInner);
+    }
     children.push(this.$props.slotFooter?.(this.formState, this.form));
     return children;
   }

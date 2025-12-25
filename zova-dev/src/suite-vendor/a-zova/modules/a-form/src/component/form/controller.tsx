@@ -28,7 +28,7 @@ export interface ControllerFormProps<TFormData extends {} = {}, TSubmitMeta = ne
   onSubmit?: TypeFormOnSubmit<TFormData, TSubmitMeta>;
   onShowError?: TypeFormOnShowError<TFormData, TSubmitMeta>;
   slotHeader?: (formState: TypeFormState<TFormData>, form: TypeForm<TFormData, TSubmitMeta>) => VNode;
-  slotBody?: (formState: TypeFormState<TFormData>, form: TypeForm<TFormData, TSubmitMeta>) => VNode;
+  slotBody?: (children: VNode, formState: TypeFormState<TFormData>, form: TypeForm<TFormData, TSubmitMeta>) => VNode;
   slotFooter?: (formState: TypeFormState<TFormData>, form: TypeForm<TFormData, TSubmitMeta>) => VNode;
 }
 @Controller()
