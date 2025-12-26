@@ -109,12 +109,12 @@ export class ZovaJsx extends BeanSimple {
     const children: VNode[] = [];
     for (const jsxChild of jsxChildren) {
       let child;
-      if (typeof jsxChild === 'string') {
-        const childText = this.evaluateExpression(jsxChild, celScope);
-        child = createTextVNode(childText);
-      } else {
+      if (jsxChild && typeof jsxChild === 'object' && jsxChild.type) {
         const props = { key: this.evaluateExpression(jsxChild.key, celScope) };
         child = this.render(jsxChild, props, celScope);
+      } else {
+        const childText = this.evaluateExpression(jsxChild, celScope);
+        child = createTextVNode(childText);
       }
       if (child) {
         if (Array.isArray(child)) {
