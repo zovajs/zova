@@ -8,7 +8,7 @@ import { $ZodIssue } from 'zod/v4/core';
 import { deepEqual, deepExtend, UseScope } from 'zova';
 import { ZovaJsx } from 'zova-jsx';
 import { Controller } from 'zova-module-a-bean';
-import { loadSchemaProperties, renderFieldTopPropsSystem, schemaToZodSchema, ScopeModuleAOpenapi, TypeRenderComponent, TypeRenderComponentJsx } from 'zova-module-a-openapi';
+import { loadSchemaProperties, renderFieldTopPropsSystem, schemaToZodSchema, ScopeModuleAOpenapi } from 'zova-module-a-openapi';
 import { BeanControllerFormBase } from '../../lib/beanControllerFormBase.js';
 import { RevalidateLogicProps, TypeForm, TypeFormOnShowError, TypeFormOnSubmit, TypeFormState } from '../../types/form.js';
 import { IFormFieldLayoutOptionsBase } from '../../types/formField.js';
@@ -136,17 +136,6 @@ export class ControllerForm<TFormData extends {} = {}, TSubmitMeta = never> exte
       props[key] = keyValue;
     }
     return props;
-  }
-
-  public normalizeComponent(type: TypeRenderComponent) {
-    if (typeof type === 'object') type = (type as TypeRenderComponentJsx).type as any;
-    if (typeof type === 'string') {
-      type = this.formProvider.components?.[type] ?? type;
-    }
-    if (typeof type === 'function') return type;
-    if (typeof type === 'string' && type.includes(':')) return this.$zovaComponent(type as any);
-    // div/QInput
-    return type;
   }
 
   private _getZodSchema() {
