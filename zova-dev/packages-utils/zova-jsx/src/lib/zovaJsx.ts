@@ -5,6 +5,7 @@ import { classes } from 'typestyle';
 import { createTextVNode, h } from 'vue';
 import { BeanSimple } from 'zova-core';
 import { renderFieldJsxPropsSystem } from './const.ts';
+import { isNativeElement, isZovaComponent } from './utils.ts';
 
 type CelEnv = typeof celEnvBase;
 
@@ -63,7 +64,7 @@ export class ZovaJsx extends BeanSimple {
       type = this.components?.[type] ?? type;
     }
     if (typeof type === 'function') return type;
-    if (typeof type === 'string' && type.includes(':')) return this.app.meta.component.getZovaComponent(type as never);
+    if (isZovaComponent(type)) return this.app.meta.component.getZovaComponent(type as never);
     // div/QInput
     return type;
   }
@@ -77,7 +78,7 @@ export class ZovaJsx extends BeanSimple {
     if (!propsChildren) {
       children = undefined;
     } else {
-      if (typeof Component === 'string' && Component.charAt(0) >= 'a' && Component.charAt(0) <= 'z') {
+      if (isNativeElement(Component)) {
         children = this._renderJsxChildren(componentOptions.props!.children, celScope);
       } else {
         children = () => {
