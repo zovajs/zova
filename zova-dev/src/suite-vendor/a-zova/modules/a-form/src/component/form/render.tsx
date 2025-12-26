@@ -1,6 +1,6 @@
 import { SchemaObject } from 'openapi3-ts/oas31';
 import { h, VNode } from 'vue';
-import { BeanRenderBase } from 'zova';
+import { BeanRenderBase, cast } from 'zova';
 import { Render } from 'zova-module-a-bean';
 import { TypeRenderComponentJsx } from 'zova-module-a-openapi';
 
@@ -25,13 +25,12 @@ export class RenderForm extends BeanRenderBase {
   private _renderField(property: SchemaObject) {
     const key = property.key!;
     // celScope
-    const celScope = this.getFieldExpressionContext(key);
-    // visible
-    const visible = this.fieldEvaluateExpressions(property.rest?.visible, celScope);
-    if (visible === false) return;
-    const componentOptions = this._getFieldComponentOptionsTop(property);
+    const celScope = this.getFieldCelScope(key);
+    // props
     const props = this.getFieldComponentPropsTop(key, celScope);
-    return this.renderJsx(componentOptions, props, celScope);
+    if (cast(props).visible === false) return;
+    const componentOptions = this._getFieldComponentOptionsTop(property);
+    return this.zovaJsx.render(componentOptions, props, celScope);
   }
 
   private _getFieldComponentOptionsTop(property: SchemaObject): TypeRenderComponentJsx {

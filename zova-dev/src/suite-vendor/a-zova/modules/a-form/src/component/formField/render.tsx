@@ -42,17 +42,17 @@ export class RenderFormField<TParentData extends {} = {}> extends BeanRenderBase
     const restRender = this.$props.render ?? this.property?.rest?.render;
     if (restRender && typeof restRender === 'object') {
       const celScope = {
-        ...this.$$form.getFieldExpressionContext(this.name),
+        ...this.$$form.getFieldCelScope(this.name),
         render: renderContext,
       };
-      return this.$$form.renderJsx(restRender, renderContext.props, celScope);
+      return this.$$form.zovaJsx.render(restRender, renderContext.props, celScope);
     }
     return createVNode(this.$$beanBehaviorsHolder.options.behaviorTag.component, renderContext.props as any);
   }
 
   private _getFieldComponentPropsTop() {
     if (this.$$form.renderAuto) return;
-    const celScope = this.$$form.getFieldExpressionContext(this.name);
+    const celScope = this.$$form.getFieldCelScope(this.name);
     return this.$$form.getFieldComponentPropsTop(this.name, celScope);
   }
 }

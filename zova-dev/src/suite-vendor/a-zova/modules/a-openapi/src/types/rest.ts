@@ -62,4 +62,4 @@ export type TypeRenderComponentProvider = Constructable<ComponentPublicInstance>
 
 export type TypeSchemaScene = 'table' | 'form';
 
-export const renderFieldTopPropsSystem = ['render', 'visible', 'order', 'table', 'form'];
+export const renderFieldTopPropsSystem = ['render', 'order', 'table', 'form'];

@@ -1,6 +1,8 @@
 import type { VNode } from 'vue';
 import type { IFormProviderComponents, TypeRenderComponent, TypeRenderComponentJsx, TypeRenderComponentJsxProps } from '../types/rest.ts';
 import { celEnvBase, evaluateExpressions } from '@cabloy/utils';
+import { classes } from 'typestyle';
+import { createTextVNode, h } from 'vue';
 import { BeanSimple } from 'zova-core';
 import { renderFieldJsxPropsSystem } from './const.ts';
 
@@ -10,7 +12,8 @@ export class ZovaJsx extends BeanSimple {
   private _components: IFormProviderComponents | undefined;
   private _celEnv: CelEnv | undefined;
 
-  public async initialize(components?: IFormProviderComponents, celEnv?: CelEnv) {
+  constructor(components?: IFormProviderComponents, celEnv?: CelEnv) {
+    super();
     this._components = components;
     this._celEnv = celEnv;
   }
@@ -106,11 +109,11 @@ export class ZovaJsx extends BeanSimple {
     for (const jsxChild of jsxChildren) {
       let child;
       if (typeof jsxChild === 'string') {
-        const childText = this.fieldEvaluateExpressions(jsxChild, celScope);
+        const childText = this.evaluateExpression(jsxChild, celScope);
         child = createTextVNode(childText);
       } else {
         const props = { key: jsxChild.key }; // key will be not a celjs
-        child = this.renderJsx(jsxChild, props, celScope);
+        child = this.render(jsxChild, props, celScope);
       }
       if (child) {
         if (Array.isArray(child)) {

@@ -1,14 +1,14 @@
-import { catchError, celEnvBase, evaluateExpressions } from '@cabloy/utils';
+import { catchError, celEnvBase } from '@cabloy/utils';
 import { ZodMetadata } from '@cabloy/zod-openapi';
 import { DeepKeys, determineFormLevelErrorSourceAndValue, FormValidationError, isGlobalFormValidationError, revalidateLogic, useStore, ValidationCause, ValidationError } from '@tanstack/vue-form';
 import { SchemaObject } from 'openapi3-ts/oas31';
-import { classes } from 'typestyle';
-import { createTextVNode, h, VNode } from 'vue';
+import { VNode } from 'vue';
 import { z } from 'zod';
 import { $ZodIssue } from 'zod/v4/core';
 import { deepEqual, deepExtend, UseScope } from 'zova';
+import { ZovaJsx } from 'zova-jsx';
 import { Controller } from 'zova-module-a-bean';
-import { loadSchemaProperties, renderFieldJsxPropsSystem, renderFieldTopPropsSystem, schemaToZodSchema, ScopeModuleAOpenapi, TypeRenderComponent, TypeRenderComponentJsx, TypeRenderComponentJsxProps } from 'zova-module-a-openapi';
+import { loadSchemaProperties, renderFieldTopPropsSystem, schemaToZodSchema, ScopeModuleAOpenapi, TypeRenderComponent, TypeRenderComponentJsx } from 'zova-module-a-openapi';
 import { BeanControllerFormBase } from '../../lib/beanControllerFormBase.js';
 import { RevalidateLogicProps, TypeForm, TypeFormOnShowError, TypeFormOnSubmit, TypeFormState } from '../../types/form.js';
 import { IFormFieldLayoutOptionsBase } from '../../types/formField.js';
@@ -43,8 +43,8 @@ export class ControllerForm<TFormData extends {} = {}, TSubmitMeta = never> exte
   schema: SchemaObject | undefined;
   zodSchema: z.ZodObject<any> | undefined;
   properties: SchemaObject[] | undefined;
-
-  private _fieldExpressionEnv: typeof celEnvBase;
+  zovaJsx: ZovaJsx;
+  fieldCelEnv: typeof celEnvBase;
 
   @UseScope()
   $$scopeModuleAOpenapi: ScopeModuleAOpenapi;
@@ -65,6 +65,13 @@ export class ControllerForm<TFormData extends {} = {}, TSubmitMeta = never> exte
     this.properties = this.$useComputed(() => {
       return loadSchemaProperties(this.schema, 'form');
     });
+    this.fieldCelEnv = this._getFieldCelEnv();
+    this.zovaJsx = this.app.bean._newBeanSimple(
+      ZovaJsx,
+      false,
+      this.formProvider.components,
+      this.fieldCelEnv,
+    );
     this.$watch(() => this.$props.data, (newValue, oldValue) => {
       if (deepEqual(newValue, oldValue)) return;
       this.reset(this.$props.data);
@@ -97,21 +104,18 @@ export class ControllerForm<TFormData extends {} = {}, TSubmitMeta = never> exte
     return ZodMetadata.getFieldSchema(this.zodSchema, name as string);
   }
 
-  public get fieldExpressionEnv(): typeof celEnvBase {
-    if (!this._fieldExpressionEnv) {
-      const celEnv = celEnvBase.clone();
-      celEnv.registerFunction('getValue(string):dyn', name => {
-        return this.form.getFieldValue(name);
-      });
-      celEnv.registerFunction('getProperty(string):dyn', name => {
-        return this.getFieldProperty(name);
-      });
-      this._fieldExpressionEnv = celEnv;
-    }
-    return this._fieldExpressionEnv;
+  private _getFieldCelEnv(): typeof celEnvBase {
+    const celEnv = celEnvBase.clone();
+    celEnv.registerFunction('getValue(string):dyn', name => {
+      return this.form.getFieldValue(name);
+    });
+    celEnv.registerFunction('getProperty(string):dyn', name => {
+      return this.getFieldProperty(name);
+    });
+    return celEnv;
   }
 
-  public getFieldExpressionContext<K extends DeepKeys<TFormData>>(name: K) {
+  public getFieldCelScope<K extends DeepKeys<TFormData>>(name: K) {
     return {
       name,
       value: this.form.getFieldValue(name) ?? null,
@@ -128,7 +132,7 @@ export class ControllerForm<TFormData extends {} = {}, TSubmitMeta = never> exte
     const keys = Object.keys(rest).filter(item => !renderFieldTopPropsSystem.includes(item));
     if (keys.length === 0) return props;
     for (const key of keys) {
-      const keyValue = this.fieldEvaluateExpressions(rest[key], celScope);
+      const keyValue = this.zovaJsx.evaluateExpression(rest[key], celScope);
       props[key] = keyValue;
     }
     return props;
