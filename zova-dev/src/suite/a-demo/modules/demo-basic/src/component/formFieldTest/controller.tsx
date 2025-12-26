@@ -18,7 +18,7 @@ export class ControllerFormFieldTest extends BeanControllerBase {
       <>
         <ZFormField
           {...this.$props}
-          render="input"
+          render="text"
         ></ZFormField>
         {this.$props.showLog && <div>{`log: ${this.$props.name}`}</div>}
         {this.$slotDefault?.()}
