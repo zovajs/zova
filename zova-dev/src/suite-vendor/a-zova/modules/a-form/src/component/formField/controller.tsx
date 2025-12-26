@@ -23,6 +23,9 @@ export class ControllerFormField<TParentData extends {} = {}> extends BeanContro
   $$beanBehaviorsHolder: BeanBehaviorsHolder;
 
   protected async __init__() {
+    if (!this.$$form) {
+      throw new Error(`FormField component should be used in Form component: ${this.name}`);
+    }
     // provide
     this.bean._setBean('$$formField', this);
     // field
