@@ -5,7 +5,7 @@ import { toUpperCaseFirstChar } from '@cabloy/word-utils';
 import fse from 'fs-extra';
 import { loadJSONFile, saveJSONFile } from '../common/utils.ts';
 import { generateBeanGenerals } from './toolsMetadata/generateBeanGenerals.ts';
-import { generateConfig, generateConstant, generateError, generateLocale } from './toolsMetadata/generateConfig.ts';
+import { generateConfig, generateConstant, generateError, generateLocale1, generateLocale2 } from './toolsMetadata/generateConfig.ts';
 import { generateIcons } from './toolsMetadata/generateIcons.ts';
 import { generateMetadataCustom } from './toolsMetadata/generateMetadataCustom.ts';
 import { generateMain, generateMainSys, generateMonkey, generateMonkeySys } from './toolsMetadata/generateMonkey.ts';
@@ -132,8 +132,9 @@ export class CliToolsMetadata extends BeanCliBase {
     const contentConstants = await generateConstant(modulePath);
     content += contentConstants;
     // locale
-    const contentLocales = await generateLocale(modulePath);
-    content += contentLocales;
+    const contentLocales1 = await generateLocale1(modulePath, moduleName);
+    const contentLocales2 = await generateLocale2(contentLocales1);
+    content += contentLocales2;
     // error
     const contentErrors = await generateError(modulePath);
     content += contentErrors;
@@ -147,7 +148,7 @@ export class CliToolsMetadata extends BeanCliBase {
     content += await generateScope(moduleName, relativeNameCapitalize, scopeResources, {
       config: contentConfig,
       errors: contentErrors,
-      locales: contentLocales,
+      locales: contentLocales2,
       constants: contentConstants,
     });
     // empty
@@ -159,12 +160,21 @@ export class CliToolsMetadata extends BeanCliBase {
     // save
     await fse.writeFile(metaIndexFile, content);
     // await this.helper.formatFile({ fileName: metaIndexFile, logPrefix: 'format: ' });
+    // locales
+    await this._generateLocales(modulePath, contentLocales1);
     // generate this
     await this._generateThis(moduleName, relativeNameCapitalize, modulePath);
     // index
     await this._generateIndex(modulePath);
     // package
     await this._generatePackage(modulePath);
+  }
+
+  async _generateLocales(modulePath: string, contentLocales) {
+    if (!contentLocales) return;
+    const localesDest = path.join(modulePath, 'src/.metadata/locales.ts');
+    // save
+    await fse.writeFile(localesDest, contentLocales);
   }
 
   async _generateThis(moduleName: string, relativeNameCapitalize: string, modulePath: string) {
@@ -194,6 +204,12 @@ export { ScopeModule${relativeNameCapitalize} as ScopeModule } from './index.js'
     const jsLibFile = path.join(modulePath, 'src/lib/index.ts');
     if (fse.existsSync(jsLibFile) && !jsContent.includes(jsLib)) {
       jsContent = `${jsLib}\n${jsContent}`;
+    }
+    // jsLocales
+    const jsLocales = "export * from './.metadata/locales.js';";
+    const jsLocalesFile = path.join(modulePath, 'src/.metadata/locales.ts');
+    if (fse.existsSync(jsLocalesFile) && !jsContent.includes(jsLocales)) {
+      jsContent = `${jsLocales}\n${jsContent}`;
     }
     // jsMetadata
     const jsMetadata = "export * from './.metadata/index.js';";

@@ -26,7 +26,7 @@ import { constants } from '../config/constants.js';
   return content;
 }
 
-export async function generateLocale(modulePath: string) {
+export async function generateLocale1(modulePath: string, moduleName: string) {
   const files = await globby('src/config/locale/*.ts', { cwd: modulePath });
   if (files.length === 0) return '';
   files.sort();
@@ -36,14 +36,29 @@ export async function generateLocale(modulePath: string) {
     const localeName = path.basename(file, '.ts');
     const className = `locale_${localeName.replace('-', '_')}`;
     contentImports.push(`import ${className} from '../config/locale/${localeName}.js';`);
-    contentLocales.push(`'${localeName}': ${className},`);
+    contentLocales.push(`  '${localeName}': ${className},`);
   }
   // combine
-  const content = `/** locale: begin */
+  const content = `import type { TypeLocaleBase } from 'zova';
+import { $makeLocaleMagic } from 'zova';
 ${contentImports.join('\n')}
+
 export const locales = {
-  ${contentLocales.join('\n')}
+${contentLocales.join('\n')}
 };
+
+export function $locale<K extends keyof (typeof locales)[TypeLocaleBase]>(key: K, ...args: any[]) {
+  return $makeLocaleMagic(\`${moduleName}::\${key}\`, ...args);
+}
+`;
+  return content;
+}
+
+export async function generateLocale2(contentLocales: string) {
+  if (!contentLocales) return '';
+  // combine
+  const content = `/** locale: begin */
+import { locales } from './locales.js';
 /** locale: end */
 `;
   return content;
