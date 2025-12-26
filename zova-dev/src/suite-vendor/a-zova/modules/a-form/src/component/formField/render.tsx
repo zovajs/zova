@@ -1,4 +1,3 @@
-import { createVNode } from 'vue';
 import { BeanRenderBase } from 'zova';
 import { Render } from 'zova-module-a-bean';
 import { IFormFieldOptions, IFormFieldRenderContext } from '../../types/formField.js';
@@ -39,9 +38,8 @@ export class RenderFormField<TParentData extends {} = {}> extends BeanRenderBase
     if (this.$slotDefault) {
       return this.$slotDefault!(renderContext, this.field);
     }
-    const restRender = this.$props.render ?? this.property?.rest?.render;
     const celScope = this.$$form.getFieldCelScope(this.name, { render: renderContext });
-    return this.$$form.zovaJsx.render(restRender, renderContext.props, celScope);
+    return this.$$form.zovaJsx.render(this.renderType, renderContext.props, celScope);
   }
 
   private _getFieldComponentPropsTop() {

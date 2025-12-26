@@ -33,7 +33,7 @@ export class ControllerFormField<TParentData extends {} = {}> extends BeanContro
     this._formField = useField(options as any) as any;
     // behaviors
     await this.$$beanBehaviorsHolder.initialize({
-      behaviorTag: $UseBehaviorTag(this._getFieldComponent()),
+      behaviorTag: $UseBehaviorTag(this.renderTypeProvider),
       behaviors: () => {
         return this._getFieldBehaviors();
       },
@@ -42,6 +42,19 @@ export class ControllerFormField<TParentData extends {} = {}> extends BeanContro
 
   public get form() {
     return this.$$form.form;
+  }
+
+  public get renderType() {
+    return this.$props.render ?? this.property?.rest?.render ?? 'text';
+  }
+
+  public get renderTypeProvider() {
+    const renderType = this.renderType;
+    let renderTypeProvider = renderType && typeof renderType === 'object' ? renderType.type : renderType;
+    if (typeof renderTypeProvider === 'string') {
+      renderTypeProvider = this.formProvider.components?.[renderTypeProvider] ?? renderTypeProvider;
+    }
+    return renderTypeProvider;
   }
 
   public get field(): TypeFormField {
@@ -107,19 +120,6 @@ export class ControllerFormField<TParentData extends {} = {}> extends BeanContro
       onBlur: _normalizeValidateSchema(validateOnBlur, zodSchemaField),
       onChange: _normalizeValidateSchema(validateOnChange, zodSchemaField),
     }, this.$props.validators);
-  }
-
-  private _getFieldComponent() {
-    const property = this.property;
-    const restRender = property?.rest?.render;
-    const restRenderType = restRender && typeof restRender === 'object' ? restRender.type : restRender;
-    let render = this.$props.render ?? restRenderType ?? 'text';
-    if (typeof render === 'string') {
-      render = this.formProvider.components?.[render] ?? render;
-    }
-    if (typeof render === 'function') return render;
-    if (typeof render === 'string' && render.includes(':')) return this.$zovaComponent(render as any);
-    return render;
   }
 }
 
