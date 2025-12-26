@@ -6,6 +6,7 @@ import type { TypeRenderComponentPreset } from 'zova-module-a-openapi';
 import type { TypeBehaviorFormFieldOptions, TypeFormField } from './form.js';
 
 export type HTMLInputElementType = 'text' | 'password' | 'number' | 'file' | 'hidden' | 'tel' | 'email';
+export const inputTypePresets = ['text', 'password', 'number', 'file', 'hidden', 'tel', 'email'];
 
 export interface IFormFieldLayoutOptionsBase {
   classContainer?: any;

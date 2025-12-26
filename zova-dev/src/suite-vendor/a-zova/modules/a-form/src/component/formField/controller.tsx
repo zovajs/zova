@@ -5,7 +5,7 @@ import { BeanControllerBase, deepExtend, IComponentOptions, Use } from 'zova';
 import { Controller } from 'zova-module-a-bean';
 import { $UseBehaviorTag, BeanBehaviorsHolder, IBehaviorItem } from 'zova-module-a-behavior';
 import { TypeFormField } from '../../types/form.js';
-import { IFormFieldOptions } from '../../types/formField.js';
+import { IFormFieldOptions, inputTypePresets } from '../../types/formField.js';
 
 export interface ControllerFormFieldProps<TParentData extends {} = {}> extends IFormFieldOptions<TParentData> {}
 
@@ -48,9 +48,13 @@ export class ControllerFormField<TParentData extends {} = {}> extends BeanContro
     return this.$props.render ?? this.property?.rest?.render ?? 'text';
   }
 
-  public get renderTypeProvider() {
+  public get renderTypeFlattern() {
     const renderType = this.renderType;
-    let renderTypeProvider = renderType && typeof renderType === 'object' ? renderType.type : renderType;
+    return renderType && typeof renderType === 'object' ? renderType.type : renderType;
+  }
+
+  public get renderTypeProvider() {
+    let renderTypeProvider = this.renderTypeFlattern;
     if (typeof renderTypeProvider === 'string') {
       renderTypeProvider = this.formProvider.components?.[renderTypeProvider] ?? renderTypeProvider;
     }
@@ -79,6 +83,15 @@ export class ControllerFormField<TParentData extends {} = {}> extends BeanContro
 
   public get formProvider() {
     return this.$$form.formProvider;
+  }
+
+  public normalizeInputType(inputType?: string) {
+    if (inputType) return inputType;
+    const renderTypeFlattern = this.renderTypeFlattern;
+    if (typeof renderTypeFlattern === 'string' && inputTypePresets.includes(renderTypeFlattern)) {
+      return renderTypeFlattern;
+    }
+    return 'text';
   }
 
   private _getFieldBehaviors() {
