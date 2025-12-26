@@ -1,0 +1,23 @@
+import type { ComponentPublicInstance } from 'vue';
+import type { Constructable } from 'zova-core';
+
+export interface TypeRenderComponentJsxProps {
+  children: TypeRenderComponentJsx | TypeRenderComponentJsx[];
+  vIf?: string | boolean;
+  vFor?: string | any[];
+  vEach?: string;
+  key?: string;
+  // [key: string]: any | undefined;
+}
+export interface TypeRenderComponentJsx {
+  type: string;
+  key?: string | null;
+  props?: TypeRenderComponentJsxProps;
+};
+
+export type TypeRenderComponentNormal =
+  Constructable<ComponentPublicInstance> | 'text' | 'textarea' | 'select' | 'checkbox' | 'radio' | 'switch' | 'image' | 'file' | 'color' | 'password' | 'email' | 'url';
+
+export type TypeRenderComponent = TypeRenderComponentNormal | TypeRenderComponentJsx;
+
+export interface IFormProviderComponents {}

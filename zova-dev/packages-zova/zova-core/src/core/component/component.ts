@@ -3,7 +3,7 @@ import type { IZovaComponentRecord } from '../../bean/resource/component/type.js
 import type { TypeModuleResourceComponents } from '../../types/interface/module.js';
 import { markRaw } from 'vue';
 import { BeanSimple } from '../../bean/beanSimple.js';
-import { createZovaComponentAsync } from '../../components/createZovaComponentAsync.js';
+import { createZovaComponentAsyncWithApp } from '../../components/createZovaComponentAsync.js';
 
 const SymbolZovaComponents = Symbol('SymbolZovaComponents');
 
@@ -38,7 +38,7 @@ export class AppComponent extends BeanSimple {
   public getZovaComponent(module: string, name?: string) {
     const componentName = module.includes(':') ? module : `${module}:${name}`;
     if (!this[SymbolZovaComponents][componentName]) {
-      this[SymbolZovaComponents][componentName] = markRaw(createZovaComponentAsync(componentName));
+      this[SymbolZovaComponents][componentName] = markRaw(createZovaComponentAsyncWithApp(this.app, componentName));
     }
     return this[SymbolZovaComponents][componentName];
   }

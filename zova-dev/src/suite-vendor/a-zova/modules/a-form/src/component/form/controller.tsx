@@ -119,14 +119,6 @@ export class ControllerForm<TFormData extends {} = {}, TSubmitMeta = never> exte
     };
   }
 
-  public fieldEvaluateExpressions(expression: any, celScope?: {}) {
-    return evaluateExpressions(
-      expression,
-      celScope,
-      this.fieldExpressionEnv,
-    );
-  }
-
   public getFieldComponentPropsTop<K extends DeepKeys<TFormData>>(name: K, celScope: {}) {
     const props = { key: name, name };
     const property = this.getFieldProperty(name);
@@ -142,49 +134,6 @@ export class ControllerForm<TFormData extends {} = {}, TSubmitMeta = never> exte
     return props;
   }
 
-  public renderJsx(componentOptions: TypeRenderComponentJsx, props: {}, celScope: {}) {
-    // vIf
-    const vIf = this.fieldEvaluateExpressions(componentOptions.props?.['v-if'], celScope);
-    if (vIf === false) return;
-    // component
-    const Component = this.normalizeComponent(componentOptions.type as TypeRenderComponent);
-    // vFor
-    const vFor = this.fieldEvaluateExpressions(componentOptions.props?.vFor, celScope);
-    if (!vFor) return this._renderJsxSingle(Component, componentOptions, props, celScope);
-    const children: VNode[] = [];
-    for (let index = 0; index < vFor.length; index++) {
-      const each = vFor[index];
-      const eachName = this.fieldEvaluateExpressions(componentOptions.props?.vEach, celScope) ?? 'each';
-      const celScopeEach = { ...celScope, [eachName]: each, [`${eachName}Index`]: index };
-      const propsEach = { ...props, key: this.fieldEvaluateExpressions(componentOptions.key, celScopeEach) };
-      const child = this._renderJsxSingle(Component, componentOptions, propsEach, celScopeEach);
-      if (child) {
-        children.push(child);
-      }
-    }
-    return children;
-  }
-
-  private _renderJsxSingle(Component: any, componentOptions: TypeRenderComponentJsx, props: {}, celScope: {}) {
-    // props
-    this._renderJsxProps(componentOptions.props, props, celScope);
-    // children
-    let children;
-    const propsChildren = componentOptions.props?.children;
-    if (!propsChildren) {
-      children = undefined;
-    } else {
-      if (typeof Component === 'string' && Component.charAt(0) >= 'a' && Component.charAt(0) <= 'z') {
-        children = this._renderJsxChildren(componentOptions.props!.children, celScope);
-      } else {
-        children = () => {
-          return this._renderJsxChildren(componentOptions.props!.children, celScope);
-        };
-      }
-    }
-    return h(Component, props, children);
-  }
-
   public normalizeComponent(type: TypeRenderComponent) {
     if (typeof type === 'object') type = (type as TypeRenderComponentJsx).type as any;
     if (typeof type === 'string') {
@@ -194,44 +143,6 @@ export class ControllerForm<TFormData extends {} = {}, TSubmitMeta = never> exte
     if (typeof type === 'string' && type.includes(':')) return this.$zovaComponent(type as any);
     // div/QInput
     return type;
-  }
-
-  private _renderJsxProps(jsxProps: TypeRenderComponentJsxProps | undefined, props: {}, celScope: {}) {
-    if (!jsxProps) return props;
-    const keys = Object.keys(jsxProps).filter(item => !renderFieldJsxPropsSystem.includes(item));
-    if (keys.length === 0) return props;
-    for (const key of keys) {
-      const keyValue = this.fieldEvaluateExpressions(jsxProps[key], celScope);
-      if (key === 'class') {
-        props[key] = classes(props[key], keyValue);
-      } else {
-        props[key] = keyValue;
-      }
-    }
-    return props;
-  }
-
-  private _renderJsxChildren(jsxChildren: TypeRenderComponentJsx | TypeRenderComponentJsx[], celScope: {}) {
-    if (!Array.isArray(jsxChildren)) jsxChildren = [jsxChildren];
-    const children: VNode[] = [];
-    for (const jsxChild of jsxChildren) {
-      let child;
-      if (typeof jsxChild === 'string') {
-        const childText = this.fieldEvaluateExpressions(jsxChild, celScope);
-        child = createTextVNode(childText);
-      } else {
-        const props = { key: jsxChild.key }; // key will be not a celjs
-        child = this.renderJsx(jsxChild, props, celScope);
-      }
-      if (child) {
-        if (Array.isArray(child)) {
-          children.push(...child);
-        } else {
-          children.push(child);
-        }
-      }
-    }
-    return children;
   }
 
   private _getZodSchema() {
