@@ -3,7 +3,7 @@ import type { IFormProviderComponents, TypeRenderComponent, TypeRenderComponentJ
 import { celEnvBase, evaluateExpressions } from '@cabloy/utils';
 import { classes } from 'typestyle';
 import { createTextVNode, h } from 'vue';
-import { BeanSimple } from 'zova-core';
+import { BeanSimple, cast } from 'zova-core';
 import { renderFieldJsxPropsSystem } from './const.ts';
 import { isNativeElement, isZovaComponent } from './utils.ts';
 
@@ -49,7 +49,7 @@ export class ZovaJsx extends BeanSimple {
       const each = vFor[index];
       const eachName = this.evaluateExpression(componentOptions.props?.['v-each'], celScope) ?? 'each';
       const celScopeEach = { ...celScope, [eachName]: each, [`${eachName}Index`]: index };
-      const propsEach = { ...props, key: this.evaluateExpression(componentOptions.key, celScopeEach) };
+      const propsEach = { ...props };
       const child = this._renderJsxSingle(Component, componentOptions, propsEach, celScopeEach);
       if (child) {
         children.push(child);
@@ -70,6 +70,8 @@ export class ZovaJsx extends BeanSimple {
   }
 
   private _renderJsxSingle(Component: any, componentOptions: TypeRenderComponentJsx, props: {}, celScope: {}) {
+    // key
+    cast(props).key = this.evaluateExpression(componentOptions.key, celScope);
     // props
     this._renderJsxProps(componentOptions.props, props, celScope);
     // children
@@ -110,7 +112,7 @@ export class ZovaJsx extends BeanSimple {
     for (const jsxChild of jsxChildren) {
       let child;
       if (jsxChild && typeof jsxChild === 'object' && jsxChild.type) {
-        const props = { key: this.evaluateExpression(jsxChild.key, celScope) };
+        const props = {};
         child = this.render(jsxChild, props, celScope);
       } else {
         const childText = this.evaluateExpression(jsxChild, celScope);
