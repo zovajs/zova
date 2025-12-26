@@ -65,10 +65,6 @@ export class ZovaJsx extends BeanSimple {
   }
 
   public normalizeComponent(type: TypeRenderComponent) {
-    if (typeof type === 'object') {
-      // type = (type as TypeRenderComponentJsx).type as any;
-      throw new TypeError('should not be here');
-    }
     if (typeof type === 'function') return type;
     if (typeof type === 'string') {
       type = this.components?.[type] ?? type;
