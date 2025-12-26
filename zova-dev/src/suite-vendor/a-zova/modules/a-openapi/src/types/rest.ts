@@ -48,7 +48,7 @@ export interface TypeRenderComponentJsxProps {
   vFor?: string | any[];
   vEach?: string;
   key?: string;
-  [key: string]: any | undefined;
+  // [key: string]: any | undefined;
 }
 export interface TypeRenderComponentJsx {
   type: (keyof IComponentRecord) | string;
