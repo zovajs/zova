@@ -9,6 +9,7 @@ export interface TypeResourceActionRowRecord {
   view: IResourceActionRowOptions;
   update: IResourceActionRowOptions;
   delete: IResourceActionRowOptions;
+  operations: IResourceActionRowOptions;
 }
 
 export type TypeResourceActionRowRecordRender = {
