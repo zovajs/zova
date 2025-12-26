@@ -41,18 +41,18 @@ export class RenderFormField<TParentData extends {} = {}> extends BeanRenderBase
     }
     const restRender = this.$props.render ?? this.property?.rest?.render;
     if (restRender && typeof restRender === 'object') {
-      const celContext = {
+      const celScope = {
         ...this.$$form.getFieldExpressionContext(this.name),
         render: renderContext,
       };
-      return this.$$form.renderJsx(restRender, renderContext.props, celContext);
+      return this.$$form.renderJsx(restRender, renderContext.props, celScope);
     }
     return createVNode(this.$$beanBehaviorsHolder.options.behaviorTag.component, renderContext.props as any);
   }
 
   private _getFieldComponentPropsTop() {
     if (this.$$form.renderAuto) return;
-    const celContext = this.$$form.getFieldExpressionContext(this.name);
-    return this.$$form.getFieldComponentPropsTop(this.name, celContext);
+    const celScope = this.$$form.getFieldExpressionContext(this.name);
+    return this.$$form.getFieldComponentPropsTop(this.name, celScope);
   }
 }

@@ -119,15 +119,15 @@ export class ControllerForm<TFormData extends {} = {}, TSubmitMeta = never> exte
     };
   }
 
-  public fieldEvaluateExpressions(expression: any, celContext?: {}) {
+  public fieldEvaluateExpressions(expression: any, celScope?: {}) {
     return evaluateExpressions(
       expression,
-      celContext,
+      celScope,
       this.fieldExpressionEnv,
     );
   }
 
-  public getFieldComponentPropsTop<K extends DeepKeys<TFormData>>(name: K, celContext: {}) {
+  public getFieldComponentPropsTop<K extends DeepKeys<TFormData>>(name: K, celScope: {}) {
     const props = { key: name, name };
     const property = this.getFieldProperty(name);
     if (!property) return props;
@@ -136,28 +136,28 @@ export class ControllerForm<TFormData extends {} = {}, TSubmitMeta = never> exte
     const keys = Object.keys(rest).filter(item => !renderFieldTopPropsSystem.includes(item));
     if (keys.length === 0) return props;
     for (const key of keys) {
-      const keyValue = this.fieldEvaluateExpressions(rest[key], celContext);
+      const keyValue = this.fieldEvaluateExpressions(rest[key], celScope);
       props[key] = keyValue;
     }
     return props;
   }
 
-  public renderJsx(componentOptions: TypeRenderComponentJsx, props: {}, celContext: {}) {
+  public renderJsx(componentOptions: TypeRenderComponentJsx, props: {}, celScope: {}) {
     // vIf
-    const vIf = this.fieldEvaluateExpressions(componentOptions.props?.['v-if'], celContext);
+    const vIf = this.fieldEvaluateExpressions(componentOptions.props?.['v-if'], celScope);
     if (vIf === false) return;
     // component
     const Component = this.normalizeComponent(componentOptions.type as TypeRenderComponent);
     // vFor
-    const vFor = this.fieldEvaluateExpressions(componentOptions.props?.vFor, celContext);
-    if (!vFor) return this._renderJsxSingle(Component, componentOptions, props, celContext);
+    const vFor = this.fieldEvaluateExpressions(componentOptions.props?.vFor, celScope);
+    if (!vFor) return this._renderJsxSingle(Component, componentOptions, props, celScope);
     const children: VNode[] = [];
     for (let index = 0; index < vFor.length; index++) {
       const each = vFor[index];
-      const eachName = this.fieldEvaluateExpressions(componentOptions.props?.vEach, celContext) ?? 'each';
-      const celContextEach = { ...celContext, [eachName]: each, [`${eachName}Index`]: index };
-      const propsEach = { ...props, key: this.fieldEvaluateExpressions(componentOptions.key, celContextEach) };
-      const child = this._renderJsxSingle(Component, componentOptions, propsEach, celContextEach);
+      const eachName = this.fieldEvaluateExpressions(componentOptions.props?.vEach, celScope) ?? 'each';
+      const celScopeEach = { ...celScope, [eachName]: each, [`${eachName}Index`]: index };
+      const propsEach = { ...props, key: this.fieldEvaluateExpressions(componentOptions.key, celScopeEach) };
+      const child = this._renderJsxSingle(Component, componentOptions, propsEach, celScopeEach);
       if (child) {
         children.push(child);
       }
@@ -165,9 +165,9 @@ export class ControllerForm<TFormData extends {} = {}, TSubmitMeta = never> exte
     return children;
   }
 
-  private _renderJsxSingle(Component: any, componentOptions: TypeRenderComponentJsx, props: {}, celContext: {}) {
+  private _renderJsxSingle(Component: any, componentOptions: TypeRenderComponentJsx, props: {}, celScope: {}) {
     // props
-    this._renderJsxProps(componentOptions.props, props, celContext);
+    this._renderJsxProps(componentOptions.props, props, celScope);
     // children
     let children;
     const propsChildren = componentOptions.props?.children;
@@ -175,10 +175,10 @@ export class ControllerForm<TFormData extends {} = {}, TSubmitMeta = never> exte
       children = undefined;
     } else {
       if (typeof Component === 'string' && Component.charAt(0) >= 'a' && Component.charAt(0) <= 'z') {
-        children = this._renderJsxChildren(componentOptions.props!.children, celContext);
+        children = this._renderJsxChildren(componentOptions.props!.children, celScope);
       } else {
         children = () => {
-          return this._renderJsxChildren(componentOptions.props!.children, celContext);
+          return this._renderJsxChildren(componentOptions.props!.children, celScope);
         };
       }
     }
@@ -196,12 +196,12 @@ export class ControllerForm<TFormData extends {} = {}, TSubmitMeta = never> exte
     return type;
   }
 
-  private _renderJsxProps(jsxProps: TypeRenderComponentJsxProps | undefined, props: {}, celContext: {}) {
+  private _renderJsxProps(jsxProps: TypeRenderComponentJsxProps | undefined, props: {}, celScope: {}) {
     if (!jsxProps) return props;
     const keys = Object.keys(jsxProps).filter(item => !renderFieldJsxPropsSystem.includes(item));
     if (keys.length === 0) return props;
     for (const key of keys) {
-      const keyValue = this.fieldEvaluateExpressions(jsxProps[key], celContext);
+      const keyValue = this.fieldEvaluateExpressions(jsxProps[key], celScope);
       if (key === 'class') {
         props[key] = classes(props[key], keyValue);
       } else {
@@ -211,17 +211,17 @@ export class ControllerForm<TFormData extends {} = {}, TSubmitMeta = never> exte
     return props;
   }
 
-  private _renderJsxChildren(jsxChildren: TypeRenderComponentJsx | TypeRenderComponentJsx[], celContext: {}) {
+  private _renderJsxChildren(jsxChildren: TypeRenderComponentJsx | TypeRenderComponentJsx[], celScope: {}) {
     if (!Array.isArray(jsxChildren)) jsxChildren = [jsxChildren];
     const children: VNode[] = [];
     for (const jsxChild of jsxChildren) {
       let child;
       if (typeof jsxChild === 'string') {
-        const childText = this.fieldEvaluateExpressions(jsxChild, celContext);
+        const childText = this.fieldEvaluateExpressions(jsxChild, celScope);
         child = createTextVNode(childText);
       } else {
         const props = { key: jsxChild.key }; // key will be not a celjs
-        child = this.renderJsx(jsxChild, props, celContext);
+        child = this.renderJsx(jsxChild, props, celScope);
       }
       if (child) {
         if (Array.isArray(child)) {
