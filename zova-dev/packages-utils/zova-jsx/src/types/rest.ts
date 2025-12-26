@@ -16,7 +16,7 @@ export interface TypeRenderComponentJsx {
 };
 
 export type TypeRenderComponentNormal =
-  Constructable<ComponentPublicInstance> | 'text' | 'textarea' | 'select' | 'checkbox' | 'radio' | 'switch' | 'image' | 'file' | 'color' | 'password' | 'email' | 'url';
+  Constructable<ComponentPublicInstance> | string;
 
 export type TypeRenderComponent = TypeRenderComponentNormal | TypeRenderComponentJsx;
 

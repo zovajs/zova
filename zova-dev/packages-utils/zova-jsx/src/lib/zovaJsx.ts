@@ -35,12 +35,13 @@ export class ZovaJsx extends BeanSimple {
     );
   }
 
-  public render(componentOptions: TypeRenderComponentJsx, props: {}, celScope: {}) {
+  public render(componentOptions: TypeRenderComponent | undefined, props: {}, celScope: {}) {
+    componentOptions = this.normalizeComponenOptions(componentOptions);
     // vIf
     const vIf = this.evaluateExpression(componentOptions.props?.['v-if'], celScope);
     if (vIf === false) return;
     // component
-    const Component = this.normalizeComponent(componentOptions.type as TypeRenderComponent);
+    const Component = this.normalizeComponent(componentOptions.type);
     // vFor
     const vFor = this.evaluateExpression(componentOptions.props?.['v-for'], celScope);
     if (!vFor) return this._renderJsxSingle(Component, componentOptions, props, celScope);
@@ -58,12 +59,20 @@ export class ZovaJsx extends BeanSimple {
     return children;
   }
 
+  public normalizeComponenOptions(componenOptions: TypeRenderComponent | undefined): TypeRenderComponentJsx {
+    if (componenOptions && typeof componenOptions === 'object') return componenOptions;
+    return { type: componenOptions ?? 'text' as any };
+  }
+
   public normalizeComponent(type: TypeRenderComponent) {
-    if (typeof type === 'object') type = (type as TypeRenderComponentJsx).type as any;
+    if (typeof type === 'object') {
+      // type = (type as TypeRenderComponentJsx).type as any;
+      throw new TypeError('should not be here');
+    }
+    if (typeof type === 'function') return type;
     if (typeof type === 'string') {
       type = this.components?.[type] ?? type;
     }
-    if (typeof type === 'function') return type;
     if (isZovaComponent(type)) return this.app.meta.component.getZovaComponent(type as never);
     // div/QInput
     return type;

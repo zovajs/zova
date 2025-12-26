@@ -115,11 +115,12 @@ export class ControllerForm<TFormData extends {} = {}, TSubmitMeta = never> exte
     return celEnv;
   }
 
-  public getFieldCelScope<K extends DeepKeys<TFormData>>(name: K) {
+  public getFieldCelScope<K extends DeepKeys<TFormData>>(name: K, scopeExtra?: {}) {
     return {
       name,
       value: this.form.getFieldValue(name) ?? null,
       property: this.getFieldProperty(name),
+      ...scopeExtra,
     };
   }
 

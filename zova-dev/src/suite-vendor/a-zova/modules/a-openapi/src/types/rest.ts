@@ -1,7 +1,7 @@
 import type { CurrencyOptions } from '@zhennann/currency';
 import type { ComponentPublicInstance } from 'vue';
 import type { Constructable, IComponentRecord } from 'zova';
-import type { TypeRenderComponent } from 'zova-jsx';
+import type { TypeRenderComponentJsx } from 'zova-jsx';
 import type { TypeResourceActionRowRecordRender } from './actions.js';
 import 'openapi3-ts/oas30';
 import 'openapi3-ts/oas31';
@@ -40,8 +40,12 @@ declare module 'openapi3-ts/oas31' {
   export interface SchemaObject extends ISchemaObjectExtensionField {}
 }
 
+export type TypeRenderComponentPreset = keyof TypeResourceActionRowRecordRender | 'text' | 'textarea' | 'select' | 'checkbox' | 'radio' | 'switch' | 'image' | 'file' | 'color' | 'password' | 'email' | 'url';
+
 export type TypeRenderComponentNormal =
-  Constructable<ComponentPublicInstance> | (keyof IComponentRecord) | keyof TypeResourceActionRowRecordRender | 'text' | 'textarea' | 'select' | 'checkbox' | 'radio' | 'switch' | 'image' | 'file' | 'color' | 'password' | 'email' | 'url';
+  Constructable<ComponentPublicInstance> | (keyof IComponentRecord) | TypeRenderComponentPreset;
+
+export type TypeRenderComponent = TypeRenderComponentNormal | TypeRenderComponentJsx;
 
 export type TypeRenderComponentProvider = Constructable<ComponentPublicInstance> | (keyof IComponentRecord) | 'input' | 'textarea' | 'select';
 
