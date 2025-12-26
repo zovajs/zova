@@ -1,1 +1,1 @@
-export const renderFieldJsxPropsSystem = ['children', 'vIf', 'vFor', 'vEach', 'vKey'];
+export const renderFieldJsxPropsSystem = ['children', 'v-if', 'v-for', 'v-each', 'key'];

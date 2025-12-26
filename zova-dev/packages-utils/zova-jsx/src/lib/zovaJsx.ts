@@ -42,12 +42,12 @@ export class ZovaJsx extends BeanSimple {
     // component
     const Component = this.normalizeComponent(componentOptions.type as TypeRenderComponent);
     // vFor
-    const vFor = this.evaluateExpression(componentOptions.props?.vFor, celScope);
+    const vFor = this.evaluateExpression(componentOptions.props?.['v-for'], celScope);
     if (!vFor) return this._renderJsxSingle(Component, componentOptions, props, celScope);
     const children: VNode[] = [];
     for (let index = 0; index < vFor.length; index++) {
       const each = vFor[index];
-      const eachName = this.evaluateExpression(componentOptions.props?.vEach, celScope) ?? 'each';
+      const eachName = this.evaluateExpression(componentOptions.props?.['v-each'], celScope) ?? 'each';
       const celScopeEach = { ...celScope, [eachName]: each, [`${eachName}Index`]: index };
       const propsEach = { ...props, key: this.evaluateExpression(componentOptions.key, celScopeEach) };
       const child = this._renderJsxSingle(Component, componentOptions, propsEach, celScopeEach);
@@ -113,7 +113,7 @@ export class ZovaJsx extends BeanSimple {
         const childText = this.evaluateExpression(jsxChild, celScope);
         child = createTextVNode(childText);
       } else {
-        const props = { key: jsxChild.key }; // key will be not a celjs
+        const props = { key: this.evaluateExpression(jsxChild.key, celScope) };
         child = this.render(jsxChild, props, celScope);
       }
       if (child) {

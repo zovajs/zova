@@ -2,11 +2,11 @@ import type { ComponentPublicInstance } from 'vue';
 import type { Constructable } from 'zova-core';
 
 export interface TypeRenderComponentJsxProps {
-  children: TypeRenderComponentJsx | TypeRenderComponentJsx[];
-  vIf?: string | boolean;
-  vFor?: string | any[];
-  vEach?: string;
-  key?: string;
+  'children': TypeRenderComponentJsx | TypeRenderComponentJsx[];
+  'v-if'?: string | boolean;
+  'v-for'?: string | any[];
+  'v-each'?: string;
+  // 'key'?: string;
   // [key: string]: any | undefined;
 }
 export interface TypeRenderComponentJsx {
