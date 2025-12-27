@@ -70,8 +70,8 @@ export class CliBinBuildRest extends BeanCliBase {
       outDir,
       dts: {
         resolve: true,
-        resolver: 'tsc',
-        eager: false, // should false
+        resolver: 'tsc', // should be tsc rather than oxc
+        eager: false, // should be false
         // tsconfig: false,
         // compilerOptions: {
         //   target: 'ESNext',
