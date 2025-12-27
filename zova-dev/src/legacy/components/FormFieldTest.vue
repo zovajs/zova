@@ -3,7 +3,7 @@
 
 <template>
   <ZFormField
-    {...this.$props}
+    name="name"
     render="text"
   />
   <slot name="header" />

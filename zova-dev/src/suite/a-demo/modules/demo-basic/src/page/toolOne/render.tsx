@@ -1,3 +1,4 @@
+import FormFieldTest from '@/components/FormFieldTest.vue';
 import { classes } from 'typestyle';
 import { z } from 'zod';
 import { BeanRenderBase } from 'zova';
@@ -43,7 +44,6 @@ export class RenderPageToolOne extends BeanRenderBase {
   }
 
   private _renderManual() {
-    return;
     return (
       <ZForm
         data={this.formData}
@@ -71,6 +71,13 @@ export class RenderPageToolOne extends BeanRenderBase {
         <ZFormField name="name">
           <span>name</span>
         </ZFormField>
+        <FormFieldTest>
+          {{
+            header: () => <div>--- Header Slot ---</div>,
+            default: () => <div>--- Default Slot ---</div>,
+            footer: () => <div>--- Footer Slot ---</div>,
+          }}
+        </FormFieldTest>
         <ZFormSubscribe slotDefault={state => {
           return (
             <button disabled={state.isSubmitting} type="submit" class="btn btn-primary">
