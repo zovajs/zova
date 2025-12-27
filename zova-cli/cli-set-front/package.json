@@ -58,6 +58,7 @@
     "gogocode": "^1.0.55",
     "rimraf": "^5.0.5",
     "svgo": "^3.2.0",
+    "tsdown": "^0.18.3",
     "typescript": "5.9.3",
     "urllib": "^4.6.11",
     "zova-openapi": "^1.0.3",
