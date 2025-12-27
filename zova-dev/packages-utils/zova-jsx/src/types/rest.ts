@@ -6,6 +6,8 @@ export interface TypeRenderComponentJsxProps {
   'v-if'?: string | boolean;
   'v-for'?: string | any[];
   'v-each'?: string;
+  'v-slot'?: string;
+  'v-slot-scope'?: string;
   // 'key'?: string;
   // [key: string]: any | undefined;
 }
