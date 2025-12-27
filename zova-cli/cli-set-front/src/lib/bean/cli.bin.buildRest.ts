@@ -45,6 +45,7 @@ export class CliBinBuildRest extends BeanCliBase {
     //
     await this._prepareResources(projectPath, srcDir);
     await this._build(projectPath, srcDir, outDir);
+    //
     await rimraf(srcDir);
   }
 
