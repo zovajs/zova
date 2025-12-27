@@ -95,7 +95,7 @@ export class BeanModelPersister extends BeanModelLast {
     }
   }
 
-  protected _createPersister(options?: QueryMetaPersister | boolean) {
+  protected _createPersister(options?: QueryMetaPersister | boolean): any {
     options = this._adjustPersisterOptions(options);
     if (!options) return undefined;
     return experimental_createQueryPersister({
