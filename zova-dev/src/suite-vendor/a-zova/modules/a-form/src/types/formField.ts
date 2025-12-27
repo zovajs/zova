@@ -29,15 +29,13 @@ export interface IFormFieldOptionsBase {
   validateOnBlur?: boolean | z.ZodType;
 }
 
-export interface IFormFieldOptions<TParentData = {}> extends IFormFieldRenderContextProps<TParentData> {
+export interface IFormFieldOptions<TParentData = {}>
+  extends TypeBehaviorFormFieldOptions<TParentData>, IFormFieldOptionsBase, IFormFieldLayoutOptionsBase {
   behaviors?: IBehaviorItem;
   slotDefault?: (props: IFormFieldRenderContext<TParentData>, field: TypeFormField<TParentData>) => VNode;
 }
 
-export interface IFormFieldRenderContextProps<TParentData = {}>
-  extends TypeBehaviorFormFieldOptions<TParentData>, IFormFieldOptionsBase, IFormFieldLayoutOptionsBase {}
-
-export interface IFormFieldRenderContextPropsInner {
+export interface IFormFieldRenderContextProps {
   name?: string;
   value?: any;
   type?: string;
@@ -50,5 +48,5 @@ export interface IFormFieldRenderContextPropsInner {
 
 export interface IFormFieldRenderContext<TParentData = {}> {
   options: IFormFieldOptions<TParentData>;
-  props: IFormFieldRenderContextPropsInner;
+  props: IFormFieldRenderContextProps;
 }
