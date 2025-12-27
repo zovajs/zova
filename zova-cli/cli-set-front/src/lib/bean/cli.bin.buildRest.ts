@@ -36,8 +36,15 @@ export class CliBinBuildRest extends BeanCliBase {
     // super
     await super.execute();
     const projectPath = argv.projectPath;
-    await this._prepareResources(projectPath);
-    await this._build(projectPath);
+    //
+    const srcDir = path.join(projectPath, '.zova-rest');
+    const outDir = path.join(projectPath, 'dist', `rest-${this.flavor}`);
+    await rimraf(srcDir);
+    await rimraf(outDir);
+    //
+    await this._prepareResources(projectPath, srcDir);
+    await this._build(projectPath, srcDir, outDir);
+    await rimraf(srcDir);
   }
 
   get flavor(): ZovaMetaFlavor {
@@ -45,20 +52,16 @@ export class CliBinBuildRest extends BeanCliBase {
     return argv.flavor || 'vonaHome';
   }
 
-  async _prepareResources(projectPath: string) {
-    const outDir = path.join(projectPath, '.zova-rest');
-    await rimraf(outDir);
-    await this.helper.ensureDir(outDir);
+  async _prepareResources(projectPath: string, srcDir: string) {
     // package.json
-    await this._prepareResourcesPackage(projectPath, outDir);
+    await this._prepareResourcesPackage(projectPath, srcDir);
     // index.ts
-    await this._prepareResourcesIndex(projectPath, outDir);
+    await this._prepareResourcesIndex(projectPath, srcDir);
   }
 
-  async _build(projectPath: string) {
-    const entry = path.join(projectPath, '.zova-rest', 'index.ts');
-    const outDir = path.join(projectPath, 'dist', `rest-${this.flavor}`);
-    await rimraf(outDir);
+  async _build(projectPath: string, srcDir: string, outDir: string) {
+    const entry = path.join(srcDir, 'index.ts');
+    // build
     await build({
       entry: [entry],
       format: ['esm'],
@@ -68,8 +71,9 @@ export class CliBinBuildRest extends BeanCliBase {
         resolver: 'tsc',
       },
     });
+    // package.json
     await fse.copyFile(
-      path.join(projectPath, '.zova-rest', 'package.json'),
+      path.join(srcDir, 'package.json'),
       path.join(outDir, 'package.json'),
     );
     // release
@@ -79,7 +83,7 @@ export class CliBinBuildRest extends BeanCliBase {
     );
   }
 
-  async _prepareResourcesPackage(projectPath: string, outDir: string) {
+  async _prepareResourcesPackage(projectPath: string, srcDir: string) {
     const mode: ZovaMetaMode = 'production';
     const flavor: ZovaMetaFlavor = this.flavor;
     const appMode: ZovaMetaAppMode = 'ssr';
@@ -96,17 +100,17 @@ export class CliBinBuildRest extends BeanCliBase {
       __template_package,
       { Name: flavor, Version: env.APP_VERSION },
     );
-    await fse.writeFile(path.join(outDir, 'package.json'), pkgContent!);
+    await fse.writeFile(path.join(srcDir, 'package.json'), pkgContent!);
   }
 
-  async _prepareResourcesIndex(_projectPath: string, outDir: string) {
+  async _prepareResourcesIndex(_projectPath: string, srcDir: string) {
     let indexContent = '';
     for (const module of this.modulesMeta.modulesArray) {
       const restIndexFile = path.join(module.root, 'rest/index.ts');
       if (!fse.existsSync(restIndexFile)) continue;
-      const restIndexFileRelative = path.relative(outDir, restIndexFile);
+      const restIndexFileRelative = path.relative(srcDir, restIndexFile);
       indexContent += `import '${restIndexFileRelative}';\n`;
     }
-    await fse.writeFile(path.join(outDir, 'index.ts'), indexContent);
+    await fse.writeFile(path.join(srcDir, 'index.ts'), indexContent);
   }
 }
