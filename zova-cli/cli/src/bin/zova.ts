@@ -8,9 +8,7 @@ const pnpm_version = '10.19.0';
 
 const processHelper = new ProcessHelper(process.cwd());
 
-checkPnpm().then(() => {
-  main();
-});
+main();
 
 async function checkPnpm() {
   const res = await processHelper.spawnCmd({
@@ -29,17 +27,7 @@ async function checkPnpm() {
   }
 }
 
-function main() {
+async function main() {
+  await checkPnpm();
   new ZovaCommand().start();
-  // let args: string[] = [];
-  // // bootstrapFile
-  // let bootstrapFile = path.join(import.meta.dirname, '../bootstrap.ts');
-  // if (!fse.existsSync(bootstrapFile)) {
-  //   bootstrapFile = path.join(import.meta.dirname, '../bootstrap.js');
-  // }
-  // args.push(bootstrapFile);
-  // const rawArgv = process.argv.slice(2);
-  // args = args.concat(rawArgv);
-
-  // processHelper.spawnCmd({ cmd: 'tsx', args });
 }
