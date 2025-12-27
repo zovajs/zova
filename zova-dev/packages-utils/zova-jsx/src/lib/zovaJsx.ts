@@ -70,8 +70,7 @@ export class ZovaJsx extends BeanSimple {
     if (typeof type === 'string') {
       type = this.components?.[type] ?? type;
     }
-    if (isZovaComponent(type)) return this.app.meta.component.getZovaComponent(type as never);
-    // div/QInput
+    // div/QInput/Zova Component
     return type;
   }
 
@@ -103,6 +102,9 @@ export class ZovaJsx extends BeanSimple {
           children = childrenCollect;
         }
       }
+    }
+    if (isZovaComponent(Component)) {
+      Component = this.app.meta.component.getZovaComponent(Component as never);
     }
     return h(Component, props, children);
   }
