@@ -1,6 +1,7 @@
 import type { VNode } from 'vue';
 import type { IFormProviderComponents, TypeRenderComponent, TypeRenderComponentJsx, TypeRenderComponentJsxProps } from '../types/rest.ts';
-import { celEnvBase, evaluateExpressions, isEmptyObject } from '@cabloy/utils';
+import { celEnvBase, evaluateExpressions } from '@cabloy/utils';
+import { toUpperCaseFirstChar } from '@cabloy/word-utils';
 import { classes } from 'typestyle';
 import { createTextVNode, h } from 'vue';
 import { BeanSimple, cast } from 'zova-core';
@@ -88,7 +89,19 @@ export class ZovaJsx extends BeanSimple {
       if (isNativeElement(Component)) {
         children = this._renderJsxChildrenDirect(componentOptions.props!.children, celScope);
       } else {
-        children = this._renderJsxChildrenCollect(componentOptions.props!.children, celScope);
+        const childrenCollect = this._renderJsxChildrenCollect(componentOptions.props!.children, celScope);
+        if (isZovaComponent(Component)) {
+          for (const key in childrenCollect) {
+            const slot = childrenCollect[key];
+            if (key === 'default') {
+              children = slot;
+            } else {
+              props[`slot${toUpperCaseFirstChar(key)}`] = slot;
+            }
+          }
+        } else {
+          children = childrenCollect;
+        }
       }
     }
     return h(Component, props, children);
@@ -140,16 +153,10 @@ export class ZovaJsx extends BeanSimple {
           return this._renderJsxChildrenDirect(children, celScope);
         };
     // ok
-    if (isEmptyObject(slots)) {
-      return slotDefault;
-    } else if (!slotDefault) {
-      return slots;
-    } else {
-      return {
-        ...slots,
-        default: slotDefault,
-      };
-    }
+    return {
+      ...slots,
+      default: slotDefault,
+    };
   }
 
   private _renderJsxChildrenDirect(jsxChildren: TypeRenderComponentJsx | TypeRenderComponentJsx[], celScope: {}) {
