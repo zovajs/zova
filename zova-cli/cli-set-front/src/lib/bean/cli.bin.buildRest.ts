@@ -40,6 +40,7 @@ export class CliBinBuildRest extends BeanCliBase {
     const srcDir = path.join(projectPath, '.zova-rest');
     const outDir = path.join(projectPath, 'dist', `rest-${this.flavor}`);
     await rimraf(srcDir);
+    await fse.ensureDir(srcDir);
     await rimraf(outDir);
     //
     await this._prepareResources(projectPath, srcDir);
