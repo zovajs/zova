@@ -21,6 +21,23 @@ declare module 'vue/jsx-runtime' {
       // need not provide onClick/onXXX
       // onClick?: (e: MouseEvent) => void;
       nativeOnClick?: (e: MouseEvent) => void;
+      nativeOnDblclick?: (e: MouseEvent) => void;
+      nativeOnMouseenter?: (e: MouseEvent) => void;
+      nativeOnMouseleave?: (e: MouseEvent) => void;
+      nativeOnMouseover?: (e: MouseEvent) => void;
+      nativeOnMouseout?: (e: MouseEvent) => void;
+      nativeOnMousedown?: (e: MouseEvent) => void;
+      nativeOnMouseup?: (e: MouseEvent) => void;
+      nativeOnKeydown?: (e: KeyboardEvent) => void;
+      nativeOnKeyup?: (e: KeyboardEvent) => void;
+      nativeOnFocus?: (e: FocusEvent) => void;
+      nativeOnBlur?: (e: FocusEvent) => void;
+      nativeOnChange?: (e: Event) => void;
+      nativeOnInput?: (e: Event) => void;
+      nativeOnSubmit?: (e: Event) => void;
+      nativeOnScroll?: (e: Event) => void;
+      nativeOnWheel?: (e: WheelEvent) => void;
+      nativeOnContextmenu?: (e: MouseEvent) => void;
     }
   }
 }

@@ -1,4 +1,4 @@
-import Counter from '@/components/counter.vue';
+import Counter from '@/components/Counter.vue';
 import { BeanControllerPageBase } from 'zova';
 import { Controller } from 'zova-module-a-bean';
 import { ZPage } from 'zova-module-home-base';
