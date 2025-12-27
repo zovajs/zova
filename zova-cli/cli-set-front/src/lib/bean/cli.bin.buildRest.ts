@@ -68,26 +68,13 @@ export class CliBinBuildRest extends BeanCliBase {
       entry: [entry],
       format: ['esm'],
       outDir,
+      tsconfig: 'tsconfig.rest.json',
       dts: {
         resolve: true,
-        resolver: 'tsc', // should be tsc rather than oxc
-        eager: true, // should be true
-        tsconfig: false,
-        compilerOptions: {
-          incremental: true,
-          target: 'ESNext',
-          jsx: 'preserve',
-          jsxImportSource: 'vue',
-          lib: ['esnext', 'dom'],
-          module: 'ESNext',
-          moduleResolution: 'NodeNext',
-          types: ['vite/client', 'node'],
-          noEmit: false,
-          isolatedModules: true,
-          allowImportingTsExtensions: true,
-          rewriteRelativeImportExtensions: false,
-          verbatimModuleSyntax: false,
-        },
+        // resolver: 'tsc',
+        tsgo: true,
+        eager: true,
+        tsconfig: 'tsconfig.rest.json',
       },
     });
     // package.json

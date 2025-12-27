@@ -52,6 +52,7 @@
     "@cabloy/openapi-typescript": "^7.9.2",
     "@cabloy/utils": "^2.0.4",
     "@cabloy/word-utils": "^2.0.0",
+    "@typescript/native-preview": "^7.0.0-dev.20251227.1",
     "compressing": "^1.10.0",
     "fs-extra": "^11.2.0",
     "globby": "^14.1.0",
