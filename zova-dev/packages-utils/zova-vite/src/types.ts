@@ -6,7 +6,7 @@ export interface ZovaViteConfigChunkVendor {
 export interface ZovaViteConfigOptions {
   appDir: string;
   runtimeDir: string;
-  zovaManualChunk: {
+  zovaManualChunk?: {
     debug: boolean;
     vendors: ZovaViteConfigChunkVendor[];
   };

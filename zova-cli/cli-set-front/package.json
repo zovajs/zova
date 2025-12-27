@@ -66,7 +66,8 @@
   },
   "devDependencies": {
     "clean-package": "^2.2.0",
-    "rimraf": "^6.0.1"
+    "rimraf": "^6.0.1",
+    "zova-vite": "^1.0.182"
   },
   "gitHead": "cd764f950253da76034e90e5b93f2cd1cfe2733f"
 }
