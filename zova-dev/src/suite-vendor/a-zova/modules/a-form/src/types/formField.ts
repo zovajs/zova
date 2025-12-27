@@ -38,6 +38,7 @@ export interface IFormFieldRenderContextProps<TParentData = {}>
   extends TypeBehaviorFormFieldOptions<TParentData>, IFormFieldOptionsBase, IFormFieldLayoutOptionsBase {}
 
 export interface IFormFieldRenderContextPropsInner {
+  name?: string;
   value?: any;
   type?: string;
   readonly?: boolean;
@@ -49,5 +50,5 @@ export interface IFormFieldRenderContextPropsInner {
 
 export interface IFormFieldRenderContext<TParentData = {}> {
   options: IFormFieldOptions<TParentData>;
-  props: IFormFieldRenderContextProps<TParentData>;
+  props: IFormFieldRenderContextPropsInner;
 }
