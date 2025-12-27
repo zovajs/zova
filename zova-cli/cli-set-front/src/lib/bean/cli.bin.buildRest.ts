@@ -71,22 +71,22 @@ export class CliBinBuildRest extends BeanCliBase {
       dts: {
         resolve: true,
         resolver: 'tsc',
-        eager: true,
-        tsconfig: false,
-        compilerOptions: {
-          target: 'ESNext',
-          jsx: 'preserve',
-          jsxImportSource: 'vue',
-          lib: ['esnext', 'dom'],
-          module: 'ESNext',
-          moduleResolution: 'NodeNext',
-          types: ['vite/client', 'node'],
-          noEmit: false,
-          isolatedModules: true,
-          allowImportingTsExtensions: true,
-          rewriteRelativeImportExtensions: false,
-          verbatimModuleSyntax: false,
-        },
+        eager: false, // should false
+        // tsconfig: false,
+        // compilerOptions: {
+        //   target: 'ESNext',
+        //   jsx: 'preserve',
+        //   jsxImportSource: 'vue',
+        //   lib: ['esnext', 'dom'],
+        //   module: 'ESNext',
+        //   moduleResolution: 'NodeNext',
+        //   types: ['vite/client', 'node'],
+        //   noEmit: false,
+        //   isolatedModules: true,
+        //   allowImportingTsExtensions: true,
+        //   rewriteRelativeImportExtensions: false,
+        //   verbatimModuleSyntax: false,
+        // },
       },
     });
     // package.json
