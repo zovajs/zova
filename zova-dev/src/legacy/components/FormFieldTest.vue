@@ -6,4 +6,7 @@
     {...this.$props}
     render="text"
   />
+  <slot name="header" />
+  <slot />
+  <slot name="footer" />
 </template>
