@@ -235,14 +235,16 @@ export { ScopeModule${relativeNameCapitalize} as ScopeModule } from './index.js'
       }
       return pkg;
     }
-    // cli
-    const cli = path.join(modulePath, 'cli');
-    if (fse.existsSync(cli)) {
-      pkg = await _loadPkg();
-      const index = pkg.files.indexOf('cli');
-      if (index === -1) {
-        changed = true;
-        pkg.files.push('cli');
+    // cli/rest
+    for (const name of ['cli', 'rest']) {
+      const cli = path.join(modulePath, name);
+      if (fse.existsSync(cli)) {
+        pkg = await _loadPkg();
+        const index = pkg.files.indexOf(name);
+        if (index === -1) {
+          changed = true;
+          pkg.files.push(name);
+        }
       }
     }
     // save

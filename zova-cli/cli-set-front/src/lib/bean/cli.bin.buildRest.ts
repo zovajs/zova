@@ -48,8 +48,10 @@ export class CliBinBuildRest extends BeanCliBase {
     // package.json
     const pkgContent = replaceTemplate(
       __template_package,
-      { name: flavor, version: env.APP_VERSION },
+      { Name: flavor, Version: env.APP_VERSION },
     );
     await fse.writeFile(path.join(outDir,'package.json'), pkgContent!);
+    // index.json
+    
   }
 }

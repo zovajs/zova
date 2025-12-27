@@ -1,5 +1,5 @@
 export default {
-  bean: 'bin.build',
+  bean: 'bin.buildRest',
   info: {
     version: '5.0.0',
     title: 'Cli: Tools: Bin',
