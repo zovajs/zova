@@ -4,6 +4,7 @@ import { BeanCliBase } from '@cabloy/cli';
 import { replaceTemplate } from '@cabloy/word-utils';
 import { rimraf } from 'rimraf';
 import { createConfigUtils, type ZovaViteConfigOptions } from 'zova-vite';
+import fse from 'fs-extra';
 
 const __template_package = `{
   "name": "{{Name}}",
@@ -36,7 +37,7 @@ export class CliBinBuildRest extends BeanCliBase {
     const mode: ZovaMetaMode = 'production';
     const flavor: ZovaMetaFlavor = argv.flavor || 'vonaHome';
     const appMode:ZovaMetaAppMode='ssr';
-    const configMeta: ZovaConfigMeta = { flavor, mode, appMode: 'ssr' };
+    const configMeta: ZovaConfigMeta = { flavor, mode, appMode};
     const configOptions: ZovaViteConfigOptions = {
       appDir: projectPath,
       runtimeDir: '.zova',
@@ -44,11 +45,11 @@ export class CliBinBuildRest extends BeanCliBase {
     const configUtils = createConfigUtils(configMeta, configOptions);
     // env
     const env = configUtils.loadEnvs();
-
     // package.json
-    const pkg = replaceTemplate(
+    const pkgContent = replaceTemplate(
       __template_package,
-      { name: '', version: '' },
+      { name: flavor, version: env.APP_VERSION },
     );
+    await fse.writeFile(path.join(outDir,'package.json'), pkgContent!);
   }
 }
