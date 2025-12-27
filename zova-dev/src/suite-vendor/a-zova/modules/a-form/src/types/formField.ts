@@ -18,7 +18,7 @@ export interface IFormFieldLayoutOptionsBase {
   iconSuffix?: keyof IIconRecord;
 }
 
-export interface IFormFieldOptionsBase extends IFormFieldModelOptionsBase {
+export interface IFormFieldOptionsBase {
   render?: TypeRenderComponentPreset;
   class?: any;
   placeholder?: string;
@@ -29,12 +29,6 @@ export interface IFormFieldOptionsBase extends IFormFieldModelOptionsBase {
   validateOnBlur?: boolean | z.ZodType;
 }
 
-export interface IFormFieldModelOptionsBase {
-  value?: any;
-  onInput?: (e: Event) => void;
-  onBlur?: (e: Event) => void;
-}
-
 export interface IFormFieldOptions<TParentData = {}> extends IFormFieldRenderContextProps<TParentData> {
   behaviors?: IBehaviorItem;
   slotDefault?: (props: IFormFieldRenderContext<TParentData>, field: TypeFormField<TParentData>) => VNode;
@@ -42,6 +36,16 @@ export interface IFormFieldOptions<TParentData = {}> extends IFormFieldRenderCon
 
 export interface IFormFieldRenderContextProps<TParentData = {}>
   extends TypeBehaviorFormFieldOptions<TParentData>, IFormFieldOptionsBase, IFormFieldLayoutOptionsBase {}
+
+export interface IFormFieldRenderContextPropsInner {
+  value?: any;
+  type?: string;
+  readonly?: boolean;
+  placeholder?: string;
+  class?: any;
+  onInput?: (e: Event) => void;
+  onBlur?: (e: Event) => void;
+}
 
 export interface IFormFieldRenderContext<TParentData = {}> {
   options: IFormFieldOptions<TParentData>;

@@ -3,14 +3,14 @@ import { VNode } from 'vue';
 import { Use } from 'zova';
 import { BeanBehaviorBase, Behavior, IDecoratorBehaviorOptions, NextBehavior } from 'zova-module-a-behavior';
 import { TypeFormField } from '../types/form.js';
-import { IFormFieldModelOptionsBase, IFormFieldRenderContext, IFormFieldRenderContextProps } from '../types/formField.js';
+import { IFormFieldRenderContext, IFormFieldRenderContextPropsInner } from '../types/formField.js';
 import { IFormMeta } from '../types/formMeta.js';
 
 export interface IBehaviorPropsInputFormFieldModel extends IFormFieldRenderContext {}
 
 export interface IBehaviorPropsOutputFormFieldModel extends IBehaviorPropsInputFormFieldModel {}
 
-export interface IBehaviorOptionsFormFieldModel extends IDecoratorBehaviorOptions, IFormFieldModelOptionsBase {}
+export interface IBehaviorOptionsFormFieldModel extends IDecoratorBehaviorOptions {}
 
 @Behavior<IBehaviorOptionsFormFieldModel>()
 export class BehaviorFormFieldModel extends BeanBehaviorBase<
@@ -38,7 +38,7 @@ export class BehaviorFormFieldModel extends BeanBehaviorBase<
     formMeta: IFormMeta | undefined,
     field: TypeFormField,
   ) {
-    const propsPatch: Partial<IFormFieldRenderContextProps> = {
+    const propsPatch: IFormFieldRenderContextPropsInner = {
       value: field.state.value,
     };
     if (formMeta?.formMode === 'view') {
@@ -54,7 +54,7 @@ export class BehaviorFormFieldModel extends BeanBehaviorBase<
   ) {
     const propsGeneral = this._patchProps_general(formMeta, field);
     const inputType = this.$$formField.normalizeInputType(renderContext.options.inputType);
-    const propsPatch: Partial<IFormFieldRenderContextProps> & { type: string } = {
+    const propsPatch: IFormFieldRenderContextPropsInner = {
       type: inputType,
       onInput: (e: Event) => {
         field.api.handleChange((e.target as HTMLInputElement).value);
