@@ -71,9 +71,10 @@ export class CliBinBuildRest extends BeanCliBase {
       dts: {
         resolve: true,
         resolver: 'tsc', // should be tsc rather than oxc
-        eager: false, // should be false
+        eager: true, // should be true
         tsconfig: false,
         compilerOptions: {
+          incremental: true,
           target: 'ESNext',
           jsx: 'preserve',
           jsxImportSource: 'vue',
