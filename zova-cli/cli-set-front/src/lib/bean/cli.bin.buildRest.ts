@@ -127,7 +127,7 @@ export class CliBinBuildRest extends BeanCliBase {
       const restIndexFile = path.join(module.root, 'rest/index.ts');
       if (!fse.existsSync(restIndexFile)) continue;
       const restIndexFileRelative = path.relative(srcDir, restIndexFile);
-      indexContent += `import '${restIndexFileRelative}';\n`;
+      indexContent += `export * from '${restIndexFileRelative}';\n`;
     }
     await fse.writeFile(path.join(srcDir, 'index.ts'), indexContent);
   }
