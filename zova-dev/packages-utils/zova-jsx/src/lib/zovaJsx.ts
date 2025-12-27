@@ -1,6 +1,6 @@
 import type { VNode } from 'vue';
 import type { IFormProviderComponents, TypeRenderComponent, TypeRenderComponentJsx, TypeRenderComponentJsxProps } from '../types/rest.ts';
-import { celEnvBase, evaluateExpressions } from '@cabloy/utils';
+import { celEnvBase, evaluateExpressions, isEmptyObject } from '@cabloy/utils';
 import { classes } from 'typestyle';
 import { createTextVNode, h } from 'vue';
 import { BeanSimple, cast } from 'zova-core';
@@ -86,11 +86,9 @@ export class ZovaJsx extends BeanSimple {
       children = undefined;
     } else {
       if (isNativeElement(Component)) {
-        children = this._renderJsxChildren(componentOptions.props!.children, celScope);
+        children = this._renderJsxChildrenDirect(componentOptions.props!.children, celScope);
       } else {
-        children = () => {
-          return this._renderJsxChildren(componentOptions.props!.children, celScope);
-        };
+        children = this._renderJsxChildrenCollect(componentOptions.props!.children, celScope);
       }
     }
     return h(Component, props, children);
@@ -111,7 +109,50 @@ export class ZovaJsx extends BeanSimple {
     return props;
   }
 
-  private _renderJsxChildren(jsxChildren: TypeRenderComponentJsx | TypeRenderComponentJsx[], celScope: {}) {
+  private _renderJsxChildrenCollect(jsxChildren: TypeRenderComponentJsx | TypeRenderComponentJsx[], celScope: {}) {
+    if (!Array.isArray(jsxChildren)) jsxChildren = [jsxChildren];
+    const children: TypeRenderComponentJsx[] = [];
+    const slots: Record<string, TypeRenderComponentJsx> = {};
+    for (const jsxChild of jsxChildren) {
+      if (jsxChild && typeof jsxChild === 'object' && jsxChild.props?.['v-slot']) {
+        const slotName = jsxChild.props?.['v-slot'];
+        const slotScopeName = jsxChild.props?.['v-slot-scope'];
+        let slot;
+        if (slotScopeName) {
+          slot = slotScope => {
+            const celScopeSub = { ...celScope, [slotScopeName]: slotScope };
+            return this._renderJsxChildrenDirect(jsxChild, celScopeSub);
+          };
+        } else {
+          slot = () => {
+            return this._renderJsxChildrenDirect(jsxChild, celScope);
+          };
+        }
+        slots[slotName] = slot;
+      } else {
+        children.push(jsxChild);
+      }
+    }
+    // slotDefault
+    const slotDefault = children.length === 0
+      ? undefined
+      : () => {
+          return this._renderJsxChildrenDirect(children, celScope);
+        };
+    // ok
+    if (isEmptyObject(slots)) {
+      return slotDefault;
+    } else if (!slotDefault) {
+      return slots;
+    } else {
+      return {
+        ...slots,
+        default: slotDefault,
+      };
+    }
+  }
+
+  private _renderJsxChildrenDirect(jsxChildren: TypeRenderComponentJsx | TypeRenderComponentJsx[], celScope: {}) {
     if (!Array.isArray(jsxChildren)) jsxChildren = [jsxChildren];
     const children: VNode[] = [];
     for (const jsxChild of jsxChildren) {
