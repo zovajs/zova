@@ -6,6 +6,7 @@
     "./dist-releases",
     "./dist-mock",
     "./.zova",
+    "./.zova-rest",
     "./node_modules",
     "vite.config.ts",
     "./src/boot/app",
