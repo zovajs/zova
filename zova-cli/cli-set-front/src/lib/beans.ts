@@ -1,3 +1,4 @@
+import { CliBinBuildRest } from './bean/cli.bin.buildRest.ts';
 import { CliCreateBean } from './bean/cli.create.bean.ts';
 import { CliCreateComponent } from './bean/cli.create.component.ts';
 import { CliCreateMock } from './bean/cli.create.mock.ts';
@@ -37,6 +38,7 @@ import { CliToolsMetadata } from './bean/cli.tools.metadata.ts';
 
 export const beans = {
   'default.list': CliDefaultList,
+  'bin.buildRest': CliBinBuildRest,
   'create.project': CliCreateProject,
   'create.suite': CliCreateSuite,
   'create.module': CliCreateModule,

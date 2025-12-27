@@ -16,6 +16,7 @@ dist-mock
 # zova core related directories
 .temp-dynamic-*
 .zova
+.zova-rest
 .quasar
 /quasar.config.*.temporary.compiled*
 /openapi.config.ts

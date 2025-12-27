@@ -1,3 +1,4 @@
+import binBuildRest from './command/bin.buildRest.ts';
 import createBean from './command/create.bean.ts';
 import createComponent from './command/create.component.ts';
 import createMock from './command/create.mock.ts';
@@ -39,6 +40,9 @@ import toolsMetadata from './command/tools.metadata.ts';
 export const commands = {
   default: {
     list: defaultList,
+  },
+  bin: {
+    buildRest: binBuildRest,
   },
   create: {
     project: createProject,
