@@ -58,12 +58,17 @@ export class BehaviorFormFieldModel extends BeanBehaviorBase<
     const inputType = this.$$formField.normalizeInputType(renderFlattern, renderContext.options.inputType);
     const propsPatch: IFormFieldRenderContextProps = {
       type: inputType,
-      onInput: (e: Event) => {
-        this.$$formField.handleDisplayValueUpdate((e.target as HTMLInputElement).value, renderContext.options.onDisplayValueUpdate);
-      },
-      onBlur: (_e: Event) => {
-        field.api.handleBlur();
-      },
+      onChange: renderContext.options.onChange ?? undefined,
+      onInput: renderContext.options.onInput !== undefined
+        ? (renderContext.options.onInput ?? undefined)
+        : (e: Event) => {
+            this.$$formField.handleDisplayValueUpdate((e.target as HTMLInputElement).value, renderContext.options.onDisplayValueUpdate);
+          },
+      onBlur: renderContext.options.onBlur !== undefined
+        ? (renderContext.options.onBlur ?? undefined)
+        : (_e: Event) => {
+            field.api.handleBlur();
+          },
     };
     renderContext.props = Object.assign({}, propsGeneral, propsPatch, renderContext.props);
   }

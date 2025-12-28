@@ -30,8 +30,9 @@ export class ControllerFormFieldCurrency extends BeanControllerBase {
           return this.$$form.onDisplayValueUpdate(value, this.$props.onDisplayValueUpdate);
         }}
         onChange={(e: Event) => {
-
+          console.log('onChange: ', e);
         }}
+        onInput={null}
       ></ZFormField>
     );
   }

@@ -33,9 +33,9 @@ export interface IFormFieldOptionsBase {
   validateOnDynamic?: boolean | z.ZodType;
   validateOnChange?: boolean | z.ZodType;
   validateOnBlur?: boolean | z.ZodType;
-  onChange?: (e: Event) => void;
-  onInput?: (e: Event) => void;
-  onBlur?: (e: Event) => void;
+  onChange?: ((e: Event) => void) | null;
+  onInput?: ((e: Event) => void) | null;
+  onBlur?: ((e: Event) => void) | null;
 }
 
 export interface IFormFieldOptions<TParentData = {}>
@@ -51,9 +51,9 @@ export interface IFormFieldRenderContextProps {
   readonly?: boolean;
   placeholder?: string;
   class?: any;
-  onChange?: (e: Event) => void;
-  onInput?: (e: Event) => void;
-  onBlur?: (e: Event) => void;
+  onChange?: ((e: Event) => void);
+  onInput?: ((e: Event) => void);
+  onBlur?: ((e: Event) => void);
 }
 
 export interface IFormFieldRenderContextOptions<TParentData = {}> extends Omit<IFormFieldOptions<TParentData>, 'render'> {
