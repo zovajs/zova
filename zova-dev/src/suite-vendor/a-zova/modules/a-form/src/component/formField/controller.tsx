@@ -5,7 +5,7 @@ import { BeanControllerBase, deepExtend, IComponentOptions, Use } from 'zova';
 import { Controller } from 'zova-module-a-bean';
 import { BeanBehaviorsHolder, IBehaviorItem } from 'zova-module-a-behavior';
 import { TypeFormField } from '../../types/form.js';
-import { IFormFieldOptions, inputTypePresets } from '../../types/formField.js';
+import { IFormFieldOptions, inputTypePresets, TypeFormFieldOnChanged } from '../../types/formField.js';
 
 export interface ControllerFormFieldProps<TParentData extends {} = {}> extends IFormFieldOptions<TParentData> {}
 
@@ -74,6 +74,15 @@ export class ControllerFormField<TParentData extends {} = {}> extends BeanContro
       return renderFlattern;
     }
     return 'text';
+  }
+
+  public onChange(value: any, onChange?: TypeFormFieldOnChanged) {
+    if (onChange) return onChange(value);
+    return value;
+  }
+
+  public handleChange(value: any, onChange?: TypeFormFieldOnChanged) {
+    return this.field.api.handleChange(this.onChange(value, onChange));
   }
 
   private _getFieldBehaviors() {

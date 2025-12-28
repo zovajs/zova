@@ -21,9 +21,11 @@ export interface IFormFieldLayoutOptionsBase {
   footer?: TypeRenderComponentJsx | string;
 }
 
+export type TypeFormFieldOnChanged = (value: any) => any;
 export interface IFormFieldOptionsBase {
   render?: TypeRenderComponent;
   displayValue?: any;
+  onChange?: TypeFormFieldOnChanged;
   class?: any;
   placeholder?: string;
   readonly?: boolean;
