@@ -29,7 +29,7 @@ export class RenderPageToolOne extends BeanRenderBase {
                   <button
                     class={classes('btn btn-primary', $$form.formState.isSubmitting && 'btn-disabled')}
                     onClick={async () => {
-                      await $$form.form.handleSubmit();
+                      await $$form.submit();
                     }}
                   >
                     {this.scope.locale.Submit()}

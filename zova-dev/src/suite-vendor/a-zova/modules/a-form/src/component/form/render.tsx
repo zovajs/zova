@@ -76,7 +76,7 @@ export class RenderForm extends BeanRenderBase {
       props.onSubmit = this.$props.onFormSubmit ?? ((e: SubmitEvent) => {
         e.preventDefault();
         e.stopPropagation();
-        this.form.handleSubmit();
+        this.submit();
       });
     }
     return props;
