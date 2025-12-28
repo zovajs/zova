@@ -25,12 +25,9 @@ export class ControllerFormFieldCurrency extends BeanControllerBase {
         name={name}
         displayValue={displayValue}
         render="text"
-        onDisplayValueUpdate={value => {
-          value = this._update(value);
-          return this.$$form.onDisplayValueUpdate(value, this.$props.onDisplayValueUpdate);
-        }}
         onChange={(e: Event) => {
-          console.log('onChange: ', e);
+          const value = this._update((e.target as HTMLInputElement).value);
+          this.$$form.handleFieldDisplayValueUpdate(name, value, this.$props.onDisplayValueUpdate);
         }}
         onInput={null}
       ></ZFormField>

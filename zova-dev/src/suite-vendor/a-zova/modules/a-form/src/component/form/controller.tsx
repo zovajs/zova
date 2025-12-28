@@ -99,6 +99,10 @@ export class ControllerForm<TFormData extends {} = {}, TSubmitMeta = never> exte
     return getBy(this.formState.values, name) ?? null;
   }
 
+  public setFieldValue<K extends DeepKeys<TFormData>>(name: K, value: any) {
+    this.form.setFieldValue(name, value);
+  }
+
   public getFieldDisplayValue<K extends DeepKeys<TFormData>>(name: K, displayValue?: any) {
     if (displayValue !== undefined) return displayValue;
     return this.getFieldValue(name);
@@ -107,6 +111,10 @@ export class ControllerForm<TFormData extends {} = {}, TSubmitMeta = never> exte
   public onDisplayValueUpdate(value: any, onDisplayValueUpdate?: TypeFormFieldOnDisplayValueUpdate) {
     if (onDisplayValueUpdate) return onDisplayValueUpdate(value);
     return value;
+  }
+
+  public handleFieldDisplayValueUpdate<K extends DeepKeys<TFormData>>(name: K, value: any, onDisplayValueUpdate?: TypeFormFieldOnDisplayValueUpdate) {
+    return this.setFieldValue(name, this.onDisplayValueUpdate(value, onDisplayValueUpdate));
   }
 
   public getFieldProperty<K extends DeepKeys<TFormData>>(name: K): SchemaObject | undefined {

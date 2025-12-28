@@ -77,7 +77,7 @@ export class ControllerFormField<TParentData extends {} = {}> extends BeanContro
   }
 
   public handleDisplayValueUpdate(value: any, onDisplayValueUpdate?: TypeFormFieldOnDisplayValueUpdate) {
-    return this.field.api.handleChange(this.$$form.onDisplayValueUpdate(value, onDisplayValueUpdate));
+    return this.$$form.handleFieldDisplayValueUpdate(this.name, value, onDisplayValueUpdate);
   }
 
   private _getFieldBehaviors() {

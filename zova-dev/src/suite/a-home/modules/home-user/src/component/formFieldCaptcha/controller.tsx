@@ -62,7 +62,7 @@ export class ControllerFormFieldCaptcha extends BeanControllerBase {
   }
 
   private setFieldCaptchaData() {
-    this.$$form.form.setFieldValue(this.$props.name, {
+    this.$$form.setFieldValue(this.$props.name, {
       id: this.captchaData?.id,
       token: this.captchaData?.token,
     });
