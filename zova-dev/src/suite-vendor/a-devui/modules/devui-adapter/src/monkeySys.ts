@@ -29,7 +29,7 @@ export class MonkeySys extends BeanSimple implements IMonkeySysInitialize {
             formField: 'a-form:formField',
             text: 'input',
             password: 'input',
-            currency: 'input',
+            currency: 'a-currency:formFieldCurrency',
           },
           behaviors: {
             formField: 'a-form:formField',

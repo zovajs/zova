@@ -45,7 +45,7 @@ export class RenderFormField<TParentData extends {} = {}> extends BeanRenderBase
       return this.$slotDefault!(renderContext, this.field);
     }
     const celScope = this.$$form.getFieldCelScope(this.name, { render: renderContext });
-    return this.$$form.zovaJsx.render(renderContext.options.renderProvider, renderContext.props, celScope);
+    return this.$$form.zovaJsx.render(renderContext.options.render, renderContext.props, celScope);
   }
 
   private _getFieldComponentPropsTop() {

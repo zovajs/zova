@@ -13,6 +13,7 @@ export interface IFormProviderComponents {
   formField?: TypeComponentRecordSelectorKeysStrict<'formField'>;
   text?: TypeRenderComponentProvider;
   password?: TypeRenderComponentProvider;
+  currency?: TypeRenderComponentProvider;
 }
 
 export interface IFormProvider {
