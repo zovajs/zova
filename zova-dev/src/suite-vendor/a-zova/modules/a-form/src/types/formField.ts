@@ -49,7 +49,13 @@ export interface IFormFieldRenderContextProps {
   onBlur?: (e: Event) => void;
 }
 
+export interface IFormFieldRenderContextOptions<TParentData = {}> extends Omit<IFormFieldOptions<TParentData>, 'render'> {
+  render: TypeRenderComponent;
+  renderFlattern?: any;
+  renderProvider?: any;
+}
+
 export interface IFormFieldRenderContext<TParentData = {}> {
-  options: IFormFieldOptions<TParentData>;
+  options: IFormFieldRenderContextOptions<TParentData>;
   props: IFormFieldRenderContextProps;
 }

@@ -1,4 +1,5 @@
 import { BeanRenderBase } from 'zova';
+import { isJsxComponent } from 'zova-jsx';
 import { Render } from 'zova-module-a-bean';
 import { IFormFieldOptions, IFormFieldRenderContext } from '../../types/formField.js';
 
@@ -21,12 +22,15 @@ export class RenderFormField<TParentData extends {} = {}> extends BeanRenderBase
       {
         bordered: this.scope.config.formFieldLayout.bordered,
         label: property?.title ?? name,
-        render: 'text',
+        render: 'text', // default
       },
       this.$$form.$props.formFieldLayout,
       propsTop,
       this.$props as IFormFieldOptions<TParentData>,
     );
+    // render
+    renderContext.options.renderFlattern = this._getRenderFlattern(renderContext.options.render);
+    renderContext.options.renderProvider = this._getRenderProvider(renderContext.options.renderFlattern);
     // props
     renderContext.props = {
       name,
@@ -40,12 +44,25 @@ export class RenderFormField<TParentData extends {} = {}> extends BeanRenderBase
       return this.$slotDefault!(renderContext, this.field);
     }
     const celScope = this.$$form.getFieldCelScope(this.name, { render: renderContext });
-    return this.$$form.zovaJsx.render(this.renderType, renderContext.props, celScope);
+    return this.$$form.zovaJsx.render(renderContext.options.renderProvider, renderContext.props, celScope);
   }
 
   private _getFieldComponentPropsTop() {
-    if (this.$$form.renderAuto) return;
+    // need not check renderAuto
+    // if (this.$$form.renderAuto) return;
     const celScope = this.$$form.getFieldCelScope(this.name);
     return this.$$form.getFieldComponentPropsTop(this.name, celScope);
+  }
+
+  private _getRenderFlattern(render: any) {
+    return isJsxComponent(render) ? render.type : render;
+  }
+
+  private _getRenderProvider(renderFlattern: any) {
+    let renderProvider = renderFlattern;
+    if (typeof renderProvider === 'string') {
+      renderProvider = this.formProvider.components?.[renderProvider] ?? renderProvider;
+    }
+    return renderProvider;
   }
 }

@@ -45,7 +45,7 @@ export class ZovaJsx extends BeanSimple {
 
   public render(componentOptions: TypeRenderComponent, props: {} | undefined, celScope: {}) {
     props = props ?? {};
-    componentOptions = this.normalizeComponenOptions(componentOptions, celScope);
+    componentOptions = this.normalizeComponenOptions(componentOptions);
     // vIf
     const vIf = this.evaluateExpression(componentOptions.props?.['v-if'], celScope);
     if (vIf === false) return;
@@ -68,10 +68,9 @@ export class ZovaJsx extends BeanSimple {
     return children;
   }
 
-  public normalizeComponenOptions(componentOptions: TypeRenderComponent, celScope: {}): TypeRenderComponentJsx {
+  public normalizeComponenOptions(componentOptions: TypeRenderComponent): TypeRenderComponentJsx {
     if (typeof componentOptions === 'object') return componentOptions;
-    const type = this.evaluateExpression(componentOptions, celScope);
-    return { type };
+    return { type: componentOptions as any };
   }
 
   public normalizeComponent(type: TypeRenderComponent) {

@@ -69,7 +69,7 @@ export class BehaviorFormFieldLayout extends BeanBehaviorBase<
 
   private _patchProps(renderContext: IFormFieldRenderContext) {
     const field = this.$$formField.field;
-    if (this.$$behaviorTag.component === 'input') {
+    if (renderContext.options.renderProvider === 'input') {
       this._patchProps_input(field, renderContext);
     }
   }

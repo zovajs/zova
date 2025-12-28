@@ -29,7 +29,7 @@ export class BehaviorFormFieldModel extends BeanBehaviorBase<
   private _patchProps(renderContext: IFormFieldRenderContext) {
     const formMeta = this.$$formField.formMeta;
     const field = this.$$formField.field;
-    if (this.$$behaviorTag.component === 'input') {
+    if (renderContext.options.renderProvider === 'input') {
       this._patchProps_input(formMeta, field, renderContext);
     }
   }
@@ -53,7 +53,7 @@ export class BehaviorFormFieldModel extends BeanBehaviorBase<
     renderContext: IFormFieldRenderContext,
   ) {
     const propsGeneral = this._patchProps_general(formMeta, field);
-    const inputType = this.$$formField.normalizeInputType(renderContext.options.inputType);
+    const inputType = this.$$formField.normalizeInputType(renderContext.options.renderFlattern, renderContext.options.inputType);
     const propsPatch: IFormFieldRenderContextProps = {
       type: inputType,
       onInput: (e: Event) => {

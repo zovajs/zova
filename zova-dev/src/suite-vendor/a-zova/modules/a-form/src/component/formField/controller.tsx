@@ -3,7 +3,7 @@ import { useField } from '@tanstack/vue-form';
 import z from 'zod';
 import { BeanControllerBase, deepExtend, IComponentOptions, Use } from 'zova';
 import { Controller } from 'zova-module-a-bean';
-import { $UseBehaviorTag, BeanBehaviorsHolder, IBehaviorItem } from 'zova-module-a-behavior';
+import { BeanBehaviorsHolder, IBehaviorItem } from 'zova-module-a-behavior';
 import { TypeFormField } from '../../types/form.js';
 import { IFormFieldOptions, inputTypePresets } from '../../types/formField.js';
 
@@ -33,7 +33,7 @@ export class ControllerFormField<TParentData extends {} = {}> extends BeanContro
     this._formField = useField(options as any) as any;
     // behaviors
     await this.$$beanBehaviorsHolder.initialize({
-      behaviorTag: $UseBehaviorTag(this.renderTypeProvider),
+      behaviorTag: undefined as any,
       behaviors: () => {
         return this._getFieldBehaviors();
       },
@@ -42,19 +42,6 @@ export class ControllerFormField<TParentData extends {} = {}> extends BeanContro
 
   public get form() {
     return this.$$form.form;
-  }
-
-  public get renderTypeFlattern() {
-    const renderType = this.renderType;
-    return renderType && typeof renderType === 'object' ? renderType.type : renderType;
-  }
-
-  public get renderTypeProvider() {
-    let renderTypeProvider = this.renderTypeFlattern;
-    if (typeof renderTypeProvider === 'string') {
-      renderTypeProvider = this.formProvider.components?.[renderTypeProvider] ?? renderTypeProvider;
-    }
-    return renderTypeProvider;
   }
 
   public get field(): TypeFormField {
@@ -81,11 +68,10 @@ export class ControllerFormField<TParentData extends {} = {}> extends BeanContro
     return this.$$form.formProvider;
   }
 
-  public normalizeInputType(inputType?: string) {
+  public normalizeInputType(renderFlattern: any, inputType?: string) {
     if (inputType) return inputType;
-    const renderTypeFlattern = this.renderTypeFlattern;
-    if (typeof renderTypeFlattern === 'string' && inputTypePresets.includes(renderTypeFlattern)) {
-      return renderTypeFlattern;
+    if (typeof renderFlattern === 'string' && inputTypePresets.includes(renderFlattern)) {
+      return renderFlattern;
     }
     return 'text';
   }
