@@ -3,6 +3,7 @@ import { classes } from 'typestyle';
 import { VNode } from 'vue';
 import { z } from 'zod';
 import { Use } from 'zova';
+import { invokeProp } from 'zova-jsx';
 import { BeanBehaviorBase, Behavior, IDecoratorBehaviorOptions, NextBehavior } from 'zova-module-a-behavior';
 
 export interface IBehaviorPropsInputFormFieldLayout extends IFormFieldRenderContext {}
@@ -37,6 +38,7 @@ export class BehaviorFormFieldLayout extends BeanBehaviorBase<
     const className = classes('input', renderContext.options.classContainer, bordered && 'input-bordered', !field.state.meta.isValid && 'input-error');
     return (
       <label class={className}>
+        {invokeProp(renderContext.options.header)}
         {label}
         {vnode}
         {!field.state.meta.isValid && (
@@ -44,6 +46,7 @@ export class BehaviorFormFieldLayout extends BeanBehaviorBase<
             <span class="label-text-alt text-error">{error?.message}</span>
           </div>
         )}
+        {invokeProp(renderContext.options.footer)}
       </label>
     );
   }
@@ -53,6 +56,7 @@ export class BehaviorFormFieldLayout extends BeanBehaviorBase<
     const className = classes('fieldset', renderContext.options.classContainer);
     return (
       <fieldset class={className}>
+        {invokeProp(renderContext.options.header)}
         {!!label && <legend class="fieldset-legend">{label}</legend>}
         {vnode}
         {!field.state.meta.isValid && (
@@ -60,6 +64,7 @@ export class BehaviorFormFieldLayout extends BeanBehaviorBase<
             <span class="label-text-alt text-error">{error?.message}</span>
           </div>
         )}
+        {invokeProp(renderContext.options.footer)}
       </fieldset>
     );
   }
