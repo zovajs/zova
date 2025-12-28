@@ -6,7 +6,7 @@ import { classes } from 'typestyle';
 import { createTextVNode, h } from 'vue';
 import { BeanSimple, cast } from 'zova-core';
 import { renderFieldJsxPropsSystem } from './const.ts';
-import { isNativeElement, isZovaComponent } from './utils.ts';
+import { isJsxComponent, isNativeElement, isZovaComponent } from './utils.ts';
 
 type CelEnv = typeof celEnvBase;
 
@@ -166,7 +166,7 @@ export class ZovaJsx extends BeanSimple {
     const children: VNode[] = [];
     for (const jsxChild of jsxChildren) {
       let child;
-      if (jsxChild && typeof jsxChild === 'object' && jsxChild.type) {
+      if (isJsxComponent(jsxChild)) {
         const props = {};
         child = this.render(jsxChild, props, celScope);
       } else {

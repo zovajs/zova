@@ -9,3 +9,7 @@ export function isZovaComponent(Component: any) {
 export function isLegacyComponent(Component: any) {
   return (typeof Component === 'string' && !Component.includes(':') && Component.charAt(0) >= 'A' && Component.charAt(0) <= 'Y');
 }
+
+export function isJsxComponent(Component: any) {
+  return (typeof Component === 'object' && Component.$$typeof === 'zova-jsx');
+}
