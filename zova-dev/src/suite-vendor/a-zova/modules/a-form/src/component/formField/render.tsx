@@ -41,7 +41,7 @@ export class RenderFormField<TParentData extends {} = {}> extends BeanRenderBase
 
   private _renderSlotDefault(renderContext: IFormFieldRenderContext<TParentData>) {
     if (this.$slotDefault) {
-      return this.$slotDefault!(renderContext, this.field);
+      return this.$slotDefault!(renderContext, this);
     }
     const celScope = this.$$form.getFieldCelScope(this.name, { render: renderContext });
     return this.$$form.zovaJsx.render(renderContext.options.render, renderContext.props, celScope);

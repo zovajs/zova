@@ -4,7 +4,8 @@ import type { TypeRenderComponentJsx } from 'zova-jsx';
 import type { IBehaviorItem } from 'zova-module-a-behavior';
 import type { IIconRecord } from 'zova-module-a-icon';
 import type { TypeRenderComponent, TypeRenderComponentProvider } from 'zova-module-a-openapi';
-import type { TypeBehaviorFormFieldOptions, TypeFormField } from './form.js';
+import type { ControllerFormField } from '../component/formField/controller.jsx';
+import type { TypeBehaviorFormFieldOptions } from './form.js';
 
 export type HTMLInputElementType = 'text' | 'password' | 'number' | 'file' | 'hidden' | 'tel' | 'email';
 export const inputTypePresets = ['text', 'password', 'number', 'file', 'hidden', 'tel', 'email'];
@@ -41,7 +42,7 @@ export interface IFormFieldOptionsBase {
 export interface IFormFieldOptions<TParentData = {}>
   extends TypeBehaviorFormFieldOptions<TParentData>, IFormFieldOptionsBase, IFormFieldLayoutOptionsBase {
   behaviors?: IBehaviorItem;
-  slotDefault?: (props: IFormFieldRenderContext<TParentData>, field: TypeFormField<TParentData>) => VNode;
+  slotDefault?: (props: IFormFieldRenderContext<TParentData>, formField: ControllerFormField) => VNode;
 }
 
 export interface IFormFieldRenderContextProps {
