@@ -21,15 +21,15 @@ export class RenderPageToolOne extends BeanRenderBase {
             // eslint-disable-next-line no-alert
             window.alert(error.message);
           }}
-          slotFooter={(state, form) => {
+          slotFooter={$$form => {
             return (
               <div>
-                {state.isSubmitting && <span class="loading loading-spinner text-primary"></span>}
+                {$$form.formState.isSubmitting && <span class="loading loading-spinner text-primary"></span>}
                 {this.formMeta.formMode === 'edit' && (
                   <button
-                    class={classes('btn btn-primary', state.isSubmitting && 'btn-disabled')}
+                    class={classes('btn btn-primary', $$form.formState.isSubmitting && 'btn-disabled')}
                     onClick={async () => {
-                      await form.handleSubmit();
+                      await $$form.form.handleSubmit();
                     }}
                   >
                     {this.scope.locale.Submit()}
