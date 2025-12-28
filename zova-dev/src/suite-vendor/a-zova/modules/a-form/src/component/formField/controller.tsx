@@ -76,13 +76,8 @@ export class ControllerFormField<TParentData extends {} = {}> extends BeanContro
     return 'text';
   }
 
-  public onChange(value: any, onChange?: TypeFormFieldOnChanged) {
-    if (onChange) return onChange(value);
-    return value;
-  }
-
   public handleChange(value: any, onChange?: TypeFormFieldOnChanged) {
-    return this.field.api.handleChange(this.onChange(value, onChange));
+    return this.field.api.handleChange(this.$$form.onFieldChange(value, onChange));
   }
 
   private _getFieldBehaviors() {

@@ -11,7 +11,7 @@ import { Controller } from 'zova-module-a-bean';
 import { loadSchemaProperties, renderFieldTopPropsSystem, schemaToZodSchema, ScopeModuleAOpenapi } from 'zova-module-a-openapi';
 import { BeanControllerFormBase } from '../../lib/beanControllerFormBase.js';
 import { RevalidateLogicProps, TypeForm, TypeFormOnShowError, TypeFormOnSubmit, TypeFormState } from '../../types/form.js';
-import { IFormFieldLayoutOptionsBase } from '../../types/formField.js';
+import { IFormFieldLayoutOptionsBase, TypeFormFieldOnChanged } from '../../types/formField.js';
 import { IFormMeta } from '../../types/formMeta.js';
 import { IFormProvider } from '../../types/provider.js';
 
@@ -97,6 +97,16 @@ export class ControllerForm<TFormData extends {} = {}, TSubmitMeta = never> exte
 
   public getFieldValue<K extends DeepKeys<TFormData>>(name: K) {
     return this.form.getFieldValue(name) ?? null;
+  }
+
+  public getFieldDisplayValue<K extends DeepKeys<TFormData>>(name: K, displayValue?: any) {
+    if (displayValue !== undefined) return displayValue;
+    return this.getFieldValue(name);
+  }
+
+  public onFieldChange(value: any, onChange?: TypeFormFieldOnChanged) {
+    if (onChange) return onChange(value);
+    return value;
   }
 
   public getFieldProperty<K extends DeepKeys<TFormData>>(name: K): SchemaObject | undefined {
