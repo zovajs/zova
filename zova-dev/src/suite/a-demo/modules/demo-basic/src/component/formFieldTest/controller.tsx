@@ -17,15 +17,19 @@ export class ControllerFormFieldTest extends BeanControllerBase {
   protected async __init__() {}
 
   protected render() {
+    const domField = this.$slotDefault
+      ? this.$slotDefault()
+      : (
+          <ZFormField
+            {...this.$props}
+            render="text"
+          ></ZFormField>
+        );
     return (
       <>
-        <ZFormField
-          {...this.$props}
-          render="text"
-        ></ZFormField>
-        {this.$props.showLog && <div>{`log: ${this.$props.name}`}</div>}
         {this.$props.slotHeader?.({ name: 'kevin' })}
-        {this.$slotDefault?.()}
+        {domField}
+        {this.$props.showLog && <div>{`log: ${this.$props.name}`}</div>}
         {this.$props.slotFooter?.({ name: 'jimmy' })}
       </>
     );
