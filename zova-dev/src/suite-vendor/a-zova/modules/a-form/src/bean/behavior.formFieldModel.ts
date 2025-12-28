@@ -36,10 +36,11 @@ export class BehaviorFormFieldModel extends BeanBehaviorBase<
 
   private _patchProps_general(
     formMeta: IFormMeta | undefined,
-    field: TypeFormField,
+    _field: TypeFormField,
+    renderContext: IFormFieldRenderContext,
   ) {
     const propsPatch: IFormFieldRenderContextProps = {
-      value: field.state.value,
+      value: renderContext.options.displayValue,
     };
     if (formMeta?.formMode === 'view') {
       propsPatch.readonly = true;
@@ -52,7 +53,7 @@ export class BehaviorFormFieldModel extends BeanBehaviorBase<
     field: TypeFormField,
     renderContext: IFormFieldRenderContext,
   ) {
-    const propsGeneral = this._patchProps_general(formMeta, field);
+    const propsGeneral = this._patchProps_general(formMeta, field, renderContext);
     const inputType = this.$$formField.normalizeInputType(renderContext.options.renderFlattern, renderContext.options.inputType);
     const propsPatch: IFormFieldRenderContextProps = {
       type: inputType,

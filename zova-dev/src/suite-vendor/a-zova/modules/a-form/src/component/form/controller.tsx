@@ -95,6 +95,10 @@ export class ControllerForm<TFormData extends {} = {}, TSubmitMeta = never> exte
     return !this.$slotDefault;
   }
 
+  public getFieldValue<K extends DeepKeys<TFormData>>(name: K) {
+    return this.form.getFieldValue(name) ?? null;
+  }
+
   public getFieldProperty<K extends DeepKeys<TFormData>>(name: K): SchemaObject | undefined {
     if (!this.properties) return;
     return this.properties.find(item => item.key === name);
@@ -118,7 +122,7 @@ export class ControllerForm<TFormData extends {} = {}, TSubmitMeta = never> exte
   public getFieldCelScope<K extends DeepKeys<TFormData>>(name: K, scopeExtra?: {}) {
     return {
       name,
-      value: this.form.getFieldValue(name) ?? null,
+      value: this.getFieldValue(name),
       property: this.getFieldProperty(name),
       ...scopeExtra,
     };

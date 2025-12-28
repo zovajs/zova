@@ -23,6 +23,7 @@ export interface IFormFieldLayoutOptionsBase {
 
 export interface IFormFieldOptionsBase {
   render?: TypeRenderComponent;
+  displayValue?: any;
   class?: any;
   placeholder?: string;
   readonly?: boolean;

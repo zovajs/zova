@@ -23,6 +23,7 @@ export class RenderFormField<TParentData extends {} = {}> extends BeanRenderBase
         bordered: this.scope.config.formFieldLayout.bordered,
         label: property?.title ?? name,
         render: 'text', // default
+        displayValue: this.$$form.getFieldValue(name),
       },
       this.$$form.$props.formFieldLayout,
       propsTop,
