@@ -36,7 +36,15 @@ export class ZovaJsx extends BeanSimple {
     );
   }
 
-  public render(componentOptions: TypeRenderComponent, props: {}, celScope: {}) {
+  public renderJsxOrCel(componentOptions: TypeRenderComponent | any, props: {} | undefined, celScope: {}) {
+    if (isJsxComponent(componentOptions)) {
+      return () => this.render(componentOptions, props, celScope);
+    }
+    return this.evaluateExpression(componentOptions, celScope);
+  }
+
+  public render(componentOptions: TypeRenderComponent, props: {} | undefined, celScope: {}) {
+    props = props ?? {};
     componentOptions = this.normalizeComponenOptions(componentOptions);
     // vIf
     const vIf = this.evaluateExpression(componentOptions.props?.['v-if'], celScope);
@@ -114,7 +122,7 @@ export class ZovaJsx extends BeanSimple {
     const keys = Object.keys(jsxProps).filter(item => !renderFieldJsxPropsSystem.includes(item));
     if (keys.length === 0) return props;
     for (const key of keys) {
-      const keyValue = this.evaluateExpression(jsxProps[key], celScope);
+      const keyValue = this.renderJsxOrCel(jsxProps[key], undefined, celScope);
       if (key === 'class') {
         props[key] = classes(props[key], keyValue);
       } else {
@@ -167,8 +175,7 @@ export class ZovaJsx extends BeanSimple {
     for (const jsxChild of jsxChildren) {
       let child;
       if (isJsxComponent(jsxChild)) {
-        const props = {};
-        child = this.render(jsxChild, props, celScope);
+        child = this.render(jsxChild, undefined, celScope);
       } else {
         const childText = this.evaluateExpression(jsxChild, celScope);
         child = createTextVNode(childText);

@@ -133,7 +133,7 @@ export class ControllerForm<TFormData extends {} = {}, TSubmitMeta = never> exte
     const keys = Object.keys(rest).filter(item => !renderFieldTopPropsSystem.includes(item));
     if (keys.length === 0) return props;
     for (const key of keys) {
-      const keyValue = this.zovaJsx.evaluateExpression(rest[key], celScope);
+      const keyValue = this.zovaJsx.renderJsxOrCel(rest[key], undefined, celScope);
       props[key] = keyValue;
     }
     return props;
