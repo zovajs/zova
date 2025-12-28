@@ -21,6 +21,7 @@ export class RenderFormField<TParentData extends {} = {}> extends BeanRenderBase
       {
         bordered: this.scope.config.formFieldLayout.bordered,
         label: property?.title ?? name,
+        render: 'text',
       },
       this.$$form.$props.formFieldLayout,
       propsTop,

@@ -2,7 +2,7 @@ import { catchError, celEnvBase } from '@cabloy/utils';
 import { ZodMetadata } from '@cabloy/zod-openapi';
 import { DeepKeys, determineFormLevelErrorSourceAndValue, FormValidationError, isGlobalFormValidationError, revalidateLogic, useStore, ValidationCause, ValidationError } from '@tanstack/vue-form';
 import { SchemaObject } from 'openapi3-ts/oas31';
-import { VNode } from 'vue';
+import { render, VNode } from 'vue';
 import { z } from 'zod';
 import { $ZodIssue } from 'zod/v4/core';
 import { deepEqual, deepExtend, UseScope } from 'zova';
@@ -133,7 +133,17 @@ export class ControllerForm<TFormData extends {} = {}, TSubmitMeta = never> exte
     const keys = Object.keys(rest).filter(item => !renderFieldTopPropsSystem.includes(item));
     if (keys.length === 0) return props;
     for (const key of keys) {
-      const keyValue = this.zovaJsx.renderJsxOrCel(rest[key], undefined, celScope);
+      const value = rest[key];
+      let keyValue;
+      if (key === 'render') {
+        if (typeof render === 'string') {
+          keyValue = this.zovaJsx.evaluateExpression(value, celScope);
+        } else {
+          keyValue = value;
+        }
+      } else {
+        keyValue = this.zovaJsx.renderJsxOrCel(value, undefined, celScope);
+      }
       props[key] = keyValue;
     }
     return props;

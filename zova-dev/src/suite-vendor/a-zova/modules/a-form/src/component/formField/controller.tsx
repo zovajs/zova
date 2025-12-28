@@ -44,10 +44,6 @@ export class ControllerFormField<TParentData extends {} = {}> extends BeanContro
     return this.$$form.form;
   }
 
-  public get renderType() {
-    return this.$props.render ?? this.property?.rest?.render ?? 'text';
-  }
-
   public get renderTypeFlattern() {
     const renderType = this.renderType;
     return renderType && typeof renderType === 'object' ? renderType.type : renderType;

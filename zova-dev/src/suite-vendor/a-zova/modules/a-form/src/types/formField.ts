@@ -3,7 +3,7 @@ import type z from 'zod';
 import type { TypeRenderComponentJsx } from 'zova-jsx';
 import type { IBehaviorItem } from 'zova-module-a-behavior';
 import type { IIconRecord } from 'zova-module-a-icon';
-import type { TypeRenderComponentPreset } from 'zova-module-a-openapi';
+import type { TypeRenderComponent } from 'zova-module-a-openapi';
 import type { TypeBehaviorFormFieldOptions, TypeFormField } from './form.js';
 
 export type HTMLInputElementType = 'text' | 'password' | 'number' | 'file' | 'hidden' | 'tel' | 'email';
@@ -22,7 +22,7 @@ export interface IFormFieldLayoutOptionsBase {
 }
 
 export interface IFormFieldOptionsBase {
-  render?: TypeRenderComponentPreset;
+  render?: TypeRenderComponent;
   class?: any;
   placeholder?: string;
   readonly?: boolean;
