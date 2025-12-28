@@ -1,8 +1,8 @@
 import { SchemaObject } from 'openapi3-ts/oas31';
 import { h, VNode } from 'vue';
 import { BeanRenderBase, cast } from 'zova';
-import { TypeRenderComponent } from 'zova-jsx';
 import { Render } from 'zova-module-a-bean';
+import { TypeRenderComponent } from 'zova-module-a-openapi';
 
 @Render()
 export class RenderForm extends BeanRenderBase {

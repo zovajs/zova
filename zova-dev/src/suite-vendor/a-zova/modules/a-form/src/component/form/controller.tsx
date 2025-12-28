@@ -1,17 +1,17 @@
 import { catchError, celEnvBase } from '@cabloy/utils';
 import { ZodMetadata } from '@cabloy/zod-openapi';
-import { DeepKeys, determineFormLevelErrorSourceAndValue, FormValidationError, isGlobalFormValidationError, revalidateLogic, useStore, ValidationCause, ValidationError } from '@tanstack/vue-form';
+import { DeepKeys, determineFormLevelErrorSourceAndValue, FormValidationError, getBy, isGlobalFormValidationError, revalidateLogic, useStore, ValidationCause, ValidationError } from '@tanstack/vue-form';
 import { SchemaObject } from 'openapi3-ts/oas31';
 import { VNode } from 'vue';
 import { z } from 'zod';
 import { $ZodIssue } from 'zod/v4/core';
-import { deepEqual, deepExtend, UseScope } from 'zova';
+import { cast, deepEqual, deepExtend, UseScope } from 'zova';
 import { isJsxComponent, ZovaJsx } from 'zova-jsx';
 import { Controller } from 'zova-module-a-bean';
-import { loadSchemaProperties, renderFieldTopPropsSystem, schemaToZodSchema, ScopeModuleAOpenapi } from 'zova-module-a-openapi';
+import { loadSchemaProperties, renderFieldTopPropsSystem, schemaToZodSchema, ScopeModuleAOpenapi, TypeRenderComponent, TypeRenderComponentProvider } from 'zova-module-a-openapi';
 import { BeanControllerFormBase } from '../../lib/beanControllerFormBase.js';
 import { RevalidateLogicProps, TypeForm, TypeFormOnShowError, TypeFormOnSubmit, TypeFormState } from '../../types/form.js';
-import { IFormFieldLayoutOptionsBase, IFormFieldRenderContextOptions, TypeFormFieldOnChanged } from '../../types/formField.js';
+import { IFormFieldLayoutOptionsBase, IFormFieldRenderContextOptions, TypeFormFieldOnDisplayValueUpdate } from '../../types/formField.js';
 import { IFormMeta } from '../../types/formMeta.js';
 import { IFormProvider } from '../../types/provider.js';
 
@@ -96,7 +96,7 @@ export class ControllerForm<TFormData extends {} = {}, TSubmitMeta = never> exte
   }
 
   public getFieldValue<K extends DeepKeys<TFormData>>(name: K) {
-    return this.form.getFieldValue(name) ?? null;
+    return getBy(this.formState.values, name) ?? null;
   }
 
   public getFieldDisplayValue<K extends DeepKeys<TFormData>>(name: K, displayValue?: any) {
@@ -104,8 +104,8 @@ export class ControllerForm<TFormData extends {} = {}, TSubmitMeta = never> exte
     return this.getFieldValue(name);
   }
 
-  public onFieldChange(value: any, onChange?: TypeFormFieldOnChanged) {
-    if (onChange) return onChange(value);
+  public onDisplayValueUpdate(value: any, onDisplayValueUpdate?: TypeFormFieldOnDisplayValueUpdate) {
+    if (onDisplayValueUpdate) return onDisplayValueUpdate(value);
     return value;
   }
 
@@ -163,16 +163,16 @@ export class ControllerForm<TFormData extends {} = {}, TSubmitMeta = never> exte
     return props;
   }
 
-  public getRenderFlattern(render: any) {
-    return isJsxComponent(render) ? render.type : render;
+  public getRenderFlattern(render: TypeRenderComponent): TypeRenderComponent {
+    return isJsxComponent(render) ? cast(render).type : render;
   }
 
-  public getRenderProvider(render: any) {
+  public getRenderProvider(render: TypeRenderComponent): TypeRenderComponentProvider {
     let renderProvider = this.getRenderFlattern(render);
     if (typeof renderProvider === 'string') {
       renderProvider = this.formProvider.components?.[renderProvider] ?? renderProvider;
     }
-    return renderProvider;
+    return renderProvider as TypeRenderComponentProvider;
   }
 
   private _getZodSchema() {

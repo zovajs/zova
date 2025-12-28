@@ -3,7 +3,7 @@ import type z from 'zod';
 import type { TypeRenderComponentJsx } from 'zova-jsx';
 import type { IBehaviorItem } from 'zova-module-a-behavior';
 import type { IIconRecord } from 'zova-module-a-icon';
-import type { TypeRenderComponent } from 'zova-module-a-openapi';
+import type { TypeRenderComponent, TypeRenderComponentProvider } from 'zova-module-a-openapi';
 import type { TypeBehaviorFormFieldOptions, TypeFormField } from './form.js';
 
 export type HTMLInputElementType = 'text' | 'password' | 'number' | 'file' | 'hidden' | 'tel' | 'email';
@@ -21,11 +21,11 @@ export interface IFormFieldLayoutOptionsBase {
   footer?: TypeRenderComponentJsx | string;
 }
 
-export type TypeFormFieldOnChanged = (value: any) => any;
+export type TypeFormFieldOnDisplayValueUpdate = (value: any) => any;
 export interface IFormFieldOptionsBase {
   render?: TypeRenderComponent;
   displayValue?: any;
-  onChange?: TypeFormFieldOnChanged;
+  onDisplayValueUpdate?: TypeFormFieldOnDisplayValueUpdate;
   class?: any;
   placeholder?: string;
   readonly?: boolean;
@@ -33,6 +33,9 @@ export interface IFormFieldOptionsBase {
   validateOnDynamic?: boolean | z.ZodType;
   validateOnChange?: boolean | z.ZodType;
   validateOnBlur?: boolean | z.ZodType;
+  onChange?: (e: Event) => void;
+  onInput?: (e: Event) => void;
+  onBlur?: (e: Event) => void;
 }
 
 export interface IFormFieldOptions<TParentData = {}>
@@ -48,14 +51,15 @@ export interface IFormFieldRenderContextProps {
   readonly?: boolean;
   placeholder?: string;
   class?: any;
+  onChange?: (e: Event) => void;
   onInput?: (e: Event) => void;
   onBlur?: (e: Event) => void;
 }
 
 export interface IFormFieldRenderContextOptions<TParentData = {}> extends Omit<IFormFieldOptions<TParentData>, 'render'> {
   render: TypeRenderComponent;
-  renderFlattern?: any;
-  renderProvider?: any;
+  renderFlattern?: TypeRenderComponent;
+  renderProvider?: TypeRenderComponentProvider;
 }
 
 export interface IFormFieldRenderContext<TParentData = {}> {

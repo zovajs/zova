@@ -40,7 +40,7 @@ declare module 'openapi3-ts/oas31' {
   export interface SchemaObject extends ISchemaObjectExtensionField {}
 }
 
-export type TypeRenderComponentPreset = keyof TypeResourceActionRowRecordRender | 'text' | 'textarea' | 'select' | 'checkbox' | 'radio' | 'switch' | 'image' | 'file' | 'color' | 'password' | 'email' | 'url';
+export type TypeRenderComponentPreset = keyof TypeResourceActionRowRecordRender | 'text' | 'currency' | 'textarea' | 'select' | 'checkbox' | 'radio' | 'switch' | 'image' | 'file' | 'color' | 'password' | 'email' | 'url';
 
 export type TypeRenderComponentNormal =
   Constructable<ComponentPublicInstance> | (keyof IComponentRecord) | TypeRenderComponentPreset;
