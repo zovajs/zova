@@ -74,7 +74,7 @@ export class ControllerFormFieldCaptcha extends BeanControllerBase {
         <ZFormField
           name={this.$props.name}
           validateOnDynamic={this.zodSchema}
-          slotDefault={({ props }, field) => {
+          slotDefault={({ props }, $$formField) => {
             return (
               <input
                 type="text"
@@ -87,7 +87,7 @@ export class ControllerFormFieldCaptcha extends BeanControllerBase {
                   if (this.captchaData) {
                     this.captchaData.token = token;
                   }
-                  field.api.handleChange({
+                  $$formField.field.api.handleChange({
                     id: this.captchaData?.id,
                     token,
                   });

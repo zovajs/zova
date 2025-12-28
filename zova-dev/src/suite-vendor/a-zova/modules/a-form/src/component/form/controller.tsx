@@ -10,7 +10,7 @@ import { isJsxComponent, ZovaJsx } from 'zova-jsx';
 import { Controller } from 'zova-module-a-bean';
 import { loadSchemaProperties, renderFieldTopPropsSystem, schemaToZodSchema, ScopeModuleAOpenapi, TypeRenderComponent, TypeRenderComponentProvider } from 'zova-module-a-openapi';
 import { BeanControllerFormBase } from '../../lib/beanControllerFormBase.js';
-import { RevalidateLogicProps, TypeForm, TypeFormOnShowError, TypeFormOnSubmit, TypeFormState } from '../../types/form.js';
+import { RevalidateLogicProps, TypeForm, TypeFormOnShowError, TypeFormOnSubmit } from '../../types/form.js';
 import { IFormFieldLayoutOptionsBase, IFormFieldRenderContextOptions, TypeFormFieldOnDisplayValueUpdate } from '../../types/formField.js';
 import { IFormMeta } from '../../types/formMeta.js';
 import { IFormProvider } from '../../types/provider.js';
@@ -29,9 +29,9 @@ export interface ControllerFormProps<TFormData extends {} = {}, TSubmitMeta = ne
   onFormSubmit?: (e: SubmitEvent) => any;
   onSubmit?: TypeFormOnSubmit<TFormData, TSubmitMeta>;
   onShowError?: TypeFormOnShowError<TFormData, TSubmitMeta>;
-  slotHeader?: (formState: TypeFormState<TFormData>, form: TypeForm<TFormData, TSubmitMeta>) => VNode;
-  slotBody?: (children: VNode, formState: TypeFormState<TFormData>, form: TypeForm<TFormData, TSubmitMeta>) => VNode;
-  slotFooter?: (formState: TypeFormState<TFormData>, form: TypeForm<TFormData, TSubmitMeta>) => VNode;
+  slotHeader?: (form: ControllerForm<TFormData, TSubmitMeta>) => VNode;
+  slotBody?: (children: VNode, form: ControllerForm<TFormData, TSubmitMeta>) => VNode;
+  slotFooter?: (form: ControllerForm<TFormData, TSubmitMeta>) => VNode;
 }
 @Controller()
 export class ControllerForm<TFormData extends {} = {}, TSubmitMeta = never> extends BeanControllerFormBase {

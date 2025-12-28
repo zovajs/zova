@@ -78,9 +78,9 @@ export class RenderPageToolOne extends BeanRenderBase {
             footer: () => <div>--- Footer Slot ---</div>,
           }}
         </FormFieldTest>
-        <ZFormSubscribe slotDefault={state => {
+        <ZFormSubscribe slotDefault={$$form => {
           return (
-            <button disabled={state.isSubmitting} type="submit" class="btn btn-primary">
+            <button disabled={$$form.formState.isSubmitting} type="submit" class="btn btn-primary">
               Submit
             </button>
           );
