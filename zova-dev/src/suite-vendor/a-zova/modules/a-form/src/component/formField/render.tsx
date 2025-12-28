@@ -1,5 +1,4 @@
 import { BeanRenderBase } from 'zova';
-import { isJsxComponent } from 'zova-jsx';
 import { Render } from 'zova-module-a-bean';
 import { IFormFieldOptions, IFormFieldRenderContext } from '../../types/formField.js';
 
@@ -30,8 +29,8 @@ export class RenderFormField<TParentData extends {} = {}> extends BeanRenderBase
       this.$props as IFormFieldOptions<TParentData>,
     );
     // render
-    renderContext.options.renderFlattern = this._getRenderFlattern(renderContext.options.render);
-    renderContext.options.renderProvider = this._getRenderProvider(renderContext.options.renderFlattern);
+    renderContext.options.renderFlattern = this.$$form.getRenderFlattern(renderContext.options.render);
+    renderContext.options.renderProvider = this.$$form.getRenderProvider(renderContext.options.render);
     // props
     renderContext.props = {
       name,
@@ -53,17 +52,5 @@ export class RenderFormField<TParentData extends {} = {}> extends BeanRenderBase
     // if (this.$$form.renderAuto) return;
     const celScope = this.$$form.getFieldCelScope(this.name);
     return this.$$form.getFieldComponentPropsTop(this.name, celScope);
-  }
-
-  private _getRenderFlattern(render: any) {
-    return isJsxComponent(render) ? render.type : render;
-  }
-
-  private _getRenderProvider(renderFlattern: any) {
-    let renderProvider = renderFlattern;
-    if (typeof renderProvider === 'string') {
-      renderProvider = this.formProvider.components?.[renderProvider] ?? renderProvider;
-    }
-    return renderProvider;
   }
 }

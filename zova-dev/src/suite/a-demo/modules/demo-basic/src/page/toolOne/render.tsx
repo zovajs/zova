@@ -93,7 +93,9 @@ export class RenderPageToolOne extends BeanRenderBase {
   public render() {
     return (
       <div>
-        <div>{this._renderAuto()}</div>
+        <div>
+          {this._renderAuto()}
+        </div>
         <div>------------------------------------</div>
         <div>
           {this._renderManual()}

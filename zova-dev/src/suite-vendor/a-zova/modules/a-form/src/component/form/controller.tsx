@@ -6,12 +6,12 @@ import { VNode } from 'vue';
 import { z } from 'zod';
 import { $ZodIssue } from 'zod/v4/core';
 import { deepEqual, deepExtend, UseScope } from 'zova';
-import { ZovaJsx } from 'zova-jsx';
+import { isJsxComponent, ZovaJsx } from 'zova-jsx';
 import { Controller } from 'zova-module-a-bean';
 import { loadSchemaProperties, renderFieldTopPropsSystem, schemaToZodSchema, ScopeModuleAOpenapi } from 'zova-module-a-openapi';
 import { BeanControllerFormBase } from '../../lib/beanControllerFormBase.js';
 import { RevalidateLogicProps, TypeForm, TypeFormOnShowError, TypeFormOnSubmit, TypeFormState } from '../../types/form.js';
-import { IFormFieldLayoutOptionsBase, TypeFormFieldOnChanged } from '../../types/formField.js';
+import { IFormFieldLayoutOptionsBase, IFormFieldRenderContextOptions, TypeFormFieldOnChanged } from '../../types/formField.js';
 import { IFormMeta } from '../../types/formMeta.js';
 import { IFormProvider } from '../../types/provider.js';
 
@@ -138,8 +138,8 @@ export class ControllerForm<TFormData extends {} = {}, TSubmitMeta = never> exte
     };
   }
 
-  public getFieldComponentPropsTop<K extends DeepKeys<TFormData>>(name: K, celScope: {}) {
-    const props = { key: name, name };
+  public getFieldComponentPropsTop<K extends DeepKeys<TFormData>>(name: K, celScope: {}): IFormFieldRenderContextOptions {
+    const props: any = { key: name, name };
     const property = this.getFieldProperty(name);
     if (!property) return props;
     const rest = property.rest;
@@ -161,6 +161,18 @@ export class ControllerForm<TFormData extends {} = {}, TSubmitMeta = never> exte
       props[key] = keyValue;
     }
     return props;
+  }
+
+  public getRenderFlattern(render: any) {
+    return isJsxComponent(render) ? render.type : render;
+  }
+
+  public getRenderProvider(render: any) {
+    let renderProvider = this.getRenderFlattern(render);
+    if (typeof renderProvider === 'string') {
+      renderProvider = this.formProvider.components?.[renderProvider] ?? renderProvider;
+    }
+    return renderProvider;
   }
 
   private _getZodSchema() {

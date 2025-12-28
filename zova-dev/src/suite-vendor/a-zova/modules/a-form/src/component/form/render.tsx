@@ -1,7 +1,7 @@
 import { SchemaObject } from 'openapi3-ts/oas31';
 import { h, VNode } from 'vue';
 import { BeanRenderBase, cast } from 'zova';
-import { TypeRenderComponentJsx } from 'zova-jsx';
+import { TypeRenderComponent } from 'zova-jsx';
 import { Render } from 'zova-module-a-bean';
 
 @Render()
@@ -29,23 +29,16 @@ export class RenderForm extends BeanRenderBase {
     // props
     const props = this.getFieldComponentPropsTop(key, celScope);
     if (cast(props).visible === false) return;
-    const componentOptions = this._getFieldComponentOptionsTop(property);
+    const componentOptions = this._getFieldComponentOptionsTop(props.render);
     return this.zovaJsx.render(componentOptions, props, celScope);
   }
 
-  private _getFieldComponentOptionsTop(property: SchemaObject): TypeRenderComponentJsx {
-    const render = property?.rest?.render;
-    if (typeof render === 'string' && render.includes(':formField')) {
-      return {
-        type: render,
-      };
-    }
-    if (typeof render === 'object' && typeof render.type === 'string' && render.type.includes(':formField')) {
+  private _getFieldComponentOptionsTop(render: TypeRenderComponent): TypeRenderComponent {
+    const renderProvider = this.getRenderProvider(render);
+    if (typeof renderProvider === 'string' && renderProvider.includes(':formField')) {
       return render;
     }
-    return {
-      type: this.formProvider.components!.formField!,
-    };
+    return this.formProvider.components!.formField!;
   }
 
   private _renderChildren() {

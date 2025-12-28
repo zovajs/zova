@@ -19,7 +19,7 @@ export class ControllerFormFieldCurrency extends BeanControllerBase {
   protected render() {
     const name = this.$props.name;
     let displayValue = this.$$form.getFieldDisplayValue(name, this.$props.displayValue);
-    displayValue=this._serializer(displayValue);
+    displayValue = this._serializer(displayValue);
     return (
       <ZFormField
         name={name}
@@ -29,7 +29,7 @@ export class ControllerFormFieldCurrency extends BeanControllerBase {
     );
   }
 
-  private _serializer(value:any){
+  private _serializer(value: any) {
     if (!value || (typeof value !== 'number' && typeof value !== 'string')) return value;
     const currency = new Currency(this.$props);
     return currency.format(value);
