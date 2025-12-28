@@ -12,6 +12,7 @@ export interface IFormProviderComponents {
   // table?: TypeComponentRecordSelectorKeysStrict<'restTable'>;
   formField?: TypeComponentRecordSelectorKeysStrict<'formField'>;
   text?: TypeRenderComponentProvider;
+  password?: TypeRenderComponentProvider;
 }
 
 export interface IFormProvider {

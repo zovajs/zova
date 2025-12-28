@@ -28,6 +28,7 @@ export class MonkeySys extends BeanSimple implements IMonkeySysInitialize {
           components: {
             formField: 'a-form:formField',
             text: 'input',
+            password: 'input',
           },
           behaviors: {
             formField: 'a-form:formField',
