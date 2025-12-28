@@ -29,7 +29,7 @@
     "_prepublishOnly": "npm run tsc:publish"
   },
   "dependencies": {
-    "@zhennann/currency": "^2.0.0"
+    "@zhennann/currency": "^2.0.2"
   },
   "zovaModule": {
     "onionsConfig": {

@@ -38,7 +38,7 @@
   },
   "dependencies": {
     "@cabloy/json-schema-to-zod": "^2.6.4",
-    "@zhennann/currency": "^2.0.0",
+    "@zhennann/currency": "^2.0.2",
     "openapi3-ts": "^4.5.0",
     "zova-jsx": "^1.0.0"
   }

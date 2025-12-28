@@ -78,8 +78,8 @@ export class ControllerForm<TFormData extends {} = {}, TSubmitMeta = never> exte
     });
   }
 
-  public submit(submitMeta?: TSubmitMeta) {
-    return this.form.handleSubmit(submitMeta as any);
+  public async submit(submitMeta?: TSubmitMeta) {
+    return await this.form.handleSubmit(submitMeta as any);
   }
 
   public reset(values?: TFormData, opts?: { keepDefaultValues?: boolean }): TFormData {
