@@ -103,8 +103,8 @@ importers:
         specifier: ^4.6.11
         version: 4.9.0
       zova-openapi:
-        specifier: ^1.0.3
-        version: 1.0.3(typescript@5.9.3)
+        specifier: ^1.0.4
+        version: 1.0.4(typescript@5.9.3)
       zova-shared:
         specifier: ^1.0.7
         version: 1.0.7
@@ -3166,12 +3166,6 @@ packages:
   once@1.4.0:
     resolution: {integrity: sha512-lNaJgI+2Q5URQBkccEKHTQOPaXdUxnZZElQTZY0MFUAuaEqe1E+Nyvgdz/aIyNi6Z9MzO5dv1H8n58/GELp3+w==}
 
-  openapi-typescript@7.10.1:
-    resolution: {integrity: sha512-rBcU8bjKGGZQT4K2ekSTY2Q5veOQbVG/lTKZ49DeCyT9z62hM2Vj/LLHjDHC9W7LJG8YMHcdXpRZDqC1ojB/lw==}
-    hasBin: true
-    peerDependencies:
-      typescript: ^5.x
-
   optionator@0.9.4:
     resolution: {integrity: sha512-6IpQ7mKUxRcZNLIObR0hz7lxsapSSIYNZJwXPGeF0mTVqGKFIXj1DQcMoT22S3ROcLyY/rz0PWaWZ9ayWmad9g==}
     engines: {node: '>= 0.8.0'}
@@ -4061,8 +4055,8 @@ packages:
     resolution: {integrity: sha512-rVksvsnNCdJ/ohGc6xgPwyN8eheCxsiLM8mxuE/t/mOVqJewPuO1miLpTHQiRgTKCLexL4MeAFVagts7HmNZ2Q==}
     engines: {node: '>=10'}
 
-  zova-openapi@1.0.3:
-    resolution: {integrity: sha512-Sizuxq8tv+IN9gbPp3HxpKZfBYmponufzfx8fDNVN9kCBc72jbQ5ftptU1kZ3afhdS2mHCON6rkNixC0l2RcHw==}
+  zova-openapi@1.0.4:
+    resolution: {integrity: sha512-HizMUA0Cq+L6HY7InwB0IegZ+/l/7AyCi/l7h038V+9vgj5j7FFglSl8rfk4A0N3XsIz28t/9dBurmlAXHiOAA==}
 
   zova-shared@1.0.7:
     resolution: {integrity: sha512-vTJSY9t7+nQq2Geg5kWVCVpP+TThooYf0Z+Bs1amxfJKj0M2rO1iDZ3howOm85Hw71QpqGbpDzLbZhR/V8sO6Q==}
@@ -7339,16 +7333,6 @@ snapshots:
     dependencies:
       wrappy: 1.0.2
 
-  openapi-typescript@7.10.1(typescript@5.9.3):
-    dependencies:
-      '@redocly/openapi-core': 1.34.6(supports-color@10.2.2)
-      ansi-colors: 4.1.3
-      change-case: 5.4.4
-      parse-json: 8.3.0
-      supports-color: 10.2.2
-      typescript: 5.9.3
-      yargs-parser: 21.1.1
-
   optionator@0.9.4:
     dependencies:
       deep-is: 0.1.4
@@ -8281,9 +8265,9 @@ snapshots:
 
   yocto-queue@0.1.0: {}
 
-  zova-openapi@1.0.3(typescript@5.9.3):
+  zova-openapi@1.0.4(typescript@5.9.3):
     dependencies:
-      openapi-typescript: 7.10.1(typescript@5.9.3)
+      '@cabloy/openapi-typescript': 7.9.2(typescript@5.9.3)
     transitivePeerDependencies:
       - typescript
 

@@ -59,7 +59,7 @@
     "vite": "^6.2.4",
     "vite-plugin-vuetify": "^2.0.4",
     "vue-tsc": "^2.0.29",
-    "zova-openapi": "^1.0.0",
+    "zova-openapi": "^1.0.4",
     "zova-vite": "^1.0.182"
   },
   "license": "MIT",
