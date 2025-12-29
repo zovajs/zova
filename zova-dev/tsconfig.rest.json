@@ -13,6 +13,7 @@
   ],
   "include": [
     "src/**/*",
+    "src/**/.metadata/**/*",
     ".zova-rest/**/*",
     "packages-zova/**/*",
     "packages-utils/zova-jsx",
