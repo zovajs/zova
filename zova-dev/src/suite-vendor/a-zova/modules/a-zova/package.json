@@ -32,7 +32,6 @@
       "@cabloy/deps": true,
       "@cabloy/json5": true,
       "@cabloy/module-info": true,
-      "@cabloy/set": true,
       "@cabloy/utils": true,
       "@cabloy/word-utils": true,
       "defu": true
@@ -74,7 +73,6 @@
     "@cabloy/deps": "^1.0.9",
     "@cabloy/json5": "^1.0.8",
     "@cabloy/module-info": "^1.3.32",
-    "@cabloy/set": "^1.0.7",
     "@cabloy/utils": "^2.0.8",
     "@cabloy/word-utils": "^2.0.2",
     "defu": "^6.1.4"
