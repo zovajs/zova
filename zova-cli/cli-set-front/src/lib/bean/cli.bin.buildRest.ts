@@ -30,6 +30,14 @@ declare module '@cabloy/cli' {
   }
 }
 
+interface IBinBuildRestContext {
+  projectPath: string;
+  flavor: ZovaMetaFlavor;
+  bundleName: string;
+  srcDir: string;
+  outDir: string;
+}
+
 export class CliBinBuildRest extends BeanCliBase {
   async execute() {
     const { argv } = this.context;
@@ -37,35 +45,37 @@ export class CliBinBuildRest extends BeanCliBase {
     await super.execute();
     const projectPath = argv.projectPath;
     //
+    const flavor = argv.flavor || 'vonaHome';
+    const bundleName = `zova-rest-${camelToKebab(flavor)}`;
+    //
     const srcDir = path.join(projectPath, '.zova-rest');
-    const outDir = path.join(projectPath, 'dist', `rest-${this.flavor}`);
+    const outDir = path.join(projectPath, 'dist', `rest-${flavor}`);
     await rimraf(srcDir);
     await fse.ensureDir(srcDir);
     await rimraf(outDir);
+    // context
+    const context: IBinBuildRestContext = {
+      projectPath,
+      flavor,
+      bundleName,
+      srcDir,
+      outDir,
+    };
     //
-    await this._prepareResources(projectPath, srcDir);
-    await this._build(projectPath, srcDir, outDir);
+    await this._prepareResources(context);
+    await this._build(context);
     //
     await rimraf(srcDir);
   }
 
-  get flavor(): ZovaMetaFlavor {
-    const { argv } = this.context;
-    return argv.flavor || 'vonaHome';
-  }
-
-  get bundleName() {
-    return `zova-rest-${camelToKebab(this.flavor)}`;
-  }
-
-  async _prepareResources(projectPath: string, srcDir: string) {
+  async _prepareResources(context: IBinBuildRestContext) {
     // package.json
-    await this._prepareResourcesPackage(projectPath, srcDir);
+    await this._prepareResourcesPackage(context);
     // index.ts
-    await this._prepareResourcesIndex(projectPath, srcDir);
+    await this._prepareResourcesIndex(context);
   }
 
-  async _build(projectPath: string, srcDir: string, outDir: string) {
+  async _build({ projectPath, flavor, srcDir, outDir }: IBinBuildRestContext) {
     const entry = path.join(srcDir, 'index.ts');
     // build
     await build({
@@ -89,13 +99,12 @@ export class CliBinBuildRest extends BeanCliBase {
     // release
     await fse.copy(
       outDir,
-      path.join(path.join(projectPath, 'dist-releases', `rest-${this.flavor}-${process.env.APP_VERSION}`)),
+      path.join(path.join(projectPath, 'dist-releases', `rest-${flavor}-${process.env.APP_VERSION}`)),
     );
   }
 
-  async _prepareResourcesPackage(projectPath: string, srcDir: string) {
+  async _prepareResourcesPackage({ projectPath, flavor, bundleName, srcDir }: IBinBuildRestContext) {
     const mode: ZovaMetaMode = 'production';
-    const flavor: ZovaMetaFlavor = this.flavor;
     const appMode: ZovaMetaAppMode = 'ssr';
     const configMeta: ZovaConfigMeta = { flavor, mode, appMode };
     const configOptions: ZovaViteConfigOptions = {
@@ -108,12 +117,12 @@ export class CliBinBuildRest extends BeanCliBase {
     // package.json
     const pkgContent = replaceTemplate(
       __template_package,
-      { Name: this.bundleName, Version: env.APP_VERSION },
+      { Name: bundleName, Version: env.APP_VERSION },
     );
     await fse.writeFile(path.join(srcDir, 'package.json'), pkgContent!);
   }
 
-  async _prepareResourcesIndex(_projectPath: string, srcDir: string) {
+  async _prepareResourcesIndex({ srcDir }: IBinBuildRestContext) {
     let indexContent = '';
     for (const module of this.modulesMeta.modulesArray) {
       const restIndexFile = path.join(module.root, 'rest/index.ts');
