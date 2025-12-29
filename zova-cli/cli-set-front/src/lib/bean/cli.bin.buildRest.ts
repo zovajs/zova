@@ -75,7 +75,7 @@ export class CliBinBuildRest extends BeanCliBase {
       tsconfig: 'tsconfig.rest.json',
       dts: {
         resolve: true,
-        // resolver: 'tsc',
+        resolver: 'tsc',
         tsgo: true,
         eager: true,
         tsconfig: 'tsconfig.rest.json',

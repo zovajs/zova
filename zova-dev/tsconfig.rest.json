@@ -2,7 +2,6 @@
   "extends": "./tsconfig.base.esm",
   "compilerOptions": {
     "composite": false,
-    "incremental": true,
     "sourcemap": false,
     "allowImportingTsExtensions": false,
     "noEmit": false,
