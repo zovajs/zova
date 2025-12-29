@@ -3,7 +3,7 @@ import type { IGlobBeanFile } from '@cabloy/module-info';
 import type { IControllerInfo } from './types.ts';
 import { combineContentRenderAndStyle } from './utils.ts';
 
-export function generateFilePage(
+export async function generateFilePage(
   options: IMetadataCustomGenerateOptions,
   globFile: IGlobBeanFile,
   controllerInfo: IControllerInfo,

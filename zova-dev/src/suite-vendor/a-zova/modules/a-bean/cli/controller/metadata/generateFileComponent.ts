@@ -1,9 +1,13 @@
 import type { IMetadataCustomGenerateOptions } from '@cabloy/cli';
 import type { IGlobBeanFile } from '@cabloy/module-info';
 import type { IControllerInfo } from './types.ts';
+import path from 'node:path';
+import { combineResourceName } from '@cabloy/utils';
+import { toUpperCaseFirstChar } from '@cabloy/word-utils';
+import fse from 'fs-extra';
 import { combineContentRenderAndStyle } from './utils.ts';
 
-export function generateFileComponent(
+export async function generateFileComponent(
   options: IMetadataCustomGenerateOptions,
   globFile: IGlobBeanFile,
   controllerInfo: IControllerInfo,
@@ -133,5 +137,39 @@ ${contentControllerInterface}
 ${combineContentRenderAndStyle(controllerInfo, moduleName, className, genericDeclare, genericArguments)}
 ${contentComponent}
 `;
+  // restComponent
+  await generateRestComponent(options, globFile, controllerInfo, genericDeclare, genericArguments, _contentImportTypeController);
+  // ok
   return content;
+}
+
+async function generateRestComponent(
+  options: IMetadataCustomGenerateOptions,
+  _globFile: IGlobBeanFile,
+  controllerInfo: IControllerInfo,
+  genericDeclare: string,
+  genericArguments: string,
+  _contentImportTypeController: string[],
+) {
+  const { moduleName, modulePath } = options;
+  // const { className } = globFile;
+  const { name, nameProps, controllerExtJs } = controllerInfo;
+  // import
+  const contentImports: string[] = [];
+  if (_contentImportTypeController.length > 0) {
+    contentImports.push(`import type { ${_contentImportTypeController.join(', ')} } from '../../src/component/${name}/controller${controllerExtJs}';`);
+  }
+  // component
+  const componentName = `Z${toUpperCaseFirstChar(combineResourceName(name, moduleName, false, false))}`;
+  const contentComponent = `export function ${componentName}${genericDeclare}(_props: ${nameProps}${genericArguments}) {
+  return '${moduleName}:${name}';
+}`;
+  // content
+  const content = `${contentImports.join('\n')}
+
+${contentComponent}
+`;
+  // output
+  const fileDest = path.join(modulePath, `rest/component/${name}.ts`);
+  await fse.outputFile(fileDest, content);
 }

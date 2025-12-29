@@ -15,8 +15,8 @@ export async function generateFile(
   const fileDest = path.join(options.modulePath, `src/.metadata/${controllerInfo.type}/${controllerInfo.name}.ts`);
   const content =
     controllerInfo.type === 'page'
-      ? generateFilePage(options, globFile, controllerInfo)
-      : generateFileComponent(options, globFile, controllerInfo);
+      ? await generateFilePage(options, globFile, controllerInfo)
+      : await generateFileComponent(options, globFile, controllerInfo);
   await fse.outputFile(fileDest, content);
   await cli.helper.formatFile({ fileName: fileDest });
 }
