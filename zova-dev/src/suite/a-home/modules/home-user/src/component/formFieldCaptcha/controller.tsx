@@ -72,7 +72,7 @@ export class ControllerFormFieldCaptcha extends BeanControllerBase {
     return (
       <>
         <ZFormField
-          name={this.$props.name}
+          {...this.$props}
           validateOnDynamic={this.zodSchema}
           slotDefault={({ props }, $$formField) => {
             return (

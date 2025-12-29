@@ -22,9 +22,9 @@ export class ControllerFormFieldCurrency extends BeanControllerBase {
     displayValue = this._format(displayValue);
     return (
       <ZFormField
-        name={name}
-        displayValue={displayValue}
+        {...this.$props}
         render="text"
+        displayValue={displayValue}
         onChange={(e: Event) => {
           const value = this._update((e.target as HTMLInputElement).value);
           if (value !== undefined) {
