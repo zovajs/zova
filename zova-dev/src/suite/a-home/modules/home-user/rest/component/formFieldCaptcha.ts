@@ -1,5 +1,10 @@
+import type { TypeRenderComponentJsxPropsPublic } from 'zova-jsx';
 import type { ControllerFormFieldCaptchaProps } from '../../src/component/formFieldCaptcha/controller.jsx';
 
-export function ZHomeUserFormFieldCaptcha(_props: ControllerFormFieldCaptchaProps) {
+type TypeControllerFormFieldCaptchaPublicProps = TypeRenderComponentJsxPropsPublic
+  & ControllerFormFieldCaptchaProps;
+export function ZHomeUserFormFieldCaptcha(
+  _props: TypeControllerFormFieldCaptchaPublicProps,
+) {
   return 'home-user:formFieldCaptcha';
 }

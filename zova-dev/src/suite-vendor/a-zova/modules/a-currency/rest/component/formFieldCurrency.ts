@@ -1,5 +1,10 @@
+import type { TypeRenderComponentJsxPropsPublic } from 'zova-jsx';
 import type { ControllerFormFieldCurrencyProps } from '../../src/component/formFieldCurrency/controller.jsx';
 
-export function ZACurrencyFormFieldCurrency(_props: ControllerFormFieldCurrencyProps) {
+type TypeControllerFormFieldCurrencyPublicProps = TypeRenderComponentJsxPropsPublic
+  & ControllerFormFieldCurrencyProps;
+export function ZACurrencyFormFieldCurrency(
+  _props: TypeControllerFormFieldCurrencyPublicProps,
+) {
   return 'a-currency:formFieldCurrency';
 }

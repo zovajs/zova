@@ -1,5 +1,8 @@
+import type { TypeRenderComponentJsxPropsPublic } from 'zova-jsx';
 
-
-export function ZAAppApp(_props: ControllerAppProps) {
+type TypeControllerAppPublicProps = TypeRenderComponentJsxPropsPublic;
+export function ZAAppApp(
+  _props: TypeControllerAppPublicProps,
+) {
   return 'a-app:app';
 }

@@ -1,5 +1,10 @@
+import type { TypeRenderComponentJsxPropsPublic } from 'zova-jsx';
 import type { ControllerWrapperTableProps } from '../../src/component/wrapperTable/controller.jsx';
 
-export function ZDevuiRestpageWrapperTable<T extends {} = {}>(_props: ControllerWrapperTableProps<T>) {
+type TypeControllerWrapperTablePublicProps<T extends {} = {}> = TypeRenderComponentJsxPropsPublic
+  & ControllerWrapperTableProps<T>;
+export function ZDevuiRestpageWrapperTable<T extends {} = {}>(
+  _props: TypeControllerWrapperTablePublicProps<T>,
+) {
   return 'devui-restpage:wrapperTable';
 }

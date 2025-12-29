@@ -1,5 +1,10 @@
+import type { TypeRenderComponentJsxPropsPublic } from 'zova-jsx';
 import type { ControllerTableProps } from '../../src/component/table/controller.jsx';
 
-export function ZDevuiTableTable<T extends {} = {}>(_props: ControllerTableProps<T>) {
+type TypeControllerTablePublicProps<T extends {} = {}> = TypeRenderComponentJsxPropsPublic
+  & ControllerTableProps<T>;
+export function ZDevuiTableTable<T extends {} = {}>(
+  _props: TypeControllerTablePublicProps<T>,
+) {
   return 'devui-table:table';
 }

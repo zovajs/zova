@@ -1,5 +1,10 @@
+import type { TypeRenderComponentJsxPropsPublic } from 'zova-jsx';
 import type { ControllerLayoutDefaultProps } from '../../src/component/layoutDefault/controller.jsx';
 
-export function ZHomeLayoutLayoutDefault(_props: ControllerLayoutDefaultProps) {
+type TypeControllerLayoutDefaultPublicProps = TypeRenderComponentJsxPropsPublic
+  & ControllerLayoutDefaultProps;
+export function ZHomeLayoutLayoutDefault(
+  _props: TypeControllerLayoutDefaultPublicProps,
+) {
   return 'home-layout:layoutDefault';
 }

@@ -1,5 +1,10 @@
+import type { TypeRenderComponentJsxPropsPublic } from 'zova-jsx';
 import type { ControllerCardProps } from '../../src/component/card/controller.jsx';
 
-export function ZDemoBasicCard(_props: ControllerCardProps) {
+type TypeControllerCardPublicProps = TypeRenderComponentJsxPropsPublic
+  & ControllerCardProps;
+export function ZDemoBasicCard(
+  _props: TypeControllerCardPublicProps,
+) {
   return 'demo-basic:card';
 }

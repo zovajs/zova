@@ -1,5 +1,10 @@
+import type { TypeRenderComponentJsxPropsPublic } from 'zova-jsx';
 import type { ControllerIconProps } from '../../src/component/icon/controller.jsx';
 
-export function ZAIconIcon(_props: ControllerIconProps) {
+type TypeControllerIconPublicProps = TypeRenderComponentJsxPropsPublic
+  & ControllerIconProps;
+export function ZAIconIcon(
+  _props: TypeControllerIconPublicProps,
+) {
   return 'a-icon:icon';
 }
