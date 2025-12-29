@@ -54,6 +54,10 @@ export class CliBinBuildRest extends BeanCliBase {
     return argv.flavor || 'vonaHome';
   }
 
+  get bundleName() {
+    return `zova-rest-${camelToKebab(this.flavor)}`;
+  }
+
   async _prepareResources(projectPath: string, srcDir: string) {
     // package.json
     await this._prepareResourcesPackage(projectPath, srcDir);

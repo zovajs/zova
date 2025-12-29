@@ -144,3 +144,7 @@ export function hashCode(input?: string): string {
   }
   return (hash + 2147483647 + 1).toString();
 }
+
+export function camelToKebab(camelStr: string) {
+  return toLowerCaseFirstChar(camelStr).replace(/([A-Z])/g, '-$1').toLowerCase();
+}
