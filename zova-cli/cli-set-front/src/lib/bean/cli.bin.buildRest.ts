@@ -137,6 +137,9 @@ export class CliBinBuildRest extends BeanCliBase {
 
 function _copyToTarget(outDir: string, target: string | undefined, basename: string) {
   if (!target) return;
+  if (basename.includes('rest-')) {
+    basename = basename.substring('rest-'.length);
+  }
   const dirs = target.split(',');
   for (const dir of dirs) {
     const outReleasesDirCopy = path.join(dir, basename);
