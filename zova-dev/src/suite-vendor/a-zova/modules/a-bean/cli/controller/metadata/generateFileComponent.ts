@@ -162,18 +162,22 @@ async function generateRestComponent(
   }
   if (hasModels) {
     contentTypeControllerPublicProps += `\n  & ${nameModels}${genericArguments} &
-{
-  [KEY in keyof ${nameModels}${genericArguments} as TypePropValueFromModel<KEY>]: ${nameModels}${genericArguments}[KEY];
-} &
-{
-  [KEY in keyof ${nameModels}${genericArguments} as TypePropUpdateFromModel<KEY>]: (value: ${nameModels}${genericArguments}[KEY]) => void;
-}`;
+  {
+    [KEY in keyof ${nameModels}${genericArguments} as TypePropValueFromModel<KEY>]: ${nameModels}${genericArguments}[KEY];
+  } &
+  {
+    [KEY in keyof ${nameModels}${genericArguments} as TypePropUpdateFromModel<KEY>]: (value: ${nameModels}${genericArguments}[KEY]) => void;
+  }`;
   }
   contentTypeControllerPublicProps = `${contentTypeControllerPublicProps};`;
   // import
-  const contentImports: string[] = [
-    'import type { TypeRenderComponentJsxPropsPublic } from \'zova-jsx\';',
-  ];
+  const contentImports: string[] = [];
+  const _contentImportTypeZova: string[] = [];
+  if (hasModels) _contentImportTypeZova.push('TypePropUpdateFromModel', 'TypePropValueFromModel');
+  if (_contentImportTypeZova.length > 0) {
+    contentImports.push(`import type { ${_contentImportTypeZova.join(', ')} } from 'zova';`);
+  }
+  contentImports.push('import type { TypeRenderComponentJsxPropsPublic } from \'zova-jsx\';');
   if (_contentImportTypeController.length > 0) {
     contentImports.push(`import type { ${_contentImportTypeController.join(', ')} } from '../../src/component/${name}/controller${controllerExtJs}';`);
   }
