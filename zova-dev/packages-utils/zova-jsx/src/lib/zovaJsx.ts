@@ -175,7 +175,14 @@ export class ZovaJsx extends BeanSimple {
     for (const jsxChild of jsxChildren) {
       let child;
       if (isJsxComponent(jsxChild)) {
-        child = this.render(jsxChild, undefined, celScope);
+        if (jsxChild.type === 'var') {
+          const props = {};
+          this._renderJsxProps(jsxChild.props, props, celScope);
+          celScope = { ...celScope, [cast(props).name]: cast(props).value };
+          child = undefined;
+        } else {
+          child = this.render(jsxChild, undefined, celScope);
+        }
       } else {
         const childText = this.evaluateExpression(jsxChild, celScope);
         child = createTextVNode(childText);
