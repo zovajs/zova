@@ -1,7 +1,7 @@
 {
   "name": "zova-openapi",
   "type": "module",
-  "version": "1.0.3",
+  "version": "1.0.4",
   "description": "Zova Openapi",
   "publishConfig": {
     "access": "public"
