@@ -5,7 +5,7 @@ import path from 'node:path';
 import { combineResourceName } from '@cabloy/utils';
 import { toUpperCaseFirstChar } from '@cabloy/word-utils';
 import fse from 'fs-extra';
-import { combineContentRenderAndStyle } from './utils.ts';
+import { combineContentRenderAndStyle, generateRestIndex } from './utils.ts';
 
 export async function generateFileComponent(
   options: IMetadataCustomGenerateOptions,
@@ -172,4 +172,18 @@ ${contentComponent}
   // output
   const fileDest = path.join(modulePath, `rest/component/${name}.ts`);
   await fse.outputFile(fileDest, content);
+  // components
+  const fileComponents = path.join(modulePath, 'rest/components.ts');
+  let contentComponents = '';
+  if (fse.existsSync(fileComponents)) {
+    contentComponents = (await fse.readFile(fileComponents)).toString();
+  }
+  const exportContent = `export * from './component/${name}.js';`;
+  if (!contentComponents.includes(exportContent)) {
+    contentComponents = `${contentComponents}${exportContent}\n`;
+    await fse.outputFile(fileComponents, contentComponents);
+  }
+  // index
+  const exportIndexContent = 'export * from \'./components.js\';';
+  await generateRestIndex(modulePath, exportIndexContent);
 }
