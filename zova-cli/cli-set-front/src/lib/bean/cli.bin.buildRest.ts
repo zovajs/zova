@@ -97,10 +97,11 @@ export class CliBinBuildRest extends BeanCliBase {
       path.join(outDir, 'package.json'),
     );
     // release
-    await fse.copy(
-      outDir,
-      path.join(path.join(projectPath, 'dist-releases', `rest-${flavor}-${process.env.APP_VERSION}`)),
-    );
+    const outReleasesDir = path.join(projectPath, 'dist-releases', `rest-${flavor}-${process.env.APP_VERSION}`);
+    await fse.copy(outDir, outReleasesDir);
+    // copy
+    _copyToTarget(outDir, process.env.BUILD_REST_COPY_DIST, path.basename(outDir));
+    _copyToTarget(outDir, process.env.BUILD_REST_COPY_RELEASE, path.basename(outReleasesDir));
   }
 
   async _prepareResourcesPackage({ projectPath, flavor, bundleName, srcDir }: IBinBuildRestContext) {
@@ -131,5 +132,18 @@ export class CliBinBuildRest extends BeanCliBase {
       indexContent += `export * from '${restIndexFileRelative}';\n`;
     }
     await fse.writeFile(path.join(srcDir, 'index.ts'), indexContent);
+  }
+}
+
+function _copyToTarget(outDir: string, target: string | undefined, basename: string) {
+  if (!target) return;
+  const dirs = target.split(',');
+  for (const dir of dirs) {
+    const outReleasesDirCopy = path.join(dir, basename);
+    fse.removeSync(outReleasesDirCopy);
+    fse.copySync(
+      outDir,
+      outReleasesDirCopy,
+    );
   }
 }
