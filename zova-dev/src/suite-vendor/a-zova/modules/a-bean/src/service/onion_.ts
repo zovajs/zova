@@ -187,7 +187,7 @@ export class ServiceOnion<OPTIONS, ONIONNAME extends string> extends BeanSimple 
 
   async _loadModules(moduleNames: string[]) {
     // load modules
-    moduleNames = Set.unique(moduleNames).filter(item => !this.sys.meta.module.get(item));
+    moduleNames = Array.from(new Set(moduleNames)).filter(item => !this.sys.meta.module.get(item));
     await this.sys.meta.module.loadModules(moduleNames);
   }
 
