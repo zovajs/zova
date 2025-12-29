@@ -2,7 +2,7 @@ import type { BeanResource } from 'zova-module-rest-resource';
 import { isNilOrEmptyString } from '@cabloy/utils';
 import { BeanControllerBase, Use } from 'zova';
 import { Controller } from 'zova-module-a-bean';
-import { ControllerForm, IFormFieldLayoutOptionsBase, IFormMeta, IFormProvider, TypeFormOnSubmitData } from 'zova-module-a-form';
+import { IFormFieldLayoutOptionsBase, IFormMeta, IFormProvider, TypeFormOnSubmitData } from 'zova-module-a-form';
 
 export interface ControllerWrapperFilterProps {
   formData?: any;
@@ -16,8 +16,6 @@ export class ControllerWrapperFilter extends BeanControllerBase {
 
   formMeta: IFormMeta;
   formFieldLayout: IFormFieldLayoutOptionsBase;
-
-  controllerForm: ControllerForm;
 
   @Use({ injectionScope: 'host' })
   $$beanResource: BeanResource;

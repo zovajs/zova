@@ -1,6 +1,6 @@
 import { BeanRenderBase } from 'zova';
 import { Render } from 'zova-module-a-bean';
-import { IFormFieldOptions, IFormFieldRenderContext } from '../../types/formField.js';
+import { constFieldProps, IFormFieldOptions, IFormFieldRenderContext } from '../../types/formField.js';
 
 @Render()
 export class RenderFormField<TParentData extends {} = {}> extends BeanRenderBase {
@@ -48,8 +48,7 @@ export class RenderFormField<TParentData extends {} = {}> extends BeanRenderBase
   }
 
   private _getFieldComponentPropsTop() {
-    // need not check renderAuto
-    // if (this.$$form.renderAuto) return;
+    if (this.$props[constFieldProps] === true) return;
     const celScope = this.$$form.getFieldCelScope(this.name);
     return this.$$form.getFieldComponentPropsTop(this.name, celScope);
   }

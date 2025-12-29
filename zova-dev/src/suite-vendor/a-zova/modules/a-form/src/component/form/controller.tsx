@@ -11,7 +11,7 @@ import { Controller } from 'zova-module-a-bean';
 import { loadSchemaProperties, renderFieldTopPropsSystem, schemaToZodSchema, ScopeModuleAOpenapi, TypeRenderComponent, TypeRenderComponentProvider } from 'zova-module-a-openapi';
 import { BeanControllerFormBase } from '../../lib/beanControllerFormBase.js';
 import { RevalidateLogicProps, TypeForm, TypeFormOnShowError, TypeFormOnSubmit } from '../../types/form.js';
-import { IFormFieldLayoutOptionsBase, IFormFieldRenderContextOptions, TypeFormFieldOnDisplayValueUpdate } from '../../types/formField.js';
+import { constFieldProps, IFormFieldLayoutOptionsBase, IFormFieldRenderContextOptions, TypeFormFieldOnDisplayValueUpdate } from '../../types/formField.js';
 import { IFormMeta } from '../../types/formMeta.js';
 import { IFormProvider } from '../../types/provider.js';
 
@@ -91,10 +91,6 @@ export class ControllerForm<TFormData extends {} = {}, TSubmitMeta = never> exte
     return this.$props.formMeta;
   }
 
-  public get renderAuto() {
-    return !this.$slotDefault;
-  }
-
   public getFieldValue<K extends DeepKeys<TFormData>>(name: K) {
     return getBy(this.formState.values, name) ?? null;
   }
@@ -147,7 +143,7 @@ export class ControllerForm<TFormData extends {} = {}, TSubmitMeta = never> exte
   }
 
   public getFieldComponentPropsTop<K extends DeepKeys<TFormData>>(name: K, celScope: {}): IFormFieldRenderContextOptions {
-    const props: any = { key: name, name };
+    const props: any = { [constFieldProps]: true, key: name, name };
     const property = this.getFieldProperty(name);
     if (!property) return props;
     const rest = property.rest;
