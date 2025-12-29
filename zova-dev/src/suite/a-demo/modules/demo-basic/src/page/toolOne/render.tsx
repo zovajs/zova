@@ -69,7 +69,7 @@ export class RenderPageToolOne extends BeanRenderBase {
         >
         </ZFormField>
         <ZFormField name="name">
-          <span>name</span>
+          <span>span: name</span>
         </ZFormField>
         <FormFieldTest>
           {{
