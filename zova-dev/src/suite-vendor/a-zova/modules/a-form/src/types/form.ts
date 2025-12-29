@@ -1,5 +1,6 @@
 import type { DeepKeys, DeepValue, FieldAsyncValidateOrFn, FieldOptions, FieldValidateOrFn, FormApi, FormAsyncValidateOrFn, FormOptions, FormState, FormValidateOrFn, useField, useForm } from '@tanstack/vue-form';
 import type { UnwrapNestedRefs } from 'vue';
+import type { ControllerForm } from '../component/form/controller.jsx';
 
 export type TypeForm<
   TFormData = unknown,
@@ -178,7 +179,7 @@ export interface TypeFormOnSubmitData<
 }
 
 export type TypeFormOnSubmit<
-  TFormData = unknown,
+  TFormData extends {} = {},
   TSubmitMeta = never,
   TFormOnMount extends undefined | FormValidateOrFn<TFormData> = undefined | FormValidateOrFn<TFormData>,
   TFormOnChange extends undefined | FormValidateOrFn<TFormData> = undefined | FormValidateOrFn<TFormData>,
@@ -204,7 +205,7 @@ export type TypeFormOnSubmit<
    TFormOnDynamic,
    TFormOnDynamicAsync,
    TFormOnServer
- >) => any | Promise<any>;
+ >, form: ControllerForm<TFormData, TSubmitMeta>) => any | Promise<any>;
 
 export type TypeFormState<
   TFormData = unknown,
@@ -233,7 +234,7 @@ export type TypeFormState<
 >;
 
 export type TypeFormOnShowError<
-  TFormData = unknown,
+  TFormData extends {} = {},
   TSubmitMeta = never,
   TFormOnMount extends undefined | FormValidateOrFn<TFormData> = undefined | FormValidateOrFn<TFormData>,
   TFormOnChange extends undefined | FormValidateOrFn<TFormData> = undefined | FormValidateOrFn<TFormData>,
@@ -261,7 +262,7 @@ export type TypeFormOnShowError<
     TFormOnServer
   >;
   error: Error;
-}) => void;
+}, form: ControllerForm<TFormData, TSubmitMeta>) => void;
 
 export interface RevalidateLogicProps {
   mode?: 'change' | 'blur' | 'submit';
