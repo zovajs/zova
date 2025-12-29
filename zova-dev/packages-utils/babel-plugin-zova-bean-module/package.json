@@ -48,7 +48,7 @@
     "@babel/core": "^7.28.0",
     "@babel/traverse": "^7.28.0",
     "@cabloy/module-info": "^1.3.32",
-    "@cabloy/word-utils": "^2.0.0"
+    "@cabloy/word-utils": "^2.0.2"
   },
   "devDependencies": {
     "@types/babel__core": "^7.20.5",

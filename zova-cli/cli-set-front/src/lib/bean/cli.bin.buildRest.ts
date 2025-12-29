@@ -2,7 +2,7 @@ import type { ZovaConfigMeta, ZovaMetaAppMode, ZovaMetaFlavor, ZovaMetaMode } fr
 import type { ZovaViteConfigOptions } from 'zova-vite';
 import path from 'node:path';
 import { BeanCliBase } from '@cabloy/cli';
-import { replaceTemplate } from '@cabloy/word-utils';
+import { camelToKebab, replaceTemplate } from '@cabloy/word-utils';
 import fse from 'fs-extra';
 import { rimraf } from 'rimraf';
 import { build } from 'tsdown';
@@ -108,7 +108,7 @@ export class CliBinBuildRest extends BeanCliBase {
     // package.json
     const pkgContent = replaceTemplate(
       __template_package,
-      { Name: flavor, Version: env.APP_VERSION },
+      { Name: this.bundleName, Version: env.APP_VERSION },
     );
     await fse.writeFile(path.join(srcDir, 'package.json'), pkgContent!);
   }
