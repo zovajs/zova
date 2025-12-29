@@ -36,7 +36,7 @@ export async function generateFileComponent(
   } = controllerInfo;
   const contentImports: string[] = [];
   const genericDeclare = hasGeneric ? `<${generic}>` : '';
-  const genericArguments = hasGeneric ? `<${genericKeys?.join(',')}>` : '';
+  const genericArguments = hasGeneric ? `<${genericKeys?.join(', ')}>` : '';
   const componentOptions = hasComponentOptions ? `Controller${nameCapitalize}.$componentOptions` : '';
   // import
   const _contentImportTypeZova: string[] = [];
@@ -153,20 +153,41 @@ async function generateRestComponent(
 ) {
   const { moduleName, modulePath } = options;
   // const { className } = globFile;
-  const { name, nameProps, controllerExtJs } = controllerInfo;
+  const { name, nameCapitalize, hasProps, nameProps, hasModels, nameModels, controllerExtJs } = controllerInfo;
+  // TypeControllerPublicProps
+  const typeControllerPublicPropsName = `TypeController${nameCapitalize}PublicProps`;
+  let contentTypeControllerPublicProps = `type ${typeControllerPublicPropsName}${genericDeclare} = TypeRenderComponentJsxPropsPublic`;
+  if (hasProps) {
+    contentTypeControllerPublicProps += `\n  & ${nameProps}${genericArguments}`;
+  }
+  if (hasModels) {
+    contentTypeControllerPublicProps += `\n  & ${nameModels}${genericArguments} &
+{
+  [KEY in keyof ${nameModels}${genericArguments} as TypePropValueFromModel<KEY>]: ${nameModels}${genericArguments}[KEY];
+} &
+{
+  [KEY in keyof ${nameModels}${genericArguments} as TypePropUpdateFromModel<KEY>]: (value: ${nameModels}${genericArguments}[KEY]) => void;
+}`;
+  }
+  contentTypeControllerPublicProps = `${contentTypeControllerPublicProps};`;
   // import
-  const contentImports: string[] = [];
+  const contentImports: string[] = [
+    'import type { TypeRenderComponentJsxPropsPublic } from \'zova-jsx\';',
+  ];
   if (_contentImportTypeController.length > 0) {
     contentImports.push(`import type { ${_contentImportTypeController.join(', ')} } from '../../src/component/${name}/controller${controllerExtJs}';`);
   }
   // component
   const componentName = `Z${toUpperCaseFirstChar(combineResourceName(name, moduleName, false, false))}`;
-  const contentComponent = `export function ${componentName}${genericDeclare}(_props: ${nameProps}${genericArguments}) {
+  const contentComponent = `export function ${componentName}${genericDeclare}(
+  _props: ${typeControllerPublicPropsName}${genericArguments},
+) {
   return '${moduleName}:${name}';
 }`;
   // content
   const content = `${contentImports.join('\n')}
 
+${contentTypeControllerPublicProps}
 ${contentComponent}
 `;
   // output

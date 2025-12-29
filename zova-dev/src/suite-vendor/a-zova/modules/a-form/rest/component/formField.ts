@@ -1,5 +1,10 @@
+import type { TypeRenderComponentJsxPropsPublic } from 'zova-jsx';
 import type { ControllerFormFieldProps } from '../../src/component/formField/controller.jsx';
 
-export function ZAFormFormField<TParentData extends {} = {}>(_props: ControllerFormFieldProps<TParentData>) {
+type TypeControllerFormFieldPublicProps<TParentData extends {} = {}> = TypeRenderComponentJsxPropsPublic
+  & ControllerFormFieldProps<TParentData>;
+export function ZAFormFormField<TParentData extends {} = {}>(
+  _props: TypeControllerFormFieldPublicProps<TParentData>,
+) {
   return 'a-form:formField';
 }

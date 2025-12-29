@@ -1,16 +1,19 @@
 import type { ComponentPublicInstance } from 'vue';
 import type { Constructable } from 'zova-core';
 
-export interface TypeRenderComponentJsxProps {
-  'children': TypeRenderComponentJsx | TypeRenderComponentJsx[];
+export interface TypeRenderComponentJsxPropsPublic {
+  'key'?: string;
   'v-if'?: string | boolean;
   'v-for'?: string | any[];
   'v-each'?: string;
   'v-slot'?: string;
   'v-slot-scope'?: string;
-  // 'key'?: string;
-  // [key: string]: any | undefined;
 }
+
+export interface TypeRenderComponentJsxProps extends TypeRenderComponentJsxPropsPublic {
+  children: TypeRenderComponentJsx | TypeRenderComponentJsx[];
+}
+
 export interface TypeRenderComponentJsx {
   type: string;
   key?: string | null;
