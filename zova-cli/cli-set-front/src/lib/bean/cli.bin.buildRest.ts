@@ -34,6 +34,7 @@ interface IBinBuildRestContext {
   projectPath: string;
   flavor: ZovaMetaFlavor;
   bundleName: string;
+  bundleNameCopy: string;
   srcDir: string;
   outDir: string;
 }
@@ -47,6 +48,7 @@ export class CliBinBuildRest extends BeanCliBase {
     //
     const flavor = argv.flavor || 'vonaHome';
     const bundleName = `zova-rest-${camelToKebab(flavor)}`;
+    const bundleNameCopy = `${camelToKebab(flavor)}`;
     //
     const srcDir = path.join(projectPath, '.zova-rest');
     const outDir = path.join(projectPath, 'dist', `rest-${flavor}`);
@@ -58,6 +60,7 @@ export class CliBinBuildRest extends BeanCliBase {
       projectPath,
       flavor,
       bundleName,
+      bundleNameCopy,
       srcDir,
       outDir,
     };
@@ -75,7 +78,7 @@ export class CliBinBuildRest extends BeanCliBase {
     await this._prepareResourcesIndex(context);
   }
 
-  async _build({ projectPath, flavor, srcDir, outDir }: IBinBuildRestContext) {
+  async _build({ projectPath, flavor, bundleNameCopy, srcDir, outDir }: IBinBuildRestContext) {
     const entry = path.join(srcDir, 'index.ts');
     // build
     await build({
@@ -100,8 +103,8 @@ export class CliBinBuildRest extends BeanCliBase {
     const outReleasesDir = path.join(projectPath, 'dist-releases', `rest-${flavor}-${process.env.APP_VERSION}`);
     await fse.copy(outDir, outReleasesDir);
     // copy
-    _copyToTarget(outDir, process.env.BUILD_REST_COPY_DIST, path.basename(outDir));
-    _copyToTarget(outDir, process.env.BUILD_REST_COPY_RELEASE, path.basename(outReleasesDir));
+    _copyToTarget(outDir, process.env.BUILD_REST_COPY_DIST, bundleNameCopy);
+    _copyToTarget(outDir, process.env.BUILD_REST_COPY_RELEASE, bundleNameCopy);
   }
 
   async _prepareResourcesPackage({ projectPath, flavor, bundleName, srcDir }: IBinBuildRestContext) {
@@ -135,14 +138,11 @@ export class CliBinBuildRest extends BeanCliBase {
   }
 }
 
-function _copyToTarget(outDir: string, target: string | undefined, basename: string) {
+function _copyToTarget(outDir: string, target: string | undefined, bundleNameCopy: string) {
   if (!target) return;
-  if (basename.includes('rest-')) {
-    basename = basename.substring('rest-'.length);
-  }
   const dirs = target.split(',');
   for (const dir of dirs) {
-    const outReleasesDirCopy = path.join(dir, basename);
+    const outReleasesDirCopy = path.join(dir, bundleNameCopy);
     fse.removeSync(outReleasesDirCopy);
     fse.copySync(
       outDir,
