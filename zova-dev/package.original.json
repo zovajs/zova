@@ -5,7 +5,7 @@
   "type": "module",
   "packageManager": "pnpm@10.19.0",
   "scripts": {
-    "init": "pnpm install --no-frozen-lockfile && npm run zova :tools:deps && pnpm install --no-frozen-lockfile && pnpm dedupe",
+    "init": "pnpm install --no-frozen-lockfile && npm run zova :tools:deps && pnpm install --no-frozen-lockfile",
     "zova": "node ../zova-cli/cli/src/bin/zova.ts",
     "dev": "npm run dev:ssr:admin",
     "build": "npm run build:ssr:admin",

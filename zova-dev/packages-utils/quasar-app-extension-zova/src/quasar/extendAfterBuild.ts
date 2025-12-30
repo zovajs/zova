@@ -17,6 +17,7 @@ export function extendAfterBuild(context: ConfigContext, _flavor: string) {
     fse.copySync(
       outDir,
       outReleasesDir,
+      { preserveTimestamps: true },
     );
     // copy
     _copyToTarget(outDir, process.env.BUILD_COPY_DIST, path.basename(outDir));
@@ -33,6 +34,7 @@ function _copyToTarget(outDir: string, target: string | undefined, basename: str
     fse.copySync(
       outDir,
       outReleasesDirCopy,
+      { preserveTimestamps: true },
     );
   }
 }
