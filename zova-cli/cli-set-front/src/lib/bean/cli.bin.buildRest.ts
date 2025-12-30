@@ -147,6 +147,7 @@ function _copyToTarget(outDir: string, target: string | undefined, bundleNameCop
     fse.copySync(
       outDir,
       outReleasesDirCopy,
+      { preserveTimestamps: true },
     );
   }
 }
