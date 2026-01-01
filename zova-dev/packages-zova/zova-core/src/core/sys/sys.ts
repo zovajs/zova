@@ -12,16 +12,17 @@ import { setSys } from './sysFake.js';
 import { deepExtend, SysUtil } from './util.js';
 
 const SymbolSysInitializePromise = Symbol('SymbolSysInitializePromise');
+const SymbolSysClose = Symbol('SymbolSysClose');
 
 export class ZovaSys {
   private [SymbolSysInitializePromise]: Promise<void>;
+  private [SymbolSysClose]: boolean;
   bean: BeanContainer;
   util: SysUtil;
   meta: SysMeta;
   config: ZovaConfig;
   env: ZovaConfigEnv;
   constant: ZovaConstant;
-  sysClose: boolean;
 
   constructor() {
     this.bean = BeanContainer.create(this, null!, null);
@@ -84,12 +85,8 @@ export class ZovaSys {
   }
 
   public close() {
-    if (this.sysClose) return;
-    this.sysClose = true;
-    this._closeInner();
-  }
-
-  private _closeInner() {
+    if (this[SymbolSysClose]) return;
+    this[SymbolSysClose] = true;
     // monkey: sysClose
     this.meta.module._monkeyModuleSync(false, 'sysClose');
     // container dispose

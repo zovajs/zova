@@ -10,8 +10,11 @@ import { sys } from '../sys/sys.js';
 import { AppMeta } from './meta.js';
 import { AppUtil } from './util.js';
 
+const SymbolAppClose = Symbol('SymbolAppClose');
+
 export class ZovaApplication {
   private _reloadDelayTimer: number = 0;
+  private [SymbolAppClose]: boolean;
   vue: App;
   bean: BeanContainer;
   util: AppUtil;
@@ -84,6 +87,16 @@ export class ZovaApplication {
 
   public throw(code: keyof TypeErrorsInternal | number, ...args: any[]): never {
     return this.meta.error.throw(undefined, code, ...args);
+  }
+
+  public close() {
+    if (this[SymbolAppClose]) return;
+    this[SymbolAppClose] = true;
+    // monkey: appClose
+    this.meta.module._monkeyModuleSync(false, 'appClose');
+    // container dispose
+    this.bean.dispose();
+    this.ctx.dispose();
   }
 }
 

@@ -46,6 +46,7 @@ export interface IMonkeyApp
   IMonkeyAppInitialize,
   IMonkeyAppInitialized,
   IMonkeyAppReady,
+  IMonkeyAppClose,
   IMonkeyBeanInit,
   IMonkeyBeanInited,
   IMonkeyBeanDispose,
@@ -95,6 +96,10 @@ export interface IMonkeyAppInitialized {
 
 export interface IMonkeyAppReady {
   appReady(): Promise<void>;
+}
+
+export interface IMonkeyAppClose {
+  appClose(): void;
 }
 
 export interface IMonkeyBeanInit {

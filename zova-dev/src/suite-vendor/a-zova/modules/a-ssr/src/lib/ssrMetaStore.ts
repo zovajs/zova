@@ -36,8 +36,7 @@ export class CtxSSRMetaStore extends BeanSimple {
       this._injectContextStateDefer(ssrContext);
       this._injectServerMeta(ssrContext);
     }
-    this.ctx.bean.dispose();
-    this.ctx.dispose();
+    this.app.close();
   }
 
   addMetaOptions(metaOptionsWrapper: SSRMetaOptionsWrapper) {
