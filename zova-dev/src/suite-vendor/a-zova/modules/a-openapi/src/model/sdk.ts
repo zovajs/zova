@@ -69,7 +69,7 @@ export class ModelSdk extends BeanModelBase {
       queryKey: ['schema', schemaName],
       queryFn: async () => {
         const schema = this.$$sysSdk.getSchema(schemaName);
-        return schema;
+        return schema ?? null;
       },
       staleTime: Infinity,
     });
