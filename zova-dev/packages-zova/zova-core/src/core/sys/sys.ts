@@ -72,13 +72,18 @@ export class ZovaSys {
   }
 
   private _hookClose() {
-    if (import.meta.hot) {
+    if (process.env.DEV && import.meta.hot) {
       import.meta.hot.on('vite:beforeFullReload', _payload => {
         this.close();
       });
     }
-    if (typeof window !== 'undefined') {
+    if (process.env.CLIENT && typeof window !== 'undefined') {
       window.addEventListener('beforeunload', () => {
+        this.close();
+      });
+    }
+    if (process.env.SERVER && typeof process !== 'undefined') {
+      process.on('SIGINT', () => {
         this.close();
       });
     }
