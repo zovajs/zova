@@ -62,11 +62,11 @@ export class ZovaSys {
     // module
     await this.meta.module.initialize(modulesMeta);
     // monkey: sysInitialize
-    await this.meta.module._monkeyModule('sysInitialize');
+    await this.meta.module._monkeyModule(true, 'sysInitialize');
     // monkey: sysInitialized
-    await this.meta.module._monkeyModule('sysInitialized');
+    await this.meta.module._monkeyModule(true, 'sysInitialized');
     // monkey: sysReady
-    await this.meta.module._monkeyModule('sysReady');
+    await this.meta.module._monkeyModule(true, 'sysReady');
     // hookClose
     this._hookClose();
   }
