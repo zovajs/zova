@@ -94,6 +94,8 @@ export class ZovaSys {
   private async _closeInner() {
     // monkey: sysClose
     await this.meta.module._monkeyModule(false, 'sysClose');
+    // container dispose
+    this.bean.dispose();
   }
 
   private async _combineConfig(config: TypeModuleResourceConfig[]): Promise<ZovaConfig> {
