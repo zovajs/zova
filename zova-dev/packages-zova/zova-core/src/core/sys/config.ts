@@ -32,6 +32,10 @@ export interface ZovaConfig {
     prefix: string;
     jwt: boolean;
   };
+  ws: {
+    baseURL: string;
+    prefix: string;
+  };
   ssr: {
     server: {
       protocol: string;

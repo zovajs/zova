@@ -33,6 +33,12 @@ export default function (sys: ZovaSys) {
     jwt: env.API_JWT !== 'false',
   };
 
+  // ws
+  config.ws = {
+    baseURL: config.api.baseURL?.replace('https://', 'wss://').replace('http://', 'ws://'),
+    prefix: '/ws',
+  };
+
   // ssr
   config.ssr = {
     server: {
