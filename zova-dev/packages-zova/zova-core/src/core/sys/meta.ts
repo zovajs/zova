@@ -2,6 +2,7 @@ import type { RouteRecordRaw } from '@cabloy/vue-router';
 import type { Constructable } from '../../decorator/type/constructable.js';
 import type { IMonkeyModuleSys, IMonkeySys } from '../../types/interface/monkey.js';
 import { BeanSimple } from '../../bean/beanSimple.js';
+import { AppEvent } from '../component/event.js';
 import { SysLogger } from '../logger/logger.js';
 import { SysComponent } from './component.js';
 import { SysError } from './error.js';
@@ -14,6 +15,7 @@ export class SysMeta extends BeanSimple {
   logger: SysLogger;
   locale: SysLocale;
   error: SysError;
+  event: AppEvent;
 
   /** @internal */
   public sysMonkey?: IMonkeyModuleSys & IMonkeySys;
@@ -27,6 +29,7 @@ export class SysMeta extends BeanSimple {
     this.logger = this.bean._newBeanSimple(SysLogger, false);
     this.locale = this.bean._newBeanSimple(SysLocale, false);
     this.error = this.bean._newBeanSimple(SysError, false);
+    this.event = this.app.bean._newBeanSimple(AppEvent, false);
   }
 
   /** @internal */

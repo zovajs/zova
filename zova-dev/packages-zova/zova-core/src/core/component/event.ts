@@ -38,7 +38,7 @@ export class AppEvent extends BeanSimple {
 
   async emit<K extends keyof IEventRecord>(
     eventName: K,
-    data: IEventRecord[K]['data'],
+    data?: IEventRecord[K]['data'],
     nextOrDefault?: NextEventStrict<IEventRecord[K]['data'], IEventRecord[K]['result']> | IEventRecord[K]['result'],
   ): Promise<IEventRecord[K]['result']> {
     const eventHandlers = this.getEventHandlers(eventName);
@@ -53,7 +53,7 @@ export class AppEvent extends BeanSimple {
 
   emitSync<K extends keyof IEventRecord>(
     eventName: K,
-    data: IEventRecord[K]['data'],
+    data?: IEventRecord[K]['data'],
     nextOrDefault?: NextEventSyncStrict<IEventRecord[K]['data'], IEventRecord[K]['result']> | IEventRecord[K]['result'],
   ): IEventRecord[K]['result'] {
     const eventHandlers = this.getEventHandlers(eventName);
