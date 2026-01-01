@@ -4,6 +4,7 @@ import type {
   BeanContainer,
   IControllerData,
   IErrorHandlerEventData,
+  IMonkeyAppClose,
   IMonkeyAppInitialize,
   IMonkeyAppInitialized,
   IMonkeyAppReady,
@@ -22,7 +23,7 @@ import { getRealRouteName, getRouteMatched } from './utils.js';
 
 export class Monkey
   extends BeanSimple
-  implements IMonkeyAppInitialize, IMonkeyAppInitialized, IMonkeyAppReady, IMonkeyController {
+  implements IMonkeyAppInitialize, IMonkeyAppInitialized, IMonkeyAppReady, IMonkeyAppClose, IMonkeyController {
   private _beanRouter: BeanRouter;
   serviceRouter: ServiceRouter;
 
@@ -46,6 +47,12 @@ export class Monkey
     const beanRouter = await this.getBeanRouter();
     // emit event
     await this.app.meta.event.emit('a-router:routerGuards', beanRouter);
+  }
+
+  appClose(): void {
+    if (this.serviceRouter) {
+      this.serviceRouter.dispose();
+    }
   }
 
   async appReady() {
