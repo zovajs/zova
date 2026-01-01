@@ -29,6 +29,11 @@ export class MonkeySys extends BeanSimple implements IMonkeySysReady, IMonkeySys
         this._reload();
       }
     };
+    ws.onOpen = (_event, reconnectAttempts) => {
+      if (reconnectAttempts > 0) {
+        this._reload();
+      }
+    };
     // connect
     const url = `${this.sys.config.ws.baseURL}${this.sys.config.ws.prefix}/ssrhmr`;
     ws.connect(url);
