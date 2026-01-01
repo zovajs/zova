@@ -10,7 +10,7 @@ export class MonkeySys extends BeanSimple implements IMonkeySysReady, IMonkeySys
     this._startWs();
   }
 
-  async sysClose(): Promise<void> {
+  sysClose(): void {
     if (this.sys.env.SSR_HMR !== 'true') return;
     this._closeWs();
   }

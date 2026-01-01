@@ -34,8 +34,8 @@ export class ServiceSsrHandler extends BeanBase {
     this.dispose();
   }
 
-  public async dispose() {
-    await this.sys.close();
+  public dispose() {
+    this.sys.close();
     this._handlerInstance = undefined;
   }
 

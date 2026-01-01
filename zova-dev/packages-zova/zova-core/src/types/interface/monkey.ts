@@ -78,7 +78,7 @@ export interface IMonkeySysReady {
 }
 
 export interface IMonkeySysClose {
-  sysClose(): Promise<void>;
+  sysClose(): void;
 }
 
 export interface IMonkeyAppContextInitialize {
