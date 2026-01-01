@@ -12,9 +12,11 @@ import { setSys } from './sysFake.js';
 import { deepExtend, SysUtil } from './util.js';
 
 const SymbolSysInitializePromise = Symbol('SymbolSysInitializePromise');
+const SymbolSysClosePromise = Symbol('SymbolSysClosePromise');
 
 export class ZovaSys {
   private [SymbolSysInitializePromise]: Promise<void>;
+  private [SymbolSysClosePromise]: Promise<void>;
   bean: BeanContainer;
   util: SysUtil;
   meta: SysMeta;
@@ -65,6 +67,33 @@ export class ZovaSys {
     await this.meta.module._monkeyModule('sysInitialized');
     // monkey: sysReady
     await this.meta.module._monkeyModule('sysReady');
+    // hookClose
+    this._hookClose();
+  }
+
+  private _hookClose() {
+    if (import.meta.hot) {
+      import.meta.hot.on('vite:beforeFullReload', _payload => {
+        this.close();
+      });
+    }
+    if (typeof window !== 'undefined') {
+      window.addEventListener('beforeunload', () => {
+        this.close();
+      });
+    }
+  }
+
+  public async close() {
+    if (!this[SymbolSysClosePromise]) {
+      this[SymbolSysClosePromise] = this._closeInner();
+    }
+    return this[SymbolSysClosePromise];
+  }
+
+  private async _closeInner() {
+    // monkey: sysClose
+    await this.meta.module._monkeyModule('sysClose');
   }
 
   private async _combineConfig(config: TypeModuleResourceConfig[]): Promise<ZovaConfig> {

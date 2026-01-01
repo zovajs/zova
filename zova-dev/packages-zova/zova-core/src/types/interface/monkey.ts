@@ -35,6 +35,7 @@ export interface IMonkeySys
   IMonkeySysInitialize,
   IMonkeySysInitialized,
   IMonkeySysReady,
+  IMonkeySysClose,
   IMonkeyBeanInit,
   IMonkeyBeanInited,
   IMonkeyBeanDispose,
@@ -74,6 +75,10 @@ export interface IMonkeySysInitialized {
 
 export interface IMonkeySysReady {
   sysReady(): Promise<void>;
+}
+
+export interface IMonkeySysClose {
+  sysClose(): Promise<void>;
 }
 
 export interface IMonkeyAppContextInitialize {
