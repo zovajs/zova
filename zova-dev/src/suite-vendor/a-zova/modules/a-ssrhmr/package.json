@@ -28,7 +28,9 @@
     "tsc:publish": "npm run clean && tsc -b",
     "_prepublishOnly": "npm run tsc:publish"
   },
-  "dependencies": {},
+  "dependencies": {
+    "@cabloy/socket": "^2.0.3"
+  },
   "zovaModule": {
     "capabilities": {
       "monkey": true
