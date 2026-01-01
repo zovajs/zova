@@ -29,7 +29,7 @@ export class SysMeta extends BeanSimple {
     this.logger = this.bean._newBeanSimple(SysLogger, false);
     this.locale = this.bean._newBeanSimple(SysLocale, false);
     this.error = this.bean._newBeanSimple(SysError, false);
-    this.event = this.app.bean._newBeanSimple(AppEvent, false);
+    this.event = this.bean._newBeanSimple(AppEvent, false);
   }
 
   /** @internal */

@@ -82,13 +82,6 @@ export class ZovaSys {
         this.close();
       });
     }
-    if (process.env.SERVER && typeof process !== 'undefined') {
-      ['SIGINT', 'SIGUSR2'].forEach(signal => {
-        process.on(signal, () => {
-          this.close();
-        });
-      });
-    }
   }
 
   public async close() {
