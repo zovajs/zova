@@ -16,6 +16,10 @@ export class BeanRouterBase extends BeanBase {
   }
 
   protected __dispose__() {
+    this.dispose();
+  }
+
+  dispose() {
     if (this._eventRouterGuards) {
       this._eventRouterGuards();
     }
