@@ -20,16 +20,20 @@ export class SysSdk extends BeanBase {
     this.schemas = shallowReactive({});
     this.sdks = shallowReactive({});
     // event
-    this._eventSsrHmrReload = this.sys.meta.event.on('a-ssrhmr:reloadSysSdk', (_data, next) => {
-      this.schemas = shallowReactive({});
-      this.sdks = shallowReactive({});
-      return next();
-    });
+    if (this.sys.env.SSR_HMR === 'true') {
+      this._eventSsrHmrReload = this.sys.meta.event.on('a-ssrhmr:reloadSysSdk', (_data, next) => {
+        this.schemas = shallowReactive({});
+        this.sdks = shallowReactive({});
+        return next();
+      });
+    }
   }
 
   protected __dispose__() {
-    if (this._eventSsrHmrReload) {
-      this._eventSsrHmrReload();
+    if (this.sys.env.SSR_HMR === 'true') {
+      if (this._eventSsrHmrReload) {
+        this._eventSsrHmrReload();
+      }
     }
   }
 

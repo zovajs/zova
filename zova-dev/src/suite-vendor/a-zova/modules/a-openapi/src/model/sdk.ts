@@ -1,5 +1,5 @@
 import { isNil } from '@cabloy/utils';
-import { ILocaleRecord, Use, usePrepareArg } from 'zova';
+import { ILocaleRecord, TypeEventOff, Use, usePrepareArg } from 'zova';
 import { BeanModelBase, IDecoratorModelOptions, Model } from 'zova-module-a-model';
 import { SysSdk } from '../bean/sys.sdk.js';
 import { schemaToZodSchema } from '../lib/schema.js';
@@ -11,6 +11,8 @@ export interface IModelOptionsSdk extends IDecoratorModelOptions {}
 
 @Model<IModelOptionsSdk>()
 export class ModelSdk extends BeanModelBase {
+  private _eventSsrHmrReload: TypeEventOff;
+
   @Use({ beanFullName: 'a-openapi.sys.sdk' })
   get $$sysSdk(): SysSdk {
     return usePrepareArg(
@@ -21,6 +23,21 @@ export class ModelSdk extends BeanModelBase {
 
   protected async __init__(locale: keyof ILocaleRecord) {
     if (!locale) throw new Error('locale not specified');
+    // event
+    if (this.sys.env.SSR_HMR === 'true') {
+      this._eventSsrHmrReload = this.sys.meta.event.on('a-ssrhmr:reloadModelSdk', (_data, next) => {
+        this.$invalidateQueries({ queryKey: [] });
+        return next();
+      });
+    }
+  }
+
+  protected __dispose__() {
+    if (this.sys.env.SSR_HMR === 'true') {
+      if (this._eventSsrHmrReload) {
+        this._eventSsrHmrReload();
+      }
+    }
   }
 
   getSdk(api: string | undefined, apiMethod: TypeRequestMethod | undefined) {
