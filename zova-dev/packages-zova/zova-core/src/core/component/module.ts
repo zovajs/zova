@@ -2,6 +2,7 @@ import type { IModule, IModuleInfo } from '@cabloy/module-info';
 import type { TypeBeanScopeRecordKeys } from '../../bean/type.js';
 import type { IModuleApp, IModuleMain, IMonkeyApp, IMonkeyController, IMonkeyModule, TypeMonkeyName } from '../../types/index.js';
 import * as ModuleInfo from '@cabloy/module-info';
+import { forEach, forEachSync } from '@cabloy/utils';
 import { shallowReactive } from 'vue';
 import { BeanSimple } from '../../bean/beanSimple.js';
 import { SymbolInstalled } from '../../types/index.js';
@@ -106,7 +107,7 @@ export class AppModule extends BeanSimple {
     // scope: should after [SymbolInstalled].touch
     await this.app.bean._getBean(`${moduleName}.scope.module` as any, false);
     // monkey: moduleLoaded
-    await this._monkeyModule('moduleLoaded', moduleRepo);
+    await this._monkeyModule(true, 'moduleLoaded', moduleRepo);
   }
 
   private async _installInner(moduleName: string, moduleRepo: IModule) {
@@ -118,7 +119,7 @@ export class AppModule extends BeanSimple {
       this.monkeyInstances[moduleName] = this.app.bean._newBeanSimple(moduleRepo.resource.Monkey, false, moduleRepo);
     }
     // monkey: moduleLoading
-    await this._monkeyModule('moduleLoading', moduleRepo);
+    await this._monkeyModule(true, 'moduleLoading', moduleRepo);
     // register resources
     await this._registerResources(moduleRepo);
   }
@@ -132,7 +133,7 @@ export class AppModule extends BeanSimple {
   }
 
   /** @internal */
-  public async _monkeyModule(monkeyName: TypeMonkeyName, moduleTarget?: IModule, ...monkeyData: any[]) {
+  public async _monkeyModule(order: boolean, monkeyName: TypeMonkeyName, moduleTarget?: IModule, ...monkeyData: any[]) {
     // self: main
     if (moduleTarget) {
       const mainInstance = this.mainInstances[moduleTarget.info.relativeName];
@@ -144,7 +145,7 @@ export class AppModule extends BeanSimple {
       }
     }
     // module monkey
-    for (const key of this.sys.meta.module.modulesMeta.moduleNames) {
+    await forEach(this.sys.meta.module.modulesMeta.moduleNames, order, async key => {
       const moduleMonkey: IModule = this.sys.meta.module.modulesMeta.modules[key];
       if (moduleMonkey.info.capabilities?.monkey) {
         const monkeyInstance = this.monkeyInstances[key];
@@ -160,7 +161,7 @@ export class AppModule extends BeanSimple {
           });
         }
       }
-    }
+    });
     // app monkey
     const appMonkey = this.app.meta.appMonkey;
     if (appMonkey && appMonkey[monkeyName]) {
@@ -177,7 +178,7 @@ export class AppModule extends BeanSimple {
   }
 
   /** @internal */
-  public _monkeyModuleSync(monkeyName: TypeMonkeyName, moduleTarget?: IModule, ...monkeyData: any[]) {
+  public _monkeyModuleSync(order: boolean, monkeyName: TypeMonkeyName, moduleTarget?: IModule, ...monkeyData: any[]) {
     // self: main
     if (moduleTarget) {
       const mainInstance = this.mainInstances[moduleTarget.info.relativeName];
@@ -189,7 +190,7 @@ export class AppModule extends BeanSimple {
       }
     }
     // module monkey
-    for (const key of this.sys.meta.module.modulesMeta.moduleNames) {
+    forEachSync(this.sys.meta.module.modulesMeta.moduleNames, order, key => {
       const moduleMonkey: IModule = this.sys.meta.module.modulesMeta.modules[key];
       if (moduleMonkey.info.capabilities?.monkey) {
         const monkeyInstance = this.monkeyInstances[key];
@@ -205,7 +206,7 @@ export class AppModule extends BeanSimple {
           });
         }
       }
-    }
+    });
     // app monkey
     const appMonkey = this.app.meta.appMonkey;
     if (appMonkey && appMonkey[monkeyName]) {

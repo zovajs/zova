@@ -73,15 +73,15 @@ export class BeanContainer {
       const beanInstance = cast(beanInstances[prop]);
       if (beanInstance && !(beanInstance instanceof BeanAopBase) && beanInstance.__dispose__) {
         if (this.containerType === 'sys') {
-          this.sys.meta.module._monkeyModuleSync('beanDispose', undefined, this, beanInstance);
+          this.sys.meta.module._monkeyModuleSync(false, 'beanDispose', undefined, this, beanInstance);
           beanInstance.__dispose__();
-          this.sys.meta.module._monkeyModuleSync('beanDisposed', undefined, this, beanInstance);
+          this.sys.meta.module._monkeyModuleSync(false, 'beanDisposed', undefined, this, beanInstance);
         } else {
-          this.app.meta.module._monkeyModuleSync('beanDispose', undefined, this, beanInstance);
+          this.app.meta.module._monkeyModuleSync(false, 'beanDispose', undefined, this, beanInstance);
           this.runWithInstanceScopeOrAppContext(() => {
             beanInstance.__dispose__();
           });
-          this.app.meta.module._monkeyModuleSync('beanDisposed', undefined, this, beanInstance);
+          this.app.meta.module._monkeyModuleSync(false, 'beanDisposed', undefined, this, beanInstance);
         }
       }
     }
@@ -611,9 +611,9 @@ export class BeanContainer {
     await this._injectBeanInstance(beanInstance, beanFullName);
     // init
     if (this.containerType === 'sys') {
-      await this.sys.meta.module._monkeyModule('beanInit', undefined, this, beanInstance);
+      await this.sys.meta.module._monkeyModule(true, 'beanInit', undefined, this, beanInstance);
     } else {
-      await this.app?.meta.module._monkeyModule('beanInit', undefined, this, beanInstance);
+      await this.app?.meta.module._monkeyModule(true, 'beanInit', undefined, this, beanInstance);
     }
     if (!(beanInstance instanceof BeanAopBase) && beanInstance.__init__) {
       await this.runWithInstanceScopeOrAppContext(async () => {
@@ -621,9 +621,9 @@ export class BeanContainer {
       });
     }
     if (this.containerType === 'sys') {
-      await this.sys.meta.module._monkeyModule('beanInited', undefined, this, beanInstance);
+      await this.sys.meta.module._monkeyModule(true, 'beanInited', undefined, this, beanInstance);
     } else {
-      await this.app?.meta.module._monkeyModule('beanInited', undefined, this, beanInstance);
+      await this.app?.meta.module._monkeyModule(true, 'beanInited', undefined, this, beanInstance);
     }
     if (beanInstance[SymbolInited]) {
       beanInstance[SymbolInited].touch();
