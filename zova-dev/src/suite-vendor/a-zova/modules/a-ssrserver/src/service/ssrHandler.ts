@@ -35,10 +35,8 @@ export class ServiceSsrHandler extends BeanBase {
   }
 
   public async dispose() {
-    if (this._handlerInstance) {
-      await this._handlerInstance.sys.close();
-      this._handlerInstance = undefined;
-    }
+    await this.sys.close();
+    this._handlerInstance = undefined;
   }
 
   async resolvePath(filename: string): Promise<TypeEventResolvePathResult> {
