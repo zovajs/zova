@@ -1,6 +1,6 @@
 import type { SchemaObject } from 'openapi3-ts/oas31';
 import { shallowReactive } from 'vue';
-import { BeanBase, ILocaleRecord } from 'zova';
+import { BeanBase, ILocaleRecord, TypeEventOff } from 'zova';
 import { Sys } from 'zova-module-a-bean';
 import { BeanFetch } from 'zova-module-a-fetch';
 import { IOpenapiSchema, IOpenapiSchemaBootstrap } from '../types/schema.js';
@@ -13,11 +13,24 @@ export class SysSdk extends BeanBase {
   private locale: keyof ILocaleRecord;
   schemas: Record<string, SchemaObject>;
   sdks: Record<string, Record<string, IOpenapiSdkItem>>;
+  private _eventSsrHmrReload: TypeEventOff;
 
   protected async __init__(locale: keyof ILocaleRecord) {
     this.locale = locale;
     this.schemas = shallowReactive({});
     this.sdks = shallowReactive({});
+    // event
+    this._eventSsrHmrReload = this.sys.meta.event.on('a-ssrhmr:reloadSysSdk', (_data, next) => {
+      this.schemas = shallowReactive({});
+      this.sdks = shallowReactive({});
+      return next();
+    });
+  }
+
+  protected __dispose__() {
+    if (this._eventSsrHmrReload) {
+      this._eventSsrHmrReload();
+    }
   }
 
   getSdk(api: string | undefined, apiMethod: string | undefined): IOpenapiSdkItem | undefined {
