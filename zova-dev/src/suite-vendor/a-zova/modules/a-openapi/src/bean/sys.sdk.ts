@@ -30,10 +30,8 @@ export class SysSdk extends BeanBase {
   }
 
   protected __dispose__() {
-    if (this.sys.env.SSR_HMR === 'true') {
-      if (this._eventSsrHmrReload) {
-        this._eventSsrHmrReload();
-      }
+    if (this._eventSsrHmrReload) {
+      this._eventSsrHmrReload();
     }
   }
 
