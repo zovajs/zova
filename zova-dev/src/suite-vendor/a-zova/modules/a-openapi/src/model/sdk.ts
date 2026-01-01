@@ -24,7 +24,7 @@ export class ModelSdk extends BeanModelBase {
   protected async __init__(locale: keyof ILocaleRecord) {
     if (!locale) throw new Error('locale not specified');
     // event
-    if (this.sys.env.SSR_HMR === 'true') {
+    if (process.env.CLIENT && this.sys.env.SSR_HMR === 'true') {
       this._eventSsrHmrReload = this.sys.meta.event.on('a-ssrhmr:reloadModelSdk', (_data, next) => {
         this.$invalidateQueries({ queryKey: [] });
         return next();
@@ -33,10 +33,8 @@ export class ModelSdk extends BeanModelBase {
   }
 
   protected __dispose__() {
-    if (this.sys.env.SSR_HMR === 'true') {
-      if (this._eventSsrHmrReload) {
-        this._eventSsrHmrReload();
-      }
+    if (this._eventSsrHmrReload) {
+      this._eventSsrHmrReload();
     }
   }
 

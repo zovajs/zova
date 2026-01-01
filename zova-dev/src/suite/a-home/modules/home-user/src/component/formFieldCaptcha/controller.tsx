@@ -28,12 +28,14 @@ export class ControllerFormFieldCaptcha extends BeanControllerBase {
     // zodSchema
     this.zodSchema = this.$$v.required(z.string());
     // event
-    this.eventFormSubmission = this.app.meta.event.on('a-form:formSubmission', (data, next) => {
-      if (data.form.formId === this.$$form.form.formId && data.error) {
-        this.refreshCaptchaData();
-      }
-      return next();
-    });
+    if (process.env.CLIENT) {
+      this.eventFormSubmission = this.app.meta.event.on('a-form:formSubmission', (data, next) => {
+        if (data.form.formId === this.$$form.form.formId && data.error) {
+          this.refreshCaptchaData();
+        }
+        return next();
+      });
+    }
     // captcha data
     if (process.env.CLIENT) {
       this.createCaptchaData();
