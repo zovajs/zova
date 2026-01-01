@@ -41,7 +41,7 @@ export class ZovaApplication {
   /** @internal */
   public async initialize({ AppMonkey }: PluginZovaOptions) {
     // monkey
-    sys.meta.module._monkeyModuleSync('sysApplicationInitialize', undefined, this);
+    sys.meta.module._monkeyModuleSync(true, 'sysApplicationInitialize', undefined, this);
     // meta
     await this.meta.initialize(AppMonkey);
     // component
@@ -53,11 +53,11 @@ export class ZovaApplication {
     // module
     await this.meta.module.initialize();
     // monkey: appInitialize
-    await this.meta.module._monkeyModule('appInitialize');
+    await this.meta.module._monkeyModule(true, 'appInitialize');
     // monkey: appInitialized
-    await this.meta.module._monkeyModule('appInitialized');
+    await this.meta.module._monkeyModule(true, 'appInitialized');
     // monkey: appReady
-    await this.meta.module._monkeyModule('appReady');
+    await this.meta.module._monkeyModule(true, 'appReady');
   }
 
   public get sys() {

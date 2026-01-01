@@ -93,7 +93,7 @@ export class ZovaSys {
 
   private async _closeInner() {
     // monkey: sysClose
-    await this.meta.module._monkeyModule('sysClose');
+    await this.meta.module._monkeyModule(false, 'sysClose');
   }
 
   private async _combineConfig(config: TypeModuleResourceConfig[]): Promise<ZovaConfig> {

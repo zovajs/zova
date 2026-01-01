@@ -84,13 +84,13 @@ async function _useController(
   const ctx = new ZovaContext(getCurrentInstance()!);
   // ctx: monkey
   if (ctx.app) {
-    ctx.app.meta.module._monkeyModuleSync('appContextInitialize', undefined, ctx);
+    ctx.app.meta.module._monkeyModuleSync(true, 'appContextInitialize', undefined, ctx);
   } else {
-    sys.meta.module._monkeyModuleSync('sysContextInitialize', undefined, ctx);
+    sys.meta.module._monkeyModuleSync(true, 'sysContextInitialize', undefined, ctx);
   }
   // monkey
   if (ctx.app) {
-    ctx.app.meta.module._monkeyModuleSync('controllerDataPrepare', undefined, controllerData);
+    ctx.app.meta.module._monkeyModuleSync(true, 'controllerDataPrepare', undefined, controllerData);
   }
   if (process.env.CLIENT) {
     // dispose

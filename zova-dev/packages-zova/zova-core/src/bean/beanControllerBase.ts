@@ -14,14 +14,14 @@ export class BeanControllerBase extends BeanBase {
     this.$slots = controllerData.context.slots as any;
     // props
     this.__initControllerProps(this.ctx.instance.vnode.props);
-    this.app.meta.module._monkeyModuleSync('controllerDataInit', undefined, controllerData, this);
+    this.app.meta.module._monkeyModuleSync(true, 'controllerDataInit', undefined, controllerData, this);
   }
 
   /** @internal */
   public __updateControllerData() {
     // props
     this.__initControllerProps(this.ctx.instance.vnode.props);
-    this.app.meta.module._monkeyModuleSync('controllerDataUpdate', undefined, this);
+    this.app.meta.module._monkeyModuleSync(true, 'controllerDataUpdate', undefined, this);
   }
 
   public $useModel(name?, options?) {
