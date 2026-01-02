@@ -50,8 +50,7 @@ export class BeanModelQuery extends BeanModelCookie {
   $queryFind<TQueryFnData = unknown, TError = DefaultError, TData = TQueryFnData>(
     filters: QueryFilters,
   ): Query<TQueryFnData, TError, TData> | undefined {
-    filters = { ...filters };
-    cast(filters).queryKey = this._forceQueryKeyPrefix(cast(filters).queryKey);
+    filters = this.$normalizeFilters(filters);
     return this.$queryClient.getQueryCache().find(filters as any);
   }
 
@@ -59,9 +58,7 @@ export class BeanModelQuery extends BeanModelCookie {
     filters?: InvalidateQueryFilters,
     options?: MaybeRefDeep<InvalidateOptions>,
   ): Promise<void> {
-    if (!filters) filters = {};
-    const queryKey = this._forceQueryKeyPrefix(cast(filters).queryKey);
-    filters = { ...filters, queryKey };
+    filters = this.$normalizeFilters(filters);
     return this.$queryClient.invalidateQueries(filters, options);
   }
 
@@ -77,5 +74,11 @@ export class BeanModelQuery extends BeanModelCookie {
     }
     // remove all db cache
     await localforage.clear();
+  }
+
+  $normalizeFilters<T extends {}>(filters?: T): T {
+    if (!filters) filters = {} as T;
+    const queryKey = this._forceQueryKeyPrefix(cast(filters).queryKey);
+    return { ...filters, queryKey };
   }
 }
