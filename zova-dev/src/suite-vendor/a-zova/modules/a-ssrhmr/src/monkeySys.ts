@@ -4,9 +4,13 @@ import { BeanSimple } from 'zova';
 
 export class MonkeySys extends BeanSimple implements IMonkeySysReady, IMonkeySysClose {
   private _ws?: WebSocketClient;
+  private _reload?: () => void;
 
   async sysReady(): Promise<void> {
     if (this.sys.env.SSR_HMR !== 'true') return;
+    this._reload = () => {
+      this._reloadInner();
+    };
     this._startWs();
   }
 
@@ -26,12 +30,12 @@ export class MonkeySys extends BeanSimple implements IMonkeySysReady, IMonkeySys
     const ws = this._ws = new WebSocketClient({ reconnectDelayMax: 1000 });
     ws.onEvent = (eventName, _data) => {
       if (eventName === 'a-ssrhmr:reload') {
-        this._reload();
+        this._reload?.();
       }
     };
     ws.onOpen = (_event, reconnectAttempts) => {
       if (reconnectAttempts > 0) {
-        this._reload();
+        this._reloadInner();
       }
     };
     // connect
@@ -39,7 +43,7 @@ export class MonkeySys extends BeanSimple implements IMonkeySysReady, IMonkeySys
     ws.connect(url);
   }
 
-  private async _reload() {
+  private async _reloadInner() {
     await this.sys.meta.event.emit('a-ssrhmr:reloadSysSdk');
     await this.sys.meta.event.emit('a-ssrhmr:reloadModelSdk');
   }
