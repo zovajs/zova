@@ -13,7 +13,7 @@ export interface TypeEventHandlerWrapper<D, R> {
 }
 
 export interface TypeEventHandler<D, R> {
-  (data: D, next: NextGeneral): Promise<R> | R;
+  (data: D, next: NextGeneral<D, R>): Promise<R> | R;
 }
 
 export type NextEvent<DATA = unknown, RESULT = unknown> = (data?: DATA) => Promise<RESULT>;

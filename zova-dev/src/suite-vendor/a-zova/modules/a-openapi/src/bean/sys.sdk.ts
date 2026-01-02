@@ -21,9 +21,8 @@ export class SysSdk extends BeanBase {
     this.sdks = shallowReactive({});
     // event
     if (this.sys.env.SSR_HMR === 'true') {
-      this._eventSsrHmrReload = this.sys.meta.event.on('a-ssrhmr:reloadSysSdk', (_data, next) => {
-        this.schemas = shallowReactive({});
-        this.sdks = shallowReactive({});
+      this._eventSsrHmrReload = this.sys.meta.event.on('a-ssrhmr:reloadSysSdk', async (_data, next) => {
+        await this.reload();
         return next();
       });
     }
@@ -33,6 +32,11 @@ export class SysSdk extends BeanBase {
     if (this._eventSsrHmrReload) {
       this._eventSsrHmrReload();
     }
+  }
+
+  private async reload() {
+    this.schemas = shallowReactive({});
+    this.sdks = shallowReactive({});
   }
 
   getSdk(api: string | undefined, apiMethod: string | undefined): IOpenapiSdkItem | undefined {
