@@ -128,13 +128,29 @@ export class CliBinBuildRest extends BeanCliBase {
 
   async _prepareResourcesIndex({ srcDir }: IBinBuildRestContext) {
     let indexContent = '';
+    indexContent += await this._prepareResourcesIndex_rest(srcDir);
+    indexContent += await this._prepareResourcesIndex_icon(srcDir);
+    await fse.writeFile(path.join(srcDir, 'index.ts'), indexContent);
+  }
+
+  async _prepareResourcesIndex_rest(srcDir: string) {
+    let content = '';
     for (const module of this.modulesMeta.modulesArray) {
       const restIndexFile = path.join(module.root, 'rest/index.ts');
       if (!fse.existsSync(restIndexFile)) continue;
       const restIndexFileRelative = path.relative(srcDir, restIndexFile);
-      indexContent += `export * from '${restIndexFileRelative}';\n`;
+      content += `export * from '${restIndexFileRelative}';\n`;
     }
-    await fse.writeFile(path.join(srcDir, 'index.ts'), indexContent);
+    return content;
+  }
+
+  async _prepareResourcesIndex_icon(_srcDir: string) {
+    let content = 'export { $iconName } from \'zova-module-a-icon\';\n';
+    for (const module of this.modulesMeta.modulesArray) {
+      if (!module.package.zovaModule?.capabilities?.icon) continue;
+      content += `export * from '${module.info.fullName}';\n`;
+    }
+    return content;
   }
 }
 
