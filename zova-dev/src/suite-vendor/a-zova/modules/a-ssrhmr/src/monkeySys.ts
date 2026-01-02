@@ -31,7 +31,7 @@ export class MonkeySys extends BeanSimple implements IMonkeySysReady, IMonkeySys
   private _startWs() {
     const ws = this._ws = new WebSocketClient({ reconnectDelayMax: 1000 });
     ws.onEvent = (eventName, _data) => {
-      if (eventName === 'a-ssrhmr:reload') {
+      if (eventName === 'reload') {
         this._reload?.();
       }
     };
