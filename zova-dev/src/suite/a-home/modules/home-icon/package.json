@@ -3,11 +3,6 @@
   "type": "module",
   "version": "5.0.0",
   "title": "home-icon",
-  "zovaModule": {
-    "capabilities": {
-      "icon": true
-    }
-  },
   "description": "icon",
   "author": "zhennann",
   "keywords": [
@@ -26,6 +21,7 @@
   },
   "files": [
     "dist",
+    "icons",
     "mock"
   ],
   "scripts": {},

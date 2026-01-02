@@ -236,7 +236,7 @@ export { ScopeModule${relativeNameCapitalize} as ScopeModule } from './index.js'
       return pkg;
     }
     // cli/rest
-    for (const name of ['cli', 'rest']) {
+    for (const name of ['cli', 'icons', 'rest']) {
       const cli = path.join(modulePath, name);
       if (fse.existsSync(cli)) {
         pkg = await _loadPkg();

@@ -146,14 +146,18 @@ export class CliBinBuildRest extends BeanCliBase {
   }
 
   async _prepareResourcesIndex_icon(_srcDir: string) {
-    let content = `export function $iconName<K extends keyof IIconRecord>(name: K): K {
+    let content = '';
+    for (const module of this.modulesMeta.modulesArray) {
+      const iconsFile = path.join(module.root, 'icons');
+      if (!fse.existsSync(iconsFile)) continue;
+      const resourceIcons = await generateIcons(module.info.relativeName, module.root, true);
+      content += resourceIcons;
+    }
+    if (content) {
+      content += `export function $iconName<K extends keyof IIconRecord>(name: K): K {
   return name;
 }
 `;
-    for (const module of this.modulesMeta.modulesArray) {
-      if (!module.package.zovaModule?.capabilities?.icon) continue;
-      const resourceIcons = await generateIcons(module.info.relativeName, module.root, true);
-      content += resourceIcons;
     }
     return content;
   }
