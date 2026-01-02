@@ -6,6 +6,8 @@ import type {
   Query,
   QueryFilters,
   QueryKey,
+  RefetchOptions,
+  RefetchQueryFilters,
   SetDataOptions,
   Updater,
 } from '@tanstack/vue-query';
@@ -60,6 +62,14 @@ export class BeanModelQuery extends BeanModelCookie {
   ): Promise<void> {
     filters = this.$normalizeFilters(filters);
     return this.$queryClient.invalidateQueries(filters, options);
+  }
+
+  $refetchQueries(
+    filters?: RefetchQueryFilters,
+    options?: MaybeRefDeep<RefetchOptions>,
+  ): Promise<void> {
+    filters = this.$normalizeFilters(filters);
+    return this.$queryClient.refetchQueries(filters, options);
   }
 
   $setQueryDataDirect(queryKey: QueryKey, value: any) {
