@@ -267,8 +267,8 @@ export interface IIconRecord {
     ':tools:pomotodo': true;
     ':tools:spreadsheet': true;
 }
-}
 
+}
 /** icons: end */
 /** scope: begin */
 import { BeanScopeBase, type BeanScopeUtil } from 'zova';

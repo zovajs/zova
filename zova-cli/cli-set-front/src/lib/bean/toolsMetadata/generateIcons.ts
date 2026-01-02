@@ -3,7 +3,7 @@ import fse from 'fs-extra';
 import { globby } from 'globby';
 import { optimize } from 'svgo';
 
-export async function generateIcons(moduleName: string, modulePath: string) {
+export async function generateIcons(moduleName: string, modulePath: string, onlyResourceIcons?: boolean) {
   const iconsSrc = path.join(modulePath, 'icons');
   // groups
   const groups = await _resolveGroups(iconsSrc);
@@ -11,14 +11,18 @@ export async function generateIcons(moduleName: string, modulePath: string) {
     group.iconNames = await _generateIconsGroup(modulePath, iconsSrc, moduleName, group.name);
   }
   if (groups.length === 0) return '';
-  // src/config/icons.ts
-  const configIcons = await _generateFileConfigIcons(groups);
   // src/resource/icons.ts
   const resourceIcons = await _generateFileResourceIcons(groups, moduleName);
+  if (onlyResourceIcons) return resourceIcons;
+  // src/config/icons.ts
+  const configIcons = await _generateFileConfigIcons(groups);
   // combine
   const content = `/** icons: begin */
 ${configIcons}
+import 'zova-module-a-icon';
+declare module 'zova-module-a-icon' {
 ${resourceIcons}
+}
 /** icons: end */
 `;
   return content;
@@ -43,11 +47,8 @@ async function _generateFileResourceIcons(groups, moduleName) {
       groupsFrontExport.push(`'${recordId}': true;`);
     }
   }
-  const jsContent = `import 'zova-module-a-icon';
-declare module 'zova-module-a-icon' {
-export interface IIconRecord {
+  const jsContent = `export interface IIconRecord {
   ${groupsFrontExport.join('\n    ').trim()}
-}
 }
 `;
   return jsContent;
