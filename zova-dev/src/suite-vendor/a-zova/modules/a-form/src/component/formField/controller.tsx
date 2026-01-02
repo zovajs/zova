@@ -1,7 +1,7 @@
 import type { ControllerForm } from '../form/controller.jsx';
 import { useField } from '@tanstack/vue-form';
 import z from 'zod';
-import { BeanControllerBase, deepExtend, IComponentOptions, Use } from 'zova';
+import { BeanControllerBase, deepEqual, deepExtend, IComponentOptions, Use } from 'zova';
 import { Controller } from 'zova-module-a-bean';
 import { BeanBehaviorsHolder, IBehaviorItem } from 'zova-module-a-behavior';
 import { TypeFormField } from '../../types/form.js';
@@ -31,6 +31,13 @@ export class ControllerFormField<TParentData extends {} = {}> extends BeanContro
     // field
     const options = this._getFormFieldOptions();
     this._formField = useField(options as any) as any;
+    // watch
+    this.$watch(() => this.property, (newValue, oldValue) => {
+      if (deepEqual(newValue, oldValue)) return;
+      const options = this._getFormFieldOptions();
+      this._formField.api.update(options as any);
+      this.form.resetField(this.name);
+    });
     // behaviors
     await this.$$beanBehaviorsHolder.initialize({
       behaviorTag: undefined as any,
