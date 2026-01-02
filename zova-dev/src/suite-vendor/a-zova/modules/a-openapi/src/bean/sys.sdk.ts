@@ -14,6 +14,7 @@ export class SysSdk extends BeanBase {
   schemas: Record<string, SchemaObject>;
   sdks: Record<string, Record<string, IOpenapiSdkItem>>;
   private _eventSsrHmrReload: TypeEventOff;
+  private _fetch: BeanFetch;
 
   protected async __init__(locale: keyof ILocaleRecord) {
     this.locale = locale;
@@ -35,8 +36,20 @@ export class SysSdk extends BeanBase {
   }
 
   private async reload() {
-    this.schemas = shallowReactive({});
+    // server
+    if (process.env.SERVER) {
+      this.schemas = shallowReactive({});
+      this.sdks = shallowReactive({});
+      return;
+    }
+    // client
+    const sdks = this.sdks;
     this.sdks = shallowReactive({});
+    for (const api in sdks) {
+      for (const apiMethod in sdks[api]) {
+        await this.loadSdk(this._fetch, api, apiMethod as any);
+      }
+    }
   }
 
   getSdk(api: string | undefined, apiMethod: string | undefined): IOpenapiSdkItem | undefined {
@@ -50,6 +63,9 @@ export class SysSdk extends BeanBase {
   }
 
   async loadSdk($fetch: BeanFetch, api?: string, apiMethod?: TypeRequestMethod): Promise<IOpenapiSdkItem | undefined> {
+    if (process.env.CLIENT) {
+      this._fetch = $fetch;
+    }
     if (!api) return;
     const [api2, apiMethod2] = this.prepareApiInfo(api, apiMethod);
     if (this.sdks[api2]?.[apiMethod2]) return this.sdks[api2][apiMethod2];
