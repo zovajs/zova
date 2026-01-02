@@ -1,5 +1,6 @@
 import type { IMonkeySysClose, IMonkeySysReady } from 'zova';
 import { WebSocketClient } from '@cabloy/socket';
+import debounce from 'debounce';
 import { BeanSimple } from 'zova';
 
 export class MonkeySys extends BeanSimple implements IMonkeySysReady, IMonkeySysClose {
@@ -8,9 +9,10 @@ export class MonkeySys extends BeanSimple implements IMonkeySysReady, IMonkeySys
 
   async sysReady(): Promise<void> {
     if (this.sys.env.SSR_HMR !== 'true') return;
-    this._reload = () => {
+    const scopeConfig = this.sys.util.getModuleConfigSafe('a-ssrhmr');
+    this._reload = debounce(() => {
       this._reloadInner();
-    };
+    }, scopeConfig.change.debounce);
     this._startWs();
   }
 

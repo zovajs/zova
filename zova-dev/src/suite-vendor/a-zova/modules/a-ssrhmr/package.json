@@ -29,7 +29,8 @@
     "_prepublishOnly": "npm run tsc:publish"
   },
   "dependencies": {
-    "@cabloy/socket": "^2.0.4"
+    "@cabloy/socket": "^2.0.4",
+    "debounce": "^3.0.0"
   },
   "zovaModule": {
     "capabilities": {
