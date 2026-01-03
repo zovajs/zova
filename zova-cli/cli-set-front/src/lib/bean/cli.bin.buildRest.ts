@@ -7,7 +7,6 @@ import fse from 'fs-extra';
 import { rimraf } from 'rimraf';
 import { build } from 'tsdown';
 import { createConfigUtils } from 'zova-vite';
-import { generateIcons } from './toolsMetadata/generateIcons.ts';
 
 const __template_package = `{
   "name": "{{Name}}",
@@ -146,19 +145,11 @@ export class CliBinBuildRest extends BeanCliBase {
   }
 
   async _prepareResourcesIndex_icon(_srcDir: string) {
-    let content = '';
-    for (const module of this.modulesMeta.modulesArray) {
-      const iconsFile = path.join(module.root, 'icons');
-      if (!fse.existsSync(iconsFile)) continue;
-      const resourceIcons = await generateIcons(module.info.relativeName, module.root, true);
-      content += resourceIcons;
-    }
-    if (content) {
-      content += `export function $iconName<K extends keyof IIconRecord>(name: K): K {
+    const content = `export interface IIconRecord {};
+export function $iconName<K extends keyof IIconRecord>(name: K): K {
   return name;
 }
 `;
-    }
     return content;
   }
 }
