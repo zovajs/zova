@@ -3,9 +3,9 @@ import type z from 'zod';
 import type { TypeRenderComponentJsx } from 'zova-jsx';
 import type { IBehaviorItem } from 'zova-module-a-behavior';
 import type { TypeRenderComponent, TypeRenderComponentProvider } from 'zova-module-a-openapi';
-import type { IIconRecord } from 'zova-rest';
 import type { ControllerFormField } from '../component/formField/controller.jsx';
 import type { TypeBehaviorFormFieldOptions } from './form.js';
+import { IIconRecord } from 'zova-module-a-icon';
 
 export type HTMLInputElementType = 'text' | 'password' | 'number' | 'file' | 'hidden' | 'tel' | 'email';
 export const inputTypePresets = ['text', 'password', 'number', 'file', 'hidden', 'tel', 'email'];

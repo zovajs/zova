@@ -1,8 +1,7 @@
 import { RouterLink } from '@cabloy/vue-router';
 import { BeanControllerBase } from 'zova';
 import { Controller } from 'zova-module-a-bean';
-import { ZIcon } from 'zova-module-a-icon';
-import { IIconRecord } from 'zova-rest';
+import { IIconRecord, ZIcon } from 'zova-module-a-icon';
 
 export interface ControllerEssentialLinkProps {
   title: string;

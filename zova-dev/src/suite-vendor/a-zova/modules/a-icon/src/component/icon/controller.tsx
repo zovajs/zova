@@ -1,8 +1,8 @@
 import { BeanControllerBase, Use } from 'zova';
 import { Controller } from 'zova-module-a-bean';
-import { IIconRecord } from 'zova-rest';
 import { ToolIcon } from '../../bean/tool.icon.js';
 import { $getZovaIcon } from '../../lib/useZovaIcon.js';
+import { IIconRecord } from '../../types/icon.js';
 
 export interface ControllerIconProps {
   name?: keyof IIconRecord;

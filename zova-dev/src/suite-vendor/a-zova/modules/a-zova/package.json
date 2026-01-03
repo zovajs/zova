@@ -36,8 +36,7 @@
       "@cabloy/utils": true,
       "@cabloy/word-utils": true,
       "defu": true,
-      "zova-jsx": true,
-      "zova-rest": true
+      "zova-jsx": true
     },
     "globalDependenciesDev": {
       "@cabloy/cli": true,
@@ -79,8 +78,7 @@
     "@cabloy/utils": "^2.0.13",
     "@cabloy/word-utils": "^2.0.2",
     "defu": "^6.1.4",
-    "zova-jsx": "^1.0.0",
-    "zova-rest": "^1.0.0"
+    "zova-jsx": "^1.0.0"
   },
   "devDependencies": {
     "@cabloy/cli": "^3.0.77",

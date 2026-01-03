@@ -28,11 +28,10 @@ export const icons = {
   tools: icon_tools,
 };
 
-import 'zova-rest';
-
-declare module 'zova-rest' {
-  export interface IIconRecord {
-    ':auth:dingtalk-square': true;
+import 'zova-module-a-icon';
+declare module 'zova-module-a-icon' {
+export interface IIconRecord {
+  ':auth:dingtalk-square': true;
     ':auth:github': true;
     ':auth:password': true;
     ':auth:sms': true;
@@ -267,9 +266,9 @@ declare module 'zova-rest' {
     ':social:twitter': true;
     ':tools:pomotodo': true;
     ':tools:spreadsheet': true;
-  }
 }
 
+}
 /** icons: end */
 /** scope: begin */
 import { BeanScopeBase, type BeanScopeUtil } from 'zova';
