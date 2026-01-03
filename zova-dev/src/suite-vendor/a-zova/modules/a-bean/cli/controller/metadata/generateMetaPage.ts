@@ -20,6 +20,7 @@ export async function generateMetaPage(
   const contentPathSchemas: string[] = [];
   const contentNameSchemas: string[] = [];
   const contentRecords: string[] = [];
+  const srcDirRest = path.join(options.cli.context.argv.projectPath, '.zova-rest');
   for (const [globFile, controllerInfo] of globFiles) {
     const { className } = globFile;
     const { name, hasSchemaParams, hasSchemaQuery } = controllerInfo;
@@ -28,7 +29,9 @@ export async function generateMetaPage(
     contentImports.push(`export * from './page/${name}.js';`);
     if (hasSchemaParams || hasSchemaQuery) {
       contentImports.push(`import { ${namespace} } from './page/${name}.js';`);
-      contentImportsRest.push(`import { ${namespace} as ${namespaceRest} } from '..src/.metadata/page/${name}.js';`);
+      // rest
+      const restIndexFileRelative = path.relative(srcDirRest, path.join(options.modulePath, `src/.metadata/page/${name}.js`));
+      contentImportsRest.push(`import { ${namespace} as ${namespaceRest} } from '${restIndexFileRelative}';`);
     }
     // controller.tsx
     const { routePath, routeName } = _extractRoutePathOrName(options, globFile, controllerInfo);
