@@ -186,6 +186,9 @@ export interface TypePagePathSchema<PARAMS = unknown, QUERY = unknown> {
 }      
 export interface IPagePathRecord {
 ${contentRecord}
+presetLogin: TypePagePathSchema<undefined,undefined>;
+presetErrorExpired: TypePagePathSchema<undefined,undefined>;
+presetResource: TypePagePathSchema<undefined,undefined>;
 }
 `;
     }
