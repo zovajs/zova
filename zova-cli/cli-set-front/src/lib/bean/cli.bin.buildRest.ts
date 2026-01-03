@@ -145,11 +145,22 @@ export class CliBinBuildRest extends BeanCliBase {
   }
 
   async _prepareResourcesIndex_icon(_srcDir: string) {
-    const content = `export interface IIconRecord {};
+    let content = '';
+    for (const module of this.modulesMeta.modulesArray) {
+      const restIconsFile = path.join(module.root, 'rest/icons.txt');
+      if (!fse.existsSync(restIconsFile)) continue;
+      const contentIcons = (await fse.readFile(restIconsFile)).toString();
+      content += `${contentIcons}\n`;
+    }
+    if (content) {
+      content = `export interface IIconRecord {
+${content}
+};
 export function $iconName<K extends keyof IIconRecord>(name: K): K {
   return name;
 }
 `;
+    }
     return content;
   }
 }

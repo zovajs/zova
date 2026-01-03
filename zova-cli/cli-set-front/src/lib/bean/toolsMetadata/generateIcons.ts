@@ -2,7 +2,6 @@ import path from 'node:path';
 import fse from 'fs-extra';
 import { globby } from 'globby';
 import { optimize } from 'svgo';
-import { generateRestIndex } from './utils.ts';
 
 export async function generateIcons(moduleName: string, modulePath: string) {
   const iconsSrc = path.join(modulePath, 'icons');
