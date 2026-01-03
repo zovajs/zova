@@ -1,5 +1,5 @@
 import type { VNode } from 'vue';
-import type { IIconRecord } from '../types/icon.js';
+import type { IIconRecord } from 'zova-rest';
 import { createVNode } from 'vue';
 import { ZIcon } from '../.metadata/index.js';
 

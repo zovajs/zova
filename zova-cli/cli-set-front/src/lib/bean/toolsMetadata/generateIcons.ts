@@ -2,6 +2,7 @@ import path from 'node:path';
 import fse from 'fs-extra';
 import { globby } from 'globby';
 import { optimize } from 'svgo';
+import { generateRestIndex } from './utils.ts';
 
 export async function generateIcons(moduleName: string, modulePath: string) {
   const iconsSrc = path.join(modulePath, 'icons');
@@ -13,10 +14,6 @@ export async function generateIcons(moduleName: string, modulePath: string) {
   if (groups.length === 0) return '';
   // src/resource/icons.ts
   const resourceIcons = await _generateFileResourceIcons(groups, moduleName);
-  const contentResourceIcons = `export interface IIconRecord {
-  ${resourceIcons.join('\n    ').trim()}
-}
-`;
   // src/config/icons.ts
   const configIcons = await _generateFileConfigIcons(groups);
   // combine
@@ -24,7 +21,7 @@ export async function generateIcons(moduleName: string, modulePath: string) {
 ${configIcons}
 import 'zova-module-a-icon';
 declare module 'zova-module-a-icon' {
-${contentResourceIcons}
+${resourceIcons}
 }
 /** icons: end */
 `;
@@ -34,11 +31,13 @@ ${contentResourceIcons}
   return content;
 }
 
-async function generateRestIcon(_moduleName: string, modulePath: string, resourceIcons: string[]) {
+async function generateRestIcon(_moduleName: string, modulePath: string, resourceIcons: string) {
   // icons
-  const contentResourceIcons = resourceIcons.join('\n');
-  const fileIcons = path.join(modulePath, 'rest/icons.txt');
-  await fse.outputFile(fileIcons, contentResourceIcons);
+  const fileIcons = path.join(modulePath, 'rest/icons.ts');
+  await fse.outputFile(fileIcons, resourceIcons);
+  // index
+  const exportIndexContent = 'export * from \'./icons.js\';';
+  await generateRestIndex(modulePath, exportIndexContent);
 }
 
 async function _generateFileConfigIcons(groups) {
@@ -60,7 +59,11 @@ async function _generateFileResourceIcons(groups, moduleName) {
       groupsFrontExport.push(`'${recordId}': true;`);
     }
   }
-  return groupsFrontExport;
+  const jsContent = `export interface IIconRecord {
+  ${groupsFrontExport.join('\n    ').trim()}
+}
+`;
+  return jsContent;
 }
 
 async function _resolveGroups(iconsSrc: string) {

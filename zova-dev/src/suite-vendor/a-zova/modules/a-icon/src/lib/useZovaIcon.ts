@@ -1,4 +1,5 @@
-import type { IIconInfo, IIconRecord } from '../types/icon.js';
+import type { IIconRecord } from 'zova-rest';
+import type { IIconInfo } from '../types/icon.js';
 import { ref, watchEffect } from 'vue';
 import { sys } from 'zova';
 

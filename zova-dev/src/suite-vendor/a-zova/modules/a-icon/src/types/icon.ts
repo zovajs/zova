@@ -1,9 +1,6 @@
 import type { SysIcon } from '../bean/sys.icon.js';
 import type { IconGroup } from '../lib/iconGroup.js';
 
-export interface IIconRecord {}
-export type TypeIcon = keyof IIconRecord;
-
 export interface IIconMeta {
   module: string;
   group: string;
