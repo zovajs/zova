@@ -20,6 +20,9 @@ const __template_package = `{
       "import": "./index.mjs"
     },
     "./package.json": "./package.json"
+  },
+  "dependencies": {
+    "zova-rest": "^1.0.0"
   }
 }
 `;
@@ -145,22 +148,12 @@ export class CliBinBuildRest extends BeanCliBase {
   }
 
   async _prepareResourcesIndex_icon(_srcDir: string) {
-    let content = '';
-    for (const module of this.modulesMeta.modulesArray) {
-      const restIconsFile = path.join(module.root, 'rest/icons.txt');
-      if (!fse.existsSync(restIconsFile)) continue;
-      const contentIcons = (await fse.readFile(restIconsFile)).toString();
-      content += `${contentIcons}\n`;
-    }
-    if (content) {
-      content = `export interface IIconRecord {
-${content}
-}
+    const content = `import type { IIconRecord } from 'zova-rest';
+
 export function $iconName<K extends keyof IIconRecord>(name: K): K {
   return name;
 }
 `;
-    }
     return content;
   }
 }

@@ -1,7 +1,7 @@
 {
   "name": "zova-rest",
   "type": "module",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "description": "A vue3 framework with ioc",
   "publishConfig": {
     "access": "public"

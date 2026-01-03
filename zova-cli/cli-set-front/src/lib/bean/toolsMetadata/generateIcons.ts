@@ -19,10 +19,7 @@ export async function generateIcons(moduleName: string, modulePath: string) {
   // combine
   const content = `/** icons: begin */
 ${configIcons}
-import 'zova-module-a-icon';
-declare module 'zova-module-a-icon' {
 ${resourceIcons}
-}
 /** icons: end */
 `;
   // restComponent
@@ -59,8 +56,12 @@ async function _generateFileResourceIcons(groups, moduleName) {
       groupsFrontExport.push(`'${recordId}': true;`);
     }
   }
-  const jsContent = `export interface IIconRecord {
-  ${groupsFrontExport.join('\n    ').trim()}
+  const jsContent = `import 'zova-rest';
+
+declare module 'zova-rest' {
+  export interface IIconRecord {
+    ${groupsFrontExport.join('\n    ').trim()}
+  }
 }
 `;
   return jsContent;

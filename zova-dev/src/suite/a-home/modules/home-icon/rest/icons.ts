@@ -1,5 +1,8 @@
-export interface IIconRecord {
-  ':auth:dingtalk-square': true;
+import 'zova-rest';
+
+declare module 'zova-rest' {
+  export interface IIconRecord {
+    ':auth:dingtalk-square': true;
     ':auth:github': true;
     ':auth:password': true;
     ':auth:sms': true;
@@ -234,4 +237,5 @@ export interface IIconRecord {
     ':social:twitter': true;
     ':tools:pomotodo': true;
     ':tools:spreadsheet': true;
+  }
 }
