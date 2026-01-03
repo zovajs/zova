@@ -1,0 +1,2 @@
+'/home/base/errorExpired': TypePagePathSchema<undefined,NSHomeBaseControllerPageErrorExpired.QueryInput>;
+'/home/base//:catchAll(.*)*': TypePagePathSchema<undefined,undefined>;

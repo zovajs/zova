@@ -20,7 +20,8 @@
   },
   "files": [
     "dist",
-    "mock"
+    "mock",
+    "rest"
   ],
   "scripts": {},
   "dependencies": {}
