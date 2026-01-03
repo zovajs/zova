@@ -22,7 +22,8 @@
   "files": [
     "dist",
     "icons",
-    "mock"
+    "mock",
+    "rest"
   ],
   "scripts": {},
   "dependencies": {}

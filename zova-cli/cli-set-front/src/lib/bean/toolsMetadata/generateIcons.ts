@@ -2,6 +2,7 @@ import path from 'node:path';
 import fse from 'fs-extra';
 import { globby } from 'globby';
 import { optimize } from 'svgo';
+import { generateRestIndex } from './utils.ts';
 
 export async function generateIcons(moduleName: string, modulePath: string, onlyResourceIcons?: boolean) {
   const iconsSrc = path.join(modulePath, 'icons');
@@ -25,7 +26,19 @@ ${resourceIcons}
 }
 /** icons: end */
 `;
+  // restComponent
+  await generateRestIcon(moduleName, modulePath, resourceIcons);
+  // ok
   return content;
+}
+
+async function generateRestIcon(_moduleName: string, modulePath: string, resourceIcons: string) {
+  // icons
+  const fileIcons = path.join(modulePath, 'rest/icons.ts');
+  await fse.outputFile(fileIcons, resourceIcons);
+  // index
+  const exportIndexContent = 'export * from \'./icons.js\';';
+  await generateRestIndex(modulePath, exportIndexContent);
 }
 
 async function _generateFileConfigIcons(groups) {
