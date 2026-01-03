@@ -24,7 +24,7 @@ export default async function (options: IMetadataCustomGenerateOptions): Promise
       globFilesComponent.push([globFile, controllerInfo]);
     }
   }
-  const contentMetaPage = generateMetaPage(options, globFilesPage);
+  const contentMetaPage = await generateMetaPage(options, globFilesPage);
   const contentMetaComponent = generateMetaComponent(options, globFilesComponent);
   const content = `${contentMetaPage}\n${contentMetaComponent}`;
   return content;

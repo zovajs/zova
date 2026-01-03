@@ -129,7 +129,8 @@ export class CliBinBuildRest extends BeanCliBase {
   async _prepareResourcesIndex({ srcDir }: IBinBuildRestContext) {
     let indexContent = '';
     indexContent += await this._prepareResourcesIndex_rest(srcDir);
-    indexContent += await this._prepareResourcesIndex_icon(srcDir);
+    indexContent += await this._prepareResourcesIndex_icons(srcDir);
+    indexContent += await this._prepareResourcesIndex_pages(srcDir);
     await fse.writeFile(path.join(srcDir, 'index.ts'), indexContent);
   }
 
@@ -144,7 +145,7 @@ export class CliBinBuildRest extends BeanCliBase {
     return content;
   }
 
-    async _prepareResourcesIndex_icon(_srcDir: string) {
+  async _prepareResourcesIndex_icons(_srcDir: string) {
     let content = '';
     for (const module of this.modulesMeta.modulesArray) {
       const restIconsFile = path.join(module.root, 'rest/icons.txt');
@@ -158,6 +159,33 @@ ${content}
 }
 export function $iconName<K extends keyof IIconRecord>(name: K): K {
   return name;
+}
+`;
+    }
+    return content;
+  }
+
+  async _prepareResourcesIndex_pages(_srcDir: string) {
+    let contentImport = '';
+    let contentRecord = '';
+    for (const module of this.modulesMeta.modulesArray) {
+      const restPagesRecordFile = path.join(module.root, 'rest/pagesRecord.txt');
+      if (!fse.existsSync(restPagesRecordFile)) continue;
+      const restPagesImportFile = path.join(module.root, 'rest/pagesImport.txt');
+      const contentPagesImport = (await fse.readFile(restPagesImportFile)).toString();
+      const contentPagesRecord = (await fse.readFile(restPagesRecordFile)).toString();
+      contentImport += `${contentPagesImport}\n`;
+      contentRecord += `${contentPagesRecord}\n`;
+    }
+    let content = '';
+    if (contentRecord) {
+      content = `${contentImport}
+export interface TypePagePathSchema<PARAMS = unknown, QUERY = unknown> {
+  params?: PARAMS;
+  query?: QUERY;
+}      
+export interface IPagePathRecord {
+${contentRecord}
 }
 `;
     }

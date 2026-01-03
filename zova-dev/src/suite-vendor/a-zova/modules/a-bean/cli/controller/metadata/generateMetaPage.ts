@@ -2,15 +2,18 @@ import type { IMetadataCustomGenerateOptions } from '@cabloy/cli';
 import type { IGlobBeanFile } from '@cabloy/module-info';
 import type { IControllerInfo } from './types.ts';
 import path from 'node:path';
+import { combineResourceName } from '@cabloy/utils';
+import { toUpperCaseFirstChar } from '@cabloy/word-utils';
 import fse from 'fs-extra';
 
-export function generateMetaPage(
+export async function generateMetaPage(
   options: IMetadataCustomGenerateOptions,
   globFiles: [IGlobBeanFile, IControllerInfo][],
 ) {
   if (globFiles.length === 0) return '';
   const { moduleName } = options;
   const contentImports: string[] = [];
+  const contentImportsRest: string[] = [];
   const contentNameRecords: string[] = [];
   const contentPathRecords: string[] = [];
   const contentPathSchemas: string[] = [];
@@ -22,6 +25,7 @@ export function generateMetaPage(
     contentImports.push(`export * from './page/${name}.js';`);
     if (hasSchemaParams || hasSchemaQuery) {
       contentImports.push(`import { NS${className} } from './page/${name}.js';`);
+      contentImportsRest.push(`import { NS${className} as ${_combineModuleNameControllerName(moduleName, className)} } from '..src/.metadata/page/${name}.js';`);
     }
     // controller.tsx
     const { routePath, routeName } = _extractRoutePathOrName(options, globFile, controllerInfo);
@@ -30,8 +34,9 @@ export function generateMetaPage(
       ? `/${moduleName.replace('-', '/')}/${routePath}`
       : `/${moduleName.replace('-', '/')}`;
     const routeNameFull = `${moduleName}:${routeName}`;
+    contentPathRecords.push(_combineContentPathRecord(routePathFull, hasSchemaParams, hasSchemaQuery, className));
     if (!routeName) {
-      contentPathRecords.push(_combineContentPathRecord(routePathFull, hasSchemaParams, hasSchemaQuery, className));
+      // contentPathRecords.push(_combineContentPathRecord(routePathFull, hasSchemaParams, hasSchemaQuery, className));
     } else {
       //
       // const apiPath1 = routePathFull.replace(/(:[^/]+)/g, (_, _part) => {
@@ -45,7 +50,7 @@ export function generateMetaPage(
       // });
       // contentPathRecords.push(_combineContentPathRecord(apiPath1, `'${apiPath2}'`, hasSchemaQuery, className));
       // contentPathRecords.push(_combineContentPathRecord(routePathFull, `\`${apiPath3}\``, hasSchemaQuery, className));
-      contentPathRecords.push(_combineContentPathRecord(routePathFull, hasSchemaParams, hasSchemaQuery, className));
+      // contentPathRecords.push(_combineContentPathRecord(routePathFull, hasSchemaParams, hasSchemaQuery, className));
       //
       contentNameRecords.push(
         `'${routeNameFull}': undefined;`,
@@ -101,7 +106,24 @@ declare module 'zova-module-${moduleName}' {
 }
 /** pages: end */
 `;
+  // restComponent
+  await generateRestMetaPage(options, contentImportsRest, contentPathRecords);
   return content;
+}
+
+async function generateRestMetaPage(options: IMetadataCustomGenerateOptions, contentImportsRest: string[], contentPathRecords: string[]) {
+  if (contentPathRecords.length === 0) return;
+  const { modulePath } = options;
+  const contentPagesImport = contentImportsRest.join('\n');
+  const filePagesImport = path.join(modulePath, 'rest/pagesImport.txt');
+  await fse.outputFile(filePagesImport, contentPagesImport);
+  const contentPagesRecord = contentPathRecords.join('\n');
+  const filePagesRecord = path.join(modulePath, 'rest/pagesRecord.txt');
+  await fse.outputFile(filePagesRecord, contentPagesRecord);
+}
+
+function _combineModuleNameControllerName(moduleName: string, className: string) {
+  return `NS${toUpperCaseFirstChar(combineResourceName(className, moduleName, false, false))}`;
 }
 
 function _extractRoutePathOrName(
