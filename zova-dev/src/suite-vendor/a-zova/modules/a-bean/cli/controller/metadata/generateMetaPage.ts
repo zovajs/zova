@@ -16,16 +16,19 @@ export async function generateMetaPage(
   const contentImportsRest: string[] = [];
   const contentNameRecords: string[] = [];
   const contentPathRecords: string[] = [];
+  const contentPathRecordsRest: string[] = [];
   const contentPathSchemas: string[] = [];
   const contentNameSchemas: string[] = [];
   const contentRecords: string[] = [];
   for (const [globFile, controllerInfo] of globFiles) {
     const { className } = globFile;
     const { name, hasSchemaParams, hasSchemaQuery } = controllerInfo;
+    const namespace = `NS${className}`;
+    const namespaceRest = _combineModuleNameControllerName(moduleName, className);
     contentImports.push(`export * from './page/${name}.js';`);
     if (hasSchemaParams || hasSchemaQuery) {
-      contentImports.push(`import { NS${className} } from './page/${name}.js';`);
-      contentImportsRest.push(`import { NS${className} as ${_combineModuleNameControllerName(moduleName, className)} } from '..src/.metadata/page/${name}.js';`);
+      contentImports.push(`import { ${namespace} } from './page/${name}.js';`);
+      contentImportsRest.push(`import { ${namespace} as ${namespaceRest} } from '..src/.metadata/page/${name}.js';`);
     }
     // controller.tsx
     const { routePath, routeName } = _extractRoutePathOrName(options, globFile, controllerInfo);
@@ -34,7 +37,8 @@ export async function generateMetaPage(
       ? `/${moduleName.replace('-', '/')}/${routePath}`
       : `/${moduleName.replace('-', '/')}`;
     const routeNameFull = `${moduleName}:${routeName}`;
-    contentPathRecords.push(_combineContentPathRecord(routePathFull, hasSchemaParams, hasSchemaQuery, className));
+    contentPathRecords.push(_combineContentPathRecord(routePathFull, hasSchemaParams, hasSchemaQuery, namespace));
+    contentPathRecordsRest.push(_combineContentPathRecord(routePathFull, hasSchemaParams, hasSchemaQuery, namespaceRest));
     if (!routeName) {
       // contentPathRecords.push(_combineContentPathRecord(routePathFull, hasSchemaParams, hasSchemaQuery, className));
     } else {
@@ -60,21 +64,21 @@ export async function generateMetaPage(
     if (!routeName) {
       if (hasSchemaQuery) {
         contentPathSchemas.push(`'${routePathFull}': {
-          query: NS${className}.querySchema,
+          query: ${namespace}.querySchema,
         },`);
       }
     } else {
       if (hasSchemaQuery || hasSchemaParams) {
         contentNameSchemas.push(`'${routeNameFull}': {
-          ${hasSchemaParams ? `params: NS${className}.paramsSchema,` : ''}
-          ${hasSchemaQuery ? `query: NS${className}.querySchema,` : ''}
+          ${hasSchemaParams ? `params: ${namespace}.paramsSchema,` : ''}
+          ${hasSchemaQuery ? `query: ${namespace}.querySchema,` : ''}
         },`);
       }
     }
     //
     const _contentRecords_parts: string[] = [];
-    if (hasSchemaParams) _contentRecords_parts.push(`$params: NS${className}.ParamsOutput;`);
-    if (hasSchemaQuery) _contentRecords_parts.push(`$query: NS${className}.QueryOutput;`);
+    if (hasSchemaParams) _contentRecords_parts.push(`$params: ${namespace}.ParamsOutput;`);
+    if (hasSchemaQuery) _contentRecords_parts.push(`$query: ${namespace}.QueryOutput;`);
     if (_contentRecords_parts.length > 0) {
       contentRecords.push(`export interface ${className} {
         ${_contentRecords_parts.join('\n')}
@@ -107,17 +111,17 @@ declare module 'zova-module-${moduleName}' {
 /** pages: end */
 `;
   // restComponent
-  await generateRestMetaPage(options, contentImportsRest, contentPathRecords);
+  await generateRestMetaPage(options, contentImportsRest, contentPathRecordsRest);
   return content;
 }
 
-async function generateRestMetaPage(options: IMetadataCustomGenerateOptions, contentImportsRest: string[], contentPathRecords: string[]) {
-  if (contentPathRecords.length === 0) return;
+async function generateRestMetaPage(options: IMetadataCustomGenerateOptions, contentImportsRest: string[], contentPathRecordsRest: string[]) {
+  if (contentPathRecordsRest.length === 0) return;
   const { modulePath } = options;
   const contentPagesImport = contentImportsRest.join('\n');
   const filePagesImport = path.join(modulePath, 'rest/pagesImport.txt');
   await fse.outputFile(filePagesImport, contentPagesImport);
-  const contentPagesRecord = contentPathRecords.join('\n');
+  const contentPagesRecord = contentPathRecordsRest.join('\n');
   const filePagesRecord = path.join(modulePath, 'rest/pagesRecord.txt');
   await fse.outputFile(filePagesRecord, contentPagesRecord);
 }
@@ -160,10 +164,10 @@ function _extractRoutePathOrName(
   return { routePath, routeName };
 }
 
-function _combineContentPathRecord(key: string, hasSchemaParams, hasSchemaQuery: boolean, className: string) {
-  return `'${key}': TypePagePathSchema<${hasSchemaParams ? `NS${className}.ParamsInput` : 'undefined'},${hasSchemaQuery ? `NS${className}.QueryInput` : 'undefined'}>;`;
+function _combineContentPathRecord(key: string, hasSchemaParams, hasSchemaQuery: boolean, namespace: string) {
+  return `'${key}': TypePagePathSchema<${hasSchemaParams ? `${namespace}.ParamsInput` : 'undefined'},${hasSchemaQuery ? `${namespace}.QueryInput` : 'undefined'}>;`;
   // return `'${key}': {
   //   path: ${value},
-  //   schema: ${hasSchemaQuery ? `NS${className}.QueryInput` : 'undefined'},
+  //   schema: ${hasSchemaQuery ? `${namespace}.QueryInput` : 'undefined'},
   // };`;
 }
