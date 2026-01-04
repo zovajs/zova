@@ -139,6 +139,7 @@ async function _useController(
 
   // load
   ctx.meta.hooks.onCreated(() => {
+    if (!ctx.instance) return;
     return __load();
   });
   if (process.env.SERVER) {
