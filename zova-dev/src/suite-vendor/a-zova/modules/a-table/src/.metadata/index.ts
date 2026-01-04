@@ -49,6 +49,48 @@ declare module 'zova' {
   }
 }
 /** service: end */
+/** controller: begin */
+export * from '../component/table/controller.jsx';
+
+import 'zova';
+declare module 'zova' {
+  
+  
+}
+declare module 'zova-module-a-table' {
+  
+        export interface ControllerTable {
+          /** @internal */
+          get scope(): ScopeModuleATable;
+        } 
+}
+/** controller: end */
+/** controller: begin */
+import { ControllerTable } from '../component/table/controller.jsx';
+import 'zova';
+declare module 'zova' {
+  export interface IBeanRecordLocal {
+    'a-table.controller.table': ControllerTable;
+  }
+}
+/** controller: end */
+
+/** components: begin */
+export * from './component/table.js';
+import { ZTable } from './component/table.js';
+export const components = {
+  'table': ZTable,
+};
+import 'zova';
+declare module 'zova' {
+export interface IComponentRecord {
+  'a-table:table': ControllerTable;
+}
+export interface IZovaComponentRecord {
+  'a-table:table': typeof ZTable;
+}
+}
+/** components: end */
 /** scope: begin */
 import { BeanScopeBase, type BeanScopeUtil } from 'zova';
 import { Scope } from 'zova-module-a-bean';
