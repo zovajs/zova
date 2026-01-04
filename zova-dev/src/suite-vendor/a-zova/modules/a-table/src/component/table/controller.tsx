@@ -5,10 +5,8 @@ import { Controller } from 'zova-module-a-bean';
 import { TypeResourceActionRowRecord, TypeResourceActionTableRecord } from 'zova-module-a-openapi';
 import { BeanControllerTableBase } from '../../lib/beanControllerTableBase.js';
 import { BeanTableFeatureBase } from '../../lib/beanTableFeatureBase.js';
-import { ServiceTableCellFormat } from '../../service/tableCellFormat.js';
 import { ServiceTableFeature } from '../../service/tableFeature.js';
 import { TypeTable, TypeTableOptions } from '../../types/table.js';
-import { TypeTableCellFormatsMatched } from '../../types/tableCellFormat.js';
 
 export interface ControllerTableProps<TData extends {} = {}> {
   getTableOptions: () => TypeTableOptions<TData>;
@@ -22,11 +20,7 @@ export class ControllerTable<TData extends {} = {}> extends BeanControllerTableB
   static $propsDefault = {};
 
   features: BeanTableFeatureBase[] | undefined;
-  formats: TypeTableCellFormatsMatched;
   table: TypeTable<TData>;
-
-  @Use()
-  $$serviceTableCellFormat: ServiceTableCellFormat;
 
   @Use()
   $$serviceTableFeature: ServiceTableFeature;
