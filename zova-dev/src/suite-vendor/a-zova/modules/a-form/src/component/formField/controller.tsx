@@ -1,7 +1,7 @@
 import type { ControllerForm } from '../form/controller.jsx';
 import { useField } from '@tanstack/vue-form';
 import z from 'zod';
-import { BeanControllerBase, deepEqual, deepExtend, IComponentOptions, Use } from 'zova';
+import { BeanControllerBase, deepEqual, IComponentOptions, Use } from 'zova';
 import { Controller } from 'zova-module-a-bean';
 import { BeanBehaviorsHolder, IBehaviorItem } from 'zova-module-a-behavior';
 import { TypeFormField } from '../../types/form.js';
@@ -89,9 +89,15 @@ export class ControllerFormField<TParentData extends {} = {}> extends BeanContro
 
   private _getFieldBehaviors() {
     const behaviors: IBehaviorItem = {};
+    // custom
+    if (this.$props.behaviors) {
+      Object.assign(behaviors, this.$props.behaviors);
+    }
+    // formField
     this._prepareBehaviorFormField(behaviors);
+    // formFieldLayout
     this._prepareBehaviorFormFieldLayout(behaviors);
-    return this.$props.behaviors ? deepExtend(behaviors, this.$props.behaviors) : behaviors;
+    return behaviors;
   }
 
   private _prepareBehaviorFormField(behaviors: IBehaviorItem) {
