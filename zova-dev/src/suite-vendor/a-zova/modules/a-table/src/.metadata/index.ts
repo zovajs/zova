@@ -1,31 +1,18 @@
 /* eslint-disable */
 /** service: begin */
-export * from '../service/tableCellFormat.js';
 export * from '../service/tableFeature.js';
 
 import 'zova-module-a-bean';
 declare module 'zova-module-a-bean' {
   
     export interface IServiceRecord {
-      'a-table:tableCellFormat': never;
-'a-table:tableFeature': never;
+      'a-table:tableFeature': never;
     }
 
   
 }
 declare module 'zova-module-a-table' {
   
-        export interface ServiceTableCellFormat {
-          /** @internal */
-          get scope(): ScopeModuleATable;
-        }
-
-        export interface ServiceTableCellFormat {
-          get $beanFullName(): 'a-table.service.tableCellFormat';
-          get $onionName(): 'a-table:tableCellFormat';
-          
-        }
-
         export interface ServiceTableFeature {
           /** @internal */
           get scope(): ScopeModuleATable;
@@ -39,13 +26,11 @@ declare module 'zova-module-a-table' {
 }
 /** service: end */
 /** service: begin */
-import { ServiceTableCellFormat } from '../service/tableCellFormat.js';
 import { ServiceTableFeature } from '../service/tableFeature.js';
 import 'zova';
 declare module 'zova' {
   export interface IBeanRecordGeneral {
-    'a-table.service.tableCellFormat': ServiceTableCellFormat;
-'a-table.service.tableFeature': ServiceTableFeature;
+    'a-table.service.tableFeature': ServiceTableFeature;
   }
 }
 /** service: end */
