@@ -57,7 +57,7 @@ export class RenderForm extends BeanRenderBase {
   private _renderBodyInner() {
     const FormTag = this.$props.formTag;
     return this.$slotDefault
-      ? this.$slotDefault()
+      ? this.$slotDefault(this)
       : (
           <>
             {this._renderSchema()}

@@ -29,6 +29,7 @@ export interface ControllerFormProps<TFormData extends {} = {}, TSubmitMeta = ne
   onFormSubmit?: (e: SubmitEvent, form: ControllerForm<TFormData, TSubmitMeta>) => any;
   onSubmit?: TypeFormOnSubmit<TFormData, TSubmitMeta>;
   onShowError?: TypeFormOnShowError<TFormData, TSubmitMeta>;
+  slotDefault?: (form: ControllerForm<TFormData, TSubmitMeta>) => VNode;
   slotHeader?: (form: ControllerForm<TFormData, TSubmitMeta>) => VNode;
   slotBody?: (children: VNode, form: ControllerForm<TFormData, TSubmitMeta>) => VNode;
   slotFooter?: (form: ControllerForm<TFormData, TSubmitMeta>) => VNode;

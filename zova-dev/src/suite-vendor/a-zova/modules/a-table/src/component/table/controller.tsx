@@ -1,4 +1,5 @@
 import { getCoreRowModel, Row, TableOptionsWithReactiveData } from '@tanstack/vue-table';
+import { VNode } from 'vue';
 import { Use } from 'zova';
 import { Controller } from 'zova-module-a-bean';
 import { TypeResourceActionRowRecord, TypeResourceActionTableRecord } from 'zova-module-a-openapi';
@@ -13,6 +14,7 @@ export interface ControllerTableProps<TData extends any[] = any[]> {
   getTableOptions: () => TableOptionsWithReactiveData<TData>;
   onActionTable?: (action: keyof TypeResourceActionTableRecord) => Promise<any> | undefined;
   onActionRow?: (action: keyof TypeResourceActionRowRecord, row: Row<TData>) => Promise<any> | undefined;
+  slotDefault?: (table: ControllerTable<TData>) => VNode;
 }
 
 @Controller()
@@ -30,6 +32,7 @@ export class ControllerTable<TData extends any[] = any[]> extends BeanController
   $$serviceTableFeature: ServiceTableFeature;
 
   protected async __init__() {
+    this.bean._setBean('$$table', this);
     // features
     await this._createFeatures();
     // // formats

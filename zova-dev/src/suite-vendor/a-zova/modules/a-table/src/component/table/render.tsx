@@ -9,7 +9,7 @@ export class RenderTable extends BeanRenderBase {
 
   public render() {
     return this.$slotDefault
-      ? this.$slotDefault()
+      ? this.$slotDefault(this)
       : this._renderTableDefault();
   }
 }
