@@ -102,15 +102,12 @@ declare module 'zova' {
 /** render: end */
 /** behavior: begin */
 export * from '../bean/behavior.formField.js';
-export * from '../bean/behavior.formFieldModel.js';
 import { IBehaviorOptionsFormField } from '../bean/behavior.formField.js';
-import { IBehaviorOptionsFormFieldModel } from '../bean/behavior.formFieldModel.js';
 import 'zova-module-a-behavior';
 declare module 'zova-module-a-behavior' {
   
     export interface IBehaviorRecord {
       'a-form:formField': IBehaviorOptionsFormField;
-'a-form:formFieldModel': IBehaviorOptionsFormFieldModel;
     }
 
   
@@ -126,28 +123,15 @@ declare module 'zova-module-a-form' {
           get $beanFullName(): 'a-form.behavior.formField';
           get $onionName(): 'a-form:formField';
           get $onionOptions(): IBehaviorOptionsFormField;
-        }
-
-        export interface BehaviorFormFieldModel {
-          /** @internal */
-          get scope(): ScopeModuleAForm;
-        }
-
-        export interface BehaviorFormFieldModel {
-          get $beanFullName(): 'a-form.behavior.formFieldModel';
-          get $onionName(): 'a-form:formFieldModel';
-          get $onionOptions(): IBehaviorOptionsFormFieldModel;
         } 
 }
 /** behavior: end */
 /** behavior: begin */
 import { BehaviorFormField } from '../bean/behavior.formField.js';
-import { BehaviorFormFieldModel } from '../bean/behavior.formFieldModel.js';
 import 'zova';
 declare module 'zova' {
   export interface IBeanRecordLocal {
     'a-form.behavior.formField': BehaviorFormField;
-'a-form.behavior.formFieldModel': BehaviorFormFieldModel;
   }
 }
 /** behavior: end */
@@ -158,7 +142,6 @@ import 'vue/jsx-runtime';
 declare module 'vue' {
   export interface InputHTMLAttributes {
     'bs-formField'?: IBehaviorOptionsFormField | '' | boolean;
-'bs-formFieldModel'?: IBehaviorOptionsFormFieldModel | '' | boolean;
   }
 }
 
@@ -167,7 +150,6 @@ declare module 'vue/jsx-runtime' {
     // need define class/style in IntrinsicAttributes
     export interface IntrinsicAttributes {
       'bs-formField'?: IBehaviorOptionsFormField | '' | boolean;
-'bs-formFieldModel'?: IBehaviorOptionsFormFieldModel | '' | boolean;
     }
   }
 }

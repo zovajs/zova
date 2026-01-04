@@ -6,22 +6,22 @@ import { TypeFormField } from '../types/form.js';
 import { IFormFieldRenderContext, IFormFieldRenderContextProps } from '../types/formField.js';
 import { IFormMeta } from '../types/formMeta.js';
 
-export interface IBehaviorPropsInputFormFieldModel extends IFormFieldRenderContext {}
+export interface IBehaviorPropsInputFormField extends IFormFieldRenderContext {}
 
-export interface IBehaviorPropsOutputFormFieldModel extends IBehaviorPropsInputFormFieldModel {}
+export interface IBehaviorPropsOutputFormField extends IBehaviorPropsInputFormField {}
 
-export interface IBehaviorOptionsFormFieldModel extends IDecoratorBehaviorOptions {}
+export interface IBehaviorOptionsFormField extends IDecoratorBehaviorOptions {}
 
-@Behavior<IBehaviorOptionsFormFieldModel>()
-export class BehaviorFormFieldModel extends BeanBehaviorBase<
-  IBehaviorOptionsFormFieldModel,
-  IBehaviorPropsInputFormFieldModel,
-  IBehaviorPropsOutputFormFieldModel
+@Behavior<IBehaviorOptionsFormField>()
+export class BehaviorFormField extends BeanBehaviorBase<
+  IBehaviorOptionsFormField,
+  IBehaviorPropsInputFormField,
+  IBehaviorPropsOutputFormField
 > {
   @Use({ injectionScope: 'host' })
   $$formField: ControllerFormField;
 
-  protected render(renderContext: IFormFieldRenderContext, next: NextBehavior<IBehaviorPropsOutputFormFieldModel>): VNode {
+  protected render(renderContext: IFormFieldRenderContext, next: NextBehavior<IBehaviorPropsOutputFormField>): VNode {
     this._patchProps(renderContext);
     return next(renderContext);
   }

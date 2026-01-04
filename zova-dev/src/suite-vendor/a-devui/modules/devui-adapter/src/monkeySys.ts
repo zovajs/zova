@@ -33,7 +33,6 @@ export class MonkeySys extends BeanSimple implements IMonkeySysInitialize {
           },
           behaviors: {
             formField: 'a-form:formField',
-            formFieldModel: 'a-form:formFieldModel',
             formFieldLayout: 'devui-form:formFieldLayout',
           },
         },
