@@ -12,8 +12,6 @@ import { Service } from '../lib/bean.js';
 // const SymbolOnionsEnabled = Symbol('SymbolOnionsEnabled');
 // const SymbolOnionsEnabledWrapped = Symbol('SymbolOnionsEnabledWrapped');
 
-const __tableCellFormatTypes = ['vnode', 'fallback', 'value'] as const;
-
 @ProxyDisable()
 @Service()
 export class ServiceOnion<OPTIONS, ONIONNAME extends string> extends BeanSimple {
@@ -36,7 +34,6 @@ export class ServiceOnion<OPTIONS, ONIONNAME extends string> extends BeanSimple 
     if (this.sceneMeta.optionsPackage) {
       this._initOnionsAll();
       this._swapOnions(this.onionsAll);
-      this._sortOnions(this.onionsAll);
     }
   }
 
@@ -74,16 +71,6 @@ export class ServiceOnion<OPTIONS, ONIONNAME extends string> extends BeanSimple 
         return onionOptions.dependents as any;
       },
     });
-  }
-
-  private _sortOnions(onions: IOnionItem<OPTIONS, ONIONNAME>[]) {
-    if (this.sceneName === 'tableCellFormat') {
-      onions.sort((a, b) => {
-        const aType = cast(a.options)?.type ?? 'vnode';
-        const bType = cast(b.options)?.type ?? 'vnode';
-        return __tableCellFormatTypes.indexOf(aType) - __tableCellFormatTypes.indexOf(bType);
-      });
-    }
   }
 
   // getOnionsEnabled(selector?: string) {
