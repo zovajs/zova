@@ -10,7 +10,7 @@ import { ServiceTableFeature } from '../../service/tableFeature.js';
 import { TypeTable } from '../../types/table.js';
 import { TypeTableCellFormatsMatched } from '../../types/tableCellFormat.js';
 
-export interface ControllerTableProps<TData extends any[] = any[]> {
+export interface ControllerTableProps<TData extends unknown | object | any[] = unknown | object | any[]> {
   getTableOptions: () => TableOptionsWithReactiveData<TData>;
   onActionTable?: (action: keyof TypeResourceActionTableRecord) => Promise<any> | undefined;
   onActionRow?: (action: keyof TypeResourceActionRowRecord, row: Row<TData>) => Promise<any> | undefined;
@@ -18,7 +18,7 @@ export interface ControllerTableProps<TData extends any[] = any[]> {
 }
 
 @Controller()
-export class ControllerTable<TData extends any[] = any[]> extends BeanControllerTableBase {
+export class ControllerTable<TData extends unknown | object | any[] = unknown | object | any[]> extends BeanControllerTableBase {
   static $propsDefault = {};
 
   features: BeanTableFeatureBase[] | undefined;

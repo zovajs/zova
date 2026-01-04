@@ -1,20 +1,14 @@
 import { BeanControllerBase } from 'zova';
 import { Controller } from 'zova-module-a-bean';
-import { TypeTable } from 'zova-module-a-table';
+import { type ControllerTableProps as ControllerTablePropsSuper } from 'zova-module-a-table';
 
-export interface ControllerTableProps<T extends {} = {}> {
-  table: TypeTable<T>;
+export interface ControllerTableProps<TData extends unknown | object | any[] = unknown | object | any[]> extends  ControllerTablePropsSuper<TData> {
 }
 
 @Controller()
-export class ControllerTable extends BeanControllerBase {
+export class ControllerTable<TData extends unknown | object | any[] = unknown | object | any[]> extends BeanControllerBase {
   static $propsDefault = {};
 
-  protected async __init__() {
-    this.bean._setBean('$$table', this);
-  }
+  protected async __init__() {}
 
-  get table() {
-    return this.$props.table;
-  }
 }
