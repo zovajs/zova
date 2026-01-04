@@ -1,68 +1,75 @@
+import type { ControllerFormField } from '../component/formField/controller.jsx';
 import { VNode } from 'vue';
-import { disposeInstance, Use } from 'zova';
-import { BeanBehaviorBase, Behavior, IBehaviors, IDecoratorBehaviorOptions, NextBehavior, ServiceComposer } from 'zova-module-a-behavior';
-import { ControllerForm } from '../component/form/controller.jsx';
-import { IFormFieldOptions } from '../types/formField.js';
+import { Use } from 'zova';
+import { BeanBehaviorBase, Behavior, IDecoratorBehaviorOptions, NextBehavior } from 'zova-module-a-behavior';
+import { TypeFormField } from '../types/form.js';
+import { IFormFieldRenderContext, IFormFieldRenderContextProps } from '../types/formField.js';
+import { IFormMeta } from '../types/formMeta.js';
 
-export interface IBehaviorPropsInputFormField {}
+export interface IBehaviorPropsInputFormFieldModel extends IFormFieldRenderContext {}
 
-export interface IBehaviorPropsOutputFormField {}
+export interface IBehaviorPropsOutputFormFieldModel extends IBehaviorPropsInputFormFieldModel {}
 
-export interface IBehaviorOptionsFormField<TParentData = unknown>
-  extends IDecoratorBehaviorOptions, IFormFieldOptions<TParentData> {
-}
+export interface IBehaviorOptionsFormFieldModel extends IDecoratorBehaviorOptions {}
 
-@Behavior<IBehaviorOptionsFormField>()
-export class BehaviorFormField extends BeanBehaviorBase<
-  IBehaviorOptionsFormField,
-  IBehaviorPropsInputFormField,
-  IBehaviorPropsOutputFormField
+@Behavior<IBehaviorOptionsFormFieldModel>()
+export class BehaviorFormFieldModel extends BeanBehaviorBase<
+  IBehaviorOptionsFormFieldModel,
+  IBehaviorPropsInputFormFieldModel,
+  IBehaviorPropsOutputFormFieldModel
 > {
-  private _composer?: ServiceComposer;
-
   @Use({ injectionScope: 'host' })
-  $$form: ControllerForm;
+  $$formField: ControllerFormField;
 
-  protected async __init__(options: IBehaviorOptionsFormField) {
-    // behaviors
-    const behaviors = this._prepareBehaviors(options);
-    if (behaviors) {
-      this._composer = await this.createComposer(behaviors);
+  protected render(renderContext: IFormFieldRenderContext, next: NextBehavior<IBehaviorPropsOutputFormFieldModel>): VNode {
+    this._patchProps(renderContext);
+    return next(renderContext);
+  }
+
+  private _patchProps(renderContext: IFormFieldRenderContext) {
+    const formMeta = this.$$formField.formMeta;
+    const field = this.$$formField.field;
+    if (renderContext.options.renderProvider === 'input') {
+      this._patchProps_input(formMeta, field, renderContext);
     }
   }
 
-  protected __dispose__() {
-    this._disposeComposer();
-  }
-
-  protected async onOptionsChange(options: IBehaviorOptionsFormField) {
-    super.onOptionsChange(options);
-    // behaviors
-    const behaviors = this._prepareBehaviors(options);
-    if (behaviors) {
-      if (!this._composer) {
-        this._composer = await this.createComposer(behaviors);
-      } else {
-        await this._composer.load(behaviors);
-      }
-    } else {
-      this._disposeComposer();
+  private _patchProps_general(
+    formMeta: IFormMeta | undefined,
+    _field: TypeFormField,
+    renderContext: IFormFieldRenderContext,
+  ) {
+    const propsPatch: IFormFieldRenderContextProps = {
+      value: renderContext.options.displayValue,
+    };
+    if (formMeta?.formMode === 'view') {
+      propsPatch.readonly = true;
     }
+    return propsPatch;
   }
 
-  protected render(props: IBehaviorPropsInputFormField, next: NextBehavior<IBehaviorPropsOutputFormField>): VNode {
-    if (!this._composer) return next();
-    return this._composer.render(props, next);
-  }
-
-  private _disposeComposer() {
-    if (this._composer) {
-      disposeInstance(this._composer);
-      this._composer = undefined;
-    }
-  }
-
-  private _prepareBehaviors(_options: IBehaviorOptionsFormField): IBehaviors | undefined {
-    return this.$$form.formProvider.behaviors?.formFieldModel;
+  private _patchProps_input(
+    formMeta: IFormMeta | undefined,
+    field: TypeFormField,
+    renderContext: IFormFieldRenderContext,
+  ) {
+    const renderFlattern = renderContext.options.renderFlattern;
+    const propsGeneral = this._patchProps_general(formMeta, field, renderContext);
+    const inputType = this.$$formField.normalizeInputType(renderFlattern, renderContext.options.inputType);
+    const propsPatch: IFormFieldRenderContextProps = {
+      type: inputType,
+      onChange: renderContext.options.onChange ?? undefined,
+      onInput: renderContext.options.onInput !== undefined
+        ? (renderContext.options.onInput ?? undefined)
+        : (e: Event) => {
+            this.$$formField.handleDisplayValueUpdate((e.target as HTMLInputElement).value, renderContext.options.onDisplayValueUpdate);
+          },
+      onBlur: renderContext.options.onBlur !== undefined
+        ? (renderContext.options.onBlur ?? undefined)
+        : (_e: Event) => {
+            field.api.handleBlur();
+          },
+    };
+    renderContext.props = Object.assign({}, propsGeneral, propsPatch, renderContext.props);
   }
 }
