@@ -1,5 +1,4 @@
 import { Cell, Column, Row, RowData, Table } from '@tanstack/table-core';
-import { TypeComposer } from 'zova-module-a-bean';
 import { BeanTableFeatureBase, IDecoratorTableFeatureOptions, TableFeature } from 'zova-module-a-table';
 
 export interface TableFeatureFormatOptions<_TData extends RowData> {}
@@ -40,25 +39,26 @@ export class TableFeatureFormat extends BeanTableFeatureBase {
     } as TableFeatureFormatOptions<TData>;
   }
 
-  createTable<TData extends RowData>(table: Table<TData>): void {
-    table.getFormat = (accessorKey: string): TypeComposer | undefined => {
-      return table.options.formats?.[accessorKey];
-    };
+  createTable<TData extends RowData>(_table: Table<TData>): void {
+    // table.getFormat = (accessorKey: string): TypeComposer | undefined => {
+    //   return table.options.formats?.[accessorKey];
+    // };
   }
 
-  createCell<TData extends RowData>(cell: Cell<TData, unknown>, column: Column<TData>, _row: Row<TData>, table: Table<TData>): void {
-    Object.defineProperty(cell, 'format', {
-      get() {
-        return table.getFormat(column.id);
-      },
-    });
+  createCell<TData extends RowData>(cell: Cell<TData, unknown>, _column: Column<TData>, _row: Row<TData>, _table: Table<TData>): void {
+    // Object.defineProperty(cell, 'format', {
+    //   get() {
+    //     return table.getFormat(column.id);
+    //   },
+    // });
     cell.formatRender = function (props) {
       props = props ?? this.getContext();
-      const format = cell.format;
-      if (!format) return props.getValue();
-      return format(props, props => {
-        return props.getValue();
-      });
+      return props.getValue();
+      // const format = cell.format;
+      // if (!format) return props.getValue();
+      // return format(props, props => {
+      //   return props.getValue();
+      // });
     };
   }
 }

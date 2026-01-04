@@ -35,8 +35,6 @@ export class ControllerTable<TData extends {} = {}> extends BeanControllerTableB
     this.bean._setBean('$$table', this);
     // features
     await this._createFeatures();
-    // // formats
-    // await this._createFormats();
     // table
     this._createTable();
   }
@@ -44,8 +42,7 @@ export class ControllerTable<TData extends {} = {}> extends BeanControllerTableB
   private _createTable() {
     const self = this;
     const tableOptions = Object.assign({
-      // _features: this.features,
-      get formats() { return self.formats; },
+      _features: this.features,
       getRowId: (row: Row<TData>) => row.id,
       getCoreRowModel: getCoreRowModel(),
       renderFallbackValue: this.scope.config.renderFallbackValue,
@@ -67,8 +64,4 @@ export class ControllerTable<TData extends {} = {}> extends BeanControllerTableB
   private async _createFeatures() {
     this.features = await this.$$serviceTableFeature.loadTableFeatures();
   }
-
-  // private async _createFormats() {
-  //   this.formats = await this.$$serviceTableCellFormat.loadTableCellFormatsMatched(this.properties);
-  // }
 }

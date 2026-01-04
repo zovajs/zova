@@ -1,10 +1,8 @@
 import type { CellContext, RowData } from '@tanstack/vue-table';
 import type { TypeComposer } from 'zova-module-a-bean';
-import type { TypeTableCellFormatsMatched } from './tableCellFormat.js';
 import '@tanstack/vue-table';
 
 export interface TableFeatureFormatOptions<_TData extends RowData> {
-  formats?: TypeTableCellFormatsMatched;
 }
 
 export interface TableFeatureFormatInstance<_TData extends RowData> {
