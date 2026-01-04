@@ -1,14 +1,8 @@
-import type { ColumnDef, RowData, TableOptionsWithReactiveData, useVueTable } from '@tanstack/vue-table';
+import type { ColumnDef, RowData, useVueTable } from '@tanstack/vue-table';
 
 export type TypeTable<TData extends RowData = RowData> = ReturnType<typeof useVueTable<TData>>;
 
 export type TypeColumn<TData extends RowData = RowData> = ColumnDef<TData, any>;
-
-export type TypeTableOptions<TData extends RowData = RowData> = Partial<TableOptionsWithReactiveData<TData>> &
-  {
-    columnsLeft?: TypeColumn[];
-    columnsRight?: TypeColumn[];
-  };
 
 export interface ITablePaged {
   pageNo: number;

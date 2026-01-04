@@ -7,7 +7,7 @@ import { loadSchemaProperties, TypeResourceActionRowRecord, TypeResourceActionTa
 import { BeanControllerTableBase } from '../../lib/beanControllerTableBase.js';
 import { BeanTableFeatureBase } from '../../lib/beanTableFeatureBase.js';
 import { ServiceTableFeature } from '../../service/tableFeature.js';
-import { TypeColumn, TypeTable, TypeTableOptions } from '../../types/table.js';
+import { TypeColumn, TypeTable } from '../../types/table.js';
 
 export interface ControllerTableProps<TData extends {} = {}> {
   data?: TData[];
@@ -47,7 +47,7 @@ export class ControllerTable<TData extends {} = {}> extends BeanControllerTableB
     return this.$props.schema;
   }
 
-  get data(){
+  get data() {
     return this.$props.data;
   }
 

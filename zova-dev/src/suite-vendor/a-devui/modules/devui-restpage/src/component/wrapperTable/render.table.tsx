@@ -10,8 +10,10 @@ export class RenderTable<TData extends {} = {}> extends BeanRenderBase {
     const ComponentTable = this.$zovaComponent(this.$$beanResource.componentTable);
     return (
       <ComponentTable<TData>
-        getTableOptions={() => {
-          return this.getTableOptions();
+        data={this.data}
+        schema={this.schema}
+        getColumnsRight={() => {
+          return this.getColumnsRight();
         }}
         onActionTable={(action: keyof TypeResourceActionTableRecord) => {
           return this.$props.onActionTable?.(action);
