@@ -8,16 +8,18 @@ export class RenderTable<TData extends {} = {}> extends BeanRenderBase {
   public render() {
     // table
     const ComponentTable = this.$zovaComponent(this.$$beanResource.componentTable);
-    <ComponentTable<TData>
-      getTableOptions={() => {
-        return this.getTableOptions();
-      }}
-      onActionTable={(action: keyof TypeResourceActionTableRecord) => {
-        return this.$props.onActionTable?.(action);
-      }}
-      onActionRow={(action: keyof TypeResourceActionRowRecord, row: Row<TData>) => {
-        return this.$props.onActionRow?.(action, row);
-      }}
-    ></ComponentTable>;
+    return (
+      <ComponentTable<TData>
+        getTableOptions={() => {
+          return this.getTableOptions();
+        }}
+        onActionTable={(action: keyof TypeResourceActionTableRecord) => {
+          return this.$props.onActionTable?.(action);
+        }}
+        onActionRow={(action: keyof TypeResourceActionRowRecord, row: Row<TData>) => {
+          return this.$props.onActionRow?.(action, row);
+        }}
+      ></ComponentTable>
+    );
   }
 }
