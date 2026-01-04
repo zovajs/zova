@@ -91,6 +91,31 @@ export interface IZovaComponentRecord {
 }
 }
 /** components: end */
+/** render: begin */
+export * from '../component/table/render.jsx';
+
+import 'zova';
+declare module 'zova' {
+  
+  
+}
+declare module 'zova-module-a-table' {
+  
+        export interface RenderTable {
+          /** @internal */
+          get scope(): ScopeModuleATable;
+        } 
+}
+/** render: end */
+/** render: begin */
+import { RenderTable } from '../component/table/render.jsx';
+import 'zova';
+declare module 'zova' {
+  export interface IBeanRecordLocal {
+    'a-table.render.table': RenderTable;
+  }
+}
+/** render: end */
 /** scope: begin */
 import { BeanScopeBase, type BeanScopeUtil } from 'zova';
 import { Scope } from 'zova-module-a-bean';
