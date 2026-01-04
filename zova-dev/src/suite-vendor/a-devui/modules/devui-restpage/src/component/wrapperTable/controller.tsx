@@ -1,24 +1,24 @@
 import type { BeanResource } from 'zova-module-rest-resource';
-import { createColumnHelper, getCoreRowModel, Row } from '@tanstack/table-core';
+import { createColumnHelper, Row } from '@tanstack/table-core';
 import { SchemaObject } from 'openapi3-ts/oas31';
-import { cast, Use } from 'zova';
+import { Use } from 'zova';
 import { Controller } from 'zova-module-a-bean';
 import { $QueryAutoLoad } from 'zova-module-a-model';
 import { loadSchemaProperties, TypeResourceActionRowRecord, TypeResourceActionTableRecord } from 'zova-module-a-openapi';
-import { BeanControllerTableBase, ITablePaged, ITableQuery, ITableResPaged, TypeColumn } from 'zova-module-a-table';
+import { BeanControllerTableBase, ITablePaged, ITableQuery, ITableResPaged, TypeColumn, TypeTableOptions } from 'zova-module-a-table';
 import { RenderActions } from './render.actions.jsx';
 
-export interface ControllerWrapperTableProps<T extends {} = {}> {
+export interface ControllerWrapperTableProps<TData extends {} = {}> {
   onActionTable?: (action: keyof TypeResourceActionTableRecord) => Promise<any> | undefined;
-  onActionRow?: (action: keyof TypeResourceActionRowRecord, row: Row<T>) => Promise<any> | undefined;
+  onActionRow?: (action: keyof TypeResourceActionRowRecord, row: Row<TData>) => Promise<any> | undefined;
 }
 
 @Controller()
-export class ControllerWrapperTable<T extends {} = {}> extends BeanControllerTableBase {
+export class ControllerWrapperTable<TData extends {} = {}> extends BeanControllerTableBase {
   static $propsDefault = {};
 
   properties: SchemaObject[] | undefined;
-  columns: TypeColumn<T>[];
+  columns: TypeColumn<TData>[];
 
   queryFilterData: {};
   queryPaged: ITablePaged;
@@ -87,33 +87,17 @@ export class ControllerWrapperTable<T extends {} = {}> extends BeanControllerTab
           cell: props => this.$$renderActions.renderActions(props as any),
         }));
       }
-      return columns as TypeColumn<T>[];
+      return columns as TypeColumn<TData>[];
     });
   }
 
-  private _createTable() {
+  public getTableOptions(): TypeTableOptions<TData> {
     const self = this;
-    this.table = this.$useTable({
-      _features: this.features,
-      get actions() {
-        return {
-          onActionTable: (action: keyof TypeResourceActionTableRecord) => {
-            return self.$props.onActionTable?.(action);
-          },
-          onActionRow: (action: keyof TypeResourceActionRowRecord, row: Row<T>) => {
-            return self.$props.onActionRow?.(action, row);
-          },
-        };
-      },
+    return {
       get schema() { return self.schema; },
-      get formats() { return self.formats; },
       get data() { return self.data || []; },
       get columns() { return self.columns; },
-      getRowId: row => cast(row).id,
-      getCoreRowModel: getCoreRowModel(),
-      renderFallbackValue: '--',
-      manualPagination: true,
-    });
+    };
   }
 
   _onFilter(data: any) {
@@ -124,7 +108,7 @@ export class ControllerWrapperTable<T extends {} = {}> extends BeanControllerTab
     return this.$props.onActionTable?.(action);
   }
 
-  async onActionRow(action: keyof TypeResourceActionRowRecord, row: Row<T>) {
+  async onActionRow(action: keyof TypeResourceActionRowRecord, row: Row<TData>) {
     return this.$props.onActionRow?.(action, row);
   }
 

@@ -116,8 +116,12 @@ declare module 'zova' {
   }
 }
 /** render: end */
+/** config: begin */
+export * from '../config/config.js';
+import { config } from '../config/config.js';
+/** config: end */
 /** scope: begin */
-import { BeanScopeBase, type BeanScopeUtil } from 'zova';
+import { BeanScopeBase, type BeanScopeUtil, TypeModuleConfig } from 'zova';
 import { Scope } from 'zova-module-a-bean';
 
 @Scope()
@@ -125,6 +129,7 @@ export class ScopeModuleATable extends BeanScopeBase {}
 
 export interface ScopeModuleATable {
   util: BeanScopeUtil;
+config: TypeModuleConfig<typeof config>;
 }
 
 import 'zova';
@@ -133,7 +138,9 @@ declare module 'zova' {
     'a-table': ScopeModuleATable;
   }
   
-  
+  export interface IBeanScopeConfig {
+    'a-table': ReturnType<typeof config>;
+  }
 
   
 

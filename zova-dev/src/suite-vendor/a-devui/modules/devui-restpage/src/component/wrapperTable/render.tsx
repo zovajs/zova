@@ -3,9 +3,13 @@ import { Render } from 'zova-module-a-bean';
 import { ZWrapperFilter } from '../../.metadata/index.js';
 import { RenderCreate } from './render.create.jsx';
 import { RenderPaged } from './render.paged.jsx';
+import { RenderTable } from './render.table.jsx';
 
 @Render()
 export class RenderWrapperTable extends BeanRenderBase {
+  @Use()
+  $$renderTable: RenderTable;
+
   @Use()
   $$renderCreate: RenderCreate;
 
@@ -13,8 +17,6 @@ export class RenderWrapperTable extends BeanRenderBase {
   $$renderPaged: RenderPaged;
 
   public render() {
-    // table
-    const ComponentTable = this.$zovaComponent(this.$$beanResource.componentTable);
     return (
       <div>
         <ZWrapperFilter
@@ -26,9 +28,7 @@ export class RenderWrapperTable extends BeanRenderBase {
         <div>
           {this.$$renderCreate.render()}
         </div>
-        <ComponentTable
-          table={this.table}
-        ></ComponentTable>
+        {this.$$renderTable.render()}
         <div>
           {this.$$renderPaged.render()}
         </div>

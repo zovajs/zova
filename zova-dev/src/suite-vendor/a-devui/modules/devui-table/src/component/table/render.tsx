@@ -4,7 +4,7 @@ import { Render } from 'zova-module-a-bean';
 import { ControllerTable, ZTable } from 'zova-module-a-table';
 
 @Render()
-export class RenderTable<TData extends unknown | object | any[] = unknown | object | any[]> extends BeanRenderBase {
+export class RenderTable<TData extends {} = {}> extends BeanRenderBase {
   public render() {
     return (
       <ZTable

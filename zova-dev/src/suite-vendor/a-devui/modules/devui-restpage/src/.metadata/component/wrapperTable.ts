@@ -5,25 +5,26 @@ import { prepareComponentOptions, useController } from 'zova';
 import { ControllerWrapperTable } from '../../component/wrapperTable/controller.jsx';
 import { RenderWrapperTable } from '../../component/wrapperTable/render.jsx';
 
-export type TypeControllerWrapperTablePublicProps<T extends {} = {}> = {
-  controllerRef?: (ref: ControllerWrapperTable<T>) => void;
-} & ControllerWrapperTableProps<T>;
+export type TypeControllerWrapperTablePublicProps<TData extends {} = {}> = {
+  controllerRef?: (ref: ControllerWrapperTable<TData>) => void;
+} & ControllerWrapperTableProps<TData>;
 
-type ControllerInnerProps<T extends {} = {}> =
-  TypeControllerInnerProps<ControllerWrapperTableProps<T>, keyof typeof ControllerWrapperTable.$propsDefault>;
+type ControllerInnerProps<TData extends {} = {}> =
+  TypeControllerInnerProps<ControllerWrapperTableProps<TData>, keyof typeof ControllerWrapperTable.$propsDefault>;
 declare module 'zova-module-devui-restpage' {
-  export interface ControllerWrapperTable<T extends {} = {}> {
-    $props: ControllerInnerProps<T>;
+  export interface ControllerWrapperTable<TData extends {} = {}> {
+    $props: ControllerInnerProps<TData>;
   }
 }
 declare module 'zova-module-devui-restpage' {
-  export interface RenderWrapperTable<T extends {} = {}> extends ControllerWrapperTable<T> {}
-  export interface RenderActions<T extends {} = {}> extends ControllerWrapperTable<T> {}
-  export interface RenderCreate<T extends {} = {}> extends ControllerWrapperTable<T> {}
-  export interface RenderPaged<T extends {} = {}> extends ControllerWrapperTable<T> {}
+  export interface RenderWrapperTable<TData extends {} = {}> extends ControllerWrapperTable<TData> {}
+  export interface RenderActions<TData extends {} = {}> extends ControllerWrapperTable<TData> {}
+  export interface RenderCreate<TData extends {} = {}> extends ControllerWrapperTable<TData> {}
+  export interface RenderPaged<TData extends {} = {}> extends ControllerWrapperTable<TData> {}
+  export interface RenderTable<TData extends {} = {}> extends ControllerWrapperTable<TData> {}
 }
 export const ZWrapperTable = defineComponent(
-  <T extends {} = {}>(_props: TypeControllerWrapperTablePublicProps<T>) => {
+  <TData extends {} = {}>(_props: TypeControllerWrapperTablePublicProps<TData>) => {
     useController(ControllerWrapperTable, RenderWrapperTable, undefined);
     return () => {};
   },

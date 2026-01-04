@@ -4,8 +4,8 @@ import { Render } from 'zova-module-a-bean';
 import { ZIcon } from 'zova-module-a-icon';
 
 @Render()
-export class RenderActions<T extends {} = {}> extends BeanRenderBase {
-  public renderActions(props: CellContext<T, unknown>) {
+export class RenderActions<TData extends {} = {}> extends BeanRenderBase {
+  public renderActions(props: CellContext<TData, unknown>) {
     return (
       <div class="flex gap-2">
         {this.$$beanResource.permissions?.row?.update && (

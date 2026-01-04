@@ -1,4 +1,4 @@
-import { getCoreRowModel, Row, TableOptionsWithReactiveData } from '@tanstack/vue-table';
+import { getCoreRowModel, Row } from '@tanstack/vue-table';
 import { VNode } from 'vue';
 import { Use } from 'zova';
 import { Controller } from 'zova-module-a-bean';
@@ -7,18 +7,18 @@ import { BeanControllerTableBase } from '../../lib/beanControllerTableBase.js';
 import { BeanTableFeatureBase } from '../../lib/beanTableFeatureBase.js';
 import { ServiceTableCellFormat } from '../../service/tableCellFormat.js';
 import { ServiceTableFeature } from '../../service/tableFeature.js';
-import { TypeTable } from '../../types/table.js';
+import { TypeTable, TypeTableOptions } from '../../types/table.js';
 import { TypeTableCellFormatsMatched } from '../../types/tableCellFormat.js';
 
-export interface ControllerTableProps<TData extends unknown | object | any[] = unknown | object | any[]> {
-  getTableOptions: () => TableOptionsWithReactiveData<TData>;
+export interface ControllerTableProps<TData extends {} = {}> {
+  getTableOptions: () => TypeTableOptions<TData>;
   onActionTable?: (action: keyof TypeResourceActionTableRecord) => Promise<any> | undefined;
   onActionRow?: (action: keyof TypeResourceActionRowRecord, row: Row<TData>) => Promise<any> | undefined;
   slotDefault?: (table: ControllerTable<TData>) => VNode;
 }
 
 @Controller()
-export class ControllerTable<TData extends unknown | object | any[] = unknown | object | any[]> extends BeanControllerTableBase {
+export class ControllerTable<TData extends {} = {}> extends BeanControllerTableBase {
   static $propsDefault = {};
 
   features: BeanTableFeatureBase[] | undefined;
@@ -48,7 +48,7 @@ export class ControllerTable<TData extends unknown | object | any[] = unknown | 
       get formats() { return self.formats; },
       getRowId: (row: Row<TData>) => row.id,
       getCoreRowModel: getCoreRowModel(),
-      renderFallbackValue: '--',
+      renderFallbackValue: this.scope.config.renderFallbackValue,
       manualPagination: true,
       get actions() {
         return {
