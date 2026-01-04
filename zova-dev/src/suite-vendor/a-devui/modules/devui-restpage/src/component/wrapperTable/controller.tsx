@@ -19,9 +19,6 @@ export class ControllerWrapperTable<T extends {} = {}> extends BeanControllerTab
 
   properties: SchemaObject[] | undefined;
   columns: TypeColumn<T>[];
-  features: BeanTableFeatureBase[] | undefined;
-  formats: TypeTableCellFormatsMatched;
-  table: TypeTable<T>;
 
   queryFilterData: {};
   queryPaged: ITablePaged;
@@ -29,12 +26,6 @@ export class ControllerWrapperTable<T extends {} = {}> extends BeanControllerTab
 
   @Use({ injectionScope: 'host' })
   $$beanResource: BeanResource;
-
-  @Use()
-  $$serviceTableCellFormat: ServiceTableCellFormat;
-
-  @Use()
-  $$serviceTableFeature: ServiceTableFeature;
 
   @Use()
   $$renderActions: RenderActions;
@@ -50,12 +41,6 @@ export class ControllerWrapperTable<T extends {} = {}> extends BeanControllerTab
     this._loadProperties();
     // columns
     this._createColumns();
-    // features
-    await this._createFeatures();
-    // formats
-    await this._createFormats();
-    // table
-    this._createTable();
     // load data
     await $QueryAutoLoad(() => this.queryData);
   }
@@ -104,14 +89,6 @@ export class ControllerWrapperTable<T extends {} = {}> extends BeanControllerTab
       }
       return columns as TypeColumn<T>[];
     });
-  }
-
-  private async _createFeatures() {
-    this.features = await this.$$serviceTableFeature.loadTableFeatures();
-  }
-
-  private async _createFormats() {
-    this.formats = await this.$$serviceTableCellFormat.loadTableCellFormatsMatched(this.properties);
   }
 
   private _createTable() {

@@ -3,5 +3,13 @@ import { Render } from 'zova-module-a-bean';
 
 @Render()
 export class RenderTable extends BeanRenderBase {
-  public render() {}
+  private _renderTableDefault() {
+    return <table></table>;
+  }
+
+  public render() {
+    return this.$slotDefault
+      ? this.$slotDefault()
+      : this._renderTableDefault();
+  }
 }
