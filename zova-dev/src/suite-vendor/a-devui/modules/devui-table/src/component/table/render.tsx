@@ -1,16 +1,29 @@
 import { FlexRender } from '@tanstack/vue-table';
 import { BeanRenderBase } from 'zova';
 import { Render } from 'zova-module-a-bean';
+import { ControllerTable, ZTable } from 'zova-module-a-table';
 
 @Render()
-export class RenderTable extends BeanRenderBase {
+export class RenderTable<TData extends unknown | object | any[] = unknown | object | any[]> extends BeanRenderBase {
   public render() {
+    return (
+      <ZTable
+        {...this.$props}
+        slotDefault={$$table => {
+          return this._renderTable($$table);
+        }}
+      ></ZTable>
+    );
+  }
+
+  public _renderTable($$table: ControllerTable<TData>) {
+    const table = $$table.table;
     return (
       <div class="overflow-x-auto">
         <table class="table">
           <thead>
             <tr>
-              {this.table.getFlatHeaders().map(header => {
+              {table.getFlatHeaders().map(header => {
                 return (
                   <th key={header.id}>
                     <FlexRender render={header.column.columnDef.header} props={header.getContext()}></FlexRender>
@@ -20,7 +33,7 @@ export class RenderTable extends BeanRenderBase {
             </tr>
           </thead>
           <tbody>
-            {this.table.getRowModel().rows.map(row => {
+            {table.getRowModel().rows.map(row => {
               return (
                 <tr key={row.id}>
                   {row.getVisibleCells().map(cell => {
