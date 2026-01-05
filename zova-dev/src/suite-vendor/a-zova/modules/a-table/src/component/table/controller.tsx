@@ -175,9 +175,9 @@ export class ControllerTable<TData extends {} = {}> extends BeanControllerTableB
     let beanInstance: ITableCellRender | undefined;
     let onionOptions: IDecoratorTableCellOptions | undefined;
     if (typeof renderProvider === 'string' && renderProvider.includes('.tableCell.')) {
+      beanInstance = await this.sys.bean._getBean(renderProvider as any, true);
       const beanOptions = appResource.getBean(renderProvider as any);
       onionOptions = beanOptions?.options as IDecoratorTableCellOptions | undefined;
-      beanInstance = await this.sys.bean._getBean(renderProvider as any, true);
     }
     return cellContext => {
       if (!cellContext) return;

@@ -16,10 +16,10 @@ export class TableCellTest extends BeanBase implements ITableCellRender {
     const iconPrefix = options.iconPrefix;
     if (!iconPrefix) return value;
     return (
-      <>
+      <div>
         <ZIcon name={iconPrefix as any}></ZIcon>
         <span>{value}</span>
-      </>
+      </div>
     );
   }
 }
