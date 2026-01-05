@@ -126,6 +126,7 @@ async function _useController(
       await ctx.bean._newBeanInner(true, BeanRenderIdentifier, undefined, undefined, renderBeanFullName, true, false);
     }
     // must touch inited on server/client, force router.use effect
+    if (!ctx.instance) return;
     ctx.meta.state.inited.touch();
     if (process.env.CLIENT) {
       ctx.util.instanceScope(() => {

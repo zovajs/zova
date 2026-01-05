@@ -82,6 +82,14 @@ export class ControllerTable<TData extends {} = {}> extends BeanControllerTableB
     return this.$props.data;
   }
 
+  public onActionTable(action: keyof TypeResourceActionTableRecord) {
+    return this.$props.onActionTable?.(action, this);
+  }
+
+  public onActionRow(action: keyof TypeResourceActionRowRecord, row: Row<TData>) {
+    return this.$props.onActionRow?.(action, row, this);
+  }
+
   private _createTable() {
     const self = this;
     const tableOptions: TableOptionsWithReactiveData<TData> = {
@@ -90,16 +98,6 @@ export class ControllerTable<TData extends {} = {}> extends BeanControllerTableB
       getCoreRowModel: getCoreRowModel(),
       renderFallbackValue: this.scope.config.renderFallbackValue,
       manualPagination: true,
-      get actions() {
-        return {
-          onActionTable: (action: keyof TypeResourceActionTableRecord) => {
-            return self.$props.onActionTable?.(action, self);
-          },
-          onActionRow: (action: keyof TypeResourceActionRowRecord, row: Row<TData>) => {
-            return self.$props.onActionRow?.(action, row, self);
-          },
-        };
-      },
       get schema() { return self.schema; },
       get data() { return self.data || []; },
       get columns() { return self.columns; },

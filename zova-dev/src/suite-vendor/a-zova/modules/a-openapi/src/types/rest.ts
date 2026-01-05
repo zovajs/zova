@@ -1,6 +1,6 @@
 import type { CurrencyOptions } from '@zhennann/currency';
 import type { ComponentPublicInstance } from 'vue';
-import type { Constructable, IComponentRecord } from 'zova';
+import type { Constructable, IComponentRecord, TypeBeanRecordGeneralSelector } from 'zova';
 import type { TypeRenderComponentJsx } from 'zova-jsx';
 import type { TypeResourceActionRowRecordRender } from './actions.js';
 import 'openapi3-ts/oas30';
@@ -58,4 +58,4 @@ export type TypeFormFieldRenderComponentProvider = Constructable<ComponentPublic
 export type TypeTableCellRenderComponentNormal =
   Constructable<ComponentPublicInstance> | (keyof IComponentRecord) | TypeRenderComponentPreset;
 export type TypeTableCellRenderComponent = TypeTableCellRenderComponentNormal | TypeRenderComponentJsx;
-export type TypeTableCellRenderComponentProvider = Constructable<ComponentPublicInstance> | (keyof IComponentRecord) | 'text';
+export type TypeTableCellRenderComponentProvider = Constructable<ComponentPublicInstance> | (keyof TypeBeanRecordGeneralSelector<'tableCell'>) | 'text';

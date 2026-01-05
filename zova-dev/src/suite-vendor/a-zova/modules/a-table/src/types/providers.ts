@@ -1,6 +1,7 @@
 import type { TypeTableCellRenderComponentProvider } from 'zova-module-a-openapi';
 
 export interface ITableProviderComponents {
+  actionView?: TypeTableCellRenderComponentProvider;
   currency?: TypeTableCellRenderComponentProvider;
 }
 

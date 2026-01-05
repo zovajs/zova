@@ -29,7 +29,7 @@ declare module 'zova-module-devui-tableaction' {
 import { TableCellActionView } from '../bean/tableCell.actionView.jsx';
 import 'zova';
 declare module 'zova' {
-  export interface IBeanRecordLocal {
+  export interface IBeanRecordGeneral {
     'devui-tableaction.tableCell.actionView': TableCellActionView;
   }
 }

@@ -21,6 +21,7 @@
     },
     "onions": {
       "tableCell": {
+        "beanGeneral": true,
         "optionsGlobalInterfaceName": "IDecoratorTableCellOptions",
         "optionsGlobalInterfaceFrom": "zova-module-a-table",
         "boilerplate": "cli/tableCell/boilerplate"
