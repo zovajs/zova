@@ -458,8 +458,8 @@ declare module 'zova' {
 }
 /** theme: end */
 /** tableCell: begin */
-export * from '../bean/tableCell.test.js';
-import { ITableCellOptionsTest } from '../bean/tableCell.test.js';
+export * from '../bean/tableCell.test.jsx';
+import { ITableCellOptionsTest } from '../bean/tableCell.test.jsx';
 import 'zova-module-a-table';
 declare module 'zova-module-a-table' {
   
@@ -484,7 +484,7 @@ declare module 'zova-module-demo-basic' {
 }
 /** tableCell: end */
 /** tableCell: begin */
-import { TableCellTest } from '../bean/tableCell.test.js';
+import { TableCellTest } from '../bean/tableCell.test.jsx';
 import 'zova';
 declare module 'zova' {
   export interface IBeanRecordLocal {
