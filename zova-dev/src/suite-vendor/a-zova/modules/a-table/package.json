@@ -25,12 +25,6 @@
         "optionsGlobalInterfaceName": "IDecoratorTableCellOptions",
         "optionsGlobalInterfaceFrom": "zova-module-a-table",
         "boilerplate": "cli/tableCell/boilerplate"
-      },
-      "tableFeature": {
-        "optionsPackage": true,
-        "optionsGlobalInterfaceName": "IDecoratorTableFeatureOptions",
-        "optionsGlobalInterfaceFrom": "zova-module-a-table",
-        "boilerplate": "cli/tableFeature/boilerplate"
       }
     }
   },
