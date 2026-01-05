@@ -1,4 +1,6 @@
 import type { ColumnDef, RowData, useVueTable } from '@tanstack/vue-table';
+import type { SchemaObject } from 'openapi3-ts/oas31';
+import type { TypeTableCellRender } from './tableColumn.js';
 
 export type TypeTable<TData extends RowData = RowData> = ReturnType<typeof useVueTable<TData>>;
 
@@ -28,4 +30,9 @@ export interface ITableResPaged {
   pageCount: number;
   pageSize: number;
   pageNo: number;
+}
+
+export interface ITableMeta {
+  properties: SchemaObject[];
+  renders: TypeTableCellRender[];
 }

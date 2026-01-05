@@ -10,17 +10,17 @@ import { BeanControllerTableBase } from '../../lib/beanControllerTableBase.js';
 import { BeanTableFeatureBase } from '../../lib/beanTableFeatureBase.js';
 import { ServiceTableFeature } from '../../service/tableFeature.js';
 import { ITableProvider } from '../../types/providers.js';
-import { TypeColumn, TypeTable } from '../../types/table.js';
+import { ITableMeta, TypeColumn, TypeTable } from '../../types/table.js';
 import { constColumnProps, ITableCellRenderContextOptions, TypeTableCellRender } from '../../types/tableColumn.js';
 
 export interface ControllerTableProps<TData extends {} = {}> {
   data?: TData[];
   schema?: SchemaObject;
   tableProvider?: ITableProvider;
-  getColumnsLeft?: () => (TypeColumn<TData>[] | undefined);
-  getColumnsRight?: () => (TypeColumn<TData>[] | undefined);
-  onActionTable?: (action: keyof TypeResourceActionTableRecord) => Promise<any> | undefined;
-  onActionRow?: (action: keyof TypeResourceActionRowRecord, row: Row<TData>) => Promise<any> | undefined;
+  getColumnsLeft?: (table: ControllerTable<TData>) => (TypeColumn<TData>[] | undefined);
+  getColumnsRight?: (table: ControllerTable<TData>) => (TypeColumn<TData>[] | undefined);
+  onActionTable?: (action: keyof TypeResourceActionTableRecord, table: ControllerTable<TData>) => Promise<any> | undefined;
+  onActionRow?: (action: keyof TypeResourceActionRowRecord, row: Row<TData>, table: ControllerTable<TData>) => Promise<any> | undefined;
   slotDefault?: (table: ControllerTable<TData>) => VNode;
 }
 
@@ -33,6 +33,7 @@ export class ControllerTable<TData extends {} = {}> extends BeanControllerTableB
   features: BeanTableFeatureBase[] | undefined;
   table: TypeTable<TData>;
   tableProvider: ITableProvider;
+  tableMeta: ITableMeta;
   zovaJsx: ZovaJsx;
   columnCelEnv: typeof celEnvBase;
 
@@ -91,10 +92,10 @@ export class ControllerTable<TData extends {} = {}> extends BeanControllerTableB
       get actions() {
         return {
           onActionTable: (action: keyof TypeResourceActionTableRecord) => {
-            return self.$props.onActionTable?.(action);
+            return self.$props.onActionTable?.(action, self);
           },
           onActionRow: (action: keyof TypeResourceActionRowRecord, row: Row<TData>) => {
-            return self.$props.onActionRow?.(action, row);
+            return self.$props.onActionRow?.(action, row, self);
           },
         };
       },
@@ -108,8 +109,8 @@ export class ControllerTable<TData extends {} = {}> extends BeanControllerTableB
   private _createColumns() {
     this.columns = this.$useComputed(() => {
       if (!this.properties) return [];
-      const columnsLeft = this.$props.getColumnsLeft?.();
-      const columnsRight = this.$props.getColumnsRight?.();
+      const columnsLeft = this.$props.getColumnsLeft?.(this);
+      const columnsRight = this.$props.getColumnsRight?.(this);
       const columnsMiddle = this._createColumnsMiddle();
       let columns: TypeColumn<TData>[] = [];
       if (columnsLeft) columns = columns.concat(columnsLeft);
@@ -120,10 +121,9 @@ export class ControllerTable<TData extends {} = {}> extends BeanControllerTableB
   }
 
   private _createColumnsMiddle() {
-    if (!this.properties) return;
     const columnHelper = createColumnHelper<TData>();
     const columns: TypeColumn<TData>[] = [];
-    for (const property of this.properties) {
+    for (const property of this.tableMeta.properties) {
       const key = property.key!;
       columns.push(columnHelper.accessor(key as any, {
         id: key,
@@ -154,10 +154,11 @@ export class ControllerTable<TData extends {} = {}> extends BeanControllerTableB
         const props = this.getColumnComponentPropsTop(key, celScope);
         if (cast(props).visible === false) continue;
         // property
-        properties.push(property)
+        properties.push(property);
         // render
       }
     }
+    this.tableMeta = { properties, renders };
   }
 
   private async _createFeatures() {
