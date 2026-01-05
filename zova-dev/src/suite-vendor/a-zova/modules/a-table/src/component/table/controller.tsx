@@ -11,7 +11,7 @@ import { BeanTableFeatureBase } from '../../lib/beanTableFeatureBase.js';
 import { ServiceTableFeature } from '../../service/tableFeature.js';
 import { ITableProvider } from '../../types/providers.js';
 import { TypeColumn, TypeTable } from '../../types/table.js';
-import { constColumnProps, TypeTableCellRender } from '../../types/tableColumn.js';
+import { constColumnProps, ITableCellRenderContextOptions, TypeTableCellRender } from '../../types/tableColumn.js';
 
 export interface ControllerTableProps<TData extends {} = {}> {
   data?: TData[];
@@ -152,7 +152,10 @@ export class ControllerTable<TData extends {} = {}> extends BeanControllerTableB
         const celScope = this.getColumnScope(key);
         // props
         const props = this.getColumnComponentPropsTop(key, celScope);
-        if (cast(props).visible === false) return;
+        if (cast(props).visible === false) continue;
+        // property
+        properties.push(property)
+        // render
       }
     }
   }
@@ -182,7 +185,7 @@ export class ControllerTable<TData extends {} = {}> extends BeanControllerTableB
     };
   }
 
-  public getColumnComponentPropsTop(name: string, celScope: {}): IFormFieldRenderContextOptions {
+  public getColumnComponentPropsTop(name: string, celScope: {}): ITableCellRenderContextOptions {
     const props: any = { [constColumnProps]: true, key: name, name };
     const property = this.getColumnProperty(name);
     if (!property) return props;

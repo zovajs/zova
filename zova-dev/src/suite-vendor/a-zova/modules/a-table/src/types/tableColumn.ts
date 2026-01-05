@@ -1,5 +1,12 @@
 import type { CellContext, RowData } from '@tanstack/table-core';
+import { TypeTableCellRenderComponent } from 'zova-module-a-openapi';
 
 export const constColumnProps = '$$ColumnProps';
 
 export type TypeTableCellRender<TData extends RowData = RowData, TValue = any> = (props?: CellContext<TData, TValue>) => any;
+
+export interface ITableCellRenderContextOptions {
+  key: string;
+  name: string;
+  render: TypeTableCellRenderComponent;
+}

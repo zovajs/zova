@@ -3,7 +3,7 @@ import type z from 'zod';
 import type { TypeRenderComponentJsx } from 'zova-jsx';
 import type { IBehaviorItem } from 'zova-module-a-behavior';
 import type { IIconRecord } from 'zova-module-a-icon';
-import type { TypeRenderComponent, TypeRenderComponentProvider } from 'zova-module-a-openapi';
+import type { TypeFormFieldRenderComponent, TypeFormFieldRenderComponentProvider } from 'zova-module-a-openapi';
 import type { ControllerFormField } from '../component/formField/controller.jsx';
 import type { TypeBehaviorFormFieldOptions } from './form.js';
 
@@ -25,7 +25,7 @@ export interface IFormFieldLayoutOptionsBase {
 
 export type TypeFormFieldOnDisplayValueUpdate = (value: any) => any;
 export interface IFormFieldOptionsBase {
-  render?: TypeRenderComponent;
+  render?: TypeFormFieldRenderComponent;
   displayValue?: any;
   onDisplayValueUpdate?: TypeFormFieldOnDisplayValueUpdate;
   class?: any;
@@ -59,9 +59,9 @@ export interface IFormFieldRenderContextProps {
 }
 
 export interface IFormFieldRenderContextOptions<TParentData = {}> extends Omit<IFormFieldOptions<TParentData>, 'render'> {
-  render: TypeRenderComponent;
-  renderFlattern?: TypeRenderComponent;
-  renderProvider?: TypeRenderComponentProvider;
+  render: TypeFormFieldRenderComponent;
+  renderFlattern?: TypeFormFieldRenderComponent;
+  renderProvider?: TypeFormFieldRenderComponentProvider;
 }
 
 export interface IFormFieldRenderContext<TParentData = {}> {

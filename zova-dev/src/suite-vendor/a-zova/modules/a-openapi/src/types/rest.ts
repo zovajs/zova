@@ -7,7 +7,7 @@ import 'openapi3-ts/oas30';
 import 'openapi3-ts/oas31';
 
 export interface ISchemaObjectExtensionFieldRest {
-  render?: TypeRenderComponent;
+  render?: TypeFormFieldRenderComponentNormal | TypeTableCellRenderComponentNormal;
   currency?: CurrencyOptions | boolean;
   visible?: boolean;
   order?: number;
@@ -40,16 +40,20 @@ declare module 'openapi3-ts/oas31' {
   export interface SchemaObject extends ISchemaObjectExtensionField {}
 }
 
-export type TypeRenderComponentPreset = keyof TypeResourceActionRowRecordRender | 'text' | 'currency' | 'textarea' | 'select' | 'checkbox' | 'radio' | 'switch' | 'image' | 'file' | 'color' | 'password' | 'email' | 'url';
-
-export type TypeRenderComponentNormal =
-  Constructable<ComponentPublicInstance> | (keyof IComponentRecord) | TypeRenderComponentPreset;
-
-export type TypeRenderComponent = TypeRenderComponentNormal | TypeRenderComponentJsx;
-
-export type TypeFormFieldRenderComponentProvider = Constructable<ComponentPublicInstance> | (keyof IComponentRecord) | 'input' | 'textarea' | 'select';
-export type TypeTableCellRenderComponentProvider = Constructable<ComponentPublicInstance> | (keyof IComponentRecord) | 'text';
-
 export type TypeSchemaScene = 'table' | 'form';
 
 export const renderFieldTopPropsSystem = ['order', 'table', 'form'];
+
+export type TypeRenderComponentPreset = keyof TypeResourceActionRowRecordRender | 'text' | 'currency' | 'textarea' | 'select' | 'checkbox' | 'radio' | 'switch' | 'image' | 'file' | 'color' | 'password' | 'email' | 'url';
+
+// form
+export type TypeFormFieldRenderComponentNormal =
+  Constructable<ComponentPublicInstance> | (keyof IComponentRecord) | TypeRenderComponentPreset;
+export type TypeFormFieldRenderComponent = TypeFormFieldRenderComponentNormal | TypeRenderComponentJsx;
+export type TypeFormFieldRenderComponentProvider = Constructable<ComponentPublicInstance> | (keyof IComponentRecord) | 'input' | 'textarea' | 'select';
+
+// table
+export type TypeTableCellRenderComponentNormal =
+  Constructable<ComponentPublicInstance> | (keyof IComponentRecord) | TypeRenderComponentPreset;
+export type TypeTableCellRenderComponent = TypeTableCellRenderComponentNormal | TypeRenderComponentJsx;
+export type TypeTableCellRenderComponentProvider = Constructable<ComponentPublicInstance> | (keyof IComponentRecord) | 'text';
