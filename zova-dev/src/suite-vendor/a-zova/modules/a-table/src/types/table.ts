@@ -32,7 +32,8 @@ export interface ITableResPaged {
   pageNo: number;
 }
 
-export interface ITableMeta {
+export interface ITableMeta<TData extends RowData = RowData> {
   properties: SchemaObject[];
-  renders: TypeTableCellRender[];
+  renders: TypeTableCellRender<TData>[];
+  columnScopes: Record<string, {}>;
 }

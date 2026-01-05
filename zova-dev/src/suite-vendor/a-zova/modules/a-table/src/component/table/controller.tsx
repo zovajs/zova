@@ -3,9 +3,9 @@ import { createColumnHelper, getCoreRowModel, Row, TableOptionsWithReactiveData 
 import { SchemaObject } from 'openapi3-ts/oas31';
 import { VNode } from 'vue';
 import { cast, deepEqual, deepExtend, Use, UseScope } from 'zova';
-import { ZovaJsx } from 'zova-jsx';
+import { isJsxComponent, ZovaJsx } from 'zova-jsx';
 import { Controller } from 'zova-module-a-bean';
-import { loadSchemaProperties, renderTableColumnTopPropsSystem, ScopeModuleAOpenapi, TypeResourceActionRowRecord, TypeResourceActionTableRecord } from 'zova-module-a-openapi';
+import { loadSchemaProperties, renderTableColumnTopPropsSystem, ScopeModuleAOpenapi, TypeResourceActionRowRecord, TypeResourceActionTableRecord, TypeTableCellRenderComponent, TypeTableCellRenderComponentProvider } from 'zova-module-a-openapi';
 import { BeanControllerTableBase } from '../../lib/beanControllerTableBase.js';
 import { BeanTableFeatureBase } from '../../lib/beanTableFeatureBase.js';
 import { ServiceTableFeature } from '../../service/tableFeature.js';
@@ -33,7 +33,7 @@ export class ControllerTable<TData extends {} = {}> extends BeanControllerTableB
   features: BeanTableFeatureBase[] | undefined;
   table: TypeTable<TData>;
   tableProvider: ITableProvider;
-  tableMeta: ITableMeta;
+  tableMeta: ITableMeta<TData>;
   zovaJsx: ZovaJsx;
   columnCelEnv: typeof celEnvBase;
 
@@ -144,7 +144,7 @@ export class ControllerTable<TData extends {} = {}> extends BeanControllerTableB
 
   private async _createTableMeta() {
     const properties: SchemaObject[] = [];
-    const renders: TypeTableCellRender[] = [];
+    const renders: TypeTableCellRender<TData>[] = [];
     const columnScopes: Record<string, {}> = {};
     if (this.properties) {
       for (const property of this.properties) {
@@ -154,13 +154,47 @@ export class ControllerTable<TData extends {} = {}> extends BeanControllerTableB
         columnScopes[key] = columnScope;
         // props
         const props = this.getColumnComponentPropsTop(key, columnScope);
+        Object.assign(columnScope, props);
+        // visible
         if (cast(props).visible === false) continue;
         // property
         properties.push(property);
         // render
+        renders.push(await this._createColumnRender(property, columnScope));
       }
     }
-    this.tableMeta = { properties, renders };
+    this.tableMeta = { properties, renders, columnScopes };
+  }
+
+  private async _createColumnRender(property: SchemaObject, columnScope: any): Promise<TypeTableCellRender<TData, any>> {
+    // renderProvider
+    const renderProvider = this.getRenderProvider(columnScope.render);
+    // beanInstance
+    let beanInstance;
+    if (typeof renderProvider === 'string' && renderProvider.includes('.tableCell.')) {
+      beanInstance = await this.bean._newBean(renderProvider as any, true);
+    }
+    return props => {
+      // value
+      const value = props?.getValue();
+      // cellScope
+      const cellScope: any = Object.assign({}, columnScope, { value });
+      // displayValue
+      let displayValue = property.rest?.displayValue !== undefined
+        ? this.zovaJsx.evaluateExpression(property.rest?.displayValue, cellScope)
+        : value;
+      if (displayValue === undefined || displayValue === null || displayValue === '') {
+        displayValue = this.table.options.renderFallbackValue;
+      }
+      cellScope.displayValue = displayValue;
+      if (renderProvider === 'text') {
+        return displayValue;
+      } else if (beanInstance) {
+
+      } else {
+
+      }
+    };
   }
 
   private async _createFeatures() {
@@ -211,5 +245,17 @@ export class ControllerTable<TData extends {} = {}> extends BeanControllerTableB
       props[key] = keyValue;
     }
     return props;
+  }
+
+  public getRenderFlattern(render: TypeTableCellRenderComponent): TypeTableCellRenderComponent {
+    return isJsxComponent(render) ? cast(render).type : render;
+  }
+
+  public getRenderProvider(render: TypeTableCellRenderComponent): TypeTableCellRenderComponentProvider {
+    let renderProvider = this.getRenderFlattern(render);
+    if (typeof renderProvider === 'string') {
+      renderProvider = this.tableProvider.components?.[renderProvider] ?? renderProvider;
+    }
+    return renderProvider as TypeTableCellRenderComponentProvider;
   }
 }

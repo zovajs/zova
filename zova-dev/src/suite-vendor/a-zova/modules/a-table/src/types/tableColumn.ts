@@ -1,5 +1,5 @@
 import type { CellContext, RowData } from '@tanstack/table-core';
-import { TypeTableCellRenderComponent } from 'zova-module-a-openapi';
+import type { TypeTableCellRenderComponent } from 'zova-module-a-openapi';
 
 export const constColumnProps = '$$ColumnProps';
 
