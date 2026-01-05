@@ -8,7 +8,7 @@ import 'openapi3-ts/oas31';
 
 export interface ISchemaObjectExtensionFieldRest {
   render?: TypeFormFieldRenderComponentNormal | TypeTableCellRenderComponentNormal;
-  currency?: CurrencyOptions | boolean;
+  currency?: CurrencyOptions;
   visible?: boolean;
   displayValue?: any;
   order?: number;

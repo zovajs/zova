@@ -1,8 +1,9 @@
 import type { ControllerForm } from 'zova-module-a-form';
-import { Currency, CurrencyOptions } from '@zhennann/currency';
+import { CurrencyOptions } from '@zhennann/currency';
 import { BeanControllerBase, IComponentOptions, Use } from 'zova';
 import { Controller } from 'zova-module-a-bean';
 import { IFormFieldOptions, ZFormField } from 'zova-module-a-form';
+import { currencyFormat, currencyUpdate } from '../../lib/utils.js';
 
 export interface ControllerFormFieldCurrencyProps extends IFormFieldOptions, CurrencyOptions {}
 
@@ -19,14 +20,14 @@ export class ControllerFormFieldCurrency extends BeanControllerBase {
   protected render() {
     const name = this.$props.name;
     let displayValue = this.$$form.getFieldDisplayValue(name, this.$props.displayValue);
-    displayValue = this._format(displayValue);
+    displayValue = currencyFormat(displayValue, this.$props);
     return (
       <ZFormField
         {...this.$props}
         render="text"
         displayValue={displayValue}
         onChange={(e: Event) => {
-          const value = this._update((e.target as HTMLInputElement).value);
+          const value = currencyUpdate((e.target as HTMLInputElement).value, this.$props);
           if (value !== undefined) {
             this.$$form.handleFieldDisplayValueUpdate(name, value, this.$props.onDisplayValueUpdate);
           }
@@ -34,16 +35,5 @@ export class ControllerFormFieldCurrency extends BeanControllerBase {
         onInput={null}
       ></ZFormField>
     );
-  }
-
-  private _format(value: any) {
-    if (!value || (typeof value !== 'number' && typeof value !== 'string')) return value;
-    const currency = new Currency(this.$props);
-    return currency.format(value);
-  }
-
-  private _update(value: any) {
-    const currency = new Currency(this.$props);
-    return currency.update(value);
   }
 }

@@ -41,6 +41,41 @@ export interface IZovaComponentRecord {
 }
 }
 /** components: end */
+/** tableCell: begin */
+export * from '../bean/tableCell.currency.jsx';
+import { ITableCellOptionsCurrency } from '../bean/tableCell.currency.jsx';
+import 'zova-module-a-table';
+declare module 'zova-module-a-table' {
+  
+    export interface ITableCellRecord {
+      'a-currency:currency': ITableCellOptionsCurrency;
+    }
+
+  
+}
+declare module 'zova-module-a-currency' {
+  
+        export interface TableCellCurrency {
+          /** @internal */
+          get scope(): ScopeModuleACurrency;
+        }
+
+        export interface TableCellCurrency {
+          get $beanFullName(): 'a-currency.tableCell.currency';
+          get $onionName(): 'a-currency:currency';
+          get $onionOptions(): ITableCellOptionsCurrency;
+        } 
+}
+/** tableCell: end */
+/** tableCell: begin */
+import { TableCellCurrency } from '../bean/tableCell.currency.jsx';
+import 'zova';
+declare module 'zova' {
+  export interface IBeanRecordGeneral {
+    'a-currency.tableCell.currency': TableCellCurrency;
+  }
+}
+/** tableCell: end */
 /** scope: begin */
 import { BeanScopeBase, type BeanScopeUtil } from 'zova';
 import { Scope } from 'zova-module-a-bean';
