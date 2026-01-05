@@ -8,7 +8,7 @@ import { $ZodIssue } from 'zod/v4/core';
 import { cast, deepEqual, deepExtend, UseScope } from 'zova';
 import { isJsxComponent, ZovaJsx } from 'zova-jsx';
 import { Controller } from 'zova-module-a-bean';
-import { loadSchemaProperties, renderFieldTopPropsSystem, schemaToZodSchema, ScopeModuleAOpenapi, TypeRenderComponent, TypeRenderComponentProvider } from 'zova-module-a-openapi';
+import { loadSchemaProperties, renderFieldTopPropsSystem, schemaToZodSchema, ScopeModuleAOpenapi, TypeFormFieldRenderComponentProvider, TypeRenderComponent } from 'zova-module-a-openapi';
 import { BeanControllerFormBase } from '../../lib/beanControllerFormBase.js';
 import { RevalidateLogicProps, TypeForm, TypeFormOnShowError, TypeFormOnSubmit } from '../../types/form.js';
 import { constFieldProps, IFormFieldLayoutOptionsBase, IFormFieldRenderContextOptions, TypeFormFieldOnDisplayValueUpdate } from '../../types/formField.js';
@@ -172,12 +172,12 @@ export class ControllerForm<TFormData extends {} = {}, TSubmitMeta = never> exte
     return isJsxComponent(render) ? cast(render).type : render;
   }
 
-  public getRenderProvider(render: TypeRenderComponent): TypeRenderComponentProvider {
+  public getRenderProvider(render: TypeRenderComponent): TypeFormFieldRenderComponentProvider {
     let renderProvider = this.getRenderFlattern(render);
     if (typeof renderProvider === 'string') {
       renderProvider = this.formProvider.components?.[renderProvider] ?? renderProvider;
     }
-    return renderProvider as TypeRenderComponentProvider;
+    return renderProvider as TypeFormFieldRenderComponentProvider;
   }
 
   private _getZodSchema() {

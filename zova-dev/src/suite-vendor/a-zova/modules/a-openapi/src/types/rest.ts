@@ -47,7 +47,8 @@ export type TypeRenderComponentNormal =
 
 export type TypeRenderComponent = TypeRenderComponentNormal | TypeRenderComponentJsx;
 
-export type TypeRenderComponentProvider = Constructable<ComponentPublicInstance> | (keyof IComponentRecord) | 'input' | 'textarea' | 'select';
+export type TypeFormFieldRenderComponentProvider = Constructable<ComponentPublicInstance> | (keyof IComponentRecord) | 'input' | 'textarea' | 'select';
+export type TypeTableCellRenderComponentProvider = Constructable<ComponentPublicInstance> | (keyof IComponentRecord) | 'text';
 
 export type TypeSchemaScene = 'table' | 'form';
 

@@ -37,6 +37,13 @@ export class MonkeySys extends BeanSimple implements IMonkeySysInitialize {
           },
         },
       },
+      table: {
+        provider: {
+          components: {
+            currency: 'text',
+          },
+        },
+      },
     } satisfies IOpenApiOptionsRestResource, scopeRestConfig.restResource);
   }
 }

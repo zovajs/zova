@@ -1,17 +1,21 @@
+import { celEnvBase } from '@cabloy/utils';
 import { createColumnHelper, getCoreRowModel, Row, TableOptionsWithReactiveData } from '@tanstack/vue-table';
 import { SchemaObject } from 'openapi3-ts/oas31';
 import { VNode } from 'vue';
-import { cast, Use } from 'zova';
+import { cast, deepEqual, Use } from 'zova';
+import { ZovaJsx } from 'zova-jsx';
 import { Controller } from 'zova-module-a-bean';
-import { loadSchemaProperties, TypeResourceActionRowRecord, TypeResourceActionTableRecord } from 'zova-module-a-openapi';
+import { loadSchemaProperties, renderFieldTopPropsSystem, TypeResourceActionRowRecord, TypeResourceActionTableRecord } from 'zova-module-a-openapi';
 import { BeanControllerTableBase } from '../../lib/beanControllerTableBase.js';
 import { BeanTableFeatureBase } from '../../lib/beanTableFeatureBase.js';
 import { ServiceTableFeature } from '../../service/tableFeature.js';
 import { TypeColumn, TypeTable } from '../../types/table.js';
+import { constColumnProps, TypeTableCellRender } from '../../types/tableColumn.js';
 
 export interface ControllerTableProps<TData extends {} = {}> {
   data?: TData[];
   schema?: SchemaObject;
+  tableProvider?: ITableProvider;
   getColumnsLeft?: () => (TypeColumn<TData>[] | undefined);
   getColumnsRight?: () => (TypeColumn<TData>[] | undefined);
   onActionTable?: (action: keyof TypeResourceActionTableRecord) => Promise<any> | undefined;
@@ -27,6 +31,8 @@ export class ControllerTable<TData extends {} = {}> extends BeanControllerTableB
   columns: TypeColumn<TData>[];
   features: BeanTableFeatureBase[] | undefined;
   table: TypeTable<TData>;
+  zovaJsx: ZovaJsx;
+  columnCelEnv: typeof celEnvBase;
 
   @Use()
   $$serviceTableFeature: ServiceTableFeature;
@@ -35,12 +41,27 @@ export class ControllerTable<TData extends {} = {}> extends BeanControllerTableB
     this.bean._setBean('$$table', this);
     // properties
     this._createProperties();
+    // tableMeta
+    await this._createTableMeta();
+    // watch
+    this.$watch(() => this.$props.schema, async (newValue, oldValue) => {
+      if (deepEqual(newValue, oldValue)) return;
+      await this._createTableMeta();
+    });
     // columns
     this._createColumns();
     // features
     await this._createFeatures();
     // table
     this._createTable();
+    // jsx
+    this.columnCelEnv = this._getColumnCelEnv();
+    this.zovaJsx = this.app.bean._newBeanSimple(
+      ZovaJsx,
+      false,
+      this.tableProvider.components,
+      this.columnCelEnv,
+    );
   }
 
   get schema() {
@@ -113,7 +134,60 @@ export class ControllerTable<TData extends {} = {}> extends BeanControllerTableB
     });
   }
 
+  private async _createTableMeta() {
+    const properties: SchemaObject[] = [];
+    const renders: TypeTableCellRender[] = [];
+    if (this.properties) {
+      for (const property of this.properties) {
+        const key = property.key!;
+        // celScope
+        const celScope = this.getCellScope(key);
+        // props
+        const props = this.getFieldComponentPropsTop(key, celScope);
+        if (cast(props).visible === false) return;
+      }
+    }
+  }
+
   private async _createFeatures() {
     this.features = await this.$$serviceTableFeature.loadTableFeatures();
+  }
+
+  public getCellProperty(name: string): SchemaObject | undefined {
+    if (!this.properties) return;
+    return this.properties.find(item => item.key === name);
+  }
+
+  public getCellScope(name: string, scopeExtra?: {}) {
+    return {
+      name,
+      property: this.getCellProperty(name),
+      ...scopeExtra,
+    };
+  }
+
+  public getFieldComponentPropsTop(name: string, celScope: {}): IFormFieldRenderContextOptions {
+    const props: any = { [constColumnProps]: true, key: name, name };
+    const property = this.getCellProperty(name);
+    if (!property) return props;
+    const rest = property.rest;
+    if (!rest) return props;
+    const keys = Object.keys(rest).filter(item => !renderFieldTopPropsSystem.includes(item));
+    if (keys.length === 0) return props;
+    for (const key of keys) {
+      const value = rest[key];
+      let keyValue;
+      if (key === 'render') {
+        if (typeof value === 'string') {
+          keyValue = this.zovaJsx.evaluateExpression(value, celScope);
+        } else {
+          keyValue = value;
+        }
+      } else {
+        keyValue = this.zovaJsx.renderJsxOrCel(value, undefined, celScope);
+      }
+      props[key] = keyValue;
+    }
+    return props;
   }
 }

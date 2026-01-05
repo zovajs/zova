@@ -5,9 +5,12 @@ export interface IOpenApiOptionsRestResource {
   permissions?: IOpenApiOptionsRestResourcePermissions;
   provider?: IOpenApiOptionsRestResourceProvider;
   form?: IOpenApiOptionsRestResourceForm;
+  table?: IOpenApiOptionsRestResourceTable;
 }
 
 export interface IOpenApiOptionsRestResourceForm {}
+
+export interface IOpenApiOptionsRestResourceTable {}
 
 export interface IOpenApiOptionsRestResourcePermissions {
   table?: TypeOpenApiOptionsRestResourcePermissionsTable;

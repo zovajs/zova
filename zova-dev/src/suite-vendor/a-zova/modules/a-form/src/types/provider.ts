@@ -1,6 +1,6 @@
 import type { TypeComponentRecordSelectorKeysStrict } from 'zova';
 import type { TypeBehaviorRecordSelectorKeys, TypeBehaviorRecordSelectorKeysStrict } from 'zova-module-a-behavior';
-import type { TypeRenderComponentProvider } from 'zova-module-a-openapi';
+import type { TypeFormFieldRenderComponentProvider } from 'zova-module-a-openapi';
 
 export interface IFormProviderBehaviors {
   formField?: TypeBehaviorRecordSelectorKeysStrict<'formField'>;
@@ -8,11 +8,10 @@ export interface IFormProviderBehaviors {
 }
 
 export interface IFormProviderComponents {
-  // table?: TypeComponentRecordSelectorKeysStrict<'restTable'>;
   formField?: TypeComponentRecordSelectorKeysStrict<'formField'>;
-  text?: TypeRenderComponentProvider;
-  password?: TypeRenderComponentProvider;
-  currency?: TypeRenderComponentProvider;
+  text?: TypeFormFieldRenderComponentProvider;
+  password?: TypeFormFieldRenderComponentProvider;
+  currency?: TypeFormFieldRenderComponentProvider;
 }
 
 export interface IFormProvider {
@@ -20,7 +19,7 @@ export interface IFormProvider {
   behaviors?: IFormProviderBehaviors;
 }
 
-declare module 'zova-module-a-openapi'{
+declare module 'zova-module-a-openapi' {
   export interface IOpenApiOptionsRestResourceForm {
     provider?: IFormProvider;
   }
