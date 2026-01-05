@@ -49,6 +49,14 @@ export class ControllerTable<TData extends {} = {}> extends BeanControllerTableB
     this.tableProvider = this.$useComputed(() => {
       return deepExtend({}, this.$$scopeModuleAOpenapi.config.restResource.table?.provider, this.$props.tableProvider);
     });
+    // jsx
+    this.columnCelEnv = this._getColumnCelEnv();
+    this.zovaJsx = this.app.bean._newBeanSimple(
+      ZovaJsx,
+      false,
+      this.tableProvider.components,
+      this.columnCelEnv,
+    );
     // properties
     this._createProperties();
     // tableMeta
@@ -64,14 +72,6 @@ export class ControllerTable<TData extends {} = {}> extends BeanControllerTableB
     await this._createFeatures();
     // table
     this._createTable();
-    // jsx
-    this.columnCelEnv = this._getColumnCelEnv();
-    this.zovaJsx = this.app.bean._newBeanSimple(
-      ZovaJsx,
-      false,
-      this.tableProvider.components,
-      this.columnCelEnv,
-    );
   }
 
   get schema() {
