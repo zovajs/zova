@@ -35,5 +35,4 @@ export interface ITableResPaged {
 export interface ITableMeta<TData extends RowData = RowData> {
   properties: SchemaObject[];
   renders: TypeTableCellRender<TData>[];
-  columnScopes: Record<string, {}>;
 }

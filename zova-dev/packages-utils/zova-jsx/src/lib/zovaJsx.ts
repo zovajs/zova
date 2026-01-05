@@ -94,7 +94,7 @@ export class ZovaJsx extends BeanSimple {
       children = undefined;
     } else {
       if (isNativeElement(Component)) {
-        children = this._renderJsxChildrenDirect(componentOptions.props!.children, celScope);
+        children = this.renderJsxChildrenDirect(componentOptions.props!.children, celScope);
       } else {
         const childrenCollect = this._renderJsxChildrenCollect(componentOptions.props!.children, celScope);
         if (isZovaComponent(Component)) {
@@ -144,11 +144,11 @@ export class ZovaJsx extends BeanSimple {
         if (slotScopeName) {
           slot = slotScope => {
             const celScopeSub = { ...celScope, [slotScopeName]: slotScope };
-            return this._renderJsxChildrenDirect(jsxChild, celScopeSub);
+            return this.renderJsxChildrenDirect(jsxChild, celScopeSub);
           };
         } else {
           slot = () => {
-            return this._renderJsxChildrenDirect(jsxChild, celScope);
+            return this.renderJsxChildrenDirect(jsxChild, celScope);
           };
         }
         slots[slotName] = slot;
@@ -160,7 +160,7 @@ export class ZovaJsx extends BeanSimple {
     const slotDefault = children.length === 0
       ? undefined
       : () => {
-          return this._renderJsxChildrenDirect(children, celScope);
+          return this.renderJsxChildrenDirect(children, celScope);
         };
     // ok
     return {
@@ -169,7 +169,7 @@ export class ZovaJsx extends BeanSimple {
     };
   }
 
-  private _renderJsxChildrenDirect(jsxChildren: TypeRenderComponentJsx | TypeRenderComponentJsx[], celScope: {}) {
+  public renderJsxChildrenDirect(jsxChildren: TypeRenderComponentJsx | TypeRenderComponentJsx[], celScope: {}) {
     if (!Array.isArray(jsxChildren)) jsxChildren = [jsxChildren];
     const children: VNode[] = [];
     for (const jsxChild of jsxChildren) {

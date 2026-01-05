@@ -5,8 +5,11 @@ export const constColumnProps = '$$ColumnProps';
 
 export type TypeTableCellRender<TData extends RowData = RowData, TValue = any> = (props?: CellContext<TData, TValue>) => any;
 
-export interface ITableCellRenderContextOptions {
+export interface ITableCellRenderColumnProps {
   key: string;
   name: string;
+  visible?: boolean;
   render: TypeTableCellRenderComponent;
 }
+
+// 将renderContext类型都收集到一起

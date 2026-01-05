@@ -20,6 +20,11 @@
       ]
     },
     "onions": {
+      "tableCell": {
+        "optionsGlobalInterfaceName": "IDecoratorTableCellOptions",
+        "optionsGlobalInterfaceFrom": "zova-module-a-table",
+        "boilerplate": "cli/tableCell/boilerplate"
+      },
       "tableFeature": {
         "optionsPackage": true,
         "optionsGlobalInterfaceName": "IDecoratorTableFeatureOptions",
