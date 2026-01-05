@@ -104,7 +104,6 @@ export class CliBinBuildRest extends BeanCliBase {
     await fse.copy(outDir, outReleasesDir);
     // copy
     _copyToTarget(outDir, process.env.BUILD_REST_COPY_DIST, bundleNameCopy);
-    _copyToTarget(outDir, process.env.BUILD_REST_COPY_RELEASE, bundleNameCopy);
   }
 
   async _prepareResourcesPackage({ projectPath, flavor, bundleName, srcDir }: IBinBuildRestContext) {
