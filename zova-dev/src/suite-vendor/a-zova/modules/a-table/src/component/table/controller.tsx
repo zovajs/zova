@@ -2,13 +2,11 @@ import { celEnvBase } from '@cabloy/utils';
 import { createColumnHelper, getCoreRowModel, Row, TableOptionsWithReactiveData } from '@tanstack/vue-table';
 import { SchemaObject } from 'openapi3-ts/oas31';
 import { VNode } from 'vue';
-import { appResource, cast, deepEqual, deepExtend, Use, UseScope } from 'zova';
+import { appResource, cast, deepEqual, deepExtend, UseScope } from 'zova';
 import { isJsxComponent, ZovaJsx } from 'zova-jsx';
 import { Controller } from 'zova-module-a-bean';
 import { loadSchemaProperties, renderTableColumnTopPropsSystem, ScopeModuleAOpenapi, TypeResourceActionRowRecord, TypeResourceActionTableRecord, TypeTableCellRenderComponent, TypeTableCellRenderComponentProvider } from 'zova-module-a-openapi';
 import { BeanControllerTableBase } from '../../lib/beanControllerTableBase.js';
-import { BeanTableFeatureBase } from '../../lib/beanTableFeatureBase.js';
-import { ServiceTableFeature } from '../../service/tableFeature.js';
 import { ITableProvider } from '../../types/providers.js';
 import { ITableMeta, TypeColumn, TypeTable } from '../../types/table.js';
 import { IDecoratorTableCellOptions, ITableCellRender } from '../../types/tableCell.js';
@@ -31,15 +29,11 @@ export class ControllerTable<TData extends {} = {}> extends BeanControllerTableB
 
   properties: SchemaObject[] | undefined;
   columns: TypeColumn<TData>[];
-  features: BeanTableFeatureBase[] | undefined;
   table: TypeTable<TData>;
   tableProvider: ITableProvider;
   tableMeta: ITableMeta<TData>;
   zovaJsx: ZovaJsx;
   columnCelEnv: typeof celEnvBase;
-
-  @Use()
-  $$serviceTableFeature: ServiceTableFeature;
 
   @UseScope()
   $$scopeModuleAOpenapi: ScopeModuleAOpenapi;
@@ -68,8 +62,6 @@ export class ControllerTable<TData extends {} = {}> extends BeanControllerTableB
     });
     // columns
     this._createColumns();
-    // features
-    await this._createFeatures();
     // table
     this._createTable();
   }
@@ -93,12 +85,10 @@ export class ControllerTable<TData extends {} = {}> extends BeanControllerTableB
   private _createTable() {
     const self = this;
     const tableOptions: TableOptionsWithReactiveData<TData> = {
-      _features: this.features,
       getRowId: (row: TData) => cast(row).id,
       getCoreRowModel: getCoreRowModel(),
       renderFallbackValue: this.scope.config.renderFallbackValue,
       manualPagination: true,
-      get schema() { return self.schema; },
       get data() { return self.data || []; },
       get columns() { return self.columns; },
     };
@@ -126,8 +116,8 @@ export class ControllerTable<TData extends {} = {}> extends BeanControllerTableB
       const key = property.key!;
       columns.push(columnHelper.accessor(key as any, {
         id: key,
-        header: props => {
-          return props.header.property?.title || key;
+        header: _props => {
+          return property?.title || key;
         },
         cell: props => this.tableMeta.renders[key](props),
       }));
@@ -221,10 +211,6 @@ export class ControllerTable<TData extends {} = {}> extends BeanControllerTableB
       // general component
       return this.zovaJsx.render(columnProps.render, {}, cellScope);
     };
-  }
-
-  private async _createFeatures() {
-    this.features = await this.$$serviceTableFeature.loadTableFeatures();
   }
 
   public getColumnProperty(name: string): SchemaObject | undefined {
