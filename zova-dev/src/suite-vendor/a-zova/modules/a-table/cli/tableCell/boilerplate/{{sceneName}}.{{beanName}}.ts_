@@ -1,13 +1,12 @@
-import { CellContext } from '@tanstack/table-core';
 import { VNode } from 'vue';
 import { BeanBase } from 'zova';
-import { IDecoratorTableCellOptions, ITableCellRender, TableCellFormat } from 'zova-module-a-table';
+import { IDecoratorTableCellOptions, ITableCellRender, ITableCellRenderContext, NextTableCellRender, TableCell } from 'zova-module-a-table';
 
 export interface ITableCellOptions<%=argv.beanNameCapitalize%> extends IDecoratorTableCellOptions {}
 
 @TableCell<ITableCellOptions<%=argv.beanNameCapitalize%>>()
 export class TableCell<%=argv.beanNameCapitalize%> extends BeanBase implements ITableCellRender {
-  render(_props: CellContext<{}, unknown>, _options: ITableCellFormatOptions<%=argv.beanNameCapitalize%>, next: NextTableCellFormat): VNode | string {
+  render(_renderContext: ITableCellRenderContext, _options: ITableCellFormatOptions<%=argv.beanNameCapitalize%>, next: NextTableCellRender): VNode | string {
     return next();
   }
 }

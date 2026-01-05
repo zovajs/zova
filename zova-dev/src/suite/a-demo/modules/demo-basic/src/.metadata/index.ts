@@ -457,6 +457,41 @@ declare module 'zova' {
   }
 }
 /** theme: end */
+/** tableCell: begin */
+export * from '../bean/tableCell.test.js';
+import { ITableCellOptionsTest } from '../bean/tableCell.test.js';
+import 'zova-module-a-table';
+declare module 'zova-module-a-table' {
+  
+    export interface ITableCellRecord {
+      'demo-basic:test': ITableCellOptionsTest;
+    }
+
+  
+}
+declare module 'zova-module-demo-basic' {
+  
+        export interface TableCellTest {
+          /** @internal */
+          get scope(): ScopeModuleDemoBasic;
+        }
+
+        export interface TableCellTest {
+          get $beanFullName(): 'demo-basic.tableCell.test';
+          get $onionName(): 'demo-basic:test';
+          get $onionOptions(): ITableCellOptionsTest;
+        } 
+}
+/** tableCell: end */
+/** tableCell: begin */
+import { TableCellTest } from '../bean/tableCell.test.js';
+import 'zova';
+declare module 'zova' {
+  export interface IBeanRecordLocal {
+    'demo-basic.tableCell.test': TableCellTest;
+  }
+}
+/** tableCell: end */
 /** locale: begin */
 import { locales } from './locales.js';
 /** locale: end */

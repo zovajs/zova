@@ -23,11 +23,7 @@ export type NextTableCellRender = () => VNode | string;
 export interface ITableCellRecord {}
 
 export interface ITableCellRender {
-  render(
-    renderContext: ITableCellRenderContext,
-    options: IDecoratorTableCellOptions,
-    next: NextTableCellRender
-  ): VNode | string;
+  render(renderContext: ITableCellRenderContext, options: IDecoratorTableCellOptions, next: NextTableCellRender): VNode | string;
 }
 
 export interface IDecoratorTableCellOptions {}
