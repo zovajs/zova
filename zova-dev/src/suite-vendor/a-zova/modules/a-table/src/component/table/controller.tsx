@@ -5,7 +5,7 @@ import { VNode } from 'vue';
 import { cast, deepEqual, deepExtend, Use, UseScope } from 'zova';
 import { ZovaJsx } from 'zova-jsx';
 import { Controller } from 'zova-module-a-bean';
-import { loadSchemaProperties, renderFieldTopPropsSystem, ScopeModuleAOpenapi, TypeResourceActionRowRecord, TypeResourceActionTableRecord } from 'zova-module-a-openapi';
+import { loadSchemaProperties, renderTableColumnTopPropsSystem, ScopeModuleAOpenapi, TypeResourceActionRowRecord, TypeResourceActionTableRecord } from 'zova-module-a-openapi';
 import { BeanControllerTableBase } from '../../lib/beanControllerTableBase.js';
 import { BeanTableFeatureBase } from '../../lib/beanTableFeatureBase.js';
 import { ServiceTableFeature } from '../../service/tableFeature.js';
@@ -145,13 +145,15 @@ export class ControllerTable<TData extends {} = {}> extends BeanControllerTableB
   private async _createTableMeta() {
     const properties: SchemaObject[] = [];
     const renders: TypeTableCellRender[] = [];
+    const columnScopes: Record<string, {}> = {};
     if (this.properties) {
       for (const property of this.properties) {
         const key = property.key!;
-        // celScope
-        const celScope = this.getColumnScope(key);
+        // columnScope
+        const columnScope = this.getColumnScope(key);
+        columnScopes[key] = columnScope;
         // props
-        const props = this.getColumnComponentPropsTop(key, celScope);
+        const props = this.getColumnComponentPropsTop(key, columnScope);
         if (cast(props).visible === false) continue;
         // property
         properties.push(property);
@@ -192,7 +194,7 @@ export class ControllerTable<TData extends {} = {}> extends BeanControllerTableB
     if (!property) return props;
     const rest = property.rest;
     if (!rest) return props;
-    const keys = Object.keys(rest).filter(item => !renderFieldTopPropsSystem.includes(item));
+    const keys = Object.keys(rest).filter(item => !renderTableColumnTopPropsSystem.includes(item));
     if (keys.length === 0) return props;
     for (const key of keys) {
       const value = rest[key];

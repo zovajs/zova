@@ -8,7 +8,7 @@ import { $ZodIssue } from 'zod/v4/core';
 import { cast, deepEqual, deepExtend, UseScope } from 'zova';
 import { isJsxComponent, ZovaJsx } from 'zova-jsx';
 import { Controller } from 'zova-module-a-bean';
-import { loadSchemaProperties, renderFieldTopPropsSystem, schemaToZodSchema, ScopeModuleAOpenapi, TypeFormFieldRenderComponent, TypeFormFieldRenderComponentProvider,  } from 'zova-module-a-openapi';
+import { loadSchemaProperties, renderFormFieldTopPropsSystem, schemaToZodSchema, ScopeModuleAOpenapi, TypeFormFieldRenderComponent, TypeFormFieldRenderComponentProvider } from 'zova-module-a-openapi';
 import { BeanControllerFormBase } from '../../lib/beanControllerFormBase.js';
 import { RevalidateLogicProps, TypeForm, TypeFormOnShowError, TypeFormOnSubmit } from '../../types/form.js';
 import { constFieldProps, IFormFieldLayoutOptionsBase, IFormFieldRenderContextOptions, TypeFormFieldOnDisplayValueUpdate } from '../../types/formField.js';
@@ -149,7 +149,7 @@ export class ControllerForm<TFormData extends {} = {}, TSubmitMeta = never> exte
     if (!property) return props;
     const rest = property.rest;
     if (!rest) return props;
-    const keys = Object.keys(rest).filter(item => !renderFieldTopPropsSystem.includes(item));
+    const keys = Object.keys(rest).filter(item => !renderFormFieldTopPropsSystem.includes(item));
     if (keys.length === 0) return props;
     for (const key of keys) {
       const value = rest[key];

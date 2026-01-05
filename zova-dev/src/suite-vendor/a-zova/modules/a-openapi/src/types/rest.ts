@@ -42,7 +42,8 @@ declare module 'openapi3-ts/oas31' {
 
 export type TypeSchemaScene = 'table' | 'form';
 
-export const renderFieldTopPropsSystem = ['order', 'table', 'form'];
+export const renderFormFieldTopPropsSystem = ['order', 'table', 'form'];
+export const renderTableColumnTopPropsSystem = ['order', 'table', 'form', 'displayValue'];
 
 export type TypeRenderComponentPreset = keyof TypeResourceActionRowRecordRender | 'text' | 'currency' | 'textarea' | 'select' | 'checkbox' | 'radio' | 'switch' | 'image' | 'file' | 'color' | 'password' | 'email' | 'url';
 
