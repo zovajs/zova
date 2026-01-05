@@ -131,7 +131,7 @@ export class ControllerTable<TData extends {} = {}> extends BeanControllerTableB
         header: props => {
           return props.header.property?.title || key;
         },
-        cell: props => props.cell.formatRender(),
+        cell: props => this.tableMeta.renders[key](props),
       }));
     }
     return columns;
@@ -145,7 +145,7 @@ export class ControllerTable<TData extends {} = {}> extends BeanControllerTableB
 
   private async _createTableMeta() {
     const properties: SchemaObject[] = [];
-    const renders: TypeTableCellRender<TData>[] = [];
+    const renders: Record<string, TypeTableCellRender<TData>> = {};
     if (this.properties) {
       for (const property of this.properties) {
         const key = property.key!;
@@ -158,7 +158,7 @@ export class ControllerTable<TData extends {} = {}> extends BeanControllerTableB
         // property
         properties.push(property);
         // render
-        renders.push(await this._createColumnRender(property, columnProps, columnScope));
+        renders[key] = await this._createColumnRender(property, columnProps, columnScope);
       }
     }
     this.tableMeta = { properties, renders };
@@ -197,12 +197,12 @@ export class ControllerTable<TData extends {} = {}> extends BeanControllerTableB
       if (renderProvider === 'text') {
         return displayValue;
       }
-      // jsx: props
-      let cellProps = isJsxComponent(columnProps.render)
-        ? this.zovaJsx.renderJsxProps(cast(columnProps.render).props, { ...columnProps }, cellScope)
-        : columnProps;
       // beanInstance
       if (beanInstance) {
+        // jsx: props
+        let cellProps = isJsxComponent(columnProps.render)
+          ? this.zovaJsx.renderJsxProps(cast(columnProps.render).props, { ...columnProps }, cellScope)
+          : columnProps;
         if (onionOptions) {
           cellProps = deepExtend({}, onionOptions, cellProps);
         }
@@ -211,7 +211,7 @@ export class ControllerTable<TData extends {} = {}> extends BeanControllerTableB
           cellContext,
           $$table: this,
         };
-        beanInstance.render(cellRenderContext, cellProps, () => {
+        return beanInstance.render(cellRenderContext, cellProps, () => {
           const children = isJsxComponent(columnProps.render) && cast(columnProps.render).children;
           if (children && children.length > 0) {
             return this.zovaJsx.renderJsxChildrenDirect(children, cellScope);
@@ -284,6 +284,6 @@ export class ControllerTable<TData extends {} = {}> extends BeanControllerTableB
     if (typeof renderProvider === 'string') {
       renderProvider = this.tableProvider.components?.[renderProvider] ?? renderProvider;
     }
-    return renderProvider as TypeTableCellRenderComponentProvider;
+    return (renderProvider ?? 'text') as TypeTableCellRenderComponentProvider;
   }
 }

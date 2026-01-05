@@ -7,7 +7,9 @@ export interface ITableCellOptionsTest extends IDecoratorTableCellOptions {
   iconPrefix?: string;
 }
 
-@TableCell<ITableCellOptionsTest>()
+@TableCell<ITableCellOptionsTest>({
+  iconPrefix: '::home',
+})
 export class TableCellTest extends BeanBase implements ITableCellRender {
   render(_renderContext: ITableCellRenderContext, options: ITableCellOptionsTest, next: NextTableCellRender): VNode | string {
     const value = next();
@@ -16,7 +18,7 @@ export class TableCellTest extends BeanBase implements ITableCellRender {
     return (
       <>
         <ZIcon name={iconPrefix as any}></ZIcon>
-        {value}
+        <span>{value}</span>
       </>
     );
   }
