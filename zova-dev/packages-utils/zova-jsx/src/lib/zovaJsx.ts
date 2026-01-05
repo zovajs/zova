@@ -86,7 +86,7 @@ export class ZovaJsx extends BeanSimple {
     // key
     cast(props).key = this.evaluateExpression(componentOptions.key, celScope);
     // props
-    this._renderJsxProps(componentOptions.props, props, celScope);
+    this.renderJsxProps(componentOptions.props, props, celScope);
     // children
     let children;
     const propsChildren = componentOptions.props?.children;
@@ -117,7 +117,7 @@ export class ZovaJsx extends BeanSimple {
     return h(Component, props, children);
   }
 
-  private _renderJsxProps(jsxProps: TypeRenderComponentJsxProps | undefined, props: {}, celScope: {}) {
+  public renderJsxProps(jsxProps: TypeRenderComponentJsxProps | undefined, props: {}, celScope: {}) {
     if (!jsxProps) return props;
     const keys = Object.keys(jsxProps).filter(item => !renderFieldJsxPropsSystem.includes(item));
     if (keys.length === 0) return props;
@@ -177,7 +177,7 @@ export class ZovaJsx extends BeanSimple {
       if (isJsxComponent(jsxChild)) {
         if (jsxChild.type === 'var') {
           const props = {};
-          this._renderJsxProps(jsxChild.props, props, celScope);
+          this.renderJsxProps(jsxChild.props, props, celScope);
           celScope = { ...celScope, [cast(props).name]: cast(props).value };
           child = undefined;
         } else {

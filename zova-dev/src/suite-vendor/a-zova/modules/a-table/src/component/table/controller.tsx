@@ -174,9 +174,9 @@ export class ControllerTable<TData extends {} = {}> extends BeanControllerTableB
     if (typeof renderProvider === 'string' && renderProvider.includes('.tableCell.')) {
       beanInstance = await this.bean._newBean(renderProvider as any, true);
     }
-    return props => {
+    return cellProps => {
       // value
-      const value = props?.getValue();
+      const value = cellProps?.getValue();
       // cellScope
       const cellScope: any = Object.assign({}, columnScope, { value });
       // displayValue
@@ -187,13 +187,14 @@ export class ControllerTable<TData extends {} = {}> extends BeanControllerTableB
         displayValue = this.table.options.renderFallbackValue;
       }
       cellScope.displayValue = displayValue;
+      // render: text
       if (renderProvider === 'text') {
         return displayValue;
-      } else if (beanInstance) {
-
-      } else {
-
       }
+      // jsx: props
+      const props = isJsxComponent(columnScope.render)
+        ? this.zovaJsx.renderJsxProps(columnScope.render.props, {}, cellScope)
+        : undefined;
     };
   }
 
