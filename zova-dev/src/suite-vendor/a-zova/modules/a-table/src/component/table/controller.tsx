@@ -2,13 +2,14 @@ import { celEnvBase } from '@cabloy/utils';
 import { createColumnHelper, getCoreRowModel, Row, TableOptionsWithReactiveData } from '@tanstack/vue-table';
 import { SchemaObject } from 'openapi3-ts/oas31';
 import { VNode } from 'vue';
-import { cast, deepEqual, Use } from 'zova';
+import { cast, deepEqual, deepExtend, Use, UseScope } from 'zova';
 import { ZovaJsx } from 'zova-jsx';
 import { Controller } from 'zova-module-a-bean';
-import { loadSchemaProperties, renderFieldTopPropsSystem, TypeResourceActionRowRecord, TypeResourceActionTableRecord } from 'zova-module-a-openapi';
+import { loadSchemaProperties, renderFieldTopPropsSystem, ScopeModuleAOpenapi, TypeResourceActionRowRecord, TypeResourceActionTableRecord } from 'zova-module-a-openapi';
 import { BeanControllerTableBase } from '../../lib/beanControllerTableBase.js';
 import { BeanTableFeatureBase } from '../../lib/beanTableFeatureBase.js';
 import { ServiceTableFeature } from '../../service/tableFeature.js';
+import { ITableProvider } from '../../types/providers.js';
 import { TypeColumn, TypeTable } from '../../types/table.js';
 import { constColumnProps, TypeTableCellRender } from '../../types/tableColumn.js';
 
@@ -31,14 +32,21 @@ export class ControllerTable<TData extends {} = {}> extends BeanControllerTableB
   columns: TypeColumn<TData>[];
   features: BeanTableFeatureBase[] | undefined;
   table: TypeTable<TData>;
+  tableProvider: ITableProvider;
   zovaJsx: ZovaJsx;
   columnCelEnv: typeof celEnvBase;
 
   @Use()
   $$serviceTableFeature: ServiceTableFeature;
 
+  @UseScope()
+  $$scopeModuleAOpenapi: ScopeModuleAOpenapi;
+
   protected async __init__() {
     this.bean._setBean('$$table', this);
+    this.tableProvider = this.$useComputed(() => {
+      return deepExtend({}, this.$$scopeModuleAOpenapi.config.restResource.table?.provider, this.$props.tableProvider);
+    });
     // properties
     this._createProperties();
     // tableMeta
@@ -141,9 +149,9 @@ export class ControllerTable<TData extends {} = {}> extends BeanControllerTableB
       for (const property of this.properties) {
         const key = property.key!;
         // celScope
-        const celScope = this.getCellScope(key);
+        const celScope = this.getColumnScope(key);
         // props
-        const props = this.getFieldComponentPropsTop(key, celScope);
+        const props = this.getColumnComponentPropsTop(key, celScope);
         if (cast(props).visible === false) return;
       }
     }
@@ -153,22 +161,30 @@ export class ControllerTable<TData extends {} = {}> extends BeanControllerTableB
     this.features = await this.$$serviceTableFeature.loadTableFeatures();
   }
 
-  public getCellProperty(name: string): SchemaObject | undefined {
+  public getColumnProperty(name: string): SchemaObject | undefined {
     if (!this.properties) return;
     return this.properties.find(item => item.key === name);
   }
 
-  public getCellScope(name: string, scopeExtra?: {}) {
+  private _getColumnCelEnv(): typeof celEnvBase {
+    const celEnv = celEnvBase.clone();
+    celEnv.registerFunction('getProperty(string):dyn', name => {
+      return this.getColumnProperty(name);
+    });
+    return celEnv;
+  }
+
+  public getColumnScope(name: string, scopeExtra?: {}) {
     return {
       name,
-      property: this.getCellProperty(name),
+      property: this.getColumnProperty(name),
       ...scopeExtra,
     };
   }
 
-  public getFieldComponentPropsTop(name: string, celScope: {}): IFormFieldRenderContextOptions {
+  public getColumnComponentPropsTop(name: string, celScope: {}): IFormFieldRenderContextOptions {
     const props: any = { [constColumnProps]: true, key: name, name };
-    const property = this.getCellProperty(name);
+    const property = this.getColumnProperty(name);
     if (!property) return props;
     const rest = property.rest;
     if (!rest) return props;
