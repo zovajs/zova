@@ -6,7 +6,7 @@ export interface ITableCellOptions<%=argv.beanNameCapitalize%> extends IDecorato
 
 @TableCell<ITableCellOptions<%=argv.beanNameCapitalize%>>()
 export class TableCell<%=argv.beanNameCapitalize%> extends BeanBase implements ITableCellRender {
-  render(_renderContext: ITableCellRenderContext, _options: ITableCellFormatOptions<%=argv.beanNameCapitalize%>, next: NextTableCellRender): VNode | string {
+  render(_renderContext: ITableCellRenderContext, _options: ITableCellOptions<%=argv.beanNameCapitalize%>, next: NextTableCellRender): VNode | string {
     return next();
   }
 }
