@@ -185,7 +185,7 @@ export class ZovaJsx extends BeanSimple {
         }
       } else {
         const childText = this.evaluateExpression(jsxChild, celScope);
-        child = createTextVNode(childText);
+        child = createTextVNode(childText ?? '');
       }
       if (child) {
         if (Array.isArray(child)) {
