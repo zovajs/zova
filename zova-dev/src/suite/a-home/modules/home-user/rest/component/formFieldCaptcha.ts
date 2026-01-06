@@ -3,7 +3,7 @@ import type { ControllerFormFieldCaptchaProps } from '../../src/component/formFi
 
 type TypeControllerFormFieldCaptchaPublicProps = TypeRenderComponentJsxPropsPublic
   & ControllerFormFieldCaptchaProps;
-export function ZHomeUserFormFieldCaptcha(
+export function FHomeUserCaptcha(
   _props: TypeControllerFormFieldCaptchaPublicProps,
 ) {
   return 'home-user:formFieldCaptcha';

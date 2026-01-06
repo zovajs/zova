@@ -3,7 +3,7 @@ import type { ControllerLayoutEmptyProps } from '../../src/component/layoutEmpty
 
 type TypeControllerLayoutEmptyPublicProps = TypeRenderComponentJsxPropsPublic
   & ControllerLayoutEmptyProps;
-export function ZHomeLayoutLayoutEmpty(
+export function ZHomeLayoutEmpty(
   _props: TypeControllerLayoutEmptyPublicProps,
 ) {
   return 'home-layout:layoutEmpty';

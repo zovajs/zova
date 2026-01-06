@@ -3,7 +3,7 @@ import type { ControllerFormFieldTestProps } from '../../src/component/formField
 
 type TypeControllerFormFieldTestPublicProps = TypeRenderComponentJsxPropsPublic
   & ControllerFormFieldTestProps;
-export function ZDemoBasicFormFieldTest(
+export function FDemoBasicTest(
   _props: TypeControllerFormFieldTestPublicProps,
 ) {
   return 'demo-basic:formFieldTest';

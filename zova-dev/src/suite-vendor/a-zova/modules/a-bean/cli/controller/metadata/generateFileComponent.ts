@@ -191,7 +191,7 @@ async function generateRestComponent(
     componentNamePrefix='Z';
     componentName=name;
   }
-  const componentNameFull = `${componentNamePrefix}${toUpperCaseFirstChar(combineResourceName(name, moduleName, true, true))}`;
+  const componentNameFull = `${componentNamePrefix}${toUpperCaseFirstChar(combineResourceName(componentName, moduleName, true, true))}`;
   const contentComponent = `export function ${componentNameFull}${genericDeclare}(
   _props: ${typeControllerPublicPropsName}${genericArguments},
 ) {

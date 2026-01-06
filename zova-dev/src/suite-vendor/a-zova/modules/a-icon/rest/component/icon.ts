@@ -3,7 +3,7 @@ import type { ControllerIconProps } from '../../src/component/icon/controller.js
 
 type TypeControllerIconPublicProps = TypeRenderComponentJsxPropsPublic
   & ControllerIconProps;
-export function ZAIconIcon(
+export function ZIcon(
   _props: TypeControllerIconPublicProps,
 ) {
   return 'a-icon:icon';

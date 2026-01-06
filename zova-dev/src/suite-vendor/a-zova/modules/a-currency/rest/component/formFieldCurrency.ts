@@ -3,7 +3,7 @@ import type { ControllerFormFieldCurrencyProps } from '../../src/component/formF
 
 type TypeControllerFormFieldCurrencyPublicProps = TypeRenderComponentJsxPropsPublic
   & ControllerFormFieldCurrencyProps;
-export function ZACurrencyFormFieldCurrency(
+export function FCurrency(
   _props: TypeControllerFormFieldCurrencyPublicProps,
 ) {
   return 'a-currency:formFieldCurrency';

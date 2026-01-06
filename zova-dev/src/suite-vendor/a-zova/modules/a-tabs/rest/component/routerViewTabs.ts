@@ -3,7 +3,7 @@ import type { ControllerRouterViewTabsProps } from '../../src/component/routerVi
 
 type TypeControllerRouterViewTabsPublicProps = TypeRenderComponentJsxPropsPublic
   & ControllerRouterViewTabsProps;
-export function ZATabsRouterViewTabs(
+export function ZTabsRouterViewTabs(
   _props: TypeControllerRouterViewTabsPublicProps,
 ) {
   return 'a-tabs:routerViewTabs';

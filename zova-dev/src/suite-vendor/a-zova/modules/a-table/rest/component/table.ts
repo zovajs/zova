@@ -3,7 +3,7 @@ import type { ControllerTableProps } from '../../src/component/table/controller.
 
 type TypeControllerTablePublicProps<TData extends {} = {}> = TypeRenderComponentJsxPropsPublic
   & ControllerTableProps<TData>;
-export function ZATableTable<TData extends {} = {}>(
+export function ZTable<TData extends {} = {}>(
   _props: TypeControllerTablePublicProps<TData>,
 ) {
   return 'a-table:table';
