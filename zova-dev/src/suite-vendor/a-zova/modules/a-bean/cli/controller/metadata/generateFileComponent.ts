@@ -185,10 +185,10 @@ async function generateRestComponent(
   let componentNamePrefix;
   let componentName;
   if(name !== 'formField' && name.startsWith('formField')){
-    componentNamePrefix='F';
+    componentNamePrefix='FF';
     componentName=toLowerCaseFirstChar(name.substring('formField'.length));
   }else{
-    componentNamePrefix='Z';
+    componentNamePrefix='ZZ';
     componentName=name;
   }
   const componentNameFull = `${componentNamePrefix}${toUpperCaseFirstChar(combineResourceName(componentName, moduleName, true, true))}`;
