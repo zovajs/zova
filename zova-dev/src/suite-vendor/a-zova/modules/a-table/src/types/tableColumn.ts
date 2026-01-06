@@ -1,4 +1,5 @@
 import type { CellContext, RowData } from '@tanstack/table-core';
+import type { SchemaObject } from 'openapi3-ts/oas31';
 import type { TypeTableCellRenderComponent } from 'zova-module-a-openapi';
 
 export const constColumnProps = '$$ColumnProps';
@@ -10,4 +11,14 @@ export interface ITableCellRenderColumnProps {
   name: string;
   visible?: boolean;
   render: TypeTableCellRenderComponent;
+}
+
+export interface ITableColumnCelScope {
+  name: string;
+  property?: SchemaObject;
+}
+
+export interface ITableCellCelScope extends ITableColumnCelScope {
+  value: any;
+  displayValue?: any;
 }

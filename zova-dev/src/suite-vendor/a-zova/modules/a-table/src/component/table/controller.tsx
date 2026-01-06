@@ -9,8 +9,8 @@ import { loadSchemaProperties, renderTableColumnTopPropsSystem, ScopeModuleAOpen
 import { BeanControllerTableBase } from '../../lib/beanControllerTableBase.js';
 import { ITableProvider } from '../../types/providers.js';
 import { ITableMeta, TypeColumn, TypeTable, TypeTableGetColumnsNext } from '../../types/table.js';
-import { IDecoratorTableCellOptions, ITableCellRender } from '../../types/tableCell.js';
-import { constColumnProps, ITableCellRenderColumnProps, TypeTableCellRender } from '../../types/tableColumn.js';
+import { IDecoratorTableCellOptions, ITableCellRender, ITableCellRenderContext } from '../../types/tableCell.js';
+import { constColumnProps, ITableCellCelScope, ITableCellRenderColumnProps, ITableColumnCelScope, TypeTableCellRender } from '../../types/tableColumn.js';
 
 export interface ControllerTableProps<TData extends {} = {}> {
   data?: TData[];
@@ -150,7 +150,7 @@ export class ControllerTable<TData extends {} = {}> extends BeanControllerTableB
   private async _createColumnRender(
     property: SchemaObject,
     columnProps: ITableCellRenderColumnProps,
-    columnScope: any,
+    columnScope: ITableColumnCelScope,
   ): Promise<TypeTableCellRender<TData, any>> {
     // renderProvider
     const renderProvider = this.getRenderProvider(columnProps.render);
@@ -167,7 +167,7 @@ export class ControllerTable<TData extends {} = {}> extends BeanControllerTableB
       // value
       const value = cellContext.getValue();
       // cellScope
-      const cellScope: any = Object.assign({}, columnScope, { value });
+      const cellScope: ITableCellCelScope = Object.assign({}, columnScope, { value });
       // displayValue
       let displayValue = property.rest?.displayValue !== undefined
         ? this.zovaJsx.evaluateExpression(property.rest?.displayValue, cellScope)
@@ -189,7 +189,7 @@ export class ControllerTable<TData extends {} = {}> extends BeanControllerTableB
         if (onionOptions) {
           cellProps = deepExtend({}, onionOptions, cellProps);
         }
-        const cellRenderContext = {
+        const cellRenderContext: ITableCellRenderContext = {
           cellScope,
           cellContext,
           $$table: this,
@@ -221,7 +221,7 @@ export class ControllerTable<TData extends {} = {}> extends BeanControllerTableB
     return celEnv;
   }
 
-  public getColumnScope(name: string, scopeExtra?: {}) {
+  public getColumnScope(name: string, scopeExtra?: {}): ITableColumnCelScope {
     return {
       name,
       property: this.getColumnProperty(name),

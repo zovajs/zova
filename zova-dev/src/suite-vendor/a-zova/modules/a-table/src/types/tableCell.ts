@@ -1,20 +1,13 @@
 import type { CellContext } from '@tanstack/table-core';
-import type { SchemaObject } from 'openapi3-ts/oas31';
 import type { OmitNever } from 'zova';
 import type { ServiceOnion } from 'zova-module-a-bean';
 import type { ControllerTable } from '../component/table/controller.jsx';
+import type { ITableCellCelScope } from './tableColumn.js';
 
 export interface ITableCellRenderContext<TData extends {} = any> {
-  cellScope: ITableCellRenderScope;
+  cellScope: ITableCellCelScope;
   cellContext: CellContext<TData, any>;
   $$table: ControllerTable<TData>;
-}
-
-export interface ITableCellRenderScope {
-  name: string;
-  property: SchemaObject;
-  value: any;
-  displayValue?: any;
 }
 
 export type NextTableCellRender = () => any;
