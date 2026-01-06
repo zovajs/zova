@@ -3,7 +3,7 @@ import type { IGlobBeanFile } from '@cabloy/module-info';
 import type { IControllerInfo } from './types.ts';
 import path from 'node:path';
 import { combineResourceName } from '@cabloy/utils';
-import { toUpperCaseFirstChar } from '@cabloy/word-utils';
+import { toLowerCaseFirstChar, toUpperCaseFirstChar } from '@cabloy/word-utils';
 import fse from 'fs-extra';
 import { combineContentRenderAndStyle, generateRestIndex } from './utils.ts';
 
@@ -182,9 +182,17 @@ async function generateRestComponent(
     contentImports.push(`import type { ${_contentImportTypeController.join(', ')} } from '../../src/component/${name}/controller${controllerExtJs}';`);
   }
   // component
-  const componentNamePrefix = name !== 'formField' && name.startsWith('formField') ? 'F' : 'Z';
-  const componentName = `${componentNamePrefix}${toUpperCaseFirstChar(combineResourceName(name, moduleName, false, false))}`;
-  const contentComponent = `export function ${componentName}${genericDeclare}(
+  let componentNamePrefix;
+  let componentName;
+  if(name !== 'formField' && name.startsWith('formField')){
+    componentNamePrefix='F';
+    componentName=toLowerCaseFirstChar(name.substring('formField'.length));
+  }else{
+    componentNamePrefix='Z';
+    componentName=name;
+  }
+  const componentNameFull = `${componentNamePrefix}${toUpperCaseFirstChar(combineResourceName(name, moduleName, true, true))}`;
+  const contentComponent = `export function ${componentNameFull}${genericDeclare}(
   _props: ${typeControllerPublicPropsName}${genericArguments},
 ) {
   return '${moduleName}:${name}';
