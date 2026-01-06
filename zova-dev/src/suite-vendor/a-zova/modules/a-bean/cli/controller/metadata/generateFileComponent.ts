@@ -184,12 +184,12 @@ async function generateRestComponent(
   // component
   let componentNamePrefix;
   let componentName;
-  if(name !== 'formField' && name.startsWith('formField')){
-    componentNamePrefix='FF';
-    componentName=toLowerCaseFirstChar(name.substring('formField'.length));
-  }else{
-    componentNamePrefix='ZZ';
-    componentName=name;
+  if (name !== 'formField' && name.startsWith('formField')) {
+    componentNamePrefix = 'FF';
+    componentName = toLowerCaseFirstChar(name.substring('formField'.length));
+  } else {
+    componentNamePrefix = 'ZZ';
+    componentName = name;
   }
   const componentNameFull = `${componentNamePrefix}${toUpperCaseFirstChar(combineResourceName(componentName, moduleName, true, true))}`;
   const contentComponent = `export function ${componentNameFull}${genericDeclare}(
