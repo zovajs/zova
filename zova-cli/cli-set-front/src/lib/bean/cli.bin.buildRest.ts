@@ -156,7 +156,7 @@ export class CliBinBuildRest extends BeanCliBase {
       content = `export interface IIconRecord {
 ${content}
 }
-export function $iconName<K extends keyof IIconRecord>(name: K): K {
+export function $iconName<K extends keyof IIconRecord>(name: K): any {
   return name;
 }
 `;
