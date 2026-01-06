@@ -487,7 +487,7 @@ declare module 'zova-module-demo-basic' {
 import { TableCellTest } from '../bean/tableCell.test.jsx';
 import 'zova';
 declare module 'zova' {
-  export interface IBeanRecordLocal {
+  export interface IBeanRecordGeneral {
     'demo-basic.tableCell.test': TableCellTest;
   }
 }
