@@ -8,7 +8,7 @@ import { Controller } from 'zova-module-a-bean';
 import { loadSchemaProperties, renderTableColumnTopPropsSystem, ScopeModuleAOpenapi, TypeResourceActionRowRecord, TypeResourceActionTableRecord, TypeTableCellRenderComponent, TypeTableCellRenderComponentProvider } from 'zova-module-a-openapi';
 import { BeanControllerTableBase } from '../../lib/beanControllerTableBase.js';
 import { ITableProvider } from '../../types/providers.js';
-import { ITableMeta, TypeColumn, TypeTable } from '../../types/table.js';
+import { ITableMeta, TypeColumn, TypeTable, TypeTableGetColumnsNext } from '../../types/table.js';
 import { IDecoratorTableCellOptions, ITableCellRender } from '../../types/tableCell.js';
 import { constColumnProps, ITableCellRenderColumnProps, TypeTableCellRender } from '../../types/tableColumn.js';
 
@@ -16,8 +16,7 @@ export interface ControllerTableProps<TData extends {} = {}> {
   data?: TData[];
   schema?: SchemaObject;
   tableProvider?: ITableProvider;
-  getColumnsLeft?: (table: ControllerTable<TData>) => (TypeColumn<TData>[] | undefined);
-  getColumnsRight?: (table: ControllerTable<TData>) => (TypeColumn<TData>[] | undefined);
+  getColumns?: (next: TypeTableGetColumnsNext<TData>, table: ControllerTable<TData>,) => (TypeColumn<TData>[]);
   onActionTable?: (action: keyof TypeResourceActionTableRecord, table: ControllerTable<TData>) => Promise<any> | undefined;
   onActionRow?: (action: keyof TypeResourceActionRowRecord, row: Row<TData>, table: ControllerTable<TData>) => Promise<any> | undefined;
   slotDefault?: (table: ControllerTable<TData>) => VNode;
@@ -98,21 +97,17 @@ export class ControllerTable<TData extends {} = {}> extends BeanControllerTableB
   private _createColumns() {
     this.columns = this.$useComputed(() => {
       if (!this.properties) return [];
-      const columnsLeft = this.$props.getColumnsLeft?.(this);
-      const columnsRight = this.$props.getColumnsRight?.(this);
-      const columnsMiddle = this._createColumnsMiddle();
-      let columns: TypeColumn<TData>[] = [];
-      if (columnsLeft) columns = columns.concat(columnsLeft);
-      if (columnsMiddle) columns = columns.concat(columnsMiddle);
-      if (columnsRight) columns = columns.concat(columnsRight);
-      return columns;
+      if (!this.$props.getColumns) return this._createColumnsMiddle(this.tableMeta.properties);
+      return this.$props.getColumns(properties => {
+        return this._createColumnsMiddle(properties ?? this.tableMeta.properties);
+      }, this);
     });
   }
 
-  private _createColumnsMiddle() {
+  private _createColumnsMiddle(properties: SchemaObject[]) {
     const columnHelper = createColumnHelper<TData>();
     const columns: TypeColumn<TData>[] = [];
-    for (const property of this.tableMeta.properties) {
+    for (const property of properties) {
       const key = property.key!;
       columns.push(columnHelper.accessor(key as any, {
         id: key,

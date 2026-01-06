@@ -12,8 +12,8 @@ export class RenderTable<TData extends {} = {}> extends BeanRenderBase {
       <ComponentTable<TData>
         data={this.data}
         schema={this.schema}
-        getColumnsRight={() => {
-          return this.getColumnsRight();
+        getColumns={(next, $$table) => {
+          return this.getColumns(next, $$table);
         }}
         onActionTable={(action: keyof TypeResourceActionTableRecord) => {
           return this.$props.onActionTable?.(action);

@@ -36,3 +36,5 @@ export interface ITableMeta<TData extends RowData = RowData> {
   properties: SchemaObject[];
   renders: Record<string, TypeTableCellRender<TData>>;
 }
+
+export type TypeTableGetColumnsNext<TData extends RowData = RowData> = (properties?: SchemaObject[]) => TypeColumn<TData>[];

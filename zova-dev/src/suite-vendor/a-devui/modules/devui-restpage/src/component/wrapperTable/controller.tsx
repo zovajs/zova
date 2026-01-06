@@ -4,7 +4,7 @@ import { Use } from 'zova';
 import { Controller } from 'zova-module-a-bean';
 import { $QueryAutoLoad } from 'zova-module-a-model';
 import { TypeResourceActionRowRecord, TypeResourceActionTableRecord } from 'zova-module-a-openapi';
-import { BeanControllerTableBase, ITablePaged, ITableQuery, ITableResPaged, TypeColumn } from 'zova-module-a-table';
+import { BeanControllerTableBase, ControllerTable, ITablePaged, ITableQuery, ITableResPaged, TypeTableGetColumnsNext } from 'zova-module-a-table';
 import { RenderActions } from './render.actions.jsx';
 
 export interface ControllerWrapperTableProps<TData extends {} = {}> {
@@ -53,10 +53,10 @@ export class ControllerWrapperTable<TData extends {} = {}> extends BeanControlle
     return this.$$beanResource.schemaRow;
   }
 
-  getColumnsRight() {
-    if (!this.$$beanResource.permissions?.row?.update && !this.$$beanResource.permissions?.row?.delete) return;
+  getColumns(next: TypeTableGetColumnsNext<TData>, _$$table: ControllerTable<TData>) {
+    const columns = next();
+    if (!this.$$beanResource.permissions?.row?.update && !this.$$beanResource.permissions?.row?.delete) return columns;
     const columnHelper = createColumnHelper<TData>();
-    const columns: TypeColumn<TData>[] = [];
     columns.push(columnHelper.display({
       id: 'actions',
       header: () => this.scope.locale.TableActions(),
