@@ -11,5 +11,3 @@ export interface ITableCellRenderColumnProps {
   visible?: boolean;
   render: TypeTableCellRenderComponent;
 }
-
-// 将renderContext类型都收集到一起

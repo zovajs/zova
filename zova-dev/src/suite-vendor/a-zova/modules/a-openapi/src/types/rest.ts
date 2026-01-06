@@ -56,6 +56,6 @@ export type TypeFormFieldRenderComponentProvider = Constructable<ComponentPublic
 
 // table
 export type TypeTableCellRenderComponentNormal =
-  Constructable<ComponentPublicInstance> | (keyof IComponentRecord) | TypeRenderComponentPreset;
+  Constructable<ComponentPublicInstance> | (keyof IComponentRecord) | (keyof TypeBeanRecordGeneralSelector<'tableCell'>) | TypeRenderComponentPreset;
 export type TypeTableCellRenderComponent = TypeTableCellRenderComponentNormal | TypeRenderComponentJsx;
-export type TypeTableCellRenderComponentProvider = Constructable<ComponentPublicInstance> | (keyof TypeBeanRecordGeneralSelector<'tableCell'>) | 'text';
+export type TypeTableCellRenderComponentProvider = Constructable<ComponentPublicInstance> | (keyof IComponentRecord) | (keyof TypeBeanRecordGeneralSelector<'tableCell'>) | 'text';
