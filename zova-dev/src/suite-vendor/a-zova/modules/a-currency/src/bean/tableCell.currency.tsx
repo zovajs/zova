@@ -9,6 +9,6 @@ export class TableCellCurrency extends BeanBase implements ITableCellRender {
   render(renderContext: ITableCellRenderContext, _options: ITableCellOptionsCurrency, next: NextTableCellRender) {
     const { cellScope } = renderContext;
     const value = next();
-    return currencyFormat(value, cellScope.property.rest?.currency);
+    return currencyFormat(value, cellScope.property?.rest?.currency);
   }
 }
