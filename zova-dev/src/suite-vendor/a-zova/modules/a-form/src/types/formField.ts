@@ -1,3 +1,4 @@
+import type { SchemaObject } from 'openapi3-ts/oas31';
 import type { VNode } from 'vue';
 import type z from 'zod';
 import type { TypeRenderComponentJsx } from 'zova-jsx';
@@ -10,6 +11,14 @@ import type { TypeBehaviorFormFieldOptions } from './form.js';
 export type HTMLInputElementType = 'text' | 'password' | 'number' | 'file' | 'hidden' | 'tel' | 'email';
 export const inputTypePresets = ['text', 'password', 'number', 'file', 'hidden', 'tel', 'email'];
 export const constFieldProps = '$$FieldProps';
+
+export interface IFormFieldCelScope<TParentData = {}> {
+  name: string;
+  value: any;
+  property?: SchemaObject;
+  displayValue?: any;
+  render?: IFormFieldRenderContext<TParentData>;
+}
 
 export interface IFormFieldLayoutOptionsBase {
   classContainer?: any;

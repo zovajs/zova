@@ -11,7 +11,7 @@ import { Controller } from 'zova-module-a-bean';
 import { loadSchemaProperties, renderFormFieldTopPropsSystem, schemaToZodSchema, ScopeModuleAOpenapi, TypeFormFieldRenderComponent, TypeFormFieldRenderComponentProvider } from 'zova-module-a-openapi';
 import { BeanControllerFormBase } from '../../lib/beanControllerFormBase.js';
 import { RevalidateLogicProps, TypeForm, TypeFormOnShowError, TypeFormOnSubmit } from '../../types/form.js';
-import { constFieldProps, IFormFieldLayoutOptionsBase, IFormFieldRenderContextOptions, TypeFormFieldOnDisplayValueUpdate } from '../../types/formField.js';
+import { constFieldProps, IFormFieldCelScope, IFormFieldLayoutOptionsBase, IFormFieldRenderContextOptions, TypeFormFieldOnDisplayValueUpdate } from '../../types/formField.js';
 import { IFormMeta } from '../../types/formMeta.js';
 import { IFormProvider } from '../../types/provider.js';
 
@@ -134,7 +134,7 @@ export class ControllerForm<TFormData extends {} = {}, TSubmitMeta = never> exte
     return celEnv;
   }
 
-  public getFieldCelScope<K extends DeepKeys<TFormData>>(name: K, scopeExtra?: {}) {
+  public getFieldCelScope<K extends DeepKeys<TFormData>>(name: K, scopeExtra?: {}): IFormFieldCelScope {
     return {
       name,
       value: this.getFieldValue(name),
