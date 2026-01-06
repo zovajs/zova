@@ -3,7 +3,7 @@ import type { ControllerWrapperFilterProps } from '../../src/component/wrapperFi
 
 type TypeControllerWrapperFilterPublicProps = TypeRenderComponentJsxPropsPublic
   & ControllerWrapperFilterProps;
-export function ZDevuiRestpageWrapperFilter(
+export function ZZDevuiRestpageWrapperFilter(
   _props: TypeControllerWrapperFilterPublicProps,
 ) {
   return 'devui-restpage:wrapperFilter';

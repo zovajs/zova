@@ -3,7 +3,7 @@ import type { ControllerWrapperFormProps } from '../../src/component/wrapperForm
 
 type TypeControllerWrapperFormPublicProps = TypeRenderComponentJsxPropsPublic
   & ControllerWrapperFormProps;
-export function ZDevuiRestpageWrapperForm(
+export function ZZDevuiRestpageWrapperForm(
   _props: TypeControllerWrapperFormPublicProps,
 ) {
   return 'devui-restpage:wrapperForm';

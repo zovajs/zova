@@ -3,7 +3,7 @@ import type { ControllerFormSubscribeProps } from '../../src/component/formSubsc
 
 type TypeControllerFormSubscribePublicProps<TFormData extends {} = {}, TSubmitMeta = never> = TypeRenderComponentJsxPropsPublic
   & ControllerFormSubscribeProps<TFormData, TSubmitMeta>;
-export function ZFormSubscribe<TFormData extends {} = {}, TSubmitMeta = never>(
+export function ZZFormSubscribe<TFormData extends {} = {}, TSubmitMeta = never>(
   _props: TypeControllerFormSubscribePublicProps<TFormData, TSubmitMeta>,
 ) {
   return 'a-form:formSubscribe';

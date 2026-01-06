@@ -3,7 +3,7 @@ import type { ControllerPageProps } from '../../src/component/page/controller.js
 
 type TypeControllerPagePublicProps = TypeRenderComponentJsxPropsPublic
   & ControllerPageProps;
-export function ZHomeBasePage(
+export function ZZHomeBasePage(
   _props: TypeControllerPagePublicProps,
 ) {
   return 'home-base:page';

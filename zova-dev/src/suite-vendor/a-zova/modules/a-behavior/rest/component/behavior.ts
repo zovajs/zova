@@ -3,7 +3,7 @@ import type { ControllerBehaviorProps } from '../../src/component/behavior/contr
 
 type TypeControllerBehaviorPublicProps = TypeRenderComponentJsxPropsPublic
   & ControllerBehaviorProps;
-export function ZBehavior(
+export function ZZBehavior(
   _props: TypeControllerBehaviorPublicProps,
 ) {
   return 'a-behavior:behavior';

@@ -3,7 +3,7 @@ import type { ControllerEssentialLinkProps } from '../../src/component/essential
 
 type TypeControllerEssentialLinkPublicProps = TypeRenderComponentJsxPropsPublic
   & ControllerEssentialLinkProps;
-export function ZHomeLayoutEssentialLink(
+export function ZZHomeLayoutEssentialLink(
   _props: TypeControllerEssentialLinkPublicProps,
 ) {
   return 'home-layout:essentialLink';

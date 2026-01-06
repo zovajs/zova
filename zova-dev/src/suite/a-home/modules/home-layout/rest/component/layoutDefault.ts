@@ -3,7 +3,7 @@ import type { ControllerLayoutDefaultProps } from '../../src/component/layoutDef
 
 type TypeControllerLayoutDefaultPublicProps = TypeRenderComponentJsxPropsPublic
   & ControllerLayoutDefaultProps;
-export function ZHomeLayoutDefault(
+export function ZZHomeLayoutDefault(
   _props: TypeControllerLayoutDefaultPublicProps,
 ) {
   return 'home-layout:layoutDefault';

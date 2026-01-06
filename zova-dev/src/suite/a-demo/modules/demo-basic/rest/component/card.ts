@@ -3,7 +3,7 @@ import type { ControllerCardProps } from '../../src/component/card/controller.js
 
 type TypeControllerCardPublicProps = TypeRenderComponentJsxPropsPublic
   & ControllerCardProps;
-export function ZDemoBasicCard(
+export function ZZDemoBasicCard(
   _props: TypeControllerCardPublicProps,
 ) {
   return 'demo-basic:card';

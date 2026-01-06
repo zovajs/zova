@@ -3,7 +3,7 @@ import type { ControllerFormFieldProps } from '../../src/component/formField/con
 
 type TypeControllerFormFieldPublicProps<TParentData extends {} = {}> = TypeRenderComponentJsxPropsPublic
   & ControllerFormFieldProps<TParentData>;
-export function ZFormField<TParentData extends {} = {}>(
+export function ZZFormField<TParentData extends {} = {}>(
   _props: TypeControllerFormFieldPublicProps<TParentData>,
 ) {
   return 'a-form:formField';

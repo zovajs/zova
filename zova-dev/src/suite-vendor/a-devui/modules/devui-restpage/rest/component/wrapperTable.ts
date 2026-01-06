@@ -3,7 +3,7 @@ import type { ControllerWrapperTableProps } from '../../src/component/wrapperTab
 
 type TypeControllerWrapperTablePublicProps<TData extends {} = {}> = TypeRenderComponentJsxPropsPublic
   & ControllerWrapperTableProps<TData>;
-export function ZDevuiRestpageWrapperTable<TData extends {} = {}>(
+export function ZZDevuiRestpageWrapperTable<TData extends {} = {}>(
   _props: TypeControllerWrapperTablePublicProps<TData>,
 ) {
   return 'devui-restpage:wrapperTable';
