@@ -4,7 +4,7 @@ import path from 'node:path';
 import { combineResourceName } from '@cabloy/utils';
 import { toUpperCaseFirstChar } from '@cabloy/word-utils';
 import fse from 'fs-extra';
-import { generateRestIndex } from './utils.js';
+import { generateRestIndex } from './utils.ts';
 
 export default async function (options: IMetadataCustomGenerateOptions): Promise<string> {
   const { globFiles } = options;
@@ -21,12 +21,12 @@ async function generateRestTableCell(
   globFile: IGlobBeanFile,
 ) {
   const { moduleName, modulePath } = options;
-  const { beanName, beanNameCapitalize, beanNameFull, className, fileNameJS, fileNameJSRelative } = globFile;
+  const { beanName, beanNameCapitalize, sceneName, fileNameJS } = globFile;
   // options
   const typeOptionsName = `ITableCellOptions${beanNameCapitalize}`;
   // import
   const contentImports: string[] = [];
-  contentImports.push(`import type { ${typeOptionsName} } from '../../src/bean/${fileNameJSRelative}';`);
+  contentImports.push(`import type { ${typeOptionsName} } from '../../src/bean/${fileNameJS}';`);
   // component
   const componentNamePrefix = 'TT';
   const componentName = beanName;
@@ -34,7 +34,7 @@ async function generateRestTableCell(
   const contentComponent = `export function ${componentNameFull}(
   _props: ${typeOptionsName},
 ) {
-  return '${beanNameFull}';
+  return '${moduleName}.${sceneName}.${beanName}';
 }`;
   // content
   const content = `${contentImports.join('\n')}
