@@ -182,7 +182,8 @@ async function generateRestComponent(
     contentImports.push(`import type { ${_contentImportTypeController.join(', ')} } from '../../src/component/${name}/controller${controllerExtJs}';`);
   }
   // component
-  const componentName = `Z${toUpperCaseFirstChar(combineResourceName(name, moduleName, false, false))}`;
+  const componentNamePrefix = name !== 'formField' && name.startsWith('formField') ? 'F' : 'Z';
+  const componentName = `${componentNamePrefix}${toUpperCaseFirstChar(combineResourceName(name, moduleName, false, false))}`;
   const contentComponent = `export function ${componentName}${genericDeclare}(
   _props: ${typeControllerPublicPropsName}${genericArguments},
 ) {
