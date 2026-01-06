@@ -1,0 +1,61 @@
+import type { IMetadataCustomGenerateOptions } from '@cabloy/cli';
+import type { IGlobBeanFile } from '@cabloy/module-info';
+import path from 'node:path';
+import { combineResourceName } from '@cabloy/utils';
+import { toUpperCaseFirstChar } from '@cabloy/word-utils';
+import fse from 'fs-extra';
+import { generateRestIndex } from './utils.js';
+
+export default async function (options: IMetadataCustomGenerateOptions): Promise<string> {
+  const { globFiles } = options;
+  for (const globFile of globFiles) {
+    if (globFile.isIgnore) continue;
+    // restComponent
+    await generateRestTableCell(options, globFile);
+  }
+  return '';
+}
+
+async function generateRestTableCell(
+  options: IMetadataCustomGenerateOptions,
+  globFile: IGlobBeanFile,
+) {
+  const { moduleName, modulePath } = options;
+  const { beanName, beanNameCapitalize, beanNameFull, className, fileNameJS, fileNameJSRelative } = globFile;
+  // options
+  const typeOptionsName = `ITableCellOptions${beanNameCapitalize}`;
+  // import
+  const contentImports: string[] = [];
+  contentImports.push(`import type { ${typeOptionsName} } from '../../src/bean/${fileNameJSRelative}';`);
+  // component
+  const componentNamePrefix = 'TT';
+  const componentName = beanName;
+  const componentNameFull = `${componentNamePrefix}${toUpperCaseFirstChar(combineResourceName(componentName, moduleName, true, true))}`;
+  const contentComponent = `export function ${componentNameFull}(
+  _props: ${typeOptionsName},
+) {
+  return '${beanNameFull}';
+}`;
+  // content
+  const content = `${contentImports.join('\n')}
+
+${contentComponent}
+`;
+  // output
+  const fileDest = path.join(modulePath, `rest/tableCell/${beanName}.ts`);
+  await fse.outputFile(fileDest, content);
+  // tableCells
+  const fileComponents = path.join(modulePath, 'rest/tableCells.ts');
+  let contentComponents = '';
+  if (fse.existsSync(fileComponents)) {
+    contentComponents = (await fse.readFile(fileComponents)).toString();
+  }
+  const exportContent = `export * from './tableCell/${beanName}.js';`;
+  if (!contentComponents.includes(exportContent)) {
+    contentComponents = `${contentComponents}${exportContent}\n`;
+    await fse.outputFile(fileComponents, contentComponents);
+  }
+  // index
+  const exportIndexContent = 'export * from \'./tableCells.js\';';
+  await generateRestIndex(modulePath, exportIndexContent);
+}
