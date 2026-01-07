@@ -60,7 +60,7 @@ export class BeanBehaviorsHolder extends BeanBase {
 
   public render(vNodeDefault?: Function, propsCustom?: {}) {
     const parent = this.ctx.instance;
-    const { ref, props, children } = parent.vnode;
+    const { props, children } = parent.vnode;
     // props
     const propsNew = Object.assign({}, propsCustom ?? props) as any;
     delete propsNew.behaviorTag;
@@ -71,11 +71,11 @@ export class BeanBehaviorsHolder extends BeanBase {
       return createVNode(this.options.behaviorTag.component, propsNew, children);
     });
     // ensure inner component inherits the async wrapper's ref owner
-    vnode.ref = ref;
+    vnode.ref = parent.vnode.ref;
     // pass the custom element callback on to the inner comp
     // and remove it from the async wrapper
     cast(vnode).ce = cast(parent.vnode).ce;
-    delete cast(parent.vnode).ce;
+    // delete cast(parent.vnode).ce;
     // ok
     return vnode;
   }
