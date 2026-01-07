@@ -10,7 +10,7 @@ export class BeanControllerBase extends BeanBase {
 
   /** @internal */
   public __initControllerData(controllerData: IControllerData) {
-    if (!this.ctx.instance) return;
+    if (this.ctx.disposed) return;
     // slots
     this.$slots = controllerData.context.slots as any;
     // props
@@ -20,7 +20,7 @@ export class BeanControllerBase extends BeanBase {
 
   /** @internal */
   public __updateControllerData() {
-    if (!this.ctx.instance) return;
+    if (this.ctx.disposed) return;
     // props
     this.__initControllerProps(this.ctx.instance.vnode.props);
     this.app.meta.module._monkeyModuleSync(true, 'controllerDataUpdate', undefined, this);
