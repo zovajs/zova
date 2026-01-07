@@ -2,8 +2,14 @@ import type { ITableCellRenderContext } from 'zova-module-a-table';
 import { BeanControllerBase, Use } from 'zova';
 import { Controller } from 'zova-module-a-bean';
 
+export interface ControllerActionViewProps {
+  onClick?: () => void;
+}
+
 @Controller()
 export class ControllerActionView extends BeanControllerBase {
+  static $propsDefault = {};
+
   @Use({ injectionScope: 'host' })
   $$cell: ITableCellRenderContext;
 
