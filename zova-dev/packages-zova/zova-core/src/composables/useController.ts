@@ -110,6 +110,7 @@ async function _useController(
 
   async function __load() {
     // controller
+    if (ctx.disposed) return;
     await ctx.bean._newBeanInner(
       true,
       BeanControllerIdentifier,
@@ -120,13 +121,15 @@ async function _useController(
       false,
     );
     if (styleBeanFullName) {
+      if (ctx.disposed) return;
       await ctx.bean._newBeanInner(true, BeanStyleIdentifier, undefined, undefined, styleBeanFullName, true, false);
     }
     if (renderBeanFullName) {
+      if (ctx.disposed) return;
       await ctx.bean._newBeanInner(true, BeanRenderIdentifier, undefined, undefined, renderBeanFullName, true, false);
     }
     // must touch inited on server/client, force router.use effect
-    if (!ctx.instance) return;
+    if (ctx.disposed) return;
     ctx.meta.state.inited.touch();
     if (process.env.CLIENT) {
       ctx.util.instanceScope(() => {
@@ -139,9 +142,14 @@ async function _useController(
   }
 
   // load
-  ctx.meta.hooks.onCreated(() => {
-    if (!ctx.instance) return;
-    return __load();
+  ctx.meta.hooks.onCreated(async () => {
+    if (ctx.disposed) return;
+    try {
+      return await __load();
+    } catch (err) {
+      if (ctx.disposed) return;
+      throw err;
+    }
   });
   if (process.env.SERVER) {
     onServerPrefetch(() => {
