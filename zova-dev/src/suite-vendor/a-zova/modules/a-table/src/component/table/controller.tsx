@@ -190,6 +190,8 @@ export class ControllerTable<TData extends {} = {}> extends BeanControllerTableB
           cellProps = deepExtend({}, onionOptions, cellProps);
         }
         const cellRenderContext: ITableCellRenderContext = {
+          app: this.app,
+          ctx: this.ctx,
           cellScope,
           cellContext,
           $$table: this,
