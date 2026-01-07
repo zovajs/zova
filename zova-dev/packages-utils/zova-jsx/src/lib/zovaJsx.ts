@@ -117,7 +117,7 @@ export class ZovaJsx extends BeanSimple {
     }
     const vnode = h(Component, props, children);
     if (_isZovaComponent && hostProviders) {
-      cast(vnode).ctx.zovaHostProviders = hostProviders;
+      cast(vnode).zovaHostProviders = hostProviders;
     }
     return vnode;
   }

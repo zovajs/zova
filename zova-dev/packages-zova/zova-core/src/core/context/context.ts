@@ -26,6 +26,7 @@ export class ZovaContext {
     this.meta = this.bean._newBeanSimple(CtxMeta, false);
     this.meta.initialize();
     // zovaHostProviders
+    console.log(instance.vnode.el?.tagName === 'svg');
   }
 
   /** @internal */
