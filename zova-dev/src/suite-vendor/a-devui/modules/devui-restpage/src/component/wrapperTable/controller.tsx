@@ -77,6 +77,12 @@ export class ControllerWrapperTable<TData extends {} = {}> extends BeanControlle
     return this.$props.onActionRow?.(action, row);
   }
 
+  async onActionDelete(row: Row<TData>) {
+    // eslint-disable-next-line no-alert
+    if (!window.confirm(this.scope.locale.DeleteConfirm())) return;
+    return this.onActionRow('delete', row);
+  }
+
   gotoPage(pageNo: number) {
     this.queryPaged.pageNo = pageNo;
   }

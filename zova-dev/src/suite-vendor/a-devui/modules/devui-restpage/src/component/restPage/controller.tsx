@@ -63,11 +63,8 @@ export class ControllerRestPage extends BeanControllerBase implements ITableActi
       this.editMode = 'update';
       this.formVisible = true;
     } else if (action === 'delete') {
-      // eslint-disable-next-line no-alert
-      if (window.confirm(this.scope.locale.DeleteConfirm())) {
-        const mutation = this.$$beanResource.getMutationDelete(row.id);
-        await mutation.mutateAsync();
-      }
+      const mutation = this.$$beanResource.getMutationDelete(row.id);
+      await mutation.mutateAsync();
     }
   }
 }

@@ -22,7 +22,7 @@ export class RenderActions<TData extends {} = {}> extends BeanRenderBase {
           <button
             class="btn btn-outline btn-error"
             onClick={() => {
-              this.onActionRow('delete', props.row);
+              this.onActionDelete(props.row);
             }}
           >
             <ZIcon name="::delete"></ZIcon>
