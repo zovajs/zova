@@ -69,7 +69,7 @@ export class ModelSdk extends BeanModelBase {
         const schema = this.$$sysSdk.getSchema(schemaName);
         return schema ?? null;
       },
-      staleTime: Infinity,
+      staleTime: process.env.SSR ? Infinity : undefined,
     });
   }
 

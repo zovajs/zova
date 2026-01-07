@@ -10,6 +10,7 @@ export class ControllerActionView extends BeanControllerBase {
   protected async __init__() {}
 
   protected render() {
+    if (!this.$$cell) throw new Error('should used in table');
     const { $$table, cellContext, cellScope } = this.$$cell;
     return (
       <a
