@@ -83,6 +83,7 @@ export class ZovaJsx extends BeanSimple {
   }
 
   private _renderJsxSingle(Component: any, componentOptions: TypeRenderComponentJsx, props: {}, celScope: {}, hostProviders?: {}) {
+    const _isZovaComponent = isZovaComponent(Component);
     // key
     cast(props).key = this.evaluateExpression(componentOptions.key, celScope);
     // props
@@ -97,7 +98,7 @@ export class ZovaJsx extends BeanSimple {
         children = this.renderJsxChildrenDirect(componentOptions.props!.children, celScope);
       } else {
         const childrenCollect = this._renderJsxChildrenCollect(componentOptions.props!.children, celScope, hostProviders);
-        if (isZovaComponent(Component)) {
+        if (_isZovaComponent) {
           for (const key in childrenCollect) {
             const slot = childrenCollect[key];
             if (key === 'default') {
@@ -111,10 +112,14 @@ export class ZovaJsx extends BeanSimple {
         }
       }
     }
-    if (isZovaComponent(Component)) {
+    if (_isZovaComponent) {
       Component = this.app.meta.component.getZovaComponent(Component as never);
     }
-    return h(Component, props, children);
+    const vnode = h(Component, props, children);
+    if (_isZovaComponent && hostProviders) {
+      cast(vnode).ctx.zovaHostProviders = hostProviders;
+    }
+    return vnode;
   }
 
   public renderJsxProps(jsxProps: TypeRenderComponentJsxProps | undefined, props: {}, celScope: {}) {
