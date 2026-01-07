@@ -7,7 +7,7 @@ const emits = defineEmits<{
 }>();
 function onClick() {
   props.onPerform?.('onPerform');
-  emits('click', 'onClick');
+  emits('click', 'inner: onClick');
 }
 </script>
 
