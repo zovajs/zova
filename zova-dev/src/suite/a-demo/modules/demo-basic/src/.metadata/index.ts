@@ -31,6 +31,7 @@ declare module 'zova' {
 }
 /** store: end */
 /** controller: begin */
+export * from '../component/actionView/controller.jsx';
 export * from '../component/card/controller.jsx';
 export * from '../component/formFieldTest/controller.jsx';
 export * from '../component/tableCellTest/controller.jsx';
@@ -53,6 +54,11 @@ declare module 'zova' {
 }
 declare module 'zova-module-demo-basic' {
   
+        export interface ControllerActionView {
+          /** @internal */
+          get scope(): ScopeModuleDemoBasic;
+        }
+
         export interface ControllerCard {
           /** @internal */
           get scope(): ScopeModuleDemoBasic;
@@ -125,6 +131,7 @@ declare module 'zova-module-demo-basic' {
 }
 /** controller: end */
 /** controller: begin */
+import { ControllerActionView } from '../component/actionView/controller.jsx';
 import { ControllerCard } from '../component/card/controller.jsx';
 import { ControllerFormFieldTest } from '../component/formFieldTest/controller.jsx';
 import { ControllerTableCellTest } from '../component/tableCellTest/controller.jsx';
@@ -142,7 +149,8 @@ import { ControllerPageToolTwo } from '../page/toolTwo/controller.jsx';
 import 'zova';
 declare module 'zova' {
   export interface IBeanRecordLocal {
-    'demo-basic.controller.card': ControllerCard;
+    'demo-basic.controller.actionView': ControllerActionView;
+'demo-basic.controller.card': ControllerCard;
 'demo-basic.controller.formFieldTest': ControllerFormFieldTest;
 'demo-basic.controller.tableCellTest': ControllerTableCellTest;
 'demo-basic.controller.pageComponent': ControllerPageComponent;
@@ -246,6 +254,8 @@ $query: NSControllerPageToolTwo.QueryOutput;
 /** pages: end */
 
 /** components: begin */
+export * from './component/actionView.js';
+import { ZActionView } from './component/actionView.js';
 export * from './component/card.js';
 import { ZCard } from './component/card.js';
 export * from './component/formFieldTest.js';
@@ -253,19 +263,22 @@ import { ZFormFieldTest } from './component/formFieldTest.js';
 export * from './component/tableCellTest.js';
 import { ZTableCellTest } from './component/tableCellTest.js';
 export const components = {
-  'card': ZCard,
+  'actionView': ZActionView,
+'card': ZCard,
 'formFieldTest': ZFormFieldTest,
 'tableCellTest': ZTableCellTest,
 };
 import 'zova';
 declare module 'zova' {
 export interface IComponentRecord {
-  'demo-basic:card': ControllerCard;
+  'demo-basic:actionView': ControllerActionView;
+'demo-basic:card': ControllerCard;
 'demo-basic:formFieldTest': ControllerFormFieldTest;
 'demo-basic:tableCellTest': ControllerTableCellTest;
 }
 export interface IZovaComponentRecord {
-  'demo-basic:card': typeof ZCard;
+  'demo-basic:actionView': typeof ZActionView;
+'demo-basic:card': typeof ZCard;
 'demo-basic:formFieldTest': typeof ZFormFieldTest;
 'demo-basic:tableCellTest': typeof ZTableCellTest;
 }
