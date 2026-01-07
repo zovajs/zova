@@ -25,8 +25,7 @@ export class ZovaContext {
     this.util = this.bean._newBeanSimple(CtxUtil, false);
     this.meta = this.bean._newBeanSimple(CtxMeta, false);
     this.meta.initialize();
-    // zovaHostProviders
-    console.log(instance.vnode.el?.tagName === 'svg');
+    this._zovaHostProviders();
   }
 
   /** @internal */
@@ -38,6 +37,14 @@ export class ZovaContext {
     cast(this).bean = null;
     cast(this).meta = null;
     this.disposed = true;
+  }
+
+  private _zovaHostProviders() {
+    const zovaHostProviders = cast(this.instance).zovaHostProviders;
+    if (!zovaHostProviders) return;
+    for (const key in zovaHostProviders) {
+      this.bean._setBean(key, zovaHostProviders[key]);
+    }
   }
 }
 
