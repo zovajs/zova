@@ -180,6 +180,14 @@ export class ControllerTable<TData extends {} = {}> extends BeanControllerTableB
       if (renderProvider === 'text') {
         return displayValue;
       }
+      // renderContext
+      const cellRenderContext: ITableCellRenderContext = {
+        app: this.app,
+        ctx: this.ctx,
+        cellScope,
+        cellContext,
+        $$table: this,
+      };
       // beanInstance
       if (beanInstance) {
         // jsx: props
@@ -189,13 +197,6 @@ export class ControllerTable<TData extends {} = {}> extends BeanControllerTableB
         if (onionOptions) {
           cellProps = deepExtend({}, onionOptions, cellProps);
         }
-        const cellRenderContext: ITableCellRenderContext = {
-          app: this.app,
-          ctx: this.ctx,
-          cellScope,
-          cellContext,
-          $$table: this,
-        };
         return beanInstance.render(cellRenderContext, cellProps, () => {
           const children = isJsxComponent(columnProps.render) && cast(columnProps.render).children;
           if (children && children.length > 0) {
@@ -206,7 +207,7 @@ export class ControllerTable<TData extends {} = {}> extends BeanControllerTableB
         });
       }
       // general component
-      return this.zovaJsx.render(columnProps.render, {}, cellScope);
+      return this.zovaJsx.render(columnProps.render, {}, cellScope, { $$cell: cellRenderContext });
     };
   }
 
