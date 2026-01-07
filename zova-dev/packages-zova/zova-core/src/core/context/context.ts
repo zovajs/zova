@@ -25,6 +25,7 @@ export class ZovaContext {
     this.util = this.bean._newBeanSimple(CtxUtil, false);
     this.meta = this.bean._newBeanSimple(CtxMeta, false);
     this.meta.initialize();
+    // zovaHostProviders
   }
 
   /** @internal */

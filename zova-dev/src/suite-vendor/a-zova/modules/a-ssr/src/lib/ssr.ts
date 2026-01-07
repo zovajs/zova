@@ -198,7 +198,15 @@ export class CtxSSR extends BeanSimple {
     //
     this[SymbolInstanceUpdates].forEach(instance => {
       if (!instance.isUnmounted && instance.zova) {
-        instance.update();
+        try {
+          instance.update();
+        } catch (_err) {
+          const ctx = instance.zova;
+          if (ctx) {
+            ctx.bean.dispose();
+            ctx.dispose();
+          }
+        }
       }
     });
     this[SymbolInstanceUpdates] = [];
