@@ -8,6 +8,7 @@ export class CtxComponent extends BeanSimple {
   private _bean_render_original: any;
 
   activate() {
+    if (this.ctx.disposed) return;
     const renderMethod = 'render';
     const self = this;
     const instance = cast(this.ctx.instance);

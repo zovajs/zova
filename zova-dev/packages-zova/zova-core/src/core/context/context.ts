@@ -13,6 +13,7 @@ export class ZovaContext {
   bean: BeanContainer;
   util: CtxUtil;
   meta: CtxMeta;
+  disposed: boolean;
   // config: ContextConfig;
 
   constructor(instance: ComponentInternalInstance) {
@@ -34,6 +35,7 @@ export class ZovaContext {
     cast(this).app = null;
     cast(this).bean = null;
     cast(this).meta = null;
+    this.disposed = true;
   }
 }
 
