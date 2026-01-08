@@ -1,8 +1,9 @@
 import { BeanBase } from 'zova';
+import { TypeDateFormat } from 'zova-module-a-openapi';
 import { IDecoratorTableCellOptions, ITableCellRender, ITableCellRenderContext, NextTableCellRender, TableCell } from 'zova-module-a-table';
 
 export interface ITableCellOptionsDate extends IDecoratorTableCellOptions {
-  dateFormat?:
+  dateFormat?: TypeDateFormat;
 }
 
 @TableCell<ITableCellOptionsDate>()

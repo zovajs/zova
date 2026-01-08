@@ -3,14 +3,6 @@
   "title": "a-date",
   "type": "module",
   "version": "5.0.0",
-  "zovaModule": {
-    "globalDependencies": {
-      "luxon": true
-    },
-    "globalDependenciesDev": {
-      "@types/luxon": true
-    }
-  },
   "description": "",
   "author": "",
   "keywords": [
@@ -37,10 +29,5 @@
     "tsc:publish": "npm run clean && tsc -b",
     "_prepublishOnly": "npm run tsc:publish"
   },
-  "dependencies": {
-    "luxon": "^3.7.2"
-  },
-  "devDependencies": {
-    "@types/luxon": "^3.7.1"
-  }
+  "dependencies": {}
 }

@@ -3,12 +3,14 @@ import type { ComponentPublicInstance } from 'vue';
 import type { Constructable, IComponentRecord, TypeBeanRecordGeneralSelector } from 'zova';
 import type { TypeRenderComponentJsx } from 'zova-jsx';
 import type { TypeResourceActionRowRecordRender } from './actions.js';
+import type { TypeDateFormat } from './date.js';
 import 'openapi3-ts/oas30';
 import 'openapi3-ts/oas31';
 
 export interface ISchemaObjectExtensionFieldRest {
   render?: TypeFormFieldRenderComponentNormal | TypeTableCellRenderComponentNormal;
   currency?: CurrencyOptions;
+  dateFormat?: TypeDateFormat;
   visible?: boolean;
   displayValue?: any;
   order?: number;
