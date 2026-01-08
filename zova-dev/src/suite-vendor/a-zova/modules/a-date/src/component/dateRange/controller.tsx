@@ -19,9 +19,9 @@ export class ControllerDateRange extends BeanControllerBase {
   protected render() {
     return (
       <div>
-        <input type="date" class="input" />
+        <input style={{ width: '130px' }} type="date" />
         <span>~</span>
-        <input type="date" class="input" />
+        <input style={{ width: '130px' }} type="date" />
       </div>
     );
   }

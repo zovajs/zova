@@ -10,6 +10,7 @@ export class RenderWrapperFilter extends BeanRenderBase {
         inline={true}
         data={this.$props.formData}
         schema={this.schema}
+        schemaScene="filter"
         formMeta={this.formMeta}
         formFieldLayout={this.formFieldLayout}
         formProvider={this.$props.formProvider}
