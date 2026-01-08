@@ -6,7 +6,7 @@ import { classes } from 'typestyle';
 import { createTextVNode, h } from 'vue';
 import { BeanSimple, cast } from 'zova-core';
 import { renderFieldJsxPropsSystem } from './const.ts';
-import { isJsxComponent, isNativeElement, isZovaComponent } from './utils.ts';
+import { isJsxComponent, isNativeElement, isZovaComponent, normalizePropName } from './utils.ts';
 
 type CelEnv = typeof celEnvBase;
 
@@ -127,12 +127,12 @@ export class ZovaJsx extends BeanSimple {
     const keys = Object.keys(jsxProps).filter(item => !renderFieldJsxPropsSystem.includes(item));
     if (keys.length === 0) return props;
     for (const key of keys) {
-      const keyValue = this.renderJsxOrCel(jsxProps[key], undefined, celScope);
-      if (key === 'class') {
-        props[key] = classes(props[key], keyValue);
-      } else {
-        props[key] = keyValue;
+      let keyValue = this.renderJsxOrCel(jsxProps[key], undefined, celScope);
+      const propName = normalizePropName(key);
+      if (propName === 'class') {
+        keyValue = classes(props[propName], keyValue);
       }
+      props[propName] = keyValue;
     }
     return props;
   }

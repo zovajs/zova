@@ -1,3 +1,7 @@
+const __propsMapper = {
+  className: 'class',
+};
+
 export function isNativeElement(Component: any) {
   return (typeof Component === 'string' && !Component.includes(':') && Component.charAt(0) >= 'a' && Component.charAt(0) <= 'z');
 }
@@ -17,4 +21,8 @@ export function isJsxComponent(Component: any) {
 export function invokeProp(prop: any) {
   if (typeof prop === 'function') return prop();
   return prop;
+}
+
+export function normalizePropName(name: string) {
+  return __propsMapper[name] ?? name;
 }
