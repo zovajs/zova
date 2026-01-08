@@ -12,6 +12,8 @@ export interface IFormProviderComponents {
   text?: TypeFormFieldRenderComponentProvider;
   password?: TypeFormFieldRenderComponentProvider;
   currency?: TypeFormFieldRenderComponentProvider;
+  date?: TypeFormFieldRenderComponentProvider;
+  dateRange?: TypeFormFieldRenderComponentProvider;
 }
 
 export interface IFormProvider {
