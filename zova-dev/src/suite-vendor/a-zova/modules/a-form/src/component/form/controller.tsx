@@ -8,7 +8,7 @@ import { $ZodIssue } from 'zod/v4/core';
 import { cast, deepEqual, deepExtend, UseScope } from 'zova';
 import { isJsxComponent, ZovaJsx } from 'zova-jsx';
 import { Controller } from 'zova-module-a-bean';
-import { loadSchemaProperties, renderFormFieldTopPropsSystem, schemaToZodSchema, ScopeModuleAOpenapi, TypeFormFieldRenderComponent, TypeFormFieldRenderComponentProvider } from 'zova-module-a-openapi';
+import { loadSchemaProperties, renderFormFieldTopPropsSystem, schemaToZodSchema, ScopeModuleAOpenapi, TypeFormFieldRenderComponent, TypeFormFieldRenderComponentProvider, TypeFormSchemaScene } from 'zova-module-a-openapi';
 import { BeanControllerFormBase } from '../../lib/beanControllerFormBase.js';
 import { RevalidateLogicProps, TypeForm, TypeFormOnShowError, TypeFormOnSubmit } from '../../types/form.js';
 import { constFieldProps, IFormFieldCelScope, IFormFieldLayoutOptionsBase, IFormFieldRenderContextOptions, TypeFormFieldOnDisplayValueUpdate } from '../../types/formField.js';
@@ -20,6 +20,7 @@ export interface ControllerFormProps<TFormData extends {} = {}, TSubmitMeta = ne
   inline?: boolean;
   data?: TFormData;
   schema?: SchemaObject;
+  schemaScene?: TypeFormSchemaScene;
   zodSchema?: z.ZodObject<any>;
   validateOnDynamic?: boolean;
   validateOnDynamicLogic?: RevalidateLogicProps;
@@ -36,7 +37,7 @@ export interface ControllerFormProps<TFormData extends {} = {}, TSubmitMeta = ne
 }
 @Controller()
 export class ControllerForm<TFormData extends {} = {}, TSubmitMeta = never> extends BeanControllerFormBase {
-  static $propsDefault = { formTag: 'form' };
+  static $propsDefault = { formTag: 'form', schemaScene: 'form' };
 
   form: TypeForm<TFormData, TSubmitMeta>;
   formState: TypeForm<TFormData>['state'];
@@ -64,7 +65,7 @@ export class ControllerForm<TFormData extends {} = {}, TSubmitMeta = never> exte
       return this._getZodSchema();
     });
     this.properties = this.$useComputed(() => {
-      return loadSchemaProperties(this.schema, 'form');
+      return loadSchemaProperties(this.schema, this.$props.schemaScene);
     });
     this.fieldCelEnv = this._getFieldCelEnv();
     this.zovaJsx = this.app.bean._newBeanSimple(

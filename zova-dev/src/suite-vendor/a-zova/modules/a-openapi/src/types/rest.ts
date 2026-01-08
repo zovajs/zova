@@ -43,6 +43,7 @@ declare module 'openapi3-ts/oas31' {
 }
 
 export type TypeSchemaScene = 'table' | 'form' | 'filter';
+export type TypeFormSchemaScene = 'form' | 'filter';
 
 export const renderFormFieldTopPropsSystem = ['order', 'table', 'form', 'filter'];
 export const renderTableColumnTopPropsSystem = ['order', 'table', 'form', 'filter', 'displayValue'];
