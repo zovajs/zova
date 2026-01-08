@@ -1,4 +1,46 @@
 /* eslint-disable */
+/** controller: begin */
+export * from '../component/dateRange/controller.jsx';
+
+import 'zova';
+declare module 'zova' {
+  
+  
+}
+declare module 'zova-module-a-date' {
+  
+        export interface ControllerDateRange {
+          /** @internal */
+          get scope(): ScopeModuleADate;
+        } 
+}
+/** controller: end */
+/** controller: begin */
+import { ControllerDateRange } from '../component/dateRange/controller.jsx';
+import 'zova';
+declare module 'zova' {
+  export interface IBeanRecordLocal {
+    'a-date.controller.dateRange': ControllerDateRange;
+  }
+}
+/** controller: end */
+
+/** components: begin */
+export * from './component/dateRange.js';
+import { ZDateRange } from './component/dateRange.js';
+export const components = {
+  'dateRange': ZDateRange,
+};
+import 'zova';
+declare module 'zova' {
+export interface IComponentRecord {
+  'a-date:dateRange': ControllerDateRange;
+}
+export interface IZovaComponentRecord {
+  'a-date:dateRange': typeof ZDateRange;
+}
+}
+/** components: end */
 /** tableCell: begin */
 export * from '../bean/tableCell.date.jsx';
 import { ITableCellOptionsDate } from '../bean/tableCell.date.jsx';
