@@ -24,9 +24,9 @@ module.exports = {
       return `${$0}\n  '${typeName}'?: number;`;
     });
     // @Model
-    if (!ast.match(/import \{[^}]*Model[^}]*\} from 'zova';/)) {
+    if (!ast.match(/import \{[^}]*ModelValue[^}]*\} from 'zova';/)) {
       ast = ast.replace(/import \{ ([^}]*) \} from 'zova';/, (_, $1) => {
-        return `import { ${$1}, Model } from 'zova';`;
+        return `import { ${$1}, ModelValue } from 'zova';`;
       });
     }
     // propsDefault
@@ -35,7 +35,7 @@ module.exports = {
     });
     // localName
     ast = ast.replace(/protected async __init__/, ($0) => {
-      return `@Model()\n${localName}: number;\n\n    ${$0}`;
+      return `@ModelValue()\n${localName}: number;\n\n    ${$0}`;
     });
     // ok
     return ast;
