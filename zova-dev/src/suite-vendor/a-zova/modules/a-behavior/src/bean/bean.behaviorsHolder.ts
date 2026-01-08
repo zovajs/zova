@@ -1,6 +1,6 @@
 import type { IBehaviors, IBehaviorTag } from '../types/behavior.js';
 import { createVNode } from 'vue';
-import { BeanBase, cast, deepEqual, disposeInstance, Use } from 'zova';
+import { BeanBase, deepEqual, disposeInstance, Use } from 'zova';
 import { Bean } from 'zova-module-a-bean';
 import { Log } from 'zova-module-a-logger';
 import { $UseBehavior } from '../lib/useBehavior.js';
@@ -66,17 +66,17 @@ export class BeanBehaviorsHolder extends BeanBase {
     delete propsNew.behaviorTag;
     delete propsNew.behaviors;
     // render
-    const vnode = this.composer.render(propsNew, propsNew => {
+    return this.composer.render(propsNew, propsNew => {
       if (vNodeDefault) return vNodeDefault(propsNew);
       return createVNode(this.options.behaviorTag.component, propsNew, children);
     });
-    // ensure inner component inherits the async wrapper's ref owner
-    vnode.ref = parent.vnode.ref;
-    // pass the custom element callback on to the inner comp
-    // and remove it from the async wrapper
-    cast(vnode).ce = cast(parent.vnode).ce;
-    // delete cast(parent.vnode).ce;
-    // ok
-    return vnode;
+    // // ensure inner component inherits the async wrapper's ref owner
+    // vnode.ref = parent.vnode.ref;
+    // // pass the custom element callback on to the inner comp
+    // // and remove it from the async wrapper
+    // cast(vnode).ce = cast(parent.vnode).ce;
+    // // delete cast(parent.vnode).ce;
+    // // ok
+    // return vnode;
   }
 }
