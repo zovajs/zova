@@ -14,12 +14,12 @@ export class ControllerTableCellTest extends BeanControllerBase {
   static $propsDefault = {};
 
   @Use({ injectionScope: 'host' })
-  $$cell: ITableCellRenderContext;
+  $$tableCell: ITableCellRenderContext;
 
   protected async __init__() {}
 
   protected render() {
-    const { name, displayValue } = this.$$cell.cellScope;
+    const { name, displayValue } = this.$$tableCell.cellScope;
     const domCell = this.$slotDefault
       ? this.$slotDefault()
       : displayValue;
