@@ -29,7 +29,6 @@ export class ControllerDateRange extends BeanControllerBase {
   }
 
   protected render() {
-    console.log(this.modelValue)
     const [dateStartStr, dateEndStr] = this._parseValue(this.modelValue);
     return (
       <div>
