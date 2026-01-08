@@ -39,7 +39,6 @@ export class ControllerDateRange extends BeanControllerBase {
           onInput={e => {
             const value = (e.target as HTMLInputElement).value;
             this.modelValue = this._combineValue(value, dateEndStr);
-            console.log(this.modelValue);
           }}
         />
         <div class={this.cSeparator}>~</div>
@@ -50,7 +49,6 @@ export class ControllerDateRange extends BeanControllerBase {
           onInput={e => {
             const value = (e.target as HTMLInputElement).value;
             this.modelValue = this._combineValue(dateStartStr, value);
-            console.log(this.modelValue);
           }}
         />
       </div>

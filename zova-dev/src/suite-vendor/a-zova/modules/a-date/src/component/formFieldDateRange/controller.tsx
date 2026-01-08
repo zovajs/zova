@@ -23,8 +23,15 @@ export class ControllerFormFieldDateRange extends BeanControllerBase {
       <ZFormField
         {...this.$props}
         classContainer={this.cContainer}
-        slotDefault={({ props }) => {
-          return <ZDateRange vModel={props.value}></ZDateRange>;
+        slotDefault={({ props }, $$formField) => {
+          return (
+            <ZDateRange
+              modelValue={props.value}
+              onUpdate:modelValue={value => {
+                $$formField.handleDisplayValueUpdate(value, this.$props.onDisplayValueUpdate);
+              }}
+            ></ZDateRange>
+          );
         }}
       ></ZFormField>
     );
