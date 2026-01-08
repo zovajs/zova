@@ -8,6 +8,7 @@ export interface TypeRenderComponentJsxPropsPublic {
   'v-each'?: string;
   'v-slot'?: string;
   'v-slot-scope'?: string;
+  'children'?: any;
 }
 
 export interface TypeRenderComponentJsxProps extends TypeRenderComponentJsxPropsPublic {
