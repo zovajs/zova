@@ -4,21 +4,25 @@ import { Controller } from 'zova-module-a-bean';
 export interface ControllerDateRangeProps {}
 
 export interface ControllerDateRangeModels {
-  vModel?: number;
+  vModel?: string;
 }
 
 @Controller()
 export class ControllerDateRange extends BeanControllerBase {
-  static $propsDefault = {
-    modelValue: 0,
-  };
+  static $propsDefault = {};
 
   @ModelValue()
-  modelValue: number;
+  modelValue: string;
 
   protected async __init__() {}
 
   protected render() {
-    return null;
+    return (
+      <div>
+        <input type="date" class="input" />
+        <span>~</span>
+        <input type="date" class="input" />
+      </div>
+    );
   }
 }
