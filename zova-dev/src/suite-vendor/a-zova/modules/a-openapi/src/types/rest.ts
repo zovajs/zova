@@ -12,8 +12,9 @@ export interface ISchemaObjectExtensionFieldRest {
   visible?: boolean;
   displayValue?: any;
   order?: number;
-  table?: Omit<ISchemaObjectExtensionFieldRest, 'table' | 'form'>;
-  form?: Omit<ISchemaObjectExtensionFieldRest, 'table' | 'form'>;
+  table?: Omit<ISchemaObjectExtensionFieldRest, TypeSchemaScene>;
+  form?: Omit<ISchemaObjectExtensionFieldRest, TypeSchemaScene>;
+  filter?: Omit<ISchemaObjectExtensionFieldRest, TypeSchemaScene>;
 }
 
 export interface ISchemaObjectExtensionFieldFilterCapabilities {
@@ -41,12 +42,12 @@ declare module 'openapi3-ts/oas31' {
   export interface SchemaObject extends ISchemaObjectExtensionField {}
 }
 
-export type TypeSchemaScene = 'table' | 'form';
+export type TypeSchemaScene = 'table' | 'form' | 'filter';
 
-export const renderFormFieldTopPropsSystem = ['order', 'table', 'form'];
-export const renderTableColumnTopPropsSystem = ['order', 'table', 'form', 'displayValue'];
+export const renderFormFieldTopPropsSystem = ['order', 'table', 'form', 'filter'];
+export const renderTableColumnTopPropsSystem = ['order', 'table', 'form', 'filter', 'displayValue'];
 
-export type TypeRenderComponentPreset = keyof TypeResourceActionRowRecordRender | 'text' | 'currency' | 'textarea' | 'select' | 'checkbox' | 'radio' | 'switch' | 'image' | 'file' | 'color' | 'password' | 'email' | 'url';
+export type TypeRenderComponentPreset = keyof TypeResourceActionRowRecordRender | 'text' | 'currency' | 'dateRange' | 'textarea' | 'select' | 'checkbox' | 'radio' | 'switch' | 'image' | 'file' | 'color' | 'password' | 'email' | 'url';
 
 // form
 export type TypeFormFieldRenderComponentNormal =
