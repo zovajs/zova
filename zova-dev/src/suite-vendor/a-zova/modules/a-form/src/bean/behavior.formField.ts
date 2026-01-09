@@ -53,19 +53,23 @@ export class BehaviorFormField extends BeanBehaviorBase<
     field: TypeFormField,
     renderContext: IFormFieldRenderContext,
   ) {
-    const renderFlattern = renderContext.propsBucket.renderFlattern;
+    const { propsBucket } = renderContext;
+    const renderFlattern = propsBucket.renderFlattern;
     const propsGeneral = this._patchProps_general(formMeta, field, renderContext);
-    const inputType = this.$$formField.normalizeInputType(renderFlattern, renderContext.propsBucket.inputType);
+    const inputType = this.$$formField.normalizeInputType(renderFlattern, propsBucket.inputType);
+    const onHandleDisplayValueUpdateDefault = (e: Event) => {
+      this.$$formField.handleDisplayValueUpdate((e.target as HTMLInputElement).value);
+    };
     const propsPatch: IFormFieldRenderContextProps = {
       type: inputType,
-      onChange: renderContext.propsBucket.onChange ?? undefined,
-      onInput: renderContext.propsBucket.onInput !== undefined
-        ? (renderContext.propsBucket.onInput ?? undefined)
-        : (e: Event) => {
-            this.$$formField.handleDisplayValueUpdate((e.target as HTMLInputElement).value);
-          },
-      onBlur: renderContext.propsBucket.onBlur !== undefined
-        ? (renderContext.propsBucket.onBlur ?? undefined)
+      onChange: propsBucket.onChange !== undefined
+        ? (propsBucket.onChange ?? undefined)
+        : (propsBucket.handleDisplayValueUpdateMode === 'change' ? onHandleDisplayValueUpdateDefault : undefined),
+      onInput: propsBucket.onInput !== undefined
+        ? (propsBucket.onInput ?? undefined)
+        : (propsBucket.handleDisplayValueUpdateMode !== 'change' ? onHandleDisplayValueUpdateDefault : undefined),
+      onBlur: propsBucket.onBlur !== undefined
+        ? (propsBucket.onBlur ?? undefined)
         : (_e: Event) => {
             field.api.handleBlur();
           },

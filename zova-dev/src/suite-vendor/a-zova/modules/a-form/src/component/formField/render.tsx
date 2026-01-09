@@ -6,8 +6,8 @@ import { IFormFieldRenderContext, IFormFieldRenderContextProps } from '../../typ
 export class RenderFormField<TParentData extends {} = {}> extends BeanRenderBase {
   public render() {
     const renderContext = this._getRenderContext();
-    return this.$$beanBehaviorsHolder.render((renderProps: IFormFieldRenderContext<TParentData>) => {
-      return this._renderSlotDefault(renderProps);
+    return this.$$beanBehaviorsHolder.render((renderContext: IFormFieldRenderContext<TParentData>) => {
+      return this._renderSlotDefault(renderContext);
     }, renderContext);
   }
 
