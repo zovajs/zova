@@ -10,7 +10,7 @@ import { isJsxComponent, ZovaJsx } from 'zova-jsx';
 import { Controller } from 'zova-module-a-bean';
 import { loadSchemaProperties, renderFormFieldTopPropsSystem, schemaToZodSchema, ScopeModuleAOpenapi, TypeFormFieldRenderComponent, TypeFormFieldRenderComponentProvider, TypeFormSchemaScene } from 'zova-module-a-openapi';
 import { BeanControllerFormBase } from '../../lib/beanControllerFormBase.js';
-import { RevalidateLogicProps, TypeForm, TypeFormOnShowError, TypeFormOnSubmit } from '../../types/form.js';
+import { RevalidateLogicProps, TypeForm, TypeFormOnShowError, TypeFormOnSubmit, TypeFormOnSubmitInvalid } from '../../types/form.js';
 import { constFieldProps, IFormFieldCelScope, IFormFieldLayoutOptionsBase, IFormFieldRenderContextPropsBucket, TypeFormFieldOnDisplayValueUpdate } from '../../types/formField.js';
 import { IFormMeta } from '../../types/formMeta.js';
 import { IFormProvider } from '../../types/provider.js';
@@ -28,6 +28,7 @@ export interface ControllerFormProps<TFormData extends {} = {}, TSubmitMeta = ne
   formProvider?: IFormProvider;
   formFieldLayout?: IFormFieldLayoutOptionsBase;
   onFormSubmit?: (e: SubmitEvent, form: ControllerForm<TFormData, TSubmitMeta>) => any;
+  onSubmitInvalid?: TypeFormOnSubmitInvalid<TFormData, TSubmitMeta>;
   onSubmit?: TypeFormOnSubmit<TFormData, TSubmitMeta>;
   onShowError?: TypeFormOnShowError<TFormData, TSubmitMeta>;
   slotDefault?: (form: ControllerForm<TFormData, TSubmitMeta>) => VNode;
@@ -211,6 +212,9 @@ export class ControllerForm<TFormData extends {} = {}, TSubmitMeta = never> exte
     return this.$useForm<TFormData, TSubmitMeta>({
       defaultValues: this.$props.data,
       validationLogic: this.$props.validateOnDynamic !== false ? revalidateLogic(this.$props.validateOnDynamicLogic) : undefined,
+      onSubmitInvalid: data => {
+        return this.$props.onSubmitInvalid?.(data, this);
+      },
       onSubmit: async data => {
         const [_, error] = await catchError(() => {
           return this.$props.onSubmit?.(data, this);

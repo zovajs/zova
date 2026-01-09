@@ -178,6 +178,35 @@ export interface TypeFormOnSubmitData<
   meta: TSubmitMeta;
 }
 
+export type TypeFormOnSubmitInvalid<
+  TFormData extends {} = {},
+  TSubmitMeta = never,
+  TFormOnMount extends undefined | FormValidateOrFn<TFormData> = undefined | FormValidateOrFn<TFormData>,
+  TFormOnChange extends undefined | FormValidateOrFn<TFormData> = undefined | FormValidateOrFn<TFormData>,
+  TFormOnChangeAsync extends undefined | FormAsyncValidateOrFn<TFormData> = undefined | FormAsyncValidateOrFn<TFormData>,
+  TFormOnBlur extends undefined | FormValidateOrFn<TFormData> = undefined | FormValidateOrFn<TFormData>,
+  TFormOnBlurAsync extends undefined | FormAsyncValidateOrFn<TFormData> = undefined | FormAsyncValidateOrFn<TFormData>,
+  TFormOnSubmit extends undefined | FormValidateOrFn<TFormData> = undefined | FormValidateOrFn<TFormData>,
+  TFormOnSubmitAsync extends undefined | FormAsyncValidateOrFn<TFormData> = undefined | FormAsyncValidateOrFn<TFormData>,
+  TFormOnDynamic extends undefined | FormValidateOrFn<TFormData> = undefined | FormValidateOrFn<TFormData>,
+  TFormOnDynamicAsync extends undefined | FormAsyncValidateOrFn<TFormData> = undefined | FormAsyncValidateOrFn<TFormData>,
+  TFormOnServer extends undefined | FormAsyncValidateOrFn<TFormData> = undefined | FormAsyncValidateOrFn<TFormData>,
+>
+ = (props: TypeFormOnSubmitData<
+   TFormData,
+   TSubmitMeta,
+   TFormOnMount,
+   TFormOnChange,
+   TFormOnChangeAsync,
+   TFormOnBlur,
+   TFormOnBlurAsync,
+   TFormOnSubmit,
+   TFormOnSubmitAsync,
+   TFormOnDynamic,
+   TFormOnDynamicAsync,
+   TFormOnServer
+ >, form: ControllerForm<TFormData, TSubmitMeta>) => any;
+
 export type TypeFormOnSubmit<
   TFormData extends {} = {},
   TSubmitMeta = never,
