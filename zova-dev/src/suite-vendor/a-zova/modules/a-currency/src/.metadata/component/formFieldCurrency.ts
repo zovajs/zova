@@ -21,5 +21,5 @@ export const ZFormFieldCurrency = defineComponent(
     useController(ControllerFormFieldCurrency, undefined, undefined);
     return () => {};
   },
-  prepareComponentOptions(ControllerFormFieldCurrency.$componentOptions),
+  prepareComponentOptions(),
 );

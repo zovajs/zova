@@ -5,7 +5,7 @@ import { BeanControllerBase, deepEqual, IComponentOptions, Use } from 'zova';
 import { Controller } from 'zova-module-a-bean';
 import { BeanBehaviorsHolder, IBehaviorItem } from 'zova-module-a-behavior';
 import { TypeFormField } from '../../types/form.js';
-import { IFormFieldOptions, inputTypePresets, TypeFormFieldOnDisplayValueUpdate } from '../../types/formField.js';
+import { constFieldProps, IFormFieldOptions, IFormFieldRenderContextPropsBucket, inputTypePresets, TypeFormFieldOnDisplayValueUpdate } from '../../types/formField.js';
 
 export interface ControllerFormFieldProps<TParentData extends {} = {}> extends IFormFieldOptions<TParentData> {}
 
@@ -15,6 +15,7 @@ export class ControllerFormField<TParentData extends {} = {}> extends BeanContro
   static $componentOptions: IComponentOptions = { inheritAttrs: false };
 
   private _formField: TypeFormField;
+  public propsBucket: IFormFieldRenderContextPropsBucket<TParentData>;
 
   @Use({ injectionScope: 'host' })
   $$form: ControllerForm<TParentData>;
@@ -31,6 +32,9 @@ export class ControllerFormField<TParentData extends {} = {}> extends BeanContro
     // field
     const options = this._getFormFieldOptions();
     this._formField = useField(options as any) as any;
+    this.propsBucket = this.$useComputed(() => {
+      return this._getPropsBucket();
+    });
     // watch
     this.$watch(() => this.property, (newValue, oldValue) => {
       if (deepEqual(newValue, oldValue)) return;
@@ -85,6 +89,34 @@ export class ControllerFormField<TParentData extends {} = {}> extends BeanContro
 
   public handleDisplayValueUpdate(value: any, onDisplayValueUpdate?: TypeFormFieldOnDisplayValueUpdate) {
     return this.$$form.handleFieldDisplayValueUpdate(this.name, value, onDisplayValueUpdate);
+  }
+
+  private _getPropsBucket() {
+    const property = this.property;
+    const name = this.name;
+    // options
+    const propsTop = this._getFieldComponentPropsTop();
+    const propsBucket = Object.assign(
+      {
+        bordered: this.scope.config.formFieldLayout.bordered,
+        label: property?.title ?? name,
+        render: 'text', // default
+        displayValue: this.$$form.getFieldValue(name),
+      },
+      this.$$form.$props.formFieldLayout,
+      propsTop,
+      this.$props as IFormFieldOptions<TParentData>,
+    );
+    // render
+    propsBucket.renderFlattern = this.$$form.getRenderFlattern(propsBucket.render);
+    propsBucket.renderProvider = this.$$form.getRenderProvider(propsBucket.render);
+    return propsBucket;
+  }
+
+  private _getFieldComponentPropsTop() {
+    if (this.$props[constFieldProps] === true) return;
+    const celScope = this.$$form.getFieldCelScope(this.name);
+    return this.$$form.getFieldComponentPropsTop(this.name, celScope);
   }
 
   private _getFieldBehaviors() {

@@ -1,6 +1,6 @@
 import { BeanRenderBase } from 'zova';
 import { Render } from 'zova-module-a-bean';
-import { constFieldProps, IFormFieldOptions, IFormFieldRenderContext } from '../../types/formField.js';
+import { IFormFieldRenderContext, IFormFieldRenderContextProps } from '../../types/formField.js';
 
 @Render()
 export class RenderFormField<TParentData extends {} = {}> extends BeanRenderBase {
@@ -11,48 +11,26 @@ export class RenderFormField<TParentData extends {} = {}> extends BeanRenderBase
     }, renderContext);
   }
 
-  private _getRenderContext() {
-    const property = this.property;
+  private _getRenderContext(): IFormFieldRenderContext<TParentData> {
     const name = this.name;
-    const renderContext: IFormFieldRenderContext<TParentData> = {} as any;
-    // options
-    const propsTop = this._getFieldComponentPropsTop();
-    renderContext.options = Object.assign(
-      {
-        bordered: this.scope.config.formFieldLayout.bordered,
-        label: property?.title ?? name,
-        render: 'text', // default
-        displayValue: this.$$form.getFieldValue(name),
-      },
-      this.$$form.$props.formFieldLayout,
-      propsTop,
-      this.$props as IFormFieldOptions<TParentData>,
-    );
-    // render
-    renderContext.options.renderFlattern = this.$$form.getRenderFlattern(renderContext.options.render);
-    renderContext.options.renderProvider = this.$$form.getRenderProvider(renderContext.options.render);
+    // propsBucket
+    const propsBucket = this.propsBucket;
     // props
-    renderContext.props = {
-      name,
-      class: renderContext.options.class,
-    };
-    return renderContext;
+    const props: IFormFieldRenderContextProps = { name };
+    if (propsBucket.class) {
+      props.class = propsBucket.class;
+    }
+    // celScope
+    const celScope = this.$$form.getFieldCelScope(this.name, {
+      displayValue: propsBucket.displayValue,
+    });
+    return { propsBucket, props, celScope };
   }
 
   private _renderSlotDefault(renderContext: IFormFieldRenderContext<TParentData>) {
     if (this.$slotDefault) {
       return this.$slotDefault!(renderContext, this);
     }
-    const celScope = this.$$form.getFieldCelScope(this.name, {
-      displayValue: renderContext.options.displayValue,
-      render: renderContext,
-    });
-    return this.$$form.zovaJsx.render(renderContext.options.render, renderContext.props, celScope);
-  }
-
-  private _getFieldComponentPropsTop() {
-    if (this.$props[constFieldProps] === true) return;
-    const celScope = this.$$form.getFieldCelScope(this.name);
-    return this.$$form.getFieldComponentPropsTop(this.name, celScope);
+    return this.$$form.zovaJsx.render(renderContext.propsBucket.render, renderContext.props, renderContext.celScope);
   }
 }

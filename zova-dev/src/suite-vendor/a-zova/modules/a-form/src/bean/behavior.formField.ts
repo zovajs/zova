@@ -29,7 +29,7 @@ export class BehaviorFormField extends BeanBehaviorBase<
   private _patchProps(renderContext: IFormFieldRenderContext) {
     const formMeta = this.$$formField.formMeta;
     const field = this.$$formField.field;
-    if (renderContext.options.renderProvider === 'input') {
+    if (renderContext.propsBucket.renderProvider === 'input') {
       this._patchProps_input(formMeta, field, renderContext);
     }
   }
@@ -40,7 +40,7 @@ export class BehaviorFormField extends BeanBehaviorBase<
     renderContext: IFormFieldRenderContext,
   ) {
     const propsPatch: IFormFieldRenderContextProps = {
-      value: renderContext.options.displayValue,
+      value: renderContext.propsBucket.displayValue,
     };
     if (formMeta?.formMode === 'view') {
       propsPatch.readonly = true;
@@ -53,19 +53,19 @@ export class BehaviorFormField extends BeanBehaviorBase<
     field: TypeFormField,
     renderContext: IFormFieldRenderContext,
   ) {
-    const renderFlattern = renderContext.options.renderFlattern;
+    const renderFlattern = renderContext.propsBucket.renderFlattern;
     const propsGeneral = this._patchProps_general(formMeta, field, renderContext);
-    const inputType = this.$$formField.normalizeInputType(renderFlattern, renderContext.options.inputType);
+    const inputType = this.$$formField.normalizeInputType(renderFlattern, renderContext.propsBucket.inputType);
     const propsPatch: IFormFieldRenderContextProps = {
       type: inputType,
-      onChange: renderContext.options.onChange ?? undefined,
-      onInput: renderContext.options.onInput !== undefined
-        ? (renderContext.options.onInput ?? undefined)
+      onChange: renderContext.propsBucket.onChange ?? undefined,
+      onInput: renderContext.propsBucket.onInput !== undefined
+        ? (renderContext.propsBucket.onInput ?? undefined)
         : (e: Event) => {
             this.$$formField.handleDisplayValueUpdate((e.target as HTMLInputElement).value, renderContext.options.onDisplayValueUpdate);
           },
-      onBlur: renderContext.options.onBlur !== undefined
-        ? (renderContext.options.onBlur ?? undefined)
+      onBlur: renderContext.propsBucket.onBlur !== undefined
+        ? (renderContext.propsBucket.onBlur ?? undefined)
         : (_e: Event) => {
             field.api.handleBlur();
           },
