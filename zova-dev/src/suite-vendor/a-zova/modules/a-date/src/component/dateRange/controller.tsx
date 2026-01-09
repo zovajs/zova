@@ -39,7 +39,7 @@ export class ControllerDateRange extends BeanControllerBase {
             this.modelValue = this._combineValue(value, dateEndStr);
           }}
         />
-        <div class={this.cSeparator}>~</div>
+        <div class={this.cSeparator}>{this.$props.separator}</div>
         <input
           style={{ width: '130px' }}
           type="date"
