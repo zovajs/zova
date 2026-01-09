@@ -36,6 +36,7 @@ export class MonkeySys extends BeanSimple implements IMonkeySysReady, IMonkeySys
       }
     };
     ws.onOpen = (_event, reconnectAttempts) => {
+      this.sys.meta.logger.get().log('silly', '[ssr hmr] ready');
       if (reconnectAttempts > 0) {
         this._reloadInner();
       }
