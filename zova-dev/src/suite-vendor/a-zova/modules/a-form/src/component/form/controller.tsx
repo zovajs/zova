@@ -80,8 +80,11 @@ export class ControllerForm<TFormData extends {} = {}, TSubmitMeta = never> exte
     });
   }
 
-  public async submit(submitMeta?: TSubmitMeta) {
-    return await this.form.handleSubmit(submitMeta as any);
+  public async submit(submitMeta?: TSubmitMeta): Promise<boolean> {
+    const [_, error] = await catchError(() => {
+      return this.form.handleSubmit(submitMeta as any);
+    });
+    return !error && this.formState.isValid;
   }
 
   public reset(values?: TFormData, opts?: { keepDefaultValues?: boolean }): TFormData {
@@ -212,22 +215,22 @@ export class ControllerForm<TFormData extends {} = {}, TSubmitMeta = never> exte
         const [_, error] = await catchError(() => {
           return this.$props.onSubmit?.(data, this);
         });
-          // emit event
+        // emit event
         const resHandled = await this.app.meta.event.emit('a-form:formSubmission', {
           form: this.form as any,
           data,
           error,
         });
-        if (error) {
-          if (error.code === 422) {
-            this._handleError422(error);
-          } else {
-            if (!resHandled) {
-              this.$props.onShowError?.({ data, error }, this);
-            }
+        if (!error) return;
+        if (error.code === 422) {
+          this._handleError422(error);
+        } else {
+          if (!resHandled) {
+            this.$props.onShowError?.({ data, error }, this);
           }
-          throw error;
         }
+        // must throw error for stop next logic
+        throw error;
       },
     });
   }

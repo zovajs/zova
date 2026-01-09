@@ -40,8 +40,10 @@ export class RenderRestPage extends BeanRenderBase {
               <button
                 class={classes('btn btn-primary', this.controllerForm?.formState.isSubmitting && 'btn-disabled')}
                 onClick={async () => {
-                  await this.controllerForm.submit();
-                  this.formVisible = false;
+                  const res = await this.controllerForm.submit();
+                  if (res) {
+                    this.formVisible = false;
+                  }
                 }}
               >
                 {this.scope.locale.Submit()}
