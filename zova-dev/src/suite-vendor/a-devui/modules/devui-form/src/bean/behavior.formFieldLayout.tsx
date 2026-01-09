@@ -26,16 +26,16 @@ export class BehaviorFormFieldLayout extends BeanBehaviorBase<
     this._patchProps(renderContext);
     const vnode = next(renderContext);
     const error = field.state.meta.errors[0] as z.ZodError | undefined;
-    if (renderContext.options.inline) {
+    if (renderContext.propsBucket.inline) {
       return this._renderInline(renderContext, vnode, field, error);
     }
     return this._renderBlock(renderContext, vnode, field, error);
   }
 
   private _renderInline(renderContext: IFormFieldRenderContext, vnode: VNode, field: TypeFormField, error: z.ZodError | undefined): VNode {
-    const bordered = renderContext.options.bordered;
-    const label = renderContext.options.label;
-    const className = classes('input', renderContext.options.classContainer, bordered && 'input-bordered', !field.state.meta.isValid && 'input-error');
+    const bordered = renderContext.propsBucket.bordered;
+    const label = renderContext.propsBucket.label;
+    const className = classes('input', renderContext.propsBucket.classContainer, bordered && 'input-bordered', !field.state.meta.isValid && 'input-error');
     return (
       <label class={className}>
         {label}
@@ -50,32 +50,32 @@ export class BehaviorFormFieldLayout extends BeanBehaviorBase<
   }
 
   private _renderBlock(renderContext: IFormFieldRenderContext, vnode: VNode, field: TypeFormField, error: z.ZodError | undefined): VNode {
-    const label = renderContext.options.label;
-    const className = classes('fieldset', renderContext.options.classContainer);
+    const label = renderContext.propsBucket.label;
+    const className = classes('fieldset', renderContext.propsBucket.classContainer);
     return (
       <fieldset class={className}>
         {!!label && <legend class="fieldset-legend">{label}</legend>}
-        {invokeProp(renderContext.options.header)}
+        {invokeProp(renderContext.propsBucket.header)}
         {vnode}
         {!field.state.meta.isValid && (
           <div class="label">
             <span class="label-text-alt text-error">{error?.message}</span>
           </div>
         )}
-        {invokeProp(renderContext.options.footer)}
+        {invokeProp(renderContext.propsBucket.footer)}
       </fieldset>
     );
   }
 
   private _patchProps(renderContext: IFormFieldRenderContext) {
     const field = this.$$formField.field;
-    if (renderContext.options.renderProvider === 'input') {
+    if (renderContext.propsBucket.renderProvider === 'input') {
       this._patchProps_input(field, renderContext);
     }
   }
 
   private _patchProps_input(field: TypeFormField, renderContext: IFormFieldRenderContext) {
-    if (!renderContext.options.inline) {
+    if (!renderContext.propsBucket.inline) {
       renderContext.props.class = classes(
         renderContext.props.class,
         'input',
