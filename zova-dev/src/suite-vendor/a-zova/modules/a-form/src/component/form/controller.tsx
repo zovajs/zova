@@ -141,6 +141,18 @@ export class ControllerForm<TFormData extends {} = {}, TSubmitMeta = never> exte
     name: K,
     celScope: IFormFieldCelScope<TFormData>,
   ): IFormFieldRenderContextPropsBucket {
+    const props = this._getFieldComponentPropsTopInner(name, celScope);
+    // displayValue
+    if (props.displayValue === undefined) {
+      props.displayValue = celScope.value;
+    }
+    return props;
+  }
+
+  private _getFieldComponentPropsTopInner<K extends DeepKeys<TFormData>>(
+    name: K,
+    celScope: IFormFieldCelScope<TFormData>,
+  ): IFormFieldRenderContextPropsBucket {
     const props: any = { [constFieldProps]: true, key: name, name };
     const property = this.getFieldProperty(name);
     if (!property) return props;
@@ -162,11 +174,6 @@ export class ControllerForm<TFormData extends {} = {}, TSubmitMeta = never> exte
       }
       props[key] = keyValue;
     }
-    // displayValue
-    if (props.displayValue === undefined) {
-      props.displayValue = celScope.value;
-    }
-    // ok
     return props;
   }
 
