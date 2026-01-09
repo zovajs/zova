@@ -26,7 +26,7 @@ export class BehaviorFormFieldLayoutLogin extends BeanBehaviorBase<
     const field = this.$$formField.field;
     this._patchProps(renderContext);
     const vnode = next(renderContext);
-    const iconPrefix = renderContext.options.iconPrefix;
+    const iconPrefix = renderContext.propsBucket.iconPrefix;
     const error = field.state.meta.errors[0] as z.ZodError | undefined;
     return (
       <label class="input input-bordered flex items-center gap-2 w-full">
@@ -43,7 +43,7 @@ export class BehaviorFormFieldLayoutLogin extends BeanBehaviorBase<
 
   private _patchProps(renderContext: IFormFieldRenderContext) {
     const field = this.$$formField.field;
-    if (renderContext.options.renderProvider === 'input') {
+    if (renderContext.propsBucket.renderProvider === 'input') {
       this._patchProps_input(field, renderContext);
     }
   }
