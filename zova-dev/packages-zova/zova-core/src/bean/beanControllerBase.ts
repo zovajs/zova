@@ -47,6 +47,11 @@ export class BeanControllerBase extends BeanBase {
     } else {
       // hold the same $props ref
       Object.assign(this.$props as any, props);
+      for (const key in this.$props) {
+        if (!props || !Object.hasOwnProperty.call(props, key)) {
+          delete this.$props[key];
+        }
+      }
     }
   }
 }
