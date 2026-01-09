@@ -62,7 +62,7 @@ export class BehaviorFormField extends BeanBehaviorBase<
       onInput: renderContext.propsBucket.onInput !== undefined
         ? (renderContext.propsBucket.onInput ?? undefined)
         : (e: Event) => {
-            this.$$formField.handleDisplayValueUpdate((e.target as HTMLInputElement).value, renderContext.options.onDisplayValueUpdate);
+            this.$$formField.handleDisplayValueUpdate((e.target as HTMLInputElement).value);
           },
       onBlur: renderContext.propsBucket.onBlur !== undefined
         ? (renderContext.propsBucket.onBlur ?? undefined)

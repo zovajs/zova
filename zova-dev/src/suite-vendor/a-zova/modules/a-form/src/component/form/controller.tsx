@@ -101,18 +101,11 @@ export class ControllerForm<TFormData extends {} = {}, TSubmitMeta = never> exte
     this.form.setFieldValue(name, value);
   }
 
-  public getFieldDisplayValue<K extends DeepKeys<TFormData>>(name: K, displayValue?: any) {
-    if (displayValue !== undefined) return displayValue;
-    return this.getFieldValue(name);
-  }
-
-  public onDisplayValueUpdate(value: any, onDisplayValueUpdate?: TypeFormFieldOnDisplayValueUpdate) {
-    if (onDisplayValueUpdate) return onDisplayValueUpdate(value);
-    return value;
-  }
-
   public handleFieldDisplayValueUpdate<K extends DeepKeys<TFormData>>(name: K, value: any, onDisplayValueUpdate?: TypeFormFieldOnDisplayValueUpdate) {
-    return this.setFieldValue(name, this.onDisplayValueUpdate(value, onDisplayValueUpdate));
+    if (onDisplayValueUpdate) {
+      value = onDisplayValueUpdate(value);
+    }
+    return this.setFieldValue(name, value);
   }
 
   public getFieldProperty<K extends DeepKeys<TFormData>>(name: K): SchemaObject | undefined {
@@ -144,7 +137,10 @@ export class ControllerForm<TFormData extends {} = {}, TSubmitMeta = never> exte
     };
   }
 
-  public getFieldComponentPropsTop<K extends DeepKeys<TFormData>>(name: K, celScope: {}): IFormFieldRenderContextPropsBucket {
+  public getFieldComponentPropsTop<K extends DeepKeys<TFormData>>(
+    name: K,
+    celScope: IFormFieldCelScope<TFormData>,
+  ): IFormFieldRenderContextPropsBucket {
     const props: any = { [constFieldProps]: true, key: name, name };
     const property = this.getFieldProperty(name);
     if (!property) return props;
@@ -166,6 +162,11 @@ export class ControllerForm<TFormData extends {} = {}, TSubmitMeta = never> exte
       }
       props[key] = keyValue;
     }
+    // displayValue
+    if (props.displayValue === undefined) {
+      props.displayValue = celScope.value;
+    }
+    // ok
     return props;
   }
 

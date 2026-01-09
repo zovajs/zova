@@ -20,7 +20,7 @@ export class ControllerFormFieldCurrency extends BeanControllerBase {
 
   protected render() {
     const name = this.$props.name;
-    let displayValue = this.$$form.getFieldDisplayValue(name, this.$props.displayValue);
+    let displayValue = this.$props.displayValue;
     displayValue = currencyFormat(displayValue, this.$props.currency);
     return (
       <ZFormField

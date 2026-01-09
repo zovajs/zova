@@ -1,4 +1,4 @@
-import { BeanControllerBase} from 'zova';
+import { BeanControllerBase } from 'zova';
 import { Controller } from 'zova-module-a-bean';
 import { IFormFieldOptions, ZFormField } from 'zova-module-a-form';
 import { ZDateRange } from '../../.metadata/index.js';
@@ -22,12 +22,12 @@ export class ControllerFormFieldDateRange extends BeanControllerBase {
       <ZFormField
         {...this.$props}
         classContainer={this.cContainer}
-        slotDefault={({ options }, $$formField) => {
+        slotDefault={({ propsBucket }, $$formField) => {
           return (
             <ZDateRange
-              modelValue={options.displayValue}
+              modelValue={propsBucket.displayValue}
               onUpdate:modelValue={value => {
-                $$formField.handleDisplayValueUpdate(value, this.$props.onDisplayValueUpdate);
+                $$formField.handleDisplayValueUpdate(value);
               }}
             ></ZDateRange>
           );

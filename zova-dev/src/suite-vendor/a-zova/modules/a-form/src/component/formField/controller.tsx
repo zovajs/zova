@@ -5,7 +5,7 @@ import { BeanControllerBase, deepEqual, IComponentOptions, Use } from 'zova';
 import { Controller } from 'zova-module-a-bean';
 import { BeanBehaviorsHolder, IBehaviorItem } from 'zova-module-a-behavior';
 import { TypeFormField } from '../../types/form.js';
-import { constFieldProps, IFormFieldOptions, IFormFieldRenderContextPropsBucket, inputTypePresets, TypeFormFieldOnDisplayValueUpdate } from '../../types/formField.js';
+import { constFieldProps, IFormFieldOptions, IFormFieldRenderContextPropsBucket, inputTypePresets } from '../../types/formField.js';
 
 export interface ControllerFormFieldProps<TParentData extends {} = {}> extends IFormFieldOptions<TParentData> {}
 
@@ -87,8 +87,8 @@ export class ControllerFormField<TParentData extends {} = {}> extends BeanContro
     return 'text';
   }
 
-  public handleDisplayValueUpdate(value: any, onDisplayValueUpdate?: TypeFormFieldOnDisplayValueUpdate) {
-    return this.$$form.handleFieldDisplayValueUpdate(this.name, value, onDisplayValueUpdate);
+  public handleDisplayValueUpdate(value: any) {
+    return this.$$form.handleFieldDisplayValueUpdate(this.name, value, this.propsBucket.onDisplayValueUpdate);
   }
 
   private _getPropsBucket() {
@@ -101,7 +101,6 @@ export class ControllerFormField<TParentData extends {} = {}> extends BeanContro
         bordered: this.scope.config.formFieldLayout.bordered,
         label: property?.title ?? name,
         render: 'text', // default
-        displayValue: this.$$form.getFieldValue(name),
       },
       this.$$form.$props.formFieldLayout,
       propsTop,
