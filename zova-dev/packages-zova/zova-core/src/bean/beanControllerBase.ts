@@ -39,8 +39,14 @@ export class BeanControllerBase extends BeanBase {
     return cast(this.$props).slotDefault ?? this.$slots.default;
   }
 
-  private __initControllerProps(props: unknown | undefined) {
+  private __initControllerProps(propsInput: unknown | undefined) {
     const propsDefault = Object.getPrototypeOf(this).constructor.$propsDefault;
+    let props = Object.assign({}, propsInput);
+    for (const key in props) {
+      if (props[key] === undefined) {
+        delete props[key];
+      }
+    }
     props = Object.assign({}, propsDefault, props);
     if (!this.$props) {
       this.$props = process.env.SERVER ? props : shallowReactive(props as any);
