@@ -18,6 +18,7 @@ export class ControllerActionView extends BeanControllerBase {
   protected render() {
     if (!this.$$tableCell) throw new Error('should used in table');
     const { $$table, cellContext, cellScope } = this.$$tableCell;
+    if (this.$slotDefault) return this.$slotDefault();
     return (
       <a
         class="hover:text-blue-500"
