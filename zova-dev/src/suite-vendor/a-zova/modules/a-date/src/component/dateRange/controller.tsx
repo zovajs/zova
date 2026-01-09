@@ -11,9 +11,7 @@ export interface ControllerDateRangeModels {
 
 @Controller()
 export class ControllerDateRange extends BeanControllerBase {
-  static $propsDefault = {
-    separator: '~',
-  };
+  static $propsDefault = { separator: '~' };
 
   private cSeparator: string;
 

@@ -1,6 +1,6 @@
 import type { ControllerForm } from 'zova-module-a-form';
 import { CurrencyOptions } from '@zhennann/currency';
-import { BeanControllerBase, IComponentOptions, Use } from 'zova';
+import { BeanControllerBase, Use } from 'zova';
 import { Controller } from 'zova-module-a-bean';
 import { IFormFieldOptions, ZFormField } from 'zova-module-a-form';
 import { currencyFormat, currencyUpdate } from '../../lib/utils.js';
@@ -12,7 +12,6 @@ export interface ControllerFormFieldCurrencyProps extends IFormFieldOptions {
 @Controller()
 export class ControllerFormFieldCurrency extends BeanControllerBase {
   static $propsDefault = {};
-  static $componentOptions: IComponentOptions = { inheritAttrs: false };
 
   @Use({ injectionScope: 'host' })
   $$form: ControllerForm;
