@@ -213,7 +213,7 @@ export class ControllerForm<TFormData extends {} = {}, TSubmitMeta = never> exte
       defaultValues: this.$props.data,
       validationLogic: this.$props.validateOnDynamic !== false ? revalidateLogic(this.$props.validateOnDynamicLogic) : undefined,
       onSubmitInvalid: data => {
-        return this.$props.onSubmitInvalid?.(data, this);
+        this.$props.onSubmitInvalid?.(data, this);
       },
       onSubmit: async data => {
         const [_, error] = await catchError(() => {
@@ -228,6 +228,7 @@ export class ControllerForm<TFormData extends {} = {}, TSubmitMeta = never> exte
         if (!error) return;
         if (error.code === 422) {
           this._handleError422(error);
+          this.$props.onSubmitInvalid?.(data, this);
         } else {
           if (!resHandled) {
             this.$props.onShowError?.({ data, error }, this);

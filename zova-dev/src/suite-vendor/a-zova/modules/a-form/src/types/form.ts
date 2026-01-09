@@ -205,7 +205,7 @@ export type TypeFormOnSubmitInvalid<
    TFormOnDynamic,
    TFormOnDynamicAsync,
    TFormOnServer
- >, form: ControllerForm<TFormData, TSubmitMeta>) => any;
+ >, form: ControllerForm<TFormData, TSubmitMeta>) => void;
 
 export type TypeFormOnSubmit<
   TFormData extends {} = {},
