@@ -18,6 +18,12 @@
         "optionsNone": true,
         "boilerplate": "cli/api/boilerplate",
         "metadataCustom": "cli/api/metadata/generate.ts"
+      },
+      "apiMeta": {
+        "sceneIsolate": true,
+        "scopeResource": true,
+        "beanGeneral": true,
+        "optionsNone": true
       }
     }
   },
