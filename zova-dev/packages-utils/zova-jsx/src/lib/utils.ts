@@ -15,7 +15,7 @@ export function isLegacyComponent(Component: any) {
 }
 
 export function isJsxComponent(Component: any) {
-  return (typeof Component === 'object' && Component.$$typeof === 'zova-jsx');
+  return (typeof Component === 'object' && Component.$$typeof === 'zova-jsx:component');
 }
 
 export function invokeProp(prop: any) {
