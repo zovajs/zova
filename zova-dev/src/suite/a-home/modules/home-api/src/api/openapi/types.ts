@@ -1388,15 +1388,15 @@ export interface components {
       married: boolean;
       details: components['schemas']['test-ssr.dto.testDetail'][];
       /** @default custom */
-      _custom1: string;
+      _custom1: string | undefined;
       /** @default custom */
-      _custom2: string;
+      _custom2: string | undefined;
       /** @default custom */
-      _custom3: string;
+      _custom3: string | undefined;
       /** @default custom */
-      _custom4: string;
+      _custom4: string | undefined;
       /** @default custom */
-      _custom5: string;
+      _custom5: string | undefined;
     };
     'test-ssr.dto.testDetail': {
       name: string;
@@ -1414,15 +1414,15 @@ export interface components {
       married: boolean;
       details: components['schemas']['test-ssr.dto.testDetail'][];
       /** @default custom */
-      _custom1: string;
+      _custom1: string | undefined;
       /** @default custom */
-      _custom2: string;
+      _custom2: string | undefined;
       /** @default custom */
-      _custom3: string;
+      _custom3: string | undefined;
       /** @default custom */
-      _custom4: string;
+      _custom4: string | undefined;
       /** @default custom */
-      _custom5: string;
+      _custom5: string | undefined;
     };
     'a-play.dto.play': {
       args: string[];

@@ -24,6 +24,12 @@
         "scopeResource": true,
         "beanGeneral": true,
         "optionsNone": true
+      },
+      "apiSchema": {
+        "sceneIsolate": true,
+        "scopeResource": true,
+        "beanGeneral": true,
+        "optionsNone": true
       }
     }
   },
