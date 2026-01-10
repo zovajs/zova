@@ -34,10 +34,10 @@ export function getSchemaOfRequestBody(operationObject?: OperationObject): Schem
   return cast<RequestBodyObject>(operationObject?.requestBody)?.content?.['application/json']?.schema as any;
 }
 
-export function getSchemaNameOfRequestBody(operationObject?: OperationObject):string|undefined {
-    const schemaData = getSchemaOfRequestBody(operationObject);
-    return  cast(schemaData)?.$ref;
-  }
+export function getSchemaNameOfRequestBody(operationObject?: OperationObject): string | undefined {
+  const schemaData = getSchemaOfRequestBody(operationObject);
+  return cast(schemaData)?.$ref;
+}
 
 export function getSchemaOfResponse(operationObject?: OperationObject): SchemaObject | undefined {
   return operationObject?.responses?.['200']?.content?.['application/json']?.schema;
