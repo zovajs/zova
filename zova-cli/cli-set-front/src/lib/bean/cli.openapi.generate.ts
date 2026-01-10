@@ -119,6 +119,8 @@ export class CliOpenapiGenerate extends BeanCliBase {
     }
     // rimraf
     await rimraf(path.join(module.root, 'src/api'));
+    // rimraf
+    await rimraf(path.join(module.root, 'src/apiMeta'));
     // output: openapi/types.ts
     const outputFile = path.join(module.root, 'src/api/openapi/types.ts');
     await fse.outputFile(outputFile, cache.contents);

@@ -69,6 +69,9 @@ declare module 'zova' {
 export * from '../config/config.js';
 import { config } from '../config/config.js';
 /** config: end */
+/** main: begin */
+export * from '../main.js';
+/** main: end */
 /** scope: begin */
 import { BeanScopeBase, type BeanScopeUtil, TypeModuleConfig } from 'zova';
 import { Scope } from 'zova-module-a-bean';
