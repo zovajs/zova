@@ -239,70 +239,6 @@ export interface paths {
     patch?: never;
     trace?: never;
   };
-  '/api/play': {
-    parameters: {
-      query?: never;
-      header?: never;
-      path?: never;
-      cookie?: never;
-    };
-    get?: never;
-    put?: never;
-    post: operations['Play_index'];
-    delete?: never;
-    options?: never;
-    head?: never;
-    patch?: never;
-    trace?: never;
-  };
-  '/api/demo/student/test': {
-    parameters: {
-      query?: never;
-      header?: never;
-      path?: never;
-      cookie?: never;
-    };
-    get: operations['DemoStudent_test'];
-    put?: never;
-    post?: never;
-    delete?: never;
-    options?: never;
-    head?: never;
-    patch?: never;
-    trace?: never;
-  };
-  '/api/demo/student/test3': {
-    parameters: {
-      query?: never;
-      header?: never;
-      path?: never;
-      cookie?: never;
-    };
-    get: operations['DemoStudent_test3'];
-    put?: never;
-    post?: never;
-    delete?: never;
-    options?: never;
-    head?: never;
-    patch?: never;
-    trace?: never;
-  };
-  '/api/demo/student/test2': {
-    parameters: {
-      query?: never;
-      header?: never;
-      path?: never;
-      cookie?: never;
-    };
-    get: operations['DemoStudent_test2'];
-    put?: never;
-    post?: never;
-    delete?: never;
-    options?: never;
-    head?: never;
-    patch?: never;
-    trace?: never;
-  };
   '/api/demo/student': {
     parameters: {
       query?: never;
@@ -458,6 +394,22 @@ export interface paths {
     get: operations['TestSsrToolTwo_test'];
     put?: never;
     post?: never;
+    delete?: never;
+    options?: never;
+    head?: never;
+    patch?: never;
+    trace?: never;
+  };
+  '/api/play': {
+    parameters: {
+      query?: never;
+      header?: never;
+      path?: never;
+      cookie?: never;
+    };
+    get?: never;
+    put?: never;
+    post: operations['Play_index'];
     delete?: never;
     options?: never;
     head?: never;
@@ -1018,8 +970,9 @@ export interface components {
       meta?: unknown;
     };
     'test-vona.dto.postCreate': {
+      /** @description Title */
       title: string;
-      userId: string;
+      userId: number | string;
       stars?: number | undefined;
     };
     'test-vona.dto.userCreate': {
@@ -1027,10 +980,11 @@ export interface components {
       age?: number | undefined;
       scores?: number | undefined;
       posts?: {
+        /** @description Title */
         title: string;
       }[] | undefined;
       roles?: {
-        id: string;
+        id: number | string;
         deleted?: boolean | undefined;
       }[] | undefined;
     };
@@ -1056,7 +1010,7 @@ export interface components {
              */
       iid: number;
       /** @description ID */
-      id: string;
+      id: number | string;
       /** @description Name */
       name: string;
       /** @description Price */
@@ -1065,7 +1019,7 @@ export interface components {
       quantity: number;
       /** @description Amount */
       amount: number;
-      orderId: string;
+      orderId: number | string;
     };
     'home-user.dto.passport': {
       user: components['schemas']['home-user.entity.user'];
@@ -1095,7 +1049,7 @@ export interface components {
              */
       iid: number;
       /** @description ID */
-      id: string;
+      id: number | string;
       /** @description User Name */
       name: string;
       /** @description Avatar */
@@ -1116,7 +1070,7 @@ export interface components {
     };
     'a-auth.dto.auth': {
       /** @description ID */
-      id: string;
+      id: number | string;
       profileId: string;
       authProvider?: {
         /** @description ID */
@@ -1148,7 +1102,7 @@ export interface components {
              */
       iid: number;
       /** @description ID */
-      id: string;
+      id: number | string;
       /** @description Role Name */
       name: string;
     };
@@ -1184,10 +1138,6 @@ export interface components {
       token?: unknown;
       payload?: unknown;
     };
-    'a-play.dto.play': {
-      args: string[];
-      projectPath: string;
-    };
     'demo-student.dto.studentCreate': {
       /**
              * @description Name
@@ -1220,7 +1170,7 @@ export interface components {
                  */
         iid: number;
         /** @description ID */
-        id: string;
+        id: number | string;
         /**
                  * @description Name
                  * @default
@@ -1257,7 +1207,7 @@ export interface components {
              */
       iid: number;
       /** @description ID */
-      id: string;
+      id: number | string;
       /**
              * @description Name
              * @default
@@ -1348,7 +1298,7 @@ export interface components {
                  */
         iid: number;
         /** @description ID */
-        id: string;
+        id: number | string;
         /** @description Name */
         name: string;
         /** @description Description */
@@ -1393,7 +1343,7 @@ export interface components {
              */
       iid: number;
       /** @description ID */
-      id: string;
+      id: number | string;
       /** @description Name */
       name: string;
       /** @description Description */
@@ -1429,14 +1379,24 @@ export interface components {
       _custom?: unknown;
     };
     'test-ssr.dto.testResult': {
-      id: string;
+      id: number | string;
       /**
-             * @description test
+             * @description Name
              * @default tom
              */
       name: string;
       married: boolean;
       details: components['schemas']['test-ssr.dto.testDetail'][];
+      /** @default custom */
+      _custom1: string;
+      /** @default custom */
+      _custom2: string;
+      /** @default custom */
+      _custom3: string;
+      /** @default custom */
+      _custom4: string;
+      /** @default custom */
+      _custom5: string;
     };
     'test-ssr.dto.testDetail': {
       name: string;
@@ -1445,14 +1405,28 @@ export interface components {
       amount: number;
     };
     'test-ssr.dto.testBody': {
-      id: string;
+      id: number | string;
       /**
-             * @description test
+             * @description Name
              * @default tom
              */
       name: string;
       married: boolean;
       details: components['schemas']['test-ssr.dto.testDetail'][];
+      /** @default custom */
+      _custom1: string;
+      /** @default custom */
+      _custom2: string;
+      /** @default custom */
+      _custom3: string;
+      /** @default custom */
+      _custom4: string;
+      /** @default custom */
+      _custom5: string;
+    };
+    'a-play.dto.play': {
+      args: string[];
+      projectPath: string;
     };
     'test-vona.dto.signin': {
       username: string;
@@ -1470,7 +1444,7 @@ export interface components {
     };
     'test-vona.entity.user_2c7d642ee581efa300341e343180fbb0ecdc785d': {
       /** @description ID */
-      id: string;
+      id: number | string;
       name: string;
     };
     'test-vona.entity.post_a6ba2076b5b70a3c098374cc82d418bd1ab226c3': {
@@ -1479,6 +1453,7 @@ export interface components {
       sum_stars?: string | undefined;
     };
     'test-vona.entity.post_729883d7de16ce4401b26f75bebe618c8948ff64': {
+      /** @description Title */
       title: string;
       count_all?: string | undefined;
       count_title?: string | undefined;
@@ -1495,26 +1470,27 @@ export interface components {
                  */
         deleted: boolean | undefined;
         /** @description ID */
-        id?: string | undefined;
+        id?: number | string | undefined;
+        /** @description Title */
         title: string;
       }[] | undefined;
     };
     'test-vona.entity.category_2c7d642ee581efa300341e343180fbb0ecdc785d': {
       /** @description ID */
-      id: string;
+      id: number | string;
       name: string;
       children: components['schemas']['test-vona.entity.category_2c7d642ee581efa300341e343180fbb0ecdc785d'][];
     };
     'test-vona.dto.categoryTree': {
       /** @description ID */
-      id: string;
+      id: number | string;
       name: string;
       children: components['schemas']['test-vona.entity.category_2c7d642ee581efa300341e343180fbb0ecdc785d'][];
     };
     /** @description User */
     'test-vona.dto.user': {
       /** @description User ID */
-      id: string;
+      id: number | string;
       name: string;
       married: boolean;
     };
@@ -1555,7 +1531,7 @@ export interface components {
              */
       deleted: boolean | undefined;
       /** @description ID */
-      id?: string | undefined;
+      id?: number | string | undefined;
       /** @description Name */
       name: string;
       /** @description Price */
@@ -1587,7 +1563,7 @@ export interface components {
              */
       iid: number;
       /** @description ID */
-      id: string;
+      id: number | string;
       /**
              * @description Order No
              * @default
@@ -1595,13 +1571,13 @@ export interface components {
       orderNo: string;
       /** @description Remark */
       remark?: string | undefined;
-      userId: string;
+      userId: number | string;
       user?: components['schemas']['test-vona.entity.user_2c7d642ee581efa300341e343180fbb0ecdc785d'];
       products: components['schemas']['test-vona.entity.product_bce173590aaef19772f1ae3a82196493c2633e2e'][];
     };
     'test-vona.entity.product_bce173590aaef19772f1ae3a82196493c2633e2e': {
       /** @description ID */
-      id: string;
+      id: number | string;
       /** @description Name */
       name: string;
       /** @description Price */
@@ -1634,7 +1610,7 @@ export interface components {
                  */
         iid: number;
         /** @description ID */
-        id: string;
+        id: number | string;
         /**
                  * @description Order No
                  * @default
@@ -1642,7 +1618,7 @@ export interface components {
         orderNo: string;
         /** @description Remark */
         remark?: string | undefined;
-        userId: string;
+        userId: number | string;
         user?: components['schemas']['test-vona.entity.user_2c7d642ee581efa300341e343180fbb0ecdc785d'];
         products: components['schemas']['test-vona.entity.product_bce173590aaef19772f1ae3a82196493c2633e2e'][];
       }[];
@@ -1652,7 +1628,7 @@ export interface components {
       pageNo: number;
     };
     'test-vona.dto.postGroup': {
-      userId: string;
+      userId: number | string;
       count_all?: string | undefined;
       sum_stars?: string | undefined;
     };
@@ -1687,13 +1663,14 @@ export interface components {
                  */
         iid: number;
         /** @description ID */
-        id: string;
+        id: number | string;
+        /** @description Title */
         title: string;
-        userId: string;
+        userId: number | string;
         stars?: number | undefined;
         postContent?: {
           /** @description ID */
-          id: string;
+          id: number | string;
           content: string;
         };
         user?: components['schemas']['test-vona.entity.user_2c7d642ee581efa300341e343180fbb0ecdc785d'];
@@ -2205,106 +2182,6 @@ export interface operations {
       };
     };
   };
-  Play_index: {
-    parameters: {
-      query?: never;
-      header?: never;
-      path?: never;
-      cookie?: never;
-    };
-    requestBody: {
-      content: {
-        'application/json': components['schemas']['a-play.dto.play'];
-      };
-    };
-    responses: {
-      200: {
-        headers: {
-          [name: string]: unknown;
-        };
-        content: {
-          'application/json': {
-            code: string;
-            message: string;
-            data?: unknown;
-          };
-        };
-      };
-    };
-    authToken: true;
-  };
-  DemoStudent_test: {
-    parameters: {
-      query?: never;
-      header?: never;
-      path?: never;
-      cookie?: never;
-    };
-    requestBody?: never;
-    responses: {
-      200: {
-        headers: {
-          [name: string]: unknown;
-        };
-        content: {
-          'application/json': {
-            code: string;
-            message: string;
-            data?: unknown;
-          };
-        };
-      };
-    };
-    authToken: true;
-  };
-  DemoStudent_test3: {
-    parameters: {
-      query?: never;
-      header?: never;
-      path?: never;
-      cookie?: never;
-    };
-    requestBody?: never;
-    responses: {
-      200: {
-        headers: {
-          [name: string]: unknown;
-        };
-        content: {
-          'application/json': {
-            code: string;
-            message: string;
-            data?: unknown;
-          };
-        };
-      };
-    };
-    authToken: true;
-  };
-  DemoStudent_test2: {
-    parameters: {
-      query?: never;
-      header?: never;
-      path?: never;
-      cookie?: never;
-    };
-    requestBody?: never;
-    responses: {
-      200: {
-        headers: {
-          [name: string]: unknown;
-        };
-        content: {
-          'application/json': {
-            code: string;
-            message: string;
-            data?: unknown;
-          };
-        };
-      };
-    };
-    authToken: true;
-  };
   DemoStudent_findMany: {
     parameters: {
       query?: {
@@ -2315,6 +2192,7 @@ export interface operations {
         orders?: string | string[][] | undefined;
         pageNo?: number;
         pageSize?: number;
+        createdAt?: string | undefined;
         name?: string | undefined;
       };
       header?: never;
@@ -2359,7 +2237,7 @@ export interface operations {
           'application/json': {
             code: string;
             message: string;
-            data: string;
+            data: number | string;
           };
         };
       };
@@ -2371,7 +2249,7 @@ export interface operations {
       query?: never;
       header?: never;
       path: {
-        id: string;
+        id: number | string;
       };
       cookie?: never;
     };
@@ -2397,7 +2275,7 @@ export interface operations {
       query?: never;
       header?: never;
       path: {
-        id: string;
+        id: number | string;
       };
       cookie?: never;
     };
@@ -2423,7 +2301,7 @@ export interface operations {
       query?: never;
       header?: never;
       path: {
-        id: string;
+        id: number | string;
       };
       cookie?: never;
     };
@@ -2555,6 +2433,7 @@ export interface operations {
         orders?: string | string[][] | undefined;
         pageNo?: number;
         pageSize?: number;
+        createdAt?: string | undefined;
         name?: string | undefined;
       };
       header?: never;
@@ -2599,7 +2478,7 @@ export interface operations {
           'application/json': {
             code: string;
             message: string;
-            data: string;
+            data: number | string;
           };
         };
       };
@@ -2611,7 +2490,7 @@ export interface operations {
       query?: never;
       header?: never;
       path: {
-        id: string;
+        id: number | string;
       };
       cookie?: never;
     };
@@ -2637,7 +2516,7 @@ export interface operations {
       query?: never;
       header?: never;
       path: {
-        id: string;
+        id: number | string;
       };
       cookie?: never;
     };
@@ -2663,7 +2542,7 @@ export interface operations {
       query?: never;
       header?: never;
       path: {
-        id: string;
+        id: number | string;
       };
       cookie?: never;
     };
@@ -2695,7 +2574,7 @@ export interface operations {
       };
       header?: never;
       path: {
-        id: ((string | undefined) | undefined) | undefined;
+        id: ((number | undefined) | (string | undefined) | (undefined | undefined)) | undefined;
       };
       cookie?: never;
     };
@@ -2723,7 +2602,7 @@ export interface operations {
       };
       header?: never;
       path: {
-        id: ((string | undefined) | undefined) | undefined;
+        id: ((number | undefined) | (string | undefined) | (undefined | undefined)) | undefined;
       };
       cookie?: never;
     };
@@ -2755,7 +2634,7 @@ export interface operations {
       };
       header?: never;
       path: {
-        id: ((string | undefined) | undefined) | undefined;
+        id: ((number | undefined) | (string | undefined) | (undefined | undefined)) | undefined;
       };
       cookie?: never;
     };
@@ -2774,6 +2653,34 @@ export interface operations {
         };
       };
     };
+  };
+  Play_index: {
+    parameters: {
+      query?: never;
+      header?: never;
+      path?: never;
+      cookie?: never;
+    };
+    requestBody: {
+      content: {
+        'application/json': components['schemas']['a-play.dto.play'];
+      };
+    };
+    responses: {
+      200: {
+        headers: {
+          [name: string]: unknown;
+        };
+        content: {
+          'application/json': {
+            code: string;
+            message: string;
+            data?: unknown;
+          };
+        };
+      };
+    };
+    authToken: true;
   };
   TestVonaCaptcha_signin: {
     parameters: {
@@ -2845,29 +2752,30 @@ export interface operations {
             message: string;
             data: {
               /**
-                             * a-orm::CreatedAt
+                             * Created At
                              * Format: date
                              */
               createdAt: string;
               /**
-                             * a-orm::UpdatedAt
+                             * Updated At
                              * Format: date
                              */
               updatedAt: string;
               /**
-                             * a-orm::Deleted
+                             * Deleted
                              * @default false
                              */
               deleted: boolean;
               /**
-                             * a-orm::InstanceId
+                             * Instance ID
                              * @default 0
                              */
               iid: number;
-              /** a-orm::TableIdentity */
-              id: string;
+              /** ID */
+              id: number | string;
+              /** Title */
               title: string;
-              userId: string;
+              userId: number | string;
               stars?: number | undefined;
               user?: components['schemas']['test-vona.entity.user_2c7d642ee581efa300341e343180fbb0ecdc785d'];
             };
@@ -2896,27 +2804,27 @@ export interface operations {
             message: string;
             data: {
               /**
-                             * a-orm::CreatedAt
+                             * Created At
                              * Format: date
                              */
               createdAt: string;
               /**
-                             * a-orm::UpdatedAt
+                             * Updated At
                              * Format: date
                              */
               updatedAt: string;
               /**
-                             * a-orm::Deleted
+                             * Deleted
                              * @default false
                              */
               deleted: boolean;
               /**
-                             * a-orm::InstanceId
+                             * Instance ID
                              * @default 0
                              */
               iid: number;
-              /** a-orm::TableIdentity */
-              id: string;
+              /** ID */
+              id: number | string;
               name: string;
               age?: number | undefined;
               scores?: number | undefined;
@@ -2947,27 +2855,27 @@ export interface operations {
             message: string;
             data: {
               /**
-                             * a-orm::CreatedAt
+                             * Created At
                              * Format: date
                              */
               createdAt: string;
               /**
-                             * a-orm::UpdatedAt
+                             * Updated At
                              * Format: date
                              */
               updatedAt: string;
               /**
-                             * a-orm::Deleted
+                             * Deleted
                              * @default false
                              */
               deleted: boolean;
               /**
-                             * a-orm::InstanceId
+                             * Instance ID
                              * @default 0
                              */
               iid: number;
-              /** a-orm::TableIdentity */
-              id: string;
+              /** ID */
+              id: number | string;
               name: string;
               age?: number | undefined;
               scores?: number | undefined;
@@ -3055,8 +2963,8 @@ export interface operations {
             code: string;
             message: string;
             data: {
-              /** a-orm::TableIdentity */
-              id: string;
+              /** ID */
+              id: number | string;
               name: string;
               children: components['schemas']['test-vona.entity.category_2c7d642ee581efa300341e343180fbb0ecdc785d'][];
             }[];
@@ -3245,7 +3153,7 @@ export interface operations {
   Onion_echo2: {
     parameters: {
       query: {
-        id: string;
+        id: number | string;
         name: string;
         married: boolean;
       };
@@ -3405,7 +3313,7 @@ export interface operations {
           'application/json': {
             code: string;
             message: string;
-            data: string;
+            data: number | string;
           };
         };
       };
@@ -3567,6 +3475,7 @@ export interface operations {
         orders?: string | string[][] | undefined;
         pageNo?: number;
         pageSize?: number;
+        createdAt?: string | undefined;
         title?: string | undefined;
         userName?: string | undefined;
       };
@@ -3600,6 +3509,7 @@ export interface operations {
         orders?: string | string[][] | undefined;
         pageNo?: number;
         pageSize?: number;
+        createdAt?: string | undefined;
         title?: string | undefined;
         userName?: string | undefined;
       };
