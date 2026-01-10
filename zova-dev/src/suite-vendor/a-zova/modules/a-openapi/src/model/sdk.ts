@@ -1,6 +1,6 @@
 import { isNil } from '@cabloy/utils';
 import { ILocaleRecord, TypeEventOff, Use, usePrepareArg } from 'zova';
-import { BeanModelBase, IDecoratorModelOptions, Model } from 'zova-module-a-model';
+import { $QueryAutoLoad, BeanModelBase, IDecoratorModelOptions, Model } from 'zova-module-a-model';
 import { SysSdk } from '../bean/sys.sdk.js';
 import { schemaToZodSchema } from '../lib/schema.js';
 import { TypeRequestMethod } from '../types/sdk.js';
@@ -48,8 +48,7 @@ export class ModelSdk extends BeanModelBase {
         if (!sdk) throw new Error('load sdk error');
         for (const schemaName of sdk.schemas) {
           if (process.env.SERVER) {
-            const querySchema = this.getSchema(schemaName);
-            await querySchema.suspense();
+            await $QueryAutoLoad(() => this.getSchema(schemaName));
           } else {
             this.$invalidateQueries({ queryKey: ['schema', schemaName] });
           }
