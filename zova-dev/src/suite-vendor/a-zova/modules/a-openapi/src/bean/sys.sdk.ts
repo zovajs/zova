@@ -54,7 +54,7 @@ export class SysSdk extends BeanBase {
 
   getSdk(api: string | undefined, apiMethod: string | undefined): IOpenapiSdkItem | undefined {
     if (!api) return;
-    const [api2, apiMethod2] = this.prepareApiInfo(api, apiMethod);
+    const [api2, apiMethod2] = this.prepareApiMeta(api, apiMethod);
     return this.sdks[api2]?.[apiMethod2];
   }
 
@@ -67,7 +67,7 @@ export class SysSdk extends BeanBase {
       this._fetch = $fetch;
     }
     if (!api) return;
-    const [api2, apiMethod2] = this.prepareApiInfo(api, apiMethod);
+    const [api2, apiMethod2] = this.prepareApiMeta(api, apiMethod);
     if (this.sdks[api2]?.[apiMethod2]) return this.sdks[api2][apiMethod2];
     // params
     const params: any[] = [this.sys.util.apiActionPathTranslate(api2)];
@@ -118,9 +118,7 @@ export class SysSdk extends BeanBase {
     return this.sdks[api2][apiMethod2];
   }
 
-  prepareApiInfo(api: string, apiMethod?: string) {
-    // const api2 = this.sys.util.getApiPath(api)!;
-    const apiMethod2 = apiMethod ?? 'get';
-    return [api, apiMethod2];
+  prepareApiMeta(api: string, apiMethod?: string) {
+    return [api, apiMethod ?? 'get'];
   }
 }
