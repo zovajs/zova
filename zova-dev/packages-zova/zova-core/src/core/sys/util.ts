@@ -2,7 +2,7 @@ import type { IBeanRecord, IBeanScopeRecord, TypeBeanScopeRecordKeys } from '../
 import type { IBeanSceneRecord } from '../../decorator/interface/beanOptions.js';
 import type { TypeAuthToken } from '../../types/utils/auth.js';
 import { extend } from '@cabloy/extend';
-import { defaultPathSerializer } from '@cabloy/utils';
+import { combineApiPathControllerAndAction, defaultPathSerializer } from '@cabloy/utils';
 import DeepEqual from 'deep-equal';
 import { BeanSimple } from '../../bean/beanSimple.js';
 import { cast } from '../../types/utils/cast.js';
@@ -106,6 +106,11 @@ export class SysUtil extends BeanSimple {
       config = this.sys.config.modules[moduleName as any] = {} as any;
     }
     return config;
+  }
+
+  parseResourceApi(resource: string, api?: string) {
+    const parts = resource.split(':');
+    return api ?? combineApiPathControllerAndAction(parts[0], parts[1], undefined, true, true, this.sys.env.API_PREFIX);
   }
 }
 
