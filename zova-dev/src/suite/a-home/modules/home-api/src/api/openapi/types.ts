@@ -1003,12 +1003,12 @@ export interface components {
              * @description Deleted
              * @default false
              */
-      deleted: boolean;
+      deleted?: boolean;
       /**
              * @description Instance ID
              * @default 0
              */
-      iid: number;
+      iid?: number;
       /** @description ID */
       id: number | string;
       /** @description Name */
@@ -1042,12 +1042,12 @@ export interface components {
              * @description Deleted
              * @default false
              */
-      deleted: boolean;
+      deleted?: boolean;
       /**
              * @description Instance ID
              * @default 0
              */
-      iid: number;
+      iid?: number;
       /** @description ID */
       id: number | string;
       /** @description User Name */
@@ -1062,7 +1062,7 @@ export interface components {
              * @description Activated
              * @default false
              */
-      activated: boolean;
+      activated?: boolean;
       /** @description Language */
       locale?: string | undefined;
       /** @description Timezone */
@@ -1095,12 +1095,12 @@ export interface components {
              * @description Deleted
              * @default false
              */
-      deleted: boolean;
+      deleted?: boolean;
       /**
              * @description Instance ID
              * @default 0
              */
-      iid: number;
+      iid?: number;
       /** @description ID */
       id: number | string;
       /** @description Role Name */
@@ -1143,7 +1143,7 @@ export interface components {
              * @description Name
              * @default
              */
-      name: string;
+      name?: string;
       /** @description Description */
       description?: string | undefined;
     };
@@ -1163,19 +1163,19 @@ export interface components {
                  * @description Deleted
                  * @default false
                  */
-        deleted: boolean;
+        deleted?: boolean;
         /**
                  * @description Instance ID
                  * @default 0
                  */
-        iid: number;
+        iid?: number;
         /** @description ID */
         id: number | string;
         /**
                  * @description Name
                  * @default
                  */
-        name: string;
+        name?: string;
         /** @description Description */
         description?: string | undefined;
       }[];
@@ -1200,19 +1200,19 @@ export interface components {
              * @description Deleted
              * @default false
              */
-      deleted: boolean;
+      deleted?: boolean;
       /**
              * @description Instance ID
              * @default 0
              */
-      iid: number;
+      iid?: number;
       /** @description ID */
       id: number | string;
       /**
              * @description Name
              * @default
              */
-      name: string;
+      name?: string;
       /** @description Description */
       description?: string | undefined;
     } | undefined;
@@ -1221,7 +1221,7 @@ export interface components {
              * @description Name
              * @default
              */
-      name: string;
+      name?: string;
       /** @description Description */
       description?: string | undefined;
     };
@@ -1267,7 +1267,7 @@ export interface components {
              * @description Quantity
              * @default 0
              */
-      quantity: number;
+      quantity?: number;
       /** @description Amount */
       amount: number;
       /** @description Custom */
@@ -1291,12 +1291,12 @@ export interface components {
                  * @description Deleted
                  * @default false
                  */
-        deleted: boolean;
+        deleted?: boolean;
         /**
                  * @description Instance ID
                  * @default 0
                  */
-        iid: number;
+        iid?: number;
         /** @description ID */
         id: number | string;
         /** @description Name */
@@ -1309,7 +1309,7 @@ export interface components {
                  * @description Quantity
                  * @default 0
                  */
-        quantity: number;
+        quantity?: number;
         /** @description Amount */
         amount: number;
         /** @description Custom */
@@ -1336,12 +1336,12 @@ export interface components {
              * @description Deleted
              * @default false
              */
-      deleted: boolean;
+      deleted?: boolean;
       /**
              * @description Instance ID
              * @default 0
              */
-      iid: number;
+      iid?: number;
       /** @description ID */
       id: number | string;
       /** @description Name */
@@ -1354,7 +1354,7 @@ export interface components {
              * @description Quantity
              * @default 0
              */
-      quantity: number;
+      quantity?: number;
       /** @description Amount */
       amount: number;
       /** @description Custom */
@@ -1372,7 +1372,7 @@ export interface components {
              * @description Quantity
              * @default 0
              */
-      quantity: number;
+      quantity?: number;
       /** @description Amount */
       amount: number;
       /** @description Custom */
@@ -1384,19 +1384,19 @@ export interface components {
              * @description Name
              * @default tom
              */
-      name: string;
+      name?: string;
       married: boolean;
       details: components['schemas']['test-ssr.dto.testDetail'][];
       /** @default custom */
-      _custom1: string | undefined;
+      _custom1?: string | undefined;
       /** @default custom */
-      _custom2: string | undefined;
+      _custom2?: string | undefined;
       /** @default custom */
-      _custom3: string | undefined;
+      _custom3?: string | undefined;
       /** @default custom */
-      _custom4: string | undefined;
+      _custom4?: string | undefined;
       /** @default custom */
-      _custom5: string | undefined;
+      _custom5?: string | undefined;
     };
     'test-ssr.dto.testDetail': {
       name: string;
@@ -1410,19 +1410,19 @@ export interface components {
              * @description Name
              * @default tom
              */
-      name: string;
+      name?: string;
       married: boolean;
       details: components['schemas']['test-ssr.dto.testDetail'][];
       /** @default custom */
-      _custom1: string | undefined;
+      _custom1?: string | undefined;
       /** @default custom */
-      _custom2: string | undefined;
+      _custom2?: string | undefined;
       /** @default custom */
-      _custom3: string | undefined;
+      _custom3?: string | undefined;
       /** @default custom */
-      _custom4: string | undefined;
+      _custom4?: string | undefined;
       /** @default custom */
-      _custom5: string | undefined;
+      _custom5?: string | undefined;
     };
     'a-play.dto.play': {
       args: string[];
@@ -1468,7 +1468,7 @@ export interface components {
                  * @description Deleted
                  * @default false
                  */
-        deleted: boolean | undefined;
+        deleted?: boolean | undefined;
         /** @description ID */
         id?: number | string | undefined;
         /** @description Title */
@@ -1499,7 +1499,7 @@ export interface components {
              * @description Order No
              * @default
              */
-      orderNo: string;
+      orderNo?: string;
       /** @description Remark */
       remark?: string | undefined;
       products?: components['schemas']['test-vona.entity.product_29731960f3f38d3572bc2f8a01a7498bfe927055'][] | undefined;
@@ -1519,7 +1519,7 @@ export interface components {
              * @description Order No
              * @default
              */
-      orderNo: string;
+      orderNo?: string;
       /** @description Remark */
       remark?: string | undefined;
       products?: components['schemas']['test-vona.entity.product_9cf2c6bcd41713270c34bcfce21b7b4942e3fbc6'][] | undefined;
@@ -1529,7 +1529,7 @@ export interface components {
              * @description Deleted
              * @default false
              */
-      deleted: boolean | undefined;
+      deleted?: boolean | undefined;
       /** @description ID */
       id?: number | string | undefined;
       /** @description Name */
@@ -1556,19 +1556,19 @@ export interface components {
              * @description Deleted
              * @default false
              */
-      deleted: boolean;
+      deleted?: boolean;
       /**
              * @description Instance ID
              * @default 0
              */
-      iid: number;
+      iid?: number;
       /** @description ID */
       id: number | string;
       /**
              * @description Order No
              * @default
              */
-      orderNo: string;
+      orderNo?: string;
       /** @description Remark */
       remark?: string | undefined;
       userId: number | string;
@@ -1603,19 +1603,19 @@ export interface components {
                  * @description Deleted
                  * @default false
                  */
-        deleted: boolean;
+        deleted?: boolean;
         /**
                  * @description Instance ID
                  * @default 0
                  */
-        iid: number;
+        iid?: number;
         /** @description ID */
         id: number | string;
         /**
                  * @description Order No
                  * @default
                  */
-        orderNo: string;
+        orderNo?: string;
         /** @description Remark */
         remark?: string | undefined;
         userId: number | string;
@@ -1656,12 +1656,12 @@ export interface components {
                  * @description Deleted
                  * @default false
                  */
-        deleted: boolean;
+        deleted?: boolean;
         /**
                  * @description Instance ID
                  * @default 0
                  */
-        iid: number;
+        iid?: number;
         /** @description ID */
         id: number | string;
         /** @description Title */
@@ -2765,12 +2765,12 @@ export interface operations {
                              * Deleted
                              * @default false
                              */
-              deleted: boolean;
+              deleted?: boolean;
               /**
                              * Instance ID
                              * @default 0
                              */
-              iid: number;
+              iid?: number;
               /** ID */
               id: number | string;
               /** Title */
@@ -2817,12 +2817,12 @@ export interface operations {
                              * Deleted
                              * @default false
                              */
-              deleted: boolean;
+              deleted?: boolean;
               /**
                              * Instance ID
                              * @default 0
                              */
-              iid: number;
+              iid?: number;
               /** ID */
               id: number | string;
               name: string;
@@ -2868,12 +2868,12 @@ export interface operations {
                              * Deleted
                              * @default false
                              */
-              deleted: boolean;
+              deleted?: boolean;
               /**
                              * Instance ID
                              * @default 0
                              */
-              iid: number;
+              iid?: number;
               /** ID */
               id: number | string;
               name: string;

@@ -471,7 +471,9 @@ const UNDEFINED = ts.factory.createKeywordTypeNode(ts.SyntaxKind.UndefinedKeywor
 function _patchOpenapiTSOptions(options?: OpenAPITSOptions) {
   const transformCustom = options?.transform;
   const postTransformCustom = options?.postTransform;
-  return Object.assign({}, options, {
+  return Object.assign({
+    defaultNonNullable: false,
+  }, options, {
     transform(schemaObject: SchemaObject, options: TransformNodeOptions) {
       if (transformCustom) {
         const res = transformCustom(schemaObject, options);

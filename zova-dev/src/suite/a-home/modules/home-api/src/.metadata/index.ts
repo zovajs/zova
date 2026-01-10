@@ -226,6 +226,43 @@ declare module 'zova' {
   }
 }
 /** apiMeta: end */
+/** apiSchema: begin */
+export * from '../apiSchema/captcha.js';
+
+import 'zova';
+declare module 'zova' {
+  
+  
+}
+declare module 'zova-module-home-api' {
+  
+        export interface ApiSchemaCaptcha {
+          /** @internal */
+          get scope(): ScopeModuleHomeApi;
+        }
+
+        export interface ApiSchemaCaptcha {
+          get $beanFullName(): 'home-api.apiSchema.captcha';
+          get $onionName(): 'home-api:captcha';
+          
+        } 
+}
+/** apiSchema: end */
+/** apiSchema: begin */
+import { ApiSchemaCaptcha } from '../apiSchema/captcha.js';
+export interface IModuleApiSchema {
+  'captcha': ApiSchemaCaptcha;
+}
+/** apiSchema: end */
+/** apiSchema: begin */
+
+import 'zova';
+declare module 'zova' {
+  export interface IBeanRecordGeneral {
+    'home-api.apiSchema.captcha': ApiSchemaCaptcha;
+  }
+}
+/** apiSchema: end */
 /** service: begin */
 export * from '../service/jwtAdapter.js';
 
@@ -272,6 +309,7 @@ export interface ScopeModuleHomeApi {
   util: BeanScopeUtil;
 api: IModuleApi;
 apiMeta: IModuleApiMeta;
+apiSchema: IModuleApiSchema;
 }
 
 import 'zova';
