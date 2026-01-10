@@ -11,7 +11,7 @@ import { Controller } from 'zova-module-a-bean';
 import { loadSchemaProperties, renderFormFieldTopPropsSystem, schemaToZodSchema, ScopeModuleAOpenapi, TypeFormFieldRenderComponent, TypeFormFieldRenderComponentProvider, TypeFormSchemaScene } from 'zova-module-a-openapi';
 import { BeanControllerFormBase } from '../../lib/beanControllerFormBase.js';
 import { RevalidateLogicProps, TypeForm, TypeFormOnShowError, TypeFormOnSubmit, TypeFormOnSubmitInvalid } from '../../types/form.js';
-import { constFieldProps, IFormFieldCelScope, IFormFieldLayoutOptionsBase, IFormFieldRenderContextPropsBucket, TypeFormFieldOnDisplayValueUpdate } from '../../types/formField.js';
+import { constFieldProps, IFormFieldCelScope, IFormFieldLayoutOptionsBase, IFormFieldRenderContextPropsBucket, TypeFormFieldOnSetDisplayValue } from '../../types/formField.js';
 import { IFormMeta } from '../../types/formMeta.js';
 import { IFormProvider } from '../../types/provider.js';
 
@@ -105,9 +105,9 @@ export class ControllerForm<TFormData extends {} = {}, TSubmitMeta = never> exte
     this.form.setFieldValue(name, value);
   }
 
-  public setFieldDisplayValue<K extends DeepKeys<TFormData>>(name: K, value: any, onDisplayValueUpdate?: TypeFormFieldOnDisplayValueUpdate) {
-    if (onDisplayValueUpdate) {
-      value = onDisplayValueUpdate(value);
+  public setFieldDisplayValue<K extends DeepKeys<TFormData>>(name: K, value: any, onSetDisplayValue?: TypeFormFieldOnSetDisplayValue) {
+    if (onSetDisplayValue) {
+      value = onSetDisplayValue(value);
     }
     return this.setFieldValue(name, value);
   }

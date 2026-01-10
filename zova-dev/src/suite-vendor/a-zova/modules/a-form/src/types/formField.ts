@@ -32,14 +32,14 @@ export interface IFormFieldLayoutOptionsBase {
   footer?: TypeRenderComponentJsx | string;
 }
 
-export type TypeFormFieldOnDisplayValueUpdate = (value: any) => any;
+export type TypeFormFieldOnSetDisplayValue = (value: any) => any;
 export type TypeFormFieldDisplayValueUpdateTiming = 'input' | 'change';
 
 export interface IFormFieldOptionsBase {
   render?: TypeFormFieldRenderComponent;
   displayValue?: any;
   displayValueUpdateTiming?: TypeFormFieldDisplayValueUpdateTiming;
-  onDisplayValueUpdate?: TypeFormFieldOnDisplayValueUpdate;
+  onSetDisplayValue?: TypeFormFieldOnSetDisplayValue;
   class?: any;
   placeholder?: string;
   readonly?: boolean;
