@@ -7,3 +7,7 @@ export function Api(): ClassDecorator {
 export function ApiMeta(): ClassDecorator {
   return createBeanDecorator('apiMeta', 'app');
 }
+
+export function ApiSchema(): ClassDecorator {
+  return createBeanDecorator('apiSchema', 'app');
+}
