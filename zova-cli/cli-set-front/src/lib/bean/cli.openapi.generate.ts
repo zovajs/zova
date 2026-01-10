@@ -187,10 +187,15 @@ export const OpenApiBaseURL = (sys: ZovaSys) => {
     for (const apiName in nodeApis) {
       const apiNameLower = toLowerCaseFirstChar(apiName);
       const nodeApi = nodeApis[apiName];
+      const { apiContent, apiMetaContent } = this._generateApi(openapiTypescript, ast, apiName, nodeApi);
+      // api
       const apiFile = path.join(module.root, `src/api/${apiNameLower}.ts`);
-      const apiContent = this._generateApi(openapiTypescript, ast, apiName, nodeApi);
       await fse.outputFile(apiFile, apiContent);
       await this.helper.formatFile({ fileName: apiFile });
+      // apiMeta
+      const apiMetaFile = path.join(module.root, `src/apiMeta/${apiNameLower}.ts`);
+      await fse.outputFile(apiMetaFile, apiMetaContent);
+      await this.helper.formatFile({ fileName: apiMetaFile });
     }
   }
 
@@ -297,18 +302,27 @@ export const OpenApiBaseURL = (sys: ZovaSys) => {
         this.$configPrepare(OpenApiBaseURL(this.sys), options${contentAuthToken}),
       );
     }\n`;
-    return [contentTypes.join('\n'), contentSignature];
+    return [contentTypes.join('\n'), contentSignature, nodeActionInfo.action, nameRequestPath, pathInfo.method];
   }
 
   _generateApi(openapiTypescript: any, ast: ts.Node[], apiName: string, nodeApi: Record<string, INodeActionInfo>) {
+    const apiNameLower = toLowerCaseFirstChar(apiName);
     const contentTypes: string[] = [];
     const contentSignatures: string[] = [];
+    const contentActions: string[] = [];
+    const contentApiPaths: string[] = [];
+    const contentApiMethods: string[] = [];
     for (const actionName in nodeApi) {
       const nodeActionInfo = nodeApi[actionName];
       const contentAction = this._generateAction(openapiTypescript, ast, nodeActionInfo);
-      contentTypes.push(contentAction[0]);
-      contentSignatures.push(contentAction[1]);
+      const [_contentType, _contentSignature, _action, _apiPath, _apiMethod] = contentAction;
+      contentTypes.push(_contentType);
+      contentSignatures.push(_contentSignature);
+      contentActions.push(_action);
+      contentApiPaths.push(_apiPath);
+      contentApiMethods.push(_apiMethod);
     }
+    //
     const contentTypes2 = contentTypes.join('\n');
     const importsType: string[] = [];
     if (contentSignatures.length > 0) importsType.push('OpenApiBaseURL');
@@ -316,6 +330,7 @@ export const OpenApiBaseURL = (sys: ZovaSys) => {
     if (contentTypes2.includes('paths[')) importsType.push('type paths');
     const contentImportsType =
       importsType.length > 0 ? `import { ${importsType.join(', ')} } from './openapi/index.js';` : '';
+    // apiContent
     const apiContent = `import { Api, BeanApiBase, IApiActionOptions } from 'zova-module-a-api';
 ${contentImportsType}
 
@@ -326,7 +341,28 @@ export class Api${apiName} extends BeanApiBase {
   ${contentSignatures.join('\n')}
 }
 `;
-    return apiContent;
+    // apiMetaContent
+    const importsApiPath: string[] = [];
+    const contentMetaSignatures: string[] = [];
+    for (let i = 0; i < contentActions.length; i++) {
+      importsApiPath.push(contentApiPaths[i]);
+      contentMetaSignatures.push(`get ${contentActions[i]}() {
+    return [${contentApiPaths[i]}, '${contentApiMethods[i]}'];
+  }
+`);
+    }
+    const contentImportsApiPath =
+    importsApiPath.length > 0 ? `import { ${importsApiPath.join(', ')} } from '../api/${apiNameLower}.js';` : '';
+    const apiMetaContent = `import { BeanBase } from 'zova';
+import { ApiMeta } from 'zova-module-a-api';
+${contentImportsApiPath}
+
+@ApiMeta()
+export class ApiMeta${apiName} extends BeanBase {
+  ${contentMetaSignatures.join('\n')}
+}
+`;
+    return { apiContent, apiMetaContent };
   }
 
   _getNodeApis(ast: ts.Node[], moduleConfig: ZovaOpenapiConfigModule) {
