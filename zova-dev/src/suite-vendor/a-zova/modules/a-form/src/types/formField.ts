@@ -33,13 +33,13 @@ export interface IFormFieldLayoutOptionsBase {
 }
 
 export type TypeFormFieldOnDisplayValueUpdate = (value: any) => any;
-export type TypeFormFieldOnhandleDisplayValueUpdateMode = 'input' | 'change';
+export type TypeFormFieldDisplayValueUpdateTiming = 'input' | 'change';
 
 export interface IFormFieldOptionsBase {
   render?: TypeFormFieldRenderComponent;
   displayValue?: any;
+  displayValueUpdateTiming?: TypeFormFieldDisplayValueUpdateTiming;
   onDisplayValueUpdate?: TypeFormFieldOnDisplayValueUpdate;
-  handleDisplayValueUpdateMode?: TypeFormFieldOnhandleDisplayValueUpdateMode;
   class?: any;
   placeholder?: string;
   readonly?: boolean;

@@ -87,8 +87,8 @@ export class ControllerFormField<TParentData extends {} = {}> extends BeanContro
     return 'text';
   }
 
-  public handleDisplayValueUpdate(value: any) {
-    return this.$$form.handleFieldDisplayValueUpdate(this.name, value, this.propsBucket.onDisplayValueUpdate);
+  public setDisplayValue(value: any) {
+    return this.$$form.setFieldDisplayValue(this.name, value, this.propsBucket.onDisplayValueUpdate);
   }
 
   private _getPropsBucket() {

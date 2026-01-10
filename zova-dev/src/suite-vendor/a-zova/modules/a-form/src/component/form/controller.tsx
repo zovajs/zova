@@ -105,7 +105,7 @@ export class ControllerForm<TFormData extends {} = {}, TSubmitMeta = never> exte
     this.form.setFieldValue(name, value);
   }
 
-  public handleFieldDisplayValueUpdate<K extends DeepKeys<TFormData>>(name: K, value: any, onDisplayValueUpdate?: TypeFormFieldOnDisplayValueUpdate) {
+  public setFieldDisplayValue<K extends DeepKeys<TFormData>>(name: K, value: any, onDisplayValueUpdate?: TypeFormFieldOnDisplayValueUpdate) {
     if (onDisplayValueUpdate) {
       value = onDisplayValueUpdate(value);
     }

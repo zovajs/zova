@@ -22,7 +22,7 @@ export class ControllerFormFieldCurrency extends BeanControllerBase {
         {...this.$props}
         render="text"
         displayValue={displayValue}
-        handleDisplayValueUpdateMode="change"
+        displayValueUpdateTiming="change"
         onDisplayValueUpdate={value => {
           const valuePatch = currencyUpdate(value, currencyOptions);
           return valuePatch !== undefined ? valuePatch : value;

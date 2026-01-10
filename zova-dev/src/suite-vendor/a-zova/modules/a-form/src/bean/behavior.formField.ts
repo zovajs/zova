@@ -57,17 +57,17 @@ export class BehaviorFormField extends BeanBehaviorBase<
     const renderFlattern = propsBucket.renderFlattern;
     const propsGeneral = this._patchProps_general(formMeta, field, renderContext);
     const inputType = this.$$formField.normalizeInputType(renderFlattern, propsBucket.inputType);
-    const onHandleDisplayValueUpdateDefault = (e: Event) => {
-      this.$$formField.handleDisplayValueUpdate((e.target as HTMLInputElement).value);
+    const onSetDisplayValueDefault = (e: Event) => {
+      this.$$formField.setDisplayValue((e.target as HTMLInputElement).value);
     };
     const propsPatch: IFormFieldRenderContextProps = {
       type: inputType,
       onChange: propsBucket.onChange !== undefined
         ? (propsBucket.onChange ?? undefined)
-        : (propsBucket.handleDisplayValueUpdateMode === 'change' ? onHandleDisplayValueUpdateDefault : undefined),
+        : (propsBucket.displayValueUpdateTiming === 'change' ? onSetDisplayValueDefault : undefined),
       onInput: propsBucket.onInput !== undefined
         ? (propsBucket.onInput ?? undefined)
-        : (propsBucket.handleDisplayValueUpdateMode !== 'change' ? onHandleDisplayValueUpdateDefault : undefined),
+        : (propsBucket.displayValueUpdateTiming !== 'change' ? onSetDisplayValueDefault : undefined),
       onBlur: propsBucket.onBlur !== undefined
         ? (propsBucket.onBlur ?? undefined)
         : (_e: Event) => {
