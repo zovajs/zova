@@ -118,36 +118,36 @@ export class ModelSdk extends BeanModelBase {
   }
 
   public createApiSchemas(api: string, apiMethod?: TypeRequestMethod): IOpenapiSchemas {
-    const sdk = this.getSdk(api, apiMethod);
-    return this._createApiSchemasInner(sdk);
-  }
-
-  private _createApiSchemasInner(sdk: TypeOpenapiSchemasSdk): IOpenapiSchemas {
     const self = this;
-    const operationObject = sdk.data?.operationObject;
+    const sdk = this.getSdk(api, apiMethod);
     return {
       get sdk() {
         return sdk;
       },
       get query() {
+        const operationObject = sdk.data?.operationObject;
         return getSchemaOfRequestQuery(operationObject);
       },
       get filter() {
+        const operationObject = sdk.data?.operationObject;
         return getSchemaOfRequestQueryFilter(operationObject, { where: true });
       },
       get requestBody() {
+        const operationObject = sdk.data?.operationObject;
         const schemaData = getSchemaOfRequestBody(operationObject);
         const schemaName = cast(schemaData)?.$ref;
         if (!schemaName) return;
         return self.getSchema(schemaName).data;
       },
       get responseBody() {
+        const operationObject = sdk.data?.operationObject;
         const schemaData = getSchemaOfResponseBody(operationObject);
         const schemaName = cast(schemaData?.properties?.data)?.$ref;
         if (!schemaName) return;
         return self.getSchema(schemaName).data;
       },
       get paged() {
+        const operationObject = sdk.data?.operationObject;
         const schemaData = getSchemaOfResponseBody(operationObject);
         if (!schemaData) return;
         const schemaName = cast(schemaData?.properties?.data)?.items?.$ref;
@@ -156,6 +156,7 @@ export class ModelSdk extends BeanModelBase {
         return this.responseBody;
       },
       get row() {
+        const operationObject = sdk.data?.operationObject;
         const schemaData = getSchemaOfResponseBody(operationObject);
         if (!schemaData) return;
         const schemaName = cast(schemaData?.properties?.data)?.items?.$ref;
