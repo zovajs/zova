@@ -117,7 +117,7 @@ export class ModelSdk extends BeanModelBase {
     });
   }
 
-  public createSdkSchemas(api: string, apiMethod?: TypeRequestMethod): IOpenapiSchemas {
+  public createApiSchemas(api: string, apiMethod?: TypeRequestMethod): IOpenapiSchemas {
     const sdk = this.getSdk(api, apiMethod);
     return this._createApiSchemasInner(sdk);
   }
