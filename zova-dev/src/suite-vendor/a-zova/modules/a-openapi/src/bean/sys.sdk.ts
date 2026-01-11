@@ -11,6 +11,7 @@ import { IOpenapiSdkItem, SymbolOpenapiSchemaName, TypeRequestMethod } from '../
 @Sys()
 export class SysSdk extends BeanBase {
   private locale: keyof ILocaleRecord;
+  bootstraps: Record<string, string>;
   schemas: Record<string, SchemaObject>;
   sdks: Record<string, Record<string, IOpenapiSdkItem>>;
   private _eventSsrHmrReload: TypeEventOff;
@@ -18,6 +19,7 @@ export class SysSdk extends BeanBase {
 
   protected async __init__(locale: keyof ILocaleRecord) {
     this.locale = locale;
+    this.bootstraps = shallowReactive({});
     this.schemas = shallowReactive({});
     this.sdks = shallowReactive({});
     // event
@@ -38,11 +40,19 @@ export class SysSdk extends BeanBase {
   private async reload() {
     // server
     if (process.env.SERVER) {
+      this.bootstraps = shallowReactive({});
       this.schemas = shallowReactive({});
       this.sdks = shallowReactive({});
       return;
     }
     // client
+    // bootstraps
+    const bootstraps = this.bootstraps;
+    this.bootstraps = shallowReactive({});
+    for (const resource in bootstraps) {
+      await this.loadBootstrap(this._fetch, resource);
+    }
+    // sdks
     const sdks = this.sdks;
     this.sdks = shallowReactive({});
     for (const api in sdks) {
@@ -50,6 +60,10 @@ export class SysSdk extends BeanBase {
         await this.loadSdk(this._fetch, api, apiMethod as any);
       }
     }
+  }
+
+  getBootstrap(resource: string): string | undefined {
+    return this.bootstraps[resource];
   }
 
   getSdk(api: string | undefined, apiMethod: string | undefined): IOpenapiSdkItem | undefined {
@@ -60,6 +74,16 @@ export class SysSdk extends BeanBase {
 
   getSchema(schemaName: string): SchemaObject {
     return this.schemas[schemaName];
+  }
+
+  async loadBootstrap($fetch: BeanFetch, resource: string): Promise<string> {
+    if (process.env.CLIENT) {
+      this._fetch = $fetch;
+    }
+    if (!this.bootstraps[resource]) {
+      this.bootstraps[resource] = await $fetch.get(this.sys.util.apiActionPathTranslate(this.scope.config.bootstrapApi, { resource }));
+    }
+    return this.bootstraps[resource];
   }
 
   async loadSdk($fetch: BeanFetch, api?: string, apiMethod?: TypeRequestMethod): Promise<IOpenapiSdkItem | undefined> {
