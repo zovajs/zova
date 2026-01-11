@@ -1,31 +1,24 @@
-import { OperationObject } from 'openapi3-ts/oas31';
 import { BeanBase, cast, Virtual } from 'zova';
 import { Bean } from 'zova-module-a-bean';
 import { getSchemaOfRequestBody, getSchemaOfRequestQuery, getSchemaOfRequestQueryFilter, getSchemaOfResponseBody } from '../lib/schema.js';
-import { IOpenapiSchemas } from '../types/schema.js';
+import { IOpenapiSchemas, TypeOpenapiSchemasSdk } from '../types/schema.js';
 import { TypeRequestMethod } from '../types/sdk.js';
 
 @Bean()
 @Virtual()
 export class BeanApiSchemaBase extends BeanBase {
-  public $createApiSchemas(operationObject?: OperationObject): IOpenapiSchemas;
-  public $createApiSchemas(api: string | undefined, apiMethod: TypeRequestMethod | undefined): IOpenapiSchemas;
-  public $createApiSchemas(api: OperationObject | string | undefined, apiMethod?: TypeRequestMethod | undefined): IOpenapiSchemas {
-    let operationObject: OperationObject | undefined;
-    if (!api) {
-      operationObject = undefined;
-    } else if (typeof api === 'string') {
-      const querySdk = this.$sdk.getSdk(api, apiMethod);
-      operationObject = querySdk?.data?.operationObject;
-    } else {
-      operationObject = api;
-    }
-    return this._createApiSchemasInner(operationObject);
+  public $createApiSchemas(api: string, apiMethod?: TypeRequestMethod): IOpenapiSchemas {
+    const sdk = this.$sdk.getSdk(api, apiMethod);
+    return this._createApiSchemasInner(sdk);
   }
 
-  private _createApiSchemasInner(operationObject?: OperationObject): IOpenapiSchemas {
+  private _createApiSchemasInner(sdk: TypeOpenapiSchemasSdk): IOpenapiSchemas {
     const self = this;
+    const operationObject = sdk.data?.operationObject;
     return {
+      get sdk() {
+        return sdk;
+      },
       get query() {
         return getSchemaOfRequestQuery(operationObject);
       },

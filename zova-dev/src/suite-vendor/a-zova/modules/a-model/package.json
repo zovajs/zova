@@ -8,6 +8,7 @@
       "monkey": true
     },
     "globalDependencies": {
+      "@tanstack/vue-query": true,
       "mutate-on-copy": true,
       "table-identity": true
     },

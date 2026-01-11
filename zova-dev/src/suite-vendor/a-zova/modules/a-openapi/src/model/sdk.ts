@@ -3,6 +3,7 @@ import { ILocaleRecord, TypeEventOff, Use, usePrepareArg } from 'zova';
 import { $QueryAutoLoad, BeanModelBase, IDecoratorModelOptions, Model } from 'zova-module-a-model';
 import { SysSdk } from '../bean/sys.sdk.js';
 import { schemaToZodSchema } from '../lib/schema.js';
+import { TypeOpenapiSchemasSdk } from '../types/schema.js';
 import { TypeRequestMethod } from '../types/sdk.js';
 
 const __schemaRefPrefix = '#/components/schemas/';
@@ -50,8 +51,7 @@ export class ModelSdk extends BeanModelBase {
     });
   }
 
-  getSdk(api: string | undefined, apiMethod: TypeRequestMethod | undefined) {
-    if (!api) return;
+  getSdk(api: string, apiMethod?: TypeRequestMethod): TypeOpenapiSchemasSdk {
     const [api2, apiMethod2] = this.$$sysSdk.prepareApiMeta(api, apiMethod);
     return this.$useStateData({
       queryKey: ['sdk', api2, apiMethod2],
@@ -67,7 +67,7 @@ export class ModelSdk extends BeanModelBase {
         }
         return sdk;
       },
-    });
+    }) as TypeOpenapiSchemasSdk;
   }
 
   getSchema(schemaName: string) {
