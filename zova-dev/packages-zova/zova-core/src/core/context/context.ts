@@ -30,6 +30,7 @@ export class ZovaContext {
 
   /** @internal */
   public dispose() {
+    if (this.disposed) return;
     this.meta.dispose();
     cast(this.instance).zova = null;
     cast(this).instance = null;

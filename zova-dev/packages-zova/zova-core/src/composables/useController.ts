@@ -95,7 +95,7 @@ async function _useController(
   if (process.env.CLIENT) {
     // dispose
     onBeforeUnmount(() => {
-      if (!ctx.bean) return;
+      if (ctx.disposed) return;
       // undefined better than null
       setControllerRef(ctx, false);
       if (ctx.bean !== ctx.app.bean) {
@@ -103,7 +103,6 @@ async function _useController(
       }
     });
     onUnmounted(() => {
-      if (!ctx.bean) return;
       ctx.dispose();
     });
   }
