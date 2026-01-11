@@ -1,10 +1,10 @@
 import { OperationObject, SchemaObject } from 'openapi3-ts/oas31';
 import { z } from 'zod';
-import { cast, Use, usePrepareArg } from 'zova';
+import { cast, Use } from 'zova';
 import { Controller } from 'zova-module-a-bean';
 import { BeanControllerPageFormBase, ControllerForm, IFormMeta, TypeFormOnSubmitData } from 'zova-module-a-form';
 import { $QueryAutoLoad } from 'zova-module-a-model';
-import { getSchemaOfRequestBody, ModelSdk } from 'zova-module-a-openapi';
+import { getSchemaOfRequestBody } from 'zova-module-a-openapi';
 import { ApiSchemaTestSsrDtoTestBodyPartial } from 'zova-module-home-api';
 import { ModelTest } from '../../model/test.js';
 
@@ -25,14 +25,6 @@ export class ControllerPageToolOne extends BeanControllerPageFormBase {
 
   @Use()
   $$modelTest: ModelTest;
-
-  @Use({ beanFullName: 'a-openapi.model.sdk' })
-  get $$modelSdk(): ModelSdk {
-    return usePrepareArg(
-      this.app.meta.locale.current,
-      true,
-    );
-  }
 
   controllerForm: ControllerForm;
   fieldName: string = 'name';
@@ -77,13 +69,13 @@ export class ControllerPageToolOne extends BeanControllerPageFormBase {
   }
 
   protected getQuerySdkUpdate() {
-    return this.$$modelSdk.getSdk(this.$query.api, this.$query.apiMethod as any)!;
+    return this.$sdk.getSdk(this.$query.api, this.$query.apiMethod as any)!;
   }
 
   protected getQuerySchemaOfFormUpdate(operationObject?: OperationObject) {
     const schemaData = getSchemaOfRequestBody(operationObject);
     const schemaName = cast(schemaData)?.$ref;
     if (!schemaName) return;
-    return this.$$modelSdk.getSchema(schemaName);
+    return this.$sdk.getSchema(schemaName);
   }
 }
