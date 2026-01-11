@@ -114,120 +114,13 @@ declare module 'zova' {
 /** openapi: begin */
 export * from '../api/openapi/index.js';
 /** openapi: end */
-/** apiMeta: begin */
-export * from '../apiMeta/captcha.js';
-export * from '../apiMeta/home.js';
-export * from '../apiMeta/homeBaseMenu.js';
-export * from '../apiMeta/homeUserPassport.js';
-export * from '../apiMeta/testSsrToolOne.js';
-export * from '../apiMeta/testVonaCaptcha.js';
-
-import 'zova';
-declare module 'zova' {
-  
-  
-}
-declare module 'zova-module-home-api' {
-  
-        export interface ApiMetaCaptcha {
-          /** @internal */
-          get scope(): ScopeModuleHomeApi;
-        }
-
-        export interface ApiMetaCaptcha {
-          get $beanFullName(): 'home-api.apiMeta.captcha';
-          get $onionName(): 'home-api:captcha';
-          
-        }
-
-        export interface ApiMetaHome {
-          /** @internal */
-          get scope(): ScopeModuleHomeApi;
-        }
-
-        export interface ApiMetaHome {
-          get $beanFullName(): 'home-api.apiMeta.home';
-          get $onionName(): 'home-api:home';
-          
-        }
-
-        export interface ApiMetaHomeBaseMenu {
-          /** @internal */
-          get scope(): ScopeModuleHomeApi;
-        }
-
-        export interface ApiMetaHomeBaseMenu {
-          get $beanFullName(): 'home-api.apiMeta.homeBaseMenu';
-          get $onionName(): 'home-api:homeBaseMenu';
-          
-        }
-
-        export interface ApiMetaHomeUserPassport {
-          /** @internal */
-          get scope(): ScopeModuleHomeApi;
-        }
-
-        export interface ApiMetaHomeUserPassport {
-          get $beanFullName(): 'home-api.apiMeta.homeUserPassport';
-          get $onionName(): 'home-api:homeUserPassport';
-          
-        }
-
-        export interface ApiMetaTestSsrToolOne {
-          /** @internal */
-          get scope(): ScopeModuleHomeApi;
-        }
-
-        export interface ApiMetaTestSsrToolOne {
-          get $beanFullName(): 'home-api.apiMeta.testSsrToolOne';
-          get $onionName(): 'home-api:testSsrToolOne';
-          
-        }
-
-        export interface ApiMetaTestVonaCaptcha {
-          /** @internal */
-          get scope(): ScopeModuleHomeApi;
-        }
-
-        export interface ApiMetaTestVonaCaptcha {
-          get $beanFullName(): 'home-api.apiMeta.testVonaCaptcha';
-          get $onionName(): 'home-api:testVonaCaptcha';
-          
-        } 
-}
-/** apiMeta: end */
-/** apiMeta: begin */
-import { ApiMetaCaptcha } from '../apiMeta/captcha.js';
-import { ApiMetaHome } from '../apiMeta/home.js';
-import { ApiMetaHomeBaseMenu } from '../apiMeta/homeBaseMenu.js';
-import { ApiMetaHomeUserPassport } from '../apiMeta/homeUserPassport.js';
-import { ApiMetaTestSsrToolOne } from '../apiMeta/testSsrToolOne.js';
-import { ApiMetaTestVonaCaptcha } from '../apiMeta/testVonaCaptcha.js';
-export interface IModuleApiMeta {
-  'captcha': ApiMetaCaptcha;
-'home': ApiMetaHome;
-'homeBaseMenu': ApiMetaHomeBaseMenu;
-'homeUserPassport': ApiMetaHomeUserPassport;
-'testSsrToolOne': ApiMetaTestSsrToolOne;
-'testVonaCaptcha': ApiMetaTestVonaCaptcha;
-}
-/** apiMeta: end */
-/** apiMeta: begin */
-
-import 'zova';
-declare module 'zova' {
-  export interface IBeanRecordGeneral {
-    'home-api.apiMeta.captcha': ApiMetaCaptcha;
-'home-api.apiMeta.home': ApiMetaHome;
-'home-api.apiMeta.homeBaseMenu': ApiMetaHomeBaseMenu;
-'home-api.apiMeta.homeUserPassport': ApiMetaHomeUserPassport;
-'home-api.apiMeta.testSsrToolOne': ApiMetaTestSsrToolOne;
-'home-api.apiMeta.testVonaCaptcha': ApiMetaTestVonaCaptcha;
-  }
-}
-/** apiMeta: end */
 /** apiSchema: begin */
 export * from '../apiSchema/captcha.js';
+export * from '../apiSchema/home.js';
+export * from '../apiSchema/homeBaseMenu.js';
+export * from '../apiSchema/homeUserPassport.js';
+export * from '../apiSchema/testSsrToolOne.js';
+export * from '../apiSchema/testVonaCaptcha.js';
 
 import 'zova';
 declare module 'zova' {
@@ -245,13 +138,78 @@ declare module 'zova-module-home-api' {
           get $beanFullName(): 'home-api.apiSchema.captcha';
           get $onionName(): 'home-api:captcha';
           
+        }
+
+        export interface ApiSchemaHome {
+          /** @internal */
+          get scope(): ScopeModuleHomeApi;
+        }
+
+        export interface ApiSchemaHome {
+          get $beanFullName(): 'home-api.apiSchema.home';
+          get $onionName(): 'home-api:home';
+          
+        }
+
+        export interface ApiSchemaHomeBaseMenu {
+          /** @internal */
+          get scope(): ScopeModuleHomeApi;
+        }
+
+        export interface ApiSchemaHomeBaseMenu {
+          get $beanFullName(): 'home-api.apiSchema.homeBaseMenu';
+          get $onionName(): 'home-api:homeBaseMenu';
+          
+        }
+
+        export interface ApiSchemaHomeUserPassport {
+          /** @internal */
+          get scope(): ScopeModuleHomeApi;
+        }
+
+        export interface ApiSchemaHomeUserPassport {
+          get $beanFullName(): 'home-api.apiSchema.homeUserPassport';
+          get $onionName(): 'home-api:homeUserPassport';
+          
+        }
+
+        export interface ApiSchemaTestSsrToolOne {
+          /** @internal */
+          get scope(): ScopeModuleHomeApi;
+        }
+
+        export interface ApiSchemaTestSsrToolOne {
+          get $beanFullName(): 'home-api.apiSchema.testSsrToolOne';
+          get $onionName(): 'home-api:testSsrToolOne';
+          
+        }
+
+        export interface ApiSchemaTestVonaCaptcha {
+          /** @internal */
+          get scope(): ScopeModuleHomeApi;
+        }
+
+        export interface ApiSchemaTestVonaCaptcha {
+          get $beanFullName(): 'home-api.apiSchema.testVonaCaptcha';
+          get $onionName(): 'home-api:testVonaCaptcha';
+          
         } 
 }
 /** apiSchema: end */
 /** apiSchema: begin */
 import { ApiSchemaCaptcha } from '../apiSchema/captcha.js';
+import { ApiSchemaHome } from '../apiSchema/home.js';
+import { ApiSchemaHomeBaseMenu } from '../apiSchema/homeBaseMenu.js';
+import { ApiSchemaHomeUserPassport } from '../apiSchema/homeUserPassport.js';
+import { ApiSchemaTestSsrToolOne } from '../apiSchema/testSsrToolOne.js';
+import { ApiSchemaTestVonaCaptcha } from '../apiSchema/testVonaCaptcha.js';
 export interface IModuleApiSchema {
   'captcha': ApiSchemaCaptcha;
+'home': ApiSchemaHome;
+'homeBaseMenu': ApiSchemaHomeBaseMenu;
+'homeUserPassport': ApiSchemaHomeUserPassport;
+'testSsrToolOne': ApiSchemaTestSsrToolOne;
+'testVonaCaptcha': ApiSchemaTestVonaCaptcha;
 }
 /** apiSchema: end */
 /** apiSchema: begin */
@@ -260,6 +218,11 @@ import 'zova';
 declare module 'zova' {
   export interface IBeanRecordGeneral {
     'home-api.apiSchema.captcha': ApiSchemaCaptcha;
+'home-api.apiSchema.home': ApiSchemaHome;
+'home-api.apiSchema.homeBaseMenu': ApiSchemaHomeBaseMenu;
+'home-api.apiSchema.homeUserPassport': ApiSchemaHomeUserPassport;
+'home-api.apiSchema.testSsrToolOne': ApiSchemaTestSsrToolOne;
+'home-api.apiSchema.testVonaCaptcha': ApiSchemaTestVonaCaptcha;
   }
 }
 /** apiSchema: end */
@@ -308,7 +271,6 @@ export class ScopeModuleHomeApi extends BeanScopeBase {}
 export interface ScopeModuleHomeApi {
   util: BeanScopeUtil;
 api: IModuleApi;
-apiMeta: IModuleApiMeta;
 apiSchema: IModuleApiSchema;
 }
 

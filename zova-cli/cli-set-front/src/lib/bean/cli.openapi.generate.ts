@@ -385,7 +385,7 @@ ${contentImportsApiPath}
 
 @ApiSchema()
 export class ApiSchema${apiName} extends BeanApiSchemaBase {
-  ${contentMetaSignatures.join('\n')}
+  ${contentSchemaSignatures.join('\n')}
 }
 `;
     return { apiContent, apiMetaContent, apiSchemaContent };
