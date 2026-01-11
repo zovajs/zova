@@ -30,6 +30,27 @@ declare module 'zova' {
   }
 }
 /** sys: end */
+/** bean: begin */
+export * from '../bean/bean.apiSchemaBase.js';
+
+import 'zova';
+declare module 'zova' {
+  
+  
+}
+declare module 'zova-module-a-openapi' {
+   
+}
+/** bean: end */
+/** bean: begin */
+import { BeanApiSchemaBase } from '../bean/bean.apiSchemaBase.js';
+import 'zova';
+declare module 'zova' {
+  export interface IBeanRecordGeneral {
+    'a-openapi.bean.apiSchemaBase': BeanApiSchemaBase;
+  }
+}
+/** bean: end */
 /** model: begin */
 export * from '../model/sdk.js';
 import { IModelOptionsSdk } from '../model/sdk.js';

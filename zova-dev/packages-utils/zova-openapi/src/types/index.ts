@@ -5,6 +5,8 @@ export type TypeOpenapiConfigMatchRule = string | RegExp | (string | RegExp)[];
 export interface ZovaOpenapiConfigModuleBase {
   source?: string;
   options?: OpenAPITSOptions;
+  apiMeta?: boolean;
+  apiSchema?: boolean;
 }
 
 export interface ZovaOpenapiConfigModule extends ZovaOpenapiConfigModuleBase {

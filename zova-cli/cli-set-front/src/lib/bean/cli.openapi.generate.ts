@@ -88,7 +88,7 @@ export class CliOpenapiGenerate extends BeanCliBase {
     }
     const configInstance = await this.helper.importDynamic(configFile);
     const moduleConfigCli = (await configInstance.default()) as ZovaOpenapiConfigModule;
-    const moduleConfig = extend(true, {}, config.default, moduleConfigCli, config.modules[moduleInfo.relativeName]);
+    const moduleConfig = extend(true, { apiMeta: false, apiSchema: true }, config.default, moduleConfigCli, config.modules[moduleInfo.relativeName]);
     const cache = await this._outputFiles(openapiTypescript, moduleConfig, moduleInfo, module, __caches);
     // generate
     await this._generateApis(openapiTypescript, cache.ast, moduleConfig, moduleInfo, module);
@@ -121,6 +121,8 @@ export class CliOpenapiGenerate extends BeanCliBase {
     await rimraf(path.join(module.root, 'src/api'));
     // rimraf
     await rimraf(path.join(module.root, 'src/apiMeta'));
+    // rimraf
+    await rimraf(path.join(module.root, 'src/apiSchema'));
     // output: openapi/types.ts
     const outputFile = path.join(module.root, 'src/api/openapi/types.ts');
     await fse.outputFile(outputFile, cache.contents);
