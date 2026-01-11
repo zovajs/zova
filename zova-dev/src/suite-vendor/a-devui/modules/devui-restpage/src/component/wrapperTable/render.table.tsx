@@ -7,7 +7,7 @@ import { TypeResourceActionRowRecord, TypeResourceActionTableRecord } from 'zova
 export class RenderTable<TData extends {} = {}> extends BeanRenderBase {
   public render() {
     // table
-    const ComponentTable = this.$zovaComponent(this.$$beanResource.componentTable);
+    const ComponentTable = this.$zovaComponent(this.$$modelResource.componentTable);
     return (
       <ComponentTable<TData>
         data={this.data}

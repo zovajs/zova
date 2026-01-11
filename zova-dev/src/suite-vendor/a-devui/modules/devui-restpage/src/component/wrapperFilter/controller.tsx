@@ -1,4 +1,4 @@
-import type { BeanResource } from 'zova-module-rest-resource';
+import type { ModelResource } from 'zova-module-rest-resource';
 import { isNilOrEmptyString } from '@cabloy/utils';
 import { BeanControllerBase, Use } from 'zova';
 import { Controller } from 'zova-module-a-bean';
@@ -18,7 +18,7 @@ export class ControllerWrapperFilter extends BeanControllerBase {
   formFieldLayout: IFormFieldLayoutOptionsBase;
 
   @Use({ injectionScope: 'host' })
-  $$beanResource: BeanResource;
+  $$modelResource: ModelResource;
 
   protected async __init__() {
     this.formMeta = { formMode: 'edit' };
@@ -26,7 +26,7 @@ export class ControllerWrapperFilter extends BeanControllerBase {
   }
 
   get schema() {
-    return this.$$beanResource.schemaWhere;
+    return this.$$modelResource.schemaFilter;
   }
 
   onSubmit(data: TypeFormOnSubmitData) {

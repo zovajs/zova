@@ -1,4 +1,4 @@
-import type { BeanResource } from 'zova-module-rest-resource';
+import type { ModelResource } from 'zova-module-rest-resource';
 import { isNil } from '@cabloy/utils';
 import { SchemaObject } from 'openapi3-ts/oas31';
 import { TableIdentity } from 'table-identity';
@@ -22,14 +22,14 @@ export class ControllerWrapperForm extends BeanControllerBase {
   formData?: any;
 
   @Use({ injectionScope: 'host' })
-  $$beanResource: BeanResource;
+  $$modelResource: ModelResource;
 
   protected async __init__() {
     this.formSchema = this.$useComputed(() => {
-      return this.$$beanResource.getFormSchema(this.formMeta);
+      return this.$$modelResource.getFormSchema(this.formMeta);
     });
     this.formData = this.$useComputed(() => {
-      return this.$$beanResource.getFormData(this.formMeta, this.rowId);
+      return this.$$modelResource.getFormData(this.formMeta, this.rowId);
     });
     // load data
     await $QueryAutoLoad(() => this.queryData);
@@ -45,11 +45,11 @@ export class ControllerWrapperForm extends BeanControllerBase {
 
   get queryData() {
     if (isNil(this.rowId)) return;
-    return this.$$beanResource.getQueryDataGet(this.rowId);
+    return this.$$modelResource.get(this.rowId);
   }
 
   async onSubmit(data: TypeFormOnSubmitData) {
-    const mutationSubmit = this.$$beanResource.getFormMutationSubmit(this.formMeta, this.rowId);
+    const mutationSubmit = this.$$modelResource.getFormMutationSubmit(this.formMeta, this.rowId);
     await mutationSubmit?.mutateAsync(data.value as any);
   }
 }

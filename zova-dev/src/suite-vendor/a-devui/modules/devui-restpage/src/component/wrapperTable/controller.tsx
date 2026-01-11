@@ -1,4 +1,4 @@
-import type { BeanResource } from 'zova-module-rest-resource';
+import type { ModelResource } from 'zova-module-rest-resource';
 import { createColumnHelper, Row } from '@tanstack/table-core';
 import { Use } from 'zova';
 import { Controller } from 'zova-module-a-bean';
@@ -22,7 +22,7 @@ export class ControllerWrapperTable<TData extends {} = {}> extends BeanControlle
   query: ITableQuery;
 
   @Use({ injectionScope: 'host' })
-  $$beanResource: BeanResource;
+  $$modelResource: ModelResource;
 
   @Use()
   $$renderActions: RenderActions;
@@ -39,7 +39,7 @@ export class ControllerWrapperTable<TData extends {} = {}> extends BeanControlle
   }
 
   get queryData() {
-    return this.$$beanResource.getQueryDataSelect(this.query);
+    return this.$$modelResource.select(this.query);
   }
 
   get data() {
@@ -51,12 +51,12 @@ export class ControllerWrapperTable<TData extends {} = {}> extends BeanControlle
   }
 
   get schema() {
-    return this.$$beanResource.schemaRow;
+    return this.$$modelResource.schemaRow;
   }
 
   getColumns(next: TypeTableGetColumnsNext<TData>, _$$table: ControllerTable<TData>) {
     const columns = next();
-    if (!this.$$beanResource.permissions?.row?.update && !this.$$beanResource.permissions?.row?.delete) return columns;
+    if (!this.$$modelResource.permissions?.row?.update && !this.$$modelResource.permissions?.row?.delete) return columns;
     const columnHelper = createColumnHelper<TData>();
     columns.push(columnHelper.display({
       id: 'actions',

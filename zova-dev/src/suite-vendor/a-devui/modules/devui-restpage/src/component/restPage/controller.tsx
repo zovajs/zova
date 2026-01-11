@@ -1,4 +1,4 @@
-import type { BeanResource } from 'zova-module-rest-resource';
+import type { ModelResource } from 'zova-module-rest-resource';
 import { Row } from '@tanstack/table-core';
 import { SchemaObject } from 'openapi3-ts/oas31';
 import { TableIdentity } from 'table-identity';
@@ -26,20 +26,20 @@ export class ControllerRestPage extends BeanControllerBase implements ITableActi
   controllerForm: ControllerForm;
 
   @Use({ injectionScope: 'host' })
-  $$beanResource: BeanResource;
+  $$modelResource: ModelResource;
 
   protected async __init__() {
     this.formMeta = this.$useComputed(() => {
       return { formMode: this.formMode, editMode: this.editMode };
     });
     this.formProvider = this.$useComputed(() => {
-      return this.$$beanResource.formProvider || {};
+      return this.$$modelResource.formProvider;
     });
     this.tableProvider = this.$useComputed(() => {
-      return this.$$beanResource.tableProvider || {};
+      return this.$$modelResource.tableProvider;
     });
     this.formSchema = this.$useComputed(() => {
-      return this.$$beanResource.getFormSchema(this.formMeta);
+      return this.$$modelResource.getFormSchema(this.formMeta);
     });
     this.rowId = this.$useComputed(() => {
       return this.rowCurrent?.getValue('id');
@@ -67,7 +67,7 @@ export class ControllerRestPage extends BeanControllerBase implements ITableActi
       this.editMode = 'update';
       this.formVisible = true;
     } else if (action === 'delete') {
-      const mutation = this.$$beanResource.getMutationDelete(row.id);
+      const mutation = this.$$modelResource.delete(row.id);
       await mutation.mutateAsync();
     }
   }
