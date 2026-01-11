@@ -164,7 +164,7 @@ export class ModelSdk extends BeanModelBase {
           return self.getSchema(schemaName).data;
         }
         // pages
-        const schemaBody = this.requestBody;
+        const schemaBody = this.responseBody;
         return cast(schemaBody?.properties?.list)?.items;
       },
     };
