@@ -200,11 +200,9 @@ export class CtxSSR extends BeanSimple {
       if (!instance.isUnmounted && instance.zova) {
         try {
           instance.update();
-        } catch (_err) {
-          const ctx = instance.zova;
-          if (ctx) {
-            ctx.bean.dispose();
-            ctx.dispose();
+        } catch (err: any) {
+          if (!err.message.includes('\'insertBefore\'')) {
+            throw err;
           }
         }
       }
