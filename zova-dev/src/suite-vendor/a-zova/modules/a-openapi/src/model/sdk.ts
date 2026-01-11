@@ -26,6 +26,7 @@ export class ModelSdk extends BeanModelBase {
     // event
     if (process.env.CLIENT && this.sys.env.SSR_HMR === 'true') {
       this._eventSsrHmrReload = this.sys.meta.event.on('a-ssrhmr:reloadModelSdk', async (_data, next) => {
+        await this.$refetchQueries({ queryKey: ['bootstrap'] });
         await this.$refetchQueries({ queryKey: ['sdk'] });
         return next();
       });
@@ -36,6 +37,17 @@ export class ModelSdk extends BeanModelBase {
     if (this._eventSsrHmrReload) {
       this._eventSsrHmrReload();
     }
+  }
+
+  getBootstrap(resource: string) {
+    return this.$useStateData({
+      queryKey: ['bootstrap', resource],
+      queryFn: async () => {
+        const api = await this.$$sysSdk.loadBootstrap(this.$fetch, resource);
+        if (!api) throw new Error('load bootstrap error');
+        return api ?? null;
+      },
+    });
   }
 
   getSdk(api: string | undefined, apiMethod: TypeRequestMethod | undefined) {
