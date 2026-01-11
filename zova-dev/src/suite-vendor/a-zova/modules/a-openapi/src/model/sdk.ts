@@ -1,9 +1,9 @@
 import { isNil } from '@cabloy/utils';
-import { ILocaleRecord, TypeEventOff, Use, usePrepareArg } from 'zova';
+import { cast, ILocaleRecord, TypeEventOff, Use, usePrepareArg } from 'zova';
 import { $QueryAutoLoad, BeanModelBase, IDecoratorModelOptions, Model } from 'zova-module-a-model';
 import { SysSdk } from '../bean/sys.sdk.js';
-import { schemaToZodSchema } from '../lib/schema.js';
-import { TypeOpenapiSchemasSdk } from '../types/schema.js';
+import { getSchemaOfRequestBody, getSchemaOfRequestQuery, getSchemaOfRequestQueryFilter, getSchemaOfResponseBody, schemaToZodSchema } from '../lib/schema.js';
+import { IOpenapiSchemas, TypeOpenapiSchemasSdk } from '../types/schema.js';
 import { TypeRequestMethod } from '../types/sdk.js';
 
 const __schemaRefPrefix = '#/components/schemas/';
@@ -115,5 +115,57 @@ export class ModelSdk extends BeanModelBase {
         return defaultValues;
       },
     });
+  }
+
+  public createSchemas(api: string, apiMethod?: TypeRequestMethod): IOpenapiSchemas {
+    const sdk = this.getSdk(api, apiMethod);
+    return this._createApiSchemasInner(sdk);
+  }
+
+  private _createApiSchemasInner(sdk: TypeOpenapiSchemasSdk): IOpenapiSchemas {
+    const self = this;
+    const operationObject = sdk.data?.operationObject;
+    return {
+      get sdk() {
+        return sdk;
+      },
+      get query() {
+        return getSchemaOfRequestQuery(operationObject);
+      },
+      get filter() {
+        return getSchemaOfRequestQueryFilter(operationObject, { where: true });
+      },
+      get requestBody() {
+        const schemaData = getSchemaOfRequestBody(operationObject);
+        const schemaName = cast(schemaData)?.$ref;
+        if (!schemaName) return;
+        return self.getSchema(schemaName).data;
+      },
+      get responseBody() {
+        const schemaData = getSchemaOfResponseBody(operationObject);
+        const schemaName = cast(schemaData?.properties?.data)?.$ref;
+        if (!schemaName) return;
+        return self.getSchema(schemaName).data;
+      },
+      get paged() {
+        const schemaData = getSchemaOfResponseBody(operationObject);
+        if (!schemaData) return;
+        const schemaName = cast(schemaData?.properties?.data)?.items?.$ref;
+        if (schemaName) return;
+        // pages
+        return this.responseBody;
+      },
+      get row() {
+        const schemaData = getSchemaOfResponseBody(operationObject);
+        if (!schemaData) return;
+        const schemaName = cast(schemaData?.properties?.data)?.items?.$ref;
+        if (schemaName) {
+          return self.getSchema(schemaName).data;
+        }
+        // pages
+        const schemaBody = this.requestBody;
+        return cast(schemaBody?.properties?.list)?.items;
+      },
+    };
   }
 }
