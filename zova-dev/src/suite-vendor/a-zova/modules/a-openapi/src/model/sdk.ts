@@ -50,7 +50,7 @@ export class ModelSdk extends BeanModelBase {
           if (process.env.SERVER) {
             await $QueryAutoLoad(() => this.getSchema(schemaName));
           } else {
-            this.$invalidateQueries({ queryKey: ['schema', schemaName] });
+            await this.$refetchQueries({ queryKey: ['schema', schemaName] });
           }
         }
         return sdk;
