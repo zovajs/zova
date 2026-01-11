@@ -2,7 +2,6 @@ import type { OperationObject, ParameterObject, RequestBodyObject, SchemaObject 
 import type { TypeSchemaScene } from '../types/rest.js';
 import jsonSchemaToZod from '@cabloy/json-schema-to-zod';
 import { evaluateSimple } from '@cabloy/utils';
-import { filter } from 'compression';
 import { toRaw } from 'vue';
 import { z } from 'zod';
 import { cast, deepExtend } from 'zova';
@@ -37,30 +36,8 @@ export function getSchemaOfRequestBody(operationObject?: OperationObject): Schem
   return cast<RequestBodyObject>(operationObject?.requestBody)?.content?.['application/json']?.schema as any;
 }
 
-export function getSchemaNameOfRequestBody(operationObject?: OperationObject): string | undefined {
-  const schemaData = getSchemaOfRequestBody(operationObject);
-  return cast(schemaData)?.$ref;
-}
-
 export function getSchemaOfResponseBody(operationObject?: OperationObject): SchemaObject | undefined {
   return operationObject?.responses?.['200']?.content?.['application/json']?.schema;
-}
-
-export function createApiSchemas(operationObject?: OperationObject) {
-  return {
-    query() {
-      return getSchemaOfRequestQuery(operationObject);
-    },
-    filter() {
-      return getSchemaOfRequestQueryFilter(operationObject, { where: true });
-    },
-    requestBody() {
-      const schemaData = getSchemaOfRequestBody(operationObject);
-      const schemaName = cast(schemaData)?.$ref;
-      if (!schemaName) return;
-      return this.$sdk.getSchema(schemaName);
-    },
-  };
 }
 
 export function getSchemaOfRequestQuery(operationObject?: OperationObject): SchemaObject | undefined {
