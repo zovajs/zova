@@ -191,15 +191,23 @@ export const OpenApiBaseURL = (sys: ZovaSys) => {
     for (const apiName in nodeApis) {
       const apiNameLower = toLowerCaseFirstChar(apiName);
       const nodeApi = nodeApis[apiName];
-      const { apiContent, apiMetaContent } = this._generateApi(openapiTypescript, ast, apiName, nodeApi);
+      const { apiContent, apiMetaContent, apiSchemaContent } = this._generateApi(openapiTypescript, ast, apiName, nodeApi);
       // api
       const apiFile = path.join(module.root, `src/api/${apiNameLower}.ts`);
       await fse.outputFile(apiFile, apiContent);
       await this.helper.formatFile({ fileName: apiFile });
       // apiMeta
-      const apiMetaFile = path.join(module.root, `src/apiMeta/${apiNameLower}.ts`);
-      await fse.outputFile(apiMetaFile, apiMetaContent);
-      await this.helper.formatFile({ fileName: apiMetaFile });
+      if (moduleConfig.apiMeta) {
+        const apiMetaFile = path.join(module.root, `src/apiMeta/${apiNameLower}.ts`);
+        await fse.outputFile(apiMetaFile, apiMetaContent);
+        await this.helper.formatFile({ fileName: apiMetaFile });
+      }
+      // apiSchema
+      if (moduleConfig.apiSchema) {
+        const apiSchemaFile = path.join(module.root, `src/apiSchema/${apiNameLower}.ts`);
+        await fse.outputFile(apiSchemaFile, apiSchemaContent);
+        await this.helper.formatFile({ fileName: apiSchemaFile });
+      }
     }
   }
 
@@ -345,13 +353,18 @@ export class Api${apiName} extends BeanApiBase {
   ${contentSignatures.join('\n')}
 }
 `;
-    // apiMetaContent
+    // apiMetaContent/apiSchemaContent
     const importsApiPath: string[] = [];
     const contentMetaSignatures: string[] = [];
+    const contentSchemaSignatures: string[] = [];
     for (let i = 0; i < contentActions.length; i++) {
       importsApiPath.push(contentApiPaths[i]);
       contentMetaSignatures.push(`get ${contentActions[i]}() {
     return [${contentApiPaths[i]}, '${contentApiMethods[i]}'];
+  }
+`);
+      contentSchemaSignatures.push(`get ${contentActions[i]}() {
+    return this.$createApiSchemas(${contentApiPaths[i]}, '${contentApiMethods[i]}');
   }
 `);
     }
@@ -366,7 +379,16 @@ export class ApiMeta${apiName} extends BeanBase {
   ${contentMetaSignatures.join('\n')}
 }
 `;
-    return { apiContent, apiMetaContent };
+    const apiSchemaContent = `import { ApiSchema } from 'zova-module-a-api';
+import { BeanApiSchemaBase } from 'zova-module-a-openapi';
+${contentImportsApiPath}
+
+@ApiSchema()
+export class ApiSchema${apiName} extends BeanApiSchemaBase {
+  ${contentMetaSignatures.join('\n')}
+}
+`;
+    return { apiContent, apiMetaContent, apiSchemaContent };
   }
 
   _getNodeApis(ast: ts.Node[], moduleConfig: ZovaOpenapiConfigModule) {

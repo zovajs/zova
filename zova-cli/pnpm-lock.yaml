@@ -67,8 +67,8 @@ importers:
         specifier: ^7.9.2
         version: 7.9.2(typescript@5.9.3)
       '@cabloy/utils':
-        specifier: ^2.0.8
-        version: 2.0.8
+        specifier: ^2.0.15
+        version: 2.0.16
       '@cabloy/word-utils':
         specifier: ^2.0.2
         version: 2.0.2
@@ -103,8 +103,8 @@ importers:
         specifier: ^4.6.11
         version: 4.9.0
       zova-openapi:
-        specifier: ^1.0.4
-        version: 1.0.4(typescript@5.9.3)
+        specifier: ^1.0.5
+        version: 1.0.5(typescript@5.9.3)
       zova-shared:
         specifier: ^1.0.7
         version: 1.0.7
@@ -329,6 +329,9 @@ packages:
   '@cabloy/module-info@1.3.32':
     resolution: {integrity: sha512-tezLYem2/+GrfVo6J+o0f2Cf+rVqLJD030XlRZbaKqoGrNHAGJwZvngOcQP1r9cGyuJTsmfE98KQ2fry5H/PxA==}
 
+  '@cabloy/module-info@1.3.37':
+    resolution: {integrity: sha512-7gwbacwugWbf+IEnOLTOLVGMAWpDxajdj4tR+JITj4kMK+XC6vS1DQZsxFqo4BApEIMqU57bcOCP3tK4Ny6SYQ==}
+
   '@cabloy/openapi-typescript@7.9.2':
     resolution: {integrity: sha512-ftV2wtrEUkYX6qTwP5DGMox8uMpQ5zjsWIbxCeYCDMstyTTzKDf/SS72wiWF8HqnwrpnMYz6KiC4erRkAv/6BQ==}
     hasBin: true
@@ -338,11 +341,11 @@ packages:
   '@cabloy/process-helper@2.0.25':
     resolution: {integrity: sha512-iOd8TtfC2+LIDYZ0KzgrhOIb0MD+R4hxMDUQ24zEhduZCfZniUL+feSJD0uxSOb0ec1mo5DO3ogohYsNcRgE6w==}
 
+  '@cabloy/utils@2.0.16':
+    resolution: {integrity: sha512-k/Fe/13jaL6uHahc66Ca+rb9oYqySMwLdhNkCv4BnCez94FO7hVPHQ/Z2ZTWkmthOv7RFdzulY2Ykprgj0ccDg==}
+
   '@cabloy/utils@2.0.5':
     resolution: {integrity: sha512-ydAK+xBI1psh2zHHm8o5sFcajSSefIqVVICk5DxufG9XST1LNEA6mUzeWDGlCQCTYWegld8uXloN6556lY58dw==}
-
-  '@cabloy/utils@2.0.8':
-    resolution: {integrity: sha512-FRo6OkQ2Cv4PYvjC50gyUGsNQgU3w4davabEBVQDme1AsFrYw6DuhYj3SGkTcFckQzsH/11J87TushAY9ATMAA==}
 
   '@cabloy/vite-plugin-babel@1.3.1':
     resolution: {integrity: sha512-bzUIP318dMSGJzMqtAU9ut/xCYgBNMQV12UKPQZ1tM29XUMnmU2uBTFAZ+9JX3XNggQgkf/x9mKDPPEVrRteMA==}
@@ -4055,8 +4058,8 @@ packages:
     resolution: {integrity: sha512-rVksvsnNCdJ/ohGc6xgPwyN8eheCxsiLM8mxuE/t/mOVqJewPuO1miLpTHQiRgTKCLexL4MeAFVagts7HmNZ2Q==}
     engines: {node: '>=10'}
 
-  zova-openapi@1.0.4:
-    resolution: {integrity: sha512-HizMUA0Cq+L6HY7InwB0IegZ+/l/7AyCi/l7h038V+9vgj5j7FFglSl8rfk4A0N3XsIz28t/9dBurmlAXHiOAA==}
+  zova-openapi@1.0.5:
+    resolution: {integrity: sha512-6VxGXr94BEfHG8XyhJ43RUL5gySsGuDyyjHr6PLCKvqjsoiWtWlqF7kx3lsknqav371OgNxV55FxlXZXZpekpg==}
 
   zova-shared@1.0.7:
     resolution: {integrity: sha512-vTJSY9t7+nQq2Geg5kWVCVpP+TThooYf0Z+Bs1amxfJKj0M2rO1iDZ3howOm85Hw71QpqGbpDzLbZhR/V8sO6Q==}
@@ -4381,7 +4384,7 @@ snapshots:
   '@cabloy/module-glob@5.2.40':
     dependencies:
       '@cabloy/module-info': 1.3.32
-      '@cabloy/utils': 2.0.8
+      '@cabloy/utils': 2.0.16
       boxen: 4.2.0
       chalk: 3.0.0
       fs-extra: 11.3.3
@@ -4389,6 +4392,8 @@ snapshots:
       semver: 7.7.3
 
   '@cabloy/module-info@1.3.32': {}
+
+  '@cabloy/module-info@1.3.37': {}
 
   '@cabloy/openapi-typescript@7.9.2(typescript@5.9.3)':
     dependencies:
@@ -4402,14 +4407,14 @@ snapshots:
 
   '@cabloy/process-helper@2.0.25': {}
 
-  '@cabloy/utils@2.0.5':
+  '@cabloy/utils@2.0.16':
     dependencies:
-      '@cabloy/module-info': 1.3.32
+      '@cabloy/module-info': 1.3.37
       '@cabloy/word-utils': 2.0.2
       '@marcbachmann/cel-js': 6.5.1
       object-hash: 3.0.0
 
-  '@cabloy/utils@2.0.8':
+  '@cabloy/utils@2.0.5':
     dependencies:
       '@cabloy/module-info': 1.3.32
       '@cabloy/word-utils': 2.0.2
@@ -8265,7 +8270,7 @@ snapshots:
 
   yocto-queue@0.1.0: {}
 
-  zova-openapi@1.0.4(typescript@5.9.3):
+  zova-openapi@1.0.5(typescript@5.9.3):
     dependencies:
       '@cabloy/openapi-typescript': 7.9.2(typescript@5.9.3)
     transitivePeerDependencies:
