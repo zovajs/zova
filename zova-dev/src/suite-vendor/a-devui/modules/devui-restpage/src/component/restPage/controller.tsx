@@ -7,7 +7,7 @@ import { BeanControllerBase, Use } from 'zova';
 import { Controller } from 'zova-module-a-bean';
 import { ControllerForm, IFormMeta, IFormProvider, TypeEditMode, TypeFormMode } from 'zova-module-a-form';
 import { TypeResourceActionRowRecord, TypeResourceActionTableRecord } from 'zova-module-a-openapi';
-import { ITableActionHandler } from 'zova-module-a-table';
+import { ITableActionHandler, ITableProvider } from 'zova-module-a-table';
 
 @Controller()
 export class ControllerRestPage extends BeanControllerBase implements ITableActionHandler {
@@ -17,9 +17,10 @@ export class ControllerRestPage extends BeanControllerBase implements ITableActi
   formMode?: TypeFormMode;
   editMode?: TypeEditMode;
   formMeta: IFormMeta;
-  formProvider: IFormProvider;
   formSchema?: SchemaObject;
   rowId?: TableIdentity;
+  formProvider: IFormProvider;
+  tableProvider: ITableProvider;
 
   formDomId: string;
   controllerForm: ControllerForm;
@@ -33,6 +34,9 @@ export class ControllerRestPage extends BeanControllerBase implements ITableActi
     });
     this.formProvider = this.$useComputed(() => {
       return this.$$beanResource.formProvider || {};
+    });
+    this.tableProvider = this.$useComputed(() => {
+      return this.$$beanResource.tableProvider || {};
     });
     this.formSchema = this.$useComputed(() => {
       return this.$$beanResource.getFormSchema(this.formMeta);
