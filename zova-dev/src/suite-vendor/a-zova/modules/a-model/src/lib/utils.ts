@@ -6,7 +6,7 @@ export async function $QueryAutoLoad<T = any>(fn: TypeQueryAutoLoadFn<T>) {
   return _QueryAutoLoadInner<T>(fn);
 }
 
-export async function $QueryAutoLoads<T1 = any, T2 = any, T3 = any, T4 = any, T5 = any>(
+export async function $QueriesAutoLoad<T1 = any, T2 = any, T3 = any, T4 = any, T5 = any>(
   fn1?: TypeQueryAutoLoadFn<T1>,
   fn2?: TypeQueryAutoLoadFn<T2>,
   fn3?: TypeQueryAutoLoadFn<T3>,

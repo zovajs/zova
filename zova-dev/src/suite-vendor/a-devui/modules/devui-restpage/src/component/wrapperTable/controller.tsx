@@ -2,7 +2,7 @@ import type { ModelResource } from 'zova-module-rest-resource';
 import { createColumnHelper, Row } from '@tanstack/table-core';
 import { Use } from 'zova';
 import { Controller } from 'zova-module-a-bean';
-import { $QueryAutoLoad, $QueryAutoLoads } from 'zova-module-a-model';
+import { $QueriesAutoLoad } from 'zova-module-a-model';
 import { TypeResourceActionRowRecord, TypeResourceActionTableRecord } from 'zova-module-a-openapi';
 import { BeanControllerTableBase, ControllerTable, ITablePaged, ITableProvider, ITableQuery, ITableResPaged, TypeTableGetColumnsNext } from 'zova-module-a-table';
 import { RenderActions } from './render.actions.jsx';
@@ -35,7 +35,7 @@ export class ControllerWrapperTable<TData extends {} = {}> extends BeanControlle
       return Object.assign({}, this.queryFilterData, this.queryPaged);
     });
     // load schema/data
-    await $QueryAutoLoads(
+    await $QueriesAutoLoad(
       () => this.$$modelResource.apiSchemasSelect.sdk,
       () => this.queryData,
     );
