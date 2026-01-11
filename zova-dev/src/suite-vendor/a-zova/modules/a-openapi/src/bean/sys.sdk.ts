@@ -81,7 +81,10 @@ export class SysSdk extends BeanBase {
       this._fetch = $fetch;
     }
     if (!this.bootstraps[resource]) {
-      this.bootstraps[resource] = await $fetch.get(this.sys.util.apiActionPathTranslate(this.scope.config.bootstrapApi, { resource }));
+      this.bootstraps[resource] = await $fetch.get(
+        this.sys.util.apiActionPathTranslate(this.scope.config.bootstrapApi, { resource }),
+        this.sys.util.apiActionConfigPrepare(),
+      );
     }
     return this.bootstraps[resource];
   }
