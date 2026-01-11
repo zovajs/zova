@@ -52,6 +52,7 @@ export class ModelSdk extends BeanModelBase {
   }
 
   getSdk(api: string, apiMethod?: TypeRequestMethod): TypeOpenapiSchemasSdk {
+    if (!api) throw new Error('should specify api');
     const [api2, apiMethod2] = this.$$sysSdk.prepareApiMeta(api, apiMethod);
     return this.$useStateData({
       queryKey: ['sdk', api2, apiMethod2],
