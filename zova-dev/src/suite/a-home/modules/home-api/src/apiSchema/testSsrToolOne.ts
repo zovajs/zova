@@ -1,14 +1,14 @@
+import { BeanBase } from 'zova';
 import { ApiSchema } from 'zova-module-a-api';
-import { BeanApiSchemaBase } from 'zova-module-a-openapi';
 import { ApiApiTestSsrToolOnetestGetPath, ApiApiTestSsrToolOnetestPath } from '../api/testSsrToolOne.js';
 
 @ApiSchema()
-export class ApiSchemaTestSsrToolOne extends BeanApiSchemaBase {
+export class ApiSchemaTestSsrToolOne extends BeanBase {
   get testGet() {
-    return this.$createApiSchemas(ApiApiTestSsrToolOnetestGetPath, 'get');
+    return this.$sdk.createApiSchemas(ApiApiTestSsrToolOnetestGetPath, 'get');
   }
 
   get test() {
-    return this.$createApiSchemas(ApiApiTestSsrToolOnetestPath, 'post');
+    return this.$sdk.createApiSchemas(ApiApiTestSsrToolOnetestPath, 'post');
   }
 }

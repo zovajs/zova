@@ -1,46 +1,46 @@
+import { BeanBase } from 'zova';
 import { ApiSchema } from 'zova-module-a-api';
-import { BeanApiSchemaBase } from 'zova-module-a-openapi';
 import { ApiApiHomeUserPassportassociatePath, ApiApiHomeUserPassportcreatePassportJwtFromOauthCodePath, ApiApiHomeUserPassportcreateTempAuthTokenPath, ApiApiHomeUserPassportcurrentPath, ApiApiHomeUserPassportloginOauthPath, ApiApiHomeUserPassportloginPath, ApiApiHomeUserPassportlogoutPath, ApiApiHomeUserPassportmigratePath, ApiApiHomeUserPassportrefreshAuthTokenPath, ApiApiHomeUserPassportregisterPath } from '../api/homeUserPassport.js';
 
 @ApiSchema()
-export class ApiSchemaHomeUserPassport extends BeanApiSchemaBase {
+export class ApiSchemaHomeUserPassport extends BeanBase {
   get current() {
-    return this.$createApiSchemas(ApiApiHomeUserPassportcurrentPath, 'get');
+    return this.$sdk.createApiSchemas(ApiApiHomeUserPassportcurrentPath, 'get');
   }
 
   get logout() {
-    return this.$createApiSchemas(ApiApiHomeUserPassportlogoutPath, 'post');
+    return this.$sdk.createApiSchemas(ApiApiHomeUserPassportlogoutPath, 'post');
   }
 
   get register() {
-    return this.$createApiSchemas(ApiApiHomeUserPassportregisterPath, 'post');
+    return this.$sdk.createApiSchemas(ApiApiHomeUserPassportregisterPath, 'post');
   }
 
   get login() {
-    return this.$createApiSchemas(ApiApiHomeUserPassportloginPath, 'post');
+    return this.$sdk.createApiSchemas(ApiApiHomeUserPassportloginPath, 'post');
   }
 
   get loginOauth() {
-    return this.$createApiSchemas(ApiApiHomeUserPassportloginOauthPath, 'get');
+    return this.$sdk.createApiSchemas(ApiApiHomeUserPassportloginOauthPath, 'get');
   }
 
   get associate() {
-    return this.$createApiSchemas(ApiApiHomeUserPassportassociatePath, 'get');
+    return this.$sdk.createApiSchemas(ApiApiHomeUserPassportassociatePath, 'get');
   }
 
   get migrate() {
-    return this.$createApiSchemas(ApiApiHomeUserPassportmigratePath, 'get');
+    return this.$sdk.createApiSchemas(ApiApiHomeUserPassportmigratePath, 'get');
   }
 
   get refreshAuthToken() {
-    return this.$createApiSchemas(ApiApiHomeUserPassportrefreshAuthTokenPath, 'post');
+    return this.$sdk.createApiSchemas(ApiApiHomeUserPassportrefreshAuthTokenPath, 'post');
   }
 
   get createPassportJwtFromOauthCode() {
-    return this.$createApiSchemas(ApiApiHomeUserPassportcreatePassportJwtFromOauthCodePath, 'post');
+    return this.$sdk.createApiSchemas(ApiApiHomeUserPassportcreatePassportJwtFromOauthCodePath, 'post');
   }
 
   get createTempAuthToken() {
-    return this.$createApiSchemas(ApiApiHomeUserPassportcreateTempAuthTokenPath, 'post');
+    return this.$sdk.createApiSchemas(ApiApiHomeUserPassportcreateTempAuthTokenPath, 'post');
   }
 }

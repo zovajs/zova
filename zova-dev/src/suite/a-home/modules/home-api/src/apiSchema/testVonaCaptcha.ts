@@ -1,10 +1,10 @@
+import { BeanBase } from 'zova';
 import { ApiSchema } from 'zova-module-a-api';
-import { BeanApiSchemaBase } from 'zova-module-a-openapi';
 import { ApiApiTestVonaCaptchasigninPath } from '../api/testVonaCaptcha.js';
 
 @ApiSchema()
-export class ApiSchemaTestVonaCaptcha extends BeanApiSchemaBase {
+export class ApiSchemaTestVonaCaptcha extends BeanBase {
   get signin() {
-    return this.$createApiSchemas(ApiApiTestVonaCaptchasigninPath, 'post');
+    return this.$sdk.createApiSchemas(ApiApiTestVonaCaptchasigninPath, 'post');
   }
 }

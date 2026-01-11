@@ -1,10 +1,10 @@
+import { BeanBase } from 'zova';
 import { ApiSchema } from 'zova-module-a-api';
-import { BeanApiSchemaBase } from 'zova-module-a-openapi';
 import { ApiApiHomeindexPath } from '../api/home.js';
 
 @ApiSchema()
-export class ApiSchemaHome extends BeanApiSchemaBase {
+export class ApiSchemaHome extends BeanBase {
   get index() {
-    return this.$createApiSchemas(ApiApiHomeindexPath, 'get');
+    return this.$sdk.createApiSchemas(ApiApiHomeindexPath, 'get');
   }
 }
