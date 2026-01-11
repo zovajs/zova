@@ -34,6 +34,8 @@ export class ControllerWrapperTable<TData extends {} = {}> extends BeanControlle
     this.query = this.$useComputed(() => {
       return Object.assign({}, this.queryFilterData, this.queryPaged);
     });
+    // load schema
+    await $QueryAutoLoad(() => this.$$modelResource.apiSchemasSelect.sdk);
     // load data
     await $QueryAutoLoad(() => this.queryData);
   }
