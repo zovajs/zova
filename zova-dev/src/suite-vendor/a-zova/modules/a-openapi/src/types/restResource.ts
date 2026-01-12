@@ -1,6 +1,8 @@
 import type { TypeComponentRecordSelectorKeysStrict } from 'zova';
 import type { TypeResourceActionRowRecord, TypeResourceActionTableRecord } from './actions.js';
 
+export type TypeOpenApiRestResourceScene = 'table' | 'row';
+
 export interface IOpenApiOptionsRestResource {
   permissions?: IOpenApiOptionsRestResourcePermissions;
   provider?: IOpenApiOptionsRestResourceProvider;
