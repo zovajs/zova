@@ -10,17 +10,18 @@ export class RenderTabs extends BeanRenderBase {
   public render() {
     const domTabs: VNode[] = [];
     for (const tab of this.$$modelTabs.tabs) {
-      const className = tab.key === this.$$modelTabs.tabCurrentKey ? 'tab tab-active text-primary' : 'tab';
-      const menuItem = this.$$modelMenu.findMenuItem({ link: tab.key });
+      const tabKey = tab.key;
+      const className = tabKey === this.$$modelTabs.tabCurrentKey ? 'tab tab-active text-primary' : 'tab';
+      const menuItem = this.$$modelMenu.findMenuItem({ link: tabKey });
       if (!menuItem) continue;
       const titleLocal = this.$text(menuItem?.title || '');
       const domTab = (
         <a
-          key={tab.key}
+          key={tabKey}
           role="tab"
           class={`${className} ${this.cTab}`}
           onClick={() => {
-            this.$$modelTabs.activeTab(tab);
+            this.$$modelTabs.activeTab(tabKey);
           }}
         >
           {!!menuItem?.icon && <ZIcon name={menuItem?.icon as any} width="24" height="24"></ZIcon>}
@@ -32,7 +33,7 @@ export class RenderTabs extends BeanRenderBase {
               width="16"
               height="16"
               nativeOnClick={withModifiers(() => {
-                this.$$modelTabs.deleteTab(tab);
+                this.$$modelTabs.deleteTab(tabKey);
               }, ['stop'])}
             >
             </ZIcon>

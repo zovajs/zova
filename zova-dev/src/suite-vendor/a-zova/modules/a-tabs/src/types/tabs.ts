@@ -5,19 +5,21 @@ export interface RouteTabInfo {
 
 export interface RouteTabBase {
   key: string;
+  affix?: boolean;
+}
+
+export interface RouteTabItem {
+  fullPath?: string;
   name?: string;
   keepAlive?: boolean;
-  affix?: boolean;
-  updatedAt?: number;
-  info?: RouteTabInfo;
 }
+
+export interface RouteTabTransient extends RouteTabBase, RouteTabItem {}
 
 export interface RouteTab extends RouteTabBase {
-  fullPath?: string;
-}
-
-export interface RouteTabRecord extends RouteTabBase {
-  fullPath: string[];
+  items: RouteTabItem[];
+  updatedAt?: number;
+  info?: RouteTabInfo;
 }
 
 export interface ModelTabsOptions {
@@ -25,6 +27,6 @@ export interface ModelTabsOptions {
   /** -1: infinite 0: Affix Only  */
   max?: number;
   persister?: boolean;
-  getAffixTabs: () => RouteTab[] | undefined;
-  getTabInfo: (tab: RouteTab) => RouteTabInfo | undefined;
+  getAffixTabs: () => RouteTabTransient[] | undefined;
+  getTabInfo: (tab: RouteTabTransient) => RouteTabInfo | undefined;
 }

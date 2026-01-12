@@ -2,7 +2,7 @@ import type { IDecoratorModelOptions, UseQueryOptions } from 'zova-module-a-mode
 import { mutate } from 'mutate-on-copy';
 import { useComputed } from 'zova';
 import { BeanModelBase, Model } from 'zova-module-a-model';
-import { ModelTabsOptions, RouteTab } from '../types/tabs.js';
+import { ModelTabsOptions, RouteTab, RouteTabTransient } from '../types/tabs.js';
 
 export interface IModelOptionsTabs extends IDecoratorModelOptions {}
 
@@ -59,7 +59,7 @@ export class ModelTabs extends BeanModelBase {
     );
   }
 
-  async addTab(tab: RouteTab): Promise<boolean> {
+  async addTab(tab: RouteTabTransient): Promise<boolean> {
     const res = await this._addTab(tab);
     if (res) {
       // current
@@ -68,7 +68,7 @@ export class ModelTabs extends BeanModelBase {
     return res;
   }
 
-  async _addTab(tab: RouteTab): Promise<boolean> {
+  async _addTab(tab: RouteTabTransient): Promise<boolean> {
     // must perform await before findTab
     const tabInfo = this.tabsOptions.getTabInfo(tab);
     if (!tabInfo) return false;
@@ -77,7 +77,14 @@ export class ModelTabs extends BeanModelBase {
     // tabs
     const [index, tabOld] = this.findTab(tab.key);
     if (index === -1) {
-      const tabNew = { ...tab, updatedAt: Date.now(), info: tabInfo };
+      // new
+      const tabNew: RouteTab = {
+        key: tab.key,
+        affix: tab.affix,
+        items: [{ fullPath: tab.fullPath, name: tab.name, keepAlive: tab.keepAlive }],
+        updatedAt: Date.now(),
+        info: tabInfo,
+      };
       if (this.tabCurrentIndex === -1) {
         this.tabs = mutate(this.tabs, copyState => {
           copyState.push(tabNew);
@@ -89,6 +96,7 @@ export class ModelTabs extends BeanModelBase {
       }
       this.pruneTabs();
     } else {
+      // update
       if (this._checkIfTabNeedUpdate(tabOld!, tab)) {
         this.updateTab(tab);
       }
@@ -96,7 +104,7 @@ export class ModelTabs extends BeanModelBase {
     return true;
   }
 
-  async addAffixTabs(affixTabs?: RouteTab[]) {
+  async addAffixTabs(affixTabs?: RouteTabTransient[]) {
     if (!affixTabs) {
       // donothing
       return;
@@ -114,7 +122,7 @@ export class ModelTabs extends BeanModelBase {
     }
     // delete old affixTabs
     for (const tab of oldTabs) {
-      await this.deleteTab(tab);
+      await this.deleteTab(tab.key);
     }
     // sort
     this.tabs = mutate(this.tabs, copyState => {
@@ -124,16 +132,17 @@ export class ModelTabs extends BeanModelBase {
     });
   }
 
-  async deleteTab(tab: Pick<RouteTab, 'key'>) {
+  async deleteTab(tabKey?: string) {
+    if (!tabKey) return;
     // tabs
-    const [index] = this.findTab(tab.key);
+    const [index] = this.findTab(tabKey);
     if (index === -1) return;
     // current
     if (index === this.tabCurrentIndex) {
       // prev/next
       const tabCurrentIndex = index - 1 > -1 ? index - 1 : index + 1 < this.tabs.length ? index + 1 : -1;
       if (tabCurrentIndex > -1) {
-        await this.activeTab(this.tabs[tabCurrentIndex]);
+        await this.activeTab(this.tabs[tabCurrentIndex]?.key);
       }
     }
     // tabs
@@ -142,24 +151,40 @@ export class ModelTabs extends BeanModelBase {
     });
   }
 
-  updateTab(tab: RouteTab) {
+  updateTab(tab: RouteTabTransient) {
     const [index, tabOld] = this.findTab(tab.key);
-    if (index === -1) return;
-    const tabNew = { ...tabOld, ...tab, updatedAt: Date.now() };
+    if (index === -1 || !tabOld) return;
+    const items = tabOld.items;
+    if (tab.fullPath) {
+      if (items.findIndex(item => item.fullPath === tab.fullPath) === -1) {
+        items.push({ fullPath: tab.fullPath, name: tab.name, keepAlive: tab.keepAlive });
+        items.sort((a, b) => a.fullPath!.length - b.fullPath!.length);
+      }
+    }
+    const tabNew: RouteTab = {
+      ...tabOld,
+      key: tab.key,
+      affix: tab.affix ?? tabOld.affix,
+      items,
+      updatedAt: Date.now(),
+    };
     this.tabs = mutate(this.tabs, copyState => {
       copyState.splice(index, 1, tabNew);
     });
   }
 
-  async activeTab(tab: RouteTab) {
-    this.updateTab(tab);
-    this.tabCurrentKey = tab.key;
-    await this.$router.push(tab.fullPath || tab.key);
+  async activeTab(tabKey?: string) {
+    if (!tabKey) return;
+    const [_, tab] = this.findTab(tabKey);
+    if (!tab) return;
+    this.updateTab({ key: tabKey });
+    this.tabCurrentKey = tabKey;
+    await this.$router.push(tab.items[0]?.fullPath || tab.key);
   }
 
-  findTab(key?: string): [number, RouteTab | undefined] {
-    if (!key) return [-1, undefined];
-    const index = this.tabs.findIndex(item => item.key === key);
+  findTab(tabKey?: string): [number, RouteTab | undefined] {
+    if (!tabKey) return [-1, undefined];
+    const index = this.tabs.findIndex(item => item.key === tabKey);
     if (index === -1) return [index, undefined];
     return [index, this.tabs[index]];
   }
@@ -176,14 +201,18 @@ export class ModelTabs extends BeanModelBase {
         }
       }
       if (!key) break;
-      await this.deleteTab({ key });
+      await this.deleteTab(key);
     }
   }
 
   // special for _addTab
-  private _checkIfTabNeedUpdate(tabOld: RouteTab, tabNew: RouteTab) {
+  private _checkIfTabNeedUpdate(tabOld: RouteTab, tabNew: RouteTabTransient) {
     for (const key in tabNew) {
-      if (tabNew[key] !== tabOld[key]) return true;
+      if (['fullPath', 'name', 'keepAlive'].includes(key)) {
+        if (tabOld.items.findIndex(item => item[key] === tabNew[key]) === -1) return true;
+      } else if (tabNew[key] !== tabOld[key]) {
+        return true;
+      }
     }
     const recentTabIndex = this.tabs.findIndex(
       item => item.key !== tabOld.key && (item.updatedAt ?? 0) > (tabOld.updatedAt ?? 0),
@@ -202,8 +231,10 @@ export class ModelTabs extends BeanModelBase {
   private _getKeepAliveInclude() {
     const include: string[] = [];
     for (const tab of this.tabs) {
-      if (tab.keepAlive !== false && tab.name) {
-        include.push(tab.name);
+      for (const item of tab.items) {
+        if (item.keepAlive !== false && item.name) {
+          include.push(item.name);
+        }
       }
     }
     return include;
