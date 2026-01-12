@@ -5,14 +5,19 @@ import { ZIcon } from 'zova-module-a-icon';
 
 @Render()
 export class RenderActions<TData extends {} = {}> extends BeanRenderBase {
-  public renderActions(props: CellContext<TData, unknown>) {
+  public renderActions(cellContext: CellContext<TData, unknown>) {
     return (
       <div class="flex gap-2">
         {this.$$modelResource.permissions?.row?.update && (
           <button
             class="btn btn-outline btn-primary"
             onClick={() => {
-              this.onActionRow('update', props.row);
+              // todo:
+              const url = this.$router.getPagePath('/rest/resource/:resource/:id/:formScene?', {
+                params: { resource: 'test-rest:product', id: cellContext.row.id,formScene:'edit' },
+              });
+              this.$router.push(url);
+              // this.onActionRow('update', cellContext.row);
             }}
           >
             <ZIcon name="::draft"></ZIcon>
@@ -22,7 +27,7 @@ export class RenderActions<TData extends {} = {}> extends BeanRenderBase {
           <button
             class="btn btn-outline btn-error"
             onClick={() => {
-              this.onActionDelete(props.row);
+              this.onActionDelete(cellContext.row);
             }}
           >
             <ZIcon name="::delete"></ZIcon>
