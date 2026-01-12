@@ -2,7 +2,7 @@ import type { IDecoratorModelOptions, UseQueryOptions } from 'zova-module-a-mode
 import { mutate } from 'mutate-on-copy';
 import { useComputed } from 'zova';
 import { BeanModelBase, Model } from 'zova-module-a-model';
-import { ModelTabsOptions, RouteTab, RouteTabTransient } from '../types/tabs.js';
+import { ModelTabsOptions, RouteTab, RouteTabItem, RouteTabTransient } from '../types/tabs.js';
 
 export interface IModelOptionsTabs extends IDecoratorModelOptions {}
 
@@ -154,7 +154,7 @@ export class ModelTabs extends BeanModelBase {
   updateTab(tab: RouteTabTransient) {
     const [index, tabOld] = this.findTab(tab.key);
     if (index === -1 || !tabOld) return;
-    const items = tabOld.items;
+    const items: RouteTabItem[] = tabOld.items ? ([] as RouteTabItem[]).concat(tabOld.items) : [];
     if (tab.fullPath) {
       if (items.findIndex(item => item.fullPath === tab.fullPath) === -1) {
         items.push({ fullPath: tab.fullPath, name: tab.name, keepAlive: tab.keepAlive });
@@ -179,7 +179,7 @@ export class ModelTabs extends BeanModelBase {
     if (!tab) return;
     this.updateTab({ key: tabKey });
     this.tabCurrentKey = tabKey;
-    await this.$router.push(tab.items[0]?.fullPath || tab.key);
+    await this.$router.push(tab.items?.[0]?.fullPath || tab.key);
   }
 
   findTab(tabKey?: string): [number, RouteTab | undefined] {
@@ -209,7 +209,7 @@ export class ModelTabs extends BeanModelBase {
   private _checkIfTabNeedUpdate(tabOld: RouteTab, tabNew: RouteTabTransient) {
     for (const key in tabNew) {
       if (['fullPath', 'name', 'keepAlive'].includes(key)) {
-        if (tabOld.items.findIndex(item => item[key] === tabNew[key]) === -1) return true;
+        if (!tabOld.items || tabOld.items.findIndex(item => item[key] === tabNew[key]) === -1) return true;
       } else if (tabNew[key] !== tabOld[key]) {
         return true;
       }
@@ -231,9 +231,11 @@ export class ModelTabs extends BeanModelBase {
   private _getKeepAliveInclude() {
     const include: string[] = [];
     for (const tab of this.tabs) {
-      for (const item of tab.items) {
-        if (item.keepAlive !== false && item.name) {
-          include.push(item.name);
+      if (tab.items) {
+        for (const item of tab.items) {
+          if (item.keepAlive !== false && item.name) {
+            include.push(item.name);
+          }
         }
       }
     }
