@@ -15,10 +15,12 @@ export class ControllerRestPageEntry extends BeanControllerBase {
   protected async __init__() {}
 
   protected render() {
-    <ZPage>
-      <ZWrapperForm
-        onControllerForm={ref => this.controllerForm = ref}
-      ></ZWrapperForm>
-    </ZPage>;
+    return (
+      <ZPage>
+        <ZWrapperForm
+          onControllerForm={ref => this.controllerForm = ref}
+        ></ZWrapperForm>
+      </ZPage>
+    );
   }
 }
