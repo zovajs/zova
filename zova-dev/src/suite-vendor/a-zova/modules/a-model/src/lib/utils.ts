@@ -12,14 +12,14 @@ export async function $QueriesAutoLoad<T1 = any, T2 = any, T3 = any, T4 = any, T
   fn3?: TypeQueryAutoLoadFn<T3>,
   fn4?: TypeQueryAutoLoadFn<T4>,
   fn5?: TypeQueryAutoLoadFn<T5>,
-  ...fns: any[]
+  ...fns: TypeQueryAutoLoadFn<any>[]
 ): Promise<[
 DataQuery<T1> | undefined,
 DataQuery<T2> | undefined,
 DataQuery<T3> | undefined,
 DataQuery<T4> | undefined,
 DataQuery<T5> | undefined,
-...any[],
+...DataQuery<any>[],
   ]> {
   let promises: any[] = [
     _QueryAutoLoadInner<T1>(fn1),
