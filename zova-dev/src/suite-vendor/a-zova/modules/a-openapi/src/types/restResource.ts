@@ -33,6 +33,7 @@ export interface IOpenApiOptionsRestResourceProvider {
 
 export interface IOpenApiOptionsRestResourceProviderComponents {
   restPage?: TypeComponentRecordSelectorKeysStrict<'restPage'>;
+  restPageEntry?: TypeComponentRecordSelectorKeysStrict<'restPageEntry'>;
   table?: TypeComponentRecordSelectorKeysStrict<'table'>;
   form?: TypeComponentRecordSelectorKeysStrict<'form'>;
 }
