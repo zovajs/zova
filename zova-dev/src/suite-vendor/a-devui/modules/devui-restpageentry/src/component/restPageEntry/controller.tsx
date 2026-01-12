@@ -6,6 +6,6 @@ export class ControllerRestPageEntry extends BeanControllerBase {
   protected async __init__() {}
 
   protected render() {
-    return null;
+    return <div>sss</div>;
   }
 }
