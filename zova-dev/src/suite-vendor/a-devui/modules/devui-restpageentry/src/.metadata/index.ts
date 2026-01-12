@@ -54,8 +54,11 @@ export interface IZovaComponentRecord {
 }
 }
 /** components: end */
+/** locale: begin */
+import { locales } from './locales.js';
+/** locale: end */
 /** scope: begin */
-import { BeanScopeBase, type BeanScopeUtil } from 'zova';
+import { BeanScopeBase, type BeanScopeUtil, TypeModuleLocales, TypeLocaleBase } from 'zova';
 import { Scope } from 'zova-module-a-bean';
 
 @Scope()
@@ -63,6 +66,7 @@ export class ScopeModuleDevuiRestpageentry extends BeanScopeBase {}
 
 export interface ScopeModuleDevuiRestpageentry {
   util: BeanScopeUtil;
+locale: TypeModuleLocales<(typeof locales)[TypeLocaleBase]>;
 }
 
 import 'zova';
@@ -73,9 +77,14 @@ declare module 'zova' {
   
   
 
-  
+  export interface IBeanScopeLocale {
+    'devui-restpageentry': (typeof locales)[TypeLocaleBase];
+  }
 
   
 }
-  
+
+export function locale<K extends keyof (typeof locales)[TypeLocaleBase]>(key: K): `devui-restpageentry::${K}` {
+  return `devui-restpageentry::${key}`;
+}  
 /** scope: end */
