@@ -6,7 +6,8 @@ export interface ITableCellOptionsActionView extends IDecoratorTableCellOptions 
 }
 
 @TableCell<ITableCellOptionsActionView>({
-  openTarget: 'popup',
+  // openTarget: 'popup',
+  openTarget: 'page',
 })
 export class TableCellActionView extends BeanBase implements ITableCellRender {
   render(renderContext: ITableCellRenderContext, options: ITableCellOptionsActionView, next: NextTableCellRender) {

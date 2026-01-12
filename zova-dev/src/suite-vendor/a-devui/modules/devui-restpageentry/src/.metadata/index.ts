@@ -1,6 +1,7 @@
 /* eslint-disable */
 /** controller: begin */
 export * from '../component/restPageEntry/controller.jsx';
+export * from '../component/wrapperForm/controller.jsx';
 
 import 'zova';
 declare module 'zova' {
@@ -12,15 +13,22 @@ declare module 'zova-module-devui-restpageentry' {
         export interface ControllerRestPageEntry {
           /** @internal */
           get scope(): ScopeModuleDevuiRestpageentry;
+        }
+
+        export interface ControllerWrapperForm {
+          /** @internal */
+          get scope(): ScopeModuleDevuiRestpageentry;
         } 
 }
 /** controller: end */
 /** controller: begin */
 import { ControllerRestPageEntry } from '../component/restPageEntry/controller.jsx';
+import { ControllerWrapperForm } from '../component/wrapperForm/controller.jsx';
 import 'zova';
 declare module 'zova' {
   export interface IBeanRecordLocal {
     'devui-restpageentry.controller.restPageEntry': ControllerRestPageEntry;
+'devui-restpageentry.controller.wrapperForm': ControllerWrapperForm;
   }
 }
 /** controller: end */
@@ -28,16 +36,21 @@ declare module 'zova' {
 /** components: begin */
 export * from './component/restPageEntry.js';
 import { ZRestPageEntry } from './component/restPageEntry.js';
+export * from './component/wrapperForm.js';
+import { ZWrapperForm } from './component/wrapperForm.js';
 export const components = {
   'restPageEntry': ZRestPageEntry,
+'wrapperForm': ZWrapperForm,
 };
 import 'zova';
 declare module 'zova' {
 export interface IComponentRecord {
   'devui-restpageentry:restPageEntry': ControllerRestPageEntry;
+'devui-restpageentry:wrapperForm': ControllerWrapperForm;
 }
 export interface IZovaComponentRecord {
   'devui-restpageentry:restPageEntry': typeof ZRestPageEntry;
+'devui-restpageentry:wrapperForm': typeof ZWrapperForm;
 }
 }
 /** components: end */
