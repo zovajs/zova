@@ -22,7 +22,7 @@ export class ControllerRestPageEntry extends BeanControllerBase {
         <ZWrapperForm
           onControllerForm={ref => this.controllerForm = ref}
         ></ZWrapperForm>
-        <div class="modal-action">
+        <div>
           {this.controllerForm?.formState.isSubmitting && <span class="loading loading-spinner text-primary"></span>}
           {formMeta.formMode === 'edit' && (
             <button
