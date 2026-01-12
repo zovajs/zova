@@ -19,7 +19,7 @@ export class TableCellActionView extends BeanBase implements ITableCellRender {
         onClick={e => {
           e.preventDefault();
           e.stopPropagation();
-          if (options.openTarget !== 'page') {
+          if (options.openTarget === 'page') {
             const url = $$table.$router.getPagePath('/rest/resource/:resource/:id/:formScene?', {
               params: { resource: 'test-rest:product', id: cellContext.row.id },
             });
