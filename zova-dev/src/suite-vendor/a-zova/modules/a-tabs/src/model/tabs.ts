@@ -8,14 +8,21 @@ export interface RouteTabInfo {
   icon?: string;
 }
 
-export interface RouteTab {
+export interface RouteTabBase {
   key: string;
-  fullPath?: string;
   name?: string;
   keepAlive?: boolean;
   affix?: boolean;
   updatedAt?: number;
   info?: RouteTabInfo;
+}
+
+export interface RouteTab extends RouteTabBase {
+  fullPath?: string;
+}
+
+export interface RouteTabRecord extends RouteTabBase {
+  fullPath: string[];
 }
 
 export interface ModelTabsOptions {

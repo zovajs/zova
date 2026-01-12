@@ -2,7 +2,7 @@ import type { RouteLocationNormalizedLoaded } from '@cabloy/vue-router';
 import type { ComponentInternalInstance } from 'vue';
 import { RouterView } from '@cabloy/vue-router';
 import { KeepAlive, nextTick, Transition } from 'vue';
-import { BeanControllerBase, Use } from 'zova';
+import { BeanControllerBase, cast, Use } from 'zova';
 import { Controller } from 'zova-module-a-bean';
 import { ModelTabs } from '../../model/tabs.js';
 
@@ -24,8 +24,9 @@ export class ControllerRouterViewTabs extends BeanControllerBase {
     let name = component.Component.type.name;
     if (name) return name;
     name = component.route.meta.name || this.$router.getRealRouteName(component.route.name) || component.route.path;
-    // should not set Component.type.name, because one Component maybe used for more routes
-    // cast(component.Component.type).name = name;
+    // must set Component.type.name, because keep-alive need Component.type.name
+    //   so: one Component must be used for only one route
+    cast(component.Component.type).name = name;
     return name;
   }
 
