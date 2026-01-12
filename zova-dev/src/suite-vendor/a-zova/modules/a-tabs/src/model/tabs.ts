@@ -2,37 +2,7 @@ import type { IDecoratorModelOptions, UseQueryOptions } from 'zova-module-a-mode
 import { mutate } from 'mutate-on-copy';
 import { useComputed } from 'zova';
 import { BeanModelBase, Model } from 'zova-module-a-model';
-
-export interface RouteTabInfo {
-  title?: string;
-  icon?: string;
-}
-
-export interface RouteTabBase {
-  key: string;
-  name?: string;
-  keepAlive?: boolean;
-  affix?: boolean;
-  updatedAt?: number;
-  info?: RouteTabInfo;
-}
-
-export interface RouteTab extends RouteTabBase {
-  fullPath?: string;
-}
-
-export interface RouteTabRecord extends RouteTabBase {
-  fullPath: string[];
-}
-
-export interface ModelTabsOptions {
-  scene?: string;
-  /** -1: infinite 0: Affix Only  */
-  max?: number;
-  persister?: boolean;
-  getAffixTabs: () => RouteTab[] | undefined;
-  getTabInfo: (tab: RouteTab) => RouteTabInfo | undefined;
-}
+import { ModelTabsOptions, RouteTab } from '../types/tabs.js';
 
 export interface IModelOptionsTabs extends IDecoratorModelOptions {}
 
