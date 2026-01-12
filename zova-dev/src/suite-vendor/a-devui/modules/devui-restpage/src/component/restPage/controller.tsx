@@ -5,7 +5,7 @@ import { TableIdentity } from 'table-identity';
 import { useId } from 'vue';
 import { BeanControllerBase, Use } from 'zova';
 import { Controller } from 'zova-module-a-bean';
-import { ControllerForm, IFormMeta, IFormProvider, TypeEditMode, TypeFormMode } from 'zova-module-a-form';
+import { ControllerForm, formSceneFromFormMeta, IFormMeta, IFormProvider, TypeEditMode, TypeFormMode } from 'zova-module-a-form';
 import { TypeResourceActionRowRecord, TypeResourceActionTableRecord } from 'zova-module-a-openapi';
 import { ITableActionHandler, ITableProvider } from 'zova-module-a-table';
 
@@ -14,7 +14,7 @@ export class ControllerRestPage extends BeanControllerBase implements ITableActi
   // form
   rowCurrent?: Row<any>;
   formVisible: boolean = false;
-  formMode?: TypeFormMode;
+  formMode: TypeFormMode;
   editMode?: TypeEditMode;
   formMeta: IFormMeta;
   formSchema?: SchemaObject;
@@ -30,7 +30,8 @@ export class ControllerRestPage extends BeanControllerBase implements ITableActi
 
   protected async __init__() {
     this.formMeta = this.$useComputed(() => {
-      return { formMode: this.formMode, editMode: this.editMode };
+      const formMeta = { formMode: this.formMode, editMode: this.editMode };
+      return { ...formMeta, formScene: formSceneFromFormMeta(formMeta) };
     });
     this.formProvider = this.$useComputed(() => {
       return this.$$modelResource.formProvider;
