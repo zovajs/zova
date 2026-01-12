@@ -18,7 +18,7 @@ export class ControllerRestPage extends BeanControllerBase implements ITableActi
   editMode?: TypeEditMode;
   formMeta: IFormMeta;
   formSchema?: SchemaObject;
-  rowId?: TableIdentity;
+  entryId?: TableIdentity;
   formProvider: IFormProvider;
   tableProvider: ITableProvider;
 
@@ -42,7 +42,7 @@ export class ControllerRestPage extends BeanControllerBase implements ITableActi
     this.formSchema = this.$useComputed(() => {
       return this.$$modelResource.getFormSchema(this.formMeta);
     });
-    this.rowId = this.$useComputed(() => {
+    this.entryId = this.$useComputed(() => {
       return this.rowCurrent?.getValue('id');
     });
     this.formDomId = useId();

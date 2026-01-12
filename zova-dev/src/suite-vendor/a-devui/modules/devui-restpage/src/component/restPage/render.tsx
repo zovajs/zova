@@ -28,7 +28,7 @@ export class RenderRestPage extends BeanRenderBase {
           <p class="py-4">
             {this.formVisible && (
               <ZWrapperForm
-                rowId={this.rowId}
+                entryId={this.entryId}
                 formMeta={this.formMeta}
                 formProvider={this.formProvider}
                 onControllerForm={ref => this.controllerForm = ref}

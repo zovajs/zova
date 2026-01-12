@@ -8,7 +8,7 @@ import { ControllerForm, IFormMeta, IFormProvider, TypeFormOnSubmitData } from '
 import { $QueryAutoLoad } from 'zova-module-a-model';
 
 export interface ControllerWrapperFormProps {
-  rowId?: TableIdentity;
+  entryId?: TableIdentity;
   formMeta: IFormMeta;
   formProvider?: IFormProvider;
   onControllerForm?: (ref: ControllerForm) => void;
@@ -29,14 +29,14 @@ export class ControllerWrapperForm extends BeanControllerBase {
       return this.$$modelResource.getFormSchema(this.formMeta);
     });
     this.formData = this.$useComputed(() => {
-      return this.$$modelResource.getFormData(this.formMeta, this.rowId);
+      return this.$$modelResource.getFormData(this.formMeta, this.entryId);
     });
     // load data
     await $QueryAutoLoad(() => this.queryData);
   }
 
-  get rowId() {
-    return this.$props.rowId;
+  get entryId() {
+    return this.$props.entryId;
   }
 
   get formMeta() {
@@ -44,12 +44,12 @@ export class ControllerWrapperForm extends BeanControllerBase {
   }
 
   get queryData() {
-    if (isNil(this.rowId)) return;
-    return this.$$modelResource.get(this.rowId);
+    if (isNil(this.entryId)) return;
+    return this.$$modelResource.get(this.entryId);
   }
 
   async onSubmit(data: TypeFormOnSubmitData) {
-    const mutationSubmit = this.$$modelResource.getFormMutationSubmit(this.formMeta, this.rowId);
+    const mutationSubmit = this.$$modelResource.getFormMutationSubmit(this.formMeta, this.entryId);
     await mutationSubmit?.mutateAsync(data.value as any);
   }
 }

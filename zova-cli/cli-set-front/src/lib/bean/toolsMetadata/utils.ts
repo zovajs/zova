@@ -40,7 +40,7 @@ export async function globAllTsFiles(moduleName: string, modulePath: string): Pr
     const matches = fileContent.replace('@ProxyDisable()', '').match(/\s@([^\s<]+)\S*?\([\s\S]*?\)\sexport class ([^ \n<]+)/);
     if (!matches) continue;
     const className = matches[2];
-    const sceneNameCapitalize = isVirtual ? 'Bean' : matches[1];
+    const sceneNameCapitalize = isVirtual ? (matches[1] === 'Virtual' ? 'Bean' : matches[1]) : matches[1];
     const sceneName = toLowerCaseFirstChar(sceneNameCapitalize);
     const beanName = parseBeanName(className, sceneName);
     const beanNameFull = `${moduleName}:${beanName}`;
