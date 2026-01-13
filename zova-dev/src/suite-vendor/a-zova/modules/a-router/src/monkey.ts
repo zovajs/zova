@@ -15,8 +15,7 @@ import type { ErrorSSR } from 'zova-module-a-ssr';
 import type { BeanRouter } from './bean/bean.router.js';
 import type { TypePageSchema } from './types/router.js';
 import * as ModuleInfo from '@cabloy/module-info';
-import { routerViewLocationKey } from '@cabloy/vue-router';
-import { inject, shallowReactive } from 'vue';
+import { shallowReactive } from 'vue';
 import { BeanControllerPageBase, BeanSimple, cast } from 'zova';
 import { ServiceRouter } from './service/router.js';
 import { SymbolRouterHistory } from './types/utils.js';
@@ -90,7 +89,7 @@ export class Monkey
   }
 
   controllerDataPrepare(controllerData: IControllerData, ctx: ZovaContext) {
-    controllerData.context.route = this._getRouterViewLocation(ctx);
+    controllerData.context.route = ctx.util.getTabRoute();
   }
 
   controllerDataInit(controllerData: IControllerData, controller: BeanBase) {
@@ -103,7 +102,7 @@ export class Monkey
   controllerDataUpdate(controller: BeanBase) {
     // only for controller page
     if (!(controller instanceof BeanControllerPageBase)) return;
-    const route = this._getRouterViewLocation(cast(controller).ctx);
+    const route = cast<ZovaContext>(cast(controller).ctx).util.getTabRoute();
     this._initControllerRoute(route, controller);
   }
 
@@ -155,14 +154,6 @@ export class Monkey
         Object.assign(controller.$query as any, query);
       }
     }
-  }
-
-  private _getRouterViewLocation(ctx: ZovaContext): RouteLocationNormalizedLoadedGeneric | undefined {
-    let route = ctx.bean._getBeanFromHost({ name: '$$routerViewLocation', injectionScope: 'host' });
-    if (!route) {
-      route = inject(routerViewLocationKey)?.value;
-    }
-    return route as RouteLocationNormalizedLoadedGeneric | undefined;
   }
 
   private _checkIfRouteSame(route1: RouteLocationMatched, route2: RouteLocationMatched) {

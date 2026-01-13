@@ -1,5 +1,8 @@
+import type { RouteLocationNormalizedLoadedGeneric } from '@cabloy/vue-router';
+import { routerViewLocationKey } from '@cabloy/vue-router';
 import { setCurrentInstance } from '@cabloy/vue-runtime-core';
 import { pauseTracking, resetTracking } from '@vue/reactivity';
+import { inject } from 'vue';
 import { BeanSimple } from '../../bean/beanSimple.js';
 
 export class CtxUtil extends BeanSimple {
@@ -21,5 +24,15 @@ export class CtxUtil extends BeanSimple {
       }
       reset();
     }
+  }
+
+  getTabRoute(): RouteLocationNormalizedLoadedGeneric | undefined {
+    let route = this.bean._getBeanFromHost({ name: '$$tabRoute', injectionScope: 'host' });
+    if (!route) {
+      route = this.ctx.util.instanceScope(() => {
+        return inject(routerViewLocationKey)?.value;
+      });
+    }
+    return route as RouteLocationNormalizedLoadedGeneric | undefined;
   }
 }

@@ -80,7 +80,7 @@ export class ControllerRouterViewTabs extends BeanControllerBase {
             const vnode = h(component.Component, {
               key: componentKey,
             });
-            cast(vnode).zovaHostProviders = { $$routerViewLocation: component.route };
+            cast(vnode).zovaHostProviders = { $$tabRoute: component.route };
             return [
               h(KeepAlive, {
                 include: this.$$modelTabs.keepAliveInclude,
