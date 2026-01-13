@@ -234,7 +234,9 @@ export class ModelTabs extends BeanModelBase {
       if (tab.items) {
         for (const item of tab.items) {
           if (item.keepAlive !== false && item.name) {
-            include.push(item.name);
+            if (!include.includes(item.name)) {
+              include.push(item.name);
+            }
           }
         }
       }
