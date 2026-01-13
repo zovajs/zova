@@ -1,6 +1,5 @@
 /* eslint-disable */
 /** controller: begin */
-export * from '../component/routerViewLocation/controller.jsx';
 export * from '../component/routerViewTabs/controller.jsx';
 
 import 'zova';
@@ -10,11 +9,6 @@ declare module 'zova' {
 }
 declare module 'zova-module-a-tabs' {
   
-        export interface ControllerRouterViewLocation {
-          /** @internal */
-          get scope(): ScopeModuleATabs;
-        }
-
         export interface ControllerRouterViewTabs {
           /** @internal */
           get scope(): ScopeModuleATabs;
@@ -22,35 +16,28 @@ declare module 'zova-module-a-tabs' {
 }
 /** controller: end */
 /** controller: begin */
-import { ControllerRouterViewLocation } from '../component/routerViewLocation/controller.jsx';
 import { ControllerRouterViewTabs } from '../component/routerViewTabs/controller.jsx';
 import 'zova';
 declare module 'zova' {
   export interface IBeanRecordLocal {
-    'a-tabs.controller.routerViewLocation': ControllerRouterViewLocation;
-'a-tabs.controller.routerViewTabs': ControllerRouterViewTabs;
+    'a-tabs.controller.routerViewTabs': ControllerRouterViewTabs;
   }
 }
 /** controller: end */
 
 /** components: begin */
-export * from './component/routerViewLocation.js';
-import { ZRouterViewLocation } from './component/routerViewLocation.js';
 export * from './component/routerViewTabs.js';
 import { ZRouterViewTabs } from './component/routerViewTabs.js';
 export const components = {
-  'routerViewLocation': ZRouterViewLocation,
-'routerViewTabs': ZRouterViewTabs,
+  'routerViewTabs': ZRouterViewTabs,
 };
 import 'zova';
 declare module 'zova' {
 export interface IComponentRecord {
-  'a-tabs:routerViewLocation': ControllerRouterViewLocation;
-'a-tabs:routerViewTabs': ControllerRouterViewTabs;
+  'a-tabs:routerViewTabs': ControllerRouterViewTabs;
 }
 export interface IZovaComponentRecord {
-  'a-tabs:routerViewLocation': typeof ZRouterViewLocation;
-'a-tabs:routerViewTabs': typeof ZRouterViewTabs;
+  'a-tabs:routerViewTabs': typeof ZRouterViewTabs;
 }
 }
 /** components: end */
