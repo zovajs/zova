@@ -2,6 +2,7 @@ import type { RouteLocationNormalizedLoaded } from '@cabloy/vue-router';
 import type { PropType, Slot } from 'vue';
 import { RouterView as RouterViewRaw } from '@cabloy/vue-router';
 import { defineComponent, h } from 'vue';
+import { cast } from '../types/utils/cast.js';
 
 export const pageRouteKey = '$$pageRoute';
 
@@ -17,7 +18,10 @@ export const RouterView = defineComponent({
   setup(props, { slots }) {
     return () => {
       return h(RouterViewRaw, props, { default: component => {
-        const vnode = normalizeSlot(slots.default, component) || h(component.Component);
+        const vnode = normalizeSlot(slots.default, component) || (component.Component && h(component.Component)) || null;
+        if (vnode) {
+          cast(vnode).zovaHostProviders = { [pageRouteKey]: component.route };
+        }
         return vnode;
       } });
     };
