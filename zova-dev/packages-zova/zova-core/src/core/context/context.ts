@@ -44,7 +44,10 @@ export class ZovaContext {
     const zovaHostProviders = cast(this.instance).zovaHostProviders;
     if (!zovaHostProviders) return;
     for (const key in zovaHostProviders) {
-      this.bean._setBean(key, zovaHostProviders[key]);
+      const beanInstance = this.bean._getBeanSyncOnly(key);
+      if (beanInstance !== zovaHostProviders[key]) {
+        this.bean._setBean(key, zovaHostProviders[key]);
+      }
     }
   }
 }
