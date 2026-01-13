@@ -1,4 +1,5 @@
 import type { Logger } from '@cabloy/logger';
+import type { RouteLocationNormalizedLoadedGeneric } from '@cabloy/vue-router';
 import type { ReactiveMarker } from '@vue/reactivity';
 import type { ComputedGetter, DebuggerOptions, MultiWatchSources, RendererNode, WatchCallback, WatchEffect, WatchEffectOptions, WatchHandle, WatchOptions, WatchSource, WritableComputedOptions } from 'vue';
 import type { AppEvent } from '../core/component/event.js';
@@ -156,6 +157,10 @@ export class BeanBase extends BeanBaseSimple {
   protected $zovaComponent(module: string, name: string);
   protected $zovaComponent(module: string, name?: string) {
     return this.app.meta.component.getZovaComponent(module, name!);
+  }
+
+  protected get $pageRoute(): RouteLocationNormalizedLoadedGeneric | undefined {
+    return this.ctx.util.getPageRoute();
   }
 
   // need not
