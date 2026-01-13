@@ -2,7 +2,7 @@ import type { RouteLocationNormalizedLoaded } from '@cabloy/vue-router';
 import type { ComponentInternalInstance } from 'vue';
 import { RouterView } from '@cabloy/vue-router';
 import { h, KeepAlive, nextTick, Transition } from 'vue';
-import { BeanControllerBase, cast, Use } from 'zova';
+import { BeanControllerBase, cast, pageRouteKey, Use } from 'zova';
 import { Controller } from 'zova-module-a-bean';
 import { ModelTabs } from '../../model/tabs.js';
 
@@ -80,7 +80,7 @@ export class ControllerRouterViewTabs extends BeanControllerBase {
             const vnode = h(component.Component, {
               key: componentKey,
             });
-            cast(vnode).zovaHostProviders = { $$tabRoute: component.route };
+            cast(vnode).zovaHostProviders = { [pageRouteKey]: component.route };
             return [
               h(KeepAlive, {
                 include: this.$$modelTabs.keepAliveInclude,
