@@ -78,10 +78,11 @@ export class ModelTabs extends BeanModelBase {
     const [index, tabOld] = this.findTab(tab.key);
     if (index === -1) {
       // new
+      const items = tab.fullPath ? [{ fullPath: tab.fullPath, name: tab.name, keepAlive: tab.keepAlive }] : [];
       const tabNew: RouteTab = {
         key: tab.key,
         affix: tab.affix,
-        items: [{ fullPath: tab.fullPath, name: tab.name, keepAlive: tab.keepAlive }],
+        items,
         updatedAt: Date.now(),
         info: tabInfo,
       };
