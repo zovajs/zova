@@ -1,7 +1,7 @@
 import type { RouteLocationNormalizedLoaded } from '@cabloy/vue-router';
 import type { ComponentInternalInstance } from 'vue';
 import { RouterView } from '@cabloy/vue-router';
-import { createVNode, KeepAlive, nextTick, Transition } from 'vue';
+import { h, KeepAlive, nextTick, Transition } from 'vue';
 import { BeanControllerBase, cast, Use } from 'zova';
 import { Controller } from 'zova-module-a-bean';
 import { ModelTabs } from '../../model/tabs.js';
@@ -75,17 +75,15 @@ export class ControllerRouterViewTabs extends BeanControllerBase {
     const slots = {
       default: component => {
         const { componentKey } = this._handleComponent(component);
-        return createVNode(Transition, null, {
+        return h(Transition, null, {
           default: () => {
+            const vnode = h(component.Component, {
+              key: componentKey,
+            });
             return [
-              createVNode(KeepAlive, {
+              h(KeepAlive, {
                 include: this.$$modelTabs.keepAliveInclude,
-              }, [
-                createVNode(component.Component, {
-                  key: componentKey,
-                  route: component.route,
-                }),
-              ]),
+              }, [vnode]),
             ];
           },
         });
