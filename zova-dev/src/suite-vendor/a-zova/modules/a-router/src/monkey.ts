@@ -89,7 +89,7 @@ export class Monkey
   }
 
   controllerDataPrepare(controllerData: IControllerData, ctx: ZovaContext) {
-    controllerData.context.route = ctx.util.getTabRoute();
+    controllerData.context.route = ctx.util.getPageRoute();
   }
 
   controllerDataInit(controllerData: IControllerData, controller: BeanBase) {
@@ -102,7 +102,7 @@ export class Monkey
   controllerDataUpdate(controller: BeanBase) {
     // only for controller page
     if (!(controller instanceof BeanControllerPageBase)) return;
-    const route = cast<ZovaContext>(cast(controller).ctx).util.getTabRoute();
+    const route = cast<ZovaContext>(cast(controller).ctx).util.getPageRoute();
     this._initControllerRoute(route, controller);
   }
 
