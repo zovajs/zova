@@ -4,6 +4,7 @@ import { RouterView } from '@cabloy/vue-router';
 import { KeepAlive, nextTick, Transition } from 'vue';
 import { BeanControllerBase, cast, Use } from 'zova';
 import { Controller } from 'zova-module-a-bean';
+import { ZRouterViewLocation } from '../../.metadata/index.js';
 import { ModelTabs } from '../../model/tabs.js';
 
 export interface ControllerRouterViewTabsProps {}
@@ -78,7 +79,7 @@ export class ControllerRouterViewTabs extends BeanControllerBase {
         return (
           <Transition>
             <KeepAlive include={this.$$modelTabs.keepAliveInclude}>
-              <component.Component key={componentKey}></component.Component>
+              <ZRouterViewLocation component={component.Component} route={component.route} key={componentKey}></ZRouterViewLocation>
             </KeepAlive>
           </Transition>
         );
