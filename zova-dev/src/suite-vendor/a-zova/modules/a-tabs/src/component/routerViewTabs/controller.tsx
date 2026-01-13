@@ -1,10 +1,10 @@
 import type { RouteLocationNormalizedLoaded } from '@cabloy/vue-router';
 import type { ComponentInternalInstance } from 'vue';
 import { RouterView } from '@cabloy/vue-router';
-import { KeepAlive, nextTick, Transition } from 'vue';
+import { createVNode, KeepAlive, nextTick, Transition } from 'vue';
 import { BeanControllerBase, cast, Use } from 'zova';
 import { Controller } from 'zova-module-a-bean';
-import { ZRouterViewLocation } from '../../.metadata/index.js';
+import { RouterViewLocation } from '../../lib/routerViewLocation.js';
 import { ModelTabs } from '../../model/tabs.js';
 
 export interface ControllerRouterViewTabsProps {}
@@ -76,13 +76,26 @@ export class ControllerRouterViewTabs extends BeanControllerBase {
     const slots = {
       default: component => {
         const { componentKey } = this._handleComponent(component);
-        return (
-          <Transition>
-            <KeepAlive include={this.$$modelTabs.keepAliveInclude}>
-              <ZRouterViewLocation component={component.Component} route={component.route} key={componentKey}></ZRouterViewLocation>
-            </KeepAlive>
-          </Transition>
-        );
+        return createVNode(Transition, null, {
+          default: () => [
+            createVNode(KeepAlive, {
+              include: this.$$modelTabs.keepAliveInclude,
+            }, [
+              createVNode(RouterViewLocation, {
+                key: componentKey,
+                component: component.Component,
+                route: component.route,
+              }),
+            ]),
+          ],
+        });
+        // return (
+        //   <Transition>
+        //     <KeepAlive include={this.$$modelTabs.keepAliveInclude}>
+        //       <ZRouterViewLocation component={component.Component} route={component.route} key={componentKey}></ZRouterViewLocation>
+        //     </KeepAlive>
+        //   </Transition>
+        // );
       },
     };
     return <RouterView v-slots={slots}></RouterView>;
