@@ -90,7 +90,7 @@ async function _useController(
   }
   // monkey
   if (ctx.app) {
-    ctx.app.meta.module._monkeyModuleSync(true, 'controllerDataPrepare', undefined, controllerData);
+    ctx.app.meta.module._monkeyModuleSync(true, 'controllerDataPrepare', undefined, controllerData, ctx);
   }
   if (process.env.CLIENT) {
     // dispose

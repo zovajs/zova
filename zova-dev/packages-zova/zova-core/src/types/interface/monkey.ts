@@ -53,7 +53,7 @@ export interface IMonkeyApp
   IMonkeyBeanDisposed {}
 
 export interface IMonkeyController {
-  controllerDataPrepare(controllerData: IControllerData): void;
+  controllerDataPrepare(controllerData: IControllerData, ctx: ZovaContext): void;
   controllerDataInit(controllerData: IControllerData, controller: BeanBase): void;
   controllerDataUpdate(controller: BeanBase): void;
 }

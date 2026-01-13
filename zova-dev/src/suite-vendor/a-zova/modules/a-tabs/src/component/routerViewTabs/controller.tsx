@@ -80,6 +80,7 @@ export class ControllerRouterViewTabs extends BeanControllerBase {
             const vnode = h(component.Component, {
               key: componentKey,
             });
+            cast(vnode).zovaHostProviders = { $$routerViewLocation: component.route };
             return [
               h(KeepAlive, {
                 include: this.$$modelTabs.keepAliveInclude,
@@ -87,13 +88,6 @@ export class ControllerRouterViewTabs extends BeanControllerBase {
             ];
           },
         });
-        // return (
-        //   <Transition>
-        //     <KeepAlive include={this.$$modelTabs.keepAliveInclude}>
-        //       <ZRouterViewLocation component={component.Component} route={component.route} key={componentKey}></ZRouterViewLocation>
-        //     </KeepAlive>
-        //   </Transition>
-        // );
       },
     };
     return <RouterView v-slots={slots}></RouterView>;
