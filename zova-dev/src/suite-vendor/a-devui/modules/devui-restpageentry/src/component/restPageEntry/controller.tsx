@@ -3,7 +3,6 @@ import { classes } from 'typestyle';
 import { BeanControllerBase, Use } from 'zova';
 import { Controller } from 'zova-module-a-bean';
 import { ControllerForm } from 'zova-module-a-form';
-import { ZPage } from 'zova-module-home-base';
 import { ZWrapperForm } from '../../.metadata/index.js';
 
 @Controller()
@@ -18,7 +17,7 @@ export class ControllerRestPageEntry extends BeanControllerBase {
   protected render() {
     const { formMeta } = this.$$restPageEntry;
     return (
-      <ZPage>
+      <div>
         <ZWrapperForm
           onControllerForm={ref => this.controllerForm = ref}
         ></ZWrapperForm>
@@ -46,7 +45,7 @@ export class ControllerRestPageEntry extends BeanControllerBase {
             {this.scope.locale.Back()}
           </button>
         </div>
-      </ZPage>
+      </div>
     );
   }
 }
