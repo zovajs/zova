@@ -14,8 +14,8 @@ export interface RouteTabTransient extends IRouteViewComponentMeta {}
 
 export interface RouteTab extends RouteTabBase {
   items: IRouteViewComponentItem[];
-  updatedAt?: number;
-  info?: RouteTabInfo;
+  updatedAt: number;
+  info: RouteTabInfo;
 }
 
 export interface ModelTabsOptions {

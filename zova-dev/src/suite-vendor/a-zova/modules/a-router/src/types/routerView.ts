@@ -9,7 +9,7 @@ export interface IRouteViewComponentItemBase {
 }
 
 export interface IRouteViewComponentItem extends IRouteViewComponentItemBase {
-  updatedAt?: number;
+  updatedAt: number;
 }
 
 export interface IRouteViewComponentMeta extends IRouteViewComponentItemBase {

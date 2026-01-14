@@ -215,16 +215,16 @@ export class ModelTabs extends BeanModelBase {
   async pruneTabs() {
     if (this.tabsOptions.max === undefined || this.tabsOptions.max === -1) return;
     while (this.tabs.length > this.tabsOptions.max) {
-      let key: string | undefined;
+      let tabKey: string | undefined;
       let updatedAt = Date.now();
       for (const tab of this.tabs) {
-        if (!tab.affix && tab.updatedAt! < updatedAt) {
-          key = tab.key;
-          updatedAt = tab.updatedAt!;
+        if (!tab.affix && tab.updatedAt < updatedAt) {
+          tabKey = tab.tabKey;
+          updatedAt = tab.updatedAt;
         }
       }
-      if (!key) break;
-      await this.deleteTab(key);
+      if (!tabKey) break;
+      await this.deleteTab(tabKey);
     }
   }
 
@@ -264,12 +264,11 @@ export class ModelTabs extends BeanModelBase {
   private _getKeepAliveInclude() {
     const include: string[] = [];
     for (const tab of this.tabs) {
-      if (tab.items) {
-        for (const item of tab.items) {
-          if (item.keepAlive !== false && item.name) {
-            if (!include.includes(item.name)) {
-              include.push(item.name);
-            }
+      if (!tab.items) continue;
+      for (const item of tab.items) {
+        if (item.keepAlive !== false && item.componentKey) {
+          if (!include.includes(item.componentKey)) {
+            include.push(item.componentKey);
           }
         }
       }
