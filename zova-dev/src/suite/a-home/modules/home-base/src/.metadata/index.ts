@@ -1,13 +1,13 @@
 /* eslint-disable */
 /** service: begin */
-export * from '../service/router.js';
+export * from '../service/routerGuards.js';
 export * from '../service/ssr.js';
 
 import 'zova-module-a-bean';
 declare module 'zova-module-a-bean' {
   
     export interface IServiceRecord {
-      'home-base:router': never;
+      'home-base:routerGuards': never;
 'home-base:ssr': never;
     }
 
@@ -15,14 +15,14 @@ declare module 'zova-module-a-bean' {
 }
 declare module 'zova-module-home-base' {
   
-        export interface ServiceRouter {
+        export interface ServiceRouterGuards {
           /** @internal */
           get scope(): ScopeModuleHomeBase;
         }
 
-        export interface ServiceRouter {
-          get $beanFullName(): 'home-base.service.router';
-          get $onionName(): 'home-base:router';
+        export interface ServiceRouterGuards {
+          get $beanFullName(): 'home-base.service.routerGuards';
+          get $onionName(): 'home-base:routerGuards';
           
         }
 
@@ -39,12 +39,12 @@ declare module 'zova-module-home-base' {
 }
 /** service: end */
 /** service: begin */
-import { ServiceRouter } from '../service/router.js';
+import { ServiceRouterGuards } from '../service/routerGuards.js';
 import { ServiceSsr } from '../service/ssr.js';
 import 'zova';
 declare module 'zova' {
   export interface IBeanRecordGeneral {
-    'home-base.service.router': ServiceRouter;
+    'home-base.service.routerGuards': ServiceRouterGuards;
 'home-base.service.ssr': ServiceSsr;
   }
 }

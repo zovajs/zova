@@ -2,11 +2,11 @@ import type { BeanRouter } from 'zova-module-a-router';
 import { catchError } from '@cabloy/utils';
 import { Use } from 'zova';
 import { Service } from 'zova-module-a-bean';
-import { BeanRouterBase } from 'zova-module-a-router';
+import { BeanRouterGuardsBase } from 'zova-module-a-router';
 import { ModelPassport } from 'zova-module-home-user';
 
 @Service()
-export class ServiceRouter extends BeanRouterBase {
+export class ServiceRouterGuards extends BeanRouterGuardsBase {
   @Use()
   $$modelPassport: ModelPassport;
 
