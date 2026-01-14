@@ -6,7 +6,7 @@ import { cast } from '../types/utils/cast.js';
 
 export const pageRouteKey = '$$pageRoute';
 
-export const RouterView = defineComponent({
+export const RouterView1 = defineComponent({
   inheritAttrs: false,
   props: {
     name: {

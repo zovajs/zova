@@ -5,9 +5,9 @@ import { combineParamsAndQuery } from '@cabloy/utils';
 import { createMemoryHistory, createRouter, createWebHashHistory, createWebHistory } from '@cabloy/vue-router';
 import { BeanBase, cast, deepExtend } from 'zova';
 import { Sys } from 'zova-module-a-bean';
+import { getRealRouteName, getRouteMatched, isRouterName } from '../lib/utils.js';
 import { IModuleRoute, IModuleRouteComponent, IPageNameRecord, IPagePathRecord } from '../types/router.js';
 import { SymbolRouterHistory } from '../types/utils.js';
-import { getRealRouteName, getRouteMatched, isRouterName } from '../utils.js';
 
 export interface SysRouter extends Router {}
 

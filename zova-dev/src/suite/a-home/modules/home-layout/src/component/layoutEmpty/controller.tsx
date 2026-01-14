@@ -1,4 +1,5 @@
-import { BeanControllerBase, RouterView } from 'zova';
+import { RouterView } from '@cabloy/vue-router';
+import { BeanControllerBase } from 'zova';
 import { Controller } from 'zova-module-a-bean';
 
 export interface ControllerLayoutEmptyProps {}
