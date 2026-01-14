@@ -18,7 +18,6 @@ declare module '@cabloy/vue-router' {
     absolute?: boolean;
     layout?: keyof TypeComponentLayoutRecord | 'empty' | 'default' | false | IModuleRouteComponent;
     requiresAuth?: boolean;
-    name?: string;
     componentKeyMode?: TypeComponentKeyMode;
     componentKey?: ((this: ZovaApplication, route: RouteLocationNormalizedLoaded) => string) | string;
     tabKey?: ((this: ZovaApplication, route: RouteLocationNormalizedLoaded) => string) | string;

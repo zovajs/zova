@@ -180,7 +180,8 @@ export class ModelTabs extends BeanModelBase {
       } else {
         items.splice(index, 1, tabItemNew);
       }
-      items.sort((a, b) => a.fullPath!.length - b.fullPath!.length);
+      // not use fullPath, because fullPath has query string
+      items.sort((a, b) => a.componentKey!.length - b.componentKey!.length);
     }
     const tabNew: RouteTab = {
       ...tabOld,

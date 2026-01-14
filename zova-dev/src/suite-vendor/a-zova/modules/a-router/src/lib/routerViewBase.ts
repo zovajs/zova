@@ -16,13 +16,6 @@ export class BeanRouterViewBase extends BeanControllerBase implements IRouterVie
     this.$router.removeRouterView(this);
   }
 
-  private _handleComponentName(component: IRouterViewSlotParams) {
-    let name = component.Component.type.name;
-    if (name) return name;
-    name = component.route.meta.name || this.$router.getRealRouteName(component.route.name) || component.route.path;
-    return name;
-  }
-
   private _handleRouteProp(route: RouteLocationNormalizedLoaded, prop: 'componentKey' | 'tabKey'): string;
   private _handleRouteProp(route: RouteLocationNormalizedLoaded, prop: 'keepAlive'): boolean;
   private _handleRouteProp(route: RouteLocationNormalizedLoaded, prop) {
@@ -33,11 +26,13 @@ export class BeanRouterViewBase extends BeanControllerBase implements IRouterVie
     return value;
   }
 
-  private __handleRoutePropComponentKey(route: RouteLocationNormalizedLoaded, name: string) {
+  private __handleRoutePropComponentKey(route: RouteLocationNormalizedLoaded) {
     const componentKey = this._handleRouteProp(route, 'componentKey');
     if (componentKey) return componentKey;
+    // name
+    const name = this.$router.getRealRouteName(route.name);
     // path
-    if (!route.name) return name;
+    if (!name) return route.path;
     // name: nameOnly
     if (route.meta.componentKeyMode === 'nameOnly') return name;
     // name: withParams
@@ -47,10 +42,8 @@ export class BeanRouterViewBase extends BeanControllerBase implements IRouterVie
   protected prepareComponentMeta(component: IRouterViewSlotParams): IRouteViewComponentMeta {
     // fullPath
     const fullPath = component.route.fullPath;
-    // name
-    const name = this._handleComponentName(component);
     // componentKey
-    const componentKey = this.__handleRoutePropComponentKey(component.route, name);
+    const componentKey = this.__handleRoutePropComponentKey(component.route);
     // tabKey
     const tabKey = this._handleRouteProp(component.route, 'tabKey') || componentKey;
     // keepAlive
