@@ -254,11 +254,14 @@ export class ModelTabs extends BeanModelBase {
     return false;
   }
 
-  private _prepareTabsOptions(options: ModelTabsOptions) {
-    options.scene = options.scene ?? '';
-    options.max = options.max ?? -1;
-    options.persister = process.env.CLIENT && !!options.persister;
-    return options;
+  private _prepareTabsOptions(options: ModelTabsOptions): ModelTabsOptions {
+    return {
+      ...options,
+      scene: options.scene ?? '',
+      max: options.max ?? -1,
+      maxItems: options.maxItems ?? -1,
+      persister: process.env.CLIENT && !!options.persister,
+    };
   }
 
   private _getKeepAliveInclude() {

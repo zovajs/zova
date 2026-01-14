@@ -22,6 +22,7 @@ export interface ModelTabsOptions {
   scene?: string;
   /** -1: infinite 0: Affix Only  */
   max?: number;
+  maxItems?: number;
   persister?: boolean;
   getAffixTabs: () => RouteTabBase[] | undefined;
   getTabInfo: (tab: Partial<RouteTabTransient>) => RouteTabInfo | undefined;
