@@ -209,7 +209,8 @@ export class ModelTabs extends BeanModelBase {
   // special for _addTab
   private _checkIfTabNeedUpdate(tabOld: RouteTab, tabNew: RouteTabTransient) {
     for (const key in tabNew) {
-      if (['fullPath', 'name', 'keepAlive'].includes(key)) {
+      if (['componentKey', 'name', 'keepAlive'].includes(key)) continue;
+      if (['fullPath'].includes(key)) {
         if (!tabOld.items || tabOld.items.findIndex(item => item[key] === tabNew[key]) === -1) return true;
       } else if (tabNew[key] !== tabOld[key]) {
         return true;
