@@ -1,4 +1,4 @@
-import type { RouteComponent, RouteLocationMatched, RouteLocationNormalized, RouteLocationNormalizedLoaded, RouteRecordRaw } from '@cabloy/vue-router';
+import type { RouteComponent, RouteLocationMatched, RouteLocationNormalized, RouteLocationNormalizedLoaded, RouteLocationNormalizedLoadedGeneric, RouteRecordRaw } from '@cabloy/vue-router';
 import type { z } from 'zod';
 import type { TypeComponentLayoutRecord, ZovaApplication } from 'zova';
 import type { BeanRouter } from '../bean/bean.router.js';
@@ -40,6 +40,7 @@ declare module 'zova' {
   }
   export interface BeanBase {
     $router: BeanRouter;
+    $pageRoute: RouteLocationNormalizedLoadedGeneric | undefined;
   }
 
   export interface IModuleResource {

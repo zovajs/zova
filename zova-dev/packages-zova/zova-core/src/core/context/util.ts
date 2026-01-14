@@ -1,10 +1,6 @@
-import type { RouteLocationNormalizedLoadedGeneric } from '@cabloy/vue-router';
-import { routerViewLocationKey } from '@cabloy/vue-router';
 import { setCurrentInstance } from '@cabloy/vue-runtime-core';
 import { pauseTracking, resetTracking } from '@vue/reactivity';
-import { inject } from 'vue';
 import { BeanSimple } from '../../bean/beanSimple.js';
-import { pageRouteKey } from '../../utils/route.js';
 
 export class CtxUtil extends BeanSimple {
   instanceScope(fn, tracking?: boolean) {
@@ -25,15 +21,5 @@ export class CtxUtil extends BeanSimple {
       }
       reset();
     }
-  }
-
-  getPageRoute(): RouteLocationNormalizedLoadedGeneric | undefined {
-    let route = this.bean._getBeanFromHost({ name: pageRouteKey, injectionScope: 'host' });
-    if (!route) {
-      route = this.ctx.util.instanceScope(() => {
-        return inject(routerViewLocationKey)?.value;
-      });
-    }
-    return route as RouteLocationNormalizedLoadedGeneric | undefined;
   }
 }

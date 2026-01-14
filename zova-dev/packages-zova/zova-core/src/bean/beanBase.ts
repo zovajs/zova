@@ -159,10 +159,6 @@ export class BeanBase extends BeanBaseSimple {
     return this.app.meta.component.getZovaComponent(module, name!);
   }
 
-  protected get $pageRoute(): RouteLocationNormalizedLoadedGeneric | undefined {
-    return this.ctx.util.getPageRoute();
-  }
-
   // need not
   // public dispose() {
   //   const self = cast(this);

@@ -2,8 +2,9 @@ import type { RouteLocationNormalizedLoaded } from '@cabloy/vue-router';
 import type { ComponentInternalInstance } from 'vue';
 import { RouterView } from '@cabloy/vue-router';
 import { h, KeepAlive, nextTick, Transition } from 'vue';
-import { BeanControllerBase, cast, pageRouteKey, Use } from 'zova';
+import { BeanControllerBase, cast, Use } from 'zova';
 import { Controller } from 'zova-module-a-bean';
+import { pageRouteKey } from 'zova-module-a-router';
 import { ModelTabs } from '../../model/tabs.js';
 
 export interface ControllerRouterViewTabsProps {}

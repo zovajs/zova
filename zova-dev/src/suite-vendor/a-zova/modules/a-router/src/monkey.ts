@@ -17,7 +17,7 @@ import type { TypePageSchema } from './types/router.js';
 import * as ModuleInfo from '@cabloy/module-info';
 import { shallowReactive } from 'vue';
 import { BeanControllerPageBase, BeanSimple, cast } from 'zova';
-import { getRealRouteName, getRouteMatched } from './lib/utils.js';
+import { getPageRoute, getRealRouteName, getRouteMatched } from './lib/utils.js';
 import { ServiceRouterGuards } from './service/routerGuards.js';
 import { SymbolRouterHistory } from './types/utils.js';
 
@@ -86,10 +86,17 @@ export class Monkey
         return bean._getBeanFromHost('a-router.bean.router');
       },
     });
+    Object.defineProperty(beanInstance, '$pageRoute', {
+      enumerable: false,
+      configurable: true,
+      get() {
+        return getPageRoute(cast(bean).ctx);
+      },
+    });
   }
 
   controllerDataPrepare(controllerData: IControllerData, ctx: ZovaContext) {
-    controllerData.context.route = ctx.util.getPageRoute();
+    controllerData.context.route = getPageRoute(ctx);
   }
 
   controllerDataInit(controllerData: IControllerData, controller: BeanBase) {
@@ -102,7 +109,7 @@ export class Monkey
   controllerDataUpdate(controller: BeanBase) {
     // only for controller page
     if (!(controller instanceof BeanControllerPageBase)) return;
-    const route = cast<ZovaContext>(cast(controller).ctx).util.getPageRoute();
+    const route = getPageRoute(cast<ZovaContext>(cast(controller).ctx));
     this._initControllerRoute(route, controller);
   }
 
