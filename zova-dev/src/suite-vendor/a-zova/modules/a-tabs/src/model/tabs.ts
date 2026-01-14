@@ -2,7 +2,8 @@ import type { IDecoratorModelOptions, UseQueryOptions } from 'zova-module-a-mode
 import { mutate } from 'mutate-on-copy';
 import { useComputed } from 'zova';
 import { BeanModelBase, Model } from 'zova-module-a-model';
-import { ModelTabsOptions, RouteTab, RouteTabItem, RouteTabTransient } from '../types/tabs.js';
+import { IRouteViewComponentItem } from 'zova-module-a-router';
+import { ModelTabsOptions, RouteTab, RouteTabBase, RouteTabTransient } from '../types/tabs.js';
 
 export interface IModelOptionsTabs extends IDecoratorModelOptions {}
 
@@ -67,25 +68,33 @@ export class ModelTabs extends BeanModelBase {
     const res = await this._addTab(tab);
     if (res) {
       // current
-      this.tabCurrentKey = tab.key;
+      this.tabCurrentKey = tab.tabKey;
     }
     return res;
   }
 
-  async _addTab(tab: RouteTabTransient): Promise<boolean> {
+  async _addTab(tab: Partial<RouteTabTransient>, affix?: boolean): Promise<boolean> {
     // must perform await before findTab
     const tabInfo = this.tabsOptions.getTabInfo(tab);
     if (!tabInfo) return false;
     // max
-    if (this.tabsOptions.max === 0 && !tab.affix) return false;
+    if (this.tabsOptions.max === 0 && !affix) return false;
     // tabs
-    const [index, tabOld] = this.findTab(tab.key);
+    const [index, tabOld] = this.findTab(tab.tabKey);
     if (index === -1) {
       // new
-      const items = tab.fullPath ? [{ fullPath: tab.fullPath, name: tab.name, keepAlive: tab.keepAlive }] : [];
+      const items: IRouteViewComponentItem[] = tab.componentKey
+        ? [{
+            componentKey: tab.componentKey!,
+            fullPath: tab.fullPath!,
+            name: tab.name!,
+            keepAlive: tab.keepAlive,
+            updatedAt: Date.now(),
+          }]
+        : [];
       const tabNew: RouteTab = {
-        key: tab.key,
-        affix: tab.affix,
+        tabKey: tab.tabKey!,
+        affix,
         items,
         updatedAt: Date.now(),
         info: tabInfo,
@@ -109,7 +118,7 @@ export class ModelTabs extends BeanModelBase {
     return true;
   }
 
-  async addAffixTabs(affixTabs?: RouteTabTransient[]) {
+  async addAffixTabs(affixTabs?: RouteTabBase[]) {
     if (!affixTabs) {
       // donothing
       return;
@@ -117,17 +126,17 @@ export class ModelTabs extends BeanModelBase {
     // record old affixTabs
     const oldTabs: RouteTab[] = [];
     for (const tab of this.tabs) {
-      if (tab.affix && affixTabs.findIndex(item => item.key === tab.key) === -1) {
+      if (tab.affix && affixTabs.findIndex(item => item.tabKey === tab.tabKey) === -1) {
         oldTabs.push(tab);
       }
     }
     // add new affixTabs
     for (const tab of affixTabs) {
-      await this._addTab(tab);
+      await this._addTab({ tabKey: tab.tabKey }, tab.affix);
     }
     // delete old affixTabs
     for (const tab of oldTabs) {
-      await this.deleteTab(tab.key);
+      await this.deleteTab(tab.tabKey);
     }
     // sort
     this.tabs = mutate(this.tabs, copyState => {
@@ -147,7 +156,7 @@ export class ModelTabs extends BeanModelBase {
       // prev/next
       const tabCurrentIndex = index - 1 > -1 ? index - 1 : index + 1 < this.tabs.length ? index + 1 : -1;
       if (tabCurrentIndex > -1) {
-        await this.activeTab(this.tabs[tabCurrentIndex]?.key);
+        await this.activeTab(this.tabs[tabCurrentIndex]?.tabKey);
       }
     }
     // tabs
@@ -156,20 +165,29 @@ export class ModelTabs extends BeanModelBase {
     });
   }
 
-  updateTab(tab: RouteTabTransient) {
-    const [index, tabOld] = this.findTab(tab.key);
+  updateTab(tab: Partial<RouteTabTransient>) {
+    const [index, tabOld] = this.findTab(tab.tabKey);
     if (index === -1 || !tabOld) return;
-    const items: RouteTabItem[] = tabOld.items ? ([] as RouteTabItem[]).concat(tabOld.items) : [];
-    if (tab.fullPath) {
-      if (items.findIndex(item => item.fullPath === tab.fullPath) === -1) {
-        items.push({ fullPath: tab.fullPath, name: tab.name, keepAlive: tab.keepAlive });
-        items.sort((a, b) => a.fullPath!.length - b.fullPath!.length);
+    const items: IRouteViewComponentItem[] = tabOld.items ? ([] as IRouteViewComponentItem[]).concat(tabOld.items) : [];
+    if (tab.componentKey) {
+      const tabItemNew: IRouteViewComponentItem = {
+        componentKey: tab.componentKey,
+        fullPath: tab.fullPath!,
+        name: tab.name!,
+        keepAlive: tab.keepAlive,
+        updatedAt: Date.now(),
+      };
+      const index = items.findIndex(item => item.componentKey === tab.componentKey);
+      if (index === -1) {
+        items.push(tabItemNew);
+      } else {
+        items.splice(index, 1, tabItemNew);
       }
+      items.sort((a, b) => a.fullPath!.length - b.fullPath!.length);
     }
     const tabNew: RouteTab = {
       ...tabOld,
-      key: tab.key,
-      affix: tab.affix ?? tabOld.affix,
+      tabKey: tab.tabKey!,
       items,
       updatedAt: Date.now(),
     };
@@ -182,14 +200,14 @@ export class ModelTabs extends BeanModelBase {
     if (!tabKey) return;
     const [_, tab] = this.findTab(tabKey);
     if (!tab) return;
-    this.updateTab({ key: tabKey });
+    this.updateTab({ tabKey });
     this.tabCurrentKey = tabKey;
-    await this.$router.push(tab.items?.[0]?.fullPath || tab.key);
+    await this.$router.push(tab.items?.[0]?.fullPath || tab.tabKey);
   }
 
   findTab(tabKey?: string): [number, RouteTab | undefined] {
     if (!tabKey) return [-1, undefined];
-    const index = this.tabs.findIndex(item => item.key === tabKey);
+    const index = this.tabs.findIndex(item => item.tabKey === tabKey);
     if (index === -1) return [index, undefined];
     return [index, this.tabs[index]];
   }
@@ -211,17 +229,26 @@ export class ModelTabs extends BeanModelBase {
   }
 
   // special for _addTab
-  private _checkIfTabNeedUpdate(tabOld: RouteTab, tabNew: RouteTabTransient) {
+  private _checkIfTabNeedUpdate(tabOld: RouteTab, tabNew: Partial<RouteTabTransient>) {
     for (const key in tabNew) {
-      if (['componentKey', 'name', 'keepAlive'].includes(key)) continue;
-      if (['fullPath'].includes(key)) {
-        if (!tabOld.items || tabOld.items.findIndex(item => item[key] === tabNew[key]) === -1) return true;
+      if (['fullPath', 'name', 'keepAlive', 'updatedAt'].includes(key)) continue;
+      if (['componentKey'].includes(key)) {
+        if (!tabOld.items) return true;
+        const tabOldItem = tabOld.items.find(item => item[key] === tabNew[key]);
+        if (!tabOldItem) return true;
+        for (const key2 of ['fullPath', 'name', 'keepAlive']) {
+          if (tabOldItem[key2] !== tabNew[key2]) return true;
+        }
+        const recentItemIndex = tabOld.items.findIndex(
+          item => item[key] !== tabOld[key] && (item.updatedAt ?? 0) > (tabOldItem.updatedAt ?? 0),
+        );
+        if (recentItemIndex > -1) return true;
       } else if (tabNew[key] !== tabOld[key]) {
         return true;
       }
     }
     const recentTabIndex = this.tabs.findIndex(
-      item => item.key !== tabOld.key && (item.updatedAt ?? 0) > (tabOld.updatedAt ?? 0),
+      item => item.tabKey !== tabOld.tabKey && (item.updatedAt ?? 0) > (tabOld.updatedAt ?? 0),
     );
     if (recentTabIndex > -1) return true;
     return false;

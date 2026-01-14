@@ -42,12 +42,12 @@ export class ControllerLayoutTabs extends BeanControllerBase {
       persister: configTabs.persister,
       getAffixTabs: () => {
         if (!this.$$modelMenu.retrieveMenus().data) return;
-        return [{ key: '/', affix: true }];
+        return [{ tabKey: '/', affix: true }];
       },
       getTabInfo: tab => {
         const queryMenu = this.$$modelMenu.retrieveMenus();
         if (!queryMenu.data || queryMenu.isError) return undefined;
-        const menuItem = this.$$modelMenu.findMenuItem({ link: tab.key });
+        const menuItem = this.$$modelMenu.findMenuItem({ link: tab.tabKey });
         if (!menuItem) return undefined;
         return { title: menuItem.title, icon: menuItem.icon };
       },

@@ -1,23 +1,19 @@
+import type { IRouteViewComponentItem, IRouteViewComponentMeta } from 'zova-module-a-router';
+
 export interface RouteTabInfo {
   title?: string;
   icon?: string;
 }
 
 export interface RouteTabBase {
-  key: string;
+  tabKey: string;
   affix?: boolean;
 }
 
-export interface RouteTabItem {
-  fullPath?: string;
-  name?: string;
-  keepAlive?: boolean;
-}
-
-export interface RouteTabTransient extends RouteTabBase, RouteTabItem {}
+export interface RouteTabTransient extends IRouteViewComponentMeta {}
 
 export interface RouteTab extends RouteTabBase {
-  items: RouteTabItem[];
+  items: IRouteViewComponentItem[];
   updatedAt?: number;
   info?: RouteTabInfo;
 }
@@ -27,6 +23,6 @@ export interface ModelTabsOptions {
   /** -1: infinite 0: Affix Only  */
   max?: number;
   persister?: boolean;
-  getAffixTabs: () => RouteTabTransient[] | undefined;
-  getTabInfo: (tab: RouteTabTransient) => RouteTabInfo | undefined;
+  getAffixTabs: () => RouteTabBase[] | undefined;
+  getTabInfo: (tab: Partial<RouteTabTransient>) => RouteTabInfo | undefined;
 }

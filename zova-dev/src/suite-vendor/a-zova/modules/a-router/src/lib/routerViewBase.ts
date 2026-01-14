@@ -1,7 +1,7 @@
 import type { RouteLocationNormalizedLoaded } from '@cabloy/vue-router';
 import type { IRouterViewSlotParams, IRouteViewComponentMeta } from '../types/routerView.js';
 import { nextTick } from 'vue';
-import { BeanControllerBase, cast } from 'zova';
+import { BeanControllerBase } from 'zova';
 import { routerViewKey } from './const.js';
 
 export interface IRouterViewPropsBase {}
@@ -20,10 +20,6 @@ export class BeanRouterViewBase extends BeanControllerBase implements IRouterVie
     let name = component.Component.type.name;
     if (name) return name;
     name = component.route.meta.name || this.$router.getRealRouteName(component.route.name) || component.route.path;
-    // must set Component.type.name, because keep-alive need Component.type.name
-    //   so: one Component must be used for only one route
-    // todo: 不必写入组件中，而且必须总是动态获取组件名称
-    cast(component.Component.type).name = name;
     return name;
   }
 
@@ -60,7 +56,7 @@ export class BeanRouterViewBase extends BeanControllerBase implements IRouterVie
     // keepAlive
     const keepAlive = this._handleRouteProp(component.route, 'keepAlive');
     // tab
-    const componentMeta: IRouteViewComponentMeta = { key: tabKey, componentKey, fullPath, name, keepAlive };
+    const componentMeta: IRouteViewComponentMeta = { tabKey, componentKey, fullPath, name, keepAlive };
     // onRender
     this.onRender(componentMeta, component);
     // add tab
