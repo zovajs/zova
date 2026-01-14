@@ -99,6 +99,48 @@ declare module 'zova' {
   }
 }
 /** service: end */
+/** controller: begin */
+export * from '../component/routerViewEmpty/controller.jsx';
+
+import 'zova';
+declare module 'zova' {
+  
+  
+}
+declare module 'zova-module-a-router' {
+  
+        export interface ControllerRouterViewEmpty {
+          /** @internal */
+          get scope(): ScopeModuleARouter;
+        } 
+}
+/** controller: end */
+/** controller: begin */
+import { ControllerRouterViewEmpty } from '../component/routerViewEmpty/controller.jsx';
+import 'zova';
+declare module 'zova' {
+  export interface IBeanRecordLocal {
+    'a-router.controller.routerViewEmpty': ControllerRouterViewEmpty;
+  }
+}
+/** controller: end */
+
+/** components: begin */
+export * from './component/routerViewEmpty.js';
+import { ZRouterViewEmpty } from './component/routerViewEmpty.js';
+export const components = {
+  'routerViewEmpty': ZRouterViewEmpty,
+};
+import 'zova';
+declare module 'zova' {
+export interface IComponentRecord {
+  'a-router:routerViewEmpty': ControllerRouterViewEmpty;
+}
+export interface IZovaComponentRecord {
+  'a-router:routerViewEmpty': typeof ZRouterViewEmpty;
+}
+}
+/** components: end */
 /** model: begin */
 export * from '../model/pageRoute.js';
 import { IModelOptionsPageRoute } from '../model/pageRoute.js';

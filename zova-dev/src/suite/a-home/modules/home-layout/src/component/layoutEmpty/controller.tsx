@@ -1,6 +1,6 @@
-import { RouterView } from '@cabloy/vue-router';
 import { BeanControllerBase } from 'zova';
 import { Controller } from 'zova-module-a-bean';
+import { ZRouterViewEmpty } from 'zova-module-a-router';
 
 export interface ControllerLayoutEmptyProps {}
 
@@ -10,9 +10,7 @@ export class ControllerLayoutEmpty extends BeanControllerBase {
 
   protected render() {
     return (
-      <div>
-        <RouterView />
-      </div>
+      <ZRouterViewEmpty></ZRouterViewEmpty>
     );
   }
 }
