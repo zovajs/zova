@@ -109,6 +109,7 @@ export class ModelTabs extends BeanModelBase {
       // update
       if (this._checkIfTabNeedUpdate(tabOld!, tab)) {
         this.updateTab(tab);
+        await this.pruneTabItems(tab.tabKey);
       }
     }
     return true;
@@ -231,11 +232,6 @@ export class ModelTabs extends BeanModelBase {
   }
 
   async pruneTabs() {
-    await this._pruneTabs();
-    await this._pruneTabsItems();
-  }
-
-  private async _pruneTabs() {
     let max = this.tabsOptions.max;
     if (max === undefined || max === -1) return;
     if (max < 1) max = 1;
@@ -255,29 +251,26 @@ export class ModelTabs extends BeanModelBase {
     }
   }
 
-  private async _pruneTabsItems() {
+  async pruneTabItems(tabKey?: string) {
+    if (!tabKey) return;
+    const [_, tab] = this.findTab(tabKey);
+    if (!tab) return;
     let maxItems = this.tabsOptions.maxItems;
     if (maxItems === undefined || maxItems === -1) return;
     if (maxItems < 1) maxItems = 1;
-    for (const tab of this.tabs) {
-      await this._pruneTabItems(tab, maxItems);
-    }
-  }
-
-  private async _pruneTabItems(tab: RouteTab, maxItems: number) {
     while (true) {
-      const ignoreCount = tab.items.filter(item => item.componentKey === tab.tabKey).length;
+      const ignoreCount = tab.items.filter(item => item.componentKey === tabKey).length;
       if (tab.items.length - ignoreCount <= maxItems) break;
       let componentKey: string | undefined;
       let updatedAt = Date.now();
       for (const tabItem of tab.items) {
-        if (tabItem.componentKey !== tab.tabKey && tabItem.updatedAt < updatedAt) {
+        if (tabItem.componentKey !== tabKey && tabItem.updatedAt < updatedAt) {
           componentKey = tabItem.componentKey;
           updatedAt = tabItem.updatedAt;
         }
       }
       if (!componentKey) break;
-      await this.deleteTabItem(tab.tabKey, componentKey);
+      await this.deleteTabItem(tabKey, componentKey);
     }
   }
 
