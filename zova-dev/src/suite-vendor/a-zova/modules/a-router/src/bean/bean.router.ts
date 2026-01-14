@@ -9,7 +9,7 @@ export interface BeanRouter extends Omit<SysRouter, '$beanFullName' | '$onionNam
 @Bean()
 export class BeanRouter extends BeanBase {
   private _vueRouterApp: Router;
-  private _eventRouterGuards: TypeEventOff[];
+  private _eventRouterGuards: TypeEventOff[] = [];
 
   @Use()
   $$sysRouter: SysRouter;
