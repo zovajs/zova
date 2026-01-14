@@ -1,5 +1,4 @@
 import type { Logger } from '@cabloy/logger';
-import type { RouteLocationNormalizedLoadedGeneric } from '@cabloy/vue-router';
 import type { ReactiveMarker } from '@vue/reactivity';
 import type { ComputedGetter, DebuggerOptions, MultiWatchSources, RendererNode, WatchCallback, WatchEffect, WatchEffectOptions, WatchHandle, WatchOptions, WatchSource, WritableComputedOptions } from 'vue';
 import type { AppEvent } from '../core/component/event.js';
