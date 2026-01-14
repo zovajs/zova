@@ -1,6 +1,7 @@
 import type { NavigationGuardWithThis, NavigationHookAfter, Router } from '@cabloy/vue-router';
 import { BeanBase, TypeEventOff, Use } from 'zova';
 import { Bean } from 'zova-module-a-bean';
+import { BeanRouterViewBase } from '../lib/routerViewBase.js';
 import { ModelPageRoute } from '../model/pageRoute.js';
 import { TypeErrorListener } from '../types/router.js';
 import { SysRouter } from './sys.router.js';
@@ -11,6 +12,7 @@ export interface BeanRouter extends Omit<SysRouter, '$beanFullName' | '$onionNam
 export class BeanRouter extends BeanBase {
   private _vueRouterApp: Router;
   private _eventRouterGuards: TypeEventOff[] = [];
+  private _routerViews: BeanRouterViewBase[] = [];
 
   @Use()
   $$sysRouter: SysRouter;
@@ -41,6 +43,17 @@ export class BeanRouter extends BeanBase {
     if (!mainRouter) {
       // emit event
       await this.app.meta.event.emit('a-router:routerGuards', this);
+    }
+  }
+
+  addRouterView(routerView: BeanRouterViewBase) {
+    this._routerViews.push(routerView);
+  }
+
+  removeRouterView(routerView: BeanRouterViewBase) {
+    const index = this._routerViews.findIndex(item => item === routerView);
+    if (index > -1) {
+      this._routerViews.splice(index, 1);
     }
   }
 
