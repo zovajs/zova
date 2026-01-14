@@ -3,6 +3,7 @@ import { withModifiers } from 'vue';
 import { BeanRenderBase, ClientOnly } from 'zova';
 import { Render } from 'zova-module-a-bean';
 import { ZIcon } from 'zova-module-a-icon';
+import { IRouteViewComponentMeta } from 'zova-module-a-router';
 import { ZRouterViewTabs } from 'zova-module-a-tabs';
 
 @Render()
@@ -52,6 +53,15 @@ export class RenderTabs extends BeanRenderBase {
   }
 
   _renderRouterViewTabs() {
-    return <ZRouterViewTabs></ZRouterViewTabs>;
+    return (
+      <ZRouterViewTabs
+        onRendered={(componentMeta: IRouteViewComponentMeta) => {
+          this.$$modelTabs.addTab(componentMeta);
+        }}
+        onKeepAliveInclude={() => {
+          return this.$$modelTabs.keepAliveInclude;
+        }}
+      ></ZRouterViewTabs>
+    );
   }
 }
