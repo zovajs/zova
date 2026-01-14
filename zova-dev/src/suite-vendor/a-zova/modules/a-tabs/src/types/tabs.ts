@@ -1,3 +1,6 @@
+import type { RouteLocationNormalizedLoaded } from '@cabloy/vue-router';
+import type { ComponentInternalInstance } from 'vue';
+
 export interface RouteTabInfo {
   title?: string;
   icon?: string;
@@ -29,4 +32,9 @@ export interface ModelTabsOptions {
   persister?: boolean;
   getAffixTabs: () => RouteTabTransient[] | undefined;
   getTabInfo: (tab: RouteTabTransient) => RouteTabInfo | undefined;
+}
+
+export interface RouterViewSlotParams {
+  Component: ComponentInternalInstance;
+  route: RouteLocationNormalizedLoaded;
 }
