@@ -12,14 +12,14 @@ export class ControllerRouterViewTabs extends BeanRouterViewBase {
   static $propsDefault = {};
 
   @Use({ injectionScope: 'skipSelf' })
-  $$tabs: ModelTabs;
+  $$modelTabs: ModelTabs;
 
   onRendered(componentMeta: IRouteViewComponentMeta, _component: IRouterViewSlotParams): void {
-    this.$$tabs.addTab(componentMeta);
+    this.$$modelTabs.addTab(componentMeta);
   }
 
   onKeepAliveInclude(): string[] | undefined {
-    return this.$$tabs.keepAliveInclude;
+    return this.$$modelTabs.keepAliveInclude;
   }
 
   protected render() {

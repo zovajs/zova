@@ -16,7 +16,7 @@ export class ModelTabs extends BeanModelBase {
   keepAliveInclude: string[];
 
   protected async __init__() {
-    this.bean._setBean('$$tabs', this);
+    this.bean._setBean('$$modelTabs', this);
   }
 
   async initialize(options: ModelTabsOptions) {
