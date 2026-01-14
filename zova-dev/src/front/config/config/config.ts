@@ -68,7 +68,7 @@ export default function (sys: ZovaSys) {
       component: 'a-app:app',
     },
     component: {
-      default: 'home-layout:layoutDefault',
+      default: 'home-layout:layoutTabs',
       empty: 'home-layout:layoutEmpty',
     },
     sidebar: {
