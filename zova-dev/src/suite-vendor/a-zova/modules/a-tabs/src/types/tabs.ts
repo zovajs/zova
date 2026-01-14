@@ -24,5 +24,5 @@ export interface ModelTabsOptions {
   maxItems?: number;
   persister?: boolean;
   getAffixTabs: () => RouteTabBase[] | undefined;
-  getTabInfo: (tab: Partial<RouteTabTransient>) => RouteTabInfo | undefined;
+  getTabInfo: (tabKey: string) => RouteTabInfo | undefined;
 }

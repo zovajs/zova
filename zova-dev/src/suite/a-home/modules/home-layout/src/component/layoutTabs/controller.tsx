@@ -43,10 +43,10 @@ export class ControllerLayoutTabs extends BeanControllerBase {
         if (!this.$$modelMenu.retrieveMenus().data) return;
         return [{ tabKey: '/', affix: true }];
       },
-      getTabInfo: tab => {
+      getTabInfo: tabKey => {
         const queryMenu = this.$$modelMenu.retrieveMenus();
         if (!queryMenu.data || queryMenu.isError) return undefined;
-        const menuItem = this.$$modelMenu.findMenuItem({ link: tab.tabKey });
+        const menuItem = this.$$modelMenu.findMenuItem({ link: tabKey });
         if (!menuItem) return undefined;
         return { title: menuItem.title, icon: menuItem.icon };
       },

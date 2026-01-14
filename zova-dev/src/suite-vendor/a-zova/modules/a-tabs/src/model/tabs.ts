@@ -72,7 +72,7 @@ export class ModelTabs extends BeanModelBase {
 
   async _addTab(tab: Partial<RouteTabTransient>, affix?: boolean): Promise<boolean> {
     // must perform await before findTab
-    const tabInfo = this.tabsOptions.getTabInfo(tab);
+    const tabInfo = this.tabsOptions.getTabInfo(tab.tabKey!);
     if (!tabInfo) return false;
     // max
     if (this.tabsOptions.max === 0 && !affix) return false;
@@ -199,7 +199,8 @@ export class ModelTabs extends BeanModelBase {
     if (!tab) return;
     this.updateTab({ tabKey });
     this.tabCurrentKey = tabKey;
-    await this.$router.push(tab.items?.[0]?.fullPath || tab.tabKey);
+    // not use tab.items?.[0]?.fullPath, because maybe not the first page
+    await this.$router.push(tab.tabKey);
   }
 
   findTab(tabKey?: string): [number, RouteTab | undefined] {
