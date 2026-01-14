@@ -4,7 +4,8 @@ export const config = (_sys: ZovaSys) => {
   return {
     tabs: {
       scene: '',
-      max: 3,
+      max: 6,
+      maxItems: 6,
       persister: true,
     },
   };

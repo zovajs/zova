@@ -16,16 +16,13 @@ export class ModelTabs extends BeanModelBase {
   tabCurrent?: RouteTab;
   keepAliveInclude: string[];
 
-  protected async __init__() {
+  protected async __init__(_scene: string, options: ModelTabsOptions) {
     this.bean._setBean('$$modelTabs', this);
-  }
-
-  async initialize(options: ModelTabsOptions) {
     // options
     this.tabsOptions = this._prepareTabsOptions(options);
     // tabs
     const queryOptionsTabs: UseQueryOptions<RouteTab[]> = {
-      queryKey: [this.tabsOptions.scene, 'tabs'],
+      queryKey: ['tabs'],
       meta: { defaultData: [] },
     };
     if (this.tabsOptions.persister) {
@@ -35,7 +32,7 @@ export class ModelTabs extends BeanModelBase {
     }
     // tabCurrentKey
     const queryOptionsTabCurrentKey: UseQueryOptions<string> = {
-      queryKey: [this.tabsOptions.scene, 'tabCurrentKey'],
+      queryKey: ['tabCurrentKey'],
     };
     if (this.tabsOptions.persister) {
       this.tabCurrentKey = this.$useStateLocal(queryOptionsTabCurrentKey);
@@ -257,7 +254,6 @@ export class ModelTabs extends BeanModelBase {
   private _prepareTabsOptions(options: ModelTabsOptions): ModelTabsOptions {
     return {
       ...options,
-      scene: options.scene ?? '',
       max: options.max ?? -1,
       maxItems: options.maxItems ?? -1,
       persister: process.env.CLIENT && !!options.persister,

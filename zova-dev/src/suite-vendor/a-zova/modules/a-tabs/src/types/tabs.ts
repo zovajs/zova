@@ -19,7 +19,6 @@ export interface RouteTab extends RouteTabBase {
 }
 
 export interface ModelTabsOptions {
-  scene?: string;
   /** -1: infinite 0: Affix Only  */
   max?: number;
   maxItems?: number;

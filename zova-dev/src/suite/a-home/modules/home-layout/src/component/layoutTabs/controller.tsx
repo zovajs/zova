@@ -1,8 +1,8 @@
 import type { ModelTabsOptions } from 'zova-module-a-tabs';
+import type { ModelTabs } from 'zova-module-a-tabs';
 import { BeanControllerBase, Use } from 'zova';
 import { Controller } from 'zova-module-a-bean';
 import { $QueryAutoLoad } from 'zova-module-a-model';
-import { ModelTabs } from 'zova-module-a-tabs';
 import { ModelPassport } from 'zova-module-home-user';
 import { ModelMenu } from '../../model/menu.js';
 
@@ -12,14 +12,13 @@ export interface ControllerLayoutTabsProps {}
 export class ControllerLayoutTabs extends BeanControllerBase {
   static $propsDefault = {};
 
+  $$modelTabs: ModelTabs;
+
   @Use()
   $$modelMenu: ModelMenu;
 
   @Use()
   $$modelPassport: ModelPassport;
-
-  @Use()
-  $$modelTabs: ModelTabs;
 
   leftDrawerOpen: boolean = false;
 
@@ -37,8 +36,8 @@ export class ControllerLayoutTabs extends BeanControllerBase {
   private async _initTabs() {
     const configTabs = this.scope.config.tabs;
     const tabsOptions: ModelTabsOptions = {
-      scene: configTabs.scene,
       max: configTabs.max,
+      maxItems: configTabs.maxItems,
       persister: configTabs.persister,
       getAffixTabs: () => {
         if (!this.$$modelMenu.retrieveMenus().data) return;
@@ -52,7 +51,7 @@ export class ControllerLayoutTabs extends BeanControllerBase {
         return { title: menuItem.title, icon: menuItem.icon };
       },
     };
-    await this.$$modelTabs.initialize(tabsOptions);
+    this.$$modelTabs = await this.bean._getBeanSelector('a-tabs.model.tabs', true, configTabs.scene ?? '', tabsOptions);
   }
 
   toggleLeftDrawer() {
