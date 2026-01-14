@@ -253,12 +253,12 @@ export class ModelTabs extends BeanModelBase {
 
   async pruneTabItems(tabKey?: string) {
     if (!tabKey) return;
-    const [_, tab] = this.findTab(tabKey);
-    if (!tab) return;
     let maxItems = this.tabsOptions.maxItems;
     if (maxItems === undefined || maxItems === -1) return;
     if (maxItems < 1) maxItems = 1;
     while (true) {
+      const [_, tab] = this.findTab(tabKey);
+      if (!tab) break;
       const ignoreCount = tab.items.filter(item => item.componentKey === tabKey).length;
       if (tab.items.length - ignoreCount <= maxItems) break;
       let componentKey: string | undefined;
