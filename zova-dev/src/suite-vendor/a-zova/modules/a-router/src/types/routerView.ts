@@ -4,7 +4,6 @@ import type { ComponentInternalInstance } from 'vue';
 export interface IRouteViewComponentItemBase {
   componentKey: string;
   fullPath: string;
-  name: string;
   keepAlive?: boolean;
 }
 

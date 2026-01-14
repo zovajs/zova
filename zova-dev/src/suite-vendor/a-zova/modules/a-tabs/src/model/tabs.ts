@@ -84,7 +84,6 @@ export class ModelTabs extends BeanModelBase {
         ? [{
             componentKey: tab.componentKey!,
             fullPath: tab.fullPath!,
-            name: tab.name!,
             keepAlive: tab.keepAlive,
             updatedAt: Date.now(),
           }]
@@ -170,7 +169,6 @@ export class ModelTabs extends BeanModelBase {
       const tabItemNew: IRouteViewComponentItem = {
         componentKey: tab.componentKey,
         fullPath: tab.fullPath!,
-        name: tab.name!,
         keepAlive: tab.keepAlive,
         updatedAt: Date.now(),
       };
@@ -230,12 +228,12 @@ export class ModelTabs extends BeanModelBase {
   // special for _addTab
   private _checkIfTabNeedUpdate(tabOld: RouteTab, tabNew: Partial<RouteTabTransient>) {
     for (const key in tabNew) {
-      if (['fullPath', 'name', 'keepAlive', 'updatedAt'].includes(key)) continue;
+      if (['fullPath', 'keepAlive', 'updatedAt'].includes(key)) continue;
       if (['componentKey'].includes(key)) {
         if (!tabOld.items) return true;
         const tabOldItem = tabOld.items.find(item => item[key] === tabNew[key]);
         if (!tabOldItem) return true;
-        for (const key2 of ['fullPath', 'name', 'keepAlive']) {
+        for (const key2 of ['fullPath', 'keepAlive']) {
           if (tabOldItem[key2] !== tabNew[key2]) return true;
         }
         const recentItemIndex = tabOld.items.findIndex(

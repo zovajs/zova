@@ -49,7 +49,7 @@ export class BeanRouterViewBase extends BeanControllerBase implements IRouterVie
     // keepAlive
     const keepAlive = this._handleRouteProp(component.route, 'keepAlive');
     // tab
-    const componentMeta: IRouteViewComponentMeta = { tabKey, componentKey, fullPath, name, keepAlive };
+    const componentMeta: IRouteViewComponentMeta = { tabKey, componentKey, fullPath, keepAlive };
     // onRender
     this.onRender(componentMeta, component);
     // add tab
