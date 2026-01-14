@@ -6,10 +6,10 @@ import { ModelTabs } from 'zova-module-a-tabs';
 import { ModelPassport } from 'zova-module-home-user';
 import { ModelMenu } from '../../model/menu.js';
 
-export interface ControllerLayoutDefaultProps {}
+export interface ControllerLayoutTabsProps {}
 
 @Controller()
-export class ControllerLayoutDefault extends BeanControllerBase {
+export class ControllerLayoutTabs extends BeanControllerBase {
   static $propsDefault = {};
 
   @Use()

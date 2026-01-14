@@ -1,11 +1,11 @@
-import type { RenderLayoutDefault } from './render.jsx';
+import type { RenderLayoutTabs } from './render.jsx';
 import { BeanRenderBase, Use } from 'zova';
 import { Render } from 'zova-module-a-bean';
 
 @Render()
 export class RenderSidebar extends BeanRenderBase {
   @Use()
-  $$r: RenderLayoutDefault;
+  $$r: RenderLayoutTabs;
 
   public render() {
     return (

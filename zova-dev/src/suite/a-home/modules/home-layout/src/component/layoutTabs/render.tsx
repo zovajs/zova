@@ -10,7 +10,7 @@ import { RenderTheme } from './render.theme.jsx';
 import { RenderUser } from './render.user.jsx';
 
 @Render()
-export class RenderLayoutDefault extends BeanRenderBase {
+export class RenderLayoutTabs extends BeanRenderBase {
   @Use()
   $$renderHeader: RenderHeader;
 

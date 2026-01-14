@@ -1,11 +1,11 @@
-import type { RenderLayoutDefault } from './render.jsx';
+import type { RenderLayoutTabs } from './render.jsx';
 import { BeanRenderBase, Use } from 'zova';
 import { Render } from 'zova-module-a-bean';
 
 @Render()
 export class RenderContent extends BeanRenderBase {
   @Use()
-  $$r: RenderLayoutDefault;
+  $$r: RenderLayoutTabs;
 
   public render() {
     return this.$$r.$$renderTabs._renderRouterViewTabs();
