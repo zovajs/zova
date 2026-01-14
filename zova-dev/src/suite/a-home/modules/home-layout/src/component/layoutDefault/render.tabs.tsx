@@ -8,7 +8,7 @@ import { ZRouterViewTabs } from 'zova-module-a-tabs';
 @Render()
 export class RenderTabs extends BeanRenderBase {
   public render() {
-    const $$modelTabs = this.$$routerView?.$$modelTabs;
+    const $$modelTabs = this.$$modelTabs;
     if (!$$modelTabs) return;
     const domTabs: VNode[] = [];
     for (const tab of $$modelTabs.tabs) {
@@ -55,7 +55,7 @@ export class RenderTabs extends BeanRenderBase {
 
   _renderRouterViewTabs() {
     return (
-      <ZRouterViewTabs controllerRef={ref => this.$$routerView = ref} tabsOptions={this.tabsOptions}></ZRouterViewTabs>
+      <ZRouterViewTabs></ZRouterViewTabs>
     );
   }
 }

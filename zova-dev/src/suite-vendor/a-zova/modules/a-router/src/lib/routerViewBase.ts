@@ -62,23 +62,23 @@ export class BeanRouterViewBase extends BeanControllerBase implements IRouterVie
     // tab
     const componentMeta: IRouteViewComponentMeta = { key: tabKey, componentKey, fullPath, name, keepAlive };
     // onRender
-    cast(this.$props).onRender?.(componentMeta, component);
+    this.onRender(componentMeta, component);
     // add tab
     nextTick(() => {
-      cast(this.$props).onRendered?.(componentMeta, component);
+      this.onRendered(componentMeta, component);
     });
     return componentMeta;
   }
 
   protected getKeepAliveInclude() {
-    return cast(this.$props).onKeepAliveInclude?.();
+    return this.onKeepAliveInclude();
   }
 
-  onRender(_componentMeta: IRouteViewComponentMeta, _component: IRouterViewSlotParams): void {}
+  protected onRender(_componentMeta: IRouteViewComponentMeta, _component: IRouterViewSlotParams): void {}
 
-  onRendered(_componentMeta: IRouteViewComponentMeta, _component: IRouterViewSlotParams): void {}
+  protected onRendered(_componentMeta: IRouteViewComponentMeta, _component: IRouterViewSlotParams): void {}
 
-  onKeepAliveInclude(): string[] | undefined {
+  protected onKeepAliveInclude(): string[] | undefined {
     throw new Error('Not Implemented');
   }
 }

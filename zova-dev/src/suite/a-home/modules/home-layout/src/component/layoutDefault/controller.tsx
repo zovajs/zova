@@ -1,4 +1,4 @@
-import type { ControllerRouterViewTabs, ModelTabsOptions } from 'zova-module-a-tabs';
+import type { ModelTabs, ModelTabsOptions } from 'zova-module-a-tabs';
 import { BeanControllerBase, Use, UseScope } from 'zova';
 import { Controller } from 'zova-module-a-bean';
 import { $QueryAutoLoad } from 'zova-module-a-model';
@@ -21,8 +21,8 @@ export class ControllerLayoutDefault extends BeanControllerBase {
   @Use()
   $$modelPassport: ModelPassport;
 
-  tabsOptions: ModelTabsOptions;
-  $$routerView: ControllerRouterViewTabs | undefined;
+  @Use()
+  $$modelTabs: ModelTabs;
 
   leftDrawerOpen: boolean = false;
 
@@ -39,7 +39,7 @@ export class ControllerLayoutDefault extends BeanControllerBase {
 
   private async _initTabs() {
     const configTabs = this.scope.config.tabs;
-    this.tabsOptions = {
+    const tabsOptions: ModelTabsOptions = {
       scene: configTabs.scene,
       max: configTabs.max,
       persister: configTabs.persister,
@@ -55,6 +55,7 @@ export class ControllerLayoutDefault extends BeanControllerBase {
         return { title: menuItem.title, icon: menuItem.icon };
       },
     };
+    await this.$$modelTabs.initialize(tabsOptions);
   }
 
   toggleLeftDrawer() {

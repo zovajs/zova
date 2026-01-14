@@ -4,22 +4,15 @@ import { cast, Use } from 'zova';
 import { Controller } from 'zova-module-a-bean';
 import { BeanRouterViewBase, IRouterViewPropsBase, IRouterViewSlotParams, IRouteViewComponentMeta, pageRouteKey } from 'zova-module-a-router';
 import { ModelTabs } from '../../model/tabs.js';
-import { ModelTabsOptions } from '../../types/tabs.js';
 
-export interface ControllerRouterViewTabsProps extends IRouterViewPropsBase {
-  tabsOptions: ModelTabsOptions;
-}
+export interface ControllerRouterViewTabsProps extends IRouterViewPropsBase {}
 
 @Controller()
 export class ControllerRouterViewTabs extends BeanRouterViewBase {
   static $propsDefault = {};
 
-  @Use()
+  @Use({ injectionScope: 'skipSelf' })
   $$modelTabs: ModelTabs;
-
-  protected async __init__() {
-    await this.$$modelTabs.initialize(this.$props.tabsOptions);
-  }
 
   onRendered(componentMeta: IRouteViewComponentMeta, _component: IRouterViewSlotParams): void {
     this.$$modelTabs.addTab(componentMeta);
