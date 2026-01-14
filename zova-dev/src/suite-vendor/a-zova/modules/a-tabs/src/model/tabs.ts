@@ -162,7 +162,8 @@ export class ModelTabs extends BeanModelBase {
   }
 
   updateTab(tab: Partial<RouteTabTransient>) {
-    const [index, tabOld] = this.findTab(tab.tabKey);
+    const tabKey = tab.tabKey!;
+    const [index, tabOld] = this.findTab(tabKey);
     if (index === -1 || !tabOld) return;
     const items: IRouteViewComponentItem[] = tabOld.items ? ([] as IRouteViewComponentItem[]).concat(tabOld.items) : [];
     if (tab.componentKey) {
@@ -179,11 +180,11 @@ export class ModelTabs extends BeanModelBase {
         items.splice(index, 1, tabItemNew);
       }
       // not use fullPath, because fullPath has query string
-      items.sort((a, b) => a.componentKey!.length - b.componentKey!.length);
+      items.sort((a, b) => (a.componentKey === tabKey ? 0 : 1) - (b.componentKey === tabKey ? 0 : 1));
     }
     const tabNew: RouteTab = {
       ...tabOld,
-      tabKey: tab.tabKey!,
+      tabKey,
       items,
       updatedAt: Date.now(),
     };
@@ -198,8 +199,10 @@ export class ModelTabs extends BeanModelBase {
     if (!tab) return;
     this.updateTab({ tabKey });
     this.tabCurrentKey = tabKey;
-    // not use tab.items?.[0]?.fullPath, because maybe not the first page
-    await this.$router.push(tab.tabKey);
+    // first check tab.items?.[0]?.fullPath, because fullPath maybe has query string
+    const tabItemFirst = tab.items?.[0];
+    const path = tabItemFirst?.componentKey === tabKey ? tabItemFirst.fullPath : tabKey;
+    await this.$router.push(path);
   }
 
   findTab(tabKey?: string): [number, RouteTab | undefined] {
