@@ -1,8 +1,8 @@
-import type { ModelTabs, ModelTabsOptions } from 'zova-module-a-tabs';
-import { BeanControllerBase, Use, UseScope } from 'zova';
+import type { ModelTabsOptions } from 'zova-module-a-tabs';
+import { BeanControllerBase, Use } from 'zova';
 import { Controller } from 'zova-module-a-bean';
 import { $QueryAutoLoad } from 'zova-module-a-model';
-import { ScopeModuleATabs } from 'zova-module-a-tabs';
+import { ModelTabs } from 'zova-module-a-tabs';
 import { ModelPassport } from 'zova-module-home-user';
 import { ModelMenu } from '../../model/menu.js';
 
@@ -11,9 +11,6 @@ export interface ControllerLayoutDefaultProps {}
 @Controller()
 export class ControllerLayoutDefault extends BeanControllerBase {
   static $propsDefault = {};
-
-  @UseScope()
-  $$scopeModuleATabs: ScopeModuleATabs;
 
   @Use()
   $$modelMenu: ModelMenu;
