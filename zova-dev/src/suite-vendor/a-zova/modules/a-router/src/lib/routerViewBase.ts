@@ -4,13 +4,9 @@ import { nextTick } from 'vue';
 import { BeanControllerBase, cast } from 'zova';
 import { routerViewKey } from './const.js';
 
-export interface IRouterViewPropsBase {
-  onRender?(componentMeta: IRouteViewComponentMeta, component: IRouterViewSlotParams): void;
-  onRendered?(componentMeta: IRouteViewComponentMeta, component: IRouterViewSlotParams): void;
-  onKeepAliveInclude?(): string[] | undefined;
-}
+export interface IRouterViewPropsBase {}
 
-export class BeanRouterViewBase extends BeanControllerBase {
+export class BeanRouterViewBase extends BeanControllerBase implements IRouterViewPropsBase {
   protected async __init__() {
     this.bean._setBean(routerViewKey, this);
     this.$router.addRouterView(this);
@@ -76,5 +72,13 @@ export class BeanRouterViewBase extends BeanControllerBase {
 
   protected getKeepAliveInclude() {
     return cast(this.$props).onKeepAliveInclude?.();
+  }
+
+  onRender(_componentMeta: IRouteViewComponentMeta, _component: IRouterViewSlotParams): void {}
+
+  onRendered(_componentMeta: IRouteViewComponentMeta, _component: IRouterViewSlotParams): void {}
+
+  onKeepAliveInclude(): string[] | undefined {
+    throw new Error('Not Implemented');
   }
 }

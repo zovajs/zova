@@ -3,16 +3,17 @@ import { withModifiers } from 'vue';
 import { BeanRenderBase, ClientOnly } from 'zova';
 import { Render } from 'zova-module-a-bean';
 import { ZIcon } from 'zova-module-a-icon';
-import { IRouteViewComponentMeta } from 'zova-module-a-router';
 import { ZRouterViewTabs } from 'zova-module-a-tabs';
 
 @Render()
 export class RenderTabs extends BeanRenderBase {
   public render() {
+    const $$modelTabs = this.$$routerView?.$$modelTabs;
+    if (!$$modelTabs) return;
     const domTabs: VNode[] = [];
-    for (const tab of this.$$modelTabs.tabs) {
+    for (const tab of $$modelTabs.tabs) {
       const tabKey = tab.key;
-      const className = tabKey === this.$$modelTabs.tabCurrentKey ? 'tab tab-active text-primary' : 'tab';
+      const className = tabKey === $$modelTabs.tabCurrentKey ? 'tab tab-active text-primary' : 'tab';
       const menuItem = this.$$modelMenu.findMenuItem({ link: tabKey });
       if (!menuItem) continue;
       const titleLocal = this.$text(menuItem?.title || '');
@@ -22,7 +23,7 @@ export class RenderTabs extends BeanRenderBase {
           role="tab"
           class={`${className} ${this.cTab}`}
           onClick={() => {
-            this.$$modelTabs.activeTab(tabKey);
+            $$modelTabs.activeTab(tabKey);
           }}
         >
           {!!menuItem?.icon && <ZIcon name={menuItem?.icon as any} width="24" height="24"></ZIcon>}
@@ -34,7 +35,7 @@ export class RenderTabs extends BeanRenderBase {
               width="16"
               height="16"
               nativeOnClick={withModifiers(() => {
-                this.$$modelTabs.deleteTab(tabKey);
+                $$modelTabs.deleteTab(tabKey);
               }, ['stop'])}
             >
             </ZIcon>
@@ -54,14 +55,7 @@ export class RenderTabs extends BeanRenderBase {
 
   _renderRouterViewTabs() {
     return (
-      <ZRouterViewTabs
-        onRendered={(componentMeta: IRouteViewComponentMeta) => {
-          this.$$modelTabs.addTab(componentMeta);
-        }}
-        onKeepAliveInclude={() => {
-          return this.$$modelTabs.keepAliveInclude;
-        }}
-      ></ZRouterViewTabs>
+      <ZRouterViewTabs controllerRef={ref => this.$$routerView = ref} tabsOptions={this.tabsOptions}></ZRouterViewTabs>
     );
   }
 }
