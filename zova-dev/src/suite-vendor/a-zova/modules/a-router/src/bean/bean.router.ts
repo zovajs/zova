@@ -1,7 +1,8 @@
-import type { NavigationGuardWithThis, Router } from '@cabloy/vue-router';
+import type { NavigationGuardWithThis, NavigationHookAfter, Router } from '@cabloy/vue-router';
 import { BeanBase, TypeEventOff, Use } from 'zova';
 import { Bean } from 'zova-module-a-bean';
 import { ModelPageRoute } from '../model/pageRoute.js';
+import { TypeErrorListener } from '../types/router.js';
 import { SysRouter } from './sys.router.js';
 
 export interface BeanRouter extends Omit<SysRouter, '$beanFullName' | '$onionName' | '$onionOptions'> {}
@@ -45,6 +46,24 @@ export class BeanRouter extends BeanBase {
 
   beforeEach(guard: NavigationGuardWithThis<undefined>): () => void {
     const fn = this._vueRouterApp.beforeEach(guard);
+    this._eventRouterGuards.push(fn);
+    return fn;
+  }
+
+  beforeResolve(guard: NavigationGuardWithThis<undefined>): () => void {
+    const fn = this._vueRouterApp.beforeResolve(guard);
+    this._eventRouterGuards.push(fn);
+    return fn;
+  }
+
+  afterEach(guard: NavigationHookAfter): () => void {
+    const fn = this._vueRouterApp.afterEach(guard);
+    this._eventRouterGuards.push(fn);
+    return fn;
+  }
+
+  onError(handler: TypeErrorListener): () => void {
+    const fn = this._vueRouterApp.onError(handler);
     this._eventRouterGuards.push(fn);
     return fn;
   }

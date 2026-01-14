@@ -1,4 +1,4 @@
-import type { RouteComponent, RouteLocationMatched, RouteLocationNormalizedLoaded, RouteRecordRaw } from '@cabloy/vue-router';
+import type { RouteComponent, RouteLocationMatched, RouteLocationNormalized, RouteLocationNormalizedLoaded, RouteRecordRaw } from '@cabloy/vue-router';
 import type { z } from 'zod';
 import type { TypeComponentLayoutRecord, ZovaApplication } from 'zova';
 import type { BeanRouter } from '../bean/bean.router.js';
@@ -95,4 +95,8 @@ export type TypePageSchemas = Record<string, TypePageSchema>;
 export interface TypePagePathSchema<PARAMS = unknown, QUERY = unknown> {
   params?: PARAMS;
   query?: QUERY;
+}
+
+export interface TypeErrorListener {
+  (error: any, to: RouteLocationNormalized, from: RouteLocationNormalizedLoaded): any;
 }
