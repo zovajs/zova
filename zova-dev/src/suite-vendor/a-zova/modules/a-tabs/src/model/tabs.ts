@@ -226,7 +226,7 @@ export class ModelTabs extends BeanModelBase {
   private _prepareTabsOptions(options: ModelTabsOptions) {
     options.scene = options.scene ?? '';
     options.max = options.max ?? -1;
-    options.persister = !!options.persister;
+    options.persister = process.env.CLIENT && !!options.persister;
     return options;
   }
 
