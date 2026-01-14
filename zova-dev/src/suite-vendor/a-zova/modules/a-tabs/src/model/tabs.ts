@@ -15,6 +15,10 @@ export class ModelTabs extends BeanModelBase {
   tabCurrent?: RouteTab;
   keepAliveInclude: string[];
 
+  protected async __init__() {
+    this.bean._setBean('$$tabs', this);
+  }
+
   async initialize(options: ModelTabsOptions) {
     // options
     this.tabsOptions = this._prepareTabsOptions(options);

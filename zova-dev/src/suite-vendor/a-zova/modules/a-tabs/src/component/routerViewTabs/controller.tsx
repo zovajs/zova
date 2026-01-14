@@ -1,9 +1,9 @@
+import type { ModelTabs } from '../../model/tabs.js';
 import { RouterView } from '@cabloy/vue-router';
 import { h, KeepAlive, Transition } from 'vue';
 import { cast, Use } from 'zova';
 import { Controller } from 'zova-module-a-bean';
 import { BeanRouterViewBase, IRouterViewPropsBase, IRouterViewSlotParams, IRouteViewComponentMeta, pageRouteKey } from 'zova-module-a-router';
-import { ModelTabs } from '../../model/tabs.js';
 
 export interface ControllerRouterViewTabsProps extends IRouterViewPropsBase {}
 
@@ -12,14 +12,14 @@ export class ControllerRouterViewTabs extends BeanRouterViewBase {
   static $propsDefault = {};
 
   @Use({ injectionScope: 'skipSelf' })
-  $$modelTabs: ModelTabs;
+  $$tabs: ModelTabs;
 
   onRendered(componentMeta: IRouteViewComponentMeta, _component: IRouterViewSlotParams): void {
-    this.$$modelTabs.addTab(componentMeta);
+    this.$$tabs.addTab(componentMeta);
   }
 
   onKeepAliveInclude(): string[] | undefined {
-    return this.$$modelTabs.keepAliveInclude;
+    return this.$$tabs.keepAliveInclude;
   }
 
   protected render() {
