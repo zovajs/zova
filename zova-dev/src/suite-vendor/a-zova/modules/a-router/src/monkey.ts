@@ -13,11 +13,11 @@ import type {
 } from 'zova';
 import type { ErrorSSR } from 'zova-module-a-ssr';
 import type { BeanRouter } from './bean/bean.router.js';
-import type { ServiceRouterGuards } from './service/routerGuards.js';
 import type { TypePageSchema } from './types/router.js';
 import * as ModuleInfo from '@cabloy/module-info';
 import { shallowReactive } from 'vue';
 import { BeanControllerPageBase, BeanSimple, cast } from 'zova';
+import { ServiceRouterGuards } from './service/routerGuards.js';
 import { SymbolRouterHistory } from './types/utils.js';
 import { getRealRouteName, getRouteMatched } from './utils.js';
 
