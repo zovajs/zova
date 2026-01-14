@@ -17,9 +17,9 @@ import type { TypePageSchema } from './types/router.js';
 import * as ModuleInfo from '@cabloy/module-info';
 import { shallowReactive } from 'vue';
 import { BeanControllerPageBase, BeanSimple, cast } from 'zova';
+import { getRealRouteName, getRouteMatched } from './lib/utils.js';
 import { ServiceRouterGuards } from './service/routerGuards.js';
 import { SymbolRouterHistory } from './types/utils.js';
-import { getRealRouteName, getRouteMatched } from './utils.js';
 
 export class Monkey
   extends BeanSimple
