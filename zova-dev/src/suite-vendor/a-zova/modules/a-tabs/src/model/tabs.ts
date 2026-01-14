@@ -161,6 +161,24 @@ export class ModelTabs extends BeanModelBase {
     });
   }
 
+  async deleteTabItem(tabKey?: string, componentKey?: string) {
+    if (!tabKey || !componentKey) return;
+    // tab
+    const [index, tab] = this.findTab(tabKey);
+    if (index === -1 || !tab) return;
+    // items
+    const items = mutate(tab.items, copyState => {
+      const index = copyState.findIndex(item => item.componentKey === componentKey);
+      if (index > -1) {
+        copyState.splice(index, 1);
+      }
+    });
+    const tabNew: RouteTab = { ...tab, items };
+    this.tabs = mutate(this.tabs, copyState => {
+      copyState.splice(index, 1, tabNew);
+    });
+  }
+
   updateTab(tab: Partial<RouteTabTransient>) {
     const tabKey = tab.tabKey!;
     const [index, tabOld] = this.findTab(tabKey);
@@ -213,8 +231,17 @@ export class ModelTabs extends BeanModelBase {
   }
 
   async pruneTabs() {
-    if (this.tabsOptions.max === undefined || this.tabsOptions.max === -1) return;
-    while (this.tabs.length > this.tabsOptions.max) {
+    await this._pruneTabs();
+    await this._pruneTabsItems();
+  }
+
+  private async _pruneTabs() {
+    let max = this.tabsOptions.max;
+    if (max === undefined || max === -1) return;
+    if (max < 1) max = 1;
+    while (true) {
+      const affixCount = this.tabs.filter(item => item.affix).length;
+      if (this.tabs.length - affixCount <= max) break;
       let tabKey: string | undefined;
       let updatedAt = Date.now();
       for (const tab of this.tabs) {
@@ -225,6 +252,32 @@ export class ModelTabs extends BeanModelBase {
       }
       if (!tabKey) break;
       await this.deleteTab(tabKey);
+    }
+  }
+
+  private async _pruneTabsItems() {
+    let maxItems = this.tabsOptions.maxItems;
+    if (maxItems === undefined || maxItems === -1) return;
+    if (maxItems < 1) maxItems = 1;
+    for (const tab of this.tabs) {
+      await this._pruneTabItems(tab, maxItems);
+    }
+  }
+
+  private async _pruneTabItems(tab: RouteTab, maxItems: number) {
+    while (true) {
+      const ignoreCount = tab.items.filter(item => item.componentKey === tab.tabKey).length;
+      if (tab.items.length - ignoreCount <= maxItems) break;
+      let componentKey: string | undefined;
+      let updatedAt = Date.now();
+      for (const tabItem of tab.items) {
+        if (tabItem.componentKey !== tab.tabKey && tabItem.updatedAt < updatedAt) {
+          componentKey = tabItem.componentKey;
+          updatedAt = tabItem.updatedAt;
+        }
+      }
+      if (!componentKey) break;
+      await this.deleteTabItem(tab.tabKey, componentKey);
     }
   }
 
