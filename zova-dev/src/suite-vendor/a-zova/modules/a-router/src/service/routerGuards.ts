@@ -1,12 +1,12 @@
 import * as ModuleInfo from '@cabloy/module-info';
 import { Service } from 'zova-module-a-bean';
 import { BeanRouter } from '../bean/bean.router.js';
-import { BeanRouterBase } from '../bean/bean.routerBase.js';
+import { BeanRouterGuardsBase } from '../bean/bean.routerGuardsBase.js';
 
 @Service()
-export class ServiceRouter extends BeanRouterBase {
+export class ServiceRouterGuards extends BeanRouterGuardsBase {
   protected onRouterGuards(router: BeanRouter) {
-    router.beforeEach(async to => {
+    return router.beforeEach(async to => {
       // match path
       let match = to.matched.find(item => item.aliasOf);
       if (match) {

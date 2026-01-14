@@ -32,7 +32,7 @@ declare module 'zova' {
 /** sys: end */
 /** bean: begin */
 export * from '../bean/bean.router.js';
-export * from '../bean/bean.routerBase.js';
+export * from '../bean/bean.routerGuardsBase.js';
 
 import 'zova';
 declare module 'zova' {
@@ -55,47 +55,47 @@ declare module 'zova-module-a-router' {
 /** bean: end */
 /** bean: begin */
 import { BeanRouter } from '../bean/bean.router.js';
-import { BeanRouterBase } from '../bean/bean.routerBase.js';
+import { BeanRouterGuardsBase } from '../bean/bean.routerGuardsBase.js';
 import 'zova';
 declare module 'zova' {
   export interface IBeanRecordGeneral {
     'a-router.bean.router': BeanRouter;
-'a-router.bean.routerBase': BeanRouterBase;
+'a-router.bean.routerGuardsBase': BeanRouterGuardsBase;
   }
 }
 /** bean: end */
 /** service: begin */
-export * from '../service/router.js';
+export * from '../service/routerGuards.js';
 
 import 'zova-module-a-bean';
 declare module 'zova-module-a-bean' {
   
     export interface IServiceRecord {
-      'a-router:router': never;
+      'a-router:routerGuards': never;
     }
 
   
 }
 declare module 'zova-module-a-router' {
   
-        export interface ServiceRouter {
+        export interface ServiceRouterGuards {
           /** @internal */
           get scope(): ScopeModuleARouter;
         }
 
-        export interface ServiceRouter {
-          get $beanFullName(): 'a-router.service.router';
-          get $onionName(): 'a-router:router';
+        export interface ServiceRouterGuards {
+          get $beanFullName(): 'a-router.service.routerGuards';
+          get $onionName(): 'a-router:routerGuards';
           
         } 
 }
 /** service: end */
 /** service: begin */
-import { ServiceRouter } from '../service/router.js';
+import { ServiceRouterGuards } from '../service/routerGuards.js';
 import 'zova';
 declare module 'zova' {
   export interface IBeanRecordGeneral {
-    'a-router.service.router': ServiceRouter;
+    'a-router.service.routerGuards': ServiceRouterGuards;
   }
 }
 /** service: end */

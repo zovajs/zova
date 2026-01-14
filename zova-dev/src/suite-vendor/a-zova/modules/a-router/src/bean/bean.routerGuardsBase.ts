@@ -5,12 +5,12 @@ import { Bean } from 'zova-module-a-bean';
 
 @Bean()
 @Virtual()
-export class BeanRouterBase extends BeanBase {
+export class BeanRouterGuardsBase extends BeanBase {
   private _eventRouterGuards: TypeEventOff;
 
   protected async __init__() {
-    this._eventRouterGuards = this.app.meta.event.on('a-router:routerGuards', async (data, next) => {
-      this.onRouterGuards(data);
+    this._eventRouterGuards = this.app.meta.event.on('a-router:routerGuards', async (router, next) => {
+      this.onRouterGuards(router);
       return await next();
     });
   }

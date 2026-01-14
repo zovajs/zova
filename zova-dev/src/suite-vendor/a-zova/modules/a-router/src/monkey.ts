@@ -13,11 +13,11 @@ import type {
 } from 'zova';
 import type { ErrorSSR } from 'zova-module-a-ssr';
 import type { BeanRouter } from './bean/bean.router.js';
+import type { ServiceRouterGuards } from './service/routerGuards.js';
 import type { TypePageSchema } from './types/router.js';
 import * as ModuleInfo from '@cabloy/module-info';
 import { shallowReactive } from 'vue';
 import { BeanControllerPageBase, BeanSimple, cast } from 'zova';
-import { ServiceRouter } from './service/router.js';
 import { SymbolRouterHistory } from './types/utils.js';
 import { getRealRouteName, getRouteMatched } from './utils.js';
 
@@ -25,7 +25,7 @@ export class Monkey
   extends BeanSimple
   implements IMonkeyAppInitialize, IMonkeyAppInitialized, IMonkeyAppReady, IMonkeyAppClose, IMonkeyController {
   private _beanRouter: BeanRouter;
-  serviceRouter: ServiceRouter;
+  serviceRouterGuards: ServiceRouterGuards;
 
   async getBeanRouter() {
     if (!this._beanRouter) {
@@ -36,7 +36,7 @@ export class Monkey
 
   async appInitialize() {
     // router
-    this.serviceRouter = await this.bean._newBean(ServiceRouter, false);
+    this.serviceRouterGuards = await this.bean._newBean(ServiceRouterGuards, false);
     //  ssr errorHandler
     if (process.env.CLIENT) {
       this._ssrErrorHandler();
@@ -50,8 +50,8 @@ export class Monkey
   }
 
   appClose(): void {
-    if (this.serviceRouter) {
-      this.serviceRouter.dispose();
+    if (this.serviceRouterGuards) {
+      this.serviceRouterGuards.dispose();
     }
   }
 
