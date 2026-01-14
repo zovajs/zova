@@ -2,9 +2,9 @@ import type { RouteLocationNormalizedLoaded } from '@cabloy/vue-router';
 import type { ComponentInternalInstance } from 'vue';
 import { RouterView } from '@cabloy/vue-router';
 import { h, KeepAlive, nextTick, Transition } from 'vue';
-import { BeanControllerBase, cast, Use } from 'zova';
+import { cast, Use } from 'zova';
 import { Controller } from 'zova-module-a-bean';
-import { pageRouteKey } from 'zova-module-a-router';
+import { BeanRouterViewBase, pageRouteKey } from 'zova-module-a-router';
 import { ModelTabs } from '../../model/tabs.js';
 
 export interface ControllerRouterViewTabsProps {}
@@ -15,13 +15,13 @@ export interface RouterViewSlotParams {
 }
 
 @Controller()
-export class ControllerRouterViewTabs extends BeanControllerBase {
+export class ControllerRouterViewTabs extends BeanRouterViewBase {
   static $propsDefault = {};
 
   @Use({ injectionScope: 'skipSelf' })
-  $$modelTabs: ModelTabs;
+  private $$modelTabs: ModelTabs;
 
-  _handleComponentName(component: RouterViewSlotParams) {
+  private _handleComponentName(component: RouterViewSlotParams) {
     let name = component.Component.type.name;
     if (name) return name;
     name = component.route.meta.name || this.$router.getRealRouteName(component.route.name) || component.route.path;
@@ -31,9 +31,9 @@ export class ControllerRouterViewTabs extends BeanControllerBase {
     return name;
   }
 
-  _handleRouteProp(route: RouteLocationNormalizedLoaded, prop: 'componentKey' | 'tabKey'): string;
-  _handleRouteProp(route: RouteLocationNormalizedLoaded, prop: 'keepAlive'): boolean;
-  _handleRouteProp(route: RouteLocationNormalizedLoaded, prop) {
+  private _handleRouteProp(route: RouteLocationNormalizedLoaded, prop: 'componentKey' | 'tabKey'): string;
+  private _handleRouteProp(route: RouteLocationNormalizedLoaded, prop: 'keepAlive'): boolean;
+  private _handleRouteProp(route: RouteLocationNormalizedLoaded, prop) {
     let value = route.meta[prop];
     if (typeof value === 'function') {
       value = value.call(this.app, route);
@@ -41,7 +41,7 @@ export class ControllerRouterViewTabs extends BeanControllerBase {
     return value;
   }
 
-  __handleRoutePropComponentKey(route: RouteLocationNormalizedLoaded, name: string) {
+  private __handleRoutePropComponentKey(route: RouteLocationNormalizedLoaded, name: string) {
     const componentKey = this._handleRouteProp(route, 'componentKey');
     if (componentKey) return componentKey;
     // path
@@ -52,7 +52,7 @@ export class ControllerRouterViewTabs extends BeanControllerBase {
     return route.path;
   }
 
-  _handleComponent(component: RouterViewSlotParams) {
+  private _handleComponent(component: RouterViewSlotParams) {
     // fullPath
     const fullPath = component.route.fullPath;
     // name

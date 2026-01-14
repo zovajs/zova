@@ -26,7 +26,7 @@ export function isRouterName(name?: string | null | undefined): boolean {
 }
 
 export function getPageRoute(ctx: ZovaContext): RouteLocationNormalizedLoadedGeneric | undefined {
-  let route = ctx.bean._getBeanFromHost({ name: pageRouteKey, injectionScope: 'host' });
+  let route = ctx.bean._getBeanFromHost({ name: pageRouteKey });
   if (!route) {
     route = ctx.util.instanceScope(() => {
       return inject(routerViewLocationKey)?.value;

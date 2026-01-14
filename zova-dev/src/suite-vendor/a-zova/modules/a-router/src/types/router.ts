@@ -3,6 +3,7 @@ import type { z } from 'zod';
 import type { TypeComponentLayoutRecord, ZovaApplication } from 'zova';
 import type { BeanRouter } from '../bean/bean.router.js';
 
+import type { BeanRouterViewBase } from '../lib/routerViewBase.js';
 import type { IGotoPageOptions } from './utils.js';
 import 'vue-router';
 
@@ -40,6 +41,7 @@ declare module 'zova' {
   }
   export interface BeanBase {
     $router: BeanRouter;
+    $routerView: BeanRouterViewBase;
     $pageRoute: RouteLocationNormalizedLoadedGeneric | undefined;
   }
 
