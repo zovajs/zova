@@ -5,7 +5,7 @@ import { combineParamsAndQuery } from '@cabloy/utils';
 import { createMemoryHistory, createRouter, createWebHashHistory, createWebHistory } from '@cabloy/vue-router';
 import { BeanBase, cast, deepExtend } from 'zova';
 import { Sys } from 'zova-module-a-bean';
-import { IModuleRoute, IModuleRouteComponent, IPagePathRecord } from '../types/router.js';
+import { IModuleRoute, IModuleRouteComponent, IPageNameRecord, IPagePathRecord } from '../types/router.js';
 import { SymbolRouterHistory } from '../types/utils.js';
 import { getRealRouteName, getRouteMatched, isRouterName } from '../utils.js';
 
@@ -163,6 +163,49 @@ export class SysRouter extends BeanBase {
 
   isRouterName(name?: string | null | undefined): boolean {
     return isRouterName(name);
+  }
+
+  resolveName<K extends keyof IPageNameRecord>(name: K, options?: IPageNameRecord[K]): string {
+    const params = cast(options)?.params;
+    const query = cast(options)?.query;
+    return this._resolveNameOrPath(query, query => {
+      const route = this.router.resolve({ name, params, query });
+      return route.fullPath;
+    });
+  }
+
+  resolvePath<K extends keyof IPagePathRecord>(path: K, query?: IPagePathRecord[K]): string {
+    return this._resolveNameOrPath(query, query => {
+      const route = this.router.resolve({ path, query });
+      return route.fullPath;
+    });
+  }
+
+  private _resolveNameOrPath(query, fn) {
+    const query1 = {};
+    const query2: any = [];
+    if (query) {
+      for (const key in query) {
+        const value = query[key];
+        if (value && typeof value === 'object') {
+          query2.push([key, value]);
+        } else {
+          query1[key] = value;
+        }
+      }
+    }
+    // resolve
+    const fullPath = fn(query1);
+    // query2
+    const query2str = query2
+      .map(([key, value]) => {
+        return `${encodeURIComponent(key)}=${encodeURIComponent(JSON.stringify(value))}`;
+      })
+      .join('&');
+    // join
+    if (!query2str) return fullPath;
+    const join = Object.keys(query1).length > 0 ? '&' : '?';
+    return `${fullPath}${join}${query2str}`;
   }
 
   private _loadConfigRoutes() {

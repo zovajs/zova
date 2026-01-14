@@ -1,14 +1,10 @@
 import * as ModuleInfo from '@cabloy/module-info';
-import { Use } from 'zova';
 import { Service } from 'zova-module-a-bean';
 import { BeanRouter } from '../bean/bean.router.js';
 import { BeanRouterBase } from '../bean/bean.routerBase.js';
 
 @Service()
 export class ServiceRouter extends BeanRouterBase {
-  @Use()
-  $$router: BeanRouter;
-
   protected onRouterGuards(router: BeanRouter) {
     router.beforeEach(async to => {
       // match path
@@ -23,19 +19,18 @@ export class ServiceRouter extends BeanRouterBase {
           return to.fullPath;
         }
         // legacy
-        const legacyRoute = this.$$router._findLegacyRoute(match?.name, match?.path);
+        const legacyRoute = router._findLegacyRoute(match?.name, match?.path);
         if (legacyRoute) return;
         // alias
-        const configRoute = this.$$router._findConfigRoute(match?.name, match?.path);
+        const configRoute = router._findConfigRoute(match?.name, match?.path);
         const alias = configRoute?.alias;
         if (alias) {
           // force load module
-          const resLoadModule = await this._forceLoadModule(match?.name, match?.path);
+          const resLoadModule = await this._forceLoadModule(router, match?.name, match?.path);
           if (resLoadModule && resLoadModule !== true) return resLoadModule;
           if (resLoadModule === false) return to.fullPath;
-          if (this.$$router.getRealRouteName(match?.name)) {
-            // @ts-ignore ignore
-            const routeAlias = this.$$router.resolveName(`$alias:${match?.name}`, {
+          if (router.getRealRouteName(match?.name)) {
+            const routeAlias = router.resolveName(`$alias:${match?.name as string}` as any, {
               params: to.params,
               query: to.query,
             });
@@ -50,7 +45,7 @@ export class ServiceRouter extends BeanRouterBase {
         }
       }
       // force load module
-      const resLoadModule = await this._forceLoadModule(match?.name, match?.path);
+      const resLoadModule = await this._forceLoadModule(router, match?.name, match?.path);
       if (resLoadModule === true) return;
       if (resLoadModule) return resLoadModule;
       // redirect again
@@ -77,10 +72,11 @@ export class ServiceRouter extends BeanRouterBase {
   }
 
   private async _forceLoadModule(
+    router: BeanRouter,
     name: string | symbol | null | undefined,
     path: string | undefined,
   ): Promise<string | boolean | undefined> {
-    const nameOrPath = this.$$router.getRealRouteName(name) || path;
+    const nameOrPath = router.getRealRouteName(name) || path;
     // module info
     const moduleInfo = ModuleInfo.parseInfo(ModuleInfo.parseName(nameOrPath));
     if (!moduleInfo) {
