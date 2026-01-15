@@ -3,7 +3,7 @@ import { mutate } from 'mutate-on-copy';
 import { useComputed } from 'zova';
 import { BeanModelBase, Model } from 'zova-module-a-model';
 import { IRouteViewComponentItem } from 'zova-module-a-router';
-import { ModelTabsOptions, RouteTab, RouteTabInitial, RouteTabTransient } from '../types/tabs.js';
+import { ModelTabsOptions, RouteTab, RouteTabTransient } from '../types/tabs.js';
 
 export interface IModelOptionsTabs extends IDecoratorModelOptions {}
 
@@ -23,7 +23,7 @@ export class ModelTabs extends BeanModelBase {
     // tabs
     const queryOptionsTabs: UseQueryOptions<RouteTab[]> = {
       queryKey: ['tabs'],
-      meta: { defaultData: [] },
+      meta: { defaultData: this.tabsOptions.getInitialTabs() ?? [] },
     };
     if (this.tabsOptions.persister) {
       this.tabs = this.$useStateLocal(queryOptionsTabs);
@@ -51,19 +51,11 @@ export class ModelTabs extends BeanModelBase {
     this.keepAliveInclude = useComputed(() => {
       return this._getKeepAliveInclude();
     });
-    // watch
-    this.$watch(
-      this.tabsOptions.getInitialTabs,
-      value => {
-        this.addAffixTabs(value);
-      },
-      { immediate: true },
-    );
   }
 
   // need not async
-  addTab(tab: RouteTabTransient): boolean {
-    const res = this._addTab(tab);
+  addTab(tab: RouteTabTransient, affix?: boolean): boolean {
+    const res = this._addTab(tab, affix);
     if (res) {
       // current
       this.tabCurrentKey = tab.tabKey;
@@ -119,34 +111,6 @@ export class ModelTabs extends BeanModelBase {
       this.pruneTabItems(tabKey);
     }
     return true;
-  }
-
-  async addAffixTabs(affixTabs?: RouteTabInitial[]) {
-    if (!affixTabs) {
-      // donothing
-      return;
-    }
-    // record old affixTabs
-    const oldTabs: RouteTab[] = [];
-    for (const tab of this.tabs) {
-      if (tab.affix && affixTabs.findIndex(item => item.tabKey === tab.tabKey) === -1) {
-        oldTabs.push(tab);
-      }
-    }
-    // add new affixTabs
-    for (const tab of affixTabs) {
-      this._addTab({ tabKey: tab.tabKey }, tab.affix);
-    }
-    // delete old affixTabs
-    for (const tab of oldTabs) {
-      await this.deleteTab(tab.tabKey);
-    }
-    // sort
-    this.tabs = mutate(this.tabs, copyState => {
-      copyState.sort((a, b) => {
-        return Number(!!b.affix) - Number(!!a.affix);
-      });
-    });
   }
 
   async deleteTab(tabKey?: string) {
