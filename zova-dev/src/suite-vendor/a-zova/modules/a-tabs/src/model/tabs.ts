@@ -311,7 +311,9 @@ export class ModelTabs extends BeanModelBase {
       ...options,
       max: options.max ?? -1,
       maxItems: options.maxItems ?? -1,
-      persister: process.env.CLIENT && !!options.persister,
+      persister: !!options.persister,
+      // should not check process.env.CLIENT, client/server should be same
+      // persister: process.env.CLIENT && !!options.persister,
     };
   }
 
