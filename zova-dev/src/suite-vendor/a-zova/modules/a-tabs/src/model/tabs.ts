@@ -292,7 +292,7 @@ export class ModelTabs extends BeanModelBase {
           if (tabItemOld[key2] !== tabNew[key2]) return true;
         }
         const recentItemIndex = tabOld.items.findIndex(
-          item => item[key] !== tabItemOld[key] && (item.updatedAt ?? 0) > (tabItemOld.updatedAt ?? 0),
+          item => item[key] !== tabItemOld[key] && (item.updatedAt ?? 0) >= (tabItemOld.updatedAt ?? 0),
         );
         if (recentItemIndex > -1) return true;
       } else if (tabNew[key] !== tabOld[key]) {
@@ -300,7 +300,7 @@ export class ModelTabs extends BeanModelBase {
       }
     }
     const recentTabIndex = this.tabs.findIndex(
-      item => item.tabKey !== tabOld.tabKey && (item.updatedAt ?? 0) > (tabOld.updatedAt ?? 0),
+      item => item.tabKey !== tabOld.tabKey && (item.updatedAt ?? 0) >= (tabOld.updatedAt ?? 0),
     );
     if (recentTabIndex > -1) return true;
     return false;
