@@ -102,3 +102,21 @@ export interface TypePagePathSchema<PARAMS = unknown, QUERY = unknown> {
 export interface TypeErrorListener {
   (error: any, to: RouteLocationNormalized, from: RouteLocationNormalizedLoaded): any;
 }
+
+export enum NavigationType {
+  pop = 'pop',
+  push = 'push',
+}
+
+export enum NavigationDirection {
+  back = 'back',
+  forward = 'forward',
+  unknown = '',
+}
+
+export interface NavigationInformation {
+  type: NavigationType;
+  direction: NavigationDirection;
+  delta: number;
+  replace?: boolean;
+}
