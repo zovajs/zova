@@ -102,7 +102,7 @@ export class ModelTabs extends BeanModelBase {
           copyState.splice(this.tabCurrentIndex + 1, 0, tabNew);
         });
       }
-      this.pruneTabs();
+      await this.pruneTabs();
     } else {
       // update
       if (!this._checkIfTabNeedUpdate(tabOld!, tab)) {
