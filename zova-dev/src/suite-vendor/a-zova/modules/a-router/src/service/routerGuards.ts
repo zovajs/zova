@@ -51,7 +51,7 @@ export class ServiceRouterGuards extends BeanRouterGuardsBase {
       // redirect again
       return to.fullPath;
     });
-    router.afterEach((_to, _from, _error) => {
+    router.afterEach(function(_to, _from, _error) {
       const info=arguments[3];
       console.log(info);
     });
