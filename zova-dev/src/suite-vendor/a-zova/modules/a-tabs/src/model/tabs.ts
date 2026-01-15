@@ -133,21 +133,28 @@ export class ModelTabs extends BeanModelBase {
   }
 
   async deleteTabItem(tabKey?: string, componentKey?: string) {
-    if (!tabKey || !componentKey) return;
+    if (!tabKey || !componentKey) return false;
+    if (tabKey === componentKey) return false; // not delete first tabItem
     // tab
     const [index, tab] = this.findTab(tabKey);
-    if (index === -1 || !tab) return;
-    // items
-    const items = mutate(tab.items, copyState => {
-      const index = copyState.findIndex(item => item.componentKey === componentKey);
-      if (index > -1) {
+    if (index === -1 || !tab) return false;
+    // indexItem
+    const indexItem = tab.items.findIndex(item => item.componentKey === componentKey);
+    if (indexItem === -1) return false;
+    if (tab.items.length === 1) {
+      // delete tab
+      await this.deleteTab(tabKey);
+    } else {
+      // delete tab item
+      const items = mutate(tab.items, copyState => {
         copyState.splice(index, 1);
-      }
-    });
-    const tabNew: RouteTab = { ...tab, items };
-    this.tabs = mutate(this.tabs, copyState => {
-      copyState.splice(index, 1, tabNew);
-    });
+      });
+      const tabNew: RouteTab = { ...tab, items };
+      this.tabs = mutate(this.tabs, copyState => {
+        copyState.splice(index, 1, tabNew);
+      });
+    }
+    return true;
   }
 
   updateTab(tab: Partial<RouteTabTransient>) {
