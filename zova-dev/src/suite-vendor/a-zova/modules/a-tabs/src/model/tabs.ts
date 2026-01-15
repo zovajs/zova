@@ -215,6 +215,7 @@ export class ModelTabs extends BeanModelBase {
     if (!tabKey) return;
     const [_, tab] = this.findTab(tabKey);
     if (!tab) return;
+    // should not updateTab here
     // this.updateTab({ tabKey });
     // this.tabCurrentKey = tabKey;
     // first check tab.items?.[0]?.fullPath, because fullPath maybe has query string
