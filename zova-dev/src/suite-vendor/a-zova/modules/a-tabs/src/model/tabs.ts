@@ -114,23 +114,28 @@ export class ModelTabs extends BeanModelBase {
     return true;
   }
 
-  async deleteTab(tabKey?: string) {
+  async deleteTab(tabKey?: string, noActiveNext?: boolean) {
     if (!tabKey) return;
     // tabs
     const [index] = this.findTab(tabKey);
     if (index === -1) return;
     // current
-    if (index === this.tabCurrentIndex) {
+    let tabKeyActiveNext;
+    if (!noActiveNext && index === this.tabCurrentIndex) {
       // prev/next
       const tabCurrentIndex = index - 1 > -1 ? index - 1 : index + 1 < this.tabs.length ? index + 1 : -1;
       if (tabCurrentIndex > -1) {
-        await this.activeTab(this.tabs[tabCurrentIndex]?.tabKey);
+        tabKeyActiveNext = this.tabs[tabCurrentIndex]?.tabKey;
       }
     }
     // tabs
     this.tabs = mutate(this.tabs, copyState => {
       copyState.splice(index, 1);
     });
+    // active next
+    if (tabKeyActiveNext) {
+      await this.activeTab(tabKeyActiveNext);
+    }
   }
 
   async deleteTabItem(tabKey?: string, componentKey?: string) {
