@@ -3,11 +3,14 @@ import type { IRouteViewComponentItem, IRouteViewComponentMeta } from 'zova-modu
 export interface RouteTabInfo {
   title?: string;
   icon?: string;
+  link?: string;
+  children?: RouteTabInfo[];
 }
 
 export interface RouteTabBase {
   tabKey: string;
   affix?: boolean;
+  affixAfter?: boolean;
 }
 
 export interface RouteTabInitial extends RouteTabBase {
