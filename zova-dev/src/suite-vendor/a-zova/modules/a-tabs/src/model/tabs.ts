@@ -53,7 +53,7 @@ export class ModelTabs extends BeanModelBase {
     });
     // watch
     this.$watch(
-      this.tabsOptions.getAffixTabs,
+      this.tabsOptions.getInitialTabs,
       value => {
         this.addAffixTabs(value);
       },

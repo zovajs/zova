@@ -39,7 +39,7 @@ export class ControllerLayoutTabs extends BeanControllerBase {
       max: configTabs.max,
       maxItems: configTabs.maxItems,
       persister: configTabs.persister,
-      getAffixTabs: () => {
+      getInitialTabs: () => {
         if (!this.$$modelMenu.retrieveMenus().data) return;
         return [{ tabKey: '/', affix: true }];
       },
