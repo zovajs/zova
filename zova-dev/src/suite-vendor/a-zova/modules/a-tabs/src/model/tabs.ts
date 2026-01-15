@@ -61,8 +61,9 @@ export class ModelTabs extends BeanModelBase {
     );
   }
 
-  async addTab(tab: RouteTabTransient): Promise<boolean> {
-    const res = await this._addTab(tab);
+  // need not async
+  addTab(tab: RouteTabTransient): boolean {
+    const res = this._addTab(tab);
     if (res) {
       // current
       this.tabCurrentKey = tab.tabKey;
@@ -70,12 +71,15 @@ export class ModelTabs extends BeanModelBase {
     return res;
   }
 
-  async _addTab(tab: Partial<RouteTabTransient>, affix?: boolean): Promise<boolean> {
+  // need not async
+  _addTab(tab: Partial<RouteTabTransient>, affix?: boolean): boolean {
+    const tabKey = tab.tabKey;
+    if (!tabKey) return false;
     // must perform await before findTab
-    const tabInfo = this.tabsOptions.getTabInfo(tab.tabKey!);
+    const tabInfo = this.tabsOptions.getTabInfo(tabKey);
     if (!tabInfo) return false;
     // tabs
-    const [index, tabOld] = this.findTab(tab.tabKey);
+    const [index, tabOld] = this.findTab(tabKey);
     if (index === -1) {
       // new
       const items: IRouteViewComponentItem[] = tab.componentKey
@@ -87,7 +91,7 @@ export class ModelTabs extends BeanModelBase {
           }]
         : [];
       const tabNew: RouteTab = {
-        tabKey: tab.tabKey!,
+        tabKey,
         affix,
         items,
         updatedAt: Date.now(),
@@ -102,14 +106,16 @@ export class ModelTabs extends BeanModelBase {
           copyState.splice(this.tabCurrentIndex + 1, 0, tabNew);
         });
       }
-      await this.pruneTabs();
+      // need not await
+      this.pruneTabs();
     } else {
       // update
       if (!this._checkIfTabNeedUpdate(tabOld!, tab)) {
         return false;
       }
       this.updateTab(tab);
-      await this.pruneTabItems(tab.tabKey);
+      // need not await
+      this.pruneTabItems(tabKey);
     }
     return true;
   }
@@ -128,7 +134,7 @@ export class ModelTabs extends BeanModelBase {
     }
     // add new affixTabs
     for (const tab of affixTabs) {
-      await this._addTab({ tabKey: tab.tabKey }, tab.affix);
+      this._addTab({ tabKey: tab.tabKey }, tab.affix);
     }
     // delete old affixTabs
     for (const tab of oldTabs) {
