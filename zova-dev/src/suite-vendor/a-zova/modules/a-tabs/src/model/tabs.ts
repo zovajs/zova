@@ -141,7 +141,7 @@ export class ModelTabs extends BeanModelBase {
     // indexItem
     const indexItem = tab.items.findIndex(item => item.componentKey === componentKey);
     if (indexItem === -1) return false;
-    if (tab.items.length === 1) {
+    if (tab.items.length === 1 && !tab.affix) {
       // delete tab
       await this.deleteTab(tabKey);
     } else {
