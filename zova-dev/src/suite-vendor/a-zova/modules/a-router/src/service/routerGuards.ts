@@ -6,7 +6,7 @@ import { BeanRouterGuardsBase } from '../bean/bean.routerGuardsBase.js';
 @Service()
 export class ServiceRouterGuards extends BeanRouterGuardsBase {
   protected onRouterGuards(router: BeanRouter) {
-    return router.beforeEach(async to => {
+    router.beforeEach(async to => {
       // match path
       let match = to.matched.find(item => item.aliasOf);
       if (match) {
@@ -50,6 +50,10 @@ export class ServiceRouterGuards extends BeanRouterGuardsBase {
       if (resLoadModule) return resLoadModule;
       // redirect again
       return to.fullPath;
+    });
+    router.afterEach((_to, _from, _error) => {
+      const info=arguments[3];
+      console.log(info);
     });
   }
 
