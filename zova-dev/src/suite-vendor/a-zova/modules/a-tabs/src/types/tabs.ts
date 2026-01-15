@@ -10,6 +10,10 @@ export interface RouteTabBase {
   affix?: boolean;
 }
 
+export interface RouteTabInitial extends RouteTabBase {
+  info?: RouteTabInfo;
+}
+
 export interface RouteTabTransient extends IRouteViewComponentMeta {}
 
 export interface RouteTab extends RouteTabBase {
@@ -23,6 +27,6 @@ export interface ModelTabsOptions {
   max?: number;
   maxItems?: number;
   persister?: boolean;
-  getInitialTabs: () => RouteTabBase[] | undefined;
+  getInitialTabs: () => RouteTabInitial[] | undefined;
   getTabInfo: (tabKey: string) => RouteTabInfo | undefined;
 }

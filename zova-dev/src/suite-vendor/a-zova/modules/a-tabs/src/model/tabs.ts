@@ -3,7 +3,7 @@ import { mutate } from 'mutate-on-copy';
 import { useComputed } from 'zova';
 import { BeanModelBase, Model } from 'zova-module-a-model';
 import { IRouteViewComponentItem } from 'zova-module-a-router';
-import { ModelTabsOptions, RouteTab, RouteTabBase, RouteTabTransient } from '../types/tabs.js';
+import { ModelTabsOptions, RouteTab, RouteTabInitial, RouteTabTransient } from '../types/tabs.js';
 
 export interface IModelOptionsTabs extends IDecoratorModelOptions {}
 
@@ -75,11 +75,12 @@ export class ModelTabs extends BeanModelBase {
   _addTab(tab: Partial<RouteTabTransient>, affix?: boolean): boolean {
     const tabKey = tab.tabKey;
     if (!tabKey) return false;
-    // must perform await before findTab
-    const tabInfo = this.tabsOptions.getTabInfo(tabKey);
+    // tab
+    const [index, tabOld] = this.findTab(tabKey);
+    // tabInfo
+    const tabInfo = tabOld?.info ?? this.tabsOptions.getTabInfo(tabKey);
     if (!tabInfo) return false;
     // tabs
-    const [index, tabOld] = this.findTab(tabKey);
     if (index === -1) {
       // new
       const items: IRouteViewComponentItem[] = tab.componentKey
@@ -120,7 +121,7 @@ export class ModelTabs extends BeanModelBase {
     return true;
   }
 
-  async addAffixTabs(affixTabs?: RouteTabBase[]) {
+  async addAffixTabs(affixTabs?: RouteTabInitial[]) {
     if (!affixTabs) {
       // donothing
       return;
