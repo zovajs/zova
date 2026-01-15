@@ -1,4 +1,5 @@
 import type { IDecoratorModelOptions, UseQueryOptions } from 'zova-module-a-model';
+import { RouteLocationNormalizedLoadedGeneric } from '@cabloy/vue-router';
 import { mutate } from 'mutate-on-copy';
 import { useComputed } from 'zova';
 import { BeanModelBase, Model } from 'zova-module-a-model';
@@ -155,6 +156,23 @@ export class ModelTabs extends BeanModelBase {
       });
     }
     return true;
+  }
+
+  findTabItemByFullPath(fullPath: string) {
+    for (const tab of this.tabs) {
+      if (!tab.items) continue;
+      for (const item of tab.items) {
+        if (item.fullPath === fullPath) {
+          return [tab.tabKey, item.componentKey];
+        }
+      }
+    }
+    return [];
+  }
+
+  async backRoute(route: RouteLocationNormalizedLoadedGeneric) {
+    const [tabKey, componentKey] = this.findTabItemByFullPath(route.fullPath);
+    return await this.deleteTabItem(tabKey, componentKey);
   }
 
   updateTab(tab: Partial<RouteTabTransient>) {

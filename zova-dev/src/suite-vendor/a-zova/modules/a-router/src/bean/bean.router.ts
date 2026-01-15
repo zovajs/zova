@@ -1,4 +1,4 @@
-import type { NavigationGuardWithThis, NavigationHookAfter, Router } from '@cabloy/vue-router';
+import type { NavigationGuardWithThis, NavigationHookAfter, RouteLocationNormalizedLoadedGeneric, Router } from '@cabloy/vue-router';
 import { BeanBase, TypeEventOff, Use } from 'zova';
 import { Bean } from 'zova-module-a-bean';
 import { BeanRouterViewBase } from '../lib/routerViewBase.js';
@@ -54,6 +54,13 @@ export class BeanRouter extends BeanBase {
     const index = this._routerViews.findIndex(item => item === routerView);
     if (index > -1) {
       this._routerViews.splice(index, 1);
+    }
+  }
+
+  async backRoute(route: RouteLocationNormalizedLoadedGeneric) {
+    for (const routerView of this._routerViews) {
+      const res = await routerView.backRoute(route);
+      if (res) break;
     }
   }
 

@@ -2,7 +2,7 @@ import * as ModuleInfo from '@cabloy/module-info';
 import { Service } from 'zova-module-a-bean';
 import { BeanRouter } from '../bean/bean.router.js';
 import { BeanRouterGuardsBase } from '../bean/bean.routerGuardsBase.js';
-import { NavigationInformation } from '../types/router.js';
+import { NavigationDirection, NavigationInformation, NavigationType } from '../types/router.js';
 
 @Service()
 export class ServiceRouterGuards extends BeanRouterGuardsBase {
@@ -52,9 +52,14 @@ export class ServiceRouterGuards extends BeanRouterGuardsBase {
       // redirect again
       return to.fullPath;
     });
-    router.afterEach(function (_to, _from, _error) {
+    router.afterEach(function (_to, from, error) {
+      if (error) return;
       const info: NavigationInformation = arguments[3];
-      console.log(info);
+      if (!info) return;
+      const needBack = (info.type === NavigationType.pop && info.direction === NavigationDirection.back) ||
+        (info.type === NavigationType.push && info.replace);
+      if (!needBack) return;
+      router.backRoute(from);
     });
   }
 

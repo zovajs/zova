@@ -1,5 +1,5 @@
 import type { ModelTabs } from '../../model/tabs.js';
-import { RouterView } from '@cabloy/vue-router';
+import { RouteLocationNormalizedLoadedGeneric, RouterView } from '@cabloy/vue-router';
 import { h, KeepAlive, Transition } from 'vue';
 import { cast, Use } from 'zova';
 import { Controller } from 'zova-module-a-bean';
@@ -14,11 +14,15 @@ export class ControllerRouterViewTabs extends BeanRouterViewBase {
   @Use({ injectionScope: 'skipSelf' })
   $$modelTabs: ModelTabs;
 
-  onRender(componentMeta: IRouteViewComponentMeta, _component: IRouterViewSlotParams): void {
+  public async backRoute(route: RouteLocationNormalizedLoadedGeneric) {
+    return await this.$$modelTabs.backRoute(route);
+  }
+
+  protected onRender(componentMeta: IRouteViewComponentMeta, _component: IRouterViewSlotParams): void {
     this.$$modelTabs.addTab(componentMeta);
   }
 
-  onKeepAliveInclude(): string[] | undefined {
+  protected onKeepAliveInclude(): string[] | undefined {
     return this.$$modelTabs.keepAliveInclude;
   }
 

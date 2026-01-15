@@ -1,4 +1,4 @@
-import type { RouteLocationNormalizedLoaded } from '@cabloy/vue-router';
+import type { RouteLocationNormalizedLoaded, RouteLocationNormalizedLoadedGeneric } from '@cabloy/vue-router';
 import type { IRouterViewSlotParams, IRouteViewComponentMeta } from '../types/routerView.js';
 import { BeanControllerBase } from 'zova';
 import { routerViewKey } from './const.js';
@@ -36,6 +36,10 @@ export class BeanRouterViewBase extends BeanControllerBase implements IRouterVie
     if (route.meta.componentKeyMode === 'nameOnly') return name;
     // name: withParams
     return route.path;
+  }
+
+  public async backRoute(_route: RouteLocationNormalizedLoadedGeneric) {
+    return false;
   }
 
   protected prepareComponentMeta(component: IRouterViewSlotParams): IRouteViewComponentMeta {
