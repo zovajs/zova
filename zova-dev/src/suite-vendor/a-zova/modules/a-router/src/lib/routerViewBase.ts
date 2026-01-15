@@ -1,6 +1,5 @@
 import type { RouteLocationNormalizedLoaded } from '@cabloy/vue-router';
 import type { IRouterViewSlotParams, IRouteViewComponentMeta } from '../types/routerView.js';
-import { nextTick } from 'vue';
 import { BeanControllerBase } from 'zova';
 import { routerViewKey } from './const.js';
 
@@ -52,10 +51,6 @@ export class BeanRouterViewBase extends BeanControllerBase implements IRouterVie
     const componentMeta: IRouteViewComponentMeta = { tabKey, componentKey, fullPath, keepAlive };
     // onRender
     this.onRender(componentMeta, component);
-    // add tab
-    // nextTick(() => {
-    this.onRendered(componentMeta, component);
-    // });
     return componentMeta;
   }
 
@@ -64,8 +59,6 @@ export class BeanRouterViewBase extends BeanControllerBase implements IRouterVie
   }
 
   protected onRender(_componentMeta: IRouteViewComponentMeta, _component: IRouterViewSlotParams): void {}
-
-  protected onRendered(_componentMeta: IRouteViewComponentMeta, _component: IRouterViewSlotParams): void {}
 
   protected onKeepAliveInclude(): string[] | undefined {
     throw new Error('Not Implemented');

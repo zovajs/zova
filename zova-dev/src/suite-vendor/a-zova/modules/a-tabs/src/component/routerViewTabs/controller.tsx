@@ -14,7 +14,7 @@ export class ControllerRouterViewTabs extends BeanRouterViewBase {
   @Use({ injectionScope: 'skipSelf' })
   $$modelTabs: ModelTabs;
 
-  onRendered(componentMeta: IRouteViewComponentMeta, _component: IRouterViewSlotParams): void {
+  onRender(componentMeta: IRouteViewComponentMeta, _component: IRouterViewSlotParams): void {
     this.$$modelTabs.addTab(componentMeta);
   }
 

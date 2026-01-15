@@ -74,8 +74,6 @@ export class ModelTabs extends BeanModelBase {
     // must perform await before findTab
     const tabInfo = this.tabsOptions.getTabInfo(tab.tabKey!);
     if (!tabInfo) return false;
-    // max
-    if (this.tabsOptions.max === 0 && !affix) return false;
     // tabs
     const [index, tabOld] = this.findTab(tab.tabKey);
     if (index === -1) {
@@ -107,10 +105,11 @@ export class ModelTabs extends BeanModelBase {
       this.pruneTabs();
     } else {
       // update
-      if (this._checkIfTabNeedUpdate(tabOld!, tab)) {
-        this.updateTab(tab);
-        await this.pruneTabItems(tab.tabKey);
+      if (!this._checkIfTabNeedUpdate(tabOld!, tab)) {
+        return false;
       }
+      this.updateTab(tab);
+      await this.pruneTabItems(tab.tabKey);
     }
     return true;
   }
@@ -216,8 +215,8 @@ export class ModelTabs extends BeanModelBase {
     if (!tabKey) return;
     const [_, tab] = this.findTab(tabKey);
     if (!tab) return;
-    this.updateTab({ tabKey });
-    this.tabCurrentKey = tabKey;
+    // this.updateTab({ tabKey });
+    // this.tabCurrentKey = tabKey;
     // first check tab.items?.[0]?.fullPath, because fullPath maybe has query string
     const tabItemFirst = tab.items?.[0];
     const path = tabItemFirst?.componentKey === tabKey ? tabItemFirst.fullPath : tabKey;
