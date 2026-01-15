@@ -53,9 +53,9 @@ export class BeanRouterViewBase extends BeanControllerBase implements IRouterVie
     // onRender
     this.onRender(componentMeta, component);
     // add tab
-    nextTick(() => {
-      this.onRendered(componentMeta, component);
-    });
+    // nextTick(() => {
+    this.onRendered(componentMeta, component);
+    // });
     return componentMeta;
   }
 

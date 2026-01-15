@@ -280,13 +280,13 @@ export class ModelTabs extends BeanModelBase {
       if (['fullPath', 'keepAlive', 'updatedAt'].includes(key)) continue;
       if (['componentKey'].includes(key)) {
         if (!tabOld.items) return true;
-        const tabOldItem = tabOld.items.find(item => item[key] === tabNew[key]);
-        if (!tabOldItem) return true;
+        const tabItemOld = tabOld.items.find(item => item[key] === tabNew[key]);
+        if (!tabItemOld) return true;
         for (const key2 of ['fullPath', 'keepAlive']) {
-          if (tabOldItem[key2] !== tabNew[key2]) return true;
+          if (tabItemOld[key2] !== tabNew[key2]) return true;
         }
         const recentItemIndex = tabOld.items.findIndex(
-          item => item[key] !== tabOld[key] && (item.updatedAt ?? 0) > (tabOldItem.updatedAt ?? 0),
+          item => item[key] !== tabItemOld[key] && (item.updatedAt ?? 0) > (tabItemOld.updatedAt ?? 0),
         );
         if (recentItemIndex > -1) return true;
       } else if (tabNew[key] !== tabOld[key]) {
