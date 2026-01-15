@@ -138,7 +138,7 @@ export class ModelTabs extends BeanModelBase {
     }
   }
 
-  async deleteTabItem(tabKey?: string, componentKey?: string) {
+  async deleteTabItem(tabKey?: string, componentKey?: string, noActiveNext?: boolean) {
     if (!tabKey || !componentKey) return false;
     if (tabKey === componentKey) return false; // not delete first tabItem
     // tab
@@ -149,11 +149,11 @@ export class ModelTabs extends BeanModelBase {
     if (indexItem === -1) return false;
     if (tab.items.length === 1 && !tab.affix) {
       // delete tab
-      await this.deleteTab(tabKey);
+      await this.deleteTab(tabKey, noActiveNext);
     } else {
       // delete tab item
       const items = mutate(tab.items, copyState => {
-        copyState.splice(index, 1);
+        copyState.splice(indexItem, 1);
       });
       const tabNew: RouteTab = { ...tab, items };
       this.tabs = mutate(this.tabs, copyState => {
@@ -177,7 +177,7 @@ export class ModelTabs extends BeanModelBase {
 
   async backRoute(route: RouteLocationNormalizedLoadedGeneric) {
     const [tabKey, componentKey] = this.findTabItemByFullPath(route.fullPath);
-    return await this.deleteTabItem(tabKey, componentKey);
+    return await this.deleteTabItem(tabKey, componentKey, true);
   }
 
   updateTab(tab: Partial<RouteTabTransient>) {
@@ -248,7 +248,7 @@ export class ModelTabs extends BeanModelBase {
         }
       }
       if (!tabKey) break;
-      await this.deleteTab(tabKey);
+      await this.deleteTab(tabKey, true);
     }
   }
 
@@ -271,7 +271,7 @@ export class ModelTabs extends BeanModelBase {
         }
       }
       if (!componentKey) break;
-      await this.deleteTabItem(tabKey, componentKey);
+      await this.deleteTabItem(tabKey, componentKey, true);
     }
   }
 
