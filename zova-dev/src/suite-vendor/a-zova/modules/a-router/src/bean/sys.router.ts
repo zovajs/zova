@@ -48,15 +48,19 @@ export class SysRouter extends BeanBase {
     if (!options.scrollBehavior) {
       options.scrollBehavior = (to, _from, savedPosition) => {
         if (savedPosition) {
-          return savedPosition;
+          return new Promise(resolve => {
+            setTimeout(() => {
+              resolve(Object.assign({}, savedPosition, { behavior: 'smooth' }));
+            }, 200);
+          });
         } else if (to.hash) {
           return new Promise(resolve => {
             setTimeout(() => {
               resolve({ el: to.hash, behavior: 'smooth' });
-            }, 300);
+            }, 200);
           });
         } else {
-          return { top: 0 };
+          return { left: 0, top: 0 };
         }
       };
     }
