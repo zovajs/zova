@@ -1,4 +1,4 @@
-import type { RouteLocationMatched, RouteLocationNormalizedLoaded, RouteLocationNormalizedLoadedGeneric } from '@cabloy/vue-router';
+import type { RouteLocationMatched, RouteLocationNormalizedLoaded, RouteLocationNormalizedLoadedGeneric, RouterScrollBehavior } from '@cabloy/vue-router';
 import type { ZovaContext } from 'zova';
 import { routerViewLocationKey } from '@cabloy/vue-router';
 import { inject } from 'vue';
@@ -34,3 +34,23 @@ export function getPageRoute(ctx: ZovaContext): RouteLocationNormalizedLoadedGen
   }
   return route as RouteLocationNormalizedLoadedGeneric | undefined;
 }
+
+export const scrollBehavior: RouterScrollBehavior = (to, _from, savedPosition) => {
+  if (savedPosition) {
+    return new Promise(resolve => {
+      setTimeout(() => {
+        // savedPosition = Object.assign({}, savedPosition, { behavior: 'smooth' });
+        resolve(savedPosition);
+      }, 100);
+    });
+  } else if (to.hash) {
+    return new Promise(resolve => {
+      setTimeout(() => {
+        // resolve({ el: to.hash, behavior: 'smooth' });
+        resolve({ el: to.hash });
+      }, 200);
+    });
+  } else {
+    return { left: 0, top: 0 };
+  }
+};

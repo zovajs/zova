@@ -176,6 +176,10 @@ declare module 'zova' {
   }
 }
 /** model: end */
+/** config: begin */
+export * from '../config/config.js';
+import { config } from '../config/config.js';
+/** config: end */
 /** monkey: begin */
 export * from '../monkey.js';
 /** monkey: end */
@@ -183,7 +187,7 @@ export * from '../monkey.js';
 export * from '../monkeySys.js';
 /** monkeySys: end */
 /** scope: begin */
-import { BeanScopeBase, type BeanScopeUtil } from 'zova';
+import { BeanScopeBase, type BeanScopeUtil, TypeModuleConfig } from 'zova';
 import { Scope } from 'zova-module-a-bean';
 
 @Scope()
@@ -191,6 +195,7 @@ export class ScopeModuleARouter extends BeanScopeBase {}
 
 export interface ScopeModuleARouter {
   util: BeanScopeUtil;
+config: TypeModuleConfig<typeof config>;
 }
 
 import 'zova';
@@ -199,7 +204,9 @@ declare module 'zova' {
     'a-router': ScopeModuleARouter;
   }
   
-  
+  export interface IBeanScopeConfig {
+    'a-router': ReturnType<typeof config>;
+  }
 
   
 

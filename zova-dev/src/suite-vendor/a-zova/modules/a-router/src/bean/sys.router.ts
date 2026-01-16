@@ -46,23 +46,7 @@ export class SysRouter extends BeanBase {
     }
     // scrollBehavior
     if (!options.scrollBehavior) {
-      options.scrollBehavior = (to, _from, savedPosition) => {
-        if (savedPosition) {
-          return new Promise(resolve => {
-            setTimeout(() => {
-              resolve(Object.assign({}, savedPosition, { behavior: 'smooth' }));
-            }, 200);
-          });
-        } else if (to.hash) {
-          return new Promise(resolve => {
-            setTimeout(() => {
-              resolve({ el: to.hash, behavior: 'smooth' });
-            }, 200);
-          });
-        } else {
-          return { left: 0, top: 0 };
-        }
-      };
+      options.scrollBehavior = this.scope.config.scrollBehavior;
     }
     // history
     if (!options.history) {
