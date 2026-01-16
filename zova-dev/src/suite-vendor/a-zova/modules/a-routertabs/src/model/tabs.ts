@@ -9,6 +9,7 @@ import { ModelTabsOptions, ModelTabsOptionsBase, RouteTab, RouteTabTransient } f
 export interface IModelOptionsTabs extends IDecoratorModelOptions, ModelTabsOptionsBase {}
 
 @Model<IModelOptionsTabs>({
+  enableSelector: true,
   max: -1,
   maxItems: -1,
   persister: false,
@@ -21,7 +22,8 @@ export class ModelTabs extends BeanModelBase {
   tabCurrent?: RouteTab;
   keepAliveInclude: string[];
 
-  protected async __init__(_scene: string, options: ModelTabsOptions) {
+  protected async __init__(scene: string, options?: ModelTabsOptions) {
+    await super.__init__(scene);
     this.bean._setBean('$$modelTabs', this);
     // options
     this.tabsOptions = deepExtend({}, this.$onionOptions, options);

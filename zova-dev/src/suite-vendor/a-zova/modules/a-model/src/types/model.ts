@@ -3,7 +3,9 @@ import type { ServiceOnion } from 'zova-module-a-bean';
 
 export interface IModelRecord {}
 
-export interface IDecoratorModelOptions {}
+export interface IDecoratorModelOptions {
+  enableSelector?: boolean;
+}
 
 declare module 'zova-module-a-bean' {
   export interface SysOnion {
