@@ -15,7 +15,7 @@ export class ControllerRouterViewStack extends BeanRouterViewBase {
   $$modelStack: ModelStack;
 
   public async backRoute(route: RouteLocationNormalizedLoadedGeneric) {
-    return await this.$$modelStack.backRoute(route);
+    return this.$$modelStack.backRoute(route);
   }
 
   protected onRender(componentMeta: IRouteViewComponentMeta): void {
