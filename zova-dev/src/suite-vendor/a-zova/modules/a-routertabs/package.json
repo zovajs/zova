@@ -1,9 +1,9 @@
 {
-  "name": "zova-module-a-tabs",
+  "name": "zova-module-a-routertabs",
   "type": "module",
   "version": "5.0.29",
-  "title": "a-tabs",
-  "description": "tabs",
+  "title": "a-routertabs",
+  "description": "routertabs",
   "author": "zhennann",
   "keywords": [
     "Zova Module"

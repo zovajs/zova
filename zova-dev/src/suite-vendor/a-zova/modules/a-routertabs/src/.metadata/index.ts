@@ -7,11 +7,11 @@ declare module 'zova' {
   
   
 }
-declare module 'zova-module-a-tabs' {
+declare module 'zova-module-a-routertabs' {
   
         export interface ControllerRouterViewTabs {
           /** @internal */
-          get scope(): ScopeModuleATabs;
+          get scope(): ScopeModuleARoutertabs;
         } 
 }
 /** controller: end */
@@ -20,7 +20,7 @@ import { ControllerRouterViewTabs } from '../component/routerViewTabs/controller
 import 'zova';
 declare module 'zova' {
   export interface IBeanRecordLocal {
-    'a-tabs.controller.routerViewTabs': ControllerRouterViewTabs;
+    'a-routertabs.controller.routerViewTabs': ControllerRouterViewTabs;
   }
 }
 /** controller: end */
@@ -34,10 +34,10 @@ export const components = {
 import 'zova';
 declare module 'zova' {
 export interface IComponentRecord {
-  'a-tabs:routerViewTabs': ControllerRouterViewTabs;
+  'a-routertabs:routerViewTabs': ControllerRouterViewTabs;
 }
 export interface IZovaComponentRecord {
-  'a-tabs:routerViewTabs': typeof ZRouterViewTabs;
+  'a-routertabs:routerViewTabs': typeof ZRouterViewTabs;
 }
 }
 /** components: end */
@@ -48,21 +48,21 @@ import 'zova-module-a-model';
 declare module 'zova-module-a-model' {
   
     export interface IModelRecord {
-      'a-tabs:tabs': IModelOptionsTabs;
+      'a-routertabs:tabs': IModelOptionsTabs;
     }
 
   
 }
-declare module 'zova-module-a-tabs' {
+declare module 'zova-module-a-routertabs' {
   
         export interface ModelTabs {
           /** @internal */
-          get scope(): ScopeModuleATabs;
+          get scope(): ScopeModuleARoutertabs;
         }
 
         export interface ModelTabs {
-          get $beanFullName(): 'a-tabs.model.tabs';
-          get $onionName(): 'a-tabs:tabs';
+          get $beanFullName(): 'a-routertabs.model.tabs';
+          get $onionName(): 'a-routertabs:tabs';
           get $onionOptions(): IModelOptionsTabs;
         } 
 }
@@ -72,7 +72,7 @@ import { ModelTabs } from '../model/tabs.js';
 import 'zova';
 declare module 'zova' {
   export interface IBeanRecordGeneral {
-    'a-tabs.model.tabs': ModelTabs;
+    'a-routertabs.model.tabs': ModelTabs;
   }
 }
 /** model: end */
@@ -81,16 +81,16 @@ import { BeanScopeBase, type BeanScopeUtil } from 'zova';
 import { Scope } from 'zova-module-a-bean';
 
 @Scope()
-export class ScopeModuleATabs extends BeanScopeBase {}
+export class ScopeModuleARoutertabs extends BeanScopeBase {}
 
-export interface ScopeModuleATabs {
+export interface ScopeModuleARoutertabs {
   util: BeanScopeUtil;
 }
 
 import 'zova';
 declare module 'zova' {
   export interface IBeanScopeRecord {
-    'a-tabs': ScopeModuleATabs;
+    'a-routertabs': ScopeModuleARoutertabs;
   }
   
   

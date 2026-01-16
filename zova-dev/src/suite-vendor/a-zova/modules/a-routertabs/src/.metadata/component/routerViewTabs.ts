@@ -10,7 +10,7 @@ export type TypeControllerRouterViewTabsPublicProps = {
 
 type ControllerInnerProps =
   TypeControllerInnerProps<ControllerRouterViewTabsProps, keyof typeof ControllerRouterViewTabs.$propsDefault>;
-declare module 'zova-module-a-tabs' {
+declare module 'zova-module-a-routertabs' {
   export interface ControllerRouterViewTabs {
     $props: ControllerInnerProps;
   }
