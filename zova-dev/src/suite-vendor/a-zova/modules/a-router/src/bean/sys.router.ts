@@ -46,7 +46,19 @@ export class SysRouter extends BeanBase {
     }
     // scrollBehavior
     if (!options.scrollBehavior) {
-      options.scrollBehavior = () => ({ left: 0, top: 0 });
+      options.scrollBehavior = (to, _from, savedPosition) => {
+        if (savedPosition) {
+          return savedPosition;
+        } else if (to.hash) {
+          return new Promise(resolve => {
+            setTimeout(() => {
+              resolve({ el: to.hash, behavior: 'smooth' });
+            }, 300);
+          });
+        } else {
+          return { top: 0 };
+        }
+      };
     }
     // history
     if (!options.history) {
