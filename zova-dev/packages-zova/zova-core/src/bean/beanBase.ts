@@ -155,7 +155,7 @@ export class BeanBase extends BeanBaseSimple {
   protected $zovaComponent<K extends keyof IZovaComponentRecord>(componentName: K): IZovaComponentRecord[K];
   protected $zovaComponent(module: string, name: string);
   protected $zovaComponent(module: string, name?: string) {
-    return this.app.meta.component.getZovaComponent(module, name!);
+    return this.sys.meta.component.getZovaComponent(module, name!);
   }
 
   // need not

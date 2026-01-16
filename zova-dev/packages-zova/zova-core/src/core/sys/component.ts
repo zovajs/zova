@@ -1,7 +1,14 @@
 import type { Component } from 'vue';
+import type { IZovaComponentRecord } from '../../bean/resource/component/type.js';
+import { markRaw } from 'vue';
 import { BeanSimple } from '../../bean/beanSimple.js';
+import { createZovaComponentAsync } from '../../components/createZovaComponentAsync.js';
+
+const SymbolZovaComponents = Symbol('SymbolZovaComponents');
 
 export class SysComponent extends BeanSimple {
+  private [SymbolZovaComponents]: Record<string, any> = {};
+
   /** @internal */
   public async initialize() {}
 
@@ -13,6 +20,16 @@ export class SysComponent extends BeanSimple {
     // return defineAsyncComponent(() => {
     //   return this.use(componentName);
     // });
+  }
+
+  public getZovaComponent<K extends keyof IZovaComponentRecord>(componentName: K): IZovaComponentRecord[K];
+  public getZovaComponent(module: string, name: string);
+  public getZovaComponent(module: string, name?: string) {
+    const componentName = module.includes(':') ? module : `${module}:${name}`;
+    if (!this[SymbolZovaComponents][componentName]) {
+      this[SymbolZovaComponents][componentName] = markRaw(createZovaComponentAsync(componentName));
+    }
+    return this[SymbolZovaComponents][componentName];
   }
 
   public async use(module: string, name?: string): Promise<Component> {
