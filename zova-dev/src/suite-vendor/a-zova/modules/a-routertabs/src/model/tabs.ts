@@ -144,14 +144,14 @@ export class ModelTabs extends BeanModelBase {
         tabKeyActiveNext = this.tabs[tabCurrentIndex]?.tabKey;
       }
     }
-    // active next: must before this.tabs = mutate, avoid to addTab again
-    if (tabKeyActiveNext) {
-      await this.activeTab(tabKeyActiveNext);
-    }
     // tabs
     this.tabs = mutate(this.tabs, copyState => {
       copyState.splice(index, 1);
     });
+    // active next
+    if (tabKeyActiveNext) {
+      await this.activeTab(tabKeyActiveNext);
+    }
   }
 
   async deleteTabItem(tabKey?: string, componentKey?: string, noActiveNext?: boolean) {

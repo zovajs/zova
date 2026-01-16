@@ -1,5 +1,6 @@
 import type { RouteLocationNormalizedLoaded, RouteLocationNormalizedLoadedGeneric } from '@cabloy/vue-router';
 import type { IRouterViewSlotParams, IRouteViewComponentMeta } from '../types/routerView.js';
+import { nextTick } from 'vue';
 import { BeanControllerBase } from 'zova';
 import { routerViewKey } from './const.js';
 
@@ -54,7 +55,9 @@ export class BeanRouterViewBase extends BeanControllerBase implements IRouterVie
     // tab
     const componentMeta: IRouteViewComponentMeta = { tabKey, componentKey, fullPath, keepAlive };
     // onRender
-    this.onRender(componentMeta);
+    nextTick(() => {
+      this.onRender(componentMeta);
+    });
     return componentMeta;
   }
 
