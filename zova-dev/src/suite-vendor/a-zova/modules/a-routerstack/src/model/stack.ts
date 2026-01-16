@@ -8,6 +8,7 @@ import { ModelStackOptions, ModelStackOptionsBase, RouteTab, RouteTabTransient }
 export interface IModelOptionsStack extends IDecoratorModelOptions, ModelStackOptionsBase {}
 
 @Model<IModelOptionsStack>({
+  enableSelector: true,
   max: -1,
 })
 export class ModelStack extends BeanModelBase {
@@ -15,7 +16,8 @@ export class ModelStack extends BeanModelBase {
   tabs: RouteTab[];
   keepAliveInclude: string[];
 
-  protected async __init__(_scene: string, options: ModelStackOptions) {
+  protected async __init__(scene: string, options?: ModelStackOptions) {
+    await super.__init__(scene);
     this.bean._setBean('$$modelStack', this);
     // options
     this.stackOptions = deepExtend({}, this.$onionOptions, options);

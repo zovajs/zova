@@ -10,7 +10,9 @@ const __schemaRefPrefix = '#/components/schemas/';
 
 export interface IModelOptionsSdk extends IDecoratorModelOptions {}
 
-@Model<IModelOptionsSdk>()
+@Model<IModelOptionsSdk>({
+  enableSelector: true,
+})
 export class ModelSdk extends BeanModelBase {
   private _eventSsrHmrReload: TypeEventOff;
 
@@ -24,6 +26,7 @@ export class ModelSdk extends BeanModelBase {
 
   protected async __init__(locale: keyof ILocaleRecord) {
     if (!locale) throw new Error('locale not specified');
+    await super.__init__(locale);
     // event
     if (process.env.CLIENT && this.sys.env.SSR_HMR === 'true') {
       this._eventSsrHmrReload = this.sys.meta.event.on('a-ssrhmr:reloadModelSdk', async (_data, next) => {
