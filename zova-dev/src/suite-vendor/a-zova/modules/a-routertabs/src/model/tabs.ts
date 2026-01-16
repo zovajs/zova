@@ -27,6 +27,18 @@ export class ModelTabs extends BeanModelBase {
     this.bean._setBean('$$modelTabs', this);
     // options
     this.tabsOptions = deepExtend({}, this.$onionOptions, options);
+    // computed
+    this.tabCurrentIndex = useComputed(() => {
+      const [index] = this.findTab(this.tabCurrentKey);
+      return index;
+    });
+    this.tabCurrent = useComputed(() => {
+      const [, tab] = this.findTab(this.tabCurrentKey);
+      return tab;
+    });
+    this.keepAliveInclude = useComputed(() => {
+      return this._getKeepAliveInclude();
+    });
     // tabs
     const queryOptionsTabs: UseQueryOptions<RouteTab[]> = {
       queryKey: ['tabs'],
@@ -46,18 +58,6 @@ export class ModelTabs extends BeanModelBase {
     } else {
       this.tabCurrentKey = this.$useStateMem(queryOptionsTabCurrentKey);
     }
-    // computed
-    this.tabCurrentIndex = useComputed(() => {
-      const [index] = this.findTab(this.tabCurrentKey);
-      return index;
-    });
-    this.tabCurrent = useComputed(() => {
-      const [, tab] = this.findTab(this.tabCurrentKey);
-      return tab;
-    });
-    this.keepAliveInclude = useComputed(() => {
-      return this._getKeepAliveInclude();
-    });
   }
 
   // need not async
