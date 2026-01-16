@@ -2,7 +2,7 @@ import type { IDecoratorModelOptions, UseQueryOptions } from 'zova-module-a-mode
 import { RouteLocationNormalizedLoadedGeneric } from '@cabloy/vue-router';
 import { mutate } from 'mutate-on-copy';
 import { deepExtend, useComputed } from 'zova';
-import { BeanModelBase, Model } from 'zova-module-a-model';
+import { $QueryAutoLoad, BeanModelBase, Model } from 'zova-module-a-model';
 import { IRouteViewComponentItem } from 'zova-module-a-router';
 import { ModelTabsOptions, ModelTabsOptionsBase, RouteTab, RouteTabTransient } from '../types/tabs.js';
 
@@ -15,8 +15,9 @@ export interface IModelOptionsTabs extends IDecoratorModelOptions, ModelTabsOpti
   persister: false,
 })
 export class ModelTabs extends BeanModelBase {
+  private _tabs: RouteTab[];
   tabsOptions: ModelTabsOptions;
-  tabs: RouteTab[];
+  // tabs: RouteTab[];
   tabCurrentKey?: string;
   tabCurrentIndex: number;
   tabCurrent?: RouteTab;
@@ -45,9 +46,9 @@ export class ModelTabs extends BeanModelBase {
       meta: { defaultData: this.tabsOptions.getInitialTabs() ?? [] },
     };
     if (this.tabsOptions.persister) {
-      this.tabs = this.$useStateLocal(queryOptionsTabs);
+      await $QueryAutoLoad(() => this.queryTabs);
     } else {
-      this.tabs = this.$useStateMem(queryOptionsTabs);
+      this._tabs = this.$useStateMem(queryOptionsTabs);
     }
     // tabCurrentKey
     const queryOptionsTabCurrentKey: UseQueryOptions<string> = {
@@ -57,6 +58,32 @@ export class ModelTabs extends BeanModelBase {
       this.tabCurrentKey = this.$useStateLocal(queryOptionsTabCurrentKey);
     } else {
       this.tabCurrentKey = this.$useStateMem(queryOptionsTabCurrentKey);
+    }
+  }
+
+  private get queryTabs() {
+    return this.$useStateData({
+      queryKey: ['tabs'],
+      queryFn: async () => {
+        return this.tabsOptions.getInitialTabs() ?? [];
+      },
+      'staleTime':Infinity,
+    });
+  }
+
+  get tabs() {
+    if (this.tabsOptions.persister) {
+      return this.queryTabs.data as RouteTab[];
+    } else {
+      return this._tabs;
+    }
+  }
+
+  set tabs(value) {
+    if (this.tabsOptions.persister) {
+      this.$setQueryData(['tabs'],value,false)
+    } else {
+      this._tabs = value;
     }
   }
 
@@ -151,6 +178,7 @@ export class ModelTabs extends BeanModelBase {
     const [index, tab] = this.findTab(tabKey);
     if (index === -1 || !tab) return false;
     // indexItem
+    if(!tab.items) return false;
     const indexItem = tab.items.findIndex(item => item.componentKey === componentKey);
     if (indexItem === -1) return false;
     if (tab.items.length === 1 && !tab.affix) {
@@ -265,7 +293,7 @@ export class ModelTabs extends BeanModelBase {
     if (maxItems < 1) maxItems = 1;
     while (true) {
       const [_, tab] = this.findTab(tabKey);
-      if (!tab) break;
+      if (!tab || !tab.items) break;
       const ignoreCount = tab.items.filter(item => item.componentKey === tabKey).length;
       if (tab.items.length - ignoreCount <= maxItems) break;
       let componentKey: string | undefined;

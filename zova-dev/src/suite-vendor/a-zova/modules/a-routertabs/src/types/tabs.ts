@@ -19,7 +19,7 @@ export interface RouteTabInitial extends RouteTabBase {
 export interface RouteTabTransient extends IRouteViewComponentMeta {}
 
 export interface RouteTab extends RouteTabBase {
-  items: IRouteViewComponentItem[];
+  items?: IRouteViewComponentItem[];
   updatedAt: number;
   info: RouteTabInfo;
 }
