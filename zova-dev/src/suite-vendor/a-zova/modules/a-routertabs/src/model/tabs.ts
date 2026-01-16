@@ -2,7 +2,7 @@ import type { IDecoratorModelOptions, UseQueryOptions } from 'zova-module-a-mode
 import { RouteLocationNormalizedLoadedGeneric } from '@cabloy/vue-router';
 import { mutate } from 'mutate-on-copy';
 import { deepExtend, useComputed } from 'zova';
-import { $QueryAutoLoad, BeanModelBase, Model } from 'zova-module-a-model';
+import { BeanModelBase, Model } from 'zova-module-a-model';
 import { IRouteViewComponentItem } from 'zova-module-a-router';
 import { ModelTabsOptions, ModelTabsOptionsBase, RouteTab, RouteTabTransient } from '../types/tabs.js';
 
@@ -15,9 +15,8 @@ export interface IModelOptionsTabs extends IDecoratorModelOptions, ModelTabsOpti
   persister: false,
 })
 export class ModelTabs extends BeanModelBase {
-  private _tabs: RouteTab[];
   tabsOptions: ModelTabsOptions;
-  // tabs: RouteTab[];
+  tabs: RouteTab[];
   tabCurrentKey?: string;
   tabCurrentIndex: number;
   tabCurrent?: RouteTab;
@@ -46,9 +45,9 @@ export class ModelTabs extends BeanModelBase {
       meta: { defaultData: this.tabsOptions.getInitialTabs() ?? [] },
     };
     if (this.tabsOptions.persister) {
-      await $QueryAutoLoad(() => this.queryTabs);
+      this.tabs = this.$useStateLocal(queryOptionsTabs);
     } else {
-      this._tabs = this.$useStateMem(queryOptionsTabs);
+      this.tabs = this.$useStateMem(queryOptionsTabs);
     }
     // tabCurrentKey
     const queryOptionsTabCurrentKey: UseQueryOptions<string> = {
@@ -58,32 +57,6 @@ export class ModelTabs extends BeanModelBase {
       this.tabCurrentKey = this.$useStateLocal(queryOptionsTabCurrentKey);
     } else {
       this.tabCurrentKey = this.$useStateMem(queryOptionsTabCurrentKey);
-    }
-  }
-
-  private get queryTabs() {
-    return this.$useStateData({
-      queryKey: ['tabs'],
-      queryFn: async () => {
-        return this.tabsOptions.getInitialTabs() ?? [];
-      },
-      staleTime: Infinity,
-    });
-  }
-
-  get tabs() {
-    if (this.tabsOptions.persister) {
-      return this.queryTabs.data as RouteTab[];
-    } else {
-      return this._tabs;
-    }
-  }
-
-  set tabs(value) {
-    if (this.tabsOptions.persister) {
-      this.$setQueryData(['tabs'], value, false);
-    } else {
-      this._tabs = value;
     }
   }
 
