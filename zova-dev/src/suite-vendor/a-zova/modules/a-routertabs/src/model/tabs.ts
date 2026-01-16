@@ -73,10 +73,8 @@ export class ModelTabs extends BeanModelBase {
   // need not async
   addTab(tab: RouteTabTransient, affix?: boolean): boolean {
     const res = this._addTab(tab, affix);
-    if (res) {
-      // current
-      this.tabCurrentKey = tab.tabKey;
-    }
+    // current
+    this.tabCurrentKey = res ? tab.tabKey : undefined;
     return res;
   }
 
@@ -121,7 +119,7 @@ export class ModelTabs extends BeanModelBase {
     } else {
       // update
       if (!this._checkIfTabNeedUpdate(tabOld!, tab)) {
-        return false;
+        return true;
       }
       this.updateTab(tab);
       // need not await
