@@ -12,11 +12,9 @@ export class RenderTabs extends BeanRenderBase {
     if (!$$modelTabs) return;
     const domTabs: VNode[] = [];
     for (const tab of $$modelTabs.tabs) {
-      const tabKey = tab.tabKey;
+      const { tabKey, info } = tab;
       const className = tabKey === $$modelTabs.tabCurrentKey ? 'tab tab-active text-primary' : 'tab';
-      const menuItem = this.$$modelMenu.findMenuItem({ link: tabKey });
-      if (!menuItem) continue;
-      const titleLocal = this.$text(menuItem?.title || '');
+      const titleLocal = this.$text(info?.title || '');
       const domTab = (
         <a
           key={tabKey}
@@ -26,7 +24,7 @@ export class RenderTabs extends BeanRenderBase {
             $$modelTabs.activeTab(tabKey);
           }}
         >
-          {!!menuItem?.icon && <ZIcon name={menuItem?.icon as any} width="24" height="24"></ZIcon>}
+          {!!info?.icon && <ZIcon name={info?.icon as any} width="24" height="24"></ZIcon>}
           {titleLocal}
           {!tab.affix && (
             <ZIcon

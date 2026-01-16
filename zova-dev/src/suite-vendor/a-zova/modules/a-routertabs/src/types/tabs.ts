@@ -32,6 +32,6 @@ export interface ModelTabsOptionsBase {
 }
 
 export interface ModelTabsOptions extends ModelTabsOptionsBase {
-  getInitialTabs: () => RouteTabInitial[] | undefined;
-  getTabInfo: (tabKey: string) => RouteTabInfo | undefined;
+  getInitialTabs?: () => RouteTabInitial[] | undefined;
+  getTabInfo?: (tabKey: string) => RouteTabInfo | undefined;
 }

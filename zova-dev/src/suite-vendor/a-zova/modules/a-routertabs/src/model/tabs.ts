@@ -43,7 +43,7 @@ export class ModelTabs extends BeanModelBase {
     const queryOptionsTabs: UseQueryOptions<RouteTab[]> = {
       queryKey: ['tabs'],
       meta: {
-        defaultData: this.tabsOptions.getInitialTabs() ?? [],
+        defaultData: this._getInitialTabs(),
         persister: {
           storageKeySimplify: false,
         },
@@ -87,7 +87,7 @@ export class ModelTabs extends BeanModelBase {
     // tab
     const [index, tabOld] = this.findTab(tabKey);
     // tabInfo
-    const tabInfo = tabOld?.info ?? this.tabsOptions.getTabInfo(tabKey);
+    const tabInfo = this.tabsOptions.getTabInfo?.(tabKey) ?? tabOld?.info;
     if (!tabInfo) return false;
     // tabs
     if (index === -1) {
@@ -144,14 +144,14 @@ export class ModelTabs extends BeanModelBase {
         tabKeyActiveNext = this.tabs[tabCurrentIndex]?.tabKey;
       }
     }
+    // active next: must before this.tabs = mutate, avoid to addTab again
+    if (tabKeyActiveNext) {
+      await this.activeTab(tabKeyActiveNext);
+    }
     // tabs
     this.tabs = mutate(this.tabs, copyState => {
       copyState.splice(index, 1);
     });
-    // active next
-    if (tabKeyActiveNext) {
-      await this.activeTab(tabKeyActiveNext);
-    }
   }
 
   async deleteTabItem(tabKey?: string, componentKey?: string, noActiveNext?: boolean) {
@@ -331,5 +331,16 @@ export class ModelTabs extends BeanModelBase {
       }
     }
     return include;
+  }
+
+  private _getInitialTabs() {
+    const tabs = this.tabsOptions.getInitialTabs?.() ?? [];
+    if (!this.tabsOptions.getTabInfo) return tabs;
+    return tabs.map(tab => {
+      return {
+        ...tab,
+        info: this.tabsOptions.getTabInfo?.(tab.tabKey) ?? tab.info,
+      };
+    });
   }
 }
