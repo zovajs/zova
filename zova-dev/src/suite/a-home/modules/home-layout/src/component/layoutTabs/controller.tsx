@@ -1,5 +1,4 @@
-import type { ModelTabsOptions } from 'zova-module-a-tabs';
-import type { ModelTabs } from 'zova-module-a-tabs';
+import type { ModelTabs, ModelTabsOptions } from 'zova-module-a-routertabs';
 import { BeanControllerBase, Use } from 'zova';
 import { Controller } from 'zova-module-a-bean';
 import { $QueryAutoLoad } from 'zova-module-a-model';
