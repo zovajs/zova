@@ -10,7 +10,6 @@ export interface RouteTabInfo {
 export interface RouteTabBase {
   tabKey: string;
   affix?: boolean;
-  affixAfter?: boolean;
 }
 
 export interface RouteTabInitial extends RouteTabBase {
