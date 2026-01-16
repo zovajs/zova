@@ -42,7 +42,12 @@ export class ModelTabs extends BeanModelBase {
     // tabs
     const queryOptionsTabs: UseQueryOptions<RouteTab[]> = {
       queryKey: ['tabs'],
-      meta: { defaultData: this.tabsOptions.getInitialTabs() ?? [] },
+      meta: {
+        defaultData: this.tabsOptions.getInitialTabs() ?? [],
+        persister: {
+          storageKeySimplify: false,
+        },
+      },
     };
     if (this.tabsOptions.persister) {
       this.tabs = this.$useStateLocal(queryOptionsTabs);
@@ -52,6 +57,11 @@ export class ModelTabs extends BeanModelBase {
     // tabCurrentKey
     const queryOptionsTabCurrentKey: UseQueryOptions<string> = {
       queryKey: ['tabCurrentKey'],
+      meta: {
+        persister: {
+          storageKeySimplify: false,
+        },
+      },
     };
     if (this.tabsOptions.persister) {
       this.tabCurrentKey = this.$useStateLocal(queryOptionsTabCurrentKey);
