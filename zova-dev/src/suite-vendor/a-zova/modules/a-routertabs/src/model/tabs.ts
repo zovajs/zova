@@ -12,7 +12,7 @@ export interface IModelOptionsTabs extends IDecoratorModelOptions, ModelTabsOpti
   enableSelector: true,
   max: -1,
   maxItems: -1,
-  persister: false,
+  cache: false,
 })
 export class ModelTabs extends BeanModelBase {
   tabsOptions: ModelTabsOptions;
@@ -49,7 +49,7 @@ export class ModelTabs extends BeanModelBase {
         },
       },
     };
-    if (this.tabsOptions.persister) {
+    if (this.tabsOptions.cache) {
       this.tabs = this.$useStateLocal(queryOptionsTabs);
     } else {
       this.tabs = this.$useStateMem(queryOptionsTabs);
@@ -63,7 +63,7 @@ export class ModelTabs extends BeanModelBase {
         },
       },
     };
-    if (this.tabsOptions.persister) {
+    if (this.tabsOptions.cache) {
       this.tabCurrentKey = this.$useStateLocal(queryOptionsTabCurrentKey);
     } else {
       this.tabCurrentKey = this.$useStateMem(queryOptionsTabCurrentKey);

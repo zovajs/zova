@@ -28,7 +28,7 @@ export interface ModelTabsOptionsBase {
   /** -1: infinite 0: Affix Only  */
   max?: number;
   maxItems?: number;
-  persister?: boolean;
+  cache?: boolean;
 }
 
 export interface ModelTabsOptions extends ModelTabsOptionsBase {
