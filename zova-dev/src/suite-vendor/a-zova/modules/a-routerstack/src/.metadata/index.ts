@@ -1,4 +1,46 @@
 /* eslint-disable */
+/** controller: begin */
+export * from '../component/routerViewStack/controller.jsx';
+
+import 'zova';
+declare module 'zova' {
+  
+  
+}
+declare module 'zova-module-a-routerstack' {
+  
+        export interface ControllerRouterViewStack {
+          /** @internal */
+          get scope(): ScopeModuleARouterstack;
+        } 
+}
+/** controller: end */
+/** controller: begin */
+import { ControllerRouterViewStack } from '../component/routerViewStack/controller.jsx';
+import 'zova';
+declare module 'zova' {
+  export interface IBeanRecordLocal {
+    'a-routerstack.controller.routerViewStack': ControllerRouterViewStack;
+  }
+}
+/** controller: end */
+
+/** components: begin */
+export * from './component/routerViewStack.js';
+import { ZRouterViewStack } from './component/routerViewStack.js';
+export const components = {
+  'routerViewStack': ZRouterViewStack,
+};
+import 'zova';
+declare module 'zova' {
+export interface IComponentRecord {
+  'a-routerstack:routerViewStack': ControllerRouterViewStack;
+}
+export interface IZovaComponentRecord {
+  'a-routerstack:routerViewStack': typeof ZRouterViewStack;
+}
+}
+/** components: end */
 /** model: begin */
 export * from '../model/stack.js';
 import { IModelOptionsStack } from '../model/stack.js';
