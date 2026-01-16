@@ -67,7 +67,7 @@ export class ModelTabs extends BeanModelBase {
       queryFn: async () => {
         return this.tabsOptions.getInitialTabs() ?? [];
       },
-      'staleTime':Infinity,
+      staleTime: Infinity,
     });
   }
 
@@ -81,7 +81,7 @@ export class ModelTabs extends BeanModelBase {
 
   set tabs(value) {
     if (this.tabsOptions.persister) {
-      this.$setQueryData(['tabs'],value,false)
+      this.$setQueryData(['tabs'], value, false);
     } else {
       this._tabs = value;
     }
@@ -178,7 +178,7 @@ export class ModelTabs extends BeanModelBase {
     const [index, tab] = this.findTab(tabKey);
     if (index === -1 || !tab) return false;
     // indexItem
-    if(!tab.items) return false;
+    if (!tab.items) return false;
     const indexItem = tab.items.findIndex(item => item.componentKey === componentKey);
     if (indexItem === -1) return false;
     if (tab.items.length === 1 && !tab.affix) {
