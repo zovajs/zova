@@ -1,9 +1,19 @@
+import type { TypeControllerInnerProps } from 'zova';
+import type { ControllerRouterViewStackProps } from '../../component/routerViewStack/controller.jsx';
 import { defineComponent } from 'vue';
 import { prepareComponentOptions, useController } from 'zova';
 import { ControllerRouterViewStack } from '../../component/routerViewStack/controller.jsx';
 
-export interface TypeControllerRouterViewStackPublicProps {
+export type TypeControllerRouterViewStackPublicProps = {
   controllerRef?: (ref: ControllerRouterViewStack) => void;
+} & ControllerRouterViewStackProps;
+
+type ControllerInnerProps =
+  TypeControllerInnerProps<ControllerRouterViewStackProps, keyof typeof ControllerRouterViewStack.$propsDefault>;
+declare module 'zova-module-a-routerstack' {
+  export interface ControllerRouterViewStack {
+    $props: ControllerInnerProps;
+  }
 }
 
 export const ZRouterViewStack = defineComponent(

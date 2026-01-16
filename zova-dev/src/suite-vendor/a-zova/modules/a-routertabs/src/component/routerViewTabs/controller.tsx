@@ -28,11 +28,11 @@ export class ControllerRouterViewTabs extends BeanRouterViewBase {
 
   protected render() {
     const slots = {
-      default: component => {
+      default: (component: IRouterViewSlotParams) => {
         const componentMeta = this.prepareComponentMeta(component);
         return h(Transition, null, {
           default: () => {
-            const vnode = h(component.Component, {
+            const vnode = h(component.Component as any, {
               key: componentMeta.componentKey,
             });
             cast(vnode).zovaHostProviders = { [pageRouteKey]: component.route };
