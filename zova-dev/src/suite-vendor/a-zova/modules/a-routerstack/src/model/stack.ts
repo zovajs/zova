@@ -1,13 +1,15 @@
 import type { IDecoratorModelOptions } from 'zova-module-a-model';
 import { RouteLocationNormalizedLoadedGeneric } from '@cabloy/vue-router';
 import { mutate } from 'mutate-on-copy';
-import { useComputed } from 'zova';
+import { deepExtend, useComputed } from 'zova';
 import { BeanModelBase, Model } from 'zova-module-a-model';
-import { ModelStackOptions, RouteTab, RouteTabTransient } from '../types/stack.js';
+import { ModelStackOptions, ModelStackOptionsBase, RouteTab, RouteTabTransient } from '../types/stack.js';
 
-export interface IModelOptionsStack extends IDecoratorModelOptions {}
+export interface IModelOptionsStack extends IDecoratorModelOptions, ModelStackOptionsBase {}
 
-@Model<IModelOptionsStack>()
+@Model<IModelOptionsStack>({
+  max: -1,
+})
 export class ModelStack extends BeanModelBase {
   stackOptions: ModelStackOptions;
   tabs: RouteTab[];
@@ -16,7 +18,7 @@ export class ModelStack extends BeanModelBase {
   protected async __init__(_scene: string, options: ModelStackOptions) {
     this.bean._setBean('$$modelStack', this);
     // options
-    this.stackOptions = this._prepareStackOptions(options);
+    this.stackOptions = deepExtend({}, this.$onionOptions, options);
     // tabs: always []
     this.tabs = [];
     // computed
@@ -118,13 +120,6 @@ export class ModelStack extends BeanModelBase {
     );
     if (recentTabIndex > -1) return true;
     return false;
-  }
-
-  private _prepareStackOptions(options: ModelStackOptions): ModelStackOptions {
-    return {
-      ...options,
-      max: options.max ?? -1,
-    };
   }
 
   private _getKeepAliveInclude() {

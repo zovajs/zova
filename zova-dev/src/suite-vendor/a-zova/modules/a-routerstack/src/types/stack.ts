@@ -1,9 +1,11 @@
 import type { IRouteViewComponentMeta } from 'zova-module-a-router';
 
-export interface ModelStackOptions {
+export interface ModelStackOptionsBase {
   /** -1: infinite 0: Affix Only  */
   max?: number;
 }
+
+export interface ModelStackOptions extends ModelStackOptionsBase {}
 
 export interface RouteTabBase {
   tabKey: string;
