@@ -1,14 +1,18 @@
 import type { IDecoratorModelOptions, UseQueryOptions } from 'zova-module-a-model';
 import { RouteLocationNormalizedLoadedGeneric } from '@cabloy/vue-router';
 import { mutate } from 'mutate-on-copy';
-import { useComputed } from 'zova';
+import { deepExtend, useComputed } from 'zova';
 import { BeanModelBase, Model } from 'zova-module-a-model';
 import { IRouteViewComponentItem } from 'zova-module-a-router';
-import { ModelTabsOptions, RouteTab, RouteTabTransient } from '../types/tabs.js';
+import { ModelTabsOptions, ModelTabsOptionsBase, RouteTab, RouteTabTransient } from '../types/tabs.js';
 
-export interface IModelOptionsTabs extends IDecoratorModelOptions {}
+export interface IModelOptionsTabs extends IDecoratorModelOptions, ModelTabsOptionsBase {}
 
-@Model<IModelOptionsTabs>()
+@Model<IModelOptionsTabs>({
+  max: -1,
+  maxItems: -1,
+  persister: false,
+})
 export class ModelTabs extends BeanModelBase {
   tabsOptions: ModelTabsOptions;
   tabs: RouteTab[];
@@ -20,7 +24,7 @@ export class ModelTabs extends BeanModelBase {
   protected async __init__(_scene: string, options: ModelTabsOptions) {
     this.bean._setBean('$$modelTabs', this);
     // options
-    this.tabsOptions = this._prepareTabsOptions(options);
+    this.tabsOptions = deepExtend({}, this.$onionOptions, options);
     // tabs
     const queryOptionsTabs: UseQueryOptions<RouteTab[]> = {
       queryKey: ['tabs'],
@@ -299,17 +303,6 @@ export class ModelTabs extends BeanModelBase {
     );
     if (recentTabIndex > -1) return true;
     return false;
-  }
-
-  private _prepareTabsOptions(options: ModelTabsOptions): ModelTabsOptions {
-    return {
-      ...options,
-      max: options.max ?? -1,
-      maxItems: options.maxItems ?? -1,
-      persister: !!options.persister,
-      // should not check process.env.CLIENT, client/server should be same
-      // persister: process.env.CLIENT && !!options.persister,
-    };
   }
 
   private _getKeepAliveInclude() {

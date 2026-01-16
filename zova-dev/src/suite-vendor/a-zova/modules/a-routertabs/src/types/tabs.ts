@@ -24,11 +24,14 @@ export interface RouteTab extends RouteTabBase {
   info: RouteTabInfo;
 }
 
-export interface ModelTabsOptions {
+export interface ModelTabsOptionsBase {
   /** -1: infinite 0: Affix Only  */
   max?: number;
   maxItems?: number;
   persister?: boolean;
+}
+
+export interface ModelTabsOptions extends ModelTabsOptionsBase {
   getInitialTabs: () => RouteTabInitial[] | undefined;
   getTabInfo: (tabKey: string) => RouteTabInfo | undefined;
 }
