@@ -7,9 +7,9 @@ import { __ThisModule__ } from '../../.metadata/this.js';
 export class BeanModelLast extends BeanBase {
   public selector: string;
 
-  protected async __init__(selector?: string) {
+  protected async __init__(selector?: unknown) {
     if (this.$onionOptions?.enableSelector) {
-      this.selector = selector ?? '';
+      this.selector = selector as string ?? '';
     }
   }
 
