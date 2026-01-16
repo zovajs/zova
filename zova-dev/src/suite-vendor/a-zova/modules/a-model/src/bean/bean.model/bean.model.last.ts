@@ -5,13 +5,16 @@ import { BeanBase, cast } from 'zova';
 import { __ThisModule__ } from '../../.metadata/this.js';
 
 export class BeanModelLast extends BeanBase {
-  public selector?: string;
+  public selector: string;
 
   protected async __init__(selector?: string) {
-    const options = this.$onionOptions as IDecoratorModelOptions | undefined;
-    if (options?.enableSelector) {
+    if (this.$onionOptions?.enableSelector) {
       this.selector = selector ?? '';
     }
+  }
+
+  public get $onionOptions(): IDecoratorModelOptions | undefined {
+    return super.$onionOptions as IDecoratorModelOptions | undefined;
   }
 
   get self() {
