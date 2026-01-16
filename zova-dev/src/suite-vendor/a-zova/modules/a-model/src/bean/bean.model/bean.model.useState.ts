@@ -9,7 +9,7 @@ import type {
 } from '@tanstack/vue-query';
 import type { UnwrapNestedRefs } from 'vue';
 import type { DefinedInitialQueryOptions, UndefinedInitialQueryOptions } from '../../common/types.js';
-import type { UseQueryComputedOptions } from '../../types/query.js';
+import type { QueryMetaPersister, UseQueryComputedOptions } from '../../types/query.js';
 import {
   hashKey,
 } from '@tanstack/vue-query';
@@ -52,7 +52,8 @@ export class BeanModelUseState extends BeanModelUseQuery {
             deserializeDefault: (value?: string) => {
               return this.$deserializeLocal(value);
             },
-          },
+            storageKeySimplify: true,
+          } satisfies QueryMetaPersister,
         },
       },
       options,
@@ -60,7 +61,7 @@ export class BeanModelUseState extends BeanModelUseQuery {
         enabled: false,
         staleTime: Infinity,
         meta: {
-          persister: { storage: 'local', sync: true },
+          persister: { storage: 'local', sync: true } satisfies QueryMetaPersister,
         },
       },
     );
@@ -115,7 +116,8 @@ export class BeanModelUseState extends BeanModelUseQuery {
               const cookieType = options.meta.persister.cookieType;
               return this.$deserializeCookie(this._cookieCoerce(value, cookieType));
             },
-          },
+            storageKeySimplify: true,
+          } satisfies QueryMetaPersister,
         },
       },
       options,
@@ -123,7 +125,7 @@ export class BeanModelUseState extends BeanModelUseQuery {
         enabled: false,
         staleTime: Infinity,
         meta: {
-          persister: { storage: 'cookie', sync: true },
+          persister: { storage: 'cookie', sync: true } satisfies QueryMetaPersister,
         },
       },
     );

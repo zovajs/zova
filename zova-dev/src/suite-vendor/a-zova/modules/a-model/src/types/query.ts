@@ -75,6 +75,8 @@ export interface QueryMetaPersister {
   sync?: boolean;
   /** default is db if async, local if sync */
   storage?: QueryMetaPersisterStorage;
+  /** default is false if db, true if local/cookie */
+  storageKeySimplify?: boolean;
   /** default is 24 hours */
   maxAge?: MaxAgeTime;
   /**

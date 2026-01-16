@@ -122,7 +122,7 @@ export class BeanModelPersister extends BeanModelLast {
   }
 
   protected _getPersisterStorageKey(options: QueryMetaPersister, query: Query) {
-    if (['cookie', 'local'].includes(options.storage!)) return String(query.queryKey[query.queryKey.length - 1]);
+    if (options.storageKeySimplify) return String(query.queryKey[query.queryKey.length - 1]);
     return `${options.prefix}-${query.queryHash}`;
   }
 
