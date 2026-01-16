@@ -18,7 +18,7 @@ export class ControllerRouterViewTabs extends BeanRouterViewBase {
     return await this.$$modelTabs.backRoute(route);
   }
 
-  protected onRender(componentMeta: IRouteViewComponentMeta, _component: IRouterViewSlotParams): void {
+  protected onRender(componentMeta: IRouteViewComponentMeta): void {
     this.$$modelTabs.addTab(componentMeta);
   }
 
