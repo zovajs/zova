@@ -113,7 +113,7 @@ export class ZovaJsx extends BeanSimple {
       }
     }
     if (_isZovaComponent) {
-      Component = this.app.meta.component.getZovaComponent(Component as never);
+      Component = this.sys.meta.component.getZovaComponent(Component as never);
     }
     const vnode = h(Component, props, children);
     if (_isZovaComponent && hostProviders) {
