@@ -3,7 +3,7 @@ import { withModifiers } from 'vue';
 import { BeanRenderBase, ClientOnly } from 'zova';
 import { Render } from 'zova-module-a-bean';
 import { ZIcon } from 'zova-module-a-icon';
-import { ZRouterViewTabs } from 'zova-module-a-tabs';
+import { ZRouterViewTabs } from 'zova-module-a-routertabs';
 
 @Render()
 export class RenderTabs extends BeanRenderBase {
