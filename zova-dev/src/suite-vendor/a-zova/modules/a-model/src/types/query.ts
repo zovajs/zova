@@ -56,7 +56,7 @@ export type QueryMetaPersisterStorage = 'cookie' | 'local' | 'db' | undefined;
 
 export type QueryMetaPersisterCookieType = 'auto' | 'boolean' | 'number' | 'date' | 'string' | undefined;
 
-export type StateType = 'local' | 'cookie' | 'mem' | 'data';
+export type StateType = 'db' | 'local' | 'cookie' | 'mem' | 'data';
 
 export type StaleTime = number;
 export type StaleTimeFunction<TQueryFnData = unknown, TError = DefaultError, TData = TQueryFnData, TQueryKey extends QueryKey = QueryKey> =
