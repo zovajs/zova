@@ -24,6 +24,10 @@ export class BeanModelUseState extends BeanModelUseQuery {
   private [SymbolUseQueries]: Record<string, unknown> = {};
   private [SymbolUseComputeds]: Record<string, unknown> = {};
 
+  async $loadStateDb<T>(dbData: T): Promise<T> {
+    return await dbData;
+  }
+
   $useStateDb<
     TQueryFnData = unknown,
     TError = DefaultError,

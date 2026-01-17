@@ -62,8 +62,8 @@ export class ModelTabs extends BeanModelBase {
     }
     // load cache
     if (this.tabsOptions.cache) {
-      await this.tabCurrentKey;
-      await this.tabs;
+      await this.$loadStateDb(this.tabCurrentKey);
+      await this.$loadStateDb(this.tabs);
     }
   }
 
