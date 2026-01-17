@@ -8,47 +8,6 @@ import { resolveMaxAgeTime } from '../../types/index.js';
 import { BeanModelLast } from './bean.model.last.js';
 
 export class BeanModelPersister extends BeanModelLast {
-  $persisterLoadAsync<T>(queryKey: QueryKey): T | undefined {
-    const query = this.self.$queryFind({ queryKey });
-    if (!query) return undefined;
-    const options = this._adjustPersisterOptions(query.meta?.persister);
-    if (!options) return undefined;
-    const storage = this._getPersisterStorage(options, query);
-    if (!storage) return undefined;
-    const storageKey = this._getPersisterStorageKey(options, query);
-    try {
-      const storedData = storage.getItem(storageKey);
-      if (!storedData) return undefined;
-      const persistedQuery = options.deserialize
-        ? options.deserialize(storedData as string, options.deserializeDefault!)
-        : options.deserializeDefault!(storedData as string);
-
-      if (persistedQuery.state.dataUpdatedAt) {
-        const queryAge = Date.now() - persistedQuery.state.dataUpdatedAt;
-        const expired = queryAge > (resolveMaxAgeTime(options.maxAge, query) ?? Infinity);
-        const busted = persistedQuery.buster !== options.buster;
-        if (expired || busted) {
-          storage.removeItem(storageKey);
-        } else {
-          // Set proper updatedAt, since resolving in the first pass overrides those values
-          query.setState({
-            dataUpdatedAt: persistedQuery.state.dataUpdatedAt,
-            errorUpdatedAt: persistedQuery.state.errorUpdatedAt,
-          });
-          return persistedQuery.state.data as T;
-        }
-      } else {
-        storage.removeItem(storageKey);
-      }
-    } catch (err) {
-      if (process.env.NODE_ENV === 'development') {
-        console.error(err);
-        console.warn('Encountered an error attempting to restore query cache from persisted location.');
-      }
-      storage.removeItem(storageKey);
-    }
-  }
-
   $persisterLoad<T>(queryKey: QueryKey): T | undefined {
     const query = this.self.$queryFind({ queryKey });
     if (!query) return undefined;
