@@ -40,7 +40,8 @@ export class RenderPageLogin extends BeanRenderBase {
     return (
       <ZForm
         data={this.user}
-        zodSchema={this.zodSchema}
+        schema={this.$$modelPassport.schemaLogin}
+        // zodSchema={this.zodSchema}
         formProvider={{ behaviors: { formFieldLayout: 'home-user:formFieldLayoutLogin' } }}
         onSubmit={data => {
           return this.onSubmitLogin(data);

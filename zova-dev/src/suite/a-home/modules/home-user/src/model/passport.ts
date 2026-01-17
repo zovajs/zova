@@ -1,6 +1,7 @@
 import type { IJwtInfo } from 'zova-module-a-interceptor';
 import type { IDecoratorModelOptions } from 'zova-module-a-model';
 import type { ApiApiHomeUserPassportloginRequestBody, ApiApiHomeUserPassportloginResponseBody } from 'zova-module-home-api';
+import { SchemaObject } from 'openapi3-ts/oas31';
 import { BeanModelBase, Model } from 'zova-module-a-model';
 
 export interface IModelOptionsPassport extends IDecoratorModelOptions {}
@@ -11,8 +12,12 @@ export class ModelPassport extends BeanModelBase {
   jwt?: ApiApiHomeUserPassportloginResponseBody['jwt'];
   accessToken?: string;
   expireTime?: number;
+  schemaLogin?: SchemaObject;
 
   protected async __init__() {
+    this.schemaLogin = this.$useComputed(() => {
+      return this.$apiSchema.homeUserPassport.login.requestBody;
+    });
     this.passport = process.env.CLIENT
       ? this.$useStateLocal({ queryKey: ['passport'] })
       : this.$useStateMem({ queryKey: ['passport'] });

@@ -4,6 +4,12 @@
   "version": "5.0.0",
   "title": "a-openapi",
   "zovaModule": {
+    "capabilities": {
+      "monkey": true
+    },
+    "dependencies": {
+      "a-model": "5.0.0"
+    },
     "globalDependencies": {
       "openapi3-ts": true
     },
@@ -17,9 +23,6 @@
           "output": "openapi3"
         }
       ]
-    },
-    "capabilities": {
-      "monkey": true
     }
   },
   "description": "",

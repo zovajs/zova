@@ -8,7 +8,9 @@
       "monkey": true
     },
     "dependencies": {
-      "a-fetch": "5.0.0"
+      "a-fetch": "5.0.0",
+      "a-openapi": "5.0.0",
+      "a-model": "5.0.0"
     },
     "onions": {
       "api": {
