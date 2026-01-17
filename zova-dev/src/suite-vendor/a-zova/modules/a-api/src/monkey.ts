@@ -26,14 +26,8 @@ export class Monkey extends BeanSimple implements IMonkeyModule, IMonkeyBeanInit
   async moduleLoading(_module: IModule) {}
   async moduleLoaded(module: IModule) {
     // load apis
-    const onions = appResource.scenes.api?.[module.info.relativeName];
-    if (onions) {
-      const scope = this.bean.scope(module.info.relativeName as any) as any;
-      for (const beanFullName in onions) {
-        const beanOptions = onions[beanFullName];
-        scope.api[beanOptions.name] = await this.bean._getBean(beanFullName as any, true);
-      }
-    }
+    await this._loadApis(module, 'api');
+    await this._loadApis(module, 'apiSchema');
     // self
     if (this._moduleSelf === module) {
       const scopeSelf: ScopeModule = await this.bean.getScope(__ThisModule__);
@@ -52,5 +46,24 @@ export class Monkey extends BeanSimple implements IMonkeyModule, IMonkeyBeanInit
         return cast(self.app.bean.scope(self._defaultModuleApi)).api;
       },
     });
+    // $apiSchema
+    bean.defineProperty(beanInstance, '$apiSchema', {
+      enumerable: false,
+      configurable: true,
+      get() {
+        return cast(self.app.bean.scope(self._defaultModuleApi)).apiSchema;
+      },
+    });
+  }
+
+  private async _loadApis(module: IModule, sceneName: 'api' | 'apiSchema') {
+    const onions = appResource.scenes[sceneName]?.[module.info.relativeName];
+    if (onions) {
+      const scope = this.bean.scope(module.info.relativeName as any) as any;
+      for (const beanFullName in onions) {
+        const beanOptions = onions[beanFullName];
+        scope[sceneName][beanOptions.name] = await this.bean._getBean(beanFullName as any, true);
+      }
+    }
   }
 }
