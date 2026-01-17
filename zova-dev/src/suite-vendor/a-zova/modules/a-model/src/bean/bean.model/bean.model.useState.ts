@@ -3,6 +3,7 @@ import type {
   Query,
   QueryClient,
   QueryKey,
+  QueryMeta,
   UseQueryDefinedReturnType,
   UseQueryOptions,
   UseQueryReturnType,
@@ -43,14 +44,21 @@ export class BeanModelUseState extends BeanModelUseQuery {
   >(options: UseQueryOptions<TQueryFnData, TError, TData, TQueryFnData, TQueryKey>, queryClient?: QueryClient): TData;
   $useStateDb(options, queryClient) {
     options = deepExtend(
-      {},
+      {
+        meta: {
+          maxAge: Infinity,
+        } satisfies QueryMeta,
+      },
       options,
       {
         enabled: false,
         staleTime: Infinity,
         meta: {
-          persister: { storage: 'db', sync: false } satisfies QueryMetaPersister,
-        },
+          ssr: {
+            dehydrate: false,
+          },
+          persister: { storage: 'db', sync: false },
+        } satisfies QueryMeta,
       },
     );
     const self = this;
@@ -96,8 +104,8 @@ export class BeanModelUseState extends BeanModelUseQuery {
               return this.$deserializeLocal(value);
             },
             storageKeySimplify: true,
-          } satisfies QueryMetaPersister,
-        },
+          },
+        } satisfies QueryMeta,
       },
       options,
       {
@@ -160,8 +168,8 @@ export class BeanModelUseState extends BeanModelUseQuery {
               return this.$deserializeCookie(this._cookieCoerce(value, cookieType));
             },
             storageKeySimplify: true,
-          } satisfies QueryMetaPersister,
-        },
+          },
+        } satisfies QueryMeta,
       },
       options,
       {

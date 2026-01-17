@@ -58,13 +58,11 @@ export class ModelTabs extends BeanModelBase {
       queryKey: ['tabs'],
       meta: {
         defaultData: this._getInitialTabs(),
-        persister: {
-          storageKeySimplify: false,
-        },
       },
     };
     if (this.tabsOptions.cache) {
-      this.tabs = this.$useStateLocal(queryOptionsTabs);
+      this.tabs = this.$useStateDb(queryOptionsTabs);
+      await this.tabs;
     } else {
       this.tabs = this.$useStateMem(queryOptionsTabs);
     }
