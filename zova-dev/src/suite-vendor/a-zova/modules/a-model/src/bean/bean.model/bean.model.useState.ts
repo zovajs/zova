@@ -57,7 +57,7 @@ export class BeanModelUseState extends BeanModelUseQuery {
     return useCustomRef(() => {
       return {
         get() {
-          return undefined;
+          return self._handleSyncDataGet(options, queryClient, true);
         },
         set(value) {
           self._handleSyncDataSet(options, queryClient, true, value);
@@ -292,22 +292,22 @@ export class BeanModelUseState extends BeanModelUseQuery {
   private _handleSyncDataGet(options, queryClient, persister) {
     const queryKey = options.queryKey;
     const query = this.$useStateData(options, queryClient);
-    if (query.data === undefined) {
-      if (persister) {
-        const data = this.$persisterLoad(queryKey);
-        if (data !== undefined) {
-          this.$setQueryData(queryKey, data, false);
-        }
+    if (query.data !== undefined) return query.data;
+    if (!options.meta.persister.sync) return query.data;
+    if (persister) {
+      const data = this.$persisterLoad(queryKey);
+      if (data !== undefined) {
+        this.$setQueryData(queryKey, data, false);
       }
-      if (query.data === undefined) {
-        let defaultData = options.meta?.defaultData;
-        if (typeof defaultData === 'function') {
-          defaultData = defaultData();
-        }
-        if (defaultData !== undefined) {
-          // need not persister save
-          this.$setQueryData(queryKey, defaultData, false);
-        }
+    }
+    if (query.data === undefined) {
+      let defaultData = options.meta?.defaultData;
+      if (typeof defaultData === 'function') {
+        defaultData = defaultData();
+      }
+      if (defaultData !== undefined) {
+        // need not persister save
+        this.$setQueryData(queryKey, defaultData, false);
       }
     }
     return query.data;
