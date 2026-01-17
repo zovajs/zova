@@ -8,7 +8,38 @@ import { resolveMaxAgeTime } from '../../types/index.js';
 import { BeanModelLast } from './bean.model.last.js';
 
 export class BeanModelPersister extends BeanModelLast {
-  $persisterLoad<T>(queryKey: QueryKey): T | undefined {
+  private _persisterLoad_inner<T>(
+    storage: Storage,
+    storageKey: string,
+    storedData: any,
+    query: Query,
+    options: QueryMetaPersister,
+  ): T | undefined {
+    if (!storedData) return undefined;
+    const persistedQuery = options.deserialize
+      ? options.deserialize(storedData as string, options.deserializeDefault!)
+      : options.deserializeDefault!(storedData as string);
+
+    if (persistedQuery.state.dataUpdatedAt) {
+      const queryAge = Date.now() - persistedQuery.state.dataUpdatedAt;
+      const expired = queryAge > (resolveMaxAgeTime(options.maxAge, query) ?? Infinity);
+      const busted = persistedQuery.buster !== options.buster;
+      if (expired || busted) {
+        storage.removeItem(storageKey);
+      } else {
+        // Set proper updatedAt, since resolving in the first pass overrides those values
+        query.setState({
+          dataUpdatedAt: persistedQuery.state.dataUpdatedAt,
+          errorUpdatedAt: persistedQuery.state.errorUpdatedAt,
+        });
+        return persistedQuery.state.data as T;
+      }
+    } else {
+      storage.removeItem(storageKey);
+    }
+  }
+
+  $persisterLoad<T>(queryKey: QueryKey): Promise<T | undefined> | T | undefined {
     const query = this.self.$queryFind({ queryKey });
     if (!query) return undefined;
     const options = this._adjustPersisterOptions(query.meta?.persister);
@@ -18,27 +49,12 @@ export class BeanModelPersister extends BeanModelLast {
     const storageKey = this._getPersisterStorageKey(options, query);
     try {
       const storedData = storage.getItem(storageKey);
-      if (!storedData) return undefined;
-      const persistedQuery = options.deserialize
-        ? options.deserialize(storedData as string, options.deserializeDefault!)
-        : options.deserializeDefault!(storedData as string);
-
-      if (persistedQuery.state.dataUpdatedAt) {
-        const queryAge = Date.now() - persistedQuery.state.dataUpdatedAt;
-        const expired = queryAge > (resolveMaxAgeTime(options.maxAge, query) ?? Infinity);
-        const busted = persistedQuery.buster !== options.buster;
-        if (expired || busted) {
-          storage.removeItem(storageKey);
-        } else {
-          // Set proper updatedAt, since resolving in the first pass overrides those values
-          query.setState({
-            dataUpdatedAt: persistedQuery.state.dataUpdatedAt,
-            errorUpdatedAt: persistedQuery.state.errorUpdatedAt,
-          });
-          return persistedQuery.state.data as T;
-        }
+      if (options.sync) {
+        return this._persisterLoad_inner(storage as any, storageKey, storedData, query, options);
       } else {
-        storage.removeItem(storageKey);
+        return (storedData as Promise<T>).then(storedData => {
+          return this._persisterLoad_inner(storage as any, storageKey, storedData, query, options);
+        });
       }
     } catch (err) {
       if (process.env.NODE_ENV === 'development') {

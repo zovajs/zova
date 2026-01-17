@@ -299,7 +299,7 @@ export class BeanModelUseState extends BeanModelUseQuery {
     const queryKey = options.queryKey;
     const query = this.$useStateData(options, queryClient);
     if (persister) {
-      const data = await this.$persisterLoadAsync(queryKey);
+      const data = await this.$persisterLoad(queryKey);
       if (data !== undefined) {
         this.$setQueryData(queryKey, data, false);
       }
