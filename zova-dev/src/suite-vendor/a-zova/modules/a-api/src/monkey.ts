@@ -26,8 +26,10 @@ export class Monkey extends BeanSimple implements IMonkeyModule, IMonkeyBeanInit
   async moduleLoading(_module: IModule) {}
   async moduleLoaded(module: IModule) {
     // load apis
-    await this._loadApis(module, 'api');
-    await this._loadApis(module, 'apiSchema');
+    const promises: Promise<any>[] = [];
+    promises.push(this._loadApis(module, 'api'));
+    promises.push(this._loadApis(module, 'apiSchema'));
+    await Promise.all(promises);
     // self
     if (this._moduleSelf === module) {
       const scopeSelf: ScopeModule = await this.bean.getScope(__ThisModule__);
@@ -51,12 +53,18 @@ export class Monkey extends BeanSimple implements IMonkeyModule, IMonkeyBeanInit
 
   private async _loadApis(module: IModule, sceneName: 'api' | 'apiSchema') {
     const onions = appResource.scenes[sceneName]?.[module.info.relativeName];
-    if (onions) {
-      const scope = this.bean.scope(module.info.relativeName as any) as any;
-      for (const beanFullName in onions) {
-        const beanOptions = onions[beanFullName];
-        scope[sceneName][beanOptions.name] = await this.bean._getBean(beanFullName as any, true);
-      }
+    if (!onions) return;
+    const scope = this.bean.scope(module.info.relativeName as any) as any;
+    const beanFullNames = Object.keys(onions);
+    const promises: Promise<any>[] = [];
+    for (const beanFullName of beanFullNames) {
+      promises.push(this.bean._getBean(beanFullName as any, true));
+    }
+    const values = await Promise.all(promises);
+    for (let index = 0; index < beanFullNames.length; index++) {
+      const beanFullName = beanFullNames[index];
+      const beanOptions = onions[beanFullName];
+      scope[sceneName][beanOptions.name] = values[index];
     }
   }
 }
