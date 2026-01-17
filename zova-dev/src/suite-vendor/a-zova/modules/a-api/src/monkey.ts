@@ -38,22 +38,15 @@ export class Monkey extends BeanSimple implements IMonkeyModule, IMonkeyBeanInit
 
   async beanInit(bean: BeanContainer, beanInstance: BeanBase) {
     const self = this;
-    // $api
-    bean.defineProperty(beanInstance, '$api', {
-      enumerable: false,
-      configurable: true,
-      get() {
-        return cast(self.app.bean.scope(self._defaultModuleApi)).api;
-      },
-    });
-    // $apiSchema
-    bean.defineProperty(beanInstance, '$apiSchema', {
-      enumerable: false,
-      configurable: true,
-      get() {
-        return cast(self.app.bean.scope(self._defaultModuleApi)).apiSchema;
-      },
-    });
+    for (const sceneName of ['api', 'apiSchema']) {
+      bean.defineProperty(beanInstance, `$${sceneName}`, {
+        enumerable: false,
+        configurable: true,
+        get() {
+          return cast(self.app.bean.scope(self._defaultModuleApi))[sceneName];
+        },
+      });
+    }
   }
 
   private async _loadApis(module: IModule, sceneName: 'api' | 'apiSchema') {
