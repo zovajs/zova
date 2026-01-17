@@ -23,6 +23,49 @@ export class BeanModelUseState extends BeanModelUseQuery {
   private [SymbolUseQueries]: Record<string, unknown> = {};
   private [SymbolUseComputeds]: Record<string, unknown> = {};
 
+  $useStateDb<
+    TQueryFnData = unknown,
+    TError = DefaultError,
+    TData = TQueryFnData,
+    TQueryKey extends QueryKey = QueryKey,
+  >(options: UndefinedInitialQueryOptions<TQueryFnData, TError, TData, TQueryKey>, queryClient?: QueryClient): TData;
+  $useStateDb<
+    TQueryFnData = unknown,
+    TError = DefaultError,
+    TData = TQueryFnData,
+    TQueryKey extends QueryKey = QueryKey,
+  >(options: DefinedInitialQueryOptions<TQueryFnData, TError, TData, TQueryKey>, queryClient?: QueryClient): TData;
+  $useStateDb<
+    TQueryFnData = unknown,
+    TError = DefaultError,
+    TData = TQueryFnData,
+    TQueryKey extends QueryKey = QueryKey,
+  >(options: UseQueryOptions<TQueryFnData, TError, TData, TQueryFnData, TQueryKey>, queryClient?: QueryClient): TData;
+  $useStateDb(options, queryClient) {
+    options = deepExtend(
+      {},
+      options,
+      {
+        enabled: false,
+        staleTime: Infinity,
+        meta: {
+          persister: { storage: 'db', sync: false } satisfies QueryMetaPersister,
+        },
+      },
+    );
+    const self = this;
+    return useCustomRef(() => {
+      return {
+        get() {
+          return undefined;
+        },
+        set(value) {
+          self._handleSyncDataSet(options, queryClient, true, value);
+        },
+      };
+    });
+  }
+
   $useStateLocal<
     TQueryFnData = unknown,
     TError = DefaultError,
