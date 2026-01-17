@@ -42,14 +42,9 @@ export class ModelTabs extends BeanModelBase {
     // tabCurrentKey
     const queryOptionsTabCurrentKey: UseQueryOptions<string> = {
       queryKey: ['tabCurrentKey'],
-      meta: {
-        persister: {
-          storageKeySimplify: false,
-        },
-      },
     };
     if (this.tabsOptions.cache) {
-      this.tabCurrentKey = this.$useStateLocal(queryOptionsTabCurrentKey);
+      this.tabCurrentKey = this.$useStateDb(queryOptionsTabCurrentKey);
     } else {
       this.tabCurrentKey = this.$useStateMem(queryOptionsTabCurrentKey);
     }
@@ -62,9 +57,13 @@ export class ModelTabs extends BeanModelBase {
     };
     if (this.tabsOptions.cache) {
       this.tabs = this.$useStateDb(queryOptionsTabs);
-      await this.tabs;
     } else {
       this.tabs = this.$useStateMem(queryOptionsTabs);
+    }
+    // load cache
+    if (this.tabsOptions.cache) {
+      await this.tabCurrentKey;
+      await this.tabs;
     }
   }
 
