@@ -39,6 +39,20 @@ export class ModelTabs extends BeanModelBase {
     this.keepAliveInclude = useComputed(() => {
       return this._getKeepAliveInclude();
     });
+    // tabCurrentKey
+    const queryOptionsTabCurrentKey: UseQueryOptions<string> = {
+      queryKey: ['tabCurrentKey'],
+      meta: {
+        persister: {
+          storageKeySimplify: false,
+        },
+      },
+    };
+    if (this.tabsOptions.cache) {
+      this.tabCurrentKey = this.$useStateLocal(queryOptionsTabCurrentKey);
+    } else {
+      this.tabCurrentKey = this.$useStateMem(queryOptionsTabCurrentKey);
+    }
     // tabs
     const queryOptionsTabs: UseQueryOptions<RouteTab[]> = {
       queryKey: ['tabs'],
@@ -53,20 +67,6 @@ export class ModelTabs extends BeanModelBase {
       this.tabs = this.$useStateLocal(queryOptionsTabs);
     } else {
       this.tabs = this.$useStateMem(queryOptionsTabs);
-    }
-    // tabCurrentKey
-    const queryOptionsTabCurrentKey: UseQueryOptions<string> = {
-      queryKey: ['tabCurrentKey'],
-      meta: {
-        persister: {
-          storageKeySimplify: false,
-        },
-      },
-    };
-    if (this.tabsOptions.cache) {
-      this.tabCurrentKey = this.$useStateLocal(queryOptionsTabCurrentKey);
-    } else {
-      this.tabCurrentKey = this.$useStateMem(queryOptionsTabCurrentKey);
     }
   }
 
