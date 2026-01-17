@@ -50,7 +50,7 @@ export class BeanModelUseState extends BeanModelUseQuery {
     options = deepExtend(
       {
         meta: {
-          maxAge: Infinity,
+          maxAge: this.scopeSelf.config.persister.maxAge.local,
         } satisfies QueryMeta,
       },
       options,
