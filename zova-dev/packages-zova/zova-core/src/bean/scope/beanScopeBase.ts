@@ -9,6 +9,7 @@ const BeanModuleLocale = Symbol('BeanScopeBase#BeanModuleLocale');
 const BeanModuleConfig = Symbol('BeanScopeBase#BeanModuleConfig');
 const BeanModuleConstant = Symbol('BeanScopeBase#BeanModuleConstant');
 const BeanModuleApi = Symbol('BeanScopeBase#BeanModuleApi');
+const BeanModuleApiSchema = Symbol('BeanScopeBase#BeanModuleApiSchema');
 const BeanModuleUtil = Symbol('BeanScopeBase#BeanModuleUtil');
 
 export class BeanScopeBase extends BeanBaseSimple {
@@ -17,6 +18,7 @@ export class BeanScopeBase extends BeanBaseSimple {
   private [BeanModuleConfig]: unknown;
   private [BeanModuleConstant]: unknown;
   private [BeanModuleApi]: unknown;
+  private [BeanModuleApiSchema]: unknown;
   private [BeanModuleUtil]: BeanScopeUtil;
 
   get module(): IModule {
@@ -59,6 +61,13 @@ export class BeanScopeBase extends BeanBaseSimple {
         this[BeanModuleApi] = {};
       }
       return this[BeanModuleApi];
+    }
+    // apiSchema
+    if (prop === 'apiSchema') {
+      if (!this[BeanModuleApiSchema]) {
+        this[BeanModuleApiSchema] = {};
+      }
+      return this[BeanModuleApiSchema];
     }
     // util
     if (prop === 'util') {
