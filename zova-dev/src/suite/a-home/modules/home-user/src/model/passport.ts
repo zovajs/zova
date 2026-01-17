@@ -50,12 +50,12 @@ export class ModelPassport extends BeanModelBase {
       mutationFn: async () => {
         await this.$api.homeUserPassport.logout();
       },
-      onSuccess: () => {
-        // clear
-        this.$clear(); // not await
+      onSuccess: async () => {
         this._setPassportJwt();
         // page: login
-        this.app.$gotoLogin();
+        await this.app.$gotoLogin();
+        // clear: should after goto login page, avoid home-layout use some cache data
+        this.$clear(); // not await
       },
     });
   }

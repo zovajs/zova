@@ -46,7 +46,7 @@ export class MonkeySys extends BeanSimple implements IMonkeyModuleSys, IMonkeySy
       error.message = process.env.SERVER ? error.url : error.pagePath;
       throw error;
     };
-    app.$gotoPage = (pagePath: string, options?: IGotoPageOptions) => {
+    app.$gotoPage = async (pagePath: string, options?: IGotoPageOptions): Promise<void> => {
       const query = options?.query ?? {};
       // returnTo
       if (options?.returnTo) {
@@ -62,18 +62,23 @@ export class MonkeySys extends BeanSimple implements IMonkeyModuleSys, IMonkeySy
         return app.$redirect(pagePath);
       }
       // replace
-      nextTick(() => {
-        if (pagePath.startsWith('http://') || pagePath.startsWith('https://')) {
+      if (pagePath.startsWith('http://') || pagePath.startsWith('https://')) {
+        nextTick(() => {
           window.location.replace(pagePath);
-        } else {
-          app.meta.$router.replace(pagePath);
-        }
+        });
+        return;
+      }
+      return new Promise(resolve => {
+        nextTick(async () => {
+          await app.meta.$router.replace(pagePath);
+          resolve(undefined);
+        });
       });
     };
     app.$gotoHome = () => {
       return app.$gotoPage(app.sys.env.ROUTER_PAGE_HOME);
     };
-    app.$gotoLogin = (returnTo?: string, cause?: string) => {
+    app.$gotoLogin = async (returnTo?: string, cause?: string): Promise<void> => {
       if (!returnTo && cast(app.meta.$router.currentRoute)?.path === app.sys.env.ROUTER_PAGE_LOGIN) return;
       const query: any = {};
       if (cause) {

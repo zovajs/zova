@@ -28,10 +28,10 @@ declare module '@cabloy/vue-router' {
 declare module 'zova' {
   export interface ZovaApplication {
     $redirect(pagePath: string, status?: 301 | 302): never;
-    $gotoPage(pagePath: string, options?: IGotoPageOptions): void;
-    $gotoHome(): void;
-    $gotoLogin(returnTo?: string, cause?: string): void;
-    $gotoReturnTo(returnTo?: string): void;
+    $gotoPage(pagePath: string, options?: IGotoPageOptions): Promise<void>;
+    $gotoHome(): Promise<void>;
+    $gotoLogin(returnTo?: string, cause?: string): Promise<void>;
+    $gotoReturnTo(returnTo?: string): Promise<void>;
     $getCurrentPagePath(): string | undefined;
   }
 
