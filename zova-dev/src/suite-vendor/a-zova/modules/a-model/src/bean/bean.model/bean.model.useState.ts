@@ -10,7 +10,6 @@ import type {
 import type { UnwrapNestedRefs } from 'vue';
 import type { DefinedInitialQueryOptions, UndefinedInitialQueryOptions } from '../../common/types.js';
 import type { QueryMetaPersister, UseQueryComputedOptions } from '../../types/query.js';
-import { resolve } from 'node:path';
 import {
   hashKey,
 } from '@tanstack/vue-query';
@@ -300,7 +299,7 @@ export class BeanModelUseState extends BeanModelUseQuery {
     const queryKey = options.queryKey;
     const query = this.$useStateData(options, queryClient);
     if (persister) {
-      const data = this.$persisterLoad(queryKey);
+      const data = await this.$persisterLoadAsync(queryKey);
       if (data !== undefined) {
         this.$setQueryData(queryKey, data, false);
       }
