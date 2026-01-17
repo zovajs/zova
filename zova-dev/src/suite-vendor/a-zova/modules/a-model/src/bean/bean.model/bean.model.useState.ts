@@ -10,6 +10,7 @@ import type {
 import type { UnwrapNestedRefs } from 'vue';
 import type { DefinedInitialQueryOptions, UndefinedInitialQueryOptions } from '../../common/types.js';
 import type { QueryMetaPersister, UseQueryComputedOptions } from '../../types/query.js';
+import { resolve } from 'node:path';
 import {
   hashKey,
 } from '@tanstack/vue-query';
@@ -57,7 +58,7 @@ export class BeanModelUseState extends BeanModelUseQuery {
     return useCustomRef(() => {
       return {
         get() {
-          return self._handleSyncDataGet(options, queryClient, true);
+          return self._handleAsyncDataGet(options, queryClient, true);
         },
         set(value) {
           self._handleSyncDataSet(options, queryClient, true, value);
@@ -289,11 +290,15 @@ export class BeanModelUseState extends BeanModelUseQuery {
     return this[SymbolUseQueries][queryHash];
   }
 
-  private _handleSyncDataGet(options, queryClient, persister) {
-    const queryKey = options.queryKey;
+  private _handleAsyncDataGet(options, queryClient, persister) {
     const query = this.$useStateData(options, queryClient);
     if (query.data !== undefined) return query.data;
-    if (!options.meta.persister.sync) return query.data;
+    return this._handleAsyncDataGet_inner(options, queryClient, persister);
+  }
+
+  private async _handleAsyncDataGet_inner(options, queryClient, persister) {
+    const queryKey = options.queryKey;
+    const query = this.$useStateData(options, queryClient);
     if (persister) {
       const data = this.$persisterLoad(queryKey);
       if (data !== undefined) {
@@ -301,16 +306,36 @@ export class BeanModelUseState extends BeanModelUseQuery {
       }
     }
     if (query.data === undefined) {
-      let defaultData = options.meta?.defaultData;
-      if (typeof defaultData === 'function') {
-        defaultData = defaultData();
-      }
-      if (defaultData !== undefined) {
-        // need not persister save
-        this.$setQueryData(queryKey, defaultData, false);
-      }
+      this._handleSyncDataGet_defaultData(queryKey, options);
     }
     return query.data;
+  }
+
+  private _handleSyncDataGet(options, queryClient, persister) {
+    const queryKey = options.queryKey;
+    const query = this.$useStateData(options, queryClient);
+    if (query.data !== undefined) return query.data;
+    if (persister) {
+      const data = this.$persisterLoad(queryKey);
+      if (data !== undefined) {
+        this.$setQueryData(queryKey, data, false);
+      }
+    }
+    if (query.data === undefined) {
+      this._handleSyncDataGet_defaultData(queryKey, options);
+    }
+    return query.data;
+  }
+
+  private _handleSyncDataGet_defaultData(queryKey, options) {
+    let defaultData = options.meta?.defaultData;
+    if (typeof defaultData === 'function') {
+      defaultData = defaultData();
+    }
+    if (defaultData !== undefined) {
+      // need not persister save
+      this.$setQueryData(queryKey, defaultData, false);
+    }
   }
 
   private _handleSyncDataSet(options, queryClient, persister, value) {
