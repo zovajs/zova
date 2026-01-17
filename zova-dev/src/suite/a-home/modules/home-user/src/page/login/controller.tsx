@@ -1,4 +1,3 @@
-import z, { ZodObject } from 'zod';
 import { BeanControllerPageBase, Use } from 'zova';
 import { Controller } from 'zova-module-a-bean';
 import { TypeFormOnSubmitData } from 'zova-module-a-form';
@@ -19,13 +18,8 @@ export class ControllerPageLogin extends BeanControllerPageBase {
     },
   };
 
-  zodSchema: ZodObject<any>;
-
-  protected async __init__() {
-    this.zodSchema = z.object({
-      username: z.string().min(3),
-      password: z.string().min(6),
-    });
+  get schema() {
+    return this.$$modelPassport.schemaLogin;
   }
 
   async onSubmitLogin(data: TypeFormOnSubmitData<ApiApiHomeUserPassportloginRequestBody>) {
