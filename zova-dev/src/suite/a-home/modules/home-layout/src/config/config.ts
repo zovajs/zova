@@ -1,11 +1,7 @@
 import type { ZovaSys } from 'zova';
-import type { ModelTabsOptionsBase } from 'zova-module-a-routertabs';
-
-export type TypeConfigTabs = ModelTabsOptionsBase & { scene: string };
-export interface IConfig { tabs: TypeConfigTabs }
 
 export const config = (_sys: ZovaSys) => {
-  const config: IConfig = {
+  return {
     tabs: {
       scene: '',
       max: 6,
@@ -13,5 +9,4 @@ export const config = (_sys: ZovaSys) => {
       cache: true,
     },
   };
-  return config;
 };
