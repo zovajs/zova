@@ -1,4 +1,4 @@
-import type { IRouteViewComponentItem, IRouteViewComponentMeta } from 'zova-module-a-router';
+import type { IRouteViewRouteItem, IRouteViewRouteMeta } from 'zova-module-a-router';
 
 export interface RouteTabInfo {
   title?: string;
@@ -16,10 +16,10 @@ export interface RouteTabInitial extends RouteTabBase {
   info?: RouteTabInfo;
 }
 
-export interface RouteTabTransient extends IRouteViewComponentMeta {}
+export interface RouteTabTransient extends IRouteViewRouteMeta {}
 
 export interface RouteTab extends RouteTabBase {
-  items?: IRouteViewComponentItem[];
+  items?: IRouteViewRouteItem[];
   updatedAt: number;
   info: RouteTabInfo;
 }

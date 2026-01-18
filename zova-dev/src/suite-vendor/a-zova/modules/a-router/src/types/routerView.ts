@@ -1,17 +1,17 @@
 import type { RouteLocationNormalizedLoaded } from '@cabloy/vue-router';
 import type { ComponentInternalInstance } from 'vue';
 
-export interface IRouteViewComponentItemBase {
+export interface IRouteViewRouteItemBase {
   componentKey: string;
   fullPath: string;
   keepAlive?: boolean;
 }
 
-export interface IRouteViewComponentItem extends IRouteViewComponentItemBase {
+export interface IRouteViewRouteItem extends IRouteViewRouteItemBase {
   updatedAt: number;
 }
 
-export interface IRouteViewComponentMeta extends IRouteViewComponentItemBase {
+export interface IRouteViewRouteMeta extends IRouteViewRouteItemBase {
   tabKey: string;
 }
 

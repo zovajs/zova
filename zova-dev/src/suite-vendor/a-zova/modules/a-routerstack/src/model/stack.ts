@@ -3,6 +3,7 @@ import { RouteLocationNormalizedLoadedGeneric } from '@cabloy/vue-router';
 import { mutate } from 'mutate-on-copy';
 import { deepExtend, useComputed } from 'zova';
 import { BeanModelBase, Model } from 'zova-module-a-model';
+import { IRouteViewRouteMeta } from 'zova-module-a-router';
 import { ModelStackOptions, ModelStackOptionsBase, RouteTab, RouteTabTransient } from '../types/stack.js';
 
 export interface IModelOptionsStack extends IDecoratorModelOptions, ModelStackOptionsBase {}
@@ -27,6 +28,10 @@ export class ModelStack extends BeanModelBase {
     this.keepAliveInclude = useComputed(() => {
       return this._getKeepAliveInclude();
     });
+    // first route
+    if (this.$pageRoute) {
+      this.forwardRoute(this.$pageRoute)
+    }
   }
 
   addTab(tab: RouteTabTransient): boolean {
@@ -57,10 +62,6 @@ export class ModelStack extends BeanModelBase {
       this.updateTab(tab);
     }
     return true;
-  }
-
-  backRoute(route: RouteLocationNormalizedLoadedGeneric) {
-    this.deleteTab(route.fullPath);
   }
 
   findTab(tabKey?: string): [number, RouteTab | undefined] {
@@ -132,5 +133,21 @@ export class ModelStack extends BeanModelBase {
       }
     }
     return include;
+  }
+
+  backRoute(route: RouteLocationNormalizedLoadedGeneric) {
+    this.deleteTab(route.fullPath);
+  }
+
+  forwardRoute(route: RouteLocationNormalizedLoadedGeneric) {
+    const componentMeta = this.prepareRouteMeta(route);
+    this.addTab(componentMeta);
+  }
+
+  prepareRouteMeta(route: RouteLocationNormalizedLoadedGeneric): IRouteViewRouteMeta {
+    // fullPath
+    const fullPath = route.fullPath;
+    // tab
+    return { tabKey: fullPath, componentKey: fullPath, fullPath };
   }
 }

@@ -17,29 +17,6 @@ export class BeanRouterViewBase extends BeanControllerBase implements IRouterVie
     this.$router.removeRouterView(this);
   }
 
-  private _handleRouteProp(route: RouteLocationNormalizedLoaded, prop: 'componentKey' | 'tabKey'): string;
-  private _handleRouteProp(route: RouteLocationNormalizedLoaded, prop: 'keepAlive'): boolean;
-  private _handleRouteProp(route: RouteLocationNormalizedLoaded, prop) {
-    let value = route.meta[prop];
-    if (typeof value === 'function') {
-      value = value.call(this.app, route);
-    }
-    return value;
-  }
-
-  private __handleRoutePropComponentKey(route: RouteLocationNormalizedLoaded) {
-    const componentKey = this._handleRouteProp(route, 'componentKey');
-    if (componentKey) return componentKey;
-    // name
-    const name = this.$router.getRealRouteName(route.name);
-    // path
-    if (!name) return route.path;
-    // name: nameOnly
-    if (route.meta.componentKeyMode === 'nameOnly') return name;
-    // name: withParams
-    return route.path;
-  }
-
   public backRoute(_route: RouteLocationNormalizedLoadedGeneric) {
     return false;
   }
@@ -48,17 +25,8 @@ export class BeanRouterViewBase extends BeanControllerBase implements IRouterVie
     return false;
   }
 
-  protected prepareComponentMeta(route: RouteLocationNormalizedLoadedGeneric): IRouteViewComponentMeta {
-    // fullPath
-    const fullPath = route.fullPath;
-    // componentKey
-    const componentKey = this.__handleRoutePropComponentKey(route);
-    // tabKey
-    const tabKey = this._handleRouteProp(route, 'tabKey') || componentKey;
-    // keepAlive
-    const keepAlive = this._handleRouteProp(route, 'keepAlive');
-    // tab
-    return { tabKey, componentKey, fullPath, keepAlive };
+  protected prepareRouteMeta(_route: RouteLocationNormalizedLoadedGeneric): IRouteViewComponentMeta {
+    throw new Error('Not Implemented');
   }
 
   protected getKeepAliveInclude(): string[] | undefined {
@@ -68,11 +36,11 @@ export class BeanRouterViewBase extends BeanControllerBase implements IRouterVie
   protected render() {
     const slots = {
       default: (component: IRouterViewSlotParams) => {
-        const componentMeta = this.prepareComponentMeta(component.route);
+        const routeMeta = this.prepareRouteMeta(component.route);
         return h(Transition, null, {
           default: () => {
             const vnode = h(component.Component as any, {
-              key: componentMeta.componentKey,
+              key: routeMeta.componentKey,
             });
             cast(vnode).zovaHostProviders = { [pageRouteKey]: component.route };
             return [

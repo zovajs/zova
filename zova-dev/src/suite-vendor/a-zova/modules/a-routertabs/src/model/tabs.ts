@@ -1,9 +1,9 @@
 import type { IDecoratorModelOptions, UseQueryOptions } from 'zova-module-a-model';
-import { RouteLocationNormalizedLoadedGeneric } from '@cabloy/vue-router';
+import { RouteLocationNormalizedLoaded, RouteLocationNormalizedLoadedGeneric } from '@cabloy/vue-router';
 import { mutate } from 'mutate-on-copy';
 import { deepExtend, useComputed } from 'zova';
 import { BeanModelBase, Model } from 'zova-module-a-model';
-import { IRouteViewComponentItem } from 'zova-module-a-router';
+import { IRouteViewRouteItem, IRouteViewRouteMeta } from 'zova-module-a-router';
 import { ModelTabsOptions, ModelTabsOptionsBase, RouteTab, RouteTabTransient } from '../types/tabs.js';
 
 export interface IModelOptionsTabs extends IDecoratorModelOptions, ModelTabsOptionsBase {}
@@ -59,12 +59,15 @@ export class ModelTabs extends BeanModelBase {
       this.tabs = this.$useStateDb(queryOptionsTabs);
     } else {
       this.tabs = this.$useStateMem(queryOptionsTabs);
-      console.log(this.tabs);
     }
     // load cache
     if (this.tabsOptions.cache) {
       await this.$loadStateDb(this.tabCurrentKey);
       await this.$loadStateDb(this.tabs);
+    }
+    // first route
+    if (this.$pageRoute) {
+      this.forwardRoute(this.$pageRoute)
     }
   }
 
@@ -92,7 +95,7 @@ export class ModelTabs extends BeanModelBase {
     // tabs
     if (index === -1) {
       // new
-      const items: IRouteViewComponentItem[] = tab.componentKey
+      const items: IRouteViewRouteItem[] = tab.componentKey
         ? [{
             componentKey: tab.componentKey!,
             fullPath: tab.fullPath!,
@@ -192,18 +195,13 @@ export class ModelTabs extends BeanModelBase {
     return [];
   }
 
-  backRoute(route: RouteLocationNormalizedLoadedGeneric) {
-    const [tabKey, componentKey] = this.findTabItemByFullPath(route.fullPath);
-    this.deleteTabItem(tabKey, componentKey, true);
-  }
-
   updateTab(tab: Partial<RouteTabTransient>) {
     const tabKey = tab.tabKey!;
     const [index, tabOld] = this.findTab(tabKey);
     if (index === -1 || !tabOld) return;
-    const items: IRouteViewComponentItem[] = tabOld.items ? ([] as IRouteViewComponentItem[]).concat(tabOld.items) : [];
+    const items: IRouteViewRouteItem[] = tabOld.items ? ([] as IRouteViewRouteItem[]).concat(tabOld.items) : [];
     if (tab.componentKey) {
-      const tabItemNew: IRouteViewComponentItem = {
+      const tabItemNew: IRouteViewRouteItem = {
         componentKey: tab.componentKey,
         fullPath: tab.fullPath!,
         keepAlive: tab.keepAlive,
@@ -342,5 +340,51 @@ export class ModelTabs extends BeanModelBase {
         info: this.tabsOptions.getTabInfo?.(tab.tabKey) ?? tab.info,
       };
     });
+  }
+
+  backRoute(route: RouteLocationNormalizedLoadedGeneric) {
+    const [tabKey, componentKey] = this.findTabItemByFullPath(route.fullPath);
+    this.deleteTabItem(tabKey, componentKey, true);
+  }
+
+  forwardRoute(route: RouteLocationNormalizedLoadedGeneric) {
+    const routeMeta = this.prepareRouteMeta(route);
+    this.addTab(routeMeta);
+  }
+
+  prepareRouteMeta(route: RouteLocationNormalizedLoadedGeneric): IRouteViewRouteMeta {
+    // fullPath
+    const fullPath = route.fullPath;
+    // componentKey
+    const componentKey = this.__handleRoutePropComponentKey(route);
+    // tabKey
+    const tabKey = this._handleRouteProp(route, 'tabKey') || componentKey;
+    // keepAlive
+    const keepAlive = this._handleRouteProp(route, 'keepAlive');
+    // tab
+    return { tabKey, componentKey, fullPath, keepAlive };
+  }
+
+  private _handleRouteProp(route: RouteLocationNormalizedLoaded, prop: 'componentKey' | 'tabKey'): string;
+  private _handleRouteProp(route: RouteLocationNormalizedLoaded, prop: 'keepAlive'): boolean;
+  private _handleRouteProp(route: RouteLocationNormalizedLoaded, prop) {
+    let value = route.meta[prop];
+    if (typeof value === 'function') {
+      value = value.call(this.app, route);
+    }
+    return value;
+  }
+
+  private __handleRoutePropComponentKey(route: RouteLocationNormalizedLoaded) {
+    const componentKey = this._handleRouteProp(route, 'componentKey');
+    if (componentKey) return componentKey;
+    // name
+    const name = this.$router.getRealRouteName(route.name);
+    // path
+    if (!name) return route.path;
+    // name: nameOnly
+    if (route.meta.componentKeyMode === 'nameOnly') return name;
+    // name: withParams
+    return route.path;
   }
 }

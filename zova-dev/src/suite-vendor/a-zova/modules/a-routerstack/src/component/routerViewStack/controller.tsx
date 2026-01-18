@@ -2,7 +2,7 @@ import type { ModelStack } from '../../model/stack.js';
 import { RouteLocationNormalizedLoadedGeneric } from '@cabloy/vue-router';
 import { Use } from 'zova';
 import { Controller } from 'zova-module-a-bean';
-import { BeanRouterViewBase, IRouterViewPropsBase, IRouteViewComponentMeta } from 'zova-module-a-router';
+import { BeanRouterViewBase, IRouterViewPropsBase,  IRouteViewRouteMeta } from 'zova-module-a-router';
 
 export interface ControllerRouterViewStackProps extends IRouterViewPropsBase {}
 
@@ -19,19 +19,15 @@ export class ControllerRouterViewStack extends BeanRouterViewBase {
   }
 
   public forwardRoute(route: RouteLocationNormalizedLoadedGeneric) {
-    const componentMeta = this.prepareComponentMeta(route);
-    this.$$modelStack.addTab(componentMeta);
+    this.$$modelStack.forwardRoute(route);
     return true;
+  }
+
+  protected prepareRouteMeta(route: RouteLocationNormalizedLoadedGeneric): IRouteViewRouteMeta {
+    return this.$$modelStack.prepareRouteMeta(route);
   }
 
   protected getKeepAliveInclude(): string[] | undefined {
     return this.$$modelStack.keepAliveInclude;
-  }
-
-  protected prepareComponentMeta(route: RouteLocationNormalizedLoadedGeneric): IRouteViewComponentMeta {
-    // fullPath
-    const fullPath = route.fullPath;
-    // tab
-    return { tabKey: fullPath, componentKey: fullPath, fullPath };
   }
 }

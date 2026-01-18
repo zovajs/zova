@@ -2,7 +2,7 @@ import type { ModelTabs } from '../../model/tabs.js';
 import { RouteLocationNormalizedLoadedGeneric } from '@cabloy/vue-router';
 import { Use } from 'zova';
 import { Controller } from 'zova-module-a-bean';
-import { BeanRouterViewBase, IRouterViewPropsBase } from 'zova-module-a-router';
+import { BeanRouterViewBase, IRouterViewPropsBase, IRouteViewRouteMeta } from 'zova-module-a-router';
 
 export interface ControllerRouterViewTabsProps extends IRouterViewPropsBase {}
 
@@ -19,9 +19,12 @@ export class ControllerRouterViewTabs extends BeanRouterViewBase {
   }
 
   public forwardRoute(route: RouteLocationNormalizedLoadedGeneric) {
-    const componentMeta = this.prepareComponentMeta(route);
-    this.$$modelTabs.addTab(componentMeta);
+    this.$$modelTabs.forwardRoute(route);
     return true;
+  }
+
+  protected prepareRouteMeta(route: RouteLocationNormalizedLoadedGeneric): IRouteViewRouteMeta {
+    return this.$$modelTabs.prepareRouteMeta(route);
   }
 
   protected getKeepAliveInclude(): string[] | undefined {
