@@ -1,4 +1,4 @@
-import type { RouteComponent, RouteLocationMatched, RouteLocationNormalized, RouteLocationNormalizedLoaded, RouteLocationNormalizedLoadedGeneric, RouteRecordRaw } from '@cabloy/vue-router';
+import type { NavigationFailure, RouteComponent, RouteLocationMatched, RouteLocationNormalized, RouteLocationNormalizedLoaded, RouteLocationNormalizedLoadedGeneric, RouteRecordRaw } from '@cabloy/vue-router';
 import type { z } from 'zod';
 import type { TypeComponentLayoutRecord, ZovaApplication } from 'zova';
 import type { BeanRouter } from '../bean/bean.router.js';
@@ -12,6 +12,8 @@ export type IModuleRouteComponent = RouteComponent | Lazy<RouteComponent>;
 export type IModuleRoute = RouteRecordRaw;
 
 export type TypeComponentKeyMode = 'nameOnly' | 'withParams';
+
+export type TypeGotoPageResult = void | Promise<NavigationFailure | void | undefined>;
 
 declare module '@cabloy/vue-router' {
   interface RouteMeta {
@@ -28,10 +30,10 @@ declare module '@cabloy/vue-router' {
 declare module 'zova' {
   export interface ZovaApplication {
     $redirect(pagePath: string, status?: 301 | 302): never;
-    $gotoPage(pagePath: string, options?: IGotoPageOptions): Promise<void>;
-    $gotoHome(): Promise<void>;
-    $gotoLogin(returnTo?: string, cause?: string): Promise<void>;
-    $gotoReturnTo(returnTo?: string): Promise<void>;
+    $gotoPage(pagePath: string, options?: IGotoPageOptions): TypeGotoPageResult;
+    $gotoHome(): TypeGotoPageResult;
+    $gotoLogin(returnTo?: string, cause?: string): TypeGotoPageResult;
+    $gotoReturnTo(returnTo?: string): TypeGotoPageResult;
     $getCurrentPagePath(): string | undefined;
   }
 
