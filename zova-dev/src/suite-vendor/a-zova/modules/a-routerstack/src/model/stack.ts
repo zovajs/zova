@@ -60,7 +60,7 @@ export class ModelStack extends BeanModelBase {
   }
 
   backRoute(route: RouteLocationNormalizedLoadedGeneric) {
-    return this.deleteTab(route.fullPath);
+    this.deleteTab(route.fullPath);
   }
 
   findTab(tabKey?: string): [number, RouteTab | undefined] {

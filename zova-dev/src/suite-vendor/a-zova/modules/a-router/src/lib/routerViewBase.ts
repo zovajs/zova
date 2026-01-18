@@ -1,6 +1,5 @@
 import type { RouteLocationNormalizedLoaded, RouteLocationNormalizedLoadedGeneric } from '@cabloy/vue-router';
-import type { IRouterViewSlotParams, IRouteViewComponentMeta } from '../types/routerView.js';
-import { nextTick } from 'vue';
+import type { IRouteViewComponentMeta } from '../types/routerView.js';
 import { BeanControllerBase } from 'zova';
 import { routerViewKey } from './const.js';
 
@@ -47,29 +46,22 @@ export class BeanRouterViewBase extends BeanControllerBase implements IRouterVie
     return false;
   }
 
-  protected prepareComponentMeta(component: IRouterViewSlotParams): IRouteViewComponentMeta {
+  protected prepareComponentMeta(route: RouteLocationNormalizedLoadedGeneric): IRouteViewComponentMeta {
     // fullPath
-    const fullPath = component.route.fullPath;
+    const fullPath = route.fullPath;
     // componentKey
-    const componentKey = this.__handleRoutePropComponentKey(component.route);
+    const componentKey = this.__handleRoutePropComponentKey(route);
     // tabKey
-    const tabKey = this._handleRouteProp(component.route, 'tabKey') || componentKey;
+    const tabKey = this._handleRouteProp(route, 'tabKey') || componentKey;
     // keepAlive
-    const keepAlive = this._handleRouteProp(component.route, 'keepAlive');
+    const keepAlive = this._handleRouteProp(route, 'keepAlive');
     // tab
-    const componentMeta: IRouteViewComponentMeta = { tabKey, componentKey, fullPath, keepAlive };
-    // onRender: must use nextTick, avoid render deps on model.tabs
-    nextTick(() => {
-      this.onRender(componentMeta);
-    });
-    return componentMeta;
+    return { tabKey, componentKey, fullPath, keepAlive };
   }
 
   protected getKeepAliveInclude() {
     return this.onKeepAliveInclude();
   }
-
-  protected onRender(_componentMeta: IRouteViewComponentMeta): void {}
 
   protected onKeepAliveInclude(): string[] | undefined {
     throw new Error('Not Implemented');

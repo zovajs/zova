@@ -19,8 +19,10 @@ export class ControllerRouterViewTabs extends BeanRouterViewBase {
     return true;
   }
 
-  protected onRender(componentMeta: IRouteViewComponentMeta): void {
+  public forwardRoute(route: RouteLocationNormalizedLoadedGeneric) {
+    const componentMeta = this.prepareComponentMeta(route);
     this.$$modelTabs.addTab(componentMeta);
+    return true;
   }
 
   protected onKeepAliveInclude(): string[] | undefined {
@@ -30,7 +32,7 @@ export class ControllerRouterViewTabs extends BeanRouterViewBase {
   protected render() {
     const slots = {
       default: (component: IRouterViewSlotParams) => {
-        const componentMeta = this.prepareComponentMeta(component);
+        const componentMeta = this.prepareComponentMeta(component.route);
         return h(Transition, null, {
           default: () => {
             const vnode = h(component.Component as any, {

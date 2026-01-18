@@ -15,31 +15,31 @@ export class ControllerRouterViewStack extends BeanRouterViewBase {
   $$modelStack: ModelStack;
 
   public backRoute(route: RouteLocationNormalizedLoadedGeneric) {
-    return this.$$modelStack.backRoute(route);
+    this.$$modelStack.backRoute(route);
+    return true;
   }
 
-  protected onRender(componentMeta: IRouteViewComponentMeta): void {
+  public forwardRoute(route: RouteLocationNormalizedLoadedGeneric) {
+    const componentMeta = this.prepareComponentMeta(route);
     this.$$modelStack.addTab(componentMeta);
+    return true;
   }
 
   protected onKeepAliveInclude(): string[] | undefined {
     return this.$$modelStack.keepAliveInclude;
   }
 
-  protected prepareComponentMeta(component: IRouterViewSlotParams): IRouteViewComponentMeta {
+  protected prepareComponentMeta(route: RouteLocationNormalizedLoadedGeneric): IRouteViewComponentMeta {
     // fullPath
-    const fullPath = component.route.fullPath;
+    const fullPath = route.fullPath;
     // tab
-    const componentMeta: IRouteViewComponentMeta = { tabKey: fullPath, componentKey: fullPath, fullPath };
-    // onRender
-    this.onRender(componentMeta);
-    return componentMeta;
+    return { tabKey: fullPath, componentKey: fullPath, fullPath };
   }
 
   protected render() {
     const slots = {
       default: (component: IRouterViewSlotParams) => {
-        const componentMeta = this.prepareComponentMeta(component);
+        const componentMeta = this.prepareComponentMeta(component.route);
         return h(Transition, null, {
           default: () => {
             const vnode = h(component.Component as any, {
