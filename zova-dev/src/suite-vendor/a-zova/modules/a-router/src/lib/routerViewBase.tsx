@@ -1,5 +1,5 @@
-import type { RouteLocationNormalizedLoaded, RouteLocationNormalizedLoadedGeneric } from '@cabloy/vue-router';
-import type { IRouterViewSlotParams, IRouteViewComponentMeta } from '../types/routerView.js';
+import type { RouteLocationNormalizedLoadedGeneric } from '@cabloy/vue-router';
+import type { IRouterViewSlotParams, IRouteViewRouteMeta } from '../types/routerView.js';
 import { RouterView } from '@cabloy/vue-router';
 import { h, KeepAlive, Transition } from 'vue';
 import { BeanControllerBase, cast } from 'zova';
@@ -25,7 +25,7 @@ export class BeanRouterViewBase extends BeanControllerBase implements IRouterVie
     return false;
   }
 
-  protected prepareRouteMeta(_route: RouteLocationNormalizedLoadedGeneric): IRouteViewComponentMeta {
+  protected prepareRouteMeta(_route: RouteLocationNormalizedLoadedGeneric): IRouteViewRouteMeta {
     throw new Error('Not Implemented');
   }
 
