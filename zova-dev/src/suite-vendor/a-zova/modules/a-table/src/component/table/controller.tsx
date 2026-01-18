@@ -10,13 +10,13 @@ import { BeanControllerTableBase } from '../../lib/beanControllerTableBase.js';
 import { ITableProvider } from '../../types/providers.js';
 import { ITableMeta, TypeColumn, TypeTable, TypeTableGetColumnsNext } from '../../types/table.js';
 import { IDecoratorTableCellOptions, ITableCellRender, ITableCellRenderContext } from '../../types/tableCell.js';
-import { constColumnProps, ITableCellCelScope, ITableCellRenderColumnProps, ITableColumnCelScope, TypeTableCellRender } from '../../types/tableColumn.js';
+import { constColumnProps, ITableCellCelScope, ITableCellRenderColumnProps, ITableCelScope, ITableColumnCelScope, TypeTableCellRender } from '../../types/tableColumn.js';
 
 export interface ControllerTableProps<TData extends {} = {}> {
   data?: TData[];
   schema?: SchemaObject;
   tableProvider?: ITableProvider;
-  tableScope?: {};
+  tableScope?: ITableCelScope;
   getColumns?: (next: TypeTableGetColumnsNext<TData>, table: ControllerTable<TData>,) => (TypeColumn<TData>[]);
   onActionTable?: (action: keyof TypeResourceActionTableRecord, table: ControllerTable<TData>) => Promise<any> | undefined;
   onActionRow?: (action: keyof TypeResourceActionRowRecord, row: Row<TData>, table: ControllerTable<TData>) => Promise<any> | undefined;
