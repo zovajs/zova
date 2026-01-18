@@ -16,6 +16,7 @@ export interface ControllerTableProps<TData extends {} = {}> {
   data?: TData[];
   schema?: SchemaObject;
   tableProvider?: ITableProvider;
+  tableScope?: {};
   getColumns?: (next: TypeTableGetColumnsNext<TData>, table: ControllerTable<TData>,) => (TypeColumn<TData>[]);
   onActionTable?: (action: keyof TypeResourceActionTableRecord, table: ControllerTable<TData>) => Promise<any> | undefined;
   onActionRow?: (action: keyof TypeResourceActionRowRecord, row: Row<TData>, table: ControllerTable<TData>) => Promise<any> | undefined;
@@ -226,6 +227,7 @@ export class ControllerTable<TData extends {} = {}> extends BeanControllerTableB
 
   public getColumnScope(name: string, scopeExtra?: {}): ITableColumnCelScope {
     return {
+      ...this.$props.tableScope,
       name,
       property: this.getColumnProperty(name),
       ...scopeExtra,

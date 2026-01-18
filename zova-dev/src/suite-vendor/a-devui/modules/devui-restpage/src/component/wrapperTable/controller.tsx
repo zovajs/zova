@@ -54,6 +54,10 @@ export class ControllerWrapperTable<TData extends {} = {}> extends BeanControlle
     return this.$$modelResource.schemaRow;
   }
 
+  get tableScope() {
+    return { resource: this.$$modelResource.resource };
+  }
+
   getColumns(next: TypeTableGetColumnsNext<TData>, _$$table: ControllerTable<TData>) {
     const columns = next();
     if (!this.$$modelResource.permissions?.row?.update && !this.$$modelResource.permissions?.row?.delete) return columns;

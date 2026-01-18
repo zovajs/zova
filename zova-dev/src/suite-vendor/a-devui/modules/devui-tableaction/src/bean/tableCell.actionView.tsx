@@ -1,17 +1,12 @@
 import { BeanBase } from 'zova';
 import { IDecoratorTableCellOptions, ITableCellRender, ITableCellRenderContext, NextTableCellRender, TableCell } from 'zova-module-a-table';
 
-export interface ITableCellOptionsActionView extends IDecoratorTableCellOptions {
-  openTarget: 'popup' | 'page';
-}
+export interface ITableCellOptionsActionView extends IDecoratorTableCellOptions {}
 
-@TableCell<ITableCellOptionsActionView>({
-  // openTarget: 'popup',
-  openTarget: 'page',
-})
+@TableCell<ITableCellOptionsActionView>()
 export class TableCellActionView extends BeanBase implements ITableCellRender {
-  render(renderContext: ITableCellRenderContext, options: ITableCellOptionsActionView, next: NextTableCellRender) {
-    const { $$table, cellContext } = renderContext;
+  render(renderContext: ITableCellRenderContext, _options: ITableCellOptionsActionView, next: NextTableCellRender) {
+    const { $$table, cellContext, cellScope } = renderContext;
     const value = next();
     return (
       <a
@@ -20,15 +15,10 @@ export class TableCellActionView extends BeanBase implements ITableCellRender {
         onClick={e => {
           e.preventDefault();
           e.stopPropagation();
-          if (options.openTarget === 'page') {
-            // todo: resource
-            const url = $$table.$router.getPagePath('/rest/resource/:resource/:id/:formScene?', {
-              params: { resource: 'test-rest:product', id: cellContext.row.id },
-            });
-            $$table.$router.push(url);
-          } else {
-            $$table.onActionRow('view', cellContext.row);
-          }
+          const url = $$table.$router.getPagePath('/rest/resource/:resource/:id/:formScene?', {
+            params: { resource: cellScope.resource!, id: cellContext.row.id },
+          });
+          $$table.$router.push(url);
         }}
       >
         {value}

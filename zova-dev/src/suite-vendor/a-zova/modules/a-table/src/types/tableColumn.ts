@@ -13,7 +13,11 @@ export interface ITableCellRenderColumnProps {
   render: TypeTableCellRenderComponent;
 }
 
-export interface ITableColumnCelScope {
+export interface ITableCelScope {
+  resource?: string;
+}
+
+export interface ITableColumnCelScope extends ITableCelScope {
   name: string;
   property?: SchemaObject;
 }
