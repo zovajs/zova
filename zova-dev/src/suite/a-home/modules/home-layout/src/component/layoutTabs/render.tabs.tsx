@@ -42,11 +42,15 @@ export class RenderTabs extends BeanRenderBase {
       );
       domTabs.push(domTab);
     }
+    const domWrapper = (
+      <div role="tablist" class="tabs tabs-lifted">
+        {domTabs}
+      </div>
+    );
+    if (!this.$$modelTabs.cache) return domWrapper;
     return (
       <ClientOnly>
-        <div role="tablist" class="tabs tabs-lifted">
-          {domTabs}
-        </div>
+        {domWrapper}
       </ClientOnly>
     );
   }

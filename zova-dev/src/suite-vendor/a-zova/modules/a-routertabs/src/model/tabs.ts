@@ -67,6 +67,10 @@ export class ModelTabs extends BeanModelBase {
     }
   }
 
+  get cache() {
+    return this.tabsOptions.cache;
+  }
+
   // need not async
   addTab(tab: RouteTabTransient, affix?: boolean): boolean {
     const res = this._addTab(tab, affix);
