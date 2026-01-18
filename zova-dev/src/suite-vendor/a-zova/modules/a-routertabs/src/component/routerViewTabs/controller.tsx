@@ -1,9 +1,8 @@
 import type { ModelTabs } from '../../model/tabs.js';
-import { RouteLocationNormalizedLoadedGeneric, RouterView } from '@cabloy/vue-router';
-import { h, KeepAlive, Transition } from 'vue';
-import { cast, Use } from 'zova';
+import { RouteLocationNormalizedLoadedGeneric } from '@cabloy/vue-router';
+import { Use } from 'zova';
 import { Controller } from 'zova-module-a-bean';
-import { BeanRouterViewBase, IRouterViewPropsBase, IRouterViewSlotParams, IRouteViewComponentMeta, pageRouteKey } from 'zova-module-a-router';
+import { BeanRouterViewBase, IRouterViewPropsBase } from 'zova-module-a-router';
 
 export interface ControllerRouterViewTabsProps extends IRouterViewPropsBase {}
 
@@ -25,29 +24,7 @@ export class ControllerRouterViewTabs extends BeanRouterViewBase {
     return true;
   }
 
-  protected onKeepAliveInclude(): string[] | undefined {
+  protected getKeepAliveInclude(): string[] | undefined {
     return this.$$modelTabs.keepAliveInclude;
-  }
-
-  protected render() {
-    const slots = {
-      default: (component: IRouterViewSlotParams) => {
-        const componentMeta = this.prepareComponentMeta(component.route);
-        return h(Transition, null, {
-          default: () => {
-            const vnode = h(component.Component as any, {
-              key: componentMeta.componentKey,
-            });
-            cast(vnode).zovaHostProviders = { [pageRouteKey]: component.route };
-            return [
-              h(KeepAlive, {
-                include: this.getKeepAliveInclude(),
-              }, [vnode]),
-            ];
-          },
-        });
-      },
-    };
-    return <RouterView v-slots={slots}></RouterView>;
   }
 }

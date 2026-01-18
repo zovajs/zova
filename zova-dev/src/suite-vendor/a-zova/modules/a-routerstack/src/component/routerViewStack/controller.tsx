@@ -1,9 +1,8 @@
 import type { ModelStack } from '../../model/stack.js';
-import { RouteLocationNormalizedLoadedGeneric, RouterView } from '@cabloy/vue-router';
-import { h, KeepAlive, Transition } from 'vue';
-import { cast, Use } from 'zova';
+import { RouteLocationNormalizedLoadedGeneric } from '@cabloy/vue-router';
+import { Use } from 'zova';
 import { Controller } from 'zova-module-a-bean';
-import { BeanRouterViewBase, IRouterViewPropsBase, IRouterViewSlotParams, IRouteViewComponentMeta, pageRouteKey } from 'zova-module-a-router';
+import { BeanRouterViewBase, IRouterViewPropsBase, IRouteViewComponentMeta } from 'zova-module-a-router';
 
 export interface ControllerRouterViewStackProps extends IRouterViewPropsBase {}
 
@@ -25,7 +24,7 @@ export class ControllerRouterViewStack extends BeanRouterViewBase {
     return true;
   }
 
-  protected onKeepAliveInclude(): string[] | undefined {
+  protected getKeepAliveInclude(): string[] | undefined {
     return this.$$modelStack.keepAliveInclude;
   }
 
@@ -34,27 +33,5 @@ export class ControllerRouterViewStack extends BeanRouterViewBase {
     const fullPath = route.fullPath;
     // tab
     return { tabKey: fullPath, componentKey: fullPath, fullPath };
-  }
-
-  protected render() {
-    const slots = {
-      default: (component: IRouterViewSlotParams) => {
-        const componentMeta = this.prepareComponentMeta(component.route);
-        return h(Transition, null, {
-          default: () => {
-            const vnode = h(component.Component as any, {
-              key: componentMeta.componentKey,
-            });
-            cast(vnode).zovaHostProviders = { [pageRouteKey]: component.route };
-            return [
-              h(KeepAlive, {
-                include: this.getKeepAliveInclude(),
-              }, [vnode]),
-            ];
-          },
-        });
-      },
-    };
-    return <RouterView v-slots={slots}></RouterView>;
   }
 }
