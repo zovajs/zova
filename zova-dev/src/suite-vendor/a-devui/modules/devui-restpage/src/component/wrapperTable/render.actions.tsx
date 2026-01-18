@@ -14,7 +14,7 @@ export class RenderActions<TData extends {} = {}> extends BeanRenderBase {
             onClick={() => {
               // todo:
               const url = this.$router.getPagePath('/rest/resource/:resource/:id/:formScene?', {
-                params: { resource: 'test-rest:product', id: cellContext.row.id,formScene:'edit' },
+                params: { resource: this.tableScope.resource!, id: cellContext.row.id, formScene: 'edit' },
               });
               this.$router.push(url);
               // this.onActionRow('update', cellContext.row);
