@@ -1,3 +1,4 @@
+import type { ComponentPublicInstance } from 'vue';
 import type { IErrorObject } from '../../bean/resource/error/errorObject.js';
 import type { IErrorInstanceInfo, IModuleError } from '../../bean/resource/error/type.js';
 import { ErrorClass } from '../../bean/resource/error/errorClass.js';
@@ -9,14 +10,7 @@ export class AppError extends ErrorClass {
     await super.initialize();
     // errorHandler
     this.app.vue.config.errorHandler = (err, instance, info) => {
-      if (!this.app) {
-        // means destroyed
-        console.error(err);
-        return;
-      }
-      return this.app.meta.event.emitSync('app:errorHandler', { err: err as Error, instance, info }, data => {
-        return data.err;
-      });
+      return this._handleError(err as Error, instance, info);
     };
     // unhandledrejection
     if (process.env.CLIENT) {
@@ -52,5 +46,24 @@ export class AppError extends ErrorClass {
       // should not catch error
       this.app.vue.config.errorHandler!(error, errorInfo?.instance as any, errorInfo?.info || infoDefault) as unknown as Error;
     }
+  }
+
+  private _handleError(err: Error, instance: ComponentPublicInstance | null | undefined, info: string | undefined) {
+    if (!this.app) {
+      // means destroyed
+      console.error(err);
+      return;
+    }
+    const err2 = this.app.meta.event.emitSync('app:errorHandler', { err: err as Error, instance, info }, data => {
+      return data.err;
+    });
+    // only log error in client
+    if (process.env.CLIENT) {
+      if (!err2 || !(err2 instanceof Error)) return err2;
+      if (!info || !['useMutationData'].includes(info)) {
+        console.error(err2);
+      }
+    }
+    return err2;
   }
 }

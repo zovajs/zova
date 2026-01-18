@@ -184,7 +184,7 @@ export class Monkey
     });
   }
 
-  private _errorHandlerDefaultClient(err: ErrorSSR, data: IErrorHandlerEventData) {
+  private _errorHandlerDefaultClient(err: ErrorSSR, _data: IErrorHandlerEventData) {
     if (!process.env.CLIENT) return err;
     // client
     if ([301, 302].includes(Number(err.code))) {
@@ -200,10 +200,6 @@ export class Monkey
     if (err.code === 401) {
       this.app.$gotoLogin();
       return undefined;
-    }
-    // only log error in client
-    if (!data.info || !['useMutationData'].includes(data.info)) {
-      console.error(err);
     }
     // not handled
     return err;
