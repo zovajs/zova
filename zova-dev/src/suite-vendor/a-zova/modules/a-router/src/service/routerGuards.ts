@@ -1,4 +1,5 @@
 import * as ModuleInfo from '@cabloy/module-info';
+import { RouteLocationNormalizedLoadedGeneric } from '@cabloy/vue-router';
 import { Service } from 'zova-module-a-bean';
 import { BeanRouter } from '../bean/bean.router.js';
 import { BeanRouterGuardsBase } from '../bean/bean.routerGuardsBase.js';
@@ -7,6 +8,7 @@ import { NavigationDirection, NavigationInformation, NavigationType } from '../t
 @Service()
 export class ServiceRouterGuards extends BeanRouterGuardsBase {
   protected onRouterGuards(router: BeanRouter) {
+    const self = this;
     router.beforeEach(async to => {
       // match path
       let match = to.matched.find(item => item.aliasOf);
@@ -52,15 +54,24 @@ export class ServiceRouterGuards extends BeanRouterGuardsBase {
       // redirect again
       return to.fullPath;
     });
-    router.afterEach(function (_to, from, error) {
+    router.afterEach(function (to, from, error) {
       if (error) return;
-      const info: NavigationInformation = arguments[3];
-      if (!info) return;
-      const needBack = (info.type === NavigationType.pop && info.direction === NavigationDirection.back) ||
-        (info.type === NavigationType.push && info.replace);
-      if (!needBack) return;
-      router.backRoute(from);
+      const info: NavigationInformation | undefined = arguments[3];
+      // from
+      if (from.fullPath !== to.fullPath) {
+        self._afterEachFrom(router, from, info);
+      }
+      // to
+      router.afterEachForwardRoute(to);
     });
+  }
+
+  private _afterEachFrom(router: BeanRouter, from: RouteLocationNormalizedLoadedGeneric, info: NavigationInformation | undefined) {
+    if (!info) return;
+    const needBack = (info.type === NavigationType.pop && info.direction === NavigationDirection.back) ||
+      (info.type === NavigationType.push && info.replace);
+    if (!needBack) return;
+    router.afterEachBackRoute(from);
   }
 
   // if 404 then check if module loaded

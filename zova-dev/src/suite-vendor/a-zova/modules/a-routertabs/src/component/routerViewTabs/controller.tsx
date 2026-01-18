@@ -14,8 +14,9 @@ export class ControllerRouterViewTabs extends BeanRouterViewBase {
   @Use({ injectionScope: 'skipSelf' })
   $$modelTabs: ModelTabs;
 
-  public async backRoute(route: RouteLocationNormalizedLoadedGeneric) {
-    return await this.$$modelTabs.backRoute(route);
+  public backRoute(route: RouteLocationNormalizedLoadedGeneric) {
+    this.$$modelTabs.backRoute(route);
+    return true;
   }
 
   protected onRender(componentMeta: IRouteViewComponentMeta): void {

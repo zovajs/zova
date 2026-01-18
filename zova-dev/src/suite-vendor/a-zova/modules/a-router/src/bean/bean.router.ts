@@ -57,9 +57,16 @@ export class BeanRouter extends BeanBase {
     }
   }
 
-  async backRoute(route: RouteLocationNormalizedLoadedGeneric) {
+  afterEachBackRoute(route: RouteLocationNormalizedLoadedGeneric) {
     for (const routerView of this._routerViews) {
-      const res = await routerView.backRoute(route);
+      const res = routerView.backRoute(route);
+      if (res) break;
+    }
+  }
+
+  afterEachForwardRoute(route: RouteLocationNormalizedLoadedGeneric) {
+    for (const routerView of this._routerViews) {
+      const res = routerView.forwardRoute(route);
       if (res) break;
     }
   }

@@ -14,7 +14,7 @@ export class ControllerRouterViewStack extends BeanRouterViewBase {
   @Use({ injectionScope: 'skipSelf' })
   $$modelStack: ModelStack;
 
-  public async backRoute(route: RouteLocationNormalizedLoadedGeneric) {
+  public backRoute(route: RouteLocationNormalizedLoadedGeneric) {
     return this.$$modelStack.backRoute(route);
   }
 

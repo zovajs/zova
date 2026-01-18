@@ -192,9 +192,9 @@ export class ModelTabs extends BeanModelBase {
     return [];
   }
 
-  async backRoute(route: RouteLocationNormalizedLoadedGeneric) {
+  backRoute(route: RouteLocationNormalizedLoadedGeneric) {
     const [tabKey, componentKey] = this.findTabItemByFullPath(route.fullPath);
-    return await this.deleteTabItem(tabKey, componentKey, true);
+    this.deleteTabItem(tabKey, componentKey, true);
   }
 
   updateTab(tab: Partial<RouteTabTransient>) {

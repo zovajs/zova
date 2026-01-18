@@ -39,7 +39,11 @@ export class BeanRouterViewBase extends BeanControllerBase implements IRouterVie
     return route.path;
   }
 
-  public async backRoute(_route: RouteLocationNormalizedLoadedGeneric) {
+  public backRoute(_route: RouteLocationNormalizedLoadedGeneric) {
+    return false;
+  }
+
+  public forwardRoute(_route: RouteLocationNormalizedLoadedGeneric) {
     return false;
   }
 
