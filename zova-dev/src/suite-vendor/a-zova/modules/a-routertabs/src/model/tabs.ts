@@ -67,7 +67,7 @@ export class ModelTabs extends BeanModelBase {
     }
     // first route
     if (this.$pageRoute) {
-      this.forwardRoute(this.$pageRoute)
+      this.forwardRoute(this.$pageRoute);
     }
   }
 
