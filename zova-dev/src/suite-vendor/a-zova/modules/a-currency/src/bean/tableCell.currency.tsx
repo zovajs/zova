@@ -9,7 +9,7 @@ export interface ITableCellOptionsCurrency extends IDecoratorTableCellOptions {
 
 @TableCell<ITableCellOptionsCurrency>()
 export class TableCellCurrency extends BeanBase implements ITableCellRender {
-  render(_renderContext: ITableCellRenderContext, options: ITableCellOptionsCurrency, next: NextTableCellRender) {
+  render(options: ITableCellOptionsCurrency, _renderContext: ITableCellRenderContext, next: NextTableCellRender) {
     const value = next();
     return currencyFormat(value, options.currency);
   }

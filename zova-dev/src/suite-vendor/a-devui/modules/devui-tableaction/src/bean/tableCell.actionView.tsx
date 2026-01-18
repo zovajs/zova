@@ -5,7 +5,7 @@ export interface ITableCellOptionsActionView extends IDecoratorTableCellOptions 
 
 @TableCell<ITableCellOptionsActionView>()
 export class TableCellActionView extends BeanBase implements ITableCellRender {
-  render(renderContext: ITableCellRenderContext, _options: ITableCellOptionsActionView, next: NextTableCellRender) {
+  render(_options: ITableCellOptionsActionView, renderContext: ITableCellRenderContext, next: NextTableCellRender) {
     const { $$table, cellContext, cellScope } = renderContext;
     const value = next();
     return (

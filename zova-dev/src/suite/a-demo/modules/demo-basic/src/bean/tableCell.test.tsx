@@ -10,7 +10,7 @@ export interface ITableCellOptionsTest extends IDecoratorTableCellOptions {
   iconPrefix: '::home',
 })
 export class TableCellTest extends BeanBase implements ITableCellRender {
-  render(_renderContext: ITableCellRenderContext, options: ITableCellOptionsTest, next: NextTableCellRender) {
+  render(options: ITableCellOptionsTest, _renderContext: ITableCellRenderContext, next: NextTableCellRender) {
     const value = next();
     const iconPrefix = options.iconPrefix;
     if (!iconPrefix) return value;

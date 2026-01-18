@@ -17,7 +17,7 @@ export type NextTableCellRender = () => any;
 export interface ITableCellRecord {}
 
 export interface ITableCellRender {
-  render(renderContext: ITableCellRenderContext, options: IDecoratorTableCellOptions, next: NextTableCellRender): any;
+  render(options: IDecoratorTableCellOptions, renderContext: ITableCellRenderContext, next: NextTableCellRender): any;
 }
 
 export interface IDecoratorTableCellOptions {}

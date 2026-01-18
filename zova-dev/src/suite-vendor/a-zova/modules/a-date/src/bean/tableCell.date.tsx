@@ -11,7 +11,7 @@ export interface ITableCellOptionsDate extends IDecoratorTableCellOptions {
   dateFormat: { preset: 'DATETIME_SHORT' },
 })
 export class TableCellDate extends BeanBase implements ITableCellRender {
-  render(_renderContext: ITableCellRenderContext, options: ITableCellOptionsDate, next: NextTableCellRender) {
+  render(options: ITableCellOptionsDate, _renderContext: ITableCellRenderContext, next: NextTableCellRender) {
     const value = next();
     if (!value) return;
     const dateFormat = options.dateFormat;
