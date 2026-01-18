@@ -59,6 +59,7 @@ export class ModelTabs extends BeanModelBase {
       this.tabs = this.$useStateDb(queryOptionsTabs);
     } else {
       this.tabs = this.$useStateMem(queryOptionsTabs);
+      console.log(this.tabs);
     }
     // load cache
     if (this.tabsOptions.cache) {

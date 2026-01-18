@@ -22,14 +22,14 @@ export class ControllerLayoutTabs extends BeanControllerBase {
   leftDrawerOpen: boolean = false;
 
   protected async __init__() {
-    // tabs
-    await this._initTabs();
     // passport
     if (process.env.SERVER) {
       await this.$$modelPassport.ensurePassport();
     }
     // menu
     await $QueryAutoLoad(() => this.$$modelMenu.retrieveMenus());
+    // tabs
+    await this._initTabs();
   }
 
   private async _initTabs() {
