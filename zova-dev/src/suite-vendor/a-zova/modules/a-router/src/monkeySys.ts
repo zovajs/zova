@@ -2,9 +2,9 @@ import type { IModule } from '@cabloy/module-info';
 import type { IMonkeyModuleSys, IMonkeySysApplicationInitialize, ZovaApplication } from 'zova';
 import type { ErrorSSR } from 'zova-module-a-ssr';
 import type { SysRouter } from './bean/sys.router.js';
+import type { TypeGotoPageResult } from './types/router.js';
 import type { IGotoPageOptions } from './types/utils.js';
 import { combineQueries } from '@cabloy/utils';
-import { nextTick } from 'vue';
 import { BeanSimple, cast } from 'zova';
 
 export class MonkeySys extends BeanSimple implements IMonkeyModuleSys, IMonkeySysApplicationInitialize {
@@ -46,7 +46,7 @@ export class MonkeySys extends BeanSimple implements IMonkeyModuleSys, IMonkeySy
       error.message = process.env.SERVER ? error.url : error.pagePath;
       throw error;
     };
-    app.$gotoPage = async (pagePath: string, options?: IGotoPageOptions): Promise<void> => {
+    app.$gotoPage = (pagePath: string, options?: IGotoPageOptions): TypeGotoPageResult => {
       const query = options?.query ?? {};
       // returnTo
       if (options?.returnTo) {
@@ -63,22 +63,15 @@ export class MonkeySys extends BeanSimple implements IMonkeyModuleSys, IMonkeySy
       }
       // replace
       if (pagePath.startsWith('http://') || pagePath.startsWith('https://')) {
-        nextTick(() => {
-          window.location.replace(pagePath);
-        });
-        return;
+        window.location.replace(pagePath);
+      } else {
+        return app.meta.$router.replace(pagePath);
       }
-      return new Promise(resolve => {
-        nextTick(async () => {
-          await app.meta.$router.replace(pagePath);
-          resolve(undefined);
-        });
-      });
     };
     app.$gotoHome = () => {
       return app.$gotoPage(app.sys.env.ROUTER_PAGE_HOME);
     };
-    app.$gotoLogin = async (returnTo?: string, cause?: string): Promise<void> => {
+    app.$gotoLogin = (returnTo?: string, cause?: string) => {
       if (!returnTo && cast(app.meta.$router.currentRoute)?.path === app.sys.env.ROUTER_PAGE_LOGIN) return;
       const query: any = {};
       if (cause) {
