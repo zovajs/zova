@@ -137,6 +137,7 @@ export class ZovaJsx extends BeanSimple {
         if (actionChild.type === 'actionVar') {
           const props = this.renderJsxProps(actionChild.props, {}, celScope, hostProviders);
           celScope = { ...celScope, [cast(props).name]: cast(props).value };
+          return next(undefined);
         } else if (isJsxEvent(actionChild)) {
           // nested action
           eventRes[index] = [];
