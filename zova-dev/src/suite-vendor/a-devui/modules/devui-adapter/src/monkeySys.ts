@@ -46,6 +46,9 @@ export class MonkeySys extends BeanSimple implements IMonkeySysInitialize {
             currency: 'a-currency.tableCell.currency',
             date: 'a-date.tableCell.date',
           },
+          actions: {
+            actionView: 'rest-actions:view',
+          },
         },
       },
     } satisfies IOpenApiOptionsRestResource, scopeRestConfig.restResource);

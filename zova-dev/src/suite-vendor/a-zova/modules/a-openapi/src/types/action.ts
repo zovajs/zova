@@ -1,4 +1,5 @@
 import type { BeanBase, ZovaApplication, ZovaContext } from 'zova';
+import type { IActionRecord } from 'zova-module-a-action';
 
 export interface IRenderContextBase {
   scene?: keyof IRenderSceneRecord;
@@ -13,3 +14,5 @@ export interface IRenderSceneRecord {
   form: never;
   formField: never;
 }
+
+export type TypeActionProvider = keyof IActionRecord;
