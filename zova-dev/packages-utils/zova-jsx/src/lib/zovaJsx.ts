@@ -130,7 +130,7 @@ export class ZovaJsx extends BeanSimple {
         if (isJsxEvent(actionChild)) {
           // nested action
           eventRes[index] = [];
-          return this.renderEventDirect(actionChild, celScope, hostProviders, eventRes[index], next);
+          return this.renderEventDirect(actionChild, { ...celScope }, hostProviders, eventRes[index], next);
         } else {
           // normal
           return this._renderEventActionNormal(actionChild, celScope, hostProviders, eventRes, next);
