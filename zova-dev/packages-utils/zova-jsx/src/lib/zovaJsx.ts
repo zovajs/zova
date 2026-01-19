@@ -33,20 +33,14 @@ export class ZovaJsx extends BeanSimple {
     return celEnv;
   }
 
-  public setCelEnv(celEnv: CelEnv) {
-    const celEnvPrev = this._celEnv;
-    this._celEnv = this._prepareCelEnv(celEnv);
-    return () => {
-      this._celEnv = celEnvPrev;
-    };
-  }
-
-  public setTransientObject(transientObject?: {}) {
+  public setTransientObject(transientObject: {} | undefined, fn: Function) {
     const transientObjectPrev = this._transientObject;
     this._transientObject = transientObject;
-    return () => {
+    try {
+      return fn();
+    } finally {
       this._transientObject = transientObjectPrev;
-    };
+    }
   }
 
   public getTransientValue(name: string) {
