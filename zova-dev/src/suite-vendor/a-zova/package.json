@@ -34,7 +34,8 @@
     "zova-module-a-ssrhmr": "^5.0.0",
     "zova-module-a-date": "^5.0.0",
     "zova-module-a-routerstack": "^5.0.0",
-    "zova-module-a-action": "^5.0.0"
+    "zova-module-a-action": "^5.0.0",
+    "zova-module-a-actions": "^5.0.0"
   },
   "gitHead": "73721393c1ea9a95539948d57ad692f2c004d7c7"
 }
