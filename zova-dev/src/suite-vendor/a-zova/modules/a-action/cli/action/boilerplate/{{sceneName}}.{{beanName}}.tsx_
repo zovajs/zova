@@ -2,7 +2,9 @@ import { BeanBase } from 'zova';
 import { Action, IActionExecute, IDecoratorActionOptions, NextActionExecute } from 'zova-module-a-action';
 import { IRenderContextBase } from 'zova-module-a-openapi';
 
-export interface IActionOptions<%=argv.beanNameCapitalize%> extends IDecoratorActionOptions {}
+export type TypeAction<%=argv.beanNameCapitalize%>Result = unknown;
+
+export interface IActionOptions<%=argv.beanNameCapitalize%> extends IDecoratorActionOptions<TypeAction<%=argv.beanNameCapitalize%>Result> {}
 
 @Action<IActionOptions<%=argv.beanNameCapitalize%>>()
 export class Action<%=argv.beanNameCapitalize%> extends BeanBase implements IActionExecute {
