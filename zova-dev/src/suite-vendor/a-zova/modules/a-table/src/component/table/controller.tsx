@@ -183,6 +183,7 @@ export class ControllerTable<TData extends {} = {}> extends BeanControllerTableB
       }
       // renderContext
       const cellRenderContext: ITableCellRenderContext = {
+        scene: 'tableCell',
         app: this.app,
         ctx: this.ctx,
         cellScope,
@@ -198,7 +199,7 @@ export class ControllerTable<TData extends {} = {}> extends BeanControllerTableB
         if (onionOptions) {
           cellProps = deepExtend({}, onionOptions, cellProps);
         }
-        return beanInstance.render(cellRenderContext, cellProps, () => {
+        return beanInstance.render(cellProps, cellRenderContext, () => {
           const children = isJsxComponent(columnProps.render) && cast(columnProps.render).children;
           if (children && children.length > 0) {
             return this.zovaJsx.renderJsxChildrenDirect(children, cellScope);
@@ -208,7 +209,9 @@ export class ControllerTable<TData extends {} = {}> extends BeanControllerTableB
         });
       }
       // general component
-      return this.zovaJsx.render(columnProps.render, {}, cellScope, { $$tableCell: cellRenderContext });
+      return this.zovaJsx.render(columnProps.render, {}, cellScope, {
+        $$renderContext: cellRenderContext,
+      });
     };
   }
 

@@ -54,6 +54,7 @@
     "postpack": "clean-package restore"
   },
   "dependencies": {
+    "@cabloy/compose": "^2.0.4",
     "@cabloy/utils": "^2.0.15",
     "@cabloy/word-utils": "^2.0.2",
     "typestyle": "^2.4.0",

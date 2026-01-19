@@ -1,12 +1,11 @@
 import type { CellContext } from '@tanstack/table-core';
-import type { OmitNever, ZovaApplication, ZovaContext } from 'zova';
+import type { OmitNever } from 'zova';
 import type { ServiceOnion } from 'zova-module-a-bean';
+import type { IRenderContextBase } from 'zova-module-a-openapi';
 import type { ControllerTable } from '../component/table/controller.jsx';
 import type { ITableCellCelScope } from './tableColumn.js';
 
-export interface ITableCellRenderContext<TData extends {} = any> {
-  app: ZovaApplication;
-  ctx: ZovaContext;
+export interface ITableCellRenderContext<TData extends {} = any> extends IRenderContextBase {
   cellScope: ITableCellCelScope;
   cellContext: CellContext<TData, any>;
   $$table: ControllerTable<TData>;

@@ -1,31 +1,47 @@
 import type { VNode } from 'vue';
 import type { IFormProviderComponents, TypeRenderComponent, TypeRenderComponentJsx, TypeRenderComponentJsxProps } from '../types/rest.ts';
-import { celEnvBase, evaluateExpressions } from '@cabloy/utils';
+import { compose } from '@cabloy/compose';
+import { celEnvBase, evaluateExpressions, getProperty, isPromise } from '@cabloy/utils';
 import { toUpperCaseFirstChar } from '@cabloy/word-utils';
 import { classes } from 'typestyle';
 import { createTextVNode, h } from 'vue';
-import { BeanSimple, cast } from 'zova-core';
+import { beanFullNameFromOnionName, BeanSimple, cast, deepExtend } from 'zova-core';
 import { renderFieldJsxPropsSystem } from './const.ts';
-import { isJsxComponent, isNativeElement, isZovaComponent, normalizePropName } from './utils.ts';
+import { isJsxComponent, isJsxEvent, isNativeElement, isZovaComponent, normalizePropName } from './utils.ts';
 
 type CelEnv = typeof celEnvBase;
 
 export class ZovaJsx extends BeanSimple {
   private _components: IFormProviderComponents | undefined;
-  private _celEnv: CelEnv | undefined;
+  private _actions: Record<string, string> | undefined;
+  private _celEnv: CelEnv;
+  private _eventObject?: Event;
 
-  constructor(components?: IFormProviderComponents, celEnv?: CelEnv) {
+  constructor(components?: IFormProviderComponents, actions?: Record<string, string>, celEnv?: CelEnv) {
     super();
     this._components = components;
-    this._celEnv = celEnv;
+    this._actions = actions;
+    this._celEnv = this._prepareCelEnv(celEnv ?? celEnvBase);
+  }
+
+  private _prepareCelEnv(celEnv: CelEnv) {
+    celEnv = celEnv.clone();
+    celEnv.registerFunction('getEventProp(string):dyn', prop => {
+      return getProperty(this._eventObject, prop);
+    });
+    return celEnv;
   }
 
   public get components() {
     return this._components;
   }
 
+  public get actions() {
+    return this._actions;
+  }
+
   public get celEnv(): CelEnv {
-    return this._celEnv ?? celEnvBase;
+    return this._celEnv;
   }
 
   public evaluateExpression(expression: any, celScope?: {}) {
@@ -36,11 +52,116 @@ export class ZovaJsx extends BeanSimple {
     );
   }
 
-  public renderJsxOrCel(componentOptions: TypeRenderComponent | any, props: {} | undefined, celScope: {}) {
+  public renderJsxOrCel(componentOptions: TypeRenderComponent | any, props: {} | undefined, celScope: {}, hostProviders?: {}) {
+    // component
     if (isJsxComponent(componentOptions)) {
       return () => this.render(componentOptions, props, celScope);
     }
+    if (isJsxEvent(componentOptions)) {
+      return (event: Event) => {
+        return this.renderEvent(event, componentOptions, celScope, hostProviders);
+      };
+    }
+    // normal
     return this.evaluateExpression(componentOptions, celScope);
+  }
+
+  public renderEvent(event: Event, componentOptions: TypeRenderComponentJsx, celScope: {}, hostProviders: {} | undefined) {
+    // event
+    this._eventObject = event;
+    // props
+    if (event && event instanceof Event) {
+      const props: any = this.renderJsxProps(componentOptions.props, {}, celScope);
+      if (props.stop) this._eventObject.stopPropagation();
+      if (props.prevent) this._eventObject.preventDefault();
+    }
+    // render
+    const eventRes: any[] = [];
+    celScope = { ...celScope, res: eventRes };
+    const result = this.renderEventDirect(componentOptions, celScope, hostProviders, eventRes);
+    if (isPromise(result)) {
+      return result.then(result => {
+        this._eventObject = undefined;
+        return result;
+      });
+    }
+    this._eventObject = undefined;
+    return result;
+  }
+
+  public renderEventDirect(componentOptions: TypeRenderComponentJsx, celScope: {}, hostProviders: {} | undefined, eventRes: any[], next?: Function) {
+    const actions = this._collectEventActions(componentOptions, celScope, hostProviders, eventRes);
+    if (!actions || actions.length === 0) return next ? next(undefined) : undefined;
+    return compose(actions)(undefined, actionRes => {
+      return next ? next(actionRes) : actionRes;
+    });
+  }
+
+  private _collectEventActions(componentOptions: TypeRenderComponentJsx, celScope: {}, hostProviders: {} | undefined, eventRes: any[]) {
+    let actionChildren = componentOptions.props?.children;
+    if (!actionChildren) return;
+    if (!Array.isArray(actionChildren)) actionChildren = [actionChildren];
+    const actions: Function[] = [];
+    for (let index = 0; index < actionChildren.length; index++) {
+      const actionChild = actionChildren[index];
+      // vIf
+      const vIf = this.evaluateExpression(actionChild.props?.['v-if'], celScope);
+      if (vIf === false) continue;
+      // action
+      const action = (actionRes, next) => {
+        if (index > 0) {
+          eventRes[index - 1] = actionRes;
+        }
+        if (isJsxEvent(actionChild)) {
+          // nested action
+          eventRes[index] = [];
+          return this.renderEventDirect(actionChild, celScope, hostProviders, eventRes[index], next);
+        } else {
+          // normal
+          return this._renderEventActionNormal(actionChild, celScope, hostProviders, eventRes, next);
+        }
+      };
+      actions.push(action);
+    }
+    return actions;
+  }
+
+  private _renderEventActionNormal(
+    actionChild: TypeRenderComponentJsx,
+    celScope: {},
+    hostProviders: {} | undefined,
+    eventRes: any[],
+    next: Function,
+  ) {
+    // action
+    const actionName = this.normalizeAction(actionChild.type);
+    const beanFullName = beanFullNameFromOnionName(actionName, 'action' as never);
+    const beanInstance = this.sys.bean._getBeanSyncOnly(beanFullName);
+    if (beanInstance) {
+      // sync
+      return this._renderEventActionNormal_inner(beanInstance, actionChild, celScope, hostProviders, eventRes, next);
+    }
+    // async
+    return this.sys.bean._getBean(beanFullName).then(beanInstance => {
+      return this._renderEventActionNormal_inner(beanInstance, actionChild, celScope, hostProviders, eventRes, next);
+    });
+  }
+
+  private _renderEventActionNormal_inner(
+    beanInstance: any,
+    actionChild: TypeRenderComponentJsx,
+    celScope: {},
+    hostProviders: {} | undefined,
+    _eventRes: any[],
+    next: Function,
+  ) {
+    const onionOptions = beanInstance.$onionOptions;
+    // props
+    let props = this.renderJsxProps(actionChild.props, {}, celScope);
+    if (onionOptions) {
+      props = deepExtend({}, onionOptions, props);
+    }
+    return beanInstance.execute(props, cast(hostProviders).$$renderContext, next);
   }
 
   public render(componentOptions: TypeRenderComponent, props: {} | undefined, celScope: {}, hostProviders?: {}) {
@@ -80,6 +201,10 @@ export class ZovaJsx extends BeanSimple {
     }
     // div/QInput/Zova Component
     return type;
+  }
+
+  public normalizeAction(type: string) {
+    return this.actions?.[type] ?? type;
   }
 
   private _renderJsxSingle(Component: any, componentOptions: TypeRenderComponentJsx, props: {}, celScope: {}, hostProviders?: {}) {
@@ -122,12 +247,12 @@ export class ZovaJsx extends BeanSimple {
     return vnode;
   }
 
-  public renderJsxProps(jsxProps: TypeRenderComponentJsxProps | undefined, props: {}, celScope: {}) {
+  public renderJsxProps(jsxProps: TypeRenderComponentJsxProps | undefined, props: {}, celScope: {}, hostProviders?: {}) {
     if (!jsxProps) return props;
     const keys = Object.keys(jsxProps).filter(item => !renderFieldJsxPropsSystem.includes(item));
     if (keys.length === 0) return props;
     for (const key of keys) {
-      let keyValue = this.renderJsxOrCel(jsxProps[key], undefined, celScope);
+      let keyValue = this.renderJsxOrCel(jsxProps[key], undefined, celScope, hostProviders);
       const propName = normalizePropName(key);
       if (propName === 'class') {
         keyValue = classes(props[propName], keyValue);
@@ -182,7 +307,7 @@ export class ZovaJsx extends BeanSimple {
       if (isJsxComponent(jsxChild)) {
         if (jsxChild.type === 'var') {
           const props = {};
-          this.renderJsxProps(jsxChild.props, props, celScope);
+          this.renderJsxProps(jsxChild.props, props, celScope, hostProviders);
           celScope = { ...celScope, [cast(props).name]: cast(props).value };
           child = undefined;
         } else {

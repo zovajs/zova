@@ -18,6 +18,10 @@ export function isJsxComponent(Component: any) {
   return (typeof Component === 'object' && Component.$$typeof === 'zova-jsx:component');
 }
 
+export function isJsxEvent(Component: any) {
+  return (typeof Component === 'object' && Component.$$typeof === 'zova-jsx:event');
+}
+
 export function invokeProp(prop: any) {
   if (typeof prop === 'function') return prop();
   return prop;
