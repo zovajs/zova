@@ -203,7 +203,7 @@ export class ControllerTable<TData extends {} = {}> extends BeanControllerTableB
     }
     // renderContext
     const cellRenderContext: ITableCellRenderContext = {
-      scene: 'tableCell',
+      $$scene: 'tableCell',
       $$host: this,
       app: this.app,
       ctx: this.ctx,

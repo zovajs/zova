@@ -2,7 +2,7 @@ import type { BeanBase, ZovaApplication, ZovaContext } from 'zova';
 import type { IActionRecord } from 'zova-module-a-action';
 
 export interface IRenderContextBase {
-  scene?: keyof IRenderSceneRecord;
+  $$scene?: keyof IRenderSceneRecord;
   $$host: BeanBase;
   app: ZovaApplication;
   ctx: ZovaContext;
