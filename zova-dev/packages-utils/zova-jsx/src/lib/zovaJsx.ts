@@ -134,7 +134,10 @@ export class ZovaJsx extends BeanSimple {
         const vIf = this.evaluateExpression(actionChild.props?.['v-if'], celScope);
         if (vIf === false) return next(undefined);
         // action
-        if (isJsxEvent(actionChild)) {
+        if (actionChild.type === 'actionVar') {
+          const props = this.renderJsxProps(actionChild.props, {}, celScope, hostProviders);
+          celScope = { ...celScope, [cast(props).name]: cast(props).value };
+        } else if (isJsxEvent(actionChild)) {
           // nested action
           eventRes[index] = [];
           return this.renderEventDirect(actionChild, { ...celScope }, hostProviders, eventRes[index], next);
@@ -330,8 +333,7 @@ export class ZovaJsx extends BeanSimple {
       let child;
       if (isJsxComponent(jsxChild)) {
         if (jsxChild.type === 'var') {
-          const props = {};
-          this.renderJsxProps(jsxChild.props, props, celScope, hostProviders);
+          const props = this.renderJsxProps(jsxChild.props, {}, celScope, hostProviders);
           celScope = { ...celScope, [cast(props).name]: cast(props).value };
           child = undefined;
         } else {
