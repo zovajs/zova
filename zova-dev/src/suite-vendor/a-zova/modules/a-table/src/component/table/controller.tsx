@@ -165,6 +165,7 @@ export class ControllerTable<TData extends {} = {}> extends BeanControllerTableB
     }
     return cellContext => {
       if (!cellContext) return;
+
       return this._cellRender(property, columnProps, columnScope, cellContext, renderProvider, beanInstance, onionOptions);
     };
   }
@@ -237,6 +238,9 @@ export class ControllerTable<TData extends {} = {}> extends BeanControllerTableB
     const celEnv = celEnvBase.clone();
     celEnv.registerFunction('getProperty(string):dyn', name => {
       return this.getColumnProperty(name);
+    });
+    celEnv.registerFunction('getValue(string):dyn', name => {
+      return this.zovaJsx.getTransientValue(name);
     });
     return celEnv;
   }
