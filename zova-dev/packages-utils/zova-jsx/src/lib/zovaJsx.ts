@@ -16,7 +16,7 @@ export class ZovaJsx extends BeanSimple {
   private _actions: Record<string, string> | undefined;
   private _celEnv: CelEnv;
   private _eventObject?: Event;
-  private _transientObject?: {};
+  private _transientObject: any;
 
   constructor(components?: IFormProviderComponents, actions?: Record<string, string>, celEnv?: CelEnv) {
     super();
@@ -43,8 +43,8 @@ export class ZovaJsx extends BeanSimple {
     }
   }
 
-  public getTransientValue(name: string) {
-    return getProperty(this._transientObject, name);
+  public get transientObject() {
+    return this._transientObject;
   }
 
   public get components() {

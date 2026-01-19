@@ -166,7 +166,11 @@ export class ControllerTable<TData extends {} = {}> extends BeanControllerTableB
     }
     return cellContext => {
       if (!cellContext) return;
-      return this.zovaJsx.setTransientObject(cellContext.row, () => {
+      return this.zovaJsx.setTransientObject({
+        getValue: (name: string) => {
+          return cellContext.row.getValue(name);
+        },
+      }, () => {
         return this._cellRender(property, columnProps, columnScope, cellContext, renderProvider, beanInstance, onionOptions);
       });
     };
@@ -242,7 +246,7 @@ export class ControllerTable<TData extends {} = {}> extends BeanControllerTableB
       return this.getColumnProperty(name);
     });
     celEnv.registerFunction('getValue(string):dyn', name => {
-      return this.zovaJsx.getTransientValue(name);
+      return this.zovaJsx.transientObject.getValue(name);
     });
     return celEnv;
   }
