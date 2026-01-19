@@ -86,7 +86,7 @@ export class ZovaJsx extends BeanSimple {
     this._eventObject = event;
     // props
     if (event && event instanceof Event) {
-      const props: any = this.renderJsxProps(componentOptions.props, {}, celScope);
+      const props: any = this.renderJsxProps(componentOptions.props, {}, celScope, hostProviders);
       if (props.stop) this._eventObject.stopPropagation();
       if (props.prevent) this._eventObject.preventDefault();
     }
@@ -172,11 +172,13 @@ export class ZovaJsx extends BeanSimple {
   ) {
     const onionOptions = beanInstance.$onionOptions;
     // props
-    let props = this.renderJsxProps(actionChild.props, {}, celScope);
+    let props = this.renderJsxProps(actionChild.props, {}, celScope, hostProviders);
     if (onionOptions) {
       props = deepExtend({}, onionOptions, props);
     }
-    return beanInstance.execute(props, cast(hostProviders).$$renderContext, next);
+    const $$renderContext = cast(hostProviders).$$renderContext;
+    if (!$$renderContext) throw new Error('should provide hostProviders');
+    return beanInstance.execute(props, $$renderContext, next);
   }
 
   public render(componentOptions: TypeRenderComponent, props: {} | undefined, celScope: {}, hostProviders?: {}) {
@@ -227,7 +229,7 @@ export class ZovaJsx extends BeanSimple {
     // key
     cast(props).key = this.evaluateExpression(componentOptions.key, celScope);
     // props
-    this.renderJsxProps(componentOptions.props, props, celScope);
+    this.renderJsxProps(componentOptions.props, props, celScope, hostProviders);
     // children
     let children;
     const propsChildren = componentOptions.props?.children;
