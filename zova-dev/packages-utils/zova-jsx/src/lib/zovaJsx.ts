@@ -124,6 +124,11 @@ export class ZovaJsx extends BeanSimple {
         // record res
         if (index > 0) {
           eventRes[index - 1] = actionRes;
+          const actionChildPrev = actionChildren[index - 1];
+          const resName = cast(actionChildPrev.props)?.res;
+          if (resName) {
+            celScope = { ...celScope, [resName]: actionRes };
+          }
         }
         // vIf
         const vIf = this.evaluateExpression(actionChild.props?.['v-if'], celScope);
