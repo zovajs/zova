@@ -1,7 +1,8 @@
-import type { ZovaApplication, ZovaContext } from 'zova';
+import type { BeanBase, ZovaApplication, ZovaContext } from 'zova';
 
 export interface IRenderContextBase {
   scene?: keyof IRenderSceneRecord;
+  $$host: BeanBase;
   app: ZovaApplication;
   ctx: ZovaContext;
 }
