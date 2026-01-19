@@ -1,5 +1,5 @@
 import { celEnvBase } from '@cabloy/utils';
-import { createColumnHelper, getCoreRowModel, Row, TableOptionsWithReactiveData } from '@tanstack/vue-table';
+import { CellContext, createColumnHelper, getCoreRowModel, Row, TableOptionsWithReactiveData } from '@tanstack/vue-table';
 import { SchemaObject } from 'openapi3-ts/oas31';
 import { VNode } from 'vue';
 import { appResource, cast, deepEqual, deepExtend, UseScope } from 'zova';
@@ -165,55 +165,67 @@ export class ControllerTable<TData extends {} = {}> extends BeanControllerTableB
     }
     return cellContext => {
       if (!cellContext) return;
-      // value
-      const value = cellContext.getValue();
-      // cellScope
-      const cellScope: ITableCellCelScope = Object.assign({}, columnScope, { value });
-      // displayValue
-      let displayValue = property.rest?.displayValue !== undefined
-        ? this.zovaJsx.evaluateExpression(property.rest?.displayValue, cellScope)
-        : value;
-      if (displayValue === undefined || displayValue === null || displayValue === '') {
-        displayValue = this.table.options.renderFallbackValue;
-      }
-      cellScope.displayValue = displayValue;
-      // render: text
-      if (renderProvider === 'text') {
-        return displayValue;
-      }
-      // renderContext
-      const cellRenderContext: ITableCellRenderContext = {
-        scene: 'tableCell',
-        $$host: this,
-        app: this.app,
-        ctx: this.ctx,
-        cellScope,
-        cellContext,
-        $$table: this,
-      };
-      // beanInstance
-      if (beanInstance) {
-        // jsx: props
-        let cellProps = isJsxComponent(columnProps.render)
-          ? this.zovaJsx.renderJsxProps(cast(columnProps.render).props, { ...columnProps }, cellScope)
-          : columnProps;
-        if (onionOptions) {
-          cellProps = deepExtend({}, onionOptions, cellProps);
-        }
-        return beanInstance.render(cellProps, cellRenderContext, () => {
-          const children = isJsxComponent(columnProps.render) && cast(columnProps.render).children;
-          if (children && children.length > 0) {
-            return this.zovaJsx.renderJsxChildrenDirect(children, cellScope);
-          } else {
-            return displayValue;
-          }
-        });
-      }
-      // general component
-      return this.zovaJsx.render(columnProps.render, {}, cellScope, {
-        $$renderContext: cellRenderContext,
-      });
+      return this._cellRender(property, columnProps, columnScope, cellContext, renderProvider, beanInstance, onionOptions);
     };
+  }
+
+  private _cellRender(
+    property: SchemaObject,
+    columnProps: ITableCellRenderColumnProps,
+    columnScope: ITableColumnCelScope,
+    cellContext: CellContext<TData, any>,
+    renderProvider: TypeTableCellRenderComponentProvider,
+    beanInstance: ITableCellRender | undefined,
+    onionOptions: IDecoratorTableCellOptions | undefined,
+  ) {
+    // value
+    const value = cellContext.getValue();
+    // cellScope
+    const cellScope: ITableCellCelScope = Object.assign({}, columnScope, { value });
+    // displayValue
+    let displayValue = property.rest?.displayValue !== undefined
+      ? this.zovaJsx.evaluateExpression(property.rest?.displayValue, cellScope)
+      : value;
+    if (displayValue === undefined || displayValue === null || displayValue === '') {
+      displayValue = this.table.options.renderFallbackValue;
+    }
+    cellScope.displayValue = displayValue;
+    // render: text
+    if (renderProvider === 'text') {
+      return displayValue;
+    }
+    // renderContext
+    const cellRenderContext: ITableCellRenderContext = {
+      scene: 'tableCell',
+      $$host: this,
+      app: this.app,
+      ctx: this.ctx,
+      cellScope,
+      cellContext,
+      $$table: this,
+    };
+      // beanInstance
+    if (beanInstance) {
+      // jsx: props
+      let cellProps = isJsxComponent(columnProps.render)
+        ? this.zovaJsx.renderJsxProps(cast(columnProps.render).props, { ...columnProps }, cellScope)
+        : columnProps;
+      if (onionOptions) {
+        cellProps = deepExtend({}, onionOptions, cellProps);
+      }
+      return beanInstance.render(cellProps, cellRenderContext, () => {
+        const children = isJsxComponent(columnProps.render) && cast(columnProps.render).children;
+        if (children && children.length > 0) {
+          return this.zovaJsx.renderJsxChildrenDirect(children, cellScope);
+        } else {
+          return displayValue;
+        }
+      });
+    }
+    // general component
+    return this.zovaJsx.render(columnProps.render, {}, cellScope, {
+      $$renderContext: cellRenderContext,
+    });
   }
 
   public getColumnProperty(name: string): SchemaObject | undefined {
