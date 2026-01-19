@@ -1,0 +1,11 @@
+import { BeanBase } from 'zova';
+import { IDecoratorActionOptions, IActionExecute, IRenderContextBase, NextActionExecute, Action } from 'zova-module-a-action';
+
+export interface IActionOptions<%=argv.beanNameCapitalize%> extends IDecoratorActionOptions {}
+
+@Action<IActionOptions<%=argv.beanNameCapitalize%>>()
+export class Action<%=argv.beanNameCapitalize%> extends BeanBase implements IActionExecute {
+  execute(_options: IActionOptions<%=argv.beanNameCapitalize%>, _renderContext: IRenderContextBase, next: NextActionExecute) {
+    return next();
+  }
+}
