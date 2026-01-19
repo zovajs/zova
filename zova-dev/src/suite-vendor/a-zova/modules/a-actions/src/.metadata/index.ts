@@ -1,36 +1,36 @@
 /* eslint-disable */
 /** action: begin */
-export * from '../bean/action.var.jsx';
-import { IActionOptionsVar } from '../bean/action.var.jsx';
+export * from '../bean/action.log.jsx';
+import { IActionOptionsLog } from '../bean/action.log.jsx';
 import 'zova-module-a-action';
 declare module 'zova-module-a-action' {
   
     export interface IActionRecord {
-      'a-actions:var': IActionOptionsVar;
+      'a-actions:log': IActionOptionsLog;
     }
 
   
 }
 declare module 'zova-module-a-actions' {
   
-        export interface ActionVar {
+        export interface ActionLog {
           /** @internal */
           get scope(): ScopeModuleAActions;
         }
 
-        export interface ActionVar {
-          get $beanFullName(): 'a-actions.action.var';
-          get $onionName(): 'a-actions:var';
-          get $onionOptions(): IActionOptionsVar;
+        export interface ActionLog {
+          get $beanFullName(): 'a-actions.action.log';
+          get $onionName(): 'a-actions:log';
+          get $onionOptions(): IActionOptionsLog;
         } 
 }
 /** action: end */
 /** action: begin */
-import { ActionVar } from '../bean/action.var.jsx';
+import { ActionLog } from '../bean/action.log.jsx';
 import 'zova';
 declare module 'zova' {
   export interface IBeanRecordGeneral {
-    'a-actions.action.var': ActionVar;
+    'a-actions.action.log': ActionLog;
   }
 }
 /** action: end */
