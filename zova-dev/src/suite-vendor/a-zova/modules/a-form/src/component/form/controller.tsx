@@ -73,6 +73,7 @@ export class ControllerForm<TFormData extends {} = {}, TSubmitMeta = never> exte
       ZovaJsx,
       false,
       this.formProvider.components,
+      this.formProvider.actions,
       this.fieldCelEnv,
     );
     this.$watch(() => this.$props.data, (newValue, oldValue) => {

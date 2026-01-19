@@ -1,3 +1,4 @@
+import type { IActionsRecord } from 'zova-module-a-action';
 import type { TypeTableCellRenderComponentProvider } from 'zova-module-a-openapi';
 
 export interface ITableProviderComponents {
@@ -9,6 +10,7 @@ export interface ITableProviderComponents {
 
 export interface ITableProvider {
   components?: ITableProviderComponents;
+  actions?: IActionsRecord;
 }
 
 declare module 'zova-module-a-openapi' {

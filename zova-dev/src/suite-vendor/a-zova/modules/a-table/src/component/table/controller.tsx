@@ -49,6 +49,7 @@ export class ControllerTable<TData extends {} = {}> extends BeanControllerTableB
       ZovaJsx,
       false,
       this.tableProvider.components,
+      this.tableProvider.actions,
       this.columnCelEnv,
     );
     // properties

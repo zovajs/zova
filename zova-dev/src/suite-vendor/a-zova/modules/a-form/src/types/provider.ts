@@ -1,4 +1,5 @@
 import type { TypeComponentRecordSelectorKeysStrict } from 'zova';
+import type { IActionsRecord } from 'zova-module-a-action';
 import type { TypeBehaviorRecordSelectorKeys, TypeBehaviorRecordSelectorKeysStrict } from 'zova-module-a-behavior';
 import type { TypeFormFieldRenderComponentProvider } from 'zova-module-a-openapi';
 
@@ -18,6 +19,7 @@ export interface IFormProviderComponents {
 
 export interface IFormProvider {
   components?: IFormProviderComponents;
+  actions?: IActionsRecord;
   behaviors?: IFormProviderBehaviors;
 }
 

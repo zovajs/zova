@@ -4,6 +4,8 @@ import type { IRenderContextBase } from 'zova-module-a-openapi';
 
 export type NextActionExecute = (res?: any) => any | Promise<any>;
 
+export interface IActionsRecord {}
+
 export interface IActionRecord {}
 
 export interface IActionExecute {
