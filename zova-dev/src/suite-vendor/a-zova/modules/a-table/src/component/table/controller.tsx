@@ -165,8 +165,9 @@ export class ControllerTable<TData extends {} = {}> extends BeanControllerTableB
     }
     return cellContext => {
       if (!cellContext) return;
-
-      return this._cellRender(property, columnProps, columnScope, cellContext, renderProvider, beanInstance, onionOptions);
+      return this.zovaJsx.setTransientObject(cellContext.row, () => {
+        return this._cellRender(property, columnProps, columnScope, cellContext, renderProvider, beanInstance, onionOptions);
+      });
     };
   }
 

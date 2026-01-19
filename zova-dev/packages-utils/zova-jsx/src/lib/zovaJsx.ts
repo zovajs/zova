@@ -33,11 +33,11 @@ export class ZovaJsx extends BeanSimple {
     return celEnv;
   }
 
-  public setTransientObject(transientObject: {} | undefined, fn: Function) {
+  public setTransientObject<T>(transientObject: {} | undefined, fnMethod: () => T): T {
     const transientObjectPrev = this._transientObject;
     this._transientObject = transientObject;
     try {
-      return fn();
+      return fnMethod();
     } finally {
       this._transientObject = transientObjectPrev;
     }
