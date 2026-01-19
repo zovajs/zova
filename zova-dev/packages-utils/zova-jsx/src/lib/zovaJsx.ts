@@ -119,14 +119,16 @@ export class ZovaJsx extends BeanSimple {
     const actions: Function[] = [];
     for (let index = 0; index < actionChildren.length; index++) {
       const actionChild = actionChildren[index];
-      // vIf
-      const vIf = this.evaluateExpression(actionChild.props?.['v-if'], celScope);
-      if (vIf === false) continue;
       // action
       const action = (actionRes, next) => {
+        // record res
         if (index > 0) {
           eventRes[index - 1] = actionRes;
         }
+        // vIf
+        const vIf = this.evaluateExpression(actionChild.props?.['v-if'], celScope);
+        if (vIf === false) return next(undefined);
+        // action
         if (isJsxEvent(actionChild)) {
           // nested action
           eventRes[index] = [];
