@@ -1,12 +1,15 @@
 import { BeanBase } from 'zova';
+import { $performAction } from 'zova-module-a-action';
 import { IDecoratorTableCellOptions, ITableCellRender, ITableCellRenderContext, NextTableCellRender, TableCell } from 'zova-module-a-table';
 
-export interface ITableCellOptionsActionView extends IDecoratorTableCellOptions {}
+export interface ITableCellOptionsActionView extends IDecoratorTableCellOptions {
+  resource?: string;
+  id?: string;
+}
 
 @TableCell<ITableCellOptionsActionView>()
 export class TableCellActionView extends BeanBase implements ITableCellRender {
-  render(_options: ITableCellOptionsActionView, renderContext: ITableCellRenderContext, next: NextTableCellRender) {
-    const { $$table, cellContext, cellScope } = renderContext;
+  render(options: ITableCellOptionsActionView, renderContext: ITableCellRenderContext, next: NextTableCellRender) {
     const value = next();
     return (
       <a
@@ -15,10 +18,7 @@ export class TableCellActionView extends BeanBase implements ITableCellRender {
         onClick={e => {
           e.preventDefault();
           e.stopPropagation();
-          const url = $$table.$router.getPagePath('/rest/resource/:resource/:id/:formScene?', {
-            params: { resource: cellScope.resource!, id: cellContext.row.id },
-          });
-          $$table.$router.push(url);
+          $performAction('rest-actions:view', options, renderContext);
         }}
       >
         {value}
