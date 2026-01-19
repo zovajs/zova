@@ -2,7 +2,17 @@
   "name": "zova-module-a-action",
   "version": "5.0.0",
   "title": "a-action",
-  "zovaModule": {},
+  "zovaModule": {
+    "onions": {
+      "action": {
+        "beanGeneral": true,
+        "optionsGlobalInterfaceName": "IDecoratorActionOptions",
+        "optionsGlobalInterfaceFrom": "zova-module-a-action",
+        "boilerplate": "cli/action/boilerplate",
+        "metadataCustom": "cli/action/metadata/generate.ts"
+      }
+    }
+  },
   "type": "module",
   "exports": {
     ".": {
