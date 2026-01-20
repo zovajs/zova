@@ -4,7 +4,8 @@ import type z from 'zod';
 import type { TypeRenderComponentJsx } from 'zova-jsx';
 import type { IBehaviorItem } from 'zova-module-a-behavior';
 import type { IIconRecord } from 'zova-module-a-icon';
-import type { TypeFormFieldRenderComponent, TypeFormFieldRenderComponentProvider } from 'zova-module-a-openapi';
+import type { IRenderContextBase, TypeFormFieldRenderComponent, TypeFormFieldRenderComponentProvider } from 'zova-module-a-openapi';
+import type { ControllerForm } from '../component/form/controller.jsx';
 import type { ControllerFormField } from '../component/formField/controller.jsx';
 import type { TypeBehaviorFormFieldOptions } from './form.js';
 
@@ -80,4 +81,15 @@ export interface IFormFieldRenderContext<TParentData = {}> {
   propsBucket: IFormFieldRenderContextPropsBucket<TParentData>;
   props: IFormFieldRenderContextProps;
   celScope: IFormFieldCelScope<TParentData>;
+}
+
+export interface IFormFieldJsxRenderContext<TParentData extends {} = {}, TSubmitMeta = never> extends IRenderContextBase {
+  celScope: IFormFieldCelScope<TParentData>;
+  $$formField: ControllerFormField<TParentData> | undefined;
+  $$form: ControllerForm<TParentData, TSubmitMeta>;
+}
+
+export interface IFormJsxRenderContext<TParentData extends {} = {}> extends IRenderContextBase {
+  celScope: IFormFieldCelScope<TParentData>;
+  $$form: ControllerForm<TParentData>;
 }
