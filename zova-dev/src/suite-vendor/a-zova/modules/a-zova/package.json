@@ -76,7 +76,7 @@
     "@cabloy/compose": "^2.0.4",
     "@cabloy/deps": "^1.0.9",
     "@cabloy/json5": "^1.0.8",
-    "@cabloy/module-info": "^1.3.39",
+    "@cabloy/module-info": "^1.3.40",
     "@cabloy/utils": "^2.0.15",
     "@cabloy/vue-router": "^4.4.16",
     "@cabloy/word-utils": "^2.0.2",
