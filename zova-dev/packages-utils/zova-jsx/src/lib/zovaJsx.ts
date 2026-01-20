@@ -70,7 +70,12 @@ export class ZovaJsx extends BeanSimple {
   public renderJsxOrCel(componentOptions: TypeRenderComponent | any, props: {} | undefined, celScope: {}, hostProviders?: {}) {
     // component
     if (isJsxComponent(componentOptions)) {
-      return () => this.render(componentOptions, props, celScope);
+      const transientObject = this.transientObject;
+      return () => {
+        return this.setTransientObject(transientObject, () => {
+          return this.render(componentOptions, props, celScope);
+        });
+      };
     }
     if (isJsxEvent(componentOptions)) {
       const transientObject = this.transientObject;
@@ -110,8 +115,12 @@ export class ZovaJsx extends BeanSimple {
   public renderEventDirect(componentOptions: TypeRenderComponentJsx, celScope: {}, hostProviders: {} | undefined, eventRes: any[], next?: Function) {
     const actions = this._collectEventActions(componentOptions, celScope, hostProviders, eventRes);
     if (!actions || actions.length === 0) return next ? next(undefined) : undefined;
+    const transientObject = this.transientObject;
     return compose(actions)(undefined, actionRes => {
-      return next ? next(actionRes) : actionRes;
+      if (!next) return actionRes;
+      return this.setTransientObject(transientObject, () => {
+        return next(actionRes);
+      });
     });
   }
 
@@ -120,38 +129,41 @@ export class ZovaJsx extends BeanSimple {
     if (!actionChildren) return;
     if (!Array.isArray(actionChildren)) actionChildren = [actionChildren];
     const actions: Function[] = [];
+    const transientObject = this.transientObject;
     for (let index = 0; index < actionChildren.length; index++) {
       const actionChild = actionChildren[index];
       // action
       const action = (actionRes, next) => {
-        // record res
-        if (index > 0) {
-          eventRes[index - 1] = actionRes;
-          const actionChildPrev = actionChildren[index - 1];
-          const resName = cast(actionChildPrev.props)?.res;
-          if (resName) {
-            celScope = { ...celScope, [resName]: actionRes };
+        return this.setTransientObject(transientObject, () => {
+          // record res
+          if (index > 0) {
+            eventRes[index - 1] = actionRes;
+            const actionChildPrev = actionChildren[index - 1];
+            const resName = cast(actionChildPrev.props)?.res;
+            if (resName) {
+              celScope = { ...celScope, [resName]: actionRes };
+            }
           }
-        }
-        // vIf
-        const vIf = this.evaluateExpression(actionChild.props?.['v-if'], celScope);
-        if (vIf === false) return next(undefined);
-        // action
-        if (actionChild.type === 'actionVar') {
-          const props = this.renderJsxProps(actionChild.props, {}, celScope, hostProviders);
-          celScope = { ...celScope, [cast(props).name]: cast(props).value };
-          return next(undefined);
-        } else if (actionChild.type === 'actionExpr') {
-          const expression = this.evaluateExpression(cast(actionChild.props)?.expression, celScope);
-          return next(expression);
-        } else if (isJsxEvent(actionChild)) {
-          // nested action
-          eventRes[index] = [];
-          return this.renderEventDirect(actionChild, { ...celScope }, hostProviders, eventRes[index], next);
-        } else {
-          // normal
-          return this._renderEventActionNormal(actionChild, celScope, hostProviders, eventRes, next);
-        }
+          // vIf
+          const vIf = this.evaluateExpression(actionChild.props?.['v-if'], celScope);
+          if (vIf === false) return next(undefined);
+          // action
+          if (actionChild.type === 'actionVar') {
+            const props = this.renderJsxProps(actionChild.props, {}, celScope, hostProviders);
+            celScope = { ...celScope, [cast(props).name]: cast(props).value };
+            return next(undefined);
+          } else if (actionChild.type === 'actionExpr') {
+            const expression = this.evaluateExpression(cast(actionChild.props)?.expression, celScope);
+            return next(expression);
+          } else if (isJsxEvent(actionChild)) {
+            // nested action
+            eventRes[index] = [];
+            return this.renderEventDirect(actionChild, { ...celScope }, hostProviders, eventRes[index], next);
+          } else {
+            // normal
+            return this._renderEventActionNormal(actionChild, celScope, hostProviders, eventRes, next);
+          }
+        });
       };
       actions.push(action);
     }
