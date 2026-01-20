@@ -41,7 +41,12 @@ export class ControllerTable<TData extends {} = {}> extends BeanControllerTableB
   protected async __init__() {
     this.bean._setBean('$$table', this);
     this.tableProvider = this.$useComputed(() => {
-      return deepExtend({}, this.$$scopeModuleAOpenapi.config.restResource.table?.provider, this.$props.tableProvider);
+      return deepExtend(
+        {},
+        this.$$scopeModuleAOpenapi.config.restResource.provider,
+        this.$$scopeModuleAOpenapi.config.restResource.table?.provider,
+        this.$props.tableProvider,
+      );
     });
     // jsx
     this.columnCelEnv = this._getColumnCelEnv();
