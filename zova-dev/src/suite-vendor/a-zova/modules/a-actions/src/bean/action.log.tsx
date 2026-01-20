@@ -12,7 +12,7 @@ export interface IActionOptionsLog extends IDecoratorActionOptions<TypeActionLog
 @Preload()
 export class ActionLog extends BeanBase implements IActionExecute {
   execute(options: IActionOptionsLog, _renderContext: IRenderContextBase, next: NextActionExecute) {
-    this.$logger.silly(options.message === undefined ? '' : options.message);
+    this.$logger.silly(options.message === undefined ? '' : { message: options.message });
     return next();
   }
 }
