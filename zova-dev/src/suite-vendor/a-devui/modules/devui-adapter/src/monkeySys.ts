@@ -47,9 +47,9 @@ export class MonkeySys extends BeanSimple implements IMonkeySysInitialize {
             date: 'a-date.tableCell.date',
           },
           actions: {
-            actionView: 'rest-actions:view',
             actionLog: 'a-actions:log',
-          } as any,
+            actionView: 'rest-actions:view',
+          },
         },
       },
     } satisfies IOpenApiOptionsRestResource, scopeRestConfig.restResource);
