@@ -2,7 +2,9 @@ import type { VNode } from 'vue';
 import type { IDecoratorBehaviorOptions, NextBehavior } from 'zova-module-a-behavior';
 import { BeanBehaviorBase, Behavior } from 'zova-module-a-behavior';
 
-export interface IBehaviorPropsInputFocus {}
+export interface IBehaviorPropsInputFocus {
+  ref?: any;
+}
 
 export interface IBehaviorPropsOutputFocus extends IBehaviorPropsInputFocus {}
 
@@ -19,13 +21,15 @@ export class BehaviorFocus extends BeanBehaviorBase<
   inputRef?: HTMLElement;
 
   protected render(props: IBehaviorPropsInputFocus, next: NextBehavior<IBehaviorPropsOutputFocus>): VNode {
+    const refOuter = props?.ref;
     props = {
       ...props,
       ref: (ref: HTMLElement) => {
         if (this.$options.always || !this.inputRef) {
-          ref.focus();
+          ref.focus?.();
         }
         this.inputRef = ref;
+        refOuter?.(ref);
       },
     };
     return next(props);

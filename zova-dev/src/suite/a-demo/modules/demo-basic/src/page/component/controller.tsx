@@ -39,6 +39,10 @@ export class ControllerPageComponent extends BeanControllerPageBase {
           type="text"
           class="input input-bordered w-full max-w-xs"
           value={this.resetTime.toString()}
+          ref={ref => {
+            // eslint-disable-next-line
+            console.log('outer:', ref);
+          }}
         >
         </input>
       </ZPage>

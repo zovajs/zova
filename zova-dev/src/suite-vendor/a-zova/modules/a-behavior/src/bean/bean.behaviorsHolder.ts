@@ -1,5 +1,5 @@
 import type { IBehaviors, IBehaviorTag } from '../types/behavior.js';
-import { createVNode } from 'vue';
+import { createVNode, toRaw } from 'vue';
 import { BeanBase, deepEqual, disposeInstance, Use } from 'zova';
 import { Bean } from 'zova-module-a-bean';
 import { Log } from 'zova-module-a-logger';
@@ -68,7 +68,7 @@ export class BeanBehaviorsHolder extends BeanBase {
     // render
     return this.composer.render(propsNew, propsNew => {
       if (vNodeDefault) return vNodeDefault(propsNew);
-      return createVNode(this.options.behaviorTag.component, propsNew, children);
+      return createVNode(toRaw(this.options.behaviorTag.component), propsNew, children);
     });
     // // ensure inner component inherits the async wrapper's ref owner
     // vnode.ref = parent.vnode.ref;
