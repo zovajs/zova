@@ -3,7 +3,13 @@ import type { IOpenApiOptionsRestResource } from '../types/restResource.js';
 
 export const config = (_sys: ZovaSys) => {
   return {
-    restResource: {} as IOpenApiOptionsRestResource,
+    restResource: {
+      provider: {
+        actions: {
+          actionLog: 'a-actions:log',
+        },
+      },
+    } as IOpenApiOptionsRestResource,
     bootstrapApi: '/api/openapischema/resource/bootstrap/:resource',
   };
 };
