@@ -33,7 +33,7 @@ export class MonkeySys extends BeanSimple implements IMonkeySysInitialize {
       table: {
         provider: {
           components: {
-            actionView: 'devui-tableaction.tableCell.actionView',
+            actionView: 'devui-tablecell.tableCell.actionView',
           },
           actions: {
             actionView: 'rest-actions:view',

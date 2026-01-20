@@ -1,7 +1,7 @@
 import type { ITableCellOptionsActionView } from '../../src/bean/tableCell.actionView.jsx';
 
-export function TTDevuiTableactionActionView(
+export function TTDevuiTablecellActionView(
   _props: ITableCellOptionsActionView,
 ) {
-  return 'devui-tableaction.tableCell.actionView';
+  return 'devui-tablecell.tableCell.actionView';
 }

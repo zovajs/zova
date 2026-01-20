@@ -10,7 +10,7 @@
     "zova-module-devui-form": "workspace:^",
     "zova-module-devui-restpage": "workspace:^",
     "zova-module-devui-table": "workspace:^",
-    "zova-module-devui-tableaction": "^5.0.0",
+    "zova-module-devui-tablecell": "^5.0.0",
     "zova-module-devui-restpageentry": "^5.0.0",
     "zova-module-devui-actions": "^5.0.0"
   },

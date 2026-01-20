@@ -1,6 +1,6 @@
 {
-  "name": "zova-module-devui-tableaction",
-  "title": "devui-tableaction",
+  "name": "zova-module-devui-tablecell",
+  "title": "devui-tablecell",
   "type": "module",
   "version": "5.0.0",
   "description": "",
