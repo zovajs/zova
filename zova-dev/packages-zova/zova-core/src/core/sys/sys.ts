@@ -58,7 +58,7 @@ export class ZovaSys {
     await this.meta.error.initialize();
     // // config
     this.config = await this._combineConfig(config);
-    this.configOriginal = { modules: {} };
+    this.configOriginal = { modules: {} } as any;
     // constant
     this.constant = constantDefault;
     // module

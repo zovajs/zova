@@ -52,10 +52,9 @@ export class MonkeySys extends BeanSimple implements IMonkeySysInitialize {
     };
     // rest
     const scopeRestConfig = this.sys.util.getModuleConfigSafe('a-openapi');
-    const scopeRestConfigOriginal = this.sys.util.getModuleConfigOriginal('a-openapi');
     scopeRestConfig.restResource = deepExtend(
       {},
-      scopeRestConfigOriginal.restResource,
+      scopeRestConfig.base,
       configCustom,
       scopeRestConfig.restResource,
     );

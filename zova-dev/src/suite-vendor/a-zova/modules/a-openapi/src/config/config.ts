@@ -3,7 +3,7 @@ import type { IOpenApiOptionsRestResource } from '../types/restResource.js';
 
 export const config = (_sys: ZovaSys) => {
   return {
-    restResource: {
+    base: {
       provider: {
         components: {
           form: 'a-form:form',
@@ -14,6 +14,7 @@ export const config = (_sys: ZovaSys) => {
         },
       },
     } as IOpenApiOptionsRestResource,
+    restResource: {} as IOpenApiOptionsRestResource,
     bootstrapApi: '/api/openapischema/resource/bootstrap/:resource',
   };
 };
