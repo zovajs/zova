@@ -108,6 +108,11 @@ export class SysUtil extends BeanSimple {
     return config;
   }
 
+  getModuleConfigOriginal<K extends TypeBeanScopeRecordKeys>(moduleName: K):
+  IBeanScopeRecord[K] extends { config?: infer CONFIG } ? CONFIG : undefined {
+    return this.sys.configOriginal.modules![moduleName as any] ?? {};
+  }
+
   parseResourceApi(resource: string, api?: string) {
     const parts = resource.split(':');
     return api ?? combineApiPathControllerAndAction(parts[0], parts[1], undefined, true, true, this.sys.env.API_PREFIX);

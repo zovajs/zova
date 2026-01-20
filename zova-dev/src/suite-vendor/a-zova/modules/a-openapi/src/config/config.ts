@@ -5,6 +5,10 @@ export const config = (_sys: ZovaSys) => {
   return {
     restResource: {
       provider: {
+        components: {
+          form: 'a-form:form',
+          table: 'a-table:table',
+        },
         actions: {
           actionLog: 'a-actions:log',
         },

@@ -221,6 +221,7 @@ export class SysModule extends BeanSimple {
     // extend
     const relativeName = module.info.relativeName;
     this.sys.config.modules[relativeName] = deepExtend({}, config, this.sys.config.modules[relativeName]);
+    this.sys.configOriginal.modules![relativeName] = config;
   }
 
   /** @internal */

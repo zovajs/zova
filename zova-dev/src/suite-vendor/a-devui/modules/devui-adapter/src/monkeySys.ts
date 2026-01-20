@@ -9,9 +9,8 @@ export class MonkeySys extends BeanSimple implements IMonkeySysInitialize {
     if (!scopeStyleConfig.defaultThemeHandler) {
       scopeStyleConfig.defaultThemeHandler = 'devui-adapter:themeHandler';
     }
-    // rest
-    const scopeRestConfig = this.sys.util.getModuleConfigSafe('a-openapi');
-    scopeRestConfig.restResource = deepExtend({
+    // config custom
+    const configCustom: IOpenApiOptionsRestResource = {
       permissions: {
         table: { create: true },
         row: { update: true, delete: true },
@@ -21,7 +20,6 @@ export class MonkeySys extends BeanSimple implements IMonkeySysInitialize {
           restPage: 'devui-restpage:restPage',
           restPageEntry: 'devui-restpageentry:restPageEntry',
           table: 'devui-table:table',
-          form: 'a-form:form',
         },
       },
       form: {
@@ -51,6 +49,15 @@ export class MonkeySys extends BeanSimple implements IMonkeySysInitialize {
           },
         },
       },
-    } satisfies IOpenApiOptionsRestResource, scopeRestConfig.restResource);
+    };
+    // rest
+    const scopeRestConfig = this.sys.util.getModuleConfigSafe('a-openapi');
+    const scopeRestConfigOriginal = this.sys.util.getModuleConfigOriginal('a-openapi');
+    scopeRestConfig.restResource = deepExtend(
+      {},
+      scopeRestConfigOriginal.restResource,
+      configCustom,
+      scopeRestConfig.restResource,
+    );
   }
 }

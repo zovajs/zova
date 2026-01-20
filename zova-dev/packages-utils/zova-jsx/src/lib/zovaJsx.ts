@@ -26,6 +26,9 @@ export class ZovaJsx extends BeanSimple {
 
   private _prepareCelEnv(celEnv: CelEnv) {
     celEnv = celEnv.clone();
+    celEnv.registerFunction('getEvent():dyn', () => {
+      return this.transientObject.eventObject;
+    });
     celEnv.registerFunction('getEventProp(string):dyn', prop => {
       return getProperty(this.transientObject.eventObject, prop);
     });

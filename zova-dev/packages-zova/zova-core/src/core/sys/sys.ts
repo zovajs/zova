@@ -21,6 +21,7 @@ export class ZovaSys {
   util: SysUtil;
   meta: SysMeta;
   config: ZovaConfig;
+  configOriginal: Partial<ZovaConfig>;
   env: ZovaConfigEnv;
   constant: ZovaConstant;
 
@@ -57,6 +58,7 @@ export class ZovaSys {
     await this.meta.error.initialize();
     // // config
     this.config = await this._combineConfig(config);
+    this.configOriginal = { modules: {} };
     // constant
     this.constant = constantDefault;
     // module
