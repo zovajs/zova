@@ -48,7 +48,8 @@ export class MonkeySys extends BeanSimple implements IMonkeySysInitialize {
           },
           actions: {
             actionView: 'rest-actions:view',
-          },
+            actionLog: 'a-actions:log',
+          } as any,
         },
       },
     } satisfies IOpenApiOptionsRestResource, scopeRestConfig.restResource);

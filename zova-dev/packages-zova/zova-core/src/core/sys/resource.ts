@@ -20,6 +20,7 @@ import { deepExtend } from './util.js';
 export const DecoratorBeanFullName = Symbol('Decorator#BeanFullName');
 export const SymbolDecoratorBeanInfo = Symbol('SymbolDecoratorBeanInfo');
 export const SymbolDecoratorProxyDisable = Symbol('SymbolDecoratorProxyDisable');
+export const SymbolDecoratorPreload = Symbol('SymbolDecoratorPreload');
 export const SymbolDecoratorVirtual = Symbol('SymbolDecoratorVirtual');
 export const SymbolDecoratorUse = Symbol('SymbolDecoratorUse');
 export const DecoratorBeanFullNameOfComposable = Symbol('Decorator#BeanFullNameOfComposable');
