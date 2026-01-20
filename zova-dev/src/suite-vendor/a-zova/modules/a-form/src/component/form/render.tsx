@@ -26,13 +26,14 @@ export class RenderForm extends BeanRenderBase {
     const key = property.key!;
     // celScope
     const celScope = this.getFieldCelScope(key);
+    const hostProviders = this.getFieldHostProviders(undefined, celScope);
     // props
-    const props = this.getFieldComponentPropsTop(key, celScope);
+    const props = this.getFieldComponentPropsTop(key, celScope, hostProviders);
     if (cast(props).visible === false) return;
     // displayValue
     celScope.displayValue = props.displayValue;
     const componentOptions = this._getFieldComponentOptionsTop(props.render);
-    return this.zovaJsx.render(componentOptions, props, celScope);
+    return this.zovaJsx.render(componentOptions, props, celScope, hostProviders);
   }
 
   private _getFieldComponentOptionsTop(render: TypeFormFieldRenderComponent): TypeFormFieldRenderComponent {

@@ -5,7 +5,7 @@ import { BeanControllerBase, deepEqual, IComponentOptions, Use } from 'zova';
 import { Controller } from 'zova-module-a-bean';
 import { BeanBehaviorsHolder, IBehaviorItem } from 'zova-module-a-behavior';
 import { TypeFormField } from '../../types/form.js';
-import { constFieldProps, IFormFieldOptions, IFormFieldRenderContextPropsBucket, inputTypePresets } from '../../types/formField.js';
+import { constFieldProps, IFormFieldOptions, IFormFieldRenderContext, IFormFieldRenderContextProps, IFormFieldRenderContextPropsBucket, inputTypePresets } from '../../types/formField.js';
 
 export interface ControllerFormFieldProps<TParentData extends {} = {}> extends IFormFieldOptions<TParentData> {}
 
@@ -91,6 +91,23 @@ export class ControllerFormField<TParentData extends {} = {}> extends BeanContro
     return this.$$form.setFieldDisplayValue(this.name, value, this.propsBucket.onSetDisplayValue);
   }
 
+  public getRenderContext(): IFormFieldRenderContext<TParentData> {
+    const name = this.name;
+    // propsBucket
+    const propsBucket = this.propsBucket;
+    // props
+    const props: IFormFieldRenderContextProps = { name };
+    if (propsBucket.class) {
+      props.class = propsBucket.class;
+    }
+    // celScope
+    const celScope = this.$$form.getFieldCelScope(this.name, {
+      displayValue: propsBucket.displayValue,
+    });
+    const hostProviders = this.$$form.getFieldHostProviders(this, celScope);
+    return { propsBucket, props, celScope, hostProviders };
+  }
+
   private _getPropsBucket() {
     const property = this.property;
     const name = this.name;
@@ -115,7 +132,8 @@ export class ControllerFormField<TParentData extends {} = {}> extends BeanContro
   private _getFieldComponentPropsTop() {
     if (this.$props[constFieldProps] === true) return;
     const celScope = this.$$form.getFieldCelScope(this.name);
-    return this.$$form.getFieldComponentPropsTop(this.name, celScope);
+    const hostProviders = this.$$form.getFieldHostProviders(this, celScope);
+    return this.$$form.getFieldComponentPropsTop(this.name, celScope, hostProviders);
   }
 
   private _getFieldBehaviors() {
