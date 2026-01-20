@@ -70,6 +70,7 @@ export class CliToolsMetadata extends BeanCliBase {
     let content = '';
     // all files
     const globFiles = await globAllTsFiles(moduleName, modulePath);
+    const beansPreload = globFiles.filter(item => item.isPreload).map(item => item.beanFullName);
     // onions
     const scopeResources = {};
     for (const sceneName in onionScenesMeta) {
@@ -167,7 +168,7 @@ export class CliToolsMetadata extends BeanCliBase {
     // index
     await this._generateIndex(modulePath);
     // package
-    await this._generatePackage(modulePath);
+    await this._generatePackage(modulePath, beansPreload);
   }
 
   async _generateLocales(modulePath: string, contentLocales) {
@@ -224,7 +225,7 @@ export { ScopeModule${relativeNameCapitalize} as ScopeModule } from './index.js'
     await this.helper.formatFile({ fileName: jsFile, logPrefix: 'format: ' });
   }
 
-  async _generatePackage(modulePath: string) {
+  async _generatePackage(modulePath: string, beansPreload: string[]) {
     let pkgFile: string;
     let pkg: any;
     let changed: boolean | undefined;
@@ -234,6 +235,15 @@ export { ScopeModule${relativeNameCapitalize} as ScopeModule } from './index.js'
         pkg = await loadJSONFile(pkgFile);
       }
       return pkg;
+    }
+    // beansPreload
+    if (beansPreload.length > 0) {
+      pkg = await _loadPkg();
+      if (!pkg.zovaModule) pkg.zovaModule = {};
+      if (!pkg.zovaModule.beansPreload || pkg.zovaModule.beansPreload.join(',') !== beansPreload.join(',')) {
+        changed = true;
+        pkg.zovaModule.beansPreload = beansPreload;
+      }
     }
     // cli/rest
     for (const name of ['cli', 'icons', 'rest']) {
