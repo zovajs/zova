@@ -73,8 +73,11 @@ export class ZovaJsx extends BeanSimple {
       return () => this.render(componentOptions, props, celScope);
     }
     if (isJsxEvent(componentOptions)) {
+      const transientObject = this.transientObject;
       return (event: Event) => {
-        return this.renderEvent(event, componentOptions, celScope, hostProviders);
+        return this.setTransientObject(transientObject, () => {
+          return this.renderEvent(event, componentOptions, celScope, hostProviders);
+        });
       };
     }
     // normal
@@ -168,8 +171,11 @@ export class ZovaJsx extends BeanSimple {
       return this._renderEventActionNormal_inner(beanInstance, actionChild, celScope, hostProviders, eventRes, next);
     }
     // async
+    const transientObject = this.transientObject;
     return this.sys.bean._getBean(beanFullName, false).then(beanInstance => {
-      return this._renderEventActionNormal_inner(beanInstance, actionChild, celScope, hostProviders, eventRes, next);
+      return this.setTransientObject(transientObject, () => {
+        return this._renderEventActionNormal_inner(beanInstance, actionChild, celScope, hostProviders, eventRes, next);
+      });
     });
   }
 
