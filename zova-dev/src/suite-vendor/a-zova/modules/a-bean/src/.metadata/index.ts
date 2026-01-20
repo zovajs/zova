@@ -66,6 +66,9 @@ declare module 'zova' {
   }
 }
 /** service: end */
+/** monkeySys: begin */
+export * from '../monkeySys.js';
+/** monkeySys: end */
 /** scope: begin */
 import { BeanScopeBase, type BeanScopeUtil } from 'zova';
 import { Scope } from '../lib/scope.js';

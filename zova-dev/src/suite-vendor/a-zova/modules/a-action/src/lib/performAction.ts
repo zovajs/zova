@@ -22,7 +22,7 @@ export function $performAction<T extends keyof IActionRecord>(
     return _renderEventActionNormal_inner(beanInstance, options, renderContext, next);
   }
   // async
-  return sys.bean._getBean(beanFullName).then(beanInstance => {
+  return sys.bean._getBean(beanFullName, false).then(beanInstance => {
     return _renderEventActionNormal_inner(beanInstance, options, renderContext, next);
   });
 }

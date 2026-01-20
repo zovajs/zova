@@ -168,7 +168,7 @@ export class ZovaJsx extends BeanSimple {
       return this._renderEventActionNormal_inner(beanInstance, actionChild, celScope, hostProviders, eventRes, next);
     }
     // async
-    return this.sys.bean._getBean(beanFullName).then(beanInstance => {
+    return this.sys.bean._getBean(beanFullName, false).then(beanInstance => {
       return this._renderEventActionNormal_inner(beanInstance, actionChild, celScope, hostProviders, eventRes, next);
     });
   }
