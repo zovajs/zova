@@ -24,15 +24,8 @@ export class MonkeySys extends BeanSimple implements IMonkeySysInitialize {
       },
       form: {
         provider: {
-          components: {
-            formField: 'a-form:formField',
-            text: 'input',
-            password: 'input',
-            currency: 'a-currency:formFieldCurrency',
-            dateRange: 'a-date:formFieldDateRange',
-          },
+          components: {},
           behaviors: {
-            formField: 'a-form:formField',
             formFieldLayout: 'devui-form:formFieldLayout',
           },
         },
@@ -41,8 +34,6 @@ export class MonkeySys extends BeanSimple implements IMonkeySysInitialize {
         provider: {
           components: {
             actionView: 'devui-tableaction.tableCell.actionView',
-            currency: 'a-currency.tableCell.currency',
-            date: 'a-date.tableCell.date',
           },
           actions: {
             actionView: 'rest-actions:view',
