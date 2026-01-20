@@ -6,7 +6,9 @@ export interface IBehaviorPropsInputFocus {}
 
 export interface IBehaviorPropsOutputFocus extends IBehaviorPropsInputFocus {}
 
-export interface IBehaviorOptionsFocus extends IDecoratorBehaviorOptions {}
+export interface IBehaviorOptionsFocus extends IDecoratorBehaviorOptions {
+  always?: boolean;
+}
 
 @Behavior<IBehaviorOptionsFocus>()
 export class BehaviorFocus extends BeanBehaviorBase<
@@ -14,11 +16,16 @@ export class BehaviorFocus extends BeanBehaviorBase<
   IBehaviorPropsInputFocus,
   IBehaviorPropsOutputFocus
 > {
+  inputRef?: HTMLElement;
+
   protected render(props: IBehaviorPropsInputFocus, next: NextBehavior<IBehaviorPropsOutputFocus>): VNode {
     props = {
       ...props,
       ref: (ref: HTMLElement) => {
-        ref.focus();
+        if (this.$options.always || !this.inputRef) {
+          ref.focus();
+        }
+        this.inputRef = ref;
       },
     };
     return next(props);
