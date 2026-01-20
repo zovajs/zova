@@ -61,8 +61,8 @@ importers:
         specifier: ^3.1.0
         version: 3.1.11
       '@cabloy/module-info':
-        specifier: ^1.3.32
-        version: 1.3.32
+        specifier: ^1.3.39
+        version: 1.3.39
       '@cabloy/openapi-typescript':
         specifier: ^7.9.2
         version: 7.9.2(typescript@5.9.3)
@@ -326,11 +326,11 @@ packages:
   '@cabloy/module-glob@5.2.40':
     resolution: {integrity: sha512-yEpfBRlwPFnfsarzTiq6Vuo9c4LvxjQPWL+wylisKr219U6bhUjcD9aRngj4paB/WMlNZ3LYAiTLqxGt6AUB1A==}
 
-  '@cabloy/module-info@1.3.32':
-    resolution: {integrity: sha512-tezLYem2/+GrfVo6J+o0f2Cf+rVqLJD030XlRZbaKqoGrNHAGJwZvngOcQP1r9cGyuJTsmfE98KQ2fry5H/PxA==}
+  '@cabloy/module-info@1.3.38':
+    resolution: {integrity: sha512-aZu70NQHwbjtcbi8Rbp/kd9RztHvdmd7hJVlhsAOwsUFJhpwbgTjFrMCDWD7tRn+GcF0JdV1fginPj6ta2muAg==}
 
-  '@cabloy/module-info@1.3.37':
-    resolution: {integrity: sha512-7gwbacwugWbf+IEnOLTOLVGMAWpDxajdj4tR+JITj4kMK+XC6vS1DQZsxFqo4BApEIMqU57bcOCP3tK4Ny6SYQ==}
+  '@cabloy/module-info@1.3.39':
+    resolution: {integrity: sha512-r6TGOfMuH88ULWlQBWR2RuYYs7lPmPItizaU/4LeYAjWfnmwANQDorbGBh2C9yGJCbmdqptEKAEInIbgUu9cow==}
 
   '@cabloy/openapi-typescript@7.9.2':
     resolution: {integrity: sha512-ftV2wtrEUkYX6qTwP5DGMox8uMpQ5zjsWIbxCeYCDMstyTTzKDf/SS72wiWF8HqnwrpnMYz6KiC4erRkAv/6BQ==}
@@ -4316,7 +4316,7 @@ snapshots:
     dependencies:
       '@babel/parser': 7.28.5
       '@cabloy/module-glob': 5.2.40
-      '@cabloy/module-info': 1.3.32
+      '@cabloy/module-info': 1.3.38
       '@cabloy/process-helper': 2.0.25
       '@cabloy/utils': 2.0.5
       '@cabloy/word-utils': 2.0.1
@@ -4383,7 +4383,7 @@ snapshots:
 
   '@cabloy/module-glob@5.2.40':
     dependencies:
-      '@cabloy/module-info': 1.3.32
+      '@cabloy/module-info': 1.3.39
       '@cabloy/utils': 2.0.16
       boxen: 4.2.0
       chalk: 3.0.0
@@ -4391,9 +4391,9 @@ snapshots:
       globby: 16.1.0
       semver: 7.7.3
 
-  '@cabloy/module-info@1.3.32': {}
+  '@cabloy/module-info@1.3.38': {}
 
-  '@cabloy/module-info@1.3.37': {}
+  '@cabloy/module-info@1.3.39': {}
 
   '@cabloy/openapi-typescript@7.9.2(typescript@5.9.3)':
     dependencies:
@@ -4409,14 +4409,14 @@ snapshots:
 
   '@cabloy/utils@2.0.16':
     dependencies:
-      '@cabloy/module-info': 1.3.37
+      '@cabloy/module-info': 1.3.39
       '@cabloy/word-utils': 2.0.2
       '@marcbachmann/cel-js': 6.5.1
       object-hash: 3.0.0
 
   '@cabloy/utils@2.0.5':
     dependencies:
-      '@cabloy/module-info': 1.3.32
+      '@cabloy/module-info': 1.3.39
       '@cabloy/word-utils': 2.0.2
       '@marcbachmann/cel-js': 6.5.1
       object-hash: 3.0.0
@@ -5614,7 +5614,7 @@ snapshots:
 
   babel-plugin-zova-bean-module@1.1.1:
     dependencies:
-      '@cabloy/module-info': 1.3.32
+      '@cabloy/module-info': 1.3.39
       '@cabloy/word-utils': 2.0.2
 
   babel-plugin-zova-bean-use@1.0.3: {}
@@ -8286,7 +8286,7 @@ snapshots:
       '@cabloy/dotenv': 1.1.12
       '@cabloy/extend': 3.1.11
       '@cabloy/module-glob': 5.2.40
-      '@cabloy/module-info': 1.3.32
+      '@cabloy/module-info': 1.3.39
       '@cabloy/vite-plugin-babel': 1.3.1(@babel/core@7.28.5)(vite@6.4.1(@types/node@22.19.3)(terser@5.44.1)(yaml@2.8.2))
       '@cabloy/vue-babel-plugin-jsx': 1.2.5(@babel/core@7.28.5)
       '@cabloy/vue-compiler-sfc': 3.5.14

@@ -37,6 +37,7 @@ export async function globAllTsFiles(moduleName: string, modulePath: string): Pr
       .replace('.tsx', '.jsx');
     const fileContent = fse.readFileSync(filePath).toString();
     const isVirtual = fileContent.includes('@Virtual()');
+    const isPreload = fileContent.includes('@Preload()');
     const matches = fileContent.replace('@ProxyDisable()', '').match(/\s@([^\s<]+)\S*?\([\s\S]*?\)\sexport class ([^ \n<]+)/);
     if (!matches) continue;
     const className = matches[2];
@@ -45,6 +46,7 @@ export async function globAllTsFiles(moduleName: string, modulePath: string): Pr
     const beanName = parseBeanName(className, sceneName);
     const beanNameFull = `${moduleName}:${beanName}`;
     const beanNameCapitalize = toUpperCaseFirstChar(beanName);
+    const beanFullName = `${moduleName}.${sceneName}.${beanName}`;
     result.push({
       sceneName,
       sceneNameCapitalize,
@@ -57,8 +59,10 @@ export async function globAllTsFiles(moduleName: string, modulePath: string): Pr
       beanName,
       beanNameFull,
       beanNameCapitalize,
+      beanFullName,
       isIgnore,
       isVirtual,
+      isPreload,
     });
   }
   return result;
