@@ -127,6 +127,7 @@ export class ZovaJsx extends BeanSimple {
         return this.setTransientObject(transientObject, () => {
           // record res
           if (index > 0) {
+            if (actionRes === undefined) actionRes = null;
             eventRes[index - 1] = actionRes;
             const actionChildPrev = actionChildren[index - 1];
             const resName = cast(actionChildPrev.props)?.res;
