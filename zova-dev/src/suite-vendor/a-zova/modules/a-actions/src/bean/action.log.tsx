@@ -4,13 +4,15 @@ import { IRenderContextBase } from 'zova-module-a-openapi';
 
 export type TypeActionLogResult = unknown;
 
-export interface IActionOptionsLog extends IDecoratorActionOptions<TypeActionLogResult> {}
+export interface IActionOptionsLog extends IDecoratorActionOptions<TypeActionLogResult> {
+  message: string;
+}
 
 @Action<IActionOptionsLog>()
 @Preload()
 export class ActionLog extends BeanBase implements IActionExecute {
-  execute(_options: IActionOptionsLog, _renderContext: IRenderContextBase, next: NextActionExecute) {
-    console.log(_renderContext.$$scene);
+  execute(options: IActionOptionsLog, _renderContext: IRenderContextBase, next: NextActionExecute) {
+    this.$logger.silly(options.message === undefined ? '' : options.message);
     return next();
   }
 }
