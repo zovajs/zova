@@ -1,7 +1,7 @@
 import type { VNode } from 'vue';
 import type { IFormProviderComponents, TypeRenderComponent, TypeRenderComponentJsx, TypeRenderComponentJsxProps } from '../types/rest.ts';
 import { compose } from '@cabloy/compose';
-import { celEnvBase, evaluateExpressions, getProperty, isPromise } from '@cabloy/utils';
+import { celEnvBase, evaluateExpressions, getProperty } from '@cabloy/utils';
 import { toUpperCaseFirstChar } from '@cabloy/word-utils';
 import { classes } from 'typestyle';
 import { createTextVNode, h } from 'vue';
@@ -15,7 +15,6 @@ export class ZovaJsx extends BeanSimple {
   private _components: IFormProviderComponents | undefined;
   private _actions: Record<string, string> | undefined;
   private _celEnv: CelEnv;
-  private _eventObject?: Event;
   private _transientObject: any;
 
   constructor(components?: IFormProviderComponents, actions?: Record<string, string>, celEnv?: CelEnv) {
@@ -28,7 +27,7 @@ export class ZovaJsx extends BeanSimple {
   private _prepareCelEnv(celEnv: CelEnv) {
     celEnv = celEnv.clone();
     celEnv.registerFunction('getEventProp(string):dyn', prop => {
-      return getProperty(this._eventObject, prop);
+      return getProperty(this.transientObject.eventObject, prop);
     });
     return celEnv;
   }
@@ -78,8 +77,9 @@ export class ZovaJsx extends BeanSimple {
       };
     }
     if (isJsxEvent(componentOptions)) {
-      const transientObject = this.transientObject;
+      let transientObject = this.transientObject;
       return (event: Event) => {
+        transientObject = { ...transientObject, eventObject: event };
         return this.setTransientObject(transientObject, () => {
           return this.renderEvent(event, componentOptions, celScope, hostProviders);
         });
@@ -90,26 +90,16 @@ export class ZovaJsx extends BeanSimple {
   }
 
   public renderEvent(event: Event, componentOptions: TypeRenderComponentJsx, celScope: {}, hostProviders: {} | undefined) {
-    // event
-    this._eventObject = event;
     // props
     if (event && event instanceof Event) {
       const props: any = this.renderJsxProps(componentOptions.props, {}, celScope, hostProviders);
-      if (props.stop) this._eventObject.stopPropagation();
-      if (props.prevent) this._eventObject.preventDefault();
+      if (props.stop) event.stopPropagation();
+      if (props.prevent) event.preventDefault();
     }
     // render
     const eventRes: any[] = [];
     celScope = { ...celScope, res: eventRes };
-    const result = this.renderEventDirect(componentOptions, celScope, hostProviders, eventRes);
-    if (isPromise(result)) {
-      return result.then(result => {
-        this._eventObject = undefined;
-        return result;
-      });
-    }
-    this._eventObject = undefined;
-    return result;
+    return this.renderEventDirect(componentOptions, celScope, hostProviders, eventRes);
   }
 
   public renderEventDirect(componentOptions: TypeRenderComponentJsx, celScope: {}, hostProviders: {} | undefined, eventRes: any[], next?: Function) {
@@ -315,6 +305,7 @@ export class ZovaJsx extends BeanSimple {
     if (!Array.isArray(jsxChildren)) jsxChildren = [jsxChildren];
     const children: TypeRenderComponentJsx[] = [];
     const slots: Record<string, TypeRenderComponentJsx> = {};
+    const transientObject = this.transientObject;
     for (const jsxChild of jsxChildren) {
       if (jsxChild && typeof jsxChild === 'object' && jsxChild.props?.['v-slot']) {
         const slotName = jsxChild.props?.['v-slot'];
@@ -322,12 +313,16 @@ export class ZovaJsx extends BeanSimple {
         let slot;
         if (slotScopeName) {
           slot = slotScope => {
-            const celScopeSub = { ...celScope, [slotScopeName]: slotScope };
-            return this.renderJsxChildrenDirect(jsxChild, celScopeSub, hostProviders);
+            return this.setTransientObject(transientObject, () => {
+              const celScopeSub = { ...celScope, [slotScopeName]: slotScope };
+              return this.renderJsxChildrenDirect(jsxChild, celScopeSub, hostProviders);
+            });
           };
         } else {
           slot = () => {
-            return this.renderJsxChildrenDirect(jsxChild, celScope, hostProviders);
+            return this.setTransientObject(transientObject, () => {
+              return this.renderJsxChildrenDirect(jsxChild, celScope, hostProviders);
+            });
           };
         }
         slots[slotName] = slot;
@@ -339,7 +334,9 @@ export class ZovaJsx extends BeanSimple {
     const slotDefault = children.length === 0
       ? undefined
       : () => {
-          return this.renderJsxChildrenDirect(children, celScope, hostProviders);
+          return this.setTransientObject(transientObject, () => {
+            return this.renderJsxChildrenDirect(children, celScope, hostProviders);
+          });
         };
     // ok
     return {
