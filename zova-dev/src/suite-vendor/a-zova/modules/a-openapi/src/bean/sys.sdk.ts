@@ -4,14 +4,14 @@ import { BeanBase, ILocaleRecord, TypeEventOff } from 'zova';
 import { Sys } from 'zova-module-a-bean';
 import { BeanFetch } from 'zova-module-a-fetch';
 import { IOpenapiSchema } from '../types/schema.js';
-import { IOpenapiSdkItem, SymbolOpenapiSchemaName, TypeRequestMethod } from '../types/sdk.js';
+import { IOpenapiSdkBootstrap, IOpenapiSdkItem, SymbolOpenapiSchemaName, TypeRequestMethod } from '../types/sdk.js';
 
 // const PATH_PARAM_RE = /\{([^{}/]+)\}/g;
 
 @Sys()
 export class SysSdk extends BeanBase {
   private locale: keyof ILocaleRecord;
-  bootstraps: Record<string, string>;
+  bootstraps: Record<string, IOpenapiSdkBootstrap>;
   schemas: Record<string, SchemaObject>;
   sdks: Record<string, Record<string, IOpenapiSdkItem>>;
   private _eventSsrHmrReload: TypeEventOff;
@@ -62,7 +62,7 @@ export class SysSdk extends BeanBase {
     }
   }
 
-  getBootstrap(resource: string): string | undefined {
+  getBootstrap(resource: string): IOpenapiSdkBootstrap | undefined {
     return this.bootstraps[resource];
   }
 
@@ -76,7 +76,7 @@ export class SysSdk extends BeanBase {
     return this.schemas[schemaName];
   }
 
-  async loadBootstrap($fetch: BeanFetch, resource: string): Promise<string> {
+  async loadBootstrap($fetch: BeanFetch, resource: string): Promise<IOpenapiSdkBootstrap> {
     if (process.env.CLIENT) {
       this._fetch = $fetch;
     }

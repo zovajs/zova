@@ -47,9 +47,9 @@ export class ModelSdk extends BeanModelBase {
     return this.$useStateData({
       queryKey: ['bootstrap', resource],
       queryFn: async () => {
-        const api = await this.$$sysSdk.loadBootstrap(this.$fetch, resource);
-        if (!api) throw new Error('load bootstrap error');
-        return api ?? null;
+        const bootstrap = await this.$$sysSdk.loadBootstrap(this.$fetch, resource);
+        if (!bootstrap) throw new Error('load bootstrap error');
+        return bootstrap ?? null;
       },
     });
   }

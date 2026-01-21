@@ -43,8 +43,8 @@ export class ControllerTable<TData extends {} = {}> extends BeanControllerTableB
     this.tableProvider = this.$useComputed(() => {
       return deepExtend(
         {},
-        this.$$scopeModuleAOpenapi.config.restResource.provider,
-        this.$$scopeModuleAOpenapi.config.restResource.table?.provider,
+        this.$$scopeModuleAOpenapi.config.resourceMeta.provider,
+        this.$$scopeModuleAOpenapi.config.resourceMeta.table?.provider,
         this.$props.tableProvider,
       );
     });

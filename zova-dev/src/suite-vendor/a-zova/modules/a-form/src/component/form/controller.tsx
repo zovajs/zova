@@ -61,8 +61,8 @@ export class ControllerForm<TFormData extends {} = {}, TSubmitMeta = never> exte
     this.formProvider = this.$useComputed(() => {
       return deepExtend(
         {},
-        this.$$scopeModuleAOpenapi.config.restResource.provider,
-        this.$$scopeModuleAOpenapi.config.restResource.form?.provider,
+        this.$$scopeModuleAOpenapi.config.resourceMeta.provider,
+        this.$$scopeModuleAOpenapi.config.resourceMeta.form?.provider,
         this.$props.formProvider,
       );
     });

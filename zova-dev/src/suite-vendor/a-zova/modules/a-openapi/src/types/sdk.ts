@@ -1,8 +1,14 @@
 import type { OperationObject } from 'openapi3-ts/oas31';
 import type { ModelSdk } from '../model/sdk.js';
+import type { IOpenapiOptionsResourceMeta } from './resourceMeta.js';
 import type { IOpenapiSchemaMeta } from './schema.js';
 
 export const SymbolOpenapiSchemaName = '__schemaName__';
+
+export interface IOpenapiSdkBootstrap {
+  apiPath: string;
+  resourceMeta: IOpenapiOptionsResourceMeta;
+}
 
 export interface IOpenapiSdkItem {
   schemas: string[];
