@@ -4,6 +4,8 @@ import type { IJsxRenderContextBase } from 'zova-module-a-openapi';
 
 export const SymbolActionResult = Symbol('SymbolActionResult');
 
+export type TypeActionOptionsRest<T> = Omit<T, typeof SymbolActionResult> & { res?: string };
+
 export type NextActionExecute = (res?: any) => any | Promise<any>;
 
 export interface IActionsRecord {}

@@ -26,13 +26,14 @@ async function generateRestAction(
   const typeOptionsName = `IActionOptions${beanNameCapitalize}`;
   // import
   const contentImports: string[] = [];
+  contentImports.push('import type { TypeActionOptionsRest } from \'zova-module-a-action\';');
   contentImports.push(`import type { ${typeOptionsName} } from '../../src/bean/${fileNameJS}';`);
   // component
   const componentNamePrefix = 'AA';
   const componentName = beanName;
   const componentNameFull = `${componentNamePrefix}${toUpperCaseFirstChar(combineResourceName(componentName, moduleName, true, true))}`;
   const contentComponent = `export function ${componentNameFull}(
-  _props: ${typeOptionsName} & { res?: string },
+  _props: TypeActionOptionsRest<${typeOptionsName}>,
 ) {
   return '${moduleName}:${beanName}';
 }`;
