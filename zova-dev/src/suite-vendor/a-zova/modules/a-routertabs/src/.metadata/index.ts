@@ -1,4 +1,39 @@
 /* eslint-disable */
+/** model: begin */
+export * from '../model/tabs.js';
+import { IModelOptionsTabs } from '../model/tabs.js';
+import 'zova-module-a-model';
+declare module 'zova-module-a-model' {
+  
+    export interface IModelRecord {
+      'a-routertabs:tabs': IModelOptionsTabs;
+    }
+
+  
+}
+declare module 'zova-module-a-routertabs' {
+  
+        export interface ModelTabs {
+          /** @internal */
+          get scope(): ScopeModuleARoutertabs;
+        }
+
+        export interface ModelTabs {
+          get $beanFullName(): 'a-routertabs.model.tabs';
+          get $onionName(): 'a-routertabs:tabs';
+          get $onionOptions(): IModelOptionsTabs;
+        } 
+}
+/** model: end */
+/** model: begin */
+import { ModelTabs } from '../model/tabs.js';
+import 'zova';
+declare module 'zova' {
+  export interface IBeanRecordGeneral {
+    'a-routertabs.model.tabs': ModelTabs;
+  }
+}
+/** model: end */
 /** controller: begin */
 export * from '../component/routerViewTabs/controller.jsx';
 
@@ -41,41 +76,6 @@ export interface IZovaComponentRecord {
 }
 }
 /** components: end */
-/** model: begin */
-export * from '../model/tabs.js';
-import { IModelOptionsTabs } from '../model/tabs.js';
-import 'zova-module-a-model';
-declare module 'zova-module-a-model' {
-  
-    export interface IModelRecord {
-      'a-routertabs:tabs': IModelOptionsTabs;
-    }
-
-  
-}
-declare module 'zova-module-a-routertabs' {
-  
-        export interface ModelTabs {
-          /** @internal */
-          get scope(): ScopeModuleARoutertabs;
-        }
-
-        export interface ModelTabs {
-          get $beanFullName(): 'a-routertabs.model.tabs';
-          get $onionName(): 'a-routertabs:tabs';
-          get $onionOptions(): IModelOptionsTabs;
-        } 
-}
-/** model: end */
-/** model: begin */
-import { ModelTabs } from '../model/tabs.js';
-import 'zova';
-declare module 'zova' {
-  export interface IBeanRecordGeneral {
-    'a-routertabs.model.tabs': ModelTabs;
-  }
-}
-/** model: end */
 /** scope: begin */
 import { BeanScopeBase, type BeanScopeUtil } from 'zova';
 import { Scope } from 'zova-module-a-bean';

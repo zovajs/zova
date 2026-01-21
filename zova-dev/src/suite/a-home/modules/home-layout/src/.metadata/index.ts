@@ -1,4 +1,39 @@
 /* eslint-disable */
+/** model: begin */
+export * from '../model/menu.js';
+import { IModelOptionsMenu } from '../model/menu.js';
+import 'zova-module-a-model';
+declare module 'zova-module-a-model' {
+  
+    export interface IModelRecord {
+      'home-layout:menu': IModelOptionsMenu;
+    }
+
+  
+}
+declare module 'zova-module-home-layout' {
+  
+        export interface ModelMenu {
+          /** @internal */
+          get scope(): ScopeModuleHomeLayout;
+        }
+
+        export interface ModelMenu {
+          get $beanFullName(): 'home-layout.model.menu';
+          get $onionName(): 'home-layout:menu';
+          get $onionOptions(): IModelOptionsMenu;
+        } 
+}
+/** model: end */
+/** model: begin */
+import { ModelMenu } from '../model/menu.js';
+import 'zova';
+declare module 'zova' {
+  export interface IBeanRecordGeneral {
+    'home-layout.model.menu': ModelMenu;
+  }
+}
+/** model: end */
 /** controller: begin */
 export * from '../component/essentialLink/controller.jsx';
 export * from '../component/layoutEmpty/controller.jsx';
@@ -181,41 +216,6 @@ declare module 'zova' {
   }
 }
 /** style: end */
-/** model: begin */
-export * from '../model/menu.js';
-import { IModelOptionsMenu } from '../model/menu.js';
-import 'zova-module-a-model';
-declare module 'zova-module-a-model' {
-  
-    export interface IModelRecord {
-      'home-layout:menu': IModelOptionsMenu;
-    }
-
-  
-}
-declare module 'zova-module-home-layout' {
-  
-        export interface ModelMenu {
-          /** @internal */
-          get scope(): ScopeModuleHomeLayout;
-        }
-
-        export interface ModelMenu {
-          get $beanFullName(): 'home-layout.model.menu';
-          get $onionName(): 'home-layout:menu';
-          get $onionOptions(): IModelOptionsMenu;
-        } 
-}
-/** model: end */
-/** model: begin */
-import { ModelMenu } from '../model/menu.js';
-import 'zova';
-declare module 'zova' {
-  export interface IBeanRecordGeneral {
-    'home-layout.model.menu': ModelMenu;
-  }
-}
-/** model: end */
 /** config: begin */
 export * from '../config/config.js';
 import { config } from '../config/config.js';

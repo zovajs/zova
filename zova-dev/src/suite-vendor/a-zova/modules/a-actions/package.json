@@ -21,7 +21,8 @@
   },
   "files": [
     "dist",
-    "mock"
+    "mock",
+    "rest"
   ],
   "scripts": {
     "clean": "tsc -b --clean",

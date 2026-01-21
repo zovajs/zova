@@ -1,4 +1,39 @@
 /* eslint-disable */
+/** model: begin */
+export * from '../model/todo.js';
+import { IModelOptionsTodo } from '../model/todo.js';
+import 'zova-module-a-model';
+declare module 'zova-module-a-model' {
+  
+    export interface IModelRecord {
+      'demo-todo:todo': IModelOptionsTodo;
+    }
+
+  
+}
+declare module 'zova-module-demo-todo' {
+  
+        export interface ModelTodo {
+          /** @internal */
+          get scope(): ScopeModuleDemoTodo;
+        }
+
+        export interface ModelTodo {
+          get $beanFullName(): 'demo-todo.model.todo';
+          get $onionName(): 'demo-todo:todo';
+          get $onionOptions(): IModelOptionsTodo;
+        } 
+}
+/** model: end */
+/** model: begin */
+import { ModelTodo } from '../model/todo.js';
+import 'zova';
+declare module 'zova' {
+  export interface IBeanRecordGeneral {
+    'demo-todo.model.todo': ModelTodo;
+  }
+}
+/** model: end */
 /** api: begin */
 export * from '../api/todo.js';
 
@@ -105,41 +140,6 @@ $query: NSControllerPageItem.QueryOutput;
 }
 /** pages: end */
 
-/** model: begin */
-export * from '../model/todo.js';
-import { IModelOptionsTodo } from '../model/todo.js';
-import 'zova-module-a-model';
-declare module 'zova-module-a-model' {
-  
-    export interface IModelRecord {
-      'demo-todo:todo': IModelOptionsTodo;
-    }
-
-  
-}
-declare module 'zova-module-demo-todo' {
-  
-        export interface ModelTodo {
-          /** @internal */
-          get scope(): ScopeModuleDemoTodo;
-        }
-
-        export interface ModelTodo {
-          get $beanFullName(): 'demo-todo.model.todo';
-          get $onionName(): 'demo-todo:todo';
-          get $onionOptions(): IModelOptionsTodo;
-        } 
-}
-/** model: end */
-/** model: begin */
-import { ModelTodo } from '../model/todo.js';
-import 'zova';
-declare module 'zova' {
-  export interface IBeanRecordGeneral {
-    'demo-todo.model.todo': ModelTodo;
-  }
-}
-/** model: end */
 /** scope: begin */
 import { BeanScopeBase, type BeanScopeUtil } from 'zova';
 import { Scope } from 'zova-module-a-bean';

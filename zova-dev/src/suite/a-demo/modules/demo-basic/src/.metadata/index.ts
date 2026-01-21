@@ -1,4 +1,39 @@
 /* eslint-disable */
+/** model: begin */
+export * from '../model/test.js';
+import { IModelOptionsTest } from '../model/test.js';
+import 'zova-module-a-model';
+declare module 'zova-module-a-model' {
+  
+    export interface IModelRecord {
+      'demo-basic:test': IModelOptionsTest;
+    }
+
+  
+}
+declare module 'zova-module-demo-basic' {
+  
+        export interface ModelTest {
+          /** @internal */
+          get scope(): ScopeModuleDemoBasic;
+        }
+
+        export interface ModelTest {
+          get $beanFullName(): 'demo-basic.model.test';
+          get $onionName(): 'demo-basic:test';
+          get $onionOptions(): IModelOptionsTest;
+        } 
+}
+/** model: end */
+/** model: begin */
+import { ModelTest } from '../model/test.js';
+import 'zova';
+declare module 'zova' {
+  export interface IBeanRecordGeneral {
+    'demo-basic.model.test': ModelTest;
+  }
+}
+/** model: end */
 /** store: begin */
 export * from '../bean/store.counter.js';
 
@@ -413,41 +448,6 @@ declare module 'vue/jsx-runtime' {
   }
 }
 /** behaviors: end */
-/** model: begin */
-export * from '../model/test.js';
-import { IModelOptionsTest } from '../model/test.js';
-import 'zova-module-a-model';
-declare module 'zova-module-a-model' {
-  
-    export interface IModelRecord {
-      'demo-basic:test': IModelOptionsTest;
-    }
-
-  
-}
-declare module 'zova-module-demo-basic' {
-  
-        export interface ModelTest {
-          /** @internal */
-          get scope(): ScopeModuleDemoBasic;
-        }
-
-        export interface ModelTest {
-          get $beanFullName(): 'demo-basic.model.test';
-          get $onionName(): 'demo-basic:test';
-          get $onionOptions(): IModelOptionsTest;
-        } 
-}
-/** model: end */
-/** model: begin */
-import { ModelTest } from '../model/test.js';
-import 'zova';
-declare module 'zova' {
-  export interface IBeanRecordGeneral {
-    'demo-basic.model.test': ModelTest;
-  }
-}
-/** model: end */
 /** theme: begin */
 export * from '../bean/theme.orange.js';
 import { IThemeOptionsOrange } from '../bean/theme.orange.js';

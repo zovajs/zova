@@ -1,4 +1,39 @@
 /* eslint-disable */
+/** model: begin */
+export * from '../model/passport.js';
+import { IModelOptionsPassport } from '../model/passport.js';
+import 'zova-module-a-model';
+declare module 'zova-module-a-model' {
+  
+    export interface IModelRecord {
+      'home-user:passport': IModelOptionsPassport;
+    }
+
+  
+}
+declare module 'zova-module-home-user' {
+  
+        export interface ModelPassport {
+          /** @internal */
+          get scope(): ScopeModuleHomeUser;
+        }
+
+        export interface ModelPassport {
+          get $beanFullName(): 'home-user.model.passport';
+          get $onionName(): 'home-user:passport';
+          get $onionOptions(): IModelOptionsPassport;
+        } 
+}
+/** model: end */
+/** model: begin */
+import { ModelPassport } from '../model/passport.js';
+import 'zova';
+declare module 'zova' {
+  export interface IBeanRecordGeneral {
+    'home-user.model.passport': ModelPassport;
+  }
+}
+/** model: end */
 /** controller: begin */
 export * from '../component/formFieldCaptcha/controller.jsx';
 export * from '../page/login/controller.jsx';
@@ -151,41 +186,6 @@ declare module 'vue/jsx-runtime' {
   }
 }
 /** behaviors: end */
-/** model: begin */
-export * from '../model/passport.js';
-import { IModelOptionsPassport } from '../model/passport.js';
-import 'zova-module-a-model';
-declare module 'zova-module-a-model' {
-  
-    export interface IModelRecord {
-      'home-user:passport': IModelOptionsPassport;
-    }
-
-  
-}
-declare module 'zova-module-home-user' {
-  
-        export interface ModelPassport {
-          /** @internal */
-          get scope(): ScopeModuleHomeUser;
-        }
-
-        export interface ModelPassport {
-          get $beanFullName(): 'home-user.model.passport';
-          get $onionName(): 'home-user:passport';
-          get $onionOptions(): IModelOptionsPassport;
-        } 
-}
-/** model: end */
-/** model: begin */
-import { ModelPassport } from '../model/passport.js';
-import 'zova';
-declare module 'zova' {
-  export interface IBeanRecordGeneral {
-    'home-user.model.passport': ModelPassport;
-  }
-}
-/** model: end */
 /** config: begin */
 export * from '../config/config.js';
 import { config } from '../config/config.js';
