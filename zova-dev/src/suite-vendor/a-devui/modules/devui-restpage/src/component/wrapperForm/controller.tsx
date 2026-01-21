@@ -4,13 +4,14 @@ import { SchemaObject } from 'openapi3-ts/oas31';
 import { TableIdentity } from 'table-identity';
 import { BeanControllerBase, Use } from 'zova';
 import { Controller } from 'zova-module-a-bean';
-import { ControllerForm, IFormMeta, IFormProvider, TypeFormOnSubmitData } from 'zova-module-a-form';
+import { ControllerForm, IFormCelScope, IFormMeta, IFormProvider, TypeFormOnSubmitData } from 'zova-module-a-form';
 import { $QueryAutoLoad } from 'zova-module-a-model';
 
 export interface ControllerWrapperFormProps {
   entryId?: TableIdentity;
   formMeta: IFormMeta;
   formProvider?: IFormProvider;
+  formScope?: IFormCelScope;
   onControllerForm?: (ref: ControllerForm) => void;
 }
 

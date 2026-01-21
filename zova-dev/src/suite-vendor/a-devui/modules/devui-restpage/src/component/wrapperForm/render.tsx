@@ -12,6 +12,7 @@ export class RenderWrapperForm extends BeanRenderBase {
         schema={this.formSchema}
         formMeta={this.formMeta}
         formProvider={this.$props.formProvider}
+        formScope={this.$props.formScope}
         onSubmit={data => this.onSubmit(data)}
         onShowError={({ error }) => {
           // eslint-disable-next-line no-alert

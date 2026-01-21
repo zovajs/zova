@@ -13,6 +13,7 @@ export class RenderRestPage extends BeanRenderBase {
         </ClientOnly>
         <ZWrapperTable
           tableProvider={this.tableProvider}
+          tableScope={this.tableScope}
           onActionTable={action => this.onActionTable(action)}
           onActionRow={(action, row) => this.onActionRow(action, row)}
         ></ZWrapperTable>
@@ -31,6 +32,7 @@ export class RenderRestPage extends BeanRenderBase {
                 entryId={this.entryId}
                 formMeta={this.formMeta}
                 formProvider={this.formProvider}
+                formScope={this.formScope}
                 onControllerForm={ref => this.controllerForm = ref}
               ></ZWrapperForm>
             )}

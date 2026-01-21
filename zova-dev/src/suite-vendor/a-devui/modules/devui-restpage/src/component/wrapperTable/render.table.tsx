@@ -13,7 +13,7 @@ export class RenderTable<TData extends {} = {}> extends BeanRenderBase {
         data={this.data}
         schema={this.schema}
         tableProvider={this.$props.tableProvider}
-        tableScope={this.tableScope}
+        tableScope={this.$props.tableScope}
         getColumns={(next, $$table) => {
           return this.getColumns(next, $$table);
         }}

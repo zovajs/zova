@@ -5,9 +5,9 @@ import { TableIdentity } from 'table-identity';
 import { useId } from 'vue';
 import { BeanControllerBase, Use } from 'zova';
 import { Controller } from 'zova-module-a-bean';
-import { ControllerForm, formSceneFromFormMeta, IFormMeta, IFormProvider, TypeEditMode, TypeFormMode } from 'zova-module-a-form';
+import { ControllerForm, formSceneFromFormMeta, IFormCelScope, IFormMeta, IFormProvider, TypeEditMode, TypeFormMode } from 'zova-module-a-form';
 import { TypeResourceActionRowRecord, TypeResourceActionTableRecord } from 'zova-module-a-openapi';
-import { ITableActionHandler, ITableProvider } from 'zova-module-a-table';
+import { ITableActionHandler, ITableCelScope, ITableProvider } from 'zova-module-a-table';
 
 @Controller()
 export class ControllerRestPage extends BeanControllerBase implements ITableActionHandler {
@@ -20,7 +20,9 @@ export class ControllerRestPage extends BeanControllerBase implements ITableActi
   formSchema?: SchemaObject;
   entryId?: TableIdentity;
   formProvider: IFormProvider;
+  formScope: IFormCelScope;
   tableProvider: ITableProvider;
+  tableScope: ITableCelScope;
 
   formDomId: string;
   controllerForm: ControllerForm;
@@ -36,8 +38,14 @@ export class ControllerRestPage extends BeanControllerBase implements ITableActi
     this.formProvider = this.$useComputed(() => {
       return this.$$modelResource.formProvider;
     });
+    this.formScope = this.$useComputed(() => {
+      return { resource: this.$$modelResource.resource, id: this.entryId };
+    });
     this.tableProvider = this.$useComputed(() => {
       return this.$$modelResource.tableProvider;
+    });
+    this.tableScope = this.$useComputed(() => {
+      return { resource: this.$$modelResource.resource };
     });
     this.formSchema = this.$useComputed(() => {
       return this.$$modelResource.getFormSchema(this.formMeta);

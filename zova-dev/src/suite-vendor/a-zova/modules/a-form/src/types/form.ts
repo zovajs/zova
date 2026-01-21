@@ -309,3 +309,5 @@ declare module 'zova' {
     'a-form:formSubmission': { data: IEventFormSubmission; result: boolean | undefined };
   }
 }
+
+export interface IFormCelScope {}

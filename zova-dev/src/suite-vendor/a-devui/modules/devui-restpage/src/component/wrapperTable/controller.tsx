@@ -9,6 +9,7 @@ import { RenderActions } from './render.actions.jsx';
 
 export interface ControllerWrapperTableProps<TData extends {} = {}> {
   tableProvider?: ITableProvider;
+  tableScope?: ITableCelScope;
   onActionTable?: (action: keyof TypeResourceActionTableRecord) => Promise<any> | undefined;
   onActionRow?: (action: keyof TypeResourceActionRowRecord, row: Row<TData>) => Promise<any> | undefined;
 }
@@ -52,10 +53,6 @@ export class ControllerWrapperTable<TData extends {} = {}> extends BeanControlle
 
   get schema() {
     return this.$$modelResource.schemaRow;
-  }
-
-  get tableScope(): ITableCelScope {
-    return { resource: this.$$modelResource.resource };
   }
 
   getColumns(next: TypeTableGetColumnsNext<TData>, _$$table: ControllerTable<TData>) {
