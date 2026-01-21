@@ -19,7 +19,7 @@ export class RenderFormField<TParentData extends {} = {}> extends BeanRenderBase
       renderContext.propsBucket.render,
       renderContext.props,
       renderContext.celScope,
-      renderContext.hostProviders,
+      renderContext.jsxRenderContext,
     );
   }
 }
