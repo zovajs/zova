@@ -2,10 +2,11 @@ import type { BeanBase, ZovaApplication, ZovaContext } from 'zova';
 import type { IActionRecord } from 'zova-module-a-action';
 
 export interface IJsxRenderContextBase {
-  $$scene?: keyof IJsxRenderSceneRecord;
-  $$host: BeanBase;
   app: ZovaApplication;
   ctx: ZovaContext;
+  $scene?: keyof IJsxRenderSceneRecord;
+  $host: BeanBase;
+  $celScope?: unknown;
 }
 
 export interface IJsxRenderSceneRecord {

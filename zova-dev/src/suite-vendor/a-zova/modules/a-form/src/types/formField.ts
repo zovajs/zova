@@ -85,12 +85,12 @@ export interface IFormFieldRenderContext<TParentData = {}> {
 }
 
 export interface IJsxRenderContextFormField<TParentData extends {} = {}, TSubmitMeta = never> extends IJsxRenderContextBase {
-  celScope: IFormFieldCelScope<TParentData>;
+  $celScope: IFormFieldCelScope<TParentData>;
   $$formField: ControllerFormField<TParentData> | undefined;
   $$form: ControllerForm<TParentData, TSubmitMeta>;
 }
 
 export interface IJsxRenderContextForm<TParentData extends {} = {}> extends IJsxRenderContextBase {
-  celScope: IFormFieldCelScope<TParentData>;
+  $celScope: IFormFieldCelScope<TParentData>;
   $$form: ControllerForm<TParentData>;
 }

@@ -11,7 +11,7 @@ import { Controller } from 'zova-module-a-bean';
 import { loadSchemaProperties, renderFormFieldTopPropsSystem, schemaToZodSchema, ScopeModuleAOpenapi, TypeFormFieldRenderComponent, TypeFormFieldRenderComponentProvider, TypeFormSchemaScene } from 'zova-module-a-openapi';
 import { BeanControllerFormBase } from '../../lib/beanControllerFormBase.js';
 import { RevalidateLogicProps, TypeForm, TypeFormOnShowError, TypeFormOnSubmit, TypeFormOnSubmitInvalid } from '../../types/form.js';
-import { constFieldProps, IFormFieldCelScope, IFormFieldJsxRenderContext, IFormFieldLayoutOptionsBase, IFormFieldRenderContextPropsBucket, TypeFormFieldOnSetDisplayValue } from '../../types/formField.js';
+import { constFieldProps, IFormFieldCelScope, IFormFieldLayoutOptionsBase, IFormFieldRenderContextPropsBucket, IJsxRenderContextFormField, TypeFormFieldOnSetDisplayValue } from '../../types/formField.js';
 import { IFormMeta } from '../../types/formMeta.js';
 import { IFormProvider } from '../../types/provider.js';
 import { ControllerFormField } from '../formField/controller.jsx';
@@ -151,7 +151,7 @@ export class ControllerForm<TFormData extends {} = {}, TSubmitMeta = never> exte
   public getFieldJsxRenderContext(
     $$formField: ControllerFormField<TFormData> | undefined,
     celScope: IFormFieldCelScope<TFormData>,
-  ): IFormFieldJsxRenderContext<TFormData, TSubmitMeta> {
+  ): IJsxRenderContextFormField<TFormData, TSubmitMeta> {
     return {
       $$scene: 'formField',
       $$host: $$formField ?? this,

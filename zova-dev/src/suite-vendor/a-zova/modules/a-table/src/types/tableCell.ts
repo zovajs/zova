@@ -6,9 +6,9 @@ import type { ControllerTable } from '../component/table/controller.jsx';
 import type { ITableCellCelScope } from './tableColumn.js';
 
 export interface IJsxRenderContextTableCell<TData extends {} = any> extends IJsxRenderContextBase {
-  cellScope: ITableCellCelScope;
-  cellContext: CellContext<TData, any>;
+  $celScope: ITableCellCelScope;
   $$table: ControllerTable<TData>;
+  cellContext: CellContext<TData, any>;
 }
 
 export type NextTableCellRender = () => any;

@@ -19,7 +19,7 @@ export class ControllerTableCellTest extends BeanControllerBase {
   protected async __init__() {}
 
   protected render() {
-    const { name, displayValue } = this.$$renderContext.cellScope;
+    const { name, displayValue } = this.$$renderContext.$celScope;
     const domCell = this.$slotDefault
       ? this.$slotDefault()
       : displayValue;

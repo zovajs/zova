@@ -17,7 +17,7 @@ export class ControllerActionView extends BeanControllerBase {
 
   protected render() {
     if (!this.$$renderContext) throw new Error('should used in table');
-    const { $$table, cellContext, cellScope } = this.$$renderContext;
+    const { $celScope, $$table, cellContext } = this.$$renderContext;
     return (
       <a
         class="hover:text-blue-500"
@@ -27,7 +27,7 @@ export class ControllerActionView extends BeanControllerBase {
           $$table.onActionRow('view', cellContext.row);
         }}
       >
-        {this.$slotDefault ? this.$slotDefault() : cellScope.displayValue}
+        {this.$slotDefault ? this.$slotDefault() : $celScope.displayValue}
       </a>
     );
   }
