@@ -46,7 +46,7 @@ export class ControllerWrapperForm extends BeanControllerBase {
 
   get queryData() {
     if (isNil(this.entryId)) return;
-    return this.$$modelResource.get(this.entryId);
+    return this.$$modelResource.view(this.entryId);
   }
 
   async onSubmit(data: TypeFormOnSubmitData) {
