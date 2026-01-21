@@ -1,5 +1,5 @@
 import type { IMonkeySysInitialize } from 'zova';
-import type { IOpenapiOptionsRestResource } from 'zova-module-a-openapi';
+import type { IOpenapiOptionsResourceMeta } from 'zova-module-a-openapi';
 import { BeanSimple, deepExtend } from 'zova';
 
 export class MonkeySys extends BeanSimple implements IMonkeySysInitialize {
@@ -10,7 +10,7 @@ export class MonkeySys extends BeanSimple implements IMonkeySysInitialize {
       scopeStyleConfig.defaultThemeHandler = 'devui-adapter:themeHandler';
     }
     // config custom
-    const configCustom: IOpenapiOptionsRestResource = {
+    const configCustom: IOpenapiOptionsResourceMeta = {
       permissions: {
         table: { create: true },
         row: { update: true, delete: true },
