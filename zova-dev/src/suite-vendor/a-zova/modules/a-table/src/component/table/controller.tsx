@@ -213,6 +213,7 @@ export class ControllerTable<TData extends {} = {}> extends BeanControllerTableB
       $scene: 'tableCell',
       $host: this,
       $celScope: cellScope,
+      $jsx: this.zovaJsx,
       $$table: this,
       cellContext,
     };

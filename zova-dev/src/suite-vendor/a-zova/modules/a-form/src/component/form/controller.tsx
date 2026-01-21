@@ -158,6 +158,7 @@ export class ControllerForm<TFormData extends {} = {}, TSubmitMeta = never> exte
       $scene: 'formField',
       $host: $$formField ?? this,
       $celScope: celScope,
+      $jsx: this.zovaJsx,
       $$formField,
       $$form: this,
     };

@@ -155,7 +155,7 @@ export class ZovaJsx extends BeanSimple {
             return this.renderEventDirect(actionChild, { ...celScope }, hostProviders, eventRes[index], next);
           } else {
             // normal
-            return this._renderEventActionNormal(actionChild, celScope, hostProviders, eventRes, next);
+            return this._renderEventActionNormal(actionChild, celScope, hostProviders, next);
           }
         });
       };
@@ -168,7 +168,6 @@ export class ZovaJsx extends BeanSimple {
     actionChild: TypeRenderComponentJsx,
     celScope: {},
     hostProviders: {} | undefined,
-    eventRes: any[],
     next: Function,
   ) {
     // action
@@ -177,13 +176,13 @@ export class ZovaJsx extends BeanSimple {
     const beanInstance = this.sys.bean._getBeanSyncOnly(beanFullName);
     if (beanInstance) {
       // sync
-      return this._renderEventActionNormal_inner(beanInstance, actionChild, celScope, hostProviders, eventRes, next);
+      return this._renderEventActionNormal_inner(beanInstance, actionChild, celScope, hostProviders, next);
     }
     // async
     const transientObject = this.transientObject;
     return this.sys.bean._getBean(beanFullName, false).then(beanInstance => {
       return this.setTransientObject(transientObject, () => {
-        return this._renderEventActionNormal_inner(beanInstance, actionChild, celScope, hostProviders, eventRes, next);
+        return this._renderEventActionNormal_inner(beanInstance, actionChild, celScope, hostProviders, next);
       });
     });
   }
@@ -193,7 +192,6 @@ export class ZovaJsx extends BeanSimple {
     actionChild: TypeRenderComponentJsx,
     celScope: {},
     hostProviders: {} | undefined,
-    _eventRes: any[],
     next: Function,
   ) {
     const onionOptions = beanInstance.$onionOptions;
