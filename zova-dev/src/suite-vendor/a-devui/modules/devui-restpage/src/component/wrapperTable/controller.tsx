@@ -9,7 +9,7 @@ import { RenderActions } from './render.actions.jsx';
 
 export interface ControllerWrapperTableProps<TData extends {} = {}> {
   tableProvider?: ITableProvider;
-  tableScope?: ITableCelScope;
+  tableScope: ITableCelScope;
   onActionTable?: (action: keyof TypeResourceActionTableRecord) => Promise<any> | undefined;
   onActionRow?: (action: keyof TypeResourceActionRowRecord, row: Row<TData>) => Promise<any> | undefined;
 }
