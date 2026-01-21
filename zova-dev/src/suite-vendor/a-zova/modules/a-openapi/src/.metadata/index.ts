@@ -1,35 +1,4 @@
 /* eslint-disable */
-/** sys: begin */
-export * from '../bean/sys.sdk.js';
-
-import 'zova';
-declare module 'zova' {
-  
-  
-}
-declare module 'zova-module-a-openapi' {
-  
-        export interface SysSdk {
-          /** @internal */
-          get scope(): ScopeModuleAOpenapi;
-        }
-
-        export interface SysSdk {
-          get $beanFullName(): 'a-openapi.sys.sdk';
-          get $onionName(): 'a-openapi:sdk';
-          
-        } 
-}
-/** sys: end */
-/** sys: begin */
-import { SysSdk } from '../bean/sys.sdk.js';
-import 'zova';
-declare module 'zova' {
-  export interface IBeanRecordGeneral {
-    'a-openapi.sys.sdk': SysSdk;
-  }
-}
-/** sys: end */
 /** model: begin */
 export * from '../model/sdk.js';
 import { IModelOptionsSdk } from '../model/sdk.js';
@@ -65,6 +34,37 @@ declare module 'zova' {
   }
 }
 /** model: end */
+/** sys: begin */
+export * from '../bean/sys.sdk.js';
+
+import 'zova';
+declare module 'zova' {
+  
+  
+}
+declare module 'zova-module-a-openapi' {
+  
+        export interface SysSdk {
+          /** @internal */
+          get scope(): ScopeModuleAOpenapi;
+        }
+
+        export interface SysSdk {
+          get $beanFullName(): 'a-openapi.sys.sdk';
+          get $onionName(): 'a-openapi:sdk';
+          
+        } 
+}
+/** sys: end */
+/** sys: begin */
+import { SysSdk } from '../bean/sys.sdk.js';
+import 'zova';
+declare module 'zova' {
+  export interface IBeanRecordGeneral {
+    'a-openapi.sys.sdk': SysSdk;
+  }
+}
+/** sys: end */
 /** config: begin */
 export * from '../config/config.js';
 import { config } from '../config/config.js';

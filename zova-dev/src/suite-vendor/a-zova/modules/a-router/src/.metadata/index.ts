@@ -1,4 +1,39 @@
 /* eslint-disable */
+/** model: begin */
+export * from '../model/pageRoute.js';
+import { IModelOptionsPageRoute } from '../model/pageRoute.js';
+import 'zova-module-a-model';
+declare module 'zova-module-a-model' {
+  
+    export interface IModelRecord {
+      'a-router:pageRoute': IModelOptionsPageRoute;
+    }
+
+  
+}
+declare module 'zova-module-a-router' {
+  
+        export interface ModelPageRoute {
+          /** @internal */
+          get scope(): ScopeModuleARouter;
+        }
+
+        export interface ModelPageRoute {
+          get $beanFullName(): 'a-router.model.pageRoute';
+          get $onionName(): 'a-router:pageRoute';
+          get $onionOptions(): IModelOptionsPageRoute;
+        } 
+}
+/** model: end */
+/** model: begin */
+import { ModelPageRoute } from '../model/pageRoute.js';
+import 'zova';
+declare module 'zova' {
+  export interface IBeanRecordGeneral {
+    'a-router.model.pageRoute': ModelPageRoute;
+  }
+}
+/** model: end */
 /** sys: begin */
 export * from '../bean/sys.router.js';
 
@@ -141,41 +176,6 @@ export interface IZovaComponentRecord {
 }
 }
 /** components: end */
-/** model: begin */
-export * from '../model/pageRoute.js';
-import { IModelOptionsPageRoute } from '../model/pageRoute.js';
-import 'zova-module-a-model';
-declare module 'zova-module-a-model' {
-  
-    export interface IModelRecord {
-      'a-router:pageRoute': IModelOptionsPageRoute;
-    }
-
-  
-}
-declare module 'zova-module-a-router' {
-  
-        export interface ModelPageRoute {
-          /** @internal */
-          get scope(): ScopeModuleARouter;
-        }
-
-        export interface ModelPageRoute {
-          get $beanFullName(): 'a-router.model.pageRoute';
-          get $onionName(): 'a-router:pageRoute';
-          get $onionOptions(): IModelOptionsPageRoute;
-        } 
-}
-/** model: end */
-/** model: begin */
-import { ModelPageRoute } from '../model/pageRoute.js';
-import 'zova';
-declare module 'zova' {
-  export interface IBeanRecordGeneral {
-    'a-router.model.pageRoute': ModelPageRoute;
-  }
-}
-/** model: end */
 /** config: begin */
 export * from '../config/config.js';
 import { config } from '../config/config.js';
