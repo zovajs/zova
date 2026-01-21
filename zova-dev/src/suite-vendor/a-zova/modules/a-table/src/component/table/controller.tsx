@@ -208,13 +208,13 @@ export class ControllerTable<TData extends {} = {}> extends BeanControllerTableB
     }
     // renderContext
     const cellRenderContext: IJsxRenderContextTableCell = {
-      $$scene: 'tableCell',
-      $$host: this,
       app: this.app,
       ctx: this.ctx,
-      cellScope,
-      cellContext,
+      $scene: 'tableCell',
+      $host: this,
+      $celScope: cellScope,
       $$table: this,
+      cellContext,
     };
       // beanInstance
     if (beanInstance) {

@@ -153,11 +153,11 @@ export class ControllerForm<TFormData extends {} = {}, TSubmitMeta = never> exte
     celScope: IFormFieldCelScope<TFormData>,
   ): IJsxRenderContextFormField<TFormData, TSubmitMeta> {
     return {
-      $$scene: 'formField',
-      $$host: $$formField ?? this,
       app: this.app,
       ctx: this.ctx,
-      celScope,
+      $scene: 'formField',
+      $host: $$formField ?? this,
+      $celScope: celScope,
       $$formField,
       $$form: this,
     };
