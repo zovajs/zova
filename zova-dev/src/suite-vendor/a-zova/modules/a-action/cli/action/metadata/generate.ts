@@ -32,7 +32,7 @@ async function generateRestAction(
   const componentName = beanName;
   const componentNameFull = `${componentNamePrefix}${toUpperCaseFirstChar(combineResourceName(componentName, moduleName, true, true))}`;
   const contentComponent = `export function ${componentNameFull}(
-  _props: ${typeOptionsName},
+  _props: ${typeOptionsName} & { res?: string },
 ) {
   return '${moduleName}:${beanName}';
 }`;
