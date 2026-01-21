@@ -236,9 +236,7 @@ export class ControllerTable<TData extends {} = {}> extends BeanControllerTableB
       });
     }
     // general component
-    return this.zovaJsx.render(columnProps.render, {}, cellScope, {
-      $$renderContext: cellRenderContext,
-    });
+    return this.zovaJsx.render(columnProps.render, {}, cellScope, cellRenderContext);
   }
 
   public getColumnProperty(name: string): SchemaObject | undefined {

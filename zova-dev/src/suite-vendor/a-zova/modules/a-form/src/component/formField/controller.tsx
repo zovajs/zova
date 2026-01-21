@@ -104,8 +104,8 @@ export class ControllerFormField<TParentData extends {} = {}> extends BeanContro
     const celScope = this.$$form.getFieldCelScope(this.name, {
       displayValue: propsBucket.displayValue,
     });
-    const hostProviders = this.$$form.getFieldHostProviders(this, celScope);
-    return { propsBucket, props, celScope, hostProviders };
+    const jsxRenderContext = this.$$form.getFieldJsxRenderContext(this, celScope);
+    return { propsBucket, props, celScope, jsxRenderContext };
   }
 
   private _getPropsBucket() {
@@ -132,8 +132,8 @@ export class ControllerFormField<TParentData extends {} = {}> extends BeanContro
   private _getFieldComponentPropsTop() {
     if (this.$props[constFieldProps] === true) return;
     const celScope = this.$$form.getFieldCelScope(this.name);
-    const hostProviders = this.$$form.getFieldHostProviders(this, celScope);
-    return this.$$form.getFieldComponentPropsTop(this.name, celScope, hostProviders);
+    const jsxRenderContext = this.$$form.getFieldJsxRenderContext(this, celScope);
+    return this.$$form.getFieldComponentPropsTop(this.name, celScope, jsxRenderContext);
   }
 
   private _getFieldBehaviors() {

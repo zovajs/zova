@@ -164,20 +164,12 @@ export class ControllerForm<TFormData extends {} = {}, TSubmitMeta = never> exte
     };
   }
 
-  public getFieldHostProviders(
-    $$formField: ControllerFormField<TFormData> | undefined,
-    celScope: IFormFieldCelScope<TFormData>,
-  ) {
-    const $$renderContext = this.getFieldJsxRenderContext($$formField, celScope);
-    return { $$renderContext };
-  }
-
   public getFieldComponentPropsTop<K extends DeepKeys<TFormData>>(
     name: K,
     celScope: IFormFieldCelScope<TFormData>,
-    hostProviders: {},
+    jsxRenderContext: {},
   ): IFormFieldRenderContextPropsBucket {
-    const props = this._getFieldComponentPropsTopInner(name, celScope, hostProviders);
+    const props = this._getFieldComponentPropsTopInner(name, celScope, jsxRenderContext);
     // displayValue
     if (props.displayValue === undefined) {
       props.displayValue = celScope.value;
@@ -188,7 +180,7 @@ export class ControllerForm<TFormData extends {} = {}, TSubmitMeta = never> exte
   private _getFieldComponentPropsTopInner<K extends DeepKeys<TFormData>>(
     name: K,
     celScope: IFormFieldCelScope<TFormData>,
-    hostProviders: {},
+    jsxRenderContext: {},
   ): IFormFieldRenderContextPropsBucket {
     const props: any = { [constFieldProps]: true, key: name, name };
     const property = this.getFieldProperty(name);
@@ -207,7 +199,7 @@ export class ControllerForm<TFormData extends {} = {}, TSubmitMeta = never> exte
           keyValue = value;
         }
       } else {
-        keyValue = this.zovaJsx.renderJsxOrCel(value, undefined, celScope, hostProviders);
+        keyValue = this.zovaJsx.renderJsxOrCel(value, undefined, celScope, jsxRenderContext);
       }
       props[key] = keyValue;
     }

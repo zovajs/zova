@@ -81,7 +81,7 @@ export interface IFormFieldRenderContext<TParentData = {}> {
   propsBucket: IFormFieldRenderContextPropsBucket<TParentData>;
   props: IFormFieldRenderContextProps;
   celScope: IFormFieldCelScope<TParentData>;
-  hostProviders: {};
+  jsxRenderContext: {};
 }
 
 export interface IJsxRenderContextFormField<TParentData extends {} = {}, TSubmitMeta = never> extends IJsxRenderContextBase {
