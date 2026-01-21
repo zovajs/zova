@@ -4,18 +4,18 @@ import type { TypeResourceActionRowRecord, TypeResourceActionTableRecord } from 
 
 export type TypeOpenApiRestResourceScene = 'table' | 'row';
 
-export interface IOpenApiOptionsRestResource {
-  permissions?: IOpenApiOptionsRestResourcePermissions;
-  provider?: IOpenApiOptionsRestResourceProvider;
-  form?: IOpenApiOptionsRestResourceForm;
-  table?: IOpenApiOptionsRestResourceTable;
+export interface IOpenapiOptionsResourceMeta {
+  permissions?: IOpenapiOptionsRestResourcePermissions;
+  provider?: IOpenapiOptionsRestResourceProvider;
+  form?: IOpenapiOptionsRestResourceForm;
+  table?: IOpenapiOptionsRestResourceTable;
 }
 
-export interface IOpenApiOptionsRestResourceForm {}
+export interface IOpenapiOptionsRestResourceForm {}
 
-export interface IOpenApiOptionsRestResourceTable {}
+export interface IOpenapiOptionsRestResourceTable {}
 
-export interface IOpenApiOptionsRestResourcePermissions {
+export interface IOpenapiOptionsRestResourcePermissions {
   table?: TypeOpenApiOptionsRestResourcePermissionsTable;
   row?: TypeOpenApiOptionsRestResourcePermissionsRow;
 }
@@ -28,12 +28,12 @@ export type TypeOpenApiOptionsRestResourcePermissionsRow = {
   [key in keyof TypeResourceActionRowRecord]?: boolean;
 };
 
-export interface IOpenApiOptionsRestResourceProvider {
-  components?: IOpenApiOptionsRestResourceProviderComponents;
+export interface IOpenapiOptionsRestResourceProvider {
+  components?: IOpenapiOptionsRestResourceProviderComponents;
   actions?: IActionsRecord;
 }
 
-export interface IOpenApiOptionsRestResourceProviderComponents {
+export interface IOpenapiOptionsRestResourceProviderComponents {
   restPage?: TypeComponentRecordSelectorKeysStrict<'restPage'>;
   restPageEntry?: TypeComponentRecordSelectorKeysStrict<'restPageEntry'>;
   table?: TypeComponentRecordSelectorKeysStrict<'table'>;

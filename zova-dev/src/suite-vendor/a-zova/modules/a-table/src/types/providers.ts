@@ -14,7 +14,7 @@ export interface ITableProvider {
 }
 
 declare module 'zova-module-a-openapi' {
-  export interface IOpenApiOptionsRestResourceTable {
+  export interface IOpenapiOptionsRestResourceTable {
     provider?: ITableProvider;
   }
 }
