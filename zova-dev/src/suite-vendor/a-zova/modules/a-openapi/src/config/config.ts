@@ -1,5 +1,5 @@
 import type { ZovaSys } from 'zova';
-import type { IOpenapiOptionsRestResource } from '../types/restResource.js';
+import type { IOpenapiOptionsResourceMeta } from '../types/restResource.js';
 
 export const config = (_sys: ZovaSys) => {
   return {
@@ -36,8 +36,8 @@ export const config = (_sys: ZovaSys) => {
           actions: {},
         },
       },
-    } as IOpenapiOptionsRestResource,
-    restResource: {} as IOpenapiOptionsRestResource,
+    } as IOpenapiOptionsResourceMeta,
+    restResource: {} as IOpenapiOptionsResourceMeta,
     bootstrapApi: '/api/openapischema/resource/bootstrap/:resource',
   };
 };
