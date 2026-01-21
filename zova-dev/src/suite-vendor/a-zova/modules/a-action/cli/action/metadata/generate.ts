@@ -7,35 +7,34 @@ import fse from 'fs-extra';
 import { generateRestIndex } from './utils.ts';
 
 export default async function (options: IMetadataCustomGenerateOptions): Promise<string> {
-  return '';
   const { globFiles } = options;
   for (const globFile of globFiles) {
     if (globFile.isIgnore) continue;
     // restComponent
-    await generateRestTableCell(options, globFile);
+    await generateRestAction(options, globFile);
   }
   return '';
 }
 
-async function generateRestTableCell(
+async function generateRestAction(
   options: IMetadataCustomGenerateOptions,
   globFile: IGlobBeanFile,
 ) {
   const { moduleName, modulePath } = options;
-  const { beanName, beanNameCapitalize, sceneName, fileNameJS } = globFile;
+  const { beanName, beanNameCapitalize, fileNameJS } = globFile;
   // options
-  const typeOptionsName = `ITableCellOptions${beanNameCapitalize}`;
+  const typeOptionsName = `IActionOptions${beanNameCapitalize}`;
   // import
   const contentImports: string[] = [];
   contentImports.push(`import type { ${typeOptionsName} } from '../../src/bean/${fileNameJS}';`);
   // component
-  const componentNamePrefix = 'TT';
+  const componentNamePrefix = 'AA';
   const componentName = beanName;
   const componentNameFull = `${componentNamePrefix}${toUpperCaseFirstChar(combineResourceName(componentName, moduleName, true, true))}`;
   const contentComponent = `export function ${componentNameFull}(
   _props: ${typeOptionsName},
 ) {
-  return '${moduleName}.${sceneName}.${beanName}';
+  return '${moduleName}:${beanName}';
 }`;
   // content
   const content = `${contentImports.join('\n')}
@@ -43,20 +42,20 @@ async function generateRestTableCell(
 ${contentComponent}
 `;
   // output
-  const fileDest = path.join(modulePath, `rest/tableCell/${beanName}.ts`);
+  const fileDest = path.join(modulePath, `rest/action/${beanName}.ts`);
   await fse.outputFile(fileDest, content);
-  // tableCells
-  const fileComponents = path.join(modulePath, 'rest/tableCells.ts');
+  // actions
+  const fileComponents = path.join(modulePath, 'rest/actions.ts');
   let contentComponents = '';
   if (fse.existsSync(fileComponents)) {
     contentComponents = (await fse.readFile(fileComponents)).toString();
   }
-  const exportContent = `export * from './tableCell/${beanName}.js';`;
+  const exportContent = `export * from './action/${beanName}.js';`;
   if (!contentComponents.includes(exportContent)) {
     contentComponents = `${contentComponents}${exportContent}\n`;
     await fse.outputFile(fileComponents, contentComponents);
   }
   // index
-  const exportIndexContent = 'export * from \'./tableCells.js\';';
+  const exportIndexContent = 'export * from \'./actions.js\';';
   await generateRestIndex(modulePath, exportIndexContent);
 }
