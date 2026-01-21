@@ -31,6 +31,7 @@ export class ControllerPageToolOne extends BeanControllerPageFormBase {
   formMeta: IFormMeta;
 
   protected async __init__() {
+    this.$performAction('a-actions:log', { message: 'sssss' });
     if (this.$query.api) {
       const apiSchemas = this.$sdk.createApiSchemas(this.$query.api!, this.$query.apiMethod as any);
       const querySdk = await $QueryAutoLoad(() => apiSchemas.sdk);

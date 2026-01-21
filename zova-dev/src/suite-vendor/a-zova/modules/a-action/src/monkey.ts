@@ -13,7 +13,7 @@ export class Monkey extends BeanSimple implements IMonkeyBeanInit {
         return function<T extends keyof IActionRecord>(
           actionName: T,
           options: Partial<IActionRecord[T]> | undefined,
-          renderContext: IJsxRenderContextBase,
+          renderContext?: IJsxRenderContextBase,
           next?: Function,
         ) {
           renderContext = Object.assign({

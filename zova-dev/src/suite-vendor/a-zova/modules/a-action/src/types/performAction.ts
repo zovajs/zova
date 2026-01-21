@@ -4,10 +4,10 @@ import 'zova';
 
 declare module 'zova' {
   export interface BeanBase {
-    $router: <T extends keyof IActionRecord>(
+    $performAction: <T extends keyof IActionRecord>(
       actionName: T,
       options: Partial<IActionRecord[T]> | undefined,
-      renderContext: IJsxRenderContextBase,
+      renderContext?: IJsxRenderContextBase,
       next?: Function,
     ) => IActionRecord[T][typeof SymbolActionResult];
   }

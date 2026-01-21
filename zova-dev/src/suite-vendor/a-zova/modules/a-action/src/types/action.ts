@@ -16,7 +16,7 @@ export interface IActionExecute {
 
 export interface IDecoratorActionOptions<Result = any> {
   [SymbolActionResult]: Result;
-  res?: string;
+  // res?: string; // need not define here
 }
 
 declare module 'zova-module-a-bean' {
