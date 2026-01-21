@@ -8,6 +8,7 @@ import type {
   IMonkeyAppInitialize,
   IMonkeyAppInitialized,
   IMonkeyAppReady,
+  IMonkeyBeanInit,
   IMonkeyController,
   ZovaContext,
 } from 'zova';
@@ -24,7 +25,7 @@ import { SymbolRouterHistory } from './types/utils.js';
 
 export class Monkey
   extends BeanSimple
-  implements IMonkeyAppInitialize, IMonkeyAppInitialized, IMonkeyAppReady, IMonkeyAppClose, IMonkeyController {
+  implements IMonkeyAppInitialize, IMonkeyAppInitialized, IMonkeyAppReady, IMonkeyAppClose, IMonkeyBeanInit, IMonkeyController {
   private _beanRouter: BeanRouter;
   serviceRouterGuards: ServiceRouterGuards;
 

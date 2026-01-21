@@ -10,6 +10,12 @@
         "boilerplate": "cli/action/boilerplate",
         "metadataCustom": "cli/action/metadata/generate.ts"
       }
+    },
+    "capabilities": {
+      "monkey": true
+    },
+    "dependencies": {
+      "a-zova": "5.0.0"
     }
   },
   "type": "module",
