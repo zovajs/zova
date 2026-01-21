@@ -1,6 +1,6 @@
 import type { OmitNever } from 'zova';
 import type { ServiceOnion } from 'zova-module-a-bean';
-import type { IRenderContextBase } from 'zova-module-a-openapi';
+import type { IJsxRenderContextBase } from 'zova-module-a-openapi';
 
 export const SymbolActionResult = Symbol('SymbolActionResult');
 
@@ -11,7 +11,7 @@ export interface IActionsRecord {}
 export interface IActionRecord {}
 
 export interface IActionExecute {
-  execute(options: IDecoratorActionOptions, renderContext: IRenderContextBase, next: NextActionExecute): any | Promise<any>;
+  execute(options: IDecoratorActionOptions, renderContext: IJsxRenderContextBase, next: NextActionExecute): any | Promise<any>;
 }
 
 export interface IDecoratorActionOptions<Result = any> {

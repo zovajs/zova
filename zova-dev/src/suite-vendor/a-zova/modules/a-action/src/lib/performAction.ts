@@ -1,11 +1,11 @@
-import type { IRenderContextBase } from 'zova-module-a-openapi';
+import type { IJsxRenderContextBase } from 'zova-module-a-openapi';
 import type { IActionRecord, SymbolActionResult } from '../types/action.js';
 import { beanFullNameFromOnionName, deepExtend, useSys } from 'zova';
 
 export function $performAction<T extends keyof IActionRecord>(
   actionName: T,
   options: Partial<IActionRecord[T]> | undefined,
-  renderContext: IRenderContextBase,
+  renderContext: IJsxRenderContextBase,
   next?: Function,
 ): IActionRecord[T][typeof SymbolActionResult] {
   const sys = useSys();
@@ -30,7 +30,7 @@ export function $performAction<T extends keyof IActionRecord>(
 function _renderEventActionNormal_inner(
   beanInstance: any,
   options: {} | undefined,
-  renderContext: IRenderContextBase,
+  renderContext: IJsxRenderContextBase,
   next?: Function,
 ) {
   const onionOptions = beanInstance.$onionOptions;
