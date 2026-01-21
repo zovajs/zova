@@ -1,6 +1,6 @@
 import { BeanBase } from 'zova';
 import { $performAction } from 'zova-module-a-action';
-import { IDecoratorTableCellOptions, ITableCellRender, ITableCellRenderContext, NextTableCellRender, TableCell } from 'zova-module-a-table';
+import { IDecoratorTableCellOptions, IJsxRenderContextTableCell, ITableCellRender, NextTableCellRender, TableCell } from 'zova-module-a-table';
 
 export interface ITableCellOptionsActionView extends IDecoratorTableCellOptions {
   resource?: string;
@@ -9,7 +9,7 @@ export interface ITableCellOptionsActionView extends IDecoratorTableCellOptions 
 
 @TableCell<ITableCellOptionsActionView>()
 export class TableCellActionView extends BeanBase implements ITableCellRender {
-  render(options: ITableCellOptionsActionView, renderContext: ITableCellRenderContext, next: NextTableCellRender) {
+  render(options: ITableCellOptionsActionView, renderContext: IJsxRenderContextTableCell, next: NextTableCellRender) {
     const value = next();
     return (
       <a

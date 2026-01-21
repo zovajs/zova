@@ -9,7 +9,7 @@ import { loadSchemaProperties, renderTableColumnTopPropsSystem, ScopeModuleAOpen
 import { BeanControllerTableBase } from '../../lib/beanControllerTableBase.js';
 import { ITableProvider } from '../../types/providers.js';
 import { ITableMeta, TypeColumn, TypeTable, TypeTableGetColumnsNext } from '../../types/table.js';
-import { IDecoratorTableCellOptions, ITableCellRender, ITableCellRenderContext } from '../../types/tableCell.js';
+import { IDecoratorTableCellOptions, IJsxRenderContextTableCell, ITableCellRender } from '../../types/tableCell.js';
 import { constColumnProps, ITableCellCelScope, ITableCellRenderColumnProps, ITableCelScope, ITableColumnCelScope, TypeTableCellRender } from '../../types/tableColumn.js';
 
 export interface ControllerTableProps<TData extends {} = {}> {
@@ -207,7 +207,7 @@ export class ControllerTable<TData extends {} = {}> extends BeanControllerTableB
       return displayValue;
     }
     // renderContext
-    const cellRenderContext: ITableCellRenderContext = {
+    const cellRenderContext: IJsxRenderContextTableCell = {
       $$scene: 'tableCell',
       $$host: this,
       app: this.app,

@@ -1,4 +1,4 @@
-import type { ITableCellRenderContext } from 'zova-module-a-table';
+import type { IJsxRenderContextTableCell } from 'zova-module-a-table';
 import { BeanControllerBase, Use } from 'zova';
 import { Controller } from 'zova-module-a-bean';
 
@@ -11,7 +11,7 @@ export class ControllerActionView extends BeanControllerBase {
   static $propsDefault = {};
 
   @Use({ injectionScope: 'host' })
-  $$renderContext: ITableCellRenderContext;
+  $$renderContext: IJsxRenderContextTableCell;
 
   protected async __init__() {}
 

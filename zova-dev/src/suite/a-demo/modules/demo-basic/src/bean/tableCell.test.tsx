@@ -1,6 +1,6 @@
 import { BeanBase } from 'zova';
 import { ZIcon } from 'zova-module-a-icon';
-import { IDecoratorTableCellOptions, ITableCellRender, ITableCellRenderContext, NextTableCellRender, TableCell } from 'zova-module-a-table';
+import { IDecoratorTableCellOptions, IJsxRenderContextTableCell, ITableCellRender, NextTableCellRender, TableCell } from 'zova-module-a-table';
 
 export interface ITableCellOptionsTest extends IDecoratorTableCellOptions {
   iconPrefix?: string;
@@ -10,7 +10,7 @@ export interface ITableCellOptionsTest extends IDecoratorTableCellOptions {
   iconPrefix: '::home',
 })
 export class TableCellTest extends BeanBase implements ITableCellRender {
-  render(options: ITableCellOptionsTest, _renderContext: ITableCellRenderContext, next: NextTableCellRender) {
+  render(options: ITableCellOptionsTest, _renderContext: IJsxRenderContextTableCell, next: NextTableCellRender) {
     const value = next();
     const iconPrefix = options.iconPrefix;
     if (!iconPrefix) return value;

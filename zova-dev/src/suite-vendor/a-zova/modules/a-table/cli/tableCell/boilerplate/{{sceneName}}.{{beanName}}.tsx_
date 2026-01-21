@@ -1,11 +1,11 @@
 import { BeanBase } from 'zova';
-import { IDecoratorTableCellOptions, ITableCellRender, ITableCellRenderContext, NextTableCellRender, TableCell } from 'zova-module-a-table';
+import { IDecoratorTableCellOptions, IJsxRenderContextTableCell, ITableCellRender, NextTableCellRender, TableCell } from 'zova-module-a-table';
 
 export interface ITableCellOptions<%=argv.beanNameCapitalize%> extends IDecoratorTableCellOptions {}
 
 @TableCell<ITableCellOptions<%=argv.beanNameCapitalize%>>()
 export class TableCell<%=argv.beanNameCapitalize%> extends BeanBase implements ITableCellRender {
-  render(_options: ITableCellOptions<%=argv.beanNameCapitalize%>, _renderContext: ITableCellRenderContext, next: NextTableCellRender) {
+  render(_options: ITableCellOptions<%=argv.beanNameCapitalize%>, _renderContext: IJsxRenderContextTableCell, next: NextTableCellRender) {
     return next();
   }
 }
