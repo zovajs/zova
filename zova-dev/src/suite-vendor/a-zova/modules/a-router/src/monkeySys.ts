@@ -27,6 +27,7 @@ export class MonkeySys extends BeanSimple implements IMonkeyModuleSys, IMonkeySy
 
   async moduleLoaded(module: IModule) {
     if (this._moduleSelf === module) return;
+    if (!module.resource.routes) return;
     const sysRouter = await this.getSysRouter();
     sysRouter._registerRoutes(module);
   }
