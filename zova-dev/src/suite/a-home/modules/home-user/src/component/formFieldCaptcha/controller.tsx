@@ -1,6 +1,6 @@
 import type { ControllerForm, IFormFieldOptions } from 'zova-module-a-form';
 import z from 'zod';
-import { BeanControllerBase, ClientOnly, TypeEventOff, Use } from 'zova';
+import { BeanControllerBase, ClientOnly, IComponentOptions, TypeEventOff, Use } from 'zova';
 import { Controller } from 'zova-module-a-bean';
 import { ZFormField } from 'zova-module-a-form';
 import { ToolV } from 'zova-module-a-zod';
@@ -13,6 +13,7 @@ export interface ControllerFormFieldCaptchaProps extends IFormFieldOptions {
 @Controller()
 export class ControllerFormFieldCaptcha extends BeanControllerBase {
   static $propsDefault = {};
+  static $componentOptions: IComponentOptions = { inheritAttrs: false };
 
   zodSchema: z.ZodString;
   eventFormSubmission: TypeEventOff;
