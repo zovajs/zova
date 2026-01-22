@@ -3,6 +3,7 @@ import type { IModuleInfo } from '@cabloy/module-info';
 import fs from 'node:fs';
 import path from 'node:path';
 import { BeanCliBase } from '@cabloy/cli';
+import { toUpperCaseFirstChar } from '@cabloy/word-utils';
 import { __ThisSetName__ } from '../this.ts';
 
 declare module '@cabloy/cli' {
@@ -11,6 +12,7 @@ declare module '@cabloy/cli' {
     moduleInfo: IModuleInfo;
     componentName: string;
     nameMeta: NameMeta;
+    boilerplate: string;
   }
 }
 
@@ -54,12 +56,17 @@ export class CliCreateComponentBase extends BeanCliBase {
     //   snippetsPath: `create/${this.componentMode}/snippets`,
     //   boilerplatePath: null,
     // });
+    // boilerplate
+    let boilerplate = 'boilerplate';
+    if (argv.boilerplate) {
+      boilerplate = `${boilerplate}${toUpperCaseFirstChar(argv.boilerplate)}`;
+    }
     // render boilerplate
     await this.template.renderBoilerplateAndSnippets({
       targetDir: componentDir,
       setName: __ThisSetName__,
       snippetsPath: null,
-      boilerplatePath: `create/${this.componentMode}/boilerplate`,
+      boilerplatePath: `create/${this.componentMode}/${boilerplate}`,
     });
     // tools.metadata
     await this.helper.invokeCli([':tools:metadata', moduleName], { cwd: argv.projectPath });

@@ -3,11 +3,15 @@ export default {
   info: {
     version: '5.0.0',
     title: 'Cli: Create Component',
-    usage: 'zova :create:component componentName [--module=]',
+    usage: 'zova :create:component componentName [--module=] [--boilerplate=]',
   },
   options: {
     module: {
       description: 'module name',
+      type: 'string',
+    },
+    boilerplate: {
+      description: 'boilerplate',
       type: 'string',
     },
   },
