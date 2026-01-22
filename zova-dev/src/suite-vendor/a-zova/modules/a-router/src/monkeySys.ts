@@ -23,15 +23,14 @@ export class MonkeySys extends BeanSimple implements IMonkeyModuleSys, IMonkeySy
     return this._sysRouter;
   }
 
-  async moduleLoading(_module: IModule) {}
-
-  async moduleLoaded(module: IModule) {
+  async moduleLoading(module: IModule) {
     if (this._moduleSelf === module) return;
     if (!module.resource.routes) return;
     const sysRouter = await this.getSysRouter();
     sysRouter._registerRoutes(module);
   }
 
+  async moduleLoaded(_module: IModule) {}
   async configLoaded(_module: IModule, _config) {}
 
   sysApplicationInitialize(app: ZovaApplication): void {
