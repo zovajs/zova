@@ -13,8 +13,6 @@ export const ControllerPageToolOneSchemaParams = z.object({
 
 export const ControllerPageToolOneSchemaQuery = z.object({
   name: z.string().optional(),
-  api: z.string().optional(),
-  apiMethod: z.string().optional(),
 });
 
 @Controller()
@@ -31,35 +29,33 @@ export class ControllerPageToolOne extends BeanControllerPageFormBase {
   formMeta: IFormMeta;
 
   protected async __init__() {
-    if (this.$query.api) {
-      const apiSchemas = this.$sdk.createApiSchemas(this.$query.api!, this.$query.apiMethod as any);
-      const querySdk = await $QueryAutoLoad(() => apiSchemas.sdk);
-      this.schemaUpdate = this.$useComputed(() => {
-        const schema = apiSchemas.requestBody;
-        console.log('schema: ', schema);
-        return schema;
-      });
+    const apiSchemas = this.$apiSchema.testSsrToolOne.test;
+    const querySdk = await $QueryAutoLoad(() => apiSchemas.sdk);
+    this.schemaUpdate = this.$useComputed(() => {
+      const schema = apiSchemas.requestBody;
+      console.log('schema: ', schema);
+      return schema;
+    });
 
-      console.log('sdk: ', querySdk?.data);
-      // form data
-      this.formData = {
-        name: 'tom',
-      };
-      this.formMeta = {
-        formMode: 'edit',
-        editMode: 'update',
-      };
-      // form;
-      // this.form = this.$useForm({
-      //   defaultValues: this.formData,
-      //   onSubmit: async ({ value }) => {
-      //     console.log('submit manual: ', JSON.stringify(value));
-      //   },
-      // });
-      // setInterval(()=>{
-      //   this.fieldName=this.fieldName==='name'?'married':'name';
-      // },1000)
-    }
+    console.log('sdk: ', querySdk?.data);
+    // form data
+    this.formData = {
+      name: 'tom',
+    };
+    this.formMeta = {
+      formMode: 'edit',
+      editMode: 'update',
+    };
+    // form;
+    // this.form = this.$useForm({
+    //   defaultValues: this.formData,
+    //   onSubmit: async ({ value }) => {
+    //     console.log('submit manual: ', JSON.stringify(value));
+    //   },
+    // });
+    // setInterval(()=>{
+    //   this.fieldName=this.fieldName==='name'?'married':'name';
+    // },1000)
   }
 
   async onSubmit(data: TypeFormOnSubmitData<ApiSchemaTestSsrDtoTestBodyPartial>) {
