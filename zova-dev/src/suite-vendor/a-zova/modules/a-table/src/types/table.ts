@@ -1,6 +1,5 @@
-import type { ColumnDef, Row, RowData, useVueTable } from '@tanstack/vue-table';
+import type { ColumnDef, RowData, useVueTable } from '@tanstack/vue-table';
 import type { SchemaObject } from 'openapi3-ts/oas31';
-import type { TypeResourceActionRowRecord, TypeResourceActionTableRecord } from 'zova-module-a-openapi';
 import type { TypeTableCellRender } from './tableColumn.js';
 
 export type TypeTable<TData extends RowData = RowData> = ReturnType<typeof useVueTable<TData>>;
