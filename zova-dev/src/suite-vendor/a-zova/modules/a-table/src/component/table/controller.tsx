@@ -17,7 +17,7 @@ export interface ControllerTableProps<TData extends {} = {}> {
   schema?: SchemaObject;
   tableProvider?: ITableProvider;
   tableScope?: ITableCelScope;
-  getColumns?: (next: TypeTableGetColumnsNext<TData>, table: ControllerTable<TData>,) => (TypeColumn<TData>[]);
+  getColumns?: (next: TypeTableGetColumnsNext<TData>, table: ControllerTable<TData>,) => Promise<TypeColumn<TData>[]>;
   onActionTable?: (action: keyof TypeResourceActionTableRecord, table: ControllerTable<TData>) => Promise<any> | undefined;
   onActionRow?: (action: keyof TypeResourceActionRowRecord, row: Row<TData>, table: ControllerTable<TData>) => Promise<any> | undefined;
   slotDefault?: (table: ControllerTable<TData>) => VNode;
@@ -60,14 +60,15 @@ export class ControllerTable<TData extends {} = {}> extends BeanControllerTableB
     // properties
     this._createProperties();
     // tableMeta
-    await this._createTableMeta();
+    this.tableMeta = await this._createTableMeta();
+    // columns
+    this.columns = await this._createColumns();
     // watch
     this.$watch(() => this.$props.schema, async (newValue, oldValue) => {
       if (deepEqual(newValue, oldValue)) return;
-      await this._createTableMeta();
+      this.tableMeta = await this._createTableMeta();
+      this.columns = await this._createColumns();
     });
-    // columns
-    this._createColumns();
     // table
     this._createTable();
   }
@@ -101,17 +102,15 @@ export class ControllerTable<TData extends {} = {}> extends BeanControllerTableB
     this.table = this.$useTable(tableOptions);
   }
 
-  private _createColumns() {
-    this.columns = this.$useComputed(() => {
-      if (!this.properties) return [];
-      if (!this.$props.getColumns) return this._createColumnsMiddle(this.tableMeta.properties);
-      return this.$props.getColumns(properties => {
-        return this._createColumnsMiddle(properties ?? this.tableMeta.properties);
-      }, this);
-    });
+  private async _createColumns() {
+    if (!this.properties) return [];
+    if (!this.$props.getColumns) return await this._createColumnsMiddle(this.tableMeta.properties);
+    return await this.$props.getColumns(async properties => {
+      return await this._createColumnsMiddle(properties ?? this.tableMeta.properties);
+    }, this);
   }
 
-  private _createColumnsMiddle(properties: SchemaObject[]) {
+  private async _createColumnsMiddle(properties: SchemaObject[]) {
     const columnHelper = createColumnHelper<TData>();
     const columns: TypeColumn<TData>[] = [];
     for (const property of properties) {
@@ -161,7 +160,7 @@ export class ControllerTable<TData extends {} = {}> extends BeanControllerTableB
         renders[key] = await this._createColumnRender(property, columnProps, columnScope);
       }
     }
-    this.tableMeta = { properties, renders };
+    return { properties, renders };
   }
 
   private async _createColumnRender(

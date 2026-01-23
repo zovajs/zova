@@ -55,8 +55,8 @@ export class ControllerWrapperTable<TData extends {} = {}> extends BeanControlle
     return this.$$modelResource.schemaRow;
   }
 
-  getColumns(next: TypeTableGetColumnsNext<TData>, _$$table: ControllerTable<TData>) {
-    const columns = next();
+  async getColumns(next: TypeTableGetColumnsNext<TData>, _$$table: ControllerTable<TData>) {
+    const columns = await next();
     if (!this.$$modelResource.permissions?.row?.update && !this.$$modelResource.permissions?.row?.delete) return columns;
     const columnHelper = createColumnHelper<TData>();
     columns.push(columnHelper.display({

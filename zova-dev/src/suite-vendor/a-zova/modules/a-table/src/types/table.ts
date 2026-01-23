@@ -38,7 +38,7 @@ export interface ITableMeta<TData extends RowData = RowData> {
   renders: Record<string, TypeTableCellRender<TData>>;
 }
 
-export type TypeTableGetColumnsNext<TData extends RowData = RowData> = (properties?: SchemaObject[]) => TypeColumn<TData>[];
+export type TypeTableGetColumnsNext<TData extends RowData = RowData> = (properties?: SchemaObject[]) => Promise<TypeColumn<TData>[]>;
 
 export interface ITableActionHandler<TData extends RowData = any> {
   onActionTable?: (action: keyof TypeResourceActionTableRecord) => Promise<any> | undefined;
