@@ -1,6 +1,6 @@
 import type { NavigationFailure, RouteComponent, RouteLocationMatched, RouteLocationNormalized, RouteLocationNormalizedLoaded, RouteLocationNormalizedLoadedGeneric, RouteRecordRaw } from '@cabloy/vue-router';
 import type { z } from 'zod';
-import type { TypeComponentLayoutRecord, ZovaApplication } from 'zova';
+import type { ILayoutRecord, TypeComponentLayoutRecord, ZovaApplication } from 'zova';
 import type { BeanRouter } from '../bean/bean.router.js';
 
 import type { BeanRouterViewBase } from '../lib/routerViewBase.js';
@@ -18,7 +18,7 @@ export type TypeGotoPageResult = void | Promise<NavigationFailure | void | undef
 declare module '@cabloy/vue-router' {
   interface RouteMeta {
     absolute?: boolean;
-    layout?: keyof TypeComponentLayoutRecord | 'empty' | 'default' | false | IModuleRouteComponent;
+    layout?: keyof TypeComponentLayoutRecord | keyof ILayoutRecord | false | IModuleRouteComponent;
     requiresAuth?: boolean;
     componentKeyMode?: TypeComponentKeyMode;
     componentKey?: ((this: ZovaApplication, route: RouteLocationNormalizedLoaded) => string) | string;

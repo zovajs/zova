@@ -1,5 +1,5 @@
 import type { ZovaConfigMeta } from '@cabloy/module-info';
-import type { TypeComponentAppRecord, TypeComponentLayoutRecord } from '../../bean/resource/component/type.js';
+import type { ILayoutRecord, TypeComponentAppRecord, TypeComponentLayoutRecord } from '../../bean/resource/component/type.js';
 import type { ILocaleRecord } from '../../bean/resource/locale/type.js';
 import type { ZovaConfigRoutes } from '../../bean/resource/page/type.js';
 import type { IBeanScopeConfig } from '../../bean/type.js';
@@ -56,8 +56,7 @@ export interface ZovaConfig {
       component: keyof TypeComponentAppRecord;
     };
     component: {
-      default: keyof TypeComponentLayoutRecord;
-      empty: keyof TypeComponentLayoutRecord;
+      [K in keyof ILayoutRecord]: keyof TypeComponentLayoutRecord;
     };
     sidebar: {
       leftOpenPC: boolean;

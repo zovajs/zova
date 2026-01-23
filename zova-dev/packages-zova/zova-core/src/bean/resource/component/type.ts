@@ -4,6 +4,14 @@ export interface IZovaComponentRecord {}
 
 export interface IComponentRecord {}
 
+export interface ILayoutRecord {
+  empty: never;
+  default: never;
+  admin: never;
+  front: never;
+  mobile: never;
+}
+
 export type TypeComponentRecordSelector<PREFIX extends string> = {
   [K in keyof IComponentRecord as K extends `${string}:${PREFIX}${string}` ? K : never]: IComponentRecord[K];
 };

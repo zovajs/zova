@@ -68,8 +68,11 @@ export default function (sys: ZovaSys) {
       component: 'a-app:app',
     },
     component: {
-      default: 'home-layout:layoutTabs',
       empty: 'home-layout:layoutEmpty',
+      default: 'home-layout:layoutTabs',
+      admin: 'home-layout:layoutTabs',
+      front: 'home-layout:layoutTabs',
+      mobile: 'home-layout:layoutTabs',
     },
     sidebar: {
       leftOpenPC: true,
