@@ -2,6 +2,7 @@ export * from './action.js';
 export * from './actions.js';
 export * from './database.js';
 export * from './date.js';
+export * from './jsx.js';
 export * from './resourceMeta.js';
 export * from './rest.js';
 export * from './schema.js';

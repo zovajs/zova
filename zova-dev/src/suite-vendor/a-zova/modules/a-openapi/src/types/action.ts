@@ -8,7 +8,7 @@ export interface IJsxRenderContextBase {
   $scene?: keyof IJsxRenderSceneRecord;
   $host: BeanBase;
   $celScope?: unknown;
-  $jsx?: ZovaJsx;
+  $jsx: ZovaJsx;
 }
 
 export interface IJsxRenderSceneRecord {
