@@ -6,7 +6,7 @@ export interface IModelOptionsPageData extends IDecoratorModelOptions {}
 @Model<IModelOptionsPageData>()
 export class ModelPageData<PAGEDATA = unknown> extends BeanModelBase {
   protected _pageDataInner: any;
-  public current: PAGEDATA;
+  public current: PAGEDATA | undefined;
 
   protected async __init__() {
     if (process.env.SERVER) {
@@ -20,8 +20,8 @@ export class ModelPageData<PAGEDATA = unknown> extends BeanModelBase {
       if (this.$ssr.isRuntimeSsrPreHydration) {
         this.current = this.$ssr.state.pageData as PAGEDATA;
       } else {
-        const route = this.$pageRoute!;
-        this.current = this.getPageData(route.path);
+        const route = this.$pageRoute;
+        this.current = route ? this.getPageData(route.path) : undefined;
       }
     }
   }
