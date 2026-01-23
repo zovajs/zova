@@ -1,7 +1,5 @@
 import type { RouteLocationMatched, RouteLocationNormalizedLoaded, RouteLocationNormalizedLoadedGeneric, RouterScrollBehavior } from '@cabloy/vue-router';
 import type { ZovaContext } from 'zova';
-import { routerViewLocationKey } from '@cabloy/vue-router';
-import { inject } from 'vue';
 import { pageRouteKey } from './const.js';
 
 export function getRouteMatched(route: RouteLocationNormalizedLoaded): RouteLocationMatched | undefined {
@@ -26,12 +24,13 @@ export function isRouterName(name?: string | null | undefined): boolean {
 }
 
 export function getPageRoute(ctx: ZovaContext): RouteLocationNormalizedLoadedGeneric | undefined {
-  let route = ctx.bean._getBeanFromHost({ name: pageRouteKey });
-  if (!route) {
-    route = ctx.util.instanceScope(() => {
-      return inject(routerViewLocationKey)?.value;
-    });
-  }
+  const route = ctx.bean._getBeanFromHost({ name: pageRouteKey });
+  // need not inject(routerViewLocationKey)
+  // if (!route) {
+  //   route = ctx.util.instanceScope(() => {
+  //     return inject(routerViewLocationKey)?.value;
+  //   });
+  // }
   return route as RouteLocationNormalizedLoadedGeneric | undefined;
 }
 

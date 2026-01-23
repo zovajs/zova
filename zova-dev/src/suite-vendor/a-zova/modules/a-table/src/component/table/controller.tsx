@@ -161,7 +161,7 @@ export class ControllerTable<TData extends {} = {}> extends BeanControllerTableB
         renders[key] = await this._createColumnRender(property, columnProps, columnScope);
       }
     }
-    this.tableMeta = {properties, renders };
+    this.tableMeta = { properties, renders };
   }
 
   private async _createColumnRender(
