@@ -2,7 +2,6 @@ import type { NavigationGuardWithThis, NavigationHookAfter, RouteLocationNormali
 import { BeanBase, TypeEventOff, Use } from 'zova';
 import { Bean } from 'zova-module-a-bean';
 import { BeanRouterViewBase } from '../lib/routerViewBase.js';
-import { ModelPageRoute } from '../model/pageRoute.js';
 import { TypeErrorListener } from '../types/router.js';
 import { SysRouter } from './sys.router.js';
 
@@ -16,9 +15,6 @@ export class BeanRouter extends BeanBase {
 
   @Use()
   $$sysRouter: SysRouter;
-
-  @Use()
-  $$modelPageRoute: ModelPageRoute;
 
   get router(): Router {
     return this._vueRouterApp;

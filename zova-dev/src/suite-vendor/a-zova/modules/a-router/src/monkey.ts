@@ -61,10 +61,10 @@ export class Monkey
     const beanRouter = await this.getBeanRouter();
     // pagePath
     if (process.env.CLIENT && this.ctx.meta.$ssr.isRuntimeSsrPreHydration) {
-      const pagePath = beanRouter.$$modelPageRoute.pagePath;
-      if (pagePath) {
+      const pagePathFull = this.ctx.meta.$ssr.state.pagePathFull;
+      if (pagePathFull) {
         const routerHistory = beanRouter.router[SymbolRouterHistory];
-        routerHistory.push(pagePath);
+        routerHistory.push(pagePathFull);
       }
     }
     // use router

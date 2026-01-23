@@ -1,36 +1,36 @@
 /* eslint-disable */
 /** model: begin */
-export * from '../model/pageRoute.js';
-import { IModelOptionsPageRoute } from '../model/pageRoute.js';
+export * from '../model/pageData.js';
+import { IModelOptionsPageData } from '../model/pageData.js';
 import 'zova-module-a-model';
 declare module 'zova-module-a-model' {
   
     export interface IModelRecord {
-      'a-router:pageRoute': IModelOptionsPageRoute;
+      'a-router:pageData': IModelOptionsPageData;
     }
 
   
 }
 declare module 'zova-module-a-router' {
   
-        export interface ModelPageRoute {
+        export interface ModelPageData {
           /** @internal */
           get scope(): ScopeModuleARouter;
         }
 
-        export interface ModelPageRoute {
-          get $beanFullName(): 'a-router.model.pageRoute';
-          get $onionName(): 'a-router:pageRoute';
-          get $onionOptions(): IModelOptionsPageRoute;
+        export interface ModelPageData {
+          get $beanFullName(): 'a-router.model.pageData';
+          get $onionName(): 'a-router:pageData';
+          get $onionOptions(): IModelOptionsPageData;
         } 
 }
 /** model: end */
 /** model: begin */
-import { ModelPageRoute } from '../model/pageRoute.js';
+import { ModelPageData } from '../model/pageData.js';
 import 'zova';
 declare module 'zova' {
   export interface IBeanRecordGeneral {
-    'a-router.model.pageRoute': ModelPageRoute;
+    'a-router.model.pageData': ModelPageData;
   }
 }
 /** model: end */

@@ -45,6 +45,9 @@ export interface SSRContextMeta {
 
 export interface SSRContextState {
   envClient?: ZovaConfigEnv;
+  pagePathFull?: string;
+  pagePath?: string;
+  pageData?: unknown;
 }
 export interface SSRContextStateDefer {}
 

@@ -1,7 +1,7 @@
 import { z } from 'zod';
 import { BeanControllerPageBase, Use } from 'zova';
 import { Controller } from 'zova-module-a-bean';
-import { ModelPageRoute } from 'zova-module-a-router';
+import { ModelPageData } from 'zova-module-a-router';
 import { ApiSchemaTestSsrDtoTestResult } from 'zova-module-home-api';
 
 export const ControllerPageToolTwoSchemaParams = z.object({
@@ -15,12 +15,12 @@ export const ControllerPageToolTwoSchemaQuery = z.object({
 @Controller()
 export class ControllerPageToolTwo extends BeanControllerPageBase {
   @Use()
-  $$modelPageRoute: ModelPageRoute;
+  $$modelPageData: ModelPageData<ApiSchemaTestSsrDtoTestResult | undefined>;
 
   protected async __init__() {}
 
   protected render() {
-    const pageData: ApiSchemaTestSsrDtoTestResult | undefined = this.$$modelPageRoute.pageData;
+    const pageData = this.$$modelPageData.current;
     return (
       <div>
         <div>{`id: ${pageData?.id}`}</div>
