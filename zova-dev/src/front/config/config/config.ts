@@ -70,9 +70,6 @@ export default function (sys: ZovaSys) {
     component: {
       empty: 'home-layout:layoutEmpty',
       default: 'home-layout:layoutTabs',
-      admin: 'home-layout:layoutTabs',
-      front: 'home-layout:layoutTabs',
-      mobile: 'home-layout:layoutTabs',
     },
     sidebar: {
       leftOpenPC: true,

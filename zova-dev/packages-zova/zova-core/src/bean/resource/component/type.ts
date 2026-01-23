@@ -7,9 +7,9 @@ export interface IComponentRecord {}
 export interface ILayoutRecord {
   empty: never;
   default: never;
-  admin: never;
-  front: never;
-  mobile: never;
+  // admin: never;
+  // front: never;
+  // mobile: never;
 }
 
 export type TypeComponentRecordSelector<PREFIX extends string> = {
