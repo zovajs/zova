@@ -93,20 +93,21 @@ export class ServiceSsrHandler extends BeanBase {
     return html;
   }
 
-  public async ensureReady() {
+  public async ensureReady(handlerNonce: number) {
     if (!this._handlerInstance) {
       if (!this._handlerPromise) {
-        this._handlerPromise = this._prepareHandler();
+        this._handlerPromise = this._prepareHandler(handlerNonce);
       }
       this._handlerInstance = await this._handlerPromise;
     }
     return this._handlerInstance;
   }
 
-  private async _prepareHandler() {
+  private async _prepareHandler(handlerNonce: number) {
     // handler
     const fileHandler = path.join(this._siteAssetDir, 'handler.js');
-    const handlerInstance = await import(/* @vite-ignore */pathToHref(fileHandler));
+    const fileUrl = `${pathToHref(fileHandler)}?${handlerNonce}`;
+    const handlerInstance = await import(/* @vite-ignore */fileUrl);
     // clientManifest
     const fileManifest = path.join(this._siteAssetDir, 'quasar.manifest.json');
     const contentManifest = await fse.readFile(fileManifest, { encoding: 'utf-8' });
