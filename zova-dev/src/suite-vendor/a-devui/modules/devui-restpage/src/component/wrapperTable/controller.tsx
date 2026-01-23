@@ -55,14 +55,17 @@ export class ControllerWrapperTable<TData extends {} = {}> extends BeanControlle
     return this.$$modelResource.schemaRow;
   }
 
-  async getColumns(next: TypeTableGetColumnsNext<TData>, _$$table: ControllerTable<TData>) {
+  async getColumns(next: TypeTableGetColumnsNext<TData>, $$table: ControllerTable<TData>) {
     const columns = await next();
     if (!this.$$modelResource.permissions?.row?.update && !this.$$modelResource.permissions?.row?.delete) return columns;
     const columnHelper = createColumnHelper<TData>();
+    const id = 'actions';
+    const columnRender = await $$table.createColumnRender(id, 'actionView');
     columns.push(columnHelper.display({
       id: 'actions',
       header: () => this.scope.locale.TableActions(),
-      cell: cellContext => this.$$renderActions.renderActions(cellContext as any),
+      // cell: cellContext => this.$$renderActions.renderActions(cellContext as any),
+      cell: columnRender,
     }));
     return columns;
   }
