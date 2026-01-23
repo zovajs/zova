@@ -104,9 +104,9 @@ export class ControllerTable<TData extends {} = {}> extends BeanControllerTableB
   private _createColumns() {
     this.columns = this.$useComputed(() => {
       if (!this.properties) return [];
-      if (!this.$props.getColumns) return this._createColumnsMiddle(this.tableMeta.properties);
+      if (!this.$props.getColumns) return this._createColumnsMiddle(this.properties);
       return this.$props.getColumns(properties => {
-        return this._createColumnsMiddle(properties ?? this.tableMeta.properties);
+        return this._createColumnsMiddle(properties ?? this.properties!);
       }, this);
     });
   }
@@ -161,7 +161,7 @@ export class ControllerTable<TData extends {} = {}> extends BeanControllerTableB
         renders[key] = await this._createColumnRender(property, columnProps, columnScope);
       }
     }
-    this.tableMeta = { properties, renders };
+    this.tableMeta = { renders };
   }
 
   private async _createColumnRender(
@@ -181,17 +181,29 @@ export class ControllerTable<TData extends {} = {}> extends BeanControllerTableB
     }
     return cellContext => {
       if (!cellContext) return;
-      return this.zovaJsx.setTransientObject({
-        getValue: (name: string) => {
-          return cellContext.row.getValue(name);
-        },
-      }, () => {
-        return this._cellRender(property, columnProps, columnScope, cellContext, renderProvider, beanInstance, onionOptions);
-      });
+      return this._cellRender(property, columnProps, columnScope, cellContext, renderProvider, beanInstance, onionOptions);
     };
   }
 
   private _cellRender(
+    property: SchemaObject,
+    columnProps: ITableCellRenderColumnProps,
+    columnScope: ITableColumnCelScope,
+    cellContext: CellContext<TData, any>,
+    renderProvider: TypeTableCellRenderComponentProvider,
+    beanInstance: ITableCellRender | undefined,
+    onionOptions: IDecoratorTableCellOptions | undefined,
+  ) {
+    return this.zovaJsx.setTransientObject({
+      getValue: (name: string) => {
+        return cellContext.row.getValue(name);
+      },
+    }, () => {
+      return this._cellRenderInner(property, columnProps, columnScope, cellContext, renderProvider, beanInstance, onionOptions);
+    });
+  }
+
+  private _cellRenderInner(
     property: SchemaObject,
     columnProps: ITableCellRenderColumnProps,
     columnScope: ITableColumnCelScope,
