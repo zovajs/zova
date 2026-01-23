@@ -60,7 +60,7 @@ export class ControllerWrapperTable<TData extends {} = {}> extends BeanControlle
     if (!this.$$modelResource.permissions?.row?.update && !this.$$modelResource.permissions?.row?.delete) return columns;
     const columnHelper = createColumnHelper<TData>();
     const id = 'actions';
-    const columnRender = await $$table.createColumnRender(id, 'actionView');
+    const columnRender = await $$table.createColumnRender(id, 'actionOperationsRow');
     columns.push(columnHelper.display({
       id: 'actions',
       header: () => this.scope.locale.TableActions(),

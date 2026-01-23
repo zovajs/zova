@@ -3,6 +3,7 @@ import type { TypeTableCellRenderComponentProvider } from 'zova-module-a-openapi
 
 export interface ITableProviderComponents {
   actionView?: TypeTableCellRenderComponentProvider;
+  actionOperationsRow?: TypeTableCellRenderComponentProvider;
   currency?: TypeTableCellRenderComponentProvider;
   date?: TypeTableCellRenderComponentProvider;
   dateRange?: TypeTableCellRenderComponentProvider;

@@ -3,13 +3,14 @@ export interface IResourceActionRowOptions {}
 
 export interface TypeResourceActionTableRecord {
   create: IResourceActionTableOptions;
+  operationsTable: IResourceActionTableOptions;
 }
 
 export interface TypeResourceActionRowRecord {
   view: IResourceActionRowOptions;
   update: IResourceActionRowOptions;
   delete: IResourceActionRowOptions;
-  operations: IResourceActionRowOptions;
+  operationsRow: IResourceActionRowOptions;
 }
 
 export type TypeResourceActionRowRecordRender = {
