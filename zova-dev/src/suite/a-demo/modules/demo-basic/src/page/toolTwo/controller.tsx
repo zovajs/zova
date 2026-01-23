@@ -1,3 +1,4 @@
+import { RouterLink } from '@cabloy/vue-router';
 import { z } from 'zod';
 import { BeanControllerPageBase, Use } from 'zova';
 import { Controller } from 'zova-module-a-bean';
@@ -26,6 +27,7 @@ export class ControllerPageToolTwo extends BeanControllerPageBase {
         <div>{`id: ${pageData?.id}`}</div>
         <div>{`name: ${pageData?.name}`}</div>
         <div>{`married: ${pageData?.married}`}</div>
+        <RouterLink to={this.sys.env.ROUTER_PAGE_HOME}>Go Home</RouterLink>
       </div>
     );
   }
