@@ -10,7 +10,7 @@ import { BeanControllerTableBase } from '../../lib/beanControllerTableBase.js';
 import { ITableProvider } from '../../types/providers.js';
 import { ITableMeta, TypeColumn, TypeTable, TypeTableGetColumnsNext } from '../../types/table.js';
 import { IDecoratorTableCellOptions, IJsxRenderContextTableCell, ITableCellRender } from '../../types/tableCell.js';
-import { constColumnProps, ITableCellCelScope, ITableCellRenderColumnProps, ITableCelScope, ITableColumnCelScope, TypeTableCellRender } from '../../types/tableColumn.js';
+import { constColumnProps, IJsxRenderContextTableColumn, ITableCellCelScope, ITableCellRenderColumnProps, ITableCelScope, ITableColumnCelScope, TypeTableCellRender } from '../../types/tableColumn.js';
 
 export interface ControllerTableProps<TData extends {} = {}> {
   data?: TData[];
@@ -141,8 +141,18 @@ export class ControllerTable<TData extends {} = {}> extends BeanControllerTableB
         const key = property.key!;
         // columnScope
         const columnScope = this.getColumnScope(key);
+        // renderContext
+        const jsxRenderContext: IJsxRenderContextTableColumn = {
+          app: this.app,
+          ctx: this.ctx,
+          $scene: 'tableColumn',
+          $host: this,
+          $celScope: columnScope,
+          $jsx: this.zovaJsx,
+          $$table: this,
+        };
         // columnProps
-        const columnProps = this.getColumnComponentPropsTop(key, columnScope);
+        const columnProps = this.getColumnComponentPropsTop(key, columnScope, jsxRenderContext);
         // visible
         if (columnProps.visible === false) continue;
         // property
@@ -207,7 +217,7 @@ export class ControllerTable<TData extends {} = {}> extends BeanControllerTableB
       return displayValue;
     }
     // renderContext
-    const cellRenderContext: IJsxRenderContextTableCell = {
+    const jsxRenderContext: IJsxRenderContextTableCell = {
       app: this.app,
       ctx: this.ctx,
       $scene: 'tableCell',
@@ -221,22 +231,22 @@ export class ControllerTable<TData extends {} = {}> extends BeanControllerTableB
     if (beanInstance) {
       // jsx: props
       let cellProps = isJsxComponent(columnProps.render)
-        ? this.zovaJsx.renderJsxProps(cast(columnProps.render).props, { ...columnProps }, cellScope)
+        ? this.zovaJsx.renderJsxProps(cast(columnProps.render).props, { ...columnProps }, cellScope, jsxRenderContext)
         : columnProps;
       if (onionOptions) {
         cellProps = deepExtend({}, onionOptions, cellProps);
       }
-      return beanInstance.render(cellProps, cellRenderContext, () => {
+      return beanInstance.render(cellProps, jsxRenderContext, () => {
         const children = isJsxComponent(columnProps.render) && cast(columnProps.render).children;
         if (children && children.length > 0) {
-          return this.zovaJsx.renderJsxChildrenDirect(children, cellScope);
+          return this.zovaJsx.renderJsxChildrenDirect(children, cellScope, jsxRenderContext);
         } else {
           return displayValue;
         }
       });
     }
     // general component
-    return this.zovaJsx.render(columnProps.render, {}, cellScope, cellRenderContext);
+    return this.zovaJsx.render(columnProps.render, {}, cellScope, jsxRenderContext);
   }
 
   public getColumnProperty(name: string): SchemaObject | undefined {
@@ -264,7 +274,7 @@ export class ControllerTable<TData extends {} = {}> extends BeanControllerTableB
     };
   }
 
-  public getColumnComponentPropsTop(name: string, celScope: {}): ITableCellRenderColumnProps {
+  public getColumnComponentPropsTop(name: string, celScope: {}, renderContext: {}): ITableCellRenderColumnProps {
     const props: any = { [constColumnProps]: true, key: name, name };
     const property = this.getColumnProperty(name);
     if (!property) return props;
@@ -282,7 +292,7 @@ export class ControllerTable<TData extends {} = {}> extends BeanControllerTableB
           keyValue = value;
         }
       } else {
-        keyValue = this.zovaJsx.renderJsxOrCel(value, undefined, celScope);
+        keyValue = this.zovaJsx.renderJsxOrCel(value, undefined, celScope, renderContext);
       }
       props[key] = keyValue;
     }
