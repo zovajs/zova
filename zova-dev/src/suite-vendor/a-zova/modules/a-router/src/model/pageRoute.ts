@@ -4,9 +4,9 @@ import { BeanModelBase, Model } from 'zova-module-a-model';
 export interface IModelOptionsPageRoute extends IDecoratorModelOptions {}
 
 @Model<IModelOptionsPageRoute>()
-export class ModelPageRoute extends BeanModelBase {
+export class ModelPageRoute<PAGEDATA = unknown> extends BeanModelBase {
   protected _pageDataInner: any;
-  public pageData: any;
+  public pageData: PAGEDATA;
 
   protected async __init__() {
     if (process.env.SERVER) {
@@ -22,7 +22,7 @@ export class ModelPageRoute extends BeanModelBase {
     }
   }
 
-  getPageData(pagePath: string) {
+  getPageData(pagePath: string): PAGEDATA {
     return this.$useStateMem({ queryKey: ['pageData', pagePath] });
   }
 }
