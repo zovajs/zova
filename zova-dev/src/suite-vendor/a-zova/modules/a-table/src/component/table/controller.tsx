@@ -104,9 +104,9 @@ export class ControllerTable<TData extends {} = {}> extends BeanControllerTableB
   private _createColumns() {
     this.columns = this.$useComputed(() => {
       if (!this.properties) return [];
-      if (!this.$props.getColumns) return this._createColumnsMiddle(this.properties);
+      if (!this.$props.getColumns) return this._createColumnsMiddle(this.tableMeta.properties);
       return this.$props.getColumns(properties => {
-        return this._createColumnsMiddle(properties ?? this.properties!);
+        return this._createColumnsMiddle(properties ?? this.tableMeta.properties);
       }, this);
     });
   }
@@ -161,7 +161,7 @@ export class ControllerTable<TData extends {} = {}> extends BeanControllerTableB
         renders[key] = await this._createColumnRender(property, columnProps, columnScope);
       }
     }
-    this.tableMeta = { renders };
+    this.tableMeta = {properties, renders };
   }
 
   private async _createColumnRender(
