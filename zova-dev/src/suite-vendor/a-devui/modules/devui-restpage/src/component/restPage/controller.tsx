@@ -39,13 +39,13 @@ export class ControllerRestPage extends BeanControllerBase implements ITableActi
       return this.$$modelResource.formProvider;
     });
     this.formScope = this.$useComputed(() => {
-      return { resource: this.$$modelResource.resource, id: this.entryId };
+      return { resource: this.$$modelResource.resource, permissions: this.$$modelResource.permissions, id: this.entryId };
     });
     this.tableProvider = this.$useComputed(() => {
       return this.$$modelResource.tableProvider;
     });
     this.tableScope = this.$useComputed(() => {
-      return { resource: this.$$modelResource.resource };
+      return { resource: this.$$modelResource.resource, permissions: this.$$modelResource.permissions };
     });
     this.formSchema = this.$useComputed(() => {
       return this.$$modelResource.getFormSchema(this.formMeta);
