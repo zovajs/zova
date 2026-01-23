@@ -18,7 +18,6 @@ declare module 'zova-module-devui-restpage' {
 }
 declare module 'zova-module-devui-restpage' {
   export interface RenderWrapperTable<TData extends {} = {}> extends ControllerWrapperTable<TData> {}
-  export interface RenderActions<TData extends {} = {}> extends ControllerWrapperTable<TData> {}
   export interface RenderCreate<TData extends {} = {}> extends ControllerWrapperTable<TData> {}
   export interface RenderPaged<TData extends {} = {}> extends ControllerWrapperTable<TData> {}
   export interface RenderTable<TData extends {} = {}> extends ControllerWrapperTable<TData> {}
