@@ -141,15 +141,7 @@ export class ControllerTable<TData extends {} = {}> extends BeanControllerTableB
         // columnScope
         const columnScope = this.getColumnScope(key);
         // renderContext
-        const jsxRenderContext: IJsxRenderContextTableColumn = {
-          app: this.app,
-          ctx: this.ctx,
-          $scene: 'tableColumn',
-          $host: this,
-          $celScope: columnScope,
-          $jsx: this.zovaJsx,
-          $$table: this,
-        };
+        const jsxRenderContext = this.getColumnJsxRenderContext(columnScope);
         // columnProps
         const columnProps = this.getColumnComponentPropsTop(key, columnScope, jsxRenderContext);
         // visible
@@ -163,14 +155,28 @@ export class ControllerTable<TData extends {} = {}> extends BeanControllerTableB
     return { properties, renders };
   }
 
-  public createColumnRender(_render: TypeTableCellRenderComponent) {
+  public getColumnJsxRenderContext(celScope: ITableColumnCelScope): IJsxRenderContextTableColumn {
+    return {
+      app: this.app,
+      ctx: this.ctx,
+      $scene: 'tableColumn',
+      $host: this,
+      $celScope: celScope,
+      $jsx: this.zovaJsx,
+      $$table: this,
+    };
+  }
 
+  public async createColumnRender(key: string, render: TypeTableCellRenderComponent) {
+    // columnScope
+    const columnScope = this.getColumnScope(key);
+    return await this._createColumnRender(render, undefined, undefined, columnScope);
   }
 
   private async _createColumnRender(
     render: TypeTableCellRenderComponent,
-    property: SchemaObject,
-    columnProps: ITableCellRenderColumnProps,
+    property: SchemaObject | undefined,
+    columnProps: ITableCellRenderColumnProps | undefined,
     columnScope: ITableColumnCelScope,
   ): Promise<TypeTableCellRender<TData, any>> {
     // renderProvider
@@ -190,8 +196,8 @@ export class ControllerTable<TData extends {} = {}> extends BeanControllerTableB
   }
 
   private _cellRender(
-    property: SchemaObject,
-    columnProps: ITableCellRenderColumnProps,
+    property: SchemaObject | undefined,
+    columnProps: ITableCellRenderColumnProps | undefined,
     columnScope: ITableColumnCelScope,
     cellContext: CellContext<TData, any>,
     renderProvider: TypeTableCellRenderComponentProvider,
@@ -208,8 +214,8 @@ export class ControllerTable<TData extends {} = {}> extends BeanControllerTableB
   }
 
   private _cellRenderInner(
-    property: SchemaObject,
-    columnProps: ITableCellRenderColumnProps,
+    property: SchemaObject | undefined,
+    columnProps: ITableCellRenderColumnProps | undefined,
     columnScope: ITableColumnCelScope,
     cellContext: CellContext<TData, any>,
     renderProvider: TypeTableCellRenderComponentProvider,
