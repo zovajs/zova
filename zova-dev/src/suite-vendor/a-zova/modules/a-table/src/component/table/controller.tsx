@@ -157,19 +157,24 @@ export class ControllerTable<TData extends {} = {}> extends BeanControllerTableB
         // property
         properties.push(property);
         // render
-        renders[key] = await this._createColumnRender(property, columnProps, columnScope);
+        renders[key] = await this._createColumnRender(columnProps.render, property, columnProps, columnScope);
       }
     }
     return { properties, renders };
   }
 
+  public createColumnRender(_render: TypeTableCellRenderComponent) {
+
+  }
+
   private async _createColumnRender(
+    render: TypeTableCellRenderComponent,
     property: SchemaObject,
     columnProps: ITableCellRenderColumnProps,
     columnScope: ITableColumnCelScope,
   ): Promise<TypeTableCellRender<TData, any>> {
     // renderProvider
-    const renderProvider = this.getRenderProvider(columnProps.render);
+    const renderProvider = this.getRenderProvider(render);
     // beanInstance
     let beanInstance: ITableCellRender | undefined;
     let onionOptions: IDecoratorTableCellOptions | undefined;
