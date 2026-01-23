@@ -9,6 +9,7 @@ export type TypeEventResolvePathResult = string | true | undefined;
 export interface ISsrHandlerRenderOptionsInner {
   req: http.IncomingMessage;
   res: http.ServerResponse<http.IncomingMessage>;
+  pagePathFull?: string;
   pagePath?: string;
   pageData?: any;
   performAction?: TypeSsrSitePerformAction;

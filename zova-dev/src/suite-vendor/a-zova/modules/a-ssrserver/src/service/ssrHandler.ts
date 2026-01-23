@@ -50,8 +50,8 @@ export class ServiceSsrHandler extends BeanBase {
 
   public async render(options: ISsrHandlerRenderOptionsInner) {
     // resolve route
-    const pagePath = options.pagePath ?? this.sys.util.getPagePathFromAbsoluteUrl(options.req.url!);
-    const route = await this.$$sysRouter.resolveRoute(pagePath, true, false);
+    const pagePathFull = options.pagePathFull ?? this.sys.util.getPagePathFromAbsoluteUrl(options.req.url!);
+    const route = await this.$$sysRouter.resolveRoute(pagePathFull, true, false);
     if (!route) return;
     // handler
     const { serverEntry, renderToString, renderTemplate } = this._handlerInstance;
