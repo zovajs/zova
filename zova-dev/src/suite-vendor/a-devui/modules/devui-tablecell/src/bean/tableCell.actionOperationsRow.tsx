@@ -1,4 +1,5 @@
 import { BeanBase } from 'zova';
+import { $performAction } from 'zova-module-a-action';
 import { ZIcon } from 'zova-module-a-icon';
 import { IDecoratorTableCellOptions, IJsxRenderContextTableCell, ITableCellRender, NextTableCellRender, TableCell } from 'zova-module-a-table';
 
@@ -7,19 +8,15 @@ export interface ITableCellOptionsActionOperationsRow extends IDecoratorTableCel
 @TableCell<ITableCellOptionsActionOperationsRow>()
 export class TableCellActionOperationsRow extends BeanBase implements ITableCellRender {
   render(_options: ITableCellOptionsActionOperationsRow, renderContext: IJsxRenderContextTableCell, _next: NextTableCellRender) {
-    const { $celScope, cellContext } = renderContext;
+    const { $jsx, $celScope } = renderContext;
     return (
       <div class="flex gap-2">
         {$celScope.permissions?.row?.update && (
           <button
             class="btn btn-outline btn-primary"
             onClick={() => {
-              // todo:
-              const url = this.$router.getPagePath('/rest/resource/:resource/:id/:formScene?', {
-                params: { resource: $celScope.resource!, id: cellContext.row.id, formScene: 'edit' },
-              });
-              this.$router.push(url);
-              // this.onActionRow('update', cellContext.row);
+              const actionName = $jsx.normalizeAction('actionEdit');
+              $performAction(actionName, undefined, renderContext);
             }}
           >
             <ZIcon name="::draft"></ZIcon>
@@ -28,8 +25,12 @@ export class TableCellActionOperationsRow extends BeanBase implements ITableCell
         {$celScope.permissions?.row?.delete && (
           <button
             class="btn btn-outline btn-error"
-            onClick={() => {
-              // this.onActionDelete(cellContext.row);
+            onClick={async () => {
+              // eslint-disable-next-line no-alert
+              if (!window.confirm(this.scope.locale.DeleteConfirm())) return;
+              const actionName = $jsx.normalizeAction('actionDelete');
+              await $performAction(actionName, undefined, renderContext);
+              console.log('ddd');
             }}
           >
             <ZIcon name="::delete"></ZIcon>

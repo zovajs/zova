@@ -1,14 +1,15 @@
 import type { TypeModuleResourceLocaleModules, TypeModuleResourceLocales } from '../../types/interface/module.js';
 import type { ZovaLocaleOptionalMap } from '../app/locale.js';
-import { BeanSimple } from '../../bean/beanSimple.js';
+import { AppLocale } from '../component/locale.js';
 
-export class SysLocale extends BeanSimple {
+export class SysLocale extends AppLocale {
   /** @internal */
   public locales: TypeModuleResourceLocales = {};
   public localeModules: TypeModuleResourceLocaleModules = {};
 
   /** @internal */
-  public async initialize(locales: ZovaLocaleOptionalMap) {
+  public async initialize(locales?: ZovaLocaleOptionalMap) {
+    if(!locales) return;
     for (const locale in locales) {
       const moduleMap = locales[locale].modules;
       for (const moduleName in moduleMap) {

@@ -50,8 +50,11 @@ declare module 'zova' {
   }
 }
 /** tableCell: end */
+/** locale: begin */
+import { locales } from './locales.js';
+/** locale: end */
 /** scope: begin */
-import { BeanScopeBase, type BeanScopeUtil } from 'zova';
+import { BeanScopeBase, type BeanScopeUtil, TypeModuleLocales, TypeLocaleBase } from 'zova';
 import { Scope } from 'zova-module-a-bean';
 
 @Scope()
@@ -59,6 +62,7 @@ export class ScopeModuleDevuiTablecell extends BeanScopeBase {}
 
 export interface ScopeModuleDevuiTablecell {
   util: BeanScopeUtil;
+locale: TypeModuleLocales<(typeof locales)[TypeLocaleBase]>;
 }
 
 import 'zova';
@@ -69,9 +73,14 @@ declare module 'zova' {
   
   
 
-  
+  export interface IBeanScopeLocale {
+    'devui-tablecell': (typeof locales)[TypeLocaleBase];
+  }
 
   
 }
-  
+
+export function locale<K extends keyof (typeof locales)[TypeLocaleBase]>(key: K): `devui-tablecell::${K}` {
+  return `devui-tablecell::${key}`;
+}  
 /** scope: end */

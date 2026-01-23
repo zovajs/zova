@@ -8,6 +8,7 @@ import { SysComponent } from './component.js';
 import { SysError } from './error.js';
 import { SysLocale } from './locale.js';
 import { SysModule } from './module.js';
+import { AppCookie } from '../component/cookie.js';
 
 export class SysMeta extends BeanSimple {
   module: SysModule;
@@ -16,6 +17,7 @@ export class SysMeta extends BeanSimple {
   locale: SysLocale;
   error: SysError;
   event: AppEvent;
+  cookie: AppCookie;
 
   /** @internal */
   public sysMonkey?: IMonkeyModuleSys & IMonkeySys;
@@ -30,6 +32,7 @@ export class SysMeta extends BeanSimple {
     this.locale = this.bean._newBeanSimple(SysLocale, false);
     this.error = this.bean._newBeanSimple(SysError, false);
     this.event = this.bean._newBeanSimple(AppEvent, false);
+    this.cookie = this.bean._newBeanSimple(AppCookie, false);
   }
 
   /** @internal */

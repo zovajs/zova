@@ -18,9 +18,13 @@ export class AppLocale extends BeanSimple {
   private [SymbolLocaleCurrent]: Ref<string | undefined> = ref();
   private [SymbolTzCurrent]: Ref<string | undefined> = ref();
 
+  get metaCookie() {
+    return this.app ? this.app.meta.cookie : this.sys.meta.cookie;
+  }
+
   get current(): keyof ILocaleRecord {
     let locale = this[SymbolLocaleCurrent].value;
-    if (!locale) locale = this.app.meta.cookie.getItem(this.sys.config.locale.storeKey);
+    if (!locale) locale = this.metaCookie.getItem(this.sys.config.locale.storeKey);
     if (!locale) locale = this.sys.config.locale.default;
     return locale as keyof ILocaleRecord;
   }
@@ -28,12 +32,12 @@ export class AppLocale extends BeanSimple {
   set current(value: keyof ILocaleRecord) {
     if (this[SymbolLocaleCurrent].value === value) return;
     this[SymbolLocaleCurrent].value = value;
-    this.app.meta.cookie.setItem(this.sys.config.locale.storeKey, value);
+    this.metaCookie.setItem(this.sys.config.locale.storeKey, value);
   }
 
   get tz(): string {
     let tz = this[SymbolTzCurrent].value;
-    if (!tz) tz = this.app.meta.cookie.getItem(this.sys.config.tz.storeKey);
+    if (!tz) tz = this.metaCookie.getItem(this.sys.config.tz.storeKey);
     if (!tz) tz = Intl.DateTimeFormat().resolvedOptions().timeZone;
     return tz;
   }
@@ -41,7 +45,7 @@ export class AppLocale extends BeanSimple {
   set tz(value: string) {
     if (this[SymbolTzCurrent].value === value) return;
     this[SymbolTzCurrent].value = value;
-    this.app.meta.cookie.setItem(this.sys.config.tz.storeKey, value);
+    this.metaCookie.setItem(this.sys.config.tz.storeKey, value);
   }
 
   /** @internal */

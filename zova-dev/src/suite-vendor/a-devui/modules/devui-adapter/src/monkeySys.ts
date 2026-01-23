@@ -38,6 +38,8 @@ export class MonkeySys extends BeanSimple implements IMonkeySysInitialize {
           },
           actions: {
             actionView: 'rest-actions:view',
+            actionEdit: 'rest-actions:edit',
+            actionDelete: 'rest-actions:delete',
           },
         },
       },

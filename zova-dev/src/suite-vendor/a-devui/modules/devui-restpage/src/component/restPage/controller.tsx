@@ -45,7 +45,14 @@ export class ControllerRestPage extends BeanControllerBase implements ITableActi
       return this.$$modelResource.tableProvider;
     });
     this.tableScope = this.$useComputed(() => {
-      return { resource: this.$$modelResource.resource, permissions: this.$$modelResource.permissions };
+      return {
+        resource: this.$$modelResource.resource,
+        permissions: this.$$modelResource.permissions,
+        onActionTable: (_action: keyof TypeResourceActionTableRecord) => {},
+        onActionRow: (action: keyof TypeResourceActionRowRecord, row: Row<any>) => {
+          return this.onActionRow(action, row);
+        },
+      } satisfies ITableCelScope;
     });
     this.formSchema = this.$useComputed(() => {
       return this.$$modelResource.getFormSchema(this.formMeta);
