@@ -1,16 +1,15 @@
 import type { ModelResource } from 'zova-module-rest-resource';
-import { createColumnHelper, Row } from '@tanstack/table-core';
+import { createColumnHelper } from '@tanstack/table-core';
 import { Use } from 'zova';
 import { Controller } from 'zova-module-a-bean';
 import { $QueryAutoLoad } from 'zova-module-a-model';
-import { TypeResourceActionRowRecord, TypeResourceActionTableRecord } from 'zova-module-a-openapi';
 import { BeanControllerTableBase, ControllerTable, ITableCelScope, ITablePaged, ITableProvider, ITableQuery, ITableResPaged, TypeTableGetColumnsNext } from 'zova-module-a-table';
 
+// @ts-ignore ignore
+// eslint-disable-next-line
 export interface ControllerWrapperTableProps<TData extends {} = {}> {
   tableProvider?: ITableProvider;
   tableScope: ITableCelScope;
-  onActionTable?: (action: keyof TypeResourceActionTableRecord) => Promise<any> | undefined;
-  onActionRow?: (action: keyof TypeResourceActionRowRecord, row: Row<TData>) => Promise<any> | undefined;
 }
 
 @Controller()
@@ -64,7 +63,6 @@ export class ControllerWrapperTable<TData extends {} = {}> extends BeanControlle
     columns.push(columnHelper.display({
       id: 'actions',
       header: () => this.scope.locale.TableActions(),
-      // cell: cellContext => this.$$renderActions.renderActions(cellContext as any),
       cell: columnRender,
     }));
     return columns;
@@ -72,19 +70,6 @@ export class ControllerWrapperTable<TData extends {} = {}> extends BeanControlle
 
   _onFilter(data: any) {
     this.queryFilterData = data;
-  }
-
-  async onActionTable(action: keyof TypeResourceActionTableRecord) {
-    return this.$props.onActionTable?.(action);
-  }
-
-  async onActionRow(action: keyof TypeResourceActionRowRecord, row: Row<TData>) {
-    return this.$props.onActionRow?.(action, row);
-  }
-
-  async onActionDelete(row: Row<TData>) {
-    // if (!window.confirm(this.scope.locale.DeleteConfirm())) return;
-    return this.onActionRow('delete', row);
   }
 
   gotoPage(pageNo: number) {

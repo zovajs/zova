@@ -1,11 +1,11 @@
 import { celEnvBase } from '@cabloy/utils';
-import { CellContext, createColumnHelper, getCoreRowModel, Row, TableOptionsWithReactiveData } from '@tanstack/vue-table';
+import { CellContext, createColumnHelper, getCoreRowModel, TableOptionsWithReactiveData } from '@tanstack/vue-table';
 import { SchemaObject } from 'openapi3-ts/oas31';
 import { VNode } from 'vue';
 import { appResource, cast, deepEqual, deepExtend, UseScope } from 'zova';
 import { isJsxComponent, ZovaJsx } from 'zova-jsx';
 import { Controller } from 'zova-module-a-bean';
-import { loadSchemaProperties, renderTableColumnTopPropsSystem, ScopeModuleAOpenapi, TypeResourceActionRowRecord, TypeResourceActionTableRecord, TypeTableCellRenderComponent, TypeTableCellRenderComponentProvider } from 'zova-module-a-openapi';
+import { loadSchemaProperties, renderTableColumnTopPropsSystem, ScopeModuleAOpenapi, TypeTableCellRenderComponent, TypeTableCellRenderComponentProvider } from 'zova-module-a-openapi';
 import { BeanControllerTableBase } from '../../lib/beanControllerTableBase.js';
 import { ITableProvider } from '../../types/providers.js';
 import { ITableMeta, TypeColumn, TypeTable, TypeTableGetColumnsNext } from '../../types/table.js';
@@ -18,8 +18,6 @@ export interface ControllerTableProps<TData extends {} = {}> {
   tableProvider?: ITableProvider;
   tableScope?: ITableCelScope;
   getColumns?: (next: TypeTableGetColumnsNext<TData>, table: ControllerTable<TData>,) => Promise<TypeColumn<TData>[]>;
-  onActionTable?: (action: keyof TypeResourceActionTableRecord, table: ControllerTable<TData>) => Promise<any> | undefined;
-  onActionRow?: (action: keyof TypeResourceActionRowRecord, row: Row<TData>, table: ControllerTable<TData>) => Promise<any> | undefined;
   slotDefault?: (table: ControllerTable<TData>) => VNode;
 }
 
@@ -79,14 +77,6 @@ export class ControllerTable<TData extends {} = {}> extends BeanControllerTableB
 
   get data() {
     return this.$props.data;
-  }
-
-  public onActionTable(action: keyof TypeResourceActionTableRecord) {
-    return this.$props.onActionTable?.(action, this);
-  }
-
-  public onActionRow(action: keyof TypeResourceActionRowRecord, row: Row<TData>) {
-    return this.$props.onActionRow?.(action, row, this);
   }
 
   private _createTable() {

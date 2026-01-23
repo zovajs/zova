@@ -7,10 +7,10 @@ import { BeanControllerBase, Use } from 'zova';
 import { Controller } from 'zova-module-a-bean';
 import { ControllerForm, formSceneFromFormMeta, IFormCelScope, IFormMeta, IFormProvider, TypeEditMode, TypeFormMode } from 'zova-module-a-form';
 import { TypeResourceActionRowRecord, TypeResourceActionTableRecord } from 'zova-module-a-openapi';
-import { ITableActionHandler, ITableCelScope, ITableProvider } from 'zova-module-a-table';
+import { ITableCelScope, ITableProvider } from 'zova-module-a-table';
 
 @Controller()
-export class ControllerRestPage extends BeanControllerBase implements ITableActionHandler {
+export class ControllerRestPage extends BeanControllerBase {
   // form
   rowCurrent?: Row<any>;
   formVisible: boolean = false;

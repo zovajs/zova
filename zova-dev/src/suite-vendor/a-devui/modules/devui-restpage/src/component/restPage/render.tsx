@@ -14,8 +14,6 @@ export class RenderRestPage extends BeanRenderBase {
         <ZWrapperTable
           tableProvider={this.tableProvider}
           tableScope={this.tableScope}
-          onActionTable={action => this.onActionTable(action)}
-          onActionRow={(action, row) => this.onActionRow(action, row)}
         ></ZWrapperTable>
       </div>
     );
