@@ -39,7 +39,7 @@ export class ControllerRestPage extends BeanControllerBase implements ITableActi
       return this.$$modelResource.formProvider;
     });
     this.formScope = this.$useComputed(() => {
-      return { resource: this.$$modelResource.resource, id: this.entryId };
+      return { resource: this.$$modelResource.resource, entryId: this.entryId };
     });
     this.tableProvider = this.$useComputed(() => {
       return this.$$modelResource.tableProvider;

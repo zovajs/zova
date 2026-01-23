@@ -26,7 +26,7 @@ export class ControllerWrapperForm extends BeanControllerBase {
   }
 
   protected render() {
-    const { formData, formSchema, formMeta, formProvider } = this.$$restPageEntry;
+    const { formData, formSchema, formMeta, formProvider, formScope } = this.$$restPageEntry;
     const ComponentForm = this.$zovaComponent(this.$$modelResource.componentForm);
     return (
       <ComponentForm
@@ -35,6 +35,7 @@ export class ControllerWrapperForm extends BeanControllerBase {
         schema={formSchema}
         formMeta={formMeta}
         formProvider={formProvider}
+        formScope={formScope}
         onSubmit={data => this.onSubmit(data)}
         onShowError={({ error }) => {
           // eslint-disable-next-line no-alert
