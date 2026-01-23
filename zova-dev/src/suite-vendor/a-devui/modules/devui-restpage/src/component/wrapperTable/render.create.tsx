@@ -10,7 +10,7 @@ export class RenderCreate extends BeanRenderBase {
         class="btn btn-primary"
         type="button"
         onClick={() => {
-          this.onActionTable('create');
+          // this.onActionTable('create');
         }}
       >
         {this.scope.locale.Create()}

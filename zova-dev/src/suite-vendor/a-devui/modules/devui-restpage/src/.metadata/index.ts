@@ -2,7 +2,6 @@
 /** controller: begin */
 export * from '../component/restPage/controller.jsx';
 export * from '../component/wrapperFilter/controller.jsx';
-export * from '../component/wrapperForm/controller.jsx';
 export * from '../component/wrapperTable/controller.jsx';
 
 import 'zova';
@@ -22,11 +21,6 @@ declare module 'zova-module-devui-restpage' {
           get scope(): ScopeModuleDevuiRestpage;
         }
 
-        export interface ControllerWrapperForm {
-          /** @internal */
-          get scope(): ScopeModuleDevuiRestpage;
-        }
-
         export interface ControllerWrapperTable {
           /** @internal */
           get scope(): ScopeModuleDevuiRestpage;
@@ -36,14 +30,12 @@ declare module 'zova-module-devui-restpage' {
 /** controller: begin */
 import { ControllerRestPage } from '../component/restPage/controller.jsx';
 import { ControllerWrapperFilter } from '../component/wrapperFilter/controller.jsx';
-import { ControllerWrapperForm } from '../component/wrapperForm/controller.jsx';
 import { ControllerWrapperTable } from '../component/wrapperTable/controller.jsx';
 import 'zova';
 declare module 'zova' {
   export interface IBeanRecordLocal {
     'devui-restpage.controller.restPage': ControllerRestPage;
 'devui-restpage.controller.wrapperFilter': ControllerWrapperFilter;
-'devui-restpage.controller.wrapperForm': ControllerWrapperForm;
 'devui-restpage.controller.wrapperTable': ControllerWrapperTable;
   }
 }
@@ -54,14 +46,11 @@ export * from './component/restPage.js';
 import { ZRestPage } from './component/restPage.js';
 export * from './component/wrapperFilter.js';
 import { ZWrapperFilter } from './component/wrapperFilter.js';
-export * from './component/wrapperForm.js';
-import { ZWrapperForm } from './component/wrapperForm.js';
 export * from './component/wrapperTable.js';
 import { ZWrapperTable } from './component/wrapperTable.js';
 export const components = {
   'restPage': ZRestPage,
 'wrapperFilter': ZWrapperFilter,
-'wrapperForm': ZWrapperForm,
 'wrapperTable': ZWrapperTable,
 };
 import 'zova';
@@ -69,13 +58,11 @@ declare module 'zova' {
 export interface IComponentRecord {
   'devui-restpage:restPage': ControllerRestPage;
 'devui-restpage:wrapperFilter': ControllerWrapperFilter;
-'devui-restpage:wrapperForm': ControllerWrapperForm;
 'devui-restpage:wrapperTable': ControllerWrapperTable;
 }
 export interface IZovaComponentRecord {
   'devui-restpage:restPage': typeof ZRestPage;
 'devui-restpage:wrapperFilter': typeof ZWrapperFilter;
-'devui-restpage:wrapperForm': typeof ZWrapperForm;
 'devui-restpage:wrapperTable': typeof ZWrapperTable;
 }
 }
@@ -83,7 +70,6 @@ export interface IZovaComponentRecord {
 /** render: begin */
 export * from '../component/restPage/render.jsx';
 export * from '../component/wrapperFilter/render.jsx';
-export * from '../component/wrapperForm/render.jsx';
 export * from '../component/wrapperTable/render.create.jsx';
 export * from '../component/wrapperTable/render.paged.jsx';
 export * from '../component/wrapperTable/render.table.jsx';
@@ -102,11 +88,6 @@ declare module 'zova-module-devui-restpage' {
         }
 
         export interface RenderWrapperFilter {
-          /** @internal */
-          get scope(): ScopeModuleDevuiRestpage;
-        }
-
-        export interface RenderWrapperForm {
           /** @internal */
           get scope(): ScopeModuleDevuiRestpage;
         }
@@ -135,7 +116,6 @@ declare module 'zova-module-devui-restpage' {
 /** render: begin */
 import { RenderRestPage } from '../component/restPage/render.jsx';
 import { RenderWrapperFilter } from '../component/wrapperFilter/render.jsx';
-import { RenderWrapperForm } from '../component/wrapperForm/render.jsx';
 import { RenderCreate } from '../component/wrapperTable/render.create.jsx';
 import { RenderPaged } from '../component/wrapperTable/render.paged.jsx';
 import { RenderTable } from '../component/wrapperTable/render.table.jsx';
@@ -145,7 +125,6 @@ declare module 'zova' {
   export interface IBeanRecordLocal {
     'devui-restpage.render.restPage': RenderRestPage;
 'devui-restpage.render.wrapperFilter': RenderWrapperFilter;
-'devui-restpage.render.wrapperForm': RenderWrapperForm;
 'devui-restpage.render.create': RenderCreate;
 'devui-restpage.render.paged': RenderPaged;
 'devui-restpage.render.table': RenderTable;
