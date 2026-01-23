@@ -17,8 +17,12 @@ export class ModelPageData<PAGEDATA = unknown> extends BeanModelBase {
         this.current = this._pageDataInner;
       }
     } else {
-      const route = this.$pageRoute!;
-      this.current = this.getPageData(route.path);
+      if (this.$ssr.isRuntimeSsrPreHydration) {
+        this.current = this.$ssr.state.pageData as PAGEDATA;
+      } else {
+        const route = this.$pageRoute!;
+        this.current = this.getPageData(route.path);
+      }
     }
   }
 

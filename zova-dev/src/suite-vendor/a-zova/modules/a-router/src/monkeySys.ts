@@ -86,7 +86,7 @@ export class MonkeySys extends BeanSimple implements IMonkeyModuleSys, IMonkeySy
     };
     app.$getCurrentPagePath = (): string | undefined => {
       if (process.env.SERVER) {
-        return app.ctx.meta.$ssr.context.pagePath ?? app.sys.util.getPagePathFromAbsoluteUrl(app.ctx.meta.$ssr.context.req.url);
+        return app.ctx.meta.$ssr.state.pagePathFull ?? app.sys.util.getPagePathFromAbsoluteUrl(app.ctx.meta.$ssr.context.req.url);
       }
       return cast(app.meta.$router.currentRoute)?.fullPath;
     };
