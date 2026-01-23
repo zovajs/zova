@@ -5,7 +5,6 @@ import { Controller } from 'zova-module-a-bean';
 import { $QueryAutoLoad } from 'zova-module-a-model';
 import { TypeResourceActionRowRecord, TypeResourceActionTableRecord } from 'zova-module-a-openapi';
 import { BeanControllerTableBase, ControllerTable, ITableCelScope, ITablePaged, ITableProvider, ITableQuery, ITableResPaged, TypeTableGetColumnsNext } from 'zova-module-a-table';
-import { RenderActions } from './render.actions.jsx';
 
 export interface ControllerWrapperTableProps<TData extends {} = {}> {
   tableProvider?: ITableProvider;
@@ -24,9 +23,6 @@ export class ControllerWrapperTable<TData extends {} = {}> extends BeanControlle
 
   @Use({ injectionScope: 'host' })
   $$modelResource: ModelResource;
-
-  @Use()
-  $$renderActions: RenderActions;
 
   protected async __init__() {
     // query
