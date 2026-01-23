@@ -1,7 +1,7 @@
 import type { ComponentPublicInstance } from 'vue';
-import type { Constructable } from 'zova-core';
+import type { Constructable, IComponentIntrinsicAttributes } from 'zova-core';
 
-export interface TypeRenderComponentJsxPropsPublic {
+export interface TypeRenderComponentJsxPropsPublic extends IComponentIntrinsicAttributes {
   'key'?: string;
   'v-if'?: string | boolean;
   'v-for'?: string | any[];
