@@ -187,6 +187,9 @@ async function generateRestComponent(
   if (name !== 'formField' && name.startsWith('formField')) {
     componentNamePrefix = 'FF';
     componentName = toLowerCaseFirstChar(name.substring('formField'.length));
+  } else if (name.startsWith('restPage')) {
+    componentNamePrefix = 'PP';
+    componentName = toLowerCaseFirstChar(name.substring('restPage'.length));
   } else {
     componentNamePrefix = 'ZZ';
     componentName = name;
