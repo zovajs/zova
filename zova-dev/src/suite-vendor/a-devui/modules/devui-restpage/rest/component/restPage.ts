@@ -3,7 +3,7 @@ import type { ControllerRestPageProps } from '../../src/component/restPage/contr
 
 type TypeControllerRestPagePublicProps<TData extends {} = {}> = TypeRenderComponentJsxPropsPublic
   & ControllerRestPageProps<TData>;
-export function ZZDevuiRestpageRestPage<TData extends {} = {}>(
+export function PPDevuiRestpage<TData extends {} = {}>(
   _props: TypeControllerRestPagePublicProps<TData>,
 ) {
   return 'devui-restpage:restPage';

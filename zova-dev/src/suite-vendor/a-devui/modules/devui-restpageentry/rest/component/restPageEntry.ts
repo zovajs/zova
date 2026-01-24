@@ -1,7 +1,7 @@
 import type { TypeRenderComponentJsxPropsPublic } from 'zova-jsx';
 
 type TypeControllerRestPageEntryPublicProps = TypeRenderComponentJsxPropsPublic;
-export function ZZDevuiRestpageentryRestPageEntry(
+export function PPDevuiRestpageentryEntry(
   _props: TypeControllerRestPageEntryPublicProps,
 ) {
   return 'devui-restpageentry:restPageEntry';
