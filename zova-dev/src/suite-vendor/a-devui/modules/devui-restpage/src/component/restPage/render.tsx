@@ -5,6 +5,7 @@ import { ZWrapperFilter } from '../../.metadata/component/wrapperFilter.js';
 @Render()
 export class RenderRestPage<TData extends {} = {}> extends BeanRenderBase {
   private _renderFilter() {
+    if (!this.$props.showFilter) return;
     return (
       <ZWrapperFilter
         formData={this.queryFilterData}

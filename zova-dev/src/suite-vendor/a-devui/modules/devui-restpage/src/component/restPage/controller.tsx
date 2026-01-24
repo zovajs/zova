@@ -8,11 +8,13 @@ import { BeanControllerTableBase, ControllerTable, ITableCelScope, ITablePaged, 
 
 // @ts-ignore ignore
 // eslint-disable-next-line
-export interface ControllerRestPageProps<TData extends {} = {}> {}
+export interface ControllerRestPageProps<TData extends {} = {}> {
+  showFilter?: boolean;
+}
 
 @Controller()
 export class ControllerRestPage<TData extends {} = {}> extends BeanControllerTableBase {
-  static $propsDefault = {};
+  static $propsDefault = { showFilter: true };
 
   tableProvider: ITableProvider;
   tableScope: ITableCelScope;
