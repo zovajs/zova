@@ -16,7 +16,7 @@ export class RenderRestPage<TData extends {} = {}> extends BeanRenderBase {
     );
   }
 
-  private _renderCreate() {
+  private _renderOperationsTable() {
     if (!this.permissions?.table?.create) return;
     return (
       <button
@@ -82,7 +82,7 @@ export class RenderRestPage<TData extends {} = {}> extends BeanRenderBase {
     return (
       <div>
         {this._renderFilter()}
-        {this._renderCreate()}
+        {this._renderOperationsTable()}
         {this._renderTable()}
         {this._renderPages()}
       </div>
