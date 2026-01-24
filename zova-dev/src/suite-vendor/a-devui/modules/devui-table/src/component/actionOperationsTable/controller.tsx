@@ -16,14 +16,14 @@ export class ControllerActionOperationsTable extends BeanControllerBase {
 
   private _renderCreate() {
     if (!this.permissions?.table?.create) return;
-    const { $jsx, $celScope } = this.$$renderContext;
+    const { $jsx } = this.$$renderContext;
     return (
       <button
         class="btn btn-primary"
         type="button"
         onClick={() => {
           const actionName = $jsx.normalizeAction('actionCreate');
-          $performAction(actionName, { resource: $celScope.resource }, this.$$renderContext);
+          $performAction(actionName, undefined, this.$$renderContext);
         }}
       >
         {this.scope.locale.Create()}
