@@ -10,7 +10,6 @@
     "zova-module-devui-form": "workspace:^",
     "zova-module-devui-restpage": "workspace:^",
     "zova-module-devui-table": "workspace:^",
-    "zova-module-devui-tablecell": "^5.0.0",
     "zova-module-devui-actions": "^5.0.0"
   },
   "gitHead": "73721393c1ea9a95539948d57ad692f2c004d7c7"
