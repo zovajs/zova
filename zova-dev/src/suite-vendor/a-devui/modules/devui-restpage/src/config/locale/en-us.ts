@@ -1,4 +1,5 @@
 export default {
+  Back: 'Back',
   Close: 'Close',
   Create: 'Create',
   Submit: 'Submit',

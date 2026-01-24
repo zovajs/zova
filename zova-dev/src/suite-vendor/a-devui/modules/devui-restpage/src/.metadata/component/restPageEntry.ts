@@ -7,7 +7,7 @@ export interface TypeControllerRestPageEntryPublicProps {
   controllerRef?: (ref: ControllerRestPageEntry) => void;
 }
 
-declare module 'zova-module-devui-restpageentry' {
+declare module 'zova-module-devui-restpage' {
   export interface RenderRestPageEntry extends ControllerRestPageEntry {}
 }
 export const ZRestPageEntry = defineComponent(

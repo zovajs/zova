@@ -1,6 +1,7 @@
 /* eslint-disable */
 /** controller: begin */
 export * from '../component/restPage/controller.jsx';
+export * from '../component/restPageEntry/controller.jsx';
 export * from '../component/wrapperFilter/controller.jsx';
 
 import 'zova';
@@ -15,6 +16,11 @@ declare module 'zova-module-devui-restpage' {
           get scope(): ScopeModuleDevuiRestpage;
         }
 
+        export interface ControllerRestPageEntry {
+          /** @internal */
+          get scope(): ScopeModuleDevuiRestpage;
+        }
+
         export interface ControllerWrapperFilter {
           /** @internal */
           get scope(): ScopeModuleDevuiRestpage;
@@ -23,11 +29,13 @@ declare module 'zova-module-devui-restpage' {
 /** controller: end */
 /** controller: begin */
 import { ControllerRestPage } from '../component/restPage/controller.jsx';
+import { ControllerRestPageEntry } from '../component/restPageEntry/controller.jsx';
 import { ControllerWrapperFilter } from '../component/wrapperFilter/controller.jsx';
 import 'zova';
 declare module 'zova' {
   export interface IBeanRecordLocal {
     'devui-restpage.controller.restPage': ControllerRestPage;
+'devui-restpage.controller.restPageEntry': ControllerRestPageEntry;
 'devui-restpage.controller.wrapperFilter': ControllerWrapperFilter;
   }
 }
@@ -36,26 +44,32 @@ declare module 'zova' {
 /** components: begin */
 export * from './component/restPage.js';
 import { ZRestPage } from './component/restPage.js';
+export * from './component/restPageEntry.js';
+import { ZRestPageEntry } from './component/restPageEntry.js';
 export * from './component/wrapperFilter.js';
 import { ZWrapperFilter } from './component/wrapperFilter.js';
 export const components = {
   'restPage': ZRestPage,
+'restPageEntry': ZRestPageEntry,
 'wrapperFilter': ZWrapperFilter,
 };
 import 'zova';
 declare module 'zova' {
 export interface IComponentRecord {
   'devui-restpage:restPage': ControllerRestPage;
+'devui-restpage:restPageEntry': ControllerRestPageEntry;
 'devui-restpage:wrapperFilter': ControllerWrapperFilter;
 }
 export interface IZovaComponentRecord {
   'devui-restpage:restPage': typeof ZRestPage;
+'devui-restpage:restPageEntry': typeof ZRestPageEntry;
 'devui-restpage:wrapperFilter': typeof ZWrapperFilter;
 }
 }
 /** components: end */
 /** render: begin */
 export * from '../component/restPage/render.jsx';
+export * from '../component/restPageEntry/render.jsx';
 export * from '../component/wrapperFilter/render.jsx';
 
 import 'zova';
@@ -70,6 +84,11 @@ declare module 'zova-module-devui-restpage' {
           get scope(): ScopeModuleDevuiRestpage;
         }
 
+        export interface RenderRestPageEntry {
+          /** @internal */
+          get scope(): ScopeModuleDevuiRestpage;
+        }
+
         export interface RenderWrapperFilter {
           /** @internal */
           get scope(): ScopeModuleDevuiRestpage;
@@ -78,11 +97,13 @@ declare module 'zova-module-devui-restpage' {
 /** render: end */
 /** render: begin */
 import { RenderRestPage } from '../component/restPage/render.jsx';
+import { RenderRestPageEntry } from '../component/restPageEntry/render.jsx';
 import { RenderWrapperFilter } from '../component/wrapperFilter/render.jsx';
 import 'zova';
 declare module 'zova' {
   export interface IBeanRecordLocal {
     'devui-restpage.render.restPage': RenderRestPage;
+'devui-restpage.render.restPageEntry': RenderRestPageEntry;
 'devui-restpage.render.wrapperFilter': RenderWrapperFilter;
   }
 }
