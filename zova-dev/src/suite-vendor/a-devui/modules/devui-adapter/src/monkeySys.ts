@@ -38,6 +38,7 @@ export class MonkeySys extends BeanSimple implements IMonkeySysInitialize {
             actionView: 'devui-table.tableCell.actionView',
           },
           actions: {
+            actionCreate: 'rest-actions:create',
             actionView: 'rest-actions:view',
             actionEdit: 'rest-actions:edit',
             actionDelete: 'rest-actions:delete',
