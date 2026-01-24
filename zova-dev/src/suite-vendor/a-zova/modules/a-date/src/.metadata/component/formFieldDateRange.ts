@@ -21,5 +21,5 @@ export const ZFormFieldDateRange = defineComponent(
     useController(ControllerFormFieldDateRange, undefined, undefined);
     return () => {};
   },
-  prepareComponentOptions(),
+  prepareComponentOptions(ControllerFormFieldDateRange.$componentOptions),
 );
