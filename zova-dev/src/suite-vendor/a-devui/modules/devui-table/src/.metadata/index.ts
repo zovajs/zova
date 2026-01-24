@@ -1,5 +1,6 @@
 /* eslint-disable */
 /** controller: begin */
+export * from '../component/actionOperationsTable/controller.jsx';
 export * from '../component/table/controller.jsx';
 
 import 'zova';
@@ -9,6 +10,11 @@ declare module 'zova' {
 }
 declare module 'zova-module-devui-table' {
   
+        export interface ControllerActionOperationsTable {
+          /** @internal */
+          get scope(): ScopeModuleDevuiTable;
+        }
+
         export interface ControllerTable {
           /** @internal */
           get scope(): ScopeModuleDevuiTable;
@@ -16,28 +22,35 @@ declare module 'zova-module-devui-table' {
 }
 /** controller: end */
 /** controller: begin */
+import { ControllerActionOperationsTable } from '../component/actionOperationsTable/controller.jsx';
 import { ControllerTable } from '../component/table/controller.jsx';
 import 'zova';
 declare module 'zova' {
   export interface IBeanRecordLocal {
-    'devui-table.controller.table': ControllerTable;
+    'devui-table.controller.actionOperationsTable': ControllerActionOperationsTable;
+'devui-table.controller.table': ControllerTable;
   }
 }
 /** controller: end */
 
 /** components: begin */
+export * from './component/actionOperationsTable.js';
+import { ZActionOperationsTable } from './component/actionOperationsTable.js';
 export * from './component/table.js';
 import { ZTable } from './component/table.js';
 export const components = {
-  'table': ZTable,
+  'actionOperationsTable': ZActionOperationsTable,
+'table': ZTable,
 };
 import 'zova';
 declare module 'zova' {
 export interface IComponentRecord {
-  'devui-table:table': ControllerTable;
+  'devui-table:actionOperationsTable': ControllerActionOperationsTable;
+'devui-table:table': ControllerTable;
 }
 export interface IZovaComponentRecord {
-  'devui-table:table': typeof ZTable;
+  'devui-table:actionOperationsTable': typeof ZActionOperationsTable;
+'devui-table:table': typeof ZTable;
 }
 }
 /** components: end */

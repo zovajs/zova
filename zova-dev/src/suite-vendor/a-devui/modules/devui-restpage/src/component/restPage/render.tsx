@@ -22,18 +22,6 @@ export class RenderRestPage<TData extends {} = {}> extends BeanRenderBase {
     const jsxRenderContext = this.$$restPage.getPageJsxRenderContext(celScope);
     const domRestPageEntry = this.$$restPage.zovaJsx.render(render, {}, celScope, jsxRenderContext);
     return domRestPageEntry;
-    // if (!this.permissions?.table?.create) return;
-    // return (
-    //   <button
-    //     class="btn btn-primary"
-    //     type="button"
-    //     onClick={() => {
-    //       // this.onActionTable('create');
-    //     }}
-    //   >
-    //     {this.scope.locale.Create()}
-    //   </button>
-    // );
   }
 
   private _renderTable() {

@@ -30,7 +30,6 @@ export class TableCellActionOperationsRow extends BeanBase implements ITableCell
               if (!window.confirm(this.scope.locale.DeleteConfirm())) return;
               const actionName = $jsx.normalizeAction('actionDelete');
               await $performAction(actionName, undefined, renderContext);
-              console.log('ddd');
             }}
           >
             <ZIcon name="::delete"></ZIcon>
