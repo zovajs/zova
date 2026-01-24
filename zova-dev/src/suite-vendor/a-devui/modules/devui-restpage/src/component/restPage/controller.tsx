@@ -2,6 +2,7 @@ import type { ModelResource } from 'zova-module-rest-resource';
 import { Row } from '@tanstack/table-core';
 import { BeanControllerBase, Use } from 'zova';
 import { Controller } from 'zova-module-a-bean';
+import { $QueryAutoLoad } from 'zova-module-a-model';
 import { TypeResourceActionRowRecord, TypeResourceActionTableRecord } from 'zova-module-a-openapi';
 import { ITableCelScope, ITableProvider } from 'zova-module-a-table';
 
@@ -29,6 +30,7 @@ export class ControllerRestPage extends BeanControllerBase {
         },
       } satisfies ITableCelScope;
     });
+    await $QueryAutoLoad(() => this.$$modelResource.apiSchemasSelect.sdk);
   }
 
   async onActionTable(_action: keyof TypeResourceActionTableRecord) {}
