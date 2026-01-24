@@ -21,5 +21,5 @@ export const ZFormFieldCaptcha = defineComponent(
     useController(ControllerFormFieldCaptcha, undefined, undefined);
     return () => {};
   },
-  prepareComponentOptions(),
+  prepareComponentOptions(ControllerFormFieldCaptcha.$componentOptions),
 );
