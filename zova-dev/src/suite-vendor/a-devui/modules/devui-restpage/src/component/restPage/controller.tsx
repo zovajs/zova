@@ -23,7 +23,7 @@ export class ControllerRestPage<TData extends {} = {}> extends BeanControllerTab
   $$restPage: ControllerPageResource;
 
   @Use({ injectionScope: 'host' })
-  $$modelResource: ModelResource;
+  $$modelResource: ModelResource<TData>;
 
   protected async __init__() {
     // query

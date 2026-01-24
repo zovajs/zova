@@ -3,11 +3,11 @@ import { BeanRenderBase } from 'zova';
 import { Render } from 'zova-module-a-bean';
 
 @Render()
-export class RenderRestPageEntry extends BeanRenderBase {
+export class RenderRestPageEntry<TData extends {} = {}> extends BeanRenderBase {
   private _renderForm() {
     const ComponentForm = this.$zovaComponent(this.$$modelResource.componentForm);
     return (
-      <ComponentForm
+      <ComponentForm<TData>
         controllerRef={ref => { this.controllerForm = ref; }}
         data={this.formData}
         schema={this.formSchema}
