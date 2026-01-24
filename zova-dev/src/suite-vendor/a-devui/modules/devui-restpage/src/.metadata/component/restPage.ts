@@ -1,17 +1,26 @@
+import type { TypeControllerInnerProps } from 'zova';
+import type { ControllerRestPageProps } from '../../component/restPage/controller.jsx';
 import { defineComponent } from 'vue';
 import { prepareComponentOptions, useController } from 'zova';
 import { ControllerRestPage } from '../../component/restPage/controller.jsx';
 import { RenderRestPage } from '../../component/restPage/render.jsx';
 
-export interface TypeControllerRestPagePublicProps {
-  controllerRef?: (ref: ControllerRestPage) => void;
-}
+export type TypeControllerRestPagePublicProps<TData extends {} = {}> = {
+  controllerRef?: (ref: ControllerRestPage<TData>) => void;
+} & ControllerRestPageProps<TData>;
 
+type ControllerInnerProps<TData extends {} = {}> =
+  TypeControllerInnerProps<ControllerRestPageProps<TData>, keyof typeof ControllerRestPage.$propsDefault>;
 declare module 'zova-module-devui-restpage' {
-  export interface RenderRestPage extends ControllerRestPage {}
+  export interface ControllerRestPage<TData extends {} = {}> {
+    $props: ControllerInnerProps<TData>;
+  }
+}
+declare module 'zova-module-devui-restpage' {
+  export interface RenderRestPage<TData extends {} = {}> extends ControllerRestPage<TData> {}
 }
 export const ZRestPage = defineComponent(
-  (_props: TypeControllerRestPagePublicProps) => {
+  <TData extends {} = {}>(_props: TypeControllerRestPagePublicProps<TData>) => {
     useController(ControllerRestPage, RenderRestPage, undefined);
     return () => {};
   },
