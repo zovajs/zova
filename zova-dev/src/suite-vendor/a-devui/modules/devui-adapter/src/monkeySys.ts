@@ -18,7 +18,7 @@ export class MonkeySys extends BeanSimple implements IMonkeySysInitialize {
       provider: {
         components: {
           restPage: 'devui-restpage:restPage',
-          restPageEntry: 'devui-restpageentry:restPageEntry',
+          restPageEntry: 'devui-restpage:restPageEntry',
           table: 'devui-table:table',
         },
       },
