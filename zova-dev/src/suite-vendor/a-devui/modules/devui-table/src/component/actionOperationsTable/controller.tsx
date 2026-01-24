@@ -1,11 +1,38 @@
-import { BeanControllerBase } from 'zova';
+import type { IJsxRenderContextPage } from 'zova-module-rest-resource';
+import { BeanControllerBase, Use } from 'zova';
 import { Controller } from 'zova-module-a-bean';
 
 @Controller()
 export class ControllerActionOperationsTable extends BeanControllerBase {
   protected async __init__() {}
 
+  @Use({ injectionScope: 'host' })
+  $$renderContext: IJsxRenderContextPage;
+
+  get permissions() {
+    return this.$$renderContext.$celScope.permissions;
+  }
+
+  private _renderCreate() {
+    if (!this.permissions?.table?.create) return;
+    return (
+      <button
+        class="btn btn-primary"
+        type="button"
+        onClick={() => {
+          // this.onActionTable('create');
+        }}
+      >
+        {this.scope.locale.Create()}
+      </button>
+    );
+  }
+
   protected render() {
-    return null;
+    return (
+      <div>
+        {this._renderCreate()}
+      </div>
+    );
   }
 }
