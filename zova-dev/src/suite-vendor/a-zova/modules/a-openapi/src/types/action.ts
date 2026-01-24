@@ -14,10 +14,10 @@ export interface IJsxRenderContextBase {
 export interface IJsxRenderSceneRecord {
   page: never;
   pageEntry: never;
-  table: never;
+  // table: never;
   tableColumn: never;
   tableCell: never;
-  form: never;
+  // form: never;
   formField: never;
 }
 
