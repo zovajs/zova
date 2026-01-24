@@ -23,35 +23,43 @@ export class RenderRestPageEntry<TData extends {} = {}> extends BeanRenderBase {
     );
   }
 
-  public render() {
-    const { formMeta } = this.$$restPageEntry;
+  private _renderToolbar() {
     return (
       <div>
-        {this._renderForm()}
-        <div>
-          {this.controllerForm?.formState.isSubmitting && <span class="loading loading-spinner text-primary"></span>}
-          {formMeta.formMode === 'edit' && (
-            <button
-              class={classes('btn btn-primary', this.controllerForm?.formState.isSubmitting && 'btn-disabled')}
-              onClick={async () => {
-                const res = await this.controllerForm.submit();
-                if (res) {
-                  this.$router.back();
-                }
-              }}
-            >
-              {this.scope.locale.Submit()}
-            </button>
-          )}
+        {this.controllerForm?.formState.isSubmitting && <span class="loading loading-spinner text-primary"></span>}
+        {this.formMeta.formMode === 'edit' && (
           <button
-            class={classes('btn', this.controllerForm?.formState.isSubmitting && 'btn-disabled')}
-            onClick={() => {
-              this.$router.back();
+            class={classes('btn btn-primary', this.controllerForm?.formState.isSubmitting && 'btn-disabled')}
+            onClick={async () => {
+              const res = await this.controllerForm.submit();
+              if (res) {
+                this.$router.back();
+              }
             }}
           >
-            {this.scope.locale.Back()}
+            {this.scope.locale.Submit()}
           </button>
-        </div>
+        )}
+        <button
+          class={classes('btn', this.controllerForm?.formState.isSubmitting && 'btn-disabled')}
+          onClick={() => {
+            this.$router.back();
+          }}
+        >
+          {this.scope.locale.Back()}
+        </button>
+      </div>
+    );
+  }
+
+  public render() {
+    const toolbarPosition = this.$props.toolbarPosition;
+    const domToolbar = this._renderToolbar();
+    return (
+      <div>
+        {toolbarPosition === 'top' && domToolbar}
+        {this._renderForm()}
+        {toolbarPosition === 'bottom' && domToolbar}
       </div>
     );
   }
