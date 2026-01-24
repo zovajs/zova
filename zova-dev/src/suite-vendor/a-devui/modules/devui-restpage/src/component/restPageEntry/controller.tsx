@@ -14,6 +14,8 @@ export interface ControllerRestPageEntryProps<TData extends {} = {}> {
 
 @Controller()
 export class ControllerRestPageEntry<TData extends {} = {}> extends BeanControllerBase {
+  static $propsDefault = { showFilter: true };
+
   controllerForm: ControllerForm<TData>;
 
   formSchema?: SchemaObject;
