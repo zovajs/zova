@@ -9,9 +9,10 @@ export interface ITableCellOptionsActionOperationsRow extends IDecoratorTableCel
 export class TableCellActionOperationsRow extends BeanBase implements ITableCellRender {
   render(_options: ITableCellOptionsActionOperationsRow, renderContext: IJsxRenderContextTableCell, _next: NextTableCellRender) {
     const { $jsx, $celScope } = renderContext;
+    const permissions = $celScope.permissions;
     return (
       <div class="flex gap-2">
-        {$celScope.permissions?.row?.update && (
+        {permissions?.row?.update && (
           <button
             class="btn btn-outline btn-primary"
             onClick={() => {
@@ -22,7 +23,7 @@ export class TableCellActionOperationsRow extends BeanBase implements ITableCell
             <ZIcon name="::draft"></ZIcon>
           </button>
         )}
-        {$celScope.permissions?.row?.delete && (
+        {permissions?.row?.delete && (
           <button
             class="btn btn-outline btn-error"
             onClick={async () => {
