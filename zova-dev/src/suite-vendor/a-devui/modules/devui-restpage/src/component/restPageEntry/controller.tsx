@@ -9,12 +9,12 @@ import { $QueriesAutoLoad } from 'zova-module-a-model';
 // @ts-ignore ignore
 // eslint-disable-next-line
 export interface ControllerRestPageEntryProps<TData extends {} = {}> {
-  showFilter?: boolean;
+  toolbarPosition?: 'top' | 'bottom';
 }
 
 @Controller()
 export class ControllerRestPageEntry<TData extends {} = {}> extends BeanControllerBase {
-  static $propsDefault = { showFilter: true };
+  static $propsDefault = { toolbarPosition: 'bottom' };
 
   controllerForm: ControllerForm<TData>;
 
