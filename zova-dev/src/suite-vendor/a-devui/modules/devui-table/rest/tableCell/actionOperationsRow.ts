@@ -1,7 +1,7 @@
 import type { ITableCellOptionsActionOperationsRow } from '../../src/bean/tableCell.actionOperationsRow.jsx';
 
-export function TTDevuiTablecellActionOperationsRow(
+export function TTDevuiTableActionOperationsRow(
   _props: ITableCellOptionsActionOperationsRow,
 ) {
-  return 'devui-tablecell.tableCell.actionOperationsRow';
+  return 'devui-table.tableCell.actionOperationsRow';
 }

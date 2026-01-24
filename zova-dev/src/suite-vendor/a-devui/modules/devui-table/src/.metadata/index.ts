@@ -66,6 +66,57 @@ declare module 'zova' {
   }
 }
 /** render: end */
+/** tableCell: begin */
+export * from '../bean/tableCell.actionOperationsRow.jsx';
+export * from '../bean/tableCell.actionView.jsx';
+import { ITableCellOptionsActionOperationsRow } from '../bean/tableCell.actionOperationsRow.jsx';
+import { ITableCellOptionsActionView } from '../bean/tableCell.actionView.jsx';
+import 'zova-module-a-table';
+declare module 'zova-module-a-table' {
+  
+    export interface ITableCellRecord {
+      'devui-table:actionOperationsRow': ITableCellOptionsActionOperationsRow;
+'devui-table:actionView': ITableCellOptionsActionView;
+    }
+
+  
+}
+declare module 'zova-module-devui-table' {
+  
+        export interface TableCellActionOperationsRow {
+          /** @internal */
+          get scope(): ScopeModuleDevuiTable;
+        }
+
+        export interface TableCellActionOperationsRow {
+          get $beanFullName(): 'devui-table.tableCell.actionOperationsRow';
+          get $onionName(): 'devui-table:actionOperationsRow';
+          get $onionOptions(): ITableCellOptionsActionOperationsRow;
+        }
+
+        export interface TableCellActionView {
+          /** @internal */
+          get scope(): ScopeModuleDevuiTable;
+        }
+
+        export interface TableCellActionView {
+          get $beanFullName(): 'devui-table.tableCell.actionView';
+          get $onionName(): 'devui-table:actionView';
+          get $onionOptions(): ITableCellOptionsActionView;
+        } 
+}
+/** tableCell: end */
+/** tableCell: begin */
+import { TableCellActionOperationsRow } from '../bean/tableCell.actionOperationsRow.jsx';
+import { TableCellActionView } from '../bean/tableCell.actionView.jsx';
+import 'zova';
+declare module 'zova' {
+  export interface IBeanRecordGeneral {
+    'devui-table.tableCell.actionOperationsRow': TableCellActionOperationsRow;
+'devui-table.tableCell.actionView': TableCellActionView;
+  }
+}
+/** tableCell: end */
 /** locale: begin */
 import { locales } from './locales.js';
 /** locale: end */

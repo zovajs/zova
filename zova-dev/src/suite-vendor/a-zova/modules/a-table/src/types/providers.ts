@@ -1,9 +1,10 @@
 import type { IActionsRecord } from 'zova-module-a-action';
-import type { TypeTableCellRenderComponentProvider } from 'zova-module-a-openapi';
+import type { TypeTableCellRenderComponentProvider, TypeTableRenderComponentProvider } from 'zova-module-a-openapi';
 
 export interface ITableProviderComponents {
-  actionView?: TypeTableCellRenderComponentProvider;
+  actionOperationsTable?: TypeTableRenderComponentProvider;
   actionOperationsRow?: TypeTableCellRenderComponentProvider;
+  actionView?: TypeTableCellRenderComponentProvider;
   currency?: TypeTableCellRenderComponentProvider;
   date?: TypeTableCellRenderComponentProvider;
   dateRange?: TypeTableCellRenderComponentProvider;

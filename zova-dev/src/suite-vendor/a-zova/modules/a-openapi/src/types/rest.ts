@@ -63,3 +63,4 @@ export type TypeTableCellRenderComponentNormal =
   Constructable<ComponentPublicInstance> | (keyof IComponentRecord) | (keyof TypeBeanRecordGeneralSelector<'tableCell'>) | TypeRenderComponentPreset;
 export type TypeTableCellRenderComponent = TypeTableCellRenderComponentNormal | TypeRenderComponentJsx;
 export type TypeTableCellRenderComponentProvider = Constructable<ComponentPublicInstance> | (keyof IComponentRecord) | (keyof TypeBeanRecordGeneralSelector<'tableCell'>) | 'text';
+export type TypeTableRenderComponentProvider = Constructable<ComponentPublicInstance> | (keyof IComponentRecord) | TypeRenderComponentJsx;

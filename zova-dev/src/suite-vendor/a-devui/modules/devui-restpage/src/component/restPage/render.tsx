@@ -17,18 +17,23 @@ export class RenderRestPage<TData extends {} = {}> extends BeanRenderBase {
   }
 
   private _renderOperationsTable() {
-    if (!this.permissions?.table?.create) return;
-    return (
-      <button
-        class="btn btn-primary"
-        type="button"
-        onClick={() => {
-          // this.onActionTable('create');
-        }}
-      >
-        {this.scope.locale.Create()}
-      </button>
-    );
+    const render = this.$$restPage.tableProvider.components!.actionOperationsTable!;
+    const celScope = this.$$restPage.tableScope;
+    const jsxRenderContext = this.$$restPage.getPageJsxRenderContext(celScope);
+    const domRestPageEntry = this.$$restPage.zovaJsx.render(render, {}, celScope, jsxRenderContext);
+    return domRestPageEntry;
+    // if (!this.permissions?.table?.create) return;
+    // return (
+    //   <button
+    //     class="btn btn-primary"
+    //     type="button"
+    //     onClick={() => {
+    //       // this.onActionTable('create');
+    //     }}
+    //   >
+    //     {this.scope.locale.Create()}
+    //   </button>
+    // );
   }
 
   private _renderTable() {
