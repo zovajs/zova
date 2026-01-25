@@ -5,7 +5,7 @@ import { celEnvBase, evaluateExpressions, getProperty, isPromise } from '@cabloy
 import { toUpperCaseFirstChar } from '@cabloy/word-utils';
 import { classes } from 'typestyle';
 import { createTextVNode, h } from 'vue';
-import { beanFullNameFromOnionName, BeanSimple, cast, deepExtend } from 'zova-core';
+import { beanFullNameFromOnionName, BeanSimple, cast, deepExtend, objectAssignReactive } from 'zova-core';
 import { renderFieldJsxPropsSystem } from './const.ts';
 import { isJsxComponent, isJsxEvent, isNativeElement, isZovaComponent, normalizePropName } from './utils.ts';
 
@@ -105,7 +105,7 @@ export class ZovaJsx extends BeanSimple {
     }
     // render
     const eventRes: any[] = [];
-    celScope = { ...celScope, res: eventRes };
+    celScope = objectAssignReactive({}, celScope, { res: eventRes });
     return this.renderEventDirect(componentOptions, celScope, renderContext, eventRes);
   }
 
@@ -163,7 +163,7 @@ export class ZovaJsx extends BeanSimple {
         const actionChildPrev = actionChildren[index - 1];
         const resName = cast(actionChildPrev.props)?.res;
         if (resName) {
-          celScope = { ...celScope, [resName]: actionRes };
+          celScope = objectAssignReactive({}, celScope, { [resName]: actionRes });
         }
       }
       // vIf
@@ -172,7 +172,7 @@ export class ZovaJsx extends BeanSimple {
       // action
       if (actionChild.type === 'actionVar') {
         const props = this.renderJsxProps(actionChild.props, {}, celScope, renderContext);
-        celScope = { ...celScope, [cast(props).name]: cast(props).value };
+        celScope = objectAssignReactive({}, celScope, { [cast(props).name]: cast(props).value });
         return next(undefined);
       } else if (actionChild.type === 'actionExpr') {
         const expression = this.evaluateExpression(cast(actionChild.props)?.expression, celScope);
@@ -180,7 +180,7 @@ export class ZovaJsx extends BeanSimple {
       } else if (isJsxEvent(actionChild)) {
         // nested action
         eventRes[index] = [];
-        return this.renderEventDirect(actionChild, { ...celScope }, renderContext, eventRes[index], next);
+        return this.renderEventDirect(actionChild, objectAssignReactive({}, celScope), renderContext, eventRes[index], next);
       } else {
         // normal
         return this._renderEventActionNormal(actionChild, celScope, renderContext, next);
@@ -243,7 +243,7 @@ export class ZovaJsx extends BeanSimple {
     for (let index = 0; index < vFor.length; index++) {
       const each = vFor[index];
       const eachName = this.evaluateExpression(componentOptions.props?.['v-each'], celScope) ?? 'each';
-      const celScopeEach = { ...celScope, [eachName]: each, [`${eachName}Index`]: index };
+      const celScopeEach = objectAssignReactive({}, celScope, { [eachName]: each, [`${eachName}Index`]: index });
       const propsEach = { ...props };
       const child = this._renderJsxSingle(Component, componentOptions, propsEach, celScopeEach, renderContext);
       if (child) {
@@ -339,7 +339,7 @@ export class ZovaJsx extends BeanSimple {
         if (slotScopeName) {
           slot = slotScope => {
             return this.setTransientObject(transientObject, () => {
-              const celScopeSub = { ...celScope, [slotScopeName]: slotScope };
+              const celScopeSub = objectAssignReactive({}, celScope, { [slotScopeName]: slotScope });
               return this.renderJsxChildrenDirect(jsxChild, celScopeSub, renderContext);
             });
           };
@@ -378,7 +378,7 @@ export class ZovaJsx extends BeanSimple {
       if (isJsxComponent(jsxChild)) {
         if (jsxChild.type === 'var') {
           const props = this.renderJsxProps(jsxChild.props, {}, celScope, renderContext);
-          celScope = { ...celScope, [cast(props).name]: cast(props).value };
+          celScope = objectAssignReactive({}, celScope, { [cast(props).name]: cast(props).value });
           child = undefined;
         } else {
           child = this.render(jsxChild, undefined, celScope, renderContext);
