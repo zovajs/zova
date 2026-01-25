@@ -129,6 +129,20 @@ export function isUuid(str: string): boolean {
   return length === 36 || length === 32;
 }
 
+// for hold on CustomRefImpl
+export function objectAssign<T = any>(...args): T {
+  const target = args[0];
+  for (let i = 1; i < args.length; i++) {
+    const source = args[i];
+    const keys = Object.getOwnPropertyNames(source);
+    for (const key of keys) {
+      const desc = Object.getOwnPropertyDescriptor(source, key);
+      target[key] = desc?.value;
+    }
+  }
+  return target;
+}
+
 export function deepExtend<T = any>(...args): T {
   return extend(true, ...args);
 }
