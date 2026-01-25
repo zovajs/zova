@@ -5,7 +5,7 @@ import { SchemaObject } from 'openapi3-ts/oas31';
 import { VNode } from 'vue';
 import { z } from 'zod';
 import { $ZodIssue } from 'zod/v4/core';
-import { cast, deepEqual, deepExtend, UseScope } from 'zova';
+import { cast, deepEqual, deepExtend, objectAssignReactive, UseScope } from 'zova';
 import { isJsxComponent, ZovaJsx } from 'zova-jsx';
 import { Controller } from 'zova-module-a-bean';
 import { loadSchemaProperties, renderFormFieldTopPropsSystem, schemaToZodSchema, ScopeModuleAOpenapi, TypeFormFieldRenderComponent, TypeFormFieldRenderComponentProvider, TypeFormSchemaScene } from 'zova-module-a-openapi';
@@ -141,13 +141,12 @@ export class ControllerForm<TFormData extends {} = {}, TSubmitMeta = never> exte
   }
 
   public getFieldCelScope<K extends DeepKeys<TFormData>>(name: K, scopeExtra?: {}): IFormFieldCelScope<TFormData> {
-    return {
-      ...this.$props.formScope,
+    return objectAssignReactive({}, this.$props.formScope, {
       name,
       value: this.getFieldValue(name),
       property: this.getFieldProperty(name),
       ...scopeExtra,
-    };
+    });
   }
 
   public getFieldJsxRenderContext(
