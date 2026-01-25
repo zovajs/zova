@@ -132,10 +132,10 @@ export class ControllerForm<TFormData extends {} = {}, TSubmitMeta = never> exte
   private _getFieldCelEnv(): typeof celEnvBase {
     const celEnv = celEnvBase.clone();
     celEnv.registerFunction('getValue(string):dyn', name => {
-      return this.form.getFieldValue(name);
+      return this.form.getFieldValue(name) ?? null;
     });
     celEnv.registerFunction('getProperty(string):dyn', name => {
-      return this.getFieldProperty(name);
+      return this.getFieldProperty(name) ?? null;
     });
     return celEnv;
   }
