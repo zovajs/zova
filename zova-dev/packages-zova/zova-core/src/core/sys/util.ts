@@ -139,6 +139,7 @@ export function objectAssignReactive<T = any>(...args): T {
   }
   for (let i = 1; i < args.length; i++) {
     const source = args[i];
+    if (!source) continue;
     const keys = Object.getOwnPropertyNames(source);
     for (const key of keys) {
       const desc = Object.getOwnPropertyDescriptor(source, key);
