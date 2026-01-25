@@ -5,6 +5,7 @@ import path from 'node:path';
 import { getEnvFiles } from '@cabloy/dotenv';
 import chalk from 'chalk';
 import fse from 'fs-extra';
+import { generateCel } from './generateCel.ts';
 import { generateZod } from './generateZod.ts';
 import { copyTemplateFile, getEnvMeta, resolveTemplatePath } from './utils.ts';
 
@@ -24,6 +25,8 @@ export async function generateEntryFiles(
   await __generateEnvJson();
   // zod
   await generateZod(configOptions);
+  // cel
+  await generateCel(configOptions);
 
   //////////////////////////////
 
