@@ -4,6 +4,7 @@ import type { TypeAuthToken } from '../../types/utils/auth.js';
 import { extend } from '@cabloy/extend';
 import { combineApiPathControllerAndAction, defaultPathSerializer } from '@cabloy/utils';
 import DeepEqual from 'deep-equal';
+import { isReactive, reactive } from 'vue';
 import { BeanSimple } from '../../bean/beanSimple.js';
 import { cast } from '../../types/utils/cast.js';
 import { uuid as _uuid } from '../../utils/uuid.js';
@@ -127,6 +128,24 @@ export function isUuid(str: string): boolean {
   if (!str) return false;
   const length = str.length;
   return length === 36 || length === 32;
+}
+
+// for hold on CustomRefImpl
+export function objectAssignReactive<T = any>(...args): T {
+  let target = args[0];
+  if (!target || typeof target !== 'object') throw new Error('invalid args');
+  if (!isReactive(target)) {
+    target = reactive(target);
+  }
+  for (let i = 1; i < args.length; i++) {
+    const source = args[i];
+    const keys = Object.getOwnPropertyNames(source);
+    for (const key of keys) {
+      const desc = Object.getOwnPropertyDescriptor(source, key);
+      target[key] = desc?.value;
+    }
+  }
+  return target;
 }
 
 export function deepExtend<T = any>(...args): T {

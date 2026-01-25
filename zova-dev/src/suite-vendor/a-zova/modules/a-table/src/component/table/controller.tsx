@@ -1,8 +1,8 @@
-import { celEnvBase, objectAssign } from '@cabloy/utils';
+import { celEnvBase } from '@cabloy/utils';
 import { CellContext, createColumnHelper, getCoreRowModel, TableOptionsWithReactiveData } from '@tanstack/vue-table';
 import { SchemaObject } from 'openapi3-ts/oas31';
 import { VNode } from 'vue';
-import { appResource, cast, deepEqual, deepExtend, UseScope } from 'zova';
+import { appResource, cast, deepEqual, deepExtend, objectAssignReactive, UseScope } from 'zova';
 import { isJsxComponent, ZovaJsx } from 'zova-jsx';
 import { Controller } from 'zova-module-a-bean';
 import { loadSchemaProperties, renderTableColumnTopPropsSystem, ScopeModuleAOpenapi, TypeTableCellRenderComponent, TypeTableCellRenderComponentProvider } from 'zova-module-a-openapi';
@@ -230,7 +230,7 @@ export class ControllerTable<TData extends {} = {}> extends BeanControllerTableB
     // value
     const value = cellContext.getValue();
     // cellScope
-    const cellScope: ITableCellCelScope = Object.assign({}, columnScope, { value });
+    const cellScope: ITableCellCelScope = objectAssignReactive({}, columnScope, { value });
     // displayValue
     let displayValue = property?.rest?.displayValue !== undefined
       ? this.zovaJsx.evaluateExpression(property?.rest?.displayValue, cellScope)
@@ -284,7 +284,7 @@ export class ControllerTable<TData extends {} = {}> extends BeanControllerTableB
   }
 
   public getColumnScope(name: string, scopeExtra?: {}): ITableColumnCelScope {
-    return objectAssign({}, this.$props.tableScope, {
+    return objectAssignReactive({}, this.$props.tableScope, {
       name,
       property: this.getColumnProperty(name),
       ...scopeExtra,
