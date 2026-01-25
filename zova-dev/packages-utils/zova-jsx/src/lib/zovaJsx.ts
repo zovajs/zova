@@ -27,10 +27,10 @@ export class ZovaJsx extends BeanSimple {
   private _prepareCelEnv(celEnv: CelEnv) {
     celEnv = celEnv.clone();
     celEnv.registerFunction('getEvent():dyn', () => {
-      return this.transientObject.eventObject;
+      return this.transientObject.eventObject ?? null;
     });
     celEnv.registerFunction('getEventProp(string):dyn', prop => {
-      return getProperty(this.transientObject.eventObject, prop);
+      return getProperty(this.transientObject.eventObject, prop) ?? null;
     });
     return celEnv;
   }
@@ -47,6 +47,10 @@ export class ZovaJsx extends BeanSimple {
 
   public get transientObject() {
     return this._transientObject;
+  }
+
+  public get event(): Event | undefined {
+    return this.transientObject?.eventObject;
   }
 
   public get components() {
