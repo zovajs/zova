@@ -1,8 +1,8 @@
-import { celEnvBase } from '@cabloy/utils';
+import { celEnvBase, objectAssign } from '@cabloy/utils';
 import { CellContext, createColumnHelper, getCoreRowModel, TableOptionsWithReactiveData } from '@tanstack/vue-table';
 import { SchemaObject } from 'openapi3-ts/oas31';
 import { VNode } from 'vue';
-import { appResource, cast, deepEqual, deepExtend, objectAssign, UseScope } from 'zova';
+import { appResource, cast, deepEqual, deepExtend, UseScope } from 'zova';
 import { isJsxComponent, ZovaJsx } from 'zova-jsx';
 import { Controller } from 'zova-module-a-bean';
 import { loadSchemaProperties, renderTableColumnTopPropsSystem, ScopeModuleAOpenapi, TypeTableCellRenderComponent, TypeTableCellRenderComponentProvider } from 'zova-module-a-openapi';
