@@ -9,7 +9,7 @@ export interface ITableCellOptionsActionOperationsRow extends IDecoratorTableCel
 export class TableCellActionOperationsRow extends BeanBase implements ITableCellRender {
   render(_options: ITableCellOptionsActionOperationsRow, renderContext: IJsxRenderContextTableCell, _next: NextTableCellRender) {
     const { $jsx, $celScope } = renderContext;
-    const permissions = $celScope.permissions;
+    const permissions = $celScope.permissions?.();
     return (
       <div class="flex gap-2">
         {permissions?.row?.update && (

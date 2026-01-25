@@ -11,7 +11,7 @@ export class ControllerActionOperationsTable extends BeanControllerBase {
   $$renderContext: IJsxRenderContextPage;
 
   get permissions() {
-    return this.$$renderContext.$celScope.permissions;
+    return this.$$renderContext.$celScope.permissions?.();
   }
 
   private _renderCreate() {
