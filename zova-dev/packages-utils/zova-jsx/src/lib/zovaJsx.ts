@@ -1,7 +1,7 @@
 import type { VNode } from 'vue';
 import type { IFormProviderComponents, TypeRenderComponent, TypeRenderComponentJsx, TypeRenderComponentJsxProps } from '../types/rest.ts';
 import { compose } from '@cabloy/compose';
-import { celEnvBase, evaluateExpressions, getProperty } from '@cabloy/utils';
+import { celEnvBase, evaluateExpressions, getProperty, isPromise } from '@cabloy/utils';
 import { toUpperCaseFirstChar } from '@cabloy/word-utils';
 import { classes } from 'typestyle';
 import { createTextVNode, h } from 'vue';
@@ -130,42 +130,62 @@ export class ZovaJsx extends BeanSimple {
     for (let index = 0; index < actionChildren.length; index++) {
       const actionChild = actionChildren[index];
       // action
-      const action = (actionRes, next) => {
-        return this.setTransientObject(transientObject, () => {
-          // record res
-          if (index > 0) {
-            if (actionRes === undefined) actionRes = null;
-            eventRes[index - 1] = actionRes;
-            const actionChildPrev = actionChildren[index - 1];
-            const resName = cast(actionChildPrev.props)?.res;
-            if (resName) {
-              celScope = { ...celScope, [resName]: actionRes };
-            }
-          }
-          // vIf
-          const vIf = this.evaluateExpression(actionChild.props?.['v-if'], celScope);
-          if (vIf === false) return next(undefined);
-          // action
-          if (actionChild.type === 'actionVar') {
-            const props = this.renderJsxProps(actionChild.props, {}, celScope, renderContext);
-            celScope = { ...celScope, [cast(props).name]: cast(props).value };
-            return next(undefined);
-          } else if (actionChild.type === 'actionExpr') {
-            const expression = this.evaluateExpression(cast(actionChild.props)?.expression, celScope);
-            return next(expression);
-          } else if (isJsxEvent(actionChild)) {
-            // nested action
-            eventRes[index] = [];
-            return this.renderEventDirect(actionChild, { ...celScope }, renderContext, eventRes[index], next);
-          } else {
-            // normal
-            return this._renderEventActionNormal(actionChild, celScope, renderContext, next);
-          }
-        });
+      const action = (actionRes: any, next: Function) => {
+        if (isPromise(actionRes)) {
+          return actionRes.then(actionRes => {
+            return this._actionHandler(index, actionChild, actionRes, next, actionChildren, celScope, renderContext, eventRes, transientObject);
+          });
+        } else {
+          return this._actionHandler(index, actionChild, actionRes, next, actionChildren, celScope, renderContext, eventRes, transientObject);
+        }
       };
       actions.push(action);
     }
     return actions;
+  }
+
+  private _actionHandler(
+    index: number,
+    actionChild: TypeRenderComponentJsx,
+    actionRes: any,
+    next: Function,
+    actionChildren: TypeRenderComponentJsx[],
+    celScope: {},
+    renderContext: {},
+    eventRes: any[],
+    transientObject: any,
+  ) {
+    return this.setTransientObject(transientObject, () => {
+      // record res
+      if (index > 0) {
+        if (actionRes === undefined) actionRes = null;
+        eventRes[index - 1] = actionRes;
+        const actionChildPrev = actionChildren[index - 1];
+        const resName = cast(actionChildPrev.props)?.res;
+        if (resName) {
+          celScope = { ...celScope, [resName]: actionRes };
+        }
+      }
+      // vIf
+      const vIf = this.evaluateExpression(actionChild.props?.['v-if'], celScope);
+      if (vIf === false) return next(undefined);
+      // action
+      if (actionChild.type === 'actionVar') {
+        const props = this.renderJsxProps(actionChild.props, {}, celScope, renderContext);
+        celScope = { ...celScope, [cast(props).name]: cast(props).value };
+        return next(undefined);
+      } else if (actionChild.type === 'actionExpr') {
+        const expression = this.evaluateExpression(cast(actionChild.props)?.expression, celScope);
+        return next(expression);
+      } else if (isJsxEvent(actionChild)) {
+        // nested action
+        eventRes[index] = [];
+        return this.renderEventDirect(actionChild, { ...celScope }, renderContext, eventRes[index], next);
+      } else {
+        // normal
+        return this._renderEventActionNormal(actionChild, celScope, renderContext, next);
+      }
+    });
   }
 
   private _renderEventActionNormal(
