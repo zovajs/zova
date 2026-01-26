@@ -37,3 +37,6 @@ publicHoistPattern:
   - '*pinia*'
   - '*@tanstack*'
   - 'zod'
+
+overrides:
+  "@quasar/app-vite": "npm:@cabloy/quasar-app-vite@^2.4.0"
