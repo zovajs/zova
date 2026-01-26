@@ -125,23 +125,25 @@ export class ControllerTable<TData extends {} = {}> extends BeanControllerTableB
   private async _createTableMeta() {
     const properties: SchemaObject[] = [];
     const renders: Record<string, TypeTableCellRender<TData>> = {};
-    if (this.properties) {
-      for (const property of this.properties) {
-        const key = property.key!;
-        // columnScope
-        const columnScope = this.getColumnScope(key);
-        // renderContext
-        const jsxRenderContext = this.getColumnJsxRenderContext(columnScope);
-        // columnProps
-        const columnProps = this.getColumnComponentPropsTop(key, columnScope, jsxRenderContext);
-        // visible
-        if (columnProps.visible === false) continue;
-        // property
-        properties.push(property);
-        // render
-        renders[key] = await this._createColumnRender(columnProps.render, property, columnProps, columnScope);
-      }
+    if (!this.properties) return { properties, renders };
+    const promises: Promise<any>[] = [];
+    for (const property of this.properties) {
+      const key = property.key!;
+      // columnScope
+      const columnScope = this.getColumnScope(key);
+      // renderContext
+      const jsxRenderContext = this.getColumnJsxRenderContext(columnScope);
+      // columnProps
+      const columnProps = this.getColumnComponentPropsTop(key, columnScope, jsxRenderContext);
+      // visible
+      if (columnProps.visible === false) continue;
+      // property
+      properties.push(property);
+      // render
+      promises.push(this._createColumnRender(columnProps.render, property, columnProps, columnScope));
     }
+    const res = await Promise.all(promises);
+    properties.forEach((item, index) => renders[item.key!] = res[index]);
     return { properties, renders };
   }
 
