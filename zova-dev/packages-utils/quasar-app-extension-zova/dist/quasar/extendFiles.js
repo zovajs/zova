@@ -28,7 +28,7 @@ export function extendFilesOne(api, flavor) {
         }
     }
 }
-export function extendFilesTwo(api, _flavor) {
+export function extendFilesTwo(_api, _flavor) {
     return async function extendFiles() {
         // patch templates
         await patchTemplates();
@@ -37,65 +37,89 @@ export function extendFilesTwo(api, _flavor) {
     };
     async function patchTemplates() {
         // app.js
-        fse.copyFileSync(resolveTemplatePath('entry/app.js_'), api.resolve.cli('templates/entry/app.js'));
+        // fse.copyFileSync(resolveTemplatePath('entry/app.js_'), api.resolve.cli('templates/entry/app.js'));
         // client-entry.js
-        fse.copyFileSync(resolveTemplatePath('entry/client-entry.js_'), api.resolve.cli('templates/entry/client-entry.js'));
+        // fse.copyFileSync(resolveTemplatePath('entry/client-entry.js_'), api.resolve.cli('templates/entry/client-entry.js'));
         // server-entry.js
-        fse.copyFileSync(resolveTemplatePath('entry/server-entry.js_'), api.resolve.cli('templates/entry/server-entry.js'));
+        // fse.copyFileSync(
+        //   resolveTemplatePath('entry/server-entry.js_'),
+        //   api.resolve.cli('templates/entry/server-entry.js'),
+        // );
         // ssr: html-template.js
-        await _handleSSRHtmlTemplate();
+        // await _handleSSRHtmlTemplate();
         // ssr: ssr-devserver.js
-        await _handleSSRDevServer();
+        // await _handleSSRDevServer();
         // ssr: ssr-builder.js
-        await _handleSSRBuilder();
+        // await _handleSSRBuilder();
     }
-    // html-template
-    async function _handleSSRHtmlTemplate() {
-        const fileSrc = api.resolve.cli('lib/utils/html-template.js');
-        const fileSrcBak = api.resolve.cli('lib/utils/html-template-origin.js');
-        copyTemplateIfNeed(fileSrc, fileSrcBak);
-        const content = fse.readFileSync(fileSrcBak).toString();
-        const contentNew = content
-            .replace('const bodyStartTagRE = /(<body[^>]*)(>)/i', 'const bodyStartTagRE = /(<body[^>]*)(>)/i\nconst bodyEndRE = /(<\\/body>)/i')
-            .replace(/\.replace\(\s+bodyStartTagRE,/, `.replace(
-      bodyEndRE,
-      (_, tag) => \`{{ ssrContext._meta.endingBodyTags || '' }}\${ tag }\`
-    )
-    .replace(
-      bodyStartTagRE,`);
-        fse.writeFileSync(fileSrc, contentNew);
-    }
-    // ssr-devserver.js
-    async function _handleSSRDevServer() {
-        const fileSrc = resolveTemplatePath('entry/ssr-devserver.js_');
-        const fileDest = api.resolve.cli('lib/modes/ssr/ssr-devserver.js');
-        fse.copyFileSync(fileSrc, fileDest);
-    }
-    // ssr-builder.js
-    async function _handleSSRBuilder() {
-        const fileSrc = api.resolve.cli('lib/modes/ssr/ssr-builder.js');
-        const fileSrcBak = api.resolve.cli('lib/modes/ssr/ssr-builder-origin.js');
-        copyTemplateIfNeed(fileSrc, fileSrcBak);
-        const content = fse.readFileSync(fileSrcBak).toString();
-        const contentNew = content
-            .replace('await this.#buildWebserver()', '')
-            .replace('await this.#copyWebserverFiles()', '')
-            .replace('await this.#writePackageJson()', '')
-            .replace("await this.buildWithVite('SSR Server', viteServerConfig)", "await this.buildWithVite('SSR Server', viteServerConfig)\nawait this.#buildWebserver()")
-            .replace("'render-template.js',", "this.ctx.appPaths.resolve.entry('render-template.js'),")
-            .replace('async #writeRenderTemplate (clientDir) {', `_patchIndexHtml(html){
-    return html
-      .replace(/<title>.*?<\\/title>/,'')
-      .replace(/<meta name="description"[^>]*?>/,'')
-      .replace(/<link([^>]*?)href="(\\/[^>]*?)>/g,
-        (_,a,b)=>{return \`<link\${a}href="{{ ssrContext._meta.baseUrl }}\${b}>\`})
-      .replace(/<script([^>]*?)src="(\\/[^>]*?)><\\/script>/g,
-        (_,a,b)=>{return \`<script\${a}src="{{ ssrContext._meta.baseUrl }}\${b}></script>\`}) ;
-  }
-        async #writeRenderTemplate (clientDir) {`)
-            .replace('const html = this.readFile(htmlFile);', 'const html = this._patchIndexHtml(this.readFile(htmlFile));');
-        fse.writeFileSync(fileSrc, contentNew);
-    }
+    // // html-template
+    // async function _handleSSRHtmlTemplate() {
+    //   const fileSrc = api.resolve.cli('lib/utils/html-template.js');
+    //   const fileSrcBak = api.resolve.cli('lib/utils/html-template-origin.js');
+    //   copyTemplateIfNeed(fileSrc, fileSrcBak);
+    //   const content = fse.readFileSync(fileSrcBak).toString();
+    //   const contentNew = content
+    //     .replace(
+    //       'const bodyStartTagRE = /(<body[^>]*)(>)/i',
+    //       'const bodyStartTagRE = /(<body[^>]*)(>)/i\nconst bodyEndRE = /(<\\/body>)/i',
+    //     )
+    //     .replace(
+    //       /\.replace\(\s+bodyStartTagRE,/,
+    //       `.replace(
+    //     bodyEndRE,
+    //     (_, tag) => \`{{ ssrContext._meta.endingBodyTags || '' }}\${ tag }\`
+    //   )
+    //   .replace(
+    //     bodyStartTagRE,`,
+    //     );
+    //   fse.writeFileSync(fileSrc, contentNew);
+    // }
+    // // ssr-devserver.js
+    // async function _handleSSRDevServer() {
+    //   const fileSrc = resolveTemplatePath('entry/ssr-devserver.js_');
+    //   const fileDest = api.resolve.cli('lib/modes/ssr/ssr-devserver.js');
+    //   fse.copyFileSync(fileSrc, fileDest);
+    // }
+    // // ssr-builder.js
+    // async function _handleSSRBuilder() {
+    //   const fileSrc = api.resolve.cli('lib/modes/ssr/ssr-builder.js');
+    //   const fileSrcBak = api.resolve.cli('lib/modes/ssr/ssr-builder-origin.js');
+    //   copyTemplateIfNeed(fileSrc, fileSrcBak);
+    //   const content = fse.readFileSync(fileSrcBak).toString();
+    //   const contentNew = content
+    //     .replace(
+    //       'await this.#buildWebserver()',
+    //       '',
+    //     )
+    //     .replace(
+    //       'await this.#copyWebserverFiles()',
+    //       '',
+    //     )
+    //     .replace(
+    //       'await this.#writePackageJson()',
+    //       '',
+    //     )
+    //     .replace(
+    //       "await this.buildWithVite('SSR Server', viteServerConfig)",
+    //       "await this.buildWithVite('SSR Server', viteServerConfig)\nawait this.#buildWebserver()",
+    //     )
+    //     .replace(
+    //       "'render-template.js',",
+    //       "this.ctx.appPaths.resolve.entry('render-template.js'),",
+    //     )
+    //     .replace('async #writeRenderTemplate (clientDir) {', `_patchIndexHtml(html){
+    //   return html
+    //     .replace(/<title>.*?<\\/title>/,'')
+    //     .replace(/<meta name="description"[^>]*?>/,'')
+    //     .replace(/<link([^>]*?)href="(\\/[^>]*?)>/g,
+    //       (_,a,b)=>{return \`<link\${a}href="{{ ssrContext._meta.baseUrl }}\${b}>\`})
+    //     .replace(/<script([^>]*?)src="(\\/[^>]*?)><\\/script>/g,
+    //       (_,a,b)=>{return \`<script\${a}src="{{ ssrContext._meta.baseUrl }}\${b}></script>\`}) ;
+    // }
+    //       async #writeRenderTemplate (clientDir) {`)
+    //     .replace('const html = this.readFile(htmlFile);', 'const html = this._patchIndexHtml(this.readFile(htmlFile));');
+    //   fse.writeFileSync(fileSrc, contentNew);
+    // }
     async function prepareVuetify() {
         let modulePath;
         try {

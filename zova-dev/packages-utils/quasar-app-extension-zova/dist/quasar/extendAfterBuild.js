@@ -11,21 +11,20 @@ export function extendAfterBuild(context, _flavor) {
         // copy
         const outReleasesDir = path.join(context.configOptions.appDir, getOutReleasesDir());
         fse.removeSync(outReleasesDir);
-        fse.copySync(outDir, outReleasesDir);
+        fse.copySync(outDir, outReleasesDir, { preserveTimestamps: true });
         // copy
-        if (process.env.BUILD_COPY_DIST) {
-            const outDirCopy = path.join(process.env.BUILD_COPY_DIST, path.basename(outDir));
-            fse.removeSync(outDirCopy);
-            fse.copySync(outDir, outDirCopy);
-        }
-        if (process.env.BUILD_COPY_RELEASE) {
-            const dirs = process.env.BUILD_COPY_RELEASE.split(',');
-            for (const dir of dirs) {
-                const outReleasesDirCopy = path.join(dir, path.basename(outReleasesDir));
-                fse.removeSync(outReleasesDirCopy);
-                fse.copySync(outDir, outReleasesDirCopy);
-            }
-        }
+        _copyToTarget(outDir, process.env.BUILD_COPY_DIST, path.basename(outDir));
+        _copyToTarget(outDir, process.env.BUILD_COPY_RELEASE, path.basename(outReleasesDir));
     };
+}
+function _copyToTarget(outDir, target, basename) {
+    if (!target)
+        return;
+    const dirs = target.split(',');
+    for (const dir of dirs) {
+        const outReleasesDirCopy = path.join(dir, basename);
+        fse.removeSync(outReleasesDirCopy);
+        fse.copySync(outDir, outReleasesDirCopy, { preserveTimestamps: true });
+    }
 }
 //# sourceMappingURL=extendAfterBuild.js.map
