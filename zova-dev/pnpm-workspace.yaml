@@ -39,4 +39,4 @@ publicHoistPattern:
   - 'zod'
 
 overrides:
-  "@quasar/app-vite": "npm:@cabloy/quasar-app-vite@^2.4.0"
+  "@quasar/app-vite": "npm:@cabloy/quasar-app-vite@^2.4.1"
