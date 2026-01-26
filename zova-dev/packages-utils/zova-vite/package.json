@@ -1,7 +1,7 @@
 {
   "name": "zova-vite",
   "type": "module",
-  "version": "1.0.184",
+  "version": "1.0.185",
   "description": "zova vite",
   "publishConfig": {
     "access": "public"
