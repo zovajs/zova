@@ -191,7 +191,7 @@ export class CtxSSRMetaStore extends BeanSimple {
         };
         window.ssr_bodyReadyObserver = new MutationObserver(() => {
           if(window.ssr_body_ready_condition && window.ssr_body_ready_condition()){
-            window.ssr_body_ready_callback(); 
+            window.ssr_body_ready_callback();
             window.ssr_bodyReadyObserverClear();
           }
         });
