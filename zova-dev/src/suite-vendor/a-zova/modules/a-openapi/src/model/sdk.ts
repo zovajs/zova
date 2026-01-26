@@ -160,15 +160,22 @@ export class ModelSdk extends BeanModelBase {
       },
       get row() {
         const operationObject = sdk.data?.operationObject;
-        const schemaData = getSchemaOfResponseBody(operationObject);
-        if (!schemaData) return;
-        const schemaName = cast(schemaData?.properties?.data)?.items?.$ref;
+        const schemaBody = getSchemaOfResponseBody(operationObject);
+        if (!schemaBody) return;
+        // schemaData
+        let schemaData;
+        if (schemaBody?.properties?.data.$ref) {
+          schemaData = self.getSchema(schemaBody?.properties?.data.$ref).data;
+        } else {
+          schemaData = schemaBody?.properties?.data;
+        }
+        // entry
+        const schemaName = cast(schemaData)?.items?.$ref;
         if (schemaName) {
           return self.getSchema(schemaName).data;
         }
         // pages
-        const schemaBody = this.responseBody;
-        return cast(schemaBody?.properties?.list)?.items;
+        return cast(schemaData?.properties?.list)?.items;
       },
     };
   }
