@@ -137,23 +137,23 @@ export class ModelSdk extends BeanModelBase {
       },
       get requestBody() {
         const operationObject = sdk.data?.operationObject;
-        const schemaData = getSchemaOfRequestBody(operationObject);
-        const schemaName = cast(schemaData)?.$ref;
+        const schemaBody = getSchemaOfRequestBody(operationObject);
+        const schemaName = cast(schemaBody)?.$ref;
         if (!schemaName) return;
         return self.getSchema(schemaName).data;
       },
       get responseBody() {
         const operationObject = sdk.data?.operationObject;
-        const schemaData = getSchemaOfResponseBody(operationObject);
-        const schemaName = cast(schemaData?.properties?.data)?.$ref;
+        const schemaBody = getSchemaOfResponseBody(operationObject);
+        const schemaName = cast(schemaBody?.properties?.data)?.$ref;
         if (!schemaName) return;
         return self.getSchema(schemaName).data;
       },
       get paged() {
         const operationObject = sdk.data?.operationObject;
-        const schemaData = getSchemaOfResponseBody(operationObject);
-        if (!schemaData) return;
-        const schemaName = cast(schemaData?.properties?.data)?.items?.$ref;
+        const schemaBody = getSchemaOfResponseBody(operationObject);
+        if (!schemaBody) return;
+        const schemaName = cast(schemaBody?.properties?.data)?.items?.$ref;
         if (schemaName) return;
         // pages
         return this.responseBody;
