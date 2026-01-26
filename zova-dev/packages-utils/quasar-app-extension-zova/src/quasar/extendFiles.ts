@@ -34,12 +34,12 @@ export function extendFilesOne(api: IndexAPI, flavor: string) {
 export function extendFilesTwo(_api: IndexAPI, _flavor: string) {
   return async function extendFiles() {
     // patch templates
-    await patchTemplates();
+    // await patchTemplates();
     // prepare vuetify
     await prepareVuetify();
   };
 
-  async function patchTemplates() {
+  // async function patchTemplates() {
     // app.js
     // fse.copyFileSync(resolveTemplatePath('entry/app.js_'), api.resolve.cli('templates/entry/app.js'));
     // client-entry.js
@@ -55,7 +55,7 @@ export function extendFilesTwo(_api: IndexAPI, _flavor: string) {
     // await _handleSSRDevServer();
     // ssr: ssr-builder.js
     // await _handleSSRBuilder();
-  }
+  // }
 
   // // html-template
   // async function _handleSSRHtmlTemplate() {
