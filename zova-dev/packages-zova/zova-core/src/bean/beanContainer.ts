@@ -681,7 +681,7 @@ export class BeanContainer {
           );
         });
         __setPropertyValue(beanInstance, key, targetBeanInstance, true);
-        return;
+        continue;
       }
       // others
       const targetBeanInstance = await this._injectBeanInstanceProp(
