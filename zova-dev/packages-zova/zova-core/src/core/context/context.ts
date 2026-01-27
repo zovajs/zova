@@ -47,11 +47,10 @@ export class ZovaContext {
         zovaHostProviders = cast(this.instance.parent).zovaHostProviders;
       }
     }
-    this._zovaHostProvidersUpdate(zovaHostProviders, true);
+    this._zovaHostProvidersUpdate_inner(zovaHostProviders);
   }
 
-  private _zovaHostProvidersUpdate(zovaHostProviders?: any, sync?: boolean) {
-    if (sync) return this._zovaHostProvidersUpdate_inner(zovaHostProviders);
+  protected _zovaHostProvidersUpdate(zovaHostProviders?: any) {
     if (process.env.SERVER) throw new Error('should not update zovaHostProviders in server');
     nextTick(() => {
       this._zovaHostProvidersUpdate_inner(zovaHostProviders);
