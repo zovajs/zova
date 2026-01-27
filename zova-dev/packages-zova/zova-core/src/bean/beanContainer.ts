@@ -14,6 +14,7 @@ import type { IBeanRecord, IBeanScopeRecord, IControllerData, TypeBeanScopeRecor
 import { compose } from '@cabloy/compose';
 import { isClass, isNilOrEmptyString } from '@cabloy/utils';
 import { inject as composableInject, provide as composableProvide, markRaw, reactive, shallowReactive } from 'vue';
+import { useComputed } from 'zova';
 import { appMetadata } from '../core/sys/metadata.js';
 import { appResource, SymbolDecoratorProxyDisable } from '../core/sys/resource.js';
 import {
@@ -666,6 +667,23 @@ export class BeanContainer {
       if (!targetBeanFullName && useOptions.beanClass) {
         targetBeanFullName = appResource.getBeanFullName(useOptions.beanClass);
       }
+      // 0. host/skipSelf
+      if (useOptions.injectionScope && ['host', 'skipSelf'].includes(useOptions.injectionScope)) {
+        const selectorInfo = __prepareInjectSelectorInfo(beanInstance, useOptions);
+        const useOptions2 = selectorInfo.withSelector ? Object.assign({}, useOptions, { selector: selectorInfo.args[0] }) : useOptions;
+        const targetBeanInstance = useComputed(() => {
+          return this._getBeanFromHostInner(
+            false,
+            useOptions.prop,
+            targetBeanComposable,
+            targetBeanFullName,
+            useOptions2 as IDecoratorUseOptions,
+          );
+        });
+        __setPropertyValue(beanInstance, key, targetBeanInstance, true);
+        return;
+      }
+      // others
       const targetBeanInstance = await this._injectBeanInstanceProp(
         beanInstance,
         targetBeanComposable,
@@ -682,18 +700,6 @@ export class BeanContainer {
     targetBeanFullName: string | undefined,
     useOptions: IDecoratorUseOptionsBase,
   ) {
-    // 0. host/skipSelf
-    if (useOptions.injectionScope && ['host', 'skipSelf'].includes(useOptions.injectionScope)) {
-      const selectorInfo = __prepareInjectSelectorInfo(beanInstance, useOptions);
-      const useOptions2 = selectorInfo.withSelector ? Object.assign({}, useOptions, { selector: selectorInfo.args[0] }) : useOptions;
-      return this._getBeanFromHostInner(
-        true,
-        useOptions.prop,
-        targetBeanComposable,
-        targetBeanFullName,
-        useOptions2 as IDecoratorUseOptions,
-      );
-    }
     // 1. use name
     if (useOptions.name) {
       return this[SymbolBeanContainerInstances][useOptions.name];
