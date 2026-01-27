@@ -52,7 +52,7 @@ export class ZovaContext {
 
   private _zovaHostProvidersUpdate(zovaHostProviders?: any, sync?: boolean) {
     if (sync) return this._zovaHostProvidersUpdate_inner(zovaHostProviders);
-    if (!process.env.CLIENT) return;
+    if (process.env.SERVER) throw new Error('should not update zovaHostProviders in server');
     nextTick(() => {
       this._zovaHostProvidersUpdate_inner(zovaHostProviders);
     });
