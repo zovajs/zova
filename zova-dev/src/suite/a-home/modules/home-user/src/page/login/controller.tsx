@@ -20,7 +20,7 @@ export class ControllerPageLogin extends BeanControllerPageBase {
   };
 
   protected async __init__() {
-    await $QueryAutoLoad(() => this.$$modelPassport.apiSchemaLogin.sdk);
+    await $QueryAutoLoad(() => this.$$modelPassport.apiSchemasLogin.sdk);
   }
 
   get schema() {

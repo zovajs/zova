@@ -3,7 +3,6 @@ import type { IDecoratorModelOptions } from 'zova-module-a-model';
 import type { ApiApiHomeUserPassportloginRequestBody, ApiApiHomeUserPassportloginResponseBody } from 'zova-module-home-api';
 import { SchemaObject } from 'openapi3-ts/oas31';
 import { BeanModelBase, Model } from 'zova-module-a-model';
-import { IOpenapiSchemas } from 'zova-module-a-openapi';
 
 export interface IModelOptionsPassport extends IDecoratorModelOptions {}
 
@@ -13,13 +12,11 @@ export class ModelPassport extends BeanModelBase {
   jwt?: ApiApiHomeUserPassportloginResponseBody['jwt'];
   accessToken?: string;
   expireTime?: number;
-  apiSchemaLogin: IOpenapiSchemas;
   schemaLogin?: SchemaObject;
 
   protected async __init__() {
-    this.apiSchemaLogin = this.$apiSchema.homeUserPassport.login;
     this.schemaLogin = this.$useComputed(() => {
-      return this.apiSchemaLogin.requestBody;
+      return this.apiSchemasLogin.requestBody;
     });
     this.passport = process.env.CLIENT
       ? this.$useStateLocal({ queryKey: ['passport'] })
@@ -30,6 +27,10 @@ export class ModelPassport extends BeanModelBase {
     if (process.env.CLIENT) {
       this._setLocaleTz();
     }
+  }
+
+  get apiSchemasLogin() {
+    return this.$apiSchema.homeUserPassport.login;
   }
 
   login() {
