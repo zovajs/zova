@@ -1,6 +1,6 @@
 import type { ComponentInternalInstance } from 'vue';
 import type { ZovaApplication } from '../app/application.js';
-import { markRaw } from 'vue';
+import { markRaw, nextTick } from 'vue';
 import { BeanContainer } from '../../bean/beanContainer.js';
 import { cast } from '../../types/utils/cast.js';
 import { sys } from '../sys/sys.js';
@@ -25,7 +25,7 @@ export class ZovaContext {
     this.util = this.bean._newBeanSimple(CtxUtil, false);
     this.meta = this.bean._newBeanSimple(CtxMeta, false);
     this.meta.initialize();
-    this._zovaHostProviders();
+    this._zovaHostProvidersInit();
   }
 
   /** @internal */
@@ -40,8 +40,25 @@ export class ZovaContext {
     this.disposed = true;
   }
 
-  private _zovaHostProviders() {
-    const zovaHostProviders = cast(this.instance).zovaHostProviders;
+  private _zovaHostProvidersInit() {
+    let zovaHostProviders = cast(this.instance).zovaHostProviders;
+    if (!zovaHostProviders) {
+      if (this.instance.parent?.type.name === 'AsyncComponentWrapper') {
+        zovaHostProviders = cast(this.instance.parent).zovaHostProviders;
+      }
+    }
+    this._zovaHostProvidersUpdate(zovaHostProviders, true);
+  }
+
+  private _zovaHostProvidersUpdate(zovaHostProviders?: any, sync?: boolean) {
+    if (sync) return this._zovaHostProvidersUpdate_inner(zovaHostProviders);
+    if (!process.env.CLIENT) return;
+    nextTick(() => {
+      this._zovaHostProvidersUpdate_inner(zovaHostProviders);
+    });
+  }
+
+  private _zovaHostProvidersUpdate_inner(zovaHostProviders?: any) {
     if (!zovaHostProviders) return;
     for (const key in zovaHostProviders) {
       const beanInstance = this.bean._getBeanSyncOnly(key);
