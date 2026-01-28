@@ -1366,6 +1366,11 @@ export interface components {
       group?: string | string[] | undefined;
       collapsed?: boolean | undefined;
     };
+    'a-openapischema.dto.permissions': {
+      roleIds?: (number | string)[] | undefined;
+      roleNames?: string[] | undefined;
+      actions?: unknown;
+    };
     /** @description Create Product */
     'test-rest.dto.productCreate': {
       /** @description Name */
@@ -2630,7 +2635,7 @@ export interface operations {
           'application/json': {
             code: string;
             message: string;
-            data?: unknown;
+            data: components['schemas']['a-openapischema.dto.permissions'];
           };
         };
       };
