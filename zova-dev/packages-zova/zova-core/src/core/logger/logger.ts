@@ -31,12 +31,12 @@ export class SysLogger extends BeanSimple {
     return logger.child({ name: childName });
   }
 
-  getLevel(clientName?: keyof ILoggerClientRecord): LoggerLevel | undefined {
-    return getLoggerClientLevel(clientName);
+  getFilterLevel(clientName?: keyof ILoggerClientRecord): LoggerLevel | undefined {
+    return getLoggerFilterLevel(clientName);
   }
 
-  setLevel(level: LoggerLevel | boolean, clientName?: keyof ILoggerClientRecord) {
-    setLoggerClientLevel(level, clientName);
+  setFilterLevel(level: LoggerLevel | boolean, clientName?: keyof ILoggerClientRecord) {
+    setLoggerFilterLevel(level, clientName);
   }
 
   private _createClient(clientName: keyof ILoggerClientRecord): Logger {
@@ -55,7 +55,7 @@ export class SysLogger extends BeanSimple {
     if (typeof configClient !== 'function') return configClient;
     return configClient.call(this.sys, {
       clientName,
-      level: () => getLoggerClientLevel(clientName),
+      level: () => getLoggerFilterLevel(clientName),
     });
   }
 }
@@ -66,7 +66,7 @@ async function _closeLogger(logger: Logger) {
   (logger as any).__closed__ = true;
 }
 
-export function getLoggerClientLevel(clientName?: keyof ILoggerClientRecord): LoggerLevel | undefined {
+export function getLoggerFilterLevel(clientName?: keyof ILoggerClientRecord): LoggerLevel | undefined {
   clientName = clientName || 'default';
   if (process.env.PROD) return; // disable on prod
   const envName = `LOGGER_CLIENT_${clientName.toUpperCase()}`;
@@ -76,7 +76,7 @@ export function getLoggerClientLevel(clientName?: keyof ILoggerClientRecord): Lo
   return level as LoggerLevel;
 }
 
-export function setLoggerClientLevel(level: LoggerLevel | boolean, clientName?: keyof ILoggerClientRecord) {
+export function setLoggerFilterLevel(level: LoggerLevel | boolean, clientName?: keyof ILoggerClientRecord) {
   clientName = clientName || 'default';
   if (process.env.PROD) return; // disable on prod
   const envName = `LOGGER_CLIENT_${clientName.toUpperCase()}`;

@@ -12,7 +12,9 @@ export interface ILoggerClientRecord {
   default: never;
 }
 
-export interface ILoggerChildRecord {}
+export interface ILoggerChildRecord {
+  module: never;
+}
 
 export interface ConfigLogger {
   base: TypeLoggerOptions;
