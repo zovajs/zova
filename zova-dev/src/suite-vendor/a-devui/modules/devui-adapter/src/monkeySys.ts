@@ -11,10 +11,6 @@ export class MonkeySys extends BeanSimple implements IMonkeySysInitialize {
     }
     // config custom
     const configCustom: IOpenapiOptionsResourceMeta = {
-      permissions: {
-        table: { create: true },
-        row: { update: true, delete: true },
-      },
       provider: {
         components: {
           restPage: 'devui-restpage:restPage',

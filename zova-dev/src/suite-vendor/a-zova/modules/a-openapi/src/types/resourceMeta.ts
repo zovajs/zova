@@ -1,11 +1,19 @@
 import type { TypeComponentRecordSelectorKeysStrict } from 'zova';
 import type { IActionsRecord } from 'zova-module-a-action';
-import type { TypeResourceActionRowRecord, TypeResourceActionTableRecord } from './actions.js';
+import type { IOpenapiPermissions } from './permissions.js';
 
 export type TypeOpenApiRestResourceScene = 'table' | 'row';
 
+export type TypeOpenapiPermissions = IOpenapiPermissions | boolean;
+
 export interface IOpenapiOptionsResourceMeta {
-  permissions?: IOpenapiOptionsResourceMetaPermissions;
+  /**
+   * false: disallow
+   * true: public
+   * undefined: by api
+   * IOpenapiPermissions: specific
+   */
+  permissions?: TypeOpenapiPermissions;
   provider?: IOpenapiOptionsResourceMetaProvider;
   form?: IOpenapiOptionsResourceMetaForm;
   table?: IOpenapiOptionsResourceMetaTable;
@@ -14,19 +22,6 @@ export interface IOpenapiOptionsResourceMeta {
 export interface IOpenapiOptionsResourceMetaForm {}
 
 export interface IOpenapiOptionsResourceMetaTable {}
-
-export interface IOpenapiOptionsResourceMetaPermissions {
-  table?: TypeOpenApiOptionsRestResourcePermissionsTable;
-  row?: TypeOpenApiOptionsRestResourcePermissionsRow;
-}
-
-export type TypeOpenApiOptionsRestResourcePermissionsTable = {
-  [key in keyof TypeResourceActionTableRecord]?: boolean;
-};
-
-export type TypeOpenApiOptionsRestResourcePermissionsRow = {
-  [key in keyof TypeResourceActionRowRecord]?: boolean;
-};
 
 export interface IOpenapiOptionsResourceMetaProvider {
   components?: IOpenapiOptionsResourceMetaProviderComponents;
