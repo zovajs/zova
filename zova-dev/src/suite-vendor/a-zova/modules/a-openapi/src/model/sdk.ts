@@ -82,7 +82,7 @@ export class ModelSdk extends BeanModelBase {
         if (!sdk) throw new Error('load sdk error');
         for (const schemaName of sdk.schemas) {
           // if (process.env.SERVER) {
-          // await $QueryAutoLoad(() => this.getSchema(schemaName));
+          //   await $QueryAutoLoad(() => this.getSchema(schemaName));
           // } else {
           await this.$refetchQueries({ queryKey: ['schema', schemaName] });
           // }
