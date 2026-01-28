@@ -239,6 +239,70 @@ export interface paths {
     patch?: never;
     trace?: never;
   };
+  '/api/demo/student/book': {
+    parameters: {
+      query?: never;
+      header?: never;
+      path?: never;
+      cookie?: never;
+    };
+    get: operations['DemoStudentBook_select'];
+    put?: never;
+    post: operations['DemoStudentBook_create'];
+    delete?: never;
+    options?: never;
+    head?: never;
+    patch?: never;
+    trace?: never;
+  };
+  '/api/demo/student/book/{id}': {
+    parameters: {
+      query?: never;
+      header?: never;
+      path?: never;
+      cookie?: never;
+    };
+    get: operations['DemoStudentBook_view'];
+    put?: never;
+    post?: never;
+    delete: operations['DemoStudentBook_delete'];
+    options?: never;
+    head?: never;
+    patch: operations['DemoStudentBook_update'];
+    trace?: never;
+  };
+  '/api/demo/student': {
+    parameters: {
+      query?: never;
+      header?: never;
+      path?: never;
+      cookie?: never;
+    };
+    get: operations['DemoStudent_select'];
+    put?: never;
+    post: operations['DemoStudent_create'];
+    delete?: never;
+    options?: never;
+    head?: never;
+    patch?: never;
+    trace?: never;
+  };
+  '/api/demo/student/{id}': {
+    parameters: {
+      query?: never;
+      header?: never;
+      path?: never;
+      cookie?: never;
+    };
+    get: operations['DemoStudent_view'];
+    put?: never;
+    post?: never;
+    delete: operations['DemoStudent_delete'];
+    options?: never;
+    head?: never;
+    patch: operations['DemoStudent_update'];
+    trace?: never;
+  };
   '/api/home/base/menu/{publicPath?}': {
     parameters: {
       query?: never;
@@ -247,6 +311,22 @@ export interface paths {
       cookie?: never;
     };
     get: operations['HomeBaseMenu_retrieveMenus'];
+    put?: never;
+    post?: never;
+    delete?: never;
+    options?: never;
+    head?: never;
+    patch?: never;
+    trace?: never;
+  };
+  '/api/home/base/permission/{resource}': {
+    parameters: {
+      query?: never;
+      header?: never;
+      path?: never;
+      cookie?: never;
+    };
+    get: operations['HomeBasePermission_retrieveMenus'];
     put?: never;
     post?: never;
     delete?: never;
@@ -1106,6 +1186,156 @@ export interface components {
       token?: unknown;
       payload?: unknown;
     };
+    'demo-student.dto.bookCreate': {
+      /** @description Name */
+      name: string;
+      /** @description Description */
+      description?: string | undefined;
+    };
+    'demo-student.dto.bookQueryRes': {
+      list: {
+        /**
+                 * Format: date
+                 * @description Created At
+                 */
+        createdAt: string;
+        /**
+                 * Format: date
+                 * @description Updated At
+                 */
+        updatedAt: string;
+        /**
+                 * @description Deleted
+                 * @default false
+                 */
+        deleted?: boolean;
+        /**
+                 * @description Instance ID
+                 * @default 0
+                 */
+        iid?: number;
+        /** @description ID */
+        id: number | string;
+        /** @description Name */
+        name: string;
+        /** @description Description */
+        description?: string | undefined;
+      }[];
+      total: string;
+      pageCount: number;
+      pageSize: number;
+      pageNo: number;
+    };
+    /** @description Book */
+    'demo-student.entity.book': {
+      /**
+             * Format: date
+             * @description Created At
+             */
+      createdAt: string;
+      /**
+             * Format: date
+             * @description Updated At
+             */
+      updatedAt: string;
+      /**
+             * @description Deleted
+             * @default false
+             */
+      deleted?: boolean;
+      /**
+             * @description Instance ID
+             * @default 0
+             */
+      iid?: number;
+      /** @description ID */
+      id: number | string;
+      /** @description Name */
+      name: string;
+      /** @description Description */
+      description?: string | undefined;
+    } | undefined;
+    'demo-student.dto.bookUpdate': {
+      /** @description Name */
+      name: string;
+      /** @description Description */
+      description?: string | undefined;
+    };
+    'demo-student.dto.studentCreate': {
+      /** @description Name */
+      name: string;
+      /** @description Description */
+      description?: string | undefined;
+    };
+    'demo-student.dto.studentQueryRes': {
+      list: {
+        /**
+                 * Format: date
+                 * @description Created At
+                 */
+        createdAt: string;
+        /**
+                 * Format: date
+                 * @description Updated At
+                 */
+        updatedAt: string;
+        /**
+                 * @description Deleted
+                 * @default false
+                 */
+        deleted?: boolean;
+        /**
+                 * @description Instance ID
+                 * @default 0
+                 */
+        iid?: number;
+        /** @description ID */
+        id: number | string;
+        /** @description Name */
+        name: string;
+        /** @description Description */
+        description?: string | undefined;
+      }[];
+      total: string;
+      pageCount: number;
+      pageSize: number;
+      pageNo: number;
+    };
+    /** @description Student */
+    'demo-student.entity.student': {
+      /**
+             * Format: date
+             * @description Created At
+             */
+      createdAt: string;
+      /**
+             * Format: date
+             * @description Updated At
+             */
+      updatedAt: string;
+      /**
+             * @description Deleted
+             * @default false
+             */
+      deleted?: boolean;
+      /**
+             * @description Instance ID
+             * @default 0
+             */
+      iid?: number;
+      /** @description ID */
+      id: number | string;
+      /** @description Name */
+      name: string;
+      /** @description Description */
+      description?: string | undefined;
+    } | undefined;
+    'demo-student.dto.studentUpdate': {
+      /** @description Name */
+      name: string;
+      /** @description Description */
+      description?: string | undefined;
+    };
     'a-menu.dto.menus': {
       menus?: components['schemas']['a-menu.dto.menuItem'][] | undefined;
       groups?: components['schemas']['a-menu.dto.menuGroup'][] | undefined;
@@ -1278,6 +1508,8 @@ export interface components {
       _custom4?: string | undefined;
       /** @default custom */
       _custom5?: string | undefined;
+      _customCopy?: string | undefined;
+      _customCopied?: boolean | undefined;
     };
     'test-ssr.dto.testDetail': {
       name: string;
@@ -1304,6 +1536,8 @@ export interface components {
       _custom4?: string | undefined;
       /** @default custom */
       _custom5?: string | undefined;
+      _customCopy?: string | undefined;
+      _customCopied?: boolean | undefined;
     };
     'a-play.dto.play': {
       args: string[];
@@ -2063,6 +2297,294 @@ export interface operations {
       };
     };
   };
+  DemoStudentBook_select: {
+    parameters: {
+      query?: {
+        columns?: string[] | undefined;
+        where?: {
+          [key: string]: unknown;
+        } | undefined;
+        orders?: string | string[][] | undefined;
+        pageNo?: number;
+        pageSize?: number;
+        createdAt?: string | undefined;
+        name?: string | undefined;
+      };
+      header?: never;
+      path?: never;
+      cookie?: never;
+    };
+    requestBody?: never;
+    responses: {
+      200: {
+        headers: {
+          [name: string]: unknown;
+        };
+        content: {
+          'application/json': {
+            code: string;
+            message: string;
+            data: components['schemas']['demo-student.dto.bookQueryRes'];
+          };
+        };
+      };
+    };
+    authToken: true;
+  };
+  DemoStudentBook_create: {
+    parameters: {
+      query?: never;
+      header?: never;
+      path?: never;
+      cookie?: never;
+    };
+    requestBody: {
+      content: {
+        'application/json': components['schemas']['demo-student.dto.bookCreate'];
+      };
+    };
+    responses: {
+      200: {
+        headers: {
+          [name: string]: unknown;
+        };
+        content: {
+          'application/json': {
+            code: string;
+            message: string;
+            data: number | string;
+          };
+        };
+      };
+    };
+    authToken: true;
+  };
+  DemoStudentBook_view: {
+    parameters: {
+      query?: never;
+      header?: never;
+      path: {
+        id: number | string;
+      };
+      cookie?: never;
+    };
+    requestBody?: never;
+    responses: {
+      200: {
+        headers: {
+          [name: string]: unknown;
+        };
+        content: {
+          'application/json': {
+            code: string;
+            message: string;
+            data?: components['schemas']['demo-student.entity.book'];
+          };
+        };
+      };
+    };
+    authToken: true;
+  };
+  DemoStudentBook_delete: {
+    parameters: {
+      query?: never;
+      header?: never;
+      path: {
+        id: number | string;
+      };
+      cookie?: never;
+    };
+    requestBody?: never;
+    responses: {
+      200: {
+        headers: {
+          [name: string]: unknown;
+        };
+        content: {
+          'application/json': {
+            code: string;
+            message: string;
+            data?: unknown;
+          };
+        };
+      };
+    };
+    authToken: true;
+  };
+  DemoStudentBook_update: {
+    parameters: {
+      query?: never;
+      header?: never;
+      path: {
+        id: number | string;
+      };
+      cookie?: never;
+    };
+    requestBody: {
+      content: {
+        'application/json': components['schemas']['demo-student.dto.bookUpdate'];
+      };
+    };
+    responses: {
+      200: {
+        headers: {
+          [name: string]: unknown;
+        };
+        content: {
+          'application/json': {
+            code: string;
+            message: string;
+            data?: unknown;
+          };
+        };
+      };
+    };
+    authToken: true;
+  };
+  DemoStudent_select: {
+    parameters: {
+      query?: {
+        columns?: string[] | undefined;
+        where?: {
+          [key: string]: unknown;
+        } | undefined;
+        orders?: string | string[][] | undefined;
+        pageNo?: number;
+        pageSize?: number;
+        createdAt?: string | undefined;
+        name?: string | undefined;
+      };
+      header?: never;
+      path?: never;
+      cookie?: never;
+    };
+    requestBody?: never;
+    responses: {
+      200: {
+        headers: {
+          [name: string]: unknown;
+        };
+        content: {
+          'application/json': {
+            code: string;
+            message: string;
+            data: components['schemas']['demo-student.dto.studentQueryRes'];
+          };
+        };
+      };
+    };
+    authToken: true;
+  };
+  DemoStudent_create: {
+    parameters: {
+      query?: never;
+      header?: never;
+      path?: never;
+      cookie?: never;
+    };
+    requestBody: {
+      content: {
+        'application/json': components['schemas']['demo-student.dto.studentCreate'];
+      };
+    };
+    responses: {
+      200: {
+        headers: {
+          [name: string]: unknown;
+        };
+        content: {
+          'application/json': {
+            code: string;
+            message: string;
+            data: number | string;
+          };
+        };
+      };
+    };
+    authToken: true;
+  };
+  DemoStudent_view: {
+    parameters: {
+      query?: never;
+      header?: never;
+      path: {
+        id: number | string;
+      };
+      cookie?: never;
+    };
+    requestBody?: never;
+    responses: {
+      200: {
+        headers: {
+          [name: string]: unknown;
+        };
+        content: {
+          'application/json': {
+            code: string;
+            message: string;
+            data?: components['schemas']['demo-student.entity.student'];
+          };
+        };
+      };
+    };
+    authToken: true;
+  };
+  DemoStudent_delete: {
+    parameters: {
+      query?: never;
+      header?: never;
+      path: {
+        id: number | string;
+      };
+      cookie?: never;
+    };
+    requestBody?: never;
+    responses: {
+      200: {
+        headers: {
+          [name: string]: unknown;
+        };
+        content: {
+          'application/json': {
+            code: string;
+            message: string;
+            data?: unknown;
+          };
+        };
+      };
+    };
+    authToken: true;
+  };
+  DemoStudent_update: {
+    parameters: {
+      query?: never;
+      header?: never;
+      path: {
+        id: number | string;
+      };
+      cookie?: never;
+    };
+    requestBody: {
+      content: {
+        'application/json': components['schemas']['demo-student.dto.studentUpdate'];
+      };
+    };
+    responses: {
+      200: {
+        headers: {
+          [name: string]: unknown;
+        };
+        content: {
+          'application/json': {
+            code: string;
+            message: string;
+            data?: unknown;
+          };
+        };
+      };
+    };
+    authToken: true;
+  };
   HomeBaseMenu_retrieveMenus: {
     parameters: {
       query?: never;
@@ -2083,6 +2605,32 @@ export interface operations {
             code: string;
             message: string;
             data: components['schemas']['a-menu.dto.menus'];
+          };
+        };
+      };
+    };
+    authToken: true;
+  };
+  HomeBasePermission_retrieveMenus: {
+    parameters: {
+      query?: never;
+      header?: never;
+      path: {
+        resource: string;
+      };
+      cookie?: never;
+    };
+    requestBody?: never;
+    responses: {
+      200: {
+        headers: {
+          [name: string]: unknown;
+        };
+        content: {
+          'application/json': {
+            code: string;
+            message: string;
+            data?: unknown;
           };
         };
       };

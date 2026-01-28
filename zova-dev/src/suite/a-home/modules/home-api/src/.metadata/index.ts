@@ -3,6 +3,7 @@
 export * from '../api/captcha.js';
 export * from '../api/home.js';
 export * from '../api/homeBaseMenu.js';
+export * from '../api/homeBasePermission.js';
 export * from '../api/homeUserPassport.js';
 export * from '../api/testSsrToolOne.js';
 export * from '../api/testVonaCaptcha.js';
@@ -47,6 +48,17 @@ declare module 'zova-module-home-api' {
           
         }
 
+        export interface ApiHomeBasePermission {
+          /** @internal */
+          get scope(): ScopeModuleHomeApi;
+        }
+
+        export interface ApiHomeBasePermission {
+          get $beanFullName(): 'home-api.api.homeBasePermission';
+          get $onionName(): 'home-api:homeBasePermission';
+          
+        }
+
         export interface ApiHomeUserPassport {
           /** @internal */
           get scope(): ScopeModuleHomeApi;
@@ -85,6 +97,7 @@ declare module 'zova-module-home-api' {
 import { ApiCaptcha } from '../api/captcha.js';
 import { ApiHome } from '../api/home.js';
 import { ApiHomeBaseMenu } from '../api/homeBaseMenu.js';
+import { ApiHomeBasePermission } from '../api/homeBasePermission.js';
 import { ApiHomeUserPassport } from '../api/homeUserPassport.js';
 import { ApiTestSsrToolOne } from '../api/testSsrToolOne.js';
 import { ApiTestVonaCaptcha } from '../api/testVonaCaptcha.js';
@@ -92,6 +105,7 @@ export interface IModuleApi {
   'captcha': ApiCaptcha;
 'home': ApiHome;
 'homeBaseMenu': ApiHomeBaseMenu;
+'homeBasePermission': ApiHomeBasePermission;
 'homeUserPassport': ApiHomeUserPassport;
 'testSsrToolOne': ApiTestSsrToolOne;
 'testVonaCaptcha': ApiTestVonaCaptcha;
@@ -105,6 +119,7 @@ declare module 'zova' {
     'home-api.api.captcha': ApiCaptcha;
 'home-api.api.home': ApiHome;
 'home-api.api.homeBaseMenu': ApiHomeBaseMenu;
+'home-api.api.homeBasePermission': ApiHomeBasePermission;
 'home-api.api.homeUserPassport': ApiHomeUserPassport;
 'home-api.api.testSsrToolOne': ApiTestSsrToolOne;
 'home-api.api.testVonaCaptcha': ApiTestVonaCaptcha;
@@ -118,6 +133,7 @@ export * from '../api/openapi/index.js';
 export * from '../apiSchema/captcha.js';
 export * from '../apiSchema/home.js';
 export * from '../apiSchema/homeBaseMenu.js';
+export * from '../apiSchema/homeBasePermission.js';
 export * from '../apiSchema/homeUserPassport.js';
 export * from '../apiSchema/testSsrToolOne.js';
 export * from '../apiSchema/testVonaCaptcha.js';
@@ -162,6 +178,17 @@ declare module 'zova-module-home-api' {
           
         }
 
+        export interface ApiSchemaHomeBasePermission {
+          /** @internal */
+          get scope(): ScopeModuleHomeApi;
+        }
+
+        export interface ApiSchemaHomeBasePermission {
+          get $beanFullName(): 'home-api.apiSchema.homeBasePermission';
+          get $onionName(): 'home-api:homeBasePermission';
+          
+        }
+
         export interface ApiSchemaHomeUserPassport {
           /** @internal */
           get scope(): ScopeModuleHomeApi;
@@ -200,6 +227,7 @@ declare module 'zova-module-home-api' {
 import { ApiSchemaCaptcha } from '../apiSchema/captcha.js';
 import { ApiSchemaHome } from '../apiSchema/home.js';
 import { ApiSchemaHomeBaseMenu } from '../apiSchema/homeBaseMenu.js';
+import { ApiSchemaHomeBasePermission } from '../apiSchema/homeBasePermission.js';
 import { ApiSchemaHomeUserPassport } from '../apiSchema/homeUserPassport.js';
 import { ApiSchemaTestSsrToolOne } from '../apiSchema/testSsrToolOne.js';
 import { ApiSchemaTestVonaCaptcha } from '../apiSchema/testVonaCaptcha.js';
@@ -207,6 +235,7 @@ export interface IModuleApiSchema {
   'captcha': ApiSchemaCaptcha;
 'home': ApiSchemaHome;
 'homeBaseMenu': ApiSchemaHomeBaseMenu;
+'homeBasePermission': ApiSchemaHomeBasePermission;
 'homeUserPassport': ApiSchemaHomeUserPassport;
 'testSsrToolOne': ApiSchemaTestSsrToolOne;
 'testVonaCaptcha': ApiSchemaTestVonaCaptcha;
@@ -220,6 +249,7 @@ declare module 'zova' {
     'home-api.apiSchema.captcha': ApiSchemaCaptcha;
 'home-api.apiSchema.home': ApiSchemaHome;
 'home-api.apiSchema.homeBaseMenu': ApiSchemaHomeBaseMenu;
+'home-api.apiSchema.homeBasePermission': ApiSchemaHomeBasePermission;
 'home-api.apiSchema.homeUserPassport': ApiSchemaHomeUserPassport;
 'home-api.apiSchema.testSsrToolOne': ApiSchemaTestSsrToolOne;
 'home-api.apiSchema.testVonaCaptcha': ApiSchemaTestVonaCaptcha;
