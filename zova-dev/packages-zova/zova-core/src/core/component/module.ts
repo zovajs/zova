@@ -72,11 +72,13 @@ export class AppModule extends BeanSimple {
   }
 
   private async _requireAllSpecifics(capabilityName: 'preload' | 'monkey' | 'sync') {
-    for (const moduleName of this.sys.meta.module.modulesMeta.moduleNames) {
+    const moduleNames = this.sys.meta.module.modulesMeta.moduleNames.filter(moduleName => {
       const module = this.sys.meta.module.modulesMeta.modules[moduleName];
-      if (module.info.capabilities?.[capabilityName]) {
-        await this._install(moduleName, module);
-      }
+      return module.info.capabilities?.[capabilityName];
+    });
+    for (const moduleName of moduleNames) {
+      const module = this.sys.meta.module.modulesMeta.modules[moduleName];
+      await this._install(moduleName, module);
     }
   }
 
