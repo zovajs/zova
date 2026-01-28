@@ -326,7 +326,7 @@ export interface paths {
       path?: never;
       cookie?: never;
     };
-    get: operations['HomeBasePermission_retrieveMenus'];
+    get: operations['HomeBasePermission_retrievePermissions'];
     put?: never;
     post?: never;
     delete?: never;
@@ -2611,7 +2611,7 @@ export interface operations {
     };
     authToken: true;
   };
-  HomeBasePermission_retrieveMenus: {
+  HomeBasePermission_retrievePermissions: {
     parameters: {
       query?: never;
       header?: never;

@@ -62,9 +62,7 @@ export class ModelSdk extends BeanModelBase {
         const resourceMeta = this.getBootstrap(resource);
         const permissions = resourceMeta.data?.resourceMeta.permissions;
         if (!isNil(permissions)) return permissions;
-
-        if (!bootstrap) throw new Error('load bootstrap error');
-        return bootstrap ?? null;
+        return await this.$api.homeBasePermission.retrievePermissions({ params: { resource } });
       },
     });
   }
