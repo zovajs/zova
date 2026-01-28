@@ -64,6 +64,7 @@ export class ModelSdk extends BeanModelBase {
     return this.$useStateData({
       queryKey: ['permissions', resource],
       queryFn: async () => {
+        // should not use this.getBootstrap(resource);
         const bootstrap = await this.$$sysSdk.loadBootstrap(this.$fetch, resource);
         let permissions = bootstrap.resourceMeta.permissions;
         if (!isNil(permissions)) return permissions;
