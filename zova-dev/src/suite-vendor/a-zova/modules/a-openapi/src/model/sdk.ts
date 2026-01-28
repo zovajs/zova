@@ -64,8 +64,8 @@ export class ModelSdk extends BeanModelBase {
     return this.$useStateData({
       queryKey: ['permissions', resource],
       queryFn: async () => {
-        const resourceMeta = this.getBootstrap(resource);
-        let permissions = resourceMeta.data?.resourceMeta.permissions;
+        const bootstrap = await this.$$sysSdk.loadBootstrap(this.$fetch, resource);
+        let permissions = bootstrap.resourceMeta.permissions;
         if (!isNil(permissions)) return permissions;
         permissions = await this.$fetch.get(
           this.sys.util.apiActionPathTranslate(this.scope.config.api.permissions, { resource }),
