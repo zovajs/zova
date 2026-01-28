@@ -4,7 +4,7 @@ import type { ApiApiHomeUserPassportloginRequestBody, ApiApiHomeUserPassportlogi
 import { isNil } from '@cabloy/utils';
 import { SchemaObject } from 'openapi3-ts/oas31';
 import { BeanModelBase, Model } from 'zova-module-a-model';
-import { TypeOpenapiPermissions } from 'zova-module-a-openapi';
+import { IOpenapiActionRecord, TypeOpenapiPermissions } from 'zova-module-a-openapi';
 
 export interface IModelOptionsPassport extends IDecoratorModelOptions {}
 
@@ -148,7 +148,7 @@ export class ModelPassport extends BeanModelBase {
     }
   }
 
-  public checkPermission(permissions: TypeOpenapiPermissions | undefined, actionName: string): boolean {
+  public checkPermission(permissions: TypeOpenapiPermissions | undefined, actionName: keyof IOpenapiActionRecord): boolean {
     if (isNil(permissions)) return false;
     if (permissions === false) return false;
     if (permissions === true) return true;

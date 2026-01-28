@@ -8,11 +8,13 @@ export interface ITableCellOptionsActionOperationsRow extends IDecoratorTableCel
 @TableCell<ITableCellOptionsActionOperationsRow>()
 export class TableCellActionOperationsRow extends BeanBase implements ITableCellRender {
   render(_options: ITableCellOptionsActionOperationsRow, renderContext: IJsxRenderContextTableCell, _next: NextTableCellRender) {
-    const { $jsx, $celScope } = renderContext;
+    const { $jsx, $celScope, $host } = renderContext;
     const permissions = $celScope.permissions;
+    const permissionUpdate = $host.$passport.checkPermission(permissions, 'update');
+    const permissionDelete = $host.$passport.checkPermission(permissions, 'delete');
     return (
       <div class="flex gap-2">
-        {permissions?.row?.update && (
+        {permissionUpdate && (
           <button
             class="btn btn-outline btn-primary"
             onClick={() => {
@@ -23,7 +25,7 @@ export class TableCellActionOperationsRow extends BeanBase implements ITableCell
             <ZIcon name="::draft"></ZIcon>
           </button>
         )}
-        {permissions?.row?.delete && (
+        {permissionDelete && (
           <button
             class="btn btn-outline btn-error"
             onClick={async () => {

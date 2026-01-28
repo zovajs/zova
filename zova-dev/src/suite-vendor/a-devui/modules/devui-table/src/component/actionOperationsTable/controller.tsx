@@ -15,7 +15,8 @@ export class ControllerActionOperationsTable extends BeanControllerBase {
   }
 
   private _renderCreate() {
-    if (!this.permissions?.table?.create) return;
+    const permissionCreate = this.$passport.checkPermission(this.permissions, 'create');
+    if (!permissionCreate) return;
     const { $jsx } = this.$$renderContext;
     return (
       <button
