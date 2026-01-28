@@ -62,7 +62,7 @@ export class ModelSdk extends BeanModelBase {
       queryFn: async () => {
         const resourceMeta = this.getBootstrap(resource);
         let permissions = resourceMeta.data?.resourceMeta.permissions;
-        if (!isNil(permissions)) return permissions ?? null;
+        if (!isNil(permissions)) return permissions;
         permissions = await this.$fetch.get(
           this.sys.util.apiActionPathTranslate(this.scope.config.api.permissions, { resource }),
           this.sys.util.apiActionConfigPrepare(),
