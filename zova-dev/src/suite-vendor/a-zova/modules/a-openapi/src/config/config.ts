@@ -38,6 +38,9 @@ export const config = (_sys: ZovaSys) => {
       },
     } as IOpenapiOptionsResourceMeta,
     resourceMeta: {} as IOpenapiOptionsResourceMeta,
-    bootstrapApi: '/api/openapischema/resource/bootstrap/:resource',
+    api: {
+      bootstrap: '/api/openapischema/resource/bootstrap/:resource',
+      permissions: '/api/home/base/permission/:resource',
+    },
   };
 };
