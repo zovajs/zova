@@ -61,12 +61,13 @@ export class ModelSdk extends BeanModelBase {
       queryKey: ['permissions', resource],
       queryFn: async () => {
         const resourceMeta = this.getBootstrap(resource);
-        const permissions = resourceMeta.data?.resourceMeta.permissions;
+        let permissions = resourceMeta.data?.resourceMeta.permissions;
         if (!isNil(permissions)) return permissions ?? null;
-        return await this.$fetch.get(
+        permissions = await this.$fetch.get(
           this.sys.util.apiActionPathTranslate(this.scope.config.api.permissions, { resource }),
           this.sys.util.apiActionConfigPrepare(),
         ) as TypeOpenapiPermissions;
+        return permissions ?? null;
       },
     });
   }
