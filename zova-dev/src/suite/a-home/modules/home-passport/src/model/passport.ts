@@ -133,7 +133,7 @@ export class ModelPassport extends BeanModelBase {
   private _setJwt(jwt?: ApiApiHomeUserPassportloginResponseBody['jwt']) {
     if (jwt) {
       this.jwt = jwt;
-      this.expireTime = Date.now() + (jwt.expiresIn - this.scope.config.passport.accessToken.expireTimeDelay) * 1000;
+      this.expireTime = Date.now() + (jwt.expiresIn - this.scope.config.accessToken.expireTimeDelay) * 1000;
       this.accessToken = jwt.accessToken;
     } else {
       this.jwt = undefined;

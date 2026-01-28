@@ -34,8 +34,15 @@ declare module 'zova' {
   }
 }
 /** model: end */
+/** config: begin */
+export * from '../config/config.js';
+import { config } from '../config/config.js';
+/** config: end */
+/** monkey: begin */
+export * from '../monkey.js';
+/** monkey: end */
 /** scope: begin */
-import { BeanScopeBase, type BeanScopeUtil } from 'zova';
+import { BeanScopeBase, type BeanScopeUtil, TypeModuleConfig } from 'zova';
 import { Scope } from 'zova-module-a-bean';
 
 @Scope()
@@ -43,6 +50,7 @@ export class ScopeModuleHomePassport extends BeanScopeBase {}
 
 export interface ScopeModuleHomePassport {
   util: BeanScopeUtil;
+config: TypeModuleConfig<typeof config>;
 }
 
 import 'zova';
@@ -51,7 +59,9 @@ declare module 'zova' {
     'home-passport': ScopeModuleHomePassport;
   }
   
-  
+  export interface IBeanScopeConfig {
+    'home-passport': ReturnType<typeof config>;
+  }
 
   
 
