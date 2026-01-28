@@ -3,10 +3,9 @@ import { cast, ILocaleRecord, TypeEventOff, Use, usePrepareArg } from 'zova';
 import { BeanModelBase, IDecoratorModelOptions, Model } from 'zova-module-a-model';
 import { SysSdk } from '../bean/sys.sdk.js';
 import { getSchemaOfRequestBody, getSchemaOfRequestQuery, getSchemaOfRequestQueryFilter, getSchemaOfResponseBody, schemaToZodSchema } from '../lib/schema.js';
-import { IOpenapiPermissions } from '../types/permissions.js';
+import { TypeOpenapiPermissions } from '../types/resourceMeta.js';
 import { IOpenapiSchemas, TypeOpenapiSchemasSdk } from '../types/schema.js';
 import { TypeRequestMethod } from '../types/sdk.js';
-import { TypeOpenapiPermissions } from '../types/resourceMeta.js';
 
 const __schemaRefPrefix = '#/components/schemas/';
 
