@@ -125,7 +125,7 @@ export class SysModule extends BeanSimple {
       return module.info.capabilities?.[capabilityName];
     });
     if (moduleNames.length > 0) {
-      this.sys.meta.logger.child('module', 'default').debug(`sys modules: ${capabilityName}: ${moduleNames.join(',')}`);
+      this.sys.meta.logger.child('module', 'default').debug(`modules ${capabilityName}: ${moduleNames.join(',')}`);
     }
     for (const moduleName of moduleNames) {
       const module = this.modulesMeta.modules[moduleName];

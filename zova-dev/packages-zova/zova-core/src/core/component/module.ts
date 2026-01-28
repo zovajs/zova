@@ -76,9 +76,9 @@ export class AppModule extends BeanSimple {
       const module = this.sys.meta.module.modulesMeta.modules[moduleName];
       return module.info.capabilities?.[capabilityName];
     });
-    if (moduleNames.length > 0) {
-      this.sys.meta.logger.child('module', 'default').debug(`app modules: ${capabilityName}: ${moduleNames.join(',')}`);
-    }
+    // if (moduleNames.length > 0) {
+    //   this.sys.meta.logger.child('module', 'default').debug(`app modules: ${capabilityName}: ${moduleNames.join(',')}`);
+    // }
     for (const moduleName of moduleNames) {
       const module = this.sys.meta.module.modulesMeta.modules[moduleName];
       await this._install(moduleName, module);
