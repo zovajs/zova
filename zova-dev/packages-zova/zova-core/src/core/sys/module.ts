@@ -120,11 +120,16 @@ export class SysModule extends BeanSimple {
   }
 
   private async _requireAllSpecifics(capabilityName: 'preload' | 'monkey' | 'sync') {
-    for (const moduleName of this.modulesMeta.moduleNames) {
+    const moduleNames = this.modulesMeta.moduleNames.filter(moduleName => {
       const module = this.modulesMeta.modules[moduleName];
-      if (module.info.capabilities?.[capabilityName]) {
-        await this._install(moduleName, module);
-      }
+      return module.info.capabilities?.[capabilityName];
+    });
+    if (moduleNames.length > 0) {
+      this.sys.meta.logger.child('module', 'default').debug(`sys modules: ${capabilityName}: ${moduleNames.join(',')}`);
+    }
+    for (const moduleName of moduleNames) {
+      const module = this.modulesMeta.modules[moduleName];
+      await this._install(moduleName, module);
     }
   }
 
