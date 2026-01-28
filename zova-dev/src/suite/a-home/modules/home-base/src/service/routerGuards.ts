@@ -1,26 +1,21 @@
 import type { BeanRouter } from 'zova-module-a-router';
 import { catchError } from '@cabloy/utils';
-import { Use } from 'zova';
 import { Service } from 'zova-module-a-bean';
 import { BeanRouterGuardsBase } from 'zova-module-a-router';
-import { ModelPassport } from 'zova-module-home-user';
 
 @Service()
 export class ServiceRouterGuards extends BeanRouterGuardsBase {
-  @Use()
-  $$modelPassport: ModelPassport;
-
   protected onRouterGuards(router: BeanRouter) {
     router.beforeEach(async to => {
-      if (to.meta.requiresAuth !== false && !this.$$modelPassport.isAuthenticated) {
+      if (to.meta.requiresAuth !== false && !this.$passport.isAuthenticated) {
         const [_res, err] = await catchError(() => {
-          return this.$$modelPassport.ensurePassport();
+          return this.$passport.ensurePassport();
         });
         if (err) {
           this.$errorHandler(err, 'onRouterGuards');
           return false;
         }
-        if (!this.$$modelPassport.isAuthenticated) {
+        if (!this.$passport.isAuthenticated) {
           this.app.$gotoLogin(to.fullPath);
           return false;
         }

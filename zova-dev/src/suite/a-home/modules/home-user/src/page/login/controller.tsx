@@ -1,15 +1,11 @@
-import { BeanControllerPageBase, Use } from 'zova';
+import { BeanControllerPageBase } from 'zova';
 import { Controller } from 'zova-module-a-bean';
 import { TypeFormOnSubmitData } from 'zova-module-a-form';
 import { $QueryAutoLoad } from 'zova-module-a-model';
 import { ApiApiHomeUserPassportloginRequestBody } from 'zova-module-home-api';
-import { ModelPassport } from '../../model/passport.js';
 
 @Controller()
 export class ControllerPageLogin extends BeanControllerPageBase {
-  @Use()
-  $$modelPassport: ModelPassport;
-
   user: ApiApiHomeUserPassportloginRequestBody = {
     username: process.env.DEV ? 'admin' : '',
     password: process.env.DEV ? '123456' : '',
@@ -20,14 +16,14 @@ export class ControllerPageLogin extends BeanControllerPageBase {
   };
 
   protected async __init__() {
-    await $QueryAutoLoad(() => this.$$modelPassport.apiSchemasLogin.sdk);
+    await $QueryAutoLoad(() => this.$passport.apiSchemasLogin.sdk);
   }
 
   get schema() {
-    return this.$$modelPassport.schemaLogin;
+    return this.$passport.schemaLogin;
   }
 
   async onSubmitLogin(data: TypeFormOnSubmitData<ApiApiHomeUserPassportloginRequestBody>) {
-    await this.$$modelPassport.login().mutateAsync(data.value);
+    await this.$passport.login().mutateAsync(data.value);
   }
 }
