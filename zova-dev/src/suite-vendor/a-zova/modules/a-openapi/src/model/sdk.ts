@@ -66,7 +66,7 @@ export class ModelSdk extends BeanModelBase {
         return await this.$fetch.get(
           this.sys.util.apiActionPathTranslate(this.scope.config.api.permissions, { resource }),
           this.sys.util.apiActionConfigPrepare(),
-        ) as TypeOpenapiPermissions; ;
+        ) as TypeOpenapiPermissions;
       },
     });
   }
