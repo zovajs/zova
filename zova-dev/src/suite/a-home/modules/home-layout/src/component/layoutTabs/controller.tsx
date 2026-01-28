@@ -2,7 +2,6 @@ import type { ModelTabs, ModelTabsOptions } from 'zova-module-a-routertabs';
 import { BeanControllerBase, Use } from 'zova';
 import { Controller } from 'zova-module-a-bean';
 import { $QueryAutoLoad } from 'zova-module-a-model';
-import { ModelPassport } from 'zova-module-home-user';
 import { ModelMenu } from '../../model/menu.js';
 
 export interface ControllerLayoutTabsProps {}
@@ -16,15 +15,12 @@ export class ControllerLayoutTabs extends BeanControllerBase {
   @Use()
   $$modelMenu: ModelMenu;
 
-  @Use()
-  $$modelPassport: ModelPassport;
-
   leftDrawerOpen: boolean = false;
 
   protected async __init__() {
     // passport
     if (process.env.SERVER) {
-      await this.$$modelPassport.ensurePassport();
+      await this.$passport.ensurePassport();
     }
     // menu
     await $QueryAutoLoad(() => this.$$modelMenu.retrieveMenus());
