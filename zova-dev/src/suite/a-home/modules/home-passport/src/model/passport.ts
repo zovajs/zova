@@ -1,8 +1,10 @@
 import type { IJwtInfo } from 'zova-module-a-interceptor';
 import type { IDecoratorModelOptions } from 'zova-module-a-model';
 import type { ApiApiHomeUserPassportloginRequestBody, ApiApiHomeUserPassportloginResponseBody } from 'zova-module-home-api';
+import { isNil } from '@cabloy/utils';
 import { SchemaObject } from 'openapi3-ts/oas31';
 import { BeanModelBase, Model } from 'zova-module-a-model';
+import { TypeOpenapiPermissions } from 'zova-module-a-openapi';
 
 export interface IModelOptionsPassport extends IDecoratorModelOptions {}
 
@@ -73,6 +75,10 @@ export class ModelPassport extends BeanModelBase {
     return this.passport?.user;
   }
 
+  get roles() {
+    return this.passport?.roles;
+  }
+
   async getJwtInfo(): Promise<IJwtInfo | undefined> {
     if (!this.accessToken) return undefined;
     return {
@@ -140,5 +146,19 @@ export class ModelPassport extends BeanModelBase {
       this.expireTime = undefined;
       this.accessToken = undefined;
     }
+  }
+
+  public checkPermission(permissions: TypeOpenapiPermissions | undefined, actionName: string): boolean {
+    if (isNil(permissions)) return false;
+    if (permissions === false) return false;
+    if (permissions === true) return true;
+    // roleIds
+    if (permissions.roleIds && permissions.roleIds.some(roleId => this.roles?.some(role => role.id === roleId))) return true;
+    // roleNames
+    if (permissions.roleNames && permissions.roleNames.some(roleName => this.roles?.some(role => role.name === roleName))) return true;
+    // actions
+    if (permissions.actions && !!permissions.actions[actionName]) return true;
+    // others
+    return false;
   }
 }

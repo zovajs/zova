@@ -61,7 +61,9 @@ export class ControllerRestPage<TData extends {} = {}> extends BeanControllerTab
 
   async getColumns(next: TypeTableGetColumnsNext<TData>, $$table: ControllerTable<TData>) {
     const columns = await next();
-    if (!this.permissions?.row?.update && !this.permissions?.row?.delete) return columns;
+    const permissionUpdate = this.$passport.checkPermission(this.permissions, 'update');
+    const permissionDelete = this.$passport.checkPermission(this.permissions, 'delete');
+    if (!permissionUpdate && !permissionDelete) return columns;
     const columnHelper = createColumnHelper<TData>();
     const id = 'actions';
     const columnRender = await $$table.createColumnRender(id, 'actionOperationsRow');
