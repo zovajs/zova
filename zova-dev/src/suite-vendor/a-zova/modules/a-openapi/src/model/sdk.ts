@@ -1,6 +1,6 @@
 import { isNil } from '@cabloy/utils';
 import { cast, ILocaleRecord, TypeEventOff, Use, usePrepareArg } from 'zova';
-import { BeanModelBase, IDecoratorModelOptions, Model } from 'zova-module-a-model';
+import { $QueryAutoLoad, BeanModelBase, IDecoratorModelOptions, Model } from 'zova-module-a-model';
 import { SysSdk } from '../bean/sys.sdk.js';
 import { getSchemaOfRequestBody, getSchemaOfRequestQuery, getSchemaOfRequestQueryFilter, getSchemaOfResponseBody, schemaToZodSchema } from '../lib/schema.js';
 import { TypeOpenapiPermissions } from '../types/resourceMeta.js';
@@ -50,7 +50,11 @@ export class ModelSdk extends BeanModelBase {
       queryFn: async () => {
         const bootstrap = await this.$$sysSdk.loadBootstrap(this.$fetch, resource);
         if (!bootstrap) throw new Error('load bootstrap error');
-        await this.$refetchQueries({ queryKey: ['permissions', resource] });
+        if (process.env.SERVER) {
+          await $QueryAutoLoad(() => this.getPermissions(resource));
+        } else {
+          await this.$refetchQueries({ queryKey: ['permissions', resource] });
+        }
         return bootstrap ?? null;
       },
     });
@@ -81,11 +85,11 @@ export class ModelSdk extends BeanModelBase {
         const sdk = await this.$$sysSdk.loadSdk(this.$fetch, api, apiMethod);
         if (!sdk) throw new Error('load sdk error');
         for (const schemaName of sdk.schemas) {
-          // if (process.env.SERVER) {
-          //   await $QueryAutoLoad(() => this.getSchema(schemaName));
-          // } else {
-          await this.$refetchQueries({ queryKey: ['schema', schemaName] });
-          // }
+          if (process.env.SERVER) {
+            await $QueryAutoLoad(() => this.getSchema(schemaName));
+          } else {
+            await this.$refetchQueries({ queryKey: ['schema', schemaName] });
+          }
         }
         return sdk;
       },
