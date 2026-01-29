@@ -1,6 +1,6 @@
 import type { AxiosInstance } from 'axios';
 import type { IBeanFetchOptions } from '../types/interceptor.js';
-import axios from 'axios';
+import axios, { Axios } from 'axios';
 import { markRaw } from 'vue';
 import { BeanBase, deepExtend } from 'zova';
 import { Bean } from 'zova-module-a-bean';
@@ -17,6 +17,7 @@ export class BeanFetch extends BeanBase {
   protected [SymbolFetch]: AxiosInstance;
 
   protected async __init__(options?: IBeanFetchOptions) {
+    patchAxios(Axios);
     // axiosConfig
     const axiosConfig = deepExtend(
       {},
@@ -41,10 +42,10 @@ export class BeanFetch extends BeanBase {
       async config => {
         return await this._composer.executeRequest(config);
       },
-      async _error => {
-        const error = await this._composer.executeRequestError(_error);
-        if (error instanceof Error) return Promise.reject(error);
-        return error;
+      async (_error: any) => {
+        if (!(_error instanceof Error)) return Promise.reject(_error);
+        const error = await this._composer.executeRequestError(_error as any);
+        return Promise.reject(error);
       },
     );
     // response
@@ -53,11 +54,24 @@ export class BeanFetch extends BeanBase {
         return await this._composer.executeResponse(response);
       },
       async (_error: any) => {
-        if (!(_error instanceof Error)) return _error;
+        if (!(_error instanceof Error)) return Promise.reject(_error);
         const error = await this._composer.executeResponseError(_error as any);
-        if (error instanceof Error) return Promise.reject(error);
-        return error;
+        return Promise.reject(error);
       },
     );
   }
+}
+
+function patchAxios(_Axios: any) {
+  if (_Axios.__requestPatched) return;
+  _Axios.__requestPatched = true;
+  const requestPrev: Function = _Axios.prototype.request;
+  _Axios.prototype.request = async function (...args: any[]) {
+    try {
+      return await requestPrev.call(this, ...args);
+    } catch (err) {
+      if (err instanceof Error) throw err;
+      return err;
+    }
+  };
 }
