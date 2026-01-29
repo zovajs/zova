@@ -24,7 +24,7 @@ export class SysSdk extends BeanBase {
     this.sdks = shallowReactive({});
     // event
     if (this.sys.env.SSR_HMR === 'true') {
-      this._eventSsrHmrReload = this.sys.meta.event.on('a-ssrhmr:reloadSysSdk', async (_data, next) => {
+      this._eventSsrHmrReload = this.sys.meta.event.on('a-ssrhmr:reload', async (_data, next) => {
         await this.reload();
         return next();
       });

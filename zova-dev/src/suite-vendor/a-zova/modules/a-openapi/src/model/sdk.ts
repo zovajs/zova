@@ -30,7 +30,7 @@ export class ModelSdk extends BeanModelBase {
     await super.__init__(locale);
     // event
     if (process.env.CLIENT && this.sys.env.SSR_HMR === 'true') {
-      this._eventSsrHmrReload = this.sys.meta.event.on('a-ssrhmr:reloadModelSdk', async (_data, next) => {
+      this._eventSsrHmrReload = this.sys.meta.event.on('a-ssrhmr:reload', async (_data, next) => {
         await this.$refetchQueries({ queryKey: ['bootstrap'] });
         await this.$refetchQueries({ queryKey: ['sdk'] });
         return next();

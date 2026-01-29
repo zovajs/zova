@@ -47,7 +47,6 @@ export class MonkeySys extends BeanSimple implements IMonkeySysReady, IMonkeySys
   }
 
   private async _reloadInner() {
-    await this.sys.meta.event.emit('a-ssrhmr:reloadSysSdk');
-    await this.sys.meta.event.emit('a-ssrhmr:reloadModelSdk');
+    await this.sys.meta.event.emit('a-ssrhmr:reload');
   }
 }
