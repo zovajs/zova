@@ -1,6 +1,6 @@
 import type { IDecoratorModelOptions } from 'zova-module-a-model';
 import type { ApiSchemaAMenuDtoMenuGroup, ApiSchemaAMenuDtoMenuItem, ApiSchemaAMenuDtoMenus } from 'zova-module-home-api';
-import { useComputed } from 'zova-core';
+import { TypeEventOff, useComputed } from 'zova';
 import { BeanModelBase, Model } from 'zova-module-a-model';
 
 export type TypeMenuGroup = ApiSchemaAMenuDtoMenuGroup & { folder: true; children: TypeMenuItem[] };
@@ -12,6 +12,7 @@ export interface IModelOptionsMenu extends IDecoratorModelOptions {}
 @Model<IModelOptionsMenu>()
 export class ModelMenu extends BeanModelBase {
   menuTree?: TypeMenuTree;
+  private _eventSsrHmrReload: TypeEventOff;
 
   protected async __init__() {
     this.menuTree = useComputed(() => {
@@ -19,6 +20,19 @@ export class ModelMenu extends BeanModelBase {
       if (!queryMenus.data) return;
       return this._prepareMenuTree(queryMenus.data);
     });
+    // event
+    if (process.env.CLIENT && this.sys.env.SSR_HMR === 'true') {
+      this._eventSsrHmrReload = this.sys.meta.event.on('a-ssrhmr:reload', async (_data, next) => {
+        await this.$refetchQueries({ queryKey: ['retrieveMenus'] });
+        return next();
+      });
+    }
+  }
+
+  protected __dispose__() {
+    if (this._eventSsrHmrReload) {
+      this._eventSsrHmrReload();
+    }
   }
 
   retrieveMenus() {
