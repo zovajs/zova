@@ -29,8 +29,8 @@ export class ModelStack extends BeanModelBase {
       return this._getKeepAliveInclude();
     });
     // first route
-    if (this.$pageRoute) {
-      this.forwardRoute(this.$pageRoute);
+    if (this.$currentRoute) {
+      this.forwardRoute(this.$currentRoute);
     }
   }
 
