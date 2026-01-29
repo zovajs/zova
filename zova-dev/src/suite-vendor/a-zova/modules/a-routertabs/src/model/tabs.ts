@@ -133,6 +133,19 @@ export class ModelTabs extends BeanModelBase {
     return true;
   }
 
+  updateTabInfo(tabKey?: string) {
+    if (!tabKey) return;
+    // tabs
+    const [index, tabOld] = this.findTab(tabKey);
+    if (index === -1) return;
+    // tabInfo
+    const tabInfo = this.tabsOptions.getTabInfo?.(tabKey) ?? tabOld?.info;
+    if (!tabInfo) return;
+    // update
+    const tabNew = { ...tabOld, info: tabInfo };
+    this.updateTab(tabNew);
+  }
+
   async deleteTab(tabKey?: string, noActiveNext?: boolean) {
     if (!tabKey) return;
     // tabs
