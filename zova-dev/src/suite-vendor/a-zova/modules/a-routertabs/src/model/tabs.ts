@@ -1,7 +1,7 @@
 import type { IDecoratorModelOptions, UseQueryOptions } from 'zova-module-a-model';
 import { RouteLocationNormalizedLoaded, RouteLocationNormalizedLoadedGeneric } from '@cabloy/vue-router';
 import { mutate } from 'mutate-on-copy';
-import { deepExtend, TypeEventOff, useComputed } from 'zova';
+import { deepEqual, deepExtend, TypeEventOff, useComputed } from 'zova';
 import { BeanModelBase, Model } from 'zova-module-a-model';
 import { IRouteViewRouteItem, IRouteViewRouteMeta } from 'zova-module-a-router';
 import { ModelTabsOptions, ModelTabsOptionsBase, RouteTab, RouteTabTransient } from '../types/tabs.js';
@@ -136,6 +136,10 @@ export class ModelTabs extends BeanModelBase {
       // need not await
       this.pruneTabs();
     } else {
+      // update tabInfo
+      if (!deepEqual(tabInfo, tabOld?.info)) {
+        this.updateTabInfo(tabKey);
+      }
       // update
       if (!this._checkIfTabNeedUpdate(tabOld!, tab)) {
         return true;
