@@ -69,7 +69,7 @@ export class RenderPageLogin extends BeanRenderBase {
         >
         </ZFormField>
         <ZFormField name="password" class="grow" inputType="password" iconPrefix=":daisy:lock"></ZFormField>
-        <ZFormFieldCaptcha name="captcha" scene="a-captchasimple:simple"></ZFormFieldCaptcha>
+        <ZFormFieldCaptcha name="captcha" captcha={{ scene: 'a-captchasimple:simple' }}></ZFormFieldCaptcha>
         <ZFormSubscribe slotDefault={$$form => {
           return (
             <button disabled={$$form.formState.isSubmitting} type="submit" class="btn mt-2 w-full btn-primary">

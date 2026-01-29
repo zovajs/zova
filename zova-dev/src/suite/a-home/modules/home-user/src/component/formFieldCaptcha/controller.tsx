@@ -6,8 +6,12 @@ import { ZFormField } from 'zova-module-a-form';
 import { ToolV } from 'zova-module-a-zod';
 import { ApiSchemaACaptchaDtoCaptchaData } from 'zova-module-home-api';
 
-export interface ControllerFormFieldCaptchaProps extends IFormFieldOptions {
+export interface ICaptchaOptions {
   scene: string;
+}
+
+export interface ControllerFormFieldCaptchaProps extends IFormFieldOptions {
+  captcha: ICaptchaOptions;
 }
 
 @Controller()
@@ -51,7 +55,7 @@ export class ControllerFormFieldCaptcha extends BeanControllerBase {
 
   private async createCaptchaData() {
     this.captchaData = await this.$api.captcha.create({
-      scene: this.$props.scene,
+      scene: this.$props.captcha.scene,
     }, { authToken: false });
     this.setFieldCaptchaData();
   }
@@ -59,7 +63,7 @@ export class ControllerFormFieldCaptcha extends BeanControllerBase {
   private async refreshCaptchaData() {
     this.captchaData = await this.$api.captcha.refresh({
       id: this.captchaData!.id,
-      scene: this.$props.scene,
+      scene: this.$props.captcha.scene,
     }, { authToken: false });
     this.setFieldCaptchaData();
   }
