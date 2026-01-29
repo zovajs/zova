@@ -1,6 +1,7 @@
 import { classes } from 'typestyle';
 import { BeanRenderBase } from 'zova';
 import { Render } from 'zova-module-a-bean';
+import { $locale } from '../../.metadata/locales.js';
 
 @Render()
 export class RenderRestPageEntry<TData extends {} = {}> extends BeanRenderBase {
@@ -55,6 +56,9 @@ export class RenderRestPageEntry<TData extends {} = {}> extends BeanRenderBase {
   public render() {
     const toolbarPosition = this.$props.toolbarPosition;
     const domToolbar = this._renderToolbar();
+    if (!this.formData) {
+      return <div>{$locale('EntryNotExist')}</div>;
+    }
     return (
       <div>
         {toolbarPosition === 'top' && domToolbar}

@@ -8,4 +8,5 @@ export default {
   TableActions: 'Actions',
   PagedTotalItems: 'Total',
   PagedTotalPages: 'Pages',
+  EntryNotExist: 'The entry does not exist',
 };
