@@ -27,7 +27,7 @@ export class InterceptorBody
       throw error;
     }
     // return data
-    return response.data.data;
+    return response.data.data ?? null;
   }
 
   async onResponseError(

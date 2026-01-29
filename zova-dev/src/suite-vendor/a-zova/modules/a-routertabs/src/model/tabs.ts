@@ -1,7 +1,7 @@
 import type { IDecoratorModelOptions, UseQueryOptions } from 'zova-module-a-model';
 import { RouteLocationNormalizedLoaded, RouteLocationNormalizedLoadedGeneric } from '@cabloy/vue-router';
 import { mutate } from 'mutate-on-copy';
-import { deepExtend, useComputed } from 'zova';
+import { deepExtend, TypeEventOff, useComputed } from 'zova';
 import { BeanModelBase, Model } from 'zova-module-a-model';
 import { IRouteViewRouteItem, IRouteViewRouteMeta } from 'zova-module-a-router';
 import { ModelTabsOptions, ModelTabsOptionsBase, RouteTab, RouteTabTransient } from '../types/tabs.js';
@@ -21,6 +21,7 @@ export class ModelTabs extends BeanModelBase {
   tabCurrentIndex: number;
   tabCurrent?: RouteTab;
   keepAliveInclude: string[];
+  private _eventSsrHmrReload: TypeEventOff;
 
   protected async __init__(scene: string, options?: ModelTabsOptions) {
     await super.__init__(scene);
@@ -68,6 +69,19 @@ export class ModelTabs extends BeanModelBase {
     // first route
     if (this.$pageRoute) {
       this.forwardRoute(this.$pageRoute);
+    }
+    // event
+    if (process.env.CLIENT && this.sys.env.SSR_HMR === 'true') {
+      this._eventSsrHmrReload = this.sys.meta.event.on('a-ssrhmr:reload', async (_data, next) => {
+        this.updateAllTabInfos();
+        return next();
+      });
+    }
+  }
+
+  protected __dispose__() {
+    if (this._eventSsrHmrReload) {
+      this._eventSsrHmrReload();
     }
   }
 
@@ -131,6 +145,12 @@ export class ModelTabs extends BeanModelBase {
       this.pruneTabItems(tabKey);
     }
     return true;
+  }
+
+  updateAllTabInfos() {
+    for (const tab of this.tabs) {
+      this.updateTabInfo(tab.tabKey);
+    }
   }
 
   updateTabInfo(tabKey?: string) {
@@ -231,6 +251,7 @@ export class ModelTabs extends BeanModelBase {
     }
     const tabNew: RouteTab = {
       ...tabOld,
+      ...tab,
       tabKey,
       items,
       updatedAt: Date.now(),
