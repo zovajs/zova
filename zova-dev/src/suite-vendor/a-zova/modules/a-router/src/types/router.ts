@@ -44,6 +44,7 @@ declare module 'zova' {
     $router: BeanRouter;
     $routerView: BeanRouterViewBase;
     $pageRoute: RouteLocationNormalizedLoadedGeneric | undefined;
+    $currentRoute: RouteLocationNormalizedLoadedGeneric | undefined;
   }
 
   export interface IModuleResource {

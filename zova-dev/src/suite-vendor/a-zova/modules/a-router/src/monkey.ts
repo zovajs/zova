@@ -19,7 +19,7 @@ import * as ModuleInfo from '@cabloy/module-info';
 import { shallowReactive } from 'vue';
 import { BeanControllerPageBase, BeanSimple, cast } from 'zova';
 import { routerViewKey } from './lib/const.js';
-import { getPageRoute, getRealRouteName, getRouteMatched } from './lib/utils.js';
+import { getCurrentRoute, getPageRoute, getRealRouteName, getRouteMatched } from './lib/utils.js';
 import { ServiceRouterGuards } from './service/routerGuards.js';
 import { SymbolRouterHistory } from './types/utils.js';
 
@@ -100,6 +100,13 @@ export class Monkey
       configurable: true,
       get() {
         return getPageRoute(cast(bean).ctx);
+      },
+    });
+    Object.defineProperty(beanInstance, '$currentRoute', {
+      enumerable: false,
+      configurable: true,
+      get() {
+        return getCurrentRoute(cast(bean).ctx);
       },
     });
   }

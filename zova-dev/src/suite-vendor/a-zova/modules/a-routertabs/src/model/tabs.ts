@@ -44,11 +44,12 @@ export class ModelTabs extends BeanModelBase {
     const queryOptionsTabCurrentKey: UseQueryOptions<string> = {
       queryKey: ['tabCurrentKey'],
     };
-    if (this.tabsOptions.cache) {
-      this.tabCurrentKey = this.$useStateDb(queryOptionsTabCurrentKey);
-    } else {
-      this.tabCurrentKey = this.$useStateMem(queryOptionsTabCurrentKey);
-    }
+    this.tabCurrentKey = this.$useStateMem(queryOptionsTabCurrentKey);
+    // if (this.tabsOptions.cache) {
+    //   this.tabCurrentKey = this.$useStateDb(queryOptionsTabCurrentKey);
+    // } else {
+    //   this.tabCurrentKey = this.$useStateMem(queryOptionsTabCurrentKey);
+    // }
     // tabs
     const queryOptionsTabs: UseQueryOptions<RouteTab[]> = {
       queryKey: ['tabs'],
@@ -63,12 +64,12 @@ export class ModelTabs extends BeanModelBase {
     }
     // load cache
     if (this.tabsOptions.cache) {
-      await this.$loadStateDb(this.tabCurrentKey);
+      // await this.$loadStateDb(this.tabCurrentKey);
       await this.$loadStateDb(this.tabs);
     }
     // first route
-    if (this.$pageRoute) {
-      this.forwardRoute(this.$pageRoute);
+    if (this.$currentRoute) {
+      this.forwardRoute(this.$currentRoute);
     }
     // event
     if (process.env.CLIENT && this.sys.env.SSR_HMR === 'true') {
