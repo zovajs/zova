@@ -1,9 +1,12 @@
 {
   "extends": "./tsconfig.base.esm",
   "compilerOptions": {
-    "noEmit": true,
     "paths": {
       "@/*": ["./src/legacy/*"]
-    }
+    },
+    "allowImportingTsExtensions": false,
+    "noEmit": true,
+    "rewriteRelativeImportExtensions": false,
+    "verbatimModuleSyntax": false
   }
 }
