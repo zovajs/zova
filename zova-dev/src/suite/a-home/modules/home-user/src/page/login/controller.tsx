@@ -20,7 +20,6 @@ export class ControllerPageLogin extends BeanControllerPageBase {
   }
 
   get schema() {
-    console.log(this.$passport.schemaLogin?.properties)
     return this.$passport.schemaLogin;
   }
 
