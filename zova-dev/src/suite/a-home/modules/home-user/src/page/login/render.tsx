@@ -1,6 +1,7 @@
 import { BeanRenderBase } from 'zova';
 import { Render } from 'zova-module-a-bean';
 import { ZForm, ZFormField, ZFormSubscribe } from 'zova-module-a-form';
+import { ZFormFieldCaptcha } from 'zova-module-devui-form';
 
 @Render()
 export class RenderPageLogin extends BeanRenderBase {
@@ -68,7 +69,7 @@ export class RenderPageLogin extends BeanRenderBase {
         >
         </ZFormField>
         <ZFormField name="password" class="grow" inputType="password" iconPrefix=":daisy:lock"></ZFormField>
-        <ZFormField name="captcha"></ZFormField>
+        <ZFormFieldCaptcha name="captcha"></ZFormFieldCaptcha>
         <ZFormSubscribe slotDefault={$$form => {
           return (
             <button disabled={$$form.formState.isSubmitting} type="submit" class="btn mt-2 w-full btn-primary">
