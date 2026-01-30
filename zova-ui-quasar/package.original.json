@@ -1,30 +1,43 @@
 {
   "name": "zova-ui-quasar",
   "version": "5.0.356",
-  "packageManager": "pnpm@10.19.0",
   "description": "A vue3 quasar framework with ioc",
   "publishConfig": {
     "access": "public"
   },
   "author": "zhennann <zhen.nann@icloud.com>",
   "type": "module",
+  "packageManager": "pnpm@10.19.0",
   "scripts": {
+    "init": "pnpm install --no-frozen-lockfile && npm run zova :tools:deps && pnpm install --no-frozen-lockfile",
+    "zova": "node ../zova-cli/cli/src/bin/zova.ts",
     "dev": "npm run dev:ssr:admin",
     "build": "npm run build:ssr:admin",
-    "preview": "npm run preview:ssr",
+    "preview": "npm run preview:ssr:admin",
     "dev:ssr:admin": "npm run prerun && quasar dev --mode ssr --flavor admin",
     "dev:ssr:front": "npm run prerun && quasar dev --mode ssr --flavor front",
+    "dev:ssr:vonaHome": "npm run prerun && quasar dev --mode ssr --flavor vonaHome",
     "build:ssr:admin": "npm run prerun && quasar build --mode ssr --flavor admin",
     "build:ssr:front": "npm run prerun && quasar build --mode ssr --flavor front",
-    "preview:ssr": "concurrently \"node ./dist-mock/index.js\" \"node ./dist/ssr/index.js\"",
+    "build:ssr:vonaHome": "npm run prerun && quasar build --mode ssr --flavor vonaHome",
+    "build:rest:vonaHome": "npm run prerun && npm run zova :bin:buildRest -- --flavor vonaHome",
+    "preview:ssr:admin": "concurrently \"node ./dist-mock/index.js\" \"node ./dist/ssr-admin/index.js\"",
+    "preview:ssr:front": "concurrently \"node ./dist-mock/index.js\" \"node ./dist/ssr-front/index.js\"",
+    "preview:ssr:vonaHome": "concurrently \"node ./dist-mock/index.js\" \"node ./dist/ssr-vonaHome/index.js\"",
     "dev:spa": "npm run prerun && quasar dev --mode spa --flavor admin",
+    "dev:spa:vonaHome": "npm run prerun && quasar dev --mode spa --flavor vonaHome",
     "build:spa": "npm run prerun && quasar build --mode spa --flavor admin",
-    "preview:spa": "vite preview --outDir=dist/spa",
-    "prerun": "zova :tools:deps && npm run tsc",
+    "preview:spa": "vite preview --outDir=dist/spa-admin",
+    "prerun": "npm run zova :tools:deps && npm run tsc",
     "tsc": "vue-tsc --noEmit --project tsconfig.vue-tsc.json",
-    "lint": "eslint . --fix --ignore-path .gitignore"
+    "lint": "eslint",
+    "lint:fix": "eslint --fix"
   },
-  "keywords": ["vue3", "ioc", "zova"],
+  "keywords": [
+    "vue3",
+    "ioc",
+    "zova"
+  ],
   "repository": {
     "type": "git",
     "url": "git+https://github.com/cabloy/zova.git"
@@ -34,15 +47,15 @@
     "url": "https://github.com/cabloy/zova/issues"
   },
   "dependencies": {
-    "@quasar/extras": "^1.16.12",
-    "compression": "^1.7.4",
+    "@quasar/extras": "^1.17.0",
+    "compression": "^1.7.5",
     "connect": "^3.7.0",
     "cors": "^2.8.5",
-    "express": "^4.19.2",
-    "quasar": "^2.18.1",
-    "vue": "^3.5.6",
+    "express": "^4.21.1",
+    "quasar": "^2.18.6",
+    "vue": "^3.5.13",
     "vue-router": "^4.4.5",
-    "zova": "^5.0.237"
+    "zova": "workspace:^"
   },
   "devDependencies": {
     "@cabloy/lint": "^5.0.8",
@@ -52,12 +65,11 @@
     "autoprefixer": "^10.4.20",
     "concurrently": "^8.2.2",
     "eslint": "^9.20.1",
-    "quasar-app-extension-zova": "^1.1.184",
+    "quasar-app-extension-zova": "workspace:^",
     "typescript": "5.7.3",
-    "vue-tsc": "^2.0.29",
+    "vue-tsc": "^2.2.0",
     "zova-openapi": "^1.0.5",
-    "zova-vite": "^1.0.182"
+    "zova-vite": "workspace:^"
   },
-  "license": "MIT",
-  "gitHead": "c90e59abc1bf445154a3fb32856f83783dc0eb39"
+  "license": "MIT"
 }
