@@ -1,0 +1,1 @@
+'/home/base//:catchAll(.*)*': TypePagePathSchema<undefined,undefined>;

@@ -1,5 +1,6 @@
-import { BeanBase, Use } from 'zova';
+import { BeanBase, Use, UseScope } from 'zova';
 import { Meta } from 'zova-module-a-meta';
+import { ScopeModuleASsr } from 'zova-module-a-ssr';
 import { IThemeHandler, IThemeHandlerApplyParams } from 'zova-module-a-style';
 import { ModelTheme } from '../model/theme.js';
 
@@ -8,7 +9,10 @@ export class MetaThemeHandler extends BeanBase implements IThemeHandler {
   @Use()
   $$modelTheme: ModelTheme;
 
-  async apply({ dark, token }: IThemeHandlerApplyParams): Promise<void> {
+  @UseScope()
+  $$scopeSsr: ScopeModuleASsr;
+
+  async apply({ name: _name, dark, token }: IThemeHandlerApplyParams): Promise<void> {
     // data
     const brand = {};
     for (const key in token.color) {
@@ -34,7 +38,7 @@ export class MetaThemeHandler extends BeanBase implements IThemeHandler {
     }
     // server
     if (process.env.SERVER) {
-      if (!this.sys.config.ssr.cookieTheme) {
+      if (!this.$$scopeSsr.config.cookieTheme) {
         const bodyClass = [this.$$modelTheme.cBrand, dark ? 'body--dark' : 'body--light'];
         this.$useMeta({ bodyAttr: { [`data-ssr-theme-dark-${dark}`]: bodyClass.join(',') } });
       } else {

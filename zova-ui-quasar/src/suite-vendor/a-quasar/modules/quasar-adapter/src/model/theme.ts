@@ -1,9 +1,10 @@
-import { Model } from 'zova';
-import { BeanModelBase } from 'zova-module-a-model';
-import { ScopeModule } from '../.metadata/this.js';
+import type { IDecoratorModelOptions } from 'zova-module-a-model';
+import { BeanModelBase, Model } from 'zova-module-a-model';
 
-@Model()
-export class ModelTheme extends BeanModelBase<ScopeModule> {
+export interface IModelOptionsTheme extends IDecoratorModelOptions {}
+
+@Model<IModelOptionsTheme>()
+export class ModelTheme extends BeanModelBase {
   cBrand: string;
 
   protected async __init__() {
