@@ -31,10 +31,13 @@ export class BeanModelUseQuery extends BeanModelQuery {
     const persister = this._createPersister(options.meta?.persister);
     const optionsDefault: any = {};
     if (!cast(options).meta?.disableErrorEffect) {
-      optionsDefault.throwOnError = (error, query) => {
+      optionsDefault.throwOnError = (error: Error, query) => {
         let errorInfo = cast(options).meta?.errorInfo;
         if (typeof errorInfo === 'function') {
           errorInfo = errorInfo(error, query);
+        }
+        if (!error.message.includes('useQuery:')) {
+          error.message = `useQuery: [${queryKey.join(', ')}]: ${error.message}`;
         }
         this.$errorHandler(error, errorInfo ?? 'useQuery');
         return false;
