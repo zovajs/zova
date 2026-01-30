@@ -10,6 +10,7 @@ import { watch, watchEffect, watchPostEffect, watchSyncEffect } from 'vue';
 import { cast } from '../types/utils/cast.js';
 import { useComputed } from '../vueExtra/computed.js';
 import { BeanBaseSimple, SymbolModuleBelong } from './beanBaseSimple.js';
+import { SymbolErrorInstanceInfo } from './resource/index.js';
 import { getVueDecoratorValue } from './vueDecorators/utils.js';
 
 const SymbolText = Symbol('SymbolText');
@@ -93,6 +94,9 @@ export class BeanBase extends BeanBaseSimple {
   }
 
   protected $errorHandler(err: unknown, info?: string): IErrorHandlerEventResult {
+    if (err instanceof Error && err[SymbolErrorInstanceInfo]) {
+      delete err[SymbolErrorInstanceInfo];
+    }
     return this.app?.vue.config.errorHandler!(err, this.ctx.instance as any, info!) as unknown as IErrorHandlerEventResult;
   }
 

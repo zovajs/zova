@@ -42,7 +42,10 @@ export class AppError extends ErrorClass {
 
   private _handleUnhandledError(error: Error, infoDefault: string) {
     if (error instanceof Error) {
-      const errorInfo: IErrorInstanceInfo = error[SymbolErrorInstanceInfo];
+      const errorInfo: IErrorInstanceInfo | undefined = error[SymbolErrorInstanceInfo];
+      if (errorInfo) {
+        delete error[SymbolErrorInstanceInfo];
+      }
       // should not catch error
       this.app.vue.config.errorHandler!(error, errorInfo?.instance as any, errorInfo?.info || infoDefault) as unknown as Error;
     }
