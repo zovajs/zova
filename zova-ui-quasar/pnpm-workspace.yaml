@@ -1,4 +1,6 @@
 packages:
+  - 'packages-zova/*'
+  - 'packages-utils/*'
   - 'src/module/*'
   - 'src/module-vendor/*'
   - 'src/suite/*'
@@ -37,3 +39,6 @@ publicHoistPattern:
   - 'zod'
   - '*quasar*'
   - '*@quasar*'
+
+overrides:
+  "@quasar/app-vite": "npm:@cabloy/quasar-app-vite@^2.4.1"
