@@ -17,7 +17,7 @@ import type { BeanRouter } from './bean/bean.router.js';
 import type { TypePageSchema } from './types/router.js';
 import * as ModuleInfo from '@cabloy/module-info';
 import { shallowReactive } from 'vue';
-import { BeanControllerPageBase, BeanSimple, cast } from 'zova';
+import { BeanControllerPageBase, BeanSimple, cast, useComputed } from 'zova';
 import { routerViewKey } from './lib/const.js';
 import { getCurrentRoute, getPageRoute, getRealRouteName, getRouteMatched } from './lib/utils.js';
 import { ServiceRouterGuards } from './service/routerGuards.js';
@@ -95,11 +95,13 @@ export class Monkey
         return bean._getBeanFromHost({ name: routerViewKey });
       },
     });
-    Object.defineProperty(beanInstance, '$pageRoute', {
+    bean.defineProperty(beanInstance, '$pageRoute', {
       enumerable: false,
       configurable: true,
       get() {
-        return getPageRoute(cast(bean).ctx);
+        return useComputed(() => {
+          return getPageRoute(cast(bean).ctx);
+        });
       },
     });
     Object.defineProperty(beanInstance, '$currentRoute', {

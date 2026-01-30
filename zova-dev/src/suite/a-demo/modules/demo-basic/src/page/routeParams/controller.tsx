@@ -15,6 +15,7 @@ export class ControllerPageRouteParams extends BeanControllerPageBase {
   protected render() {
     return (
       <ZPage>
+        {this.$pageRoute?.fullPath}
         <div class="overflow-x-auto">
           <table class="table">
             <thead>
