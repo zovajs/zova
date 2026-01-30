@@ -2,7 +2,6 @@ import type { NavigationFailure, RouteComponent, RouteLocationMatched, RouteLoca
 import type { z } from 'zod';
 import type { ILayoutRecord, TypeComponentLayoutRecord, ZovaApplication } from 'zova';
 import type { BeanRouter } from '../bean/bean.router.js';
-
 import type { BeanRouterViewBase } from '../lib/routerViewBase.js';
 import type { IGotoPageOptions } from './utils.js';
 import 'vue-router';

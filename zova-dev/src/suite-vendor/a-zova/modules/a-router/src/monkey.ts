@@ -104,11 +104,13 @@ export class Monkey
         });
       },
     });
-    Object.defineProperty(beanInstance, '$currentRoute', {
+    bean.defineProperty(beanInstance, '$currentRoute', {
       enumerable: false,
       configurable: true,
       get() {
-        return getCurrentRoute(cast(bean).ctx);
+        return useComputed(() => {
+          return getCurrentRoute(cast(bean).ctx);
+        });
       },
     });
   }
