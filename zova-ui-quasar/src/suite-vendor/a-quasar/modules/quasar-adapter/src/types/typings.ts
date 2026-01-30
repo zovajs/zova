@@ -1,4 +1,5 @@
 import 'quasar';
+
 declare module 'quasar' {
   export interface QBtnToggleProps {
     // @ts-ignore: ignore
