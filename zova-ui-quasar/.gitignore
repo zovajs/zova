@@ -49,7 +49,7 @@ env/.env*.mine
 /src/front/config/config/config*.mine.ts
 /src/front/typing/modules.d.ts
 **/.metadata/modules.d.ts
-/package.json
+# /package.json
 
 **/*.tsbuildinfo
 
