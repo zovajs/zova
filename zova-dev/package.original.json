@@ -75,7 +75,7 @@
     "sass": "^1.81.0",
     "typescript": "5.7.3",
     "vite": "^7.3.1",
-    "vue-tsc": "^2.2.0",
+    "vue-tsc": "^3.2.4",
     "zova-vite": "workspace:^"
   },
   "license": "MIT"
