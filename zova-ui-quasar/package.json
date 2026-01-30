@@ -55,7 +55,7 @@
     "quasar": "^2.18.1",
     "vue": "^3.5.6",
     "vue-router": "^4.4.5",
-    "zova": "^5.0.237",
+    "zova": "workspace:^",
     "zova-module-a-api": "^5.0.0",
     "zova-module-a-model": "^5.0.37",
     "zova-module-a-pinia": "^5.0.35",
