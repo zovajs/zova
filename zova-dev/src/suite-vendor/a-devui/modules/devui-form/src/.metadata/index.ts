@@ -95,8 +95,11 @@ declare module 'vue/jsx-runtime' {
   }
 }
 /** behaviors: end */
+/** locale: begin */
+import { locales } from './locales.js';
+/** locale: end */
 /** scope: begin */
-import { BeanScopeBase, type BeanScopeUtil } from 'zova';
+import { BeanScopeBase, type BeanScopeUtil, TypeModuleLocales, TypeLocaleBase } from 'zova';
 import { Scope } from 'zova-module-a-bean';
 
 @Scope()
@@ -104,6 +107,7 @@ export class ScopeModuleDevuiForm extends BeanScopeBase {}
 
 export interface ScopeModuleDevuiForm {
   util: BeanScopeUtil;
+locale: TypeModuleLocales<(typeof locales)[TypeLocaleBase]>;
 }
 
 import 'zova';
@@ -114,9 +118,14 @@ declare module 'zova' {
   
   
 
-  
+  export interface IBeanScopeLocale {
+    'devui-form': (typeof locales)[TypeLocaleBase];
+  }
 
   
 }
-  
+
+export function locale<K extends keyof (typeof locales)[TypeLocaleBase]>(key: K): `devui-form::${K}` {
+  return `devui-form::${key}`;
+}  
 /** scope: end */
