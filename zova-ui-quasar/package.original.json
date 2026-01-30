@@ -47,7 +47,7 @@
   "devDependencies": {
     "@cabloy/lint": "^5.0.8",
     "@cabloy/openapi-typescript": "^7.9.2",
-    "@quasar/app-vite": "2.2.0",
+    "@quasar/app-vite": "2.4.0",
     "@types/node": "^22.10.2",
     "autoprefixer": "^10.4.20",
     "concurrently": "^8.2.2",
