@@ -1,7 +1,11 @@
 {
   "extends": "./tsconfig.json",
-  "compilerOptions": {},
+  "compilerOptions": {
+    "allowImportingTsExtensions": true,
+  },
   "exclude": [
+    "**/cli/**",
+    "**/dist/**",
     "./dist",
     "./dist-releases",
     "./dist-mock",
@@ -10,6 +14,8 @@
     "./node_modules",
     "vite.config.ts",
     "./src/boot/app",
-    "./src/boot/main.ts"
+    "./src/boot/main.ts",
+    "./packages-utils",
+    "./packages-zova"
   ]
 }
