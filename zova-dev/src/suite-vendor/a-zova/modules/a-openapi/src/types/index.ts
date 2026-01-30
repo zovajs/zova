@@ -1,5 +1,6 @@
 export * from './action.js';
 export * from './actions.js';
+export * from './captcha.js';
 export * from './database.js';
 export * from './date.js';
 export * from './jsx.js';

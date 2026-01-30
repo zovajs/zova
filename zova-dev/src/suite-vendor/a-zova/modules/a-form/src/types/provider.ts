@@ -12,6 +12,7 @@ export interface IFormProviderComponents {
   formField?: TypeComponentRecordSelectorKeysStrict<'formField'>;
   text?: TypeFormFieldRenderComponentProvider;
   password?: TypeFormFieldRenderComponentProvider;
+  captcha?: TypeFormFieldRenderComponentProvider;
   currency?: TypeFormFieldRenderComponentProvider;
   date?: TypeFormFieldRenderComponentProvider;
   dateRange?: TypeFormFieldRenderComponentProvider;

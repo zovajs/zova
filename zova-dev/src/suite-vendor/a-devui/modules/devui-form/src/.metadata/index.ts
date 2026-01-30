@@ -1,4 +1,46 @@
 /* eslint-disable */
+/** controller: begin */
+export * from '../component/formFieldCaptcha/controller.jsx';
+
+import 'zova';
+declare module 'zova' {
+  
+  
+}
+declare module 'zova-module-devui-form' {
+  
+        export interface ControllerFormFieldCaptcha {
+          /** @internal */
+          get scope(): ScopeModuleDevuiForm;
+        } 
+}
+/** controller: end */
+/** controller: begin */
+import { ControllerFormFieldCaptcha } from '../component/formFieldCaptcha/controller.jsx';
+import 'zova';
+declare module 'zova' {
+  export interface IBeanRecordLocal {
+    'devui-form.controller.formFieldCaptcha': ControllerFormFieldCaptcha;
+  }
+}
+/** controller: end */
+
+/** components: begin */
+export * from './component/formFieldCaptcha.js';
+import { ZFormFieldCaptcha } from './component/formFieldCaptcha.js';
+export const components = {
+  'formFieldCaptcha': ZFormFieldCaptcha,
+};
+import 'zova';
+declare module 'zova' {
+export interface IComponentRecord {
+  'devui-form:formFieldCaptcha': ControllerFormFieldCaptcha;
+}
+export interface IZovaComponentRecord {
+  'devui-form:formFieldCaptcha': typeof ZFormFieldCaptcha;
+}
+}
+/** components: end */
 /** behavior: begin */
 export * from '../bean/behavior.formFieldLayout.jsx';
 import { IBehaviorOptionsFormFieldLayout } from '../bean/behavior.formFieldLayout.jsx';

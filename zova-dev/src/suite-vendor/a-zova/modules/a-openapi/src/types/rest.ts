@@ -3,12 +3,14 @@ import type { ComponentPublicInstance } from 'vue';
 import type { Constructable, IComponentRecord, TypeBeanRecordGeneralSelector } from 'zova';
 import type { TypeRenderComponentJsx } from 'zova-jsx';
 import type { TypeResourceActionRowRecordRender } from './actions.js';
+import type { ICaptchaOptions } from './captcha.js';
 import type { TypeDateFormat } from './date.js';
 import 'openapi3-ts/oas30';
 import 'openapi3-ts/oas31';
 
 export interface ISchemaObjectExtensionFieldRest {
   render?: TypeFormFieldRenderComponentNormal | TypeTableCellRenderComponentNormal;
+  captcha?: ICaptchaOptions;
   currency?: CurrencyOptions;
   dateFormat?: TypeDateFormat;
   visible?: boolean;
@@ -50,7 +52,7 @@ export type TypeFormSchemaScene = 'form' | 'filter';
 export const renderFormFieldTopPropsSystem = ['order', 'table', 'form', 'filter'];
 export const renderTableColumnTopPropsSystem = ['order', 'table', 'form', 'filter', 'displayValue'];
 
-export type TypeRenderComponentPreset = keyof TypeResourceActionRowRecordRender | 'text' | 'currency' | 'date' | 'dateRange' | 'textarea' | 'select' | 'checkbox' | 'radio' | 'switch' | 'image' | 'file' | 'color' | 'password' | 'email' | 'url';
+export type TypeRenderComponentPreset = keyof TypeResourceActionRowRecordRender | 'text' | 'captcha' | 'currency' | 'date' | 'dateRange' | 'textarea' | 'select' | 'checkbox' | 'radio' | 'switch' | 'image' | 'file' | 'color' | 'password' | 'email' | 'url';
 
 // form
 export type TypeFormFieldRenderComponentNormal =
