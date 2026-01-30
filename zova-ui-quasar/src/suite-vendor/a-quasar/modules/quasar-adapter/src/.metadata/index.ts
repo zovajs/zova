@@ -1,7 +1,6 @@
 /* eslint-disable */
 /** model: begin */
 export * from '../model/theme.js';
-export * from '../model/theme_.js';
 import { IModelOptionsTheme } from '../model/theme.js';
 import 'zova-module-a-model';
 declare module 'zova-module-a-model' {
@@ -35,41 +34,37 @@ declare module 'zova' {
   }
 }
 /** model: end */
-/** service: begin */
-export * from '../service/icon.js';
+/** sys: begin */
+export * from '../bean/sys.icon.js';
 
-import 'zova-module-a-bean';
-declare module 'zova-module-a-bean' {
+import 'zova';
+declare module 'zova' {
   
-    export interface IServiceRecord {
-      'quasar-adapter:icon': never;
-    }
-
   
 }
 declare module 'zova-module-quasar-adapter' {
   
-        export interface ServiceIcon {
+        export interface SysIcon {
           /** @internal */
           get scope(): ScopeModuleQuasarAdapter;
         }
 
-        export interface ServiceIcon {
-          get $beanFullName(): 'quasar-adapter.service.icon';
+        export interface SysIcon {
+          get $beanFullName(): 'quasar-adapter.sys.icon';
           get $onionName(): 'quasar-adapter:icon';
           
         } 
 }
-/** service: end */
-/** service: begin */
-import { ServiceIcon } from '../service/icon.js';
+/** sys: end */
+/** sys: begin */
+import { SysIcon } from '../bean/sys.icon.js';
 import 'zova';
 declare module 'zova' {
   export interface IBeanRecordGeneral {
-    'quasar-adapter.service.icon': ServiceIcon;
+    'quasar-adapter.sys.icon': SysIcon;
   }
 }
-/** service: end */
+/** sys: end */
 /** meta: begin */
 export * from '../bean/meta.themeHandler.js';
 

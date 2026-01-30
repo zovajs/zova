@@ -1,10 +1,10 @@
 import { Platform, QIcon, Quasar } from 'quasar';
 import useSize from 'quasar/src/composables/private.use-size/use-size.js';
 import { hMergeSlot, hSlot } from 'quasar/src/utils/private.render/render.js';
-
 import { computed, h, onServerPrefetch } from 'vue';
-import { $getZovaIcon, BeanBase, cast, Local, useApp } from 'zova';
-import { ScopeModule } from '../.metadata/this.js';
+import { BeanBase, cast, useApp } from 'zova';
+import { Sys } from 'zova-module-a-bean';
+import { $getZovaIcon } from 'zova-module-a-icon';
 
 const defaultViewBox = '0 0 24 24';
 
@@ -43,10 +43,11 @@ const mRE = /^M\s?[-+]?\.?\d/i;
 const imgRE = /^img:/;
 const svgUseRE = /^svguse:/;
 const ionRE = /^ion-/;
+// eslint-disable-next-line
 const faRE = /^(fa-(sharp|solid|regular|light|brands|duotone|thin)|[lf]a[srlbdk]?) /;
 
-@Service()
-export class ServiceIcon extends BeanBase<ScopeModule> {
+@Sys()
+export class SysIcon extends BeanBase {
   public async initialize() {
     this._patchSetup();
     this._patchIconMap();
@@ -60,7 +61,8 @@ export class ServiceIcon extends BeanBase<ScopeModule> {
           return;
         }
         const app = useApp();
-        await app.meta.icon.parseIconInfo(icon);
+        const $$toolIcon = await app.bean._getBean('a-icon.tool.icon', true);
+        await $$toolIcon.parseIconInfo(icon);
       });
 
       const sizeStyle = useSize(props);
@@ -229,7 +231,7 @@ export class ServiceIcon extends BeanBase<ScopeModule> {
 
   private _patchIconMap() {
     Quasar.iconSet.iconMapFn = iconName => {
-      const iconInfo = $getZovaIcon(iconName, this.app);
+      const iconInfo = $getZovaIcon(iconName as any);
       if (iconInfo === undefined) return undefined; // system handle
       return { icon: `svguse:#${iconInfo.symbolId}` };
     };

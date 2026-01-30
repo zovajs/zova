@@ -1,5 +1,6 @@
 import type { IMonkeySysInitialize } from 'zova';
 import { BeanSimple } from 'zova';
+import { SysIcon } from './bean/sys.icon.js';
 
 export class MonkeySys extends BeanSimple implements IMonkeySysInitialize {
   async sysInitialize() {
@@ -9,7 +10,7 @@ export class MonkeySys extends BeanSimple implements IMonkeySysInitialize {
       scopeStyleConfig.defaultThemeHandler = 'quasar-adapter:themeHandler';
     }
     // icon
-    const localIcon = await this.bean._newBean(LocalIcon, false);
+    const localIcon = await this.bean._newBean(SysIcon, false);
     await localIcon.initialize();
   }
 }

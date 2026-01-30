@@ -1,13 +1,7 @@
-import type { BeanBase, BeanContainer, IMonkeyAppInitialize, IMonkeyBeanInit } from 'zova';
-import type { ScopeModuleAStyle } from 'zova-module-a-style';
+import type { BeanBase, BeanContainer, IMonkeyBeanInit } from 'zova';
 import { BeanSimple } from 'zova';
-import { LocalIcon } from './bean/local.icon.js';
 
-export class Monkey extends BeanSimple implements IMonkeyAppInitialize, IMonkeyBeanInit {
-  async appInitialize() {
-
-  }
-
+export class Monkey extends BeanSimple implements IMonkeyBeanInit {
   async beanInit(bean: BeanContainer, beanInstance: BeanBase) {
     const self = this;
     bean.defineProperty(beanInstance, '$q', {
