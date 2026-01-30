@@ -1,7 +1,9 @@
-import { CssDefault } from './bean/css.default.js';
-import { ScopeModule } from './.metadata/this.js';
-import { ThemeToken } from './themeToken.js';
+import type { ScopeModule } from './.metadata/this.js';
+import type { CssDefault } from './bean/css.default.js';
+import type { ThemeToken } from './themeToken.js';
 import 'zova';
+
+import 'zova-module-a-style';
 
 declare module 'zova' {
   export interface BeanBase {
@@ -11,7 +13,6 @@ declare module 'zova' {
   }
 }
 
-import 'zova-module-a-style';
 declare module 'zova-module-a-style' {
   export interface IThemeApplyResult {
     token: ThemeToken;
