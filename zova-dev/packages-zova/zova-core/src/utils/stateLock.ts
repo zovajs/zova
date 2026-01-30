@@ -1,9 +1,12 @@
-import { reactive, watch } from 'vue';
+import { reactive } from 'vue';
+
+const SymbolWaitPromise = Symbol('SymbolWaitPromise');
 
 let __counter = 0;
 
 export class StateLock {
   private _state: boolean;
+  private _resolve?: Function;
 
   static create() {
     return reactive(new StateLock()) as StateLock;
@@ -18,29 +21,29 @@ export class StateLock {
     return this._state;
   }
 
-  set state(value) {
-    if (this._state !== value) {
-      this._state = value;
-      __counter--;
-      // console.log('-----lock counter: ', __counter);
+  touch() {
+    if (this._state === true) return;
+    this._state = true;
+    __counter--;
+    // console.log('-----lock counter: ', __counter);
+    if (this._resolve) {
+      this._resolve.call(undefined, null);
+      this._resolve = undefined;
     }
   }
 
-  touch() {
-    this.state = true;
+  async wait() {
+    if (!this[SymbolWaitPromise]) {
+      this[SymbolWaitPromise] = this._waitInner();
+    }
+    return this[SymbolWaitPromise];
   }
 
-  async wait() {
+  private async _waitInner() {
     return new Promise(resolve => {
       // condition check should place in the promise inner
       if (this.state) return resolve(null);
-      watch(
-        () => this.state,
-        () => {
-          resolve(null);
-        },
-        { once: true },
-      );
+      this._resolve = resolve;
     });
   }
 }
