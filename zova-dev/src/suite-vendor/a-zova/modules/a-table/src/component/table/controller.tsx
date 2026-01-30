@@ -5,7 +5,7 @@ import { VNode } from 'vue';
 import { appResource, cast, deepEqual, deepExtend, objectAssignReactive, UseScope } from 'zova';
 import { isJsxComponent, ZovaJsx } from 'zova-jsx';
 import { Controller } from 'zova-module-a-bean';
-import { loadSchemaProperties, renderTableColumnTopPropsSystem, ScopeModuleAOpenapi, TypeTableCellRenderComponent, TypeTableCellRenderComponentProvider } from 'zova-module-a-openapi';
+import {  renderTableColumnTopPropsSystem, ScopeModuleAOpenapi, TypeTableCellRenderComponent, TypeTableCellRenderComponentProvider } from 'zova-module-a-openapi';
 import { BeanControllerTableBase } from '../../lib/beanControllerTableBase.js';
 import { ITableProvider } from '../../types/providers.js';
 import { ITableMeta, TypeColumn, TypeTable, TypeTableGetColumnsNext } from '../../types/table.js';
@@ -118,7 +118,7 @@ export class ControllerTable<TData extends {} = {}> extends BeanControllerTableB
 
   private _createProperties() {
     this.properties = this.$useComputed(() => {
-      return loadSchemaProperties(this.schema, 'table');
+      return this.$sdk.loadSchemaProperties(this.schema, 'table');
     });
   }
 

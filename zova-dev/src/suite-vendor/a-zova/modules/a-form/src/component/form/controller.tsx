@@ -8,7 +8,7 @@ import { $ZodIssue } from 'zod/v4/core';
 import { cast, deepEqual, deepExtend, objectAssignReactive, UseScope } from 'zova';
 import { isJsxComponent, ZovaJsx } from 'zova-jsx';
 import { Controller } from 'zova-module-a-bean';
-import { loadSchemaProperties, renderFormFieldTopPropsSystem, schemaToZodSchema, ScopeModuleAOpenapi, TypeFormFieldRenderComponent, TypeFormFieldRenderComponentProvider, TypeFormSchemaScene } from 'zova-module-a-openapi';
+import {  renderFormFieldTopPropsSystem, schemaToZodSchema, ScopeModuleAOpenapi, TypeFormFieldRenderComponent, TypeFormFieldRenderComponentProvider, TypeFormSchemaScene } from 'zova-module-a-openapi';
 import { BeanControllerFormBase } from '../../lib/beanControllerFormBase.js';
 import { IFormCelScope, RevalidateLogicProps, TypeForm, TypeFormOnShowError, TypeFormOnSubmit, TypeFormOnSubmitInvalid } from '../../types/form.js';
 import { constFieldProps, IFormFieldCelScope, IFormFieldLayoutOptionsBase, IFormFieldRenderContextPropsBucket, IJsxRenderContextFormField, TypeFormFieldOnSetDisplayValue } from '../../types/formField.js';
@@ -73,7 +73,7 @@ export class ControllerForm<TFormData extends {} = {}, TSubmitMeta = never> exte
       return this._getZodSchema();
     });
     this.properties = this.$useComputed(() => {
-      return loadSchemaProperties(this.schema, this.$props.schemaScene);
+      return this.$sdk.loadSchemaProperties(this.schema, this.$props.schemaScene);
     });
     this.fieldCelEnv = this._getFieldCelEnv();
     this.zovaJsx = this.app.bean._newBeanSimple(

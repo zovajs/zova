@@ -1,9 +1,12 @@
 import { isNil } from '@cabloy/utils';
-import { cast, ILocaleRecord, TypeEventOff, Use, usePrepareArg } from 'zova';
+import { SchemaObject } from 'openapi3-ts/oas31';
+import { cast, deepExtend, ILocaleRecord, TypeEventOff, Use, usePrepareArg } from 'zova';
 import { $QueryAutoLoad, BeanModelBase, IDecoratorModelOptions, Model } from 'zova-module-a-model';
 import { SysSdk } from '../bean/sys.sdk.js';
 import { getSchemaOfRequestBody, getSchemaOfRequestQuery, getSchemaOfRequestQueryFilter, getSchemaOfResponseBody, schemaToZodSchema } from '../lib/schema.js';
+import { OrderUnknownBase } from '../types/database.js';
 import { TypeOpenapiPermissions } from '../types/resourceMeta.js';
+import { TypeSchemaScene } from '../types/rest.js';
 import { IOpenapiSchemas, TypeOpenapiSchemasSdk } from '../types/schema.js';
 import { TypeRequestMethod } from '../types/sdk.js';
 
@@ -201,5 +204,26 @@ export class ModelSdk extends BeanModelBase {
         return cast(schemaData?.properties?.list)?.items;
       },
     };
+  }
+
+  public loadSchemaProperties(schema: SchemaObject | undefined, scene: TypeSchemaScene): SchemaObject[] | undefined {
+    if (!schema) return;
+    const properties = schema.properties!;
+    const result: SchemaObject[] = [];
+    // filter
+    for (const key in properties) {
+      let property = properties[key] as SchemaObject;
+      if (property.$ref) {
+        property = this.getSchema(property.$ref).data!;
+      }
+      property = deepExtend({ key }, property, { rest: property.rest?.[scene] ?? {} });
+      result.push(property);
+    }
+    // sort
+    result.sort((a, b) => {
+      return (a.rest?.order ?? OrderUnknownBase) - (b.rest?.order ?? OrderUnknownBase);
+    });
+    // ok
+    return result;
   }
 }
