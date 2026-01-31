@@ -12,7 +12,9 @@ export interface IJsxRenderContextBase {
 }
 
 export interface IJsxRenderSceneRecord {
+  pageWrapper: never;
   page: never;
+  pageEntryWrapper: never;
   pageEntry: never;
   // table: never;
   tableColumn: never;

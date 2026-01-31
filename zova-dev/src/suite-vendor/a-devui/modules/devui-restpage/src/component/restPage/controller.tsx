@@ -1,9 +1,11 @@
 import type { ControllerPageResource, ModelResource } from 'zova-module-rest-resource';
+import { celEnvBase } from '@cabloy/utils';
 import { createColumnHelper } from '@tanstack/table-core';
 import { Use } from 'zova';
 import { Controller } from 'zova-module-a-bean';
 import { $QueriesAutoLoad } from 'zova-module-a-model';
 import { BeanControllerTableBase, ControllerTable, ITablePaged, ITableQuery, ITableResPaged, TypeTableGetColumnsNext } from 'zova-module-a-table';
+import { IJsxRenderContextPage, IPageScope } from '../../types/page.js';
 
 // @ts-ignore ignore
 // eslint-disable-next-line
@@ -20,12 +22,13 @@ export class ControllerRestPage<TData extends {} = {}> extends BeanControllerTab
   query: ITableQuery;
 
   @Use({ injectionScope: 'host' })
-  $$restPage: ControllerPageResource;
+  $$pageWrapper: ControllerPageResource;
 
   @Use({ injectionScope: 'host' })
   $$modelResource: ModelResource<TData>;
 
   protected async __init__() {
+    this.bean._setBean('$$page', this);
     // query
     this.queryFilterData = {};
     this.queryPaged = { pageNo: 1 };
@@ -37,6 +40,34 @@ export class ControllerRestPage<TData extends {} = {}> extends BeanControllerTab
       () => this.$$modelResource.apiSchemasSelect.sdk,
       () => this.queryData,
     );
+  }
+
+  get tableProvider() {
+    return this.$$pageWrapper.tableProvider;
+  }
+
+  get pageScope(): IPageScope {
+    return this.$$pageWrapper.pageWrapperScope;
+  }
+
+  get zovaJsx() {
+    return this.$$pageWrapper.zovaJsx;
+  }
+
+  get pageCelEnv(): typeof celEnvBase {
+    return this.$$pageWrapper.pageWrapperCelEnv;
+  }
+
+  public getJsxRenderContextPage(celScope: IPageScope): IJsxRenderContextPage<TData> {
+    return {
+      app: this.app,
+      ctx: this.ctx,
+      $scene: 'page',
+      $host: this,
+      $celScope: celScope,
+      $jsx: this.zovaJsx,
+      $$page: this,
+    };
   }
 
   get queryData() {
@@ -75,11 +106,11 @@ export class ControllerRestPage<TData extends {} = {}> extends BeanControllerTab
     return columns;
   }
 
-  _onFilter(data: any) {
-    this.queryFilterData = data;
-  }
-
   gotoPage(pageNo: number) {
     this.queryPaged.pageNo = pageNo;
+  }
+
+  onFilter(data: any) {
+    this.queryFilterData = data;
   }
 }

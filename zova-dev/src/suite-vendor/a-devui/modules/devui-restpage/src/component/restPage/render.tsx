@@ -10,17 +10,17 @@ export class RenderRestPage<TData extends {} = {}> extends BeanRenderBase {
       <ZWrapperFilter
         formData={this.queryFilterData}
         onFilter={data => {
-          this._onFilter(data);
+          this.onFilter(data);
         }}
       ></ZWrapperFilter>
     );
   }
 
   private _renderOperationsTable() {
-    const render = this.$$restPage.tableProvider.components!.actionOperationsTable!;
-    const celScope = this.$$restPage.tableScope;
-    const jsxRenderContext = this.$$restPage.getPageJsxRenderContext(celScope);
-    const domRestPageEntry = this.$$restPage.zovaJsx.render(render, {}, celScope, jsxRenderContext);
+    const render = this.tableProvider.components!.actionOperationsTable!;
+    const celScope = this.pageScope;
+    const jsxRenderContext = this.getJsxRenderContextPage(celScope);
+    const domRestPageEntry = this.zovaJsx.render(render, {}, celScope, jsxRenderContext);
     return domRestPageEntry;
   }
 
@@ -31,8 +31,8 @@ export class RenderRestPage<TData extends {} = {}> extends BeanRenderBase {
       <ComponentTable<TData>
         data={this.data}
         schema={this.schema}
-        tableProvider={this.$$restPage.tableProvider}
-        tableScope={this.$$restPage.tableScope}
+        tableProvider={this.tableProvider}
+        tableScope={this.pageScope}
         getColumns={(next, $$table) => {
           return this.getColumns(next, $$table);
         }}
