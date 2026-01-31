@@ -5,6 +5,7 @@ import { BeanControllerBase, Use } from 'zova';
 import { Controller } from 'zova-module-a-bean';
 import { ControllerForm, TypeFormOnSubmitData } from 'zova-module-a-form';
 import { $QueriesAutoLoad } from 'zova-module-a-model';
+import { IPageEntryScope } from '../../types/pageEntry.js';
 
 // @ts-ignore ignore
 // eslint-disable-next-line
@@ -22,12 +23,13 @@ export class ControllerRestPageEntry<TData extends {} = {}> extends BeanControll
   formData?: TData;
 
   @Use({ injectionScope: 'host' })
-  $$restPageEntry: ControllerPageEntry;
+  $$pageEntryWrapper: ControllerPageEntry;
 
   @Use({ injectionScope: 'host' })
   $$modelResource: ModelResource<TData>;
 
   protected async __init__() {
+    this.bean._setBean('$$pageEntry', this);
     this.formSchema = this.$useComputed(() => {
       return this.$$modelResource.getFormSchema(this.formMeta);
     });
@@ -41,12 +43,20 @@ export class ControllerRestPageEntry<TData extends {} = {}> extends BeanControll
     );
   }
 
+  get formProvider() {
+    return this.$$pageEntryWrapper.formProvider;
+  }
+
+  get pageEntryScope(): IPageEntryScope {
+    return this.$$pageEntryWrapper.pageEntryWrapperScope;
+  }
+
   get entryId() {
-    return this.$$restPageEntry.entryId;
+    return this.$$pageEntryWrapper.entryId;
   }
 
   get formMeta() {
-    return this.$$restPageEntry.formMeta;
+    return this.$$pageEntryWrapper.formMeta;
   }
 
   get queryData() {
@@ -55,8 +65,7 @@ export class ControllerRestPageEntry<TData extends {} = {}> extends BeanControll
   }
 
   async onSubmit(data: TypeFormOnSubmitData<TData>) {
-    const { formMeta, entryId } = this.$$restPageEntry;
-    const mutationSubmit = this.$$modelResource.getFormMutationSubmit(formMeta, entryId);
+    const mutationSubmit = this.$$modelResource.getFormMutationSubmit(this.formMeta, this.entryId);
     await mutationSubmit?.mutateAsync(data.value as any);
   }
 }
