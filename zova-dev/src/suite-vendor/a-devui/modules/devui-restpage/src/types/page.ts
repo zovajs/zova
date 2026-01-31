@@ -2,6 +2,8 @@ import type { IJsxRenderContextBase } from 'zova-module-a-openapi';
 import type { IPageWrapperScope } from 'zova-module-rest-resource';
 import type { ControllerRestPage } from '../component/restPage/controller.jsx';
 
+import 'zova-module-a-table';
+
 export interface IPageScope extends IPageWrapperScope {}
 
 export interface IJsxRenderContextPage<TData extends {} = {}> extends IJsxRenderContextBase {
@@ -9,9 +11,6 @@ export interface IJsxRenderContextPage<TData extends {} = {}> extends IJsxRender
   $$page: ControllerRestPage<TData>;
 }
 
-// need not extend ITableCelScope
-// import 'zova-module-a-table';
-
-// declare module 'zova-module-a-table' {
-//   export interface ITableCelScope extends IPageScope {}
-// }
+declare module 'zova-module-a-table' {
+  export interface ITableCelScope extends IPageScope {}
+}
