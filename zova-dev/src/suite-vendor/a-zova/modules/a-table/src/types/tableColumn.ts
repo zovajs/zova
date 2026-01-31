@@ -8,7 +8,7 @@ export const constColumnProps = '$$ColumnProps';
 export type TypeTableCellRender<TData extends RowData = RowData, TValue = any> = (props?: CellContext<TData, TValue>) => any;
 
 export interface IJsxRenderContextTableColumn<TData extends {} = any> extends IJsxRenderContextBase {
-  $celScope: ITableColumnCelScope;
+  $celScope: ITableColumnScope;
   $$table: ControllerTable<TData>;
 }
 
@@ -19,14 +19,14 @@ export interface ITableCellRenderColumnProps {
   render: TypeTableCellRenderComponent;
 }
 
-export interface ITableCelScope {}
+export interface ITableScope {}
 
-export interface ITableColumnCelScope extends ITableCelScope {
+export interface ITableColumnScope extends ITableScope {
   name: string;
   property?: SchemaObject;
 }
 
-export interface ITableCellCelScope extends ITableColumnCelScope {
+export interface ITableCellScope extends ITableColumnScope {
   value: any;
   displayValue?: any;
 }

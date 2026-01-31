@@ -3,10 +3,10 @@ import type { OmitNever } from 'zova';
 import type { ServiceOnion } from 'zova-module-a-bean';
 import type { IJsxRenderContextBase } from 'zova-module-a-openapi';
 import type { ControllerTable } from '../component/table/controller.jsx';
-import type { ITableCellCelScope } from './tableColumn.js';
+import type { ITableCellScope } from './tableColumn.js';
 
 export interface IJsxRenderContextTableCell<TData extends {} = any> extends IJsxRenderContextBase {
-  $celScope: ITableCellCelScope;
+  $celScope: ITableCellScope;
   $$table: ControllerTable<TData>;
   cellContext: CellContext<TData, any>;
 }

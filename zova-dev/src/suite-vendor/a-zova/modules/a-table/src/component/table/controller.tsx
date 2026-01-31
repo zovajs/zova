@@ -10,13 +10,13 @@ import { BeanControllerTableBase } from '../../lib/beanControllerTableBase.js';
 import { ITableProvider } from '../../types/providers.js';
 import { ITableMeta, TypeColumn, TypeTable, TypeTableGetColumnsNext } from '../../types/table.js';
 import { IDecoratorTableCellOptions, IJsxRenderContextTableCell, ITableCellRender } from '../../types/tableCell.js';
-import { constColumnProps, IJsxRenderContextTableColumn, ITableCellCelScope, ITableCellRenderColumnProps, ITableCelScope, ITableColumnCelScope, TypeTableCellRender } from '../../types/tableColumn.js';
+import { constColumnProps, IJsxRenderContextTableColumn, ITableCellRenderColumnProps, ITableCellScope, ITableColumnScope, ITableScope, TypeTableCellRender } from '../../types/tableColumn.js';
 
 export interface ControllerTableProps<TData extends {} = {}> {
   data?: TData[];
   schema?: SchemaObject;
   tableProvider?: ITableProvider;
-  tableScope?: ITableCelScope;
+  tableScope?: ITableScope;
   getColumns?: (next: TypeTableGetColumnsNext<TData>, table: ControllerTable<TData>,) => Promise<TypeColumn<TData>[]>;
   slotDefault?: (table: ControllerTable<TData>) => VNode;
 }
@@ -147,7 +147,7 @@ export class ControllerTable<TData extends {} = {}> extends BeanControllerTableB
     return { properties, renders };
   }
 
-  public getColumnJsxRenderContext(celScope: ITableColumnCelScope): IJsxRenderContextTableColumn {
+  public getColumnJsxRenderContext(celScope: ITableColumnScope): IJsxRenderContextTableColumn {
     return {
       app: this.app,
       ctx: this.ctx,
@@ -159,7 +159,7 @@ export class ControllerTable<TData extends {} = {}> extends BeanControllerTableB
     };
   }
 
-  public getCellJsxRenderContext(celScope: ITableCellCelScope, cellContext: CellContext<TData, any>): IJsxRenderContextTableCell {
+  public getCellJsxRenderContext(celScope: ITableCellScope, cellContext: CellContext<TData, any>): IJsxRenderContextTableCell {
     return {
       app: this.app,
       ctx: this.ctx,
@@ -182,7 +182,7 @@ export class ControllerTable<TData extends {} = {}> extends BeanControllerTableB
     render: TypeTableCellRenderComponent,
     property: SchemaObject | undefined,
     columnProps: ITableCellRenderColumnProps | undefined,
-    columnScope: ITableColumnCelScope,
+    columnScope: ITableColumnScope,
   ): Promise<TypeTableCellRender<TData, any>> {
     // renderProvider
     const renderProvider = this.getRenderProvider(render);
@@ -204,7 +204,7 @@ export class ControllerTable<TData extends {} = {}> extends BeanControllerTableB
     render: TypeTableCellRenderComponent,
     property: SchemaObject | undefined,
     columnProps: ITableCellRenderColumnProps | undefined,
-    columnScope: ITableColumnCelScope,
+    columnScope: ITableColumnScope,
     cellContext: CellContext<TData, any>,
     renderProvider: TypeTableCellRenderComponentProvider,
     beanInstance: ITableCellRender | undefined,
@@ -223,7 +223,7 @@ export class ControllerTable<TData extends {} = {}> extends BeanControllerTableB
     render: TypeTableCellRenderComponent,
     property: SchemaObject | undefined,
     columnProps: ITableCellRenderColumnProps | undefined,
-    columnScope: ITableColumnCelScope,
+    columnScope: ITableColumnScope,
     cellContext: CellContext<TData, any>,
     renderProvider: TypeTableCellRenderComponentProvider,
     beanInstance: ITableCellRender | undefined,
@@ -232,7 +232,7 @@ export class ControllerTable<TData extends {} = {}> extends BeanControllerTableB
     // value
     const value = cellContext.getValue();
     // cellScope
-    const cellScope: ITableCellCelScope = objectAssignReactive({}, columnScope, { value });
+    const cellScope: ITableCellScope = objectAssignReactive({}, columnScope, { value });
     // displayValue
     let displayValue = property?.rest?.displayValue !== undefined
       ? this.zovaJsx.evaluateExpression(property?.rest?.displayValue, cellScope)
@@ -285,7 +285,7 @@ export class ControllerTable<TData extends {} = {}> extends BeanControllerTableB
     return celEnv;
   }
 
-  public getColumnScope(name: string, scopeExtra?: {}): ITableColumnCelScope {
+  public getColumnScope(name: string, scopeExtra?: {}): ITableColumnScope {
     return objectAssignReactive({}, this.$props.tableScope, {
       name,
       property: this.getColumnProperty(name),

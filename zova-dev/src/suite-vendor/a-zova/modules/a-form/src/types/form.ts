@@ -310,4 +310,4 @@ declare module 'zova' {
   }
 }
 
-export interface IFormCelScope {}
+export interface IFormScope {}

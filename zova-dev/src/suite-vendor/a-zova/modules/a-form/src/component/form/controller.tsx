@@ -10,8 +10,8 @@ import { isJsxComponent, ZovaJsx } from 'zova-jsx';
 import { Controller } from 'zova-module-a-bean';
 import { renderFormFieldTopPropsSystem, schemaToZodSchema, ScopeModuleAOpenapi, TypeFormFieldRenderComponent, TypeFormFieldRenderComponentProvider, TypeFormSchemaScene } from 'zova-module-a-openapi';
 import { BeanControllerFormBase } from '../../lib/beanControllerFormBase.js';
-import { IFormCelScope, RevalidateLogicProps, TypeForm, TypeFormOnShowError, TypeFormOnSubmit, TypeFormOnSubmitInvalid } from '../../types/form.js';
-import { constFieldProps, IFormFieldCelScope, IFormFieldLayoutOptionsBase, IFormFieldRenderContextPropsBucket, IJsxRenderContextFormField, TypeFormFieldOnSetDisplayValue } from '../../types/formField.js';
+import { IFormScope, RevalidateLogicProps, TypeForm, TypeFormOnShowError, TypeFormOnSubmit, TypeFormOnSubmitInvalid } from '../../types/form.js';
+import { constFieldProps, IFormFieldLayoutOptionsBase, IFormFieldRenderContextPropsBucket, IFormFieldScope, IJsxRenderContextFormField, TypeFormFieldOnSetDisplayValue } from '../../types/formField.js';
 import { IFormMeta } from '../../types/formMeta.js';
 import { IFormProvider } from '../../types/provider.js';
 import { ControllerFormField } from '../formField/controller.jsx';
@@ -27,7 +27,7 @@ export interface ControllerFormProps<TFormData extends {} = {}, TSubmitMeta = ne
   validateOnDynamicLogic?: RevalidateLogicProps;
   formMeta?: IFormMeta;
   formProvider?: IFormProvider;
-  formScope?: IFormCelScope;
+  formScope?: IFormScope;
   formFieldLayout?: IFormFieldLayoutOptionsBase;
   onFormSubmit?: (e: SubmitEvent, form: ControllerForm<TFormData, TSubmitMeta>) => any;
   onSubmitInvalid?: TypeFormOnSubmitInvalid<TFormData, TSubmitMeta>;
@@ -140,7 +140,7 @@ export class ControllerForm<TFormData extends {} = {}, TSubmitMeta = never> exte
     return celEnv;
   }
 
-  public getFieldCelScope<K extends DeepKeys<TFormData>>(name: K, scopeExtra?: {}): IFormFieldCelScope<TFormData> {
+  public getFieldScope<K extends DeepKeys<TFormData>>(name: K, scopeExtra?: {}): IFormFieldScope<TFormData> {
     return objectAssignReactive({}, this.$props.formScope, {
       name,
       value: this.getFieldValue(name),
@@ -151,7 +151,7 @@ export class ControllerForm<TFormData extends {} = {}, TSubmitMeta = never> exte
 
   public getFieldJsxRenderContext(
     $$formField: ControllerFormField<TFormData> | undefined,
-    celScope: IFormFieldCelScope<TFormData>,
+    celScope: IFormFieldScope<TFormData>,
   ): IJsxRenderContextFormField<TFormData, TSubmitMeta> {
     return {
       app: this.app,
@@ -167,7 +167,7 @@ export class ControllerForm<TFormData extends {} = {}, TSubmitMeta = never> exte
 
   public getFieldComponentPropsTop<K extends DeepKeys<TFormData>>(
     name: K,
-    celScope: IFormFieldCelScope<TFormData>,
+    celScope: IFormFieldScope<TFormData>,
     jsxRenderContext: {},
   ): IFormFieldRenderContextPropsBucket {
     const props = this._getFieldComponentPropsTopInner(name, celScope, jsxRenderContext);
@@ -180,7 +180,7 @@ export class ControllerForm<TFormData extends {} = {}, TSubmitMeta = never> exte
 
   private _getFieldComponentPropsTopInner<K extends DeepKeys<TFormData>>(
     name: K,
-    celScope: IFormFieldCelScope<TFormData>,
+    celScope: IFormFieldScope<TFormData>,
     jsxRenderContext: {},
   ): IFormFieldRenderContextPropsBucket {
     const props: any = { [constFieldProps]: true, key: name, name };

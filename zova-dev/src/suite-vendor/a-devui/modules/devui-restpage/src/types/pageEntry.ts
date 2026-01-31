@@ -12,5 +12,5 @@ export interface IJsxRenderContextPageEntry<TData extends {} = {}> extends IJsxR
 }
 
 declare module 'zova-module-a-form' {
-  export interface IFormCelScope extends IPageEntryScope {}
+  export interface IFormScope extends IPageEntryScope {}
 }

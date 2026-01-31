@@ -25,7 +25,7 @@ export class RenderForm extends BeanRenderBase {
   private _renderField(property: SchemaObject) {
     const key = property.key!;
     // celScope
-    const celScope = this.getFieldCelScope(key);
+    const celScope = this.getFieldScope(key);
     const jsxRenderContext = this.getFieldJsxRenderContext(undefined, celScope);
     // props
     const props = this.getFieldComponentPropsTop(key, celScope, jsxRenderContext);

@@ -12,5 +12,5 @@ export interface IJsxRenderContextPage<TData extends {} = {}> extends IJsxRender
 }
 
 declare module 'zova-module-a-table' {
-  export interface ITableCelScope extends IPageScope {}
+  export interface ITableScope extends IPageScope {}
 }

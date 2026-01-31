@@ -13,7 +13,7 @@ export type HTMLInputElementType = 'text' | 'password' | 'number' | 'file' | 'hi
 export const inputTypePresets = ['text', 'password', 'number', 'file', 'hidden', 'tel', 'email'];
 export const constFieldProps = '$$FieldProps';
 
-export interface IFormFieldCelScope<TParentData = {}> {
+export interface IFormFieldScope<TParentData = {}> {
   name: string;
   value: any;
   property?: SchemaObject;
@@ -80,17 +80,17 @@ export interface IFormFieldRenderContextPropsBucket<TParentData = {}> extends Om
 export interface IFormFieldRenderContext<TParentData = {}> {
   propsBucket: IFormFieldRenderContextPropsBucket<TParentData>;
   props: IFormFieldRenderContextProps;
-  celScope: IFormFieldCelScope<TParentData>;
+  celScope: IFormFieldScope<TParentData>;
   jsxRenderContext: {};
 }
 
 export interface IJsxRenderContextFormField<TParentData extends {} = {}, TSubmitMeta = never> extends IJsxRenderContextBase {
-  $celScope: IFormFieldCelScope<TParentData>;
+  $celScope: IFormFieldScope<TParentData>;
   $$formField: ControllerFormField<TParentData> | undefined;
   $$form: ControllerForm<TParentData, TSubmitMeta>;
 }
 
 export interface IJsxRenderContextForm<TParentData extends {} = {}> extends IJsxRenderContextBase {
-  $celScope: IFormFieldCelScope<TParentData>;
+  $celScope: IFormFieldScope<TParentData>;
   $$form: ControllerForm<TParentData>;
 }
