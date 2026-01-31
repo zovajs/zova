@@ -1,6 +1,5 @@
 import type { IFormCelScope } from 'zova-module-a-form';
 import type { IJsxRenderContextBase } from 'zova-module-a-openapi';
-import type { ITableCelScope } from 'zova-module-a-table';
 import type { IPageWrapperScope } from 'zova-module-rest-resource';
 import type { ControllerRestPage } from '../component/restPage/controller.jsx';
 import type { ControllerRestPageEntry } from '../component/restPageEntry/controller.jsx';
@@ -17,8 +16,9 @@ export interface IJsxRenderContextPageEntry extends IJsxRenderContextBase {
   $$pageEntry: ControllerRestPageEntry;
 }
 
-import 'zova-module-a-table';
+// need not extend ITableCelScope
+// import 'zova-module-a-table';
 
-declare module 'zova-module-a-table' {
-  export interface ITableCelScope extends IPageScope {}
-}
+// declare module 'zova-module-a-table' {
+//   export interface ITableCelScope extends IPageScope {}
+// }
