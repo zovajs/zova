@@ -42,6 +42,10 @@ export class ControllerRestPage<TData extends {} = {}> extends BeanControllerTab
     );
   }
 
+  get resource() {
+    return this.$$pageWrapper.resource;
+  }
+
   get tableProvider() {
     return this.$$pageWrapper.tableProvider;
   }
