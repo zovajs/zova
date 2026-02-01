@@ -1,64 +1,220 @@
-/** beans: begin */
-export * from '../bean/theme.orange.js';
-import { ThemeOrange } from '../bean/theme.orange.js';
-import 'zova';
-declare module 'zova' {
-  export interface IBeanRecord {
-    'demo-basic.theme.orange': ThemeOrange;
-  }
-}
-/** beans: end */
-/** components: begin */
-export { ControllerCard } from '../component/card/controller.js';
-export * as NSControllerCard from '../component/card/controller.js';
-import * as NSControllerCard from '../component/card/controller.js';
-export { default as ZCard } from '../component/card/index.vue';
-import ZCard from '../component/card/index.vue';
-export const components = {
-  card: ZCard,
-};
-import 'zova';
-declare module 'zova' {
-  export interface IComponentRecord {
-    'demo-basic:card': NSControllerCard.ControllerCard;
-  }
-}
-/** components: end */
-/** pages: begin */
-export * as NSControllerPageComponent from '../page/component/controller.js';
-export * as NSControllerPageState from '../page/state/controller.js';
-export * as NSControllerPageStyle from '../page/style/controller.js';
-import * as NSControllerPageStyle from '../page/style/controller.js';
-export * from '../routes.js';
+/* eslint-disable */
+/** controller: begin */
+export * from '../component/card/controller.jsx';
+export * from '../page/component/controller.jsx';
+export * from '../page/state/controller.jsx';
+export * from '../page/style/controller.jsx';
 
 import 'zova';
 declare module 'zova' {
-  export interface IPagePathRecord {
-    '/demo/basic/component': undefined;
-    '/demo/basic/state': undefined;
-    '/demo/basic/style': NSControllerPageStyle.QueryInput;
+  
+  
+}
+declare module 'zova-module-demo-basic' {
+  
+        export interface ControllerCard {
+          /** @internal */
+          get scope(): ScopeModuleDemoBasic;
+        }
+
+        export interface ControllerPageComponent {
+          /** @internal */
+          get scope(): ScopeModuleDemoBasic;
+        }
+
+        export interface ControllerPageState {
+          /** @internal */
+          get scope(): ScopeModuleDemoBasic;
+        }
+
+        export interface ControllerPageStyle {
+          /** @internal */
+          get scope(): ScopeModuleDemoBasic;
+        } 
+}
+/** controller: end */
+/** controller: begin */
+import { ControllerCard } from '../component/card/controller.jsx';
+import { ControllerPageComponent } from '../page/component/controller.jsx';
+import { ControllerPageState } from '../page/state/controller.jsx';
+import { ControllerPageStyle } from '../page/style/controller.jsx';
+import 'zova';
+declare module 'zova' {
+  export interface IBeanRecordLocal {
+    'demo-basic.controller.card': ControllerCard;
+'demo-basic.controller.pageComponent': ControllerPageComponent;
+'demo-basic.controller.pageState': ControllerPageState;
+'demo-basic.controller.pageStyle': ControllerPageStyle;
   }
-  export interface IPageNameRecord {}
+}
+/** controller: end */
+/** pages: begin */
+export * from './page/component.js';
+export * from './page/state.js';
+export * from './page/style.js';
+export * from '../routes.js';
+import { TypePagePathSchema } from 'zova-module-a-router';
+import 'zova';
+declare module 'zova-module-a-router' {
+export interface IPagePathRecord {
+  '/demo/basic/component': TypePagePathSchema<undefined,undefined>;
+'/demo/basic/state': TypePagePathSchema<undefined,undefined>;
+'/demo/basic/style': TypePagePathSchema<undefined,undefined>;
+}
+export interface IPageNameRecord {
+  
+}
 }
 export const pagePathSchemas = {
-  '/demo/basic/style': {
-    query: NSControllerPageStyle.QuerySchema,
-  },
+
 };
-export const pageNameSchemas = {};
+export const pageNameSchemas = {
+
+};
+declare module 'zova-module-demo-basic' {
+   
+}
 /** pages: end */
+
+/** components: begin */
+export * from './component/card.js';
+import { ZCard } from './component/card.js';
+export const components = {
+  'card': ZCard,
+};
+import 'zova';
+declare module 'zova' {
+export interface IComponentRecord {
+  'demo-basic:card': ControllerCard;
+}
+export interface IZovaComponentRecord {
+  'demo-basic:card': typeof ZCard;
+}
+}
+/** components: end */
+/** render: begin */
+export * from '../page/component/render.jsx';
+export * from '../page/state/render.jsx';
+export * from '../page/style/render.jsx';
+
+import 'zova';
+declare module 'zova' {
+  
+  
+}
+declare module 'zova-module-demo-basic' {
+  
+        export interface RenderPageComponent {
+          /** @internal */
+          get scope(): ScopeModuleDemoBasic;
+        }
+
+        export interface RenderPageState {
+          /** @internal */
+          get scope(): ScopeModuleDemoBasic;
+        }
+
+        export interface RenderPageStyle {
+          /** @internal */
+          get scope(): ScopeModuleDemoBasic;
+        } 
+}
+/** render: end */
+/** render: begin */
+import { RenderPageComponent } from '../page/component/render.jsx';
+import { RenderPageState } from '../page/state/render.jsx';
+import { RenderPageStyle } from '../page/style/render.jsx';
+import 'zova';
+declare module 'zova' {
+  export interface IBeanRecordLocal {
+    'demo-basic.render.pageComponent': RenderPageComponent;
+'demo-basic.render.pageState': RenderPageState;
+'demo-basic.render.pageStyle': RenderPageStyle;
+  }
+}
+/** render: end */
+/** style: begin */
+export * from '../page/style/style.js';
+
+import 'zova';
+declare module 'zova' {
+  
+  
+}
+declare module 'zova-module-demo-basic' {
+  
+        export interface StylePageStyle {
+          /** @internal */
+          get scope(): ScopeModuleDemoBasic;
+        } 
+}
+/** style: end */
+/** style: begin */
+import { StylePageStyle } from '../page/style/style.js';
+import 'zova';
+declare module 'zova' {
+  export interface IBeanRecordLocal {
+    'demo-basic.style.pageStyle': StylePageStyle;
+  }
+}
+/** style: end */
+/** theme: begin */
+export * from '../bean/theme.orange.js';
+import { IThemeOptionsOrange } from '../bean/theme.orange.js';
+import 'zova-module-a-style';
+declare module 'zova-module-a-style' {
+  
+    export interface IThemeRecord {
+      'demo-basic:orange': IThemeOptionsOrange;
+    }
+
+  
+}
+declare module 'zova-module-demo-basic' {
+  
+        export interface ThemeOrange {
+          /** @internal */
+          get scope(): ScopeModuleDemoBasic;
+        }
+
+        export interface ThemeOrange {
+          get $beanFullName(): 'demo-basic.theme.orange';
+          get $onionName(): 'demo-basic:orange';
+          get $onionOptions(): IThemeOptionsOrange;
+        } 
+}
+/** theme: end */
+/** theme: begin */
+import { ThemeOrange } from '../bean/theme.orange.js';
+import 'zova';
+declare module 'zova' {
+  export interface IBeanRecordLocal {
+    'demo-basic.theme.orange': ThemeOrange;
+  }
+}
+/** theme: end */
 /** scope: begin */
-import { BeanScopeBase, Scope, TypeModuleResource } from 'zova';
+import { BeanScopeBase, type BeanScopeUtil } from 'zova';
+import { Scope } from 'zova-module-a-bean';
 
 @Scope()
 export class ScopeModuleDemoBasic extends BeanScopeBase {}
 
-export interface ScopeModuleDemoBasic extends TypeModuleResource<never, never, never, never, never> {}
+export interface ScopeModuleDemoBasic {
+  util: BeanScopeUtil;
+}
 
 import 'zova';
 declare module 'zova' {
   export interface IBeanScopeRecord {
     'demo-basic': ScopeModuleDemoBasic;
   }
+  
+  
+
+  
+
+  
 }
+  
 /** scope: end */
