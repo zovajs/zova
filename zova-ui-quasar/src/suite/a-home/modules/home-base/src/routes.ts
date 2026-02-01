@@ -1,15 +1,24 @@
-import ErrorNotFound from './.metadata/page/errorNotFound.vue';
-import { IModuleRoute } from 'zova-module-a-router';
+import type { IModuleRoute } from 'zova-module-a-router';
+import { ZPageErrorExpired } from './.metadata/page/errorExpired.js';
+import { ZPageErrorNotFound } from './.metadata/page/errorNotFound.js';
 
 export const routes: IModuleRoute[] = [
   {
     path: '/:catchAll(.*)*',
-    component: ErrorNotFound,
+    component: ZPageErrorNotFound,
     meta: {
       absolute: true,
       layout: 'empty',
       requiresAuth: false,
     },
   },
-  { path: 'errorNotFound', component: ErrorNotFound },
+  { path: 'errorNotFound', component: ZPageErrorNotFound },
+  {
+    path: 'errorExpired',
+    component: ZPageErrorExpired,
+    meta: {
+      layout: 'empty',
+      requiresAuth: false,
+    },
+  },
 ];

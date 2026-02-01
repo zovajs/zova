@@ -1,20 +1,24 @@
+import type { TypeControllerInnerProps } from 'zova';
+import type { ControllerPageProps } from '../../component/page/controller.jsx';
 import { defineComponent } from 'vue';
 import { prepareComponentOptions, useController } from 'zova';
 import { ControllerPage } from '../../component/page/controller.jsx';
-import { RenderPage } from '../../component/page/render.jsx';
-import { StylePage } from '../../component/page/style.js';
 
-export interface TypeControllerPagePublicProps {
+export type TypeControllerPagePublicProps = {
   controllerRef?: (ref: ControllerPage) => void;
+} & ControllerPageProps;
+
+type ControllerInnerProps =
+  TypeControllerInnerProps<ControllerPageProps, keyof typeof ControllerPage.$propsDefault>;
+declare module 'zova-module-home-base' {
+  export interface ControllerPage {
+    $props: ControllerInnerProps;
+  }
 }
 
-declare module 'zova-module-home-base' {
-  export interface StylePage extends ControllerPage {}
-  export interface RenderPage extends StylePage {}
-}
 export const ZPage = defineComponent(
   (_props: TypeControllerPagePublicProps) => {
-    useController(ControllerPage, RenderPage, StylePage);
+    useController(ControllerPage, undefined, undefined);
     return () => {};
   },
   prepareComponentOptions(),

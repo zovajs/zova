@@ -1,28 +1,34 @@
-import { BeanBase, cast } from 'zova';
+import { BeanBase, cast, UseScope } from 'zova';
 import { Service } from 'zova-module-a-bean';
+import { ScopeModuleASsr } from 'zova-module-a-ssr';
+
+export const ErrorMessageJwtExpired = 'jwt expired';
 
 @Service()
 export class ServiceSsr extends BeanBase {
+  @UseScope()
+  $$scopeSsr: ScopeModuleASsr;
+
   public async initialize() {
     // ssr hydrated
     if (process.env.CLIENT) {
-      this.ctx.meta.ssr.onHydrated(() => {
+      this.ctx.meta.$ssr.onHydrated(() => {
         cast(this.app.vue.config.globalProperties.$q).onSSRHydrated();
       });
     }
     // ssr theme
     if (process.env.SERVER) {
-      this.ctx.meta.ssr.context.onRendered((err?: Error) => {
+      this.ctx.meta.$ssr.context.onRendered((err?: Error) => {
         if (err) return;
-        if (!this.sys.config.ssr.cookieTheme) {
-          this.ctx.meta.ssr.context._meta.bodyTags += `<script id="__prefersColorSchemeDarkJS">
+        if (!this.$$scopeSsr.config.cookieTheme) {
+          this.ctx.meta.$ssr.context._meta.bodyTags += `<script id="__prefersColorSchemeDarkJS">
             document.body.classList.remove('body--light','body--dark');
             window.ssr_themedark_data.split(',').forEach(item=>document.body.classList.add(item));
             document.querySelector('#__prefersColorSchemeDarkJS').remove();
           </script>`.replaceAll('\n', '');
         }
-        if (this.sys.config.ssr.optimization.bodyReadyObserver) {
-          this.ctx.meta.ssr.context._meta.bodyTags += `<script id="__leftDrawerOpenJS">
+        if (this.$$scopeSsr.config.optimization.bodyReadyObserver) {
+          this.ctx.meta.$ssr.context._meta.bodyTags += `<script id="__leftDrawerOpenJS">
   window.ssr_body_ready_condition=()=>{
     const __domHeader=document.querySelector('#q-app>.q-layout>.q-header');
     const __domDrawer=document.querySelector('#q-app>.q-layout>.q-drawer-container>.q-drawer--left');
@@ -36,7 +42,7 @@ export class ServiceSsr extends BeanBase {
       __leftDrawerOpen=false;
     }else{
       const __leftDrawerOpenPC=window.ssr_load_local('sidebarLeftOpenPC');
-      __leftDrawerOpen=__leftDrawerOpenPC!==undefined?__leftDrawerOpenPC:${this.sys.config.layout.sidebar.leftOpenPC};  
+      __leftDrawerOpen=__leftDrawerOpenPC!==undefined?__leftDrawerOpenPC:${this.sys.config.layout.sidebar.leftOpenPC};
     }
     if(__leftDrawerOpen){
       const __domHeader=document.querySelector('#q-app>.q-layout>.q-header');
@@ -53,10 +59,34 @@ export class ServiceSsr extends BeanBase {
       }
     }
     document.querySelector('#__leftDrawerOpenJS').remove();
-  };        
+  };
 </script>`.replaceAll('\n', '');
         }
       });
     }
+    // ssr errorHandler
+    if (process.env.SERVER) {
+      this._ssrErrorHandler();
+    }
+  }
+
+  private _ssrErrorHandler() {
+    if (!process.env.SERVER) return;
+    const _eventErrorHandler = this.app.meta.event.on('app:errorHandler', ({ err }, next) => {
+      if (err.code === 401) {
+        if (err.message === ErrorMessageJwtExpired) {
+          try {
+            this.app.$gotoPage('/home/base/errorExpired', { returnTo: true });
+          } catch (err: any) {
+            this.ctx.meta.$ssr.context._meta.renderError = err;
+          }
+          return undefined;
+        }
+      }
+      return next();
+    });
+    this.ctx.meta.$ssr.context.onRendered((_err?: Error) => {
+      _eventErrorHandler();
+    });
   }
 }

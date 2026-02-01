@@ -196,37 +196,41 @@ declare module 'zova' {
   }
 }
 /** apiSchema: end */
-/** bean: begin */
-export * from '../bean/bean.api.js';
+/** service: begin */
+export * from '../service/jwtAdapter.js';
 
-import 'zova';
-declare module 'zova' {
+import 'zova-module-a-bean';
+declare module 'zova-module-a-bean' {
   
+    export interface IServiceRecord {
+      'home-api:jwtAdapter': never;
+    }
+
   
 }
 declare module 'zova-module-home-api' {
   
-        export interface BeanFetch {
+        export interface ServiceJwtAdapter {
           /** @internal */
           get scope(): ScopeModuleHomeApi;
         }
 
-        export interface BeanFetch {
-          get $beanFullName(): 'home-api.bean.fetch';
-          get $onionName(): 'home-api:fetch';
+        export interface ServiceJwtAdapter {
+          get $beanFullName(): 'home-api.service.jwtAdapter';
+          get $onionName(): 'home-api:jwtAdapter';
           
         } 
 }
-/** bean: end */
-/** bean: begin */
-import { BeanFetch } from '../bean/bean.api.js';
+/** service: end */
+/** service: begin */
+import { ServiceJwtAdapter } from '../service/jwtAdapter.js';
 import 'zova';
 declare module 'zova' {
   export interface IBeanRecordGeneral {
-    'home-api.bean.fetch': BeanFetch;
+    'home-api.service.jwtAdapter': ServiceJwtAdapter;
   }
 }
-/** bean: end */
+/** service: end */
 /** scope: begin */
 import { BeanScopeBase, type BeanScopeUtil } from 'zova';
 import { Scope } from 'zova-module-a-bean';
