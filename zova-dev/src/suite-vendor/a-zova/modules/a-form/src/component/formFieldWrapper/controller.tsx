@@ -1,7 +1,7 @@
 import type { ControllerForm } from '../form/controller.jsx';
 import { BeanControllerBase, IComponentOptions, Use } from 'zova';
 import { Controller } from 'zova-module-a-bean';
-import { IFormFieldOptions, ZFormField } from 'zova-module-a-form';
+import { IFormFieldOptions } from '../../types/formField.js';
 
 export interface ControllerFormFieldWrapperProps<TParentData extends {} = {}> extends IFormFieldOptions<TParentData> {}
 
@@ -16,10 +16,6 @@ export class ControllerFormFieldWrapper<TParentData extends {} = {}> extends Bea
   protected async __init__() {}
 
   protected render() {
-    return (
-      <ZFormField
-        {...this.$props}
-      ></ZFormField>
-    );
+    return this.$$form.renderField(this.$props.name);
   }
 }
