@@ -1,18 +1,24 @@
+import type { TypeControllerInnerProps } from 'zova';
+import type { ControllerEssentialLinkProps } from '../../component/essentialLink/controller.jsx';
 import { defineComponent } from 'vue';
 import { prepareComponentOptions, useController } from 'zova';
 import { ControllerEssentialLink } from '../../component/essentialLink/controller.jsx';
-import { RenderEssentialLink } from '../../component/essentialLink/render.jsx';
 
-export interface TypeControllerEssentialLinkPublicProps {
+export type TypeControllerEssentialLinkPublicProps = {
   controllerRef?: (ref: ControllerEssentialLink) => void;
+} & ControllerEssentialLinkProps;
+
+type ControllerInnerProps =
+  TypeControllerInnerProps<ControllerEssentialLinkProps, keyof typeof ControllerEssentialLink.$propsDefault>;
+declare module 'zova-module-home-layout' {
+  export interface ControllerEssentialLink {
+    $props: ControllerInnerProps;
+  }
 }
 
-declare module 'zova-module-home-layout' {
-  export interface RenderEssentialLink extends ControllerEssentialLink {}
-}
 export const ZEssentialLink = defineComponent(
   (_props: TypeControllerEssentialLinkPublicProps) => {
-    useController(ControllerEssentialLink, RenderEssentialLink, undefined);
+    useController(ControllerEssentialLink, undefined, undefined);
     return () => {};
   },
   prepareComponentOptions(),

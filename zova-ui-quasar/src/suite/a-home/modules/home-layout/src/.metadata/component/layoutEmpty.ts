@@ -1,18 +1,24 @@
+import type { TypeControllerInnerProps } from 'zova';
+import type { ControllerLayoutEmptyProps } from '../../component/layoutEmpty/controller.jsx';
 import { defineComponent } from 'vue';
 import { prepareComponentOptions, useController } from 'zova';
 import { ControllerLayoutEmpty } from '../../component/layoutEmpty/controller.jsx';
-import { RenderLayoutEmpty } from '../../component/layoutEmpty/render.jsx';
 
-export interface TypeControllerLayoutEmptyPublicProps {
+export type TypeControllerLayoutEmptyPublicProps = {
   controllerRef?: (ref: ControllerLayoutEmpty) => void;
+} & ControllerLayoutEmptyProps;
+
+type ControllerInnerProps =
+  TypeControllerInnerProps<ControllerLayoutEmptyProps, keyof typeof ControllerLayoutEmpty.$propsDefault>;
+declare module 'zova-module-home-layout' {
+  export interface ControllerLayoutEmpty {
+    $props: ControllerInnerProps;
+  }
 }
 
-declare module 'zova-module-home-layout' {
-  export interface RenderLayoutEmpty extends ControllerLayoutEmpty {}
-}
 export const ZLayoutEmpty = defineComponent(
   (_props: TypeControllerLayoutEmptyPublicProps) => {
-    useController(ControllerLayoutEmpty, RenderLayoutEmpty, undefined);
+    useController(ControllerLayoutEmpty, undefined, undefined);
     return () => {};
   },
   prepareComponentOptions(),

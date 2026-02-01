@@ -1,27 +1,46 @@
-import { BeanControllerBase, PropsBase, RequiredSome } from 'zova';
+import { QIcon, QItem, QItemLabel, QItemSection } from 'quasar';
+import { BeanControllerBase } from 'zova';
 import { Controller } from 'zova-module-a-bean';
+import { IIconRecord,  } from 'zova-module-a-icon';
 
-export interface Props extends PropsBase<ControllerEssentialLink, Slots> {
-  title?: string;
-  caption?: string;
-  icon?: string;
+export interface ControllerEssentialLinkProps {
+  title: string;
+  description?: string;
+  icon?: keyof IIconRecord;
   href?: string;
-  to?: string;
+  to?: string | object;
 }
 
-export type Emits = {};
-
-export interface Slots {}
-
 @Controller()
-export class ControllerEssentialLink extends BeanControllerBase<
-  unknown,
-  RequiredSome<Props, keyof typeof ControllerEssentialLink.$propsDefault>,
-  Emits,
-  Slots
-> {
+export class ControllerEssentialLink extends BeanControllerBase {
   static $propsDefault = {
-    caption: '',
+    description: '',
     icon: '',
   };
+
+  _renderLink() {
+    return (
+      <QItem
+        clickable
+        tag="a"
+        target={this.$props.href ? '_blank' : undefined}
+        href={this.$props.href}
+        to={this.$props.to}
+      >
+        {
+          <QItemSection avatar>
+            <QIcon name={this.$props.icon} />
+          </QItemSection>
+        }
+        <QItemSection>
+          <QItemLabel>{this.$props.title}</QItemLabel>
+          {this.$props.description && <QItemLabel caption>{this.$props.description}</QItemLabel>}
+        </QItemSection>
+      </QItem>
+    );
+  }
+
+  protected render() {
+    return this._renderLink();
+  }
 }
