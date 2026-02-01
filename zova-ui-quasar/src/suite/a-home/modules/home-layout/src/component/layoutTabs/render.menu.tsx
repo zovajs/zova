@@ -1,4 +1,5 @@
 import type { VNode } from 'vue';
+import { QItemLabel, QList, QSeparator } from 'quasar';
 import { BeanRenderBase } from 'zova';
 import { Render } from 'zova-module-a-bean';
 import { TypeMenuItem, TypeMenuTree, ZEssentialLink } from '../../.metadata/index.js';
@@ -8,15 +9,16 @@ export class RenderMenu extends BeanRenderBase {
   _renderMenuItem(item: TypeMenuItem) {
     const titleLocale = this.$text(item.title ?? '');
     if (item.folder) {
-      return (
-        <li>
-          <h2 class="menu-title">{titleLocale}</h2>
-          <ul>{this._renderMenuItems(item.children)}</ul>
-        </li>
-      );
+      return <QItemLabel header>{titleLocale}</QItemLabel>;
+      // return (
+      //   <li>
+      //     <h2 class="menu-title">{titleLocale}</h2>
+      //     <ul>{this._renderMenuItems(item.children)}</ul>
+      //   </li>
+      // );
     }
     if (item.separator) {
-      return <li></li>;
+      return <QSeparator spaced></QSeparator>;
     }
     let to: any;
     if (!item.external) {
@@ -32,15 +34,14 @@ export class RenderMenu extends BeanRenderBase {
       if (item.meta?.query) to.query = item.meta?.query;
     }
     return (
-      <li key={item.title}>
-        <ZEssentialLink
-          title={titleLocale}
-          description={item.description}
-          icon={item.icon as any}
-          href={item.external ? item.link : undefined}
-          to={to}
-        />
-      </li>
+      <ZEssentialLink
+        key={item.title}
+        title={titleLocale}
+        description={item.description}
+        icon={item.icon as any}
+        href={item.external ? item.link : undefined}
+        to={to}
+      />
     );
   }
 
@@ -57,6 +58,6 @@ export class RenderMenu extends BeanRenderBase {
     const menuTree = this.$$modelMenu.menuTree;
     if (!menuTree) return;
     const domItems = this._renderMenuItems(menuTree);
-    return <ul class="menu bg-base-200 text-base-content min-h-full w-80 p-4">{domItems}</ul>;
+    return <QList>{domItems}</QList>;
   }
 }

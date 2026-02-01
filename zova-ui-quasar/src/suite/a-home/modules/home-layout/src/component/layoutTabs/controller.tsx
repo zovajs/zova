@@ -1,7 +1,8 @@
 import type { ModelTabs, ModelTabsOptions } from 'zova-module-a-routertabs';
-import { BeanControllerBase, Use } from 'zova';
+import { BeanControllerBase, Use, useComputed, useCustomRef } from 'zova';
 import { Controller } from 'zova-module-a-bean';
 import { $QueryAutoLoad } from 'zova-module-a-model';
+import { ModelLayout } from '../../model/layout.js';
 import { ModelMenu } from '../../model/menu.js';
 
 export interface ControllerLayoutTabsProps {}
@@ -15,9 +16,36 @@ export class ControllerLayoutTabs extends BeanControllerBase {
   @Use()
   $$modelMenu: ModelMenu;
 
-  leftDrawerOpen: boolean = false;
+  @Use()
+  $$modelLayout: ModelLayout;
+
+  leftDrawerOpen: boolean;
+  leftDrawerOpenMobile: boolean = false;
+  belowBreakpoint: boolean;
 
   protected async __init__() {
+    // belowBreakpoint
+    this.belowBreakpoint = useComputed(() => {
+      let width;
+      if (process.env.SERVER) {
+        width = this.$q.screen.width;
+      } else {
+        width = this.$q.screen.width || document.documentElement.clientWidth;
+      }
+      return width <= this.sys.config.layout.sidebar.breakpoint;
+    });
+    // leftDrawerOpen
+    this.leftDrawerOpen = useCustomRef(() => {
+      const self = this;
+      return {
+        get() {
+          return self.belowBreakpoint ? self.leftDrawerOpenMobile : self.$$modelLayout.leftDrawerOpenPC;
+        },
+        set(value) {
+          self.belowBreakpoint ? (self.leftDrawerOpenMobile = value) : (self.$$modelLayout.leftDrawerOpenPC = value);
+        },
+      };
+    });
     // passport
     if (process.env.SERVER) {
       await this.$passport.ensurePassport();

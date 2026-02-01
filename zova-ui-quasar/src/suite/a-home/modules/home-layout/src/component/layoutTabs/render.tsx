@@ -1,3 +1,4 @@
+import { QBtn, QDrawer, QHeader, QLayout, QPageContainer, QToolbar, QToolbarTitle } from 'quasar';
 import { BeanRenderBase, Use } from 'zova';
 import { Render } from 'zova-module-a-bean';
 import { RenderContent } from './render.content.jsx';
@@ -37,14 +38,35 @@ export class RenderLayoutTabs extends BeanRenderBase {
 
   public render() {
     return (
-      <div class="drawer lg:drawer-open">
-        <input id="my-drawer-2" type="checkbox" class="drawer-toggle" />
-        <div class="drawer-content">
-          {this.$$renderHeader.render()}
+      <QLayout view="lHh Lpr lFf">
+        <QHeader elevated>
+          <QToolbar>
+            <QBtn flat dense round icon="::menu" aria-label="Menu" onClick={() => this.toggleLeftDrawer()} />
+
+            <QToolbarTitle> Quasar App </QToolbarTitle>
+
+            <div>{`Quasar v${this.$q.version}`}</div>
+          </QToolbar>
+        </QHeader>
+
+        <QDrawer v-model={this.leftDrawerOpen} breakpoint={this.sys.config.layout.sidebar.breakpoint} bordered>
+          {this.$$renderMenu.render()}
+        </QDrawer>
+
+        <QPageContainer>
           {this.$$renderContent.render()}
-        </div>
-        {this.$$renderSidebar.render()}
-      </div>
+        </QPageContainer>
+      </QLayout>
     );
+    // return (
+    //   <div class="drawer lg:drawer-open">
+    //     <input id="my-drawer-2" type="checkbox" class="drawer-toggle" />
+    //     <div class="drawer-content">
+    //       {this.$$renderHeader.render()}
+    //       {this.$$renderContent.render()}
+    //     </div>
+    //     {this.$$renderSidebar.render()}
+    //   </div>
+    // );
   }
 }

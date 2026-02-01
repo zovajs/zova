@@ -49,26 +49,6 @@ export class RenderLayoutDefault extends BeanRenderBase {
   }
 
   render() {
-    return (
-      <QLayout view="lHh Lpr lFf">
-        <QHeader elevated>
-          <QToolbar>
-            <QBtn flat dense round icon="::menu" aria-label="Menu" onClick={() => this.toggleLeftDrawer()} />
 
-            <QToolbarTitle> Quasar App </QToolbarTitle>
-
-            <div>{`Quasar v${this.$q.version}`}</div>
-          </QToolbar>
-        </QHeader>
-
-        <QDrawer v-model={this.leftDrawerOpen} breakpoint={this.sys.config.layout.sidebar.breakpoint} bordered>
-          {this._renderMenu()}
-        </QDrawer>
-
-        <QPageContainer>
-          <RouterView />
-        </QPageContainer>
-      </QLayout>
-    );
   }
 }
