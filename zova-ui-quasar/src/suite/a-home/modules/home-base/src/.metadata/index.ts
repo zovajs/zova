@@ -1,13 +1,13 @@
 /* eslint-disable */
 /** service: begin */
-export * from '../service/router.js';
+export * from '../service/routerGuards.js';
 export * from '../service/ssr.js';
 
 import 'zova-module-a-bean';
 declare module 'zova-module-a-bean' {
   
     export interface IServiceRecord {
-      'home-base:router': never;
+      'home-base:routerGuards': never;
 'home-base:ssr': never;
     }
 
@@ -15,14 +15,14 @@ declare module 'zova-module-a-bean' {
 }
 declare module 'zova-module-home-base' {
   
-        export interface ServiceRouter {
+        export interface ServiceRouterGuards {
           /** @internal */
           get scope(): ScopeModuleHomeBase;
         }
 
-        export interface ServiceRouter {
-          get $beanFullName(): 'home-base.service.router';
-          get $onionName(): 'home-base:router';
+        export interface ServiceRouterGuards {
+          get $beanFullName(): 'home-base.service.routerGuards';
+          get $onionName(): 'home-base:routerGuards';
           
         }
 
@@ -39,18 +39,19 @@ declare module 'zova-module-home-base' {
 }
 /** service: end */
 /** service: begin */
-import { ServiceRouter } from '../service/router.js';
+import { ServiceRouterGuards } from '../service/routerGuards.js';
 import { ServiceSsr } from '../service/ssr.js';
 import 'zova';
 declare module 'zova' {
   export interface IBeanRecordGeneral {
-    'home-base.service.router': ServiceRouter;
+    'home-base.service.routerGuards': ServiceRouterGuards;
 'home-base.service.ssr': ServiceSsr;
   }
 }
 /** service: end */
 /** controller: begin */
 export * from '../component/page/controller.jsx';
+export * from '../page/errorExpired/controller.jsx';
 export * from '../page/errorNotFound/controller.jsx';
 
 import 'zova';
@@ -65,6 +66,11 @@ declare module 'zova-module-home-base' {
           get scope(): ScopeModuleHomeBase;
         }
 
+        export interface ControllerPageErrorExpired {
+          /** @internal */
+          get scope(): ScopeModuleHomeBase;
+        }
+
         export interface ControllerPageErrorNotFound {
           /** @internal */
           get scope(): ScopeModuleHomeBase;
@@ -73,36 +79,45 @@ declare module 'zova-module-home-base' {
 /** controller: end */
 /** controller: begin */
 import { ControllerPage } from '../component/page/controller.jsx';
+import { ControllerPageErrorExpired } from '../page/errorExpired/controller.jsx';
 import { ControllerPageErrorNotFound } from '../page/errorNotFound/controller.jsx';
 import 'zova';
 declare module 'zova' {
   export interface IBeanRecordLocal {
     'home-base.controller.page': ControllerPage;
+'home-base.controller.pageErrorExpired': ControllerPageErrorExpired;
 'home-base.controller.pageErrorNotFound': ControllerPageErrorNotFound;
   }
 }
 /** controller: end */
 /** pages: begin */
+export * from './page/errorExpired.js';
+import { NSControllerPageErrorExpired } from './page/errorExpired.js';
 export * from './page/errorNotFound.js';
 export * from '../routes.js';
 import { TypePagePathSchema } from 'zova-module-a-router';
 import 'zova';
 declare module 'zova-module-a-router' {
 export interface IPagePathRecord {
-  '/home/base//:catchAll(.*)*': TypePagePathSchema<undefined,undefined>;
+  '/home/base/errorExpired': TypePagePathSchema<undefined,NSControllerPageErrorExpired.QueryInput>;
+'/home/base//:catchAll(.*)*': TypePagePathSchema<undefined,undefined>;
 }
 export interface IPageNameRecord {
   
 }
 }
 export const pagePathSchemas = {
-
+'/home/base/errorExpired': {
+          query: NSControllerPageErrorExpired.querySchema,
+        },
 };
 export const pageNameSchemas = {
 
 };
 declare module 'zova-module-home-base' {
-   
+  export interface ControllerPageErrorExpired {
+        $query: NSControllerPageErrorExpired.QueryOutput;
+      } 
 }
 /** pages: end */
 
@@ -122,80 +137,14 @@ export interface IZovaComponentRecord {
 }
 }
 /** components: end */
-/** render: begin */
-export * from '../component/page/render.jsx';
-export * from '../page/errorNotFound/render.jsx';
-
-import 'zova';
-declare module 'zova' {
-  
-  
-}
-declare module 'zova-module-home-base' {
-  
-        export interface RenderPage {
-          /** @internal */
-          get scope(): ScopeModuleHomeBase;
-        }
-
-        export interface RenderPageErrorNotFound {
-          /** @internal */
-          get scope(): ScopeModuleHomeBase;
-        } 
-}
-/** render: end */
-/** render: begin */
-import { RenderPage } from '../component/page/render.jsx';
-import { RenderPageErrorNotFound } from '../page/errorNotFound/render.jsx';
-import 'zova';
-declare module 'zova' {
-  export interface IBeanRecordLocal {
-    'home-base.render.page': RenderPage;
-'home-base.render.pageErrorNotFound': RenderPageErrorNotFound;
-  }
-}
-/** render: end */
-/** style: begin */
-export * from '../component/page/style.js';
-export * from '../page/errorNotFound/style.js';
-
-import 'zova';
-declare module 'zova' {
-  
-  
-}
-declare module 'zova-module-home-base' {
-  
-        export interface StylePage {
-          /** @internal */
-          get scope(): ScopeModuleHomeBase;
-        }
-
-        export interface StylePageErrorNotFound {
-          /** @internal */
-          get scope(): ScopeModuleHomeBase;
-        } 
-}
-/** style: end */
-/** style: begin */
-import { StylePage } from '../component/page/style.js';
-import { StylePageErrorNotFound } from '../page/errorNotFound/style.js';
-import 'zova';
-declare module 'zova' {
-  export interface IBeanRecordLocal {
-    'home-base.style.page': StylePage;
-'home-base.style.pageErrorNotFound': StylePageErrorNotFound;
-  }
-}
-/** style: end */
 /** css: begin */
 export * from '../bean/css.default.js';
-
-import { IDecoratorCssOptions } from 'zova-module-a-style';
+import { ICssOptionsDefault } from '../bean/css.default.js';
+import 'zova-module-a-style';
 declare module 'zova-module-a-style' {
   
     export interface ICssRecord {
-      'home-base:default': IDecoratorCssOptions;
+      'home-base:default': ICssOptionsDefault;
     }
 
   
@@ -210,7 +159,7 @@ declare module 'zova-module-home-base' {
         export interface CssDefault {
           get $beanFullName(): 'home-base.css.default';
           get $onionName(): 'home-base:default';
-          get $onionOptions(): IDecoratorCssOptions;
+          get $onionOptions(): ICssOptionsDefault;
         } 
 }
 /** css: end */
@@ -225,12 +174,12 @@ declare module 'zova' {
 /** css: end */
 /** theme: begin */
 export * from '../bean/theme.default.js';
-
-import { IDecoratorThemeOptions } from 'zova-module-a-style';
+import { IThemeOptionsDefault } from '../bean/theme.default.js';
+import 'zova-module-a-style';
 declare module 'zova-module-a-style' {
   
     export interface IThemeRecord {
-      'home-base:default': IDecoratorThemeOptions;
+      'home-base:default': IThemeOptionsDefault;
     }
 
   
@@ -245,7 +194,7 @@ declare module 'zova-module-home-base' {
         export interface ThemeDefault {
           get $beanFullName(): 'home-base.theme.default';
           get $onionName(): 'home-base:default';
-          get $onionOptions(): IDecoratorThemeOptions;
+          get $onionOptions(): IThemeOptionsDefault;
         } 
 }
 /** theme: end */
@@ -258,11 +207,20 @@ declare module 'zova' {
   }
 }
 /** theme: end */
+/** locale: begin */
+import { locales } from './locales.js';
+/** locale: end */
 /** monkey: begin */
 export * from '../monkey.js';
 /** monkey: end */
+/** monkeySys: begin */
+export * from '../monkeySys.js';
+/** monkeySys: end */
+/** main: begin */
+export * from '../main.js';
+/** main: end */
 /** scope: begin */
-import { BeanScopeBase, type BeanScopeUtil } from 'zova';
+import { BeanScopeBase, type BeanScopeUtil, TypeModuleLocales, TypeLocaleBase } from 'zova';
 import { Scope } from 'zova-module-a-bean';
 
 @Scope()
@@ -270,6 +228,7 @@ export class ScopeModuleHomeBase extends BeanScopeBase {}
 
 export interface ScopeModuleHomeBase {
   util: BeanScopeUtil;
+locale: TypeModuleLocales<(typeof locales)[TypeLocaleBase]>;
 }
 
 import 'zova';
@@ -280,9 +239,14 @@ declare module 'zova' {
   
   
 
-  
+  export interface IBeanScopeLocale {
+    'home-base': (typeof locales)[TypeLocaleBase];
+  }
 
   
 }
-  
+
+export function locale<K extends keyof (typeof locales)[TypeLocaleBase]>(key: K): `home-base::${K}` {
+  return `home-base::${key}`;
+}  
 /** scope: end */
