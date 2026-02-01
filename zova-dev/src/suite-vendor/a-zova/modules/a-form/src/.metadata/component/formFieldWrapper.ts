@@ -4,20 +4,20 @@ import { defineComponent } from 'vue';
 import { prepareComponentOptions, useController } from 'zova';
 import { ControllerFormFieldWrapper } from '../../component/formFieldWrapper/controller.jsx';
 
-export type TypeControllerFormFieldWrapperPublicProps = {
-  controllerRef?: (ref: ControllerFormFieldWrapper) => void;
-} & ControllerFormFieldWrapperProps;
+export type TypeControllerFormFieldWrapperPublicProps<TParentData extends {} = {}> = {
+  controllerRef?: (ref: ControllerFormFieldWrapper<TParentData>) => void;
+} & ControllerFormFieldWrapperProps<TParentData>;
 
-type ControllerInnerProps =
-  TypeControllerInnerProps<ControllerFormFieldWrapperProps, keyof typeof ControllerFormFieldWrapper.$propsDefault>;
+type ControllerInnerProps<TParentData extends {} = {}> =
+  TypeControllerInnerProps<ControllerFormFieldWrapperProps<TParentData>, keyof typeof ControllerFormFieldWrapper.$propsDefault>;
 declare module 'zova-module-a-form' {
-  export interface ControllerFormFieldWrapper {
-    $props: ControllerInnerProps;
+  export interface ControllerFormFieldWrapper<TParentData extends {} = {}> {
+    $props: ControllerInnerProps<TParentData>;
   }
 }
 
 export const ZFormFieldWrapper = defineComponent(
-  (_props: TypeControllerFormFieldWrapperPublicProps) => {
+  <TParentData extends {} = {}>(_props: TypeControllerFormFieldWrapperPublicProps<TParentData>) => {
     useController(ControllerFormFieldWrapper, undefined, undefined);
     return () => {};
   },
