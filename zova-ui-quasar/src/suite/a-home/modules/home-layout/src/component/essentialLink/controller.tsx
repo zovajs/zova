@@ -1,7 +1,7 @@
 import { QIcon, QItem, QItemLabel, QItemSection } from 'quasar';
 import { BeanControllerBase } from 'zova';
 import { Controller } from 'zova-module-a-bean';
-import { IIconRecord,  } from 'zova-module-a-icon';
+import { IIconRecord } from 'zova-module-a-icon';
 
 export interface ControllerEssentialLinkProps {
   title: string;
@@ -27,11 +27,9 @@ export class ControllerEssentialLink extends BeanControllerBase {
         href={this.$props.href}
         to={this.$props.to}
       >
-        {
-          <QItemSection avatar>
-            <QIcon name={this.$props.icon} />
-          </QItemSection>
-        }
+        <QItemSection avatar>
+          <QIcon name={this.$props.icon} />
+        </QItemSection>
         <QItemSection>
           <QItemLabel>{this.$props.title}</QItemLabel>
           {this.$props.description && <QItemLabel caption>{this.$props.description}</QItemLabel>}
