@@ -266,6 +266,34 @@ export class ControllerForm<TFormData extends {} = {}, TSubmitMeta = never> exte
     });
   }
 
+  public renderField<K extends DeepKeys<TFormData>>(name: K) {
+    const property = this.getFieldProperty(name);
+    if (!property) return;
+    return this._renderField(property);
+  }
+
+  protected _renderField(property: SchemaObject) {
+    const key = property.key!;
+    // celScope
+    const celScope = this.getFieldScope(key);
+    const jsxRenderContext = this.getFieldJsxRenderContext(undefined, celScope);
+    // props
+    const props = this.getFieldComponentPropsTop(key, celScope, jsxRenderContext);
+    if (cast(props).visible === false) return;
+    // displayValue
+    celScope.displayValue = props.displayValue;
+    const componentOptions = this._getFieldComponentOptionsTop(props.render);
+    return this.zovaJsx.render(componentOptions, props, celScope, jsxRenderContext);
+  }
+
+  private _getFieldComponentOptionsTop(render: TypeFormFieldRenderComponent): TypeFormFieldRenderComponent {
+    const renderProvider = this.getRenderProvider(render);
+    if (typeof renderProvider === 'string' && renderProvider.includes(':formField')) {
+      return render;
+    }
+    return this.formProvider.components!.formField!;
+  }
+
   private _handleError422(error: Error, cause: ValidationCause = 'submit') {
     const formApi = this.form;
 
