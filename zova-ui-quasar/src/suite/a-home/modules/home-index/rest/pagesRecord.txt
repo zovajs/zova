@@ -1,1 +1,1 @@
-'/home/index/home': TypePagePathSchema<undefined,undefined>;
+'/home/index': TypePagePathSchema<undefined,undefined>;

@@ -31,7 +31,7 @@ import { TypePagePathSchema } from 'zova-module-a-router';
 import 'zova';
 declare module 'zova-module-a-router' {
 export interface IPagePathRecord {
-  '/home/index/home': TypePagePathSchema<undefined,undefined>;
+  '/home/index': TypePagePathSchema<undefined,undefined>;
 }
 export interface IPageNameRecord {
   
