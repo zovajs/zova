@@ -2,11 +2,6 @@
   "name": "zova-module-home-icon",
   "version": "5.0.0",
   "title": "home-icon",
-  "zovaModule": {
-    "capabilities": {
-      "icon": true
-    }
-  },
   "type": "module",
   "exports": {
     ".": {
