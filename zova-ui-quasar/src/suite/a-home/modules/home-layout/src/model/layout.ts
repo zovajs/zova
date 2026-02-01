@@ -1,14 +1,20 @@
-import { Model } from 'zova';
-import { BeanModelBase } from 'zova-module-a-model';
-import { ScopeModule } from '../.metadata/this.js';
+import { UseScope } from 'zova';
+import type { IDecoratorModelOptions } from 'zova-module-a-model';
+import { BeanModelBase, Model } from 'zova-module-a-model';
+import { ScopeModuleASsr } from 'zova-module-a-ssr';
 
-@Model()
-export class ModelLayout extends BeanModelBase<ScopeModule> {
+export interface IModelOptionsLayout extends IDecoratorModelOptions {}
+
+@Model<IModelOptionsLayout>()
+export class ModelLayout extends BeanModelBase {
   leftDrawerOpenPC: boolean;
 
+  @UseScope()
+  $$scopeSsr: ScopeModuleASsr;
+
   protected async __init__() {
-    this.leftDrawerOpenPC =
-      process.env.SSR && !this.sys.config.ssr.optimization.bodyReadyObserver
+     this.leftDrawerOpenPC =
+      process.env.SSR && !this.$$scopeSsr.config.optimization.bodyReadyObserver
         ? this.sys.config.layout.sidebar.leftOpenPC
         : this.$useStateLocal({
             queryKey: ['sidebarLeftOpenPC'],
