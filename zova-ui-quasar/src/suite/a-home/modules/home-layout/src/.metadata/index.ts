@@ -159,7 +159,6 @@ export interface IZovaComponentRecord {
 }
 /** components: end */
 /** render: begin */
-export * from '../component/layoutDefault/render.jsx';
 export * from '../component/layoutTabs/render.content.jsx';
 export * from '../component/layoutTabs/render.header.jsx';
 export * from '../component/layoutTabs/render.locale.jsx';
@@ -177,11 +176,6 @@ declare module 'zova' {
 }
 declare module 'zova-module-home-layout' {
   
-        export interface RenderLayoutDefault {
-          /** @internal */
-          get scope(): ScopeModuleHomeLayout;
-        }
-
         export interface RenderContent {
           /** @internal */
           get scope(): ScopeModuleHomeLayout;
@@ -229,7 +223,6 @@ declare module 'zova-module-home-layout' {
 }
 /** render: end */
 /** render: begin */
-import { RenderLayoutDefault } from '../component/layoutDefault/render.jsx';
 import { RenderContent } from '../component/layoutTabs/render.content.jsx';
 import { RenderHeader } from '../component/layoutTabs/render.header.jsx';
 import { RenderLocale } from '../component/layoutTabs/render.locale.jsx';
@@ -242,8 +235,7 @@ import { RenderUser } from '../component/layoutTabs/render.user.jsx';
 import 'zova';
 declare module 'zova' {
   export interface IBeanRecordLocal {
-    'home-layout.render.layoutDefault': RenderLayoutDefault;
-'home-layout.render.content': RenderContent;
+    'home-layout.render.content': RenderContent;
 'home-layout.render.header': RenderHeader;
 'home-layout.render.locale': RenderLocale;
 'home-layout.render.menu': RenderMenu;

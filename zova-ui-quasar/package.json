@@ -87,6 +87,7 @@
     "zova-module-home-index": "workspace:^",
     "zova-module-home-layout": "workspace:^",
     "zova-module-home-passport": "workspace:^",
+    "zova-module-home-user": "workspace:^",
     "zova-module-a-ssrcabloy": "workspace:^",
     "zova-module-rest-actions": "workspace:^",
     "zova-module-rest-resource": "workspace:^",
