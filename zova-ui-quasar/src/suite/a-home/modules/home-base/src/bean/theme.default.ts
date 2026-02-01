@@ -5,7 +5,7 @@ export interface IThemeOptionsDefault extends IDecoratorThemeOptions {}
 
 @Theme<IThemeOptionsDefault>()
 export class ThemeDefault extends BeanThemeBase implements IThemeBase {
-  async apply({ name: _name, dark: _dark }: IThemeApplyParams): Promise<IThemeApplyResult> {
+  async apply({ name, dark }: IThemeApplyParams): Promise<IThemeApplyResult> {
     // token
     const token: ThemeToken = {
       color: {
@@ -20,6 +20,8 @@ export class ThemeDefault extends BeanThemeBase implements IThemeBase {
         'warning': '#F2C037',
       },
     };
-    return { token };
+    return {
+      token: this.mergeOptionsToken({ name, dark }, token),
+    };
   }
 }
