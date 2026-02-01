@@ -303,6 +303,38 @@ export interface paths {
     patch: operations['DemoStudent_update'];
     trace?: never;
   };
+  '/api/demo/student/teacher': {
+    parameters: {
+      query?: never;
+      header?: never;
+      path?: never;
+      cookie?: never;
+    };
+    get: operations['DemoStudentTeacher_select'];
+    put?: never;
+    post: operations['DemoStudentTeacher_create'];
+    delete?: never;
+    options?: never;
+    head?: never;
+    patch?: never;
+    trace?: never;
+  };
+  '/api/demo/student/teacher/{id}': {
+    parameters: {
+      query?: never;
+      header?: never;
+      path?: never;
+      cookie?: never;
+    };
+    get: operations['DemoStudentTeacher_view'];
+    put?: never;
+    post?: never;
+    delete: operations['DemoStudentTeacher_delete'];
+    options?: never;
+    head?: never;
+    patch: operations['DemoStudentTeacher_update'];
+    trace?: never;
+  };
   '/api/home/base/menu/{publicPath?}': {
     parameters: {
       query?: never;
@@ -1169,16 +1201,16 @@ export interface components {
       email: string;
       password: string;
       passwordConfirm: string;
-      captcha: components['schemas']['a-captcha.dto.captchaVerify_3e0e56cc9823311c05e4ea2412c0f05ef604f668'];
+      captcha: components['schemas']['a-captcha.dto.captchaVerify_c3cd80b1eeafe39bfe4433491bb081d68e84797e'];
     };
-    'a-captcha.dto.captchaVerify_3e0e56cc9823311c05e4ea2412c0f05ef604f668': {
+    'a-captcha.dto.captchaVerify_c3cd80b1eeafe39bfe4433491bb081d68e84797e': {
       id: string;
       token?: unknown;
     };
     'home-user.dto.login': {
       username: string;
       password: string;
-      captcha: components['schemas']['a-captcha.dto.captchaVerify_3e0e56cc9823311c05e4ea2412c0f05ef604f668'];
+      captcha: components['schemas']['a-captcha.dto.captchaVerify_c3cd80b1eeafe39bfe4433491bb081d68e84797e'];
     };
     'a-captcha.dto.captchaData': {
       id: string;
@@ -1336,6 +1368,81 @@ export interface components {
       /** @description Description */
       description?: string | undefined;
     };
+    'demo-student.dto.teacherCreate': {
+      /** @description Name */
+      name: string;
+      /** @description Description */
+      description?: string | undefined;
+    };
+    'demo-student.dto.teacherQueryRes': {
+      list: {
+        /**
+                 * Format: date
+                 * @description Created At
+                 */
+        createdAt: string;
+        /**
+                 * Format: date
+                 * @description Updated At
+                 */
+        updatedAt: string;
+        /**
+                 * @description Deleted
+                 * @default false
+                 */
+        deleted?: boolean;
+        /**
+                 * @description Instance ID
+                 * @default 0
+                 */
+        iid?: number;
+        /** @description ID */
+        id: number | string;
+        /** @description Name */
+        name: string;
+        /** @description Description */
+        description?: string | undefined;
+      }[];
+      total: string;
+      pageCount: number;
+      pageSize: number;
+      pageNo: number;
+    };
+    /** @description Teacher */
+    'demo-student.entity.teacher': {
+      /**
+             * Format: date
+             * @description Created At
+             */
+      createdAt: string;
+      /**
+             * Format: date
+             * @description Updated At
+             */
+      updatedAt: string;
+      /**
+             * @description Deleted
+             * @default false
+             */
+      deleted?: boolean;
+      /**
+             * @description Instance ID
+             * @default 0
+             */
+      iid?: number;
+      /** @description ID */
+      id: number | string;
+      /** @description Name */
+      name: string;
+      /** @description Description */
+      description?: string | undefined;
+    } | undefined;
+    'demo-student.dto.teacherUpdate': {
+      /** @description Name */
+      name: string;
+      /** @description Description */
+      description?: string | undefined;
+    };
     'a-menu.dto.menus': {
       menus?: components['schemas']['a-menu.dto.menuItem'][] | undefined;
       groups?: components['schemas']['a-menu.dto.menuGroup'][] | undefined;
@@ -1366,7 +1473,7 @@ export interface components {
       group?: string | string[] | undefined;
       collapsed?: boolean | undefined;
     };
-    'a-openapischema.dto.permissions': {
+    'a-permission.dto.permissions': {
       roleIds?: (number | string)[] | undefined;
       roleNames?: string[] | undefined;
       actions?: unknown;
@@ -2590,6 +2697,150 @@ export interface operations {
     };
     authToken: true;
   };
+  DemoStudentTeacher_select: {
+    parameters: {
+      query?: {
+        columns?: string[] | undefined;
+        where?: {
+          [key: string]: unknown;
+        } | undefined;
+        orders?: string | string[][] | undefined;
+        pageNo?: number;
+        pageSize?: number;
+        createdAt?: string | undefined;
+        name?: string | undefined;
+      };
+      header?: never;
+      path?: never;
+      cookie?: never;
+    };
+    requestBody?: never;
+    responses: {
+      200: {
+        headers: {
+          [name: string]: unknown;
+        };
+        content: {
+          'application/json': {
+            code: string;
+            message: string;
+            data: components['schemas']['demo-student.dto.teacherQueryRes'];
+          };
+        };
+      };
+    };
+    authToken: true;
+  };
+  DemoStudentTeacher_create: {
+    parameters: {
+      query?: never;
+      header?: never;
+      path?: never;
+      cookie?: never;
+    };
+    requestBody: {
+      content: {
+        'application/json': components['schemas']['demo-student.dto.teacherCreate'];
+      };
+    };
+    responses: {
+      200: {
+        headers: {
+          [name: string]: unknown;
+        };
+        content: {
+          'application/json': {
+            code: string;
+            message: string;
+            data: number | string;
+          };
+        };
+      };
+    };
+    authToken: true;
+  };
+  DemoStudentTeacher_view: {
+    parameters: {
+      query?: never;
+      header?: never;
+      path: {
+        id: number | string;
+      };
+      cookie?: never;
+    };
+    requestBody?: never;
+    responses: {
+      200: {
+        headers: {
+          [name: string]: unknown;
+        };
+        content: {
+          'application/json': {
+            code: string;
+            message: string;
+            data?: components['schemas']['demo-student.entity.teacher'];
+          };
+        };
+      };
+    };
+    authToken: true;
+  };
+  DemoStudentTeacher_delete: {
+    parameters: {
+      query?: never;
+      header?: never;
+      path: {
+        id: number | string;
+      };
+      cookie?: never;
+    };
+    requestBody?: never;
+    responses: {
+      200: {
+        headers: {
+          [name: string]: unknown;
+        };
+        content: {
+          'application/json': {
+            code: string;
+            message: string;
+            data?: unknown;
+          };
+        };
+      };
+    };
+    authToken: true;
+  };
+  DemoStudentTeacher_update: {
+    parameters: {
+      query?: never;
+      header?: never;
+      path: {
+        id: number | string;
+      };
+      cookie?: never;
+    };
+    requestBody: {
+      content: {
+        'application/json': components['schemas']['demo-student.dto.teacherUpdate'];
+      };
+    };
+    responses: {
+      200: {
+        headers: {
+          [name: string]: unknown;
+        };
+        content: {
+          'application/json': {
+            code: string;
+            message: string;
+            data?: unknown;
+          };
+        };
+      };
+    };
+    authToken: true;
+  };
   HomeBaseMenu_retrieveMenus: {
     parameters: {
       query?: never;
@@ -2635,7 +2886,7 @@ export interface operations {
           'application/json': {
             code: string;
             message: string;
-            data: components['schemas']['a-openapischema.dto.permissions'];
+            data: components['schemas']['a-permission.dto.permissions'];
           };
         };
       };
