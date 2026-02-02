@@ -1,5 +1,5 @@
 import type { VNode } from 'vue';
-import { QItemLabel, QList, QSeparator } from 'quasar';
+import { QItem, QItemLabel, QItemSection, QList, QSeparator } from 'quasar';
 import { BeanRenderBase } from 'zova';
 import { Render } from 'zova-module-a-bean';
 import { TypeMenuItem, TypeMenuTree, ZEssentialLink } from '../../.metadata/index.js';
@@ -9,13 +9,13 @@ export class RenderMenu extends BeanRenderBase {
   _renderMenuItem(item: TypeMenuItem) {
     const titleLocale = this.$text(item.title ?? '');
     if (item.folder) {
-      return <QItemLabel header>{titleLocale}</QItemLabel>;
-      // return (
-      //   <li>
-      //     <h2 class="menu-title">{titleLocale}</h2>
-      //     <ul>{this._renderMenuItems(item.children)}</ul>
-      //   </li>
-      // );
+      let domChildren: VNode[] = [];
+      domChildren.push(<QItemLabel key={`folder:${item.title}`} header>{titleLocale}</QItemLabel>);
+      const domChildren2 = this._renderMenuItems(item.children);
+      if (domChildren2) {
+        domChildren = domChildren.concat(domChildren2);
+      }
+      return domChildren;
     }
     if (item.separator) {
       return <QSeparator spaced></QSeparator>;
@@ -41,7 +41,7 @@ export class RenderMenu extends BeanRenderBase {
         icon={item.icon as any}
         href={item.external ? item.link : undefined}
         to={to}
-      />
+      ></ZEssentialLink>
     );
   }
 
@@ -49,7 +49,12 @@ export class RenderMenu extends BeanRenderBase {
     if (!items) return;
     const domItems: VNode[] = [];
     for (const item of items) {
-      domItems.push(this._renderMenuItem(item));
+      const domChildren = this._renderMenuItem(item);
+      if (Array.isArray(domChildren)) {
+        domItems.push(...domChildren);
+      } else {
+        domItems.push(domChildren);
+      }
     }
     return domItems;
   }

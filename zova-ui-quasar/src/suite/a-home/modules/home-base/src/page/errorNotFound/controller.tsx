@@ -9,10 +9,10 @@ export class ControllerPageErrorNotFound extends BeanControllerPageBase {
 
   protected async __init__() {
     this.cTitle = this.$style({
-      fontSize: '30vh',
+      fontSize: '60px',
     });
     this.cDescription = this.$style({
-      fontSize: '30vh',
+      fontSize: '30px',
       lineHeight: '1',
       opacity: '0.4',
     });
