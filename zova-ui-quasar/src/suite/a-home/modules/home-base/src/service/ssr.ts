@@ -52,10 +52,12 @@ export class ServiceSsr extends BeanBase {
       __domDrawer.style.transform='unset !important';
       __domDrawer.className=__domDrawer.className.replace('q-layout--prevent-focus ','');
       __domPageContainer.style.paddingLeft='300px';
-      if(window.ssr_local_themedark){
+      if(window.ssr_themedark){
       __domDrawer.classList.add('q-drawer--dark','q-dark');
-      __domDrawer.querySelector('.q-list').classList.add('q-list--dark');
-      __domDrawer.querySelector('.q-separator').classList.add('q-separator--dark');
+      const __domDrawerList=__domDrawer.querySelector('.q-list');
+      if(__domDrawerList) __domDrawerList.classList.add('q-list--dark');
+      const __domDrawerSeparator=__domDrawer.querySelector('.q-separator');
+      if(__domDrawerSeparator) __domDrawerSeparator.classList.add('q-separator--dark');
       }
     }
     document.querySelector('#__leftDrawerOpenJS').remove();
