@@ -10,6 +10,7 @@ export default function (sys: ZovaSys) {
   config.routes = {
     path: {
       '/home/index': { alias: '/' },
+      '/home/user/login': { alias: '/login' },
     },
     name: {},
   };
