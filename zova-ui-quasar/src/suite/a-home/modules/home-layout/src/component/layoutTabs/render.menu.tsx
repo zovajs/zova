@@ -1,5 +1,5 @@
 import type { VNode } from 'vue';
-import { QItem, QItemLabel, QItemSection, QList, QSeparator } from 'quasar';
+import { QItemLabel, QList, QSeparator } from 'quasar';
 import { BeanRenderBase } from 'zova';
 import { Render } from 'zova-module-a-bean';
 import { TypeMenuItem, TypeMenuTree, ZEssentialLink } from '../../.metadata/index.js';
