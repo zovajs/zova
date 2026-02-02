@@ -291,7 +291,7 @@ export class ControllerForm<TFormData extends {} = {}, TSubmitMeta = never> exte
     if (typeof renderProvider === 'string' && renderProvider.includes(':formField')) {
       return render;
     }
-    return this.formProvider.components!.formField!;
+    return this.formProvider.components?.formField ?? 'a-form:formField';
   }
 
   private _handleError422(error: Error, cause: ValidationCause = 'submit') {
