@@ -6,19 +6,22 @@ import { ZForm, ZFormField, ZFormFieldWrapper, ZFormSubscribe } from 'zova-modul
 export class RenderPageLogin extends BeanRenderBase {
   public render() {
     return (
-      <div class="min-h-screen bg-base-200 flex items-center">
-        <div class="card mx-auto w-full max-w-5xl  shadow-xl">
-          <div class="grid md:grid-cols-2 grid-cols-1 bg-base-100 rounded-xl">
-            {this._renderLandingInfo()}
-            <div class="py-24 px-10">
-              <h2 class="text-2xl font-semibold mb-2 text-center">{this.scope.locale.Login()}</h2>
-              <div class="mb-4">
+      <div class="q-pa-md row items-center justify-center" style={{ minHeight: '100vh' }}>
+        <q-card class="shadow-2" style={{ width: '100%', maxWidth: '960px' }}>
+          <div class="row">
+            <div class="col-12 col-md-6" style={{ background: 'var(--q-color-grey-3)', borderTopLeftRadius: '6px', borderBottomLeftRadius: '6px' }}>
+              {this._renderLandingInfo()}
+            </div>
+            <div class="col-12 col-md-6" style={{ minWidth: '320px' }}>
+              <h2 class="text-h6 text-center" style={{ marginBottom: '12px' }}>{this.scope.locale.Login()}</h2>
+              <div>
                 {this._renderForm()}
               </div>
             </div>
           </div>
-        </div>
+        </q-card>
       </div>
+
     );
   }
 
