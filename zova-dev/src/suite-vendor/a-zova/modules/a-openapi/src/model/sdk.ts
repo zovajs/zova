@@ -216,6 +216,7 @@ export class ModelSdk extends BeanModelBase {
       if (property.$ref) {
         property = this.getSchema(property.$ref).data!;
       }
+      if(!property) continue;
       property = deepExtend({ key }, property, { rest: property.rest?.[scene] ?? {} });
       result.push(property);
     }

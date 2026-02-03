@@ -1,3 +1,4 @@
+import { QCard } from 'quasar';
 import { BeanRenderBase } from 'zova';
 import { Render } from 'zova-module-a-bean';
 import { ZForm, ZFormField, ZFormFieldWrapper, ZFormSubscribe } from 'zova-module-a-form';
@@ -7,7 +8,7 @@ export class RenderPageLogin extends BeanRenderBase {
   public render() {
     return (
       <div class="q-pa-md row items-center justify-center" style={{ minHeight: '100vh' }}>
-        <q-card class="shadow-2" style={{ width: '100%', maxWidth: '960px' }}>
+        <QCard class="shadow-2" style={{ width: '100%', maxWidth: '960px' }}>
           <div class="row">
             <div class="col-12 col-md-6" style={{ background: 'var(--q-color-grey-3)', borderTopLeftRadius: '6px', borderBottomLeftRadius: '6px' }}>
               {this._renderLandingInfo()}
@@ -19,9 +20,8 @@ export class RenderPageLogin extends BeanRenderBase {
               </div>
             </div>
           </div>
-        </q-card>
+        </QCard>
       </div>
-
     );
   }
 
