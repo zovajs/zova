@@ -59,7 +59,6 @@ export class RenderPageLogin extends BeanRenderBase {
             return (
               <QInput
                 type="text"
-                class="grow"
                 label={this.scope.locale.YourUsername()}
                 name={props.name}
                 modelValue={props.value}
