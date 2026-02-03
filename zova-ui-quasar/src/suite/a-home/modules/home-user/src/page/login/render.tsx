@@ -43,7 +43,6 @@ export class RenderPageLogin extends BeanRenderBase {
       <ZForm
         data={this.user}
         schema={this.schema}
-        formProvider={{ behaviors: { formFieldLayout: 'home-user:formFieldLayoutLogin' } }}
         onSubmit={data => {
           return this.onSubmitLogin(data);
         }}

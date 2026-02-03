@@ -73,60 +73,6 @@ declare module 'zova' {
   }
 }
 /** render: end */
-/** behavior: begin */
-export * from '../bean/behavior.formFieldLayoutLogin.jsx';
-import { IBehaviorOptionsFormFieldLayoutLogin } from '../bean/behavior.formFieldLayoutLogin.jsx';
-import 'zova-module-a-behavior';
-declare module 'zova-module-a-behavior' {
-  
-    export interface IBehaviorRecord {
-      'home-user:formFieldLayoutLogin': IBehaviorOptionsFormFieldLayoutLogin;
-    }
-
-  
-}
-declare module 'zova-module-home-user' {
-  
-        export interface BehaviorFormFieldLayoutLogin {
-          /** @internal */
-          get scope(): ScopeModuleHomeUser;
-        }
-
-        export interface BehaviorFormFieldLayoutLogin {
-          get $beanFullName(): 'home-user.behavior.formFieldLayoutLogin';
-          get $onionName(): 'home-user:formFieldLayoutLogin';
-          get $onionOptions(): IBehaviorOptionsFormFieldLayoutLogin;
-        } 
-}
-/** behavior: end */
-/** behavior: begin */
-import { BehaviorFormFieldLayoutLogin } from '../bean/behavior.formFieldLayoutLogin.jsx';
-import 'zova';
-declare module 'zova' {
-  export interface IBeanRecordLocal {
-    'home-user.behavior.formFieldLayoutLogin': BehaviorFormFieldLayoutLogin;
-  }
-}
-/** behavior: end */
-/** behaviors: begin */
-import 'vue';
-import 'vue/jsx-runtime';
-
-declare module 'vue' {
-  export interface InputHTMLAttributes {
-    'bs-home-user-formFieldLayoutLogin'?: IBehaviorOptionsFormFieldLayoutLogin | '' | boolean;
-  }
-}
-
-declare module 'vue/jsx-runtime' {
-  namespace JSX {
-    // need define class/style in IntrinsicAttributes
-    export interface IntrinsicAttributes {
-      'bs-home-user-formFieldLayoutLogin'?: IBehaviorOptionsFormFieldLayoutLogin | '' | boolean;
-    }
-  }
-}
-/** behaviors: end */
 /** locale: begin */
 import { locales } from './locales.js';
 /** locale: end */
