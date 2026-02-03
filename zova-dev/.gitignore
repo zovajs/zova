@@ -53,8 +53,6 @@ env/.env*.mine
 
 **/*.tsbuildinfo
 
-
-
 /src/suite/*
 !/src/suite/.gitkeep
 !/src/suite/a-demo
