@@ -301,6 +301,10 @@ export class ZovaJsx extends BeanSimple {
         }
       }
     }
+    if (props['v-slots']) {
+      children = Object.assign({}, props['v-slots'], children);
+      delete props['v-slots'];
+    }
     if (_isZovaComponent) {
       Component = this.sys.meta.component.getZovaComponent(Component as never);
     }

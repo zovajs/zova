@@ -27,7 +27,7 @@ export class BehaviorFormField extends BeanBehaviorBase<
   private _patchProps(renderContext: IFormFieldRenderContext) {
     const formMeta = this.$$formField.formMeta;
     const field = this.$$formField.field;
-    const componentName=typeof renderContext.propsBucket.renderProvider==='object'? cast(renderContext.propsBucket.renderProvider)?.name:renderContext.propsBucket.renderProvider;
+    const componentName = typeof renderContext.propsBucket.renderProvider === 'object' ? cast(renderContext.propsBucket.renderProvider)?.name : renderContext.propsBucket.renderProvider;
     if (componentName === 'QInput') {
       this._patchProps_input(formMeta, field, renderContext);
     }
@@ -61,26 +61,29 @@ export class BehaviorFormField extends BeanBehaviorBase<
     // const onSetDisplayValueDefault = (e: Event) => {
     //   this.$$formField.setDisplayValue((e.target as HTMLInputElement).value);
     // };
-    const onSetDisplayValueDefaultByValue=(value:any)=>{
-     this.$$formField.setDisplayValue(value);
-    }
+    const onSetDisplayValueDefaultByValue = (value: any) => {
+      this.$$formField.setDisplayValue(value);
+    };
     const propsPatch: IFormFieldRenderContextProps = {
-      type: inputType,
-      label: propsBucket.label,
-      modelValue: propsBucket.displayValue,
+      'type': inputType,
+      'label': propsBucket.label,
+      'modelValue': propsBucket.displayValue,
       'onUpdate:modelValue': propsBucket['onUpdate:modelValue'] !== undefined
         ? (propsBucket['onUpdate:modelValue'] ?? undefined)
-        :  onSetDisplayValueDefaultByValue,
-      noErrorIcon: true,
+        : onSetDisplayValueDefaultByValue,
+      'noErrorIcon': true,
       error,
-      errorMessage: errorObj?.message,
+      'errorMessage': errorObj?.message,
+      'v-slots': {
+        prepend: () => 'sss',
+      },
       // onChange: propsBucket.onChange !== undefined
       //   ? (propsBucket.onChange ?? undefined)
       //   : (propsBucket.displayValueUpdateTiming === 'change' ? onSetDisplayValueDefault : undefined),
       // onInput: propsBucket.onInput !== undefined
       //   ? (propsBucket.onInput ?? undefined)
       //   : (propsBucket.displayValueUpdateTiming !== 'change' ? onSetDisplayValueDefault : undefined),
-      onBlur: propsBucket.onBlur !== undefined
+      'onBlur': propsBucket.onBlur !== undefined
         ? (propsBucket.onBlur ?? undefined)
         : (_e: Event) => {
             field.api.handleBlur();

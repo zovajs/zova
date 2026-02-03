@@ -8,5 +8,6 @@ declare module 'zova-module-a-form' {
     noErrorIcon?: boolean;
     error?: boolean;
     errorMessage?: string;
+    'v-slots'?: any;
   }
 }
