@@ -2,7 +2,7 @@ import type { VNode } from 'vue';
 import { QItemLabel, QList, QSeparator } from 'quasar';
 import { BeanRenderBase } from 'zova';
 import { Render } from 'zova-module-a-bean';
-import { TypeMenuItem, TypeMenuTree, ZEssentialLink } from '../../.metadata/index.js';
+import { TypeMenuItem, TypeMenuTree, ZItemLink } from '../../.metadata/index.js';
 
 @Render()
 export class RenderMenu extends BeanRenderBase {
@@ -34,14 +34,14 @@ export class RenderMenu extends BeanRenderBase {
       if (item.meta?.query) to.query = item.meta?.query;
     }
     return (
-      <ZEssentialLink
+      <ZItemLink
         key={item.title}
         title={titleLocale}
         description={item.description}
         icon={item.icon as any}
         href={item.external ? item.link : undefined}
         to={to}
-      ></ZEssentialLink>
+      ></ZItemLink>
     );
   }
 
