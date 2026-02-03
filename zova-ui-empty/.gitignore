@@ -54,13 +54,8 @@ env/.env*.mine
 
 /src/suite/*
 !/src/suite/.gitkeep
-!/src/suite/a-base
-!/src/suite/a-cms
-!/src/suite/a-zova
 !/src/suite/a-demo
-!/src/suite/a-flow
 !/src/suite/a-home
-!/src/suite/test-party
 
 /src/suite-vendor/*
 !/src/suite-vendor/.gitkeep
