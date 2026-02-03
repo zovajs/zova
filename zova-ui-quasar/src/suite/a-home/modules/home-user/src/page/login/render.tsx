@@ -1,4 +1,4 @@
-import { QCard } from 'quasar';
+import { QCard, QInput } from 'quasar';
 import { BeanRenderBase } from 'zova';
 import { Render } from 'zova-module-a-bean';
 import { ZForm, ZFormField, ZFormFieldWrapper, ZFormSubscribe } from 'zova-module-a-form';
@@ -57,13 +57,13 @@ export class RenderPageLogin extends BeanRenderBase {
           iconPrefix=":daisy:person"
           slotDefault={({ props }) => {
             return (
-              <input
+              <QInput
                 type="text"
                 class="grow"
-                placeholder={this.scope.locale.YourUsername()}
+                label={this.scope.locale.YourUsername()}
                 name={props.name}
-                value={props.value}
-                onInput={props.onInput}
+                modelValue={props.value}
+                onUpdate:modelValue={props.onUpdateValue}
                 onBlur={props.onBlur}
               />
             );
