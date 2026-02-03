@@ -1,8 +1,8 @@
 import type { IMonkeySysInitialize } from 'zova';
+import type { IOpenapiOptionsResourceMeta } from 'zova-module-a-openapi';
+import { QInput } from 'quasar';
 import { BeanSimple, deepExtend } from 'zova';
 import { SysIcon } from './bean/sys.icon.js';
-import { IOpenapiOptionsResourceMeta } from 'zova-module-a-openapi';
-import { QInput } from 'quasar';
 
 export class MonkeySys extends BeanSimple implements IMonkeySysInitialize {
   async sysInitialize() {
@@ -31,7 +31,7 @@ export class MonkeySys extends BeanSimple implements IMonkeySysInitialize {
           },
           behaviors: {
             formField: 'quasar-form:formField',
-            //  formFieldLayout: 'devui-form:formFieldLayout',
+            formFieldLayout: 'quasar-form:formFieldLayout',
           },
         },
       },

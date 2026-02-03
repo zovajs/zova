@@ -1,4 +1,4 @@
-import { QBtn, QCard, QInput } from 'quasar';
+import { QBtn, QCard } from 'quasar';
 import { BeanRenderBase } from 'zova';
 import { Render } from 'zova-module-a-bean';
 import { ZForm, ZFormField, ZFormFieldWrapper, ZFormSubscribe } from 'zova-module-a-form';
