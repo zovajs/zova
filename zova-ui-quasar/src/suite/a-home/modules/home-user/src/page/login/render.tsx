@@ -64,6 +64,9 @@ export class RenderPageLogin extends BeanRenderBase {
                 modelValue={props.value}
                 onUpdate:modelValue={props['onUpdate:modelValue']}
                 onBlur={props.onBlur}
+                noErrorIcon={true}
+                error={true}
+                errorMessage={'ssssss'}
               />
             );
           }}

@@ -1,4 +1,5 @@
 import { VNode } from 'vue';
+import z from 'zod';
 import { cast, Use } from 'zova';
 import { BeanBehaviorBase, Behavior, IDecoratorBehaviorOptions, NextBehavior } from 'zova-module-a-behavior';
 import { ControllerFormField, IFormFieldRenderContext, IFormFieldRenderContextProps, IFormMeta, TypeFormField } from 'zova-module-a-form';
@@ -55,9 +56,11 @@ export class BehaviorFormField extends BeanBehaviorBase<
     const renderFlattern = propsBucket.renderFlattern;
     const propsGeneral = this._patchProps_general(formMeta, field, renderContext);
     const inputType = this.$$formField.normalizeInputType(renderFlattern, propsBucket.inputType);
-    const onSetDisplayValueDefault = (e: Event) => {
-      this.$$formField.setDisplayValue((e.target as HTMLInputElement).value);
-    };
+    const error = !field.state.meta.isValid;
+    const errorObj = field.state.meta.errors[0] as z.ZodError | undefined;
+    // const onSetDisplayValueDefault = (e: Event) => {
+    //   this.$$formField.setDisplayValue((e.target as HTMLInputElement).value);
+    // };
     const onSetDisplayValueDefaultByValue=(value:any)=>{
      this.$$formField.setDisplayValue(value);
     }
@@ -68,12 +71,15 @@ export class BehaviorFormField extends BeanBehaviorBase<
       'onUpdate:modelValue': propsBucket['onUpdate:modelValue'] !== undefined
         ? (propsBucket['onUpdate:modelValue'] ?? undefined)
         :  onSetDisplayValueDefaultByValue,
-      onChange: propsBucket.onChange !== undefined
-        ? (propsBucket.onChange ?? undefined)
-        : (propsBucket.displayValueUpdateTiming === 'change' ? onSetDisplayValueDefault : undefined),
-      onInput: propsBucket.onInput !== undefined
-        ? (propsBucket.onInput ?? undefined)
-        : (propsBucket.displayValueUpdateTiming !== 'change' ? onSetDisplayValueDefault : undefined),
+      noErrorIcon: true,
+      error,
+      errorMessage: errorObj?.message,
+      // onChange: propsBucket.onChange !== undefined
+      //   ? (propsBucket.onChange ?? undefined)
+      //   : (propsBucket.displayValueUpdateTiming === 'change' ? onSetDisplayValueDefault : undefined),
+      // onInput: propsBucket.onInput !== undefined
+      //   ? (propsBucket.onInput ?? undefined)
+      //   : (propsBucket.displayValueUpdateTiming !== 'change' ? onSetDisplayValueDefault : undefined),
       onBlur: propsBucket.onBlur !== undefined
         ? (propsBucket.onBlur ?? undefined)
         : (_e: Event) => {
