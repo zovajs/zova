@@ -22,9 +22,7 @@ export const config = (_sys: ZovaSys) => {
             currency: 'a-currency:formFieldCurrency',
             dateRange: 'a-date:formFieldDateRange',
           },
-          behaviors: {
-            formField: 'a-form:formField',
-          },
+          behaviors: {},
         },
       },
       table: {

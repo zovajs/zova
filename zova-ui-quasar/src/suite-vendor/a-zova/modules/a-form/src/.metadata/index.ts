@@ -113,60 +113,6 @@ declare module 'zova' {
   }
 }
 /** render: end */
-/** behavior: begin */
-export * from '../bean/behavior.formField.js';
-import { IBehaviorOptionsFormField } from '../bean/behavior.formField.js';
-import 'zova-module-a-behavior';
-declare module 'zova-module-a-behavior' {
-  
-    export interface IBehaviorRecord {
-      'a-form:formField': IBehaviorOptionsFormField;
-    }
-
-  
-}
-declare module 'zova-module-a-form' {
-  
-        export interface BehaviorFormField {
-          /** @internal */
-          get scope(): ScopeModuleAForm;
-        }
-
-        export interface BehaviorFormField {
-          get $beanFullName(): 'a-form.behavior.formField';
-          get $onionName(): 'a-form:formField';
-          get $onionOptions(): IBehaviorOptionsFormField;
-        } 
-}
-/** behavior: end */
-/** behavior: begin */
-import { BehaviorFormField } from '../bean/behavior.formField.js';
-import 'zova';
-declare module 'zova' {
-  export interface IBeanRecordLocal {
-    'a-form.behavior.formField': BehaviorFormField;
-  }
-}
-/** behavior: end */
-/** behaviors: begin */
-import 'vue';
-import 'vue/jsx-runtime';
-
-declare module 'vue' {
-  export interface InputHTMLAttributes {
-    'bs-formField'?: IBehaviorOptionsFormField | '' | boolean;
-  }
-}
-
-declare module 'vue/jsx-runtime' {
-  namespace JSX {
-    // need define class/style in IntrinsicAttributes
-    export interface IntrinsicAttributes {
-      'bs-formField'?: IBehaviorOptionsFormField | '' | boolean;
-    }
-  }
-}
-/** behaviors: end */
 /** config: begin */
 export * from '../config/config.js';
 import { config } from '../config/config.js';
