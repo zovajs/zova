@@ -8,6 +8,9 @@ export const SymbolBeanInstanceKey = Symbol('SymbolBeanInstanceKey');
 export const SymbolModuleBelong = Symbol('SymbolModuleBelong');
 export const SymbolModuleName = Symbol('SymbolModuleName');
 export const SymbolInited = Symbol('SymbolInited');
+const SymbolDebugCounter = Symbol('SymbolDebugCounter');
+
+let __debugCounter = 0;
 
 export class BeanBaseSimple extends BeanSimple {
   private [SymbolBeanFullName]: string;
@@ -18,6 +21,9 @@ export class BeanBaseSimple extends BeanSimple {
   constructor() {
     super();
     this[SymbolInited] = StateLock.create();
+    if (process.env.DEV) {
+      this[SymbolDebugCounter] = ++__debugCounter;
+    }
   }
 
   protected get [SymbolModuleBelong]() {
