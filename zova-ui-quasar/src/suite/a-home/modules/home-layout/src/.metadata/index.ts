@@ -91,7 +91,7 @@ declare module 'zova' {
 
 /** openapi: end */
 /** controller: begin */
-export * from '../component/essentialLink/controller.jsx';
+export * from '../component/itemLink/controller.jsx';
 export * from '../component/layoutEmpty/controller.jsx';
 export * from '../component/layoutTabs/controller.jsx';
 
@@ -102,7 +102,7 @@ declare module 'zova' {
 }
 declare module 'zova-module-home-layout' {
   
-        export interface ControllerEssentialLink {
+        export interface ControllerItemLink {
           /** @internal */
           get scope(): ScopeModuleHomeLayout;
         }
@@ -119,13 +119,13 @@ declare module 'zova-module-home-layout' {
 }
 /** controller: end */
 /** controller: begin */
-import { ControllerEssentialLink } from '../component/essentialLink/controller.jsx';
+import { ControllerItemLink } from '../component/itemLink/controller.jsx';
 import { ControllerLayoutEmpty } from '../component/layoutEmpty/controller.jsx';
 import { ControllerLayoutTabs } from '../component/layoutTabs/controller.jsx';
 import 'zova';
 declare module 'zova' {
   export interface IBeanRecordLocal {
-    'home-layout.controller.essentialLink': ControllerEssentialLink;
+    'home-layout.controller.itemLink': ControllerItemLink;
 'home-layout.controller.layoutEmpty': ControllerLayoutEmpty;
 'home-layout.controller.layoutTabs': ControllerLayoutTabs;
   }
@@ -133,26 +133,26 @@ declare module 'zova' {
 /** controller: end */
 
 /** components: begin */
-export * from './component/essentialLink.js';
-import { ZEssentialLink } from './component/essentialLink.js';
+export * from './component/itemLink.js';
+import { ZItemLink } from './component/itemLink.js';
 export * from './component/layoutEmpty.js';
 import { ZLayoutEmpty } from './component/layoutEmpty.js';
 export * from './component/layoutTabs.js';
 import { ZLayoutTabs } from './component/layoutTabs.js';
 export const components = {
-  'essentialLink': ZEssentialLink,
+  'itemLink': ZItemLink,
 'layoutEmpty': ZLayoutEmpty,
 'layoutTabs': ZLayoutTabs,
 };
 import 'zova';
 declare module 'zova' {
 export interface IComponentRecord {
-  'home-layout:essentialLink': ControllerEssentialLink;
+  'home-layout:itemLink': ControllerItemLink;
 'home-layout:layoutEmpty': ControllerLayoutEmpty;
 'home-layout:layoutTabs': ControllerLayoutTabs;
 }
 export interface IZovaComponentRecord {
-  'home-layout:essentialLink': typeof ZEssentialLink;
+  'home-layout:itemLink': typeof ZItemLink;
 'home-layout:layoutEmpty': typeof ZLayoutEmpty;
 'home-layout:layoutTabs': typeof ZLayoutTabs;
 }

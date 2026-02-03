@@ -60,6 +60,9 @@ export class CliRefactorRenameComponent extends BeanCliBase {
       `${argv.nameMeta.short}.ts`,
     );
     await fse.remove(componentVueOld);
+    // delete rest
+    const restDir = path.join(targetDir, 'rest');
+    await fse.remove(restDir);
     // rename
     const componentDirNew = path.join(
       targetDir,
