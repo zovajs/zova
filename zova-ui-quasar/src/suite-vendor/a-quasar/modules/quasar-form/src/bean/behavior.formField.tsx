@@ -1,3 +1,5 @@
+import { isEmptyObject } from '@cabloy/utils';
+import { QIcon } from 'quasar';
 import { VNode } from 'vue';
 import z from 'zod';
 import { cast, Use } from 'zova';
@@ -74,9 +76,6 @@ export class BehaviorFormField extends BeanBehaviorBase<
       'noErrorIcon': true,
       error,
       'errorMessage': errorObj?.message,
-      'v-slots': {
-        prepend: () => 'sss',
-      },
       // onChange: propsBucket.onChange !== undefined
       //   ? (propsBucket.onChange ?? undefined)
       //   : (propsBucket.displayValueUpdateTiming === 'change' ? onSetDisplayValueDefault : undefined),
@@ -89,6 +88,18 @@ export class BehaviorFormField extends BeanBehaviorBase<
             field.api.handleBlur();
           },
     };
+    // slots
+    const slots: any = {};
+    if (propsBucket.iconPrefix) {
+      slots.prepend = () => <QIcon name={propsBucket.iconPrefix}></QIcon>;
+    }
+    if (propsBucket.iconSuffix) {
+      slots.append = () => <QIcon name={propsBucket.iconSuffix}></QIcon>;
+    }
+    if (!isEmptyObject(slots)) {
+      propsPatch['v-slots'] = slots;
+    }
+    // merge
     renderContext.props = Object.assign({}, propsGeneral, propsPatch, renderContext.props);
   }
 }

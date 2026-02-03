@@ -1,4 +1,4 @@
-import { QCard, QInput } from 'quasar';
+import { QBtn, QCard, QInput } from 'quasar';
 import { BeanRenderBase } from 'zova';
 import { Render } from 'zova-module-a-bean';
 import { ZForm, ZFormField, ZFormFieldWrapper, ZFormSubscribe } from 'zova-module-a-form';
@@ -55,27 +55,19 @@ export class RenderPageLogin extends BeanRenderBase {
         <ZFormField
           name="username"
           iconPrefix=":daisy:person"
-          slotDefault={({ props }) => {
-            return (
-              <QInput
-                type="text"
-                label={this.scope.locale.YourUsername()}
-                name={props.name}
-                modelValue={props.value}
-                onUpdate:modelValue={props['onUpdate:modelValue']}
-                onBlur={props.onBlur}
-              />
-            );
-          }}
+          label={this.scope.locale.YourUsername()}
         >
         </ZFormField>
-        <ZFormField name="password" class="grow" inputType="password" iconPrefix=":daisy:lock"></ZFormField>
+        <ZFormField name="password" inputType="password" iconPrefix=":daisy:lock"></ZFormField>
         <ZFormFieldWrapper name="captcha"></ZFormFieldWrapper>
         <ZFormSubscribe slotDefault={$$form => {
           return (
-            <button disabled={$$form.formState.isSubmitting} type="submit" class="btn mt-2 w-full btn-primary">
-              {this.scope.locale.Login()}
-            </button>
+            <QBtn
+              label={this.scope.locale.Login()}
+              disable={$$form.formState.isSubmitting}
+              type="submit"
+              color="primary"
+            ></QBtn>
           );
         }}
         >

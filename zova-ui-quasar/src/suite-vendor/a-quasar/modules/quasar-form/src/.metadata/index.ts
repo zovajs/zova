@@ -1,7 +1,7 @@
 /* eslint-disable */
 /** behavior: begin */
-export * from '../bean/behavior.formField.js';
-import { IBehaviorOptionsFormField } from '../bean/behavior.formField.js';
+export * from '../bean/behavior.formField.jsx';
+import { IBehaviorOptionsFormField } from '../bean/behavior.formField.jsx';
 import 'zova-module-a-behavior';
 declare module 'zova-module-a-behavior' {
   
@@ -26,7 +26,7 @@ declare module 'zova-module-quasar-form' {
 }
 /** behavior: end */
 /** behavior: begin */
-import { BehaviorFormField } from '../bean/behavior.formField.js';
+import { BehaviorFormField } from '../bean/behavior.formField.jsx';
 import 'zova';
 declare module 'zova' {
   export interface IBeanRecordLocal {
