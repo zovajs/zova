@@ -62,7 +62,7 @@ export class RenderPageLogin extends BeanRenderBase {
                 label={this.scope.locale.YourUsername()}
                 name={props.name}
                 modelValue={props.value}
-                onUpdate:modelValue={props.onUpdateValue}
+                onUpdate:modelValue={props['onUpdate:modelValue']}
                 onBlur={props.onBlur}
               />
             );

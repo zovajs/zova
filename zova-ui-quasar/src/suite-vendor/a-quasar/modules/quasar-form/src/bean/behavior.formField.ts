@@ -1,5 +1,5 @@
 import { VNode } from 'vue';
-import { Use } from 'zova';
+import { cast, Use } from 'zova';
 import { BeanBehaviorBase, Behavior, IDecoratorBehaviorOptions, NextBehavior } from 'zova-module-a-behavior';
 import { ControllerFormField, IFormFieldRenderContext, IFormFieldRenderContextProps, IFormMeta, TypeFormField } from 'zova-module-a-form';
 
@@ -26,7 +26,8 @@ export class BehaviorFormField extends BeanBehaviorBase<
   private _patchProps(renderContext: IFormFieldRenderContext) {
     const formMeta = this.$$formField.formMeta;
     const field = this.$$formField.field;
-    if (renderContext.propsBucket.renderProvider === 'input') {
+    const componentName=typeof renderContext.propsBucket.renderProvider==='object'? cast(renderContext.propsBucket.renderProvider)?.name:renderContext.propsBucket.renderProvider;
+    if (componentName === 'QInput') {
       this._patchProps_input(formMeta, field, renderContext);
     }
   }
@@ -34,10 +35,10 @@ export class BehaviorFormField extends BeanBehaviorBase<
   private _patchProps_general(
     formMeta: IFormMeta | undefined,
     _field: TypeFormField,
-    renderContext: IFormFieldRenderContext,
+    _renderContext: IFormFieldRenderContext,
   ) {
     const propsPatch: IFormFieldRenderContextProps = {
-      value: renderContext.propsBucket.displayValue,
+      // value: renderContext.propsBucket.displayValue,
     };
     if (formMeta?.formMode === 'view') {
       propsPatch.readonly = true;
@@ -62,6 +63,11 @@ export class BehaviorFormField extends BeanBehaviorBase<
     }
     const propsPatch: IFormFieldRenderContextProps = {
       type: inputType,
+      label: propsBucket.label,
+      modelValue: propsBucket.displayValue,
+      'onUpdate:modelValue': propsBucket['onUpdate:modelValue'] !== undefined
+        ? (propsBucket['onUpdate:modelValue'] ?? undefined)
+        :  onSetDisplayValueDefaultByValue,
       onChange: propsBucket.onChange !== undefined
         ? (propsBucket.onChange ?? undefined)
         : (propsBucket.displayValueUpdateTiming === 'change' ? onSetDisplayValueDefault : undefined),
@@ -73,9 +79,6 @@ export class BehaviorFormField extends BeanBehaviorBase<
         : (_e: Event) => {
             field.api.handleBlur();
           },
-      onUpdateValue: propsBucket.onUpdateValue !== undefined
-        ? (propsBucket.onUpdateValue ?? undefined)
-        :  onSetDisplayValueDefaultByValue,
     };
     renderContext.props = Object.assign({}, propsGeneral, propsPatch, renderContext.props);
   }

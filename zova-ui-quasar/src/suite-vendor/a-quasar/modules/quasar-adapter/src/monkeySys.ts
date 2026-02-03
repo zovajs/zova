@@ -30,6 +30,7 @@ export class MonkeySys extends BeanSimple implements IMonkeySysInitialize {
             // captcha: 'devui-form:formFieldCaptcha',
           },
           behaviors: {
+            formField: 'quasar-form:formField',
             //  formFieldLayout: 'devui-form:formFieldLayout',
           },
         },
