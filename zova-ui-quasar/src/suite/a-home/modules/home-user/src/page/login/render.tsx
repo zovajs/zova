@@ -14,7 +14,7 @@ export class RenderPageLogin extends BeanRenderBase {
               {this._renderLandingInfo()}
             </div>
             <div class="col-12 col-md-6" style={{ minWidth: '320px' }}>
-              <h2 class="text-h6 text-center" style={{ marginBottom: '12px' }}>{this.scope.locale.Login()}</h2>
+              <h5 class="text-center" style={{ marginBottom: '12px' }}>{this.scope.locale.Login()}</h5>
               <div>
                 {this._renderForm()}
               </div>
@@ -30,8 +30,8 @@ export class RenderPageLogin extends BeanRenderBase {
       <div class="min-h-full rounded-l-xl bg-base-200">
         <div class="py-12">
           <div class="max-w-md">
-            <h1 class="text-3xl text-center font-bold">Zova</h1>
-            <h5 class="text-2xl text-center opacity-40">Less is more, while more is less</h5>
+            <h1 class="text-center font-bold">Zova</h1>
+            <h5 class="text-center opacity-40">Less is more, while more is less</h5>
           </div>
         </div>
       </div>
