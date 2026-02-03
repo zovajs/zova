@@ -42,19 +42,33 @@ export interface IZovaComponentRecord {
 }
 /** components: end */
 /** behavior: begin */
+export * from '../bean/behavior.formField.js';
 export * from '../bean/behavior.formFieldLayout.jsx';
+import { IBehaviorOptionsFormField } from '../bean/behavior.formField.js';
 import { IBehaviorOptionsFormFieldLayout } from '../bean/behavior.formFieldLayout.jsx';
 import 'zova-module-a-behavior';
 declare module 'zova-module-a-behavior' {
   
     export interface IBehaviorRecord {
-      'devui-form:formFieldLayout': IBehaviorOptionsFormFieldLayout;
+      'devui-form:formField': IBehaviorOptionsFormField;
+'devui-form:formFieldLayout': IBehaviorOptionsFormFieldLayout;
     }
 
   
 }
 declare module 'zova-module-devui-form' {
   
+        export interface BehaviorFormField {
+          /** @internal */
+          get scope(): ScopeModuleDevuiForm;
+        }
+
+        export interface BehaviorFormField {
+          get $beanFullName(): 'devui-form.behavior.formField';
+          get $onionName(): 'devui-form:formField';
+          get $onionOptions(): IBehaviorOptionsFormField;
+        }
+
         export interface BehaviorFormFieldLayout {
           /** @internal */
           get scope(): ScopeModuleDevuiForm;
@@ -68,11 +82,13 @@ declare module 'zova-module-devui-form' {
 }
 /** behavior: end */
 /** behavior: begin */
+import { BehaviorFormField } from '../bean/behavior.formField.js';
 import { BehaviorFormFieldLayout } from '../bean/behavior.formFieldLayout.jsx';
 import 'zova';
 declare module 'zova' {
   export interface IBeanRecordLocal {
-    'devui-form.behavior.formFieldLayout': BehaviorFormFieldLayout;
+    'devui-form.behavior.formField': BehaviorFormField;
+'devui-form.behavior.formFieldLayout': BehaviorFormFieldLayout;
   }
 }
 /** behavior: end */
@@ -82,7 +98,8 @@ import 'vue/jsx-runtime';
 
 declare module 'vue' {
   export interface InputHTMLAttributes {
-    'bs-devui-form-formFieldLayout'?: IBehaviorOptionsFormFieldLayout | '' | boolean;
+    'bs-devui-form-formField'?: IBehaviorOptionsFormField | '' | boolean;
+'bs-devui-form-formFieldLayout'?: IBehaviorOptionsFormFieldLayout | '' | boolean;
   }
 }
 
@@ -90,7 +107,8 @@ declare module 'vue/jsx-runtime' {
   namespace JSX {
     // need define class/style in IntrinsicAttributes
     export interface IntrinsicAttributes {
-      'bs-devui-form-formFieldLayout'?: IBehaviorOptionsFormFieldLayout | '' | boolean;
+      'bs-devui-form-formField'?: IBehaviorOptionsFormField | '' | boolean;
+'bs-devui-form-formFieldLayout'?: IBehaviorOptionsFormFieldLayout | '' | boolean;
     }
   }
 }

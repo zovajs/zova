@@ -1,10 +1,7 @@
-import type { ControllerFormField } from '../component/formField/controller.jsx';
+import type { ControllerFormField, IFormFieldRenderContext, IFormFieldRenderContextProps, IFormMeta, TypeFormField } from 'zova-module-a-form';
 import { VNode } from 'vue';
 import { Use } from 'zova';
 import { BeanBehaviorBase, Behavior, IDecoratorBehaviorOptions, NextBehavior } from 'zova-module-a-behavior';
-import { TypeFormField } from '../types/form.js';
-import { IFormFieldRenderContext, IFormFieldRenderContextProps } from '../types/formField.js';
-import { IFormMeta } from '../types/formMeta.js';
 
 export interface IBehaviorPropsInputFormField extends IFormFieldRenderContext {}
 
