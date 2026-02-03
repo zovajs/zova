@@ -87,6 +87,7 @@
     "zova-module-home-passport": "workspace:^",
     "zova-module-home-user": "workspace:^",
     "zova-module-quasar-adapter": "workspace:^",
+    "zova-module-quasar-form": "workspace:^",
     "zova-module-a-action": "workspace:^",
     "zova-module-a-actions": "workspace:^",
     "zova-module-a-behaviors": "workspace:^",
