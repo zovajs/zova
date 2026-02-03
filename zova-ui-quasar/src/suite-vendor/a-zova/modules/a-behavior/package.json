@@ -1,0 +1,44 @@
+{
+  "name": "zova-module-a-behavior",
+  "type": "module",
+  "version": "5.0.0",
+  "title": "a-behavior",
+  "zovaModule": {
+    "onions": {
+      "behavior": {
+        "optionsGlobalInterfaceName": "IDecoratorBehaviorOptions",
+        "optionsGlobalInterfaceFrom": "zova-module-a-behavior",
+        "boilerplate": "cli/behavior/boilerplate",
+        "metadataCustom": "cli/behavior/metadata/generate.ts"
+      }
+    }
+  },
+  "description": "",
+  "author": "",
+  "keywords": [
+    "Zova Module"
+  ],
+  "exports": {
+    ".": {
+      "types": [
+        "./src/index.ts",
+        "./dist/index.d.ts"
+      ],
+      "import": "./src/index.ts",
+      "default": "./dist/index.js"
+    },
+    "./*": "./*"
+  },
+  "files": [
+    "cli",
+    "dist",
+    "mock",
+    "rest"
+  ],
+  "scripts": {
+    "clean": "tsc -b --clean",
+    "tsc:publish": "npm run clean && tsc -b",
+    "_prepublishOnly": "npm run tsc:publish"
+  },
+  "dependencies": {}
+}
