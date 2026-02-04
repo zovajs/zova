@@ -1,5 +1,4 @@
 import { QInput } from 'quasar';
-import z from 'zod';
 import { BeanControllerBase, ClientOnly, IComponentOptions, TypeEventOff, Use } from 'zova';
 import { Controller } from 'zova-module-a-bean';
 import { ControllerForm, IFormFieldOptions, ZFormField } from 'zova-module-a-form';
@@ -16,7 +15,6 @@ export class ControllerFormFieldCaptcha extends BeanControllerBase {
   static $propsDefault = {};
   static $componentOptions: IComponentOptions = { inheritAttrs: false };
 
-  zodSchema: z.ZodString;
   eventFormSubmission: TypeEventOff;
   captchaData?: ICaptchaData;
 
@@ -27,8 +25,6 @@ export class ControllerFormFieldCaptcha extends BeanControllerBase {
   $$form: ControllerForm;
 
   protected async __init__() {
-    // zodSchema
-    this.zodSchema = this.$$v.required(z.string());
     // event
     if (process.env.CLIENT) {
       this.eventFormSubmission = this.app.meta.event.on('a-form:formSubmission', (data, next) => {
@@ -80,7 +76,7 @@ export class ControllerFormFieldCaptcha extends BeanControllerBase {
     return (
       <ZFormField
         {...this.$props}
-        validateOnDynamic={this.zodSchema}
+        render="text"
         slotDefault={({ props }, $$formField) => {
           return (
             <QInput
