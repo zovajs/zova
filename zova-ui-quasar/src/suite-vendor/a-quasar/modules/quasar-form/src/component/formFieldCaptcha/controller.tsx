@@ -1,3 +1,4 @@
+import { QInput } from 'quasar';
 import z from 'zod';
 import { BeanControllerBase, ClientOnly, IComponentOptions, TypeEventOff, Use } from 'zova';
 import { Controller } from 'zova-module-a-bean';
@@ -82,14 +83,12 @@ export class ControllerFormFieldCaptcha extends BeanControllerBase {
           validateOnDynamic={this.zodSchema}
           slotDefault={({ props }, $$formField) => {
             return (
-              <input
+              <QInput
                 type="text"
-                class="grow"
-                placeholder={this.scope.locale.InputCaptcha()}
+                label={this.scope.locale.InputCaptcha()}
                 name={props.name}
-                value={this.captchaData?.token}
-                onInput={(e: Event) => {
-                  const token = (e.target as HTMLInputElement).value;
+                modelValue={this.captchaData?.token as any}
+                onUpdate:modelValue={token => {
                   if (this.captchaData) {
                     this.captchaData.token = token;
                   }
@@ -99,7 +98,11 @@ export class ControllerFormFieldCaptcha extends BeanControllerBase {
                   });
                 }}
                 onBlur={props.onBlur}
-              ></input>
+              >
+                {{
+                  append: () => 'xx',
+                }}
+              </QInput>
             );
           }}
         ></ZFormField>
