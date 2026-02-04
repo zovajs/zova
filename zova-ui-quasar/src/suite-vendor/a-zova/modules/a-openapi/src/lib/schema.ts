@@ -7,9 +7,27 @@ import { cast } from 'zova';
 
 const __FilterColumnsIgnore = ['columns', 'where', 'orders', 'pageNo', 'pageSize'];
 
-export function schemaToZodSchema<T extends z.ZodType = z.ZodType>(schema: SchemaObject): T {
-  const code = jsonSchemaToZod(toRaw(schema));
+export function schemaToZodSchema<T extends z.ZodType = z.ZodType>(
+  schema: SchemaObject,
+  onGetSchema: (schemaName: string) => SchemaObject | undefined,
+): T {
+  const schemaNormalize = _normalizeSchema(toRaw(schema), onGetSchema);
+  const code = jsonSchemaToZod(schemaNormalize);
   return evaluateSimple(code, { z });
+}
+
+function _normalizeSchema(schema: SchemaObject, onGetSchema: (schemaName: string) => SchemaObject | undefined) {
+  if (!schema.properties) return schema;
+  const schemaNew = Object.assign({}, schema, { properties: {} });
+  for (const key in schema.properties) {
+    let property = schema.properties[key] as SchemaObject | undefined;
+    if (property?.$ref) {
+      property = onGetSchema(property.$ref);
+    }
+    if (!property) continue;
+    schemaNew.properties[key] = _normalizeSchema(property, onGetSchema);
+  }
+  return schemaNew;
 }
 
 export function getSchemaOfRequestBody(operationObject?: OperationObject): SchemaObject | undefined {
