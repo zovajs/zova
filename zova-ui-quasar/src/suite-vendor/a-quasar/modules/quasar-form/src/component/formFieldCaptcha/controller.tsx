@@ -3,6 +3,7 @@ import z from 'zod';
 import { BeanControllerBase, ClientOnly, IComponentOptions, TypeEventOff, Use } from 'zova';
 import { Controller } from 'zova-module-a-bean';
 import { ControllerForm, IFormFieldOptions, ZFormField } from 'zova-module-a-form';
+import { ZIcon } from 'zova-module-a-icon';
 import { ICaptchaData, ICaptchaOptions } from 'zova-module-a-openapi';
 import { ToolV } from 'zova-module-a-zod';
 
@@ -32,7 +33,7 @@ export class ControllerFormFieldCaptcha extends BeanControllerBase {
     if (process.env.CLIENT) {
       this.eventFormSubmission = this.app.meta.event.on('a-form:formSubmission', (data, next) => {
         if (data.form.formId === this.$$form.form.formId && data.error) {
-          this.refreshCaptchaData();
+          // this.refreshCaptchaData();
         }
         return next();
       });
@@ -77,49 +78,54 @@ export class ControllerFormFieldCaptcha extends BeanControllerBase {
 
   protected render() {
     return (
-      <>
-        <ZFormField
-          {...this.$props}
-          validateOnDynamic={this.zodSchema}
-          slotDefault={({ props }, $$formField) => {
-            return (
-              <QInput
-                type="text"
-                label={this.scope.locale.InputCaptcha()}
-                name={props.name}
-                modelValue={this.captchaData?.token as any}
-                onUpdate:modelValue={token => {
-                  if (this.captchaData) {
-                    this.captchaData.token = token;
-                  }
-                  $$formField.field.api.handleChange({
-                    id: this.captchaData?.id,
-                    token,
-                  });
-                }}
-                onBlur={props.onBlur}
-              >
-                {{
-                  append: () => 'xx',
-                }}
-              </QInput>
-            );
-          }}
-        ></ZFormField>
-        <label class="flex items-center gap-2 w-full" style={{ height: '50px' }}>
-          <ClientOnly>
-            {this.captchaData?.payload && (
-              <img
-                class="cursor-pointer"
-                src={this.captchaData!.payload as string}
-                onClick={() => {
-                  this.refreshCaptchaData();
-                }}
-              ></img>
-            )}
-          </ClientOnly>
-        </label>
-      </>
+      <ZFormField
+        {...this.$props}
+        validateOnDynamic={this.zodSchema}
+        slotDefault={({ props }, $$formField) => {
+          return (
+            <QInput
+              type="text"
+              label={this.scope.locale.InputCaptcha()}
+              name={props.name}
+              modelValue={this.captchaData?.token as any}
+              onUpdate:modelValue={token => {
+                if (this.captchaData) {
+                  this.captchaData.token = token;
+                }
+                $$formField.field.api.handleChange({
+                  id: this.captchaData?.id,
+                  token,
+                });
+              }}
+              onBlur={props.onBlur}
+              noErrorIcon={props.noErrorIcon}
+              error={props.error}
+              errorMessage={props.errorMessage}
+            >
+              {{
+                prepend: () => <ZIcon name=":editor:code-block"></ZIcon>,
+                append: () => this._renderCaptcha(),
+              }}
+            </QInput>
+          );
+        }}
+      ></ZFormField>
+    );
+  }
+
+  private _renderCaptcha() {
+    return (
+      <ClientOnly>
+        {this.captchaData?.payload && (
+          <img
+            class="cursor-pointer"
+            src={this.captchaData!.payload as string}
+            onClick={() => {
+              this.refreshCaptchaData();
+            }}
+          ></img>
+        )}
+      </ClientOnly>
     );
   }
 }
