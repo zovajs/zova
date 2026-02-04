@@ -119,7 +119,7 @@ export class ModelSdk extends BeanModelBase {
       queryFn: () => {
         const querySchema = this.getSchema(schemaName);
         if (!querySchema.data) return null;
-        const zodSchema = schemaToZodSchema(querySchema.data);
+        const zodSchema = schemaToZodSchema(querySchema.data, schemaName => this.getSchema(schemaName).data);
         return zodSchema;
       },
     });
