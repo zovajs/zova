@@ -27,7 +27,7 @@ export class MonkeySys extends BeanSimple implements IMonkeySysInitialize {
         provider: {
           components: {
             text: QInput,
-            // captcha: 'devui-form:formFieldCaptcha',
+            captcha: 'quasar-form:formFieldCaptcha',
           },
           behaviors: {
             formField: 'quasar-form:formField',
