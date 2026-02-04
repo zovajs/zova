@@ -15,7 +15,7 @@ export class RenderPageLogin extends BeanRenderBase {
             </div>
             <div class="col-12 col-md-6" style={{ minWidth: '320px' }}>
               <h5 class="text-center" style={{ marginBottom: '12px' }}>{this.scope.locale.Login()}</h5>
-              <div>
+              <div class="q-pa-md">
                 {this._renderForm()}
               </div>
             </div>
@@ -41,6 +41,7 @@ export class RenderPageLogin extends BeanRenderBase {
   _renderForm() {
     return (
       <ZForm
+        class="q-gutter-md"
         data={this.user}
         schema={this.schema}
         onSubmit={data => {
