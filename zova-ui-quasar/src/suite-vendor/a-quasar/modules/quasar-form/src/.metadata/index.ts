@@ -1,4 +1,46 @@
 /* eslint-disable */
+/** controller: begin */
+export * from '../component/formFieldCaptcha/controller.jsx';
+
+import 'zova';
+declare module 'zova' {
+  
+  
+}
+declare module 'zova-module-quasar-form' {
+  
+        export interface ControllerFormFieldCaptcha {
+          /** @internal */
+          get scope(): ScopeModuleQuasarForm;
+        } 
+}
+/** controller: end */
+/** controller: begin */
+import { ControllerFormFieldCaptcha } from '../component/formFieldCaptcha/controller.jsx';
+import 'zova';
+declare module 'zova' {
+  export interface IBeanRecordLocal {
+    'quasar-form.controller.formFieldCaptcha': ControllerFormFieldCaptcha;
+  }
+}
+/** controller: end */
+
+/** components: begin */
+export * from './component/formFieldCaptcha.js';
+import { ZFormFieldCaptcha } from './component/formFieldCaptcha.js';
+export const components = {
+  'formFieldCaptcha': ZFormFieldCaptcha,
+};
+import 'zova';
+declare module 'zova' {
+export interface IComponentRecord {
+  'quasar-form:formFieldCaptcha': ControllerFormFieldCaptcha;
+}
+export interface IZovaComponentRecord {
+  'quasar-form:formFieldCaptcha': typeof ZFormFieldCaptcha;
+}
+}
+/** components: end */
 /** behavior: begin */
 export * from '../bean/behavior.formField.jsx';
 export * from '../bean/behavior.formFieldLayout.js';
@@ -71,8 +113,11 @@ declare module 'vue/jsx-runtime' {
   }
 }
 /** behaviors: end */
+/** locale: begin */
+import { locales } from './locales.js';
+/** locale: end */
 /** scope: begin */
-import { BeanScopeBase, type BeanScopeUtil } from 'zova';
+import { BeanScopeBase, type BeanScopeUtil, TypeModuleLocales, TypeLocaleBase } from 'zova';
 import { Scope } from 'zova-module-a-bean';
 
 @Scope()
@@ -80,6 +125,7 @@ export class ScopeModuleQuasarForm extends BeanScopeBase {}
 
 export interface ScopeModuleQuasarForm {
   util: BeanScopeUtil;
+locale: TypeModuleLocales<(typeof locales)[TypeLocaleBase]>;
 }
 
 import 'zova';
@@ -90,9 +136,14 @@ declare module 'zova' {
   
   
 
-  
+  export interface IBeanScopeLocale {
+    'quasar-form': (typeof locales)[TypeLocaleBase];
+  }
 
   
 }
-  
+
+export function locale<K extends keyof (typeof locales)[TypeLocaleBase]>(key: K): `quasar-form::${K}` {
+  return `quasar-form::${key}`;
+}  
 /** scope: end */
