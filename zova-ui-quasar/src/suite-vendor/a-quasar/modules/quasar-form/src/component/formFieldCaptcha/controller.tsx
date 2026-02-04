@@ -29,7 +29,7 @@ export class ControllerFormFieldCaptcha extends BeanControllerBase {
     if (process.env.CLIENT) {
       this.eventFormSubmission = this.app.meta.event.on('a-form:formSubmission', (data, next) => {
         if (data.form.formId === this.$$form.form.formId && data.error) {
-          // this.refreshCaptchaData();
+          this.refreshCaptchaData();
         }
         return next();
       });
