@@ -1,4 +1,4 @@
-import { QInput } from 'quasar';
+import { QInput, QInputProps } from 'quasar';
 import { BeanControllerBase, ClientOnly, IComponentOptions, TypeEventOff, Use } from 'zova';
 import { Controller } from 'zova-module-a-bean';
 import { ControllerForm, IFormFieldOptions, ZFormField } from 'zova-module-a-form';
@@ -78,25 +78,23 @@ export class ControllerFormFieldCaptcha extends BeanControllerBase {
         {...this.$props}
         render="text"
         slotDefault={({ props }, $$formField) => {
+          const propsNew: QInputProps = {
+            ...props,
+            'label': this.scope.locale.InputCaptcha(),
+            'modelValue': this.captchaData?.token as any,
+            'onUpdate:modelValue': token => {
+              if (this.captchaData) {
+                this.captchaData.token = token;
+              }
+              $$formField.field.api.handleChange({
+                id: this.captchaData?.id,
+                token,
+              });
+            },
+          };
           return (
             <QInput
-              type="text"
-              label={this.scope.locale.InputCaptcha()}
-              name={props.name}
-              modelValue={this.captchaData?.token as any}
-              onUpdate:modelValue={token => {
-                if (this.captchaData) {
-                  this.captchaData.token = token;
-                }
-                $$formField.field.api.handleChange({
-                  id: this.captchaData?.id,
-                  token,
-                });
-              }}
-              onBlur={props.onBlur}
-              noErrorIcon={props.noErrorIcon}
-              error={props.error}
-              errorMessage={props.errorMessage}
+              {...propsNew}
             >
               {{
                 prepend: () => <ZIcon name=":editor:code-block"></ZIcon>,

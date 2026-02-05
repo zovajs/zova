@@ -62,7 +62,7 @@ export interface IFormFieldOptions<TParentData = {}>
 export interface IFormFieldRenderContextProps {
   name?: string;
   value?: any;
-  type?: string;
+  type?: any; // not use string for quasar
   readonly?: boolean;
   placeholder?: string;
   class?: any;
