@@ -78,10 +78,10 @@ export class ControllerFormFieldCaptcha extends BeanControllerBase {
           slotDefault={({ props }, $$formField) => {
             return (
               <input
+                {...props}
                 type="text"
                 class="grow"
                 placeholder={this.scope.locale.InputCaptcha()}
-                name={props.name}
                 value={this.captchaData?.token}
                 onInput={(e: Event) => {
                   const token = (e.target as HTMLInputElement).value;
@@ -93,7 +93,6 @@ export class ControllerFormFieldCaptcha extends BeanControllerBase {
                     token,
                   });
                 }}
-                onBlur={props.onBlur}
               ></input>
             );
           }}

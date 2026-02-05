@@ -55,13 +55,10 @@ export class RenderPageLogin extends BeanRenderBase {
           slotDefault={({ props }) => {
             return (
               <input
+                {...props}
                 type="text"
                 class="grow"
                 placeholder={this.scope.locale.YourUsername()}
-                name={props.name}
-                value={props.value}
-                onInput={props.onInput}
-                onBlur={props.onBlur}
               />
             );
           }}
