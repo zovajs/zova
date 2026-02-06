@@ -2,7 +2,6 @@ import { QInput, QInputProps } from 'quasar';
 import { BeanControllerBase, ClientOnly, IComponentOptions, TypeEventOff, Use } from 'zova';
 import { Controller } from 'zova-module-a-bean';
 import { ControllerForm, IFormFieldOptions, ZFormField } from 'zova-module-a-form';
-import { ZIcon } from 'zova-module-a-icon';
 import { ICaptchaData, ICaptchaOptions } from 'zova-module-a-openapi';
 import { ToolV } from 'zova-module-a-zod';
 
@@ -77,6 +76,7 @@ export class ControllerFormFieldCaptcha extends BeanControllerBase {
       <ZFormField
         {...this.$props}
         render="text"
+        iconPrefix=":editor:code-block"
         slotDefault={({ props }, $$formField) => {
           const propsNew: QInputProps = {
             ...props,
@@ -97,7 +97,6 @@ export class ControllerFormFieldCaptcha extends BeanControllerBase {
               {...propsNew}
             >
               {{
-                prepend: () => <ZIcon name=":editor:code-block"></ZIcon>,
                 append: () => this._renderCaptcha(),
               }}
             </QInput>
