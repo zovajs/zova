@@ -1,6 +1,6 @@
 import { BeanControllerBase, ClientOnly, IComponentOptions, TypeEventOff, Use } from 'zova';
 import { Controller } from 'zova-module-a-bean';
-import { ControllerForm, IFormFieldOptions, ZFormField } from 'zova-module-a-form';
+import { ControllerForm, IFormFieldOptions, IFormFieldRenderContextProps, ZFormField } from 'zova-module-a-form';
 import { ICaptchaData, ICaptchaOptions } from 'zova-module-a-openapi';
 import { ToolV } from 'zova-module-a-zod';
 
@@ -75,24 +75,28 @@ export class ControllerFormFieldCaptcha extends BeanControllerBase {
       <>
         <ZFormField
           {...this.$props}
+          render="text"
           slotDefault={({ props }, $$formField) => {
+            const propsNew: IFormFieldRenderContextProps = {
+              ...props,
+              type: 'text',
+              class: 'grow',
+              placeholder: this.scope.locale.InputCaptcha(),
+              value: this.captchaData?.token,
+              onInput: (e: Event) => {
+                const token = (e.target as HTMLInputElement).value;
+                if (this.captchaData) {
+                  this.captchaData.token = token;
+                }
+                $$formField.field.api.handleChange({
+                  id: this.captchaData?.id,
+                  token,
+                });
+              },
+            };
             return (
               <input
-                {...props}
-                type="text"
-                class="grow"
-                placeholder={this.scope.locale.InputCaptcha()}
-                value={this.captchaData?.token}
-                onInput={(e: Event) => {
-                  const token = (e.target as HTMLInputElement).value;
-                  if (this.captchaData) {
-                    this.captchaData.token = token;
-                  }
-                  $$formField.field.api.handleChange({
-                    id: this.captchaData?.id,
-                    token,
-                  });
-                }}
+                {...propsNew}
               ></input>
             );
           }}
