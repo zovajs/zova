@@ -1,34 +1,15 @@
-import { BeanBase, UseScope } from 'zova';
+import { BeanBase } from 'zova';
 import { Service } from 'zova-module-a-bean';
-import { ScopeModuleASsr } from 'zova-module-a-ssr';
 
 export const ErrorMessageJwtExpired = 'jwt expired';
 
 @Service()
 export class ServiceSsr extends BeanBase {
-  @UseScope()
-  $$scopeSsr: ScopeModuleASsr;
-
   public async initialize() {
     // ssr hydrated
     if (process.env.CLIENT) {
       this.ctx.meta.$ssr.onHydrated(() => {
         // do something
-      });
-    }
-    // ssr theme
-    if (process.env.SERVER) {
-      this.ctx.meta.$ssr.context.onRendered((err?: Error) => {
-        if (err) return;
-        if (!this.$$scopeSsr.config.cookieTheme) {
-          this.ctx.meta.$ssr.context._meta.bodyTags += `<script id="__prefersColorSchemeDarkJS">
-            document.body.setAttribute('data-theme', window.ssr_themedark_data);
-            if(window.ssr_local_themename==='demo-basic.theme.orange'){
-              document.body.style.setProperty('--color-primary', '#f28238');
-            }
-            document.querySelector('#__prefersColorSchemeDarkJS').remove();
-          </script>`.replaceAll('\n', '');
-        }
       });
     }
     // ssr errorHandler

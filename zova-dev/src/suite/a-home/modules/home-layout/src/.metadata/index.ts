@@ -34,6 +34,41 @@ declare module 'zova' {
   }
 }
 /** model: end */
+/** service: begin */
+export * from '../service/ssr.js';
+
+import 'zova-module-a-bean';
+declare module 'zova-module-a-bean' {
+  
+    export interface IServiceRecord {
+      'home-layout:ssr': never;
+    }
+
+  
+}
+declare module 'zova-module-home-layout' {
+  
+        export interface ServiceSsr {
+          /** @internal */
+          get scope(): ScopeModuleHomeLayout;
+        }
+
+        export interface ServiceSsr {
+          get $beanFullName(): 'home-layout.service.ssr';
+          get $onionName(): 'home-layout:ssr';
+          
+        } 
+}
+/** service: end */
+/** service: begin */
+import { ServiceSsr } from '../service/ssr.js';
+import 'zova';
+declare module 'zova' {
+  export interface IBeanRecordGeneral {
+    'home-layout.service.ssr': ServiceSsr;
+  }
+}
+/** service: end */
 /** controller: begin */
 export * from '../component/essentialLink/controller.jsx';
 export * from '../component/layoutEmpty/controller.jsx';

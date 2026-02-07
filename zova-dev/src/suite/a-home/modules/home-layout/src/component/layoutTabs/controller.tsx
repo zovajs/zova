@@ -3,6 +3,7 @@ import { BeanControllerBase, Use } from 'zova';
 import { Controller } from 'zova-module-a-bean';
 import { $QueryAutoLoad } from 'zova-module-a-model';
 import { ModelMenu } from '../../model/menu.js';
+import { ServiceSsr } from '../../service/ssr.js';
 
 export interface ControllerLayoutTabsProps {}
 
@@ -14,6 +15,9 @@ export class ControllerLayoutTabs extends BeanControllerBase {
 
   @Use()
   $$modelMenu: ModelMenu;
+
+  @Use()
+  $$ssr: ServiceSsr;
 
   leftDrawerOpen: boolean = false;
 
