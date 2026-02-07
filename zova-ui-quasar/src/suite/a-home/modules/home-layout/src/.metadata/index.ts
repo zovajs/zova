@@ -50,6 +50,41 @@ declare module 'zova' {
   }
 }
 /** model: end */
+/** service: begin */
+export * from '../component/layoutTabs/service.layoutTabsSsr.js';
+
+import 'zova-module-a-bean';
+declare module 'zova-module-a-bean' {
+  
+    export interface IServiceRecord {
+      'home-layout:layoutTabsSsr': never;
+    }
+
+  
+}
+declare module 'zova-module-home-layout' {
+  
+        export interface ServiceLayoutTabsSsr {
+          /** @internal */
+          get scope(): ScopeModuleHomeLayout;
+        }
+
+        export interface ServiceLayoutTabsSsr {
+          get $beanFullName(): 'home-layout.service.layoutTabsSsr';
+          get $onionName(): 'home-layout:layoutTabsSsr';
+          
+        } 
+}
+/** service: end */
+/** service: begin */
+import { ServiceLayoutTabsSsr } from '../component/layoutTabs/service.layoutTabsSsr.js';
+import 'zova';
+declare module 'zova' {
+  export interface IBeanRecordGeneral {
+    'home-layout.service.layoutTabsSsr': ServiceLayoutTabsSsr;
+  }
+}
+/** service: end */
 /** controller: begin */
 export * from '../component/itemLink/controller.jsx';
 export * from '../component/layoutEmpty/controller.jsx';
