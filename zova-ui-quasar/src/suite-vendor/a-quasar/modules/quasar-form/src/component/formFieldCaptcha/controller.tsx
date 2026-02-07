@@ -76,7 +76,6 @@ export class ControllerFormFieldCaptcha extends BeanControllerBase {
       <ZFormField
         {...this.$props}
         render="text"
-        iconPrefix=":editor:code-block"
         slotDefault={({ props }, $$formField) => {
           const propsNew: QInputProps = {
             ...props,
