@@ -48,9 +48,9 @@ export interface IFormFieldOptionsBase {
   validateOnDynamic?: boolean | z.ZodType;
   validateOnChange?: boolean | z.ZodType;
   validateOnBlur?: boolean | z.ZodType;
-  onChange?: ((e: Event) => void) | null;
-  onInput?: ((e: Event) => void) | null;
-  onBlur?: ((e: Event) => void) | null;
+  onChange?: (e: Event) => void; // allow set to null, but not provide null type
+  onInput?: (e: Event) => void; // allow set to null, but not provide null type
+  onBlur?: (e: Event) => void; // allow set to null, but not provide null type
 }
 
 export interface IFormFieldOptions<TParentData = {}>

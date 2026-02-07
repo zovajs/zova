@@ -5,7 +5,7 @@ import { pathToFileURL } from 'node:url';
 import fse from 'fs-extra';
 import compileTemplate from 'lodash/template.js';
 import parseArgs from 'minimist';
-import moduleAlias from 'module-alias';
+// import moduleAlias from 'module-alias';
 
 export function getFlavor(offset: number = 2): ZovaMetaFlavor {
   return getEnvFromCli('FLAVOR', 'flavor', 'admin', offset) as ZovaMetaFlavor;
@@ -60,22 +60,22 @@ export function generateConfigDefine(env, translates?: string[]) {
   return acc;
 }
 
-export function setModuleAlias() {
-  // alias
-  const alias = {
-    '@vue/babel-plugin-jsx': '@cabloy/vue-babel-plugin-jsx',
-    '@vue/compiler-sfc': '@cabloy/vue-compiler-sfc',
-    '@vue/runtime-core': '@cabloy/vue-runtime-core',
-    '@vue/runtime-dom': '@cabloy/vue-runtime-dom',
-    '@vue/reactivity': '@cabloy/vue-reactivity',
-    '@vue/server-renderer': '@cabloy/vue-server-renderer',
-    'vue-router': '@cabloy/vue-router',
-  };
-  for (const key in alias) {
-    moduleAlias.addAlias(key, alias[key]);
-  }
-  return alias;
-}
+// export function setModuleAlias() {
+//   // alias
+//   const alias = {
+//     '@vue/babel-plugin-jsx': '@cabloy/vue-babel-plugin-jsx',
+//     '@vue/compiler-sfc': '@cabloy/vue-compiler-sfc',
+//     '@vue/runtime-core': '@cabloy/vue-runtime-core',
+//     '@vue/runtime-dom': '@cabloy/vue-runtime-dom',
+//     '@vue/reactivity': '@cabloy/vue-reactivity',
+//     '@vue/server-renderer': '@cabloy/vue-server-renderer',
+//     'vue-router': '@cabloy/vue-router',
+//   };
+//   for (const key in alias) {
+//     moduleAlias.addAlias(key, alias[key]);
+//   }
+//   return alias;
+// }
 
 export function getAbsolutePathOfModule(id: string, postfix: string = 'index.js') {
   const require = createRequire(import.meta.url);

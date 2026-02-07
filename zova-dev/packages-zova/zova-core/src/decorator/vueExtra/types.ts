@@ -1,4 +1,5 @@
-import type { WatchEffectOptions, WatchOptions } from 'vue';
+import type { WatchOptions } from '@cabloy/vue-reactivity';
+import type { WatchEffectOptions } from '@cabloy/vue-runtime-core';
 
 export const SymbolDecoratorVueElements = Symbol('SymbolDecoratorVueElements');
 
