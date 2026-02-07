@@ -1,4 +1,5 @@
-import { QInput, QInputProps } from 'quasar';
+import type { QInputProps } from 'quasar';
+import { QInput } from 'quasar';
 import { BeanControllerBase, ClientOnly, IComponentOptions, TypeEventOff, Use } from 'zova';
 import { Controller } from 'zova-module-a-bean';
 import { ControllerForm, IFormFieldOptions, ZFormField } from 'zova-module-a-form';
