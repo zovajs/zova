@@ -5,7 +5,6 @@ import { pathToFileURL } from 'node:url';
 import fse from 'fs-extra';
 import compileTemplate from 'lodash/template.js';
 import parseArgs from 'minimist';
-// import moduleAlias from 'module-alias';
 
 export function getFlavor(offset: number = 2): ZovaMetaFlavor {
   return getEnvFromCli('FLAVOR', 'flavor', 'admin', offset) as ZovaMetaFlavor;
