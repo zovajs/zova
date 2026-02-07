@@ -1,5 +1,5 @@
-import { UseScope } from 'zova';
 import type { IDecoratorModelOptions } from 'zova-module-a-model';
+import { UseScope } from 'zova';
 import { BeanModelBase, Model } from 'zova-module-a-model';
 import { ScopeModuleASsr } from 'zova-module-a-ssr';
 
@@ -13,7 +13,7 @@ export class ModelLayout extends BeanModelBase {
   $$scopeSsr: ScopeModuleASsr;
 
   protected async __init__() {
-     this.leftDrawerOpenPC =
+    this.leftDrawerOpenPC =
       process.env.SSR && !this.$$scopeSsr.config.optimization.bodyReadyObserver
         ? this.sys.config.layout.sidebar.leftOpenPC
         : this.$useStateLocal({

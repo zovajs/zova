@@ -50,46 +50,6 @@ declare module 'zova' {
   }
 }
 /** model: end */
-/** api: begin */
-export * from '../api/menu.js';
-
-import 'zova';
-declare module 'zova' {
-  
-  
-}
-declare module 'zova-module-home-layout' {
-  
-        export interface ApiMenu {
-          /** @internal */
-          get scope(): ScopeModuleHomeLayout;
-        }
-
-        export interface ApiMenu {
-          get $beanFullName(): 'home-layout.api.menu';
-          get $onionName(): 'home-layout:menu';
-          
-        } 
-}
-/** api: end */
-/** api: begin */
-import { ApiMenu } from '../api/menu.js';
-export interface IModuleApi {
-  'menu': ApiMenu;
-}
-/** api: end */
-/** api: begin */
-
-import 'zova';
-declare module 'zova' {
-  export interface IBeanRecordGeneral {
-    'home-layout.api.menu': ApiMenu;
-  }
-}
-/** api: end */
-/** openapi: begin */
-
-/** openapi: end */
 /** controller: begin */
 export * from '../component/itemLink/controller.jsx';
 export * from '../component/layoutEmpty/controller.jsx';
@@ -290,7 +250,6 @@ export interface ScopeModuleHomeLayout {
   util: BeanScopeUtil;
 config: TypeModuleConfig<typeof config>;
 locale: TypeModuleLocales<(typeof locales)[TypeLocaleBase]>;
-api: IModuleApi;
 }
 
 import 'zova';
