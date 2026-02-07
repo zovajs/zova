@@ -51,19 +51,32 @@ declare module 'zova' {
 }
 /** model: end */
 /** service: begin */
+export * from '../component/layoutEmpty/service.layoutEmptySsr.js';
 export * from '../component/layoutTabs/service.layoutTabsSsr.js';
 
 import 'zova-module-a-bean';
 declare module 'zova-module-a-bean' {
   
     export interface IServiceRecord {
-      'home-layout:layoutTabsSsr': never;
+      'home-layout:layoutEmptySsr': never;
+'home-layout:layoutTabsSsr': never;
     }
 
   
 }
 declare module 'zova-module-home-layout' {
   
+        export interface ServiceLayoutEmptySsr {
+          /** @internal */
+          get scope(): ScopeModuleHomeLayout;
+        }
+
+        export interface ServiceLayoutEmptySsr {
+          get $beanFullName(): 'home-layout.service.layoutEmptySsr';
+          get $onionName(): 'home-layout:layoutEmptySsr';
+          
+        }
+
         export interface ServiceLayoutTabsSsr {
           /** @internal */
           get scope(): ScopeModuleHomeLayout;
@@ -77,11 +90,13 @@ declare module 'zova-module-home-layout' {
 }
 /** service: end */
 /** service: begin */
+import { ServiceLayoutEmptySsr } from '../component/layoutEmpty/service.layoutEmptySsr.js';
 import { ServiceLayoutTabsSsr } from '../component/layoutTabs/service.layoutTabsSsr.js';
 import 'zova';
 declare module 'zova' {
   export interface IBeanRecordGeneral {
-    'home-layout.service.layoutTabsSsr': ServiceLayoutTabsSsr;
+    'home-layout.service.layoutEmptySsr': ServiceLayoutEmptySsr;
+'home-layout.service.layoutTabsSsr': ServiceLayoutTabsSsr;
   }
 }
 /** service: end */
