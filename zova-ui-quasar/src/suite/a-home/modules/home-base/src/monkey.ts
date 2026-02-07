@@ -1,10 +1,10 @@
-import { BeanBase, BeanContainer, BeanSimple, IMonkeyAppClose, IMonkeyAppInitialize, IMonkeyBeanInit } from 'zova';
-import { ServiceSsr } from './service/ssr.js';
-import { __ThisModule__ } from './.metadata/this.js';
-import { ServiceRouterGuards } from './service/routerGuards.js';
+import type { BeanBase, BeanContainer, IMonkeyAppClose, IMonkeyAppInitialize, IMonkeyBeanInit } from 'zova';
+import { BeanSimple } from 'zova';
 import { definePropertyScopeBase } from './lib/utils.js';
+import { ServiceRouterGuards } from './service/routerGuards.js';
+import { ServiceSsr } from './service/ssr.js';
 
-export class Monkey extends BeanSimple implements IMonkeyAppInitialize, IMonkeyAppClose,IMonkeyBeanInit {
+export class Monkey extends BeanSimple implements IMonkeyAppInitialize, IMonkeyAppClose, IMonkeyBeanInit {
   serviceRouterGuards: ServiceRouterGuards;
   serviceSsr: ServiceSsr;
 
