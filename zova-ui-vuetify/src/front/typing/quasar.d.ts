@@ -1,9 +1,10 @@
-/* eslint-disable */
+// This import enable module augmentation instead of module overwrite
+import 'quasar';
 
-// Forces TS to apply `@quasar/app-vite` augmentations of `quasar` package
-// Removing this would break `quasar/wrappers` imports as those typings are declared
-//  into `@quasar/app-vite`
-// As a side effect, since `@quasar/app-vite` reference `quasar` to augment it,
-//  this declaration also apply `quasar` own
-//  augmentations (eg. adds `$q` into Vue component context)
-/// <reference types="@quasar/app-vite" />
+declare module 'quasar' {
+  // This will be merged with other definitions
+  //  thanks to interface declaration merging
+  export interface QuasarFeatureFlags {
+    ssr: true; // The object key is the feature flag name
+  }
+}
