@@ -1,0 +1,15 @@
+{
+  "extends": "./tsconfig.json",
+  "compilerOptions": {},
+  "exclude": [
+    "./dist",
+    "./dist-releases",
+    "./dist-mock",
+    "./.zova",
+    "./.zova-rest",
+    "./node_modules",
+    "vite.config.ts",
+    "./src/boot/app",
+    "./src/boot/main.ts"
+  ]
+}

@@ -1,0 +1,9 @@
+{
+  "extends": "./tsconfig.base.esm",
+  "compilerOptions": {
+    "noEmit": true,
+    "paths": {
+      "@/*": ["./src/legacy/*"]
+    }
+  }
+}
