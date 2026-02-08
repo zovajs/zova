@@ -32,10 +32,8 @@ export class ServiceSsr extends BeanBase {
     window.ssr_body_ready_handler_pageContainer();
   };
   window.ssr_body_ready_condition=()=>{
-    const __domHeader=document.querySelector('#q-app>.q-layout>.q-header');
-    const __domDrawer=document.querySelector('#q-app>.q-layout>.q-drawer-container>.q-drawer--left');
-    const __domPageContainer=document.querySelector('#q-app>.q-layout>.q-page-container');
-    return __domHeader && __domDrawer && __domPageContainer;
+    const __domPlaceholder=document.querySelector('.__ssr_placeholder__');
+    return __domPlaceholder;
   };
   window.ssr_body_ready_callback=()=>{
     window.ssr_body_ready_handler();

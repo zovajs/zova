@@ -2,7 +2,7 @@ import { QLayout, QPageContainer } from 'quasar';
 import { BeanControllerBase, Use } from 'zova';
 import { Controller } from 'zova-module-a-bean';
 import { ZRouterViewEmpty } from 'zova-module-a-router';
-import { ServiceLayoutEmptySsr } from './service.layoutEmptySsr.js';
+import { IServiceSsrOptions, ServiceSsr } from '../../service/ssr.js';
 
 export interface ControllerLayoutEmptyProps {}
 
@@ -10,8 +10,8 @@ export interface ControllerLayoutEmptyProps {}
 export class ControllerLayoutEmpty extends BeanControllerBase {
   static $propsDefault = {};
 
-  @Use()
-  $$ssr: ServiceLayoutEmptySsr;
+  @Use({ init: { arg: { sidebarLeftOpenPC: false } as IServiceSsrOptions } })
+  $$ssr: ServiceSsr;
 
   protected render() {
     return (
