@@ -16,9 +16,6 @@ export default configure(_ctx => {
           // https://github.com/vuetifyjs/vuetify-loader/tree/master/packages/vite-plugin#readme
           <any>Vuetify({
             autoImport: false,
-            styles: {
-              configFile: 'src/styles/settings.scss',
-            },
           }),
           Fonts({
             fontsource: {

@@ -1,9 +1,7 @@
-import { SSRContext } from 'zova';
-import { App } from 'vue';
+import { defineBoot } from '@quasar/app-vite/wrappers';
 import vuetify from './vuetify.js';
-
 import '../css/settings.scss';
 
-export default (app: App, _ssrContext: SSRContext) => {
+export default defineBoot(({ app, ssrContext }) => {
   app.use(vuetify);
-};
+});
