@@ -1,0 +1,21 @@
+{
+  "extends": "./tsconfig.base.esm",
+  "compilerOptions": {
+    "composite": false,
+    "sourcemap": false,
+    "allowImportingTsExtensions": false,
+    "noEmit": false,
+    "rewriteRelativeImportExtensions": false,
+    "verbatimModuleSyntax": false
+  },
+  "references": [
+  ],
+  "include": [
+    "src/**/*",
+    "src/**/.metadata/**/*",
+    ".zova-rest/**/*",
+    "packages-zova/**/*",
+    "packages-utils/zova-jsx",
+    "packages-utils/logger"
+  ]
+}
