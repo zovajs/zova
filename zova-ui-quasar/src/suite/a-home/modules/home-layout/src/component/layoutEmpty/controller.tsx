@@ -19,7 +19,7 @@ export class ControllerLayoutEmpty extends BeanControllerBase {
         <QPageContainer>
           <ZRouterViewEmpty></ZRouterViewEmpty>
         </QPageContainer>
-        <div class="__placeholder__"></div>
+        <div class="__ssr_placeholder__"></div>
       </QLayout>
     );
   }

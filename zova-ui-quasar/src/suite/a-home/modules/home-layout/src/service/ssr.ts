@@ -2,12 +2,16 @@ import { BeanBase, UseScope } from 'zova';
 import { Service } from 'zova-module-a-bean';
 import { ScopeModuleASsr } from 'zova-module-a-ssr';
 
+export interface IServiceSsrOptions {
+  sidebarLeftOpenPC?: boolean;
+}
+
 @Service()
-export class ServiceLayoutTabsSsr extends BeanBase {
+export class ServiceSsr extends BeanBase {
   @UseScope()
   $$scopeSsr: ScopeModuleASsr;
 
-  protected async __init__() {
+  protected async __init__(options?: IServiceSsrOptions) {
     // ssr theme
     if (process.env.SERVER) {
       this.ctx.meta.$ssr.context.onRendered((err?: Error) => {
@@ -21,7 +25,44 @@ export class ServiceLayoutTabsSsr extends BeanBase {
         }
         if (this.$$scopeSsr.config.optimization.bodyReadyObserver) {
           this.ctx.meta.$ssr.context._meta.bodyTags += `<script id="__leftDrawerOpenJS">
+  ${options?.sidebarLeftOpenPC ? this._getJsHandlerSidebar() : ''}
+  ${this._getJsHandlerPageContainer()}
   window.ssr_body_ready_handler=()=>{
+    ${options?.sidebarLeftOpenPC ? 'window.ssr_body_ready_handler_sidebar();' : ''}
+    window.ssr_body_ready_handler_pageContainer();
+  };
+  window.ssr_body_ready_condition=()=>{
+    const __domHeader=document.querySelector('#q-app>.q-layout>.q-header');
+    const __domDrawer=document.querySelector('#q-app>.q-layout>.q-drawer-container>.q-drawer--left');
+    const __domPageContainer=document.querySelector('#q-app>.q-layout>.q-page-container');
+    return __domHeader && __domDrawer && __domPageContainer;
+  };
+  window.ssr_body_ready_callback=()=>{
+    window.ssr_body_ready_handler();
+    document.querySelector('#__leftDrawerOpenJS').remove();
+  };
+</script>`.replaceAll('\n', '');
+        }
+      });
+    }
+  }
+
+  private _getJsHandlerPageContainer() {
+    return `window.ssr_body_ready_handler_pageContainer=()=>{
+    const __domPageContainer=document.querySelector('#q-app>.q-layout>.q-page-container');
+    if(window.ssr_themedark){
+      if(__domPageContainer){
+        const __domCards=__domPageContainer.querySelectorAll('.q-card');
+        __domCards.forEach(item=>item.classList.add('q-card--dark','q-dark'));
+        const __domFields=__domPageContainer.querySelectorAll('.q-field');
+        __domFields.forEach(item=>item.classList.add('q-field--dark'));
+      }
+    }
+  };`;
+  }
+
+  private _getJsHandlerSidebar() {
+    return `window.ssr_body_ready_handler_sidebar=()=>{
     const __belowBreakpoint=document.documentElement.clientWidth <= ${this.sys.config.layout.sidebar.breakpoint};
     let __leftDrawerOpen;
     if(__belowBreakpoint){
@@ -54,20 +95,6 @@ export class ServiceLayoutTabsSsr extends BeanBase {
         }
       }
     }
-  };
-  window.ssr_body_ready_condition=()=>{
-    const __domHeader=document.querySelector('#q-app>.q-layout>.q-header');
-    const __domDrawer=document.querySelector('#q-app>.q-layout>.q-drawer-container>.q-drawer--left');
-    const __domPageContainer=document.querySelector('#q-app>.q-layout>.q-page-container');
-    return __domHeader && __domDrawer && __domPageContainer;
-  };
-  window.ssr_body_ready_callback=()=>{
-    window.ssr_body_ready_handler();
-    document.querySelector('#__leftDrawerOpenJS').remove();
-  };
-</script>`.replaceAll('\n', '');
-        }
-      });
-    }
+  };`;
   }
 }

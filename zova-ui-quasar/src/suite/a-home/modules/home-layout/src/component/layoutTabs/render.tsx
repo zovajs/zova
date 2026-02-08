@@ -56,6 +56,7 @@ export class RenderLayoutTabs extends BeanRenderBase {
         <QPageContainer>
           {this.$$renderContent.render()}
         </QPageContainer>
+        <div class="__ssr_placeholder__"></div>
       </QLayout>
     );
     // return (
