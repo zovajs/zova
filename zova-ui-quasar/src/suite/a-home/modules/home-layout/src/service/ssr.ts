@@ -11,7 +11,10 @@ export class ServiceSsr extends BeanBase {
   @UseScope()
   $$scopeSsr: ScopeModuleASsr;
 
+  options?: IServiceSsrOptions;
+
   protected async __init__(options?: IServiceSsrOptions) {
+    this.options = options;
     // ssr theme
     if (process.env.SERVER) {
       this.ctx.meta.$ssr.context.onRendered((err?: Error) => {
@@ -25,10 +28,10 @@ export class ServiceSsr extends BeanBase {
         }
         if (this.$$scopeSsr.config.optimization.bodyReadyObserver) {
           this.ctx.meta.$ssr.context._meta.bodyTags += `<script id="__leftDrawerOpenJS">
-  ${options?.sidebarLeftOpenPC ? this._getJsHandlerSidebar() : ''}
+  ${this.options?.sidebarLeftOpenPC ? this._getJsHandlerSidebar() : ''}
   ${this._getJsHandlerPageContainer()}
   window.ssr_body_ready_handler=()=>{
-    ${options?.sidebarLeftOpenPC ? 'window.ssr_body_ready_handler_sidebar();' : ''}
+    ${this.options?.sidebarLeftOpenPC ? 'window.ssr_body_ready_handler_sidebar();' : ''}
     window.ssr_body_ready_handler_pageContainer();
   };
   window.ssr_body_ready_condition=()=>{
