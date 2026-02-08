@@ -1,0 +1,55 @@
+{
+  "name": "@cabloy/logger",
+  "type": "module",
+  "version": "1.0.0",
+  "description": "logger",
+  "publishConfig": {
+    "access": "public"
+  },
+  "author": "zhennann",
+  "license": "MIT",
+  "keywords": [
+    "framework",
+    "zova"
+  ],
+  "exports": {
+    ".": {
+      "types": [
+        "./src/index.ts",
+        "./dist/index.d.ts"
+      ],
+      "import": "./src/index.ts",
+      "require": "./src/index.ts",
+      "default": "./dist/index.js"
+    },
+    "./package.json": "./package.json"
+  },
+  "files": [
+    "dist"
+  ],
+  "clean-package": {
+    "indent": 2,
+    "remove": [
+      "clean-package",
+      "devDependencies",
+      "exports.\\..import",
+      "exports.\\..require"
+    ]
+  },
+  "scripts": {
+    "lint": "eslint .",
+    "clean": "rimraf dist tsconfig.tsbuildinfo",
+    "tsc:publish": "npm run clean && tsc",
+    "prepublishOnly": "npm run tsc:publish",
+    "prepack": "clean-package",
+    "postpack": "clean-package restore"
+  },
+  "dependencies": {
+    "@cabloy/localeutil": "^2.0.0",
+    "fecha": "^4.2.3"
+  },
+  "devDependencies": {
+    "clean-package": "^2.2.0",
+    "rimraf": "^6.0.1"
+  }
+}
