@@ -28,7 +28,7 @@
     "@types/node": "^22.10.2",
     "eslint": "^9.20.1",
     "typedoc": "^0.25.13",
-    "typescript": "5.9.3"
+    "typescript": "^5.9.3"
   },
   "pnpm": {
     "overrides": {}
