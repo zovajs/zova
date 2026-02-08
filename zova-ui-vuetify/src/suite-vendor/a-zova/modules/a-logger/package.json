@@ -1,0 +1,31 @@
+{
+  "name": "zova-module-a-logger",
+  "type": "module",
+  "version": "5.0.0",
+  "title": "a-logger",
+  "zovaModule": {
+    "globalDependencies": {
+      "@cabloy/logger": true
+    }
+  },
+  "description": "",
+  "author": "",
+  "keywords": ["Zova Module"],
+  "exports": {
+    ".": {
+      "types": ["./src/index.ts", "./dist/index.d.ts"],
+      "import": "./src/index.ts",
+      "default": "./dist/index.js"
+    },
+    "./*": "./*"
+  },
+  "files": ["dist", "mock"],
+  "scripts": {
+    "clean": "tsc -b --clean",
+    "tsc:publish": "npm run clean && tsc -b",
+    "_prepublishOnly": "npm run tsc:publish"
+  },
+  "dependencies": {
+    "@cabloy/logger": "workspace:^"
+  }
+}

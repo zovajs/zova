@@ -1,0 +1,7 @@
+import { BeanBase } from 'zova';
+import { Meta } from 'vona-module-a-meta';
+
+@Meta()
+export class Meta<%=argv.beanNameCapitalize%> extends BeanBase {
+  protected async __init__() {}
+}
