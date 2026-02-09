@@ -11,6 +11,11 @@ export default configure(_ctx => {
   return {
     build: {
       extendViteConf(viteConf) {
+        // Ensure Vuetify is bundled for SSR so Node doesn't try to import raw CSS
+        viteConf.ssr = {
+          ...(viteConf.ssr || {}),
+          noExternal: [...((viteConf.ssr && (viteConf.ssr as any).noExternal) || []), 'vuetify'],
+        } as any;
         // plugins
         viteConf.plugins = viteConf.plugins!.concat([
           // https://github.com/vuetifyjs/vuetify-loader/tree/master/packages/vite-plugin#readme
