@@ -1,6 +1,6 @@
 /* eslint-disable */
 /** sys: begin */
-export * from '../bean/sys.icon.jsx';
+export * from '../bean/sys.icon.js';
 
 import 'zova';
 declare module 'zova' {
@@ -22,7 +22,7 @@ declare module 'zova-module-vuetify-adapter' {
 }
 /** sys: end */
 /** sys: begin */
-import { SysIcon } from '../bean/sys.icon.jsx';
+import { SysIcon } from '../bean/sys.icon.js';
 import 'zova';
 declare module 'zova' {
   export interface IBeanRecordGeneral {
