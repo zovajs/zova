@@ -5,12 +5,13 @@ import { useIcon } from 'vuetify/lib/composables/icons.mjs';
 import { useSize } from 'vuetify/lib/composables/size.mjs';
 import { provideTheme } from 'vuetify/lib/composables/theme.mjs';
 import { convertToUnit, flattenFragments } from 'vuetify/lib/util/index.mjs';
-import { $getZovaIcon, BeanBase, useApp } from 'zova';
-import { Service } from 'zova-module-a-bean';
-import { VSvgIconZova } from '../component/svg.js';
+import { BeanBase, useApp } from 'zova';
+import { Sys } from 'zova-module-a-bean';
+import { $getZovaIcon } from 'zova-module-a-icon';
+import { VSvgIconZova } from '../lib/svg.js';
 
-@Service()
-export class ServiceIcon extends BeanBase {
+@Sys()
+export class SysIcon extends BeanBase {
   public async initialize() {
     this._patchSetup();
   }
@@ -25,7 +26,8 @@ export class ServiceIcon extends BeanBase {
           return;
         }
         const app = useApp();
-        await app.meta.icon.parseIconInfo(iconName);
+        const $$toolIcon = await app.bean._getBean('a-icon.tool.icon', true);
+        await $$toolIcon.parseIconInfo(iconName);
       });
 
       const slotIcon = ref<string>();

@@ -1,39 +1,35 @@
 /* eslint-disable */
-/** service: begin */
-export * from '../bean/local.icon.jsx';
+/** sys: begin */
+export * from '../bean/sys.icon.jsx';
 
-import 'zova-module-a-bean';
-declare module 'zova-module-a-bean' {
+import 'zova';
+declare module 'zova' {
   
-    export interface IServiceRecord {
-      'vuetify-adapter:icon': never;
-    }
-
   
 }
 declare module 'zova-module-vuetify-adapter' {
   
-        export interface ServiceIcon {
+        export interface SysIcon {
           /** @internal */
           get scope(): ScopeModuleVuetifyAdapter;
         }
 
-        export interface ServiceIcon {
-          get $beanFullName(): 'vuetify-adapter.service.icon';
+        export interface SysIcon {
+          get $beanFullName(): 'vuetify-adapter.sys.icon';
           get $onionName(): 'vuetify-adapter:icon';
           
         } 
 }
-/** service: end */
-/** service: begin */
-import { ServiceIcon } from '../bean/local.icon.jsx';
+/** sys: end */
+/** sys: begin */
+import { SysIcon } from '../bean/sys.icon.jsx';
 import 'zova';
 declare module 'zova' {
   export interface IBeanRecordGeneral {
-    'vuetify-adapter.service.icon': ServiceIcon;
+    'vuetify-adapter.sys.icon': SysIcon;
   }
 }
-/** service: end */
+/** sys: end */
 /** meta: begin */
 export * from '../bean/meta.themeHandler.js';
 
@@ -72,6 +68,9 @@ declare module 'zova' {
 /** monkey: begin */
 export * from '../monkey.js';
 /** monkey: end */
+/** monkeySys: begin */
+export * from '../monkeySys.js';
+/** monkeySys: end */
 /** scope: begin */
 import { BeanScopeBase, type BeanScopeUtil } from 'zova';
 import { Scope } from 'zova-module-a-bean';
