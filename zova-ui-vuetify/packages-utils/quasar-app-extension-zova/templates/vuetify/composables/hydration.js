@@ -1,7 +1,7 @@
 import { getCurrentInstance, shallowRef } from 'vue';
-import { IN_BROWSER } from '../util/index.mjs';
+import { IN_BROWSER } from '../util/index.js';
 // Composables
-import { useDisplay } from './display.mjs';
+import { useDisplay } from './display.js';
 // Utilities
 export function useHydration() {
   if (!IN_BROWSER)
@@ -22,4 +22,4 @@ export function useHydration() {
     return shallowRef(true);
   }
 }
-// # sourceMappingURL=hydration.mjs.map
+// # sourceMappingURL=hydration.js.map
