@@ -13,7 +13,7 @@ export function useHydration() {
     const isMounted = shallowRef(false);
     const instance = getCurrentInstance();
     const zova = instance.appContext.app.zova;
-    zova.ctx.meta.ssr.onHydrated(() => {
+    zova.ctx.meta.$ssr.onHydrated(() => {
       isMounted.value = true;
     });
     return isMounted;

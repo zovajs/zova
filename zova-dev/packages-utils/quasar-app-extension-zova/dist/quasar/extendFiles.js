@@ -31,27 +31,27 @@ export function extendFilesOne(api, flavor) {
 export function extendFilesTwo(_api, _flavor) {
     return async function extendFiles() {
         // patch templates
-        await patchTemplates();
+        // await patchTemplates();
         // prepare vuetify
         await prepareVuetify();
     };
-    async function patchTemplates() {
-        // app.js
-        // fse.copyFileSync(resolveTemplatePath('entry/app.js_'), api.resolve.cli('templates/entry/app.js'));
-        // client-entry.js
-        // fse.copyFileSync(resolveTemplatePath('entry/client-entry.js_'), api.resolve.cli('templates/entry/client-entry.js'));
-        // server-entry.js
-        // fse.copyFileSync(
-        //   resolveTemplatePath('entry/server-entry.js_'),
-        //   api.resolve.cli('templates/entry/server-entry.js'),
-        // );
-        // ssr: html-template.js
-        // await _handleSSRHtmlTemplate();
-        // ssr: ssr-devserver.js
-        // await _handleSSRDevServer();
-        // ssr: ssr-builder.js
-        // await _handleSSRBuilder();
-    }
+    // async function patchTemplates() {
+    // app.js
+    // fse.copyFileSync(resolveTemplatePath('entry/app.js_'), api.resolve.cli('templates/entry/app.js'));
+    // client-entry.js
+    // fse.copyFileSync(resolveTemplatePath('entry/client-entry.js_'), api.resolve.cli('templates/entry/client-entry.js'));
+    // server-entry.js
+    // fse.copyFileSync(
+    //   resolveTemplatePath('entry/server-entry.js_'),
+    //   api.resolve.cli('templates/entry/server-entry.js'),
+    // );
+    // ssr: html-template.js
+    // await _handleSSRHtmlTemplate();
+    // ssr: ssr-devserver.js
+    // await _handleSSRDevServer();
+    // ssr: ssr-builder.js
+    // await _handleSSRBuilder();
+    // }
     // // html-template
     // async function _handleSSRHtmlTemplate() {
     //   const fileSrc = api.resolve.cli('lib/utils/html-template.js');
@@ -123,14 +123,14 @@ export function extendFilesTwo(_api, _flavor) {
     async function prepareVuetify() {
         let modulePath;
         try {
-            modulePath = getAbsolutePathOfModule('vuetify', 'lib/framework.mjs');
+            modulePath = getAbsolutePathOfModule('vuetify', 'lib/framework.js');
         }
         catch (_) { }
         if (!modulePath)
             return;
         // copy
-        fse.copyFileSync(resolveTemplatePath('vuetify/composables/hydration.mjs'), path.join(modulePath, 'lib/composables/hydration.mjs'));
-        fse.copyFileSync(resolveTemplatePath('vuetify/composables/ssrBoot.mjs'), path.join(modulePath, 'lib/composables/ssrBoot.mjs'));
+        fse.copyFileSync(resolveTemplatePath('vuetify/composables/hydration.js'), path.join(modulePath, 'lib/composables/hydration.js'));
+        fse.copyFileSync(resolveTemplatePath('vuetify/composables/ssrBoot.js'), path.join(modulePath, 'lib/composables/ssrBoot.js'));
     }
 }
 export function extendFilesThree(conf, api, _flavor) {
