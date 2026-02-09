@@ -60,6 +60,10 @@ export class ControllerLayoutTabs extends BeanControllerBase {
     await this._initTabs();
   }
 
+  toggleLeftDrawer() {
+    this.leftDrawerOpen = !this.leftDrawerOpen;
+  }
+
   private async _initTabs() {
     const configTabs = this.scope.config.tabs;
     const tabsOptions: ModelTabsOptions = {
@@ -79,9 +83,5 @@ export class ControllerLayoutTabs extends BeanControllerBase {
       },
     };
     this.$$modelTabs = await this.bean._getBeanSelector('a-routertabs.model.tabs', true, configTabs.scene, tabsOptions);
-  }
-
-  toggleLeftDrawer() {
-    this.leftDrawerOpen = !this.leftDrawerOpen;
   }
 }

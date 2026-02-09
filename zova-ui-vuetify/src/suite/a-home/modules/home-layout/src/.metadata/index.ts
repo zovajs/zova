@@ -87,8 +87,8 @@ declare module 'zova' {
 /** service: end */
 /** controller: begin */
 export * from '../component/itemLink/controller.jsx';
-export * from '../component/layoutDefault/controller.jsx';
 export * from '../component/layoutEmpty/controller.jsx';
+export * from '../component/layoutTabs/controller.jsx';
 
 import 'zova';
 declare module 'zova' {
@@ -102,12 +102,12 @@ declare module 'zova-module-home-layout' {
           get scope(): ScopeModuleHomeLayout;
         }
 
-        export interface ControllerLayoutDefault {
+        export interface ControllerLayoutEmpty {
           /** @internal */
           get scope(): ScopeModuleHomeLayout;
         }
 
-        export interface ControllerLayoutEmpty {
+        export interface ControllerLayoutTabs {
           /** @internal */
           get scope(): ScopeModuleHomeLayout;
         } 
@@ -115,14 +115,14 @@ declare module 'zova-module-home-layout' {
 /** controller: end */
 /** controller: begin */
 import { ControllerItemLink } from '../component/itemLink/controller.jsx';
-import { ControllerLayoutDefault } from '../component/layoutDefault/controller.jsx';
 import { ControllerLayoutEmpty } from '../component/layoutEmpty/controller.jsx';
+import { ControllerLayoutTabs } from '../component/layoutTabs/controller.jsx';
 import 'zova';
 declare module 'zova' {
   export interface IBeanRecordLocal {
     'home-layout.controller.itemLink': ControllerItemLink;
-'home-layout.controller.layoutDefault': ControllerLayoutDefault;
 'home-layout.controller.layoutEmpty': ControllerLayoutEmpty;
+'home-layout.controller.layoutTabs': ControllerLayoutTabs;
   }
 }
 /** controller: end */
@@ -130,31 +130,31 @@ declare module 'zova' {
 /** components: begin */
 export * from './component/itemLink.js';
 import { ZItemLink } from './component/itemLink.js';
-export * from './component/layoutDefault.js';
-import { ZLayoutDefault } from './component/layoutDefault.js';
 export * from './component/layoutEmpty.js';
 import { ZLayoutEmpty } from './component/layoutEmpty.js';
+export * from './component/layoutTabs.js';
+import { ZLayoutTabs } from './component/layoutTabs.js';
 export const components = {
   'itemLink': ZItemLink,
-'layoutDefault': ZLayoutDefault,
 'layoutEmpty': ZLayoutEmpty,
+'layoutTabs': ZLayoutTabs,
 };
 import 'zova';
 declare module 'zova' {
 export interface IComponentRecord {
   'home-layout:itemLink': ControllerItemLink;
-'home-layout:layoutDefault': ControllerLayoutDefault;
 'home-layout:layoutEmpty': ControllerLayoutEmpty;
+'home-layout:layoutTabs': ControllerLayoutTabs;
 }
 export interface IZovaComponentRecord {
   'home-layout:itemLink': typeof ZItemLink;
-'home-layout:layoutDefault': typeof ZLayoutDefault;
 'home-layout:layoutEmpty': typeof ZLayoutEmpty;
+'home-layout:layoutTabs': typeof ZLayoutTabs;
 }
 }
 /** components: end */
 /** render: begin */
-export * from '../component/layoutDefault/render.jsx';
+export * from '../component/layoutTabs/render.jsx';
 
 import 'zova';
 declare module 'zova' {
@@ -170,7 +170,7 @@ declare module 'zova-module-home-layout' {
 }
 /** render: end */
 /** render: begin */
-import { RenderLayoutDefault } from '../component/layoutDefault/render.jsx';
+import { RenderLayoutDefault } from '../component/layoutTabs/render.jsx';
 import 'zova';
 declare module 'zova' {
   export interface IBeanRecordLocal {

@@ -1,28 +1,27 @@
-import { BeanControllerBase, PropsBase, RequiredSome, Use, useComputed, useCustomRef } from 'zova';
+import type { ModelTabs, ModelTabsOptions } from 'zova-module-a-routertabs';
+import { BeanControllerBase, Use, useComputed, useCustomRef } from 'zova';
 import { Controller } from 'zova-module-a-bean';
-import { ModelLayout } from '../../bean/model.layout.js';
-import { ModelMenu } from '../../bean/model.menu.js';
+import { $QueryAutoLoad } from 'zova-module-a-model';
+import { ModelLayout } from '../../model/layout.js';
+import { ModelMenu } from '../../model/menu.js';
+import { IServiceSsrOptions, ServiceSsr } from '../../service/ssr.js';
 
-export interface Props extends PropsBase<ControllerLayoutDefault, Slots> {}
-
-export interface Emits {}
-
-export interface Slots {}
+export interface ControllerLayoutTabsProps {}
 
 @Controller()
-export class ControllerLayoutDefault extends BeanControllerBase<
-  unknown,
-  RequiredSome<Props, keyof typeof ControllerLayoutDefault.$propsDefault>,
-  Emits,
-  Slots
-> {
+export class ControllerLayoutTabs extends BeanControllerBase {
   static $propsDefault = {};
+
+  $$modelTabs: ModelTabs;
 
   @Use()
   $$modelMenu: ModelMenu;
 
   @Use()
   $$modelLayout: ModelLayout;
+
+  @Use({ init: { arg: { sidebarLeftOpenPC: true } as IServiceSsrOptions } })
+  $$ssr: ServiceSsr;
 
   leftDrawerOpen: boolean;
   leftDrawerOpenMobile: boolean = false;
@@ -51,13 +50,38 @@ export class ControllerLayoutDefault extends BeanControllerBase<
         },
       };
     });
+    // passport
+    if (process.env.SERVER) {
+      await this.$passport.ensurePassport();
+    }
     // menu
-    const queryMenus = this.$$modelMenu.select();
-    await queryMenus.suspense();
-    if (queryMenus.error) throw queryMenus.error;
+    await $QueryAutoLoad(() => this.$$modelMenu.retrieveMenus());
+    // tabs
+    await this._initTabs();
   }
 
   toggleLeftDrawer() {
     this.leftDrawerOpen = !this.leftDrawerOpen;
+  }
+
+  private async _initTabs() {
+    const configTabs = this.scope.config.tabs;
+    const tabsOptions: ModelTabsOptions = {
+      max: configTabs.max,
+      maxItems: configTabs.maxItems,
+      cache: configTabs.cache,
+      getInitialTabs: () => {
+        if (!this.$$modelMenu.retrieveMenus().data) return;
+        return [{ tabKey: '/', affix: true }];
+      },
+      getTabInfo: tabKey => {
+        const queryMenu = this.$$modelMenu.retrieveMenus();
+        if (!queryMenu.data || queryMenu.isError) return undefined;
+        const menuItem = this.$$modelMenu.findMenuItem({ link: tabKey });
+        if (!menuItem) return undefined;
+        return { title: menuItem.title, icon: menuItem.icon };
+      },
+    };
+    this.$$modelTabs = await this.bean._getBeanSelector('a-routertabs.model.tabs', true, configTabs.scene, tabsOptions);
   }
 }
