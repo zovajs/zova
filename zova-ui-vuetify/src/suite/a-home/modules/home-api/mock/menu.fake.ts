@@ -5,13 +5,13 @@ const __MenuItems = [
   { group: 'basic', title: 'State', caption: 'ref, computed', icon: '', link: '/demo/basic/state' },
   { group: 'basic', title: 'Component', caption: 'props, emits, slots', icon: '', link: '/demo/basic/component' },
   { group: 'basic', title: 'CSS-in-JS', caption: 'Style & Theme', icon: '', link: '/demo/basic/style' },
-  { group: 'quasar', title: 'Docs', caption: 'quasar.dev', icon: ':social:school', external: true, link: 'https://quasar.dev' },
-  { group: 'quasar', title: 'Github', caption: 'github.com/quasarframework', icon: ':editor:code', external: true, link: 'https://github.com/quasarframework' },
-  { group: 'quasar', title: 'Quasar Awesome', caption: 'Community Quasar projects', icon: '::heart', external: true, link: 'https://awesome.quasar.dev' },
+  { group: 'vuetify', title: 'Docs', caption: 'vuetifyjs.com', icon: ':social:school', external: true, link: 'https://vuetifyjs.com' },
+  { group: 'vuetify', title: 'Github', caption: 'github.com/vuetifyjs', icon: ':editor:code', external: true, link: 'https://github.com/vuetifyjs' },
+  { group: 'vuetify', title: 'Vuetify Awesome', caption: 'Community Vuetify projects', icon: '::heart', external: true, link: 'https://github.com/vuetifyjs/awesome' },
 ];
 const __MenuGroups = [
   { order: 1, name: 'basic', title: 'Basic' },
-  { order: 2, name: 'quasar', title: 'Quasar' },
+  { order: 2, name: 'vuetify', title: 'Vuetify' },
 ];
 const __MenuData = { menus: __MenuItems, groups: __MenuGroups };
 
