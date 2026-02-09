@@ -1,18 +1,5 @@
 import { RouterView } from '@cabloy/vue-router';
 import { VNode } from 'vue';
-import {
-  VApp,
-  VAppBar,
-  VAppBarNavIcon,
-  VBtn,
-  VDivider,
-  VList,
-  VListSubheader,
-  VMain,
-  VNavigationDrawer,
-  VSpacer,
-  VToolbarTitle,
-} from 'vuetify/components';
 import { BeanRenderBase } from 'zova';
 import { Render } from 'zova-module-a-bean';
 import { ApiMenuEntity } from '../../api/menu.js';

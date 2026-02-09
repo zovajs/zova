@@ -155,7 +155,6 @@ export interface IZovaComponentRecord {
 /** components: end */
 /** render: begin */
 export * from '../component/layoutDefault/render.jsx';
-export * from '../component/layoutEmpty/render.jsx';
 
 import 'zova';
 declare module 'zova' {
@@ -167,22 +166,15 @@ declare module 'zova-module-home-layout' {
         export interface RenderLayoutDefault {
           /** @internal */
           get scope(): ScopeModuleHomeLayout;
-        }
-
-        export interface RenderLayoutEmpty {
-          /** @internal */
-          get scope(): ScopeModuleHomeLayout;
         } 
 }
 /** render: end */
 /** render: begin */
 import { RenderLayoutDefault } from '../component/layoutDefault/render.jsx';
-import { RenderLayoutEmpty } from '../component/layoutEmpty/render.jsx';
 import 'zova';
 declare module 'zova' {
   export interface IBeanRecordLocal {
     'home-layout.render.layoutDefault': RenderLayoutDefault;
-'home-layout.render.layoutEmpty': RenderLayoutEmpty;
   }
 }
 /** render: end */

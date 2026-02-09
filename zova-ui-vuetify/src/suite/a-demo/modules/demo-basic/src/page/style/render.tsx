@@ -1,7 +1,6 @@
 import { BeanRenderBase, getBeanName } from 'zova';
 import { Render } from 'zova-module-a-bean';
 import { ScopeModule } from '../../.metadata/this.js';
-import { VBtn, VRadio, VRadioGroup } from 'vuetify/components';
 
 @Render()
 export class RenderPageStyle extends BeanRenderBase<ScopeModule> {
@@ -21,12 +20,15 @@ export class RenderPageStyle extends BeanRenderBase<ScopeModule> {
           <VRadioGroup v-model={this.$theme.darkMode} inline>
             <VRadio label="Light" value={false}></VRadio>
             <VRadio label="Dark" value={true}></VRadio>
-            <VRadio label="Auto" value={'auto'}></VRadio>
+            <VRadio label="Auto" value="auto"></VRadio>
           </VRadioGroup>
         </div>
         <hr></hr>
         <div>
-          <div style={{ color: this.$token.colors.primary }}>theme: {this.$theme.name}</div>
+          <div style={{ color: this.$token.colors.primary }}>
+            theme:
+            {this.$theme.name}
+          </div>
           <VRadioGroup v-model={this.$theme.name} inline>
             <VRadio label="Default" value={getBeanName('home-base.theme.default')}></VRadio>
             <VRadio label="Orange" value={getBeanName('demo-basic.theme.orange')}></VRadio>

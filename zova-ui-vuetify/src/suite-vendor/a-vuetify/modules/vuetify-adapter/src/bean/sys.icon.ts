@@ -1,6 +1,6 @@
 import { computed, createVNode, normalizeClass, normalizeStyle, onServerPrefetch, shallowRef } from 'vue';
 import { useTheme } from 'vuetify';
-import { VIcon } from 'vuetify/components';
+import { VIcon } from 'vuetify/components/VIcon';
 import { useTextColor } from 'vuetify/lib/composables/color.js';
 import { useIcon } from 'vuetify/lib/composables/icons.js';
 import { useSize } from 'vuetify/lib/composables/size.js';

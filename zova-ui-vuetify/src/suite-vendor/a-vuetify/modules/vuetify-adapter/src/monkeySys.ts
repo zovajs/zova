@@ -1,6 +1,6 @@
 import type { IMonkeySysInitialize } from 'zova';
 import type { IOpenapiOptionsResourceMeta } from 'zova-module-a-openapi';
-import { VTextField } from 'vuetify/components';
+import { VTextField } from 'vuetify/components/VTextField';
 import { BeanSimple, deepExtend } from 'zova';
 import { SysIcon } from './bean/sys.icon.js';
 

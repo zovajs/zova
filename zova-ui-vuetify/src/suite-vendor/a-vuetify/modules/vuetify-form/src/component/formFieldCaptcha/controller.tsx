@@ -1,4 +1,4 @@
-import { VTextField } from 'vuetify/components';
+import { VTextField } from 'vuetify/components/VTextField';
 import { BeanControllerBase, ClientOnly, IComponentOptions, TypeEventOff, Use } from 'zova';
 import { Controller } from 'zova-module-a-bean';
 import { ControllerForm, IFormFieldOptions, IFormFieldRenderContextProps, ZFormField } from 'zova-module-a-form';
