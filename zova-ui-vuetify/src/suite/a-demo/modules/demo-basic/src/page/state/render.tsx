@@ -1,4 +1,4 @@
-import { VBtn, VInput, VTextField } from 'vuetify/components';
+import { VBtn } from 'vuetify/components';
 import { BeanRenderBase } from 'zova';
 import { Render } from 'zova-module-a-bean';
 
