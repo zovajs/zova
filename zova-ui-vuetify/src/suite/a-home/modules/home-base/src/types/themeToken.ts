@@ -1,20 +1,22 @@
-export interface ThemeToken {
+import 'zova-module-a-style';
+
+export interface ThemeTokenCustom {
   dark: boolean;
   colors: {
-    background: string;
-    surface: string;
+    'background': string;
+    'surface': string;
     'surface-bright': string;
     'surface-light': string;
     'surface-variant': string;
     'on-surface-variant': string;
-    primary: string;
+    'primary': string;
     'primary-darken-1': string;
-    secondary: string;
+    'secondary': string;
     'secondary-darken-1': string;
-    error: string;
-    info: string;
-    success: string;
-    warning: string;
+    'error': string;
+    'info': string;
+    'success': string;
+    'warning': string;
   };
   variables: {
     'border-color': string;
@@ -34,4 +36,8 @@ export interface ThemeToken {
     'theme-code': string;
     'theme-on-code': string;
   };
+}
+
+declare module 'zova-module-a-style' {
+  export interface ThemeToken extends ThemeTokenCustom {}
 }
