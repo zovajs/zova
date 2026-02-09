@@ -1,5 +1,6 @@
 import type { VNode } from 'vue';
-import { QItemLabel, QList, QSeparator } from 'quasar';
+import { VDivider } from 'vuetify/components/VDivider';
+import { VList, VListSubheader } from 'vuetify/components/VList';
 import { BeanRenderBase } from 'zova';
 import { Render } from 'zova-module-a-bean';
 import { TypeMenuItem, TypeMenuTree, ZItemLink } from '../../.metadata/index.js';
@@ -10,7 +11,7 @@ export class RenderMenu extends BeanRenderBase {
     const titleLocale = this.$text(item.title ?? '');
     if (item.folder) {
       let domChildren: VNode[] = [];
-      domChildren.push(<QItemLabel key={`folder:${item.title}`} header>{titleLocale}</QItemLabel>);
+      domChildren.push(<VListSubheader key={`folder:${item.title}`}>{titleLocale}</VListSubheader>);
       const domChildren2 = this._renderMenuItems(item.children);
       if (domChildren2) {
         domChildren = domChildren.concat(domChildren2);
@@ -18,7 +19,7 @@ export class RenderMenu extends BeanRenderBase {
       return domChildren;
     }
     if (item.separator) {
-      return <QSeparator spaced></QSeparator>;
+      return <VDivider></VDivider>;
     }
     let to: any;
     if (!item.external) {
@@ -63,6 +64,6 @@ export class RenderMenu extends BeanRenderBase {
     const menuTree = this.$$modelMenu.menuTree;
     if (!menuTree) return;
     const domItems = this._renderMenuItems(menuTree);
-    return <QList>{domItems}</QList>;
+    return <VList>{domItems}</VList>;
   }
 }
