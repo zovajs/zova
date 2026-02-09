@@ -196,37 +196,6 @@ declare module 'zova' {
   }
 }
 /** apiSchema: end */
-/** bean: begin */
-export * from '../bean/bean.api.js';
-
-import 'zova';
-declare module 'zova' {
-  
-  
-}
-declare module 'zova-module-home-api' {
-  
-        export interface BeanFetch {
-          /** @internal */
-          get scope(): ScopeModuleHomeApi;
-        }
-
-        export interface BeanFetch {
-          get $beanFullName(): 'home-api.bean.fetch';
-          get $onionName(): 'home-api:fetch';
-          
-        } 
-}
-/** bean: end */
-/** bean: begin */
-import { BeanFetch } from '../bean/bean.api.js';
-import 'zova';
-declare module 'zova' {
-  export interface IBeanRecordGeneral {
-    'home-api.bean.fetch': BeanFetch;
-  }
-}
-/** bean: end */
 /** service: begin */
 export * from '../service/jwtAdapter.js';
 

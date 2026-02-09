@@ -1,6 +1,5 @@
-import type { IDecoratorThemeOptions, IThemeApplyParams, IThemeApplyResult, IThemeBase } from 'zova-module-a-style';
+import type { IDecoratorThemeOptions, IThemeApplyParams, IThemeApplyResult, IThemeBase, ThemeToken } from 'zova-module-a-style';
 import { BeanThemeBase, Theme } from 'zova-module-a-style';
-import { ThemeToken } from '../themeToken.js';
 
 const themeLight = {
   dark: false,

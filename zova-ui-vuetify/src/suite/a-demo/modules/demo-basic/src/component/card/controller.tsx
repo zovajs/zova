@@ -1,4 +1,3 @@
-import { QBtn } from 'quasar';
 import { VBtn } from 'vuetify/components/VBtn';
 import { BeanControllerBase, ISlot } from 'zova';
 import { Controller } from 'zova-module-a-bean';
