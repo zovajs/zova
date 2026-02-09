@@ -1,6 +1,6 @@
+import { VBtn } from 'vuetify/components';
 import { BeanRenderBase } from 'zova';
 import { Render } from 'zova-module-a-bean';
-import { VBtn } from 'vuetify/components';
 
 @Render()
 export class RenderPageState extends BeanRenderBase {
