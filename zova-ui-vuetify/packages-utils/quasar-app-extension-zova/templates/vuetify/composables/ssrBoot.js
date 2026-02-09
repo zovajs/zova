@@ -6,8 +6,8 @@ export function useSsrBoot() {
   const isBooted = shallowRef(false);
   const instance = getCurrentInstance();
   const zova = instance.appContext.app.zova;
-  if (zova.config.env.ssr) {
-    zova.ctx.meta.ssr.onHydrated(() => {
+  if (zova.sys.env.SSR) {
+    zova.ctx.meta.$ssr.onHydrated(() => {
       isBooted.value = true;
     });
   }
