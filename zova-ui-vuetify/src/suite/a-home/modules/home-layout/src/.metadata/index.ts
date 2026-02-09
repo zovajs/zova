@@ -2,13 +2,14 @@
 /** model: begin */
 export * from '../model/layout.js';
 export * from '../model/menu.js';
-
-import { IDecoratorModelOptions } from 'zova-module-a-model';
+import { IModelOptionsLayout } from '../model/layout.js';
+import { IModelOptionsMenu } from '../model/menu.js';
+import 'zova-module-a-model';
 declare module 'zova-module-a-model' {
   
     export interface IModelRecord {
-      'home-layout:layout': IDecoratorModelOptions;
-'home-layout:menu': IDecoratorModelOptions;
+      'home-layout:layout': IModelOptionsLayout;
+'home-layout:menu': IModelOptionsMenu;
     }
 
   
@@ -23,7 +24,7 @@ declare module 'zova-module-home-layout' {
         export interface ModelLayout {
           get $beanFullName(): 'home-layout.model.layout';
           get $onionName(): 'home-layout:layout';
-          get $onionOptions(): IDecoratorModelOptions;
+          get $onionOptions(): IModelOptionsLayout;
         }
 
         export interface ModelMenu {
@@ -34,7 +35,7 @@ declare module 'zova-module-home-layout' {
         export interface ModelMenu {
           get $beanFullName(): 'home-layout.model.menu';
           get $onionName(): 'home-layout:menu';
-          get $onionOptions(): IDecoratorModelOptions;
+          get $onionOptions(): IModelOptionsMenu;
         } 
 }
 /** model: end */
@@ -49,6 +50,41 @@ declare module 'zova' {
   }
 }
 /** model: end */
+/** service: begin */
+export * from '../service/ssr.js';
+
+import 'zova-module-a-bean';
+declare module 'zova-module-a-bean' {
+  
+    export interface IServiceRecord {
+      'home-layout:ssr': never;
+    }
+
+  
+}
+declare module 'zova-module-home-layout' {
+  
+        export interface ServiceSsr {
+          /** @internal */
+          get scope(): ScopeModuleHomeLayout;
+        }
+
+        export interface ServiceSsr {
+          get $beanFullName(): 'home-layout.service.ssr';
+          get $onionName(): 'home-layout:ssr';
+          
+        } 
+}
+/** service: end */
+/** service: begin */
+import { ServiceSsr } from '../service/ssr.js';
+import 'zova';
+declare module 'zova' {
+  export interface IBeanRecordGeneral {
+    'home-layout.service.ssr': ServiceSsr;
+  }
+}
+/** service: end */
 /** controller: begin */
 export * from '../component/itemLink/controller.jsx';
 export * from '../component/layoutDefault/controller.jsx';
@@ -150,8 +186,15 @@ declare module 'zova' {
   }
 }
 /** render: end */
+/** config: begin */
+export * from '../config/config.js';
+import { config } from '../config/config.js';
+/** config: end */
+/** locale: begin */
+import { locales } from './locales.js';
+/** locale: end */
 /** scope: begin */
-import { BeanScopeBase, type BeanScopeUtil } from 'zova';
+import { BeanScopeBase, type BeanScopeUtil, TypeModuleConfig, TypeModuleLocales, TypeLocaleBase } from 'zova';
 import { Scope } from 'zova-module-a-bean';
 
 @Scope()
@@ -159,6 +202,8 @@ export class ScopeModuleHomeLayout extends BeanScopeBase {}
 
 export interface ScopeModuleHomeLayout {
   util: BeanScopeUtil;
+config: TypeModuleConfig<typeof config>;
+locale: TypeModuleLocales<(typeof locales)[TypeLocaleBase]>;
 }
 
 import 'zova';
@@ -167,11 +212,18 @@ declare module 'zova' {
     'home-layout': ScopeModuleHomeLayout;
   }
   
-  
+  export interface IBeanScopeConfig {
+    'home-layout': ReturnType<typeof config>;
+  }
 
-  
+  export interface IBeanScopeLocale {
+    'home-layout': (typeof locales)[TypeLocaleBase];
+  }
 
   
 }
-  
+
+export function locale<K extends keyof (typeof locales)[TypeLocaleBase]>(key: K): `home-layout::${K}` {
+  return `home-layout::${key}`;
+}  
 /** scope: end */
