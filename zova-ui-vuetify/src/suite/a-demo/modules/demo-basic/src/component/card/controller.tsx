@@ -1,31 +1,58 @@
-import { BeanControllerBase, PropsBase, RequiredSome } from 'zova';
+import { QBtn } from 'quasar';
+import { VBtn } from 'vuetify/components/VBtn';
+import { BeanControllerBase, ISlot } from 'zova';
 import { Controller } from 'zova-module-a-bean';
-import { VNode } from 'vue';
 
-export interface Props extends PropsBase<ControllerCard, Slots> {
+export interface ControllerCardProps {
   header?: string;
   content?: string;
   footer?: string;
-}
-
-export type Emits = {
-  (e: 'reset', time: Date): void;
-};
-
-export interface Slots {
-  header?(): VNode;
-  default?(): VNode;
-  footer?(): VNode;
+  onReset?: (time: Date) => void;
+  slotHeader?: ISlot;
+  slotFooter?: ISlot;
 }
 
 @Controller()
-export class ControllerCard extends BeanControllerBase<
-  unknown,
-  RequiredSome<Props, keyof typeof ControllerCard.$propsDefault>,
-  Emits,
-  Slots
-> {
+export class ControllerCard extends BeanControllerBase {
   static $propsDefault = {
     header: 'default header',
   };
+
+  protected render() {
+    return (
+      <div>
+        <VBtn
+          color="secondary"
+          nativeOnClick={() => {
+            this.$props.onReset?.(new Date());
+          }}
+        >
+          Reset Time
+        </VBtn>
+        <div>
+          <div style={{ backgroundColor: 'teal' }}>
+            <div>
+              <div>Slot:</div>
+              {this.$props.slotHeader?.()}
+            </div>
+            <div>{`Prop: ${this.$props.header}`}</div>
+          </div>
+          <div style={{ backgroundColor: 'orange' }}>
+            <div>
+              <div>Slot:</div>
+              {this.$slotDefault?.()}
+            </div>
+            <div>{`Prop: ${this.$props.content}`}</div>
+          </div>
+          <div style={{ backgroundColor: 'green' }}>
+            <div>
+              <div>Slot</div>
+              {this.$props.slotFooter?.()}
+            </div>
+            <div>{`Prop: ${this.$props.footer}`}</div>
+          </div>
+        </div>
+      </div>
+    );
+  }
 }

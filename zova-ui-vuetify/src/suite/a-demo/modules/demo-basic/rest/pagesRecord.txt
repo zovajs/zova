@@ -1,0 +1,3 @@
+'/demo/basic/component': TypePagePathSchema<undefined,undefined>;
+'/demo/basic/state': TypePagePathSchema<undefined,undefined>;
+'/demo/basic/style': TypePagePathSchema<undefined,undefined>;
