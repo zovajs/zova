@@ -1,8 +1,11 @@
+/* eslint-disable */
 /** icons: begin */
 import icon_auth from './icons/groups/auth.svg';
 import icon_business from './icons/groups/business.svg';
+import icon_daisy from './icons/groups/daisy.svg';
 import icon_default from './icons/groups/default.svg';
 import icon_editor from './icons/groups/editor.svg';
+import icon_emoji from './icons/groups/emoji.svg';
 import icon_flow from './icons/groups/flow.svg';
 import icon_login from './icons/groups/login.svg';
 import icon_outline from './icons/groups/outline.svg';
@@ -13,8 +16,10 @@ import icon_tools from './icons/groups/tools.svg';
 export const icons = {
   auth: icon_auth,
   business: icon_business,
+  daisy: icon_daisy,
   default: icon_default,
   editor: icon_editor,
+  emoji: icon_emoji,
   flow: icon_flow,
   login: icon_login,
   outline: icon_outline,
@@ -23,10 +28,10 @@ export const icons = {
   tools: icon_tools,
 };
 
-import 'zova';
-declare module 'zova' {
-  export interface IIconRecord {
-    ':auth:dingtalk-square': true;
+import 'zova-module-a-icon';
+declare module 'zova-module-a-icon' {
+export interface IIconRecord {
+  ':auth:dingtalk-square': true;
     ':auth:github': true;
     ':auth:password': true;
     ':auth:sms': true;
@@ -42,6 +47,8 @@ declare module 'zova' {
     ':business:provider': true;
     ':business:purchase': true;
     ':business:store': true;
+    ':daisy:lock': true;
+    ':daisy:person': true;
     '::add': true;
     '::alert': true;
     '::archive': true;
@@ -76,6 +83,7 @@ declare module 'zova' {
     '::construction': true;
     '::copyright': true;
     '::cross-circle': true;
+    '::dark-theme': true;
     '::dashboard': true;
     '::database': true;
     '::delete-forever': true;
@@ -119,6 +127,7 @@ declare module 'zova' {
     '::message': true;
     '::module': true;
     '::more-horiz': true;
+    '::none': true;
     '::notebook': true;
     '::open-in-new': true;
     '::open-with': true;
@@ -184,6 +193,7 @@ declare module 'zova' {
     ':editor:task-alt': true;
     ':editor:title': true;
     ':editor:undo': true;
+    ':emoji:flower': true;
     ':flow:activity-none': true;
     ':flow:activity-service': true;
     ':flow:activity-user-task': true;
@@ -256,22 +266,32 @@ declare module 'zova' {
     ':social:twitter': true;
     ':tools:pomotodo': true;
     ':tools:spreadsheet': true;
-  }
 }
 
+}
 /** icons: end */
 /** scope: begin */
-import { BeanScopeBase, Scope, TypeModuleResource } from 'zova';
+import { BeanScopeBase, type BeanScopeUtil } from 'zova';
+import { Scope } from 'zova-module-a-bean';
 
 @Scope()
 export class ScopeModuleHomeIcon extends BeanScopeBase {}
 
-export interface ScopeModuleHomeIcon extends TypeModuleResource<never, never, never, never, never> {}
+export interface ScopeModuleHomeIcon {
+  util: BeanScopeUtil;
+}
 
 import 'zova';
 declare module 'zova' {
   export interface IBeanScopeRecord {
     'home-icon': ScopeModuleHomeIcon;
   }
+  
+  
+
+  
+
+  
 }
+  
 /** scope: end */
