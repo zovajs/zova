@@ -86,6 +86,7 @@
     "zova-module-home-index": "workspace:^",
     "zova-module-home-layout": "workspace:^",
     "zova-module-vuetify-adapter": "workspace:^",
+    "zova-module-vuetify-form": "workspace:^",
     "zova-module-a-action": "workspace:^",
     "zova-module-a-actions": "workspace:^",
     "zova-module-a-behaviors": "workspace:^",
