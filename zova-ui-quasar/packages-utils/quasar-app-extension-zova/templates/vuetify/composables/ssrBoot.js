@@ -1,5 +1,5 @@
 // Utilities
-import { computed, getCurrentInstance, onMounted, readonly, shallowRef } from 'vue';
+import { getCurrentInstance, onMounted, readonly, shallowRef, toRef } from 'vue';
 
 // Composables
 export function useSsrBoot() {
@@ -18,16 +18,14 @@ export function useSsrBoot() {
       });
     });
   }
-  const ssrBootStyles = computed(() =>
-    !isBooted.value
-      ? {
-          transition: 'none !important',
-        }
-      : undefined,
-  );
+  const ssrBootStyles = toRef(() => !isBooted.value
+    ? {
+        transition: 'none !important',
+      }
+    : undefined);
   return {
     ssrBootStyles,
     isBooted: readonly(isBooted),
   };
 }
-// # sourceMappingURL=ssrBoot.mjs.map
+// # sourceMappingURL=ssrBoot.js.map
