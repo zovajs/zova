@@ -4,6 +4,7 @@ import { defineComponent } from 'vue';
 import { prepareComponentOptions, useController } from 'zova';
 import { ControllerLayoutTabs } from '../../component/layoutTabs/controller.jsx';
 import { RenderLayoutTabs } from '../../component/layoutTabs/render.jsx';
+import { StyleLayoutTabs } from '../../component/layoutTabs/style.js';
 
 export type TypeControllerLayoutTabsPublicProps = {
   controllerRef?: (ref: ControllerLayoutTabs) => void;
@@ -17,11 +18,16 @@ declare module 'zova-module-home-layout' {
   }
 }
 declare module 'zova-module-home-layout' {
-  export interface RenderLayoutTabs extends ControllerLayoutTabs {}
+  export interface StyleLayoutTabs extends ControllerLayoutTabs {}
+  export interface RenderLayoutTabs extends StyleLayoutTabs {}
+  export interface RenderContent extends StyleLayoutTabs {}
+  export interface RenderMenu extends StyleLayoutTabs {}
+  export interface RenderSidebar extends StyleLayoutTabs {}
+  export interface RenderTabs extends StyleLayoutTabs {}
 }
 export const ZLayoutTabs = defineComponent(
   (_props: TypeControllerLayoutTabsPublicProps) => {
-    useController(ControllerLayoutTabs, RenderLayoutTabs, undefined);
+    useController(ControllerLayoutTabs, RenderLayoutTabs, StyleLayoutTabs);
     return () => {};
   },
   prepareComponentOptions(),

@@ -1,12 +1,28 @@
 import { RouterView } from '@cabloy/vue-router';
 import { VNode } from 'vue';
-import { BeanRenderBase } from 'zova';
+import { BeanRenderBase, Use } from 'zova';
 import { Render } from 'zova-module-a-bean';
 import { ApiMenuEntity } from '../../api/menu.js';
 import EssentialLink from '../essentialLink/index.vue';
+import { RenderContent } from './render.content.jsx';
+import { RenderMenu } from './render.menu.jsx';
+import { RenderSidebar } from './render.sidebar.jsx';
+import { RenderTabs } from './render.tabs.jsx';
 
 @Render()
-export class RenderLayoutDefault extends BeanRenderBase {
+export class RenderLayoutTabs extends BeanRenderBase {
+  @Use()
+  $$renderContent: RenderContent;
+
+  @Use()
+  $$renderSidebar: RenderSidebar;
+
+  @Use()
+  $$renderMenu: RenderMenu;
+
+  @Use()
+  $$renderTabs: RenderTabs;
+
   _renderMenuItem(item: ApiMenuEntity) {
     if (item.separator) {
       return <VDivider></VDivider>;
