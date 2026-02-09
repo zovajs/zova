@@ -225,6 +225,12 @@ importers:
       zova-module-home-layout:
         specifier: workspace:^
         version: link:src/suite/a-home/modules/home-layout
+      zova-module-home-passport:
+        specifier: workspace:^
+        version: link:src/suite/a-home/modules/home-passport
+      zova-module-home-user:
+        specifier: workspace:^
+        version: link:src/suite/a-home/modules/home-user
       zova-module-vuetify-adapter:
         specifier: workspace:^
         version: link:src/suite-vendor/a-vuetify/modules/vuetify-adapter
@@ -1066,12 +1072,14 @@ importers:
       zova-module-home-layout:
         specifier: workspace:^
         version: link:modules/home-layout
+      zova-module-home-passport:
+        specifier: ^5.0.0
+        version: link:modules/home-passport
+      zova-module-home-user:
+        specifier: ^5.0.0
+        version: link:modules/home-user
 
-  src/suite/a-home/modules/home-api:
-    dependencies:
-      axios:
-        specifier: ^1.13.2
-        version: 1.13.5
+  src/suite/a-home/modules/home-api: {}
 
   src/suite/a-home/modules/home-base: {}
 
@@ -1080,6 +1088,10 @@ importers:
   src/suite/a-home/modules/home-index: {}
 
   src/suite/a-home/modules/home-layout: {}
+
+  src/suite/a-home/modules/home-passport: {}
+
+  src/suite/a-home/modules/home-user: {}
 
 packages:
 
