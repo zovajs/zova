@@ -1,4 +1,4 @@
-import { computed, createVNode, normalizeClass, normalizeStyle, onServerPrefetch, shallowRef } from 'vue';
+import { createCommentVNode, createVNode, normalizeClass, normalizeStyle, onServerPrefetch, shallowRef } from 'vue';
 import { useTheme } from 'vuetify';
 import { VIcon } from 'vuetify/components/VIcon';
 import { useTextColor } from 'vuetify/lib/composables/color.js';
@@ -34,8 +34,10 @@ export class SysIcon extends BeanBase {
       const { themeClasses } = useTheme();
       const { sizeClasses } = useSize(props);
       const { textColorClasses, textColorStyles } = useTextColor(() => props.color);
+      const iconV = useIcon(() => slotIcon.value || props.icon);
       useRender(() => {
-        const { iconData } = self._getIconData(slotIcon.value || props.icon);
+        if (!slotIcon.value && !props.icon) return createCommentVNode();
+        const { iconData } = self._getIconData(slotIcon.value || props.icon) ?? iconV;
         const slotValue = slots.default?.();
         if (slotValue) {
           slotIcon.value = flattenFragments(slotValue).filter(node => node.type === Text && node.children && typeof node.children === 'string')[0]?.children;
@@ -72,7 +74,7 @@ export class SysIcon extends BeanBase {
 
   private _getIconData(iconName) {
     const iconInfo = $getZovaIcon(iconName);
-    if (iconInfo === undefined) return useIcon(computed(() => iconName));
+    if (!iconInfo) return;
     return {
       iconData: {
         value: {
