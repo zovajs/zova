@@ -1,4 +1,4 @@
-import { VBtn } from 'vuetify/components';
+import { VBtn, VInput, VTextField } from 'vuetify/components';
 import { BeanRenderBase } from 'zova';
 import { Render } from 'zova-module-a-bean';
 
@@ -15,6 +15,8 @@ export class RenderPageState extends BeanRenderBase {
         <VBtn color="secondary" onClick={() => this.decrement()}>
           Decrement
         </VBtn>
+        <VInput label=""></VInput>
+        <VTextField type=""></VTextField>
       </div>
     );
   }

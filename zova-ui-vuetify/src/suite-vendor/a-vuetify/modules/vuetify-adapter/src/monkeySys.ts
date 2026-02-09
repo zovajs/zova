@@ -1,6 +1,6 @@
 import type { IMonkeySysInitialize } from 'zova';
 import type { IOpenapiOptionsResourceMeta } from 'zova-module-a-openapi';
-import { VInput } from 'vuetify/components';
+import { VTextField } from 'vuetify/components';
 import { BeanSimple, deepExtend } from 'zova';
 import { SysIcon } from './bean/sys.icon.js';
 
@@ -26,7 +26,7 @@ export class MonkeySys extends BeanSimple implements IMonkeySysInitialize {
       form: {
         provider: {
           components: {
-            text: VInput,
+            text: VTextField,
             captcha: 'quasar-form:formFieldCaptcha',
           },
           behaviors: {

@@ -1,6 +1,4 @@
 import type { ControllerFormField, IFormFieldRenderContext, IFormFieldRenderContextProps, IFormMeta, TypeFormField } from 'zova-module-a-form';
-import { isEmptyObject } from '@cabloy/utils';
-import { QIcon } from 'quasar';
 import { VNode } from 'vue';
 import z from 'zod';
 import { cast, Use } from 'zova';
@@ -30,7 +28,7 @@ export class BehaviorFormField extends BeanBehaviorBase<
     const formMeta = this.$$formField.formMeta;
     const field = this.$$formField.field;
     const componentName = typeof renderContext.propsBucket.renderProvider === 'object' ? cast(renderContext.propsBucket.renderProvider)?.name : renderContext.propsBucket.renderProvider;
-    if (componentName === 'QInput') {
+    if (componentName === 'VTextField') {
       this._patchProps_input(formMeta, field, renderContext);
     }
   }
@@ -69,11 +67,11 @@ export class BehaviorFormField extends BeanBehaviorBase<
     const propsPatch: IFormFieldRenderContextProps = {
       'type': inputType,
       'label': propsBucket.label,
+      'placeholder': propsBucket.placeholder,
       'modelValue': propsBucket.displayValue,
       'onUpdate:modelValue': propsBucket['onUpdate:modelValue'] !== undefined
         ? (propsBucket['onUpdate:modelValue'] ?? undefined)
         : onSetDisplayValueDefaultByValue,
-      'noErrorIcon': true,
       error,
       'errorMessage': errorObj?.message,
       // onChange: propsBucket.onChange !== undefined
@@ -82,23 +80,14 @@ export class BehaviorFormField extends BeanBehaviorBase<
       // onInput: propsBucket.onInput !== undefined
       //   ? (propsBucket.onInput ?? undefined)
       //   : (propsBucket.displayValueUpdateTiming !== 'change' ? onSetDisplayValueDefault : undefined),
-      'onBlur': propsBucket.onBlur !== undefined
+      'prependIcon': propsBucket.iconPrefix,
+      'appendIcon': propsBucket.iconSuffix,
+      'nativeOnBlur': propsBucket.onBlur !== undefined
         ? (propsBucket.onBlur ?? undefined)
         : (_e: Event) => {
             field.api.handleBlur();
           },
     };
-    // slots
-    const slots: any = {};
-    if (propsBucket.iconPrefix) {
-      slots.prepend = () => <QIcon name={propsBucket.iconPrefix}></QIcon>;
-    }
-    if (propsBucket.iconSuffix) {
-      slots.append = () => <QIcon name={propsBucket.iconSuffix}></QIcon>;
-    }
-    if (!isEmptyObject(slots)) {
-      propsPatch['v-slots'] = slots;
-    }
     // merge
     renderContext.props = Object.assign({}, propsGeneral, propsPatch, renderContext.props);
   }
