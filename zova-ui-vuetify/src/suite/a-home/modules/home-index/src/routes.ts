@@ -1,7 +1,7 @@
-import Index from './.metadata/page/index.vue';
-import { IModuleRoute } from 'zova-module-a-router';
+import type { IModuleRoute } from 'zova-module-a-router';
+import { ZPageHome } from './.metadata/page/home.js';
 
 export const routes: IModuleRoute[] = [
   //
-  { path: '', component: Index },
+  { path: '', component: ZPageHome },
 ];

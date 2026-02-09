@@ -3,7 +3,7 @@ import { Controller } from 'zova-module-a-bean';
 
 @Controller()
 export class ControllerPageHome extends BeanControllerPageBase {
-   public message: string;
+  public message: string;
 
   protected async __init__() {
     this.message = 'Hello Zova';
