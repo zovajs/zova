@@ -27,11 +27,11 @@ export class MonkeySys extends BeanSimple implements IMonkeySysInitialize {
         provider: {
           components: {
             text: VTextField,
-            captcha: 'quasar-form:formFieldCaptcha',
+            captcha: 'vuetify-form:formFieldCaptcha',
           },
           behaviors: {
-            formField: 'quasar-form:formField',
-            formFieldLayout: 'quasar-form:formFieldLayout',
+            formField: 'vuetify-form:formField',
+            formFieldLayout: 'vuetify-form:formFieldLayout',
           },
         },
       },

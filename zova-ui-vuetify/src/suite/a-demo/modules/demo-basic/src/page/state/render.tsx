@@ -15,8 +15,6 @@ export class RenderPageState extends BeanRenderBase {
         <VBtn color="secondary" onClick={() => this.decrement()}>
           Decrement
         </VBtn>
-        <VInput label=""></VInput>
-        <VTextField type=""></VTextField>
       </div>
     );
   }

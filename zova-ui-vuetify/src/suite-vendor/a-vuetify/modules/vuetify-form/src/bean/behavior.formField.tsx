@@ -66,7 +66,7 @@ export class BehaviorFormField extends BeanBehaviorBase<
     };
     const propsPatch: IFormFieldRenderContextProps = {
       'type': inputType,
-      'label': propsBucket.label,
+      'label': propsBucket.label as string | undefined,
       'placeholder': propsBucket.placeholder,
       'modelValue': propsBucket.displayValue,
       'onUpdate:modelValue': propsBucket['onUpdate:modelValue'] !== undefined
