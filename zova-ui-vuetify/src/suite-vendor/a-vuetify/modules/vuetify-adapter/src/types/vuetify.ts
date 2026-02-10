@@ -3,6 +3,8 @@ import type { DateInstance, DefaultsInstance, DisplayInstance, LocaleInstance, T
 
 import 'zova';
 
+import 'vue/jsx-runtime';
+
 export interface VuetifyGlobal {
   defaults: UnwrapNestedRefs<DefaultsInstance>;
   display: UnwrapNestedRefs<DisplayInstance>;
@@ -15,5 +17,12 @@ export interface VuetifyGlobal {
 declare module 'zova' {
   export interface BeanBase {
     $vuetify: VuetifyGlobal;
+  }
+}
+declare module 'vue/jsx-runtime' {
+  namespace JSX {
+    export interface IntrinsicAttributes {
+      type?: string;
+    }
   }
 }

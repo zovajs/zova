@@ -72,8 +72,7 @@ export class BehaviorFormField extends BeanBehaviorBase<
       'onUpdate:modelValue': propsBucket['onUpdate:modelValue'] !== undefined
         ? (propsBucket['onUpdate:modelValue'] ?? undefined)
         : onSetDisplayValueDefaultByValue,
-      error,
-      'errorMessage': errorObj?.message,
+      'errorMessages': error ? errorObj?.message : null,
       // onChange: propsBucket.onChange !== undefined
       //   ? (propsBucket.onChange ?? undefined)
       //   : (propsBucket.displayValueUpdateTiming === 'change' ? onSetDisplayValueDefault : undefined),

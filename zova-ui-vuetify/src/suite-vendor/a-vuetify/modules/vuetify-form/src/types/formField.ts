@@ -7,7 +7,7 @@ declare module 'zova-module-a-form' {
     'modelValue'?: any;
     'onUpdate:modelValue'?: ((value: any) => void);
     'error'?: boolean;
-    'errorMessage'?: string;
+    'errorMessages'?: string | null;
     'prependIcon'?: keyof IIconRecord;
     'appendIcon'?: keyof IIconRecord;
     'nativeOnBlur'?: (e: FocusEvent) => void;
