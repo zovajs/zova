@@ -22,7 +22,7 @@ export class ServiceSsr extends BeanBase {
         this.ctx.meta.$ssr.context._meta.bodyTags += `<script id="__prefersColorSchemeDarkJS">
             const __themeDarkStyle=window.ssr_themedark_data;
             const __themeDarkEl=document.createElement('style');
-            __themeDarkEl.id='vuetify-theme-stylesheet';
+            __themeDarkEl.setAttribute('vite-css-module-id','vuetify-theme-stylesheet');
             __themeDarkEl.innerHTML=__themeDarkStyle;
             document.head.appendChild(__themeDarkEl);
             document.querySelector('#__prefersColorSchemeDarkJS').remove();
