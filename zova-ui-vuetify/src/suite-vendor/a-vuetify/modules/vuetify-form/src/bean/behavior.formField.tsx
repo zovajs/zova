@@ -82,7 +82,7 @@ export class BehaviorFormField extends BeanBehaviorBase<
       //   : (propsBucket.displayValueUpdateTiming !== 'change' ? onSetDisplayValueDefault : undefined),
       'prependIcon': propsBucket.iconPrefix,
       'appendIcon': propsBucket.iconSuffix,
-      'nativeOnBlur': propsBucket.onBlur !== undefined
+      'onBlur': propsBucket.onBlur !== undefined
         ? (propsBucket.onBlur ?? undefined)
         : (_e: Event) => {
             field.api.handleBlur();
