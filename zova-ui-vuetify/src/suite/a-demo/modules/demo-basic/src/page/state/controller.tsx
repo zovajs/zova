@@ -1,13 +1,14 @@
-import { VBtn } from 'vuetify/components/VBtn';
+import { VBtn, VIcon } from 'vuetify/components';
 import { BeanControllerPageBase, useComputed } from 'zova';
 import { Controller } from 'zova-module-a-bean';
-import { ZIcon } from 'zova-module-a-icon';
+import { IIconRecord } from 'zova-module-a-icon';
 import { ZPage } from 'zova-module-home-base';
 
 @Controller()
 export class ControllerPageState extends BeanControllerPageBase {
   count: number = 0;
   count2: string;
+  icon: keyof IIconRecord = '::add';
 
   protected async __init__() {
     this.count2 = useComputed(() => {
@@ -35,7 +36,13 @@ export class ControllerPageState extends BeanControllerPageBase {
           Decrement
         </VBtn>
         <div>
-          <ZIcon name='::add'></ZIcon>test
+          <VIcon icon={this.icon}></VIcon>
+          <VBtn nativeOnClick={() => {
+            this.icon = this.icon === '::add' ? '::alert' : '::add';
+          }}
+          >
+            Switch
+          </VBtn>
         </div>
       </ZPage>
     );
