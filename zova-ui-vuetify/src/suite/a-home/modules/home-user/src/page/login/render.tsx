@@ -1,4 +1,4 @@
-import { VBtn, VCard, VCol, VContainer, VRow } from 'vuetify/components';
+import { VBtn, VCard, VCol, VRow } from 'vuetify/components';
 import { BeanRenderBase } from 'zova';
 import { Render } from 'zova-module-a-bean';
 import { ZForm, ZFormField, ZFormFieldWrapper, ZFormSubscribe } from 'zova-module-a-form';
@@ -67,13 +67,15 @@ export class RenderPageLogin extends BeanRenderBase {
         <ZFormFieldWrapper name="captcha"></ZFormFieldWrapper>
         <ZFormSubscribe slotDefault={$$form => {
           return (
-            <VBtn
-              disabled={$$form.formState.isSubmitting}
-              type="submit"
-              color="primary"
-            >
-              {this.scope.locale.Login()}
-            </VBtn>
+            <div class="d-flex justify-center">
+              <VBtn
+                disabled={$$form.formState.isSubmitting}
+                type="submit"
+                color="primary"
+              >
+                {this.scope.locale.Login()}
+              </VBtn>
+            </div>
           );
         }}
         >
