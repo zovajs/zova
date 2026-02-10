@@ -8,7 +8,7 @@ import { ZPage } from 'zova-module-home-base';
 export class ControllerPageState extends BeanControllerPageBase {
   count: number = 0;
   count2: string;
-  icon: keyof IIconRecord = '::add';
+  icon: keyof IIconRecord;
 
   protected async __init__() {
     this.count2 = useComputed(() => {
@@ -38,7 +38,7 @@ export class ControllerPageState extends BeanControllerPageBase {
         <div>
           <VIcon icon={this.icon}></VIcon>
           <VBtn nativeOnClick={() => {
-            this.icon = this.icon === '::add' ? '::alert' : '::add';
+            this.icon = this.icon === '::add' ? ('$cancel' as any) : '::add';
           }}
           >
             Switch
