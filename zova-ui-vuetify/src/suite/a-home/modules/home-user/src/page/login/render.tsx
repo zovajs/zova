@@ -1,4 +1,4 @@
-import { QBtn, QCard } from 'quasar';
+import { VBtn, VCard, VCol, VContainer, VRow } from 'vuetify/components';
 import { BeanRenderBase } from 'zova';
 import { Render } from 'zova-module-a-bean';
 import { ZForm, ZFormField, ZFormFieldWrapper, ZFormSubscribe } from 'zova-module-a-form';
@@ -7,31 +7,31 @@ import { ZForm, ZFormField, ZFormFieldWrapper, ZFormSubscribe } from 'zova-modul
 export class RenderPageLogin extends BeanRenderBase {
   public render() {
     return (
-      <div class="q-pa-md row items-center justify-center" style={{ minHeight: '100vh' }}>
-        <QCard class="shadow-2" style={{ width: '100%', maxWidth: '960px' }}>
-          <div class="row">
-            <div class="col-12 col-md-6" style={{ background: 'var(--q-color-grey-3)', borderTopLeftRadius: '6px', borderBottomLeftRadius: '6px' }}>
+      <div class="pa-4 d-flex align-center justify-center" style={{ minHeight: '100vh' }}>
+        <VCard class="elevation-2" style={{ width: '100%', maxWidth: '960px' }}>
+          <VRow>
+            <VCol cols={12} md={6} style={{ background: 'var(--v-theme-surface)', borderTopLeftRadius: '6px', borderBottomLeftRadius: '6px' }}>
               {this._renderLandingInfo()}
-            </div>
-            <div class="col-12 col-md-6" style={{ minWidth: '320px' }}>
-              <h5 class="text-center" style={{ marginBottom: '12px' }}>{this.scope.locale.Login()}</h5>
-              <div class="q-pa-md">
+            </VCol>
+            <VCol cols={12} md={6} style={{ minWidth: '320px' }}>
+              <h2 class="text-center" style={{ marginBottom: '12px' }}>{this.scope.locale.Login()}</h2>
+              <div class="pa-4">
                 {this._renderForm()}
               </div>
-            </div>
-          </div>
-        </QCard>
+            </VCol>
+          </VRow>
+        </VCard>
       </div>
     );
   }
 
   _renderLandingInfo() {
     return (
-      <div class="min-h-full rounded-l-xl bg-base-200">
-        <div class="py-12">
-          <div class="max-w-md">
+      <div style={{ minHeight: '100%' }}>
+        <div style={{ padding: '48px 0' }}>
+          <div style={{ maxWidth: '360px', margin: '0 auto' }}>
             <h1 class="text-center font-bold">Zova</h1>
-            <h5 class="text-center opacity-40">Less is more, while more is less</h5>
+            <h2 class="text-center" style={{ opacity: 0.4 }}>Less is more, while more is less</h2>
           </div>
         </div>
       </div>
@@ -41,7 +41,7 @@ export class RenderPageLogin extends BeanRenderBase {
   _renderForm() {
     return (
       <ZForm
-        class="q-gutter-md"
+        class="d-grid"
         data={this.user}
         schema={this.schema}
         onSubmit={data => {
@@ -67,12 +67,13 @@ export class RenderPageLogin extends BeanRenderBase {
         <ZFormFieldWrapper name="captcha"></ZFormFieldWrapper>
         <ZFormSubscribe slotDefault={$$form => {
           return (
-            <QBtn
-              label={this.scope.locale.Login()}
-              disable={$$form.formState.isSubmitting}
+            <VBtn
+              disabled={$$form.formState.isSubmitting}
               type="submit"
               color="primary"
-            ></QBtn>
+            >
+              {this.scope.locale.Login()}
+            </VBtn>
           );
         }}
         >
