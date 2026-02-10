@@ -21,8 +21,11 @@ export class ServiceSsr extends BeanBase {
         if (err) return;
         if (!this.$$scopeSsr.config.cookieTheme) {
           this.ctx.meta.$ssr.context._meta.bodyTags += `<script id="__prefersColorSchemeDarkJS">
-            document.body.classList.remove('body--light','body--dark');
-            window.ssr_themedark_data.split(',').forEach(item=>document.body.classList.add(item));
+            const __themeDarkStyle=window.ssr_themedark_data;
+            const __themeDarkEl=document.createElement('style');
+            __themeDarkEl.id='vuetify-theme-stylesheet';
+            __themeDarkEl.innerHTML=__themeDarkStyle;
+            document.head.appendChild(__themeDarkEl);
             document.querySelector('#__prefersColorSchemeDarkJS').remove();
           </script>`.replaceAll('\n', '');
         }
@@ -35,8 +38,8 @@ export class ServiceSsr extends BeanBase {
     window.ssr_body_ready_handler_pageContainer();
   };
   window.ssr_body_ready_condition=()=>{
-    const __domPlaceholder=document.querySelector('.__ssr_placeholder__');
-    return __domPlaceholder;
+    const __domPageContainer=document.querySelector('#q-app>.v-application>.v-application__wrap>main.v-main');
+    return __domPageContainer;
   };
   window.ssr_body_ready_callback=()=>{
     window.ssr_body_ready_handler();
@@ -64,38 +67,30 @@ export class ServiceSsr extends BeanBase {
 
   private _getJsHandlerSidebar() {
     return `window.ssr_body_ready_handler_sidebar=()=>{
-    const __belowBreakpoint=document.documentElement.clientWidth <= ${this.sys.config.layout.sidebar.breakpoint};
-    let __leftDrawerOpen;
-    if(__belowBreakpoint){
-      __leftDrawerOpen=false;
-    }else{
-      const __leftDrawerOpenPC=window.ssr_load_local('sidebarLeftOpenPC');
-      __leftDrawerOpen=__leftDrawerOpenPC!==undefined?__leftDrawerOpenPC:${this.sys.config.layout.sidebar.leftOpenPC};
-    }
-    if(__leftDrawerOpen){
-      const __domHeader=document.querySelector('#q-app>.q-layout>.q-header');
-      const __domDrawer=document.querySelector('#q-app>.q-layout>.q-drawer-container>.q-drawer--left');
-      const __domPageContainer=document.querySelector('#q-app>.q-layout>.q-page-container');
-      if(__domHeader){
-        __domHeader.style.left='300px';
+      const __belowBreakpoint=document.documentElement.clientWidth <= ${this.sys.config.layout.sidebar.breakpoint};
+      let __leftDrawerOpen;
+      if(__belowBreakpoint){
+        __leftDrawerOpen=false;
+      }else{
+        const __leftDrawerOpenPC=window.ssr_load_local('sidebarLeftOpenPC');
+        __leftDrawerOpen=__leftDrawerOpenPC!==undefined?__leftDrawerOpenPC:${this.sys.config.layout.sidebar.leftOpenPC};
       }
-      if(__domDrawer){
-        __domDrawer.style.transform='unset !important';
-        __domDrawer.className=__domDrawer.className.replace('q-layout--prevent-focus ','');
+      const __domHeader=document.querySelector('#q-app>.v-application>.v-application__wrap>header.v-toolbar');
+      const __domDrawer=document.querySelector('#q-app>.v-application>.v-application__wrap>.v-navigation-drawer--left');
+      const __domPageContainer=document.querySelector('#q-app>.v-application>.v-application__wrap>main.v-main');
+      if(__leftDrawerOpen){
+        __domHeader.style.left='360px';
+        __domHeader.style.width='calc(100% - 360px)';
+        __domDrawer.style.transform='translateX(0px)';
+        __domDrawer.style.width='360px';
+        __domPageContainer.style.setProperty('--v-layout-left','360px');
+        __domPageContainer.style.setProperty('--v-layout-top','64px');
+      }else{
+        __domPageContainer.style.setProperty('--v-layout-left','0px');
+        __domPageContainer.style.setProperty('--v-layout-top','64px');
       }
-      if(__domPageContainer){
-        __domPageContainer.style.paddingLeft='300px';
-      }
-      if(window.ssr_themedark){
-        if(__domDrawer){
-          __domDrawer.classList.add('q-drawer--dark','q-dark');
-          const __domDrawerList=__domDrawer.querySelector('.q-list');
-          if(__domDrawerList) __domDrawerList.classList.add('q-list--dark');
-          const __domDrawerSeparators=__domDrawer.querySelectorAll('.q-separator');
-          __domDrawerSeparators.forEach(item=>item.classList.add('q-separator--dark'));
-        }
-      }
-    }
+      document.querySelector('#__leftDrawerOpenJS').remove();
+    };
   };`;
   }
 }
