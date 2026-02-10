@@ -29,7 +29,7 @@ export class ControllerPageState extends BeanControllerPageBase {
       <ZPage>
         <div>{`count(ref): ${this.count}`}</div>
         <div>{`count(computed): ${this.count2}`}</div>
-        <VBtn color="secondary" nativeOnClick={() => this.increment()}>
+        <VBtn color="primary" nativeOnClick={() => this.increment()}>
           Increment
         </VBtn>
         <VBtn color="secondary" nativeOnClick={() => this.decrement()}>
