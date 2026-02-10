@@ -1,5 +1,4 @@
 import type { BeanControllerBase } from '../../bean/beanControllerBase.js';
-import { withCtx } from 'vue';
 import { BeanSimple } from '../../bean/beanSimple.js';
 import { BeanControllerIdentifier, BeanRenderIdentifier } from '../../bean/type.js';
 import { cast } from '../../types/utils/cast.js';
@@ -23,13 +22,15 @@ export class CtxComponent extends BeanSimple {
         return self._bean_render_original.call(this, ...args);
         // throw new Error('render bean not found');
       }
-      if (process.env.SERVER) {
-        return withCtx(() => {
-          return render.render();
-        }, instance)();
-      } else {
-        return render.render();
-      }
+      return render.render();
+      // need not set currentRenderingInstance on server for better performance
+      // if (process.env.SERVER) {
+      //   return withCtx(() => {
+      //     return render.render();
+      //   }, instance)();
+      // } else {
+      //   return render.render();
+      // }
     };
     instance.type.ssrRender = null;
     instance.ssrRender = null;
