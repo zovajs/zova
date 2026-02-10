@@ -1,6 +1,7 @@
 import { VBtn } from 'vuetify/components/VBtn';
 import { BeanControllerPageBase, useComputed } from 'zova';
 import { Controller } from 'zova-module-a-bean';
+import { ZIcon } from 'zova-module-a-icon';
 import { ZPage } from 'zova-module-home-base';
 
 @Controller()
@@ -33,6 +34,9 @@ export class ControllerPageState extends BeanControllerPageBase {
         <VBtn color="secondary" nativeOnClick={() => this.decrement()}>
           Decrement
         </VBtn>
+        <div>
+          <ZIcon name='::add'></ZIcon>test
+        </div>
       </ZPage>
     );
   }
