@@ -36,7 +36,7 @@ export class RenderLayoutTabs extends BeanRenderBase {
         >
           {this.$$renderMenu.render()}
         </VNavigationDrawer>
-        <VAppBar>
+        <VAppBar style={{ transition: 'none' }}>
           <VAppBarNavIcon icon="::menu" variant="text" nativeOnClick={() => this.toggleLeftDrawer()}></VAppBarNavIcon>
           <VToolbarTitle>Zova</VToolbarTitle>
           <VSpacer></VSpacer>
