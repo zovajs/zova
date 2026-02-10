@@ -726,8 +726,8 @@ importers:
         specifier: ^3.5.6
         version: 3.5.27(typescript@5.9.3)
       vue-plugin-render-freeze:
-        specifier: ^2.0.3
-        version: 2.0.3(vue@3.5.27(typescript@5.9.3))
+        specifier: ^2.0.4
+        version: 2.0.4(vue@3.5.27(typescript@5.9.3))
       zod:
         specifier: ^4.1.5
         version: 4.3.6
@@ -5989,8 +5989,8 @@ packages:
     peerDependencies:
       eslint: ^8.57.0 || ^9.0.0
 
-  vue-plugin-render-freeze@2.0.3:
-    resolution: {integrity: sha512-In+ok9c2gmZsmN7N+exVSbbC8NDSpio4IgNp11aRPrp3JG3lG7xeHRfdJbCzsSi40uxbhLaT40Gy35M+Hd8eXw==}
+  vue-plugin-render-freeze@2.0.4:
+    resolution: {integrity: sha512-XFkSsG+Ur5XGNQe7rCOqiqDRChhs2lD+QJxQu5dbt9mcOt9A/x0SpQN96MBhaiQ4Mq+Ie2AM9epnBFW7Z4vo9A==}
     peerDependencies:
       vue: ^3.5.13
 
@@ -11382,7 +11382,7 @@ snapshots:
     transitivePeerDependencies:
       - supports-color
 
-  vue-plugin-render-freeze@2.0.3(vue@3.5.27(typescript@5.9.3)):
+  vue-plugin-render-freeze@2.0.4(vue@3.5.27(typescript@5.9.3)):
     dependencies:
       vue: 3.5.27(typescript@5.9.3)
 

@@ -60,6 +60,7 @@ export function extendViteConf(context: ConfigContext) {
       });
       // special for dist files
       process.env.SERVER = env.SERVER;
+      process.env.NODE_ENV = 'production'; // patch for vue warn, such as withDirectives: currentRenderingInstance === null
       // process.env.CLIENT = env.CLIENT; // should not set if false
     }
     // define
