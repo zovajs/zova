@@ -92,31 +92,6 @@ export interface IZovaComponentRecord {
 }
 }
 /** components: end */
-/** render: begin */
-export * from '../page/state/render.jsx';
-
-import 'zova';
-declare module 'zova' {
-  
-  
-}
-declare module 'zova-module-demo-basic' {
-  
-        export interface RenderPageState {
-          /** @internal */
-          get scope(): ScopeModuleDemoBasic;
-        } 
-}
-/** render: end */
-/** render: begin */
-import { RenderPageState } from '../page/state/render.jsx';
-import 'zova';
-declare module 'zova' {
-  export interface IBeanRecordLocal {
-    'demo-basic.render.pageState': RenderPageState;
-  }
-}
-/** render: end */
 /** theme: begin */
 export * from '../bean/theme.orange.js';
 import { IThemeOptionsOrange } from '../bean/theme.orange.js';
