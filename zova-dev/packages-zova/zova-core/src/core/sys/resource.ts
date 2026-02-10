@@ -35,7 +35,7 @@ export class AppResource {
     registerMappedClassMetadataKey(target, SymbolDecoratorUse);
     const uses = appMetadata.getOwnMetadataMap(true, SymbolDecoratorUse, target);
     uses[options.prop] = options;
-    if (process.env.NODE_ENV === 'development') {
+    if (process.env.DEV) {
       if (typeof options.prop === 'string' && !options.prop.startsWith('$$')) {
         console.error(`inject prop name should start with $$: ${options.prop}`);
       }
