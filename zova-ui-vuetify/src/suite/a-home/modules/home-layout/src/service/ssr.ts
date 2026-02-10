@@ -19,8 +19,7 @@ export class ServiceSsr extends BeanBase {
     if (process.env.SERVER) {
       this.ctx.meta.$ssr.context.onRendered((err?: Error) => {
         if (err) return;
-        if (!this.$$scopeSsr.config.cookieTheme) {
-          this.ctx.meta.$ssr.context._meta.bodyTags += `<script id="__prefersColorSchemeDarkJS">
+        this.ctx.meta.$ssr.context._meta.bodyTags += `<script id="__prefersColorSchemeDarkJS">
             const __themeDarkStyle=window.ssr_themedark_data;
             const __themeDarkEl=document.createElement('style');
             __themeDarkEl.id='vuetify-theme-stylesheet';
@@ -28,7 +27,6 @@ export class ServiceSsr extends BeanBase {
             document.head.appendChild(__themeDarkEl);
             document.querySelector('#__prefersColorSchemeDarkJS').remove();
           </script>`.replaceAll('\n', '');
-        }
         if (this.$$scopeSsr.config.optimization.bodyReadyObserver) {
           this.ctx.meta.$ssr.context._meta.bodyTags += `<script id="__leftDrawerOpenJS">
   ${this.options?.sidebarLeftOpenPC ? this._getJsHandlerSidebar() : ''}
