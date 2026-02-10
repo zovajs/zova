@@ -12,7 +12,14 @@ export const routes: IModuleRoute[] = [
       requiresAuth: false,
     },
   },
-  { path: 'errorNotFound', component: ZPageErrorNotFound },
+  {
+    path: 'errorNotFound',
+    component: ZPageErrorNotFound,
+    meta: {
+      layout: 'empty',
+      requiresAuth: false,
+    },
+  },
   {
     path: 'errorExpired',
     component: ZPageErrorExpired,
