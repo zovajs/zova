@@ -34,8 +34,9 @@ export class SysIcon extends BeanBase {
       const { themeClasses } = useTheme();
       const { sizeClasses } = useSize(props);
       const { textColorClasses, textColorStyles } = useTextColor(() => props.color);
+      const iconDefault = useIcon(() => slotIcon.value || props.icon);
       const iconV = computed(() => {
-        return self._getIconData(slotIcon.value || props.icon) ?? useIcon(() => slotIcon.value || props.icon);
+        return self._getIconData(slotIcon.value || props.icon) ?? iconDefault;
       });
       useRender(() => {
         if (!slotIcon.value && !props.icon) return createCommentVNode();
