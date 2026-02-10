@@ -51,15 +51,6 @@ export class ServiceSsr extends BeanBase {
 
   private _getJsHandlerPageContainer() {
     return `window.ssr_body_ready_handler_pageContainer=()=>{
-    const __domPageContainer=document.querySelector('#q-app>.q-layout>.q-page-container');
-    if(window.ssr_themedark){
-      if(__domPageContainer){
-        const __domCards=__domPageContainer.querySelectorAll('.q-card');
-        __domCards.forEach(item=>item.classList.add('q-card--dark','q-dark'));
-        const __domFields=__domPageContainer.querySelectorAll('.q-field');
-        __domFields.forEach(item=>item.classList.add('q-field--dark'));
-      }
-    }
   };`;
   }
 
