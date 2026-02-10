@@ -28,7 +28,10 @@ export class ControllerIcon extends BeanControllerBase {
     if (icon === 'none' as any || !icon) {
       return;
     }
-    await this.$$toolIcon.parseIconInfo(icon);
+    const promise = this.$$toolIcon.parseIconInfo(icon);
+    if (process.env.SSR) {
+      await promise;
+    }
   }
 
   protected render() {
