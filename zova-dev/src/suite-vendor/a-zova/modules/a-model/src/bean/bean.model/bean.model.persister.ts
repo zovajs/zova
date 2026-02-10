@@ -57,7 +57,7 @@ export class BeanModelPersister extends BeanModelLast {
         });
       }
     } catch (err) {
-      if (process.env.NODE_ENV === 'development') {
+      if (process.env.DEV) {
         console.error(err);
         console.warn('Encountered an error attempting to restore query cache from persisted location.');
       }
