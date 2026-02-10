@@ -23,7 +23,7 @@ export class CtxComponent extends BeanSimple {
         return self._bean_render_original.call(this, ...args);
         // throw new Error('render bean not found');
       }
-      if (process.env.SERVER && process.env.PROD) {
+      if (process.env.SERVER) {
         return withCtx(() => {
           return render.render();
         }, instance)();
