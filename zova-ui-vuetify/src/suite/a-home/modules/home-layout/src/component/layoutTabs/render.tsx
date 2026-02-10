@@ -43,7 +43,7 @@ export class RenderLayoutTabs extends BeanRenderBase {
           <VBtn icon="::search" variant="text"></VBtn>
           <VBtn icon="::more-horiz" variant="text"></VBtn>
         </VAppBar>
-        <VMain>
+        <VMain style={{ transition: 'none' }}>
           {this.$$renderContent.render()}
         </VMain>
       </VApp>

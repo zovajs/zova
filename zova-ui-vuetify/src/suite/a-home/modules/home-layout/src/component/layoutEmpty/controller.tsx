@@ -17,7 +17,7 @@ export class ControllerLayoutEmpty extends BeanControllerBase {
   protected render() {
     return (
       <VApp>
-        <VMain>
+        <VMain style={{ transition: 'none' }}>
           <ZRouterViewEmpty></ZRouterViewEmpty>
         </VMain>
       </VApp>
