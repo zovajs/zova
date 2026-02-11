@@ -21,6 +21,7 @@ export class RenderHeader extends BeanRenderBase {
         <VSpacer></VSpacer>
         {this.$$r.$$renderLocale.render()}
         {this.$$r.$$renderTheme.renderThemeDark()}
+        {this.$$r.$$renderTheme.renderThemeName()}
       </VAppBar>
     );
   }
