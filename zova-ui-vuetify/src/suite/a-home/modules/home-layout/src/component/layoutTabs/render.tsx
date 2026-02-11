@@ -8,6 +8,7 @@ import { RenderLocale } from './render.locale.jsx';
 import { RenderMenu } from './render.menu.jsx';
 import { RenderSidebar } from './render.sidebar.jsx';
 import { RenderTabs } from './render.tabs.jsx';
+import { RenderTheme } from './render.theme.jsx';
 
 @Render()
 export class RenderLayoutTabs extends BeanRenderBase {
@@ -25,6 +26,9 @@ export class RenderLayoutTabs extends BeanRenderBase {
 
   @Use()
   $$renderTabs: RenderTabs;
+
+  @Use()
+  $$renderTheme: RenderTheme;
 
   @Use()
   $$renderLocale: RenderLocale;

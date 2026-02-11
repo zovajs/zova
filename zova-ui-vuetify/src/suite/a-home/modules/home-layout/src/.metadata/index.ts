@@ -160,6 +160,7 @@ export * from '../component/layoutTabs/render.locale.jsx';
 export * from '../component/layoutTabs/render.menu.jsx';
 export * from '../component/layoutTabs/render.sidebar.jsx';
 export * from '../component/layoutTabs/render.tabs.jsx';
+export * from '../component/layoutTabs/render.theme.jsx';
 export * from '../component/layoutTabs/render.jsx';
 
 import 'zova';
@@ -199,6 +200,11 @@ declare module 'zova-module-home-layout' {
           get scope(): ScopeModuleHomeLayout;
         }
 
+        export interface RenderTheme {
+          /** @internal */
+          get scope(): ScopeModuleHomeLayout;
+        }
+
         export interface RenderLayoutTabs {
           /** @internal */
           get scope(): ScopeModuleHomeLayout;
@@ -212,6 +218,7 @@ import { RenderLocale } from '../component/layoutTabs/render.locale.jsx';
 import { RenderMenu } from '../component/layoutTabs/render.menu.jsx';
 import { RenderSidebar } from '../component/layoutTabs/render.sidebar.jsx';
 import { RenderTabs } from '../component/layoutTabs/render.tabs.jsx';
+import { RenderTheme } from '../component/layoutTabs/render.theme.jsx';
 import { RenderLayoutTabs } from '../component/layoutTabs/render.jsx';
 import 'zova';
 declare module 'zova' {
@@ -222,6 +229,7 @@ declare module 'zova' {
 'home-layout.render.menu': RenderMenu;
 'home-layout.render.sidebar': RenderSidebar;
 'home-layout.render.tabs': RenderTabs;
+'home-layout.render.theme': RenderTheme;
 'home-layout.render.layoutTabs': RenderLayoutTabs;
   }
 }

@@ -1,5 +1,5 @@
 import type { RenderLayoutTabs } from './render.jsx';
-import { VAppBar, VAppBarNavIcon, VBtn, VSpacer, VToolbarTitle } from 'vuetify/components';
+import { VAppBar, VAppBarNavIcon, VSpacer, VToolbarTitle } from 'vuetify/components';
 import { BeanRenderBase, Use } from 'zova';
 import { Render } from 'zova-module-a-bean';
 
@@ -20,8 +20,7 @@ export class RenderHeader extends BeanRenderBase {
         <VToolbarTitle>Zova</VToolbarTitle>
         <VSpacer></VSpacer>
         {this.$$r.$$renderLocale.render()}
-        <VBtn icon="::search" variant="text"></VBtn>
-        <VBtn icon="::more-horiz" variant="text"></VBtn>
+        {this.$$r.$$renderTheme.renderThemeDark()}
       </VAppBar>
     );
   }

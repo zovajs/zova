@@ -26,6 +26,7 @@ declare module 'zova-module-home-layout' {
   export interface RenderMenu extends StyleLayoutTabs {}
   export interface RenderSidebar extends StyleLayoutTabs {}
   export interface RenderTabs extends StyleLayoutTabs {}
+  export interface RenderTheme extends StyleLayoutTabs {}
 }
 export const ZLayoutTabs = defineComponent(
   (_props: TypeControllerLayoutTabsPublicProps) => {
