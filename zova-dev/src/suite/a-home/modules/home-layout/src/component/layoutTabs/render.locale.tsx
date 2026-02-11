@@ -1,4 +1,4 @@
-import { BeanRenderBase } from 'zova';
+import { BeanRenderBase, ClientOnly } from 'zova';
 import { Render } from 'zova-module-a-bean';
 import { $icon } from 'zova-module-a-icon';
 
@@ -19,22 +19,24 @@ export class RenderLocale extends BeanRenderBase {
       <li>
         <details>
           <summary>{$icon('::language')}</summary>
-          <ul class="bg-base-100 rounded-t-none p-2 w-48">
-            {locales.map(item => {
-              return (
-                <li key={item.name} class={this.app.meta.locale.current === item.name ? 'disabled' : ''}>
-                  <a
-                    onClick={() => {
-                      this.app.meta.locale.current = item.name as any;
-                    }}
-                  >
-                    {$icon(this.app.meta.locale.current === item.name ? '::done' : '::none')}
-                    {item.title}
-                  </a>
-                </li>
-              );
-            })}
-          </ul>
+          <ClientOnly>
+            <ul class="bg-base-100 rounded-t-none p-2 w-48">
+              {locales.map(item => {
+                return (
+                  <li key={item.name} class={this.app.meta.locale.current === item.name ? 'disabled' : ''}>
+                    <a
+                      onClick={() => {
+                        this.app.meta.locale.current = item.name as any;
+                      }}
+                    >
+                      {$icon(this.app.meta.locale.current === item.name ? '::done' : '::none')}
+                      {item.title}
+                    </a>
+                  </li>
+                );
+              })}
+            </ul>
+          </ClientOnly>
         </details>
       </li>
     );

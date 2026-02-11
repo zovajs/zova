@@ -1,6 +1,7 @@
+import { VBtn, VList, VListItem, VMenu } from 'vuetify/components';
 import { BeanRenderBase, ClientOnly } from 'zova';
 import { Render } from 'zova-module-a-bean';
-import { $icon } from 'zova-module-a-icon';
+import { $icon, $iconName } from 'zova-module-a-icon';
 
 @Render()
 export class RenderTheme extends BeanRenderBase {
@@ -19,30 +20,32 @@ export class RenderTheme extends BeanRenderBase {
         title: this.scope.locale.ThemeAuto(),
       },
     ];
+    const slots = {
+      activator: ({ props }) => {
+        return <VBtn icon={$iconName('::dark-theme')} variant="text" {...props}></VBtn>;
+      },
+    };
     return (
-      <li>
-        <details>
-          <summary>{$icon('::dark-theme')}</summary>
-          <ClientOnly>
-            <ul class="bg-base-100 rounded-t-none p-2 w-48">
-              {themes.map(item => {
-                return (
-                  <li key={item.mode.toString()} class={this.$theme.darkMode === item.mode ? 'disabled' : ''}>
-                    <a
-                      onClick={() => {
-                        this.$theme.darkMode = item.mode as any;
-                      }}
-                    >
-                      {$icon(this.$theme.darkMode === item.mode ? '::done' : '::none')}
-                      {item.title}
-                    </a>
-                  </li>
-                );
-              })}
-            </ul>
-          </ClientOnly>
-        </details>
-      </li>
+      <VMenu v-slots={slots}>
+        <ClientOnly>
+          <VList>
+            {themes.map(item => {
+              return (
+                <VListItem
+                  key={item.mode.toString()}
+                  value={item.mode}
+                  title={item.title}
+                  disabled={this.$theme.darkMode === item.mode}
+                  prependIcon={$iconName(this.$theme.darkMode === item.mode ? '::done' : '::none')}
+                  onClick={() => {
+                    this.$theme.darkMode = item.mode as any;
+                  }}
+                ></VListItem>
+              );
+            })}
+          </VList>
+        </ClientOnly>
+      </VMenu>
     );
   }
 
