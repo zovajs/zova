@@ -21,7 +21,7 @@ export class RenderTabs extends BeanRenderBase {
         : (
             <VBadge
               class="hidden"
-              color="success"
+              color="surface"
               offsetX={-10}
               offsetY={-8}
               v-slots={{
