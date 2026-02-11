@@ -9,6 +9,7 @@ import { RenderMenu } from './render.menu.jsx';
 import { RenderSidebar } from './render.sidebar.jsx';
 import { RenderTabs } from './render.tabs.jsx';
 import { RenderTheme } from './render.theme.jsx';
+import { RenderUser } from './render.user.jsx';
 
 @Render()
 export class RenderLayoutTabs extends BeanRenderBase {
@@ -32,6 +33,9 @@ export class RenderLayoutTabs extends BeanRenderBase {
 
   @Use()
   $$renderLocale: RenderLocale;
+
+  @Use()
+  $$renderUser: RenderUser;
 
   render() {
     return (

@@ -162,6 +162,7 @@ export * from '../component/layoutTabs/render.sidebar.jsx';
 export * from '../component/layoutTabs/render.tabs.jsx';
 export * from '../component/layoutTabs/render.theme.jsx';
 export * from '../component/layoutTabs/render.jsx';
+export * from '../component/layoutTabs/render.user.jsx';
 
 import 'zova';
 declare module 'zova' {
@@ -208,6 +209,11 @@ declare module 'zova-module-home-layout' {
         export interface RenderLayoutTabs {
           /** @internal */
           get scope(): ScopeModuleHomeLayout;
+        }
+
+        export interface RenderUser {
+          /** @internal */
+          get scope(): ScopeModuleHomeLayout;
         } 
 }
 /** render: end */
@@ -220,6 +226,7 @@ import { RenderSidebar } from '../component/layoutTabs/render.sidebar.jsx';
 import { RenderTabs } from '../component/layoutTabs/render.tabs.jsx';
 import { RenderTheme } from '../component/layoutTabs/render.theme.jsx';
 import { RenderLayoutTabs } from '../component/layoutTabs/render.jsx';
+import { RenderUser } from '../component/layoutTabs/render.user.jsx';
 import 'zova';
 declare module 'zova' {
   export interface IBeanRecordLocal {
@@ -231,6 +238,7 @@ declare module 'zova' {
 'home-layout.render.tabs': RenderTabs;
 'home-layout.render.theme': RenderTheme;
 'home-layout.render.layoutTabs': RenderLayoutTabs;
+'home-layout.render.user': RenderUser;
   }
 }
 /** render: end */
