@@ -1,5 +1,6 @@
 import type { VNode } from 'vue';
 import { withModifiers } from 'vue';
+import { VBadge, VTab, VTabs } from 'vuetify/components';
 import { BeanRenderBase, ClientOnly } from 'zova';
 import { Render } from 'zova-module-a-bean';
 import { ZIcon } from 'zova-module-a-icon';
@@ -13,39 +14,56 @@ export class RenderTabs extends BeanRenderBase {
     const domTabs: VNode[] = [];
     for (const tab of $$modelTabs.tabs) {
       const { tabKey, info } = tab;
-      const className = tabKey === $$modelTabs.tabCurrentKey ? 'tab tab-active text-primary' : 'tab';
+      const className = tabKey === $$modelTabs.tabCurrentKey ? 'text-primary' : '';
       const titleLocal = this.$text(info?.title || '');
+      const domTabContent = tab.affix
+        ? titleLocal
+        : (
+            <VBadge
+              class="hidden"
+              color="success"
+              offsetX={-10}
+              offsetY={-8}
+              v-slots={{
+                badge: () => (
+                  <ZIcon
+                    name="::close"
+                    width="16"
+                    height="16"
+                    nativeOnClick={withModifiers(() => {
+                      $$modelTabs.deleteTab(tabKey);
+                    }, ['stop'])}
+                  >
+                  </ZIcon>
+                ),
+              }}
+            >
+              {titleLocal}
+            </VBadge>
+          );
       const domTab = (
-        <a
+        <VTab
           key={tabKey}
-          role="tab"
+          value={tabKey}
           class={`${className} ${this.cTab}`}
-          onClick={() => {
-            $$modelTabs.activeTab(tabKey);
-          }}
         >
           {!!info?.icon && <ZIcon name={info?.icon as any} width="24" height="24"></ZIcon>}
-          {titleLocal}
-          {!tab.affix && (
-            <ZIcon
-              class="tab-close hidden hover:bg-slate-400 rounded-sm"
-              name="::close"
-              width="16"
-              height="16"
-              nativeOnClick={withModifiers(() => {
-                $$modelTabs.deleteTab(tabKey);
-              }, ['stop'])}
-            >
-            </ZIcon>
-          )}
-        </a>
+          {domTabContent}
+        </VTab>
       );
       domTabs.push(domTab);
     }
     const domWrapper = (
-      <div role="tablist" class="tabs tabs-lifted">
+      <VTabs
+        alignTabs="start"
+        centerActive
+        modelValue={$$modelTabs.tabCurrentKey}
+        onUpdate:modelValue={tabKey => {
+          $$modelTabs.activeTab(tabKey);
+        }}
+      >
         {domTabs}
-      </div>
+      </VTabs>
     );
     if (!this.$$modelTabs.cache) return domWrapper;
     return (

@@ -11,6 +11,7 @@ export class RenderHeader extends BeanRenderBase {
   public render() {
     const slots = {
       extension: () => {
+        return this.$$r.$$renderTabs.render();
         return (
           <VTabs alignTabs="start" centerActive showArrows={true}>
             <VTab>

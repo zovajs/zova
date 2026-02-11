@@ -1,10 +1,5 @@
-import { VIcon, VTab, VTabs } from 'vuetify/components';
 import { VApp } from 'vuetify/components/VApp';
-import { VAppBar, VAppBarNavIcon } from 'vuetify/components/VAppBar';
-import { VBtn } from 'vuetify/components/VBtn';
-import { VSpacer } from 'vuetify/components/VGrid';
 import { VMain } from 'vuetify/components/VMain';
-import { VToolbarTitle } from 'vuetify/components/VToolbar';
 import { BeanRenderBase, Use } from 'zova';
 import { Render } from 'zova-module-a-bean';
 import { RenderContent } from './render.content.jsx';
