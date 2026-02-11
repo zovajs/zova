@@ -20,7 +20,6 @@ export class RenderUser extends BeanRenderBase {
                 this.$passport.logout().mutate();
               }}
             ></VListItem>
-
           </VList>
         </ClientOnly>
       </VMenu>
