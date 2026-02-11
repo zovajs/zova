@@ -4,6 +4,7 @@ import { BeanRenderBase, Use } from 'zova';
 import { Render } from 'zova-module-a-bean';
 import { RenderContent } from './render.content.jsx';
 import { RenderHeader } from './render.header.jsx';
+import { RenderLocale } from './render.locale.jsx';
 import { RenderMenu } from './render.menu.jsx';
 import { RenderSidebar } from './render.sidebar.jsx';
 import { RenderTabs } from './render.tabs.jsx';
@@ -24,6 +25,9 @@ export class RenderLayoutTabs extends BeanRenderBase {
 
   @Use()
   $$renderTabs: RenderTabs;
+
+  @Use()
+  $$renderLocale: RenderLocale;
 
   render() {
     return (

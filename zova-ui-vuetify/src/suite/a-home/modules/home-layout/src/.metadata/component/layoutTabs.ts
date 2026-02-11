@@ -22,6 +22,7 @@ declare module 'zova-module-home-layout' {
   export interface RenderLayoutTabs extends StyleLayoutTabs {}
   export interface RenderContent extends StyleLayoutTabs {}
   export interface RenderHeader extends StyleLayoutTabs {}
+  export interface RenderLocale extends StyleLayoutTabs {}
   export interface RenderMenu extends StyleLayoutTabs {}
   export interface RenderSidebar extends StyleLayoutTabs {}
   export interface RenderTabs extends StyleLayoutTabs {}
