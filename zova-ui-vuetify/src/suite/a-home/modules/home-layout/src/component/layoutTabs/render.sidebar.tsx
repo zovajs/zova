@@ -1,4 +1,5 @@
 import type { RenderLayoutTabs } from './render.jsx';
+import { VNavigationDrawer } from 'vuetify/components';
 import { BeanRenderBase, Use } from 'zova';
 import { Render } from 'zova-module-a-bean';
 
@@ -9,10 +10,13 @@ export class RenderSidebar extends BeanRenderBase {
 
   public render() {
     return (
-      <div class="drawer-side">
-        <label for="my-drawer-2" aria-label="close sidebar" class="drawer-overlay"></label>
+      <VNavigationDrawer
+        v-model={this.leftDrawerOpen}
+        mobileBreakpoint={this.sys.config.layout.sidebar.breakpoint}
+        width="360"
+      >
         {this.$$r.$$renderMenu.render()}
-      </div>
+      </VNavigationDrawer>
     );
   }
 }
