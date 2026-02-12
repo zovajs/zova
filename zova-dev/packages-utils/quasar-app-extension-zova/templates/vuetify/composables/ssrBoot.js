@@ -7,9 +7,14 @@ export function useSsrBoot() {
   const instance = getCurrentInstance();
   const zova = instance.appContext.app.zova;
   if (zova.sys.env.SSR) {
-    zova.ctx.meta.$ssr.onHydrated(() => {
+    if (!zova.ctx.meta.$ssr.isRuntimeSsrPreHydration) {
       isBooted.value = true;
-    });
+    }
+    else {
+      zova.ctx.meta.$ssr.onHydrated(() => {
+        isBooted.value = true;
+      });
+    }
   }
   else {
     onMounted(() => {
