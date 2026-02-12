@@ -2,18 +2,27 @@ import { VBtn, VList, VListItem, VMenu } from 'vuetify/components';
 import { BeanRenderBase, ClientOnly } from 'zova';
 import { Render } from 'zova-module-a-bean';
 import { $iconName } from 'zova-module-a-icon';
+import { $useLocale } from '../../.metadata/locales.js';
 
 @Render()
 export class RenderLocale extends BeanRenderBase {
+  private textLanguageEnglish: string;
+  private textLanguageChinese: string;
+
+  protected async __init__() {
+    this.textLanguageEnglish = $useLocale('LanguageEnglish');
+    this.textLanguageChinese = $useLocale('LanguageChinese');
+  }
+
   public render() {
     const locales = [
       {
         name: 'en-us',
-        title: this.scope.locale.LanguageEnglish(),
+        title: this.textLanguageEnglish,
       },
       {
         name: 'zh-cn',
-        title: this.scope.locale.LanguageChinese(),
+        title: this.textLanguageChinese,
       },
     ];
     const slots = {
