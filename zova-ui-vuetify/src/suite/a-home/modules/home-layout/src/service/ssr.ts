@@ -73,10 +73,10 @@ export class ServiceSsr extends BeanBase {
         __domDrawer.style.transform='translateX(0px)';
         __domDrawer.style.width='360px';
         __domPageContainer.style.setProperty('--v-layout-left','360px');
-        __domPageContainer.style.setProperty('--v-layout-top','64px');
+        __domPageContainer.style.setProperty('--v-layout-top','112px');
       }else{
         __domPageContainer.style.setProperty('--v-layout-left','0px');
-        __domPageContainer.style.setProperty('--v-layout-top','64px');
+        __domPageContainer.style.setProperty('--v-layout-top','112px');
       }
     };`;
   }
