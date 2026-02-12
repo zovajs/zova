@@ -2,9 +2,16 @@ import { VBtn, VCard, VCol, VRow } from 'vuetify/components';
 import { BeanRenderBase } from 'zova';
 import { Render } from 'zova-module-a-bean';
 import { ZForm, ZFormField, ZFormFieldWrapper, ZFormSubscribe } from 'zova-module-a-form';
+import { $useLocale } from '../../.metadata/locales.js';
 
 @Render()
 export class RenderPageLogin extends BeanRenderBase {
+  private textLogin: string;
+
+  protected async __init__() {
+    this.textLogin = $useLocale('Login');
+  }
+
   public render() {
     return (
       <div class="pa-4 d-flex align-center justify-center" style={{ minHeight: '100vh' }}>
@@ -73,7 +80,7 @@ export class RenderPageLogin extends BeanRenderBase {
                 type="submit"
                 color="primary"
               >
-                {this.scope.locale.Login()}
+                {this.textLogin}
               </VBtn>
             </div>
           );

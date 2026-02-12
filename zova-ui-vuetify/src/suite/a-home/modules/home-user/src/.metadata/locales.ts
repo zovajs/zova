@@ -1,5 +1,5 @@
 import type { TypeLocaleBase } from 'zova';
-import { $makeLocaleMagic } from 'zova';
+import { useApp, useComputed } from 'zova';
 import locale_en_us from '../config/locale/en-us.js';
 import locale_zh_cn from '../config/locale/zh-cn.js';
 
@@ -8,6 +8,10 @@ export const locales = {
   'zh-cn': locale_zh_cn,
 };
 
-export function $locale<K extends keyof (typeof locales)[TypeLocaleBase]>(key: K, ...args: any[]) {
-  return $makeLocaleMagic(`home-user::${key}`, ...args);
+export function $useLocale<K extends keyof (typeof locales)[TypeLocaleBase]>(key: K, ...args: any[]) {
+  const app = useApp();
+  const str = `home-user::${key}`;
+  return useComputed(() => {
+    return app.meta.text(str, ...args);
+  });
 }

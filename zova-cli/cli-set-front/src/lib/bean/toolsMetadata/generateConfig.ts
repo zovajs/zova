@@ -40,15 +40,19 @@ export async function generateLocale1(modulePath: string, moduleName: string) {
   }
   // combine
   const content = `import type { TypeLocaleBase } from 'zova';
-import { $makeLocaleMagic } from 'zova';
+import { useApp, useComputed } from 'zova';
 ${contentImports.join('\n')}
 
 export const locales = {
 ${contentLocales.join('\n')}
 };
 
-export function $locale<K extends keyof (typeof locales)[TypeLocaleBase]>(key: K, ...args: any[]) {
-  return $makeLocaleMagic(\`${moduleName}::\${key}\`, ...args);
+export function $useLocale<K extends keyof (typeof locales)[TypeLocaleBase]>(key: K, ...args: any[]) {
+  const app = useApp();
+  const str = \`${moduleName}::\${key}\`;
+  return useComputed(() => {
+    return app.meta.text(str, ...args);
+  });
 }
 `;
   return content;
