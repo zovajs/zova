@@ -189,9 +189,6 @@ importers:
       zova-module-a-ssr:
         specifier: workspace:^
         version: link:src/suite-vendor/a-zova/modules/a-ssr
-      zova-module-a-ssrcabloy:
-        specifier: workspace:^
-        version: link:src/suite-vendor/a-cabloy/modules/a-ssrcabloy
       zova-module-a-ssrhmr:
         specifier: workspace:^
         version: link:src/suite-vendor/a-zova/modules/a-ssrhmr
@@ -765,17 +762,12 @@ importers:
 
   src/suite-vendor/a-cabloy:
     dependencies:
-      zova-module-a-ssrcabloy:
-        specifier: workspace:^
-        version: link:modules/a-ssrcabloy
       zova-module-rest-actions:
         specifier: ^5.0.0
         version: link:modules/rest-actions
       zova-module-rest-resource:
         specifier: workspace:^
         version: link:modules/rest-resource
-
-  src/suite-vendor/a-cabloy/modules/a-ssrcabloy: {}
 
   src/suite-vendor/a-cabloy/modules/rest-actions: {}
 
@@ -1128,6 +1120,9 @@ importers:
       zova-module-start-adapter:
         specifier: ^5.0.0
         version: link:modules/start-adapter
+      zova-suite-a-cabloy:
+        specifier: ^5.0.0
+        version: link:../../suite-vendor/a-cabloy
 
   src/suite/cabloy-start/modules/start-adapter: {}
 
