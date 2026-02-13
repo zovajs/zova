@@ -240,6 +240,12 @@ importers:
       zova-module-start-adapter:
         specifier: workspace:^
         version: link:src/suite/cabloy-start/modules/start-adapter
+      zova-module-start-restpage:
+        specifier: workspace:^
+        version: link:src/suite/cabloy-start/modules/start-restpage
+      zova-module-start-table:
+        specifier: workspace:^
+        version: link:src/suite/cabloy-start/modules/start-table
       zova-module-vuetify-adapter:
         specifier: workspace:^
         version: link:src/suite-vendor/a-vuetify/modules/vuetify-adapter
@@ -1120,11 +1126,21 @@ importers:
       zova-module-start-adapter:
         specifier: ^5.0.0
         version: link:modules/start-adapter
+      zova-module-start-restpage:
+        specifier: ^5.0.0
+        version: link:modules/start-restpage
+      zova-module-start-table:
+        specifier: ^5.0.0
+        version: link:modules/start-table
       zova-suite-a-cabloy:
         specifier: ^5.0.0
         version: link:../../suite-vendor/a-cabloy
 
   src/suite/cabloy-start/modules/start-adapter: {}
+
+  src/suite/cabloy-start/modules/start-restpage: {}
+
+  src/suite/cabloy-start/modules/start-table: {}
 
 packages:
 
