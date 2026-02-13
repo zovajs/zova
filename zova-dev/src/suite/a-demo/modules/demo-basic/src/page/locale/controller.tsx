@@ -1,7 +1,6 @@
 import { BeanControllerPageBase } from 'zova';
 import { Controller } from 'zova-module-a-bean';
 import { ZPage } from 'zova-module-home-base';
-import { $locale } from '../../.metadata/locales.js';
 
 @Controller()
 export class ControllerPageLocale extends BeanControllerPageBase {
@@ -15,7 +14,7 @@ export class ControllerPageLocale extends BeanControllerPageBase {
           :
           {this.scope.locale.HelloWorld()}
         </div>
-        <div>{$locale('HelloWorld')}</div>
+        <div>{this.scope.locale.HelloWorld()}</div>
         <button
           class="btn btn-primary"
           onClick={() => {
