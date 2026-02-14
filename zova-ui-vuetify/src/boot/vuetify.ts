@@ -6,10 +6,11 @@
 
 // Composables
 import { createVuetify } from 'vuetify';
-
 import { aliases, mdi } from 'vuetify/iconsets/mdi-svg';
+
 // Styles
 import 'vuetify/styles';
+
 import 'unfonts.css';
 
 // https://vuetifyjs.com/en/introduction/why-vuetify/#feature-guides
