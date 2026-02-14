@@ -60,8 +60,9 @@ env/.env*.mine
 
 /src/suite-vendor/*
 !/src/suite-vendor/.gitkeep
-!/src/suite-vendor/a-zova
+!/src/suite-vendor/a-cabloy
 !/src/suite-vendor/a-devui
+!/src/suite-vendor/a-zova
 
 /src/module/*
 !/src/module/.gitkeep
