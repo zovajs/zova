@@ -47,7 +47,8 @@ export class CtxSSR extends BeanSimple {
     // metaStore
     this.metaStore = this.bean._newBeanSimple(CtxSSRMetaStore, false);
     // fix: flash on page load
-    if (process.env.DEV && process.env.CLIENT && this.isRuntimeSsrPreHydration) {
+    //    need not check process.env.DEV, because maybe need remove vite-css-module-id on prod
+    if (process.env.CLIENT && this.isRuntimeSsrPreHydration) {
       this.onHydrated(() => {
         document.querySelectorAll('style[vite-css-module-id]').forEach(node => node.remove());
       });
