@@ -51,8 +51,8 @@ export class InterceptorJwt extends BeanInterceptorBase<IInterceptorOptionsJwt> 
     if (!this.sys.config.api.jwt) return;
     // use default in scope.config rather than IInterceptorOptionsJwt.options
     const authTokenCurrent = authToken ?? this.scope.config.authToken.default;
-    // authToken: false
-    if (authTokenCurrent === false) return;
+    // // authToken: false
+    // if (authTokenCurrent === false) return;
     // authToken: string
     if (typeof authTokenCurrent === 'string') return authTokenCurrent;
     // authToken: true

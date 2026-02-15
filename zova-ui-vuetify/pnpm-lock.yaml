@@ -5,7 +5,7 @@ settings:
   excludeLinksFromLockfile: false
 
 overrides:
-  '@quasar/app-vite': npm:@cabloy/quasar-app-vite@^2.4.1
+  '@quasar/app-vite': npm:@cabloy/quasar-app-vite@^2.4.3
   '@vue/babel-plugin-jsx': npm:@cabloy/vue-babel-plugin-jsx@^1.2.5
   '@vue/compiler-sfc': npm:@cabloy/vue-compiler-sfc@^3.5.14
   '@vue/runtime-core': npm:@cabloy/vue-runtime-core@^3.5.51
@@ -266,8 +266,8 @@ importers:
         specifier: ^7.9.2
         version: 7.9.2(typescript@5.9.3)
       '@quasar/app-vite':
-        specifier: npm:@cabloy/quasar-app-vite@^2.4.1
-        version: '@cabloy/quasar-app-vite@2.4.1(@cabloy/vue-router@4.4.16(vue@3.5.27(typescript@5.9.3)))(@types/node@22.19.10)(eslint@9.39.2)(pinia@2.3.1(typescript@5.9.3)(vue@3.5.27(typescript@5.9.3)))(quasar@2.18.6)(rollup@4.57.1)(sass@1.97.3)(terser@5.46.0)(typescript@5.9.3)(vue@3.5.27(typescript@5.9.3))(yaml@2.8.2)'
+        specifier: npm:@cabloy/quasar-app-vite@^2.4.3
+        version: '@cabloy/quasar-app-vite@2.4.3(@cabloy/vue-router@4.4.16(vue@3.5.27(typescript@5.9.3)))(@types/node@22.19.10)(eslint@9.39.2)(pinia@2.3.1(typescript@5.9.3)(vue@3.5.27(typescript@5.9.3)))(quasar@2.18.6)(rollup@4.57.1)(sass@1.97.3)(terser@5.46.0)(typescript@5.9.3)(vue@3.5.27(typescript@5.9.3))(yaml@2.8.2)'
       '@types/luxon':
         specifier: ^3.7.1
         version: 3.7.1
@@ -457,8 +457,8 @@ importers:
   packages-utils/quasar-app-extension-zova:
     dependencies:
       '@quasar/app-vite':
-        specifier: npm:@cabloy/quasar-app-vite@^2.4.1
-        version: '@cabloy/quasar-app-vite@2.4.1(@types/node@22.19.10)(eslint@9.39.2)(pinia@2.3.1(typescript@5.9.3)(vue@3.5.27(typescript@5.9.3)))(quasar@2.18.6)(rollup@4.57.1)(sass@1.97.3)(terser@5.46.0)(typescript@5.9.3)(vue-router@4.6.4(vue@3.5.27(typescript@5.9.3)))(vue@3.5.27(typescript@5.9.3))(yaml@2.8.2)'
+        specifier: npm:@cabloy/quasar-app-vite@^2.4.3
+        version: '@cabloy/quasar-app-vite@2.4.3(@types/node@22.19.10)(eslint@9.39.2)(pinia@2.3.1(typescript@5.9.3)(vue@3.5.27(typescript@5.9.3)))(quasar@2.18.6)(rollup@4.57.1)(sass@1.97.3)(terser@5.46.0)(typescript@5.9.3)(vue-router@4.6.4(vue@3.5.27(typescript@5.9.3)))(vue@3.5.27(typescript@5.9.3))(yaml@2.8.2)'
       chalk:
         specifier: ^3.0.0
         version: 3.0.0
@@ -1395,8 +1395,8 @@ packages:
   '@cabloy/process-helper@2.0.25':
     resolution: {integrity: sha512-iOd8TtfC2+LIDYZ0KzgrhOIb0MD+R4hxMDUQ24zEhduZCfZniUL+feSJD0uxSOb0ec1mo5DO3ogohYsNcRgE6w==}
 
-  '@cabloy/quasar-app-vite@2.4.1':
-    resolution: {integrity: sha512-w6XfGj/8z0a5AHEcBi/fOg1tBt5B6m0YAkFdk+jcJ6sTNbmF9sXMShmS9w+s0C6KuoLVZ4Z3yTO7bXx1TDTRvg==}
+  '@cabloy/quasar-app-vite@2.4.3':
+    resolution: {integrity: sha512-cG9FBLGrOX4jevwj+y6OvVEzgjGGfY+ekLKfQqsYQe3Rp4pCz/+61YjtrIDGEZ8pnffbEiDv7li5wrCr+9aO5g==}
     engines: {node: ^30 || ^28 || ^26 || ^24 || ^22 || ^20, npm: '>= 6.14.12', yarn: '>= 1.17.3'}
     hasBin: true
     peerDependencies:
@@ -6584,7 +6584,7 @@ snapshots:
 
   '@cabloy/process-helper@2.0.25': {}
 
-  '@cabloy/quasar-app-vite@2.4.1(@cabloy/vue-router@4.4.16(vue@3.5.27(typescript@5.9.3)))(@types/node@22.19.10)(eslint@9.39.2)(pinia@2.3.1(typescript@5.9.3)(vue@3.5.27(typescript@5.9.3)))(quasar@2.18.6)(rollup@4.57.1)(sass@1.97.3)(terser@5.46.0)(typescript@5.9.3)(vue@3.5.27(typescript@5.9.3))(yaml@2.8.2)':
+  '@cabloy/quasar-app-vite@2.4.3(@cabloy/vue-router@4.4.16(vue@3.5.27(typescript@5.9.3)))(@types/node@22.19.10)(eslint@9.39.2)(pinia@2.3.1(typescript@5.9.3)(vue@3.5.27(typescript@5.9.3)))(quasar@2.18.6)(rollup@4.57.1)(sass@1.97.3)(terser@5.46.0)(typescript@5.9.3)(vue@3.5.27(typescript@5.9.3))(yaml@2.8.2)':
     dependencies:
       '@quasar/render-ssr-error': 1.0.3
       '@quasar/ssl-certificate': 1.0.0
@@ -6648,7 +6648,7 @@ snapshots:
       - tsx
       - yaml
 
-  '@cabloy/quasar-app-vite@2.4.1(@types/node@22.19.10)(eslint@9.39.2)(pinia@2.3.1(typescript@5.9.3)(vue@3.5.27(typescript@5.9.3)))(quasar@2.18.6)(rollup@4.57.1)(sass@1.97.3)(terser@5.46.0)(typescript@5.9.3)(vue-router@4.6.4(vue@3.5.27(typescript@5.9.3)))(vue@3.5.27(typescript@5.9.3))(yaml@2.8.2)':
+  '@cabloy/quasar-app-vite@2.4.3(@types/node@22.19.10)(eslint@9.39.2)(pinia@2.3.1(typescript@5.9.3)(vue@3.5.27(typescript@5.9.3)))(quasar@2.18.6)(rollup@4.57.1)(sass@1.97.3)(terser@5.46.0)(typescript@5.9.3)(vue-router@4.6.4(vue@3.5.27(typescript@5.9.3)))(vue@3.5.27(typescript@5.9.3))(yaml@2.8.2)':
     dependencies:
       '@quasar/render-ssr-error': 1.0.3
       '@quasar/ssl-certificate': 1.0.0
