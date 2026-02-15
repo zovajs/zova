@@ -6,6 +6,7 @@ import type {
   NextInterceptorRequest,
 } from 'zova-module-a-fetch';
 import type { IJwtAdapter, IJwtInfo } from '../types/jwt.js';
+import { $customKey } from 'zova-core';
 import {
   BeanInterceptorBase,
   Interceptor,
@@ -16,7 +17,7 @@ export interface IInterceptorOptionsJwt extends IDecoratorInterceptorOptions {
   authToken?: boolean | string;
 }
 
-@Interceptor<IInterceptorOptionsJwt>({ dependencies: 'a-interceptor:performAction' })
+@Interceptor<IInterceptorOptionsJwt>({ dependencies: 'a-interceptor:headers' })
 export class InterceptorJwt extends BeanInterceptorBase<IInterceptorOptionsJwt> implements IInterceptorRequest {
   private _beanJwtAdapter: IJwtAdapter;
   private _refreshAuthTokenPromise?: Promise<IJwtInfo>;
@@ -34,7 +35,7 @@ export class InterceptorJwt extends BeanInterceptorBase<IInterceptorOptionsJwt> 
     next: NextInterceptorRequest,
   ): Promise<AxiosRequestConfig> {
     try {
-      const accessToken = await this.prepareAccessToken(options.authToken);
+      const accessToken = await this.prepareAccessToken(config, options.authToken);
       if (accessToken) {
         config.headers!.Authorization = `Bearer ${accessToken}`;
       }
@@ -47,7 +48,7 @@ export class InterceptorJwt extends BeanInterceptorBase<IInterceptorOptionsJwt> 
     return next(config);
   }
 
-  async prepareAccessToken(authToken: string | boolean | undefined): Promise<string | undefined> {
+  async prepareAccessToken(config: AxiosRequestConfig, authToken: string | boolean | undefined): Promise<string | undefined> {
     if (!this.sys.config.api.jwt) return;
     // use default in scope.config rather than IInterceptorOptionsJwt.options
     // const authTokenCurrent = authToken ?? this.scope.config.authToken.default;
@@ -57,6 +58,9 @@ export class InterceptorJwt extends BeanInterceptorBase<IInterceptorOptionsJwt> 
     // authToken: string
     // if (typeof authTokenCurrent === 'string') return authTokenCurrent;
     if (typeof authToken === 'string') return authToken;
+    if (process.env.SERVER) {
+      config.headers![$customKey('x-vona-jwt-authtoken')] = authToken;
+    }
     // authToken: true
     let jwtInfo = await this._beanJwtAdapter.getJwtInfo();
     if (!jwtInfo) {

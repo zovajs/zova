@@ -6,7 +6,7 @@ import { ISsrSitePerformActionOptions } from 'zova-module-a-ssr';
 
 export interface IInterceptorOptionsPerformAction extends IDecoratorInterceptorOptions {}
 
-@Interceptor<IInterceptorOptionsPerformAction>({ dependencies: 'a-interceptor:headers' })
+@Interceptor<IInterceptorOptionsPerformAction>({ dependencies: 'a-interceptor:jwt' })
 export class InterceptorPerformAction extends BeanInterceptorBase<IInterceptorOptionsPerformAction> implements IInterceptorRequest {
   async onRequest(
     config: AxiosRequestConfig,
