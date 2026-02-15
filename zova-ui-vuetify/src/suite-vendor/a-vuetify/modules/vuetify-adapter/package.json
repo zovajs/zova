@@ -13,7 +13,7 @@
       "vendors": [
         {
           "match": [
-            "vuetify"
+            "vuetify/lib"
           ],
           "output": "vuetify"
         }
