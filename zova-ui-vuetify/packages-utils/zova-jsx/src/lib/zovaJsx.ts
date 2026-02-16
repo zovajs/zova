@@ -263,6 +263,9 @@ export class ZovaJsx extends BeanSimple {
     if (typeof type === 'string') {
       type = this.components?.[type] ?? type;
     }
+    if (typeof type === 'string' && ['script', 'style', 'link'].includes(type)) {
+      throw new Error(`not valid zova jsx component: ${type}`);
+    }
     // div/QInput/Zova Component
     return type;
   }
