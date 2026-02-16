@@ -10,6 +10,11 @@ export class ServiceSsr extends BeanBase {
     if (process.env.SERVER) {
       this._ssrErrorHandler();
     }
+    if (process.env.CLIENT && this.$ssr.isRuntimeSsrPreHydration) {
+      this.$ssr.onHydrated(() => {
+        this.$vuetify.display.update();
+      });
+    }
   }
 
   private _ssrErrorHandler() {
