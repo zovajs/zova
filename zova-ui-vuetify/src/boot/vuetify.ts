@@ -6,11 +6,13 @@
 
 // Composables
 import { createVuetify } from 'vuetify';
-import { aliases, mdi } from 'vuetify/iconsets/mdi-svg';
+import { aliases } from 'vuetify/iconsets/mdi-svg';
 
 // Styles
-import 'vuetify/styles';
+import '../css/settings.scss';
 
+import 'vuetify/lib/styles/main.sass';
+// import 'vuetify/styles';
 import 'unfonts.css';
 
 // https://vuetifyjs.com/en/introduction/why-vuetify/#feature-guides
@@ -33,10 +35,6 @@ export default createVuetify({
   ssr: process.env.SSR,
   theme,
   icons: {
-    defaultSet: 'mdi',
     aliases,
-    sets: {
-      mdi,
-    },
   },
 });
