@@ -6,6 +6,7 @@ import { $performAction } from './lib/performAction.js';
 
 export class Monkey extends BeanSimple implements IMonkeyBeanInit {
   async beanInit(bean: BeanContainer, beanInstance: BeanBase) {
+    const self = this;
     bean.defineProperty(beanInstance, '$performAction', {
       enumerable: false,
       configurable: true,
@@ -21,7 +22,7 @@ export class Monkey extends BeanSimple implements IMonkeyBeanInit {
             ctx: cast(beanInstance).ctx,
             $host: beanInstance,
           }, renderContext);
-          return $performAction(actionName, options, renderContext, next);
+          return $performAction(self.sys, actionName, options, renderContext, next);
         };
       },
     });

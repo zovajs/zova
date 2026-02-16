@@ -10,6 +10,7 @@ import { constantDefault } from './constant.js';
 import { SysMeta } from './meta.js';
 import { setSys } from './sysFake.js';
 import { deepExtend, SysUtil } from './util.js';
+import { cast } from '../../types/utils/cast.js';
 
 const SymbolSysInitializePromise = Symbol('SymbolSysInitializePromise');
 const SymbolSysClose = Symbol('SymbolSysClose');
@@ -74,8 +75,8 @@ export class ZovaSys {
   }
 
   private _hookClose() {
-    if (process.env.DEV && import.meta.hot) {
-      import.meta.hot.on('vite:beforeFullReload', _payload => {
+    if (process.env.DEV && cast(import.meta).hot) {
+      cast(import.meta).hot.on('vite:beforeFullReload', _payload => {
         this.close();
       });
     }

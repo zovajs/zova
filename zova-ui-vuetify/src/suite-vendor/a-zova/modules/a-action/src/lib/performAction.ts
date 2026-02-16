@@ -1,14 +1,15 @@
+import type { ZovaSys } from 'zova';
 import type { IJsxRenderContextBase } from 'zova-module-a-openapi';
 import type { IActionRecord, SymbolActionResult } from '../types/action.js';
-import { beanFullNameFromOnionName, deepExtend, useSys } from 'zova';
+import { beanFullNameFromOnionName, deepExtend } from 'zova';
 
 export function $performAction<T extends keyof IActionRecord>(
+  sys: ZovaSys,
   actionName: T,
   options: Partial<IActionRecord[T]> | undefined,
   renderContext: IJsxRenderContextBase,
   next?: Function,
 ): IActionRecord[T][typeof SymbolActionResult] {
-  const sys = useSys();
   if (!next) {
     next = actionRes => {
       return actionRes;
