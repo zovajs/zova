@@ -83,5 +83,11 @@ export class ControllerLayoutTabs extends BeanControllerBase {
       },
     };
     this.$$modelTabs = await this.bean._getBeanSelector('a-routertabs.model.tabs', true, configTabs.scene, tabsOptions);
+    // watch menus
+    this.$watch(() => {
+      return this.$$modelMenu.retrieveMenus().data;
+    }, async () => {
+      this.$$modelTabs.updateAllTabInfos();
+    });
   }
 }
