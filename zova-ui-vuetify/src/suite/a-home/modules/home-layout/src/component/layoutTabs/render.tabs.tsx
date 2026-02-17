@@ -61,6 +61,7 @@ export class RenderTabs extends BeanRenderBase {
         onUpdate:modelValue={tabKey => {
           $$modelTabs.activeTab(tabKey);
         }}
+        mandatory={false}
       >
         {domTabs}
       </VTabs>
