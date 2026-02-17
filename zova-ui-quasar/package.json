@@ -131,7 +131,7 @@
     "quasar-app-extension-zova": "^1.1.184",
     "typescript": "^5.9.3",
     "vite": "^7.3.1",
-    "vite-plugin-fake-server-turbo": "^3.0.11",
+    "vite-plugin-fake-server-turbo": "^3.0.12",
     "vue-tsc": "^3.2.4",
     "zova-openapi": "^1.0.5",
     "zova-vite": "^1.0.182",
