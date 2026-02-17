@@ -86,7 +86,7 @@ export class ControllerLayoutTabs extends BeanControllerBase {
     // watch menus
     this.$watch(() => {
       return this.$$modelMenu.retrieveMenus().data;
-    }, async () => {
+    }, () => {
       this.$$modelTabs.updateAllTabInfos();
     });
   }
