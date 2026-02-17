@@ -81,7 +81,7 @@ export class ModelTabs extends BeanModelBase {
     // locale
     this.$watch(() => {
       return this.app.meta.locale.current;
-    }, async () => {
+    }, () => {
       this.updateAllTabInfos();
     });
   }
