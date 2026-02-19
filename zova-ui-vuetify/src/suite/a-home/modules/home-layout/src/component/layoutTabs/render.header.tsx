@@ -15,7 +15,7 @@ export class RenderHeader extends BeanRenderBase {
       },
     };
     return (
-      <VAppBar style={{ transition: 'none' }} v-slots={slots}>
+      <VAppBar style={{ transition: 'none' }} extended={true} v-slots={slots}>
         <VAppBarNavIcon icon="::menu" variant="text" nativeOnClick={() => this.toggleLeftDrawer()}></VAppBarNavIcon>
         <VToolbarTitle>Zova</VToolbarTitle>
         <VSpacer></VSpacer>
