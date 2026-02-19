@@ -409,6 +409,7 @@ export default defineFakeRoute([
     url: '/home/user/passport/login',
     method: 'post',
     response: req => {
+      // headers
       const headers = req?.headers;
       if (headers['x-vona-openapi-schema']) {
         return {
@@ -417,6 +418,18 @@ export default defineFakeRoute([
           data: __sdkSchemaPassportLogin,
         };
       }
+      // captcha
+      const captcha = req.body.captcha;
+      if (captcha.id !== '88b3ad2d-e2a9-44bf-9154-3086ef9770a4' || captcha.token !== '7') {
+        return {
+          code: 422,
+          message: '[\n  {\n    "code": "custom",\n    "path": [\n      "captcha"\n    ],\n    "message": "验证码不正确"\n  }\n]',
+          stack: 'Error: [\n  {\n    "code": "custom",\n    "path": [\n      "captcha"\n    ],\n    "message": "验证码不正确"\n  }\n]\n    at zodCustomError (file:///Volumes/my-data/cabloy/vona/packages-utils/utils/src/zod.ts:2:19)\n    at InterceptorCaptchaVerify.execute (file:///Volumes/my-data/cabloy/vona/src/suite-vendor/a-vona/modules/a-captcha/src/bean/interceptor.captchaVerify.ts:22:30)\n    at process.processTicksAndRejections (node:internal/process/task_queues:105:5)\n    at async InterceptorBodyRes.execute (file:///Volumes/my-data/cabloy/vona/src/suite-vendor/a-vona/modules/a-body/src/bean/interceptor.bodyRes.ts:12:21)\n    at async BeanDatasharding.switchDatasource (file:///Volumes/my-data/cabloy/vona/src/suite-vendor/a-cabloy/modules/a-datasharding/src/bean/bean.datasharding.ts:13:89)\n    at async InterceptorDatasharding.execute (file:///Volumes/my-data/cabloy/vona/src/suite-vendor/a-cabloy/modules/a-datasharding/src/bean/interceptor.datasharding.ts:11:16)\n    at async middlewareInterceptor (file:///Volumes/my-data/cabloy/vona/src/suite-vendor/a-vona/modules/a-web/src/lib/middleware/middlewareInterceptor.ts:7:12)\n    at async MiddlewareSsrPassport.execute (file:///Volumes/my-data/cabloy/vona/src/suite-vendor/a-cabloy/modules/a-ssr/src/bean/middleware.ssrPassport.ts:14:20)\n    at async routeStartMiddleware (file:///Volumes/my-data/cabloy/vona/src/suite-vendor/a-vona/modules/a-web/src/bean/bean.router.ts:147:17)\n    at async /Volumes/my-data/cabloy/vona/node_modules/.pnpm/@cabloy+koa-static-cache@6.0.1/node_modules/@cabloy/koa-static-cache/index.js:46:63',
+          name: 'Error',
+          level: 'error',
+        };
+      }
+      // user
       const user = __users.find(item => item.name === req.body.username);
       if (!user) {
         return { code: 403, message: 'Error' };
