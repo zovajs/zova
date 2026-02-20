@@ -40,7 +40,7 @@ export class RenderForm extends BeanRenderBase {
       : (
           <>
             {this._renderSchema()}
-            {FormTag === 'form' && <button type="submit" class="hidden"></button>}
+            {FormTag === 'form' && <button type="submit" style={{ display: 'none' }}></button>}
           </>
         );
   }
@@ -69,6 +69,9 @@ export class RenderForm extends BeanRenderBase {
     const FormTag = this.$props.formTag;
     const props = this._renderProps();
     const children = this._renderChildren();
+    if (this.$props.slotWrapper) {
+      return h(FormTag, props, this.$props.slotWrapper(children, this));
+    }
     return h(FormTag, props, children);
   }
 }

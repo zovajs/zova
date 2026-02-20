@@ -37,6 +37,7 @@ export interface ControllerFormProps<TFormData extends {} = {}, TSubmitMeta = ne
   slotHeader?: (form: ControllerForm<TFormData, TSubmitMeta>) => VNode;
   slotBody?: (children: VNode, form: ControllerForm<TFormData, TSubmitMeta>) => VNode;
   slotFooter?: (form: ControllerForm<TFormData, TSubmitMeta>) => VNode;
+  slotWrapper?: (children: (VNode | undefined)[], form: ControllerForm<TFormData, TSubmitMeta>) => VNode;
 }
 @Controller()
 export class ControllerForm<TFormData extends {} = {}, TSubmitMeta = never> extends BeanControllerFormBase {
