@@ -1,6 +1,6 @@
 import type { SchemaObject } from 'openapi3-ts/oas31';
 import { shallowReactive } from 'vue';
-import { BeanBase, ILocaleRecord, TypeEventOff } from 'zova';
+import { BeanBase, IApiActionConfigPrepareOptions, ILocaleRecord, TypeEventOff } from 'zova';
 import { Sys } from 'zova-module-a-bean';
 import { BeanFetch } from 'zova-module-a-fetch';
 import { IOpenapiSchema } from '../types/schema.js';
@@ -83,7 +83,7 @@ export class SysSdk extends BeanBase {
     if (!this.bootstraps[resource]) {
       this.bootstraps[resource] = await $fetch.get(
         this.sys.util.apiActionPathTranslate(this.scope.config.api.bootstrap, { resource }),
-        this.sys.util.apiActionConfigPrepare(),
+        this.sys.util.apiActionConfigPrepare(undefined, undefined, false),
       );
     }
     return this.bootstraps[resource];
@@ -103,10 +103,10 @@ export class SysSdk extends BeanBase {
       params.push(undefined);
     }
     // options
-    const options = { openapiSchema: true, headers: {} };
+    const options: IApiActionConfigPrepareOptions = { authToken: false, openapiSchema: true, headers: {} };
     const localeKey = this.sys.env.APP_LOCALE_HEADER_KEY;
     if (localeKey) {
-      options.headers[localeKey] = this.locale;
+      options.headers![localeKey] = this.locale;
     }
     params.push(this.sys.util.apiActionConfigPrepare(undefined, options));
     const data: IOpenapiSchema = await $fetch[apiMethod2](...params);

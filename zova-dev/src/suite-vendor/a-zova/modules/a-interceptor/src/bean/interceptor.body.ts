@@ -5,7 +5,7 @@ import { BeanInterceptorBase, Interceptor, SymbolInterceptorBodyResponseFlag } f
 
 export interface IInterceptorOptionsBody extends IDecoratorInterceptorOptions {}
 
-@Interceptor<IInterceptorOptionsBody>({ dependencies: 'a-interceptor:jwt' })
+@Interceptor<IInterceptorOptionsBody>({ dependencies: 'a-interceptor:performAction' })
 export class InterceptorBody
   extends BeanInterceptorBase<IInterceptorOptionsBody>
   implements IInterceptorResponse, IInterceptorResponseError {

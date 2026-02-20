@@ -78,6 +78,12 @@ export class ModelTabs extends BeanModelBase {
         return next();
       });
     }
+    // locale
+    this.$watch(() => {
+      return this.app.meta.locale.current;
+    }, () => {
+      this.updateAllTabInfos();
+    });
   }
 
   protected __dispose__() {
