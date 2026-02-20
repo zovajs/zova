@@ -240,6 +240,9 @@ importers:
       zova-module-start-adapter:
         specifier: workspace:^
         version: link:src/suite/cabloy-start/modules/start-adapter
+      zova-module-start-date:
+        specifier: workspace:^
+        version: link:src/suite/cabloy-start/modules/start-date
       zova-module-start-form:
         specifier: workspace:^
         version: link:src/suite/cabloy-start/modules/start-form
@@ -1129,6 +1132,9 @@ importers:
       zova-module-start-adapter:
         specifier: ^5.0.0
         version: link:modules/start-adapter
+      zova-module-start-date:
+        specifier: ^5.0.0
+        version: link:modules/start-date
       zova-module-start-form:
         specifier: ^5.0.0
         version: link:modules/start-form
@@ -1143,6 +1149,8 @@ importers:
         version: link:../../suite-vendor/a-cabloy
 
   src/suite/cabloy-start/modules/start-adapter: {}
+
+  src/suite/cabloy-start/modules/start-date: {}
 
   src/suite/cabloy-start/modules/start-form: {}
 

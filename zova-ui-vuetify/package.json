@@ -89,6 +89,7 @@
     "zova-module-home-user": "workspace:^",
     "zova-module-vuetify-adapter": "workspace:^",
     "zova-module-start-adapter": "workspace:^",
+    "zova-module-start-date": "workspace:^",
     "zova-module-start-form": "workspace:^",
     "zova-module-start-restpage": "workspace:^",
     "zova-module-start-table": "workspace:^",
