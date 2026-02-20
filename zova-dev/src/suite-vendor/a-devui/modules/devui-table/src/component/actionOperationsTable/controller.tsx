@@ -1,6 +1,5 @@
 import type { IJsxRenderContextPage } from 'zova-module-devui-restpage';
 import { BeanControllerBase, Use } from 'zova';
-import { $performAction } from 'zova-module-a-action';
 import { Controller } from 'zova-module-a-bean';
 
 @Controller()
@@ -24,7 +23,7 @@ export class ControllerActionOperationsTable extends BeanControllerBase {
         type="button"
         onClick={() => {
           const actionName = $jsx.normalizeAction('actionCreate');
-          $performAction(actionName, undefined, this.$$renderContext);
+          this.$performAction(actionName, undefined, this.$$renderContext);
         }}
       >
         {this.scope.locale.Create()}

@@ -1,6 +1,5 @@
 import type { IJsxRenderContextTableCell } from 'zova-module-a-table';
 import { BeanControllerBase, Use } from 'zova';
-import { $performAction } from 'zova-module-a-action';
 import { Controller } from 'zova-module-a-bean';
 
 export interface ControllerActionViewProps {
@@ -23,11 +22,11 @@ export class ControllerActionView extends BeanControllerBase {
       <a
         class="hover:text-blue-500"
         href="#"
-        onClick={e => {
+        onClick={async e => {
           e.preventDefault();
           e.stopPropagation();
           const actionName = $jsx.normalizeAction('actionView');
-          $performAction(actionName, undefined, this.$$renderContext);
+          await this.$performAction(actionName, undefined, this.$$renderContext);
         }}
       >
         {this.$slotDefault ? this.$slotDefault() : $celScope.displayValue}

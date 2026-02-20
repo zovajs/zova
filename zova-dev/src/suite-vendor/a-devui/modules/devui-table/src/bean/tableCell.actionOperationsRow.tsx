@@ -1,5 +1,4 @@
 import { BeanBase } from 'zova';
-import { $performAction } from 'zova-module-a-action';
 import { ZIcon } from 'zova-module-a-icon';
 import { IDecoratorTableCellOptions, IJsxRenderContextTableCell, ITableCellRender, NextTableCellRender, TableCell } from 'zova-module-a-table';
 
@@ -17,9 +16,9 @@ export class TableCellActionOperationsRow extends BeanBase implements ITableCell
         {permissionUpdate && (
           <button
             class="btn btn-outline btn-primary"
-            onClick={() => {
+            onClick={async () => {
               const actionName = $jsx.normalizeAction('actionEdit');
-              $performAction(actionName, undefined, renderContext);
+              await $host.$performAction(actionName, undefined, renderContext);
             }}
           >
             <ZIcon name="::draft"></ZIcon>
@@ -32,7 +31,7 @@ export class TableCellActionOperationsRow extends BeanBase implements ITableCell
               // eslint-disable-next-line no-alert
               if (!window.confirm(this.scope.locale.DeleteConfirm())) return;
               const actionName = $jsx.normalizeAction('actionDelete');
-              await $performAction(actionName, undefined, renderContext);
+              await $host.$performAction(actionName, undefined, renderContext);
             }}
           >
             <ZIcon name="::delete"></ZIcon>
