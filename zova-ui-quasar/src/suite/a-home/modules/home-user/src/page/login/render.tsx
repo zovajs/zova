@@ -44,7 +44,7 @@ export class RenderPageLogin extends BeanRenderBase {
         class="q-gutter-md"
         data={this.user}
         schema={this.schema}
-        onSubmit={data => {
+        onSubmitData={data => {
           return this.onSubmitLogin(data);
         }}
         onShowError={({ error }) => {
