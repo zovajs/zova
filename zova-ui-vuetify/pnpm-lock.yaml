@@ -797,7 +797,11 @@ importers:
         specifier: ^5.0.0
         version: link:modules/vuetify-form
 
-  src/suite-vendor/a-vuetify/modules/vuetify-adapter: {}
+  src/suite-vendor/a-vuetify/modules/vuetify-adapter:
+    dependencies:
+      '@date-io/luxon':
+        specifier: ^3.2.0
+        version: 3.2.0(luxon@3.7.2)
 
   src/suite-vendor/a-vuetify/modules/vuetify-form: {}
 

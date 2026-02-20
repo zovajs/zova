@@ -41,5 +41,7 @@
     "dist"
   ],
   "scripts": {},
-  "dependencies": {}
+  "dependencies": {
+    "@date-io/luxon": "^3.2.0"
+  }
 }
