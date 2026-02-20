@@ -4,6 +4,7 @@
  * Framework documentation: https://vuetifyjs.com`
  */
 
+import LuxonAdapter from '@date-io/luxon';
 // Composables
 import { createVuetify } from 'vuetify';
 import { aliases } from 'vuetify/iconsets/mdi-svg';
@@ -36,5 +37,8 @@ export default createVuetify({
   theme,
   icons: {
     aliases,
+  },
+  date: {
+    adapter: LuxonAdapter,
   },
 });
