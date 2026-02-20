@@ -111,7 +111,9 @@ export class ControllerRestPage<TData extends {} = {}> extends BeanControllerTab
   }
 
   gotoPage(pageNo: number) {
-    this.queryPaged.pageNo = pageNo;
+    if (this.queryPaged.pageNo !== pageNo) {
+      this.queryPaged.pageNo = pageNo;
+    }
   }
 
   onFilter(data: any) {
