@@ -3,8 +3,8 @@ import type { ControllerFormFieldDateRangeProps } from '../../src/component/form
 
 type TypeControllerFormFieldDateRangePublicProps = TypeRenderComponentJsxPropsPublic
   & ControllerFormFieldDateRangeProps;
-export function FFDateRange(
+export function FFDevuiDateRange(
   _props: TypeControllerFormFieldDateRangePublicProps,
 ) {
-  return 'a-date:formFieldDateRange';
+  return 'devui-date:formFieldDateRange';
 }
