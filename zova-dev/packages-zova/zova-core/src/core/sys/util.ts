@@ -13,6 +13,7 @@ export interface IApiActionConfigPrepareOptions {
   query?: {};
   authToken?: TypeAuthToken;
   openapiSchema?: boolean;
+  headers?: {};
 }
 
 export class SysUtil extends BeanSimple {

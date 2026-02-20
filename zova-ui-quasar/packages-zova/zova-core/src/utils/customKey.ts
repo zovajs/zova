@@ -6,6 +6,7 @@ export interface ICustomKeyRecord {
   'x-vona-passport-code': string | undefined;
   'x-vona-oauth-code': string | undefined;
   'x-vona-openapi-schema': 'true' | 'false' | undefined;
+  'x-vona-jwt-authtoken': 'true' | 'false' | undefined;
 }
 
 export function $customKey<K extends keyof ICustomKeyRecord>(key: K): K {

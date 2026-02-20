@@ -2,7 +2,7 @@ import type { IBeanRecord, IBeanScopeRecord, TypeBeanScopeRecordKeys } from '../
 import type { IBeanSceneRecord } from '../../decorator/interface/beanOptions.js';
 import type { TypeAuthToken } from '../../types/utils/auth.js';
 import { extend } from '@cabloy/extend';
-import { combineApiPathControllerAndAction, defaultPathSerializer } from '@cabloy/utils';
+import { combineApiPathControllerAndAction, defaultPathSerializer, isEmptyObject } from '@cabloy/utils';
 import DeepEqual from 'deep-equal';
 import { isReactive, reactive } from 'vue';
 import { BeanSimple } from '../../bean/beanSimple.js';
@@ -13,6 +13,7 @@ export interface IApiActionConfigPrepareOptions {
   query?: {};
   authToken?: TypeAuthToken;
   openapiSchema?: boolean;
+  headers?: {};
 }
 
 export class SysUtil extends BeanSimple {
@@ -77,14 +78,18 @@ export class SysUtil extends BeanSimple {
       params: options?.query,
       query: undefined,
     };
+    const interceptors = {};
     // authToken
     authToken = options?.authToken === undefined ? authToken : options?.authToken;
     if (authToken !== undefined) {
-      optionsCustom.interceptors = { 'a-interceptor:jwt': { authToken } };
+      interceptors['a-interceptor:jwt'] = { authToken };
     }
     // openapiSchema
     if (options?.openapiSchema) {
-      optionsCustom.interceptors = { 'a-interceptor:headers': { openapiSchema: options?.openapiSchema } };
+      interceptors['a-interceptor:headers'] = { openapiSchema: options?.openapiSchema };
+    }
+    if (!isEmptyObject(interceptors)) {
+      optionsCustom.interceptors = interceptors;
     }
     // extend
     return deepExtend(
