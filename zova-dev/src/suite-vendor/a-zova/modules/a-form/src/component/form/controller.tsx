@@ -31,7 +31,7 @@ export interface ControllerFormProps<TFormData extends {} = {}, TSubmitMeta = ne
   formFieldLayout?: IFormFieldLayoutOptionsBase;
   onFormSubmit?: (e: SubmitEvent, form: ControllerForm<TFormData, TSubmitMeta>) => any;
   onSubmitInvalid?: TypeFormOnSubmitInvalid<TFormData, TSubmitMeta>;
-  onSubmit?: TypeFormOnSubmit<TFormData, TSubmitMeta>;
+  onSubmitData?: TypeFormOnSubmit<TFormData, TSubmitMeta>;
   onShowError?: TypeFormOnShowError<TFormData, TSubmitMeta>;
   slotDefault?: (form: ControllerForm<TFormData, TSubmitMeta>) => VNode;
   slotHeader?: (form: ControllerForm<TFormData, TSubmitMeta>) => VNode;
@@ -243,7 +243,7 @@ export class ControllerForm<TFormData extends {} = {}, TSubmitMeta = never> exte
       },
       onSubmit: async data => {
         const [_, error] = await catchError(() => {
-          return this.$props.onSubmit?.(data, this);
+          return this.$props.onSubmitData?.(data, this);
         });
         // emit event
         const resHandled = await this.app.meta.event.emit('a-form:formSubmission', {

@@ -14,7 +14,7 @@ export class RenderRestPageEntry<TData extends {} = {}> extends BeanRenderBase {
         formMeta={this.formMeta}
         formProvider={this.formProvider}
         formScope={this.pageEntryScope}
-        onSubmit={data => this.onSubmit(data)}
+        onSubmitData={data => this.onSubmit(data)}
         onShowError={({ error }) => {
           // eslint-disable-next-line no-alert
           window.alert(error.message);

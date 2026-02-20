@@ -41,7 +41,7 @@ export class RenderPageLogin extends BeanRenderBase {
         data={this.user}
         schema={this.schema}
         formProvider={{ behaviors: { formFieldLayout: 'home-user:formFieldLayoutLogin' } }}
-        onSubmit={data => {
+        onSubmitData={data => {
           return this.onSubmitLogin(data);
         }}
         onShowError={({ error }) => {

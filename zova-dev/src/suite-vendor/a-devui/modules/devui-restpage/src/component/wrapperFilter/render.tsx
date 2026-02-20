@@ -14,7 +14,7 @@ export class RenderWrapperFilter extends BeanRenderBase {
         formMeta={this.formMeta}
         formFieldLayout={this.formFieldLayout}
         formProvider={this.$props.formProvider}
-        onSubmit={data => this.onSubmit(data)}
+        onSubmitData={data => this.onSubmit(data)}
         slotFooter={$$form => {
           return (
             <>
