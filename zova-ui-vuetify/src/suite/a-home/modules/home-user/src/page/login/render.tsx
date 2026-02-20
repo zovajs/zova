@@ -51,7 +51,7 @@ export class RenderPageLogin extends BeanRenderBase {
         class="d-grid"
         data={this.user}
         schema={this.schema}
-        onSubmit={data => {
+        onSubmitData={data => {
           return this.onSubmitLogin(data);
         }}
         onShowError={({ error }) => {
