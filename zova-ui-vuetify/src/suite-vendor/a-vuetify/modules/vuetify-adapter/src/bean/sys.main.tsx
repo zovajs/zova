@@ -57,14 +57,24 @@ function useLayoutStylePatch(mainStyles: Ref<CSSProperties, CSSProperties>) {
   return computed(() => {
     let mainStylesPatch;
     if (process.env.SSR && layoutConfigRef?.value) {
-      mainStylesPatch = Object.assign(
-        {},
-        mainStyles.value,
-        {
-          '--v-layout-left': `${layoutConfigRef.value.sidebar.width}px`,
-          '--v-layout-top': `${layoutConfigRef.value.navbar.height}px`,
-        },
-      );
+      if (layoutConfigRef.value.leftDrawerOpen) {
+        mainStylesPatch = Object.assign(
+          {},
+          mainStyles.value,
+          {
+            '--v-layout-left': `${layoutConfigRef.value.sidebar.width}px`,
+            '--v-layout-top': `${layoutConfigRef.value.navbar.height}px`,
+          },
+        );
+      } else {
+        mainStylesPatch = Object.assign(
+          {},
+          mainStyles.value,
+          {
+            '--v-layout-top': `${layoutConfigRef.value.navbar.height}px`,
+          },
+        );
+      }
     } else {
       mainStylesPatch = mainStyles.value;
     }

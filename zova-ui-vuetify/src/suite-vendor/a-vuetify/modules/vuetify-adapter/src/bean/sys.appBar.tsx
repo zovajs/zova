@@ -180,15 +180,19 @@ function useLayoutStylePatch(layoutItemStyles: Ref<CSSProperties, CSSProperties>
   return computed(() => {
     let layoutItemStylesPatch;
     if (process.env.SSR && layoutConfigRef?.value) {
-      const __mainStyleLayoutLeft = `${layoutConfigRef.value.sidebar.width}px`;
-      layoutItemStylesPatch = Object.assign(
-        {},
-        layoutItemStyles.value,
-        {
-          left: __mainStyleLayoutLeft,
-          width: `calc(100% - ${__mainStyleLayoutLeft} - 0px)`,
-        },
-      );
+      if (layoutConfigRef.value.leftDrawerOpen) {
+        const __mainStyleLayoutLeft = `${layoutConfigRef.value.sidebar.width}px`;
+        layoutItemStylesPatch = Object.assign(
+          {},
+          layoutItemStyles.value,
+          {
+            left: __mainStyleLayoutLeft,
+            width: `calc(100% - ${__mainStyleLayoutLeft} - 0px)`,
+          },
+        );
+      } else {
+        layoutItemStylesPatch = layoutItemStyles.value;
+      }
     } else {
       layoutItemStylesPatch = layoutItemStyles.value;
     }
