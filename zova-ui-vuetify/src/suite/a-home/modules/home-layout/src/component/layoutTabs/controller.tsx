@@ -1,8 +1,9 @@
 import type { ModelTabs, ModelTabsOptions } from 'zova-module-a-routertabs';
 import { provide, ref } from 'vue';
-import { BeanControllerBase, Use, useComputed, useCustomRef } from 'zova';
+import { BeanControllerBase, Use, useComputed, useCustomRef, UseScope } from 'zova';
 import { Controller } from 'zova-module-a-bean';
 import { $QueryAutoLoad } from 'zova-module-a-model';
+import { ScopeModuleASsr } from 'zova-module-a-ssr';
 import { ILayoutConfig } from 'zova-module-vuetify-adapter';
 import { ModelLayout } from '../../model/layout.js';
 import { ModelMenu } from '../../model/menu.js';
@@ -21,6 +22,9 @@ export class ControllerLayoutTabs extends BeanControllerBase {
 
   @Use()
   $$modelLayout: ModelLayout;
+
+  @UseScope()
+  $$scopeSsr: ScopeModuleASsr;
 
   @Use({ init: { arg: { sidebarLeftOpenPC: true } as IServiceSsrOptions } })
   $$ssr: ServiceSsr;
