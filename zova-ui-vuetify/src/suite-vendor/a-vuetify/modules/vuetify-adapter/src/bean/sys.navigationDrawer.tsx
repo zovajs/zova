@@ -261,14 +261,18 @@ function useLayoutStylePatch(layoutItemStyles: Ref<CSSProperties, CSSProperties>
   return computed(() => {
     let layoutItemStylesPatch;
     if (process.env.SSR && layoutConfigRef?.value) {
-      layoutItemStylesPatch = Object.assign(
-        {},
-        layoutItemStyles.value,
-        {
-          width: `${layoutConfigRef.value.sidebar.width}px`,
-          transform: 'translateX(0px)',
-        },
-      );
+      if (layoutConfigRef.value.leftDrawerOpen) {
+        layoutItemStylesPatch = Object.assign(
+          {},
+          layoutItemStyles.value,
+          {
+            width: `${layoutConfigRef.value.sidebar.width}px`,
+            transform: 'translateX(0px)',
+          },
+        );
+      } else {
+        layoutItemStylesPatch = layoutItemStyles.value;
+      }
     } else {
       layoutItemStylesPatch = layoutItemStyles.value;
     }

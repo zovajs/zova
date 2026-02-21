@@ -5,4 +5,5 @@ export interface ILayoutConfig {
   navbar: {
     height: number;
   };
+  leftDrawerOpen?: boolean;
 }
