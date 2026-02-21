@@ -1,4 +1,4 @@
-import { createElementVNode, createVNode, CSSProperties, Ref } from 'vue';
+import { CSSProperties, Ref } from 'vue';
 import { VMain } from 'vuetify/components/VMain';
 import { useDimension } from 'vuetify/lib/composables/dimensions.mjs';
 import { useLayout } from 'vuetify/lib/composables/layout.mjs';
@@ -18,21 +18,34 @@ export class SysMain extends BeanBase {
       const { dimensionStyles } = useDimension(props);
       const { mainStyles } = useLayout();
       const { ssrBootStyles } = useSsrBoot();
+
       useRender(() => {
         const mainStylesPatch = _layoutStylePatch(mainStyles);
-        return createVNode(props.tag, {
-          class: ['v-main', {
-            'v-main--scrollable': props.scrollable,
-          }, props.class],
-          style: [mainStylesPatch, ssrBootStyles.value, dimensionStyles.value, props.style],
-        }, {
-          default: () => [props.scrollable
-            ? createElementVNode('div', {
-                class: 'v-main__scroller',
-              }, [slots.default?.()])
-            : slots.default?.()],
-        });
+        return (
+          <props.tag
+            class={[
+              'v-main',
+              { 'v-main--scrollable': props.scrollable },
+              props.class,
+            ]}
+            style={[
+              mainStylesPatch,
+              ssrBootStyles.value,
+              dimensionStyles.value,
+              props.style,
+            ]}
+          >
+            { props.scrollable
+              ? (
+                  <div class="v-main__scroller">
+                    { slots.default?.() }
+                  </div>
+                )
+              : slots.default?.()}
+          </props.tag>
+        );
       });
+
       return {};
     };
   }
