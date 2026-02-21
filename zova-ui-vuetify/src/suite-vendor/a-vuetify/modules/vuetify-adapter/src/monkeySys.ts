@@ -3,7 +3,6 @@ import type { IOpenapiOptionsResourceMeta } from 'zova-module-a-openapi';
 import { VTextField } from 'vuetify/components';
 import { BeanSimple, deepExtend } from 'zova';
 import { SysIcon } from './bean/sys.icon.js';
-import { SysMain } from './bean/sys.main.js';
 
 export class MonkeySys extends BeanSimple implements IMonkeySysInitialize {
   async sysInitialize() {
@@ -15,9 +14,6 @@ export class MonkeySys extends BeanSimple implements IMonkeySysInitialize {
     // icon
     const sysIcon = await this.bean._newBean(SysIcon, false);
     await sysIcon.initialize();
-    // main
-    const sysMain = await this.bean._newBean(SysMain, false);
-    await sysMain.initialize();
     // config custom
     const configCustom: IOpenapiOptionsResourceMeta = {
       provider: {
