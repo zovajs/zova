@@ -46,6 +46,9 @@ export class RenderTabs extends BeanRenderBase {
           key={tabKey}
           value={tabKey}
           class={`${className} ${this.cTab}`}
+          nativeOnClick={() => {
+            $$modelTabs.activeTab(tabKey);
+          }}
         >
           {!!info?.icon && <ZIcon name={info?.icon as any} width="24" height="24"></ZIcon>}
           {domTabContent}
@@ -58,9 +61,6 @@ export class RenderTabs extends BeanRenderBase {
         alignTabs="start"
         centerActive
         modelValue={$$modelTabs.tabCurrentKey}
-        onUpdate:modelValue={tabKey => {
-          $$modelTabs.activeTab(tabKey);
-        }}
         mandatory={false}
       >
         {domTabs}
