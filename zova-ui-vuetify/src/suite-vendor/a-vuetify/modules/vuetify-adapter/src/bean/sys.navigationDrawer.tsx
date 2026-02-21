@@ -257,7 +257,7 @@ export class SysNavigationDrawer extends BeanBase {
 }
 
 function useLayoutStylePatch(layoutItemStyles: Ref<CSSProperties, CSSProperties>) {
-  const layoutConfigRef: Ref<ILayoutConfig> | undefined = inject('VuetifyLayoutConfig', undefined);
+  const layoutConfigRef = inject('VuetifyLayoutConfig', undefined) as Ref<ILayoutConfig> | undefined;
   return computed(() => {
     let layoutItemStylesPatch;
     if (process.env.SSR && layoutConfigRef?.value) {
