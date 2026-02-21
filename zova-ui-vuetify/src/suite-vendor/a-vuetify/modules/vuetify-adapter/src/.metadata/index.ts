@@ -2,7 +2,7 @@
 /** sys: begin */
 export * from '../bean/sys.appBar.jsx';
 export * from '../bean/sys.icon.js';
-export * from '../bean/sys.main.js';
+export * from '../bean/sys.main.jsx';
 export * from '../bean/sys.navigationDrawer.jsx';
 
 import 'zova';
@@ -60,7 +60,7 @@ declare module 'zova-module-vuetify-adapter' {
 /** sys: begin */
 import { SysAppBar } from '../bean/sys.appBar.jsx';
 import { SysIcon } from '../bean/sys.icon.js';
-import { SysMain } from '../bean/sys.main.js';
+import { SysMain } from '../bean/sys.main.jsx';
 import { SysNavigationDrawer } from '../bean/sys.navigationDrawer.jsx';
 import 'zova';
 declare module 'zova' {
