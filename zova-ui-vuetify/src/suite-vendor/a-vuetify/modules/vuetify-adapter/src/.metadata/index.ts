@@ -1,6 +1,7 @@
 /* eslint-disable */
 /** sys: begin */
 export * from '../bean/sys.icon.js';
+export * from '../bean/sys.main.js';
 
 import 'zova';
 declare module 'zova' {
@@ -18,15 +19,28 @@ declare module 'zova-module-vuetify-adapter' {
           get $beanFullName(): 'vuetify-adapter.sys.icon';
           get $onionName(): 'vuetify-adapter:icon';
           
+        }
+
+        export interface SysMain {
+          /** @internal */
+          get scope(): ScopeModuleVuetifyAdapter;
+        }
+
+        export interface SysMain {
+          get $beanFullName(): 'vuetify-adapter.sys.main';
+          get $onionName(): 'vuetify-adapter:main';
+          
         } 
 }
 /** sys: end */
 /** sys: begin */
 import { SysIcon } from '../bean/sys.icon.js';
+import { SysMain } from '../bean/sys.main.js';
 import 'zova';
 declare module 'zova' {
   export interface IBeanRecordGeneral {
     'vuetify-adapter.sys.icon': SysIcon;
+'vuetify-adapter.sys.main': SysMain;
   }
 }
 /** sys: end */
