@@ -266,6 +266,7 @@ function useLayoutStylePatch(layoutItemStyles: Ref<CSSProperties, CSSProperties>
         layoutItemStyles.value,
         {
           width: `${layoutConfigRef.value.sidebar.width}px`,
+          transform: 'translateX(0px)',
         },
       );
     } else {

@@ -7,7 +7,7 @@ import { useSsrBoot } from 'vuetify/lib/composables/ssrBoot.mjs';
 import { useToggleScope } from 'vuetify/lib/composables/toggleScope.mjs';
 import { omit } from 'vuetify/lib/util/helpers.mjs';
 import { useRender } from 'vuetify/lib/util/useRender.mjs';
-import { BeanBase, cast } from 'zova';
+import { BeanBase } from 'zova';
 import { Sys } from 'zova-module-a-bean';
 import { ILayoutConfig } from '../types/layoutConfig.js';
 
