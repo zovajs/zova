@@ -2,6 +2,7 @@ import type { ModelTabs, ModelTabsOptions } from 'zova-module-a-routertabs';
 import { BeanControllerBase, Use, useComputed, useCustomRef } from 'zova';
 import { Controller } from 'zova-module-a-bean';
 import { $QueryAutoLoad } from 'zova-module-a-model';
+import { ILayoutConfig } from 'zova-module-vuetify-adapter';
 import { ModelLayout } from '../../model/layout.js';
 import { ModelMenu } from '../../model/menu.js';
 import { IServiceSsrOptions, ServiceSsr } from '../../service/ssr.js';
@@ -22,6 +23,8 @@ export class ControllerLayoutTabs extends BeanControllerBase {
 
   @Use({ init: { arg: { sidebarLeftOpenPC: true } as IServiceSsrOptions } })
   $$ssr: ServiceSsr;
+
+  layoutConfig: ILayoutConfig;
 
   leftDrawerOpen: boolean;
   leftDrawerOpenMobile: boolean = false;
@@ -89,5 +92,9 @@ export class ControllerLayoutTabs extends BeanControllerBase {
     }, () => {
       this.$$modelTabs.updateAllTabInfos();
     });
+  }
+
+  private __initLayoutConfig() {
+    this.layoutConfig = this.scope.config.layout;
   }
 }
