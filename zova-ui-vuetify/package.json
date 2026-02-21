@@ -125,7 +125,9 @@
     "@cabloy/vue-router": "^4.4.16",
     "@cabloy/word-utils": "^2.0.2",
     "defu": "^6.1.4",
-    "zova-jsx": "^1.0.0"
+    "luxon": "^3.7.2",
+    "zova-jsx": "^1.0.0",
+    "@date-io/luxon": "^3.2.0"
   },
   "devDependencies": {
     "@cabloy/lint": "^5.0.8",

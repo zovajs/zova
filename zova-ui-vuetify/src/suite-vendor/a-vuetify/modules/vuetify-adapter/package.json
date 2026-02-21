@@ -9,6 +9,9 @@
     "dependencies": {
       "a-zova": "5.0.0"
     },
+    "globalDependencies": {
+      "@date-io/luxon": true
+    },
     "bundle": {
       "vendors": [
         {
