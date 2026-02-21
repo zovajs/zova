@@ -1,4 +1,4 @@
-import { computed, CSSProperties, Ref, ref, shallowRef, toRef, watchEffect } from 'vue';
+import { computed, CSSProperties, inject, Ref, ref, shallowRef, toRef, watchEffect } from 'vue';
 import { VAppBar, VToolbar } from 'vuetify/components';
 import { useLayoutItem } from 'vuetify/lib/composables/layout.mjs';
 import { useProxiedModel } from 'vuetify/lib/composables/proxiedModel.mjs';
@@ -9,6 +9,7 @@ import { omit } from 'vuetify/lib/util/helpers.mjs';
 import { useRender } from 'vuetify/lib/util/useRender.mjs';
 import { BeanBase, cast } from 'zova';
 import { Sys } from 'zova-module-a-bean';
+import { ILayoutConfig } from '../types/layoutConfig.js';
 
 @Sys()
 export class SysAppBar extends BeanBase {
@@ -137,9 +138,9 @@ export class SysAppBar extends BeanBase {
         absolute: toRef(() => props.absolute),
       });
 
-      useRender(() => {
-        const layoutItemStylesPatch = _layoutStylePatch(layoutItemStyles);
+      const layoutItemStylesPatch = useLayoutStylePatch(layoutItemStyles);
 
+      useRender(() => {
         const toolbarProps = omit(VToolbar.filterProps(props), ['location']);
 
         return (
@@ -154,7 +155,7 @@ export class SysAppBar extends BeanBase {
             ]}
             style={[
               {
-                ...layoutItemStylesPatch,
+                ...layoutItemStylesPatch.value,
                 '--v-toolbar-image-opacity': opacity.value,
                 'height': undefined,
                 ...ssrBootStyles.value,
@@ -174,19 +175,23 @@ export class SysAppBar extends BeanBase {
   }
 }
 
-function _layoutStylePatch(layoutItemStyles: Ref<CSSProperties, CSSProperties>) {
-  let layoutItemStylesPatch;
-  if (process.env.CLIENT && process.env.SSR && cast(window).__mainStyleLayoutTop) {
-    layoutItemStylesPatch = Object.assign(
-      {},
-      layoutItemStyles.value,
-      {
-        left: cast(window).__mainStyleLayoutLeft,
-        width: `calc(100% - ${cast(window).__mainStyleLayoutLeft} - 0px)`,
-      },
-    );
-  } else {
-    layoutItemStylesPatch = layoutItemStyles.value;
-  }
-  return layoutItemStylesPatch;
+function useLayoutStylePatch(layoutItemStyles: Ref<CSSProperties, CSSProperties>) {
+  const layoutConfigRef: Ref<ILayoutConfig> | undefined = inject('VuetifyLayoutConfig');
+  return computed(() => {
+    let layoutItemStylesPatch;
+    if (process.env.SSR && layoutConfigRef?.value) {
+      const __mainStyleLayoutLeft = `${layoutConfigRef.value.sidebar.width}px`;
+      layoutItemStylesPatch = Object.assign(
+        {},
+        layoutItemStyles.value,
+        {
+          left: __mainStyleLayoutLeft,
+          width: `calc(100% - ${__mainStyleLayoutLeft} - 0px)`,
+        },
+      );
+    } else {
+      layoutItemStylesPatch = layoutItemStyles.value;
+    }
+    return layoutItemStylesPatch;
+  });
 }
