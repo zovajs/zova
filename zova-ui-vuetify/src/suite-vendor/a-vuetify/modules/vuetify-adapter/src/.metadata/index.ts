@@ -1,6 +1,6 @@
 /* eslint-disable */
 /** sys: begin */
-export * from '../bean/sys.appBar.js';
+export * from '../bean/sys.appBar.jsx';
 export * from '../bean/sys.icon.js';
 export * from '../bean/sys.main.js';
 export * from '../bean/sys.navigationDrawer.jsx';
@@ -58,7 +58,7 @@ declare module 'zova-module-vuetify-adapter' {
 }
 /** sys: end */
 /** sys: begin */
-import { SysAppBar } from '../bean/sys.appBar.js';
+import { SysAppBar } from '../bean/sys.appBar.jsx';
 import { SysIcon } from '../bean/sys.icon.js';
 import { SysMain } from '../bean/sys.main.js';
 import { SysNavigationDrawer } from '../bean/sys.navigationDrawer.jsx';

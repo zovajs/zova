@@ -1,5 +1,5 @@
 import { useRouter } from '@cabloy/vue-router';
-import { computed, nextTick, readonly, ref, shallowRef, toRef, Transition, watch } from 'vue';
+import { computed, CSSProperties, nextTick, readonly, Ref, ref, shallowRef, toRef, Transition, watch } from 'vue';
 import { useDisplay, useRtl } from 'vuetify';
 import { VDefaultsProvider, VImg } from 'vuetify/components';
 import { VNavigationDrawer } from 'vuetify/components/VNavigationDrawer';
@@ -142,18 +142,9 @@ export class SysNavigationDrawer extends BeanBase {
       });
 
       useRender(() => {
-        const hasImage = (slots.image || props.image);
+        const layoutItemStylesPatch = _layoutStylePatch(layoutItemStyles);
 
-        let layoutItemStylesPatch;
-        if (process.env.CLIENT && process.env.SSR && cast(window).__mainStyleLayoutTop) {
-          layoutItemStylesPatch = Object.assign(
-            {},
-            layoutItemStyles.value,
-            { width: cast(window).__mainStyleLayoutLeft },
-          );
-        } else {
-          layoutItemStylesPatch = layoutItemStyles.value;
-        }
+        const hasImage = (slots.image || props.image);
 
         return (
           <>
@@ -262,4 +253,18 @@ export class SysNavigationDrawer extends BeanBase {
       };
     };
   }
+}
+
+function _layoutStylePatch(layoutItemStyles: Ref<CSSProperties, CSSProperties>) {
+  let layoutItemStylesPatch;
+  if (process.env.CLIENT && process.env.SSR && cast(window).__mainStyleLayoutTop) {
+    layoutItemStylesPatch = Object.assign(
+      {},
+      layoutItemStyles.value,
+      { width: cast(window).__mainStyleLayoutLeft },
+    );
+  } else {
+    layoutItemStylesPatch = layoutItemStyles.value;
+  }
+  return layoutItemStylesPatch;
 }
