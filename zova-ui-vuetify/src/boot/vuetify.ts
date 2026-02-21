@@ -7,8 +7,8 @@
 import LuxonAdapter from '@date-io/luxon';
 // Composables
 import { createVuetify } from 'vuetify';
+import { md3 } from 'vuetify/blueprints';
 import { aliases } from 'vuetify/iconsets/mdi-svg';
-
 // Styles
 import '../css/settings.scss';
 
@@ -44,4 +44,5 @@ export default createVuetify({
       isoDateShort: 'yyyy-MM-dd',
     },
   },
+  blueprint: md3,
 });
