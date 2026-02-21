@@ -1,4 +1,4 @@
-import { CSSProperties, Ref } from 'vue';
+import { CSSProperties, ref, Ref } from 'vue';
 import { VMain } from 'vuetify/components/VMain';
 import { useDimension } from 'vuetify/lib/composables/dimensions.mjs';
 import { useLayout } from 'vuetify/lib/composables/layout.mjs';
@@ -18,9 +18,10 @@ export class SysMain extends BeanBase {
       const { dimensionStyles } = useDimension(props);
       const { mainStyles } = useLayout();
       const { ssrBootStyles } = useSsrBoot();
+      const timeout = ref(null);
 
       useRender(() => {
-        const mainStylesPatch = _layoutStylePatch(mainStyles);
+        const mainStylesPatch = _layoutStylePatch(mainStyles, timeout);
         return (
           <props.tag
             class={[
@@ -51,7 +52,7 @@ export class SysMain extends BeanBase {
   }
 }
 
-function _layoutStylePatch(mainStyles: Ref<CSSProperties, CSSProperties>) {
+function _layoutStylePatch(mainStyles: Ref<CSSProperties, CSSProperties>, timeout: Ref) {
   let mainStylesPatch;
   if (process.env.CLIENT && process.env.SSR && cast(window).__mainStyleLayoutTop) {
     mainStylesPatch = Object.assign(
@@ -62,10 +63,12 @@ function _layoutStylePatch(mainStyles: Ref<CSSProperties, CSSProperties>) {
         '--v-layout-top': cast(window).__mainStyleLayoutTop,
       },
     );
-    setTimeout(() => {
-      delete cast(window).__mainStyleLayoutLeft;
-      delete cast(window).__mainStyleLayoutTop;
-    }, 100);
+    if (!timeout.value) {
+      timeout.value = setTimeout(() => {
+        delete cast(window).__mainStyleLayoutLeft;
+        delete cast(window).__mainStyleLayoutTop;
+      }, 100);
+    }
   } else {
     mainStylesPatch = mainStyles.value;
   }
