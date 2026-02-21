@@ -1,5 +1,6 @@
 /* eslint-disable */
 /** sys: begin */
+export * from '../bean/sys.appBar.js';
 export * from '../bean/sys.icon.js';
 export * from '../bean/sys.main.js';
 export * from '../bean/sys.navigationDrawer.jsx';
@@ -11,6 +12,17 @@ declare module 'zova' {
 }
 declare module 'zova-module-vuetify-adapter' {
   
+        export interface SysAppBar {
+          /** @internal */
+          get scope(): ScopeModuleVuetifyAdapter;
+        }
+
+        export interface SysAppBar {
+          get $beanFullName(): 'vuetify-adapter.sys.appBar';
+          get $onionName(): 'vuetify-adapter:appBar';
+          
+        }
+
         export interface SysIcon {
           /** @internal */
           get scope(): ScopeModuleVuetifyAdapter;
@@ -46,13 +58,15 @@ declare module 'zova-module-vuetify-adapter' {
 }
 /** sys: end */
 /** sys: begin */
+import { SysAppBar } from '../bean/sys.appBar.js';
 import { SysIcon } from '../bean/sys.icon.js';
 import { SysMain } from '../bean/sys.main.js';
 import { SysNavigationDrawer } from '../bean/sys.navigationDrawer.jsx';
 import 'zova';
 declare module 'zova' {
   export interface IBeanRecordGeneral {
-    'vuetify-adapter.sys.icon': SysIcon;
+    'vuetify-adapter.sys.appBar': SysAppBar;
+'vuetify-adapter.sys.icon': SysIcon;
 'vuetify-adapter.sys.main': SysMain;
 'vuetify-adapter.sys.navigationDrawer': SysNavigationDrawer;
   }

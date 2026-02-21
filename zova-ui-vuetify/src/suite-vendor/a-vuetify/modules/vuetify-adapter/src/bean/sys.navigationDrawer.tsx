@@ -30,7 +30,7 @@ export class SysNavigationDrawer extends BeanBase {
   }
 
   private _patchSetup() {
-    VNavigationDrawer.setup = (props, { attrs, emit, slots }) => {
+    VNavigationDrawer.setup = function (props, { attrs, emit, slots }) {
       const { isRtl } = useRtl();
       const { themeClasses } = provideTheme(props);
       const { borderClasses } = useBorder(props);
