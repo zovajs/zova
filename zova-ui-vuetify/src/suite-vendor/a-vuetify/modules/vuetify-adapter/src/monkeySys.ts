@@ -4,6 +4,7 @@ import { VTextField } from 'vuetify/components';
 import { BeanSimple, deepExtend } from 'zova';
 import { SysIcon } from './bean/sys.icon.js';
 import { SysMain } from './bean/sys.main.js';
+import { SysNavigationDrawer } from './bean/sys.navigationDrawer.jsx';
 
 export class MonkeySys extends BeanSimple implements IMonkeySysInitialize {
   async sysInitialize() {
@@ -18,6 +19,9 @@ export class MonkeySys extends BeanSimple implements IMonkeySysInitialize {
     // main
     const sysMain = await this.bean._newBean(SysMain, false);
     await sysMain.initialize();
+    // navigationDrawer
+    const sysNavigationDrawer = await this.bean._newBean(SysNavigationDrawer, false);
+    await sysNavigationDrawer.initialize();
     // config custom
     const configCustom: IOpenapiOptionsResourceMeta = {
       provider: {

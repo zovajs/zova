@@ -108,14 +108,14 @@ export class SysNavigationDrawer extends BeanBase {
       });
       const { layoutItemStyles, layoutItemScrimStyles } = useLayoutItem({
         id: props.name,
-        order: computed(() => Number.parseInt(props.order, 10)),
+        order: computed(() => Number.parseInt(props.order as any, 10)),
         position: location,
         layoutSize,
         elementSize: width,
         active: readonly(isActive),
         disableTransitions: toRef(() => isDragging.value),
         absolute: computed(() =>
-        // eslint-disable-next-line @typescript-eslint/no-use-before-define
+        // eslint-disable-next-line
           props.absolute || (isSticky.value && typeof isStuck.value !== 'string'),
         ),
       });
