@@ -45,6 +45,7 @@ export interface ZovaConfig {
   logger: ConfigLogger;
   locale: {
     default: keyof ILocaleRecord;
+    cookieLocale: boolean;
     storeKey: string;
     items: Record<keyof ILocaleRecord, string>;
   };

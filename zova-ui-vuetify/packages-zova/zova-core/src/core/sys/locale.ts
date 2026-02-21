@@ -9,7 +9,7 @@ export class SysLocale extends AppLocale {
 
   /** @internal */
   public async initialize(locales?: ZovaLocaleOptionalMap) {
-    if(!locales) return;
+    if (!locales) return;
     for (const locale in locales) {
       const moduleMap = locales[locale].modules;
       for (const moduleName in moduleMap) {
