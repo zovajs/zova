@@ -72,6 +72,41 @@ declare module 'zova' {
   }
 }
 /** sys: end */
+/** service: begin */
+export * from '../service/locale.js';
+
+import 'zova-module-a-bean';
+declare module 'zova-module-a-bean' {
+  
+    export interface IServiceRecord {
+      'vuetify-adapter:locale': never;
+    }
+
+  
+}
+declare module 'zova-module-vuetify-adapter' {
+  
+        export interface ServiceLocale {
+          /** @internal */
+          get scope(): ScopeModuleVuetifyAdapter;
+        }
+
+        export interface ServiceLocale {
+          get $beanFullName(): 'vuetify-adapter.service.locale';
+          get $onionName(): 'vuetify-adapter:locale';
+          
+        } 
+}
+/** service: end */
+/** service: begin */
+import { ServiceLocale } from '../service/locale.js';
+import 'zova';
+declare module 'zova' {
+  export interface IBeanRecordGeneral {
+    'vuetify-adapter.service.locale': ServiceLocale;
+  }
+}
+/** service: end */
 /** meta: begin */
 export * from '../bean/meta.themeHandler.js';
 

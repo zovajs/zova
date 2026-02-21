@@ -43,6 +43,9 @@ export default createVuetify({
     formats: {
       isoDateShort: 'yyyy-MM-dd',
     },
+    locale: {
+      en: 'en-GB',
+    },
   },
   blueprint: md3,
 });
