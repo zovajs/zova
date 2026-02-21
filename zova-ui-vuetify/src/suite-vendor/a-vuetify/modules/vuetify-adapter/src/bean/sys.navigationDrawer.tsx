@@ -20,7 +20,7 @@ import { provideTheme } from 'vuetify/lib/composables/theme.mjs';
 import { useToggleScope } from 'vuetify/lib/composables/toggleScope.mjs';
 import { toPhysical } from 'vuetify/lib/util/anchor.mjs';
 import { useRender } from 'vuetify/lib/util/useRender.mjs';
-import { BeanBase } from 'zova';
+import { BeanBase, cast } from 'zova';
 import { Sys } from 'zova-module-a-bean';
 
 @Sys()
@@ -144,6 +144,17 @@ export class SysNavigationDrawer extends BeanBase {
       useRender(() => {
         const hasImage = (slots.image || props.image);
 
+        let layoutItemStylesPatch;
+        if (process.env.CLIENT && process.env.SSR && cast(window).__mainStyleLayoutTop) {
+          layoutItemStylesPatch = Object.assign(
+            {},
+            layoutItemStyles.value,
+            { width: cast(window).__mainStyleLayoutLeft },
+          );
+        } else {
+          layoutItemStylesPatch = layoutItemStyles.value;
+        }
+
         return (
           <>
             <props.tag
@@ -173,7 +184,7 @@ export class SysNavigationDrawer extends BeanBase {
               ]}
               style={[
                 backgroundColorStyles.value,
-                layoutItemStyles.value,
+                layoutItemStylesPatch,
                 ssrBootStyles.value,
                 stickyStyles.value,
                 props.style,
