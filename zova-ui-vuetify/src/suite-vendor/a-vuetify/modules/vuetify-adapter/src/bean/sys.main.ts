@@ -1,10 +1,10 @@
-import { createElementVNode, createVNode, normalizeClass } from 'vue';
+import { createElementVNode, createVNode } from 'vue';
 import { VMain } from 'vuetify/components/VMain';
 import { useDimension } from 'vuetify/lib/composables/dimensions.mjs';
 import { useLayout } from 'vuetify/lib/composables/layout.mjs';
 import { useSsrBoot } from 'vuetify/lib/composables/ssrBoot.mjs';
 import { useRender } from 'vuetify/lib/util/useRender.mjs';
-import { BeanBase, useApp } from 'zova';
+import { BeanBase, cast } from 'zova';
 import { Sys } from 'zova-module-a-bean';
 
 @Sys()
@@ -19,28 +19,27 @@ export class SysMain extends BeanBase {
       const { dimensionStyles } = useDimension(props);
       const { mainStyles } = useLayout();
       const { ssrBootStyles } = useSsrBoot();
-      const app = useApp();
       useRender(() => {
         let mainStylesPatch;
-        if (process.env.CLIENT && app.ctx.meta.$ssr.isRuntimeSsrPreHydration) {
-          console.log(mainStyles);
+        if (process.env.CLIENT && process.env.SSR && cast(window).__mainStyleLayoutTop) {
           mainStylesPatch = {
-            '--v-layout-bottom': '0px',
-            '--v-layout-left': '0px',
-            '--v-layout-right': '0px',
-            '--v-layout-top': '112px',
+            '--v-layout-bottom': mainStyles.value['--v-layout-bottom'],
+            '--v-layout-left': cast(window).__mainStyleLayoutLeft,
+            '--v-layout-right': mainStyles.value['--v-layout-right'],
+            '--v-layout-top': cast(window).__mainStyleLayoutTop,
           };
+          setTimeout(() => {
+            delete cast(window).__mainStyleLayoutLeft;
+            delete cast(window).__mainStyleLayoutTop;
+          }, 100);
         } else {
           mainStylesPatch = mainStyles.value;
         }
-        console.log(mainStylesPatch);
-        const style=normalizeClass([mainStyles.value, ssrBootStyles.value, dimensionStyles.value, props.style]);
-        console.log(style);
         return createVNode(props.tag, {
-          class: normalizeClass(['v-main', {
+          class: ['v-main', {
             'v-main--scrollable': props.scrollable,
-          }, props.class]),
-          style,
+          }, props.class],
+          style: [mainStylesPatch, ssrBootStyles.value, dimensionStyles.value, props.style],
         }, {
           default: () => [props.scrollable
             ? createElementVNode('div', {

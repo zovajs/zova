@@ -74,9 +74,13 @@ export class ServiceSsr extends BeanBase {
         __domDrawer.style.width='360px';
         __domPageContainer.style.setProperty('--v-layout-left','360px');
         __domPageContainer.style.setProperty('--v-layout-top','112px');
+        window.__mainStyleLayoutLeft='360px';
+        window.__mainStyleLayoutTop='112px';
       }else{
         __domPageContainer.style.setProperty('--v-layout-left','0px');
         __domPageContainer.style.setProperty('--v-layout-top','112px');
+        window.__mainStyleLayoutLeft='0px';
+        window.__mainStyleLayoutTop='112px';
       }
     };`;
   }
