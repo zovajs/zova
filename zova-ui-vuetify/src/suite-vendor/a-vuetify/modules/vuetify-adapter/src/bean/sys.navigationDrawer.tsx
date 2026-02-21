@@ -1,5 +1,5 @@
 import { useRouter } from '@cabloy/vue-router';
-import { computed, CSSProperties, nextTick, readonly, Ref, ref, shallowRef, toRef, Transition, watch } from 'vue';
+import { computed, CSSProperties, inject, nextTick, readonly, Ref, ref, shallowRef, toRef, Transition, watch } from 'vue';
 import { useDisplay, useRtl } from 'vuetify';
 import { VDefaultsProvider, VImg } from 'vuetify/components';
 import { VNavigationDrawer } from 'vuetify/components/VNavigationDrawer';
@@ -20,8 +20,9 @@ import { provideTheme } from 'vuetify/lib/composables/theme.mjs';
 import { useToggleScope } from 'vuetify/lib/composables/toggleScope.mjs';
 import { toPhysical } from 'vuetify/lib/util/anchor.mjs';
 import { useRender } from 'vuetify/lib/util/useRender.mjs';
-import { BeanBase, cast } from 'zova';
+import { BeanBase } from 'zova';
 import { Sys } from 'zova-module-a-bean';
+import { ILayoutConfig } from '../types/layoutConfig.js';
 
 @Sys()
 export class SysNavigationDrawer extends BeanBase {
@@ -141,9 +142,9 @@ export class SysNavigationDrawer extends BeanBase {
         },
       });
 
-      useRender(() => {
-        const layoutItemStylesPatch = _layoutStylePatch(layoutItemStyles);
+      const layoutItemStylesPatch = useLayoutStylePatch(layoutItemStyles);
 
+      useRender(() => {
         const hasImage = (slots.image || props.image);
 
         return (
@@ -175,7 +176,7 @@ export class SysNavigationDrawer extends BeanBase {
               ]}
               style={[
                 backgroundColorStyles.value,
-                layoutItemStylesPatch,
+                layoutItemStylesPatch.value,
                 ssrBootStyles.value,
                 stickyStyles.value,
                 props.style,
@@ -255,16 +256,21 @@ export class SysNavigationDrawer extends BeanBase {
   }
 }
 
-function _layoutStylePatch(layoutItemStyles: Ref<CSSProperties, CSSProperties>) {
-  let layoutItemStylesPatch;
-  if (process.env.CLIENT && process.env.SSR && cast(window).__mainStyleLayoutTop) {
-    layoutItemStylesPatch = Object.assign(
-      {},
-      layoutItemStyles.value,
-      { width: cast(window).__mainStyleLayoutLeft },
-    );
-  } else {
-    layoutItemStylesPatch = layoutItemStyles.value;
-  }
-  return layoutItemStylesPatch;
+function useLayoutStylePatch(layoutItemStyles: Ref<CSSProperties, CSSProperties>) {
+  const layoutConfigRef: Ref<ILayoutConfig> | undefined = inject('VuetifyLayoutConfig');
+  return computed(() => {
+    let layoutItemStylesPatch;
+    if (process.env.SSR && layoutConfigRef?.value) {
+      layoutItemStylesPatch = Object.assign(
+        {},
+        layoutItemStyles.value,
+        {
+          width: `${layoutConfigRef.value.sidebar.width}px`,
+        },
+      );
+    } else {
+      layoutItemStylesPatch = layoutItemStyles.value;
+    }
+    return layoutItemStylesPatch;
+  });
 }
