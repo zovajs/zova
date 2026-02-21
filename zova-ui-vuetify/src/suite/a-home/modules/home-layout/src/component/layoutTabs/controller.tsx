@@ -31,6 +31,8 @@ export class ControllerLayoutTabs extends BeanControllerBase {
   belowBreakpoint: boolean;
 
   protected async __init__() {
+    // layoutConfig
+    this.__initLayoutConfig();
     // belowBreakpoint
     this.belowBreakpoint = useComputed(() => {
       let width;
