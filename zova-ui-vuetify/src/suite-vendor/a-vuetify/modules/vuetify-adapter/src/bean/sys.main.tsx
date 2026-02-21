@@ -1,4 +1,4 @@
-import { createElementVNode, createVNode } from 'vue';
+import { createElementVNode, createVNode, CSSProperties, Ref } from 'vue';
 import { VMain } from 'vuetify/components/VMain';
 import { useDimension } from 'vuetify/lib/composables/dimensions.mjs';
 import { useLayout } from 'vuetify/lib/composables/layout.mjs';
@@ -19,21 +19,7 @@ export class SysMain extends BeanBase {
       const { mainStyles } = useLayout();
       const { ssrBootStyles } = useSsrBoot();
       useRender(() => {
-        let mainStylesPatch;
-        if (process.env.CLIENT && process.env.SSR && cast(window).__mainStyleLayoutTop) {
-          mainStylesPatch = {
-            '--v-layout-bottom': mainStyles.value['--v-layout-bottom'],
-            '--v-layout-left': cast(window).__mainStyleLayoutLeft,
-            '--v-layout-right': mainStyles.value['--v-layout-right'],
-            '--v-layout-top': cast(window).__mainStyleLayoutTop,
-          };
-          setTimeout(() => {
-            delete cast(window).__mainStyleLayoutLeft;
-            delete cast(window).__mainStyleLayoutTop;
-          }, 100);
-        } else {
-          mainStylesPatch = mainStyles.value;
-        }
+        const mainStylesPatch = _layoutStylePatch(mainStyles);
         return createVNode(props.tag, {
           class: ['v-main', {
             'v-main--scrollable': props.scrollable,
@@ -50,4 +36,25 @@ export class SysMain extends BeanBase {
       return {};
     };
   }
+}
+
+function _layoutStylePatch(mainStyles: Ref<CSSProperties, CSSProperties>) {
+  let mainStylesPatch;
+  if (process.env.CLIENT && process.env.SSR && cast(window).__mainStyleLayoutTop) {
+    mainStylesPatch = Object.assign(
+      {},
+      mainStyles.value,
+      {
+        '--v-layout-left': cast(window).__mainStyleLayoutLeft,
+        '--v-layout-top': cast(window).__mainStyleLayoutTop,
+      },
+    );
+    setTimeout(() => {
+      delete cast(window).__mainStyleLayoutLeft;
+      delete cast(window).__mainStyleLayoutTop;
+    }, 100);
+  } else {
+    mainStylesPatch = mainStyles.value;
+  }
+  return mainStylesPatch;
 }
