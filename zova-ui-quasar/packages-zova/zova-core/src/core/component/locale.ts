@@ -24,7 +24,7 @@ export class AppLocale extends BeanSimple {
 
   get current(): keyof ILocaleRecord {
     let locale = this[SymbolLocaleCurrent].value;
-    if (!locale) locale = this.metaCookie.getItem(this.sys.config.locale.storeKey);
+    if (!locale && this.sys.config.locale.cookieLocale) locale = this.metaCookie.getItem(this.sys.config.locale.storeKey);
     if (!locale) locale = this.sys.config.locale.default;
     return locale as keyof ILocaleRecord;
   }
@@ -32,7 +32,9 @@ export class AppLocale extends BeanSimple {
   set current(value: keyof ILocaleRecord) {
     if (this[SymbolLocaleCurrent].value === value) return;
     this[SymbolLocaleCurrent].value = value;
-    this.metaCookie.setItem(this.sys.config.locale.storeKey, value);
+    if (this.sys.config.locale.cookieLocale) {
+      this.metaCookie.setItem(this.sys.config.locale.storeKey, value);
+    }
   }
 
   get tz(): string {
