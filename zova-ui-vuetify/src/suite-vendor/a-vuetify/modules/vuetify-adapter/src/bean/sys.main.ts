@@ -14,7 +14,6 @@ export class SysMain extends BeanBase {
   }
 
   private _patchSetup() {
-    // const self = this;
     VMain.setup = function (props, { slots }) {
       const { dimensionStyles } = useDimension(props);
       const { mainStyles } = useLayout();
