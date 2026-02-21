@@ -47,6 +47,7 @@ export default function (sys: ZovaSys) {
   // locale
   config.locale = {
     default: env.APP_LOCALE_DEFAULT as keyof ILocaleRecord,
+    cookieLocale: sys.env.SSR_COOKIE_LOCALE === 'true',
     storeKey: 'locale',
     items: {
       'en-us': 'English',
