@@ -12,8 +12,8 @@ export class MonkeySys extends BeanSimple implements IMonkeySysInitialize {
       scopeStyleConfig.defaultThemeHandler = 'quasar-adapter:themeHandler';
     }
     // icon
-    const localIcon = await this.bean._newBean(SysIcon, false);
-    await localIcon.initialize();
+    const sysIcon = await this.bean._newBean(SysIcon, false);
+    await sysIcon.initialize();
     // config custom
     const configCustom: IOpenapiOptionsResourceMeta = {
       provider: {
