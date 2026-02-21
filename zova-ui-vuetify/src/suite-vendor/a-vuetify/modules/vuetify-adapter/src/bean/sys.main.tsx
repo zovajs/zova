@@ -53,7 +53,7 @@ export class SysMain extends BeanBase {
 }
 
 function useLayoutStylePatch(mainStyles: Ref<CSSProperties, CSSProperties>) {
-  const layoutConfigRef: Ref<ILayoutConfig> | undefined = inject('VuetifyLayoutConfig');
+  const layoutConfigRef: Ref<ILayoutConfig> | undefined = inject('VuetifyLayoutConfig', undefined);
   return computed(() => {
     let mainStylesPatch;
     if (process.env.SSR && layoutConfigRef?.value) {

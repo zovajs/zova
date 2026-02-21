@@ -176,7 +176,7 @@ export class SysAppBar extends BeanBase {
 }
 
 function useLayoutStylePatch(layoutItemStyles: Ref<CSSProperties, CSSProperties>) {
-  const layoutConfigRef: Ref<ILayoutConfig> | undefined = inject('VuetifyLayoutConfig');
+  const layoutConfigRef: Ref<ILayoutConfig> | undefined = inject('VuetifyLayoutConfig', undefined);
   return computed(() => {
     let layoutItemStylesPatch;
     if (process.env.SSR && layoutConfigRef?.value) {
