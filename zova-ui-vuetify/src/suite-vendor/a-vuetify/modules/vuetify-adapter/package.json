@@ -19,6 +19,13 @@
             "vuetify/lib"
           ],
           "output": "vuetify"
+        },
+        {
+          "match": [
+            "@date-io/core",
+            "@date-io/luxon"
+          ],
+          "output": "date-io-luxon"
         }
       ]
     }
