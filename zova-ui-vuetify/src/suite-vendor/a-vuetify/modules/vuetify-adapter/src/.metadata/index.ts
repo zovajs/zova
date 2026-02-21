@@ -2,6 +2,7 @@
 /** sys: begin */
 export * from '../bean/sys.icon.js';
 export * from '../bean/sys.main.js';
+export * from '../bean/sys.navigationDrawer.jsx';
 
 import 'zova';
 declare module 'zova' {
@@ -30,17 +31,30 @@ declare module 'zova-module-vuetify-adapter' {
           get $beanFullName(): 'vuetify-adapter.sys.main';
           get $onionName(): 'vuetify-adapter:main';
           
+        }
+
+        export interface SysNavigationDrawer {
+          /** @internal */
+          get scope(): ScopeModuleVuetifyAdapter;
+        }
+
+        export interface SysNavigationDrawer {
+          get $beanFullName(): 'vuetify-adapter.sys.navigationDrawer';
+          get $onionName(): 'vuetify-adapter:navigationDrawer';
+          
         } 
 }
 /** sys: end */
 /** sys: begin */
 import { SysIcon } from '../bean/sys.icon.js';
 import { SysMain } from '../bean/sys.main.js';
+import { SysNavigationDrawer } from '../bean/sys.navigationDrawer.jsx';
 import 'zova';
 declare module 'zova' {
   export interface IBeanRecordGeneral {
     'vuetify-adapter.sys.icon': SysIcon;
 'vuetify-adapter.sys.main': SysMain;
+'vuetify-adapter.sys.navigationDrawer': SysNavigationDrawer;
   }
 }
 /** sys: end */
