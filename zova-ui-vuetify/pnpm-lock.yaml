@@ -799,6 +799,9 @@ importers:
 
   src/suite-vendor/a-vuetify/modules/vuetify-adapter:
     dependencies:
+      '@date-io/core':
+        specifier: ^3.2.0
+        version: 3.2.0
       '@date-io/luxon':
         specifier: ^3.2.0
         version: 3.2.0(luxon@3.7.2)

@@ -40,5 +40,8 @@ export default createVuetify({
   },
   date: {
     adapter: LuxonAdapter,
+    formats: {
+      isoDateShort: 'yyyy-MM-dd',
+    },
   },
 });

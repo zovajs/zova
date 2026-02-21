@@ -34,3 +34,9 @@ declare module 'vuetify' {
     interface Adapter extends LuxonAdapter {}
   }
 }
+
+declare module '@date-io/core/IUtils.d.ts' {
+  export interface DateIOFormats<TLibFormatToken = string> {
+    isoDateShort: TLibFormatToken;
+  }
+}
