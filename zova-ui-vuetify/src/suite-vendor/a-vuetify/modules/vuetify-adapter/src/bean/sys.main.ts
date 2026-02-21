@@ -1,4 +1,4 @@
-import { computed, createElementVNode, createVNode, normalizeClass, ref } from 'vue';
+import { createElementVNode, createVNode, normalizeClass } from 'vue';
 import { VMain } from 'vuetify/components/VMain';
 import { useDimension } from 'vuetify/lib/composables/dimensions.mjs';
 import { useLayout } from 'vuetify/lib/composables/layout.mjs';
@@ -20,31 +20,35 @@ export class SysMain extends BeanBase {
       const { mainStyles } = useLayout();
       const { ssrBootStyles } = useSsrBoot();
       const app = useApp();
-      const mainStylesPatch = computed(() => {
+      useRender(() => {
+        let mainStylesPatch;
         if (process.env.CLIENT && app.ctx.meta.$ssr.isRuntimeSsrPreHydration) {
           console.log(mainStyles);
-          return ref({
+          mainStylesPatch = {
             '--v-layout-bottom': '0px',
             '--v-layout-left': '0px',
             '--v-layout-right': '0px',
             '--v-layout-top': '112px',
-          });
+          };
+        } else {
+          mainStylesPatch = mainStyles.value;
         }
-        return mainStyles;
+        console.log(mainStylesPatch);
+        const style=normalizeClass([mainStyles.value, ssrBootStyles.value, dimensionStyles.value, props.style]);
+        console.log(style);
+        return createVNode(props.tag, {
+          class: normalizeClass(['v-main', {
+            'v-main--scrollable': props.scrollable,
+          }, props.class]),
+          style,
+        }, {
+          default: () => [props.scrollable
+            ? createElementVNode('div', {
+                class: 'v-main__scroller',
+              }, [slots.default?.()])
+            : slots.default?.()],
+        });
       });
-
-      useRender(() => createVNode(props.tag, {
-        class: normalizeClass(['v-main', {
-          'v-main--scrollable': props.scrollable,
-        }, props.class]),
-        style: normalizeClass([mainStylesPatch.value, ssrBootStyles.value, dimensionStyles.value, props.style]),
-      }, {
-        default: () => [props.scrollable
-          ? createElementVNode('div', {
-              class: 'v-main__scroller',
-            }, [slots.default?.()])
-          : slots.default?.()],
-      }));
       return {};
     };
   }
