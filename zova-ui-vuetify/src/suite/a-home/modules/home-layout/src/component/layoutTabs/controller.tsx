@@ -1,4 +1,5 @@
 import type { ModelTabs, ModelTabsOptions } from 'zova-module-a-routertabs';
+import { provide, ref } from 'vue';
 import { BeanControllerBase, Use, useComputed, useCustomRef } from 'zova';
 import { Controller } from 'zova-module-a-bean';
 import { $QueryAutoLoad } from 'zova-module-a-model';
@@ -25,6 +26,7 @@ export class ControllerLayoutTabs extends BeanControllerBase {
   $$ssr: ServiceSsr;
 
   layoutConfig: ILayoutConfig;
+  layoutConfigTimeout: number = 0;
 
   leftDrawerOpen: boolean;
   leftDrawerOpenMobile: boolean = false;
@@ -98,5 +100,16 @@ export class ControllerLayoutTabs extends BeanControllerBase {
 
   private __initLayoutConfig() {
     this.layoutConfig = this.scope.config.layout;
+    if (process.env.SSR) {
+      const layoutConfigRef = ref<ILayoutConfig | undefined>(this.layoutConfig);
+      provide('VuetifyLayoutConfig', layoutConfigRef);
+      if (process.env.CLIENT) {
+        if (!this.layoutConfigTimeout) {
+          this.layoutConfigTimeout = window.setTimeout(() => {
+            layoutConfigRef.value = undefined;
+          }, 100);
+        }
+      }
+    }
   }
 }
