@@ -261,6 +261,7 @@ function useLayoutStylePatch(layoutItemStyles: Ref<CSSProperties, CSSProperties>
   return computed(() => {
     let layoutItemStylesPatch;
     if (process.env.SSR && layoutConfigRef?.value) {
+      console.log('leftDrawerOpen:', layoutConfigRef.value.leftDrawerOpen);
       if (layoutConfigRef.value.leftDrawerOpen) {
         layoutItemStylesPatch = Object.assign(
           {},

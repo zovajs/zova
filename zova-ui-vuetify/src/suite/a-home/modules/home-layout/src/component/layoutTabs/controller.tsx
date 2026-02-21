@@ -33,8 +33,6 @@ export class ControllerLayoutTabs extends BeanControllerBase {
   belowBreakpoint: boolean;
 
   protected async __init__() {
-    // layoutConfig
-    this.__initLayoutConfig();
     // belowBreakpoint
     this.belowBreakpoint = useComputed(() => {
       let width;
@@ -57,6 +55,8 @@ export class ControllerLayoutTabs extends BeanControllerBase {
         },
       };
     });
+    // layoutConfig
+    this.__initLayoutConfig();
     // passport
     if (process.env.SERVER) {
       await this.$passport.ensurePassport();
