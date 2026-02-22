@@ -67,16 +67,18 @@ export class ServiceSsr extends BeanBase {
       const __domHeader=document.querySelector('#q-app>.v-application>.v-application__wrap>header.v-toolbar');
       const __domDrawer=document.querySelector('#q-app>.v-application>.v-application__wrap>.v-navigation-drawer--left');
       const __domPageContainer=document.querySelector('#q-app>.v-application>.v-application__wrap>main.v-main');
+      const sidebarWidth = '${this.scope.config.layout.sidebar.width}px';
+      const navbarHeight = '${this.scope.config.layout.navbar.height}px';
       if(__leftDrawerOpen){
-        __domHeader.style.left='360px';
-        __domHeader.style.width='calc(100% - 360px)';
+        __domHeader.style.left=sidebarWidth;
+        __domHeader.style.width=\`calc(100% - \${sidebarWidth})\`;
         __domDrawer.style.transform='translateX(0px)';
-        __domDrawer.style.width='360px';
-        __domPageContainer.style.setProperty('--v-layout-left','360px');
-        __domPageContainer.style.setProperty('--v-layout-top','112px');
+        __domDrawer.style.width=sidebarWidth;
+        __domPageContainer.style.setProperty('--v-layout-left',sidebarWidth);
+        __domPageContainer.style.setProperty('--v-layout-top',navbarHeight);
       }else{
         __domPageContainer.style.setProperty('--v-layout-left','0px');
-        __domPageContainer.style.setProperty('--v-layout-top','112px');
+        __domPageContainer.style.setProperty('--v-layout-top',navbarHeight);
       }
     };`;
   }
