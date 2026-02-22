@@ -41,10 +41,9 @@ export class ControllerFormFieldCurrency extends BeanControllerBase {
     const valueInputPatch = currencyUpdate(this._valueKeyboardInput, currencyOptions);
     if (valueInputPatch === undefined) return this._valueKeyboardInput;
     // hold the current input value if equal
-    const displayValue = this._getDisplayValue(currencyOptions);
-    if (valueInputPatch === displayValue) return this._valueKeyboardInput;
+    if (valueInputPatch === this.$props.displayValue) return this._valueKeyboardInput;
     // default
-    return displayValue;
+    return this._getDisplayValue(currencyOptions);
   }
 
   private _getDisplayValue(currencyOptions?: CurrencyOptions) {
