@@ -87,6 +87,7 @@
     "zova-module-home-layout": "workspace:^",
     "zova-module-home-passport": "workspace:^",
     "zova-module-home-user": "workspace:^",
+    "zova-module-start-actions": "workspace:^",
     "zova-module-vuetify-adapter": "workspace:^",
     "zova-module-start-adapter": "workspace:^",
     "zova-module-start-date": "workspace:^",

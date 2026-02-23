@@ -240,6 +240,9 @@ importers:
       zova-module-rest-resource:
         specifier: workspace:^
         version: link:src/suite-vendor/a-cabloy/modules/rest-resource
+      zova-module-start-actions:
+        specifier: workspace:^
+        version: link:src/suite/cabloy-start/modules/start-actions
       zova-module-start-adapter:
         specifier: workspace:^
         version: link:src/suite/cabloy-start/modules/start-adapter
@@ -1139,6 +1142,9 @@ importers:
 
   src/suite/cabloy-start:
     dependencies:
+      zova-module-start-actions:
+        specifier: ^5.0.0
+        version: link:modules/start-actions
       zova-module-start-adapter:
         specifier: ^5.0.0
         version: link:modules/start-adapter
@@ -1157,6 +1163,8 @@ importers:
       zova-suite-a-cabloy:
         specifier: ^5.0.0
         version: link:../../suite-vendor/a-cabloy
+
+  src/suite/cabloy-start/modules/start-actions: {}
 
   src/suite/cabloy-start/modules/start-adapter: {}
 
