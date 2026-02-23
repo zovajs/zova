@@ -1,4 +1,4 @@
-import { VBtn, VIcon } from 'vuetify/components';
+import { VBtn, VDivider, VIcon } from 'vuetify/components';
 import { BeanControllerPageBase, useComputed } from 'zova';
 import { Controller } from 'zova-module-a-bean';
 import { IIconRecord } from 'zova-module-a-icon';
@@ -35,6 +35,13 @@ export class ControllerPageState extends BeanControllerPageBase {
         <VBtn color="secondary" nativeOnClick={() => this.decrement()}>
           Decrement
         </VBtn>
+        <VDivider
+          color="primary"
+          opacity=".7"
+          thickness="12"
+          variant="double"
+          gradient
+        ></VDivider>
         <div>
           <VIcon icon={this.icon}></VIcon>
           <VBtn nativeOnClick={() => {
@@ -44,6 +51,25 @@ export class ControllerPageState extends BeanControllerPageBase {
             Switch
           </VBtn>
         </div>
+        <VDivider
+          color="primary"
+          opacity=".7"
+          thickness="12"
+          variant="double"
+          gradient
+        ></VDivider>
+        <VBtn nativeOnClick={() => {
+          this.$appModal.alert({ type: 'error', text: 'This is a error test' });
+        }}
+        >
+          Alert
+        </VBtn>
+        <VBtn nativeOnClick={() => {
+          this.$appModal.confirm({ text: 'Are you sure that you want to delete this one?' });
+        }}
+        >
+          Confirm
+        </VBtn>
       </ZPage>
     );
   }
