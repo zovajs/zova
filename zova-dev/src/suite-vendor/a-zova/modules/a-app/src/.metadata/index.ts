@@ -41,8 +41,12 @@ export interface IZovaComponentRecord {
 }
 }
 /** components: end */
+/** config: begin */
+export * from '../config/config.js';
+import { config } from '../config/config.js';
+/** config: end */
 /** scope: begin */
-import { BeanScopeBase, type BeanScopeUtil } from 'zova';
+import { BeanScopeBase, type BeanScopeUtil, TypeModuleConfig } from 'zova';
 import { Scope } from 'zova-module-a-bean';
 
 @Scope()
@@ -50,6 +54,7 @@ export class ScopeModuleAApp extends BeanScopeBase {}
 
 export interface ScopeModuleAApp {
   util: BeanScopeUtil;
+config: TypeModuleConfig<typeof config>;
 }
 
 import 'zova';
@@ -58,7 +63,9 @@ declare module 'zova' {
     'a-app': ScopeModuleAApp;
   }
   
-  
+  export interface IBeanScopeConfig {
+    'a-app': ReturnType<typeof config>;
+  }
 
   
 

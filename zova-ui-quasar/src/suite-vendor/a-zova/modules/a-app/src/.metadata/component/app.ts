@@ -11,5 +11,5 @@ export const ZApp = defineComponent(
     useController(ControllerApp, undefined, undefined);
     return () => {};
   },
-  prepareComponentOptions(),
+  prepareComponentOptions(ControllerApp.$componentOptions),
 );

@@ -1,10 +1,21 @@
 import { RouterView } from '@cabloy/vue-router';
-import { BeanControllerBase } from 'zova';
+import { BeanControllerBase, IComponentOptions, Use } from 'zova';
 import { Controller } from 'zova-module-a-bean';
+import { BeanBehaviorsHolder } from 'zova-module-a-behavior';
 
 @Controller()
 export class ControllerApp extends BeanControllerBase {
+  static $componentOptions: IComponentOptions = { inheritAttrs: false };
+
+  @Use()
+  $$beanBehaviorsHolder: BeanBehaviorsHolder;
+
   protected async __init__() {
+    this._initMeta();
+    await this._initBehaviors();
+  }
+
+  private _initMeta() {
     this.$useMeta(() => {
       return {
         title: this.sys.env.APP_TITLE,
@@ -25,7 +36,22 @@ export class ControllerApp extends BeanControllerBase {
     });
   }
 
+  private async _initBehaviors() {
+    await this.$$beanBehaviorsHolder.initialize({
+      behaviorTag: undefined as any,
+      behaviors: () => {
+        return this._getAppBehaviors();
+      },
+    });
+  }
+
+  private _getAppBehaviors() {
+    return this.scope.config.behaviors;
+  }
+
   protected render() {
-    return <RouterView />;
+    return this.$$beanBehaviorsHolder.render(() => {
+      return <RouterView />;
+    });
   }
 }
