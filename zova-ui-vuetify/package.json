@@ -90,6 +90,7 @@
     "zova-module-start-actions": "workspace:^",
     "zova-module-vuetify-adapter": "workspace:^",
     "zova-module-start-adapter": "workspace:^",
+    "zova-module-start-app": "workspace:^",
     "zova-module-start-date": "workspace:^",
     "zova-module-start-form": "workspace:^",
     "zova-module-start-restpage": "workspace:^",
