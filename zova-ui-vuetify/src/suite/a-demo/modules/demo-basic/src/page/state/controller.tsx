@@ -64,8 +64,10 @@ export class ControllerPageState extends BeanControllerPageBase {
         >
           Alert
         </VBtn>
-        <VBtn nativeOnClick={() => {
-          this.$appModal.confirm({ text: 'Are you sure that you want to delete this one?' });
+        <VBtn nativeOnClick={async () => {
+          // const res = await this.$performAction('start-actions:confirm', { text: 'Are you sure that you want to delete this one?' });
+          const res = await this.$appModal.confirm({ text: 'Are you sure that you want to delete this one?' });
+          this.$appModal.alert({ text: String(res) });
         }}
         >
           Confirm
