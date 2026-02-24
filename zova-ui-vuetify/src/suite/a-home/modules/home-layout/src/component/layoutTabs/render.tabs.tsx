@@ -76,9 +76,7 @@ export class RenderTabs extends BeanRenderBase {
   }
 
   public getTabIcon(tab: RouteTab) {
-    const { info, items } = tab;
-    const hasPageDirty = items && items.some(item => !!item.pageMeta?.pageDirty);
-    if (hasPageDirty) return $iconName('::dot');
+    const { info } = tab;
     return info?.icon ? info?.icon : '';
   }
 
