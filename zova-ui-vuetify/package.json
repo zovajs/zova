@@ -92,6 +92,7 @@
     "zova-module-start-adapter": "workspace:^",
     "zova-module-start-app": "workspace:^",
     "zova-module-start-date": "workspace:^",
+    "zova-module-start-demo": "workspace:^",
     "zova-module-start-form": "workspace:^",
     "zova-module-start-restpage": "workspace:^",
     "zova-module-start-table": "workspace:^",
