@@ -3,7 +3,7 @@ import { withModifiers } from 'vue';
 import { VBadge, VTab, VTabs } from 'vuetify/components';
 import { BeanRenderBase, ClientOnly } from 'zova';
 import { Render } from 'zova-module-a-bean';
-import { $iconName, ZIcon } from 'zova-module-a-icon';
+import { ZIcon } from 'zova-module-a-icon';
 import { RouteTab, ZRouterViewTabs } from 'zova-module-a-routertabs';
 
 @Render()
