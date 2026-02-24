@@ -14,7 +14,7 @@ export class RenderTabs extends BeanRenderBase {
     const domTabs: VNode[] = [];
     for (const tab of $$modelTabs.tabs) {
       const { tabKey, info } = tab;
-      const className = tabKey === $$modelTabs.tabCurrentKey ? 'text-primary' : '';
+      const className = tabKey === $$modelTabs.tabKeyCurrent ? 'text-primary' : '';
       const titleLocal = this.$text(info?.title || '');
       const domTabContent = tab.affix
         ? titleLocal
@@ -49,8 +49,8 @@ export class RenderTabs extends BeanRenderBase {
           nativeOnClick={() => {
             $$modelTabs.activeTab(tabKey);
           }}
+          prependIcon={info?.icon ? info?.icon : ''}
         >
-          {!!info?.icon && <ZIcon name={info?.icon as any} width="24" height="24"></ZIcon>}
           {domTabContent}
         </VTab>
       );
@@ -60,7 +60,7 @@ export class RenderTabs extends BeanRenderBase {
       <VTabs
         alignTabs="start"
         centerActive
-        modelValue={$$modelTabs.tabCurrentKey}
+        modelValue={$$modelTabs.tabKeyCurrent}
         mandatory={false}
       >
         {domTabs}

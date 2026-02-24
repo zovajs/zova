@@ -17,7 +17,8 @@ export interface IModelOptionsTabs extends IDecoratorModelOptions, ModelTabsOpti
 export class ModelTabs extends BeanModelBase {
   tabsOptions: ModelTabsOptions;
   tabs: RouteTab[];
-  tabCurrentKey?: string;
+  componentKeyCurrent?: string;
+  tabKeyCurrent?: string;
   tabCurrentIndex: number;
   tabCurrent?: RouteTab;
   keepAliveInclude: string[];
@@ -30,25 +31,30 @@ export class ModelTabs extends BeanModelBase {
     this.tabsOptions = deepExtend({}, this.$onionOptions, options);
     // computed
     this.tabCurrentIndex = useComputed(() => {
-      const [index] = this.findTab(this.tabCurrentKey);
+      const [index] = this.findTab(this.tabKeyCurrent);
       return index;
     });
     this.tabCurrent = useComputed(() => {
-      const [, tab] = this.findTab(this.tabCurrentKey);
+      const [, tab] = this.findTab(this.tabKeyCurrent);
       return tab;
     });
     this.keepAliveInclude = useComputed(() => {
       return this._getKeepAliveInclude();
     });
-    // tabCurrentKey
-    const queryOptionsTabCurrentKey: UseQueryOptions<string> = {
-      queryKey: ['tabCurrentKey'],
+    // componentKeyCurrent
+    const queryOptionsComponentKeyCurrent: UseQueryOptions<string> = {
+      queryKey: ['componentKeyCurrent'],
     };
-    this.tabCurrentKey = this.$useStateMem(queryOptionsTabCurrentKey);
+    this.componentKeyCurrent = this.$useStateMem(queryOptionsComponentKeyCurrent);
+    // tabKeyCurrent
+    const queryOptionsTabKeyCurrent: UseQueryOptions<string> = {
+      queryKey: ['tabKeyCurrent'],
+    };
+    this.tabKeyCurrent = this.$useStateMem(queryOptionsTabKeyCurrent);
     // if (this.tabsOptions.cache) {
-    //   this.tabCurrentKey = this.$useStateDb(queryOptionsTabCurrentKey);
+    //   this.tabKeyCurrent = this.$useStateDb(queryOptionsTabKeyCurrent);
     // } else {
-    //   this.tabCurrentKey = this.$useStateMem(queryOptionsTabCurrentKey);
+    //   this.tabKeyCurrent = this.$useStateMem(queryOptionsTabKeyCurrent);
     // }
     // tabs
     const queryOptionsTabs: UseQueryOptions<RouteTab[]> = {
@@ -64,7 +70,7 @@ export class ModelTabs extends BeanModelBase {
     }
     // load cache
     if (this.tabsOptions.cache) {
-      // await this.$loadStateDb(this.tabCurrentKey);
+      // await this.$loadStateDb(this.tabKeyCurrent);
       await this.$loadStateDb(this.tabs);
     }
     // first route
@@ -100,7 +106,8 @@ export class ModelTabs extends BeanModelBase {
   addTab(tab: RouteTabTransient, affix?: boolean): boolean {
     const res = this._addTab(tab, affix);
     // current
-    this.tabCurrentKey = res ? tab.tabKey : undefined;
+    this.tabKeyCurrent = res ? tab.tabKey : undefined;
+    this.componentKeyCurrent = res ? tab.componentKey : undefined;
     return res;
   }
 
@@ -302,10 +309,21 @@ export class ModelTabs extends BeanModelBase {
     if (!tab) return;
     // should not updateTab here
     // this.updateTab({ tabKey });
-    // this.tabCurrentKey = tabKey;
+    // this.tabKeyCurrent = tabKey;
     // first check tab.items?.[0]?.fullPath, because fullPath maybe has query string
     const tabItemFirst = tab.items?.[0];
     const path = tabItemFirst?.componentKey === tabKey ? tabItemFirst.fullPath : tabKey;
+    await this.$router.push(path);
+  }
+
+  async activeTabItem(tabKey?: string, componentKey?: string) {
+    if (!tabKey || !componentKey) return;
+    const [_, tab] = this.findTab(tabKey);
+    if (!tab) return;
+    const tabItem = tab.items?.find(item => item.componentKey === componentKey);
+    if (!tabItem) return;
+    //
+    const path = tabItem.fullPath;
     await this.$router.push(path);
   }
 
