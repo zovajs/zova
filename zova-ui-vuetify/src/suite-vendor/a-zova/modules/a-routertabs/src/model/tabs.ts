@@ -188,7 +188,8 @@ export class ModelTabs extends BeanModelBase {
     if (indexItem === -1) return false;
     const tabItem = tab.items[indexItem];
     // change tab item
-    const tabItemNew: IRouteViewRouteItem = { ...tabItem, pageMeta };
+    const pageMetaNew: IPageMeta = { ...tabItem.pageMeta, ...pageMeta };
+    const tabItemNew: IRouteViewRouteItem = { ...tabItem, pageMeta: pageMetaNew };
     const items = mutate(tab.items, copyState => {
       copyState.splice(indexItem, 1, tabItemNew);
     });
