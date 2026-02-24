@@ -3,8 +3,8 @@ import { withModifiers } from 'vue';
 import { VBadge, VTab, VTabs } from 'vuetify/components';
 import { BeanRenderBase, ClientOnly } from 'zova';
 import { Render } from 'zova-module-a-bean';
-import { ZIcon } from 'zova-module-a-icon';
-import { ZRouterViewTabs } from 'zova-module-a-routertabs';
+import { $iconName, ZIcon } from 'zova-module-a-icon';
+import { RouteTab, ZRouterViewTabs } from 'zova-module-a-routertabs';
 
 @Render()
 export class RenderTabs extends BeanRenderBase {
@@ -49,7 +49,7 @@ export class RenderTabs extends BeanRenderBase {
           nativeOnClick={() => {
             $$modelTabs.activeTab(tabKey);
           }}
-          prependIcon={info?.icon ? info?.icon : ''}
+          prependIcon={this.getTabIcon(tab)}
         >
           {domTabContent}
         </VTab>
@@ -72,6 +72,13 @@ export class RenderTabs extends BeanRenderBase {
         {domWrapper}
       </ClientOnly>
     );
+  }
+
+  public getTabIcon(tab: RouteTab) {
+    const { info, items } = tab;
+    const hasPageDirty = items && items.some(item => !!item.pageMeta?.pageDirty);
+    if (hasPageDirty) return $iconName('::dot');
+    return info?.icon ? info?.icon : '';
   }
 
   public renderTabItems() {}
