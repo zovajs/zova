@@ -37,7 +37,7 @@ export class RenderPageLogin extends BeanRenderBase {
       <div style={{ minHeight: '100%' }}>
         <div style={{ padding: '48px 0' }}>
           <div style={{ maxWidth: '360px', margin: '0 auto' }}>
-            <h1 class="text-center font-bold">Zova</h1>
+            <h1 class="text-center font-bold">{this.sys.env.APP_TITLE}</h1>
             <h2 class="text-center" style={{ opacity: 0.4 }}>Less is more, while more is less</h2>
           </div>
         </div>

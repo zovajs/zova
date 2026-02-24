@@ -6,7 +6,7 @@ export class ControllerPageHome extends BeanControllerPageBase {
   public message: string;
 
   protected async __init__() {
-    this.message = 'Hello Zova';
+    this.message = this.sys.env.APP_TITLE!;
   }
 
   protected render() {
