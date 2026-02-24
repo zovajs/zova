@@ -89,10 +89,6 @@ export class ControllerForm<TFormData extends {} = {}, TSubmitMeta = never> exte
       if (deepEqual(newValue, oldValue)) return;
       this.reset(this.$props.data);
     });
-    this.$watch(() => this.formState.values, (newValue, oldValue) => {
-      if (!this.$props.onChanged || deepEqual(newValue, oldValue)) return;
-      this.$props.onChanged(newValue);
-    });
   }
 
   public async submit(submitMeta?: TSubmitMeta): Promise<boolean> {
@@ -117,6 +113,7 @@ export class ControllerForm<TFormData extends {} = {}, TSubmitMeta = never> exte
 
   public setFieldValue<K extends DeepKeys<TFormData>>(name: K, value: any) {
     this.form.setFieldValue(name, value);
+    this.$props.onChanged?.(this.formState.values);
   }
 
   public setFieldDisplayValue<K extends DeepKeys<TFormData>>(name: K, value: any, onSetDisplayValue?: TypeFormFieldOnSetDisplayValue) {
