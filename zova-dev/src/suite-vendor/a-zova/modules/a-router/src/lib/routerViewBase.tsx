@@ -1,4 +1,5 @@
 import type { RouteLocationNormalizedLoadedGeneric } from '@cabloy/vue-router';
+import type { IPageMeta } from '../types/pageMeta.js';
 import type { IRouterViewSlotParams, IRouteViewRouteMeta } from '../types/routerView.js';
 import { RouterView } from '@cabloy/vue-router';
 import { h, KeepAlive, Transition } from 'vue';
@@ -24,6 +25,8 @@ export class BeanRouterViewBase extends BeanControllerBase implements IRouterVie
   public forwardRoute(_route: RouteLocationNormalizedLoadedGeneric) {
     return false;
   }
+
+  public setPageMeta(_route: RouteLocationNormalizedLoadedGeneric, _pageMeta: IPageMeta) {}
 
   protected prepareRouteMeta(_route: RouteLocationNormalizedLoadedGeneric): IRouteViewRouteMeta {
     throw new Error('Not Implemented');

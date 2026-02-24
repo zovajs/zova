@@ -3,7 +3,7 @@ import { RouteLocationNormalizedLoaded, RouteLocationNormalizedLoadedGeneric } f
 import { mutate } from 'mutate-on-copy';
 import { deepEqual, deepExtend, TypeEventOff, useComputed } from 'zova';
 import { BeanModelBase, Model } from 'zova-module-a-model';
-import { IRouteViewRouteItem, IRouteViewRouteMeta } from 'zova-module-a-router';
+import { IPageMeta, IRouteViewRouteItem, IRouteViewRouteMeta } from 'zova-module-a-router';
 import { ModelTabsOptions, ModelTabsOptionsBase, RouteTab, RouteTabTransient } from '../types/tabs.js';
 
 export interface IModelOptionsTabs extends IDecoratorModelOptions, ModelTabsOptionsBase {}
@@ -17,7 +17,8 @@ export interface IModelOptionsTabs extends IDecoratorModelOptions, ModelTabsOpti
 export class ModelTabs extends BeanModelBase {
   tabsOptions: ModelTabsOptions;
   tabs: RouteTab[];
-  tabCurrentKey?: string;
+  componentKeyCurrent?: string;
+  tabKeyCurrent?: string;
   tabCurrentIndex: number;
   tabCurrent?: RouteTab;
   keepAliveInclude: string[];
@@ -30,25 +31,30 @@ export class ModelTabs extends BeanModelBase {
     this.tabsOptions = deepExtend({}, this.$onionOptions, options);
     // computed
     this.tabCurrentIndex = useComputed(() => {
-      const [index] = this.findTab(this.tabCurrentKey);
+      const [index] = this.findTab(this.tabKeyCurrent);
       return index;
     });
     this.tabCurrent = useComputed(() => {
-      const [, tab] = this.findTab(this.tabCurrentKey);
+      const [, tab] = this.findTab(this.tabKeyCurrent);
       return tab;
     });
     this.keepAliveInclude = useComputed(() => {
       return this._getKeepAliveInclude();
     });
-    // tabCurrentKey
-    const queryOptionsTabCurrentKey: UseQueryOptions<string> = {
-      queryKey: ['tabCurrentKey'],
+    // componentKeyCurrent
+    const queryOptionsComponentKeyCurrent: UseQueryOptions<string> = {
+      queryKey: ['componentKeyCurrent'],
     };
-    this.tabCurrentKey = this.$useStateMem(queryOptionsTabCurrentKey);
+    this.componentKeyCurrent = this.$useStateMem(queryOptionsComponentKeyCurrent);
+    // tabKeyCurrent
+    const queryOptionsTabKeyCurrent: UseQueryOptions<string> = {
+      queryKey: ['tabKeyCurrent'],
+    };
+    this.tabKeyCurrent = this.$useStateMem(queryOptionsTabKeyCurrent);
     // if (this.tabsOptions.cache) {
-    //   this.tabCurrentKey = this.$useStateDb(queryOptionsTabCurrentKey);
+    //   this.tabKeyCurrent = this.$useStateDb(queryOptionsTabKeyCurrent);
     // } else {
-    //   this.tabCurrentKey = this.$useStateMem(queryOptionsTabCurrentKey);
+    //   this.tabKeyCurrent = this.$useStateMem(queryOptionsTabKeyCurrent);
     // }
     // tabs
     const queryOptionsTabs: UseQueryOptions<RouteTab[]> = {
@@ -64,7 +70,7 @@ export class ModelTabs extends BeanModelBase {
     }
     // load cache
     if (this.tabsOptions.cache) {
-      // await this.$loadStateDb(this.tabCurrentKey);
+      // await this.$loadStateDb(this.tabKeyCurrent);
       await this.$loadStateDb(this.tabs);
     }
     // first route
@@ -100,7 +106,8 @@ export class ModelTabs extends BeanModelBase {
   addTab(tab: RouteTabTransient, affix?: boolean): boolean {
     const res = this._addTab(tab, affix);
     // current
-    this.tabCurrentKey = res ? tab.tabKey : undefined;
+    this.tabKeyCurrent = res ? tab.tabKey : undefined;
+    this.componentKeyCurrent = res ? tab.componentKey : undefined;
     return res;
   }
 
@@ -177,6 +184,29 @@ export class ModelTabs extends BeanModelBase {
     this.updateTab(tabNew);
   }
 
+  updateTabItemPageMeta(tabKey?: string, componentKey?: string, pageMeta?: IPageMeta) {
+    if (!tabKey || !componentKey) return false;
+    // tab
+    const [index, tab] = this.findTab(tabKey);
+    if (index === -1 || !tab) return false;
+    // tabItem
+    if (!tab.items) return false;
+    const indexItem = tab.items.findIndex(item => item.componentKey === componentKey);
+    if (indexItem === -1) return false;
+    const tabItem = tab.items[indexItem];
+    // change tab item
+    const pageMetaNew: IPageMeta = { ...tabItem.pageMeta, ...pageMeta };
+    const tabItemNew: IRouteViewRouteItem = { ...tabItem, pageMeta: pageMetaNew };
+    const items = mutate(tab.items, copyState => {
+      copyState.splice(indexItem, 1, tabItemNew);
+    });
+    const tabNew: RouteTab = { ...tab, items };
+    this.tabs = mutate(this.tabs, copyState => {
+      copyState.splice(index, 1, tabNew);
+    });
+    return true;
+  }
+
   async deleteTab(tabKey?: string, noActiveNext?: boolean) {
     if (!tabKey) return;
     // tabs
@@ -245,7 +275,7 @@ export class ModelTabs extends BeanModelBase {
     if (index === -1 || !tabOld) return;
     const items: IRouteViewRouteItem[] = tabOld.items ? ([] as IRouteViewRouteItem[]).concat(tabOld.items) : [];
     if (tab.componentKey) {
-      const tabItemNew: IRouteViewRouteItem = {
+      const tabItem: IRouteViewRouteItem = {
         componentKey: tab.componentKey,
         fullPath: tab.fullPath!,
         keepAlive: tab.keepAlive,
@@ -253,8 +283,9 @@ export class ModelTabs extends BeanModelBase {
       };
       const index = items.findIndex(item => item.componentKey === tab.componentKey);
       if (index === -1) {
-        items.push(tabItemNew);
+        items.push(tabItem);
       } else {
+        const tabItemNew: IRouteViewRouteItem = { ...items[index], ...tabItem };
         items.splice(index, 1, tabItemNew);
       }
       // not use fullPath, because fullPath has query string
@@ -278,10 +309,21 @@ export class ModelTabs extends BeanModelBase {
     if (!tab) return;
     // should not updateTab here
     // this.updateTab({ tabKey });
-    // this.tabCurrentKey = tabKey;
+    // this.tabKeyCurrent = tabKey;
     // first check tab.items?.[0]?.fullPath, because fullPath maybe has query string
     const tabItemFirst = tab.items?.[0];
     const path = tabItemFirst?.componentKey === tabKey ? tabItemFirst.fullPath : tabKey;
+    await this.$router.push(path);
+  }
+
+  async activeTabItem(tabKey?: string, componentKey?: string) {
+    if (!tabKey || !componentKey) return;
+    const [_, tab] = this.findTab(tabKey);
+    if (!tab) return;
+    const tabItem = tab.items?.find(item => item.componentKey === componentKey);
+    if (!tabItem) return;
+    //
+    const path = tabItem.fullPath;
     await this.$router.push(path);
   }
 
@@ -395,6 +437,11 @@ export class ModelTabs extends BeanModelBase {
   forwardRoute(route: RouteLocationNormalizedLoadedGeneric) {
     const routeMeta = this.prepareRouteMeta(route);
     this.addTab(routeMeta);
+  }
+
+  public setPageMeta(route: RouteLocationNormalizedLoadedGeneric, pageMeta: IPageMeta) {
+    const [tabKey, componentKey] = this.findTabItemByFullPath(route.fullPath);
+    this.updateTabItemPageMeta(tabKey, componentKey, pageMeta);
   }
 
   prepareRouteMeta(route: RouteLocationNormalizedLoadedGeneric): IRouteViewRouteMeta {
