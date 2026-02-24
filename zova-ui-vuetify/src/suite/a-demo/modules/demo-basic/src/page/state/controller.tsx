@@ -53,36 +53,7 @@ export class ControllerPageState extends BeanControllerPageBase {
             Switch
           </VBtn>
         </div>
-        <VDivider
-          color="primary"
-          opacity=".7"
-          thickness="12"
-          variant="double"
-          gradient
-        ></VDivider>
-        {this._renderAppModals()}
       </ZPage>
-    );
-  }
-
-  private _renderAppModals() {
-    return (
-      <VBtnGroup variant="outlined" divided>
-        <VBtn nativeOnClick={() => {
-          this.$appModal.alert({ type: 'error', text: 'This is a error test' });
-        }}
-        >
-          Alert
-        </VBtn>
-        <VBtn nativeOnClick={async () => {
-        // const res = await this.$performAction('start-actions:confirm', { text: 'Are you sure that you want to delete this one?' });
-          const res = await this.$appModal.confirm({ text: 'Are you sure that you want to delete this one?' });
-          this.$appModal.alert({ text: String(res) });
-        }}
-        >
-          Confirm
-        </VBtn>
-      </VBtnGroup>
     );
   }
 }

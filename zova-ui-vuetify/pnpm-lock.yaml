@@ -252,6 +252,9 @@ importers:
       zova-module-start-date:
         specifier: workspace:^
         version: link:src/suite/cabloy-start/modules/start-date
+      zova-module-start-demo:
+        specifier: workspace:^
+        version: link:src/suite/cabloy-start/modules/start-demo
       zova-module-start-form:
         specifier: workspace:^
         version: link:src/suite/cabloy-start/modules/start-form
@@ -1157,6 +1160,9 @@ importers:
       zova-module-start-date:
         specifier: ^5.0.0
         version: link:modules/start-date
+      zova-module-start-demo:
+        specifier: ^5.0.0
+        version: link:modules/start-demo
       zova-module-start-form:
         specifier: ^5.0.0
         version: link:modules/start-form
@@ -1177,6 +1183,8 @@ importers:
   src/suite/cabloy-start/modules/start-app: {}
 
   src/suite/cabloy-start/modules/start-date: {}
+
+  src/suite/cabloy-start/modules/start-demo: {}
 
   src/suite/cabloy-start/modules/start-form: {}
 
