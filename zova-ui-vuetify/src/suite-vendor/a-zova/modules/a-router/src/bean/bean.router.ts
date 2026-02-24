@@ -94,4 +94,8 @@ export class BeanRouter extends BeanBase {
     this._eventRouterGuards.push(fn);
     return fn;
   }
+
+  setPageMeta() {
+
+  }
 }

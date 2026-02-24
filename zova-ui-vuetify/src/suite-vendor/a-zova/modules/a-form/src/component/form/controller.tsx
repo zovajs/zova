@@ -33,6 +33,7 @@ export interface ControllerFormProps<TFormData extends {} = {}, TSubmitMeta = ne
   onSubmitInvalid?: TypeFormOnSubmitInvalid<TFormData, TSubmitMeta>;
   onSubmitData?: TypeFormOnSubmit<TFormData, TSubmitMeta>;
   onShowError?: TypeFormOnShowError<TFormData, TSubmitMeta>;
+  onChanged?: (data: TFormData) => void;
   slotDefault?: (form: ControllerForm<TFormData, TSubmitMeta>) => VNode;
   slotHeader?: (form: ControllerForm<TFormData, TSubmitMeta>) => VNode;
   slotBody?: (children: VNode, form: ControllerForm<TFormData, TSubmitMeta>) => VNode;
@@ -87,6 +88,10 @@ export class ControllerForm<TFormData extends {} = {}, TSubmitMeta = never> exte
     this.$watch(() => this.$props.data, (newValue, oldValue) => {
       if (deepEqual(newValue, oldValue)) return;
       this.reset(this.$props.data);
+    });
+    this.$watch(() => this.formState.values, (newValue, oldValue) => {
+      if (!this.$props.onChanged || deepEqual(newValue, oldValue)) return;
+      this.$props.onChanged(newValue);
     });
   }
 
