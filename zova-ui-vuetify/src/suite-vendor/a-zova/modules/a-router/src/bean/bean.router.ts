@@ -3,6 +3,7 @@ import { BeanBase, TypeEventOff, Use } from 'zova';
 import { Bean } from 'zova-module-a-bean';
 import { BeanRouterViewBase } from '../lib/routerViewBase.js';
 import { ModelPageData } from '../model/pageData.js';
+import { IPageMeta } from '../types/pageMeta.js';
 import { TypeErrorListener } from '../types/router.js';
 import { SysRouter } from './sys.router.js';
 
@@ -95,7 +96,9 @@ export class BeanRouter extends BeanBase {
     return fn;
   }
 
-  setPageMeta() {
-
+  setPageMeta(route: RouteLocationNormalizedLoadedGeneric, pageMeta: IPageMeta) {
+    for (const routerView of this._routerViews) {
+      routerView.setPageMeta(route, pageMeta);
+    }
   }
 }

@@ -3,7 +3,7 @@ import { RouteLocationNormalizedLoaded, RouteLocationNormalizedLoadedGeneric } f
 import { mutate } from 'mutate-on-copy';
 import { deepEqual, deepExtend, TypeEventOff, useComputed } from 'zova';
 import { BeanModelBase, Model } from 'zova-module-a-model';
-import { IRouteViewRouteItem, IRouteViewRouteMeta } from 'zova-module-a-router';
+import { IPageMeta, IRouteViewRouteItem, IRouteViewRouteMeta } from 'zova-module-a-router';
 import { ModelTabsOptions, ModelTabsOptionsBase, RouteTab, RouteTabTransient } from '../types/tabs.js';
 
 export interface IModelOptionsTabs extends IDecoratorModelOptions, ModelTabsOptionsBase {}
@@ -177,6 +177,28 @@ export class ModelTabs extends BeanModelBase {
     this.updateTab(tabNew);
   }
 
+  updateTabItemPageMeta(tabKey?: string, componentKey?: string, pageMeta?: IPageMeta) {
+    if (!tabKey || !componentKey) return false;
+    // tab
+    const [index, tab] = this.findTab(tabKey);
+    if (index === -1 || !tab) return false;
+    // tabItem
+    if (!tab.items) return false;
+    const indexItem = tab.items.findIndex(item => item.componentKey === componentKey);
+    if (indexItem === -1) return false;
+    const tabItem = tab.items[indexItem];
+    // change tab item
+    const tabItemNew: IRouteViewRouteItem = { ...tabItem, pageMeta };
+    const items = mutate(tab.items, copyState => {
+      copyState.splice(indexItem, 1, tabItemNew);
+    });
+    const tabNew: RouteTab = { ...tab, items };
+    this.tabs = mutate(this.tabs, copyState => {
+      copyState.splice(index, 1, tabNew);
+    });
+    return true;
+  }
+
   async deleteTab(tabKey?: string, noActiveNext?: boolean) {
     if (!tabKey) return;
     // tabs
@@ -245,7 +267,7 @@ export class ModelTabs extends BeanModelBase {
     if (index === -1 || !tabOld) return;
     const items: IRouteViewRouteItem[] = tabOld.items ? ([] as IRouteViewRouteItem[]).concat(tabOld.items) : [];
     if (tab.componentKey) {
-      const tabItemNew: IRouteViewRouteItem = {
+      const tabItem: IRouteViewRouteItem = {
         componentKey: tab.componentKey,
         fullPath: tab.fullPath!,
         keepAlive: tab.keepAlive,
@@ -253,8 +275,9 @@ export class ModelTabs extends BeanModelBase {
       };
       const index = items.findIndex(item => item.componentKey === tab.componentKey);
       if (index === -1) {
-        items.push(tabItemNew);
+        items.push(tabItem);
       } else {
+        const tabItemNew: IRouteViewRouteItem = { ...items[index], ...tabItem };
         items.splice(index, 1, tabItemNew);
       }
       // not use fullPath, because fullPath has query string
@@ -395,6 +418,11 @@ export class ModelTabs extends BeanModelBase {
   forwardRoute(route: RouteLocationNormalizedLoadedGeneric) {
     const routeMeta = this.prepareRouteMeta(route);
     this.addTab(routeMeta);
+  }
+
+  public setPageMeta(route: RouteLocationNormalizedLoadedGeneric, pageMeta: IPageMeta) {
+    const [tabKey, componentKey] = this.findTabItemByFullPath(route.fullPath);
+    this.updateTabItemPageMeta(tabKey, componentKey, pageMeta);
   }
 
   prepareRouteMeta(route: RouteLocationNormalizedLoadedGeneric): IRouteViewRouteMeta {
