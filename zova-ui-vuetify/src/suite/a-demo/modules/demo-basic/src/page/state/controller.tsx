@@ -1,4 +1,4 @@
-import { VBtn, VDivider, VIcon } from 'vuetify/components';
+import { VBtn, VBtnGroup, VDivider, VIcon } from 'vuetify/components';
 import { BeanControllerPageBase, useComputed } from 'zova';
 import { Controller } from 'zova-module-a-bean';
 import { IIconRecord } from 'zova-module-a-icon';
@@ -29,12 +29,14 @@ export class ControllerPageState extends BeanControllerPageBase {
       <ZPage>
         <div>{`count(ref): ${this.count}`}</div>
         <div>{`count(computed): ${this.count2}`}</div>
-        <VBtn color="primary" nativeOnClick={() => this.increment()}>
-          Increment
-        </VBtn>
-        <VBtn color="secondary" nativeOnClick={() => this.decrement()}>
-          Decrement
-        </VBtn>
+        <VBtnGroup variant="elevated">
+          <VBtn color="primary" nativeOnClick={() => this.increment()}>
+            Increment
+          </VBtn>
+          <VBtn color="secondary" nativeOnClick={() => this.decrement()}>
+            Decrement
+          </VBtn>
+        </VBtnGroup>
         <VDivider
           color="primary"
           opacity=".7"
@@ -58,6 +60,14 @@ export class ControllerPageState extends BeanControllerPageBase {
           variant="double"
           gradient
         ></VDivider>
+        {this._renderAppModals()}
+      </ZPage>
+    );
+  }
+
+  private _renderAppModals() {
+    return (
+      <VBtnGroup variant="outlined" divided>
         <VBtn nativeOnClick={() => {
           this.$appModal.alert({ type: 'error', text: 'This is a error test' });
         }}
@@ -65,14 +75,14 @@ export class ControllerPageState extends BeanControllerPageBase {
           Alert
         </VBtn>
         <VBtn nativeOnClick={async () => {
-          // const res = await this.$performAction('start-actions:confirm', { text: 'Are you sure that you want to delete this one?' });
+        // const res = await this.$performAction('start-actions:confirm', { text: 'Are you sure that you want to delete this one?' });
           const res = await this.$appModal.confirm({ text: 'Are you sure that you want to delete this one?' });
           this.$appModal.alert({ text: String(res) });
         }}
         >
           Confirm
         </VBtn>
-      </ZPage>
+      </VBtnGroup>
     );
   }
 }
