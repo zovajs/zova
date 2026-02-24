@@ -16,13 +16,14 @@ export class RenderTabs extends BeanRenderBase {
       const { tabKey, info } = tab;
       const className = tabKey === $$modelTabs.tabKeyCurrent ? 'text-primary' : '';
       const titleLocal = this.$text(info?.title || '');
+      const tabIcon = this.getTabIcon(tab);
       const domTabContent = tab.affix
         ? titleLocal
         : (
             <VBadge
               class="hidden"
               color="surface"
-              offsetX={-10}
+              offsetX={tabIcon ? 2 : -10}
               offsetY={-8}
               v-slots={{
                 badge: () => (
