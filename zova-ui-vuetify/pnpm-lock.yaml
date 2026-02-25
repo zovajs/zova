@@ -267,6 +267,9 @@ importers:
       zova-module-start-table:
         specifier: workspace:^
         version: link:src/suite/cabloy-start/modules/start-table
+      zova-module-start-toggle:
+        specifier: workspace:^
+        version: link:src/suite/cabloy-start/modules/start-toggle
       zova-module-vuetify-adapter:
         specifier: workspace:^
         version: link:src/suite-vendor/a-vuetify/modules/vuetify-adapter
@@ -1178,6 +1181,9 @@ importers:
       zova-module-start-table:
         specifier: ^5.0.0
         version: link:modules/start-table
+      zova-module-start-toggle:
+        specifier: ^5.0.0
+        version: link:modules/start-toggle
       zova-suite-a-cabloy:
         specifier: ^5.0.0
         version: link:../../suite-vendor/a-cabloy
@@ -1199,6 +1205,8 @@ importers:
   src/suite/cabloy-start/modules/start-restpage: {}
 
   src/suite/cabloy-start/modules/start-table: {}
+
+  src/suite/cabloy-start/modules/start-toggle: {}
 
 packages:
 
