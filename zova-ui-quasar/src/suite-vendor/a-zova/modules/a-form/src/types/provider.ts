@@ -16,6 +16,7 @@ export interface IFormProviderComponents {
   currency?: TypeFormFieldRenderComponentProvider;
   date?: TypeFormFieldRenderComponentProvider;
   dateRange?: TypeFormFieldRenderComponentProvider;
+  toggle?: TypeFormFieldRenderComponentProvider;
 }
 
 export interface IFormProvider {

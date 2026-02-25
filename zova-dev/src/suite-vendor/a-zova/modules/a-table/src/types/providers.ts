@@ -8,6 +8,7 @@ export interface ITableProviderComponents {
   currency?: TypeTableCellRenderComponentProvider;
   date?: TypeTableCellRenderComponentProvider;
   dateRange?: TypeTableCellRenderComponentProvider;
+  toggle?: TypeTableCellRenderComponentProvider;
 }
 
 export interface ITableProvider {
