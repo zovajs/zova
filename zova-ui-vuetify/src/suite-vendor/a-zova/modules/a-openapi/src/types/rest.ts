@@ -5,6 +5,7 @@ import type { TypeRenderComponentJsx } from 'zova-jsx';
 import type { TypeResourceActionRowRecordRender } from './actions.js';
 import type { ICaptchaOptions } from './captcha.js';
 import type { TypeDateFormat } from './date.js';
+import type { IToggleOptions } from './toggle.js';
 import 'openapi3-ts/oas30';
 import 'openapi3-ts/oas31';
 
@@ -13,6 +14,7 @@ export interface ISchemaObjectExtensionFieldRest {
   captcha?: ICaptchaOptions;
   currency?: CurrencyOptions;
   dateFormat?: TypeDateFormat;
+  toggle?: IToggleOptions;
   visible?: boolean;
   displayValue?: any;
   order?: number;
