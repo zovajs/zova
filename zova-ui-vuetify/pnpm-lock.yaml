@@ -249,6 +249,9 @@ importers:
       zova-module-start-app:
         specifier: workspace:^
         version: link:src/suite/cabloy-start/modules/start-app
+      zova-module-start-captcha:
+        specifier: workspace:^
+        version: link:src/suite/cabloy-start/modules/start-captcha
       zova-module-start-date:
         specifier: workspace:^
         version: link:src/suite/cabloy-start/modules/start-date
@@ -1163,6 +1166,9 @@ importers:
       zova-module-start-app:
         specifier: ^5.0.0
         version: link:modules/start-app
+      zova-module-start-captcha:
+        specifier: ^5.0.0
+        version: link:modules/start-captcha
       zova-module-start-date:
         specifier: ^5.0.0
         version: link:modules/start-date
@@ -1193,6 +1199,8 @@ importers:
   src/suite/cabloy-start/modules/start-adapter: {}
 
   src/suite/cabloy-start/modules/start-app: {}
+
+  src/suite/cabloy-start/modules/start-captcha: {}
 
   src/suite/cabloy-start/modules/start-date: {}
 
