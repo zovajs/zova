@@ -4,15 +4,15 @@ export * from '../component/formFieldCaptcha/controller.jsx';
 
 import 'zova';
 declare module 'zova' {
-  
-  
+
+
 }
 declare module 'zova-module-vuetify-form' {
-  
+
         export interface ControllerFormFieldCaptcha {
           /** @internal */
           get scope(): ScopeModuleVuetifyForm;
-        } 
+        }
 }
 /** controller: end */
 /** controller: begin */
@@ -48,16 +48,16 @@ import { IBehaviorOptionsFormField } from '../bean/behavior.formField.jsx';
 import { IBehaviorOptionsFormFieldLayout } from '../bean/behavior.formFieldLayout.js';
 import 'zova-module-a-behavior';
 declare module 'zova-module-a-behavior' {
-  
+
     export interface IBehaviorRecord {
       'vuetify-form:formField': IBehaviorOptionsFormField;
 'vuetify-form:formFieldLayout': IBehaviorOptionsFormFieldLayout;
     }
 
-  
+
 }
 declare module 'zova-module-vuetify-form' {
-  
+
         export interface BehaviorFormField {
           /** @internal */
           get scope(): ScopeModuleVuetifyForm;
@@ -78,7 +78,7 @@ declare module 'zova-module-vuetify-form' {
           get $beanFullName(): 'vuetify-form.behavior.formFieldLayout';
           get $onionName(): 'vuetify-form:formFieldLayout';
           get $onionOptions(): IBehaviorOptionsFormFieldLayout;
-        } 
+        }
 }
 /** behavior: end */
 /** behavior: begin */
@@ -133,17 +133,17 @@ declare module 'zova' {
   export interface IBeanScopeRecord {
     'vuetify-form': ScopeModuleVuetifyForm;
   }
-  
-  
+
+
 
   export interface IBeanScopeLocale {
     'vuetify-form': (typeof locales)[TypeLocaleBase];
   }
 
-  
+
 }
 
 export function locale<K extends keyof (typeof locales)[TypeLocaleBase]>(key: K): `vuetify-form::${K}` {
   return `vuetify-form::${key}`;
-}  
+}
 /** scope: end */
