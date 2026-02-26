@@ -267,6 +267,9 @@ importers:
       zova-module-start-restpage:
         specifier: workspace:^
         version: link:src/suite/cabloy-start/modules/start-restpage
+      zova-module-start-select:
+        specifier: workspace:^
+        version: link:src/suite/cabloy-start/modules/start-select
       zova-module-start-table:
         specifier: workspace:^
         version: link:src/suite/cabloy-start/modules/start-table
@@ -1184,6 +1187,9 @@ importers:
       zova-module-start-restpage:
         specifier: ^5.0.0
         version: link:modules/start-restpage
+      zova-module-start-select:
+        specifier: ^5.0.0
+        version: link:modules/start-select
       zova-module-start-table:
         specifier: ^5.0.0
         version: link:modules/start-table
@@ -1211,6 +1217,8 @@ importers:
   src/suite/cabloy-start/modules/start-layout: {}
 
   src/suite/cabloy-start/modules/start-restpage: {}
+
+  src/suite/cabloy-start/modules/start-select: {}
 
   src/suite/cabloy-start/modules/start-table: {}
 

@@ -9,6 +9,7 @@ export interface ITableProviderComponents {
   date?: TypeTableCellRenderComponentProvider;
   dateRange?: TypeTableCellRenderComponentProvider;
   toggle?: TypeTableCellRenderComponentProvider;
+  select?: TypeTableCellRenderComponentProvider;
 }
 
 export interface ITableProvider {
