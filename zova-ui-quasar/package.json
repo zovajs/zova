@@ -102,7 +102,7 @@
     "typestyle": "^2.4.0",
     "@tanstack/table-core": "^8.21.3",
     "@tanstack/vue-table": "^8.21.3",
-    "@cabloy/zod-openapi": "^1.0.9",
+    "@cabloy/zod-openapi": "^1.0.10",
     "zod": "^4.1.5",
     "@cabloy/compose": "^2.0.4",
     "@cabloy/deps": "^1.0.9",
