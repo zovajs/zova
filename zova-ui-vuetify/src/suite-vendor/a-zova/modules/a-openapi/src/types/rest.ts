@@ -17,6 +17,7 @@ export interface ISchemaObjectExtensionFieldRest {
   dateFormat?: TypeDateFormat;
   toggle?: IToggleOptions;
   select?: ISelectOptions;
+  customKey?: string;
   visible?: boolean;
   displayValue?: any;
   order?: number;

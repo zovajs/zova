@@ -211,12 +211,19 @@ export class ModelSdk extends BeanModelBase {
     const properties = schema.properties!;
     const result: SchemaObject[] = [];
     // filter
-    for (const key in properties) {
+    for (let key in properties) {
       let property = properties[key] as SchemaObject;
       if (property.$ref) {
         property = this.getSchema(property.$ref).data!;
       }
       if (!property) continue;
+      const customKey = property.rest?.customKey;
+      if (customKey) {
+        const parts = customKey.split('.');
+        const propertyParent: any = parts[0] === key ? property : result.find(item => item.key === parts[0]);
+        property = propertyParent.properties[parts[1]];
+        key = customKey;
+      }
       property = deepExtend({ key }, property, { rest: property.rest?.[scene] ?? {} });
       result.push(property);
     }

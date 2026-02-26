@@ -43,8 +43,8 @@ importers:
         specifier: ^2.0.2
         version: link:packages-utils/word-utils
       '@cabloy/zod-openapi':
-        specifier: ^1.0.9
-        version: 1.0.9(zod@4.3.6)
+        specifier: ^1.0.10
+        version: 1.0.10(zod@4.3.6)
       '@date-io/luxon':
         specifier: ^3.2.0
         version: 3.2.0(luxon@3.7.2)
@@ -750,8 +750,8 @@ importers:
         specifier: ^2.0.3
         version: 2.0.6
       '@cabloy/zod-openapi':
-        specifier: ^1.0.9
-        version: 1.0.9(zod@4.3.6)
+        specifier: ^1.0.10
+        version: 1.0.10(zod@4.3.6)
       '@cabloy/zod-query':
         specifier: ^2.0.3
         version: 2.0.4
@@ -1057,8 +1057,8 @@ importers:
         specifier: ^2.0.3
         version: 2.0.6
       '@cabloy/zod-openapi':
-        specifier: ^1.0.9
-        version: 1.0.9(zod@4.3.6)
+        specifier: ^1.0.10
+        version: 1.0.10(zod@4.3.6)
       '@cabloy/zod-query':
         specifier: ^2.0.3
         version: 2.0.4
@@ -1551,8 +1551,8 @@ packages:
   '@cabloy/zod-errors-custom@2.0.6':
     resolution: {integrity: sha512-54ONYDjVDqkRJEG0ifqKAtxbjPGgItyhWsdcQB0NSzj5sYBsFITx1rOMPc23zaRP/rLd0qHs5BcJfMDjFxJeXA==}
 
-  '@cabloy/zod-openapi@1.0.9':
-    resolution: {integrity: sha512-nw252bzz3B5qR6D8a/lSjJ6wCfPUhsFWqIwdqM7KKYZ5gGVEolRqpXGp8L+HVkS08EqaJFffuktiwVWJFSETMw==}
+  '@cabloy/zod-openapi@1.0.10':
+    resolution: {integrity: sha512-y0iKLxZGOHC/ffIRRO4ARROEnUnhtRxG0PLguYJppZyTwmZiG0XjBOosf9n6jcOa/xTqPvd/0d5f6uY3jyNv4g==}
 
   '@cabloy/zod-query@2.0.4':
     resolution: {integrity: sha512-JfuBnmUvEsGgw/vpeMQFple4xfhQDX4u63EG54mbKgWJxxwuC22Qpl6KcjYdSfXxY0agQ+UBvw7Ue5j+AyH4ug==}
@@ -6922,7 +6922,7 @@ snapshots:
     dependencies:
       '@cabloy/word-utils': link:packages-utils/word-utils
 
-  '@cabloy/zod-openapi@1.0.9(zod@4.3.6)':
+  '@cabloy/zod-openapi@1.0.10(zod@4.3.6)':
     dependencies:
       '@cabloy/zod-to-openapi': 8.1.5(zod@4.3.6)
     transitivePeerDependencies:
