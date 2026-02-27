@@ -31,7 +31,17 @@
     "prerun": "npm run zova :tools:deps && npm run tsc",
     "tsc": "tsc --noEmit --project tsconfig.vue-tsc.json",
     "lint": "eslint",
-    "lint:fix": "eslint --fix"
+    "lint:fix": "eslint --fix",
+    "dev:ssr:cabloyStoreAdmin": "npm run prerun && quasar dev --mode ssr --flavor cabloyStoreAdmin",
+    "build:ssr:cabloyStoreAdmin": "npm run prerun && quasar build --mode ssr --flavor cabloyStoreAdmin",
+    "build:rest:cabloyStoreAdmin": "npm run prerun && npm run zova :bin:buildRest -- --flavor cabloyStoreAdmin",
+    "preview:ssr:cabloyStoreAdmin": "concurrently \"node ./dist-mock/index.js\" \"node ./dist/ssr-cabloyStoreAdmin/index.js\"",
+    "dev:spa:cabloyStoreAdmin": "npm run prerun && quasar dev --mode spa --flavor cabloyStoreAdmin",
+    "dev:ssr:cabloyStoreFront": "npm run prerun && quasar dev --mode ssr --flavor cabloyStoreFront",
+    "build:ssr:cabloyStoreFront": "npm run prerun && quasar build --mode ssr --flavor cabloyStoreFront",
+    "build:rest:cabloyStoreFront": "npm run prerun && npm run zova :bin:buildRest -- --flavor cabloyStoreFront",
+    "preview:ssr:cabloyStoreFront": "concurrently \"node ./dist-mock/index.js\" \"node ./dist/ssr-cabloyStoreFront/index.js\"",
+    "dev:spa:cabloyStoreFront": "npm run prerun && quasar dev --mode spa --flavor cabloyStoreFront"
   },
   "keywords": [
     "vue3",
