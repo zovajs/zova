@@ -101,6 +101,8 @@
     "zova-module-start-table": "workspace:^",
     "zova-module-start-textarea": "workspace:^",
     "zova-module-start-toggle": "workspace:^",
+    "zova-module-cabloy-store": "workspace:^",
+    "zova-module-store-layout": "workspace:^",
     "zova-module-rest-actions": "workspace:^",
     "zova-module-rest-resource": "workspace:^",
     "zova-module-vuetify-form": "workspace:^",

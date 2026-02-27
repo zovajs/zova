@@ -210,6 +210,9 @@ importers:
       zova-module-a-zova:
         specifier: workspace:^
         version: link:src/suite-vendor/a-zova/modules/a-zova
+      zova-module-cabloy-store:
+        specifier: workspace:^
+        version: link:src/suite/cabloy-store/modules/cabloy-store
       zova-module-demo-basic:
         specifier: workspace:^
         version: link:src/suite/a-demo/modules/demo-basic
@@ -279,6 +282,9 @@ importers:
       zova-module-start-toggle:
         specifier: workspace:^
         version: link:src/suite/cabloy-start/modules/start-toggle
+      zova-module-store-layout:
+        specifier: workspace:^
+        version: link:src/suite/cabloy-store/modules/store-layout
       zova-module-vuetify-adapter:
         specifier: workspace:^
         version: link:src/suite-vendor/a-vuetify/modules/vuetify-adapter
@@ -1231,6 +1237,19 @@ importers:
   src/suite/cabloy-start/modules/start-textarea: {}
 
   src/suite/cabloy-start/modules/start-toggle: {}
+
+  src/suite/cabloy-store:
+    dependencies:
+      zova-module-cabloy-store:
+        specifier: ^5.0.0
+        version: link:modules/cabloy-store
+      zova-module-store-layout:
+        specifier: ^5.0.0
+        version: link:modules/store-layout
+
+  src/suite/cabloy-store/modules/cabloy-store: {}
+
+  src/suite/cabloy-store/modules/store-layout: {}
 
 packages:
 
