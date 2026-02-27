@@ -10,6 +10,7 @@ export interface ITableProviderComponents {
   dateRange?: TypeTableCellRenderComponentProvider;
   toggle?: TypeTableCellRenderComponentProvider;
   select?: TypeTableCellRenderComponentProvider;
+  textarea?: TypeTableCellRenderComponentProvider;
 }
 
 export interface ITableProvider {

@@ -18,6 +18,7 @@ export interface IFormProviderComponents {
   dateRange?: TypeFormFieldRenderComponentProvider;
   toggle?: TypeFormFieldRenderComponentProvider;
   select?: TypeFormFieldRenderComponentProvider;
+  textarea?: TypeFormFieldRenderComponentProvider;
 }
 
 export interface IFormProvider {
