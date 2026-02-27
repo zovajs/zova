@@ -201,7 +201,11 @@ export class ModelSdk extends BeanModelBase {
           return self.getSchema(schemaName).data;
         }
         // pages
-        return cast(schemaData?.properties?.list)?.items;
+        const schemaRow = cast(schemaData?.properties?.list)?.items;
+        if (schemaRow?.$ref) {
+          return self.getSchema(schemaRow?.$ref).data;
+        }
+        return schemaRow;
       },
     };
   }
@@ -221,9 +225,10 @@ export class ModelSdk extends BeanModelBase {
       if (customKey) {
         const parts = customKey.split('.');
         const propertyParent: any = parts[0] === key ? property : result.find(item => item.key === parts[0]);
-        property = propertyParent.properties[parts[1]];
+        property = propertyParent?.properties[parts[1]];
         key = customKey;
       }
+      if (!property) continue;
       property = deepExtend({ key }, property, { rest: property.rest?.[scene] ?? {} });
       result.push(property);
     }
