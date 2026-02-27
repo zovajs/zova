@@ -6,5 +6,5 @@ export interface ITextareaOptions {
   rows?: number;
   color?: string;
   bgColor?: string;
-  counter?: boolean;
+  counter?: string | number | true;
 }
