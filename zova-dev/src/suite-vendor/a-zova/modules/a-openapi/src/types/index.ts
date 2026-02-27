@@ -9,4 +9,5 @@ export * from './resourceMeta.js';
 export * from './rest.js';
 export * from './schema.js';
 export * from './sdk.js';
+export * from './select.js';
 export * from './toggle.js';
