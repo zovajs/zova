@@ -1,4 +1,5 @@
 import type { ZovaMetaAppMode, ZovaMetaFlavor, ZovaMetaMode } from '@cabloy/module-info';
+import type { TypeComponentLayoutRecord } from '../../bean/resource/component/type.js';
 
 export interface ZovaConfigEnv {
   APP_NAME: string | undefined;
@@ -12,6 +13,8 @@ export interface ZovaConfigEnv {
   APP_TZ_HEADER_KEY: string | undefined;
   DEV_SERVER_HOSTNAME: string | undefined;
   DEV_SERVER_PORT: string | undefined;
+  LAYOUT_COMPONENT_EMPTY: keyof TypeComponentLayoutRecord | undefined;
+  LAYOUT_COMPONENT_DEFAULT: keyof TypeComponentLayoutRecord | undefined;
   SSR_API_BASE_URL: string | undefined;
   API_BASE_URL: string | undefined;
   API_PREFIX: string | undefined;
