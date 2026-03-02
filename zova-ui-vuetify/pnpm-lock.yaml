@@ -282,6 +282,9 @@ importers:
       zova-module-start-toggle:
         specifier: workspace:^
         version: link:src/suite/cabloy-start/modules/start-toggle
+      zova-module-store-index:
+        specifier: workspace:^
+        version: link:src/suite/cabloy-store/modules/store-index
       zova-module-store-layout:
         specifier: workspace:^
         version: link:src/suite/cabloy-store/modules/store-layout
@@ -1243,11 +1246,16 @@ importers:
       zova-module-cabloy-store:
         specifier: ^5.0.0
         version: link:modules/cabloy-store
+      zova-module-store-index:
+        specifier: ^5.0.0
+        version: link:modules/store-index
       zova-module-store-layout:
         specifier: ^5.0.0
         version: link:modules/store-layout
 
   src/suite/cabloy-store/modules/cabloy-store: {}
+
+  src/suite/cabloy-store/modules/store-index: {}
 
   src/suite/cabloy-store/modules/store-layout: {}
 
