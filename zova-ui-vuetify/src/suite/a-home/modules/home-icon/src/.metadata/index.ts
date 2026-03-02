@@ -162,7 +162,6 @@ export interface IIconRecord {
     '::visibility': true;
     '::zoom-in': true;
     '::zoom-out': true;
-    '::zova': true;
     ':editor:add-box-outline': true;
     ':editor:add-box': true;
     ':editor:bookmark-outline': true;
@@ -258,6 +257,7 @@ export interface IIconRecord {
     ':role:role': true;
     ':role:shield-key': true;
     ':role:template': true;
+    ':social:cabloy': true;
     ':social:chat': true;
     ':social:facebook': true;
     ':social:github': true;
@@ -265,6 +265,8 @@ export interface IIconRecord {
     ':social:record-voice-over': true;
     ':social:school': true;
     ':social:twitter': true;
+    ':social:vona': true;
+    ':social:zova': true;
     ':tools:pomotodo': true;
     ':tools:spreadsheet': true;
 }
