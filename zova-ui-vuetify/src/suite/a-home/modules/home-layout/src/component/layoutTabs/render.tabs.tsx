@@ -15,10 +15,10 @@ export class RenderTabs extends BeanRenderBase {
     for (const tab of $$modelTabs.tabs) {
       const { tabKey, info } = tab;
       const className = tabKey === $$modelTabs.tabKeyCurrent ? 'text-primary' : '';
-      const titleLocal = this.$text(info?.title || '');
+      const titleLocale = this.$text(info?.title || '');
       const tabIcon = this.getTabIcon(tab);
       const domTabContent = tab.affix
-        ? titleLocal
+        ? titleLocale
         : (
             <VBadge
               class="hidden"
@@ -39,7 +39,7 @@ export class RenderTabs extends BeanRenderBase {
                 ),
               }}
             >
-              {titleLocal}
+              {titleLocale}
             </VBadge>
           );
       const domTab = (

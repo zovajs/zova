@@ -13,8 +13,8 @@ export class RenderTabs extends BeanRenderBase {
     const domTabs: VNode[] = [];
     for (const tab of $$modelTabs.tabs) {
       const { tabKey, info } = tab;
-      const className = tabKey === $$modelTabs.tabCurrentKey ? 'tab tab-active text-primary' : 'tab';
-      const titleLocal = this.$text(info?.title || '');
+      const className = tabKey === $$modelTabs.tabKeyCurrent ? 'tab tab-active text-primary' : 'tab';
+      const titleLocale = this.$text(info?.title || '');
       const domTab = (
         <a
           key={tabKey}
@@ -25,7 +25,7 @@ export class RenderTabs extends BeanRenderBase {
           }}
         >
           {!!info?.icon && <ZIcon name={info?.icon as any} width="24" height="24"></ZIcon>}
-          {titleLocal}
+          {titleLocale}
           {!tab.affix && (
             <ZIcon
               class="tab-close hidden hover:bg-slate-400 rounded-sm"
