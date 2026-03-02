@@ -212,11 +212,13 @@ export class SysRouter extends BeanBase {
     const routesPath = this.sys.config.routes.path;
     for (const key in routesPath) {
       const route = routesPath[key];
+      if (!route) continue;
       this._loadConfigRoute({ ...route, path: key, name: `$:${key}` });
     }
     const routesName = this.sys.config.routes.name;
     for (const key in routesName) {
       const route = routesName[key];
+      if (!route) continue;
       this._loadConfigRoute({ ...route, path: route.path || (route.alias as string), name: key });
     }
   }

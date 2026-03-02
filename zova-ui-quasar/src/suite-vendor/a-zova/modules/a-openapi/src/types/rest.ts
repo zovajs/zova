@@ -6,6 +6,7 @@ import type { TypeResourceActionRowRecordRender } from './actions.js';
 import type { ICaptchaOptions } from './captcha.js';
 import type { TypeDateFormat } from './date.js';
 import type { ISelectOptions } from './select.js';
+import type { ITextareaOptions } from './textarea.js';
 import type { IToggleOptions } from './toggle.js';
 import 'openapi3-ts/oas30';
 import 'openapi3-ts/oas31';
@@ -17,6 +18,7 @@ export interface ISchemaObjectExtensionFieldRest {
   dateFormat?: TypeDateFormat;
   toggle?: IToggleOptions;
   select?: ISelectOptions;
+  textarea?: ITextareaOptions;
   customKey?: string;
   visible?: boolean;
   displayValue?: any;
