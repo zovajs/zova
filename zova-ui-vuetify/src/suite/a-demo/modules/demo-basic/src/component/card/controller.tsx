@@ -1,4 +1,4 @@
-import { VBtn } from 'vuetify/components/VBtn';
+import { VBtn } from 'vuetify/components';
 import { BeanControllerBase, ISlot } from 'zova';
 import { Controller } from 'zova-module-a-bean';
 

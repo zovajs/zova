@@ -1,6 +1,6 @@
-import { VBtn } from 'vuetify/components/VBtn';
-import { VRadio } from 'vuetify/components/VRadio';
-import { VRadioGroup } from 'vuetify/components/VRadioGroup';
+import { VBtn } from 'vuetify/components';
+import { VRadio } from 'vuetify/components';
+import { VRadioGroup } from 'vuetify/components';
 import { BeanControllerPageBase, useComputed } from 'zova';
 import { Controller } from 'zova-module-a-bean';
 import { $getThemeName } from 'zova-module-a-style';

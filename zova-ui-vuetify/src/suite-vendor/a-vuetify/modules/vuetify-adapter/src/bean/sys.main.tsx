@@ -1,5 +1,5 @@
 import { computed, CSSProperties, inject, Ref } from 'vue';
-import { VMain } from 'vuetify/components/VMain';
+import { VMain } from 'vuetify/components';
 import { useDimension } from 'vuetify/lib/composables/dimensions.mjs';
 import { useLayout } from 'vuetify/lib/composables/layout.mjs';
 import { useSsrBoot } from 'vuetify/lib/composables/ssrBoot.mjs';

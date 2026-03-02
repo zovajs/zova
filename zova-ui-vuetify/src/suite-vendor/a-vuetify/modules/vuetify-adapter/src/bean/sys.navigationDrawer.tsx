@@ -2,7 +2,7 @@ import { useRouter } from '@cabloy/vue-router';
 import { computed, CSSProperties, inject, nextTick, readonly, Ref, ref, shallowRef, toRef, Transition, watch } from 'vue';
 import { useDisplay, useRtl } from 'vuetify';
 import { VDefaultsProvider, VImg } from 'vuetify/components';
-import { VNavigationDrawer } from 'vuetify/components/VNavigationDrawer';
+import { VNavigationDrawer } from 'vuetify/components';
 import { useSticky } from 'vuetify/lib/components/VNavigationDrawer/sticky.mjs';
 import { useTouch } from 'vuetify/lib/components/VNavigationDrawer/touch.mjs';
 import { useBorder } from 'vuetify/lib/composables/border.mjs';

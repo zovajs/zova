@@ -1,5 +1,5 @@
-import { VApp } from 'vuetify/components/VApp';
-import { VMain } from 'vuetify/components/VMain';
+import { VApp } from 'vuetify/components';
+import { VMain } from 'vuetify/components';
 import { BeanRenderBase, Use } from 'zova';
 import { Render } from 'zova-module-a-bean';
 import { RenderContent } from './render.content.jsx';

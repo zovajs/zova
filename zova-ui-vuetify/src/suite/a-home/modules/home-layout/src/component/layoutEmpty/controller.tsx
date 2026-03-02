@@ -1,5 +1,5 @@
-import { VApp } from 'vuetify/components/VApp';
-import { VMain } from 'vuetify/components/VMain';
+import { VApp } from 'vuetify/components';
+import { VMain } from 'vuetify/components';
 import { BeanControllerBase, Use } from 'zova';
 import { Controller } from 'zova-module-a-bean';
 import { ZRouterViewEmpty } from 'zova-module-a-router';

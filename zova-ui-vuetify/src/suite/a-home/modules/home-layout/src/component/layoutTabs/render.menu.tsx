@@ -1,6 +1,6 @@
 import type { VNode } from 'vue';
-import { VDivider } from 'vuetify/components/VDivider';
-import { VList, VListSubheader } from 'vuetify/components/VList';
+import { VDivider } from 'vuetify/components';
+import { VList, VListSubheader } from 'vuetify/components';
 import { BeanRenderBase } from 'zova';
 import { Render } from 'zova-module-a-bean';
 import { TypeMenuItem, TypeMenuTree, ZItemLink } from '../../.metadata/index.js';

@@ -1,5 +1,5 @@
-import { VIcon } from 'vuetify/components/VIcon';
-import { VListItem, VListItemTitle } from 'vuetify/components/VList';
+import { VIcon } from 'vuetify/components';
+import { VListItem, VListItemTitle } from 'vuetify/components';
 import { BeanControllerBase } from 'zova';
 import { Controller } from 'zova-module-a-bean';
 import { IIconRecord } from 'zova-module-a-icon';
