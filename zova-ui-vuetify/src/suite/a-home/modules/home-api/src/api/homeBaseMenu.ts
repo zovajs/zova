@@ -19,7 +19,7 @@ export class ApiHomeBaseMenu extends BeanApiBase {
   ) {
     return this.$fetch.get<any, ApiApiHomeBaseMenuretrieveMenusResponseBody>(
       this.$pathTranslate(ApiApiHomeBaseMenuretrieveMenusPath, options.params),
-      this.$configPrepare(OpenApiBaseURL(this.sys), options, true),
+      this.$configPrepare(OpenApiBaseURL(this.sys), options),
     );
   }
 }

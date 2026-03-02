@@ -239,102 +239,6 @@ export interface paths {
     patch?: never;
     trace?: never;
   };
-  '/api/demo/student/book': {
-    parameters: {
-      query?: never;
-      header?: never;
-      path?: never;
-      cookie?: never;
-    };
-    get: operations['DemoStudentBook_select'];
-    put?: never;
-    post: operations['DemoStudentBook_create'];
-    delete?: never;
-    options?: never;
-    head?: never;
-    patch?: never;
-    trace?: never;
-  };
-  '/api/demo/student/book/{id}': {
-    parameters: {
-      query?: never;
-      header?: never;
-      path?: never;
-      cookie?: never;
-    };
-    get: operations['DemoStudentBook_view'];
-    put?: never;
-    post?: never;
-    delete: operations['DemoStudentBook_delete'];
-    options?: never;
-    head?: never;
-    patch: operations['DemoStudentBook_update'];
-    trace?: never;
-  };
-  '/api/demo/student': {
-    parameters: {
-      query?: never;
-      header?: never;
-      path?: never;
-      cookie?: never;
-    };
-    get: operations['DemoStudent_select'];
-    put?: never;
-    post: operations['DemoStudent_create'];
-    delete?: never;
-    options?: never;
-    head?: never;
-    patch?: never;
-    trace?: never;
-  };
-  '/api/demo/student/{id}': {
-    parameters: {
-      query?: never;
-      header?: never;
-      path?: never;
-      cookie?: never;
-    };
-    get: operations['DemoStudent_view'];
-    put?: never;
-    post?: never;
-    delete: operations['DemoStudent_delete'];
-    options?: never;
-    head?: never;
-    patch: operations['DemoStudent_update'];
-    trace?: never;
-  };
-  '/api/demo/student/teacher': {
-    parameters: {
-      query?: never;
-      header?: never;
-      path?: never;
-      cookie?: never;
-    };
-    get: operations['DemoStudentTeacher_select'];
-    put?: never;
-    post: operations['DemoStudentTeacher_create'];
-    delete?: never;
-    options?: never;
-    head?: never;
-    patch?: never;
-    trace?: never;
-  };
-  '/api/demo/student/teacher/{id}': {
-    parameters: {
-      query?: never;
-      header?: never;
-      path?: never;
-      cookie?: never;
-    };
-    get: operations['DemoStudentTeacher_view'];
-    put?: never;
-    post?: never;
-    delete: operations['DemoStudentTeacher_delete'];
-    options?: never;
-    head?: never;
-    patch: operations['DemoStudentTeacher_update'];
-    trace?: never;
-  };
   '/api/home/base/menu/{publicPath?}': {
     parameters: {
       query?: never;
@@ -382,6 +286,102 @@ export interface paths {
     options?: never;
     head?: never;
     patch?: never;
+    trace?: never;
+  };
+  '/api/start/test/product': {
+    parameters: {
+      query?: never;
+      header?: never;
+      path?: never;
+      cookie?: never;
+    };
+    get: operations['StartTestProduct_select'];
+    put?: never;
+    post: operations['StartTestProduct_create'];
+    delete?: never;
+    options?: never;
+    head?: never;
+    patch?: never;
+    trace?: never;
+  };
+  '/api/start/test/product/{id}': {
+    parameters: {
+      query?: never;
+      header?: never;
+      path?: never;
+      cookie?: never;
+    };
+    get: operations['StartTestProduct_view'];
+    put?: never;
+    post?: never;
+    delete: operations['StartTestProduct_delete'];
+    options?: never;
+    head?: never;
+    patch: operations['StartTestProduct_update'];
+    trace?: never;
+  };
+  '/api/cabloy/store/cabloyModule': {
+    parameters: {
+      query?: never;
+      header?: never;
+      path?: never;
+      cookie?: never;
+    };
+    get: operations['CabloyStoreCabloyModule_select'];
+    put?: never;
+    post: operations['CabloyStoreCabloyModule_create'];
+    delete?: never;
+    options?: never;
+    head?: never;
+    patch?: never;
+    trace?: never;
+  };
+  '/api/cabloy/store/cabloyModule/{id}': {
+    parameters: {
+      query?: never;
+      header?: never;
+      path?: never;
+      cookie?: never;
+    };
+    get: operations['CabloyStoreCabloyModule_view'];
+    put?: never;
+    post?: never;
+    delete: operations['CabloyStoreCabloyModule_delete'];
+    options?: never;
+    head?: never;
+    patch: operations['CabloyStoreCabloyModule_update'];
+    trace?: never;
+  };
+  '/api/cabloy/store/cabloyProvider': {
+    parameters: {
+      query?: never;
+      header?: never;
+      path?: never;
+      cookie?: never;
+    };
+    get: operations['CabloyStoreCabloyProvider_select'];
+    put?: never;
+    post: operations['CabloyStoreCabloyProvider_create'];
+    delete?: never;
+    options?: never;
+    head?: never;
+    patch?: never;
+    trace?: never;
+  };
+  '/api/cabloy/store/cabloyProvider/{id}': {
+    parameters: {
+      query?: never;
+      header?: never;
+      path?: never;
+      cookie?: never;
+    };
+    get: operations['CabloyStoreCabloyProvider_view'];
+    put?: never;
+    post?: never;
+    delete: operations['CabloyStoreCabloyProvider_delete'];
+    options?: never;
+    head?: never;
+    patch: operations['CabloyStoreCabloyProvider_update'];
     trace?: never;
   };
   '/api/test/cabloy/passport/isAuthenticated': {
@@ -1044,11 +1044,6 @@ export interface paths {
 export type webhooks = Record<string, never>;
 export interface components {
   schemas: {
-    'a-ssrcabloy.dto.errorData': {
-      request?: unknown;
-      appInfo?: unknown;
-      meta?: unknown;
-    };
     'test-vona.dto.postCreate': {
       /** @description Title */
       title: string;
@@ -1222,231 +1217,6 @@ export interface components {
       token?: unknown;
       payload?: unknown;
     };
-    'demo-student.dto.bookCreate': {
-      /** @description Name */
-      name: string;
-      /** @description Description */
-      description?: string | undefined;
-    };
-    'demo-student.dto.bookQueryRes': {
-      list: {
-        /**
-                 * Format: date
-                 * @description Created At
-                 */
-        createdAt: string;
-        /**
-                 * Format: date
-                 * @description Updated At
-                 */
-        updatedAt: string;
-        /**
-                 * @description Deleted
-                 * @default false
-                 */
-        deleted?: boolean;
-        /**
-                 * @description Instance ID
-                 * @default 0
-                 */
-        iid?: number;
-        /** @description ID */
-        id: number | string;
-        /** @description Name */
-        name: string;
-        /** @description Description */
-        description?: string | undefined;
-      }[];
-      total: string;
-      pageCount: number;
-      pageSize: number;
-      pageNo: number;
-    };
-    /** @description Book */
-    'demo-student.entity.book': {
-      /**
-             * Format: date
-             * @description Created At
-             */
-      createdAt: string;
-      /**
-             * Format: date
-             * @description Updated At
-             */
-      updatedAt: string;
-      /**
-             * @description Deleted
-             * @default false
-             */
-      deleted?: boolean;
-      /**
-             * @description Instance ID
-             * @default 0
-             */
-      iid?: number;
-      /** @description ID */
-      id: number | string;
-      /** @description Name */
-      name: string;
-      /** @description Description */
-      description?: string | undefined;
-    } | undefined;
-    'demo-student.dto.bookUpdate': {
-      /** @description Name */
-      name: string;
-      /** @description Description */
-      description?: string | undefined;
-    };
-    'demo-student.dto.studentCreate': {
-      /** @description Name */
-      name: string;
-      /** @description Description */
-      description?: string | undefined;
-    };
-    'demo-student.dto.studentQueryRes': {
-      list: {
-        /**
-                 * Format: date
-                 * @description Created At
-                 */
-        createdAt: string;
-        /**
-                 * Format: date
-                 * @description Updated At
-                 */
-        updatedAt: string;
-        /**
-                 * @description Deleted
-                 * @default false
-                 */
-        deleted?: boolean;
-        /**
-                 * @description Instance ID
-                 * @default 0
-                 */
-        iid?: number;
-        /** @description ID */
-        id: number | string;
-        /** @description Name */
-        name: string;
-        /** @description Description */
-        description?: string | undefined;
-      }[];
-      total: string;
-      pageCount: number;
-      pageSize: number;
-      pageNo: number;
-    };
-    /** @description Student */
-    'demo-student.entity.student': {
-      /**
-             * Format: date
-             * @description Created At
-             */
-      createdAt: string;
-      /**
-             * Format: date
-             * @description Updated At
-             */
-      updatedAt: string;
-      /**
-             * @description Deleted
-             * @default false
-             */
-      deleted?: boolean;
-      /**
-             * @description Instance ID
-             * @default 0
-             */
-      iid?: number;
-      /** @description ID */
-      id: number | string;
-      /** @description Name */
-      name: string;
-      /** @description Description */
-      description?: string | undefined;
-    } | undefined;
-    'demo-student.dto.studentUpdate': {
-      /** @description Name */
-      name: string;
-      /** @description Description */
-      description?: string | undefined;
-    };
-    'demo-student.dto.teacherCreate': {
-      /** @description Name */
-      name: string;
-      /** @description Description */
-      description?: string | undefined;
-    };
-    'demo-student.dto.teacherQueryRes': {
-      list: {
-        /**
-                 * Format: date
-                 * @description Created At
-                 */
-        createdAt: string;
-        /**
-                 * Format: date
-                 * @description Updated At
-                 */
-        updatedAt: string;
-        /**
-                 * @description Deleted
-                 * @default false
-                 */
-        deleted?: boolean;
-        /**
-                 * @description Instance ID
-                 * @default 0
-                 */
-        iid?: number;
-        /** @description ID */
-        id: number | string;
-        /** @description Name */
-        name: string;
-        /** @description Description */
-        description?: string | undefined;
-      }[];
-      total: string;
-      pageCount: number;
-      pageSize: number;
-      pageNo: number;
-    };
-    /** @description Teacher */
-    'demo-student.entity.teacher': {
-      /**
-             * Format: date
-             * @description Created At
-             */
-      createdAt: string;
-      /**
-             * Format: date
-             * @description Updated At
-             */
-      updatedAt: string;
-      /**
-             * @description Deleted
-             * @default false
-             */
-      deleted?: boolean;
-      /**
-             * @description Instance ID
-             * @default 0
-             */
-      iid?: number;
-      /** @description ID */
-      id: number | string;
-      /** @description Name */
-      name: string;
-      /** @description Description */
-      description?: string | undefined;
-    } | undefined;
-    'demo-student.dto.teacherUpdate': {
-      /** @description Name */
-      name: string;
-      /** @description Description */
-      description?: string | undefined;
-    };
     'a-menu.dto.menus': {
       menus?: components['schemas']['a-menu.dto.menuItem'][] | undefined;
       groups?: components['schemas']['a-menu.dto.menuGroup'][] | undefined;
@@ -1481,6 +1251,373 @@ export interface components {
       roleIds?: (number | string)[] | undefined;
       roleNames?: string[] | undefined;
       actions?: unknown;
+    };
+    /** @description Create Product */
+    'start-test.dto.productCreate': {
+      /** @description Name */
+      name: string;
+      /** @description Description */
+      description?: string | undefined;
+      /** @description Price */
+      price: number;
+      /**
+             * @description Quantity
+             * @default 0
+             */
+      quantity?: number;
+      /** @description Amount */
+      amount: number;
+      /** @description Custom */
+      _custom?: unknown;
+      /** @description Test */
+      _test?: unknown;
+    };
+    'start-test.dto.productQueryRes': {
+      list: {
+        /**
+                 * Format: date
+                 * @description Created At
+                 */
+        createdAt: string;
+        /**
+                 * Format: date
+                 * @description Updated At
+                 */
+        updatedAt: string;
+        /**
+                 * @description Deleted
+                 * @default false
+                 */
+        deleted?: boolean;
+        /**
+                 * @description Instance ID
+                 * @default 0
+                 */
+        iid?: number;
+        /** @description ID */
+        id: number | string;
+        /** @description Name */
+        name: string;
+        /** @description Description */
+        description?: string | undefined;
+        /** @description Price */
+        price: number;
+        /**
+                 * @description Quantity
+                 * @default 0
+                 */
+        quantity?: number;
+        /** @description Amount */
+        amount: number;
+        /** @description Custom */
+        _custom?: unknown;
+      }[];
+      total: string;
+      pageCount: number;
+      pageSize: number;
+      pageNo: number;
+    };
+    /** @description Product Info */
+    'start-test.entity.product': {
+      /**
+             * Format: date
+             * @description Created At
+             */
+      createdAt: string;
+      /**
+             * Format: date
+             * @description Updated At
+             */
+      updatedAt: string;
+      /**
+             * @description Deleted
+             * @default false
+             */
+      deleted?: boolean;
+      /**
+             * @description Instance ID
+             * @default 0
+             */
+      iid?: number;
+      /** @description ID */
+      id: number | string;
+      /** @description Name */
+      name: string;
+      /** @description Description */
+      description?: string | undefined;
+      /** @description Price */
+      price: number;
+      /**
+             * @description Quantity
+             * @default 0
+             */
+      quantity?: number;
+      /** @description Amount */
+      amount: number;
+      /** @description Custom */
+      _custom?: unknown;
+    } | undefined;
+    /** @description Update Product */
+    'start-test.dto.productUpdate': {
+      /** @description Name */
+      name: string;
+      /** @description Description */
+      description?: string | undefined;
+      /** @description Price */
+      price: number;
+      /**
+             * @description Quantity
+             * @default 0
+             */
+      quantity?: number;
+      /** @description Amount */
+      amount: number;
+      /** @description Custom */
+      _custom?: unknown;
+    };
+    'cabloy-store.dto.cabloyModuleCreate': {
+      /** @description Name */
+      name: string;
+      /** @description Description */
+      description?: string | undefined;
+      /** @description Version */
+      version: string;
+      /** @description Repository */
+      repoUrl?: string | undefined;
+      /** @description License */
+      license: number;
+      /** @description Price */
+      price?: number | undefined;
+      providerId: number | string;
+      content?: components['schemas']['cabloy-store.entity.cabloyModuleContent_415bfafaac51a5415ead581cd137db9671af9a2b_1816ff740d81c738ec055c7038bbd93beb9405a7'];
+      _content?: unknown;
+    };
+    'cabloy-store.entity.cabloyModuleContent_415bfafaac51a5415ead581cd137db9671af9a2b_1816ff740d81c738ec055c7038bbd93beb9405a7': {
+      /** @description Content */
+      content: string;
+    };
+    'cabloy-store.dto.cabloyModuleQueryRes': {
+      list: components['schemas']['cabloy-store.dto.cabloyModuleQueryResItem'][];
+      total: string;
+      pageCount: number;
+      pageSize: number;
+      pageNo: number;
+    };
+    'cabloy-store.dto.cabloyModuleQueryResItem': {
+      /**
+             * Format: date
+             * @description Created At
+             */
+      createdAt: string;
+      /**
+             * Format: date
+             * @description Updated At
+             */
+      updatedAt: string;
+      /**
+             * @description Deleted
+             * @default false
+             */
+      deleted?: boolean;
+      /**
+             * @description Instance ID
+             * @default 0
+             */
+      iid?: number;
+      /** @description ID */
+      id: number | string;
+      /** @description Name */
+      name: string;
+      /** @description Description */
+      description?: string | undefined;
+      /** @description Version */
+      version: string;
+      /** @description Repository */
+      repoUrl?: string | undefined;
+      /** @description License */
+      license: number;
+      /** @description Price */
+      price?: number | undefined;
+      providerId: number | string;
+      provider?: components['schemas']['cabloy-store.entity.cabloyProvider_2c7d642ee581efa300341e343180fbb0ecdc785d_1816ff740d81c738ec055c7038bbd93beb9405a7'];
+    };
+    'cabloy-store.entity.cabloyProvider_2c7d642ee581efa300341e343180fbb0ecdc785d_1816ff740d81c738ec055c7038bbd93beb9405a7': {
+      /** @description ID */
+      id: number | string;
+      /** @description Name */
+      name: string;
+    };
+    'cabloy-store.dto.cabloyModuleGet': {
+      /**
+             * Format: date
+             * @description Created At
+             */
+      createdAt: string;
+      /**
+             * Format: date
+             * @description Updated At
+             */
+      updatedAt: string;
+      /**
+             * @description Deleted
+             * @default false
+             */
+      deleted?: boolean;
+      /**
+             * @description Instance ID
+             * @default 0
+             */
+      iid?: number;
+      /** @description ID */
+      id: number | string;
+      /** @description Name */
+      name: string;
+      /** @description Description */
+      description?: string | undefined;
+      /** @description Version */
+      version: string;
+      /** @description Repository */
+      repoUrl?: string | undefined;
+      /** @description License */
+      license: number;
+      /** @description Price */
+      price?: number | undefined;
+      providerId: number | string;
+      content?: components['schemas']['cabloy-store.entity.cabloyModuleContent_c6e103f7cf035f2c8b2a66de341b2af9a91356ae_1816ff740d81c738ec055c7038bbd93beb9405a7'];
+      provider?: components['schemas']['cabloy-store.entity.cabloyProvider_2c7d642ee581efa300341e343180fbb0ecdc785d_1816ff740d81c738ec055c7038bbd93beb9405a7'];
+      _content?: unknown;
+    } | undefined;
+    'cabloy-store.entity.cabloyModuleContent_c6e103f7cf035f2c8b2a66de341b2af9a91356ae_1816ff740d81c738ec055c7038bbd93beb9405a7': {
+      /** @description ID */
+      id: number | string;
+      /** @description Content */
+      content: string;
+    };
+    'cabloy-store.dto.cabloyModuleUpdate': {
+      /** @description Name */
+      name: string;
+      /** @description Description */
+      description?: string | undefined;
+      /** @description Version */
+      version: string;
+      /** @description Repository */
+      repoUrl?: string | undefined;
+      /** @description License */
+      license: number;
+      /** @description Price */
+      price?: number | undefined;
+      providerId: number | string;
+      content?: components['schemas']['cabloy-store.entity.cabloyModuleContent_ff0869fb10e36144ce6da354ab0f63f1aaad2074_1816ff740d81c738ec055c7038bbd93beb9405a7'];
+      _content?: unknown;
+    };
+    'cabloy-store.entity.cabloyModuleContent_ff0869fb10e36144ce6da354ab0f63f1aaad2074_1816ff740d81c738ec055c7038bbd93beb9405a7': {
+      /**
+             * @description Deleted
+             * @default false
+             */
+      deleted?: boolean | undefined;
+      /** @description ID */
+      id?: number | string | undefined;
+      /** @description Content */
+      content: string;
+    };
+    'cabloy-store.dto.cabloyProviderCreate': {
+      /** @description Name */
+      name: string;
+      /** @description Description */
+      description?: string | undefined;
+      /**
+             * @description GitHub Account
+             * @default false
+             */
+      githubAccount?: boolean | undefined;
+      userId?: number | string | undefined;
+    };
+    'cabloy-store.dto.cabloyProviderQueryRes': {
+      list: {
+        /**
+                 * Format: date
+                 * @description Created At
+                 */
+        createdAt: string;
+        /**
+                 * Format: date
+                 * @description Updated At
+                 */
+        updatedAt: string;
+        /**
+                 * @description Deleted
+                 * @default false
+                 */
+        deleted?: boolean;
+        /**
+                 * @description Instance ID
+                 * @default 0
+                 */
+        iid?: number;
+        /** @description ID */
+        id: number | string;
+        /** @description Name */
+        name: string;
+        /** @description Description */
+        description?: string | undefined;
+        /**
+                 * @description GitHub Account
+                 * @default false
+                 */
+        githubAccount?: boolean | undefined;
+        userId?: number | string | undefined;
+      }[];
+      total: string;
+      pageCount: number;
+      pageSize: number;
+      pageNo: number;
+    };
+    /** @description Provider */
+    'cabloy-store.entity.cabloyProvider': {
+      /**
+             * Format: date
+             * @description Created At
+             */
+      createdAt: string;
+      /**
+             * Format: date
+             * @description Updated At
+             */
+      updatedAt: string;
+      /**
+             * @description Deleted
+             * @default false
+             */
+      deleted?: boolean;
+      /**
+             * @description Instance ID
+             * @default 0
+             */
+      iid?: number;
+      /** @description ID */
+      id: number | string;
+      /** @description Name */
+      name: string;
+      /** @description Description */
+      description?: string | undefined;
+      /**
+             * @description GitHub Account
+             * @default false
+             */
+      githubAccount?: boolean | undefined;
+      userId?: number | string | undefined;
+    } | undefined;
+    'cabloy-store.dto.cabloyProviderUpdate': {
+      /** @description Name */
+      name: string;
+      /** @description Description */
+      description?: string | undefined;
+      /**
+             * @description GitHub Account
+             * @default false
+             */
+      githubAccount?: boolean | undefined;
     };
     /** @description Create Product */
     'test-rest.dto.productCreate': {
@@ -1673,7 +1810,7 @@ export interface components {
       name: string;
       users?: components['schemas']['test-vona.dto.userLazy'][] | undefined;
     };
-    'test-vona.entity.user_2c7d642ee581efa300341e343180fbb0ecdc785d': {
+    'test-vona.entity.user_2c7d642ee581efa300341e343180fbb0ecdc785d_1816ff740d81c738ec055c7038bbd93beb9405a7': {
       /** @description ID */
       id: number | string;
       name: string;
@@ -1803,7 +1940,7 @@ export interface components {
       /** @description Remark */
       remark?: string | undefined;
       userId: number | string;
-      user?: components['schemas']['test-vona.entity.user_2c7d642ee581efa300341e343180fbb0ecdc785d'];
+      user?: components['schemas']['test-vona.entity.user_2c7d642ee581efa300341e343180fbb0ecdc785d_1816ff740d81c738ec055c7038bbd93beb9405a7'];
       products: components['schemas']['test-vona.entity.product_bce173590aaef19772f1ae3a82196493c2633e2e'][];
     };
     'test-vona.entity.product_bce173590aaef19772f1ae3a82196493c2633e2e': {
@@ -1850,7 +1987,7 @@ export interface components {
         /** @description Remark */
         remark?: string | undefined;
         userId: number | string;
-        user?: components['schemas']['test-vona.entity.user_2c7d642ee581efa300341e343180fbb0ecdc785d'];
+        user?: components['schemas']['test-vona.entity.user_2c7d642ee581efa300341e343180fbb0ecdc785d_1816ff740d81c738ec055c7038bbd93beb9405a7'];
         products: components['schemas']['test-vona.entity.product_bce173590aaef19772f1ae3a82196493c2633e2e'][];
       }[];
       total: string;
@@ -1904,7 +2041,7 @@ export interface components {
           id: number | string;
           content: string;
         };
-        user?: components['schemas']['test-vona.entity.user_2c7d642ee581efa300341e343180fbb0ecdc785d'];
+        user?: components['schemas']['test-vona.entity.user_2c7d642ee581efa300341e343180fbb0ecdc785d_1816ff740d81c738ec055c7038bbd93beb9405a7'];
       }[];
       total: string;
       pageCount: number;
@@ -2413,438 +2550,6 @@ export interface operations {
       };
     };
   };
-  DemoStudentBook_select: {
-    parameters: {
-      query?: {
-        columns?: string[] | undefined;
-        where?: {
-          [key: string]: unknown;
-        } | undefined;
-        orders?: string | string[][] | undefined;
-        pageNo?: number;
-        pageSize?: number;
-        createdAt?: string | undefined;
-        name?: string | undefined;
-      };
-      header?: never;
-      path?: never;
-      cookie?: never;
-    };
-    requestBody?: never;
-    responses: {
-      200: {
-        headers: {
-          [name: string]: unknown;
-        };
-        content: {
-          'application/json': {
-            code: string;
-            message: string;
-            data: components['schemas']['demo-student.dto.bookQueryRes'];
-          };
-        };
-      };
-    };
-    authToken: true;
-  };
-  DemoStudentBook_create: {
-    parameters: {
-      query?: never;
-      header?: never;
-      path?: never;
-      cookie?: never;
-    };
-    requestBody: {
-      content: {
-        'application/json': components['schemas']['demo-student.dto.bookCreate'];
-      };
-    };
-    responses: {
-      200: {
-        headers: {
-          [name: string]: unknown;
-        };
-        content: {
-          'application/json': {
-            code: string;
-            message: string;
-            data: number | string;
-          };
-        };
-      };
-    };
-    authToken: true;
-  };
-  DemoStudentBook_view: {
-    parameters: {
-      query?: never;
-      header?: never;
-      path: {
-        id: number | string;
-      };
-      cookie?: never;
-    };
-    requestBody?: never;
-    responses: {
-      200: {
-        headers: {
-          [name: string]: unknown;
-        };
-        content: {
-          'application/json': {
-            code: string;
-            message: string;
-            data?: components['schemas']['demo-student.entity.book'];
-          };
-        };
-      };
-    };
-    authToken: true;
-  };
-  DemoStudentBook_delete: {
-    parameters: {
-      query?: never;
-      header?: never;
-      path: {
-        id: number | string;
-      };
-      cookie?: never;
-    };
-    requestBody?: never;
-    responses: {
-      200: {
-        headers: {
-          [name: string]: unknown;
-        };
-        content: {
-          'application/json': {
-            code: string;
-            message: string;
-            data?: unknown;
-          };
-        };
-      };
-    };
-    authToken: true;
-  };
-  DemoStudentBook_update: {
-    parameters: {
-      query?: never;
-      header?: never;
-      path: {
-        id: number | string;
-      };
-      cookie?: never;
-    };
-    requestBody: {
-      content: {
-        'application/json': components['schemas']['demo-student.dto.bookUpdate'];
-      };
-    };
-    responses: {
-      200: {
-        headers: {
-          [name: string]: unknown;
-        };
-        content: {
-          'application/json': {
-            code: string;
-            message: string;
-            data?: unknown;
-          };
-        };
-      };
-    };
-    authToken: true;
-  };
-  DemoStudent_select: {
-    parameters: {
-      query?: {
-        columns?: string[] | undefined;
-        where?: {
-          [key: string]: unknown;
-        } | undefined;
-        orders?: string | string[][] | undefined;
-        pageNo?: number;
-        pageSize?: number;
-        createdAt?: string | undefined;
-        name?: string | undefined;
-      };
-      header?: never;
-      path?: never;
-      cookie?: never;
-    };
-    requestBody?: never;
-    responses: {
-      200: {
-        headers: {
-          [name: string]: unknown;
-        };
-        content: {
-          'application/json': {
-            code: string;
-            message: string;
-            data: components['schemas']['demo-student.dto.studentQueryRes'];
-          };
-        };
-      };
-    };
-    authToken: true;
-  };
-  DemoStudent_create: {
-    parameters: {
-      query?: never;
-      header?: never;
-      path?: never;
-      cookie?: never;
-    };
-    requestBody: {
-      content: {
-        'application/json': components['schemas']['demo-student.dto.studentCreate'];
-      };
-    };
-    responses: {
-      200: {
-        headers: {
-          [name: string]: unknown;
-        };
-        content: {
-          'application/json': {
-            code: string;
-            message: string;
-            data: number | string;
-          };
-        };
-      };
-    };
-    authToken: true;
-  };
-  DemoStudent_view: {
-    parameters: {
-      query?: never;
-      header?: never;
-      path: {
-        id: number | string;
-      };
-      cookie?: never;
-    };
-    requestBody?: never;
-    responses: {
-      200: {
-        headers: {
-          [name: string]: unknown;
-        };
-        content: {
-          'application/json': {
-            code: string;
-            message: string;
-            data?: components['schemas']['demo-student.entity.student'];
-          };
-        };
-      };
-    };
-    authToken: true;
-  };
-  DemoStudent_delete: {
-    parameters: {
-      query?: never;
-      header?: never;
-      path: {
-        id: number | string;
-      };
-      cookie?: never;
-    };
-    requestBody?: never;
-    responses: {
-      200: {
-        headers: {
-          [name: string]: unknown;
-        };
-        content: {
-          'application/json': {
-            code: string;
-            message: string;
-            data?: unknown;
-          };
-        };
-      };
-    };
-    authToken: true;
-  };
-  DemoStudent_update: {
-    parameters: {
-      query?: never;
-      header?: never;
-      path: {
-        id: number | string;
-      };
-      cookie?: never;
-    };
-    requestBody: {
-      content: {
-        'application/json': components['schemas']['demo-student.dto.studentUpdate'];
-      };
-    };
-    responses: {
-      200: {
-        headers: {
-          [name: string]: unknown;
-        };
-        content: {
-          'application/json': {
-            code: string;
-            message: string;
-            data?: unknown;
-          };
-        };
-      };
-    };
-    authToken: true;
-  };
-  DemoStudentTeacher_select: {
-    parameters: {
-      query?: {
-        columns?: string[] | undefined;
-        where?: {
-          [key: string]: unknown;
-        } | undefined;
-        orders?: string | string[][] | undefined;
-        pageNo?: number;
-        pageSize?: number;
-        createdAt?: string | undefined;
-        name?: string | undefined;
-      };
-      header?: never;
-      path?: never;
-      cookie?: never;
-    };
-    requestBody?: never;
-    responses: {
-      200: {
-        headers: {
-          [name: string]: unknown;
-        };
-        content: {
-          'application/json': {
-            code: string;
-            message: string;
-            data: components['schemas']['demo-student.dto.teacherQueryRes'];
-          };
-        };
-      };
-    };
-    authToken: true;
-  };
-  DemoStudentTeacher_create: {
-    parameters: {
-      query?: never;
-      header?: never;
-      path?: never;
-      cookie?: never;
-    };
-    requestBody: {
-      content: {
-        'application/json': components['schemas']['demo-student.dto.teacherCreate'];
-      };
-    };
-    responses: {
-      200: {
-        headers: {
-          [name: string]: unknown;
-        };
-        content: {
-          'application/json': {
-            code: string;
-            message: string;
-            data: number | string;
-          };
-        };
-      };
-    };
-    authToken: true;
-  };
-  DemoStudentTeacher_view: {
-    parameters: {
-      query?: never;
-      header?: never;
-      path: {
-        id: number | string;
-      };
-      cookie?: never;
-    };
-    requestBody?: never;
-    responses: {
-      200: {
-        headers: {
-          [name: string]: unknown;
-        };
-        content: {
-          'application/json': {
-            code: string;
-            message: string;
-            data?: components['schemas']['demo-student.entity.teacher'];
-          };
-        };
-      };
-    };
-    authToken: true;
-  };
-  DemoStudentTeacher_delete: {
-    parameters: {
-      query?: never;
-      header?: never;
-      path: {
-        id: number | string;
-      };
-      cookie?: never;
-    };
-    requestBody?: never;
-    responses: {
-      200: {
-        headers: {
-          [name: string]: unknown;
-        };
-        content: {
-          'application/json': {
-            code: string;
-            message: string;
-            data?: unknown;
-          };
-        };
-      };
-    };
-    authToken: true;
-  };
-  DemoStudentTeacher_update: {
-    parameters: {
-      query?: never;
-      header?: never;
-      path: {
-        id: number | string;
-      };
-      cookie?: never;
-    };
-    requestBody: {
-      content: {
-        'application/json': components['schemas']['demo-student.dto.teacherUpdate'];
-      };
-    };
-    responses: {
-      200: {
-        headers: {
-          [name: string]: unknown;
-        };
-        content: {
-          'application/json': {
-            code: string;
-            message: string;
-            data?: unknown;
-          };
-        };
-      };
-    };
-    authToken: true;
-  };
   HomeBaseMenu_retrieveMenus: {
     parameters: {
       query?: never;
@@ -2869,7 +2574,6 @@ export interface operations {
         };
       };
     };
-    authToken: true;
   };
   HomeBasePermission_retrievePermissions: {
     parameters: {
@@ -2919,6 +2623,438 @@ export interface operations {
         };
       };
     };
+  };
+  StartTestProduct_select: {
+    parameters: {
+      query?: {
+        columns?: string[] | undefined;
+        where?: {
+          [key: string]: unknown;
+        } | undefined;
+        orders?: string | string[][] | undefined;
+        pageNo?: number;
+        pageSize?: number;
+        createdAt?: string | undefined;
+        name?: string | undefined;
+      };
+      header?: never;
+      path?: never;
+      cookie?: never;
+    };
+    requestBody?: never;
+    responses: {
+      200: {
+        headers: {
+          [name: string]: unknown;
+        };
+        content: {
+          'application/json': {
+            code: string;
+            message: string;
+            data: components['schemas']['start-test.dto.productQueryRes'];
+          };
+        };
+      };
+    };
+    authToken: true;
+  };
+  StartTestProduct_create: {
+    parameters: {
+      query?: never;
+      header?: never;
+      path?: never;
+      cookie?: never;
+    };
+    requestBody: {
+      content: {
+        'application/json': components['schemas']['start-test.dto.productCreate'];
+      };
+    };
+    responses: {
+      200: {
+        headers: {
+          [name: string]: unknown;
+        };
+        content: {
+          'application/json': {
+            code: string;
+            message: string;
+            data: number | string;
+          };
+        };
+      };
+    };
+    authToken: true;
+  };
+  StartTestProduct_view: {
+    parameters: {
+      query?: never;
+      header?: never;
+      path: {
+        id: number | string;
+      };
+      cookie?: never;
+    };
+    requestBody?: never;
+    responses: {
+      200: {
+        headers: {
+          [name: string]: unknown;
+        };
+        content: {
+          'application/json': {
+            code: string;
+            message: string;
+            data?: components['schemas']['start-test.entity.product'];
+          };
+        };
+      };
+    };
+    authToken: true;
+  };
+  StartTestProduct_delete: {
+    parameters: {
+      query?: never;
+      header?: never;
+      path: {
+        id: number | string;
+      };
+      cookie?: never;
+    };
+    requestBody?: never;
+    responses: {
+      200: {
+        headers: {
+          [name: string]: unknown;
+        };
+        content: {
+          'application/json': {
+            code: string;
+            message: string;
+            data?: unknown;
+          };
+        };
+      };
+    };
+    authToken: true;
+  };
+  StartTestProduct_update: {
+    parameters: {
+      query?: never;
+      header?: never;
+      path: {
+        id: number | string;
+      };
+      cookie?: never;
+    };
+    requestBody: {
+      content: {
+        'application/json': components['schemas']['start-test.dto.productUpdate'];
+      };
+    };
+    responses: {
+      200: {
+        headers: {
+          [name: string]: unknown;
+        };
+        content: {
+          'application/json': {
+            code: string;
+            message: string;
+            data?: unknown;
+          };
+        };
+      };
+    };
+    authToken: true;
+  };
+  CabloyStoreCabloyModule_select: {
+    parameters: {
+      query?: {
+        columns?: string[] | undefined;
+        where?: {
+          [key: string]: unknown;
+        } | undefined;
+        orders?: string | string[][] | undefined;
+        pageNo?: number;
+        pageSize?: number;
+        createdAt?: string | undefined;
+        name?: string | undefined;
+      };
+      header?: never;
+      path?: never;
+      cookie?: never;
+    };
+    requestBody?: never;
+    responses: {
+      200: {
+        headers: {
+          [name: string]: unknown;
+        };
+        content: {
+          'application/json': {
+            code: string;
+            message: string;
+            data: components['schemas']['cabloy-store.dto.cabloyModuleQueryRes'];
+          };
+        };
+      };
+    };
+    authToken: true;
+  };
+  CabloyStoreCabloyModule_create: {
+    parameters: {
+      query?: never;
+      header?: never;
+      path?: never;
+      cookie?: never;
+    };
+    requestBody: {
+      content: {
+        'application/json': components['schemas']['cabloy-store.dto.cabloyModuleCreate'];
+      };
+    };
+    responses: {
+      200: {
+        headers: {
+          [name: string]: unknown;
+        };
+        content: {
+          'application/json': {
+            code: string;
+            message: string;
+            data: number | string;
+          };
+        };
+      };
+    };
+    authToken: true;
+  };
+  CabloyStoreCabloyModule_view: {
+    parameters: {
+      query?: never;
+      header?: never;
+      path: {
+        id: number | string;
+      };
+      cookie?: never;
+    };
+    requestBody?: never;
+    responses: {
+      200: {
+        headers: {
+          [name: string]: unknown;
+        };
+        content: {
+          'application/json': {
+            code: string;
+            message: string;
+            data?: components['schemas']['cabloy-store.dto.cabloyModuleGet'];
+          };
+        };
+      };
+    };
+    authToken: true;
+  };
+  CabloyStoreCabloyModule_delete: {
+    parameters: {
+      query?: never;
+      header?: never;
+      path: {
+        id: number | string;
+      };
+      cookie?: never;
+    };
+    requestBody?: never;
+    responses: {
+      200: {
+        headers: {
+          [name: string]: unknown;
+        };
+        content: {
+          'application/json': {
+            code: string;
+            message: string;
+            data?: unknown;
+          };
+        };
+      };
+    };
+    authToken: true;
+  };
+  CabloyStoreCabloyModule_update: {
+    parameters: {
+      query?: never;
+      header?: never;
+      path: {
+        id: number | string;
+      };
+      cookie?: never;
+    };
+    requestBody: {
+      content: {
+        'application/json': components['schemas']['cabloy-store.dto.cabloyModuleUpdate'];
+      };
+    };
+    responses: {
+      200: {
+        headers: {
+          [name: string]: unknown;
+        };
+        content: {
+          'application/json': {
+            code: string;
+            message: string;
+            data?: unknown;
+          };
+        };
+      };
+    };
+    authToken: true;
+  };
+  CabloyStoreCabloyProvider_select: {
+    parameters: {
+      query?: {
+        columns?: string[] | undefined;
+        where?: {
+          [key: string]: unknown;
+        } | undefined;
+        orders?: string | string[][] | undefined;
+        pageNo?: number;
+        pageSize?: number;
+        createdAt?: string | undefined;
+        name?: string | undefined;
+      };
+      header?: never;
+      path?: never;
+      cookie?: never;
+    };
+    requestBody?: never;
+    responses: {
+      200: {
+        headers: {
+          [name: string]: unknown;
+        };
+        content: {
+          'application/json': {
+            code: string;
+            message: string;
+            data: components['schemas']['cabloy-store.dto.cabloyProviderQueryRes'];
+          };
+        };
+      };
+    };
+    authToken: true;
+  };
+  CabloyStoreCabloyProvider_create: {
+    parameters: {
+      query?: never;
+      header?: never;
+      path?: never;
+      cookie?: never;
+    };
+    requestBody: {
+      content: {
+        'application/json': components['schemas']['cabloy-store.dto.cabloyProviderCreate'];
+      };
+    };
+    responses: {
+      200: {
+        headers: {
+          [name: string]: unknown;
+        };
+        content: {
+          'application/json': {
+            code: string;
+            message: string;
+            data: number | string;
+          };
+        };
+      };
+    };
+    authToken: true;
+  };
+  CabloyStoreCabloyProvider_view: {
+    parameters: {
+      query?: never;
+      header?: never;
+      path: {
+        id: number | string;
+      };
+      cookie?: never;
+    };
+    requestBody?: never;
+    responses: {
+      200: {
+        headers: {
+          [name: string]: unknown;
+        };
+        content: {
+          'application/json': {
+            code: string;
+            message: string;
+            data?: components['schemas']['cabloy-store.entity.cabloyProvider'];
+          };
+        };
+      };
+    };
+    authToken: true;
+  };
+  CabloyStoreCabloyProvider_delete: {
+    parameters: {
+      query?: never;
+      header?: never;
+      path: {
+        id: number | string;
+      };
+      cookie?: never;
+    };
+    requestBody?: never;
+    responses: {
+      200: {
+        headers: {
+          [name: string]: unknown;
+        };
+        content: {
+          'application/json': {
+            code: string;
+            message: string;
+            data?: unknown;
+          };
+        };
+      };
+    };
+    authToken: true;
+  };
+  CabloyStoreCabloyProvider_update: {
+    parameters: {
+      query?: never;
+      header?: never;
+      path: {
+        id: number | string;
+      };
+      cookie?: never;
+    };
+    requestBody: {
+      content: {
+        'application/json': components['schemas']['cabloy-store.dto.cabloyProviderUpdate'];
+      };
+    };
+    responses: {
+      200: {
+        headers: {
+          [name: string]: unknown;
+        };
+        content: {
+          'application/json': {
+            code: string;
+            message: string;
+            data?: unknown;
+          };
+        };
+      };
+    };
+    authToken: true;
   };
   TestCabloyPassport_isAuthenticated: {
     parameters: {
@@ -3322,7 +3458,7 @@ export interface operations {
               title: string;
               userId: number | string;
               stars?: number | undefined;
-              user?: components['schemas']['test-vona.entity.user_2c7d642ee581efa300341e343180fbb0ecdc785d'];
+              user?: components['schemas']['test-vona.entity.user_2c7d642ee581efa300341e343180fbb0ecdc785d_1816ff740d81c738ec055c7038bbd93beb9405a7'];
             };
           };
         };
