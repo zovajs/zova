@@ -4,6 +4,9 @@ export interface RouteTabInfo {
   title?: string;
   icon?: string;
   link?: string;
+  external?: boolean;
+  target?: string;
+  folder?: boolean;
   children?: RouteTabInfo[];
 }
 
