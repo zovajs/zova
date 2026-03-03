@@ -29,7 +29,8 @@ export class ServiceRouterGuards extends BeanRouterGuardsBase {
     router.beforeResolve(async to => {
       const locale = to.meta?.locale;
       if (locale) {
-        this.$$serviceLocale.setLocale(cast(to.params)?.locale);
+        const localeCurrent = cast(to.params)?.locale ?? this.sys.config.locale.default;
+        this.$$serviceLocale.setLocale(localeCurrent);
       }
     });
   }
