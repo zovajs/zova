@@ -27,7 +27,7 @@ export class ControllerLayoutTabs extends BeanControllerBase {
   $$scopeSsr: ScopeModuleASsr;
 
   @Use({ init: { arg: { sidebarLeftOpenPC: true } as IServiceSsrLayoutOptions } })
-  $$ssr: ServiceSsrLayout;
+  $$serviceSsrLayout: ServiceSsrLayout;
 
   @Use()
   $$serviceLocale: ServiceLocale;

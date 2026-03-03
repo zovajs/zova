@@ -12,7 +12,7 @@ export class ControllerLayoutEmpty extends BeanControllerBase {
   static $propsDefault = {};
 
   @Use({ init: { arg: { sidebarLeftOpenPC: false } as IServiceSsrLayoutOptions } })
-  $$ssr: ServiceSsrLayout;
+  $$serviceSsrLayout: ServiceSsrLayout;
 
   protected render() {
     return (
