@@ -12,6 +12,8 @@
     "zova-module-home-base": "workspace:^",
     "zova-module-home-api": "workspace:^",
     "zova-module-home-passport": "^5.0.0",
-    "zova-module-home-user": "^5.0.0"
+    "zova-module-home-user": "^5.0.0",
+    "zova-module-home-layoutempty": "^5.0.0",
+    "zova-module-home-layouttabs": "^5.0.0"
   }
 }

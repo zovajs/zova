@@ -231,6 +231,12 @@ importers:
       zova-module-home-layout:
         specifier: workspace:^
         version: link:src/suite/a-home/modules/home-layout
+      zova-module-home-layoutempty:
+        specifier: workspace:^
+        version: link:src/suite/a-home/modules/home-layoutempty
+      zova-module-home-layouttabs:
+        specifier: workspace:^
+        version: link:src/suite/a-home/modules/home-layouttabs
       zova-module-home-passport:
         specifier: workspace:^
         version: link:src/suite/a-home/modules/home-passport
@@ -264,9 +270,6 @@ importers:
       zova-module-start-form:
         specifier: workspace:^
         version: link:src/suite/cabloy-start/modules/start-form
-      zova-module-start-layout:
-        specifier: workspace:^
-        version: link:src/suite/cabloy-start/modules/start-layout
       zova-module-start-layoutadmin:
         specifier: workspace:^
         version: link:src/suite/cabloy-start/modules/start-layoutadmin
@@ -1155,6 +1158,12 @@ importers:
       zova-module-home-layout:
         specifier: workspace:^
         version: link:modules/home-layout
+      zova-module-home-layoutempty:
+        specifier: ^5.0.0
+        version: link:modules/home-layoutempty
+      zova-module-home-layouttabs:
+        specifier: ^5.0.0
+        version: link:modules/home-layouttabs
       zova-module-home-passport:
         specifier: ^5.0.0
         version: link:modules/home-passport
@@ -1171,6 +1180,10 @@ importers:
   src/suite/a-home/modules/home-index: {}
 
   src/suite/a-home/modules/home-layout: {}
+
+  src/suite/a-home/modules/home-layoutempty: {}
+
+  src/suite/a-home/modules/home-layouttabs: {}
 
   src/suite/a-home/modules/home-passport: {}
 
@@ -1199,9 +1212,6 @@ importers:
       zova-module-start-form:
         specifier: ^5.0.0
         version: link:modules/start-form
-      zova-module-start-layout:
-        specifier: ^5.0.0
-        version: link:modules/start-layout
       zova-module-start-layoutadmin:
         specifier: ^5.0.0
         version: link:modules/start-layoutadmin
@@ -1240,8 +1250,6 @@ importers:
   src/suite/cabloy-start/modules/start-demo: {}
 
   src/suite/cabloy-start/modules/start-form: {}
-
-  src/suite/cabloy-start/modules/start-layout: {}
 
   src/suite/cabloy-start/modules/start-layoutadmin: {}
 
