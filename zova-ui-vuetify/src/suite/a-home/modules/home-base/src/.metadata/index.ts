@@ -2,6 +2,7 @@
 /** service: begin */
 export * from '../service/routerGuards.js';
 export * from '../service/ssr.js';
+export * from '../service/ssrLayout.js';
 
 import 'zova-module-a-bean';
 declare module 'zova-module-a-bean' {
@@ -9,6 +10,7 @@ declare module 'zova-module-a-bean' {
     export interface IServiceRecord {
       'home-base:routerGuards': never;
 'home-base:ssr': never;
+'home-base:ssrLayout': never;
     }
 
   
@@ -35,17 +37,30 @@ declare module 'zova-module-home-base' {
           get $beanFullName(): 'home-base.service.ssr';
           get $onionName(): 'home-base:ssr';
           
+        }
+
+        export interface ServiceSsrLayout {
+          /** @internal */
+          get scope(): ScopeModuleHomeBase;
+        }
+
+        export interface ServiceSsrLayout {
+          get $beanFullName(): 'home-base.service.ssrLayout';
+          get $onionName(): 'home-base:ssrLayout';
+          
         } 
 }
 /** service: end */
 /** service: begin */
 import { ServiceRouterGuards } from '../service/routerGuards.js';
 import { ServiceSsr } from '../service/ssr.js';
+import { ServiceSsrLayout } from '../service/ssrLayout.js';
 import 'zova';
 declare module 'zova' {
   export interface IBeanRecordGeneral {
     'home-base.service.routerGuards': ServiceRouterGuards;
 'home-base.service.ssr': ServiceSsr;
+'home-base.service.ssrLayout': ServiceSsrLayout;
   }
 }
 /** service: end */
@@ -220,6 +235,10 @@ declare module 'zova' {
   }
 }
 /** theme: end */
+/** config: begin */
+export * from '../config/config.js';
+import { config } from '../config/config.js';
+/** config: end */
 /** locale: begin */
 import { locales } from './locales.js';
 /** locale: end */
@@ -233,7 +252,7 @@ export * from '../monkeySys.js';
 export * from '../main.js';
 /** main: end */
 /** scope: begin */
-import { BeanScopeBase, type BeanScopeUtil, TypeModuleLocales, TypeLocaleBase } from 'zova';
+import { BeanScopeBase, type BeanScopeUtil, TypeModuleConfig, TypeModuleLocales, TypeLocaleBase } from 'zova';
 import { Scope } from 'zova-module-a-bean';
 
 @Scope()
@@ -241,6 +260,7 @@ export class ScopeModuleHomeBase extends BeanScopeBase {}
 
 export interface ScopeModuleHomeBase {
   util: BeanScopeUtil;
+config: TypeModuleConfig<typeof config>;
 locale: TypeModuleLocales<(typeof locales)[TypeLocaleBase]>;
 }
 
@@ -250,7 +270,9 @@ declare module 'zova' {
     'home-base': ScopeModuleHomeBase;
   }
   
-  
+  export interface IBeanScopeConfig {
+    'home-base': ReturnType<typeof config>;
+  }
 
   export interface IBeanScopeLocale {
     'home-base': (typeof locales)[TypeLocaleBase];
