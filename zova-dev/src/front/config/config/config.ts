@@ -73,7 +73,7 @@ export default function (sys: ZovaSys) {
       default: env.LAYOUT_COMPONENT_DEFAULT,
     },
     sidebar: {
-      leftOpenPC: true,
+      eftOpenPC: env.LAYOUT_SIDEBAR_LEFTOPENPC === 'true',
       breakpoint: 1023,
     },
   };
