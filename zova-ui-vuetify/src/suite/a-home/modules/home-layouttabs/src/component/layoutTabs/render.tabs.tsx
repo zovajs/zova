@@ -23,7 +23,7 @@ export class RenderTabs extends BeanRenderBase {
             <VBadge
               class="hidden"
               color="surface"
-              offsetX={tabIcon ? 2 : -10}
+              offsetX={tabIcon ? 2 : -8}
               offsetY={-8}
               v-slots={{
                 badge: () => (
