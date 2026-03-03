@@ -103,7 +103,7 @@ export class ControllerLayoutTabs extends BeanControllerBase {
   }
 
   private __initLayoutConfig() {
-    this.layoutConfig = this.scope.config.layout;
+    this.layoutConfig = this.$scopeBase.config.layout;
     this.layoutConfig.leftDrawerOpen = this.leftDrawerOpen;
     if (process.env.SSR) {
       const layoutConfigRef = ref<ILayoutConfig | undefined>(this.layoutConfig);
