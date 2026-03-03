@@ -4,7 +4,7 @@ import { BeanControllerBase, Use, useComputed, useCustomRef, UseScope } from 'zo
 import { Controller } from 'zova-module-a-bean';
 import { $QueryAutoLoad } from 'zova-module-a-model';
 import { ScopeModuleASsr } from 'zova-module-a-ssr';
-import { IServiceSsrLayoutOptions, ServiceSsrLayout } from 'zova-module-home-base';
+import { IServiceSsrLayoutOptions, ServiceLocale, ServiceSsrLayout } from 'zova-module-home-base';
 import { ILayoutConfig } from 'zova-module-vuetify-adapter';
 import { ModelLayout } from '../../model/layout.js';
 import { ModelMenu } from '../../model/menu.js';
@@ -28,6 +28,9 @@ export class ControllerLayoutTabs extends BeanControllerBase {
 
   @Use({ init: { arg: { sidebarLeftOpenPC: true } as IServiceSsrLayoutOptions } })
   $$ssr: ServiceSsrLayout;
+
+  @Use()
+  $$serviceLocale: ServiceLocale;
 
   layoutConfig: ILayoutConfig;
   layoutConfigTimeout: number = 0;

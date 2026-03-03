@@ -26,7 +26,7 @@ export class RenderLocale extends BeanRenderBase {
                   disabled={this.app.meta.locale.current === key}
                   prependIcon={$iconName(this.app.meta.locale.current === key ? '::done' : '::none')}
                   onClick={() => {
-                    this.app.meta.locale.current = key as any;
+                    this.$$serviceLocale.setLocale(key as any);
                   }}
                 ></VListItem>
               );
