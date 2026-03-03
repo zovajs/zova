@@ -3,7 +3,7 @@ import { VMain } from 'vuetify/components';
 import { BeanControllerBase, Use } from 'zova';
 import { Controller } from 'zova-module-a-bean';
 import { ZRouterViewEmpty } from 'zova-module-a-router';
-import { IServiceSsrOptions, ServiceSsr } from '../../service/ssr.js';
+import { IServiceSsrLayoutOptions, ServiceSsr } from 'zova-module-home-base';
 
 export interface ControllerLayoutEmptyProps {}
 
@@ -11,7 +11,7 @@ export interface ControllerLayoutEmptyProps {}
 export class ControllerLayoutEmpty extends BeanControllerBase {
   static $propsDefault = {};
 
-  @Use({ init: { arg: { sidebarLeftOpenPC: false } as IServiceSsrOptions } })
+  @Use({ init: { arg: { sidebarLeftOpenPC: false } as IServiceSsrLayoutOptions } })
   $$ssr: ServiceSsr;
 
   protected render() {
