@@ -1,6 +1,6 @@
 import type { NavigationFailure, RouteComponent, RouteLocationMatched, RouteLocationNormalized, RouteLocationNormalizedLoaded, RouteLocationNormalizedLoadedGeneric, RouteRecordRaw } from '@cabloy/vue-router';
 import type { z } from 'zod';
-import type { ILayoutRecord, TypeComponentLayoutRecord, ZovaApplication } from 'zova';
+import type { ILayoutRecord, ILocaleRecord, TypeComponentLayoutRecord, ZovaApplication } from 'zova';
 import type { BeanRouter } from '../bean/bean.router.js';
 import type { BeanRouterViewBase } from '../lib/routerViewBase.js';
 import type { IGotoPageOptions } from './utils.js';
@@ -19,6 +19,8 @@ declare module '@cabloy/vue-router' {
     absolute?: boolean;
     layout?: keyof TypeComponentLayoutRecord | keyof ILayoutRecord | false | IModuleRouteComponent;
     requiresAuth?: boolean;
+    locale?: boolean;
+    locales?: Record<keyof ILocaleRecord, string>;
     componentKeyMode?: TypeComponentKeyMode;
     componentKey?: ((this: ZovaApplication, route: RouteLocationNormalizedLoaded) => string) | string;
     tabKey?: ((this: ZovaApplication, route: RouteLocationNormalizedLoaded) => string) | string;

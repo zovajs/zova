@@ -4,7 +4,7 @@ import { mutate } from 'mutate-on-copy';
 import { deepEqual, deepExtend, TypeEventOff, useComputed } from 'zova';
 import { BeanModelBase, Model } from 'zova-module-a-model';
 import { IPageMeta, IRouteViewRouteItem, IRouteViewRouteMeta } from 'zova-module-a-router';
-import { ModelTabsOptions, ModelTabsOptionsBase, RouteTab, RouteTabTransient } from '../types/tabs.js';
+import { ModelTabsOptions, ModelTabsOptionsBase, RouteTab, RouteTabInitial, RouteTabTransient } from '../types/tabs.js';
 
 export interface IModelOptionsTabs extends IDecoratorModelOptions, ModelTabsOptionsBase {}
 
@@ -165,19 +165,20 @@ export class ModelTabs extends BeanModelBase {
     return true;
   }
 
-  updateAllTabInfos() {
+  updateAllTabInfos(tabInitials?: RouteTabInitial[]) {
     for (const tab of this.tabs) {
-      this.updateTabInfo(tab.tabKey);
+      const tabInitial = tabInitials?.find(item => item.tabKey === tab.tabKey);
+      this.updateTabInfo(tab.tabKey, tabInitial);
     }
   }
 
-  updateTabInfo(tabKey?: string) {
+  updateTabInfo(tabKey?: string, tabInitial?: RouteTabInitial) {
     if (!tabKey) return;
     // tabs
     const [index, tabOld] = this.findTab(tabKey);
     if (index === -1) return;
     // tabInfo
-    const tabInfo = this.tabsOptions.getTabInfo?.(tabKey) ?? tabOld?.info;
+    const tabInfo = this.tabsOptions.getTabInfo ? this.tabsOptions.getTabInfo(tabKey) : tabInitial?.info ?? tabOld?.info;
     if (!tabInfo) return;
     // update
     const tabNew = { ...tabOld, info: tabInfo };

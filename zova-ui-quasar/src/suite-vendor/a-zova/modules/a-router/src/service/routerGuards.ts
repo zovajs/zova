@@ -37,7 +37,8 @@ export class ServiceRouterGuards extends BeanRouterGuardsBase {
               params: to.params,
               query: to.query,
             } as any);
-            return routeAlias.startsWith('/__alias__') ? routeAlias.substring('/__alias__'.length) : routeAlias;
+            const fullPath = routeAlias.startsWith('/__alias__') ? routeAlias.substring('/__alias__'.length) : routeAlias;
+            return fullPath || '/';
           } else {
             return {
               path: Array.isArray(alias) ? alias[0] : alias,
