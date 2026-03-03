@@ -3,7 +3,8 @@ import { VDivider } from 'vuetify/components';
 import { VList, VListSubheader } from 'vuetify/components';
 import { BeanRenderBase } from 'zova';
 import { Render } from 'zova-module-a-bean';
-import { TypeMenuItem, TypeMenuTree, ZItemLink } from '../../.metadata/index.js';
+import { ZItemLink } from 'zova-module-home-base';
+import { TypeMenuItem, TypeMenuTree } from '../../.metadata/index.js';
 
 @Render()
 export class RenderMenu extends BeanRenderBase {
