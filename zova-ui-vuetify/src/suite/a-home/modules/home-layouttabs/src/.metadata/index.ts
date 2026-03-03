@@ -50,41 +50,6 @@ declare module 'zova' {
   }
 }
 /** model: end */
-/** service: begin */
-export * from '../service/ssr.js';
-
-import 'zova-module-a-bean';
-declare module 'zova-module-a-bean' {
-  
-    export interface IServiceRecord {
-      'home-layouttabs:ssr': never;
-    }
-
-  
-}
-declare module 'zova-module-home-layouttabs' {
-  
-        export interface ServiceSsr {
-          /** @internal */
-          get scope(): ScopeModuleHomeLayouttabs;
-        }
-
-        export interface ServiceSsr {
-          get $beanFullName(): 'home-layouttabs.service.ssr';
-          get $onionName(): 'home-layouttabs:ssr';
-          
-        } 
-}
-/** service: end */
-/** service: begin */
-import { ServiceSsr } from '../service/ssr.js';
-import 'zova';
-declare module 'zova' {
-  export interface IBeanRecordGeneral {
-    'home-layouttabs.service.ssr': ServiceSsr;
-  }
-}
-/** service: end */
 /** controller: begin */
 export * from '../component/layoutTabs/controller.jsx';
 
