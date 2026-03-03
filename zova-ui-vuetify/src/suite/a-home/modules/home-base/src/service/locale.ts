@@ -9,7 +9,6 @@ export class ServiceLocale extends BeanBase {
   protected async __init__() {}
 
   public initVuetifyLocale() {
-    if (!this.sys.config.locale.cookieLocale) return;
     this.app.ctx.util.instanceScope(() => {
       const localeVuetify = inject(LocaleSymbol);
       if (localeVuetify) {
