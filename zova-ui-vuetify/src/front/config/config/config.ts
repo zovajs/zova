@@ -50,8 +50,8 @@ export default function (sys: ZovaSys) {
     cookieLocale: sys.env.SSR_COOKIE_LOCALE === 'true',
     storeKey: 'locale',
     items: {
-      'en-us': 'English',
-      'zh-cn': 'Chinese',
+      'en-us': 'LanguageEnglish',
+      'zh-cn': 'LanguageChinese',
     },
   };
 
