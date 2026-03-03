@@ -3,8 +3,8 @@ import type { ControllerItemLinkProps } from '../../src/component/itemLink/contr
 
 type TypeControllerItemLinkPublicProps = TypeRenderComponentJsxPropsPublic
   & ControllerItemLinkProps;
-export function ZZHomeLayoutItemLink(
+export function ZZHomeBaseItemLink(
   _props: TypeControllerItemLinkPublicProps,
 ) {
-  return 'home-layout:itemLink';
+  return 'home-base:itemLink';
 }

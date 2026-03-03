@@ -50,6 +50,7 @@ declare module 'zova' {
 }
 /** service: end */
 /** controller: begin */
+export * from '../component/itemLink/controller.jsx';
 export * from '../component/page/controller.jsx';
 export * from '../page/errorExpired/controller.jsx';
 export * from '../page/errorNotFound/controller.jsx';
@@ -61,6 +62,11 @@ declare module 'zova' {
 }
 declare module 'zova-module-home-base' {
   
+        export interface ControllerItemLink {
+          /** @internal */
+          get scope(): ScopeModuleHomeBase;
+        }
+
         export interface ControllerPage {
           /** @internal */
           get scope(): ScopeModuleHomeBase;
@@ -78,13 +84,15 @@ declare module 'zova-module-home-base' {
 }
 /** controller: end */
 /** controller: begin */
+import { ControllerItemLink } from '../component/itemLink/controller.jsx';
 import { ControllerPage } from '../component/page/controller.jsx';
 import { ControllerPageErrorExpired } from '../page/errorExpired/controller.jsx';
 import { ControllerPageErrorNotFound } from '../page/errorNotFound/controller.jsx';
 import 'zova';
 declare module 'zova' {
   export interface IBeanRecordLocal {
-    'home-base.controller.page': ControllerPage;
+    'home-base.controller.itemLink': ControllerItemLink;
+'home-base.controller.page': ControllerPage;
 'home-base.controller.pageErrorExpired': ControllerPageErrorExpired;
 'home-base.controller.pageErrorNotFound': ControllerPageErrorNotFound;
   }
@@ -122,18 +130,23 @@ declare module 'zova-module-home-base' {
 /** pages: end */
 
 /** components: begin */
+export * from './component/itemLink.js';
+import { ZItemLink } from './component/itemLink.js';
 export * from './component/page.js';
 import { ZPage } from './component/page.js';
 export const components = {
-  'page': ZPage,
+  'itemLink': ZItemLink,
+'page': ZPage,
 };
 import 'zova';
 declare module 'zova' {
 export interface IComponentRecord {
-  'home-base:page': ControllerPage;
+  'home-base:itemLink': ControllerItemLink;
+'home-base:page': ControllerPage;
 }
 export interface IZovaComponentRecord {
-  'home-base:page': typeof ZPage;
+  'home-base:itemLink': typeof ZItemLink;
+'home-base:page': typeof ZPage;
 }
 }
 /** components: end */
