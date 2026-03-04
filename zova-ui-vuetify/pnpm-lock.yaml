@@ -210,9 +210,6 @@ importers:
       zova-module-a-zova:
         specifier: workspace:^
         version: link:src/suite-vendor/a-zova/modules/a-zova
-      zova-module-cabloy-store:
-        specifier: workspace:^
-        version: link:src/suite/cabloy-store/modules/cabloy-store
       zova-module-demo-basic:
         specifier: workspace:^
         version: link:src/suite/a-demo/modules/demo-basic
@@ -291,12 +288,12 @@ importers:
       zova-module-store-api:
         specifier: workspace:^
         version: link:src/suite/cabloy-store/modules/store-api
+      zova-module-store-cabloymodule:
+        specifier: workspace:^
+        version: link:src/suite/cabloy-store/modules/store-cabloymodule
       zova-module-store-index:
         specifier: workspace:^
         version: link:src/suite/cabloy-store/modules/store-index
-      zova-module-store-layout:
-        specifier: workspace:^
-        version: link:src/suite/cabloy-store/modules/store-layout
       zova-module-store-model:
         specifier: workspace:^
         version: link:src/suite/cabloy-store/modules/store-model
@@ -1265,29 +1262,28 @@ importers:
 
   src/suite/cabloy-store:
     dependencies:
-      zova-module-cabloy-store:
-        specifier: ^5.0.0
-        version: link:modules/cabloy-store
       zova-module-store-api:
         specifier: ^5.0.0
         version: link:modules/store-api
+      zova-module-store-cabloymodule:
+        specifier: ^5.0.0
+        version: link:modules/store-cabloymodule
       zova-module-store-index:
         specifier: ^5.0.0
         version: link:modules/store-index
-      zova-module-store-layout:
-        specifier: ^5.0.0
-        version: link:modules/store-layout
       zova-module-store-model:
         specifier: ^5.0.0
         version: link:modules/store-model
 
-  src/suite/cabloy-store/modules/cabloy-store: {}
-
   src/suite/cabloy-store/modules/store-api: {}
 
-  src/suite/cabloy-store/modules/store-index: {}
+  src/suite/cabloy-store/modules/store-cabloymodule: {}
 
-  src/suite/cabloy-store/modules/store-layout: {}
+  src/suite/cabloy-store/modules/store-index:
+    dependencies:
+      '@zhennann/currency':
+        specifier: ^2.0.2
+        version: 2.0.2
 
   src/suite/cabloy-store/modules/store-model: {}
 

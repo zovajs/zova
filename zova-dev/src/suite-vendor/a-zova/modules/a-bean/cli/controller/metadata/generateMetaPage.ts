@@ -109,7 +109,7 @@ export const pageNameSchemas = {
 ${contentNameSchemas.join('\n')}
 };
 declare module 'zova-module-${moduleName}' {
-  ${contentRecords.join('\n')} 
+  ${contentRecords.join('\n')}
 }
 /** pages: end */
 `;
