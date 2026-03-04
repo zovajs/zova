@@ -228,9 +228,6 @@ importers:
       zova-module-home-index:
         specifier: workspace:^
         version: link:src/suite/a-home/modules/home-index
-      zova-module-home-layout:
-        specifier: workspace:^
-        version: link:src/suite/a-home/modules/home-layout
       zova-module-home-layoutempty:
         specifier: workspace:^
         version: link:src/suite/a-home/modules/home-layoutempty
@@ -291,12 +288,18 @@ importers:
       zova-module-start-toggle:
         specifier: workspace:^
         version: link:src/suite/cabloy-start/modules/start-toggle
+      zova-module-store-api:
+        specifier: workspace:^
+        version: link:src/suite/cabloy-store/modules/store-api
       zova-module-store-index:
         specifier: workspace:^
         version: link:src/suite/cabloy-store/modules/store-index
       zova-module-store-layout:
         specifier: workspace:^
         version: link:src/suite/cabloy-store/modules/store-layout
+      zova-module-store-model:
+        specifier: workspace:^
+        version: link:src/suite/cabloy-store/modules/store-model
       zova-module-vuetify-adapter:
         specifier: workspace:^
         version: link:src/suite-vendor/a-vuetify/modules/vuetify-adapter
@@ -1155,9 +1158,6 @@ importers:
       zova-module-home-index:
         specifier: workspace:^
         version: link:modules/home-index
-      zova-module-home-layout:
-        specifier: workspace:^
-        version: link:modules/home-layout
       zova-module-home-layoutempty:
         specifier: ^5.0.0
         version: link:modules/home-layoutempty
@@ -1178,8 +1178,6 @@ importers:
   src/suite/a-home/modules/home-icon: {}
 
   src/suite/a-home/modules/home-index: {}
-
-  src/suite/a-home/modules/home-layout: {}
 
   src/suite/a-home/modules/home-layoutempty: {}
 
@@ -1270,18 +1268,28 @@ importers:
       zova-module-cabloy-store:
         specifier: ^5.0.0
         version: link:modules/cabloy-store
+      zova-module-store-api:
+        specifier: ^5.0.0
+        version: link:modules/store-api
       zova-module-store-index:
         specifier: ^5.0.0
         version: link:modules/store-index
       zova-module-store-layout:
         specifier: ^5.0.0
         version: link:modules/store-layout
+      zova-module-store-model:
+        specifier: ^5.0.0
+        version: link:modules/store-model
 
   src/suite/cabloy-store/modules/cabloy-store: {}
+
+  src/suite/cabloy-store/modules/store-api: {}
 
   src/suite/cabloy-store/modules/store-index: {}
 
   src/suite/cabloy-store/modules/store-layout: {}
+
+  src/suite/cabloy-store/modules/store-model: {}
 
 packages:
 
