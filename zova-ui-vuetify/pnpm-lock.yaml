@@ -288,6 +288,9 @@ importers:
       zova-module-store-api:
         specifier: workspace:^
         version: link:src/suite/cabloy-store/modules/store-api
+      zova-module-store-base:
+        specifier: workspace:^
+        version: link:src/suite/cabloy-store/modules/store-base
       zova-module-store-cabloymodule:
         specifier: workspace:^
         version: link:src/suite/cabloy-store/modules/store-cabloymodule
@@ -1265,6 +1268,9 @@ importers:
       zova-module-store-api:
         specifier: ^5.0.0
         version: link:modules/store-api
+      zova-module-store-base:
+        specifier: ^5.0.0
+        version: link:modules/store-base
       zova-module-store-cabloymodule:
         specifier: ^5.0.0
         version: link:modules/store-cabloymodule
@@ -1277,13 +1283,15 @@ importers:
 
   src/suite/cabloy-store/modules/store-api: {}
 
-  src/suite/cabloy-store/modules/store-cabloymodule: {}
-
-  src/suite/cabloy-store/modules/store-index:
+  src/suite/cabloy-store/modules/store-base:
     dependencies:
       '@zhennann/currency':
         specifier: ^2.0.2
         version: 2.0.2
+
+  src/suite/cabloy-store/modules/store-cabloymodule: {}
+
+  src/suite/cabloy-store/modules/store-index: {}
 
   src/suite/cabloy-store/modules/store-model: {}
 

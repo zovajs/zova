@@ -114,6 +114,7 @@
     "zova-module-start-textarea": "workspace:^",
     "zova-module-start-toggle": "workspace:^",
     "zova-module-store-api": "workspace:^",
+    "zova-module-store-base": "workspace:^",
     "zova-module-store-cabloymodule": "workspace:^",
     "zova-module-store-index": "workspace:^",
     "zova-module-store-model": "workspace:^",
