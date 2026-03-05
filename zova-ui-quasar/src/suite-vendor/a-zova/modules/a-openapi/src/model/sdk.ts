@@ -1,6 +1,7 @@
 import { isNil } from '@cabloy/utils';
 import { SchemaObject } from 'openapi3-ts/oas31';
 import { cast, deepExtend, ILocaleRecord, TypeEventOff, Use, usePrepareArg } from 'zova';
+import { IApiSchemaFetchOptions } from 'zova-module-a-api';
 import { $QueryAutoLoad, BeanModelBase, IDecoratorModelOptions, Model } from 'zova-module-a-model';
 import { SysSdk } from '../bean/sys.sdk.js';
 import { getSchemaOfRequestBody, getSchemaOfRequestQuery, getSchemaOfRequestQueryFilter, getSchemaOfResponseBody, schemaToZodSchema } from '../lib/schema.js';
@@ -80,13 +81,13 @@ export class ModelSdk extends BeanModelBase {
     });
   }
 
-  getSdk(api: string, apiMethod?: TypeRequestMethod): TypeOpenapiSchemasSdk {
+  getSdk(api: string, apiMethod?: TypeRequestMethod, apiOptions?: IApiSchemaFetchOptions): TypeOpenapiSchemasSdk {
     if (!api) throw new Error('should specify api');
     const [api2, apiMethod2] = this.$$sysSdk.prepareApiMeta(api, apiMethod);
     return this.$useStateData({
       queryKey: ['sdk', api2, apiMethod2],
       queryFn: async () => {
-        const sdk = await this.$$sysSdk.loadSdk(this.$fetch, api, apiMethod);
+        const sdk = await this.$$sysSdk.loadSdk(this.$fetch, api, apiMethod, apiOptions);
         if (!sdk) throw new Error('load sdk error');
         for (const schemaName of sdk.schemas) {
           if (process.env.SERVER) {
@@ -146,9 +147,9 @@ export class ModelSdk extends BeanModelBase {
     });
   }
 
-  public createApiSchemas(api: string, apiMethod?: TypeRequestMethod): IOpenapiSchemas {
+  public createApiSchemas(api: string, apiMethod?: TypeRequestMethod, apiOptions?: IApiSchemaFetchOptions): IOpenapiSchemas {
     const self = this;
-    const sdk = this.getSdk(api, apiMethod);
+    const sdk = this.getSdk(api, apiMethod, apiOptions);
     return {
       get sdk() {
         return sdk;
