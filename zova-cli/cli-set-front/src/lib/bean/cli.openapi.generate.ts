@@ -491,6 +491,7 @@ function _checkOperationIdEnabled(moduleConfig: ZovaOpenapiConfigModule, selecto
  * https://openapi-ts.dev/node#example-blob-types
 */
 const BLOB = ts.factory.createTypeReferenceNode(ts.factory.createIdentifier('Blob')); // `Blob`
+const DATE = ts.factory.createTypeReferenceNode(ts.factory.createIdentifier('Date')); // `Date`
 // const NULL = ts.factory.createLiteralTypeNode(ts.factory.createNull()); // `null`
 const UNDEFINED = ts.factory.createKeywordTypeNode(ts.SyntaxKind.UndefinedKeyword);
 
@@ -516,6 +517,11 @@ function _patchOpenapiTSOptions(options?: OpenAPITSOptions) {
             questionToken: schemaObject.nullable,
           };
         }
+      } else if (schemaObject.format === 'date') {
+        return {
+          schema: DATE,
+          questionToken: schemaObject.nullable,
+        };
       }
       // default
       return undefined;
