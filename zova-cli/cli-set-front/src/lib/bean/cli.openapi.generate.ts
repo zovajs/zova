@@ -363,7 +363,7 @@ export class Api${apiName} extends BeanApiBase {
     return [${contentApiPaths[i]}, '${contentApiMethods[i]}'];
   }
 `);
-      contentSchemaSignatures.push(`${contentActions[i]}(options?: IApiSchemaFetchOptions) {
+      contentSchemaSignatures.push(`${contentActions[i]}(options?: IApiSchemaOptions) {
     return this.$sdk.createApiSchemas(${contentApiPaths[i]}, '${contentApiMethods[i]}', options);
   }
 `);
@@ -380,7 +380,7 @@ export class ApiMeta${apiName} extends BeanBase {
 }
 `;
     const apiSchemaContent = `import { BeanBase } from 'zova';
-import { ApiSchema, IApiSchemaFetchOptions } from 'zova-module-a-api';
+import { ApiSchema, IApiSchemaOptions } from 'zova-module-a-api';
 ${contentImportsApiPath}
 
 @ApiSchema()

@@ -1,7 +1,7 @@
 import { isNil } from '@cabloy/utils';
 import { SchemaObject } from 'openapi3-ts/oas31';
 import { cast, deepExtend, ILocaleRecord, TypeEventOff, Use, usePrepareArg } from 'zova';
-import { IApiSchemaFetchOptions } from 'zova-module-a-api';
+import { IApiSchemaOptions } from 'zova-module-a-api';
 import { $QueryAutoLoad, BeanModelBase, IDecoratorModelOptions, Model } from 'zova-module-a-model';
 import { SysSdk } from '../bean/sys.sdk.js';
 import { getSchemaOfRequestBody, getSchemaOfRequestQuery, getSchemaOfRequestQueryFilter, getSchemaOfResponseBody, schemaToZodSchema } from '../lib/schema.js';
@@ -81,7 +81,7 @@ export class ModelSdk extends BeanModelBase {
     });
   }
 
-  getSdk(api: string, apiMethod?: TypeRequestMethod, apiOptions?: IApiSchemaFetchOptions): TypeOpenapiSchemasSdk {
+  getSdk(api: string, apiMethod?: TypeRequestMethod, apiOptions?: IApiSchemaOptions): TypeOpenapiSchemasSdk {
     if (!api) throw new Error('should specify api');
     const [api2, apiMethod2] = this.$$sysSdk.prepareApiMeta(api, apiMethod);
     return this.$useStateData({
@@ -147,7 +147,7 @@ export class ModelSdk extends BeanModelBase {
     });
   }
 
-  public createApiSchemas(api: string, apiMethod?: TypeRequestMethod, apiOptions?: IApiSchemaFetchOptions): IOpenapiSchemas {
+  public createApiSchemas(api: string, apiMethod?: TypeRequestMethod, apiOptions?: IApiSchemaOptions): IOpenapiSchemas {
     const self = this;
     const sdk = this.getSdk(api, apiMethod, apiOptions);
     return {

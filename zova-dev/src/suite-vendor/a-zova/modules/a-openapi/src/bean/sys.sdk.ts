@@ -1,7 +1,7 @@
 import type { SchemaObject } from 'openapi3-ts/oas31';
 import { shallowReactive } from 'vue';
 import { BeanBase, IApiActionConfigPrepareOptions, ILocaleRecord, TypeEventOff } from 'zova';
-import { IApiSchemaFetchOptions } from 'zova-module-a-api';
+import { IApiSchemaOptions } from 'zova-module-a-api';
 import { Sys } from 'zova-module-a-bean';
 import { BeanFetch } from 'zova-module-a-fetch';
 import { IOpenapiSchema } from '../types/schema.js';
@@ -94,7 +94,7 @@ export class SysSdk extends BeanBase {
     $fetch: BeanFetch,
     api?: string,
     apiMethod?: TypeRequestMethod,
-    apiOptions?: IApiSchemaFetchOptions,
+    apiOptions?: IApiSchemaOptions,
   ): Promise<IOpenapiSdkItem | undefined> {
     if (process.env.CLIENT) {
       this._fetch = $fetch;

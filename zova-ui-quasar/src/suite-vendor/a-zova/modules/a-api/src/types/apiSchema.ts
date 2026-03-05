@@ -1,6 +1,6 @@
 import 'zova';
 
-export interface IApiSchemaFetchOptions {
+export interface IApiSchemaOptions {
   authToken?: boolean;
 }
 
