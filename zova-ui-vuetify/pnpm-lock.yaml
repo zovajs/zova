@@ -300,6 +300,9 @@ importers:
       zova-module-store-model:
         specifier: workspace:^
         version: link:src/suite/cabloy-store/modules/store-model
+      zova-module-store-purchase:
+        specifier: workspace:^
+        version: link:src/suite/cabloy-store/modules/store-purchase
       zova-module-vuetify-adapter:
         specifier: workspace:^
         version: link:src/suite-vendor/a-vuetify/modules/vuetify-adapter
@@ -1280,6 +1283,9 @@ importers:
       zova-module-store-model:
         specifier: ^5.0.0
         version: link:modules/store-model
+      zova-module-store-purchase:
+        specifier: ^5.0.0
+        version: link:modules/store-purchase
 
   src/suite/cabloy-store/modules/store-api: {}
 
@@ -1294,6 +1300,8 @@ importers:
   src/suite/cabloy-store/modules/store-index: {}
 
   src/suite/cabloy-store/modules/store-model: {}
+
+  src/suite/cabloy-store/modules/store-purchase: {}
 
 packages:
 
