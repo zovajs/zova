@@ -32,7 +32,7 @@ export class ModelPassport extends BeanModelBase {
   }
 
   get apiSchemasLogin() {
-    return this.$apiSchema.homeUserPassport.login;
+    return this.$apiSchema.homeUserPassport.login({ authToken: false });
   }
 
   login() {

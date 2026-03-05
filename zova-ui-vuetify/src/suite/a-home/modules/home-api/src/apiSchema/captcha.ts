@@ -1,18 +1,18 @@
 import { BeanBase } from 'zova';
-import { ApiSchema } from 'zova-module-a-api';
+import { ApiSchema, IApiSchemaFetchOptions } from 'zova-module-a-api';
 import { ApiApiCaptchacreatePath, ApiApiCaptcharefreshPath, ApiApiCaptchaverifyImmediatePath } from '../api/captcha.js';
 
 @ApiSchema()
 export class ApiSchemaCaptcha extends BeanBase {
-  get create() {
-    return this.$sdk.createApiSchemas(ApiApiCaptchacreatePath, 'post');
+  create(options?: IApiSchemaFetchOptions) {
+    return this.$sdk.createApiSchemas(ApiApiCaptchacreatePath, 'post', options);
   }
 
-  get refresh() {
-    return this.$sdk.createApiSchemas(ApiApiCaptcharefreshPath, 'post');
+  refresh(options?: IApiSchemaFetchOptions) {
+    return this.$sdk.createApiSchemas(ApiApiCaptcharefreshPath, 'post', options);
   }
 
-  get verifyImmediate() {
-    return this.$sdk.createApiSchemas(ApiApiCaptchaverifyImmediatePath, 'post');
+  verifyImmediate(options?: IApiSchemaFetchOptions) {
+    return this.$sdk.createApiSchemas(ApiApiCaptchaverifyImmediatePath, 'post', options);
   }
 }

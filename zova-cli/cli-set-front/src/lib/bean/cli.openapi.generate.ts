@@ -310,7 +310,7 @@ export const OpenApiBaseURL = (sys: ZovaSys) => {
       ${contentOptions2}
     ) {
       return this.$fetch.${pathInfo.method}<any, ${nameResponseBody}>(
-        ${contentPathTranslate} ${contentRequestBody ? `${contentBodyParams},` : ''} 
+        ${contentPathTranslate} ${contentRequestBody ? `${contentBodyParams},` : ''}
         this.$configPrepare(OpenApiBaseURL(this.sys), options${contentAuthToken}),
       );
     }\n`;
@@ -363,8 +363,8 @@ export class Api${apiName} extends BeanApiBase {
     return [${contentApiPaths[i]}, '${contentApiMethods[i]}'];
   }
 `);
-      contentSchemaSignatures.push(`get ${contentActions[i]}() {
-    return this.$sdk.createApiSchemas(${contentApiPaths[i]}, '${contentApiMethods[i]}');
+      contentSchemaSignatures.push(`${contentActions[i]}(options?: IApiSchemaFetchOptions) {
+    return this.$sdk.createApiSchemas(${contentApiPaths[i]}, '${contentApiMethods[i]}', options);
   }
 `);
     }
@@ -380,7 +380,7 @@ export class ApiMeta${apiName} extends BeanBase {
 }
 `;
     const apiSchemaContent = `import { BeanBase } from 'zova';
-import { ApiSchema } from 'zova-module-a-api';
+import { ApiSchema, IApiSchemaFetchOptions } from 'zova-module-a-api';
 ${contentImportsApiPath}
 
 @ApiSchema()

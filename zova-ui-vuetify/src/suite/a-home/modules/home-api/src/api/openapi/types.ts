@@ -352,6 +352,22 @@ export interface paths {
     patch: operations['CabloyStoreCabloyModule_update'];
     trace?: never;
   };
+  '/api/cabloy/store/cabloyModule/viewByName/{name}': {
+    parameters: {
+      query?: never;
+      header?: never;
+      path?: never;
+      cookie?: never;
+    };
+    get: operations['CabloyStoreCabloyModule_viewByName'];
+    put?: never;
+    post?: never;
+    delete?: never;
+    options?: never;
+    head?: never;
+    patch?: never;
+    trace?: never;
+  };
   '/api/cabloy/store/cabloyProvider': {
     parameters: {
       query?: never;
@@ -1378,12 +1394,16 @@ export interface components {
     'cabloy-store.dto.cabloyModuleCreate': {
       /** @description Name */
       name: string;
+      /** @description Title */
+      title: string;
       /** @description Description */
       description?: string | undefined;
       /** @description Version */
       version: string;
       /** @description Repository */
       repoUrl?: string | undefined;
+      /** @description Demo */
+      demoUrl?: string | undefined;
       /** @description License */
       license: number;
       /** @description Price */
@@ -1428,17 +1448,23 @@ export interface components {
       id: number | string;
       /** @description Name */
       name: string;
+      /** @description Title */
+      title: string;
       /** @description Description */
       description?: string | undefined;
       /** @description Version */
       version: string;
       /** @description Repository */
       repoUrl?: string | undefined;
+      /** @description Demo */
+      demoUrl?: string | undefined;
       /** @description License */
       license: number;
       /** @description Price */
       price?: number | undefined;
       providerId: number | string;
+      /** @description Published */
+      published?: boolean | undefined;
       provider?: components['schemas']['cabloy-store.entity.cabloyProvider_2c7d642ee581efa300341e343180fbb0ecdc785d_1816ff740d81c738ec055c7038bbd93beb9405a7'];
     };
     'cabloy-store.entity.cabloyProvider_2c7d642ee581efa300341e343180fbb0ecdc785d_1816ff740d81c738ec055c7038bbd93beb9405a7': {
@@ -1472,17 +1498,23 @@ export interface components {
       id: number | string;
       /** @description Name */
       name: string;
+      /** @description Title */
+      title: string;
       /** @description Description */
       description?: string | undefined;
       /** @description Version */
       version: string;
       /** @description Repository */
       repoUrl?: string | undefined;
+      /** @description Demo */
+      demoUrl?: string | undefined;
       /** @description License */
       license: number;
       /** @description Price */
       price?: number | undefined;
       providerId: number | string;
+      /** @description Published */
+      published?: boolean | undefined;
       content?: components['schemas']['cabloy-store.entity.cabloyModuleContent_c6e103f7cf035f2c8b2a66de341b2af9a91356ae_1816ff740d81c738ec055c7038bbd93beb9405a7'];
       provider?: components['schemas']['cabloy-store.entity.cabloyProvider_2c7d642ee581efa300341e343180fbb0ecdc785d_1816ff740d81c738ec055c7038bbd93beb9405a7'];
       _content?: unknown;
@@ -1496,12 +1528,16 @@ export interface components {
     'cabloy-store.dto.cabloyModuleUpdate': {
       /** @description Name */
       name: string;
+      /** @description Title */
+      title: string;
       /** @description Description */
       description?: string | undefined;
       /** @description Version */
       version: string;
       /** @description Repository */
       repoUrl?: string | undefined;
+      /** @description Demo */
+      demoUrl?: string | undefined;
       /** @description License */
       license: number;
       /** @description Price */
@@ -2911,6 +2947,31 @@ export interface operations {
       };
     };
     authToken: true;
+  };
+  CabloyStoreCabloyModule_viewByName: {
+    parameters: {
+      query?: never;
+      header?: never;
+      path: {
+        name: string;
+      };
+      cookie?: never;
+    };
+    requestBody?: never;
+    responses: {
+      200: {
+        headers: {
+          [name: string]: unknown;
+        };
+        content: {
+          'application/json': {
+            code: string;
+            message: string;
+            data?: components['schemas']['cabloy-store.dto.cabloyModuleGet'];
+          };
+        };
+      };
+    };
   };
   CabloyStoreCabloyProvider_select: {
     parameters: {

@@ -29,7 +29,7 @@ export class ControllerPageToolOne extends BeanControllerPageFormBase {
   formMeta: IFormMeta;
 
   protected async __init__() {
-    const apiSchemas = this.$apiSchema.testSsrToolOne.test;
+    const apiSchemas = this.$apiSchema.testSsrToolOne.test();
     const querySdk = await $QueryAutoLoad(() => apiSchemas.sdk);
     this.schemaUpdate = this.$useComputed(() => {
       const schema = apiSchemas.requestBody;
