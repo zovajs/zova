@@ -26,30 +26,25 @@ declare module 'zova' {
 /** controller: end */
 /** pages: begin */
 export * from './page/login.js';
-import { NSControllerPageLogin } from './page/login.js';
 export * from '../routes.js';
 import { TypePagePathSchema } from 'zova-module-a-router';
 import 'zova';
 declare module 'zova-module-a-router' {
 export interface IPagePathRecord {
-  '/home/user/login': TypePagePathSchema<undefined,NSControllerPageLogin.QueryInput>;
+  '/home/user/login': TypePagePathSchema<undefined,undefined>;
 }
 export interface IPageNameRecord {
   
 }
 }
 export const pagePathSchemas = {
-'/home/user/login': {
-          query: NSControllerPageLogin.querySchema,
-        },
+
 };
 export const pageNameSchemas = {
 
 };
 declare module 'zova-module-home-user' {
-  export interface ControllerPageLogin {
-        $query: NSControllerPageLogin.QueryOutput;
-      }
+  
 }
 /** pages: end */
 

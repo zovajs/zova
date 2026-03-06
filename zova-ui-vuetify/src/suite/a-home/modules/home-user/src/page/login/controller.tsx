@@ -1,13 +1,8 @@
-import { z } from 'zod';
 import { BeanControllerPageBase } from 'zova';
 import { Controller } from 'zova-module-a-bean';
 import { TypeFormOnSubmitData } from 'zova-module-a-form';
 import { $QueryAutoLoad } from 'zova-module-a-model';
 import { ApiApiHomeUserPassportloginRequestBody } from 'zova-module-home-api';
-
-export const ControllerPageLoginSchemaQuery = z.object({
-  returnTo: z.string().optional(),
-});
 
 @Controller()
 export class ControllerPageLogin extends BeanControllerPageBase {

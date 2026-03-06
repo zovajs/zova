@@ -1,1 +1,0 @@
-import { NSControllerPageLogin as NSHomeUserControllerPageLogin } from '../src/suite/a-home/modules/home-user/src/.metadata/page/login.js';
