@@ -31,7 +31,8 @@ export class Monkey
 
   async getBeanRouter() {
     if (!this._beanRouter) {
-      this._beanRouter = this.app.meta.$router = (await this.bean._getBean('a-router.bean.router', false, true)) as BeanRouter;
+      // markReactive: true
+      this._beanRouter = this.app.meta.$router = (await this.bean._getBean('a-router.bean.router', true, true)) as BeanRouter;
     }
     return this._beanRouter;
   }

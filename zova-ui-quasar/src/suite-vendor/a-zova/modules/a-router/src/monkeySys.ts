@@ -64,9 +64,9 @@ export class MonkeySys extends BeanSimple implements IMonkeyModuleSys, IMonkeySy
       }
       // replace
       if (pagePath.startsWith('http://') || pagePath.startsWith('https://')) {
-        window.location.replace(pagePath);
+        window.location[options?.replace ? 'replace' : 'assign'](pagePath);
       } else {
-        return app.meta.$router.replace(pagePath);
+        return app.meta.$router[options?.replace ? 'replace' : 'push'](pagePath);
       }
     };
     app.$gotoHome = () => {
@@ -82,7 +82,7 @@ export class MonkeySys extends BeanSimple implements IMonkeyModuleSys, IMonkeySy
     };
     app.$gotoReturnTo = (returnTo?: string) => {
       const pagePath = returnTo ?? cast(app.meta.$router.currentRoute)?.query?.[app.sys.env.ROUTER_KEY_RETURNTO] ?? app.sys.env.ROUTER_PAGE_HOME;
-      return app.$gotoPage(pagePath);
+      return app.$gotoPage(pagePath, { replace: true });
     };
     app.$getCurrentPagePath = (): string | undefined => {
       if (process.env.SERVER) {
