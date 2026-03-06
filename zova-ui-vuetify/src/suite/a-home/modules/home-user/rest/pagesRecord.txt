@@ -1,1 +1,1 @@
-'/home/user/login': TypePagePathSchema<undefined,undefined>;
+'/home/user/login': TypePagePathSchema<undefined,NSHomeUserControllerPageLogin.QueryInput>;
