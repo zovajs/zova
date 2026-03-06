@@ -177,9 +177,6 @@ importers:
       zova-module-a-openapi:
         specifier: workspace:^
         version: link:src/suite-vendor/a-zova/modules/a-openapi
-      zova-module-a-paypal:
-        specifier: workspace:^
-        version: link:src/suite/a-paypal/modules/a-paypal
       zova-module-a-pinia:
         specifier: workspace:^
         version: link:src/suite-vendor/a-zova/modules/a-pinia
@@ -975,8 +972,8 @@ importers:
   src/suite-vendor/a-zova/modules/a-currency:
     dependencies:
       '@zhennann/currency':
-        specifier: ^2.0.2
-        version: 2.0.2
+        specifier: ^2.0.3
+        version: 2.0.3
 
   src/suite-vendor/a-zova/modules/a-date: {}
 
@@ -1031,8 +1028,8 @@ importers:
         specifier: ^2.6.4
         version: 2.6.4
       '@zhennann/currency':
-        specifier: ^2.0.2
-        version: 2.0.2
+        specifier: ^2.0.3
+        version: 2.0.3
       openapi3-ts:
         specifier: ^4.5.0
         version: 4.5.0
@@ -1196,14 +1193,6 @@ importers:
 
   src/suite/a-home/modules/home-user: {}
 
-  src/suite/a-paypal:
-    dependencies:
-      zova-module-a-paypal:
-        specifier: ^5.0.0
-        version: link:modules/a-paypal
-
-  src/suite/a-paypal/modules/a-paypal: {}
-
   src/suite/cabloy-start:
     dependencies:
       zova-module-start-actions:
@@ -1311,8 +1300,8 @@ importers:
   src/suite/cabloy-store/modules/store-base:
     dependencies:
       '@zhennann/currency':
-        specifier: ^2.0.2
-        version: 2.0.2
+        specifier: ^2.0.3
+        version: 2.0.3
 
   src/suite/cabloy-store/modules/store-cabloymodule: {}
 
@@ -3221,8 +3210,8 @@ packages:
     resolution: {integrity: sha512-PJMKNkA7UrrYW8KZyz7i3+lE4sDM0YxbLCGIidM73jaceQ4oZyrVN2vHTWpxN0NRV/SBVHYwpaZKPOw/FPczrA==}
     engines: {node: '>= 14.0.0'}
 
-  '@zhennann/currency@2.0.2':
-    resolution: {integrity: sha512-3OEDdZvFq2pZYvzy3USyjkC2G/Jd97RbVyf+8pF2WwK9gqP3cYaeN/ca8URtnG2d37X17TlgYIcr9bTYXlcLog==}
+  '@zhennann/currency@2.0.3':
+    resolution: {integrity: sha512-dcPMHcODlvraYmekpeFaJGY1hxeQyUvqlPHQBYgIa031YyWVIC4nQdCBfE5t0Vn9uwH5f/6izW74lqWRXZMjng==}
 
   '@zhennann/ejs@3.0.1':
     resolution: {integrity: sha512-AkfhJ8D8X+sLyBTl5Lrp7nT0Gg4apE+9CcPk5EFolC3O0Qhom4QDUJxaczElsSyNzbSAkFNRzcNW9MTeJQOv3w==}
@@ -8292,7 +8281,7 @@ snapshots:
     transitivePeerDependencies:
       - supports-color
 
-  '@zhennann/currency@2.0.2': {}
+  '@zhennann/currency@2.0.3': {}
 
   '@zhennann/ejs@3.0.1': {}
 
