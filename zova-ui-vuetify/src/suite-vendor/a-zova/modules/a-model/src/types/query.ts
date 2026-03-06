@@ -94,6 +94,7 @@ export interface QueryMetaPersister {
   prefix?: string;
   buster?: string;
   cookieType?: QueryMetaPersisterCookieType;
+  refetchOnRestore?: boolean | 'always';
 }
 
 export type DataQuery<TData> = UnwrapNestedRefs<ReturnType<typeof useQuery<TData | undefined, Error | null>>>;
