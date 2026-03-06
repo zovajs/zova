@@ -44,6 +44,7 @@ export interface IIconRecord {
     ':business:kitchen-set': true;
     ':business:money-bag': true;
     ':business:party': true;
+    ':business:paypal': true;
     ':business:provider': true;
     ':business:purchase': true;
     ':business:store': true;
