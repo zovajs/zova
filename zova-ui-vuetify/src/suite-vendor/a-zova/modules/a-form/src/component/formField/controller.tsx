@@ -163,7 +163,9 @@ export class ControllerFormField<TParentData extends {} = {}> extends BeanContro
 
   private _getFormFieldOptions() {
     const validators = this._getFormFieldOptionsValidators();
-    return Object.assign({}, this.$props, {
+    return Object.assign({
+      defaultValue: this.property?.default,
+    }, this.$props, {
       form: this.$$form.form,
       validators,
     });
