@@ -111,9 +111,9 @@ export class ControllerForm<TFormData extends {} = {}, TSubmitMeta = never> exte
     return getBy(this.formState.values, name) ?? null;
   }
 
-  public setFieldValue<K extends DeepKeys<TFormData>>(name: K, value: any, disableOnChanged?: boolean) {
+  public setFieldValue<K extends DeepKeys<TFormData>>(name: K, value: any, disableNotifyChanged?: boolean) {
     this.form.setFieldValue(name, value);
-    if (!disableOnChanged) {
+    if (!disableNotifyChanged) {
       this.$props.onChanged?.(this.formState.values);
     }
   }
