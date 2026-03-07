@@ -98,6 +98,7 @@
     "zova-module-home-layouttabs": "workspace:^",
     "zova-module-home-passport": "workspace:^",
     "zova-module-home-user": "workspace:^",
+    "zova-module-a-paypal": "workspace:^",
     "zova-module-start-actions": "workspace:^",
     "zova-module-vuetify-adapter": "workspace:^",
     "zova-module-start-adapter": "workspace:^",

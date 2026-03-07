@@ -6,5 +6,7 @@
   "description": "",
   "author": "",
   "files": [],
-  "dependencies": {}
+  "dependencies": {
+    "zova-module-a-paypal": "^5.0.0"
+  }
 }
