@@ -1,5 +1,5 @@
 import type { ControllerFormField, IFormFieldRenderContext, IFormFieldRenderContextProps, IFormMeta, TypeFormField } from 'zova-module-a-form';
-import { isEmptyObject } from '@cabloy/utils';
+import { isEmptyObject, isNil } from '@cabloy/utils';
 import { VNode } from 'vue';
 import z from 'zod';
 import { cast, Use } from 'zova';
@@ -63,7 +63,9 @@ export class BehaviorFormField extends BeanBehaviorBase<
         : onSetDisplayValueDefaultByValue,
       'errorMessages': error ? errorObj?.message : undefined,
     };
-    if (formMeta?.formMode === 'view') {
+    if (!isNil(propsBucket.readonly)) {
+      propsPatch.readonly = propsBucket.readonly;
+    } else if (formMeta?.formMode === 'view') {
       propsPatch.readonly = true;
     }
     return propsPatch;
