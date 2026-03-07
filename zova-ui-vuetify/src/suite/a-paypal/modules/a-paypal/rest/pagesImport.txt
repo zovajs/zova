@@ -1,0 +1,1 @@
+import { NSControllerPagePaypalReturn as NSAPaypalControllerPagePaypalReturn } from '../src/suite/a-paypal/modules/a-paypal/src/.metadata/page/paypalReturn.js';
