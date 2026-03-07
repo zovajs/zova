@@ -177,6 +177,9 @@ importers:
       zova-module-a-openapi:
         specifier: workspace:^
         version: link:src/suite-vendor/a-zova/modules/a-openapi
+      zova-module-a-paypal:
+        specifier: workspace:^
+        version: link:src/suite/a-paypal/modules/a-paypal
       zova-module-a-pinia:
         specifier: workspace:^
         version: link:src/suite-vendor/a-zova/modules/a-pinia
@@ -1189,6 +1192,14 @@ importers:
   src/suite/a-home/modules/home-passport: {}
 
   src/suite/a-home/modules/home-user: {}
+
+  src/suite/a-paypal:
+    dependencies:
+      zova-module-a-paypal:
+        specifier: ^5.0.0
+        version: link:modules/a-paypal
+
+  src/suite/a-paypal/modules/a-paypal: {}
 
   src/suite/cabloy-start:
     dependencies:

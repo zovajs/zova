@@ -1,0 +1,2 @@
+'/a/paypal/paypalCancel': TypePagePathSchema<undefined,undefined>;
+'/a/paypal/paypalReturn': TypePagePathSchema<undefined,undefined>;
