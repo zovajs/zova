@@ -118,11 +118,16 @@ export class ControllerForm<TFormData extends {} = {}, TSubmitMeta = never> exte
     }
   }
 
-  public setFieldDisplayValue<K extends DeepKeys<TFormData>>(name: K, value: any, onSetDisplayValue?: TypeFormFieldOnSetDisplayValue) {
+  public setFieldDisplayValue<K extends DeepKeys<TFormData>>(
+    name: K,
+    value: any,
+    onSetDisplayValue?: TypeFormFieldOnSetDisplayValue,
+    disableNotifyChanged?: boolean,
+  ) {
     if (onSetDisplayValue) {
       value = onSetDisplayValue(value);
     }
-    return this.setFieldValue(name, value);
+    return this.setFieldValue(name, value, disableNotifyChanged);
   }
 
   public getFieldProperty<K extends DeepKeys<TFormData>>(name: K): SchemaObject | undefined {
