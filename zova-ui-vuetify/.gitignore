@@ -61,7 +61,7 @@ env/.env*.mine
 
 /src/suite-vendor/*
 !/src/suite-vendor/.gitkeep
-!/src/suite-vendor/cabloy-base
+!/src/suite-vendor/a-cabloy
 !/src/suite-vendor/a-vuetify
 !/src/suite-vendor/a-zova
 
