@@ -46,7 +46,7 @@ export class CliBinBuildRest extends BeanCliBase {
     await super.execute();
     const projectPath = argv.projectPath;
     //
-    const flavor = argv.flavor || 'vonaHome';
+    const flavor = argv.flavor || 'cabloyBaseAdmin';
     const bundleName = `zova-rest-${camelToKebab(flavor)}`;
     const bundleNameCopy = `${camelToKebab(flavor)}`;
     //
@@ -182,7 +182,7 @@ export function $iconName<K extends keyof IIconRecord>(name: K): any {
 export interface TypePagePathSchema<PARAMS = unknown, QUERY = unknown> {
   params?: PARAMS;
   query?: QUERY;
-}      
+}
 export interface IPagePathRecord {
 ${contentRecord}
 '/': TypePagePathSchema<undefined,undefined>;
