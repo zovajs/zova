@@ -972,8 +972,8 @@ importers:
   src/suite-vendor/a-zova/modules/a-currency:
     dependencies:
       '@zhennann/currency':
-        specifier: ^2.0.3
-        version: 2.0.3
+        specifier: ^2.0.4
+        version: 2.0.4
 
   src/suite-vendor/a-zova/modules/a-date: {}
 
@@ -1028,8 +1028,8 @@ importers:
         specifier: ^2.6.4
         version: 2.6.4
       '@zhennann/currency':
-        specifier: ^2.0.3
-        version: 2.0.3
+        specifier: ^2.0.4
+        version: 2.0.4
       openapi3-ts:
         specifier: ^4.5.0
         version: 4.5.0
@@ -1300,8 +1300,8 @@ importers:
   src/suite/cabloy-store/modules/store-base:
     dependencies:
       '@zhennann/currency':
-        specifier: ^2.0.3
-        version: 2.0.3
+        specifier: ^2.0.4
+        version: 2.0.4
 
   src/suite/cabloy-store/modules/store-cabloymodule: {}
 
@@ -3210,8 +3210,8 @@ packages:
     resolution: {integrity: sha512-PJMKNkA7UrrYW8KZyz7i3+lE4sDM0YxbLCGIidM73jaceQ4oZyrVN2vHTWpxN0NRV/SBVHYwpaZKPOw/FPczrA==}
     engines: {node: '>= 14.0.0'}
 
-  '@zhennann/currency@2.0.3':
-    resolution: {integrity: sha512-dcPMHcODlvraYmekpeFaJGY1hxeQyUvqlPHQBYgIa031YyWVIC4nQdCBfE5t0Vn9uwH5f/6izW74lqWRXZMjng==}
+  '@zhennann/currency@2.0.4':
+    resolution: {integrity: sha512-+RmlCeTGcM4QbR02MA3Ypb8vAo7LdcI+2m2ZRPC8KsrxFtAkO5IxACFGF7HUMuv8AJOdX+9RGHzZltSvJvcP5Q==}
 
   '@zhennann/ejs@3.0.1':
     resolution: {integrity: sha512-AkfhJ8D8X+sLyBTl5Lrp7nT0Gg4apE+9CcPk5EFolC3O0Qhom4QDUJxaczElsSyNzbSAkFNRzcNW9MTeJQOv3w==}
@@ -8281,7 +8281,7 @@ snapshots:
     transitivePeerDependencies:
       - supports-color
 
-  '@zhennann/currency@2.0.3': {}
+  '@zhennann/currency@2.0.4': {}
 
   '@zhennann/ejs@3.0.1': {}
 
