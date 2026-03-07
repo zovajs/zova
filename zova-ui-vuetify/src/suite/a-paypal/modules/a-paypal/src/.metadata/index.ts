@@ -34,6 +34,7 @@ declare module 'zova' {
 /** controller: end */
 /** pages: begin */
 export * from './page/paypalCancel.js';
+import { NSControllerPagePaypalCancel } from './page/paypalCancel.js';
 export * from './page/paypalReturn.js';
 import { NSControllerPagePaypalReturn } from './page/paypalReturn.js';
 export * from '../routes.js';
@@ -41,7 +42,7 @@ import { TypePagePathSchema } from 'zova-module-a-router';
 import 'zova';
 declare module 'zova-module-a-router' {
 export interface IPagePathRecord {
-  '/a/paypal/paypalCancel': TypePagePathSchema<undefined,undefined>;
+  '/a/paypal/paypalCancel': TypePagePathSchema<undefined,NSControllerPagePaypalCancel.QueryInput>;
 '/a/paypal/paypalReturn': TypePagePathSchema<undefined,NSControllerPagePaypalReturn.QueryInput>;
 }
 export interface IPageNameRecord {
@@ -49,6 +50,9 @@ export interface IPageNameRecord {
 }
 }
 export const pagePathSchemas = {
+'/a/paypal/paypalCancel': {
+          query: NSControllerPagePaypalCancel.querySchema,
+        },
 '/a/paypal/paypalReturn': {
           query: NSControllerPagePaypalReturn.querySchema,
         },
@@ -57,7 +61,10 @@ export const pageNameSchemas = {
 
 };
 declare module 'zova-module-a-paypal' {
-  export interface ControllerPagePaypalReturn {
+  export interface ControllerPagePaypalCancel {
+        $query: NSControllerPagePaypalCancel.QueryOutput;
+      }
+export interface ControllerPagePaypalReturn {
         $query: NSControllerPagePaypalReturn.QueryOutput;
       }
 }

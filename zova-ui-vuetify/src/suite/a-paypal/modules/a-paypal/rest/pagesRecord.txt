@@ -1,2 +1,2 @@
-'/a/paypal/paypalCancel': TypePagePathSchema<undefined,undefined>;
+'/a/paypal/paypalCancel': TypePagePathSchema<undefined,NSAPaypalControllerPagePaypalCancel.QueryInput>;
 '/a/paypal/paypalReturn': TypePagePathSchema<undefined,NSAPaypalControllerPagePaypalReturn.QueryInput>;

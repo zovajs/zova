@@ -11,6 +11,6 @@ export class ControllerPagePaypalReturn extends BeanControllerPageBase {
   protected async __init__() {}
 
   protected render() {
-    return <div>{this}</div>;
+    return <div>{`return:${this.$query.recordId}`}</div>;
   }
 }
