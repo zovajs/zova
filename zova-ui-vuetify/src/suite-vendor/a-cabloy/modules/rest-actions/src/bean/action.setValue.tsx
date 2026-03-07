@@ -8,6 +8,7 @@ export type TypeActionSetValueResult = unknown;
 export interface IActionOptionsSetValue extends IDecoratorActionOptions<TypeActionSetValueResult> {
   name?: string;
   value?: any;
+  disableNotifyChanged?: boolean;
 }
 
 @Action<IActionOptionsSetValue>()
@@ -18,7 +19,7 @@ export class ActionSetValue extends BeanBase implements IActionExecute {
       const name = options.name ?? $celScope.name;
       // null means valid prop value
       const value = options.value !== undefined ? options.value : cast($jsx.event?.target)?.value;
-      $$form.setFieldValue(name, value);
+      $$form.setFieldValue(name, value, options.disableNotifyChanged);
     }
     return next();
   }
