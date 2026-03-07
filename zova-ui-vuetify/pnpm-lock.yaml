@@ -239,10 +239,10 @@ importers:
         version: link:src/suite/a-home/modules/home-user
       zova-module-rest-actions:
         specifier: workspace:^
-        version: link:src/suite-vendor/a-cabloy/modules/rest-actions
+        version: link:src/suite-vendor/cabloy-base/modules/rest-actions
       zova-module-rest-resource:
         specifier: workspace:^
-        version: link:src/suite-vendor/a-cabloy/modules/rest-resource
+        version: link:src/suite-vendor/cabloy-base/modules/rest-resource
       zova-module-start-actions:
         specifier: workspace:^
         version: link:src/suite/cabloy-start/modules/start-actions
@@ -826,19 +826,6 @@ importers:
         specifier: ^6.0.1
         version: 6.1.3
 
-  src/suite-vendor/a-cabloy:
-    dependencies:
-      zova-module-rest-actions:
-        specifier: ^5.0.0
-        version: link:modules/rest-actions
-      zova-module-rest-resource:
-        specifier: workspace:^
-        version: link:modules/rest-resource
-
-  src/suite-vendor/a-cabloy/modules/rest-actions: {}
-
-  src/suite-vendor/a-cabloy/modules/rest-resource: {}
-
   src/suite-vendor/a-vuetify:
     dependencies:
       zova-module-vuetify-adapter:
@@ -1142,6 +1129,19 @@ importers:
         specifier: workspace:^
         version: link:../../../../../packages-utils/zova-openapi
 
+  src/suite-vendor/cabloy-base:
+    dependencies:
+      zova-module-rest-actions:
+        specifier: ^5.0.0
+        version: link:modules/rest-actions
+      zova-module-rest-resource:
+        specifier: workspace:^
+        version: link:modules/rest-resource
+
+  src/suite-vendor/cabloy-base/modules/rest-actions: {}
+
+  src/suite-vendor/cabloy-base/modules/rest-resource: {}
+
   src/suite/a-demo:
     dependencies:
       zova-module-demo-basic:
@@ -1240,9 +1240,9 @@ importers:
       zova-module-start-toggle:
         specifier: ^5.0.0
         version: link:modules/start-toggle
-      zova-suite-a-cabloy:
+      zova-suite-cabloy-base:
         specifier: ^5.0.0
-        version: link:../../suite-vendor/a-cabloy
+        version: link:../../suite-vendor/cabloy-base
 
   src/suite/cabloy-start/modules/start-actions: {}
 
