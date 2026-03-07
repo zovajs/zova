@@ -35,6 +35,7 @@ export const config = (_sys: ZovaSys) => {
       cookie: {
         options: {} as Omit<CookieOptions, 'expires'>,
       },
+      refetchOnRestore: true,
     },
     query: {
       staleTime: {

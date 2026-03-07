@@ -28,8 +28,9 @@ export class ControllerFormFieldCurrency extends BeanControllerBase {
         displayValueUpdateTiming="input"
         onSetDisplayValue={value => {
           this._valueKeyboardInput = value;
+          // valuePatch maybe null
           const valuePatch = currencyUpdate(value, currencyOptions);
-          return valuePatch !== undefined ? valuePatch : value;
+          return valuePatch !== undefined ? (valuePatch ?? undefined) : value;
         }}
       ></ZFormField>
     );

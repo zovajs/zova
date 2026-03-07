@@ -116,6 +116,7 @@ export class BeanModelPersister extends BeanModelLast {
     return experimental_createQueryPersister({
       storage: this._getPersisterStorage(options) as any,
       maxAge: options.maxAge as number,
+      refetchOnRestore: options.refetchOnRestore,
       prefix: options.prefix,
       buster: options.buster,
     }).persisterFn;
@@ -130,6 +131,7 @@ export class BeanModelPersister extends BeanModelLast {
     }
     options.storage = options.storage ?? (options.sync ? 'local' : 'db');
     options.maxAge = options.maxAge ?? this.scopeSelf.config.persister.maxAge[options.storage];
+    options.refetchOnRestore = options.refetchOnRestore ?? this.scopeSelf.config.persister.refetchOnRestore;
     options.prefix = options.prefix ?? this._getPersisterPrefix();
     options.buster = options.buster ?? this._getPersisterBuster();
     options.serializeDefault = options.serializeDefault ?? JSON.stringify;

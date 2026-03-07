@@ -35,9 +35,13 @@ export class ControllerFormField<TParentData extends {} = {}> extends BeanContro
     this.propsBucket = this.$useComputed(() => {
       return this._getPropsBucket();
     });
+    // defaultValue
+    // this._handleDefaultValue();
     // watch
     this.$watch(() => this.property, (newValue, oldValue) => {
       if (deepEqual(newValue, oldValue)) return;
+      // defaultValue
+      // this._handleDefaultValue();
       const options = this._getFormFieldOptions();
       this._formField.api.update(options as any);
       this.form.resetField(this.name);
@@ -87,8 +91,18 @@ export class ControllerFormField<TParentData extends {} = {}> extends BeanContro
     return 'text';
   }
 
-  public setDisplayValue(value: any) {
-    return this.$$form.setFieldDisplayValue(this.name, value, this.propsBucket.onSetDisplayValue);
+  public setDisplayValue(value: any, disableNotifyChanged?: boolean) {
+    if (disableNotifyChanged === undefined) {
+      disableNotifyChanged = this.propsBucket.disableNotifyChanged;
+    }
+    return this.$$form.setFieldDisplayValue(this.name, value, this.propsBucket.onSetDisplayValue, disableNotifyChanged);
+  }
+
+  public setValue(value: any, disableNotifyChanged?: boolean) {
+    if (disableNotifyChanged === undefined) {
+      disableNotifyChanged = this.propsBucket.disableNotifyChanged;
+    }
+    return this.$$form.setFieldValue(this.name, value, disableNotifyChanged);
   }
 
   public getRenderContext(): IFormFieldRenderContext<TParentData> {
@@ -161,9 +175,20 @@ export class ControllerFormField<TParentData extends {} = {}> extends BeanContro
     behaviors[behaviorFormFieldLayout] = {} as never;
   }
 
+  // private _handleDefaultValue() {
+  //   const defaultValue = this.$props.defaultValue ?? this.property?.default;
+  //   if (isNil(defaultValue)) return;
+  //   const value = this.$$form.getFieldValue(this.name);
+  //   if (isNil(value)) {
+  //     this.$$form.setFieldValue(this.name, defaultValue, true);
+  //   }
+  // }
+
   private _getFormFieldOptions() {
     const validators = this._getFormFieldOptionsValidators();
-    return Object.assign({}, this.$props, {
+    return Object.assign({
+      defaultValue: this.$props.defaultValue ?? this.property?.default,
+    }, this.$props, {
       form: this.$$form.form,
       validators,
     });
