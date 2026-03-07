@@ -1,5 +1,4 @@
 import type { ControllerForm } from '../form/controller.jsx';
-import { isNil } from '@cabloy/utils';
 import { useField } from '@tanstack/vue-form';
 import z from 'zod';
 import { BeanControllerBase, deepEqual, IComponentOptions, Use } from 'zova';
