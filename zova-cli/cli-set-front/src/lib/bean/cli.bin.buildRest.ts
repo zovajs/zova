@@ -46,7 +46,7 @@ export class CliBinBuildRest extends BeanCliBase {
     await super.execute();
     const projectPath = argv.projectPath;
     //
-    const flavor = argv.flavor || 'cabloyBaseAdmin';
+    const flavor = argv.flavor || 'cabloyBasicAdmin';
     const bundleName = `zova-rest-${camelToKebab(flavor)}`;
     const bundleNameCopy = `${camelToKebab(flavor)}`;
     //

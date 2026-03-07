@@ -24,11 +24,11 @@
     "tsc": "vue-tsc --noEmit --project tsconfig.vue-tsc.json",
     "lint": "eslint",
     "lint:fix": "eslint --fix",
-    "dev:ssr:cabloyBaseAdmin": "npm run prerun && quasar dev --mode ssr --flavor cabloyBaseAdmin",
-    "build:ssr:cabloyBaseAdmin": "npm run prerun && quasar build --mode ssr --flavor cabloyBaseAdmin",
-    "build:rest:cabloyBaseAdmin": "npm run prerun && npm run zova :bin:buildRest -- --flavor cabloyBaseAdmin",
-    "preview:ssr:cabloyBaseAdmin": "concurrently \"node ./dist-mock/index.js\" \"node ./dist/ssr-cabloyBaseAdmin/index.js\"",
-    "dev:spa:cabloyBaseAdmin": "npm run prerun && quasar dev --mode spa --flavor cabloyBaseAdmin"
+    "dev:ssr:cabloyBasicAdmin": "npm run prerun && quasar dev --mode ssr --flavor cabloyBasicAdmin",
+    "build:ssr:cabloyBasicAdmin": "npm run prerun && quasar build --mode ssr --flavor cabloyBasicAdmin",
+    "build:rest:cabloyBasicAdmin": "npm run prerun && npm run zova :bin:buildRest -- --flavor cabloyBasicAdmin",
+    "preview:ssr:cabloyBasicAdmin": "concurrently \"node ./dist-mock/index.js\" \"node ./dist/ssr-cabloyBasicAdmin/index.js\"",
+    "dev:spa:cabloyBasicAdmin": "npm run prerun && quasar dev --mode spa --flavor cabloyBasicAdmin"
   },
   "keywords": [
     "vue3",
