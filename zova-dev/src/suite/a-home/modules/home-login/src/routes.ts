@@ -4,7 +4,7 @@ import { ZPageLogin } from './.metadata/page/login.js';
 export const routes: IModuleRoute[] = [
   //
   {
-    path: 'login',
+    path: '',
     component: ZPageLogin,
     meta: {
       layout: 'empty',

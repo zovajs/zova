@@ -10,7 +10,7 @@ export const locales = {
 
 export function $useLocale<K extends keyof (typeof locales)[TypeLocaleBase]>(key: K, ...args: any[]) {
   const app = useApp();
-  const str = `home-user::${key}`;
+  const str = `home-login::${key}`;
   return useComputed(() => {
     return app.meta.text(str, ...args);
   });
