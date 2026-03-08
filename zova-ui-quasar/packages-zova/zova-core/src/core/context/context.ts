@@ -58,7 +58,7 @@ export class ZovaContext {
   }
 
   private _zovaHostProvidersUpdate_inner(zovaHostProviders?: any) {
-    if (!zovaHostProviders) return;
+    if (!this.bean || !zovaHostProviders) return;
     for (const key in zovaHostProviders) {
       const beanInstance = this.bean._getBeanSyncOnly(key);
       if (beanInstance !== zovaHostProviders[key]) {
