@@ -16,8 +16,9 @@ export class ControllerPageAuthCallback extends BeanControllerPageBase {
     }
   }
 
-  private _handleAuth() {
-
+  private async _handleAuth() {
+    const code = this.$query['x-vona-oauth-code']!;
+    await this.$passport.loginByOauthCode().mutateAsync({ code });
   }
 
   protected render() {
