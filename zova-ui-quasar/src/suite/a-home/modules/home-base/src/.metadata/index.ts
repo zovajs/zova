@@ -100,6 +100,7 @@ declare module 'zova' {
 /** controller: end */
 /** pages: begin */
 export * from './page/authCallback.js';
+import { NSControllerPageAuthCallback } from './page/authCallback.js';
 export * from './page/errorExpired.js';
 import { NSControllerPageErrorExpired } from './page/errorExpired.js';
 export * from './page/errorNotFound.js';
@@ -108,7 +109,7 @@ import { TypePagePathSchema } from 'zova-module-a-router';
 import 'zova';
 declare module 'zova-module-a-router' {
 export interface IPagePathRecord {
-  '/home/base/authCallback': TypePagePathSchema<undefined,undefined>;
+  '/home/base/authCallback': TypePagePathSchema<undefined,NSControllerPageAuthCallback.QueryInput>;
 '/home/base/errorExpired': TypePagePathSchema<undefined,NSControllerPageErrorExpired.QueryInput>;
 '/home/base//:catchAll(.*)*': TypePagePathSchema<undefined,undefined>;
 }
@@ -117,6 +118,9 @@ export interface IPageNameRecord {
 }
 }
 export const pagePathSchemas = {
+'/home/base/authCallback': {
+          query: NSControllerPageAuthCallback.querySchema,
+        },
 '/home/base/errorExpired': {
           query: NSControllerPageErrorExpired.querySchema,
         },
@@ -125,7 +129,10 @@ export const pageNameSchemas = {
 
 };
 declare module 'zova-module-home-base' {
-  export interface ControllerPageErrorExpired {
+  export interface ControllerPageAuthCallback {
+        $query: NSControllerPageAuthCallback.QueryOutput;
+      }
+export interface ControllerPageErrorExpired {
         $query: NSControllerPageErrorExpired.QueryOutput;
       }
 }

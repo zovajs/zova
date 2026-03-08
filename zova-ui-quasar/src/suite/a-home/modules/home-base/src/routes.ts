@@ -25,4 +25,11 @@ export const routes: IModuleRoute[] = [{
     layout: 'empty',
     requiresAuth: false,
   },
-}, { path: 'authCallback', component: ZPageAuthCallback }];
+}, {
+  path: 'authCallback',
+  component: ZPageAuthCallback,
+  meta: {
+    layout: 'empty',
+    requiresAuth: false,
+  },
+}];
