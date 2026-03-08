@@ -20,14 +20,15 @@ export class ControllerPageErrorExpired extends BeanControllerPageBase {
   }
 
   private async _refreshToken() {
+    const returnTo = this.$query.returnTo;
     const jwtInfo = await this.$$jwtAdapter.getJwtInfo();
     const refreshToken = jwtInfo?.refreshToken;
     if (!refreshToken) {
-      this.app.$gotoPage(this.sys.env.ROUTER_PAGE_LOGIN, { returnTo: this.$query.returnTo });
+      this.app.$gotoPage(this.sys.env.ROUTER_PAGE_LOGIN, { returnTo, replace: true });
       return;
     }
     await this.$$jwtAdapter.refreshAuthToken(refreshToken);
-    this.app.$gotoReturnTo(this.$query.returnTo);
+    this.app.$gotoReturnTo(returnTo);
   }
 
   protected render() {
