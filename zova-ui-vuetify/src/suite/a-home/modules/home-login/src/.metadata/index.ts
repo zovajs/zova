@@ -1,6 +1,5 @@
 /* eslint-disable */
 /** controller: begin */
-export * from '../page/authCallback/controller.jsx';
 export * from '../page/login/controller.jsx';
 
 import 'zova';
@@ -10,11 +9,6 @@ declare module 'zova' {
 }
 declare module 'zova-module-home-login' {
   
-        export interface ControllerPageAuthCallback {
-          /** @internal */
-          get scope(): ScopeModuleHomeLogin;
-        }
-
         export interface ControllerPageLogin {
           /** @internal */
           get scope(): ScopeModuleHomeLogin;
@@ -22,26 +16,22 @@ declare module 'zova-module-home-login' {
 }
 /** controller: end */
 /** controller: begin */
-import { ControllerPageAuthCallback } from '../page/authCallback/controller.jsx';
 import { ControllerPageLogin } from '../page/login/controller.jsx';
 import 'zova';
 declare module 'zova' {
   export interface IBeanRecordLocal {
-    'home-login.controller.pageAuthCallback': ControllerPageAuthCallback;
-'home-login.controller.pageLogin': ControllerPageLogin;
+    'home-login.controller.pageLogin': ControllerPageLogin;
   }
 }
 /** controller: end */
 /** pages: begin */
-export * from './page/authCallback.js';
 export * from './page/login.js';
 export * from '../routes.js';
 import { TypePagePathSchema } from 'zova-module-a-router';
 import 'zova';
 declare module 'zova-module-a-router' {
 export interface IPagePathRecord {
-  '/home/login/authCallback': TypePagePathSchema<undefined,undefined>;
-'/home/login': TypePagePathSchema<undefined,undefined>;
+  '/home/login': TypePagePathSchema<undefined,undefined>;
 }
 export interface IPageNameRecord {
   

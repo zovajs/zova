@@ -1,2 +1,1 @@
-'/home/login/authCallback': TypePagePathSchema<undefined,undefined>;
 '/home/login': TypePagePathSchema<undefined,undefined>;
