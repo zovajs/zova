@@ -231,12 +231,12 @@ importers:
       zova-module-home-layouttabs:
         specifier: workspace:^
         version: link:src/suite/a-home/modules/home-layouttabs
+      zova-module-home-login:
+        specifier: workspace:^
+        version: link:src/suite/a-home/modules/home-login
       zova-module-home-passport:
         specifier: workspace:^
         version: link:src/suite/a-home/modules/home-passport
-      zova-module-home-user:
-        specifier: workspace:^
-        version: link:src/suite/a-home/modules/home-user
       zova-module-rest-actions:
         specifier: workspace:^
         version: link:src/suite-vendor/a-cabloy/modules/rest-actions
@@ -1173,12 +1173,12 @@ importers:
       zova-module-home-layouttabs:
         specifier: ^5.0.0
         version: link:modules/home-layouttabs
+      zova-module-home-login:
+        specifier: ^5.0.0
+        version: link:modules/home-login
       zova-module-home-passport:
         specifier: ^5.0.0
         version: link:modules/home-passport
-      zova-module-home-user:
-        specifier: ^5.0.0
-        version: link:modules/home-user
 
   src/suite/a-home/modules/home-api: {}
 
@@ -1192,9 +1192,9 @@ importers:
 
   src/suite/a-home/modules/home-layouttabs: {}
 
-  src/suite/a-home/modules/home-passport: {}
+  src/suite/a-home/modules/home-login: {}
 
-  src/suite/a-home/modules/home-user: {}
+  src/suite/a-home/modules/home-passport: {}
 
   src/suite/cabloy-start:
     dependencies:
