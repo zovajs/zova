@@ -1,1 +1,0 @@
-'/home/user/login': TypePagePathSchema<undefined,undefined>;

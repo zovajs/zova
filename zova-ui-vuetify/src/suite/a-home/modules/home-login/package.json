@@ -1,9 +1,9 @@
 {
-  "name": "zova-module-home-user",
+  "name": "zova-module-home-login",
   "type": "module",
   "version": "5.0.0",
-  "title": "home-user",
-  "description": "user",
+  "title": "home-login",
+  "description": "login",
   "author": "zhennann",
   "keywords": [
     "Zova Module"

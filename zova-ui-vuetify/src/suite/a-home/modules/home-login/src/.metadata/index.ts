@@ -7,11 +7,11 @@ declare module 'zova' {
   
   
 }
-declare module 'zova-module-home-user' {
+declare module 'zova-module-home-login' {
   
         export interface ControllerPageLogin {
           /** @internal */
-          get scope(): ScopeModuleHomeUser;
+          get scope(): ScopeModuleHomeLogin;
         } 
 }
 /** controller: end */
@@ -20,7 +20,7 @@ import { ControllerPageLogin } from '../page/login/controller.jsx';
 import 'zova';
 declare module 'zova' {
   export interface IBeanRecordLocal {
-    'home-user.controller.pageLogin': ControllerPageLogin;
+    'home-login.controller.pageLogin': ControllerPageLogin;
   }
 }
 /** controller: end */
@@ -31,7 +31,7 @@ import { TypePagePathSchema } from 'zova-module-a-router';
 import 'zova';
 declare module 'zova-module-a-router' {
 export interface IPagePathRecord {
-  '/home/user/login': TypePagePathSchema<undefined,undefined>;
+  '/home/login/login': TypePagePathSchema<undefined,undefined>;
 }
 export interface IPageNameRecord {
   
@@ -43,7 +43,7 @@ export const pagePathSchemas = {
 export const pageNameSchemas = {
 
 };
-declare module 'zova-module-home-user' {
+declare module 'zova-module-home-login' {
   
 }
 /** pages: end */
@@ -56,11 +56,11 @@ declare module 'zova' {
   
   
 }
-declare module 'zova-module-home-user' {
+declare module 'zova-module-home-login' {
   
         export interface RenderPageLogin {
           /** @internal */
-          get scope(): ScopeModuleHomeUser;
+          get scope(): ScopeModuleHomeLogin;
         } 
 }
 /** render: end */
@@ -69,7 +69,7 @@ import { RenderPageLogin } from '../page/login/render.jsx';
 import 'zova';
 declare module 'zova' {
   export interface IBeanRecordLocal {
-    'home-user.render.pageLogin': RenderPageLogin;
+    'home-login.render.pageLogin': RenderPageLogin;
   }
 }
 /** render: end */
@@ -81,9 +81,9 @@ import { BeanScopeBase, type BeanScopeUtil, TypeModuleLocales, TypeLocaleBase } 
 import { Scope } from 'zova-module-a-bean';
 
 @Scope()
-export class ScopeModuleHomeUser extends BeanScopeBase {}
+export class ScopeModuleHomeLogin extends BeanScopeBase {}
 
-export interface ScopeModuleHomeUser {
+export interface ScopeModuleHomeLogin {
   util: BeanScopeUtil;
 locale: TypeModuleLocales<(typeof locales)[TypeLocaleBase]>;
 }
@@ -91,19 +91,19 @@ locale: TypeModuleLocales<(typeof locales)[TypeLocaleBase]>;
 import 'zova';
 declare module 'zova' {
   export interface IBeanScopeRecord {
-    'home-user': ScopeModuleHomeUser;
+    'home-login': ScopeModuleHomeLogin;
   }
   
   
 
   export interface IBeanScopeLocale {
-    'home-user': (typeof locales)[TypeLocaleBase];
+    'home-login': (typeof locales)[TypeLocaleBase];
   }
 
   
 }
 
-export function locale<K extends keyof (typeof locales)[TypeLocaleBase]>(key: K): `home-user::${K}` {
-  return `home-user::${key}`;
+export function locale<K extends keyof (typeof locales)[TypeLocaleBase]>(key: K): `home-login::${K}` {
+  return `home-login::${key}`;
 }  
 /** scope: end */
