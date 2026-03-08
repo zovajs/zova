@@ -35,6 +35,7 @@ declare module 'zova' {
     $gotoHome(): TypeGotoPageResult;
     $gotoLogin(returnTo?: string, cause?: string): TypeGotoPageResult;
     $gotoReturnTo(returnTo?: string): TypeGotoPageResult;
+    $getReturnTo(returnTo?: string): string;
     $getCurrentPagePath(): string | undefined;
   }
 

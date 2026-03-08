@@ -82,8 +82,12 @@ export class MonkeySys extends BeanSimple implements IMonkeyModuleSys, IMonkeySy
       return app.$gotoPage(app.sys.env.ROUTER_PAGE_LOGIN, { query, returnTo: returnTo2 });
     };
     app.$gotoReturnTo = (returnTo?: string) => {
-      const pagePath = returnTo ?? cast(app.meta.$router.currentRoute)?.query?.[app.sys.env.ROUTER_KEY_RETURNTO] ?? app.sys.env.ROUTER_PAGE_HOME;
+      const pagePath = app.$getReturnTo(returnTo);
       return app.$gotoPage(pagePath, { replace: true });
+    };
+    app.$getReturnTo = (returnTo?: string) => {
+      const pagePath = returnTo ?? cast(app.meta.$router.currentRoute)?.query?.[app.sys.env.ROUTER_KEY_RETURNTO] ?? app.sys.env.ROUTER_PAGE_HOME;
+      return pagePath;
     };
     app.$getCurrentPagePath = (): string | undefined => {
       if (process.env.SERVER) {

@@ -1,10 +1,11 @@
 import type { IJwtInfo } from 'zova-module-a-interceptor';
 import type { IDecoratorModelOptions } from 'zova-module-a-model';
-import type { ApiApiHomeUserPassportloginRequestBody, ApiApiHomeUserPassportloginResponseBody } from 'zova-module-home-api';
-import { isNil } from '@cabloy/utils';
+import type { ApiApiHomeUserPassportcreatePassportJwtFromOauthCodeRequestBody, ApiApiHomeUserPassportcreatePassportJwtFromOauthCodeResponseBody, ApiApiHomeUserPassportloginRequestBody, ApiApiHomeUserPassportloginResponseBody } from 'zova-module-home-api';
+import { combineQueries, isNil } from '@cabloy/utils';
 import { SchemaObject } from 'openapi3-ts/oas31';
 import { BeanModelBase, Model } from 'zova-module-a-model';
 import { IOpenapiActionRecord, TypeOpenapiPermissions } from 'zova-module-a-openapi';
+import { ApiApiHomeUserPassportloginOauthPath, OpenApiBaseURL } from 'zova-module-home-api';
 
 export interface IModelOptionsPassport extends IDecoratorModelOptions {}
 
@@ -42,12 +43,42 @@ export class ModelPassport extends BeanModelBase {
         return this.$api.homeUserPassport.login(params, { authToken: false });
       },
       onSuccess: data => {
-        // save
-        this._setPassportJwt(data);
-        // page: returnTo
-        this.app.$gotoReturnTo();
+        this.afterLogin(data);
       },
     });
+  }
+
+  loginByOauthCode() {
+    return this.$useMutationData<
+      ApiApiHomeUserPassportcreatePassportJwtFromOauthCodeResponseBody,
+      ApiApiHomeUserPassportcreatePassportJwtFromOauthCodeRequestBody
+    >({
+      mutationKey: ['loginByOauthCode'],
+      mutationFn: async params => {
+        return this.$api.homeUserPassport.createPassportJwtFromOauthCode(params, { authToken: false });
+      },
+      onSuccess: data => {
+        this.afterLogin(data);
+      },
+    });
+  }
+
+  getOauthLoginUrl(module: string, providerName: string, clientName?: string): string {
+    const apiPath = this.sys.util.apiActionPathTranslate(ApiApiHomeUserPassportloginOauthPath, {
+      module,
+      providerName,
+      clientName,
+    });
+    const returnTo = this.app.$getReturnTo();
+    const redirect = this.$router.getPagePath('/home/base/authCallback', { query: { returnTo } }, true);
+    return combineQueries(`${OpenApiBaseURL(this.sys)}${apiPath}`, { redirect });
+  }
+
+  afterLogin(data?: ApiApiHomeUserPassportloginResponseBody) {
+    // save
+    this._setPassportJwt(data);
+    // page: returnTo
+    this.app.$gotoReturnTo();
   }
 
   logout() {
