@@ -51,6 +51,7 @@
     "vue": "^3.5.6",
     "vue-router": "^4.4.5",
     "zova": "workspace:^",
+    "zova-module-home-user": "^5.0.0",
     "zova-module-demo-basic": "workspace:^",
     "zova-module-home-api": "workspace:^",
     "zova-module-a-fetch": "workspace:^",
@@ -79,8 +80,8 @@
     "zova-module-home-icon": "workspace:^",
     "zova-module-home-index": "workspace:^",
     "zova-module-home-layout": "workspace:^",
+    "zova-module-home-login": "workspace:^",
     "zova-module-home-passport": "workspace:^",
-    "zova-module-home-user": "workspace:^",
     "zova-module-quasar-adapter": "workspace:^",
     "zova-module-quasar-form": "workspace:^",
     "zova-module-a-action": "workspace:^",
@@ -112,6 +113,7 @@
     "@cabloy/vue-router": "^4.4.16",
     "@cabloy/word-utils": "^2.0.2",
     "defu": "^6.1.4",
+    "luxon": "^3.7.2",
     "zova-jsx": "^1.0.0"
   },
   "devDependencies": {
