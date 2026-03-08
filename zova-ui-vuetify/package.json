@@ -113,6 +113,7 @@
     "zova-module-store-base": "workspace:^",
     "zova-module-store-cabloymodule": "workspace:^",
     "zova-module-store-index": "workspace:^",
+    "zova-module-store-login": "workspace:^",
     "zova-module-store-model": "workspace:^",
     "zova-module-store-purchase": "workspace:^",
     "zova-module-rest-actions": "workspace:^",

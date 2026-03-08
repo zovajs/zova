@@ -300,6 +300,9 @@ importers:
       zova-module-store-index:
         specifier: workspace:^
         version: link:src/suite/cabloy-store/modules/store-index
+      zova-module-store-login:
+        specifier: workspace:^
+        version: link:src/suite/cabloy-store/modules/store-login
       zova-module-store-model:
         specifier: workspace:^
         version: link:src/suite/cabloy-store/modules/store-model
@@ -1288,6 +1291,9 @@ importers:
       zova-module-store-index:
         specifier: ^5.0.0
         version: link:modules/store-index
+      zova-module-store-login:
+        specifier: ^5.0.0
+        version: link:modules/store-login
       zova-module-store-model:
         specifier: ^5.0.0
         version: link:modules/store-model
@@ -1306,6 +1312,8 @@ importers:
   src/suite/cabloy-store/modules/store-cabloymodule: {}
 
   src/suite/cabloy-store/modules/store-index: {}
+
+  src/suite/cabloy-store/modules/store-login: {}
 
   src/suite/cabloy-store/modules/store-model: {}
 
