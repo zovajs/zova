@@ -51,7 +51,6 @@
     "vue": "^3.5.6",
     "vue-router": "^4.4.5",
     "zova": "workspace:^",
-    "zova-module-home-user": "^5.0.0",
     "zova-module-demo-basic": "workspace:^",
     "zova-module-home-api": "workspace:^",
     "zova-module-a-fetch": "workspace:^",

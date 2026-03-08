@@ -50,8 +50,7 @@
     "quasar": "^2.18.1",
     "vue": "^3.5.6",
     "vue-router": "^4.4.5",
-    "zova": "workspace:^",
-    "zova-module-home-user": "^5.0.0"
+    "zova": "workspace:^"
   },
   "devDependencies": {
     "@cabloy/lint": "^5.0.8",

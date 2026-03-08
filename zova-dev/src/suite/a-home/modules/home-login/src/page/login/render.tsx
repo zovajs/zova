@@ -26,10 +26,8 @@ export class RenderPageLogin extends BeanRenderBase {
     return (
       <div class="min-h-full rounded-l-xl bg-base-200">
         <div class="py-12">
-          <div class="max-w-md">
-            <h1 class="text-3xl text-center font-bold">Zova</h1>
-            <h5 class="text-2xl text-center opacity-40">Less is more, while more is less</h5>
-          </div>
+          <h1 class="text-3xl text-center font-bold">Zova</h1>
+          <h5 class="text-2xl text-center opacity-40">Less is more, while more is less</h5>
         </div>
       </div>
     );
