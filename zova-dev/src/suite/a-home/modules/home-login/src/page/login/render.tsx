@@ -1,6 +1,7 @@
 import { BeanRenderBase } from 'zova';
 import { Render } from 'zova-module-a-bean';
 import { ZForm, ZFormField, ZFormFieldWrapper, ZFormSubscribe } from 'zova-module-a-form';
+import { ZIcon } from 'zova-module-a-icon';
 
 @Render()
 export class RenderPageLogin extends BeanRenderBase {
@@ -14,6 +15,8 @@ export class RenderPageLogin extends BeanRenderBase {
               <h2 class="text-2xl font-semibold mb-2 text-center">{this.scope.locale.Login()}</h2>
               <div class="mb-4">
                 {this._renderForm()}
+                <div class="divider">OR</div>
+                {this._renderGithub()}
               </div>
             </div>
           </div>
@@ -74,6 +77,20 @@ export class RenderPageLogin extends BeanRenderBase {
         >
         </ZFormSubscribe>
       </ZForm>
+    );
+  }
+
+  _renderGithub() {
+    return (
+      <button
+        class="btn mt-2 w-full btn-primary"
+        onClick={() => {
+          this.onSubmitLoginGitHub();
+        }}
+      >
+        <ZIcon name=":auth:github"></ZIcon>
+        {this.scope.locale.LoginGitHub()}
+      </button>
     );
   }
 }
