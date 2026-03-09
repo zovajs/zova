@@ -83,7 +83,7 @@ export class RenderPageLogin extends BeanRenderBase {
   _renderGithub() {
     return (
       <button
-        class="btn mt-2 w-full btn-primary"
+        class="btn mt-2 w-full btn-default"
         onClick={() => {
           this.onSubmitLoginGitHub();
         }}
