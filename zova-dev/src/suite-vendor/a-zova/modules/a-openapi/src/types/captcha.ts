@@ -1,8 +1,8 @@
 export interface ICaptchaSceneRecord {
-  'a-captchasimple:simple': never;
+  'captcha-simple:simple': never;
 }
 
-export interface ICaptchaProviderRecord{}
+export interface ICaptchaProviderRecord {}
 
 export interface ICaptchaOptions {
   scene?: keyof ICaptchaSceneRecord;

@@ -46,7 +46,7 @@ export class ControllerFormFieldCaptcha extends BeanControllerBase {
   }
 
   get captchaScene() {
-    return this.$props.captcha?.scene ?? 'a-captchasimple:simple';
+    return this.$props.captcha?.scene ?? 'captcha-simple:simple';
   }
 
   private async createCaptchaData() {
