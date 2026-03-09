@@ -14,7 +14,7 @@ hero:
       text: 为什么需要Vue3+IOC?
       link: /zh/guide/start/why
     - theme: alt
-      text: Github
+      text: GitHub
       link: https://github.com/zovajs/zova
 
 features:

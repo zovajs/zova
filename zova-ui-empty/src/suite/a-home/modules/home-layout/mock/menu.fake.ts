@@ -6,7 +6,7 @@ const __MenuData = [
     caption: '',
     icon: '::home',
     to: '/',
-    //to: '/home/index',
+    // to: '/home/index',
   },
   {
     title: 'State',
@@ -21,7 +21,7 @@ const __MenuData = [
     to: '/demo/basic/component',
   },
   {
-    title: 'Github',
+    title: 'GitHub',
     caption: 'github.com/cabloy',
     icon: ':social:github',
     href: 'https://github.com/cabloy',

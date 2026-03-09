@@ -6,7 +6,7 @@ const __MenuItems = [
   { group: 'basic', title: 'Component', caption: 'props, emits, slots', icon: '', link: '/demo/basic/component' },
   { group: 'basic', title: 'CSS-in-JS', caption: 'Style & Theme', icon: '', link: '/demo/basic/style' },
   { group: 'vuetify', title: 'Docs', caption: 'vuetifyjs.com', icon: ':social:school', external: true, link: 'https://vuetifyjs.com' },
-  { group: 'vuetify', title: 'Github', caption: 'github.com/vuetifyjs', icon: ':editor:code', external: true, link: 'https://github.com/vuetifyjs' },
+  { group: 'vuetify', title: 'GitHub', caption: 'github.com/vuetifyjs', icon: ':editor:code', external: true, link: 'https://github.com/vuetifyjs' },
   { group: 'vuetify', title: 'Vuetify Awesome', caption: 'Community Vuetify projects', icon: '::heart', external: true, link: 'https://github.com/vuetifyjs/awesome' },
 ];
 const __MenuGroups = [

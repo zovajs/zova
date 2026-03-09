@@ -4,7 +4,7 @@ const __MenuItems = [
   { order: 0, title: 'Home', caption: '', icon: '::home', link: '/' },
   { group: 'basic', title: 'State', caption: 'ref, computed', icon: '', link: '/demo/basic/state' },
   { group: 'basic', title: 'Component', caption: 'props, emits, slots', icon: '', link: '/demo/basic/component' },
-  { group: 'vona', title: 'Github', caption: 'github.com/vonajs', icon: ':editor:code', external: true, link: 'https://github.com/vonajs' },
+  { group: 'vona', title: 'GitHub', caption: 'github.com/vonajs', icon: ':editor:code', external: true, link: 'https://github.com/vonajs' },
 ];
 const __MenuGroups = [
   { order: 1, name: 'basic', title: 'Basic' },

@@ -14,7 +14,7 @@ const __MenuItems = [
   { group: 'basic', title: 'Legacy Vue3(2)', caption: '', icon: '', link: '/legacy/counter' },
   { group: 'business', title: 'Todo: CRUD', caption: 'Model: Unified Data Source', icon: '', link: '/todo' }, // link: '/demo/todo/todo',
   { group: 'zova', title: 'Docs', caption: 'zova.js.org', icon: ':social:school', external: true, link: 'https://zova.js.org' },
-  { group: 'zova', title: 'Github', caption: 'github.com/cabloy', icon: ':social:github', external: true, link: 'https://github.com/cabloy/zova' },
+  { group: 'zova', title: 'GitHub', caption: 'github.com/cabloy', icon: ':social:github', external: true, link: 'https://github.com/cabloy/zova' },
 ];
 const __MenuGroups = [
   { order: 1, name: 'basic', title: 'Basic' },

@@ -14,7 +14,7 @@ hero:
       text: Why Vue3+IOC?
       link: /guide/start/why
     - theme: alt
-      text: Github
+      text: GitHub
       link: https://github.com/zovajs/zova
 
 features:
