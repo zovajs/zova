@@ -7,6 +7,9 @@ export class AppCookie extends BeanSimple {
   getItem(key: string): string | undefined;
   getItem(key?: undefined | null): Record<string, string>;
   getItem(key?: string | undefined | null): Record<string, string> | string | undefined {
+    if (!this.ctx) {
+      throw new Error('cannot called in sys bean');
+    }
     const cookieSource = cast(process.env.SERVER ? cast(this.ctx.meta).$ssr.context.req.headers : document);
     const cookies = cookieSource.cookie ? cookieSource.cookie.split('; ') : [];
     const l = cookies.length;
