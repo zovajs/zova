@@ -285,6 +285,9 @@ importers:
       zova-module-start-textarea:
         specifier: workspace:^
         version: link:src/suite/cabloy-start/modules/start-textarea
+      zova-module-start-theme:
+        specifier: workspace:^
+        version: link:src/suite/cabloy-start/modules/start-theme
       zova-module-start-toggle:
         specifier: workspace:^
         version: link:src/suite/cabloy-start/modules/start-toggle
@@ -1240,6 +1243,9 @@ importers:
       zova-module-start-textarea:
         specifier: ^5.0.0
         version: link:modules/start-textarea
+      zova-module-start-theme:
+        specifier: ^5.0.0
+        version: link:modules/start-theme
       zova-module-start-toggle:
         specifier: ^5.0.0
         version: link:modules/start-toggle
@@ -1274,6 +1280,8 @@ importers:
   src/suite/cabloy-start/modules/start-table: {}
 
   src/suite/cabloy-start/modules/start-textarea: {}
+
+  src/suite/cabloy-start/modules/start-theme: {}
 
   src/suite/cabloy-start/modules/start-toggle: {}
 
