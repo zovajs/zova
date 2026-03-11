@@ -1,4 +1,5 @@
 import type { ILocaleRecord, ZovaConfigOptional, ZovaSys } from 'zova';
+import type { IThemeRecord } from 'zova-module-a-style';
 import { colorizer, combine, errors, splatter, timestamp } from '@cabloy/logger';
 import { formatLoggerConsole, formatLoggerFilter } from 'zova';
 
@@ -98,7 +99,11 @@ export default function (sys: ZovaSys) {
   };
 
   // modules
-  config.modules = {};
+  config.modules = {
+    'a-style': {
+      defaultTheme: env.STYLE_DEFAULT_THEME as keyof IThemeRecord,
+    },
+  };
 
   // onions
   config.onions = {};
