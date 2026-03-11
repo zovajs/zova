@@ -69,7 +69,7 @@ export class RenderTheme extends BeanRenderBase {
                   <li key={item.name} class={this.$theme.name === item.name ? 'disabled' : ''}>
                     <a
                       onClick={() => {
-                        this.$theme.name = item.name as any;
+                        this.$theme.name = item.name as keyof IThemeRecord;
                       }}
                     >
                       {$icon(this.$theme.name === item.name ? '::done' : '::none')}

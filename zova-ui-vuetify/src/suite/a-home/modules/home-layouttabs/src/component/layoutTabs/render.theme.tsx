@@ -70,7 +70,7 @@ export class RenderTheme extends BeanRenderBase {
                   disabled={this.$theme.name === item.name}
                   prependIcon={$iconName(this.$theme.name === item.name ? '::done' : '::none')}
                   onClick={() => {
-                    this.$theme.name = item.name as any;
+                    this.$theme.name = item.name as keyof IThemeRecord;
                   }}
                 ></VListItem>
               );
