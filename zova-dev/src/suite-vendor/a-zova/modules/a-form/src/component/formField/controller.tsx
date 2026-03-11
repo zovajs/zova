@@ -1,4 +1,5 @@
 import type { ControllerForm } from '../form/controller.jsx';
+import { isNil } from '@cabloy/utils';
 import { useField } from '@tanstack/vue-form';
 import z from 'zod';
 import { BeanControllerBase, deepEqual, IComponentOptions, Use } from 'zova';
@@ -185,9 +186,13 @@ export class ControllerFormField<TParentData extends {} = {}> extends BeanContro
   // }
 
   private _getFormFieldOptions() {
+    // defaultValue
+    const value = this.$$form.getFieldValue(this.name);
+    const defaultValue = isNil(value) ? (this.$props.defaultValue ?? this.property?.default) : undefined;
+    // validators
     const validators = this._getFormFieldOptionsValidators();
     return Object.assign({
-      defaultValue: this.$props.defaultValue ?? this.property?.default,
+      defaultValue,
     }, this.$props, {
       form: this.$$form.form,
       validators,
