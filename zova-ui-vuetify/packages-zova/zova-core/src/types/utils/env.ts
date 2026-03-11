@@ -16,6 +16,7 @@ export interface ZovaConfigEnv {
   LAYOUT_COMPONENT_EMPTY: keyof TypeComponentLayoutRecord | undefined;
   LAYOUT_COMPONENT_DEFAULT: keyof TypeComponentLayoutRecord | undefined;
   LAYOUT_SIDEBAR_LEFTOPENPC: string | undefined;
+  STYLE_DEFAULT_THEME: string | undefined;
   SSR_API_BASE_URL: string | undefined;
   API_BASE_URL: string | undefined;
   API_PREFIX: string | undefined;
