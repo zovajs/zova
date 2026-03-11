@@ -51,16 +51,7 @@ export class RenderTheme extends BeanRenderBase {
   }
 
   renderThemeName() {
-    const themes = [
-      {
-        name: 'home-base:default' satisfies keyof IThemeRecord,
-        title: this.scope.locale.ThemeDefault(),
-      },
-      {
-        name: 'demo-basic:orange' satisfies keyof IThemeRecord,
-        title: this.scope.locale.ThemeOrange(),
-      },
-    ];
+    const themes = this.getThemeNames();
     const slots = {
       activator: ({ props }) => {
         return <VBtn icon={$iconName(':outline:theme-outline')} variant="text" {...props}></VBtn>;
@@ -88,5 +79,18 @@ export class RenderTheme extends BeanRenderBase {
         </ClientOnly>
       </VMenu>
     );
+  }
+
+  getThemeNames() {
+    return [
+      {
+        name: 'home-base:default' satisfies keyof IThemeRecord,
+        title: this.scope.locale.ThemeDefault(),
+      },
+      {
+        name: 'demo-basic:orange' satisfies keyof IThemeRecord,
+        title: this.scope.locale.ThemeOrange(),
+      },
+    ];
   }
 }
