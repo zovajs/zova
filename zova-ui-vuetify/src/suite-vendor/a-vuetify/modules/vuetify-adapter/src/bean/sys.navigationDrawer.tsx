@@ -69,16 +69,16 @@ export class SysNavigationDrawer extends BeanBase {
 
       useFocusTrap(props, { isActive, localTop: isTemporary, contentEl: rootEl });
 
-      useToggleScope(() => props.expandOnHover && props.rail != null, () => {
-        watch(isHovering, val => emit('update:rail', !val));
+      useToggleScope(() => (props.expandOnHover && props.rail != null), () => {
+        watch(() => isHovering, val => emit('update:rail', !val));
       });
 
-      useToggleScope(() => !props.disableResizeWatcher, () => {
-        watch(isTemporary, val => !props.permanent && (nextTick(() => isActive.value = !val)));
+      useToggleScope(() => (!props.disableResizeWatcher), () => {
+        watch(() => isTemporary, val => !props.permanent && (nextTick(() => isActive.value = !val)));
       });
 
-      useToggleScope(() => !props.disableRouteWatcher && !!router, () => {
-        watch(router!.currentRoute, () => isTemporary.value && (isActive.value = false));
+      useToggleScope(() => (!props.disableRouteWatcher && !!router), () => {
+        watch(() => router!.currentRoute, () => isTemporary.value && (isActive.value = false));
       });
 
       watch(() => props.permanent, val => {
