@@ -1,3 +1,4 @@
+import type { IThemeRecord } from 'zova-module-a-style';
 import { BeanRenderBase, ClientOnly } from 'zova';
 import { Render } from 'zova-module-a-bean';
 import { $icon } from 'zova-module-a-icon';
@@ -49,11 +50,11 @@ export class RenderTheme extends BeanRenderBase {
   renderThemeName() {
     const themes = [
       {
-        name: 'home-base.theme.default',
+        name: 'home-base:default' satisfies keyof IThemeRecord,
         title: this.scope.locale.ThemeDefault(),
       },
       {
-        name: 'demo-basic.theme.orange',
+        name: 'demo-basic:orange' satisfies keyof IThemeRecord,
         title: this.scope.locale.ThemeOrange(),
       },
     ];
