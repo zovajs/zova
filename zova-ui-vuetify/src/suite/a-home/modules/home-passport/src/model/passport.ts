@@ -111,7 +111,7 @@ export class ModelPassport extends BeanModelBase {
   }
 
   get isAdmin() {
-    return this.passport?.roles.some(item => item.name === 'admin');
+    return !!this.passport?.roles.some(item => item.name === 'admin');
   }
 
   async getJwtInfo(): Promise<IJwtInfo | undefined> {
