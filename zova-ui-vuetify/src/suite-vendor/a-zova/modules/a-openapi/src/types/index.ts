@@ -6,6 +6,7 @@ export * from './date.js';
 export * from './jsx.js';
 export * from './permissions.js';
 export * from './resourceMeta.js';
+export * from './resourcePicker.js';
 export * from './rest.js';
 export * from './schema.js';
 export * from './sdk.js';
