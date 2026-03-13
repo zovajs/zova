@@ -11,6 +11,7 @@ export interface ITableProviderComponents {
   toggle?: TypeTableCellRenderComponentProvider;
   select?: TypeTableCellRenderComponentProvider;
   textarea?: TypeTableCellRenderComponentProvider;
+  resourcePicker?: TypeTableCellRenderComponentProvider;
 }
 
 export interface ITableProvider {

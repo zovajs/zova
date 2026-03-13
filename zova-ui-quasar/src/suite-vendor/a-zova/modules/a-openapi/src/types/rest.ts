@@ -5,6 +5,7 @@ import type { TypeRenderComponentJsx } from 'zova-jsx';
 import type { TypeResourceActionRowRecordRender } from './actions.js';
 import type { ICaptchaOptions } from './captcha.js';
 import type { TypeDateFormat } from './date.js';
+import type { IResourcePickerOptions } from './resourcePicker.js';
 import type { ISelectOptions } from './select.js';
 import type { ITextareaOptions } from './textarea.js';
 import type { IToggleOptions } from './toggle.js';
@@ -19,6 +20,7 @@ export interface ISchemaObjectExtensionFieldRest {
   toggle?: IToggleOptions;
   select?: ISelectOptions;
   textarea?: ITextareaOptions;
+  resourcePicker?: IResourcePickerOptions;
   customKey?: string;
   visible?: boolean;
   displayValue?: any;

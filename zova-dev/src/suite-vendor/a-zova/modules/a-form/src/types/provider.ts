@@ -19,6 +19,7 @@ export interface IFormProviderComponents {
   toggle?: TypeFormFieldRenderComponentProvider;
   select?: TypeFormFieldRenderComponentProvider;
   textarea?: TypeFormFieldRenderComponentProvider;
+  resourcePicker?: TypeFormFieldRenderComponentProvider;
 }
 
 export interface IFormProvider {
