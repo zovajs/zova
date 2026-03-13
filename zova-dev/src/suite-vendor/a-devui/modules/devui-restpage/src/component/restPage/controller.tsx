@@ -4,7 +4,8 @@ import { createColumnHelper } from '@tanstack/table-core';
 import { Use } from 'zova';
 import { Controller } from 'zova-module-a-bean';
 import { $QueriesAutoLoad } from 'zova-module-a-model';
-import { BeanControllerTableBase, ControllerTable, ITablePaged, ITableQuery, ITableResPaged, TypeTableGetColumnsNext } from 'zova-module-a-table';
+import { ITablePaged, ITableQuery, ITableResPaged } from 'zova-module-a-openapi';
+import { BeanControllerTableBase, ControllerTable, TypeTableGetColumnsNext } from 'zova-module-a-table';
 import { IJsxRenderContextPage, IPageScope } from '../../types/page.js';
 
 // @ts-ignore ignore
