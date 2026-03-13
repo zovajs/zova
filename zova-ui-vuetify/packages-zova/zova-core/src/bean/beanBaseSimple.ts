@@ -47,7 +47,7 @@ export class BeanBaseSimple extends BeanSimple {
   }
 
   protected get $beanOptions(): IDecoratorBeanOptionsBase {
-    return appResource.getBean(this[SymbolBeanFullName])!;
+    return appResource.getBean(this[SymbolBeanFullName] || this.constructor as any)!;
   }
 
   public get $onionName() {
