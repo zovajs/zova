@@ -1,5 +1,8 @@
+import type { ISelectOptions } from './select.js';
+import type { ITableQuery } from './table.js';
+
 export interface IResourcePickerOptions {
   resource: string;
-  idKey?: string;
-  nameKey?: string;
+  query?: ITableQuery;
+  selectOptions?: ISelectOptions;
 }
