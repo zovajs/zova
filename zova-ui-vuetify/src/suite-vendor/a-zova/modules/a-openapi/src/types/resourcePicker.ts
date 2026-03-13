@@ -2,7 +2,7 @@ import type { ISelectOptions } from './select.js';
 import type { ITableQuery } from './table.js';
 
 export interface IResourcePickerOptions {
-  resource: string;
+  resource?: string;
   actionPath?: string;
   query?: ITableQuery;
   selectOptions?: ISelectOptions;
