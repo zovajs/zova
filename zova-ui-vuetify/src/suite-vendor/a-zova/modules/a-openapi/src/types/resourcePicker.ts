@@ -6,4 +6,5 @@ export interface IResourcePickerOptions {
   actionPath?: string;
   query?: ITableQuery;
   selectOptions?: ISelectOptions;
+  relation?: string;
 }
