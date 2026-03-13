@@ -101,6 +101,7 @@ export class ControllerTable<TData extends {} = {}> extends BeanControllerTableB
   }
 
   private async _createColumnsMiddle(properties: SchemaObject[]) {
+    const tableMeta = this.tableMeta;
     const columnHelper = createColumnHelper<TData>();
     const columns: TypeColumn<TData>[] = [];
     for (const property of properties) {
@@ -110,7 +111,7 @@ export class ControllerTable<TData extends {} = {}> extends BeanControllerTableB
         header: _props => {
           return property?.title || key;
         },
-        cell: props => this.tableMeta.renders[key](props),
+        cell: props => tableMeta.renders[key](props),
       }));
     }
     return columns;

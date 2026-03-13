@@ -7,10 +7,15 @@ import { __ThisModule__ } from '../../.metadata/this.js';
 export class BeanModelLast extends BeanBase {
   public selector: string;
 
-  protected async __init__(selector?: unknown) {
+  constructor(selector?: unknown) {
+    super();
     if (this.$onionOptions?.enableSelector) {
       this.selector = selector as string ?? '';
     }
+  }
+
+  protected async __init__(_selector?: unknown) {
+    // do nothing
   }
 
   public get $onionOptions(): IDecoratorModelOptions | undefined {
