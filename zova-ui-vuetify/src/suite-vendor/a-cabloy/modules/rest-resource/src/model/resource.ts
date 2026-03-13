@@ -1,13 +1,13 @@
 import type { TableIdentity } from 'table-identity';
 import type { DataMutation, IDecoratorModelOptions } from 'zova-module-a-model';
-import type { IOpenapiOptionsResourceMeta, ScopeModuleAOpenapi, TypeOpenapiPermissions } from 'zova-module-a-openapi';
+import type { IOpenapiOptionsResourceMeta, ITableQuery, ITableRes, ScopeModuleAOpenapi, TypeOpenapiPermissions } from 'zova-module-a-openapi';
 import { hashkey, isNil } from '@cabloy/utils';
 import { SchemaObject } from 'openapi3-ts/oas31';
 import { deepExtend, UseScope } from 'zova';
 import { formSceneFromFormMeta, IFormMeta, IFormProvider } from 'zova-module-a-form';
 import { $QueryAutoLoad, BeanModelBase, Model } from 'zova-module-a-model';
 import { SymbolOpenapiSchemaName } from 'zova-module-a-openapi';
-import { ITableProvider, ITableQuery, ITableRes } from 'zova-module-a-table';
+import { ITableProvider } from 'zova-module-a-table';
 
 export interface IModelOptionsResource extends IDecoratorModelOptions {}
 

@@ -276,6 +276,9 @@ importers:
       zova-module-start-paypal:
         specifier: workspace:^
         version: link:src/suite/cabloy-start/modules/start-paypal
+      zova-module-start-resource:
+        specifier: workspace:^
+        version: link:src/suite/cabloy-start/modules/start-resource
       zova-module-start-restpage:
         specifier: workspace:^
         version: link:src/suite/cabloy-start/modules/start-restpage
@@ -1237,6 +1240,9 @@ importers:
       zova-module-start-paypal:
         specifier: ^5.0.0
         version: link:modules/start-paypal
+      zova-module-start-resource:
+        specifier: ^5.0.0
+        version: link:modules/start-resource
       zova-module-start-restpage:
         specifier: ^5.0.0
         version: link:modules/start-restpage
@@ -1280,6 +1286,8 @@ importers:
   src/suite/cabloy-start/modules/start-layoutfront: {}
 
   src/suite/cabloy-start/modules/start-paypal: {}
+
+  src/suite/cabloy-start/modules/start-resource: {}
 
   src/suite/cabloy-start/modules/start-restpage: {}
 

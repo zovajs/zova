@@ -1,7 +1,9 @@
-import { VNode } from 'vue';
-import { BeanControllerBase, IComponentOptions } from 'zova';
+import type { VNode } from 'vue';
+import type { IComponentOptions } from 'zova';
+import type { IFormFieldOptions } from 'zova-module-a-form';
+import { BeanControllerBase } from 'zova';
 import { Controller } from 'zova-module-a-bean';
-import { IFormFieldOptions, ZFormField } from 'zova-module-a-form';
+import { ZFormField } from 'zova-module-a-form';
 
 export interface ControllerFormFieldTestProps extends IFormFieldOptions {
   showLog?: boolean;
