@@ -9,10 +9,14 @@ const __MenuItems = [
   { group: 'vuetify', title: 'GitHub', caption: 'github.com/vuetifyjs', icon: ':editor:code', external: true, link: 'https://github.com/vuetifyjs' },
   { group: 'vuetify', title: 'Vuetify Awesome', caption: 'Community Vuetify projects', icon: '::heart', external: true, link: 'https://github.com/vuetifyjs/awesome' },
 ];
-const __MenuGroups = [
-  { order: 1, name: 'basic', title: 'Basic' },
-  { order: 2, name: 'vuetify', title: 'Vuetify' },
-];
+const __MenuGroups = ['cabloyStartAdmin', 'cabloyStartFront'].includes(process.env.META_FLAVOR)
+  ? [
+      { order: 2, name: 'vuetify', title: 'Vuetify' },
+    ]
+  : [
+      { order: 1, name: 'basic', title: 'Basic' },
+      { order: 2, name: 'vuetify', title: 'Vuetify' },
+    ];
 const __MenuData = { menus: __MenuItems, groups: __MenuGroups };
 
 export default defineFakeRoute([
