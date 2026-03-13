@@ -72,17 +72,22 @@ export class ModelResource<Entity = any, EntityCreate = Partial<Entity>, EntityU
     await this._bootstrap();
   }
 
-  select(query: ITableQuery) {
+  selectGeneral(actionPath?: string, query?: ITableQuery) {
     const queryHash = hashkey(query);
     return this.$useStateData({
-      queryKey: ['select', queryHash],
+      queryKey: ['select', actionPath ?? '', queryHash],
       queryFn: async () => {
+        const apiPath = actionPath ? `${this.resourceApi}/${actionPath}` : this.resourceApi;
         return this.$fetch.get<any, ITableRes<Entity>>(
-          this.sys.util.apiActionPathTranslate(this.resourceApi),
+          this.sys.util.apiActionPathTranslate(apiPath),
           this.sys.util.apiActionConfigPrepare(undefined, { query }),
         );
       },
     });
+  }
+
+  select(query?: ITableQuery) {
+    return this.selectGeneral(undefined, query);
   }
 
   view(id: TableIdentity) {
