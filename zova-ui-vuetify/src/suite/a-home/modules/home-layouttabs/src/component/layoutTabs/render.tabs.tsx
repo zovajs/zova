@@ -1,6 +1,6 @@
 import type { VNode } from 'vue';
 import { withModifiers } from 'vue';
-import { VBadge, VTab, VTabs } from 'vuetify/components';
+import { VTab, VTabs } from 'vuetify/components';
 import { BeanRenderBase, ClientOnly } from 'zova';
 import { Render } from 'zova-module-a-bean';
 import { ZIcon } from 'zova-module-a-icon';
@@ -17,31 +17,22 @@ export class RenderTabs extends BeanRenderBase {
       const className = tabKey === $$modelTabs.tabKeyCurrent ? 'text-primary' : '';
       const titleLocale = this.$text(info?.title || '');
       const tabIcon = this.getTabIcon(tab);
-      const domTabContent = tab.affix
-        ? titleLocale
-        : (
-            <VBadge
-              class="hidden"
-              color="surface"
-              offsetX={tabIcon ? 2 : -8}
-              offsetY={-8}
-              v-slots={{
-                badge: () => (
-                  <ZIcon
-                    name="::close"
-                    width="16"
-                    height="16"
-                    nativeOnClick={withModifiers(() => {
-                      $$modelTabs.deleteTab(tabKey);
-                    }, ['stop'])}
-                  >
-                  </ZIcon>
-                ),
-              }}
-            >
-              {titleLocale}
-            </VBadge>
+      const slots = {
+        append: () => {
+          if (tab.affix) return;
+          return (
+            <ZIcon
+              class="close"
+              name="::close"
+              width="16"
+              height="16"
+              nativeOnClick={withModifiers(() => {
+                $$modelTabs.deleteTab(tabKey);
+              }, ['stop'])}
+            ></ZIcon>
           );
+        },
+      };
       const domTab = (
         <VTab
           key={tabKey}
@@ -50,9 +41,10 @@ export class RenderTabs extends BeanRenderBase {
           nativeOnClick={() => {
             $$modelTabs.activeTab(tabKey);
           }}
-          prependIcon={this.getTabIcon(tab)}
+          prependIcon={tabIcon}
+          v-slots={slots}
         >
-          {domTabContent}
+          {titleLocale}
         </VTab>
       );
       domTabs.push(domTab);

@@ -8,10 +8,13 @@ export class StyleLayoutTabs extends BeanStyleBase {
   protected async __init__() {
     this.cTab = this.$style({
       $nest: {
-        '.v-badge__badge': {
+        '.close': {
           display: 'none',
+          position: 'absolute',
+          top: '2px',
+          right: '4px',
         },
-        '&:hover .v-badge__badge': {
+        '&:hover .close': {
           display: 'block',
         },
       },
