@@ -136,7 +136,7 @@ declare module 'zova-module-demo-todo' {
   export interface ControllerPageItem {
         $params: NSControllerPageItem.ParamsOutput;
 $query: NSControllerPageItem.QueryOutput;
-      } 
+      }
 }
 /** pages: end */
 

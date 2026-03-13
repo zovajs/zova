@@ -129,7 +129,6 @@
 '::visibility': true;
 '::zoom-in': true;
 '::zoom-out': true;
-'::zova': true;
 ':editor:add-box-outline': true;
 ':editor:add-box': true;
 ':editor:bookmark-outline': true;
@@ -224,6 +223,7 @@
 ':role:role': true;
 ':role:shield-key': true;
 ':role:template': true;
+':social:cabloy': true;
 ':social:chat': true;
 ':social:facebook': true;
 ':social:github': true;
@@ -231,5 +231,7 @@
 ':social:record-voice-over': true;
 ':social:school': true;
 ':social:twitter': true;
+':social:vona': true;
+':social:zova': true;
 ':tools:pomotodo': true;
 ':tools:spreadsheet': true;

@@ -284,7 +284,7 @@ $query: NSControllerPageToolOne.QueryOutput;
 export interface ControllerPageToolTwo {
         $params: NSControllerPageToolTwo.ParamsOutput;
 $query: NSControllerPageToolTwo.QueryOutput;
-      } 
+      }
 }
 /** pages: end */
 

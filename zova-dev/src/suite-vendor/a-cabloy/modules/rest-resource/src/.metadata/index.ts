@@ -118,7 +118,7 @@ export interface ControllerPageEntryCreate {
       }
 export interface ControllerPageResource {
         $params: NSControllerPageResource.ParamsOutput;
-      } 
+      }
 }
 /** pages: end */
 

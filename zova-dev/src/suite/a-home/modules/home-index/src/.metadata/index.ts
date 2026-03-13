@@ -44,7 +44,7 @@ export const pageNameSchemas = {
 
 };
 declare module 'zova-module-home-index' {
-   
+  
 }
 /** pages: end */
 
