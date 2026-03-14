@@ -9,20 +9,24 @@
   "author": "zhennann <zhen.nann@icloud.com>",
   "type": "module",
   "scripts": {
+    "init": "pnpm install --no-frozen-lockfile && npm run zova :tools:deps && pnpm install --no-frozen-lockfile",
+    "zova": "node ../zova-cli/cli/src/bin/zova.ts",
     "dev": "npm run dev:ssr:admin",
     "build": "npm run build:ssr:admin",
-    "preview": "npm run preview:ssr",
+    "preview": "npm run preview:ssr:admin",
     "dev:ssr:admin": "npm run prerun && quasar dev --mode ssr --flavor admin",
     "dev:ssr:front": "npm run prerun && quasar dev --mode ssr --flavor front",
     "build:ssr:admin": "npm run prerun && quasar build --mode ssr --flavor admin",
     "build:ssr:front": "npm run prerun && quasar build --mode ssr --flavor front",
-    "preview:ssr": "concurrently \"node ./dist-mock/index.js\" \"node ./dist/ssr/index.js\"",
+    "preview:ssr:admin": "concurrently \"node ./dist-mock/index.js\" \"node ./dist/ssr-admin/index.js\"",
+    "preview:ssr:front": "concurrently \"node ./dist-mock/index.js\" \"node ./dist/ssr-front/index.js\"",
     "dev:spa": "npm run prerun && quasar dev --mode spa --flavor admin",
     "build:spa": "npm run prerun && quasar build --mode spa --flavor admin",
-    "preview:spa": "vite preview --outDir=dist/spa",
-    "prerun": "zova :tools:deps && npm run tsc",
+    "preview:spa": "vite preview --outDir=dist/spa-admin",
+    "prerun": "npm run zova :tools:deps && npm run tsc",
     "tsc": "vue-tsc --noEmit --project tsconfig.vue-tsc.json",
-    "lint": "eslint . --fix --ignore-path .gitignore"
+    "lint": "eslint",
+    "lint:fix": "eslint --fix"
   },
   "keywords": ["vue3", "ioc", "zova"],
   "repository": {
@@ -41,14 +45,13 @@
     "quasar": "^2.18.1",
     "vue": "^3.5.6",
     "vue-router": "^4.4.5",
-    "zova": "^5.0.237"
+    "zova": "workspace:^"
   },
   "devDependencies": {
     "@cabloy/lint": "^5.0.8",
     "@cabloy/openapi-typescript": "^7.9.2",
-    "@quasar/app-vite": "2.2.0",
+    "@quasar/app-vite": "2.4.0",
     "@types/node": "^22.10.2",
-    "@vitejs/plugin-vue": "^5.0.5",
     "concurrently": "^8.2.2",
     "eslint": "^9.20.1",
     "quasar-app-extension-zova": "^1.1.184",
