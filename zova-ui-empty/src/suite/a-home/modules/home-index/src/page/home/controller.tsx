@@ -11,9 +11,11 @@ export class ControllerPageHome extends BeanControllerPageBase {
 
   protected render() {
     return (
-      <div>
-        <div style="font-size: 36px;">Hello Zova</div>
-        <div style="font-size: 24px;opacity:.4;">Less is more, while more is less</div>
+      <div style="text-align: center;">
+        <div>
+          <div style="font-size: 36px;">{this.message}</div>
+          <div style="font-size: 24px;opacity:.4;">Less is more, while more is less</div>
+        </div>
       </div>
     );
   }
