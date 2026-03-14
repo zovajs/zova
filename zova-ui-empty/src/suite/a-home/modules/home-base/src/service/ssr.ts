@@ -9,7 +9,7 @@ export class ServiceSsr extends BeanBase {
     // ssr hydrated
     if (process.env.CLIENT) {
       this.ctx.meta.$ssr.onHydrated(() => {
-        cast(this.app.vue.config.globalProperties.$q).onSSRHydrated();
+        // do something
       });
     }
     // ssr errorHandler
