@@ -1,7 +1,8 @@
-import { VBtn, VCard, VCol, VRow } from 'vuetify/components';
+import { VBtn, VCard, VCol, VDivider, VRow } from 'vuetify/components';
 import { BeanRenderBase } from 'zova';
 import { Render } from 'zova-module-a-bean';
 import { ZForm, ZFormField, ZFormFieldWrapper, ZFormSubscribe } from 'zova-module-a-form';
+import { $iconName } from 'zova-module-a-icon';
 import { $useLocale } from '../../.metadata/locales.js';
 
 @Render()
@@ -24,6 +25,8 @@ export class RenderPageLogin extends BeanRenderBase {
               <h2 class="text-center" style={{ marginBottom: '12px' }}>{this.scope.locale.Login()}</h2>
               <div class="pa-4">
                 {this._renderForm()}
+                <VDivider style={{ marginTop: '12px', marginBottom: '12px' }}></VDivider>
+                {this._renderGithub()}
               </div>
             </VCol>
           </VRow>
@@ -88,6 +91,22 @@ export class RenderPageLogin extends BeanRenderBase {
         >
         </ZFormSubscribe>
       </ZForm>
+    );
+  }
+
+  _renderGithub() {
+    return (
+      <div class="d-flex justify-center">
+        <VBtn
+          color="secondary"
+          prependIcon={$iconName(':auth:github')}
+          nativeOnClick={() => {
+            this.onSubmitLoginGitHub();
+          }}
+        >
+          {this.scope.locale.LoginGitHub()}
+        </VBtn>
+      </div>
     );
   }
 }
