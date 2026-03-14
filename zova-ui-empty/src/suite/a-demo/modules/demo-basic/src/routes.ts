@@ -1,8 +1,10 @@
-import Component from './.metadata/page/component.vue';
-import State from './.metadata/page/state.vue';
-import { IModuleRoute } from 'zova-module-a-router';
+import type { IModuleRoute } from 'zova-module-a-router';
+import { ZPageComponent } from './.metadata/page/component.js';
+import { ZPageState } from './.metadata/page/state.js';
+import { ZPageStyle } from './.metadata/page/style.js';
 
 export const routes: IModuleRoute[] = [
-  { path: 'state', component: State },
-  { path: 'component', component: Component },
+  { path: 'state', component: ZPageState },
+  { path: 'component', component: ZPageComponent },
+  { path: 'style', component: ZPageStyle },
 ];

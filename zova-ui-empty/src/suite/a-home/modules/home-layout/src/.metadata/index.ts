@@ -1,32 +1,18 @@
 /* eslint-disable */
 /** model: begin */
-export * from '../model/layout.js';
 export * from '../model/menu.js';
-import { IModelOptionsLayout } from '../model/layout.js';
 import { IModelOptionsMenu } from '../model/menu.js';
 import 'zova-module-a-model';
 declare module 'zova-module-a-model' {
   
     export interface IModelRecord {
-      'home-layout:layout': IModelOptionsLayout;
-'home-layout:menu': IModelOptionsMenu;
+      'home-layout:menu': IModelOptionsMenu;
     }
 
   
 }
 declare module 'zova-module-home-layout' {
   
-        export interface ModelLayout {
-          /** @internal */
-          get scope(): ScopeModuleHomeLayout;
-        }
-
-        export interface ModelLayout {
-          get $beanFullName(): 'home-layout.model.layout';
-          get $onionName(): 'home-layout:layout';
-          get $onionOptions(): IModelOptionsLayout;
-        }
-
         export interface ModelMenu {
           /** @internal */
           get scope(): ScopeModuleHomeLayout;
@@ -40,13 +26,11 @@ declare module 'zova-module-home-layout' {
 }
 /** model: end */
 /** model: begin */
-import { ModelLayout } from '../model/layout.js';
 import { ModelMenu } from '../model/menu.js';
 import 'zova';
 declare module 'zova' {
   export interface IBeanRecordGeneral {
-    'home-layout.model.layout': ModelLayout;
-'home-layout.model.menu': ModelMenu;
+    'home-layout.model.menu': ModelMenu;
   }
 }
 /** model: end */
@@ -156,8 +140,6 @@ export interface IZovaComponentRecord {
 /** render: begin */
 export * from '../component/layoutTabs/render.content.jsx';
 export * from '../component/layoutTabs/render.menu.jsx';
-export * from '../component/layoutTabs/render.sidebar.jsx';
-export * from '../component/layoutTabs/render.tabs.jsx';
 export * from '../component/layoutTabs/render.jsx';
 
 import 'zova';
@@ -177,16 +159,6 @@ declare module 'zova-module-home-layout' {
           get scope(): ScopeModuleHomeLayout;
         }
 
-        export interface RenderSidebar {
-          /** @internal */
-          get scope(): ScopeModuleHomeLayout;
-        }
-
-        export interface RenderTabs {
-          /** @internal */
-          get scope(): ScopeModuleHomeLayout;
-        }
-
         export interface RenderLayoutTabs {
           /** @internal */
           get scope(): ScopeModuleHomeLayout;
@@ -196,16 +168,12 @@ declare module 'zova-module-home-layout' {
 /** render: begin */
 import { RenderContent } from '../component/layoutTabs/render.content.jsx';
 import { RenderMenu } from '../component/layoutTabs/render.menu.jsx';
-import { RenderSidebar } from '../component/layoutTabs/render.sidebar.jsx';
-import { RenderTabs } from '../component/layoutTabs/render.tabs.jsx';
 import { RenderLayoutTabs } from '../component/layoutTabs/render.jsx';
 import 'zova';
 declare module 'zova' {
   export interface IBeanRecordLocal {
     'home-layout.render.content': RenderContent;
 'home-layout.render.menu': RenderMenu;
-'home-layout.render.sidebar': RenderSidebar;
-'home-layout.render.tabs': RenderTabs;
 'home-layout.render.layoutTabs': RenderLayoutTabs;
   }
 }
