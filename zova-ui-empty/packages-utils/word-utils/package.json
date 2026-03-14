@@ -1,0 +1,52 @@
+{
+  "name": "@cabloy/word-utils",
+  "type": "module",
+  "version": "2.0.2",
+  "description": "word utils",
+  "publishConfig": {
+    "access": "public"
+  },
+  "author": "zhennann",
+  "license": "MIT",
+  "keywords": [
+    "framework",
+    "zova"
+  ],
+  "exports": {
+    ".": {
+      "types": [
+        "./src/index.ts",
+        "./dist/index.d.ts"
+      ],
+      "import": "./src/index.ts",
+      "require": "./src/index.ts",
+      "default": "./dist/index.js"
+    },
+    "./package.json": "./package.json"
+  },
+  "files": [
+    "dist"
+  ],
+  "clean-package": {
+    "indent": 2,
+    "remove": [
+      "clean-package",
+      "devDependencies",
+      "exports.\\..import",
+      "exports.\\..require"
+    ]
+  },
+  "scripts": {
+    "lint": "eslint .",
+    "clean": "rimraf dist tsconfig.tsbuildinfo",
+    "tsc:publish": "npm run clean && tsc",
+    "prepublishOnly": "npm run tsc:publish",
+    "prepack": "clean-package",
+    "postpack": "clean-package restore"
+  },
+  "devDependencies": {
+    "clean-package": "^2.2.0",
+    "rimraf": "^6.0.1"
+  },
+  "gitHead": "78fe325e2b08956a9b65c2e0b04b811cb3d54e90"
+}
