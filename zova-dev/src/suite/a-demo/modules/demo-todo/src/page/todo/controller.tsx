@@ -16,7 +16,15 @@ export class ControllerPageTodo extends BeanControllerPageBase {
   currentTodoId?: string;
 
   protected async __init__() {
-    await $QueryAutoLoad(() => this.$$modelTodo.findAll());
+    await $QueryAutoLoad(() => this.queryTodos);
+  }
+
+  get queryTodos() {
+    return this.$$modelTodo.findAll();
+  }
+
+  get queryTodoCurrent() {
+    return this.$$modelTodo.findOne(this.currentTodoId);
   }
 
   async addTodo() {
@@ -39,8 +47,8 @@ export class ControllerPageTodo extends BeanControllerPageBase {
   }
 
   protected render() {
-    const queryTodoCurrent = this.$$modelTodo.findOne(this.currentTodoId);
-    const queryTodos = this.$$modelTodo.findAll();
+    const queryTodoCurrent = this.queryTodoCurrent;
+    const queryTodos = this.queryTodos;
     return (
       <ZPage>
         {queryTodoCurrent?.data && (
