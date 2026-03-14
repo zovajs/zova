@@ -2,18 +2,11 @@ import { defineFakeRoute } from 'vite-plugin-fake-server-turbo/client';
 
 const __MenuItems = [
   { order: 0, title: 'Home', caption: '', icon: '::home', link: '/' },
-  { group: 'basic', title: 'State', caption: 'ref, computed', icon: '', link: '/demo/basic/state' },
-  { group: 'basic', title: 'Component', caption: 'props, emits, slots', icon: '', link: '/demo/basic/component' },
-  { group: 'basic', title: 'CSS-in-JS', caption: 'Style & Theme', icon: '', link: '/demo/basic/style' },
-  { group: 'quasar', title: 'Docs', caption: 'quasar.dev', icon: ':social:school', external: true, link: 'https://quasar.dev' },
-  { group: 'quasar', title: 'GitHub', caption: 'github.com/quasarframework', icon: ':editor:code', external: true, link: 'https://github.com/quasarframework' },
-  { group: 'quasar', title: 'Quasar Awesome', caption: 'Community Quasar projects', icon: '::heart', external: true, link: 'https://awesome.quasar.dev' },
+  {  title: 'State', caption: 'ref, computed', icon: '', link: '/demo/basic/state' },
+  {  title: 'Component', caption: 'props, emits, slots', icon: '', link: '/demo/basic/component' },
+  {  title: 'GitHub', caption: 'github.com/zovajs/zova', icon: ':social:github', external: true, link: 'https://github.com/zovajs/zova' },
 ];
-const __MenuGroups = [
-  { order: 1, name: 'basic', title: 'Basic' },
-  { order: 2, name: 'quasar', title: 'Quasar' },
-];
-const __MenuData = { menus: __MenuItems, groups: __MenuGroups };
+const __MenuData = { menus: __MenuItems };
 
 export default defineFakeRoute([
   {
