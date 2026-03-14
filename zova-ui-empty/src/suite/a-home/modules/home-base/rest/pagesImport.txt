@@ -1,0 +1,2 @@
+import { NSControllerPageAuthCallback as NSHomeBaseControllerPageAuthCallback } from '../src/suite/a-home/modules/home-base/src/.metadata/page/authCallback.js';
+import { NSControllerPageErrorExpired as NSHomeBaseControllerPageErrorExpired } from '../src/suite/a-home/modules/home-base/src/.metadata/page/errorExpired.js';

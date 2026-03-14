@@ -1,6 +1,5 @@
 {
   "name": "zova-module-home-base",
-  "version": "5.0.0",
   "title": "home-base",
   "zovaModule": {
     "capabilities": {
@@ -11,6 +10,12 @@
     }
   },
   "type": "module",
+  "version": "5.0.0",
+  "description": "",
+  "author": "",
+  "keywords": [
+    "Zova Module"
+  ],
   "exports": {
     ".": {
       "types": [
@@ -22,14 +27,10 @@
     },
     "./*": "./*"
   },
-  "description": "",
-  "keywords": [
-    "Zova Module"
-  ],
-  "author": "",
   "files": [
+    "dist",
     "mock",
-    "dist"
+    "rest"
   ],
   "scripts": {},
   "dependencies": {}

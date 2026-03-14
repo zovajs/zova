@@ -1,7 +1,10 @@
+import type { IDecoratorCssOptions } from 'zova-module-a-style';
 import { BeanBase } from 'zova';
 import { Css } from 'zova-module-a-style';
 
-@Css()
+export interface ICssOptionsDefault extends IDecoratorCssOptions {}
+
+@Css<ICssOptionsDefault>()
 export class CssDefault extends BeanBase {
   textCenter: string;
 
