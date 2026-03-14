@@ -1,62 +1,278 @@
-/** beans: begin */
-export * from '../bean/model.menu.js';
-import { ModelMenu } from '../bean/model.menu.js';
+/* eslint-disable */
+/** model: begin */
+export * from '../model/layout.js';
+export * from '../model/menu.js';
+import { IModelOptionsLayout } from '../model/layout.js';
+import { IModelOptionsMenu } from '../model/menu.js';
+import 'zova-module-a-model';
+declare module 'zova-module-a-model' {
+  
+    export interface IModelRecord {
+      'home-layout:layout': IModelOptionsLayout;
+'home-layout:menu': IModelOptionsMenu;
+    }
+
+  
+}
+declare module 'zova-module-home-layout' {
+  
+        export interface ModelLayout {
+          /** @internal */
+          get scope(): ScopeModuleHomeLayout;
+        }
+
+        export interface ModelLayout {
+          get $beanFullName(): 'home-layout.model.layout';
+          get $onionName(): 'home-layout:layout';
+          get $onionOptions(): IModelOptionsLayout;
+        }
+
+        export interface ModelMenu {
+          /** @internal */
+          get scope(): ScopeModuleHomeLayout;
+        }
+
+        export interface ModelMenu {
+          get $beanFullName(): 'home-layout.model.menu';
+          get $onionName(): 'home-layout:menu';
+          get $onionOptions(): IModelOptionsMenu;
+        } 
+}
+/** model: end */
+/** model: begin */
+import { ModelLayout } from '../model/layout.js';
+import { ModelMenu } from '../model/menu.js';
 import 'zova';
 declare module 'zova' {
-  export interface IBeanRecord {
-    'home-layout.model.menu': ModelMenu;
+  export interface IBeanRecordGeneral {
+    'home-layout.model.layout': ModelLayout;
+'home-layout.model.menu': ModelMenu;
   }
 }
-/** beans: end */
+/** model: end */
+/** service: begin */
+export * from '../service/ssr.js';
+
+import 'zova-module-a-bean';
+declare module 'zova-module-a-bean' {
+  
+    export interface IServiceRecord {
+      'home-layout:ssr': never;
+    }
+
+  
+}
+declare module 'zova-module-home-layout' {
+  
+        export interface ServiceSsr {
+          /** @internal */
+          get scope(): ScopeModuleHomeLayout;
+        }
+
+        export interface ServiceSsr {
+          get $beanFullName(): 'home-layout.service.ssr';
+          get $onionName(): 'home-layout:ssr';
+          
+        } 
+}
+/** service: end */
+/** service: begin */
+import { ServiceSsr } from '../service/ssr.js';
+import 'zova';
+declare module 'zova' {
+  export interface IBeanRecordGeneral {
+    'home-layout.service.ssr': ServiceSsr;
+  }
+}
+/** service: end */
+/** controller: begin */
+export * from '../component/itemLink/controller.jsx';
+export * from '../component/layoutEmpty/controller.jsx';
+export * from '../component/layoutTabs/controller.jsx';
+
+import 'zova';
+declare module 'zova' {
+  
+  
+}
+declare module 'zova-module-home-layout' {
+  
+        export interface ControllerItemLink {
+          /** @internal */
+          get scope(): ScopeModuleHomeLayout;
+        }
+
+        export interface ControllerLayoutEmpty {
+          /** @internal */
+          get scope(): ScopeModuleHomeLayout;
+        }
+
+        export interface ControllerLayoutTabs {
+          /** @internal */
+          get scope(): ScopeModuleHomeLayout;
+        } 
+}
+/** controller: end */
+/** controller: begin */
+import { ControllerItemLink } from '../component/itemLink/controller.jsx';
+import { ControllerLayoutEmpty } from '../component/layoutEmpty/controller.jsx';
+import { ControllerLayoutTabs } from '../component/layoutTabs/controller.jsx';
+import 'zova';
+declare module 'zova' {
+  export interface IBeanRecordLocal {
+    'home-layout.controller.itemLink': ControllerItemLink;
+'home-layout.controller.layoutEmpty': ControllerLayoutEmpty;
+'home-layout.controller.layoutTabs': ControllerLayoutTabs;
+  }
+}
+/** controller: end */
+
 /** components: begin */
-export { ControllerEssentialLink } from '../component/essentialLink/controller.js';
-export * as NSControllerEssentialLink from '../component/essentialLink/controller.js';
-export { ControllerLayoutDefault } from '../component/layoutDefault/controller.js';
-export * as NSControllerLayoutDefault from '../component/layoutDefault/controller.js';
-export { ControllerLayoutEmpty } from '../component/layoutEmpty/controller.js';
-export * as NSControllerLayoutEmpty from '../component/layoutEmpty/controller.js';
-import * as NSControllerEssentialLink from '../component/essentialLink/controller.js';
-import * as NSControllerLayoutDefault from '../component/layoutDefault/controller.js';
-import * as NSControllerLayoutEmpty from '../component/layoutEmpty/controller.js';
-export { default as ZEssentialLink } from '../component/essentialLink/index.vue';
-import ZEssentialLink from '../component/essentialLink/index.vue';
-export { default as ZLayoutDefault } from '../component/layoutDefault/index.vue';
-import ZLayoutDefault from '../component/layoutDefault/index.vue';
-export { default as ZLayoutEmpty } from '../component/layoutEmpty/index.vue';
-import ZLayoutEmpty from '../component/layoutEmpty/index.vue';
+export * from './component/itemLink.js';
+import { ZItemLink } from './component/itemLink.js';
+export * from './component/layoutEmpty.js';
+import { ZLayoutEmpty } from './component/layoutEmpty.js';
+export * from './component/layoutTabs.js';
+import { ZLayoutTabs } from './component/layoutTabs.js';
 export const components = {
-  essentialLink: ZEssentialLink,
-  layoutDefault: ZLayoutDefault,
-  layoutEmpty: ZLayoutEmpty,
+  'itemLink': ZItemLink,
+'layoutEmpty': ZLayoutEmpty,
+'layoutTabs': ZLayoutTabs,
 };
 import 'zova';
 declare module 'zova' {
-  export interface IComponentRecord {
-    'home-layout:essentialLink': NSControllerEssentialLink.ControllerEssentialLink;
-    'home-layout:layoutDefault': NSControllerLayoutDefault.ControllerLayoutDefault;
-    'home-layout:layoutEmpty': NSControllerLayoutEmpty.ControllerLayoutEmpty;
-  }
+export interface IComponentRecord {
+  'home-layout:itemLink': ControllerItemLink;
+'home-layout:layoutEmpty': ControllerLayoutEmpty;
+'home-layout:layoutTabs': ControllerLayoutTabs;
+}
+export interface IZovaComponentRecord {
+  'home-layout:itemLink': typeof ZItemLink;
+'home-layout:layoutEmpty': typeof ZLayoutEmpty;
+'home-layout:layoutTabs': typeof ZLayoutTabs;
+}
 }
 /** components: end */
-/** service: begin */
-export * from '../service/menu.js';
-import { ServiceMenu } from '../service/menu.js';
-export interface IModuleService {
-  menu: ServiceMenu;
+/** render: begin */
+export * from '../component/layoutTabs/render.content.jsx';
+export * from '../component/layoutTabs/render.menu.jsx';
+export * from '../component/layoutTabs/render.sidebar.jsx';
+export * from '../component/layoutTabs/render.tabs.jsx';
+export * from '../component/layoutTabs/render.jsx';
+
+import 'zova';
+declare module 'zova' {
+  
+  
 }
-/** service: end */
+declare module 'zova-module-home-layout' {
+  
+        export interface RenderContent {
+          /** @internal */
+          get scope(): ScopeModuleHomeLayout;
+        }
+
+        export interface RenderMenu {
+          /** @internal */
+          get scope(): ScopeModuleHomeLayout;
+        }
+
+        export interface RenderSidebar {
+          /** @internal */
+          get scope(): ScopeModuleHomeLayout;
+        }
+
+        export interface RenderTabs {
+          /** @internal */
+          get scope(): ScopeModuleHomeLayout;
+        }
+
+        export interface RenderLayoutTabs {
+          /** @internal */
+          get scope(): ScopeModuleHomeLayout;
+        } 
+}
+/** render: end */
+/** render: begin */
+import { RenderContent } from '../component/layoutTabs/render.content.jsx';
+import { RenderMenu } from '../component/layoutTabs/render.menu.jsx';
+import { RenderSidebar } from '../component/layoutTabs/render.sidebar.jsx';
+import { RenderTabs } from '../component/layoutTabs/render.tabs.jsx';
+import { RenderLayoutTabs } from '../component/layoutTabs/render.jsx';
+import 'zova';
+declare module 'zova' {
+  export interface IBeanRecordLocal {
+    'home-layout.render.content': RenderContent;
+'home-layout.render.menu': RenderMenu;
+'home-layout.render.sidebar': RenderSidebar;
+'home-layout.render.tabs': RenderTabs;
+'home-layout.render.layoutTabs': RenderLayoutTabs;
+  }
+}
+/** render: end */
+/** style: begin */
+export * from '../component/layoutTabs/style.js';
+
+import 'zova';
+declare module 'zova' {
+  
+  
+}
+declare module 'zova-module-home-layout' {
+  
+        export interface StyleLayoutTabs {
+          /** @internal */
+          get scope(): ScopeModuleHomeLayout;
+        } 
+}
+/** style: end */
+/** style: begin */
+import { StyleLayoutTabs } from '../component/layoutTabs/style.js';
+import 'zova';
+declare module 'zova' {
+  export interface IBeanRecordLocal {
+    'home-layout.style.layoutTabs': StyleLayoutTabs;
+  }
+}
+/** style: end */
+/** config: begin */
+export * from '../config/config.js';
+import { config } from '../config/config.js';
+/** config: end */
+/** locale: begin */
+import { locales } from './locales.js';
+/** locale: end */
 /** scope: begin */
-import { BeanScopeBase, Scope, TypeModuleResource } from 'zova';
+import { BeanScopeBase, type BeanScopeUtil, TypeModuleConfig, TypeModuleLocales, TypeLocaleBase } from 'zova';
+import { Scope } from 'zova-module-a-bean';
 
 @Scope()
 export class ScopeModuleHomeLayout extends BeanScopeBase {}
 
-export interface ScopeModuleHomeLayout extends TypeModuleResource<never, never, never, never, IModuleService> {}
+export interface ScopeModuleHomeLayout {
+  util: BeanScopeUtil;
+config: TypeModuleConfig<typeof config>;
+locale: TypeModuleLocales<(typeof locales)[TypeLocaleBase]>;
+}
 
 import 'zova';
 declare module 'zova' {
   export interface IBeanScopeRecord {
     'home-layout': ScopeModuleHomeLayout;
   }
+  
+  export interface IBeanScopeConfig {
+    'home-layout': ReturnType<typeof config>;
+  }
+
+  export interface IBeanScopeLocale {
+    'home-layout': (typeof locales)[TypeLocaleBase];
+  }
+
+  
 }
+
+export function locale<K extends keyof (typeof locales)[TypeLocaleBase]>(key: K): `home-layout::${K}` {
+  return `home-layout::${key}`;
+}  
 /** scope: end */
