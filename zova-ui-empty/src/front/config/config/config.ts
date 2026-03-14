@@ -12,11 +12,8 @@ export default function (sys: ZovaSys) {
     path: {
       '/home/index': { alias: '/' },
       '/home/login': { alias: '/login' },
-      '/demo/todo/todo': { alias: '/todo' },
     },
-    name: {
-      'demo-todo:item': { alias: '/todo/:id' },
-    },
+    name: {},
   };
 
   // app
