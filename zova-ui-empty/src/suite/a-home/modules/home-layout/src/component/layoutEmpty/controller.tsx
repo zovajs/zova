@@ -1,4 +1,3 @@
-import { QLayout, QPageContainer } from 'quasar';
 import { BeanControllerBase, Use } from 'zova';
 import { Controller } from 'zova-module-a-bean';
 import { ZRouterViewEmpty } from 'zova-module-a-router';
@@ -15,12 +14,7 @@ export class ControllerLayoutEmpty extends BeanControllerBase {
 
   protected render() {
     return (
-      <QLayout>
-        <QPageContainer>
-          <ZRouterViewEmpty></ZRouterViewEmpty>
-        </QPageContainer>
-        <div class="__ssr_placeholder__"></div>
-      </QLayout>
+      <ZRouterViewEmpty></ZRouterViewEmpty>
     );
   }
 }

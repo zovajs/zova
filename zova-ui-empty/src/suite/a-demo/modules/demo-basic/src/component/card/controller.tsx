@@ -1,4 +1,3 @@
-import { QBtn } from 'quasar';
 import { BeanControllerBase, ISlot } from 'zova';
 import { Controller } from 'zova-module-a-bean';
 
@@ -20,14 +19,13 @@ export class ControllerCard extends BeanControllerBase {
   protected render() {
     return (
       <div>
-        <QBtn
-          color="secondary"
+        <button
           onClick={() => {
             this.$props.onReset?.(new Date());
           }}
         >
           Reset Time
-        </QBtn>
+        </button>
         <div>
           <div style={{ backgroundColor: 'teal' }}>
             <div>

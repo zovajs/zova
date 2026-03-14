@@ -1,4 +1,3 @@
-import { QBtn } from 'quasar';
 import { BeanControllerPageBase, useComputed } from 'zova';
 import { Controller } from 'zova-module-a-bean';
 import { ZPage } from 'zova-module-home-base';
@@ -27,12 +26,12 @@ export class ControllerPageState extends BeanControllerPageBase {
       <ZPage>
         <div>{`count(ref): ${this.count}`}</div>
         <div>{`count(computed): ${this.count2}`}</div>
-        <QBtn color="secondary" onClick={() => this.increment()}>
+        <button onClick={() => this.increment()}>
           Increment
-        </QBtn>
-        <QBtn color="secondary" onClick={() => this.decrement()}>
+        </button>
+        <button onClick={() => this.decrement()}>
           Decrement
-        </QBtn>
+        </button>
       </ZPage>
     );
   }

@@ -1,7 +1,8 @@
 import type { RenderLayoutTabs } from './render.jsx';
-import { RouterView } from '@cabloy/vue-router';
 import { BeanRenderBase, Use } from 'zova';
 import { Render } from 'zova-module-a-bean';
+import { ZRouterViewEmpty } from 'zova-module-a-router';
+// import { ZRouterViewTabs } from 'zova-module-a-routertabs';
 
 @Render()
 export class RenderContent extends BeanRenderBase {
@@ -9,6 +10,11 @@ export class RenderContent extends BeanRenderBase {
   $$r: RenderLayoutTabs;
 
   public render() {
-    return <RouterView />;
+    return (
+      <ZRouterViewEmpty></ZRouterViewEmpty>
+    );
+    // return (
+    //   <ZRouterViewTabs></ZRouterViewTabs>
+    // );
   }
 }
