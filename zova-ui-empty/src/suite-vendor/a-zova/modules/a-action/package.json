@@ -1,0 +1,50 @@
+{
+  "name": "zova-module-a-action",
+  "title": "a-action",
+  "zovaModule": {
+    "onions": {
+      "action": {
+        "beanGeneral": true,
+        "optionsGlobalInterfaceName": "IDecoratorActionOptions",
+        "optionsGlobalInterfaceFrom": "zova-module-a-action",
+        "boilerplate": "cli/action/boilerplate",
+        "metadataCustom": "cli/action/metadata/generate.ts"
+      }
+    },
+    "capabilities": {
+      "monkey": true
+    },
+    "dependencies": {
+      "a-zova": "5.0.0"
+    }
+  },
+  "type": "module",
+  "version": "5.0.0",
+  "description": "",
+  "author": "",
+  "keywords": [
+    "Zova Module"
+  ],
+  "exports": {
+    ".": {
+      "types": [
+        "./src/index.ts",
+        "./dist/index.d.ts"
+      ],
+      "import": "./src/index.ts",
+      "default": "./dist/index.js"
+    },
+    "./*": "./*"
+  },
+  "files": [
+    "cli",
+    "dist",
+    "mock"
+  ],
+  "scripts": {
+    "clean": "tsc -b --clean",
+    "tsc:publish": "npm run clean && tsc -b",
+    "_prepublishOnly": "npm run tsc:publish"
+  },
+  "dependencies": {}
+}

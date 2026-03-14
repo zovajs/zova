@@ -1,0 +1,62 @@
+{
+  "name": "zova-module-a-fetch",
+  "type": "module",
+  "version": "5.0.0",
+  "title": "a-fetch",
+  "zovaModule": {
+    "capabilities": {
+      "monkey": true
+    },
+    "globalDependencies": {
+      "axios": true
+    },
+    "onions": {
+      "interceptor": {
+        "optionsPackage": true,
+        "optionsGlobalInterfaceName": "IDecoratorInterceptorOptions",
+        "optionsGlobalInterfaceFrom": "zova-module-a-fetch",
+        "boilerplate": "cli/interceptor/boilerplate"
+      }
+    },
+    "bundle": {
+      "vendors": [
+        {
+          "match": [
+            "axios"
+          ],
+          "output": "axios"
+        }
+      ]
+    }
+  },
+  "description": "",
+  "author": "",
+  "keywords": [
+    "Zova Module"
+  ],
+  "exports": {
+    ".": {
+      "types": [
+        "./src/index.ts",
+        "./dist/index.d.ts"
+      ],
+      "import": "./src/index.ts",
+      "default": "./dist/index.js"
+    },
+    "./*": "./*"
+  },
+  "files": [
+    "cli",
+    "dist",
+    "mock",
+    "src"
+  ],
+  "scripts": {
+    "clean": "tsc -b --clean",
+    "tsc:publish": "npm run clean && tsc -b",
+    "_prepublishOnly": "npm run tsc:publish"
+  },
+  "dependencies": {
+    "axios": "^1.13.4"
+  }
+}

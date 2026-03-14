@@ -3,7 +3,7 @@
 
 .DS_Store
 .thumbs.db
-# pnpm-lock.yaml
+pnpm-lock.yaml
 # package-lock.json
 node_modules
 miniprogram_npm
@@ -49,6 +49,7 @@ env/.env*.mine
 /src/front/config/config/config*.mine.ts
 /src/front/typing/modules.d.ts
 **/.metadata/modules.d.ts
+# /package.json
 
 **/*.tsbuildinfo
 
@@ -59,6 +60,7 @@ env/.env*.mine
 
 /src/suite-vendor/*
 !/src/suite-vendor/.gitkeep
+!/src/suite-vendor/a-zova
 
 /src/module/*
 !/src/module/.gitkeep
