@@ -4,11 +4,14 @@ const __MenuItems = [
   { order: 0, title: 'Home', caption: '', icon: '::home', link: '/' },
   { group: 'basic', title: 'State', caption: 'ref, computed', icon: '', link: '/demo/basic/state' },
   { group: 'basic', title: 'Component', caption: 'props, emits, slots', icon: '', link: '/demo/basic/component' },
-  { group: 'vona', title: 'GitHub', caption: 'github.com/vonajs', icon: ':editor:code', external: true, link: 'https://github.com/vonajs' },
+  { group: 'basic', title: 'CSS-in-JS', caption: 'Style & Theme', icon: '', link: '/demo/basic/style' },
+  { group: 'quasar', title: 'Docs', caption: 'quasar.dev', icon: ':social:school', external: true, link: 'https://quasar.dev' },
+  { group: 'quasar', title: 'GitHub', caption: 'github.com/quasarframework', icon: ':editor:code', external: true, link: 'https://github.com/quasarframework' },
+  { group: 'quasar', title: 'Quasar Awesome', caption: 'Community Quasar projects', icon: '::heart', external: true, link: 'https://awesome.quasar.dev' },
 ];
 const __MenuGroups = [
   { order: 1, name: 'basic', title: 'Basic' },
-  { order: 2, name: 'vona', title: 'VonaJS' },
+  { order: 2, name: 'quasar', title: 'Quasar' },
 ];
 const __MenuData = { menus: __MenuItems, groups: __MenuGroups };
 
