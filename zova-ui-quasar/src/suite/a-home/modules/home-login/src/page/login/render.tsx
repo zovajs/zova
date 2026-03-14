@@ -1,7 +1,8 @@
-import { QBtn, QCard } from 'quasar';
+import { QBtn, QCard, QSeparator } from 'quasar';
 import { BeanRenderBase } from 'zova';
 import { Render } from 'zova-module-a-bean';
 import { ZForm, ZFormField, ZFormFieldWrapper, ZFormSubscribe } from 'zova-module-a-form';
+import { ZIcon } from 'zova-module-a-icon';
 
 @Render()
 export class RenderPageLogin extends BeanRenderBase {
@@ -17,6 +18,8 @@ export class RenderPageLogin extends BeanRenderBase {
               <h5 class="text-center" style={{ marginBottom: '12px' }}>{this.scope.locale.Login()}</h5>
               <div class="q-pa-md">
                 {this._renderForm()}
+                <QSeparator inset style={{ marginTop: '24px', marginBottom: '24px' }}></QSeparator>
+                {this._renderGithub()}
               </div>
             </div>
           </div>
@@ -67,17 +70,36 @@ export class RenderPageLogin extends BeanRenderBase {
         <ZFormFieldWrapper name="captcha"></ZFormFieldWrapper>
         <ZFormSubscribe slotDefault={$$form => {
           return (
-            <QBtn
-              label={this.scope.locale.Login()}
-              disable={$$form.formState.isSubmitting}
-              type="submit"
-              color="primary"
-            ></QBtn>
+            <div class="text-center">
+              <QBtn
+                label={this.scope.locale.Login()}
+                disable={$$form.formState.isSubmitting}
+                type="submit"
+                color="primary"
+              ></QBtn>
+            </div>
           );
         }}
         >
         </ZFormSubscribe>
       </ZForm>
+    );
+  }
+
+  _renderGithub() {
+    return (
+      <div class="text-center">
+        <QBtn
+          class="btn mt-2 w-full btn-default"
+          onClick={() => {
+            this.onSubmitLoginGitHub();
+          }}
+        >
+          <ZIcon name=":auth:github"></ZIcon>
+          {this.scope.locale.LoginGitHub()}
+        </QBtn>
+      </div>
+
     );
   }
 }
