@@ -1,4 +1,4 @@
-import { ZovaLocaleOptional } from 'zova';
+import type { ZovaLocaleOptional } from 'zova';
 
 export default {
   modules: {},
