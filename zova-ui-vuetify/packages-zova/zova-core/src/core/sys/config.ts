@@ -36,12 +36,6 @@ export interface ZovaConfig {
     baseURL: string;
     prefix: string;
   };
-  ssr: {
-    server: {
-      protocol: string;
-      host: string;
-    };
-  };
   logger: ConfigLogger;
   locale: {
     default: keyof ILocaleRecord;

@@ -40,14 +40,6 @@ export default function (sys: ZovaSys) {
     prefix: '/ws',
   };
 
-  // ssr
-  config.ssr = {
-    server: {
-      protocol: env.SSR_PROD_PROTOCOL,
-      host: env.SSR_PROD_HOST || `localhost:${env.SSR_PROD_PORT}`,
-    },
-  };
-
   // locale
   config.locale = {
     default: env.APP_LOCALE_DEFAULT as keyof ILocaleRecord,
