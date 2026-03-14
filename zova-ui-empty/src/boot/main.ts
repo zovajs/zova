@@ -1,6 +1,5 @@
-import { SSRContext } from 'zova';
-import { App } from 'vue';
+import { defineBoot } from '@quasar/app-vite/wrappers';
 
 import '../css/settings.scss';
 
-export default (_app: App, _ssrContext: SSRContext) => {};
+export default defineBoot(({ app: _app, ssrContext: _ssrContext }) => {});
