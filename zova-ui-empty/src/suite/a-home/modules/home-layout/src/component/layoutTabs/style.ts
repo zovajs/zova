@@ -3,18 +3,17 @@ import { Style } from 'zova-module-a-bean';
 
 @Style()
 export class StyleLayoutTabs extends BeanStyleBase {
-  cTab: string;
+  cMenuList: string;
 
   protected async __init__() {
-    this.cTab = this.$style({
+    this.cMenuList = this.$style({
+      backgroundColor: 'whitesmoke',
+      display: 'flex',
       $nest: {
-        '&:hover .tab-close': {
-          display: 'block',
-        },
-        '.tab-close': {
-          position: 'absolute',
-          top: '-6px',
-          right: '-6px',
+        a: {
+          display: 'flex',
+          alignItems: 'center',
+          padding: '6px',
         },
       },
     });
