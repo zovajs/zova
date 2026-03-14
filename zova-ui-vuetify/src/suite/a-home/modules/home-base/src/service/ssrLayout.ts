@@ -26,6 +26,7 @@ export class ServiceSsrLayout extends BeanBase {
             __themeDarkEl.innerHTML=__themeDarkStyle;
             document.head.appendChild(__themeDarkEl);
             document.querySelector('#__prefersColorSchemeDarkJS').remove();
+            document.body.setAttribute('data-theme',window.ssr_themedark?'dark':'light');
           </script>`.replaceAll('\n', '');
         if (this.$$scopeSsr.config.optimization.bodyReadyObserver) {
           this.ctx.meta.$ssr.context._meta.bodyTags += `<script id="__leftDrawerOpenJS">
