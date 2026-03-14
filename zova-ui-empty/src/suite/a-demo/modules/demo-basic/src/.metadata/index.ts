@@ -3,7 +3,6 @@
 export * from '../component/card/controller.jsx';
 export * from '../page/component/controller.jsx';
 export * from '../page/state/controller.jsx';
-export * from '../page/style/controller.jsx';
 
 import 'zova';
 declare module 'zova' {
@@ -25,11 +24,6 @@ declare module 'zova-module-demo-basic' {
         export interface ControllerPageState {
           /** @internal */
           get scope(): ScopeModuleDemoBasic;
-        }
-
-        export interface ControllerPageStyle {
-          /** @internal */
-          get scope(): ScopeModuleDemoBasic;
         } 
 }
 /** controller: end */
@@ -37,21 +31,18 @@ declare module 'zova-module-demo-basic' {
 import { ControllerCard } from '../component/card/controller.jsx';
 import { ControllerPageComponent } from '../page/component/controller.jsx';
 import { ControllerPageState } from '../page/state/controller.jsx';
-import { ControllerPageStyle } from '../page/style/controller.jsx';
 import 'zova';
 declare module 'zova' {
   export interface IBeanRecordLocal {
     'demo-basic.controller.card': ControllerCard;
 'demo-basic.controller.pageComponent': ControllerPageComponent;
 'demo-basic.controller.pageState': ControllerPageState;
-'demo-basic.controller.pageStyle': ControllerPageStyle;
   }
 }
 /** controller: end */
 /** pages: begin */
 export * from './page/component.js';
 export * from './page/state.js';
-export * from './page/style.js';
 export * from '../routes.js';
 import { TypePagePathSchema } from 'zova-module-a-router';
 import 'zova';
@@ -59,7 +50,6 @@ declare module 'zova-module-a-router' {
 export interface IPagePathRecord {
   '/demo/basic/component': TypePagePathSchema<undefined,undefined>;
 '/demo/basic/state': TypePagePathSchema<undefined,undefined>;
-'/demo/basic/style': TypePagePathSchema<undefined,undefined>;
 }
 export interface IPageNameRecord {
   
