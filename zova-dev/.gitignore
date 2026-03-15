@@ -57,6 +57,7 @@ env/.env*.mine
 !/src/suite/.gitkeep
 !/src/suite/a-demo
 !/src/suite/a-home
+!/src/suite/cabloy-basic
 
 /src/suite-vendor/*
 !/src/suite-vendor/.gitkeep
