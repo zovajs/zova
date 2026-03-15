@@ -1,8 +1,8 @@
 {
-  "name": "zova-module-basic-table",
+  "name": "zova-module-basic-adapter",
+  "title": "basic-adapter",
   "type": "module",
   "version": "5.0.0",
-  "title": "basic-table",
   "description": "",
   "author": "",
   "keywords": [
@@ -21,13 +21,20 @@
   },
   "files": [
     "dist",
-    "mock",
-    "rest"
+    "mock"
   ],
   "scripts": {
     "clean": "tsc -b --clean",
     "tsc:publish": "npm run clean && tsc -b",
     "_prepublishOnly": "npm run tsc:publish"
   },
-  "dependencies": {}
+  "dependencies": {},
+  "zovaModule": {
+    "capabilities": {
+      "monkey": true
+    },
+    "dependencies": {
+      "a-zova": "5.0.0"
+    }
+  }
 }
