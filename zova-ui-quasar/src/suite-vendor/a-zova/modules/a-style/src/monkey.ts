@@ -1,4 +1,5 @@
 import type { TypeStyle } from 'typestyle';
+import type { NestedCSSProperties } from 'typestyle/lib/types.js';
 import type {
   BeanBase,
   BeanContainer,
@@ -7,7 +8,7 @@ import type {
   IMonkeyBeanInit,
 } from 'zova';
 import type { ScopeModule } from './.metadata/this.js';
-import { createTypeStyle, style } from 'typestyle';
+import { createTypeStyle, cssRaw, cssRule, style } from 'typestyle';
 import {
   beanFullNameFromOnionName,
   BeanSimple,
@@ -58,6 +59,24 @@ export class Monkey extends BeanSimple implements IMonkeyAppInitialize, IMonkeyA
         };
       },
     });
+    bean.defineProperty(beanInstance, '$cssRule', {
+      enumerable: false,
+      configurable: true,
+      get() {
+        return function (selector: string, ...objects: NestedCSSProperties[]) {
+          return self._patchCssRule(beanInstance, selector, ...objects);
+        };
+      },
+    });
+    bean.defineProperty(beanInstance, '$cssRaw', {
+      enumerable: false,
+      configurable: true,
+      get() {
+        return function (mustBeValidCSS: string) {
+          return self._patchCssRaw(beanInstance, mustBeValidCSS);
+        };
+      },
+    });
     bean.defineProperty(beanInstance, '$css', {
       enumerable: false,
       configurable: true,
@@ -91,6 +110,22 @@ export class Monkey extends BeanSimple implements IMonkeyAppInitialize, IMonkeyA
       return this._styleInstance.style(props, ...args);
     } else {
       return style(props, ...args);
+    }
+  }
+
+  _patchCssRule(_beanInstance: BeanBase, selector: string, ...objects: NestedCSSProperties[]) {
+    if (this._styleInstance) {
+      return this._styleInstance.cssRule(selector, ...objects);
+    } else {
+      return cssRule(selector, ...objects);
+    }
+  }
+
+  _patchCssRaw(_beanInstance: BeanBase, mustBeValidCSS: string) {
+    if (this._styleInstance) {
+      return this._styleInstance.cssRaw(mustBeValidCSS);
+    } else {
+      return cssRaw(mustBeValidCSS);
     }
   }
 }
