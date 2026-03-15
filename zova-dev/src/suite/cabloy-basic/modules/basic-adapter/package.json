@@ -34,7 +34,8 @@
       "monkey": true
     },
     "dependencies": {
-      "a-zova": "5.0.0"
+      "a-zova": "5.0.0",
+      "devui-adapter": "5.0.0"
     }
   }
 }

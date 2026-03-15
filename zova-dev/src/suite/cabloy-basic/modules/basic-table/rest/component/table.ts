@@ -3,8 +3,8 @@ import type { ControllerTableProps } from '../../src/component/table/controller.
 
 type TypeControllerTablePublicProps<TData extends {} = {}> = TypeRenderComponentJsxPropsPublic
   & ControllerTableProps<TData>;
-export function ZZDevuiTable<TData extends {} = {}>(
+export function ZZBasicTable<TData extends {} = {}>(
   _props: TypeControllerTablePublicProps<TData>,
 ) {
-  return 'devui-table:table';
+  return 'basic-table:table';
 }

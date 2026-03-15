@@ -12,37 +12,18 @@ export class MonkeySys extends BeanSimple implements IMonkeySysInitialize {
     // config custom
     const configCustom: IOpenapiOptionsResourceMeta = {
       provider: {
-        components: {
-          restPage: 'devui-restpage:restPage',
-          restPageEntry: 'devui-restpage:restPageEntry',
-          table: 'devui-table:table',
-        },
+        components: {},
       },
       form: {
         provider: {
-          components: {
-            captcha: 'devui-form:formFieldCaptcha',
-            dateRange: 'devui-date:formFieldDateRange',
-          },
-          behaviors: {
-            formField: 'devui-form:formField',
-            formFieldLayout: 'devui-form:formFieldLayout',
-          },
+          components: {},
+          behaviors: {},
         },
       },
       table: {
         provider: {
-          components: {
-            actionOperationsTable: 'devui-table:actionOperationsTable',
-            actionOperationsRow: 'devui-table.tableCell.actionOperationsRow',
-            actionView: 'devui-table.tableCell.actionView',
-          },
-          actions: {
-            actionCreate: 'rest-actions:create',
-            actionView: 'rest-actions:view',
-            actionEdit: 'rest-actions:edit',
-            actionDelete: 'rest-actions:delete',
-          },
+          components: {},
+          actions: {},
         },
       },
     };

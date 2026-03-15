@@ -1,8 +1,8 @@
 import type { TypeRenderComponentJsxPropsPublic } from 'zova-jsx';
 
 type TypeControllerActionOperationsTablePublicProps = TypeRenderComponentJsxPropsPublic;
-export function ZZDevuiTableActionOperationsTable(
+export function ZZBasicTableActionOperationsTable(
   _props: TypeControllerActionOperationsTablePublicProps,
 ) {
-  return 'devui-table:actionOperationsTable';
+  return 'basic-table:actionOperationsTable';
 }
