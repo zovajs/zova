@@ -33,7 +33,7 @@
     "zova": "^5"
   },
   "devDependencies": {
-    "@cabloy/lint": "^5.0.8",
+    "@cabloy/lint": "^5.0.21",
     "@cabloy/process-helper": "^2.0.4",
     "@types/fs-extra": "^11.0.4",
     "@types/mocha": "^10.0.6",
