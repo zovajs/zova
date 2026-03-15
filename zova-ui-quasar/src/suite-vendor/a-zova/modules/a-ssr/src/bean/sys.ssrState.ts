@@ -32,7 +32,7 @@ export class SysSsrState extends BeanBase {
 
   private _patchEnvConfig() {
     // env
-    Object.assign(this.sys.env, this.state.envClient);
+    this.sys.env = Object.assign({}, this.sys.env, this.state.envClient);
     // config
     this.sys.config.app.name = this.sys.env.APP_NAME!;
     this.sys.config.app.title = this.sys.env.APP_TITLE!;
