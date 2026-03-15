@@ -2,13 +2,13 @@ import type { RouteRecordRaw } from '@cabloy/vue-router';
 import type { Constructable } from '../../decorator/type/constructable.js';
 import type { IMonkeyModuleSys, IMonkeySys } from '../../types/interface/monkey.js';
 import { BeanSimple } from '../../bean/beanSimple.js';
+import { AppCookie } from '../component/cookie.js';
 import { AppEvent } from '../component/event.js';
 import { SysLogger } from '../logger/logger.js';
 import { SysComponent } from './component.js';
 import { SysError } from './error.js';
 import { SysLocale } from './locale.js';
 import { SysModule } from './module.js';
-import { AppCookie } from '../component/cookie.js';
 
 export class SysMeta extends BeanSimple {
   module: SysModule;

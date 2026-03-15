@@ -4,17 +4,17 @@ import type { WatchEffectOptions } from '@cabloy/vue-runtime-core';
 export const SymbolDecoratorVueElements = Symbol('SymbolDecoratorVueElements');
 
 export type TypeDecoratorVue =
-  | 'computed'
-  | 'emit'
-  | 'watch'
-  | 'watchEffect'
-  | 'raw'
-  | 'shallow'
-  | 'readonly'
-  | 'shallowReadonly'
-  | 'model'
-  | 'controllerCreated'
-  | 'controllerMounted';
+  'computed' |
+  'emit' |
+  'watch' |
+  'watchEffect' |
+  'raw' |
+  'shallow' |
+  'readonly' |
+  'shallowReadonly' |
+  'model' |
+  'controllerCreated' |
+  'controllerMounted';
 
 export interface IDecoratorVueElement<OPTIONS = any> {
   type: TypeDecoratorVue;

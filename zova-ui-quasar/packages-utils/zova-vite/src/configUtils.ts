@@ -58,10 +58,10 @@ export function createConfigUtils(
   configMeta: ZovaConfigMeta,
   configOptions: ZovaViteConfigOptions,
 ): {
-    loadEnvs: () => { [name: string]: string };
-    loadModulesMeta: () => ReturnType<typeof glob>;
-    configManualChunk: (id: string) => string;
-  } {
+  loadEnvs: () => { [name: string]: string };
+  loadModulesMeta: () => ReturnType<typeof glob>;
+  configManualChunk: (id: string) => string;
+} {
   let __zovaManualChunkVendors_runtime: ZovaViteConfigChunkVendor[];
   let __zovaManualChunkVendors_runtime_modulesBefore: ZovaViteConfigChunkVendor[];
   let __modulesMeta: Awaited<ReturnType<typeof glob>>;
