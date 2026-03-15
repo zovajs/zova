@@ -7,11 +7,11 @@ declare module 'zova' {
   
   
 }
-declare module 'zova-module-devui-form' {
+declare module 'zova-module-basic-form' {
   
         export interface ControllerFormFieldCaptcha {
           /** @internal */
-          get scope(): ScopeModuleDevuiForm;
+          get scope(): ScopeModuleBasicForm;
         } 
 }
 /** controller: end */
@@ -20,7 +20,7 @@ import { ControllerFormFieldCaptcha } from '../component/formFieldCaptcha/contro
 import 'zova';
 declare module 'zova' {
   export interface IBeanRecordLocal {
-    'devui-form.controller.formFieldCaptcha': ControllerFormFieldCaptcha;
+    'basic-form.controller.formFieldCaptcha': ControllerFormFieldCaptcha;
   }
 }
 /** controller: end */
@@ -34,10 +34,10 @@ export const components = {
 import 'zova';
 declare module 'zova' {
 export interface IComponentRecord {
-  'devui-form:formFieldCaptcha': ControllerFormFieldCaptcha;
+  'basic-form:formFieldCaptcha': ControllerFormFieldCaptcha;
 }
 export interface IZovaComponentRecord {
-  'devui-form:formFieldCaptcha': typeof ZFormFieldCaptcha;
+  'basic-form:formFieldCaptcha': typeof ZFormFieldCaptcha;
 }
 }
 /** components: end */
@@ -50,33 +50,33 @@ import 'zova-module-a-behavior';
 declare module 'zova-module-a-behavior' {
   
     export interface IBehaviorRecord {
-      'devui-form:formField': IBehaviorOptionsFormField;
-'devui-form:formFieldLayout': IBehaviorOptionsFormFieldLayout;
+      'basic-form:formField': IBehaviorOptionsFormField;
+'basic-form:formFieldLayout': IBehaviorOptionsFormFieldLayout;
     }
 
   
 }
-declare module 'zova-module-devui-form' {
+declare module 'zova-module-basic-form' {
   
         export interface BehaviorFormField {
           /** @internal */
-          get scope(): ScopeModuleDevuiForm;
+          get scope(): ScopeModuleBasicForm;
         }
 
         export interface BehaviorFormField {
-          get $beanFullName(): 'devui-form.behavior.formField';
-          get $onionName(): 'devui-form:formField';
+          get $beanFullName(): 'basic-form.behavior.formField';
+          get $onionName(): 'basic-form:formField';
           get $onionOptions(): IBehaviorOptionsFormField;
         }
 
         export interface BehaviorFormFieldLayout {
           /** @internal */
-          get scope(): ScopeModuleDevuiForm;
+          get scope(): ScopeModuleBasicForm;
         }
 
         export interface BehaviorFormFieldLayout {
-          get $beanFullName(): 'devui-form.behavior.formFieldLayout';
-          get $onionName(): 'devui-form:formFieldLayout';
+          get $beanFullName(): 'basic-form.behavior.formFieldLayout';
+          get $onionName(): 'basic-form:formFieldLayout';
           get $onionOptions(): IBehaviorOptionsFormFieldLayout;
         } 
 }
@@ -87,8 +87,8 @@ import { BehaviorFormFieldLayout } from '../bean/behavior.formFieldLayout.jsx';
 import 'zova';
 declare module 'zova' {
   export interface IBeanRecordLocal {
-    'devui-form.behavior.formField': BehaviorFormField;
-'devui-form.behavior.formFieldLayout': BehaviorFormFieldLayout;
+    'basic-form.behavior.formField': BehaviorFormField;
+'basic-form.behavior.formFieldLayout': BehaviorFormFieldLayout;
   }
 }
 /** behavior: end */
@@ -98,8 +98,8 @@ import 'vue/jsx-runtime';
 
 declare module 'vue' {
   export interface InputHTMLAttributes {
-    'bs-devui-form-formField'?: IBehaviorOptionsFormField | '' | boolean;
-'bs-devui-form-formFieldLayout'?: IBehaviorOptionsFormFieldLayout | '' | boolean;
+    'bs-basic-form-formField'?: IBehaviorOptionsFormField | '' | boolean;
+'bs-basic-form-formFieldLayout'?: IBehaviorOptionsFormFieldLayout | '' | boolean;
   }
 }
 
@@ -107,8 +107,8 @@ declare module 'vue/jsx-runtime' {
   namespace JSX {
     // need define class/style in IntrinsicAttributes
     export interface IntrinsicAttributes {
-      'bs-devui-form-formField'?: IBehaviorOptionsFormField | '' | boolean;
-'bs-devui-form-formFieldLayout'?: IBehaviorOptionsFormFieldLayout | '' | boolean;
+      'bs-basic-form-formField'?: IBehaviorOptionsFormField | '' | boolean;
+'bs-basic-form-formFieldLayout'?: IBehaviorOptionsFormFieldLayout | '' | boolean;
     }
   }
 }
@@ -121,9 +121,9 @@ import { BeanScopeBase, type BeanScopeUtil, TypeModuleLocales, TypeLocaleBase } 
 import { Scope } from 'zova-module-a-bean';
 
 @Scope()
-export class ScopeModuleDevuiForm extends BeanScopeBase {}
+export class ScopeModuleBasicForm extends BeanScopeBase {}
 
-export interface ScopeModuleDevuiForm {
+export interface ScopeModuleBasicForm {
   util: BeanScopeUtil;
 locale: TypeModuleLocales<(typeof locales)[TypeLocaleBase]>;
 }
@@ -131,19 +131,19 @@ locale: TypeModuleLocales<(typeof locales)[TypeLocaleBase]>;
 import 'zova';
 declare module 'zova' {
   export interface IBeanScopeRecord {
-    'devui-form': ScopeModuleDevuiForm;
+    'basic-form': ScopeModuleBasicForm;
   }
   
   
 
   export interface IBeanScopeLocale {
-    'devui-form': (typeof locales)[TypeLocaleBase];
+    'basic-form': (typeof locales)[TypeLocaleBase];
   }
 
   
 }
 
-export function locale<K extends keyof (typeof locales)[TypeLocaleBase]>(key: K): `devui-form::${K}` {
-  return `devui-form::${key}`;
+export function locale<K extends keyof (typeof locales)[TypeLocaleBase]>(key: K): `basic-form::${K}` {
+  return `basic-form::${key}`;
 }  
 /** scope: end */

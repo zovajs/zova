@@ -8,6 +8,7 @@
   "files": [],
   "dependencies": {
     "zova-module-basic-date": "^5.0.0",
-    "zova-module-basic-form": "^5.0.0"
+    "zova-module-basic-form": "^5.0.0",
+    "zova-module-basic-restpage": "^5.0.0"
   }
 }

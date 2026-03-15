@@ -1,8 +1,8 @@
 {
-  "name": "zova-module-devui-form",
+  "name": "zova-module-basic-form",
   "type": "module",
   "version": "5.0.0",
-  "title": "devui-form",
+  "title": "basic-form",
   "description": "",
   "author": "",
   "keywords": [

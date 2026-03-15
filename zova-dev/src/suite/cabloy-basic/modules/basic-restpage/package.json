@@ -1,8 +1,8 @@
 {
-  "name": "zova-module-devui-restpage",
+  "name": "zova-module-basic-restpage",
   "type": "module",
   "version": "5.0.0",
-  "title": "devui-restpage",
+  "title": "basic-restpage",
   "description": "",
   "author": "",
   "keywords": [

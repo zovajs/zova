@@ -1,2 +1,2 @@
-export const __ThisModule__ = 'devui-form';
-export { ScopeModuleDevuiForm as ScopeModule } from './index.js';
+export const __ThisModule__ = 'basic-form';
+export { ScopeModuleBasicForm as ScopeModule } from './index.js';

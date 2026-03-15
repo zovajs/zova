@@ -3,8 +3,8 @@ import type { ControllerFormFieldCaptchaProps } from '../../src/component/formFi
 
 type TypeControllerFormFieldCaptchaPublicProps = TypeRenderComponentJsxPropsPublic
   & ControllerFormFieldCaptchaProps;
-export function FFDevuiFormCaptcha(
+export function FFBasicFormCaptcha(
   _props: TypeControllerFormFieldCaptchaPublicProps,
 ) {
-  return 'devui-form:formFieldCaptcha';
+  return 'basic-form:formFieldCaptcha';
 }

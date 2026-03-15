@@ -10,7 +10,7 @@ export type TypeControllerFormFieldCaptchaPublicProps = {
 
 type ControllerInnerProps =
   TypeControllerInnerProps<ControllerFormFieldCaptchaProps, keyof typeof ControllerFormFieldCaptcha.$propsDefault>;
-declare module 'zova-module-devui-form' {
+declare module 'zova-module-basic-form' {
   export interface ControllerFormFieldCaptcha {
     $props: ControllerInnerProps;
   }

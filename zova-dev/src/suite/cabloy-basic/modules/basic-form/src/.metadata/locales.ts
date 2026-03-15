@@ -10,7 +10,7 @@ export const locales = {
 
 export function $useLocale<K extends keyof (typeof locales)[TypeLocaleBase]>(key: K, ...args: any[]) {
   const app = useApp();
-  const str = `devui-form::${key}`;
+  const str = `basic-form::${key}`;
   return useComputed(() => {
     return app.meta.text(str, ...args);
   });
