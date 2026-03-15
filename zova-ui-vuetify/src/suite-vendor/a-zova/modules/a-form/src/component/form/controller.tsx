@@ -333,12 +333,12 @@ export class ControllerForm<TFormData extends {} = {}, TSubmitMeta = never> exte
       const newFormValidatorError = fieldErrors?.[field];
 
       const { newErrorValue, newSource } =
-            determineFormLevelErrorSourceAndValue({
-              newFormValidatorError,
-              isPreviousErrorFromFormValidator:
+        determineFormLevelErrorSourceAndValue({
+          newFormValidatorError,
+          isPreviousErrorFromFormValidator:
                 currentErrorMapSource?.[errorMapKey] === 'form',
-              previousErrorValue: currentErrorMap?.[errorMapKey],
-            });
+          previousErrorValue: currentErrorMap?.[errorMapKey],
+        });
 
       if (newSource === 'form') {
         currentValidationErrorMap[field] = {

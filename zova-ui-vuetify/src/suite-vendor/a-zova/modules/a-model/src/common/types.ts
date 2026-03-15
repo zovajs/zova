@@ -23,15 +23,15 @@ export type DefinedInitialQueryOptions<
 
 export type Primitive = string | number | boolean | bigint | symbol | undefined | null;
 export type UnwrapLeaf =
-  | Primitive
-  | Functionable
-  | Date
-  | Error
-  | RegExp
-  | Map<any, any>
-  | WeakMap<any, any>
-  | Set<any>
-  | WeakSet<any>;
+  Primitive |
+  Functionable |
+  Date |
+  Error |
+  RegExp |
+  Map<any, any> |
+  WeakMap<any, any> |
+  Set<any> |
+  WeakSet<any>;
 export type MaybeRef<T> = Ref<T> | T;
 export type MaybeRefOrGetter<T> = MaybeRef<T> | (() => T);
 export type MaybeRefDeep<T> = MaybeRef<

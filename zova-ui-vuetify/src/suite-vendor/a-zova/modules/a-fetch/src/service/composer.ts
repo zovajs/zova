@@ -26,8 +26,8 @@ export class ServiceComposer extends BeanBase {
   protected async __init__(
     beanFetch: BeanFetch,
     onionItems?:
-      | IOnionItem<IDecoratorInterceptorOptions, keyof IInterceptorRecord>
-      | IOnionItem<IDecoratorInterceptorOptions, keyof IInterceptorRecord>[],
+      | IOnionItem<IDecoratorInterceptorOptions, keyof IInterceptorRecord> |
+      IOnionItem<IDecoratorInterceptorOptions, keyof IInterceptorRecord>[],
   ) {
     this.$beanFetch = beanFetch;
     await this._createComposer(onionItems);
@@ -58,8 +58,8 @@ export class ServiceComposer extends BeanBase {
 
   private async _createComposer(
     onionItems?:
-      | IOnionItem<IDecoratorInterceptorOptions, keyof IInterceptorRecord>
-      | IOnionItem<IDecoratorInterceptorOptions, keyof IInterceptorRecord>[],
+      IOnionItem<IDecoratorInterceptorOptions, keyof IInterceptorRecord> |
+      IOnionItem<IDecoratorInterceptorOptions, keyof IInterceptorRecord>[],
   ) {
     // onionSlices
     let onionSlices: IOnionSlice<IDecoratorInterceptorOptions, keyof IInterceptorRecord>[];
