@@ -1,2 +1,2 @@
-export const __ThisModule__ = 'devui-date';
-export { ScopeModuleDevuiDate as ScopeModule } from './index.js';
+export const __ThisModule__ = 'basic-date';
+export { ScopeModuleBasicDate as ScopeModule } from './index.js';

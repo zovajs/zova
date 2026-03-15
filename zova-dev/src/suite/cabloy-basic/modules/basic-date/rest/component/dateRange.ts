@@ -11,8 +11,8 @@ type TypeControllerDateRangePublicProps = TypeRenderComponentJsxPropsPublic
   {
     [KEY in keyof ControllerDateRangeModels as TypePropUpdateFromModel<KEY>]: (value: ControllerDateRangeModels[KEY]) => void;
   };
-export function ZZDevuiDateRange(
+export function ZZBasicDateRange(
   _props: TypeControllerDateRangePublicProps,
 ) {
-  return 'devui-date:dateRange';
+  return 'basic-date:dateRange';
 }

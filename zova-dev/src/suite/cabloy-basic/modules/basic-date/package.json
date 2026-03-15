@@ -1,6 +1,6 @@
 {
-  "name": "zova-module-devui-date",
-  "title": "devui-date",
+  "name": "zova-module-basic-date",
+  "title": "basic-date",
   "type": "module",
   "version": "5.0.0",
   "description": "",

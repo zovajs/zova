@@ -8,16 +8,16 @@ declare module 'zova' {
   
   
 }
-declare module 'zova-module-devui-date' {
+declare module 'zova-module-basic-date' {
   
         export interface ControllerDateRange {
           /** @internal */
-          get scope(): ScopeModuleDevuiDate;
+          get scope(): ScopeModuleBasicDate;
         }
 
         export interface ControllerFormFieldDateRange {
           /** @internal */
-          get scope(): ScopeModuleDevuiDate;
+          get scope(): ScopeModuleBasicDate;
         } 
 }
 /** controller: end */
@@ -27,8 +27,8 @@ import { ControllerFormFieldDateRange } from '../component/formFieldDateRange/co
 import 'zova';
 declare module 'zova' {
   export interface IBeanRecordLocal {
-    'devui-date.controller.dateRange': ControllerDateRange;
-'devui-date.controller.formFieldDateRange': ControllerFormFieldDateRange;
+    'basic-date.controller.dateRange': ControllerDateRange;
+'basic-date.controller.formFieldDateRange': ControllerFormFieldDateRange;
   }
 }
 /** controller: end */
@@ -45,12 +45,12 @@ export const components = {
 import 'zova';
 declare module 'zova' {
 export interface IComponentRecord {
-  'devui-date:dateRange': ControllerDateRange;
-'devui-date:formFieldDateRange': ControllerFormFieldDateRange;
+  'basic-date:dateRange': ControllerDateRange;
+'basic-date:formFieldDateRange': ControllerFormFieldDateRange;
 }
 export interface IZovaComponentRecord {
-  'devui-date:dateRange': typeof ZDateRange;
-'devui-date:formFieldDateRange': typeof ZFormFieldDateRange;
+  'basic-date:dateRange': typeof ZDateRange;
+'basic-date:formFieldDateRange': typeof ZFormFieldDateRange;
 }
 }
 /** components: end */
@@ -59,16 +59,16 @@ import { BeanScopeBase, type BeanScopeUtil } from 'zova';
 import { Scope } from 'zova-module-a-bean';
 
 @Scope()
-export class ScopeModuleDevuiDate extends BeanScopeBase {}
+export class ScopeModuleBasicDate extends BeanScopeBase {}
 
-export interface ScopeModuleDevuiDate {
+export interface ScopeModuleBasicDate {
   util: BeanScopeUtil;
 }
 
 import 'zova';
 declare module 'zova' {
   export interface IBeanScopeRecord {
-    'devui-date': ScopeModuleDevuiDate;
+    'basic-date': ScopeModuleBasicDate;
   }
   
   

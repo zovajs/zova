@@ -20,7 +20,7 @@ type ControllerInnerProps =
   TypeControllerInnerProps<ControllerDateRangeProps & {
     [KEY in keyof ControllerDateRangeModels as TypePropValueFromModel<KEY>]: ControllerDateRangeModels[KEY];
   }, keyof typeof ControllerDateRange.$propsDefault>;
-declare module 'zova-module-devui-date' {
+declare module 'zova-module-basic-date' {
   export interface ControllerDateRange {
     $props: ControllerInnerProps;
     $useModel<K extends keyof TypeModelArguments>(name: K, options?: DefineModelOptions<TypeModelArguments[K]>): ControllerInnerProps[K];

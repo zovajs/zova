@@ -10,7 +10,7 @@ export type TypeControllerFormFieldDateRangePublicProps = {
 
 type ControllerInnerProps =
   TypeControllerInnerProps<ControllerFormFieldDateRangeProps, keyof typeof ControllerFormFieldDateRange.$propsDefault>;
-declare module 'zova-module-devui-date' {
+declare module 'zova-module-basic-date' {
   export interface ControllerFormFieldDateRange {
     $props: ControllerInnerProps;
   }
