@@ -17,8 +17,8 @@ export type NextInterceptorError = (error?: AxiosError) => Promise<AxiosError>;
 export interface IBeanFetchOptions {
   axiosConfig?: CreateAxiosDefaults;
   onionItems?:
-    | IOnionItem<IDecoratorInterceptorOptions, keyof IInterceptorRecord>
-    | IOnionItem<IDecoratorInterceptorOptions, keyof IInterceptorRecord>[];
+    IOnionItem<IDecoratorInterceptorOptions, keyof IInterceptorRecord> |
+    IOnionItem<IDecoratorInterceptorOptions, keyof IInterceptorRecord>[];
 }
 
 export interface IInterceptorRecord {}

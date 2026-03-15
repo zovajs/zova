@@ -12,7 +12,7 @@ export interface ISsrHandlerRenderOptionsInner {
   state?: SSRContextState;
 }
 
-declare module 'zova'{
+declare module 'zova' {
   export interface SysMeta {
     $getSsrHandler(siteAssetDir: string): Promise<ServiceSsrHandler>;
   }
