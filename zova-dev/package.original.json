@@ -71,7 +71,7 @@
     "@types/node": "^22.10.2",
     "@vitejs/plugin-vue": "^5.2.0",
     "concurrently": "^8.2.2",
-    "eslint": "^9.20.1",
+    "eslint": "^10.0.3",
     "quasar-app-extension-zova": "workspace:^",
     "sass": "^1.81.0",
     "typescript": "^5.9.3",
