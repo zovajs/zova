@@ -6,5 +6,7 @@
   "description": "",
   "author": "",
   "files": [],
-  "dependencies": {}
+  "dependencies": {
+    "zova-module-basic-date": "^5.0.0"
+  }
 }
