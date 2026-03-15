@@ -1,4 +1,4 @@
-import type { IJsxRenderContextPage } from 'zova-module-devui-restpage';
+import type { IJsxRenderContextPage } from 'zova-module-basic-restpage';
 import { BeanControllerBase, Use } from 'zova';
 import { Controller } from 'zova-module-a-bean';
 
