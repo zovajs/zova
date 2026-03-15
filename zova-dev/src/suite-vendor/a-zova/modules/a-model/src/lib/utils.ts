@@ -20,7 +20,7 @@ DataQuery<T3> | undefined,
 DataQuery<T4> | undefined,
 DataQuery<T5> | undefined,
 ...DataQuery<any>[],
-  ]> {
+]> {
   let promises: any[] = [
     _QueryAutoLoadInner<T1>(fn1),
     _QueryAutoLoadInner<T2>(fn2),

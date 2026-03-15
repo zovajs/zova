@@ -7,7 +7,7 @@
   "author": "",
   "files": [],
   "dependencies": {
-    "zova-module-rest-resource": "workspace:^",
-    "zova-module-rest-actions": "^5.0.0"
+    "zova-module-rest-actions": "^5.0.0",
+    "zova-module-rest-resource": "workspace:^"
   }
 }

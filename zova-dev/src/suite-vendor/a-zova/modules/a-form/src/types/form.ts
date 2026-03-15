@@ -15,21 +15,21 @@ export type TypeForm<
   TFormOnDynamic extends undefined | FormValidateOrFn<TFormData> = undefined | FormValidateOrFn<TFormData>,
   TFormOnDynamicAsync extends undefined | FormAsyncValidateOrFn<TFormData> = undefined | FormAsyncValidateOrFn<TFormData>,
   TFormOnServer extends undefined | FormAsyncValidateOrFn<TFormData> = undefined | FormAsyncValidateOrFn<TFormData>,
->
- = ReturnType<typeof useForm<
-   TFormData,
-   TFormOnMount,
-   TFormOnChange,
-   TFormOnChangeAsync,
-   TFormOnBlur,
-   TFormOnBlurAsync,
-   TFormOnSubmit,
-   TFormOnSubmitAsync,
-   TFormOnDynamic,
-   TFormOnDynamicAsync,
-   TFormOnServer,
-   TSubmitMeta
- >>;
+> =
+  ReturnType<typeof useForm<
+    TFormData,
+    TFormOnMount,
+    TFormOnChange,
+    TFormOnChangeAsync,
+    TFormOnBlur,
+    TFormOnBlurAsync,
+    TFormOnSubmit,
+    TFormOnSubmitAsync,
+    TFormOnDynamic,
+    TFormOnDynamicAsync,
+    TFormOnServer,
+    TSubmitMeta
+  >>;
 
 export type TypeBehaviorFormOptions<
   TFormData = unknown,
@@ -44,21 +44,21 @@ export type TypeBehaviorFormOptions<
   TFormOnDynamic extends undefined | FormValidateOrFn<TFormData> = undefined | FormValidateOrFn<TFormData>,
   TFormOnDynamicAsync extends undefined | FormAsyncValidateOrFn<TFormData> = undefined | FormAsyncValidateOrFn<TFormData>,
   TFormOnServer extends undefined | FormAsyncValidateOrFn<TFormData> = undefined | FormAsyncValidateOrFn<TFormData>,
->
- = FormOptions<
-   TFormData,
-   TFormOnMount,
-   TFormOnChange,
-   TFormOnChangeAsync,
-   TFormOnBlur,
-   TFormOnBlurAsync,
-   TFormOnSubmit,
-   TFormOnSubmitAsync,
-   TFormOnDynamic,
-   TFormOnDynamicAsync,
-   TFormOnServer,
-   TSubmitMeta
- >;
+> =
+  FormOptions<
+    TFormData,
+    TFormOnMount,
+    TFormOnChange,
+    TFormOnChangeAsync,
+    TFormOnBlur,
+    TFormOnBlurAsync,
+    TFormOnSubmit,
+    TFormOnSubmitAsync,
+    TFormOnDynamic,
+    TFormOnDynamicAsync,
+    TFormOnServer,
+    TSubmitMeta
+  >;
 
 export type TypeFormField<
   TParentData = unknown,
@@ -131,20 +131,20 @@ export type TypeBehaviorFormFieldOptions<
   extends undefined | FieldAsyncValidateOrFn<TParentData, TName, TData> = undefined | FieldAsyncValidateOrFn<TParentData, TName, TData>,
 
 > =
- FieldOptions<
-   TParentData,
-   TName,
-   TData,
-   TOnMount,
-   TOnChange,
-   TOnChangeAsync,
-   TOnBlur,
-   TOnBlurAsync,
-   TOnSubmit,
-   TOnSubmitAsync,
-   TOnDynamic,
-   TOnDynamicAsync
- >;
+  FieldOptions<
+    TParentData,
+    TName,
+    TData,
+    TOnMount,
+    TOnChange,
+    TOnChangeAsync,
+    TOnBlur,
+    TOnBlurAsync,
+    TOnSubmit,
+    TOnSubmitAsync,
+    TOnDynamic,
+    TOnDynamicAsync
+  >;
 
 export interface TypeFormOnSubmitData<
   TFormData = unknown,
@@ -191,21 +191,21 @@ export type TypeFormOnSubmitInvalid<
   TFormOnDynamic extends undefined | FormValidateOrFn<TFormData> = undefined | FormValidateOrFn<TFormData>,
   TFormOnDynamicAsync extends undefined | FormAsyncValidateOrFn<TFormData> = undefined | FormAsyncValidateOrFn<TFormData>,
   TFormOnServer extends undefined | FormAsyncValidateOrFn<TFormData> = undefined | FormAsyncValidateOrFn<TFormData>,
->
- = (props: TypeFormOnSubmitData<
-   TFormData,
-   TSubmitMeta,
-   TFormOnMount,
-   TFormOnChange,
-   TFormOnChangeAsync,
-   TFormOnBlur,
-   TFormOnBlurAsync,
-   TFormOnSubmit,
-   TFormOnSubmitAsync,
-   TFormOnDynamic,
-   TFormOnDynamicAsync,
-   TFormOnServer
- >, form: ControllerForm<TFormData, TSubmitMeta>) => void;
+> =
+  (props: TypeFormOnSubmitData<
+    TFormData,
+    TSubmitMeta,
+    TFormOnMount,
+    TFormOnChange,
+    TFormOnChangeAsync,
+    TFormOnBlur,
+    TFormOnBlurAsync,
+    TFormOnSubmit,
+    TFormOnSubmitAsync,
+    TFormOnDynamic,
+    TFormOnDynamicAsync,
+    TFormOnServer
+  >, form: ControllerForm<TFormData, TSubmitMeta>) => void;
 
 export type TypeFormOnSubmit<
   TFormData extends {} = {},
@@ -220,21 +220,21 @@ export type TypeFormOnSubmit<
   TFormOnDynamic extends undefined | FormValidateOrFn<TFormData> = undefined | FormValidateOrFn<TFormData>,
   TFormOnDynamicAsync extends undefined | FormAsyncValidateOrFn<TFormData> = undefined | FormAsyncValidateOrFn<TFormData>,
   TFormOnServer extends undefined | FormAsyncValidateOrFn<TFormData> = undefined | FormAsyncValidateOrFn<TFormData>,
->
- = (props: TypeFormOnSubmitData<
-   TFormData,
-   TSubmitMeta,
-   TFormOnMount,
-   TFormOnChange,
-   TFormOnChangeAsync,
-   TFormOnBlur,
-   TFormOnBlurAsync,
-   TFormOnSubmit,
-   TFormOnSubmitAsync,
-   TFormOnDynamic,
-   TFormOnDynamicAsync,
-   TFormOnServer
- >, form: ControllerForm<TFormData, TSubmitMeta>) => any | Promise<any>;
+> =
+  (props: TypeFormOnSubmitData<
+    TFormData,
+    TSubmitMeta,
+    TFormOnMount,
+    TFormOnChange,
+    TFormOnChangeAsync,
+    TFormOnBlur,
+    TFormOnBlurAsync,
+    TFormOnSubmit,
+    TFormOnSubmitAsync,
+    TFormOnDynamic,
+    TFormOnDynamicAsync,
+    TFormOnServer
+  >, form: ControllerForm<TFormData, TSubmitMeta>) => any | Promise<any>;
 
 export type TypeFormState<
   TFormData = unknown,

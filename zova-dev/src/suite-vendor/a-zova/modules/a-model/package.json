@@ -68,8 +68,8 @@
     "_prepublishOnly": "npm run tsc:publish"
   },
   "dependencies": {
+    "@tanstack/query-core": "^5.90.16",
     "@tanstack/query-persist-client-core": "^5.91.15",
-    "@tanstack/query-core":"^5.90.16",
     "@tanstack/vue-query": "^5.92.5",
     "localforage": "^1.10.0",
     "mutate-on-copy": "^1.0.1",

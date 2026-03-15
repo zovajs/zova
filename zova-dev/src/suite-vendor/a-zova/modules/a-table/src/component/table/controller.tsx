@@ -17,7 +17,7 @@ export interface ControllerTableProps<TData extends {} = {}> {
   schema?: SchemaObject;
   tableProvider?: ITableProvider;
   tableScope?: ITableScope;
-  getColumns?: (next: TypeTableGetColumnsNext<TData>, table: ControllerTable<TData>,) => Promise<TypeColumn<TData>[]>;
+  getColumns?: (next: TypeTableGetColumnsNext<TData>, table: ControllerTable<TData>) => Promise<TypeColumn<TData>[]>;
   slotDefault?: (table: ControllerTable<TData>) => VNode;
 }
 
