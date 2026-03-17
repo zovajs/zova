@@ -72,7 +72,7 @@ export const pageNameSchemas = {
 
 };
 declare module 'zova-module-demo-basic' {
-   
+  
 }
 /** pages: end */
 

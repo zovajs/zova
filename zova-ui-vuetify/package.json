@@ -32,11 +32,11 @@
     "build:rest:cabloyStartAdmin": "npm run prerun && npm run zova :bin:buildRest -- --flavor cabloyStartAdmin",
     "preview:ssr:cabloyStartAdmin": "concurrently \"node ./dist-mock/index.js\" \"node ./dist/ssr-cabloyStartAdmin/index.js\"",
     "dev:spa:cabloyStartAdmin": "npm run prerun && quasar dev --mode spa --flavor cabloyStartAdmin",
-    "dev:ssr:cabloyStartFront": "npm run prerun && quasar dev --mode ssr --flavor cabloyStartFront",
-    "build:ssr:cabloyStartFront": "npm run prerun && quasar build --mode ssr --flavor cabloyStartFront",
-    "build:rest:cabloyStartFront": "npm run prerun && npm run zova :bin:buildRest -- --flavor cabloyStartFront",
-    "preview:ssr:cabloyStartFront": "concurrently \"node ./dist-mock/index.js\" \"node ./dist/ssr-cabloyStartFront/index.js\"",
-    "dev:spa:cabloyStartFront": "npm run prerun && quasar dev --mode spa --flavor cabloyStartFront"
+    "dev:ssr:cabloyStartWeb": "npm run prerun && quasar dev --mode ssr --flavor cabloyStartWeb",
+    "build:ssr:cabloyStartWeb": "npm run prerun && quasar build --mode ssr --flavor cabloyStartWeb",
+    "build:rest:cabloyStartWeb": "npm run prerun && npm run zova :bin:buildRest -- --flavor cabloyStartWeb",
+    "preview:ssr:cabloyStartWeb": "concurrently \"node ./dist-mock/index.js\" \"node ./dist/ssr-cabloyStartWeb/index.js\"",
+    "dev:spa:cabloyStartWeb": "npm run prerun && quasar dev --mode spa --flavor cabloyStartWeb"
   },
   "keywords": [
     "vue3",
