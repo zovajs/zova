@@ -20,7 +20,7 @@ Zova uses [dotenv](https://github.com/motdotla/dotenv) to load additional enviro
 | Name    | Description                                                                          |
 | ------- | ------------------------------------------------------------------------------------ |
 | mode    | 'development' \| 'production' \| string;                                             |
-| flavor  | 'front' \| 'admin' \| string;                                                        |
+| flavor  | 'web' \| 'admin' \| string;                                                        |
 | appMode | 'spa' \| 'ssr' \| 'pwa' \| 'cordova' \| 'capacitor' \| 'electron' \| 'bex' \| string |
 
 - `appMode`: for more info, see [Commands List: Mode](https://quasar.dev/quasar-cli-vite/commands-list#mode)
