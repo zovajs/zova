@@ -103,7 +103,7 @@
     "zova-module-start-demo": "workspace:^",
     "zova-module-start-form": "workspace:^",
     "zova-module-start-layoutadmin": "workspace:^",
-    "zova-module-start-layoutfront": "workspace:^",
+    "zova-module-start-layoutweb": "workspace:^",
     "zova-module-start-paypal": "workspace:^",
     "zova-module-start-resource": "workspace:^",
     "zova-module-start-restpage": "workspace:^",
