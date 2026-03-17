@@ -270,9 +270,9 @@ importers:
       zova-module-start-layoutadmin:
         specifier: workspace:^
         version: link:src/suite/cabloy-start/modules/start-layoutadmin
-      zova-module-start-layoutfront:
+      zova-module-start-layoutweb:
         specifier: workspace:^
-        version: link:src/suite/cabloy-start/modules/start-layoutfront
+        version: link:src/suite/cabloy-start/modules/start-layoutweb
       zova-module-start-paypal:
         specifier: workspace:^
         version: link:src/suite/cabloy-start/modules/start-paypal
@@ -1237,9 +1237,9 @@ importers:
       zova-module-start-layoutadmin:
         specifier: ^5.0.0
         version: link:modules/start-layoutadmin
-      zova-module-start-layoutfront:
+      zova-module-start-layoutweb:
         specifier: ^5.0.0
-        version: link:modules/start-layoutfront
+        version: link:modules/start-layoutweb
       zova-module-start-paypal:
         specifier: ^5.0.0
         version: link:modules/start-paypal
@@ -1286,7 +1286,7 @@ importers:
 
   src/suite/cabloy-start/modules/start-layoutadmin: {}
 
-  src/suite/cabloy-start/modules/start-layoutfront: {}
+  src/suite/cabloy-start/modules/start-layoutweb: {}
 
   src/suite/cabloy-start/modules/start-paypal: {}
 
