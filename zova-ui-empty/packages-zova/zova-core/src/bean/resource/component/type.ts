@@ -7,9 +7,9 @@ export interface IComponentRecord {}
 export interface ILayoutRecord {
   empty: never;
   default: never;
-  // maybe need not admin/front/mobile, just set default to specific layout component
+  // maybe need not admin/web/mobile, just set default to specific layout component
   // admin: never;
-  // front: never;
+  // web: never;
   // mobile: never;
 }
 
