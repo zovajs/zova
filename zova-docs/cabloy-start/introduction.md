@@ -1,33 +1,33 @@
 # Cabloy Start
 
-该套件采用 VuetifyJS UI 库，提供了一组开箱即用的前端模块，加速开发`Web网站`和`Admin中后台`等全栈系统
+This suite uses the VuetifyJS UI library and provides a set of out-of-the-box frontend modules to accelerate the development of fullstack projects such as `Websites` and `Admin-Dashboards`
 
-## 模块清单
+## Module List
 
-### 1. 核心模块
+### 1. Core Modules
 
-|名称|说明|
+| Name | Description |
 |--|--|
-|start-layoutadmin|用于`Admin中后台`的布局组件，首创双层页签导航设计|
-|start-layoutfront|用于`Web网站`的布局组件|
-|start-adapter|UI组件适配器：为`Table/Form`渲染定义常用的UI组件|
-|start-restpage|可动态渲染CRUD的列表页、条目页、搜索表单，并且提供了`Tanstack Table`/`Tanstack Form`/`Tanstack Query`的最佳实践|
-|start-paypal|与后端Paypal API进行对接的前端渲染组件|
-|start-theme|基于Token机制实现的一款橘色主题|
+| start-layoutadmin | Layout component for `Admin-Dashboards`, pioneers dual-layer tabs navigation design |
+| start-layoutfront | Layout component for `Websites` |
+| start-adapter | UI component adapter: defines commonly used UI components for rendering `Table/Form` |
+| start-restpage | Dynamically renders CRUD list pages, detail pages, and search forms, and provides best practices for `Tanstack Table` / `Tanstack Form` / `Tanstack Query` |
+| start-paypal | Front-end rendering component for interfacing with the backend Paypal API |
+| start-theme | Orange theme implemented based on the Token mechanism |
 
-### 2. 其他模块
+### 2. Other Modules
 
-|名称|说明|
+| Name | Description |
 |--|--|
-|start-actions|提供可以在ZovaJsx中使用的常用Actions：`Alert`/`Confirm`/`Prompt`，方便在后端通过声明式语法来实现事件响应逻辑|
-|start-app|提供应用级别的行为组件，实现多种弹窗能力：`$appModal.alert`/`$appModal.confirm`/`$appModal.prompt`|
-|start-button|增强版本的 Button 组件：1. 自动显示 loading 图标，2. 点击事件如果执行失败，会自动弹出错误提示|
-|start-captcha|开箱即用的验证码组件|
-|start-date|时间段组件，自动处理`Timezone`|
-|start-demo|一些演示代码|
-|start-form|表单行为组件，基于`Behavior`机制控制表单渲染行为|
-|start-table|基于`Tanstack Table`实现的表格组件|
-|start-select|用于`Table/Form`渲染的 Select 组件|
-|start-textarea|用于`Table/Form`渲染的 Textarea 组件|
-|start-toggle|用于`Table/Form`渲染的 Toggle 组件|
-|start-resource|用于`Table/Form`渲染的`资源选择`组件|
+| start-actions | Provides commonly used Actions for use in ZovaJsx: `Alert` / `Confirm` / `Prompt`, facilitating event response logic in the backend through declarative syntax |
+| start-app | Provides application-level behavior components with multiple modal capabilities: `$appModal.alert` / `$appModal.confirm` / `$appModal.prompt` |
+| start-button | Enhanced Button component: 1. Automatically shows a loading icon, 2. If the click event fails, an error prompt is automatically displayed |
+| start-captcha | Ready-to-use captcha component |
+| start-date | Time period component, automatically handles `Timezone` |
+| start-demo | Some demonstration code |
+| start-form | Form behavior component, controls form rendering behavior based on the `Behavior` mechanism |
+| start-table | Table component implemented based on `Tanstack Table` |
+| start-select | Select component used for rendering in `Table/Form` |
+| start-textarea | Textarea component used for rendering in `Table/Form` |
+| start-toggle | Toggle component used for rendering in `Table/Form` |
+| start-resource | `Resource selection` component used for rendering in `Table/Form` |
