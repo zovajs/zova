@@ -1,6 +1,6 @@
 # Cabloy Basic
 
-该套件采用 daisyui + tailwindcss，提供了一组开箱即用的前端模块，加速开发`Admin中后台`全栈系统
+该套件采用 Daisyui + Tailwindcss，提供了一组开箱即用的前端模块，加速开发`Admin中后台`全栈系统
 
 ## 模块清单
 
