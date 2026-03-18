@@ -9,7 +9,7 @@ This suite uses the `Daisyui + Tailwindcss` UI library and provides a set of out
 | Name | Description |
 |--|--|
 |basic-adapter|UI component adapter: defines commonly used UI components for rendering `Table/Form`|
-|basic-restpage|Dynamically renders CRUD list pages, entry pages, and search forms, and provides best practices for `Tanstack Table` / `Tanstack Form` / `Tanstack Query`|
+|basic-restpage|Dynamically renders CRUD list pages, entry pages, and search forms, and provides the best practices of `Tanstack Table` / `Tanstack Form` / `Tanstack Query`|
 
 ### 2. Other Modules
 

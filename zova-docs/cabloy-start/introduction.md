@@ -11,7 +11,7 @@ This suite uses the `VuetifyJS` UI library and provides a set of out-of-the-box 
 | start-layoutadmin | Layout component for `Admin-Dashboard`, pioneers dual-layer tabs navigation UI/UX |
 | start-layoutfront | Layout component for `Website` |
 | start-adapter | UI component adapter: defines commonly used UI components for rendering `Table/Form` |
-| start-restpage | Dynamically renders CRUD list pages, entry pages, and search forms, and provides best practices for `Tanstack Table` / `Tanstack Form` / `Tanstack Query` |
+| start-restpage | Dynamically renders CRUD list pages, entry pages, and search forms, and provides the best practices of `Tanstack Table` / `Tanstack Form` / `Tanstack Query` |
 | start-paypal | Frontend rendering component for interfacing with the backend Paypal API |
 | start-theme | Orange theme implemented based on the Token mechanism |
 
