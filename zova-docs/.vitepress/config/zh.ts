@@ -39,12 +39,14 @@ function sidebarCabloy(): DefaultTheme.SidebarItem[] {
 function sidebarCabloyBasic(): DefaultTheme.SidebarItem[] {
   return [
     { text: '介绍', link: 'introduction' },
+    { text: '快速上手', link: 'quick-start' },
   ];
 }
 
 function sidebarCabloyStart(): DefaultTheme.SidebarItem[] {
   return [
     { text: '介绍', link: 'introduction' },
+    { text: '快速上手', link: 'quick-start' },
   ];
 }
 
