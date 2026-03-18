@@ -32,26 +32,23 @@ export const en = defineConfig({
 
 function sidebarCabloy(): DefaultTheme.SidebarItem[] {
   return [
-    {
-      text: 'Cabloy',
-      items: [{ text: 'Introduction', link: 'start/introduction' }],
-    },
-    {
-      text: 'Resources',
-      items: [
-        { text: 'Videos', link: 'resources/videos' },
-        {
-          text: 'Articles',
-          items: [
-            { text: 'A more elegant ioc than nestjs: Basics', link: 'resources/articles/ioc-basic' },
-            {
-              text: 'A more elegant ioc than nestjs: Cross Module Access',
-              link: 'resources/articles/ioc-cross-module',
-            },
-          ],
-        },
-      ],
-    },
+    { text: 'Introduction', link: 'introduction' },
+    { text: 'Dynamic Datasource', link: 'dynamic-datasource' },
+    { text: 'Sharding', link: 'sharding' },
+  ];
+}
+
+function sidebarCabloyBasic(): DefaultTheme.SidebarItem[] {
+  return [
+    { text: 'Introduction', link: 'introduction' },
+    { text: 'Quick Start', link: 'quick-start' },
+  ];
+}
+
+function sidebarCabloyStart(): DefaultTheme.SidebarItem[] {
+  return [
+    { text: 'Introduction', link: 'introduction' },
+    { text: 'Quick Start', link: 'quick-start' },
   ];
 }
 

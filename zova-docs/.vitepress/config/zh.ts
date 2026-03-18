@@ -36,6 +36,18 @@ function sidebarCabloy(): DefaultTheme.SidebarItem[] {
   ];
 }
 
+function sidebarCabloyBasic(): DefaultTheme.SidebarItem[] {
+  return [
+    { text: '介绍', link: 'introduction' },
+  ];
+}
+
+function sidebarCabloyStart(): DefaultTheme.SidebarItem[] {
+  return [
+    { text: '介绍', link: 'introduction' },
+  ];
+}
+
 function sidebarGuide(): DefaultTheme.SidebarItem[] {
   return [
     {
