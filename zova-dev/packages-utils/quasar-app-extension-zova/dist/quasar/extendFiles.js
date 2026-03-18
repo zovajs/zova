@@ -14,12 +14,12 @@ export function extendFilesOne(api, flavor) {
             if (api.ctx.prod) {
                 copyTemplateIfNeed(resolveTemplatePath('env/.env.ssr.production'), api.resolve.app('env/.env.ssr.production'));
             }
-            // admin/front
+            // admin/web
             if (flavor === 'admin') {
                 copyTemplateIfNeed(resolveTemplatePath('env/.env.ssr.admin'), api.resolve.app('env/.env.ssr.admin'));
             }
-            else if (flavor === 'front') {
-                copyTemplateIfNeed(resolveTemplatePath('env/.env.ssr.front'), api.resolve.app('env/.env.ssr.front'));
+            else if (flavor === 'web') {
+                copyTemplateIfNeed(resolveTemplatePath('env/.env.ssr.web'), api.resolve.app('env/.env.ssr.web'));
             }
         }
     }

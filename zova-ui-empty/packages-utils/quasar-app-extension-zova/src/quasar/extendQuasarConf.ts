@@ -47,6 +47,11 @@ export function extendQuasarConf(context: ConfigContext, flavor: ZovaMetaFlavor)
     conf.build.distDir = zovaViteMeta.viteConfig.build.outDir;
     // build: analyze
     conf.build.analyze = conf.build.analyze ?? process.env.BUILD_ANALYZE === 'true';
+    // build: target
+    conf.build.target = {
+      browser: conf.build.target?.browser ?? process.env.BUILD_TARGET_BROWSER?.split(','),
+      node: conf.build.target?.node ?? process.env.BUILD_TARGET_NODE,
+    };
     // devServer
     conf.devServer = mergeConfig(conf.devServer || {}, zovaViteMeta.viteConfig.server);
     // ssr: middlewares
