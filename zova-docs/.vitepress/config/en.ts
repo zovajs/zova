@@ -7,10 +7,16 @@ export const en = defineConfig({
     nav: [
       { text: 'Home', link: '/' },
       { text: 'Docs', link: '/guide/start/introduction', activeMatch: '/guide/' },
+      { text: 'Cabloy', link: '/cabloy/introduction', activeMatch: '/cabloy/' },
+      { text: 'Basic', link: '/cabloy-basic/introduction', activeMatch: '/cabloy-basic/' },
+      { text: 'Start', link: '/cabloy-start/introduction', activeMatch: '/cabloy-start/' },
+      { text: 'Store', link: 'https://cabloy.com', target: '_self' },
     ],
     sidebar: {
       '/guide/': { base: '/guide/', items: sidebarGuide() },
       '/cabloy/': { base: '/cabloy/', items: sidebarCabloy() },
+      '/cabloy-basic/': { base: '/cabloy-basic/', items: sidebarCabloyBasic() },
+      '/cabloy-start/': { base: '/cabloy-start/', items: sidebarCabloyStart() },
     },
     footer: {
       message: 'Released under the MIT License.',
@@ -23,6 +29,31 @@ export const en = defineConfig({
     ],
   },
 });
+
+function sidebarCabloy(): DefaultTheme.SidebarItem[] {
+  return [
+    {
+      text: 'Cabloy',
+      items: [{ text: 'Introduction', link: 'start/introduction' }],
+    },
+    {
+      text: 'Resources',
+      items: [
+        { text: 'Videos', link: 'resources/videos' },
+        {
+          text: 'Articles',
+          items: [
+            { text: 'A more elegant ioc than nestjs: Basics', link: 'resources/articles/ioc-basic' },
+            {
+              text: 'A more elegant ioc than nestjs: Cross Module Access',
+              link: 'resources/articles/ioc-cross-module',
+            },
+          ],
+        },
+      ],
+    },
+  ];
+}
 
 function sidebarGuide(): DefaultTheme.SidebarItem[] {
   return [
@@ -197,30 +228,5 @@ function sidebarGuide(): DefaultTheme.SidebarItem[] {
     },
     { text: 'Thanks', link: 'others/thanks' },
     { text: 'License', link: 'others/license' },
-  ];
-}
-
-function sidebarCabloy(): DefaultTheme.SidebarItem[] {
-  return [
-    {
-      text: 'Cabloy',
-      items: [{ text: 'Introduction', link: 'start/introduction' }],
-    },
-    {
-      text: 'Resources',
-      items: [
-        { text: 'Videos', link: 'resources/videos' },
-        {
-          text: 'Articles',
-          items: [
-            { text: 'A more elegant ioc than nestjs: Basics', link: 'resources/articles/ioc-basic' },
-            {
-              text: 'A more elegant ioc than nestjs: Cross Module Access',
-              link: 'resources/articles/ioc-cross-module',
-            },
-          ],
-        },
-      ],
-    },
   ];
 }

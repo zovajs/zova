@@ -7,10 +7,16 @@ export const zh = defineConfig({
     nav: [
       { text: '首页', link: '/' },
       { text: '文档', link: '/zh/guide/start/introduction', activeMatch: '/zh/guide/' },
+      { text: 'Cabloy', link: '/zh/cabloy/introduction', activeMatch: '/zh/cabloy/' },
+      { text: 'Basic', link: '/zh/cabloy-basic/introduction', activeMatch: '/zh/cabloy-basic/' },
+      { text: 'Start', link: '/zh/cabloy-start/introduction', activeMatch: '/zh/cabloy-start/' },
+      { text: 'Store', link: 'https://cabloy.com', target: '_self' },
     ],
     sidebar: {
       '/zh/guide/': { base: '/zh/guide/', items: sidebarGuide() },
       '/zh/cabloy/': { base: '/zh/cabloy/', items: sidebarCabloy() },
+      '/zh/cabloy-basic/': { base: '/zh/cabloy-basic/', items: sidebarCabloyBasic() },
+      '/zh/cabloy-start/': { base: '/zh/cabloy-start/', items: sidebarCabloyStart() },
     },
     footer: {
       message: '基于 MIT 许可发布',
@@ -23,6 +29,12 @@ export const zh = defineConfig({
     ],
   },
 });
+
+function sidebarCabloy(): DefaultTheme.SidebarItem[] {
+  return [
+    { text: '介绍', link: 'introduction' },
+  ];
+}
 
 function sidebarGuide(): DefaultTheme.SidebarItem[] {
   return [
@@ -197,27 +209,5 @@ function sidebarGuide(): DefaultTheme.SidebarItem[] {
     },
     { text: '致谢', link: 'others/thanks' },
     { text: 'License', link: 'others/license' },
-  ];
-}
-
-function sidebarCabloy(): DefaultTheme.SidebarItem[] {
-  return [
-    {
-      text: 'Cabloy',
-      items: [{ text: '简介', link: 'start/introduction' }],
-    },
-    {
-      text: '资源',
-      items: [
-        { text: '视频', link: 'resources/videos' },
-        {
-          text: '文章',
-          items: [
-            { text: '比nestjs更优雅的ioc: 基础篇', link: 'resources/articles/ioc-basic' },
-            { text: '比nestjs更优雅的ioc: 跨模块访问资源', link: 'resources/articles/ioc-cross-module' },
-          ],
-        },
-      ],
-    },
   ];
 }

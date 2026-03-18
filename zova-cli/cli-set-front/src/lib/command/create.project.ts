@@ -22,8 +22,6 @@ export default {
           type: 'select',
           message: 'Specify the project template',
           choices: [
-            { name: 'antdv', message: 'zova + antdv' },
-            { name: 'element', message: 'zova + element-plus' },
             { name: 'quasar', message: 'zova + quasar' },
             { name: 'vuetify', message: 'zova + vuetify' },
             { name: 'empty', message: 'zova only' },
