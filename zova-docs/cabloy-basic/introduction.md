@@ -1,20 +1,20 @@
 # Cabloy Basic
 
-该套件采用 Daisyui + Tailwindcss，提供了一组开箱即用的前端模块，加速开发`Admin中后台`全栈系统
+This suite uses the `Daisyui + Tailwindcss` UI library and provides a set of out-of-the-box frontend modules to accelerate the development of fullstack projects such as `Admin-Dashboards`
 
-## 模块清单
+## Module List
 
-### 1. 核心模块
+### 1. Core Modules
 
-|名称|说明|
+| Name | Description |
 |--|--|
-|basic-adapter|UI组件适配器：为`Table/Form`渲染定义常用的UI组件|
-|basic-restpage|可动态渲染CRUD的列表页、条目页、搜索表单，并且提供了`Tanstack Table`/`Tanstack Form`/`Tanstack Query`的最佳实践|
+|basic-adapter|UI component adapter: defines commonly used UI components for rendering `Table/Form`|
+|basic-restpage|Dynamically renders CRUD list pages, entry pages, and search forms, and provides best practices for `Tanstack Table` / `Tanstack Form` / `Tanstack Query`|
 
-### 2. 其他模块
+### 2. Other Modules
 
-|名称|说明|
+| Name | Description |
 |--|--|
-|basic-date|时间段组件，自动处理`Timezone`|
-|basic-form|表单行为组件，基于`Behavior`机制控制表单渲染行为|
-|basic-table|基于`Tanstack Table`实现的表格组件|
+|basic-date|Date range component, automatically handles `Timezone`|
+|basic-form|Form behavior component, controls form rendering behavior based on the `Behavior` mechanism |
+|basic-table|Table component implemented based on `Tanstack Table`|
