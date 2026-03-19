@@ -120,7 +120,7 @@ export class ModelSdk extends BeanModelBase {
       queryFn: () => {
         const querySchema = this.getSchema(schemaName);
         if (!querySchema.data) return null;
-        const zodSchema = schemaToZodSchema(querySchema.data, schemaName => this.getSchema(schemaName).data);
+        const zodSchema = this.schemaToZodSchema(querySchema.data);
         return zodSchema;
       },
     });
@@ -215,7 +215,7 @@ export class ModelSdk extends BeanModelBase {
     return loadSchemaProperties(schema, schemaName => this.getSchema(schemaName).data, scene);
   }
 
-  public schemaToZodSchema<T extends z.ZodType = z.ZodType>(schema: SchemaObject, scene?: TypeSchemaScene): T {
-    return schemaToZodSchema(schema, schemaName => this.getSchema(schemaName).data, scene);
+  public schemaToZodSchema<T extends z.ZodType = z.ZodType>(schema: SchemaObject): T {
+    return schemaToZodSchema(schema, schemaName => this.getSchema(schemaName).data);
   }
 }

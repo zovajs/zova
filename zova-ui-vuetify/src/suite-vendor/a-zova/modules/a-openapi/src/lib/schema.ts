@@ -50,9 +50,8 @@ export function loadSchemaProperties(
 export function schemaToZodSchema<T extends z.ZodType = z.ZodType>(
   schema: SchemaObject,
   onGetSchema: (schemaName: string) => SchemaObject | undefined,
-  scene?: TypeSchemaScene,
 ): T {
-  const schemaNormalize = _normalizeSchema(toRaw(schema), onGetSchema, scene);
+  const schemaNormalize = _normalizeSchema(toRaw(schema), onGetSchema);
   const code = jsonSchemaToZod(schemaNormalize);
   return evaluateSimple(code, { z });
 }
@@ -60,7 +59,6 @@ export function schemaToZodSchema<T extends z.ZodType = z.ZodType>(
 function _normalizeSchema(
   schema: SchemaObject,
   onGetSchema: (schemaName: string) => SchemaObject | undefined,
-  scene?: TypeSchemaScene,
 ) {
   if (!schema.properties) return schema;
   const schemaNew = Object.assign({}, schema, { properties: {} });
@@ -70,7 +68,7 @@ function _normalizeSchema(
       property = onGetSchema(property.$ref);
     }
     if (!property) continue;
-    schemaNew.properties[key] = _normalizeSchema(property, onGetSchema, scene);
+    schemaNew.properties[key] = _normalizeSchema(property, onGetSchema);
   }
   return schemaNew;
 }
