@@ -1,11 +1,11 @@
 import { isNil } from '@cabloy/utils';
 import { SchemaObject } from 'openapi3-ts/oas31';
-import { cast, deepExtend, ILocaleRecord, TypeEventOff, Use, usePrepareArg } from 'zova';
+import z from 'zod';
+import { cast, ILocaleRecord, TypeEventOff, Use, usePrepareArg } from 'zova';
 import { IApiSchemaOptions } from 'zova-module-a-api';
 import { $QueryAutoLoad, BeanModelBase, IDecoratorModelOptions, Model } from 'zova-module-a-model';
 import { SysSdk } from '../bean/sys.sdk.js';
-import { getSchemaOfRequestBody, getSchemaOfRequestQuery, getSchemaOfRequestQueryFilter, getSchemaOfResponseBody, schemaToZodSchema } from '../lib/schema.js';
-import { OrderUnknownBase } from '../types/database.js';
+import { getSchemaOfRequestBody, getSchemaOfRequestQuery, getSchemaOfRequestQueryFilter, getSchemaOfResponseBody, loadSchemaProperties, schemaToZodSchema } from '../lib/schema.js';
 import { TypeOpenapiPermissions } from '../types/resourceMeta.js';
 import { TypeSchemaScene } from '../types/rest.js';
 import { IOpenapiSchemas, TypeOpenapiSchemasSdk } from '../types/schema.js';
@@ -120,7 +120,7 @@ export class ModelSdk extends BeanModelBase {
       queryFn: () => {
         const querySchema = this.getSchema(schemaName);
         if (!querySchema.data) return null;
-        const zodSchema = schemaToZodSchema(querySchema.data, schemaName => this.getSchema(schemaName).data);
+        const zodSchema = this.schemaToZodSchema(querySchema.data);
         return zodSchema;
       },
     });
@@ -211,33 +211,11 @@ export class ModelSdk extends BeanModelBase {
     };
   }
 
-  public loadSchemaProperties(schema: SchemaObject | undefined, scene: TypeSchemaScene): SchemaObject[] | undefined {
-    if (!schema) return;
-    const properties = schema.properties!;
-    const result: SchemaObject[] = [];
-    // filter
-    for (let key in properties) {
-      let property = properties[key] as SchemaObject;
-      if (property.$ref) {
-        property = this.getSchema(property.$ref).data!;
-      }
-      if (!property) continue;
-      const customKey = property.rest?.customKey;
-      if (customKey) {
-        const parts = customKey.split('.');
-        const propertyParent: any = parts[0] === key ? property : result.find(item => item.key === parts[0]);
-        property = propertyParent?.properties[parts[1]];
-        key = customKey;
-      }
-      if (!property) continue;
-      property = deepExtend({ key }, property, { rest: property.rest?.[scene] ?? {} });
-      result.push(property);
-    }
-    // sort
-    result.sort((a, b) => {
-      return (a.rest?.order ?? OrderUnknownBase) - (b.rest?.order ?? OrderUnknownBase);
-    });
-    // ok
-    return result;
+  public loadSchemaProperties(schema: SchemaObject | undefined, scene?: TypeSchemaScene): SchemaObject[] | undefined {
+    return loadSchemaProperties(schema, schemaName => this.getSchema(schemaName).data, scene);
+  }
+
+  public schemaToZodSchema<T extends z.ZodType = z.ZodType>(schema: SchemaObject): T {
+    return schemaToZodSchema(schema, schemaName => this.getSchema(schemaName).data);
   }
 }

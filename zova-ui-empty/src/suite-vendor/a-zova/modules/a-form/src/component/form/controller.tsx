@@ -8,7 +8,7 @@ import { $ZodIssue } from 'zod/v4/core';
 import { cast, deepEqual, deepExtend, objectAssignReactive, UseScope } from 'zova';
 import { isJsxComponent, ZovaJsx } from 'zova-jsx';
 import { Controller } from 'zova-module-a-bean';
-import { renderFormFieldTopPropsSystem, schemaToZodSchema, ScopeModuleAOpenapi, TypeFormFieldRenderComponent, TypeFormFieldRenderComponentProvider, TypeFormSchemaScene } from 'zova-module-a-openapi';
+import { renderFormFieldTopPropsSystem, ScopeModuleAOpenapi, TypeFormFieldRenderComponent, TypeFormFieldRenderComponentProvider, TypeFormSchemaScene } from 'zova-module-a-openapi';
 import { BeanControllerFormBase } from '../../lib/beanControllerFormBase.js';
 import { IFormScope, RevalidateLogicProps, TypeForm, TypeFormOnShowError, TypeFormOnSubmit, TypeFormOnSubmitInvalid } from '../../types/form.js';
 import { constFieldProps, IFormFieldLayoutOptionsBase, IFormFieldRenderContextPropsBucket, IFormFieldScope, IJsxRenderContextFormField, TypeFormFieldOnSetDisplayValue } from '../../types/formField.js';
@@ -232,7 +232,7 @@ export class ControllerForm<TFormData extends {} = {}, TSubmitMeta = never> exte
   private _getZodSchema() {
     if (this.$props.zodSchema) return this._patchZodSchema(this.$props.zodSchema);
     if (!this.schema) return;
-    return this._patchZodSchema(schemaToZodSchema<z.ZodObject<any>>(this.schema, schemaName => this.$sdk.getSchema(schemaName).data));
+    return this._patchZodSchema(this.$sdk.schemaToZodSchema(this.schema));
   }
 
   private _patchZodSchema(schema: z.ZodObject<any> | z.ZodUnion<any>) {

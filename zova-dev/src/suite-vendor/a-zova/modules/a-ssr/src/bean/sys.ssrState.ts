@@ -1,4 +1,4 @@
-import { BeanBase, cast, ILocaleRecord } from 'zova';
+import { BeanBase, cast } from 'zova';
 import { Sys } from 'zova-module-a-bean';
 import { SSRContextState, SSRContextStateDefer } from '../types/ssr.js';
 
@@ -16,7 +16,6 @@ export class SysSsrState extends BeanBase {
         this[SymbolSSRState] = cast(window).__INITIAL_STATE__;
         delete cast(window).__INITIAL_STATE__;
         document.getElementById('ssr-state-init')?.remove();
-        this._patchEnvConfig();
       } else {
         this[SymbolSSRState] = {};
       }
@@ -28,17 +27,6 @@ export class SysSsrState extends BeanBase {
         this[SymbolSSRStateDefer] = {} as any;
       }
     }
-  }
-
-  private _patchEnvConfig() {
-    // env
-    this.sys.env = Object.assign({}, this.sys.env, this.state.envClient);
-    // config
-    this.sys.config.app.name = this.sys.env.APP_NAME!;
-    this.sys.config.app.title = this.sys.env.APP_TITLE!;
-    this.sys.config.app.description = this.sys.env.APP_DESCRIPTION!;
-    this.sys.config.app.version = this.sys.env.APP_VERSION!;
-    this.sys.config.locale.default = this.sys.env.APP_LOCALE_DEFAULT as keyof ILocaleRecord;
   }
 
   get state() {

@@ -1,11 +1,51 @@
 import type { OperationObject, ParameterObject, RequestBodyObject, SchemaObject } from 'openapi3-ts/oas31';
+import type { TypeSchemaScene } from '../types/rest.js';
 import jsonSchemaToZod from '@cabloy/json-schema-to-zod';
 import { evaluateSimple } from '@cabloy/utils';
 import { toRaw } from 'vue';
 import { z } from 'zod';
-import { cast } from 'zova';
+import { cast, deepExtend } from 'zova';
+import { OrderUnknownBase } from '../types/database.js';
 
 const __FilterColumnsIgnore = ['columns', 'where', 'orders', 'pageNo', 'pageSize'];
+
+export function loadSchemaProperties(
+  schema: SchemaObject | undefined,
+  onGetSchema: (schemaName: string) => SchemaObject | undefined,
+  scene?: TypeSchemaScene,
+): SchemaObject[] | undefined {
+  if (!schema) return;
+  const properties = schema.properties!;
+  const result: SchemaObject[] = [];
+  // filter
+  for (let key in properties) {
+    let property = properties[key] as SchemaObject;
+    if (property.$ref) {
+      property = onGetSchema(property.$ref)!;
+    }
+    if (!property) continue;
+    const customKey = property.rest?.customKey;
+    if (customKey) {
+      const parts = customKey.split('.');
+      const propertyParent: any = parts[0] === key ? property : result.find(item => item.key === parts[0]);
+      property = propertyParent?.properties[parts[1]];
+      key = customKey;
+    }
+    if (!property) continue;
+    property = deepExtend(
+      { key },
+      property,
+      scene ? { rest: property.rest?.[scene] ?? {} } : undefined,
+    );
+    result.push(property);
+  }
+  // sort
+  result.sort((a, b) => {
+    return (a.rest?.order ?? OrderUnknownBase) - (b.rest?.order ?? OrderUnknownBase);
+  });
+  // ok
+  return result;
+}
 
 export function schemaToZodSchema<T extends z.ZodType = z.ZodType>(
   schema: SchemaObject,
@@ -16,7 +56,10 @@ export function schemaToZodSchema<T extends z.ZodType = z.ZodType>(
   return evaluateSimple(code, { z });
 }
 
-function _normalizeSchema(schema: SchemaObject, onGetSchema: (schemaName: string) => SchemaObject | undefined) {
+function _normalizeSchema(
+  schema: SchemaObject,
+  onGetSchema: (schemaName: string) => SchemaObject | undefined,
+) {
   if (!schema.properties) return schema;
   const schemaNew = Object.assign({}, schema, { properties: {} });
   for (const key in schema.properties) {
