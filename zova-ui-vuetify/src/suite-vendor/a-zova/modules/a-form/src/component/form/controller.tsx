@@ -232,7 +232,7 @@ export class ControllerForm<TFormData extends {} = {}, TSubmitMeta = never> exte
   private _getZodSchema() {
     if (this.$props.zodSchema) return this._patchZodSchema(this.$props.zodSchema);
     if (!this.schema) return;
-    return this._patchZodSchema(schemaToZodSchema<z.ZodObject<any>>(this.schema, schemaName => this.$sdk.getSchema(schemaName).data));
+    return this._patchZodSchema(schemaToZodSchema<z.ZodObject<any>>(this.schema, schemaName => this.$sdk.getSchema(schemaName).data, this.$props.schemaScene));
   }
 
   private _patchZodSchema(schema: z.ZodObject<any> | z.ZodUnion<any>) {
