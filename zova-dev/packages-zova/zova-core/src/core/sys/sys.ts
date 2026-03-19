@@ -106,15 +106,34 @@ export class ZovaSys {
 
   // eslint-disable-next-line no-undef
   private _prepareEnv(env: NodeJS.ProcessEnv, envRuntime?: Partial<ZovaConfigEnv>): ZovaConfigEnv {
-    if (!envRuntime) return env as unknown as ZovaConfigEnv;
-    const env2 = { ...env };
-    for (const key of Object.keys(env2)) {
-      if (envRuntime[key] !== undefined) {
-        env2[key] = envRuntime[key];
-      }
-    }
-    return env2 as unknown as ZovaConfigEnv;
+    const env2 = this._prepareEnv_Runtime(env, envRuntime);
+    const env3 = this._prepareEnv_Client(env2 as any);
+    return env3;
   }
+
+  // eslint-disable-next-line no-undef
+  private _prepareEnv_Runtime(env: NodeJS.ProcessEnv, envRuntime?: Partial<ZovaConfigEnv>): ZovaConfigEnv {
+    return _mergeEnv(env, envRuntime);
+  }
+
+  // eslint-disable-next-line no-undef
+  private _prepareEnv_Client(env: NodeJS.ProcessEnv): ZovaConfigEnv {
+    if (process.env.SERVER || !cast(window).__INITIAL_STATE__) return env as unknown as ZovaConfigEnv;
+    const ssrState = cast(window).__INITIAL_STATE__;
+    return _mergeEnv(env, ssrState.envClient);
+  }
+}
+
+// eslint-disable-next-line no-undef
+function _mergeEnv(env: NodeJS.ProcessEnv, envRuntime?: Partial<ZovaConfigEnv>): ZovaConfigEnv {
+  if (!envRuntime) return env as unknown as ZovaConfigEnv;
+  const env2 = { ...env };
+  for (const key of Object.keys(env2)) {
+    if (envRuntime[key] !== undefined) {
+      env2[key] = envRuntime[key];
+    }
+  }
+  return env2 as unknown as ZovaConfigEnv;
 }
 
 export const sys = new ZovaSys();
