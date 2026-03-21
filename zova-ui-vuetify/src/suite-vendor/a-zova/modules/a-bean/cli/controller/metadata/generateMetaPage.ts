@@ -150,11 +150,11 @@ function _extractRoutePathOrName(options: IMetadataCustomGenerateOptions, _globF
   if (!astMatch) {
     throw new Error(`page route not found: ${controllerInfo.nameCapitalize}`);
   }
-  const astPropPath = (astMatch?.node as any).properties.find(prop => {
+  const astPropPath = (astMatch?.node as any)?.properties.find(prop => {
     return prop.key.name === 'path';
   });
   const routePath = astPropPath?.value.value || '';
-  const astPropName = (astMatch?.node as any).properties.find(prop => {
+  const astPropName = (astMatch?.node as any)?.properties.find(prop => {
     return prop.key.name === 'name';
   });
   const routeName = astPropName?.value.value;

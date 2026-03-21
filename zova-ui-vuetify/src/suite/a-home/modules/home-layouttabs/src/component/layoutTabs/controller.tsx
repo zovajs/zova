@@ -60,7 +60,11 @@ export class ControllerLayoutTabs extends BeanControllerBase {
           return self.belowBreakpoint ? self.leftDrawerOpenMobile : self.$$modelLayout.leftDrawerOpenPC;
         },
         set(value) {
-          self.belowBreakpoint ? (self.leftDrawerOpenMobile = value) : (self.$$modelLayout.leftDrawerOpenPC = value);
+          if (self.belowBreakpoint) {
+            self.leftDrawerOpenMobile = value;
+          } else {
+            self.$$modelLayout.leftDrawerOpenPC = value;
+          }
         },
       };
     });
