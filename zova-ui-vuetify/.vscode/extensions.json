@@ -1,9 +1,5 @@
 {
-  "recommendations": [
-    "cabloy.zova-vscode",
-    "oxc.oxc-vscode",
-    "Vue.volar"
-  ],
+  "recommendations": ["cabloy.zova-vscode", "oxc.oxc-vscode", "Vue.volar"],
   "unwantedRecommendations": [
     "Vue.vscode-typescript-vue-plugin",
     "octref.vetur",
