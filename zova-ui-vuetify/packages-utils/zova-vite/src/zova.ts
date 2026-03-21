@@ -86,7 +86,7 @@ export async function generateZovaViteMeta(configMeta: ZovaConfigMeta, configOpt
     const outDir = getOutDir();
     const build = {
       outDir,
-      rollupOptions: {
+      rolldownOptions: {
         output: {
           manualChunks: id => {
             return configUtils.configManualChunk(id);
