@@ -19,8 +19,10 @@
     "preview:spa": "vite preview --outDir=dist/spa-admin",
     "prerun": "npm run zova :tools:deps && npm run tsc",
     "tsc": "tsc --noEmit --project tsconfig.vue-tsc.json",
-    "lint": "eslint",
-    "lint:fix": "eslint --fix",
+    "format": "oxfmt --check",
+    "format:fix": "oxfmt --write",
+    "lint": "oxlint",
+    "lint:fix": "oxlint --fix",
     "dev:ssr:admin": "npm run prerun && quasar dev --mode ssr --flavor admin",
     "build:ssr:admin": "npm run prerun && quasar build --mode ssr --flavor admin",
     "preview:ssr:admin": "concurrently \"node ./dist-mock/index.js\" \"node ./dist/ssr-admin/index.js\"",
@@ -38,11 +40,7 @@
     "preview:ssr:cabloyStartWeb": "concurrently \"node ./dist-mock/index.js\" \"node ./dist/ssr-cabloyStartWeb/index.js\"",
     "dev:spa:cabloyStartWeb": "npm run prerun && quasar dev --mode spa --flavor cabloyStartWeb"
   },
-  "keywords": [
-    "vue3",
-    "ioc",
-    "zova"
-  ],
+  "keywords": ["vue3", "ioc", "zova"],
   "repository": {
     "type": "git",
     "url": "git+https://github.com/cabloy/zova.git"
