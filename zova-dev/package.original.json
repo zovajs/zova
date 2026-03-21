@@ -63,7 +63,7 @@
     "zova": "workspace:^"
   },
   "devDependencies": {
-    "@cabloy/lint": "^5.0.23",
+    "@cabloy/lint": "^5.0.24",
     "@cabloy/openapi-typescript": "^7.9.2",
     "@quasar/app-vite": "2.4.0",
     "@types/node": "^22.10.2",
