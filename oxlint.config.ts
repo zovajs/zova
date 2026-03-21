@@ -41,6 +41,7 @@ export default defineConfig(
       '**/dist/**',
       '**/static/**',
       '**/.rollup.cache/**',
+      'postcss.config.cjs',
       '**/.metadata/index.ts',
       '.vona',
       '.assets',
