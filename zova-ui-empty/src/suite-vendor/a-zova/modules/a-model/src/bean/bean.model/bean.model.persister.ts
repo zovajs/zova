@@ -1,20 +1,17 @@
 import type { Query, QueryKey } from '@tanstack/vue-query';
-import type { QueryMetaPersister } from '../../types/index.js';
+
 import { experimental_createQueryPersister } from '@tanstack/query-persist-client-core';
 import localforage from 'localforage';
 import { SymbolBeanFullName } from 'zova';
+
+import type { QueryMetaPersister } from '../../types/index.js';
+
 import { CookieWrapper } from '../../common/cookieWrapper.js';
 import { resolveMaxAgeTime } from '../../types/index.js';
 import { BeanModelLast } from './bean.model.last.js';
 
 export class BeanModelPersister extends BeanModelLast {
-  private _persisterLoad_inner<T>(
-    storage: Storage,
-    storageKey: string,
-    storedData: any,
-    query: Query,
-    options: QueryMetaPersister,
-  ): T | undefined {
+  private _persisterLoad_inner<T>(storage: Storage, storageKey: string, storedData: any, query: Query, options: QueryMetaPersister): T | undefined {
     if (!storedData) return undefined;
     const persistedQuery = options.deserialize
       ? options.deserialize(storedData as string, options.deserializeDefault!)
@@ -79,9 +76,7 @@ export class BeanModelPersister extends BeanModelLast {
       queryHash: query.queryHash,
       buster: options.buster,
     };
-    const data = options.serialize
-      ? options.serialize(params, options.serializeDefault!)
-      : options.serializeDefault!(params);
+    const data = options.serialize ? options.serialize(params, options.serializeDefault!) : options.serializeDefault!(params);
     if (options.sync === true) {
       storage.setItem(storageKey, data);
     } else {

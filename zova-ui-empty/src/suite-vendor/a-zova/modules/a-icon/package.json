@@ -1,13 +1,17 @@
 {
   "name": "zova-module-a-icon",
-  "type": "module",
   "version": "5.0.0",
-  "title": "a-icon",
   "description": "",
-  "author": "",
   "keywords": [
     "Zova Module"
   ],
+  "author": "",
+  "files": [
+    "dist",
+    "mock",
+    "rest"
+  ],
+  "type": "module",
   "exports": {
     ".": {
       "types": [
@@ -19,17 +23,13 @@
     },
     "./*": "./*"
   },
-  "files": [
-    "dist",
-    "mock",
-    "rest"
-  ],
   "scripts": {
     "clean": "tsc -b --clean",
     "tsc:publish": "npm run clean && tsc -b",
     "_prepublishOnly": "npm run tsc:publish"
   },
   "dependencies": {},
+  "title": "a-icon",
   "zovaModule": {
     "capabilities": {
       "monkey": true

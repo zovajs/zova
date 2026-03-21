@@ -24,5 +24,4 @@ declare module 'zova' {
   export interface SysMeta {
     $icon: SysIcon;
   }
-
 }

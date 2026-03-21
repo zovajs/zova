@@ -1,4 +1,5 @@
 import type { Query } from '@tanstack/vue-query';
+
 import { BeanModelPersister } from './bean.model.persister.js';
 
 export class BeanModelLocal extends BeanModelPersister {

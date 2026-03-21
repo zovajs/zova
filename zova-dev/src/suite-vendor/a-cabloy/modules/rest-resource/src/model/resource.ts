@@ -1,6 +1,7 @@
 import type { TableIdentity } from 'table-identity';
 import type { DataMutation, IDecoratorModelOptions } from 'zova-module-a-model';
 import type { IOpenapiOptionsResourceMeta, ITableQuery, ITableRes, ScopeModuleAOpenapi, TypeOpenapiPermissions } from 'zova-module-a-openapi';
+
 import { hashkey, isNil } from '@cabloy/utils';
 import { SchemaObject } from 'openapi3-ts/oas31';
 import { deepExtend, UseScope } from 'zova';

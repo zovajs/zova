@@ -1,15 +1,11 @@
-import type {
-  DefaultError,
-  QueryClient,
-  QueryKey,
-  UseQueryDefinedReturnType,
-  UseQueryOptions,
-  UseQueryReturnType,
-} from '@tanstack/vue-query';
+import type { DefaultError, QueryClient, QueryKey, UseQueryDefinedReturnType, UseQueryOptions, UseQueryReturnType } from '@tanstack/vue-query';
 import type { UnwrapNestedRefs } from 'vue';
-import type { DefinedInitialQueryOptions, UndefinedInitialQueryOptions } from '../../common/types.js';
+
 import { useQuery } from '@tanstack/vue-query';
 import { cast } from 'zova';
+
+import type { DefinedInitialQueryOptions, UndefinedInitialQueryOptions } from '../../common/types.js';
+
 import { resolveStaleTime } from '../../types/index.js';
 import { BeanModelQuery } from './bean.model.query.js';
 

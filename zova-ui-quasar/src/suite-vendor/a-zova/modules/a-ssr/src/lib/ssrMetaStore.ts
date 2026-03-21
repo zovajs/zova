@@ -1,7 +1,9 @@
-import type { SSRContext, SSRMetaOptions, SSRMetaOptionsWrapper } from '../types/ssr.js';
 // from: quasar/ui/src/plugins/Meta.js
 import { extend } from '@cabloy/extend';
 import { BeanSimple, cast } from 'zova';
+
+import type { SSRContext, SSRMetaOptions, SSRMetaOptionsWrapper } from '../types/ssr.js';
+
 import { unevalPatch } from './utils.js';
 
 export class CtxSSRMetaStore extends BeanSimple {
@@ -140,11 +142,11 @@ export class CtxSSRMetaStore extends BeanSimple {
 
     data.title = '\'"`';
 
-    ctx.endingHeadTags +=
-      `${Object.keys(data.noscript!)
-        .map(name => `<noscript data-qmeta="${name}">${data.noscript![name]}</noscript>`)
-        .join('')
-      }<script${nonce} id="ssr-meta-init">window.__Q_META__=${delete data.bodyStyle && delete data.bodyClass && delete data.noscript && unevalPatch(data)}</script>`;
+    ctx.endingHeadTags += `${Object.keys(data.noscript!)
+      .map(name => `<noscript data-qmeta="${name}">${data.noscript![name]}</noscript>`)
+      .join(
+        '',
+      )}<script${nonce} id="ssr-meta-init">window.__Q_META__=${delete data.bodyStyle && delete data.bodyClass && delete data.noscript && unevalPatch(data)}</script>`;
 
     let ssr_local_themedark =
       this.sys.env.SSR_COOKIE_THEME === 'true'
@@ -165,8 +167,7 @@ export class CtxSSRMetaStore extends BeanSimple {
             return _data;
           },
         });`;
-    const ssr_local_themename =
-      this.sys.env.SSR_COOKIE_THEME === 'true' ? '' : "window.ssr_local_themename=window.ssr_load_local('themename');";
+    const ssr_local_themename = this.sys.env.SSR_COOKIE_THEME === 'true' ? '' : "window.ssr_local_themename=window.ssr_load_local('themename');";
     ctx.endingHeadTags += `<script id="ssr-prefers-color-schema-dark">
         window.ssr_load_local=function(key){
           const __ssr_local=localStorage.getItem(key);

@@ -5,12 +5,26 @@ import { VNode } from 'vue';
 import { appResource, cast, deepEqual, deepExtend, objectAssignReactive, UseScope } from 'zova';
 import { isJsxComponent, ZovaJsx } from 'zova-jsx';
 import { Controller } from 'zova-module-a-bean';
-import { renderTableColumnTopPropsSystem, ScopeModuleAOpenapi, TypeTableCellRenderComponent, TypeTableCellRenderComponentProvider } from 'zova-module-a-openapi';
+import {
+  renderTableColumnTopPropsSystem,
+  ScopeModuleAOpenapi,
+  TypeTableCellRenderComponent,
+  TypeTableCellRenderComponentProvider,
+} from 'zova-module-a-openapi';
+
 import { BeanControllerTableBase } from '../../lib/beanControllerTableBase.js';
 import { ITableProvider } from '../../types/providers.js';
 import { ITableMeta, TypeColumn, TypeTable, TypeTableGetColumnsNext } from '../../types/table.js';
 import { IDecoratorTableCellOptions, IJsxRenderContextTableCell, ITableCellRender } from '../../types/tableCell.js';
-import { constColumnProps, IJsxRenderContextTableColumn, ITableCellRenderColumnProps, ITableCellScope, ITableColumnScope, ITableScope, TypeTableCellRender } from '../../types/tableColumn.js';
+import {
+  constColumnProps,
+  IJsxRenderContextTableColumn,
+  ITableCellRenderColumnProps,
+  ITableCellScope,
+  ITableColumnScope,
+  ITableScope,
+  TypeTableCellRender,
+} from '../../types/tableColumn.js';
 
 export interface ControllerTableProps<TData extends {} = {}> {
   data?: TData[];
@@ -48,13 +62,7 @@ export class ControllerTable<TData extends {} = {}> extends BeanControllerTableB
     });
     // jsx
     this.columnCelEnv = this._getColumnCelEnv();
-    this.zovaJsx = this.app.bean._newBeanSimple(
-      ZovaJsx,
-      false,
-      this.tableProvider.components,
-      this.tableProvider.actions,
-      this.columnCelEnv,
-    );
+    this.zovaJsx = this.app.bean._newBeanSimple(ZovaJsx, false, this.tableProvider.components, this.tableProvider.actions, this.columnCelEnv);
     // properties
     this._createProperties();
     // tableMeta
@@ -62,11 +70,14 @@ export class ControllerTable<TData extends {} = {}> extends BeanControllerTableB
     // columns
     this.columns = await this._createColumns();
     // watch
-    this.$watch(() => this.$props.schema, async (newValue, oldValue) => {
-      if (deepEqual(newValue, oldValue)) return;
-      this.tableMeta = await this._createTableMeta();
-      this.columns = await this._createColumns();
-    });
+    this.$watch(
+      () => this.$props.schema,
+      async (newValue, oldValue) => {
+        if (deepEqual(newValue, oldValue)) return;
+        this.tableMeta = await this._createTableMeta();
+        this.columns = await this._createColumns();
+      },
+    );
     // table
     this._createTable();
   }
@@ -86,8 +97,12 @@ export class ControllerTable<TData extends {} = {}> extends BeanControllerTableB
       getCoreRowModel: getCoreRowModel(),
       renderFallbackValue: this.scope.config.renderFallbackValue,
       manualPagination: true,
-      get data() { return self.data || []; },
-      get columns() { return self.columns; },
+      get data() {
+        return self.data || [];
+      },
+      get columns() {
+        return self.columns;
+      },
     };
     this.table = this.$useTable(tableOptions);
   }
@@ -106,13 +121,15 @@ export class ControllerTable<TData extends {} = {}> extends BeanControllerTableB
     const columns: TypeColumn<TData>[] = [];
     for (const property of properties) {
       const key = property.key!;
-      columns.push(columnHelper.accessor(key as any, {
-        id: key,
-        header: _props => {
-          return property?.title || key;
-        },
-        cell: props => tableMeta.renders[key](props),
-      }));
+      columns.push(
+        columnHelper.accessor(key as any, {
+          id: key,
+          header: _props => {
+            return property?.title || key;
+          },
+          cell: props => tableMeta.renders[key](props),
+        }),
+      );
     }
     return columns;
   }
@@ -144,7 +161,7 @@ export class ControllerTable<TData extends {} = {}> extends BeanControllerTableB
       promises.push(this._createColumnRender(columnProps.render, property, columnProps, columnScope));
     }
     const res = await Promise.all(promises);
-    properties.forEach((item, index) => renders[item.key!] = res[index]);
+    properties.forEach((item, index) => (renders[item.key!] = res[index]));
     return { properties, renders };
   }
 
@@ -211,13 +228,16 @@ export class ControllerTable<TData extends {} = {}> extends BeanControllerTableB
     beanInstance: ITableCellRender | undefined,
     onionOptions: IDecoratorTableCellOptions | undefined,
   ) {
-    return this.zovaJsx.setTransientObject({
-      getValue: (name: string) => {
-        return cellContext.row.getValue(name);
+    return this.zovaJsx.setTransientObject(
+      {
+        getValue: (name: string) => {
+          return cellContext.row.getValue(name);
+        },
       },
-    }, () => {
-      return this._cellRenderInner(render, property, columnProps, columnScope, cellContext, renderProvider, beanInstance, onionOptions);
-    });
+      () => {
+        return this._cellRenderInner(render, property, columnProps, columnScope, cellContext, renderProvider, beanInstance, onionOptions);
+      },
+    );
   }
 
   private _cellRenderInner(
@@ -235,9 +255,7 @@ export class ControllerTable<TData extends {} = {}> extends BeanControllerTableB
     // cellScope
     const cellScope: ITableCellScope = objectAssignReactive({}, columnScope, { value });
     // displayValue
-    let displayValue = property?.rest?.displayValue !== undefined
-      ? this.zovaJsx.evaluateExpression(property?.rest?.displayValue, cellScope)
-      : value;
+    let displayValue = property?.rest?.displayValue !== undefined ? this.zovaJsx.evaluateExpression(property?.rest?.displayValue, cellScope) : value;
     if (displayValue === undefined || displayValue === null || displayValue === '') {
       displayValue = this.table.options.renderFallbackValue;
     }

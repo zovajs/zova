@@ -1,7 +1,9 @@
 import type { DefaultOptions } from '@tanstack/vue-query';
 import type { CookieOptions, ZovaSys } from 'zova';
-import type { MaxAgeTime, StaleTimeFunction } from '../types/index.js';
+
 import { defaultShouldDehydrateQuery } from '@tanstack/vue-query';
+
+import type { MaxAgeTime, StaleTimeFunction } from '../types/index.js';
 
 const defaultOptions: DefaultOptions = {
   queries: {

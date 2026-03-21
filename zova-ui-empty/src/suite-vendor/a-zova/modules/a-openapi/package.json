@@ -1,7 +1,37 @@
 {
   "name": "zova-module-a-openapi",
-  "type": "module",
   "version": "5.0.0",
+  "description": "",
+  "keywords": [
+    "Zova Module"
+  ],
+  "author": "",
+  "files": [
+    "dist",
+    "mock"
+  ],
+  "type": "module",
+  "exports": {
+    ".": {
+      "types": [
+        "./src/index.ts",
+        "./dist/index.d.ts"
+      ],
+      "import": "./src/index.ts",
+      "default": "./dist/index.js"
+    },
+    "./*": "./*"
+  },
+  "scripts": {
+    "clean": "tsc -b --clean",
+    "tsc:publish": "npm run clean && tsc -b",
+    "_prepublishOnly": "npm run tsc:publish"
+  },
+  "dependencies": {
+    "@cabloy/json-schema-to-zod": "^2.6.4",
+    "@zhennann/currency": "^2.0.4",
+    "openapi3-ts": "^4.5.0"
+  },
   "title": "a-openapi",
   "zovaModule": {
     "capabilities": {
@@ -24,35 +54,5 @@
         }
       ]
     }
-  },
-  "description": "",
-  "author": "",
-  "keywords": [
-    "Zova Module"
-  ],
-  "exports": {
-    ".": {
-      "types": [
-        "./src/index.ts",
-        "./dist/index.d.ts"
-      ],
-      "import": "./src/index.ts",
-      "default": "./dist/index.js"
-    },
-    "./*": "./*"
-  },
-  "files": [
-    "dist",
-    "mock"
-  ],
-  "scripts": {
-    "clean": "tsc -b --clean",
-    "tsc:publish": "npm run clean && tsc -b",
-    "_prepublishOnly": "npm run tsc:publish"
-  },
-  "dependencies": {
-    "@cabloy/json-schema-to-zod": "^2.6.4",
-    "@zhennann/currency": "^2.0.4",
-    "openapi3-ts": "^4.5.0"
   }
 }

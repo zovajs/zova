@@ -1,10 +1,13 @@
 import type { IMetadataCustomGenerateOptions } from '@cabloy/cli';
 import type { IGlobBeanFile } from '@cabloy/module-info';
-import type { IControllerInfo } from './types.ts';
-import path from 'node:path';
+
 import { toUpperCaseFirstChar } from '@cabloy/word-utils';
 import fse from 'fs-extra';
 import { globbySync } from 'globby';
+import path from 'node:path';
+
+import type { IControllerInfo } from './types.ts';
+
 import { generateFile } from './generateFile.ts';
 import { generateMetaComponent } from './generateMetaComponent.ts';
 import { generateMetaPage } from './generateMetaPage.ts';
@@ -30,10 +33,7 @@ export default async function (options: IMetadataCustomGenerateOptions): Promise
   return content;
 }
 
-function _parseControllerInfo(
-  options: IMetadataCustomGenerateOptions,
-  globFile: IGlobBeanFile,
-): IControllerInfo | undefined {
+function _parseControllerInfo(options: IMetadataCustomGenerateOptions, globFile: IGlobBeanFile): IControllerInfo | undefined {
   const { className, fileContent, fileNameJSRelative } = globFile;
   const matches = fileNameJSRelative.match(/..\/(.+?)\/(.+?)\/controller(.jsx?)$/);
   if (!matches) return;
@@ -73,7 +73,9 @@ function _parseControllerInfo(
   const fileRenderOthers = globbySync(`src/${type}/${name}/render.*.tsx`, { cwd: options.modulePath });
   const nameRenderOthers: string[] = fileRenderOthers.map(item => /render\.(.*)\.tsx/.exec(item)![1]);
   const classNameRenderOthers: string[] = nameRenderOthers.map(item => `Render${type === 'page' ? 'Page' : ''}${toUpperCaseFirstChar(item)}`);
-  const importRenderOthers: string[] = nameRenderOthers.map(item => `import { ${`Render${type === 'page' ? 'Page' : ''}${toUpperCaseFirstChar(item)}`} } from '../../${type}/${name}/render.${item}.jsx';`);
+  const importRenderOthers: string[] = nameRenderOthers.map(
+    item => `import { ${`Render${type === 'page' ? 'Page' : ''}${toUpperCaseFirstChar(item)}`} } from '../../${type}/${name}/render.${item}.jsx';`,
+  );
   // style
   const fileStyleFirst = path.join(options.modulePath, `src/${type}/${name}/style.ts`);
   const hasStyleFirst = fse.existsSync(fileStyleFirst);
@@ -82,7 +84,9 @@ function _parseControllerInfo(
   const fileStyleOthers = globbySync(`src/${type}/${name}/style.*.ts`, { cwd: options.modulePath });
   const nameStyleOthers: string[] = fileStyleOthers.map(item => /style\.(.*)\.ts/.exec(item)![1]);
   const classNameStyleOthers: string[] = nameStyleOthers.map(item => `Style${type === 'page' ? 'Page' : ''}${toUpperCaseFirstChar(item)}`);
-  const importStyleOthers: string[] = nameStyleOthers.map(item => `import { ${`Style${type === 'page' ? 'Page' : ''}${toUpperCaseFirstChar(item)}`} } from '../../${type}/${name}/style.${item}.js';`);
+  const importStyleOthers: string[] = nameStyleOthers.map(
+    item => `import { ${`Style${type === 'page' ? 'Page' : ''}${toUpperCaseFirstChar(item)}`} } from '../../${type}/${name}/style.${item}.js';`,
+  );
   // ok
   return {
     type,

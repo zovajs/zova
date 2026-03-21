@@ -1,15 +1,14 @@
 import type { IMetadataCustomGenerateOptions } from '@cabloy/cli';
 import type { IGlobBeanFile } from '@cabloy/module-info';
-import type { IControllerInfo } from './types.ts';
-import path from 'node:path';
+
 import { combineResourceName } from '@cabloy/utils';
 import { toUpperCaseFirstChar } from '@cabloy/word-utils';
 import fse from 'fs-extra';
+import path from 'node:path';
 
-export async function generateMetaPage(
-  options: IMetadataCustomGenerateOptions,
-  globFiles: [IGlobBeanFile, IControllerInfo][],
-) {
+import type { IControllerInfo } from './types.ts';
+
+export async function generateMetaPage(options: IMetadataCustomGenerateOptions, globFiles: [IGlobBeanFile, IControllerInfo][]) {
   if (globFiles.length === 0) return '';
   const { moduleName } = options;
   const contentImports: string[] = [];
@@ -36,9 +35,7 @@ export async function generateMetaPage(
     // controller.tsx
     const { routePath, routeName } = _extractRoutePathOrName(options, globFile, controllerInfo);
     // no matter that: route.meta?.absolute
-    const routePathFull = routePath
-      ? `/${moduleName.replace('-', '/')}/${routePath}`
-      : `/${moduleName.replace('-', '/')}`;
+    const routePathFull = routePath ? `/${moduleName.replace('-', '/')}/${routePath}` : `/${moduleName.replace('-', '/')}`;
     const routeNameFull = `${moduleName}:${routeName}`;
     contentPathRecords.push(_combineContentPathRecord(routePathFull, hasSchemaParams, hasSchemaQuery, namespace));
     contentPathRecordsRest.push(_combineContentPathRecord(routePathFull, hasSchemaParams, hasSchemaQuery, namespaceRest));
@@ -59,9 +56,7 @@ export async function generateMetaPage(
       // contentPathRecords.push(_combineContentPathRecord(routePathFull, `\`${apiPath3}\``, hasSchemaQuery, className));
       // contentPathRecords.push(_combineContentPathRecord(routePathFull, hasSchemaParams, hasSchemaQuery, className));
       //
-      contentNameRecords.push(
-        `'${routeNameFull}': undefined;`,
-      );
+      contentNameRecords.push(`'${routeNameFull}': undefined;`);
     }
     // schema
     if (!routeName) {
@@ -133,11 +128,7 @@ function _combineModuleNameControllerName(moduleName: string, className: string)
   return `NS${toUpperCaseFirstChar(combineResourceName(className, moduleName, false, false))}`;
 }
 
-function _extractRoutePathOrName(
-  options: IMetadataCustomGenerateOptions,
-  _globFile: IGlobBeanFile,
-  controllerInfo: IControllerInfo,
-) {
+function _extractRoutePathOrName(options: IMetadataCustomGenerateOptions, _globFile: IGlobBeanFile, controllerInfo: IControllerInfo) {
   const cli = options.cli;
   const targetFile = path.join(options.modulePath, 'src/routes.ts');
   const content = fse.readFileSync(targetFile).toString('utf8');
@@ -150,17 +141,20 @@ function _extractRoutePathOrName(
   const astMatches = astNode.match[0];
   const astMatch = astMatches.find(item => {
     return (item.node as any).properties.some(prop => {
-      return prop.key.name === 'component' && (prop.value.name === controllerInfo.nameCapitalize || prop.value.name === `ZPage${controllerInfo.nameCapitalize}`);
+      return (
+        prop.key.name === 'component' &&
+        (prop.value.name === controllerInfo.nameCapitalize || prop.value.name === `ZPage${controllerInfo.nameCapitalize}`)
+      );
     });
   });
   if (!astMatch) {
     throw new Error(`page route not found: ${controllerInfo.nameCapitalize}`);
   }
-  const astPropPath = (astMatch?.node as any).properties.find(prop => {
+  const astPropPath = (astMatch?.node as any)?.properties.find(prop => {
     return prop.key.name === 'path';
   });
   const routePath = astPropPath?.value.value || '';
-  const astPropName = (astMatch?.node as any).properties.find(prop => {
+  const astPropName = (astMatch?.node as any)?.properties.find(prop => {
     return prop.key.name === 'name';
   });
   const routeName = astPropName?.value.value;

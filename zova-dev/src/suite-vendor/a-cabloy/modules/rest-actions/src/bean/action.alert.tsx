@@ -1,6 +1,10 @@
+import type { IActionExecute } from 'zova-module-a-action';
+import type { IDecoratorActionOptions } from 'zova-module-a-action';
+import type { NextActionExecute } from 'zova-module-a-action';
+import type { IJsxRenderContextBase } from 'zova-module-a-openapi';
+
 import { BeanBase } from 'zova';
-import { Action, IActionExecute, IDecoratorActionOptions, NextActionExecute } from 'zova-module-a-action';
-import { IJsxRenderContextBase } from 'zova-module-a-openapi';
+import { Action } from 'zova-module-a-action';
 
 export type TypeActionAlertResult = unknown;
 

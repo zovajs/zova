@@ -1,13 +1,19 @@
 {
   "name": "zova-module-a-routertabs",
-  "type": "module",
   "version": "5.0.29",
-  "title": "a-routertabs",
+  "gitHead": "73721393c1ea9a95539948d57ad692f2c004d7c7",
   "description": "routertabs",
-  "author": "zhennann",
   "keywords": [
     "Zova Module"
   ],
+  "author": "zhennann",
+  "files": [
+    "dist",
+    "mock",
+    "rest",
+    "src"
+  ],
+  "type": "module",
   "exports": {
     ".": {
       "types": [
@@ -19,12 +25,6 @@
     },
     "./*": "./*"
   },
-  "files": [
-    "dist",
-    "mock",
-    "rest",
-    "src"
-  ],
   "scripts": {},
-  "gitHead": "73721393c1ea9a95539948d57ad692f2c004d7c7"
+  "title": "a-routertabs"
 }

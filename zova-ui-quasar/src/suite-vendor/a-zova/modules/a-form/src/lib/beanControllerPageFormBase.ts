@@ -1,4 +1,5 @@
 import type { FormApi, FormAsyncValidateOrFn, FormOptions, FormValidateOrFn, VueFormApi } from '@tanstack/vue-form';
+
 import { useForm } from '@tanstack/vue-form';
 import { markRaw } from 'vue';
 import { BeanControllerPageBase } from 'zova';
@@ -17,22 +18,8 @@ export class BeanControllerPageFormBase extends BeanControllerPageBase {
     TFormOnDynamicAsync extends undefined | FormAsyncValidateOrFn<TParentData>,
     TFormOnServer extends undefined | FormAsyncValidateOrFn<TParentData>,
     TSubmitMeta,
-  >(opts?: FormOptions<
-    TParentData,
-    TFormOnMount,
-    TFormOnChange,
-    TFormOnChangeAsync,
-    TFormOnBlur,
-    TFormOnBlurAsync,
-    TFormOnSubmit,
-    TFormOnSubmitAsync,
-    TFormOnDynamic,
-    TFormOnDynamicAsync,
-    TFormOnServer,
-    TSubmitMeta
-  >,
-  ):
-    FormApi<
+  >(
+    opts?: FormOptions<
       TParentData,
       TFormOnMount,
       TFormOnChange,
@@ -45,7 +32,22 @@ export class BeanControllerPageFormBase extends BeanControllerPageBase {
       TFormOnDynamicAsync,
       TFormOnServer,
       TSubmitMeta
-    > & VueFormApi<
+    >,
+  ): FormApi<
+    TParentData,
+    TFormOnMount,
+    TFormOnChange,
+    TFormOnChangeAsync,
+    TFormOnBlur,
+    TFormOnBlurAsync,
+    TFormOnSubmit,
+    TFormOnSubmitAsync,
+    TFormOnDynamic,
+    TFormOnDynamicAsync,
+    TFormOnServer,
+    TSubmitMeta
+  > &
+    VueFormApi<
       TParentData,
       TFormOnMount,
       TFormOnChange,

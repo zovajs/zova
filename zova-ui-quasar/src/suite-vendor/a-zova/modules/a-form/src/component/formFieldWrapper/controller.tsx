@@ -1,6 +1,8 @@
-import type { ControllerForm } from '../form/controller.jsx';
 import { BeanControllerBase, IComponentOptions, Use } from 'zova';
 import { Controller } from 'zova-module-a-bean';
+
+import type { ControllerForm } from '../form/controller.jsx';
+
 import { IFormFieldOptions } from '../../types/formField.js';
 
 export interface ControllerFormFieldWrapperProps<TParentData extends {} = {}> extends IFormFieldOptions<TParentData> {}

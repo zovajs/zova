@@ -1,7 +1,9 @@
 import type { ZovaContext } from 'zova';
-import type { SSRMetaOptions, SSRMetaOptionsWrapper } from '../types/ssr.js';
+
 // from: quasar/ui/src/composables/use-meta.js
 import { computed, onActivated, onDeactivated, onUnmounted, watch } from 'vue';
+
+import type { SSRMetaOptions, SSRMetaOptionsWrapper } from '../types/ssr.js';
 
 export function useMeta(ctx: ZovaContext, metaOptions) {
   if (process.env.SERVER) {

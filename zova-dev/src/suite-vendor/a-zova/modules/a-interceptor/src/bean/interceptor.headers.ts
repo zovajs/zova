@@ -8,11 +8,7 @@ export interface IInterceptorOptionsHeaders extends IDecoratorInterceptorOptions
 
 @Interceptor<IInterceptorOptionsHeaders>({ dependencies: 'a-interceptor:mock' })
 export class InterceptorHeaders extends BeanInterceptorBase<IInterceptorOptionsHeaders> {
-  async onRequest(
-    config: AxiosRequestConfig,
-    options: IInterceptorOptionsHeaders,
-    next: NextInterceptorRequest,
-  ): Promise<AxiosRequestConfig> {
+  async onRequest(config: AxiosRequestConfig, options: IInterceptorOptionsHeaders, next: NextInterceptorRequest): Promise<AxiosRequestConfig> {
     // locale
     const keyLocale = this.sys.env.APP_LOCALE_HEADER_KEY;
     if (keyLocale && !config.headers![keyLocale]) {

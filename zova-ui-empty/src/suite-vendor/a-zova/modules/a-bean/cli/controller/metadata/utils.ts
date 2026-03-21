@@ -1,6 +1,7 @@
-import type { IControllerInfo } from './types.ts';
-import path from 'node:path';
 import fse from 'fs-extra';
+import path from 'node:path';
+
+import type { IControllerInfo } from './types.ts';
 
 export function combineContentRenderAndStyle(
   controllerInfo: IControllerInfo,
@@ -9,14 +10,7 @@ export function combineContentRenderAndStyle(
   genericDeclare: string,
   genericArguments: string,
 ) {
-  const {
-    hasRenderFirst,
-    classNameRenderFirst,
-    classNameRenderOthers,
-    hasStyleFirst,
-    classNameStyleFirst,
-    classNameStyleOthers,
-  } = controllerInfo;
+  const { hasRenderFirst, classNameRenderFirst, classNameRenderOthers, hasStyleFirst, classNameStyleFirst, classNameStyleOthers } = controllerInfo;
   const contentControllerInterfaceRecords: string[] = [];
   if (hasStyleFirst) {
     contentControllerInterfaceRecords.push(`export interface ${classNameStyleFirst}${genericDeclare} extends ${className}${genericArguments} {}`);
@@ -26,7 +20,9 @@ export function combineContentRenderAndStyle(
   }
   if (hasRenderFirst) {
     if (hasStyleFirst) {
-      contentControllerInterfaceRecords.push(`export interface ${classNameRenderFirst}${genericDeclare} extends ${classNameStyleFirst}${genericArguments} {}`);
+      contentControllerInterfaceRecords.push(
+        `export interface ${classNameRenderFirst}${genericDeclare} extends ${classNameStyleFirst}${genericArguments} {}`,
+      );
     } else {
       contentControllerInterfaceRecords.push(`export interface ${classNameRenderFirst}${genericDeclare} extends ${className}${genericArguments} {}`);
     }

@@ -1,4 +1,5 @@
 import type { CurrencyOptions } from '@zhennann/currency';
+
 import { Currency } from '@zhennann/currency';
 
 export function currencyFormat(value: any, options?: CurrencyOptions) {

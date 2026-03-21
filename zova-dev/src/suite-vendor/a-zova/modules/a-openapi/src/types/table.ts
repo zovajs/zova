@@ -5,9 +5,11 @@ export interface ITablePaged {
 
 export interface ITableQuery {
   columns?: string[] | undefined;
-  where?: {
-    [key: string]: unknown;
-  } | undefined;
+  where?:
+    | {
+        [key: string]: unknown;
+      }
+    | undefined;
   orders?: string | string[][] | undefined;
   pageNo?: number;
   pageSize?: number;

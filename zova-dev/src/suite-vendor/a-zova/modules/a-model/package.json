@@ -1,7 +1,43 @@
 {
   "name": "zova-module-a-model",
-  "type": "module",
   "version": "5.0.37",
+  "gitHead": "73721393c1ea9a95539948d57ad692f2c004d7c7",
+  "description": "core",
+  "keywords": [
+    "Zova Module"
+  ],
+  "license": "MIT",
+  "author": "zhennann",
+  "files": [
+    "cli",
+    "dist",
+    "src"
+  ],
+  "type": "module",
+  "exports": {
+    ".": {
+      "types": [
+        "./src/index.ts",
+        "./dist/index.d.ts"
+      ],
+      "import": "./src/index.ts",
+      "default": "./dist/index.js"
+    },
+    "./*": "./*"
+  },
+  "scripts": {
+    "clean": "tsc -b --clean",
+    "tsc:publish": "npm run clean && tsc -b",
+    "_prepublishOnly": "npm run tsc:publish"
+  },
+  "dependencies": {
+    "@tanstack/query-core": "^5.90.16",
+    "@tanstack/query-persist-client-core": "^5.91.15",
+    "@tanstack/vue-query": "^5.92.5",
+    "localforage": "^1.10.0",
+    "mutate-on-copy": "^1.0.1",
+    "table-identity": "^1.0.0"
+  },
   "title": "a-model",
   "zovaModule": {
     "capabilities": {
@@ -39,41 +75,5 @@
         }
       ]
     }
-  },
-  "description": "core",
-  "author": "zhennann",
-  "license": "MIT",
-  "keywords": [
-    "Zova Module"
-  ],
-  "exports": {
-    ".": {
-      "types": [
-        "./src/index.ts",
-        "./dist/index.d.ts"
-      ],
-      "import": "./src/index.ts",
-      "default": "./dist/index.js"
-    },
-    "./*": "./*"
-  },
-  "files": [
-    "cli",
-    "dist",
-    "src"
-  ],
-  "scripts": {
-    "clean": "tsc -b --clean",
-    "tsc:publish": "npm run clean && tsc -b",
-    "_prepublishOnly": "npm run tsc:publish"
-  },
-  "dependencies": {
-    "@tanstack/query-core": "^5.90.16",
-    "@tanstack/query-persist-client-core": "^5.91.15",
-    "@tanstack/vue-query": "^5.92.5",
-    "localforage": "^1.10.0",
-    "mutate-on-copy": "^1.0.1",
-    "table-identity": "^1.0.0"
-  },
-  "gitHead": "73721393c1ea9a95539948d57ad692f2c004d7c7"
+  }
 }

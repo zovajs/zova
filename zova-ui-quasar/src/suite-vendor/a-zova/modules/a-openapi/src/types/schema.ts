@@ -1,6 +1,7 @@
 import type { DefaultError, UseQueryReturnType } from '@tanstack/vue-query';
 import type { OpenAPIObject, SchemaObject } from 'openapi3-ts/oas31';
 import type { UnwrapNestedRefs } from 'vue';
+
 import type { IOpenapiSdkItem } from './sdk.js';
 
 export interface IOpenapiSchema {

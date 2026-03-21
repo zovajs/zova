@@ -1,4 +1,3 @@
-import type { ModelResource } from '../../model/resource.js';
 import { celEnvBase } from '@cabloy/utils';
 import { z } from 'zod';
 import { BeanControllerPageBase, Use, useCustomRef, usePrepareArg } from 'zova';
@@ -7,6 +6,9 @@ import { Controller } from 'zova-module-a-bean';
 import { TypeResourceActionRowRecord, TypeResourceActionTableRecord } from 'zova-module-a-openapi';
 import { ITableProvider } from 'zova-module-a-table';
 import { ZPage } from 'zova-module-home-base';
+
+import type { ModelResource } from '../../model/resource.js';
+
 import { IJsxRenderContextPageWrapper, IPageWrapperScope } from '../../types/pageWrapper.js';
 
 export const ControllerPageResourceSchemaParams = z.object({
@@ -22,10 +24,7 @@ export class ControllerPageResource extends BeanControllerPageBase {
 
   @Use({ beanFullName: 'rest-resource.model.resource' })
   get $$modelResource(): ModelResource {
-    return usePrepareArg(
-      this.$params.resource,
-      true,
-    );
+    return usePrepareArg(this.$params.resource, true);
   }
 
   protected async __init__() {
@@ -36,13 +35,7 @@ export class ControllerPageResource extends BeanControllerPageBase {
     this.pageWrapperScope = this._getPageWrapperScope();
     // jsx
     this.pageWrapperCelEnv = this._getPageWrapperCelEnv();
-    this.zovaJsx = this.app.bean._newBeanSimple(
-      ZovaJsx,
-      false,
-      this.tableProvider.components,
-      this.tableProvider.actions,
-      this.pageWrapperCelEnv,
-    );
+    this.zovaJsx = this.app.bean._newBeanSimple(ZovaJsx, false, this.tableProvider.components, this.tableProvider.actions, this.pageWrapperCelEnv);
   }
 
   get resource() {
@@ -101,10 +94,6 @@ export class ControllerPageResource extends BeanControllerPageBase {
     const celScope = this.pageWrapperScope;
     const jsxRenderContext = this.getJsxRenderContextPageWrapper(celScope);
     const domRestPage = this.zovaJsx.render(this.$$modelResource.componentRestPage, {}, celScope, jsxRenderContext);
-    return (
-      <ZPage>
-        {domRestPage}
-      </ZPage>
-    );
+    return <ZPage>{domRestPage}</ZPage>;
   }
 }

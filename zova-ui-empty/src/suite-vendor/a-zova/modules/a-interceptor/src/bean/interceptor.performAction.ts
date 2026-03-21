@@ -8,11 +8,7 @@ export interface IInterceptorOptionsPerformAction extends IDecoratorInterceptorO
 
 @Interceptor<IInterceptorOptionsPerformAction>({ dependencies: 'a-interceptor:jwt' })
 export class InterceptorPerformAction extends BeanInterceptorBase<IInterceptorOptionsPerformAction> implements IInterceptorRequest {
-  async onRequest(
-    config: AxiosRequestConfig,
-    _options: IInterceptorOptionsPerformAction,
-    next: NextInterceptorRequest,
-  ): Promise<AxiosRequestConfig> {
+  async onRequest(config: AxiosRequestConfig, _options: IInterceptorOptionsPerformAction, next: NextInterceptorRequest): Promise<AxiosRequestConfig> {
     if (process.env.CLIENT) return next();
     const performAction = this.ctx.meta.$ssr.getPerformAction(config.baseURL);
     if (!performAction) return next();

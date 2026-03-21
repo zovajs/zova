@@ -1,20 +1,12 @@
 import type { TypeStyle } from 'typestyle';
 import type { NestedCSSProperties } from 'typestyle/lib/types.js';
-import type {
-  BeanBase,
-  BeanContainer,
-  IMonkeyAppInitialize,
-  IMonkeyAppInitialized,
-  IMonkeyBeanInit,
-} from 'zova';
-import type { ScopeModule } from './.metadata/this.js';
+import type { BeanBase, BeanContainer, IMonkeyAppInitialize, IMonkeyAppInitialized, IMonkeyBeanInit } from 'zova';
+
 import { createTypeStyle, cssRaw, cssRule, style } from 'typestyle';
-import {
-  beanFullNameFromOnionName,
-  BeanSimple,
-  SymbolBeanFullName,
-  useComputed,
-} from 'zova';
+import { beanFullNameFromOnionName, BeanSimple, SymbolBeanFullName, useComputed } from 'zova';
+
+import type { ScopeModule } from './.metadata/this.js';
+
 import { __ThisModule__ } from './.metadata/this.js';
 import { BeanTheme } from './bean/bean.theme.js';
 

@@ -1,7 +1,39 @@
 {
   "name": "zova-module-a-style",
-  "type": "module",
   "version": "5.0.47",
+  "gitHead": "73721393c1ea9a95539948d57ad692f2c004d7c7",
+  "description": "style",
+  "keywords": [
+    "Zova Module"
+  ],
+  "license": "MIT",
+  "author": "zhennann",
+  "files": [
+    "cli",
+    "dist",
+    "src"
+  ],
+  "type": "module",
+  "exports": {
+    ".": {
+      "types": [
+        "./src/index.ts",
+        "./dist/index.d.ts"
+      ],
+      "import": "./src/index.ts",
+      "default": "./dist/index.js"
+    },
+    "./*": "./*"
+  },
+  "scripts": {
+    "clean": "tsc -b --clean",
+    "tsc:publish": "npm run clean && tsc -b",
+    "_prepublishOnly": "npm run tsc:publish"
+  },
+  "dependencies": {
+    "csx": "^10.0.2",
+    "typestyle": "^2.4.0"
+  },
   "title": "a-style",
   "zovaModule": {
     "capabilities": {
@@ -42,37 +74,5 @@
         }
       ]
     }
-  },
-  "description": "style",
-  "author": "zhennann",
-  "license": "MIT",
-  "keywords": [
-    "Zova Module"
-  ],
-  "exports": {
-    ".": {
-      "types": [
-        "./src/index.ts",
-        "./dist/index.d.ts"
-      ],
-      "import": "./src/index.ts",
-      "default": "./dist/index.js"
-    },
-    "./*": "./*"
-  },
-  "files": [
-    "cli",
-    "dist",
-    "src"
-  ],
-  "scripts": {
-    "clean": "tsc -b --clean",
-    "tsc:publish": "npm run clean && tsc -b",
-    "_prepublishOnly": "npm run tsc:publish"
-  },
-  "dependencies": {
-    "csx": "^10.0.2",
-    "typestyle": "^2.4.0"
-  },
-  "gitHead": "73721393c1ea9a95539948d57ad692f2c004d7c7"
+  }
 }

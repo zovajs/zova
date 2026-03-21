@@ -1,7 +1,7 @@
 import type { Component, VNode } from 'vue';
 import type { OmitNever } from 'zova';
-
 import type { IOnionOptionsEnable, ServiceOnion } from 'zova-module-a-bean';
+
 import 'vue';
 import 'vue/jsx-runtime';
 import '@vue/runtime-dom';
@@ -65,7 +65,6 @@ declare module 'vue/jsx-runtime' {
     export interface IntrinsicAttributes {
       bs_all?: IBehaviors;
     }
-
   }
 }
 

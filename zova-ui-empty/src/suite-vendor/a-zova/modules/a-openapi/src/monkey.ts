@@ -1,9 +1,11 @@
 import type { IModule } from '@cabloy/module-info';
 import type { Ref } from 'vue';
 import type { BeanBase, BeanContainer, IMonkeyBeanInit, IMonkeyModule } from 'zova';
-import type { ModelSdk } from './model/sdk.js';
+
 import { ref, watch } from 'vue';
 import { BeanSimple } from 'zova';
+
+import type { ModelSdk } from './model/sdk.js';
 
 export class Monkey extends BeanSimple implements IMonkeyModule, IMonkeyBeanInit {
   private _moduleSelf: IModule;
@@ -20,11 +22,14 @@ export class Monkey extends BeanSimple implements IMonkeyModule, IMonkeyBeanInit
     if (this._moduleSelf === module) {
       await this._loadSdk();
       this.ctx.util.instanceScope(() => {
-        return watch(() => {
-          return this.app.meta.locale.current;
-        }, async () => {
-          await this._loadSdk();
-        });
+        return watch(
+          () => {
+            return this.app.meta.locale.current;
+          },
+          async () => {
+            await this._loadSdk();
+          },
+        );
       });
     }
   }

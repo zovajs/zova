@@ -1,9 +1,12 @@
 import type { AxiosInstance } from 'axios';
-import type { IBeanFetchOptions } from '../types/interceptor.js';
+
 import axios, { Axios } from 'axios';
 import { markRaw } from 'vue';
 import { BeanBase, deepExtend } from 'zova';
 import { Bean } from 'zova-module-a-bean';
+
+import type { IBeanFetchOptions } from '../types/interceptor.js';
+
 import { ServiceComposer } from '../service/composer.js';
 
 const SymbolFetch = Symbol('SymbolFetch');
@@ -19,12 +22,7 @@ export class BeanFetch extends BeanBase {
   protected async __init__(options?: IBeanFetchOptions) {
     patchAxios(Axios);
     // axiosConfig
-    const axiosConfig = deepExtend(
-      {},
-      { baseURL: this.sys.util.getApiBaseURL() },
-      this.scope.config.axios.config,
-      options?.axiosConfig,
-    );
+    const axiosConfig = deepExtend({}, { baseURL: this.sys.util.getApiBaseURL() }, this.scope.config.axios.config, options?.axiosConfig);
     // composer
     this._composer = await this.bean._newBean(ServiceComposer, true, this, options?.onionItems);
     // axios

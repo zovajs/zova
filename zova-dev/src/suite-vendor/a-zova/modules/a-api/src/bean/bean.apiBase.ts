@@ -1,7 +1,9 @@
 import type { AxiosRequestConfig } from 'axios';
-import type { IApiActionOptions } from '../types/api.js';
+
 import { BeanBase, TypeAuthToken, Virtual } from 'zova';
 import { Bean } from 'zova-module-a-bean';
+
+import type { IApiActionOptions } from '../types/api.js';
 
 @Bean()
 @Virtual()

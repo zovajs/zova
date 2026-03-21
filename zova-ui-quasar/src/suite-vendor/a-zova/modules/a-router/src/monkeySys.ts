@@ -1,11 +1,13 @@
 import type { IModule } from '@cabloy/module-info';
 import type { IMonkeyModuleSys, IMonkeySysApplicationInitialize, ZovaApplication } from 'zova';
 import type { ErrorSSR } from 'zova-module-a-ssr';
+
+import { combineQueries } from '@cabloy/utils';
+import { BeanSimple, cast } from 'zova';
+
 import type { SysRouter } from './bean/sys.router.js';
 import type { TypeGotoPageResult } from './types/router.js';
 import type { IGotoPageOptions } from './types/utils.js';
-import { combineQueries } from '@cabloy/utils';
-import { BeanSimple, cast } from 'zova';
 
 export class MonkeySys extends BeanSimple implements IMonkeyModuleSys, IMonkeySysApplicationInitialize {
   private _moduleSelf: IModule;

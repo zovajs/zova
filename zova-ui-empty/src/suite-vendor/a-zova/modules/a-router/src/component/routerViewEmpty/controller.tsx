@@ -2,6 +2,7 @@ import { RouterView } from '@cabloy/vue-router';
 import { h } from 'vue';
 import { cast } from 'zova';
 import { Controller } from 'zova-module-a-bean';
+
 import { pageRouteKey } from '../../lib/const.js';
 import { BeanRouterViewBase } from '../../lib/routerViewBase.js';
 

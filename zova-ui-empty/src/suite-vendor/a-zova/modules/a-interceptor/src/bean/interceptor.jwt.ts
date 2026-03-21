@@ -1,16 +1,10 @@
 import type { AxiosRequestConfig } from 'axios';
-import type {
-  BeanFetch,
-  IDecoratorInterceptorOptions,
-  IInterceptorRequest,
-  NextInterceptorRequest,
-} from 'zova-module-a-fetch';
-import type { IJwtAdapter, IJwtInfo } from '../types/jwt.js';
+import type { BeanFetch, IDecoratorInterceptorOptions, IInterceptorRequest, NextInterceptorRequest } from 'zova-module-a-fetch';
+
 import { $customKey } from 'zova-core';
-import {
-  BeanInterceptorBase,
-  Interceptor,
-} from 'zova-module-a-fetch';
+import { BeanInterceptorBase, Interceptor } from 'zova-module-a-fetch';
+
+import type { IJwtAdapter, IJwtInfo } from '../types/jwt.js';
 
 export interface IInterceptorOptionsJwt extends IDecoratorInterceptorOptions {
   jwtAdapter?: string;
@@ -29,11 +23,7 @@ export class InterceptorJwt extends BeanInterceptorBase<IInterceptorOptionsJwt> 
     this._beanJwtAdapter = await this.app.bean._getBean(beanFullName as any, true);
   }
 
-  async onRequest(
-    config: AxiosRequestConfig,
-    options: IInterceptorOptionsJwt,
-    next: NextInterceptorRequest,
-  ): Promise<AxiosRequestConfig> {
+  async onRequest(config: AxiosRequestConfig, options: IInterceptorOptionsJwt, next: NextInterceptorRequest): Promise<AxiosRequestConfig> {
     try {
       const accessToken = await this.prepareAccessToken(config, options.authToken);
       if (accessToken) {
@@ -70,7 +60,7 @@ export class InterceptorJwt extends BeanInterceptorBase<IInterceptorOptionsJwt> 
       return;
     }
     // accessToken
-    if (process.env.SERVER || (!jwtInfo.expireTime || jwtInfo.expireTime > Date.now())) {
+    if (process.env.SERVER || !jwtInfo.expireTime || jwtInfo.expireTime > Date.now()) {
       if (!jwtInfo.accessToken) {
         if (authToken === true) this.app.throw(401);
         return;

@@ -1,23 +1,19 @@
 {
   "name": "zova-module-a-router",
-  "type": "module",
   "version": "5.0.71",
-  "title": "a-router",
-  "zovaModule": {
-    "capabilities": {
-      "monkey": true
-    },
-    "dependencies": {
-      "a-model": "5.0.0",
-      "a-ssr": "5.0.0"
-    }
-  },
+  "gitHead": "73721393c1ea9a95539948d57ad692f2c004d7c7",
   "description": "router",
-  "author": "zhennann",
-  "license": "MIT",
   "keywords": [
     "Zova Module"
   ],
+  "license": "MIT",
+  "author": "zhennann",
+  "files": [
+    "dist",
+    "rest",
+    "src"
+  ],
+  "type": "module",
   "exports": {
     ".": {
       "types": [
@@ -29,15 +25,19 @@
     },
     "./*": "./*"
   },
-  "files": [
-    "dist",
-    "rest",
-    "src"
-  ],
   "scripts": {
     "clean": "tsc -b --clean",
     "tsc:publish": "npm run clean && tsc -b",
     "_prepublishOnly": "npm run tsc:publish"
   },
-  "gitHead": "73721393c1ea9a95539948d57ad692f2c004d7c7"
+  "title": "a-router",
+  "zovaModule": {
+    "capabilities": {
+      "monkey": true
+    },
+    "dependencies": {
+      "a-model": "5.0.0",
+      "a-ssr": "5.0.0"
+    }
+  }
 }

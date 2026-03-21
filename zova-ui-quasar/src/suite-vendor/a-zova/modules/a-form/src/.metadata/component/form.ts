@@ -1,7 +1,10 @@
 import type { TypeControllerInnerProps } from 'zova';
-import type { ControllerFormProps } from '../../component/form/controller.jsx';
+
 import { defineComponent } from 'vue';
 import { prepareComponentOptions, useController } from 'zova';
+
+import type { ControllerFormProps } from '../../component/form/controller.jsx';
+
 import { ControllerForm } from '../../component/form/controller.jsx';
 import { RenderForm } from '../../component/form/render.jsx';
 
@@ -9,8 +12,10 @@ export type TypeControllerFormPublicProps<TFormData extends {} = {}, TSubmitMeta
   controllerRef?: (ref: ControllerForm<TFormData, TSubmitMeta>) => void;
 } & ControllerFormProps<TFormData, TSubmitMeta>;
 
-type ControllerInnerProps<TFormData extends {} = {}, TSubmitMeta = never> =
-  TypeControllerInnerProps<ControllerFormProps<TFormData, TSubmitMeta>, keyof typeof ControllerForm.$propsDefault>;
+type ControllerInnerProps<TFormData extends {} = {}, TSubmitMeta = never> = TypeControllerInnerProps<
+  ControllerFormProps<TFormData, TSubmitMeta>,
+  keyof typeof ControllerForm.$propsDefault
+>;
 declare module 'zova-module-a-form' {
   export interface ControllerForm<TFormData extends {} = {}, TSubmitMeta = never> {
     $props: ControllerInnerProps<TFormData, TSubmitMeta>;

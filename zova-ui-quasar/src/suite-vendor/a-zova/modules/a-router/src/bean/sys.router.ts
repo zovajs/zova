@@ -1,10 +1,12 @@
 import type { RouteLocationMatched, RouteLocationNormalizedLoaded, RouteLocationResolvedGeneric, Router, RouterOptions } from '@cabloy/vue-router';
+
 import { IModule } from '@cabloy/module-info';
 import * as ModuleInfo from '@cabloy/module-info';
 import { combineParamsAndQuery } from '@cabloy/utils';
 import { createMemoryHistory, createRouter, createWebHashHistory, createWebHistory } from '@cabloy/vue-router';
 import { BeanBase, cast, deepExtend } from 'zova';
 import { Sys } from 'zova-module-a-bean';
+
 import { getRealRouteName, getRouteMatched, isRouterName } from '../lib/utils.js';
 import { IModuleRoute, IModuleRouteComponent, IPageNameRecord, IPagePathRecord } from '../types/router.js';
 import { SymbolRouterHistory } from '../types/utils.js';
@@ -55,7 +57,7 @@ export class SysRouter extends BeanBase {
         : this.sys.env.ROUTER_MODE === 'history'
           ? createWebHistory
           : createWebHashHistory;
-      const routeBase = (process.env.SERVER || this.sys.env.ROUTER_MODE === 'history') ? this.sys.env.APP_PUBLIC_PATH : undefined;
+      const routeBase = process.env.SERVER || this.sys.env.ROUTER_MODE === 'history' ? this.sys.env.APP_PUBLIC_PATH : undefined;
       options.history = createHistory(routeBase);
     }
     // create
@@ -132,19 +134,13 @@ export class SysRouter extends BeanBase {
   }
 
   /** @internal */
-  public _findConfigRoute(
-    name: string | symbol | null | undefined,
-    path: string | undefined,
-  ): IModuleRoute | undefined {
+  public _findConfigRoute(name: string | symbol | null | undefined, path: string | undefined): IModuleRoute | undefined {
     name = this.getRealRouteName(name);
     return name ? this.sys.config.routes.name[name] : this.sys.config.routes.path[path!];
   }
 
   /** @internal */
-  public _findLegacyRoute(
-    name: string | symbol | null | undefined,
-    path: string | null | undefined,
-  ): IModuleRoute | undefined {
+  public _findLegacyRoute(name: string | symbol | null | undefined, path: string | null | undefined): IModuleRoute | undefined {
     const legacyRoutes = cast(this.sys.meta).legacyRoutes;
     if (!legacyRoutes) return;
     name = this.getRealRouteName(name);
@@ -242,9 +238,7 @@ export class SysRouter extends BeanBase {
       if (!module || route.meta?.absolute === true) {
         path = route.path;
       } else {
-        path = route.path
-          ? `/${module.info.pid}/${module.info.name}/${route.path}`
-          : `/${module.info.pid}/${module.info.name}`;
+        path = route.path ? `/${module.info.pid}/${module.info.name}/${route.path}` : `/${module.info.pid}/${module.info.name}`;
       }
     }
     // name

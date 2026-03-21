@@ -1,6 +1,7 @@
 import { reactive } from 'vue';
 import { BeanBase } from 'zova';
 import { Sys } from 'zova-module-a-bean';
+
 import { IconGroup } from '../lib/iconGroup.js';
 import { IIconInfo, IIconMeta, TypeIconModules, TypeIconSymbols } from '../types/icon.js';
 
@@ -53,7 +54,7 @@ export class SysIcon extends BeanBase {
     if (!iconGroup) return undefined;
     // icon inject
     this._injectIconClient(meta);
-    const symbolId = this._iconSymbols[meta.fullName] = meta.symbolId;
+    const symbolId = (this._iconSymbols[meta.fullName] = meta.symbolId);
     // ok
     return { meta, symbolId };
   }
@@ -98,7 +99,7 @@ export class SysIcon extends BeanBase {
         filePath = path.join(process.cwd(), groupUrl);
       } else {
         const { fileURLToPath } = await import('node:url');
-        const rootFolder = fileURLToPath(new URL(/* @vite-ignore */'.', import.meta.url));
+        const rootFolder = fileURLToPath(new URL(/* @vite-ignore */ '.', import.meta.url));
         filePath = path.join(rootFolder, 'client', groupUrl);
       }
       svg = await fs.readFile(filePath, { encoding: 'utf8' });

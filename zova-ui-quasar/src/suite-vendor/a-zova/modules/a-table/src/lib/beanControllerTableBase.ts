@@ -1,5 +1,6 @@
 import type { RowData, Table } from '@tanstack/table-core';
 import type { TableOptionsWithReactiveData } from '@tanstack/vue-table';
+
 import { useVueTable } from '@tanstack/vue-table';
 import { markRaw } from 'vue';
 import { BeanControllerBase } from 'zova';

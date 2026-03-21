@@ -1,9 +1,12 @@
 import type { RouteLocationNormalizedLoadedGeneric } from '@cabloy/vue-router';
-import type { IPageMeta } from '../types/pageMeta.js';
-import type { IRouterViewSlotParams, IRouteViewRouteMeta } from '../types/routerView.js';
+
 import { RouterView } from '@cabloy/vue-router';
 import { h, KeepAlive, Transition } from 'vue';
 import { BeanControllerBase, cast } from 'zova';
+
+import type { IPageMeta } from '../types/pageMeta.js';
+import type { IRouterViewSlotParams, IRouteViewRouteMeta } from '../types/routerView.js';
+
 import { pageRouteKey, routerViewKey } from './const.js';
 
 export interface IRouterViewPropsBase {}
@@ -47,9 +50,13 @@ export class BeanRouterViewBase extends BeanControllerBase implements IRouterVie
             });
             cast(vnode).zovaHostProviders = { [pageRouteKey]: component.route };
             return [
-              h(KeepAlive, {
-                include: this.getKeepAliveInclude(),
-              }, [vnode]),
+              h(
+                KeepAlive,
+                {
+                  include: this.getKeepAliveInclude(),
+                },
+                [vnode],
+              ),
             ];
           },
         });

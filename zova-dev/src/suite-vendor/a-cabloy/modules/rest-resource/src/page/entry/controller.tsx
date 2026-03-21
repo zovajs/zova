@@ -1,4 +1,3 @@
-import type { ModelResource } from '../../model/resource.js';
 import { celEnvBase, isNil } from '@cabloy/utils';
 import { z } from 'zod';
 import { BeanControllerPageBase, Use, useCustomRef, usePrepareArg } from 'zova';
@@ -7,6 +6,9 @@ import { Controller } from 'zova-module-a-bean';
 import { formMetaFromFormScene, IFormMeta, IFormProvider, TypeFormScene } from 'zova-module-a-form';
 import { TypeResourceActionRowRecord, TypeResourceActionTableRecord } from 'zova-module-a-openapi';
 import { ZPage } from 'zova-module-home-base';
+
+import type { ModelResource } from '../../model/resource.js';
+
 import { IJsxRenderContextPageEntryWrapper, IPageEntryWrapperScope } from '../../types/pageEntryWrapper.js';
 
 export const ControllerPageEntrySchemaParams = z.object({
@@ -25,10 +27,7 @@ export class ControllerPageEntry extends BeanControllerPageBase {
 
   @Use({ beanFullName: 'rest-resource.model.resource' })
   get $$modelResource(): ModelResource {
-    return usePrepareArg(
-      this.$params.resource,
-      true,
-    );
+    return usePrepareArg(this.$params.resource, true);
   }
 
   get resource() {
@@ -40,7 +39,7 @@ export class ControllerPageEntry extends BeanControllerPageBase {
   }
 
   get formScene() {
-    return this.$params.formScene as (TypeFormScene | undefined) ?? (isNil(this.entryId) ? 'create' : 'view');
+    return (this.$params.formScene as TypeFormScene | undefined) ?? (isNil(this.entryId) ? 'create' : 'view');
   }
 
   protected async __init__() {
@@ -55,13 +54,7 @@ export class ControllerPageEntry extends BeanControllerPageBase {
     this.pageEntryWrapperScope = this._getPageEntryWrapperScope();
     // jsx
     this.pageEntryWrapperCelEnv = this._getPageEntryWrapperCelEnv();
-    this.zovaJsx = this.app.bean._newBeanSimple(
-      ZovaJsx,
-      false,
-      this.formProvider.components,
-      this.formProvider.actions,
-      this.pageEntryWrapperCelEnv,
-    );
+    this.zovaJsx = this.app.bean._newBeanSimple(ZovaJsx, false, this.formProvider.components, this.formProvider.actions, this.pageEntryWrapperCelEnv);
   }
 
   async onActionTable(_action: keyof TypeResourceActionTableRecord) {}
@@ -118,10 +111,6 @@ export class ControllerPageEntry extends BeanControllerPageBase {
     const celScope = this.pageEntryWrapperScope;
     const jsxRenderContext = this.getJsxRenderContextPageEntryWrapper(celScope);
     const domRestPageEntry = this.zovaJsx.render(this.$$modelResource.componentRestPageEntry, {}, celScope, jsxRenderContext);
-    return (
-      <ZPage>
-        {domRestPageEntry}
-      </ZPage>
-    );
+    return <ZPage>{domRestPageEntry}</ZPage>;
   }
 }

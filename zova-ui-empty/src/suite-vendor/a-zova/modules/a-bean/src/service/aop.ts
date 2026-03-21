@@ -1,7 +1,10 @@
 import type { BeanAopMethodBase, Constructable, IBeanRecord } from 'zova';
+
+import { appMetadata, appResource, BeanBase, ProxyDisable, Use } from 'zova';
+
 import type { IAopRecord, IDecoratorAopOptions } from '../types/aop.js';
 import type { IOnionItem, IOnionSlice } from '../types/onion.js';
-import { appMetadata, appResource, BeanBase, ProxyDisable, Use } from 'zova';
+
 import { SysOnion } from '../bean/sys.onion.js';
 import { Service } from '../lib/bean.js';
 import { IAopMethodRecord, IDecoratorAopMethodOptions, IUseAopMethodPropMetadata, SymbolDecoratorUseAopMethod } from '../types/aopMethod.js';
@@ -14,18 +17,10 @@ export class ServiceAop extends BeanBase {
   @Use()
   $$sysOnion: SysOnion;
 
-  async findAopsMatched<T>(
-    A: Constructable<T>,
-  ): Promise<IOnionSlice<IDecoratorAopOptions, keyof IAopRecord>[] | undefined>;
-  async findAopsMatched<K extends keyof IBeanRecord>(
-    beanFullName: K,
-  ): Promise<IOnionSlice<IDecoratorAopOptions, keyof IAopRecord>[] | undefined>;
-  async findAopsMatched(
-    beanFullName: string,
-  ): Promise<IOnionSlice<IDecoratorAopOptions, keyof IAopRecord>[] | undefined>;
-  async findAopsMatched<T>(
-    beanFullName: Constructable<T> | string,
-  ): Promise<IOnionSlice<IDecoratorAopOptions, keyof IAopRecord>[] | undefined> {
+  async findAopsMatched<T>(A: Constructable<T>): Promise<IOnionSlice<IDecoratorAopOptions, keyof IAopRecord>[] | undefined>;
+  async findAopsMatched<K extends keyof IBeanRecord>(beanFullName: K): Promise<IOnionSlice<IDecoratorAopOptions, keyof IAopRecord>[] | undefined>;
+  async findAopsMatched(beanFullName: string): Promise<IOnionSlice<IDecoratorAopOptions, keyof IAopRecord>[] | undefined>;
+  async findAopsMatched<T>(beanFullName: Constructable<T> | string): Promise<IOnionSlice<IDecoratorAopOptions, keyof IAopRecord>[] | undefined> {
     if (process.env.DEV && this.bean.containerType !== 'sys') {
       throw new Error('should in sys container');
     }
@@ -47,10 +42,7 @@ export class ServiceAop extends BeanBase {
     const beanOptions = appResource.getBean(beanFullName as any);
     if (!beanOptions) return;
     const aopMethodsMatchedAll: AopMethodsMatchedAll = {};
-    const uses = appMetadata.getMetadata<Record<string, IUseAopMethodPropMetadata[]>>(
-      SymbolDecoratorUseAopMethod,
-      beanOptions.beanClass.prototype,
-    );
+    const uses = appMetadata.getMetadata<Record<string, IUseAopMethodPropMetadata[]>>(SymbolDecoratorUseAopMethod, beanOptions.beanClass.prototype);
     for (const prop in uses) {
       const onionItems: IOnionItem<IDecoratorAopMethodOptions, keyof IAopMethodRecord>[] = [];
       const aopMethods: IUseAopMethodPropMetadata[] = uses[prop];

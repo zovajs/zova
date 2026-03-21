@@ -1,5 +1,6 @@
 import type { ILoggerChildRecord, ILoggerClientRecord, Next, NextSync } from 'zova';
 import type { IAopMethodExecute, IAopMethodGet, IAopMethodSet, IDecoratorAopMethodOptions } from 'zova-module-a-bean';
+
 import { LoggerLevel, Profiler } from '@cabloy/logger';
 import { evaluateExpressions } from '@cabloy/utils';
 import { BeanAopMethodBase, cast, SymbolBeanFullName } from 'zova';
@@ -68,13 +69,15 @@ export class AopMethodLog extends BeanAopMethodBase implements IAopMethodGet, IA
     try {
       const res = next();
       if (res?.then) {
-        return res.then((res: any) => {
-          options.result !== false && this._logResult(profiler, context, res, options, message);
-          return res;
-        }).catch((err: Error) => {
-          this._logError(profiler, context, err, options, message);
-          throw err;
-        });
+        return res
+          .then((res: any) => {
+            options.result !== false && this._logResult(profiler, context, res, options, message);
+            return res;
+          })
+          .catch((err: Error) => {
+            this._logError(profiler, context, err, options, message);
+            throw err;
+          });
       }
       options.result !== false && this._logResult(profiler, context, res, options, message);
       return res;

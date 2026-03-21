@@ -1,7 +1,9 @@
 import type { ZovaSys } from 'zova';
 import type { IJsxRenderContextBase } from 'zova-module-a-openapi';
-import type { IActionRecord, SymbolActionResult } from '../types/action.js';
+
 import { beanFullNameFromOnionName, deepExtend } from 'zova';
+
+import type { IActionRecord, SymbolActionResult } from '../types/action.js';
 
 export function $performAction<T extends keyof IActionRecord>(
   sys: ZovaSys,
@@ -28,12 +30,7 @@ export function $performAction<T extends keyof IActionRecord>(
   });
 }
 
-function _renderEventActionNormal_inner(
-  beanInstance: any,
-  options: {} | undefined,
-  renderContext: IJsxRenderContextBase,
-  next?: Function,
-) {
+function _renderEventActionNormal_inner(beanInstance: any, options: {} | undefined, renderContext: IJsxRenderContextBase, next?: Function) {
   const onionOptions = beanInstance.$onionOptions;
   // props
   const props = onionOptions ? deepExtend({}, onionOptions, options) : (options ?? {});

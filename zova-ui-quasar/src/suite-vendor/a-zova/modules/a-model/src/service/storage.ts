@@ -1,4 +1,5 @@
 import type { VueQueryPluginOptions } from '@tanstack/vue-query';
+
 import { dehydrate, hydrate, QueryCache, QueryClient, VueQueryPlugin } from '@tanstack/vue-query';
 import { BeanBase, deepExtend } from 'zova';
 import { Service } from 'zova-module-a-bean';
@@ -18,10 +19,10 @@ export class ServiceStorage extends BeanBase {
     // queryCache
     const queryCache = new QueryCache();
     // queryClient
-    const queryClient = this._queryClient = new QueryClient({
+    const queryClient = (this._queryClient = new QueryClient({
       defaultOptions: options,
       queryCache,
-    });
+    }));
     // use plugin
     const vueQueryPluginOptions: VueQueryPluginOptions = { queryClient };
     this.app.vue.use(VueQueryPlugin, vueQueryPluginOptions);

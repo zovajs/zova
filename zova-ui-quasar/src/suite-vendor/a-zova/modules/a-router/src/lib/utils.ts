@@ -1,8 +1,15 @@
-import type { RouteLocationMatched, RouteLocationNormalizedLoaded, RouteLocationNormalizedLoadedGeneric, RouterScrollBehavior } from '@cabloy/vue-router';
+import type {
+  RouteLocationMatched,
+  RouteLocationNormalizedLoaded,
+  RouteLocationNormalizedLoadedGeneric,
+  RouterScrollBehavior,
+} from '@cabloy/vue-router';
 import type { Ref } from 'vue';
 import type { ZovaContext } from 'zova';
+
 import { routerViewLocationKey } from '@cabloy/vue-router';
 import { inject } from 'vue';
+
 import { pageRouteKey } from './const.js';
 
 export function getRouteMatched(route: RouteLocationNormalizedLoaded): RouteLocationMatched | undefined {

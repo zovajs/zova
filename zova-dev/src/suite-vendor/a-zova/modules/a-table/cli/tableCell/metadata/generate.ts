@@ -1,9 +1,11 @@
 import type { IMetadataCustomGenerateOptions } from '@cabloy/cli';
 import type { IGlobBeanFile } from '@cabloy/module-info';
-import path from 'node:path';
+
 import { combineResourceName } from '@cabloy/utils';
 import { toUpperCaseFirstChar } from '@cabloy/word-utils';
 import fse from 'fs-extra';
+import path from 'node:path';
+
 import { generateRestIndex } from './utils.ts';
 
 export default async function (options: IMetadataCustomGenerateOptions): Promise<string> {
@@ -16,10 +18,7 @@ export default async function (options: IMetadataCustomGenerateOptions): Promise
   return '';
 }
 
-async function generateRestTableCell(
-  options: IMetadataCustomGenerateOptions,
-  globFile: IGlobBeanFile,
-) {
+async function generateRestTableCell(options: IMetadataCustomGenerateOptions, globFile: IGlobBeanFile) {
   const { moduleName, modulePath } = options;
   const { beanName, beanNameCapitalize, sceneName, fileNameJS } = globFile;
   // options
@@ -56,6 +55,6 @@ ${contentComponent}
     await fse.outputFile(fileComponents, contentComponents);
   }
   // index
-  const exportIndexContent = 'export * from \'./tableCells.js\';';
+  const exportIndexContent = "export * from './tableCells.js';";
   await generateRestIndex(modulePath, exportIndexContent);
 }

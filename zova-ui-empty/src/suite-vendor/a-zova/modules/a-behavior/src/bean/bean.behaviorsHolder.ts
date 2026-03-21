@@ -1,8 +1,10 @@
-import type { IBehaviors, IBehaviorTag } from '../types/behavior.js';
 import { createVNode, toRaw } from 'vue';
 import { BeanBase, deepEqual, disposeInstance, Use } from 'zova';
 import { Bean } from 'zova-module-a-bean';
 import { Log } from 'zova-module-a-logger';
+
+import type { IBehaviors, IBehaviorTag } from '../types/behavior.js';
+
 import { $UseBehavior } from '../lib/useBehavior.js';
 import { ServiceComposer } from '../service/composer.js';
 import { BeanBehavior } from './bean.behavior.js';
@@ -28,13 +30,10 @@ export class BeanBehaviorsHolder extends BeanBase {
     // watch
     const behaviors = this.options.behaviors;
     if (typeof behaviors === 'function') {
-      this.$watch(
-        behaviors,
-        async (newValue, oldValue) => {
-          if (deepEqual(newValue, oldValue)) return;
-          await this.composer.load(this._getBehaviorRoot(newValue));
-        },
-      );
+      this.$watch(behaviors, async (newValue, oldValue) => {
+        if (deepEqual(newValue, oldValue)) return;
+        await this.composer.load(this._getBehaviorRoot(newValue));
+      });
     }
   }
 

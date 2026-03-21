@@ -1,5 +1,6 @@
 import { BeanControllerBase, Use } from 'zova';
 import { Controller } from 'zova-module-a-bean';
+
 import { ToolIcon } from '../../bean/tool.icon.js';
 import { $getZovaIcon } from '../../lib/useZovaIcon.js';
 import { IIconRecord } from '../../types/icon.js';
@@ -25,7 +26,7 @@ export class ControllerIcon extends BeanControllerBase {
 
   private async _load() {
     const icon = this.$props.name;
-    if (icon === 'none' as any || !icon) {
+    if (icon === ('none' as any) || !icon) {
       return;
     }
     const promise = this.$$toolIcon.parseIconInfo(icon);
@@ -56,9 +57,7 @@ export class ControllerIcon extends BeanControllerBase {
         aria-hidden="true"
         width={width}
         height={height}
-        style={
-          { color: this.$props.color }
-        }
+        style={{ color: this.$props.color }}
       >
         <use xlinkHref={href}></use>
       </svg>

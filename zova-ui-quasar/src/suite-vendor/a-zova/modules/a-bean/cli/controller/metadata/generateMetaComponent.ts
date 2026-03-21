@@ -1,5 +1,6 @@
 import type { IMetadataCustomGenerateOptions } from '@cabloy/cli';
 import type { IGlobBeanFile } from '@cabloy/module-info';
+
 import type { IControllerInfo } from './types.ts';
 
 export function generateMetaComponent(
@@ -15,10 +16,7 @@ export function generateMetaComponent(
   const contentRecords2: string[] = [];
   for (const [globFile, controllerInfo] of globFiles) {
     const { className } = globFile;
-    const {
-      name,
-      nameCapitalize,
-    } = controllerInfo;
+    const { name, nameCapitalize } = controllerInfo;
     const componentFullName = `${moduleName}:${name}`;
     const componentName2 = `Z${nameCapitalize}`;
     contentImports.push(`export * from './component/${name}.js';`);

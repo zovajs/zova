@@ -1,6 +1,7 @@
+import { createBeanDecorator } from 'zova';
+
 import type { IDecoratorAopOptions } from '../types/aop.js';
 import type { IDecoratorAopMethodOptions } from '../types/aopMethod.js';
-import { createBeanDecorator } from 'zova';
 
 export function Sys(): ClassDecorator {
   return createBeanDecorator('sys', 'sys');

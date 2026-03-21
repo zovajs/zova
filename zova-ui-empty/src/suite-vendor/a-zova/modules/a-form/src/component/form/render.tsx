@@ -35,14 +35,14 @@ export class RenderForm extends BeanRenderBase {
 
   private _renderBodyInner() {
     const FormTag = this.$props.formTag;
-    return this.$slotDefault
-      ? this.$slotDefault(this)
-      : (
-          <>
-            {this._renderSchema()}
-            {FormTag === 'form' && <button type="submit" style={{ display: 'none' }}></button>}
-          </>
-        );
+    return this.$slotDefault ? (
+      this.$slotDefault(this)
+    ) : (
+      <>
+        {this._renderSchema()}
+        {FormTag === 'form' && <button type="submit" style={{ display: 'none' }}></button>}
+      </>
+    );
   }
 
   private _renderProps() {

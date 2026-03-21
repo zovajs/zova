@@ -2,6 +2,7 @@ import type { CurrencyOptions } from '@zhennann/currency';
 import type { ComponentPublicInstance } from 'vue';
 import type { Constructable, IComponentRecord, TypeBeanRecordGeneralSelector } from 'zova';
 import type { TypeRenderComponentJsx } from 'zova-jsx';
+
 import type { TypeResourceActionRowRecordRender } from './actions.js';
 import type { ICaptchaOptions } from './captcha.js';
 import type { TypeDateFormat } from './date.js';
@@ -61,17 +62,46 @@ export type TypeFormSchemaScene = 'form' | 'filter';
 export const renderFormFieldTopPropsSystem = ['order', 'table', 'form', 'filter'];
 export const renderTableColumnTopPropsSystem = ['order', 'table', 'form', 'filter', 'displayValue'];
 
-export type TypeRenderComponentPreset = keyof TypeResourceActionRowRecordRender | 'text' | 'captcha' | 'currency' | 'date' | 'dateRange' | 'textarea' | 'select' | 'checkbox' | 'radio' | 'switch' | 'image' | 'file' | 'color' | 'password' | 'email' | 'url';
+export type TypeRenderComponentPreset =
+  | keyof TypeResourceActionRowRecordRender
+  | 'text'
+  | 'captcha'
+  | 'currency'
+  | 'date'
+  | 'dateRange'
+  | 'textarea'
+  | 'select'
+  | 'checkbox'
+  | 'radio'
+  | 'switch'
+  | 'image'
+  | 'file'
+  | 'color'
+  | 'password'
+  | 'email'
+  | 'url';
 
 // form
-export type TypeFormFieldRenderComponentNormal =
-  Constructable<ComponentPublicInstance> | (keyof IComponentRecord) | TypeRenderComponentPreset;
+export type TypeFormFieldRenderComponentNormal = Constructable<ComponentPublicInstance> | keyof IComponentRecord | TypeRenderComponentPreset;
 export type TypeFormFieldRenderComponent = TypeFormFieldRenderComponentNormal | TypeRenderComponentJsx;
-export type TypeFormFieldRenderComponentProvider = Constructable | Constructable<ComponentPublicInstance> | (keyof IComponentRecord) | 'input' | 'textarea' | 'select';
+export type TypeFormFieldRenderComponentProvider =
+  | Constructable
+  | Constructable<ComponentPublicInstance>
+  | keyof IComponentRecord
+  | 'input'
+  | 'textarea'
+  | 'select';
 
 // table
 export type TypeTableCellRenderComponentNormal =
-  Constructable<ComponentPublicInstance> | (keyof IComponentRecord) | (keyof TypeBeanRecordGeneralSelector<'tableCell'>) | TypeRenderComponentPreset;
+  | Constructable<ComponentPublicInstance>
+  | keyof IComponentRecord
+  | keyof TypeBeanRecordGeneralSelector<'tableCell'>
+  | TypeRenderComponentPreset;
 export type TypeTableCellRenderComponent = TypeTableCellRenderComponentNormal | TypeRenderComponentJsx;
-export type TypeTableCellRenderComponentProvider = Constructable<ComponentPublicInstance> | (keyof IComponentRecord) | (keyof TypeBeanRecordGeneralSelector<'tableCell'>) | 'text';
-export type TypeTableRenderComponentProvider = Constructable<ComponentPublicInstance> | (keyof IComponentRecord) | TypeRenderComponentJsx;
+export type TypeTableCellRenderComponentProvider =
+  | Constructable<ComponentPublicInstance>
+  | keyof IComponentRecord
+  | keyof TypeBeanRecordGeneralSelector<'tableCell'>
+  | 'text';
+export type TypeTableRenderComponentProvider = Constructable<ComponentPublicInstance> | keyof IComponentRecord | TypeRenderComponentJsx;

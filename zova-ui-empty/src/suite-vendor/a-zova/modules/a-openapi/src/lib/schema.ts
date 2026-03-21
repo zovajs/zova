@@ -1,10 +1,13 @@
 import type { OperationObject, ParameterObject, RequestBodyObject, SchemaObject } from 'openapi3-ts/oas31';
-import type { TypeSchemaScene } from '../types/rest.js';
+
 import jsonSchemaToZod from '@cabloy/json-schema-to-zod';
 import { evaluateSimple } from '@cabloy/utils';
 import { toRaw } from 'vue';
 import { z } from 'zod';
 import { cast, deepExtend } from 'zova';
+
+import type { TypeSchemaScene } from '../types/rest.js';
+
 import { OrderUnknownBase } from '../types/database.js';
 
 const __FilterColumnsIgnore = ['columns', 'where', 'orders', 'pageNo', 'pageSize'];
@@ -32,11 +35,7 @@ export function loadSchemaProperties(
       key = customKey;
     }
     if (!property) continue;
-    property = deepExtend(
-      { key },
-      property,
-      scene ? { rest: property.rest?.[scene] ?? {} } : undefined,
-    );
+    property = deepExtend({ key }, property, scene ? { rest: property.rest?.[scene] ?? {} } : undefined);
     result.push(property);
   }
   // sort
@@ -56,10 +55,7 @@ export function schemaToZodSchema<T extends z.ZodType = z.ZodType>(
   return evaluateSimple(code, { z });
 }
 
-function _normalizeSchema(
-  schema: SchemaObject,
-  onGetSchema: (schemaName: string) => SchemaObject | undefined,
-) {
+function _normalizeSchema(schema: SchemaObject, onGetSchema: (schemaName: string) => SchemaObject | undefined) {
   if (!schema.properties) return schema;
   const schemaNew = Object.assign({}, schema, { properties: {} });
   for (const key in schema.properties) {

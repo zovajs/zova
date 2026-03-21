@@ -1,5 +1,6 @@
 import { BeanRenderBase } from 'zova';
 import { Render } from 'zova-module-a-bean';
+
 import { IFormFieldRenderContext } from '../../types/formField.js';
 
 @Render()
@@ -15,11 +16,6 @@ export class RenderFormField<TParentData extends {} = {}> extends BeanRenderBase
     if (this.$slotDefault) {
       return this.$slotDefault!(renderContext, this);
     }
-    return this.$$form.zovaJsx.render(
-      renderContext.propsBucket.render,
-      renderContext.props,
-      renderContext.celScope,
-      renderContext.jsxRenderContext,
-    );
+    return this.$$form.zovaJsx.render(renderContext.propsBucket.render, renderContext.props, renderContext.celScope, renderContext.jsxRenderContext);
   }
 }

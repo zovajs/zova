@@ -1,12 +1,21 @@
-import type { ControllerForm } from '../form/controller.jsx';
 import { isNil } from '@cabloy/utils';
 import { useField } from '@tanstack/vue-form';
 import z from 'zod';
 import { BeanControllerBase, deepEqual, IComponentOptions, Use } from 'zova';
 import { Controller } from 'zova-module-a-bean';
 import { BeanBehaviorsHolder, IBehaviorItem } from 'zova-module-a-behavior';
+
+import type { ControllerForm } from '../form/controller.jsx';
+
 import { TypeFormField } from '../../types/form.js';
-import { constFieldProps, IFormFieldOptions, IFormFieldRenderContext, IFormFieldRenderContextProps, IFormFieldRenderContextPropsBucket, inputTypePresets } from '../../types/formField.js';
+import {
+  constFieldProps,
+  IFormFieldOptions,
+  IFormFieldRenderContext,
+  IFormFieldRenderContextProps,
+  IFormFieldRenderContextPropsBucket,
+  inputTypePresets,
+} from '../../types/formField.js';
 
 export interface ControllerFormFieldProps<TParentData extends {} = {}> extends IFormFieldOptions<TParentData> {}
 
@@ -39,14 +48,17 @@ export class ControllerFormField<TParentData extends {} = {}> extends BeanContro
     // defaultValue
     // this._handleDefaultValue();
     // watch
-    this.$watch(() => this.property, (newValue, oldValue) => {
-      if (deepEqual(newValue, oldValue)) return;
-      // defaultValue
-      // this._handleDefaultValue();
-      const options = this._getFormFieldOptions();
-      this._formField.api.update(options as any);
-      this.form.resetField(this.name);
-    });
+    this.$watch(
+      () => this.property,
+      (newValue, oldValue) => {
+        if (deepEqual(newValue, oldValue)) return;
+        // defaultValue
+        // this._handleDefaultValue();
+        const options = this._getFormFieldOptions();
+        this._formField.api.update(options as any);
+        this.form.resetField(this.name);
+      },
+    );
     // behaviors
     await this.$$beanBehaviorsHolder.initialize({
       behaviorTag: undefined as any,
@@ -191,12 +203,16 @@ export class ControllerFormField<TParentData extends {} = {}> extends BeanContro
     const defaultValue = isNil(value) ? (this.$props.defaultValue ?? this.property?.default) : undefined;
     // validators
     const validators = this._getFormFieldOptionsValidators();
-    return Object.assign({
-      defaultValue,
-    }, this.$props, {
-      form: this.$$form.form,
-      validators,
-    });
+    return Object.assign(
+      {
+        defaultValue,
+      },
+      this.$props,
+      {
+        form: this.$$form.form,
+        validators,
+      },
+    );
   }
 
   private _getFormFieldOptionsValidators() {
@@ -206,11 +222,15 @@ export class ControllerFormField<TParentData extends {} = {}> extends BeanContro
     const validateOnDynamic = this.$props.validateOnDynamic ?? validateOnDynamicDefault;
     const validateOnBlur = this.$props.validateOnBlur;
     const validateOnChange = this.$props.validateOnChange;
-    return Object.assign({}, {
-      onDynamic: _normalizeValidateSchema(validateOnDynamic, zodSchemaField),
-      onBlur: _normalizeValidateSchema(validateOnBlur, zodSchemaField),
-      onChange: _normalizeValidateSchema(validateOnChange, zodSchemaField),
-    }, this.$props.validators);
+    return Object.assign(
+      {},
+      {
+        onDynamic: _normalizeValidateSchema(validateOnDynamic, zodSchemaField),
+        onBlur: _normalizeValidateSchema(validateOnBlur, zodSchemaField),
+        onChange: _normalizeValidateSchema(validateOnChange, zodSchemaField),
+      },
+      this.$props.validators,
+    );
   }
 }
 

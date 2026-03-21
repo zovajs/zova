@@ -1,6 +1,8 @@
-import type { IBehaviors } from '../types/behavior.js';
 import { BeanBase } from 'zova';
 import { Bean } from 'zova-module-a-bean';
+
+import type { IBehaviors } from '../types/behavior.js';
+
 import { ServiceComposer } from '../service/composer.js';
 
 @Bean()

@@ -1,12 +1,12 @@
 {
   "name": "zova-suite-a-zova",
-  "type": "module",
   "version": "5.0.128",
-  "title": "a-zova",
+  "gitHead": "73721393c1ea9a95539948d57ad692f2c004d7c7",
   "description": "zova",
-  "author": "zhennann",
   "license": "MIT",
+  "author": "zhennann",
   "files": [],
+  "type": "module",
   "dependencies": {
     "zova-module-a-action": "^5.0.0",
     "zova-module-a-actions": "^5.0.0",
@@ -38,5 +38,5 @@
     "zova-module-a-zod": "workspace:^",
     "zova-module-a-zova": "workspace:^"
   },
-  "gitHead": "73721393c1ea9a95539948d57ad692f2c004d7c7"
+  "title": "a-zova"
 }

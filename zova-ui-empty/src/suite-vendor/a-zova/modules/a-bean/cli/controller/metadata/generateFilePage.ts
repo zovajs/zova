@@ -1,13 +1,11 @@
 import type { IMetadataCustomGenerateOptions } from '@cabloy/cli';
 import type { IGlobBeanFile } from '@cabloy/module-info';
+
 import type { IControllerInfo } from './types.ts';
+
 import { combineContentRenderAndStyle } from './utils.ts';
 
-export async function generateFilePage(
-  options: IMetadataCustomGenerateOptions,
-  globFile: IGlobBeanFile,
-  controllerInfo: IControllerInfo,
-) {
+export async function generateFilePage(options: IMetadataCustomGenerateOptions, globFile: IGlobBeanFile, controllerInfo: IControllerInfo) {
   const { moduleName } = options;
   const { className } = globFile;
   const {
@@ -25,9 +23,7 @@ export async function generateFilePage(
   const contentImports: string[] = [];
   // controller
   contentImports.push("import { createZovaComponentPage } from 'zova';");
-  contentImports.push(
-    `import { ControllerPage${nameCapitalize} } from '../../page/${name}/controller${controllerExtJs}';`,
-  );
+  contentImports.push(`import { ControllerPage${nameCapitalize} } from '../../page/${name}/controller${controllerExtJs}';`);
   // render
   if (hasRenderFirst) {
     contentImports.push(importRenderFirst);
@@ -41,9 +37,7 @@ export async function generateFilePage(
   if (hasSchemaParams) _contentImports_parts.push(nameSchemaParams);
   if (hasSchemaQuery) _contentImports_parts.push(nameSchemaQuery);
   if (_contentImports_parts.length > 0) {
-    contentImports.push(
-      `import { ${_contentImports_parts.join(', ')} } from '../../page/${name}/controller${controllerExtJs}';`,
-    );
+    contentImports.push(`import { ${_contentImports_parts.join(', ')} } from '../../page/${name}/controller${controllerExtJs}';`);
   }
   //
   const _contentRecords2_parts: string[] = [];
@@ -60,7 +54,7 @@ export async function generateFilePage(
     `);
   }
   if (_contentRecords2_parts.length > 0) {
-    contentImports.push('import { z } from \'zod\';');
+    contentImports.push("import { z } from 'zod';");
     contentImports.push(`export namespace NS${className} {
       ${_contentRecords2_parts.join('\n')}
     }`);

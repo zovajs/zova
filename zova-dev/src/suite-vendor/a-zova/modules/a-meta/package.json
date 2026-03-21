@@ -1,20 +1,17 @@
 {
   "name": "zova-module-a-meta",
-  "type": "module",
   "version": "5.0.0",
-  "title": "a-meta",
-  "zovaModule": {
-    "onions": {
-      "meta": {
-        "optionsGlobalInterfaceFrom": "zova-module-a-meta"
-      }
-    }
-  },
   "description": "",
-  "author": "",
   "keywords": [
     "Zova Module"
   ],
+  "author": "",
+  "files": [
+    "cli",
+    "dist",
+    "mock"
+  ],
+  "type": "module",
   "exports": {
     ".": {
       "types": [
@@ -26,15 +23,18 @@
     },
     "./*": "./*"
   },
-  "files": [
-    "cli",
-    "dist",
-    "mock"
-  ],
   "scripts": {
     "clean": "tsc -b --clean",
     "tsc:publish": "npm run clean && tsc -b",
     "_prepublishOnly": "npm run tsc:publish"
   },
-  "dependencies": {}
+  "dependencies": {},
+  "title": "a-meta",
+  "zovaModule": {
+    "onions": {
+      "meta": {
+        "optionsGlobalInterfaceFrom": "zova-module-a-meta"
+      }
+    }
+  }
 }

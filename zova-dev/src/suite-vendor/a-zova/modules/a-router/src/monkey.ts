@@ -13,11 +13,14 @@ import type {
   ZovaContext,
 } from 'zova';
 import type { ErrorSSR } from 'zova-module-a-ssr';
-import type { BeanRouter } from './bean/bean.router.js';
-import type { TypePageSchema } from './types/router.js';
+
 import * as ModuleInfo from '@cabloy/module-info';
 import { shallowReactive } from 'vue';
 import { BeanControllerPageBase, BeanSimple, cast, useComputed } from 'zova';
+
+import type { BeanRouter } from './bean/bean.router.js';
+import type { TypePageSchema } from './types/router.js';
+
 import { routerViewKey } from './lib/const.js';
 import { getCurrentRoute, getPageRoute, getRealRouteName, getRouteMatched } from './lib/utils.js';
 import { ServiceRouterGuards } from './service/routerGuards.js';
@@ -25,7 +28,8 @@ import { SymbolRouterHistory } from './types/utils.js';
 
 export class Monkey
   extends BeanSimple
-  implements IMonkeyAppInitialize, IMonkeyAppInitialized, IMonkeyAppReady, IMonkeyAppClose, IMonkeyBeanInit, IMonkeyController {
+  implements IMonkeyAppInitialize, IMonkeyAppInitialized, IMonkeyAppReady, IMonkeyAppClose, IMonkeyBeanInit, IMonkeyController
+{
   private _beanRouter: BeanRouter;
   serviceRouterGuards: ServiceRouterGuards;
 
@@ -185,7 +189,7 @@ export class Monkey
   }
 
   private _checkIfRouteSame(route1: RouteLocationMatched, route2: RouteLocationMatched) {
-    return ((route1.name && route1.name === route2.name) || route1.path === route2.path);
+    return (route1.name && route1.name === route2.name) || route1.path === route2.path;
   }
 
   private _ssrErrorHandler() {

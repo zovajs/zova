@@ -1,8 +1,9 @@
-import type { IThemeBase, IThemeHandler, IThemeRecord } from '../types/index.js';
 import { beanFullNameFromOnionName, cast, UseScope } from 'zova';
 import { Bean } from 'zova-module-a-bean';
 import { BeanModelBase } from 'zova-module-a-model';
 import { ScopeModuleASsr } from 'zova-module-a-ssr';
+
+import type { IThemeBase, IThemeHandler, IThemeRecord } from '../types/index.js';
 
 export type ThemeDarkMode = 'auto' | boolean;
 
@@ -27,34 +28,28 @@ export class BeanTheme extends BeanModelBase {
     const cookieTheme = this.$$scopeSsr.config.cookieTheme;
     const cookieThemeDarkDefault = this.$$scopeSsr.config.cookieThemeDarkDefault;
     // support admin
-    this.name = this.$useState (
-      cookieTheme ? 'cookie' : 'local',
-      {
-        queryKey: ['themename'],
-        meta: {
-          persister: {
-            maxAge: this.scope.config.model.themename.persister.maxAge,
-          },
-          defaultData: this.scope.config.defaultTheme,
+    this.name = this.$useState(cookieTheme ? 'cookie' : 'local', {
+      queryKey: ['themename'],
+      meta: {
+        persister: {
+          maxAge: this.scope.config.model.themename.persister.maxAge,
         },
+        defaultData: this.scope.config.defaultTheme,
       },
-    );
-    this.darkMode = this.$useState(
-      cookieTheme ? 'cookie' : 'local',
-      {
-        queryKey: ['themedark'],
-        meta: {
-          persister: {
-            maxAge: this.scope.config.model.themename.persister.maxAge,
-            deserialize: (value, deserializeDefault) => {
-              if (cookieTheme && value === 'auto') value = cookieThemeDarkDefault;
-              return deserializeDefault(value);
-            },
+    });
+    this.darkMode = this.$useState(cookieTheme ? 'cookie' : 'local', {
+      queryKey: ['themedark'],
+      meta: {
+        persister: {
+          maxAge: this.scope.config.model.themename.persister.maxAge,
+          deserialize: (value, deserializeDefault) => {
+            if (cookieTheme && value === 'auto') value = cookieThemeDarkDefault;
+            return deserializeDefault(value);
           },
-          defaultData: cookieTheme ? cookieThemeDarkDefault : 'auto',
         },
+        defaultData: cookieTheme ? cookieThemeDarkDefault : 'auto',
       },
-    );
+    });
     this._updateDark();
 
     this.$watch(
@@ -115,7 +110,7 @@ export class BeanTheme extends BeanModelBase {
     }
     const moduleName = parts[0];
     if (!this.app.meta.module.exists(moduleName)) return;
-    return await this.bean._getBean(beanFullNameFromOnionName(name, 'theme'), true) as IThemeBase;
+    return (await this.bean._getBean(beanFullNameFromOnionName(name, 'theme'), true)) as IThemeBase;
   }
 
   toggleDark() {

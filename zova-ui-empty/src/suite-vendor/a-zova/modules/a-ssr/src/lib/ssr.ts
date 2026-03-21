@@ -1,11 +1,14 @@
 import type { ComponentInternalInstance, Ref, VNode } from 'vue';
 import type { Functionable } from 'zova';
-import type { SysSsrState } from '../bean/sys.ssrState.js';
-import type { OnHydratePropHasMismatch, OnHydratePropHasMismatchResult, SSRContext, TypeSsrSitePerformAction } from '../types/ssr.js';
+
 import { includeBooleanAttr, isBooleanAttr, isString, stringifyStyle } from '@vue/shared';
 import { defu } from 'defu';
 import { normalizeClass, normalizeStyle, ref, useSSRContext } from 'vue';
 import { BeanSimple } from 'zova';
+
+import type { SysSsrState } from '../bean/sys.ssrState.js';
+import type { OnHydratePropHasMismatch, OnHydratePropHasMismatchResult, SSRContext, TypeSsrSitePerformAction } from '../types/ssr.js';
+
 import { CtxSSRMetaStore } from './ssrMetaStore.js';
 
 const SymbolIsRuntimeSsrPreHydration = Symbol('SymbolIsRuntimeSsrPreHydration');
@@ -208,7 +211,7 @@ export class CtxSSR extends BeanSimple {
         try {
           instance.update();
         } catch (err: any) {
-          if (!err.message.includes('\'insertBefore\'')) {
+          if (!err.message.includes("'insertBefore'")) {
             throw err;
           }
         }

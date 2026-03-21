@@ -1,6 +1,7 @@
 import * as ModuleInfo from '@cabloy/module-info';
 import { RouteLocationNormalizedLoadedGeneric } from '@cabloy/vue-router';
 import { Service } from 'zova-module-a-bean';
+
 import { BeanRouter } from '../bean/bean.router.js';
 import { BeanRouterGuardsBase } from '../bean/bean.routerGuardsBase.js';
 import { NavigationDirection, NavigationInformation, NavigationType } from '../types/router.js';
@@ -33,10 +34,13 @@ export class ServiceRouterGuards extends BeanRouterGuardsBase {
           if (resLoadModule && resLoadModule !== true) return resLoadModule;
           if (resLoadModule === false) return to.fullPath;
           if (router.getRealRouteName(match?.name)) {
-            const routeAlias = router.resolveName(`$alias:${match?.name as string}` as never, {
-              params: to.params,
-              query: to.query,
-            } as any);
+            const routeAlias = router.resolveName(
+              `$alias:${match?.name as string}` as never,
+              {
+                params: to.params,
+                query: to.query,
+              } as any,
+            );
             const fullPath = routeAlias.startsWith('/__alias__') ? routeAlias.substring('/__alias__'.length) : routeAlias;
             return fullPath || '/';
           } else {
@@ -69,8 +73,8 @@ export class ServiceRouterGuards extends BeanRouterGuardsBase {
 
   private _afterEachFrom(router: BeanRouter, from: RouteLocationNormalizedLoadedGeneric, info: NavigationInformation | undefined) {
     if (!info) return;
-    const needBack = (info.type === NavigationType.pop && info.direction === NavigationDirection.back) ||
-      (info.type === NavigationType.push && info.replace);
+    const needBack =
+      (info.type === NavigationType.pop && info.direction === NavigationDirection.back) || (info.type === NavigationType.push && info.replace);
     if (!needBack) return;
     router.afterEachBackRoute(from);
   }
@@ -79,11 +83,7 @@ export class ServiceRouterGuards extends BeanRouterGuardsBase {
   private async _prepareCheck(pathMatched: string | undefined, pathTo: string): Promise<boolean> {
     if (pathMatched === '/:catchAll(.*)*') {
       const moduleInfo = ModuleInfo.parseInfo(ModuleInfo.parseName(pathTo));
-      if (
-        moduleInfo &&
-        this.app.meta.module.exists(moduleInfo.relativeName) &&
-        !this.app.meta.module.get(moduleInfo.relativeName, false)
-      ) {
+      if (moduleInfo && this.app.meta.module.exists(moduleInfo.relativeName) && !this.app.meta.module.get(moduleInfo.relativeName, false)) {
         // use module
         await this.app.meta.module.use(moduleInfo.relativeName);
         // redirect again

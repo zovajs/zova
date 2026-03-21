@@ -1,11 +1,22 @@
 import type { ISwapDepsItem } from '@cabloy/deps';
 import type { OnionSceneMeta } from '@cabloy/module-info';
 import type { Next } from 'zova';
-import type { IOnionExecuteCustom, IOnionItem, IOnionOptionsDeps, IOnionOptionsEnable, IOnionOptionsMatch, IOnionSlice, TypeOnionOptionsMatchRule } from '../types/onion.js';
+
 import { compose as _compose } from '@cabloy/compose';
 import { swapDeps } from '@cabloy/deps';
 import { getOnionScenesMeta } from '@cabloy/module-info';
 import { appResource, BeanSimple, cast, deepExtend, ProxyDisable } from 'zova';
+
+import type {
+  IOnionExecuteCustom,
+  IOnionItem,
+  IOnionOptionsDeps,
+  IOnionOptionsEnable,
+  IOnionOptionsMatch,
+  IOnionSlice,
+  TypeOnionOptionsMatchRule,
+} from '../types/onion.js';
+
 import { SysOnion } from '../bean/sys.onion.js';
 import { Service } from '../lib/bean.js';
 

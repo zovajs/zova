@@ -1,8 +1,10 @@
 import type { VNode } from 'vue';
-import type { BeanBehaviorBase } from '../bean/bean.behaviorBase.js';
-import type { IBehaviorRecord, IBehaviors, IDecoratorBehaviorOptions, NextBehavior } from '../types/behavior.js';
+
 import { BeanBase, cast, deepEqual, disposeInstance, Use } from 'zova';
 import { IOnionItem, IOnionSlice, Service, SysOnion, TypeComposer } from 'zova-module-a-bean';
+
+import type { BeanBehaviorBase } from '../bean/bean.behaviorBase.js';
+import type { IBehaviorRecord, IBehaviors, IDecoratorBehaviorOptions, NextBehavior } from '../types/behavior.js';
 
 const SymbolSliceOptionsOriginal = Symbol('SymbolSliceOptionsOriginal');
 
@@ -77,10 +79,7 @@ export class ServiceComposer extends BeanBase {
     return this._prepareOnionItemsInner(onionItems, behaviors);
   }
 
-  private _prepareOnionItemsInner(
-    onionItems: IOnionItem<IDecoratorBehaviorOptions, keyof IBehaviorRecord>[],
-    behaviors: IBehaviors,
-  ) {
+  private _prepareOnionItemsInner(onionItems: IOnionItem<IDecoratorBehaviorOptions, keyof IBehaviorRecord>[], behaviors: IBehaviors) {
     const behaviors2 = Array.isArray(behaviors) ? behaviors : [behaviors];
     for (const behaviorItem of behaviors2) {
       if (typeof behaviorItem === 'string') {

@@ -1,7 +1,38 @@
 {
   "name": "zova-module-a-zod",
-  "type": "module",
   "version": "5.0.0",
+  "description": "",
+  "keywords": [
+    "Zova Module"
+  ],
+  "author": "",
+  "files": [
+    "dist",
+    "mock"
+  ],
+  "type": "module",
+  "exports": {
+    ".": {
+      "types": [
+        "./src/index.ts",
+        "./dist/index.d.ts"
+      ],
+      "import": "./src/index.ts",
+      "default": "./dist/index.js"
+    },
+    "./*": "./*"
+  },
+  "scripts": {
+    "clean": "tsc -b --clean",
+    "tsc:publish": "npm run clean && tsc -b",
+    "_prepublishOnly": "npm run tsc:publish"
+  },
+  "dependencies": {
+    "@cabloy/zod-errors-custom": "^2.0.3",
+    "@cabloy/zod-openapi": "^1.0.10",
+    "@cabloy/zod-query": "^2.0.3",
+    "zod": "^4.1.5"
+  },
   "title": "a-zod",
   "zovaModule": {
     "globalDependencies": {
@@ -23,36 +54,5 @@
         }
       ]
     }
-  },
-  "description": "",
-  "author": "",
-  "keywords": [
-    "Zova Module"
-  ],
-  "exports": {
-    ".": {
-      "types": [
-        "./src/index.ts",
-        "./dist/index.d.ts"
-      ],
-      "import": "./src/index.ts",
-      "default": "./dist/index.js"
-    },
-    "./*": "./*"
-  },
-  "files": [
-    "dist",
-    "mock"
-  ],
-  "scripts": {
-    "clean": "tsc -b --clean",
-    "tsc:publish": "npm run clean && tsc -b",
-    "_prepublishOnly": "npm run tsc:publish"
-  },
-  "dependencies": {
-    "@cabloy/zod-errors-custom": "^2.0.3",
-    "@cabloy/zod-openapi": "^1.0.10",
-    "@cabloy/zod-query": "^2.0.3",
-    "zod": "^4.1.5"
   }
 }

@@ -1,6 +1,8 @@
 import type { NavigationGuardWithThis, NavigationHookAfter, RouteLocationNormalizedLoadedGeneric, Router } from '@cabloy/vue-router';
+
 import { BeanBase, TypeEventOff, Use } from 'zova';
 import { Bean } from 'zova-module-a-bean';
+
 import { BeanRouterViewBase } from '../lib/routerViewBase.js';
 import { ModelPageData } from '../model/pageData.js';
 import { IPageMeta } from '../types/pageMeta.js';

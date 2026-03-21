@@ -1,6 +1,16 @@
 import { catchError, celEnvBase } from '@cabloy/utils';
 import { ZodMetadata } from '@cabloy/zod-openapi';
-import { DeepKeys, determineFormLevelErrorSourceAndValue, FormValidationError, getBy, isGlobalFormValidationError, revalidateLogic, useStore, ValidationCause, ValidationError } from '@tanstack/vue-form';
+import {
+  DeepKeys,
+  determineFormLevelErrorSourceAndValue,
+  FormValidationError,
+  getBy,
+  isGlobalFormValidationError,
+  revalidateLogic,
+  useStore,
+  ValidationCause,
+  ValidationError,
+} from '@tanstack/vue-form';
 import { SchemaObject } from 'openapi3-ts/oas31';
 import { VNode } from 'vue';
 import { z } from 'zod';
@@ -8,10 +18,24 @@ import { $ZodIssue } from 'zod/v4/core';
 import { cast, deepEqual, deepExtend, objectAssignReactive, UseScope } from 'zova';
 import { isJsxComponent, ZovaJsx } from 'zova-jsx';
 import { Controller } from 'zova-module-a-bean';
-import { renderFormFieldTopPropsSystem, ScopeModuleAOpenapi, TypeFormFieldRenderComponent, TypeFormFieldRenderComponentProvider, TypeFormSchemaScene } from 'zova-module-a-openapi';
+import {
+  renderFormFieldTopPropsSystem,
+  ScopeModuleAOpenapi,
+  TypeFormFieldRenderComponent,
+  TypeFormFieldRenderComponentProvider,
+  TypeFormSchemaScene,
+} from 'zova-module-a-openapi';
+
 import { BeanControllerFormBase } from '../../lib/beanControllerFormBase.js';
 import { IFormScope, RevalidateLogicProps, TypeForm, TypeFormOnShowError, TypeFormOnSubmit, TypeFormOnSubmitInvalid } from '../../types/form.js';
-import { constFieldProps, IFormFieldLayoutOptionsBase, IFormFieldRenderContextPropsBucket, IFormFieldScope, IJsxRenderContextFormField, TypeFormFieldOnSetDisplayValue } from '../../types/formField.js';
+import {
+  constFieldProps,
+  IFormFieldLayoutOptionsBase,
+  IFormFieldRenderContextPropsBucket,
+  IFormFieldScope,
+  IJsxRenderContextFormField,
+  TypeFormFieldOnSetDisplayValue,
+} from '../../types/formField.js';
 import { IFormMeta } from '../../types/formMeta.js';
 import { IFormProvider } from '../../types/provider.js';
 import { ControllerFormField } from '../formField/controller.jsx';
@@ -78,17 +102,14 @@ export class ControllerForm<TFormData extends {} = {}, TSubmitMeta = never> exte
       return this.$sdk.loadSchemaProperties(this.schema, this.$props.schemaScene);
     });
     this.fieldCelEnv = this._getFieldCelEnv();
-    this.zovaJsx = this.app.bean._newBeanSimple(
-      ZovaJsx,
-      false,
-      this.formProvider.components,
-      this.formProvider.actions,
-      this.fieldCelEnv,
+    this.zovaJsx = this.app.bean._newBeanSimple(ZovaJsx, false, this.formProvider.components, this.formProvider.actions, this.fieldCelEnv);
+    this.$watch(
+      () => this.$props.data,
+      (newValue, oldValue) => {
+        if (deepEqual(newValue, oldValue)) return;
+        this.reset(this.$props.data);
+      },
     );
-    this.$watch(() => this.$props.data, (newValue, oldValue) => {
-      if (deepEqual(newValue, oldValue)) return;
-      this.reset(this.$props.data);
-    });
   }
 
   public async submit(submitMeta?: TSubmitMeta): Promise<boolean> {
@@ -99,7 +120,7 @@ export class ControllerForm<TFormData extends {} = {}, TSubmitMeta = never> exte
   }
 
   public reset(values?: TFormData, opts?: { keepDefaultValues?: boolean }): TFormData {
-    this.form.reset(values ?? {} as TFormData, opts);
+    this.form.reset(values ?? ({} as TFormData), opts);
     return this.form.state.values;
   }
 
@@ -325,20 +346,15 @@ export class ControllerForm<TFormData extends {} = {}, TSubmitMeta = never> exte
       const fieldMeta = formApi.getFieldMeta(field);
       if (!fieldMeta) continue;
 
-      const {
-        errorMap: currentErrorMap,
-        errorSourceMap: currentErrorMapSource,
-      } = fieldMeta;
+      const { errorMap: currentErrorMap, errorSourceMap: currentErrorMapSource } = fieldMeta;
 
       const newFormValidatorError = fieldErrors?.[field];
 
-      const { newErrorValue, newSource } =
-        determineFormLevelErrorSourceAndValue({
-          newFormValidatorError,
-          isPreviousErrorFromFormValidator:
-                currentErrorMapSource?.[errorMapKey] === 'form',
-          previousErrorValue: currentErrorMap?.[errorMapKey],
-        });
+      const { newErrorValue, newSource } = determineFormLevelErrorSourceAndValue({
+        newFormValidatorError,
+        isPreviousErrorFromFormValidator: currentErrorMapSource?.[errorMapKey] === 'form',
+        previousErrorValue: currentErrorMap?.[errorMapKey],
+      });
 
       if (newSource === 'form') {
         currentValidationErrorMap[field] = {
@@ -347,9 +363,7 @@ export class ControllerForm<TFormData extends {} = {}, TSubmitMeta = never> exte
         };
       }
 
-      if (
-        currentErrorMap?.[errorMapKey] !== newErrorValue
-      ) {
+      if (currentErrorMap?.[errorMapKey] !== newErrorValue) {
         formApi.setFieldMeta(field, prev => ({
           ...prev,
           errorMap: {
@@ -379,15 +393,11 @@ export class ControllerForm<TFormData extends {} = {}, TSubmitMeta = never> exte
     }
 
     /**
-       *  when we have an error for onSubmit in the state, we want
-       *  to clear the error as soon as the user enters a valid value in the field
-       */
+     *  when we have an error for onSubmit in the state, we want
+     *  to clear the error as soon as the user enters a valid value in the field
+     */
     const submitErrKey = getErrorMapKey('submit');
-    if (
-      formApi.state.errorMap?.[submitErrKey] &&
-      cause !== 'submit' &&
-      !hasErrored
-    ) {
+    if (formApi.state.errorMap?.[submitErrKey] && cause !== 'submit' && !hasErrored) {
       formApi.baseStore.setState(prev => ({
         ...prev,
         errorMap: {
@@ -398,15 +408,11 @@ export class ControllerForm<TFormData extends {} = {}, TSubmitMeta = never> exte
     }
 
     /**
-       *  when we have an error for onServer in the state, we want
-       *  to clear the error as soon as the user enters a valid value in the field
-       */
+     *  when we have an error for onServer in the state, we want
+     *  to clear the error as soon as the user enters a valid value in the field
+     */
     const serverErrKey = getErrorMapKey('server');
-    if (
-      formApi.state.errorMap?.[serverErrKey] &&
-      cause !== 'server' &&
-      !hasErrored
-    ) {
+    if (formApi.state.errorMap?.[serverErrKey] && cause !== 'server' && !hasErrored) {
       formApi.baseStore.setState(prev => ({
         ...prev,
         errorMap: {

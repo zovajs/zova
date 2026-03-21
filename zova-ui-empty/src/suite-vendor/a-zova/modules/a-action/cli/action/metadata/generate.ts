@@ -1,9 +1,11 @@
 import type { IMetadataCustomGenerateOptions } from '@cabloy/cli';
 import type { IGlobBeanFile } from '@cabloy/module-info';
-import path from 'node:path';
+
 import { combineResourceName } from '@cabloy/utils';
 import { toUpperCaseFirstChar } from '@cabloy/word-utils';
 import fse from 'fs-extra';
+import path from 'node:path';
+
 import { generateRestIndex } from './utils.ts';
 
 export default async function (options: IMetadataCustomGenerateOptions): Promise<string> {
@@ -16,17 +18,14 @@ export default async function (options: IMetadataCustomGenerateOptions): Promise
   return '';
 }
 
-async function generateRestAction(
-  options: IMetadataCustomGenerateOptions,
-  globFile: IGlobBeanFile,
-) {
+async function generateRestAction(options: IMetadataCustomGenerateOptions, globFile: IGlobBeanFile) {
   const { moduleName, modulePath } = options;
   const { beanName, beanNameCapitalize, fileNameJS } = globFile;
   // options
   const typeOptionsName = `IActionOptions${beanNameCapitalize}`;
   // import
   const contentImports: string[] = [];
-  contentImports.push('import type { TypeActionOptionsRest } from \'zova-module-a-action\';');
+  contentImports.push("import type { TypeActionOptionsRest } from 'zova-module-a-action';");
   contentImports.push(`import type { ${typeOptionsName} } from '../../src/bean/${fileNameJS}';`);
   // component
   const componentNamePrefix = 'AA';
@@ -57,6 +56,6 @@ ${contentComponent}
     await fse.outputFile(fileComponents, contentComponents);
   }
   // index
-  const exportIndexContent = 'export * from \'./actions.js\';';
+  const exportIndexContent = "export * from './actions.js';";
   await generateRestIndex(modulePath, exportIndexContent);
 }

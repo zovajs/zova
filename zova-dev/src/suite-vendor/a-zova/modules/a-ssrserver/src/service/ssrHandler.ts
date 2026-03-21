@@ -1,10 +1,11 @@
-import path, { basename } from 'node:path';
-import { pathToFileURL } from 'node:url';
 import { catchError } from '@cabloy/utils';
 import fse from 'fs-extra';
+import path, { basename } from 'node:path';
+import { pathToFileURL } from 'node:url';
 import { BeanBase, cast, Use } from 'zova';
 import { Service } from 'zova-module-a-bean';
 import { SysRouter } from 'zova-module-a-router';
+
 import { ISsrHandlerRenderOptionsInner, TypeEventResolvePathResult } from '../types/ssr.js';
 
 const jsRE = /\.js$/;
@@ -60,7 +61,9 @@ export class ServiceSsrHandler extends BeanBase {
     const ssrContext = {
       ...options,
       _meta: {} as any,
-      onRendered: fn => { onRenderedList.push(fn); },
+      onRendered: fn => {
+        onRenderedList.push(fn);
+      },
     };
     // render
     const renderFn = await serverEntry(ssrContext);
@@ -107,7 +110,7 @@ export class ServiceSsrHandler extends BeanBase {
     // handler
     const fileHandler = path.join(this._siteAssetDir, 'handler.js');
     const fileUrl = `${pathToHref(fileHandler)}?${handlerNonce}`;
-    const handlerInstance = await import(/* @vite-ignore */fileUrl);
+    const handlerInstance = await import(/* @vite-ignore */ fileUrl);
     // clientManifest
     const fileManifest = path.join(this._siteAssetDir, 'quasar.manifest.json');
     const contentManifest = await fse.readFile(fileManifest, { encoding: 'utf-8' });

@@ -1,6 +1,15 @@
-import type { NavigationFailure, RouteComponent, RouteLocationMatched, RouteLocationNormalized, RouteLocationNormalizedLoaded, RouteLocationNormalizedLoadedGeneric, RouteRecordRaw } from '@cabloy/vue-router';
+import type {
+  NavigationFailure,
+  RouteComponent,
+  RouteLocationMatched,
+  RouteLocationNormalized,
+  RouteLocationNormalizedLoaded,
+  RouteLocationNormalizedLoadedGeneric,
+  RouteRecordRaw,
+} from '@cabloy/vue-router';
 import type { z } from 'zod';
 import type { ILayoutRecord, ILocaleRecord, TypeComponentLayoutRecord, ZovaApplication } from 'zova';
+
 import type { BeanRouter } from '../bean/bean.router.js';
 import type { BeanRouterViewBase } from '../lib/routerViewBase.js';
 import type { IGotoPageOptions } from './utils.js';
@@ -96,7 +105,10 @@ export interface IPageNameRecord {}
 export interface IPagePathRecord {}
 export interface IPagePathSchemaRecord {}
 
-export interface TypePageSchema { params?: z.ZodTypeAny; query: z.ZodTypeAny }
+export interface TypePageSchema {
+  params?: z.ZodTypeAny;
+  query: z.ZodTypeAny;
+}
 export type TypePageSchemas = Record<string, TypePageSchema>;
 
 export interface TypePagePathSchema<PARAMS = unknown, QUERY = unknown> {

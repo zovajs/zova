@@ -1,7 +1,10 @@
 import type { IModule } from '@cabloy/module-info';
 import type { IMonkeyModuleSys, IMonkeySysContextInitialize, ZovaContext } from 'zova';
-import type { SysSsrState } from './bean/sys.ssrState.js';
+
 import { BeanSimple } from 'zova';
+
+import type { SysSsrState } from './bean/sys.ssrState.js';
+
 import { CtxSSR } from './lib/ssr.js';
 
 export class MonkeySys extends BeanSimple implements IMonkeyModuleSys, IMonkeySysContextInitialize {

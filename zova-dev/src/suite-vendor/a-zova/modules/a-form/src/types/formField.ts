@@ -5,6 +5,7 @@ import type { TypeRenderComponentJsx } from 'zova-jsx';
 import type { IBehaviorItem } from 'zova-module-a-behavior';
 import type { IIconRecord } from 'zova-module-a-icon';
 import type { IJsxRenderContextBase, TypeFormFieldRenderComponent, TypeFormFieldRenderComponentProvider } from 'zova-module-a-openapi';
+
 import type { ControllerForm } from '../component/form/controller.jsx';
 import type { ControllerFormField } from '../component/formField/controller.jsx';
 import type { TypeBehaviorFormFieldOptions } from './form.js';
@@ -67,9 +68,9 @@ export interface IFormFieldRenderContextProps {
   readonly?: boolean;
   placeholder?: string;
   class?: any;
-  onChange?: ((e: Event) => void);
-  onInput?: ((e: Event) => void);
-  onBlur?: ((e: Event) => void);
+  onChange?: (e: Event) => void;
+  onInput?: (e: Event) => void;
+  onBlur?: (e: Event) => void;
 }
 
 export interface IFormFieldRenderContextPropsBucket<TParentData = {}> extends Omit<IFormFieldOptions<TParentData>, 'render'> {

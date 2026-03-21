@@ -14,5 +14,5 @@ export interface TypeResourceActionRowRecord {
 }
 
 export type TypeResourceActionRowRecordRender = {
-  [key in keyof TypeResourceActionRowRecord as `action${Capitalize<key>}`]: TypeResourceActionRowRecord[key]
+  [key in keyof TypeResourceActionRowRecord as `action${Capitalize<key>}`]: TypeResourceActionRowRecord[key];
 };

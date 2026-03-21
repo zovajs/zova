@@ -1,13 +1,17 @@
 {
   "name": "zova-module-a-currency",
-  "title": "a-currency",
-  "type": "module",
   "version": "5.0.0",
   "description": "",
-  "author": "",
   "keywords": [
     "Zova Module"
   ],
+  "author": "",
+  "files": [
+    "dist",
+    "mock",
+    "rest"
+  ],
+  "type": "module",
   "exports": {
     ".": {
       "types": [
@@ -19,11 +23,6 @@
     },
     "./*": "./*"
   },
-  "files": [
-    "dist",
-    "mock",
-    "rest"
-  ],
   "scripts": {
     "clean": "tsc -b --clean",
     "tsc:publish": "npm run clean && tsc -b",
@@ -31,5 +30,6 @@
   },
   "dependencies": {
     "@zhennann/currency": "^2.0.4"
-  }
+  },
+  "title": "a-currency"
 }

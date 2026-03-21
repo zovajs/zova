@@ -1,7 +1,9 @@
+import { BeanBase, cast } from 'zova';
+
 import type { ScopeModule } from '../../.metadata/this.js';
 import type { IDecoratorModelOptions } from '../../types/model.js';
 import type { BeanModelBase } from '../bean.modelBase.js';
-import { BeanBase, cast } from 'zova';
+
 import { __ThisModule__ } from '../../.metadata/this.js';
 
 export class BeanModelLast extends BeanBase {
@@ -10,7 +12,7 @@ export class BeanModelLast extends BeanBase {
   constructor(selector?: unknown) {
     super();
     if (this.$onionOptions?.enableSelector) {
-      this.selector = selector as string ?? '';
+      this.selector = (selector as string) ?? '';
     }
   }
 
