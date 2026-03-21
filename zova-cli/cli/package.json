@@ -44,7 +44,7 @@
   },
   "dependencies": {
     "@cabloy/cli": "^3.0.77",
-    "@cabloy/process-helper": "^2.0.21",
+    "@cabloy/process-helper": "^3.0.0",
     "fs-extra": "^11.2.0",
     "semver": "^7.6.2",
     "zova-cli-set-front": "^1.1.199"
