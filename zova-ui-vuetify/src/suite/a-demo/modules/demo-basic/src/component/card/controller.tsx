@@ -1,5 +1,7 @@
+import type { ISlot } from 'zova';
+
 import { VBtn } from 'vuetify/components';
-import { BeanControllerBase, ISlot } from 'zova';
+import { BeanControllerBase } from 'zova';
 import { Controller } from 'zova-module-a-bean';
 
 export interface ControllerCardProps {
