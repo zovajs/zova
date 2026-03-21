@@ -10,7 +10,6 @@ function onClick() {
   emits('click', 'inner: onClick');
 }
 </script>
-
 <template>
   <button class="btn btn-primary" @click="onClick">Click</button>
 </template>

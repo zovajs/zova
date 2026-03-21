@@ -34,10 +34,11 @@ export class ControllerPageToolOne extends BeanControllerPageFormBase {
     const querySdk = await $QueryAutoLoad(() => apiSchemas.sdk);
     this.schemaUpdate = this.$useComputed(() => {
       const schema = apiSchemas.requestBody;
+      // eslint-disable-next-line
       console.log('schema: ', schema);
       return schema;
     });
-
+    // eslint-disable-next-line
     console.log('sdk: ', querySdk?.data);
     // form data
     this.formData = {
@@ -60,6 +61,7 @@ export class ControllerPageToolOne extends BeanControllerPageFormBase {
   }
 
   async onSubmit(data: TypeFormOnSubmitData<ApiSchemaTestSsrDtoTestBodyPartial>) {
+    // eslint-disable-next-line
     console.log('submit auto: ', JSON.stringify(data.value));
     this.formData = data.value;
   }
