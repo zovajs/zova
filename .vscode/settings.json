@@ -15,7 +15,7 @@
   "js/ts.preferences.importModuleSpecifierEnding": "js",
   "js/ts.preferences.includePackageJsonAutoImports": "on",
   // oxfmt
-  "oxc.fmt.configPath": ".oxfmtrc.json",
+  "oxc.fmt.configPath": "oxfmt.config.ts",
   "editor.defaultFormatter": "oxc.oxc-vscode",
   "editor.formatOnSave": true,
   // oxlint
@@ -28,7 +28,7 @@
     "*.css.ejs": "css",
     "*.less.ejs": "less",
     "*.code-snippets": "text",
-    "docker-compose-dockerfile-app": "dockerfile"
+    "docker-compose-dockerfile-app": "dockerfile",
   },
   // search
   "search.exclude": {
@@ -41,9 +41,9 @@
     "/src/backend/run/**": true,
     "src/front/__dist,": true,
     "src/front/__runtime,": true,
-    "**/node_modules": true
+    "**/node_modules": true,
   },
   "search.useIgnoreFiles": false,
   "textlint.autoFixOnSave": true,
-  "hide-my-secrets.hideSecrets": false
+  "hide-my-secrets.hideSecrets": false,
 }

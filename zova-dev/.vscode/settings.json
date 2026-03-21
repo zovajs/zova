@@ -15,7 +15,7 @@
   "js/ts.preferences.importModuleSpecifierEnding": "js",
   "js/ts.preferences.includePackageJsonAutoImports": "on",
   // oxfmt
-  "oxc.fmt.configPath": ".oxfmtrc.json",
+  "oxc.fmt.configPath": "oxfmt.config.ts",
   "editor.defaultFormatter": "oxc.oxc-vscode",
   "editor.formatOnSave": true,
   // oxlint
@@ -26,10 +26,10 @@
   "files.associations": {
     "*.ejs": "html",
     "*.code-snippets": "text",
-    "docker-compose-dockerfile-app": "dockerfile"
+    "docker-compose-dockerfile-app": "dockerfile",
   },
   // watcher
   "files.watcherExclude": {
-    "node_modules": true
-  }
+    "node_modules": true,
+  },
 }
