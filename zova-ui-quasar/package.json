@@ -119,7 +119,7 @@
     "zova-module-quasar-form": "workspace:^"
   },
   "devDependencies": {
-    "@cabloy/cli": "^3.0.77",
+    "@cabloy/cli": "^3.0.99",
     "@cabloy/lint": "^5.0.24",
     "@cabloy/openapi-typescript": "^7.9.2",
     "@quasar/app-vite": "2.4.0",
