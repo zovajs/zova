@@ -31,7 +31,6 @@ export interface IDecoratorUseOptions {
   - Optional
   - Inject through variable name
 - injectionScope: `app/ctx/new/host/skipSelf`
-
   - Optional
   - Default: Use the value specified when the bean is defined
 

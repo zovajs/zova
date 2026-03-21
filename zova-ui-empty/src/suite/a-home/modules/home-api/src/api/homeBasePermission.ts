@@ -1,18 +1,21 @@
-import type { paths } from './openapi/index.js';
 import { Api, BeanApiBase, IApiActionOptions } from 'zova-module-a-api';
+
+import type { paths } from './openapi/index.js';
+
 import { OpenApiBaseURL } from './openapi/index.js';
 
 /** HomeBasePermission_retrievePermissions */
 export const ApiApiHomeBasePermissionretrievePermissionsPath = '/api/home/base/permission/{resource}';
 export type ApiApiHomeBasePermissionretrievePermissionsPath = '/api/home/base/permission/{resource}';
 export type ApiApiHomeBasePermissionretrievePermissionsMethod = 'get';
-export type ApiApiHomeBasePermissionretrievePermissionsRequestParams = paths[ApiApiHomeBasePermissionretrievePermissionsPath][ApiApiHomeBasePermissionretrievePermissionsMethod]['parameters']['path'];
-export type ApiApiHomeBasePermissionretrievePermissionsResponseBody = paths[ApiApiHomeBasePermissionretrievePermissionsPath][ApiApiHomeBasePermissionretrievePermissionsMethod]['responses']['200']['content']['application/json']['data'];
+export type ApiApiHomeBasePermissionretrievePermissionsRequestParams =
+  paths[ApiApiHomeBasePermissionretrievePermissionsPath][ApiApiHomeBasePermissionretrievePermissionsMethod]['parameters']['path'];
+export type ApiApiHomeBasePermissionretrievePermissionsResponseBody =
+  paths[ApiApiHomeBasePermissionretrievePermissionsPath][ApiApiHomeBasePermissionretrievePermissionsMethod]['responses']['200']['content']['application/json']['data'];
 
 @Api()
 export class ApiHomeBasePermission extends BeanApiBase {
   retrievePermissions(
-
     options: {
       params: ApiApiHomeBasePermissionretrievePermissionsRequestParams;
     } & IApiActionOptions,

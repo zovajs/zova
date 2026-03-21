@@ -1,4 +1,3 @@
-import FormFieldTest from '@/components/FormFieldTest.vue';
 import { classes } from 'typestyle';
 import { z } from 'zod';
 import { BeanRenderBase } from 'zova';
@@ -6,13 +5,17 @@ import { Render } from 'zova-module-a-bean';
 import { ZForm, ZFormField, ZFormSubscribe } from 'zova-module-a-form';
 import { ApiSchemaTestSsrDtoTestBodyPartial } from 'zova-module-home-api';
 
+import FormFieldTest from '@/components/FormFieldTest.vue';
+
 @Render()
 export class RenderPageToolOne extends BeanRenderBase {
   private _renderAuto() {
     return (
       <div>
         <ZForm
-          controllerRef={ref => { this.controllerForm = ref; }}
+          controllerRef={ref => {
+            this.controllerForm = ref;
+          }}
           data={this.formData}
           schema={this.schemaUpdate}
           formMeta={this.formMeta}
@@ -45,10 +48,7 @@ export class RenderPageToolOne extends BeanRenderBase {
 
   private _renderManual() {
     return (
-      <ZForm
-        data={this.formData}
-        onSubmitData={data => this.onSubmit(data)}
-      >
+      <ZForm data={this.formData} onSubmitData={data => this.onSubmit(data)}>
         <ZFormField<ApiSchemaTestSsrDtoTestBodyPartial>
           name="name"
           label={`${this.scope.locale.YourName()}:`}
@@ -57,17 +57,9 @@ export class RenderPageToolOne extends BeanRenderBase {
         <ZFormField
           name="name"
           slotDefault={({ props }) => {
-            return (
-              <input
-                name={props.name}
-                value={props.value}
-                onInput={props.onInput}
-                onBlur={props.onBlur}
-              ></input>
-            );
+            return <input name={props.name} value={props.value} onInput={props.onInput} onBlur={props.onBlur}></input>;
           }}
-        >
-        </ZFormField>
+        ></ZFormField>
         <ZFormField name="name">
           <span>span: name</span>
         </ZFormField>
@@ -78,13 +70,14 @@ export class RenderPageToolOne extends BeanRenderBase {
             footer: () => <div>--- Footer Slot ---</div>,
           }}
         </FormFieldTest>
-        <ZFormSubscribe slotDefault={$$form => {
-          return (
-            <button disabled={$$form.formState.isSubmitting} type="submit" class="btn btn-primary">
-              Submit
-            </button>
-          );
-        }}
+        <ZFormSubscribe
+          slotDefault={$$form => {
+            return (
+              <button disabled={$$form.formState.isSubmitting} type="submit" class="btn btn-primary">
+                Submit
+              </button>
+            );
+          }}
         ></ZFormSubscribe>
       </ZForm>
     );
@@ -93,13 +86,9 @@ export class RenderPageToolOne extends BeanRenderBase {
   public render() {
     return (
       <div>
-        <div>
-          {this._renderAuto()}
-        </div>
+        <div>{this._renderAuto()}</div>
         <div>------------------------------------</div>
-        <div>
-          {this._renderManual()}
-        </div>
+        <div>{this._renderManual()}</div>
       </div>
     );
   }

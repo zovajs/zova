@@ -8,7 +8,9 @@ export class RenderRestPageEntry<TData extends {} = {}> extends BeanRenderBase {
     const ComponentForm = this.$zovaComponent(this.$$modelResource.componentForm);
     return (
       <ComponentForm<TData>
-        controllerRef={ref => { this.controllerForm = ref; }}
+        controllerRef={ref => {
+          this.controllerForm = ref;
+        }}
         data={this.formData}
         schema={this.formSchema}
         formMeta={this.formMeta}

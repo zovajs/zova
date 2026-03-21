@@ -1,11 +1,11 @@
 {
   "name": "zova-suite-a-demo",
   "version": "5.0.0",
-  "title": "a-demo",
-  "type": "module",
   "description": "demo",
   "author": "zhennann",
+  "type": "module",
   "dependencies": {
     "zova-module-demo-basic": "workspace:^"
-  }
+  },
+  "title": "a-demo"
 }

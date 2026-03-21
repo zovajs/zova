@@ -41,8 +41,7 @@ export class ControllerPageRouteQueryB extends BeanControllerPageBase {
   }
 
   toggleTodos() {
-    const todo =
-      (this.$query.todos?.length ?? 0) % 2 === 0 ? { title: 'Running', done: false } : { title: 'Eating', done: true };
+    const todo = (this.$query.todos?.length ?? 0) % 2 === 0 ? { title: 'Running', done: false } : { title: 'Eating', done: true };
     const todos = this.$query.todos ? [todo].concat(this.$query.todos) : [todo];
     const query = { ...this.$query, todos };
     const url = this.$router.getPagePath('/demo/basic/routeQueryB', { query });

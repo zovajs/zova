@@ -1,8 +1,9 @@
 import type { IModule } from '@cabloy/module-info';
+
+import fse from 'fs-extra';
 import fs from 'node:fs';
 import path from 'node:path';
 import { pathToFileURL } from 'node:url';
-import fse from 'fs-extra';
 
 export function getControllerFileName(module: IModule, type: 'page' | 'component', beanName) {
   const controllerFile = path.join(module.root, `src/${type}/${beanName}/controller.ts`);

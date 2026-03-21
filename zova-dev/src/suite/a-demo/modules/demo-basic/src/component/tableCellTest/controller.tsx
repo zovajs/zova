@@ -1,4 +1,5 @@
 import type { IJsxRenderContextTableCell } from 'zova-module-a-table';
+
 import { VNode } from 'vue';
 import { BeanControllerBase, Use } from 'zova';
 import { Controller } from 'zova-module-a-bean';
@@ -20,9 +21,7 @@ export class ControllerTableCellTest extends BeanControllerBase {
 
   protected render() {
     const { name, displayValue } = this.$$renderContext.$celScope;
-    const domCell = this.$slotDefault
-      ? this.$slotDefault()
-      : displayValue;
+    const domCell = this.$slotDefault ? this.$slotDefault() : displayValue;
     return (
       <>
         {this.$props.slotHeader?.({ name: 'kevin' })}

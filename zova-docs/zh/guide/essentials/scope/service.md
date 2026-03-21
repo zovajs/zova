@@ -62,12 +62,9 @@ export default (app: ZovaApplication) => {
   return {
     select: () => app.meta.$fetch.get<any, ApiTodoEntity[]>('/demo/todo/select'),
     get: (params: ApiTodoGetParams) => app.meta.$fetch.get<any, ApiTodoEntity>('/demo/todo/get', { params }),
-    insert: (params: ApiTodoIntertParams) =>
-      app.meta.$fetch.post<any, void, ApiTodoIntertParams>('/demo/todo/insert', params),
-    update: (params: ApiTodoUpdateParams) =>
-      app.meta.$fetch.post<any, void, ApiTodoUpdateParams>('/demo/todo/update', params),
-    delete: (params: ApiTodoDeleteParams) =>
-      app.meta.$fetch.post<any, void, ApiTodoDeleteParams>('/demo/todo/delete', params),
+    insert: (params: ApiTodoIntertParams) => app.meta.$fetch.post<any, void, ApiTodoIntertParams>('/demo/todo/insert', params),
+    update: (params: ApiTodoUpdateParams) => app.meta.$fetch.post<any, void, ApiTodoUpdateParams>('/demo/todo/update', params),
+    delete: (params: ApiTodoDeleteParams) => app.meta.$fetch.post<any, void, ApiTodoDeleteParams>('/demo/todo/delete', params),
   };
 };
 ```

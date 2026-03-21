@@ -9,8 +9,7 @@
     "rewriteRelativeImportExtensions": false,
     "verbatimModuleSyntax": false
   },
-  "references": [
-  ],
+  "references": [],
   "exclude": [
     "**/cli/**",
     "**/dist/**",

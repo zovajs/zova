@@ -1,6 +1,6 @@
-import path from 'node:path';
 import fse from 'fs-extra';
 import { globby } from 'globby';
+import path from 'node:path';
 import { optimize } from 'svgo';
 
 export async function generateIcons(moduleName: string, modulePath: string) {
@@ -106,10 +106,12 @@ async function _combineSymbol(file, moduleName, groupName, iconName): Promise<st
   // optimize
   const { data } = await optimize(content, {});
   content = data || content;
-  content = content.replace(/<svg(.*?)>/, (_, $1) => {
-    const $2 = $1.replace(/ width=".*?"/, '').replace(/ height=".*?"/, '');
-    return `<symbol id="${_getSymbolId(moduleName, groupName, iconName)}"${$2}>`;
-  }).replace('</svg>', '</symbol>');
+  content = content
+    .replace(/<svg(.*?)>/, (_, $1) => {
+      const $2 = $1.replace(/ width=".*?"/, '').replace(/ height=".*?"/, '');
+      return `<symbol id="${_getSymbolId(moduleName, groupName, iconName)}"${$2}>`;
+    })
+    .replace('</svg>', '</symbol>');
   return content;
 }
 

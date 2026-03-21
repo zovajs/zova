@@ -1,4 +1,5 @@
 import type { ControllerFormField, IFormFieldRenderContext, IFormFieldRenderContextProps, IFormMeta, TypeFormField } from 'zova-module-a-form';
+
 import { isEmptyObject } from '@cabloy/utils';
 import { QIcon } from 'quasar';
 import { VNode } from 'vue';
@@ -13,11 +14,7 @@ export interface IBehaviorPropsOutputFormField extends IBehaviorPropsInputFormFi
 export interface IBehaviorOptionsFormField extends IDecoratorBehaviorOptions {}
 
 @Behavior<IBehaviorOptionsFormField>()
-export class BehaviorFormField extends BeanBehaviorBase<
-  IBehaviorOptionsFormField,
-  IBehaviorPropsInputFormField,
-  IBehaviorPropsOutputFormField
-> {
+export class BehaviorFormField extends BeanBehaviorBase<IBehaviorOptionsFormField, IBehaviorPropsInputFormField, IBehaviorPropsOutputFormField> {
   @Use({ injectionScope: 'host' })
   $$formField: ControllerFormField;
 
@@ -29,17 +26,16 @@ export class BehaviorFormField extends BeanBehaviorBase<
   private _patchProps(renderContext: IFormFieldRenderContext) {
     const formMeta = this.$$formField.formMeta;
     const field = this.$$formField.field;
-    const componentName = typeof renderContext.propsBucket.renderProvider === 'object' ? cast(renderContext.propsBucket.renderProvider)?.name : renderContext.propsBucket.renderProvider;
+    const componentName =
+      typeof renderContext.propsBucket.renderProvider === 'object'
+        ? cast(renderContext.propsBucket.renderProvider)?.name
+        : renderContext.propsBucket.renderProvider;
     if (componentName === 'QInput') {
       this._patchProps_input(formMeta, field, renderContext);
     }
   }
 
-  private _patchProps_general(
-    formMeta: IFormMeta | undefined,
-    _field: TypeFormField,
-    _renderContext: IFormFieldRenderContext,
-  ) {
+  private _patchProps_general(formMeta: IFormMeta | undefined, _field: TypeFormField, _renderContext: IFormFieldRenderContext) {
     const propsPatch: IFormFieldRenderContextProps = {
       // value: renderContext.propsBucket.displayValue,
     };
@@ -49,11 +45,7 @@ export class BehaviorFormField extends BeanBehaviorBase<
     return propsPatch;
   }
 
-  private _patchProps_input(
-    formMeta: IFormMeta | undefined,
-    field: TypeFormField,
-    renderContext: IFormFieldRenderContext,
-  ) {
+  private _patchProps_input(formMeta: IFormMeta | undefined, field: TypeFormField, renderContext: IFormFieldRenderContext) {
     const { propsBucket } = renderContext;
     const renderFlattern = propsBucket.renderFlattern;
     const propsGeneral = this._patchProps_general(formMeta, field, renderContext);
@@ -70,9 +62,8 @@ export class BehaviorFormField extends BeanBehaviorBase<
       'type': inputType,
       'label': propsBucket.label,
       'modelValue': propsBucket.displayValue,
-      'onUpdate:modelValue': propsBucket['onUpdate:modelValue'] !== undefined
-        ? (propsBucket['onUpdate:modelValue'] ?? undefined)
-        : onSetDisplayValueDefaultByValue,
+      'onUpdate:modelValue':
+        propsBucket['onUpdate:modelValue'] !== undefined ? (propsBucket['onUpdate:modelValue'] ?? undefined) : onSetDisplayValueDefaultByValue,
       'noErrorIcon': true,
       error,
       'errorMessage': errorObj?.message,
@@ -82,11 +73,12 @@ export class BehaviorFormField extends BeanBehaviorBase<
       // onInput: propsBucket.onInput !== undefined
       //   ? (propsBucket.onInput ?? undefined)
       //   : (propsBucket.displayValueUpdateTiming !== 'change' ? onSetDisplayValueDefault : undefined),
-      'onBlur': propsBucket.onBlur !== undefined
-        ? (propsBucket.onBlur ?? undefined)
-        : (_e: Event) => {
-            field.api.handleBlur();
-          },
+      'onBlur':
+        propsBucket.onBlur !== undefined
+          ? (propsBucket.onBlur ?? undefined)
+          : (_e: Event) => {
+              field.api.handleBlur();
+            },
     };
     // slots
     const slots: any = {};

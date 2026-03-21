@@ -1,6 +1,28 @@
 {
   "name": "zova-module-quasar-adapter",
   "version": "5.0.0",
+  "description": "quasar",
+  "keywords": [
+    "Zova Module"
+  ],
+  "author": "zhennann",
+  "files": [
+    "dist"
+  ],
+  "type": "module",
+  "exports": {
+    ".": {
+      "types": [
+        "./src/index.ts",
+        "./dist/index.d.ts"
+      ],
+      "import": "./src/index.ts",
+      "default": "./dist/index.js"
+    },
+    "./*": "./*"
+  },
+  "scripts": {},
+  "dependencies": {},
   "title": "quasar-adapter",
   "zovaModule": {
     "capabilities": {
@@ -19,27 +41,5 @@
         }
       ]
     }
-  },
-  "type": "module",
-  "exports": {
-    ".": {
-      "types": [
-        "./src/index.ts",
-        "./dist/index.d.ts"
-      ],
-      "import": "./src/index.ts",
-      "default": "./dist/index.js"
-    },
-    "./*": "./*"
-  },
-  "description": "quasar",
-  "keywords": [
-    "Zova Module"
-  ],
-  "author": "zhennann",
-  "files": [
-    "dist"
-  ],
-  "scripts": {},
-  "dependencies": {}
+  }
 }

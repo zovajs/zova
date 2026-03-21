@@ -1,11 +1,12 @@
 import type { CmdOptions } from '@cabloy/cli';
+
+import { BeanCliBase } from '@cabloy/cli';
+import compressing from 'compressing';
+import fse from 'fs-extra';
 import fs from 'node:fs';
 import { createRequire } from 'node:module';
 import os from 'node:os';
 import path from 'node:path';
-import { BeanCliBase } from '@cabloy/cli';
-import compressing from 'compressing';
-import fse from 'fs-extra';
 import { rimraf } from 'rimraf';
 import urllib from 'urllib';
 // import { __ThisSetName__ } from '../this.ts';

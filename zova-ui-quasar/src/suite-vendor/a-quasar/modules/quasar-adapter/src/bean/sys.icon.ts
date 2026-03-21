@@ -71,8 +71,7 @@ export class SysIcon extends BeanBase {
         () =>
           `q-icon${
             props.left === true ? ' on-left' : '' // TODO Qv3: drop this
-          }${props.right === true ? ' on-right' : ''
-          }${props.color !== void 0 ? ` text-${props.color}` : ''}`,
+          }${props.right === true ? ' on-right' : ''}${props.color !== void 0 ? ` text-${props.color}` : ''}`,
       );
 
       function _computeType() {

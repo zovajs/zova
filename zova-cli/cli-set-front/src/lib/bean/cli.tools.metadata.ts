@@ -1,8 +1,9 @@
-import path from 'node:path';
 import { BeanCliBase } from '@cabloy/cli';
 import { getOnionMetasMeta, getOnionScenesMeta } from '@cabloy/module-info';
 import { toUpperCaseFirstChar } from '@cabloy/word-utils';
 import fse from 'fs-extra';
+import path from 'node:path';
+
 import { loadJSONFile, saveJSONFile } from '../common/utils.ts';
 import { generateBeanGenerals } from './toolsMetadata/generateBeanGenerals.ts';
 import { generateConfig, generateConstant, generateError, generateLocale1, generateLocale2 } from './toolsMetadata/generateConfig.ts';
@@ -33,9 +34,7 @@ export class CliToolsMetadata extends BeanCliBase {
     let moduleNames = argv._;
     const force = argv.force ?? moduleNames.length > 0;
     if (moduleNames.length === 0) {
-      moduleNames = this.modulesMeta.modulesArray
-        .filter(item => !item.info.node_modules)
-        .map(item => item.info.relativeName);
+      moduleNames = this.modulesMeta.modulesArray.filter(item => !item.info.node_modules).map(item => item.info.relativeName);
     }
     const total = moduleNames.length;
     for (let index = 0; index < total; index++) {
@@ -80,13 +79,7 @@ export class CliToolsMetadata extends BeanCliBase {
       content += await generateOnions(globFilesScene, sceneName, sceneMeta, moduleName, modulePath);
       // scope resources
       if (sceneMeta.scopeResource) {
-        const contentScopeResource = await generateScopeResources(
-          globFilesScene,
-          sceneName,
-          sceneMeta,
-          moduleName,
-          modulePath,
-        );
+        const contentScopeResource = await generateScopeResources(globFilesScene, sceneName, sceneMeta, moduleName, modulePath);
         if (contentScopeResource) {
           content += contentScopeResource;
           scopeResources[sceneName] = `IModule${toUpperCaseFirstChar(sceneName)}`;

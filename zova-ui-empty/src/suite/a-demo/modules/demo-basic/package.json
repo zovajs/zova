@@ -1,13 +1,17 @@
 {
   "name": "zova-module-demo-basic",
-  "title": "demo-basic",
-  "type": "module",
   "version": "5.0.0",
   "description": "demo basic",
-  "author": "zhennann",
   "keywords": [
     "Zova Module"
   ],
+  "author": "zhennann",
+  "files": [
+    "dist",
+    "mock",
+    "rest"
+  ],
+  "type": "module",
   "exports": {
     ".": {
       "types": [
@@ -19,11 +23,7 @@
     },
     "./*": "./*"
   },
-  "files": [
-    "dist",
-    "mock",
-    "rest"
-  ],
   "scripts": {},
-  "dependencies": {}
+  "dependencies": {},
+  "title": "demo-basic"
 }

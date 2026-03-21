@@ -1,13 +1,18 @@
 {
   "name": "zova-module-home-icon",
-  "type": "module",
   "version": "5.0.0",
-  "title": "home-icon",
   "description": "icon",
-  "author": "zhennann",
   "keywords": [
     "Zova Module"
   ],
+  "author": "zhennann",
+  "files": [
+    "dist",
+    "icons",
+    "mock",
+    "rest"
+  ],
+  "type": "module",
   "exports": {
     ".": {
       "types": [
@@ -19,12 +24,7 @@
     },
     "./*": "./*"
   },
-  "files": [
-    "dist",
-    "icons",
-    "mock",
-    "rest"
-  ],
   "scripts": {},
-  "dependencies": {}
+  "dependencies": {},
+  "title": "home-icon"
 }

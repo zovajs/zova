@@ -1,5 +1,6 @@
 import type { VNode } from 'vue';
 import type { IDecoratorBehaviorOptions, NextBehavior } from 'zova-module-a-behavior';
+
 import { BeanBehaviorBase, Behavior } from 'zova-module-a-behavior';
 
 export interface IBehaviorPropsInputFormFieldLayout {}

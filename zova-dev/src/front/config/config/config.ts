@@ -1,5 +1,6 @@
 import type { ILocaleRecord, ZovaConfigOptional, ZovaSys } from 'zova';
 import type { IThemeRecord } from 'zova-module-a-style';
+
 import { colorizer, combine, errors, splatter, timestamp } from '@cabloy/logger';
 import { formatLoggerConsole, formatLoggerFilter } from 'zova';
 
@@ -29,7 +30,7 @@ export default function (sys: ZovaSys) {
 
   // api
   config.api = {
-    baseURL: process.env.SERVER ? (env.SSR_API_BASE_URL || env.API_BASE_URL) : env.API_BASE_URL,
+    baseURL: process.env.SERVER ? env.SSR_API_BASE_URL || env.API_BASE_URL : env.API_BASE_URL,
     prefix: env.API_PREFIX,
     jwt: env.API_JWT !== 'false',
   };

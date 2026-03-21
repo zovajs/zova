@@ -31,7 +31,7 @@ export class ServiceTestA extends BeanBase {
 | constant | Constant of Module        |
 | locale   | I18n of Module            |
 | error    | Error exception of Module |
-| api  | Api of Module     |
+| api      | Api of Module             |
 
 ## How to obtain Scope Instance cross-module?
 

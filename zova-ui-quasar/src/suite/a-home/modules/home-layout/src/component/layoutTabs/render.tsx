@@ -1,6 +1,7 @@
 import { QBtn, QDrawer, QHeader, QLayout, QPageContainer, QToolbar, QToolbarTitle } from 'quasar';
 import { BeanRenderBase, Use } from 'zova';
 import { Render } from 'zova-module-a-bean';
+
 import { RenderContent } from './render.content.jsx';
 import { RenderMenu } from './render.menu.jsx';
 import { RenderSidebar } from './render.sidebar.jsx';
@@ -37,9 +38,7 @@ export class RenderLayoutTabs extends BeanRenderBase {
           {this.$$renderMenu.render()}
         </QDrawer>
 
-        <QPageContainer>
-          {this.$$renderContent.render()}
-        </QPageContainer>
+        <QPageContainer>{this.$$renderContent.render()}</QPageContainer>
         <div class="__ssr_placeholder__"></div>
       </QLayout>
     );

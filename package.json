@@ -1,27 +1,23 @@
 {
   "name": "zova",
-  "type": "module",
   "private": true,
-  "packageManager": "pnpm@10.19.0",
   "description": "A vue3 framework with ioc",
-  "author": "zhennann",
-  "license": "MIT",
+  "keywords": [
+    "ioc",
+    "vue3",
+    "zova"
+  ],
   "homepage": "https://github.com/cabloy/zova#readme",
+  "bugs": {
+    "url": "https://github.com/cabloy/zova/issues"
+  },
+  "license": "MIT",
+  "author": "zhennann",
   "repository": {
     "type": "git",
     "url": "git+https://github.com/cabloy/zova.git"
   },
-  "bugs": {
-    "url": "https://github.com/cabloy/zova/issues"
-  },
-  "keywords": [
-    "vue3",
-    "ioc",
-    "zova"
-  ],
-  "engines": {
-    "node": ">=22.12.0"
-  },
+  "type": "module",
   "scripts": {
     "init": "pnpm install --no-frozen-lockfile && cd ./zova-cli && pnpm install --no-frozen-lockfile && cd .. && npm run zova-dev-deps && cd ./zova-dev && pnpm install --no-frozen-lockfile",
     "zova-dev-deps": "cd ./zova-dev && node ../zova-cli/cli/src/bin/zova.ts :tools:deps",
@@ -38,16 +34,20 @@
     "@types/fs-extra": "^11.0.4",
     "@types/mocha": "^10.0.6",
     "@types/node": "^22.10.2",
-    "oxfmt": "^0.41.0",
-    "oxlint": "^1.56.0",
     "lerna": "=8.1.2",
     "minimist": "^1.2.8",
+    "oxfmt": "^0.41.0",
+    "oxlint": "^1.56.0",
     "textlint": "^14.8.0",
     "textlint-rule-ja-space-between-half-and-full-width": "^2.4.2",
     "typedoc": "^0.25.13",
     "typescript": "^5.9.3",
     "vitepress": "^1.1.4"
   },
+  "engines": {
+    "node": ">=22.12.0"
+  },
+  "packageManager": "pnpm@10.19.0",
   "pnpm": {
     "overrides": {}
   }

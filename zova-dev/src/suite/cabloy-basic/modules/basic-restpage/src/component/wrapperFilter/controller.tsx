@@ -1,4 +1,5 @@
 import type { ModelResource } from 'zova-module-rest-resource';
+
 import { isNilOrEmptyString } from '@cabloy/utils';
 import { BeanControllerBase, Use } from 'zova';
 import { Controller } from 'zova-module-a-bean';

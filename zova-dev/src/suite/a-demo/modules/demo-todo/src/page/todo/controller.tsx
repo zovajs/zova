@@ -1,10 +1,12 @@
-import type { ApiTodoEntity } from '../../api/todo.js';
 import { RouterLink } from '@cabloy/vue-router';
 import { withModifiers } from 'vue';
 import { BeanControllerPageBase, Use, uuid } from 'zova';
 import { Controller } from 'zova-module-a-bean';
 import { $QueryAutoLoad } from 'zova-module-a-model';
 import { ZPage } from 'zova-module-home-base';
+
+import type { ApiTodoEntity } from '../../api/todo.js';
+
 import { ModelTodo } from '../../model/todo.js';
 
 @Controller()
@@ -54,8 +56,7 @@ export class ControllerPageTodo extends BeanControllerPageBase {
         {queryTodoCurrent?.data && (
           <div role="alert" class="alert alert-success">
             <div>
-              Current:
-              {' '}
+              Current:{' '}
               <RouterLink to={this.$router.getPagePath('/demo/todo/item/:id', { params: { id: queryTodoCurrent?.data?.id } })}>
                 {queryTodoCurrent?.data?.title}
               </RouterLink>

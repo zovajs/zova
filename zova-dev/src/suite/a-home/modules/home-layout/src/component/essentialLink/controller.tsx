@@ -34,11 +34,7 @@ export class ControllerEssentialLink extends BeanControllerBase {
       );
     }
     if (!this.$props.to) {
-      return (
-        <a href="#">
-          {domContent}
-        </a>
-      );
+      return <a href="#">{domContent}</a>;
     }
     return <RouterLink to={this.$props.to}>{domContent}</RouterLink>;
   }

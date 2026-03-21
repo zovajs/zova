@@ -1,5 +1,6 @@
 import { BeanBase } from 'zova';
 import { ApiSchema, IApiSchemaOptions } from 'zova-module-a-api';
+
 import { ApiApiHomeBasePermissionretrievePermissionsPath } from '../api/homeBasePermission.js';
 
 @ApiSchema()

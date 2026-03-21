@@ -31,7 +31,6 @@ export interface IDecoratorUseOptions {
   - Optional
   - 通过注册名注入
 - injectionScope: `app/ctx/new/host/skipSelf`
-
   - Optional
   - 缺省值：使用 Bean 在定义时指定的值
 

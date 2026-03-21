@@ -1,4 +1,5 @@
 import type { ControllerPageResource, ModelResource } from 'zova-module-rest-resource';
+
 import { celEnvBase } from '@cabloy/utils';
 import { createColumnHelper } from '@tanstack/table-core';
 import { Use } from 'zova';
@@ -6,6 +7,7 @@ import { Controller } from 'zova-module-a-bean';
 import { $QueriesAutoLoad } from 'zova-module-a-model';
 import { ITablePaged, ITableQuery, ITableResPaged } from 'zova-module-a-openapi';
 import { BeanControllerTableBase, ControllerTable, TypeTableGetColumnsNext } from 'zova-module-a-table';
+
 import { IJsxRenderContextPage, IPageScope } from '../../types/page.js';
 
 // @ts-ignore ignore
@@ -103,11 +105,13 @@ export class ControllerRestPage<TData extends {} = {}> extends BeanControllerTab
     const columnHelper = createColumnHelper<TData>();
     const id = 'actions';
     const columnRender = await $$table.createColumnRender(id, 'actionOperationsRow');
-    columns.push(columnHelper.display({
-      id: 'actions',
-      header: () => this.scope.locale.TableActions(),
-      cell: columnRender,
-    }));
+    columns.push(
+      columnHelper.display({
+        id: 'actions',
+        header: () => this.scope.locale.TableActions(),
+        cell: columnRender,
+      }),
+    );
     return columns;
   }
 

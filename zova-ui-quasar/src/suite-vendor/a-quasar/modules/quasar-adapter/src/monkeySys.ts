@@ -1,7 +1,9 @@
 import type { IMonkeySysInitialize } from 'zova';
 import type { IOpenapiOptionsResourceMeta } from 'zova-module-a-openapi';
+
 import { QInput } from 'quasar';
 import { BeanSimple, deepExtend } from 'zova';
+
 import { SysIcon } from './bean/sys.icon.js';
 
 export class MonkeySys extends BeanSimple implements IMonkeySysInitialize {
@@ -53,11 +55,6 @@ export class MonkeySys extends BeanSimple implements IMonkeySysInitialize {
     };
     // rest
     const scopeRestConfig = this.sys.util.getModuleConfigSafe('a-openapi');
-    scopeRestConfig.resourceMeta = deepExtend(
-      {},
-      scopeRestConfig.base,
-      configCustom,
-      scopeRestConfig.resourceMeta,
-    );
+    scopeRestConfig.resourceMeta = deepExtend({}, scopeRestConfig.base, configCustom, scopeRestConfig.resourceMeta);
   }
 }

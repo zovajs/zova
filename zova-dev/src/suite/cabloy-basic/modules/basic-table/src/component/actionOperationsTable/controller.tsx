@@ -1,4 +1,5 @@
 import type { IJsxRenderContextPage } from 'zova-module-basic-restpage';
+
 import { BeanControllerBase, Use } from 'zova';
 import { Controller } from 'zova-module-a-bean';
 
@@ -32,10 +33,6 @@ export class ControllerActionOperationsTable extends BeanControllerBase {
   }
 
   protected render() {
-    return (
-      <div>
-        {this._renderCreate()}
-      </div>
-    );
+    return <div>{this._renderCreate()}</div>;
   }
 }

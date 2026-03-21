@@ -1,4 +1,5 @@
 import type { IDecoratorThemeOptions, IThemeApplyParams, IThemeApplyResult, IThemeBase, ThemeToken } from 'zova-module-a-style';
+
 import { BeanThemeBase, Theme } from 'zova-module-a-style';
 
 export interface IThemeOptionsDefault extends IDecoratorThemeOptions {}

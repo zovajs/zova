@@ -1,4 +1,5 @@
 import type { BeanBase, BeanContainer, IMonkeyBeanInit } from 'zova';
+
 import { BeanSimple } from 'zova';
 
 export class Monkey extends BeanSimple implements IMonkeyBeanInit {

@@ -40,12 +40,7 @@ export class ControllerPageStyle extends BeanControllerPageBase {
         </QBtn>
         <hr></hr>
         <div>
-          <QOptionGroup
-            options={this.themeDarkOptions}
-            type="radio"
-            inline
-            v-model={this.$theme.darkMode}
-          ></QOptionGroup>
+          <QOptionGroup options={this.themeDarkOptions} type="radio" inline v-model={this.$theme.darkMode}></QOptionGroup>
         </div>
         <hr></hr>
         <div>

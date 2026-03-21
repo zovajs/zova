@@ -1,6 +1,6 @@
-import path from 'node:path';
 import fse from 'fs-extra';
 import { globby } from 'globby';
+import path from 'node:path';
 
 export async function generateConfig(modulePath: string) {
   const configFile = path.join(modulePath, 'src/config/config.ts');

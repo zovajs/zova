@@ -2,9 +2,9 @@ import { defineFakeRoute } from 'vite-plugin-fake-server-turbo/client';
 
 const __MenuItems = [
   { order: 0, title: 'Home', caption: '', icon: '::home', link: '/' },
-  {  title: 'State', caption: 'ref, computed', icon: '', link: '/demo/basic/state' },
-  {  title: 'Component', caption: 'props, emits, slots', icon: '', link: '/demo/basic/component' },
-  {  title: 'GitHub', caption: 'github.com/zovajs/zova', icon: ':social:github', external: true, link: 'https://github.com/zovajs/zova' },
+  { title: 'State', caption: 'ref, computed', icon: '', link: '/demo/basic/state' },
+  { title: 'Component', caption: 'props, emits, slots', icon: '', link: '/demo/basic/component' },
+  { title: 'GitHub', caption: 'github.com/zovajs/zova', icon: ':social:github', external: true, link: 'https://github.com/zovajs/zova' },
 ];
 const __MenuData = { menus: __MenuItems };
 

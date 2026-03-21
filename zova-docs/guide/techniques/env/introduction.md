@@ -20,7 +20,7 @@ Zova uses [dotenv](https://github.com/motdotla/dotenv) to load additional enviro
 | Name    | Description                                                                          |
 | ------- | ------------------------------------------------------------------------------------ |
 | mode    | 'development' \| 'production' \| string;                                             |
-| flavor  | 'web' \| 'admin' \| string;                                                        |
+| flavor  | 'web' \| 'admin' \| string;                                                          |
 | appMode | 'spa' \| 'ssr' \| 'pwa' \| 'cordova' \| 'capacitor' \| 'electron' \| 'bex' \| string |
 
 - `appMode`: for more info, see [Commands List: Mode](https://quasar.dev/quasar-cli-vite/commands-list#mode)
@@ -96,10 +96,10 @@ To further achieve out-of-box functionality, Zova provides several built-in env 
 
 ### Dev server
 
-| Name            | Description                                                                                    |
-| --------------- | ---------------------------------------------------------------------------------------------- |
+| Name                | Description                                                                                    |
+| ------------------- | ---------------------------------------------------------------------------------------------- |
 | DEV_SERVER_HOSTNAME | Dev server host [Vite: server.host](https://vitejs.dev/config/server-options.html#server-host) |
-| DEV_SERVER_PORT | Dev server port                                                                                |
+| DEV_SERVER_PORT     | Dev server port                                                                                |
 
 ### Build
 

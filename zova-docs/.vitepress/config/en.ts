@@ -1,4 +1,5 @@
 import type { DefaultTheme } from 'vitepress';
+
 import { defineConfig } from 'vitepress';
 
 export const en = defineConfig({

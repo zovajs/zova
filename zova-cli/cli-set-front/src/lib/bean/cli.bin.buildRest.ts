@@ -1,9 +1,10 @@
 import type { ZovaConfigMeta, ZovaMetaAppMode, ZovaMetaFlavor, ZovaMetaMode } from '@cabloy/module-info';
 import type { ZovaViteConfigOptions } from 'zova-vite';
-import path from 'node:path';
+
 import { BeanCliBase } from '@cabloy/cli';
 import { camelToKebab, replaceTemplate } from '@cabloy/word-utils';
 import fse from 'fs-extra';
+import path from 'node:path';
 import { rimraf } from 'rimraf';
 import { build } from 'tsdown';
 import { createConfigUtils } from 'zova-vite';
@@ -95,10 +96,7 @@ export class CliBinBuildRest extends BeanCliBase {
       },
     });
     // package.json
-    await fse.copyFile(
-      path.join(srcDir, 'package.json'),
-      path.join(outDir, 'package.json'),
-    );
+    await fse.copyFile(path.join(srcDir, 'package.json'), path.join(outDir, 'package.json'));
     // release
     const outReleasesDir = path.join(projectPath, 'dist-releases', `rest-${flavor}-${process.env.APP_VERSION}`);
     await fse.copy(outDir, outReleasesDir);
@@ -118,10 +116,7 @@ export class CliBinBuildRest extends BeanCliBase {
     // env
     const env = configUtils.loadEnvs();
     // package.json
-    const pkgContent = replaceTemplate(
-      __template_package,
-      { Name: bundleName, Version: env.APP_VERSION },
-    );
+    const pkgContent = replaceTemplate(__template_package, { Name: bundleName, Version: env.APP_VERSION });
     await fse.writeFile(path.join(srcDir, 'package.json'), pkgContent!);
   }
 
@@ -202,10 +197,6 @@ function _copyToTarget(outDir: string, target: string | undefined, bundleNameCop
   for (const dir of dirs) {
     const outReleasesDirCopy = path.join(dir, bundleNameCopy);
     fse.removeSync(outReleasesDirCopy);
-    fse.copySync(
-      outDir,
-      outReleasesDirCopy,
-      { preserveTimestamps: true },
-    );
+    fse.copySync(outDir, outReleasesDirCopy, { preserveTimestamps: true });
   }
 }

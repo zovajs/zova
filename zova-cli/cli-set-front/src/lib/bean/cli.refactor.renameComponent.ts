@@ -1,10 +1,11 @@
 import type { NameMeta } from '@cabloy/cli';
 import type { IModuleInfo } from '@cabloy/module-info';
-import path from 'node:path';
+
 import { BeanCliBase } from '@cabloy/cli';
 import fse from 'fs-extra';
 import { globbySync } from 'globby';
 import gogocode from 'gogocode';
+import path from 'node:path';
 
 declare module '@cabloy/cli' {
   interface ICommandArgv {
@@ -64,12 +65,7 @@ export class CliRefactorRenameComponent extends BeanCliBase {
     const restDir = path.join(targetDir, 'rest');
     await fse.remove(restDir);
     // rename
-    const componentDirNew = path.join(
-      targetDir,
-      'src',
-      argv.nameMeta.directory === 'page' ? 'page' : 'component',
-      argv.componentNameNew,
-    );
+    const componentDirNew = path.join(targetDir, 'src', argv.nameMeta.directory === 'page' ? 'page' : 'component', argv.componentNameNew);
     await fse.rename(componentDir, componentDirNew);
   }
 
@@ -117,18 +113,9 @@ export class CliRefactorRenameComponent extends BeanCliBase {
     const typeMiddleFix = argv.nameMeta.directory === 'page' ? 'Page' : '';
     //
     const replaces: Array<[string, string]> = [];
-    replaces.push([
-      `Controller${typeMiddleFix}${argv.nameMeta.shortCapitalize}`,
-      `Controller${typeMiddleFix}${argv.componentNameNewCapitalize}`,
-    ]);
-    replaces.push([
-      `Render${typeMiddleFix}${argv.nameMeta.shortCapitalize}`,
-      `Render${typeMiddleFix}${argv.componentNameNewCapitalize}`,
-    ]);
-    replaces.push([
-      `Style${typeMiddleFix}${argv.nameMeta.shortCapitalize}`,
-      `Style${typeMiddleFix}${argv.componentNameNewCapitalize}`,
-    ]);
+    replaces.push([`Controller${typeMiddleFix}${argv.nameMeta.shortCapitalize}`, `Controller${typeMiddleFix}${argv.componentNameNewCapitalize}`]);
+    replaces.push([`Render${typeMiddleFix}${argv.nameMeta.shortCapitalize}`, `Render${typeMiddleFix}${argv.componentNameNewCapitalize}`]);
+    replaces.push([`Style${typeMiddleFix}${argv.nameMeta.shortCapitalize}`, `Style${typeMiddleFix}${argv.componentNameNewCapitalize}`]);
     //
     const files = globbySync('*', {
       cwd: componentDir,

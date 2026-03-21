@@ -1,6 +1,8 @@
 import type { IDecoratorModelOptions } from 'zova-module-a-model';
-import type { ApiTodoIntertBody, ApiTodoUpdateBody } from '../api/todo.js';
+
 import { BeanModelBase, Model } from 'zova-module-a-model';
+
+import type { ApiTodoIntertBody, ApiTodoUpdateBody } from '../api/todo.js';
 
 export interface IModelOptionsTodo extends IDecoratorModelOptions {}
 

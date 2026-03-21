@@ -1,7 +1,9 @@
 import type { IModule } from '@cabloy/module-info';
 import type { BeanBase, BeanContainer, IMonkeyBeanInit, IMonkeyModule } from 'zova';
-import type { ModelPassport } from './model/passport.js';
+
 import { BeanSimple } from 'zova';
+
+import type { ModelPassport } from './model/passport.js';
 
 export class Monkey extends BeanSimple implements IMonkeyModule, IMonkeyBeanInit {
   private _moduleSelf: IModule;

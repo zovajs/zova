@@ -1,12 +1,16 @@
 {
   "name": "zova-module-home-index",
-  "type": "module",
   "version": "5.0.0",
-  "title": "Home Index",
-  "author": "zhennann",
   "keywords": [
     "Zova Module"
   ],
+  "author": "zhennann",
+  "files": [
+    "dist",
+    "mock",
+    "rest"
+  ],
+  "type": "module",
   "exports": {
     ".": {
       "types": [
@@ -18,11 +22,7 @@
     },
     "./*": "./*"
   },
-  "files": [
-    "dist",
-    "mock",
-    "rest"
-  ],
   "scripts": {},
-  "dependencies": {}
+  "dependencies": {},
+  "title": "Home Index"
 }

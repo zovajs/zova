@@ -1,6 +1,7 @@
 import type { VNode } from 'vue';
 import type { IComponentOptions } from 'zova';
 import type { IFormFieldOptions } from 'zova-module-a-form';
+
 import { BeanControllerBase } from 'zova';
 import { Controller } from 'zova-module-a-bean';
 import { ZFormField } from 'zova-module-a-form';
@@ -19,14 +20,7 @@ export class ControllerFormFieldTest extends BeanControllerBase {
   protected async __init__() {}
 
   protected render() {
-    const domField = this.$slotDefault
-      ? this.$slotDefault()
-      : (
-          <ZFormField
-            {...this.$props}
-            render="text"
-          ></ZFormField>
-        );
+    const domField = this.$slotDefault ? this.$slotDefault() : <ZFormField {...this.$props} render="text"></ZFormField>;
     return (
       <>
         {this.$props.slotHeader?.({ name: 'kevin' })}

@@ -1,4 +1,5 @@
 import type { IModuleMain } from 'zova';
+
 import { en, zhCN } from 'zod/locales';
 import { BeanSimple } from 'zova';
 

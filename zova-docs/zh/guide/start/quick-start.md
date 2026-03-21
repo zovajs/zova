@@ -29,7 +29,6 @@ $ zova :create:project projectName
 
 1. 直接在命令行执行`zova`创建一个项目，名称为`projectName`
 2. 命令行会列出模版列表，当前提供的模版如下：
-
    - zova + antdv
    - zova + element-plus
    - zova + quasar

@@ -1,5 +1,7 @@
-import type { paths } from './openapi/index.js';
 import { Api, BeanApiBase, IApiActionOptions } from 'zova-module-a-api';
+
+import type { paths } from './openapi/index.js';
+
 import { OpenApiBaseURL } from './openapi/index.js';
 
 /** Captcha_create */
@@ -9,7 +11,8 @@ export type ApiApiCaptchacreateMethod = 'post';
 export interface ApiApiCaptchacreateRequestBody {
   scene: string;
 }
-export type ApiApiCaptchacreateResponseBody = paths[ApiApiCaptchacreatePath][ApiApiCaptchacreateMethod]['responses']['200']['content']['application/json']['data'];
+export type ApiApiCaptchacreateResponseBody =
+  paths[ApiApiCaptchacreatePath][ApiApiCaptchacreateMethod]['responses']['200']['content']['application/json']['data'];
 
 /** Captcha_refresh */
 export const ApiApiCaptcharefreshPath = '/api/captcha/refresh';
@@ -19,7 +22,8 @@ export interface ApiApiCaptcharefreshRequestBody {
   id: string;
   scene: string;
 }
-export type ApiApiCaptcharefreshResponseBody = paths[ApiApiCaptcharefreshPath][ApiApiCaptcharefreshMethod]['responses']['200']['content']['application/json']['data'];
+export type ApiApiCaptcharefreshResponseBody =
+  paths[ApiApiCaptcharefreshPath][ApiApiCaptcharefreshMethod]['responses']['200']['content']['application/json']['data'];
 
 /** Captcha_verifyImmediate */
 export const ApiApiCaptchaverifyImmediatePath = '/api/captcha/verifyImmediate';
@@ -29,14 +33,12 @@ export interface ApiApiCaptchaverifyImmediateRequestBody {
   id: string;
   token?: unknown;
 }
-export type ApiApiCaptchaverifyImmediateResponseBody = paths[ApiApiCaptchaverifyImmediatePath][ApiApiCaptchaverifyImmediateMethod]['responses']['200']['content']['application/json']['data'];
+export type ApiApiCaptchaverifyImmediateResponseBody =
+  paths[ApiApiCaptchaverifyImmediatePath][ApiApiCaptchaverifyImmediateMethod]['responses']['200']['content']['application/json']['data'];
 
 @Api()
 export class ApiCaptcha extends BeanApiBase {
-  create(
-    body: ApiApiCaptchacreateRequestBody,
-    options?: IApiActionOptions,
-  ) {
+  create(body: ApiApiCaptchacreateRequestBody, options?: IApiActionOptions) {
     return this.$fetch.post<any, ApiApiCaptchacreateResponseBody>(
       ApiApiCaptchacreatePath,
       body,
@@ -44,10 +46,7 @@ export class ApiCaptcha extends BeanApiBase {
     );
   }
 
-  refresh(
-    body: ApiApiCaptcharefreshRequestBody,
-    options?: IApiActionOptions,
-  ) {
+  refresh(body: ApiApiCaptcharefreshRequestBody, options?: IApiActionOptions) {
     return this.$fetch.post<any, ApiApiCaptcharefreshResponseBody>(
       ApiApiCaptcharefreshPath,
       body,
@@ -55,10 +54,7 @@ export class ApiCaptcha extends BeanApiBase {
     );
   }
 
-  verifyImmediate(
-    body: ApiApiCaptchaverifyImmediateRequestBody,
-    options?: IApiActionOptions,
-  ) {
+  verifyImmediate(body: ApiApiCaptchaverifyImmediateRequestBody, options?: IApiActionOptions) {
     return this.$fetch.post<any, ApiApiCaptchaverifyImmediateResponseBody>(
       ApiApiCaptchaverifyImmediatePath,
       body,

@@ -1,7 +1,8 @@
-import Counter from '@/components/Counter.vue';
 import { BeanControllerPageBase } from 'zova';
 import { Controller } from 'zova-module-a-bean';
 import { ZPage } from 'zova-module-home-base';
+
+import Counter from '@/components/Counter.vue';
 
 @Controller()
 export class ControllerPageLegacy extends BeanControllerPageBase {

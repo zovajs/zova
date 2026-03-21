@@ -1,5 +1,7 @@
 import type { BeanBase, BeanContainer, IMonkeyAppClose, IMonkeyAppInitialize, IMonkeyBeanInit } from 'zova';
+
 import { BeanSimple } from 'zova';
+
 import { definePropertyScopeBase } from './lib/utils.js';
 import { ServiceRouterGuards } from './service/routerGuards.js';
 import { ServiceSsr } from './service/ssr.js';

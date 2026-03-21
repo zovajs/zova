@@ -6,8 +6,22 @@ const __MenuItems = [
   { group: 'basic', title: 'Component', caption: 'props, emits, slots', icon: '', link: '/demo/basic/component' },
   { group: 'basic', title: 'CSS-in-JS', caption: 'Style & Theme', icon: '', link: '/demo/basic/style' },
   { group: 'quasar', title: 'Docs', caption: 'quasar.dev', icon: ':social:school', external: true, link: 'https://quasar.dev' },
-  { group: 'quasar', title: 'GitHub', caption: 'github.com/quasarframework', icon: ':editor:code', external: true, link: 'https://github.com/quasarframework' },
-  { group: 'quasar', title: 'Quasar Awesome', caption: 'Community Quasar projects', icon: '::heart', external: true, link: 'https://awesome.quasar.dev' },
+  {
+    group: 'quasar',
+    title: 'GitHub',
+    caption: 'github.com/quasarframework',
+    icon: ':editor:code',
+    external: true,
+    link: 'https://github.com/quasarframework',
+  },
+  {
+    group: 'quasar',
+    title: 'Quasar Awesome',
+    caption: 'Community Quasar projects',
+    icon: '::heart',
+    external: true,
+    link: 'https://awesome.quasar.dev',
+  },
 ];
 const __MenuGroups = [
   { order: 1, name: 'basic', title: 'Basic' },

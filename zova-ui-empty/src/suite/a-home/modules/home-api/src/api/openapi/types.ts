@@ -1070,35 +1070,39 @@ export interface components {
       name: string;
       age?: number | undefined;
       scores?: number | undefined;
-      posts?: {
-        /** @description Title */
-        title: string;
-      }[] | undefined;
-      roles?: {
-        id: number | string;
-        deleted?: boolean | undefined;
-      }[] | undefined;
+      posts?:
+        | {
+            /** @description Title */
+            title: string;
+          }[]
+        | undefined;
+      roles?:
+        | {
+            id: number | string;
+            deleted?: boolean | undefined;
+          }[]
+        | undefined;
     };
     'test-vona.entity.product': {
       /**
-             * Format: date
-             * @description Created At
-             */
+       * Format: date
+       * @description Created At
+       */
       createdAt: string;
       /**
-             * Format: date
-             * @description Updated At
-             */
+       * Format: date
+       * @description Updated At
+       */
       updatedAt: string;
       /**
-             * @description Deleted
-             * @default false
-             */
+       * @description Deleted
+       * @default false
+       */
       deleted?: boolean;
       /**
-             * @description Instance ID
-             * @default 0
-             */
+       * @description Instance ID
+       * @default 0
+       */
       iid?: number;
       /** @description ID */
       id: number | string;
@@ -1112,32 +1116,34 @@ export interface components {
       amount: number;
       orderId: number | string;
     };
-    'home-user.dto.passport': {
-      user: components['schemas']['home-user.entity.user'];
-      auth: components['schemas']['a-auth.dto.auth'];
-      roles: components['schemas']['home-user.entity.role'][];
-    } | undefined;
+    'home-user.dto.passport':
+      | {
+          user: components['schemas']['home-user.entity.user'];
+          auth: components['schemas']['a-auth.dto.auth'];
+          roles: components['schemas']['home-user.entity.role'][];
+        }
+      | undefined;
     /** @description User */
     'home-user.entity.user': {
       /**
-             * Format: date
-             * @description Created At
-             */
+       * Format: date
+       * @description Created At
+       */
       createdAt: string;
       /**
-             * Format: date
-             * @description Updated At
-             */
+       * Format: date
+       * @description Updated At
+       */
       updatedAt: string;
       /**
-             * @description Deleted
-             * @default false
-             */
+       * @description Deleted
+       * @default false
+       */
       deleted?: boolean;
       /**
-             * @description Instance ID
-             * @default 0
-             */
+       * @description Instance ID
+       * @default 0
+       */
       iid?: number;
       /** @description ID */
       id: number | string;
@@ -1150,9 +1156,9 @@ export interface components {
       /** @description Mobile */
       mobile?: string | undefined;
       /**
-             * @description Activated
-             * @default false
-             */
+       * @description Activated
+       * @default false
+       */
       activated?: boolean;
       /** @description Language */
       locale?: string | undefined;
@@ -1173,24 +1179,24 @@ export interface components {
     /** @description Role */
     'home-user.entity.role': {
       /**
-             * Format: date
-             * @description Created At
-             */
+       * Format: date
+       * @description Created At
+       */
       createdAt: string;
       /**
-             * Format: date
-             * @description Updated At
-             */
+       * Format: date
+       * @description Updated At
+       */
       updatedAt: string;
       /**
-             * @description Deleted
-             * @default false
-             */
+       * @description Deleted
+       * @default false
+       */
       deleted?: boolean;
       /**
-             * @description Instance ID
-             * @default 0
-             */
+       * @description Instance ID
+       * @default 0
+       */
       iid?: number;
       /** @description ID */
       id: number | string;
@@ -1250,10 +1256,12 @@ export interface components {
       target?: string | undefined;
       meta?: components['schemas']['a-menu.dto.menuItemMeta'];
     };
-    'a-menu.dto.menuItemMeta': {
-      params?: unknown;
-      query?: unknown;
-    } | undefined;
+    'a-menu.dto.menuItemMeta':
+      | {
+          params?: unknown;
+          query?: unknown;
+        }
+      | undefined;
     'a-menu.dto.menuGroup': {
       name: string;
       title?: string | undefined;
@@ -1277,9 +1285,9 @@ export interface components {
       /** @description Price */
       price: number;
       /**
-             * @description Quantity
-             * @default 0
-             */
+       * @description Quantity
+       * @default 0
+       */
       quantity?: number;
       /** @description Amount */
       amount: number;
@@ -1291,24 +1299,24 @@ export interface components {
     'start-test.dto.productQueryRes': {
       list: {
         /**
-                 * Format: date
-                 * @description Created At
-                 */
+         * Format: date
+         * @description Created At
+         */
         createdAt: string;
         /**
-                 * Format: date
-                 * @description Updated At
-                 */
+         * Format: date
+         * @description Updated At
+         */
         updatedAt: string;
         /**
-                 * @description Deleted
-                 * @default false
-                 */
+         * @description Deleted
+         * @default false
+         */
         deleted?: boolean;
         /**
-                 * @description Instance ID
-                 * @default 0
-                 */
+         * @description Instance ID
+         * @default 0
+         */
         iid?: number;
         /** @description ID */
         id: number | string;
@@ -1319,9 +1327,9 @@ export interface components {
         /** @description Price */
         price: number;
         /**
-                 * @description Quantity
-                 * @default 0
-                 */
+         * @description Quantity
+         * @default 0
+         */
         quantity?: number;
         /** @description Amount */
         amount: number;
@@ -1334,45 +1342,47 @@ export interface components {
       pageNo: number;
     };
     /** @description Product Info */
-    'start-test.entity.product': {
-      /**
-             * Format: date
-             * @description Created At
-             */
-      createdAt: string;
-      /**
-             * Format: date
-             * @description Updated At
-             */
-      updatedAt: string;
-      /**
-             * @description Deleted
-             * @default false
-             */
-      deleted?: boolean;
-      /**
-             * @description Instance ID
-             * @default 0
-             */
-      iid?: number;
-      /** @description ID */
-      id: number | string;
-      /** @description Name */
-      name: string;
-      /** @description Description */
-      description?: string | undefined;
-      /** @description Price */
-      price: number;
-      /**
-             * @description Quantity
-             * @default 0
-             */
-      quantity?: number;
-      /** @description Amount */
-      amount: number;
-      /** @description Custom */
-      _custom?: unknown;
-    } | undefined;
+    'start-test.entity.product':
+      | {
+          /**
+           * Format: date
+           * @description Created At
+           */
+          createdAt: string;
+          /**
+           * Format: date
+           * @description Updated At
+           */
+          updatedAt: string;
+          /**
+           * @description Deleted
+           * @default false
+           */
+          deleted?: boolean;
+          /**
+           * @description Instance ID
+           * @default 0
+           */
+          iid?: number;
+          /** @description ID */
+          id: number | string;
+          /** @description Name */
+          name: string;
+          /** @description Description */
+          description?: string | undefined;
+          /** @description Price */
+          price: number;
+          /**
+           * @description Quantity
+           * @default 0
+           */
+          quantity?: number;
+          /** @description Amount */
+          amount: number;
+          /** @description Custom */
+          _custom?: unknown;
+        }
+      | undefined;
     /** @description Update Product */
     'start-test.dto.productUpdate': {
       /** @description Name */
@@ -1382,9 +1392,9 @@ export interface components {
       /** @description Price */
       price: number;
       /**
-             * @description Quantity
-             * @default 0
-             */
+       * @description Quantity
+       * @default 0
+       */
       quantity?: number;
       /** @description Amount */
       amount: number;
@@ -1425,24 +1435,24 @@ export interface components {
     };
     'cabloy-store.dto.cabloyModuleQueryResItem': {
       /**
-             * Format: date
-             * @description Created At
-             */
+       * Format: date
+       * @description Created At
+       */
       createdAt: string;
       /**
-             * Format: date
-             * @description Updated At
-             */
+       * Format: date
+       * @description Updated At
+       */
       updatedAt: string;
       /**
-             * @description Deleted
-             * @default false
-             */
+       * @description Deleted
+       * @default false
+       */
       deleted?: boolean;
       /**
-             * @description Instance ID
-             * @default 0
-             */
+       * @description Instance ID
+       * @default 0
+       */
       iid?: number;
       /** @description ID */
       id: number | string;
@@ -1473,52 +1483,54 @@ export interface components {
       /** @description Name */
       name: string;
     };
-    'cabloy-store.dto.cabloyModuleGet': {
-      /**
-             * Format: date
-             * @description Created At
-             */
-      createdAt: string;
-      /**
-             * Format: date
-             * @description Updated At
-             */
-      updatedAt: string;
-      /**
-             * @description Deleted
-             * @default false
-             */
-      deleted?: boolean;
-      /**
-             * @description Instance ID
-             * @default 0
-             */
-      iid?: number;
-      /** @description ID */
-      id: number | string;
-      /** @description Name */
-      name: string;
-      /** @description Title */
-      title: string;
-      /** @description Description */
-      description?: string | undefined;
-      /** @description Version */
-      version: string;
-      /** @description Repository */
-      repoUrl?: string | undefined;
-      /** @description Demo */
-      demoUrl?: string | undefined;
-      /** @description License */
-      license: number;
-      /** @description Price */
-      price?: number | undefined;
-      providerId: number | string;
-      /** @description Published */
-      published?: boolean | undefined;
-      content?: components['schemas']['cabloy-store.entity.cabloyModuleContent_c6e103f7cf035f2c8b2a66de341b2af9a91356ae_1816ff740d81c738ec055c7038bbd93beb9405a7'];
-      provider?: components['schemas']['cabloy-store.entity.cabloyProvider_2c7d642ee581efa300341e343180fbb0ecdc785d_1816ff740d81c738ec055c7038bbd93beb9405a7'];
-      _content?: unknown;
-    } | undefined;
+    'cabloy-store.dto.cabloyModuleGet':
+      | {
+          /**
+           * Format: date
+           * @description Created At
+           */
+          createdAt: string;
+          /**
+           * Format: date
+           * @description Updated At
+           */
+          updatedAt: string;
+          /**
+           * @description Deleted
+           * @default false
+           */
+          deleted?: boolean;
+          /**
+           * @description Instance ID
+           * @default 0
+           */
+          iid?: number;
+          /** @description ID */
+          id: number | string;
+          /** @description Name */
+          name: string;
+          /** @description Title */
+          title: string;
+          /** @description Description */
+          description?: string | undefined;
+          /** @description Version */
+          version: string;
+          /** @description Repository */
+          repoUrl?: string | undefined;
+          /** @description Demo */
+          demoUrl?: string | undefined;
+          /** @description License */
+          license: number;
+          /** @description Price */
+          price?: number | undefined;
+          providerId: number | string;
+          /** @description Published */
+          published?: boolean | undefined;
+          content?: components['schemas']['cabloy-store.entity.cabloyModuleContent_c6e103f7cf035f2c8b2a66de341b2af9a91356ae_1816ff740d81c738ec055c7038bbd93beb9405a7'];
+          provider?: components['schemas']['cabloy-store.entity.cabloyProvider_2c7d642ee581efa300341e343180fbb0ecdc785d_1816ff740d81c738ec055c7038bbd93beb9405a7'];
+          _content?: unknown;
+        }
+      | undefined;
     'cabloy-store.entity.cabloyModuleContent_c6e103f7cf035f2c8b2a66de341b2af9a91356ae_1816ff740d81c738ec055c7038bbd93beb9405a7': {
       /** @description ID */
       id: number | string;
@@ -1548,9 +1560,9 @@ export interface components {
     };
     'cabloy-store.entity.cabloyModuleContent_ff0869fb10e36144ce6da354ab0f63f1aaad2074_1816ff740d81c738ec055c7038bbd93beb9405a7': {
       /**
-             * @description Deleted
-             * @default false
-             */
+       * @description Deleted
+       * @default false
+       */
       deleted?: boolean | undefined;
       /** @description ID */
       id?: number | string | undefined;
@@ -1563,33 +1575,33 @@ export interface components {
       /** @description Description */
       description?: string | undefined;
       /**
-             * @description GitHub Account
-             * @default false
-             */
+       * @description GitHub Account
+       * @default false
+       */
       githubAccount?: boolean | undefined;
       userId?: number | string | undefined;
     };
     'cabloy-store.dto.cabloyProviderQueryRes': {
       list: {
         /**
-                 * Format: date
-                 * @description Created At
-                 */
+         * Format: date
+         * @description Created At
+         */
         createdAt: string;
         /**
-                 * Format: date
-                 * @description Updated At
-                 */
+         * Format: date
+         * @description Updated At
+         */
         updatedAt: string;
         /**
-                 * @description Deleted
-                 * @default false
-                 */
+         * @description Deleted
+         * @default false
+         */
         deleted?: boolean;
         /**
-                 * @description Instance ID
-                 * @default 0
-                 */
+         * @description Instance ID
+         * @default 0
+         */
         iid?: number;
         /** @description ID */
         id: number | string;
@@ -1598,9 +1610,9 @@ export interface components {
         /** @description Description */
         description?: string | undefined;
         /**
-                 * @description GitHub Account
-                 * @default false
-                 */
+         * @description GitHub Account
+         * @default false
+         */
         githubAccount?: boolean | undefined;
         userId?: number | string | undefined;
       }[];
@@ -1610,49 +1622,51 @@ export interface components {
       pageNo: number;
     };
     /** @description Provider */
-    'cabloy-store.entity.cabloyProvider': {
-      /**
-             * Format: date
-             * @description Created At
-             */
-      createdAt: string;
-      /**
-             * Format: date
-             * @description Updated At
-             */
-      updatedAt: string;
-      /**
-             * @description Deleted
-             * @default false
-             */
-      deleted?: boolean;
-      /**
-             * @description Instance ID
-             * @default 0
-             */
-      iid?: number;
-      /** @description ID */
-      id: number | string;
-      /** @description Name */
-      name: string;
-      /** @description Description */
-      description?: string | undefined;
-      /**
-             * @description GitHub Account
-             * @default false
-             */
-      githubAccount?: boolean | undefined;
-      userId?: number | string | undefined;
-    } | undefined;
+    'cabloy-store.entity.cabloyProvider':
+      | {
+          /**
+           * Format: date
+           * @description Created At
+           */
+          createdAt: string;
+          /**
+           * Format: date
+           * @description Updated At
+           */
+          updatedAt: string;
+          /**
+           * @description Deleted
+           * @default false
+           */
+          deleted?: boolean;
+          /**
+           * @description Instance ID
+           * @default 0
+           */
+          iid?: number;
+          /** @description ID */
+          id: number | string;
+          /** @description Name */
+          name: string;
+          /** @description Description */
+          description?: string | undefined;
+          /**
+           * @description GitHub Account
+           * @default false
+           */
+          githubAccount?: boolean | undefined;
+          userId?: number | string | undefined;
+        }
+      | undefined;
     'cabloy-store.dto.cabloyProviderUpdate': {
       /** @description Name */
       name: string;
       /** @description Description */
       description?: string | undefined;
       /**
-             * @description GitHub Account
-             * @default false
-             */
+       * @description GitHub Account
+       * @default false
+       */
       githubAccount?: boolean | undefined;
     };
     /** @description Create Product */
@@ -1664,9 +1678,9 @@ export interface components {
       /** @description Price */
       price: number;
       /**
-             * @description Quantity
-             * @default 0
-             */
+       * @description Quantity
+       * @default 0
+       */
       quantity?: number;
       /** @description Amount */
       amount: number;
@@ -1678,24 +1692,24 @@ export interface components {
     'test-rest.dto.productQueryRes': {
       list: {
         /**
-                 * Format: date
-                 * @description Created At
-                 */
+         * Format: date
+         * @description Created At
+         */
         createdAt: string;
         /**
-                 * Format: date
-                 * @description Updated At
-                 */
+         * Format: date
+         * @description Updated At
+         */
         updatedAt: string;
         /**
-                 * @description Deleted
-                 * @default false
-                 */
+         * @description Deleted
+         * @default false
+         */
         deleted?: boolean;
         /**
-                 * @description Instance ID
-                 * @default 0
-                 */
+         * @description Instance ID
+         * @default 0
+         */
         iid?: number;
         /** @description ID */
         id: number | string;
@@ -1706,9 +1720,9 @@ export interface components {
         /** @description Price */
         price: number;
         /**
-                 * @description Quantity
-                 * @default 0
-                 */
+         * @description Quantity
+         * @default 0
+         */
         quantity?: number;
         /** @description Amount */
         amount: number;
@@ -1721,45 +1735,47 @@ export interface components {
       pageNo: number;
     };
     /** @description Product Info */
-    'test-rest.entity.product': {
-      /**
-             * Format: date
-             * @description Created At
-             */
-      createdAt: string;
-      /**
-             * Format: date
-             * @description Updated At
-             */
-      updatedAt: string;
-      /**
-             * @description Deleted
-             * @default false
-             */
-      deleted?: boolean;
-      /**
-             * @description Instance ID
-             * @default 0
-             */
-      iid?: number;
-      /** @description ID */
-      id: number | string;
-      /** @description Name */
-      name: string;
-      /** @description Description */
-      description?: string | undefined;
-      /** @description Price */
-      price: number;
-      /**
-             * @description Quantity
-             * @default 0
-             */
-      quantity?: number;
-      /** @description Amount */
-      amount: number;
-      /** @description Custom */
-      _custom?: unknown;
-    } | undefined;
+    'test-rest.entity.product':
+      | {
+          /**
+           * Format: date
+           * @description Created At
+           */
+          createdAt: string;
+          /**
+           * Format: date
+           * @description Updated At
+           */
+          updatedAt: string;
+          /**
+           * @description Deleted
+           * @default false
+           */
+          deleted?: boolean;
+          /**
+           * @description Instance ID
+           * @default 0
+           */
+          iid?: number;
+          /** @description ID */
+          id: number | string;
+          /** @description Name */
+          name: string;
+          /** @description Description */
+          description?: string | undefined;
+          /** @description Price */
+          price: number;
+          /**
+           * @description Quantity
+           * @default 0
+           */
+          quantity?: number;
+          /** @description Amount */
+          amount: number;
+          /** @description Custom */
+          _custom?: unknown;
+        }
+      | undefined;
     /** @description Update Product */
     'test-rest.dto.productUpdate': {
       /** @description Name */
@@ -1769,9 +1785,9 @@ export interface components {
       /** @description Price */
       price: number;
       /**
-             * @description Quantity
-             * @default 0
-             */
+       * @description Quantity
+       * @default 0
+       */
       quantity?: number;
       /** @description Amount */
       amount: number;
@@ -1781,9 +1797,9 @@ export interface components {
     'test-ssr.dto.testResult': {
       id: number | string;
       /**
-             * @description Name
-             * @default tom
-             */
+       * @description Name
+       * @default tom
+       */
       name?: string;
       married: boolean;
       details: components['schemas']['test-ssr.dto.testDetail'][];
@@ -1809,9 +1825,9 @@ export interface components {
     'test-ssr.dto.testBody': {
       id: number | string;
       /**
-             * @description Name
-             * @default tom
-             */
+       * @description Name
+       * @default tom
+       */
       name?: string;
       married: boolean;
       details: components['schemas']['test-ssr.dto.testDetail'][];
@@ -1867,17 +1883,19 @@ export interface components {
       name: string;
       age?: number | undefined;
       scores?: number | undefined;
-      posts?: {
-        /**
-                 * @description Deleted
-                 * @default false
-                 */
-        deleted?: boolean | undefined;
-        /** @description ID */
-        id?: number | string | undefined;
-        /** @description Title */
-        title: string;
-      }[] | undefined;
+      posts?:
+        | {
+            /**
+             * @description Deleted
+             * @default false
+             */
+            deleted?: boolean | undefined;
+            /** @description ID */
+            id?: number | string | undefined;
+            /** @description Title */
+            title: string;
+          }[]
+        | undefined;
     };
     'test-vona.entity.category_2c7d642ee581efa300341e343180fbb0ecdc785d': {
       /** @description ID */
@@ -1900,9 +1918,9 @@ export interface components {
     };
     'test-vona.dto.orderCreate': {
       /**
-             * @description Order No
-             * @default
-             */
+       * @description Order No
+       * @default
+       */
       orderNo?: string;
       /** @description Remark */
       remark?: string | undefined;
@@ -1920,9 +1938,9 @@ export interface components {
     };
     'test-vona.dto.orderUpdate': {
       /**
-             * @description Order No
-             * @default
-             */
+       * @description Order No
+       * @default
+       */
       orderNo?: string;
       /** @description Remark */
       remark?: string | undefined;
@@ -1930,9 +1948,9 @@ export interface components {
     };
     'test-vona.entity.product_9cf2c6bcd41713270c34bcfce21b7b4942e3fbc6': {
       /**
-             * @description Deleted
-             * @default false
-             */
+       * @description Deleted
+       * @default false
+       */
       deleted?: boolean | undefined;
       /** @description ID */
       id?: number | string | undefined;
@@ -1947,31 +1965,31 @@ export interface components {
     };
     'test-vona.dto.orderResult': {
       /**
-             * Format: date
-             * @description Created At
-             */
+       * Format: date
+       * @description Created At
+       */
       createdAt: string;
       /**
-             * Format: date
-             * @description Updated At
-             */
+       * Format: date
+       * @description Updated At
+       */
       updatedAt: string;
       /**
-             * @description Deleted
-             * @default false
-             */
+       * @description Deleted
+       * @default false
+       */
       deleted?: boolean;
       /**
-             * @description Instance ID
-             * @default 0
-             */
+       * @description Instance ID
+       * @default 0
+       */
       iid?: number;
       /** @description ID */
       id: number | string;
       /**
-             * @description Order No
-             * @default
-             */
+       * @description Order No
+       * @default
+       */
       orderNo?: string;
       /** @description Remark */
       remark?: string | undefined;
@@ -1994,31 +2012,31 @@ export interface components {
     'test-vona.dto.orderResultPage': {
       list: {
         /**
-                 * Format: date
-                 * @description Created At
-                 */
+         * Format: date
+         * @description Created At
+         */
         createdAt: string;
         /**
-                 * Format: date
-                 * @description Updated At
-                 */
+         * Format: date
+         * @description Updated At
+         */
         updatedAt: string;
         /**
-                 * @description Deleted
-                 * @default false
-                 */
+         * @description Deleted
+         * @default false
+         */
         deleted?: boolean;
         /**
-                 * @description Instance ID
-                 * @default 0
-                 */
+         * @description Instance ID
+         * @default 0
+         */
         iid?: number;
         /** @description ID */
         id: number | string;
         /**
-                 * @description Order No
-                 * @default
-                 */
+         * @description Order No
+         * @default
+         */
         orderNo?: string;
         /** @description Remark */
         remark?: string | undefined;
@@ -2047,24 +2065,24 @@ export interface components {
     'test-vona.dto.postQueryRes': {
       list: {
         /**
-                 * Format: date
-                 * @description Created At
-                 */
+         * Format: date
+         * @description Created At
+         */
         createdAt: string;
         /**
-                 * Format: date
-                 * @description Updated At
-                 */
+         * Format: date
+         * @description Updated At
+         */
         updatedAt: string;
         /**
-                 * @description Deleted
-                 * @default false
-                 */
+         * @description Deleted
+         * @default false
+         */
         deleted?: boolean;
         /**
-                 * @description Instance ID
-                 * @default 0
-                 */
+         * @description Instance ID
+         * @default 0
+         */
         iid?: number;
         /** @description ID */
         id: number | string;
@@ -2139,9 +2157,9 @@ export interface components {
       fullName4?: string | undefined;
     };
     /**
-         * title
-         * @description description
-         */
+     * title
+     * @description description
+     */
     'test-vona.dto.serializerSimple_542f7be0da9b85a67248a6a1a3629e72de5fdb33_cff0ae112a392da58caf5aa905749f3c4444c4ab': {
       password: string;
       password2: string;
@@ -2664,9 +2682,11 @@ export interface operations {
     parameters: {
       query?: {
         columns?: string[] | undefined;
-        where?: {
-          [key: string]: unknown;
-        } | undefined;
+        where?:
+          | {
+              [key: string]: unknown;
+            }
+          | undefined;
         orders?: string | string[][] | undefined;
         pageNo?: number;
         pageSize?: number;
@@ -2808,9 +2828,11 @@ export interface operations {
     parameters: {
       query?: {
         columns?: string[] | undefined;
-        where?: {
-          [key: string]: unknown;
-        } | undefined;
+        where?:
+          | {
+              [key: string]: unknown;
+            }
+          | undefined;
         orders?: string | string[][] | undefined;
         pageNo?: number;
         pageSize?: number;
@@ -2977,9 +2999,11 @@ export interface operations {
     parameters: {
       query?: {
         columns?: string[] | undefined;
-        where?: {
-          [key: string]: unknown;
-        } | undefined;
+        where?:
+          | {
+              [key: string]: unknown;
+            }
+          | undefined;
         orders?: string | string[][] | undefined;
         pageNo?: number;
         pageSize?: number;
@@ -3169,9 +3193,11 @@ export interface operations {
     parameters: {
       query?: {
         columns?: string[] | undefined;
-        where?: {
-          [key: string]: unknown;
-        } | undefined;
+        where?:
+          | {
+              [key: string]: unknown;
+            }
+          | undefined;
         orders?: string | string[][] | undefined;
         pageNo?: number;
         pageSize?: number;
@@ -3494,24 +3520,24 @@ export interface operations {
             message: string;
             data: {
               /**
-                             * Created At
-                             * Format: date
-                             */
+               * Created At
+               * Format: date
+               */
               createdAt: string;
               /**
-                             * Updated At
-                             * Format: date
-                             */
+               * Updated At
+               * Format: date
+               */
               updatedAt: string;
               /**
-                             * Deleted
-                             * @default false
-                             */
+               * Deleted
+               * @default false
+               */
               deleted?: boolean;
               /**
-                             * Instance ID
-                             * @default 0
-                             */
+               * Instance ID
+               * @default 0
+               */
               iid?: number;
               /** ID */
               id: number | string;
@@ -3546,24 +3572,24 @@ export interface operations {
             message: string;
             data: {
               /**
-                             * Created At
-                             * Format: date
-                             */
+               * Created At
+               * Format: date
+               */
               createdAt: string;
               /**
-                             * Updated At
-                             * Format: date
-                             */
+               * Updated At
+               * Format: date
+               */
               updatedAt: string;
               /**
-                             * Deleted
-                             * @default false
-                             */
+               * Deleted
+               * @default false
+               */
               deleted?: boolean;
               /**
-                             * Instance ID
-                             * @default 0
-                             */
+               * Instance ID
+               * @default 0
+               */
               iid?: number;
               /** ID */
               id: number | string;
@@ -3597,24 +3623,24 @@ export interface operations {
             message: string;
             data: {
               /**
-                             * Created At
-                             * Format: date
-                             */
+               * Created At
+               * Format: date
+               */
               createdAt: string;
               /**
-                             * Updated At
-                             * Format: date
-                             */
+               * Updated At
+               * Format: date
+               */
               updatedAt: string;
               /**
-                             * Deleted
-                             * @default false
-                             */
+               * Deleted
+               * @default false
+               */
               deleted?: boolean;
               /**
-                             * Instance ID
-                             * @default 0
-                             */
+               * Instance ID
+               * @default 0
+               */
               iid?: number;
               /** ID */
               id: number | string;
@@ -4096,9 +4122,11 @@ export interface operations {
     parameters: {
       query?: {
         columns?: string[] | undefined;
-        where?: {
-          [key: string]: unknown;
-        } | undefined;
+        where?:
+          | {
+              [key: string]: unknown;
+            }
+          | undefined;
         orders?: string | string[][] | undefined;
         orderNo?: string | undefined;
         remark?: string | undefined;
@@ -4129,9 +4157,11 @@ export interface operations {
     parameters: {
       query?: {
         columns?: string[] | undefined;
-        where?: {
-          [key: string]: unknown;
-        } | undefined;
+        where?:
+          | {
+              [key: string]: unknown;
+            }
+          | undefined;
         orders?: string | string[][] | undefined;
         pageNo?: number;
         orderNo?: string | undefined;
@@ -4211,9 +4241,11 @@ export interface operations {
     parameters: {
       query?: {
         columns?: string[] | undefined;
-        where?: {
-          [key: string]: unknown;
-        } | undefined;
+        where?:
+          | {
+              [key: string]: unknown;
+            }
+          | undefined;
         orders?: string | string[][] | undefined;
         pageNo?: number;
         pageSize?: number;
@@ -4245,9 +4277,11 @@ export interface operations {
     parameters: {
       query?: {
         columns?: string[] | undefined;
-        where?: {
-          [key: string]: unknown;
-        } | undefined;
+        where?:
+          | {
+              [key: string]: unknown;
+            }
+          | undefined;
         orders?: string | string[][] | undefined;
         pageNo?: number;
         pageSize?: number;
@@ -4368,9 +4402,9 @@ export interface operations {
         'multipart/form-data': {
           checkes: string[];
           /**
-                     * your name
-                     * @default zhennann
-                     */
+           * your name
+           * @default zhennann
+           */
           name?: string;
         };
       };
@@ -4435,9 +4469,9 @@ export interface operations {
           /** images */
           images: Blob[];
           /**
-                     * single file
-                     * Format: binary
-                     */
+           * single file
+           * Format: binary
+           */
           welcome1: Blob;
           /** Format: binary */
           welcome2: Blob;

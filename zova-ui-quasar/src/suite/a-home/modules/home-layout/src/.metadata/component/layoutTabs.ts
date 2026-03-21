@@ -1,7 +1,10 @@
 import type { TypeControllerInnerProps } from 'zova';
-import type { ControllerLayoutTabsProps } from '../../component/layoutTabs/controller.jsx';
+
 import { defineComponent } from 'vue';
 import { prepareComponentOptions, useController } from 'zova';
+
+import type { ControllerLayoutTabsProps } from '../../component/layoutTabs/controller.jsx';
+
 import { ControllerLayoutTabs } from '../../component/layoutTabs/controller.jsx';
 import { RenderLayoutTabs } from '../../component/layoutTabs/render.jsx';
 import { StyleLayoutTabs } from '../../component/layoutTabs/style.js';
@@ -10,8 +13,7 @@ export type TypeControllerLayoutTabsPublicProps = {
   controllerRef?: (ref: ControllerLayoutTabs) => void;
 } & ControllerLayoutTabsProps;
 
-type ControllerInnerProps =
-  TypeControllerInnerProps<ControllerLayoutTabsProps, keyof typeof ControllerLayoutTabs.$propsDefault>;
+type ControllerInnerProps = TypeControllerInnerProps<ControllerLayoutTabsProps, keyof typeof ControllerLayoutTabs.$propsDefault>;
 declare module 'zova-module-home-layout' {
   export interface ControllerLayoutTabs {
     $props: ControllerInnerProps;
@@ -25,10 +27,7 @@ declare module 'zova-module-home-layout' {
   export interface RenderSidebar extends StyleLayoutTabs {}
   export interface RenderTabs extends StyleLayoutTabs {}
 }
-export const ZLayoutTabs = defineComponent(
-  (_props: TypeControllerLayoutTabsPublicProps) => {
-    useController(ControllerLayoutTabs, RenderLayoutTabs, StyleLayoutTabs);
-    return () => {};
-  },
-  prepareComponentOptions(),
-);
+export const ZLayoutTabs = defineComponent((_props: TypeControllerLayoutTabsPublicProps) => {
+  useController(ControllerLayoutTabs, RenderLayoutTabs, StyleLayoutTabs);
+  return () => {};
+}, prepareComponentOptions());

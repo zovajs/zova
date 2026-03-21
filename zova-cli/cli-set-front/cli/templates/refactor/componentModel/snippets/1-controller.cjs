@@ -20,7 +20,7 @@ module.exports = {
       throw new Error('Model exists');
     }
     // Model
-    ast = ast.replace(/interface [^<]*Models([^{]*) \{/, ($0) => {
+    ast = ast.replace(/interface [^<]*Models([^{]*) \{/, $0 => {
       return `${$0}\n  '${typeName}'?: number;`;
     });
     // @Model
@@ -30,11 +30,11 @@ module.exports = {
       });
     }
     // propsDefault
-    ast = ast.replace(/static \$propsDefault([^{]*) = \{/, ($0) => {
+    ast = ast.replace(/static \$propsDefault([^{]*) = \{/, $0 => {
       return `${$0}\n  ${modelName}: 0,`;
     });
     // localName
-    ast = ast.replace(/protected async __init__/, ($0) => {
+    ast = ast.replace(/protected async __init__/, $0 => {
       return `@ModelValue()\n${localName}: number;\n\n    ${$0}`;
     });
     // ok

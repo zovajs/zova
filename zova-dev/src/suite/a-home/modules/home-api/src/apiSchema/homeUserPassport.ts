@@ -1,6 +1,18 @@
 import { BeanBase } from 'zova';
 import { ApiSchema, IApiSchemaOptions } from 'zova-module-a-api';
-import { ApiApiHomeUserPassportassociatePath, ApiApiHomeUserPassportcreatePassportJwtFromOauthCodePath, ApiApiHomeUserPassportcreateTempAuthTokenPath, ApiApiHomeUserPassportcurrentPath, ApiApiHomeUserPassportloginOauthPath, ApiApiHomeUserPassportloginPath, ApiApiHomeUserPassportlogoutPath, ApiApiHomeUserPassportmigratePath, ApiApiHomeUserPassportrefreshAuthTokenPath, ApiApiHomeUserPassportregisterPath } from '../api/homeUserPassport.js';
+
+import {
+  ApiApiHomeUserPassportassociatePath,
+  ApiApiHomeUserPassportcreatePassportJwtFromOauthCodePath,
+  ApiApiHomeUserPassportcreateTempAuthTokenPath,
+  ApiApiHomeUserPassportcurrentPath,
+  ApiApiHomeUserPassportloginOauthPath,
+  ApiApiHomeUserPassportloginPath,
+  ApiApiHomeUserPassportlogoutPath,
+  ApiApiHomeUserPassportmigratePath,
+  ApiApiHomeUserPassportrefreshAuthTokenPath,
+  ApiApiHomeUserPassportregisterPath,
+} from '../api/homeUserPassport.js';
 
 @ApiSchema()
 export class ApiSchemaHomeUserPassport extends BeanBase {

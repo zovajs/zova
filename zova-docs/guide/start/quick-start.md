@@ -29,7 +29,6 @@ $ zova :create:project projectName
 
 1. Directly execute `zova` on the command line to create a project named `projectName`
 2. The command line will output a list of templates, and the currently provided templates are as follows:
-
    - zova + antdv
    - zova + element-plus
    - zova + quasar

@@ -1,12 +1,13 @@
 import type { IModule, IModuleInfo } from '@cabloy/module-info';
 import type { OpenAPITSOptions, SchemaObject, TransformNodeOptions } from '@cabloy/openapi-typescript';
 import type { ZovaOpenapiConfig, ZovaOpenapiConfigModule } from 'zova-openapi';
-import path from 'node:path';
+
 import { BeanCliBase } from '@cabloy/cli';
 import { extend } from '@cabloy/extend';
 import { catchError, matchSelector } from '@cabloy/utils';
 import { toLowerCaseFirstChar, toUpperCaseFirstChar } from '@cabloy/word-utils';
 import fse from 'fs-extra';
+import path from 'node:path';
 import { rimraf } from 'rimraf';
 import ts from 'typescript';
 
@@ -134,19 +135,19 @@ export class CliOpenapiGenerate extends BeanCliBase {
     await this.helper.formatFile({ fileName: schemasFile });
     // output: openapi/baseURL.ts
     const baseURLFile = path.join(module.root, 'src/api/openapi/baseURL.ts');
-    await fse.outputFile(baseURLFile, `import type { ZovaSys } from 'zova';
+    await fse.outputFile(
+      baseURLFile,
+      `import type { ZovaSys } from 'zova';
 
 export const OpenApiBaseURL = (sys: ZovaSys) => {
   return sys.util.getOpenApiBaseURL('OPENAPI_BASE_URL_${module.name.replace('-', '_').toUpperCase()}');
 };
-`);
+`,
+    );
     await this.helper.formatFile({ fileName: baseURLFile });
     // output: openapi/index.ts
     const indexFile = path.join(module.root, 'src/api/openapi/index.ts');
-    await fse.outputFile(
-      indexFile,
-      "export * from './baseURL.js';\nexport * from './schemas.js';\nexport * from './types.js';",
-    );
+    await fse.outputFile(indexFile, "export * from './baseURL.js';\nexport * from './schemas.js';\nexport * from './types.js';");
     await this.helper.formatFile({ fileName: indexFile });
     return cache;
   }
@@ -161,13 +162,11 @@ export const OpenApiBaseURL = (sys: ZovaSys) => {
     const nodeTypeInfoSchemas = _parseNodeType(nodeTypeInfoComponents.schemas.nodeType)!;
     const typeSchemas: string[] = [];
     for (const key in nodeTypeInfoSchemas) {
-      const schemaName =
-        `ApiSchema${
-          key
-            .replaceAll('.', '-')
-            .split('-')
-            .map(item => toUpperCaseFirstChar(item))
-            .join('')}`;
+      const schemaName = `ApiSchema${key
+        .replaceAll('.', '-')
+        .split('-')
+        .map(item => toUpperCaseFirstChar(item))
+        .join('')}`;
       typeSchemas.push(`export type ${schemaName} = components["schemas"]["${key}"];`);
       typeSchemas.push(`export type ${schemaName}Partial = Partial<${schemaName}>;`);
     }
@@ -179,13 +178,7 @@ export const OpenApiBaseURL = (sys: ZovaSys) => {
     return contentSchemas;
   }
 
-  async _generateApis(
-    openapiTypescript: any,
-    ast: ts.Node[],
-    moduleConfig: ZovaOpenapiConfigModule,
-    _moduleInfo: IModuleInfo,
-    module: IModule,
-  ) {
+  async _generateApis(openapiTypescript: any, ast: ts.Node[], moduleConfig: ZovaOpenapiConfigModule, _moduleInfo: IModuleInfo, module: IModule) {
     const nodeApis = this._getNodeApis(ast, moduleConfig);
     if (!nodeApis) return;
     for (const apiName in nodeApis) {
@@ -246,9 +239,7 @@ export const OpenApiBaseURL = (sys: ZovaSys) => {
         question: nodeTypeInfoParameters[key].question,
       };
       parametersInfo[key2] = info;
-      contentTypes.push(
-        `export type ${info.name} = paths[${nameRequestPath}][${nameRequestMethod}]['parameters']['${key}'];`,
-      );
+      contentTypes.push(`export type ${info.name} = paths[${nameRequestPath}][${nameRequestMethod}]['parameters']['${key}'];`);
     }
     // name: request body
     let nameRequestBody = '';
@@ -300,8 +291,7 @@ export const OpenApiBaseURL = (sys: ZovaSys) => {
       ? `this.$pathTranslate(${nameRequestPath}, options${_q(contentOptionsQuestion)}.params),`
       : `${nameRequestPath},`;
     // content: comment
-    const contentComments =
-      pathInfo.comments && pathInfo.comments.length > 0 ? `/*${pathInfo.comments.join()}*/\n` : '';
+    const contentComments = pathInfo.comments && pathInfo.comments.length > 0 ? `/*${pathInfo.comments.join()}*/\n` : '';
     // content: body
     const contentBodyParams = isUpload ? 'this.$formData(body)' : 'body';
     // content: signature
@@ -340,8 +330,7 @@ export const OpenApiBaseURL = (sys: ZovaSys) => {
     if (contentSignatures.length > 0) importsType.push('OpenApiBaseURL');
     if (contentTypes2.includes('components["schemas"]')) importsType.push('type components');
     if (contentTypes2.includes('paths[')) importsType.push('type paths');
-    const contentImportsType =
-      importsType.length > 0 ? `import { ${importsType.join(', ')} } from './openapi/index.js';` : '';
+    const contentImportsType = importsType.length > 0 ? `import { ${importsType.join(', ')} } from './openapi/index.js';` : '';
     // apiContent
     const apiContent = `import { Api, BeanApiBase, IApiActionOptions } from 'zova-module-a-api';
 ${contentImportsType}
@@ -368,8 +357,7 @@ export class Api${apiName} extends BeanApiBase {
   }
 `);
     }
-    const contentImportsApiPath =
-    importsApiPath.length > 0 ? `import { ${importsApiPath.join(', ')} } from '../api/${apiNameLower}.js';` : '';
+    const contentImportsApiPath = importsApiPath.length > 0 ? `import { ${importsApiPath.join(', ')} } from '../api/${apiNameLower}.js';` : '';
     const apiMetaContent = `import { BeanBase } from 'zova';
 import { ApiMeta } from 'zova-module-a-api';
 ${contentImportsApiPath}
@@ -424,9 +412,7 @@ export class ApiSchema${apiName} extends BeanBase {
 }
 
 function _getRequestPathInfo(ast: ts.Node[], nodeActionInfo: INodeActionInfo) {
-  const nodePaths = ast.find(node => ts.isInterfaceDeclaration(node) && node.name.text === 'paths') as
-    | ts.InterfaceDeclaration
-    | undefined;
+  const nodePaths = ast.find(node => ts.isInterfaceDeclaration(node) && node.name.text === 'paths') as ts.InterfaceDeclaration | undefined;
   if (!nodePaths) throw new Error('paths not found');
   let path;
   let method;
@@ -489,7 +475,7 @@ function _checkOperationIdEnabled(moduleConfig: ZovaOpenapiConfigModule, selecto
 /**
  * https://github.com/openapi-ts/openapi-typescript/issues/1214
  * https://openapi-ts.dev/node#example-blob-types
-*/
+ */
 const BLOB = ts.factory.createTypeReferenceNode(ts.factory.createIdentifier('Blob')); // `Blob`
 const DATE = ts.factory.createTypeReferenceNode(ts.factory.createIdentifier('Date')); // `Date`
 // const NULL = ts.factory.createLiteralTypeNode(ts.factory.createNull()); // `null`
@@ -498,47 +484,51 @@ const UNDEFINED = ts.factory.createKeywordTypeNode(ts.SyntaxKind.UndefinedKeywor
 function _patchOpenapiTSOptions(options?: OpenAPITSOptions) {
   const transformCustom = options?.transform;
   const postTransformCustom = options?.postTransform;
-  return Object.assign({
-    defaultNonNullable: false,
-  }, options, {
-    transform(schemaObject: SchemaObject, options: TransformNodeOptions) {
-      if (transformCustom) {
-        const res = transformCustom(schemaObject, options);
-        if (res !== undefined) return res;
-      }
-      // multipart
-      if (schemaObject.format === 'binary') {
-        if (options.path?.includes('multipart~1form-data') || options.path?.includes('application~1octet-stream')) {
+  return Object.assign(
+    {
+      defaultNonNullable: false,
+    },
+    options,
+    {
+      transform(schemaObject: SchemaObject, options: TransformNodeOptions) {
+        if (transformCustom) {
+          const res = transformCustom(schemaObject, options);
+          if (res !== undefined) return res;
+        }
+        // multipart
+        if (schemaObject.format === 'binary') {
+          if (options.path?.includes('multipart~1form-data') || options.path?.includes('application~1octet-stream')) {
+            return {
+              // schema: schemaObject.nullable
+              //   ? ts.factory.createUnionTypeNode([BLOB, NULL])
+              //   : BLOB,
+              schema: BLOB,
+              questionToken: schemaObject.nullable,
+            };
+          }
+        } else if (schemaObject.format === 'date') {
           return {
-            // schema: schemaObject.nullable
-            //   ? ts.factory.createUnionTypeNode([BLOB, NULL])
-            //   : BLOB,
-            schema: BLOB,
+            schema: DATE,
             questionToken: schemaObject.nullable,
           };
         }
-      } else if (schemaObject.format === 'date') {
-        return {
-          schema: DATE,
-          questionToken: schemaObject.nullable,
-        };
-      }
-      // default
-      return undefined;
-    },
-    postTransform(type: ts.TypeNode, options: TransformNodeOptions): ts.TypeNode | undefined {
-      if (postTransformCustom) {
-        const res = postTransformCustom(type, options);
-        if (res !== undefined) return res;
-      }
-      // path param
-      const paramMatched = options.path?.match(/parameters\/path\/([^/]+)$/);
-      if (paramMatched) {
-        const paramName = paramMatched[1];
-        if (options.path?.includes(`{${paramName}?}`)) {
-          return ts.factory.createUnionTypeNode([type, UNDEFINED]);
+        // default
+        return undefined;
+      },
+      postTransform(type: ts.TypeNode, options: TransformNodeOptions): ts.TypeNode | undefined {
+        if (postTransformCustom) {
+          const res = postTransformCustom(type, options);
+          if (res !== undefined) return res;
         }
-      }
+        // path param
+        const paramMatched = options.path?.match(/parameters\/path\/([^/]+)$/);
+        if (paramMatched) {
+          const paramName = paramMatched[1];
+          if (options.path?.includes(`{${paramName}?}`)) {
+            return ts.factory.createUnionTypeNode([type, UNDEFINED]);
+          }
+        }
+      },
     },
-  });
+  );
 }

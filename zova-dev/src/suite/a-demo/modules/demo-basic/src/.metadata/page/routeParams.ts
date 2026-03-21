@@ -1,5 +1,7 @@
 import type { z } from 'zod';
+
 import { createZovaComponentPage } from 'zova';
+
 import { ControllerPageRouteParams } from '../../page/routeParams/controller.jsx';
 import { ControllerPageRouteParamsSchemaParams, ControllerPageRouteParamsSchemaQuery } from '../../page/routeParams/controller.jsx';
 
@@ -11,7 +13,6 @@ export namespace NSControllerPageRouteParams {
   export const querySchema = ControllerPageRouteParamsSchemaQuery;
   export type QueryInput = z.input<typeof ControllerPageRouteParamsSchemaQuery>;
   export type QueryOutput = z.output<typeof ControllerPageRouteParamsSchemaQuery>;
-
 }
 
 export const ZPageRouteParams = createZovaComponentPage(ControllerPageRouteParams, undefined, undefined);

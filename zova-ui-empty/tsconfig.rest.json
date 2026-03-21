@@ -8,8 +8,7 @@
     "rewriteRelativeImportExtensions": false,
     "verbatimModuleSyntax": false
   },
-  "references": [
-  ],
+  "references": [],
   "include": [
     "src/**/*",
     "src/**/.metadata/**/*",

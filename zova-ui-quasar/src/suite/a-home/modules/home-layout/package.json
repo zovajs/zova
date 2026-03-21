@@ -1,13 +1,17 @@
 {
   "name": "zova-module-home-layout",
-  "title": "home-layout",
-  "type": "module",
   "version": "5.0.0",
   "description": "layout",
-  "author": "zhennann",
   "keywords": [
     "Zova Module"
   ],
+  "author": "zhennann",
+  "files": [
+    "dist",
+    "mock",
+    "rest"
+  ],
+  "type": "module",
   "exports": {
     ".": {
       "types": [
@@ -19,11 +23,7 @@
     },
     "./*": "./*"
   },
-  "files": [
-    "dist",
-    "mock",
-    "rest"
-  ],
   "scripts": {},
-  "dependencies": {}
+  "dependencies": {},
+  "title": "home-layout"
 }

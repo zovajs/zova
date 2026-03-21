@@ -1,13 +1,16 @@
 {
   "name": "zova-module-home-passport",
-  "title": "home-passport",
-  "type": "module",
   "version": "5.0.0",
   "description": "",
-  "author": "",
   "keywords": [
     "Zova Module"
   ],
+  "author": "",
+  "files": [
+    "dist",
+    "mock"
+  ],
+  "type": "module",
   "exports": {
     ".": {
       "types": [
@@ -19,16 +22,13 @@
     },
     "./*": "./*"
   },
-  "files": [
-    "dist",
-    "mock"
-  ],
   "scripts": {
     "clean": "tsc -b --clean",
     "tsc:publish": "npm run clean && tsc -b",
     "_prepublishOnly": "npm run tsc:publish"
   },
   "dependencies": {},
+  "title": "home-passport",
   "zovaModule": {
     "capabilities": {
       "monkey": true

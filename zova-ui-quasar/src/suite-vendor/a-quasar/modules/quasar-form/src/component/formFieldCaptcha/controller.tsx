@@ -1,4 +1,5 @@
 import type { QInputProps } from 'quasar';
+
 import { QInput } from 'quasar';
 import { BeanControllerBase, ClientOnly, IComponentOptions, TypeEventOff, Use } from 'zova';
 import { Controller } from 'zova-module-a-bean';
@@ -51,17 +52,23 @@ export class ControllerFormFieldCaptcha extends BeanControllerBase {
   }
 
   private async createCaptchaData() {
-    this.captchaData = await this.$api.captcha.create({
-      scene: this.captchaScene,
-    }, { authToken: false });
+    this.captchaData = await this.$api.captcha.create(
+      {
+        scene: this.captchaScene,
+      },
+      { authToken: false },
+    );
     this.setFieldCaptchaData();
   }
 
   private async refreshCaptchaData() {
-    this.captchaData = await this.$api.captcha.refresh({
-      id: this.captchaData!.id,
-      scene: this.captchaScene,
-    }, { authToken: false });
+    this.captchaData = await this.$api.captcha.refresh(
+      {
+        id: this.captchaData!.id,
+        scene: this.captchaScene,
+      },
+      { authToken: false },
+    );
     this.setFieldCaptchaData();
   }
 
@@ -93,9 +100,7 @@ export class ControllerFormFieldCaptcha extends BeanControllerBase {
             },
           };
           return (
-            <QInput
-              {...propsNew}
-            >
+            <QInput {...propsNew}>
               {{
                 append: () => this._renderCaptcha(),
               }}

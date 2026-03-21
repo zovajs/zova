@@ -1,5 +1,6 @@
 import { BeanRenderBase } from 'zova';
 import { Render } from 'zova-module-a-bean';
+
 import { ZWrapperFilter } from '../../.metadata/component/wrapperFilter.js';
 
 @Render()

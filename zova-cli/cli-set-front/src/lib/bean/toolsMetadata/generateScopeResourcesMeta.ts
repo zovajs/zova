@@ -1,4 +1,5 @@
 import type { IGlobBeanFile, OnionMetaMeta, OnionSceneMeta } from '@cabloy/module-info';
+
 import { toUpperCaseFirstChar } from '@cabloy/word-utils';
 
 export async function generateScopeResourcesMeta(

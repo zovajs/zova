@@ -1,5 +1,6 @@
 import { BeanBase } from 'zova';
 import { ApiSchema, IApiSchemaOptions } from 'zova-module-a-api';
+
 import { ApiApiHomeindexPath } from '../api/home.js';
 
 @ApiSchema()

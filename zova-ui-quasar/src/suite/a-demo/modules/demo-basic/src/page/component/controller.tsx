@@ -1,7 +1,9 @@
-import type { ControllerCard } from '../../.metadata/index.jsx';
 import { BeanControllerPageBase } from 'zova';
 import { Controller } from 'zova-module-a-bean';
 import { ZPage } from 'zova-module-home-base';
+
+import type { ControllerCard } from '../../.metadata/index.jsx';
+
 import { ZCard } from '../../index.js';
 
 @Controller()
@@ -43,8 +45,7 @@ export class ControllerPageComponent extends BeanControllerPageBase {
             // eslint-disable-next-line
             console.log('outer:', ref);
           }}
-        >
-        </input>
+        ></input>
       </ZPage>
     );
   }

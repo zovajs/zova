@@ -1,7 +1,9 @@
 import type { VNode } from 'vue';
+
 import { QItemLabel, QList, QSeparator } from 'quasar';
 import { BeanRenderBase } from 'zova';
 import { Render } from 'zova-module-a-bean';
+
 import { TypeMenuItem, TypeMenuTree, ZItemLink } from '../../.metadata/index.js';
 
 @Render()
@@ -10,7 +12,11 @@ export class RenderMenu extends BeanRenderBase {
     const titleLocale = this.$text(item.title ?? '');
     if (item.folder) {
       let domChildren: VNode[] = [];
-      domChildren.push(<QItemLabel key={`folder:${item.title}`} header>{titleLocale}</QItemLabel>);
+      domChildren.push(
+        <QItemLabel key={`folder:${item.title}`} header>
+          {titleLocale}
+        </QItemLabel>,
+      );
       const domChildren2 = this._renderMenuItems(item.children);
       if (domChildren2) {
         domChildren = domChildren.concat(domChildren2);

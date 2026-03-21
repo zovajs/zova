@@ -1,4 +1,5 @@
 import type { ControllerFormField, IFormFieldRenderContext, IFormFieldRenderContextProps, IFormMeta, TypeFormField } from 'zova-module-a-form';
+
 import { VNode } from 'vue';
 import { Use } from 'zova';
 import { BeanBehaviorBase, Behavior, IDecoratorBehaviorOptions, NextBehavior } from 'zova-module-a-behavior';
@@ -10,11 +11,7 @@ export interface IBehaviorPropsOutputFormField extends IBehaviorPropsInputFormFi
 export interface IBehaviorOptionsFormField extends IDecoratorBehaviorOptions {}
 
 @Behavior<IBehaviorOptionsFormField>()
-export class BehaviorFormField extends BeanBehaviorBase<
-  IBehaviorOptionsFormField,
-  IBehaviorPropsInputFormField,
-  IBehaviorPropsOutputFormField
-> {
+export class BehaviorFormField extends BeanBehaviorBase<IBehaviorOptionsFormField, IBehaviorPropsInputFormField, IBehaviorPropsOutputFormField> {
   @Use({ injectionScope: 'host' })
   $$formField: ControllerFormField;
 
@@ -31,11 +28,7 @@ export class BehaviorFormField extends BeanBehaviorBase<
     }
   }
 
-  private _patchProps_general(
-    formMeta: IFormMeta | undefined,
-    _field: TypeFormField,
-    renderContext: IFormFieldRenderContext,
-  ) {
+  private _patchProps_general(formMeta: IFormMeta | undefined, _field: TypeFormField, renderContext: IFormFieldRenderContext) {
     const propsPatch: IFormFieldRenderContextProps = {
       value: renderContext.propsBucket.displayValue,
     };
@@ -45,11 +38,7 @@ export class BehaviorFormField extends BeanBehaviorBase<
     return propsPatch;
   }
 
-  private _patchProps_input(
-    formMeta: IFormMeta | undefined,
-    field: TypeFormField,
-    renderContext: IFormFieldRenderContext,
-  ) {
+  private _patchProps_input(formMeta: IFormMeta | undefined, field: TypeFormField, renderContext: IFormFieldRenderContext) {
     const { propsBucket } = renderContext;
     const renderFlattern = propsBucket.renderFlattern;
     const propsGeneral = this._patchProps_general(formMeta, field, renderContext);
@@ -59,17 +48,24 @@ export class BehaviorFormField extends BeanBehaviorBase<
     };
     const propsPatch: IFormFieldRenderContextProps = {
       type: inputType,
-      onChange: propsBucket.onChange !== undefined
-        ? (propsBucket.onChange ?? undefined)
-        : (propsBucket.displayValueUpdateTiming === 'change' ? onSetDisplayValueDefault : undefined),
-      onInput: propsBucket.onInput !== undefined
-        ? (propsBucket.onInput ?? undefined)
-        : (propsBucket.displayValueUpdateTiming !== 'change' ? onSetDisplayValueDefault : undefined),
-      onBlur: propsBucket.onBlur !== undefined
-        ? (propsBucket.onBlur ?? undefined)
-        : (_e: Event) => {
-            field.api.handleBlur();
-          },
+      onChange:
+        propsBucket.onChange !== undefined
+          ? (propsBucket.onChange ?? undefined)
+          : propsBucket.displayValueUpdateTiming === 'change'
+            ? onSetDisplayValueDefault
+            : undefined,
+      onInput:
+        propsBucket.onInput !== undefined
+          ? (propsBucket.onInput ?? undefined)
+          : propsBucket.displayValueUpdateTiming !== 'change'
+            ? onSetDisplayValueDefault
+            : undefined,
+      onBlur:
+        propsBucket.onBlur !== undefined
+          ? (propsBucket.onBlur ?? undefined)
+          : (_e: Event) => {
+              field.api.handleBlur();
+            },
     };
     renderContext.props = Object.assign({}, propsGeneral, propsPatch, renderContext.props);
   }

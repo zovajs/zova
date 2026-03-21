@@ -22,10 +22,7 @@ const __sdkSchemaPassportLogin = {
               $ref: '#/components/schemas/a-jwt.dto.jwtToken',
             },
           },
-          required: [
-            'passport',
-            'jwt',
-          ],
+          required: ['passport', 'jwt'],
         },
         'home-user.dto.passport': {
           type: 'object',
@@ -43,11 +40,7 @@ const __sdkSchemaPassportLogin = {
               },
             },
           },
-          required: [
-            'user',
-            'auth',
-            'roles',
-          ],
+          required: ['user', 'auth', 'roles'],
         },
         'home-user.entity.user': {
           type: 'object',
@@ -111,24 +104,15 @@ const __sdkSchemaPassportLogin = {
               title: '用户名',
             },
             avatar: {
-              type: [
-                'string',
-                'null',
-              ],
+              type: ['string', 'null'],
               title: '头像',
             },
             email: {
-              type: [
-                'string',
-                'null',
-              ],
+              type: ['string', 'null'],
               title: '电子邮件',
             },
             mobile: {
-              type: [
-                'string',
-                'null',
-              ],
+              type: ['string', 'null'],
               title: '手机号',
             },
             activated: {
@@ -137,26 +121,15 @@ const __sdkSchemaPassportLogin = {
               title: '已激活',
             },
             locale: {
-              type: [
-                'string',
-                'null',
-              ],
+              type: ['string', 'null'],
               title: '语言',
             },
             tz: {
-              type: [
-                'string',
-                'null',
-              ],
+              type: ['string', 'null'],
               title: '时区',
             },
           },
-          required: [
-            'createdAt',
-            'updatedAt',
-            'id',
-            'name',
-          ],
+          required: ['createdAt', 'updatedAt', 'id', 'name'],
           title: '用户',
         },
         'a-auth.dto.auth': {
@@ -196,17 +169,10 @@ const __sdkSchemaPassportLogin = {
                   type: 'string',
                 },
               },
-              required: [
-                'id',
-                'providerName',
-                'clientName',
-              ],
+              required: ['id', 'providerName', 'clientName'],
             },
           },
-          required: [
-            'id',
-            'profileId',
-          ],
+          required: ['id', 'profileId'],
         },
         'home-user.entity.role': {
           type: 'object',
@@ -270,12 +236,7 @@ const __sdkSchemaPassportLogin = {
               title: '角色名',
             },
           },
-          required: [
-            'createdAt',
-            'updatedAt',
-            'id',
-            'name',
-          ],
+          required: ['createdAt', 'updatedAt', 'id', 'name'],
           title: '角色',
         },
         'a-jwt.dto.jwtToken': {
@@ -291,11 +252,7 @@ const __sdkSchemaPassportLogin = {
               type: 'number',
             },
           },
-          required: [
-            'accessToken',
-            'refreshToken',
-            'expiresIn',
-          ],
+          required: ['accessToken', 'refreshToken', 'expiresIn'],
         },
         'home-user.dto.login': {
           type: 'object',
@@ -318,11 +275,7 @@ const __sdkSchemaPassportLogin = {
               $ref: '#/components/schemas/a-captcha.dto.captchaVerify_c3cd80b1eeafe39bfe4433491bb081d68e84797e_3218e7d152830e08f6e764b9e0c3796df929ee2b',
             },
           },
-          required: [
-            'username',
-            'password',
-            'captcha',
-          ],
+          required: ['username', 'password', 'captcha'],
         },
         'a-captcha.dto.captchaVerify_c3cd80b1eeafe39bfe4433491bb081d68e84797e_3218e7d152830e08f6e764b9e0c3796df929ee2b': {
           type: 'object',
@@ -340,10 +293,7 @@ const __sdkSchemaPassportLogin = {
               },
             },
           },
-          required: [
-            'id',
-            'token',
-          ],
+          required: ['id', 'token'],
           rest: {
             render: 'captcha',
             iconPrefix: ':editor:code-block',
@@ -355,9 +305,7 @@ const __sdkSchemaPassportLogin = {
     paths: {
       '/api/home/user/passport/login': {
         post: {
-          tags: [
-            'HomeUserPassport',
-          ],
+          tags: ['HomeUserPassport'],
           operationId: 'HomeUserPassport_login',
           requestBody: {
             required: true,
@@ -387,11 +335,7 @@ const __sdkSchemaPassportLogin = {
                         $ref: '#/components/schemas/home-user.dto.passportJwt',
                       },
                     },
-                    required: [
-                      'code',
-                      'message',
-                      'data',
-                    ],
+                    required: ['code', 'message', 'data'],
                   },
                 },
               },

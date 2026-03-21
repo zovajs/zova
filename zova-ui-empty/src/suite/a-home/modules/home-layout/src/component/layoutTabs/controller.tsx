@@ -1,6 +1,7 @@
 import { BeanControllerBase, Use } from 'zova';
 import { Controller } from 'zova-module-a-bean';
 import { $QueryAutoLoad } from 'zova-module-a-model';
+
 import { ModelMenu } from '../../model/menu.js';
 import { IServiceSsrOptions, ServiceSsr } from '../../service/ssr.js';
 

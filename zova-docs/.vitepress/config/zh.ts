@@ -1,4 +1,5 @@
 import type { DefaultTheme } from 'vitepress';
+
 import { defineConfig } from 'vitepress';
 
 export const zh = defineConfig({
@@ -31,9 +32,7 @@ export const zh = defineConfig({
 });
 
 function sidebarCabloy(): DefaultTheme.SidebarItem[] {
-  return [
-    { text: '介绍', link: 'introduction' },
-  ];
+  return [{ text: '介绍', link: 'introduction' }];
 }
 
 function sidebarCabloyBasic(): DefaultTheme.SidebarItem[] {

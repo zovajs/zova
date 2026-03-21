@@ -26,12 +26,8 @@ export class ControllerPageState extends BeanControllerPageBase {
       <ZPage>
         <div>{`count(ref): ${this.count}`}</div>
         <div>{`count(computed): ${this.count2}`}</div>
-        <button onClick={() => this.increment()}>
-          Increment
-        </button>
-        <button onClick={() => this.decrement()}>
-          Decrement
-        </button>
+        <button onClick={() => this.increment()}>Increment</button>
+        <button onClick={() => this.decrement()}>Decrement</button>
       </ZPage>
     );
   }

@@ -7,11 +7,7 @@ const { count, increment, decrement } = useCounter();
 <template>
   <div>
     <div>{{ `count: ${count}` }}</div>
-    <button class="btn btn-primary" @click="increment">
-      Increment
-    </button>
-    <button class="btn btn-secondary" @click="decrement">
-      Decrement
-    </button>
+    <button class="btn btn-primary" @click="increment">Increment</button>
+    <button class="btn btn-secondary" @click="decrement">Decrement</button>
   </div>
 </template>

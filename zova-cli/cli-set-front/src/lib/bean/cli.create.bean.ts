@@ -1,8 +1,10 @@
 import type { IModuleInfo } from '@cabloy/module-info';
-import fs from 'node:fs';
-import path from 'node:path';
+
 import { BeanCliBase } from '@cabloy/cli';
 import { getOnionMetasMeta, getOnionScenesMeta } from '@cabloy/module-info';
+import fs from 'node:fs';
+import path from 'node:path';
+
 import { __ThisSetName__ } from '../this.ts';
 
 declare module '@cabloy/cli' {

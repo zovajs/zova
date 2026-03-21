@@ -1,6 +1,8 @@
 import type { VNode } from 'vue';
+
 import { BeanRenderBase } from 'zova';
 import { Render } from 'zova-module-a-bean';
+
 import { TypeMenuItem, TypeMenuTree, ZEssentialLink } from '../../.metadata/index.js';
 
 @Render()

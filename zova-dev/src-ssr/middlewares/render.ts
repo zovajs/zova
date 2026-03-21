@@ -1,5 +1,6 @@
 import type { RenderError } from '@quasar/app-vite';
 import type { Request, Response } from 'express';
+
 import { defineSsrMiddleware } from '@quasar/app-vite/wrappers';
 
 // This middleware should execute as last one

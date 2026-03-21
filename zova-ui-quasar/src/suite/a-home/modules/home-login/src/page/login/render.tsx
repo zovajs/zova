@@ -15,7 +15,9 @@ export class RenderPageLogin extends BeanRenderBase {
               {this._renderLandingInfo()}
             </div>
             <div class="col-12 col-md-6" style={{ minWidth: '320px' }}>
-              <h5 class="text-center" style={{ marginBottom: '12px' }}>{this.scope.locale.Login()}</h5>
+              <h5 class="text-center" style={{ marginBottom: '12px' }}>
+                {this.scope.locale.Login()}
+              </h5>
               <div class="q-pa-md">
                 {this._renderForm()}
                 <QSeparator inset style={{ marginTop: '24px', marginBottom: '24px' }}></QSeparator>
@@ -55,33 +57,18 @@ export class RenderPageLogin extends BeanRenderBase {
           window.alert(error.message);
         }}
       >
-        <ZFormField
-          name="username"
-          iconPrefix=":daisy:person"
-          label={this.scope.locale.YourUsername()}
-        >
-        </ZFormField>
-        <ZFormField
-          name="password"
-          inputType="password"
-          iconPrefix=":daisy:lock"
-          label={this.scope.locale.YourPassword()}
-        ></ZFormField>
+        <ZFormField name="username" iconPrefix=":daisy:person" label={this.scope.locale.YourUsername()}></ZFormField>
+        <ZFormField name="password" inputType="password" iconPrefix=":daisy:lock" label={this.scope.locale.YourPassword()}></ZFormField>
         <ZFormFieldWrapper name="captcha"></ZFormFieldWrapper>
-        <ZFormSubscribe slotDefault={$$form => {
-          return (
-            <div class="text-center">
-              <QBtn
-                label={this.scope.locale.Login()}
-                disable={$$form.formState.isSubmitting}
-                type="submit"
-                color="primary"
-              ></QBtn>
-            </div>
-          );
-        }}
-        >
-        </ZFormSubscribe>
+        <ZFormSubscribe
+          slotDefault={$$form => {
+            return (
+              <div class="text-center">
+                <QBtn label={this.scope.locale.Login()} disable={$$form.formState.isSubmitting} type="submit" color="primary"></QBtn>
+              </div>
+            );
+          }}
+        ></ZFormSubscribe>
       </ZForm>
     );
   }
@@ -99,7 +86,6 @@ export class RenderPageLogin extends BeanRenderBase {
           {this.scope.locale.LoginGitHub()}
         </QBtn>
       </div>
-
     );
   }
 }

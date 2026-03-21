@@ -1,4 +1,5 @@
 import type { ControllerFormField, IFormFieldLayoutOptionsBase, IFormFieldRenderContext, TypeFormField } from 'zova-module-a-form';
+
 import { classes } from 'typestyle';
 import { VNode } from 'vue';
 import { z } from 'zod';
@@ -35,7 +36,12 @@ export class BehaviorFormFieldLayout extends BeanBehaviorBase<
   private _renderInline(renderContext: IFormFieldRenderContext, vnode: VNode, field: TypeFormField, error: z.ZodError | undefined): VNode {
     const bordered = renderContext.propsBucket.bordered;
     const label = renderContext.propsBucket.label;
-    const className = classes('input', renderContext.propsBucket.classContainer, bordered && 'input-bordered', !field.state.meta.isValid && 'input-error');
+    const className = classes(
+      'input',
+      renderContext.propsBucket.classContainer,
+      bordered && 'input-bordered',
+      !field.state.meta.isValid && 'input-error',
+    );
     return (
       <label class={className}>
         {label}

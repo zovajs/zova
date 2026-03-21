@@ -1,7 +1,30 @@
 {
   "name": "zova-module-demo-basic",
-  "type": "module",
   "version": "5.0.0",
+  "description": "demo basic",
+  "keywords": [
+    "Zova Module"
+  ],
+  "author": "zhennann",
+  "files": [
+    "dist",
+    "mock",
+    "rest"
+  ],
+  "type": "module",
+  "exports": {
+    ".": {
+      "types": [
+        "./src/index.ts",
+        "./dist/index.d.ts"
+      ],
+      "import": "./src/index.ts",
+      "default": "./dist/index.js"
+    },
+    "./*": "./*"
+  },
+  "scripts": {},
+  "dependencies": {},
   "title": "demo-basic",
   "zovaModule": {
     "onionsConfig": {
@@ -15,28 +38,5 @@
         }
       }
     }
-  },
-  "description": "demo basic",
-  "author": "zhennann",
-  "keywords": [
-    "Zova Module"
-  ],
-  "exports": {
-    ".": {
-      "types": [
-        "./src/index.ts",
-        "./dist/index.d.ts"
-      ],
-      "import": "./src/index.ts",
-      "default": "./dist/index.js"
-    },
-    "./*": "./*"
-  },
-  "files": [
-    "dist",
-    "mock",
-    "rest"
-  ],
-  "scripts": {},
-  "dependencies": {}
+  }
 }

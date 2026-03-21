@@ -5,13 +5,7 @@
  * Runs in Node context.
  */
 
-import {
-  defineSsrClose,
-  defineSsrCreate,
-  defineSsrListen,
-  defineSsrRenderPreloadTag,
-  defineSsrServeStaticContent,
-} from '@quasar/app-vite/wrappers';
+import { defineSsrClose, defineSsrCreate, defineSsrListen, defineSsrRenderPreloadTag, defineSsrServeStaticContent } from '@quasar/app-vite/wrappers';
 import compression from 'compression';
 /**
  * Make sure to yarn add / npm install (in your project root)
@@ -109,7 +103,7 @@ const pngRE = /\.png$/;
  * Should return a String with HTML output
  * (if any) for preloading indicated file
  */
-export const renderPreloadTag = defineSsrRenderPreloadTag((file/* , { ssrContext } */) => {
+export const renderPreloadTag = defineSsrRenderPreloadTag((file /* , { ssrContext } */) => {
   if (jsRE.test(file) === true) {
     return `<link rel="modulepreload" href="${file}" crossorigin>`;
   }

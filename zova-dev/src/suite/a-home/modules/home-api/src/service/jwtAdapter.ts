@@ -1,4 +1,5 @@
 import type { IJwtAdapter, IJwtInfo } from 'zova-module-a-interceptor';
+
 import { BeanBase } from 'zova';
 import { Service } from 'zova-module-a-bean';
 

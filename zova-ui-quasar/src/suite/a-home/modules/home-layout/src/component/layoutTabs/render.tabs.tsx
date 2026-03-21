@@ -1,4 +1,5 @@
 import type { VNode } from 'vue';
+
 import { withModifiers } from 'vue';
 import { BeanRenderBase, ClientOnly } from 'zova';
 import { Render } from 'zova-module-a-bean';
@@ -35,8 +36,7 @@ export class RenderTabs extends BeanRenderBase {
               nativeOnClick={withModifiers(() => {
                 $$modelTabs.deleteTab(tabKey);
               }, ['stop'])}
-            >
-            </ZIcon>
+            ></ZIcon>
           )}
         </a>
       );
@@ -48,16 +48,10 @@ export class RenderTabs extends BeanRenderBase {
       </div>
     );
     if (!this.$$modelTabs.cache) return domWrapper;
-    return (
-      <ClientOnly>
-        {domWrapper}
-      </ClientOnly>
-    );
+    return <ClientOnly>{domWrapper}</ClientOnly>;
   }
 
   _renderRouterViewTabs() {
-    return (
-      <ZRouterViewTabs></ZRouterViewTabs>
-    );
+    return <ZRouterViewTabs></ZRouterViewTabs>;
   }
 }

@@ -1,7 +1,9 @@
 import type { ModelTabs, ModelTabsOptions } from 'zova-module-a-routertabs';
+
 import { BeanControllerBase, Use, useComputed, useCustomRef } from 'zova';
 import { Controller } from 'zova-module-a-bean';
 import { $QueryAutoLoad } from 'zova-module-a-model';
+
 import { ModelLayout } from '../../model/layout.js';
 import { ModelMenu } from '../../model/menu.js';
 import { IServiceSsrOptions, ServiceSsr } from '../../service/ssr.js';

@@ -10,9 +10,7 @@ export class ControllerPageLocale extends BeanControllerPageBase {
     return (
       <ZPage>
         <div>
-          {this.app.meta.locale.current}
-          :
-          {this.scope.locale.HelloWorld()}
+          {this.app.meta.locale.current}:{this.scope.locale.HelloWorld()}
         </div>
         <div>{this.scope.locale.HelloWorld()}</div>
         <button

@@ -1,8 +1,9 @@
 import type { IGlobBeanFile, OnionSceneMeta } from '@cabloy/module-info';
-import path from 'node:path';
+
 import { skipPrefix, stringToCapitalize, toLowerCaseFirstChar, toUpperCaseFirstChar } from '@cabloy/word-utils';
 import fse from 'fs-extra';
 import { globby } from 'globby';
+import path from 'node:path';
 
 export function checkIgnoreOfParts(parts: string[]) {
   const indexLast = parts.length - 1;
@@ -30,11 +31,7 @@ export async function globAllTsFiles(moduleName: string, modulePath: string): Pr
     const parts = fileName.split('.').slice(0, -1);
     const isIgnore = checkIgnoreOfParts(parts);
     const fileNameJS = fileName.replace('.ts', '.js').replace('.tsx', '.jsx');
-    const fileNameJSRelative = path
-      .relative(pathMetadata, filePath)
-      .replace(/\\/g, '/')
-      .replace('.ts', '.js')
-      .replace('.tsx', '.jsx');
+    const fileNameJSRelative = path.relative(pathMetadata, filePath).replace(/\\/g, '/').replace('.ts', '.js').replace('.tsx', '.jsx');
     const fileContent = fse.readFileSync(filePath).toString();
     const isVirtual = fileContent.includes('@Virtual()');
     const isPreload = fileContent.includes('@Preload()');
@@ -89,9 +86,7 @@ export function extractBeanInfo(sceneName: string, fileContent: string, sceneMet
     }
   }
   // isGlobal
-  const isGlobal = sceneMeta.hasLocal
-    ? fileContent.match(/@.*?\(\{([\s\S]*?)global: true([\s\S]*?)\}([\s\S]*?)\)\s*export class/)
-    : true;
+  const isGlobal = sceneMeta.hasLocal ? fileContent.match(/@.*?\(\{([\s\S]*?)global: true([\s\S]*?)\}([\s\S]*?)\)\s*export class/) : true;
   return { optionsCustomInterface, optionsCustomInterfaceFrom, isGlobal };
 }
 

@@ -2,7 +2,9 @@
   "editor.bracketPairColorization.enabled": true,
   "editor.guides.bracketPairs": true,
   // tailwindCSS
-  "tailwindCSS.experimental.classRegex": [["classes\\(([^)]*)\\)", "(?:'|\"|`)([^']*)(?:'|\"|`)"]],
+  "tailwindCSS.experimental.classRegex": [
+    ["classes\\(([^)]*)\\)", "(?:'|\"|`)([^']*)(?:'|\"|`)"]
+  ],
   // typescript
   "js/ts.tsserver.automaticTypeAcquisition.enabled": true,
   "js/ts.format.enabled": true,
@@ -20,13 +22,13 @@
   "editor.formatOnSave": true,
   // oxlint
   "editor.codeActionsOnSave": {
-    "source.fixAll.oxc": "always",
+    "source.fixAll.oxc": "always"
   },
   "[typescriptreact]": {
-    "editor.defaultFormatter": "oxc.oxc-vscode",
+    "editor.defaultFormatter": "oxc.oxc-vscode"
   },
   "[typescript]": {
-    "editor.defaultFormatter": "oxc.oxc-vscode",
+    "editor.defaultFormatter": "oxc.oxc-vscode"
   },
   // associations
   "files.associations": {
@@ -34,7 +36,7 @@
     "*.css.ejs": "css",
     "*.less.ejs": "less",
     "*.code-snippets": "text",
-    "docker-compose-dockerfile-app": "dockerfile",
+    "docker-compose-dockerfile-app": "dockerfile"
   },
   // search
   "search.exclude": {
@@ -47,9 +49,9 @@
     "/src/backend/run/**": true,
     "src/front/__dist,": true,
     "src/front/__runtime,": true,
-    "**/node_modules": true,
+    "**/node_modules": true
   },
   "search.useIgnoreFiles": false,
   "textlint.autoFixOnSave": true,
-  "hide-my-secrets.hideSecrets": false,
+  "hide-my-secrets.hideSecrets": false
 }

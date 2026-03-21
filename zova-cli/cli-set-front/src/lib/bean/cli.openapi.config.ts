@@ -1,6 +1,7 @@
-import path from 'node:path';
 import { BeanCliBase } from '@cabloy/cli';
 import fse from 'fs-extra';
+import path from 'node:path';
+
 import { __ThisSetName__ } from '../this.ts';
 
 declare module '@cabloy/cli' {

@@ -1,21 +1,16 @@
 {
   "name": "zova-module-devui-adapter",
-  "type": "module",
   "version": "5.0.33",
-  "title": "devui-adapter",
-  "zovaModule": {
-    "capabilities": {
-      "monkey": true
-    },
-    "dependencies": {
-      "a-zova": "5.0.0"
-    }
-  },
+  "gitHead": "73721393c1ea9a95539948d57ad692f2c004d7c7",
   "description": "devui",
-  "author": "zhennann",
   "keywords": [
     "Zova Module"
   ],
+  "author": "zhennann",
+  "files": [
+    "dist"
+  ],
+  "type": "module",
   "exports": {
     ".": {
       "types": [
@@ -27,9 +22,14 @@
     },
     "./*": "./*"
   },
-  "files": [
-    "dist"
-  ],
   "scripts": {},
-  "gitHead": "73721393c1ea9a95539948d57ad692f2c004d7c7"
+  "title": "devui-adapter",
+  "zovaModule": {
+    "capabilities": {
+      "monkey": true
+    },
+    "dependencies": {
+      "a-zova": "5.0.0"
+    }
+  }
 }

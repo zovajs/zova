@@ -1,5 +1,6 @@
 import type { IMonkeySysInitialize } from 'zova';
 import type { IOpenapiOptionsResourceMeta } from 'zova-module-a-openapi';
+
 import { BeanSimple, deepExtend } from 'zova';
 
 export class MonkeySys extends BeanSimple implements IMonkeySysInitialize {
@@ -43,10 +44,6 @@ export class MonkeySys extends BeanSimple implements IMonkeySysInitialize {
     };
     // rest
     const scopeRestConfig = this.sys.util.getModuleConfigSafe('a-openapi');
-    scopeRestConfig.resourceMeta = deepExtend(
-      {},
-      scopeRestConfig.resourceMeta,
-      configCustom,
-    );
+    scopeRestConfig.resourceMeta = deepExtend({}, scopeRestConfig.resourceMeta, configCustom);
   }
 }

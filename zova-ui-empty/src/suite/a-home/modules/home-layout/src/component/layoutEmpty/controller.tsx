@@ -1,6 +1,7 @@
 import { BeanControllerBase, Use } from 'zova';
 import { Controller } from 'zova-module-a-bean';
 import { ZRouterViewEmpty } from 'zova-module-a-router';
+
 import { IServiceSsrOptions, ServiceSsr } from '../../service/ssr.js';
 
 export interface ControllerLayoutEmptyProps {}
@@ -13,8 +14,6 @@ export class ControllerLayoutEmpty extends BeanControllerBase {
   $$ssr: ServiceSsr;
 
   protected render() {
-    return (
-      <ZRouterViewEmpty></ZRouterViewEmpty>
-    );
+    return <ZRouterViewEmpty></ZRouterViewEmpty>;
   }
 }

@@ -1,5 +1,7 @@
 import type { IGlobBeanFile, OnionSceneMeta } from '@cabloy/module-info';
+
 import { replaceTemplate, toUpperCaseFirstChar } from '@cabloy/word-utils';
+
 import { beanFullNameFromOnionName, extractBeanInfo, getScopeModuleName } from './utils.ts';
 
 export async function generateOnions(
@@ -31,17 +33,14 @@ export async function generateOnions(
       const fileInfo = extractBeanInfo(sceneName, fileContent, sceneMeta);
       // import options
       if (fileInfo.optionsCustomInterface) {
-        contentImports.push(
-          `import { ${fileInfo.optionsCustomInterface} } from '${fileInfo.optionsCustomInterfaceFrom || fileNameJSRelative}';`,
-        );
+        contentImports.push(`import { ${fileInfo.optionsCustomInterface} } from '${fileInfo.optionsCustomInterfaceFrom || fileNameJSRelative}';`);
       }
       // valueOptionsCustomInterface
       let valueOptionsCustomInterface = fileInfo.optionsCustomInterface;
       if (valueOptionsCustomInterface && sceneMeta.optionsCustomInterfaceTemplate) {
-        valueOptionsCustomInterface = replaceTemplate(
-          sceneMeta.optionsCustomInterfaceTemplate,
-          { optionsCustomInterface: valueOptionsCustomInterface },
-        );
+        valueOptionsCustomInterface = replaceTemplate(sceneMeta.optionsCustomInterfaceTemplate, {
+          optionsCustomInterface: valueOptionsCustomInterface,
+        });
       }
       // record
       if (fileInfo.isGlobal) {
@@ -101,9 +100,11 @@ export interface I${sceneNameCapitalize}RecordLocal {
   const content = `/** ${sceneName}: begin */
 ${contentExports.join('\n')}
 ${contentImports.join('\n')}
-${needImportOptionsGlobalInterface
-  ? `import { ${sceneMeta.optionsGlobalInterfaceName} } from '${sceneMeta.optionsGlobalInterfaceFrom || 'zova'}';`
-  : `import '${sceneMeta.optionsGlobalInterfaceFrom || 'zova'}';`}
+${
+  needImportOptionsGlobalInterface
+    ? `import { ${sceneMeta.optionsGlobalInterfaceName} } from '${sceneMeta.optionsGlobalInterfaceFrom || 'zova'}';`
+    : `import '${sceneMeta.optionsGlobalInterfaceFrom || 'zova'}';`
+}
 declare module '${sceneMeta.optionsGlobalInterfaceFrom || 'zova'}' {
   ${contentRecordsGlobal.length > 0 ? exportRecordsMiddlewareGlobal : ''}
   ${contentRecordsLocal.length > 0 ? exportRecordsMiddlewareLocal : ''}
