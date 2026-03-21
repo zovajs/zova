@@ -1,4 +1,5 @@
 import type { IDecoratorModelOptions } from 'zova-module-a-model';
+
 import { UseScope } from 'zova';
 import { BeanModelBase, Model } from 'zova-module-a-model';
 import { ScopeModuleASsr } from 'zova-module-a-ssr';

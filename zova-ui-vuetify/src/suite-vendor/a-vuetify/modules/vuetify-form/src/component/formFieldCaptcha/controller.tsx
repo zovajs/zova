@@ -50,17 +50,23 @@ export class ControllerFormFieldCaptcha extends BeanControllerBase {
   }
 
   private async createCaptchaData() {
-    this.captchaData = await this.$api.captcha.create({
-      scene: this.captchaScene,
-    }, { authToken: false });
+    this.captchaData = await this.$api.captcha.create(
+      {
+        scene: this.captchaScene,
+      },
+      { authToken: false },
+    );
     this.setFieldCaptchaData();
   }
 
   private async refreshCaptchaData() {
-    this.captchaData = await this.$api.captcha.refresh({
-      id: this.captchaData!.id,
-      scene: this.captchaScene,
-    }, { authToken: false });
+    this.captchaData = await this.$api.captcha.refresh(
+      {
+        id: this.captchaData!.id,
+        scene: this.captchaScene,
+      },
+      { authToken: false },
+    );
     this.setFieldCaptchaData();
   }
 
@@ -92,9 +98,7 @@ export class ControllerFormFieldCaptcha extends BeanControllerBase {
             },
           };
           return (
-            <VTextField
-              {...propsNew}
-            >
+            <VTextField {...propsNew}>
               {{
                 'append-inner': () => this._renderCaptcha(),
               }}

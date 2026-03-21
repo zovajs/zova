@@ -1,4 +1,10 @@
-import type { IJsxRenderContextBase, TypeOpenapiPermissions, TypeResourceActionRowRecord, TypeResourceActionTableRecord } from 'zova-module-a-openapi';
+import type {
+  IJsxRenderContextBase,
+  TypeOpenapiPermissions,
+  TypeResourceActionRowRecord,
+  TypeResourceActionTableRecord,
+} from 'zova-module-a-openapi';
+
 import type { ControllerPageResource } from '../page/resource/controller.jsx';
 
 export interface IPageWrapperScope {

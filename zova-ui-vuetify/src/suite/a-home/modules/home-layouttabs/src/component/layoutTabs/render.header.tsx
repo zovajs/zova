@@ -1,7 +1,8 @@
-import type { RenderLayoutTabs } from './render.jsx';
 import { VAppBar, VAppBarNavIcon, VSpacer, VToolbarTitle } from 'vuetify/components';
 import { BeanRenderBase, Use } from 'zova';
 import { Render } from 'zova-module-a-bean';
+
+import type { RenderLayoutTabs } from './render.jsx';
 
 @Render()
 export class RenderHeader extends BeanRenderBase {

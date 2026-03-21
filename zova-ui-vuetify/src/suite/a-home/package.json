@@ -1,10 +1,9 @@
 {
   "name": "zova-suite-a-home",
-  "title": "Home",
-  "type": "module",
   "version": "5.0.0",
   "description": "",
   "author": "zhennann",
+  "type": "module",
   "dependencies": {
     "zova-module-home-api": "workspace:^",
     "zova-module-home-base": "workspace:^",
@@ -14,5 +13,6 @@
     "zova-module-home-layouttabs": "^5.0.0",
     "zova-module-home-login": "^5.0.0",
     "zova-module-home-passport": "^5.0.0"
-  }
+  },
+  "title": "Home"
 }

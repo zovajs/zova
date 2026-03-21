@@ -1,10 +1,8 @@
 import type LuxonAdapter from '@date-io/luxon';
 import type { UnwrapNestedRefs } from 'vue';
-
 import type { DateInstance, DefaultsInstance, DisplayInstance, LocaleInstance, ThemeInstance } from 'vuetify';
 
 import 'zova';
-
 import 'vue/jsx-runtime';
 
 export interface VuetifyGlobal {

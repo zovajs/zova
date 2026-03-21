@@ -1,13 +1,17 @@
 {
   "name": "zova-module-home-api",
-  "type": "module",
   "version": "5.0.0",
-  "title": "home-api",
   "description": "",
-  "author": "",
   "keywords": [
     "Zova Module"
   ],
+  "author": "",
+  "files": [
+    "cli",
+    "dist",
+    "mock"
+  ],
+  "type": "module",
   "exports": {
     ".": {
       "types": [
@@ -19,11 +23,7 @@
     },
     "./*": "./*"
   },
-  "files": [
-    "cli",
-    "dist",
-    "mock"
-  ],
   "scripts": {},
-  "dependencies": {}
+  "dependencies": {},
+  "title": "home-api"
 }

@@ -1,5 +1,11 @@
 import type { TableIdentity } from 'table-identity';
-import type { IJsxRenderContextBase, TypeOpenapiPermissions, TypeResourceActionRowRecord, TypeResourceActionTableRecord } from 'zova-module-a-openapi';
+import type {
+  IJsxRenderContextBase,
+  TypeOpenapiPermissions,
+  TypeResourceActionRowRecord,
+  TypeResourceActionTableRecord,
+} from 'zova-module-a-openapi';
+
 import type { ControllerPageEntry } from '../page/entry/controller.jsx';
 
 export interface IPageEntryWrapperScope {

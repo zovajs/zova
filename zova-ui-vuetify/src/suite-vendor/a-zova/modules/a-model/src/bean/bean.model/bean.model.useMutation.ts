@@ -1,14 +1,11 @@
-import type {
-  DefaultError,
-  MutationKey,
-  MutationObserverOptions,
-  QueryClient,
-  UseMutationReturnType,
-} from '@tanstack/vue-query';
+import type { DefaultError, MutationKey, MutationObserverOptions, QueryClient, UseMutationReturnType } from '@tanstack/vue-query';
 import type { UnwrapNestedRefs } from 'vue';
-import type { MaybeRefDeep } from '../../common/types.js';
+
 import { hashKey, useMutation } from '@tanstack/vue-query';
 import { cast } from 'zova';
+
+import type { MaybeRefDeep } from '../../common/types.js';
+
 import { BeanModelUseStateGeneral } from './bean.model.useStateGeneral.js';
 
 const SymbolUseMutations = Symbol('SymbolUseMutations');
@@ -47,8 +44,6 @@ export class BeanModelUseMutation extends BeanModelUseStateGeneral {
       mutationOptions = Object.assign(optionsDefault, mutationOptions, { mutationKey });
       this[SymbolUseMutations][mutationHash] = this.$useMutation(mutationOptions, queryClient);
     }
-    return this[SymbolUseMutations][mutationHash] as UnwrapNestedRefs<
-      UseMutationReturnType<TData, DefaultError, TVariables, TContext>
-    >;
+    return this[SymbolUseMutations][mutationHash] as UnwrapNestedRefs<UseMutationReturnType<TData, DefaultError, TVariables, TContext>>;
   }
 }

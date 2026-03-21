@@ -1,23 +1,18 @@
 {
   "name": "zova-module-a-behavior",
-  "type": "module",
   "version": "5.0.0",
-  "title": "a-behavior",
-  "zovaModule": {
-    "onions": {
-      "behavior": {
-        "optionsGlobalInterfaceName": "IDecoratorBehaviorOptions",
-        "optionsGlobalInterfaceFrom": "zova-module-a-behavior",
-        "boilerplate": "cli/behavior/boilerplate",
-        "metadataCustom": "cli/behavior/metadata/generate.ts"
-      }
-    }
-  },
   "description": "",
-  "author": "",
   "keywords": [
     "Zova Module"
   ],
+  "author": "",
+  "files": [
+    "cli",
+    "dist",
+    "mock",
+    "rest"
+  ],
+  "type": "module",
   "exports": {
     ".": {
       "types": [
@@ -29,16 +24,21 @@
     },
     "./*": "./*"
   },
-  "files": [
-    "cli",
-    "dist",
-    "mock",
-    "rest"
-  ],
   "scripts": {
     "clean": "tsc -b --clean",
     "tsc:publish": "npm run clean && tsc -b",
     "_prepublishOnly": "npm run tsc:publish"
   },
-  "dependencies": {}
+  "dependencies": {},
+  "title": "a-behavior",
+  "zovaModule": {
+    "onions": {
+      "behavior": {
+        "optionsGlobalInterfaceName": "IDecoratorBehaviorOptions",
+        "optionsGlobalInterfaceFrom": "zova-module-a-behavior",
+        "boilerplate": "cli/behavior/boilerplate",
+        "metadataCustom": "cli/behavior/metadata/generate.ts"
+      }
+    }
+  }
 }

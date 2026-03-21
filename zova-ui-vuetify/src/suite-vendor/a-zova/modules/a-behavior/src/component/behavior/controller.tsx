@@ -1,7 +1,10 @@
 import type { IComponentOptions } from 'zova';
-import type { IBehaviors, IBehaviorTag } from '../../types/behavior.js';
+
 import { BeanControllerBase, SymbolControllerRefDisable, Use } from 'zova';
 import { Controller } from 'zova-module-a-bean';
+
+import type { IBehaviors, IBehaviorTag } from '../../types/behavior.js';
+
 import { BeanBehaviorsHolder } from '../../bean/bean.behaviorsHolder.js';
 
 export interface ControllerBehaviorProps {

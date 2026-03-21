@@ -1,4 +1,5 @@
 import type { IModuleRoute } from 'zova-module-a-router';
+
 import { ZPageEntry } from './.metadata/page/entry.js';
 import { ZPageEntryCreate } from './.metadata/page/entryCreate.js';
 import { ZPageResource } from './.metadata/page/resource.js';

@@ -1,7 +1,38 @@
 {
   "name": "zova-module-a-table",
-  "type": "module",
   "version": "5.0.0",
+  "description": "",
+  "keywords": [
+    "Zova Module"
+  ],
+  "author": "",
+  "files": [
+    "cli",
+    "dist",
+    "mock",
+    "rest"
+  ],
+  "type": "module",
+  "exports": {
+    ".": {
+      "types": [
+        "./src/index.ts",
+        "./dist/index.d.ts"
+      ],
+      "import": "./src/index.ts",
+      "default": "./dist/index.js"
+    },
+    "./*": "./*"
+  },
+  "scripts": {
+    "clean": "tsc -b --clean",
+    "tsc:publish": "npm run clean && tsc -b",
+    "_prepublishOnly": "npm run tsc:publish"
+  },
+  "dependencies": {
+    "@tanstack/table-core": "^8.21.3",
+    "@tanstack/vue-table": "^8.21.3"
+  },
   "title": "a-table",
   "zovaModule": {
     "globalDependencies": {
@@ -28,36 +59,5 @@
         "metadataCustom": "cli/tableCell/metadata/generate.ts"
       }
     }
-  },
-  "description": "",
-  "author": "",
-  "keywords": [
-    "Zova Module"
-  ],
-  "exports": {
-    ".": {
-      "types": [
-        "./src/index.ts",
-        "./dist/index.d.ts"
-      ],
-      "import": "./src/index.ts",
-      "default": "./dist/index.js"
-    },
-    "./*": "./*"
-  },
-  "files": [
-    "cli",
-    "dist",
-    "mock",
-    "rest"
-  ],
-  "scripts": {
-    "clean": "tsc -b --clean",
-    "tsc:publish": "npm run clean && tsc -b",
-    "_prepublishOnly": "npm run tsc:publish"
-  },
-  "dependencies": {
-    "@tanstack/table-core": "^8.21.3",
-    "@tanstack/vue-table": "^8.21.3"
   }
 }

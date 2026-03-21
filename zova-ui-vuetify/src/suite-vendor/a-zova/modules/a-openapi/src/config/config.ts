@@ -1,4 +1,5 @@
 import type { ZovaSys } from 'zova';
+
 import type { IOpenapiOptionsResourceMeta } from '../types/resourceMeta.js';
 
 export const config = (_sys: ZovaSys) => {

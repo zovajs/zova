@@ -37,18 +37,13 @@ export class ControllerPageState extends BeanControllerPageBase {
             Decrement
           </VBtn>
         </VBtnGroup>
-        <VDivider
-          color="primary"
-          opacity=".7"
-          thickness="12"
-          variant="double"
-          gradient
-        ></VDivider>
+        <VDivider color="primary" opacity=".7" thickness="12" variant="double" gradient></VDivider>
         <div>
           <VIcon icon={this.icon}></VIcon>
-          <VBtn nativeOnClick={() => {
-            this.icon = this.icon === '::add' ? ('$cancel' as any) : '::add';
-          }}
+          <VBtn
+            nativeOnClick={() => {
+              this.icon = this.icon === '::add' ? ('$cancel' as any) : '::add';
+            }}
           >
             Switch
           </VBtn>

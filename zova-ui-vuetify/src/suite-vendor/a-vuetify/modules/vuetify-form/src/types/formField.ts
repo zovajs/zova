@@ -1,11 +1,12 @@
 import type { IIconRecord } from 'zova-module-a-icon';
+
 import 'zova-module-a-form';
 
 declare module 'zova-module-a-form' {
   export interface IFormFieldRenderContextProps {
     'label'?: string;
     'modelValue'?: any;
-    'onUpdate:modelValue'?: ((value: any) => void);
+    'onUpdate:modelValue'?: (value: any) => void;
     'error'?: boolean;
     'errorMessages'?: string;
     'prependIcon'?: keyof IIconRecord;

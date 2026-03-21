@@ -4,8 +4,16 @@ import z from 'zod';
 import { cast, ILocaleRecord, TypeEventOff, Use, usePrepareArg } from 'zova';
 import { IApiSchemaOptions } from 'zova-module-a-api';
 import { $QueryAutoLoad, BeanModelBase, IDecoratorModelOptions, Model } from 'zova-module-a-model';
+
 import { SysSdk } from '../bean/sys.sdk.js';
-import { getSchemaOfRequestBody, getSchemaOfRequestQuery, getSchemaOfRequestQueryFilter, getSchemaOfResponseBody, loadSchemaProperties, schemaToZodSchema } from '../lib/schema.js';
+import {
+  getSchemaOfRequestBody,
+  getSchemaOfRequestQuery,
+  getSchemaOfRequestQueryFilter,
+  getSchemaOfResponseBody,
+  loadSchemaProperties,
+  schemaToZodSchema,
+} from '../lib/schema.js';
 import { TypeOpenapiPermissions } from '../types/resourceMeta.js';
 import { TypeSchemaScene } from '../types/rest.js';
 import { IOpenapiSchemas, TypeOpenapiSchemasSdk } from '../types/schema.js';
@@ -23,10 +31,7 @@ export class ModelSdk extends BeanModelBase {
 
   @Use({ beanFullName: 'a-openapi.sys.sdk' })
   get $$sysSdk(): SysSdk {
-    return usePrepareArg(
-      this.selector,
-      true,
-    );
+    return usePrepareArg(this.selector, true);
   }
 
   protected async __init__(locale: keyof ILocaleRecord) {
@@ -72,10 +77,10 @@ export class ModelSdk extends BeanModelBase {
         const bootstrap = await this.$$sysSdk.loadBootstrap(this.$fetch, resource);
         let permissions = bootstrap.resourceMeta.permissions;
         if (!isNil(permissions)) return permissions;
-        permissions = await this.$fetch.get(
+        permissions = (await this.$fetch.get(
           this.sys.util.apiActionPathTranslate(this.scope.config.api.permissions, { resource }),
           this.sys.util.apiActionConfigPrepare(),
-        ) as TypeOpenapiPermissions;
+        )) as TypeOpenapiPermissions;
         return permissions ?? null;
       },
     });

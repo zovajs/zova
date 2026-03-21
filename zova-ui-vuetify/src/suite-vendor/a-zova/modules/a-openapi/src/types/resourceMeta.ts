@@ -1,5 +1,6 @@
 import type { TypeComponentRecordSelectorKeysStrict } from 'zova';
 import type { IActionsRecord } from 'zova-module-a-action';
+
 import type { IOpenapiPermissions } from './permissions.js';
 
 export type TypeOpenApiRestResourceScene = 'table' | 'row';

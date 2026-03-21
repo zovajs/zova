@@ -1,4 +1,5 @@
 import type { ModelTabs, ModelTabsOptions } from 'zova-module-a-routertabs';
+
 import { provide, ref } from 'vue';
 import { BeanControllerBase, Use, useComputed, useCustomRef, UseScope } from 'zova';
 import { Controller } from 'zova-module-a-bean';
@@ -6,6 +7,7 @@ import { $QueryAutoLoad } from 'zova-module-a-model';
 import { ScopeModuleASsr } from 'zova-module-a-ssr';
 import { IServiceSsrLayoutOptions, ServiceLocale, ServiceSsrLayout } from 'zova-module-home-base';
 import { ILayoutConfig } from 'zova-module-vuetify-adapter';
+
 import { ModelLayout } from '../../model/layout.js';
 import { ModelMenu } from '../../model/menu.js';
 
@@ -98,11 +100,14 @@ export class ControllerLayoutTabs extends BeanControllerBase {
     };
     this.$$modelTabs = await this.bean._getBeanSelector('a-routertabs.model.tabs', true, configTabs.scene, tabsOptions);
     // watch menus
-    this.$watch(() => {
-      return this.$$modelMenu.retrieveMenus().data;
-    }, () => {
-      this.$$modelTabs.updateAllTabInfos();
-    });
+    this.$watch(
+      () => {
+        return this.$$modelMenu.retrieveMenus().data;
+      },
+      () => {
+        this.$$modelTabs.updateAllTabInfos();
+      },
+    );
   }
 
   private __initLayoutConfig() {

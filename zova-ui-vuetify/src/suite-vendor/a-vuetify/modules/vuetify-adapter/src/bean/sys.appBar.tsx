@@ -9,6 +9,7 @@ import { omit } from 'vuetify/lib/util/helpers.mjs';
 import { useRender } from 'vuetify/lib/util/useRender.mjs';
 import { BeanBase } from 'zova';
 import { Sys } from 'zova-module-a-bean';
+
 import { ILayoutConfig } from '../types/layoutConfig.js';
 
 @Sys()
@@ -30,7 +31,7 @@ export class SysAppBar extends BeanBase {
           collapse: behavior.has('collapse'),
           elevate: behavior.has('elevate'),
           fadeImage: behavior.has('fade-image'),
-        // shrink: behavior.has('shrink'),
+          // shrink: behavior.has('shrink'),
         };
       });
       const canScroll = computed(() => {
@@ -53,79 +54,66 @@ export class SysAppBar extends BeanBase {
         return height + extensionHeight;
       });
 
-      const {
-        currentScroll,
-        scrollThreshold,
-        isScrollingUp,
-        scrollRatio,
-        isAtBottom,
-        reachedBottomWhileScrollingDown,
-        hasEnoughScrollableSpace,
-      } = useScroll(props, { canScroll, layoutSize: appBarHeight });
+      const { currentScroll, scrollThreshold, isScrollingUp, scrollRatio, isAtBottom, reachedBottomWhileScrollingDown, hasEnoughScrollableSpace } =
+        useScroll(props, { canScroll, layoutSize: appBarHeight });
 
-      const canHide = toRef(() => (
-        scrollBehavior.value.hide ||
-        scrollBehavior.value.fullyHide
-      ));
-      const isCollapsed = computed(() => props.collapse || (
-        scrollBehavior.value.collapse &&
-        (scrollBehavior.value.inverted ? scrollRatio.value > 0 : scrollRatio.value === 0)
-      ));
-      const isFlat = computed(() => props.flat || (
-        scrollBehavior.value.fullyHide &&
-        !isActive.value
-      ) || (
-        scrollBehavior.value.elevate &&
-        (scrollBehavior.value.inverted ? currentScroll.value > 0 : currentScroll.value === 0)
-      ));
-      const opacity = computed(() => (
-        scrollBehavior.value.fadeImage
-          ? (scrollBehavior.value.inverted ? 1 - scrollRatio.value : scrollRatio.value)
-          : undefined
-      ));
+      const canHide = toRef(() => scrollBehavior.value.hide || scrollBehavior.value.fullyHide);
+      const isCollapsed = computed(
+        () => props.collapse || (scrollBehavior.value.collapse && (scrollBehavior.value.inverted ? scrollRatio.value > 0 : scrollRatio.value === 0)),
+      );
+      const isFlat = computed(
+        () =>
+          props.flat ||
+          (scrollBehavior.value.fullyHide && !isActive.value) ||
+          (scrollBehavior.value.elevate && (scrollBehavior.value.inverted ? currentScroll.value > 0 : currentScroll.value === 0)),
+      );
+      const opacity = computed(() =>
+        scrollBehavior.value.fadeImage ? (scrollBehavior.value.inverted ? 1 - scrollRatio.value : scrollRatio.value) : undefined,
+      );
       const height = computed(() => {
         if (scrollBehavior.value.hide && scrollBehavior.value.inverted) return 0;
 
         const height = vToolbarRef.value?.contentHeight ?? 0;
         const extensionHeight = vToolbarRef.value?.extensionHeight ?? 0;
 
-        if (!canHide.value) return (height + extensionHeight);
+        if (!canHide.value) return height + extensionHeight;
 
-        return currentScroll.value < scrollThreshold.value || scrollBehavior.value.fullyHide
-          ? (height + extensionHeight)
-          : height;
+        return currentScroll.value < scrollThreshold.value || scrollBehavior.value.fullyHide ? height + extensionHeight : height;
       });
 
-      useToggleScope(() => !!props.scrollBehavior, () => {
-        watchEffect(() => {
-          if (!canHide.value) {
-            isActive.value = true;
-            return;
-          }
+      useToggleScope(
+        () => !!props.scrollBehavior,
+        () => {
+          watchEffect(() => {
+            if (!canHide.value) {
+              isActive.value = true;
+              return;
+            }
 
-          if (scrollBehavior.value.inverted) {
-            isActive.value = currentScroll.value > scrollThreshold.value;
-            return;
-          }
+            if (scrollBehavior.value.inverted) {
+              isActive.value = currentScroll.value > scrollThreshold.value;
+              return;
+            }
 
-          // If there's not enough scrollable space, don't apply scroll-hide behavior at all
-          // This prevents flickering/bouncing animations on short pages
-          if (!hasEnoughScrollableSpace.value) {
-            isActive.value = true;
-            return;
-          }
+            // If there's not enough scrollable space, don't apply scroll-hide behavior at all
+            // This prevents flickering/bouncing animations on short pages
+            if (!hasEnoughScrollableSpace.value) {
+              isActive.value = true;
+              return;
+            }
 
-          // Prevent navbar from showing when we reached bottom while scrolling down
-          // This handles the case where scroll momentum causes to hit bottom during hide transition
-          if (reachedBottomWhileScrollingDown.value) {
-            isActive.value = false;
-            return;
-          }
+            // Prevent navbar from showing when we reached bottom while scrolling down
+            // This handles the case where scroll momentum causes to hit bottom during hide transition
+            if (reachedBottomWhileScrollingDown.value) {
+              isActive.value = false;
+              return;
+            }
 
-          // Normal behavior: show when scrolling up (and not at bottom) or above threshold
-          isActive.value = (isScrollingUp.value && !isAtBottom.value) || (currentScroll.value < scrollThreshold.value);
-        });
-      });
+            // Normal behavior: show when scrolling up (and not at bottom) or above threshold
+            isActive.value = (isScrollingUp.value && !isAtBottom.value) || currentScroll.value < scrollThreshold.value;
+          });
+        },
+      );
 
       const { ssrBootStyles } = useSsrBoot();
       const { layoutItemStyles } = useLayoutItem({
@@ -182,14 +170,10 @@ function useLayoutStylePatch(layoutItemStyles: Ref<CSSProperties, CSSProperties>
     if (process.env.SSR && layoutConfigRef?.value) {
       if (layoutConfigRef.value.leftDrawerOpen) {
         const __mainStyleLayoutLeft = `${layoutConfigRef.value.sidebar.width}px`;
-        layoutItemStylesPatch = Object.assign(
-          {},
-          layoutItemStyles.value,
-          {
-            left: __mainStyleLayoutLeft,
-            width: `calc(100% - ${__mainStyleLayoutLeft} - 0px)`,
-          },
-        );
+        layoutItemStylesPatch = Object.assign({}, layoutItemStyles.value, {
+          left: __mainStyleLayoutLeft,
+          width: `calc(100% - ${__mainStyleLayoutLeft} - 0px)`,
+        });
       } else {
         layoutItemStylesPatch = layoutItemStyles.value;
       }

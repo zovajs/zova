@@ -1,6 +1,31 @@
 {
   "name": "zova-module-vuetify-adapter",
   "version": "5.0.0",
+  "description": "vuetify",
+  "keywords": [
+    "Zova Module"
+  ],
+  "author": "zhennann",
+  "files": [
+    "dist"
+  ],
+  "type": "module",
+  "exports": {
+    ".": {
+      "types": [
+        "./src/index.ts",
+        "./dist/index.d.ts"
+      ],
+      "import": "./src/index.ts",
+      "default": "./dist/index.js"
+    },
+    "./*": "./*"
+  },
+  "scripts": {},
+  "dependencies": {
+    "@date-io/core": "^3.2.0",
+    "@date-io/luxon": "^3.2.0"
+  },
   "title": "vuetify-adapter",
   "zovaModule": {
     "capabilities": {
@@ -29,30 +54,5 @@
         }
       ]
     }
-  },
-  "type": "module",
-  "exports": {
-    ".": {
-      "types": [
-        "./src/index.ts",
-        "./dist/index.d.ts"
-      ],
-      "import": "./src/index.ts",
-      "default": "./dist/index.js"
-    },
-    "./*": "./*"
-  },
-  "description": "vuetify",
-  "keywords": [
-    "Zova Module"
-  ],
-  "author": "zhennann",
-  "files": [
-    "dist"
-  ],
-  "scripts": {},
-  "dependencies": {
-    "@date-io/core": "^3.2.0",
-    "@date-io/luxon": "^3.2.0"
   }
 }

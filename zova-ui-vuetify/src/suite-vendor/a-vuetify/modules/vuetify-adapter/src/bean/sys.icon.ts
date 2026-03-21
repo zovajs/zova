@@ -8,6 +8,7 @@ import { convertToUnit, flattenFragments, useRender } from 'vuetify/lib/util/ind
 import { BeanBase, useApp } from 'zova';
 import { Sys } from 'zova-module-a-bean';
 import { $getZovaIcon } from 'zova-module-a-icon';
+
 import { VSvgIconZova } from '../lib/svg.js';
 
 @Sys()
@@ -43,33 +44,52 @@ export class SysIcon extends BeanBase {
         const { iconData } = iconV.value;
         const slotValue = slots.default?.();
         if (slotValue) {
-          slotIcon.value = flattenFragments(slotValue).filter(node => node.type === Text && node.children && typeof node.children === 'string')[0]?.children;
+          slotIcon.value = flattenFragments(slotValue).filter(
+            node => node.type === Text && node.children && typeof node.children === 'string',
+          )[0]?.children;
         }
         const hasClick = !!(attrs.onClick || attrs.onClickOnce);
-        return createVNode(iconData.value.component, {
-          'tag': props.tag,
-          'icon': iconData.value.icon,
-          'class': normalizeClass(['v-icon', 'notranslate', themeClasses.value, sizeClasses.value, textColorClasses.value, {
-            'v-icon--clickable': hasClick,
-            'v-icon--disabled': props.disabled,
-            'v-icon--start': props.start,
-            'v-icon--end': props.end,
-          }, props.class]),
-          'style': normalizeStyle([{
-            '--v-icon-opacity': props.opacity,
-          }, !sizeClasses.value
-            ? {
-                fontSize: convertToUnit(props.size),
-                height: convertToUnit(props.size),
-                width: convertToUnit(props.size),
-              }
-            : undefined, textColorStyles.value, props.style]),
-          'role': hasClick ? 'button' : undefined,
-          'aria-hidden': !hasClick,
-          'tabindex': hasClick ? props.disabled ? -1 : 0 : undefined,
-        }, {
-          default: () => [slotValue],
-        });
+        return createVNode(
+          iconData.value.component,
+          {
+            'tag': props.tag,
+            'icon': iconData.value.icon,
+            'class': normalizeClass([
+              'v-icon',
+              'notranslate',
+              themeClasses.value,
+              sizeClasses.value,
+              textColorClasses.value,
+              {
+                'v-icon--clickable': hasClick,
+                'v-icon--disabled': props.disabled,
+                'v-icon--start': props.start,
+                'v-icon--end': props.end,
+              },
+              props.class,
+            ]),
+            'style': normalizeStyle([
+              {
+                '--v-icon-opacity': props.opacity,
+              },
+              !sizeClasses.value
+                ? {
+                    fontSize: convertToUnit(props.size),
+                    height: convertToUnit(props.size),
+                    width: convertToUnit(props.size),
+                  }
+                : undefined,
+              textColorStyles.value,
+              props.style,
+            ]),
+            'role': hasClick ? 'button' : undefined,
+            'aria-hidden': !hasClick,
+            'tabindex': hasClick ? (props.disabled ? -1 : 0) : undefined,
+          },
+          {
+            default: () => [slotValue],
+          },
+        );
       });
       return {};
     };
@@ -92,9 +112,8 @@ export class SysIcon extends BeanBase {
     if (!slots.default) return [undefined, null];
     const slotDefault = slots.default();
     if (!slotDefault) return [undefined, null];
-    const iconName = flattenFragments(slotDefault).filter(
-      node => node.type === Text && node.children && typeof node.children === 'string',
-    )[0]?.children as string;
+    const iconName = flattenFragments(slotDefault).filter(node => node.type === Text && node.children && typeof node.children === 'string')[0]
+      ?.children as string;
     return [iconName, slotDefault];
   }
 }

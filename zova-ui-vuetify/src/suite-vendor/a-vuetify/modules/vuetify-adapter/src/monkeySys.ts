@@ -1,7 +1,9 @@
 import type { IMonkeySysInitialize } from 'zova';
 import type { IOpenapiOptionsResourceMeta } from 'zova-module-a-openapi';
+
 import { VTextField } from 'vuetify/components';
 import { BeanSimple, deepExtend } from 'zova';
+
 import { SysAppBar } from './bean/sys.appBar.jsx';
 import { SysIcon } from './bean/sys.icon.js';
 import { SysMain } from './bean/sys.main.js';
@@ -52,11 +54,6 @@ export class MonkeySys extends BeanSimple implements IMonkeySysInitialize {
     };
     // rest
     const scopeRestConfig = this.sys.util.getModuleConfigSafe('a-openapi');
-    scopeRestConfig.resourceMeta = deepExtend(
-      {},
-      scopeRestConfig.base,
-      configCustom,
-      scopeRestConfig.resourceMeta,
-    );
+    scopeRestConfig.resourceMeta = deepExtend({}, scopeRestConfig.base, configCustom, scopeRestConfig.resourceMeta);
   }
 }

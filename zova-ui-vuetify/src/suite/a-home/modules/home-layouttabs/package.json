@@ -1,13 +1,17 @@
 {
   "name": "zova-module-home-layouttabs",
-  "title": "home-layouttabs",
-  "type": "module",
   "version": "5.0.0",
   "description": "",
-  "author": "",
   "keywords": [
     "Zova Module"
   ],
+  "author": "",
+  "files": [
+    "dist",
+    "mock",
+    "rest"
+  ],
+  "type": "module",
   "exports": {
     ".": {
       "types": [
@@ -19,15 +23,11 @@
     },
     "./*": "./*"
   },
-  "files": [
-    "dist",
-    "mock",
-    "rest"
-  ],
   "scripts": {
     "clean": "tsc -b --clean",
     "tsc:publish": "npm run clean && tsc -b",
     "_prepublishOnly": "npm run tsc:publish"
   },
-  "dependencies": {}
+  "dependencies": {},
+  "title": "home-layouttabs"
 }

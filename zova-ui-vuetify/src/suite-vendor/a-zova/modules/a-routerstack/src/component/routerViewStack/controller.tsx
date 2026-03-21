@@ -1,8 +1,9 @@
-import type { ModelStack } from '../../model/stack.js';
 import { RouteLocationNormalizedLoadedGeneric } from '@cabloy/vue-router';
 import { Use } from 'zova';
 import { Controller } from 'zova-module-a-bean';
 import { BeanRouterViewBase, IRouterViewPropsBase, IRouteViewRouteMeta } from 'zova-module-a-router';
+
+import type { ModelStack } from '../../model/stack.js';
 
 export interface ControllerRouterViewStackProps extends IRouterViewPropsBase {}
 

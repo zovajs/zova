@@ -1,4 +1,5 @@
 import type { VNode } from 'vue';
+
 import { withModifiers } from 'vue';
 import { VTab, VTabs } from 'vuetify/components';
 import { BeanRenderBase, ClientOnly } from 'zova';
@@ -50,21 +51,12 @@ export class RenderTabs extends BeanRenderBase {
       domTabs.push(domTab);
     }
     const domWrapper = (
-      <VTabs
-        alignTabs="start"
-        centerActive
-        modelValue={$$modelTabs.tabKeyCurrent}
-        mandatory={false}
-      >
+      <VTabs alignTabs="start" centerActive modelValue={$$modelTabs.tabKeyCurrent} mandatory={false}>
         {domTabs}
       </VTabs>
     );
     if (!this.$$modelTabs.cache) return domWrapper;
-    return (
-      <ClientOnly>
-        {domWrapper}
-      </ClientOnly>
-    );
+    return <ClientOnly>{domWrapper}</ClientOnly>;
   }
 
   public getTabIcon(tab: RouteTab) {
@@ -75,8 +67,6 @@ export class RenderTabs extends BeanRenderBase {
   public renderTabItems() {}
 
   _renderRouterViewTabs() {
-    return (
-      <ZRouterViewTabs></ZRouterViewTabs>
-    );
+    return <ZRouterViewTabs></ZRouterViewTabs>;
   }
 }

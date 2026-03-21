@@ -1,4 +1,5 @@
 import type { Pinia } from 'pinia';
+
 import { createPinia } from 'pinia';
 import { BeanBase } from 'zova';
 import { Service } from 'zova-module-a-bean';

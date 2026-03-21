@@ -1,24 +1,32 @@
 {
   "name": "zova-module-a-boundary",
-  "type": "module",
   "version": "5.0.0",
-  "title": "a-boundary",
   "description": "",
+  "keywords": [
+    "Zova Module"
+  ],
   "author": "",
-  "keywords": ["Zova Module"],
+  "files": [
+    "dist",
+    "mock"
+  ],
+  "type": "module",
   "exports": {
     ".": {
-      "types": ["./src/index.ts", "./dist/index.d.ts"],
+      "types": [
+        "./src/index.ts",
+        "./dist/index.d.ts"
+      ],
       "import": "./src/index.ts",
       "default": "./dist/index.js"
     },
     "./*": "./*"
   },
-  "files": ["dist", "mock"],
   "scripts": {
     "clean": "tsc -b --clean",
     "tsc:publish": "npm run clean && tsc -b",
     "_prepublishOnly": "npm run tsc:publish"
   },
-  "dependencies": {}
+  "dependencies": {},
+  "title": "a-boundary"
 }

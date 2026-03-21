@@ -1,5 +1,7 @@
 import type { IMonkeySysInitialize } from 'zova';
+
 import { BeanSimple } from 'zova';
+
 import { SysIcon } from './bean/sys.icon.js';
 
 export class MonkeySys extends BeanSimple implements IMonkeySysInitialize {

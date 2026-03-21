@@ -1,9 +1,11 @@
 import type { VNode } from 'vue';
+
 import { VDivider } from 'vuetify/components';
 import { VList, VListSubheader } from 'vuetify/components';
 import { BeanRenderBase } from 'zova';
 import { Render } from 'zova-module-a-bean';
 import { ZItemLink } from 'zova-module-home-base';
+
 import { TypeMenuItem, TypeMenuTree } from '../../.metadata/index.js';
 
 @Render()

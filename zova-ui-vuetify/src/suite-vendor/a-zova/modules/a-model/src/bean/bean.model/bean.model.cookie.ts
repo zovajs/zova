@@ -1,5 +1,7 @@
 import type { Query } from '@tanstack/vue-query';
+
 import type { QueryMetaPersisterCookieType } from '../../types/index.js';
+
 import { BeanModelLocal } from './bean.model.local.js';
 
 export class BeanModelCookie extends BeanModelLocal {

@@ -1,17 +1,10 @@
 import type { IModule } from '@cabloy/module-info';
-import type {
-  BeanBase,
-  BeanContainer,
-  IBeanScopeRecord,
-  IMonkeyBeanInit,
-  IMonkeyModule,
-} from 'zova';
+import type { BeanBase, BeanContainer, IBeanScopeRecord, IMonkeyBeanInit, IMonkeyModule } from 'zova';
+
+import { appResource, BeanSimple, cast } from 'zova';
+
 import type { ScopeModule } from './.metadata/this.js';
-import {
-  appResource,
-  BeanSimple,
-  cast,
-} from 'zova';
+
 import { __ThisModule__ } from './.metadata/this.js';
 
 export class Monkey extends BeanSimple implements IMonkeyModule, IMonkeyBeanInit {

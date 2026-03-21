@@ -1,5 +1,7 @@
 import type { IMonkeySysInitialize } from 'zova';
+
 import { BeanSimple } from 'zova';
+
 import { ServiceSsrHandler } from './service/ssrHandler.js';
 
 export class MonkeySys extends BeanSimple implements IMonkeySysInitialize {

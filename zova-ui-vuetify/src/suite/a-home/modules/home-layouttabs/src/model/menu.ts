@@ -1,5 +1,6 @@
 import type { IDecoratorModelOptions } from 'zova-module-a-model';
 import type { ApiSchemaAMenuDtoMenuGroup, ApiSchemaAMenuDtoMenuItem, ApiSchemaAMenuDtoMenus } from 'zova-module-home-api';
+
 import { TypeEventOff, useComputed } from 'zova';
 import { BeanModelBase, Model } from 'zova-module-a-model';
 
@@ -28,11 +29,14 @@ export class ModelMenu extends BeanModelBase {
       });
     }
     // locale
-    this.$watch(() => {
-      return this.app.meta.locale.current;
-    }, async () => {
-      await this.$refetchQueries({ queryKey: ['retrieveMenus'] });
-    });
+    this.$watch(
+      () => {
+        return this.app.meta.locale.current;
+      },
+      async () => {
+        await this.$refetchQueries({ queryKey: ['retrieveMenus'] });
+      },
+    );
   }
 
   protected __dispose__() {
@@ -46,15 +50,17 @@ export class ModelMenu extends BeanModelBase {
       queryKey: ['retrieveMenus'],
       queryFn: async () => {
         const data = await this.$api.homeBaseMenu.retrieveMenus({ params: { publicPath: this.sys.env.APP_PUBLIC_PATH } });
-        const menus = data.menus?.map(item => {
-          if (item.link && !this.$router.isRouterName(item.link) && item.meta?.params) {
-            const link = this.sys.util.apiActionPathTranslate(item.link, item.meta?.params);
-            return { ...item, link };
-          }
-          return item;
-        })?.filter(item => {
-          return !item.external || this.$router.checkPathValid(item.link);
-        });
+        const menus = data.menus
+          ?.map(item => {
+            if (item.link && !this.$router.isRouterName(item.link) && item.meta?.params) {
+              const link = this.sys.util.apiActionPathTranslate(item.link, item.meta?.params);
+              return { ...item, link };
+            }
+            return item;
+          })
+          ?.filter(item => {
+            return !item.external || this.$router.checkPathValid(item.link);
+          });
         return { ...data, menus };
       },
     });
@@ -70,13 +76,16 @@ export class ModelMenu extends BeanModelBase {
     let children: TypeMenuItem[] = [];
     if (menus.menus) {
       children = children.concat(
-        menus.menus?.filter(item => item.group === groupName || (Array.isArray(item.group) && item.group.includes(groupName!))).map(item => {
-          return { ...item, folder: false };
-        }),
+        menus.menus
+          ?.filter(item => item.group === groupName || (Array.isArray(item.group) && item.group.includes(groupName!)))
+          .map(item => {
+            return { ...item, folder: false };
+          }),
       );
     }
     if (menus.groups) {
-      const groups = menus.groups.filter(item => item.group === groupName || (Array.isArray(item.group) && item.group.includes(groupName!)))
+      const groups = menus.groups
+        .filter(item => item.group === groupName || (Array.isArray(item.group) && item.group.includes(groupName!)))
         .map(menuGroup => {
           return Object.assign({}, menuGroup, { folder: true, children: this._prepareMenuTree(menus, menuGroup.name) });
         });

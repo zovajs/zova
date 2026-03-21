@@ -1,17 +1,16 @@
 import type { IMetadataCustomGenerateOptions } from '@cabloy/cli';
 import type { IGlobBeanFile } from '@cabloy/module-info';
-import type { IControllerInfo } from './types.ts';
-import path from 'node:path';
+
 import { combineResourceName } from '@cabloy/utils';
 import { toLowerCaseFirstChar, toUpperCaseFirstChar } from '@cabloy/word-utils';
 import fse from 'fs-extra';
+import path from 'node:path';
+
+import type { IControllerInfo } from './types.ts';
+
 import { combineContentRenderAndStyle, generateRestIndex } from './utils.ts';
 
-export async function generateFileComponent(
-  options: IMetadataCustomGenerateOptions,
-  globFile: IGlobBeanFile,
-  controllerInfo: IControllerInfo,
-) {
+export async function generateFileComponent(options: IMetadataCustomGenerateOptions, globFile: IGlobBeanFile, controllerInfo: IControllerInfo) {
   const { moduleName } = options;
   const { className } = globFile;
   const {
@@ -47,16 +46,14 @@ export async function generateFileComponent(
   }
   const _contentImportTypeController: string[] = [];
   if (hasModels) _contentImportTypeController.push(nameModels);
-  if (hasProps)_contentImportTypeController.push(nameProps);
+  if (hasProps) _contentImportTypeController.push(nameProps);
   if (_contentImportTypeController.length > 0) {
     contentImports.push(`import type { ${_contentImportTypeController.join(', ')} } from '../../component/${name}/controller${controllerExtJs}';`);
   }
   contentImports.push("import { defineComponent } from 'vue'");
   contentImports.push("import { prepareComponentOptions, useController } from 'zova';");
   // controller
-  contentImports.push(
-    `import { ${className} } from '../../component/${name}/controller${controllerExtJs}';`,
-  );
+  contentImports.push(`import { ${className} } from '../../component/${name}/controller${controllerExtJs}';`);
   // render
   if (hasRenderFirst) {
     contentImports.push(importRenderFirst);
@@ -107,10 +104,14 @@ export async function generateFileComponent(
     contentControllerInterfaceMethods.push(`$props: ControllerInnerProps${genericArguments};`);
   }
   if (hasModels) {
-    contentControllerInterfaceMethods.push(`$useModel<K extends keyof TypeModelArguments${genericArguments}>(name: K, options?: DefineModelOptions<TypeModelArguments${genericArguments}[K]>): ControllerInnerProps${genericArguments}[K];`);
+    contentControllerInterfaceMethods.push(
+      `$useModel<K extends keyof TypeModelArguments${genericArguments}>(name: K, options?: DefineModelOptions<TypeModelArguments${genericArguments}[K]>): ControllerInnerProps${genericArguments}[K];`,
+    );
   }
   if (hasModelValue) {
-    contentControllerInterfaceMethods.push(`$useModel(options?: DefineModelOptions<TypeModelArguments${genericArguments}['modelValue']>): ControllerInnerProps${genericArguments}['modelValue'];`);
+    contentControllerInterfaceMethods.push(
+      `$useModel(options?: DefineModelOptions<TypeModelArguments${genericArguments}['modelValue']>): ControllerInnerProps${genericArguments}['modelValue'];`,
+    );
   }
   let contentControllerInterface = '';
   if (hasProps || hasModels) {
@@ -177,9 +178,11 @@ async function generateRestComponent(
   if (_contentImportTypeZova.length > 0) {
     contentImports.push(`import type { ${_contentImportTypeZova.join(', ')} } from 'zova';`);
   }
-  contentImports.push('import type { TypeRenderComponentJsxPropsPublic } from \'zova-jsx\';');
+  contentImports.push("import type { TypeRenderComponentJsxPropsPublic } from 'zova-jsx';");
   if (_contentImportTypeController.length > 0) {
-    contentImports.push(`import type { ${_contentImportTypeController.join(', ')} } from '../../src/component/${name}/controller${controllerExtJs}';`);
+    contentImports.push(
+      `import type { ${_contentImportTypeController.join(', ')} } from '../../src/component/${name}/controller${controllerExtJs}';`,
+    );
   }
   // component
   let componentNamePrefix;
@@ -221,6 +224,6 @@ ${contentComponent}
     await fse.outputFile(fileComponents, contentComponents);
   }
   // index
-  const exportIndexContent = 'export * from \'./components.js\';';
+  const exportIndexContent = "export * from './components.js';";
   await generateRestIndex(modulePath, exportIndexContent);
 }

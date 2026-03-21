@@ -22,6 +22,7 @@ import { toPhysical } from 'vuetify/lib/util/anchor.mjs';
 import { useRender } from 'vuetify/lib/util/useRender.mjs';
 import { BeanBase } from 'zova';
 import { Sys } from 'zova-module-a-bean';
+
 import { ILayoutConfig } from '../types/layoutConfig.js';
 
 @Sys()
@@ -52,38 +53,53 @@ export class SysNavigationDrawer extends BeanBase {
       });
 
       const width = computed(() => {
-        return (props.rail && props.expandOnHover && isHovering.value)
-          ? Number(props.width)
-          : Number(props.rail ? props.railWidth : props.width);
+        return props.rail && props.expandOnHover && isHovering.value ? Number(props.width) : Number(props.rail ? props.railWidth : props.width);
       });
       const location = computed(() => {
         return toPhysical(props.location, isRtl.value) as 'left' | 'right' | 'bottom';
       });
       const isPersistent = toRef(() => props.persistent);
       const isTemporary = computed(() => !props.permanent && (mobile.value || props.temporary));
-      const isSticky = computed(() =>
-        props.sticky &&
-        !isTemporary.value &&
-        location.value !== 'bottom',
-      );
+      const isSticky = computed(() => props.sticky && !isTemporary.value && location.value !== 'bottom');
 
       useFocusTrap(props, { isActive, localTop: isTemporary, contentEl: rootEl });
 
-      useToggleScope(() => (props.expandOnHover && props.rail != null), () => {
-        watch(() => isHovering, val => emit('update:rail', !val));
-      });
+      useToggleScope(
+        () => props.expandOnHover && props.rail != null,
+        () => {
+          watch(
+            () => isHovering,
+            val => emit('update:rail', !val),
+          );
+        },
+      );
 
-      useToggleScope(() => (!props.disableResizeWatcher), () => {
-        watch(() => isTemporary, val => !props.permanent && (nextTick(() => isActive.value = !val)));
-      });
+      useToggleScope(
+        () => !props.disableResizeWatcher,
+        () => {
+          watch(
+            () => isTemporary,
+            val => !props.permanent && nextTick(() => (isActive.value = !val)),
+          );
+        },
+      );
 
-      useToggleScope(() => (!props.disableRouteWatcher && !!router), () => {
-        watch(() => router!.currentRoute, () => isTemporary.value && (isActive.value = false));
-      });
+      useToggleScope(
+        () => !props.disableRouteWatcher && !!router,
+        () => {
+          watch(
+            () => router!.currentRoute,
+            () => isTemporary.value && (isActive.value = false),
+          );
+        },
+      );
 
-      watch(() => props.permanent, val => {
-        if (val) isActive.value = true;
-      });
+      watch(
+        () => props.permanent,
+        val => {
+          if (val) isActive.value = true;
+        },
+      );
 
       if (props.modelValue == null && !isTemporary.value) {
         isActive.value = props.permanent || !mobile.value;
@@ -99,11 +115,7 @@ export class SysNavigationDrawer extends BeanBase {
       });
 
       const layoutSize = computed(() => {
-        const size = isTemporary.value
-          ? 0
-          : props.rail && props.expandOnHover
-            ? Number(props.railWidth)
-            : width.value;
+        const size = isTemporary.value ? 0 : props.rail && props.expandOnHover ? Number(props.railWidth) : width.value;
 
         return isDragging.value ? size * dragProgress.value : size;
       });
@@ -115,9 +127,10 @@ export class SysNavigationDrawer extends BeanBase {
         elementSize: width,
         active: readonly(isActive),
         disableTransitions: toRef(() => isDragging.value),
-        absolute: computed(() =>
-        // eslint-disable-next-line
-          props.absolute || (isSticky.value && typeof isStuck.value !== 'string'),
+        absolute: computed(
+          () =>
+            // eslint-disable-next-line
+            props.absolute || (isSticky.value && typeof isStuck.value !== 'string'),
         ),
       });
 
@@ -127,12 +140,12 @@ export class SysNavigationDrawer extends BeanBase {
         return typeof props.scrim === 'string' ? props.scrim : null;
       });
       const scrimStyles = computed(() => ({
-        ...isDragging.value
+        ...(isDragging.value
           ? {
               opacity: dragProgress.value * 0.2,
               transition: 'none',
             }
-          : undefined,
+          : undefined),
         ...layoutItemScrimStyles.value,
       }));
 
@@ -145,7 +158,7 @@ export class SysNavigationDrawer extends BeanBase {
       const layoutItemStylesPatch = useLayoutStylePatch(layoutItemStyles);
 
       useRender(() => {
-        const hasImage = (slots.image || props.image);
+        const hasImage = slots.image || props.image;
 
         return (
           <>
@@ -174,66 +187,42 @@ export class SysNavigationDrawer extends BeanBase {
                 roundedClasses.value,
                 props.class,
               ]}
-              style={[
-                backgroundColorStyles.value,
-                layoutItemStylesPatch.value,
-                ssrBootStyles.value,
-                stickyStyles.value,
-                props.style,
-              ]}
+              style={[backgroundColorStyles.value, layoutItemStylesPatch.value, ssrBootStyles.value, stickyStyles.value, props.style]}
               inert={!isActive.value}
               {...scopeId}
               {...attrs}
             >
-              { hasImage && (
+              {hasImage && (
                 <div key="image" class="v-navigation-drawer__img">
-                  { !slots.image
-                    ? (
-                        <VImg
-                          key="image-img"
-                          alt=""
-                          cover
-                          height="inherit"
-                          src={props.image}
-                        />
-                      )
-                    : (
-                        <VDefaultsProvider
-                          key="image-defaults"
-                          disabled={!props.image}
-                          defaults={{
-                            VImg: {
-                              alt: '',
-                              cover: true,
-                              height: 'inherit',
-                              src: props.image,
-                            },
-                          }}
-                          v-slots:default={slots.image}
-                        />
-                      )}
+                  {!slots.image ? (
+                    <VImg key="image-img" alt="" cover height="inherit" src={props.image} />
+                  ) : (
+                    <VDefaultsProvider
+                      key="image-defaults"
+                      disabled={!props.image}
+                      defaults={{
+                        VImg: {
+                          alt: '',
+                          cover: true,
+                          height: 'inherit',
+                          src: props.image,
+                        },
+                      }}
+                      v-slots:default={slots.image}
+                    />
+                  )}
                 </div>
               )}
 
-              { slots.prepend && (
-                <div class="v-navigation-drawer__prepend">
-                  { slots.prepend?.() }
-                </div>
-              )}
+              {slots.prepend && <div class="v-navigation-drawer__prepend">{slots.prepend?.()}</div>}
 
-              <div class="v-navigation-drawer__content">
-                { slots.default?.() }
-              </div>
+              <div class="v-navigation-drawer__content">{slots.default?.()}</div>
 
-              { slots.append && (
-                <div class="v-navigation-drawer__append">
-                  { slots.append?.() }
-                </div>
-              )}
+              {slots.append && <div class="v-navigation-drawer__append">{slots.append?.()}</div>}
             </props.tag>
 
             <Transition name="fade-transition">
-              { isTemporary.value && (isDragging.value || isActive.value) && !!props.scrim && (
+              {isTemporary.value && (isDragging.value || isActive.value) && !!props.scrim && (
                 <div
                   class={['v-navigation-drawer__scrim', scrimColor.backgroundColorClasses.value]}
                   style={[scrimStyles.value, scrimColor.backgroundColorStyles.value]}
@@ -262,14 +251,10 @@ function useLayoutStylePatch(layoutItemStyles: Ref<CSSProperties, CSSProperties>
     let layoutItemStylesPatch;
     if (process.env.SSR && layoutConfigRef?.value) {
       if (layoutConfigRef.value.leftDrawerOpen) {
-        layoutItemStylesPatch = Object.assign(
-          {},
-          layoutItemStyles.value,
-          {
-            width: `${layoutConfigRef.value.sidebar.width}px`,
-            transform: 'translateX(0px)',
-          },
-        );
+        layoutItemStylesPatch = Object.assign({}, layoutItemStyles.value, {
+          width: `${layoutConfigRef.value.sidebar.width}px`,
+          transform: 'translateX(0px)',
+        });
       } else {
         layoutItemStylesPatch = layoutItemStyles.value;
       }

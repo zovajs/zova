@@ -1,6 +1,12 @@
 import type { IJwtInfo } from 'zova-module-a-interceptor';
 import type { IDecoratorModelOptions } from 'zova-module-a-model';
-import type { ApiApiHomeUserPassportcreatePassportJwtFromOauthCodeRequestBody, ApiApiHomeUserPassportcreatePassportJwtFromOauthCodeResponseBody, ApiApiHomeUserPassportloginRequestBody, ApiApiHomeUserPassportloginResponseBody } from 'zova-module-home-api';
+import type {
+  ApiApiHomeUserPassportcreatePassportJwtFromOauthCodeRequestBody,
+  ApiApiHomeUserPassportcreatePassportJwtFromOauthCodeResponseBody,
+  ApiApiHomeUserPassportloginRequestBody,
+  ApiApiHomeUserPassportloginResponseBody,
+} from 'zova-module-home-api';
+
 import { combineQueries, isNil } from '@cabloy/utils';
 import { SchemaObject } from 'openapi3-ts/oas31';
 import { BeanModelBase, Model } from 'zova-module-a-model';
@@ -21,9 +27,7 @@ export class ModelPassport extends BeanModelBase {
     this.schemaLogin = this.$useComputed(() => {
       return this.apiSchemasLogin.requestBody;
     });
-    this.passport = process.env.CLIENT
-      ? this.$useStateLocal({ queryKey: ['passport'] })
-      : this.$useStateMem({ queryKey: ['passport'] });
+    this.passport = process.env.CLIENT ? this.$useStateLocal({ queryKey: ['passport'] }) : this.$useStateMem({ queryKey: ['passport'] });
     this.jwt = this.$useStateLocal({ queryKey: ['jwt'] });
     this.expireTime = this.$useStateLocal({ queryKey: ['expireTime'] });
     this.accessToken = this.$useStateCookie({ queryKey: ['token'] });

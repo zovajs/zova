@@ -7,7 +7,11 @@ export class RenderUser extends BeanRenderBase {
   public render() {
     const slots = {
       activator: ({ props }) => {
-        return <VBtn {...props} prependIcon={this.$passport.user?.avatar as any} variant="text">{this.$passport.user?.name}</VBtn>;
+        return (
+          <VBtn {...props} prependIcon={this.$passport.user?.avatar as any} variant="text">
+            {this.$passport.user?.name}
+          </VBtn>
+        );
       },
     };
     return (
