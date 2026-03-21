@@ -1,7 +1,7 @@
 {
   "recommendations": [
     "cabloy.zova-vscode",
-    "dbaeumer.vscode-eslint",
+    "oxc.oxc-vscode",
     "Vue.volar",
     "csstools.postcss",
     "bradlc.vscode-tailwindcss"
