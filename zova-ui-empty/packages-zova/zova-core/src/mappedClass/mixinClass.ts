@@ -1,4 +1,5 @@
 import type { Constructable } from '../decorator/type/constructable.js';
+
 import { copyMetadataOfClasses, copyPropertiesOfClasses } from './utils.js';
 
 type UnionToIntersection<U> = (U extends any ? (k: U) => void : never) extends (k: infer I) => void ? I : never;

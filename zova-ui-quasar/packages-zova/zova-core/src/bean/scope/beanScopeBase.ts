@@ -1,4 +1,5 @@
 import type { IModule } from '@cabloy/module-info';
+
 import { BeanBaseSimple, SymbolModuleBelong } from '../beanBaseSimple.js';
 import { BeanScopeError } from '../resource/error/beanScopeError.js';
 import { BeanScopeLocale } from '../resource/locale/beanScopeLocale.js';

@@ -1,4 +1,5 @@
 import type { IDecoratorVueElement, IDecoratorVueWatchOptions } from '../../decorator/vueExtra/types.js';
+
 import { onControllerCreated } from '../../composables/onControllerCreated.js';
 
 export function controllerCreated(

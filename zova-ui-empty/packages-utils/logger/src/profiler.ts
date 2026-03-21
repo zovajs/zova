@@ -23,8 +23,8 @@ export class Profiler {
 
     const info = typeof args[args.length - 1] === 'object' ? args.pop() : {};
     info.level = info.level || 'info';
-    info.durationMs = (Date.now()) - this.start;
+    info.durationMs = Date.now() - this.start;
 
     return this.logger.log(info);
   }
-};
+}

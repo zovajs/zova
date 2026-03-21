@@ -5,13 +5,12 @@
  */
 
 import fecha from 'fecha';
+
 import { format } from './format.js';
 
 export const timestamp = format((info, opts: any = {}) => {
   if (opts.format) {
-    info.timestamp = typeof opts.format === 'function'
-      ? opts.format()
-      : fecha.format(new Date(), opts.format);
+    info.timestamp = typeof opts.format === 'function' ? opts.format() : fecha.format(new Date(), opts.format);
   }
 
   if (!info.timestamp) {

@@ -1,10 +1,11 @@
 import type { ZovaConfigMeta, ZovaMetaAppMode, ZovaMetaFlavor } from '@cabloy/module-info';
-import { createRequire } from 'node:module';
-import path from 'node:path';
-import { pathToFileURL } from 'node:url';
+
 import fse from 'fs-extra';
 import compileTemplate from 'lodash/template.js';
 import parseArgs from 'minimist';
+import { createRequire } from 'node:module';
+import path from 'node:path';
+import { pathToFileURL } from 'node:url';
 
 export function getFlavor(offset: number = 2): ZovaMetaFlavor {
   return getEnvFromCli('FLAVOR', 'flavor', 'admin', offset) as ZovaMetaFlavor;
@@ -26,12 +27,7 @@ export function getOutReleasesDir() {
   return `dist-releases/${process.env.META_APP_MODE}-${process.env.META_FLAVOR}-${process.env.APP_VERSION}`;
 }
 
-export function getEnvFromCli(
-  cliEnvName: string,
-  cliArgName: string,
-  defaultValue: string,
-  offset: number = 2,
-): string {
+export function getEnvFromCli(cliEnvName: string, cliArgName: string, defaultValue: string, offset: number = 2): string {
   let value = process.env[cliEnvName];
   if (!value) {
     const argv = parseArgs(process.argv.slice(offset));

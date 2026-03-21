@@ -1,7 +1,9 @@
-import type { ZovaViteConfigOptions } from './types.ts';
+import fse from 'fs-extra';
 import { createRequire } from 'node:module';
 import path from 'node:path';
-import fse from 'fs-extra';
+
+import type { ZovaViteConfigOptions } from './types.ts';
+
 import { copyTemplateIfNeed, pathToHref } from './utils.ts';
 
 const __ImportZodCore = 'zod/v4/core';
@@ -49,10 +51,7 @@ export function setParseAdapter(parseAdapterFn) {
 }
 export const $ZodType =`,
     )
-    .replace(
-      'inst._zod.run = inst._zod.parse;',
-      'inst._zod.run = __parseAdapterFn ? __parseAdapterFn(inst, inst._zod.parse) : inst._zod.parse;',
-    )
+    .replace('inst._zod.run = inst._zod.parse;', 'inst._zod.run = __parseAdapterFn ? __parseAdapterFn(inst, inst._zod.parse) : inst._zod.parse;')
     .replace(/inst._zod.run = (\(payload, ctx\) => \{[\s\S]*?return runChecks\(result, checks, ctx\);\s*\};)/, (_, $0) => {
       return `const __run = ${$0}\ninst._zod.run = __parseAdapterFn ? __parseAdapterFn(inst, __run) : __run;`;
     });

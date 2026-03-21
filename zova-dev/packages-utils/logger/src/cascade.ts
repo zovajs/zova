@@ -6,11 +6,13 @@
 
 function isValidFormat(fmt) {
   if (typeof fmt.transform !== 'function') {
-    throw new TypeError([
-      'No transform function found on format. Did you create a format instance?',
-      'const myFormat = format(formatFn);',
-      'const instance = myFormat();',
-    ].join('\n'));
+    throw new TypeError(
+      [
+        'No transform function found on format. Did you create a format instance?',
+        'const myFormat = format(formatFn);',
+        'const instance = myFormat();',
+      ].join('\n'),
+    );
   }
 
   return true;

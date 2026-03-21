@@ -1,6 +1,8 @@
 import type { RouteRecordRaw } from '@cabloy/vue-router';
+
 import type { Constructable } from '../../decorator/type/constructable.js';
 import type { IMonkeyModuleSys, IMonkeySys } from '../../types/interface/monkey.js';
+
 import { BeanSimple } from '../../bean/beanSimple.js';
 import { AppCookie } from '../component/cookie.js';
 import { AppEvent } from '../component/event.js';

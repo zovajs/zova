@@ -1,8 +1,11 @@
 import type { IndexAPI } from '@quasar/app-vite';
-import type { QuasarConf } from './types.js';
-import path from 'node:path';
+
 import fse from 'fs-extra';
+import path from 'node:path';
 import { copyTemplateFile, getAbsolutePathOfModule, getOutDir } from 'zova-vite';
+
+import type { QuasarConf } from './types.js';
+
 import { resolveTemplatePath } from '../utils.js';
 
 export function extendFilesOne(api: IndexAPI, flavor: string) {
@@ -132,14 +135,8 @@ export function extendFilesTwo(_api: IndexAPI, _flavor: string) {
     } catch (_) {}
     if (!modulePath) return;
     // copy
-    fse.copyFileSync(
-      resolveTemplatePath('vuetify/composables/hydration.js'),
-      path.join(modulePath, 'lib/composables/hydration.js'),
-    );
-    fse.copyFileSync(
-      resolveTemplatePath('vuetify/composables/ssrBoot.js'),
-      path.join(modulePath, 'lib/composables/ssrBoot.js'),
-    );
+    fse.copyFileSync(resolveTemplatePath('vuetify/composables/hydration.js'), path.join(modulePath, 'lib/composables/hydration.js'));
+    fse.copyFileSync(resolveTemplatePath('vuetify/composables/ssrBoot.js'), path.join(modulePath, 'lib/composables/ssrBoot.js'));
   }
 }
 

@@ -1,5 +1,6 @@
-import type { ZovaApplication } from '../core/index.js';
 import { getCurrentInstance } from 'vue';
+
+import type { ZovaApplication } from '../core/index.js';
 
 export function useApp(): ZovaApplication {
   const instance = getCurrentInstance();

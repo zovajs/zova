@@ -9,25 +9,25 @@ export function useSsrBoot() {
   if (zova.sys.env.SSR) {
     if (!zova.ctx.meta.$ssr.isRuntimeSsrPreHydration) {
       isBooted.value = true;
-    }
-    else {
+    } else {
       zova.ctx.meta.$ssr.onHydrated(() => {
         isBooted.value = true;
       });
     }
-  }
-  else {
+  } else {
     onMounted(() => {
       window.requestAnimationFrame(() => {
         isBooted.value = true;
       });
     });
   }
-  const ssrBootStyles = toRef(() => !isBooted.value
-    ? {
-        transition: 'none !important',
-      }
-    : undefined);
+  const ssrBootStyles = toRef(() =>
+    !isBooted.value
+      ? {
+          transition: 'none !important',
+        }
+      : undefined,
+  );
   return {
     ssrBootStyles,
     isBooted: readonly(isBooted),

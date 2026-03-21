@@ -1,6 +1,7 @@
 import type { PluginPass } from '@babel/core';
 import type { NodePath, Visitor } from '@babel/traverse';
 import type { IModuleInfo } from '@cabloy/module-info';
+
 import { /* template, */ types as t } from '@babel/core';
 import { parseInfo } from '@cabloy/module-info';
 
@@ -94,9 +95,7 @@ function checkUseScope(decorator: t.Decorator, path: NodePath<t.ClassProperty>, 
   if (!t.isTSTypeAnnotation(path.node.typeAnnotation)) return;
   const tsType = path.node.typeAnnotation;
   const tsTypeName =
-    t.isTSTypeReference(tsType.typeAnnotation) &&
-    t.isIdentifier(tsType.typeAnnotation.typeName) &&
-    tsType.typeAnnotation.typeName.name;
+    t.isTSTypeReference(tsType.typeAnnotation) && t.isIdentifier(tsType.typeAnnotation.typeName) && tsType.typeAnnotation.typeName.name;
   if (!tsTypeName) return;
   // findComponent
   const componentFindInfo = findComponent(tsTypeName, context);
@@ -116,13 +115,9 @@ function checkUseScope(decorator: t.Decorator, path: NodePath<t.ClassProperty>, 
   }
   // argument: options
   if (t.isObjectExpression(argument)) {
-    const prop = argument.properties.find(
-      item => t.isObjectProperty(item) && t.isIdentifier(item.key) && item.key.name === 'module',
-    );
+    const prop = argument.properties.find(item => t.isObjectProperty(item) && t.isIdentifier(item.key) && item.key.name === 'module');
     if (!prop) {
-      argument.properties.push(
-        t.objectProperty(t.identifier('module'), t.stringLiteral(componentFindInfo.import.moduleInfo.relativeName)),
-      );
+      argument.properties.push(t.objectProperty(t.identifier('module'), t.stringLiteral(componentFindInfo.import.moduleInfo.relativeName)));
     }
     componentFindInfo.component.specifier.importKind = 'type';
   }
@@ -134,9 +129,7 @@ function checkUse(decorator: t.Decorator, path: NodePath<t.ClassProperty>, conte
   if (!t.isTSTypeAnnotation(path.node.typeAnnotation)) return;
   const tsType = path.node.typeAnnotation;
   const tsTypeName =
-    t.isTSTypeReference(tsType.typeAnnotation) &&
-    t.isIdentifier(tsType.typeAnnotation.typeName) &&
-    tsType.typeAnnotation.typeName.name;
+    t.isTSTypeReference(tsType.typeAnnotation) && t.isIdentifier(tsType.typeAnnotation.typeName) && tsType.typeAnnotation.typeName.name;
   if (!tsTypeName) return;
   // findComponent
   const componentFindInfo = findComponent(tsTypeName, context);
@@ -156,13 +149,9 @@ function checkUse(decorator: t.Decorator, path: NodePath<t.ClassProperty>, conte
   }
   // argument: options
   if (t.isObjectExpression(argument)) {
-    const prop = argument.properties.find(
-      item => t.isObjectProperty(item) && t.isIdentifier(item.key) && item.key.name === 'name',
-    );
+    const prop = argument.properties.find(item => t.isObjectProperty(item) && t.isIdentifier(item.key) && item.key.name === 'name');
     if (!prop) {
-      argument.properties.push(
-        t.objectProperty(t.identifier('beanFullName'), t.stringLiteral(combineBeanFullName(componentFindInfo))),
-      );
+      argument.properties.push(t.objectProperty(t.identifier('beanFullName'), t.stringLiteral(combineBeanFullName(componentFindInfo))));
     }
     componentFindInfo.component.specifier.importKind = 'type';
   }
@@ -188,11 +177,7 @@ function combineBeanFullName(componentFindInfo: ComponentFindInfo) {
 }
 
 function getDecoratorCalleeName(decorator: t.Decorator) {
-  return (
-    t.isCallExpression(decorator.expression) &&
-    t.isIdentifier(decorator.expression.callee) &&
-    decorator.expression.callee.name
-  );
+  return t.isCallExpression(decorator.expression) && t.isIdentifier(decorator.expression.callee) && decorator.expression.callee.name;
 }
 
 function isZComponent(name: string) {

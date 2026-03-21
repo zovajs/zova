@@ -1,8 +1,10 @@
 import type { ZovaConfigMeta, ZovaMetaFlavor } from '@cabloy/module-info';
 import type { IndexAPI } from '@quasar/app-vite';
-import type { ConfigContext, QuasarConf } from './types.js';
+
 import { mergeConfig } from 'vite';
 import { generateZovaViteMeta } from 'zova-vite';
+
+import type { ConfigContext, QuasarConf } from './types.js';
 
 export function extendQuasarConf(context: ConfigContext, flavor: ZovaMetaFlavor) {
   return async function extendQuasarConf(conf: QuasarConf, api: IndexAPI) {

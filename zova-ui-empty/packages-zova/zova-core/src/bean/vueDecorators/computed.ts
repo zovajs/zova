@@ -1,14 +1,9 @@
 import type { IDecoratorVueElement } from '../../decorator/vueExtra/types.js';
+
 import { useComputed } from '../../vueExtra/computed.js';
 import { getVueDecoratorValue } from './utils.js';
 
-export function computed(
-  beanInstance,
-  _beanFullName: string,
-  prop: string,
-  vueElement: IDecoratorVueElement,
-  index: number,
-) {
+export function computed(beanInstance, _beanFullName: string, prop: string, vueElement: IDecoratorVueElement, index: number) {
   const { descriptor } = vueElement;
   Object.defineProperty(beanInstance, prop, {
     enumerable: false,

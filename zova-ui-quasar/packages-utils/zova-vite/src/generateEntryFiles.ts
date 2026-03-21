@@ -1,10 +1,13 @@
 import type { glob } from '@cabloy/module-glob';
 import type { ZovaConfigMeta } from '@cabloy/module-info';
-import type { ZovaViteConfigOptions } from './types.ts';
-import path from 'node:path';
+
 import { getEnvFiles } from '@cabloy/dotenv';
 import chalk from 'chalk';
 import fse from 'fs-extra';
+import path from 'node:path';
+
+import type { ZovaViteConfigOptions } from './types.ts';
+
 // import { generateCel } from './generateCel.ts';
 import { generateZod } from './generateZod.ts';
 import { copyTemplateFile, getEnvMeta, resolveTemplatePath } from './utils.ts';

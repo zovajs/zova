@@ -1,5 +1,6 @@
 import type { /* template, */ NodePath } from '@babel/core';
 import type { PluginPass } from '@babel/core';
+
 import { types as t } from '@babel/core';
 import htmlTags from 'html-tags';
 import svgTags from 'svg-tags';
@@ -7,8 +8,7 @@ import svgTags from 'svg-tags';
 export const FRAGMENT = 'Fragment';
 export const KEEP_ALIVE = 'KeepAlive';
 
-export const shouldTransformedToSlots = (tag: string) =>
-  !(tag.match(new RegExp(`^_?${FRAGMENT}\\d*$`)) || tag === KEEP_ALIVE);
+export const shouldTransformedToSlots = (tag: string) => !(tag.match(new RegExp(`^_?${FRAGMENT}\\d*$`)) || tag === KEEP_ALIVE);
 
 export const transformJSXMemberExpression = (path: NodePath<t.JSXMemberExpression>): t.MemberExpression => {
   const objectPath = path.node.object;
@@ -45,10 +45,7 @@ export const checkIsComponent = (path: NodePath<t.JSXOpeningElement>, state: Plu
  * @param state State
  * @returns Identifier | StringLiteral | MemberExpression | CallExpression
  */
-export const getTag = (
-  path: NodePath<t.JSXElement>,
-  state: PluginPass,
-): t.Identifier | t.CallExpression | t.StringLiteral | t.MemberExpression => {
+export const getTag = (path: NodePath<t.JSXElement>, state: PluginPass): t.Identifier | t.CallExpression | t.StringLiteral | t.MemberExpression => {
   const namePath = path.get('openingElement').get('name');
   if (namePath.isJSXIdentifier()) {
     const { name } = namePath.node;
@@ -58,8 +55,8 @@ export const getTag = (
         : path.scope.hasBinding(name)
           ? t.identifier(name)
           : (state.opts as any).isCustomElement?.(name)
-              ? t.stringLiteral(name)
-              : t.callExpression(t.identifier('resolveComponent'), [t.stringLiteral(name)]);
+            ? t.stringLiteral(name)
+            : t.callExpression(t.identifier('resolveComponent'), [t.stringLiteral(name)]);
     }
 
     return t.stringLiteral(name);

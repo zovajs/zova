@@ -1,6 +1,7 @@
 import type { IModuleInfo } from '@cabloy/module-info';
 import type { ZovaConfigMeta } from '@cabloy/module-info';
 import type { Component } from 'vue';
+
 import type { ZovaSys } from '../../core/sys/sys.js';
 import type { Constructable } from '../../decorator/type/constructable.js';
 import type { StateLock } from '../../utils/stateLock.js';

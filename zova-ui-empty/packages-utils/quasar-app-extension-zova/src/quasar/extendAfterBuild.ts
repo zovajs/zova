@@ -1,8 +1,10 @@
 import type { IndexAPI } from '@quasar/app-vite';
-import type { ConfigContext, QuasarConf } from './types.js';
-import path from 'node:path';
+
 import fse from 'fs-extra';
+import path from 'node:path';
 import { getOutDir, getOutReleasesDir } from 'zova-vite';
+
+import type { ConfigContext, QuasarConf } from './types.js';
 
 export function extendAfterBuild(context: ConfigContext, _flavor: string) {
   return async function extendAfterBuild(_conf: QuasarConf, _api: IndexAPI) {
@@ -14,11 +16,7 @@ export function extendAfterBuild(context: ConfigContext, _flavor: string) {
     // copy
     const outReleasesDir = path.join(context.configOptions!.appDir, getOutReleasesDir());
     fse.removeSync(outReleasesDir);
-    fse.copySync(
-      outDir,
-      outReleasesDir,
-      { preserveTimestamps: true },
-    );
+    fse.copySync(outDir, outReleasesDir, { preserveTimestamps: true });
     // copy
     _copyToTarget(outDir, process.env.BUILD_COPY_DIST, path.basename(outDir));
     _copyToTarget(outDir, process.env.BUILD_COPY_RELEASE, path.basename(outReleasesDir));
@@ -31,10 +29,6 @@ function _copyToTarget(outDir: string, target: string | undefined, basename: str
   for (const dir of dirs) {
     const outReleasesDirCopy = path.join(dir, basename);
     fse.removeSync(outReleasesDirCopy);
-    fse.copySync(
-      outDir,
-      outReleasesDirCopy,
-      { preserveTimestamps: true },
-    );
+    fse.copySync(outDir, outReleasesDirCopy, { preserveTimestamps: true });
   }
 }

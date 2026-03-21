@@ -1,22 +1,9 @@
-import type {
-  IBeanRecord,
-  IControllerData,
-} from '../bean/type.js';
+import { getCurrentInstance, onBeforeUnmount, onServerPrefetch, onUnmounted, queuePostFlushCb, useSlots } from 'vue';
+
+import type { IBeanRecord, IControllerData } from '../bean/type.js';
 import type { Constructable } from '../decorator/index.js';
-import {
-  getCurrentInstance,
-  onBeforeUnmount,
-  onServerPrefetch,
-  onUnmounted,
-  queuePostFlushCb,
-  useSlots,
-} from 'vue';
-import {
-  BeanControllerIdentifier,
-  BeanRenderIdentifier,
-  BeanStyleIdentifier,
-  SymbolControllerRefDisable,
-} from '../bean/type.js';
+
+import { BeanControllerIdentifier, BeanRenderIdentifier, BeanStyleIdentifier, SymbolControllerRefDisable } from '../bean/type.js';
 import { ZovaContext } from '../core/context/index.js';
 import { sys } from '../core/sys/sys.js';
 
@@ -25,11 +12,11 @@ export function useControllerPage<M, R, S>(
   renderBeanFullName?: Constructable<R>,
   styleBeanFullName?: Constructable<S>,
 );
-export function useControllerPage<
-  MK extends keyof IBeanRecord,
-  RK extends keyof IBeanRecord,
-  SK extends keyof IBeanRecord,
->(controllerBeanFullName: MK, renderBeanFullName?: RK, styleBeanFullName?: SK);
+export function useControllerPage<MK extends keyof IBeanRecord, RK extends keyof IBeanRecord, SK extends keyof IBeanRecord>(
+  controllerBeanFullName: MK,
+  renderBeanFullName?: RK,
+  styleBeanFullName?: SK,
+);
 // not use type string for typed params
 // export function useControllerPage(controllerBeanFullName: string, renderBeanFullName?: string, styleBeanFullName?: string);
 export function useControllerPage(
@@ -110,15 +97,7 @@ async function _useController(
   async function __load() {
     // controller
     if (ctx.disposed) return;
-    await ctx.bean._newBeanInner(
-      true,
-      BeanControllerIdentifier,
-      controllerData,
-      undefined,
-      controllerBeanFullName,
-      true,
-      false,
-    );
+    await ctx.bean._newBeanInner(true, BeanControllerIdentifier, controllerData, undefined, controllerBeanFullName, true, false);
     if (styleBeanFullName) {
       if (ctx.disposed) return;
       await ctx.bean._newBeanInner(true, BeanStyleIdentifier, undefined, undefined, styleBeanFullName, true, false);

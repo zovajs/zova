@@ -1,9 +1,12 @@
 import type { IBundleVendor, ZovaConfigMeta } from '@cabloy/module-info';
-import type { ZovaViteConfigChunkVendor, ZovaViteConfigOptions } from './types.ts';
-import crypto from 'node:crypto';
-import path from 'node:path';
+
 import * as dotenv from '@cabloy/dotenv';
 import { glob } from '@cabloy/module-glob';
+import crypto from 'node:crypto';
+import path from 'node:path';
+
+import type { ZovaViteConfigChunkVendor, ZovaViteConfigOptions } from './types.ts';
+
 import { getEnvMeta } from './utils.ts';
 
 const __ModuleLibs = [
@@ -100,7 +103,7 @@ export function createConfigUtils(
       },
     );
     for (const key of ['NODE_ENV', 'META_FLAVOR', 'META_MODE', 'META_APP_MODE', 'DEV', 'PROD', 'SSR']) {
-      if (res[key] as any !== false) {
+      if ((res[key] as any) !== false) {
         process.env[key] = res[key];
       }
     }

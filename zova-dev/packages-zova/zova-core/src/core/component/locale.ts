@@ -1,15 +1,12 @@
 import type { Ref } from 'vue';
-import type {
-  ILocaleRecord,
-  IModuleLocale,
-  IModuleLocaleText,
-} from '../../bean/resource/locale/type.js';
+
 import * as localeutil from '@cabloy/localeutil';
 import { ref } from 'vue';
+
+import type { ILocaleRecord, IModuleLocale, IModuleLocaleText } from '../../bean/resource/locale/type.js';
+
 import { BeanSimple } from '../../bean/beanSimple.js';
-import {
-  LocaleModuleNameSeparator,
-} from '../../bean/resource/locale/type.js';
+import { LocaleModuleNameSeparator } from '../../bean/resource/locale/type.js';
 
 const SymbolLocaleCurrent = Symbol('SymbolLocaleCurrent');
 const SymbolTzCurrent = Symbol('SymbolTzCurrent');
@@ -59,11 +56,7 @@ export class AppLocale extends BeanSimple {
     const getText = function (text: string, ...args: any[]): string {
       return self.getText(false, moduleScope, undefined, text, ...args);
     };
-    getText.locale = function <T extends keyof ILocaleRecord>(
-      locale: T | undefined,
-      text: string,
-      ...args: any[]
-    ): string {
+    getText.locale = function <T extends keyof ILocaleRecord>(locale: T | undefined, text: string, ...args: any[]): string {
       return self.getText(false, moduleScope, locale, text, ...args);
     };
     return getText;

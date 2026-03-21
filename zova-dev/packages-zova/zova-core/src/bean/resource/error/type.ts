@@ -1,4 +1,5 @@
 import type { ComponentPublicInstance } from 'vue';
+
 import type { IErrorObject } from './errorObject.js';
 
 export const SymbolErrorInstanceInfo = Symbol('SymbolErrorInstanceInfo');

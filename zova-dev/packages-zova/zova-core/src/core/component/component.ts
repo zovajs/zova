@@ -1,5 +1,7 @@
 import type { Component, ComponentCustomOptions } from 'vue';
+
 import type { TypeModuleResourceComponents } from '../../types/interface/module.js';
+
 import { BeanSimple } from '../../bean/beanSimple.js';
 
 export class AppComponent extends BeanSimple {

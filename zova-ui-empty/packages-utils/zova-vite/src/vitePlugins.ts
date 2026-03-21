@@ -1,18 +1,18 @@
 import type { glob } from '@cabloy/module-glob';
-import type { ZovaViteConfigOptions, ZovaVitePlugin } from './types.ts';
-import path from 'node:path';
+
 import babel from '@cabloy/vite-plugin-babel';
 import fse from 'fs-extra';
+import path from 'node:path';
 import devtoolsJson from 'vite-plugin-devtools-json';
 // import vitePluginChecker from 'vite-plugin-checker';
 import { vitePluginFakeServer } from 'vite-plugin-fake-server-turbo';
+
+import type { ZovaViteConfigOptions, ZovaVitePlugin } from './types.ts';
+
 import { getAbsolutePathOfModule, requireModule } from './utils.ts';
 import { cssCollectPlugin } from './vitePluginCssCollect.ts';
 
-export function generateVitePlugins(
-  configOptions: ZovaViteConfigOptions,
-  modulesMeta: Awaited<ReturnType<typeof glob>>,
-) {
+export function generateVitePlugins(configOptions: ZovaViteConfigOptions, modulesMeta: Awaited<ReturnType<typeof glob>>) {
   const vitePlugins: ZovaVitePlugin[] = [];
   vitePlugins.push(__getVitePluginTs());
   vitePlugins.push(__getVitePluginTsx());
@@ -84,21 +84,11 @@ export function generateVitePlugins(
   }
 
   function __getVitePluginDevtoolsJson() {
-    return [
-      'vite-plugin-devtools-json',
-      devtoolsJson,
-      {},
-      undefined,
-    ] as ZovaVitePlugin;
+    return ['vite-plugin-devtools-json', devtoolsJson, {}, undefined] as ZovaVitePlugin;
   }
 
   function __getVitePluginCss() {
-    return [
-      'vite-plugin-zova-css-collect',
-      cssCollectPlugin,
-      {},
-      undefined,
-    ] as ZovaVitePlugin;
+    return ['vite-plugin-zova-css-collect', cssCollectPlugin, {}, undefined] as ZovaVitePlugin;
   }
 
   function __getVitePluginMock(configOptions: ZovaViteConfigOptions, _modulesMeta: Awaited<ReturnType<typeof glob>>) {
@@ -133,11 +123,7 @@ export function generateVitePlugins(
     ] as ZovaVitePlugin;
   }
 
-  function __prepareMockIncludes(
-    includes: string[],
-    _configOptions: ZovaViteConfigOptions,
-    modulesMeta: Awaited<ReturnType<typeof glob>>,
-  ) {
+  function __prepareMockIncludes(includes: string[], _configOptions: ZovaViteConfigOptions, modulesMeta: Awaited<ReturnType<typeof glob>>) {
     // modules
     const { modules } = modulesMeta;
     // loop

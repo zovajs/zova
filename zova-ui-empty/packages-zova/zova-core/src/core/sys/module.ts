@@ -1,9 +1,12 @@
 import type { IModule, IModuleInfo } from '@cabloy/module-info';
-import type { TypeBeanScopeRecordKeys } from '../../bean/type.js';
-import type { IModuleMainSys, IModuleResource, IMonkeyModuleSys, IMonkeySys, PluginZovaModulesMeta, TypeMonkeyName } from '../../types/index.js';
+
 import * as ModuleInfo from '@cabloy/module-info';
 import { forEach, forEachSync } from '@cabloy/utils';
 import { shallowReactive } from 'vue';
+
+import type { TypeBeanScopeRecordKeys } from '../../bean/type.js';
+import type { IModuleMainSys, IModuleResource, IMonkeyModuleSys, IMonkeySys, PluginZovaModulesMeta, TypeMonkeyName } from '../../types/index.js';
+
 import { BeanSimple } from '../../bean/beanSimple.js';
 import { SymbolInstalled } from '../../types/index.js';
 import { StateLock } from '../../utils/stateLock.js';
@@ -84,7 +87,7 @@ export class SysModule extends BeanSimple {
     for (const moduleName of this.modulesMeta.moduleNames) {
       const module = this.modulesMeta.modules[moduleName];
       const info = module.info;
-      const shouldLoad = process.env.SERVER || (info.capabilities?.monkey || info.capabilities?.sync || info.capabilities?.preload);
+      const shouldLoad = process.env.SERVER || info.capabilities?.monkey || info.capabilities?.sync || info.capabilities?.preload;
       if (shouldLoad) {
         const moduleResource = module.resource as any;
         if (typeof moduleResource === 'function') {
@@ -137,7 +140,7 @@ export class SysModule extends BeanSimple {
     for (const moduleName of this.modulesMeta.moduleNames) {
       const module = this.modulesMeta.modules[moduleName];
       const info = module.info;
-      const shouldInstall = (!info.capabilities?.monkey && !info.capabilities?.sync && !info.capabilities?.preload);
+      const shouldInstall = !info.capabilities?.monkey && !info.capabilities?.sync && !info.capabilities?.preload;
       if (shouldInstall) {
         await this._install(moduleName, module);
       }
@@ -210,11 +213,7 @@ export class SysModule extends BeanSimple {
   private _registerConstants(module: IModule) {
     if (!module.resource.constants) return;
     const relativeName = module.info.relativeName;
-    this.sys.constant.modules[relativeName] = deepExtend(
-      {},
-      module.resource.constants,
-      this.sys.constant.modules[relativeName],
-    );
+    this.sys.constant.modules[relativeName] = deepExtend({}, module.resource.constants, this.sys.constant.modules[relativeName]);
   }
 
   private async _registerConfig(module: IModule) {

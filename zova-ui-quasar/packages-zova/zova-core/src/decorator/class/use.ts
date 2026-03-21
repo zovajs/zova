@@ -1,3 +1,5 @@
+import { evaluateExpressions, isNilOrEmptyString } from '@cabloy/utils';
+
 import type { IBeanRecord } from '../../bean/type.js';
 import type { MetadataKey } from '../../core/sys/metadata.js';
 import type {
@@ -8,7 +10,7 @@ import type {
   IUsePrepareArgResult,
   TypeDecoratorUseOptionsInitArg,
 } from '../index.js';
-import { evaluateExpressions, isNilOrEmptyString } from '@cabloy/utils';
+
 import { appMetadata } from '../../core/sys/metadata.js';
 import { appResource } from '../../core/sys/resource.js';
 import { useRef } from '../../vueExtra/ref.js';
@@ -80,10 +82,7 @@ export function __prepareInjectSelectorInfo(beanInstance, useOptions: IDecorator
   return selectorInfo ?? { withSelector: false, args: [] };
 }
 
-function __prepareInjectSelectorInfo_descriptor(
-  beanInstance,
-  useOptions: IDecoratorUseOptionsBase,
-): IInjectSelectorInfo | undefined {
+function __prepareInjectSelectorInfo_descriptor(beanInstance, useOptions: IDecoratorUseOptionsBase): IInjectSelectorInfo | undefined {
   const fnGet = useOptions.descriptor?.get;
   if (!fnGet) return;
   const res: IUsePrepareArgResult = fnGet.call(beanInstance);
@@ -96,19 +95,14 @@ function __prepareInjectSelectorInfo_descriptor(
   return { withSelector, args };
 }
 
-function __prepareInjectSelectorInfo_init(
-  beanInstance,
-  useOptions: IDecoratorUseOptionsBase,
-): IInjectSelectorInfo | undefined {
+function __prepareInjectSelectorInfo_init(beanInstance, useOptions: IDecoratorUseOptionsBase): IInjectSelectorInfo | undefined {
   const init = useOptions.init;
   if (!init) return;
   const withSelector = init.withSelector ?? false;
   const markReactive = init.markReactive ?? true;
   const _args = init.args ?? [init.arg];
   if (!_args) return;
-  const args = _args.map((arg, index) =>
-    __prepareInjectSelectorInfo_init_arg(beanInstance, arg, markReactive && (!withSelector || index > 0)),
-  );
+  const args = _args.map((arg, index) => __prepareInjectSelectorInfo_init_arg(beanInstance, arg, markReactive && (!withSelector || index > 0)));
   return { withSelector, args };
 }
 

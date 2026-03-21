@@ -1,4 +1,5 @@
 import type { BeanControllerBase } from '../../bean/beanControllerBase.js';
+
 import { BeanSimple } from '../../bean/beanSimple.js';
 import { BeanControllerIdentifier, BeanRenderIdentifier } from '../../bean/type.js';
 import { cast } from '../../types/utils/cast.js';

@@ -1,12 +1,27 @@
 import type { Logger } from '@cabloy/logger';
 import type { ReactiveMarker } from '@vue/reactivity';
-import type { ComputedGetter, DebuggerOptions, MultiWatchSources, RendererNode, WatchCallback, WatchEffect, WatchEffectOptions, WatchHandle, WatchOptions, WatchSource, WritableComputedOptions } from 'vue';
+import type {
+  ComputedGetter,
+  DebuggerOptions,
+  MultiWatchSources,
+  RendererNode,
+  WatchCallback,
+  WatchEffect,
+  WatchEffectOptions,
+  WatchHandle,
+  WatchOptions,
+  WatchSource,
+  WritableComputedOptions,
+} from 'vue';
+
+import { watch, watchEffect, watchPostEffect, watchSyncEffect } from 'vue';
+
 import type { AppEvent } from '../core/component/event.js';
 import type { ILoggerChildRecord, ILoggerClientRecord } from '../core/logger/types.js';
 import type { FunctionAsync } from '../decorator/type/functionable.js';
 import type { MapSources, MaybeUndefined } from '../vueExtra/watch.js';
 import type { IErrorHandlerEventResult, IModuleLocaleText, IZovaComponentRecord } from './resource/index.js';
-import { watch, watchEffect, watchPostEffect, watchSyncEffect } from 'vue';
+
 import { cast } from '../types/utils/cast.js';
 import { useComputed } from '../vueExtra/computed.js';
 import { BeanBaseSimple, SymbolModuleBelong } from './beanBaseSimple.js';
@@ -127,13 +142,20 @@ export class BeanBase extends BeanBaseSimple {
   }
 
   protected $watch<T, Immediate extends Readonly<boolean> = false>(
-    source: WatchSource<T>, cb: WatchCallback<T, MaybeUndefined<T, Immediate>>, options?: WatchOptions<Immediate>): WatchHandle;
+    source: WatchSource<T>,
+    cb: WatchCallback<T, MaybeUndefined<T, Immediate>>,
+    options?: WatchOptions<Immediate>,
+  ): WatchHandle;
   protected $watch<T extends Readonly<MultiWatchSources>, Immediate extends Readonly<boolean> = false>(
     sources: readonly [...T] | T,
     cb: [T] extends [ReactiveMarker] ? WatchCallback<T, MaybeUndefined<T, Immediate>> : WatchCallback<MapSources<T, false>, MapSources<T, Immediate>>,
-    options?: WatchOptions<Immediate>): WatchHandle;
+    options?: WatchOptions<Immediate>,
+  ): WatchHandle;
   protected $watch<T extends MultiWatchSources, Immediate extends Readonly<boolean> = false>(
-    sources: [...T], cb: WatchCallback<MapSources<T, false>, MapSources<T, Immediate>>, options?: WatchOptions<Immediate>): WatchHandle;
+    sources: [...T],
+    cb: WatchCallback<MapSources<T, false>, MapSources<T, Immediate>>,
+    options?: WatchOptions<Immediate>,
+  ): WatchHandle;
   protected $watch<T extends object, Immediate extends Readonly<boolean> = false>(
     source: T,
     cb: WatchCallback<T, MaybeUndefined<T, Immediate>>,

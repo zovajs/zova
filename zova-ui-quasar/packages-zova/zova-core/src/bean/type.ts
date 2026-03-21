@@ -1,4 +1,5 @@
 import type { defineOptions, Ref, VNode } from 'vue';
+
 import type { IBeanSceneRecord } from '../decorator/interface/beanOptions.js';
 import type { RequiredSome } from '../types/utils/requiredSome.js';
 import type { TypeRecordValues } from '../types/utils/type.js';
@@ -13,8 +14,7 @@ export type TypeBeanRecordKeys = keyof IBeanRecord;
 export type TypeBeanRecordGeneralSelector<SCENE extends keyof IBeanSceneRecord> = {
   [K in keyof IBeanRecordGeneral as K extends `${string}.${SCENE}.${string}` ? K : never]: IBeanRecordGeneral[K];
 };
-export type TypeBeanRecordGeneralSelectorKeys<SCENE extends keyof IBeanSceneRecord> =
-  keyof TypeBeanRecordGeneralSelector<SCENE>;
+export type TypeBeanRecordGeneralSelectorKeys<SCENE extends keyof IBeanSceneRecord> = keyof TypeBeanRecordGeneralSelector<SCENE>;
 
 export type TypeBeanRecordGeneralSelectorSpecificName<SCENE extends keyof IBeanSceneRecord, NAME extends string> = {
   [K in keyof IBeanRecordGeneral as K extends `${string}.${SCENE}.${NAME}` ? K : never]: IBeanRecordGeneral[K];
@@ -39,10 +39,10 @@ export type TypeBeanScopeErrorsKeys = keyof IBeanScopeErrors;
 
 export type TypeScopesErrorsHelper<ModuleName extends keyof IBeanScopeErrors, Errors extends IBeanScopeErrors[ModuleName]> = {
   // @ts-ignore: ignore
-  [K in keyof Errors as `${ModuleName}:${Errors[K]}` ]: K
+  [K in keyof Errors as `${ModuleName}:${Errors[K]}`]: K;
 };
 export type TypeScopesErrorCodes = TypeRecordValues<{
-  [ModuleName in keyof IBeanScopeErrors]: keyof TypeScopesErrorsHelper<ModuleName, IBeanScopeErrors[ModuleName]>
+  [ModuleName in keyof IBeanScopeErrors]: keyof TypeScopesErrorsHelper<ModuleName, IBeanScopeErrors[ModuleName]>;
 }>;
 export type TypeAllErrorCodes = TypeScopesErrorCodes | keyof TypeErrorsInternal;
 
@@ -63,11 +63,7 @@ export function $getBeanName<K extends keyof IBeanRecord>(beanFullName: K): K {
   return beanFullName;
 }
 
-export type ModelRef<T, M extends PropertyKey = string, G = T, S = T> = Ref<
-  G,
-  S
-> &
-[ModelRef<T, M, G, S>, Record<M, true | undefined>];
+export type ModelRef<T, M extends PropertyKey = string, G = T, S = T> = Ref<G, S> & [ModelRef<T, M, G, S>, Record<M, true | undefined>];
 
 export interface DefineModelOptions<T = any, G = T, S = T> {
   get?: (v: T) => G;
@@ -83,7 +79,19 @@ export interface ISlotsDefault {
   default?: ISlot;
 }
 
-export type TypePropValueFromModel<T> = T extends 'vModel' ? 'modelValue' : T extends `vModel:${string}_${string}` ? never : T extends `vModel:${infer ARG}` ? ARG : never;
-export type TypePropUpdateFromModel<T> = T extends 'vModel' ? 'onUpdate:modelValue' : T extends `vModel:${string}_${string}` ? never : T extends `vModel:${infer ARG}` ? `onUpdate:${ARG}` : never;
+export type TypePropValueFromModel<T> = T extends 'vModel'
+  ? 'modelValue'
+  : T extends `vModel:${string}_${string}`
+    ? never
+    : T extends `vModel:${infer ARG}`
+      ? ARG
+      : never;
+export type TypePropUpdateFromModel<T> = T extends 'vModel'
+  ? 'onUpdate:modelValue'
+  : T extends `vModel:${string}_${string}`
+    ? never
+    : T extends `vModel:${infer ARG}`
+      ? `onUpdate:${ARG}`
+      : never;
 // @ts-ignore ignore
 export type TypeControllerInnerProps<PROPS, PROPSDEFAULT> = RequiredSome<PROPS, PROPSDEFAULT>;

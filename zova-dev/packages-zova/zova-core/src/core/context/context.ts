@@ -1,6 +1,9 @@
 import type { ComponentInternalInstance } from 'vue';
-import type { ZovaApplication } from '../app/application.js';
+
 import { markRaw, nextTick } from 'vue';
+
+import type { ZovaApplication } from '../app/application.js';
+
 import { BeanContainer } from '../../bean/beanContainer.js';
 import { cast } from '../../types/utils/cast.js';
 import { sys } from '../sys/sys.js';

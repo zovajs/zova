@@ -1,5 +1,7 @@
-import type { IControllerData, ISlot, ISlotsDefault } from './type.js';
 import { shallowReactive } from 'vue';
+
+import type { IControllerData, ISlot, ISlotsDefault } from './type.js';
+
 import { cast } from '../types/utils/cast.js';
 import { useModel } from '../vueExtra/useModel.js';
 import { BeanBase } from './beanBase.js';

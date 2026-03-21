@@ -1,17 +1,15 @@
 import type { App } from 'vue';
+
 import type { ZovaContext } from '../core/index.js';
 import type { PluginZovaOptions } from '../types/interface/pluginZova.js';
+
 import { SymbolBeanContainerInstances } from '../bean/beanContainer.js';
 import { BeanControllerIdentifier, BeanRenderIdentifier, BeanStyleIdentifier } from '../bean/type.js';
 import { ZovaApplication } from '../core/index.js';
 import { cast } from '../types/index.js';
 
 export const PluginZova = {
-  async install(
-    vue: App,
-    ctxRoot: ZovaContext,
-    { modulesMeta, locales, config, env, SysMonkey, AppMonkey, legacyRoutes }: PluginZovaOptions,
-  ) {
+  async install(vue: App, ctxRoot: ZovaContext, { modulesMeta, locales, config, env, SysMonkey, AppMonkey, legacyRoutes }: PluginZovaOptions) {
     // zova app
     const app = new ZovaApplication(vue, ctxRoot);
     await app.initialize({ modulesMeta, locales, config, env, SysMonkey, AppMonkey, legacyRoutes });

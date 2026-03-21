@@ -1,7 +1,9 @@
 import type { PluginPass } from '@babel/core';
 import type { NodePath, Visitor } from '@babel/traverse';
+
 import { /* template, */ types as t } from '@babel/core';
 import { parseFirstWord } from '@cabloy/word-utils';
+
 import { getTag } from './utils.ts';
 
 // interface ComponentFindInfo {
@@ -65,9 +67,7 @@ function createVisitor(context: ContextInfo) {
         }
       }
       if (behaviors.length > 0) {
-        nodePath.node.attributes.push(
-          t.jsxAttribute(t.jsxIdentifier('behaviors'), t.jsxExpressionContainer(t.arrayExpression(behaviors))),
-        );
+        nodePath.node.attributes.push(t.jsxAttribute(t.jsxIdentifier('behaviors'), t.jsxExpressionContainer(t.arrayExpression(behaviors))));
         // path.get('openingElement').node.name.name
         if (t.isJSXIdentifier(nodePath.node.name)) {
           context.behaviors = true;
@@ -77,9 +77,7 @@ function createVisitor(context: ContextInfo) {
             props.push(t.objectProperty(t.identifier('name'), t.stringLiteral(tag.value)));
           }
           const objectExpression = t.objectExpression(props);
-          nodePath.node.attributes.push(
-            t.jsxAttribute(t.jsxIdentifier('behaviorTag'), t.jsxExpressionContainer(objectExpression)),
-          );
+          nodePath.node.attributes.push(t.jsxAttribute(t.jsxIdentifier('behaviorTag'), t.jsxExpressionContainer(objectExpression)));
           // -> ()=>{}
           const children = (nodePath.container as any)?.children;
           if (children && children.length > 0 && !_checkIfHasJsxExpression(children)) {
@@ -127,4 +125,4 @@ function buildProps(path: NodePath<t.JSXElement>, state: PluginPass) {
   return {
     tag,
   };
-};
+}

@@ -1,4 +1,5 @@
 import type { IModuleLocale } from './type.js';
+
 import { BeanSimple } from '../../beanSimple.js';
 
 const BeanModuleScope = Symbol('BeanScopeLocale#ModuleScope');

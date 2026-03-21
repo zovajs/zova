@@ -1,4 +1,5 @@
 import type { WatchEffectOptions, WatchOptions } from 'vue';
+
 import { createVueDecorator } from './createVueDecorator.js';
 
 export function Computed(): MethodDecorator {

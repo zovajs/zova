@@ -1,9 +1,12 @@
 import type { IModule, IModuleInfo } from '@cabloy/module-info';
-import type { TypeBeanScopeRecordKeys } from '../../bean/type.js';
-import type { IModuleApp, IModuleMain, IMonkeyApp, IMonkeyController, IMonkeyModule, TypeMonkeyName } from '../../types/index.js';
+
 import * as ModuleInfo from '@cabloy/module-info';
 import { forEach, forEachSync } from '@cabloy/utils';
 import { shallowReactive } from 'vue';
+
+import type { TypeBeanScopeRecordKeys } from '../../bean/type.js';
+import type { IModuleApp, IModuleMain, IMonkeyApp, IMonkeyController, IMonkeyModule, TypeMonkeyName } from '../../types/index.js';
+
 import { BeanSimple } from '../../bean/beanSimple.js';
 import { SymbolInstalled } from '../../types/index.js';
 import { StateLock } from '../../utils/stateLock.js';

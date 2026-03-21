@@ -1,3 +1,6 @@
+import { isClass } from '@cabloy/utils';
+import { parseLastWord, skipLastWord, skipPrefix, splitWords } from '@cabloy/word-utils';
+
 import type { IBeanRecord } from '../../bean/type.js';
 import type {
   Constructable,
@@ -8,8 +11,7 @@ import type {
   IDecoratorUseOptionsBase,
 } from '../../decorator/index.js';
 import type { MetadataKey } from './metadata.js';
-import { isClass } from '@cabloy/utils';
-import { parseLastWord, skipLastWord, skipPrefix, splitWords } from '@cabloy/word-utils';
+
 import { registerMappedClassMetadataKey } from '../../mappedClass/utils.js';
 import { cast } from '../../types/utils/cast.js';
 import { uuid } from '../../utils/uuid.js';
@@ -119,11 +121,7 @@ export class AppResource {
     return className;
   }
 
-  _parseSceneAndBeanName<T>(
-    beanClass: Constructable<T>,
-    scene?: string,
-    name?: string,
-  ): { scene: string; name: string } {
+  _parseSceneAndBeanName<T>(beanClass: Constructable<T>, scene?: string, name?: string): { scene: string; name: string } {
     if (scene && name) {
       return { scene, name };
     }

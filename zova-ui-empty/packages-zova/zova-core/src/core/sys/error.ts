@@ -1,4 +1,5 @@
 import type { TypeModuleResourceErrorModules } from '../../types/interface/module.js';
+
 import { BeanSimple } from '../../bean/beanSimple.js';
 
 export class SysError extends BeanSimple {

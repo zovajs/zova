@@ -1,4 +1,5 @@
 import type { CookieOptions } from '../../types/index.js';
+
 // from: quasar/ui/src/plugins/Cookies.js
 import { BeanSimple } from '../../bean/beanSimple.js';
 import { cast } from '../../types/index.js';
@@ -48,7 +49,7 @@ export class AppCookie extends BeanSimple {
         expire = cast<Date>(opts.expires).toUTCString();
       } else if (typeof opts.expires === 'string') {
         // if it's a String (eg. "15m", "1h", "13d", "1d 15m", "31s")
-      // possible units: d (days), h (hours), m (minutes), s (seconds)
+        // possible units: d (days), h (hours), m (minutes), s (seconds)
         expire = parseExpireString(opts.expires);
       } else {
         // otherwise it must be a Number (defined in days)
@@ -104,9 +105,16 @@ export class AppCookie extends BeanSimple {
   }
 
   removeItem(key: string, opts?: CookieOptions): void {
-    this.setItem(key, '', Object.assign({
-      expires: -1,
-    }, opts));
+    this.setItem(
+      key,
+      '',
+      Object.assign(
+        {
+          expires: -1,
+        },
+        opts,
+      ),
+    );
   }
 }
 

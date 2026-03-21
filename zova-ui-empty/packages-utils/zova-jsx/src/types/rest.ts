@@ -19,10 +19,9 @@ export interface TypeRenderComponentJsx {
   type: string;
   key?: string | null;
   props?: TypeRenderComponentJsxProps;
-};
+}
 
-export type TypeRenderComponentNormal =
-  Constructable<ComponentPublicInstance> | string;
+export type TypeRenderComponentNormal = Constructable<ComponentPublicInstance> | string;
 
 export type TypeRenderComponent = TypeRenderComponentNormal | TypeRenderComponentJsx;
 

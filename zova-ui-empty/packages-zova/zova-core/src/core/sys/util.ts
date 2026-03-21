@@ -1,10 +1,12 @@
-import type { IBeanRecord, IBeanScopeRecord, TypeBeanScopeRecordKeys } from '../../bean/type.js';
-import type { IBeanSceneRecord } from '../../decorator/interface/beanOptions.js';
-import type { TypeAuthToken } from '../../types/utils/auth.js';
 import { extend } from '@cabloy/extend';
 import { combineApiPathControllerAndAction, defaultPathSerializer, isEmptyObject } from '@cabloy/utils';
 import DeepEqual from 'deep-equal';
 import { isReactive, reactive } from 'vue';
+
+import type { IBeanRecord, IBeanScopeRecord, TypeBeanScopeRecordKeys } from '../../bean/type.js';
+import type { IBeanSceneRecord } from '../../decorator/interface/beanOptions.js';
+import type { TypeAuthToken } from '../../types/utils/auth.js';
+
 import { BeanSimple } from '../../bean/beanSimple.js';
 import { cast } from '../../types/utils/cast.js';
 import { uuid as _uuid } from '../../utils/uuid.js';
@@ -18,7 +20,11 @@ export interface IApiActionConfigPrepareOptions {
 
 export class SysUtil extends BeanSimple {
   getAbsoluteUrlFromPagePath(path?: string, ignoreHost?: boolean, ignorePublicPath?: boolean) {
-    let prefix = ignoreHost ? '' : (process.env.DEV ? `http://${this.sys.env.DEV_SERVER_HOSTNAME || 'localhost'}:${this.sys.env.DEV_SERVER_PORT}` : `${this.sys.env.SSR_PROD_PROTOCOL}://${this.sys.env.SSR_PROD_HOST}`);
+    let prefix = ignoreHost
+      ? ''
+      : process.env.DEV
+        ? `http://${this.sys.env.DEV_SERVER_HOSTNAME || 'localhost'}:${this.sys.env.DEV_SERVER_PORT}`
+        : `${this.sys.env.SSR_PROD_PROTOCOL}://${this.sys.env.SSR_PROD_HOST}`;
     if (!ignorePublicPath && this.sys.env.APP_PUBLIC_PATH) {
       prefix = `${prefix}/${this.sys.env.APP_PUBLIC_PATH}`;
     }
@@ -58,12 +64,12 @@ export class SysUtil extends BeanSimple {
     }
   }
 
-  getApiPath<K extends (string | undefined) = string | undefined>(path: K): K extends string ? string : undefined {
+  getApiPath<K extends string | undefined = string | undefined>(path: K): K extends string ? string : undefined {
     if (!path) return path as any;
     if (path.startsWith('//')) {
       path = path.substring(1) as any;
     } else {
-      path = this.sys.config.api.prefix + path as any;
+      path = (this.sys.config.api.prefix + path) as any;
     }
     return path as any;
   }
@@ -114,8 +120,9 @@ export class SysUtil extends BeanSimple {
     return config;
   }
 
-  getModuleConfigOriginal<K extends TypeBeanScopeRecordKeys>(moduleName: K):
-  IBeanScopeRecord[K] extends { config?: infer CONFIG } ? CONFIG : undefined {
+  getModuleConfigOriginal<K extends TypeBeanScopeRecordKeys>(
+    moduleName: K,
+  ): IBeanScopeRecord[K] extends { config?: infer CONFIG } ? CONFIG : undefined {
     return this.sys.configOriginal.modules![moduleName as any] ?? {};
   }
 

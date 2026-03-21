@@ -1,6 +1,8 @@
 import type { IndexAPI } from '@quasar/app-vite';
-import type { ConfigContext, QuasarConf } from './types.js';
+
 import chalk from 'chalk';
+
+import type { ConfigContext, QuasarConf } from './types.js';
 
 export function printBanner(_context: ConfigContext, flavor: string, delay: boolean) {
   return async function printBanner(_conf: QuasarConf, api: IndexAPI) {

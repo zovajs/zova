@@ -1,7 +1,9 @@
+import { toLowerCaseFirstChar } from '@cabloy/word-utils';
+
 import type { IDecoratorVueElement, IDecoratorVueModelOptions } from '../../decorator/vueExtra/types.js';
 import type { BeanContainer } from '../beanContainer.js';
 import type { DefineModelOptions } from '../type.js';
-import { toLowerCaseFirstChar } from '@cabloy/word-utils';
+
 import { cast } from '../../types/utils/cast.js';
 import { useModel } from '../../vueExtra/useModel.js';
 import { getVueDecoratorValue } from './utils.js';

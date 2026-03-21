@@ -1,4 +1,5 @@
 import type { RendererNode } from 'vue';
+
 import { BeanSimple } from '../../bean/beanSimple.js';
 import { CtxComponent } from './component.js';
 import { CtxHooks } from './hooks.js';

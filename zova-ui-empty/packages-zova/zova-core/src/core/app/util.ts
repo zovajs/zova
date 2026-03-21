@@ -1,4 +1,5 @@
 import type { ZodLocaleErrors } from '../../utils/zod-enhance.js';
+
 import { BeanSimple } from '../../bean/beanSimple.js';
 import { zodSetLocaleErrors } from '../../utils/zod-enhance.js';
 

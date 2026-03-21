@@ -1,9 +1,11 @@
 import type { IndexAPI } from '@quasar/app-vite';
 import type { UserConfig as ViteUserConfig } from 'vite';
 import type { ZovaViteConfigResult } from 'zova-vite';
-import type { ConfigContext } from './types.js';
+
 import { createLogger, mergeConfig } from 'vite';
 import { generateConfigDefine } from 'zova-vite';
+
+import type { ConfigContext } from './types.js';
 
 const __SvgIconPattern = /\.metadata\/icons\/groups\/.*?\.svg/;
 
@@ -67,7 +69,7 @@ export function extendViteConf(context: ConfigContext) {
     const define = generateConfigDefine(env, ['NODE_ENV', 'META_FLAVOR', 'META_MODE', 'META_APP_MODE', 'SERVER', 'CLIENT', 'DEV', 'PROD', 'SSR']);
     conf.define = mergeConfig(conf.define || {}, define);
     // ssr
-    if (opts.isServer && (context.configMeta?.mode === 'development')) {
+    if (opts.isServer && context.configMeta?.mode === 'development') {
       conf.ssr = mergeConfig(conf.ssr || {}, {
         external: [
           'vue',
@@ -87,7 +89,7 @@ export function extendViteConf(context: ConfigContext) {
       });
     }
     // ssr
-    if (opts.isServer && (context.configMeta?.mode === 'production')) {
+    if (opts.isServer && context.configMeta?.mode === 'production') {
       conf.ssr = mergeConfig(conf.ssr || {}, {
         target: 'node',
       });

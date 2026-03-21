@@ -1,6 +1,9 @@
 import type { Component } from 'vue';
-import type { IZovaComponentRecord } from '../../bean/resource/component/type.js';
+
 import { markRaw } from 'vue';
+
+import type { IZovaComponentRecord } from '../../bean/resource/component/type.js';
+
 import { BeanSimple } from '../../bean/beanSimple.js';
 import { createZovaComponentAsync } from '../../components/createZovaComponentAsync.js';
 

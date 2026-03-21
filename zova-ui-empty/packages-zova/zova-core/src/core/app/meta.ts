@@ -1,6 +1,7 @@
 import type { IModuleLocaleText } from '../../bean/resource/locale/type.js';
 import type { Constructable } from '../../decorator/type/constructable.js';
 import type { IMonkeyApp, IMonkeyController, IMonkeyModule } from '../../types/interface/monkey.js';
+
 import { BeanSimple } from '../../bean/beanSimple.js';
 import { AppComponent } from '../component/component.js';
 import { AppCookie } from '../component/cookie.js';
@@ -32,9 +33,7 @@ export class AppMeta extends BeanSimple {
   }
 
   /** @internal */
-  public async initialize(
-    AppMonkey?: Constructable<IMonkeyModule & IMonkeyApp & IMonkeyController>,
-  ) {
+  public async initialize(AppMonkey?: Constructable<IMonkeyModule & IMonkeyApp & IMonkeyController>) {
     if (AppMonkey) {
       this.appMonkey = this.bean._newBeanSimple(AppMonkey, false);
     }

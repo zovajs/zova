@@ -1,3 +1,5 @@
+import { compose } from '@cabloy/compose';
+
 import type {
   IEventRecord,
   NextEventStrict,
@@ -7,7 +9,7 @@ import type {
   TypeEventHandlersMap,
   TypeEventOff,
 } from '../../types/interface/event.js';
-import { compose } from '@cabloy/compose';
+
 import { BeanSimple } from '../../bean/beanSimple.js';
 import { cast } from '../../types/utils/cast.js';
 
@@ -26,9 +28,7 @@ export class AppEvent extends BeanSimple {
   /** @internal */
   public async initialize() {}
 
-  public getEventHandlers<K extends keyof IEventRecord>(
-    eventName: K,
-  ): TypeEventHandlers<IEventRecord[K]['data'], IEventRecord[K]['result']> {
+  public getEventHandlers<K extends keyof IEventRecord>(eventName: K): TypeEventHandlers<IEventRecord[K]['data'], IEventRecord[K]['result']> {
     let eventHandlers = this.eventHandlersMap[eventName];
     if (!eventHandlers) {
       eventHandlers = this.eventHandlersMap[eventName] = [] as any;
@@ -46,8 +46,8 @@ export class AppEvent extends BeanSimple {
       typeof nextOrDefault === 'function'
         ? cast<NextEventStrict<IEventRecord[K]['data'], IEventRecord[K]['result']>>(nextOrDefault)
         : async (): Promise<IEventRecord[K]['result']> => {
-          return nextOrDefault! as IEventRecord[K]['result'];
-        };
+            return nextOrDefault! as IEventRecord[K]['result'];
+          };
     return await compose(eventHandlers.concat(), __adapter)(data, next);
   }
 
@@ -66,10 +66,7 @@ export class AppEvent extends BeanSimple {
     return compose(eventHandlers.concat(), __adapter)(data, next);
   }
 
-  on<K extends keyof IEventRecord>(
-    eventName: K,
-    fn: TypeEventHandler<IEventRecord[K]['data'], IEventRecord[K]['result']>,
-  ): TypeEventOff {
+  on<K extends keyof IEventRecord>(eventName: K, fn: TypeEventHandler<IEventRecord[K]['data'], IEventRecord[K]['result']>): TypeEventOff {
     const eventHandlers = this.getEventHandlers(eventName);
     eventHandlers.push({ fn });
     return () => {
@@ -81,10 +78,7 @@ export class AppEvent extends BeanSimple {
     };
   }
 
-  once<K extends keyof IEventRecord>(
-    eventName: K,
-    fn: TypeEventHandler<IEventRecord[K]['data'], IEventRecord[K]['result']>,
-  ): TypeEventOff {
+  once<K extends keyof IEventRecord>(eventName: K, fn: TypeEventHandler<IEventRecord[K]['data'], IEventRecord[K]['result']>): TypeEventOff {
     const off = this.on(eventName, async (data, next) => {
       const res = await fn(data, next);
       off();

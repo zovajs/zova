@@ -5,6 +5,7 @@
  */
 
 import { getText } from '@cabloy/localeutil';
+
 import { SPLAT } from './types.js';
 
 const formatRegExp = /%[scdjifoO%]/g;
@@ -38,9 +39,7 @@ class Splatter {
     // splat = [100, 'wow', { such: 'js' }]
     const expectedSplat = tokens.length - escapes;
     const extraSplat = expectedSplat - splat.length;
-    const metas = extraSplat < 0
-      ? splat.splice(extraSplat, -1 * extraSplat)
-      : [];
+    const metas = extraSplat < 0 ? splat.splice(extraSplat, -1 * extraSplat) : [];
 
     // Now that { splat } has been separated from any potential { meta }. we
     // can assign this to the `info` object and write it to our format stream.
@@ -73,9 +72,7 @@ class Splatter {
     // This condition will take care of inputs with info[SPLAT]
     // but no tokens present
     if (!tokens && (splat || splat.length)) {
-      const metas = splat.length > 1
-        ? splat.splice(0)
-        : splat;
+      const metas = splat.length > 1 ? splat.splice(0) : splat;
 
       // Now that { splat } has been separated from any potential { meta }. we
       // can assign this to the `info` object and write it to our format stream.

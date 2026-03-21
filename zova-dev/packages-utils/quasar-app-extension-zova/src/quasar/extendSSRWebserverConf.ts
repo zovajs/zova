@@ -1,7 +1,9 @@
 import type { IndexAPI } from '@quasar/app-vite';
 import type { BuildOptions } from 'esbuild';
-import type { ConfigContext } from './types.js';
+
 import { getOutDir } from 'zova-vite';
+
+import type { ConfigContext } from './types.js';
 
 export function extendSSRWebserverConf(context: ConfigContext) {
   return function extendSSRWebserverConf(conf: BuildOptions, api: IndexAPI) {
@@ -11,7 +13,7 @@ export function extendSSRWebserverConf(context: ConfigContext) {
     conf.keepNames = true;
     conf.bundle = true;
     conf.external = [];
-    conf.banner = { js: 'import { createRequire } from \'module\';const require = createRequire(import.meta.url);' };
+    conf.banner = { js: "import { createRequire } from 'module';const require = createRequire(import.meta.url);" };
     conf.entryPoints = [
       { in: (api.resolve as any).entry('ssr-prod-webserver.js'), out: 'index' },
       { in: (api.resolve as any).entry('ssr-prod-handler.js'), out: 'handler' },
