@@ -91,11 +91,11 @@ export class CliRefactorRenameComponent extends BeanCliBase {
     if (!astMatch) {
       throw new Error(`page route not found: ${argv.nameMeta.shortCapitalize}`);
     }
-    const astPropComponent = (astMatch?.node as any).properties.find(prop => {
+    const astPropComponent = (astMatch?.node as any)?.properties.find(prop => {
       return prop.key.name === 'component';
     });
     astPropComponent.value.name = `ZPage${argv.componentNameNewCapitalize}`;
-    const astPropPath = (astMatch?.node as any).properties.find(prop => {
+    const astPropPath = (astMatch?.node as any)?.properties.find(prop => {
       return prop.key.name === 'path';
     });
     if (astPropPath && astPropPath.value.value) {

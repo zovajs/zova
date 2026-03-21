@@ -9,8 +9,8 @@ importers:
   .:
     devDependencies:
       '@cabloy/lint':
-        specifier: ^5.0.22
-        version: 5.0.22(@typescript-eslint/rule-tester@8.57.1(eslint@10.0.3)(typescript@5.9.3))(@typescript-eslint/typescript-estree@8.57.1(typescript@5.9.3))(@typescript-eslint/utils@8.57.1(eslint@10.0.3)(typescript@5.9.3))(@vue/compiler-sfc@3.5.26)(eslint@10.0.3)(oxlint@1.56.0)(typescript@5.9.3)
+        specifier: ^5.0.24
+        version: 5.0.24(@typescript-eslint/rule-tester@8.57.1(eslint@10.0.3)(typescript@5.9.3))(@typescript-eslint/typescript-estree@8.57.1(typescript@5.9.3))(@typescript-eslint/utils@8.57.1(eslint@10.0.3)(typescript@5.9.3))(@vue/compiler-sfc@3.5.26)(eslint@10.0.3)(oxlint@1.56.0)(typescript@5.9.3)
       '@types/mocha':
         specifier: ^10.0.6
         version: 10.0.10
@@ -36,8 +36,8 @@ importers:
         specifier: ^3.0.77
         version: 3.0.81(vue@3.5.13(typescript@5.9.3))
       '@cabloy/process-helper':
-        specifier: ^2.0.21
-        version: 2.0.25
+        specifier: ^3.0.0
+        version: 3.0.0
       fs-extra:
         specifier: ^11.2.0
         version: 11.3.3
@@ -332,8 +332,8 @@ packages:
   '@cabloy/extend@3.1.11':
     resolution: {integrity: sha512-IUAt57I2coHZ+efYEsrQS425g3QAKSs07rZJC3RWgs2AchQ21sff33qykjRLLQ/CmlOx3zoiOapH4w/kZWGliA==}
 
-  '@cabloy/lint@5.0.22':
-    resolution: {integrity: sha512-CeQliRJ8whpw0K2bZZjk5vXLCfyYwxkZLrRa+WryEcFqDEmjYCBGvnzNFm5pRLFDi7yFQvG2cPqs8o4UcRbfyg==}
+  '@cabloy/lint@5.0.24':
+    resolution: {integrity: sha512-g10MGBd1WGbBZp5XyGgw3ezoeZTqiWP7qMD8XyqZWwIKyzQ8cJb5raO42oGxjnjEMSvfNoE07aze81vDpk2nfQ==}
 
   '@cabloy/module-glob@5.2.40':
     resolution: {integrity: sha512-yEpfBRlwPFnfsarzTiq6Vuo9c4LvxjQPWL+wylisKr219U6bhUjcD9aRngj4paB/WMlNZ3LYAiTLqxGt6AUB1A==}
@@ -352,6 +352,9 @@ packages:
 
   '@cabloy/process-helper@2.0.25':
     resolution: {integrity: sha512-iOd8TtfC2+LIDYZ0KzgrhOIb0MD+R4hxMDUQ24zEhduZCfZniUL+feSJD0uxSOb0ec1mo5DO3ogohYsNcRgE6w==}
+
+  '@cabloy/process-helper@3.0.0':
+    resolution: {integrity: sha512-pwsYaMFFAcLw65+gxpuz+36v8EYaFtdbz1X5mLNqNhiWfUzHvJL4ASG1PX7nRefuYQg3bDTS0/eNDZjvbfiPXA==}
 
   '@cabloy/utils@2.0.24':
     resolution: {integrity: sha512-uAnoUOesxHEtYzUF84Uv8YZRY9FqKte/sZZ6+qOivimfwxx37V2QFQJfmUdRcZaktz10eEu++YUkdNVxkZTkjQ==}
@@ -4637,7 +4640,7 @@ snapshots:
 
   '@cabloy/extend@3.1.11': {}
 
-  '@cabloy/lint@5.0.22(@typescript-eslint/rule-tester@8.57.1(eslint@10.0.3)(typescript@5.9.3))(@typescript-eslint/typescript-estree@8.57.1(typescript@5.9.3))(@typescript-eslint/utils@8.57.1(eslint@10.0.3)(typescript@5.9.3))(@vue/compiler-sfc@3.5.26)(eslint@10.0.3)(oxlint@1.56.0)(typescript@5.9.3)':
+  '@cabloy/lint@5.0.24(@typescript-eslint/rule-tester@8.57.1(eslint@10.0.3)(typescript@5.9.3))(@typescript-eslint/typescript-estree@8.57.1(typescript@5.9.3))(@typescript-eslint/utils@8.57.1(eslint@10.0.3)(typescript@5.9.3))(@vue/compiler-sfc@3.5.26)(eslint@10.0.3)(oxlint@1.56.0)(typescript@5.9.3)':
     dependencies:
       '@antfu/eslint-config': 7.7.3(@eslint/json@1.2.0)(@typescript-eslint/rule-tester@8.57.1(eslint@10.0.3)(typescript@5.9.3))(@typescript-eslint/typescript-estree@8.57.1(typescript@5.9.3))(@typescript-eslint/utils@8.57.1(eslint@10.0.3)(typescript@5.9.3))(@vue/compiler-sfc@3.5.26)(eslint@10.0.3)(oxlint@1.56.0)(typescript@5.9.3)
       '@e18e/eslint-plugin': 0.2.0(eslint@10.0.3)(oxlint@1.56.0)
@@ -4705,6 +4708,8 @@ snapshots:
       yargs-parser: 21.1.1
 
   '@cabloy/process-helper@2.0.25': {}
+
+  '@cabloy/process-helper@3.0.0': {}
 
   '@cabloy/utils@2.0.24':
     dependencies:
