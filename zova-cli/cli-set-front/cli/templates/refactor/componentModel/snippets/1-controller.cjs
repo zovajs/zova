@@ -1,5 +1,5 @@
 const __regProps = /interface [^<]*Props<(.*?)> \{/;
-const __regModels = /interface [^<]*Models([^{]*) \{/;
+const __regModelsReplace = /interface [^<]*Models([^{]*) \{/;
 const __regModelValue = /import \{[^}]*ModelValue[^}]*\} from 'zova';/;
 const __regModelValueReplace = /import \{ ([^}]*) \} from 'zova';/;
 const __regPropsDefaultReplace = /static \$propsDefault([^{]*) = \{/;
@@ -27,7 +27,7 @@ module.exports = {
       throw new Error('Model exists');
     }
     // Model
-    ast = ast.replace(__regModels, $0 => {
+    ast = ast.replace(__regModelsReplace, $0 => {
       return `${$0}\n  '${typeName}'?: number;`;
     });
     // @Model
