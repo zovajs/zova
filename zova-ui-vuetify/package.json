@@ -133,6 +133,7 @@
     "zova-module-a-ssrserver": "workspace:^",
     "axios": "^1.13.4",
     "@tanstack/query-core": "^5.90.16",
+    "@tanstack/query-persist-client-core": "^5.94.4",
     "@tanstack/vue-query": "^5.92.5",
     "mutate-on-copy": "^1.0.1",
     "table-identity": "^1.0.0",
