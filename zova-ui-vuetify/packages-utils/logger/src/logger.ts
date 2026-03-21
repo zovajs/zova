@@ -5,6 +5,7 @@
  */
 
 import type { LoggerLevel, LoggerOptions, LogInfo } from './types.js';
+
 import { Profiler } from './profiler.js';
 import { LEVEL, MESSAGE, SPLAT } from './types.js';
 
@@ -102,12 +103,14 @@ export class Logger {
       }
     }
 
-    this.write(Object.assign({}, this.defaultMeta, {
-      [LEVEL]: level as LoggerLevel,
-      [SPLAT]: splat,
-      level: level as LoggerLevel,
-      message: msg,
-    }));
+    this.write(
+      Object.assign({}, this.defaultMeta, {
+        [LEVEL]: level as LoggerLevel,
+        [SPLAT]: splat,
+        level: level as LoggerLevel,
+        message: msg,
+      }),
+    );
     return this;
   }
 

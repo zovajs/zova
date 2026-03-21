@@ -1,6 +1,7 @@
 import type { PluginPass } from '@babel/core';
 import type { NodePath, Visitor } from '@babel/traverse';
 import type { IModuleInfo } from '@cabloy/module-info';
+
 import { /* template, */ types as t } from '@babel/core';
 import { parseInfo } from '@cabloy/module-info';
 

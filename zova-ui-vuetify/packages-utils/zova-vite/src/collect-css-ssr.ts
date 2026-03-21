@@ -16,11 +16,8 @@ const hashCode = (moduleId: string) => {
 };
 
 const moduleIsStyle = (mod: ModuleNode) =>
-  (mod?.file?.endsWith('.sass') ||
-    mod?.file?.endsWith('.scss') ||
-    mod?.file?.endsWith('.css') ||
-    mod?.id?.includes('vue&type=style')) &&
-    (mod?.ssrModule || mod?.ssrTransformResult);
+  (mod?.file?.endsWith('.sass') || mod?.file?.endsWith('.scss') || mod?.file?.endsWith('.css') || mod?.id?.includes('vue&type=style')) &&
+  (mod?.ssrModule || mod?.ssrTransformResult);
 
 function getCssContent(mod) {
   if (mod._ssrModule?.[SymbolCssResult]) return mod._ssrModule[SymbolCssResult];
@@ -51,13 +48,11 @@ function _collectCss(mods: ModuleNode[] | Set<ModuleNode>, styles = new Map(), c
   });
 
   styles.forEach((content, id) => {
-    result = result.concat(
-      `<style vite-css-module-id="${hashCode(id)}">${(content || '').replaceAll('\n', '')}</style>`,
-    );
+    result = result.concat(`<style vite-css-module-id="${hashCode(id)}">${(content || '').replaceAll('\n', '')}</style>`);
   });
 
   return result;
-};
+}
 
 /**
  * Client listener to detect updated modules through HMR,

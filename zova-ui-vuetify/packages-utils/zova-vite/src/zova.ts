@@ -1,7 +1,10 @@
 import type { ZovaConfigMeta } from '@cabloy/module-info';
 import type { CommonServerOptions } from 'vite';
-import type { ZovaViteConfigOptions, ZovaViteConfigResult } from './types.ts';
+
 import path from 'node:path';
+
+import type { ZovaViteConfigOptions, ZovaViteConfigResult } from './types.ts';
+
 import { createConfigUtils } from './configUtils.ts';
 import { generateEntryFiles } from './generateEntryFiles.ts';
 import { getOutDir } from './utils.ts';
@@ -9,10 +12,7 @@ import { generateVitePlugins } from './vitePlugins.ts';
 
 const __SvgIconPattern = /\.metadata\/icons\/groups\/.*?\.svg/;
 
-export async function generateZovaViteMeta(
-  configMeta: ZovaConfigMeta,
-  configOptions: ZovaViteConfigOptions,
-): Promise<ZovaViteConfigResult> {
+export async function generateZovaViteMeta(configMeta: ZovaConfigMeta, configOptions: ZovaViteConfigOptions): Promise<ZovaViteConfigResult> {
   // config utils
   const configUtils = createConfigUtils(configMeta, configOptions);
   // env
@@ -24,9 +24,12 @@ export async function generateZovaViteMeta(
   // build
   const build = __getConfigBuild();
   // alias
-  const alias = Object.assign({}, {
-    '@': path.join(configOptions.appDir, 'src/legacy'),
-  });
+  const alias = Object.assign(
+    {},
+    {
+      '@': path.join(configOptions.appDir, 'src/legacy'),
+    },
+  );
   // vitePlugins
   const vitePlugins = generateVitePlugins(configOptions, modulesMeta);
   // viteConfig
