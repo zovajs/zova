@@ -326,8 +326,8 @@ importers:
         version: link:src/suite-vendor/a-vuetify/modules/vuetify-form
     devDependencies:
       '@cabloy/cli':
-        specifier: ^3.0.77
-        version: 3.0.98(vue@3.5.28(typescript@5.9.3))
+        specifier: ^3.0.99
+        version: 3.0.99(vue@3.5.28(typescript@5.9.3))
       '@cabloy/lint':
         specifier: ^5.0.24
         version: 5.0.24(@typescript-eslint/rule-tester@8.57.0(eslint@10.0.3)(typescript@5.9.3))(@typescript-eslint/typescript-estree@8.57.0(typescript@5.9.3))(@typescript-eslint/utils@8.57.0(eslint@10.0.3)(typescript@5.9.3))(@vue/compiler-sfc@3.5.28)(eslint@10.0.3)(oxlint@1.56.0)(typescript@5.9.3)
@@ -1148,8 +1148,8 @@ importers:
         version: link:../../../../../packages-utils/zova-jsx
     devDependencies:
       '@cabloy/cli':
-        specifier: ^3.0.77
-        version: 3.0.98(vue@3.5.28(typescript@5.9.3))
+        specifier: ^3.0.99
+        version: 3.0.99(vue@3.5.28(typescript@5.9.3))
       '@types/luxon':
         specifier: ^3.7.1
         version: 3.7.1
@@ -1560,8 +1560,8 @@ packages:
   '@bufbuild/protobuf@2.11.0':
     resolution: {integrity: sha512-sBXGT13cpmPR5BMgHE6UEEfEaShh5Ror6rfN3yEK5si7QVrtZg8LEPQb0VVhiLRUslD2yLnXtnRzG035J/mZXQ==}
 
-  '@cabloy/cli@3.0.98':
-    resolution: {integrity: sha512-Xfkr0BQOj8cHCEkX2s10DHZp4nmdzzdy7b6/WHC7KfiNB2z4dY2/aNXYHa4w92carSKBuvqKH8qqOIrhVY8G/A==}
+  '@cabloy/cli@3.0.99':
+    resolution: {integrity: sha512-EzdIP2bOEnC/z8DocIgaFalmhrsXPNqkLd32P3A6ZLYQ4ZtQsr83bc2BHq7S2utWl2m6DkwGMJg323f8cdN3lg==}
 
   '@cabloy/compose@2.0.15':
     resolution: {integrity: sha512-1SkJvEKhcvsWtH3MeUYcyQkd+moIrUA6ihNZIemk0VxYsIraMo5yOIxFvVjfr88NJoRR4j5HsyR3j6cQpoGE2A==}
@@ -1603,8 +1603,8 @@ packages:
     peerDependencies:
       typescript: ^5.x
 
-  '@cabloy/process-helper@2.0.25':
-    resolution: {integrity: sha512-iOd8TtfC2+LIDYZ0KzgrhOIb0MD+R4hxMDUQ24zEhduZCfZniUL+feSJD0uxSOb0ec1mo5DO3ogohYsNcRgE6w==}
+  '@cabloy/process-helper@3.0.0':
+    resolution: {integrity: sha512-pwsYaMFFAcLw65+gxpuz+36v8EYaFtdbz1X5mLNqNhiWfUzHvJL4ASG1PX7nRefuYQg3bDTS0/eNDZjvbfiPXA==}
 
   '@cabloy/quasar-app-vite@2.4.6':
     resolution: {integrity: sha512-u6/LkwR3X4WS8XiYXFpNBZnSKeklJNk9+rmQA65QMb6X1TNP/wSV13FKHnJ16jsG2khK009Mw0JQ/RFy9RFIqg==}
@@ -7011,12 +7011,12 @@ snapshots:
 
   '@bufbuild/protobuf@2.11.0': {}
 
-  '@cabloy/cli@3.0.98(vue@3.5.28(typescript@5.9.3))':
+  '@cabloy/cli@3.0.99(vue@3.5.28(typescript@5.9.3))':
     dependencies:
       '@babel/parser': 7.29.0
       '@cabloy/module-glob': 5.2.56
-      '@cabloy/module-info': 1.3.42
-      '@cabloy/process-helper': 2.0.25
+      '@cabloy/module-info': 2.0.0
+      '@cabloy/process-helper': 3.0.0
       '@cabloy/utils': 2.0.24
       '@cabloy/word-utils': link:packages-utils/word-utils
       '@npmcli/config': 10.7.0
@@ -7126,7 +7126,7 @@ snapshots:
       typescript: 5.9.3
       yargs-parser: 21.1.1
 
-  '@cabloy/process-helper@2.0.25': {}
+  '@cabloy/process-helper@3.0.0': {}
 
   '@cabloy/quasar-app-vite@2.4.6(@cabloy/vue-router@4.4.16(vue@3.5.28(typescript@5.9.3)))(@types/node@22.19.11)(eslint@10.0.3)(less@4.6.4)(pinia@2.3.1(typescript@5.9.3)(vue@3.5.28(typescript@5.9.3)))(quasar@2.18.6)(rollup@4.57.1)(sass@1.97.3)(terser@5.46.0)(typescript@5.9.3)(vue@3.5.28(typescript@5.9.3))(yaml@2.8.2)':
     dependencies:
@@ -7932,7 +7932,7 @@ snapshots:
       '@npmcli/name-from-folder': 4.0.0
       '@npmcli/package-json': 7.0.4
       glob: 13.0.5
-      minimatch: 10.2.1
+      minimatch: 10.2.4
 
   '@npmcli/name-from-folder@4.0.0': {}
 
