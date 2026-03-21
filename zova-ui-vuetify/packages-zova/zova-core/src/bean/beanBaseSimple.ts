@@ -1,4 +1,5 @@
 import type { IDecoratorBeanOptionsBase } from '../decorator/interface/beanOptions.js';
+
 import { appResource } from '../core/sys/resource.js';
 import { StateLock } from '../utils/stateLock.js';
 import { BeanSimple } from './beanSimple.js';
@@ -47,7 +48,7 @@ export class BeanBaseSimple extends BeanSimple {
   }
 
   protected get $beanOptions(): IDecoratorBeanOptionsBase {
-    return appResource.getBean(this[SymbolBeanFullName] || this.constructor as any)!;
+    return appResource.getBean(this[SymbolBeanFullName] || (this.constructor as any))!;
   }
 
   public get $onionName() {

@@ -1,9 +1,10 @@
 import type { LoggerLevel, LoggerOptions } from '@cabloy/logger';
+
 import type { PowerPartial } from '../../types/utils/powerPartial.js';
 
 export interface ILoggerOptionsClientInfo {
   clientName: keyof ILoggerClientRecord;
-  level: () => (LoggerLevel | undefined);
+  level: () => LoggerLevel | undefined;
 }
 
 export type TypeLoggerOptions = LoggerOptions | ((clientInfo: ILoggerOptionsClientInfo) => LoggerOptions);

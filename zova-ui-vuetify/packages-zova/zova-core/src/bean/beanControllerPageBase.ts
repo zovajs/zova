@@ -1,4 +1,5 @@
 import type { IControllerData } from './type.js';
+
 import { BeanBase } from './beanBase.js';
 
 export class BeanControllerPageBase extends BeanBase {

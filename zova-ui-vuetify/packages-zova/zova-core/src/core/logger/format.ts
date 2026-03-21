@@ -10,7 +10,8 @@ export const formatLoggerFilter = format((info, opts: any) => {
     if (NpmConfigSetLevels[info.level as string] === NpmConfigSetLevels[level]) return __formatLoggerFilterCheckInfo(info);
     return false;
   }
-  if (NpmConfigSetLevels[info.level as string] <= NpmConfigSetLevels[level] || (opts.silly && info.level === 'silly')) return __formatLoggerFilterCheckInfo(info);
+  if (NpmConfigSetLevels[info.level as string] <= NpmConfigSetLevels[level] || (opts.silly && info.level === 'silly'))
+    return __formatLoggerFilterCheckInfo(info);
   return false;
 });
 

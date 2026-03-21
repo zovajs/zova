@@ -1,6 +1,9 @@
 import type { App } from 'vue';
-import type { PluginZovaOptions } from './types/interface/pluginZova.js';
+
 import { PluginFreeze } from 'vue-plugin-render-freeze';
+
+import type { PluginZovaOptions } from './types/interface/pluginZova.js';
+
 import { sys } from './core/sys/sys.js';
 import { PluginBean } from './plugins/bean.js';
 

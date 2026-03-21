@@ -1,4 +1,5 @@
 import type { IModule } from '@cabloy/module-info';
+
 import type { BeanBase } from '../../bean/beanBase.js';
 import type { BeanContainer } from '../../bean/beanContainer.js';
 import type { IControllerData } from '../../bean/type.js';
@@ -30,27 +31,29 @@ export interface IMonkeyModuleSys {
 }
 
 export interface IMonkeySys
-  extends IMonkeySysApplicationInitialize,
-  IMonkeySysContextInitialize,
-  IMonkeySysInitialize,
-  IMonkeySysInitialized,
-  IMonkeySysReady,
-  IMonkeySysClose,
-  IMonkeyBeanInit,
-  IMonkeyBeanInited,
-  IMonkeyBeanDispose,
-  IMonkeyBeanDisposed {}
+  extends
+    IMonkeySysApplicationInitialize,
+    IMonkeySysContextInitialize,
+    IMonkeySysInitialize,
+    IMonkeySysInitialized,
+    IMonkeySysReady,
+    IMonkeySysClose,
+    IMonkeyBeanInit,
+    IMonkeyBeanInited,
+    IMonkeyBeanDispose,
+    IMonkeyBeanDisposed {}
 
 export interface IMonkeyApp
-  extends IMonkeyAppContextInitialize,
-  IMonkeyAppInitialize,
-  IMonkeyAppInitialized,
-  IMonkeyAppReady,
-  IMonkeyAppClose,
-  IMonkeyBeanInit,
-  IMonkeyBeanInited,
-  IMonkeyBeanDispose,
-  IMonkeyBeanDisposed {}
+  extends
+    IMonkeyAppContextInitialize,
+    IMonkeyAppInitialize,
+    IMonkeyAppInitialized,
+    IMonkeyAppReady,
+    IMonkeyAppClose,
+    IMonkeyBeanInit,
+    IMonkeyBeanInited,
+    IMonkeyBeanDispose,
+    IMonkeyBeanDisposed {}
 
 export interface IMonkeyController {
   controllerDataPrepare(controllerData: IControllerData, ctx: ZovaContext): void;

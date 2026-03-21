@@ -1,5 +1,6 @@
 import type { TypeModuleResourceLocaleModules, TypeModuleResourceLocales } from '../../types/interface/module.js';
 import type { ZovaLocaleOptionalMap } from '../app/locale.js';
+
 import { AppLocale } from '../component/locale.js';
 
 export class SysLocale extends AppLocale {

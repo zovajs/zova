@@ -1,16 +1,22 @@
 import type { Constructable } from '../../decorator/type/constructable.js';
 
 export interface Type<T = any> extends Function {
-  new(...args: any[]): T;
+  new (...args: any[]): T;
 }
 
-export type TypeClassOfClassLike<ClassLike> =
-  ClassLike extends ((() => Constructable<infer Result>) | Constructable<infer Result>) ? Result
-  : ClassLike extends ((() => infer Result) | infer Result) ? Result
-  : ClassLike extends () => Constructable<infer Result> ? Result
-  : ClassLike extends () => infer Result ? Result
-  : ClassLike extends Constructable<infer Result> ? Result
-  : ClassLike extends infer Result ? Result : undefined;
+export type TypeClassOfClassLike<ClassLike> = ClassLike extends (() => Constructable<infer Result>) | Constructable<infer Result>
+  ? Result
+  : ClassLike extends (() => infer Result) | (infer Result)
+    ? Result
+    : ClassLike extends () => Constructable<infer Result>
+      ? Result
+      : ClassLike extends () => infer Result
+        ? Result
+        : ClassLike extends Constructable<infer Result>
+          ? Result
+          : ClassLike extends infer Result
+            ? Result
+            : undefined;
 
 export type TypeRecordValues<TRecord> = TRecord[keyof TRecord];
 

@@ -1,6 +1,9 @@
 import type { LoggerLevel } from '@cabloy/logger';
-import type { ILoggerChildRecord, ILoggerClientRecord, TypeLoggerOptions } from './types.js';
+
 import { Logger } from '@cabloy/logger';
+
+import type { ILoggerChildRecord, ILoggerClientRecord, TypeLoggerOptions } from './types.js';
+
 import { BeanSimple } from '../../bean/beanSimple.js';
 import { sys } from '../sys/sys.js';
 import { deepExtend } from '../sys/util.js';

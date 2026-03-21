@@ -1,15 +1,11 @@
-import type { IDecoratorVueElement, IDecoratorVueEmitOptions } from '../../decorator/vueExtra/types.js';
 import { isPromise } from '@cabloy/utils';
 import { toLowerCaseFirstChar, toUpperCaseFirstChar } from '@cabloy/word-utils';
+
+import type { IDecoratorVueElement, IDecoratorVueEmitOptions } from '../../decorator/vueExtra/types.js';
+
 import { getVueDecoratorValue } from './utils.js';
 
-export function emit(
-  beanInstance,
-  _beanFullName: string,
-  prop: string,
-  vueElement: IDecoratorVueElement,
-  index: number,
-) {
+export function emit(beanInstance, _beanFullName: string, prop: string, vueElement: IDecoratorVueElement, index: number) {
   const { descriptor } = vueElement;
   Object.defineProperty(beanInstance, prop, {
     enumerable: false,
@@ -31,13 +27,7 @@ export function emit(
   });
 }
 
-function __emitHandler(
-  returnValue: any,
-  args: any[],
-  beanInstance,
-  prop: string,
-  vueElement: IDecoratorVueElement<IDecoratorVueEmitOptions>,
-) {
+function __emitHandler(returnValue: any, args: any[], beanInstance, prop: string, vueElement: IDecoratorVueElement<IDecoratorVueEmitOptions>) {
   // eventName
   let eventName = vueElement.options?.eventName;
   if (!eventName) {

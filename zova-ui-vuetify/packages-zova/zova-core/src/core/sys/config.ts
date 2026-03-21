@@ -1,4 +1,5 @@
 import type { ZovaConfigMeta } from '@cabloy/module-info';
+
 import type { ILayoutRecord, TypeComponentAppRecord, TypeComponentLayoutRecord } from '../../bean/resource/component/type.js';
 import type { ILocaleRecord } from '../../bean/resource/locale/type.js';
 import type { ZovaConfigRoutes } from '../../bean/resource/page/type.js';
@@ -6,6 +7,7 @@ import type { IBeanScopeConfig } from '../../bean/type.js';
 import type { ZovaConfigEnv } from '../../types/utils/env.js';
 import type { PowerPartial } from '../../types/utils/powerPartial.js';
 import type { ConfigLogger } from '../logger/types.js';
+
 import { cast } from '../../types/utils/cast.js';
 
 export function configDefault(env: ZovaConfigEnv): PowerPartial<ZovaConfig> {

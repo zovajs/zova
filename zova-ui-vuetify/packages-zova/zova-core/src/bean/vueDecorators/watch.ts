@@ -1,16 +1,12 @@
-import type { IDecoratorVueElement, IDecoratorVueWatchOptions } from '../../decorator/vueExtra/types.js';
 import { getProperty } from '@cabloy/utils';
 import { toLowerCaseFirstChar } from '@cabloy/word-utils';
 import { watch as vueWatch } from 'vue';
+
+import type { IDecoratorVueElement, IDecoratorVueWatchOptions } from '../../decorator/vueExtra/types.js';
+
 import { getVueDecoratorValue } from './utils.js';
 
-export function watch(
-  beanInstance,
-  _beanFullName: string,
-  prop: string,
-  vueElement: IDecoratorVueElement<IDecoratorVueWatchOptions>,
-  index: number,
-) {
+export function watch(beanInstance, _beanFullName: string, prop: string, vueElement: IDecoratorVueElement<IDecoratorVueWatchOptions>, index: number) {
   const { descriptor, options } = vueElement;
   // getter
   let keySource = `${prop}Source`;
