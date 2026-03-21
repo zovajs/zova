@@ -1,3 +1,10 @@
+const __regProps = /interface [^<]*Props<(.*?)> \{/;
+const __regModels = /interface [^<]*Models([^{]*) \{/;
+const __regModelValue = /import \{[^}]*ModelValue[^}]*\} from 'zova';/;
+const __regModelValueReplace = /import \{ ([^}]*) \} from 'zova';/;
+const __regPropsDefaultReplace = /static \$propsDefault([^{]*) = \{/;
+const __regLocalNameReplace = /protected async __init__/;
+
 module.exports = {
   file: ({ argv }) => {
     return argv.controllerFileName;
@@ -9,7 +16,7 @@ module.exports = {
     const typeName = modelName === 'modelValue' ? 'vModel' : `vModel:${modelName}`;
     // models
     if (!ast.includes(`${argv.controllerClassName}Models`)) {
-      const matchGeneric = ast.match(/interface [^<]*Props<(.*?)> \{/);
+      const matchGeneric = ast.match(__regProps);
       const hasGeneric = !!matchGeneric;
       const generic = matchGeneric && matchGeneric[1];
       const genericT = hasGeneric ? `<${generic}>` : '';
@@ -20,21 +27,21 @@ module.exports = {
       throw new Error('Model exists');
     }
     // Model
-    ast = ast.replace(/interface [^<]*Models([^{]*) \{/, $0 => {
+    ast = ast.replace(__regModels, $0 => {
       return `${$0}\n  '${typeName}'?: number;`;
     });
     // @Model
-    if (!ast.match(/import \{[^}]*ModelValue[^}]*\} from 'zova';/)) {
-      ast = ast.replace(/import \{ ([^}]*) \} from 'zova';/, (_, $1) => {
+    if (!__regModelValue.test(ast)) {
+      ast = ast.replace(__regModelValueReplace, (_, $1) => {
         return `import { ${$1}, ModelValue } from 'zova';`;
       });
     }
     // propsDefault
-    ast = ast.replace(/static \$propsDefault([^{]*) = \{/, $0 => {
+    ast = ast.replace(__regPropsDefaultReplace, $0 => {
       return `${$0}\n  ${modelName}: 0,`;
     });
     // localName
-    ast = ast.replace(/protected async __init__/, $0 => {
+    ast = ast.replace(__regLocalNameReplace, $0 => {
       return `@ModelValue()\n${localName}: number;\n\n    ${$0}`;
     });
     // ok

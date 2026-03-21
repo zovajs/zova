@@ -1,11 +1,15 @@
+const __regEmits = /interface [^<]*Emits<(.*?)> \{/;
+
 module.exports = {
   file: ({ argv }) => {
     return argv.controllerFileName;
   },
   language: 'plain',
   async transform({ ast, argv }) {
-    if (ast.includes(`${argv.controllerClassName}Props`)) throw new Error('Props exists');
-    const matchGeneric = ast.match(/interface [^<]*Emits<(.*?)> \{/);
+    if (ast.includes(`${argv.controllerClassName}Props`)) {
+      throw new Error('Props exists');
+    }
+    const matchGeneric = ast.match(__regEmits);
     const hasGeneric = !!matchGeneric;
     const genericT = hasGeneric ? '<T = unknown>' : '';
     // Props
