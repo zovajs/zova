@@ -329,8 +329,8 @@ importers:
         specifier: ^3.0.77
         version: 3.0.98(vue@3.5.28(typescript@5.9.3))
       '@cabloy/lint':
-        specifier: ^5.0.22
-        version: 5.0.22(@typescript-eslint/rule-tester@8.57.0(eslint@10.0.3)(typescript@5.9.3))(@typescript-eslint/typescript-estree@8.57.0(typescript@5.9.3))(@typescript-eslint/utils@8.57.0(eslint@10.0.3)(typescript@5.9.3))(@vue/compiler-sfc@3.5.28)(eslint@10.0.3)(oxlint@1.56.0)(typescript@5.9.3)
+        specifier: ^5.0.23
+        version: 5.0.23(@typescript-eslint/rule-tester@8.57.0(eslint@10.0.3)(typescript@5.9.3))(@typescript-eslint/typescript-estree@8.57.0(typescript@5.9.3))(@typescript-eslint/utils@8.57.0(eslint@10.0.3)(typescript@5.9.3))(@vue/compiler-sfc@3.5.28)(eslint@10.0.3)(oxlint@1.56.0)(typescript@5.9.3)
       '@cabloy/openapi-typescript':
         specifier: ^7.9.2
         version: 7.9.2(typescript@5.9.3)
@@ -554,8 +554,8 @@ importers:
         version: link:../zova-vite
     devDependencies:
       '@cabloy/lint':
-        specifier: ^5.0.22
-        version: 5.0.22(@typescript-eslint/rule-tester@8.57.0(eslint@10.0.3)(typescript@5.9.3))(@typescript-eslint/typescript-estree@8.57.0(typescript@5.9.3))(@typescript-eslint/utils@8.57.0(eslint@10.0.3)(typescript@5.9.3))(@vue/compiler-sfc@3.5.28)(eslint@10.0.3)(oxlint@1.56.0)(typescript@5.9.3)
+        specifier: ^5.0.23
+        version: 5.0.23(@typescript-eslint/rule-tester@8.57.0(eslint@10.0.3)(typescript@5.9.3))(@typescript-eslint/typescript-estree@8.57.0(typescript@5.9.3))(@typescript-eslint/utils@8.57.0(eslint@10.0.3)(typescript@5.9.3))(@vue/compiler-sfc@3.5.28)(eslint@10.0.3)(oxlint@1.56.0)(typescript@5.9.3)
       clean-package:
         specifier: ^2.2.0
         version: 2.2.0
@@ -1582,8 +1582,8 @@ packages:
   '@cabloy/json5@1.0.19':
     resolution: {integrity: sha512-Y09XcbRTLti8aOBM2faEtbG3oN7DgCRSG41cBfh2Yepf6n4e5RfKcWP4gw0S8yY6mfN4wBjh6denPwlHCi9acA==}
 
-  '@cabloy/lint@5.0.22':
-    resolution: {integrity: sha512-CeQliRJ8whpw0K2bZZjk5vXLCfyYwxkZLrRa+WryEcFqDEmjYCBGvnzNFm5pRLFDi7yFQvG2cPqs8o4UcRbfyg==}
+  '@cabloy/lint@5.0.23':
+    resolution: {integrity: sha512-qOTjrzM+mosajcOATvh8Ua/chnPtAyZyJITLn9XKeMWD6iX+pFheF2fmL+Q48sP+WFAltj8XAwOVgsVhvQjTzw==}
 
   '@cabloy/localeutil@2.0.11':
     resolution: {integrity: sha512-6GYRP9NJDhPP4FsDdFmG5SW5AbWUOHF8a+Nl54vMT0fmBykljy37Gg4tBtAxY3MtwQ6L+oAIO9vzpNiiTgeyRQ==}
@@ -7057,7 +7057,7 @@ snapshots:
     dependencies:
       json5: 2.2.3
 
-  '@cabloy/lint@5.0.22(@typescript-eslint/rule-tester@8.57.0(eslint@10.0.3)(typescript@5.9.3))(@typescript-eslint/typescript-estree@8.57.0(typescript@5.9.3))(@typescript-eslint/utils@8.57.0(eslint@10.0.3)(typescript@5.9.3))(@vue/compiler-sfc@3.5.28)(eslint@10.0.3)(oxlint@1.56.0)(typescript@5.9.3)':
+  '@cabloy/lint@5.0.23(@typescript-eslint/rule-tester@8.57.0(eslint@10.0.3)(typescript@5.9.3))(@typescript-eslint/typescript-estree@8.57.0(typescript@5.9.3))(@typescript-eslint/utils@8.57.0(eslint@10.0.3)(typescript@5.9.3))(@vue/compiler-sfc@3.5.28)(eslint@10.0.3)(oxlint@1.56.0)(typescript@5.9.3)':
     dependencies:
       '@antfu/eslint-config': 7.7.2(@eslint/json@1.1.0)(@typescript-eslint/rule-tester@8.57.0(eslint@10.0.3)(typescript@5.9.3))(@typescript-eslint/typescript-estree@8.57.0(typescript@5.9.3))(@typescript-eslint/utils@8.57.0(eslint@10.0.3)(typescript@5.9.3))(@vue/compiler-sfc@3.5.28)(eslint@10.0.3)(oxlint@1.56.0)(typescript@5.9.3)
       '@e18e/eslint-plugin': 0.2.0(eslint@10.0.3)(oxlint@1.56.0)
