@@ -24,8 +24,8 @@ export function useSsrBoot() {
   const ssrBootStyles = toRef(() =>
     !isBooted.value
       ? {
-          transition: 'none !important',
-        }
+        transition: 'none !important',
+      }
       : undefined,
   );
   return {
