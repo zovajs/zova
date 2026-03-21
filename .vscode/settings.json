@@ -22,6 +22,12 @@
   "editor.codeActionsOnSave": {
     "source.fixAll.oxc": "always",
   },
+  "[typescriptreact]": {
+    "editor.defaultFormatter": "oxc.oxc-vscode",
+  },
+  "[typescript]": {
+    "editor.defaultFormatter": "oxc.oxc-vscode",
+  },
   // associations
   "files.associations": {
     "*.js.ejs": "javascript",
