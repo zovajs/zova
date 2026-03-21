@@ -1,17 +1,18 @@
 {
   "name": "mutate-on-copy",
-  "type": "module",
   "version": "1.0.1",
   "description": "mutate on copy",
-  "publishConfig": {
-    "access": "public"
-  },
-  "author": "zhennann",
-  "license": "MIT",
   "keywords": [
     "framework",
     "zova"
   ],
+  "license": "MIT",
+  "author": "zhennann",
+  "files": [
+    "dist/**/*.d.ts",
+    "dist/**/*.js"
+  ],
+  "type": "module",
   "exports": {
     ".": {
       "types": [
@@ -24,21 +25,10 @@
     },
     "./package.json": "./package.json"
   },
-  "files": [
-    "dist/**/*.d.ts",
-    "dist/**/*.js"
-  ],
-  "clean-package": {
-    "indent": 2,
-    "remove": [
-      "clean-package",
-      "devDependencies",
-      "exports.\\..import",
-      "exports.\\..require"
-    ]
+  "publishConfig": {
+    "access": "public"
   },
   "scripts": {
-    "lint": "eslint .",
     "clean": "rimraf dist tsconfig.tsbuildinfo",
     "tsc:publish": "npm run clean && tsc",
     "prepublishOnly": "npm run tsc:publish",
@@ -48,5 +38,14 @@
   "devDependencies": {
     "clean-package": "^2.2.0",
     "rimraf": "^6.0.1"
+  },
+  "clean-package": {
+    "indent": 2,
+    "remove": [
+      "clean-package",
+      "devDependencies",
+      "exports.\\..import",
+      "exports.\\..require"
+    ]
   }
 }

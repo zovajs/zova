@@ -1,17 +1,19 @@
 {
   "name": "zova-cli-set-front",
-  "type": "module",
   "version": "1.1.199",
+  "gitHead": "cd764f950253da76034e90e5b93f2cd1cfe2733f",
   "description": "zova cli-set-front",
-  "publishConfig": {
-    "access": "public"
-  },
-  "author": "zhennann",
-  "license": "MIT",
   "keywords": [
     "framework",
     "zova"
   ],
+  "license": "MIT",
+  "author": "zhennann",
+  "files": [
+    "cli",
+    "dist"
+  ],
+  "type": "module",
   "exports": {
     ".": {
       "types": [
@@ -24,21 +26,10 @@
     },
     "./package.json": "./package.json"
   },
-  "files": [
-    "cli",
-    "dist"
-  ],
-  "clean-package": {
-    "indent": 2,
-    "remove": [
-      "clean-package",
-      "devDependencies",
-      "exports.\\..import",
-      "exports.\\..require"
-    ]
+  "publishConfig": {
+    "access": "public"
   },
   "scripts": {
-    "lint": "eslint .",
     "clean": "rimraf dist tsconfig.tsbuildinfo",
     "tsc:publish": "npm run clean && tsc",
     "prepublishOnly": "npm run tsc:publish",
@@ -71,5 +62,13 @@
     "rimraf": "^6.0.1",
     "zova-vite": "^1.0.183"
   },
-  "gitHead": "cd764f950253da76034e90e5b93f2cd1cfe2733f"
+  "clean-package": {
+    "indent": 2,
+    "remove": [
+      "clean-package",
+      "devDependencies",
+      "exports.\\..import",
+      "exports.\\..require"
+    ]
+  }
 }

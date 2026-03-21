@@ -1,17 +1,21 @@
 {
   "name": "zova-cli",
-  "type": "module",
   "version": "1.1.212",
+  "gitHead": "cd764f950253da76034e90e5b93f2cd1cfe2733f",
   "description": "zova cli",
-  "publishConfig": {
-    "access": "public"
-  },
-  "author": "zhennann",
-  "license": "MIT",
   "keywords": [
     "framework",
     "zova"
   ],
+  "license": "MIT",
+  "author": "zhennann",
+  "bin": {
+    "zova": "dist/bin/zova.js"
+  },
+  "files": [
+    "dist"
+  ],
+  "type": "module",
   "exports": {
     ".": {
       "types": [
@@ -24,23 +28,14 @@
     },
     "./*": "./*"
   },
-  "bin": {
-    "zova": "dist/bin/zova.js"
-  },
-  "files": [
-    "dist"
-  ],
-  "clean-package": {
-    "indent": 2,
-    "remove": [
-      "clean-package",
-      "devDependencies",
-      "exports.\\..import",
-      "exports.\\..require"
-    ]
+  "publishConfig": {
+    "access": "public"
   },
   "scripts": {
-    "lint": "eslint .",
+    "format": "oxfmt --check",
+    "format:fix": "oxfmt --write",
+    "lint": "oxlint",
+    "lint:fix": "oxlint --fix",
     "clean": "rimraf dist tsconfig.tsbuildinfo",
     "tsc:publish": "npm run clean && tsc",
     "prepublishOnly": "npm run tsc:publish",
@@ -58,5 +53,13 @@
     "clean-package": "^2.2.0",
     "rimraf": "^6.0.1"
   },
-  "gitHead": "cd764f950253da76034e90e5b93f2cd1cfe2733f"
+  "clean-package": {
+    "indent": 2,
+    "remove": [
+      "clean-package",
+      "devDependencies",
+      "exports.\\..import",
+      "exports.\\..require"
+    ]
+  }
 }

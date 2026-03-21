@@ -1,17 +1,18 @@
 {
   "name": "babel-plugin-zova-bean-module",
-  "type": "module",
   "version": "1.1.1",
+  "gitHead": "19504afb5d86e9c8a3ab865099813a2cef2493bb",
   "description": "babel-plugin-zova-bean-module",
-  "publishConfig": {
-    "access": "public"
-  },
-  "author": "zhennann",
-  "license": "MIT",
   "keywords": [
     "framework",
     "zova"
   ],
+  "license": "MIT",
+  "author": "zhennann",
+  "files": [
+    "dist"
+  ],
+  "type": "module",
   "exports": {
     ".": {
       "types": [
@@ -24,20 +25,10 @@
     },
     "./package.json": "./package.json"
   },
-  "files": [
-    "dist"
-  ],
-  "clean-package": {
-    "indent": 2,
-    "remove": [
-      "clean-package",
-      "devDependencies",
-      "exports.\\..import",
-      "exports.\\..require"
-    ]
+  "publishConfig": {
+    "access": "public"
   },
   "scripts": {
-    "lint": "eslint .",
     "clean": "rimraf dist tsconfig.tsbuildinfo",
     "tsc:publish": "npm run clean && tsc",
     "prepublishOnly": "npm run tsc:publish",
@@ -56,5 +47,13 @@
     "clean-package": "^2.2.0",
     "rimraf": "^6.0.1"
   },
-  "gitHead": "19504afb5d86e9c8a3ab865099813a2cef2493bb"
+  "clean-package": {
+    "indent": 2,
+    "remove": [
+      "clean-package",
+      "devDependencies",
+      "exports.\\..import",
+      "exports.\\..require"
+    ]
+  }
 }

@@ -1,26 +1,26 @@
 {
   "name": "zova-jsx",
-  "type": "module",
   "version": "1.0.0",
   "description": "Zova JSX",
-  "publishConfig": {
-    "access": "public"
-  },
-  "author": "zhennann",
-  "license": "MIT",
+  "keywords": [
+    "ioc",
+    "vue3",
+    "zova"
+  ],
   "homepage": "https://github.com/cabloy/zova#readme",
+  "bugs": {
+    "url": "https://github.com/cabloy/zova/issues"
+  },
+  "license": "MIT",
+  "author": "zhennann",
   "repository": {
     "type": "git",
     "url": "git+https://github.com/cabloy/zova.git"
   },
-  "bugs": {
-    "url": "https://github.com/cabloy/zova/issues"
-  },
-  "keywords": [
-    "vue3",
-    "ioc",
-    "zova"
+  "files": [
+    "dist"
   ],
+  "type": "module",
   "exports": {
     ".": {
       "types": [
@@ -33,20 +33,10 @@
     },
     "./package.json": "./package.json"
   },
-  "files": [
-    "dist"
-  ],
-  "clean-package": {
-    "indent": 2,
-    "remove": [
-      "clean-package",
-      "devDependencies",
-      "exports.\\..import",
-      "exports.\\..require"
-    ]
+  "publishConfig": {
+    "access": "public"
   },
   "scripts": {
-    "lint": "eslint .",
     "clean": "rimraf dist tsconfig.tsbuildinfo",
     "tsc:publish": "npm run clean && tsc",
     "prepublishOnly": "npm run tsc:publish",
@@ -64,5 +54,14 @@
   "devDependencies": {
     "clean-package": "^2.2.0",
     "rimraf": "^6.0.1"
+  },
+  "clean-package": {
+    "indent": 2,
+    "remove": [
+      "clean-package",
+      "devDependencies",
+      "exports.\\..import",
+      "exports.\\..require"
+    ]
   }
 }

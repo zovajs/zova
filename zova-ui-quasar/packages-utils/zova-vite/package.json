@@ -1,17 +1,19 @@
 {
   "name": "zova-vite",
-  "type": "module",
   "version": "1.0.185",
+  "gitHead": "c90e59abc1bf445154a3fb32856f83783dc0eb39",
   "description": "zova vite",
-  "publishConfig": {
-    "access": "public"
-  },
-  "author": "zhennann",
-  "license": "MIT",
   "keywords": [
     "framework",
     "zova"
   ],
+  "license": "MIT",
+  "author": "zhennann",
+  "files": [
+    "dist",
+    "templates"
+  ],
+  "type": "module",
   "exports": {
     ".": {
       "types": [
@@ -24,21 +26,10 @@
     },
     "./package.json": "./package.json"
   },
-  "files": [
-    "dist",
-    "templates"
-  ],
-  "clean-package": {
-    "indent": 2,
-    "remove": [
-      "clean-package",
-      "devDependencies",
-      "exports.\\..import",
-      "exports.\\..require"
-    ]
+  "publishConfig": {
+    "access": "public"
   },
   "scripts": {
-    "lint": "eslint .",
     "clean": "rimraf dist tsconfig.tsbuildinfo",
     "tsc:publish": "npm run clean && tsc",
     "prepublishOnly": "npm run tsc:publish",
@@ -87,5 +78,13 @@
     "clean-package": "^2.2.0",
     "rimraf": "^6.0.1"
   },
-  "gitHead": "c90e59abc1bf445154a3fb32856f83783dc0eb39"
+  "clean-package": {
+    "indent": 2,
+    "remove": [
+      "clean-package",
+      "devDependencies",
+      "exports.\\..import",
+      "exports.\\..require"
+    ]
+  }
 }

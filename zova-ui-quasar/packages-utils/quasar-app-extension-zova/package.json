@@ -1,9 +1,14 @@
 {
   "name": "quasar-app-extension-zova",
-  "type": "module",
   "version": "1.1.184",
+  "gitHead": "c90e59abc1bf445154a3fb32856f83783dc0eb39",
   "description": "Quasar ext of zova",
   "author": "zhennann",
+  "files": [
+    "dist",
+    "templates"
+  ],
+  "type": "module",
   "exports": {
     ".": {
       "types": [
@@ -16,20 +21,7 @@
     "./dist/index.js": "./dist/index.js",
     "./package.json": "./package.json"
   },
-  "files": [
-    "dist",
-    "templates"
-  ],
-  "clean-package": {
-    "indent": 2,
-    "remove": [
-      "clean-package",
-      "devDependencies",
-      "exports.\\..import"
-    ]
-  },
   "scripts": {
-    "lint": "eslint .",
     "clean": "rimraf dist tsconfig.tsbuildinfo",
     "tsc:publish": "npm run clean && tsc",
     "prepublishOnly": "npm run tsc:publish",
@@ -50,5 +42,12 @@
     "clean-package": "^2.2.0",
     "rimraf": "^6.0.1"
   },
-  "gitHead": "c90e59abc1bf445154a3fb32856f83783dc0eb39"
+  "clean-package": {
+    "indent": 2,
+    "remove": [
+      "clean-package",
+      "devDependencies",
+      "exports.\\..import"
+    ]
+  }
 }
