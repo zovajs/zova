@@ -1,27 +1,27 @@
 {
   "editor.bracketPairColorization.enabled": true,
   "editor.guides.bracketPairs": true,
-  "editor.formatOnSave": false,
-  "editor.formatOnPaste": false,
-  "editor.codeActionsOnSave": {
-    "source.fixAll.eslint": "explicit",
-    "source.fixAll.stylelint": "explicit"
-  },
-  "eslint.validate": ["javascript", "javascriptreact", "typescript", "typescriptreact", "vue"],
-  "files.eol": "\n",
-  "typescript.tsdk": "node_modules/typescript/lib",
-  "typescript.disableAutomaticTypeAcquisition": false,
-  "typescript.format.enable": true,
-  "typescript.implementationsCodeLens.enabled": true,
-  "typescript.tsserver.useSyntaxServer": "auto",
-  "typescript.validate.enable": true,
-  "typescript.suggest.autoImports": true,
-  "typescript.suggest.includeCompletionsForImportStatements": true,
-  "typescript.preferences.importModuleSpecifier": "shortest",
-  "typescript.preferences.importModuleSpecifierEnding": "js",
-  "typescript.preferences.includePackageJsonAutoImports": "on",
   // tailwindCSS
   "tailwindCSS.experimental.classRegex": [["classes\\(([^)]*)\\)", "(?:'|\"|`)([^']*)(?:'|\"|`)"]],
+  // typescript
+  "js/ts.tsserver.automaticTypeAcquisition.enabled": true,
+  "js/ts.format.enabled": true,
+  "js/ts.implementationsCodeLens.enabled": true,
+  "js/ts.tsserver.useSyntaxServer": "auto",
+  "js/ts.validate.enabled": true,
+  "js/ts.suggest.autoImports": true,
+  "js/ts.suggest.includeCompletionsForImportStatements": true,
+  "js/ts.preferences.importModuleSpecifier": "shortest",
+  "js/ts.preferences.importModuleSpecifierEnding": "js",
+  "js/ts.preferences.includePackageJsonAutoImports": "on",
+  // oxfmt
+  "oxc.fmt.configPath": ".oxfmtrc.json",
+  "editor.defaultFormatter": "oxc.oxc-vscode",
+  "editor.formatOnSave": true,
+  // oxlint
+  "editor.codeActionsOnSave": {
+    "source.fixAll.oxc": "always",
+  },
   // associations
   "files.associations": {
     "*.ejs": "html",
