@@ -663,9 +663,6 @@ importers:
       '@faker-js/faker':
         specifier: ^8.4.1
         version: 8.4.1
-      '@rollup/plugin-babel':
-        specifier: ^7.0.0
-        version: 7.0.0(@babel/core@7.29.0)(@types/babel__core@7.20.5)
       '@types/node':
         specifier: ^22.10.2
         version: 22.19.15
@@ -715,8 +712,8 @@ importers:
         specifier: ^1.0.0
         version: 1.0.0(vite@8.0.1(@types/node@22.19.15)(esbuild@0.25.12)(less@4.6.4)(sass-embedded@1.98.0)(sass@1.98.0)(terser@5.46.1)(yaml@2.8.3))
       vite-plugin-fake-server-turbo:
-        specifier: ^3.0.15
-        version: 3.0.15
+        specifier: ^3.0.16
+        version: 3.0.16
       zova-shared:
         specifier: ^1.0.7
         version: link:../../packages-zova/zova-shared
@@ -3235,28 +3232,6 @@ packages:
 
   '@rolldown/pluginutils@1.0.0-rc.2':
     resolution: {integrity: sha512-izyXV/v+cHiRfozX62W9htOAvwMo4/bXKDrQ+vom1L1qRuexPock/7VZDAhnpHCLNejd3NJ6hiab+tO0D44Rgw==}
-
-  '@rollup/plugin-babel@7.0.0':
-    resolution: {integrity: sha512-NS2+P7v80N3MQqehZEjgpaFb9UyX3URNMW/zvoECKGo4PY4DvJfQusTI7BX/Ks+CPvtTfk3TqcR6S9VYBi/C+A==}
-    engines: {node: '>=14.0.0'}
-    peerDependencies:
-      '@babel/core': ^7.0.0
-      '@types/babel__core': ^7.1.9
-      rollup: ^2.0.0||^3.0.0||^4.0.0
-    peerDependenciesMeta:
-      '@types/babel__core':
-        optional: true
-      rollup:
-        optional: true
-
-  '@rollup/pluginutils@5.3.0':
-    resolution: {integrity: sha512-5EdhGZtnu3V88ces7s53hhfK5KSASnJZv8Lulpc04cWO3REESroJXg73DFsOmgbU2BhwV0E20bu2IDZb3VKW4Q==}
-    engines: {node: '>=14.0.0'}
-    peerDependencies:
-      rollup: ^1.20.0||^2.0.0||^3.0.0||^4.0.0
-    peerDependenciesMeta:
-      rollup:
-        optional: true
 
   '@sindresorhus/base62@1.0.0':
     resolution: {integrity: sha512-TeheYy0ILzBEI/CO55CP6zJCSdSWeRtGnHy8U8dWSUH4I68iqTsy7HkMktR4xakThc9jotkPQUXT4ITdbV7cHA==}
@@ -6774,6 +6749,9 @@ packages:
   vite-plugin-fake-server-turbo@3.0.15:
     resolution: {integrity: sha512-uKCEr1KstFfupyqBXAaqoEAY2puxKyhbGa+FO0FiYeEysYyTVcR66bke/lHrP89kXFdD7oJASKj5IDTv7icqrg==}
 
+  vite-plugin-fake-server-turbo@3.0.16:
+    resolution: {integrity: sha512-oO3WoHSoPlUWS/3uiRp5lf19gAg0tooSHeoW8f4o1Ap4dPOAW462Gvkd5lp3bpSz6IeOsKcDhaV1oCesKnLr5A==}
+
   vite-plugin-vuetify@2.1.3:
     resolution: {integrity: sha512-Q4SC/4TqbNvaZIFb9YsfBqkGlYHbJJJ6uU3CnRBZqLUF3s5eCMVZAaV4GkTbehIH/bhSj42lMXztOwc71u6rVw==}
     engines: {node: ^18.0.0 || >=20.0.0}
@@ -8646,22 +8624,6 @@ snapshots:
   '@rolldown/pluginutils@1.0.0-rc.10': {}
 
   '@rolldown/pluginutils@1.0.0-rc.2': {}
-
-  '@rollup/plugin-babel@7.0.0(@babel/core@7.29.0)(@types/babel__core@7.20.5)':
-    dependencies:
-      '@babel/core': 7.29.0
-      '@babel/helper-module-imports': 7.28.6
-      '@rollup/pluginutils': 5.3.0
-    optionalDependencies:
-      '@types/babel__core': 7.20.5
-    transitivePeerDependencies:
-      - supports-color
-
-  '@rollup/pluginutils@5.3.0':
-    dependencies:
-      '@types/estree': 1.0.8
-      estree-walker: 2.0.2
-      picomatch: 4.0.3
 
   '@sindresorhus/base62@1.0.0': {}
 
@@ -12724,6 +12686,16 @@ snapshots:
       vite: 8.0.1(@types/node@22.19.15)(esbuild@0.25.12)(less@4.6.4)(sass-embedded@1.98.0)(sass@1.98.0)(terser@5.46.1)(yaml@2.8.3)
 
   vite-plugin-fake-server-turbo@3.0.15:
+    dependencies:
+      bundle-import: 0.0.2
+      chokidar: 4.0.3
+      cors: 2.8.6
+      esbuild: 0.25.2
+      fast-glob: 3.3.3
+      path-to-regexp: 8.3.0
+      picocolors: 1.1.1
+
+  vite-plugin-fake-server-turbo@3.0.16:
     dependencies:
       bundle-import: 0.0.2
       chokidar: 4.0.3
