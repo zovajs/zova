@@ -40,6 +40,7 @@ export function generateVitePlugins(configOptions: ZovaViteConfigOptions, module
       {
         include: '**/*.ts',
         extensions: ['.ts'],
+        babelHelpers: 'bundled',
         babelrc: false,
         configFile: false,
         plugins: [
