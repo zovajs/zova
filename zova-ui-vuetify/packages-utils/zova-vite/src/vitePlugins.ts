@@ -1,7 +1,6 @@
 import type { glob } from '@cabloy/module-glob';
 
-// import babel from '@cabloy/vite-plugin-babel';
-import babelImport from '@rollup/plugin-babel';
+import babel from '@cabloy/vite-plugin-babel';
 import fse from 'fs-extra';
 import path from 'node:path';
 import devtoolsJson from 'vite-plugin-devtools-json';
@@ -36,21 +35,21 @@ export function generateVitePlugins(configOptions: ZovaViteConfigOptions, module
     const babelPluginTransformTypescript = getAbsolutePathOfModule('@babel/plugin-transform-typescript', '');
     return [
       'vite-plugin-babel',
-      babelImport,
+      babel,
       {
-        include: '**/*.ts',
-        extensions: ['.ts'],
-        babelHelpers: 'bundled',
-        babelrc: false,
-        configFile: false,
-        plugins: [
-          [babelPluginZovaBeanModule, { brandName: 'zova' }],
-          [babelPluginZovaBeanUse],
-          [babelPluginTransformTypescriptMetadata],
-          [babelPluginProposalDecorators, { version: 'legacy' }],
-          [babelPluginTransformClassProperties, { loose: true }],
-          [babelPluginTransformTypescript],
-        ],
+        filter: /\.ts$/,
+        babelConfig: {
+          babelrc: false,
+          configFile: false,
+          plugins: [
+            [babelPluginZovaBeanModule, { brandName: 'zova' }],
+            [babelPluginZovaBeanUse],
+            [babelPluginTransformTypescriptMetadata],
+            [babelPluginProposalDecorators, { version: 'legacy' }],
+            [babelPluginTransformClassProperties, { loose: true }],
+            [babelPluginTransformTypescript],
+          ],
+        },
       },
       undefined,
     ] as ZovaVitePlugin;
