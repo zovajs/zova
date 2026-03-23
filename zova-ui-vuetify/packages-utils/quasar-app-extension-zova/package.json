@@ -29,13 +29,13 @@
     "postpack": "clean-package restore"
   },
   "dependencies": {
-    "@quasar/app-vite": "2.4.0",
+    "@quasar/app-vite": "2.5.2",
     "chalk": "^3.0.0",
     "esbuild": "^0.25.2",
     "fs-extra": "^11.2.0",
     "vite": "^8.0.1",
     "zova-shared": "^1.0.7",
-    "zova-vite": "^1.0.182"
+    "zova-vite": "^1.0.185"
   },
   "devDependencies": {
     "@cabloy/lint": "^5.0.24",
