@@ -1,5 +1,5 @@
 import type { ZovaConfigMeta } from '@cabloy/module-info';
-import type { CommonServerOptions } from 'vite';
+import type { BuildEnvironmentOptions, CommonServerOptions } from 'vite';
 
 import path from 'node:path';
 
@@ -84,7 +84,7 @@ export async function generateZovaViteMeta(configMeta: ZovaConfigMeta, configOpt
 
   function __getConfigBuild() {
     const outDir = getOutDir();
-    const build = {
+    const build: BuildEnvironmentOptions = {
       outDir,
       rolldownOptions: {
         output: {
@@ -95,7 +95,7 @@ export async function generateZovaViteMeta(configMeta: ZovaConfigMeta, configOpt
       },
       assetsInlineLimit: (filePath: string) => {
         if (__SvgIconPattern.test(filePath)) {
-          return 0;
+          return false;
         }
       },
       minify: process.env.BUILD_MINIFY === 'false' ? false : 'oxc',
