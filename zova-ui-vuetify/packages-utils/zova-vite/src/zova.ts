@@ -84,12 +84,13 @@ export async function generateZovaViteMeta(configMeta: ZovaConfigMeta, configOpt
 
   function __getConfigBuild() {
     const outDir = getOutDir();
+    const groups = configUtils.codeSplittingGroups();
     const build: BuildEnvironmentOptions = {
       outDir,
       rolldownOptions: {
         output: {
-          manualChunks: id => {
-            return configUtils.configManualChunk(id);
+          codeSplitting: {
+            groups,
           },
         },
       },
