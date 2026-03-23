@@ -171,19 +171,21 @@ export function createConfigUtils(
 
   function __codeSplittingGroups() {
     let groups: any[] = [];
-    groups.push({
-      name: id => {
-        if (id.includes('@vue/shared')) {
-          console.log('---------:', id);
-        }
-      },
-    });
     // modules before
     groups = groups.concat(_configManualChunk_vendorsModulesBefore());
     // modules
     groups = groups.concat(_configManualChunk_modules());
     // vendors
     groups = groups.concat(_configManualChunk_vendors());
+    // debug
+    if (configOptions.zovaManualChunk?.debug) {
+      groups.push({
+        name: id => {
+          // eslint-disable-next-line
+          console.log(id);
+        },
+      });
+    }
     // ok
     return groups;
   }
