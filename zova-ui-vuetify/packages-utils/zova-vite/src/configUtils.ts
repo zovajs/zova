@@ -53,6 +53,7 @@ const __ZovaManualChunkVendors = [
     output: 'zova',
   },
   { match: ['pinia'], output: 'pinia' },
+  { match: ['~rolldown/runtime.js'], output: 'rolldownRuntime' },
   { match: ['~commonjsHelpers.js'], output: 'commonjsHelper' },
   { match: ['~plugin-vue:export-helper'], output: 'vue' },
 ];
