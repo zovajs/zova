@@ -105,5 +105,5 @@ export function extendViteConf(context: ConfigContext) {
       };
       conf.customLogger = logger;
     }
-  };
+  } as any;
 }
