@@ -26,7 +26,6 @@ const __ZovaManualChunkVendors = [
       '@vue/shared',
       '@vue/reactivity',
       '@vue/server-renderer',
-      'vue/jsx-runtime',
       '@cabloy/vue-runtime-core',
       '@cabloy/vue-runtime-dom',
       '@cabloy/vue-reactivity',
@@ -35,19 +34,26 @@ const __ZovaManualChunkVendors = [
     output: 'vue',
   },
   { match: ['vue-router', '@cabloy/vue-router'], output: 'vue-router' },
-  { match: ['@cabloy/zod-errors-custom', '@cabloy/zod-query', 'zod/lib'], output: 'zod' },
   {
     match: [
       'reflect-metadata',
       '@cabloy',
       'zova',
+      '~packages-zova/zova/',
       'zova-core',
-      'packages-zova/zova-core',
+      '~packages-zova/zova-core/',
       'zova-shared',
-      'packages-zova/zova-shared',
-      'packages-utils/word-utils',
-      'packages-utils/mutate-on-copy',
+      '~packages-zova/zova-shared/',
+      '@cabloy/logger',
+      '~packages-utils/logger/',
       'mutate-on-copy',
+      '~packages-utils/mutate-on-copy/',
+      '@cabloy/word-utils',
+      '~packages-utils/word-utils/',
+      'zova-jsx',
+      '~packages-utils/zova-jsx/',
+      'zova-openapi',
+      '~packages-utils/zova-openapi/',
     ],
     output: 'zova',
   },
@@ -165,6 +171,13 @@ export function createConfigUtils(
 
   function __codeSplittingGroups() {
     let groups: any[] = [];
+    groups.push({
+      name: id => {
+        if (id.includes('@vue/shared')) {
+          console.log('---------:', id);
+        }
+      },
+    });
     // modules before
     groups = groups.concat(_configManualChunk_vendorsModulesBefore());
     // modules
@@ -228,7 +241,7 @@ export function createConfigUtils(
           if (match[0] === '~') {
             test = match.substring(1);
           } else {
-            test = `node_modules/${match}`;
+            test = `node_modules/${match}/`;
           }
         } else {
           test = match;
@@ -257,6 +270,7 @@ export function createConfigUtils(
   // }
 
   function _configManualChunk_modules() {
+    const appDir = configOptions.appDir.replace(/\\/g, '/');
     // groups
     const groups: any[] = [];
     // modules
@@ -264,8 +278,18 @@ export function createConfigUtils(
     // loop
     for (const moduleName in modules) {
       const module = modules[moduleName];
+      //
+      let test = module.root;
+      let index = test.indexOf(appDir);
+      if (index > -1) {
+        test = test.substring(index + appDir.length);
+      }
+      index = test.lastIndexOf('node_modules');
+      if (index > -1) {
+        test = test.substring(index + 'node_modules'.length);
+      }
       groups.push({
-        test: module.root,
+        test: `${test}/`,
         name: moduleName,
       });
     }
