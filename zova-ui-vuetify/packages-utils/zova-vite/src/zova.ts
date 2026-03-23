@@ -88,10 +88,12 @@ export async function generateZovaViteMeta(configMeta: ZovaConfigMeta, configOpt
     const build: BuildEnvironmentOptions = {
       outDir,
       rolldownOptions: {
+        preserveEntrySignatures: 'allow-extension',
         output: {
+          strictExecutionOrder: true,
           codeSplitting: {
             groups,
-            // includeDependenciesRecursively: false,
+            includeDependenciesRecursively: false,
           },
         },
       },
