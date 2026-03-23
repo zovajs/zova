@@ -16,8 +16,9 @@ import { getEnvMeta } from './utils.ts';
 //   /\/zova-module-([^/]*)\//,
 // ];
 
-const __ZovaManualChunkVendors = [
-  { match: ['@faker-js'], output: 'faker' },
+const __ZovaManualChunkVendorsSys = [
+  { match: ['~commonjsHelpers.js'], output: 'commonjsHelper' },
+  { match: ['~plugin-vue:export-helper'], output: 'vue' },
   {
     match: [
       'vue',
@@ -58,9 +59,7 @@ const __ZovaManualChunkVendors = [
     output: 'zova',
   },
   { match: ['pinia'], output: 'pinia' },
-  { match: ['~rolldown/runtime.js'], output: 'rolldownRuntimeTest' },
-  { match: ['~commonjsHelpers.js'], output: 'commonjsHelper' },
-  { match: ['~plugin-vue:export-helper'], output: 'vue' },
+  { match: ['@faker-js'], output: 'faker' },
 ];
 
 export function createConfigUtils(
@@ -171,12 +170,16 @@ export function createConfigUtils(
 
   function __codeSplittingGroups() {
     let groups: any[] = [];
-    // modules before
+    // begin
     groups = groups.concat(_configManualChunk_vendorsModulesBegin());
+    // sys
+    groups = groups.concat(_configManualChunk_vendorsSys());
+    // custom
+    groups = groups.concat(_configManualChunk_vendorsCustom());
+    // vendors
+    groups = groups.concat(_configManualChunk_vendorsModules());
     // modules
     groups = groups.concat(_configManualChunk_modules());
-    // vendors
-    groups = groups.concat(_configManualChunk_vendors());
     // end
     groups = groups.concat(_configManualChunk_vendorsModulesEnd());
     // debug
@@ -192,8 +195,12 @@ export function createConfigUtils(
     return groups;
   }
 
-  function _configManualChunk_vendorsDefault() {
-    return __ZovaManualChunkVendors;
+  function _configManualChunk_vendorsSys() {
+    return _configChunkVendorsToGroups(__ZovaManualChunkVendorsSys);
+  }
+
+  function _configManualChunk_vendorsCustom() {
+    return _configChunkVendorsToGroups(configOptions.zovaManualChunk?.vendors || []);
   }
 
   function _configManualChunk_vendorsModules() {
@@ -209,7 +216,7 @@ export function createConfigUtils(
         vendors = vendors.concat(vendorsModule);
       }
     }
-    return vendors;
+    return _configChunkVendorsToGroups(vendors);
   }
 
   function _configManualChunk_vendorsModulesBegin() {
@@ -234,13 +241,6 @@ export function createConfigUtils(
     return groups;
   }
 
-  function _configManualChunk_vendors() {
-    const vendors = _configManualChunk_vendorsDefault()
-      .concat(_configManualChunk_vendorsModules() as any)
-      .concat((configOptions.zovaManualChunk?.vendors || []) as any);
-    return _configChunkVendorsToGroups(vendors);
-  }
-
   function _configChunkVendorsToGroups(vendors: IBundleVendor[]) {
     const groups: any[] = [];
     for (const vendor of vendors) {
@@ -263,20 +263,6 @@ export function createConfigUtils(
     }
     return groups;
   }
-
-  // function _configManualChunk_match(id: string, vendors) {
-  //   const matchItem = vendors.find(item => {
-  //     return item.match.some(item => {
-  //       if (typeof item === 'string') {
-  //         const matchItem = item[0] === '~' ? item.substring(1) : `/${item}/`;
-  //         return id.includes(matchItem);
-  //       }
-  //       return item.test(id);
-  //     });
-  //   });
-  //   if (matchItem) return matchItem.output;
-  //   return null;
-  // }
 
   function _configManualChunk_modules() {
     const appDir = configOptions.appDir.replace(/\\/g, '/');
@@ -304,4 +290,18 @@ export function createConfigUtils(
     }
     return groups;
   }
+
+  // function _configManualChunk_match(id: string, vendors) {
+  //   const matchItem = vendors.find(item => {
+  //     return item.match.some(item => {
+  //       if (typeof item === 'string') {
+  //         const matchItem = item[0] === '~' ? item.substring(1) : `/${item}/`;
+  //         return id.includes(matchItem);
+  //       }
+  //       return item.test(id);
+  //     });
+  //   });
+  //   if (matchItem) return matchItem.output;
+  //   return null;
+  // }
 }
