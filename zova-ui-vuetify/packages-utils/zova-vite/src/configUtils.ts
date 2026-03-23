@@ -166,7 +166,6 @@ export function createConfigUtils(
   function __codeSplittingGroups() {
     let groups: any[] = [];
     // modules before
-
     groups = groups.concat(_configManualChunk_vendorsModulesBefore());
     // modules
     groups = groups.concat(_configManualChunk_modules());
