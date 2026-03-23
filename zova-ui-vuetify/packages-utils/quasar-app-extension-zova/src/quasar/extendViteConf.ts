@@ -95,15 +95,18 @@ export function extendViteConf(context: ConfigContext) {
       });
       conf.ssr.noExternal = true;
     }
-    // ssr: logger
-    if (opts.isServer && context.configMeta?.mode === 'development') {
-      const logger = createLogger();
-      const loggerWarn = logger.warn;
-      logger.warn = (msg, options) => {
+    // general: logger
+    const logger = createLogger();
+    const loggerWarn = logger.warn;
+    logger.warn = (msg, options) => {
+      // ssr: logger
+      if (opts.isServer && context.configMeta?.mode === 'development') {
         if (msg.includes('Failed to load source map')) return;
-        loggerWarn(msg, options);
-      };
-      conf.customLogger = logger;
-    }
+      }
+      if (msg.includes('Arbitrary module namespace identifier names are not available in the configured target environment')) return;
+      if (msg.includes('Big integer literals are not available in the configured target environment')) return;
+      loggerWarn(msg, options);
+    };
+    conf.customLogger = logger;
   } as any;
 }
