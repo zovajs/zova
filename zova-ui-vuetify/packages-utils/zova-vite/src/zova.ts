@@ -91,7 +91,7 @@ export async function generateZovaViteMeta(configMeta: ZovaConfigMeta, configOpt
         output: {
           codeSplitting: {
             groups,
-            includeDependenciesRecursively: false,
+            // includeDependenciesRecursively: false,
           },
         },
       },

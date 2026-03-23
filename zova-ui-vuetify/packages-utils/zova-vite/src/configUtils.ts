@@ -172,11 +172,13 @@ export function createConfigUtils(
   function __codeSplittingGroups() {
     let groups: any[] = [];
     // modules before
-    groups = groups.concat(_configManualChunk_vendorsModulesBefore());
+    groups = groups.concat(_configManualChunk_vendorsModulesBegin());
     // modules
     groups = groups.concat(_configManualChunk_modules());
     // vendors
     groups = groups.concat(_configManualChunk_vendors());
+    // end
+    groups = groups.concat(_configManualChunk_vendorsModulesEnd());
     // debug
     if (configOptions.zovaManualChunk?.debug) {
       groups.push({
@@ -210,18 +212,23 @@ export function createConfigUtils(
     return vendors;
   }
 
-  function _configManualChunk_vendorsModulesBefore() {
+  function _configManualChunk_vendorsModulesBegin() {
     const groups: any[] = [];
-    if (process.env.MOCK_ENABLED === 'true') {
-      groups.push({
-        test: /\.fake\.ts/,
-        name: '-zova-mock',
-      });
-    }
+    return groups;
+  }
+
+  function _configManualChunk_vendorsModulesEnd() {
+    const groups: any[] = [];
     if (process.env.BUILD_MINIFY === 'false') {
       groups.push({
         test: /\.zova\/config\.ts/,
         name: '-zova-config',
+      });
+    }
+    if (process.env.MOCK_ENABLED === 'true') {
+      groups.push({
+        test: /\.fake\.ts/,
+        name: '-zova-mock',
       });
     }
     return groups;
