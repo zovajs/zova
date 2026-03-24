@@ -30,11 +30,11 @@
     "access": "public"
   },
   "scripts": {
-    "clean": "rimraf dist tsconfig.tsbuildinfo",
-    "tsc:publish": "npm run clean && tsc",
+    "clean": "rimraf dist dist-cli tsconfig.build.tsbuildinfo tsconfig.cli.tsbuildinfo",
+    "tsc:publish": "npm run clean && zova :bin:buildGeneral && tsc -p tsconfig.build.json && tsc -p tsconfig.cli.json",
     "prepublishOnly": "npm run tsc:publish",
     "prepack": "clean-package",
-    "postpack": "clean-package restore"
+    "postpack": "clean-package restore && && npm run clean"
   },
   "dependencies": {
     "@cabloy/cli": "^3.0.100",
