@@ -2,6 +2,8 @@ import type { IModuleInfo } from '@cabloy/module-info';
 
 import { BeanCliBase } from '@cabloy/cli';
 import { getOnionMetasMeta, getOnionScenesMeta } from '@cabloy/module-info';
+import { toUpperCaseFirstChar } from '@cabloy/word-utils';
+import fse from 'fs-extra';
 import fs from 'node:fs';
 import path from 'node:path';
 

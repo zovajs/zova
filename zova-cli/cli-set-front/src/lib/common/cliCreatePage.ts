@@ -1,6 +1,5 @@
 import type { CmdOptions, NameMeta } from '@cabloy/cli';
-import type { IModuleInfo } from '@cabloy/module-info';
-import type { ZovaConfigMeta } from 'zova-shared';
+import type { IModuleInfo, ZovaConfigMeta } from '@cabloy/module-info';
 
 import { BeanCliBase } from '@cabloy/cli';
 import fs from 'node:fs';
