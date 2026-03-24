@@ -1,4 +1,4 @@
-/* eslint-disable */
+// eslint-disable
 /** behavior: begin */
 export * from '../bean/behavior.focus.js';
 import { IBehaviorOptionsFocus } from '../bean/behavior.focus.js';

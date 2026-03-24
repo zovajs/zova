@@ -1,10 +1,8 @@
-import type { z } from 'zod';
-
+import { z } from 'zod';
 import { createZovaComponentPage } from 'zova';
 
 import { ControllerPageRouteParams } from '../../page/routeParams/controller.jsx';
 import { ControllerPageRouteParamsSchemaParams, ControllerPageRouteParamsSchemaQuery } from '../../page/routeParams/controller.jsx';
-
 export namespace NSControllerPageRouteParams {
   export const paramsSchema = ControllerPageRouteParamsSchemaParams;
   export type ParamsInput = z.input<typeof ControllerPageRouteParamsSchemaParams>;

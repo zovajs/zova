@@ -1,4 +1,4 @@
-/* eslint-disable */
+// eslint-disable
 /** model: begin */
 export * from '../model/sdk.js';
 import { IModelOptionsSdk } from '../model/sdk.js';

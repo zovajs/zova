@@ -7,7 +7,6 @@ import type { ControllerRestPageProps } from '../../component/restPage/controlle
 
 import { ControllerRestPage } from '../../component/restPage/controller.jsx';
 import { RenderRestPage } from '../../component/restPage/render.jsx';
-
 export type TypeControllerRestPagePublicProps<TData extends {} = {}> = {
   controllerRef?: (ref: ControllerRestPage<TData>) => void;
 } & ControllerRestPageProps<TData>;

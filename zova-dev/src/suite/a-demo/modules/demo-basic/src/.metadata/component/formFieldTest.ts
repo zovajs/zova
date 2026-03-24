@@ -6,7 +6,6 @@ import { prepareComponentOptions, useController } from 'zova';
 import type { ControllerFormFieldTestProps } from '../../component/formFieldTest/controller.jsx';
 
 import { ControllerFormFieldTest } from '../../component/formFieldTest/controller.jsx';
-
 export type TypeControllerFormFieldTestPublicProps = {
   controllerRef?: (ref: ControllerFormFieldTest) => void;
 } & ControllerFormFieldTestProps;

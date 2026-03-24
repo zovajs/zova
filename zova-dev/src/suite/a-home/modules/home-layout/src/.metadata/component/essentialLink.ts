@@ -6,7 +6,6 @@ import { prepareComponentOptions, useController } from 'zova';
 import type { ControllerEssentialLinkProps } from '../../component/essentialLink/controller.jsx';
 
 import { ControllerEssentialLink } from '../../component/essentialLink/controller.jsx';
-
 export type TypeControllerEssentialLinkPublicProps = {
   controllerRef?: (ref: ControllerEssentialLink) => void;
 } & ControllerEssentialLinkProps;

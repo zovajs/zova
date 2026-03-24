@@ -1,4 +1,4 @@
-/* eslint-disable */
+// eslint-disable
 /** meta: begin */
 export * from '../bean/meta.themeHandler.js';
 

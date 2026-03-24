@@ -1,4 +1,4 @@
-/* eslint-disable */
+// eslint-disable
 /** bean: begin */
 export * from '../bean/bean.theme.js';
 

@@ -1,4 +1,4 @@
-/* eslint-disable */
+// eslint-disable
 /** model: begin */
 export * from '../model/todo.js';
 import { IModelOptionsTodo } from '../model/todo.js';

@@ -1,4 +1,4 @@
-import type { DefineModelOptions, TypeControllerInnerProps, TypePropUpdateFromModel, TypePropValueFromModel } from 'zova';
+import type { DefineModelOptions, TypePropUpdateFromModel, TypePropValueFromModel, TypeControllerInnerProps } from 'zova';
 
 import { defineComponent } from 'vue';
 import { prepareComponentOptions, useController } from 'zova';
@@ -6,7 +6,6 @@ import { prepareComponentOptions, useController } from 'zova';
 import type { ControllerDateRangeModels, ControllerDateRangeProps } from '../../component/dateRange/controller.jsx';
 
 import { ControllerDateRange } from '../../component/dateRange/controller.jsx';
-
 export type TypeControllerDateRangePublicProps = {
   controllerRef?: (ref: ControllerDateRange) => void;
 } & ControllerDateRangeProps &

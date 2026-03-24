@@ -1,4 +1,4 @@
-/* eslint-disable */
+// eslint-disable
 /** sys: begin */
 export * from '../bean/sys.icon.js';
 

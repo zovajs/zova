@@ -1,4 +1,4 @@
-/* eslint-disable */
+// eslint-disable
 /** model: begin */
 export * from '../model/stack.js';
 import { IModelOptionsStack } from '../model/stack.js';

@@ -6,7 +6,6 @@ import { prepareComponentOptions, useController } from 'zova';
 import type { ControllerTableCellTestProps } from '../../component/tableCellTest/controller.jsx';
 
 import { ControllerTableCellTest } from '../../component/tableCellTest/controller.jsx';
-
 export type TypeControllerTableCellTestPublicProps = {
   controllerRef?: (ref: ControllerTableCellTest) => void;
 } & ControllerTableCellTestProps;

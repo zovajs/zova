@@ -1,4 +1,4 @@
-/* eslint-disable */
+// eslint-disable
 /** interceptor: begin */
 export * from '../bean/interceptor.body.js';
 export * from '../bean/interceptor.headers.js';

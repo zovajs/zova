@@ -1,4 +1,4 @@
-/* eslint-disable */
+// eslint-disable
 /** monkeySys: begin */
 export * from '../monkeySys.js';
 /** monkeySys: end */

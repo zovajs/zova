@@ -1,4 +1,4 @@
-/* eslint-disable */
+// eslint-disable
 /** model: begin */
 export * from '../model/resource.js';
 import { IModelOptionsResource } from '../model/resource.js';

@@ -6,7 +6,6 @@ import { prepareComponentOptions, useController } from 'zova';
 import type { ControllerActionViewProps } from '../../component/actionView/controller.jsx';
 
 import { ControllerActionView } from '../../component/actionView/controller.jsx';
-
 export type TypeControllerActionViewPublicProps = {
   controllerRef?: (ref: ControllerActionView) => void;
 } & ControllerActionViewProps;

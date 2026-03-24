@@ -1,4 +1,4 @@
-/* eslint-disable */
+// eslint-disable
 /** config: begin */
 export * from '../config/config.js';
 import { config } from '../config/config.js';

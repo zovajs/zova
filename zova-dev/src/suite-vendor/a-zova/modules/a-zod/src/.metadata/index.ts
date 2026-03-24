@@ -1,4 +1,4 @@
-/* eslint-disable */
+// eslint-disable
 /** tool: begin */
 export * from '../bean/tool.v.js';
 

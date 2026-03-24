@@ -1,4 +1,4 @@
-/* eslint-disable */
+// eslint-disable
 /** model: begin */
 export * from '../model/tabs.js';
 import { IModelOptionsTabs } from '../model/tabs.js';

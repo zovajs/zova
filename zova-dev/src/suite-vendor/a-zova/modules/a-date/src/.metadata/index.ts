@@ -1,4 +1,4 @@
-/* eslint-disable */
+// eslint-disable
 /** tableCell: begin */
 export * from '../bean/tableCell.date.jsx';
 import { ITableCellOptionsDate } from '../bean/tableCell.date.jsx';

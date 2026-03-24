@@ -6,7 +6,6 @@ import { prepareComponentOptions, useController } from 'zova';
 import type { ControllerFormFieldDateRangeProps } from '../../component/formFieldDateRange/controller.jsx';
 
 import { ControllerFormFieldDateRange } from '../../component/formFieldDateRange/controller.jsx';
-
 export type TypeControllerFormFieldDateRangePublicProps = {
   controllerRef?: (ref: ControllerFormFieldDateRange) => void;
 } & ControllerFormFieldDateRangeProps;

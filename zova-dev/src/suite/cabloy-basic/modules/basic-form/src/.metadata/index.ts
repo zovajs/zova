@@ -1,4 +1,4 @@
-/* eslint-disable */
+// eslint-disable
 /** controller: begin */
 export * from '../component/formFieldCaptcha/controller.jsx';
 

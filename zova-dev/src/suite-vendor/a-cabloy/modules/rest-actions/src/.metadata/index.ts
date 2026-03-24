@@ -1,4 +1,4 @@
-/* eslint-disable */
+// eslint-disable
 /** action: begin */
 export * from '../bean/action.alert.jsx';
 export * from '../bean/action.confirm.jsx';

@@ -1,11 +1,9 @@
-import type { z } from 'zod';
-
+import { z } from 'zod';
 import { createZovaComponentPage } from 'zova';
 
 import { ControllerPageToolOne } from '../../page/toolOne/controller.jsx';
 import { ControllerPageToolOneSchemaParams, ControllerPageToolOneSchemaQuery } from '../../page/toolOne/controller.jsx';
 import { RenderPageToolOne } from '../../page/toolOne/render.jsx';
-
 export namespace NSControllerPageToolOne {
   export const paramsSchema = ControllerPageToolOneSchemaParams;
   export type ParamsInput = z.input<typeof ControllerPageToolOneSchemaParams>;

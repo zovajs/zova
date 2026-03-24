@@ -1,4 +1,4 @@
-/* eslint-disable */
+// eslint-disable
 /** action: begin */
 export * from '../bean/action.log.jsx';
 import { IActionOptionsLog } from '../bean/action.log.jsx';

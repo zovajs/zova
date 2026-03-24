@@ -6,7 +6,6 @@ import { prepareComponentOptions, useController } from 'zova';
 import type { ControllerFormFieldCaptchaProps } from '../../component/formFieldCaptcha/controller.jsx';
 
 import { ControllerFormFieldCaptcha } from '../../component/formFieldCaptcha/controller.jsx';
-
 export type TypeControllerFormFieldCaptchaPublicProps = {
   controllerRef?: (ref: ControllerFormFieldCaptcha) => void;
 } & ControllerFormFieldCaptchaProps;

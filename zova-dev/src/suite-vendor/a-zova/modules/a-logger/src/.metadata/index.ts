@@ -1,4 +1,4 @@
-/* eslint-disable */
+// eslint-disable
 /** aopMethod: begin */
 export * from '../bean/aopMethod.log.js';
 import { IAopMethodOptionsLog } from '../bean/aopMethod.log.js';

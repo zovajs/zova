@@ -1,4 +1,4 @@
-/* eslint-disable */
+// eslint-disable
 /** monkey: begin */
 export * from '../monkey.js';
 /** monkey: end */

@@ -1,4 +1,4 @@
-/* eslint-disable */
+// eslint-disable
 /** model: begin */
 export * from '../model/test.js';
 import { IModelOptionsTest } from '../model/test.js';

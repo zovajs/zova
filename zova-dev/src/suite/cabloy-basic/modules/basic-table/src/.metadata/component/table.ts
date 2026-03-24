@@ -7,7 +7,6 @@ import type { ControllerTableProps } from '../../component/table/controller.jsx'
 
 import { ControllerTable } from '../../component/table/controller.jsx';
 import { RenderTable } from '../../component/table/render.jsx';
-
 export type TypeControllerTablePublicProps<TData extends {} = {}> = {
   controllerRef?: (ref: ControllerTable<TData>) => void;
 } & ControllerTableProps<TData>;

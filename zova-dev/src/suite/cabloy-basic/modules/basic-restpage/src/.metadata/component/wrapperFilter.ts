@@ -7,7 +7,6 @@ import type { ControllerWrapperFilterProps } from '../../component/wrapperFilter
 
 import { ControllerWrapperFilter } from '../../component/wrapperFilter/controller.jsx';
 import { RenderWrapperFilter } from '../../component/wrapperFilter/render.jsx';
-
 export type TypeControllerWrapperFilterPublicProps = {
   controllerRef?: (ref: ControllerWrapperFilter) => void;
 } & ControllerWrapperFilterProps;

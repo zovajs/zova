@@ -1,4 +1,4 @@
-/* eslint-disable */
+// eslint-disable
 /** model: begin */
 export * from '../model/pageData.js';
 import { IModelOptionsPageData } from '../model/pageData.js';
