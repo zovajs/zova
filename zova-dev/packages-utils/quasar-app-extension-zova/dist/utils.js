@@ -1,5 +1,5 @@
-import path from 'node:path';
 import fse from 'fs-extra';
+import path from 'node:path';
 export function resolveTemplatePath(file) {
     return new URL(path.join('../templates', file), import.meta.url);
 }

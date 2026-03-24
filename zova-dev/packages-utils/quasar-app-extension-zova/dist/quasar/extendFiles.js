@@ -1,5 +1,5 @@
-import path from 'node:path';
 import fse from 'fs-extra';
+import path from 'node:path';
 import { copyTemplateFile, getAbsolutePathOfModule, getOutDir } from 'zova-vite';
 import { resolveTemplatePath } from '../utils.js';
 export function extendFilesOne(api, flavor) {

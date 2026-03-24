@@ -63,7 +63,7 @@ export function extendViteConf(context) {
         const define = generateConfigDefine(env, ['NODE_ENV', 'META_FLAVOR', 'META_MODE', 'META_APP_MODE', 'SERVER', 'CLIENT', 'DEV', 'PROD', 'SSR']);
         conf.define = mergeConfig(conf.define || {}, define);
         // ssr
-        if (opts.isServer && (context.configMeta?.mode === 'development')) {
+        if (opts.isServer && context.configMeta?.mode === 'development') {
             conf.ssr = mergeConfig(conf.ssr || {}, {
                 external: [
                     'vue',
@@ -83,23 +83,28 @@ export function extendViteConf(context) {
             });
         }
         // ssr
-        if (opts.isServer && (context.configMeta?.mode === 'production')) {
+        if (opts.isServer && context.configMeta?.mode === 'production') {
             conf.ssr = mergeConfig(conf.ssr || {}, {
                 target: 'node',
             });
             conf.ssr.noExternal = true;
         }
-        // ssr: logger
-        if (opts.isServer && context.configMeta?.mode === 'development') {
-            const logger = createLogger();
-            const loggerWarn = logger.warn;
-            logger.warn = (msg, options) => {
+        // general: logger
+        const logger = createLogger();
+        const loggerWarn = logger.warn;
+        logger.warn = (msg, options) => {
+            // ssr: logger
+            if (opts.isServer && context.configMeta?.mode === 'development') {
                 if (msg.includes('Failed to load source map'))
                     return;
-                loggerWarn(msg, options);
-            };
-            conf.customLogger = logger;
-        }
+            }
+            if (msg.includes('Arbitrary module namespace identifier names are not available in the configured target environment'))
+                return;
+            if (msg.includes('Big integer literals are not available in the configured target environment'))
+                return;
+            loggerWarn(msg, options);
+        };
+        conf.customLogger = logger;
     };
 }
 //# sourceMappingURL=extendViteConf.js.map

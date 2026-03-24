@@ -2,23 +2,23 @@ import type { IBundleVendor, ZovaConfigMeta } from '@cabloy/module-info';
 
 import * as dotenv from '@cabloy/dotenv';
 import { glob } from '@cabloy/module-glob';
-import crypto from 'node:crypto';
 import path from 'node:path';
 
-import type { ZovaViteConfigChunkVendor, ZovaViteConfigOptions } from './types.ts';
+import type { ZovaViteConfigOptions } from './types.ts';
 
 import { getEnvMeta } from './utils.ts';
 
-const __ModuleLibs = [
-  /src\/module\/([^/]*)\//,
-  /src\/module-vendor\/([^/]*)\//,
-  /src\/suite\/.*\/modules\/([^/]*)\//,
-  /src\/suite-vendor\/.*\/modules\/([^/]*)\//,
-  /\/zova-module-([^/]*)\//,
-];
+// const __ModuleLibs = [
+//   /src\/module\/([^/]*)\//,
+//   /src\/module-vendor\/([^/]*)\//,
+//   /src\/suite\/.*\/modules\/([^/]*)\//,
+//   /src\/suite-vendor\/.*\/modules\/([^/]*)\//,
+//   /\/zova-module-([^/]*)\//,
+// ];
 
-const __ZovaManualChunkVendors = [
-  { match: ['@faker-js'], output: 'faker' },
+const __ZovaManualChunkVendorsSys = [
+  { match: ['~commonjsHelpers.js'], output: 'commonjsHelper' },
+  { match: ['~plugin-vue:export-helper'], output: 'vue' },
   {
     match: [
       'vue',
@@ -27,7 +27,6 @@ const __ZovaManualChunkVendors = [
       '@vue/shared',
       '@vue/reactivity',
       '@vue/server-renderer',
-      'vue/jsx-runtime',
       '@cabloy/vue-runtime-core',
       '@cabloy/vue-runtime-dom',
       '@cabloy/vue-reactivity',
@@ -36,25 +35,31 @@ const __ZovaManualChunkVendors = [
     output: 'vue',
   },
   { match: ['vue-router', '@cabloy/vue-router'], output: 'vue-router' },
-  { match: ['@cabloy/zod-errors-custom', '@cabloy/zod-query', 'zod/lib'], output: 'zod' },
   {
     match: [
       'reflect-metadata',
       '@cabloy',
       'zova',
+      '~packages-zova/zova/',
       'zova-core',
-      'packages-zova/zova-core',
+      '~packages-zova/zova-core/',
       'zova-shared',
-      'packages-zova/zova-shared',
-      'packages-utils/word-utils',
-      'packages-utils/mutate-on-copy',
+      '~packages-zova/zova-shared/',
+      '@cabloy/logger',
+      '~packages-utils/logger/',
       'mutate-on-copy',
+      '~packages-utils/mutate-on-copy/',
+      '@cabloy/word-utils',
+      '~packages-utils/word-utils/',
+      'zova-jsx',
+      '~packages-utils/zova-jsx/',
+      'zova-openapi',
+      '~packages-utils/zova-openapi/',
     ],
     output: 'zova',
   },
   { match: ['pinia'], output: 'pinia' },
-  { match: ['~commonjsHelpers.js'], output: 'commonjsHelper' },
-  { match: ['~plugin-vue:export-helper'], output: 'vue' },
+  { match: ['@faker-js'], output: 'faker' },
 ];
 
 export function createConfigUtils(
@@ -63,16 +68,13 @@ export function createConfigUtils(
 ): {
   loadEnvs: () => { [name: string]: string };
   loadModulesMeta: () => ReturnType<typeof glob>;
-  configManualChunk: (id: string) => string;
+  codeSplittingGroups: () => any[];
 } {
-  let __zovaManualChunkVendors_runtime: ZovaViteConfigChunkVendor[];
-  let __zovaManualChunkVendors_runtime_modulesBefore: ZovaViteConfigChunkVendor[];
   let __modulesMeta: Awaited<ReturnType<typeof glob>>;
-  const __chunkNameHashes: Record<string, string> = {};
   return {
     loadEnvs: __loadEnvs,
     loadModulesMeta: __loadModulesMeta,
-    configManualChunk: __configManualChunkWrapper,
+    codeSplittingGroups: __codeSplittingGroups,
   };
 
   //////////////////////////////
@@ -134,60 +136,71 @@ export function createConfigUtils(
     return modules;
   }
 
-  function __configManualChunk_adjustId(id: string) {
-    //
-    id = id.replace(/\\/g, '/');
-    const appDir = configOptions.appDir.replace(/\\/g, '/');
-    //
-    let index = id.indexOf(appDir);
-    if (index > -1) {
-      id = id.substring(index + appDir.length);
-    }
-    //
-    index = id.lastIndexOf('node_modules');
-    if (index > -1) {
-      id = id.substring(index + 'node_modules'.length);
-    }
-    return id;
-  }
+  // function __configManualChunk_adjustId(id: string) {
+  //   //
+  //   id = id.replace(/\\/g, '/');
+  //   const appDir = configOptions.appDir.replace(/\\/g, '/');
+  //   //
+  //   let index = id.indexOf(appDir);
+  //   if (index > -1) {
+  //     id = id.substring(index + appDir.length);
+  //   }
+  //   //
+  //   index = id.lastIndexOf('node_modules');
+  //   if (index > -1) {
+  //     id = id.substring(index + 'node_modules'.length);
+  //   }
+  //   return id;
+  // }
 
-  function __configManualChunkWrapper(id: string) {
-    let output = __configManualChunk(id);
-    if (output && process.env.BUILD_CHUNK_OBFUSCATION === 'true') {
-      output = _configManualChunk_Obfuscation(output);
-    }
-    return output;
-  }
+  // function __codeSplittingGroups(id: string) {
+  //   let output = __configManualChunk(id);
+  //   if (output && process.env.BUILD_CHUNK_OBFUSCATION === 'true') {
+  //     output = _configManualChunk_Obfuscation(output);
+  //   }
+  //   return output;
+  // }
 
-  function _configManualChunk_Obfuscation(output: string) {
-    if (!__chunkNameHashes[output]) {
-      __chunkNameHashes[output] = `Chunk-${crypto.createHash('sha1').update(output).digest('hex').slice(0, 6)}`;
-    }
-    return __chunkNameHashes[output];
-  }
+  // function _configManualChunk_Obfuscation(output: string) {
+  //   if (!__chunkNameHashes[output]) {
+  //     __chunkNameHashes[output] = `Chunk-${crypto.createHash('sha1').update(output).digest('hex').slice(0, 6)}`;
+  //   }
+  //   return __chunkNameHashes[output];
+  // }
 
-  function __configManualChunk(id: string) {
-    id = __configManualChunk_adjustId(id);
-    // modules before
-    let output = _configManualChunk_modulesBefore(id);
-    if (output) return output;
-    // modules
-    output = _configManualChunk_modules(id);
-    if (output) return output;
+  function __codeSplittingGroups() {
+    let groups: any[] = [];
+    // begin
+    groups = groups.concat(_configManualChunk_vendorsModulesBegin());
+    // sys
+    groups = groups.concat(_configManualChunk_vendorsSys());
+    // custom
+    groups = groups.concat(_configManualChunk_vendorsCustom());
     // vendors
-    output = _configManualChunk_vendors(id);
-    if (output) return output;
-    // default
+    groups = groups.concat(_configManualChunk_vendorsModules());
+    // modules
+    groups = groups.concat(_configManualChunk_modules());
+    // end
+    groups = groups.concat(_configManualChunk_vendorsModulesEnd());
+    // debug
     if (configOptions.zovaManualChunk?.debug) {
-      // eslint-disable-next-line
-      console.log(id);
+      groups.push({
+        name: id => {
+          // eslint-disable-next-line
+          console.log(id);
+        },
+      });
     }
-    return null;
-    // return 'vendor';
+    // ok
+    return groups;
   }
 
-  function _configManualChunk_vendorsDefault() {
-    return __ZovaManualChunkVendors;
+  function _configManualChunk_vendorsSys() {
+    return _configChunkVendorsToGroups(__ZovaManualChunkVendorsSys);
+  }
+
+  function _configManualChunk_vendorsCustom() {
+    return _configChunkVendorsToGroups(configOptions.zovaManualChunk?.vendors || []);
   }
 
   function _configManualChunk_vendorsModules() {
@@ -203,61 +216,92 @@ export function createConfigUtils(
         vendors = vendors.concat(vendorsModule);
       }
     }
-    return vendors;
+    return _configChunkVendorsToGroups(vendors);
   }
 
-  function _configManualChunk_vendorsModulesBefore() {
-    const vendors: any = [];
-    if (process.env.MOCK_ENABLED === 'true') {
-      vendors.push({
-        match: [/\.fake\.ts/],
-        output: '-zova-mock',
-      });
-    }
+  function _configManualChunk_vendorsModulesBegin() {
+    const groups: any[] = [];
+    return groups;
+  }
+
+  function _configManualChunk_vendorsModulesEnd() {
+    const groups: any[] = [];
     if (process.env.BUILD_MINIFY === 'false') {
-      vendors.push({
-        match: [/\.zova\/config\.ts/],
-        output: '-zova-config',
+      groups.push({
+        test: /\.zova\/config\.ts/,
+        name: '-zova-config',
       });
     }
-    return vendors;
-  }
-
-  function _configManualChunk_vendors(id: string) {
-    if (!__zovaManualChunkVendors_runtime) {
-      __zovaManualChunkVendors_runtime = _configManualChunk_vendorsDefault()
-        .concat(_configManualChunk_vendorsModules() as any)
-        .concat((configOptions.zovaManualChunk?.vendors || []) as any);
+    if (process.env.MOCK_ENABLED === 'true') {
+      groups.push({
+        test: /\.fake\.ts/,
+        name: '-zova-mock',
+      });
     }
-    return _configManualChunk_match(id, __zovaManualChunkVendors_runtime);
+    return groups;
   }
 
-  function _configManualChunk_match(id: string, vendors) {
-    const matchItem = vendors.find(item => {
-      return item.match.some(item => {
-        if (typeof item === 'string') {
-          const matchItem = item[0] === '~' ? item.substring(1) : `/${item}/`;
-          return id.includes(matchItem);
+  function _configChunkVendorsToGroups(vendors: IBundleVendor[]) {
+    const groups: any[] = [];
+    for (const vendor of vendors) {
+      for (const match of vendor.match) {
+        let test;
+        if (typeof match === 'string') {
+          if (match[0] === '~') {
+            test = match.substring(1);
+          } else {
+            test = `node_modules/${match}/`;
+          }
+        } else {
+          test = match;
         }
-        return item.test(id);
+        groups.push({
+          test,
+          name: vendor.output,
+        });
+      }
+    }
+    return groups;
+  }
+
+  function _configManualChunk_modules() {
+    const appDir = configOptions.appDir.replace(/\\/g, '/');
+    // groups
+    const groups: any[] = [];
+    // modules
+    const { modules } = __modulesMeta;
+    // loop
+    for (const moduleName in modules) {
+      const module = modules[moduleName];
+      //
+      let test = module.root;
+      let index = test.indexOf(appDir);
+      if (index > -1) {
+        test = test.substring(index + appDir.length);
+      }
+      index = test.lastIndexOf('node_modules');
+      if (index > -1) {
+        test = test.substring(index + 'node_modules'.length);
+      }
+      groups.push({
+        test: `${test}/`,
+        name: moduleName,
       });
-    });
-    if (matchItem) return matchItem.output;
-    return null;
+    }
+    return groups;
   }
 
-  function _configManualChunk_modules(id: string) {
-    for (const moduleLib of __ModuleLibs) {
-      const matched = id.match(moduleLib);
-      if (matched) return matched[1];
-    }
-    return null;
-  }
-
-  function _configManualChunk_modulesBefore(id: string) {
-    if (!__zovaManualChunkVendors_runtime_modulesBefore) {
-      __zovaManualChunkVendors_runtime_modulesBefore = _configManualChunk_vendorsModulesBefore();
-    }
-    return _configManualChunk_match(id, __zovaManualChunkVendors_runtime_modulesBefore);
-  }
+  // function _configManualChunk_match(id: string, vendors) {
+  //   const matchItem = vendors.find(item => {
+  //     return item.match.some(item => {
+  //       if (typeof item === 'string') {
+  //         const matchItem = item[0] === '~' ? item.substring(1) : `/${item}/`;
+  //         return id.includes(matchItem);
+  //       }
+  //       return item.test(id);
+  //     });
+  //   });
+  //   if (matchItem) return matchItem.output;
+  //   return null;
+  // }
 }
