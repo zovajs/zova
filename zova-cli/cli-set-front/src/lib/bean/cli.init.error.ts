@@ -47,6 +47,8 @@ export class CliInitError extends BeanCliBase {
       });
     }
     // tools.metadata
-    await this.helper.invokeCli([':tools:metadata', moduleName], { cwd: argv.projectPath });
+    if (!argv.nometadata) {
+      await this.helper.invokeCli([':tools:metadata', moduleName], { cwd: argv.projectPath });
+    }
   }
 }

@@ -67,6 +67,8 @@ export class CliRefactorFirstStyle extends BeanCliBase {
       boilerplatePath: 'refactor/firstStyle/boilerplate',
     });
     // tools.metadata
-    await this.helper.invokeCli([':tools:metadata', moduleName], { cwd: argv.projectPath });
+    if (!argv.nometadata) {
+      await this.helper.invokeCli([':tools:metadata', moduleName], { cwd: argv.projectPath });
+    }
   }
 }

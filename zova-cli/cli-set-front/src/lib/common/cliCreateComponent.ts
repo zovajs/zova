@@ -71,6 +71,8 @@ export class CliCreateComponentBase extends BeanCliBase {
       boilerplatePath: `create/${this.componentMode}/${boilerplate}`,
     });
     // tools.metadata
-    await this.helper.invokeCli([':tools:metadata', moduleName], { cwd: argv.projectPath });
+    if (!argv.nometadata) {
+      await this.helper.invokeCli([':tools:metadata', moduleName], { cwd: argv.projectPath });
+    }
   }
 }

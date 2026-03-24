@@ -67,6 +67,8 @@ export class CliRefactorFirstRender extends BeanCliBase {
     controllerContent = controllerContent.replace('protected render() {', 'protected _render() {');
     await fse.writeFile(controllerFile, controllerContent);
     // tools.metadata
-    await this.helper.invokeCli([':tools:metadata', moduleName], { cwd: argv.projectPath });
+    if (!argv.nometadata) {
+      await this.helper.invokeCli([':tools:metadata', moduleName], { cwd: argv.projectPath });
+    }
   }
 }

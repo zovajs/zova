@@ -48,7 +48,9 @@ export class CliRefactorRenameComponent extends BeanCliBase {
     await this._renameFiles(componentDir);
     await this._renameDir(componentDir, targetDir);
     // tools.metadata
-    await this.helper.invokeCli([':tools:metadata', moduleName], { cwd: argv.projectPath });
+    if (!argv.nometadata) {
+      await this.helper.invokeCli([':tools:metadata', moduleName], { cwd: argv.projectPath });
+    }
   }
 
   async _renameDir(componentDir: string, targetDir: string) {

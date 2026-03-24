@@ -94,7 +94,9 @@ export class CliOpenapiGenerate extends BeanCliBase {
     // generate
     await this._generateApis(openapiTypescript, cache.ast, moduleConfig, moduleInfo, module);
     // tools.metadata
-    await this.helper.invokeCli([':tools:metadata', moduleInfo.relativeName], { cwd: argv.projectPath });
+    if (!argv.nometadata) {
+      await this.helper.invokeCli([':tools:metadata', moduleInfo.relativeName], { cwd: argv.projectPath });
+    }
   }
 
   async _outputFiles(

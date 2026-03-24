@@ -62,6 +62,8 @@ export class CliRefactorComponentModel extends BeanCliBase {
       boilerplatePath: null,
     });
     // tools.metadata
-    await this.helper.invokeCli([':tools:metadata', moduleName], { cwd: argv.projectPath });
+    if (!argv.nometadata) {
+      await this.helper.invokeCli([':tools:metadata', moduleName], { cwd: argv.projectPath });
+    }
   }
 }
