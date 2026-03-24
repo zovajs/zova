@@ -5,6 +5,7 @@
     "outDir": "dist-cli",
     "composite": false,
     "declaration": false,
+    "allowImportingTsExtensions": true,
   },
   "include": ["cli/**/snippets/*.ts"],
 }

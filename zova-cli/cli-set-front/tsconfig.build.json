@@ -5,6 +5,7 @@
     "outDir": "dist",
     "declaration": true,
     "emitDeclarationOnly": true,
+    "allowImportingTsExtensions": true,
   },
   "include": ["src/**/*"],
 }
