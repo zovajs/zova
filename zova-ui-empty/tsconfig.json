@@ -7,7 +7,7 @@
     "declarationMap": false,
     "noEmit": true,
     "rewriteRelativeImportExtensions": false,
-    "verbatimModuleSyntax": false
+    "verbatimModuleSyntax": false,
   },
   "references": [],
   "exclude": [
@@ -24,7 +24,5 @@
     "./src-cordova",
     "./quasar.config.*.temporary.compiled*",
     "./src/boot/app",
-    "./packages-utils",
-    "./packages-zova"
-  ]
+  ],
 }

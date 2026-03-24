@@ -6,15 +6,8 @@
     "allowImportingTsExtensions": false,
     "noEmit": false,
     "rewriteRelativeImportExtensions": false,
-    "verbatimModuleSyntax": false
+    "verbatimModuleSyntax": false,
   },
   "references": [],
-  "include": [
-    "src/**/*",
-    "src/**/.metadata/**/*",
-    ".zova-rest/**/*",
-    "packages-zova/**/*",
-    "packages-utils/zova-jsx",
-    "packages-utils/logger"
-  ]
+  "include": ["src/**/*", "src/**/.metadata/**/*", ".zova-rest/**/*"],
 }
