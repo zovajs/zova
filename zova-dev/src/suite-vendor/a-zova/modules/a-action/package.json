@@ -36,8 +36,8 @@
         "beanGeneral": true,
         "optionsGlobalInterfaceName": "IDecoratorActionOptions",
         "optionsGlobalInterfaceFrom": "zova-module-a-action",
-        "boilerplate": "cli/action/boilerplate",
-        "metadataCustom": "cli/action/metadata/generate.ts"
+        "boilerplate": "action/boilerplate",
+        "metadataCustom": "action/metadata/generate.ts"
       }
     },
     "capabilities": {

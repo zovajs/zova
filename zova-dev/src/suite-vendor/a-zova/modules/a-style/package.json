@@ -50,17 +50,17 @@
       "css": {
         "optionsGlobalInterfaceName": "IDecoratorCssOptions",
         "optionsGlobalInterfaceFrom": "zova-module-a-style",
-        "boilerplate": "cli/css/boilerplate"
+        "boilerplate": "css/boilerplate"
       },
       "theme": {
         "optionsGlobalInterfaceName": "IDecoratorThemeOptions",
         "optionsGlobalInterfaceFrom": "zova-module-a-style",
-        "boilerplate": "cli/theme/boilerplate"
+        "boilerplate": "theme/boilerplate"
       }
     },
     "metas": {
       "themeHandler": {
-        "boilerplate": "cli/themeHandler/boilerplate"
+        "boilerplate": "themeHandler/boilerplate"
       }
     },
     "bundle": {

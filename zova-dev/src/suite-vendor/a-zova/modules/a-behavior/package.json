@@ -36,8 +36,8 @@
       "behavior": {
         "optionsGlobalInterfaceName": "IDecoratorBehaviorOptions",
         "optionsGlobalInterfaceFrom": "zova-module-a-behavior",
-        "boilerplate": "cli/behavior/boilerplate",
-        "metadataCustom": "cli/behavior/metadata/generate.ts"
+        "boilerplate": "behavior/boilerplate",
+        "metadataCustom": "behavior/metadata/generate.ts"
       }
     }
   }

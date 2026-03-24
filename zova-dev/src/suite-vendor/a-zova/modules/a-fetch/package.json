@@ -45,7 +45,7 @@
         "optionsPackage": true,
         "optionsGlobalInterfaceName": "IDecoratorInterceptorOptions",
         "optionsGlobalInterfaceFrom": "zova-module-a-fetch",
-        "boilerplate": "cli/interceptor/boilerplate"
+        "boilerplate": "interceptor/boilerplate"
       }
     },
     "bundle": {

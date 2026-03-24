@@ -55,7 +55,7 @@
         "beanGeneral": true,
         "optionsGlobalInterfaceName": "IDecoratorModelOptions",
         "optionsGlobalInterfaceFrom": "zova-module-a-model",
-        "boilerplate": "cli/model/boilerplate"
+        "boilerplate": "model/boilerplate"
       }
     },
     "bundle": {

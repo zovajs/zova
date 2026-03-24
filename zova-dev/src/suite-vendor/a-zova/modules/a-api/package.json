@@ -46,8 +46,8 @@
         "scopeResource": true,
         "beanGeneral": true,
         "optionsNone": true,
-        "boilerplate": "cli/api/boilerplate",
-        "metadataCustom": "cli/api/metadata/generate.ts"
+        "boilerplate": "api/boilerplate",
+        "metadataCustom": "api/metadata/generate.ts"
       },
       "apiMeta": {
         "sceneIsolate": true,
