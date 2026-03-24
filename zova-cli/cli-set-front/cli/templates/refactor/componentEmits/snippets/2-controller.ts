@@ -1,5 +1,12 @@
 import { metadataCustomSnippet } from '@cabloy/cli';
 
+declare module '@cabloy/cli' {
+  interface ICommandArgv {
+    controllerFileName: string;
+    controllerClassName: string;
+  }
+}
+
 const __regProps = /interface [^<]*Props<(.*?)> \{/;
 
 export default metadataCustomSnippet({

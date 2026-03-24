@@ -1,5 +1,13 @@
 import { metadataCustomSnippet } from '@cabloy/cli';
 
+declare module '@cabloy/cli' {
+  interface ICommandArgv {
+    renderName: string;
+    renderNameCapitalize: string;
+    renderClassName: string;
+  }
+}
+
 const __regUse = /import \{.*? Use[ ,].*?\} from 'zova';/;
 
 export default metadataCustomSnippet({

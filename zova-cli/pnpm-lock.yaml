@@ -36,8 +36,8 @@ importers:
   cli:
     dependencies:
       '@cabloy/cli':
-        specifier: ^3.0.100
-        version: 3.0.100(vue@3.5.13(typescript@5.9.3))
+        specifier: ^3.0.101
+        version: 3.0.101(vue@3.5.13(typescript@5.9.3))
       '@cabloy/process-helper':
         specifier: ^3.0.0
         version: 3.0.0
@@ -61,8 +61,8 @@ importers:
   cli-set-front:
     dependencies:
       '@cabloy/cli':
-        specifier: ^3.0.100
-        version: 3.0.100(vue@3.5.13(typescript@5.9.3))
+        specifier: ^3.0.101
+        version: 3.0.101(vue@3.5.13(typescript@5.9.3))
       '@cabloy/extend':
         specifier: ^3.1.0
         version: 3.1.13
@@ -111,9 +111,6 @@ importers:
       zova-openapi:
         specifier: ^1.0.5
         version: 1.0.5(typescript@5.9.3)
-      zova-shared:
-        specifier: ^1.0.7
-        version: 1.0.7
       zova-vite:
         specifier: ^1.0.182
         version: 1.0.185(@babel/core@7.29.0)(@babel/traverse@7.29.0)(vue@3.5.13(typescript@5.9.3))(yaml@2.8.3)
@@ -326,8 +323,8 @@ packages:
     resolution: {integrity: sha512-LwdZHpScM4Qz8Xw2iKSzS+cfglZzJGvofQICy7W7v4caru4EaAmyUuO6BGrbyQ2mYV11W0U8j5mBhd14dd3B0A==}
     engines: {node: '>=6.9.0'}
 
-  '@cabloy/cli@3.0.100':
-    resolution: {integrity: sha512-9faMcMRCZbYyFLnJC3o4mpOXly9qpzDIK5FL8YVDedEZJfX2ePOHvZ3lA+7bMqzIOv2DTqnGnQ6JKy2WYuZ7pA==}
+  '@cabloy/cli@3.0.101':
+    resolution: {integrity: sha512-SGdzmnqhNDHPp0gXNjj1kUThXuwZpVqvbJL4M+asCZd0/tIchBTvAN6l/M5Q2x8S9QHKiMBugOcRt+XaqUvuQw==}
 
   '@cabloy/dotenv@1.1.13':
     resolution: {integrity: sha512-LFpi2BVLon5XJ3ylAlqVerI5YyNf/tzYl2uW9/FZSTVEUoyxxwV5LW8acEwMZPnq+UVsJh1XOam6O9iE73+VDQ==}
@@ -4955,7 +4952,7 @@ snapshots:
       '@babel/helper-string-parser': 7.27.1
       '@babel/helper-validator-identifier': 7.28.5
 
-  '@cabloy/cli@3.0.100(vue@3.5.13(typescript@5.9.3))':
+  '@cabloy/cli@3.0.101(vue@3.5.13(typescript@5.9.3))':
     dependencies:
       '@babel/parser': 7.29.2
       '@cabloy/module-glob': 5.2.56
