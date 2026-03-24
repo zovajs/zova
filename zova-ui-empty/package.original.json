@@ -6,7 +6,7 @@
   "publishConfig": {
     "access": "public"
   },
-  "author": "zhennann <zhen.nann@icloud.com>",
+  "author": "zhennann",
   "type": "module",
   "scripts": {
     "init": "pnpm install --no-frozen-lockfile && zova :tools:deps",
