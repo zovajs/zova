@@ -1,27 +1,20 @@
 # Quick Start
 
-## Creating a Zova Application
+## Preparation
 
-### 1. Prerequisites
-
-- install pnpm
+1. Install command-line tools
 
 ```bash
-$ npm install -g pnpm
-```
-
-- install command-line tools
-
-```bash
-$ pnpm add -g tsx@latest
 $ pnpm add -g zova-cli@latest
 ```
 
-- VS Code Extension: [Zova - Official](https://marketplace.visualstudio.com/items?itemName=cabloy.zova-vscode)
+2. Install Vscode extension: [Zova - Official](https://marketplace.visualstudio.com/items?itemName=cabloy.zova-vscode)
 
-It is strongly recommended to install this VS Code extension to obtain a more convenient and pleasant development experience
+This extension provides a large number of menus for quickly creating code skeletons for various resources
 
-### 2. Create Project
+## Quick Start
+
+### 1. Create Project
 
 ```bash
 $ zova :create:project projectName
@@ -29,33 +22,23 @@ $ zova :create:project projectName
 
 1. Directly execute `zova` on the command line to create a project named `projectName`
 2. The command line will output a list of templates, and the currently provided templates are as follows:
-   - zova + antdv
-   - zova + element-plus
    - zova + quasar
    - zova + vuetify
    - zova only
 
-3. Here, we choose `zova only`
-
-### 3. Install Dependencies
-
-```bash
-$ pnpm install
-```
-
-### 4. Start Dev Server
+### 2. Start Dev Server
 
 ```bash
 $ npm run dev
 ```
 
-### 5. Build
+### 3. Build
 
 ```bash
 $ npm run build
 ```
 
-### 6. Preview
+### 4. Preview
 
 ```bash
 $ npm run preview
