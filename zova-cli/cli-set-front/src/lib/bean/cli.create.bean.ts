@@ -86,27 +86,6 @@ export class CliCreateBean extends BeanCliBase {
     }
   }
 
-  private _getBoilerplates() {
-    const result = {};
-    // scenes
-    const onionScenesMeta = getOnionScenesMeta(this.modulesMeta.modules);
-    for (const sceneName in onionScenesMeta) {
-      const onionSceneMeta = onionScenesMeta[sceneName];
-      if (onionSceneMeta.boilerplate) {
-        result[sceneName] = path.join(onionSceneMeta.module!.root, onionSceneMeta.boilerplate);
-      }
-    }
-    // metas
-    const onionMetasMeta = getOnionMetasMeta(this.modulesMeta.modules);
-    for (const sceneName in onionMetasMeta) {
-      const onionMetaMeta = onionMetasMeta[sceneName];
-      if (onionMetaMeta.boilerplate) {
-        result[`meta:${sceneName}`] = path.join(onionMetaMeta.module!.root, onionMetaMeta.boilerplate);
-      }
-    }
-    return result;
-  }
-
   private _getBoilerplatesOrSnippets(type: 'boilerplate' | 'snippets', custom?: string) {
     const type2 = custom ? `${type}${toUpperCaseFirstChar(custom)}` : type;
     const result = {};
