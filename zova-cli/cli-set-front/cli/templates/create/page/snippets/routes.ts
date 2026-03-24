@@ -1,7 +1,9 @@
+import { metadataCustomSnippet } from '@cabloy/cli';
+
 const __snippet_declare = "import { ZPage<%=argv.nameMeta.fullCapitalize%> } from './.metadata/page/<%=argv.pageName%>.js';\n";
 const __snippet_body = '{ path: \'<%=argv.moduleInfo.name!==argv.pageName?argv.pageName:""%>\', component: ZPage<%=argv.nameMeta.fullCapitalize%> },';
 
-module.exports = {
+export default metadataCustomSnippet({
   file: 'src/routes.ts',
   init: `import { IModuleRoute } from 'zova-module-a-router';
 
@@ -20,4 +22,4 @@ export const routes: IModuleRoute[] = [];
     // ok
     return ast;
   },
-};
+});
