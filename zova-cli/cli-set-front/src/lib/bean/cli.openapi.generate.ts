@@ -76,11 +76,18 @@ export class CliOpenapiGenerate extends BeanCliBase {
       // generate res
       const moduleInfo = this.helper.parseModuleInfo(moduleName);
       const module = this.helper.findModule(moduleName);
-      await this._generateOpenapi(openapiTypescript, config, moduleInfo, module, __caches);
+      await this._generateOpenapi(total, openapiTypescript, config, moduleInfo, module, __caches);
     }
   }
 
-  async _generateOpenapi(openapiTypescript: any, config: ZovaOpenapiConfig, moduleInfo: IModuleInfo, module: IModule, __caches: TypeAstCaches) {
+  async _generateOpenapi(
+    total: number,
+    openapiTypescript: any,
+    config: ZovaOpenapiConfig,
+    moduleInfo: IModuleInfo,
+    module: IModule,
+    __caches: TypeAstCaches,
+  ) {
     const { argv } = this.context;
     // config file
     const configFile = path.join(module.root, 'cli/openapi.config.ts');
@@ -94,7 +101,7 @@ export class CliOpenapiGenerate extends BeanCliBase {
     // generate
     await this._generateApis(openapiTypescript, cache.ast, moduleConfig, moduleInfo, module);
     // tools.metadata
-    if (!argv.nometadata) {
+    if (!argv.nometadata || total > 1) {
       await this.helper.invokeCli([':tools:metadata', moduleInfo.relativeName], { cwd: argv.projectPath });
     }
   }
@@ -176,7 +183,7 @@ export const OpenApiBaseURL = (sys: ZovaSys) => {
     if (contentSchemas.includes('components["schemas"]')) {
       contentSchemas = `import type { components } from './types.js';\n${contentSchemas}`;
     }
-    contentSchemas = `/* eslint-disable */\n${contentSchemas}`;
+    contentSchemas = `// eslint-disable\n${contentSchemas}`;
     return contentSchemas;
   }
 

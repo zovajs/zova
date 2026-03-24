@@ -149,7 +149,7 @@ export class CliToolsMetadata extends BeanCliBase {
     if (!content.trim()) {
       content = 'export {};';
     } else {
-      content = `/* eslint-disable */\n${content}`;
+      content = `// eslint-disable\n${content}`;
     }
     // save
     await fse.writeFile(metaIndexFile, content);
