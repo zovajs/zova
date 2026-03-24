@@ -1,8 +1,6 @@
 import { metadataCustomSnippet } from '@cabloy/cli';
 
-export default metadataCustomSnippet({});
-
-module.exports = {
+export default metadataCustomSnippet({
   file: ({ argv }) => {
     return argv.controllerFileName;
   },
@@ -19,4 +17,4 @@ module.exports = {
     // ok
     return ast;
   },
-};
+});
