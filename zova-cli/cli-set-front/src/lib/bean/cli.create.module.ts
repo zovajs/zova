@@ -23,7 +23,7 @@ export class CliCreateModule extends BeanCliBase {
     // super
     await super.execute();
     // noformat
-    argv.noformat = true;
+    // argv.noformat = true;
     // suite name/info
     const suiteName = argv.suite;
     if (suiteName) {

@@ -31,7 +31,7 @@ export class CliCreateProject extends BeanCliBase {
     // super
     await super.execute();
     // noformat
-    argv.noformat = true;
+    // argv.noformat = true;
     // project name
     const projectName = argv.name;
     // target dir
