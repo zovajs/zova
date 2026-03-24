@@ -7,7 +7,6 @@ import type { ControllerFormProps } from '../../component/form/controller.jsx';
 
 import { ControllerForm } from '../../component/form/controller.jsx';
 import { RenderForm } from '../../component/form/render.jsx';
-
 export type TypeControllerFormPublicProps<TFormData extends {} = {}, TSubmitMeta = never> = {
   controllerRef?: (ref: ControllerForm<TFormData, TSubmitMeta>) => void;
 } & ControllerFormProps<TFormData, TSubmitMeta>;

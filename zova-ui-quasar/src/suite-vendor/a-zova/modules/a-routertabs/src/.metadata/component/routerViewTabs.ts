@@ -6,7 +6,6 @@ import { prepareComponentOptions, useController } from 'zova';
 import type { ControllerRouterViewTabsProps } from '../../component/routerViewTabs/controller.jsx';
 
 import { ControllerRouterViewTabs } from '../../component/routerViewTabs/controller.jsx';
-
 export type TypeControllerRouterViewTabsPublicProps = {
   controllerRef?: (ref: ControllerRouterViewTabs) => void;
 } & ControllerRouterViewTabsProps;

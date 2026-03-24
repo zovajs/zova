@@ -6,7 +6,6 @@ import { prepareComponentOptions, useController } from 'zova';
 import type { ControllerIconProps } from '../../component/icon/controller.jsx';
 
 import { ControllerIcon } from '../../component/icon/controller.jsx';
-
 export type TypeControllerIconPublicProps = {
   controllerRef?: (ref: ControllerIcon) => void;
 } & ControllerIconProps;

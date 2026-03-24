@@ -6,7 +6,6 @@ import { prepareComponentOptions, useController } from 'zova';
 import type { ControllerFormFieldCurrencyProps } from '../../component/formFieldCurrency/controller.jsx';
 
 import { ControllerFormFieldCurrency } from '../../component/formFieldCurrency/controller.jsx';
-
 export type TypeControllerFormFieldCurrencyPublicProps = {
   controllerRef?: (ref: ControllerFormFieldCurrency) => void;
 } & ControllerFormFieldCurrencyProps;

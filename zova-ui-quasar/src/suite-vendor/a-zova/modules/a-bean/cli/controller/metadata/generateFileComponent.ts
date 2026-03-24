@@ -152,7 +152,7 @@ async function generateRestComponent(
   genericArguments: string,
   _contentImportTypeController: string[],
 ) {
-  const { moduleName, modulePath } = options;
+  const { cli, moduleName, modulePath } = options;
   // const { className } = globFile;
   const { name, nameCapitalize, hasProps, nameProps, hasModels, nameModels, controllerExtJs } = controllerInfo;
   // TypeControllerPublicProps
@@ -212,6 +212,7 @@ ${contentComponent}
   // output
   const fileDest = path.join(modulePath, `rest/component/${name}.ts`);
   await fse.outputFile(fileDest, content);
+  await cli.helper.formatFile({ fileName: fileDest });
   // components
   const fileComponents = path.join(modulePath, 'rest/components.ts');
   let contentComponents = '';
@@ -222,8 +223,9 @@ ${contentComponent}
   if (!contentComponents.includes(exportContent)) {
     contentComponents = `${contentComponents}${exportContent}\n`;
     await fse.outputFile(fileComponents, contentComponents);
+    await cli.helper.formatFile({ fileName: fileComponents });
   }
   // index
   const exportIndexContent = "export * from './components.js';";
-  await generateRestIndex(modulePath, exportIndexContent);
+  await generateRestIndex(options, modulePath, exportIndexContent);
 }

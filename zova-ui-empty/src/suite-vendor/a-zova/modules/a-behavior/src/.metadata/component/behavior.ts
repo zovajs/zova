@@ -6,7 +6,6 @@ import { prepareComponentOptions, useController } from 'zova';
 import type { ControllerBehaviorProps } from '../../component/behavior/controller.jsx';
 
 import { ControllerBehavior } from '../../component/behavior/controller.jsx';
-
 export type TypeControllerBehaviorPublicProps = {
   controllerRef?: (ref: ControllerBehavior) => void;
 } & ControllerBehaviorProps;

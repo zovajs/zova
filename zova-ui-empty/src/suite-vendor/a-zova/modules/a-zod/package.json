@@ -48,7 +48,7 @@
             "@cabloy/zod-query",
             "zod/locales",
             "zod/v4",
-            "zod/index.js"
+            "~node_modules/zod/index.js"
           ],
           "output": "zod"
         }

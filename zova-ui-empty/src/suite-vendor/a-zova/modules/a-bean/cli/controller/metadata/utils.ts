@@ -1,3 +1,5 @@
+import type { IMetadataCustomGenerateOptions } from '@cabloy/cli';
+
 import fse from 'fs-extra';
 import path from 'node:path';
 
@@ -40,7 +42,8 @@ export function combineContentRenderAndStyle(
   }`;
 }
 
-export async function generateRestIndex(modulePath: string, append: string) {
+export async function generateRestIndex(options: IMetadataCustomGenerateOptions, modulePath: string, append: string) {
+  const { cli } = options;
   // index
   const fileIndex = path.join(modulePath, 'rest/index.ts');
   let contentIndex = '';
@@ -50,5 +53,6 @@ export async function generateRestIndex(modulePath: string, append: string) {
   if (!contentIndex.includes(append)) {
     contentIndex = `${contentIndex}${append}\n`;
     await fse.outputFile(fileIndex, contentIndex);
+    await cli.helper.formatFile({ fileName: fileIndex });
   }
 }
