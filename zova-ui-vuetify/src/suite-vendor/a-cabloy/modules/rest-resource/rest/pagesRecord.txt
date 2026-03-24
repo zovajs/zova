@@ -1,3 +1,0 @@
-'/rest/resource/:resource/:id/:formScene?': TypePagePathSchema<NSRestResourceControllerPageEntry.ParamsInput,undefined>;
-'/rest/resource/:resource/create': TypePagePathSchema<NSRestResourceControllerPageEntryCreate.ParamsInput,undefined>;
-'/rest/resource/:resource': TypePagePathSchema<NSRestResourceControllerPageResource.ParamsInput,undefined>;
