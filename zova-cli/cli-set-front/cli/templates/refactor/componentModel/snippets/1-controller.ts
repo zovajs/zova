@@ -1,5 +1,11 @@
 import { metadataCustomSnippet } from '@cabloy/cli';
 
+declare module '@cabloy/cli' {
+  interface ICommandArgv {
+    modelName: string;
+  }
+}
+
 const __regProps = /interface [^<]*Props<(.*?)> \{/;
 const __regModelsReplace = /interface [^<]*Models([^{]*) \{/;
 const __regModelValue = /import \{[^}]*ModelValue[^}]*\} from 'zova';/;
