@@ -1,4 +1,6 @@
-module.exports = {
+import { metadataCustomSnippet } from '@cabloy/cli';
+
+export default metadataCustomSnippet({
   file: 'openapi.config.ts',
   async transform({ cli, ast, argv }) {
     const moduleNames = argv._;
@@ -13,4 +15,4 @@ module.exports = {
     // ok
     return ast;
   },
-};
+});

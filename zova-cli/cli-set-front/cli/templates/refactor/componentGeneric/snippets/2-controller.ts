@@ -1,7 +1,9 @@
+import { metadataCustomSnippet } from '@cabloy/cli';
+
 const __regPropsReplace = /(interface [^<]*Props) \{/;
 const __regModelsReplace = /(interface [^<]*Models) \{/;
 
-module.exports = {
+export default metadataCustomSnippet({
   file: ({ argv }) => {
     return argv.controllerFileName;
   },
@@ -18,4 +20,4 @@ module.exports = {
     // ok
     return ast;
   },
-};
+});

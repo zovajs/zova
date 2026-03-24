@@ -1,5 +1,8 @@
+import { metadataCustomSnippet } from '@cabloy/cli';
+
 const __regUse = /import \{.*? Use[ ,].*?\} from 'zova';/;
-module.exports = {
+
+export default metadataCustomSnippet({
   file: 'style.ts',
   language: 'plain',
   async transform({ ast, argv }) {
@@ -13,4 +16,4 @@ module.exports = {
     // ok
     return ast;
   },
-};
+});

@@ -1,3 +1,5 @@
+import { metadataCustomSnippet } from '@cabloy/cli';
+
 const __regProps = /interface [^<]*Props<(.*?)> \{/;
 const __regModelsReplace = /interface [^<]*Models([^{]*) \{/;
 const __regModelValue = /import \{[^}]*ModelValue[^}]*\} from 'zova';/;
@@ -5,7 +7,7 @@ const __regModelValueReplace = /import \{ ([^}]*) \} from 'zova';/;
 const __regPropsDefaultReplace = /static \$propsDefault([^{]*) = \{/;
 const __regLocalNameReplace = /protected async __init__/;
 
-module.exports = {
+export default metadataCustomSnippet({
   file: ({ argv }) => {
     return argv.controllerFileName;
   },
@@ -47,4 +49,4 @@ module.exports = {
     // ok
     return ast;
   },
-};
+});

@@ -1,3 +1,7 @@
+import { metadataCustomSnippet } from '@cabloy/cli';
+
+export default metadataCustomSnippet({});
+
 const __regEmits = /interface [^<]*Emits<(.*?)> \{/;
 
 module.exports = {

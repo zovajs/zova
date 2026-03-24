@@ -1,3 +1,7 @@
+import { metadataCustomSnippet } from '@cabloy/cli';
+
+export default metadataCustomSnippet({});
+
 module.exports = {
   file: ({ argv }) => {
     return argv.controllerFileName;
