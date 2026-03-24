@@ -16,9 +16,12 @@ declare module '@cabloy/cli' {
     beanName: string;
     beanNameCapitalize: string;
     moduleResourceName: string;
+    boilerplate: string;
     fileName: string;
   }
 }
+
+let __snippetsPathPrefix: string | undefined;
 
 export class CliCreateBean extends BeanCliBase {
   async execute() {
@@ -57,27 +60,30 @@ export class CliCreateBean extends BeanCliBase {
       argv.fileName = onionSceneMeta.sceneIsolate ? beanName : `${sceneName}.${beanName}`;
     }
     argv.beanNameCapitalize = this.helper.firstCharToUpperCase(beanName);
+    // moduleResourceName
+    argv.moduleResourceName = this.helper.combineModuleNameAndResource(argv.moduleInfo.relativeName, argv.beanName);
     // file
     const beanFile = path.join(beanDir, `${argv.fileName}.ts`);
     if (fs.existsSync(beanFile)) {
       throw new Error(`${sceneName} bean exists: ${beanName}`);
     }
-    // moduleResourceName
-    argv.moduleResourceName = this.helper.combineModuleNameAndResource(argv.moduleInfo.relativeName, argv.beanName);
     // dir
     await this.helper.ensureDir(beanDir);
     // boilerplate name
-    const boilerplates = this._getBoilerplates();
-    const boilerplateName = boilerplates[`${sceneName}:${argv.beanName}`] || boilerplates[sceneName] || 'bean';
+    const snippets = this._getBoilerplatesOrSnippets('snippets');
+    const boilerplates = this._getBoilerplatesOrSnippets('boilerplate', argv.boilerplate);
+    const snippetsName = snippets[`${sceneName}:${argv.beanName}`] || snippets[sceneName];
+    const boilerplateName = boilerplates[`${sceneName}:${argv.beanName}`] || boilerplates[sceneName];
     // render boilerplate
     await this.template.renderBoilerplateAndSnippets({
       targetDir: beanDir,
       setName: __ThisSetName__,
-      snippetsPath: null,
-      boilerplatePath: path.isAbsolute(boilerplateName) ? boilerplateName : `bean/${boilerplateName}/boilerplate`,
+      snippetsPath: snippetsName,
+      boilerplatePath: boilerplateName,
     });
-    // tools.metadata
-    await this.helper.invokeCli([':tools:metadata', moduleName], { cwd: argv.projectPath });
+    if (!argv.nometadata) {
+      await this.helper.invokeCli([':tools:metadata', moduleName], { cwd: argv.projectPath });
+    }
   }
 
   private _getBoilerplates() {
@@ -99,5 +105,48 @@ export class CliCreateBean extends BeanCliBase {
       }
     }
     return result;
+  }
+
+  private _getBoilerplatesOrSnippets(type: 'boilerplate' | 'snippets', custom?: string) {
+    const type2 = custom ? `${type}${toUpperCaseFirstChar(custom)}` : type;
+    const result = {};
+    // scenes
+    const onionScenesMeta = getOnionScenesMeta(this.modulesMeta.modules);
+    for (const sceneName in onionScenesMeta) {
+      const onionSceneMeta = onionScenesMeta[sceneName];
+      const scenePath = onionSceneMeta[type2];
+      if (scenePath) {
+        result[sceneName] = this._combineBoilerplatesOrSnippetsPath(type, onionSceneMeta.module!.root, scenePath);
+      }
+    }
+    // metas
+    const onionMetasMeta = getOnionMetasMeta(this.modulesMeta.modules);
+    for (const sceneName in onionMetasMeta) {
+      const onionMetaMeta = onionMetasMeta[sceneName];
+      const scenePath = onionMetaMeta[type2];
+      if (scenePath) {
+        result[`meta:${sceneName}`] = this._combineBoilerplatesOrSnippetsPath(type, onionMetaMeta.module!.root, scenePath);
+      }
+    }
+    return result;
+  }
+
+  private _combineBoilerplatesOrSnippetsPath(type: 'boilerplate' | 'snippets', moduleRoot: string, scenePath: string) {
+    // boilerplate
+    if (type === 'boilerplate') {
+      return path.join(moduleRoot, 'cli', scenePath);
+    }
+    // snippets
+    if (__snippetsPathPrefix) {
+      return path.join(moduleRoot, __snippetsPathPrefix, scenePath);
+    }
+    let snippetsPath = path.join(moduleRoot, 'dist-cli', scenePath);
+    if (!fse.existsSync(snippetsPath)) {
+      snippetsPath = path.join(moduleRoot, 'cli', scenePath);
+      __snippetsPathPrefix = 'cli';
+    } else {
+      __snippetsPathPrefix = 'dist-cli';
+    }
+    return snippetsPath;
   }
 }
