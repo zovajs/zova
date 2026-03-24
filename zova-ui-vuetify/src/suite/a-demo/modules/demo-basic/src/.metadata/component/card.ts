@@ -6,7 +6,6 @@ import { prepareComponentOptions, useController } from 'zova';
 import type { ControllerCardProps } from '../../component/card/controller.jsx';
 
 import { ControllerCard } from '../../component/card/controller.jsx';
-
 export type TypeControllerCardPublicProps = {
   controllerRef?: (ref: ControllerCard) => void;
 } & ControllerCardProps;
