@@ -6,7 +6,6 @@ import { prepareComponentOptions, useController } from 'zova';
 import type { ControllerRouterViewStackProps } from '../../component/routerViewStack/controller.jsx';
 
 import { ControllerRouterViewStack } from '../../component/routerViewStack/controller.jsx';
-
 export type TypeControllerRouterViewStackPublicProps = {
   controllerRef?: (ref: ControllerRouterViewStack) => void;
 } & ControllerRouterViewStackProps;

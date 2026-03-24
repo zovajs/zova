@@ -6,7 +6,6 @@ import { prepareComponentOptions, useController } from 'zova';
 import type { ControllerFormFieldWrapperProps } from '../../component/formFieldWrapper/controller.jsx';
 
 import { ControllerFormFieldWrapper } from '../../component/formFieldWrapper/controller.jsx';
-
 export type TypeControllerFormFieldWrapperPublicProps<TParentData extends {} = {}> = {
   controllerRef?: (ref: ControllerFormFieldWrapper<TParentData>) => void;
 } & ControllerFormFieldWrapperProps<TParentData>;

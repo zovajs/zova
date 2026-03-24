@@ -6,7 +6,6 @@ import { prepareComponentOptions, useController } from 'zova';
 import type { ControllerFormSubscribeProps } from '../../component/formSubscribe/controller.jsx';
 
 import { ControllerFormSubscribe } from '../../component/formSubscribe/controller.jsx';
-
 export type TypeControllerFormSubscribePublicProps<TFormData extends {} = {}, TSubmitMeta = never> = {
   controllerRef?: (ref: ControllerFormSubscribe<TFormData, TSubmitMeta>) => void;
 } & ControllerFormSubscribeProps<TFormData, TSubmitMeta>;

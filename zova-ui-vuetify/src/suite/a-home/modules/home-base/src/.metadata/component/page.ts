@@ -6,7 +6,6 @@ import { prepareComponentOptions, useController } from 'zova';
 import type { ControllerPageProps } from '../../component/page/controller.jsx';
 
 import { ControllerPage } from '../../component/page/controller.jsx';
-
 export type TypeControllerPagePublicProps = {
   controllerRef?: (ref: ControllerPage) => void;
 } & ControllerPageProps;

@@ -8,7 +8,6 @@ import type { ControllerLayoutTabsProps } from '../../component/layoutTabs/contr
 import { ControllerLayoutTabs } from '../../component/layoutTabs/controller.jsx';
 import { RenderLayoutTabs } from '../../component/layoutTabs/render.jsx';
 import { StyleLayoutTabs } from '../../component/layoutTabs/style.js';
-
 export type TypeControllerLayoutTabsPublicProps = {
   controllerRef?: (ref: ControllerLayoutTabs) => void;
 } & ControllerLayoutTabsProps;

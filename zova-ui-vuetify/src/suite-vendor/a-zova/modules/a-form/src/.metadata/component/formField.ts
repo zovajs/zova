@@ -7,7 +7,6 @@ import type { ControllerFormFieldProps } from '../../component/formField/control
 
 import { ControllerFormField } from '../../component/formField/controller.jsx';
 import { RenderFormField } from '../../component/formField/render.jsx';
-
 export type TypeControllerFormFieldPublicProps<TParentData extends {} = {}> = {
   controllerRef?: (ref: ControllerFormField<TParentData>) => void;
 } & ControllerFormFieldProps<TParentData>;

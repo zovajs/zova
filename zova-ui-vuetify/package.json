@@ -64,6 +64,7 @@
     "vuetify": "^4.0.1",
     "vue-router": "^4.4.5",
     "zova": "workspace:^",
+    "zova-module-a-b": "workspace:^",
     "zova-module-demo-basic": "workspace:^",
     "zova-module-home-api": "workspace:^",
     "zova-module-a-fetch": "workspace:^",
