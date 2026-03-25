@@ -102,7 +102,8 @@ export async function generateZovaViteMeta(configMeta: ZovaConfigMeta, configOpt
           return false;
         }
       },
-      minify: process.env.BUILD_MINIFY === 'false' ? false : 'oxc',
+      // keep_classnames not take effect for 'oxc'
+      minify: process.env.BUILD_MINIFY === 'false' ? false : 'terser',
       terserOptions: {
         keep_classnames: true,
       },
