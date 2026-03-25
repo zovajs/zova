@@ -129,6 +129,7 @@ export class CliBinBuildModule extends BeanCliBase {
         },
         rolldownOptions: {
           external: id => {
+            if (id.includes('/assets/')) return true;
             return !id.startsWith('.') && !path.isAbsolute(id);
           },
         },
