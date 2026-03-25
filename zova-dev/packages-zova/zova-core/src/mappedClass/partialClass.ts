@@ -1,6 +1,6 @@
-import type { Constructable } from '../decorator/type/constructable.js';
+import type { Constructable } from '../decorator/type/constructable.ts';
 
-import { copyMetadataOfClasses, copyPropertiesOfClasses } from './utils.js';
+import { copyMetadataOfClasses, copyPropertiesOfClasses } from './utils.ts';
 
 export function PartialClass<T>(classRef: Constructable<T>): Constructable<Partial<T>>;
 export function PartialClass<T, K extends keyof T>(

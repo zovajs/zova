@@ -10,8 +10,8 @@ import type {
   TypeEventOff,
 } from '../../types/interface/event.js';
 
-import { BeanSimple } from '../../bean/beanSimple.js';
-import { cast } from '../../types/utils/cast.js';
+import { BeanSimple } from '../../bean/beanSimple.ts';
+import { cast } from '../../types/utils/cast.ts';
 
 const __adapter = (_context, chain) => {
   const eventHandlerWrapper = chain;

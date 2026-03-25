@@ -1,17 +1,17 @@
-import type { TypeModuleResourceConfig } from '../../types/interface/module.js';
-import type { PluginZovaOptions } from '../../types/interface/pluginZova.js';
-import type { ZovaConfigEnv } from '../../types/utils/env.js';
-import type { ZovaConfig } from './config.js';
-import type { ZovaConstant } from './constant.js';
+import type { TypeModuleResourceConfig } from '../../types/interface/module.ts';
+import type { PluginZovaOptions } from '../../types/interface/pluginZova.ts';
+import type { ZovaConfigEnv } from '../../types/utils/env.ts';
+import type { ZovaConfig } from './config.ts';
+import type { ZovaConstant } from './constant.ts';
 
-import { BeanContainer } from '../../bean/beanContainer.js';
-import { cast } from '../../types/utils/cast.js';
-import { zodEnhanceSys } from '../../utils/zod-enhance.js';
-import { configDefault } from './config.js';
-import { constantDefault } from './constant.js';
-import { SysMeta } from './meta.js';
-import { setSys } from './sysFake.js';
-import { deepExtend, SysUtil } from './util.js';
+import { BeanContainer } from '../../bean/beanContainer.ts';
+import { cast } from '../../types/utils/cast.ts';
+import { zodEnhanceSys } from '../../utils/zod-enhance.ts';
+import { configDefault } from './config.ts';
+import { constantDefault } from './constant.ts';
+import { SysMeta } from './meta.ts';
+import { setSys } from './sysFake.ts';
+import { deepExtend, SysUtil } from './util.ts';
 
 const SymbolSysInitializePromise = Symbol('SymbolSysInitializePromise');
 const SymbolSysClose = Symbol('SymbolSysClose');

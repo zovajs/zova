@@ -1,6 +1,6 @@
-import type { Constructable } from '../decorator/type/constructable.js';
+import type { Constructable } from '../decorator/type/constructable.ts';
 
-import { copyMetadataOfClasses, copyPropertiesOfClasses } from './utils.js';
+import { copyMetadataOfClasses, copyPropertiesOfClasses } from './utils.ts';
 
 type UnionToIntersection<U> = (U extends any ? (k: U) => void : never) extends (k: infer I) => void ? I : never;
 

@@ -1,3 +1,3 @@
-import { BeanControllerLike } from './beanControllerLike.js';
+import { BeanControllerLike } from './beanControllerLike.ts';
 
 export class BeanStyleBase extends BeanControllerLike {}

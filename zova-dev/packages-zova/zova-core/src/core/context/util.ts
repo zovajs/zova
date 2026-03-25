@@ -1,7 +1,7 @@
 import { setCurrentInstance } from '@cabloy/vue-runtime-core';
 import { pauseTracking, resetTracking } from '@vue/reactivity';
 
-import { BeanSimple } from '../../bean/beanSimple.js';
+import { BeanSimple } from '../../bean/beanSimple.ts';
 
 export class CtxUtil extends BeanSimple {
   instanceScope(fn, tracking?: boolean) {

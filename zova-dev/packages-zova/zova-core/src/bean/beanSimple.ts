@@ -1,6 +1,6 @@
-import type { ZovaApplication } from '../core/app/index.js';
-import type { ZovaContext } from '../core/context/index.js';
-import type { ZovaSys } from '../core/sys/sys.js';
+import type { ZovaApplication } from '../core/app/index.ts';
+import type { ZovaContext } from '../core/context/index.ts';
+import type { ZovaSys } from '../core/sys/sys.ts';
 
 export class BeanSimple {
   protected sys: ZovaSys;

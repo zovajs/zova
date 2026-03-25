@@ -1,5 +1,5 @@
-import { appMetadata } from '../../core/sys/metadata.js';
-import { SymbolDecoratorVirtual } from '../../core/sys/resource.js';
+import { appMetadata } from '../../core/sys/metadata.ts';
+import { SymbolDecoratorVirtual } from '../../core/sys/resource.ts';
 
 export function Virtual(): ClassDecorator {
   return function (target) {

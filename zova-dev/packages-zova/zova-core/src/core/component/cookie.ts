@@ -1,8 +1,8 @@
-import type { CookieOptions } from '../../types/index.js';
+import type { CookieOptions } from '../../types/index.ts';
 
 // from: quasar/ui/src/plugins/Cookies.js
-import { BeanSimple } from '../../bean/beanSimple.js';
-import { cast } from '../../types/index.js';
+import { BeanSimple } from '../../bean/beanSimple.ts';
+import { cast } from '../../types/index.ts';
 
 export class AppCookie extends BeanSimple {
   getItem(key: string): string | undefined;

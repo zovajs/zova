@@ -1,5 +1,5 @@
-import { appMetadata } from '../../core/sys/metadata.js';
-import { SymbolDecoratorProxyDisable } from '../../core/sys/resource.js';
+import { appMetadata } from '../../core/sys/metadata.ts';
+import { SymbolDecoratorProxyDisable } from '../../core/sys/resource.ts';
 
 export function ProxyDisable(): ClassDecorator {
   return function (target) {

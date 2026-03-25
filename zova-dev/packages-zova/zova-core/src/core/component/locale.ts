@@ -3,10 +3,10 @@ import type { Ref } from 'vue';
 import * as localeutil from '@cabloy/localeutil';
 import { ref } from 'vue';
 
-import type { ILocaleRecord, IModuleLocale, IModuleLocaleText } from '../../bean/resource/locale/type.js';
+import type { ILocaleRecord, IModuleLocale, IModuleLocaleText } from '../../bean/resource/locale/type.ts';
 
-import { BeanSimple } from '../../bean/beanSimple.js';
-import { LocaleModuleNameSeparator } from '../../bean/resource/locale/type.js';
+import { BeanSimple } from '../../bean/beanSimple.ts';
+import { LocaleModuleNameSeparator } from '../../bean/resource/locale/type.ts';
 
 const SymbolLocaleCurrent = Symbol('SymbolLocaleCurrent');
 const SymbolTzCurrent = Symbol('SymbolTzCurrent');

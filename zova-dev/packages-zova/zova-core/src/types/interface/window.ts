@@ -1,4 +1,4 @@
-import type { ZovaSys } from '../../core/sys/sys.js';
+import type { ZovaSys } from '../../core/sys/sys.ts';
 
 declare global {
   interface Window {

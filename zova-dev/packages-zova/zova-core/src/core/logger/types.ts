@@ -1,6 +1,6 @@
 import type { LoggerLevel, LoggerOptions } from '@cabloy/logger';
 
-import type { PowerPartial } from '../../types/utils/powerPartial.js';
+import type { PowerPartial } from '../../types/utils/powerPartial.ts';
 
 export interface ILoggerOptionsClientInfo {
   clientName: keyof ILoggerClientRecord;

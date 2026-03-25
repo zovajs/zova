@@ -1,6 +1,6 @@
-import type { IControllerData } from './type.js';
+import type { IControllerData } from './type.ts';
 
-import { BeanBase } from './beanBase.js';
+import { BeanBase } from './beanBase.ts';
 
 export class BeanControllerPageBase extends BeanBase {
   public $params: unknown;

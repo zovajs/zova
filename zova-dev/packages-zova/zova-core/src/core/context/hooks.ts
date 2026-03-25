@@ -1,4 +1,4 @@
-import { BeanSimple } from '../../bean/beanSimple.js';
+import { BeanSimple } from '../../bean/beanSimple.ts';
 
 export type ZovaHookType = 'created' | 'mounted';
 

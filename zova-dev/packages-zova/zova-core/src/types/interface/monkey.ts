@@ -1,10 +1,10 @@
 import type { IModule } from '@cabloy/module-info';
 
-import type { BeanBase } from '../../bean/beanBase.js';
-import type { BeanContainer } from '../../bean/beanContainer.js';
-import type { IControllerData } from '../../bean/type.js';
-import type { ZovaApplication } from '../../core/app/application.js';
-import type { ZovaContext } from '../../core/context/context.js';
+import type { BeanBase } from '../../bean/beanBase.ts';
+import type { BeanContainer } from '../../bean/beanContainer.ts';
+import type { IControllerData } from '../../bean/type.ts';
+import type { ZovaApplication } from '../../core/app/application.ts';
+import type { ZovaContext } from '../../core/context/context.ts';
 
 export type TypeMonkeyName = keyof IMonkeyModuleSys | keyof IMonkeySys | keyof IMonkeyApp | keyof IMonkeyController;
 

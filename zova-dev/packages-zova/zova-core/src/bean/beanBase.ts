@@ -16,17 +16,17 @@ import type {
 
 import { watch, watchEffect, watchPostEffect, watchSyncEffect } from 'vue';
 
-import type { AppEvent } from '../core/component/event.js';
-import type { ILoggerChildRecord, ILoggerClientRecord } from '../core/logger/types.js';
-import type { FunctionAsync } from '../decorator/type/functionable.js';
-import type { MapSources, MaybeUndefined } from '../vueExtra/watch.js';
-import type { IErrorHandlerEventResult, IModuleLocaleText, IZovaComponentRecord } from './resource/index.js';
+import type { AppEvent } from '../core/component/event.ts';
+import type { ILoggerChildRecord, ILoggerClientRecord } from '../core/logger/types.ts';
+import type { FunctionAsync } from '../decorator/type/functionable.ts';
+import type { MapSources, MaybeUndefined } from '../vueExtra/watch.ts';
+import type { IErrorHandlerEventResult, IModuleLocaleText, IZovaComponentRecord } from './resource/index.ts';
 
-import { cast } from '../types/utils/cast.js';
-import { useComputed } from '../vueExtra/computed.js';
-import { BeanBaseSimple, SymbolModuleBelong } from './beanBaseSimple.js';
-import { SymbolErrorInstanceInfo } from './resource/index.js';
-import { getVueDecoratorValue } from './vueDecorators/utils.js';
+import { cast } from '../types/utils/cast.ts';
+import { useComputed } from '../vueExtra/computed.ts';
+import { BeanBaseSimple, SymbolModuleBelong } from './beanBaseSimple.ts';
+import { SymbolErrorInstanceInfo } from './resource/index.ts';
+import { getVueDecoratorValue } from './vueDecorators/utils.ts';
 
 const SymbolText = Symbol('SymbolText');
 const SymbolLogger = Symbol('SymbolLogger');

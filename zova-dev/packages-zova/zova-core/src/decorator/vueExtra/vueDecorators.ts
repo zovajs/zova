@@ -1,6 +1,6 @@
 import type { WatchEffectOptions, WatchOptions } from 'vue';
 
-import { createVueDecorator } from './createVueDecorator.js';
+import { createVueDecorator } from './createVueDecorator.ts';
 
 export function Computed(): MethodDecorator {
   return createVueDecorator('computed');

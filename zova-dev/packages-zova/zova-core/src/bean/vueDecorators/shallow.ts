@@ -1,8 +1,8 @@
 import { shallowReactive } from 'vue';
 
-import type { IDecoratorVueElement } from '../../decorator/vueExtra/types.js';
+import type { IDecoratorVueElement } from '../../decorator/vueExtra/types.ts';
 
-import { getVueDecoratorValue, setVueDecoratorValue } from './utils.js';
+import { getVueDecoratorValue, setVueDecoratorValue } from './utils.ts';
 
 export function shallow(beanInstance, _beanFullName: string, prop: string, _vueElement: IDecoratorVueElement, index: number) {
   const initialValue = beanInstance[prop];

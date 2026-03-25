@@ -1,14 +1,14 @@
 import type { ZovaConfigMeta } from '@cabloy/module-info';
 
-import type { ILayoutRecord, TypeComponentAppRecord, TypeComponentLayoutRecord } from '../../bean/resource/component/type.js';
-import type { ILocaleRecord } from '../../bean/resource/locale/type.js';
-import type { ZovaConfigRoutes } from '../../bean/resource/page/type.js';
-import type { IBeanScopeConfig } from '../../bean/type.js';
-import type { ZovaConfigEnv } from '../../types/utils/env.js';
-import type { PowerPartial } from '../../types/utils/powerPartial.js';
-import type { ConfigLogger } from '../logger/types.js';
+import type { ILayoutRecord, TypeComponentAppRecord, TypeComponentLayoutRecord } from '../../bean/resource/component/type.ts';
+import type { ILocaleRecord } from '../../bean/resource/locale/type.ts';
+import type { ZovaConfigRoutes } from '../../bean/resource/page/type.ts';
+import type { IBeanScopeConfig } from '../../bean/type.ts';
+import type { ZovaConfigEnv } from '../../types/utils/env.ts';
+import type { PowerPartial } from '../../types/utils/powerPartial.ts';
+import type { ConfigLogger } from '../logger/types.ts';
 
-import { cast } from '../../types/utils/cast.js';
+import { cast } from '../../types/utils/cast.ts';
 
 export function configDefault(env: ZovaConfigEnv): PowerPartial<ZovaConfig> {
   const config: PowerPartial<ZovaConfig> = {

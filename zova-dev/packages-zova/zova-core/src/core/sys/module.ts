@@ -4,13 +4,13 @@ import * as ModuleInfo from '@cabloy/module-info';
 import { forEach, forEachSync } from '@cabloy/utils';
 import { shallowReactive } from 'vue';
 
-import type { TypeBeanScopeRecordKeys } from '../../bean/type.js';
-import type { IModuleMainSys, IModuleResource, IMonkeyModuleSys, IMonkeySys, PluginZovaModulesMeta, TypeMonkeyName } from '../../types/index.js';
+import type { TypeBeanScopeRecordKeys } from '../../bean/type.ts';
+import type { IModuleMainSys, IModuleResource, IMonkeyModuleSys, IMonkeySys, PluginZovaModulesMeta, TypeMonkeyName } from '../../types/index.ts';
 
-import { BeanSimple } from '../../bean/beanSimple.js';
-import { SymbolInstalled } from '../../types/index.js';
-import { StateLock } from '../../utils/stateLock.js';
-import { deepExtend } from '../sys/util.js';
+import { BeanSimple } from '../../bean/beanSimple.ts';
+import { SymbolInstalled } from '../../types/index.ts';
+import { StateLock } from '../../utils/stateLock.ts';
+import { deepExtend } from '../sys/util.ts';
 
 export class SysModule extends BeanSimple {
   public modulesMeta: PluginZovaModulesMeta;

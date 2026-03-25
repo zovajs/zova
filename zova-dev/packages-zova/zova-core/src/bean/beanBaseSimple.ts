@@ -1,8 +1,8 @@
-import type { IDecoratorBeanOptionsBase } from '../decorator/interface/beanOptions.js';
+import type { IDecoratorBeanOptionsBase } from '../decorator/interface/beanOptions.ts';
 
-import { appResource } from '../core/sys/resource.js';
-import { StateLock } from '../utils/stateLock.js';
-import { BeanSimple } from './beanSimple.js';
+import { appResource } from '../core/sys/resource.ts';
+import { StateLock } from '../utils/stateLock.ts';
+import { BeanSimple } from './beanSimple.ts';
 
 export const SymbolBeanFullName = Symbol('SymbolBeanFullName');
 export const SymbolBeanInstanceKey = Symbol('SymbolBeanInstanceKey');

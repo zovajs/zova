@@ -2,10 +2,10 @@ import type { Component } from 'vue';
 
 import { markRaw } from 'vue';
 
-import type { IZovaComponentRecord } from '../../bean/resource/component/type.js';
+import type { IZovaComponentRecord } from '../../bean/resource/component/type.ts';
 
-import { BeanSimple } from '../../bean/beanSimple.js';
-import { createZovaComponentAsync } from '../../components/createZovaComponentAsync.js';
+import { BeanSimple } from '../../bean/beanSimple.ts';
+import { createZovaComponentAsync } from '../../components/createZovaComponentAsync.ts';
 
 const SymbolZovaComponents = Symbol('SymbolZovaComponents');
 

@@ -1,8 +1,8 @@
-import type { IBeanSceneRecord } from '../interface/beanOptions.js';
-import type { Constructable } from '../type/constructable.js';
-import type { ContainerScope } from '../type/containerScope.js';
+import type { IBeanSceneRecord } from '../interface/beanOptions.ts';
+import type { Constructable } from '../type/constructable.ts';
+import type { ContainerScope } from '../type/containerScope.ts';
 
-import { appResource } from '../../core/sys/resource.js';
+import { appResource } from '../../core/sys/resource.ts';
 
 export function createBeanDecorator<T>(
   scene: keyof IBeanSceneRecord,

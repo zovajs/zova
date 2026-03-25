@@ -3,8 +3,8 @@ import { isClass, isNilOrEmptyString } from '@cabloy/utils';
 import { inject as composableInject, provide as composableProvide, markRaw, reactive, shallowReactive } from 'vue';
 import { useComputed } from 'zova';
 
-import type { ZovaApplication, ZovaContext, ZovaSys } from '../core/index.js';
-import type { MetadataKey } from '../core/sys/metadata.js';
+import type { ZovaApplication, ZovaContext, ZovaSys } from '../core/index.ts';
+import type { MetadataKey } from '../core/sys/metadata.ts';
 import type {
   Constructable,
   ContainerType,
@@ -14,18 +14,18 @@ import type {
   IDecoratorUseOptionsBase,
   IDecoratorVueElement,
 } from '../decorator/index.js';
-import type { IInjectRecord } from '../types/interface/inject.js';
-import type { IBeanRecord, IBeanScopeRecord, IControllerData, TypeBeanScopeRecordKeys } from './type.js';
+import type { IInjectRecord } from '../types/interface/inject.ts';
+import type { IBeanRecord, IBeanScopeRecord, IControllerData, TypeBeanScopeRecordKeys } from './type.ts';
 
-import { appMetadata } from '../core/sys/metadata.js';
-import { appResource, SymbolDecoratorProxyDisable } from '../core/sys/resource.js';
-import { __prepareInjectSelectorInfo, SymbolDecoratorVueElements } from '../decorator/index.js';
-import { cast } from '../types/utils/cast.js';
-import { BeanAopBase } from './beanAopBase.js';
-import { BeanBase } from './beanBase.js';
-import { SymbolBeanFullName, SymbolBeanInstanceKey, SymbolInited } from './beanBaseSimple.js';
-import { BeanSimple } from './beanSimple.js';
-import { vueDecorators } from './vueDecorators/index.js';
+import { appMetadata } from '../core/sys/metadata.ts';
+import { appResource, SymbolDecoratorProxyDisable } from '../core/sys/resource.ts';
+import { __prepareInjectSelectorInfo, SymbolDecoratorVueElements } from '../decorator/index.ts';
+import { cast } from '../types/utils/cast.ts';
+import { BeanAopBase } from './beanAopBase.ts';
+import { BeanBase } from './beanBase.ts';
+import { SymbolBeanFullName, SymbolBeanInstanceKey, SymbolInited } from './beanBaseSimple.ts';
+import { BeanSimple } from './beanSimple.ts';
+import { vueDecorators } from './vueDecorators/index.ts';
 
 const SymbolBeanContainerParent = Symbol('SymbolBeanContainerParent');
 const SymbolProxyMagic = Symbol('SymbolProxyMagic');

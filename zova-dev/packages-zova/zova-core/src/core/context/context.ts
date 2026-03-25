@@ -2,13 +2,13 @@ import type { ComponentInternalInstance } from 'vue';
 
 import { markRaw, nextTick } from 'vue';
 
-import type { ZovaApplication } from '../app/application.js';
+import type { ZovaApplication } from '../app/application.ts';
 
-import { BeanContainer } from '../../bean/beanContainer.js';
-import { cast } from '../../types/utils/cast.js';
-import { sys } from '../sys/sys.js';
-import { CtxMeta } from './meta.js';
-import { CtxUtil } from './util.js';
+import { BeanContainer } from '../../bean/beanContainer.ts';
+import { cast } from '../../types/utils/cast.ts';
+import { sys } from '../sys/sys.ts';
+import { CtxMeta } from './meta.ts';
+import { CtxUtil } from './util.ts';
 
 export class ZovaContext {
   instance: ComponentInternalInstance;

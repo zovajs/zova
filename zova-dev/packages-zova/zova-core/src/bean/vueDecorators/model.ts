@@ -1,12 +1,12 @@
 import { toLowerCaseFirstChar } from '@cabloy/word-utils';
 
-import type { IDecoratorVueElement, IDecoratorVueModelOptions } from '../../decorator/vueExtra/types.js';
-import type { BeanContainer } from '../beanContainer.js';
-import type { DefineModelOptions } from '../type.js';
+import type { IDecoratorVueElement, IDecoratorVueModelOptions } from '../../decorator/vueExtra/types.ts';
+import type { BeanContainer } from '../beanContainer.ts';
+import type { DefineModelOptions } from '../type.ts';
 
-import { cast } from '../../types/utils/cast.js';
-import { useModel } from '../../vueExtra/useModel.js';
-import { getVueDecoratorValue } from './utils.js';
+import { cast } from '../../types/utils/cast.ts';
+import { useModel } from '../../vueExtra/useModel.ts';
+import { getVueDecoratorValue } from './utils.ts';
 
 export function model(
   this: BeanContainer,

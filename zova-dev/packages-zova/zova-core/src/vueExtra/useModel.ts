@@ -5,8 +5,8 @@ import { customRef } from '@vue/reactivity';
 import { camelize, EMPTY_OBJ, hasChanged, hyphenate } from '@vue/shared';
 import { getCurrentInstance, watchSyncEffect } from 'vue';
 
-import type { BeanBase } from '../bean/beanBase.js';
-import type { DefineModelOptions, ModelRef } from '../bean/type.js';
+import type { BeanBase } from '../bean/beanBase.ts';
+import type { DefineModelOptions, ModelRef } from '../bean/type.ts';
 
 export function useModel<M extends PropertyKey, T extends Record<string, any>, K extends keyof T, G = T[K], S = T[K]>(
   this: BeanBase,

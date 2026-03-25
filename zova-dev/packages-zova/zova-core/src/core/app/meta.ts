@@ -1,14 +1,14 @@
-import type { IModuleLocaleText } from '../../bean/resource/locale/type.js';
-import type { Constructable } from '../../decorator/type/constructable.js';
-import type { IMonkeyApp, IMonkeyController, IMonkeyModule } from '../../types/interface/monkey.js';
+import type { IModuleLocaleText } from '../../bean/resource/locale/type.ts';
+import type { Constructable } from '../../decorator/type/constructable.ts';
+import type { IMonkeyApp, IMonkeyController, IMonkeyModule } from '../../types/interface/monkey.ts';
 
-import { BeanSimple } from '../../bean/beanSimple.js';
-import { AppComponent } from '../component/component.js';
-import { AppCookie } from '../component/cookie.js';
-import { AppError } from '../component/error.js';
-import { AppEvent } from '../component/event.js';
-import { AppLocale } from '../component/locale.js';
-import { AppModule } from '../component/module.js';
+import { BeanSimple } from '../../bean/beanSimple.ts';
+import { AppComponent } from '../component/component.ts';
+import { AppCookie } from '../component/cookie.ts';
+import { AppError } from '../component/error.ts';
+import { AppEvent } from '../component/event.ts';
+import { AppLocale } from '../component/locale.ts';
+import { AppModule } from '../component/module.ts';
 
 export class AppMeta extends BeanSimple {
   module: AppModule;

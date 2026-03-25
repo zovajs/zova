@@ -1,4 +1,4 @@
-import type { NextGeneral } from '../../decorator/type/functionable.js';
+import type { NextGeneral } from '../../decorator/type/functionable.ts';
 
 export type TypeEventOff = () => void;
 

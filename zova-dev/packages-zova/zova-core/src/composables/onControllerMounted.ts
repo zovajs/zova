@@ -1,4 +1,4 @@
-import { useContext } from './useContext.js';
+import { useContext } from './useContext.ts';
 
 export function onControllerMounted(fn: any) {
   const ctx = useContext();

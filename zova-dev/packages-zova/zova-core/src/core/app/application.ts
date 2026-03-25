@@ -2,16 +2,16 @@ import type { App } from 'vue';
 
 import { markRaw } from 'vue';
 
-import type { BeanContainer } from '../../bean/beanContainer.js';
-import type { TypeErrorsInternal } from '../../bean/resource/error/errorInternal.js';
-import type { PluginZovaOptions } from '../../types/interface/pluginZova.js';
-import type { ZovaContext } from '../context/context.js';
+import type { BeanContainer } from '../../bean/beanContainer.ts';
+import type { TypeErrorsInternal } from '../../bean/resource/error/errorInternal.ts';
+import type { PluginZovaOptions } from '../../types/interface/pluginZova.ts';
+import type { ZovaContext } from '../context/context.ts';
 
-import { cast } from '../../types/utils/cast.js';
-import { zodEnhance } from '../../utils/zod-enhance.js';
-import { sys } from '../sys/sys.js';
-import { AppMeta } from './meta.js';
-import { AppUtil } from './util.js';
+import { cast } from '../../types/utils/cast.ts';
+import { zodEnhance } from '../../utils/zod-enhance.ts';
+import { sys } from '../sys/sys.ts';
+import { AppMeta } from './meta.ts';
+import { AppUtil } from './util.ts';
 
 const SymbolAppClose = Symbol('SymbolAppClose');
 

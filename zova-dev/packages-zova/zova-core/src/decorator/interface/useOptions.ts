@@ -1,8 +1,8 @@
-import type { IBeanRecord, IBeanScopeRecord } from '../../bean/type.js';
-import type { MetadataKey } from '../../core/sys/metadata.js';
-import type { Constructable } from '../type/constructable.js';
-import type { Functionable } from '../type/functionable.js';
-import type { InjectionScope } from '../type/injectionScope.js';
+import type { IBeanRecord, IBeanScopeRecord } from '../../bean/type.ts';
+import type { MetadataKey } from '../../core/sys/metadata.ts';
+import type { Constructable } from '../type/constructable.ts';
+import type { Functionable } from '../type/functionable.ts';
+import type { InjectionScope } from '../type/injectionScope.ts';
 
 export interface IDecoratorUseOptionsBase<T = unknown> {
   prop: MetadataKey;

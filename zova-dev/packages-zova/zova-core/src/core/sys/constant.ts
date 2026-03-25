@@ -1,4 +1,4 @@
-import type { PowerPartial } from '../../index.js';
+import type { PowerPartial } from '../../index.ts';
 
 export const constantDefault = {
   modules: {},

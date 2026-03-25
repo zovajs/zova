@@ -1,4 +1,4 @@
-import type { Constructable } from '../../decorator/type/constructable.js';
+import type { Constructable } from '../../decorator/type/constructable.ts';
 
 export interface Type<T = any> extends Function {
   new (...args: any[]): T;

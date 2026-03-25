@@ -1,8 +1,8 @@
-import type { MetadataKey } from '../../core/sys/metadata.js';
-import type { IDecoratorVueElement, TypeDecoratorVue } from './types.js';
+import type { MetadataKey } from '../../core/sys/metadata.ts';
+import type { IDecoratorVueElement, TypeDecoratorVue } from './types.ts';
 
-import { appMetadata } from '../../core/sys/metadata.js';
-import { SymbolDecoratorVueElements } from './types.js';
+import { appMetadata } from '../../core/sys/metadata.ts';
+import { SymbolDecoratorVueElements } from './types.ts';
 
 export function createVueDecorator<OPTIONS>(type: TypeDecoratorVue, options?: OPTIONS): PropertyDecorator & MethodDecorator {
   return function (target: object, prop: MetadataKey, descriptor?: PropertyDescriptor) {

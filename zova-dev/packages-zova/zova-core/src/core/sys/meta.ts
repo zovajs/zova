@@ -1,16 +1,16 @@
 import type { RouteRecordRaw } from '@cabloy/vue-router';
 
-import type { Constructable } from '../../decorator/type/constructable.js';
-import type { IMonkeyModuleSys, IMonkeySys } from '../../types/interface/monkey.js';
+import type { Constructable } from '../../decorator/type/constructable.ts';
+import type { IMonkeyModuleSys, IMonkeySys } from '../../types/interface/monkey.ts';
 
-import { BeanSimple } from '../../bean/beanSimple.js';
-import { AppCookie } from '../component/cookie.js';
-import { AppEvent } from '../component/event.js';
-import { SysLogger } from '../logger/logger.js';
-import { SysComponent } from './component.js';
-import { SysError } from './error.js';
-import { SysLocale } from './locale.js';
-import { SysModule } from './module.js';
+import { BeanSimple } from '../../bean/beanSimple.ts';
+import { AppCookie } from '../component/cookie.ts';
+import { AppEvent } from '../component/event.ts';
+import { SysLogger } from '../logger/logger.ts';
+import { SysComponent } from './component.ts';
+import { SysError } from './error.ts';
+import { SysLocale } from './locale.ts';
+import { SysModule } from './module.ts';
 
 export class SysMeta extends BeanSimple {
   module: SysModule;

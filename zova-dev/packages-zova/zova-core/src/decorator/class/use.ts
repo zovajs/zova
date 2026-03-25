@@ -1,7 +1,7 @@
 import { evaluateExpressions, isNilOrEmptyString } from '@cabloy/utils';
 
-import type { IBeanRecord } from '../../bean/type.js';
-import type { MetadataKey } from '../../core/sys/metadata.js';
+import type { IBeanRecord } from '../../bean/type.ts';
+import type { MetadataKey } from '../../core/sys/metadata.ts';
 import type {
   Constructable,
   IDecoratorUseOptions,
@@ -11,9 +11,9 @@ import type {
   TypeDecoratorUseOptionsInitArg,
 } from '../index.js';
 
-import { appMetadata } from '../../core/sys/metadata.js';
-import { appResource } from '../../core/sys/resource.js';
-import { useRef } from '../../vueExtra/ref.js';
+import { appMetadata } from '../../core/sys/metadata.ts';
+import { appResource } from '../../core/sys/resource.ts';
+import { useRef } from '../../vueExtra/ref.ts';
 
 export function Use(options?: IDecoratorUseOptions): PropertyDecorator & MethodDecorator;
 export function Use<T extends keyof IBeanRecord>(beanFullName?: T): PropertyDecorator & MethodDecorator;

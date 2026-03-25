@@ -1,7 +1,7 @@
 import { isClass } from '@cabloy/utils';
 import { parseLastWord, skipLastWord, skipPrefix, splitWords } from '@cabloy/word-utils';
 
-import type { IBeanRecord } from '../../bean/type.js';
+import type { IBeanRecord } from '../../bean/type.ts';
 import type {
   Constructable,
   Functionable,
@@ -10,14 +10,14 @@ import type {
   IDecoratorBeanOptionsBase,
   IDecoratorUseOptionsBase,
 } from '../../decorator/index.js';
-import type { MetadataKey } from './metadata.js';
+import type { MetadataKey } from './metadata.ts';
 
-import { registerMappedClassMetadataKey } from '../../mappedClass/utils.js';
-import { cast } from '../../types/utils/cast.js';
-import { uuid } from '../../utils/uuid.js';
-import { appMetadata } from './metadata.js';
-import { getSys } from './sysFake.js';
-import { deepExtend } from './util.js';
+import { registerMappedClassMetadataKey } from '../../mappedClass/utils.ts';
+import { cast } from '../../types/utils/cast.ts';
+import { uuid } from '../../utils/uuid.ts';
+import { appMetadata } from './metadata.ts';
+import { getSys } from './sysFake.ts';
+import { deepExtend } from './util.ts';
 
 export const DecoratorBeanFullName = Symbol('Decorator#BeanFullName');
 export const SymbolDecoratorBeanInfo = Symbol('SymbolDecoratorBeanInfo');

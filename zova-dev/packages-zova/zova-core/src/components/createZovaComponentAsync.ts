@@ -1,6 +1,6 @@
 import { defineAsyncComponent } from 'vue';
 
-import { useSys } from '../composables/useSys.js';
+import { useSys } from '../composables/useSys.ts';
 
 export function createZovaComponentAsync(module: string, name?: string) {
   return defineAsyncComponent(() => {

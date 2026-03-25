@@ -1,11 +1,11 @@
 import { getCurrentInstance, onBeforeUnmount, onServerPrefetch, onUnmounted, queuePostFlushCb, useSlots } from 'vue';
 
-import type { IBeanRecord, IControllerData } from '../bean/type.js';
-import type { Constructable } from '../decorator/index.js';
+import type { IBeanRecord, IControllerData } from '../bean/type.ts';
+import type { Constructable } from '../decorator/index.ts';
 
-import { BeanControllerIdentifier, BeanRenderIdentifier, BeanStyleIdentifier, SymbolControllerRefDisable } from '../bean/type.js';
-import { ZovaContext } from '../core/context/index.js';
-import { sys } from '../core/sys/sys.js';
+import { BeanControllerIdentifier, BeanRenderIdentifier, BeanStyleIdentifier, SymbolControllerRefDisable } from '../bean/type.ts';
+import { ZovaContext } from '../core/context/index.ts';
+import { sys } from '../core/sys/sys.ts';
 
 export function useControllerPage<M, R, S>(
   controllerBeanFullName: Constructable<M>,

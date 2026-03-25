@@ -1,5 +1,5 @@
-import { appMetadata } from '../../core/sys/metadata.js';
-import { SymbolDecoratorPreload } from '../../core/sys/resource.js';
+import { appMetadata } from '../../core/sys/metadata.ts';
+import { SymbolDecoratorPreload } from '../../core/sys/resource.ts';
 
 export function Preload(): ClassDecorator {
   return function (target) {

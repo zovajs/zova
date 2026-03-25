@@ -1,4 +1,4 @@
-import type { TypeScopesErrorCodes } from '../../type.js';
+import type { TypeScopesErrorCodes } from '../../type.ts';
 
 declare global {
   export interface Error {

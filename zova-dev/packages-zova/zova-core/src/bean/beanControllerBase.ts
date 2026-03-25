@@ -1,10 +1,10 @@
 import { shallowReactive } from 'vue';
 
-import type { IControllerData, ISlot, ISlotsDefault } from './type.js';
+import type { IControllerData, ISlot, ISlotsDefault } from './type.ts';
 
-import { cast } from '../types/utils/cast.js';
-import { useModel } from '../vueExtra/useModel.js';
-import { BeanBase } from './beanBase.js';
+import { cast } from '../types/utils/cast.ts';
+import { useModel } from '../vueExtra/useModel.ts';
+import { BeanBase } from './beanBase.ts';
 
 export class BeanControllerBase extends BeanBase {
   public $props: unknown;

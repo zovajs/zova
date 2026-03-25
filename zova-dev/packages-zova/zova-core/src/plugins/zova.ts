@@ -1,12 +1,12 @@
 import type { App } from 'vue';
 
-import type { ZovaContext } from '../core/index.js';
-import type { PluginZovaOptions } from '../types/interface/pluginZova.js';
+import type { ZovaContext } from '../core/index.ts';
+import type { PluginZovaOptions } from '../types/interface/pluginZova.ts';
 
-import { SymbolBeanContainerInstances } from '../bean/beanContainer.js';
-import { BeanControllerIdentifier, BeanRenderIdentifier, BeanStyleIdentifier } from '../bean/type.js';
-import { ZovaApplication } from '../core/index.js';
-import { cast } from '../types/index.js';
+import { SymbolBeanContainerInstances } from '../bean/beanContainer.ts';
+import { BeanControllerIdentifier, BeanRenderIdentifier, BeanStyleIdentifier } from '../bean/type.ts';
+import { ZovaApplication } from '../core/index.ts';
+import { cast } from '../types/index.ts';
 
 export const PluginZova = {
   async install(vue: App, ctxRoot: ZovaContext, { modulesMeta, locales, config, env, SysMonkey, AppMonkey, legacyRoutes }: PluginZovaOptions) {

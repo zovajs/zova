@@ -1,5 +1,5 @@
-import { BeanSimple } from '../../bean/beanSimple.js';
-import { StateLock } from '../../utils/stateLock.js';
+import { BeanSimple } from '../../bean/beanSimple.ts';
+import { StateLock } from '../../utils/stateLock.ts';
 
 let __id: number = 0;
 

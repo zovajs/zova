@@ -1,9 +1,9 @@
 import type { IModule } from '@cabloy/module-info';
 
-import { BeanBaseSimple, SymbolModuleBelong } from '../beanBaseSimple.js';
-import { BeanScopeError } from '../resource/error/beanScopeError.js';
-import { BeanScopeLocale } from '../resource/locale/beanScopeLocale.js';
-import { BeanScopeUtil } from './beanScopeUtil.js';
+import { BeanBaseSimple, SymbolModuleBelong } from '../beanBaseSimple.ts';
+import { BeanScopeError } from '../resource/error/beanScopeError.ts';
+import { BeanScopeLocale } from '../resource/locale/beanScopeLocale.ts';
+import { BeanScopeUtil } from './beanScopeUtil.ts';
 
 const BeanModuleError = Symbol('BeanScopeBase#BeanModuleError');
 const BeanModuleLocale = Symbol('BeanScopeBase#BeanModuleLocale');

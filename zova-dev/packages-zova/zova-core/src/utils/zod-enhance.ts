@@ -4,8 +4,8 @@ import { setLocaleAdapter, setLocaleErrors, translateError } from '@cabloy/zod-e
 import { ZodMetadata } from '@cabloy/zod-openapi';
 import { setParseAdapter } from '@cabloy/zod-query';
 
-import type { ILocaleRecord } from '../bean/resource/locale/type.js';
-import type { ZovaApplication } from '../core/app/application.js';
+import type { ILocaleRecord } from '../bean/resource/locale/type.ts';
+import type { ZovaApplication } from '../core/app/application.ts';
 
 export type ZodLocaleError = () => { localeError: z.core.$ZodErrorMap };
 export type ZodLocaleErrors = Record<keyof ILocaleRecord, ZodLocaleError>;

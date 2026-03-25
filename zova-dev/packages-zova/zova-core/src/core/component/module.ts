@@ -4,12 +4,12 @@ import * as ModuleInfo from '@cabloy/module-info';
 import { forEach, forEachSync } from '@cabloy/utils';
 import { shallowReactive } from 'vue';
 
-import type { TypeBeanScopeRecordKeys } from '../../bean/type.js';
-import type { IModuleApp, IModuleMain, IMonkeyApp, IMonkeyController, IMonkeyModule, TypeMonkeyName } from '../../types/index.js';
+import type { TypeBeanScopeRecordKeys } from '../../bean/type.ts';
+import type { IModuleApp, IModuleMain, IMonkeyApp, IMonkeyController, IMonkeyModule, TypeMonkeyName } from '../../types/index.ts';
 
-import { BeanSimple } from '../../bean/beanSimple.js';
-import { SymbolInstalled } from '../../types/index.js';
-import { StateLock } from '../../utils/stateLock.js';
+import { BeanSimple } from '../../bean/beanSimple.ts';
+import { SymbolInstalled } from '../../types/index.ts';
+import { StateLock } from '../../utils/stateLock.ts';
 
 export class AppModule extends BeanSimple {
   private modules: Record<string, IModuleApp> = shallowReactive({});

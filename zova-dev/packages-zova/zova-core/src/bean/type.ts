@@ -1,9 +1,9 @@
 import type { defineOptions, Ref, VNode } from 'vue';
 
-import type { IBeanSceneRecord } from '../decorator/interface/beanOptions.js';
-import type { RequiredSome } from '../types/utils/requiredSome.js';
-import type { TypeRecordValues } from '../types/utils/type.js';
-import type { TypeErrorsInternal } from './resource/error/errorInternal.js';
+import type { IBeanSceneRecord } from '../decorator/interface/beanOptions.ts';
+import type { RequiredSome } from '../types/utils/requiredSome.ts';
+import type { TypeRecordValues } from '../types/utils/type.ts';
+import type { TypeErrorsInternal } from './resource/error/errorInternal.ts';
 
 export interface IBeanRecordGeneral {}
 export interface IBeanRecordLocal {}

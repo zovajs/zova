@@ -1,7 +1,7 @@
-import type { ZodLocaleErrors } from '../../utils/zod-enhance.js';
+import type { ZodLocaleErrors } from '../../utils/zod-enhance.ts';
 
-import { BeanSimple } from '../../bean/beanSimple.js';
-import { zodSetLocaleErrors } from '../../utils/zod-enhance.js';
+import { BeanSimple } from '../../bean/beanSimple.ts';
+import { zodSetLocaleErrors } from '../../utils/zod-enhance.ts';
 
 export class AppUtil extends BeanSimple {
   setLocaleErrors(localeErrors: ZodLocaleErrors, localeDefault?: string) {

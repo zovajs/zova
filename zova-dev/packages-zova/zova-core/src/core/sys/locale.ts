@@ -1,7 +1,7 @@
-import type { TypeModuleResourceLocaleModules, TypeModuleResourceLocales } from '../../types/interface/module.js';
-import type { ZovaLocaleOptionalMap } from '../app/locale.js';
+import type { TypeModuleResourceLocaleModules, TypeModuleResourceLocales } from '../../types/interface/module.ts';
+import type { ZovaLocaleOptionalMap } from '../app/locale.ts';
 
-import { AppLocale } from '../component/locale.js';
+import { AppLocale } from '../component/locale.ts';
 
 export class SysLocale extends AppLocale {
   /** @internal */

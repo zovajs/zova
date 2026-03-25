@@ -1,10 +1,10 @@
 import type { ComponentPublicInstance } from 'vue';
 
-import type { IErrorObject } from '../../bean/resource/error/errorObject.js';
-import type { IErrorInstanceInfo, IModuleError } from '../../bean/resource/error/type.js';
+import type { IErrorObject } from '../../bean/resource/error/errorObject.ts';
+import type { IErrorInstanceInfo, IModuleError } from '../../bean/resource/error/type.ts';
 
-import { ErrorClass } from '../../bean/resource/error/errorClass.js';
-import { SymbolErrorInstanceInfo } from '../../bean/resource/error/type.js';
+import { ErrorClass } from '../../bean/resource/error/errorClass.ts';
+import { SymbolErrorInstanceInfo } from '../../bean/resource/error/type.ts';
 
 export class AppError extends ErrorClass {
   /** @internal */

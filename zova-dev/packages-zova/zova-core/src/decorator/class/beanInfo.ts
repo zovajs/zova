@@ -1,7 +1,7 @@
-import type { IDecoratorBeanInfoOptions } from '../interface/beanOptions.js';
+import type { IDecoratorBeanInfoOptions } from '../interface/beanOptions.ts';
 
-import { appMetadata } from '../../core/sys/metadata.js';
-import { SymbolDecoratorBeanInfo } from '../../core/sys/resource.js';
+import { appMetadata } from '../../core/sys/metadata.ts';
+import { SymbolDecoratorBeanInfo } from '../../core/sys/resource.ts';
 
 export function BeanInfo(options: IDecoratorBeanInfoOptions): ClassDecorator {
   return function (target) {

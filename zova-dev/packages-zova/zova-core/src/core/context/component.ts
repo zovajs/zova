@@ -1,8 +1,8 @@
-import type { BeanControllerBase } from '../../bean/beanControllerBase.js';
+import type { BeanControllerBase } from '../../bean/beanControllerBase.ts';
 
-import { BeanSimple } from '../../bean/beanSimple.js';
-import { BeanControllerIdentifier, BeanRenderIdentifier } from '../../bean/type.js';
-import { cast } from '../../types/utils/cast.js';
+import { BeanSimple } from '../../bean/beanSimple.ts';
+import { BeanControllerIdentifier, BeanRenderIdentifier } from '../../bean/type.ts';
+import { cast } from '../../types/utils/cast.ts';
 
 export class CtxComponent extends BeanSimple {
   private _bean_render_original: any;

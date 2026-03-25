@@ -1,6 +1,6 @@
-import { cast } from '../types/utils/cast.js';
-import { BeanControllerLike } from './beanControllerLike.js';
-import { BeanStyleIdentifier } from './type.js';
+import { cast } from '../types/utils/cast.ts';
+import { BeanControllerLike } from './beanControllerLike.ts';
+import { BeanStyleIdentifier } from './type.ts';
 
 const SymbolStyle = Symbol('SymbolStyle');
 

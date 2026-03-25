@@ -1,9 +1,9 @@
 import { isPromise } from '@cabloy/utils';
 import { toLowerCaseFirstChar, toUpperCaseFirstChar } from '@cabloy/word-utils';
 
-import type { IDecoratorVueElement, IDecoratorVueEmitOptions } from '../../decorator/vueExtra/types.js';
+import type { IDecoratorVueElement, IDecoratorVueEmitOptions } from '../../decorator/vueExtra/types.ts';
 
-import { getVueDecoratorValue } from './utils.js';
+import { getVueDecoratorValue } from './utils.ts';
 
 export function emit(beanInstance, _beanFullName: string, prop: string, vueElement: IDecoratorVueElement, index: number) {
   const { descriptor } = vueElement;

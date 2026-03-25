@@ -1,4 +1,4 @@
-import type { IBeanScopeLocale, PowerPartial } from '../../index.js';
+import type { IBeanScopeLocale, PowerPartial } from '../../index.ts';
 
 export const localeDefault = {
   modules: {},

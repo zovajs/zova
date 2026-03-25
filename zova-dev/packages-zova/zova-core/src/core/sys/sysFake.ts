@@ -1,4 +1,4 @@
-import type { ZovaSys } from './sys.js';
+import type { ZovaSys } from './sys.ts';
 
 let _sys: ZovaSys;
 

@@ -1,6 +1,6 @@
-import type { TypeModuleResourceErrorModules } from '../../types/interface/module.js';
+import type { TypeModuleResourceErrorModules } from '../../types/interface/module.ts';
 
-import { BeanSimple } from '../../bean/beanSimple.js';
+import { BeanSimple } from '../../bean/beanSimple.ts';
 
 export class SysError extends BeanSimple {
   /** @internal */

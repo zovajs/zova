@@ -1,5 +1,5 @@
-import type { Constructable } from '../index.js';
-import type { ContainerScope } from '../index.js';
+import type { Constructable } from '../index.ts';
+import type { ContainerScope } from '../index.ts';
 
 export interface IBeanSceneRecord {}
 

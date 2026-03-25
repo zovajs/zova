@@ -3,13 +3,13 @@ import { combineApiPathControllerAndAction, defaultPathSerializer, isEmptyObject
 import DeepEqual from 'deep-equal';
 import { isReactive, reactive } from 'vue';
 
-import type { IBeanRecord, IBeanScopeRecord, TypeBeanScopeRecordKeys } from '../../bean/type.js';
-import type { IBeanSceneRecord } from '../../decorator/interface/beanOptions.js';
-import type { TypeAuthToken } from '../../types/utils/auth.js';
+import type { IBeanRecord, IBeanScopeRecord, TypeBeanScopeRecordKeys } from '../../bean/type.ts';
+import type { IBeanSceneRecord } from '../../decorator/interface/beanOptions.ts';
+import type { TypeAuthToken } from '../../types/utils/auth.ts';
 
-import { BeanSimple } from '../../bean/beanSimple.js';
-import { cast } from '../../types/utils/cast.js';
-import { uuid as _uuid } from '../../utils/uuid.js';
+import { BeanSimple } from '../../bean/beanSimple.ts';
+import { cast } from '../../types/utils/cast.ts';
+import { uuid as _uuid } from '../../utils/uuid.ts';
 
 export interface IApiActionConfigPrepareOptions {
   query?: {};

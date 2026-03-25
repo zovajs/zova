@@ -1,3 +1,3 @@
-import { BeanBase } from './beanBase.js';
+import { BeanBase } from './beanBase.ts';
 
 export class BeanAopMethodBase extends BeanBase {}
