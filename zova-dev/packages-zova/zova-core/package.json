@@ -19,7 +19,8 @@
     "url": "git+https://github.com/cabloy/zova.git"
   },
   "files": [
-    "dist"
+    "dist",
+    "src"
   ],
   "type": "module",
   "exports": {
@@ -39,7 +40,7 @@
   },
   "scripts": {
     "clean": "rimraf dist tsconfig.tsbuildinfo",
-    "tsc:publish": "npm run clean && tsc",
+    "tsc:publish": "npm run clean && vona :bin:buildGeneral --sourcemap && tsc",
     "prepublishOnly": "npm run tsc:publish",
     "prepack": "clean-package",
     "postpack": "clean-package restore"
