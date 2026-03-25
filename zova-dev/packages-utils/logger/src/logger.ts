@@ -4,10 +4,10 @@
  * MIT LICENCE
  */
 
-import type { LoggerLevel, LoggerOptions, LogInfo } from './types.js';
+import type { LoggerLevel, LoggerOptions, LogInfo } from './types.ts';
 
-import { Profiler } from './profiler.js';
-import { LEVEL, MESSAGE, SPLAT } from './types.js';
+import { Profiler } from './profiler.ts';
+import { LEVEL, MESSAGE, SPLAT } from './types.ts';
 
 const formatRegExp = /%[scdjifoO%]/g;
 

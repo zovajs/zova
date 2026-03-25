@@ -6,7 +6,7 @@
 
 import fecha from 'fecha';
 
-import { format } from './format.js';
+import { format } from './format.ts';
 
 export const timestamp = format((info, opts: any = {}) => {
   if (opts.format) {

@@ -4,7 +4,7 @@
  * MIT LICENCE
  */
 
-import { LEVEL, MESSAGE } from './types.js';
+import { LEVEL, MESSAGE } from './types.ts';
 
 const codes = {
   black: [30, 39],

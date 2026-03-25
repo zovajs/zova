@@ -4,7 +4,7 @@
  * MIT LICENCE
  */
 
-import type { FormatWrap, TransformFunction } from './types.js';
+import type { FormatWrap, TransformFunction } from './types.ts';
 
 export class Format {
   transform: TransformFunction;

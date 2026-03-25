@@ -4,8 +4,8 @@
  * MIT LICENCE
  */
 
-import { format } from './format.js';
-import { LEVEL, MESSAGE } from './types.js';
+import { format } from './format.ts';
+import { LEVEL, MESSAGE } from './types.ts';
 
 export const errors = format((einfo, { stack, cause }: any) => {
   if (einfo instanceof Error) {

@@ -6,7 +6,7 @@
 
 import { getText } from '@cabloy/localeutil';
 
-import { SPLAT } from './types.js';
+import { SPLAT } from './types.ts';
 
 const formatRegExp = /%[scdjifoO%]/g;
 const escapedPercent = /%%/g;

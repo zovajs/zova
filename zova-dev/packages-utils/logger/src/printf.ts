@@ -4,7 +4,7 @@
  * MIT LICENCE
  */
 
-import { MESSAGE } from './types.js';
+import { MESSAGE } from './types.ts';
 
 export class Printf {
   template: any;

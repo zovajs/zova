@@ -4,7 +4,7 @@
  * MIT LICENCE
  */
 
-import type { Logger } from './logger.js';
+import type { Logger } from './logger.ts';
 
 export class Profiler {
   logger: Logger;
