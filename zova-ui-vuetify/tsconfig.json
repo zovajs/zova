@@ -7,7 +7,7 @@
     "declarationMap": false,
     "noEmit": true,
     "rewriteRelativeImportExtensions": false,
-    "verbatimModuleSyntax": false,
+    "verbatimModuleSyntax": false
   },
   "references": [],
   "exclude": [
@@ -23,6 +23,6 @@
     "./src-capacitor",
     "./src-cordova",
     "./quasar.config.*.temporary.compiled*",
-    "./src/boot/app",
-  ],
+    "./src/boot/app"
+  ]
 }
