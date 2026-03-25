@@ -8,7 +8,8 @@
   "author": "",
   "files": [
     "dist",
-    "mock"
+    "mock",
+    "src"
   ],
   "type": "module",
   "exports": {

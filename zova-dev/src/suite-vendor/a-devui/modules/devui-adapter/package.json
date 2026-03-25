@@ -8,7 +8,8 @@
   ],
   "author": "zhennann",
   "files": [
-    "dist"
+    "dist",
+    "src"
   ],
   "type": "module",
   "exports": {

@@ -10,7 +10,8 @@
     "dist",
     "icons",
     "mock",
-    "rest"
+    "rest",
+    "src"
   ],
   "type": "module",
   "exports": {

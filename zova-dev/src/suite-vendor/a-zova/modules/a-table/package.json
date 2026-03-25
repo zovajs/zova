@@ -10,7 +10,8 @@
     "cli",
     "dist",
     "mock",
-    "rest"
+    "rest",
+    "src"
   ],
   "type": "module",
   "exports": {
