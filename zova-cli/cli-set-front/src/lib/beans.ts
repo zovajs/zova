@@ -8,6 +8,7 @@ import { CliCreatePage } from './bean/cli.create.page.ts';
 import { CliCreateProject } from './bean/cli.create.project.ts';
 import { CliCreateSuite } from './bean/cli.create.suite.ts';
 import { CliDefaultList } from './bean/cli.default.list.ts';
+import { CliInitAsset } from './bean/cli.init.asset.ts';
 import { CliInitConfig } from './bean/cli.init.config.ts';
 import { CliInitConstant } from './bean/cli.init.constant.ts';
 import { CliInitError } from './bean/cli.init.error.ts';
@@ -58,6 +59,7 @@ export const beans = {
   'init.monkeySys': CliInitMonkeySys,
   'init.main': CliInitMain,
   'init.mainSys': CliInitMainSys,
+  'init.asset': CliInitAsset,
   'init.lib': CliInitLib,
   'init.types': CliInitTypes,
   'refactor.pageQuery': CliRefactorPageQuery,

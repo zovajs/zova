@@ -8,6 +8,7 @@ import createPage from './command/create.page.ts';
 import createProject from './command/create.project.ts';
 import createSuite from './command/create.suite.ts';
 import defaultList from './command/default.list.ts';
+import initAsset from './command/init.asset.ts';
 import initConfig from './command/init.config.ts';
 import initConstant from './command/init.constant.ts';
 import initError from './command/init.error.ts';
@@ -66,6 +67,7 @@ export const commands = {
     monkeySys: initMonkeySys,
     main: initMain,
     mainSys: initMainSys,
+    asset: initAsset,
     lib: initLib,
     types: initTypes,
   },
