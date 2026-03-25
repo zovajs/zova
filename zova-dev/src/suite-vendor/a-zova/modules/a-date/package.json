@@ -25,10 +25,24 @@
     "./*": "./*"
   },
   "scripts": {
-    "clean": "tsc -b --clean",
-    "tsc:publish": "npm run clean && tsc -b",
-    "_prepublishOnly": "npm run tsc:publish"
+    "clean": "rimraf dist tsconfig.build.tsbuildinfo",
+    "tsc:publish": "npm run clean && zova :bin:buildModule --sourcemap",
+    "prepublishOnly": "npm run tsc:publish",
+    "prepack": "clean-package",
+    "postpack": "clean-package restore && npm run clean"
   },
   "dependencies": {},
+  "devDependencies": {
+    "clean-package": "^2.2.0",
+    "rimraf": "^6.0.1"
+  },
+  "clean-package": {
+    "indent": 2,
+    "remove": [
+      "clean-package",
+      "devDependencies",
+      "exports.\\..import"
+    ]
+  },
   "title": "a-date"
 }
