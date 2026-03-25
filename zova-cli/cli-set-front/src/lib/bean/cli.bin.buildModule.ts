@@ -75,7 +75,6 @@ export class CliBinBuildModule extends BeanCliBase {
 
     const babelPluginZovaComponent = getAbsolutePathOfModule('babel-plugin-zova-component', '');
     const babelPluginZovaBehavior = getAbsolutePathOfModule('babel-plugin-zova-behavior', '');
-
     const babelPluginZovaBeanModule = getAbsolutePathOfModule('babel-plugin-zova-bean-module', '');
     const babelPluginZovaBeanUse = getAbsolutePathOfModule('babel-plugin-zova-bean-use', '');
     const babelPluginTransformTypescriptMetadata = getAbsolutePathOfModule('babel-plugin-transform-typescript-metadata', '');
@@ -122,12 +121,13 @@ export class CliBinBuildModule extends BeanCliBase {
           fileName: 'index',
         },
         rolldownOptions: {
-          // make sure to externalize deps that shouldn't be bundled
-          // into your library
           external: id => {
             return !id.startsWith('.') && !path.isAbsolute(id);
           },
-          output: {},
+        },
+        minify: argv.minify ? 'terser' : false,
+        terserOptions: {
+          keep_classnames: true,
         },
       },
     };
