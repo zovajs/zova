@@ -16,6 +16,7 @@ declare module '@cabloy/cli' {
   interface ICommandArgv {
     minify: boolean;
     sourcemap: boolean;
+    dts: boolean;
   }
 }
 
@@ -29,9 +30,12 @@ export class CliBinBuildModule extends BeanCliBase {
   }
 
   async _vite(projectPath: string) {
+    const { argv } = this.context;
     await rimraf(path.join(projectPath, 'dist'));
     await this._buildSrc(projectPath);
-    await this._buildDts(projectPath);
+    if (argv.dts) {
+      await this._buildDts(projectPath);
+    }
   }
 
   async _buildDts(projectPath: string) {
