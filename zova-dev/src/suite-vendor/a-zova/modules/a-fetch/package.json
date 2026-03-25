@@ -10,7 +10,10 @@
     "cli",
     "dist",
     "mock",
-    "src"
+    "src",
+    "icons",
+    "assets",
+    "rest"
   ],
   "type": "module",
   "exports": {

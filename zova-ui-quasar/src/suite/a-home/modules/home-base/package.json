@@ -10,7 +10,9 @@
     "dist",
     "mock",
     "rest",
-    "src"
+    "src",
+    "icons",
+    "assets"
   ],
   "type": "module",
   "exports": {

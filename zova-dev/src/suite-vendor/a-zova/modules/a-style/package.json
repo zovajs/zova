@@ -11,7 +11,10 @@
   "files": [
     "cli",
     "dist",
-    "src"
+    "src",
+    "icons",
+    "assets",
+    "rest"
   ],
   "type": "module",
   "exports": {

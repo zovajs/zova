@@ -11,7 +11,8 @@
     "icons",
     "mock",
     "rest",
-    "src"
+    "src",
+    "assets"
   ],
   "type": "module",
   "exports": {

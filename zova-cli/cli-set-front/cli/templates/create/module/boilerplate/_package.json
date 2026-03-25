@@ -14,7 +14,7 @@
   "description": "<%=argv.description%>",
   "keywords": ["Zova Module"],
   "author": "<%=argv.author%>",
-  "files": ["mock", "dist", "src"],
+  "files": ["mock", "dist", "src", "icons", "assets", "rest"],
   "scripts": {
     "clean": "rimraf dist tsconfig.build.tsbuildinfo",
     "tsc:publish": "npm run clean && zova :bin:buildModule --sourcemap",

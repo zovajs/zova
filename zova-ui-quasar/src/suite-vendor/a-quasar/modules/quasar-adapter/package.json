@@ -8,7 +8,10 @@
   "author": "zhennann",
   "files": [
     "dist",
-    "src"
+    "src",
+    "icons",
+    "assets",
+    "rest"
   ],
   "type": "module",
   "exports": {
