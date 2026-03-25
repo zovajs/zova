@@ -77,7 +77,8 @@
     "vite": "^7.3.1",
     "vite-plugin-fake-server-turbo": "^3.0.15",
     "vue-tsc": "^3.2.4",
-    "zova-vite": "workspace:^"
+    "zova-vite": "workspace:^",
+    "rolldown": "^1.0.0-rc.11"
   },
   "license": "MIT"
 }

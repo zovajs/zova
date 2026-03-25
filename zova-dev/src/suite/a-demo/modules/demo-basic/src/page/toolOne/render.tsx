@@ -5,7 +5,7 @@ import { Render } from 'zova-module-a-bean';
 import { ZForm, ZFormField, ZFormSubscribe } from 'zova-module-a-form';
 import { ApiSchemaTestSsrDtoTestBodyPartial } from 'zova-module-home-api';
 
-import FormFieldTest from '@/components/FormFieldTest.vue';
+// import FormFieldTest from '@/components/FormFieldTest.vue';
 
 @Render()
 export class RenderPageToolOne extends BeanRenderBase {
@@ -63,13 +63,13 @@ export class RenderPageToolOne extends BeanRenderBase {
         <ZFormField name="name">
           <span>span: name</span>
         </ZFormField>
-        <FormFieldTest>
+        {/* <FormFieldTest>
           {{
             header: () => <div>--- Header Slot ---</div>,
             default: () => <div>--- Default Slot ---</div>,
             footer: () => <div>--- Footer Slot ---</div>,
           }}
-        </FormFieldTest>
+        </FormFieldTest> */}
         <ZFormSubscribe
           slotDefault={$$form => {
             return (

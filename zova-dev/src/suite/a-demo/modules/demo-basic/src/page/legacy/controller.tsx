@@ -2,7 +2,7 @@ import { BeanControllerPageBase } from 'zova';
 import { Controller } from 'zova-module-a-bean';
 import { ZPage } from 'zova-module-home-base';
 
-import Counter from '@/components/Counter.vue';
+// import Counter from '@/components/Counter.vue';
 
 @Controller()
 export class ControllerPageLegacy extends BeanControllerPageBase {
@@ -12,7 +12,7 @@ export class ControllerPageLegacy extends BeanControllerPageBase {
     return (
       <ZPage>
         <div>Legacy Vue3 composables/components can be used directly in Zova</div>
-        <Counter></Counter>
+        {/* <Counter></Counter> */}
       </ZPage>
     );
   }
