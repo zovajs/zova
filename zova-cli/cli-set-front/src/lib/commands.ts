@@ -1,3 +1,4 @@
+import binBuildModule from './command/bin.buildModule.ts';
 import binBuildRest from './command/bin.buildRest.ts';
 import createBean from './command/create.bean.ts';
 import createComponent from './command/create.component.ts';
@@ -42,6 +43,7 @@ export const commands = {
     list: defaultList,
   },
   bin: {
+    buildModule: binBuildModule,
     buildRest: binBuildRest,
   },
   create: {
