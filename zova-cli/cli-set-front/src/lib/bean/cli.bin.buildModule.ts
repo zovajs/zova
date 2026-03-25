@@ -2,11 +2,15 @@ import type { OutputOptions, RolldownBuild, RolldownOptions } from 'rolldown';
 import type { UserConfig } from 'vite';
 
 import { BeanCliBase } from '@cabloy/cli';
+import babelPlugin from '@cabloy/vite-plugin-babel';
+import vueJsxPlugin from '@vitejs/plugin-vue-jsx';
 import path from 'node:path';
 import { rimraf } from 'rimraf';
 import { rolldown } from 'rolldown';
 import { dts } from 'rolldown-plugin-dts';
 import { build } from 'vite';
+
+import { getAbsolutePathOfModule } from '../utils.ts';
 
 declare module '@cabloy/cli' {
   interface ICommandArgv {
@@ -69,7 +73,48 @@ export class CliBinBuildModule extends BeanCliBase {
   async _buildSrc(_projectPath: string) {
     const { argv } = this.context;
 
+    const babelPluginZovaComponent = getAbsolutePathOfModule('babel-plugin-zova-component', '');
+    const babelPluginZovaBehavior = getAbsolutePathOfModule('babel-plugin-zova-behavior', '');
+
+    const babelPluginZovaBeanModule = getAbsolutePathOfModule('babel-plugin-zova-bean-module', '');
+    const babelPluginZovaBeanUse = getAbsolutePathOfModule('babel-plugin-zova-bean-use', '');
+    const babelPluginTransformTypescriptMetadata = getAbsolutePathOfModule('babel-plugin-transform-typescript-metadata', '');
+    const babelPluginProposalDecorators = getAbsolutePathOfModule('@babel/plugin-proposal-decorators', '');
+    const babelPluginTransformClassProperties = getAbsolutePathOfModule('@babel/plugin-transform-class-properties', '');
+    const babelPluginTransformTypescript = getAbsolutePathOfModule('@babel/plugin-transform-typescript', '');
+
+    const plugins = [
+      babelPlugin({
+        filter: /\.ts$/,
+        babelConfig: {
+          babelrc: false,
+          configFile: false,
+          plugins: [
+            [babelPluginZovaBeanModule, { brandName: 'zova' }],
+            [babelPluginZovaBeanUse],
+            [babelPluginTransformTypescriptMetadata],
+            [babelPluginProposalDecorators, { version: 'legacy' }],
+            [babelPluginTransformClassProperties, { loose: true }],
+            [babelPluginTransformTypescript],
+          ],
+        },
+      }),
+      vueJsxPlugin({
+        include: /\.[jt]sx$/,
+        babelPlugins: [
+          [babelPluginZovaComponent],
+          [babelPluginZovaBehavior],
+          [babelPluginZovaBeanModule, { brandName: 'zova' }],
+          [babelPluginZovaBeanUse],
+          [babelPluginTransformTypescriptMetadata],
+          [babelPluginProposalDecorators, { version: 'legacy' }],
+          [babelPluginTransformClassProperties, { loose: true }],
+        ],
+      }),
+    ];
+
     const viteConfig: UserConfig = {
+      plugins,
       build: {
         lib: {
           entry: 'src/index.ts',
