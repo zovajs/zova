@@ -4,7 +4,10 @@
     "rootDir": "src",
     "module": "NodeNext",
     "moduleResolution": "NodeNext",
-    "outDir": "dist"
+    "outDir": "dist",
+    "declaration": true,
+    "emitDeclarationOnly": true,
+    "allowImportingTsExtensions": true,
   },
-  "include": ["src/**/*"]
+  "include": ["src/**/*"],
 }

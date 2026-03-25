@@ -4,8 +4,8 @@
  * MIT LICENCE
  */
 
-import { cascade } from './cascade.js';
-import { format } from './format.js';
+import { cascade } from './cascade.ts';
+import { format } from './format.ts';
 
 export function combine(...formats) {
   const combinedFormat = format(cascade(formats));
