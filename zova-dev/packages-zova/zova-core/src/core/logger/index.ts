@@ -1,3 +1,3 @@
-export * from './format.js';
-export * from './logger.js';
-export * from './types.js';
+export * from './format.ts';
+export * from './logger.ts';
+export * from './types.ts';

@@ -1,2 +1,2 @@
-export * from './customKey.js';
-export * from './stateLock.js';
+export * from './customKey.ts';
+export * from './stateLock.ts';

@@ -1,3 +1,3 @@
-export * from './application.js';
-export * from './locale.js';
-export * from './meta.js';
+export * from './application.ts';
+export * from './locale.ts';
+export * from './meta.ts';

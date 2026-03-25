@@ -1,2 +1,2 @@
-export * from './beanOptions.js';
-export * from './useOptions.js';
+export * from './beanOptions.ts';
+export * from './useOptions.ts';

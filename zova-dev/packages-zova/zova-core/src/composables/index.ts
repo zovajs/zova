@@ -1,6 +1,6 @@
-// export * from './onControllerCreated.js';
-// export * from './onControllerMounted.js';
-export * from './useApp.js';
-export * from './useContext.js';
-export * from './useController.js';
-// export * from './useSys.js';
+// export * from './onControllerCreated.ts';
+// export * from './onControllerMounted.ts';
+export * from './useApp.ts';
+export * from './useContext.ts';
+export * from './useController.ts';
+// export * from './useSys.ts';

@@ -1,2 +1,2 @@
-export * from './beanScopeBase.js';
-export * from './beanScopeUtil.js';
+export * from './beanScopeBase.ts';
+export * from './beanScopeUtil.ts';

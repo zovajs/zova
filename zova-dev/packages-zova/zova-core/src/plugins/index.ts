@@ -1,2 +1,2 @@
-export * from './bean.js';
-export * from './zova.js';
+export * from './bean.ts';
+export * from './zova.ts';
