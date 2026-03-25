@@ -50,10 +50,13 @@
     "globby": "^14.1.0",
     "gogocode": "^1.0.55",
     "rimraf": "^5.0.5",
+    "rolldown": "^1.0.0-rc.11",
+    "rolldown-plugin-dts": "^0.22.5",
     "svgo": "^3.2.0",
     "tsdown": "^0.18.3",
     "typescript": "^5.9.3",
     "urllib": "^4.6.11",
+    "vite": "^8.0.2",
     "zova-openapi": "^1.0.5",
     "zova-vite": "^1.0.182"
   },
