@@ -7,7 +7,7 @@
     "declarationMap": false,
     "noEmit": true,
     "rewriteRelativeImportExtensions": false,
-    "verbatimModuleSyntax": false
+    "verbatimModuleSyntax": false,
   },
   "references": [],
   "exclude": [
@@ -25,6 +25,6 @@
     "./quasar.config.*.temporary.compiled*",
     "./src/boot/app",
     "./packages-utils",
-    "./packages-zova"
-  ]
+    "./packages-zova",
+  ],
 }
