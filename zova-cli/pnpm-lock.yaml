@@ -36,8 +36,8 @@ importers:
   cli:
     dependencies:
       '@cabloy/cli':
-        specifier: ^3.0.101
-        version: 3.0.101(vue@3.5.13(typescript@5.9.3))
+        specifier: ^3.0.102
+        version: 3.0.102(vue@3.5.13(typescript@5.9.3))
       '@cabloy/process-helper':
         specifier: ^3.0.0
         version: 3.0.0
@@ -70,8 +70,8 @@ importers:
         specifier: ^7.28.6
         version: 7.28.6(@babel/core@7.29.0)
       '@cabloy/cli':
-        specifier: ^3.0.101
-        version: 3.0.101(vue@3.5.13(typescript@5.9.3))
+        specifier: ^3.0.102
+        version: 3.0.102(vue@3.5.13(typescript@5.9.3))
       '@cabloy/extend':
         specifier: ^3.1.0
         version: 3.1.13
@@ -386,8 +386,8 @@ packages:
     resolution: {integrity: sha512-91gAaWRznDwSX4E2tZ1YjBuIfnQVOFDCQ2r0Toby0gu4XEbyF623kXLMA8d4ZbCu+fINcrudkmEcwSUHgDDkNw==}
     engines: {node: ^20.19.0 || >=22.12.0}
 
-  '@cabloy/cli@3.0.101':
-    resolution: {integrity: sha512-SGdzmnqhNDHPp0gXNjj1kUThXuwZpVqvbJL4M+asCZd0/tIchBTvAN6l/M5Q2x8S9QHKiMBugOcRt+XaqUvuQw==}
+  '@cabloy/cli@3.0.102':
+    resolution: {integrity: sha512-cIxVWhO+6u5w0PQkk/WTPSDAv+AATvNco28opoF5EdarBQrsgqhxExlRRibyMiL8VeOZFKFq3gxSGA3quOz1HA==}
 
   '@cabloy/dotenv@1.1.13':
     resolution: {integrity: sha512-LFpi2BVLon5XJ3ylAlqVerI5YyNf/tzYl2uW9/FZSTVEUoyxxwV5LW8acEwMZPnq+UVsJh1XOam6O9iE73+VDQ==}
@@ -400,6 +400,9 @@ packages:
 
   '@cabloy/module-glob@5.2.56':
     resolution: {integrity: sha512-ymNR8h4p+KYpESmr1MaaG4PaHMk8dEn72stu8rKhHhNbcN0YdcGUc/nJWawpQDWtyozLXXby0g0MX1ZIZ+aqAw==}
+
+  '@cabloy/module-glob@5.2.58':
+    resolution: {integrity: sha512-3qoGGzjQgc00X1MxeWhCW/esq6evKjtjTLyq8Gy8iD8u03qsNSzEn2hBJ/86hoDHceJ2fFCyrvwnLRP31sbuIQ==}
 
   '@cabloy/module-info@2.0.0':
     resolution: {integrity: sha512-ArN0/Ei4LH2LklWB2fy4+DVvli56A0m4mZPnKnQYoXEfkMtXChxbNDm6DZScY57lfTSyx7ZfGTgNVEbxF6VwYg==}
@@ -5319,10 +5322,10 @@ snapshots:
       '@babel/helper-string-parser': 8.0.0-rc.3
       '@babel/helper-validator-identifier': 8.0.0-rc.2
 
-  '@cabloy/cli@3.0.101(vue@3.5.13(typescript@5.9.3))':
+  '@cabloy/cli@3.0.102(vue@3.5.13(typescript@5.9.3))':
     dependencies:
       '@babel/parser': 7.29.2
-      '@cabloy/module-glob': 5.2.56
+      '@cabloy/module-glob': 5.2.58
       '@cabloy/module-info': 2.0.0
       '@cabloy/process-helper': 3.0.0
       '@cabloy/utils': 2.0.24
@@ -5400,6 +5403,16 @@ snapshots:
       - vitest
 
   '@cabloy/module-glob@5.2.56':
+    dependencies:
+      '@cabloy/module-info': 2.0.0
+      '@cabloy/utils': 2.0.24
+      boxen: 4.2.0
+      chalk: 3.0.0
+      fs-extra: 11.3.4
+      globby: 16.1.1
+      semver: 7.7.4
+
+  '@cabloy/module-glob@5.2.58':
     dependencies:
       '@cabloy/module-info': 2.0.0
       '@cabloy/utils': 2.0.24
