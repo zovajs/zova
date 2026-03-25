@@ -73,6 +73,9 @@ export class CliBinBuildModule extends BeanCliBase {
   async _buildSrc(_projectPath: string) {
     const { argv } = this.context;
 
+    const sourceMap = argv.sourcemap;
+    const minify = argv.minify;
+
     const babelPluginZovaComponent = getAbsolutePathOfModule('babel-plugin-zova-component', '');
     const babelPluginZovaBehavior = getAbsolutePathOfModule('babel-plugin-zova-behavior', '');
     const babelPluginZovaBeanModule = getAbsolutePathOfModule('babel-plugin-zova-bean-module', '');
@@ -125,7 +128,9 @@ export class CliBinBuildModule extends BeanCliBase {
             return !id.startsWith('.') && !path.isAbsolute(id);
           },
         },
-        minify: argv.minify ? 'terser' : false,
+        sourcemap: sourceMap,
+        // keep_classnames not take effect for 'oxc'
+        minify: minify ? 'terser' : false,
         terserOptions: {
           keep_classnames: true,
         },
