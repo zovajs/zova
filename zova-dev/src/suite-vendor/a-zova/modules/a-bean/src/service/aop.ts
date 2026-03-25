@@ -48,7 +48,7 @@ export class ServiceAop extends BeanBase {
       const aopMethods: IUseAopMethodPropMetadata[] = uses[prop];
       for (const aopMethod of aopMethods) {
         onionItems.push({
-          name: aopMethod.onionName,
+          name: aopMethod.onionName as never,
           options: aopMethod.options,
         });
       }
@@ -59,9 +59,9 @@ export class ServiceAop extends BeanBase {
       for (const onionSlice of onionSlices) {
         const beanInstance = await this.sys.bean._getBean(onionSlice.beanFullName as any, true);
         aopMethodsMatched.push({
-          onionName: onionSlice.name,
+          onionName: onionSlice.name as any,
           beanInstance,
-          options: onionSlice.options,
+          options: onionSlice.options as any,
         });
       }
       aopMethodsMatchedAll[prop] = aopMethodsMatched;
