@@ -33,7 +33,7 @@ export class SysUtil extends BeanSimple {
 
   getPagePathFromAbsoluteUrl(url: string, ignorePublicPath?: boolean) {
     let pagePath: string;
-    if (url.startsWith('http://') || url.startsWith('https://')) {
+    if (isHttpUrl(url)) {
       const _url = new URL(url);
       pagePath = _url.pathname + _url.search;
     } else {
@@ -186,7 +186,9 @@ export function onionNameFromBeanFullName(beanFullName: string, sceneName: keyof
   return beanFullName.replace(`.${sceneName}.`, ':');
 }
 
-export function convertToUnit(str, unit = 'px') {
+export function convertToUnit(str: number, unit?: string): string;
+export function convertToUnit(str: string | number | null | undefined, unit?: string): string | undefined;
+export function convertToUnit(str: string | number | null | undefined, unit: string = 'px'): string | undefined {
   if (str == null || str === '') {
     return undefined;
   }
@@ -198,4 +200,8 @@ export function convertToUnit(str, unit = 'px') {
   } else {
     return `${num}${unit}`;
   }
+}
+
+export function isHttpUrl(url?: string): boolean {
+  return !!url && (url.startsWith('http://') || url.startsWith('https://'));
 }

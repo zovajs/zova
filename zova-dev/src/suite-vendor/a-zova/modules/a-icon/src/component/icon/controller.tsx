@@ -1,4 +1,4 @@
-import { BeanControllerBase, convertToUnit, Use } from 'zova';
+import { BeanControllerBase, convertToUnit, isHttpUrl, Use } from 'zova';
 import { Controller } from 'zova-module-a-bean';
 
 import { ToolIcon } from '../../bean/tool.icon.js';
@@ -29,7 +29,7 @@ export class ControllerIcon extends BeanControllerBase {
     if (name === ('none' as any) || !name) {
       return;
     }
-    if (name.startsWith('http://') || name.startsWith('https://')) {
+    if (isHttpUrl(name)) {
       return;
     }
     const promise = this.$$toolIcon.parseIconInfo(name);
@@ -44,9 +44,10 @@ export class ControllerIcon extends BeanControllerBase {
     const width = this.$props.width ?? this.$props.height ?? defaultSize;
     const height = this.$props.height ?? this.$props.width ?? defaultSize;
     const href = this._parseHref();
-    if ((href.startsWith('http://') || href.startsWith('https://')) && !href.endsWith('.svg')) {
+    if (isHttpUrl(href) && !href?.endsWith('.svg')) {
       return (
         <img
+          class="zova-icon__img"
           style={{
             width: convertToUnit(width),
             height: convertToUnit(height),
@@ -76,7 +77,7 @@ export class ControllerIcon extends BeanControllerBase {
     let href = this.$props.href;
     const name = this.$props.name;
     if (href) return href;
-    if (name && (name.startsWith('http://') || name.startsWith('https://'))) return name;
+    if (isHttpUrl(name)) return name;
     // icon info
     const iconInfo = $getZovaIcon(name);
     // href
