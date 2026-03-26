@@ -114,8 +114,6 @@
         "boilerplate": "aopMethod/boilerplate"
       }
     },
-    "dependencies": {
-      "a-zova": "5.0.0"
-    }
+    "dependencies": {}
   }
 }
