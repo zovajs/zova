@@ -2,8 +2,8 @@
   "extends": "../../tsconfig.base",
   "compilerOptions": {
     "paths": {
-      "@/*": ["../../../../../src/legacy/*"]
-    }
+      "@/*": ["../../../../../src/legacy/*"],
+    },
   },
-  "include": ["src", "src/.metadata/**/*", "../../../../../src/legacy"]
+  "include": ["src", "src/.metadata/**/*", "../../../../../src/legacy"],
 }
