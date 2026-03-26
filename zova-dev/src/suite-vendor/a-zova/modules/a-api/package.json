@@ -13,7 +13,8 @@
     "src",
     "icons",
     "assets",
-    "rest"
+    "rest",
+    "dist-cli"
   ],
   "type": "module",
   "exports": {
