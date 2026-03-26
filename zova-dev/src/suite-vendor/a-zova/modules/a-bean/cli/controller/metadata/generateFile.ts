@@ -6,8 +6,8 @@ import path from 'node:path';
 
 import type { IControllerInfo } from './types.ts';
 
-import { generateFileComponent } from './generateFileComponent.js';
-import { generateFilePage } from './generateFilePage.js';
+import { generateFileComponent } from './generateFileComponent.ts';
+import { generateFilePage } from './generateFilePage.ts';
 
 export async function generateFile(options: IMetadataCustomGenerateOptions, globFile: IGlobBeanFile, controllerInfo: IControllerInfo) {
   const cli = options.cli;

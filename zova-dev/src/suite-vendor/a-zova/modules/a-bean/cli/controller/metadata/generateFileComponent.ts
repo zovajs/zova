@@ -6,9 +6,9 @@ import { toLowerCaseFirstChar, toUpperCaseFirstChar } from '@cabloy/word-utils';
 import fse from 'fs-extra';
 import path from 'node:path';
 
-import type { IControllerInfo } from './types.js';
+import type { IControllerInfo } from './types.ts';
 
-import { combineContentRenderAndStyle, generateRestIndex } from './utils.js';
+import { combineContentRenderAndStyle, generateRestIndex } from './utils.ts';
 
 export async function generateFileComponent(options: IMetadataCustomGenerateOptions, globFile: IGlobBeanFile, controllerInfo: IControllerInfo) {
   const { moduleName } = options;

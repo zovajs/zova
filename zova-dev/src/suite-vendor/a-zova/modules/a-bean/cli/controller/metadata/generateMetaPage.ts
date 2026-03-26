@@ -6,7 +6,7 @@ import { toUpperCaseFirstChar } from '@cabloy/word-utils';
 import fse from 'fs-extra';
 import path from 'node:path';
 
-import type { IControllerInfo } from './types.js';
+import type { IControllerInfo } from './types.ts';
 
 export async function generateMetaPage(options: IMetadataCustomGenerateOptions, globFiles: [IGlobBeanFile, IControllerInfo][]) {
   if (globFiles.length === 0) return '';

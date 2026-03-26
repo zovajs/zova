@@ -6,11 +6,11 @@ import fse from 'fs-extra';
 import { globbySync } from 'globby';
 import path from 'node:path';
 
-import type { IControllerInfo } from './types.js';
+import type { IControllerInfo } from './types.ts';
 
-import { generateFile } from './generateFile.js';
-import { generateMetaComponent } from './generateMetaComponent.js';
-import { generateMetaPage } from './generateMetaPage.js';
+import { generateFile } from './generateFile.ts';
+import { generateMetaComponent } from './generateMetaComponent.ts';
+import { generateMetaPage } from './generateMetaPage.ts';
 
 export default async function (options: IMetadataCustomGenerateOptions): Promise<string> {
   const { globFiles } = options;
