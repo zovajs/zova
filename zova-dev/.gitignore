@@ -11,7 +11,7 @@ vite.config.ts.timestamp-*
 
 **/dist/
 **/dist-toolsIsolate/
-**/dist-cli/
+# **/dist-cli/
 dist-releases
 dist-mock
 
