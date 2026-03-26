@@ -3,7 +3,7 @@ import type { IMetadataCustomGenerateOptions } from '@cabloy/cli';
 import fse from 'fs-extra';
 import path from 'node:path';
 
-import type { IControllerInfo } from './types.ts';
+import type { IControllerInfo } from './types.js';
 
 export function combineContentRenderAndStyle(
   controllerInfo: IControllerInfo,

@@ -1,9 +1,9 @@
 import type { IMetadataCustomGenerateOptions } from '@cabloy/cli';
 import type { IGlobBeanFile } from '@cabloy/module-info';
 
-import type { IControllerInfo } from './types.ts';
+import type { IControllerInfo } from './types.js';
 
-import { combineContentRenderAndStyle } from './utils.ts';
+import { combineContentRenderAndStyle } from './utils.js';
 
 export async function generateFilePage(options: IMetadataCustomGenerateOptions, globFile: IGlobBeanFile, controllerInfo: IControllerInfo) {
   const { moduleName } = options;

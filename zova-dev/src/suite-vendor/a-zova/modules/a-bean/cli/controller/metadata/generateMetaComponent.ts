@@ -1,7 +1,7 @@
 import type { IMetadataCustomGenerateOptions } from '@cabloy/cli';
 import type { IGlobBeanFile } from '@cabloy/module-info';
 
-import type { IControllerInfo } from './types.ts';
+import type { IControllerInfo } from './types.js';
 
 export function generateMetaComponent(
   options: IMetadataCustomGenerateOptions,
