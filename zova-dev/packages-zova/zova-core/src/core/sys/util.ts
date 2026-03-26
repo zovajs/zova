@@ -185,3 +185,17 @@ export function beanFullNameFromOnionName(onionName: string, sceneName: keyof IB
 export function onionNameFromBeanFullName(beanFullName: string, sceneName: keyof IBeanSceneRecord): string {
   return beanFullName.replace(`.${sceneName}.`, ':');
 }
+
+export function convertToUnit(str, unit = 'px') {
+  if (str == null || str === '') {
+    return undefined;
+  }
+  const num = Number(str);
+  if (Number.isNaN(num)) {
+    return String(str);
+  } else if (!Number.isFinite(num)) {
+    return undefined;
+  } else {
+    return `${num}${unit}`;
+  }
+}

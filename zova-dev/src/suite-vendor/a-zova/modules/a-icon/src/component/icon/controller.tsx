@@ -1,4 +1,4 @@
-import { BeanControllerBase, Use } from 'zova';
+import { BeanControllerBase, convertToUnit, Use } from 'zova';
 import { Controller } from 'zova-module-a-bean';
 
 import { ToolIcon } from '../../bean/tool.icon.js';
@@ -25,28 +25,36 @@ export class ControllerIcon extends BeanControllerBase {
   }
 
   private async _load() {
-    const icon = this.$props.name;
-    if (icon === ('none' as any) || !icon) {
+    const name = this.$props.name;
+    if (name === ('none' as any) || !name) {
       return;
     }
-    const promise = this.$$toolIcon.parseIconInfo(icon);
+    if (name.startsWith('http://') || name.startsWith('https://')) {
+      return;
+    }
+    const promise = this.$$toolIcon.parseIconInfo(name);
     if (process.env.SSR) {
       await promise;
     }
   }
 
   protected render() {
-    // icon info
-    const iconInfo = $getZovaIcon(this.$props.name);
-    // href
-    let href = this.$props.href;
-    if (!href) {
-      href = `#${iconInfo?.symbolId || ''}`;
-    }
     // width/height
     const defaultSize = this.scope.config.icon.size;
     const width = this.$props.width ?? this.$props.height ?? defaultSize;
     const height = this.$props.height ?? this.$props.width ?? defaultSize;
+    const href = this._parseHref();
+    if ((href.startsWith('http://') || href.startsWith('https://')) && !href.endsWith('.svg')) {
+      return (
+        <img
+          style={{
+            width: convertToUnit(width),
+            height: convertToUnit(height),
+          }}
+          src={href}
+        ></img>
+      );
+    }
     return (
       <svg
         class="zova-icon__svg"
@@ -62,5 +70,17 @@ export class ControllerIcon extends BeanControllerBase {
         <use xlinkHref={href}></use>
       </svg>
     );
+  }
+
+  private _parseHref() {
+    let href = this.$props.href;
+    const name = this.$props.name;
+    if (href) return href;
+    if (name && (name.startsWith('http://') || name.startsWith('https://'))) return name;
+    // icon info
+    const iconInfo = $getZovaIcon(name);
+    // href
+    href = `#${iconInfo?.symbolId || ''}`;
+    return href;
   }
 }
