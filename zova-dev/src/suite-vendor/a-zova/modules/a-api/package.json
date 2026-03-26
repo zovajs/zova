@@ -28,8 +28,8 @@
     "./*": "./*"
   },
   "scripts": {
-    "clean": "rimraf dist tsconfig.build.tsbuildinfo",
-    "tsc:publish": "npm run clean && zova :bin:buildModule --sourcemap",
+    "clean": "rimraf dist dist-cli tsconfig.build.tsbuildinfo tsconfig.cli.tsbuildinfo",
+    "tsc:publish": "npm run clean && zova :bin:buildModule --sourcemap && tsc -p tsconfig.cli.json",
     "prepublishOnly": "npm run tsc:publish",
     "prepack": "clean-package",
     "postpack": "clean-package restore && npm run clean"
