@@ -9,7 +9,9 @@ node_modules
 miniprogram_npm
 vite.config.ts.timestamp-*
 
-**/dist
+**/dist/
+**/dist-toolsIsolate/
+**/dist-cli/
 dist-releases
 dist-mock
 
