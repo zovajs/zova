@@ -14,8 +14,10 @@ export class ControllerPageErrorExpired extends BeanControllerPageBase {
 
   protected async __init__() {
     if (process.env.CLIENT) {
-      // should not use await
-      this._refreshToken();
+      this.$onMounted(() => {
+        // should not use await
+        this._refreshToken();
+      });
     }
   }
 
