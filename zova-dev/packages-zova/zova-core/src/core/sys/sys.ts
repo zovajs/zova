@@ -129,7 +129,7 @@ export class ZovaSys {
 function _mergeEnv(env: NodeJS.ProcessEnv, envRuntime?: Partial<ZovaConfigEnv>): ZovaConfigEnv {
   if (!envRuntime) return env as unknown as ZovaConfigEnv;
   const env2 = { ...env };
-  for (const key of Object.keys(env2)) {
+  for (const key of Object.keys(envRuntime)) {
     if (envRuntime[key] !== undefined) {
       env2[key] = envRuntime[key];
     }
