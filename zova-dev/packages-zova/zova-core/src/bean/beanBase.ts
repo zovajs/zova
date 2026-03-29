@@ -96,7 +96,8 @@ export class BeanBase extends BeanBaseSimple {
     return cast(this.ctx.instance).ctx.renderFreeze(freeze);
   }
 
-  protected async $renderFreezeScope<RESULT>(fn: FunctionAsync<RESULT>): Promise<RESULT> {
+  protected async $renderFreezeScope<RESULT>(fn: FunctionAsync<RESULT>): Promise<RESULT | undefined> {
+    if (this.ctx.disposed) return;
     return await cast(this.ctx.instance).ctx.renderFreezeScope(fn);
   }
 
