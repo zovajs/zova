@@ -98,7 +98,7 @@ export function coerceValueType(type: string, value: any) {
   if ((typeof value as any) === type) return value;
   let _value;
   if (type === 'number') {
-    if (Number.isNaN(value)) {
+    if (Number.isNaN(Number(value))) {
       _value = value;
     } else {
       _value = Number(value);
