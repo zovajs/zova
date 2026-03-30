@@ -40,70 +40,47 @@ Zova can be used with any UI library and comes with built-in project templates f
 
 - [Docs](https://zova.js.org/guide/start/introduction.html)
 
-## Demo Online
+## Demo Online 1
 
 - [vue3 + ts + tsx + tailwindcss + daisyui](https://zova.js.org/zova-demo/)
 
-## Coding style: Vue+React+Angular
+## Demo Online 2
 
-Zova refines the pros of `Vue3/React/Angular` and avoid their cons to make our development experience more elegant and reduce the mental burden
+The Website and Admin-Dashboard of Cabloy Store are built by one codebase
 
-1. `Vue3`: Zova still uses Vue3's convenient responsive api system, but defining responsive variables is just like defining native variables, without the need to use `ref/reactive`, and naturally without `ref.value`
-2. `React`: Zova uses the `tsx` syntax to write rendering logic in a `Render Class`, which not only perfectly matches the TS type system, but also supports the splitting of rendering code, and can keep the code clean and elegant even in the face of complex business. In Zova, there are no many hook apis like React, which greatly reduces the mental burden
-3. `Angular`: In actual development, there are three scenarios of state sharing: `state sharing of component internal`, `state sharing between components` and `global state sharing`. In the traditional Vue3, different mechanisms are used to achieve these state sharing scenes, while only a unified IOC container mechanism is needed in Zova. The IOC container provided by Zova abandons the cumbersome design of Angular, with clearer concepts and more powerful functions
+- Website: [https://cabloy.com](https://cabloy.com)
+- Admin-Dashboard: [https://cabloy.com/admin](https://cabloy.com/admin)
 
-## Features
+## GIF Demo
 
-- [SSR](https://zova.js.org/guide/techniques/ssr/introduction.html): Built-in out-of-the-box SSR solution, supporting both front-end applications and admin management systems
-- [Modularization](https://zova.js.org/guide/essentials/modularization/module.html): The basis for building large business systems
-- [IOC](https://zova.js.org/guide/essentials/ioc/introduction.html): The basis for business abstraction and modeling
-- [Module Scope](https://zova.js.org/guide/essentials/scope/introduction.html): Access strategy based on dependency lookup
-- [Route Query](https://zova.js.org/guide/techniques/router/route-query.html): Routes with TS types
-- [Mock](https://zova.js.org/guide/techniques/mock/introduction.html): More convenient Mock Mechanism
-- [Icon](https://zova.js.org/guide/techniques/icon/icon-engine.html): UI library-independent icon engine
-- [CSS-in-JS: Style & Theme](https://zova.js.org/guide/techniques/css-in-js/introduction.html): More flexible style engine based on [TypeStyle](https://github.com/typestyle/typestyle)
-- [Model: Unified Data Source](https://zova.js.org/guide/techniques/model/introduction.html): Data management strategy based on [Tanstack Query](https://tanstack.com/query/latest/docs/framework/vue/overview)
-- [Env](https://zova.js.org/guide/techniques/env/introduction.html): Env file loading strategy based on multi-dimensional variables
+- Pioneers dual-layer tabs navigation UI/UX
 
-## How to do
+![](./zova-docs/assets/img/start/cabloy-start-two-level-tabs.gif)
 
-```bash
-$ npm run init
-$ cd ./zova-dev
-$ npm run dev
-```
+## Technology Stack
 
-## How to do: ui-element
+### Core
 
-```bash
-$ cd zova-ui-element
-$ pnpm install
-$ npm run dev
-```
+| Name           | Version  |
+| -------------- | -------- |
+| Vite           | >=8.0.0  |
+| Vue            | >=3.5.6  |
+| Vue Router     | >=4.4.5  |
+| Zod            | >=4.1.13 |
+| Tanstack Query | >=5.92.5 |
+| Tanstack Form  | >=1.23.5 |
+| Tanstack Table | >=8.21.3 |
 
-## How to do: ui-quasar
+### UI Libraries
 
-```bash
-$ cd zova-ui-quasar
-$ pnpm install
-$ npm run dev
-```
+Zova can be used with any UI library and comes with built-in project templates for several UI libraries, making it easy to use out of the box
 
-## How to do: ui-vuetify
-
-```bash
-$ cd zova-ui-vuetify
-$ pnpm install
-$ npm run dev
-```
-
-## How to do: ui-empty
-
-```bash
-$ cd zova-ui-empty
-$ pnpm install
-$ npm run dev
-```
+| Name        | Version  |
+| ----------- | -------- |
+| Daisyui     | >=5.3.2  |
+| Tailwindcss | >=4.1.14 |
+| Quasar      | >=2.18.1 |
+| Vuetify     | >=4.0.1  |
 
 ## Stay In Touch
 
