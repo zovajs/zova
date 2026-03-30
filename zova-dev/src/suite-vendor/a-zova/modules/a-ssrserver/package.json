@@ -33,7 +33,9 @@
     "prepack": "clean-package",
     "postpack": "clean-package restore && npm run clean"
   },
-  "dependencies": {},
+  "dependencies": {
+    "ms": "^2.1.3"
+  },
   "devDependencies": {
     "clean-package": "^2.2.0",
     "rimraf": "^6.0.1"

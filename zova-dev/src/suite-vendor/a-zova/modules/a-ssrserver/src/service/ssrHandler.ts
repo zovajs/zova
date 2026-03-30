@@ -1,6 +1,7 @@
 import { catchError } from '@cabloy/utils';
 import { RouteLocationResolvedGeneric } from '@cabloy/vue-router';
 import fse from 'fs-extra';
+import ms from 'ms';
 import path, { basename } from 'node:path';
 import { pathToFileURL } from 'node:url';
 import { BeanBase, cast, Use, UseScope } from 'zova';
@@ -221,10 +222,17 @@ export class ServiceSsrHandler extends BeanBase {
   }
 
   private async _renderTransferCache(options: ISsrHandlerRenderOptionsInner, route: RouteLocationResolvedGeneric) {
+    const { req } = options;
     const transferCache = route.meta.transferCache ?? this.$$scopeSsr.config.transferCache;
     if (transferCache === false) return;
     // expires
-    if (transferCache.expires === 0) return;
+    const transferCacheExpires = transferCache.expires ?? 0;
+    const expires = typeof transferCacheExpires === 'string' ? ms(transferCacheExpires) / 1000 : transferCacheExpires;
+    if (expires === 0) {
+      req.headers['cache-control'] = 'no-cache, no-store, must-revalidate';
+    } else {
+      req.headers['cache-control'] = `public, max-age=${expires}`;
+    }
   }
 }
 

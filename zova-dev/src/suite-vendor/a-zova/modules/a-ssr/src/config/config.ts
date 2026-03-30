@@ -1,3 +1,4 @@
+import type { StringValue } from 'ms';
 import type { ZovaSys } from 'zova';
 
 import { ISsrConfig } from '../types/config.js';
@@ -19,8 +20,8 @@ export const config = (sys: ZovaSys) => {
   return ssrConfig;
 };
 
-function _normalizeExpires(expires: string | undefined) {
+function _normalizeExpires(expires: string | undefined): StringValue | number {
   if (!expires) return 0;
   if (!Number.isNaN(Number(expires))) return Number(expires);
-  return expires;
+  return expires as StringValue;
 }

@@ -1,7 +1,8 @@
 import '@cabloy/vue-router';
+import type { StringValue } from 'ms';
 
 export interface ISsrConfigTransferCache {
-  expires?: number | string;
+  expires?: number | StringValue;
 }
 
 export interface ISsrConfig {
