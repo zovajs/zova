@@ -1,10 +1,12 @@
 import { catchError } from '@cabloy/utils';
+import { RouteLocationResolvedGeneric } from '@cabloy/vue-router';
 import fse from 'fs-extra';
 import path, { basename } from 'node:path';
 import { pathToFileURL } from 'node:url';
-import { BeanBase, cast, Use } from 'zova';
+import { BeanBase, cast, Use, UseScope } from 'zova';
 import { Service } from 'zova-module-a-bean';
 import { SysRouter } from 'zova-module-a-router';
+import { ScopeModuleASsr } from 'zova-module-a-ssr';
 
 import { ISsrHandlerRenderOptionsInner, TypeEventResolvePathResult } from '../types/ssr.js';
 
@@ -26,6 +28,9 @@ export class ServiceSsrHandler extends BeanBase {
 
   @Use()
   $$sysRouter: SysRouter;
+
+  @UseScope()
+  $$scopeSsr: ScopeModuleASsr;
 
   protected __init__(siteAssetDir: string) {
     this._siteAssetDir = siteAssetDir;
@@ -90,6 +95,9 @@ export class ServiceSsrHandler extends BeanBase {
     ssrContext._meta.endingHeadTags += this._renderModulesPreload(cast(ssrContext).modules, { ssrContext });
 
     const html = renderTemplate(ssrContext);
+
+    // transferCache
+    await this._renderTransferCache(options, route);
 
     // todo: ssg
 
@@ -210,6 +218,13 @@ export class ServiceSsrHandler extends BeanBase {
     }
 
     return '';
+  }
+
+  private async _renderTransferCache(options: ISsrHandlerRenderOptionsInner, route: RouteLocationResolvedGeneric) {
+    const transferCache = route.meta.transferCache ?? this.$$scopeSsr.config.transferCache;
+    if (transferCache === false) return;
+    // expires
+    if (transferCache.expires === 0) return;
   }
 }
 
