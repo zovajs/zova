@@ -11,7 +11,7 @@ hero:
       text: 快速开始
       link: /zh/guide/start/introduction
     - theme: alt
-      text: Demo
+      text: 演示
       link: https://zova.js.org/zova-demo/
     - theme: alt
       text: GitHub
