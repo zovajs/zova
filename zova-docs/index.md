@@ -5,14 +5,14 @@ layout: home
 hero:
   name: 'Zova'
   text: 'A more intuitive framework'
-  tagline: With the pros of Vue3, React and Angular, empowers developers to build elegant, fast and reliable applications
+  tagline: = Vue3(intuitive state management) + React(flexible TSX rendering) + Angular(powerful IOC container)
   actions:
     - theme: brand
       text: Get Started
       link: /guide/start/introduction
     - theme: alt
-      text: Why Vue3+IOC?
-      link: /guide/start/why
+      text: 演示
+      link: https://zova.js.org/zova-demo/
     - theme: alt
       text: GitHub
       link: https://github.com/zovajs/zova
