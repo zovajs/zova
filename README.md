@@ -4,6 +4,11 @@ English | [简体中文](./README.zh-CN.md)
 
 Zova is a more intuitive frontend framework, = Vue3(intuitive state management) + React(flexible TSX rendering) + Angular(powerful IOC container)
 
+- Built-in out-of-the-box SSR solution, building `SSR/SPA/Website/Admin-Dashboard` all in one codebase
+- Pioneers dual-layer tabs navigation UI/UX, allowing more convenient switching between multiple pages
+- Dynamically render CRUD list pages, entry pages, and search forms, and provides the best practices of `Tanstack Table/Tanstack Form/Tanstack Query`
+- Offers powerful IOC + AOP capabilities, making the system more extensible and maintainable
+
 [![LICENSE MIT][license-image]][license-url]
 [![NPM version][npm-image]][npm-url]
 [![NPM download][download-image]][download-url]
@@ -15,28 +20,29 @@ Zova is a more intuitive frontend framework, = Vue3(intuitive state management) 
 [download-image]: https://img.shields.io/npm/dm/zova?color=orange&label=npm%20downloads
 [download-url]: https://npmjs.com/package/zova
 
-## Philosophy
+## Fullstack Principles
 
-Many frameworks use the simplest use cases to demonstrate design elegance, ignoring the coding challenges presented by business complexity. As business grows and changes, project code quickly degrades and becomes difficult to maintain. Zova, however, addresses the complexity of large-scale businesses and proposes a series of engineering solutions. This allows us to maintain elegant and intuitive code even when developing large-scale business systems, improving development efficiency and experience while facilitating subsequent code iteration and maintenance
+Vona works perfectly with Zova, continuing the frontend-backend separation architecture. Frontend projects built with Zova can run independently or have their JS bundle copied into the Vona backend for SSR rendering directly on the backend
+
+- Vona can generate a complete Openapi Schema, which can then generate an API SDK in Zova
+- Zova can generate types for routes and components to provide type hints in Vona
 
 ## With UI libraries
 
 Zova can be used with any UI library and comes with built-in project templates for several UI libraries, making it easy to use out of the box, including:
 
-- antdv
-- element-plus
-- quasar
-- vuetify
-- empty： Other UI libraries can be used based on this empty template
-
-## Demo online
-
-- [vue3 + ts + tsx + tailwindcss + daisyui](https://zova.js.org/zova-demo/)
+- Daisyui
+- Quasar
+- Vuetify
+- Empty: Other UI libraries can be used based on this empty template
 
 ## Documentation
 
-- [Get Started](https://zova.js.org/guide/start/introduction.html)
-- [Why Vue3+IOC?](https://zova.js.org/guide/start/why.html)
+- [Docs](https://zova.js.org/guide/start/introduction.html)
+
+## Demo Online
+
+- [vue3 + ts + tsx + tailwindcss + daisyui](https://zova.js.org/zova-demo/)
 
 ## Coding style: Vue+React+Angular
 

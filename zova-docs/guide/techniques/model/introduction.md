@@ -4,7 +4,7 @@ Zova provides the `Model` mechanism in the MVC architecture, encapsulating unifi
 
 The base of Zova Model is [TanStack Query](https://tanstack.com/query/latest/docs/framework/vue/overview). `TanStack Query` provides powerful data acquisition, caching and update capabilities. Zova encapsulates a very simple usage paradigm based on TanStack Query, which makes it very easy to get started. However, it is still recommended that you read the documentation for TanStack Query. If you have not used similar data management mechanisms, then you will definitely be impressed by the thought
 
-## Demo online
+## Demo Online
 
 - [Todo: CRUD](https://zova.js.org/zova-demo/#/demo/todo/todo)
 
