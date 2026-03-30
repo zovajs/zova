@@ -637,11 +637,12 @@ export class BeanContainer {
       return this[SymbolBeanContainerInstances][useOptions.prop];
     }
     // 3. targetBeanFullName
-    let targetOptions: Pick<IDecoratorBeanOptionsBase, 'containerScope' | 'markReactive'> | undefined;
+    let targetOptions: Pick<IDecoratorBeanOptionsBase, 'containerScope' | 'markReactive' | 'scene'> | undefined;
     if (targetBeanComposable) {
       targetOptions = {
         containerScope: undefined,
         markReactive: undefined,
+        scene: undefined as never,
       };
     } else if (targetBeanFullName) {
       targetOptions = await this._getBeanOptionsForce(targetBeanFullName);
@@ -650,7 +651,11 @@ export class BeanContainer {
       }
     }
     // options: injectionScope
-    const injectionScope = useOptions.injectionScope ?? targetOptions!.containerScope ?? 'ctx';
+    let injectionScope = useOptions.injectionScope ?? targetOptions!.containerScope ?? 'ctx';
+    // patch
+    if (targetOptions?.scene === 'scope' && !this.app) {
+      injectionScope = 'sys';
+    }
     // options: markReactive: default is true
     const markReactive = useOptions.markReactive ?? targetOptions!.markReactive ?? true;
     // options: selectorInfo
