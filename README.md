@@ -2,7 +2,7 @@ English | [简体中文](./README.zh-CN.md)
 
 # Zova
 
-Zova is a more intuitive framework with the pros of Vue3, React and Angular, empowers developers to build elegant, fast and reliable applications
+Zova is a more intuitive frontend framework, = Vue3(intuitive state management) + React(flexible TSX rendering) + Angular(powerful IOC container)
 
 [![LICENSE MIT][license-image]][license-url]
 [![NPM version][npm-image]][npm-url]
@@ -17,7 +17,7 @@ Zova is a more intuitive framework with the pros of Vue3, React and Angular, emp
 
 ## Philosophy
 
-Many frameworks use the simplest use cases to demonstrate design elegance, ignoring the coding challenges presented by business complexity. As business grows and changes, project code quickly degrades and becomes difficult to maintain. Vona, however, addresses the complexity of large-scale businesses and proposes a series of engineering solutions. This allows us to maintain elegant and intuitive code even when developing large-scale business systems, improving development efficiency and experience while facilitating subsequent code iteration and maintenance
+Many frameworks use the simplest use cases to demonstrate design elegance, ignoring the coding challenges presented by business complexity. As business grows and changes, project code quickly degrades and becomes difficult to maintain. Zova, however, addresses the complexity of large-scale businesses and proposes a series of engineering solutions. This allows us to maintain elegant and intuitive code even when developing large-scale business systems, improving development efficiency and experience while facilitating subsequent code iteration and maintenance
 
 ## With UI libraries
 
