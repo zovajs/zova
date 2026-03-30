@@ -1,5 +1,7 @@
+import '@cabloy/vue-router';
+
 export interface ISsrConfigTransferCache {
-  expires: number | string;
+  expires?: number | string;
 }
 
 export interface ISsrConfig {
@@ -9,4 +11,10 @@ export interface ISsrConfig {
     bodyReadyObserver: boolean;
   };
   transferCache: false | ISsrConfigTransferCache;
+}
+
+declare module '@cabloy/vue-router' {
+  export interface RouteMeta {
+    transferCache?: false | ISsrConfigTransferCache;
+  }
 }
