@@ -222,16 +222,16 @@ export class ServiceSsrHandler extends BeanBase {
   }
 
   private async _renderTransferCache(options: ISsrHandlerRenderOptionsInner, route: RouteLocationResolvedGeneric) {
-    const { req } = options;
+    const { res } = options;
     const transferCache = route.meta.transferCache ?? this.$$scopeSsr.config.transferCache;
     if (transferCache === false) return;
     // expires
     const transferCacheExpires = transferCache.expires ?? 0;
     const expires = typeof transferCacheExpires === 'string' ? ms(transferCacheExpires) / 1000 : transferCacheExpires;
     if (expires === 0) {
-      req.headers['cache-control'] = 'no-cache, no-store, must-revalidate';
+      res.appendHeader('cache-control', 'no-cache, no-store, must-revalidate');
     } else {
-      req.headers['cache-control'] = `public, max-age=${expires}`;
+      res.appendHeader('cache-control', `public, max-age=${expires}`);
     }
   }
 }
