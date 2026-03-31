@@ -105,3 +105,85 @@ In fact, the coding styles of Zova and Java are significantly different, which i
 ### Some people say that the technology trend of the front-end is that `composition better than inheritance`, so it is inappropriate to introduce IOC
 
 In fact, in essence, the core architectural concept of the IOC container is composition. Through the hosting of the IOC container, these bean instances can be composited more freely and flexibly, and can share states and logic more conveniently
+
+## Demonstration: no `ref/reactive`, no `ref.value`
+
+### 1. Define reactive state
+
+Define a reactive variable `count` in the component and add two methods to modify its value
+
+```typescript
+export class ControllerPageCounter {
+  count: number = 0;
+
+  increment() {
+    this.count++;
+  }
+
+  decrement() {
+    this.count--;
+  }
+}
+```
+
+### 2. Use reactive state
+
+Use `count` in render class
+
+```typescript
+export class RenderCounter {
+  render() {
+    return (
+      <div>
+        <div>count(ref): {this.count}</div>
+        <button onClick={() => this.increment()}>Increment</button>
+        <button onClick={() => this.decrement()}>Decrement</button>
+      </div>
+    );
+  }
+}
+```
+
+## Demonstration: dependency injection
+
+### 1. Logic Reuse
+
+Create a `Service` Bean to implement the logic of `count`
+
+```typescript
+@Service()
+export class ServiceCounter {
+  count: number = 0;
+
+  increment() {
+    this.count++;
+  }
+
+  decrement() {
+    this.count--;
+  }
+}
+```
+
+### 2. Inject and use in a component
+
+```typescript
+export class ControllerPageCounter {
+  @Use()
+  $$counter: ServiceCounter;
+}
+```
+
+```typescript
+export class RenderCounter {
+  render() {
+    return (
+      <div>
+        <div>count(ref): {this.$$counter.count}</div>
+        <button onClick={() => this.$$counter.increment()}>Increment</button>
+        <button onClick={() => this.$$counter.decrement()}>Decrement</button>
+      </div>
+    );
+  }
+}
+```
