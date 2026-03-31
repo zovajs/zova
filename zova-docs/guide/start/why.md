@@ -171,30 +171,30 @@ class ControllerPageTest {
 
 We know that IOC is an effective architectural design for system decoupling, and is also a supporting tool for the development of large-scale business systems. Zova provides powerful AOP programming capabilities on top of IOC, making the system more extensible and maintainable
 
-Zova's AOP programming includes: 'Inner Facet', 'Outer Facet', 'Behavior', 'Interceptor'. Here are just two examples:
+AOP programming in Zova includes: `Internal Aspect`, `External Aspect`, `Behavior`, `Interceptor`. Here are just two examples:
 
-### Example: Internal section
+### Example: Internal Aspect
 
-Taking the previous class 'ControllerPageCounter' as an example, to output the execution time of the render method in the console, the code is as follows:
+Taking the previous class `ControllerPageCounter` as an example, to output the execution time of the render method in the console, the code is as follows:
 
 ```diff
 import { Log } from 'zova-module-a-logger';
 
 class ControllerPageCounter {
 + @Log()
-protected render() {
-...
-}
+  protected render() {
+    ...
+  }
 }
 ```
 
 The console output is as follows:
 
-! [](.. /.. /assets/img/start/why-001.png)
+![](../../assets/img/start/why-001.png)
 
-### Example: External facet
+### Example: External Aspect
 
-It is also possible to cut into the Log logic from the outside without changing the source code of the Class 'ControllerPageCounter'
+It is also possible to cut into the Log logic from the external without changing the source code of the Class `ControllerPageCounter`
 
 ```typescript
 @Aop({ match: 'demo-student.controller.pageCounter' })
@@ -211,4 +211,4 @@ class AopCounterLog {
 
 The console output is as follows:
 
-! [](.. /.. /assets/img/start/why-002.png)
+![](../../assets/img/start/why-002.png)
