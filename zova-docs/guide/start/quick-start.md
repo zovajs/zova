@@ -1,5 +1,12 @@
 # Quick Start
 
+## Prerequisites
+
+| Name   | Version   |
+| ------ | --------- |
+| pnpm   | >=10.19.0 |
+| Nodejs | >=24.8.0  |
+
 ## Preparation
 
 1. Install command-line tools
@@ -17,14 +24,17 @@ This extension provides a large number of menus for quickly creating code skelet
 ### 1. Create Project
 
 ```bash
-$ zova :create:project projectName
+$ zova :create:project projectName --template=vuetify
+$ cd projectName
 ```
 
-1. Directly execute `zova` on the command line to create a project named `projectName`
-2. The command line will output a list of templates, and the currently provided templates are as follows:
-   - zova + quasar
-   - zova + vuetify
-   - zova only
+Zova provides three project templates:
+
+| Name    | UI      | Description                                                 |
+| ------- | ------- | ----------------------------------------------------------- |
+| quasar  | Quasar  | >=2.18.1                                                    |
+| vuetify | Vuetify | >=4.0.1                                                     |
+| empty   |         | Other UI libraries can be used based on this empty template |
 
 ### 2. Start Dev Server
 
