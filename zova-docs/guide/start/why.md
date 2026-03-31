@@ -149,19 +149,19 @@ class ServiceData {
 import { ServiceData } from '../../service/data.js';
 
 class ControllerPageTest {
-  // 组件内部状态共享
+  // Component internal
   @Use()
   $$serviceData: ServiceData;
 
-  // 组件之间状态共享
+  // Between components
   @Use({ injectionScope: 'host' })
   $$serviceData2: ServiceData;
 
-  // 全局状态共享
+  // Global
   @Use({ injectionScope: 'app' })
   $$serviceData3: ServiceData;
 
-  // 系统状态共享
+  // System
   @Use({ injectionScope: 'sys' })
   $$serviceData4: ServiceData;
 }
