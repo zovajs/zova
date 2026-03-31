@@ -19,11 +19,12 @@ hero:
 
 features:
   - title: Vue+React+Angular
-    details: Refines the pros of Vue/React/Angular and avoid their cons to make our development experience more elegant and reduce the mental burden
+    details: Absorb the essence of Vue3/React/Angular, avoid their shortcomings, make our development experience more elegant, and reduce mental burden
+  - title: SSR
+    details: Built-in out-of-the-box SSR solution, building `SSR/SPA/Website/Admin-Dashboard` all in one codebase
   - title: UI libraries
     details: Zova can be used with any UI library and comes with built-in project templates for several UI libraries, making it easy to use out of the box, including antdv, element-plus, quasar and vuetify
-  - title: SSR
-    details: Built-in out-of-the-box SSR solution, supporting both front-end applications and admin management systems
+
   - title: Reactivity
     details: With the support of ioc container, defining reactive states no longer needs ref/reactive. Without ref, naturally there is no need to write a lot of ref.value
   - title: CSS-in-JS

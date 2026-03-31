@@ -34,6 +34,6 @@ features:
     details: 内置CSS-in-JS的能力，让样式的开发更加灵活、便捷，同时提供了开箱即用的主题切换能力
   - title: 统一状态数据
     details: 采用统一的Model机制封装状态数据，包括Cookie、Localstorage和TanStack Query管理的服务端数据
-  - title: IOC容器
-    details: Zova提供的IOC容器概念更加清晰，功能更加强大，是应对大型业务系统开发的利器
+  - title: IOC + AOP
+    details: 提供强大的 IOC + AOP 能力，让系统具有无与伦比的可扩展性和可维护性
 ---
