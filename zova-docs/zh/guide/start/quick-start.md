@@ -1,5 +1,12 @@
 # 快速上手
 
+## 前置条件
+
+| 名称   | 版本      |
+| ------ | --------- |
+| pnpm   | >=10.19.0 |
+| Nodejs | >=24.8.0  |
+
 ## 准备工作
 
 1. 安装命令行工具
@@ -17,14 +24,17 @@ $ pnpm add -g zova-cli@latest
 ### 1. 创建项目
 
 ```bash
-$ zova :create:project projectName
+$ zova :create:project projectName --template=vuetify
+$ cd projectName
 ```
 
-1. 直接在命令行执行`zova`创建一个项目，名称为`projectName`
-2. 命令行会列出模版列表，当前提供的模版如下：
-   - zova + quasar
-   - zova + vuetify
-   - zova only
+Zova 提供了三个项目模版:
+
+| 名称    | UI      | 说明                         |
+| ------- | ------- | ---------------------------- |
+| quasar  | Quasar  | >=2.18.1                     |
+| vuetify | Vuetify | >=4.0.1                      |
+| empty   |         | 可以在此基础上使用其他 UI 库 |
 
 ### 2. 启动开发服务
 
@@ -32,7 +42,7 @@ $ zova :create:project projectName
 $ npm run dev
 ```
 
-### 3. 构建项目
+### 3. 构建
 
 ```bash
 $ npm run build
