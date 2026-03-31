@@ -22,17 +22,18 @@ features:
     details: Absorb the essence of Vue3/React/Angular, avoid their shortcomings, make our development experience more elegant, and reduce mental burden
   - title: SSR
     details: Built-in out-of-the-box SSR solution, building `SSR/SPA/Website/Admin-Dashboard` all in one codebase
+  - title: Dual-layer Tabs UI/UX
+    details: Pioneers dual-layer tabs navigation UI/UX, allowing more convenient switching between multiple pages
+  - title: CRUD Dynamic Rendering
+    details: Dynamically render CRUD list pages, entry pages, and search forms, and provides the best practices of Tanstack Table/Tanstack Form/Tanstack Query
   - title: UI libraries
-    details: Zova can be used with any UI library and comes with built-in project templates for several UI libraries, making it easy to use out of the box, including antdv, element-plus, quasar and vuetify
-
+    details: Zova can be used with any UI library and comes with built-in project templates for several UI libraries, making it easy to use out of the box, including daisyui, quasar and vuetify
   - title: Reactivity
     details: With the support of ioc container, defining reactive states no longer needs ref/reactive. Without ref, naturally there is no need to write a lot of ref.value
   - title: CSS-in-JS
     details: Built-in CSS-in-JS capability making style development more flexible and convenient, while providing out-of-the-box theme switching capabilities
-  - title: Unified Data Source
-    details: Encapsulating unified data sources through model mechanism, including Cookie, Localstorage and server-side data managed by TanStack Query
-  - title: IOC Container
-    details: The IOC container provided by Zova has a clearer concept and more powerful functions, which is a powerful tool for the development of large-scale business systems
-  - title: Modularization
-    details: In a large web business system, as the business grows and changes, it is also necessary to divide the system into relatively independent modules in order to avoid code bloating. This is why Zova introduces modularization. In Zova, a module is a natural bundle boundary, and automatically bundled into an independent asynchronous chunk when building, bidding farewell to the hassle of Vite configuration and effectively avoiding the fragmentation of bundles. Especially in large business systems, this advantage is particularly evident
+  - title: Unified state management
+    details: Encapsulating unified state data through model mechanism, including Cookie, Localstorage and server-side data managed by TanStack Query
+  - title: IOC + AOP
+    details: Offers powerful IOC + AOP capabilities, making the system more extensible and maintainable
 ---

@@ -32,7 +32,7 @@ features:
     details: 有了IOC容器的加持，定义响应式状态不再需要 ref/reactive。因为不用 ref，自然也就不用再写大量的 ref.value
   - title: CSS-in-JS
     details: 内置CSS-in-JS的能力，让样式的开发更加灵活、便捷，同时提供了开箱即用的主题切换能力
-  - title: 统一状态数据
+  - title: 统一状态管理
     details: 采用统一的Model机制封装状态数据，包括Cookie、Localstorage和TanStack Query管理的服务端数据
   - title: IOC + AOP
     details: 提供强大的 IOC + AOP 能力，让系统具有无与伦比的可扩展性和可维护性
