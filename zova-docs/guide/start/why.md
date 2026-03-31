@@ -114,20 +114,18 @@ class ControllerPageTest {
 
 ## Elegance: State Sharing: 4-in-1
 
-In actual development, the state sharing of three scenes will be encountered: `state sharing of component internal`, `state sharing between components` and `global state sharing`. In the traditional Vue3, different mechanisms are used to achieve these state sharing scenes, while only a unified IOC container mechanism is needed in Zova
+In actual development, there are four scopes of state sharing: `component internal`, `between components`, `global` and `system`. In the traditional Vue3, different mechanisms are used to achieve these state sharing scopes, while only a unified IOC container mechanism is needed in Zova
 
-In actual development, there are four scopes of state sharing: 'internal component state sharing', 'state sharing between components', 'global state sharing', and 'system state sharing'. In traditional Vue3, different mechanisms are used to implement them, while in Zova, only a unified IOC container mechanism is required
+| Scope of state sharing | Traditional Vue3 | Zova |
+| ---------------------- | ---------------- | ---- |
+| Component internal     | Composable       | IOC  |
+| Between components     | Provide/Inject   | IOC  |
+| Global                 | Pinia            | IOC  |
+| System                 | ES Module        | IOC  |
 
-| Scenario                         | Traditional Vue3 | Zova |
-| -------------------------------- | ---------------- | ---- |
-| Component Internal State Sharing | Composable       | IOC  |
-| State sharing between components | Provide/Inject   | IOC  |
-| Global State Sharing             | Pinia            | IOC  |
-| System State Sharing             | ES Module        | IOC  |
-
-> Some people may ask, what is the difference between 'global state sharing' and 'system state sharing'?
+> Some people may ask, what is the difference between `global state sharing` and `system state sharing`?
 >
-> > Because in SSR scenarios, 'global state sharing' is for requests, and 'system state sharing' can span requests
+> > Because in SSR scenarios, `global state sharing` is for each request, and `system state sharing` can cross requests
 
 ### Example: Create a service
 
@@ -148,30 +146,30 @@ class ServiceData {
 ### Example: Dependency injection
 
 ```typescript
-import { ServiceData } from '.. /.. /service/data.js';
+import { ServiceData } from '../../service/data.js';
 
 class ControllerPageTest {
-Internal state sharing of components
-@Use()
-$$serviceData: ServiceData;
+  // 组件内部状态共享
+  @Use()
+  $$serviceData: ServiceData;
 
-State is shared between components
-@Use({ injectionScope: 'host' })
-$$serviceData2: ServiceData;
+  // 组件之间状态共享
+  @Use({ injectionScope: 'host' })
+  $$serviceData2: ServiceData;
 
-Global state sharing
-@Use({ injectionScope: 'app' })
-$$serviceData3: ServiceData;
+  // 全局状态共享
+  @Use({ injectionScope: 'app' })
+  $$serviceData3: ServiceData;
 
-System state sharing
-@Use({ injectionScope: 'sys' })
-$$serviceData4: ServiceData;
+  // 系统状态共享
+  @Use({ injectionScope: 'sys' })
+  $$serviceData4: ServiceData;
 }
 ```
 
 ## Powerful: IOC + AOP
 
-IOC containers are effective architectural designs for system decoupling and support tools for large-scale business system development. Zova provides powerful AOP programming capabilities on top of IOC containers, making the system unmatched scalability and maintainability
+We know that IOC is an effective architectural design for system decoupling, and is also a supporting tool for the development of large-scale business systems. Zova provides powerful AOP programming capabilities on top of IOC, making the system more extensible and maintainable
 
 Zova's AOP programming includes: 'Inner Facet', 'Outer Facet', 'Behavior', 'Interceptor'. Here are just two examples:
 
