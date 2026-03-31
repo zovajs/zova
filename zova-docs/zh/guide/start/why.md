@@ -146,8 +146,28 @@ class ServiceData {
 ### 举例：依赖注入
 
 ```typescript
+import { ServiceData } from '../../service/data.js';
 
+class ControllerPageTest {
+  // 组件内部状态共享
+  @Use()
+  $$serviceData: ServiceData;
+
+  // 组件之间状态共享
+  @Use({ injectionScope: 'host' })
+  $$serviceData2: ServiceData;
+
+  // 全局状态共享
+  @Use({ injectionScope: 'app' })
+  $$serviceData3: ServiceData;
+
+  // 系统状态共享
+  @Use({ injectionScope: 'sys' })
+  $$serviceData4: ServiceData;
+}
 ```
+
+## 强大：IOC + AOP
 
 ## 前言
 
