@@ -169,6 +169,50 @@ class ControllerPageTest {
 
 ## 强大：IOC + AOP
 
+IOC 容器是进行系统解耦行之有效的架构设计，也是应对大型业务系统开发的支撑工具。Zova 在 IOC 容器的基础上提供了强大的 AOP 编程能力，让系统具有无与伦比的可扩展性和可维护性
+
+Zova 的 AOP 编程包括：`内部切面`、`外部切面`、`行为`、`拦截器`。在这里仅举两例：
+
+### 举例：内部切面
+
+以前面的 class `ControllerPageCounter`为例，要在控制台输出 render 方法的执行时间，代码如下：
+
+```diff
+import { Log } from 'zova-module-a-logger';
+
+class ControllerPageCounter {
++ @Log()
+  protected render() {
+    ...
+  }
+}
+```
+
+控制台输出如下：
+
+![](../../assets/img/start/why-001.png)
+
+### 举例：外部切面
+
+也可以不改变 Class `ControllerPageCounter`源码，而是从外部切入 Log 逻辑
+
+```typescript
+@Aop({ match: 'demo-student.controller.pageCounter' })
+class AopCounterLog {
+  render = (_args, next, _receiver) => {
+    const timeBegin = Date.now();
+    const res = next();
+    const timeEnd = Date.now();
+    console.log(`render: ${timeEnd - timeBegin}ms`);
+    return res;
+  };
+}
+```
+
+控制台输出如下：
+
+![](../../assets/img/start/why-002.png)
+
 ## 前言
 
 Vue3 已经非常强大和灵活了，为什么还要引入 IOC 容器呢？
