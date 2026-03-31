@@ -20,13 +20,6 @@ Zova is a more intuitive frontend framework, = Vue3(intuitive state management) 
 [download-image]: https://img.shields.io/npm/dm/zova?color=orange&label=npm%20downloads
 [download-url]: https://npmjs.com/package/zova
 
-## Fullstack Principles
-
-Vona works perfectly with Zova, continuing the frontend-backend separation architecture. Frontend projects built with Zova can run independently or have their JS bundle copied into the Vona backend for SSR rendering directly on the backend
-
-- Vona can generate a complete Openapi Schema, which can then generate an API SDK in Zova
-- Zova can generate types for routes and components to provide type hints in Vona
-
 ## With UI libraries
 
 Zova can be used with any UI library and comes with built-in project templates for several UI libraries, making it easy to use out of the box, including:
