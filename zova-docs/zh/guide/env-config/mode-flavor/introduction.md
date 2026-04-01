@@ -6,30 +6,23 @@ Zova 中的`多维变量`包含三个维度：`运行环境`、`应用模式`、
 
 ## 运行环境
 
-Vona 提供了三个运行环境：
+Zova 提供了两个运行环境：
 
-| 名称 | 说明     |
-| ---- | -------- |
-| test | 测试环境 |
-| dev  | 开发环境 |
-| prod | 生产环境 |
+| 名称        | 说明     |
+| ----------- | -------- |
+| development | 开发环境 |
+| production  | 生产环境 |
 
 ### 1. 启用运行环境
 
 通过执行不同的命令启用相应的运行环境
 
 ```bash
-# test
-$ npm run test
-$ npm run cov
-$ npm run db:reset
-# dev
+# development
 $ npm run dev
-$ npm run dev:one
-# prod
-$ npm run start
-$ npm run start:one
-$ npm run start:docker
+# production
+$ npm run build
+$ npm run preview
 ```
 
 ### 2. 如何判断当前运行环境
@@ -39,54 +32,49 @@ $ npm run start:docker
 使用 Env 来判断当前运行环境，可以支持 build 时的 tree-shaking 能力
 
 ```typescript
-process.env.META_MODE === 'test';
-process.env.META_MODE === 'dev';
-process.env.META_MODE === 'prod';
-```
-
-- 通过 Config 来判断
-
-```typescript
-app.config.meta.mode === 'test';
-app.config.meta.mode === 'dev';
-app.config.meta.mode === 'prod';
+process.env.META_MODE === 'development';
+process.env.META_MODE === 'production';
 ```
 
 - 简化写法
 
 ```typescript
-app.meta.isTest;
-app.meta.isDev;
-app.meta.isProd;
+process.env.DEV; // boolean
+process.env.PROD; // boolean
+```
+
+- 通过 Config 来判断
+
+```typescript
+sys.config.meta.mode === 'development';
+sys.config.meta.mode === 'production';
 ```
 
 ## Flavor
 
-面对更复杂的业务场景，往往需要提供更多场景的配置能力。那么，Vona 专门提供了 Flavor 机制。通过`运行环境`和`Flavor`的组合，使我们可以非常方便的定义各种场景的配置信息
+面对更复杂的业务场景，往往需要提供更多场景的配置能力。那么，Zova 专门提供了 Flavor 机制。通过`运行环境`、`应用模式`和`Flavor`的组合，使我们可以非常方便的定义各种场景的配置信息
 
 ### 1. 内置Flavor
 
-为了开箱即用，Vona 提供了几个内置 Flavor：
+为了开箱即用，Zova 提供了几个内置 Flavor：
 
-| 名称   | 说明                              |
-| ------ | --------------------------------- |
-| normal | 默认的Flavor                      |
-| play   | 用于[练习场](../../start/play.md) |
-| docker | 用于Docker环境                    |
-| ci     | 用于CI环境，比如Github Actions    |
+| 名称             | 说明                              |
+| ---------------- | --------------------------------- |
+| admin            | 默认的Flavor                      |
+| web              | 用于[练习场](../../start/play.md) |
+| cabloyBasicAdmin | 用于Cabloy Basic的`Admin中后台`   |
+| cabloyStartAdmin | 用于Cabloy Start的`Admin中后台`   |
+| cabloyStartWeb   | 用于Cabloy Start的`Web网站`       |
 
 ### 2. 启用Flavor
 
 通过传递命令参数启用相应的 Flavor
 
-```bash
-# normal
-$ npm run dev
-# docker
-$ npm run dev -- --flavor=docker
-$ npm run build -- --flavor=docker
-# ci
-$ npm run build -- --flavor=ci
+```json
+"scripts": {
+  "dev": "npm run dev:ssr:admin",
+  "dev:ssr:admin": "npm run prerun && quasar dev --mode ssr --flavor admin",
+},
 ```
 
 ### 3. 如何判断当前Flavor
@@ -96,17 +84,15 @@ $ npm run build -- --flavor=ci
 使用 Env 来判断当前 Flavor，可以支持 build 时的 tree-shaking 能力
 
 ```typescript
-process.env.META_FLAVOR === 'normal';
-process.env.META_FLAVOR === 'docker';
-process.env.META_FLAVOR === 'ci';
+process.env.META_FLAVOR === 'admin';
+process.env.META_FLAVOR === 'web';
 ```
 
 - 通过 Config 来判断
 
 ```typescript
-app.config.meta.flavor === 'normal';
-app.config.meta.flavor === 'docker';
-app.config.meta.flavor === 'ci';
+sys.config.meta.flavor === 'admin';
+sys.config.meta.flavor === 'web';
 ```
 
 ### 4. 新建Flavor
@@ -115,17 +101,22 @@ app.config.meta.flavor === 'ci';
 
 比如，为顾客 A 分配一个 Flavor: `customA`，从而为顾客 A 提供独立的 Env/Config 配置
 
-- 启用 Flavor
+- 添加 npm scripts
 
-```bash
-$ npm run dev -- --flavor=customA
+```json
+"scripts": {
+  "dev:ssr:customA": "npm run prerun && quasar dev --mode ssr --flavor customA",
+  "build:ssr:customA": "npm run prerun && quasar build --mode ssr --flavor customA",
+  "preview:ssr:customA": "concurrently \"node ./dist-mock/index.js\" \"node ./dist/ssr-customA/index.js\"",
+  "dev:spa:customA": "npm run prerun && quasar dev --mode spa --flavor customA",
+}
 ```
 
 - 如何判断 Flavor
 
 ```typescript
 process.env.META_FLAVOR === 'customA';
-app.config.meta.flavor === 'customA';
+sys.config.meta.flavor === 'customA';
 ```
 
 ### 5. 添加Flavor类型定义
@@ -136,7 +127,7 @@ app.config.meta.flavor === 'customA';
 
 ```diff
 declare module '@cabloy/module-info' {
-  export interface VonaMetaFlavorExtend {
+  export interface ZovaMetaFlavorExtend {
 +   customA: never;
   }
 }
