@@ -70,6 +70,32 @@ function sidebarGuide(): DefaultTheme.SidebarItem[] {
     },
     {
       collapsed: true,
+      text: 'Environment & Configuration',
+      items: [
+        {
+          text: 'Runtime Environments & Flavors',
+          base: '/guide/env-config/mode-flavor/',
+          link: 'introduction',
+        },
+        {
+          text: 'Env',
+          base: '/guide/env-config/env/',
+          link: 'introduction',
+        },
+        {
+          text: 'Config',
+          base: '/guide/env-config/config/',
+          link: 'introduction',
+        },
+        {
+          text: 'App Startup Customization',
+          base: '/guide/env-config/app-start/',
+          link: 'introduction',
+        },
+      ],
+    },
+    {
+      collapsed: true,
       text: 'Essentials',
       items: [
         {

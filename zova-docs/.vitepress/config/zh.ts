@@ -66,6 +66,32 @@ function sidebarGuide(): DefaultTheme.SidebarItem[] {
     },
     {
       collapsed: true,
+      text: '环境与配置',
+      items: [
+        {
+          text: '运行环境与Flavor',
+          base: '/zh/guide/env-config/mode-flavor/',
+          link: 'introduction',
+        },
+        {
+          text: 'Env环境变量',
+          base: '/zh/guide/env-config/env/',
+          link: 'introduction',
+        },
+        {
+          text: 'Config配置',
+          base: '/zh/guide/env-config/config/',
+          link: 'introduction',
+        },
+        {
+          text: '应用启动自定义',
+          base: '/zh/guide/env-config/app-start/',
+          link: 'introduction',
+        },
+      ],
+    },
+    {
+      collapsed: true,
       text: '基础',
       items: [
         {
