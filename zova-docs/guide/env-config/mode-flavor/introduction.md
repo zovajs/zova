@@ -1,35 +1,28 @@
 # Multi-dimensional Variables
 
-Vona uses multi-dimensional variables to load environment variables and Config configurations, providing a more flexible configuration mechanism and supporting more complex business scenarios
+Zova uses multi-dimensional variables to load environment variables and Config configurations, providing a more flexible configuration mechanism and supporting more complex business scenarios
 
-The `multi-dimensional variables` in Vona contain two dimensions: `Runtime Environment` and `Flavor`
+The `multi-dimensional variables` in Zova contain three dimensions: `Runtime Environment`, `App Mode` and `Flavor`
 
 ## Runtime Environment
 
-Vona provides three runtime environments:
+Zova provides two runtime environments:
 
-| Name | Description             |
-| ---- | ----------------------- |
-| test | Testing environment     |
-| dev  | Development environment |
-| prod | Production environment  |
+| Name        | Description             |
+| ----------- | ----------------------- |
+| development | Development environment |
+| production  | Production environment  |
 
 ### 1. Enabling the Runtime Environment
 
 Enabling the corresponding runtime environment by executing different commands
 
 ```bash
-# test
-$ npm run test
-$ npm run cov
-$ npm run db:reset
-# dev
+# development
 $ npm run dev
-$ npm run dev:one
-# prod
-$ npm run start
-$ npm run start:one
-$ npm run start:docker
+# production
+$ npm run build
+$ npm run preview
 ```
 
 ### 2. How to Determine the Current Runtime Environment
@@ -39,34 +32,31 @@ $ npm run start:docker
 Using Env to determine the current runtime environment supports `tree-shaking` during builds
 
 ```typescript
-process.env.META_MODE === 'test';
-process.env.META_MODE === 'dev';
-process.env.META_MODE === 'prod';
-```
-
-- Determined by `Config`
-
-```typescript
-app.config.meta.mode === 'test';
-app.config.meta.mode === 'dev';
-app.config.meta.mode === 'prod';
+process.env.META_MODE === 'development';
+process.env.META_MODE === 'production';
 ```
 
 - Simplified Notation
 
 ```typescript
-app.meta.isTest;
-app.meta.isDev;
-app.meta.isProd;
+process.env.DEV; // boolean
+process.env.PROD; // boolean
+```
+
+- Determined by `Config`
+
+```typescript
+sys.config.meta.mode === 'development';
+sys.config.meta.mode === 'production';
 ```
 
 ## Flavor
 
-For more complex business scenarios, we often need to provide configuration capabilities for more scenarios. Vona specifically provides a `Flavor` mechanism. The combination of `runtime environments` and `flavors` allows us to conveniently define configuration information for various scenarios
+For more complex business scenarios, we often need to provide configuration capabilities for more scenarios. Zova specifically provides a `Flavor` mechanism. The combination of `runtime environments` and `flavors` allows us to conveniently define configuration information for various scenarios
 
 ### 1. Built-in Flavors
 
-For out-of-the-box, Vona provides several built-in flavors:
+For out-of-the-box, Zova provides several built-in flavors:
 
 | Name   | Description                                        |
 | ------ | -------------------------------------------------- |
