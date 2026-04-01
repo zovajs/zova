@@ -1,56 +1,43 @@
-# VS Code 插件: [Zova - Official](https://marketplace.visualstudio.com/items?itemName=cabloy.zova-vscode)
+# 菜单命令
 
-An extension offering commands and tools to make your experience with Zova more pleasant!
+Vona 在 Cli 命令的基础上提供了大量菜单命令，通过菜单来执行 Cli 命令，从而显著降低心智负担，提升开发体验
 
-## Features
+## VS Code 插件: [Zova - Official](https://marketplace.visualstudio.com/items?itemName=cabloy.zova-vscode)
 
-### Zova Create
+为了使用菜单命令，需要安装该插件
 
-- Suite
-- Module
-- Page
-- Component
-- Api
-- Mock
+## 菜单清单
+
+### Zova Aspect
+
+![](../../assets/img/menu/menu-aspect.png)
 
 ### Zova Bean
 
-- Local
-- Model
-- Store
-- Style
-- Theme
-- Tool
-- General
+![](../../assets/img/menu/menu-bean.png)
+
+### Zova Create
+
+![](../../assets/img/menu/menu-create.png)
+
+### Zova Refactor(Page)
+
+![](../../assets/img/menu/menu-refactor-page.png)
+
+### Zova Refactor(Component)
+
+![](../../assets/img/menu/menu-refactor-component.png)
 
 ### Zova Init
 
-- Icon
-- Config
-- Constant
-- Locale
-- Error
-- Legacy
-- Monkey
+![](../../assets/img/menu/menu-init.png)
 
-### Zova Refactor
+### Zova Meta
 
-- Add Page Query
-- Add Page Params
-- Rename Page
-
-- Add Component Props
-- Add Component Emits
-- Add Component Slots
-- Add v-model
-- Convert to Generic Component
-- Rename Component
-
-- Create Another Render Bean
-- Create Another Style Bean
+![](../../assets/img/menu/menu-meta.png)
 
 ### Zova Tools
 
-- Generate .metadata
+![](../../assets/img/menu/menu-tools.png)
 
 **Enjoy!**
