@@ -59,7 +59,7 @@ function sidebarGuide(): DefaultTheme.SidebarItem[] {
       text: 'Getting Started',
       items: [
         { text: 'Introduction', link: 'start/introduction' },
-        { text: 'How Intuitive, Elegant, and Powerful?🔥', link: 'start/why' },
+        { text: 'How Intuitive, Elegant, and Powerful?🔥', link: 'start/how' },
         { text: 'Quick Start', link: 'start/quick-start' },
         { text: 'Cli Commands', link: 'start/cli' },
         { text: 'Menu Commands', link: 'start/menu' },

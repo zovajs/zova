@@ -55,7 +55,7 @@ function sidebarGuide(): DefaultTheme.SidebarItem[] {
       text: '开始',
       items: [
         { text: '简介', link: 'start/introduction' },
-        { text: '如何做到直观、优雅、强大?🔥', link: 'start/why' },
+        { text: '如何做到直观、优雅、强大?🔥', link: 'start/how' },
         { text: '快速上手', link: 'start/quick-start' },
         { text: 'Cli命令', link: 'start/cli' },
         { text: '菜单命令', link: 'start/menu' },
