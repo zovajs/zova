@@ -60,7 +60,8 @@ function sidebarGuide(): DefaultTheme.SidebarItem[] {
       items: [
         { text: 'Introduction', link: 'start/introduction' },
         { text: 'How Intuitive, Elegant, and Powerful?🔥', link: 'start/how' },
-        { text: 'Quick Start', link: 'start/quick-start' },
+        { text: '1. Quick Start', link: 'start/quick-start' },
+        { text: '2. Create the first Page', link: 'start/first-page' },
         { text: 'Cli Commands', link: 'start/cli' },
         { text: 'Menu Commands', link: 'start/menu' },
         { text: 'Scripts', link: 'start/scripts' },
