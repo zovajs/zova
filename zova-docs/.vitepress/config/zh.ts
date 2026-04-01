@@ -69,7 +69,7 @@ function sidebarGuide(): DefaultTheme.SidebarItem[] {
       text: '环境与配置',
       items: [
         {
-          text: '运行环境与Flavor',
+          text: '多维变量',
           base: '/zh/guide/env-config/mode-flavor/',
           link: 'introduction',
         },

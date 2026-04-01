@@ -6,7 +6,7 @@ Zova can build `SSR/SPA/Website/Admin-Dashboard` all in one codebase, and both `
 $ npm run dev:ssr:admin
 ```
 
-- See: [Env](../techniques/env/introduction.md)
+- See: [Multi-dimensional Variables](../env-config/mode-flavor/introduction.md)
 
 ## ssr + admin
 

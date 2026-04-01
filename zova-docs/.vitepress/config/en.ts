@@ -73,7 +73,7 @@ function sidebarGuide(): DefaultTheme.SidebarItem[] {
       text: 'Environment & Configuration',
       items: [
         {
-          text: 'Runtime Environments & Flavors',
+          text: 'Multi-dimensional Variables',
           base: '/guide/env-config/mode-flavor/',
           link: 'introduction',
         },
