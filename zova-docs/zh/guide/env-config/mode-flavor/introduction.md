@@ -104,8 +104,8 @@ sys.config.meta.appMode === 'spa';
 
 | 名称             | 说明                            |
 | ---------------- | ------------------------------- |
-| admin            | Admin中后台                     |
-| web              | Web网站                         |
+| admin            | 用于Admin中后台                 |
+| web              | 用于Web网站                     |
 | cabloyBasicAdmin | 用于Cabloy Basic的`Admin中后台` |
 | cabloyStartAdmin | 用于Cabloy Start的`Admin中后台` |
 | cabloyStartWeb   | 用于Cabloy Start的`Web网站`     |
