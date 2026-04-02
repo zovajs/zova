@@ -1,10 +1,8 @@
 # Env
 
-Zova exposes env variables on the special `process.env` object, which are statically replaced at build time
-
 Zova loads environment files based on multi-dimensional variables, providing a more flexible configuration mechanism and supporting more complex business scenarios
 
-## meta & .env file
+## meta & .env files
 
 Zova uses [dotenv](https://github.com/motdotla/dotenv) to load additional environment variables from the following files in the directory `env`:
 
