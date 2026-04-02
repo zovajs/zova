@@ -8,6 +8,7 @@ import createPage from './command/create.page.ts';
 import createProject from './command/create.project.ts';
 import createSuite from './command/create.suite.ts';
 import defaultList from './command/default.list.ts';
+import initAppMonkey from './command/init.appMonkey.ts';
 import initAsset from './command/init.asset.ts';
 import initConfig from './command/init.config.ts';
 import initConstant from './command/init.constant.ts';
@@ -20,6 +21,7 @@ import initMain from './command/init.main.ts';
 import initMainSys from './command/init.mainSys.ts';
 import initMonkey from './command/init.monkey.ts';
 import initMonkeySys from './command/init.monkeySys.ts';
+import initSysMonkey from './command/init.sysMonkey.ts';
 import initTypes from './command/init.types.ts';
 import openapiConfig from './command/openapi.config.ts';
 import openapiGenerate from './command/openapi.generate.ts';
@@ -63,6 +65,8 @@ export const commands = {
     locale: initLocale,
     error: initError,
     legacy: initLegacy,
+    appMonkey: initAppMonkey,
+    sysMonkey: initSysMonkey,
     monkey: initMonkey,
     monkeySys: initMonkeySys,
     main: initMain,

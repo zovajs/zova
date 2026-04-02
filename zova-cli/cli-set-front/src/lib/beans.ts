@@ -8,6 +8,7 @@ import { CliCreatePage } from './bean/cli.create.page.ts';
 import { CliCreateProject } from './bean/cli.create.project.ts';
 import { CliCreateSuite } from './bean/cli.create.suite.ts';
 import { CliDefaultList } from './bean/cli.default.list.ts';
+import { CliInitAppMonkey } from './bean/cli.init.appMonkey.ts';
 import { CliInitAsset } from './bean/cli.init.asset.ts';
 import { CliInitConfig } from './bean/cli.init.config.ts';
 import { CliInitConstant } from './bean/cli.init.constant.ts';
@@ -20,6 +21,7 @@ import { CliInitMain } from './bean/cli.init.main.ts';
 import { CliInitMainSys } from './bean/cli.init.mainSys.ts';
 import { CliInitMonkey } from './bean/cli.init.monkey.ts';
 import { CliInitMonkeySys } from './bean/cli.init.monkeySys.ts';
+import { CliInitSysMonkey } from './bean/cli.init.sysMonkey.ts';
 import { CliInitTypes } from './bean/cli.init.types.ts';
 import { CliOpenapiConfig } from './bean/cli.openapi.config.ts';
 import { CliOpenapiGenerate } from './bean/cli.openapi.generate.ts';
@@ -55,6 +57,8 @@ export const beans = {
   'init.locale': CliInitLocale,
   'init.error': CliInitError,
   'init.legacy': CliInitLegacy,
+  'init.appMonkey': CliInitAppMonkey,
+  'init.sysMonkey': CliInitSysMonkey,
   'init.monkey': CliInitMonkey,
   'init.monkeySys': CliInitMonkeySys,
   'init.main': CliInitMain,
