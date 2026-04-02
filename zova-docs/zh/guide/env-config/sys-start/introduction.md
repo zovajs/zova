@@ -1,75 +1,75 @@
-# 应用启动自定义
+# 系统启动自定义
 
-ZovaJS 提供了`Hook/Monkey`机制，可以在应用启动时对系统进行深度的定制
+ZovaJS 提供了`Hook/Monkey`机制，可以在系统启动时对系统进行深度的定制
 
-在解释`Hook/Monkey`机制之前，有必要先了解应用启动/停止的时序
+在解释`Hook/Monkey`机制之前，有必要先了解系统启动/停止的时序
 
-## 应用启动时序
+## 🔥与应用启动的区别
 
-应用启动时序分三个时机：
+在 SSR 场景中，`应用启动`是针对每一个 Request 而言的，`系统启动`则与 Request 无关
 
-1. `appInitialize`: 触发钩子`appInitialize`
-   - 比如，模块 a-router 响应此钩子，初始化路由守卫服务
-2. `appInitialized`: 触发钩子`appInitialized`
-   - 比如，模块 a-router 响应此钩子，触发路由守卫事件，从而允许其他业务模块也可以提供路由守卫服务，并监听路由守卫事件
-3. `appReady`: 触发钩子`appReady`
-   - 比如，模块 a-router 响应此钩子，注入 Vue Router 实例，并执行首次导航
+## 系统启动时序
 
-> 最佳实践：ZovaJS提供三个时机，是为了提供更大的灵活性和可配置性。业务模块可以根据自身需要在合适的时机执行自定义的初始化逻辑。在满足业务需求的前提下，尽量使用最靠前的时机，从而为后续的其他业务扩展提供可能
+系统启动时序分三个时机：
 
-## 应用停止时序
+1. `sysInitialize`: 触发钩子`sysInitialize`
+2. `sysInitialized`: 触发钩子`sysInitialized`
+3. `sysReady`: 触发钩子`sysReady`
 
-应用停止时序只有一个时机：
+## 系统停止时序
 
-1. `appClose`: 触发钩子`appClose`
-   - 比如，模块 a-router 响应此钩子，销毁路由守卫服务，从而销毁路由守卫监听器
+系统停止时序只有一个时机：
+
+1. `sysClose`: 触发钩子`sysClose`
 
 ## 模块加载时序
 
 模块加载时序分两个时机：
 
 1. `moduleLoading`: 触发钩子`moduleLoading`
+   - 比如，模块 a-router 响应此钩子，将模块提供的路由注册到应用路由表中
 2. `moduleLoaded`: 触发钩子`moduleLoaded`
 
 ## 钩子清单
 
 系统提供了三个场景来响应钩子:
 
-1. `Module Main`: 在`{module}/src/main.ts`中响应模块自身的钩子
-2. `Module Monkey`: 在`{module}/src/monkey.ts`中响应 App 钩子
-3. `App Monkey`: 在`{project}/src/front/config/monkey.ts`中响应 App 钩子
+1. `Module Main`: 在`{module}/src/mainSys.ts`中响应模块自身的钩子
+2. `Module Monkey`: 在`{module}/src/monkeySys.ts`中响应 Sys 钩子
+3. `Sys Monkey`: 在`{project}/src/front/config/monkeySys.ts`中响应 Sys 钩子
 
 针对不同的场景，为不同的钩子提供了对应的接口定义，从而规范钩子的使用
 
 | 钩子           | Module Main 接口 | Module Monkey 接口    | App Monkey 接口       |
 | -------------- | ---------------- | --------------------- | --------------------- |
-| moduleLoading  | IModuleMain      | IMonkeyModule         | IMonkeyModule         |
-| moduleLoaded   | IModuleMain      | IMonkeyModule         | IMonkeyModule         |
-| appInitialize  |                  | IMonkeyAppInitialize  | IMonkeyAppInitialize  |
-| appInitialized |                  | IMonkeyAppInitialized | IMonkeyAppInitialized |
-| appReady       |                  | IMonkeyAppReady       | IMonkeyAppReady       |
-| appClose       |                  | IMonkeyAppClose       | IMonkeyAppClose       |
+| moduleLoading  | IModuleMainSys   | IMonkeyModuleSys      | IMonkeyModuleSys      |
+| moduleLoaded   | IModuleMainSys   | IMonkeyModuleSys      | IMonkeyModuleSys      |
+| sysInitialize  |                  | IMonkeySysInitialize  | IMonkeySysInitialize  |
+| sysInitialized |                  | IMonkeySysInitialized | IMonkeySysInitialized |
+| sysReady       |                  | IMonkeySysReady       | IMonkeySysReady       |
+| sysClose       |                  | IMonkeySysClose       | IMonkeySysClose       |
 
 ## 创建 Module Main
 
 ### 1. Cli命令
 
 ```bash
-$ zova :init:main demo-student
+$ zova :init:mainSys demo-student
 ```
 
 ### 2. 菜单命令
 
 ::: tip
-右键菜单 - [模块路径]: `Zova Init/Main`
+右键菜单 - [模块路径]: `Zova Init/Main Sys`
 :::
 
 ### Module Main定义
 
 ```typescript
-export class Main extends BeanSimple implements IModuleMain {
+export class MainSys extends BeanSimple implements IModuleMainSys {
   async moduleLoading() {}
   async moduleLoaded() {}
+  async configLoaded(_config: any) {}
 }
 ```
 
@@ -78,53 +78,55 @@ export class Main extends BeanSimple implements IModuleMain {
 ### 1. Cli命令
 
 ```bash
-$ zova :init:monkey demo-student
+$ zova :init:monkeySys demo-student
 ```
 
 ### 2. 菜单命令
 
 ::: tip
-右键菜单 - [模块路径]: `Zova Init/Monkey`
+右键菜单 - [模块路径]: `Zova Init/Monkey Sys`
 :::
 
 ### Module Monkey定义
 
 ```typescript
-export class Monkey extends BeanSimple implements IMonkeyModule, IMonkeyAppInitialize, IMonkeyAppInitialized, IMonkeyAppReady, IMonkeyAppClose {
+export class MonkeySys extends BeanSimple implements IMonkeyModuleSys, IMonkeySysInitialize, IMonkeySysInitialized, IMonkeySysReady, IMonkeySysClose {
   async moduleLoading(_module: IModule) {}
   async moduleLoaded(_module: IModule) {}
-  async appInitialize() {}
-  async appInitialized() {}
-  async appReady() {}
-  async appClose() {}
+  async configLoaded(_module: IModule, _config: any) {}
+  async sysInitialize() {}
+  async sysInitialized() {}
+  async sysReady() {}
+  async sysClose() {}
 }
 ```
 
-## 创建 App Monkey
+## 创建 Sys Monkey
 
 ### 1. Cli命令
 
 ```bash
-$ zova :init:appMonkey
+$ zova :init:sysMonkey
 ```
 
 ### 2. 菜单命令
 
 ::: tip
-右键菜单 - [项目路径/src]: `Zova Init/Monkey`
+右键菜单 - [项目路径/src]: `Zova Init/Monkey Sys`
 :::
 
-### App Monkey定义
+### Sys Monkey定义
 
-`src/front/config/monkey.ts`
+`src/front/config/monkeySys.ts`
 
 ```typescript
-export class AppMonkey extends BeanSimple implements IMonkeyModule, IMonkeyAppInitialize, IMonkeyAppInitialized, IMonkeyAppReady, IMonkeyAppClose {
+export class SysMonkey extends BeanSimple implements IMonkeyModuleSys, IMonkeySysInitialize, IMonkeySysInitialized, IMonkeySysReady, IMonkeySysClose {
   async moduleLoading(_module: IModule) {}
   async moduleLoaded(_module: IModule) {}
-  async appInitialize() {}
-  async appInitialized() {}
-  async appReady() {}
-  async appClose() {}
+  async configLoaded(_module: IModule, _config: any) {}
+  async sysInitialize() {}
+  async sysInitialized() {}
+  async sysReady() {}
+  async sysClose() {}
 }
 ```
