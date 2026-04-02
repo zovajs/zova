@@ -13,8 +13,10 @@
 短名: {providerId}-{suiteName}
 ```
 
-- providerId: 提供者 Id
-- suiteName: 套件名称
+| 名称       | 说明      |
+| ---------- | --------- |
+| providerId | 提供者 Id |
+| suiteName  | 套件名称  |
 
 ## 目录结构
 

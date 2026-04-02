@@ -54,4 +54,4 @@ $ zova :create:module moduleName [--suite=]
 右键菜单 - [项目路径/src/suite/suite-name/modules]: `Zova Create/Module`
 :::
 
-依据提示输入模块的名称，比如`demo-student`，VSCode 插件会自动创建模块的代码骨架
+依据提示输入模块名称，比如`demo-student`，VSCode 插件会自动创建模块的代码骨架
