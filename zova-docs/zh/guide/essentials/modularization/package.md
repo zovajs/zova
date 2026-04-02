@@ -14,48 +14,69 @@
       "vendors": [
         {
           "match": [
-            "@tanstack"
+            "@tanstack/query-core",
+            "@tanstack/query-persist-client-core",
+            "@tanstack/vue-query"
           ],
-          "output": "tanstack"
+          "output": "tanstack-query"
         },
-        {
-          "match": [
-            "js-cookie"
-          ],
-          "output": "js-cookie"
-        },
-        {
-          "match": [
-            "localforage"
-          ],
-          "output": "localforage"
-        }
       ]
     }
   },
 }
 ```
 
-- match: 判断文件路径是否匹配
-- output: 为匹配文件指定分包的名称
+| 名称   | 说明                   |
+| ------ | ---------------------- |
+| match  | 指定需要分包的文件路径 |
+| output | 分包名称               |
 
-## zovaModule.capabilities
+## zovaModule.dependencies
 
-在 Zova 中，一个模块就是一个天然的拆包边界，在 build 构建时，自动打包成一个独立的 Chunk。那么，在运行时也是异步加载的
-
-如果需要在模块中提供一些钩子功能，从而在系统启动时初始化资源，或者向系统注入一些能力，那么就需要配置`zovaModule.capabilities`
-
-Zova 提供的许多核心模块都是采用这种机制实现的。比如，模块 a-model 的配置：
+如果模块需要依赖其他模块，那么，需要配置`zovaModule.dependencies`，比如：模块 demo-student 的配置：
 
 ```typescript
 {
-  "name": "zova-module-a-model",
+  "name": "zova-module-demo-student",
   "zovaModule": {
-    "capabilities": {
-      "monkey": true
+    "dependencies": {
+      "a-zova": "5.0.0"
     },
   },
 }
 ```
 
-- monkey: 设为 true，就说明该模块提供了钩子能力，那么系统就会预先加载该模块
+## zovaModule.globalDependencies
+
+如果模块需要提供全局的依赖项，那么，需要配置`zovaModule.globalDependencies`，比如：模块 a-zova 的配置：
+
+```typescript
+{
+  "name": "zova-module-a-zova",
+  "zovaModule": {
+    "globalDependencies": {
+      "luxon": true,
+      "zova-jsx": true
+    },
+  },
+}
+```
+
+由于模块 a-zova 将`luxon`和`zova-jsx`声明为全局依赖，那么系统就会将这些依赖项放入项目的 packages.json 当中，从而所有其他模块都可以直接导入并使用这些模块
+
+## zovaModule.globalDependenciesDev
+
+如果模块需要提供全局的开发依赖项，那么，需要配置`zovaModule.globalDependenciesDev`，比如：模块 a-zova 的配置：
+
+```typescript
+{
+  "name": "zova-module-a-zova",
+  "zovaModule": {
+    "globalDependenciesDev": {
+      "@types/luxon": true,
+    },
+  },
+}
+```
+
+由于模块 a-zova 将`@types/luxon`声明为全局开发依赖，那么系统就会将这些依赖项放入项目的 packages.json 当中，从而所有其他模块都可以直接导入并使用这些模块

@@ -79,6 +79,7 @@
       "vendors": [
         {
           "match": [
+            "@tanstack/query-core",
             "@tanstack/query-persist-client-core",
             "@tanstack/vue-query"
           ],
