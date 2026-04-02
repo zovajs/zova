@@ -123,7 +123,7 @@ $ vona :init:appMonkey
 
 ### App Monkey定义
 
-`src/backend/config/monkey.ts`
+`src/front/config/monkey.ts`
 
 ```typescript
 export class AppMonkey extends BeanSimple implements IMonkeyModule, IMonkeySystem {

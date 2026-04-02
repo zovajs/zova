@@ -33,37 +33,35 @@ ZovaJS 提供了`Hook/Monkey`机制，可以在应用启动时对系统进行深
 
 ## 钩子清单
 
-系统提供了三个场景来响应应用启动/停止的钩子:
+系统提供了三个场景来响应钩子:
 
-1. `Module Main`: 在模块代码中响应模块自身的钩子
-2. `Module Monkey`: 在模块代码中响应系统钩子
-3. `App Monkey`: 在应用代码中响应系统钩子
+1. `Module Main`: 在`{module}/src/main.ts`中响应模块自身的钩子
+2. `Module Monkey`: 在`{module}/src/monkey.ts`中响应 App 钩子
+3. `App Monkey`: 在`{project}/src/front/config/monkey.ts`中响应 App 钩子
 
 针对不同的场景，为不同的钩子提供了对应的接口定义，从而规范钩子的使用
 
-| 钩子          | Module Main 接口 | Module Monkey 接口                | App Monkey 接口                   |
-| ------------- | ---------------- | --------------------------------- | --------------------------------- |
-| moduleLoading | IModuleMain      | IMonkeyModule                     | IMonkeyModule                     |
-| configLoaded  | IModuleMain      | IMonkeyModule                     | IMonkeyModule                     |
-| moduleLoaded  | IModuleMain      | IMonkeyModule                     | IMonkeyModule                     |
-| appStart      |                  | IMonkeySystem / IMonkeyAppStart   | IMonkeySystem / IMonkeyAppStart   |
-| appReady      |                  | IMonkeySystem / IMonkeyAppReady   | IMonkeySystem / IMonkeyAppReady   |
-| appStarted    |                  | IMonkeySystem / IMonkeyAppStarted | IMonkeySystem / IMonkeyAppStarted |
-| appClose      |                  | IMonkeySystem / IMonkeyAppClose   | IMonkeySystem / IMonkeyAppClose   |
-| appClosed     |                  | IMonkeySystem / IMonkeyAppClosed  | IMonkeySystem / IMonkeyAppClosed  |
+| 钩子           | Module Main 接口 | Module Monkey 接口    | App Monkey 接口       |
+| -------------- | ---------------- | --------------------- | --------------------- |
+| moduleLoading  | IModuleMain      | IMonkeyModule         | IMonkeyModule         |
+| moduleLoaded   | IModuleMain      | IMonkeyModule         | IMonkeyModule         |
+| appInitialize  |                  | IMonkeyAppInitialize  | IMonkeyAppInitialize  |
+| appInitialized |                  | IMonkeyAppInitialized | IMonkeyAppInitialized |
+| appReady       |                  | IMonkeyAppReady       | IMonkeyAppReady       |
+| appClose       |                  | IMonkeyAppClose       | IMonkeyAppClose       |
 
 ## 创建 Module Main
 
 ### 1. Cli命令
 
 ```bash
-$ vona :init:main demo-student
+$ zova :init:main demo-student
 ```
 
 ### 2. 菜单命令
 
 ::: tip
-右键菜单 - [模块路径]: `Vona Init/Main`
+右键菜单 - [模块路径]: `Zova Init/Main`
 :::
 
 ### Module Main定义
@@ -72,7 +70,6 @@ $ vona :init:main demo-student
 export class Main extends BeanSimple implements IModuleMain {
   async moduleLoading() {}
   async moduleLoaded() {}
-  async configLoaded(_config: any) {}
 }
 ```
 
@@ -81,27 +78,24 @@ export class Main extends BeanSimple implements IModuleMain {
 ### 1. Cli命令
 
 ```bash
-$ vona :init:monkey demo-student
+$ zova :init:monkey demo-student
 ```
 
 ### 2. 菜单命令
 
 ::: tip
-右键菜单 - [模块路径]: `Vona Init/Monkey`
+右键菜单 - [模块路径]: `Zova Init/Monkey`
 :::
 
 ### Module Monkey定义
 
 ```typescript
-export class Monkey extends BeanSimple implements IMonkeyModule, IMonkeySystem {
+export class Monkey extends BeanSimple implements IMonkeyModule, IMonkeyAppInitialize, IMonkeyAppInitialized, IMonkeyAppReady {
   async moduleLoading(_module: IModule) {}
   async moduleLoaded(_module: IModule) {}
-  async configLoaded(_module: IModule, _config: any) {}
-  async appStart() {}
+  async appInitialize() {}
+  async appInitialized() {}
   async appReady() {}
-  async appStarted() {}
-  async appClose() {}
-  async appClosed() {}
 }
 ```
 
@@ -110,18 +104,18 @@ export class Monkey extends BeanSimple implements IMonkeyModule, IMonkeySystem {
 ### 1. Cli命令
 
 ```bash
-$ vona :init:appMonkey
+$ zova :init:appMonkey
 ```
 
 ### 2. 菜单命令
 
 ::: tip
-右键菜单 - [项目路径/src]: `Vona Init/App Monkey`
+右键菜单 - [项目路径/src]: `Zova Init/App Monkey`
 :::
 
 ### App Monkey定义
 
-`src/backend/config/monkey.ts`
+`src/front/config/monkey.ts`
 
 ```typescript
 export class AppMonkey extends BeanSimple implements IMonkeyModule, IMonkeySystem {
