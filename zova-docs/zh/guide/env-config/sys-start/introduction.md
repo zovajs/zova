@@ -27,8 +27,9 @@ ZovaJS 提供了`Hook/Monkey`机制，可以在系统启动时对系统进行深
 模块加载时序分两个时机：
 
 1. `moduleLoading`: 触发钩子`moduleLoading`
-   - 比如，模块 a-router 响应此钩子，将模块提供的路由注册到应用路由表中
+   - 比如，模块 a-router 响应此钩子，将模块提供的路由注册到系统路由表中
 2. `moduleLoaded`: 触发钩子`moduleLoaded`
+3. `configLoaded`: 触发钩子`configLoaded`
 
 ## 钩子清单
 
@@ -44,6 +45,7 @@ ZovaJS 提供了`Hook/Monkey`机制，可以在系统启动时对系统进行深
 | -------------- | ---------------- | --------------------- | --------------------- |
 | moduleLoading  | IModuleMainSys   | IMonkeyModuleSys      | IMonkeyModuleSys      |
 | moduleLoaded   | IModuleMainSys   | IMonkeyModuleSys      | IMonkeyModuleSys      |
+| configLoaded   | IModuleMainSys   | IMonkeyModuleSys      | IMonkeyModuleSys      |
 | sysInitialize  |                  | IMonkeySysInitialize  | IMonkeySysInitialize  |
 | sysInitialized |                  | IMonkeySysInitialized | IMonkeySysInitialized |
 | sysReady       |                  | IMonkeySysReady       | IMonkeySysReady       |

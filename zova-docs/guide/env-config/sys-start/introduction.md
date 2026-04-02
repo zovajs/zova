@@ -1,35 +1,35 @@
-# App Startup Customization
+# Sys Startup Customization
 
-ZovaJS provides a `Hook/Monkey` mechanism that allows deep customization of the system during application startup
+ZovaJS provides a `Hook/Monkey` mechanism that allows deep customization of the system during system startup
 
-Before explaining the `Hook/Monkey` mechanism, it is necessary to first understand the timing of application startup and shutdown
+Before explaining the `Hook/Monkey` mechanism, it is necessary to first understand the timing of system startup and shutdown
 
-## Application Startup Timing
+## 🔥Difference from Application Startup
 
-There are three timings for application startup:
+In the SSR scenario, `application startup` refers to each individual request, while `system startup` is unrelated to requests
 
-1. `appInitialize`: Triggers the hook `appInitialize`
-   - For example, the module a-router responds to this hook and initializes the route guard service
-2. `appInitialized`: Triggers the hook `appInitialized`
-   - For example, the module a-router responds to this hook, triggering route guard events, thereby allowing other business modules to also provide route guard services and listen to route guard events
-3. `appReady`: Triggers the hook `appReady`
-   - For example, the module a-router responds to this hook, injects the Vue Router instance, and performs the initial navigation
+## System Startup Timing
 
-> Best Practice: ZovaJS provides three timings to offer greater flexibility and configurability. Business modules can execute custom initialization logic at the appropriate timing according to their needs. While meeting business requirements, try to use the earliest timing possible, thereby providing possibilities for subsequent business extensions
+There are three timings for system startup:
 
-## Application Shutdown Timing
+1. `sysInitialize`: Triggers the hook `sysInitialize`
+2. `sysInitialized`: Triggers the hook `sysInitialized`
+3. `sysReady`: Triggers the hook `sysReady`
 
-There is only one timing for application shutdown:
+## System Shutdown Timing
 
-1. `appClose`: Triggers the hook `appClose`
-   - For example, the module a-router responds to this hook, destroys the route guard service, thereby destroying the route guard listeners
+There is only one timing for system shutdown:
+
+1. `sysClose`: Triggers the hook `sysClose`
 
 ## Module Load Timing
 
 There are two timings for module load:
 
 1. `moduleLoading`: Triggers the hook `moduleLoading`
+   - For example, the module a-router responds to this hook and registers the routes provided by the module into the system's routing table
 2. `moduleLoaded`: Triggers the hook `moduleLoaded`
+3. `configLoaded`: Triggers the hook `configLoaded`
 
 ## Hook List
 
