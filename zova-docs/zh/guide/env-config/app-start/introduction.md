@@ -1,37 +1,35 @@
 # 应用启动自定义
 
-VonaJS 提供了`Hook/Monkey`机制，可以在应用启动时对系统进行深度的定制
-
-::: tip
-当然，对于常规业务需求，一般只需创建[启动项](../../distributed/startup/introduction.md)即可
-:::
+ZovaJS 提供了`Hook/Monkey`机制，可以在应用启动时对系统进行深度的定制
 
 在解释`Hook/Monkey`机制之前，有必要先了解应用启动/停止的时序
 
 ## 应用启动时序
 
-![](../../../assets/img/app-start/app-start.png)
+应用启动时序分三个时机：
 
-应用启动时序分四个步骤：
-
-1. `appLoad`: 加载所有的模块
-   - 针对每个模块均触发钩子`moduleLoading`、`configLoaded`、`moduleLoaded`
-2. `appStart`: 触发钩子`appStart`
-   - 比如，模块 a-startup 响应此钩子，执行`应用启动项(after: false)`。参见: [启动项](../../distributed/startup/introduction.md)
-   - 当`appStart`执行后，会设置`app.meta.appReady=true`
-   - 此时，系统提供的所有 API 服务可以接受客户端的请求
+1. `appInitialize`: 触发钩子`appInitialize`
+   - 比如，模块 a-router 响应此钩子，初始化路由守卫服务
+2. `appInitialized`: 触发钩子`appInitialized`
+   - 比如，模块 a-router 响应此钩子，触发路由守卫事件，从而允许其他业务模块也可以提供路由守卫服务，并监听路由守卫事件
 3. `appReady`: 触发钩子`appReady`
-   - 比如，模块 a-startup 响应此钩子，执行`应用启动项(after: true)`。参见: [启动项](../../distributed/startup/introduction.md)
-4. `appStarted`: 触发钩子`appStarted`
+   - 比如，模块 a-router 响应此钩子，注入 Vue Router 实例，并执行首次导航
+
+> 最佳实践：ZovaJS提供三个时机，是为了提供更大的灵活性和可配置性。业务模块可以根据自身需要在合适的时机执行自定义的初始化逻辑。在满足业务需求的前提下，尽量使用最靠前的时机，从而为后续的其他业务扩展提供可能
 
 ## 应用停止时序
 
-![](../../../assets/img/app-start/app-close.png)
-
-应用停止时序分两个步骤：
+应用停止时序只有一个时机：
 
 1. `appClose`: 触发钩子`appClose`
-2. `appClosed`: 触发钩子`appClosed`
+   - 比如，模块 a-router 响应此钩子，销毁路由守卫服务，从而销毁路由守卫监听器
+
+## 模块加载时序
+
+模块加载时序分两个时机：
+
+1. `moduleLoading`: 触发钩子`moduleLoading`
+2. `moduleLoaded`: 触发钩子`moduleLoaded`
 
 ## 钩子清单
 

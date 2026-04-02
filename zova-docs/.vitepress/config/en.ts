@@ -92,6 +92,11 @@ function sidebarGuide(): DefaultTheme.SidebarItem[] {
           base: '/guide/env-config/app-start/',
           link: 'introduction',
         },
+        {
+          text: 'Sys Startup Customization',
+          base: '/guide/env-config/sys-start/',
+          link: 'introduction',
+        },
       ],
     },
     {

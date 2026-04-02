@@ -88,6 +88,11 @@ function sidebarGuide(): DefaultTheme.SidebarItem[] {
           base: '/zh/guide/env-config/app-start/',
           link: 'introduction',
         },
+        {
+          text: '系统启动自定义',
+          base: '/zh/guide/env-config/sys-start/',
+          link: 'introduction',
+        },
       ],
     },
     {
