@@ -4,8 +4,6 @@
 
 ## 为什么要实现模块化体系？
 
-不知你是否认同一个架构理念：如果要避免`香山`的形成，那就把`香`装进集装箱里。
-
 在一个大型的 Web 业务系统当中，随着业务的增长和变更，为了避免代码失控，也有必要将系统拆分为一个个相对独立的模块，这就是 Zova 采用模块化体系的缘由。因此，在 Zova 中，实际的业务代码开发都是在模块中进行。
 
 ## 模块化体系的意义
@@ -30,25 +28,30 @@
 短名: {providerId}-{moduleName}
 ```
 
-- providerId: 提供者 Id。可以将某个功能或者特性作为 providerId，比如：test, demo, blog, dashboard, flow 等等
-- moduleName: 模块名称
+| 名称       | 说明                                                                                           |
+| ---------- | ---------------------------------------------------------------------------------------------- |
+| providerId | 提供者 Id。可以将某个功能或者特性作为 providerId，比如：test, demo, blog, dashboard, flow 等等 |
+| moduleName | 模块名称                                                                                       |
 
 ## 新建模块
+
+### 1. Cli 命令
+
+```bash
+$ zova :create:module moduleName [--suite=]
+```
+
+| 名称       | 说明               |
+| ---------- | ------------------ |
+| moduleName | 模块名称           |
+| suite      | 套件名称，允许为空 |
+
+### 2. 菜单命令
 
 ::: tip
 右键菜单 - [项目路径/src/module]: `Zova Create/Module`
 
-右键菜单 - [项目路径/src/module-vendor]: `Zova Create/Module`
-
 右键菜单 - [项目路径/src/suite/suite-name/modules]: `Zova Create/Module`
-
-右键菜单 - [项目路径/src/suite-vendor/suite-name/modules]: `Zova Create/Module`
 :::
 
-依据提示输入模块的名称，比如`test-home`，VSCode 插件会自动创建模块的代码骨架
-
-## 社区文章
-
-- [Vite打包碎片化，如何化解？](https://juejin.cn/post/7425418556928933914)
-
-  > 摘录：我们在使用Vite进行打包时，经常会遇到这个问题：随着业务的展开，版本迭代，页面越来越多，第三方依赖也越来越多，打出来的包也越来越大。如果把页面都进行动态导入，那么凡是几个页面共用的文件都会进行独立拆包，从而导致大量chunk碎片的产生。许多chunk碎片体积都很小，比如：1k，2k，3k，从而显著增加了浏览器的资源请求
+依据提示输入模块的名称，比如`demo-student`，VSCode 插件会自动创建模块的代码骨架

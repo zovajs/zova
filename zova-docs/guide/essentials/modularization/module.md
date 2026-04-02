@@ -4,8 +4,6 @@ In Zova, `Modules` consolidate pages, components, configurations, languages â€‹â
 
 ## Why need Modularization?
 
-May you agree with such an architectural concept: if you want to avoid `shit mountains`, then put `shit` into boxes.
-
 In a large web business system, as the business grows and changes, it is also necessary to divide the system into relatively independent modules in order to avoid code bloating. This is why Zova introduces modularization.
 
 ## Benefits of Modularization
@@ -30,24 +28,30 @@ FullName: zova-module-{providerId}-{moduleName}
 ShortName: {providerId}-{moduleName}
 ```
 
-- You can use a function or feature as a `providerid`, such as: test, demo, blog, dashboard, flow, etc.
+| Name       | Description                                                                                                                                                    |
+| ---------- | -------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| providerId | Provider ID. You can designate a certain feature, function, or organization as the providerId, such as: test, demo, blog, dashboard, flow, cabloy, apple, etc. |
+| moduleName | Module Name                                                                                                                                                    |
 
 ## Create Module
+
+### 1. Cli command
+
+```bash
+$ zova :create:module moduleName [--suite=]
+```
+
+| Name       | Description          |
+| ---------- | -------------------- |
+| moduleName | Module Name          |
+| suite      | Suite Name. Optional |
+
+### 2. Menu command
 
 ::: tip
 Context Menu - [Project Path/src/module]: `Zova Create/Module`
 
-Context Menu - [Project Path/src/module-vendor]: `Zova Create/Module`
-
 Context Menu - [Project Path/src/suite/suite-name/modules]: `Zova Create/Module`
-
-Context Menu - [Project Path/src/suite-vendor/suite-name/modules]: `Zova Create/Module`
 :::
 
-Enter the module name according to the prompt, such as `test-home`, and the VSCode extension will automatically create the code skeleton of the module
-
-## Community Articles
-
-- [Vite: How to resolve bundle fragmentation?](https://dev.to/uncle-pushui/vite-how-to-resolve-bundle-fragmentation-3jm7)
-
-  > Summary: When we use Vite for bundle code files, we often encounter this problem: With the development of the business, there are more and more pages, more and more third-party dependencies, and the chunks are getting bigger and bigger. If the pages are imported dynamically, then all the files shared by several pages will be independently bundled to the same chunk, which will create a large number of tiny js chunk files, such as: 1K, 2K, 3K, which significantly increases the resource request of the browser
+Enter the module name according to the prompt, such as `demo-student`, and the VSCode extension will automatically create the code skeleton of the module
