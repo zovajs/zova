@@ -43,33 +43,35 @@ For different scenarios, corresponding interface definitions are provided for di
 
 | Hook           | Module Main Interface | Module Monkey Interface | Sys Monkey Interface  |
 | -------------- | --------------------- | ----------------------- | --------------------- |
-| moduleLoading  | IModuleMain           | IMonkeyModule           | IMonkeyModule         |
-| moduleLoaded   | IModuleMain           | IMonkeyModule           | IMonkeyModule         |
-| appInitialize  |                       | IMonkeyAppInitialize    | IMonkeyAppInitialize  |
-| appInitialized |                       | IMonkeyAppInitialized   | IMonkeyAppInitialized |
-| appReady       |                       | IMonkeyAppReady         | IMonkeyAppReady       |
-| appClose       |                       | IMonkeyAppClose         | IMonkeyAppClose       |
+| moduleLoading  | IModuleMainSys        | IMonkeyModuleSys        | IMonkeyModuleSys      |
+| moduleLoaded   | IModuleMainSys        | IMonkeyModuleSys        | IMonkeyModuleSys      |
+| configLoaded   | IModuleMainSys        | IMonkeyModuleSys        | IMonkeyModuleSys      |
+| sysInitialize  |                       | IMonkeySysInitialize    | IMonkeySysInitialize  |
+| sysInitialized |                       | IMonkeySysInitialized   | IMonkeySysInitialized |
+| sysReady       |                       | IMonkeySysReady         | IMonkeySysReady       |
+| sysClose       |                       | IMonkeySysClose         | IMonkeySysClose       |
 
 ## Create Module Main
 
 ### 1. Cli command
 
 ```bash
-$ zova :init:main demo-student
+$ zova :init:mainSys demo-student
 ```
 
 ### 2. Menu command
 
 ::: tip
-Context Menu - [Module Path]: `Zova Init/Main`
+Context Menu - [Module Path]: `Zova Init/Main Sys`
 :::
 
 ### Module Main Definition
 
 ```typescript
-export class Main extends BeanSimple implements IModuleMain {
+export class MainSys extends BeanSimple implements IModuleMainSys {
   async moduleLoading() {}
   async moduleLoaded() {}
+  async configLoaded(_config: any) {}
 }
 ```
 
@@ -78,53 +80,55 @@ export class Main extends BeanSimple implements IModuleMain {
 ### 1. Cli command
 
 ```bash
-$ zova :init:monkey demo-student
+$ zova :init:monkeySys demo-student
 ```
 
 ### 2. Menu command
 
 ::: tip
-Context Menu - [Module Path]: `Zova Init/Monkey`
+Context Menu - [Module Path]: `Zova Init/Monkey Sys`
 :::
 
 ### Module Monkey Definition
 
 ```typescript
-export class Monkey extends BeanSimple implements IMonkeyModule, IMonkeyAppInitialize, IMonkeyAppInitialized, IMonkeyAppReady, IMonkeyAppClose {
+export class MonkeySys extends BeanSimple implements IMonkeyModuleSys, IMonkeySysInitialize, IMonkeySysInitialized, IMonkeySysReady, IMonkeySysClose {
   async moduleLoading(_module: IModule) {}
   async moduleLoaded(_module: IModule) {}
-  async appInitialize() {}
-  async appInitialized() {}
-  async appReady() {}
-  async appClose() {}
+  async configLoaded(_module: IModule, _config: any) {}
+  async sysInitialize() {}
+  async sysInitialized() {}
+  async sysReady() {}
+  async sysClose() {}
 }
 ```
 
-## Create App Monkey
+## Create Sys Monkey
 
 ### 1. Cli command
 
 ```bash
-$ zova :init:appMonkey
+$ zova :init:sysMonkey
 ```
 
 ### 2. Menu command
 
 ::: tip
-Context Menu - [Project Path/src]: `Zova Init/Monkey`
+Context Menu - [Project Path/src]: `Zova Init/Monkey Sys`
 :::
 
-### App Monkey Definition
+### Sys Monkey Definition
 
-`src/front/config/monkey.ts`
+`src/front/config/monkeySys.ts`
 
 ```typescript
-export class AppMonkey extends BeanSimple implements IMonkeyModule, IMonkeyAppInitialize, IMonkeyAppInitialized, IMonkeyAppReady, IMonkeyAppClose {
+export class SysMonkey extends BeanSimple implements IMonkeyModuleSys, IMonkeySysInitialize, IMonkeySysInitialized, IMonkeySysReady, IMonkeySysClose {
   async moduleLoading(_module: IModule) {}
   async moduleLoaded(_module: IModule) {}
-  async appInitialize() {}
-  async appInitialized() {}
-  async appReady() {}
-  async appClose() {}
+  async configLoaded(_module: IModule, _config: any) {}
+  async sysInitialize() {}
+  async sysInitialized() {}
+  async sysReady() {}
+  async sysClose() {}
 }
 ```
