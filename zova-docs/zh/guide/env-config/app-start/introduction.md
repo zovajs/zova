@@ -90,12 +90,13 @@ $ zova :init:monkey demo-student
 ### Module Monkey定义
 
 ```typescript
-export class Monkey extends BeanSimple implements IMonkeyModule, IMonkeyAppInitialize, IMonkeyAppInitialized, IMonkeyAppReady {
+export class Monkey extends BeanSimple implements IMonkeyModule, IMonkeyAppInitialize, IMonkeyAppInitialized, IMonkeyAppReady, IMonkeyAppClose {
   async moduleLoading(_module: IModule) {}
   async moduleLoaded(_module: IModule) {}
   async appInitialize() {}
   async appInitialized() {}
   async appReady() {}
+  async appClose() {}
 }
 ```
 
@@ -118,14 +119,12 @@ $ zova :init:appMonkey
 `src/front/config/monkey.ts`
 
 ```typescript
-export class AppMonkey extends BeanSimple implements IMonkeyModule, IMonkeySystem {
+export class AppMonkey extends BeanSimple implements IMonkeyModule, IMonkeyAppInitialize, IMonkeyAppInitialized, IMonkeyAppReady, IMonkeyAppClose {
   async moduleLoading(_module: IModule) {}
   async moduleLoaded(_module: IModule) {}
-  async configLoaded(_module: IModule, _config: any) {}
-  async appStart() {}
+  async appInitialize() {}
+  async appInitialized() {}
   async appReady() {}
-  async appStarted() {}
   async appClose() {}
-  async appClosed() {}
 }
 ```

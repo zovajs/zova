@@ -126,14 +126,12 @@ $ vona :init:appMonkey
 `src/front/config/monkey.ts`
 
 ```typescript
-export class AppMonkey extends BeanSimple implements IMonkeyModule, IMonkeySystem {
+export class AppMonkey extends BeanSimple implements IMonkeyModule, IMonkeyAppInitialize, IMonkeyAppInitialized, IMonkeyAppReady, IMonkeyAppClose {
   async moduleLoading(_module: IModule) {}
   async moduleLoaded(_module: IModule) {}
-  async configLoaded(_module: IModule, _config: any) {}
-  async appStart() {}
+  async appInitialize() {}
+  async appInitialized() {}
   async appReady() {}
-  async appStarted() {}
   async appClose() {}
-  async appClosed() {}
 }
 ```
