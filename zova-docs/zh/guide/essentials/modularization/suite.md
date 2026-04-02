@@ -35,10 +35,20 @@ a-home
 
 ## 新建套件
 
+### 1. Cli 命令
+
+```bash
+$ zova :create:suite suiteName
+```
+
+| 名称      | 说明     |
+| --------- | -------- |
+| suiteName | 套件名称 |
+
+### 2. 菜单命令
+
 ::: tip
 右键菜单 - [项目路径/src/suite]: `Zova Create/Suite`
-
-右键菜单 - [项目路径/src/suite-vendor]: `Zova Create/Suite`
 :::
 
-依据提示输入套件的名称，比如`test-home`，VSCode 插件会自动创建套件的代码骨架
+依据提示输入套件名称，比如`demo-student`，VSCode 插件会自动创建套件的代码骨架

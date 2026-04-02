@@ -13,6 +13,11 @@ FullName: zova-suite-{providerId}-{suiteName}
 ShortName: {providerId}-{suiteName}
 ```
 
+| Name       | Description |
+| ---------- | ----------- |
+| providerId | Provider ID |
+| suiteName  | Suite Name  |
+
 ## Directory Structure
 
 A suite is a combination of a group of business modules, so the directory structure is also very simple. Take the suite `a-home` as an example:
@@ -30,10 +35,20 @@ a-home
 
 ## Create Suite
 
+### 1. Cli command
+
+```bash
+$ zova :create:suite suiteName
+```
+
+| Name      | Description |
+| --------- | ----------- |
+| suiteName | Suite Name  |
+
+### 2. Menu command
+
 ::: tip
 Context Menu - [Project Path/src/suite]: `Zova Create/Suite`
-
-Context Menu - [Project Path/src/suite-vendor]: `Zova Create/Suite`
 :::
 
-Enter the suite name according to the prompt, such as `test-home`, and the VSCode extension will automatically create the code skeleton of the suite
+Enter the suite name according to the prompt, such as `demo-student`, and the VSCode extension will automatically create the code skeleton of the suite
