@@ -14,48 +14,69 @@ If the module depends on some third-party modules, you can specify the bundle st
       "vendors": [
         {
           "match": [
-            "@tanstack"
+            "@tanstack/query-core",
+            "@tanstack/query-persist-client-core",
+            "@tanstack/vue-query"
           ],
-          "output": "tanstack"
+          "output": "tanstack-query"
         },
-        {
-          "match": [
-            "js-cookie"
-          ],
-          "output": "js-cookie"
-        },
-        {
-          "match": [
-            "localforage"
-          ],
-          "output": "localforage"
-        }
       ]
     }
   },
 }
 ```
 
-- match: Determine whether the file path matches
-- output: Specify the bundle name for the matching files
+| Name   | Description                                    |
+| ------ | ---------------------------------------------- |
+| match  | Specify the file paths that need to be chunked |
+| output | chunk name                                     |
 
-## zovaModule.capabilities
+## zovaModule.dependencies
 
-In Zova, a module is a natural bundle boundary, and automatically bundled into an independent chunk when building. Then, it is also loaded asynchronously at runtime
-
-If you need to provide some hook functions in the module to initialize resources when the system starts, or inject some capabilities into the system, you need to configure `zovaModule.capabilities`
-
-Many core modules provided by Zova are implemented using this mechanism. For example, the configuration of module `a-model`:
+If a module needs to depend on other modules, you need to configure `zovaModule.dependencies`, for example: the configuration of module `demo-student`:
 
 ```typescript
 {
-  "name": "zova-module-a-model",
+  "name": "zova-module-demo-student",
   "zovaModule": {
-    "capabilities": {
-      "monkey": true
+    "dependencies": {
+      "a-zova": "5.0.0"
     },
   },
 }
 ```
 
-- monkey: If set to `true`, it means that the module provides hook capabilities, then the system will preload the module
+## zovaModule.globalDependencies
+
+If the module needs to provide global dependencies, you need to configure `zovaModule.globalDependencies`, for example: the configuration of module `a-zova`:
+
+```typescript
+{
+  "name": "zova-module-a-zova",
+  "zovaModule": {
+    "globalDependencies": {
+      "luxon": true,
+      "zova-jsx": true
+    },
+  },
+}
+```
+
+Since the module a-zova declares `luxon` and `zova-jsx` as global dependencies, the system will put these dependencies into the project's `packages.json`, so that all other modules can directly import and use these modules
+
+## zovaModule.globalDependenciesDev
+
+If the module needs to provide global dev dependencies, you need to configure `zovaModule.globalDependenciesDev`, for example: the configuration of module `a-zova`:
+
+```typescript
+{
+  "name": "zova-module-a-zova",
+  "zovaModule": {
+    "globalDependenciesDev": {
+      "@types/luxon": true,
+    },
+  },
+}
+```
+
+Since the module a-zova declares `@types/luxon` as global dev dependencies, the system will put these dependencies into the project's `packages.json`, so that all other modules can directly import and use these modules
