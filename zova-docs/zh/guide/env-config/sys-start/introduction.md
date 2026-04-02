@@ -41,7 +41,7 @@ ZovaJS 提供了`Hook/Monkey`机制，可以在系统启动时对系统进行深
 
 针对不同的场景，为不同的钩子提供了对应的接口定义，从而规范钩子的使用
 
-| 钩子           | Module Main 接口 | Module Monkey 接口    | App Monkey 接口       |
+| 钩子           | Module Main 接口 | Module Monkey 接口    | Sys Monkey 接口       |
 | -------------- | ---------------- | --------------------- | --------------------- |
 | moduleLoading  | IModuleMainSys   | IMonkeyModuleSys      | IMonkeyModuleSys      |
 | moduleLoaded   | IModuleMainSys   | IMonkeyModuleSys      | IMonkeyModuleSys      |

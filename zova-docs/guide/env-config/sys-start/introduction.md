@@ -35,13 +35,13 @@ There are two timings for module load:
 
 The system provides three scenarios to respond to application startup/shutdown hooks:
 
-1. `Module Main`: Respond to the module's own hooks in the file `{module}/src/main.ts`
-2. `Module Monkey`: Respond to app hooks in the file `{module}/src/monkey.ts`
-3. `App Monkey`: Respond to app hooks in the file `{project}/src/front/config/monkey.ts`
+1. `Module Main`: Respond to the module's own hooks in the file `{module}/src/mainSys.ts`
+2. `Module Monkey`: Respond to app hooks in the file `{module}/src/monkeySys.ts`
+3. `Sys Monkey`: Respond to app hooks in the file `{project}/src/front/config/monkeySys.ts`
 
 For different scenarios, corresponding interface definitions are provided for different hooks, thereby standardizing the use of hooks
 
-| Hook           | Module Main Interface | Module Monkey Interface | App Monkey Interface  |
+| Hook           | Module Main Interface | Module Monkey Interface | Sys Monkey Interface  |
 | -------------- | --------------------- | ----------------------- | --------------------- |
 | moduleLoading  | IModuleMain           | IMonkeyModule           | IMonkeyModule         |
 | moduleLoaded   | IModuleMain           | IMonkeyModule           | IMonkeyModule         |
