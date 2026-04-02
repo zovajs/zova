@@ -111,7 +111,7 @@ $ zova :init:appMonkey
 ### 2. 菜单命令
 
 ::: tip
-右键菜单 - [项目路径/src]: `Zova Init/App Monkey`
+右键菜单 - [项目路径/src]: `Zova Init/Monkey`
 :::
 
 ### App Monkey定义
