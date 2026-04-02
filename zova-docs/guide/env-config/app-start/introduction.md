@@ -1,74 +1,71 @@
-# 应用启动自定义
+# App Startup Customization
 
-VonaJS 提供了`Hook/Monkey`机制，可以在应用启动时对系统进行深度的定制
+ZovaJS provides a `Hook/Monkey` mechanism that allows deep customization of the system during application startup
 
 ::: tip
-当然，对于常规业务需求，一般只需创建[启动项](../../distributed/startup/introduction.md)即可
+Of course, for regular business needs, it is generally sufficient to just create a [Startup](../../distributed/startup/introduction.md)
 :::
 
-在解释`Hook/Monkey`机制之前，有必要先了解应用启动/停止的时序
+Before explaining the `Hook/Monkey` mechanism, it is necessary to first understand the timing of application startup and shutdown
 
-## 应用启动时序
+## Application Startup Timing
 
 ![](../../../assets/img/app-start/app-start.png)
 
-应用启动时序分四个步骤：
+The application startup timing is divided into four steps:
 
-1. `appLoad`: 加载所有的模块
-   - 针对每个模块均触发钩子`moduleLoading`、`configLoaded`、`moduleLoaded`
-2. `appStart`: 触发钩子`appStart`
-   - 比如，模块 a-startup 响应此钩子，执行`应用启动项(after: false)`。参见: [启动项](../../distributed/startup/introduction.md)
-   - 当`appStart`执行后，会设置`app.meta.appReady=true`
-   - 此时，系统提供的所有 API 服务可以接受客户端的请求
-3. `appReady`: 触发钩子`appReady`
-   - 比如，模块 a-startup 响应此钩子，执行`应用启动项(after: true)`。参见: [启动项](../../distributed/startup/introduction.md)
-4. `appStarted`: 触发钩子`appStarted`
+1. `appLoad`: Loads all modules. For each module, it triggers the hooks `moduleLoading`, `configLoaded`, and `moduleLoaded`
+2. `appStart`: Triggers the hook `appStart`. For example, the module a-startup responds to this hook and executes `app startups(after: false)`. See: [Startup](../../distributed/startup/introduction.md)
+   - After `appStart` is executed, it sets `app.meta.appReady=true`
+   - At this point, all API services provided by the system can accept client requests
+3. `appReady`: Triggers the hook `appReady`. For example, the module a-startup responds to this hook and executes `app startups(after: true)`. See: [Startup](../../distributed/startup/introduction.md)
+4. `appStarted`: Triggers the hook `appStarted`
 
-## 应用停止时序
+## Application Shutdown Timing
 
 ![](../../../assets/img/app-start/app-close.png)
 
-应用停止时序分两个步骤：
+The application shutdown timing is divided into two steps:
 
-1. `appClose`: 触发钩子`appClose`
-2. `appClosed`: 触发钩子`appClosed`
+1. `appClose`: Triggers the hook `appClose`
+2. `appClosed`: Triggers the hook `appClosed`
 
-## 钩子清单
+## Hook List
 
-系统提供了三个场景来响应应用启动/停止的钩子:
+The system provides three scenarios to respond to application startup/shutdown hooks:
 
-1. `Module Main`: 在模块代码中响应模块自身的钩子
-2. `Module Monkey`: 在模块代码中响应系统钩子
-3. `App Monkey`: 在应用代码中响应系统钩子
+1. `Module Main`: Respond to the module's own hooks in the file `{module}/src/main.ts`
+2. `Module Monkey`: Respond to system hooks in the file `{module}/src/monkey.ts`
+3. `App Monkey`: Respond to system hooks in the file `{project}/src/backend/config/monkey.ts`
 
-针对不同的场景，为不同的钩子提供了对应的接口定义，从而规范钩子的使用
+For different scenarios, corresponding interface definitions are provided for different hooks, thereby standardizing the use of hooks
 
-| 钩子          | Module Main 接口 | Module Monkey 接口                | App Monkey 接口                   |
-| ------------- | ---------------- | --------------------------------- | --------------------------------- |
-| moduleLoading | IModuleMain      | IMonkeyModule                     | IMonkeyModule                     |
-| configLoaded  | IModuleMain      | IMonkeyModule                     | IMonkeyModule                     |
-| moduleLoaded  | IModuleMain      | IMonkeyModule                     | IMonkeyModule                     |
-| appStart      |                  | IMonkeySystem / IMonkeyAppStart   | IMonkeySystem / IMonkeyAppStart   |
-| appReady      |                  | IMonkeySystem / IMonkeyAppReady   | IMonkeySystem / IMonkeyAppReady   |
-| appStarted    |                  | IMonkeySystem / IMonkeyAppStarted | IMonkeySystem / IMonkeyAppStarted |
-| appClose      |                  | IMonkeySystem / IMonkeyAppClose   | IMonkeySystem / IMonkeyAppClose   |
-| appClosed     |                  | IMonkeySystem / IMonkeyAppClosed  | IMonkeySystem / IMonkeyAppClosed  |
+| Hook          | Module Main Interface | Module Monkey Interface           | App Monkey Interface              |
+| ------------- | --------------------- | --------------------------------- | --------------------------------- |
+| moduleLoading | IModuleMain           | IMonkeyModule                     | IMonkeyModule                     |
+| configLoaded  | IModuleMain           | IMonkeyModule                     | IMonkeyModule                     |
+| moduleLoaded  | IModuleMain           | IMonkeyModule                     | IMonkeyModule                     |
+| appStart      |                       | IMonkeySystem / IMonkeyAppStart   | IMonkeySystem / IMonkeyAppStart   |
+| appReady      |                       | IMonkeySystem / IMonkeyAppReady   | IMonkeySystem / IMonkeyAppReady   |
+| appStarted    |                       | IMonkeySystem / IMonkeyAppStarted | IMonkeySystem / IMonkeyAppStarted |
+| appClose      |                       | IMonkeySystem / IMonkeyAppClose   | IMonkeySystem / IMonkeyAppClose   |
+| appClosed     |                       | IMonkeySystem / IMonkeyAppClosed  | IMonkeySystem / IMonkeyAppClosed  |
 
-## 创建 Module Main
+## Create Module Main
 
-### 1. Cli命令
+### 1. Cli command
 
 ```bash
 $ vona :init:main demo-student
 ```
 
-### 2. 菜单命令
+### 2. Menu command
 
 ::: tip
-右键菜单 - [模块路径]: `Vona Init/Main`
+Context Menu - [Module Path]: `Vona Init/Main`
 :::
 
-### Module Main定义
+### Module Main Definition
 
 ```typescript
 export class Main extends BeanSimple implements IModuleMain {
@@ -78,21 +75,21 @@ export class Main extends BeanSimple implements IModuleMain {
 }
 ```
 
-## 创建 Module Monkey
+## Create Module Monkey
 
-### 1. Cli命令
+### 1. Cli command
 
 ```bash
 $ vona :init:monkey demo-student
 ```
 
-### 2. 菜单命令
+### 2. Menu command
 
 ::: tip
-右键菜单 - [模块路径]: `Vona Init/Monkey`
+Context Menu - [Module Path]: `Vona Init/Monkey`
 :::
 
-### Module Monkey定义
+### Module Monkey Definition
 
 ```typescript
 export class Monkey extends BeanSimple implements IMonkeyModule, IMonkeySystem {
@@ -107,31 +104,33 @@ export class Monkey extends BeanSimple implements IMonkeyModule, IMonkeySystem {
 }
 ```
 
-## 创建 App Monkey
+## Create App Monkey
 
-### 1. Cli命令
+### 1. Cli command
 
 ```bash
 $ vona :init:appMonkey
 ```
 
-### 2. 菜单命令
+### 2. Menu command
 
 ::: tip
-右键菜单 - [项目路径/src]: `Vona Init/App Monkey`
+Context Menu - [Project Path/src]: `Vona Init/App Monkey`
 :::
 
-### App Monkey定义
+### App Monkey Definition
 
-`src/front/config/monkey.ts`
+`src/backend/config/monkey.ts`
 
 ```typescript
-export class AppMonkey extends BeanSimple implements IMonkeyModule, IMonkeyAppInitialize, IMonkeyAppInitialized, IMonkeyAppReady, IMonkeyAppClose {
+export class AppMonkey extends BeanSimple implements IMonkeyModule, IMonkeySystem {
   async moduleLoading(_module: IModule) {}
   async moduleLoaded(_module: IModule) {}
-  async appInitialize() {}
-  async appInitialized() {}
+  async configLoaded(_module: IModule, _config: any) {}
+  async appStart() {}
   async appReady() {}
+  async appStarted() {}
   async appClose() {}
+  async appClosed() {}
 }
 ```
