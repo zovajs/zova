@@ -100,19 +100,9 @@ function sidebarGuide(): DefaultTheme.SidebarItem[] {
       text: '基础',
       items: [
         {
-          text: 'Vue组件',
-          base: '/zh/guide/essentials/component/',
-          items: [
-            { text: '页面组件', link: 'page' },
-            { text: '子组件', link: 'child' },
-            { text: '子组件成员', link: 'child-members' },
-            { text: 'v-model', link: 'v-model' },
-            { text: '组件(高级)', link: 'component-advanced' },
-          ],
-        },
-        {
           text: '模块化体系',
           base: '/zh/guide/essentials/modularization/',
+          collapsed: true,
           items: [
             { text: '模块', link: 'module' },
             { text: '套件', link: 'suite' },
@@ -123,6 +113,7 @@ function sidebarGuide(): DefaultTheme.SidebarItem[] {
         {
           text: 'IOC控制反转',
           base: '/zh/guide/essentials/ioc/',
+          collapsed: true,
           items: [
             { text: '简介', link: 'introduction' },
             { text: '匿名Bean', link: 'anonymous-bean' },
@@ -138,6 +129,7 @@ function sidebarGuide(): DefaultTheme.SidebarItem[] {
         {
           text: '模块Scope',
           base: '/zh/guide/essentials/scope/',
+          collapsed: true,
           items: [
             { text: '简介', link: 'introduction' },
             { text: 'Config配置', link: 'config' },
@@ -147,6 +139,18 @@ function sidebarGuide(): DefaultTheme.SidebarItem[] {
             { text: 'Api服务', link: 'service' },
           ],
         },
+      ],
+    },
+    {
+      collapsed: true,
+      text: '组件与页面',
+      base: '/zh/guide/essentials/component/',
+      items: [
+        { text: '页面组件', link: 'page' },
+        { text: '子组件', link: 'child' },
+        { text: '子组件成员', link: 'child-members' },
+        { text: 'v-model', link: 'v-model' },
+        { text: '组件(高级)', link: 'component-advanced' },
       ],
     },
     {

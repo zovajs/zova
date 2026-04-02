@@ -104,19 +104,9 @@ function sidebarGuide(): DefaultTheme.SidebarItem[] {
       text: 'Essentials',
       items: [
         {
-          text: 'Vue Component',
-          base: '/guide/essentials/component/',
-          items: [
-            { text: 'Page Component', link: 'page' },
-            { text: 'Child Component', link: 'child' },
-            { text: 'Child Component Members', link: 'child-members' },
-            { text: 'v-model', link: 'v-model' },
-            { text: 'Component(Advanced)', link: 'component-advanced' },
-          ],
-        },
-        {
           text: 'Modularization',
           base: '/guide/essentials/modularization/',
+          collapsed: true,
           items: [
             { text: 'Module', link: 'module' },
             { text: 'Suite', link: 'suite' },
@@ -127,6 +117,7 @@ function sidebarGuide(): DefaultTheme.SidebarItem[] {
         {
           text: 'IOC',
           base: '/guide/essentials/ioc/',
+          collapsed: true,
           items: [
             { text: 'Introduction', link: 'introduction' },
             { text: 'Anonymous Bean', link: 'anonymous-bean' },
@@ -142,6 +133,7 @@ function sidebarGuide(): DefaultTheme.SidebarItem[] {
         {
           text: 'Module Scope',
           base: '/guide/essentials/scope/',
+          collapsed: true,
           items: [
             { text: 'Introduction', link: 'introduction' },
             { text: 'Config', link: 'config' },
@@ -151,6 +143,18 @@ function sidebarGuide(): DefaultTheme.SidebarItem[] {
             { text: 'Api', link: 'api' },
           ],
         },
+      ],
+    },
+    {
+      collapsed: true,
+      text: 'Component & Page',
+      base: '/guide/essentials/component/',
+      items: [
+        { text: 'Page Component', link: 'page' },
+        { text: 'Child Component', link: 'child' },
+        { text: 'Child Component Members', link: 'child-members' },
+        { text: 'v-model', link: 'v-model' },
+        { text: 'Component(Advanced)', link: 'component-advanced' },
       ],
     },
     {
