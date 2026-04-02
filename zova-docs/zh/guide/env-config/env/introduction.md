@@ -142,14 +142,15 @@ ZovaJS 提供了若干内置的环境变量：
 
 ### app
 
-| 名称               | 说明                    |
-| ------------------ | ----------------------- |
-| APP_NAME           | 应用名称                |
-| APP_TITLE          | 应用标题                |
-| APP_DESCRIPTION    | 应用描述                |
-| APP_VERSION        | 应用版本                |
-| APP_META_VIEWPORT  | html.head.meta.viewport |
-| APP_LOCALE_DEFAULT | 缺省Locale值            |
+| 名称               | 说明                                                                           |
+| ------------------ | ------------------------------------------------------------------------------ |
+| APP_NAME           | 应用名称                                                                       |
+| APP_TITLE          | 应用标题                                                                       |
+| APP_DESCRIPTION    | 应用描述                                                                       |
+| APP_VERSION        | 应用版本                                                                       |
+| APP_META_VIEWPORT  | html.head.meta.viewport                                                        |
+| APP_PUBLIC_PATH    | [Vite: Public Base Path](https://vitejs.dev/guide/build.html#public-base-path) |
+| APP_LOCALE_DEFAULT | 缺省Locale值                                                                   |
 
 ### router
 

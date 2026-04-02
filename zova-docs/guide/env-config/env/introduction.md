@@ -4,7 +4,7 @@ Zova loads environment files based on multi-dimensional variables, providing a m
 
 ## meta & .env files
 
-Zova uses [dotenv](https://github.com/motdotla/dotenv) to load additional environment variables from the following files in the directory `env`:
+Zova uses [dotenv](https://github.com/motdotla/dotenv) to load environment variables from the following files in the directory `env`:
 
 ```txt
 .env                # loaded in all cases
@@ -13,26 +13,22 @@ Zova uses [dotenv](https://github.com/motdotla/dotenv) to load additional enviro
 .env.[meta].mine    # only loaded in specified condition, ignored by git
 ```
 
-- `[meta]` can be `any combination` of the following three field values
+- `[meta]` can be `any combination` of the following three variables
 
-| Name    | Description                                                                          |
-| ------- | ------------------------------------------------------------------------------------ |
-| mode    | 'development' \| 'production' \| string;                                             |
-| flavor  | 'web' \| 'admin' \| string;                                                          |
-| appMode | 'spa' \| 'ssr' \| 'pwa' \| 'cordova' \| 'capacitor' \| 'electron' \| 'bex' \| string |
-
-- `appMode`: for more info, see [Commands List: Mode](https://quasar.dev/quasar-cli-vite/commands-list#mode)
+| Name    | Description                   |
+| ------- | ----------------------------- |
+| mode    | 'development' \| 'production' |
+| appMode | 'spa' \| 'ssr'                |
+| flavor  | 'web' \| 'admin'              |
 
 ## npm scripts
 
-Corresponding to the multi-dimensional variables, the command line script is also divided into three parts, such as:
+Corresponding to the multidimensional variables, the correspondence between the commands and the scripts are as follows:
 
 ```bash
 $ npm run dev:ssr:admin
 $ npm run build:ssr:admin
 ```
-
-For convenience, we can set the most commonly used scripts as aliases, for example:
 
 ```json
 "scripts": {
@@ -59,60 +55,130 @@ The system will automatically load the environment variables in the following fi
 
 ```txt
 .env
-.env.admin
-.env.admin.development
-.env.admin.development.ssr
+.env.ssr
+.env.ssr.admin
+.env.ssr.admin.development
 .env.mine
-.env.admin.mine
-.env.admin.development.mine
-.env.admin.development.ssr.mine
+.env.ssr.mine
+.env.ssr.admin.mine
+.env.ssr.admin.development.mine
+```
+
+## Tree-shaking
+
+ZovaJS only supports tree-shaking during builds for the following environment variables:
+
+| Name          | Description                               |
+| ------------- | ----------------------------------------- |
+| META_MODE     | Runtime Environment                       |
+| META_APP_MODE | App Mode                                  |
+| META_FLAVOR   | Flavor                                    |
+| NODE_ENV      | = process.env.META_MODE                   |
+| DEV           | = process.env.META_MODE === 'development' |
+| PROD          | = process.env.META_MODE === 'production'  |
+| SSR           | = process.env.META_APP_MODE === 'ssr'     |
+| CLIENT        | Check if Client                           |
+| SERVER        | Check if Server                           |
+
+For example:
+
+```typescript
+if (process.env.DEV) {
+  console.log('for development');
+}
+```
+
+During builds, this is automatically converted to:
+
+```typescript
+if (false) {
+  console.log('for development');
+}
+```
+
+Since the condition is false, tree-shaking is performed
+
+## Obtaining Environment Variables
+
+### 1. process.env
+
+For environment variables that support tree-shaking, use `process.env`
+
+```typescript
+process.env.META_MODE;
+process.env.META_APP_MODE;
+process.env.META_FLAVOR;
+process.env.NODE_ENV;
+process.env.DEV;
+process.env.PROD;
+process.env.SSR;
+process.env.CLIENT;
+process.env.SERVER;
+```
+
+- `process.env.NODE_ENV`: For compatibility with the Node.js ecosystem only; `process.env.META_MODE` is preferred
+
+### 2. sys.env
+
+For environment variables that don't support tree-shaking, use `sys.env` to obtain them
+
+```typescript
+this.sys.env.APP_NAME;
+this.sys.env.APP_TITLE;
+this.sys.env.APP_PUBLIC_PATH;
 ```
 
 ## Built-in env variables
 
-To further achieve out-of-box functionality, Zova provides several built-in env variables:
+ZovaJS provides several built-in env variables:
 
-### meta
+### Meta
 
-| Name          | Description       |
-| ------------- | ----------------- |
-| META_MODE     | mode              |
-| META_FLAVOR   | flavor            |
-| META_APP_MODE | appMode           |
-| NODE_ENV      | equal `META_MODE` |
+| Name          | Description |
+| ------------- | ----------- |
+| META_MODE     | Mode        |
+| META_APP_MODE | App Mode    |
+| META_FLAVOR   | Flavor      |
 
 ### App
 
-| Name            | Description                                                                              |
-| --------------- | ---------------------------------------------------------------------------------------- |
-| APP_ROUTER_MODE | [Vue Router: History Modes](https://router.vuejs.org/guide/essentials/history-mode.html) |
-| APP_ROUTER_BASE | [Vue Router: base](https://router.vuejs.org/api/interfaces/RouterHistory.html#base)      |
-| APP_PUBLIC_PATH | [Vite: Public Base Path](https://vitejs.dev/guide/build.html#public-base-path)           |
-| APP_NAME        | App Name                                                                                 |
-| APP_TITLE       | App Title                                                                                |
-| APP_VERSION     | App Version                                                                              |
+| Name               | Description                                                                    |
+| ------------------ | ------------------------------------------------------------------------------ |
+| APP_NAME           | App Name                                                                       |
+| APP_TITLE          | App Title                                                                      |
+| APP_DESCRIPTION    | App Description                                                                |
+| APP_VERSION        | App Version                                                                    |
+| APP_PUBLIC_PATH    | [Vite: Public Base Path](https://vitejs.dev/guide/build.html#public-base-path) |
+| APP_LOCALE_DEFAULT | Default Locale                                                                 |
 
-### Dev server
+### Router
+
+| Name        | Description                                                                              |
+| ----------- | ---------------------------------------------------------------------------------------- |
+| ROUTER_MODE | [Vue Router: History Modes](https://router.vuejs.org/guide/essentials/history-mode.html) |
+
+### Dev Server
 
 | Name                | Description                                                                                    |
 | ------------------- | ---------------------------------------------------------------------------------------------- |
 | DEV_SERVER_HOSTNAME | Dev server host [Vite: server.host](https://vitejs.dev/config/server-options.html#server-host) |
 | DEV_SERVER_PORT     | Dev server port                                                                                |
 
-### Build
-
-| Name          | Description                         |
-| ------------- | ----------------------------------- |
-| BUILD_OUTDIR  | Specify the output directory        |
-| BUILD_MINIFY  | Whether to enable minify            |
-| BUILD_ANALYZE | Whether to display the analyze info |
-
-### Suite/Module
+### Project
 
 | Name                     | Description              |
 | ------------------------ | ------------------------ |
 | PROJECT_DISABLED_MODULES | List of disabled modules |
 | PROJECT_DISABLED_SUITES  | List of disabled suites  |
+
+### Build
+
+| Name            | Description                         |
+| --------------- | ----------------------------------- |
+| BUILD_OUTDIR    | Specify the output directory        |
+| BUILD_MINIFY    | Whether to enable minify            |
+| BUILD_SOURCEMAP | Whether to generate sourcemap       |
+| BUILD_ANALYZE   | Whether to display the analyze info |
 
 ### API
 
