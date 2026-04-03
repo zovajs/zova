@@ -1,12 +1,12 @@
 # Bean标识
 
-系统会为每一个 具名 bean 自动分配一个标识，格式如下：
+系统会为每一个 bean class 自动分配一个标识，格式如下：
 
 ```bash
 {moduleName}.{sceneName}.{beanName}
 ```
 
-比如，模块 demo-student 提供了一个组件 test，其 controller class 名称为`ControllerTest`。那么该 bean 对应的标识为：`demo-student.controller.test`
+比如，模块 demo-student 提供了一个组件`test`，其 controller class 名称为`ControllerTest`。那么该 bean 对应的标识为：`demo-student.controller.test`
 
 ## 基于Bean标识注入的优点
 
@@ -16,7 +16,7 @@
 2. `实现按需异步加载`：只有在需要时才会异步加载模块，并注入模块提供的 Bean 实例
 3. `避免出现循环引用出错的问题`：在复杂的业务场景中，经常会出现多个具名 Bean 之间相互引用的情况。基于 Bean 标识注入可以非常直观的支持循环引用的场景，不会出现错误提示，没有任何心智负担
 
-## 体验提升
+## 开发体验提升
 
 为了提升开发体验，仍然可以采用`基于Class类型`的注入，基于编译器的加持，会自动转为`基于Bean标识`的写法
 

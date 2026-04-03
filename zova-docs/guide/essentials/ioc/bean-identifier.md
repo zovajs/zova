@@ -1,59 +1,43 @@
 # Bean Identifier
 
-The system will automatically assign an identifier to each named bean as the following format:
+The system will automatically assign an identifier to each bean class as the following format:
 
 ```bash
 {moduleName}.{sceneName}.{beanName}
 ```
 
-For example, the previously created store bean `userInfo` corresponds to the identifier `demo-basic.store.userInfo`, where `demo-basic` is the module name which `userInfo` belongs to
+For example, the module demo-student provides a component `test`, whose controller class name is `ControllerTest`. Then the identifier corresponding to this bean is: `demo-student.controller.test`
 
 ## Advantages of Bean-identifier-based injection
 
-When using named beans cross-module, we do not recommend injecting directly based on `class type`, but rather on `bean identifier`. `Bean-identifier-based` injection has the following advantages:
+When using beans cross-module, we do not recommend injecting directly based on `class type`, but rather on `bean identifier`. `Bean-identifier-based` injection has the following advantages:
 
 1. `Loose coupling between modules`: In Zova, a module is a natural bundle boundary, and automatically bundled into an independent asynchronous chunk when building. Therefore, there is a loose coupling relationship between modules
-2. `Achieve asynchronous loading on demand`: Modules are asynchronously loaded only when needed, and then named beans are injected
-3. `Avoid circular reference errors`: In complex business scenarios, multiple named beans often reference each other. `Bean-identifier-based` injection can intuitively support circular reference scenarios without error prompts and without any mental burden
+2. `Achieve asynchronous loading on demand`: Modules are loaded asynchronously only when needed, and Bean instances provided by the modules are injected
+3. `Avoid circular reference errors`: In complex business scenarios, multiple beans often reference each other. `Bean-identifier-based` injection can intuitively support circular reference scenarios without error prompts and without any mental burden
 
-## Bean-identifier-based injection: Complete style
+## Development Experience Improvement
 
-Assume that a store bean `userInfo` is defined in the module `demo-basic` and then used in the page component `counter2` of the module `demo-basic2`, the complete style of the code is as follows:
+To enhance the development experience, you can still use `Class-based` injection. With compiler support, it will automatically be converted to `Bean Identifier-based` syntax
 
-`src/suite/a-demo/modules/demo-basic2/src/page/counter2/controller.ts`
+- Example: Class-based
 
-```typescript{1,5-6,9-10}
-import type { StoreUserInfo } from 'zova-module-demo-basic';
+```typescript
+import { ModelTabs } from 'zova-module-a-routertabs';
 
-@Controller()
-export class ControllerPageCounter {
-  @Use('demo-basic.store.userInfo')
-  $$userInfo: StoreUserInfo;
-
-  protected async __init__() {
-    console.log(this.$$userInfo.user);
-    await this.$$userInfo.reloadUser();
-  }
+class ControllerLayout {
+  @Use()
+  $$modelTabs: ModelTabs;
 }
 ```
 
-## Bean-identifier-based injection: Optimized style
+- Automatically converted to: Bean Identifier-based
 
-In order to simplify the code, we can still use the `Class-type-based` code style. Based on the support of the compiler, this `Class-type-based` code style will automatically be converted to the `Bean-identifier-based` code style. Then the optimized code style is as follows:
+```typescript
+import type { ModelTabs } from 'zova-module-a-routertabs';
 
-`src/suite/a-demo/modules/demo-basic2/src/page/counter2/controller.ts`
-
-```typescript{1,5-6,9-10}
-import { StoreUserInfo } from 'zova-module-demo-basic';
-
-@Controller()
-export class ControllerPageCounter {
-  @Use()
-  $$userInfo: StoreUserInfo;
-
-  protected async __init__() {
-    console.log(this.$$userInfo.user);
-    await this.$$userInfo.reloadUser();
-  }
+class ControllerLayout {
+  @Use('a-routertabs.model.tabs')
+  $$modelTabs: ModelTabs;
 }
 ```
