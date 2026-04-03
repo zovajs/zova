@@ -116,10 +116,17 @@ function sidebarGuide(): DefaultTheme.SidebarItem[] {
           collapsed: true,
           items: [
             { text: '简介', link: 'introduction' },
+            { text: 'Bean标识', link: 'bean-identifier' },
+            { text: 'Onion名称', link: 'onion-name' },
+            { text: '创建Bean', link: 'bean-create' },
+            { text: '依赖注入', link: 'dependency-injection' },
+            { text: '依赖查找', link: 'dependency-lookup' },
+            { text: '依赖查找(API)', link: 'inject-api' },
+            { text: 'BeanBase基类', link: 'bean-base' },
             { text: '匿名Bean', link: 'anonymous-bean' },
             { text: '具名Bean: Store', link: 'store-bean' },
             { text: '具名Bean: 通用', link: 'named-bean' },
-            { text: 'Bean标识', link: 'bean-identifier' },
+
             { text: '注入', link: 'inject' },
             { text: '注入(API)', link: 'inject-api' },
             { text: 'BeanBase基类', link: 'bean-base' },
