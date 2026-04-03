@@ -9,36 +9,29 @@
 
 - Zova 提供了两个代码片段，你可以通过输入`init`和`dispose`快速添加相应的生命周期方法
 
-## 举例：computed计算属性
+## 举例：$useComputed
 
 ```typescript
-import { useComputed } from 'zova';
-
 export class Counter {
   count: number = 0;
   count2: string;
 
   protected async __init__() {
-    this.count2 = useComputed(() => {
+    this.count2 = this.$useComputed(() => {
       return `=== ${this.count} ===`;
     });
   }
 }
 ```
 
-- `count`是响应式属性
-- `count2`是计算属性，使用`useComputed`函数进行初始化
-
-## 举例：watch
+## 举例：$watch
 
 ```typescript
-import { watch } from 'vue';
-
 export class Counter {
   count: number = 0;
 
   protected async __init__() {
-    watch(
+    this.$watch(
       () => this.count,
       () => {
         console.log('changed: ', this.count);
