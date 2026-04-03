@@ -18,10 +18,6 @@ Zova 提供了一组装饰器函数，用于声明 Bean Class 是可注入的。
 | @Bean       | General Service                  | bean       | ctx          |
 | @Data       | Data Bean                        | data       | new          |
 
-| @Style | [全局样式](../../techniques/css-in-js/class.md) | style | app |
-| @Theme | [Theme](../../techniques/css-in-js/theme.md) | theme | app |
-| @Model | [Model: 统一数据源](../../techniques/model/introduction.md) | model | ctx |
-
 - a-action
 
 | 名称    | 说明        | scene  | 默认注入范围 |
@@ -53,3 +49,22 @@ Zova 提供了一组装饰器函数，用于声明 Bean Class 是可注入的。
 | 名称  | 说明      | scene | 默认注入范围 |
 | ----- | --------- | ----- | ------------ |
 | @Meta | Meta Bean | meta  | app          |
+
+- a-model
+
+| 名称   | 说明                                                 | scene | 默认注入范围 |
+| ------ | ---------------------------------------------------- | ----- | ------------ |
+| @Model | [Model Bean](../../techniques/model/introduction.md) | model | ctx          |
+
+- a-style
+
+| 名称   | 说明                                              | scene | 默认注入范围 |
+| ------ | ------------------------------------------------- | ----- | ------------ |
+| @Css   | [Css Bean](../../techniques/css-in-js/css.md)     | css   | app          |
+| @Theme | [Theme Bean](../../techniques/css-in-js/theme.md) | theme | app          |
+
+- a-table
+
+| 名称       | 说明           | scene     | 默认注入范围 |
+| ---------- | -------------- | --------- | ------------ |
+| @TableCell | TableCell Bean | tableCell | sys          |
