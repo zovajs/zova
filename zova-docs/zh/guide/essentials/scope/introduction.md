@@ -22,13 +22,14 @@ class ControllerTest extends BeanBase {
 
 ## Scope对象的成员
 
-| 名称     | 说明             |
-| -------- | ---------------- |
-| config   | 模块的Config配置 |
-| constant | 模块的常量定义   |
-| locale   | 模块的I18n国际化 |
-| error    | 模块的错误异常   |
-| api      | 模块的Api资源    |
+| 名称      | 说明                |
+| --------- | ------------------- |
+| config    | 模块的Config配置    |
+| constant  | 模块的常量定义      |
+| locale    | 模块的I18n国际化    |
+| error     | 模块的错误异常      |
+| api       | 模块的Api资源       |
+| apiSchema | 模块的ApiSchema资源 |
 
 ## 跨模块访问Scope实例
 
@@ -36,25 +37,24 @@ class ControllerTest extends BeanBase {
 
 `Scope`对象本身也是一个 bean，因此可以直接采用`依赖注入`的方式获取到其他模块的`Scope`实例
 
-仍以`testA.ts`为例，获取模块`home-base`的`Scope`实例：
-
-```typescript{1,4-5,8}
+```typescript
+import { UseScope } from 'zova';
 import { ScopeModuleHomeBase } from 'zova-module-home-base';
 
-export class TestA {
+class ControllerTest {
   @UseScope()
-  $$scopeModuleHomeBase: ScopeModuleHomeBase;
+  $$scopeHomeBase: ScopeModuleHomeBase;
 
-  protected async __init__() {
-    console.log(this.$$scopeModuleHomeBase);
+  async test() {
+    console.log(this.$$scopeHomeBase);
   }
 }
 ```
 
 - 导入模块`home-base`的`Scope`对象的类型
-- 使用`UseScope`装饰器函数
-- 系统会自动找到模块`home-base`的`Scope`实例，并且注入给变量`$$scopeModuleHomeBase`
+- 使用`@UseScope`装饰器函数
+- 系统会自动找到模块`home-base`的`Scope`实例，并且注入给变量`$$scopeHomeBase`
 
 ::: info
-基于编译器的加持，UseScope 会自动转为异步加载模式，具体而言就是：系统会异步加载模块`home-base`，然后取得 home-base 的 Scope 实例，从而完成注入
+基于编译器的加持，`@UseScope`会自动转为异步加载模式，具体而言就是：系统会异步加载模块`home-base`，然后取得 home-base 的 Scope 实例，从而完成注入
 :::
