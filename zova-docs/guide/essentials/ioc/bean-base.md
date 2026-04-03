@@ -12,7 +12,8 @@ The reason is to prioritize the use of the `dependency lookup` strategy, resulti
 
 | Name     | Description                                                                     |
 | -------- | ------------------------------------------------------------------------------- |
-| app      | Global App object                                                               |
+| sys      | Sys object                                                                      |
+| app      | App object                                                                      |
 | ctx      | The Context object which the current bean instance belongs to                   |
 | bean     | The bean container which the current bean instance belongs to                   |
 | scope    | The Scope object of the module which the current bean instance belongs to       |
@@ -33,9 +34,7 @@ The reason is to prioritize the use of the `dependency lookup` strategy, resulti
 | Name   | Description |
 | ------ | ----------- |
 | $props | props       |
-| $emit  | emit        |
 | $slots | slots       |
-| $attrs | attrs       |
 
 ## Extended Members
 
@@ -43,7 +42,7 @@ When a project is created, there will be some modules present in the project, pr
 
 | Name                                                    | Description                                        |
 | ------------------------------------------------------- | -------------------------------------------------- |
-| [$fetch](../../techniques/api/introduction.md)          | Api object provided by module `home-base`          |
+| [$fetch](../../techniques/api/introduction.md)          | Fetch object provided by module `a-fetch`          |
 | [$scopeBase](../../essentials/scope/introduction.md)    | Scope object provided by module `home-base`        |
 | [$css](../../techniques/css-in-js/css.md)               | Global style object provided by module `home-base` |
 | [$pinia](../../vue/pinia.md)                            | Pinia object provided by module `a-pinia`          |
@@ -57,6 +56,18 @@ Zova can be used with any UI library and comes with built-in project templates f
 
 | 名称     | 说明                                            |
 | -------- | ----------------------------------------------- |
-| $antdv   | Provided by module `antdv-adapter` of Antdv     |
 | $q       | Provided by module `quasar-adapter` of Quasar   |
 | $vuetify | Provided by module `vuetify-adapter` of Vuetify |
+
+## BeanBaseSimple
+
+`BeanBase` inherits from `BeanBaseSimple`
+
+### Built-in Members
+
+| Name          | Description     |
+| ------------- | --------------- |
+| $beanFullName | Bean Identifier |
+| $beanOptions  | Bean Options    |
+| $onionName    | Onion Name      |
+| $onionOptions | Onion Options   |
