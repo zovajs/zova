@@ -6,16 +6,13 @@
 
 原因就是优先使用`依赖查找`策略，从而使用更少的装饰器函数，使用更少的类型标注。通过`Scope`对象访问模块提供的资源，就是践行`依赖查找策略`的机制之一
 
-## 如何获取Scope实例
+## this.scope: 获取本模块Scope实例
 
-所有 bean 都继承自基类`BeanBase`，`BeanBase`支持传入范型参数`ScopeModule`。当传入范型参数`ScopeModule`之后就可以直接获取到当前 bean 所属模块的`Scope`实例
-
-以`service.testA.ts`为例：
+所有 bean 都继承自基类`BeanBase`，因此可以直接获取到当前 bean 所属模块的`Scope`实例
 
 ```typescript
-@Service()
-export class ServiceTestA extends BeanBase {
-  protected async __init__() {
+class ControllerTest extends BeanBase {
+  async test() {
     console.log(this.scope);
   }
 }
