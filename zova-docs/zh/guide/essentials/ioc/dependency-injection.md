@@ -2,9 +2,9 @@
 
 Zova 通过`@Use`装饰器函数注入 Bean 实例
 
-## 注入方式
+## 解析规则
 
-Zova 提供了以下几种注入方式：
+Zova 提供了以下几种解析规则，用于查找指定的 Bean 实例：
 
 - Bean Class
 - Bean 标识
@@ -175,9 +175,9 @@ class ControllerLayout {
 
 - 由于指定 injectionScope 选项为 new，因此直接创建新的 bean 实例
 
-## 层级注入 {#hierarchical-injection}
+## 注入范围: 层级注入 {#hierarchical-injection}
 
-注入范围除了支持`sys/app/ctx/new`，还支持层级注入：`host/skipSelf`，替代 Vue3 Provide/Inject 的能力
+注入范围还支持层级注入，替代 Vue3 Provide/Inject 的能力：
 
 ### 5. host
 
@@ -185,7 +185,7 @@ class ControllerLayout {
 
 ```typescript
 // in parent component
-import { ModelTabs } from 'zova-module-a-tabs';
+import { ModelTabs } from 'zova-module-a-routertabs';
 
 class Parent {
   @Use()
@@ -195,7 +195,7 @@ class Parent {
 
 ```typescript
 // in child component
-import type { ModelTabs } from 'zova-module-a-tabs';
+import type { ModelTabs } from 'zova-module-a-routertabs';
 
 class Child {
   @Use({ injectionScope: 'host' })

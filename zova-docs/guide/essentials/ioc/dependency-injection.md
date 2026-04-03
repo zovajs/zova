@@ -1,4 +1,4 @@
-# Inject
+# Dependency Injection
 
 Zova injects Bean instances through `@Use` decorator function
 
