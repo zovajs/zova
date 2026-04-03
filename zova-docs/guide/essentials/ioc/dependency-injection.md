@@ -92,61 +92,61 @@ Zova provides the following injection scopes: `sys/app/ctx/new/host/skipSelf`
 
 ### 1. sys
 
-If the injection scope is `app`, then inject the bean instance in the global ioc container to achieve the singleton effect
+If the injection scope is `sys`, then inject the bean instance in the global ioc container to achieve the singleton effect
 
 ```typescript
 // in module: test-module1
-@Store()
-class StoreCounter {}
+@Sys()
+class SysTest {}
 ```
 
 ```typescript
 // in module: test-module2
-import { StoreCounter } from 'zova-module-test-module1';
+import { SysTest } from 'zova-module-test-module1';
 
 class Test {
   @Use()
-  $$storeCounter: StoreCounter;
+  $$sysTest: SysTest;
 }
 ```
 
-- The injection scope of `Store` is `app` by default, so the bean instance will be lookuped and injected in the global ioc container
+- The injection scope of `@Sys` is `sys` by default, so the bean instance will be lookuped and injected in the sys ioc container
 
 ### 2. app
 
-If the injection scope is `app`, then inject the bean instance in the global ioc container to achieve the singleton effect
+If the injection scope is `app`, then inject the bean instance in the app ioc container
 
 ```typescript
 // in module: test-module1
-@Store()
-class StoreCounter {}
+@Tool()
+class ToolTest {}
 ```
 
 ```typescript
 // in module: test-module2
-import { StoreCounter } from 'zova-module-test-module1';
+import { ToolTest } from 'zova-module-test-module1';
 
 class Test {
   @Use()
-  $$storeCounter: StoreCounter;
+  $$toolTest: ToolTest;
 }
 ```
 
-- The injection scope of `Store` is `app` by default, so the bean instance will be lookuped and injected in the global ioc container
+- The injection scope of `@Tool` is `app` by default, so the bean instance will be lookuped and injected in the app ioc container
 
 ### 3. ctx
 
 If the injection scope is `ctx`, then inject the bean instance into the ioc container of the current component instance
 
 ```typescript
-// in module: a-tabs
+// in module: a-routertabs
 @Model()
 class ModelTabs {}
 ```
 
 ```typescript
 // in module: test-module2
-import { ModelTabs } from 'zova-module-a-tabs';
+import { ModelTabs } from 'zova-module-a-routertabs';
 
 class ControllerLayout {
   @Use()
@@ -154,21 +154,21 @@ class ControllerLayout {
 }
 ```
 
-- The injection scope of `Model` is `ctx` by default, so the bean instance will be lookuped and injected in the ioc container of the current component instance
+- The injection scope of `@Model` is `ctx` by default, so the bean instance will be lookuped and injected in the ctx ioc container of the current component instance
 
 ### 4. new
 
 If the injection scope is `new`, then directly create a new bean instance
 
 ```typescript
-// in module: a-tabs
+// in module: a-routertabs
 @Model()
 class ModelTabs {}
 ```
 
 ```typescript
 // in module: test-module2
-import { ModelTabs } from 'zova-module-a-tabs';
+import { ModelTabs } from 'zova-module-a-routertabs';
 
 class ControllerLayout {
   @Use({ injectionScope: 'new' })
@@ -178,9 +178,9 @@ class ControllerLayout {
 
 - Since the `injectionScope` option is specified as `new`, a new bean instance will be directly created
 
-## Hierarchical injection {#hierarchical-injection}
+## Injection scope: Hierarchical injection {#hierarchical-injection}
 
-Injection scope supports not only `app/ctx/new`, but also `host/skipSelf` which is called `hierarchical injection`
+The injection scope also supports hierarchical injection, replacing the capabilities of Vue3 Provide/Inject:
 
 ### 5. host
 
@@ -188,7 +188,7 @@ If the injection scope is `host`, the bean instance will be lookuped in the ioc 
 
 ```typescript
 // in parent component
-import { ModelTabs } from 'zova-module-a-tabs';
+import { ModelTabs } from 'zova-module-a-routertabs';
 
 class Parent {
   @Use()
@@ -198,7 +198,7 @@ class Parent {
 
 ```typescript
 // in child component
-import type { ModelTabs } from 'zova-module-a-tabs';
+import type { ModelTabs } from 'zova-module-a-routertabs';
 
 class Child {
   @Use({ injectionScope: 'host' })

@@ -151,7 +151,7 @@ class ControllerLayout {
 }
 ```
 
-- `@Model`的注入范围默认是 ctx，因此在当前组件实例的 ioc 容器中查找并注入 bean 实例
+- `@Model`的注入范围默认是 ctx，因此在当前组件实例的 ctx ioc 容器中查找并注入 bean 实例
 
 ### 4. new
 
