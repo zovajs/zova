@@ -8,48 +8,30 @@ The system will automatically assign an Onion name to each bean class as the fol
 
 ## For Example
 
-- The module demo-student provides a Controller bean: ControllerStudent
+- The module demo-student provides a component test which controller bean is `ControllerTest`
 
-| Class Name        | Scene Name | Bean Identifier                 | Onion Name           | Controller Name |
-| ----------------- | ---------- | ------------------------------- | -------------------- | --------------- |
-| ControllerStudent | controller | demo-student.controller.student | demo-student:student | `= Onion Name`  |
+| Class Name     | Scene Name | Bean Identifier              | Onion Name        | Component Name |
+| -------------- | ---------- | ---------------------------- | ----------------- | -------------- |
+| ControllerTest | controller | demo-student.controller.test | demo-student:test | `= Onion Name` |
 
-- The module demo-student provides a Model bean: ModelStudent
+- The module a-routertabs provides a Model bean: ModelTabs
 
-| Class Name   | Scene Name | Bean Identifier            | Onion Name           | Model Name     |
-| ------------ | ---------- | -------------------------- | -------------------- | -------------- |
-| ModelStudent | model      | demo-student.model.student | demo-student:student | `= Onion Name` |
+| Class Name | Scene Name | Bean Identifier         | Onion Name        | Model Name     |
+| ---------- | ---------- | ----------------------- | ----------------- | -------------- |
+| ModelTabs  | model      | a-routertabs.model.tabs | a-routertabs:tabs | `= Onion Name` |
 
 ## App Config
 
 With a common Onion name, you can modify the parameters of all bean classes in App Config
 
-`src/backend/config/config/config.ts`
+`src/front/config/config/config.ts`
 
 ```typescript
 // onions
 config.onions = {
-  controller: {
-    'demo-student:student': {
-      enable: false,
-    },
-  },
   model: {
-    'demo-student:student': {
-      cache: {
-        query: false,
-        entity: false,
-      },
-    },
-  },
-  middleware: {
-    'a-core:gate': {
-      enable: false,
-    },
-  },
-  schedule: {
-    'a-orm:softDeletionPrune': {
-      repeat: { every: 24 * 3600 * 1000 },
+    'a-routertabs:tabs': {
+      max: 10,
     },
   },
 };
