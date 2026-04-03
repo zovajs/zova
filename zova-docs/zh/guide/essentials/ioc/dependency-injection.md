@@ -4,7 +4,7 @@ Zova 通过`@Use`装饰器函数注入 Bean 实例
 
 ## 解析规则
 
-Zova 提供了以下几种解析规则，用于查找指定的 Bean 实例：
+Zova 提供了以下几种解析规则，用于查找或创建指定的 Bean 实例：
 
 - Bean Class
 - Bean 标识
