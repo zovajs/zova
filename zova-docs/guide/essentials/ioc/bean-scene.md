@@ -20,51 +20,51 @@ Zova provides a set of decorator functions for declaring that a Bean Class is in
 
 - a-action
 
-| 名称    | 说明        | scene  | 默认注入范围 |
-| ------- | ----------- | ------ | ------------ |
-| @Action | Action Bean | action | sys          |
+| Name    | Description | Scene  | Default Injection Scope |
+| ------- | ----------- | ------ | ----------------------- |
+| @Action | Action Bean | action | sys                     |
 
 - a-api
 
-| 名称       | 说明           | scene     | 默认注入范围 |
-| ---------- | -------------- | --------- | ------------ |
-| @Api       | Api Bean       | api       | app          |
-| @ApiMeta   | ApiMeta Bean   | apiMeta   | app          |
-| @ApiSchema | ApiSchema Bean | apiSchema | app          |
+| Name       | Description    | Scene     | Default Injection Scope |
+| ---------- | -------------- | --------- | ----------------------- |
+| @Api       | Api Bean       | api       | app                     |
+| @ApiMeta   | ApiMeta Bean   | apiMeta   | app                     |
+| @ApiSchema | ApiSchema Bean | apiSchema | app                     |
 
 - a-behavior
 
-| 名称      | 说明          | scene    | 默认注入范围 |
-| --------- | ------------- | -------- | ------------ |
-| @Behavior | Behavior Bean | behavior | new          |
+| Name      | Description   | Scene    | Default Injection Scope |
+| --------- | ------------- | -------- | ----------------------- |
+| @Behavior | Behavior Bean | behavior | new                     |
 
 - a-fetch
 
-| 名称         | 说明             | scene       | 默认注入范围 |
-| ------------ | ---------------- | ----------- | ------------ |
-| @Interceptor | Interceptor Bean | interceptor | new          |
+| Name         | Description      | Scene       | Default Injection Scope |
+| ------------ | ---------------- | ----------- | ----------------------- |
+| @Interceptor | Interceptor Bean | interceptor | new                     |
 
 - a-meta
 
-| 名称  | 说明      | scene | 默认注入范围 |
-| ----- | --------- | ----- | ------------ |
-| @Meta | Meta Bean | meta  | app          |
+| Name  | Description | Scene | Default Injection Scope |
+| ----- | ----------- | ----- | ----------------------- |
+| @Meta | Meta Bean   | meta  | app                     |
 
 - a-model
 
-| 名称   | 说明                                                 | scene | 默认注入范围 |
-| ------ | ---------------------------------------------------- | ----- | ------------ |
-| @Model | [Model Bean](../../techniques/model/introduction.md) | model | ctx          |
+| Name   | Description                                          | Scene | Default Injection Scope |
+| ------ | ---------------------------------------------------- | ----- | ----------------------- |
+| @Model | [Model Bean](../../techniques/model/introduction.md) | model | ctx                     |
 
 - a-style
 
-| 名称   | 说明                                              | scene | 默认注入范围 |
-| ------ | ------------------------------------------------- | ----- | ------------ |
-| @Css   | [Css Bean](../../techniques/css-in-js/css.md)     | css   | app          |
-| @Theme | [Theme Bean](../../techniques/css-in-js/theme.md) | theme | app          |
+| Name   | Description                                       | Scene | Default Injection Scope |
+| ------ | ------------------------------------------------- | ----- | ----------------------- |
+| @Css   | [Css Bean](../../techniques/css-in-js/css.md)     | css   | app                     |
+| @Theme | [Theme Bean](../../techniques/css-in-js/theme.md) | theme | app                     |
 
 - a-table
 
-| 名称       | 说明           | scene     | 默认注入范围 |
-| ---------- | -------------- | --------- | ------------ |
-| @TableCell | TableCell Bean | tableCell | sys          |
+| Name       | Description    | Scene     | Default Injection Scope |
+| ---------- | -------------- | --------- | ----------------------- |
+| @TableCell | TableCell Bean | tableCell | sys                     |
