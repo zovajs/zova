@@ -123,12 +123,6 @@ function sidebarGuide(): DefaultTheme.SidebarItem[] {
             { text: '依赖注入', link: 'dependency-injection' },
             { text: '依赖注入(API)', link: 'dependency-injection-api' },
             { text: 'BeanBase基类', link: 'bean-base' },
-            { text: '匿名Bean', link: 'anonymous-bean' },
-            { text: '具名Bean: Store', link: 'store-bean' },
-            { text: '具名Bean: 通用', link: 'named-bean' },
-
-            { text: '注入(API)', link: 'inject-api' },
-            { text: 'BeanBase基类', link: 'bean-base' },
             { text: '生命周期', link: 'lifecycle' },
           ],
         },
