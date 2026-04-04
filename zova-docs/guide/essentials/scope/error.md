@@ -4,41 +4,49 @@ Modules can individually provide their own `Error` exceptions
 
 ## Initialize code skeleton
 
+### 1. Cli command
+
+```bash
+$ zova :init:error demo-student
+```
+
+### 2. Menu command
+
 ::: tip
 Context Menu - [Module Path]: `Zova Init/Error`
 :::
 
 ## Define Error
 
-It takes two steps to define `Error`. Taking the module `demo-basic` as an example:
+It takes two steps to define `Error`. Taking the module `demo-student` as an example:
 
 ### 1. Define Errors
 
-`src/suite/a-demo/modules/demo-basic/src/config/errors.ts`
+`src/module/demo-student/src/config/errors.ts`
 
-```typescript{2}
+```diff
 export const errors = {
-  ErrorTest: 1001,
++ ErrorTest: 1001,
 } as const;
 ```
 
-- Convention: Error Code > 1000
+Convention: Error Code > 1000
 
 ### 2. Define Error language resources
 
-English: `src/suite/a-demo/modules/demo-basic/src/config/locale/en-us.ts`
+English: `src/module/demo-student/src/config/locale/en-us.ts`
 
-```typescript{2}
+```diff
 export default {
-  ErrorTest: 'This is a error test',
++ ErrorTest: 'This is a error test',
 };
 ```
 
-Chinese: `src/suite/a-demo/modules/demo-basic/src/config/locale/zh-cn.ts`
+Chinese: `src/module/demo-student/src/config/locale/zh-cn.ts`
 
-```typescript{2}
+```diff
 export default {
-  ErrorTest: '这是一个错误测试',
++ ErrorTest: '这是一个错误测试',
 };
 ```
 
@@ -46,25 +54,25 @@ export default {
 
 You can directly throw the module's `Error` exception through the `Scope` instance
 
-```typescript{3}
-export class TestA {
-  protected async __init__() {
-    this.scope.error.ErrorTest.throw();
+```diff
+class ControllerTest {
+  async test() {
++   this.scope.error.ErrorTest.throw();
   }
 }
 ```
 
 ## Use Error cross-module
 
-```typescript{1,4-5,8}
-import { ScopeModuleDemoBasic } from 'zova-module-demo-basic';
+```diff
++ import { ScopeModuleDemoStudent } from 'zova-module-demo-student';
 
-export class TestA {
-  @UseScope()
-  $$scopeModuleDemoBasic: ScopeModuleDemoBasic;
+class ControllerOther {
++ @UseScope()
++ $$scopeDemoStudent: ScopeModuleDemoStudent;
 
-  protected async __init__() {
-    this.$$scopeModuleDemoBasic.error.ErrorTest.throw();
+  async test() {
++   this.$$scopeDemoStudent.error.ErrorTest.throw();
   }
 }
 ```
