@@ -31,7 +31,7 @@ export const ControllerPageCounterSchemaQuery = z.object({
 
 ## Use Query
 
-Zova injects a `$query` object into the base class of the `controller` bean so that the `Query` parameter can be obtained through `this.$query` in the render instance, and type hints are supported
+Zova injects a `$query` object into the base class of the `controller` bean so that the `Query` parameter can be obtained through `this.$query`, and type hints are supported
 
 ```diff
 class ControllerPageCounter {
