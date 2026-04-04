@@ -49,7 +49,7 @@ class ControllerTest {
 ```diff
 + import { ScopeModuleDemoStudent } from 'zova-module-demo-student';
 
-export class TestA {
+class ControllerOther {
 + @UseScope()
 + $$scopeDemoStudent: ScopeModuleDemoStudent;
 

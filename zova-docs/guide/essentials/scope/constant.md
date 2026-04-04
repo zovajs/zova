@@ -4,54 +4,60 @@ Modules can individually provide their own `Constant`
 
 ## Initialize code skeleton
 
+### 1. Cli command
+
+```bash
+$ zova :init:constant demo-student
+```
+
+### 2. Menu command
+
 ::: tip
 Context Menu - [Module Path]: `Zova Init/Constant`
 :::
 
 ## Define Constant
 
-Taking the module `demo-basic` as an example, define the `Constant` of the module:
+Taking the module `demo-student` as an example, define the `Constant` of the module:
 
-`src/suite/a-demo/modules/demo-basic/src/config/constants.ts`
+`src/module/demo-student/src/config/constants.ts`
 
-```typescript{2-5}
+```diff
 export const constants = {
-  gender: {
-    male: 1,
-    female: 2,
-  },
++ gender: {
++   male: 1,
++   female: 2,
++ },
 } as const;
 ```
 
-- Just define the required constants directly, and the system will automatically extract the type information of constants
+Just define the required constants directly, and the system will automatically extract the type information of constants
 
 ## Use Constant
 
 The `Constant` of the module can be obtained through the `Scope` instance
 
-```typescript{3-5}
-export class TestA {
-  protected async __init__() {
-    const male = this.scope.constant.gender.male;
-    const female = this.scope.constant.gender.female;
-    console.log(male, female);
+```diff
+class ControllerTest {
+  async test() {
++   console.log(this.scope.constant.gender.male);
++   console.log(this.scope.constant.gender.female);
   }
 }
 ```
 
 ## Use Constant cross-module
 
-```typescript{1,4-5,8-10}
-import { ScopeModuleDemoBasic } from 'zova-module-demo-basic';
+```diff
++ import { ScopeModuleDemoStudent } from 'zova-module-demo-student';
 
-export class TestA {
-  @UseScope()
-  $$scopeModuleDemoBasic: ScopeModuleDemoBasic;
+class ControllerOther {
++ @UseScope()
++ $$scopeDemoStudent: ScopeModuleDemoStudent;
 
-  protected async __init__() {
-    const male = this.$$scopeModuleDemoBasic.constant.gender.male;
-    const female = this.$$scopeModuleDemoBasic.constant.gender.female;
-    console.log(male, female);
+  async test() {
++   console.log(this.$$scopeDemoStudent.constant.gender.male);
++   console.log(this.$$scopeDemoStudent.constant.gender.female);
   }
 }
 ```
