@@ -1,87 +1,75 @@
 # Page Query
 
-Zova enhances route `Query` and provides Typescript typing support
+Zova enhances page `Query` and provides Typescript typing support
 
-## Create Page Component
+## Add Query code skeleton
 
-In order to fully demonstrate how to define and use typed `Query`, here we create a new page component `user` in the module `demo-basic`:
+Add Query code skeleton for page `counter`
+
+### 1. CLI command
+
+```bash
+$ zova :refactor:pageQuery counter --module=demo-student
+```
+
+### 2. Menu command
 
 ::: tip
-Context Menu - [Module Path]: `Zova Create/Page`
+Context Menu - [Module Path/src/page/pageName]: `Zova Refactor/Add Page Query`
 :::
 
-## Initialize code skeleton
+## Add Zod Schema
 
-::: tip
-Context Menu - [Module Path/src/page/user]: `Zova Refactor/Add Page Query`
-:::
+Add fields schema
 
-## Define Query
-
-Define Query in `controller.ts`:
-
-`src/suite/a-demo/modules/demo-basic/src/page/user/controller.ts`
-
-```typescript{2-3}
-export const QuerySchema = z.object({
-  name: z.string().optional(),
-  age: z.number().optional(),
+```diff
+export const ControllerPageCounterSchemaQuery = z.object({
++ name: z.string().optional(),
++ age: z.number().optional(),
 });
 ```
 
-- Zova encapsulates [zod](https://zod.dev) and provides an enhanced version of `z` object
-- An `object` is defined using `z`, containing two fields: `name` and `age`
-
 ## Use Query
 
-In `render.ts`, you can directly obtain Query and render its fields
+Zova injects a `$query` object into the base class of the `controller` bean so that the `Query` parameter can be obtained through `this.$query` in the render instance, and type hints are supported
 
-`src/suite/a-demo/modules/demo-basic/src/page/user/render.tsx`
-
-```typescript{5-6}
-export class RenderUser {
+```diff
+class ControllerPageCounter {
   render() {
     return (
       <div>
-        <div>{this.$query.name}</div>
-        <div>{this.$query.age}</div>
++       <div>{this.$query.name}</div>
++       <div>{this.$query.age}</div>
       </div>
     );
   }
 }
 ```
 
-- The type of `$query.name` is `string | undefined`
-- The type of `$query.age` is `number | undefined`
-
 ## Pass in Query
 
-Next, we need to pass in the `Query` parameter when navigating the route
+When invoking the page navigation method, you can also pass Query parameters, and type hints are supported
 
-Add a button directly to the page component `user`, listen to the click event, and use different `Query` parameter to navigate to the current page. In this way, we can see that `$query` is reactive
-
-```typescript{9-11}
-export class RenderUser {
+```diff
+class ControllerPageCounter {
   render() {
     return (
       <div>
-        <div>{this.$query.name}</div>
-        <div>{this.$query.age}</div>
         <button
           onClick={() => {
-            const age = (this.$query.age ?? 0) + 1;
-            const url = this.$router.resolvePath('/demo/basic/user', { name: 'tom', age });
+            const url = this.$router.getPagePath('/demo/student/counter', {
+              query: {
++               name: 'tom',
++               age: 18,
+              },
+            });
             this.$router.push(url);
           }}
         >
-          Go To Current Page
+          Go To
         </button>
       </div>
     );
   }
 }
 ```
-
-## $query
-
-Zova injects a `$query` object into the base class of the `controller` bean so that the `Query` parameter can be obtained through `this.$query` in the render instance

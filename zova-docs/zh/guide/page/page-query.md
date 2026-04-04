@@ -20,7 +20,7 @@ $ zova :refactor:pageQuery counter --module=demo-student
 
 ## 添加Zod Schema
 
-添加两个字段的 Schema 定义
+添加字段 Schema
 
 ```diff
 export const ControllerPageCounterSchemaQuery = z.object({
