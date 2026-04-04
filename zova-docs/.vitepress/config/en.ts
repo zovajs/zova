@@ -151,7 +151,7 @@ function sidebarGuide(): DefaultTheme.SidebarItem[] {
       base: '/guide/page/',
       items: [
         { text: 'Introduction', link: 'introduction' },
-        { text: 'Create Page', link: 'page-create' },
+        { text: 'File Structure', link: 'file-structure' },
       ],
     },
     {

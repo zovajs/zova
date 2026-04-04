@@ -147,7 +147,7 @@ function sidebarGuide(): DefaultTheme.SidebarItem[] {
       base: '/zh/guide/page/',
       items: [
         { text: '简介', link: 'introduction' },
-        { text: '创建页面', link: 'page-create' },
+        { text: '文件结构', link: 'file-structure' },
       ],
     },
     {
