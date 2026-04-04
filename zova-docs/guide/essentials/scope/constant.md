@@ -39,9 +39,6 @@ export class TestA {
 }
 ```
 
-- Gif Demonstration
-  ![scope-constant](https://cabloy-1258265067.cos.ap-shanghai.myqcloud.com/image/scope-constant.gif)
-
 ## Use Constant cross-module
 
 ```typescript{1,4-5,8-10}

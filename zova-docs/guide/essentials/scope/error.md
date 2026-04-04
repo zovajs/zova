@@ -54,9 +54,6 @@ export class TestA {
 }
 ```
 
-- Gif Demonstration
-  ![scope-error](https://cabloy-1258265067.cos.ap-shanghai.myqcloud.com/image/scope-error.gif)
-
 ## Use Error cross-module
 
 ```typescript{1,4-5,8}

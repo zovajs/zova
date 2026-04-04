@@ -39,9 +39,6 @@ export class TestA {
 }
 ```
 
-- 动图演示
-  ![scope-constant](https://cabloy-1258265067.cos.ap-shanghai.myqcloud.com/image/scope-constant.gif)
-
 ## 跨模块使用Constant
 
 ```typescript{1,4-5,8-10}

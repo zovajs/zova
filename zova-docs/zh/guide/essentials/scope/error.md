@@ -54,9 +54,6 @@ export class TestA {
 }
 ```
 
-- 动图演示
-  ![scope-error](https://cabloy-1258265067.cos.ap-shanghai.myqcloud.com/image/scope-error.gif)
-
 ## 跨模块使用Error
 
 ```typescript{1,4-5,8}

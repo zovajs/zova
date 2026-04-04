@@ -98,7 +98,3 @@ export class RenderUser {
 ## $params
 
 Zova 在`controller` bean 的基类中注入了`$params`对象，从而可以在 render 实例中通过`this.$params`访问 Params 参数
-
-## 动图演示
-
-![route-params](https://cabloy-1258265067.cos.ap-shanghai.myqcloud.com/image/route-params.gif)

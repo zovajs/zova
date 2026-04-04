@@ -46,9 +46,6 @@ export class TestA {
 }
 ```
 
-- 动图演示
-  ![scope-locale](https://cabloy-1258265067.cos.ap-shanghai.myqcloud.com/image/scope-locale.gif)
-
 ## 跨模块使用语言资源
 
 ```typescript{1,4-5,8-14}

@@ -85,7 +85,3 @@ export class RenderUser {
 ## $query
 
 Zova injects a `$query` object into the base class of the `controller` bean so that the `Query` parameter can be obtained through `this.$query` in the render instance
-
-## Gif Demonstration
-
-![route-query](https://cabloy-1258265067.cos.ap-shanghai.myqcloud.com/image/route-query.gif)

@@ -98,7 +98,3 @@ export class RenderUser {
 ## $params
 
 Zova injects a `$params` object into the base class of the `controller` bean so that the `Params` parameter can be obtained through `this.$params` in the render instance
-
-## Gif Demonstration
-
-![route-params](https://cabloy-1258265067.cos.ap-shanghai.myqcloud.com/image/route-params.gif)

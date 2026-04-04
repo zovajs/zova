@@ -85,7 +85,3 @@ export class RenderUser {
 ## $query
 
 Zova 在`controller` bean 的基类中注入了`$query`对象，从而可以在 render 实例中通过`this.$query`访问 Query 参数
-
-## 动图演示
-
-![route-query](https://cabloy-1258265067.cos.ap-shanghai.myqcloud.com/image/route-query.gif)

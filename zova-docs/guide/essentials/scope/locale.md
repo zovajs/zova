@@ -46,9 +46,6 @@ export class TestA {
 }
 ```
 
-- Gif Demonstration
-  ![scope-locale](https://cabloy-1258265067.cos.ap-shanghai.myqcloud.com/image/scope-locale.gif)
-
 ## Use language resources cross-module
 
 ```typescript{1,4-5,8-14}
