@@ -136,7 +136,7 @@ function sidebarGuide(): DefaultTheme.SidebarItem[] {
             { text: 'Constant常量', link: 'constant' },
             { text: 'I18n国际化', link: 'locale' },
             { text: 'Error错误异常', link: 'error' },
-            { text: 'Api服务', link: 'service' },
+            { text: 'Api', link: 'api' },
           ],
         },
       ],
