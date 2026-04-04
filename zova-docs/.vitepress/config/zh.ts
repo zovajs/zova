@@ -143,8 +143,17 @@ function sidebarGuide(): DefaultTheme.SidebarItem[] {
     },
     {
       collapsed: true,
-      text: '组件与页面',
-      base: '/zh/guide/essentials/component/',
+      text: '页面',
+      base: '/zh/guide/page/',
+      items: [
+        { text: '简介', link: 'introduction' },
+        { text: '创建页面', link: 'page-create' },
+      ],
+    },
+    {
+      collapsed: true,
+      text: '组件',
+      base: '/zh/guide/component/',
       items: [
         { text: '页面组件', link: 'page' },
         { text: '子组件', link: 'child' },

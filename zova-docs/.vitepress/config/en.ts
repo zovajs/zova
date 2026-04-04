@@ -147,8 +147,17 @@ function sidebarGuide(): DefaultTheme.SidebarItem[] {
     },
     {
       collapsed: true,
-      text: 'Component & Page',
-      base: '/guide/essentials/component/',
+      text: 'Page',
+      base: '/guide/page/',
+      items: [
+        { text: 'Introduction', link: 'introduction' },
+        { text: 'Create Page', link: 'page-create' },
+      ],
+    },
+    {
+      collapsed: true,
+      text: 'Component',
+      base: '/guide/component/',
       items: [
         { text: 'Page Component', link: 'page' },
         { text: 'Child Component', link: 'child' },
