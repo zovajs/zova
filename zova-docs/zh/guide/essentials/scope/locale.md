@@ -4,27 +4,35 @@
 
 ## 初始化代码骨架
 
+### 1. Cli命令
+
+```bash
+$ zova :init:locale demo-student
+```
+
+### 2. 菜单命令
+
 ::: tip
 右键菜单 - [模块路径]: `Zova Init/Locale`
 :::
 
 ## 定义语言资源
 
-以模块`demo-basic`为例，定义模块的语言资源：
+以模块`demo-student`为例，定义模块的语言资源：
 
-英文：`src/suite/a-demo/modules/demo-basic/src/config/locale/en-us.ts`
+英文：`src/module/demo-student/src/config/locale/en-us.ts`
 
-```typescript{2}
+```diff
 export default {
-  HelloWorld: 'Hello World',
++ HelloWorld: 'Hello World',
 };
 ```
 
-中文：`src/suite/a-demo/modules/demo-basic/src/config/locale/zh-cn.ts`
+中文：`src/module/demo-student/src/config/locale/zh-cn.ts`
 
-```typescript{2}
+```diff
 export default {
-  HelloWorld: '您好世界',
++ HelloWorld: '您好世界',
 };
 ```
 
@@ -32,15 +40,15 @@ export default {
 
 可以通过 Scope 实例提供的`locale`对象获取模块的语言资源
 
-```typescript{3-9}
-export class TestA {
-  protected async __init__() {
+```diff
+class ControllerTest {
+  async test() {
     // use current locale
-    const message1 = this.scope.locale.HelloWorld();
++   const message1 = this.scope.locale.HelloWorld();
     // use locale en-us
-    const message2 = this.scope.locale.HelloWorld.locale('en-us');
++   const message2 = this.scope.locale.HelloWorld.locale('en-us');
     // use locale zh-cn
-    const message3 = this.scope.locale.HelloWorld.locale('zh-cn');
++   const message3 = this.scope.locale.HelloWorld.locale('zh-cn');
     console.log(message1, message2, message3);
   }
 }
@@ -48,21 +56,15 @@ export class TestA {
 
 ## 跨模块使用语言资源
 
-```typescript{1,4-5,8-14}
-import { ScopeModuleDemoBasic } from 'zova-module-demo-basic';
+```diff
++ import { ScopeModuleDemoStudent } from 'zova-module-demo-student';
 
-export class TestA {
-  @UseScope()
-  $$scopeModuleDemoBasic: ScopeModuleDemoBasic;
+class ControllerOther {
++ @UseScope()
++ $$scopeDemoStudent: ScopeModuleDemoStudent;
 
-  protected async __init__() {
-    // use current locale
-    const message1 = this.$$scopeModuleDemoBasic.locale.HelloWorld();
-    // use locale en-us
-    const message2 = this.$$scopeModuleDemoBasic.locale.HelloWorld.locale('en-us');
-    // use locale zh-cn
-    const message3 = this.$$scopeModuleDemoBasic.locale.HelloWorld.locale('zh-cn');
-    console.log(message1, message2, message3);
+  async test() {
++   console.log(this.$$scopeDemoStudent.locale.HelloWorld());
   }
 }
 ```
@@ -73,11 +75,11 @@ export class TestA {
 
 英文：`src/front/config/locale/en-us.ts`
 
-```typescript{3-5}
+```diff
 export default {
   modules: {
     'demo-basic': {
-      HelloWorld: 'Hello World!!!',
++     HelloWorld: 'Hello World!!!',
     },
   },
 };
@@ -85,11 +87,11 @@ export default {
 
 中文：`src/front/config/locale/zh-cn.ts`
 
-```typescript{3-5}
+```diff
 export default {
   modules: {
     'demo-basic': {
-      HelloWorld: '您好世界!!!',
++     HelloWorld: '您好世界!!!',
     },
   },
 };

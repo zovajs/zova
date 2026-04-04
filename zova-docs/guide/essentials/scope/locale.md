@@ -4,27 +4,35 @@ Modules can individually provide their own `I18n` language resources
 
 ## Initialize code skeleton
 
+### 1. Cli command
+
+```bash
+$ zova :init:locale demo-student
+```
+
+### 2. Menu command
+
 ::: tip
 Context Menu - [Module Path]: `Zova Init/Locale`
 :::
 
 ## Define language resources
 
-Taking the module `demo-basic` as an example, define the `I18n` language resources of the module:
+Taking the module `demo-student` as an example, define the `I18n` language resources of the module:
 
-English: `src/suite/a-demo/modules/demo-basic/src/config/locale/en-us.ts`
+English: `src/module/demo-student/src/config/locale/en-us.ts`
 
-```typescript{2}
+```diff
 export default {
-  HelloWorld: 'Hello World',
++ HelloWorld: 'Hello World',
 };
 ```
 
-Chinese: `src/suite/a-demo/modules/demo-basic/src/config/locale/zh-cn.ts`
+Chinese: `src/module/demo-student/src/config/locale/zh-cn.ts`
 
-```typescript{2}
+```diff
 export default {
-  HelloWorld: '您好世界',
++ HelloWorld: '您好世界',
 };
 ```
 
@@ -32,15 +40,15 @@ export default {
 
 The `I18n` language resources of the module can be obtained through the `locale` object of the `Scope` instance
 
-```typescript{3-9}
-export class TestA {
-  protected async __init__() {
+```diff
+class ControllerTest {
+  async test() {
     // use current locale
-    const message1 = this.scope.locale.HelloWorld();
++   const message1 = this.scope.locale.HelloWorld();
     // use locale en-us
-    const message2 = this.scope.locale.HelloWorld.locale('en-us');
++   const message2 = this.scope.locale.HelloWorld.locale('en-us');
     // use locale zh-cn
-    const message3 = this.scope.locale.HelloWorld.locale('zh-cn');
++   const message3 = this.scope.locale.HelloWorld.locale('zh-cn');
     console.log(message1, message2, message3);
   }
 }
@@ -48,21 +56,15 @@ export class TestA {
 
 ## Use language resources cross-module
 
-```typescript{1,4-5,8-14}
-import { ScopeModuleDemoBasic } from 'zova-module-demo-basic';
+```diff
++ import { ScopeModuleDemoStudent } from 'zova-module-demo-student';
 
-export class TestA {
-  @UseScope()
-  $$scopeModuleDemoBasic: ScopeModuleDemoBasic;
+class ControllerOther {
++ @UseScope()
++ $$scopeDemoStudent: ScopeModuleDemoStudent;
 
-  protected async __init__() {
-    // use current locale
-    const message1 = this.$$scopeModuleDemoBasic.locale.HelloWorld();
-    // use locale en-us
-    const message2 = this.$$scopeModuleDemoBasic.locale.HelloWorld.locale('en-us');
-    // use locale zh-cn
-    const message3 = this.$$scopeModuleDemoBasic.locale.HelloWorld.locale('zh-cn');
-    console.log(message1, message2, message3);
+  async test() {
++   console.log(this.$$scopeDemoStudent.locale.HelloWorld());
   }
 }
 ```
@@ -73,11 +75,11 @@ You can use `project-level` language resources to override `module-level` langua
 
 English: `src/front/config/locale/en-us.ts`
 
-```typescript{3-5}
+```diff
 export default {
   modules: {
     'demo-basic': {
-      HelloWorld: 'Hello World!!!',
++     HelloWorld: 'Hello World!!!',
     },
   },
 };
@@ -85,11 +87,11 @@ export default {
 
 Chinese: `src/front/config/locale/zh-cn.ts`
 
-```typescript{3-5}
+```diff
 export default {
   modules: {
     'demo-basic': {
-      HelloWorld: '您好世界!!!',
++     HelloWorld: '您好世界!!!',
     },
   },
 };
