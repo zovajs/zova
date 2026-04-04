@@ -4,79 +4,58 @@
 
 ## 创建Api
 
+### 1. Cli命令
+
+```bash
+$ zova :create:bean api test --module=demo-student
+```
+
+### 2. 菜单命令
+
 ::: tip
 右键菜单 - [模块路径]: `Zova Create/Api`
 :::
 
-依据提示输入 api 的名称，比如`menu`，VSCode 插件会自动添加 api 的代码骨架
+依据提示输入 api 的名称，比如`test`，VSCode 插件会自动添加 api 的代码骨架
 
-以模块`home-layout`为例，通过调用 Api`/home/layout/menu/select`获取菜单。那么，可以按如下方式定义 Api 服务：
+## 定义Api
 
-`src/suite/a-home/modules/home-layout/src/api/menu.ts`
+`src/module/demo-student/src/api/test.ts`
 
-```typescript
-export default (app: ZovaApplication) => {
-  return {
-    select: () => app.meta.$fetch.get<any, ApiMenuEntity[]>('/home/layout/menu/select'),
-  };
-};
+```diff
+@Api()
+class ApiTest {
+  echo() {
++   return this.$fetch.get<any, ApiTestEchoResult>('/test/echo');
+  }
+}
 ```
 
-- 关于`$fetch`的用法，参见：[Fetch](../../techniques/fetch/introduction.md)
+关于`$fetch`的用法，参见：[Fetch](../../techniques/fetch/introduction.md)
 
 ## 使用Api
 
 可以通过 Scope 实例直接访问 Api
 
-`src/suite/a-home/modules/home-layout/src/bean/model.menu.ts`
-
-```typescript
-const data = await this.scope.api.menu.select();
-```
-
-## 跨模块使用Api
-
-```typescript
-import { ScopeModuleHomeLayout } from 'zova-module-home-layout';
-
-export class TestA {
-  @UseScope()
-  $$scopeModuleHomeLayout: ScopeModuleHomeLayout;
-
-  protected async __init__() {
-    const data = await this.$$scopeModuleHomeLayout.api.menu.select();
+```diff
+class ControllerTest {
+  async test() {
++   const res = await this.scope.api.test.echo();
   }
 }
 ```
 
-## 举例：CRUD
+## 跨模块使用Api
 
-下面以 Todo 的 CRUD 为例：
+```diff
++ import { ScopeModuleDemoStudent } from 'zova-module-demo-student';
 
-### 定义Api服务
+class ControllerOther {
++ @UseScope()
++ $$scopeDemoStudent: ScopeModuleDemoStudent;
 
-`src/suite/a-demo/modules/demo-todo/src/api/todo.ts`
-
-```typescript
-export default (app: ZovaApplication) => {
-  return {
-    select: () => app.meta.$fetch.get<any, ApiTodoEntity[]>('/demo/todo/select'),
-    get: (params: ApiTodoGetParams) => app.meta.$fetch.get<any, ApiTodoEntity>('/demo/todo/get', { params }),
-    insert: (params: ApiTodoIntertParams) => app.meta.$fetch.post<any, void, ApiTodoIntertParams>('/demo/todo/insert', params),
-    update: (params: ApiTodoUpdateParams) => app.meta.$fetch.post<any, void, ApiTodoUpdateParams>('/demo/todo/update', params),
-    delete: (params: ApiTodoDeleteParams) => app.meta.$fetch.post<any, void, ApiTodoDeleteParams>('/demo/todo/delete', params),
-  };
-};
-```
-
-### 使用Api
-
-`src/suite/a-demo/modules/demo-todo/src/bean/model.todo.ts`
-
-```typescript
-await this.scope.api.todo.select();
-await this.scope.api.todo.get(params);
-await this.scope.api.todo.insert(params);
-await this.scope.api.todo.update(params);
-await this.scope.api.todo.delete(params);
+  async test() {
++   const res = await this.$$scopeDemoStudent.api.test.echo();
+  }
+}
 ```

@@ -4,82 +4,58 @@ Modules can centrally manage backend Api calls and package Api calls as `api` re
 
 ## Create Api
 
+### 1. Cli command
+
+```bash
+$ zova :create:bean api test --module=demo-student
+```
+
+### 2. Menu command
+
 ::: tip
 Context Menu - [Module Path]: `Zova Create/Api`
 :::
 
-Enter the name of api according to the prompt, such as `menu`. The VSCode extension will automatically create the code skeleton of `api`
+Enter the name of api according to the prompt, such as `test`. The VSCode extension will automatically create the code skeleton of `api`
 
-Take the module `home-layout` as an example, and get the menu by calling the Api `/home/layout/menu/select`. Then, you can define the Api service as follows:
+## Define Api
 
-`src/suite/a-home/modules/home-layout/src/api/menu.ts`
+`src/module/demo-student/src/api/test.ts`
 
-```typescript
-import { ZovaApplication } from 'zova';
-import { ApiMenuEntity } from '../interface/menu.js';
-
-export default (app: ZovaApplication) => {
-  return {
-    select: () => app.meta.$fetch.get<any, ApiMenuEntity[]>('/home/layout/menu/select'),
-  };
-};
+```diff
+@Api()
+class ApiTest {
+  echo() {
++   return this.$fetch.get<any, ApiTestEchoResult>('/test/echo');
+  }
+}
 ```
 
-- For the usage of `$fetch`, see: [Fetch](../../techniques/fetch/introduction.md)
+For the usage of `$fetch`, see: [Fetch](../../techniques/fetch/introduction.md)
 
 ## Use API
 
 You can directly access API through Scope instance
 
-`src/suite/a-home/modules/home-layout/src/bean/model.menu.ts`
-
-```typescript
-const data = await this.scope.api.menu.select();
-```
-
-## Use API cross-module
-
-```typescript
-import { ScopeModuleHomeLayout } from 'zova-module-home-layout';
-
-export class TestA {
-  @UseScope()
-  $$scopeModuleHomeLayout: ScopeModuleHomeLayout;
-
-  protected async __init__() {
-    const data = await this.$$scopeModuleHomeLayout.api.menu.select();
+```diff
+class ControllerTest {
+  async test() {
++   const res = await this.scope.api.test.echo();
   }
 }
 ```
 
-## Example: CRUD
+## Use API cross-module
 
-Let's take Todo's CRUD as an example:
+```diff
++ import { ScopeModuleDemoStudent } from 'zova-module-demo-student';
 
-### Define Api
+class ControllerOther {
++ @UseScope()
++ $$scopeDemoStudent: ScopeModuleDemoStudent;
 
-`src/suite/a-demo/modules/demo-todo/src/api/todo.ts`
-
-```typescript
-export default (app: ZovaApplication) => {
-  return {
-    select: () => app.meta.$fetch.get<any, ApiTodoEntity[]>('/demo/todo/select'),
-    get: (params: ApiTodoGetParams) => app.meta.$fetch.get<any, ApiTodoEntity>('/demo/todo/get', { params }),
-    insert: (params: ApiTodoIntertParams) => app.meta.$fetch.post<any, void, ApiTodoIntertParams>('/demo/todo/insert', params),
-    update: (params: ApiTodoUpdateParams) => app.meta.$fetch.post<any, void, ApiTodoUpdateParams>('/demo/todo/update', params),
-    delete: (params: ApiTodoDeleteParams) => app.meta.$fetch.post<any, void, ApiTodoDeleteParams>('/demo/todo/delete', params),
-  };
-};
-```
-
-### Use Api
-
-`src/suite/a-demo/modules/demo-todo/src/bean/model.todo.ts`
-
-```typescript
-await this.scope.api.todo.select();
-await this.scope.api.todo.get(params);
-await this.scope.api.todo.insert(params);
-await this.scope.api.todo.update(params);
-await this.scope.api.todo.delete(params);
+  async test() {
++   const res = await this.$$scopeDemoStudent.api.test.echo();
+  }
+}
 ```
