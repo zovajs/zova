@@ -115,7 +115,7 @@ class StylePageCounter extends BeanStyleBase {
 
 As the code continues to grow, you can continue to adjust the file structure, create more Render files and Style files, and also create multiple Service files to separate state management
 
-### Create Another Render beans
+### Create Another Render Bean
 
 ### 1. CLI command
 
@@ -126,10 +126,10 @@ $ zova :refactor:anotherRender page/counter another --module=demo-student
 ### 2. Menu command
 
 ::: tip
-Context Menu - [Module Path/src/page/pageName]: 'Zova Refactor/Create Another Render Bean'
+Context Menu - [Module Path/src/page/pageName]: `Zova Refactor/Create Another Render Bean`
 :::
 
-### Create more Style Beans
+### Create Another Style Bean
 
 ### 1. CLI command
 
@@ -140,12 +140,12 @@ $ zova :refactor:anotherStyle page/counter another --module=demo-student
 ### 2. Menu command
 
 ::: tip
-Context Menu - [module path/src/page/pageName]: 'Zova Refactor/Create Another Style Bean'
+Context Menu - [Module Path/src/page/pageName]: `Zova Refactor/Create Another Style Bean`
 :::
 
-### Create more service beans
+### Create Another Service Bean
 
-Create a Service'counter to separate state management
+Create a Service `counter` to separate state management
 
 ### 1. CLI command
 
@@ -156,7 +156,7 @@ $ zova :create:bean service page/counter/counter --module=demo-student
 ### 2. Menu command
 
 ::: tip
-Context Menu - [module path/src/page/pageName]: 'Zova Create/Service'
+Context Menu - [Module Path/src/page/pageName]: `Zova Create/Service`
 :::
 
 ```typescript
@@ -165,7 +165,7 @@ class ServiceCounter extends BeanBase {
   count: number = 0;
 
   increment() {
-    this.count;
+    this.count++;
   }
 
   decrement() {
