@@ -120,7 +120,7 @@ class StylePageCounter extends BeanStyleBase {
 ### 1. Cli命令
 
 ```bash
-$ zova :refactor:anotherRender page/counter more --module=demo-student
+$ zova :refactor:anotherRender page/counter another --module=demo-student
 ```
 
 ### 2. 菜单命令
@@ -134,7 +134,7 @@ $ zova :refactor:anotherRender page/counter more --module=demo-student
 ### 1. Cli命令
 
 ```bash
-$ zova :refactor:anotherStyle page/counter more --module=demo-student
+$ zova :refactor:anotherStyle page/counter another --module=demo-student
 ```
 
 ### 2. 菜单命令
