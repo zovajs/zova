@@ -1,87 +1,75 @@
 # 页面Query
 
-Zova 对路由`Query`进行了强化，提供了 Typescript 类型化支持
+Zova 对页面`Query`进行了强化，提供了 Typescript 类型化支持
 
-## 创建页面组件
+## 添加Query代码骨架
 
-为了完整的演示如何定义和使用类型化的`Query`，这里我们在模块`demo-basic`中创建一个新的页面组件`user`：
+为页面`counter`添加 Query 代码骨架
+
+### 1. Cli命令
+
+```bash
+$ zova :refactor:pageQuery counter --module=demo-student
+```
+
+### 2. 菜单命令
 
 ::: tip
-右键菜单 - [模块路径]: `Zova Create/Page`
+右键菜单 - [模块路径/src/page/pageName]: `Zova Refactor/Add Page Query`
 :::
 
-## 初始化代码骨架
+## 添加Zod Schema
 
-::: tip
-右键菜单 - [模块路径/src/page/user]: `Zova Refactor/Add Page Query`
-:::
+添加两个字段的 Schema 定义
 
-## 定义Query
-
-在`controller.ts`中定义 Query：
-
-`src/suite/a-demo/modules/demo-basic/src/page/user/controller.ts`
-
-```typescript{2-3}
-export const QuerySchema = z.object({
-  name: z.string().optional(),
-  age: z.number().optional(),
+```diff
+export const ControllerPageCounterSchemaQuery = z.object({
++ name: z.string().optional(),
++ age: z.number().optional(),
 });
 ```
 
-- Zova 对[zod](https://zod.dev)进行了封装，提供了增强版的`z`对象
-- 使用`z`定义了一个`object`，包含两个字段：`name`和`age`
-
 ## 使用Query
 
-在`render.ts`中，可以直接获取 Query，并渲染出来
+Zova 在`controller` bean 的基类中注入了`$query`对象，从而可以直接通过`this.$query`访问 Query 参数，并且支持类型提示
 
-`src/suite/a-demo/modules/demo-basic/src/page/user/render.tsx`
-
-```typescript{5-6}
-export class RenderUser {
+```diff
+class ControllerPageCounter {
   render() {
     return (
       <div>
-        <div>{this.$query.name}</div>
-        <div>{this.$query.age}</div>
++       <div>{this.$query.name}</div>
++       <div>{this.$query.age}</div>
       </div>
     );
   }
 }
 ```
 
-- `$query.name`的类型是`string | undefined`
-- `$query.age`的类型是`number | undefined`
-
 ## 传入Query
 
-接下来，我们需要在导航路由时传入`Query`参数
+在调用页面跳转的方法时也可以传入 Query 参数，并且支持类型提示
 
-直接在页面组件`user`中添加一个按钮，响应单击事件，并采用不同的`Query`参数导航至当前页面。这样，我们可以看到`$query`是响应式的
-
-```typescript{9-11}
-export class RenderUser {
+```diff
+class ControllerPageCounter {
   render() {
     return (
       <div>
-        <div>{this.$query.name}</div>
-        <div>{this.$query.age}</div>
         <button
           onClick={() => {
-            const age = (this.$query.age ?? 0) + 1;
-            const url = this.$router.resolvePath('/demo/basic/user', { name: 'tom', age });
+            const url = this.$router.getPagePath('/demo/student/counter', {
+              query: {
++               name: 'tom',
++               age: 18,
+              },
+            });
             this.$router.push(url);
           }}
         >
-          Go To Current Page
+          Go To
         </button>
       </div>
     );
   }
 }
 ```
-
-## $query
-
-Zova 在`controller` bean 的基类中注入了`$query`对象，从而可以在 render 实例中通过`this.$query`访问 Query 参数
