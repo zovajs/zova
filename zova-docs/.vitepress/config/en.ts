@@ -152,6 +152,12 @@ function sidebarGuide(): DefaultTheme.SidebarItem[] {
       items: [
         { text: 'Introduction', link: 'introduction' },
         { text: 'File Structure', link: 'file-structure' },
+        { text: 'Page Query', link: 'page-query' },
+        { text: 'Page Params', link: 'page-params' },
+        { text: 'Route Fields', link: 'route-fields' },
+        { text: 'Route Alias', link: 'route-alias' },
+        { text: 'Navigation Guards', link: 'navigation-guards' },
+        { text: 'zod', link: 'zod' },
       ],
     },
     {
@@ -170,18 +176,6 @@ function sidebarGuide(): DefaultTheme.SidebarItem[] {
       collapsed: true,
       text: 'Techniques',
       items: [
-        {
-          text: 'Router',
-          base: '/guide/techniques/router/',
-          items: [
-            { text: 'Route Fields', link: 'route-fields' },
-            { text: 'Route Alias', link: 'route-alias' },
-            { text: 'Navigation Guards', link: 'navigation-guards' },
-            { text: 'Route Query', link: 'route-query' },
-            { text: 'Route Params', link: 'route-params' },
-            { text: 'zod', link: 'zod' },
-          ],
-        },
         {
           text: 'Layout',
           base: '/guide/techniques/layout/',

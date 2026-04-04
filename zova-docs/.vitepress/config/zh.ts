@@ -148,6 +148,12 @@ function sidebarGuide(): DefaultTheme.SidebarItem[] {
       items: [
         { text: '简介', link: 'introduction' },
         { text: '文件结构', link: 'file-structure' },
+        { text: '页面Query', link: 'page-query' },
+        { text: '页面Params', link: 'page-params' },
+        { text: '路由字段', link: 'route-fields' },
+        { text: '路由别名', link: 'route-alias' },
+        { text: '导航守卫', link: 'navigation-guards' },
+        { text: 'zod', link: 'zod' },
       ],
     },
     {
@@ -166,18 +172,6 @@ function sidebarGuide(): DefaultTheme.SidebarItem[] {
       collapsed: true,
       text: '技术',
       items: [
-        {
-          text: '路由',
-          base: '/zh/guide/techniques/router/',
-          items: [
-            { text: '路由字段', link: 'route-fields' },
-            { text: '路由别名', link: 'route-alias' },
-            { text: '导航守卫', link: 'navigation-guards' },
-            { text: '路由Query', link: 'route-query' },
-            { text: '路由Params', link: 'route-params' },
-            { text: 'zod', link: 'zod' },
-          ],
-        },
         {
           text: 'Layout布局',
           base: '/zh/guide/techniques/layout/',
