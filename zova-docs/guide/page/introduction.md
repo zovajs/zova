@@ -61,15 +61,15 @@ class ControllerPageCounter {
 
 ```typescript
 class ControllerPageCounter {
-protected render() {
-return (
-<div>
-<div>count: {this.count}</div>
-<button onClick={() => this.increment()}>Increment</button>
-<button onClick={() => this.decrement()}>Decrement</button>
-</div>
-);
-}
+  protected render() {
+    return (
+      <div>
+        <div>count: {this.count}</div>
+        <button onClick={() => this.increment()}>Increment</button>
+        <button onClick={() => this.decrement()}>Decrement</button>
+      </div>
+    );
+  }
 }
 ```
 
@@ -79,18 +79,18 @@ Zova provides out-of-the-box css-in-js capabilities
 
 ```typescript
 class ControllerPageCounter {
-cTextCenter: string;
+  cTextCenter: string;
 
-protected async __init__() {
-this.cTextCenter = this.$style({
-textAlign: 'center',
-});
-}
+  protected async __init__() {
+    this.cTextCenter = this.$style({
+      textAlign: 'center',
+    });
+  }
 
-protected render() {
-return (
-<div class={this.cTextCenter}></div>
-);
-}
+  protected render() {
+    return (
+      <div class={this.cTextCenter}></div>
+    );
+  }
 }
 ```
