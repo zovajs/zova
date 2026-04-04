@@ -1,4 +1,4 @@
-# 路由Query
+# 页面Query
 
 Zova 对路由`Query`进行了强化，提供了 Typescript 类型化支持
 

@@ -1,4 +1,4 @@
-# Route Query
+# Page Query
 
 Zova enhances route `Query` and provides Typescript typing support
 

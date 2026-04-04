@@ -1,4 +1,4 @@
-# 路由Params
+# 页面Params
 
 Zova 对路由`Params`进行了强化，提供了 Typescript 类型化支持
 

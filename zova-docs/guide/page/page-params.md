@@ -1,4 +1,4 @@
-# Route Params
+# Page Params
 
 Zova enhances route `Params` and provides Typescript typing support
 
