@@ -31,7 +31,7 @@ export interface ControllerCardProps {
 }
 ```
 
-## Default Props
+## Default Value
 
 You can set default values for Props:
 
@@ -45,19 +45,19 @@ class ControllerCard {
 
 ### Using Props
 
-Zova injects the `$props` object in the base class of the `controller` bean, so you can directly access props through `this.$props` with type hints supported.
+Zova injects the `$props` object in the base class of the `controller` bean, so you can directly access props through `this.$props` with type hints supported
 
 ```diff
 class ControllerCard {
   render() {
     return (
       <div>
-        <div>{this.$props.slotHeader?.()}</div>
-        <div>{this.$slotDefault?.('tom')}</div>
-        <div>{this.$props.content}</div>
++       <div>{this.$props.slotHeader?.()}</div>
++       <div>{this.$slotDefault?.('tom')}</div>
++       <div>{this.$props.content}</div>
         <button
           onClick={() => {
-            this.$props.onReset?.();
++           this.$props.onReset?.();
           }}
         >
           Reset
@@ -70,7 +70,7 @@ class ControllerCard {
 
 ### Passing Props
 
-Type hints are also supported when passing Props to child components.
+Type hints are also supported when passing Props to child components
 
 ```diff
 import { ZCard } from 'zova-module-demo-student';
@@ -80,16 +80,16 @@ class ControllerOther {
     return (
       <div>
         <ZCard
-          content="custom content"
-          onReset={() => {
-            console.log('onReset is invoked');
-          }}
-          slotHeader={() => {
-            return <div>custom header</div>;
-          }}
-          slotDefault={name => {
-            return <div>{name}</div>;
-          }}
++         content="custom content"
++         onReset={() => {
++           console.log('onReset is invoked');
++         }}
++         slotHeader={() => {
++           return <div>custom header</div>;
++         }}
++         slotDefault={name => {
++           return <div>{name}</div>;
++         }}
         ></ZCard>
       </div>
     );
