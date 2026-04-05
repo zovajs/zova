@@ -163,6 +163,7 @@ function sidebarGuide(): DefaultTheme.SidebarItem[] {
       base: '/zh/guide/component/',
       items: [
         { text: '简介', link: 'introduction' },
+        { text: '文件结构', link: 'file-structure' },
         { text: '组件Props', link: 'component-props' },
         { text: 'v-model', link: 'v-model' },
         { text: '泛型组件', link: 'component-generic' },
