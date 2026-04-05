@@ -8,13 +8,13 @@
 
 为组件`card`添加`modelValue`
 
-### 1. Cli命令
+- Cli 命令
 
 ```bash
 $ zova :refactor:componentModel card modelValue --module=demo-student
 ```
 
-### 2. 菜单命令
+- 菜单命令
 
 ::: tip
 右键菜单 - [模块路径/src/component/componentName]: `Zova Refactor/Add v-model`
@@ -29,10 +29,10 @@ class ControllerCard {
   render() {
     return (
       <div>
-        <div>{this.modelValue}</div>
++       <div>{this.modelValue}</div>
         <button
           onClick={() => {
-            this.modelValue++;
++           this.modelValue++;
           }}
         >
           Change
@@ -69,50 +69,55 @@ class ControllerOther {
 
 ### 初始化代码骨架
 
+为组件 card 添加 v-model `title`
+
+- Cli 命令
+
+```bash
+$ zova :refactor:componentModel card title --module=demo-student
+```
+
+- 菜单命令
+
 ::: tip
-右键菜单 - [模块路径/src/component/card]: `Zova Refactor/Add v-model`
+右键菜单 - [模块路径/src/component/componentName]: `Zova Refactor/Add v-model`
 :::
 
-依据提示输入 model 属性的名称，比如：`title`，VSCode 插件会自动添加`v-model`的代码骨架
+依据提示输入 model 属性的名称`title`，VSCode 插件会自动添加`v-model`的代码骨架
 
-### 访问v-model
+### 使用v-model
 
-在`render.tsx`中访问 v-model：
-
-`child/render.tsx`
-
-```typescript{5}
-export class RenderChild {
+```diff
+class ControllerCard {
   render() {
     return (
       <div>
-        <input v-model={this.modelTitle} />
++       <div>{this.modelTitle}</div>
+        <button
+          onClick={() => {
++           this.modelTitle = 'new value';
+          }}
+        >
+          Change
+        </button>
       </div>
     );
   }
 }
 ```
 
-### 使用v-model
+### 传入v-model
 
-接下来，在父组件中使用 v-model：
+在向子组件传入 v-model 时，也支持类型提示
 
-`parent/controller.ts`
+```diff
+class ControllerOther {
++ title: string;
 
-```typescript
-export class ControllerPageParent {
-  title?: string;
-}
-```
-
-`parent/render.tsx`
-
-```typescript{5}
-export class RenderParent {
   render() {
     return (
       <div>
-        <Child v-model:title={this.title}></Child>
++       <ZCard vModel:title={this.title}></ZCard>
       </div>
     );
   }
@@ -123,26 +128,31 @@ export class RenderParent {
 
 v-model 支持修饰符。我们来创建一个自定义的修饰符 capitalize，它会自动将 v-model 绑定值的首字母转为大写：
 
-`child/controller.ts`
-
-```typescript{2-4,9-17}
-export interface Props {
-  titleModifiers?: {
-    capitalize: boolean;
-  };
+```diff
+export interface ControllerCardProps {
++ titleModifiers?: {
++   capitalize: boolean;
++ };
 }
 
-export class ControllerChild {
+export interface ControllerCardModels {
++ 'vModel:title'?: string;
++ 'vModel:title_capitalize'?: string;
+}
+
+class ControllerCard {
++ modelTitle: string;
+
   protected async __init__() {
-    this.modelTitle = this.$useModel('title', {
-      set: value => {
-        if (this.$props.titleModifiers?.capitalize) {
-          if (!value) return value;
-          return value.charAt(0).toUpperCase() + value.slice(1);
-        }
-        return value;
-      },
-    });
++   this.modelTitle = this.$useModel('title', {
++     set: value => {
++       if (this.$props.titleModifiers?.capitalize) {
++         if (!value) return value;
++         return value.charAt(0).toUpperCase() + value.slice(1);
++       }
++       return value;
++     },
++   });
   }
 }
 ```
@@ -150,26 +160,18 @@ export class ControllerChild {
 - 添加 Prop `titleModifiers`，并且定义一个修饰符`capitalize`
 - 调用`$useModel`方法时传入 set 选项。在 set 选项中判断`capitalize`的值对`value`做相应的处理
 
-### 使用v-model
+### 传入v-model
 
-接下来，在父组件中使用 v-model 修饰符：
+在向子组件传入 v-model 时，也支持类型提示
 
-`parent/controller.ts`
+```diff
+class ControllerOther {
++ title: string;
 
-```typescript
-export class ControllerPageParent {
-  title?: string;
-}
-```
-
-`parent/render.tsx`
-
-```typescript{5}
-export class RenderParent {
   render() {
     return (
       <div>
-        <Child v-model:title_capitalize={this.title}></Child>
++       <ZCard vModel:title_capitalize={this.title}></ZCard>
       </div>
     );
   }
