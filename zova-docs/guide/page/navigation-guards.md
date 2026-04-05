@@ -1,26 +1,31 @@
 # Navigation Guards
 
-Zova provides a module `home-base`. We can add navigation guards to this module, such as judging user authentication status, jumping on the login page, and so on
+Zova provides a module `home-base`, in which `navigation guards` can be added, such as checking the user's authentication status, redirecting to the Login page, and so on
 
 ## onRouterGuards
 
-The module `home-base` provides a `LocalRouter` bean, just add custom logic directly in the `onRouterGuards` method as well
+The module `home-base` provides a Service bean `ServiceRouterGuards`, and you can directly add custom logic in the `onRouterGuards` method
 
-`src/suite/a-home/modules/home-base/src/bean/local.router.ts`
+`src/suite/a-home/modules/home-base/src/service/routerGuards.ts`
 
 ```typescript
-export class LocalRouter {
+class ServiceRouterGuards {
   protected onRouterGuards(router: BeanRouter) {
     router.beforeEach(async to => {
-      console.log(to);
-      console.log(to.meta.requiresAuth);
+      if (to.meta.requiresAuth !== false && !this.$passport.isAuthenticated) {
+        const [_res, err] = await catchError(() => {
+          return this.$passport.ensurePassport();
+        });
+        if (err) {
+          this.$errorHandler(err, 'onRouterGuards');
+          return false;
+        }
+        if (!this.$passport.isAuthenticated) {
+          this.app.$gotoLogin(to.fullPath);
+          return false;
+        }
+      }
     });
   }
 }
 ```
-
-- For specific usage of `router`, see: [Vue Router: Navigation Guards](https://router.vuejs.org/guide/advanced/navigation-guards.html)
-
-## $router
-
-Zova injects the `$router` object into the `BeanBase` base class, so that the Vue router object can be obtained through `this.$router` in any bean instance
