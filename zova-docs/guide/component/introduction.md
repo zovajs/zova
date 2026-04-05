@@ -1,76 +1,56 @@
 # Component
 
-## Create Child Component
+## Code Style
+
+Zova provides a more intuitive, elegant, and powerful code style, drawing from the following core designs of Vue3, React, and Angular:
+
+- `Vue3`: Intuitive state management
+- `React`: Flexible TSX rendering
+- `Angular`: Powerful IOC container
+
+## Creating a Component
+
+Taking the module `demo-student` as an example, create a component `card`
+
+### 1. CLI Command
+
+```bash
+$ zova :create:component card --module=demo-student
+```
+
+### 2. Menu Command
 
 ::: tip
 Context Menu - [Module Path]: `Zova Create/Component`
 :::
 
-Enter the name of the child component according to the prompt, such as `card`, and the VSCode extension will automatically create a file directory `src/component/card`. In Zova, a child component will be splited to four files located in that directory:
+Enter the component name `card` as prompted, and the VSCode plugin will automatically create the code skeleton for the component
 
-```
-src
-└─ component
-   └─ card
-      ├─ index.vue
-      ├─ controller.ts
-      ├─ render.tsx
-      └─ style.ts
-```
-
-| Name          | Description                     |
-| ------------- | ------------------------------- |
-| index.vue     | define vue component            |
-| controller.ts | local bean for business logic   |
-| render.tsx    | local bean for component render |
-| style.ts      | local bean for component style  |
-
-## Use Child Component
-
-### General Usage
-
-In the parent component, you can use the child component directly as usual:
+## Controller Definition
 
 ```typescript
-import Card from '../../component/card/index.vue';
-
-export class RenderComponent {
-  render() {
-    return (
-      <Card></Card>
-    );
+@Controller()
+class ControllerCard extends BeanControllerBase {
+  protected render() {
+    return null;
   }
 }
 ```
 
-### Recommended Usage
+## Component Wrapper
 
-Child components created in a module are naturally resources that belong to the module. Zova automatically assigns a unique name (prefixed with `Z`) to each child component for use within the module and across modules
+Zova automatically generates a component Wrapper for each component. For example, the component `card` corresponds to the component Wrapper `ZCard`
 
-For example, the child component `card` belongs to the module `demo-basic`, so the unique name assigned is `ZCard`, and the child component can be used in the following way:
+::: info
+All component Wrappers use the `Z` prefix, making it easy to quickly find components in JSX
+:::
 
-```typescript
-import { ZCard } from '../../index.js';
-
-export class RenderComponent {
-  render() {
-    return (
-      <ZCard></ZCard>
-    );
-  }
-}
-```
-
-- This way can better support automatic import of components
-
-## Use Child Component cross-module
-
-To use the child component `card` of the module `demo-basic` in other modules, you can use the following way:
+## Use Component
 
 ```typescript
-import { ZCard } from 'zova-module-demo-basic';
+import { ZCard } from 'zova-module-demo-student';
 
-export class RenderComponent {
+class RenderPageCounter {
   render() {
     return (
       <ZCard></ZCard>
@@ -80,5 +60,5 @@ export class RenderComponent {
 ```
 
 ::: info
-Based on the support of the compiler, ZCard will automatically switch to asynchronous loading mode. Specifically, the system will asynchronously load the module `demo-basic`, then obtain the child component `card`, and then render the component
+Based on the support of the compiler, ZCard will automatically switch to asynchronous loading mode. Specifically, the system will asynchronously load the module `demo-student`, then obtain the component `card`, and then render the component
 :::

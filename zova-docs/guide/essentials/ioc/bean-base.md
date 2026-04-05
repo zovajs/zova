@@ -22,19 +22,18 @@ The reason is to prioritize the use of the `dependency lookup` strategy, resulti
 | $ssr     | SSR object                                                                      |
 | $useMeta | Meta data for SEO                                                               |
 
-## Page Component
+## Page
 
 | Name    | Description             |
 | ------- | ----------------------- |
 | $params | Typed params parameters |
 | $query  | Typed query parameters  |
 
-## Child Component
+## Component
 
 | Name   | Description |
 | ------ | ----------- |
 | $props | props       |
-| $slots | slots       |
 
 ## Extended Members
 

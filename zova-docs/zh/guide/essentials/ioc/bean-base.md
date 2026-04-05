@@ -22,19 +22,18 @@
 | $ssr     | SSR对象                                     |
 | $useMeta | 用于SEO的Meta data                          |
 
-## 页面组件
+## 页面
 
 | 名称    | 说明                   |
 | ------- | ---------------------- |
 | $params | params参数，支持类型化 |
 | $query  | query参数，支持类型化  |
 
-## 子组件
+## 组件
 
 | 名称   | 说明  |
 | ------ | ----- |
 | $props | props |
-| $slots | slots |
 
 ## 扩展成员
 

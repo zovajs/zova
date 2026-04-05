@@ -42,7 +42,7 @@ class ControllerCard extends BeanControllerBase {
 Zova 为每个组件自动生成了一个组件 Wrapper。比如，组件`card`对应的组件 Wrapper 就是`ZCard`
 
 ::: info
-所有组件 Wrapper 都使用`Z前缀`，从而方便在 JSX 中快速查找组件
+所有组件 Wrapper 都使用`Z`前缀，从而方便在 JSX 中快速查找组件
 :::
 
 ## 使用组件
