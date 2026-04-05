@@ -150,7 +150,7 @@ function sidebarGuide(): DefaultTheme.SidebarItem[] {
         { text: '文件结构', link: 'file-structure' },
         { text: '页面Query', link: 'page-query' },
         { text: '页面Params', link: 'page-params' },
-        { text: '路由字段', link: 'route-fields' },
+        { text: '页面路由', link: 'page-route' },
         { text: '路由别名', link: 'route-alias' },
         { text: '页面布局', link: 'page-layout' },
         { text: '导航守卫', link: 'navigation-guards' },

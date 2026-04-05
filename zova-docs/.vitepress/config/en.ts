@@ -154,7 +154,7 @@ function sidebarGuide(): DefaultTheme.SidebarItem[] {
         { text: 'File Structure', link: 'file-structure' },
         { text: 'Page Query', link: 'page-query' },
         { text: 'Page Params', link: 'page-params' },
-        { text: 'Route Fields', link: 'route-fields' },
+        { text: 'Page Route', link: 'page-route' },
         { text: 'Route Alias', link: 'route-alias' },
         { text: 'Page Layout', link: 'page-layout' },
         { text: 'Navigation Guards', link: 'navigation-guards' },

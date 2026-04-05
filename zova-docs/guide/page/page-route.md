@@ -1,4 +1,4 @@
-# Route Fields
+# Page Route
 
 When creating a page, the system will automatically create a route record
 
