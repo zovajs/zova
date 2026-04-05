@@ -4,7 +4,7 @@ Zova 提供了灵活的文件结构，可以根据业务的复杂度渐进式的
 
 ## 三级迭代
 
-一个页面的文件结构可以参考以下三级迭代：
+一个组件的文件结构可以参考以下三级迭代：
 
 | 名称   | 说明                                              |
 | ------ | ------------------------------------------------- |
@@ -17,32 +17,9 @@ Zova 提供了灵活的文件结构，可以根据业务的复杂度渐进式的
 在业务开发的初始阶段，代码比较少，可以采用单文件
 
 ```typescript
-class ControllerPageCounter {
-  count: number = 0;
-  cTextCenter: string;
-
-  protected async __init__() {
-    this.cTextCenter = this.$style({
-      textAlign: 'center',
-    });
-  }
-
-  increment() {
-    this.count++;
-  }
-
-  decrement() {
-    this.count--;
-  }
-
+class ControllerCard {
   protected render() {
-    return (
-      <div class={this.cTextCenter}>
-        <div>count: {this.count}</div>
-        <button onClick={() => this.increment()}>Increment</button>
-        <button onClick={() => this.decrement()}>Decrement</button>
-      </div>
-    );
+    return null;
   }
 }
 ```
@@ -58,29 +35,14 @@ class ControllerPageCounter {
 ### 1. Cli命令
 
 ```bash
-$ zova :refactor:firstRender page/counter --module=demo-student
+$ zova :refactor:firstRender component/card --module=demo-student
 ```
 
 ### 2. 菜单命令
 
 ::: tip
-右键菜单 - [模块路径/src/page/pageName]: `Zova Refactor/Create First Render Bean`
+右键菜单 - [模块路径/src/component/componentName]: `Zova Refactor/Create First Render Bean`
 :::
-
-```typescript
-@Render()
-class RenderPageCounter extends BeanRenderBase {
-  public render() {
-    return (
-      <div class={this.cTextCenter}>
-        <div>count: {this.count}</div>
-        <button onClick={() => this.increment()}>Increment</button>
-        <button onClick={() => this.decrement()}>Decrement</button>
-      </div>
-    );
-  }
-}
-```
 
 ### 创建第一个Style Bean
 
@@ -89,27 +51,14 @@ class RenderPageCounter extends BeanRenderBase {
 ### 1. Cli命令
 
 ```bash
-$ zova :refactor:firstStyle page/counter --module=demo-student
+$ zova :refactor:firstStyle component/card --module=demo-student
 ```
 
 ### 2. 菜单命令
 
 ::: tip
-右键菜单 - [模块路径/src/page/pageName]: `Zova Refactor/Create First Style Bean`
+右键菜单 - [模块路径/src/component/componentName]: `Zova Refactor/Create First Style Bean`
 :::
-
-```typescript
-@Style()
-class StylePageCounter extends BeanStyleBase {
-  cTextCenter: string;
-
-  protected async __init__() {
-    this.cTextCenter = this.$style({
-      textAlign: 'center',
-    });
-  }
-}
-```
 
 ## 多文件
 
@@ -120,13 +69,13 @@ class StylePageCounter extends BeanStyleBase {
 ### 1. Cli命令
 
 ```bash
-$ zova :refactor:anotherRender page/counter another --module=demo-student
+$ zova :refactor:anotherRender component/card another --module=demo-student
 ```
 
 ### 2. 菜单命令
 
 ::: tip
-右键菜单 - [模块路径/src/page/pageName]: `Zova Refactor/Create Another Render Bean`
+右键菜单 - [模块路径/src/component/componentName]: `Zova Refactor/Create Another Render Bean`
 :::
 
 ### 创建更多Style Bean
@@ -134,42 +83,27 @@ $ zova :refactor:anotherRender page/counter another --module=demo-student
 ### 1. Cli命令
 
 ```bash
-$ zova :refactor:anotherStyle page/counter another --module=demo-student
+$ zova :refactor:anotherStyle component/card another --module=demo-student
 ```
 
 ### 2. 菜单命令
 
 ::: tip
-右键菜单 - [模块路径/src/page/pageName]: `Zova Refactor/Create Another Style Bean`
+右键菜单 - [模块路径/src/component/componentName]: `Zova Refactor/Create Another Style Bean`
 :::
 
 ### 创建更多Service Bean
 
-创建一个 Service`counter`，将状态管理独立出来
+创建一个 Service`another`，将状态管理独立出来
 
 ### 1. Cli命令
 
 ```bash
-$ zova :create:bean service page/counter/counter --module=demo-student
+$ zova :create:bean service component/card/another --module=demo-student
 ```
 
 ### 2. 菜单命令
 
 ::: tip
-右键菜单 - [模块路径/src/page/pageName]: `Zova Create/Service`
+右键菜单 - [模块路径/src/component/componentName]: `Zova Create/Service`
 :::
-
-```typescript
-@Service()
-class ServiceCounter extends BeanBase {
-  count: number = 0;
-
-  increment() {
-    this.count++;
-  }
-
-  decrement() {
-    this.count--;
-  }
-}
-```
