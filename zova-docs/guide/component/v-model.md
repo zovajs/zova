@@ -1,12 +1,12 @@
 # v-model
 
-It is very convenient to add the 'v-model' attribute to a component
+It is very convenient to add `v-model` to a component
 
 ## Basic Usage
 
 ### Initialize the code skeleton
 
-Add 'modelValue' to component 'card'
+Add `modelValue` to component `card`
 
 - Cli command
 
@@ -14,62 +14,62 @@ Add 'modelValue' to component 'card'
 $ zova :refactor:componentModel card modelValue --module=demo-student
 ```
 
-- Menu commands
+- Menu command
 
 ::: tip
-Right click menu - [module path/src/component/componentName]: 'Zova Refactor/Add v-model'
+Context Menu - [Module Path/src/component/componentName]: `Zova Refactor/Add v-model`
 :::
 
-Enter the name of the model attribute as prompted, the default is 'modelValue', and the VSCode plugin will automatically add the code skeleton of 'v-model'
+Enter the name of the v-model as prompted, the default is `modelValue`, and the VSCode plugin will automatically add the code skeleton of `v-model`
 
-### Use v-model
+### Using v-model
 
 ```diff
 class ControllerCard {
-render() {
-return (
-<div>
-  <div>{this.modelValue}</div>
-<button
-onClick={() => {
-  this.modelValue  ;
-}}
->
-Change
-</button>
-</div>
-);
-}
+  render() {
+    return (
+      <div>
++       <div>{this.modelValue}</div>
+        <button
+          onClick={() => {
++           this.modelValue++;
+          }}
+        >
+          Change
+        </button>
+      </div>
+    );
+  }
 }
 ```
 
-'this.modelValue' enables bidirectional binding to the parent component. Modifying the value of 'this.modelValue' triggers the synchronization update of the values bound by the parent component
+`this.modelValue` enables bidirectional binding to the parent component. Modifying the value of `this.modelValue` triggers the synchronization update of the values bound by the parent component
 
 ### Pass in v-model
 
-Type hints are also supported when passing v-model into subcomponents
+Type hints are also supported when passing v-model into child components
 
 ```diff
 class ControllerOther {
-  count: number;
++ count: number;
 
-render() {
-return (
-<div>
-  <ZCard vModel={this.count}></ZCard>
-</div>
-);
-}
+  render() {
+    return (
+      <div>
++       <ZCard vModel={this.count}></ZCard>
+      </div>
+    );
+  }
 }
 ```
 
 ## v-model parameter
 
-'modelValue' is the default model parameter, and other model parameters can also be specified
+`modelValue` is the default model parameter, and other model parameters can also be specified
 
 ### Initialize the code skeleton
 
-Add v-model 'title' to component card
+Add v-model `title` to component card
 
 - Cli command
 
@@ -77,50 +77,50 @@ Add v-model 'title' to component card
 $ zova :refactor:componentModel card title --module=demo-student
 ```
 
-- Menu commands
+- Menu command
 
 ::: tip
-Right click menu - [module path/src/component/componentName]: 'Zova Refactor/Add v-model'
+Context Menu - [Module Path/src/component/componentName]: `Zova Refactor/Add v-model`
 :::
 
-Enter the name of the model property 'title' when prompted, and the VSCode plugin will automatically add the code skeleton of 'v-model'
+Enter the name of the v-model `title` when prompted, and the VSCode plugin will automatically add the code skeleton of `v-model`
 
-### Use v-model
+### Using v-model
 
 ```diff
 class ControllerCard {
-render() {
-return (
-<div>
-  <div>{this.modelTitle}</div>
-<button
-onClick={() => {
-  this.modelTitle = 'new value';
-}}
->
-Change
-</button>
-</div>
-);
-}
+  render() {
+    return (
+      <div>
++       <div>{this.modelTitle}</div>
+        <button
+          onClick={() => {
++           this.modelTitle = 'new value';
+          }}
+        >
+          Change
+        </button>
+      </div>
+    );
+  }
 }
 ```
 
 ### Pass in v-model
 
-Type hints are also supported when passing v-model into subcomponents
+Type hints are also supported when passing v-model into child components
 
 ```diff
 class ControllerOther {
-  title: string;
++ title: string;
 
-render() {
-return (
-<div>
-  <ZCard vModel:title={this.title}></ZCard>
-</div>
-);
-}
+  render() {
+    return (
+      <div>
++       <ZCard vModel:title={this.title}></ZCard>
+      </div>
+    );
+  }
 }
 ```
 
@@ -130,50 +130,50 @@ v-model supports modifiers. Let's create a custom modifier capitalize, which aut
 
 ```diff
 export interface ControllerCardProps {
-  titleModifiers?: {
-  capitalize: boolean;
-  };
++ titleModifiers?: {
++   capitalize: boolean;
++ };
 }
 
 export interface ControllerCardModels {
-  'vModel:title'?: string;
-  'vModel:title_capitalize'?: string;
++ 'vModel:title'?: string;
++ 'vModel:title_capitalize'?: string;
 }
 
 class ControllerCard {
-  modelTitle: string;
++ modelTitle: string;
 
-protected async __init__() {
-  this.modelTitle = this.$useModel('title', {
-  set: value => {
-  if (this.$props.titleModifiers?. capitalize) {
-  if (!value) return value;
-  return value.charAt(0).toUpperCase()   value.slice(1);
+  protected async __init__() {
++   this.modelTitle = this.$useModel('title', {
++     set: value => {
++       if (this.$props.titleModifiers?.capitalize) {
++         if (!value) return value;
++         return value.charAt(0).toUpperCase() + value.slice(1);
++       }
++       return value;
++     },
++   });
   }
-  return value;
-  },
-  });
-}
 }
 ```
 
-- Add Prop 'titleModifiers' and define a modifier 'capitalize'
-- Pass in the set option when calling the '$useModel' method. In the set option, the value of 'capitalize' is judged to be treated accordingly for 'value'
+- Add Prop `titleModifiers` and define a modifier `capitalize`
+- Pass in the set option when calling the `$useModel` method
 
 ### Pass in v-model
 
-Type hints are also supported when passing v-model into subcomponents
+Type hints are also supported when passing v-model into child components
 
 ```diff
 class ControllerOther {
-  title: string;
++ title: string;
 
-render() {
-return (
-<div>
-  <ZCard vModel:title_capitalize={this.title}></ZCard>
-</div>
-);
-}
+  render() {
+    return (
+      <div>
++       <ZCard vModel:title_capitalize={this.title}></ZCard>
+      </div>
+    );
+  }
 }
 ```
