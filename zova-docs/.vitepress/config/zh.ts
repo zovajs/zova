@@ -180,6 +180,11 @@ function sidebarGuide(): DefaultTheme.SidebarItem[] {
           link: 'introduction',
         },
         {
+          text: 'Openapi SDK',
+          base: '/guide/techniques/fetch/',
+          link: 'introduction',
+        },
+        {
           text: 'Mock',
           base: '/zh/guide/techniques/mock/',
           link: 'introduction',
@@ -220,21 +225,6 @@ function sidebarGuide(): DefaultTheme.SidebarItem[] {
             { text: 'SEO Meta', link: 'seo-meta' },
             { text: 'env', link: 'env' },
           ],
-        },
-        {
-          text: 'Env环境变量',
-          base: '/zh/guide/techniques/env/',
-          link: 'introduction',
-        },
-        {
-          text: 'Config配置',
-          base: '/zh/guide/techniques/config/',
-          link: 'introduction',
-        },
-        {
-          text: '构建',
-          base: '/zh/guide/techniques/build/',
-          link: 'build',
         },
       ],
     },

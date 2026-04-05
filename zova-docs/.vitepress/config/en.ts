@@ -184,6 +184,11 @@ function sidebarGuide(): DefaultTheme.SidebarItem[] {
           link: 'introduction',
         },
         {
+          text: 'Openapi SDK',
+          base: '/guide/techniques/fetch/',
+          link: 'introduction',
+        },
+        {
           text: 'Mock',
           base: '/guide/techniques/mock/',
           link: 'introduction',
@@ -224,21 +229,6 @@ function sidebarGuide(): DefaultTheme.SidebarItem[] {
             { text: 'SEO Meta', link: 'seo-meta' },
             { text: 'env', link: 'env' },
           ],
-        },
-        {
-          text: 'Env',
-          base: '/guide/techniques/env/',
-          link: 'introduction',
-        },
-        {
-          text: 'Config',
-          base: '/guide/techniques/config/',
-          link: 'introduction',
-        },
-        {
-          text: 'Build',
-          base: '/guide/techniques/build/',
-          link: 'build',
         },
       ],
     },
