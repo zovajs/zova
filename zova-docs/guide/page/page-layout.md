@@ -1,48 +1,35 @@
-# Layout
+# Page Layout
 
-Zova provides a general layout mechanism through the module `home-layout`. Multiple layout components can be created in the module `home-layout`, and you can specify which one to use in `page route`
+Zova allows you to specify which page layout component to use in the `page routes`. If not specified, the `default` layout component will be used by default
 
-### System layout components
-
-In order to achieve out-of-the-box effects, the system has two built-in layout components: `empty` and `default`:
-
-| Name    | Description                                                                                                                                           |
-| ------- | ----------------------------------------------------------------------------------------------------------------------------------------------------- |
-| empty   | Empty layout, generally used to display system pages such as Login                                                                                    |
-| default | The default layout generally provides blocks such as Header, Sidebar, Footer, and Content, and page components will be displayed in the Content block |
-
-- Custom layout components
-
-The `empty` and `default` layout components are located in the module `home-layout`, and we can modify them according to business needs
-
-## Use layout components
-
-Just specify which layout component to use in `Page Route`. If not specified, the `default` layout component will be used by default
-
-### Example: 404 page
-
-`src/suite/a-home/modules/home-base/src/routes.ts`
-
-```typescript{7}
+```diff
 export const routes: IModuleRoute[] = [
   {
-    path: '/:catchAll(.*)*',
-    component: ErrorNotFound,
+    path: 'counter',
+    component: ZPageCounter,
     meta: {
-      absolute: true,
-      layout: 'empty',
++     layout: 'default',
     },
   },
 ];
 ```
 
-### Example: General page
+## System Layout Components
 
-`src/suite/a-demo/modules/demo-basic/src/routes.ts`
+To provide an out-of-the-box experience, the system includes two built-in layout components: `empty` and `default`:
 
-```typescript{2-3}
-export const routes: IModuleRoute[] = [
-  { path: 'state', component: State },
-  { path: 'component', component: Component },
-];
+| Name    | Description                                                                                                                                             |
+| ------- | ------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| empty   | Empty layout, generally used for displaying system pages like Login                                                                                     |
+| default | Default layout, usually provides sections such as Header, Sidebar, Footer, and Content, with page components typically displayed in the Content section |
+
+## env
+
+`empty` and `default` are merely placeholders for layout components. You can configure the actual layout components through the env configuration
+
+`env/.env`
+
+```txt
+LAYOUT_COMPONENT_EMPTY = home-layout:layoutEmpty
+LAYOUT_COMPONENT_DEFAULT = home-layout:layoutTabs
 ```
