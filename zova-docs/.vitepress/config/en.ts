@@ -168,8 +168,9 @@ function sidebarGuide(): DefaultTheme.SidebarItem[] {
       items: [
         { text: 'Introduction', link: 'introduction' },
         { text: 'File Structure', link: 'file-structure' },
-        { text: 'Child Component Members', link: 'child-members' },
+        { text: 'Component Props', link: 'component-props' },
         { text: 'v-model', link: 'v-model' },
+        { text: 'Generic Component', link: 'component-generic' },
         { text: 'Component(Advanced)', link: 'component-advanced' },
       ],
     },

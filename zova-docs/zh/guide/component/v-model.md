@@ -1,25 +1,31 @@
 # v-model
 
-可以非常便利的为子组件添加`v-model`属性
+可以非常便利的为组件添加`v-model`属性
 
 ## 基本用法
 
 ### 初始化代码骨架
 
+为组件`card`添加`modelValue`
+
+### 1. Cli命令
+
+```bash
+$ zova :refactor:componentModel card modelValue --module=demo-student
+```
+
+### 2. 菜单命令
+
 ::: tip
-右键菜单 - [模块路径/src/component/card]: `Zova Refactor/Add v-model`
+右键菜单 - [模块路径/src/component/componentName]: `Zova Refactor/Add v-model`
 :::
 
 依据提示输入 model 属性的名称，默认是`modelValue`，VSCode 插件会自动添加`v-model`的代码骨架
 
-### 访问v-model
+### 使用v-model
 
-在`render.tsx`中访问 v-model：
-
-`child/render.tsx`
-
-```typescript{5,8}
-export class RenderChild {
+```diff
+class ControllerCard {
   render() {
     return (
       <div>
@@ -37,39 +43,29 @@ export class RenderChild {
 }
 ```
 
-- 本地变量`modelValue`可实现与父组件的双向绑定。修改`modelValue`的值会触发父组件绑定的值同步更新
+`this.modelValue`可实现与父组件的双向绑定。修改`this.modelValue`的值会触发父组件绑定的值同步更新
 
-### 使用v-model
+### 传入v-model
 
-接下来，在父组件中使用 v-model：
+在向子组件传入 v-model 时，也支持类型提示
 
-`parent/controller.ts`
+```diff
+class ControllerOther {
++ count: number;
 
-```typescript
-export class ControllerPageParent {
-  count: number;
-}
-```
-
-`parent/render.tsx`
-
-```typescript{5}
-export class RenderParent {
   render() {
     return (
       <div>
-        <Child v-model={this.count}></Child>
++       <ZCard vModel={this.count}></ZCard>
       </div>
     );
   }
 }
 ```
 
-- 直接使用`v-model`绑定变量即可
-
 ## v-model参数
 
-`modelValue`是默认的 model 参数，我们也可以指定其他 model 参数
+`modelValue`是默认的 model 参数，也可以指定其他 model 参数
 
 ### 初始化代码骨架
 

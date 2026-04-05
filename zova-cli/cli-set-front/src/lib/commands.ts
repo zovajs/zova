@@ -27,11 +27,9 @@ import openapiConfig from './command/openapi.config.ts';
 import openapiGenerate from './command/openapi.generate.ts';
 import refactorAnotherRender from './command/refactor.anotherRender.ts';
 import refactorAnotherStyle from './command/refactor.anotherStyle.ts';
-import refactorComponentEmits from './command/refactor.componentEmits.ts';
 import refactorComponentGeneric from './command/refactor.componentGeneric.ts';
 import refactorComponentModel from './command/refactor.componentModel.ts';
 import refactorComponentProps from './command/refactor.componentProps.ts';
-import refactorComponentSlots from './command/refactor.componentSlots.ts';
 import refactorFirstRender from './command/refactor.firstRender.ts';
 import refactorFirstStyle from './command/refactor.firstStyle.ts';
 import refactorPageParams from './command/refactor.pageParams.ts';
@@ -84,8 +82,8 @@ export const commands = {
     anotherRender: refactorAnotherRender,
     anotherStyle: refactorAnotherStyle,
     componentProps: refactorComponentProps,
-    componentEmits: refactorComponentEmits,
-    componentSlots: refactorComponentSlots,
+    // componentEmits: refactorComponentEmits,
+    // componentSlots: refactorComponentSlots,
     componentModel: refactorComponentModel,
     renameComponent: refactorRenameComponent,
   },
