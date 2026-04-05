@@ -152,6 +152,7 @@ function sidebarGuide(): DefaultTheme.SidebarItem[] {
         { text: '页面Params', link: 'page-params' },
         { text: '路由字段', link: 'route-fields' },
         { text: '路由别名', link: 'route-alias' },
+        { text: '页面布局', link: 'page-layout' },
         { text: '导航守卫', link: 'navigation-guards' },
         { text: 'zod', link: 'zod' },
       ],
@@ -172,11 +173,6 @@ function sidebarGuide(): DefaultTheme.SidebarItem[] {
       collapsed: true,
       text: '技术',
       items: [
-        {
-          text: 'Layout布局',
-          base: '/zh/guide/techniques/layout/',
-          link: 'introduction',
-        },
         {
           text: 'Fetch',
           base: '/zh/guide/techniques/fetch/',

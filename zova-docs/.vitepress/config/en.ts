@@ -156,6 +156,7 @@ function sidebarGuide(): DefaultTheme.SidebarItem[] {
         { text: 'Page Params', link: 'page-params' },
         { text: 'Route Fields', link: 'route-fields' },
         { text: 'Route Alias', link: 'route-alias' },
+        { text: 'Page Layout', link: 'page-layout' },
         { text: 'Navigation Guards', link: 'navigation-guards' },
         { text: 'zod', link: 'zod' },
       ],
@@ -176,11 +177,6 @@ function sidebarGuide(): DefaultTheme.SidebarItem[] {
       collapsed: true,
       text: 'Techniques',
       items: [
-        {
-          text: 'Layout',
-          base: '/guide/techniques/layout/',
-          link: 'introduction',
-        },
         {
           text: 'Fetch',
           base: '/guide/techniques/fetch/',
