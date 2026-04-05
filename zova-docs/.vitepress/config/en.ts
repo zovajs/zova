@@ -166,7 +166,6 @@ function sidebarGuide(): DefaultTheme.SidebarItem[] {
       text: 'Component',
       base: '/guide/component/',
       items: [
-        { text: 'Page Component', link: 'page' },
         { text: 'Child Component', link: 'child' },
         { text: 'Child Component Members', link: 'child-members' },
         { text: 'v-model', link: 'v-model' },

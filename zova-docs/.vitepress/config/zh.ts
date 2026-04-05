@@ -162,7 +162,6 @@ function sidebarGuide(): DefaultTheme.SidebarItem[] {
       text: '组件',
       base: '/zh/guide/component/',
       items: [
-        { text: '页面组件', link: 'page' },
         { text: '子组件', link: 'child' },
         { text: '子组件成员', link: 'child-members' },
         { text: 'v-model', link: 'v-model' },
