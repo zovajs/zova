@@ -4,7 +4,7 @@ Zova provides a flexible file structure that can be gradually adjusted according
 
 ## Three-level iteration
 
-The file structure of a page can refer to the following three iterations:
+The file structure of a component can refer to the following three iterations:
 
 | Name        | Description                                       |
 | ----------- | ------------------------------------------------- |
@@ -17,32 +17,9 @@ The file structure of a page can refer to the following three iterations:
 In the initial stage of business development, there is relatively little code, and a single file can be used
 
 ```typescript
-class ControllerPageCounter {
-  count: number = 0;
-  cTextCenter: string;
-
-  protected async __init__() {
-    this.cTextCenter = this.$style({
-      textAlign: 'center',
-    });
-  }
-
-  increment() {
-    this.count++;
-  }
-
-  decrement() {
-    this.count--;
-  }
-
+class ControllerCard {
   protected render() {
-    return (
-      <div class={this.cTextCenter}>
-        <div>count: {this.count}</div>
-        <button onClick={() => this.increment()}>Increment</button>
-        <button onClick={() => this.decrement()}>Decrement</button>
-      </div>
-    );
+    return null;
   }
 }
 ```
@@ -58,29 +35,14 @@ First, separate out the Render
 ### 1. CLI command
 
 ```bash
-$ zova :refactor:firstRender page/counter --module=demo-student
+$ zova :refactor:firstRender component/card --module=demo-student
 ```
 
 ### 2. Menu command
 
 ::: tip
-Context Menu - [Module Path/src/page/pageName]: `Zova Refactor/Create First Render Bean`
+Context Menu - [Module Path/src/component/componentName]: `Zova Refactor/Create First Render Bean`
 :::
-
-```typescript
-@Render()
-class RenderPageCounter extends BeanRenderBase {
-  public render() {
-    return (
-      <div class={this.cTextCenter}>
-        <div>count: {this.count}</div>
-        <button onClick={() => this.increment()}>Increment</button>
-        <button onClick={() => this.decrement()}>Decrement</button>
-      </div>
-    );
-  }
-}
-```
 
 ### Create first Style Bean
 
@@ -89,27 +51,14 @@ Then separate out the Style
 ### 1. CLI command
 
 ```bash
-$ zova :refactor:firstStyle page/counter --module=demo-student
+$ zova :refactor:firstStyle component/card --module=demo-student
 ```
 
 ### 2. Menu command
 
 ::: tip
-Context Menu - [Module Path/src/page/pageName]: `Zova Refactor/Create First Style Bean`
+Context Menu - [Module Path/src/component/componentName]: `Zova Refactor/Create First Style Bean`
 :::
-
-```typescript
-@Style()
-class StylePageCounter extends BeanStyleBase {
-  cTextCenter: string;
-
-  protected async __init__() {
-    this.cTextCenter = this.$style({
-      textAlign: 'center',
-    });
-  }
-}
-```
 
 ## More-File
 
@@ -120,13 +69,13 @@ As the code continues to grow, you can continue to adjust the file structure, cr
 ### 1. CLI command
 
 ```bash
-$ zova :refactor:anotherRender page/counter another --module=demo-student
+$ zova :refactor:anotherRender component/card another --module=demo-student
 ```
 
 ### 2. Menu command
 
 ::: tip
-Context Menu - [Module Path/src/page/pageName]: `Zova Refactor/Create Another Render Bean`
+Context Menu - [Module Path/src/component/componentName]: `Zova Refactor/Create Another Render Bean`
 :::
 
 ### Create Another Style Bean
@@ -134,42 +83,27 @@ Context Menu - [Module Path/src/page/pageName]: `Zova Refactor/Create Another Re
 ### 1. CLI command
 
 ```bash
-$ zova :refactor:anotherStyle page/counter another --module=demo-student
+$ zova :refactor:anotherStyle component/card another --module=demo-student
 ```
 
 ### 2. Menu command
 
 ::: tip
-Context Menu - [Module Path/src/page/pageName]: `Zova Refactor/Create Another Style Bean`
+Context Menu - [Module Path/src/component/componentName]: `Zova Refactor/Create Another Style Bean`
 :::
 
 ### Create Another Service Bean
 
-Create a Service `counter` to separate state management
+Create a Service `another` to separate state management
 
 ### 1. CLI command
 
 ```bash
-$ zova :create:bean service page/counter/counter --module=demo-student
+$ zova :create:bean service component/card/another --module=demo-student
 ```
 
 ### 2. Menu command
 
 ::: tip
-Context Menu - [Module Path/src/page/pageName]: `Zova Create/Service`
+Context Menu - [Module Path/src/component/componentName]: `Zova Create/Service`
 :::
-
-```typescript
-@Service()
-class ServiceCounter extends BeanBase {
-  count: number = 0;
-
-  increment() {
-    this.count++;
-  }
-
-  decrement() {
-    this.count--;
-  }
-}
-```
