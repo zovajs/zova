@@ -1,181 +1,179 @@
 # v-model
 
-It is very convenient to add `v-model` to child components
+It is very convenient to add the 'v-model' attribute to a component
 
 ## Basic Usage
 
-### Initialize code skeleton
+### Initialize the code skeleton
 
-::: tip
-Context Menu - [Module Path/src/component/card]: `Zova Refactor/Add v-model`
-:::
+Add 'modelValue' to component 'card'
 
-Enter the name of the model according to the prompt. The default is `modelValue`. The VSCode extension will automatically add the code skeleton of `v-model`
+- Cli command
 
-### Access v-model
-
-Access v-model in `render.tsx`:
-
-`child/render.tsx`
-
-```typescript{5,8}
-export class RenderChild {
-  render() {
-    return (
-      <div>
-        <div>{this.modelValue}</div>
-        <button
-          onClick={() => {
-            this.modelValue++;
-          }}
-        >
-          Change
-        </button>
-      </div>
-    );
-  }
-}
+```bash
+$ zova :refactor:componentModel card modelValue --module=demo-student
 ```
 
-- The local variable `modelValue` can achieve two-way binding with the parent component. Modifying the value of `modelValue` will trigger the synchronous update of the value bound to the parent component
+- Menu commands
+
+::: tip
+Right click menu - [module path/src/component/componentName]: 'Zova Refactor/Add v-model'
+:::
+
+Enter the name of the model attribute as prompted, the default is 'modelValue', and the VSCode plugin will automatically add the code skeleton of 'v-model'
 
 ### Use v-model
 
-Next, use the v-model inside the parent component:
+```diff
+class ControllerCard {
+render() {
+return (
+<div>
+  <div>{this.modelValue}</div>
+<button
+onClick={() => {
+  this.modelValue  ;
+}}
+>
+Change
+</button>
+</div>
+);
+}
+}
+```
 
-`parent/controller.ts`
+'this.modelValue' enables bidirectional binding to the parent component. Modifying the value of 'this.modelValue' triggers the synchronization update of the values bound by the parent component
 
-```typescript
-export class ControllerPageParent {
+### Pass in v-model
+
+Type hints are also supported when passing v-model into subcomponents
+
+```diff
+class ControllerOther {
   count: number;
+
+render() {
+return (
+<div>
+  <ZCard vModel={this.count}></ZCard>
+</div>
+);
+}
 }
 ```
 
-`parent/render.tsx`
+## v-model parameter
 
-```typescript{5}
-export class RenderParent {
-  render() {
-    return (
-      <div>
-        <Child v-model={this.count}></Child>
-      </div>
-    );
-  }
-}
+'modelValue' is the default model parameter, and other model parameters can also be specified
+
+### Initialize the code skeleton
+
+Add v-model 'title' to component card
+
+- Cli command
+
+```bash
+$ zova :refactor:componentModel card title --module=demo-student
 ```
 
-- Just use `v-model` to bind a variable
-
-## v-model arguments
-
-`modelValue` is the default model parameter, we can also specify other model parameters
-
-### Initialize code skeleton
+- Menu commands
 
 ::: tip
-Context Menu - [Module Path/src/component/card]: `Zova Refactor/Add v-model`
+Right click menu - [module path/src/component/componentName]: 'Zova Refactor/Add v-model'
 :::
 
-Enter the name of the model according to the prompt, such as `title`. The VSCode extension will automatically add the code skeleton of `v-model`
-
-### Access v-model
-
-Access v-model in `render.tsx`:
-
-`child/render.tsx`
-
-```typescript{5}
-export class RenderChild {
-  render() {
-    return (
-      <div>
-        <input v-model={this.modelTitle} />
-      </div>
-    );
-  }
-}
-```
+Enter the name of the model property 'title' when prompted, and the VSCode plugin will automatically add the code skeleton of 'v-model'
 
 ### Use v-model
 
-Next, use the v-model inside the parent component:
-
-`parent/controller.ts`
-
-```typescript
-export class ControllerPageParent {
-  title?: string;
+```diff
+class ControllerCard {
+render() {
+return (
+<div>
+  <div>{this.modelTitle}</div>
+<button
+onClick={() => {
+  this.modelTitle = 'new value';
+}}
+>
+Change
+</button>
+</div>
+);
+}
 }
 ```
 
-`parent/render.tsx`
+### Pass in v-model
 
-```typescript{5}
-export class RenderParent {
-  render() {
-    return (
-      <div>
-        <Child v-model:title={this.title}></Child>
-      </div>
-    );
-  }
+Type hints are also supported when passing v-model into subcomponents
+
+```diff
+class ControllerOther {
+  title: string;
+
+render() {
+return (
+<div>
+  <ZCard vModel:title={this.title}></ZCard>
+</div>
+);
+}
 }
 ```
 
-## v-model modifiers
+## v-model modifier
 
-v-model supports modifiers. Let's create a custom modifier `capitalize`, which will automatically capitalize the first letter of the v-model binding value:
+v-model supports modifiers. Let's create a custom modifier capitalize, which automatically converts the first letter of the v-model binding value to uppercase:
 
-`child/controller.ts`
-
-```typescript{2-4,9-17}
-export interface Props {
+```diff
+export interface ControllerCardProps {
   titleModifiers?: {
-    capitalize: boolean;
+  capitalize: boolean;
   };
 }
 
-export class ControllerChild {
-  protected async __init__() {
-    this.modelTitle = this.$useModel('title', {
-      set: value => {
-        if (this.$props.titleModifiers?.capitalize) {
-          if (!value) return value;
-          return value.charAt(0).toUpperCase() + value.slice(1);
-        }
-        return value;
-      },
-    });
+export interface ControllerCardModels {
+  'vModel:title'?: string;
+  'vModel:title_capitalize'?: string;
+}
+
+class ControllerCard {
+  modelTitle: string;
+
+protected async __init__() {
+  this.modelTitle = this.$useModel('title', {
+  set: value => {
+  if (this.$props.titleModifiers?. capitalize) {
+  if (!value) return value;
+  return value.charAt(0).toUpperCase()   value.slice(1);
   }
+  return value;
+  },
+  });
+}
 }
 ```
 
-- Add Prop `titleModifiers` and define a modifier `capitalize`
-- When calling the `$useModel` method, pass in the `set` option. In the `set` option, determine the value of `capitalize` and handle `value` accordingly
+- Add Prop 'titleModifiers' and define a modifier 'capitalize'
+- Pass in the set option when calling the '$useModel' method. In the set option, the value of 'capitalize' is judged to be treated accordingly for 'value'
 
-### Use v-model
+### Pass in v-model
 
-Next, use the v-model inside the parent component:
+Type hints are also supported when passing v-model into subcomponents
 
-`parent/controller.ts`
+```diff
+class ControllerOther {
+  title: string;
 
-```typescript
-export class ControllerPageParent {
-  title?: string;
+render() {
+return (
+<div>
+  <ZCard vModel:title_capitalize={this.title}></ZCard>
+</div>
+);
 }
-```
-
-`parent/render.tsx`
-
-```typescript{5}
-export class RenderParent {
-  render() {
-    return (
-      <div>
-        <Child v-model:title_capitalize={this.title}></Child>
-      </div>
-    );
-  }
 }
 ```
