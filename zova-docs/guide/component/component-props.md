@@ -1,122 +1,66 @@
-# Child Component
+# Component Props
 
-The difference from `Page Component` is that `Child Component` has three members: `Props`, `Emits` and `Slots`. So how are the three members defined and used in Zova?
+In Zova, components no longer distinguish between `Props`, `Emits`, and `Slots`; you only need to provide `Props`, which offers a more consistent and concise programming paradigm, and is more friendly for TypeScript programming
 
-## Props
+## Add Props Code Skeleton
 
-Taking the `card` child component as an example, define three Props: `header`, `content` and `footer`
+Add a Props code skeleton for the `card` component
 
-### Initialize code skeleton
+### 1. CLI Command
+
+```bash
+$ zova :refactor:componentProps card --module=demo-student
+```
+
+### 2. Menu Command
 
 ::: tip
-Context Menu - [Module Path/src/component/card]: `Zova Refactor/Add Component Props`
+Context Menu - [Module Path/src/component/componentName]: `Zova Refactor/Add Component Props`
 :::
 
-### Define Props Interface
-
-First, define the Props interface in `controller.ts`:
+## Add Props
 
 ```typescript
-export interface Props {
-  header?: string;
+import { ISlot } from 'zova';
+
+export interface ControllerCardProps {
   content?: string;
-  footer?: string;
+  onReset?: () => void;
+  slotHeader?: ISlot;
+  slotDefault?: (name: string) => VNode;
 }
 ```
 
-You can also set default values for Props:
+## Default Props
 
-```typescript{2-4}
-export class ControllerCard {
+You can set default values for Props:
+
+```typescript
+class ControllerCard {
   static $propsDefault = {
-    header: 'default header',
+    content: 'no content',
   };
 }
 ```
 
-### Access Props
+### Using Props
 
-Access Props in `render.tsx`:
+Zova injects the `$props` object in the base class of the `controller` bean, so you can directly access props through `this.$props` with type hints supported.
 
-```typescript{7,10,13}
-export class RenderCard {
+```diff
+class ControllerCard {
   render() {
     return (
       <div>
-        <div>
-          <div style={{ backgroundColor: 'teal' }}>
-            <div>{`Prop: ${this.$props.header}`}</div>
-          </div>
-          <div style={{ backgroundColor: 'orange' }}>
-            <div>{`Prop: ${this.$props.content}`}</div>
-          </div>
-          <div style={{ backgroundColor: 'green' }}>
-            <div>{`Prop: ${this.$props.footer}`}</div>
-          </div>
-        </div>
-      </div>
-    );
-  }
-}
-```
-
-### Use Props
-
-Next, use the child component inside the parent component:
-
-```typescript{8-10}
-import { ZCard } from '../../index.js';
-
-export class RenderComponent {
-  render() {
-    return (
-      <div>
-        <ZCard
-          header="header"
-          content="content"
-          footer="footer"
-        ></ZCard>
-      </div>
-    );
-  }
-}
-```
-
-## Emits
-
-Next, in the `card` child component, define an Emit: `reset`
-
-### Initialize code skeleton
-
-::: tip
-Context Menu - [Module Path/src/component/card]: `Zova Refactor/Add Component Emits`
-:::
-
-### Define Emits Interface
-
-First, define the Emits interface in `controller.ts`:
-
-```typescript
-export type Emits = {
-  (e: 'reset', time: Date): void;
-};
-```
-
-### Raise Emit
-
-Raise Emit in `render.tsx`:
-
-```typescript{6-8}
-export class RenderCard {
-  render() {
-    return (
-      <div>
+        <div>{this.$props.slotHeader?.()}</div>
+        <div>{this.$slotDefault?.('tom')}</div>
+        <div>{this.$props.content}</div>
         <button
           onClick={() => {
-            this.$emit('reset', new Date());
+            this.$props.onReset?.();
           }}
         >
-          Reset Time
+          Reset
         </button>
       </div>
     );
@@ -124,98 +68,27 @@ export class RenderCard {
 }
 ```
 
-### Use Emits
+### Passing Props
 
-Next, use the child component inside the parent component:
+Type hints are also supported when passing Props to child components.
 
-```typescript{8-10}
-import { ZCard } from '../../index.js';
+```diff
+import { ZCard } from 'zova-module-demo-student';
 
-export class RenderComponent {
+class ControllerOther {
   render() {
     return (
       <div>
         <ZCard
-          onReset={time => {
-            console.log(time);
+          content="custom content"
+          onReset={() => {
+            console.log('onReset is invoked');
           }}
-        ></ZCard>
-      </div>
-    );
-  }
-}
-```
-
-## Slots
-
-Next, in the `card` child component, define three Slots: `header`, `default` and `footer`
-
-### Initialize code skeleton
-
-::: tip
-Context Menu - [Module Path/src/component/card]: `Zova Refactor/Add Component Slots`
-:::
-
-### Define Slots Interface
-
-First, define the Slots interface in `controller.ts`:
-
-```typescript
-export interface Slots {
-  header?(): JSX.Element;
-  default?(): JSX.Element;
-  footer?(): JSX.Element;
-}
-```
-
-### Render Slots
-
-Render Slots in `render.tsx`:
-
-```typescript{7,10,13}
-export class RenderCard {
-  render() {
-    return (
-      <div>
-        <div>
-          <div style={{ backgroundColor: 'teal' }}>
-            {this.$slots.header?.()}
-          </div>
-          <div style={{ backgroundColor: 'orange' }}>
-            {this.$slots.default?.()}
-          </div>
-          <div style={{ backgroundColor: 'green' }}>
-            {this.$slots.footer?.()}
-          </div>
-        </div>
-      </div>
-    );
-  }
-}
-```
-
-### Use Slots
-
-Next, use the child component inside the parent component:
-
-```typescript{8-18}
-import { ZCard } from '../../index.js';
-
-export class RenderComponent {
-  render() {
-    return (
-      <div>
-        <ZCard
-          slots={{
-            header: () => {
-              return <div>this is a header slot from parent</div>;
-            },
-            default: () => {
-              return <div>this is a default slot from parent</div>;
-            },
-            footer: () => {
-              return <div>this is a footer slot from parent</div>;
-            },
+          slotHeader={() => {
+            return <div>custom header</div>;
+          }}
+          slotDefault={name => {
+            return <div>{name}</div>;
           }}
         ></ZCard>
       </div>
