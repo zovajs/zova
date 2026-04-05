@@ -77,11 +77,11 @@ const user = z.object({
 
 ### 3. 支持json对象
 
-我们可以在 Query 中传递 json 对象。比如，我们在 Query 中定义一个 user 对象
+可以在 Query 中传递 json 对象。比如，在 Query 中定义一个 user 对象
 
 ```typescript
 export const QuerySchema = z.object({
-  user: zz
+  user: z
     .object({
       name: z.string(),
       age: z.number(),
@@ -107,7 +107,7 @@ export class RenderCardHeader {
 
 ### 4. 支持array数组
 
-我们可以在 Query 中传递 array 数组。比如，我们在 Query 中定义一个 colors 数组
+可以在 Query 中传递 array 数组。比如，在 Query 中定义一个 colors 数组
 
 ```typescript
 export const QuerySchema = z.object({

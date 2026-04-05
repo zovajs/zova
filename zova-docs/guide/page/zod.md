@@ -81,7 +81,7 @@ We can pass json object in Query. For example, we define a user object in Query
 
 ```typescript
 export const QuerySchema = z.object({
-  user: zz
+  user: z
     .object({
       name: z.string(),
       age: z.number(),
