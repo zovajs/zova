@@ -1,8 +1,20 @@
 # Route Fields
 
-In [Page Component](../../essentials/component/page.md), we create a page component `counter` and a route record. Here we further describe the fields of route records
+When creating a page, the system will automatically create a route record
 
-## List of route fields
+```typescript
+import { ZPageCounter } from './.metadata/page/counter.js';
+
+export const routes: IModuleRoute[] = [
+  {
+    name: 'counter',
+    path: 'counter/:id?',
+    component: ZPageCounter,
+  },
+];
+```
+
+## Route Fields
 
 | Name      | Description            |
 | --------- | ---------------------- |
@@ -14,11 +26,18 @@ In [Page Component](../../essentials/component/page.md), we create a page compon
 
 - meta
 
-| Name         | Description                  |
-| ------------ | ---------------------------- |
-| absolute     | Whether absolute path or not |
-| layout       | layout component             |
-| requiresAuth | Whether auth required        |
+| Name             | Type                             | Default      | Description                                                                           |
+| ---------------- | -------------------------------- | ------------ | ------------------------------------------------------------------------------------- |
+| absolute         | boolean                          | false        | Whether absolute path or not                                                          |
+| layout           | string \| false                  | 'default'    | layout component                                                                      |
+| requiresAuth     | boolean                          | true         | Whether auth required                                                                 |
+| locale           | boolean                          | false        | Whether support multi-language                                                        |
+| locales          | map<string,string>               | undefined    | List of supported languages. If empty, the system-provided language list will be used |
+| componentKeyMode | 'nameOnly' \| 'withParams'       | 'withParams' | When generating componentKey, is it necessary to include Params?                      |
+| componentKey     | function \| string               | auto         | A custom function can be provided to generate componentKey                            |
+| tabKey           | function \| string               | auto         | A custom function can be provided to generate tabKey                                  |
+| keepAlive        | function \| boolean              | true         | A custom function can be provided to generate keepAlive                               |
+| transferCache    | false \| ISsrConfigTransferCache | false        | Whether to set `cache-control` when performing SSR rendering                          |
 
 ## path
 
@@ -27,28 +46,29 @@ In [Page Component](../../essentials/component/page.md), we create a page compon
 ```typescript
 export const routes: IModuleRoute[] = [
   //
-  { path: 'counter', component: Counter },
+  { path: 'counter', component: ZPageCounter },
 ];
 ```
 
-- Since the page component belongs to the module `demo-basic`, its absolute path is: `/demo/basic/counter`
+- Since the page component belongs to the module `demo-student`, its absolute path is: `/demo/student/counter`
 
 ## name
 
-Generally speaking, a `name` identifier needs to be provided for `dynamic route`. `Dynamic route` means that you can provide `params` parameters on `path`, such as:
+If the page has a `params` parameter, then `name` needs to be provided. For example:
 
 ```typescript
 export const routes: IModuleRoute[] = [
-  //
-  { name: 'user', path: 'user/:id', component: User },
+  {
+    name: 'counter',
+    path: 'counter/:id?',
+    component: ZPageCounter,
+  },
 ];
 ```
 
-- Similarly, the system will also add a module prefix to `name` to generate an absolute name, for example, here is `demo-basic:user`
-
 ## component
 
-`component` is a page component, supporting `synchronous components` and `asynchronous components`. Generally speaking, just provide a `synchronization component` as well. Because in Zova, a module is a natural bundle boundary, and automatically bundled into an independent asynchronous chunk when building
+`component` refers to a page component. If the component name is `counter`, the system will automatically generate a component wrapper: `ZPageCounter`
 
 ## alias
 
@@ -64,10 +84,11 @@ Specify an `alias` for the route. However We cannot specify the route alias in t
 export const routes: IModuleRoute[] = [
   {
     path: '/:catchAll(.*)*',
-    component: ErrorNotFound,
+    component: ZPageErrorNotFound,
     meta: {
       absolute: true,
       layout: 'empty',
+      requiresAuth: false,
     },
   },
 ];
@@ -81,7 +102,7 @@ export const routes: IModuleRoute[] = [
 
 `layout` can specify layout component for this route. If `layout` is not set, the default layout component will be used
 
-- See: [Layout](../layout/introduction.md)
+- See: [Layout](./page-layout.md)
 
 ## meta.requiresAuth
 
