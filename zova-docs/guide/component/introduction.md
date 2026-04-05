@@ -1,4 +1,4 @@
-# Child Component
+# Component
 
 ## Create Child Component
 

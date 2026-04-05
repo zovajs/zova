@@ -26,52 +26,31 @@ $ zova :create:component card --module=demo-student
 
 依据提示输入组件名称`card`，VSCode 插件会自动创建组件的代码骨架
 
-## 使用子组件
-
-### 常规用法
-
-在父组件中可以直接按常规用法使用子组件：
+## Controller定义
 
 ```typescript
-import Card from '../../component/card/index.vue';
-
-export class RenderComponent {
-  render() {
-    return (
-      <Card></Card>
-    );
+@Controller()
+class ControllerCard extends BeanControllerBase {
+  protected render() {
+    return null;
   }
 }
 ```
 
-### 推荐用法
+## 组件Wrapper
 
-在模块中创建的子组件，自然是属于模块的资源。Zova 自动为每个子组件分配了一个唯一的名称（添加前缀`Z`），用于在模块内部以及跨模块使用
+Zova 为每个组件自动生成了一个组件 Wrapper。比如，组件`card`对应的组件 Wrapper 就是`ZCard`
 
-比如，子组件`card`属于模块`demo-basic`，那么，分配的唯一名称就是`ZCard`，那么可以采用如下方式使用子组件
+::: info
+所有组件 Wrapper 都使用`Z前缀`，从而方便在 JSX 中快速查找组件
+:::
 
-```typescript
-import { ZCard } from '../../index.js';
-
-export class RenderComponent {
-  render() {
-    return (
-      <ZCard></ZCard>
-    );
-  }
-}
-```
-
-- 这种方式可以更好的支持组件的自动导入
-
-## 跨模块使用子组件
-
-在其他模块使用模块`demo-basic`的子组件`card`，可以采用如下方式：
+## 使用组件
 
 ```typescript
-import { ZCard } from 'zova-module-demo-basic';
+import { ZCard } from 'zova-module-demo-student';
 
-export class RenderComponent {
+class RenderPageCounter {
   render() {
     return (
       <ZCard></ZCard>
@@ -81,5 +60,5 @@ export class RenderComponent {
 ```
 
 ::: info
-基于编译器的加持， ZCard 会自动转为异步加载模式，具体而言就是：系统会异步加载模块`demo-basic`，然后取得子组件`card`，再进行组件渲染
+基于编译器的加持， ZCard 会自动转为异步加载模式，具体而言就是：系统会异步加载模块`demo-student`，然后取得组件`card`，再进行组件渲染
 :::
