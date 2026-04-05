@@ -1,22 +1,39 @@
 # Route Alias
 
-You can specify an `alias` for the route. For example, the module `home-index` provides a page component with a path of `/home/index`. We can specify an alias `/` for `/home/index`, so when the user visits `/`, the URL is still `/`, but the page component corresponding to `/home/index` will be used directly
+Before explaining route alias, let's first explain the basic process of page navigation and loading
+
+## Page Navigation and Loading
+
+Take the page `counter` in module `demo-student` as an example:
+
+1. Navigate to the page path `/demo/student/counter`
+2. The system parses the module name `demo-student` from the path
+3. The system loads the module `demo-student` and injects the routes provided by the module into the system route table
+4. The route corresponding to this path is found in the route table
+5. The component is obtained from the route record, completing the page rendering
+
+## Home Page Navigation and Loading
+
+Zova uses a modular system, and all business logic is implemented within modules. The home page is no exception. Module `home-index` provides a page with the path `/home/index`. When a user visits `/home/index`, the home page can be rendered
+
+Obviously, users expect the home page path to be `/`. So, how can this be achieved?
+
+## Route Alias
+
+You can assign aliases to routes. When a user visits `/`, the system finds the real path `home/index` based on the route alias, then loads module `home-index`, and renders the specified page component
 
 ## Global Config
 
-We cannot specify the route alias in the module's route record, but must specify it in the global config. Why?
+Clearly, we cannot specify route aliases in the module's route records; they must be specified in the global Config
 
-Because Zova uses a modular system, each module is loaded asynchronously. If the user does not visit `/home/index`, the module `home-index` will not be loaded, and the route records provided by the module will not take effect. Then when the user visits `/`, the system will not know that this is an alias
-
-Here is an example of setting aliases:
-
-`zova-dev/src/front/config/config/config.ts`
+`src/front/config/config/config.ts`
 
 ```typescript
 // routes
 config.routes = {
   path: {
     '/home/index': { alias: '/' },
+    '/home/login': { alias: '/login' },
     '/demo/todo/todo': { alias: '/todo' },
   },
   name: {
@@ -25,7 +42,7 @@ config.routes = {
 };
 ```
 
-| Name        | Description                  |
-| ----------- | ---------------------------- |
-| routes.path | Set alias for `Route Query`  |
-| routes.name | Set alias for `Route Params` |
+| Name        | Description                                                       |
+| ----------- | ----------------------------------------------------------------- |
+| routes.path | Regular pages use `path` to set aliases                           |
+| routes.name | If a page supports `Params`, `name` should be used to set aliases |
