@@ -1,8 +1,20 @@
 # 路由字段
 
-在[页面组件](../../essentials/component/page.md)中，我们创建了一个页面组件`counter`，同时创建了一个路由记录。这里我们进一步讲述路由记录的字段配置
+在创建页面时，系统会自动创建一条路由记录
 
-## 路由字段清单
+```typescript
+import { ZPageCounter } from './.metadata/page/counter.js';
+
+export const routes: IModuleRoute[] = [
+  {
+    name: 'counter',
+    path: 'counter/:id?',
+    component: ZPageCounter,
+  },
+];
+```
+
+## 路由字段
 
 | 名称      | 说明       |
 | --------- | ---------- |
@@ -14,11 +26,18 @@
 
 - meta
 
-| 名称         | 说明           |
-| ------------ | -------------- |
-| absolute     | 是否为绝对路径 |
-| layout       | 布局组件       |
-| requiresAuth | 是否需要认证   |
+| 名称             | 类型                             | 缺省值       | 说明                                               |
+| ---------------- | -------------------------------- | ------------ | -------------------------------------------------- |
+| absolute         | boolean                          | false        | 是否为绝对路径                                     |
+| layout           | string \| false                  | 'default'    | 布局组件                                           |
+| requiresAuth     | boolean                          | true         | 是否需要认证                                       |
+| locale           | boolean                          | false        | 是否支持多语言                                     |
+| locales          | map<string,string>               | undefined    | 支持的多语言清单，如果为空则使用系统提供的语言清单 |
+| componentKeyMode | 'nameOnly' \| 'withParams'       | 'withParams' | 在生成componentKey时是否需要带上Params             |
+| componentKey     | function \| string               | auto         | 可提供生成componentKey的自定义函数                 |
+| tabKey           | function \| string               | auto         | 可提供生成tabKey的自定义函数                       |
+| keepAlive        | function \| boolean              | true         | 可提供生成keepAlive的自定义函数                    |
+| transferCache    | false \| ISsrConfigTransferCache | false        | 在进行SSR渲染时是否设置`cache-control`             |
 
 ## path
 
@@ -27,28 +46,29 @@
 ```typescript
 export const routes: IModuleRoute[] = [
   //
-  { path: 'counter', component: Counter },
+  { path: 'counter', component: ZPageCounter },
 ];
 ```
 
-- 由于该页面组件属于模块`demo-basic`，其绝对路径就是: `/demo/basic/counter`
+- 由于该页面组件属于模块`demo-student`，其绝对路径就是: `/demo/student/counter`
 
 ## name
 
-一般而言，需要为`动态路由`提供`name`标识。`动态路由`就是可以在`path`上提供 `params`参数，比如：
+如果页面有`params`参数，那么就需要提供`name`。比如：
 
 ```typescript
 export const routes: IModuleRoute[] = [
-  //
-  { name: 'user', path: 'user/:id', component: User },
+  {
+    name: 'counter',
+    path: 'counter/:id?',
+    component: ZPageCounter,
+  },
 ];
 ```
 
-- 同样，系统也会为`name`添加模块前缀，生成绝对名称，比如这里就是`demo-basic:user`
-
 ## component
 
-`component`就是页面组件，支持`同步组件`和`异步组件`。一般而言，只需提供`同步组件`即可。因为在 Zova 中，一个模块就是一个天然的拆包边界，在 build 构建时，自动打包成一个独立的异步 Chunk
+`component`就是页面组件。如果组件名称为`counter`，那么系统就会自动生成一个组件 Wrapper: `ZPageCounter`
 
 ## alias
 
@@ -64,10 +84,11 @@ export const routes: IModuleRoute[] = [
 export const routes: IModuleRoute[] = [
   {
     path: '/:catchAll(.*)*',
-    component: ErrorNotFound,
+    component: ZPageErrorNotFound,
     meta: {
       absolute: true,
       layout: 'empty',
+      requiresAuth: false,
     },
   },
 ];
@@ -81,7 +102,7 @@ export const routes: IModuleRoute[] = [
 
 `layout`可以为该路由指定布局组件，如果不设置`layout`就会使用默认的布局组件
 
-- 参见：[Layout布局](../layout/introduction.md)
+- 参见：[页面布局](./page-layout.md)
 
 ## meta.requiresAuth
 

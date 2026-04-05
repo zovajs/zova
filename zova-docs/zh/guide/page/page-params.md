@@ -51,13 +51,13 @@ export const routes: IModuleRoute[] = [
 
 需要重新生成模块的.metadata，以便让路由记录的变更生效
 
-### Cli命令
+- Cli 命令
 
 ```bash
 $ zova :tools:metadata demo-student
 ```
 
-### 菜单命令
+- 菜单命令
 
 ::: tip
 右键菜单 - [模块路径]: `Zova Tools/Generate .metadata`

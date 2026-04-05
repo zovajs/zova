@@ -1,28 +1,32 @@
 # Page Params
 
-Zova enhances route `Params` and provides Typescript typing support
+Zova enhances page `Params` and provides Typescript typing support
 
-We still use the page component `user` to fully demonstrate how to define and use typed `Params`
+## Add Params code skeleton
 
-## Initialize code skeleton
+Add Params code skeleton for page `counter`
 
-::: tip
-Context Menu - [Module Path/src/page/user]: `Zova Refactor/Add Page Params`
-:::
+### 1. CLI command
 
-## Define Params
-
-Define Params in `controller.ts`:
-
-`src/suite/a-demo/modules/demo-basic/src/page/user/controller.ts`
-
-```typescript{2}
-export const ParamsSchema = z.object({
-  id: z.number().optional().default(0),
-});
+```bash
+$ zova :refactor:pageParams counter --module=demo-student
 ```
 
-- An `object` is defined using `z`, containing the field: `id`
+### 2. Menu command
+
+::: tip
+Context Menu - [Module Path/src/page/pageName]: `Zova Refactor/Add Page Params`
+:::
+
+## Add Zod Schema
+
+Add fields schema
+
+```diff
+export const ControllerPageCounterSchemaParams = z.object({
++ id: z.number().optional().default(0),
+});
+```
 
 ## Route name
 
@@ -30,19 +34,30 @@ In order to support `Params`, the `name` field needs to be used on the route rec
 
 ### 1. Route record
 
-`src/suite/a-demo/modules/demo-basic/src/routes.ts`
+`src/module/demo-student/src/routes.ts`
 
-```typescript{3}
+```diff
 export const routes: IModuleRoute[] = [
-  { path: 'card/header2', component: CardHeader2 },
-  { name: 'user', path: 'user/:id?', component: User },
+  {
++   name: 'counter',
+-   path: 'counter',
++   path: 'counter/:id?',
+    component: ZPageCounter,
+  },
 ];
 ```
 
-- Set name to `user`, the system automatically adds the module prefix and generates the absolute name `demo-basic:user`
-- Change path to `user/:id?`
-
 ### 2. Regenerate the module's .metadata
+
+The module's .metadata needs to be regenerated so that changes to the routing records take effect
+
+- CLI command
+
+```bash
+$ zova :tools:metadata demo-student
+```
+
+- Menu command
 
 ::: tip
 Context Menu - [Module Path]: `Zova Tools/Generate .metadata`
@@ -50,51 +65,43 @@ Context Menu - [Module Path]: `Zova Tools/Generate .metadata`
 
 ## Use Params
 
-In `render.ts`, you can directly obtain Params and render its fields
+Zova injects a `$params` object into the base class of the `controller` bean so that the `Params` parameter can be obtained through `this.$params`, and type hints are supported
 
-`src/suite/a-demo/modules/demo-basic/src/page/user/render.tsx`
-
-```typescript{5}
-export class RenderUser {
+```diff
+class ControllerPageCounter {
   render() {
     return (
       <div>
-        <div>{this.$params.id}</div>
++       <div>{this.$params.id}</div>
       </div>
     );
   }
 }
 ```
 
-- The type of `$params.id` is `number`
-
 ## Pass in Params
 
-Next, we need to pass in the `Params` parameter when navigating the route
+When invoking the page navigation method, you can also pass Params parameters, and type hints are supported
 
-Still listen to the button click event in the page component `user` and use different `Params` parameter to navigate to the current page. In this way, we can see that `$params` is reactive
-
-```typescript{8-10}
-export class RenderUser {
+```diff
+class ControllerPageCounter {
   render() {
     return (
       <div>
-        <div>{this.$params.id}</div>
         <button
           onClick={() => {
-            const id = this.$params.id + 1;
-            const url = this.$router.resolveName('demo-basic:user', { params: { id } });
+            const url = this.$router.getPagePath('/demo/student/counter/:id?', {
+              params: {
++               id: 1,
+              },
+            });
             this.$router.push(url);
           }}
         >
-          Go To Current Page
+          Go To
         </button>
       </div>
     );
   }
 }
 ```
-
-## $params
-
-Zova injects a `$params` object into the base class of the `controller` bean so that the `Params` parameter can be obtained through `this.$params` in the render instance
