@@ -62,3 +62,26 @@ class RenderPageCounter {
 ::: info
 Based on the support of the compiler, ZCard will automatically switch to asynchronous loading mode. Specifically, the system will asynchronously load the module `demo-student`, then obtain the component `card`, and then render the component
 :::
+
+## How to Reference Component Instance
+
+In Zova, instead of using `Template Ref` to reference component instance, you directly reference the component's corresponding `controller`, which supports more intuitive and powerful type hints
+
+```typescript
+import type { ControllerCard } from 'zova-module-demo-student';
+import { ZCard } from 'zova-module-demo-student';
+
+class RenderPageCounter {
+  cardRef: ControllerCard;
+
+  render() {
+    return (
+      <ZCard
+        controllerRef={ref => {
+          this.cardRef = ref;
+        }}
+      ></ZCard>
+    );
+  }
+}
+```

@@ -62,3 +62,26 @@ class RenderPageCounter {
 ::: info
 基于编译器的加持， ZCard 会自动转为异步加载模式，具体而言就是：系统会异步加载模块`demo-student`，然后取得组件`card`，再进行组件渲染
 :::
+
+## 如何引用组件实例
+
+在 Zova 中，不使用`Template Ref`引用组件实例，而是直接引用组件对应的`controller`，这样可以支持更直观并且更强大的类型提示
+
+```typescript
+import type { ControllerCard } from 'zova-module-demo-student';
+import { ZCard } from 'zova-module-demo-student';
+
+class RenderPageCounter {
+  cardRef: ControllerCard;
+
+  render() {
+    return (
+      <ZCard
+        controllerRef={ref => {
+          this.cardRef = ref;
+        }}
+      ></ZCard>
+    );
+  }
+}
+```
