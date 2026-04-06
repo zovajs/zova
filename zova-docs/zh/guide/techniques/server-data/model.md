@@ -41,3 +41,24 @@ export class ModelMenu {
   }
 }
 ```
+
+## 使用Model
+
+采用`@Use`注入 Model 实例即可
+
+```typescript
+import { ModelMenu } from 'zova-module-demo-student';
+
+class ControllerTest {
+  @Use()
+  $$modelMenu: ModelMenu;
+
+  protected render() {
+    const { data, error } = this.$$modelMenu.retrieveMenus();
+    if (error) {
+      return <div>{error.message}</div>;
+    }
+    return <div>{data}</div>;
+  }
+}
+```
