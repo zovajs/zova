@@ -2,7 +2,7 @@
 
 Zova 采用[openapi-typescript](https://github.com/openapi-ts/openapi-typescript)基于 Swagger/Openapi 元数据，自动生成前端的 Client SDK，提供顺畅的 Typescript 开发体验
 
-Zova 采用模块化开发体系，因此可以根据业务需求将后端提供的 Swagger/Openapi 元数据拆分成多个部分，在不同的模块中独立管理
+Zova 采用模块化体系，因此可以根据业务需求将后端提供的 Swagger/Openapi 元数据拆分成多个部分，在不同的模块中独立管理
 
 ## 初始化Openapi配置
 
