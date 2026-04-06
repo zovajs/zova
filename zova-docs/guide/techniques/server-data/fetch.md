@@ -1,42 +1,70 @@
-# Fetch
+# $fetch
 
-Zova provides a module `home-base`, which provides a basic `Fetch` code skeleton based on [axios](https://axios-http.com). Custom API logic can be added on this basis, or even the `axios` underlying library can be directly replaced
+Zova wraps [axios](https://axios-http.com)
 
-## $fetch
+## this.$fetch
 
-- Zova injects the `$fetch` object into the `BeanBase` base class, so that the `axios` instance can be obtained through `this.$fetch` in any bean instance
-- Zova also injects the `$fetch` object in `app.meta`, so that the `axios` instance can be accessed outside the bean instance
+Zova injects the `$fetch` object into the `BeanBase` base class, allowing any bean instance to access the axios instance through `this.$fetch`
 
-For example, load menu data:
+For example, fetching menu data:
 
-`src/suite/a-home/modules/home-layout/src/api/menu.ts`
-
-```typescript
-export default (app: ZovaApplication) => {
-  return {
-    select: () => app.meta.$fetch.get<any, ApiMenuEntity[]>('/home/layout/menu/select'),
-  };
-};
-```
-
-## home-api.bean.fetch
-
-The module `home-base` provides an `home-api.bean.fetch` bean, in which custom logic can be added directly
-
-`src/suite/a-home/modules/home-api/src/bean/bean.fetch.ts`
-
-```typescript{7}
-export class BeanFetch {
-  private [SymbolFetch]: AxiosInstance;
-
-  protected async __init__() {
-    const baseURL = this.app.util.getApiBaseURL();
-    this[SymbolFetch] = markRaw(axios.create({ baseURL }));
-    // your custom logic maybe here
-  }
-
-  protected __get__(prop: string) {
-    return this[SymbolFetch] && this[SymbolFetch][prop];
+```diff
+class ControllerTest extends BeanBase {
+  async retrieveMenus() {
++   const menu = await this.$fetch.get('/home/base/menu/');
   }
 }
 ```
+
+## app.meta.$fetch
+
+You can also access the axios instance via `app.meta.$fetch`
+
+```diff
+async retrieveMenus(app: ZovaApplication) {
++ const menu = await app.meta.$fetch.get('/home/base/menu/');
+}
+```
+
+## baseURL
+
+`this.$fetch` and `app.meta.$fetch` use the default baseURL, which can be modified through env
+
+`env/.env`
+
+```txt
+API_BASE_URL = http://localhost:7102
+API_PREFIX = /api
+SSR_API_BASE_URL = $API_BASE_URL
+```
+
+In SSR scenarios, the Server and Client may use different baseURL
+
+## Config
+
+The project's Config can be used to modify the `axios` instance configuration
+
+`src/front/config/config/config.ts`
+
+```typescript
+// modules
+config.modules = {
+  'a-fetch': {
+    axios: {
+      config: {},
+    },
+  },
+};
+```
+
+## Interceptors
+
+Zova extends `$fetch` capabilities through interceptors. Currently, the following interceptors are built-in:
+
+| Name          | Description                                                                                                                                         |
+| ------------- | --------------------------------------------------------------------------------------------------------------------------------------------------- |
+| mock          | Automatically uses mock data when an API call fails                                                                                                 |
+| headers       | Automatically adds `locale` and `timezone` headers                                                                                                  |
+| jwt           | Automatically adds `Authorization` header; if `accessToken` expires, it automatically uses `refreshToken` to renew                                  |
+| performAction | If doing SSR rendering in `Vona`, it can directly execute the backend `performAction` method instead of calling the HTTP API, improving performance |
+| body          | Extracts the `data` from AxiosResponse                                                                                                              |
