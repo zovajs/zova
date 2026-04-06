@@ -20,7 +20,7 @@ $ zova :create:bean api menu --module=demo-student
 
 依据提示输入 api 的名称`menu`，VSCode 插件会自动添加 api 的代码骨架
 
-## 定义Api
+## Api定义
 
 `src/module/demo-student/src/api/menu.ts`
 

@@ -180,7 +180,7 @@ function sidebarGuide(): DefaultTheme.SidebarItem[] {
             { text: '简介', link: 'introduction' },
             { text: '$fetch', link: 'fetch' },
             { text: '$api', link: 'api' },
-            { text: 'Model', link: 'model' },
+            { text: 'Model: 状态管理', link: 'model' },
             { text: '$sdk', link: 'sdk' },
             { text: 'Openapi SDK', link: 'openapi-sdk' },
             { text: '$apiSchema', link: 'apiSchema' },
@@ -218,7 +218,7 @@ function sidebarGuide(): DefaultTheme.SidebarItem[] {
           ],
         },
         {
-          text: 'Model: 统一数据源',
+          text: 'Model: 状态管理',
           base: '/zh/guide/techniques/model/',
           items: [
             { text: '简介', link: 'introduction' },

@@ -184,7 +184,7 @@ function sidebarGuide(): DefaultTheme.SidebarItem[] {
             { text: 'Introduction', link: 'introduction' },
             { text: '$fetch', link: 'fetch' },
             { text: '$api', link: 'api' },
-            { text: 'Model', link: 'model' },
+            { text: 'Model: State Management', link: 'model' },
             { text: '$sdk', link: 'sdk' },
             { text: 'Openapi SDK', link: 'openapi-sdk' },
             { text: '$apiSchema', link: 'apiSchema' },
@@ -222,7 +222,7 @@ function sidebarGuide(): DefaultTheme.SidebarItem[] {
           ],
         },
         {
-          text: 'Model: Unified Data Source',
+          text: 'Model: State Management',
           base: '/guide/techniques/model/',
           items: [
             { text: 'Introduction', link: 'introduction' },
