@@ -171,7 +171,6 @@ function sidebarGuide(): DefaultTheme.SidebarItem[] {
         { text: 'Component Props', link: 'component-props' },
         { text: 'v-model', link: 'v-model' },
         { text: 'Generic Component', link: 'component-generic' },
-        { text: 'Component(Advanced)', link: 'component-advanced' },
       ],
     },
     {
