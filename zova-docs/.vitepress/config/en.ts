@@ -178,6 +178,19 @@ function sidebarGuide(): DefaultTheme.SidebarItem[] {
       text: 'Techniques',
       items: [
         {
+          text: 'Server Data',
+          base: '/guide/techniques/server-data/',
+          items: [
+            { text: 'Introduction', link: 'introduction' },
+            { text: '$fetch', link: 'fetch' },
+            { text: '$api', link: 'api' },
+            { text: 'Model', link: 'model' },
+            { text: '$sdk', link: 'sdk' },
+            { text: 'Openapi SDK', link: 'openapi-sdk' },
+            { text: '$apiSchema', link: 'apiSchema' },
+          ],
+        },
+        {
           text: 'Fetch',
           base: '/guide/techniques/fetch/',
           link: 'introduction',

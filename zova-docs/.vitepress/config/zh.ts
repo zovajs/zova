@@ -174,6 +174,19 @@ function sidebarGuide(): DefaultTheme.SidebarItem[] {
       text: '技术',
       items: [
         {
+          text: '服务端数据',
+          base: '/zh/guide/techniques/server-data/',
+          items: [
+            { text: '简介', link: 'introduction' },
+            { text: '$fetch', link: 'fetch' },
+            { text: '$api', link: 'api' },
+            { text: 'Model', link: 'model' },
+            { text: '$sdk', link: 'sdk' },
+            { text: 'Openapi SDK', link: 'openapi-sdk' },
+            { text: '$apiSchema', link: 'apiSchema' },
+          ],
+        },
+        {
           text: 'Fetch',
           base: '/zh/guide/techniques/fetch/',
           link: 'introduction',
