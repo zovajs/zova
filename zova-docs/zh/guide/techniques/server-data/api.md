@@ -44,7 +44,7 @@ export class ApiMenu extends BeanApiBase {
 
 ```diff
 class ControllerTest {
-  async test() {
+  async retrieveMenus() {
 +   const menus = await this.scope.api.menu.retrieveMenus();
   }
 }
@@ -59,8 +59,22 @@ class ControllerOther {
 + @UseScope()
 + $$scopeDemoStudent: ScopeModuleDemoStudent;
 
-  async test() {
-+   const res = await this.$$scopeDemoStudent.api.test.echo();
+  async retrieveMenus() {
++   const menus = await this.$$scopeDemoStudent.api.menu.retrieveMenus();
+  }
+}
+```
+
+## $api
+
+为了进一步提升开发体验，简化代码，系统自动加载模块`home-api`，在`BeanBase`基类中注入了`$api`对象，从而可以在任何 bean 实例中通过`this.$api`访问模块`home-api`提供的 API 服务
+
+```diff
+class ControllerTest {
+  async retrieveMenus() {
++   const menus = await this.$api.homeBaseMenu.retrieveMenus({
++      params: { publicPath: '' },
++    });
   }
 }
 ```
