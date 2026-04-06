@@ -6,7 +6,7 @@
 
 ## 创建Model
 
-在模块 demo-student 中创建一个 model 服务`menu`
+在模块 demo-student 中创建一个 model`menu`
 
 ### 1. Cli命令
 
@@ -20,7 +20,7 @@ $ zova :create:bean model menu --module=demo-student
 右键菜单 - [模块路径]: `Zova Create/Model`
 :::
 
-依据提示输入 api 的名称`menu`，VSCode 插件会自动添加 model 的代码骨架
+依据提示输入 model 的名称`menu`，VSCode 插件会自动添加 model 的代码骨架
 
 ## Model定义
 
