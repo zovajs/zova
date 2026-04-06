@@ -36,7 +36,7 @@ export class Monkey extends BeanSimple implements IMonkeyModule, IMonkeyBeanInit
 
   async beanInit(bean: BeanContainer, beanInstance: BeanBase) {
     const self = this;
-    // $api
+    // $sdk
     bean.defineProperty(beanInstance, '$sdk', {
       enumerable: false,
       configurable: true,
