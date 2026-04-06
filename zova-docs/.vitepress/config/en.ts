@@ -191,16 +191,6 @@ function sidebarGuide(): DefaultTheme.SidebarItem[] {
           ],
         },
         {
-          text: 'Fetch',
-          base: '/guide/techniques/fetch/',
-          link: 'introduction',
-        },
-        {
-          text: 'Openapi SDK',
-          base: '/guide/techniques/fetch/',
-          link: 'introduction',
-        },
-        {
           text: 'Mock',
           base: '/guide/techniques/mock/',
           link: 'introduction',
