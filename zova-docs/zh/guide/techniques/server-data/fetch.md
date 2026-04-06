@@ -11,7 +11,7 @@ Zova 在`BeanBase`基类中注入了`$fetch`对象，从而可以在任何 bean 
 ```diff
 class ControllerTest extends BeanBase {
   async retrieveMenus() {
-+   const menu = await this.$fetch.get('/home/base/menu/');
++   const menus = await this.$fetch.get('/home/base/menu/');
   }
 }
 ```
@@ -22,7 +22,7 @@ class ControllerTest extends BeanBase {
 
 ```diff
 async retrieveMenus(app: ZovaApplication) {
-+ const menu = await app.meta.$fetch.get('/home/base/menu/');
++ const menus = await app.meta.$fetch.get('/home/base/menu/');
 }
 ```
 

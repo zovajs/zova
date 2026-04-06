@@ -11,7 +11,7 @@ For example, fetching menu data:
 ```diff
 class ControllerTest extends BeanBase {
   async retrieveMenus() {
-+   const menu = await this.$fetch.get('/home/base/menu/');
++   const menus = await this.$fetch.get('/home/base/menu/');
   }
 }
 ```
@@ -22,7 +22,7 @@ You can also access the axios instance via `app.meta.$fetch`
 
 ```diff
 async retrieveMenus(app: ZovaApplication) {
-+ const menu = await app.meta.$fetch.get('/home/base/menu/');
++ const menus = await app.meta.$fetch.get('/home/base/menu/');
 }
 ```
 
