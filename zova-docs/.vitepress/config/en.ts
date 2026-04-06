@@ -185,9 +185,9 @@ function sidebarGuide(): DefaultTheme.SidebarItem[] {
             { text: '$fetch', link: 'fetch' },
             { text: '$api', link: 'api' },
             { text: 'Model: State Management', link: 'model' },
-            { text: '$sdk', link: 'sdk' },
             { text: 'Openapi SDK', link: 'openapi-sdk' },
             { text: '$apiSchema', link: 'apiSchema' },
+            { text: '$sdk', link: 'sdk' },
           ],
         },
         {

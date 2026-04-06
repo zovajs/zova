@@ -7,6 +7,6 @@ Zova 对服务端数据的获取进行了不同层级的封装，允许我们根
 | $fetch      | 对axios进行封装                                                          |
 | $api        | 在$fetch基础上提供面向业务的API服务                                      |
 | Model       | 在$api基础上使用Tanstack Query对远程数据进行缓存管理                     |
-| $sdk        | 在Model的基础上对远程API进行了更通用的封装，提供了统一的开发体验         |
 | Openapi SDK | 基于Swagger/Openapi元数据，自动生成前端的Client SDK                      |
 | $apiSchema  | 可直接获取API Schema元数据，可基于Schema元数据实现Form自动渲染和数据校验 |
+| $sdk        | 使用Model机制对API Schema元数据进行了更通用的封装，提供了统一的开发体验  |

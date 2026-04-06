@@ -181,9 +181,9 @@ function sidebarGuide(): DefaultTheme.SidebarItem[] {
             { text: '$fetch', link: 'fetch' },
             { text: '$api', link: 'api' },
             { text: 'Model: 状态管理', link: 'model' },
-            { text: '$sdk', link: 'sdk' },
             { text: 'Openapi SDK', link: 'openapi-sdk' },
             { text: '$apiSchema', link: 'apiSchema' },
+            { text: '$sdk', link: 'sdk' },
           ],
         },
         {
