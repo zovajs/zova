@@ -159,7 +159,7 @@
     "zova-module-vuetify-form": "workspace:^"
   },
   "devDependencies": {
-    "@cabloy/cli": "^3.0.102",
+    "@cabloy/cli": "^3.0.103",
     "@cabloy/lint": "^5.0.24",
     "@cabloy/openapi-typescript": "^7.9.2",
     "@quasar/app-vite": "2.4.0",
