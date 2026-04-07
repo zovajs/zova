@@ -35,7 +35,7 @@
     "tsc:publish": "npm run clean && vona :bin:buildGeneral && tsc -p tsconfig.build.json && tsc -p tsconfig.cli.json",
     "prepublishOnly": "npm run tsc:publish",
     "prepack": "clean-package",
-    "postpack": "clean-package restore && && npm run clean"
+    "postpack": "clean-package restore && npm run clean"
   },
   "dependencies": {
     "@babel/plugin-proposal-decorators": "^7.29.0",
