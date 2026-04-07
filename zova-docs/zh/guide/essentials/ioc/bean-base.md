@@ -39,17 +39,17 @@
 
 当创建好一个项目时，项目中就会存在一些模块，为我们进一步开发提供了基础能力
 
-| 名称                                                    | 说明                                 |
-| ------------------------------------------------------- | ------------------------------------ |
-| [$fetch](../../techniques/api/introduction.md)          | 由模块`a-fetch`提供的fetch对象       |
-| [$scopeBase](../../essentials/scope/introduction.md)    | 由模块`home-base`提供的scope对象     |
-| [$css](../../techniques/css-in-js/css.md)               | 由模块`home-base`提供的全局样式对象  |
-| [$pinia](../../vue/pinia.md)                            | 由模块`a-pinia`提供的pinia对象       |
-| [$queryClient](../../techniques/model/introduction.md)  | 由模块`a-model`提供的queryClient对象 |
-| [$router](../../techniques/router/navigation-guards.md) | 由模块`a-router`提供的router对象     |
-| [$style](../../techniques/css-in-js/style.md)           | 由模块`a-style`提供的style方法       |
-| [$theme](../../techniques/css-in-js/theme.md)           | 由模块`a-style`提供的theme对象       |
-| [$token](../../techniques/css-in-js/token.md)           | 由模块`a-style`提供的token对象       |
+| 名称                                                   | 说明                                 |
+| ------------------------------------------------------ | ------------------------------------ |
+| [$fetch](../../techniques/server-data/fetch.md)        | 由模块`a-fetch`提供的fetch对象       |
+| [$scopeBase](../../essentials/scope/introduction.md)   | 由模块`home-base`提供的scope对象     |
+| [$css](../../techniques/css-in-js/css.md)              | 由模块`home-base`提供的全局样式对象  |
+| [$pinia](../../vue/pinia.md)                           | 由模块`a-pinia`提供的pinia对象       |
+| [$queryClient](../../techniques/model/introduction.md) | 由模块`a-model`提供的queryClient对象 |
+| [$router](../../page/navigation-guards.md)             | 由模块`a-router`提供的router对象     |
+| [$style](../../techniques/css-in-js/style.md)          | 由模块`a-style`提供的style方法       |
+| [$theme](../../techniques/css-in-js/theme.md)          | 由模块`a-style`提供的theme对象       |
+| [$token](../../techniques/css-in-js/token.md)          | 由模块`a-style`提供的token对象       |
 
 Zova 可以搭配任何 UI 库使用，并且内置了几款 UI 库的项目模版，便于开箱即用。不同的 UI 库也会根据自身需要向`BeanBase`基类注入对象
 
