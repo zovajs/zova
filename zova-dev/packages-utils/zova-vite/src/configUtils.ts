@@ -43,8 +43,6 @@ const __ZovaManualChunkVendorsSys = [
       '~packages-zova/zova/',
       'zova-core',
       '~packages-zova/zova-core/',
-      'zova-shared',
-      '~packages-zova/zova-shared/',
       '@cabloy/logger',
       '~packages-utils/logger/',
       'mutate-on-copy',
