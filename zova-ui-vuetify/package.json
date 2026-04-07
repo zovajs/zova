@@ -93,7 +93,6 @@
     "zova-module-a-actions": "^5.1.2",
     "zova-module-a-api": "^5.1.2",
     "zova-module-a-app": "^5.1.2",
-    "zova-module-a-b": "workspace:^",
     "zova-module-a-bean": "^5.1.2",
     "zova-module-a-behavior": "^5.1.2",
     "zova-module-a-behaviors": "^5.1.2",
