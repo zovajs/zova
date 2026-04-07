@@ -114,11 +114,14 @@
     "zova-module-home-passport": "workspace:^"
   },
   "devDependencies": {
+    "@cabloy/cli": "^3.0.103",
     "@cabloy/lint": "^5.0.24",
     "@cabloy/openapi-typescript": "^7.9.2",
     "@quasar/app-vite": "2.4.0",
+    "@types/luxon": "^3.7.1",
     "@types/node": "^22.10.2",
     "concurrently": "^8.2.2",
+    "fs-extra": "^11.3.4",
     "oxfmt": "^0.41.0",
     "oxlint": "^1.56.0",
     "quasar-app-extension-zova": "^1.2.2",
