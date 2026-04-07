@@ -1,6 +1,6 @@
 {
   "name": "zova-shared",
-  "version": "1.1.1",
+  "version": "1.1.2",
   "gitHead": "a1b13b06e259e4447ab2f361ec76941810bc4ad7",
   "description": "A vue3 framework with ioc",
   "keywords": [

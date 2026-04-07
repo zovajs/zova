@@ -1,6 +1,6 @@
 {
   "name": "babel-plugin-zova-bean-module",
-  "version": "1.2.1",
+  "version": "1.2.2",
   "gitHead": "a1b13b06e259e4447ab2f361ec76941810bc4ad7",
   "description": "babel-plugin-zova-bean-module",
   "keywords": [
@@ -39,7 +39,7 @@
     "@babel/core": "^7.28.0",
     "@babel/traverse": "^7.28.0",
     "@cabloy/module-info": "^2.0.0",
-    "@cabloy/word-utils": "^2.1.1"
+    "@cabloy/word-utils": "^2.1.2"
   },
   "devDependencies": {
     "@types/babel__core": "^7.20.5",

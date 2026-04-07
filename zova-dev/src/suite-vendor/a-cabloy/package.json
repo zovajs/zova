@@ -1,13 +1,13 @@
 {
   "name": "zova-suite-a-cabloy",
-  "version": "5.1.1",
+  "version": "5.1.2",
   "description": "",
   "author": "",
   "files": [],
   "type": "module",
   "dependencies": {
-    "zova-module-rest-actions": "^5.1.1",
-    "zova-module-rest-resource": "^5.1.1"
+    "zova-module-rest-actions": "^5.1.2",
+    "zova-module-rest-resource": "^5.1.2"
   },
   "title": "a-cabloy",
   "gitHead": "a1b13b06e259e4447ab2f361ec76941810bc4ad7"
