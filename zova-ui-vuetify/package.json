@@ -1,6 +1,6 @@
 {
   "name": "zova-ui-vuetify",
-  "version": "5.1.5",
+  "version": "5.1.6",
   "gitHead": "a1b13b06e259e4447ab2f361ec76941810bc4ad7",
   "description": "A vue3 vuetify framework with ioc",
   "keywords": [
@@ -127,7 +127,7 @@
     "zova-module-home-layouttabs": "workspace:^",
     "zova-module-home-login": "workspace:^",
     "zova-module-home-passport": "workspace:^",
-    "zova-module-rest-actions": "^5.1.2",
+    "zova-module-rest-actions": "^5.1.3",
     "zova-module-rest-resource": "^5.1.2",
     "zova-module-vuetify-adapter": "workspace:^",
     "zova-module-vuetify-form": "workspace:^"
