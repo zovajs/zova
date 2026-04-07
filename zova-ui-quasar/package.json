@@ -1,6 +1,6 @@
 {
   "name": "zova-ui-quasar",
-  "version": "5.0.356",
+  "version": "5.1.0",
   "gitHead": "c90e59abc1bf445154a3fb32856f83783dc0eb39",
   "description": "A vue3 quasar framework with ioc",
   "keywords": [
@@ -51,7 +51,7 @@
     "@cabloy/module-info": "^2.0.0",
     "@cabloy/utils": "^2.0.23",
     "@cabloy/vue-router": "^4.4.16",
-    "@cabloy/word-utils": "^2.0.2",
+    "@cabloy/word-utils": "^2.1.0",
     "@cabloy/zod-openapi": "^1.0.10",
     "@quasar/extras": "^1.16.12",
     "@tanstack/query-core": "^5.94.5",
@@ -67,7 +67,7 @@
     "defu": "^6.1.4",
     "express": "^5.2.1",
     "luxon": "^3.7.2",
-    "mutate-on-copy": "^1.0.1",
+    "mutate-on-copy": "^1.1.0",
     "openapi3-ts": "^4.5.0",
     "quasar": "^2.18.1",
     "table-identity": "^1.0.0",
@@ -76,7 +76,7 @@
     "vue-router": "^4.4.5",
     "zod": "^4.1.5",
     "zova": "workspace:^",
-    "zova-jsx": "^1.0.0",
+    "zova-jsx": "^1.1.0",
     "zova-module-a-action": "workspace:^",
     "zova-module-a-actions": "workspace:^",
     "zova-module-a-api": "workspace:^",
@@ -126,13 +126,13 @@
     "concurrently": "^8.2.2",
     "oxfmt": "^0.41.0",
     "oxlint": "^1.56.0",
-    "quasar-app-extension-zova": "^1.1.184",
+    "quasar-app-extension-zova": "^1.2.0",
     "typescript": "^5.9.3",
     "vite": "^7.3.1",
     "vite-plugin-fake-server-turbo": "^3.0.15",
     "vue-tsc": "^3.2.4",
-    "zova-openapi": "^1.0.5",
-    "zova-vite": "^1.0.182"
+    "zova-openapi": "^1.1.0",
+    "zova-vite": "^1.1.0"
   },
   "packageManager": "pnpm@10.19.0"
 }
