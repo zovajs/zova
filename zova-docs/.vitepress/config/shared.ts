@@ -8,6 +8,11 @@ export const shared = defineConfig({
   markdown: {
     lineNumbers: true,
   },
+  ignoreDeadLinks: [
+    url => {
+      return url.startsWith('http://') || url.startsWith('https://');
+    },
+  ],
   themeConfig: {
     editLink: {
       pattern: 'https://github.com/zovajs/zova/edit/main/zova-docs/:path',

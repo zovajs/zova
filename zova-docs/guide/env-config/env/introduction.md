@@ -204,11 +204,11 @@ ZovaJS provides several built-in env variables:
 
 ### SSR
 
-See: [SSR](../ssr/env.md)
+See: [SSR](../../techniques/ssr/env.md)
 
 ### Mock
 
-See: [Mock](../mock/introduction.md)
+See: [Mock](../../techniques/mock/introduction.md)
 
 ## Dynamic environment variables
 

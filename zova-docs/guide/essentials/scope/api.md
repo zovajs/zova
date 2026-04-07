@@ -31,7 +31,7 @@ class ApiTest {
 }
 ```
 
-For the usage of `$fetch`, see: [Fetch](../../techniques/fetch/introduction.md)
+For the usage of `$fetch`, see: [Fetch](../../techniques/server-data/fetch.md)
 
 ## Use API
 
