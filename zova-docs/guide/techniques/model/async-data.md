@@ -26,7 +26,7 @@ export class ModelTodo {
   - Why not use the `$useQuery` method? Because asynchronous data is generally loaded asynchronously when needed. Therefore, we need to ensure that the same Query object is always returned when the `select` method is invoked multiple times, so the `$useStateData` method must be used
 - Pass in `queryKey` to ensure the uniqueness of the local cache
 - Pass in `queryFn` and call this function at the appropriate time to obtain server data
-  - service.todo.select: see [Api service](../../essentials/scope/service.md)
+  - service.todo.select: see [Api service](../../essentials/scope/api.md)
 
 ### How to use
 

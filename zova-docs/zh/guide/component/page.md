@@ -111,7 +111,7 @@ export class StyleCounter {}
 ```
 
 1. 定义一个 style bean
-2. 支持强大的 css-in-js 能力，参见：[CSS-in-JS: Style & Theme](../../techniques/css-in-js/introduction.md)
+2. 支持强大的 css-in-js 能力，参见：[CSS-in-JS: Style & Theme](../techniques/css-in-js/introduction.md)
 
 ## 页面参数
 

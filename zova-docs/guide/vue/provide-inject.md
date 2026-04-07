@@ -1,6 +1,6 @@
 # Provide/Inject
 
-Zova recommends using [ioc: hierarchical injection](../essentials/ioc/inject.md#hierarchical-injection) to replace Vue3's dependency injection mechanism. Of course, Zova also supports Vue3's dependency injection mechanism, so it is compatible with the existing Vue3 ecosystem
+Zova recommends using [ioc: hierarchical injection](../essentials/ioc/dependency-injection.md#hierarchical-injection) to replace Vue3's dependency injection mechanism. Of course, Zova also supports Vue3's dependency injection mechanism, so it is compatible with the existing Vue3 ecosystem
 
 To implement Vue3's dependency injection in Zova, there are three main steps:
 
