@@ -118,5 +118,5 @@ export class StyleCounter {}
 可以通过路由向页面传入参数。Zova 对页面参数进行了强化，提供了 Typescript 类型化支持
 
 - 参见：
-  - [路由Query](../../techniques/router/route-query.md)
-  - [路由Params](../../techniques/router/route-params.md)
+  - [路由Query](../techniques/router/route-query.md)
+  - [路由Params](../techniques/router/route-params.md)

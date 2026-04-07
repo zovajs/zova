@@ -205,11 +205,11 @@ ZovaJS 提供了若干内置的环境变量：
 
 ### SSR
 
-参见：[SSR](../ssr/env.md)
+参见：[SSR](../../techniques/ssr/env.md)
 
 ### Mock
 
-参见：[Mock](../mock/introduction.md)
+参见：[Mock](../../techniques/mock/introduction.md)
 
 ## 动态环境变量
 
