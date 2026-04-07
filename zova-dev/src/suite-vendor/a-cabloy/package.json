@@ -7,7 +7,8 @@
   "type": "module",
   "dependencies": {
     "zova-module-rest-actions": "^5.1.0",
-    "zova-module-rest-resource": "workspace:^"
+    "zova-module-rest-resource": "^5.1.0"
   },
-  "title": "a-cabloy"
+  "title": "a-cabloy",
+  "gitHead": "f98cfc976a1569ca212000ced3f10f1a211bb97e"
 }

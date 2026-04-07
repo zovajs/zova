@@ -1,7 +1,7 @@
 {
   "name": "babel-plugin-zova-bean-module",
   "version": "1.2.0",
-  "gitHead": "19504afb5d86e9c8a3ab865099813a2cef2493bb",
+  "gitHead": "f98cfc976a1569ca212000ced3f10f1a211bb97e",
   "description": "babel-plugin-zova-bean-module",
   "keywords": [
     "framework",
