@@ -1,7 +1,7 @@
 {
   "name": "zova-core",
   "version": "5.1.1",
-  "gitHead": "f98cfc976a1569ca212000ced3f10f1a211bb97e",
+  "gitHead": "a1b13b06e259e4447ab2f361ec76941810bc4ad7",
   "description": "A vue3 framework with ioc",
   "keywords": [
     "ioc",
