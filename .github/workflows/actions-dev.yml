@@ -2,7 +2,7 @@ name: actions-dev
 on:
   push:
     branches:
-      - main1
+      - main
 jobs:
   unittest:
     strategy:

@@ -2,7 +2,7 @@ name: actions-ui
 on:
   push:
     branches:
-      - main1
+      - main
 jobs:
   unittest:
     strategy:
