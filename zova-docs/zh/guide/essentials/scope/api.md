@@ -31,7 +31,7 @@ class ApiTest {
 }
 ```
 
-关于`$fetch`的用法，参见：[Fetch](../../techniques/fetch/introduction.md)
+关于`$fetch`的用法，参见：[Fetch](../../techniques/server-data/fetch.md)
 
 ## 使用Api
 

@@ -26,7 +26,7 @@ export class ModelTodo {
   - 为何不使用`$useQuery`方法？因为异步数据一般是在需要时才进行异步加载。因此我们需要确保在多次调用`select`方法时始终返回同一个 Query 对象，所以必须使用`$useStateData`方法
 - 传入 queryKey，确保本地缓存的唯一性
 - 传入 queryFn，在合适的时机调用此函数获取服务端数据
-  - service.todo.select：参见[Api服务](../../essentials/scope/service.md)
+  - service.todo.select：参见[Api服务](../../essentials/scope/api.md)
 
 ### 如何使用
 
