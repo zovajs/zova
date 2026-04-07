@@ -8,8 +8,8 @@ jobs:
     strategy:
       fail-fast: false
       matrix:
-        node-version: [18, 20]
-        project-template: ['empty', 'antdv', 'element', 'quasar', 'vuetify']
+        node-version: [24]
+        project-template: ['empty', 'quasar', 'vuetify']
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v2
@@ -26,10 +26,10 @@ jobs:
         run: pnpm install --force --no-frozen-lockfile
         working-directory: ${{ matrix.project-template }}-${{ matrix.node-version }}
       - name: suite
-        run: zova :create:suite test-demo --description --author
+        run: zova :create:suite test-demo
         working-directory: ${{ matrix.project-template }}-${{ matrix.node-version }}
       - name: module
-        run: zova :create:module test-demo --template=basic --suite=test-demo --description --author --ci
+        run: zova :create:module test-demo --suite=test-demo --ci
         working-directory: ${{ matrix.project-template }}-${{ matrix.node-version }}
       - name: pnpm install --force
         run: pnpm install --force --no-frozen-lockfile
