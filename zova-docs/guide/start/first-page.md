@@ -40,7 +40,7 @@ $ zova :create:page counter --module=demo-student
 Context menu - [Module Path]: `Zova Create/Page`
 :::
 
-Enter the page name `student` as prompted. The VSCode extension will automatically create the page code skeleton
+Enter the page name `counter` as prompted. The VSCode extension will automatically create the page code skeleton
 
 ## Page Path
 
