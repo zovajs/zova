@@ -1,7 +1,6 @@
 import type { IModuleRoute } from 'zova-module-a-router';
 
 import { ZPageComponent } from './.metadata/page/component.js';
-import { ZPageLegacy } from './.metadata/page/legacy.js';
 import { ZPageLocale } from './.metadata/page/locale.js';
 import { ZPagePinia } from './.metadata/page/pinia.js';
 import { ZPageRouteParams } from './.metadata/page/routeParams.js';
@@ -28,7 +27,6 @@ export const routes: IModuleRoute[] = [
     },
   },
   { path: 'routeQueryB', component: ZPageRouteQueryB },
-  { path: 'legacy', component: ZPageLegacy },
   {
     name: 'toolOne',
     path: 'toolOne/:id?',

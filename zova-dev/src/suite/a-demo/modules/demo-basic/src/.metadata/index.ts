@@ -71,7 +71,6 @@ export * from '../component/card/controller.jsx';
 export * from '../component/formFieldTest/controller.jsx';
 export * from '../component/tableCellTest/controller.jsx';
 export * from '../page/component/controller.jsx';
-export * from '../page/legacy/controller.jsx';
 export * from '../page/locale/controller.jsx';
 export * from '../page/pinia/controller.jsx';
 export * from '../page/routeParams/controller.jsx';
@@ -110,11 +109,6 @@ declare module 'zova-module-demo-basic' {
         }
 
         export interface ControllerPageComponent {
-          /** @internal */
-          get scope(): ScopeModuleDemoBasic;
-        }
-
-        export interface ControllerPageLegacy {
           /** @internal */
           get scope(): ScopeModuleDemoBasic;
         }
@@ -171,7 +165,6 @@ import { ControllerCard } from '../component/card/controller.jsx';
 import { ControllerFormFieldTest } from '../component/formFieldTest/controller.jsx';
 import { ControllerTableCellTest } from '../component/tableCellTest/controller.jsx';
 import { ControllerPageComponent } from '../page/component/controller.jsx';
-import { ControllerPageLegacy } from '../page/legacy/controller.jsx';
 import { ControllerPageLocale } from '../page/locale/controller.jsx';
 import { ControllerPagePinia } from '../page/pinia/controller.jsx';
 import { ControllerPageRouteParams } from '../page/routeParams/controller.jsx';
@@ -189,7 +182,6 @@ declare module 'zova' {
 'demo-basic.controller.formFieldTest': ControllerFormFieldTest;
 'demo-basic.controller.tableCellTest': ControllerTableCellTest;
 'demo-basic.controller.pageComponent': ControllerPageComponent;
-'demo-basic.controller.pageLegacy': ControllerPageLegacy;
 'demo-basic.controller.pageLocale': ControllerPageLocale;
 'demo-basic.controller.pagePinia': ControllerPagePinia;
 'demo-basic.controller.pageRouteParams': ControllerPageRouteParams;
@@ -204,7 +196,6 @@ declare module 'zova' {
 /** controller: end */
 /** pages: begin */
 export * from './page/component.js';
-export * from './page/legacy.js';
 export * from './page/locale.js';
 export * from './page/pinia.js';
 export * from './page/routeParams.js';
@@ -225,7 +216,6 @@ import 'zova';
 declare module 'zova-module-a-router' {
 export interface IPagePathRecord {
   '/demo/basic/component': TypePagePathSchema<undefined,undefined>;
-'/demo/basic/legacy': TypePagePathSchema<undefined,undefined>;
 '/demo/basic/locale': TypePagePathSchema<undefined,undefined>;
 '/demo/basic/pinia': TypePagePathSchema<undefined,undefined>;
 '/demo/basic/routeParams/:id?': TypePagePathSchema<NSControllerPageRouteParams.ParamsInput,NSControllerPageRouteParams.QueryInput>;

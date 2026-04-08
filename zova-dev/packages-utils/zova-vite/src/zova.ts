@@ -1,8 +1,6 @@
 import type { ZovaConfigMeta } from '@cabloy/module-info';
 import type { BuildEnvironmentOptions, CommonServerOptions } from 'vite';
 
-import path from 'node:path';
-
 import type { ZovaViteConfigOptions, ZovaViteConfigResult } from './types.ts';
 
 import { createConfigUtils } from './configUtils.ts';
@@ -26,9 +24,9 @@ export async function generateZovaViteMeta(configMeta: ZovaConfigMeta, configOpt
   // alias
   const alias = Object.assign(
     {},
-    {
-      '@': path.join(configOptions.appDir, 'src/legacy'),
-    },
+    // {
+    //   '@': path.join(configOptions.appDir, 'src/legacy'),
+    // },
   );
   // vitePlugins
   const vitePlugins = generateVitePlugins(configOptions, modulesMeta);

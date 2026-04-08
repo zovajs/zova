@@ -10,7 +10,6 @@ project
 │  │  ├── config
 │  │  │  ├── config
 │  │  │  └── locales.ts
-│  ├── legacy
 │  ├── module
 │  ├── module-vendor
 │  ├── suite
@@ -48,7 +47,6 @@ Zova has planned the modules/suites so that we can start business development im
 | env                                  | [Env](../../env-config/env/introduction.md)            |
 | src/front/config/config              | [Config](../../env-config/config/introduction.md)      |
 | src/front/config/locales.ts          | [I18n](../scope/locale.md)                             |
-| legacy                               | [Legacy Usage](../../vue/legacy.md)                    |
 | src/suite/a-home/modules/home-api    | [API](../../techniques/server-data/api.md)             |
 | src/suite/a-home/modules/home-base   | [Navigation Guards](../../page/navigation-guards.md)   |
 | src/suite/a-home/modules/home-icon   | [Icon](../../techniques/icon/icon-engine.md)           |

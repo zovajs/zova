@@ -14,7 +14,7 @@ import { CliInitConfig } from './bean/cli.init.config.ts';
 import { CliInitConstant } from './bean/cli.init.constant.ts';
 import { CliInitError } from './bean/cli.init.error.ts';
 import { CliInitIcon } from './bean/cli.init.icon.ts';
-import { CliInitLegacy } from './bean/cli.init.legacy.ts';
+// import { CliInitLegacy } from './bean/cli.init.legacy.ts';
 import { CliInitLib } from './bean/cli.init.lib.ts';
 import { CliInitLocale } from './bean/cli.init.locale.ts';
 import { CliInitMain } from './bean/cli.init.main.ts';
@@ -56,7 +56,7 @@ export const beans = {
   'init.constant': CliInitConstant,
   'init.locale': CliInitLocale,
   'init.error': CliInitError,
-  'init.legacy': CliInitLegacy,
+  // 'init.legacy': CliInitLegacy,
   'init.appMonkey': CliInitAppMonkey,
   'init.sysMonkey': CliInitSysMonkey,
   'init.monkey': CliInitMonkey,

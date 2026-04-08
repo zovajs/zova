@@ -14,7 +14,7 @@ import initConfig from './command/init.config.ts';
 import initConstant from './command/init.constant.ts';
 import initError from './command/init.error.ts';
 import initIcon from './command/init.icon.ts';
-import initLegacy from './command/init.legacy.ts';
+// import initLegacy from './command/init.legacy.ts';
 import initLib from './command/init.lib.ts';
 import initLocale from './command/init.locale.ts';
 import initMain from './command/init.main.ts';
@@ -62,7 +62,7 @@ export const commands = {
     constant: initConstant,
     locale: initLocale,
     error: initError,
-    legacy: initLegacy,
+    // legacy: initLegacy,
     appMonkey: initAppMonkey,
     sysMonkey: initSysMonkey,
     monkey: initMonkey,

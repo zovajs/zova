@@ -10,8 +10,6 @@ const __MenuItems = [
   { group: 'basic', title: 'Locale', caption: 'I18n', icon: '', link: '/demo/basic/locale' },
   { group: 'basic', title: 'CSS-in-JS', caption: 'Style & Theme', icon: '', link: '/demo/basic/style' },
   { group: 'basic', title: 'Pinia', caption: '', icon: '', link: '/demo/basic/pinia' },
-  { group: 'basic', title: 'Legacy Vue3', caption: '', icon: '', link: '/demo/basic/legacy' },
-  { group: 'basic', title: 'Legacy Vue3(2)', caption: '', icon: '', link: '/legacy/counter' },
   { group: 'business', title: 'Todo: CRUD', caption: 'Model: Unified Data Source', icon: '', link: '/todo' }, // link: '/demo/todo/todo',
   { group: 'zova', title: 'Docs', caption: 'zova.js.org', icon: ':social:school', external: true, link: 'https://zova.js.org' },
   { group: 'zova', title: 'GitHub', caption: 'github.com/cabloy', icon: ':social:github', external: true, link: 'https://github.com/cabloy/zova' },
