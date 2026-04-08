@@ -219,23 +219,21 @@ export function createConfigUtils(
 
   function _configManualChunk_vendorsModulesBegin() {
     const groups: any[] = [];
-    return groups;
-  }
-
-  function _configManualChunk_vendorsModulesEnd() {
-    const groups: any[] = [];
     if (process.env.BUILD_MINIFY === 'false') {
       groups.push({
         test: /\.zova\/config\.ts/,
         name: '-zova-config',
       });
     }
-    if (process.env.MOCK_ENABLED === 'true') {
-      groups.push({
-        test: /\.fake\.ts/,
-        name: '-zova-mock',
-      });
-    }
+    groups.push({
+      test: /\.fake\.ts/,
+      name: '-zova-mock',
+    });
+    return groups;
+  }
+
+  function _configManualChunk_vendorsModulesEnd() {
+    const groups: any[] = [];
     return groups;
   }
 
