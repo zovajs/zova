@@ -76,7 +76,7 @@
     "typescript": "^5.9.3",
     "unplugin-fonts": "^1.4.0",
     "vite": "^8.0.1",
-    "vite-plugin-fake-server-turbo": "^3.0.17",
+    "vite-plugin-fake-server-turbo": "^3.0.18",
     "vite-plugin-vuetify": "^2.1.2",
     "vue-tsc": "^3.2.4",
     "zova-openapi": "^1.1.2",
