@@ -29,6 +29,11 @@
   },
   "clean-package": {
     "indent": 2,
-    "remove": ["clean-package", "devDependencies", "exports.\\..import"]
+    "remove": [
+      "clean-package",
+      "devDependencies",
+      "exports.\\..import",
+      "exports.\\..types[0]"
+    ]
   }
 }

@@ -1,6 +1,7 @@
 {
   "name": "mutate-on-copy",
   "version": "1.1.2",
+  "gitHead": "a1b13b06e259e4447ab2f361ec76941810bc4ad7",
   "description": "mutate on copy",
   "keywords": [
     "framework",
@@ -45,8 +46,8 @@
       "clean-package",
       "devDependencies",
       "exports.\\..import",
+      "exports.\\..types[0]",
       "exports.\\..require"
     ]
-  },
-  "gitHead": "a1b13b06e259e4447ab2f361ec76941810bc4ad7"
+  }
 }
