@@ -1,6 +1,6 @@
 {
   "name": "zova-module-a-logger",
-  "version": "5.1.5",
+  "version": "5.1.6",
   "gitHead": "8cb2168b0a2607c216a4d9b81bc9e16088895fc5",
   "description": "",
   "keywords": [
@@ -35,7 +35,7 @@
     "postpack": "clean-package restore && npm run clean"
   },
   "dependencies": {
-    "@cabloy/logger": "^1.1.5"
+    "@cabloy/logger": "^1.1.6"
   },
   "devDependencies": {
     "clean-package": "^2.2.0",

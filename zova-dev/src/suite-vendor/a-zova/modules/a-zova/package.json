@@ -1,6 +1,6 @@
 {
   "name": "zova-module-a-zova",
-  "version": "5.1.8",
+  "version": "5.1.9",
   "gitHead": "8cb2168b0a2607c216a4d9b81bc9e16088895fc5",
   "description": "zova",
   "keywords": [
@@ -41,10 +41,10 @@
     "@cabloy/module-info": "^2.0.0",
     "@cabloy/utils": "^2.0.23",
     "@cabloy/vue-router": "^4.4.16",
-    "@cabloy/word-utils": "^2.1.5",
+    "@cabloy/word-utils": "^2.1.6",
     "defu": "^6.1.4",
     "luxon": "^3.7.2",
-    "zova-jsx": "^1.1.6"
+    "zova-jsx": "^1.1.7"
   },
   "devDependencies": {
     "@cabloy/cli": "^3.0.105",
@@ -52,7 +52,7 @@
     "clean-package": "^2.2.0",
     "fs-extra": "^11.3.4",
     "rimraf": "^6.0.1",
-    "zova-openapi": "^1.1.5"
+    "zova-openapi": "^1.1.6"
   },
   "clean-package": {
     "indent": 2,
