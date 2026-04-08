@@ -56,9 +56,11 @@
   },
   "clean-package": {
     "indent": 2,
+    "replace": {
+      "exports.\\..types": "./dist/index.d.ts"
+    },
     "remove": [
       "clean-package",
-      "exports.\\..types[0]",
       "exports.\\..import"
     ]
   },

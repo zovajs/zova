@@ -29,11 +29,9 @@
   },
   "clean-package": {
     "indent": 2,
-    "remove": [
-      "clean-package",
-      "devDependencies",
-      "exports.\\..types[0]",
-      "exports.\\..import"
-    ]
+    "replace": {
+      "exports.\\..types": "./dist/index.d.ts"
+    },
+    "remove": ["clean-package", "devDependencies", "exports.\\..import"]
   }
 }
