@@ -72,7 +72,6 @@ export async function generateEntryFiles(
     const vars = {
       sysMonkey: fse.existsSync(path.join(configOptions.appDir, 'src/front/config/monkeySys.ts')),
       appMonkey: fse.existsSync(path.join(configOptions.appDir, 'src/front/config/monkey.ts')),
-      // legacy: fse.existsSync(path.join(configOptions.appDir, 'src/legacy')),
     };
     // src
     const files = ['controller.tsx_', 'utils.ts_'];
