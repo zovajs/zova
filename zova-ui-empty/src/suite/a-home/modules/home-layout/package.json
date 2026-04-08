@@ -43,8 +43,8 @@
     "remove": [
       "clean-package",
       "devDependencies",
-      "exports.\\..import",
-      "exports.\\..types[0]"
+      "exports.\\..types[0]",
+      "exports.\\..import"
     ]
   },
   "title": "home-layout"

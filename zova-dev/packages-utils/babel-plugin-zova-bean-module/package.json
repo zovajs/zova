@@ -52,8 +52,8 @@
     "remove": [
       "clean-package",
       "devDependencies",
-      "exports.\\..import",
       "exports.\\..types[0]",
+      "exports.\\..import",
       "exports.\\..require"
     ]
   }
