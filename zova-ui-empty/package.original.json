@@ -60,7 +60,7 @@
     "sass": "^1.77.5",
     "typescript": "^5.9.3",
     "vite": "^7.3.1",
-    "vite-plugin-fake-server-turbo": "^3.0.15",
+    "vite-plugin-fake-server-turbo": "^3.0.17",
     "vue-tsc": "^3.2.4",
     "zova-openapi": "^1.1.2",
     "zova-vite": "^1.1.3"
