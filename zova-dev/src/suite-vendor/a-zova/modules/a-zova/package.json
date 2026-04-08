@@ -58,7 +58,8 @@
     "indent": 2,
     "remove": [
       "clean-package",
-      "exports.\\..import"
+      "exports.\\..import",
+      "exports.\\..types[0]"
     ]
   },
   "title": "a-zova",

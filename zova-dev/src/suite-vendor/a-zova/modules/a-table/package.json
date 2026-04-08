@@ -1,6 +1,7 @@
 {
   "name": "zova-module-a-table",
   "version": "5.1.2",
+  "gitHead": "a1b13b06e259e4447ab2f361ec76941810bc4ad7",
   "description": "",
   "keywords": [
     "Zova Module"
@@ -48,7 +49,8 @@
     "remove": [
       "clean-package",
       "devDependencies",
-      "exports.\\..import"
+      "exports.\\..import",
+      "exports.\\..types[0]"
     ]
   },
   "title": "a-table",
@@ -77,6 +79,5 @@
         "metadataCustom": "tableCell/metadata/generate.ts"
       }
     }
-  },
-  "gitHead": "a1b13b06e259e4447ab2f361ec76941810bc4ad7"
+  }
 }

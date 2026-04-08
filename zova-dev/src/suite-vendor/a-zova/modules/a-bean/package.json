@@ -1,6 +1,7 @@
 {
   "name": "zova-module-a-bean",
   "version": "5.1.2",
+  "gitHead": "a1b13b06e259e4447ab2f361ec76941810bc4ad7",
   "description": "",
   "keywords": [
     "Zova Module"
@@ -47,7 +48,8 @@
     "remove": [
       "clean-package",
       "devDependencies",
-      "exports.\\..import"
+      "exports.\\..import",
+      "exports.\\..types[0]"
     ]
   },
   "title": "a-bean",
@@ -115,6 +117,5 @@
       }
     },
     "dependencies": {}
-  },
-  "gitHead": "a1b13b06e259e4447ab2f361ec76941810bc4ad7"
+  }
 }

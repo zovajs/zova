@@ -43,7 +43,8 @@
     "remove": [
       "clean-package",
       "devDependencies",
-      "exports.\\..import"
+      "exports.\\..import",
+      "exports.\\..types[0]"
     ]
   },
   "title": "basic-adapter",
