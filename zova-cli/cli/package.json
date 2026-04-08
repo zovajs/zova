@@ -1,6 +1,6 @@
 {
   "name": "zova-cli",
-  "version": "1.2.13",
+  "version": "1.2.14",
   "gitHead": "f3ee206cee7d9b738f6603531beeec0bfa46ffa6",
   "description": "zova cli",
   "keywords": [
@@ -47,7 +47,7 @@
     "@cabloy/process-helper": "^3.0.0",
     "fs-extra": "^11.2.0",
     "semver": "^7.6.2",
-    "zova-cli-set-front": "^1.2.13"
+    "zova-cli-set-front": "^1.2.14"
   },
   "devDependencies": {
     "clean-package": "^2.2.0",

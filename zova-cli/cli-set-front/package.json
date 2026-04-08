@@ -1,6 +1,6 @@
 {
   "name": "zova-cli-set-front",
-  "version": "1.2.13",
+  "version": "1.2.14",
   "gitHead": "f3ee206cee7d9b738f6603531beeec0bfa46ffa6",
   "description": "zova cli-set-front",
   "keywords": [
@@ -48,14 +48,14 @@
     "@cabloy/utils": "^2.0.21",
     "@cabloy/vite-plugin-babel": "^1.3.3",
     "@cabloy/vue-babel-plugin-jsx": "^2.0.1",
-    "@cabloy/word-utils": "^2.1.4",
+    "@cabloy/word-utils": "^2.1.5",
     "@typescript/native-preview": "^7.0.0-dev.20260320.1",
     "@vitejs/plugin-vue-jsx": "^5.1.5",
     "babel-plugin-transform-typescript-metadata": "^0.4.0",
-    "babel-plugin-zova-bean-module": "^1.2.4",
-    "babel-plugin-zova-bean-use": "^1.1.4",
-    "babel-plugin-zova-behavior": "^1.1.4",
-    "babel-plugin-zova-component": "^1.1.4",
+    "babel-plugin-zova-bean-module": "^1.2.5",
+    "babel-plugin-zova-bean-use": "^1.1.5",
+    "babel-plugin-zova-behavior": "^1.1.5",
+    "babel-plugin-zova-component": "^1.1.5",
     "compressing": "^1.10.0",
     "fs-extra": "^11.2.0",
     "globby": "^14.1.0",
@@ -68,8 +68,8 @@
     "typescript": "^5.9.3",
     "urllib": "^4.6.11",
     "vite": "^8.0.2",
-    "zova-openapi": "^1.1.4",
-    "zova-vite": "^1.1.9"
+    "zova-openapi": "^1.1.5",
+    "zova-vite": "^1.1.10"
   },
   "devDependencies": {
     "clean-package": "^2.2.0",
