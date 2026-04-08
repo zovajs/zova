@@ -4,10 +4,6 @@ Zova provides the `Model` mechanism in the MVC architecture, encapsulating unifi
 
 The base of Zova Model is [TanStack Query](https://tanstack.com/query/latest/docs/framework/vue/overview). `TanStack Query` provides powerful data acquisition, caching and update capabilities. Zova encapsulates a very simple usage paradigm based on TanStack Query, which makes it very easy to get started. However, it is still recommended that you read the documentation for TanStack Query. If you have not used similar data management mechanisms, then you will definitely be impressed by the thought
 
-## Demo Online
-
-- [Todo: CRUD](https://zova.js.org/zova-demo/#/demo/todo/todo)
-
 ## Four types of global state data
 
 In actual development, you will encounter four types of global state data: `asynchronous data (usually from the server)` and `synchronous data`, while `synchronous data` is divided into three types: `localstorage`, `cookie`, and `memory`. In the traditional Vue3, different mechanisms are used to handle these state data, while only a unified `Model` mechanism is needed in Zova

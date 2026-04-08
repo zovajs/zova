@@ -12,7 +12,7 @@ hero:
       link: /zh/guide/start/introduction
     - theme: alt
       text: 演示
-      link: https://zova.js.org/zova-demo/
+      link: https://cabloy.com/admin
     - theme: alt
       text: GitHub
       link: https://github.com/zovajs/zova
