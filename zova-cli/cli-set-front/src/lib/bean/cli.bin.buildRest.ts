@@ -9,6 +9,24 @@ import { rimraf } from 'rimraf';
 import { build } from 'tsdown';
 import { createConfigUtils } from 'zova-vite';
 
+function svgResolverPlugin() {
+  return {
+    name: 'svg-resolver',
+    resolveId: {
+      filter: { id: /\.svg$/ },
+      handler(source, importer) {
+        return path.resolve(path.dirname(importer), source);
+      },
+    },
+    load: {
+      filter: { id: /\.svg$/ },
+      handler(_id) {
+        return 'export default {};';
+      },
+    },
+  };
+}
+
 const __template_package = `{
   "name": "{{Name}}",
   "version": "{{Version}}",
@@ -94,6 +112,7 @@ export class CliBinBuildRest extends BeanCliBase {
         eager: true,
         tsconfig: 'tsconfig.rest.json',
       },
+      plugins: [svgResolverPlugin()],
     });
     // package.json
     await fse.copyFile(path.join(srcDir, 'package.json'), path.join(outDir, 'package.json'));
