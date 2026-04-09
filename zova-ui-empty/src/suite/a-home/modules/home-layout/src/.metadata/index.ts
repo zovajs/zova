@@ -1,4 +1,4 @@
-/* eslint-disable */
+// eslint-disable
 /** model: begin */
 export * from '../model/menu.js';
 import { IModelOptionsMenu } from '../model/menu.js';

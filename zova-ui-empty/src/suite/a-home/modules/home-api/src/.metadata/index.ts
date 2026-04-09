@@ -1,4 +1,4 @@
-/* eslint-disable */
+// eslint-disable
 /** api: begin */
 export * from '../api/captcha.js';
 export * from '../api/home.js';
