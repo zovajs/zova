@@ -1,8 +1,7 @@
 import type { TypeRenderComponentJsxPropsPublic } from 'zova-jsx';
-
-import type { ControllerWrapperFilterProps } from '../../src/component/wrapperFilter/controller.jsx';
+import type { ControllerWrapperFilterProps } from 'zova-module-basic-restpage';
 
 type TypeControllerWrapperFilterPublicProps = TypeRenderComponentJsxPropsPublic & ControllerWrapperFilterProps;
-export function ZZBasicRestpageWrapperFilter(_props: TypeControllerWrapperFilterPublicProps) {
+export function BBZBasicRestpageWrapperFilter(_props: TypeControllerWrapperFilterPublicProps) {
   return 'basic-restpage:wrapperFilter';
 }

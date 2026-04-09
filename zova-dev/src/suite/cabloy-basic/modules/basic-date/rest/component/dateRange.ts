@@ -1,7 +1,6 @@
 import type { TypePropUpdateFromModel, TypePropValueFromModel } from 'zova';
 import type { TypeRenderComponentJsxPropsPublic } from 'zova-jsx';
-
-import type { ControllerDateRangeModels, ControllerDateRangeProps } from '../../src/component/dateRange/controller.jsx';
+import type { ControllerDateRangeModels, ControllerDateRangeProps } from 'zova-module-basic-date';
 
 type TypeControllerDateRangePublicProps = TypeRenderComponentJsxPropsPublic &
   ControllerDateRangeProps &
@@ -10,6 +9,6 @@ type TypeControllerDateRangePublicProps = TypeRenderComponentJsxPropsPublic &
   } & {
     [KEY in keyof ControllerDateRangeModels as TypePropUpdateFromModel<KEY>]: (value: ControllerDateRangeModels[KEY]) => void;
   };
-export function ZZBasicDateRange(_props: TypeControllerDateRangePublicProps) {
+export function BBZBasicDateRange(_props: TypeControllerDateRangePublicProps) {
   return 'basic-date:dateRange';
 }

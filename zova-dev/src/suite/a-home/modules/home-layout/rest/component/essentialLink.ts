@@ -1,8 +1,7 @@
 import type { TypeRenderComponentJsxPropsPublic } from 'zova-jsx';
-
-import type { ControllerEssentialLinkProps } from '../../src/component/essentialLink/controller.jsx';
+import type { ControllerEssentialLinkProps } from 'zova-module-home-layout';
 
 type TypeControllerEssentialLinkPublicProps = TypeRenderComponentJsxPropsPublic & ControllerEssentialLinkProps;
-export function ZZHomeLayoutEssentialLink(_props: TypeControllerEssentialLinkPublicProps) {
+export function BBZHomeLayoutEssentialLink(_props: TypeControllerEssentialLinkPublicProps) {
   return 'home-layout:essentialLink';
 }

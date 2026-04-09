@@ -1,1 +1,0 @@
-import { NSControllerPageItem as NSDemoTodoControllerPageItem } from '../src/suite/a-demo/modules/demo-todo/src/.metadata/page/item.js';

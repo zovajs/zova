@@ -1,6 +1,6 @@
-import type { ITableCellOptionsTest } from '../../src/bean/tableCell.test.jsx';
+import type { ITableCellOptionsTest } from 'zova-module-demo-basic';
 
-export function TTDemoBasicTest(
+export function BBTDemoBasicTest(
   _props: ITableCellOptionsTest,
 ) {
   return 'demo-basic.tableCell.test';

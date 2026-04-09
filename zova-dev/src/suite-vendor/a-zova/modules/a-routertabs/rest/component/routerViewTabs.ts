@@ -1,8 +1,7 @@
 import type { TypeRenderComponentJsxPropsPublic } from 'zova-jsx';
-
-import type { ControllerRouterViewTabsProps } from '../../src/component/routerViewTabs/controller.jsx';
+import type { ControllerRouterViewTabsProps } from 'zova-module-a-routertabs';
 
 type TypeControllerRouterViewTabsPublicProps = TypeRenderComponentJsxPropsPublic & ControllerRouterViewTabsProps;
-export function ZZRoutertabsRouterViewTabs(_props: TypeControllerRouterViewTabsPublicProps) {
+export function BBZRoutertabsRouterViewTabs(_props: TypeControllerRouterViewTabsPublicProps) {
   return 'a-routertabs:routerViewTabs';
 }

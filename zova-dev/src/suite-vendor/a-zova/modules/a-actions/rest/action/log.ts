@@ -1,7 +1,7 @@
 import type { TypeActionOptionsRest } from 'zova-module-a-action';
-import type { IActionOptionsLog } from '../../src/bean/action.log.jsx';
+import type { IActionOptionsLog } from 'zova-module-a-actions';
 
-export function AAActionsLog(
+export function BBAActionsLog(
   _props: TypeActionOptionsRest<IActionOptionsLog>,
 ) {
   return 'a-actions:log';

@@ -1,6 +1,6 @@
-import type { ITableCellOptionsActionView } from '../../src/bean/tableCell.actionView.jsx';
+import type { ITableCellOptionsActionView } from 'zova-module-basic-table';
 
-export function TTBasicTableActionView(
+export function BBTBasicTableActionView(
   _props: ITableCellOptionsActionView,
 ) {
   return 'basic-table.tableCell.actionView';

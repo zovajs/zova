@@ -1,5 +1,0 @@
-import { NSControllerPageRouteParams as NSDemoBasicControllerPageRouteParams } from '../src/suite/a-demo/modules/demo-basic/src/.metadata/page/routeParams.js';
-import { NSControllerPageRouteQuery as NSDemoBasicControllerPageRouteQuery } from '../src/suite/a-demo/modules/demo-basic/src/.metadata/page/routeQuery.js';
-import { NSControllerPageRouteQueryB as NSDemoBasicControllerPageRouteQueryB } from '../src/suite/a-demo/modules/demo-basic/src/.metadata/page/routeQueryB.js';
-import { NSControllerPageToolOne as NSDemoBasicControllerPageToolOne } from '../src/suite/a-demo/modules/demo-basic/src/.metadata/page/toolOne.js';
-import { NSControllerPageToolTwo as NSDemoBasicControllerPageToolTwo } from '../src/suite/a-demo/modules/demo-basic/src/.metadata/page/toolTwo.js';

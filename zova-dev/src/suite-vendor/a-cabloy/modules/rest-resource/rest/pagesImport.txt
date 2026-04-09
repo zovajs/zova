@@ -1,3 +1,0 @@
-import { NSControllerPageEntry as NSRestResourceControllerPageEntry } from '../src/suite-vendor/a-cabloy/modules/rest-resource/src/.metadata/page/entry.js';
-import { NSControllerPageEntryCreate as NSRestResourceControllerPageEntryCreate } from '../src/suite-vendor/a-cabloy/modules/rest-resource/src/.metadata/page/entryCreate.js';
-import { NSControllerPageResource as NSRestResourceControllerPageResource } from '../src/suite-vendor/a-cabloy/modules/rest-resource/src/.metadata/page/resource.js';

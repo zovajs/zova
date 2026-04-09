@@ -1,8 +1,7 @@
 import type { TypeRenderComponentJsxPropsPublic } from 'zova-jsx';
-
-import type { ControllerBehaviorProps } from '../../src/component/behavior/controller.jsx';
+import type { ControllerBehaviorProps } from 'zova-module-a-behavior';
 
 type TypeControllerBehaviorPublicProps = TypeRenderComponentJsxPropsPublic & ControllerBehaviorProps;
-export function ZZBehavior(_props: TypeControllerBehaviorPublicProps) {
+export function BBZBehavior(_props: TypeControllerBehaviorPublicProps) {
   return 'a-behavior:behavior';
 }

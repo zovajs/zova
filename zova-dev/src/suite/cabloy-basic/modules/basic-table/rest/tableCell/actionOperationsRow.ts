@@ -1,6 +1,6 @@
-import type { ITableCellOptionsActionOperationsRow } from '../../src/bean/tableCell.actionOperationsRow.jsx';
+import type { ITableCellOptionsActionOperationsRow } from 'zova-module-basic-table';
 
-export function TTBasicTableActionOperationsRow(
+export function BBTBasicTableActionOperationsRow(
   _props: ITableCellOptionsActionOperationsRow,
 ) {
   return 'basic-table.tableCell.actionOperationsRow';

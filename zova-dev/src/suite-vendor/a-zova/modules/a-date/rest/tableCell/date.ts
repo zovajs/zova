@@ -1,6 +1,6 @@
-import type { ITableCellOptionsDate } from '../../src/bean/tableCell.date.jsx';
+import type { ITableCellOptionsDate } from 'zova-module-a-date';
 
-export function TTDate(
+export function BBTDate(
   _props: ITableCellOptionsDate,
 ) {
   return 'a-date.tableCell.date';

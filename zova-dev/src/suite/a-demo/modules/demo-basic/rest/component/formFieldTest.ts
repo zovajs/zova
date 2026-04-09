@@ -1,8 +1,7 @@
 import type { TypeRenderComponentJsxPropsPublic } from 'zova-jsx';
-
-import type { ControllerFormFieldTestProps } from '../../src/component/formFieldTest/controller.jsx';
+import type { ControllerFormFieldTestProps } from 'zova-module-demo-basic';
 
 type TypeControllerFormFieldTestPublicProps = TypeRenderComponentJsxPropsPublic & ControllerFormFieldTestProps;
-export function FFDemoBasicTest(_props: TypeControllerFormFieldTestPublicProps) {
+export function BBFDemoBasicTest(_props: TypeControllerFormFieldTestPublicProps) {
   return 'demo-basic:formFieldTest';
 }

@@ -1,2 +1,0 @@
-'/demo/todo/item/:id': TypePagePathSchema<NSDemoTodoControllerPageItem.ParamsInput,NSDemoTodoControllerPageItem.QueryInput>;
-'/demo/todo/todo': TypePagePathSchema<undefined,undefined>;
