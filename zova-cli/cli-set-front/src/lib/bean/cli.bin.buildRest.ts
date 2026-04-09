@@ -106,13 +106,14 @@ export class CliBinBuildRest extends BeanCliBase {
       outDir,
       tsconfig: 'tsconfig.rest.json',
       dts: {
-        resolve: true,
+        // resolve: true,
         resolver: 'tsc',
         tsgo: true,
         eager: true,
         tsconfig: 'tsconfig.rest.json',
       },
       plugins: [svgResolverPlugin()],
+      deps: { neverBundle: ['zova-module-a-icon'] },
     });
     // package.json
     await fse.copyFile(path.join(srcDir, 'package.json'), path.join(outDir, 'package.json'));

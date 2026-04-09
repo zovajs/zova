@@ -64,7 +64,7 @@
     "rolldown": "^1.0.0-rc.11",
     "rolldown-plugin-dts": "^0.22.5",
     "svgo": "^3.2.0",
-    "tsdown": "^0.18.3",
+    "tsdown": "^0.21.7",
     "typescript": "^5.9.3",
     "urllib": "^4.6.11",
     "vite": "^8.0.2",
