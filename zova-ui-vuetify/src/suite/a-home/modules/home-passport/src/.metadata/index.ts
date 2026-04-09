@@ -1,4 +1,4 @@
-/* eslint-disable */
+// eslint-disable
 /** model: begin */
 export * from '../model/passport.js';
 import { IModelOptionsPassport } from '../model/passport.js';

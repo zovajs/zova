@@ -1,8 +1,7 @@
 import type { TypeRenderComponentJsxPropsPublic } from 'zova-jsx';
-
-import type { ControllerItemLinkProps } from '../../src/component/itemLink/controller.jsx';
+import type { ControllerItemLinkProps } from 'zova-module-home-base';
 
 type TypeControllerItemLinkPublicProps = TypeRenderComponentJsxPropsPublic & ControllerItemLinkProps;
-export function ZZHomeBaseItemLink(_props: TypeControllerItemLinkPublicProps) {
+export function BBZHomeBaseItemLink(_props: TypeControllerItemLinkPublicProps) {
   return 'home-base:itemLink';
 }

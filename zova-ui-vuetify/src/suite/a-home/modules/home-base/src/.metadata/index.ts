@@ -1,4 +1,4 @@
-/* eslint-disable */
+// eslint-disable
 /** service: begin */
 export * from '../service/locale.js';
 export * from '../service/routerGuards.js';
