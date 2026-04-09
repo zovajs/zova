@@ -7,7 +7,10 @@ import fse from 'fs-extra';
 import path from 'node:path';
 import { rimraf } from 'rimraf';
 import { build } from 'tsdown';
-import { createConfigUtils } from 'zova-vite';
+import yaml from 'yaml';
+import { createConfigUtils, saveJSONFile } from 'zova-vite';
+
+import { loadJSONFile } from '../common/utils.ts';
 
 function svgResolverPlugin() {
   return {
@@ -109,7 +112,6 @@ export class CliBinBuildRest extends BeanCliBase {
 
   async _build({ projectPath, flavor, bundleNameCopy, srcDir, outDir }: IBinBuildRestContext) {
     const bundleModules = this._prepareBundleModules();
-    const externals = {};
     // entry
     const entry = path.join(srcDir, 'index.ts');
     // build
@@ -129,14 +131,18 @@ export class CliBinBuildRest extends BeanCliBase {
       deps: {
         alwaysBundle: (id: string) => {
           if (bundleModules.includes(id)) return true;
-          externals[id] = true;
           return false;
         },
       },
     });
-    console.log('externals:', externals);
+    // deps
+    const deps = await _extractDeps(path.join(outDir, 'index.d.mts'));
+    const depsVersion = await _extractDepsVersion(projectPath, deps);
     // package.json
-    await fse.copyFile(path.join(srcDir, 'package.json'), path.join(outDir, 'package.json'));
+    const pkgContent = await loadJSONFile(path.join(srcDir, 'package.json'));
+    pkgContent.dependencies = depsVersion;
+    await saveJSONFile(path.join(outDir, 'package.json'), pkgContent);
+    // await fse.copyFile(path.join(srcDir, 'package.json'), path.join(outDir, 'package.json'));
     // release
     const outReleasesDir = path.join(projectPath, 'dist-releases', `rest-${flavor}-${process.env.APP_VERSION}`);
     await fse.copy(outDir, outReleasesDir);
@@ -239,4 +245,69 @@ function _copyToTarget(outDir: string, target: string | undefined, bundleNameCop
     fse.removeSync(outReleasesDirCopy);
     fse.copySync(outDir, outReleasesDirCopy, { preserveTimestamps: true });
   }
+}
+
+async function _extractDeps(filePath: string): Promise<string[]> {
+  let content = (await fse.readFile(filePath)).toString();
+  const pos = content.indexOf('//#region');
+  content = content.substring(0, pos);
+  const packageNames = new Set();
+  const re = /import\s+[\s\S]*?\s+from\s+['"]([^'"]+)['"]/g;
+
+  let match: any;
+  while (true) {
+    match = re.exec(content);
+    if (!match) break;
+    let pkg: string = match[1];
+    if (pkg.startsWith('.') || pkg.startsWith('/')) continue;
+    if (pkg.startsWith('@')) {
+      if (pkg.split('/').length > 2) {
+        pkg = pkg.split('/').slice(0, 2).join('/');
+      }
+    } else {
+      if (pkg.split('/').length > 1) {
+        pkg = pkg.split('/').slice(0, 1).join('/');
+      }
+    }
+    packageNames.add(pkg);
+  }
+  return Array.from(packageNames).sort() as string[];
+}
+
+async function _extractDepsVersion(projectPath: string, deps: string[]) {
+  const lockfilePath = path.join(projectPath, 'pnpm-lock.yaml');
+  const lockfileContent = (await fse.readFile(lockfilePath)).toString();
+  const parsedLockfile = yaml.parse(lockfileContent);
+  const depsVersion = {};
+  for (const dep of deps) {
+    let version = getPackageVersionFromLock(parsedLockfile, dep);
+    if (!version) {
+      version = await getPackageVersionFromNodeModules(projectPath, dep);
+    }
+    if (!version) {
+      console.warn('dep version not found: ', dep);
+      continue;
+    }
+    depsVersion[dep] = `^${version}`;
+  }
+  return depsVersion;
+}
+
+function getPackageVersionFromLock(parsedLockfile: any, packageName: string) {
+  const packages = parsedLockfile.packages || {};
+
+  for (const key in packages) {
+    if (key.startsWith(`${packageName}@`)) {
+      return key.substring(`${packageName}@`.length);
+    }
+  }
+
+  return null;
+}
+
+async function getPackageVersionFromNodeModules(projectPath: string, packageName: string) {
+  const pkgFile = path.join(projectPath, 'node_modules', packageName, 'package.json');
+  if (!fse.existsSync(pkgFile)) return null;
+  const pkgContent = await loadJSONFile(pkgFile);
+  return pkgContent.version;
 }
