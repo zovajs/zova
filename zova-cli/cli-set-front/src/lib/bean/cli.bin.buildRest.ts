@@ -167,18 +167,27 @@ export class CliBinBuildRest extends BeanCliBase {
   }
 
   async _prepareResourcesIndex({ srcDir }: IBinBuildRestContext) {
-    let indexContent = '';
+    let indexContent = `export type { IIconRecord } from 'zova-module-a-icon';
+export type { IPagePathRecord } from 'zova-module-a-router';
+`;
     indexContent += await this._prepareResourcesIndex_rest(srcDir);
     indexContent += await this._prepareResourcesIndex_icons(srcDir);
-    indexContent += await this._prepareResourcesIndex_pages(srcDir);
     await fse.writeFile(path.join(srcDir, 'index.ts'), indexContent);
   }
 
   async _prepareResourcesIndex_rest(srcDir: string) {
     let content = '';
     for (const module of this.modulesMeta.modulesArray) {
-      const restIndexFile = path.join(module.root, 'rest/index.ts');
-      if (!fse.existsSync(restIndexFile)) continue;
+      const restDir = path.join(module.root, 'rest');
+      if (!fse.existsSync(restDir)) continue;
+      let tempDir;
+      if (module.info.node_modules) {
+        tempDir = path.join(srcDir, 'modules', module.info.relativeName);
+        await fse.copyFile(restDir, tempDir);
+      } else {
+        tempDir = module.root;
+      }
+      const restIndexFile = path.join(tempDir, 'index.ts');
       const restIndexFileRelative = path.relative(srcDir, restIndexFile);
       content += `export * from '${restIndexFileRelative}';\n`;
     }
@@ -186,53 +195,10 @@ export class CliBinBuildRest extends BeanCliBase {
   }
 
   async _prepareResourcesIndex_icons(_srcDir: string) {
-    let content = '';
-    for (const module of this.modulesMeta.modulesArray) {
-      const restIconsFile = path.join(module.root, 'rest/icons.txt');
-      if (!fse.existsSync(restIconsFile)) continue;
-      const contentIcons = (await fse.readFile(restIconsFile)).toString();
-      content += `${contentIcons}\n`;
-    }
-    if (content) {
-      content = `export interface IIconRecord {
-${content}
-}
-export function $iconName<K extends keyof IIconRecord>(name: K): any {
+    const content = `export function $iconName<K extends keyof IIconRecord>(name: K): any {
   return name;
 }
 `;
-    }
-    return content;
-  }
-
-  async _prepareResourcesIndex_pages(_srcDir: string) {
-    let contentImport = '';
-    let contentRecord = '';
-    for (const module of this.modulesMeta.modulesArray) {
-      const restPagesRecordFile = path.join(module.root, 'rest/pagesRecord.txt');
-      if (!fse.existsSync(restPagesRecordFile)) continue;
-      const restPagesImportFile = path.join(module.root, 'rest/pagesImport.txt');
-      const contentPagesImport = (await fse.readFile(restPagesImportFile)).toString();
-      const contentPagesRecord = (await fse.readFile(restPagesRecordFile)).toString();
-      contentImport += `${contentPagesImport}\n`;
-      contentRecord += `${contentPagesRecord}\n`;
-    }
-    let content = '';
-    if (contentRecord) {
-      content = `${contentImport}
-export interface TypePagePathSchema<PARAMS = unknown, QUERY = unknown> {
-  params?: PARAMS;
-  query?: QUERY;
-}
-export interface IPagePathRecord {
-${contentRecord}
-'/': TypePagePathSchema<undefined,undefined>;
-presetLogin: TypePagePathSchema<undefined,undefined>;
-presetErrorExpired: TypePagePathSchema<undefined,undefined>;
-presetResource: TypePagePathSchema<undefined,undefined>;
-}
-`;
-    }
     return content;
   }
 }
