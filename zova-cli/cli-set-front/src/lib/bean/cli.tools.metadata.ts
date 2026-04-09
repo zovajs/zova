@@ -3,6 +3,7 @@ import { getOnionMetasMeta, getOnionScenesMeta } from '@cabloy/module-info';
 import { toUpperCaseFirstChar } from '@cabloy/word-utils';
 import fse from 'fs-extra';
 import path from 'node:path';
+import { rimraf } from 'rimraf';
 
 import { loadJSONFile, saveJSONFile } from '../common/utils.ts';
 import { generateBeanGenerals } from './toolsMetadata/generateBeanGenerals.ts';
@@ -60,6 +61,9 @@ export class CliToolsMetadata extends BeanCliBase {
       // do nothing
       return;
     }
+    // rest
+    await rimraf(path.join(modulePath, 'rest'));
+    // metaDir
     await this.helper.ensureDir(metaDir);
     // relativeNameCapitalize
     const relativeNameCapitalize = this.helper.stringToCapitalize(moduleName, '-');

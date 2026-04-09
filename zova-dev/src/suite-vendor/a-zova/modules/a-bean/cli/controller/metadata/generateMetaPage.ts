@@ -8,6 +8,8 @@ import path from 'node:path';
 
 import type { IControllerInfo } from './types.ts';
 
+import { generateRestIndex } from './utils.ts';
+
 export async function generateMetaPage(options: IMetadataCustomGenerateOptions, globFiles: [IGlobBeanFile, IControllerInfo][]) {
   if (globFiles.length === 0) return '';
   const { moduleName } = options;
@@ -113,15 +115,16 @@ declare module 'zova-module-${moduleName}' {
   return content;
 }
 
-async function generateRestMetaPage(options: IMetadataCustomGenerateOptions, contentImportsRest: string[], contentPathRecordsRest: string[]) {
+async function generateRestMetaPage(options: IMetadataCustomGenerateOptions, _contentImportsRest: string[], contentPathRecordsRest: string[]) {
   if (contentPathRecordsRest.length === 0) return;
-  const { modulePath } = options;
-  const contentPagesImport = contentImportsRest.join('\n');
-  const filePagesImport = path.join(modulePath, 'rest/pagesImport.txt');
-  await fse.outputFile(filePagesImport, contentPagesImport);
-  const contentPagesRecord = contentPathRecordsRest.join('\n');
-  const filePagesRecord = path.join(modulePath, 'rest/pagesRecord.txt');
-  await fse.outputFile(filePagesRecord, contentPagesRecord);
+  const { moduleName, modulePath } = options;
+  // pages
+  const contentPages = `import 'zova-module-${moduleName}';\n`;
+  const filePages = path.join(modulePath, 'rest/pages.ts');
+  await fse.outputFile(filePages, contentPages);
+  // index
+  const exportIndexContent = "export * from './pages.js';";
+  await generateRestIndex(options, modulePath, exportIndexContent);
 }
 
 function _combineModuleNameControllerName(moduleName: string, className: string) {
