@@ -6,7 +6,6 @@ import { prepareComponentOptions, useController } from 'zova';
 import type { ControllerItemLinkProps } from '../../component/itemLink/controller.jsx';
 
 import { ControllerItemLink } from '../../component/itemLink/controller.jsx';
-
 export type TypeControllerItemLinkPublicProps = {
   controllerRef?: (ref: ControllerItemLink) => void;
 } & ControllerItemLinkProps;

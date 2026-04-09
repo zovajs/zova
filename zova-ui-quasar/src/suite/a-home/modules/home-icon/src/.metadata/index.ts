@@ -1,4 +1,4 @@
-/* eslint-disable */
+// eslint-disable
 /** icons: begin */
 import icon_auth from './icons/groups/auth.svg';
 import icon_business from './icons/groups/business.svg';

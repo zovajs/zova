@@ -1,4 +1,4 @@
-/* eslint-disable */
+// eslint-disable
 /** model: begin */
 export * from '../model/layout.js';
 export * from '../model/menu.js';

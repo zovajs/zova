@@ -1,4 +1,4 @@
-/* eslint-disable */
+// eslint-disable
 /** model: begin */
 export * from '../model/theme.js';
 import { IModelOptionsTheme } from '../model/theme.js';
