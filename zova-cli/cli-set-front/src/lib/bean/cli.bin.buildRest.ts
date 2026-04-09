@@ -97,7 +97,20 @@ export class CliBinBuildRest extends BeanCliBase {
     await this._prepareResourcesIndex(context);
   }
 
+  _prepareBundleModules() {
+    const modules: string[] = [];
+    for (const module of this.modulesMeta.modulesArray) {
+      if (module.root.includes('/src/module/') || module.root.includes('/src/suite/')) {
+        modules.push(module.info.fullName);
+      }
+    }
+    return modules;
+  }
+
   async _build({ projectPath, flavor, bundleNameCopy, srcDir, outDir }: IBinBuildRestContext) {
+    const bundleModules = this._prepareBundleModules();
+    const externals = {};
+    // entry
     const entry = path.join(srcDir, 'index.ts');
     // build
     await build({
@@ -115,11 +128,13 @@ export class CliBinBuildRest extends BeanCliBase {
       plugins: [svgResolverPlugin()],
       deps: {
         alwaysBundle: (id: string) => {
-          if (id.includes('zova-module-a-icon')) return false;
-          return true;
+          if (bundleModules.includes(id)) return true;
+          externals[id] = true;
+          return false;
         },
       },
     });
+    console.log('externals:', externals);
     // package.json
     await fse.copyFile(path.join(srcDir, 'package.json'), path.join(outDir, 'package.json'));
     // release
