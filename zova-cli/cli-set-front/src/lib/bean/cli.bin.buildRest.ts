@@ -167,7 +167,8 @@ export class CliBinBuildRest extends BeanCliBase {
   }
 
   async _prepareResourcesIndex({ srcDir }: IBinBuildRestContext) {
-    let indexContent = `export type { IIconRecord } from 'zova-module-a-icon';
+    let indexContent = `import type { IIconRecord } from 'zova-module-a-icon';
+export type { IIconRecord } from 'zova-module-a-icon';
 export type { IPagePathRecord } from 'zova-module-a-router';
 `;
     indexContent += await this._prepareResourcesIndex_rest(srcDir);
@@ -187,7 +188,7 @@ export type { IPagePathRecord } from 'zova-module-a-router';
       } else {
         tempDir = module.root;
       }
-      const restIndexFile = path.join(tempDir, 'index.ts');
+      const restIndexFile = path.join(tempDir, 'rest/index.ts');
       const restIndexFileRelative = path.relative(srcDir, restIndexFile);
       content += `export * from '${restIndexFileRelative}';\n`;
     }
