@@ -20,15 +20,15 @@ export default async function (options: IMetadataCustomGenerateOptions): Promise
 
 async function generateRestAction(options: IMetadataCustomGenerateOptions, globFile: IGlobBeanFile) {
   const { moduleName, modulePath } = options;
-  const { beanName, beanNameCapitalize, fileNameJS } = globFile;
+  const { beanName, beanNameCapitalize } = globFile;
   // options
   const typeOptionsName = `IActionOptions${beanNameCapitalize}`;
   // import
   const contentImports: string[] = [];
   contentImports.push("import type { TypeActionOptionsRest } from 'zova-module-a-action';");
-  contentImports.push(`import type { ${typeOptionsName} } from '../../src/bean/${fileNameJS}';`);
+  contentImports.push(`import type { ${typeOptionsName} } from 'zova-module-${moduleName}';`);
   // component
-  const componentNamePrefix = 'AA';
+  const componentNamePrefix = 'BBA';
   const componentName = beanName;
   const componentNameFull = `${componentNamePrefix}${toUpperCaseFirstChar(combineResourceName(componentName, moduleName, true, true))}`;
   const contentComponent = `export function ${componentNameFull}(

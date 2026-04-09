@@ -1,7 +1,7 @@
 import type { TypeActionOptionsRest } from 'zova-module-a-action';
-import type { IActionOptionsEdit } from '../../src/bean/action.edit.jsx';
+import type { IActionOptionsEdit } from 'zova-module-rest-actions';
 
-export function AARestActionsEdit(
+export function BBARestActionsEdit(
   _props: TypeActionOptionsRest<IActionOptionsEdit>,
 ) {
   return 'rest-actions:edit';

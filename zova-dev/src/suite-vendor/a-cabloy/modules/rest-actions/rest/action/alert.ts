@@ -1,7 +1,7 @@
 import type { TypeActionOptionsRest } from 'zova-module-a-action';
-import type { IActionOptionsAlert } from '../../src/bean/action.alert.jsx';
+import type { IActionOptionsAlert } from 'zova-module-rest-actions';
 
-export function AARestActionsAlert(
+export function BBARestActionsAlert(
   _props: TypeActionOptionsRest<IActionOptionsAlert>,
 ) {
   return 'rest-actions:alert';

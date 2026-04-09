@@ -1,7 +1,7 @@
 import type { TypeActionOptionsRest } from 'zova-module-a-action';
-import type { IActionOptionsCreate } from '../../src/bean/action.create.jsx';
+import type { IActionOptionsCreate } from 'zova-module-rest-actions';
 
-export function AARestActionsCreate(
+export function BBARestActionsCreate(
   _props: TypeActionOptionsRest<IActionOptionsCreate>,
 ) {
   return 'rest-actions:create';

@@ -1,7 +1,7 @@
 import type { TypeActionOptionsRest } from 'zova-module-a-action';
-import type { IActionOptionsSetValue } from '../../src/bean/action.setValue.jsx';
+import type { IActionOptionsSetValue } from 'zova-module-rest-actions';
 
-export function AARestActionsSetValue(
+export function BBARestActionsSetValue(
   _props: TypeActionOptionsRest<IActionOptionsSetValue>,
 ) {
   return 'rest-actions:setValue';
