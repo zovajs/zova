@@ -154,7 +154,7 @@ async function generateRestComponent(
 ) {
   const { cli, moduleName, modulePath } = options;
   // const { className } = globFile;
-  const { name, nameCapitalize, hasProps, nameProps, hasModels, nameModels, controllerExtJs } = controllerInfo;
+  const { name, nameCapitalize, hasProps, nameProps, hasModels, nameModels } = controllerInfo;
   // TypeControllerPublicProps
   const typeControllerPublicPropsName = `TypeController${nameCapitalize}PublicProps`;
   let contentTypeControllerPublicProps = `type ${typeControllerPublicPropsName}${genericDeclare} = TypeRenderComponentJsxPropsPublic`;
@@ -180,21 +180,19 @@ async function generateRestComponent(
   }
   contentImports.push("import type { TypeRenderComponentJsxPropsPublic } from 'zova-jsx';");
   if (_contentImportTypeController.length > 0) {
-    contentImports.push(
-      `import type { ${_contentImportTypeController.join(', ')} } from '../../src/component/${name}/controller${controllerExtJs}';`,
-    );
+    contentImports.push(`import type { ${_contentImportTypeController.join(', ')} } from 'zova-module-${moduleName}';`);
   }
   // component
   let componentNamePrefix;
   let componentName;
   if (name !== 'formField' && name.startsWith('formField')) {
-    componentNamePrefix = 'FF';
+    componentNamePrefix = 'BBF';
     componentName = toLowerCaseFirstChar(name.substring('formField'.length));
   } else if (name.startsWith('restPage')) {
-    componentNamePrefix = 'PP';
+    componentNamePrefix = 'BBP';
     componentName = toLowerCaseFirstChar(name.substring('restPage'.length));
   } else {
-    componentNamePrefix = 'ZZ';
+    componentNamePrefix = 'BBZ';
     componentName = name;
   }
   const componentNameFull = `${componentNamePrefix}${toUpperCaseFirstChar(combineResourceName(componentName, moduleName, true, true))}`;

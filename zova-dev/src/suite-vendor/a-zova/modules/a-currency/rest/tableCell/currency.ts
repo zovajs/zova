@@ -1,6 +1,6 @@
-import type { ITableCellOptionsCurrency } from '../../src/bean/tableCell.currency.jsx';
+import type { ITableCellOptionsCurrency } from 'zova-module-a-currency';
 
-export function TTCurrency(
+export function BBTCurrency(
   _props: ITableCellOptionsCurrency,
 ) {
   return 'a-currency.tableCell.currency';

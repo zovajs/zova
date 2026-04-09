@@ -20,14 +20,14 @@ export default async function (options: IMetadataCustomGenerateOptions): Promise
 
 async function generateRestTableCell(options: IMetadataCustomGenerateOptions, globFile: IGlobBeanFile) {
   const { moduleName, modulePath } = options;
-  const { beanName, beanNameCapitalize, sceneName, fileNameJS } = globFile;
+  const { beanName, beanNameCapitalize, sceneName } = globFile;
   // options
   const typeOptionsName = `ITableCellOptions${beanNameCapitalize}`;
   // import
   const contentImports: string[] = [];
-  contentImports.push(`import type { ${typeOptionsName} } from '../../src/bean/${fileNameJS}';`);
+  contentImports.push(`import type { ${typeOptionsName} } from 'zova-module-${moduleName}';`);
   // component
-  const componentNamePrefix = 'TT';
+  const componentNamePrefix = 'BBT';
   const componentName = beanName;
   const componentNameFull = `${componentNamePrefix}${toUpperCaseFirstChar(combineResourceName(componentName, moduleName, true, true))}`;
   const contentComponent = `export function ${componentNameFull}(
