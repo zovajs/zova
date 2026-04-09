@@ -184,13 +184,16 @@ export type { IPagePathRecord } from 'zova-module-a-router';
       if (!fse.existsSync(restDir)) continue;
       let tempDir;
       if (module.info.node_modules) {
-        tempDir = path.join(srcDir, 'modules', module.info.relativeName);
+        tempDir = path.join(srcDir, 'modules', module.info.relativeName, 'rest');
         await fse.copy(restDir, tempDir);
       } else {
-        tempDir = module.root;
+        tempDir = path.join(module.root, 'rest');
       }
-      const restIndexFile = path.join(tempDir, 'rest/index.ts');
-      const restIndexFileRelative = path.relative(srcDir, restIndexFile);
+      const restIndexFile = path.join(tempDir, 'index.ts');
+      let restIndexFileRelative = path.relative(srcDir, restIndexFile);
+      if (!restIndexFileRelative.startsWith('.')) {
+        restIndexFileRelative = `./${restIndexFileRelative}`;
+      }
       content += `export * from '${restIndexFileRelative}';\n`;
     }
     return content;
