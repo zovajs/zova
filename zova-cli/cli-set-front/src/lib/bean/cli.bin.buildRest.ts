@@ -194,7 +194,7 @@ export type { IPagePathRecord } from 'zova-module-a-router';
       if (!restIndexFileRelative.startsWith('.')) {
         restIndexFileRelative = `./${restIndexFileRelative}`;
       }
-      content += `export * from '${restIndexFileRelative}';\n`;
+      content += `export * from '${restIndexFileRelative.replaceAll('\\', '/')}';\n`;
     }
     return content;
   }
