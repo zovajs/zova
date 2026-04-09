@@ -134,6 +134,7 @@ export class CliBinBuildRest extends BeanCliBase {
           return false;
         },
       },
+      minify: true,
     });
     // deps
     const deps = await _extractDeps(path.join(outDir, 'index.d.mts'));
@@ -184,7 +185,7 @@ export type { IPagePathRecord } from 'zova-module-a-router';
       let tempDir;
       if (module.info.node_modules) {
         tempDir = path.join(srcDir, 'modules', module.info.relativeName);
-        await fse.copyFile(restDir, tempDir);
+        await fse.copy(restDir, tempDir);
       } else {
         tempDir = module.root;
       }
