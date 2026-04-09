@@ -79,7 +79,7 @@
     "vite-plugin-fake-server-turbo": "^3.0.18",
     "vite-plugin-vuetify": "^2.1.2",
     "vue-tsc": "^3.2.4",
-    "zova-openapi": "^1.1.2",
+    "zova-openapi": "^1.1.7",
     "zova-vite": "^1.1.12",
     "@cabloy/cli": "^3.0.105",
     "@types/luxon": "^3.7.1",
