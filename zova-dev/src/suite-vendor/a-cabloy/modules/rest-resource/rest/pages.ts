@@ -1,1 +1,1 @@
-import 'zova-module-rest-resource';
+export * from 'zova-module-rest-resource';

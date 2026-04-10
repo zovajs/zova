@@ -36,7 +36,7 @@ ${contentResourceIcons}
 
 async function generateRestIcon(moduleName: string, modulePath: string, _resourceIcons: string[]) {
   // icons
-  const contentResourceIcons = `import 'zova-module-${moduleName}';\n`;
+  const contentResourceIcons = `export * from 'zova-module-${moduleName}';\n`;
   const fileIcons = path.join(modulePath, 'rest/icons.ts');
   await fse.outputFile(fileIcons, contentResourceIcons);
   // index

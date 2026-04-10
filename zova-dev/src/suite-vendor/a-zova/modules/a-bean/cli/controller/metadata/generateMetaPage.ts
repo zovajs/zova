@@ -119,7 +119,7 @@ async function generateRestMetaPage(options: IMetadataCustomGenerateOptions, _co
   if (contentPathRecordsRest.length === 0) return;
   const { moduleName, modulePath } = options;
   // pages
-  const contentPages = `import 'zova-module-${moduleName}';\n`;
+  const contentPages = `export * from 'zova-module-${moduleName}';\n`;
   const filePages = path.join(modulePath, 'rest/pages.ts');
   await fse.outputFile(filePages, contentPages);
   // index

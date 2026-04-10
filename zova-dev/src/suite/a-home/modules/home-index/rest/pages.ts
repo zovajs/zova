@@ -1,1 +1,1 @@
-import 'zova-module-home-index';
+export * from 'zova-module-home-index';

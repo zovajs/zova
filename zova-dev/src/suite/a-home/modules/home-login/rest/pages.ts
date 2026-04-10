@@ -1,1 +1,1 @@
-import 'zova-module-home-login';
+export * from 'zova-module-home-login';
