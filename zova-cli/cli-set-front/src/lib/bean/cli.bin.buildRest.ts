@@ -139,6 +139,7 @@ export class CliBinBuildRest extends BeanCliBase {
       format: ['esm'],
       outDir,
       tsconfig: 'tsconfig.rest.json',
+      clean: false,
       dts: {
         // resolve: true,
         resolver: 'tsc',
