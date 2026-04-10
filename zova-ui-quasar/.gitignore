@@ -59,10 +59,10 @@ env/.env*.mine
 !/src/suite/.gitkeep
 !/src/suite/a-demo
 !/src/suite/a-home
+!/src/suite/a-quasar
 
 /src/suite-vendor/*
 !/src/suite-vendor/.gitkeep
-!/src/suite-vendor/a-quasar
 !/src/suite-vendor/a-zova
 
 /src/module/*
