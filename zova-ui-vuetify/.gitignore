@@ -59,12 +59,11 @@ env/.env*.mine
 !/src/suite/.gitkeep
 !/src/suite/a-demo
 !/src/suite/a-home
-!/src/suite/a-paypal
+!/src/suite/a-vuetify
 
 /src/suite-vendor/*
 !/src/suite-vendor/.gitkeep
 !/src/suite-vendor/a-cabloy
-!/src/suite-vendor/a-vuetify
 !/src/suite-vendor/a-zova
 
 
