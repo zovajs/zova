@@ -103,7 +103,8 @@ export class CliBinBuildRest extends BeanCliBase {
   _prepareBundleModules() {
     const modules: string[] = [];
     for (const module of this.modulesMeta.modulesArray) {
-      if (module.root.includes('/src/module/') || module.root.includes('/src/suite/')) {
+      const moduleRoot = module.root.replaceAll('\\', '/');
+      if (moduleRoot.includes('/src/module/') || moduleRoot.includes('/src/suite/')) {
         modules.push(module.info.fullName);
       }
     }
