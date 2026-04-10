@@ -110,7 +110,26 @@ export class CliBinBuildRest extends BeanCliBase {
     return modules;
   }
 
-  async _build({ projectPath, flavor, bundleNameCopy, srcDir, outDir }: IBinBuildRestContext) {
+  async _buildTs({ srcDir, outDir }: IBinBuildRestContext) {
+    // entry
+    const entry = path.join(srcDir, 'index.ts');
+    // build
+    await build({
+      entry: [entry],
+      format: ['esm'],
+      outDir,
+      tsconfig: 'tsconfig.rest.json',
+      plugins: [svgResolverPlugin()],
+      deps: {
+        alwaysBundle: (_id: string) => {
+          return false;
+        },
+      },
+      minify: true,
+    });
+  }
+
+  async _buildDts({ srcDir, outDir }: IBinBuildRestContext) {
     const bundleModules = this._prepareBundleModules();
     // entry
     const entry = path.join(srcDir, 'index.ts');
@@ -126,6 +145,7 @@ export class CliBinBuildRest extends BeanCliBase {
         tsgo: true,
         eager: true,
         tsconfig: 'tsconfig.rest.json',
+        emitDtsOnly: true,
       },
       plugins: [svgResolverPlugin()],
       deps: {
@@ -136,6 +156,13 @@ export class CliBinBuildRest extends BeanCliBase {
       },
       minify: true,
     });
+  }
+
+  async _build(buildContext: IBinBuildRestContext) {
+    const { projectPath, flavor, bundleNameCopy, srcDir, outDir } = buildContext;
+    // build
+    await this._buildTs(buildContext);
+    await this._buildDts(buildContext);
     // deps
     const deps = await _extractDeps(path.join(outDir, 'index.d.mts'));
     const depsVersion = await _extractDepsVersion(projectPath, deps);
