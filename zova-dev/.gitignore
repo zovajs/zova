@@ -58,13 +58,13 @@ env/.env*.mine
 /src/suite/*
 !/src/suite/.gitkeep
 !/src/suite/a-demo
+!/src/suite/a-devui
 !/src/suite/a-home
 !/src/suite/cabloy-basic
 
 /src/suite-vendor/*
 !/src/suite-vendor/.gitkeep
 !/src/suite-vendor/a-cabloy
-!/src/suite-vendor/a-devui
 !/src/suite-vendor/a-zova
 
 /src/module/*
