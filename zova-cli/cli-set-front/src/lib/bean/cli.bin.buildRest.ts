@@ -127,6 +127,10 @@ export class CliBinBuildRest extends BeanCliBase {
       },
       minify: true,
     });
+    const fileIndex = path.join(outDir, 'index.mjs');
+    let fileContent = (await fse.readFile(fileIndex)).toString();
+    fileContent = fileContent.replace(/import[\s\S]*?"[^"]*";/g, '').replace(/export[\s\S]*?"[^"]*";/g, '');
+    await fse.writeFile(fileIndex, fileContent);
   }
 
   async _buildDts({ srcDir, outDir }: IBinBuildRestContext) {
