@@ -1,1 +1,1 @@
-import 'zova-module-demo-basic';
+export * from 'zova-module-demo-basic';

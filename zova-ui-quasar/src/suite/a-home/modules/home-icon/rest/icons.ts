@@ -1,1 +1,1 @@
-import 'zova-module-home-icon';
+export * from 'zova-module-home-icon';
