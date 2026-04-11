@@ -6,7 +6,7 @@
   "type": "module",
   "dependencies": {
     "zova-module-vuetify-adapter": "workspace:^",
-    "zova-module-vuetify-form": "^5.0.0"
+    "zova-module-vuetify-form": "workspace:^"
   },
   "title": "a-vuetify"
 }
