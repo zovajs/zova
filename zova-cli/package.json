@@ -18,7 +18,7 @@
   "type": "module",
   "scripts": {},
   "devDependencies": {
-    "@cabloy/lint": "^5.0.24",
+    "@cabloy/lint": "^5.1.5",
     "@types/mocha": "^10.0.6",
     "@types/node": "^22.10.2",
     "oxfmt": "^0.41.0",

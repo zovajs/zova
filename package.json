@@ -20,16 +20,11 @@
   "type": "module",
   "scripts": {
     "init": "pnpm install --no-frozen-lockfile && cd ./zova-cli && pnpm install --no-frozen-lockfile && cd .. && npm run zova-dev-deps",
-    "zova-dev-deps": "cd ./zova-dev && node ../zova-cli/cli/src/bin/zova.ts :tools:deps",
-    "docs:dev": "vitepress dev zova-docs",
-    "docs:build": "vitepress build zova-docs",
-    "docs:preview": "vitepress preview zova-docs"
+    "zova-dev-deps": "cd ./zova-dev && node ../zova-cli/cli/src/bin/zova.ts :tools:deps"
   },
-  "dependencies": {
-    "zova": "^5.1.13"
-  },
+  "dependencies": {},
   "devDependencies": {
-    "@cabloy/lint": "^5.1.3",
+    "@cabloy/lint": "^5.1.5",
     "@cabloy/process-helper": "^3.1.3",
     "@types/fs-extra": "^11.0.4",
     "@types/mocha": "^10.0.10",
@@ -41,8 +36,7 @@
     "textlint": "^14.8.4",
     "textlint-rule-ja-space-between-half-and-full-width": "^2.4.2",
     "typedoc": "^0.25.13",
-    "typescript": "^5.9.3",
-    "vitepress": "^1.6.4"
+    "typescript": "^5.9.3"
   },
   "engines": {
     "node": ">=22.12.0"
