@@ -18,7 +18,6 @@ export const VSvgIconZova = defineComponent({
         {
           default: () => [
             _createVNode(ZIcon, {
-              class: 'v-icon__svg',
               href: props.icon,
             }),
           ],
