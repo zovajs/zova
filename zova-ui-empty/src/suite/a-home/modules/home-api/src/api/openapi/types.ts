@@ -1,4 +1,149 @@
 export interface paths {
+  '/api/auth/mock/authorize': {
+    parameters: {
+      query?: never;
+      header?: never;
+      path?: never;
+      cookie?: never;
+    };
+    get: operations['AuthMock_authorize'];
+    put?: never;
+    post: operations['AuthMock_authorizePost'];
+    delete?: never;
+    options?: never;
+    head?: never;
+    patch?: never;
+    trace?: never;
+  };
+  '/api/captcha/create': {
+    parameters: {
+      query?: never;
+      header?: never;
+      path?: never;
+      cookie?: never;
+    };
+    get?: never;
+    put?: never;
+    post: operations['Captcha_create'];
+    delete?: never;
+    options?: never;
+    head?: never;
+    patch?: never;
+    trace?: never;
+  };
+  '/api/captcha/refresh': {
+    parameters: {
+      query?: never;
+      header?: never;
+      path?: never;
+      cookie?: never;
+    };
+    get?: never;
+    put?: never;
+    post: operations['Captcha_refresh'];
+    delete?: never;
+    options?: never;
+    head?: never;
+    patch?: never;
+    trace?: never;
+  };
+  '/api/captcha/verifyImmediate': {
+    parameters: {
+      query?: never;
+      header?: never;
+      path?: never;
+      cookie?: never;
+    };
+    get?: never;
+    put?: never;
+    post: operations['Captcha_verifyImmediate'];
+    delete?: never;
+    options?: never;
+    head?: never;
+    patch?: never;
+    trace?: never;
+  };
+  '/api/mailconfirm/mail/emailConfirmCallback': {
+    parameters: {
+      query?: never;
+      header?: never;
+      path?: never;
+      cookie?: never;
+    };
+    get: operations['MailconfirmMail_emailConfirmCallback'];
+    put?: never;
+    post?: never;
+    delete?: never;
+    options?: never;
+    head?: never;
+    patch?: never;
+    trace?: never;
+  };
+  '/api/mailconfirm/mail/passwordResetCallback': {
+    parameters: {
+      query?: never;
+      header?: never;
+      path?: never;
+      cookie?: never;
+    };
+    get: operations['MailconfirmMail_passwordResetCallback'];
+    put?: never;
+    post?: never;
+    delete?: never;
+    options?: never;
+    head?: never;
+    patch?: never;
+    trace?: never;
+  };
+  '/api/home/base/menu/{publicPath?}': {
+    parameters: {
+      query?: never;
+      header?: never;
+      path?: never;
+      cookie?: never;
+    };
+    get: operations['HomeBaseMenu_retrieveMenus'];
+    put?: never;
+    post?: never;
+    delete?: never;
+    options?: never;
+    head?: never;
+    patch?: never;
+    trace?: never;
+  };
+  '/api/home/base/permission/{resource}': {
+    parameters: {
+      query?: never;
+      header?: never;
+      path?: never;
+      cookie?: never;
+    };
+    get: operations['HomeBasePermission_retrievePermissions'];
+    put?: never;
+    post?: never;
+    delete?: never;
+    options?: never;
+    head?: never;
+    patch?: never;
+    trace?: never;
+  };
+  '/': {
+    parameters: {
+      query?: never;
+      header?: never;
+      path?: never;
+      cookie?: never;
+    };
+    /** @description Home */
+    get: operations['Home_index'];
+    put?: never;
+    post?: never;
+    delete?: never;
+    options?: never;
+    head?: never;
+    patch?: never;
+    trace?: never;
+  };
   '/api/home/user/passport/current': {
     parameters: {
       query?: never;
@@ -159,62 +304,14 @@ export interface paths {
     patch?: never;
     trace?: never;
   };
-  '/api/captcha/create': {
+  '/api/test/auth/passport/isAuthenticated': {
     parameters: {
       query?: never;
       header?: never;
       path?: never;
       cookie?: never;
     };
-    get?: never;
-    put?: never;
-    post: operations['Captcha_create'];
-    delete?: never;
-    options?: never;
-    head?: never;
-    patch?: never;
-    trace?: never;
-  };
-  '/api/captcha/refresh': {
-    parameters: {
-      query?: never;
-      header?: never;
-      path?: never;
-      cookie?: never;
-    };
-    get?: never;
-    put?: never;
-    post: operations['Captcha_refresh'];
-    delete?: never;
-    options?: never;
-    head?: never;
-    patch?: never;
-    trace?: never;
-  };
-  '/api/captcha/verifyImmediate': {
-    parameters: {
-      query?: never;
-      header?: never;
-      path?: never;
-      cookie?: never;
-    };
-    get?: never;
-    put?: never;
-    post: operations['Captcha_verifyImmediate'];
-    delete?: never;
-    options?: never;
-    head?: never;
-    patch?: never;
-    trace?: never;
-  };
-  '/api/mailconfirm/mail/emailConfirmCallback': {
-    parameters: {
-      query?: never;
-      header?: never;
-      path?: never;
-      cookie?: never;
-    };
-    get: operations['MailconfirmMail_emailConfirmCallback'];
+    get: operations['TestAuthPassport_isAuthenticated'];
     put?: never;
     post?: never;
     delete?: never;
@@ -223,207 +320,14 @@ export interface paths {
     patch?: never;
     trace?: never;
   };
-  '/api/mailconfirm/mail/passwordResetCallback': {
+  '/api/test/auth/passport/current': {
     parameters: {
       query?: never;
       header?: never;
       path?: never;
       cookie?: never;
     };
-    get: operations['MailconfirmMail_passwordResetCallback'];
-    put?: never;
-    post?: never;
-    delete?: never;
-    options?: never;
-    head?: never;
-    patch?: never;
-    trace?: never;
-  };
-  '/api/home/base/menu/{publicPath?}': {
-    parameters: {
-      query?: never;
-      header?: never;
-      path?: never;
-      cookie?: never;
-    };
-    get: operations['HomeBaseMenu_retrieveMenus'];
-    put?: never;
-    post?: never;
-    delete?: never;
-    options?: never;
-    head?: never;
-    patch?: never;
-    trace?: never;
-  };
-  '/api/home/base/permission/{resource}': {
-    parameters: {
-      query?: never;
-      header?: never;
-      path?: never;
-      cookie?: never;
-    };
-    get: operations['HomeBasePermission_retrievePermissions'];
-    put?: never;
-    post?: never;
-    delete?: never;
-    options?: never;
-    head?: never;
-    patch?: never;
-    trace?: never;
-  };
-  '/': {
-    parameters: {
-      query?: never;
-      header?: never;
-      path?: never;
-      cookie?: never;
-    };
-    /** @description Home */
-    get: operations['Home_index'];
-    put?: never;
-    post?: never;
-    delete?: never;
-    options?: never;
-    head?: never;
-    patch?: never;
-    trace?: never;
-  };
-  '/api/start/test/product': {
-    parameters: {
-      query?: never;
-      header?: never;
-      path?: never;
-      cookie?: never;
-    };
-    get: operations['StartTestProduct_select'];
-    put?: never;
-    post: operations['StartTestProduct_create'];
-    delete?: never;
-    options?: never;
-    head?: never;
-    patch?: never;
-    trace?: never;
-  };
-  '/api/start/test/product/{id}': {
-    parameters: {
-      query?: never;
-      header?: never;
-      path?: never;
-      cookie?: never;
-    };
-    get: operations['StartTestProduct_view'];
-    put?: never;
-    post?: never;
-    delete: operations['StartTestProduct_delete'];
-    options?: never;
-    head?: never;
-    patch: operations['StartTestProduct_update'];
-    trace?: never;
-  };
-  '/api/cabloy/store/cabloyModule': {
-    parameters: {
-      query?: never;
-      header?: never;
-      path?: never;
-      cookie?: never;
-    };
-    get: operations['CabloyStoreCabloyModule_select'];
-    put?: never;
-    post: operations['CabloyStoreCabloyModule_create'];
-    delete?: never;
-    options?: never;
-    head?: never;
-    patch?: never;
-    trace?: never;
-  };
-  '/api/cabloy/store/cabloyModule/{id}': {
-    parameters: {
-      query?: never;
-      header?: never;
-      path?: never;
-      cookie?: never;
-    };
-    get: operations['CabloyStoreCabloyModule_view'];
-    put?: never;
-    post?: never;
-    delete: operations['CabloyStoreCabloyModule_delete'];
-    options?: never;
-    head?: never;
-    patch: operations['CabloyStoreCabloyModule_update'];
-    trace?: never;
-  };
-  '/api/cabloy/store/cabloyModule/viewByName/{name}': {
-    parameters: {
-      query?: never;
-      header?: never;
-      path?: never;
-      cookie?: never;
-    };
-    get: operations['CabloyStoreCabloyModule_viewByName'];
-    put?: never;
-    post?: never;
-    delete?: never;
-    options?: never;
-    head?: never;
-    patch?: never;
-    trace?: never;
-  };
-  '/api/cabloy/store/cabloyProvider': {
-    parameters: {
-      query?: never;
-      header?: never;
-      path?: never;
-      cookie?: never;
-    };
-    get: operations['CabloyStoreCabloyProvider_select'];
-    put?: never;
-    post: operations['CabloyStoreCabloyProvider_create'];
-    delete?: never;
-    options?: never;
-    head?: never;
-    patch?: never;
-    trace?: never;
-  };
-  '/api/cabloy/store/cabloyProvider/{id}': {
-    parameters: {
-      query?: never;
-      header?: never;
-      path?: never;
-      cookie?: never;
-    };
-    get: operations['CabloyStoreCabloyProvider_view'];
-    put?: never;
-    post?: never;
-    delete: operations['CabloyStoreCabloyProvider_delete'];
-    options?: never;
-    head?: never;
-    patch: operations['CabloyStoreCabloyProvider_update'];
-    trace?: never;
-  };
-  '/api/test/cabloy/passport/isAuthenticated': {
-    parameters: {
-      query?: never;
-      header?: never;
-      path?: never;
-      cookie?: never;
-    };
-    get: operations['TestCabloyPassport_isAuthenticated'];
-    put?: never;
-    post?: never;
-    delete?: never;
-    options?: never;
-    head?: never;
-    patch?: never;
-    trace?: never;
-  };
-  '/api/test/cabloy/passport/current': {
-    parameters: {
-      query?: never;
-      header?: never;
-      path?: never;
-      cookie?: never;
-    };
-    get: operations['TestCabloyPassport_current'];
+    get: operations['TestAuthPassport_current'];
     put?: never;
     post?: never;
     delete?: never;
@@ -496,6 +400,70 @@ export interface paths {
     patch?: never;
     trace?: never;
   };
+  '/api/test/captcha/signin': {
+    parameters: {
+      query?: never;
+      header?: never;
+      path?: never;
+      cookie?: never;
+    };
+    get?: never;
+    put?: never;
+    post: operations['TestCaptcha_signin'];
+    delete?: never;
+    options?: never;
+    head?: never;
+    patch?: never;
+    trace?: never;
+  };
+  '/api/paypal/getRecord/{recordId}': {
+    parameters: {
+      query?: never;
+      header?: never;
+      path?: never;
+      cookie?: never;
+    };
+    get: operations['Paypal_getRecord'];
+    put?: never;
+    post?: never;
+    delete?: never;
+    options?: never;
+    head?: never;
+    patch?: never;
+    trace?: never;
+  };
+  '/api/paypal/captureOrder/{recordId}': {
+    parameters: {
+      query?: never;
+      header?: never;
+      path?: never;
+      cookie?: never;
+    };
+    get?: never;
+    put?: never;
+    post: operations['Paypal_captureOrder'];
+    delete?: never;
+    options?: never;
+    head?: never;
+    patch?: never;
+    trace?: never;
+  };
+  '/api/paypal/cancelOrder/{recordId}': {
+    parameters: {
+      query?: never;
+      header?: never;
+      path?: never;
+      cookie?: never;
+    };
+    get?: never;
+    put?: never;
+    post: operations['Paypal_cancelOrder'];
+    delete?: never;
+    options?: never;
+    head?: never;
+    patch?: never;
+    trace?: never;
+  };
   '/api/play': {
     parameters: {
       query?: never;
@@ -506,22 +474,6 @@ export interface paths {
     get?: never;
     put?: never;
     post: operations['Play_index'];
-    delete?: never;
-    options?: never;
-    head?: never;
-    patch?: never;
-    trace?: never;
-  };
-  '/api/test/vona/captcha/signin': {
-    parameters: {
-      query?: never;
-      header?: never;
-      path?: never;
-      cookie?: never;
-    };
-    get?: never;
-    put?: never;
-    post: operations['TestVonaCaptcha_signin'];
     delete?: never;
     options?: never;
     head?: never;
@@ -1088,12 +1040,12 @@ export interface components {
        * Format: date
        * @description Created At
        */
-      createdAt: string;
+      createdAt: Date;
       /**
        * Format: date
        * @description Updated At
        */
-      updatedAt: string;
+      updatedAt: Date;
       /**
        * @description Deleted
        * @default false
@@ -1116,6 +1068,49 @@ export interface components {
       amount: number;
       orderId: number | string;
     };
+    'a-captcha.dto.captchaData': {
+      id: string;
+      provider: string;
+      token?: unknown;
+      payload?: unknown;
+    };
+    'a-menu.dto.menus': {
+      menus?: components['schemas']['a-menu.dto.menuItem'][] | undefined;
+      groups?: components['schemas']['a-menu.dto.menuGroup'][] | undefined;
+    };
+    'a-menu.dto.menuItem': {
+      name: string;
+      title?: string | undefined;
+      description?: string | undefined;
+      icon?: string | undefined;
+      order?: number | undefined;
+      group?: string | string[] | undefined;
+      separator?: boolean | undefined;
+      link?: string | undefined;
+      external?: boolean | undefined;
+      target?: string | undefined;
+      meta?: components['schemas']['a-menu.dto.menuItemMeta'];
+    };
+    'a-menu.dto.menuItemMeta':
+      | {
+          params?: unknown;
+          query?: unknown;
+        }
+      | undefined;
+    'a-menu.dto.menuGroup': {
+      name: string;
+      title?: string | undefined;
+      description?: string | undefined;
+      icon?: string | undefined;
+      order?: number | undefined;
+      group?: string | string[] | undefined;
+      collapsed?: boolean | undefined;
+    };
+    'a-permission.dto.permissions': {
+      roleIds?: (number | string)[] | undefined;
+      roleNames?: string[] | undefined;
+      actions?: unknown;
+    };
     'home-user.dto.passport':
       | {
           user: components['schemas']['home-user.entity.user'];
@@ -1129,12 +1124,12 @@ export interface components {
        * Format: date
        * @description Created At
        */
-      createdAt: string;
+      createdAt: Date;
       /**
        * Format: date
        * @description Updated At
        */
-      updatedAt: string;
+      updatedAt: Date;
       /**
        * @description Deleted
        * @default false
@@ -1182,12 +1177,12 @@ export interface components {
        * Format: date
        * @description Created At
        */
-      createdAt: string;
+      createdAt: Date;
       /**
        * Format: date
        * @description Updated At
        */
-      updatedAt: string;
+      updatedAt: Date;
       /**
        * @description Deleted
        * @default false
@@ -1233,442 +1228,6 @@ export interface components {
       id: string;
       token: string;
     };
-    'a-captcha.dto.captchaData': {
-      id: string;
-      provider: string;
-      token?: unknown;
-      payload?: unknown;
-    };
-    'a-menu.dto.menus': {
-      menus?: components['schemas']['a-menu.dto.menuItem'][] | undefined;
-      groups?: components['schemas']['a-menu.dto.menuGroup'][] | undefined;
-    };
-    'a-menu.dto.menuItem': {
-      name: string;
-      title?: string | undefined;
-      description?: string | undefined;
-      icon?: string | undefined;
-      order?: number | undefined;
-      group?: string | string[] | undefined;
-      separator?: boolean | undefined;
-      link?: string | undefined;
-      external?: boolean | undefined;
-      target?: string | undefined;
-      meta?: components['schemas']['a-menu.dto.menuItemMeta'];
-    };
-    'a-menu.dto.menuItemMeta':
-      | {
-          params?: unknown;
-          query?: unknown;
-        }
-      | undefined;
-    'a-menu.dto.menuGroup': {
-      name: string;
-      title?: string | undefined;
-      description?: string | undefined;
-      icon?: string | undefined;
-      order?: number | undefined;
-      group?: string | string[] | undefined;
-      collapsed?: boolean | undefined;
-    };
-    'a-permission.dto.permissions': {
-      roleIds?: (number | string)[] | undefined;
-      roleNames?: string[] | undefined;
-      actions?: unknown;
-    };
-    /** @description Create Product */
-    'start-test.dto.productCreate': {
-      /** @description Name */
-      name: string;
-      /** @description Description */
-      description?: string | undefined;
-      /** @description Price */
-      price: number;
-      /**
-       * @description Quantity
-       * @default 0
-       */
-      quantity?: number;
-      /** @description Amount */
-      amount: number;
-      /** @description Custom */
-      _custom?: unknown;
-      /** @description Test */
-      _test?: unknown;
-    };
-    'start-test.dto.productQueryRes': {
-      list: {
-        /**
-         * Format: date
-         * @description Created At
-         */
-        createdAt: string;
-        /**
-         * Format: date
-         * @description Updated At
-         */
-        updatedAt: string;
-        /**
-         * @description Deleted
-         * @default false
-         */
-        deleted?: boolean;
-        /**
-         * @description Instance ID
-         * @default 0
-         */
-        iid?: number;
-        /** @description ID */
-        id: number | string;
-        /** @description Name */
-        name: string;
-        /** @description Description */
-        description?: string | undefined;
-        /** @description Price */
-        price: number;
-        /**
-         * @description Quantity
-         * @default 0
-         */
-        quantity?: number;
-        /** @description Amount */
-        amount: number;
-        /** @description Custom */
-        _custom?: unknown;
-      }[];
-      total: string;
-      pageCount: number;
-      pageSize: number;
-      pageNo: number;
-    };
-    /** @description Product Info */
-    'start-test.entity.product':
-      | {
-          /**
-           * Format: date
-           * @description Created At
-           */
-          createdAt: string;
-          /**
-           * Format: date
-           * @description Updated At
-           */
-          updatedAt: string;
-          /**
-           * @description Deleted
-           * @default false
-           */
-          deleted?: boolean;
-          /**
-           * @description Instance ID
-           * @default 0
-           */
-          iid?: number;
-          /** @description ID */
-          id: number | string;
-          /** @description Name */
-          name: string;
-          /** @description Description */
-          description?: string | undefined;
-          /** @description Price */
-          price: number;
-          /**
-           * @description Quantity
-           * @default 0
-           */
-          quantity?: number;
-          /** @description Amount */
-          amount: number;
-          /** @description Custom */
-          _custom?: unknown;
-        }
-      | undefined;
-    /** @description Update Product */
-    'start-test.dto.productUpdate': {
-      /** @description Name */
-      name: string;
-      /** @description Description */
-      description?: string | undefined;
-      /** @description Price */
-      price: number;
-      /**
-       * @description Quantity
-       * @default 0
-       */
-      quantity?: number;
-      /** @description Amount */
-      amount: number;
-      /** @description Custom */
-      _custom?: unknown;
-    };
-    'cabloy-store.dto.cabloyModuleCreate': {
-      /** @description Name */
-      name: string;
-      /** @description Title */
-      title: string;
-      /** @description Description */
-      description?: string | undefined;
-      /** @description Version */
-      version: string;
-      /** @description Repository */
-      repoUrl?: string | undefined;
-      /** @description Demo */
-      demoUrl?: string | undefined;
-      /** @description License */
-      license: number;
-      /** @description Price */
-      price?: number | undefined;
-      providerId: number | string;
-      content?: components['schemas']['cabloy-store.entity.cabloyModuleContent_415bfafaac51a5415ead581cd137db9671af9a2b_1816ff740d81c738ec055c7038bbd93beb9405a7'];
-      _content?: unknown;
-    };
-    'cabloy-store.entity.cabloyModuleContent_415bfafaac51a5415ead581cd137db9671af9a2b_1816ff740d81c738ec055c7038bbd93beb9405a7': {
-      /** @description Content */
-      content: string;
-    };
-    'cabloy-store.dto.cabloyModuleQueryRes': {
-      list: components['schemas']['cabloy-store.dto.cabloyModuleQueryResItem'][];
-      total: string;
-      pageCount: number;
-      pageSize: number;
-      pageNo: number;
-    };
-    'cabloy-store.dto.cabloyModuleQueryResItem': {
-      /**
-       * Format: date
-       * @description Created At
-       */
-      createdAt: string;
-      /**
-       * Format: date
-       * @description Updated At
-       */
-      updatedAt: string;
-      /**
-       * @description Deleted
-       * @default false
-       */
-      deleted?: boolean;
-      /**
-       * @description Instance ID
-       * @default 0
-       */
-      iid?: number;
-      /** @description ID */
-      id: number | string;
-      /** @description Name */
-      name: string;
-      /** @description Title */
-      title: string;
-      /** @description Description */
-      description?: string | undefined;
-      /** @description Version */
-      version: string;
-      /** @description Repository */
-      repoUrl?: string | undefined;
-      /** @description Demo */
-      demoUrl?: string | undefined;
-      /** @description License */
-      license: number;
-      /** @description Price */
-      price?: number | undefined;
-      providerId: number | string;
-      /** @description Published */
-      published?: boolean | undefined;
-      provider?: components['schemas']['cabloy-store.entity.cabloyProvider_2c7d642ee581efa300341e343180fbb0ecdc785d_1816ff740d81c738ec055c7038bbd93beb9405a7'];
-    };
-    'cabloy-store.entity.cabloyProvider_2c7d642ee581efa300341e343180fbb0ecdc785d_1816ff740d81c738ec055c7038bbd93beb9405a7': {
-      /** @description ID */
-      id: number | string;
-      /** @description Name */
-      name: string;
-    };
-    'cabloy-store.dto.cabloyModuleGet':
-      | {
-          /**
-           * Format: date
-           * @description Created At
-           */
-          createdAt: string;
-          /**
-           * Format: date
-           * @description Updated At
-           */
-          updatedAt: string;
-          /**
-           * @description Deleted
-           * @default false
-           */
-          deleted?: boolean;
-          /**
-           * @description Instance ID
-           * @default 0
-           */
-          iid?: number;
-          /** @description ID */
-          id: number | string;
-          /** @description Name */
-          name: string;
-          /** @description Title */
-          title: string;
-          /** @description Description */
-          description?: string | undefined;
-          /** @description Version */
-          version: string;
-          /** @description Repository */
-          repoUrl?: string | undefined;
-          /** @description Demo */
-          demoUrl?: string | undefined;
-          /** @description License */
-          license: number;
-          /** @description Price */
-          price?: number | undefined;
-          providerId: number | string;
-          /** @description Published */
-          published?: boolean | undefined;
-          content?: components['schemas']['cabloy-store.entity.cabloyModuleContent_c6e103f7cf035f2c8b2a66de341b2af9a91356ae_1816ff740d81c738ec055c7038bbd93beb9405a7'];
-          provider?: components['schemas']['cabloy-store.entity.cabloyProvider_2c7d642ee581efa300341e343180fbb0ecdc785d_1816ff740d81c738ec055c7038bbd93beb9405a7'];
-          _content?: unknown;
-        }
-      | undefined;
-    'cabloy-store.entity.cabloyModuleContent_c6e103f7cf035f2c8b2a66de341b2af9a91356ae_1816ff740d81c738ec055c7038bbd93beb9405a7': {
-      /** @description ID */
-      id: number | string;
-      /** @description Content */
-      content: string;
-    };
-    'cabloy-store.dto.cabloyModuleUpdate': {
-      /** @description Name */
-      name: string;
-      /** @description Title */
-      title: string;
-      /** @description Description */
-      description?: string | undefined;
-      /** @description Version */
-      version: string;
-      /** @description Repository */
-      repoUrl?: string | undefined;
-      /** @description Demo */
-      demoUrl?: string | undefined;
-      /** @description License */
-      license: number;
-      /** @description Price */
-      price?: number | undefined;
-      providerId: number | string;
-      content?: components['schemas']['cabloy-store.entity.cabloyModuleContent_ff0869fb10e36144ce6da354ab0f63f1aaad2074_1816ff740d81c738ec055c7038bbd93beb9405a7'];
-      _content?: unknown;
-    };
-    'cabloy-store.entity.cabloyModuleContent_ff0869fb10e36144ce6da354ab0f63f1aaad2074_1816ff740d81c738ec055c7038bbd93beb9405a7': {
-      /**
-       * @description Deleted
-       * @default false
-       */
-      deleted?: boolean | undefined;
-      /** @description ID */
-      id?: number | string | undefined;
-      /** @description Content */
-      content: string;
-    };
-    'cabloy-store.dto.cabloyProviderCreate': {
-      /** @description Name */
-      name: string;
-      /** @description Description */
-      description?: string | undefined;
-      /**
-       * @description GitHub Account
-       * @default false
-       */
-      githubAccount?: boolean | undefined;
-      userId?: number | string | undefined;
-    };
-    'cabloy-store.dto.cabloyProviderQueryRes': {
-      list: {
-        /**
-         * Format: date
-         * @description Created At
-         */
-        createdAt: string;
-        /**
-         * Format: date
-         * @description Updated At
-         */
-        updatedAt: string;
-        /**
-         * @description Deleted
-         * @default false
-         */
-        deleted?: boolean;
-        /**
-         * @description Instance ID
-         * @default 0
-         */
-        iid?: number;
-        /** @description ID */
-        id: number | string;
-        /** @description Name */
-        name: string;
-        /** @description Description */
-        description?: string | undefined;
-        /**
-         * @description GitHub Account
-         * @default false
-         */
-        githubAccount?: boolean | undefined;
-        userId?: number | string | undefined;
-      }[];
-      total: string;
-      pageCount: number;
-      pageSize: number;
-      pageNo: number;
-    };
-    /** @description Provider */
-    'cabloy-store.entity.cabloyProvider':
-      | {
-          /**
-           * Format: date
-           * @description Created At
-           */
-          createdAt: string;
-          /**
-           * Format: date
-           * @description Updated At
-           */
-          updatedAt: string;
-          /**
-           * @description Deleted
-           * @default false
-           */
-          deleted?: boolean;
-          /**
-           * @description Instance ID
-           * @default 0
-           */
-          iid?: number;
-          /** @description ID */
-          id: number | string;
-          /** @description Name */
-          name: string;
-          /** @description Description */
-          description?: string | undefined;
-          /**
-           * @description GitHub Account
-           * @default false
-           */
-          githubAccount?: boolean | undefined;
-          userId?: number | string | undefined;
-        }
-      | undefined;
-    'cabloy-store.dto.cabloyProviderUpdate': {
-      /** @description Name */
-      name: string;
-      /** @description Description */
-      description?: string | undefined;
-      /**
-       * @description GitHub Account
-       * @default false
-       */
-      githubAccount?: boolean | undefined;
-    };
     /** @description Create Product */
     'test-rest.dto.productCreate': {
       /** @description Name */
@@ -1695,12 +1254,12 @@ export interface components {
          * Format: date
          * @description Created At
          */
-        createdAt: string;
+        createdAt: Date;
         /**
          * Format: date
          * @description Updated At
          */
-        updatedAt: string;
+        updatedAt: Date;
         /**
          * @description Deleted
          * @default false
@@ -1741,12 +1300,12 @@ export interface components {
            * Format: date
            * @description Created At
            */
-          createdAt: string;
+          createdAt: Date;
           /**
            * Format: date
            * @description Updated At
            */
-          updatedAt: string;
+          updatedAt: Date;
           /**
            * @description Deleted
            * @default false
@@ -1844,14 +1403,57 @@ export interface components {
       _customCopy?: string | undefined;
       _customCopied?: boolean | undefined;
     };
-    'a-play.dto.play': {
-      args: string[];
-      projectPath: string;
-    };
-    'test-vona.dto.signin': {
+    'test-captcha.dto.signin': {
       username: string;
       password: string;
       captcha?: unknown;
+    };
+    'a-paypal.entity.paypalRecord': {
+      /**
+       * Format: date
+       * @description Created At
+       */
+      createdAt: Date;
+      /**
+       * Format: date
+       * @description Updated At
+       */
+      updatedAt: Date;
+      /**
+       * @description Deleted
+       * @default false
+       */
+      deleted?: boolean;
+      /**
+       * @description Instance ID
+       * @default 0
+       */
+      iid?: number;
+      /** @description ID */
+      id: number | string;
+      userId: number | string;
+      /** @default 0 */
+      status?: number;
+      prepayId: string;
+      payload: components['schemas']['a-paypal.dto.paypalOrderRecordPayload'];
+      options: components['schemas']['a-paypal.dto.paypalOrderRecordOptions'];
+    };
+    'a-paypal.dto.paypalOrderRecordPayload': {
+      remark: string;
+      total: string;
+      currencyCode: string;
+    };
+    'a-paypal.dto.paypalOrderRecordOptions': {
+      brandName: string;
+      returnUrl: string;
+      cancelUrl: string;
+      returnTo: string;
+      scene: string;
+      orderId: number | string;
+    };
+    'a-play.dto.play': {
+      args: string[];
+      projectPath: string;
     };
     'test-vona.dto.userLazy': {
       name: string;
@@ -1968,12 +1570,12 @@ export interface components {
        * Format: date
        * @description Created At
        */
-      createdAt: string;
+      createdAt: Date;
       /**
        * Format: date
        * @description Updated At
        */
-      updatedAt: string;
+      updatedAt: Date;
       /**
        * @description Deleted
        * @default false
@@ -2015,12 +1617,12 @@ export interface components {
          * Format: date
          * @description Created At
          */
-        createdAt: string;
+        createdAt: Date;
         /**
          * Format: date
          * @description Updated At
          */
-        updatedAt: string;
+        updatedAt: Date;
         /**
          * @description Deleted
          * @default false
@@ -2068,12 +1670,12 @@ export interface components {
          * Format: date
          * @description Created At
          */
-        createdAt: string;
+        createdAt: Date;
         /**
          * Format: date
          * @description Updated At
          */
-        updatedAt: string;
+        updatedAt: Date;
         /**
          * @description Deleted
          * @default false
@@ -2191,6 +1793,274 @@ export interface components {
 }
 export type $defs = Record<string, never>;
 export interface operations {
+  AuthMock_authorize: {
+    parameters: {
+      query?: never;
+      header?: never;
+      path?: never;
+      cookie?: never;
+    };
+    requestBody?: never;
+    responses: {
+      200: {
+        headers: {
+          [name: string]: unknown;
+        };
+        content: {
+          'application/json': {
+            code: string;
+            message: string;
+            data?: unknown;
+          };
+        };
+      };
+    };
+  };
+  AuthMock_authorizePost: {
+    parameters: {
+      query: {
+        redirect_uri: string;
+        state: string;
+      };
+      header?: never;
+      path?: never;
+      cookie?: never;
+    };
+    requestBody: {
+      content: {
+        'application/json': {
+          username: string;
+        };
+      };
+    };
+    responses: {
+      200: {
+        headers: {
+          [name: string]: unknown;
+        };
+        content: {
+          'application/json': {
+            code: string;
+            message: string;
+            data?: unknown;
+          };
+        };
+      };
+    };
+  };
+  Captcha_create: {
+    parameters: {
+      query?: never;
+      header?: never;
+      path?: never;
+      cookie?: never;
+    };
+    requestBody: {
+      content: {
+        'application/json': {
+          scene: string;
+        };
+      };
+    };
+    responses: {
+      200: {
+        headers: {
+          [name: string]: unknown;
+        };
+        content: {
+          'application/json': {
+            code: string;
+            message: string;
+            data: components['schemas']['a-captcha.dto.captchaData'];
+          };
+        };
+      };
+    };
+  };
+  Captcha_refresh: {
+    parameters: {
+      query?: never;
+      header?: never;
+      path?: never;
+      cookie?: never;
+    };
+    requestBody: {
+      content: {
+        'application/json': {
+          id: string;
+          scene: string;
+        };
+      };
+    };
+    responses: {
+      200: {
+        headers: {
+          [name: string]: unknown;
+        };
+        content: {
+          'application/json': {
+            code: string;
+            message: string;
+            data: components['schemas']['a-captcha.dto.captchaData'];
+          };
+        };
+      };
+    };
+  };
+  Captcha_verifyImmediate: {
+    parameters: {
+      query?: never;
+      header?: never;
+      path?: never;
+      cookie?: never;
+    };
+    requestBody: {
+      content: {
+        'application/json': {
+          id: string;
+          token?: unknown;
+        };
+      };
+    };
+    responses: {
+      200: {
+        headers: {
+          [name: string]: unknown;
+        };
+        content: {
+          'application/json': {
+            code: string;
+            message: string;
+            data: string;
+          };
+        };
+      };
+    };
+  };
+  MailconfirmMail_emailConfirmCallback: {
+    parameters: {
+      query: {
+        token: string;
+      };
+      header?: never;
+      path?: never;
+      cookie?: never;
+    };
+    requestBody?: never;
+    responses: {
+      200: {
+        headers: {
+          [name: string]: unknown;
+        };
+        content: {
+          'application/json': {
+            code: string;
+            message: string;
+            data?: unknown;
+          };
+        };
+      };
+    };
+  };
+  MailconfirmMail_passwordResetCallback: {
+    parameters: {
+      query: {
+        token: string;
+      };
+      header?: never;
+      path?: never;
+      cookie?: never;
+    };
+    requestBody?: never;
+    responses: {
+      200: {
+        headers: {
+          [name: string]: unknown;
+        };
+        content: {
+          'application/json': {
+            code: string;
+            message: string;
+            data?: unknown;
+          };
+        };
+      };
+    };
+  };
+  HomeBaseMenu_retrieveMenus: {
+    parameters: {
+      query?: never;
+      header?: never;
+      path: {
+        publicPath: ((string | undefined) | undefined) | undefined;
+      };
+      cookie?: never;
+    };
+    requestBody?: never;
+    responses: {
+      200: {
+        headers: {
+          [name: string]: unknown;
+        };
+        content: {
+          'application/json': {
+            code: string;
+            message: string;
+            data: components['schemas']['a-menu.dto.menus'];
+          };
+        };
+      };
+    };
+  };
+  HomeBasePermission_retrievePermissions: {
+    parameters: {
+      query?: never;
+      header?: never;
+      path: {
+        resource: string;
+      };
+      cookie?: never;
+    };
+    requestBody?: never;
+    responses: {
+      200: {
+        headers: {
+          [name: string]: unknown;
+        };
+        content: {
+          'application/json': {
+            code: string;
+            message: string;
+            data: components['schemas']['a-permission.dto.permissions'];
+          };
+        };
+      };
+    };
+    authToken: true;
+  };
+  Home_index: {
+    parameters: {
+      query?: never;
+      header?: never;
+      path?: never;
+      cookie?: never;
+    };
+    requestBody?: never;
+    responses: {
+      200: {
+        headers: {
+          [name: string]: unknown;
+        };
+        content: {
+          'application/json': {
+            code: string;
+            message: string;
+            data?: unknown;
+          };
+        };
+      };
+    };
+  };
   HomeUserPassport_current: {
     parameters: {
       query?: never;
@@ -2465,683 +2335,7 @@ export interface operations {
     };
     authToken: true;
   };
-  Captcha_create: {
-    parameters: {
-      query?: never;
-      header?: never;
-      path?: never;
-      cookie?: never;
-    };
-    requestBody: {
-      content: {
-        'application/json': {
-          scene: string;
-        };
-      };
-    };
-    responses: {
-      200: {
-        headers: {
-          [name: string]: unknown;
-        };
-        content: {
-          'application/json': {
-            code: string;
-            message: string;
-            data: components['schemas']['a-captcha.dto.captchaData'];
-          };
-        };
-      };
-    };
-  };
-  Captcha_refresh: {
-    parameters: {
-      query?: never;
-      header?: never;
-      path?: never;
-      cookie?: never;
-    };
-    requestBody: {
-      content: {
-        'application/json': {
-          id: string;
-          scene: string;
-        };
-      };
-    };
-    responses: {
-      200: {
-        headers: {
-          [name: string]: unknown;
-        };
-        content: {
-          'application/json': {
-            code: string;
-            message: string;
-            data: components['schemas']['a-captcha.dto.captchaData'];
-          };
-        };
-      };
-    };
-  };
-  Captcha_verifyImmediate: {
-    parameters: {
-      query?: never;
-      header?: never;
-      path?: never;
-      cookie?: never;
-    };
-    requestBody: {
-      content: {
-        'application/json': {
-          id: string;
-          token?: unknown;
-        };
-      };
-    };
-    responses: {
-      200: {
-        headers: {
-          [name: string]: unknown;
-        };
-        content: {
-          'application/json': {
-            code: string;
-            message: string;
-            data: string;
-          };
-        };
-      };
-    };
-  };
-  MailconfirmMail_emailConfirmCallback: {
-    parameters: {
-      query: {
-        token: string;
-      };
-      header?: never;
-      path?: never;
-      cookie?: never;
-    };
-    requestBody?: never;
-    responses: {
-      200: {
-        headers: {
-          [name: string]: unknown;
-        };
-        content: {
-          'application/json': {
-            code: string;
-            message: string;
-            data?: unknown;
-          };
-        };
-      };
-    };
-  };
-  MailconfirmMail_passwordResetCallback: {
-    parameters: {
-      query: {
-        token: string;
-      };
-      header?: never;
-      path?: never;
-      cookie?: never;
-    };
-    requestBody?: never;
-    responses: {
-      200: {
-        headers: {
-          [name: string]: unknown;
-        };
-        content: {
-          'application/json': {
-            code: string;
-            message: string;
-            data?: unknown;
-          };
-        };
-      };
-    };
-  };
-  HomeBaseMenu_retrieveMenus: {
-    parameters: {
-      query?: never;
-      header?: never;
-      path: {
-        publicPath: ((string | undefined) | undefined) | undefined;
-      };
-      cookie?: never;
-    };
-    requestBody?: never;
-    responses: {
-      200: {
-        headers: {
-          [name: string]: unknown;
-        };
-        content: {
-          'application/json': {
-            code: string;
-            message: string;
-            data: components['schemas']['a-menu.dto.menus'];
-          };
-        };
-      };
-    };
-  };
-  HomeBasePermission_retrievePermissions: {
-    parameters: {
-      query?: never;
-      header?: never;
-      path: {
-        resource: string;
-      };
-      cookie?: never;
-    };
-    requestBody?: never;
-    responses: {
-      200: {
-        headers: {
-          [name: string]: unknown;
-        };
-        content: {
-          'application/json': {
-            code: string;
-            message: string;
-            data: components['schemas']['a-permission.dto.permissions'];
-          };
-        };
-      };
-    };
-    authToken: true;
-  };
-  Home_index: {
-    parameters: {
-      query?: never;
-      header?: never;
-      path?: never;
-      cookie?: never;
-    };
-    requestBody?: never;
-    responses: {
-      200: {
-        headers: {
-          [name: string]: unknown;
-        };
-        content: {
-          'application/json': {
-            code: string;
-            message: string;
-            data?: unknown;
-          };
-        };
-      };
-    };
-  };
-  StartTestProduct_select: {
-    parameters: {
-      query?: {
-        columns?: string[] | undefined;
-        where?:
-          | {
-              [key: string]: unknown;
-            }
-          | undefined;
-        orders?: string | string[][] | undefined;
-        pageNo?: number;
-        pageSize?: number;
-        createdAt?: string | undefined;
-        name?: string | undefined;
-      };
-      header?: never;
-      path?: never;
-      cookie?: never;
-    };
-    requestBody?: never;
-    responses: {
-      200: {
-        headers: {
-          [name: string]: unknown;
-        };
-        content: {
-          'application/json': {
-            code: string;
-            message: string;
-            data: components['schemas']['start-test.dto.productQueryRes'];
-          };
-        };
-      };
-    };
-    authToken: true;
-  };
-  StartTestProduct_create: {
-    parameters: {
-      query?: never;
-      header?: never;
-      path?: never;
-      cookie?: never;
-    };
-    requestBody: {
-      content: {
-        'application/json': components['schemas']['start-test.dto.productCreate'];
-      };
-    };
-    responses: {
-      200: {
-        headers: {
-          [name: string]: unknown;
-        };
-        content: {
-          'application/json': {
-            code: string;
-            message: string;
-            data: number | string;
-          };
-        };
-      };
-    };
-    authToken: true;
-  };
-  StartTestProduct_view: {
-    parameters: {
-      query?: never;
-      header?: never;
-      path: {
-        id: number | string;
-      };
-      cookie?: never;
-    };
-    requestBody?: never;
-    responses: {
-      200: {
-        headers: {
-          [name: string]: unknown;
-        };
-        content: {
-          'application/json': {
-            code: string;
-            message: string;
-            data?: components['schemas']['start-test.entity.product'];
-          };
-        };
-      };
-    };
-    authToken: true;
-  };
-  StartTestProduct_delete: {
-    parameters: {
-      query?: never;
-      header?: never;
-      path: {
-        id: number | string;
-      };
-      cookie?: never;
-    };
-    requestBody?: never;
-    responses: {
-      200: {
-        headers: {
-          [name: string]: unknown;
-        };
-        content: {
-          'application/json': {
-            code: string;
-            message: string;
-            data?: unknown;
-          };
-        };
-      };
-    };
-    authToken: true;
-  };
-  StartTestProduct_update: {
-    parameters: {
-      query?: never;
-      header?: never;
-      path: {
-        id: number | string;
-      };
-      cookie?: never;
-    };
-    requestBody: {
-      content: {
-        'application/json': components['schemas']['start-test.dto.productUpdate'];
-      };
-    };
-    responses: {
-      200: {
-        headers: {
-          [name: string]: unknown;
-        };
-        content: {
-          'application/json': {
-            code: string;
-            message: string;
-            data?: unknown;
-          };
-        };
-      };
-    };
-    authToken: true;
-  };
-  CabloyStoreCabloyModule_select: {
-    parameters: {
-      query?: {
-        columns?: string[] | undefined;
-        where?:
-          | {
-              [key: string]: unknown;
-            }
-          | undefined;
-        orders?: string | string[][] | undefined;
-        pageNo?: number;
-        pageSize?: number;
-        createdAt?: string | undefined;
-        name?: string | undefined;
-      };
-      header?: never;
-      path?: never;
-      cookie?: never;
-    };
-    requestBody?: never;
-    responses: {
-      200: {
-        headers: {
-          [name: string]: unknown;
-        };
-        content: {
-          'application/json': {
-            code: string;
-            message: string;
-            data: components['schemas']['cabloy-store.dto.cabloyModuleQueryRes'];
-          };
-        };
-      };
-    };
-    authToken: true;
-  };
-  CabloyStoreCabloyModule_create: {
-    parameters: {
-      query?: never;
-      header?: never;
-      path?: never;
-      cookie?: never;
-    };
-    requestBody: {
-      content: {
-        'application/json': components['schemas']['cabloy-store.dto.cabloyModuleCreate'];
-      };
-    };
-    responses: {
-      200: {
-        headers: {
-          [name: string]: unknown;
-        };
-        content: {
-          'application/json': {
-            code: string;
-            message: string;
-            data: number | string;
-          };
-        };
-      };
-    };
-    authToken: true;
-  };
-  CabloyStoreCabloyModule_view: {
-    parameters: {
-      query?: never;
-      header?: never;
-      path: {
-        id: number | string;
-      };
-      cookie?: never;
-    };
-    requestBody?: never;
-    responses: {
-      200: {
-        headers: {
-          [name: string]: unknown;
-        };
-        content: {
-          'application/json': {
-            code: string;
-            message: string;
-            data?: components['schemas']['cabloy-store.dto.cabloyModuleGet'];
-          };
-        };
-      };
-    };
-    authToken: true;
-  };
-  CabloyStoreCabloyModule_delete: {
-    parameters: {
-      query?: never;
-      header?: never;
-      path: {
-        id: number | string;
-      };
-      cookie?: never;
-    };
-    requestBody?: never;
-    responses: {
-      200: {
-        headers: {
-          [name: string]: unknown;
-        };
-        content: {
-          'application/json': {
-            code: string;
-            message: string;
-            data?: unknown;
-          };
-        };
-      };
-    };
-    authToken: true;
-  };
-  CabloyStoreCabloyModule_update: {
-    parameters: {
-      query?: never;
-      header?: never;
-      path: {
-        id: number | string;
-      };
-      cookie?: never;
-    };
-    requestBody: {
-      content: {
-        'application/json': components['schemas']['cabloy-store.dto.cabloyModuleUpdate'];
-      };
-    };
-    responses: {
-      200: {
-        headers: {
-          [name: string]: unknown;
-        };
-        content: {
-          'application/json': {
-            code: string;
-            message: string;
-            data?: unknown;
-          };
-        };
-      };
-    };
-    authToken: true;
-  };
-  CabloyStoreCabloyModule_viewByName: {
-    parameters: {
-      query?: never;
-      header?: never;
-      path: {
-        name: string;
-      };
-      cookie?: never;
-    };
-    requestBody?: never;
-    responses: {
-      200: {
-        headers: {
-          [name: string]: unknown;
-        };
-        content: {
-          'application/json': {
-            code: string;
-            message: string;
-            data?: components['schemas']['cabloy-store.dto.cabloyModuleGet'];
-          };
-        };
-      };
-    };
-  };
-  CabloyStoreCabloyProvider_select: {
-    parameters: {
-      query?: {
-        columns?: string[] | undefined;
-        where?:
-          | {
-              [key: string]: unknown;
-            }
-          | undefined;
-        orders?: string | string[][] | undefined;
-        pageNo?: number;
-        pageSize?: number;
-        createdAt?: string | undefined;
-        name?: string | undefined;
-      };
-      header?: never;
-      path?: never;
-      cookie?: never;
-    };
-    requestBody?: never;
-    responses: {
-      200: {
-        headers: {
-          [name: string]: unknown;
-        };
-        content: {
-          'application/json': {
-            code: string;
-            message: string;
-            data: components['schemas']['cabloy-store.dto.cabloyProviderQueryRes'];
-          };
-        };
-      };
-    };
-    authToken: true;
-  };
-  CabloyStoreCabloyProvider_create: {
-    parameters: {
-      query?: never;
-      header?: never;
-      path?: never;
-      cookie?: never;
-    };
-    requestBody: {
-      content: {
-        'application/json': components['schemas']['cabloy-store.dto.cabloyProviderCreate'];
-      };
-    };
-    responses: {
-      200: {
-        headers: {
-          [name: string]: unknown;
-        };
-        content: {
-          'application/json': {
-            code: string;
-            message: string;
-            data: number | string;
-          };
-        };
-      };
-    };
-    authToken: true;
-  };
-  CabloyStoreCabloyProvider_view: {
-    parameters: {
-      query?: never;
-      header?: never;
-      path: {
-        id: number | string;
-      };
-      cookie?: never;
-    };
-    requestBody?: never;
-    responses: {
-      200: {
-        headers: {
-          [name: string]: unknown;
-        };
-        content: {
-          'application/json': {
-            code: string;
-            message: string;
-            data?: components['schemas']['cabloy-store.entity.cabloyProvider'];
-          };
-        };
-      };
-    };
-    authToken: true;
-  };
-  CabloyStoreCabloyProvider_delete: {
-    parameters: {
-      query?: never;
-      header?: never;
-      path: {
-        id: number | string;
-      };
-      cookie?: never;
-    };
-    requestBody?: never;
-    responses: {
-      200: {
-        headers: {
-          [name: string]: unknown;
-        };
-        content: {
-          'application/json': {
-            code: string;
-            message: string;
-            data?: unknown;
-          };
-        };
-      };
-    };
-    authToken: true;
-  };
-  CabloyStoreCabloyProvider_update: {
-    parameters: {
-      query?: never;
-      header?: never;
-      path: {
-        id: number | string;
-      };
-      cookie?: never;
-    };
-    requestBody: {
-      content: {
-        'application/json': components['schemas']['cabloy-store.dto.cabloyProviderUpdate'];
-      };
-    };
-    responses: {
-      200: {
-        headers: {
-          [name: string]: unknown;
-        };
-        content: {
-          'application/json': {
-            code: string;
-            message: string;
-            data?: unknown;
-          };
-        };
-      };
-    };
-    authToken: true;
-  };
-  TestCabloyPassport_isAuthenticated: {
+  TestAuthPassport_isAuthenticated: {
     parameters: {
       query?: never;
       header?: never;
@@ -3165,7 +2359,7 @@ export interface operations {
     };
     authToken: true;
   };
-  TestCabloyPassport_current: {
+  TestAuthPassport_current: {
     parameters: {
       query?: never;
       header?: never;
@@ -3422,6 +2616,111 @@ export interface operations {
       };
     };
   };
+  TestCaptcha_signin: {
+    parameters: {
+      query?: never;
+      header?: never;
+      path?: never;
+      cookie?: never;
+    };
+    requestBody: {
+      content: {
+        'application/json': components['schemas']['test-captcha.dto.signin'];
+      };
+    };
+    responses: {
+      200: {
+        headers: {
+          [name: string]: unknown;
+        };
+        content: {
+          'application/json': {
+            code: string;
+            message: string;
+            data?: unknown;
+          };
+        };
+      };
+    };
+  };
+  Paypal_getRecord: {
+    parameters: {
+      query?: never;
+      header?: never;
+      path: {
+        recordId: number | string;
+      };
+      cookie?: never;
+    };
+    requestBody?: never;
+    responses: {
+      200: {
+        headers: {
+          [name: string]: unknown;
+        };
+        content: {
+          'application/json': {
+            code: string;
+            message: string;
+            data: components['schemas']['a-paypal.entity.paypalRecord'];
+          };
+        };
+      };
+    };
+    authToken: true;
+  };
+  Paypal_captureOrder: {
+    parameters: {
+      query?: never;
+      header?: never;
+      path: {
+        recordId: number | string;
+      };
+      cookie?: never;
+    };
+    requestBody?: never;
+    responses: {
+      200: {
+        headers: {
+          [name: string]: unknown;
+        };
+        content: {
+          'application/json': {
+            code: string;
+            message: string;
+            data?: unknown;
+          };
+        };
+      };
+    };
+    authToken: true;
+  };
+  Paypal_cancelOrder: {
+    parameters: {
+      query?: never;
+      header?: never;
+      path: {
+        recordId: number | string;
+      };
+      cookie?: never;
+    };
+    requestBody?: never;
+    responses: {
+      200: {
+        headers: {
+          [name: string]: unknown;
+        };
+        content: {
+          'application/json': {
+            code: string;
+            message: string;
+            data?: unknown;
+          };
+        };
+      };
+    };
+    authToken: true;
+  };
   Play_index: {
     parameters: {
       query?: never;
@@ -3449,33 +2748,6 @@ export interface operations {
       };
     };
     authToken: true;
-  };
-  TestVonaCaptcha_signin: {
-    parameters: {
-      query?: never;
-      header?: never;
-      path?: never;
-      cookie?: never;
-    };
-    requestBody: {
-      content: {
-        'application/json': components['schemas']['test-vona.dto.signin'];
-      };
-    };
-    responses: {
-      200: {
-        headers: {
-          [name: string]: unknown;
-        };
-        content: {
-          'application/json': {
-            code: string;
-            message: string;
-            data?: unknown;
-          };
-        };
-      };
-    };
   };
   TestVonaDtoTest_getUserLazy: {
     parameters: {
@@ -3523,12 +2795,12 @@ export interface operations {
                * Created At
                * Format: date
                */
-              createdAt: string;
+              createdAt: Date;
               /**
                * Updated At
                * Format: date
                */
-              updatedAt: string;
+              updatedAt: Date;
               /**
                * Deleted
                * @default false
@@ -3575,12 +2847,12 @@ export interface operations {
                * Created At
                * Format: date
                */
-              createdAt: string;
+              createdAt: Date;
               /**
                * Updated At
                * Format: date
                */
-              updatedAt: string;
+              updatedAt: Date;
               /**
                * Deleted
                * @default false
@@ -3626,12 +2898,12 @@ export interface operations {
                * Created At
                * Format: date
                */
-              createdAt: string;
+              createdAt: Date;
               /**
                * Updated At
                * Format: date
                */
-              updatedAt: string;
+              updatedAt: Date;
               /**
                * Deleted
                * @default false
