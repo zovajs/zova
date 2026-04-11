@@ -1,16 +1,14 @@
 import { Api, BeanApiBase, IApiActionOptions } from 'zova-module-a-api';
 
-import type { paths } from './openapi/index.js';
-
-import { OpenApiBaseURL } from './openapi/index.js';
+import { OpenApiBaseURL, type paths } from './openapi/index.js';
 
 /** Captcha_create */
 export const ApiApiCaptchacreatePath = '/api/captcha/create';
 export type ApiApiCaptchacreatePath = '/api/captcha/create';
 export type ApiApiCaptchacreateMethod = 'post';
-export interface ApiApiCaptchacreateRequestBody {
+export type ApiApiCaptchacreateRequestBody = {
   scene: string;
-}
+};
 export type ApiApiCaptchacreateResponseBody =
   paths[ApiApiCaptchacreatePath][ApiApiCaptchacreateMethod]['responses']['200']['content']['application/json']['data'];
 
@@ -18,10 +16,10 @@ export type ApiApiCaptchacreateResponseBody =
 export const ApiApiCaptcharefreshPath = '/api/captcha/refresh';
 export type ApiApiCaptcharefreshPath = '/api/captcha/refresh';
 export type ApiApiCaptcharefreshMethod = 'post';
-export interface ApiApiCaptcharefreshRequestBody {
+export type ApiApiCaptcharefreshRequestBody = {
   id: string;
   scene: string;
-}
+};
 export type ApiApiCaptcharefreshResponseBody =
   paths[ApiApiCaptcharefreshPath][ApiApiCaptcharefreshMethod]['responses']['200']['content']['application/json']['data'];
 
@@ -29,10 +27,10 @@ export type ApiApiCaptcharefreshResponseBody =
 export const ApiApiCaptchaverifyImmediatePath = '/api/captcha/verifyImmediate';
 export type ApiApiCaptchaverifyImmediatePath = '/api/captcha/verifyImmediate';
 export type ApiApiCaptchaverifyImmediateMethod = 'post';
-export interface ApiApiCaptchaverifyImmediateRequestBody {
+export type ApiApiCaptchaverifyImmediateRequestBody = {
   id: string;
   token?: unknown;
-}
+};
 export type ApiApiCaptchaverifyImmediateResponseBody =
   paths[ApiApiCaptchaverifyImmediatePath][ApiApiCaptchaverifyImmediateMethod]['responses']['200']['content']['application/json']['data'];
 

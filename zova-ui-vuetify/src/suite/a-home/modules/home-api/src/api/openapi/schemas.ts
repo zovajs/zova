@@ -1,4 +1,4 @@
-/* eslint-disable */
+// eslint-disable
 import type { components } from './types.js';
 export type ApiSchemaTestVonaDtoPostCreate = components['schemas']['test-vona.dto.postCreate'];
 export type ApiSchemaTestVonaDtoPostCreatePartial = Partial<ApiSchemaTestVonaDtoPostCreate>;
@@ -42,72 +42,6 @@ export type ApiSchemaACaptchaDtoCaptchaVerify_c3cd80b1eeafe39bfe4433491bb081d68e
   components['schemas']['a-captcha.dto.captchaVerify_c3cd80b1eeafe39bfe4433491bb081d68e84797e_3218e7d152830e08f6e764b9e0c3796df929ee2b'];
 export type ApiSchemaACaptchaDtoCaptchaVerify_c3cd80b1eeafe39bfe4433491bb081d68e84797e_3218e7d152830e08f6e764b9e0c3796df929ee2bPartial =
   Partial<ApiSchemaACaptchaDtoCaptchaVerify_c3cd80b1eeafe39bfe4433491bb081d68e84797e_3218e7d152830e08f6e764b9e0c3796df929ee2b>;
-export type ApiSchemaCabloyStoreDtoCabloyModuleCreate = components['schemas']['cabloy-store.dto.cabloyModuleCreate'];
-export type ApiSchemaCabloyStoreDtoCabloyModuleCreatePartial = Partial<ApiSchemaCabloyStoreDtoCabloyModuleCreate>;
-export type ApiSchemaCabloyStoreEntityCabloyModuleContent_81badf1cb6c91a163ef245059a4656a90b23a2f0_1816ff740d81c738ec055c7038bbd93beb9405a7 =
-  components['schemas']['cabloy-store.entity.cabloyModuleContent_81badf1cb6c91a163ef245059a4656a90b23a2f0_1816ff740d81c738ec055c7038bbd93beb9405a7'];
-export type ApiSchemaCabloyStoreEntityCabloyModuleContent_81badf1cb6c91a163ef245059a4656a90b23a2f0_1816ff740d81c738ec055c7038bbd93beb9405a7Partial =
-  Partial<ApiSchemaCabloyStoreEntityCabloyModuleContent_81badf1cb6c91a163ef245059a4656a90b23a2f0_1816ff740d81c738ec055c7038bbd93beb9405a7>;
-export type ApiSchemaCabloyStoreDtoCabloyModuleQueryRes = components['schemas']['cabloy-store.dto.cabloyModuleQueryRes'];
-export type ApiSchemaCabloyStoreDtoCabloyModuleQueryResPartial = Partial<ApiSchemaCabloyStoreDtoCabloyModuleQueryRes>;
-export type ApiSchemaCabloyStoreDtoCabloyModuleQueryResItem = components['schemas']['cabloy-store.dto.cabloyModuleQueryResItem'];
-export type ApiSchemaCabloyStoreDtoCabloyModuleQueryResItemPartial = Partial<ApiSchemaCabloyStoreDtoCabloyModuleQueryResItem>;
-export type ApiSchemaCabloyStoreEntityCabloyProvider_2c7d642ee581efa300341e343180fbb0ecdc785d_1816ff740d81c738ec055c7038bbd93beb9405a7 =
-  components['schemas']['cabloy-store.entity.cabloyProvider_2c7d642ee581efa300341e343180fbb0ecdc785d_1816ff740d81c738ec055c7038bbd93beb9405a7'];
-export type ApiSchemaCabloyStoreEntityCabloyProvider_2c7d642ee581efa300341e343180fbb0ecdc785d_1816ff740d81c738ec055c7038bbd93beb9405a7Partial =
-  Partial<ApiSchemaCabloyStoreEntityCabloyProvider_2c7d642ee581efa300341e343180fbb0ecdc785d_1816ff740d81c738ec055c7038bbd93beb9405a7>;
-export type ApiSchemaCabloyStoreDtoCabloyModuleView = components['schemas']['cabloy-store.dto.cabloyModuleView'];
-export type ApiSchemaCabloyStoreDtoCabloyModuleViewPartial = Partial<ApiSchemaCabloyStoreDtoCabloyModuleView>;
-export type ApiSchemaCabloyStoreEntityCabloyModuleContent_1c9d53f3af6f7dcc5939f31fcb21323dc5f0c0f2_1816ff740d81c738ec055c7038bbd93beb9405a7 =
-  components['schemas']['cabloy-store.entity.cabloyModuleContent_1c9d53f3af6f7dcc5939f31fcb21323dc5f0c0f2_1816ff740d81c738ec055c7038bbd93beb9405a7'];
-export type ApiSchemaCabloyStoreEntityCabloyModuleContent_1c9d53f3af6f7dcc5939f31fcb21323dc5f0c0f2_1816ff740d81c738ec055c7038bbd93beb9405a7Partial =
-  Partial<ApiSchemaCabloyStoreEntityCabloyModuleContent_1c9d53f3af6f7dcc5939f31fcb21323dc5f0c0f2_1816ff740d81c738ec055c7038bbd93beb9405a7>;
-export type ApiSchemaCabloyStoreDtoCabloyModuleUpdate = components['schemas']['cabloy-store.dto.cabloyModuleUpdate'];
-export type ApiSchemaCabloyStoreDtoCabloyModuleUpdatePartial = Partial<ApiSchemaCabloyStoreDtoCabloyModuleUpdate>;
-export type ApiSchemaCabloyStoreEntityCabloyModuleContent_e7b4a0d4d4633f151e39304b0c3e984921d39abe_1816ff740d81c738ec055c7038bbd93beb9405a7 =
-  components['schemas']['cabloy-store.entity.cabloyModuleContent_e7b4a0d4d4633f151e39304b0c3e984921d39abe_1816ff740d81c738ec055c7038bbd93beb9405a7'];
-export type ApiSchemaCabloyStoreEntityCabloyModuleContent_e7b4a0d4d4633f151e39304b0c3e984921d39abe_1816ff740d81c738ec055c7038bbd93beb9405a7Partial =
-  Partial<ApiSchemaCabloyStoreEntityCabloyModuleContent_e7b4a0d4d4633f151e39304b0c3e984921d39abe_1816ff740d81c738ec055c7038bbd93beb9405a7>;
-export type ApiSchemaCabloyStoreDtoCabloyModuleViewByName = components['schemas']['cabloy-store.dto.cabloyModuleViewByName'];
-export type ApiSchemaCabloyStoreDtoCabloyModuleViewByNamePartial = Partial<ApiSchemaCabloyStoreDtoCabloyModuleViewByName>;
-export type ApiSchemaCabloyStoreDtoCabloyProviderCreate = components['schemas']['cabloy-store.dto.cabloyProviderCreate'];
-export type ApiSchemaCabloyStoreDtoCabloyProviderCreatePartial = Partial<ApiSchemaCabloyStoreDtoCabloyProviderCreate>;
-export type ApiSchemaCabloyStoreDtoCabloyProviderQueryRes = components['schemas']['cabloy-store.dto.cabloyProviderQueryRes'];
-export type ApiSchemaCabloyStoreDtoCabloyProviderQueryResPartial = Partial<ApiSchemaCabloyStoreDtoCabloyProviderQueryRes>;
-export type ApiSchemaCabloyStoreEntityCabloyProvider = components['schemas']['cabloy-store.entity.cabloyProvider'];
-export type ApiSchemaCabloyStoreEntityCabloyProviderPartial = Partial<ApiSchemaCabloyStoreEntityCabloyProvider>;
-export type ApiSchemaCabloyStoreDtoCabloyProviderUpdate = components['schemas']['cabloy-store.dto.cabloyProviderUpdate'];
-export type ApiSchemaCabloyStoreDtoCabloyProviderUpdatePartial = Partial<ApiSchemaCabloyStoreDtoCabloyProviderUpdate>;
-export type ApiSchemaStorePurchaseDtoPurchaseOrderCreate = components['schemas']['store-purchase.dto.purchaseOrderCreate'];
-export type ApiSchemaStorePurchaseDtoPurchaseOrderCreatePartial = Partial<ApiSchemaStorePurchaseDtoPurchaseOrderCreate>;
-export type ApiSchemaStorePurchaseDtoPurchaseOrderQueryRes = components['schemas']['store-purchase.dto.purchaseOrderQueryRes'];
-export type ApiSchemaStorePurchaseDtoPurchaseOrderQueryResPartial = Partial<ApiSchemaStorePurchaseDtoPurchaseOrderQueryRes>;
-export type ApiSchemaStorePurchaseEntityPurchaseOrder = components['schemas']['store-purchase.entity.purchaseOrder'];
-export type ApiSchemaStorePurchaseEntityPurchaseOrderPartial = Partial<ApiSchemaStorePurchaseEntityPurchaseOrder>;
-export type ApiSchemaStorePurchaseDtoPurchaseOrderUpdate = components['schemas']['store-purchase.dto.purchaseOrderUpdate'];
-export type ApiSchemaStorePurchaseDtoPurchaseOrderUpdatePartial = Partial<ApiSchemaStorePurchaseDtoPurchaseOrderUpdate>;
-export type ApiSchemaStorePurchaseDtoPurchaseRecordCreate = components['schemas']['store-purchase.dto.purchaseRecordCreate'];
-export type ApiSchemaStorePurchaseDtoPurchaseRecordCreatePartial = Partial<ApiSchemaStorePurchaseDtoPurchaseRecordCreate>;
-export type ApiSchemaStorePurchaseDtoPurchaseRecordQueryRes = components['schemas']['store-purchase.dto.purchaseRecordQueryRes'];
-export type ApiSchemaStorePurchaseDtoPurchaseRecordQueryResPartial = Partial<ApiSchemaStorePurchaseDtoPurchaseRecordQueryRes>;
-export type ApiSchemaHomeUserEntityUser_2c7d642ee581efa300341e343180fbb0ecdc785d_1816ff740d81c738ec055c7038bbd93beb9405a7 =
-  components['schemas']['home-user.entity.user_2c7d642ee581efa300341e343180fbb0ecdc785d_1816ff740d81c738ec055c7038bbd93beb9405a7'];
-export type ApiSchemaHomeUserEntityUser_2c7d642ee581efa300341e343180fbb0ecdc785d_1816ff740d81c738ec055c7038bbd93beb9405a7Partial =
-  Partial<ApiSchemaHomeUserEntityUser_2c7d642ee581efa300341e343180fbb0ecdc785d_1816ff740d81c738ec055c7038bbd93beb9405a7>;
-export type ApiSchemaCabloyStoreEntityCabloyModule_2c7d642ee581efa300341e343180fbb0ecdc785d_1816ff740d81c738ec055c7038bbd93beb9405a7 =
-  components['schemas']['cabloy-store.entity.cabloyModule_2c7d642ee581efa300341e343180fbb0ecdc785d_1816ff740d81c738ec055c7038bbd93beb9405a7'];
-export type ApiSchemaCabloyStoreEntityCabloyModule_2c7d642ee581efa300341e343180fbb0ecdc785d_1816ff740d81c738ec055c7038bbd93beb9405a7Partial =
-  Partial<ApiSchemaCabloyStoreEntityCabloyModule_2c7d642ee581efa300341e343180fbb0ecdc785d_1816ff740d81c738ec055c7038bbd93beb9405a7>;
-export type ApiSchemaStorePurchaseEntityPurchaseRecord = components['schemas']['store-purchase.entity.purchaseRecord'];
-export type ApiSchemaStorePurchaseEntityPurchaseRecordPartial = Partial<ApiSchemaStorePurchaseEntityPurchaseRecord>;
-export type ApiSchemaStorePurchaseDtoPurchaseRecordUpdate = components['schemas']['store-purchase.dto.purchaseRecordUpdate'];
-export type ApiSchemaStorePurchaseDtoPurchaseRecordUpdatePartial = Partial<ApiSchemaStorePurchaseDtoPurchaseRecordUpdate>;
-export type ApiSchemaStorePurchaseDtoPurchaseRecordView = components['schemas']['store-purchase.dto.purchaseRecordView'];
-export type ApiSchemaStorePurchaseDtoPurchaseRecordViewPartial = Partial<ApiSchemaStorePurchaseDtoPurchaseRecordView>;
-export type ApiSchemaStorePurchaseDtoPurchasePaypalResBody = components['schemas']['store-purchase.dto.purchasePaypalResBody'];
-export type ApiSchemaStorePurchaseDtoPurchasePaypalResBodyPartial = Partial<ApiSchemaStorePurchaseDtoPurchasePaypalResBody>;
-export type ApiSchemaStorePurchaseDtoPurchasePaypalReqBody = components['schemas']['store-purchase.dto.purchasePaypalReqBody'];
-export type ApiSchemaStorePurchaseDtoPurchasePaypalReqBodyPartial = Partial<ApiSchemaStorePurchaseDtoPurchasePaypalReqBody>;
 export type ApiSchemaTestRestDtoProductCreate = components['schemas']['test-rest.dto.productCreate'];
 export type ApiSchemaTestRestDtoProductCreatePartial = Partial<ApiSchemaTestRestDtoProductCreate>;
 export type ApiSchemaTestRestDtoProductQueryRes = components['schemas']['test-rest.dto.productQueryRes'];
