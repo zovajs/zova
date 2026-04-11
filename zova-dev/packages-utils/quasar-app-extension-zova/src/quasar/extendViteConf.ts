@@ -85,6 +85,18 @@ export function extendViteConf(context: ConfigContext) {
         ],
         optimizeDeps: {
           noDiscovery: false,
+          exclude: [
+            'vue',
+            'pinia',
+            '@vue/runtime-core',
+            '@vue/reactivity',
+            '@vue/runtime-dom',
+            '@vue/server-renderer',
+            '@cabloy/vue-reactivity',
+            '@cabloy/vue-runtime-core',
+            '@cabloy/vue-runtime-dom',
+            '@cabloy/vue-server-renderer',
+          ],
         },
       });
     }

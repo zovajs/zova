@@ -2,6 +2,7 @@ import { RouterLink } from '@cabloy/vue-router';
 import { classes } from 'typestyle';
 import { BeanControllerPageBase } from 'zova';
 import { Controller } from 'zova-module-a-bean';
+import { ZIcon } from 'zova-module-a-icon';
 
 @Controller()
 export class ControllerPageErrorNotFound extends BeanControllerPageBase {
@@ -21,6 +22,11 @@ export class ControllerPageErrorNotFound extends BeanControllerPageBase {
   }
 
   protected render() {
+    return (
+      <div>
+        <ZIcon name="::add"></ZIcon>
+      </div>
+    );
     return (
       <div class="text-center">
         <div>
