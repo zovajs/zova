@@ -1,4 +1,4 @@
-/* eslint-disable */
+// eslint-disable
 import type { components } from './types.js';
 export type ApiSchemaTestVonaDtoPostCreate = components['schemas']['test-vona.dto.postCreate'];
 export type ApiSchemaTestVonaDtoPostCreatePartial = Partial<ApiSchemaTestVonaDtoPostCreate>;
@@ -6,6 +6,18 @@ export type ApiSchemaTestVonaDtoUserCreate = components['schemas']['test-vona.dt
 export type ApiSchemaTestVonaDtoUserCreatePartial = Partial<ApiSchemaTestVonaDtoUserCreate>;
 export type ApiSchemaTestVonaEntityProduct = components['schemas']['test-vona.entity.product'];
 export type ApiSchemaTestVonaEntityProductPartial = Partial<ApiSchemaTestVonaEntityProduct>;
+export type ApiSchemaACaptchaDtoCaptchaData = components['schemas']['a-captcha.dto.captchaData'];
+export type ApiSchemaACaptchaDtoCaptchaDataPartial = Partial<ApiSchemaACaptchaDtoCaptchaData>;
+export type ApiSchemaAMenuDtoMenus = components['schemas']['a-menu.dto.menus'];
+export type ApiSchemaAMenuDtoMenusPartial = Partial<ApiSchemaAMenuDtoMenus>;
+export type ApiSchemaAMenuDtoMenuItem = components['schemas']['a-menu.dto.menuItem'];
+export type ApiSchemaAMenuDtoMenuItemPartial = Partial<ApiSchemaAMenuDtoMenuItem>;
+export type ApiSchemaAMenuDtoMenuItemMeta = components['schemas']['a-menu.dto.menuItemMeta'];
+export type ApiSchemaAMenuDtoMenuItemMetaPartial = Partial<ApiSchemaAMenuDtoMenuItemMeta>;
+export type ApiSchemaAMenuDtoMenuGroup = components['schemas']['a-menu.dto.menuGroup'];
+export type ApiSchemaAMenuDtoMenuGroupPartial = Partial<ApiSchemaAMenuDtoMenuGroup>;
+export type ApiSchemaAPermissionDtoPermissions = components['schemas']['a-permission.dto.permissions'];
+export type ApiSchemaAPermissionDtoPermissionsPartial = Partial<ApiSchemaAPermissionDtoPermissions>;
 export type ApiSchemaHomeUserDtoPassport = components['schemas']['home-user.dto.passport'];
 export type ApiSchemaHomeUserDtoPassportPartial = Partial<ApiSchemaHomeUserDtoPassport>;
 export type ApiSchemaHomeUserEntityUser = components['schemas']['home-user.entity.user'];
@@ -30,60 +42,6 @@ export type ApiSchemaACaptchaDtoCaptchaVerify_c3cd80b1eeafe39bfe4433491bb081d68e
   components['schemas']['a-captcha.dto.captchaVerify_c3cd80b1eeafe39bfe4433491bb081d68e84797e_3218e7d152830e08f6e764b9e0c3796df929ee2b'];
 export type ApiSchemaACaptchaDtoCaptchaVerify_c3cd80b1eeafe39bfe4433491bb081d68e84797e_3218e7d152830e08f6e764b9e0c3796df929ee2bPartial =
   Partial<ApiSchemaACaptchaDtoCaptchaVerify_c3cd80b1eeafe39bfe4433491bb081d68e84797e_3218e7d152830e08f6e764b9e0c3796df929ee2b>;
-export type ApiSchemaACaptchaDtoCaptchaData = components['schemas']['a-captcha.dto.captchaData'];
-export type ApiSchemaACaptchaDtoCaptchaDataPartial = Partial<ApiSchemaACaptchaDtoCaptchaData>;
-export type ApiSchemaAMenuDtoMenus = components['schemas']['a-menu.dto.menus'];
-export type ApiSchemaAMenuDtoMenusPartial = Partial<ApiSchemaAMenuDtoMenus>;
-export type ApiSchemaAMenuDtoMenuItem = components['schemas']['a-menu.dto.menuItem'];
-export type ApiSchemaAMenuDtoMenuItemPartial = Partial<ApiSchemaAMenuDtoMenuItem>;
-export type ApiSchemaAMenuDtoMenuItemMeta = components['schemas']['a-menu.dto.menuItemMeta'];
-export type ApiSchemaAMenuDtoMenuItemMetaPartial = Partial<ApiSchemaAMenuDtoMenuItemMeta>;
-export type ApiSchemaAMenuDtoMenuGroup = components['schemas']['a-menu.dto.menuGroup'];
-export type ApiSchemaAMenuDtoMenuGroupPartial = Partial<ApiSchemaAMenuDtoMenuGroup>;
-export type ApiSchemaAPermissionDtoPermissions = components['schemas']['a-permission.dto.permissions'];
-export type ApiSchemaAPermissionDtoPermissionsPartial = Partial<ApiSchemaAPermissionDtoPermissions>;
-export type ApiSchemaStartTestDtoProductCreate = components['schemas']['start-test.dto.productCreate'];
-export type ApiSchemaStartTestDtoProductCreatePartial = Partial<ApiSchemaStartTestDtoProductCreate>;
-export type ApiSchemaStartTestDtoProductQueryRes = components['schemas']['start-test.dto.productQueryRes'];
-export type ApiSchemaStartTestDtoProductQueryResPartial = Partial<ApiSchemaStartTestDtoProductQueryRes>;
-export type ApiSchemaStartTestEntityProduct = components['schemas']['start-test.entity.product'];
-export type ApiSchemaStartTestEntityProductPartial = Partial<ApiSchemaStartTestEntityProduct>;
-export type ApiSchemaStartTestDtoProductUpdate = components['schemas']['start-test.dto.productUpdate'];
-export type ApiSchemaStartTestDtoProductUpdatePartial = Partial<ApiSchemaStartTestDtoProductUpdate>;
-export type ApiSchemaCabloyStoreDtoCabloyModuleCreate = components['schemas']['cabloy-store.dto.cabloyModuleCreate'];
-export type ApiSchemaCabloyStoreDtoCabloyModuleCreatePartial = Partial<ApiSchemaCabloyStoreDtoCabloyModuleCreate>;
-export type ApiSchemaCabloyStoreEntityCabloyModuleContent_415bfafaac51a5415ead581cd137db9671af9a2b_1816ff740d81c738ec055c7038bbd93beb9405a7 =
-  components['schemas']['cabloy-store.entity.cabloyModuleContent_415bfafaac51a5415ead581cd137db9671af9a2b_1816ff740d81c738ec055c7038bbd93beb9405a7'];
-export type ApiSchemaCabloyStoreEntityCabloyModuleContent_415bfafaac51a5415ead581cd137db9671af9a2b_1816ff740d81c738ec055c7038bbd93beb9405a7Partial =
-  Partial<ApiSchemaCabloyStoreEntityCabloyModuleContent_415bfafaac51a5415ead581cd137db9671af9a2b_1816ff740d81c738ec055c7038bbd93beb9405a7>;
-export type ApiSchemaCabloyStoreDtoCabloyModuleQueryRes = components['schemas']['cabloy-store.dto.cabloyModuleQueryRes'];
-export type ApiSchemaCabloyStoreDtoCabloyModuleQueryResPartial = Partial<ApiSchemaCabloyStoreDtoCabloyModuleQueryRes>;
-export type ApiSchemaCabloyStoreDtoCabloyModuleQueryResItem = components['schemas']['cabloy-store.dto.cabloyModuleQueryResItem'];
-export type ApiSchemaCabloyStoreDtoCabloyModuleQueryResItemPartial = Partial<ApiSchemaCabloyStoreDtoCabloyModuleQueryResItem>;
-export type ApiSchemaCabloyStoreEntityCabloyProvider_2c7d642ee581efa300341e343180fbb0ecdc785d_1816ff740d81c738ec055c7038bbd93beb9405a7 =
-  components['schemas']['cabloy-store.entity.cabloyProvider_2c7d642ee581efa300341e343180fbb0ecdc785d_1816ff740d81c738ec055c7038bbd93beb9405a7'];
-export type ApiSchemaCabloyStoreEntityCabloyProvider_2c7d642ee581efa300341e343180fbb0ecdc785d_1816ff740d81c738ec055c7038bbd93beb9405a7Partial =
-  Partial<ApiSchemaCabloyStoreEntityCabloyProvider_2c7d642ee581efa300341e343180fbb0ecdc785d_1816ff740d81c738ec055c7038bbd93beb9405a7>;
-export type ApiSchemaCabloyStoreDtoCabloyModuleGet = components['schemas']['cabloy-store.dto.cabloyModuleGet'];
-export type ApiSchemaCabloyStoreDtoCabloyModuleGetPartial = Partial<ApiSchemaCabloyStoreDtoCabloyModuleGet>;
-export type ApiSchemaCabloyStoreEntityCabloyModuleContent_c6e103f7cf035f2c8b2a66de341b2af9a91356ae_1816ff740d81c738ec055c7038bbd93beb9405a7 =
-  components['schemas']['cabloy-store.entity.cabloyModuleContent_c6e103f7cf035f2c8b2a66de341b2af9a91356ae_1816ff740d81c738ec055c7038bbd93beb9405a7'];
-export type ApiSchemaCabloyStoreEntityCabloyModuleContent_c6e103f7cf035f2c8b2a66de341b2af9a91356ae_1816ff740d81c738ec055c7038bbd93beb9405a7Partial =
-  Partial<ApiSchemaCabloyStoreEntityCabloyModuleContent_c6e103f7cf035f2c8b2a66de341b2af9a91356ae_1816ff740d81c738ec055c7038bbd93beb9405a7>;
-export type ApiSchemaCabloyStoreDtoCabloyModuleUpdate = components['schemas']['cabloy-store.dto.cabloyModuleUpdate'];
-export type ApiSchemaCabloyStoreDtoCabloyModuleUpdatePartial = Partial<ApiSchemaCabloyStoreDtoCabloyModuleUpdate>;
-export type ApiSchemaCabloyStoreEntityCabloyModuleContent_ff0869fb10e36144ce6da354ab0f63f1aaad2074_1816ff740d81c738ec055c7038bbd93beb9405a7 =
-  components['schemas']['cabloy-store.entity.cabloyModuleContent_ff0869fb10e36144ce6da354ab0f63f1aaad2074_1816ff740d81c738ec055c7038bbd93beb9405a7'];
-export type ApiSchemaCabloyStoreEntityCabloyModuleContent_ff0869fb10e36144ce6da354ab0f63f1aaad2074_1816ff740d81c738ec055c7038bbd93beb9405a7Partial =
-  Partial<ApiSchemaCabloyStoreEntityCabloyModuleContent_ff0869fb10e36144ce6da354ab0f63f1aaad2074_1816ff740d81c738ec055c7038bbd93beb9405a7>;
-export type ApiSchemaCabloyStoreDtoCabloyProviderCreate = components['schemas']['cabloy-store.dto.cabloyProviderCreate'];
-export type ApiSchemaCabloyStoreDtoCabloyProviderCreatePartial = Partial<ApiSchemaCabloyStoreDtoCabloyProviderCreate>;
-export type ApiSchemaCabloyStoreDtoCabloyProviderQueryRes = components['schemas']['cabloy-store.dto.cabloyProviderQueryRes'];
-export type ApiSchemaCabloyStoreDtoCabloyProviderQueryResPartial = Partial<ApiSchemaCabloyStoreDtoCabloyProviderQueryRes>;
-export type ApiSchemaCabloyStoreEntityCabloyProvider = components['schemas']['cabloy-store.entity.cabloyProvider'];
-export type ApiSchemaCabloyStoreEntityCabloyProviderPartial = Partial<ApiSchemaCabloyStoreEntityCabloyProvider>;
-export type ApiSchemaCabloyStoreDtoCabloyProviderUpdate = components['schemas']['cabloy-store.dto.cabloyProviderUpdate'];
-export type ApiSchemaCabloyStoreDtoCabloyProviderUpdatePartial = Partial<ApiSchemaCabloyStoreDtoCabloyProviderUpdate>;
 export type ApiSchemaTestRestDtoProductCreate = components['schemas']['test-rest.dto.productCreate'];
 export type ApiSchemaTestRestDtoProductCreatePartial = Partial<ApiSchemaTestRestDtoProductCreate>;
 export type ApiSchemaTestRestDtoProductQueryRes = components['schemas']['test-rest.dto.productQueryRes'];
@@ -98,10 +56,16 @@ export type ApiSchemaTestSsrDtoTestDetail = components['schemas']['test-ssr.dto.
 export type ApiSchemaTestSsrDtoTestDetailPartial = Partial<ApiSchemaTestSsrDtoTestDetail>;
 export type ApiSchemaTestSsrDtoTestBody = components['schemas']['test-ssr.dto.testBody'];
 export type ApiSchemaTestSsrDtoTestBodyPartial = Partial<ApiSchemaTestSsrDtoTestBody>;
+export type ApiSchemaTestCaptchaDtoSignin = components['schemas']['test-captcha.dto.signin'];
+export type ApiSchemaTestCaptchaDtoSigninPartial = Partial<ApiSchemaTestCaptchaDtoSignin>;
+export type ApiSchemaAPaypalEntityPaypalRecord = components['schemas']['a-paypal.entity.paypalRecord'];
+export type ApiSchemaAPaypalEntityPaypalRecordPartial = Partial<ApiSchemaAPaypalEntityPaypalRecord>;
+export type ApiSchemaAPaypalDtoPaypalOrderRecordPayload = components['schemas']['a-paypal.dto.paypalOrderRecordPayload'];
+export type ApiSchemaAPaypalDtoPaypalOrderRecordPayloadPartial = Partial<ApiSchemaAPaypalDtoPaypalOrderRecordPayload>;
+export type ApiSchemaAPaypalDtoPaypalOrderRecordOptions = components['schemas']['a-paypal.dto.paypalOrderRecordOptions'];
+export type ApiSchemaAPaypalDtoPaypalOrderRecordOptionsPartial = Partial<ApiSchemaAPaypalDtoPaypalOrderRecordOptions>;
 export type ApiSchemaAPlayDtoPlay = components['schemas']['a-play.dto.play'];
 export type ApiSchemaAPlayDtoPlayPartial = Partial<ApiSchemaAPlayDtoPlay>;
-export type ApiSchemaTestVonaDtoSignin = components['schemas']['test-vona.dto.signin'];
-export type ApiSchemaTestVonaDtoSigninPartial = Partial<ApiSchemaTestVonaDtoSignin>;
 export type ApiSchemaTestVonaDtoUserLazy = components['schemas']['test-vona.dto.userLazy'];
 export type ApiSchemaTestVonaDtoUserLazyPartial = Partial<ApiSchemaTestVonaDtoUserLazy>;
 export type ApiSchemaTestVonaDtoRoleLazy = components['schemas']['test-vona.dto.roleLazy'];
