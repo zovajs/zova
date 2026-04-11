@@ -36,16 +36,16 @@
     "postpack": "clean-package restore && npm run clean"
   },
   "dependencies": {
-    "@tanstack/query-core": "^5.94.5",
-    "@tanstack/query-persist-client-core": "^5.94.5",
-    "@tanstack/vue-query": "^5.94.5",
+    "@tanstack/query-core": "^5.97.0",
+    "@tanstack/query-persist-client-core": "^5.97.0",
+    "@tanstack/vue-query": "^5.97.0",
     "localforage": "^1.10.0",
-    "mutate-on-copy": "^1.1.7",
-    "table-identity": "^1.0.0"
+    "mutate-on-copy": "workspace:^",
+    "table-identity": "^1.1.3"
   },
   "devDependencies": {
     "clean-package": "^2.2.0",
-    "rimraf": "^6.0.1"
+    "rimraf": "^6.1.3"
   },
   "clean-package": {
     "indent": 2,

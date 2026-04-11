@@ -32,10 +32,9 @@
     "prepack": "clean-package",
     "postpack": "clean-package restore && npm run clean"
   },
-  "dependencies": {},
   "devDependencies": {
     "clean-package": "^2.2.0",
-    "rimraf": "^6.0.1"
+    "rimraf": "^6.1.3"
   },
   "clean-package": {
     "indent": 2,

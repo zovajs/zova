@@ -35,24 +35,24 @@
     "postpack": "clean-package restore && npm run clean"
   },
   "dependencies": {
-    "@cabloy/compose": "^2.0.4",
-    "@cabloy/deps": "^1.0.9",
-    "@cabloy/json5": "^1.0.8",
+    "@cabloy/compose": "^2.1.3",
+    "@cabloy/deps": "^1.1.3",
+    "@cabloy/json5": "^1.1.3",
     "@cabloy/module-info": "^2.0.0",
-    "@cabloy/utils": "^2.0.23",
+    "@cabloy/utils": "^2.1.3",
     "@cabloy/vue-router": "^4.4.16",
-    "@cabloy/word-utils": "^2.1.7",
-    "defu": "^6.1.4",
+    "@cabloy/word-utils": "workspace:^",
+    "defu": "^6.1.7",
     "luxon": "^3.7.2",
-    "zova-jsx": "^1.1.8"
+    "zova-jsx": "workspace:^"
   },
   "devDependencies": {
-    "@cabloy/cli": "^3.0.105",
+    "@cabloy/cli": "^3.1.3",
     "@types/luxon": "^3.7.1",
     "clean-package": "^2.2.0",
     "fs-extra": "^11.3.4",
-    "rimraf": "^6.0.1",
-    "zova-openapi": "^1.1.7"
+    "rimraf": "^6.1.3",
+    "zova-openapi": "workspace:^"
   },
   "clean-package": {
     "indent": 2,

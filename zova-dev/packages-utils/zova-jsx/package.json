@@ -45,16 +45,16 @@
     "postpack": "clean-package restore"
   },
   "dependencies": {
-    "@cabloy/compose": "^2.0.4",
-    "@cabloy/utils": "^2.0.23",
-    "@cabloy/word-utils": "^2.1.7",
+    "@cabloy/compose": "^2.1.3",
+    "@cabloy/utils": "^2.1.3",
+    "@cabloy/word-utils": "workspace:^",
     "typestyle": "^2.4.0",
-    "vue": "^3.5.6",
-    "zova-core": "^5.1.8"
+    "vue": "^3.5.32",
+    "zova-core": "workspace:^"
   },
   "devDependencies": {
     "clean-package": "^2.2.0",
-    "rimraf": "^6.0.1"
+    "rimraf": "^6.1.3"
   },
   "clean-package": {
     "indent": 2,

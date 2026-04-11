@@ -6,7 +6,7 @@
   "author": "zhennann",
   "type": "module",
   "dependencies": {
-    "zova-module-devui-adapter": "^5.1.7"
+    "zova-module-devui-adapter": "workspace:^"
   },
   "title": "a-devui"
 }

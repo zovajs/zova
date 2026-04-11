@@ -6,12 +6,12 @@
   "files": [],
   "type": "module",
   "dependencies": {
-    "zova-module-basic-adapter": "^5.0.0",
-    "zova-module-basic-date": "^5.0.0",
-    "zova-module-basic-form": "^5.0.0",
-    "zova-module-basic-restpage": "^5.0.0",
-    "zova-module-basic-table": "^5.0.0",
-    "zova-suite-a-cabloy": "^5.0.0"
+    "zova-module-basic-adapter": "workspace:^",
+    "zova-module-basic-date": "workspace:^",
+    "zova-module-basic-form": "workspace:^",
+    "zova-module-basic-restpage": "workspace:^",
+    "zova-module-basic-table": "workspace:^",
+    "zova-suite-a-cabloy": "workspace:^"
   },
   "title": "cabloy-basic"
 }
