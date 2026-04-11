@@ -23,9 +23,7 @@ export class ControllerPageErrorNotFound extends BeanControllerPageBase {
       <div class="text-center q-pa-md">
         <div>
           <div class={this.cTitle}>404</div>
-
           <div class={this.cDescription}>Oops. Nothing here...</div>
-
           <QBtn class="q-mt-xl" outline unelevated to={this.sys.env.ROUTER_PAGE_HOME} label="Go Home" no-caps />
         </div>
       </div>
