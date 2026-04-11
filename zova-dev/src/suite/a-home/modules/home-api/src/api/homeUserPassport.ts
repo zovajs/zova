@@ -1,8 +1,6 @@
 import { Api, BeanApiBase, IApiActionOptions } from 'zova-module-a-api';
 
-import type { components, paths } from './openapi/index.js';
-
-import { OpenApiBaseURL } from './openapi/index.js';
+import { OpenApiBaseURL, type components, type paths } from './openapi/index.js';
 
 /** HomeUserPassport_current */
 export const ApiApiHomeUserPassportcurrentPath = '/api/home/user/passport/current';
@@ -71,9 +69,9 @@ export type ApiApiHomeUserPassportmigrateResponseBody =
 export const ApiApiHomeUserPassportrefreshAuthTokenPath = '/api/home/user/passport/refreshAuthToken';
 export type ApiApiHomeUserPassportrefreshAuthTokenPath = '/api/home/user/passport/refreshAuthToken';
 export type ApiApiHomeUserPassportrefreshAuthTokenMethod = 'post';
-export interface ApiApiHomeUserPassportrefreshAuthTokenRequestBody {
+export type ApiApiHomeUserPassportrefreshAuthTokenRequestBody = {
   refreshToken: string;
-}
+};
 export type ApiApiHomeUserPassportrefreshAuthTokenResponseBody =
   paths[ApiApiHomeUserPassportrefreshAuthTokenPath][ApiApiHomeUserPassportrefreshAuthTokenMethod]['responses']['200']['content']['application/json']['data'];
 
@@ -81,9 +79,9 @@ export type ApiApiHomeUserPassportrefreshAuthTokenResponseBody =
 export const ApiApiHomeUserPassportcreatePassportJwtFromOauthCodePath = '/api/home/user/passport/createPassportJwtFromOauthCode';
 export type ApiApiHomeUserPassportcreatePassportJwtFromOauthCodePath = '/api/home/user/passport/createPassportJwtFromOauthCode';
 export type ApiApiHomeUserPassportcreatePassportJwtFromOauthCodeMethod = 'post';
-export interface ApiApiHomeUserPassportcreatePassportJwtFromOauthCodeRequestBody {
+export type ApiApiHomeUserPassportcreatePassportJwtFromOauthCodeRequestBody = {
   code: string;
-}
+};
 export type ApiApiHomeUserPassportcreatePassportJwtFromOauthCodeResponseBody =
   paths[ApiApiHomeUserPassportcreatePassportJwtFromOauthCodePath][ApiApiHomeUserPassportcreatePassportJwtFromOauthCodeMethod]['responses']['200']['content']['application/json']['data'];
 
