@@ -54,7 +54,7 @@
     "dev:spa:cabloyStartWeb": "npm run prerun && quasar dev --mode spa --flavor cabloyStartWeb"
   },
   "dependencies": {
-    "@cabloy/compose": "^2.1.3",
+    "@cabloy/compose": "^2.1.4",
     "@cabloy/deps": "^1.1.3",
     "@cabloy/json5": "^1.1.3",
     "@cabloy/logger": "^1.1.8",
