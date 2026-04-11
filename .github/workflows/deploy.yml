@@ -43,10 +43,14 @@ jobs:
           cache: pnpm # or pnpm / yarn
       - name: Setup Pages
         uses: actions/configure-pages@v6
-      - name: Install dependencies
+      - name: Install dependencies all
         run: npm run init
+      - name: Install dependencies docs
+        run: pnpm install --no-frozen-lockfile
+        working-directory: zova-docs
       - name: Build with VitePress
         run: npm run docs:build # or pnpm docs:build / yarn docs:build / bun run docs:build
+        working-directory: zova-docs
       - name: Build with zova-demo
         run: npm run build:githubpages
         working-directory: zova-dev
