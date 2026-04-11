@@ -40,9 +40,8 @@ export class ControllerIcon extends BeanControllerBase {
 
   protected render() {
     // width/height
-    const defaultSize = this.scope.config.icon.size;
-    const width = this.$props.width ?? this.$props.height ?? defaultSize;
-    const height = this.$props.height ?? this.$props.width ?? defaultSize;
+    const width = this.$props.width ?? this.$props.height;
+    const height = this.$props.height ?? this.$props.width;
     const href = this._parseHref();
     if (isHttpUrl(href) && !href?.endsWith('.svg')) {
       return (
