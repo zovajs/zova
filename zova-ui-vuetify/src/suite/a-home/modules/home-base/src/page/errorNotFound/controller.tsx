@@ -23,9 +23,7 @@ export class ControllerPageErrorNotFound extends BeanControllerPageBase {
       <div class="text-center q-pa-md">
         <div>
           <div class={this.cTitle}>404</div>
-
           <div class={this.cDescription}>Oops. Nothing here...</div>
-
           <VBtn rounded elevation={12} ripple text="Go Home" to={this.sys.env.ROUTER_PAGE_HOME} />
         </div>
       </div>
