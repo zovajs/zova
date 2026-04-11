@@ -23,7 +23,7 @@ export class SysIcon extends BeanBase {
       onServerPrefetch(async () => {
         let [iconName] = self._parseNameFromSlotDefault(slots);
         iconName = iconName || props.icon;
-        if (!iconName) {
+        if (!iconName || isHttpUrl(iconName)) {
           return;
         }
         const app = useApp();
