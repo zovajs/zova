@@ -44,7 +44,7 @@
     "preview:ssr:web": "concurrently \"node ./dist-mock/index.js\" \"node ./dist/ssr-web/index.js\""
   },
   "dependencies": {
-    "@cabloy/compose": "^2.1.3",
+    "@cabloy/compose": "^2.1.4",
     "@cabloy/deps": "^1.1.3",
     "@cabloy/json5": "^1.1.3",
     "@cabloy/logger": "^1.1.8",
