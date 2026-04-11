@@ -202,11 +202,13 @@ export class CliBinBuildRest extends BeanCliBase {
 
   async _prepareResourcesIndex({ srcDir }: IBinBuildRestContext) {
     let indexContent = `import type { IIconRecord } from 'zova-module-a-icon';
+import type { TypePagePathSchema } from 'zova-module-a-router';
 export type { IIconRecord } from 'zova-module-a-icon';
 export type { IPagePathRecord } from 'zova-module-a-router';
 `;
     indexContent += await this._prepareResourcesIndex_rest(srcDir);
     indexContent += await this._prepareResourcesIndex_icons(srcDir);
+    indexContent += await this._prepareResourcesIndex_pages(srcDir);
     await fse.writeFile(path.join(srcDir, 'index.ts'), indexContent);
   }
 
@@ -235,6 +237,19 @@ export type { IPagePathRecord } from 'zova-module-a-router';
   async _prepareResourcesIndex_icons(_srcDir: string) {
     const content = `export function $iconName<K extends keyof IIconRecord>(name: K): any {
   return name;
+}
+`;
+    return content;
+  }
+
+  async _prepareResourcesIndex_pages(_srcDir: string) {
+    const content = `declare module 'zova-module-a-router' {
+  export interface IPagePathRecord {
+    '/': TypePagePathSchema<undefined, undefined>;
+    'presetLogin': TypePagePathSchema<undefined, undefined>;
+    'presetErrorExpired': TypePagePathSchema<undefined, undefined>;
+    'presetResource': TypePagePathSchema<undefined, undefined>;
+  }
 }
 `;
     return content;
