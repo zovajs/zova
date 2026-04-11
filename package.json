@@ -26,23 +26,23 @@
     "docs:preview": "vitepress preview zova-docs"
   },
   "dependencies": {
-    "zova": "^5"
+    "zova": "^5.1.13"
   },
   "devDependencies": {
-    "@cabloy/lint": "^5.0.24",
-    "@cabloy/process-helper": "^3.0.0",
+    "@cabloy/lint": "^5.1.3",
+    "@cabloy/process-helper": "^3.1.3",
     "@types/fs-extra": "^11.0.4",
-    "@types/mocha": "^10.0.6",
-    "@types/node": "^22.10.2",
-    "lerna": "=8.1.2",
+    "@types/mocha": "^10.0.10",
+    "@types/node": "^22.19.17",
+    "lerna": "^8.1.2",
     "minimist": "^1.2.8",
     "oxfmt": "^0.41.0",
-    "oxlint": "^1.56.0",
-    "textlint": "^14.8.0",
+    "oxlint": "^1.59.0",
+    "textlint": "^14.8.4",
     "textlint-rule-ja-space-between-half-and-full-width": "^2.4.2",
     "typedoc": "^0.25.13",
     "typescript": "^5.9.3",
-    "vitepress": "^1.1.4"
+    "vitepress": "^1.6.4"
   },
   "engines": {
     "node": ">=22.12.0"
