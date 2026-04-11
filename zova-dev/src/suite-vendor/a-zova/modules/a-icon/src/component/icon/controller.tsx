@@ -63,9 +63,11 @@ export class ControllerIcon extends BeanControllerBase {
         fill="currentColor"
         role="img"
         aria-hidden="true"
-        width={width}
-        height={height}
-        style={{ color: this.$props.color }}
+        style={{
+          width: convertToUnit(width),
+          height: convertToUnit(height),
+          color: this.$props.color,
+        }}
       >
         <use xlinkHref={href}></use>
       </svg>
