@@ -5,7 +5,7 @@ import { useTextColor } from 'vuetify/lib/composables/color.js';
 import { useIcon } from 'vuetify/lib/composables/icons.js';
 import { useSize } from 'vuetify/lib/composables/size.js';
 import { convertToUnit, flattenFragments, useRender } from 'vuetify/lib/util/index.js';
-import { BeanBase, useApp } from 'zova';
+import { BeanBase, isHttpUrl, useApp } from 'zova';
 import { Sys } from 'zova-module-a-bean';
 import { $getZovaIcon } from 'zova-module-a-icon';
 
@@ -96,6 +96,16 @@ export class SysIcon extends BeanBase {
   }
 
   private _getIconData(iconName) {
+    if (isHttpUrl(iconName)) {
+      return {
+        iconData: {
+          value: {
+            component: VSvgIconZova,
+            icon: iconName,
+          },
+        },
+      };
+    }
     const iconInfo = $getZovaIcon(iconName);
     if (!iconInfo) return;
     return {

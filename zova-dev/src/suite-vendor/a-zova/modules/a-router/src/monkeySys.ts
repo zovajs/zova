@@ -3,7 +3,7 @@ import type { IMonkeyModuleSys, IMonkeySysApplicationInitialize, ZovaApplication
 import type { ErrorSSR } from 'zova-module-a-ssr';
 
 import { combineQueries } from '@cabloy/utils';
-import { BeanSimple, cast } from 'zova';
+import { BeanSimple, cast, isHttpUrl } from 'zova';
 
 import type { SysRouter } from './bean/sys.router.js';
 import type { TypeGotoPageResult } from './types/router.js';
@@ -39,7 +39,7 @@ export class MonkeySys extends BeanSimple implements IMonkeyModuleSys, IMonkeySy
     app.$redirect = (pagePath: string, status?: 301 | 302): never => {
       const error = new Error() as ErrorSSR;
       error.code = status ?? 302;
-      if (pagePath.startsWith('http://') || pagePath.startsWith('https://')) {
+      if (isHttpUrl(pagePath)) {
         error.pagePath = pagePath;
         error.url = pagePath;
       } else {
@@ -65,7 +65,7 @@ export class MonkeySys extends BeanSimple implements IMonkeyModuleSys, IMonkeySy
         return app.$redirect(pagePath);
       }
       // replace
-      if (pagePath.startsWith('http://') || pagePath.startsWith('https://')) {
+      if (isHttpUrl(pagePath)) {
         window.location[options?.replace ? 'replace' : 'assign'](pagePath);
       } else {
         return app.meta.$router[options?.replace ? 'replace' : 'push'](pagePath);
