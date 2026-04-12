@@ -13,11 +13,12 @@ const SymbolLoggerInstances = Symbol('SymbolLoggerInstances');
 export class SysLogger extends BeanSimple {
   private [SymbolLoggerInstances]: Record<keyof ILoggerClientRecord, Logger> = {} as any;
 
-  public async dispose() {
+  public dispose() {
     for (const key in this[SymbolLoggerInstances]) {
       const logger = this[SymbolLoggerInstances][key];
-      await _closeLogger(logger);
+      _closeLogger(logger);
     }
+    this[SymbolLoggerInstances] = {} as any;
   }
 
   get(clientName?: keyof ILoggerClientRecord) {
@@ -63,9 +64,9 @@ export class SysLogger extends BeanSimple {
   }
 }
 
-async function _closeLogger(logger: Logger) {
+function _closeLogger(logger: Logger) {
   if ((logger as any).__closed__) return;
-  await logger.end();
+  logger.end();
   (logger as any).__closed__ = true;
 }
 

@@ -30,6 +30,11 @@ export class SysModule extends BeanSimple {
     }
   }
 
+  /** @internal */
+  public dispose() {
+    this.modulesMeta = undefined as any;
+  }
+
   get<K extends TypeBeanScopeRecordKeys>(moduleName: K): IModule | undefined;
   get(moduleName: string): IModule | undefined;
   get(moduleName: IModuleInfo): IModule | undefined;

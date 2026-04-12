@@ -10,4 +10,9 @@ export class SysError extends BeanSimple {
   public async initialize() {
     this.errors = {};
   }
+
+  /** @internal */
+  public dispose() {
+    this.errors = {};
+  }
 }

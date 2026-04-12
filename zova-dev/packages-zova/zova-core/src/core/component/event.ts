@@ -28,6 +28,11 @@ export class AppEvent extends BeanSimple {
   /** @internal */
   public async initialize() {}
 
+  /** @internal */
+  public dispose() {
+    this.eventHandlersMap = {} as any;
+  }
+
   public getEventHandlers<K extends keyof IEventRecord>(eventName: K): TypeEventHandlers<IEventRecord[K]['data'], IEventRecord[K]['result']> {
     let eventHandlers = this.eventHandlersMap[eventName];
     if (!eventHandlers) {

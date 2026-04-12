@@ -38,6 +38,18 @@ export class SysMeta extends BeanSimple {
   }
 
   /** @internal */
+  public dispose() {
+    this.event.dispose();
+    this.module.dispose();
+    this.component.dispose();
+    this.logger.dispose();
+    this.locale.dispose();
+    this.error.dispose();
+    this.sysMonkey = undefined;
+    this.legacyRoutes = undefined;
+  }
+
+  /** @internal */
   public async initialize(SysMonkey?: Constructable<IMonkeyModuleSys & IMonkeySys>, legacyRoutes?: RouteRecordRaw[]) {
     if (SysMonkey) {
       this.sysMonkey = this.bean._newBeanSimple(SysMonkey, false);

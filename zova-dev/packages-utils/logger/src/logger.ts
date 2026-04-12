@@ -137,7 +137,7 @@ export class Logger {
     }
   }
 
-  async end() {
+  end() {
     // donothing
   }
 }

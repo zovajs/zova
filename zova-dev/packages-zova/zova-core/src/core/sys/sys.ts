@@ -19,7 +19,7 @@ const SymbolSysInitializePromise = Symbol('SymbolSysInitializePromise');
 const SymbolSysClose = Symbol('SymbolSysClose');
 
 export class ZovaSys {
-  private [SymbolSysInitializePromise]: Promise<void>;
+  private [SymbolSysInitializePromise]: Promise<void> | undefined;
   private [SymbolSysClose]: boolean;
   bean: BeanContainer;
   util: SysUtil;
@@ -53,6 +53,8 @@ export class ZovaSys {
     { modulesMeta, locales, config, env, viteHot, SysMonkey, legacyRoutes }: PluginZovaOptions,
     envRuntime?: Partial<ZovaConfigEnv>,
   ) {
+    // maybe init again
+    this[SymbolSysClose] = false;
     // env
     this.env = this._prepareEnv(env, envRuntime);
     // monkey
@@ -82,14 +84,18 @@ export class ZovaSys {
 
   private _hookClose(viteHot: ViteHotContext) {
     if (process.env.DEV && viteHot) {
-      viteHot.on('vite:beforeFullReload', _payload => {
+      const hook = _payload => {
         this.close();
-      });
+        viteHot.off('vite:beforeFullReload', hook);
+      };
+      viteHot.on('vite:beforeFullReload', hook);
     }
     if (process.env.CLIENT && typeof window !== 'undefined') {
-      window.addEventListener('beforeunload', () => {
+      const hook = () => {
         this.close();
-      });
+        window.removeEventListener('beforeunload', hook);
+      };
+      window.addEventListener('beforeunload', hook);
     }
   }
 
@@ -100,6 +106,10 @@ export class ZovaSys {
     this.meta.module._monkeyModuleSync(false, 'sysClose');
     // container dispose
     this.bean.dispose();
+    // meta dispose
+    this.meta.dispose();
+    // init promise
+    this[SymbolSysInitializePromise] = undefined;
   }
 
   private async _combineConfig(config: TypeModuleResourceConfig[]): Promise<ZovaConfig> {

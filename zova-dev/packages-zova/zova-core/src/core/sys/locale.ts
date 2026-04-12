@@ -20,6 +20,12 @@ export class SysLocale extends AppLocale {
   }
 
   /** @internal */
+  public dispose() {
+    this.locales = {};
+    this.localeModules = {};
+  }
+
+  /** @internal */
   public _registerLocales(moduleName: string, locales: TypeModuleResourceLocales) {
     if (!locales) return;
     for (const locale in locales) {

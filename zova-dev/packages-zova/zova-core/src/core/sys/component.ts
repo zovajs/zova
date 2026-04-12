@@ -15,6 +15,9 @@ export class SysComponent extends BeanSimple {
   /** @internal */
   public async initialize() {}
 
+  /** @internal */
+  public dispose() {}
+
   public createAsyncComponent(module: string, name?: string) {
     return () => {
       return this.use(module, name);
