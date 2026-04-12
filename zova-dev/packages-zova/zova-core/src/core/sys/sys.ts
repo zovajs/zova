@@ -80,9 +80,9 @@ export class ZovaSys {
     this._hookClose(viteHot);
   }
 
-  private _hookClose(viteHot: ViteHotContext) {
-    if (process.env.DEV && viteHot) {
-      viteHot.on('vite:beforeFullReload', _payload => {
+  private _hookClose(_viteHot: ViteHotContext) {
+    if (process.env.DEV && import.meta.hot) {
+      import.meta.hot.on('vite:beforeFullReload', _payload => {
         this.close();
       });
     }
