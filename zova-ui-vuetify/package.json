@@ -1,6 +1,6 @@
 {
   "name": "zova-ui-vuetify",
-  "version": "5.1.26",
+  "version": "5.1.27",
   "gitHead": "4d11b0fed7af50b828971785af3c014046be6afa",
   "description": "A vue3 vuetify framework with ioc",
   "keywords": [
@@ -87,8 +87,8 @@
     "vue-router": "npm:@cabloy/vue-router@^4.4.16",
     "vuetify": "^4.0.5",
     "zod": "^4.3.6",
-    "zova": "^5.1.17",
-    "zova-jsx": "^1.1.10",
+    "zova": "^5.1.18",
+    "zova-jsx": "^1.1.11",
     "zova-module-a-action": "^5.1.11",
     "zova-module-a-actions": "^5.1.9",
     "zova-module-a-api": "^5.1.8",
@@ -117,7 +117,7 @@
     "zova-module-a-style": "^5.1.8",
     "zova-module-a-table": "^5.1.9",
     "zova-module-a-zod": "^5.1.8",
-    "zova-module-a-zova": "^5.1.12",
+    "zova-module-a-zova": "^5.1.13",
     "zova-module-demo-basic": "workspace:^",
     "zova-module-home-api": "workspace:^",
     "zova-module-home-base": "workspace:^",
@@ -146,7 +146,7 @@
     "less": "^4.6.4",
     "oxfmt": "^0.41.0",
     "oxlint": "^1.59.0",
-    "quasar-app-extension-zova": "^1.2.15",
+    "quasar-app-extension-zova": "^1.2.16",
     "sass-embedded": "^1.99.0",
     "typescript": "^5.9.3",
     "unplugin-fonts": "^1.4.0",
@@ -155,7 +155,7 @@
     "vite-plugin-vuetify": "^2.1.3",
     "vue-tsc": "^3.2.6",
     "zova-openapi": "^1.1.8",
-    "zova-vite": "^1.1.15"
+    "zova-vite": "^1.1.16"
   },
   "packageManager": "pnpm@10.19.0"
 }
