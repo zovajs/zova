@@ -35,8 +35,9 @@ export class AppResource {
 
   /** @internal */
   public dispose() {
-    this.beans = {};
-    this.scenes = {};
+    // just need override state rather than clearing state
+    // this.beans = {};
+    // this.scenes = {};
   }
 
   addUse(target: object, options: IDecoratorUseOptionsBase) {
