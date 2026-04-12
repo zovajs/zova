@@ -1,3 +1,5 @@
+import type { ViteHotContext } from 'vite/types/hot.js';
+
 import type { TypeModuleResourceConfig } from '../../types/interface/module.ts';
 import type { PluginZovaOptions } from '../../types/interface/pluginZova.ts';
 import type { ZovaConfigEnv } from '../../types/utils/env.ts';
@@ -37,15 +39,18 @@ export class ZovaSys {
 
   /** @internal */
 
-  public async initialize({ modulesMeta, locales, config, env, SysMonkey, legacyRoutes }: PluginZovaOptions, envRuntime?: Partial<ZovaConfigEnv>) {
+  public async initialize(
+    { modulesMeta, locales, config, env, viteHot, SysMonkey, legacyRoutes }: PluginZovaOptions,
+    envRuntime?: Partial<ZovaConfigEnv>,
+  ) {
     if (!this[SymbolSysInitializePromise]) {
-      this[SymbolSysInitializePromise] = this._initializeInner({ modulesMeta, locales, config, env, SysMonkey, legacyRoutes }, envRuntime);
+      this[SymbolSysInitializePromise] = this._initializeInner({ modulesMeta, locales, config, env, viteHot, SysMonkey, legacyRoutes }, envRuntime);
     }
     return this[SymbolSysInitializePromise];
   }
 
   private async _initializeInner(
-    { modulesMeta, locales, config, env, SysMonkey, legacyRoutes }: PluginZovaOptions,
+    { modulesMeta, locales, config, env, viteHot, SysMonkey, legacyRoutes }: PluginZovaOptions,
     envRuntime?: Partial<ZovaConfigEnv>,
   ) {
     // env
@@ -72,12 +77,12 @@ export class ZovaSys {
     // monkey: sysReady
     await this.meta.module._monkeyModule(true, 'sysReady');
     // hookClose
-    this._hookClose();
+    this._hookClose(viteHot);
   }
 
-  private _hookClose() {
-    if (process.env.DEV && cast(import.meta).hot) {
-      cast(import.meta).hot.on('vite:beforeFullReload', _payload => {
+  private _hookClose(viteHot: ViteHotContext) {
+    if (process.env.DEV && viteHot) {
+      viteHot.on('vite:beforeFullReload', _payload => {
         this.close();
       });
     }

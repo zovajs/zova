@@ -9,10 +9,14 @@ import { ZovaApplication } from '../core/index.ts';
 import { cast } from '../types/index.ts';
 
 export const PluginZova = {
-  async install(vue: App, ctxRoot: ZovaContext, { modulesMeta, locales, config, env, SysMonkey, AppMonkey, legacyRoutes }: PluginZovaOptions) {
+  async install(
+    vue: App,
+    ctxRoot: ZovaContext,
+    { modulesMeta, locales, config, env, viteHot, SysMonkey, AppMonkey, legacyRoutes }: PluginZovaOptions,
+  ) {
     // zova app
     const app = new ZovaApplication(vue, ctxRoot);
-    await app.initialize({ modulesMeta, locales, config, env, SysMonkey, AppMonkey, legacyRoutes });
+    await app.initialize({ modulesMeta, locales, config, env, viteHot, SysMonkey, AppMonkey, legacyRoutes });
     return app;
   },
   async update(app: ZovaApplication, ctxRoot: ZovaContext) {

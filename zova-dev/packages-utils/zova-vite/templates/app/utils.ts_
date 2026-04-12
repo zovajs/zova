@@ -10,6 +10,7 @@ const options = {
   locales,
   config,
   env,
+  viteHot: import.meta.hot,
   <%=sysMonkey?'SysMonkey,':''%>
   <%=appMonkey?'AppMonkey,':''%>
 };

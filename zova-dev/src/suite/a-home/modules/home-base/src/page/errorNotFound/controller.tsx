@@ -24,7 +24,6 @@ export class ControllerPageErrorNotFound extends BeanControllerPageBase {
     return (
       <div class="text-center">
         <div>
-          <div>ssss</div>
           <div class={this.cTitle}>404</div>
           <div class={this.cDescription}>Oops. Nothing here...</div>
           <RouterLink to={this.sys.env.ROUTER_PAGE_HOME}>Go Home</RouterLink>
