@@ -152,19 +152,7 @@ export class CtxSSR extends BeanSimple {
         expected = isString(clientValue) ? clientValue : stringifyStyle(normalizeStyle(clientValue));
         el.setAttribute(key, expected as string);
       }
-    } else if (key === 'for') {
-      ignore = true;
-      if (clientValue !== undefined) {
-        expected = String(clientValue);
-        el.setAttribute(key, expected as string);
-      }
-    } else if (key === 'id') {
-      ignore = true;
-      if (clientValue !== undefined) {
-        expected = String(clientValue);
-        el.setAttribute(key, expected as string);
-      }
-    } else if (key === 'd') {
+    } else if (['id', 'name', 'for', 'd'].includes(key)) {
       ignore = true;
       if (clientValue !== undefined) {
         expected = String(clientValue);
