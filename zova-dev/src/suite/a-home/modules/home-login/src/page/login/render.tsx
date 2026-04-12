@@ -80,7 +80,7 @@ export class RenderPageLogin extends BeanRenderBase {
           this.onSubmitLoginGitHub();
         }}
       >
-        <ZIcon name=":auth:github"></ZIcon>
+        <ZIcon name=":auth:github" width={24}></ZIcon>
         {this.scope.locale.LoginGitHub()}
       </button>
     );

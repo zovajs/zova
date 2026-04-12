@@ -11,6 +11,7 @@ import type { ZovaViteConfigOptions, ZovaVitePlugin } from './types.ts';
 
 import { getAbsolutePathOfModule, requireModule } from './utils.ts';
 import { cssCollectPlugin } from './vitePluginCssCollect.ts';
+import { hmrPlugin } from './vitePluginHmr.ts';
 
 export function generateVitePlugins(configOptions: ZovaViteConfigOptions, modulesMeta: Awaited<ReturnType<typeof glob>>) {
   const vitePlugins: ZovaVitePlugin[] = [];
@@ -21,6 +22,7 @@ export function generateVitePlugins(configOptions: ZovaViteConfigOptions, module
   }
   vitePlugins.push(__getVitePluginDevtoolsJson());
   vitePlugins.push(__getVitePluginCss());
+  vitePlugins.push(__getVitePluginHmr());
   // vitePlugins.push(__getVitePluginChecker(configOptions));
   return vitePlugins;
 
@@ -89,6 +91,10 @@ export function generateVitePlugins(configOptions: ZovaViteConfigOptions, module
 
   function __getVitePluginCss() {
     return ['vite-plugin-zova-css-collect', cssCollectPlugin, {}, undefined] as ZovaVitePlugin;
+  }
+
+  function __getVitePluginHmr() {
+    return ['vite-plugin-zova-hmr', hmrPlugin, {}, undefined] as ZovaVitePlugin;
   }
 
   function __getVitePluginMock(configOptions: ZovaViteConfigOptions, _modulesMeta: Awaited<ReturnType<typeof glob>>) {

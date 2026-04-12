@@ -14,6 +14,7 @@ export class CssDefault extends BeanBase {
     this.textCenter = this.$style({ textAlign: 'center' });
     this.buttonPrimary = useComputed(() => {
       return this.$style({
+        // color: 'green',
         color: this.$token.color.primary,
         borderColor: this.$token.var.borderColor,
       });

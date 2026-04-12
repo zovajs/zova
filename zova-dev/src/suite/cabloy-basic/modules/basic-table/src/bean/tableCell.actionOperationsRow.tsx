@@ -21,7 +21,7 @@ export class TableCellActionOperationsRow extends BeanBase implements ITableCell
               await $host.$performAction(actionName, undefined, renderContext);
             }}
           >
-            <ZIcon name="::draft"></ZIcon>
+            <ZIcon name="::draft" width={24}></ZIcon>
           </button>
         )}
         {permissionDelete && (
@@ -34,7 +34,7 @@ export class TableCellActionOperationsRow extends BeanBase implements ITableCell
               await $host.$performAction(actionName, undefined, renderContext);
             }}
           >
-            <ZIcon name="::delete"></ZIcon>
+            <ZIcon name="::delete" width={24}></ZIcon>
           </button>
         )}
       </div>

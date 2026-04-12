@@ -16,7 +16,7 @@ export class TableCellTest extends BeanBase implements ITableCellRender {
     if (!iconPrefix) return value;
     return (
       <div>
-        <ZIcon name={iconPrefix as any}></ZIcon>
+        <ZIcon name={iconPrefix as any} width={24}></ZIcon>
         <span>{value}</span>
       </div>
     );
