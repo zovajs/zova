@@ -20,7 +20,7 @@ export class ControllerEssentialLink extends BeanControllerBase {
 
   _renderLink() {
     const domContent = [
-      <ZIcon name={this.$props.icon}></ZIcon>,
+      <ZIcon name={this.$props.icon} width={24}></ZIcon>,
       <div>
         <div>{this.$props.title}</div>
         {this.$props.description && <div class="text-gray-400">{this.$props.description}</div>}

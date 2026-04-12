@@ -18,7 +18,7 @@ export class RenderLocale extends BeanRenderBase {
     return (
       <li>
         <details>
-          <summary>{$icon('::language')}</summary>
+          <summary>{$icon('::language', 24)}</summary>
           <ClientOnly>
             <ul class="bg-base-100 rounded-t-none p-2 w-48">
               {locales.map(item => {
@@ -29,7 +29,7 @@ export class RenderLocale extends BeanRenderBase {
                         this.app.meta.locale.current = item.name as any;
                       }}
                     >
-                      {$icon(this.app.meta.locale.current === item.name ? '::done' : '::none')}
+                      {$icon(this.app.meta.locale.current === item.name ? '::done' : '::none', 24)}
                       {item.title}
                     </a>
                   </li>

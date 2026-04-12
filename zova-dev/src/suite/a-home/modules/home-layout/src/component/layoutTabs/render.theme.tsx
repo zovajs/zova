@@ -24,7 +24,7 @@ export class RenderTheme extends BeanRenderBase {
     return (
       <li>
         <details>
-          <summary>{$icon('::dark-theme')}</summary>
+          <summary>{$icon('::dark-theme', 24)}</summary>
           <ClientOnly>
             <ul class="bg-base-100 rounded-t-none p-2 w-48">
               {themes.map(item => {
@@ -35,7 +35,7 @@ export class RenderTheme extends BeanRenderBase {
                         this.$theme.darkMode = item.mode as any;
                       }}
                     >
-                      {$icon(this.$theme.darkMode === item.mode ? '::done' : '::none')}
+                      {$icon(this.$theme.darkMode === item.mode ? '::done' : '::none', 24)}
                       {item.title}
                     </a>
                   </li>
@@ -62,7 +62,7 @@ export class RenderTheme extends BeanRenderBase {
     return (
       <li>
         <details>
-          <summary>{$icon(':outline:theme-outline')}</summary>
+          <summary>{$icon(':outline:theme-outline', 24)}</summary>
           <ClientOnly>
             <ul class="bg-base-100 rounded-t-none p-2 w-48">
               {themes.map(item => {
@@ -73,7 +73,7 @@ export class RenderTheme extends BeanRenderBase {
                         this.$theme.name = item.name as keyof IThemeRecord;
                       }}
                     >
-                      {$icon(this.$theme.name === item.name ? '::done' : '::none')}
+                      {$icon(this.$theme.name === item.name ? '::done' : '::none', 24)}
                       {item.title}
                     </a>
                   </li>

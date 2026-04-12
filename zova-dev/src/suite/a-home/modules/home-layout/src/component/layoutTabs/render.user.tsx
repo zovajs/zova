@@ -10,7 +10,7 @@ export class RenderUser extends BeanRenderBase {
         <details>
           <summary>
             {this.$passport.user?.name}
-            {$icon(this.$passport.user?.avatar as any)}
+            {$icon(this.$passport.user?.avatar as any, 24)}
           </summary>
           <ul class="bg-base-100 rounded-t-none p-2 w-32">
             <li>
