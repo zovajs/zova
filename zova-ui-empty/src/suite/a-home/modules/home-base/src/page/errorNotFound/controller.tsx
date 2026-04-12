@@ -23,9 +23,7 @@ export class ControllerPageErrorNotFound extends BeanControllerPageBase {
       <div class="text-center">
         <div>
           <div style="font-size: 30vh">404</div>
-
           <div style="font-size: 30px;line-height:2;opacity:.4">Oops. Nothing here...</div>
-
           <RouterLink to="/">Go Home</RouterLink>
         </div>
       </div>
