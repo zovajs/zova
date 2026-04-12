@@ -33,6 +33,12 @@ export class AppResource {
   beans: Record<string, IDecoratorBeanOptionsBase> = {};
   scenes: Record<string, Record<string, IAppResourceRecord>> = {};
 
+  /** @internal */
+  public dispose() {
+    this.beans = {};
+    this.scenes = {};
+  }
+
   addUse(target: object, options: IDecoratorUseOptionsBase) {
     registerMappedClassMetadataKey(target, SymbolDecoratorUse);
     const uses = appMetadata.getOwnMetadataMap(true, SymbolDecoratorUse, target);

@@ -1,5 +1,7 @@
 import type { ViteHotContext } from 'vite/types/hot.js';
 
+import { appResource } from 'zova';
+
 import type { TypeModuleResourceConfig } from '../../types/interface/module.ts';
 import type { PluginZovaOptions } from '../../types/interface/pluginZova.ts';
 import type { ZovaConfigEnv } from '../../types/utils/env.ts';
@@ -30,9 +32,6 @@ export class ZovaSys {
   constant: ZovaConstant;
 
   constructor() {
-    this.bean = BeanContainer.create(this, null!, null);
-    this.util = this.bean._newBeanSimple(SysUtil, false);
-    this.meta = this.bean._newBeanSimple(SysMeta, false);
     // zod
     zodEnhanceSys();
   }
@@ -55,6 +54,10 @@ export class ZovaSys {
   ) {
     // maybe init again
     this[SymbolSysClose] = false;
+    // init
+    this.bean = BeanContainer.create(this, null!, null);
+    this.util = this.bean._newBeanSimple(SysUtil, false);
+    this.meta = this.bean._newBeanSimple(SysMeta, false);
     // env
     this.env = this._prepareEnv(env, envRuntime);
     // monkey
@@ -108,6 +111,8 @@ export class ZovaSys {
     this.bean.dispose();
     // meta dispose
     this.meta.dispose();
+    // appResource
+    appResource.dispose();
     // init promise
     this[SymbolSysInitializePromise] = undefined;
   }
