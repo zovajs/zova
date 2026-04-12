@@ -1,6 +1,6 @@
 {
   "name": "zova-ui-vuetify",
-  "version": "5.1.23",
+  "version": "5.1.24",
   "gitHead": "8cb2168b0a2607c216a4d9b81bc9e16088895fc5",
   "description": "A vue3 vuetify framework with ioc",
   "keywords": [
@@ -146,7 +146,7 @@
     "less": "^4.6.4",
     "oxfmt": "^0.41.0",
     "oxlint": "^1.59.0",
-    "quasar-app-extension-zova": "^1.2.13",
+    "quasar-app-extension-zova": "^1.2.14",
     "sass-embedded": "^1.99.0",
     "typescript": "^5.9.3",
     "unplugin-fonts": "^1.4.0",
@@ -155,7 +155,7 @@
     "vite-plugin-vuetify": "^2.1.3",
     "vue-tsc": "^3.2.6",
     "zova-openapi": "^1.1.8",
-    "zova-vite": "^1.1.13"
+    "zova-vite": "^1.1.14"
   },
   "packageManager": "pnpm@10.19.0"
 }
