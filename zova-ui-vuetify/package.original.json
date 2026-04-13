@@ -68,7 +68,7 @@
     "@vitejs/plugin-vue": "^6.0.5",
     "autoprefixer": "^10.4.27",
     "concurrently": "^8.2.2",
-    "oxfmt": "^0.41.0",
+    "oxfmt": "^0.44.0",
     "oxlint": "^1.59.0",
     "less": "^4.6.4",
     "quasar-app-extension-zova": "^1.2.17",

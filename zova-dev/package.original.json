@@ -69,7 +69,7 @@
     "@types/node": "^22.19.17",
     "@vitejs/plugin-vue": "^5.2.4",
     "concurrently": "^8.2.2",
-    "oxfmt": "^0.41.0",
+    "oxfmt": "^0.44.0",
     "oxlint": "^1.59.0",
     "quasar-app-extension-zova": "workspace:^",
     "sass": "^1.99.0",

@@ -21,7 +21,7 @@
     "@cabloy/lint": "^5.1.5",
     "@types/mocha": "^10.0.6",
     "@types/node": "^22.10.2",
-    "oxfmt": "^0.41.0",
+    "oxfmt": "^0.44.0",
     "oxlint": "^1.56.0",
     "typedoc": "^0.25.13",
     "typescript": "^5.9.3"
