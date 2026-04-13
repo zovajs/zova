@@ -9,7 +9,7 @@ import path from 'node:path';
 import type { ZovaViteConfigOptions } from './types.ts';
 
 // import { generateCel } from './generateCel.ts';
-import { generateZod } from './generateZod.ts';
+// import { generateZod } from './generateZod.ts';
 import { copyTemplateFile, getEnvMeta, resolveTemplatePath } from './utils.ts';
 
 export async function generateEntryFiles(
@@ -27,7 +27,7 @@ export async function generateEntryFiles(
   // env json
   await __generateEnvJson();
   // zod
-  await generateZod(configOptions);
+  // await generateZod(configOptions);
   // cel
   // await generateCel(configOptions);
 
