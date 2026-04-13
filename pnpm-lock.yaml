@@ -4,6 +4,9 @@ settings:
   autoInstallPeers: true
   excludeLinksFromLockfile: false
 
+overrides:
+  zod: npm:@cabloy/zod@4.3.6
+
 importers:
 
   .:
@@ -69,6 +72,9 @@ packages:
 
   '@cabloy/process-helper@3.1.4':
     resolution: {integrity: sha512-26Bma3KdY/ZyDgGvRGY/Sxro1u4V8KTiTwd9TQnRVnw7Llam/gU0XcubsDNPFBdAY+tm9NfqAVkBU5ghe+MzSQ==}
+
+  '@cabloy/zod@4.3.6':
+    resolution: {integrity: sha512-pbN0IZK6BT6bhRp3wGlUVi4zLF5qCm3wspxpXCtOWB8bpQSqi+VgTMb2NGw/NGhlcD83zSyjudBdObqrI+te7w==}
 
   '@cacheable/memory@2.0.8':
     resolution: {integrity: sha512-FvEb29x5wVwu/Kf93IWwsOOEuhHh6dYCJF3vcKLzXc0KXIW181AOzv6ceT4ZpBHDvAfG60eqb+ekmrnLHIy+jw==}
@@ -3635,9 +3641,6 @@ packages:
     peerDependencies:
       zod: ^3.25.28 || ^4
 
-  zod@3.25.76:
-    resolution: {integrity: sha512-gzUt/qt81nXsFGKIFcC3YnfEAx5NkunCfnDlvuBSSFS02bcXu4Lmea0AFIUwbLWxWPx3d9p8S5QoaujKcNQxcQ==}
-
   zwitch@1.0.5:
     resolution: {integrity: sha512-V50KMwwzqJV0NpZIZFwfOD5/lyny3WlSzRiXgA0G7VUnRlqttta1L6UQIHzd6EuBY/cHGfwTIck7w1yH6Q5zUw==}
 
@@ -3679,6 +3682,8 @@ snapshots:
       - vue-eslint-parser
 
   '@cabloy/process-helper@3.1.4': {}
+
+  '@cabloy/zod@4.3.6': {}
 
   '@cacheable/memory@2.0.8':
     dependencies:
@@ -3908,7 +3913,7 @@ snapshots:
       - supports-color
       - typescript
 
-  '@modelcontextprotocol/sdk@1.29.0(zod@3.25.76)':
+  '@modelcontextprotocol/sdk@1.29.0(@cabloy/zod@4.3.6)':
     dependencies:
       '@hono/node-server': 1.19.13(hono@4.12.12)
       ajv: 8.18.0
@@ -3925,8 +3930,8 @@ snapshots:
       json-schema-typed: 8.0.2
       pkce-challenge: 5.0.1
       raw-body: 3.0.2
-      zod: 3.25.76
-      zod-to-json-schema: 3.25.2(zod@3.25.76)
+      zod: '@cabloy/zod@4.3.6'
+      zod-to-json-schema: 3.25.2(@cabloy/zod@4.3.6)
     transitivePeerDependencies:
       - supports-color
 
@@ -7582,7 +7587,7 @@ snapshots:
 
   textlint@14.8.4:
     dependencies:
-      '@modelcontextprotocol/sdk': 1.29.0(zod@3.25.76)
+      '@modelcontextprotocol/sdk': 1.29.0(@cabloy/zod@4.3.6)
       '@textlint/ast-node-types': 14.8.4
       '@textlint/ast-traverse': 14.8.4
       '@textlint/config-loader': 14.8.4
@@ -7608,7 +7613,7 @@ snapshots:
       read-pkg-up: 3.0.0
       structured-source: 4.0.0
       unique-concat: 0.2.2
-      zod: 3.25.76
+      zod: '@cabloy/zod@4.3.6'
     transitivePeerDependencies:
       - '@cfworker/json-schema'
       - supports-color
@@ -7932,11 +7937,9 @@ snapshots:
 
   yocto-queue@0.1.0: {}
 
-  zod-to-json-schema@3.25.2(zod@3.25.76):
+  zod-to-json-schema@3.25.2(@cabloy/zod@4.3.6):
     dependencies:
-      zod: 3.25.76
-
-  zod@3.25.76: {}
+      zod: '@cabloy/zod@4.3.6'
 
   zwitch@1.0.5: {}
 
