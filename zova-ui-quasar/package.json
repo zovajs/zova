@@ -127,7 +127,7 @@
     "autoprefixer": "^10.4.27",
     "concurrently": "^8.2.2",
     "fs-extra": "^11.3.4",
-    "oxfmt": "^0.44.0",
+    "oxfmt": "^0.45.0",
     "oxlint": "^1.59.0",
     "quasar-app-extension-zova": "^1.2.17",
     "typescript": "^5.9.3",

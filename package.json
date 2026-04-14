@@ -31,7 +31,7 @@
     "@types/node": "^22.19.17",
     "lerna": "^8.1.2",
     "minimist": "^1.2.8",
-    "oxfmt": "^0.44.0",
+    "oxfmt": "^0.45.0",
     "oxlint": "^1.59.0",
     "textlint": "^14.8.4",
     "textlint-rule-ja-space-between-half-and-full-width": "^2.4.2",
