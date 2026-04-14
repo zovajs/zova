@@ -35,7 +35,8 @@
     "build:ssr:testSecond": "npm run prerun && quasar build --mode ssr --flavor testSecond",
     "build:rest:testSecond": "npm run prerun && npm run zova :bin:buildRest -- --flavor testSecond",
     "preview:ssr:testSecond": "concurrently \"node ./dist-mock/index.js\" \"node ./dist/ssr-testSecond/index.js\"",
-    "dev:spa:testSecond": "npm run prerun && quasar dev --mode spa --flavor testSecond"
+    "dev:spa:testSecond": "npm run prerun && quasar dev --mode spa --flavor testSecond",
+    "build:ssr:cabloyBasicBatch": "npm run build:ssr:cabloyBasicAdmin && npm run build:rest:cabloyBasicAdmin"
   },
   "keywords": ["vue3", "ioc", "zova"],
   "repository": {

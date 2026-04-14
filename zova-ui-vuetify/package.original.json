@@ -37,7 +37,8 @@
     "build:ssr:cabloyStartWeb": "npm run prerun && quasar build --mode ssr --flavor cabloyStartWeb",
     "build:rest:cabloyStartWeb": "npm run prerun && zova :bin:buildRest --flavor cabloyStartWeb",
     "preview:ssr:cabloyStartWeb": "concurrently \"node ./dist-mock/index.js\" \"node ./dist/ssr-cabloyStartWeb/index.js\"",
-    "dev:spa:cabloyStartWeb": "npm run prerun && quasar dev --mode spa --flavor cabloyStartWeb"
+    "dev:spa:cabloyStartWeb": "npm run prerun && quasar dev --mode spa --flavor cabloyStartWeb",
+    "build:ssr:cabloyStartBatch": "npm run build:ssr:cabloyStartAdmin && npm run build:ssr:cabloyStartWeb && npm run build:rest:cabloyStartAdmin && npm run build:rest:cabloyStartWeb"
   },
   "keywords": ["vue3", "ioc", "zova"],
   "repository": {
