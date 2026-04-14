@@ -220,7 +220,7 @@ export class ModelTabs extends BeanModelBase {
     // tabs
     const [index] = this.findTab(tabKey);
     if (index === -1) return;
-    // current
+    // active next
     let tabKeyActiveNext;
     if (!noActiveNext && index === this.tabCurrentIndex) {
       // prev/next
@@ -249,18 +249,32 @@ export class ModelTabs extends BeanModelBase {
     if (!tab.items) return false;
     const indexItem = tab.items.findIndex(item => item.componentKey === componentKey);
     if (indexItem === -1) return false;
+    // deleteTab if length===1
     if (tab.items.length === 1 && !tab.affix) {
       // delete tab
       await this.deleteTab(tabKey, noActiveNext);
-    } else {
-      // delete tab item
-      const items = mutate(tab.items, copyState => {
-        copyState.splice(indexItem, 1);
-      });
-      const tabNew: RouteTab = { ...tab, items };
-      this.tabs = mutate(this.tabs, copyState => {
-        copyState.splice(index, 1, tabNew);
-      });
+      return true;
+    }
+    // active next
+    let componentKeyActiveNext;
+    if (!noActiveNext && componentKey === this.componentKeyCurrent) {
+      // prev/next
+      const tabItemCurrentIndex = indexItem - 1 > -1 ? indexItem - 1 : indexItem + 1 < tab.items.length ? indexItem + 1 : -1;
+      if (tabItemCurrentIndex > -1) {
+        componentKeyActiveNext = tab.items[tabItemCurrentIndex]?.componentKey;
+      }
+    }
+    // delete tab item
+    const items = mutate(tab.items, copyState => {
+      copyState.splice(indexItem, 1);
+    });
+    const tabNew: RouteTab = { ...tab, items };
+    this.tabs = mutate(this.tabs, copyState => {
+      copyState.splice(index, 1, tabNew);
+    });
+    // active next
+    if (componentKeyActiveNext) {
+      await this.activeTabItem(tabKey, componentKeyActiveNext);
     }
     return true;
   }
