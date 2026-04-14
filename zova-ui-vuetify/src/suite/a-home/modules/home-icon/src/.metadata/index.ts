@@ -71,6 +71,7 @@ export interface IIconRecord {
     '::arrow-up-right': true;
     '::arrow-up': true;
     '::article': true;
+    '::asterisk': true;
     '::attachment-line': true;
     '::book': true;
     '::checkbox-checked': true;
