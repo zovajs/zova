@@ -43,9 +43,9 @@
     "postpack": "clean-package restore"
   },
   "dependencies": {
-    "@cabloy/cli": "^3.0.105",
+    "@cabloy/cli": "^3.1.4",
     "@cabloy/process-helper": "^3.0.0",
-    "fs-extra": "^11.2.0",
+    "fs-extra": "^11.3.4",
     "semver": "^7.6.2",
     "zova-cli-set-front": "^1.2.27"
   },

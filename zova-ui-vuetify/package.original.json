@@ -81,9 +81,9 @@
     "vue-tsc": "^3.2.6",
     "zova-openapi": "^1.1.8",
     "zova-vite": "^1.1.17",
-    "@cabloy/cli": "^3.0.105",
+    "@cabloy/cli": "^3.1.4",
     "@types/luxon": "^3.7.1",
-    "fs-extra": "^11.2.0"
+    "fs-extra": "^11.3.4"
   },
   "license": "MIT",
   "gitHead": "4d11b0fed7af50b828971785af3c014046be6afa"
