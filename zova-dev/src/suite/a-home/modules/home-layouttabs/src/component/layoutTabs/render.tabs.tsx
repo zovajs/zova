@@ -61,7 +61,53 @@ export class RenderTabs extends BeanRenderBase {
     return info?.icon ? info?.icon : '';
   }
 
-  public renderTabItems() {}
+  public renderTabItems() {
+    const $$modelTabs = this.$$modelTabs;
+    if (!$$modelTabs) return;
+    const tabCurrent = $$modelTabs.tabCurrent;
+    if (!tabCurrent || !tabCurrent.items) return;
+    const tabKey = tabCurrent.tabKey;
+    const domTabs: VNode[] = [];
+    for (const tabItem of tabCurrent.items) {
+      // ignore first
+      if (tabItem.componentKey === tabKey) continue;
+      const { componentKey, pageMeta } = tabItem;
+      const className = componentKey === $$modelTabs.componentKeyCurrent ? 'text-secondary' : '';
+      const pageTitle = pageMeta?.pageTitle || '--';
+      const domTab = (
+        <a
+          key={componentKey}
+          role="tab"
+          class={`${className} ${this.cTab}`}
+          onClick={() => {
+            $$modelTabs.activeTabItem(tabKey, componentKey);
+          }}
+        >
+          {pageMeta?.pageDirty && <ZIcon name={'::asterisk'} width="24" height="24"></ZIcon>}
+          <div class="text-truncate" style={{ maxWidth: this.scope.config.tabItem.maxWidth }}>
+            {pageTitle}
+          </div>
+          <ZIcon
+            class="tab-close hidden hover:bg-slate-400 rounded-sm"
+            name="::close"
+            width="16"
+            height="16"
+            nativeOnClick={withModifiers(() => {
+              $$modelTabs.deleteTabItem(tabKey, componentKey, false);
+            }, ['stop'])}
+          ></ZIcon>
+        </a>
+      );
+      domTabs.push(domTab);
+    }
+    const domWrapper = (
+      <div role="tablist" class="tabs tabs-lifted">
+        {domTabs}
+      </div>
+    );
+    if (!this.$$modelTabs.cache) return domWrapper;
+    return <ClientOnly>{domWrapper}</ClientOnly>;
+  }
 
   _renderRouterViewTabs() {
     return <ZRouterViewTabs></ZRouterViewTabs>;
