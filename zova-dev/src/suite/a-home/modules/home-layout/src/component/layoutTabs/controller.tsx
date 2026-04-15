@@ -3,9 +3,9 @@ import type { ModelTabs, ModelTabsOptions } from 'zova-module-a-routertabs';
 import { BeanControllerBase, Use } from 'zova';
 import { Controller } from 'zova-module-a-bean';
 import { $QueryAutoLoad } from 'zova-module-a-model';
+import { IServiceSsrLayoutOptions, ServiceSsrLayout } from 'zova-module-home-base';
 
 import { ModelMenu } from '../../model/menu.js';
-import { ServiceSsr } from '../../service/ssr.js';
 
 export interface ControllerLayoutTabsProps {}
 
@@ -18,8 +18,8 @@ export class ControllerLayoutTabs extends BeanControllerBase {
   @Use()
   $$modelMenu: ModelMenu;
 
-  @Use()
-  $$ssr: ServiceSsr;
+  @Use({ init: { arg: { sidebarLeftOpenPC: true } as IServiceSsrLayoutOptions } })
+  $$serviceSsrLayout: ServiceSsrLayout;
 
   leftDrawerOpen: boolean = false;
 
