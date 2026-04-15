@@ -7,7 +7,7 @@ export * from '../service/ssrLayout.js';
 
 import 'zova-module-a-bean';
 declare module 'zova-module-a-bean' {
-
+  
     export interface IServiceRecord {
       'home-base:locale': never;
 'home-base:routerGuards': never;
@@ -15,10 +15,10 @@ declare module 'zova-module-a-bean' {
 'home-base:ssrLayout': never;
     }
 
-
+  
 }
 declare module 'zova-module-home-base' {
-
+  
         export interface ServiceLocale {
           /** @internal */
           get scope(): ScopeModuleHomeBase;
@@ -27,7 +27,7 @@ declare module 'zova-module-home-base' {
         export interface ServiceLocale {
           get $beanFullName(): 'home-base.service.locale';
           get $onionName(): 'home-base:locale';
-
+          
         }
 
         export interface ServiceRouterGuards {
@@ -38,7 +38,7 @@ declare module 'zova-module-home-base' {
         export interface ServiceRouterGuards {
           get $beanFullName(): 'home-base.service.routerGuards';
           get $onionName(): 'home-base:routerGuards';
-
+          
         }
 
         export interface ServiceSsr {
@@ -49,7 +49,7 @@ declare module 'zova-module-home-base' {
         export interface ServiceSsr {
           get $beanFullName(): 'home-base.service.ssr';
           get $onionName(): 'home-base:ssr';
-
+          
         }
 
         export interface ServiceSsrLayout {
@@ -60,8 +60,8 @@ declare module 'zova-module-home-base' {
         export interface ServiceSsrLayout {
           get $beanFullName(): 'home-base.service.ssrLayout';
           get $onionName(): 'home-base:ssrLayout';
-
-        }
+          
+        } 
 }
 /** service: end */
 /** service: begin */
@@ -88,11 +88,11 @@ export * from '../page/errorNotFound/controller.jsx';
 
 import 'zova';
 declare module 'zova' {
-
-
+  
+  
 }
 declare module 'zova-module-home-base' {
-
+  
         export interface ControllerItemLink {
           /** @internal */
           get scope(): ScopeModuleHomeBase;
@@ -116,7 +116,7 @@ declare module 'zova-module-home-base' {
         export interface ControllerPageErrorNotFound {
           /** @internal */
           get scope(): ScopeModuleHomeBase;
-        }
+        } 
 }
 /** controller: end */
 /** controller: begin */
@@ -152,7 +152,7 @@ export interface IPagePathRecord {
 '/home/base//:catchAll(.*)*': TypePagePathSchema<undefined,undefined>;
 }
 export interface IPageNameRecord {
-
+  
 }
 }
 export const pagePathSchemas = {
@@ -197,76 +197,6 @@ export interface IZovaComponentRecord {
 }
 }
 /** components: end */
-/** css: begin */
-export * from '../bean/css.default.js';
-import { ICssOptionsDefault } from '../bean/css.default.js';
-import 'zova-module-a-style';
-declare module 'zova-module-a-style' {
-
-    export interface ICssRecord {
-      'home-theme:default': ICssOptionsDefault;
-    }
-
-
-}
-declare module 'zova-module-home-base' {
-
-        export interface CssDefault {
-          /** @internal */
-          get scope(): ScopeModuleHomeBase;
-        }
-
-        export interface CssDefault {
-          get $beanFullName(): 'home-base.css.default';
-          get $onionName(): 'home-theme:default';
-          get $onionOptions(): ICssOptionsDefault;
-        }
-}
-/** css: end */
-/** css: begin */
-import { CssDefault } from '../bean/css.default.js';
-import 'zova';
-declare module 'zova' {
-  export interface IBeanRecordLocal {
-    'home-base.css.default': CssDefault;
-  }
-}
-/** css: end */
-/** theme: begin */
-export * from '../bean/theme.default.js';
-import { IThemeOptionsDefault } from '../bean/theme.default.js';
-import 'zova-module-a-style';
-declare module 'zova-module-a-style' {
-
-    export interface IThemeRecord {
-      'home-theme:default': IThemeOptionsDefault;
-    }
-
-
-}
-declare module 'zova-module-home-base' {
-
-        export interface ThemeDefault {
-          /** @internal */
-          get scope(): ScopeModuleHomeBase;
-        }
-
-        export interface ThemeDefault {
-          get $beanFullName(): 'home-base.theme.default';
-          get $onionName(): 'home-theme:default';
-          get $onionOptions(): IThemeOptionsDefault;
-        }
-}
-/** theme: end */
-/** theme: begin */
-import { ThemeDefault } from '../bean/theme.default.js';
-import 'zova';
-declare module 'zova' {
-  export interface IBeanRecordLocal {
-    'home-base.theme.default': ThemeDefault;
-  }
-}
-/** theme: end */
 /** config: begin */
 export * from '../config/config.js';
 import { config } from '../config/config.js';
@@ -301,7 +231,7 @@ declare module 'zova' {
   export interface IBeanScopeRecord {
     'home-base': ScopeModuleHomeBase;
   }
-
+  
   export interface IBeanScopeConfig {
     'home-base': ReturnType<typeof config>;
   }
@@ -310,10 +240,10 @@ declare module 'zova' {
     'home-base': (typeof locales)[TypeLocaleBase];
   }
 
-
+  
 }
 
 export function locale<K extends keyof (typeof locales)[TypeLocaleBase]>(key: K): `home-base::${K}` {
   return `home-base::${key}`;
-}
+}  
 /** scope: end */
