@@ -85,12 +85,12 @@ export class RenderTheme extends BeanRenderBase {
   getThemeNames() {
     return [
       {
-        name: 'home-theme:default' satisfies keyof IThemeRecord,
-        title: this.scope.locale.ThemeDefault(),
-      },
-      {
         name: 'home-theme:orange' satisfies keyof IThemeRecord,
         title: this.scope.locale.ThemeOrange(),
+      },
+      {
+        name: 'home-theme:default' satisfies keyof IThemeRecord,
+        title: this.scope.locale.ThemeBlue(),
       },
     ];
   }

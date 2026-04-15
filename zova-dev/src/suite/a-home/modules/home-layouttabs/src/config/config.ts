@@ -9,7 +9,7 @@ export const config = (_sys: ZovaSys) => {
       cache: true,
     },
     tabItem: {
-      maxWidth: '120px',
+      maxWidth: '130px',
     },
   };
 };

@@ -75,6 +75,8 @@ export class ModelTabs extends BeanModelBase {
       // await this.$loadStateDb(this.tabKeyCurrent);
       await this.$loadStateDb(this.tabs);
     }
+    // reset pageDirty
+    this._resetAllPageDirty();
     // first route
     if (this.$currentRoute) {
       this.forwardRoute(this.$currentRoute);
@@ -496,5 +498,20 @@ export class ModelTabs extends BeanModelBase {
     if (route.meta.componentKeyMode === 'nameOnly') return name;
     // name: withParams
     return route.path;
+  }
+
+  private _resetAllPageDirty() {
+    const tabItems: [string, string][] = [];
+    for (const tab of this.tabs) {
+      if (!tab.items) continue;
+      for (const tabItem of tab.items) {
+        if (tabItem.pageMeta?.pageDirty) {
+          tabItems.push([tab.tabKey, tabItem.componentKey]);
+        }
+      }
+    }
+    for (const [tabKey, componentKey] of tabItems) {
+      this.updateTabItemPageMeta(tabKey, componentKey, { pageDirty: false });
+    }
   }
 }
