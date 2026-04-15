@@ -8,5 +8,8 @@ export const config = (_sys: ZovaSys) => {
       maxItems: 6,
       cache: true,
     },
+    tabItem: {
+      maxWidth: '250px',
+    },
   };
 };
