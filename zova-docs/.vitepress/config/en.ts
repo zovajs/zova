@@ -147,7 +147,7 @@ function sidebarGuide(): DefaultTheme.SidebarItem[] {
       base: '/guide/page/',
       items: [
         { text: 'Introduction', link: 'introduction' },
-        { text: 'File Structure', link: 'file-structure' },
+        { text: 'Progressive Code Splitting', link: 'progressive-code-splitting' },
         { text: 'Page Query', link: 'page-query' },
         { text: 'Page Params', link: 'page-params' },
         { text: 'Page Route', link: 'page-route' },
@@ -163,7 +163,7 @@ function sidebarGuide(): DefaultTheme.SidebarItem[] {
       base: '/guide/component/',
       items: [
         { text: 'Introduction', link: 'introduction' },
-        { text: 'File Structure', link: 'file-structure' },
+        { text: 'Progressive Code Splitting', link: 'progressive-code-splitting' },
         { text: 'Component Props', link: 'component-props' },
         { text: 'v-model', link: 'v-model' },
         { text: 'Generic Component', link: 'component-generic' },

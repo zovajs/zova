@@ -1,4 +1,4 @@
-# File structure
+# Progressive Code Splitting
 
 Zova provides a flexible file structure that can be gradually adjusted according to the complexity of the business, always maintaining the simplicity and elegance of the code, which is more conducive to continuous iteration and maintenance of the code
 

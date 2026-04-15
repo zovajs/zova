@@ -147,7 +147,7 @@ function sidebarGuide(): DefaultTheme.SidebarItem[] {
       base: '/zh/guide/page/',
       items: [
         { text: '简介', link: 'introduction' },
-        { text: '文件结构', link: 'file-structure' },
+        { text: '渐进式代码拆分', link: 'progressive-code-splitting' },
         { text: '页面Query', link: 'page-query' },
         { text: '页面Params', link: 'page-params' },
         { text: '页面路由', link: 'page-route' },
@@ -163,7 +163,7 @@ function sidebarGuide(): DefaultTheme.SidebarItem[] {
       base: '/zh/guide/component/',
       items: [
         { text: '简介', link: 'introduction' },
-        { text: '文件结构', link: 'file-structure' },
+        { text: '渐进式代码拆分', link: 'progressive-code-splitting' },
         { text: '组件Props', link: 'component-props' },
         { text: 'v-model', link: 'v-model' },
         { text: '泛型组件', link: 'component-generic' },
