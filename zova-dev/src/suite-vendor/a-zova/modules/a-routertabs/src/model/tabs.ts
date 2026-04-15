@@ -224,7 +224,7 @@ export class ModelTabs extends BeanModelBase {
     let tabKeyActiveNext;
     if (!noActiveNext && index === this.tabCurrentIndex) {
       // prev/next
-      const tabCurrentIndex = index - 1 > -1 ? index - 1 : index + 1 < this.tabs.length ? index + 1 : -1;
+      const tabCurrentIndex = index + 1 < this.tabs.length ? index + 1 : index - 1 > -1 ? index - 1 : -1;
       if (tabCurrentIndex > -1) {
         tabKeyActiveNext = this.tabs[tabCurrentIndex]?.tabKey;
       }
@@ -259,7 +259,7 @@ export class ModelTabs extends BeanModelBase {
     let componentKeyActiveNext;
     if (!noActiveNext && componentKey === this.componentKeyCurrent) {
       // prev/next
-      const tabItemCurrentIndex = indexItem - 1 > -1 ? indexItem - 1 : indexItem + 1 < tab.items.length ? indexItem + 1 : -1;
+      const tabItemCurrentIndex = indexItem + 1 < tab.items.length ? indexItem + 1 : indexItem - 1 > -1 ? indexItem - 1 : -1;
       if (tabItemCurrentIndex > -1) {
         componentKeyActiveNext = tab.items[tabItemCurrentIndex]?.componentKey;
       }
