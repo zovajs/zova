@@ -10,8 +10,8 @@ export class RenderSidebar extends BeanRenderBase {
 
   public render() {
     return (
-      <div class="drawer-side">
-        <label for="my-drawer-2" aria-label="close sidebar" class="drawer-overlay"></label>
+      <div class="drawer-side is-drawer-close:overflow-visible">
+        <label htmlFor="my-drawer-2" aria-label="close sidebar" class="drawer-overlay"></label>
         {this.$$r.$$renderMenu.render()}
       </div>
     );
