@@ -43,6 +43,7 @@ export class ControllerRestPageEntry<TData extends {} = {}> extends BeanControll
       () => this.$$modelResource.getFormApiSchemas(this.formMeta)?.sdk,
       () => this.queryData,
     );
+    this.setPageMeta(this.formData, false);
   }
 
   get formProvider() {
@@ -93,5 +94,12 @@ export class ControllerRestPageEntry<TData extends {} = {}> extends BeanControll
   async onSubmit(data: TypeFormOnSubmitData<TData>) {
     const mutationSubmit = this.$$modelResource.getFormMutationSubmit(this.formMeta, this.entryId);
     await mutationSubmit?.mutateAsync(data.value as any);
+    this.setPageMeta(data.value, false);
+  }
+
+  setPageMeta(data: any | undefined, pageDirty?: boolean) {
+    if (!this.$pageRoute) return;
+    const pageTitle = data?.name;
+    this.$router.setPageMeta(this.$pageRoute, { pageTitle, pageDirty });
   }
 }

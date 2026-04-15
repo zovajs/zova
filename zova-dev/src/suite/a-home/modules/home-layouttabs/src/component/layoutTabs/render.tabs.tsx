@@ -72,19 +72,19 @@ export class RenderTabs extends BeanRenderBase {
       // ignore first
       if (tabItem.componentKey === tabKey) continue;
       const { componentKey, pageMeta } = tabItem;
-      const className = componentKey === $$modelTabs.componentKeyCurrent ? 'text-secondary' : '';
+      const className = componentKey === $$modelTabs.componentKeyCurrent ? 'tab-active text-primary' : '';
       const pageTitle = pageMeta?.pageTitle || '--';
       const domTab = (
         <a
           key={componentKey}
           role="tab"
-          class={`${className} ${this.cTab}`}
+          class={`tab flex items-center ${className} ${this.cTab}`}
           onClick={() => {
             $$modelTabs.activeTabItem(tabKey, componentKey);
           }}
         >
-          {pageMeta?.pageDirty && <ZIcon name={'::asterisk'} width="24" height="24"></ZIcon>}
-          <div class="text-truncate" style={{ maxWidth: this.scope.config.tabItem.maxWidth }}>
+          {pageMeta?.pageDirty && <ZIcon name={'::asterisk'} width="16" height="16"></ZIcon>}
+          <div class="overflow-hidden text-ellipsis" style={{ display: 'inline-block', maxWidth: this.scope.config.tabItem.maxWidth }}>
             {pageTitle}
           </div>
           <ZIcon

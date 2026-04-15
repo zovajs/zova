@@ -21,6 +21,9 @@ export class RenderRestPageEntry<TData extends {} = {}> extends BeanRenderBase {
           // eslint-disable-next-line no-alert
           window.alert(error.message);
         }}
+        onChanged={data => {
+          this.setPageMeta(data, true);
+        }}
       ></ComponentForm>
     );
   }

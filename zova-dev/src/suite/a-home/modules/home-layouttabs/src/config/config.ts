@@ -5,7 +5,7 @@ export const config = (_sys: ZovaSys) => {
     tabs: {
       scene: '',
       max: 6,
-      maxItems: 6,
+      maxItems: 3,
       cache: true,
     },
     tabItem: {
