@@ -16,9 +16,9 @@ export class ControllerPageStyle extends BeanControllerPageBase {
   themeNameOptions = [
     {
       label: 'Default',
-      value: $getThemeName('home-base:default'),
+      value: $getThemeName('home-theme:default'),
     },
-    { label: 'Orange', value: $getThemeName('demo-basic:orange') },
+    { label: 'Orange', value: $getThemeName('home-theme:orange') },
   ];
 
   protected async __init__() {

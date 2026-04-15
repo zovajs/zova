@@ -19,9 +19,9 @@ export class ControllerPageStyle extends BeanControllerPageBase {
   themeNameOptions = [
     {
       label: 'Default',
-      value: $getThemeName('home-base:default'),
+      value: $getThemeName('home-theme:default'),
     },
-    { label: 'Orange', value: $getThemeName('demo-basic:orange') },
+    { label: 'Orange', value: $getThemeName('home-theme:orange') },
   ];
 
   protected async __init__() {
@@ -56,8 +56,8 @@ export class ControllerPageStyle extends BeanControllerPageBase {
             {this.$theme.name}
           </div>
           <VRadioGroup v-model={this.$theme.name} inline>
-            <VRadio label="Default" value={$getThemeName('home-base:default')}></VRadio>
-            <VRadio label="Orange" value={$getThemeName('demo-basic:orange')}></VRadio>
+            <VRadio label="Default" value={$getThemeName('home-theme:default')}></VRadio>
+            <VRadio label="Orange" value={$getThemeName('home-theme:orange')}></VRadio>
           </VRadioGroup>
         </div>
       </ZPage>

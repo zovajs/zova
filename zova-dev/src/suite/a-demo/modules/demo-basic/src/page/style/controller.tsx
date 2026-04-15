@@ -83,10 +83,10 @@ export class ControllerPageStyle extends BeanControllerPageBase {
                   this.$theme.name = target.value as any;
                 }}
               >
-                <option value={$getThemeName('home-base:default')} selected={this.$theme.name === $getThemeName('home-base:default')}>
+                <option value={$getThemeName('home-theme:default')} selected={this.$theme.name === $getThemeName('home-theme:default')}>
                   Default
                 </option>
-                <option value={$getThemeName('demo-basic:orange')} selected={this.$theme.name === $getThemeName('demo-basic:orange')}>
+                <option value={$getThemeName('home-theme:orange')} selected={this.$theme.name === $getThemeName('home-theme:orange')}>
                   Orange
                 </option>
               </select>

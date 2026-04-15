@@ -116,9 +116,9 @@ export class RenderTest extends BeanRenderBase {
         <div>{String(this.$theme.darkMode)}</div>
         <button onClick={() => {
             this.$theme.name =
-              this.$theme.name === 'home-base:default'
-                ? 'demo-basic:orange'
-                : 'home-base:default';
+              this.$theme.name === 'home-theme:default'
+                ? 'home-theme:orange'
+                : 'home-theme:default';
           }}
         >
           Toggle Theme

@@ -7,11 +7,11 @@ export * from '../page/style/controller.jsx';
 
 import 'zova';
 declare module 'zova' {
-  
-  
+
+
 }
 declare module 'zova-module-demo-basic' {
-  
+
         export interface ControllerCard {
           /** @internal */
           get scope(): ScopeModuleDemoBasic;
@@ -30,7 +30,7 @@ declare module 'zova-module-demo-basic' {
         export interface ControllerPageStyle {
           /** @internal */
           get scope(): ScopeModuleDemoBasic;
-        } 
+        }
 }
 /** controller: end */
 /** controller: begin */
@@ -62,7 +62,7 @@ export interface IPagePathRecord {
 '/demo/basic/style': TypePagePathSchema<undefined,undefined>;
 }
 export interface IPageNameRecord {
-  
+
 }
 }
 export const pagePathSchemas = {
@@ -72,7 +72,7 @@ export const pageNameSchemas = {
 
 };
 declare module 'zova-module-demo-basic' {
-  
+
 }
 /** pages: end */
 
@@ -97,15 +97,15 @@ export * from '../bean/theme.orange.js';
 import { IThemeOptionsOrange } from '../bean/theme.orange.js';
 import 'zova-module-a-style';
 declare module 'zova-module-a-style' {
-  
+
     export interface IThemeRecord {
-      'demo-basic:orange': IThemeOptionsOrange;
+      'home-theme:orange': IThemeOptionsOrange;
     }
 
-  
+
 }
 declare module 'zova-module-demo-basic' {
-  
+
         export interface ThemeOrange {
           /** @internal */
           get scope(): ScopeModuleDemoBasic;
@@ -113,9 +113,9 @@ declare module 'zova-module-demo-basic' {
 
         export interface ThemeOrange {
           get $beanFullName(): 'demo-basic.theme.orange';
-          get $onionName(): 'demo-basic:orange';
+          get $onionName(): 'home-theme:orange';
           get $onionOptions(): IThemeOptionsOrange;
-        } 
+        }
 }
 /** theme: end */
 /** theme: begin */
@@ -143,12 +143,12 @@ declare module 'zova' {
   export interface IBeanScopeRecord {
     'demo-basic': ScopeModuleDemoBasic;
   }
-  
-  
 
-  
 
-  
+
+
+
+
 }
-  
+
 /** scope: end */
