@@ -11,7 +11,8 @@
     "zova-module-home-index": "workspace:^",
     "zova-module-home-layout": "workspace:^",
     "zova-module-home-login": "workspace:^",
-    "zova-module-home-passport": "workspace:^"
+    "zova-module-home-passport": "workspace:^",
+    "zova-module-home-theme": "^5.0.0"
   },
   "title": "Home"
 }
