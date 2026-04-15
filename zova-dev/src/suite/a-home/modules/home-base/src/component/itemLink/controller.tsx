@@ -3,7 +3,7 @@ import { BeanControllerBase } from 'zova';
 import { Controller } from 'zova-module-a-bean';
 import { IIconRecord, ZIcon } from 'zova-module-a-icon';
 
-export interface ControllerEssentialLinkProps {
+export interface ControllerItemLinkProps {
   title: string;
   description?: string;
   icon?: keyof IIconRecord;
@@ -12,7 +12,7 @@ export interface ControllerEssentialLinkProps {
 }
 
 @Controller()
-export class ControllerEssentialLink extends BeanControllerBase {
+export class ControllerItemLink extends BeanControllerBase {
   static $propsDefault = {
     description: '',
     icon: '',
