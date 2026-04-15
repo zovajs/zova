@@ -26,7 +26,7 @@ export class RenderTabs extends BeanRenderBase {
             $$modelTabs.activeTab(tabKey);
           }}
         >
-          {!!info?.icon && <ZIcon name={tabIcon as any} width="24" height="24"></ZIcon>}
+          {!!tabIcon && <ZIcon name={tabIcon as any} width="18" height="18"></ZIcon>}
           {titleLocale}
           {!tab.affix && (
             <ZIcon
