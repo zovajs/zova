@@ -10,7 +10,8 @@
     "zova-module-home-icon": "workspace:^",
     "zova-module-home-index": "workspace:^",
     "zova-module-home-layout": "workspace:^",
-    "zova-module-home-passport": "^5.0.0"
+    "zova-module-home-passport": "^5.0.0",
+    "zova-module-home-theme": "^5.0.0"
   },
   "title": "Home"
 }
