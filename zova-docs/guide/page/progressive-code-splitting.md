@@ -1,10 +1,10 @@
 # Progressive Code Splitting
 
-Zova provides a flexible file structure that can be gradually adjusted according to the complexity of the business, always maintaining the simplicity and elegance of the code, which is more conducive to continuous iteration and maintenance of the code
+Zova provides a flexible file structure that allows for progressive code splitting based on the complexity of the business, thereby keeping the code always simple and elegant, making it easier for continuous iteration and maintenance of the code
 
 ## Three-level iteration
 
-The file structure of a page can refer to the following three iterations:
+Progressive splitting of the page code can refer to the following three-level iteration:
 
 | Name        | Description                                       |
 | ----------- | ------------------------------------------------- |
