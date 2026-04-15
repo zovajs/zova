@@ -1,7 +1,7 @@
 import type { TypeRenderComponentJsxPropsPublic } from 'zova-jsx';
-import type { ControllerLayoutTabsProps } from 'zova-module-home-layout';
+import type { ControllerLayoutTabsProps } from 'zova-module-home-layouttabs';
 
 type TypeControllerLayoutTabsPublicProps = TypeRenderComponentJsxPropsPublic & ControllerLayoutTabsProps;
-export function BBZHomeLayoutTabs(_props: TypeControllerLayoutTabsPublicProps) {
-  return 'home-layout:layoutTabs';
+export function BBZHomeLayouttabsLayoutTabs(_props: TypeControllerLayoutTabsPublicProps) {
+  return 'home-layouttabs:layoutTabs';
 }
