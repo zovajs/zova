@@ -2,8 +2,9 @@ import type { VNode } from 'vue';
 
 import { BeanRenderBase } from 'zova';
 import { Render } from 'zova-module-a-bean';
+import { ZItemLink } from 'zova-module-home-base';
 
-import { TypeMenuItem, TypeMenuTree, ZEssentialLink } from '../../.metadata/index.js';
+import { TypeMenuItem, TypeMenuTree } from '../../.metadata/index.js';
 
 @Render()
 export class RenderMenu extends BeanRenderBase {
@@ -35,13 +36,7 @@ export class RenderMenu extends BeanRenderBase {
     }
     return (
       <li key={item.title}>
-        <ZEssentialLink
-          title={titleLocale}
-          description={item.description}
-          icon={item.icon as any}
-          href={item.external ? item.link : undefined}
-          to={to}
-        />
+        <ZItemLink title={titleLocale} description={item.description} icon={item.icon as any} href={item.external ? item.link : undefined} to={to} />
       </li>
     );
   }
