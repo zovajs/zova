@@ -67,7 +67,6 @@ export class ServiceSsrLayout extends BeanBase {
       }
       const __domDrawerContainer=document.querySelector('#q-app>.drawer');
       const __domDrawer=document.querySelector('#q-app>.drawer>.drawer-side');
-      const __domPageContainer=document.querySelector('#q-app>.drawer>.drawer-content');
       const sidebarWidth = '${this.scope.config.layout.sidebar.width}px';
       const navbarHeight = '${this.scope.config.layout.navbar.height}px';
       if(__leftDrawerOpen){
