@@ -1,3 +1,4 @@
+import { classes } from 'typestyle';
 import { BeanRenderBase, Use } from 'zova';
 import { Render } from 'zova-module-a-bean';
 
@@ -38,7 +39,7 @@ export class RenderLayoutTabs extends BeanRenderBase {
 
   public render() {
     return (
-      <div class="drawer lg:drawer-open">
+      <div class={classes('drawer', this.leftDrawerOpen ? 'drawer-open' : false)}>
         <input id="my-drawer-2" type="checkbox" class="drawer-toggle" />
         <div class="drawer-content">
           {this.$$renderHeader.render()}

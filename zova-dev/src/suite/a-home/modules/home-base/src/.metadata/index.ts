@@ -182,6 +182,10 @@ export interface IZovaComponentRecord {
 }
 }
 /** components: end */
+/** config: begin */
+export * from '../config/config.js';
+import { config } from '../config/config.js';
+/** config: end */
 /** locale: begin */
 import { locales } from './locales.js';
 /** locale: end */
@@ -195,7 +199,7 @@ export * from '../monkeySys.js';
 export * from '../main.js';
 /** main: end */
 /** scope: begin */
-import { BeanScopeBase, type BeanScopeUtil, TypeModuleLocales, TypeLocaleBase } from 'zova';
+import { BeanScopeBase, type BeanScopeUtil, TypeModuleConfig, TypeModuleLocales, TypeLocaleBase } from 'zova';
 import { Scope } from 'zova-module-a-bean';
 
 @Scope()
@@ -203,6 +207,7 @@ export class ScopeModuleHomeBase extends BeanScopeBase {}
 
 export interface ScopeModuleHomeBase {
   util: BeanScopeUtil;
+config: TypeModuleConfig<typeof config>;
 locale: TypeModuleLocales<(typeof locales)[TypeLocaleBase]>;
 }
 
@@ -212,7 +217,9 @@ declare module 'zova' {
     'home-base': ScopeModuleHomeBase;
   }
   
-  
+  export interface IBeanScopeConfig {
+    'home-base': ReturnType<typeof config>;
+  }
 
   export interface IBeanScopeLocale {
     'home-base': (typeof locales)[TypeLocaleBase];
