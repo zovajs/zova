@@ -1,10 +1,4 @@
 {
   "recommendations": ["cabloy.zova-vscode", "vscodevim.vim", "oxc.oxc-vscode", "csstools.postcss", "bradlc.vscode-tailwindcss"],
-  "unwantedRecommendations": [
-    "Vue.vscode-typescript-vue-plugin",
-    "octref.vetur",
-    "hookyqr.beautify",
-    "dbaeumer.jshint",
-    "ms-vscode.vscode-typescript-tslint-plugin",
-  ],
+  "unwantedRecommendations": [],
 }
