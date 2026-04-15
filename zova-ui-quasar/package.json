@@ -1,6 +1,6 @@
 {
   "name": "zova-ui-quasar",
-  "version": "5.1.36",
+  "version": "5.1.37",
   "gitHead": "4d11b0fed7af50b828971785af3c014046be6afa",
   "description": "A vue3 quasar framework with ioc",
   "keywords": [
@@ -75,7 +75,7 @@
     "vue": "^3.5.32",
     "vue-router": "npm:@cabloy/vue-router@^4.4.16",
     "zod": "^4.3.6",
-    "zova": "^5.1.24",
+    "zova": "^5.1.25",
     "zova-jsx": "^1.1.14",
     "zova-module-a-action": "^5.1.11",
     "zova-module-a-actions": "^5.1.9",
@@ -90,7 +90,7 @@
     "zova-module-a-fetch": "^5.1.8",
     "zova-module-a-form": "^5.1.9",
     "zova-module-a-icon": "^5.1.11",
-    "zova-module-a-interceptor": "^5.1.9",
+    "zova-module-a-interceptor": "^5.1.10",
     "zova-module-a-logger": "^5.1.9",
     "zova-module-a-meta": "^5.1.8",
     "zova-module-a-model": "^5.1.9",
