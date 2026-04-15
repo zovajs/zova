@@ -43,8 +43,9 @@ export class InterceptorJwt extends BeanInterceptorBase<IInterceptorOptionsJwt> 
     // use default in scope.config rather than IInterceptorOptionsJwt.options
     const authTokenCurrent = authToken ?? this.scope.config.authToken.default;
     // authToken = authToken ?? this.scope.config.authToken.default;
-    // should set header both server/client
-    config.headers![$customKey('x-vona-jwt-authtoken')] = typeof authTokenCurrent === 'string' ? true : authTokenCurrent;
+    if (process.env.SERVER) {
+      config.headers![$customKey('x-vona-jwt-authtoken')] = typeof authTokenCurrent === 'string' ? true : authTokenCurrent;
+    }
     // // authToken: false
     // if (authTokenCurrent === false) return;
     // authToken: string
