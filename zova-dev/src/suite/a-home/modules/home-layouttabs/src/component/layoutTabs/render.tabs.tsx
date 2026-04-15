@@ -3,12 +3,12 @@ import type { VNode } from 'vue';
 import { withModifiers } from 'vue';
 import { BeanRenderBase, ClientOnly } from 'zova';
 import { Render } from 'zova-module-a-bean';
-import { ZIcon } from 'zova-module-a-icon';
-import { ZRouterViewTabs } from 'zova-module-a-routertabs';
+import { $iconName, ZIcon } from 'zova-module-a-icon';
+import { RouteTab, ZRouterViewTabs } from 'zova-module-a-routertabs';
 
 @Render()
 export class RenderTabs extends BeanRenderBase {
-  public render() {
+  public renderTabs() {
     const $$modelTabs = this.$$modelTabs;
     if (!$$modelTabs) return;
     const domTabs: VNode[] = [];
@@ -16,6 +16,7 @@ export class RenderTabs extends BeanRenderBase {
       const { tabKey, info } = tab;
       const className = tabKey === $$modelTabs.tabKeyCurrent ? 'tab tab-active text-primary' : 'tab';
       const titleLocale = this.$text(info?.title || '');
+      const tabIcon = this.getTabIcon(tab);
       const domTab = (
         <a
           key={tabKey}
@@ -25,7 +26,7 @@ export class RenderTabs extends BeanRenderBase {
             $$modelTabs.activeTab(tabKey);
           }}
         >
-          {!!info?.icon && <ZIcon name={info?.icon as any} width="24" height="24"></ZIcon>}
+          {!!info?.icon && <ZIcon name={tabIcon as any} width="24" height="24"></ZIcon>}
           {titleLocale}
           {!tab.affix && (
             <ZIcon
@@ -50,6 +51,17 @@ export class RenderTabs extends BeanRenderBase {
     if (!this.$$modelTabs.cache) return domWrapper;
     return <ClientOnly>{domWrapper}</ClientOnly>;
   }
+
+  public getTabIcon(tab: RouteTab) {
+    const { info, items } = tab;
+    // pageDirty
+    const hasPageDirty = items && items.some(item => !!item.pageMeta?.pageDirty);
+    if (hasPageDirty) return $iconName('::asterisk');
+    // default
+    return info?.icon ? info?.icon : '';
+  }
+
+  public renderTabItems() {}
 
   _renderRouterViewTabs() {
     return <ZRouterViewTabs></ZRouterViewTabs>;

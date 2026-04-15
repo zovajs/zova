@@ -1,1 +1,4 @@
-export interface IPageMeta {}
+export interface IPageMeta {
+  pageTitle?: string;
+  pageDirty?: boolean;
+}
