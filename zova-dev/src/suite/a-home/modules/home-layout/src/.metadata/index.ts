@@ -34,43 +34,7 @@ declare module 'zova' {
   }
 }
 /** model: end */
-/** service: begin */
-export * from '../service/ssr.js';
-
-import 'zova-module-a-bean';
-declare module 'zova-module-a-bean' {
-  
-    export interface IServiceRecord {
-      'home-layout:ssr': never;
-    }
-
-  
-}
-declare module 'zova-module-home-layout' {
-  
-        export interface ServiceSsr {
-          /** @internal */
-          get scope(): ScopeModuleHomeLayout;
-        }
-
-        export interface ServiceSsr {
-          get $beanFullName(): 'home-layout.service.ssr';
-          get $onionName(): 'home-layout:ssr';
-          
-        } 
-}
-/** service: end */
-/** service: begin */
-import { ServiceSsr } from '../service/ssr.js';
-import 'zova';
-declare module 'zova' {
-  export interface IBeanRecordGeneral {
-    'home-layout.service.ssr': ServiceSsr;
-  }
-}
-/** service: end */
 /** controller: begin */
-export * from '../component/layoutEmpty/controller.jsx';
 export * from '../component/layoutTabs/controller.jsx';
 
 import 'zova';
@@ -80,11 +44,6 @@ declare module 'zova' {
 }
 declare module 'zova-module-home-layout' {
   
-        export interface ControllerLayoutEmpty {
-          /** @internal */
-          get scope(): ScopeModuleHomeLayout;
-        }
-
         export interface ControllerLayoutTabs {
           /** @internal */
           get scope(): ScopeModuleHomeLayout;
@@ -92,35 +51,28 @@ declare module 'zova-module-home-layout' {
 }
 /** controller: end */
 /** controller: begin */
-import { ControllerLayoutEmpty } from '../component/layoutEmpty/controller.jsx';
 import { ControllerLayoutTabs } from '../component/layoutTabs/controller.jsx';
 import 'zova';
 declare module 'zova' {
   export interface IBeanRecordLocal {
-    'home-layout.controller.layoutEmpty': ControllerLayoutEmpty;
-'home-layout.controller.layoutTabs': ControllerLayoutTabs;
+    'home-layout.controller.layoutTabs': ControllerLayoutTabs;
   }
 }
 /** controller: end */
 
 /** components: begin */
-export * from './component/layoutEmpty.js';
-import { ZLayoutEmpty } from './component/layoutEmpty.js';
 export * from './component/layoutTabs.js';
 import { ZLayoutTabs } from './component/layoutTabs.js';
 export const components = {
-  'layoutEmpty': ZLayoutEmpty,
-'layoutTabs': ZLayoutTabs,
+  'layoutTabs': ZLayoutTabs,
 };
 import 'zova';
 declare module 'zova' {
 export interface IComponentRecord {
-  'home-layout:layoutEmpty': ControllerLayoutEmpty;
-'home-layout:layoutTabs': ControllerLayoutTabs;
+  'home-layout:layoutTabs': ControllerLayoutTabs;
 }
 export interface IZovaComponentRecord {
-  'home-layout:layoutEmpty': typeof ZLayoutEmpty;
-'home-layout:layoutTabs': typeof ZLayoutTabs;
+  'home-layout:layoutTabs': typeof ZLayoutTabs;
 }
 }
 /** components: end */

@@ -2,6 +2,7 @@
 /** service: begin */
 export * from '../service/routerGuards.js';
 export * from '../service/ssr.js';
+export * from '../service/ssrLayout.js';
 
 import 'zova-module-a-bean';
 declare module 'zova-module-a-bean' {
@@ -9,6 +10,7 @@ declare module 'zova-module-a-bean' {
     export interface IServiceRecord {
       'home-base:routerGuards': never;
 'home-base:ssr': never;
+'home-base:ssrLayout': never;
     }
 
   
@@ -35,17 +37,30 @@ declare module 'zova-module-home-base' {
           get $beanFullName(): 'home-base.service.ssr';
           get $onionName(): 'home-base:ssr';
           
+        }
+
+        export interface ServiceSsrLayout {
+          /** @internal */
+          get scope(): ScopeModuleHomeBase;
+        }
+
+        export interface ServiceSsrLayout {
+          get $beanFullName(): 'home-base.service.ssrLayout';
+          get $onionName(): 'home-base:ssrLayout';
+          
         } 
 }
 /** service: end */
 /** service: begin */
 import { ServiceRouterGuards } from '../service/routerGuards.js';
 import { ServiceSsr } from '../service/ssr.js';
+import { ServiceSsrLayout } from '../service/ssrLayout.js';
 import 'zova';
 declare module 'zova' {
   export interface IBeanRecordGeneral {
     'home-base.service.routerGuards': ServiceRouterGuards;
 'home-base.service.ssr': ServiceSsr;
+'home-base.service.ssrLayout': ServiceSsrLayout;
   }
 }
 /** service: end */

@@ -2,12 +2,19 @@ import { BeanBase, UseScope } from 'zova';
 import { Service } from 'zova-module-a-bean';
 import { ScopeModuleASsr } from 'zova-module-a-ssr';
 
+export interface IServiceSsrLayoutOptions {
+  sidebarLeftOpenPC?: boolean;
+}
+
 @Service()
-export class ServiceSsr extends BeanBase {
+export class ServiceSsrLayout extends BeanBase {
   @UseScope()
   $$scopeSsr: ScopeModuleASsr;
 
-  protected async __init__() {
+  options?: IServiceSsrLayoutOptions;
+
+  protected async __init__(options?: IServiceSsrLayoutOptions) {
+    this.options = options;
     // ssr theme
     if (process.env.SERVER) {
       this.ctx.meta.$ssr.context.onRendered((err?: Error) => {
