@@ -17,6 +17,3 @@ publicHoistPattern:
   - '*cabloy*'
   - '*@cabloy*'
   - '*zova*'
-
-overrides:
-  '@cabloy/module-info': 'npm:@cabloy/module-info@^2.0.0'

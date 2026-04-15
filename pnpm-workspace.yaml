@@ -27,6 +27,3 @@ publicHoistPattern:
   - '*@vitejs*'
   - '*zod*'
   - 'zod'
-
-overrides:
-  'zod': 'npm:@cabloy/zod@4.3.6'

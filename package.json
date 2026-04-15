@@ -43,6 +43,8 @@
   },
   "packageManager": "pnpm@10.19.0",
   "pnpm": {
-    "overrides": {}
+    "overrides": {
+      "zod": "npm:@cabloy/zod@4.3.6"
+    }
   }
 }
