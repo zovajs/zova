@@ -7,11 +7,11 @@ export * from '../page/style/controller.jsx';
 
 import 'zova';
 declare module 'zova' {
-
-
+  
+  
 }
 declare module 'zova-module-demo-basic' {
-
+  
         export interface ControllerCard {
           /** @internal */
           get scope(): ScopeModuleDemoBasic;
@@ -30,7 +30,7 @@ declare module 'zova-module-demo-basic' {
         export interface ControllerPageStyle {
           /** @internal */
           get scope(): ScopeModuleDemoBasic;
-        }
+        } 
 }
 /** controller: end */
 /** controller: begin */
@@ -62,7 +62,7 @@ export interface IPagePathRecord {
 '/demo/basic/style': TypePagePathSchema<undefined,undefined>;
 }
 export interface IPageNameRecord {
-
+  
 }
 }
 export const pagePathSchemas = {
@@ -72,7 +72,7 @@ export const pageNameSchemas = {
 
 };
 declare module 'zova-module-demo-basic' {
-
+  
 }
 /** pages: end */
 
@@ -92,41 +92,6 @@ export interface IZovaComponentRecord {
 }
 }
 /** components: end */
-/** theme: begin */
-export * from '../bean/theme.orange.js';
-import { IThemeOptionsOrange } from '../bean/theme.orange.js';
-import 'zova-module-a-style';
-declare module 'zova-module-a-style' {
-
-    export interface IThemeRecord {
-      'home-theme:orange': IThemeOptionsOrange;
-    }
-
-
-}
-declare module 'zova-module-demo-basic' {
-
-        export interface ThemeOrange {
-          /** @internal */
-          get scope(): ScopeModuleDemoBasic;
-        }
-
-        export interface ThemeOrange {
-          get $beanFullName(): 'demo-basic.theme.orange';
-          get $onionName(): 'home-theme:orange';
-          get $onionOptions(): IThemeOptionsOrange;
-        }
-}
-/** theme: end */
-/** theme: begin */
-import { ThemeOrange } from '../bean/theme.orange.js';
-import 'zova';
-declare module 'zova' {
-  export interface IBeanRecordLocal {
-    'demo-basic.theme.orange': ThemeOrange;
-  }
-}
-/** theme: end */
 /** scope: begin */
 import { BeanScopeBase, type BeanScopeUtil } from 'zova';
 import { Scope } from 'zova-module-a-bean';
@@ -143,12 +108,12 @@ declare module 'zova' {
   export interface IBeanScopeRecord {
     'demo-basic': ScopeModuleDemoBasic;
   }
+  
+  
 
+  
 
-
-
-
-
+  
 }
-
+  
 /** scope: end */

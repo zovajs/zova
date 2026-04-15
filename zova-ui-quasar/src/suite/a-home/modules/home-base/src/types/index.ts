@@ -1,2 +1,2 @@
-export * from './style.js';
+export * from './scopeBase.js';
 export * from './themeToken.js';
