@@ -438,41 +438,6 @@ declare module 'vue/jsx-runtime' {
   }
 }
 /** behaviors: end */
-/** theme: begin */
-export * from '../bean/theme.orange.js';
-import { IThemeOptionsOrange } from '../bean/theme.orange.js';
-import 'zova-module-a-style';
-declare module 'zova-module-a-style' {
-  
-    export interface IThemeRecord {
-      'demo-basic:orange': IThemeOptionsOrange;
-    }
-
-  
-}
-declare module 'zova-module-demo-basic' {
-  
-        export interface ThemeOrange {
-          /** @internal */
-          get scope(): ScopeModuleDemoBasic;
-        }
-
-        export interface ThemeOrange {
-          get $beanFullName(): 'demo-basic.theme.orange';
-          get $onionName(): 'demo-basic:orange';
-          get $onionOptions(): IThemeOptionsOrange;
-        } 
-}
-/** theme: end */
-/** theme: begin */
-import { ThemeOrange } from '../bean/theme.orange.js';
-import 'zova';
-declare module 'zova' {
-  export interface IBeanRecordLocal {
-    'demo-basic.theme.orange': ThemeOrange;
-  }
-}
-/** theme: end */
 /** tableCell: begin */
 export * from '../bean/tableCell.test.jsx';
 import { ITableCellOptionsTest } from '../bean/tableCell.test.jsx';
