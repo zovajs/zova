@@ -14,14 +14,14 @@ export class RenderTabs extends BeanRenderBase {
     const domTabs: VNode[] = [];
     for (const tab of $$modelTabs.tabs) {
       const { tabKey, info } = tab;
-      const className = tabKey === $$modelTabs.tabKeyCurrent ? 'tab tab-active text-primary' : 'tab';
+      const className = tabKey === $$modelTabs.tabKeyCurrent ? 'tab-active text-primary' : '';
       const titleLocale = this.$text(info?.title || '');
       const tabIcon = this.getTabIcon(tab);
       const domTab = (
         <a
           key={tabKey}
           role="tab"
-          class={`${className} ${this.cTab}`}
+          class={`tab ${className} ${this.cTab}`}
           onClick={() => {
             $$modelTabs.activeTab(tabKey);
           }}
