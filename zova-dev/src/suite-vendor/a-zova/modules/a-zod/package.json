@@ -36,7 +36,7 @@
   },
   "dependencies": {
     "@cabloy/zod-errors-custom": "^2.1.3",
-    "@cabloy/zod-openapi": "^1.1.4",
+    "@cabloy/zod-openapi": "^1.1.5",
     "@cabloy/zod-query": "^2.1.3",
     "zod": "^4.3.6"
   },
