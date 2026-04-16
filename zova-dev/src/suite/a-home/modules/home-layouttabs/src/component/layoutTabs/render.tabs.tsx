@@ -26,7 +26,7 @@ export class RenderTabs extends BeanRenderBase {
             $$modelTabs.activeTab(tabKey);
           }}
         >
-          {!!tabIcon && <ZIcon name={tabIcon as any} width="18" height="18"></ZIcon>}
+          {!!tabIcon && <ZIcon name={tabIcon as any} width="24" height="24"></ZIcon>}
           {titleLocale}
           {!tab.affix && (
             <ZIcon
@@ -83,7 +83,7 @@ export class RenderTabs extends BeanRenderBase {
             $$modelTabs.activeTabItem(tabKey, componentKey);
           }}
         >
-          {pageMeta?.pageDirty && <ZIcon name={'::asterisk'} width="16" height="16"></ZIcon>}
+          {pageMeta?.pageDirty && <ZIcon name={'::asterisk'} width="24" height="24"></ZIcon>}
           <div class="overflow-hidden text-ellipsis" style={{ display: 'inline-block', maxWidth: this.scope.config.tabItem.maxWidth }}>
             {pageTitle}
           </div>

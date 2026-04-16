@@ -7,6 +7,7 @@ export class StyleLayoutTabs extends BeanStyleBase {
 
   protected async __init__() {
     this.cTab = this.$style({
+      fontSize: '16px',
       $nest: {
         '&:hover .tab-close': {
           display: 'block',
