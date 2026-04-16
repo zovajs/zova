@@ -35,7 +35,7 @@ export default {
           type: 'input',
           message: 'project name',
           initial: {
-            expression: 'context.argv._[0]',
+            expression: 'arg0',
           },
           required: true,
         },

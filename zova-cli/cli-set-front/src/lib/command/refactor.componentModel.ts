@@ -18,7 +18,7 @@ export default {
           type: 'input',
           message: 'componentName',
           initial: {
-            expression: 'context.argv._[0]',
+            expression: 'arg0',
           },
           required: true,
         },
@@ -26,7 +26,7 @@ export default {
           type: 'input',
           message: 'modelName',
           initial: {
-            expression: 'context.argv._[1]',
+            expression: 'arg1',
           },
           required: true,
         },

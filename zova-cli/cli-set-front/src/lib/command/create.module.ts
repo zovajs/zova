@@ -22,7 +22,7 @@ export default {
           type: 'input',
           message: 'module name',
           initial: {
-            expression: 'context.argv._[0]',
+            expression: 'arg0',
           },
           required: true,
         },

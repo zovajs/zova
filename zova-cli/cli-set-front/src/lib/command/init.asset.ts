@@ -18,7 +18,7 @@ export default {
           type: 'input',
           message: 'scene',
           initial: {
-            expression: 'context.argv._[0]',
+            expression: 'arg0',
           },
           required: true,
         },
