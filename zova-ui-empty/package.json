@@ -1,6 +1,6 @@
 {
   "name": "zova-ui-empty",
-  "version": "5.1.41",
+  "version": "5.1.42",
   "gitHead": "4d11b0fed7af50b828971785af3c014046be6afa",
   "description": "A vue3 empty framework with ioc",
   "keywords": [
