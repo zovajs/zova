@@ -1,18 +1,32 @@
 // eslint-disable
 /** model: begin */
+export * from '../model/layout.js';
 export * from '../model/menu.js';
+import { IModelOptionsLayout } from '../model/layout.js';
 import { IModelOptionsMenu } from '../model/menu.js';
 import 'zova-module-a-model';
 declare module 'zova-module-a-model' {
   
     export interface IModelRecord {
-      'home-layouttabs:menu': IModelOptionsMenu;
+      'home-layouttabs:layout': IModelOptionsLayout;
+'home-layouttabs:menu': IModelOptionsMenu;
     }
 
   
 }
 declare module 'zova-module-home-layouttabs' {
   
+        export interface ModelLayout {
+          /** @internal */
+          get scope(): ScopeModuleHomeLayouttabs;
+        }
+
+        export interface ModelLayout {
+          get $beanFullName(): 'home-layouttabs.model.layout';
+          get $onionName(): 'home-layouttabs:layout';
+          get $onionOptions(): IModelOptionsLayout;
+        }
+
         export interface ModelMenu {
           /** @internal */
           get scope(): ScopeModuleHomeLayouttabs;
@@ -26,11 +40,13 @@ declare module 'zova-module-home-layouttabs' {
 }
 /** model: end */
 /** model: begin */
+import { ModelLayout } from '../model/layout.js';
 import { ModelMenu } from '../model/menu.js';
 import 'zova';
 declare module 'zova' {
   export interface IBeanRecordGeneral {
-    'home-layouttabs.model.menu': ModelMenu;
+    'home-layouttabs.model.layout': ModelLayout;
+'home-layouttabs.model.menu': ModelMenu;
   }
 }
 /** model: end */
