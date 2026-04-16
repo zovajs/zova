@@ -515,7 +515,7 @@ function _patchOpenapiTSOptions(options?: OpenAPITSOptions) {
               questionToken: schemaObject.nullable,
             };
           }
-        } else if (schemaObject.format === 'date') {
+        } else if (schemaObject.format && ['date', 'date-time'].includes(schemaObject.format)) {
           return {
             schema: DATE,
             questionToken: schemaObject.nullable,
