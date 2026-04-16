@@ -1037,12 +1037,12 @@ export interface components {
     };
     'test-vona.entity.product': {
       /**
-       * Format: date
+       * Format: date-time
        * @description Created At
        */
       createdAt: Date;
       /**
-       * Format: date
+       * Format: date-time
        * @description Updated At
        */
       updatedAt: Date;
@@ -1121,12 +1121,12 @@ export interface components {
     /** @description User */
     'home-user.entity.user': {
       /**
-       * Format: date
+       * Format: date-time
        * @description Created At
        */
       createdAt: Date;
       /**
-       * Format: date
+       * Format: date-time
        * @description Updated At
        */
       updatedAt: Date;
@@ -1174,12 +1174,12 @@ export interface components {
     /** @description Role */
     'home-user.entity.role': {
       /**
-       * Format: date
+       * Format: date-time
        * @description Created At
        */
       createdAt: Date;
       /**
-       * Format: date
+       * Format: date-time
        * @description Updated At
        */
       updatedAt: Date;
@@ -1251,12 +1251,12 @@ export interface components {
     'test-rest.dto.productQueryRes': {
       list: {
         /**
-         * Format: date
+         * Format: date-time
          * @description Created At
          */
         createdAt: Date;
         /**
-         * Format: date
+         * Format: date-time
          * @description Updated At
          */
         updatedAt: Date;
@@ -1297,12 +1297,12 @@ export interface components {
     'test-rest.entity.product':
       | {
           /**
-           * Format: date
+           * Format: date-time
            * @description Created At
            */
           createdAt: Date;
           /**
-           * Format: date
+           * Format: date-time
            * @description Updated At
            */
           updatedAt: Date;
@@ -1410,12 +1410,12 @@ export interface components {
     };
     'a-paypal.entity.paypalRecord': {
       /**
-       * Format: date
+       * Format: date-time
        * @description Created At
        */
       createdAt: Date;
       /**
-       * Format: date
+       * Format: date-time
        * @description Updated At
        */
       updatedAt: Date;
@@ -1567,12 +1567,12 @@ export interface components {
     };
     'test-vona.dto.orderResult': {
       /**
-       * Format: date
+       * Format: date-time
        * @description Created At
        */
       createdAt: Date;
       /**
-       * Format: date
+       * Format: date-time
        * @description Updated At
        */
       updatedAt: Date;
@@ -1614,12 +1614,12 @@ export interface components {
     'test-vona.dto.orderResultPage': {
       list: {
         /**
-         * Format: date
+         * Format: date-time
          * @description Created At
          */
         createdAt: Date;
         /**
-         * Format: date
+         * Format: date-time
          * @description Updated At
          */
         updatedAt: Date;
@@ -1667,12 +1667,12 @@ export interface components {
     'test-vona.dto.postQueryRes': {
       list: {
         /**
-         * Format: date
+         * Format: date-time
          * @description Created At
          */
         createdAt: Date;
         /**
-         * Format: date
+         * Format: date-time
          * @description Updated At
          */
         updatedAt: Date;
@@ -2793,12 +2793,12 @@ export interface operations {
             data: {
               /**
                * Created At
-               * Format: date
+               * Format: date-time
                */
               createdAt: Date;
               /**
                * Updated At
-               * Format: date
+               * Format: date-time
                */
               updatedAt: Date;
               /**
@@ -2845,12 +2845,12 @@ export interface operations {
             data: {
               /**
                * Created At
-               * Format: date
+               * Format: date-time
                */
               createdAt: Date;
               /**
                * Updated At
-               * Format: date
+               * Format: date-time
                */
               updatedAt: Date;
               /**
@@ -2896,12 +2896,12 @@ export interface operations {
             data: {
               /**
                * Created At
-               * Format: date
+               * Format: date-time
                */
               createdAt: Date;
               /**
                * Updated At
-               * Format: date
+               * Format: date-time
                */
               updatedAt: Date;
               /**
