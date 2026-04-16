@@ -1,6 +1,6 @@
 {
   "name": "zova-ui-empty",
-  "version": "5.1.40",
+  "version": "5.1.41",
   "packageManager": "pnpm@10.19.0",
   "description": "A vue3 empty framework with ioc",
   "publishConfig": {
@@ -46,7 +46,7 @@
     "quasar": "^2.18.1",
     "vue": "^3.5.6",
     "vue-router": "^4.4.5",
-    "zova": "^5.1.27"
+    "zova": "^5.1.28"
   },
   "devDependencies": {
     "@cabloy/lint": "^5.1.5",
