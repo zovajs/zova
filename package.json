@@ -32,7 +32,7 @@
     "lerna": "^8.1.2",
     "minimist": "^1.2.8",
     "oxfmt": "^0.45.0",
-    "oxlint": "^1.59.0",
+    "oxlint": "^1.60.0",
     "textlint": "^14.8.4",
     "textlint-rule-ja-space-between-half-and-full-width": "^2.4.2",
     "typedoc": "^0.25.13",

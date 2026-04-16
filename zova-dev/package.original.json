@@ -71,7 +71,7 @@
     "@vitejs/plugin-vue": "^5.2.4",
     "concurrently": "^8.2.2",
     "oxfmt": "^0.45.0",
-    "oxlint": "^1.59.0",
+    "oxlint": "^1.60.0",
     "quasar-app-extension-zova": "workspace:^",
     "sass": "^1.99.0",
     "typescript": "^5.9.3",
