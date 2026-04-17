@@ -132,7 +132,8 @@
     "zova-module-rest-actions": "^5.1.10",
     "zova-module-rest-resource": "^5.1.10",
     "zova-module-vuetify-adapter": "workspace:^",
-    "zova-module-vuetify-form": "workspace:^"
+    "zova-module-vuetify-form": "workspace:^",
+    "zova-suite-a-cabloy": "^5.1.11"
   },
   "devDependencies": {
     "@cabloy/cli": "^3.1.7",
