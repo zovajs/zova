@@ -9,9 +9,6 @@
   ],
   "license": "MIT",
   "author": "zhennann",
-  "bin": {
-    "zova": "dist/bin/zova.js"
-  },
   "files": [
     "dist"
   ],
@@ -56,6 +53,7 @@
   "clean-package": {
     "indent": 2,
     "replace": {
+      "bin.zova": "dist/bin/zova.js",
       "exports.\\..types": "./dist/index.d.ts"
     },
     "remove": [
