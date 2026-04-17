@@ -9,6 +9,12 @@
   $color-pack: false
 );
 
+:root {
+  --v-font-body:
+    'Geist', 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen', 'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans',
+    'Helvetica Neue', sans-serif;
+}
+
 .zova-icon__img {
   border-radius: 6px;
   width: 100%;

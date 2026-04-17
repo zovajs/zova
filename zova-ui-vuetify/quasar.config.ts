@@ -4,7 +4,7 @@
 // https://v2.quasar.dev/quasar-cli-vite/quasar-config-js
 
 import { configure } from 'quasar/wrappers';
-import Fonts from 'unplugin-fonts/vite';
+// import Fonts from 'unplugin-fonts/vite';
 import Vuetify, { transformAssetUrls } from 'vite-plugin-vuetify';
 
 export default configure(_ctx => {
@@ -25,17 +25,17 @@ export default configure(_ctx => {
             //   configFile: 'src/css/settings.scss',
             // },
           }),
-          Fonts({
-            fontsource: {
-              families: [
-                {
-                  name: 'Roboto',
-                  weights: [100, 300, 400, 500, 700, 900],
-                  styles: ['normal', 'italic'],
-                },
-              ],
-            },
-          }),
+          // Fonts({
+          //   fontsource: {
+          //     families: [
+          //       {
+          //         name: 'Roboto',
+          //         weights: [100, 300, 400, 500, 700, 900],
+          //         styles: ['normal', 'italic'],
+          //       },
+          //     ],
+          //   },
+          // }),
         ]);
       },
       viteVuePluginOptions: {
