@@ -18,22 +18,22 @@
   "editor.formatOnSave": true,
   // oxlint
   "editor.codeActionsOnSave": {
-    "source.fixAll.oxc": "always"
+    "source.fixAll.oxc": "always",
   },
   "[typescriptreact]": {
-    "editor.defaultFormatter": "oxc.oxc-vscode"
+    "editor.defaultFormatter": "oxc.oxc-vscode",
   },
   "[typescript]": {
-    "editor.defaultFormatter": "oxc.oxc-vscode"
+    "editor.defaultFormatter": "oxc.oxc-vscode",
   },
   // associations
   "files.associations": {
     "*.ejs": "html",
     "*.code-snippets": "text",
-    "docker-compose-dockerfile-app": "dockerfile"
+    "docker-compose-dockerfile-app": "dockerfile",
   },
   // watcher
   "files.watcherExclude": {
-    "node_modules": true
-  }
+    "node_modules": true,
+  },
 }
