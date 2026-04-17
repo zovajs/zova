@@ -31,3 +31,5 @@ miniprogram_npm
 sftp-config.json
 sftp-config-.json
 /.assets
+
+!zova-cli/cli/dist
