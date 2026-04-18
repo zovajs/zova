@@ -25,7 +25,7 @@ export class MetaThemeHandler extends BeanBase implements IThemeHandler {
       }
     } else {
       // server
-      if (!this.$$scopeSsr.config.cookieTheme) {
+      if (!this.sys.config.ssr.cookie) {
         this.$useMeta({ bodyAttr: { [`data-ssr-theme-dark-${dark}`]: themeName } });
       } else {
         this.$useMeta({

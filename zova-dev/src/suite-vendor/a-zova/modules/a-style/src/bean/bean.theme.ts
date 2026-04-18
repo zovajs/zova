@@ -25,7 +25,7 @@ export class BeanTheme extends BeanModelBase {
   $$scopeSsr: ScopeModuleASsr;
 
   protected async __init__() {
-    const cookieTheme = this.$$scopeSsr.config.cookieTheme;
+    const cookieTheme = this.sys.config.ssr.cookie;
     const cookieThemeDarkDefault = this.$$scopeSsr.config.cookieThemeDarkDefault;
     // support admin
     this.name = this.$useState(cookieTheme ? 'cookie' : 'local', {
@@ -79,7 +79,7 @@ export class BeanTheme extends BeanModelBase {
 
   async _applyThemeWrapper() {
     await this._applyTheme();
-    if (process.env.SERVER && !this.$$scopeSsr.config.cookieTheme) {
+    if (process.env.SERVER && !this.sys.config.ssr.cookie) {
       this.toggleDark();
       await this._applyTheme();
     }

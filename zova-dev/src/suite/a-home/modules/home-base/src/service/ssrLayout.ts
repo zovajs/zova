@@ -19,7 +19,7 @@ export class ServiceSsrLayout extends BeanBase {
     if (process.env.SERVER) {
       this.ctx.meta.$ssr.context.onRendered((err?: Error) => {
         if (err) return;
-        if (!this.$$scopeSsr.config.cookieTheme) {
+        if (!this.sys.config.ssr.cookie) {
           this.ctx.meta.$ssr.context._meta.bodyTags += `<script id="__prefersColorSchemeDarkJS">
             document.body.setAttribute('data-theme', window.ssr_themedark_data);
             if(window.ssr_local_themename==='home-theme:orange'){

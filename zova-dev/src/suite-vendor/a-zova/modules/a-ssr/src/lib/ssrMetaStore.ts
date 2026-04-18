@@ -148,12 +148,11 @@ export class CtxSSRMetaStore extends BeanSimple {
         '',
       )}<script${nonce} id="ssr-meta-init">window.__Q_META__=${delete data.bodyStyle && delete data.bodyClass && delete data.noscript && unevalPatch(data)}</script>`;
 
-    let ssr_local_themedark =
-      this.sys.env.SSR_COOKIE_THEME === 'true'
-        ? `let ssr_cookie_themedark=document.cookie.split('; ')?.find(item=>item.indexOf('themedark=')>-1)?.split('=')[1];
+    let ssr_local_themedark = this.sys.config.ssr.cookie
+      ? `let ssr_cookie_themedark=document.cookie.split('; ')?.find(item=>item.indexOf('themedark=')>-1)?.split('=')[1];
         ssr_cookie_themedark=ssr_cookie_themedark==='true'?true:ssr_cookie_themedark==='false'?false:${this.sys.env.SSR_COOKIE_THEMEDARK_DEFAULT};
         window.ssr_themedark=window.ssr_cookie_themedark=ssr_cookie_themedark;`
-        : `let ssr_local_themedark=window.ssr_load_local('themedark');
+      : `let ssr_local_themedark=window.ssr_load_local('themedark');
         if(ssr_local_themedark===undefined || ssr_local_themedark==='auto'){
           ssr_local_themedark=window.matchMedia('(prefers-color-scheme: dark)').matches;
         }
@@ -167,7 +166,7 @@ export class CtxSSRMetaStore extends BeanSimple {
             return _data;
           },
         });`;
-    const ssr_local_themename = this.sys.env.SSR_COOKIE_THEME === 'true' ? '' : "window.ssr_local_themename=window.ssr_load_local('themename');";
+    const ssr_local_themename = this.sys.config.ssr.cookie ? '' : "window.ssr_local_themename=window.ssr_load_local('themename');";
     ctx.endingHeadTags += `<script id="ssr-prefers-color-schema-dark">
         window.ssr_load_local=function(key){
           const __ssr_local=localStorage.getItem(key);

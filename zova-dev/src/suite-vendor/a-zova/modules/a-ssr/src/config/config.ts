@@ -5,7 +5,6 @@ import { ISsrConfig } from '../types/config.js';
 
 export const config = (sys: ZovaSys) => {
   const ssrConfig: ISsrConfig = {
-    cookieTheme: sys.env.SSR_COOKIE_THEME === 'true',
     cookieThemeDarkDefault: sys.env.SSR_COOKIE_THEMEDARK_DEFAULT === 'true',
     optimization: {
       bodyReadyObserver: sys.env.SSR_BODYREADYOBSERVER === 'true',

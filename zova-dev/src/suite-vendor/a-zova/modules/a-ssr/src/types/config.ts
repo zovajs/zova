@@ -6,7 +6,6 @@ export interface ISsrConfigTransferCache {
 }
 
 export interface ISsrConfig {
-  cookieTheme: boolean;
   cookieThemeDarkDefault: boolean;
   optimization: {
     bodyReadyObserver: boolean;
