@@ -39,7 +39,7 @@ export class MetaThemeHandler extends BeanBase implements IThemeHandler {
     }
     // server
     if (process.env.SERVER) {
-      if (!this.$$scopeSsr.config.cookieTheme) {
+      if (!this.sys.config.ssr.cookie) {
         const bodyClass = [this.$$modelTheme.cBrand, dark ? 'body--dark' : 'body--light'];
         this.$useMeta({ bodyAttr: { [`data-ssr-theme-dark-${dark}`]: bodyClass.join(',') } });
       } else {

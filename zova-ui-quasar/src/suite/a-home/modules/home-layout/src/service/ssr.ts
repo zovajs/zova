@@ -19,7 +19,7 @@ export class ServiceSsr extends BeanBase {
     if (process.env.SERVER) {
       this.ctx.meta.$ssr.context.onRendered((err?: Error) => {
         if (err) return;
-        if (!this.$$scopeSsr.config.cookieTheme) {
+        if (!this.sys.config.ssr.cookie) {
           this.ctx.meta.$ssr.context._meta.bodyTags += `<script id="__prefersColorSchemeDarkJS">
             document.body.classList.remove('body--light','body--dark');
             window.ssr_themedark_data.split(',').forEach(item=>document.body.classList.add(item));
