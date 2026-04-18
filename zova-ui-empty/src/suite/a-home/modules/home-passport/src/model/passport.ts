@@ -30,7 +30,7 @@ export class ModelPassport extends BeanModelBase {
     this.passport = process.env.CLIENT ? this.$useStateLocal({ queryKey: ['passport'] }) : this.$useStateMem({ queryKey: ['passport'] });
     this.jwt = this.$useStateLocal({ queryKey: ['jwt'] });
     this.expireTime = this.$useStateLocal({ queryKey: ['expireTime'] });
-    this.accessToken = this.$useStateCookie({ queryKey: ['token'] });
+    this.accessToken = process.env.SERVER && !this.sys.config.ssr.cookie ? undefined : this.$useStateCookie({ queryKey: ['token'] });
     if (process.env.CLIENT) {
       this._setLocaleTz();
     }
