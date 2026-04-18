@@ -84,7 +84,10 @@ export class RenderTabs extends BeanRenderBase {
           }}
         >
           {pageMeta?.pageDirty && <ZIcon name={'::asterisk'} width="24" height="24"></ZIcon>}
-          <div class="overflow-hidden text-ellipsis" style={{ display: 'inline-block', maxWidth: this.scope.config.tabItem.maxWidth }}>
+          <div
+            class="overflow-hidden text-ellipsis whitespace-nowrap"
+            style={{ display: 'inline-block', maxWidth: this.scope.config.tabItem.maxWidth }}
+          >
             {pageTitle}
           </div>
           <ZIcon

@@ -24,7 +24,7 @@ export class RenderHeader extends BeanRenderBase {
               </svg>
             </button>
           </div>
-          <div class="flex-1 text-xl px-4">{this.sys.env.APP_TITLE}</div>
+          <div class="text-xl px-4">{this.sys.env.APP_TITLE}</div>
           <div class="mx-2 flex-2 px-2">{this.$$r.$$renderTabs.renderTabItems()}</div>
           <div class="hidden flex-none lg:block">
             <ul class="menu menu-horizontal">
