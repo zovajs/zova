@@ -1,6 +1,7 @@
 import type { DefaultError, QueryClient, QueryKey, UseQueryDefinedReturnType, UseQueryOptions, UseQueryReturnType } from '@tanstack/vue-query';
 import type { UnwrapNestedRefs } from 'vue';
 
+import { checkErrorJwtExpired } from '@cabloy/utils';
 import { useQuery } from '@tanstack/vue-query';
 import { cast } from 'zova';
 
@@ -32,7 +33,7 @@ export class BeanModelUseQuery extends BeanModelQuery {
         if (typeof errorInfo === 'function') {
           errorInfo = errorInfo(error, query);
         }
-        if (!error.message.includes('useQuery:')) {
+        if (!error.message.includes('useQuery:') && !checkErrorJwtExpired(error)) {
           error.message = `useQuery: [${queryKey.join(', ')}]: ${error.message}`;
         }
         this.$errorHandler(error, errorInfo ?? 'useQuery');
