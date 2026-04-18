@@ -32,6 +32,11 @@ export default function (sys: ZovaSys) {
     jwt: env.API_JWT !== 'false',
   };
 
+  // ssr
+  config.ssr = {
+    cookie: sys.env.SSR_COOKIE === 'true',
+  };
+
   // ws
   config.ws = {
     baseURL: config.api.baseURL?.replace('https://', 'wss://').replace('http://', 'ws://'),
@@ -41,7 +46,6 @@ export default function (sys: ZovaSys) {
   // locale
   config.locale = {
     default: env.APP_LOCALE_DEFAULT as keyof ILocaleRecord,
-    cookieLocale: sys.env.SSR_COOKIE_LOCALE === 'true',
     storeKey: 'locale',
     items: {
       'en-us': 'English',

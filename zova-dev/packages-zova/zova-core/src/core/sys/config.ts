@@ -34,6 +34,9 @@ export interface ZovaConfig {
     prefix: string;
     jwt: boolean;
   };
+  ssr: {
+    cookie: boolean;
+  };
   ws: {
     baseURL: string;
     prefix: string;
@@ -41,7 +44,6 @@ export interface ZovaConfig {
   logger: ConfigLogger;
   locale: {
     default: keyof ILocaleRecord;
-    cookieLocale: boolean;
     storeKey: string;
     items: Record<keyof ILocaleRecord, string>;
   };
