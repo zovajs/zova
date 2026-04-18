@@ -1,7 +1,6 @@
+import { checkErrorJwtExpired } from '@cabloy/utils';
 import { BeanBase } from 'zova';
 import { Service } from 'zova-module-a-bean';
-
-export const ErrorMessageJwtExpired = 'jwt expired';
 
 @Service()
 export class ServiceSsr extends BeanBase {
@@ -22,7 +21,7 @@ export class ServiceSsr extends BeanBase {
     if (!process.env.SERVER) return;
     const _eventErrorHandler = this.app.meta.event.on('app:errorHandler', ({ err }, next) => {
       if (err.code === 401) {
-        if (err.message === ErrorMessageJwtExpired) {
+        if (checkErrorJwtExpired(err)) {
           try {
             this.app.$gotoPage('/home/base/errorExpired', { returnTo: true });
           } catch (err: any) {
