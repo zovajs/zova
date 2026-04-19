@@ -131,7 +131,7 @@ export class SysUtil extends BeanSimple {
     return api ?? combineApiPathControllerAndAction(parts[0], parts[1], undefined, true, true, this.sys.env.API_PREFIX);
   }
 
-  ignoreCookie() {
+  ignoreCookieOnServer() {
     return process.env.SERVER && !this.sys.config.ssr.cookie;
   }
 }
