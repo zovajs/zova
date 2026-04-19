@@ -27,6 +27,7 @@ export const zh = defineConfig({
       { icon: 'github', link: 'https://github.com/zovajs/zova' },
       { icon: 'x', link: 'https://twitter.com/zhennann2024' },
       { icon: 'youtube', link: 'https://www.youtube.com/@cabloyjs' },
+      { icon: 'discord', link: 'https://discord.gg/CC89A22a' },
     ],
   },
 });
