@@ -79,7 +79,7 @@ export class BeanTheme extends BeanModelBase {
 
   async _applyThemeWrapper() {
     await this._applyTheme();
-    if (process.env.SERVER && !this.sys.config.ssr.cookie) {
+    if (this.sys.util.ignoreCookie()) {
       this.toggleDark();
       await this._applyTheme();
     }

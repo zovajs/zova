@@ -12,7 +12,7 @@ The module `home-base` provides a Service bean `ServiceRouterGuards`, and you ca
 class ServiceRouterGuards {
   protected onRouterGuards(router: BeanRouter) {
     router.beforeEach(async to => {
-      if (to.meta.requiresAuth !== false && !this.$passport.isAuthenticated) {
+      if (!this.sys.util.ignoreCookie() && to.meta.requiresAuth !== false && !this.$passport.isAuthenticated) {
         const [_res, err] = await catchError(() => {
           return this.$passport.ensurePassport();
         });
