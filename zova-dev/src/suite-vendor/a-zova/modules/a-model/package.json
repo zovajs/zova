@@ -36,9 +36,9 @@
     "postpack": "clean-package restore && npm run clean"
   },
   "dependencies": {
-    "@tanstack/query-core": "^5.99.0",
+    "@tanstack/query-core": "^5.99.1",
     "@tanstack/query-persist-client-core": "^5.97.0",
-    "@tanstack/vue-query": "^5.99.0",
+    "@tanstack/vue-query": "^5.99.1",
     "localforage": "^1.10.0",
     "mutate-on-copy": "workspace:^",
     "table-identity": "^1.1.4"
