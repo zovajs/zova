@@ -1,6 +1,6 @@
 {
   "name": "zova-ui-empty",
-  "version": "5.1.51",
+  "version": "5.1.52",
   "gitHead": "4d11b0fed7af50b828971785af3c014046be6afa",
   "description": "A vue3 empty framework with ioc",
   "keywords": [
@@ -74,7 +74,7 @@
     "vue": "^3.5.6",
     "vue-router": "^4.4.5",
     "zod": "^4.3.6",
-    "zova": "^5.1.34",
+    "zova": "^5.1.35",
     "zova-jsx": "^1.1.18",
     "zova-module-a-action": "^5.1.11",
     "zova-module-a-actions": "^5.1.9",
@@ -89,7 +89,7 @@
     "zova-module-a-fetch": "^5.1.8",
     "zova-module-a-form": "^5.1.9",
     "zova-module-a-icon": "^5.1.11",
-    "zova-module-a-interceptor": "^5.1.12",
+    "zova-module-a-interceptor": "^5.1.13",
     "zova-module-a-logger": "^5.1.9",
     "zova-module-a-meta": "^5.1.8",
     "zova-module-a-model": "^5.1.11",
