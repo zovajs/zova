@@ -4,8 +4,8 @@ layout: home
 
 hero:
   name: 'Zova'
-  text: 'A more intuitive framework'
-  tagline: = Vue3(intuitive state management) + React(flexible TSX rendering) + Angular(powerful IOC container)
+  text: 'Intuitive Frontend Framework'
+  tagline: = Vue3 Reactive + React TSX + Angular IOC
   actions:
     - theme: brand
       text: Get Started

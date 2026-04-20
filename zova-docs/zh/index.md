@@ -4,8 +4,8 @@ layout: home
 
 hero:
   name: 'Zova'
-  text: '一款更直观的前端框架'
-  tagline: = Vue3(直观的状态管理) + React(灵活的 TSX 渲染) + Angular(强大的 IOC 容器)
+  text: '直观的前端框架'
+  tagline: = Vue3 响应式 + React TSX + Angular IOC
   actions:
     - theme: brand
       text: 快速开始

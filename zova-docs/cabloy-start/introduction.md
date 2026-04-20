@@ -8,7 +8,7 @@ This suite uses the `VuetifyJS` UI library and provides a set of out-of-the-box 
 
 | Name              | Description                                                                                                                                                 |
 | ----------------- | ----------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| start-layoutadmin | Layout component for `Admin-Dashboard`, pioneers dual-layer tabs navigation UI/UX                                                                           |
+| start-layoutadmin | Layout component for `Admin-Dashboard`, supports dual-layer tabs navigation                                                                                 |
 | start-layoutfront | Layout component for `Website`                                                                                                                              |
 | start-adapter     | UI component adapter: defines commonly used UI components for rendering `Table/Form`                                                                        |
 | start-restpage    | Dynamically render CRUD list pages, entry pages, and search forms, while demonstrating best practices for Tanstack Table, Tanstack Form, and Tanstack Query |

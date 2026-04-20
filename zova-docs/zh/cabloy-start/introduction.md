@@ -8,7 +8,7 @@
 
 | 名称              | 说明                                                                                                            |
 | ----------------- | --------------------------------------------------------------------------------------------------------------- |
-| start-layoutadmin | 用于`Admin中后台`的布局组件，首创双层页签导航UI/UX                                                              |
+| start-layoutadmin | 用于`Admin中后台`的布局组件，支持双层页签导航                                                                   |
 | start-layoutfront | 用于`Web网站`的布局组件                                                                                         |
 | start-adapter     | UI组件适配器：为`Table/Form`渲染定义常用的UI组件                                                                |
 | start-restpage    | 可动态渲染CRUD的列表页、条目页、搜索表单，并且提供了`Tanstack Table`/`Tanstack Form`/`Tanstack Query`的最佳实践 |

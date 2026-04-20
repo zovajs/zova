@@ -19,7 +19,7 @@ Development of CabloyJS began in 2016. CabloyJS is a fullstack NodeJS framework 
 
 In 2023, after thorough evaluation and verification, CabloyJS V5 will undergo a complete redesign, adopting a completely new architectural philosophy. Developed in TypeScript and utilizing a frontend/backend separation, it has spawned two new underlying frameworks:
 
-- `ZovaJS`: A more intuitive framework with the pros of Vue3, React and Angular, empowers developers to build elegant, fast and reliable applications
+- `ZovaJS`: The Intuitive Frontend Framework = Vue3 Reactive + React TSX + Angular IOC
 - `VonaJS`: A fullstack framework for building SSR/SPA/Website/Admin-Dashboard in one codebase, with built-in DTO generation and type safety across frontend and backend
 
 ### 3. 2026: V5 Release

@@ -2,12 +2,11 @@ English | [简体中文](./README.zh-CN.md)
 
 # Zova
 
-Zova is a more intuitive frontend framework, = Vue3(intuitive state management) + React(flexible TSX rendering) + Angular(powerful IOC container)
+Zova: The Intuitive Frontend Framework = Vue3 Reactive + React TSX + Angular IOC
 
 - Built-in out-of-the-box SSR solution, building `SSR/SPA/Website/Admin-Dashboard` all in one codebase
 - Pioneers dual-layer tabs navigation UI/UX, allowing more convenient switching between multiple pages
 - Dynamically render CRUD list pages, entry pages, and search forms, and provides the best practices of `Tanstack Table/Tanstack Form/Tanstack Query`
-- Offers powerful IOC + AOP capabilities, making the system more extensible and maintainable
 
 [![LICENSE MIT][license-image]][license-url]
 [![NPM version][npm-image]][npm-url]
