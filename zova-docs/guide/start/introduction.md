@@ -35,13 +35,13 @@ The Website and Admin-Dashboard of Cabloy Store are built by one codebase
 
 ![](../../assets/img/start/cabloy-start-two-level-tabs.gif)
 
-## Coding style: Vue+React+Angular
+## Code Style
 
-Zova absorbs the essence of `Vue3/React/Angular` and avoid their shortcomings to make our development experience more elegant and reduce mental burden
+Zova delivers an intuitive, elegant, and powerful code style by combining the core design strengths of Vue3, React, and Angular:
 
-1. `Vue3`: Zova still uses Vue3's intuitive reactive api system, but defining reactive variables is just like defining native variables, without the need to use `ref/reactive`, and naturally without `ref.value`
-2. `React`: Zova uses the TSX syntax to write rendering logic, which not only perfectly matches the TS type system, but also supports the splitting of rendering code, and can keep the code clean and elegant even in the face of complex business. In Zova, there are no many Hook Apis like React, which greatly reduces mental burden
-3. `Angular`: In actual development, there are three scenarios of state sharing: `state sharing of component internal`, `state sharing between components` and `global state sharing`. In the traditional Vue3, different mechanisms are used to achieve these state sharing scenes, while only a unified IOC container mechanism is needed in Zova. The IOC container provided by Zova abandons the cumbersome design of Angular, with clearer concepts and more powerful functions
+- `Vue3`: intuitive reactive state
+- `React`: flexible TSX rendering
+- `Angular`: powerful IOC container
 
 ## Features
 
