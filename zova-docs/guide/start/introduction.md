@@ -80,7 +80,13 @@ Zova can be used with any UI library and comes with built-in project templates f
 
 ## Philosophy
 
-Many frameworks showcase design elegance with the simplest cases, while ignoring the coding challenges of real business complexity. As business grows and changes, project code can quickly degrade and become hard to maintain. Zova addresses large-scale business complexity with a set of engineering solutions, allowing elegant and intuitive code even in complex systems. This improves development efficiency and experience, while making subsequent iteration and maintenance easier
+Many frameworks showcase design elegance with the simplest cases, while ignoring the coding challenges of real business complexity.
+
+As business grows and changes, project code can quickly degrade and become hard to maintain.
+
+Zova addresses large-scale business complexity with a set of engineering solutions, allowing elegant and intuitive code even in complex systems.
+
+This improves development efficiency and experience, while making subsequent iteration and maintenance easier.
 
 ## Stay In Touch
 
