@@ -18,8 +18,8 @@ hero:
       link: https://github.com/zovajs/zova
 
 features:
-  - title: Vue+React+Angular
-    details: Absorb the essence of Vue3/React/Angular, avoid their shortcomings, make our development experience more elegant, and reduce mental burden
+  - title: Vue3 + React + Angular
+    details: Delivers an intuitive, elegant, and powerful code style by combining the core design strengths of Vue3, React, and Angular
   - title: SSR
     details: Built-in out-of-the-box SSR solution, building `SSR/SPA/Website/Admin-Dashboard` in one codebase
   - title: Dual-layer Tabs Navigation

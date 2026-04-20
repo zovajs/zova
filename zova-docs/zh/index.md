@@ -18,8 +18,8 @@ hero:
       link: https://github.com/zovajs/zova
 
 features:
-  - title: Vue+React+Angular
-    details: 汲取Vue3/React/Angular的精华，规避他们的缺点，让我们的开发体验更加优雅，减轻心智负担
+  - title: Vue3 + React + Angular
+    details: 提供更直观、更优雅、更强大的代码风格，融合 Vue3、React、Angular 的核心设计
   - title: SSR
     details: 内置开箱即用的SSR解决方案，可在同一个代码库中实现`SSR/SPA/Web网站/Admin中后台`
   - title: 双层页签导航
