@@ -2,7 +2,7 @@
 
 # Zova
 
-Zova 是一款更直观的前端框架，= Vue3(直观的状态管理) + React(灵活的 TSX 渲染) + Angular(强大的 IOC 容器)
+Zova: 直观的前端框架 = Vue3 响应式 + React TSX + Angular IOC
 
 - 内置开箱即用的 SSR 解决方案，可在同一个代码库中实现`SSR/SPA/Web网站/Admin中后台`
 - 首创双层页签导航 UI/UX，可以更加便捷的在多个页面中切换
