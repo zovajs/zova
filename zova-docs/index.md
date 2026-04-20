@@ -25,7 +25,7 @@ features:
   - title: Dual-layer Tabs Navigation
     details: Supports dual-layer tabs navigation, enabling efficient page switching while maintaining page state
   - title: CRUD Dynamic Rendering
-    details: Dynamically render CRUD list pages, entry pages, and search forms, and provides the best practices of Tanstack Table/Tanstack Form/Tanstack Query
+    details: Dynamically render CRUD list pages, entry pages, and search forms, while demonstrating best practices for Tanstack Table, Tanstack Form, and Tanstack Query
   - title: UI libraries
     details: Zova can be used with any UI library and comes with built-in project templates for several UI libraries, making it easy to use out of the box, including daisyui, quasar and vuetify
   - title: Reactivity

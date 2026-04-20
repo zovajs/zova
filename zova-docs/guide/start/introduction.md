@@ -6,7 +6,7 @@ Zova: The Intuitive Frontend Framework = Vue3 Reactive + React TSX + Angular IOC
 
 - Built-in out-of-the-box SSR solution, building `SSR/SPA/Website/Admin-Dashboard` in one codebase
 - Supports dual-layer tabs navigation, enabling efficient page switching while maintaining page state
-- Dynamically render CRUD list pages, entry pages, and search forms, and provides the best practices of `Tanstack Table/Tanstack Form/Tanstack Query`
+- Dynamically render CRUD list pages, entry pages, and search forms, while demonstrating best practices for Tanstack Table, Tanstack Form, and Tanstack Query
 
 ## With UI libraries
 
@@ -47,7 +47,7 @@ Zova delivers an intuitive, elegant, and powerful code style by combining the co
 
 - `SSR`: Built-in out-of-the-box SSR solution, building `SSR/SPA/Website/Admin-Dashboard` in one codebase
 - `Dual-layer Tabs Navigation`: Supports dual-layer tabs navigation, enabling efficient page switching while maintaining page state
-- `CRUD Dynamic Rendering`: Dynamically render CRUD list pages, entry pages, and search forms, and provides the best practices of `Tanstack Table/Tanstack Form/Tanstack Query`
+- `CRUD Dynamic Rendering`: Dynamically render CRUD list pages, entry pages, and search forms, while demonstrating best practices for Tanstack Table, Tanstack Form, and Tanstack Query
 - `Reactivity`: With the support of ioc container, defining reactive states no longer needs `ref/reactive`. Without `ref`, naturally there is no need to write a lot of `ref.value`
 - `CSS-in-JS`: Built-in CSS-in-JS capability making style development more flexible and convenient, while providing out-of-the-box theme switching capabilities
 - `Unified state management`: Encapsulating unified state data through model mechanism, including Cookie, Localstorage and server-side data managed by TanStack Query

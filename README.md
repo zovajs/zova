@@ -6,7 +6,7 @@ Zova: The Intuitive Frontend Framework = Vue3 Reactive + React TSX + Angular IOC
 
 - Built-in out-of-the-box SSR solution, building `SSR/SPA/Website/Admin-Dashboard` in one codebase
 - Supports dual-layer tabs navigation, enabling efficient page switching while maintaining page state
-- Dynamically render CRUD list pages, entry pages, and search forms, and provides the best practices of `Tanstack Table/Tanstack Form/Tanstack Query`
+- Dynamically render CRUD list pages, entry pages, and search forms, while demonstrating best practices for Tanstack Table, Tanstack Form, and Tanstack Query
 
 [![LICENSE MIT][license-image]][license-url]
 [![NPM version][npm-image]][npm-url]
