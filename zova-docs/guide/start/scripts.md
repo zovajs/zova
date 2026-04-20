@@ -1,6 +1,6 @@
 # Scripts
 
-Zova can build `SSR/SPA/Website/Admin-Dashboard` all in one codebase, and both `Website/Admin-Dashboard` can support SSR. Therefore, Zova loads environment files based on multi-dimensional variables, providing a more flexible configuration mechanism and supporting more complex business scenarios. Corresponding to the multi-dimensional variables, the command line script is also divided into three parts, such as:
+Zova can build `SSR/SPA/Website/Admin-Dashboard` in one codebase, and both `Website/Admin-Dashboard` can support SSR. Therefore, Zova loads environment files based on multi-dimensional variables, providing a more flexible configuration mechanism and supporting more complex business scenarios. Corresponding to the multi-dimensional variables, the command line script is also divided into three parts, such as:
 
 ```bash
 $ npm run dev:ssr:admin

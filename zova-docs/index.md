@@ -21,9 +21,9 @@ features:
   - title: Vue+React+Angular
     details: Absorb the essence of Vue3/React/Angular, avoid their shortcomings, make our development experience more elegant, and reduce mental burden
   - title: SSR
-    details: Built-in out-of-the-box SSR solution, building `SSR/SPA/Website/Admin-Dashboard` all in one codebase
-  - title: Dual-layer Tabs UI/UX
-    details: Pioneers dual-layer tabs navigation UI/UX, allowing more convenient switching between multiple pages
+    details: Built-in out-of-the-box SSR solution, building `SSR/SPA/Website/Admin-Dashboard` in one codebase
+  - title: Dual-layer Tabs Navigation
+    details: Supports dual-layer tabs navigation, enabling efficient page switching while maintaining page state
   - title: CRUD Dynamic Rendering
     details: Dynamically render CRUD list pages, entry pages, and search forms, and provides the best practices of Tanstack Table/Tanstack Form/Tanstack Query
   - title: UI libraries

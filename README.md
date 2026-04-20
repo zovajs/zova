@@ -4,8 +4,8 @@ English | [简体中文](./README.zh-CN.md)
 
 Zova: The Intuitive Frontend Framework = Vue3 Reactive + React TSX + Angular IOC
 
-- Built-in out-of-the-box SSR solution, building `SSR/SPA/Website/Admin-Dashboard` all in one codebase
-- Pioneers dual-layer tabs navigation UI/UX, allowing more convenient switching between multiple pages
+- Built-in out-of-the-box SSR solution, building `SSR/SPA/Website/Admin-Dashboard` in one codebase
+- Supports dual-layer tabs navigation, enabling efficient page switching while maintaining page state
 - Dynamically render CRUD list pages, entry pages, and search forms, and provides the best practices of `Tanstack Table/Tanstack Form/Tanstack Query`
 
 [![LICENSE MIT][license-image]][license-url]
@@ -46,7 +46,7 @@ The Website and Admin-Dashboard of Cabloy Store are built by one codebase
 
 ## GIF Demo
 
-- Pioneers dual-layer tabs navigation UI/UX
+- Dual-layer tabs navigation
 
 ![](./zova-docs/assets/img/start/cabloy-start-two-level-tabs.gif)
 
