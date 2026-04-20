@@ -2,11 +2,11 @@
 
 ## Code Style
 
-Zova provides a more intuitive, elegant, and powerful code style, drawing from the following core designs of Vue3, React, and Angular:
+Zova delivers an intuitive, elegant, and powerful code style by combining the core design strengths of Vue3, React, and Angular:
 
-- `Vue3`: Intuitive state management
-- `React`: Flexible TSX rendering
-- `Angular`: Powerful IOC container
+- `Vue3`: intuitive reactive state
+- `React`: flexible TSX rendering
+- `Angular`: powerful IOC container
 
 ## Creating a Page
 
