@@ -17,7 +17,7 @@ export class InterceptorBody extends BeanInterceptorBase<IInterceptorOptionsBody
   async onResponse(response: AxiosResponse, _options: IInterceptorOptionsBody, next: NextInterceptorResponse): Promise<AxiosResponse> {
     response = await next();
     const contentType = response.headers['content-type'];
-    if (!contentType || !contentType.includes('application/json')) {
+    if (!contentType || typeof contentType !== 'string' || !contentType.includes('application/json')) {
       response[SymbolInterceptorBodyResponseFlag] = true;
       return response;
     }
