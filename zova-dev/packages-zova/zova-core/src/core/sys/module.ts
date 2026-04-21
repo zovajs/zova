@@ -224,7 +224,7 @@ export class SysModule extends BeanSimple {
   private async _registerConfig(module: IModule) {
     if (!module.resource.config) return;
     // config
-    const config = await module.resource.config(this.sys, this.sys.config.meta);
+    const config = await module.resource.config(this.sys);
     // monkey
     await this._monkeyModule(true, 'configLoaded', module, config);
     // extend

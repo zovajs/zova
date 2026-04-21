@@ -1,5 +1,4 @@
 import type { IModuleInfo } from '@cabloy/module-info';
-import type { ZovaConfigMeta } from '@cabloy/module-info';
 import type { Component } from 'vue';
 
 import type { ZovaSys } from '../../core/sys/sys.ts';
@@ -13,7 +12,7 @@ export type TypeModuleResourceLocaleModules = Record<string, TypeModuleResourceL
 export type TypeModuleResourceErrors = Record<string, number>;
 export type TypeModuleResourceErrorModules = Record<string, TypeModuleResourceErrors>;
 export type TypeModuleResourceComponents = Record<string, Component>;
-export type TypeModuleResourceConfig = (sys: ZovaSys, meta?: ZovaConfigMeta) => object | Promise<object>;
+export type TypeModuleResourceConfig = (sys: ZovaSys) => object | Promise<object>;
 
 export interface IModuleResource {
   MainSys: Constructable<IModuleMainSys>;

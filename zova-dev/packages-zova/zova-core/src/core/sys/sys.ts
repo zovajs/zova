@@ -119,7 +119,7 @@ export class ZovaSys {
   private async _combineConfig(config: TypeModuleResourceConfig[]): Promise<ZovaConfig> {
     const _config = deepExtend({}, configDefault(this.env));
     for (const configFn of config) {
-      deepExtend(_config, await configFn(this, _config.meta));
+      deepExtend(_config, await configFn(this));
     }
     return _config;
   }
