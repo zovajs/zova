@@ -1,7 +1,5 @@
 import type { ViteHotContext } from 'vite/types/hot.js';
 
-import { appResource } from 'zova';
-
 import type { TypeModuleResourceConfig } from '../../types/interface/module.ts';
 import type { PluginZovaOptions } from '../../types/interface/pluginZova.ts';
 import type { ZovaConfigEnv } from '../../types/utils/env.ts';
@@ -14,6 +12,7 @@ import { zodEnhanceSys } from '../../utils/zod-enhance.ts';
 import { configDefault } from './config.ts';
 import { constantDefault } from './constant.ts';
 import { SysMeta } from './meta.ts';
+import { appResource } from './resource.ts';
 import { setSys } from './sysFake.ts';
 import { deepExtend, SysUtil } from './util.ts';
 

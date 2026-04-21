@@ -1,7 +1,6 @@
 import { compose } from '@cabloy/compose';
 import { isClass, isNilOrEmptyString } from '@cabloy/utils';
 import { inject as composableInject, provide as composableProvide, markRaw, reactive, shallowReactive } from 'vue';
-import { useComputed } from 'zova';
 
 import type { ZovaApplication, ZovaContext, ZovaSys } from '../core/index.ts';
 import type { MetadataKey } from '../core/sys/metadata.ts';
@@ -21,6 +20,7 @@ import { appMetadata } from '../core/sys/metadata.ts';
 import { appResource, SymbolDecoratorProxyDisable } from '../core/sys/resource.ts';
 import { __prepareInjectSelectorInfo, SymbolDecoratorVueElements } from '../decorator/index.ts';
 import { cast } from '../types/utils/cast.ts';
+import { useComputed } from '../vueExtra/computed.ts';
 import { BeanAopBase } from './beanAopBase.ts';
 import { BeanBase } from './beanBase.ts';
 import { SymbolBeanFullName, SymbolBeanInstanceKey, SymbolInited } from './beanBaseSimple.ts';

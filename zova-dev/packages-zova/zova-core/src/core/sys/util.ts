@@ -130,10 +130,6 @@ export class SysUtil extends BeanSimple {
     const parts = resource.split(':');
     return api ?? combineApiPathControllerAndAction(parts[0], parts[1], undefined, true, true, this.sys.env.API_PREFIX);
   }
-
-  ignoreCookieOnServer() {
-    return process.env.SERVER && !this.sys.config.ssr.cookie;
-  }
 }
 
 export function uuid(): string {

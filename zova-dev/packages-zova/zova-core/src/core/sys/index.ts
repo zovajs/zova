@@ -9,3 +9,4 @@ export * from './module.ts';
 export * from './resource.ts';
 export * from './sys.ts';
 export * from './util.ts';
+export * from './ssr.ts';

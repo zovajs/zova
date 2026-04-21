@@ -28,7 +28,7 @@ export interface ZovaConfigEnv {
   SSR_PROD_PORT: string | undefined;
   SSR_PROD_PROTOCOL: string | undefined;
   SSR_PROD_HOST: string | undefined;
-  SSR_HMR: string | undefined;
+  SSR_WITH_VONA: string | undefined;
   SSR_COOKIE: string | undefined;
   OPENAPI_BASE_URL_DEFAULT: string | undefined;
   OPENAPI_BASE_URL_HOME_API: string | undefined;
