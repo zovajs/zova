@@ -38,7 +38,7 @@ export class ModelSdk extends BeanModelBase {
     if (!locale) throw new Error('locale not specified');
     await super.__init__(locale);
     // event
-    if (process.env.CLIENT && this.sys.meta.ssr.hmr) {
+    if (process.env.CLIENT && this.sys.config.ssr.hmr) {
       this._eventSsrHmrReload = this.sys.meta.event.on('a-ssrhmr:reload', async (_data, next) => {
         await this.$refetchQueries({ queryKey: ['bootstrap'] });
         await this.$refetchQueries({ queryKey: ['sdk'] });

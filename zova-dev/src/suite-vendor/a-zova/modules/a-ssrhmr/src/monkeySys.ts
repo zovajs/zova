@@ -9,7 +9,7 @@ export class MonkeySys extends BeanSimple implements IMonkeySysReady, IMonkeySys
   private _reload?: () => void;
 
   async sysReady(): Promise<void> {
-    if (!this.sys.meta.ssr.hmr) return;
+    if (!this.sys.config.ssr.hmr) return;
     const scopeConfig = this.sys.util.getModuleConfigSafe('a-ssrhmr');
     this._reload = debounce(() => {
       this._reloadInner();
@@ -18,7 +18,7 @@ export class MonkeySys extends BeanSimple implements IMonkeySysReady, IMonkeySys
   }
 
   sysClose(): void {
-    if (!this.sys.meta.ssr.hmr) return;
+    if (!this.sys.config.ssr.hmr) return;
     this._closeWs();
   }
 

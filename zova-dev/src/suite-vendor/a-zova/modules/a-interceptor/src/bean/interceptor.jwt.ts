@@ -40,7 +40,7 @@ export class InterceptorJwt extends BeanInterceptorBase<IInterceptorOptionsJwt> 
 
   async prepareAccessToken(config: AxiosRequestConfig, authToken: string | boolean | undefined): Promise<string | undefined> {
     if (!this.sys.config.api.jwt) return;
-    if (this.sys.meta.ssr.ignoreCookieOnServer) return;
+    if (this.sys.config.ssr.ignoreCookieOnServer) return;
     // use default in scope.config rather than IInterceptorOptionsJwt.options
     const authTokenCurrent = authToken ?? this.scope.config.authToken.default;
     // authToken = authToken ?? this.scope.config.authToken.default;
