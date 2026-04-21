@@ -72,7 +72,7 @@ function _closeLogger(logger: Logger) {
 
 export function getLoggerFilterLevel(clientName?: keyof ILoggerClientRecord): LoggerLevel | undefined {
   clientName = clientName || 'default';
-  if (process.env.PROD) return; // disable on prod
+  if (sys.env.META_MODE === 'production') return; // disable on prod: not use process.env.PROD
   const envName = `LOGGER_CLIENT_${clientName.toUpperCase()}`;
   const level = sys.env[envName];
   if (level === 'false') return;
@@ -82,7 +82,7 @@ export function getLoggerFilterLevel(clientName?: keyof ILoggerClientRecord): Lo
 
 export function setLoggerFilterLevel(level: LoggerLevel | boolean, clientName?: keyof ILoggerClientRecord) {
   clientName = clientName || 'default';
-  if (process.env.PROD) return; // disable on prod
+  if (sys.env.META_MODE === 'production') return; // disable on prod: not use process.env.PROD
   const envName = `LOGGER_CLIENT_${clientName.toUpperCase()}`;
   sys.env[envName] = level.toString();
 }

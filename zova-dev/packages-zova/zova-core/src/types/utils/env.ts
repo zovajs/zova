@@ -3,6 +3,9 @@ import type { ZovaMetaAppMode, ZovaMetaFlavor, ZovaMetaMode } from '@cabloy/modu
 import type { TypeComponentLayoutRecord } from '../../bean/resource/component/type.ts';
 
 export interface ZovaConfigEnv {
+  META_FLAVOR: ZovaMetaFlavor;
+  META_MODE: ZovaMetaMode;
+  META_APP_MODE: ZovaMetaAppMode;
   APP_NAME: string | undefined;
   APP_TITLE: string | undefined;
   APP_DESCRIPTION: string | undefined;

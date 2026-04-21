@@ -8,14 +8,12 @@ import type { ZovaConfigEnv } from '../../types/utils/env.ts';
 import type { PowerPartial } from '../../types/utils/powerPartial.ts';
 import type { ConfigLogger } from '../logger/types.ts';
 
-import { cast } from '../../types/utils/cast.ts';
-
 export function configDefault(env: ZovaConfigEnv): PowerPartial<ZovaConfig> {
   const config: PowerPartial<ZovaConfig> = {
     meta: {
-      flavor: cast(env).META_FLAVOR,
-      mode: cast(env).META_MODE,
-      appMode: cast(env).META_APP_MODE,
+      flavor: env.META_FLAVOR,
+      mode: env.META_MODE,
+      appMode: env.META_APP_MODE,
     },
   };
   return config;
