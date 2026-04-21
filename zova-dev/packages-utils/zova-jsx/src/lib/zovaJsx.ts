@@ -162,7 +162,7 @@ export class ZovaJsx extends BeanSimple {
         const actionChildPrev = actionChildren[index - 1];
         const resName = cast(actionChildPrev.props)?.res;
         if (resName) {
-          celScope = objectAssignReactive({}, celScope, { [resName]: actionRes });
+          celScope[resName] = actionRes;
         }
       }
       // vIf
@@ -171,7 +171,7 @@ export class ZovaJsx extends BeanSimple {
       // action
       if (actionChild.type === 'actionVar') {
         const props = this.renderJsxProps(actionChild.props, {}, celScope, renderContext);
-        celScope = objectAssignReactive({}, celScope, { [cast(props).name]: cast(props).value });
+        celScope[cast(props).name] = cast(props).value;
         return next(undefined);
       } else if (actionChild.type === 'actionExpr') {
         const expression = this.evaluateExpression(cast(actionChild.props)?.expression, celScope);
@@ -372,7 +372,7 @@ export class ZovaJsx extends BeanSimple {
       if (isJsxComponent(jsxChild)) {
         if (jsxChild.type === 'var') {
           const props = this.renderJsxProps(jsxChild.props, {}, celScope, renderContext);
-          celScope = objectAssignReactive({}, celScope, { [cast(props).name]: cast(props).value });
+          celScope[cast(props).name] = cast(props).value;
           child = undefined;
         } else {
           child = this.render(jsxChild, undefined, celScope, renderContext);
