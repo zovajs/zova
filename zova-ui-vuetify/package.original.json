@@ -1,6 +1,6 @@
 {
   "name": "zova-ui-vuetify",
-  "version": "5.1.53",
+  "version": "5.1.58",
   "description": "A vue3 vuetify framework with ioc",
   "publishConfig": {
     "access": "public"
@@ -59,7 +59,7 @@
     "vue": "^3.5.32",
     "vuetify": "^4.0.5",
     "vue-router": "npm:@cabloy/vue-router@^4.4.16",
-    "zova": "^5.1.33",
+    "zova": "^5.1.37",
     "zova-suite-a-cabloy": "^5.1.11"
   },
   "devDependencies": {
