@@ -10,4 +10,8 @@ export class SysSsr extends BeanSimple {
   ignoreCookieOnServer() {
     return process.env.SERVER && !this.sys.config.ssr.cookie;
   }
+
+  get hmr() {
+    return this.sys.env.SSR_WITH_VONA === 'true' && this.sys.env.META_MODE === 'development';
+  }
 }

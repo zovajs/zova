@@ -82,7 +82,7 @@ export class ModelTabs extends BeanModelBase {
       this.forwardRoute(this.$currentRoute);
     }
     // event
-    if (process.env.CLIENT && this.sys.env.SSR_HMR === 'true') {
+    if (process.env.CLIENT && this.sys.meta.ssr.hmr) {
       this._eventSsrHmrReload = this.sys.meta.event.on('a-ssrhmr:reload', async (_data, next) => {
         this.updateAllTabInfos();
         return next();

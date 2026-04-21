@@ -22,7 +22,7 @@ export class ModelMenu extends BeanModelBase {
       return this._prepareMenuTree(queryMenus.data);
     });
     // event
-    if (process.env.CLIENT && this.sys.env.SSR_HMR === 'true') {
+    if (process.env.CLIENT && this.sys.meta.ssr.hmr) {
       this._eventSsrHmrReload = this.sys.meta.event.on('a-ssrhmr:reload', async (_data, next) => {
         await this.$refetchQueries({ queryKey: ['retrieveMenus'] });
         return next();
