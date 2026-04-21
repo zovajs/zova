@@ -11,7 +11,6 @@ import { SysComponent } from './component.ts';
 import { SysError } from './error.ts';
 import { SysLocale } from './locale.ts';
 import { SysModule } from './module.ts';
-import { SysSsr } from './ssr.ts';
 
 export class SysMeta extends BeanSimple {
   module: SysModule;
@@ -19,7 +18,6 @@ export class SysMeta extends BeanSimple {
   logger: SysLogger;
   locale: SysLocale;
   error: SysError;
-  ssr: SysSsr;
   event: AppEvent;
   cookie: AppCookie;
 
@@ -35,7 +33,6 @@ export class SysMeta extends BeanSimple {
     this.logger = this.bean._newBeanSimple(SysLogger, false);
     this.locale = this.bean._newBeanSimple(SysLocale, false);
     this.error = this.bean._newBeanSimple(SysError, false);
-    this.ssr = this.bean._newBeanSimple(SysSsr, false);
     this.event = this.bean._newBeanSimple(AppEvent, false);
     this.cookie = this.bean._newBeanSimple(AppCookie, false);
   }
@@ -48,7 +45,6 @@ export class SysMeta extends BeanSimple {
     this.logger.dispose();
     this.locale.dispose();
     this.error.dispose();
-    this.ssr.dispose();
     this.sysMonkey = undefined;
     this.legacyRoutes = undefined;
   }

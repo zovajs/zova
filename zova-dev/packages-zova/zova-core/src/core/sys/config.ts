@@ -34,6 +34,9 @@ export interface ZovaConfig {
   };
   ssr: {
     cookie: boolean;
+    withVona: boolean;
+    ignoreCookieOnServer: boolean;
+    hmr: boolean;
   };
   ws: {
     baseURL: string;
