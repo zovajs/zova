@@ -7,8 +7,8 @@ import { ApiApiHomeUserPassportloginRequestBody } from 'zova-module-home-api';
 @Controller()
 export class ControllerPageLogin extends BeanControllerPageBase {
   user: ApiApiHomeUserPassportloginRequestBody = {
-    username: process.env.DEV ? 'admin' : '',
-    password: process.env.DEV ? '123456' : '',
+    username: '',
+    password: '',
     captcha: {
       id: '',
       token: '',
@@ -16,6 +16,10 @@ export class ControllerPageLogin extends BeanControllerPageBase {
   };
 
   protected async __init__() {
+    if (this.sys.env.META_MODE === 'development') {
+      this.user.username = 'admin';
+      this.user.password = '123456';
+    }
     await $QueryAutoLoad(() => this.$passport.apiSchemasLogin.sdk);
   }
 
