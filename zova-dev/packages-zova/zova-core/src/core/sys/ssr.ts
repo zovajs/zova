@@ -7,7 +7,7 @@ export class SysSsr extends BeanSimple {
   /** @internal */
   public dispose() {}
 
-  ignoreCookieOnServer() {
+  get ignoreCookieOnServer() {
     return process.env.SERVER && !this.sys.config.ssr.cookie;
   }
 
