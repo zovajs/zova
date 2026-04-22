@@ -2,7 +2,7 @@ import type { ControllerPageEntry, ModelResource } from 'zova-module-rest-resour
 
 import { celEnvBase, isNil } from '@cabloy/utils';
 import { SchemaObject } from 'openapi3-ts/oas31';
-import { BeanControllerBase, Use } from 'zova';
+import { BeanControllerBase, deepEqual, Use } from 'zova';
 import { Controller } from 'zova-module-a-bean';
 import { ControllerForm, TypeFormOnSubmitData } from 'zova-module-a-form';
 import { $QueriesAutoLoad } from 'zova-module-a-model';
@@ -44,6 +44,13 @@ export class ControllerRestPageEntry<TData extends {} = {}> extends BeanControll
       () => this.queryData,
     );
     this.setPageMeta(this.formData, false);
+    this.$watch(
+      () => this.formData,
+      (newValue, oldValue) => {
+        if (deepEqual(newValue, oldValue)) return;
+        this.setPageMeta(newValue, false);
+      },
+    );
   }
 
   get formProvider() {
