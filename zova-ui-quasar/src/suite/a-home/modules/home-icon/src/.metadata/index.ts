@@ -92,6 +92,8 @@ export interface IIconRecord {
     '::developer-board': true;
     '::done': true;
     '::dot': true;
+    '::draft-add': true;
+    '::draft-edit': true;
     '::draft': true;
     '::drive-file-move': true;
     '::edit': true;
