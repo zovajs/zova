@@ -218,6 +218,9 @@ export class ZovaJsx extends BeanSimple {
   }
 
   public render(componentOptions: TypeRenderComponent, props: {} | undefined, celScope: {}, renderContext: {}) {
+    if (!componentOptions) {
+      throw new Error(`render component should not ${componentOptions}`);
+    }
     props = props ?? {};
     componentOptions = this.normalizeComponenOptions(componentOptions);
     // vIf

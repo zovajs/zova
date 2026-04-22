@@ -91,9 +91,13 @@ export class ControllerPageResource extends BeanControllerPageBase {
   }
 
   public render() {
+    const componentRestPage = this.$$modelResource.componentRestPage;
+    if (!componentRestPage) {
+      return <ZPage>not found componentRestPage</ZPage>;
+    }
     const celScope = this.pageWrapperScope;
     const jsxRenderContext = this.getJsxRenderContextPageWrapper(celScope);
-    const domRestPage = this.zovaJsx.render(this.$$modelResource.componentRestPage, {}, celScope, jsxRenderContext);
+    const domRestPage = this.zovaJsx.render(componentRestPage, {}, celScope, jsxRenderContext);
     return <ZPage>{domRestPage}</ZPage>;
   }
 }
