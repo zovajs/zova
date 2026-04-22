@@ -37,7 +37,7 @@
   "dependencies": {
     "@cabloy/compose": "^2.1.4",
     "@cabloy/deps": "^1.1.4",
-    "@cabloy/json5": "^1.1.5",
+    "@cabloy/json5": "^1.1.6",
     "@cabloy/module-info": "^2.0.0",
     "@cabloy/utils": "^2.1.9",
     "@cabloy/vue-router": "^4.4.16",
