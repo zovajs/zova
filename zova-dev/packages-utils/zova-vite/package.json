@@ -42,7 +42,7 @@
     "@babel/plugin-transform-typescript": "^7.28.6",
     "@cabloy/dotenv": "^1.2.3",
     "@cabloy/extend": "^3.2.3",
-    "@cabloy/module-glob": "^5.3.6",
+    "@cabloy/module-glob": "^5.3.7",
     "@cabloy/module-info": "^2.0.0",
     "@cabloy/vite-plugin-babel": "^1.3.3",
     "@cabloy/vue-babel-plugin-jsx": "^2.0.1",

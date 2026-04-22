@@ -1,11 +1,11 @@
 import type { VNode } from 'vue';
 
 import { compose } from '@cabloy/compose';
-import { celEnvBase, evaluateExpressions, getProperty, isPromise } from '@cabloy/utils';
+import { celEnvBase, evaluateExpressions, getProperty, isEmptyObject, isNil, isPromise } from '@cabloy/utils';
 import { toUpperCaseFirstChar } from '@cabloy/word-utils';
 import { classes } from 'typestyle';
 import { createTextVNode, h } from 'vue';
-import { beanFullNameFromOnionName, BeanSimple, cast, deepExtend, objectAssignReactive } from 'zova-core';
+import { beanFullNameFromOnionName, BeanSimple, cast, objectAssignReactive } from 'zova-core';
 
 import type { IFormProviderComponents, TypeRenderComponent, TypeRenderComponentJsx, TypeRenderComponentJsxProps } from '../types/rest.ts';
 
@@ -209,8 +209,9 @@ export class ZovaJsx extends BeanSimple {
     const onionOptions = beanInstance.$onionOptions;
     // props
     let props = this.renderJsxProps(actionChild.props, {}, celScope, renderContext);
-    if (onionOptions) {
-      props = deepExtend({}, onionOptions, props);
+    if (!isEmptyObject(onionOptions)) {
+      // not use deepExtend, maybe: Maximum call stack size exceeded
+      props = Object.assign({}, onionOptions, props);
     }
     if (!renderContext) throw new Error('should provide renderContext');
     return beanInstance.execute(props, renderContext, next);
@@ -373,6 +374,16 @@ export class ZovaJsx extends BeanSimple {
         if (jsxChild.type === 'var') {
           const props = this.renderJsxProps(jsxChild.props, {}, celScope, renderContext);
           celScope[cast(props).name] = cast(props).value;
+          child = undefined;
+        } else if (jsxChild.type === 'log') {
+          const props = this.renderJsxProps(jsxChild.props, {}, celScope, renderContext);
+          const name = cast(props).name;
+          const message = cast(props).message;
+          if (isNil(name)) {
+            console.log(message);
+          } else {
+            console.log(name, message);
+          }
           child = undefined;
         } else {
           child = this.render(jsxChild, undefined, celScope, renderContext);

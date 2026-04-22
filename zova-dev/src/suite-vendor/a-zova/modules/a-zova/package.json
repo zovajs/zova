@@ -37,9 +37,9 @@
   "dependencies": {
     "@cabloy/compose": "^2.1.4",
     "@cabloy/deps": "^1.1.4",
-    "@cabloy/json5": "^1.1.4",
+    "@cabloy/json5": "^1.1.5",
     "@cabloy/module-info": "^2.0.0",
-    "@cabloy/utils": "^2.1.6",
+    "@cabloy/utils": "^2.1.9",
     "@cabloy/vue-router": "^4.4.16",
     "@cabloy/word-utils": "workspace:^",
     "defu": "^6.1.7",
@@ -47,7 +47,7 @@
     "zova-jsx": "workspace:^"
   },
   "devDependencies": {
-    "@cabloy/cli": "^3.1.8",
+    "@cabloy/cli": "^3.1.9",
     "@types/luxon": "^3.7.1",
     "clean-package": "^2.2.0",
     "fs-extra": "^11.3.4",

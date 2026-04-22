@@ -46,10 +46,10 @@
   "dependencies": {
     "@cabloy/compose": "^2.1.4",
     "@cabloy/deps": "^1.1.4",
-    "@cabloy/json5": "^1.1.4",
+    "@cabloy/json5": "^1.1.5",
     "@cabloy/logger": "^1.1.9",
     "@cabloy/module-info": "^2.0.0",
-    "@cabloy/utils": "^2.1.6",
+    "@cabloy/utils": "^2.1.9",
     "@cabloy/vue-router": "^4.4.16",
     "@cabloy/word-utils": "^2.1.8",
     "@cabloy/zod-openapi": "^1.1.5",
@@ -115,7 +115,7 @@
     "zova-module-home-theme": "workspace:^"
   },
   "devDependencies": {
-    "@cabloy/cli": "^3.1.8",
+    "@cabloy/cli": "^3.1.9",
     "@cabloy/lint": "^5.1.5",
     "@cabloy/openapi-typescript": "^7.9.2",
     "@quasar/app-vite": "2.4.0",
