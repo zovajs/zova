@@ -1,6 +1,6 @@
 {
   "name": "quasar-app-extension-zova",
-  "version": "1.2.18",
+  "version": "1.2.19",
   "gitHead": "4d11b0fed7af50b828971785af3c014046be6afa",
   "description": "Quasar ext of zova",
   "author": "zhennann",
@@ -34,7 +34,7 @@
     "esbuild": "^0.25.12",
     "fs-extra": "^11.3.4",
     "vite": "^8.0.8",
-    "zova-vite": "^1.1.18"
+    "zova-vite": "^1.1.19"
   },
   "devDependencies": {
     "@cabloy/lint": "^5.1.5",
