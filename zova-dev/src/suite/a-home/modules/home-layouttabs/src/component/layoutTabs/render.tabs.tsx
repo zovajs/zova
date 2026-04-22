@@ -3,7 +3,8 @@ import type { VNode } from 'vue';
 import { withModifiers } from 'vue';
 import { BeanRenderBase, ClientOnly } from 'zova';
 import { Render } from 'zova-module-a-bean';
-import { $iconName, ZIcon } from 'zova-module-a-icon';
+import { $iconName, IIconRecord, ZIcon } from 'zova-module-a-icon';
+import { IRouteViewRouteItem } from 'zova-module-a-router';
 import { RouteTab, ZRouterViewTabs } from 'zova-module-a-routertabs';
 
 @Render()
@@ -52,15 +53,6 @@ export class RenderTabs extends BeanRenderBase {
     return <ClientOnly>{domWrapper}</ClientOnly>;
   }
 
-  public getTabIcon(tab: RouteTab) {
-    const { info, items } = tab;
-    // pageDirty
-    const hasPageDirty = items && items.some(item => !!item.pageMeta?.pageDirty);
-    if (hasPageDirty) return $iconName('::asterisk');
-    // default
-    return info?.icon ? info?.icon : '';
-  }
-
   public renderTabItems() {
     const $$modelTabs = this.$$modelTabs;
     if (!$$modelTabs) return;
@@ -73,7 +65,8 @@ export class RenderTabs extends BeanRenderBase {
       if (tabItem.componentKey === tabKey) continue;
       const { componentKey, pageMeta } = tabItem;
       const className = componentKey === $$modelTabs.componentKeyCurrent ? 'tab-active text-primary' : '';
-      const pageTitle = pageMeta?.pageTitle || '--';
+      const pageTitle = pageMeta?.pageTitle || '';
+      const tabItemIcon = this.getTabItemIcon(tabItem);
       const domTab = (
         <a
           key={componentKey}
@@ -83,7 +76,7 @@ export class RenderTabs extends BeanRenderBase {
             $$modelTabs.activeTabItem(tabKey, componentKey);
           }}
         >
-          {pageMeta?.pageDirty && <ZIcon name={'::asterisk'} width="24" height="24"></ZIcon>}
+          {!!tabItemIcon && <ZIcon name={tabItemIcon} width="24" height="24"></ZIcon>}
           <div
             class="overflow-hidden text-ellipsis whitespace-nowrap"
             style={{ display: 'inline-block', maxWidth: this.scope.config.tabItem.maxWidth }}
@@ -110,6 +103,23 @@ export class RenderTabs extends BeanRenderBase {
     );
     if (!this.$$modelTabs.cache) return domWrapper;
     return <ClientOnly>{domWrapper}</ClientOnly>;
+  }
+
+  public getTabIcon(tab: RouteTab) {
+    const { info, items } = tab;
+    // pageDirty
+    const hasPageDirty = items && items.some(item => !!item.pageMeta?.pageDirty);
+    if (hasPageDirty) return $iconName('::asterisk');
+    // default
+    return info?.icon ? info?.icon : '';
+  }
+
+  public getTabItemIcon(tabItem: IRouteViewRouteItem): keyof IIconRecord | '' {
+    const { pageMeta } = tabItem;
+    if (pageMeta?.pageDirty) return '::asterisk';
+    if (pageMeta?.formMeta?.formScene === 'create') return '::draft-add';
+    if (pageMeta?.formMeta?.formScene === 'edit') return '::draft-edit';
+    return '';
   }
 
   _renderRouterViewTabs() {
