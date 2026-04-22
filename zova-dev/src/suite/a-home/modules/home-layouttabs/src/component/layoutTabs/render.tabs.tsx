@@ -97,7 +97,7 @@ export class RenderTabs extends BeanRenderBase {
       domTabs.push(domTab);
     }
     const domWrapper = (
-      <div role="tablist" class="tabs tabs-lifted">
+      <div role="tablist" class="tabs tabs-border">
         {domTabs}
       </div>
     );
