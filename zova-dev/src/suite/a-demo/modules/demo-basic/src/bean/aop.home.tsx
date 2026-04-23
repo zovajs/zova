@@ -1,7 +1,7 @@
 import type { ControllerPageHome } from 'zova-module-home-index';
 
 import { BeanAopBase, polyfillDispose } from 'zova';
-import { Aop, AopAction, AopActionDispose, AopActionInit } from 'zova-module-a-bean';
+import { Aop, AopActionDispose, AopActionInit, AopActionRender } from 'zova-module-a-bean';
 
 @Aop({ match: 'home-index.controller.pageHome' })
 export class AopHome extends BeanAopBase {
@@ -16,8 +16,7 @@ export class AopHome extends BeanAopBase {
     next();
   };
 
-  // @ts-ignore: ignore
-  render: AopAction<ControllerPageHome, 'render'> = (_args, next, _receiver) => {
+  protected render: AopActionRender<ControllerPageHome> = (_args, next, _receiver) => {
     const result = next();
     return <div class="aop-home">{result}</div>;
   };
