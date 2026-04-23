@@ -13,11 +13,11 @@ This suite includes the following modules:
 
 ## 2. Zova Suite: zova-suite-cabloy-basic (MIT)
 
-该套件采用 Daisyui + Tailwindcss，提供了一组开箱即用的前端模块，加速开发`Admin中后台`全栈系统。
+This suite uses the `Daisyui + Tailwindcss` UI library and provides a set of out-of-the-box frontend modules to accelerate the development of fullstack projects such as `Admin-Dashboards`.
 
 ## 3. Zova Suite：zova-suite-cabloy-start
 
-该套件采用 VuetifyJS UI 库，提供了一组开箱即用的前端模块，加速开发`Web网站`和`Admin中后台`等全栈系统。
+This suite uses the `VuetifyJS` UI library and provides a set of out-of-the-box frontend modules to accelerate the development of fullstack projects such as `Websites` and `Admin-Dashboards`.
 
 ## Suite Comparison
 
