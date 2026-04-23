@@ -1,6 +1,6 @@
 # Cabloy Start
 
-This suite uses the `VuetifyJS` UI library and provides a set of out-of-the-box frontend modules to accelerate the development of fullstack projects such as `Websites` and `Admin-Dashboards`
+This suite `zova-suite-cabloy-start` uses the `VuetifyJS` UI library and provides a set of out-of-the-box frontend modules to accelerate the development of fullstack projects such as `Websites` and `Admin-Dashboards`
 
 ## Module List
 
