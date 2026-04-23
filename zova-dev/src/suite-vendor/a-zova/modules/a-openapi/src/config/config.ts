@@ -21,6 +21,7 @@ export const config = (_sys: ZovaSys) => {
             text: 'input',
             password: 'input',
             currency: 'a-currency:formFieldCurrency',
+            date: 'a-date:formFieldDate',
           },
           behaviors: {},
         },

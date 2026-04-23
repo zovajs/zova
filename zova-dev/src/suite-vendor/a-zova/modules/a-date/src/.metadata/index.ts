@@ -1,4 +1,46 @@
 // eslint-disable
+/** controller: begin */
+export * from '../component/formFieldDate/controller.jsx';
+
+import 'zova';
+declare module 'zova' {
+  
+  
+}
+declare module 'zova-module-a-date' {
+  
+        export interface ControllerFormFieldDate {
+          /** @internal */
+          get scope(): ScopeModuleADate;
+        } 
+}
+/** controller: end */
+/** controller: begin */
+import { ControllerFormFieldDate } from '../component/formFieldDate/controller.jsx';
+import 'zova';
+declare module 'zova' {
+  export interface IBeanRecordLocal {
+    'a-date.controller.formFieldDate': ControllerFormFieldDate;
+  }
+}
+/** controller: end */
+
+/** components: begin */
+export * from './component/formFieldDate.js';
+import { ZFormFieldDate } from './component/formFieldDate.js';
+export const components = {
+  'formFieldDate': ZFormFieldDate,
+};
+import 'zova';
+declare module 'zova' {
+export interface IComponentRecord {
+  'a-date:formFieldDate': ControllerFormFieldDate;
+}
+export interface IZovaComponentRecord {
+  'a-date:formFieldDate': typeof ZFormFieldDate;
+}
+}
+/** components: end */
 /** tableCell: begin */
 export * from '../bean/tableCell.date.jsx';
 import { ITableCellOptionsDate } from '../bean/tableCell.date.jsx';

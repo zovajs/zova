@@ -1,7 +1,8 @@
-import { DateTime } from 'luxon';
 import { BeanBase } from 'zova';
 import { TypeDateFormat } from 'zova-module-a-openapi';
 import { IDecoratorTableCellOptions, IJsxRenderContextTableCell, ITableCellRender, NextTableCellRender, TableCell } from 'zova-module-a-table';
+
+import { dateFormatUtil } from '../lib/utils.js';
 
 export interface ITableCellOptionsDate extends IDecoratorTableCellOptions {
   dateFormat?: TypeDateFormat;
@@ -13,15 +14,6 @@ export interface ITableCellOptionsDate extends IDecoratorTableCellOptions {
 export class TableCellDate extends BeanBase implements ITableCellRender {
   render(options: ITableCellOptionsDate, _renderContext: IJsxRenderContextTableCell, next: NextTableCellRender) {
     const value = next();
-    if (!value) return;
-    const dateFormat = options.dateFormat;
-    if (!dateFormat) return value;
-    const datetime = DateTime.fromJSDate(value);
-    if (typeof dateFormat === 'string') {
-      return datetime.toFormat(dateFormat);
-    } else if (typeof dateFormat === 'object' && dateFormat.preset) {
-      return datetime.toLocaleString(DateTime[dateFormat.preset]);
-    }
-    return value;
+    return dateFormatUtil(value, options.dateFormat);
   }
 }
