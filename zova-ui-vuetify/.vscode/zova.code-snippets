@@ -112,6 +112,17 @@
     ],
     "description": "aop.actionsync"
   },
+  "aop.actionrender": {
+    "scope": "typescript,typescriptreact",
+    "prefix": "aopactionrender",
+    "body": [
+      "protected render: AopActionRender<ClassSome> = (_args, next, _receiver) => {",
+      "  const value = next();",
+      "  return value;",
+      "}"
+    ],
+    "description": "aop.actionrender"
+  },
   "aopmethod.get": {
     "scope": "typescript,typescriptreact",
     "prefix": "aopmethodget",
