@@ -8,7 +8,7 @@ export const en = defineConfig({
     nav: [
       { text: 'Home', link: '/' },
       { text: 'Docs', link: '/guide/start/introduction', activeMatch: '/guide/' },
-      { text: 'Cabloy', link: '/cabloy/introduction', activeMatch: '/cabloy/' },
+      { text: 'CabloyJS', link: '/cabloy/introduction', activeMatch: '/cabloy/' },
       { text: 'Basic', link: '/cabloy-basic/introduction', activeMatch: '/cabloy-basic/' },
       { text: 'Start', link: '/cabloy-start/introduction', activeMatch: '/cabloy-start/' },
       { text: 'Store', link: 'https://cabloy.com', target: '_self' },

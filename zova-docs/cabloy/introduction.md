@@ -2,7 +2,7 @@
 
 CabloyJS is not a standalone framework, but rather provides a set of out-of-the-box advanced feature modules in the form of `Vona/Zova suites` to accelerate fullstack project development
 
-## 2. Zova Suite: zova-suite-a-cabloy (MIT)
+## 1. Zova Suite: zova-suite-a-cabloy (MIT)
 
 This suite includes the following modules:
 
@@ -11,16 +11,15 @@ This suite includes the following modules:
 | rest-actions  | Actions for Zova JSX. Includes: alert/confirm/copy/create/delete/edit/setValue/view                                                                        |
 | rest-resource | Universal component supporting CRUD rendering. Includes: list page, entry page, providing best practices for `Tanstack Table/Tanstack Form/Tanstack Query` |
 
-## 3. Project Templates
+## 2. Zova Suite: zova-suite-cabloy-basic (MIT)
 
-CabloyJS provides two project templates for different UI libraries
+该套件采用 Daisyui + Tailwindcss，提供了一组开箱即用的前端模块，加速开发`Admin中后台`全栈系统。
 
-| Template Name                                   | UI Library            | Description                                             | Demo                                                                       |
-| ----------------------------------------------- | --------------------- | ------------------------------------------------------- | -------------------------------------------------------------------------- |
-| [cabloy-basic](../cabloy-basic/introduction.md) | Daisyui + Tailwindcss | Provides out-of-the-box `Admin-Dashboard`               |                                                                            |
-| [cabloy-start](../cabloy-start/introduction.md) | VuetifyJS             | Provides out-of-the-box `Website` and `Admin-Dashboard` | [Website](https://cabloy.com), [Admin-Dashboard](https://cabloy.com/admin) |
+## 3. Zova Suite：zova-suite-cabloy-start
 
-## Template Comparison
+该套件采用 VuetifyJS UI 库，提供了一组开箱即用的前端模块，加速开发`Web网站`和`Admin中后台`等全栈系统。
+
+## Suite Comparison
 
 |                                                                  | cabloy-basic                                                                                     | cabloy-start                                            |
 | ---------------------------------------------------------------- | ------------------------------------------------------------------------------------------------ | ------------------------------------------------------- |

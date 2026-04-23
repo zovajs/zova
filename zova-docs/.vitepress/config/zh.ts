@@ -8,7 +8,7 @@ export const zh = defineConfig({
     nav: [
       { text: '首页', link: '/' },
       { text: '文档', link: '/zh/guide/start/introduction', activeMatch: '/zh/guide/' },
-      { text: 'Cabloy', link: '/zh/cabloy/introduction', activeMatch: '/zh/cabloy/' },
+      { text: 'CabloyJS', link: '/zh/cabloy/introduction', activeMatch: '/zh/cabloy/' },
       { text: 'Basic', link: '/zh/cabloy-basic/introduction', activeMatch: '/zh/cabloy-basic/' },
       { text: 'Start', link: '/zh/cabloy-start/introduction', activeMatch: '/zh/cabloy-start/' },
       { text: 'Store', link: 'https://cabloy.com', target: '_self' },
