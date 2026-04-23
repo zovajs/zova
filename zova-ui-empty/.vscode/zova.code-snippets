@@ -117,8 +117,8 @@
     "prefix": "aopactionrender",
     "body": [
       "protected render: AopActionRender<ClassSome> = (_args, next, _receiver) => {",
-      "  const value = next();",
-      "  return value;",
+      "  const result = next();",
+      "  return result;",
       "}"
     ],
     "description": "aop.actionrender"
