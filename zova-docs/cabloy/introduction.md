@@ -48,7 +48,7 @@ In 2023, after thorough evaluation and verification, CabloyJS V5 underwent a com
 
 ### 3. 2026: V5 Release
 
-On 2026-04-13, ZovaJS V5 and VonaJS V5 were officially released. CabloyJS V5, building on the new underlying frameworks, continues to provide more advanced capabilities, further enhancing development experience and efficiency, practicing the vision and mission of being a "textbook-like framework"
+On 2026-04-13, ZovaJS V5 and VonaJS V5 were officially released. CabloyJS V5, building on the new underlying frameworks, continues to provide more advanced capabilities, further enhancing development experience and efficiency, practicing the vision and mission of being a `textbook-like framework`
 
 ## License
 
