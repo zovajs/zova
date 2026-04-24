@@ -1,6 +1,6 @@
 # I18n
 
-Modules can individually provide their own `I18n` language resources
+Modules can individually provide their own `I18n` language resources.
 
 ## Initialize code skeleton
 
@@ -38,7 +38,7 @@ export default {
 
 ## Use language resources
 
-The `I18n` language resources of the module can be obtained through the `locale` object of the `Scope` instance
+The `I18n` language resources of the module can be obtained through the `locale` object of the `Scope` instance.
 
 ```diff
 class ControllerTest {
@@ -71,7 +71,7 @@ class ControllerOther {
 
 ## Override language resources
 
-You can use `project-level` language resources to override `module-level` language resources
+You can use `project-level` language resources to override `module-level` language resources.
 
 English: `src/front/config/locale/en-us.ts`
 

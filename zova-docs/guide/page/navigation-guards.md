@@ -1,10 +1,10 @@
 # Navigation Guards
 
-Zova provides a module `home-base`, in which `navigation guards` can be added, such as checking the user's authentication status, redirecting to the Login page, and so on
+Zova provides a module `home-base`, in which `navigation guards` can be added, such as checking the user's authentication status, redirecting to the Login page, and so on.
 
 ## onRouterGuards
 
-The module `home-base` provides a Service bean `ServiceRouterGuards`, and you can directly add custom logic in the `onRouterGuards` method
+The module `home-base` provides a Service bean `ServiceRouterGuards`, and you can directly add custom logic in the `onRouterGuards` method.
 
 `src/suite/a-home/modules/home-base/src/service/routerGuards.ts`
 

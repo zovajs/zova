@@ -1,6 +1,6 @@
 # Page Query
 
-Zova enhances page `Query` and provides Typescript typing support
+Zova enhances page `Query` and provides Typescript typing support.
 
 ## Add Query code skeleton
 
@@ -20,7 +20,7 @@ Context Menu - [Module Path/src/page/pageName]: `Zova Refactor/Add Page Query`
 
 ## Add Zod Schema
 
-Add fields schema
+Add fields schema.
 
 ```diff
 export const ControllerPageCounterSchemaQuery = z.object({
@@ -31,7 +31,7 @@ export const ControllerPageCounterSchemaQuery = z.object({
 
 ## Use Query
 
-Zova injects a `$query` object into the base class of the `controller` bean so that the `Query` parameter can be obtained through `this.$query`, and type hints are supported
+Zova injects a `$query` object into the base class of the `controller` bean so that the `Query` parameter can be obtained through `this.$query`, and type hints are supported.
 
 ```diff
 class ControllerPageCounter {
@@ -48,7 +48,7 @@ class ControllerPageCounter {
 
 ## Pass in Query
 
-When invoking the page navigation method, you can also pass Query parameters, and type hints are supported
+When invoking the page navigation method, you can also pass Query parameters, and type hints are supported.
 
 ```diff
 class ControllerPageCounter {

@@ -1,6 +1,6 @@
 # 多维变量
 
-Zova 基于`多维变量`加载 Env 环境变量和 Config 配置，从而提供更加灵活的配置机制，支持更复杂的业务场景
+Zova 基于`多维变量`加载 Env 环境变量和 Config 配置，从而提供更加灵活的配置机制，支持更复杂的业务场景。
 
 Zova 中的`多维变量`包含三个维度：`运行环境`、`应用模式`、`Flavor`
 
@@ -15,7 +15,7 @@ Zova 提供了两个运行环境：
 
 ### 1. 启用运行环境
 
-通过执行不同的命令启用相应的运行环境
+通过执行不同的命令启用相应的运行环境。
 
 ```bash
 # development
@@ -29,7 +29,7 @@ $ npm run preview
 
 - 通过 Env 来判断
 
-使用 Env 来判断当前运行环境，可以支持 build 时的 tree-shaking 能力
+使用 Env 来判断当前运行环境，可以支持 build 时的 tree-shaking 能力。
 
 ```typescript
 process.env.META_MODE === 'development';
@@ -61,7 +61,7 @@ Zova 目前提供了两个应用模式，后续会逐步增加更多：
 
 ### 1. 启用应用模式
 
-通过执行不同的命令启用相应的应用模式
+通过执行不同的命令启用相应的应用模式。
 
 ```bash
 # ssr
@@ -74,7 +74,7 @@ $ npm run dev:spa
 
 - 通过 Env 来判断
 
-使用 Env 来判断当前运行环境，可以支持 build 时的 tree-shaking 能力
+使用 Env 来判断当前运行环境，可以支持 build 时的 tree-shaking 能力。
 
 ```typescript
 process.env.META_APP_MODE === 'ssr';
@@ -96,7 +96,7 @@ sys.config.meta.appMode === 'spa';
 
 ## Flavor
 
-面对更复杂的业务场景，往往需要提供更多场景的配置能力。那么，Zova 专门提供了 Flavor 机制。通过`运行环境`、`应用模式`和`Flavor`的组合，使我们可以非常方便的定义各种场景的配置信息
+面对更复杂的业务场景，往往需要提供更多场景的配置能力。那么，Zova 专门提供了 Flavor 机制。通过`运行环境`、`应用模式`和`Flavor`的组合，使我们可以非常方便的定义各种场景的配置信息。
 
 ### 1. 内置Flavor
 
@@ -112,7 +112,7 @@ sys.config.meta.appMode === 'spa';
 
 ### 2. 启用Flavor
 
-通过传递命令参数启用相应的 Flavor
+通过传递命令参数启用相应的 Flavor。
 
 ```json
 "scripts": {
@@ -125,7 +125,7 @@ sys.config.meta.appMode === 'spa';
 
 - 通过 Env 来判断
 
-使用 Env 来判断当前 Flavor，可以支持 build 时的 tree-shaking 能力
+使用 Env 来判断当前 Flavor，可以支持 build 时的 tree-shaking 能力。
 
 ```typescript
 process.env.META_FLAVOR === 'admin';
@@ -141,9 +141,9 @@ sys.config.meta.flavor === 'web';
 
 ### 4. 新建Flavor
 
-可以基于任何业务需求来新建 Flavor，比如客户、项目、组织等等
+可以基于任何业务需求来新建 Flavor，比如客户、项目、组织等等。
 
-比如，为顾客 A 分配一个 Flavor: `customA`，从而为顾客 A 提供独立的 Env/Config 配置
+比如，为顾客 A 分配一个 Flavor: `customA`，从而为顾客 A 提供独立的 Env/Config 配置。
 
 - 添加 npm scripts
 
@@ -165,9 +165,9 @@ sys.config.meta.flavor === 'customA';
 
 ### 5. 添加Flavor类型定义
 
-可以添加 Flavor 类型定义，让判断 Flavor 的代码有类型提示
+可以添加 Flavor 类型定义，让判断 Flavor 的代码有类型提示。
 
-在 VSCode 编辑器中，输入代码片段`recordflavor`，自动生成代码骨架，然后添加自定义的 Flavor 类型定义
+在 VSCode 编辑器中，输入代码片段`recordflavor`，自动生成代码骨架，然后添加自定义的 Flavor 类型定义。
 
 ```diff
 declare module '@cabloy/module-info' {

@@ -1,6 +1,6 @@
 # Error Exception
 
-Modules can individually provide their own `Error` exceptions
+Modules can individually provide their own `Error` exceptions.
 
 ## Initialize code skeleton
 
@@ -30,7 +30,7 @@ export const errors = {
 } as const;
 ```
 
-Convention: Error Code > 1000
+Convention: Error Code > 1000.
 
 ### 2. Define Error language resources
 
@@ -52,7 +52,7 @@ export default {
 
 ## Use Error
 
-You can directly throw the module's `Error` exception through the `Scope` instance
+You can directly throw the module's `Error` exception through the `Scope` instance.
 
 ```diff
 class ControllerTest {

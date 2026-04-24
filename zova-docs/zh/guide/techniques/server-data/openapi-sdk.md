@@ -1,12 +1,12 @@
 # Openapi SDK
 
-Zova 采用[openapi-typescript](https://github.com/openapi-ts/openapi-typescript)基于 Swagger/Openapi 元数据，自动生成前端的 Client SDK，提供顺畅的 Typescript 开发体验
+Zova 采用[openapi-typescript](https://github.com/openapi-ts/openapi-typescript)基于 Swagger/Openapi 元数据，自动生成前端的 Client SDK，提供顺畅的 Typescript 开发体验。
 
-Zova 采用模块化体系，因此可以根据业务需求将后端提供的 Swagger/Openapi 元数据拆分成多个部分，在不同的模块中独立管理
+Zova 采用模块化体系，因此可以根据业务需求将后端提供的 Swagger/Openapi 元数据拆分成多个部分，在不同的模块中独立管理。
 
 ## 初始化Openapi配置
 
-首先，在模块 demo-student 中初始化 Openapi 配置
+首先，在模块 demo-student 中初始化 Openapi 配置。
 
 ### 1. Cli命令
 
@@ -36,11 +36,11 @@ export default function (): ZovaOpenapiConfigModule {
 }
 ```
 
-在`operations.match`中指定需要在当前模块中管理的 API，可以使用正则表达式指定一组 API
+在`operations.match`中指定需要在当前模块中管理的 API，可以使用正则表达式指定一组 API。
 
 ### 2. 项目配置
 
-系统会自动在项目目录创建文件`openapi.config.ts`，可以指定 Swagger/Openapi 的下载源
+系统会自动在项目目录创建文件`openapi.config.ts`，可以指定 Swagger/Openapi 的下载源。
 
 `openapi.config.ts`
 
@@ -57,7 +57,7 @@ export default function (): ZovaOpenapiConfig {
 
 ## 生成Openapi SDK
 
-现在就可以自动下载 Swagger/Openapi，然后在模块 demo-student 中生成指定的 API 服务
+现在就可以自动下载 Swagger/Openapi，然后在模块 demo-student 中生成指定的 API 服务。
 
 ### 1. Cli命令
 

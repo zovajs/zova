@@ -1,10 +1,10 @@
 # 组件Props
 
-Zova 中的组件不再区分`Props`、`Emits` 和 `Slots`，而是只需提供`Props`，从而提供更加一致、简洁的编程范式，而且对 Typescript 编程更加友好
+Zova 中的组件不再区分`Props`、`Emits` 和 `Slots`，而是只需提供`Props`，从而提供更加一致、简洁的编程范式，而且对 Typescript 编程更加友好。
 
 ## 添加Props代码骨架
 
-为组件`card`添加 Props 代码骨架
+为组件`card`添加 Props 代码骨架。
 
 ### 1. Cli命令
 
@@ -45,7 +45,7 @@ class ControllerCard {
 
 ### 使用Props
 
-Zova 在`controller` bean 的基类中注入了`$props`对象，从而可以直接通过`this.$props`获取 props，并且支持类型提示
+Zova 在`controller` bean 的基类中注入了`$props`对象，从而可以直接通过`this.$props`获取 props，并且支持类型提示。
 
 ```diff
 class ControllerCard {
@@ -70,7 +70,7 @@ class ControllerCard {
 
 ### 传入Props
 
-在向子组件传入 Props 时，也支持类型提示
+在向子组件传入 Props 时，也支持类型提示。
 
 ```diff
 import { ZCard } from 'zova-module-demo-student';

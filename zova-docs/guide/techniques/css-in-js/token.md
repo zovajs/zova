@@ -1,10 +1,10 @@
 # $token
 
-`Token` is the most basic unit for building styles. Zova provides a token definition and usage mechanism that is independent of UI libraries
+`Token` is the most basic unit for building styles. Zova provides a token definition and usage mechanism that is independent of UI libraries.
 
 ## Define token interface type
 
-First, you need to define a token interface type, which is the basis for all subsequent work and only needs to be defined once. Different UI libraries have their own style implementations, so different token interface types need to be customized for each UI library
+First, you need to define a token interface type, which is the basis for all subsequent work and only needs to be defined once. Different UI libraries have their own style implementations, so different token interface types need to be customized for each UI library.
 
 The following is the token interface type definition used by Zova when developing and testing:
 
@@ -41,7 +41,7 @@ In Zova, specific token values ​​are provided by different themes, see: [$th
 
 ## Use token
 
-Zova injects a `$token` object into the `BeanBase` base class so that token data can be directly accessed through `this.$token` in any bean instance
+Zova injects a `$token` object into the `BeanBase` base class so that token data can be directly accessed through `this.$token` in any bean instance.
 
 ```typescript
 export class RenderTest extends BeanRenderBase {

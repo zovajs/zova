@@ -2,7 +2,7 @@
 
 ## Cli Update
 
-Cli provides a large number of command line tools for creating various source file skeletons. It is recommended to keep them updated
+Cli provides a large number of command line tools for creating various source file skeletons. It is recommended to keep them updated.
 
 ```bash
 $ pnpm add -g zova-cli@latest

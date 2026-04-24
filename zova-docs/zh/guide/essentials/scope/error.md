@@ -1,6 +1,6 @@
 # Error错误异常
 
-模块可以单独提供自己的 Error 错误异常
+模块可以单独提供自己的 Error 错误异常。
 
 ## 初始化代码骨架
 
@@ -30,7 +30,7 @@ export const errors = {
 } as const;
 ```
 
-约定：错误码 > 1000
+约定：错误码 > 1000。
 
 ### 2. 定义Error语言资源
 
@@ -52,7 +52,7 @@ export default {
 
 ## 使用Error
 
-可以通过 Scope 实例直接抛出模块的 Error 错误异常
+可以通过 Scope 实例直接抛出模块的 Error 错误异常。
 
 ```diff
 class ControllerTest {

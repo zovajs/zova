@@ -62,7 +62,7 @@ If the module needs to provide global dependencies, you need to configure `zovaM
 }
 ```
 
-Since the module a-zova declares `luxon` and `zova-jsx` as global dependencies, the system will put these dependencies into the project's `packages.json`, so that all other modules can directly import and use these modules
+Since the module a-zova declares `luxon` and `zova-jsx` as global dependencies, the system will put these dependencies into the project's `packages.json`, so that all other modules can directly import and use these modules.
 
 ## zovaModule.globalDependenciesDev
 
@@ -79,4 +79,4 @@ If the module needs to provide global dev dependencies, you need to configure `z
 }
 ```
 
-Since the module a-zova declares `@types/luxon` as global dev dependencies, the system will put these dependencies into the project's `packages.json`, so that all other modules can directly import and use these modules
+Since the module a-zova declares `@types/luxon` as global dev dependencies, the system will put these dependencies into the project's `packages.json`, so that all other modules can directly import and use these modules.

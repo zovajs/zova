@@ -1,6 +1,6 @@
 # Async Data
 
-The core of TanStack Query is to manage server-side data. Below, we demonstrate how to implement CRUD functionality in Model
+The core of TanStack Query is to manage server-side data. Below, we demonstrate how to implement CRUD functionality in Model.
 
 - For complete code examples, please see: [demo-todo](https://github.com/zovajs/zova/blob/main/zova-dev/src/suite/a-demo/modules/demo-todo/src/bean/model.todo.ts)
 
@@ -70,7 +70,7 @@ export class RenderTodo {
 
 ### How to support SSR
 
-In SSR mode, we need to use asynchronous data like this: load the state data on the server, and then render it into an HTML string through the render method. The state data and HTML string will be sent to the client at the same time, and the client will still use the same state data when hydrating so as to maintain state consistency
+In SSR mode, we need to use asynchronous data like this: load the state data on the server, and then render it into an HTML string through the render method. The state data and HTML string will be sent to the client at the same time, and the client will still use the same state data when hydrating so as to maintain state consistency.
 
 To implement the above logic, only one step is required in Zova Model:
 

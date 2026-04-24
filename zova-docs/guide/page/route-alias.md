@@ -1,6 +1,6 @@
 # Route Alias
 
-Before explaining route alias, let's first explain the basic process of page navigation and loading
+Before explaining route alias, let's first explain the basic process of page navigation and loading.
 
 ## Page Navigation and Loading
 
@@ -14,17 +14,17 @@ Take the page `counter` in module `demo-student` as an example:
 
 ## Home Page Navigation and Loading
 
-Zova uses a modular system, and all business logic is implemented within modules. The home page is no exception. Module `home-index` provides a page with the path `/home/index`. When a user visits `/home/index`, the home page can be rendered
+Zova uses a modular system, and all business logic is implemented within modules. The home page is no exception. Module `home-index` provides a page with the path `/home/index`. When a user visits `/home/index`, the home page can be rendered.
 
 Obviously, users expect the home page path to be `/`. So, how can this be achieved?
 
 ## Route Alias
 
-You can assign aliases to routes. When a user visits `/`, the system finds the real path `home/index` based on the route alias, then loads module `home-index`, and renders the specified page component
+You can assign aliases to routes. When a user visits `/`, the system finds the real path `home/index` based on the route alias, then loads module `home-index`, and renders the specified page component.
 
 ## Global Config
 
-Clearly, we cannot specify route aliases in the module's route records; they must be specified in the global Config
+Clearly, we cannot specify route aliases in the module's route records; they must be specified in the global Config.
 
 `src/front/config/config/config.ts`
 

@@ -1,10 +1,10 @@
 # SEO Meta
 
-通过 SEO Meta 可以动态修改页面`title`，管理`<meta>`标签，管理`<html>`和`<body>`DOM 元素属性，添加/删除/修改`<style>`和`<script>`标签，以及管理`<noscript>`标签
+通过 SEO Meta 可以动态修改页面`title`，管理`<meta>`标签，管理`<html>`和`<body>`DOM 元素属性，添加/删除/修改`<style>`和`<script>`标签，以及管理`<noscript>`标签。
 
 ## $useMeta
 
-Zova 在`BeanBase`基类中提供了`$useMeta`方法，可以提供 SEO Meta 数据
+Zova 在`BeanBase`基类中提供了`$useMeta`方法，可以提供 SEO Meta 数据。
 
 `zova-dev/packages-zova/zova-core/src/bean/beanBase.ts`
 

@@ -2,7 +2,7 @@
 
 ## Template Ref {#template-ref}
 
-If it is an Html Element or a regular Vue component (without using an ioc container), you can use `Template Ref` to reference the component instance
+If it is an Html Element or a regular Vue component (without using an ioc container), you can use `Template Ref` to reference the component instance.
 
 ### 1. Html Element
 
@@ -80,7 +80,7 @@ export class RenderComponent {
 
 ## Controller Ref {#controller-ref}
 
-For Vue components that use the ioc container, you cannot use `Template Ref`, but directly reference the `controller bean` instance corresponding to the Vue component
+For Vue components that use the ioc container, you cannot use `Template Ref`, but directly reference the `controller bean` instance corresponding to the Vue component.
 
 ### 1. Declare variable
 

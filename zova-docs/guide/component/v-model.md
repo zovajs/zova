@@ -1,6 +1,6 @@
 # v-model
 
-It is very convenient to add `v-model` to a component
+It is very convenient to add `v-model` to a component.
 
 ## Basic Usage
 
@@ -43,11 +43,11 @@ class ControllerCard {
 }
 ```
 
-`this.modelValue` enables bidirectional binding to the parent component. Modifying the value of `this.modelValue` triggers the synchronization update of the values bound by the parent component
+`this.modelValue` enables bidirectional binding to the parent component. Modifying the value of `this.modelValue` triggers the synchronization update of the values bound by the parent component.
 
 ### Pass in v-model
 
-Type hints are also supported when passing v-model into child components
+Type hints are also supported when passing v-model into child components.
 
 ```diff
 class ControllerOther {
@@ -65,11 +65,11 @@ class ControllerOther {
 
 ## v-model parameter
 
-`modelValue` is the default model parameter, and other model parameters can also be specified
+`modelValue` is the default model parameter, and other model parameters can also be specified.
 
 ### Initialize the code skeleton
 
-Add v-model `title` to component card
+Add v-model `title` to component card.
 
 - Cli command
 
@@ -108,7 +108,7 @@ class ControllerCard {
 
 ### Pass in v-model
 
-Type hints are also supported when passing v-model into child components
+Type hints are also supported when passing v-model into child components.
 
 ```diff
 class ControllerOther {
@@ -162,7 +162,7 @@ class ControllerCard {
 
 ### Pass in v-model
 
-Type hints are also supported when passing v-model into child components
+Type hints are also supported when passing v-model into child components.
 
 ```diff
 class ControllerOther {

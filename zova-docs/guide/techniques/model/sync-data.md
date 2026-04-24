@@ -1,8 +1,8 @@
 # Sync Data
 
-Zova uses TanStack Query's data management mechanism to manage synchronous data, making it easier for us to write and read synchronous data in cookies and localstorage, and also to directly manage memory-based state data
+Zova uses TanStack Query's data management mechanism to manage synchronous data, making it easier for us to write and read synchronous data in cookies and localstorage, and also to directly manage memory-based state data.
 
-Below, we demonstrate how to manage user data in Model
+Below, we demonstrate how to manage user data in Model.
 
 - For complete code examples, see:
   - [home-user](https://github.com/zovajs/zova/blob/main/zova-dev/src/suite/a-home/modules/home-user/src/bean/model.user.ts)
@@ -31,9 +31,9 @@ export class ModelUser extends BeanModelBase {}
 
 ## localstorage
 
-Since the server does not support `window.localStorage`, the localstorage state data does not participate in the SSR hydration process
+Since the server does not support `window.localStorage`, the localstorage state data does not participate in the SSR hydration process.
 
-The following demonstrates storing user information in localstorage, and the state will be retained when the page is refreshed
+The following demonstrates storing user information in localstorage, and the state will be retained when the page is refreshed.
 
 ### How to define
 
@@ -55,7 +55,7 @@ export class ModelUser extends BeanModelBase {
 
 ### How to use
 
-Read and set data directly like regular variables
+Read and set data directly like regular variables.
 
 ```typescript
 const user = this.user;
@@ -64,9 +64,9 @@ this.user = newUser;
 
 ## cookie
 
-Cookies in `Request Header` are automatically used on the server side, and `document.cookie` is automatically used on the client side, thus automatically ensuring the consistency of cookie state data during SSR hydration
+Cookies in `Request Header` are automatically used on the server side, and `document.cookie` is automatically used on the client side, thus automatically ensuring the consistency of cookie state data during SSR hydration.
 
-The following demonstrates storing the user Token in a cookie, and the state will be retained when the page is refreshed. Thus, in SSR mode, both the client and the server can use the same `jwt token` to access the backend API services
+The following demonstrates storing the user Token in a cookie, and the state will be retained when the page is refreshed. Thus, in SSR mode, both the client and the server can use the same `jwt token` to access the backend API services.
 
 ### How to define
 
@@ -88,7 +88,7 @@ export class ModelUser extends BeanModelBase {
 
 ### How to use
 
-Read and set data directly like regular variables
+Read and set data directly like regular variables.
 
 ```typescript
 const token = this.token;
@@ -97,9 +97,9 @@ this.token = newToken;
 
 ## memory
 
-In SSR mode, the global state data defined by the server will be synchronized to the client and automatically complete the hydration
+In SSR mode, the global state data defined by the server will be synchronized to the client and automatically complete the hydration.
 
-The following demonstrates the memory-based global state data
+The following demonstrates the memory-based global state data.
 
 ### How to define
 
@@ -123,7 +123,7 @@ export class ModelTheme extends BeanModelBase {
 
 ### How to use
 
-Read and set data directly like regular variables
+Read and set data directly like regular variables.
 
 ```typescript
 const cBrand = this.cBrand;

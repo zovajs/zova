@@ -1,6 +1,6 @@
 # Cli Commands
 
-Zova provides a large number of Cli commands for generating code skeletons for various resources
+Zova provides a large number of Cli commands for generating code skeletons for various resources.
 
 ## Example
 
@@ -12,7 +12,7 @@ $ zova :create:component test --module=demo-student
 
 ## Command usage
 
-Zova's Cli commands have a unified format. As long as we master the ideas of running the following commands, we can easily use all commands
+Zova's Cli commands have a unified format. As long as we master the ideas of running the following commands, we can easily use all commands.
 
 1. List all commands
 

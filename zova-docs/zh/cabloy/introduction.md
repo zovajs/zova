@@ -1,6 +1,6 @@
 # CabloyJS
 
-CabloyJS 不是独立的框架，而是基于`Vona/Zova套件`的形式提供一组开箱即用的高级功能模块，加速全栈项目的开发
+CabloyJS 不是独立的框架，而是基于`Vona/Zova套件`的形式提供一组开箱即用的高级功能模块，加速全栈项目的开发。
 
 ## 1. Zova套件: zova-suite-a-cabloy (MIT)
 
@@ -34,7 +34,7 @@ CabloyJS 不是独立的框架，而是基于`Vona/Zova套件`的形式提供一
 
 ### 1. 2016年：V1-V4
 
-2016 年启动 CabloyJS 开发。CabloyJS 最初是基于 JavaScript 的全栈 NodeJS 框架，经过 V1、V2、V3、V4 等大版本的演进，不断完善架构
+2016 年启动 CabloyJS 开发。CabloyJS 最初是基于 JavaScript 的全栈 NodeJS 框架，经过 V1、V2、V3、V4 等大版本的演进，不断完善架构。
 
 - 有网友评价：`CabloyJS 是教科书式的框架`
 - 也有建议：`如果 CabloyJS 支持 TypeScript，采用前后端分离架构，就可以带来全新的全栈开发体验`
@@ -48,10 +48,10 @@ CabloyJS 不是独立的框架，而是基于`Vona/Zova套件`的形式提供一
 
 ### 3. 2026年：V5发布
 
-2026-04-13，ZovaJS V5 和 VonaJS V5 正式发布。CabloyJS V5 在全新底层框架之上，不断提供更多高级能力，进一步提升开发体验和效率，践行`教科书式框架`的愿景和使命
+2026-04-13，ZovaJS V5 和 VonaJS V5 正式发布。CabloyJS V5 在全新底层框架之上，不断提供更多高级能力，进一步提升开发体验和效率，践行`教科书式框架`的愿景和使命。
 
 ## License
 
-MIT License
+MIT License.
 
-Copyright (c) 2016-present, Vona/Zova/Cabloy
+Copyright (c) 2016-present, Vona/Zova/Cabloy.

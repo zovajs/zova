@@ -2,7 +2,7 @@
 
 ## @Use
 
-Inject Bean instance through `@Use` decorator function
+Inject Bean instance through `@Use` decorator function.
 
 ```typescript
 export declare function Use(options?: IDecoratorUseOptions): PropertyDecorator;
@@ -37,12 +37,12 @@ export interface IDecoratorUseOptions {
 
 ## @UseScope
 
-Inject the module's Scope object through the `@UseScope` decorator function
+Inject the module's Scope object through the `@UseScope` decorator function.
 
 - see: [Module Scope](../scope/introduction.md)
 
 ## @UseComposable
 
-Inject the Vue Composables through the `@UseComposable` decorator function
+Inject the Vue Composables through the `@UseComposable` decorator function.
 
 - see: [Composables](../../vue/composables.md)

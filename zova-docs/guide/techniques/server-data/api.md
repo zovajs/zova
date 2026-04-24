@@ -4,7 +4,7 @@ Zova provides business-oriented API services based on `$fetch`
 
 ## Creating an API
 
-Create an API service `menu` in the `demo-student` module to encapsulate API calls for retrieving menus
+Create an API service `menu` in the `demo-student` module to encapsulate API calls for retrieving menus.
 
 ### 1. CLI Command
 
@@ -18,7 +18,7 @@ $ zova :create:bean api menu --module=demo-student
 Context Menu - [Module Path]: `Zova Create/Api`
 :::
 
-Enter the API name `menu` as prompted, and the VSCode plugin will automatically add the API code skeleton
+Enter the API name `menu` as prompted, and the VSCode plugin will automatically add the API code skeleton.
 
 ## API Definition
 
@@ -40,7 +40,7 @@ export class ApiMenu extends BeanApiBase {
 
 ## Using API
 
-You can access the API directly through a Scope instance
+You can access the API directly through a Scope instance.
 
 ```diff
 class ControllerTest {

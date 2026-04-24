@@ -1,10 +1,10 @@
 # Menu Commands
 
-Zova provides a large number of menu commands based on Cli commands. Cli commands can be executed through menus, which significantly reduces the mental burden and improves the development experience
+Zova provides a large number of menu commands based on Cli commands. Cli commands can be executed through menus, which significantly reduces the mental burden and improves the development experience.
 
 ## VS Code Extension: [Zova - Official](https://marketplace.visualstudio.com/items?itemName=cabloy.zova-vscode)
 
-In order to use menu commands, you need to install this extension
+In order to use menu commands, you need to install this extension.
 
 ## Menus
 

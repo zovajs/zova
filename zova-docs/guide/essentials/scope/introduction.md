@@ -1,14 +1,14 @@
 # Module Scope
 
-In Zova, the actual business code development is done in modules. As a relatively independent business unit, the module contains various types of resources: `Config`, `Constant`, `Locale I18n`, `Error exception`, `Api`, etc. In order to uniformly manage these resources and facilitate the definition and use of resources, Zova provides the `Scope` object
+In Zova, the actual business code development is done in modules. As a relatively independent business unit, the module contains various types of resources: `Config`, `Constant`, `Locale I18n`, `Error exception`, `Api`, etc. In order to uniformly manage these resources and facilitate the definition and use of resources, Zova provides the `Scope` object.
 
 ## Why is Zova's IOC container code more concise?
 
-The reason is to prioritize the use of the `dependency lookup` strategy, resulting in fewer decorator functions and fewer type annotations. Accessing module's resources by the `Scope` object is one of the mechanisms for implementing `dependency lookup` strategies
+The reason is to prioritize the use of the `dependency lookup` strategy, resulting in fewer decorator functions and fewer type annotations. Accessing module's resources by the `Scope` object is one of the mechanisms for implementing `dependency lookup` strategies.
 
 ## this.scope: Obtain scope instance of the current module
 
-All beans inherit from the base class `BeanBase`, thus the `Scope` instance of the module to which the current bean belongs can be directly obtained
+All beans inherit from the base class `BeanBase`, thus the `Scope` instance of the module to which the current bean belongs can be directly obtained.
 
 ```typescript
 class ControllerTest extends BeanBase {
@@ -35,7 +35,7 @@ class ControllerTest extends BeanBase {
 
 So, how to obtain `Scope` instances of other modules?
 
-The `Scope` object itself is also a bean, so you can directly use `dependency injection` to obtain `Scope` instances of other modules
+The `Scope` object itself is also a bean, so you can directly use `dependency injection` to obtain `Scope` instances of other modules.
 
 ```typescript
 import { UseScope } from 'zova';

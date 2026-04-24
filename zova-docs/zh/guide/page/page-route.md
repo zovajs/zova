@@ -1,6 +1,6 @@
 # 页面路由
 
-在创建页面时，系统会自动创建一条路由记录
+在创建页面时，系统会自动创建一条路由记录。
 
 ```typescript
 import { ZPageCounter } from './.metadata/page/counter.js';
@@ -72,7 +72,7 @@ export const routes: IModuleRoute[] = [
 
 ## alias
 
-可以为路由指定别名。但是不能在模块的路由记录中指定路由别名，而是必须在全局 Config 中指定
+可以为路由指定别名。但是不能在模块的路由记录中指定路由别名，而是必须在全局 Config 中指定。
 
 - 参见：[路由别名](./route-alias.md)
 
@@ -100,10 +100,10 @@ export const routes: IModuleRoute[] = [
 
 ## meta.layout
 
-`layout`可以为该路由指定布局组件，如果不设置`layout`就会使用默认的布局组件
+`layout`可以为该路由指定布局组件，如果不设置`layout`就会使用默认的布局组件。
 
 - 参见：[页面布局](./page-layout.md)
 
 ## meta.requiresAuth
 
-`requiresAuth`标识该路由是否需要认证，可以在`导航守卫`中添加相关的逻辑
+`requiresAuth`标识该路由是否需要认证，可以在`导航守卫`中添加相关的逻辑。

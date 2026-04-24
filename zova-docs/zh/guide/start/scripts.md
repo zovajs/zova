@@ -54,7 +54,7 @@ $ npm run preview:spa
 
 ## Cabloy Basic
 
-`Cabloy Basic`套件采用 Daisyui + Tailwindcss，提供了一组开箱即用的前端模块，加速开发`Admin中后台`全栈系统
+`Cabloy Basic`套件采用 Daisyui + Tailwindcss，提供了一组开箱即用的前端模块，加速开发`Admin中后台`全栈系统。
 
 - 参见：[Cabloy Basic](../../cabloy-basic/introduction.md)
 
@@ -72,7 +72,7 @@ npm run build:rest:cabloyBasicAdmin
 
 ## Cabloy Start
 
-`Cabloy Start`套件采用 VuetifyJS UI 库，提供了一组开箱即用的前端模块，加速开发`Web网站`和`Admin中后台`等全栈系统
+`Cabloy Start`套件采用 VuetifyJS UI 库，提供了一组开箱即用的前端模块，加速开发`Web网站`和`Admin中后台`等全栈系统。
 
 - 参见：[Cabloy Start](../../cabloy-start/introduction.md)
 

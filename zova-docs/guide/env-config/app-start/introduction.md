@@ -1,8 +1,8 @@
 # App Startup Customization
 
-ZovaJS provides a `Hook/Monkey` mechanism that allows deep customization of the system during application startup
+ZovaJS provides a `Hook/Monkey` mechanism that allows deep customization of the system during application startup.
 
-Before explaining the `Hook/Monkey` mechanism, it is necessary to first understand the timing of application startup and shutdown
+Before explaining the `Hook/Monkey` mechanism, it is necessary to first understand the timing of application startup and shutdown.
 
 ## Application Startup Timing
 
@@ -39,7 +39,7 @@ The system provides three scenarios to respond to application startup/shutdown h
 2. `Module Monkey`: Respond to app hooks in the file `{module}/src/monkey.ts`
 3. `App Monkey`: Respond to app hooks in the file `{project}/src/front/config/monkey.ts`
 
-For different scenarios, corresponding interface definitions are provided for different hooks, thereby standardizing the use of hooks
+For different scenarios, corresponding interface definitions are provided for different hooks, thereby standardizing the use of hooks.
 
 | Hook           | Module Main Interface | Module Monkey Interface | App Monkey Interface  |
 | -------------- | --------------------- | ----------------------- | --------------------- |

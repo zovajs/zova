@@ -1,6 +1,6 @@
 # package.json
 
-可以在模块的`package.json`中设置一些元配置
+可以在模块的`package.json`中设置一些元配置。
 
 ## zovaModule.bundle
 
@@ -62,7 +62,7 @@
 }
 ```
 
-由于模块 a-zova 将`luxon`和`zova-jsx`声明为全局依赖，那么系统就会将这些依赖项放入项目的 packages.json 当中，从而所有其他模块都可以直接导入并使用这些模块
+由于模块 a-zova 将`luxon`和`zova-jsx`声明为全局依赖，那么系统就会将这些依赖项放入项目的 packages.json 当中，从而所有其他模块都可以直接导入并使用这些模块。
 
 ## zovaModule.globalDependenciesDev
 
@@ -79,4 +79,4 @@
 }
 ```
 
-由于模块 a-zova 将`@types/luxon`声明为全局开发依赖，那么系统就会将这些依赖项放入项目的 packages.json 当中，从而所有其他模块都可以直接导入并使用这些模块
+由于模块 a-zova 将`@types/luxon`声明为全局开发依赖，那么系统就会将这些依赖项放入项目的 packages.json 当中，从而所有其他模块都可以直接导入并使用这些模块。

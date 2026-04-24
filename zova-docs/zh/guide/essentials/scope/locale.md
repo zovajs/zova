@@ -1,6 +1,6 @@
 # I18n国际化
 
-模块可以单独提供自己的 I18n 语言资源
+模块可以单独提供自己的 I18n 语言资源。
 
 ## 初始化代码骨架
 
@@ -38,7 +38,7 @@ export default {
 
 ## 使用语言资源
 
-可以通过 Scope 实例提供的`locale`对象获取模块的语言资源
+可以通过 Scope 实例提供的`locale`对象获取模块的语言资源。
 
 ```diff
 class ControllerTest {
@@ -71,7 +71,7 @@ class ControllerOther {
 
 ## 覆盖语言资源
 
-可以使用`项目级别`的语言资源覆盖`模块级别`的语言资源
+可以使用`项目级别`的语言资源覆盖`模块级别`的语言资源。
 
 英文：`src/front/config/locale/en-us.ts`
 

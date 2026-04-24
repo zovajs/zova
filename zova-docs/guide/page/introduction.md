@@ -24,7 +24,7 @@ $ zova :create:page counter --module=demo-student
 Context Menu - [Module Path]: `Zova Create/Page`
 :::
 
-Enter the page name `counter` as prompted, and the VSCode plugin will automatically create the code skeleton for the page
+Enter the page name `counter` as prompted, and the VSCode plugin will automatically create the code skeleton for the page.
 
 ## Page Path
 
@@ -75,7 +75,7 @@ class ControllerPageCounter {
 
 ## Adding Style
 
-Zova provides out-of-the-box css-in-js capabilities
+Zova provides out-of-the-box css-in-js capabilities.
 
 ```typescript
 class ControllerPageCounter {

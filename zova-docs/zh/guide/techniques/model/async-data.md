@@ -1,6 +1,6 @@
 # 异步数据
 
-TanStack Query 的核心是对服务端数据进行管理。下面，我们演示如何在 Model 中实现 CRUD 功能
+TanStack Query 的核心是对服务端数据进行管理。下面，我们演示如何在 Model 中实现 CRUD 功能。
 
 - 完整代码示例，请参见：[demo-todo](https://github.com/zovajs/zova/blob/main/zova-dev/src/suite/a-demo/modules/demo-todo/src/bean/model.todo.ts)
 
@@ -70,7 +70,7 @@ export class RenderTodo {
 
 ### 如何支持SSR
 
-在 SSR 模式下，我们需要这样使用异步数据：在服务端加载状态数据，然后通过 render 方法渲染成 html 字符串。状态数据和 html 字符串会同时发送到客户端，客户端在进行水合时仍然使用此相同的状态数据，从而保持状态的一致性
+在 SSR 模式下，我们需要这样使用异步数据：在服务端加载状态数据，然后通过 render 方法渲染成 html 字符串。状态数据和 html 字符串会同时发送到客户端，客户端在进行水合时仍然使用此相同的状态数据，从而保持状态的一致性。
 
 要实现以上逻辑，在 Zova Model 中只需要执行一个步骤：
 

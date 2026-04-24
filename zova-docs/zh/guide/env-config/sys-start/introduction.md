@@ -1,12 +1,12 @@
 # 系统启动自定义
 
-ZovaJS 提供了`Hook/Monkey`机制，可以在系统启动时对系统进行深度的定制
+ZovaJS 提供了`Hook/Monkey`机制，可以在系统启动时对系统进行深度的定制。
 
-在解释`Hook/Monkey`机制之前，有必要先了解系统启动/停止的时序
+在解释`Hook/Monkey`机制之前，有必要先了解系统启动/停止的时序。
 
 ## 🔥与应用启动的区别
 
-在 SSR 场景中，`应用启动`是针对每一个 Request 而言的，`系统启动`则与 Request 无关
+在 SSR 场景中，`应用启动`是针对每一个 Request 而言的，`系统启动`则与 Request 无关。
 
 ## 系统启动时序
 
@@ -39,7 +39,7 @@ ZovaJS 提供了`Hook/Monkey`机制，可以在系统启动时对系统进行深
 2. `Module Monkey`: 在`{module}/src/monkeySys.ts`中响应 Sys 钩子
 3. `Sys Monkey`: 在`{project}/src/front/config/monkeySys.ts`中响应 Sys 钩子
 
-针对不同的场景，为不同的钩子提供了对应的接口定义，从而规范钩子的使用
+针对不同的场景，为不同的钩子提供了对应的接口定义，从而规范钩子的使用。
 
 | 钩子           | Module Main 接口 | Module Monkey 接口    | Sys Monkey 接口       |
 | -------------- | ---------------- | --------------------- | --------------------- |

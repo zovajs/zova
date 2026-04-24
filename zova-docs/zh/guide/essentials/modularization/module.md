@@ -1,6 +1,6 @@
 # 模块
 
-在 Zova 中可以通过模块把页面、组件、配置、语言等资源打包成内聚的功能块，每个模块聚焦于一个特性区域、业务领域、工作流或通用工具
+在 Zova 中可以通过模块把页面、组件、配置、语言等资源打包成内聚的功能块，每个模块聚焦于一个特性区域、业务领域、工作流或通用工具。
 
 ## 为什么要实现模块化体系？
 
@@ -54,4 +54,4 @@ $ zova :create:module moduleName [--suite=]
 右键菜单 - [项目路径/src/suite/suite-name/modules]: `Zova Create/Module`
 :::
 
-依据提示输入模块名称，比如`demo-student`，VSCode 插件会自动创建模块的代码骨架
+依据提示输入模块名称，比如`demo-student`，VSCode 插件会自动创建模块的代码骨架。

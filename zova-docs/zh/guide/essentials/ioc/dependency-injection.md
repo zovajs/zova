@@ -1,6 +1,6 @@
 # 依赖注入
 
-Zova 通过`@Use`装饰器函数注入 Bean 实例
+Zova 通过`@Use`装饰器函数注入 Bean 实例。
 
 ## 解析规则
 
@@ -13,7 +13,7 @@ Zova 提供了以下几种解析规则，用于查找或创建指定的 Bean 实
 
 ### 1. Bean Class
 
-通过`Bean Class`在 ioc 容器中查找并注入 Bean 实例，如果不存在则自动创建
+通过`Bean Class`在 ioc 容器中查找并注入 Bean 实例，如果不存在则自动创建。
 
 ```typescript
 import { ModelTodo } from '../../bean/model.todo.js';
@@ -26,7 +26,7 @@ class ControllerTodo {
 
 ### 2. Bean标识
 
-通过`Bean标识`在 ioc 容器中查找并注入 Bean 实例，如果不存在则自动创建
+通过`Bean标识`在 ioc 容器中查找并注入 Bean 实例，如果不存在则自动创建。
 
 ```typescript
 import type { ModelTabs } from 'zova-module-a-routertabs';
@@ -83,13 +83,13 @@ class ControllerTodo {
 
 ## 注入范围
 
-不同的场景(scene)有不同的默认注入范围。 此外，在实际注入时，还可以在`@Use`中通过`injectionScope`选项指定注入范围
+不同的场景(scene)有不同的默认注入范围。 此外，在实际注入时，还可以在`@Use`中通过`injectionScope`选项指定注入范围。
 
 Zova 提供了以下几种注入范围：`sys/app/ctx/new/host/skipSelf`
 
 ### 1. sys
 
-如果注入范围是 sys，那么就在 sys ioc 容器中注入 bean 实例，从而实现单例的效果
+如果注入范围是 sys，那么就在 sys ioc 容器中注入 bean 实例，从而实现单例的效果。
 
 ```typescript
 // in module: test-module1
@@ -111,7 +111,7 @@ class Test {
 
 ### 2. app
 
-如果注入范围是 app，那么就在 app ioc 容器中注入 bean 实例
+如果注入范围是 app，那么就在 app ioc 容器中注入 bean 实例。
 
 ```typescript
 // in module: test-module1
@@ -133,7 +133,7 @@ class Test {
 
 ### 3. ctx
 
-如果注入范围是 ctx，那么就在当前组件实例的 ioc 容器中注入 bean 实例
+如果注入范围是 ctx，那么就在当前组件实例的 ioc 容器中注入 bean 实例。
 
 ```typescript
 // in module: a-routertabs
@@ -155,7 +155,7 @@ class ControllerLayout {
 
 ### 4. new
 
-如果注入范围是 new，那么就直接创建新的 bean 实例
+如果注入范围是 new，那么就直接创建新的 bean 实例。
 
 ```typescript
 // in module: a-routertabs
@@ -181,7 +181,7 @@ class ControllerLayout {
 
 ### 5. host
 
-如果注入范围是 host，那么就在当前组件实例的 ioc 容器以及所有父容器中依次查找并注入 bean 实例，如果不存在则返回空值
+如果注入范围是 host，那么就在当前组件实例的 ioc 容器以及所有父容器中依次查找并注入 bean 实例，如果不存在则返回空值。
 
 ```typescript
 // in parent component
@@ -208,4 +208,4 @@ class Child {
 
 ### 6. skipSelf
 
-如果注入范围是 skipSelf，那么就在所有父容器中依次查找并注入 bean 实例，如果不存在则返回空值
+如果注入范围是 skipSelf，那么就在所有父容器中依次查找并注入 bean 实例，如果不存在则返回空值。

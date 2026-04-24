@@ -1,6 +1,6 @@
 # 简介
 
-Zova 内置了开箱即用的 SSR 解决方案，同时支持 B 端和 C 端应用
+Zova 内置了开箱即用的 SSR 解决方案，同时支持 B 端和 C 端应用。
 
 Zova SSR 底层采用`@quasar/app-vite`，并优化了大量细节，让 SSR 的开发体验更加自然、更加便捷。关于 SSR 原理性的介绍请参见：[Quasar-SSR](https://quasar.dev/quasar-cli-vite/developing-ssr/introduction)
 

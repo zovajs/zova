@@ -2,7 +2,7 @@
 
 ## $useStateData
 
-Create a Query object and return it directly if it already exists
+Create a Query object and return it directly if it already exists.
 
 ```typescript
 @Model()
@@ -37,7 +37,7 @@ export class ModelTodo {
 
 ## $useMutationData
 
-Create a Mutation object and return it directly if it already exists
+Create a Mutation object and return it directly if it already exists.
 
 ```typescript
 @Model()
@@ -81,7 +81,7 @@ export class ModelTodo {
 
 ## $invalidateQueries
 
-Invalidate the Query object in order to re-fetch the data
+Invalidate the Query object in order to re-fetch the data.
 
 ```typescript
 this.$invalidateQueries({ queryKey: ['select'] });
@@ -94,7 +94,7 @@ this.$invalidateQueries({ queryKey: ['get', params.id] });
 
 ## $useStateLocal
 
-Create a Query object based on localstorage
+Create a Query object based on localstorage.
 
 ```typescript
 export class ModelUser extends BeanModelBase {
@@ -118,7 +118,7 @@ export class ModelUser extends BeanModelBase {
 
 ## $useStateCookie
 
-Create a Query object based on cookie
+Create a Query object based on cookie.
 
 ```typescript
 export class ModelUser extends BeanModelBase {
@@ -142,7 +142,7 @@ export class ModelUser extends BeanModelBase {
 
 ## $useStateMem
 
-Create a Query object based on memory
+Create a Query object based on memory.
 
 ```typescript
 export class ModelTheme extends BeanModelBase {
@@ -166,9 +166,9 @@ export class ModelTheme extends BeanModelBase {
 
 ## Query Meta
 
-When creating a Query object, you can pass in the `meta` extension parameters
+When creating a Query object, you can pass in the `meta` extension parameters.
 
-For example, we can store the current theme's `darkMode` in a cookie. The type of darkMode is `true | false | 'auto'`, but when storing cookies, the types are all strings, so conversion operation is required the next time the value is retrieved from the cookie
+For example, we can store the current theme's `darkMode` in a cookie. The type of darkMode is `true | false | 'auto'`, but when storing cookies, the types are all strings, so conversion operation is required the next time the value is retrieved from the cookie.
 
 ```typescript
 darkMode: ThemeDarkMode; // auto/true/false

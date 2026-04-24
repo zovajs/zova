@@ -28,7 +28,7 @@ async retrieveMenus(app: ZovaApplication) {
 
 ## baseURL
 
-`this.$fetch` and `app.meta.$fetch` use the default baseURL, which can be modified through env
+`this.$fetch` and `app.meta.$fetch` use the default baseURL, which can be modified through env.
 
 `env/.env`
 
@@ -38,11 +38,11 @@ API_PREFIX = /api
 SSR_API_BASE_URL = $API_BASE_URL
 ```
 
-In SSR scenarios, the Server and Client may use different baseURL
+In SSR scenarios, the Server and Client may use different baseURL.
 
 ## Config
 
-The project's Config can be used to modify the `axios` instance configuration
+The project's Config can be used to modify the `axios` instance configuration.
 
 `src/front/config/config/config.ts`
 

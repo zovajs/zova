@@ -1,6 +1,6 @@
 # Page Layout
 
-Zova allows you to specify which page layout component to use in the `page routes`. If not specified, the `default` layout component will be used by default
+Zova allows you to specify which page layout component to use in the `page routes`. If not specified, the `default` layout component will be used by default.
 
 ```diff
 export const routes: IModuleRoute[] = [
@@ -25,7 +25,7 @@ To provide an out-of-the-box experience, the system includes two built-in layout
 
 ## env
 
-`empty` and `default` are merely placeholders for layout components. You can configure the actual layout components through the env configuration
+`empty` and `default` are merely placeholders for layout components. You can configure the actual layout components through the env configuration.
 
 `env/.env`
 

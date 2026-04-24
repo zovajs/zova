@@ -1,6 +1,6 @@
 # Api
 
-Modules can centrally manage backend Api calls and package Api calls as `api` resources, making them easy to access in any module
+Modules can centrally manage backend Api calls and package Api calls as `api` resources, making them easy to access in any module.
 
 ## Create Api
 
@@ -35,7 +35,7 @@ For the usage of `$fetch`, see: [Fetch](../../techniques/server-data/fetch.md)
 
 ## Use API
 
-You can directly access API through Scope instance
+You can directly access API through Scope instance.
 
 ```diff
 class ControllerTest {

@@ -18,7 +18,7 @@ When using beans cross-module, we do not recommend injecting directly based on `
 
 ## Development Experience Improvement
 
-To enhance the development experience, you can still use `Class-based` injection. With compiler support, it will automatically be converted to `Bean-Identifier-based` syntax
+To enhance the development experience, you can still use `Class-based` injection. With compiler support, it will automatically be converted to `Bean-Identifier-based` syntax.
 
 - Example: Class-based
 

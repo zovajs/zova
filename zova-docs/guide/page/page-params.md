@@ -1,6 +1,6 @@
 # Page Params
 
-Zova enhances page `Params` and provides Typescript typing support
+Zova enhances page `Params` and provides Typescript typing support.
 
 ## Add Params code skeleton
 
@@ -20,7 +20,7 @@ Context Menu - [Module Path/src/page/pageName]: `Zova Refactor/Add Page Params`
 
 ## Add Zod Schema
 
-Add fields schema
+Add fields schema.
 
 ```diff
 export const ControllerPageCounterSchemaParams = z.object({
@@ -30,7 +30,7 @@ export const ControllerPageCounterSchemaParams = z.object({
 
 ## Route name
 
-In order to support `Params`, the `name` field needs to be used on the route record and regenerate the module's .metadata
+In order to support `Params`, the `name` field needs to be used on the route record and regenerate the module's .metadata.
 
 ### 1. Route record
 
@@ -49,7 +49,7 @@ export const routes: IModuleRoute[] = [
 
 ### 2. Regenerate the module's .metadata
 
-The module's .metadata needs to be regenerated so that changes to the routing records take effect
+The module's .metadata needs to be regenerated so that changes to the routing records take effect.
 
 - CLI command
 
@@ -65,7 +65,7 @@ Context Menu - [Module Path]: `Zova Tools/Generate .metadata`
 
 ## Use Params
 
-Zova injects a `$params` object into the base class of the `controller` bean so that the `Params` parameter can be obtained through `this.$params`, and type hints are supported
+Zova injects a `$params` object into the base class of the `controller` bean so that the `Params` parameter can be obtained through `this.$params`, and type hints are supported.
 
 ```diff
 class ControllerPageCounter {
@@ -81,7 +81,7 @@ class ControllerPageCounter {
 
 ## Pass in Params
 
-When invoking the page navigation method, you can also pass Params parameters, and type hints are supported
+When invoking the page navigation method, you can also pass Params parameters, and type hints are supported.
 
 ```diff
 class ControllerPageCounter {

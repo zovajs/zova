@@ -1,10 +1,10 @@
 # $fetch
 
-Zova 对[axios](https://axios-http.com)进行了封装
+Zova 对[axios](https://axios-http.com)进行了封装。
 
 ## this.$fetch
 
-Zova 在`BeanBase`基类中注入了`$fetch`对象，从而可以在任何 bean 实例中通过`this.$fetch`访问`axios`实例
+Zova 在`BeanBase`基类中注入了`$fetch`对象，从而可以在任何 bean 实例中通过`this.$fetch`访问`axios`实例。
 
 比如，获取菜单数据：
 
@@ -18,7 +18,7 @@ class ControllerTest extends BeanBase {
 
 ## app.meta.$fetch
 
-也可以在 bean 实例的外部通过`app.meta.$fetch`访问`axios`实例
+也可以在 bean 实例的外部通过`app.meta.$fetch`访问`axios`实例。
 
 ```diff
 async retrieveMenus(app: ZovaApplication) {
@@ -28,7 +28,7 @@ async retrieveMenus(app: ZovaApplication) {
 
 ## baseURL
 
-`this.$fetch`和`app.meta.$fetch`使用缺省的 baseURL，可通过 env 修改
+`this.$fetch`和`app.meta.$fetch`使用缺省的 baseURL，可通过 env 修改。
 
 `env/.env`
 
@@ -38,11 +38,11 @@ API_PREFIX = /api
 SSR_API_BASE_URL = $API_BASE_URL
 ```
 
-在 SSR 场景，Server 与 Client 可能采用不同的 baseURL
+在 SSR 场景，Server 与 Client 可能采用不同的 baseURL。
 
 ## Config配置
 
-可以使用项目级别的 Config 修改`axios`实例的配置
+可以使用项目级别的 Config 修改`axios`实例的配置。
 
 `src/front/config/config/config.ts`
 

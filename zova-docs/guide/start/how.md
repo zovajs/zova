@@ -1,6 +1,6 @@
 # How Intuitive, Elegant, and Powerful?🔥
 
-Projects developed on Zova provide great capabilities while keeping the code intuitive and elegant at all times. Let's take a look at how to do it
+Projects developed on Zova provide great capabilities while keeping the code intuitive and elegant at all times. Let's take a look at how to do it.
 
 ## Intuitive: Reactive System
 
@@ -34,7 +34,7 @@ class ControllerPageCounter {
 
 ## Elegance: Global State Management: 4-in-1
 
-In actual development, you will encounter four types of global state data: `asynchronous data (usually from the server)` and `synchronous data`, while `synchronous data` is divided into three types: `localstorage`, `cookie`, and `memory`. In the traditional Vue3, different mechanisms are used to handle these state data, while only a unified `Model` mechanism is needed in Zova
+In actual development, you will encounter four types of global state data: `asynchronous data (usually from the server)` and `synchronous data`, while `synchronous data` is divided into three types: `localstorage`, `cookie`, and `memory`. In the traditional Vue3, different mechanisms are used to handle these state data, while only a unified `Model` mechanism is needed in Zova.
 
 | Global State Data | Traditional Vue3     | Zova  |
 | ----------------- | -------------------- | ----- |
@@ -43,7 +43,7 @@ In actual development, you will encounter four types of global state data: `asyn
 | cookie            | Pinia + Cookie       | Model |
 | memory            | Pinia                | Model |
 
-The model mechanism can be used to manage these global state data in a unified manner, which can automatically support SSR, standardize data usage, simplify code structure, and improve code maintainability
+The model mechanism can be used to manage these global state data in a unified manner, which can automatically support SSR, standardize data usage, simplify code structure, and improve code maintainability.
 
 ### Example: How to define
 
@@ -114,7 +114,7 @@ class ControllerPageTest {
 
 ## Elegance: State Sharing: 4-in-1
 
-In actual development, there are four scopes of state sharing: `component internal`, `between components`, `global` and `system`. In the traditional Vue3, different mechanisms are used to achieve these state sharing scopes, while only a unified IOC container mechanism is needed in Zova
+In actual development, there are four scopes of state sharing: `component internal`, `between components`, `global` and `system`. In the traditional Vue3, different mechanisms are used to achieve these state sharing scopes, while only a unified IOC container mechanism is needed in Zova.
 
 | Scope of state sharing | Traditional Vue3 | Zova |
 | ---------------------- | ---------------- | ---- |
@@ -169,7 +169,7 @@ class ControllerPageTest {
 
 ## Powerful: IOC + AOP
 
-We know that IOC is an effective architectural design for system decoupling, and is also a supporting tool for the development of large-scale business systems. Zova provides powerful AOP programming capabilities on top of IOC, making the system more extensible and maintainable
+We know that IOC is an effective architectural design for system decoupling, and is also a supporting tool for the development of large-scale business systems. Zova provides powerful AOP programming capabilities on top of IOC, making the system more extensible and maintainable.
 
 AOP programming in Zova includes: `Internal Aspect`, `External Aspect`, `Behavior`, `Interceptor`. Here are just two examples:
 

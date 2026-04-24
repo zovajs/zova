@@ -1,6 +1,6 @@
 # Server Data
 
-Zova provides different levels of abstraction for accessing server data, allowing us to obtain server data in various ways according to business needs, bringing a simple, intuitive, flexible, and powerful development experience
+Zova provides different levels of abstraction for accessing server data, allowing us to obtain server data in various ways according to business needs, bringing a simple, intuitive, flexible, and powerful development experience.
 
 | Name        | Description                                                                                                                                    |
 | ----------- | ---------------------------------------------------------------------------------------------------------------------------------------------- |

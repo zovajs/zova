@@ -1,6 +1,6 @@
 # Env
 
-Zova loads environment files based on multi-dimensional variables, providing a more flexible configuration mechanism and supporting more complex business scenarios
+Zova loads environment files based on multi-dimensional variables, providing a more flexible configuration mechanism and supporting more complex business scenarios.
 
 ## meta & .env files
 
@@ -96,7 +96,7 @@ if (false) {
 }
 ```
 
-Since the condition is false, tree-shaking is performed
+Since the condition is false, tree-shaking is performed.
 
 ## Obtaining Environment Variables
 
@@ -120,7 +120,7 @@ process.env.SERVER;
 
 ### 2. sys.env
 
-For environment variables that don't support tree-shaking, use `sys.env` to obtain them
+For environment variables that don't support tree-shaking, use `sys.env` to obtain them.
 
 ```typescript
 this.sys.env.APP_NAME;

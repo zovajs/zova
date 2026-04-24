@@ -1,6 +1,6 @@
 # Config配置
 
-模块可以单独提供自己的 Config 配置
+模块可以单独提供自己的 Config 配置。
 
 ## 初始化代码骨架
 
@@ -30,11 +30,11 @@ export const config = (_sys: ZovaSys) => {
 };
 ```
 
-直接定义所需要的配置字段即可，系统会自动提取 Config 的类型信息
+直接定义所需要的配置字段即可，系统会自动提取 Config 的类型信息。
 
 ## 使用Config
 
-可以通过 Scope 实例获取模块的 Config 配置
+可以通过 Scope 实例获取模块的 Config 配置。
 
 ```diff
 class ControllerTest {
@@ -61,7 +61,7 @@ class ControllerOther {
 
 ## 覆盖Config配置
 
-可以使用`项目级别`的 Config 配置覆盖`模块级别`的 Config 配置
+可以使用`项目级别`的 Config 配置覆盖`模块级别`的 Config 配置。
 
 `src/front/config/config/config.ts`
 

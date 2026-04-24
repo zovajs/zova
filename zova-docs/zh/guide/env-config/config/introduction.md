@@ -1,6 +1,6 @@
 # Config配置
 
-Zova 基于多维变量加载 Config 配置，从而提供更加灵活的配置机制，支持更复杂的业务场景
+Zova 基于多维变量加载 Config 配置，从而提供更加灵活的配置机制，支持更复杂的业务场景。
 
 ## meta与config文件
 
@@ -66,7 +66,7 @@ config.ssr.admin.development.mine.ts
 
 ## 支持异步加载
 
-config 文件支持异步加载
+config 文件支持异步加载。
 
 ```typescript
 export default async function (_sys: ZovaSys) {
@@ -81,7 +81,7 @@ export default async function (_sys: ZovaSys) {
 
 ## 获取全局config
 
-在任何 bean 实例中可以直接通过`this.sys.config`获取全局 config 对象
+在任何 bean 实例中可以直接通过`this.sys.config`获取全局 config 对象。
 
 ```typescript
 this.sys.config.api.baseURL;

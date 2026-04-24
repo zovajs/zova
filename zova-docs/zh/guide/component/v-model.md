@@ -1,6 +1,6 @@
 # v-model
 
-可以非常便利的为组件添加`v-model`属性
+可以非常便利的为组件添加`v-model`属性。
 
 ## 基本用法
 
@@ -20,7 +20,7 @@ $ zova :refactor:componentModel card modelValue --module=demo-student
 右键菜单 - [模块路径/src/component/componentName]: `Zova Refactor/Add v-model`
 :::
 
-依据提示输入 model 属性的名称，默认是`modelValue`，VSCode 插件会自动添加`v-model`的代码骨架
+依据提示输入 model 属性的名称，默认是`modelValue`，VSCode 插件会自动添加`v-model`的代码骨架。
 
 ### 使用v-model
 
@@ -43,11 +43,11 @@ class ControllerCard {
 }
 ```
 
-`this.modelValue`可实现与父组件的双向绑定。修改`this.modelValue`的值会触发父组件绑定的值同步更新
+`this.modelValue`可实现与父组件的双向绑定。修改`this.modelValue`的值会触发父组件绑定的值同步更新。
 
 ### 传入v-model
 
-在向子组件传入 v-model 时，也支持类型提示
+在向子组件传入 v-model 时，也支持类型提示。
 
 ```diff
 class ControllerOther {
@@ -65,7 +65,7 @@ class ControllerOther {
 
 ## v-model参数
 
-`modelValue`是默认的 model 参数，也可以指定其他 model 参数
+`modelValue`是默认的 model 参数，也可以指定其他 model 参数。
 
 ### 初始化代码骨架
 
@@ -83,7 +83,7 @@ $ zova :refactor:componentModel card title --module=demo-student
 右键菜单 - [模块路径/src/component/componentName]: `Zova Refactor/Add v-model`
 :::
 
-依据提示输入 model 属性的名称`title`，VSCode 插件会自动添加`v-model`的代码骨架
+依据提示输入 model 属性的名称`title`，VSCode 插件会自动添加`v-model`的代码骨架。
 
 ### 使用v-model
 
@@ -108,7 +108,7 @@ class ControllerCard {
 
 ### 传入v-model
 
-在向子组件传入 v-model 时，也支持类型提示
+在向子组件传入 v-model 时，也支持类型提示。
 
 ```diff
 class ControllerOther {
@@ -162,7 +162,7 @@ class ControllerCard {
 
 ### 传入v-model
 
-在向子组件传入 v-model 时，也支持类型提示
+在向子组件传入 v-model 时，也支持类型提示。
 
 ```diff
 class ControllerOther {

@@ -1,6 +1,6 @@
 # Introduction
 
-Zova provides built-in out-of-the-box SSR solution, supporting both front-end applications and admin management systems
+Zova provides built-in out-of-the-box SSR solution, supporting both front-end applications and admin management systems.
 
 Zova SSR is based on `@quasar/app-vite` and optimizes a lot of details to make the SSR development experience more natural and convenient. For an introduction to the principles of SSR, please see: [Quasar-SSR](https://quasar.dev/quasar-cli-vite/developing-ssr/introduction)
 

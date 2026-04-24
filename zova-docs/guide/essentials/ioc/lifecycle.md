@@ -1,6 +1,6 @@
 # Lifecycle
 
-All beans can provide two lifecycle methods
+All beans can provide two lifecycle methods.
 
 | Name          | Description                                                                               |
 | ------------- | ----------------------------------------------------------------------------------------- |

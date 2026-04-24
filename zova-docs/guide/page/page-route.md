@@ -1,6 +1,6 @@
 # Page Route
 
-When creating a page, the system will automatically create a route record
+When creating a page, the system will automatically create a route record.
 
 ```typescript
 import { ZPageCounter } from './.metadata/page/counter.js';
@@ -72,7 +72,7 @@ export const routes: IModuleRoute[] = [
 
 ## alias
 
-Specify an `alias` for the route. However We cannot specify the route alias in the module's route record, but must specify it in the global config
+Specify an `alias` for the route. However We cannot specify the route alias in the module's route record, but must specify it in the global config.
 
 - See: [Route Alias](./route-alias.md)
 
@@ -100,7 +100,7 @@ export const routes: IModuleRoute[] = [
 
 ## meta.layout
 
-`layout` can specify layout component for this route. If `layout` is not set, the default layout component will be used
+`layout` can specify layout component for this route. If `layout` is not set, the default layout component will be used.
 
 - See: [Layout](./page-layout.md)
 

@@ -1,6 +1,6 @@
 # 渐进式代码拆分
 
-Zova 提供了灵活的文件结构，可以根据业务的复杂度进行渐进式代码拆分，从而始终保持代码的简洁、优雅，更利于代码的持续迭代与维护
+Zova 提供了灵活的文件结构，可以根据业务的复杂度进行渐进式代码拆分，从而始终保持代码的简洁、优雅，更利于代码的持续迭代与维护。
 
 ## 三级迭代
 
@@ -14,7 +14,7 @@ Zova 提供了灵活的文件结构，可以根据业务的复杂度进行渐进
 
 ## 单文件
 
-在业务开发的初始阶段，代码比较少，可以采用单文件
+在业务开发的初始阶段，代码比较少，可以采用单文件。
 
 ```typescript
 class ControllerCard {
@@ -26,11 +26,11 @@ class ControllerCard {
 
 ## 三文件
 
-当代码开始变多时，可以将 Render 和 Style 独立出来
+当代码开始变多时，可以将 Render 和 Style 独立出来。
 
 ### 创建第一个Render Bean
 
-先将 Render 独立出来
+先将 Render 独立出来。
 
 ### 1. Cli命令
 
@@ -46,7 +46,7 @@ $ zova :refactor:firstRender component/card --module=demo-student
 
 ### 创建第一个Style Bean
 
-再将 Style 独立出来
+再将 Style 独立出来。
 
 ### 1. Cli命令
 
@@ -62,7 +62,7 @@ $ zova :refactor:firstStyle component/card --module=demo-student
 
 ## 多文件
 
-当代码继续变多时，可以继续调整文件结构，创建更多 Render 文件和 Style 文件，也可以创建多个 Service 文件，将状态管理独立出来
+当代码继续变多时，可以继续调整文件结构，创建更多 Render 文件和 Style 文件，也可以创建多个 Service 文件，将状态管理独立出来。
 
 ### 创建更多Render Bean
 
@@ -94,7 +94,7 @@ $ zova :refactor:anotherStyle component/card another --module=demo-student
 
 ### 创建更多Service Bean
 
-创建一个 Service`another`，将状态管理独立出来
+创建一个 Service`another`，将状态管理独立出来。
 
 ### 1. Cli命令
 

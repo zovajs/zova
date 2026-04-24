@@ -1,6 +1,6 @@
 # Multi-dimensional Variables
 
-Zova uses multi-dimensional variables to load environment variables and Config configurations, providing a more flexible configuration mechanism and supporting more complex business scenarios
+Zova uses multi-dimensional variables to load environment variables and Config configurations, providing a more flexible configuration mechanism and supporting more complex business scenarios.
 
 The `multi-dimensional variables` in Zova contain three dimensions: `Runtime Environment`, `App Mode` and `Flavor`
 
@@ -15,7 +15,7 @@ Zova provides two runtime environments:
 
 ### 1. Enabling the Runtime Environment
 
-Enabling the corresponding runtime environment by executing different commands
+Enabling the corresponding runtime environment by executing different commands.
 
 ```bash
 # development
@@ -29,7 +29,7 @@ $ npm run preview
 
 - Determine via `Env`
 
-Using Env to determine the current runtime environment supports `tree-shaking` during builds
+Using Env to determine the current runtime environment supports `tree-shaking` during builds.
 
 ```typescript
 process.env.META_MODE === 'development';
@@ -61,7 +61,7 @@ Zova currently offers two app modes, and more will be gradually added in the fut
 
 ### 1. Enabling the App Mode
 
-Enabling the corresponding app mode by executing different commands
+Enabling the corresponding app mode by executing different commands.
 
 ```bash
 # ssr
@@ -74,7 +74,7 @@ $ npm run dev:spa
 
 - Determine via `Env`
 
-Using Env to determine the current app mode supports `tree-shaking` during builds
+Using Env to determine the current app mode supports `tree-shaking` during builds.
 
 ```typescript
 process.env.META_APP_MODE === 'ssr';
@@ -96,7 +96,7 @@ sys.config.meta.appMode === 'spa';
 
 ## Flavor
 
-For more complex business scenarios, we often need to provide configuration capabilities for more scenarios. Zova specifically provides a `Flavor` mechanism. The combination of `runtime environments`, `app modes` and `flavors` allows us to conveniently define configuration information for various scenarios
+For more complex business scenarios, we often need to provide configuration capabilities for more scenarios. Zova specifically provides a `Flavor` mechanism. The combination of `runtime environments`, `app modes` and `flavors` allows us to conveniently define configuration information for various scenarios.
 
 ### 1. Built-in Flavors
 
@@ -112,7 +112,7 @@ For out-of-the-box, Zova provides several built-in flavors:
 
 ### 2. Enabling a Flavor
 
-Enabling the corresponding flavor by passing the command parameter
+Enabling the corresponding flavor by passing the command parameter.
 
 ```json
 "scripts": {
@@ -125,7 +125,7 @@ Enabling the corresponding flavor by passing the command parameter
 
 - Determine via `Env`
 
-Using Env to determine the current flavor supports tree-shaking during builds
+Using Env to determine the current flavor supports tree-shaking during builds.
 
 ```typescript
 process.env.META_FLAVOR === 'admin';
@@ -143,7 +143,7 @@ sys.config.meta.flavor === 'web';
 
 You can create a flavor based on any business need, such as customer, project, organization, etc.
 
-For example, let's assign a flavor named `customA` to customer A, providing a separate env/config configuration for customer A
+For example, let's assign a flavor named `customA` to customer A, providing a separate env/config configuration for customer A.
 
 - Add npm scripts
 
@@ -165,9 +165,9 @@ sys.config.meta.flavor === 'customA';
 
 ### 5. Add Flavor Type Definition
 
-You can add a Flavor type definition to provide type hints
+You can add a Flavor type definition to provide type hints.
 
-In the VSCode editor, enter the code snippet `recordflavor` to automatically generate a code skeleton, and then add a custom Flavor type definition
+In the VSCode editor, enter the code snippet `recordflavor` to automatically generate a code skeleton, and then add a custom Flavor type definition.
 
 ```diff
 declare module '@cabloy/module-info' {

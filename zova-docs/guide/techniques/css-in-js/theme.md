@@ -1,6 +1,6 @@
 # $theme
 
-Zova provides a theme definition and usage mechanism that is independent of UI libraries, and provides out-of-the-box theme switching capabilities
+Zova provides a theme definition and usage mechanism that is independent of UI libraries, and provides out-of-the-box theme switching capabilities.
 
 ## Two dimensions
 
@@ -67,7 +67,7 @@ export class ThemeDefault implements IThemeBase {
 
 ## Custom theme
 
-Then, next, you can create a new theme bean by referring to the default theme bean
+Then, next, you can create a new theme bean by referring to the default theme bean.
 
 ### Create theme beans
 
@@ -104,7 +104,7 @@ export class ThemeOrange implements IThemeBase {
 
 ## Switch theme
 
-Next, you can dynamically switch the theme in the code
+Next, you can dynamically switch the theme in the code.
 
 ```typescript
 export class RenderTest extends BeanRenderBase {

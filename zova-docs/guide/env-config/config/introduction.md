@@ -1,6 +1,6 @@
 # Config
 
-Zova loads config files based on multi-dimensional variables, providing a more flexible configuration mechanism and supporting more complex business scenarios
+Zova loads config files based on multi-dimensional variables, providing a more flexible configuration mechanism and supporting more complex business scenarios.
 
 ## meta & config files
 
@@ -66,7 +66,7 @@ config.ssr.admin.development.mine.ts
 
 ## Support Asynchronous Loading
 
-The config files support asynchronous loading
+The config files support asynchronous loading.
 
 ```typescript
 export default async function (_sys: ZovaSys) {
@@ -81,7 +81,7 @@ export default async function (_sys: ZovaSys) {
 
 ## Obtaining global config
 
-The global config object can be obtained directly through `this.sys.config` in any bean instance
+The global config object can be obtained directly through `this.sys.config` in any bean instance.
 
 ```typescript
 this.sys.config.api.baseURL;

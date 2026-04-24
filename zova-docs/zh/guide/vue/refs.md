@@ -2,7 +2,7 @@
 
 ## Template Ref {#template-ref}
 
-如果是 Html Element 或者常规的 Vue 组件（没有使用 ioc 容器），那么就可以使用`Template Ref`引用组件实例
+如果是 Html Element 或者常规的 Vue 组件（没有使用 ioc 容器），那么就可以使用`Template Ref`引用组件实例。
 
 ### 1. Html Element
 
@@ -80,7 +80,7 @@ export class RenderComponent {
 
 ## Controller Ref {#controller-ref}
 
-对于使用了 ioc 容器的 Vue 组件，不能使用`Template Ref`，而是直接引用 Vue 组件对应的`controller bean`实例
+对于使用了 ioc 容器的 Vue 组件，不能使用`Template Ref`，而是直接引用 Vue 组件对应的`controller bean`实例。
 
 ### 1. 声明变量
 

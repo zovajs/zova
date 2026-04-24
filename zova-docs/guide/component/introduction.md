@@ -24,7 +24,7 @@ $ zova :create:component card --module=demo-student
 Context Menu - [Module Path]: `Zova Create/Component`
 :::
 
-Enter the component name `card` as prompted, and the VSCode plugin will automatically create the code skeleton for the component
+Enter the component name `card` as prompted, and the VSCode plugin will automatically create the code skeleton for the component.
 
 ## Controller Definition
 
@@ -65,7 +65,7 @@ Based on the support of the compiler, ZCard will automatically switch to asynchr
 
 ## How to Reference Component Instance
 
-In Zova, instead of using `Template Ref` to reference component instance, you directly reference the component's corresponding `controller`, which supports more intuitive and powerful type hints
+In Zova, instead of using `Template Ref` to reference component instance, you directly reference the component's corresponding `controller`, which supports more intuitive and powerful type hints.
 
 ```typescript
 import type { ControllerCard } from 'zova-module-demo-student';

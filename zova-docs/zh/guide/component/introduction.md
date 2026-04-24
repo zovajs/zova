@@ -24,7 +24,7 @@ $ zova :create:component card --module=demo-student
 右键菜单 - [模块路径]: `Zova Create/Component`
 :::
 
-依据提示输入组件名称`card`，VSCode 插件会自动创建组件的代码骨架
+依据提示输入组件名称`card`，VSCode 插件会自动创建组件的代码骨架。
 
 ## Controller定义
 
@@ -65,7 +65,7 @@ class RenderPageCounter {
 
 ## 如何引用组件实例
 
-在 Zova 中，不使用`Template Ref`引用组件实例，而是直接引用组件对应的`controller`，这样可以支持更直观并且更强大的类型提示
+在 Zova 中，不使用`Template Ref`引用组件实例，而是直接引用组件对应的`controller`，这样可以支持更直观并且更强大的类型提示。
 
 ```typescript
 import type { ControllerCard } from 'zova-module-demo-student';

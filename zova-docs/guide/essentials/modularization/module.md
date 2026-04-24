@@ -1,6 +1,6 @@
 # Module
 
-In Zova, `Modules` consolidate pages, components, configurations, languages ​​and other resources into cohesive blocks of functionality, each focused on a feature area, application business domain, workflow, or common collection of utilities
+In Zova, `Modules` consolidate pages, components, configurations, languages ​​and other resources into cohesive blocks of functionality, each focused on a feature area, application business domain, workflow, or common collection of utilities.
 
 ## Why need Modularization?
 
@@ -54,4 +54,4 @@ Context Menu - [Project Path/src/module]: `Zova Create/Module`
 Context Menu - [Project Path/src/suite/suite-name/modules]: `Zova Create/Module`
 :::
 
-Enter the module name according to the prompt, such as `demo-student`, and the VSCode extension will automatically create the code skeleton of the module
+Enter the module name according to the prompt, such as `demo-student`, and the VSCode extension will automatically create the code skeleton of the module.

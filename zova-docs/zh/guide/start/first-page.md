@@ -1,6 +1,6 @@
 # 创建第一个页面
 
-下面来创建第一个页面，演示最基本的状态管理
+下面来创建第一个页面，演示最基本的状态管理。
 
 ## 新建模块
 
@@ -18,7 +18,7 @@ $ zova :create:module demo-student --suite=
 右键菜单 - [项目路径/src/module]: `Zova Create/Module`
 :::
 
-依据提示输入模块的名称`demo-student`，VSCode 插件会自动创建模块的代码骨架
+依据提示输入模块的名称`demo-student`，VSCode 插件会自动创建模块的代码骨架。
 
 ::: warning
 请确认已经安装了 Vscode 插件：[Zova - Official](https://marketplace.visualstudio.com/items?itemName=cabloy.zova-vscode)
@@ -40,7 +40,7 @@ $ zova :create:page counter --module=demo-student
 右键菜单 - [模块路径]: `Zova Create/Page`
 :::
 
-依据提示输入页面名称`counter`，VSCode 插件会自动创建页面的代码骨架
+依据提示输入页面名称`counter`，VSCode 插件会自动创建页面的代码骨架。
 
 ## 页面路径
 

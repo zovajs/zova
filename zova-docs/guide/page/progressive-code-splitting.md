@@ -1,6 +1,6 @@
 # Progressive Code Splitting
 
-Zova provides a flexible file structure that allows for progressive code splitting based on the complexity of the business, thereby keeping the code always simple and elegant, making it easier for continuous iteration and maintenance of the code
+Zova provides a flexible file structure that allows for progressive code splitting based on the complexity of the business, thereby keeping the code always simple and elegant, making it easier for continuous iteration and maintenance of the code.
 
 ## Three-level iteration
 
@@ -14,7 +14,7 @@ Progressive splitting of the page code can refer to the following three-level it
 
 ## Single-File
 
-In the initial stage of business development, there is relatively little code, and a single file can be used
+In the initial stage of business development, there is relatively little code, and a single file can be used.
 
 ```typescript
 class ControllerPageCounter {
@@ -49,11 +49,11 @@ class ControllerPageCounter {
 
 ## Three-File
 
-When the code starts to grow, you can separate the Render and Style
+When the code starts to grow, you can separate the Render and Style.
 
 ### Create first Render Bean
 
-First, separate out the Render
+First, separate out the Render.
 
 ### 1. CLI command
 
@@ -84,7 +84,7 @@ class RenderPageCounter extends BeanRenderBase {
 
 ### Create first Style Bean
 
-Then separate out the Style
+Then separate out the Style.
 
 ### 1. CLI command
 
@@ -113,7 +113,7 @@ class StylePageCounter extends BeanStyleBase {
 
 ## More-File
 
-As the code continues to grow, you can continue to adjust the file structure, create more Render files and Style files, and also create multiple Service files to separate state management
+As the code continues to grow, you can continue to adjust the file structure, create more Render files and Style files, and also create multiple Service files to separate state management.
 
 ### Create Another Render Bean
 
@@ -145,7 +145,7 @@ Context Menu - [Module Path/src/page/pageName]: `Zova Refactor/Create Another St
 
 ### Create Another Service Bean
 
-Create a Service `counter` to separate state management
+Create a Service `counter` to separate state management.
 
 ### 1. CLI command
 

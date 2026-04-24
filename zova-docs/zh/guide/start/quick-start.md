@@ -17,7 +17,7 @@ $ pnpm add -g zova-cli@latest
 
 2. 安装 Vscode 插件：[Zova - Official](https://marketplace.visualstudio.com/items?itemName=cabloy.zova-vscode)
 
-该插件提供了大量菜单，用于快速创建各类资源的代码骨架
+该插件提供了大量菜单，用于快速创建各类资源的代码骨架。
 
 ## 快速开始
 

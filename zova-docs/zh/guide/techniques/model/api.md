@@ -2,7 +2,7 @@
 
 ## $useStateData
 
-创建 Query 对象，如果已经存在则直接返回
+创建 Query 对象，如果已经存在则直接返回。
 
 ```typescript
 @Model()
@@ -37,7 +37,7 @@ export class ModelTodo {
 
 ## $useMutationData
 
-创建 Mutation 对象，如果已经存在则直接返回
+创建 Mutation 对象，如果已经存在则直接返回。
 
 ```typescript
 @Model()
@@ -81,7 +81,7 @@ export class ModelTodo {
 
 ## $invalidateQueries
 
-将 Query 对象设为失效，以便重新获取数据
+将 Query 对象设为失效，以便重新获取数据。
 
 ```typescript
 this.$invalidateQueries({ queryKey: ['select'] });
@@ -94,7 +94,7 @@ this.$invalidateQueries({ queryKey: ['get', params.id] });
 
 ## $useStateLocal
 
-创建基于 localstorage 的 Query 对象
+创建基于 localstorage 的 Query 对象。
 
 ```typescript
 export class ModelUser extends BeanModelBase {
@@ -118,7 +118,7 @@ export class ModelUser extends BeanModelBase {
 
 ## $useStateCookie
 
-创建基于 cookie 的 Query 对象
+创建基于 cookie 的 Query 对象。
 
 ```typescript
 export class ModelUser extends BeanModelBase {
@@ -142,7 +142,7 @@ export class ModelUser extends BeanModelBase {
 
 ## $useStateMem
 
-创建基于 memory 的 Query 对象
+创建基于 memory 的 Query 对象。
 
 ```typescript
 export class ModelTheme extends BeanModelBase {
@@ -166,9 +166,9 @@ export class ModelTheme extends BeanModelBase {
 
 ## Query Meta
 
-在创建 Query 对象时，可以传入 meta 扩展参数
+在创建 Query 对象时，可以传入 meta 扩展参数。
 
-比如，我们可以把当前主题的`darkMode`属性存入 cookie。darkMode 的类型是`true | false | 'auto'`，但是在存入 cookie 时类型均是字符串，那么在下次从 cookie 取值时就需要进行转换操作
+比如，我们可以把当前主题的`darkMode`属性存入 cookie。darkMode 的类型是`true | false | 'auto'`，但是在存入 cookie 时类型均是字符串，那么在下次从 cookie 取值时就需要进行转换操作。
 
 ```typescript
 darkMode: ThemeDarkMode; // auto/true/false

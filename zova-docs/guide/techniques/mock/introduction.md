@@ -37,7 +37,7 @@ export default defineFakeRoute([
 
 ## Configuration
 
-Mock can be configured through `.env` file
+Mock can be configured through `.env` file.
 
 `env/.env`
 
@@ -63,7 +63,7 @@ MOCK_BUILD_CORS = true
 
 ## Production environment
 
-By default, the production environment does not generate the fake server. If want fake server to be generated during building, just turn on `MOCK_BUILD` as well
+By default, the production environment does not generate the fake server. If want fake server to be generated during building, just turn on `MOCK_BUILD` as well.
 
 ```bash
 $ npm run build

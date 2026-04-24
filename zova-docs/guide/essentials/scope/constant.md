@@ -31,11 +31,11 @@ export const constants = {
 } as const;
 ```
 
-Just define the required constants directly, and the system will automatically extract the type information of constants
+Just define the required constants directly, and the system will automatically extract the type information of constants.
 
 ## Use Constant
 
-The `Constant` of the module can be obtained through the `Scope` instance
+The `Constant` of the module can be obtained through the `Scope` instance.
 
 ```diff
 class ControllerTest {

@@ -51,4 +51,4 @@ $ zova :create:suite suiteName
 Context Menu - [Project Path/src/suite]: `Zova Create/Suite`
 :::
 
-Enter the suite name according to the prompt, such as `demo-student`, and the VSCode extension will automatically create the code skeleton of the suite
+Enter the suite name according to the prompt, such as `demo-student`, and the VSCode extension will automatically create the code skeleton of the suite.

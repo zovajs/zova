@@ -4,11 +4,11 @@ Zova recommends using [store bean](../essentials/ioc/bean-scene.md) to create gl
 
 ## Basic idea
 
-Create a `store bean` and embed the `pinia store` in the store bean. In this way, you can inject the `store bean` anywhere and directly access the properties and methods of the bean instance, while providing Typescript typing support
+Create a `store bean` and embed the `pinia store` in the store bean. In this way, you can inject the `store bean` anywhere and directly access the properties and methods of the bean instance, while providing Typescript typing support.
 
 ## 1. Enable the Pinia module
 
-The Pinia module is disabled by default. In this way, if the pinia store is not used in the project, the pinia code will not be bundled. Therefore, if you want to use the pinia store, you need to enable the Pinia module first
+The Pinia module is disabled by default. In this way, if the pinia store is not used in the project, the pinia code will not be bundled. Therefore, if you want to use the pinia store, you need to enable the Pinia module first.
 
 Create a new file `env/.env.mine` in the project root directory:
 
@@ -49,7 +49,7 @@ Context Menu - [Module Path]: `Zova Create/Bean: Store`
 
 Enter the name of store bean according to the prompt, such as `counter`. The VSCode extension will automatically create the code skeleton of `store bean`
 
-Use `useCounterStore` in the generated file
+Use `useCounterStore` in the generated file.
 
 `src/suite/a-demo/modules/demo-basic/src/bean/store.counter.ts`
 

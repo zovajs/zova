@@ -1,12 +1,12 @@
 # Sys Startup Customization
 
-ZovaJS provides a `Hook/Monkey` mechanism that allows deep customization of the system during system startup
+ZovaJS provides a `Hook/Monkey` mechanism that allows deep customization of the system during system startup.
 
-Before explaining the `Hook/Monkey` mechanism, it is necessary to first understand the timing of system startup and shutdown
+Before explaining the `Hook/Monkey` mechanism, it is necessary to first understand the timing of system startup and shutdown.
 
 ## 🔥Difference from Application Startup
 
-In the SSR scenario, `application startup` refers to each individual request, while `system startup` is unrelated to requests
+In the SSR scenario, `application startup` refers to each individual request, while `system startup` is unrelated to requests.
 
 ## System Startup Timing
 
@@ -39,7 +39,7 @@ The system provides three scenarios to respond to application startup/shutdown h
 2. `Module Monkey`: Respond to app hooks in the file `{module}/src/monkeySys.ts`
 3. `Sys Monkey`: Respond to app hooks in the file `{project}/src/front/config/monkeySys.ts`
 
-For different scenarios, corresponding interface definitions are provided for different hooks, thereby standardizing the use of hooks
+For different scenarios, corresponding interface definitions are provided for different hooks, thereby standardizing the use of hooks.
 
 | Hook           | Module Main Interface | Module Monkey Interface | Sys Monkey Interface  |
 | -------------- | --------------------- | ----------------------- | --------------------- |

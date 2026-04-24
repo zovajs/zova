@@ -1,10 +1,10 @@
 # Create Bean
 
-We can create Bean Class through Cli command or menu command
+We can create Bean Class through Cli command or menu command.
 
 ## Example: Create Model Bean
 
-Create a Model Bean `test` in module demo-student
+Create a Model Bean `test` in module demo-student.
 
 ### 1. Cli command
 

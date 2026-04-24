@@ -1,6 +1,6 @@
 # Create the first Page
 
-Next, let's create our first Page to demonstrate the most basic state management
+Next, let's create our first Page to demonstrate the most basic state management.
 
 ## Creating a New Module
 
@@ -18,7 +18,7 @@ $ zova :create:module demo-student --suite=
 Context menu - [Project Path/src/module]: `Zova Create/Module`
 :::
 
-Follow the prompts and enter the module name `demo-student`. The VSCode plugin will automatically create the module code skeleton
+Follow the prompts and enter the module name `demo-student`. The VSCode plugin will automatically create the module code skeleton.
 
 ::: warning
 Please make sure you have installed the VSCode extension: [Zova - Official](https://marketplace.visualstudio.com/items?itemName=cabloy.zova-vscode)
@@ -40,7 +40,7 @@ $ zova :create:page counter --module=demo-student
 Context menu - [Module Path]: `Zova Create/Page`
 :::
 
-Enter the page name `counter` as prompted. The VSCode extension will automatically create the page code skeleton
+Enter the page name `counter` as prompted. The VSCode extension will automatically create the page code skeleton.
 
 ## Page Path
 

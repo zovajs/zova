@@ -41,15 +41,15 @@ Examples are as follows:
 
 ## icon function
 
-The typed icon name can be obtained through `icon` function in any bean instance, thus supporting auto-completion
+The typed icon name can be obtained through `icon` function in any bean instance, thus supporting auto-completion.
 
 ## iconh function
 
-The `vnode` object of icon can be directly generated in any bean instance through `iconh` function
+The `vnode` object of icon can be directly generated in any bean instance through `iconh` function.
 
 ## Use Icon
 
-The icon engine provides a unified interface that can be used directly in any UI library
+The icon engine provides a unified interface that can be used directly in any UI library.
 
 ### 1. antdv
 
@@ -81,7 +81,7 @@ import { VBtn } from 'vuetify/components';
 
 ## Create Icon
 
-We can either add icons to the existing module `home-icon` or create a new module
+We can either add icons to the existing module `home-icon` or create a new module.
 
 ### 1. Initialize code skeleton
 

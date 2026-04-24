@@ -8,7 +8,7 @@ Zova 基于[vite-plugin-fake-server](https://github.com/condorheroblog/vite-plug
 右键菜单 - [模块路径]: `Zova Create/Mock`
 :::
 
-依据提示输入 mock 的名称，比如`menu`，VSCode 插件会自动添加 mock 的代码骨架
+依据提示输入 mock 的名称，比如`menu`，VSCode 插件会自动添加 mock 的代码骨架。
 
 比如，模块 home-layout 需要通过 API：`/home/layout/menu/select`获取菜单，那么可以直接在 home-layout 中提供对应的 mock 文件如下：
 
@@ -37,7 +37,7 @@ export default defineFakeRoute([
 
 ## 配置
 
-可以通过`.env`文件配置 mock
+可以通过`.env`文件配置 mock。
 
 `env/.env`
 
@@ -63,7 +63,7 @@ MOCK_BUILD_CORS = true
 
 ## 生产环境
 
-默认情况下，生产环境并不生成 fake 服务。如果需要在进行构建时生成 fake 服务，只需开启`MOCK_BUILD`即可
+默认情况下，生产环境并不生成 fake 服务。如果需要在进行构建时生成 fake 服务，只需开启`MOCK_BUILD`即可。
 
 ```bash
 $ npm run build

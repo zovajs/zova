@@ -1,12 +1,12 @@
 # BeanBase
 
-`BeanBase` is the base class for all beans. By inheriting from `BeanBase`, we can easily access commonly used tools and capabilities when writing code
+`BeanBase` is the base class for all beans. By inheriting from `BeanBase`, we can easily access commonly used tools and capabilities when writing code.
 
-`BeanBase` itself provides some built-in members and allows other modules to inject extended members through the `monkey` mechanism
+`BeanBase` itself provides some built-in members and allows other modules to inject extended members through the `monkey` mechanism.
 
 ## Why is Zova's IOC container code more concise?
 
-The reason is to prioritize the use of the `dependency lookup` strategy, resulting in fewer decorator functions and fewer type annotations. Injecting system capability objects into `BeanBase` is one of the mechanisms for implementing `dependency lookup` strategies
+The reason is to prioritize the use of the `dependency lookup` strategy, resulting in fewer decorator functions and fewer type annotations. Injecting system capability objects into `BeanBase` is one of the mechanisms for implementing `dependency lookup` strategies.
 
 ## Built-in Members
 
@@ -37,7 +37,7 @@ The reason is to prioritize the use of the `dependency lookup` strategy, resulti
 
 ## Extended Members
 
-When a project is created, there will be some modules present in the project, providing us with basic capabilities for further development
+When a project is created, there will be some modules present in the project, providing us with basic capabilities for further development.
 
 | Name                                                   | Description                                        |
 | ------------------------------------------------------ | -------------------------------------------------- |
@@ -51,7 +51,7 @@ When a project is created, there will be some modules present in the project, pr
 | [$theme](../../techniques/css-in-js/theme.md)          | Theme object provided by module `a-style`          |
 | [$token](../../techniques/css-in-js/token.md)          | Token object provided by module `a-style`          |
 
-Zova can be used with any UI library and comes with built-in project templates for several UI libraries, making it easy to use out of the box. Different UI libraries will also inject objects into the `BeanBase` base class according to their own needs
+Zova can be used with any UI library and comes with built-in project templates for several UI libraries, making it easy to use out of the box. Different UI libraries will also inject objects into the `BeanBase` base class according to their own needs.
 
 | 名称     | 说明                                            |
 | -------- | ----------------------------------------------- |

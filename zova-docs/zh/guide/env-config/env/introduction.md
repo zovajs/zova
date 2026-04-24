@@ -1,6 +1,6 @@
 # Env环境变量
 
-Zova 基于多维变量加载环境文件，从而提供更加灵活的配置机制，支持更复杂的业务场景
+Zova 基于多维变量加载环境文件，从而提供更加灵活的配置机制，支持更复杂的业务场景。
 
 ## meta与.env文件
 
@@ -96,13 +96,13 @@ if (false) {
 }
 ```
 
-由于条件为 false，从而进行 Tree-shaking
+由于条件为 false，从而进行 Tree-shaking。
 
 ## 获取环境变量
 
 ### 1. process.env
 
-对于支持 Tree-shaking 能力的环境变量，通过`process.env`来获取
+对于支持 Tree-shaking 能力的环境变量，通过`process.env`来获取。
 
 ```typescript
 process.env.META_MODE;
@@ -120,7 +120,7 @@ process.env.SERVER;
 
 ### 2. sys.env
 
-对于不支持 Tree-shaking 能力的环境变量，通过`sys.env`来获取
+对于不支持 Tree-shaking 能力的环境变量，通过`sys.env`来获取。
 
 ```typescript
 this.sys.env.APP_NAME;

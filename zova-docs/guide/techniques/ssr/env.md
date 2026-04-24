@@ -1,6 +1,6 @@
 # env
 
-Zova SSR provides some env environment variables, which is very convenient to configure the behaviors of certain functions and features
+Zova SSR provides some env environment variables, which is very convenient to configure the behaviors of certain functions and features.
 
 ## Configurable environment variables
 

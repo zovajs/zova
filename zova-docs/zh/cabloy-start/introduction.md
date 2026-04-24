@@ -1,6 +1,6 @@
 # Cabloy Start
 
-套件 zova-suite-cabloy-start 采用`VuetifyJS` UI 库，提供了一组开箱即用的前端模块，加速开发`Web网站`和`Admin中后台`等全栈系统
+套件 zova-suite-cabloy-start 采用`VuetifyJS` UI 库，提供了一组开箱即用的前端模块，加速开发`Web网站`和`Admin中后台`等全栈系统。
 
 ## 模块清单
 

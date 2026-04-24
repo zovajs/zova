@@ -1,13 +1,13 @@
 # Dependency Injection
 
-Zova injects Bean instances through `@Use` decorator function
+Zova injects Bean instances through `@Use` decorator function.
 
 ## Resolution rules
 
-Zova adopts a modular system, and Bean Classes are provided by different modules. When using the Bean Class inside the same module, you can directly resolve it based on `Class type`. When using cross-module, you can resolve it based on `Bean identifier` instead of `Class type/file path`, which is conducive to achieving loose coupling between modules
+Zova adopts a modular system, and Bean Classes are provided by different modules. When using the Bean Class inside the same module, you can directly resolve it based on `Class type`. When using cross-module, you can resolve it based on `Bean identifier` instead of `Class type/file path`, which is conducive to achieving loose coupling between modules.
 
 Therefore, Zova provides the following resolution rules:
-Zova provides the following resolution rules for lookuping or creating specific Bean instances
+Zova provides the following resolution rules for lookuping or creating specific Bean instances.
 
 - Bean Class
 - Bean identifier
@@ -16,7 +16,7 @@ Zova provides the following resolution rules for lookuping or creating specific 
 
 ### 1. Bean Class
 
-Use `Bean Class` to lookup and inject bean instance in the ioc container, and automatically create one if not exist
+Use `Bean Class` to lookup and inject bean instance in the ioc container, and automatically create one if not exist.
 
 ```typescript
 import { ModelTodo } from '../../bean/model.todo.js';
@@ -29,7 +29,7 @@ class ControllerTodo {
 
 ### 2. Bean identifier
 
-Use `Bean identifier` to lookup and inject bean instance in the ioc container, and automatically create one if not exist
+Use `Bean identifier` to lookup and inject bean instance in the ioc container, and automatically create one if not exist.
 
 ```typescript
 import type { ModelTabs } from 'zova-module-a-routertabs';
@@ -92,7 +92,7 @@ Zova provides the following injection scopes: `sys/app/ctx/new/host/skipSelf`
 
 ### 1. sys
 
-If the injection scope is `sys`, then inject the bean instance in the global ioc container to achieve the singleton effect
+If the injection scope is `sys`, then inject the bean instance in the global ioc container to achieve the singleton effect.
 
 ```typescript
 // in module: test-module1
@@ -114,7 +114,7 @@ class Test {
 
 ### 2. app
 
-If the injection scope is `app`, then inject the bean instance in the app ioc container
+If the injection scope is `app`, then inject the bean instance in the app ioc container.
 
 ```typescript
 // in module: test-module1
@@ -136,7 +136,7 @@ class Test {
 
 ### 3. ctx
 
-If the injection scope is `ctx`, then inject the bean instance into the ioc container of the current component instance
+If the injection scope is `ctx`, then inject the bean instance into the ioc container of the current component instance.
 
 ```typescript
 // in module: a-routertabs
@@ -158,7 +158,7 @@ class ControllerLayout {
 
 ### 4. new
 
-If the injection scope is `new`, then directly create a new bean instance
+If the injection scope is `new`, then directly create a new bean instance.
 
 ```typescript
 // in module: a-routertabs
@@ -184,7 +184,7 @@ The injection scope also supports hierarchical injection, replacing the capabili
 
 ### 5. host
 
-If the injection scope is `host`, the bean instance will be lookuped in the ioc container of the current component instance and all parent containers in turn. If it does not exist, a null value is returned
+If the injection scope is `host`, the bean instance will be lookuped in the ioc container of the current component instance and all parent containers in turn. If it does not exist, a null value is returned.
 
 ```typescript
 // in parent component
@@ -211,4 +211,4 @@ class Child {
 
 ### 6. skipSelf
 
-If the injection scope is `skipSelf`, then lookup the bean instance in all parent containers in turn. If it does not exist, a null value is returned
+If the injection scope is `skipSelf`, then lookup the bean instance in all parent containers in turn. If it does not exist, a null value is returned.

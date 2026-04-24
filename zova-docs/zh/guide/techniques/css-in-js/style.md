@@ -1,8 +1,8 @@
 # $style
 
-Zova 提供了一个核心模块 a-style，该模块基于[TypeStyle](https://github.com/typestyle/typestyle)提供了 css-in-js 能力
+Zova 提供了一个核心模块 a-style，该模块基于[TypeStyle](https://github.com/typestyle/typestyle)提供了 css-in-js 能力。
 
-Zova 在 BeanBase 基类中注入了`$style`方法，从而可以在任何 bean 实例中通过`this.$style`访问 css-in-js 的能力
+Zova 在 BeanBase 基类中注入了`$style`方法，从而可以在任何 bean 实例中通过`this.$style`访问 css-in-js 的能力。
 
 ## Scope样式
 
@@ -29,7 +29,7 @@ export class RenderTest extends BeanRenderBase {
 
 ## 动态样式
 
-可以采用计算属性来创建动态样式
+可以采用计算属性来创建动态样式。
 
 ```typescript
 export class RenderTest extends BeanRenderBase {

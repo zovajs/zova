@@ -1,6 +1,6 @@
 # 页面布局
 
-Zova 可以在`页面路由`中指定需要使用的页面布局组件。如果没有指定，就默认使用`default`布局组件
+Zova 可以在`页面路由`中指定需要使用的页面布局组件。如果没有指定，就默认使用`default`布局组件。
 
 ```diff
 export const routes: IModuleRoute[] = [
@@ -25,7 +25,7 @@ export const routes: IModuleRoute[] = [
 
 ## env配置
 
-`empty`和`default`仅仅是布局组件的占位符。可以通过 env 配置实际的布局组件
+`empty`和`default`仅仅是布局组件的占位符。可以通过 env 配置实际的布局组件。
 
 `env/.env`
 

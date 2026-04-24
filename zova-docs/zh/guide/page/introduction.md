@@ -24,7 +24,7 @@ $ zova :create:page counter --module=demo-student
 右键菜单 - [模块路径]: `Zova Create/Page`
 :::
 
-依据提示输入页面名称`counter`，VSCode 插件会自动创建页面的代码骨架
+依据提示输入页面名称`counter`，VSCode 插件会自动创建页面的代码骨架。
 
 ## 页面路径
 
@@ -75,7 +75,7 @@ class ControllerPageCounter {
 
 ## 添加Style
 
-Zova 提供了开箱即用的 css-in-js 能力
+Zova 提供了开箱即用的 css-in-js 能力。
 
 ```typescript
 class ControllerPageCounter {

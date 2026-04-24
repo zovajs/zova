@@ -22,7 +22,7 @@ The system will automatically assign an Onion name to each bean class as the fol
 
 ## App Config
 
-With a common Onion name, you can modify the parameters of all bean classes in App Config
+With a common Onion name, you can modify the parameters of all bean classes in App Config.
 
 `src/front/config/config/config.ts`
 

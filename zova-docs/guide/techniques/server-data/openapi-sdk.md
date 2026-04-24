@@ -1,12 +1,12 @@
 # Openapi SDK
 
-Zova uses [openapi-typescript](https://github.com/openapi-ts/openapi-typescript) based on `Swagger/Openapi` metadata to automatically generate frontend client SDKs to provide a smooth Typescript development experience
+Zova uses [openapi-typescript](https://github.com/openapi-ts/openapi-typescript) based on `Swagger/Openapi` metadata to automatically generate frontend client SDKs to provide a smooth Typescript development experience.
 
-Zova adopts a modular system, so the Swagger/Openapi metadata provided by the backend can be split into multiple parts according to business needs and managed independently in different modules
+Zova adopts a modular system, so the Swagger/Openapi metadata provided by the backend can be split into multiple parts according to business needs and managed independently in different modules.
 
 ## Initialize the Openapi config
 
-First, initialize the Openapi config in the module demo-student
+First, initialize the Openapi config in the module demo-student.
 
 ### 1. CLI command
 
@@ -36,11 +36,11 @@ export default function (): ZovaOpenapiConfigModule {
 }
 ```
 
-By specifying the APIs that need to be managed in the current module in `operations.match`, you can specify a set of APIs using regexp
+By specifying the APIs that need to be managed in the current module in `operations.match`, you can specify a set of APIs using regexp.
 
 ### 2. Project config
 
-The system automatically creates the file `openapi.config.ts` in the project directory, which can specify the download source for Swagger/OpenAPI
+The system automatically creates the file `openapi.config.ts` in the project directory, which can specify the download source for Swagger/OpenAPI.
 
 `openapi.config.ts`
 
@@ -57,7 +57,7 @@ export default function (): ZovaOpenapiConfig {
 
 ## Generate Openapi SDK
 
-Now you can automatically download Swagger/Openapi and then generate the specified API services in the module demo-student
+Now you can automatically download Swagger/Openapi and then generate the specified API services in the module demo-student.
 
 ### 1. CLI command
 

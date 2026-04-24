@@ -2,7 +2,7 @@
 
 ## Global style
 
-Several global style beans can be created based on business needs, and several style variables are pre-generated in the global beans, so that they can be injected and used in any bean instance
+Several global style beans can be created based on business needs, and several style variables are pre-generated in the global beans, so that they can be injected and used in any bean instance.
 
 ### Create global style beans
 
@@ -14,7 +14,7 @@ Enter the name of style bean according to the prompt, such as `myStyle`. The VSC
 
 ### Default global style bean
 
-Zova provides a global style Bean in the module `home-base`. We can provide some global styles directly here
+Zova provides a global style Bean in the module `home-base`. We can provide some global styles directly here.
 
 `src/suite/a-home/modules/home-base/src/bean/css.default.ts`
 
@@ -58,7 +58,7 @@ export class RenderTest extends BeanRenderBase {
 
 ## $css
 
-Since the default global style bean can be used extensively across different bean instances. To simplify the code, Zova injects a `$css` object into the `BeanBase` base class, so that global styles can be directly accessed through `this.$css` in any bean instance
+Since the default global style bean can be used extensively across different bean instances. To simplify the code, Zova injects a `$css` object into the `BeanBase` base class, so that global styles can be directly accessed through `this.$css` in any bean instance.
 
 ```typescript
 export class RenderTest extends BeanRenderBase {

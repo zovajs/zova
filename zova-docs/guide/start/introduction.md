@@ -2,7 +2,7 @@
 
 ## What is Zova?
 
-Zova: The Intuitive Frontend Framework = Vue3 Reactive + React TSX + Angular IOC
+Zova: The Intuitive Frontend Framework = Vue3 Reactive + React TSX + Angular IOC.
 
 - Built-in out-of-the-box SSR solution, building `SSR/SPA/Website/Admin-Dashboard` in one codebase
 - Supports dual-layer tabs navigation, enabling efficient page switching while maintaining page state
@@ -24,7 +24,7 @@ Zova can be used with any UI library and comes with built-in project templates f
 
 ## Demo Online 2
 
-The Website and Admin-Dashboard of Cabloy Store are built by one codebase
+The Website and Admin-Dashboard of Cabloy Store are built by one codebase.
 
 - Website: [https://cabloy.com](https://cabloy.com)
 - Admin-Dashboard: [https://cabloy.com/admin](https://cabloy.com/admin)
@@ -69,7 +69,7 @@ Zova delivers an intuitive, elegant, and powerful code style by combining the co
 
 ### UI Libraries
 
-Zova can be used with any UI library and comes with built-in project templates for several UI libraries, making it easy to use out of the box
+Zova can be used with any UI library and comes with built-in project templates for several UI libraries, making it easy to use out of the box.
 
 | Name        | Version  |
 | ----------- | -------- |
@@ -101,6 +101,6 @@ This improves development efficiency and experience, while making subsequent ite
 
 ## License
 
-MIT License
+MIT License.
 
-Copyright (c) 2016-present, Zova
+Copyright (c) 2016-present, Zova.

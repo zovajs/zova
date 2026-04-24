@@ -1,6 +1,6 @@
 # 简介
 
-Zova 通过[TypeStyle](https://github.com/typestyle/typestyle) 实现了`css-in-js`的能力，让样式的开发更加灵活、便捷，同时提供了开箱即用的 theme 切换能力
+Zova 通过[TypeStyle](https://github.com/typestyle/typestyle) 实现了`css-in-js`的能力，让样式的开发更加灵活、便捷，同时提供了开箱即用的 theme 切换能力。
 
 - 强烈建议了解 TypeStyle 的基本用法：[TypeStyle](https://github.com/typestyle/typestyle)
 

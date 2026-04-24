@@ -1,6 +1,6 @@
 # Api
 
-模块可以集中管理后端 Api 调用，把 Api 调用包装为`Api`资源，从而方便在任何模块访问
+模块可以集中管理后端 Api 调用，把 Api 调用包装为`Api`资源，从而方便在任何模块访问。
 
 ## 创建Api
 
@@ -16,7 +16,7 @@ $ zova :create:bean api test --module=demo-student
 右键菜单 - [模块路径]: `Zova Create/Api`
 :::
 
-依据提示输入 api 的名称，比如`test`，VSCode 插件会自动添加 api 的代码骨架
+依据提示输入 api 的名称，比如`test`，VSCode 插件会自动添加 api 的代码骨架。
 
 ## 定义Api
 
@@ -35,7 +35,7 @@ class ApiTest {
 
 ## 使用Api
 
-可以通过 Scope 实例直接访问 Api
+可以通过 Scope 实例直接访问 Api。
 
 ```diff
 class ControllerTest {

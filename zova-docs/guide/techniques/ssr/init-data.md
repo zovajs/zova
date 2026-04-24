@@ -1,6 +1,6 @@
 # Init Data
 
-Zova SSR prepares the initial data on the server in a very intuitive way and synchronizes it to the client, and automatically completing the hydration
+Zova SSR prepares the initial data on the server in a very intuitive way and synchronizes it to the client, and automatically completing the hydration.
 
 ## \_\_init\_\_与Model
 

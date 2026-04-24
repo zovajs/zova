@@ -23,7 +23,7 @@ export class Counter {
 
 在 Bean Class 的`__init__`的方法中调用`watch/watchEffect`。更详细用法，参见：[侦听器](https://cn.vuejs.org/guide/essentials/watchers.html)
 
-在`__init__`方法中创建的侦听器，会自动绑定到宿主组件实例上，并且会在宿主组件卸载时自动停止。因此，在大多数情况下，你无需关心怎么停止一个侦听器
+在`__init__`方法中创建的侦听器，会自动绑定到宿主组件实例上，并且会在宿主组件卸载时自动停止。因此，在大多数情况下，你无需关心怎么停止一个侦听器。
 
 ```typescript
 import { watch, watchEffect } from 'vue';

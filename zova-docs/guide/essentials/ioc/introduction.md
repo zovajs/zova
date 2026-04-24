@@ -1,10 +1,10 @@
 # Introduction
 
-We know that `IOC`(Inversion of Control) is an effective architectural design for system decoupling, and is also a supporting tool for the development of large-scale business systems
+We know that `IOC`(Inversion of Control) is an effective architectural design for system decoupling, and is also a supporting tool for the development of large-scale business systems.
 
 ## State Sharing: 4-in-1
 
-In actual development, there are four scopes of state sharing: `component internal`, `between components`, `global` and `system`. In the traditional Vue3, different mechanisms are used to achieve these state sharing scopes, while only a unified IOC container mechanism is needed in Zova
+In actual development, there are four scopes of state sharing: `component internal`, `between components`, `global` and `system`. In the traditional Vue3, different mechanisms are used to achieve these state sharing scopes, while only a unified IOC container mechanism is needed in Zova.
 
 | Scope of state sharing | Traditional Vue3 | Zova |
 | ---------------------- | ---------------- | ---- |
@@ -27,7 +27,7 @@ There are three types of ioc containers in Zova:
 
 ## Bean Class
 
-Zova adopts a modular system, and Bean Classes are provided by different modules
+Zova adopts a modular system, and Bean Classes are provided by different modules.
 
 ## Injection Scope
 

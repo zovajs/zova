@@ -17,7 +17,7 @@ $ pnpm add -g zova-cli@latest
 
 2. Install Vscode extension: [Zova - Official](https://marketplace.visualstudio.com/items?itemName=cabloy.zova-vscode)
 
-This extension provides a large number of menus for quickly creating code skeletons for various resources
+This extension provides a large number of menus for quickly creating code skeletons for various resources.
 
 ## Quick Start
 

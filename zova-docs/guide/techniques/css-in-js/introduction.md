@@ -1,6 +1,6 @@
 # Introduction
 
-Zova implements the `css-in-js` capability through [TypeStyle](https://github.com/typestyle/typestyle), making style development more flexible and convenient, while providing out-of-the-box theme switching capabilities
+Zova implements the `css-in-js` capability through [TypeStyle](https://github.com/typestyle/typestyle), making style development more flexible and convenient, while providing out-of-the-box theme switching capabilities.
 
 - It is strongly recommended to understand the basic usage of TypeStyle: [TypeStyle](https://github.com/typestyle/typestyle)
 

@@ -29,7 +29,7 @@ export class RenderTest extends BeanRenderBase {
 
 ## Dynamic style
 
-Computed properties can be used to create dynamic styles
+Computed properties can be used to create dynamic styles.
 
 ```typescript
 export class RenderTest extends BeanRenderBase {

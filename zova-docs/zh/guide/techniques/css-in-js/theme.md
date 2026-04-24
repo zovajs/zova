@@ -1,6 +1,6 @@
 # $theme
 
-Zova 提供了与 UI 库无关的 theme 定义与使用机制，并且提供了开箱即用的 theme 切换能力
+Zova 提供了与 UI 库无关的 theme 定义与使用机制，并且提供了开箱即用的 theme 切换能力。
 
 ## 两个维度
 
@@ -11,7 +11,7 @@ Zova 提供了两个维度的主题切换能力：
 
 ## $theme
 
-Zova 在 BeanBase 基类中注入了`$theme`对象，从而可以在任何 bean 实例中通过`this.$theme`对 theme 进行操作
+Zova 在 BeanBase 基类中注入了`$theme`对象，从而可以在任何 bean 实例中通过`this.$theme`对 theme 进行操作。
 
 - $theme 属性
 
@@ -67,7 +67,7 @@ export class ThemeDefault implements IThemeBase {
 
 ## 自定义主题
 
-那么，接下来，就可以参照缺省主题 Bean 来创建一个新的主题 Bean
+那么，接下来，就可以参照缺省主题 Bean 来创建一个新的主题 Bean。
 
 ### 创建主题Bean
 
@@ -75,7 +75,7 @@ export class ThemeDefault implements IThemeBase {
 右键菜单 - [模块路径]: `Zova Create/Bean: Theme`
 :::
 
-依据提示输入 theme bean 的名称，比如`orange`，VSCode 插件会自动添加 theme bean 的代码骨架
+依据提示输入 theme bean 的名称，比如`orange`，VSCode 插件会自动添加 theme bean 的代码骨架。
 
 ### 定制apply方法
 
@@ -104,7 +104,7 @@ export class ThemeOrange implements IThemeBase {
 
 ## 切换主题
 
-接下来就可以在代码中动态切换主题
+接下来就可以在代码中动态切换主题。
 
 ```typescript
 export class RenderTest extends BeanRenderBase {

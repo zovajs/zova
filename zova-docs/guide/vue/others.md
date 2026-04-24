@@ -23,7 +23,7 @@ export class Counter {
 
 Call `watch/watchEffect` in the `__init__` method of the Bean Class. For more detailed usage, see: [Watchers](https://vuejs.org/guide/essentials/watchers.html)
 
-Watchers declared synchronously inside `__init__` are bound to the owner component instance, and will be automatically stopped when the owner component is unmounted. In most cases, you don't need to worry about stopping the watcher yourself
+Watchers declared synchronously inside `__init__` are bound to the owner component instance, and will be automatically stopped when the owner component is unmounted. In most cases, you don't need to worry about stopping the watcher yourself.
 
 ```typescript
 import { watch, watchEffect } from 'vue';

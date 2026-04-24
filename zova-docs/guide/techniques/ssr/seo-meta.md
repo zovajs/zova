@@ -1,10 +1,10 @@
 # SEO Meta
 
-SEO Meta can dynamically change page title, manage `<meta>` tags, manage `<html>` and `<body>` DOM element attributes, add/remove/change `<style>` and `<script>` tags in the head of your document (useful for CDN stylesheets or for json-ld markup, for example), or manage `<noscript>` tags
+SEO Meta can dynamically change page title, manage `<meta>` tags, manage `<html>` and `<body>` DOM element attributes, add/remove/change `<style>` and `<script>` tags in the head of your document (useful for CDN stylesheets or for json-ld markup, for example), or manage `<noscript>` tags.
 
 ## $useMeta
 
-Zova provides the `$useMeta` method in the `BeanBase` base class, which can provide SEO Meta data
+Zova provides the `$useMeta` method in the `BeanBase` base class, which can provide SEO Meta data.
 
 `zova-dev/packages-zova/zova-core/src/bean/beanBase.ts`
 

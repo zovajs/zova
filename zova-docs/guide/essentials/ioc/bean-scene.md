@@ -1,6 +1,6 @@
 # Bean Scene
 
-Zova provides a set of decorator functions for declaring that a Bean Class is injectable. Different decorator functions represent different usage scenarios, and they also specify the default injection scope
+Zova provides a set of decorator functions for declaring that a Bean Class is injectable. Different decorator functions represent different usage scenarios, and they also specify the default injection scope.
 
 - a-bean
 
