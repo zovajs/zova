@@ -20,7 +20,8 @@
   "type": "module",
   "scripts": {
     "init": "pnpm install --no-frozen-lockfile && cd ./zova-cli && pnpm install --no-frozen-lockfile && cd .. && npm run zova-dev-deps",
-    "zova-dev-deps": "cd ./zova-dev && node ../zova-cli/cli/src/bin/zova.ts :tools:deps"
+    "zova-dev-deps": "cd ./zova-dev && node ../zova-cli/cli/src/bin/zova.ts :tools:deps",
+    "docs:fix": "textlint --fix zova-docs/**/*.md"
   },
   "dependencies": {},
   "devDependencies": {
@@ -33,8 +34,11 @@
     "minimist": "^1.2.8",
     "oxfmt": "^0.45.0",
     "oxlint": "^1.60.0",
-    "textlint": "^14.8.4",
+    "textlint": "^15.5.4",
+    "textlint-rule-en-no-mixed-period": "^3.0.2",
+    "textlint-rule-ja-no-mixed-period": "^3.0.2",
     "textlint-rule-ja-space-between-half-and-full-width": "^2.4.2",
+    "textlint-rule-period-in-list-item": "^1.0.1",
     "typedoc": "^0.25.13",
     "typescript": "^5.9.3"
   },
