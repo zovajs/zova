@@ -39,9 +39,7 @@ export function Use(options?: IDecoratorUseOptions | string): PropertyDecorator 
         window.setTimeout(() => {
           const moduleTarget = appResource._getModuleName(target.constructor as any);
           if (moduleSource !== moduleTarget) {
-            console.error(
-              `inject class should be imported by type, such as: import type { ${appResource._fixClassName(beanClass.name)} } from 'zova-module-xxx-xxx'`,
-            );
+            console.error(`inject class should be imported by type, such as: import type { ${beanClass.name} } from 'zova-module-xxx-xxx'`);
           }
         }, 0);
       }
