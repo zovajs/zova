@@ -1,6 +1,6 @@
 # CabloyJS
 
-CabloyJS is not a standalone framework, but rather provides a set of out-of-the-box advanced feature modules in the form of `Vona/Zova suites` to accelerate fullstack project development
+CabloyJS is not a standalone framework, but rather provides a set of out-of-the-box advanced feature modules in the form of `Vona/Zova suites` to accelerate fullstack project development.
 
 ## 1. Zova Suite: zova-suite-a-cabloy (MIT)
 
@@ -34,7 +34,7 @@ This suite uses the `VuetifyJS` UI library and provides a set of out-of-the-box 
 
 ### 1. 2016: V1-V4
 
-CabloyJS development started in 2016. CabloyJS was initially a fullstack NodeJS framework based on JavaScript, and has evolved through major versions including V1, V2, V3, and V4, continuously improving its architecture
+CabloyJS development started in 2016. CabloyJS was initially a fullstack NodeJS framework based on JavaScript, and has evolved through major versions including V1, V2, V3, and V4, continuously improving its architecture.
 
 - Some say: `CabloyJS is a textbook-like framework`
 - Others suggest: `If CabloyJS supported TypeScript and adopted a frontend/backend separation architecture, it would bring a brand new fullstack development experience`
@@ -52,6 +52,6 @@ On 2026-04-13, ZovaJS V5 and VonaJS V5 were officially released. CabloyJS V5, bu
 
 ## License
 
-MIT License
+MIT License.
 
-Copyright (c) 2016-present, Vona/Zova/Cabloy
+Copyright (c) 2016-present, Vona/Zova/Cabloy.
