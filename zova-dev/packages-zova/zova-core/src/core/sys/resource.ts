@@ -121,19 +121,13 @@ export class AppResource {
     return this.beans[fullName] as IDecoratorBeanOptionsBase<T>;
   }
 
-  _fixClassName(className: string) {
-    while (className.endsWith('2')) {
-      className = className.substring(0, className.length - 1);
-    }
-    return className;
-  }
-
   _parseSceneAndBeanName<T>(beanClass: Constructable<T>, scene?: string, name?: string): { scene: string; name: string } {
     if (scene && name) {
       return { scene, name };
     }
     // bean class name
-    let beanClassName = this._fixClassName(beanClass.name);
+    // let beanClassName = this._fixClassName(beanClass.name);
+    let beanClassName = beanClass.name;
     // skip prefix: Bean
     if (beanClassName.toLowerCase().startsWith('bean')) {
       beanClassName = beanClassName.substring('bean'.length);
@@ -196,6 +190,13 @@ export class AppResource {
       return deepExtend({}, options, optionsConfig);
     }
   }
+
+  // _fixClassName(className: string) {
+  //   while (className.endsWith('2')) {
+  //     className = className.substring(0, className.length - 1);
+  //   }
+  //   return className;
+  // }
 }
 
 export const appResource = new AppResource();
