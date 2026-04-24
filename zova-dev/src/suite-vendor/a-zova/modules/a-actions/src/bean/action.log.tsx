@@ -14,12 +14,14 @@ export interface IActionOptionsLog extends IDecoratorActionOptions<TypeActionLog
 @Preload()
 export class ActionLog extends BeanBase implements IActionExecute {
   execute(options: IActionOptionsLog, _renderContext: IJsxRenderContextBase, next: NextActionExecute) {
-    const name = options.name;
-    const message = options.message;
-    if (isNil(name)) {
-      console.log(message);
-    } else {
-      console.log(name, message);
+    if (process.env.CLIENT) {
+      const name = options.name;
+      const message = options.message;
+      if (isNil(name)) {
+        console.log(message);
+      } else {
+        console.log(name, message);
+      }
     }
     return next();
   }

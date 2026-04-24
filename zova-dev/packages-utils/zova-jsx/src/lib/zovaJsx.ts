@@ -379,13 +379,15 @@ export class ZovaJsx extends BeanSimple {
           celScope[cast(props).name] = cast(props).value;
           child = undefined;
         } else if (jsxChild.type === 'log') {
-          const props = this.renderJsxProps(jsxChild.props, {}, celScope, renderContext);
-          const name = cast(props).name;
-          const message = cast(props).message;
-          if (isNil(name)) {
-            console.log(message);
-          } else {
-            console.log(name, message);
+          if (process.env.CLIENT) {
+            const props = this.renderJsxProps(jsxChild.props, {}, celScope, renderContext);
+            const name = cast(props).name;
+            const message = cast(props).message;
+            if (isNil(name)) {
+              console.log(message);
+            } else {
+              console.log(name, message);
+            }
           }
           child = undefined;
         } else {
