@@ -14,3 +14,4 @@ export * from './select.js';
 export * from './table.js';
 export * from './textarea.js';
 export * from './toggle.js';
+export * from './dateRange.js';
