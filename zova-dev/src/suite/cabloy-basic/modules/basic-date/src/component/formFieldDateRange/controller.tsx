@@ -4,13 +4,10 @@ import type { IFormFieldOptions } from 'zova-module-a-form';
 import { BeanControllerBase } from 'zova';
 import { Controller } from 'zova-module-a-bean';
 import { ZFormField } from 'zova-module-a-form';
-import { IDateRangeOptions } from 'zova-module-a-openapi';
 
 import { ZDateRange } from '../../.metadata/index.js';
 
-export interface ControllerFormFieldDateRangeProps extends IFormFieldOptions {
-  dateRange?: IDateRangeOptions;
-}
+export interface ControllerFormFieldDateRangeProps extends IFormFieldOptions {}
 
 @Controller()
 export class ControllerFormFieldDateRange extends BeanControllerBase {
@@ -31,7 +28,7 @@ export class ControllerFormFieldDateRange extends BeanControllerBase {
         slotDefault={({ propsBucket }, $$formField) => {
           return (
             <ZDateRange
-              separator={this.$props.dateRange?.separator}
+              separator={this.$props.preset?.dateRange?.separator}
               modelValue={propsBucket.displayValue}
               onUpdate:modelValue={value => {
                 $$formField.setDisplayValue(value);
