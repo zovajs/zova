@@ -1,8 +1,8 @@
 import { BeanControllerBase, ClientOnly, IComponentOptions, TypeEventOff, Use } from 'zova';
 import { Controller } from 'zova-module-a-bean';
 import { ControllerForm, IFormFieldOptions, IFormFieldRenderContextProps, ZFormField } from 'zova-module-a-form';
-import { ICaptchaData, ICaptchaOptions } from 'zova-module-a-openapi';
 import { ToolV } from 'zova-module-a-zod';
+import { ICaptchaData, ICaptchaOptions } from 'zova-module-basic-openapi';
 
 export interface ControllerFormFieldCaptchaProps extends IFormFieldOptions {
   captcha?: ICaptchaOptions;

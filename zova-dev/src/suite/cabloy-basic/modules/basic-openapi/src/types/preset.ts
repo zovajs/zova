@@ -13,10 +13,10 @@ import type { IToggleOptions } from './toggle.ts';
 
 declare module 'zova-module-a-openapi' {
   export interface ISchemaRenderComponentPresetRecord {
-    actionView: IActionViewOptions;
-    actionUpdate: IActionUpdateOptions;
-    actionDelete: IActionDeleteOptions;
-    actionOperations: IActionOperationsOptions;
+    actionView?: IActionViewOptions;
+    actionUpdate?: IActionUpdateOptions;
+    actionDelete?: IActionDeleteOptions;
+    actionOperations?: IActionOperationsOptions;
     input?: IInputOptions;
     captcha?: ICaptchaOptions;
     currency?: CurrencyOptions;

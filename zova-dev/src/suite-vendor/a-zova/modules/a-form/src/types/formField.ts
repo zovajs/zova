@@ -6,7 +6,7 @@ import type { IBehaviorItem } from 'zova-module-a-behavior';
 import type { IIconRecord } from 'zova-module-a-icon';
 import type {
   IJsxRenderContextBase,
-  ISchemaObjectExtensionFieldRestPropsPreset,
+  ISchemaRenderComponentPresetRecord,
   TypeFormFieldRenderComponent,
   TypeFormFieldRenderComponentProvider,
 } from 'zova-module-a-openapi';
@@ -44,7 +44,7 @@ export type TypeFormFieldDisplayValueUpdateTiming = 'input' | 'change';
 
 export interface IFormFieldOptionsBase {
   render?: TypeFormFieldRenderComponent;
-  preset?: ISchemaObjectExtensionFieldRestPropsPreset;
+  preset?: ISchemaRenderComponentPresetRecord;
   displayValue?: any;
   displayValueUpdateTiming?: TypeFormFieldDisplayValueUpdateTiming;
   onSetDisplayValue?: TypeFormFieldOnSetDisplayValue;

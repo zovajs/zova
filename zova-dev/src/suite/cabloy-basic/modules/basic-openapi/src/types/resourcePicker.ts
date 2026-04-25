@@ -1,9 +1,9 @@
-import type { IResourceRecord } from './resource.ts';
+import { ITableQuery } from 'zova-module-a-openapi';
+
 import type { ISelectOptions } from './select.ts';
-import type { ITableQuery } from './table.ts';
 
 export interface IResourcePickerOptions {
-  resource?: keyof IResourceRecord;
+  resource?: string;
   actionPath?: string;
   query?: ITableQuery;
   selectOptions?: ISelectOptions;

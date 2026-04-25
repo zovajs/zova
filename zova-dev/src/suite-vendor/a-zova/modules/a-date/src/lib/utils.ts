@@ -1,13 +1,13 @@
 import { DateTime } from 'luxon';
-import { TypeDateFormat } from 'zova-module-a-openapi';
+import { IDateOptions } from 'zova-module-basic-openapi';
 
-export function dateFormatUtil(value: any, options?: TypeDateFormat) {
+export function dateFormatUtil(value: any, options?: IDateOptions) {
   if (!value) return;
   if (!options) return value;
   const datetime = DateTime.fromJSDate(value);
-  if (typeof options === 'string') {
-    return datetime.toFormat(options);
-  } else if (typeof options === 'object' && options.preset) {
+  if (options.format) {
+    return datetime.toFormat(options.format);
+  } else if (options.preset) {
     return datetime.toLocaleString(DateTime[options.preset]);
   }
   return value;
