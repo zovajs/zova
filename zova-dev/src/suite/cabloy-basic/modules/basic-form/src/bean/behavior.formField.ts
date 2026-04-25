@@ -1,5 +1,6 @@
 import type { ControllerFormField, IFormFieldRenderContext, IFormFieldRenderContextProps, IFormMeta, TypeFormField } from 'zova-module-a-form';
 
+import { isNil } from '@cabloy/utils';
 import { VNode } from 'vue';
 import { Use } from 'zova';
 import { BeanBehaviorBase, Behavior, IDecoratorBehaviorOptions, NextBehavior } from 'zova-module-a-behavior';
@@ -29,10 +30,13 @@ export class BehaviorFormField extends BeanBehaviorBase<IBehaviorOptionsFormFiel
   }
 
   private _patchProps_general(formMeta: IFormMeta | undefined, _field: TypeFormField, renderContext: IFormFieldRenderContext) {
+    const { propsBucket } = renderContext;
     const propsPatch: IFormFieldRenderContextProps = {
-      value: renderContext.propsBucket.displayValue,
+      value: propsBucket.displayValue,
     };
-    if (formMeta?.formMode === 'view') {
+    if (!isNil(propsBucket.readonly)) {
+      propsPatch.readonly = propsBucket.readonly;
+    } else if (formMeta?.formMode === 'view') {
       propsPatch.readonly = true;
     }
     return propsPatch;
