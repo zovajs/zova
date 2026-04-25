@@ -1,15 +1,14 @@
 {
-  "name": "zova-module-a-openapi",
-  "version": "5.1.11",
-  "gitHead": "8cb2168b0a2607c216a4d9b81bc9e16088895fc5",
+  "name": "zova-module-basic-openapi",
+  "version": "5.0.0",
   "description": "",
   "keywords": [
     "Zova Module"
   ],
   "author": "",
   "files": [
-    "dist",
     "mock",
+    "dist",
     "src",
     "icons",
     "assets",
@@ -35,8 +34,7 @@
     "postpack": "clean-package restore && npm run clean"
   },
   "dependencies": {
-    "@cabloy/json-schema-to-zod": "^2.6.4",
-    "openapi3-ts": "^4.5.0"
+    "@zhennann/currency": "^2.0.4"
   },
   "devDependencies": {
     "clean-package": "^2.2.0",
@@ -53,27 +51,5 @@
       "exports.\\..import"
     ]
   },
-  "title": "a-openapi",
-  "zovaModule": {
-    "capabilities": {
-      "monkey": true
-    },
-    "dependencies": {
-      "a-model": "5.0.0"
-    },
-    "globalDependencies": {
-      "openapi3-ts": true
-    },
-    "bundle": {
-      "vendors": [
-        {
-          "match": [
-            "@cabloy/json-schema-to-zod",
-            "openapi3-ts"
-          ],
-          "output": "openapi3"
-        }
-      ]
-    }
-  }
+  "title": "basic-openapi"
 }

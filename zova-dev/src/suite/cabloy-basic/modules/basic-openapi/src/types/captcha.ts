@@ -2,11 +2,11 @@ export interface ICaptchaSceneRecord {
   'captcha-simple:simple': never;
 }
 
-export interface ICaptchaProviderRecord {}
-
 export interface ICaptchaOptions {
   scene?: keyof ICaptchaSceneRecord;
 }
+
+export interface ICaptchaProviderRecord {}
 
 export interface ICaptchaData {
   id: string;

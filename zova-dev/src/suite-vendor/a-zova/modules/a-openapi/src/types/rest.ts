@@ -1,27 +1,16 @@
-import type { CurrencyOptions } from '@zhennann/currency';
 import type { ComponentPublicInstance } from 'vue';
 import type { Constructable, IComponentRecord, TypeBeanRecordGeneralSelector } from 'zova';
 import type { TypeRenderComponentJsx } from 'zova-jsx';
 
 import type { TypeResourceActionRowRecordRender } from './actions.js';
-import type { ICaptchaOptions } from './captcha.js';
-import type { TypeDateFormat } from './date.js';
-import type { IResourcePickerOptions } from './resourcePicker.js';
-import type { ISelectOptions } from './select.js';
-import type { ITextareaOptions } from './textarea.js';
-import type { IToggleOptions } from './toggle.js';
 import 'openapi3-ts/oas30';
 import 'openapi3-ts/oas31';
 
+export interface ISchemaRenderComponentPresetRecord {}
+
 export interface ISchemaObjectExtensionFieldRest {
   render?: TypeFormFieldRenderComponentNormal | TypeTableCellRenderComponentNormal;
-  captcha?: ICaptchaOptions;
-  currency?: CurrencyOptions;
-  dateFormat?: TypeDateFormat;
-  toggle?: IToggleOptions;
-  select?: ISelectOptions;
-  textarea?: ITextareaOptions;
-  resourcePicker?: IResourcePickerOptions;
+  preset?: ISchemaRenderComponentPresetRecord;
   customKey?: string;
   visible?: boolean;
   displayValue?: any;

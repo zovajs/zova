@@ -9,6 +9,7 @@
     "zova-module-basic-adapter": "workspace:^",
     "zova-module-basic-date": "workspace:^",
     "zova-module-basic-form": "workspace:^",
+    "zova-module-basic-openapi": "^5.0.0",
     "zova-module-basic-restpage": "workspace:^",
     "zova-module-basic-table": "workspace:^",
     "zova-suite-a-cabloy": "workspace:^"

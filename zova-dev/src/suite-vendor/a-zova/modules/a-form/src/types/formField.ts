@@ -4,7 +4,12 @@ import type z from 'zod';
 import type { TypeRenderComponentJsx } from 'zova-jsx';
 import type { IBehaviorItem } from 'zova-module-a-behavior';
 import type { IIconRecord } from 'zova-module-a-icon';
-import type { IJsxRenderContextBase, TypeFormFieldRenderComponent, TypeFormFieldRenderComponentProvider } from 'zova-module-a-openapi';
+import type {
+  IJsxRenderContextBase,
+  ISchemaObjectExtensionFieldRestPropsPreset,
+  TypeFormFieldRenderComponent,
+  TypeFormFieldRenderComponentProvider,
+} from 'zova-module-a-openapi';
 
 import type { ControllerForm } from '../component/form/controller.jsx';
 import type { ControllerFormField } from '../component/formField/controller.jsx';
@@ -39,6 +44,7 @@ export type TypeFormFieldDisplayValueUpdateTiming = 'input' | 'change';
 
 export interface IFormFieldOptionsBase {
   render?: TypeFormFieldRenderComponent;
+  preset?: ISchemaObjectExtensionFieldRestPropsPreset;
   displayValue?: any;
   displayValueUpdateTiming?: TypeFormFieldDisplayValueUpdateTiming;
   onSetDisplayValue?: TypeFormFieldOnSetDisplayValue;

@@ -22,4 +22,7 @@ export type TypeDateFormatPreset =
   | 'DATETIME_FULL_WITH_SECONDS'
   | 'DATETIME_HUGE_WITH_SECONDS';
 
-export type TypeDateFormat = { preset: TypeDateFormatPreset } | string;
+export interface IDateOptions {
+  preset?: TypeDateFormatPreset;
+  format?: string;
+}
