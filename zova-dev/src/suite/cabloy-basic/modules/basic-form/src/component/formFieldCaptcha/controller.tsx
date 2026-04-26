@@ -1,12 +1,10 @@
 import { BeanControllerBase, ClientOnly, IComponentOptions, TypeEventOff, Use } from 'zova';
 import { Controller } from 'zova-module-a-bean';
-import { ControllerForm, IFormFieldOptions, IFormFieldRenderContextProps, ZFormField } from 'zova-module-a-form';
+import { ControllerForm, IFormFieldPresetOptions, IFormFieldRenderContextProps, ZFormField } from 'zova-module-a-form';
 import { ToolV } from 'zova-module-a-zod';
-import { ICaptchaData, ICaptchaOptions } from 'zova-module-basic-openapi';
+import { ICaptchaData } from 'zova-module-basic-openapi';
 
-export interface ControllerFormFieldCaptchaProps extends IFormFieldOptions {
-  captcha?: ICaptchaOptions;
-}
+export interface ControllerFormFieldCaptchaProps extends IFormFieldPresetOptions {}
 
 @Controller()
 export class ControllerFormFieldCaptcha extends BeanControllerBase {
@@ -45,7 +43,7 @@ export class ControllerFormFieldCaptcha extends BeanControllerBase {
   }
 
   get captchaScene() {
-    return this.$props.captcha?.scene ?? 'captcha-simple:simple';
+    return this.$props.preset?.captcha?.scene ?? 'captcha-simple:simple';
   }
 
   private async createCaptchaData() {

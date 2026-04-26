@@ -49,7 +49,7 @@
     "zova": "^5.1.39"
   },
   "devDependencies": {
-    "@cabloy/lint": "^5.1.5",
+    "@cabloy/lint": "^5.1.8",
     "@cabloy/openapi-typescript": "^7.9.2",
     "@quasar/app-vite": "2.4.0",
     "@types/node": "^22.10.2",

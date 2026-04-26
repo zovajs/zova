@@ -13,6 +13,6 @@ export interface TypeResourceActionRowRecord {
   operationsRow: IResourceActionRowOptions;
 }
 
-export type TypeResourceActionRowRecordRender = {
-  [key in keyof TypeResourceActionRowRecord as `action${Capitalize<key>}`]: TypeResourceActionRowRecord[key];
-};
+// export type TypeResourceActionRowRecordRender = {
+//   [key in keyof TypeResourceActionRowRecord as `action${Capitalize<key>}`]: TypeResourceActionRowRecord[key];
+// };

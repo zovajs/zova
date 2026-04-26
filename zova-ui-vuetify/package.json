@@ -137,7 +137,7 @@
   },
   "devDependencies": {
     "@cabloy/cli": "^3.1.9",
-    "@cabloy/lint": "^5.1.7",
+    "@cabloy/lint": "^5.1.8",
     "@cabloy/openapi-typescript": "^7.9.2",
     "@quasar/app-vite": "npm:@cabloy/quasar-app-vite@^2.5.9",
     "@types/luxon": "^3.7.1",

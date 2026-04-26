@@ -1,5 +1,5 @@
 import type { IComponentOptions } from 'zova';
-import type { IFormFieldOptions } from 'zova-module-a-form';
+import type { IFormFieldPresetOptions } from 'zova-module-a-form';
 
 import { BeanControllerBase } from 'zova';
 import { Controller } from 'zova-module-a-bean';
@@ -8,7 +8,7 @@ import { IDateOptions } from 'zova-module-basic-openapi';
 
 import { dateFormatUtil } from '../../lib/utils.js';
 
-export interface ControllerFormFieldDateProps extends IFormFieldOptions {}
+export interface ControllerFormFieldDateProps extends IFormFieldPresetOptions {}
 
 @Controller()
 export class ControllerFormFieldDate extends BeanControllerBase {

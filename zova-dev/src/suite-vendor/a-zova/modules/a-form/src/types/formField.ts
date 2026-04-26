@@ -44,7 +44,6 @@ export type TypeFormFieldDisplayValueUpdateTiming = 'input' | 'change';
 
 export interface IFormFieldOptionsBase {
   render?: TypeFormFieldRenderComponent;
-  preset?: ISchemaRenderComponentPresetRecord;
   displayValue?: any;
   displayValueUpdateTiming?: TypeFormFieldDisplayValueUpdateTiming;
   onSetDisplayValue?: TypeFormFieldOnSetDisplayValue;
@@ -59,6 +58,10 @@ export interface IFormFieldOptionsBase {
   onChange?: (e: Event) => void; // allow set to null, but not provide null type
   onInput?: (e: Event) => void; // allow set to null, but not provide null type
   onBlur?: (e: Event) => void; // allow set to null, but not provide null type
+}
+
+export interface IFormFieldPresetOptions<TParentData = {}> extends IFormFieldOptions<TParentData> {
+  preset?: ISchemaRenderComponentPresetRecord;
 }
 
 export interface IFormFieldOptions<TParentData = {}>

@@ -2,7 +2,6 @@ import type { ComponentPublicInstance } from 'vue';
 import type { Constructable, IComponentRecord, TypeBeanRecordGeneralSelector } from 'zova';
 import type { TypeRenderComponentJsx } from 'zova-jsx';
 
-import type { TypeResourceActionRowRecordRender } from './actions.js';
 import 'openapi3-ts/oas30';
 import 'openapi3-ts/oas31';
 
@@ -52,23 +51,25 @@ export const renderFormFieldTopPropsSystem = ['order', 'table', 'form', 'filter'
 export const renderTableColumnTopPropsSystem = ['order', 'table', 'form', 'filter', 'displayValue'];
 
 export type TypeRenderComponentPreset =
-  | keyof TypeResourceActionRowRecordRender
+  | keyof ISchemaRenderComponentPresetRecord
   | 'text'
   | 'captcha'
   | 'currency'
   | 'date'
   | 'dateRange'
-  | 'textarea'
+  | 'toggle'
   | 'select'
-  | 'checkbox'
-  | 'radio'
-  | 'switch'
-  | 'image'
-  | 'file'
-  | 'color'
-  | 'password'
-  | 'email'
-  | 'url';
+  | 'textarea'
+  | 'resourcePicker';
+// | 'checkbox';
+// | 'radio'
+// | 'switch';
+// | 'image'
+// | 'file'
+// | 'color'
+// | 'password'
+// | 'email'
+// | 'url';
 
 // form
 export type TypeFormFieldRenderComponentNormal = Constructable<ComponentPublicInstance> | keyof IComponentRecord | TypeRenderComponentPreset;
