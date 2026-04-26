@@ -1,6 +1,12 @@
 import type { TypeStyle } from 'typestyle';
 import type { NestedCSSProperties } from 'typestyle/lib/types.js';
-import type { BeanBase, BeanContainer, IMonkeyAppInitialize, IMonkeyAppInitialized, IMonkeyBeanInit } from 'zova';
+import type {
+  BeanBase,
+  BeanContainer,
+  IMonkeyAppInitialize,
+  IMonkeyAppInitialized,
+  IMonkeyBeanInit,
+} from 'zova';
 
 import { createTypeStyle, cssRaw, cssRule, style } from 'typestyle';
 import { beanFullNameFromOnionName, BeanSimple, SymbolBeanFullName, useComputed } from 'zova';
@@ -10,7 +16,10 @@ import type { ScopeModule } from './.metadata/this.js';
 import { __ThisModule__ } from './.metadata/this.js';
 import { BeanTheme } from './bean/bean.theme.js';
 
-export class Monkey extends BeanSimple implements IMonkeyAppInitialize, IMonkeyAppInitialized, IMonkeyBeanInit {
+export class Monkey
+  extends BeanSimple
+  implements IMonkeyAppInitialize, IMonkeyAppInitialized, IMonkeyBeanInit
+{
   private _beanTheme: BeanTheme;
   private _beanCssDefault: any;
   private _styleInstance: TypeStyle;
@@ -37,7 +46,10 @@ export class Monkey extends BeanSimple implements IMonkeyAppInitialize, IMonkeyA
     this._beanTheme = await this.bean._getBean(BeanTheme, true);
     // css default
     const scope: ScopeModule = await this.bean.getScope(__ThisModule__);
-    this._beanCssDefault = await this.bean._getBean(beanFullNameFromOnionName(scope.config.defaultCss, 'css'), true);
+    this._beanCssDefault = await this.bean._getBean(
+      beanFullNameFromOnionName(scope.config.defaultCss, 'css'),
+      true,
+    );
   }
 
   async beanInit(bean: BeanContainer, beanInstance: BeanBase) {
@@ -95,7 +107,10 @@ export class Monkey extends BeanSimple implements IMonkeyAppInitialize, IMonkeyA
   _patchStyle(beanInstance: BeanBase, props, ...args) {
     if (process.env.DEV) {
       if (props && typeof props === 'object') {
-        props = Object.assign({ $debugName: beanInstance[SymbolBeanFullName].replaceAll('.', '_') }, props);
+        props = Object.assign(
+          { $debugName: beanInstance[SymbolBeanFullName].replaceAll('.', '_') },
+          props,
+        );
       }
     }
     if (this._styleInstance) {

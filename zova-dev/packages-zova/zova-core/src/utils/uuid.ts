@@ -14,7 +14,12 @@ for (let i = 0; i < 256; i++) {
 // Use best available PRNG
 const randomBytes = (() => {
   // Node & Browser support
-  const lib: any = typeof crypto !== 'undefined' ? crypto : typeof window !== 'undefined' ? window.crypto || (<any>window).msCrypto : void 0;
+  const lib: any =
+    typeof crypto !== 'undefined'
+      ? crypto
+      : typeof window !== 'undefined'
+        ? window.crypto || (<any>window).msCrypto
+        : void 0;
 
   if (lib !== void 0) {
     if (lib.randomBytes !== void 0) {

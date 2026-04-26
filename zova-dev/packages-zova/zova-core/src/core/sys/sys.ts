@@ -42,7 +42,10 @@ export class ZovaSys {
     envRuntime?: Partial<ZovaConfigEnv>,
   ) {
     if (!this[SymbolSysInitializePromise]) {
-      this[SymbolSysInitializePromise] = this._initializeInner({ modulesMeta, locales, config, env, viteHot, SysMonkey, legacyRoutes }, envRuntime);
+      this[SymbolSysInitializePromise] = this._initializeInner(
+        { modulesMeta, locales, config, env, viteHot, SysMonkey, legacyRoutes },
+        envRuntime,
+      );
     }
     return this[SymbolSysInitializePromise];
   }
@@ -132,13 +135,17 @@ export class ZovaSys {
   }
 
   // eslint-disable-next-line no-undef
-  private _prepareEnv_Runtime(env: NodeJS.ProcessEnv, envRuntime?: Partial<ZovaConfigEnv>): ZovaConfigEnv {
+  private _prepareEnv_Runtime(
+    env: NodeJS.ProcessEnv,
+    envRuntime?: Partial<ZovaConfigEnv>,
+  ): ZovaConfigEnv {
     return _mergeEnv(env, envRuntime);
   }
 
   // eslint-disable-next-line no-undef
   private _prepareEnv_Client(env: NodeJS.ProcessEnv): ZovaConfigEnv {
-    if (process.env.SERVER || !cast(window).__INITIAL_STATE__) return env as unknown as ZovaConfigEnv;
+    if (process.env.SERVER || !cast(window).__INITIAL_STATE__)
+      return env as unknown as ZovaConfigEnv;
     const ssrState = cast(window).__INITIAL_STATE__;
     return _mergeEnv(env, ssrState.envClient);
   }

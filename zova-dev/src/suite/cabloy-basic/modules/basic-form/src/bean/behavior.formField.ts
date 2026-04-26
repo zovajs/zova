@@ -1,9 +1,20 @@
-import type { ControllerFormField, IFormFieldRenderContext, IFormFieldRenderContextProps, IFormMeta, TypeFormField } from 'zova-module-a-form';
+import type {
+  ControllerFormField,
+  IFormFieldRenderContext,
+  IFormFieldRenderContextProps,
+  IFormMeta,
+  TypeFormField,
+} from 'zova-module-a-form';
 
 import { isNil } from '@cabloy/utils';
 import { VNode } from 'vue';
 import { Use } from 'zova';
-import { BeanBehaviorBase, Behavior, IDecoratorBehaviorOptions, NextBehavior } from 'zova-module-a-behavior';
+import {
+  BeanBehaviorBase,
+  Behavior,
+  IDecoratorBehaviorOptions,
+  NextBehavior,
+} from 'zova-module-a-behavior';
 
 export interface IBehaviorPropsInputFormField extends IFormFieldRenderContext {}
 
@@ -12,11 +23,18 @@ export interface IBehaviorPropsOutputFormField extends IBehaviorPropsInputFormFi
 export interface IBehaviorOptionsFormField extends IDecoratorBehaviorOptions {}
 
 @Behavior<IBehaviorOptionsFormField>()
-export class BehaviorFormField extends BeanBehaviorBase<IBehaviorOptionsFormField, IBehaviorPropsInputFormField, IBehaviorPropsOutputFormField> {
+export class BehaviorFormField extends BeanBehaviorBase<
+  IBehaviorOptionsFormField,
+  IBehaviorPropsInputFormField,
+  IBehaviorPropsOutputFormField
+> {
   @Use({ injectionScope: 'host' })
   $$formField: ControllerFormField;
 
-  protected render(renderContext: IFormFieldRenderContext, next: NextBehavior<IBehaviorPropsOutputFormField>): VNode {
+  protected render(
+    renderContext: IFormFieldRenderContext,
+    next: NextBehavior<IBehaviorPropsOutputFormField>,
+  ): VNode {
     this._patchProps(renderContext);
     return next(renderContext);
   }
@@ -29,7 +47,11 @@ export class BehaviorFormField extends BeanBehaviorBase<IBehaviorOptionsFormFiel
     }
   }
 
-  private _patchProps_general(formMeta: IFormMeta | undefined, _field: TypeFormField, renderContext: IFormFieldRenderContext) {
+  private _patchProps_general(
+    formMeta: IFormMeta | undefined,
+    _field: TypeFormField,
+    renderContext: IFormFieldRenderContext,
+  ) {
     const { propsBucket } = renderContext;
     const propsPatch: IFormFieldRenderContextProps = {
       value: propsBucket.displayValue,
@@ -42,7 +64,11 @@ export class BehaviorFormField extends BeanBehaviorBase<IBehaviorOptionsFormFiel
     return propsPatch;
   }
 
-  private _patchProps_input(formMeta: IFormMeta | undefined, field: TypeFormField, renderContext: IFormFieldRenderContext) {
+  private _patchProps_input(
+    formMeta: IFormMeta | undefined,
+    field: TypeFormField,
+    renderContext: IFormFieldRenderContext,
+  ) {
     const { propsBucket } = renderContext;
     const renderFlattern = propsBucket.renderFlattern;
     const propsGeneral = this._patchProps_general(formMeta, field, renderContext);

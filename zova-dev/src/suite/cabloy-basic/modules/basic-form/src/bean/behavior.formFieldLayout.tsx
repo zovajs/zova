@@ -1,17 +1,28 @@
-import type { ControllerFormField, IFormFieldLayoutOptionsBase, IFormFieldRenderContext, TypeFormField } from 'zova-module-a-form';
+import type {
+  ControllerFormField,
+  IFormFieldLayoutOptionsBase,
+  IFormFieldRenderContext,
+  TypeFormField,
+} from 'zova-module-a-form';
 
 import { classes } from 'typestyle';
 import { VNode } from 'vue';
 import { z } from 'zod';
 import { Use } from 'zova';
 import { invokeProp } from 'zova-jsx';
-import { BeanBehaviorBase, Behavior, IDecoratorBehaviorOptions, NextBehavior } from 'zova-module-a-behavior';
+import {
+  BeanBehaviorBase,
+  Behavior,
+  IDecoratorBehaviorOptions,
+  NextBehavior,
+} from 'zova-module-a-behavior';
 
 export interface IBehaviorPropsInputFormFieldLayout extends IFormFieldRenderContext {}
 
 export interface IBehaviorPropsOutputFormFieldLayout extends IBehaviorPropsInputFormFieldLayout {}
 
-export interface IBehaviorOptionsFormFieldLayout extends IDecoratorBehaviorOptions, IFormFieldLayoutOptionsBase {}
+export interface IBehaviorOptionsFormFieldLayout
+  extends IDecoratorBehaviorOptions, IFormFieldLayoutOptionsBase {}
 
 @Behavior<IBehaviorOptionsFormFieldLayout>()
 export class BehaviorFormFieldLayout extends BeanBehaviorBase<
@@ -22,7 +33,10 @@ export class BehaviorFormFieldLayout extends BeanBehaviorBase<
   @Use({ injectionScope: 'host' })
   $$formField: ControllerFormField;
 
-  protected render(renderContext: IFormFieldRenderContext, next: NextBehavior<IBehaviorPropsOutputFormFieldLayout>): VNode {
+  protected render(
+    renderContext: IFormFieldRenderContext,
+    next: NextBehavior<IBehaviorPropsOutputFormFieldLayout>,
+  ): VNode {
     const field = this.$$formField.field;
     this._patchProps(renderContext);
     const vnode = next(renderContext);
@@ -33,7 +47,12 @@ export class BehaviorFormFieldLayout extends BeanBehaviorBase<
     return this._renderBlock(renderContext, vnode, field, error);
   }
 
-  private _renderInline(renderContext: IFormFieldRenderContext, vnode: VNode, field: TypeFormField, error: z.ZodError | undefined): VNode {
+  private _renderInline(
+    renderContext: IFormFieldRenderContext,
+    vnode: VNode,
+    field: TypeFormField,
+    error: z.ZodError | undefined,
+  ): VNode {
     const bordered = renderContext.propsBucket.bordered;
     const label = renderContext.propsBucket.label;
     const className = classes(
@@ -55,7 +74,12 @@ export class BehaviorFormFieldLayout extends BeanBehaviorBase<
     );
   }
 
-  private _renderBlock(renderContext: IFormFieldRenderContext, vnode: VNode, field: TypeFormField, error: z.ZodError | undefined): VNode {
+  private _renderBlock(
+    renderContext: IFormFieldRenderContext,
+    vnode: VNode,
+    field: TypeFormField,
+    error: z.ZodError | undefined,
+  ): VNode {
     const label = renderContext.propsBucket.label;
     const className = classes('fieldset', renderContext.propsBucket.classContainer);
     return (

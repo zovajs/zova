@@ -16,7 +16,10 @@ const hashCode = (moduleId: string) => {
 };
 
 const moduleIsStyle = (mod: ModuleNode) =>
-  (mod?.file?.endsWith('.sass') || mod?.file?.endsWith('.scss') || mod?.file?.endsWith('.css') || mod?.id?.includes('vue&type=style')) &&
+  (mod?.file?.endsWith('.sass') ||
+    mod?.file?.endsWith('.scss') ||
+    mod?.file?.endsWith('.css') ||
+    mod?.id?.includes('vue&type=style')) &&
   (mod?.ssrModule || mod?.ssrTransformResult);
 
 function getCssContent(mod) {
@@ -28,11 +31,19 @@ function getCssContent(mod) {
   return __vite_ssr_exports__.default;
 }
 
-export const collectCss = (mods: ModuleNode[] | Set<ModuleNode>, styles = new Map(), checkedMods = new Set()) => {
+export const collectCss = (
+  mods: ModuleNode[] | Set<ModuleNode>,
+  styles = new Map(),
+  checkedMods = new Set(),
+) => {
   return _collectCss(mods, styles, checkedMods);
 };
 
-function _collectCss(mods: ModuleNode[] | Set<ModuleNode>, styles = new Map(), checkedMods = new Set()) {
+function _collectCss(
+  mods: ModuleNode[] | Set<ModuleNode>,
+  styles = new Map(),
+  checkedMods = new Set(),
+) {
   let result = '';
 
   mods.forEach(mod => {
@@ -48,7 +59,9 @@ function _collectCss(mods: ModuleNode[] | Set<ModuleNode>, styles = new Map(), c
   });
 
   styles.forEach((content, id) => {
-    result = result.concat(`<style vite-css-module-id="${hashCode(id)}">${(content || '').replaceAll('\n', '')}</style>`);
+    result = result.concat(
+      `<style vite-css-module-id="${hashCode(id)}">${(content || '').replaceAll('\n', '')}</style>`,
+    );
   });
 
   return result;
@@ -65,7 +78,9 @@ export const removeCssHotReloaded = () => {
 
   (import.meta as any).hot.on('vite:beforeUpdate', module => {
     module.updates.forEach(update => {
-      const moduleStyle = document.querySelector(`[vite-module-id="${hashCode(update.acceptedPath)}"]`);
+      const moduleStyle = document.querySelector(
+        `[vite-module-id="${hashCode(update.acceptedPath)}"]`,
+      );
 
       if (moduleStyle) {
         moduleStyle.remove();

@@ -7,7 +7,9 @@ export interface ILoggerOptionsClientInfo {
   level: () => LoggerLevel | undefined;
 }
 
-export type TypeLoggerOptions = LoggerOptions | ((clientInfo: ILoggerOptionsClientInfo) => LoggerOptions);
+export type TypeLoggerOptions =
+  | LoggerOptions
+  | ((clientInfo: ILoggerOptionsClientInfo) => LoggerOptions);
 
 export interface ILoggerClientRecord {
   default: never;

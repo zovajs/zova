@@ -58,7 +58,10 @@ function createVisitor(context: ContextInfo) {
               behaviors.push(t.stringLiteral(onionName));
             } else if (t.isJSXExpressionContainer(attr.value)) {
               const objectExpression = t.objectExpression([
-                t.objectProperty(t.stringLiteral(onionName), attr.value.expression as t.ObjectExpression),
+                t.objectProperty(
+                  t.stringLiteral(onionName),
+                  attr.value.expression as t.ObjectExpression,
+                ),
               ]);
               behaviors.push(objectExpression);
             }
@@ -67,7 +70,12 @@ function createVisitor(context: ContextInfo) {
         }
       }
       if (behaviors.length > 0) {
-        nodePath.node.attributes.push(t.jsxAttribute(t.jsxIdentifier('behaviors'), t.jsxExpressionContainer(t.arrayExpression(behaviors))));
+        nodePath.node.attributes.push(
+          t.jsxAttribute(
+            t.jsxIdentifier('behaviors'),
+            t.jsxExpressionContainer(t.arrayExpression(behaviors)),
+          ),
+        );
         // path.get('openingElement').node.name.name
         if (t.isJSXIdentifier(nodePath.node.name)) {
           context.behaviors = true;
@@ -77,7 +85,12 @@ function createVisitor(context: ContextInfo) {
             props.push(t.objectProperty(t.identifier('name'), t.stringLiteral(tag.value)));
           }
           const objectExpression = t.objectExpression(props);
-          nodePath.node.attributes.push(t.jsxAttribute(t.jsxIdentifier('behaviorTag'), t.jsxExpressionContainer(objectExpression)));
+          nodePath.node.attributes.push(
+            t.jsxAttribute(
+              t.jsxIdentifier('behaviorTag'),
+              t.jsxExpressionContainer(objectExpression),
+            ),
+          );
           // -> ()=>{}
           const children = (nodePath.container as any)?.children;
           if (children && children.length > 0 && !_checkIfHasJsxExpression(children)) {

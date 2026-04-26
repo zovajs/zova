@@ -12,7 +12,11 @@ export function UseAopMethod<T extends keyof IAopMethodRecord>(
 ): PropertyDescriptor & MethodDecorator {
   return function (target: object, prop: MetadataKey, descriptor?: PropertyDescriptor) {
     registerMappedClassMetadataKey(target, SymbolDecoratorUseAopMethod);
-    const uses = appMetadata.getOwnMetadataMap<MetadataKey, IUseAopMethodPropMetadata<T>[]>(true, SymbolDecoratorUseAopMethod, target);
+    const uses = appMetadata.getOwnMetadataMap<MetadataKey, IUseAopMethodPropMetadata<T>[]>(
+      true,
+      SymbolDecoratorUseAopMethod,
+      target,
+    );
     if (!uses[prop]) uses[prop] = [];
     uses[prop].push({ onionName: aopMethodName, options });
     return descriptor;

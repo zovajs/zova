@@ -1,4 +1,10 @@
-import type { FormApi, FormAsyncValidateOrFn, FormOptions, FormValidateOrFn, VueFormApi } from '@tanstack/vue-form';
+import type {
+  FormApi,
+  FormAsyncValidateOrFn,
+  FormOptions,
+  FormValidateOrFn,
+  VueFormApi,
+} from '@tanstack/vue-form';
 
 import { useForm } from '@tanstack/vue-form';
 import { markRaw } from 'vue';

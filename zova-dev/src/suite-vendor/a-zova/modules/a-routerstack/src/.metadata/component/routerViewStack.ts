@@ -10,14 +10,20 @@ export type TypeControllerRouterViewStackPublicProps = {
   controllerRef?: (ref: ControllerRouterViewStack) => void;
 } & ControllerRouterViewStackProps;
 
-type ControllerInnerProps = TypeControllerInnerProps<ControllerRouterViewStackProps, keyof typeof ControllerRouterViewStack.$propsDefault>;
+type ControllerInnerProps = TypeControllerInnerProps<
+  ControllerRouterViewStackProps,
+  keyof typeof ControllerRouterViewStack.$propsDefault
+>;
 declare module 'zova-module-a-routerstack' {
   export interface ControllerRouterViewStack {
     $props: ControllerInnerProps;
   }
 }
 
-export const ZRouterViewStack = defineComponent((_props: TypeControllerRouterViewStackPublicProps) => {
-  useController(ControllerRouterViewStack, undefined, undefined);
-  return () => {};
-}, prepareComponentOptions());
+export const ZRouterViewStack = defineComponent(
+  (_props: TypeControllerRouterViewStackPublicProps) => {
+    useController(ControllerRouterViewStack, undefined, undefined);
+    return () => {};
+  },
+  prepareComponentOptions(),
+);

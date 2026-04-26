@@ -1,7 +1,10 @@
 import type { CellContext } from '@tanstack/table-core';
 import type { OmitNever } from 'zova';
 import type { ServiceOnion } from 'zova-module-a-bean';
-import type { IJsxRenderContextBase, ISchemaRenderComponentPresetRecord } from 'zova-module-a-openapi';
+import type {
+  IJsxRenderContextBase,
+  ISchemaRenderComponentPresetRecord,
+} from 'zova-module-a-openapi';
 
 import type { ControllerTable } from '../component/table/controller.jsx';
 import type { ITableCellScope } from './tableColumn.js';
@@ -17,7 +20,11 @@ export type NextTableCellRender = () => any;
 export interface ITableCellRecord {}
 
 export interface ITableCellRender {
-  render(options: IDecoratorTableCellOptions, renderContext: IJsxRenderContextTableCell, next: NextTableCellRender): any;
+  render(
+    options: IDecoratorTableCellOptions,
+    renderContext: IJsxRenderContextTableCell,
+    next: NextTableCellRender,
+  ): any;
 }
 
 export interface IDecoratorTableCellPresetOptions {

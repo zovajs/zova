@@ -7,10 +7,14 @@ export const formatLoggerFilter = format((info, opts: any) => {
   const level = typeof opts.level === 'function' ? opts.level() : opts.level;
   if (!level) return false;
   if (opts.strict) {
-    if (NpmConfigSetLevels[info.level as string] === NpmConfigSetLevels[level]) return __formatLoggerFilterCheckInfo(info);
+    if (NpmConfigSetLevels[info.level as string] === NpmConfigSetLevels[level])
+      return __formatLoggerFilterCheckInfo(info);
     return false;
   }
-  if (NpmConfigSetLevels[info.level as string] <= NpmConfigSetLevels[level] || (opts.silly && info.level === 'silly'))
+  if (
+    NpmConfigSetLevels[info.level as string] <= NpmConfigSetLevels[level] ||
+    (opts.silly && info.level === 'silly')
+  )
     return __formatLoggerFilterCheckInfo(info);
   return false;
 });
@@ -20,9 +24,12 @@ export const formatLoggerConsole = () => {
     const textName = name ? ` ${colorize('verbose', `[${name}]`)}` : '';
     const textBeanFullName = beanFullName ? ` ${colorize('tip', `[${beanFullName}]`)}` : '';
     const textMessage = ` ${message}`;
-    const textDurationMs = durationMs !== undefined ? ` ${colorize('verbose', `+${durationMs}ms`)}` : '';
+    const textDurationMs =
+      durationMs !== undefined ? ` ${colorize('verbose', `+${durationMs}ms`)}` : '';
     const textStack = stack ? `\n${stack}` : '';
-    const result: any[] = [`${timestamp} ${level}${textName}${textBeanFullName}${textMessage}${textDurationMs}${textStack}`];
+    const result: any[] = [
+      `${timestamp} ${level}${textName}${textBeanFullName}${textMessage}${textDurationMs}${textStack}`,
+    ];
     if (!isEmptyObject(meta)) {
       const meta2 = {};
       for (const key in meta) {

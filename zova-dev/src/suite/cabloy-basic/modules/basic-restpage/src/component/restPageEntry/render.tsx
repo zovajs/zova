@@ -31,10 +31,15 @@ export class RenderRestPageEntry<TData extends {} = {}> extends BeanRenderBase {
   private _renderToolbar() {
     return (
       <div>
-        {this.controllerForm?.formState.isSubmitting && <span class="loading loading-spinner text-primary"></span>}
+        {this.controllerForm?.formState.isSubmitting && (
+          <span class="loading loading-spinner text-primary"></span>
+        )}
         {this.formMeta.formMode === 'edit' && (
           <button
-            class={classes('btn btn-primary', this.controllerForm?.formState.isSubmitting && 'btn-disabled')}
+            class={classes(
+              'btn btn-primary',
+              this.controllerForm?.formState.isSubmitting && 'btn-disabled',
+            )}
             onClick={async () => {
               const res = await this.controllerForm.submit();
               if (res) {

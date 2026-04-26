@@ -10,7 +10,10 @@ import type { IControllerInfo } from './types.ts';
 
 import { generateRestIndex } from './utils.ts';
 
-export async function generateMetaPage(options: IMetadataCustomGenerateOptions, globFiles: [IGlobBeanFile, IControllerInfo][]) {
+export async function generateMetaPage(
+  options: IMetadataCustomGenerateOptions,
+  globFiles: [IGlobBeanFile, IControllerInfo][],
+) {
   if (globFiles.length === 0) return '';
   const { moduleName } = options;
   const contentImports: string[] = [];
@@ -31,16 +34,27 @@ export async function generateMetaPage(options: IMetadataCustomGenerateOptions, 
     if (hasSchemaParams || hasSchemaQuery) {
       contentImports.push(`import { ${namespace} } from './page/${name}.js';`);
       // rest
-      const restIndexFileRelative = path.relative(srcDirRest, path.join(options.modulePath, `src/.metadata/page/${name}.js`));
-      contentImportsRest.push(`import { ${namespace} as ${namespaceRest} } from '${restIndexFileRelative}';`);
+      const restIndexFileRelative = path.relative(
+        srcDirRest,
+        path.join(options.modulePath, `src/.metadata/page/${name}.js`),
+      );
+      contentImportsRest.push(
+        `import { ${namespace} as ${namespaceRest} } from '${restIndexFileRelative}';`,
+      );
     }
     // controller.tsx
     const { routePath, routeName } = _extractRoutePathOrName(options, globFile, controllerInfo);
     // no matter that: route.meta?.absolute
-    const routePathFull = routePath ? `/${moduleName.replace('-', '/')}/${routePath}` : `/${moduleName.replace('-', '/')}`;
+    const routePathFull = routePath
+      ? `/${moduleName.replace('-', '/')}/${routePath}`
+      : `/${moduleName.replace('-', '/')}`;
     const routeNameFull = `${moduleName}:${routeName}`;
-    contentPathRecords.push(_combineContentPathRecord(routePathFull, hasSchemaParams, hasSchemaQuery, namespace));
-    contentPathRecordsRest.push(_combineContentPathRecord(routePathFull, hasSchemaParams, hasSchemaQuery, namespaceRest));
+    contentPathRecords.push(
+      _combineContentPathRecord(routePathFull, hasSchemaParams, hasSchemaQuery, namespace),
+    );
+    contentPathRecordsRest.push(
+      _combineContentPathRecord(routePathFull, hasSchemaParams, hasSchemaQuery, namespaceRest),
+    );
     if (!routeName) {
       // contentPathRecords.push(_combineContentPathRecord(routePathFull, hasSchemaParams, hasSchemaQuery, className));
     } else {
@@ -115,7 +129,11 @@ declare module 'zova-module-${moduleName}' {
   return content;
 }
 
-async function generateRestMetaPage(options: IMetadataCustomGenerateOptions, _contentImportsRest: string[], contentPathRecordsRest: string[]) {
+async function generateRestMetaPage(
+  options: IMetadataCustomGenerateOptions,
+  _contentImportsRest: string[],
+  contentPathRecordsRest: string[],
+) {
   if (contentPathRecordsRest.length === 0) return;
   const { moduleName, modulePath } = options;
   // pages
@@ -131,7 +149,11 @@ function _combineModuleNameControllerName(moduleName: string, className: string)
   return `NS${toUpperCaseFirstChar(combineResourceName(className, moduleName, false, false))}`;
 }
 
-function _extractRoutePathOrName(options: IMetadataCustomGenerateOptions, _globFile: IGlobBeanFile, controllerInfo: IControllerInfo) {
+function _extractRoutePathOrName(
+  options: IMetadataCustomGenerateOptions,
+  _globFile: IGlobBeanFile,
+  controllerInfo: IControllerInfo,
+) {
   const cli = options.cli;
   const targetFile = path.join(options.modulePath, 'src/routes.ts');
   const content = fse.readFileSync(targetFile).toString('utf8');
@@ -146,7 +168,8 @@ function _extractRoutePathOrName(options: IMetadataCustomGenerateOptions, _globF
     return (item.node as any).properties.some(prop => {
       return (
         prop.key.name === 'component' &&
-        (prop.value.name === controllerInfo.nameCapitalize || prop.value.name === `ZPage${controllerInfo.nameCapitalize}`)
+        (prop.value.name === controllerInfo.nameCapitalize ||
+          prop.value.name === `ZPage${controllerInfo.nameCapitalize}`)
       );
     });
   });
@@ -164,7 +187,12 @@ function _extractRoutePathOrName(options: IMetadataCustomGenerateOptions, _globF
   return { routePath, routeName };
 }
 
-function _combineContentPathRecord(key: string, hasSchemaParams, hasSchemaQuery: boolean, namespace: string) {
+function _combineContentPathRecord(
+  key: string,
+  hasSchemaParams,
+  hasSchemaQuery: boolean,
+  namespace: string,
+) {
   return `'${key}': TypePagePathSchema<${hasSchemaParams ? `${namespace}.ParamsInput` : 'undefined'},${hasSchemaQuery ? `${namespace}.QueryInput` : 'undefined'}>;`;
   // return `'${key}': {
   //   path: ${value},

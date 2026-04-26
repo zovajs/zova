@@ -11,7 +11,10 @@ export type TypeControllerWrapperFilterPublicProps = {
   controllerRef?: (ref: ControllerWrapperFilter) => void;
 } & ControllerWrapperFilterProps;
 
-type ControllerInnerProps = TypeControllerInnerProps<ControllerWrapperFilterProps, keyof typeof ControllerWrapperFilter.$propsDefault>;
+type ControllerInnerProps = TypeControllerInnerProps<
+  ControllerWrapperFilterProps,
+  keyof typeof ControllerWrapperFilter.$propsDefault
+>;
 declare module 'zova-module-basic-restpage' {
   export interface ControllerWrapperFilter {
     $props: ControllerInnerProps;

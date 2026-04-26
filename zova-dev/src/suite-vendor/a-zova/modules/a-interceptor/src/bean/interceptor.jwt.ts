@@ -1,5 +1,10 @@
 import type { AxiosRequestConfig } from 'axios';
-import type { BeanFetch, IDecoratorInterceptorOptions, IInterceptorRequest, NextInterceptorRequest } from 'zova-module-a-fetch';
+import type {
+  BeanFetch,
+  IDecoratorInterceptorOptions,
+  IInterceptorRequest,
+  NextInterceptorRequest,
+} from 'zova-module-a-fetch';
 
 import { $customKey } from 'zova-core';
 import { BeanInterceptorBase, Interceptor } from 'zova-module-a-fetch';
@@ -12,7 +17,10 @@ export interface IInterceptorOptionsJwt extends IDecoratorInterceptorOptions {
 }
 
 @Interceptor<IInterceptorOptionsJwt>({ dependencies: 'a-interceptor:headers' })
-export class InterceptorJwt extends BeanInterceptorBase<IInterceptorOptionsJwt> implements IInterceptorRequest {
+export class InterceptorJwt
+  extends BeanInterceptorBase<IInterceptorOptionsJwt>
+  implements IInterceptorRequest
+{
   private _beanJwtAdapter: IJwtAdapter;
   private _refreshAuthTokenPromise?: Promise<IJwtInfo>;
 
@@ -23,7 +31,11 @@ export class InterceptorJwt extends BeanInterceptorBase<IInterceptorOptionsJwt> 
     this._beanJwtAdapter = await this.app.bean._getBean(beanFullName as any, true);
   }
 
-  async onRequest(config: AxiosRequestConfig, options: IInterceptorOptionsJwt, next: NextInterceptorRequest): Promise<AxiosRequestConfig> {
+  async onRequest(
+    config: AxiosRequestConfig,
+    options: IInterceptorOptionsJwt,
+    next: NextInterceptorRequest,
+  ): Promise<AxiosRequestConfig> {
     try {
       const accessToken = await this.prepareAccessToken(config, options.authToken);
       if (accessToken) {
@@ -38,14 +50,18 @@ export class InterceptorJwt extends BeanInterceptorBase<IInterceptorOptionsJwt> 
     return next(config);
   }
 
-  async prepareAccessToken(config: AxiosRequestConfig, authToken: string | boolean | undefined): Promise<string | undefined> {
+  async prepareAccessToken(
+    config: AxiosRequestConfig,
+    authToken: string | boolean | undefined,
+  ): Promise<string | undefined> {
     if (!this.sys.config.api.jwt) return;
     if (this.sys.config.ssr.ignoreCookieOnServer) return;
     // use default in scope.config rather than IInterceptorOptionsJwt.options
     const authTokenCurrent = authToken ?? this.scope.config.authToken.default;
     // authToken = authToken ?? this.scope.config.authToken.default;
     if (process.env.SERVER) {
-      config.headers![$customKey('x-vona-jwt-authtoken')] = typeof authTokenCurrent === 'string' ? true : authTokenCurrent;
+      config.headers![$customKey('x-vona-jwt-authtoken')] =
+        typeof authTokenCurrent === 'string' ? true : authTokenCurrent;
     }
     // // authToken: false
     // if (authTokenCurrent === false) return;

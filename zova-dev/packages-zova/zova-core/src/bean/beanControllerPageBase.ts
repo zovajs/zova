@@ -9,7 +9,13 @@ export class BeanControllerPageBase extends BeanBase {
   /** @internal */
   public __initControllerData(controllerData: IControllerData) {
     if (this.app) {
-      this.app.meta.module._monkeyModuleSync(true, 'controllerDataInit', undefined, controllerData, this);
+      this.app.meta.module._monkeyModuleSync(
+        true,
+        'controllerDataInit',
+        undefined,
+        controllerData,
+        this,
+      );
     }
   }
 

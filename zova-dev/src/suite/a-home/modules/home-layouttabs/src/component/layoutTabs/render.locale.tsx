@@ -23,7 +23,10 @@ export class RenderLocale extends BeanRenderBase {
             <ul class="bg-base-100 rounded-t-none p-2 w-48">
               {locales.map(item => {
                 return (
-                  <li key={item.name} class={this.app.meta.locale.current === item.name ? 'disabled' : ''}>
+                  <li
+                    key={item.name}
+                    class={this.app.meta.locale.current === item.name ? 'disabled' : ''}
+                  >
                     <a
                       onClick={() => {
                         this.app.meta.locale.current = item.name as any;

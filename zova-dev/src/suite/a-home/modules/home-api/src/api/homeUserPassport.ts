@@ -20,7 +20,8 @@ export type ApiApiHomeUserPassportlogoutResponseBody =
 export const ApiApiHomeUserPassportregisterPath = '/api/home/user/passport/register';
 export type ApiApiHomeUserPassportregisterPath = '/api/home/user/passport/register';
 export type ApiApiHomeUserPassportregisterMethod = 'post';
-export type ApiApiHomeUserPassportregisterRequestBody = components['schemas']['home-user.dto.register'];
+export type ApiApiHomeUserPassportregisterRequestBody =
+  components['schemas']['home-user.dto.register'];
 export type ApiApiHomeUserPassportregisterResponseBody =
   paths[ApiApiHomeUserPassportregisterPath][ApiApiHomeUserPassportregisterMethod]['responses']['200']['content']['application/json']['data'];
 
@@ -33,8 +34,10 @@ export type ApiApiHomeUserPassportloginResponseBody =
   paths[ApiApiHomeUserPassportloginPath][ApiApiHomeUserPassportloginMethod]['responses']['200']['content']['application/json']['data'];
 
 /** HomeUserPassport_loginOauth */
-export const ApiApiHomeUserPassportloginOauthPath = '/api/home/user/passport/login/{module}/{providerName}/{clientName?}';
-export type ApiApiHomeUserPassportloginOauthPath = '/api/home/user/passport/login/{module}/{providerName}/{clientName?}';
+export const ApiApiHomeUserPassportloginOauthPath =
+  '/api/home/user/passport/login/{module}/{providerName}/{clientName?}';
+export type ApiApiHomeUserPassportloginOauthPath =
+  '/api/home/user/passport/login/{module}/{providerName}/{clientName?}';
 export type ApiApiHomeUserPassportloginOauthMethod = 'get';
 export type ApiApiHomeUserPassportloginOauthRequestParams =
   paths[ApiApiHomeUserPassportloginOauthPath][ApiApiHomeUserPassportloginOauthMethod]['parameters']['path'];
@@ -44,8 +47,10 @@ export type ApiApiHomeUserPassportloginOauthResponseBody =
   paths[ApiApiHomeUserPassportloginOauthPath][ApiApiHomeUserPassportloginOauthMethod]['responses']['200']['content']['application/json']['data'];
 
 /** HomeUserPassport_associate */
-export const ApiApiHomeUserPassportassociatePath = '/api/home/user/passport/associate/{module}/{providerName}/{clientName?}';
-export type ApiApiHomeUserPassportassociatePath = '/api/home/user/passport/associate/{module}/{providerName}/{clientName?}';
+export const ApiApiHomeUserPassportassociatePath =
+  '/api/home/user/passport/associate/{module}/{providerName}/{clientName?}';
+export type ApiApiHomeUserPassportassociatePath =
+  '/api/home/user/passport/associate/{module}/{providerName}/{clientName?}';
 export type ApiApiHomeUserPassportassociateMethod = 'get';
 export type ApiApiHomeUserPassportassociateRequestParams =
   paths[ApiApiHomeUserPassportassociatePath][ApiApiHomeUserPassportassociateMethod]['parameters']['path'];
@@ -55,8 +60,10 @@ export type ApiApiHomeUserPassportassociateResponseBody =
   paths[ApiApiHomeUserPassportassociatePath][ApiApiHomeUserPassportassociateMethod]['responses']['200']['content']['application/json']['data'];
 
 /** HomeUserPassport_migrate */
-export const ApiApiHomeUserPassportmigratePath = '/api/home/user/passport/migrate/{module}/{providerName}/{clientName?}';
-export type ApiApiHomeUserPassportmigratePath = '/api/home/user/passport/migrate/{module}/{providerName}/{clientName?}';
+export const ApiApiHomeUserPassportmigratePath =
+  '/api/home/user/passport/migrate/{module}/{providerName}/{clientName?}';
+export type ApiApiHomeUserPassportmigratePath =
+  '/api/home/user/passport/migrate/{module}/{providerName}/{clientName?}';
 export type ApiApiHomeUserPassportmigrateMethod = 'get';
 export type ApiApiHomeUserPassportmigrateRequestParams =
   paths[ApiApiHomeUserPassportmigratePath][ApiApiHomeUserPassportmigrateMethod]['parameters']['path'];
@@ -66,7 +73,8 @@ export type ApiApiHomeUserPassportmigrateResponseBody =
   paths[ApiApiHomeUserPassportmigratePath][ApiApiHomeUserPassportmigrateMethod]['responses']['200']['content']['application/json']['data'];
 
 /** HomeUserPassport_refreshAuthToken */
-export const ApiApiHomeUserPassportrefreshAuthTokenPath = '/api/home/user/passport/refreshAuthToken';
+export const ApiApiHomeUserPassportrefreshAuthTokenPath =
+  '/api/home/user/passport/refreshAuthToken';
 export type ApiApiHomeUserPassportrefreshAuthTokenPath = '/api/home/user/passport/refreshAuthToken';
 export type ApiApiHomeUserPassportrefreshAuthTokenMethod = 'post';
 export type ApiApiHomeUserPassportrefreshAuthTokenRequestBody = {
@@ -76,8 +84,10 @@ export type ApiApiHomeUserPassportrefreshAuthTokenResponseBody =
   paths[ApiApiHomeUserPassportrefreshAuthTokenPath][ApiApiHomeUserPassportrefreshAuthTokenMethod]['responses']['200']['content']['application/json']['data'];
 
 /** HomeUserPassport_createPassportJwtFromOauthCode */
-export const ApiApiHomeUserPassportcreatePassportJwtFromOauthCodePath = '/api/home/user/passport/createPassportJwtFromOauthCode';
-export type ApiApiHomeUserPassportcreatePassportJwtFromOauthCodePath = '/api/home/user/passport/createPassportJwtFromOauthCode';
+export const ApiApiHomeUserPassportcreatePassportJwtFromOauthCodePath =
+  '/api/home/user/passport/createPassportJwtFromOauthCode';
+export type ApiApiHomeUserPassportcreatePassportJwtFromOauthCodePath =
+  '/api/home/user/passport/createPassportJwtFromOauthCode';
 export type ApiApiHomeUserPassportcreatePassportJwtFromOauthCodeMethod = 'post';
 export type ApiApiHomeUserPassportcreatePassportJwtFromOauthCodeRequestBody = {
   code: string;
@@ -86,8 +96,10 @@ export type ApiApiHomeUserPassportcreatePassportJwtFromOauthCodeResponseBody =
   paths[ApiApiHomeUserPassportcreatePassportJwtFromOauthCodePath][ApiApiHomeUserPassportcreatePassportJwtFromOauthCodeMethod]['responses']['200']['content']['application/json']['data'];
 
 /** HomeUserPassport_createTempAuthToken */
-export const ApiApiHomeUserPassportcreateTempAuthTokenPath = '/api/home/user/passport/createTempAuthToken';
-export type ApiApiHomeUserPassportcreateTempAuthTokenPath = '/api/home/user/passport/createTempAuthToken';
+export const ApiApiHomeUserPassportcreateTempAuthTokenPath =
+  '/api/home/user/passport/createTempAuthToken';
+export type ApiApiHomeUserPassportcreateTempAuthTokenPath =
+  '/api/home/user/passport/createTempAuthToken';
 export type ApiApiHomeUserPassportcreateTempAuthTokenMethod = 'post';
 export type ApiApiHomeUserPassportcreateTempAuthTokenRequestQuery =
   paths[ApiApiHomeUserPassportcreateTempAuthTokenPath][ApiApiHomeUserPassportcreateTempAuthTokenMethod]['parameters']['query'];
@@ -163,7 +175,10 @@ export class ApiHomeUserPassport extends BeanApiBase {
     );
   }
 
-  refreshAuthToken(body: ApiApiHomeUserPassportrefreshAuthTokenRequestBody, options?: IApiActionOptions) {
+  refreshAuthToken(
+    body: ApiApiHomeUserPassportrefreshAuthTokenRequestBody,
+    options?: IApiActionOptions,
+  ) {
     return this.$fetch.post<any, ApiApiHomeUserPassportrefreshAuthTokenResponseBody>(
       ApiApiHomeUserPassportrefreshAuthTokenPath,
       body,
@@ -171,7 +186,10 @@ export class ApiHomeUserPassport extends BeanApiBase {
     );
   }
 
-  createPassportJwtFromOauthCode(body: ApiApiHomeUserPassportcreatePassportJwtFromOauthCodeRequestBody, options?: IApiActionOptions) {
+  createPassportJwtFromOauthCode(
+    body: ApiApiHomeUserPassportcreatePassportJwtFromOauthCodeRequestBody,
+    options?: IApiActionOptions,
+  ) {
     return this.$fetch.post<any, ApiApiHomeUserPassportcreatePassportJwtFromOauthCodeResponseBody>(
       ApiApiHomeUserPassportcreatePassportJwtFromOauthCodePath,
       body,

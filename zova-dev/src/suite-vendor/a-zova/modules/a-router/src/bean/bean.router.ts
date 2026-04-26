@@ -1,4 +1,9 @@
-import type { NavigationGuardWithThis, NavigationHookAfter, RouteLocationNormalizedLoadedGeneric, Router } from '@cabloy/vue-router';
+import type {
+  NavigationGuardWithThis,
+  NavigationHookAfter,
+  RouteLocationNormalizedLoadedGeneric,
+  Router,
+} from '@cabloy/vue-router';
 
 import { BeanBase, TypeEventOff, Use } from 'zova';
 import { Bean } from 'zova-module-a-bean';
@@ -9,7 +14,10 @@ import { IPageMeta } from '../types/pageMeta.js';
 import { TypeErrorListener } from '../types/router.js';
 import { SysRouter } from './sys.router.js';
 
-export interface BeanRouter extends Omit<SysRouter, '$beanFullName' | '$onionName' | '$onionOptions'> {}
+export interface BeanRouter extends Omit<
+  SysRouter,
+  '$beanFullName' | '$onionName' | '$onionOptions'
+> {}
 
 @Bean()
 export class BeanRouter extends BeanBase {

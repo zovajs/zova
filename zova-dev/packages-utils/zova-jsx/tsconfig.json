@@ -6,7 +6,7 @@
     "declaration": true,
     "emitDeclarationOnly": true,
     "allowImportingTsExtensions": true,
-    "noEmit": false,
+    "noEmit": false
   },
-  "include": ["src/**/*"],
+  "include": ["src/**/*"]
 }

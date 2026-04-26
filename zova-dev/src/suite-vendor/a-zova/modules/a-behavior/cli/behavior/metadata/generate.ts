@@ -7,7 +7,9 @@ export default async function (options: IMetadataCustomGenerateOptions): Promise
   for (const { beanName, beanNameCapitalize, isIgnore } of globFiles) {
     if (isIgnore) continue;
     const behaviorAttrName = _combineBehaviorAttrName(moduleName, beanName);
-    contentRecords.push(`'${behaviorAttrName}'?: IBehaviorOptions${beanNameCapitalize} | '' | boolean;`);
+    contentRecords.push(
+      `'${behaviorAttrName}'?: IBehaviorOptions${beanNameCapitalize} | '' | boolean;`,
+    );
   }
   // combine
   const content = `/** behaviors: begin */

@@ -1,14 +1,30 @@
-import type { RouteLocationMatched, RouteLocationNormalizedLoaded, RouteLocationResolvedGeneric, Router, RouterOptions } from '@cabloy/vue-router';
+import type {
+  RouteLocationMatched,
+  RouteLocationNormalizedLoaded,
+  RouteLocationResolvedGeneric,
+  Router,
+  RouterOptions,
+} from '@cabloy/vue-router';
 
 import { IModule } from '@cabloy/module-info';
 import * as ModuleInfo from '@cabloy/module-info';
 import { combineParamsAndQuery } from '@cabloy/utils';
-import { createMemoryHistory, createRouter, createWebHashHistory, createWebHistory } from '@cabloy/vue-router';
+import {
+  createMemoryHistory,
+  createRouter,
+  createWebHashHistory,
+  createWebHistory,
+} from '@cabloy/vue-router';
 import { BeanBase, cast, deepExtend } from 'zova';
 import { Sys } from 'zova-module-a-bean';
 
 import { getRealRouteName, getRouteMatched, isRouterName } from '../lib/utils.js';
-import { IModuleRoute, IModuleRouteComponent, IPageNameRecord, IPagePathRecord } from '../types/router.js';
+import {
+  IModuleRoute,
+  IModuleRouteComponent,
+  IPageNameRecord,
+  IPagePathRecord,
+} from '../types/router.js';
 import { SymbolRouterHistory } from '../types/utils.js';
 
 export interface SysRouter extends Router {}
@@ -57,7 +73,10 @@ export class SysRouter extends BeanBase {
         : this.sys.env.ROUTER_MODE === 'history'
           ? createWebHistory
           : createWebHashHistory;
-      const routeBase = process.env.SERVER || this.sys.env.ROUTER_MODE === 'history' ? this.sys.env.APP_PUBLIC_PATH : undefined;
+      const routeBase =
+        process.env.SERVER || this.sys.env.ROUTER_MODE === 'history'
+          ? this.sys.env.APP_PUBLIC_PATH
+          : undefined;
       options.history = createHistory(routeBase);
     }
     // create
@@ -72,12 +91,23 @@ export class SysRouter extends BeanBase {
     return this.sys.meta.component.createAsyncComponent(component);
   }
 
-  public getPagePath<K extends keyof IPagePathRecord>(path: K, options?: IPagePathRecord[K], absolute?: boolean) {
-    const pagePath = combineParamsAndQuery(path, { params: options?.params, query: options?.query });
+  public getPagePath<K extends keyof IPagePathRecord>(
+    path: K,
+    options?: IPagePathRecord[K],
+    absolute?: boolean,
+  ) {
+    const pagePath = combineParamsAndQuery(path, {
+      params: options?.params,
+      query: options?.query,
+    });
     return absolute ? this.sys.util.getAbsoluteUrlFromPagePath(pagePath) : pagePath;
   }
 
-  public async resolveRoute(url: string, check404?: boolean, checkAliasOf?: boolean): Promise<RouteLocationResolvedGeneric | undefined> {
+  public async resolveRoute(
+    url: string,
+    check404?: boolean,
+    checkAliasOf?: boolean,
+  ): Promise<RouteLocationResolvedGeneric | undefined> {
     const pagePath = this.sys.util.getPagePathFromAbsoluteUrl(url);
     let route = await this.ensureRoute(pagePath);
     if (check404 && route.name === '$:/:catchAll(.*)*') return;
@@ -94,7 +124,9 @@ export class SysRouter extends BeanBase {
     return route;
   }
 
-  public checkPathValid(to?: { name?: string; path?: string | null | undefined } | string | null | undefined): boolean {
+  public checkPathValid(
+    to?: { name?: string; path?: string | null | undefined } | string | null | undefined,
+  ): boolean {
     const _name = to && typeof to === 'object' ? to.name : undefined;
     const _path = to && typeof to === 'object' ? (to.name ?? to.path) : to;
     // legacy
@@ -134,13 +166,19 @@ export class SysRouter extends BeanBase {
   }
 
   /** @internal */
-  public _findConfigRoute(name: string | symbol | null | undefined, path: string | undefined): IModuleRoute | undefined {
+  public _findConfigRoute(
+    name: string | symbol | null | undefined,
+    path: string | undefined,
+  ): IModuleRoute | undefined {
     name = this.getRealRouteName(name);
     return name ? this.sys.config.routes.name[name] : this.sys.config.routes.path[path!];
   }
 
   /** @internal */
-  public _findLegacyRoute(name: string | symbol | null | undefined, path: string | null | undefined): IModuleRoute | undefined {
+  public _findLegacyRoute(
+    name: string | symbol | null | undefined,
+    path: string | null | undefined,
+  ): IModuleRoute | undefined {
     const legacyRoutes = cast(this.sys.meta).legacyRoutes;
     if (!legacyRoutes) return;
     name = this.getRealRouteName(name);
@@ -238,7 +276,9 @@ export class SysRouter extends BeanBase {
       if (!module || route.meta?.absolute === true) {
         path = route.path;
       } else {
-        path = route.path ? `/${module.info.pid}/${module.info.name}/${route.path}` : `/${module.info.pid}/${module.info.name}`;
+        path = route.path
+          ? `/${module.info.pid}/${module.info.name}/${route.path}`
+          : `/${module.info.pid}/${module.info.name}`;
       }
     }
     // name
@@ -251,14 +291,20 @@ export class SysRouter extends BeanBase {
       }
     }
     // config route
-    const configRoute = name ? this.sys.config.routes.name[name] : this.sys.config.routes.path[path!];
+    const configRoute = name
+      ? this.sys.config.routes.name[name]
+      : this.sys.config.routes.path[path!];
     if (configRoute) {
       route = deepExtend({}, route, configRoute);
     }
     // name alias
     if (name && configRoute?.alias) {
       // add extra route
-      this.router.addRoute({ name: `$alias:${name}`, path: `/__alias__${configRoute?.alias}`, redirect: '' });
+      this.router.addRoute({
+        name: `$alias:${name}`,
+        path: `/__alias__${configRoute?.alias}`,
+        redirect: '',
+      });
     }
     // name
     if (!name) {

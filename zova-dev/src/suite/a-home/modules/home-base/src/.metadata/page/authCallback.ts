@@ -9,4 +9,8 @@ export namespace NSControllerPageAuthCallback {
   export type QueryOutput = z.output<typeof ControllerPageAuthCallbackSchemaQuery>;
 }
 
-export const ZPageAuthCallback = createZovaComponentPage(ControllerPageAuthCallback, undefined, undefined);
+export const ZPageAuthCallback = createZovaComponentPage(
+  ControllerPageAuthCallback,
+  undefined,
+  undefined,
+);

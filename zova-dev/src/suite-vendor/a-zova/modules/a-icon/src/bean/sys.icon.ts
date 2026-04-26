@@ -77,7 +77,10 @@ export class SysIcon extends BeanBase {
     return iconModule[groupName].svg;
   }
 
-  private async _parseIconGroupInner(moduleName: string, groupName: string): Promise<string | undefined> {
+  private async _parseIconGroupInner(
+    moduleName: string,
+    groupName: string,
+  ): Promise<string | undefined> {
     // module
     const module = await this.sys.meta.module.use(moduleName);
     if (!module) return;
@@ -135,7 +138,9 @@ export class SysIcon extends BeanBase {
       domContainer.appendChild(domModule);
     }
     // inject group
-    let domGroup = document.getElementById(`zova-svg-group-${meta.module}-${meta.group}`) as unknown as SVGSVGElement;
+    let domGroup = document.getElementById(
+      `zova-svg-group-${meta.module}-${meta.group}`,
+    ) as unknown as SVGSVGElement;
     if (!domGroup) {
       domGroup = document.createElementNS(XMLNS, 'svg');
       domGroup.id = `zova-svg-group-${meta.module}-${meta.group}`;

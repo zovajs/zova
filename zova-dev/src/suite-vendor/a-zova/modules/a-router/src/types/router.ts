@@ -8,7 +8,12 @@ import type {
   RouteRecordRaw,
 } from '@cabloy/vue-router';
 import type { z } from 'zod';
-import type { ILayoutRecord, ILocaleRecord, TypeComponentLayoutRecord, ZovaApplication } from 'zova';
+import type {
+  ILayoutRecord,
+  ILocaleRecord,
+  TypeComponentLayoutRecord,
+  ZovaApplication,
+} from 'zova';
 
 import type { BeanRouter } from '../bean/bean.router.js';
 import type { BeanRouterViewBase } from '../lib/routerViewBase.js';
@@ -31,9 +36,13 @@ declare module '@cabloy/vue-router' {
     locale?: boolean;
     locales?: Record<keyof ILocaleRecord, string>;
     componentKeyMode?: TypeComponentKeyMode;
-    componentKey?: ((this: ZovaApplication, route: RouteLocationNormalizedLoaded) => string) | string;
+    componentKey?:
+      | ((this: ZovaApplication, route: RouteLocationNormalizedLoaded) => string)
+      | string;
     tabKey?: ((this: ZovaApplication, route: RouteLocationNormalizedLoaded) => string) | string;
-    keepAlive?: ((this: ZovaApplication, route: RouteLocationNormalizedLoaded) => boolean) | boolean;
+    keepAlive?:
+      | ((this: ZovaApplication, route: RouteLocationNormalizedLoaded) => boolean)
+      | boolean;
   }
 }
 

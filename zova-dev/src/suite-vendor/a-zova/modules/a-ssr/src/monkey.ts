@@ -1,5 +1,13 @@
 import type { IModule } from '@cabloy/module-info';
-import type { BeanBase, BeanContainer, IMonkeyAppContextInitialize, IMonkeyAppInitialize, IMonkeyBeanInit, IMonkeyModule, ZovaContext } from 'zova';
+import type {
+  BeanBase,
+  BeanContainer,
+  IMonkeyAppContextInitialize,
+  IMonkeyAppInitialize,
+  IMonkeyBeanInit,
+  IMonkeyModule,
+  ZovaContext,
+} from 'zova';
 
 import { isNavigationFailure } from '@cabloy/vue-router';
 import { BeanSimple, cast } from 'zova';
@@ -8,7 +16,10 @@ import type { SSRMetaOptions } from './types/ssr.js';
 
 import { useMeta } from './lib/useMeta.js';
 
-export class Monkey extends BeanSimple implements IMonkeyAppContextInitialize, IMonkeyAppInitialize, IMonkeyBeanInit, IMonkeyModule {
+export class Monkey
+  extends BeanSimple
+  implements IMonkeyAppContextInitialize, IMonkeyAppInitialize, IMonkeyBeanInit, IMonkeyModule
+{
   appContextInitialize(ctx: ZovaContext): void {
     ctx.meta.$ssr = ctx.app.ctx.meta.$ssr;
   }

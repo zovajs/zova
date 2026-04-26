@@ -19,13 +19,22 @@ export function extendFilesOne(api: IndexAPI, flavor: string) {
     if ((<any>api.ctx.mode).ssr) {
       // prod
       if (api.ctx.prod) {
-        copyTemplateIfNeed(resolveTemplatePath('env/.env.ssr.production'), api.resolve.app('env/.env.ssr.production'));
+        copyTemplateIfNeed(
+          resolveTemplatePath('env/.env.ssr.production'),
+          api.resolve.app('env/.env.ssr.production'),
+        );
       }
       // admin/web
       if (flavor === 'admin') {
-        copyTemplateIfNeed(resolveTemplatePath('env/.env.ssr.admin'), api.resolve.app('env/.env.ssr.admin'));
+        copyTemplateIfNeed(
+          resolveTemplatePath('env/.env.ssr.admin'),
+          api.resolve.app('env/.env.ssr.admin'),
+        );
       } else if (flavor === 'web') {
-        copyTemplateIfNeed(resolveTemplatePath('env/.env.ssr.web'), api.resolve.app('env/.env.ssr.web'));
+        copyTemplateIfNeed(
+          resolveTemplatePath('env/.env.ssr.web'),
+          api.resolve.app('env/.env.ssr.web'),
+        );
       }
     }
   }
@@ -135,8 +144,14 @@ export function extendFilesTwo(_api: IndexAPI, _flavor: string) {
     } catch (_) {}
     if (!modulePath) return;
     // copy
-    fse.copyFileSync(resolveTemplatePath('vuetify/composables/hydration.js'), path.join(modulePath, 'lib/composables/hydration.js'));
-    fse.copyFileSync(resolveTemplatePath('vuetify/composables/ssrBoot.js'), path.join(modulePath, 'lib/composables/ssrBoot.js'));
+    fse.copyFileSync(
+      resolveTemplatePath('vuetify/composables/hydration.js'),
+      path.join(modulePath, 'lib/composables/hydration.js'),
+    );
+    fse.copyFileSync(
+      resolveTemplatePath('vuetify/composables/ssrBoot.js'),
+      path.join(modulePath, 'lib/composables/ssrBoot.js'),
+    );
   }
 }
 

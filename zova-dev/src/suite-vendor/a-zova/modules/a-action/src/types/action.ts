@@ -13,7 +13,11 @@ export interface IActionsRecord {}
 export interface IActionRecord {}
 
 export interface IActionExecute {
-  execute(options: IDecoratorActionOptions, renderContext: IJsxRenderContextBase, next: NextActionExecute): any | Promise<any>;
+  execute(
+    options: IDecoratorActionOptions,
+    renderContext: IJsxRenderContextBase,
+    next: NextActionExecute,
+  ): any | Promise<any>;
 }
 
 export interface IDecoratorActionOptions<Result = any> {

@@ -7,7 +7,9 @@ import type { SSRMetaOptions, SSRMetaOptionsWrapper } from '../types/ssr.js';
 
 export function useMeta(ctx: ZovaContext, metaOptions) {
   if (process.env.SERVER) {
-    ctx.meta.$ssr.context.__qMetaList.push(typeof metaOptions === 'function' ? metaOptions() : metaOptions);
+    ctx.meta.$ssr.context.__qMetaList.push(
+      typeof metaOptions === 'function' ? metaOptions() : metaOptions,
+    );
   } else {
     const meta: SSRMetaOptionsWrapper = { active: true };
 

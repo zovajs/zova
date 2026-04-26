@@ -10,7 +10,8 @@ import { format } from './format.ts';
 
 export const timestamp = format((info, opts: any = {}) => {
   if (opts.format) {
-    info.timestamp = typeof opts.format === 'function' ? opts.format() : fecha.format(new Date(), opts.format);
+    info.timestamp =
+      typeof opts.format === 'function' ? opts.format() : fecha.format(new Date(), opts.format);
   }
 
   if (!info.timestamp) {

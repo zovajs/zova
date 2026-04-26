@@ -51,10 +51,16 @@ export function setParseAdapter(parseAdapterFn) {
 }
 export const $ZodType =`,
     )
-    .replace('inst._zod.run = inst._zod.parse;', 'inst._zod.run = __parseAdapterFn ? __parseAdapterFn(inst, inst._zod.parse) : inst._zod.parse;')
-    .replace(/inst._zod.run = (\(payload, ctx\) => \{[\s\S]*?return runChecks\(result, checks, ctx\);\s*\};)/, (_, $0) => {
-      return `const __run = ${$0}\ninst._zod.run = __parseAdapterFn ? __parseAdapterFn(inst, __run) : __run;`;
-    });
+    .replace(
+      'inst._zod.run = inst._zod.parse;',
+      'inst._zod.run = __parseAdapterFn ? __parseAdapterFn(inst, inst._zod.parse) : inst._zod.parse;',
+    )
+    .replace(
+      /inst._zod.run = (\(payload, ctx\) => \{[\s\S]*?return runChecks\(result, checks, ctx\);\s*\};)/,
+      (_, $0) => {
+        return `const __run = ${$0}\ninst._zod.run = __parseAdapterFn ? __parseAdapterFn(inst, __run) : __run;`;
+      },
+    );
   fse.writeFileSync(fileSrc, contentNew);
 }
 

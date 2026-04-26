@@ -1,4 +1,7 @@
-import type { RouteLocationMatched, RouteLocationNormalizedLoadedGeneric } from '@cabloy/vue-router';
+import type {
+  RouteLocationMatched,
+  RouteLocationNormalizedLoadedGeneric,
+} from '@cabloy/vue-router';
 import type {
   BeanBase,
   BeanContainer,
@@ -28,7 +31,13 @@ import { SymbolRouterHistory } from './types/utils.js';
 
 export class Monkey
   extends BeanSimple
-  implements IMonkeyAppInitialize, IMonkeyAppInitialized, IMonkeyAppReady, IMonkeyAppClose, IMonkeyBeanInit, IMonkeyController
+  implements
+    IMonkeyAppInitialize,
+    IMonkeyAppInitialized,
+    IMonkeyAppReady,
+    IMonkeyAppClose,
+    IMonkeyBeanInit,
+    IMonkeyController
 {
   private _beanRouter: BeanRouter;
   serviceRouterGuards: ServiceRouterGuards;
@@ -36,7 +45,11 @@ export class Monkey
   async getBeanRouter() {
     if (!this._beanRouter) {
       // markReactive: true
-      this._beanRouter = this.app.meta.$router = (await this.bean._getBean('a-router.bean.router', true, true)) as BeanRouter;
+      this._beanRouter = this.app.meta.$router = (await this.bean._getBean(
+        'a-router.bean.router',
+        true,
+        true,
+      )) as BeanRouter;
     }
     return this._beanRouter;
   }
@@ -138,12 +151,16 @@ export class Monkey
     this._initControllerRoute(route, controller);
   }
 
-  private _initControllerRoute(route: RouteLocationNormalizedLoadedGeneric | undefined, controller: BeanControllerPageBase) {
+  private _initControllerRoute(
+    route: RouteLocationNormalizedLoadedGeneric | undefined,
+    controller: BeanControllerPageBase,
+  ) {
     if (!route) return;
     const routeMatched = getRouteMatched(route);
     if (!routeMatched) return;
     // check if the same
-    if (controller.$routeMatched && !this._checkIfRouteSame(routeMatched, controller.$routeMatched)) return;
+    if (controller.$routeMatched && !this._checkIfRouteSame(routeMatched, controller.$routeMatched))
+      return;
     // check if changed
     const changed = !controller.$route || controller.$route.fullPath !== route.fullPath;
     if (!changed) return;

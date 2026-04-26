@@ -5,7 +5,11 @@ import type { IControllerInfo } from './types.ts';
 
 import { combineContentRenderAndStyle } from './utils.ts';
 
-export async function generateFilePage(options: IMetadataCustomGenerateOptions, globFile: IGlobBeanFile, controllerInfo: IControllerInfo) {
+export async function generateFilePage(
+  options: IMetadataCustomGenerateOptions,
+  globFile: IGlobBeanFile,
+  controllerInfo: IControllerInfo,
+) {
   const { moduleName } = options;
   const { className } = globFile;
   const {
@@ -23,7 +27,9 @@ export async function generateFilePage(options: IMetadataCustomGenerateOptions, 
   const contentImports: string[] = [];
   // controller
   contentImports.push("import { createZovaComponentPage } from 'zova';");
-  contentImports.push(`import { ControllerPage${nameCapitalize} } from '../../page/${name}/controller${controllerExtJs}';`);
+  contentImports.push(
+    `import { ControllerPage${nameCapitalize} } from '../../page/${name}/controller${controllerExtJs}';`,
+  );
   // render
   if (hasRenderFirst) {
     contentImports.push(importRenderFirst);
@@ -37,7 +43,9 @@ export async function generateFilePage(options: IMetadataCustomGenerateOptions, 
   if (hasSchemaParams) _contentImports_parts.push(nameSchemaParams);
   if (hasSchemaQuery) _contentImports_parts.push(nameSchemaQuery);
   if (_contentImports_parts.length > 0) {
-    contentImports.push(`import { ${_contentImports_parts.join(', ')} } from '../../page/${name}/controller${controllerExtJs}';`);
+    contentImports.push(
+      `import { ${_contentImports_parts.join(', ')} } from '../../page/${name}/controller${controllerExtJs}';`,
+    );
   }
   //
   const _contentRecords2_parts: string[] = [];

@@ -7,7 +7,9 @@ type TypeControllerDateRangePublicProps = TypeRenderComponentJsxPropsPublic &
   ControllerDateRangeModels & {
     [KEY in keyof ControllerDateRangeModels as TypePropValueFromModel<KEY>]: ControllerDateRangeModels[KEY];
   } & {
-    [KEY in keyof ControllerDateRangeModels as TypePropUpdateFromModel<KEY>]: (value: ControllerDateRangeModels[KEY]) => void;
+    [KEY in keyof ControllerDateRangeModels as TypePropUpdateFromModel<KEY>]: (
+      value: ControllerDateRangeModels[KEY],
+    ) => void;
   };
 export function BBZBasicDateRange(_props: TypeControllerDateRangePublicProps) {
   return 'basic-date:dateRange';

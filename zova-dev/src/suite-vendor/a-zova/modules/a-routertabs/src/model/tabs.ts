@@ -1,12 +1,21 @@
 import type { IDecoratorModelOptions, UseQueryOptions } from 'zova-module-a-model';
 
-import { RouteLocationNormalizedLoaded, RouteLocationNormalizedLoadedGeneric } from '@cabloy/vue-router';
+import {
+  RouteLocationNormalizedLoaded,
+  RouteLocationNormalizedLoadedGeneric,
+} from '@cabloy/vue-router';
 import { mutate } from 'mutate-on-copy';
 import { deepEqual, deepExtend, TypeEventOff, useComputed } from 'zova';
 import { BeanModelBase, Model } from 'zova-module-a-model';
 import { IPageMeta, IRouteViewRouteItem, IRouteViewRouteMeta } from 'zova-module-a-router';
 
-import { ModelTabsOptions, ModelTabsOptionsBase, RouteTab, RouteTabInitial, RouteTabTransient } from '../types/tabs.js';
+import {
+  ModelTabsOptions,
+  ModelTabsOptionsBase,
+  RouteTab,
+  RouteTabInitial,
+  RouteTabTransient,
+} from '../types/tabs.js';
 
 export interface IModelOptionsTabs extends IDecoratorModelOptions, ModelTabsOptionsBase {}
 
@@ -187,7 +196,9 @@ export class ModelTabs extends BeanModelBase {
     const [index, tabOld] = this.findTab(tabKey);
     if (index === -1) return;
     // tabInfo
-    const tabInfo = this.tabsOptions.getTabInfo ? this.tabsOptions.getTabInfo(tabKey) : (tabInitial?.info ?? tabOld?.info);
+    const tabInfo = this.tabsOptions.getTabInfo
+      ? this.tabsOptions.getTabInfo(tabKey)
+      : (tabInitial?.info ?? tabOld?.info);
     if (!tabInfo) return;
     // update
     const tabNew = { ...tabOld, info: tabInfo };
@@ -226,7 +237,8 @@ export class ModelTabs extends BeanModelBase {
     let tabKeyActiveNext;
     if (!noActiveNext && index === this.tabCurrentIndex) {
       // prev/next
-      const tabCurrentIndex = index + 1 < this.tabs.length ? index + 1 : index - 1 > -1 ? index - 1 : -1;
+      const tabCurrentIndex =
+        index + 1 < this.tabs.length ? index + 1 : index - 1 > -1 ? index - 1 : -1;
       if (tabCurrentIndex > -1) {
         tabKeyActiveNext = this.tabs[tabCurrentIndex]?.tabKey;
       }
@@ -261,7 +273,8 @@ export class ModelTabs extends BeanModelBase {
     let componentKeyActiveNext;
     if (!noActiveNext && componentKey === this.componentKeyCurrent) {
       // prev/next
-      const tabItemCurrentIndex = indexItem + 1 < tab.items.length ? indexItem + 1 : indexItem - 1 > -1 ? indexItem - 1 : -1;
+      const tabItemCurrentIndex =
+        indexItem + 1 < tab.items.length ? indexItem + 1 : indexItem - 1 > -1 ? indexItem - 1 : -1;
       if (tabItemCurrentIndex > -1) {
         componentKeyActiveNext = tab.items[tabItemCurrentIndex]?.componentKey;
       }
@@ -297,7 +310,9 @@ export class ModelTabs extends BeanModelBase {
     const tabKey = tab.tabKey!;
     const [index, tabOld] = this.findTab(tabKey);
     if (index === -1 || !tabOld) return;
-    const items: IRouteViewRouteItem[] = tabOld.items ? ([] as IRouteViewRouteItem[]).concat(tabOld.items) : [];
+    const items: IRouteViewRouteItem[] = tabOld.items
+      ? ([] as IRouteViewRouteItem[]).concat(tabOld.items)
+      : [];
     if (tab.componentKey) {
       const tabItem: IRouteViewRouteItem = {
         componentKey: tab.componentKey,
@@ -313,7 +328,9 @@ export class ModelTabs extends BeanModelBase {
         items.splice(index, 1, tabItemNew);
       }
       // not use fullPath, because fullPath has query string
-      items.sort((a, b) => (a.componentKey === tabKey ? 0 : 1) - (b.componentKey === tabKey ? 0 : 1));
+      items.sort(
+        (a, b) => (a.componentKey === tabKey ? 0 : 1) - (b.componentKey === tabKey ? 0 : 1),
+      );
     }
     const tabNew: RouteTab = {
       ...tabOld,
@@ -412,13 +429,18 @@ export class ModelTabs extends BeanModelBase {
         for (const key2 of ['fullPath', 'keepAlive']) {
           if (tabItemOld[key2] !== tabNew[key2]) return true;
         }
-        const recentItemIndex = tabOld.items.findIndex(item => item[key] !== tabItemOld[key] && (item.updatedAt ?? 0) >= (tabItemOld.updatedAt ?? 0));
+        const recentItemIndex = tabOld.items.findIndex(
+          item =>
+            item[key] !== tabItemOld[key] && (item.updatedAt ?? 0) >= (tabItemOld.updatedAt ?? 0),
+        );
         if (recentItemIndex > -1) return true;
       } else if (tabNew[key] !== tabOld[key]) {
         return true;
       }
     }
-    const recentTabIndex = this.tabs.findIndex(item => item.tabKey !== tabOld.tabKey && (item.updatedAt ?? 0) >= (tabOld.updatedAt ?? 0));
+    const recentTabIndex = this.tabs.findIndex(
+      item => item.tabKey !== tabOld.tabKey && (item.updatedAt ?? 0) >= (tabOld.updatedAt ?? 0),
+    );
     if (recentTabIndex > -1) return true;
     return false;
   }
@@ -477,7 +499,10 @@ export class ModelTabs extends BeanModelBase {
     return { tabKey, componentKey, fullPath, keepAlive };
   }
 
-  private _handleRouteProp(route: RouteLocationNormalizedLoaded, prop: 'componentKey' | 'tabKey'): string;
+  private _handleRouteProp(
+    route: RouteLocationNormalizedLoaded,
+    prop: 'componentKey' | 'tabKey',
+  ): string;
   private _handleRouteProp(route: RouteLocationNormalizedLoaded, prop: 'keepAlive'): boolean;
   private _handleRouteProp(route: RouteLocationNormalizedLoaded, prop) {
     let value = route.meta[prop];

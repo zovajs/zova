@@ -8,13 +8,24 @@ import { getCurrentInstance, watchSyncEffect } from 'vue';
 import type { BeanBase } from '../bean/beanBase.ts';
 import type { DefineModelOptions, ModelRef } from '../bean/type.ts';
 
-export function useModel<M extends PropertyKey, T extends Record<string, any>, K extends keyof T, G = T[K], S = T[K]>(
+export function useModel<
+  M extends PropertyKey,
+  T extends Record<string, any>,
+  K extends keyof T,
+  G = T[K],
+  S = T[K],
+>(
   this: BeanBase,
   props: T,
   name: K,
   options?: DefineModelOptions<T[K], G, S>,
 ): ModelRef<T[K], M, G, S>;
-export function useModel(this: BeanBase, props: Record<string, any>, name: string, options: DefineModelOptions = EMPTY_OBJ): Ref {
+export function useModel(
+  this: BeanBase,
+  props: Record<string, any>,
+  name: string,
+  options: DefineModelOptions = EMPTY_OBJ,
+): Ref {
   const i = getCurrentInstance();
   if (!i) {
     throw new Error('useModel() called without active instance.');
@@ -48,7 +59,10 @@ export function useModel(this: BeanBase, props: Record<string, any>, name: strin
 
       set(value) {
         const emittedValue = coerceValueType(propType, options.set ? options.set(value) : value);
-        if (!hasChanged(emittedValue, localValue) && !(prevSetValue !== EMPTY_OBJ && hasChanged(value, prevSetValue))) {
+        if (
+          !hasChanged(emittedValue, localValue) &&
+          !(prevSetValue !== EMPTY_OBJ && hasChanged(value, prevSetValue))
+        ) {
           return;
         }
         // local update
@@ -61,7 +75,11 @@ export function useModel(this: BeanBase, props: Record<string, any>, name: strin
         // emitted to parent was the same, the parent will not trigger any
         // updates and there will be no prop sync. However the local input state
         // may be out of sync, so we need to force an update here.
-        if (hasChanged(value, emittedValue) && hasChanged(value, prevSetValue) && !hasChanged(emittedValue, prevEmittedValue)) {
+        if (
+          hasChanged(value, emittedValue) &&
+          hasChanged(value, prevSetValue) &&
+          !hasChanged(emittedValue, prevEmittedValue)
+        ) {
           trigger();
         }
         prevSetValue = value;
@@ -86,10 +104,15 @@ export function useModel(this: BeanBase, props: Record<string, any>, name: strin
   return res;
 }
 
-export function getModelModifiers(props: Record<string, any>, modelName: string): Record<string, boolean> | undefined {
+export function getModelModifiers(
+  props: Record<string, any>,
+  modelName: string,
+): Record<string, boolean> | undefined {
   return modelName === 'modelValue' || modelName === 'model-value'
     ? props.modelModifiers
-    : props[`${modelName}Modifiers`] || props[`${camelize(modelName)}Modifiers`] || props[`${hyphenate(modelName)}Modifiers`];
+    : props[`${modelName}Modifiers`] ||
+        props[`${camelize(modelName)}Modifiers`] ||
+        props[`${hyphenate(modelName)}Modifiers`];
 }
 
 export function coerceValueType(type: string, value: any) {

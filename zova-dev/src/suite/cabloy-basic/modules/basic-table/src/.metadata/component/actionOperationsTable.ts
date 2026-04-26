@@ -6,7 +6,10 @@ export type TypeControllerActionOperationsTablePublicProps = {
   controllerRef?: (ref: ControllerActionOperationsTable) => void;
 };
 
-export const ZActionOperationsTable = defineComponent((_props: TypeControllerActionOperationsTablePublicProps) => {
-  useController(ControllerActionOperationsTable, undefined, undefined);
-  return () => {};
-}, prepareComponentOptions());
+export const ZActionOperationsTable = defineComponent(
+  (_props: TypeControllerActionOperationsTablePublicProps) => {
+    useController(ControllerActionOperationsTable, undefined, undefined);
+    return () => {};
+  },
+  prepareComponentOptions(),
+);

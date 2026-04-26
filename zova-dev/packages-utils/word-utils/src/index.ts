@@ -36,7 +36,11 @@ export function parseFirstWord(str?: string, toLowerCase?: boolean): string | un
   return toLowerCase ? toLowerCaseFirstChar(word) : word;
 }
 
-export function skipPrefix(str?: string, prefix?: string, toLowerCase?: boolean): string | undefined {
+export function skipPrefix(
+  str?: string,
+  prefix?: string,
+  toLowerCase?: boolean,
+): string | undefined {
   if (!str) return str;
   let word: string;
   if (!prefix) {
@@ -52,7 +56,11 @@ export function skipPrefix(str?: string, prefix?: string, toLowerCase?: boolean)
   return toLowerCase ? toLowerCaseFirstChar(word) : word;
 }
 
-export function skipLastWord(str?: string, lastWord?: string, toLowerCase?: boolean): string | undefined {
+export function skipLastWord(
+  str?: string,
+  lastWord?: string,
+  toLowerCase?: boolean,
+): string | undefined {
   if (!str) return str;
   if (!lastWord) lastWord = parseLastWord(str)!;
   let word;
@@ -64,7 +72,11 @@ export function skipLastWord(str?: string, lastWord?: string, toLowerCase?: bool
   return toLowerCase ? toLowerCaseFirstChar(word) : word;
 }
 
-export function splitWords(str?: string, toLowerCase?: boolean, separator: string = ' '): string | undefined {
+export function splitWords(
+  str?: string,
+  toLowerCase?: boolean,
+  separator: string = ' ',
+): string | undefined {
   if (!str) return str;
   // parts
   let parts: string[] = [];
@@ -98,7 +110,10 @@ export function stringToCapitalize(str: string[] | string, separator?: string): 
   return str.map(name => toUpperCaseFirstChar(name)).join('');
 }
 
-export function replaceTemplate(content: string | undefined, scope?: object | undefined): string | undefined {
+export function replaceTemplate(
+  content: string | undefined,
+  scope?: object | undefined,
+): string | undefined {
   if (!content) return content;
   if (!scope) return content;
   return content.toString().replace(/(\\)?\{\{ *([\w.]+) *\}\}/g, (block, skip, key) => {

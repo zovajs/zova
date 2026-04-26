@@ -8,9 +8,12 @@ import svgTags from 'svg-tags';
 export const FRAGMENT = 'Fragment';
 export const KEEP_ALIVE = 'KeepAlive';
 
-export const shouldTransformedToSlots = (tag: string) => !(tag.match(new RegExp(`^_?${FRAGMENT}\\d*$`)) || tag === KEEP_ALIVE);
+export const shouldTransformedToSlots = (tag: string) =>
+  !(tag.match(new RegExp(`^_?${FRAGMENT}\\d*$`)) || tag === KEEP_ALIVE);
 
-export const transformJSXMemberExpression = (path: NodePath<t.JSXMemberExpression>): t.MemberExpression => {
+export const transformJSXMemberExpression = (
+  path: NodePath<t.JSXMemberExpression>,
+): t.MemberExpression => {
   const objectPath = path.node.object;
   const propertyPath = path.node.property;
   const transformedObject = t.isJSXMemberExpression(objectPath)
@@ -22,7 +25,10 @@ export const transformJSXMemberExpression = (path: NodePath<t.JSXMemberExpressio
   return t.memberExpression(transformedObject, transformedProperty);
 };
 
-export const checkIsComponent = (path: NodePath<t.JSXOpeningElement>, state: PluginPass): boolean => {
+export const checkIsComponent = (
+  path: NodePath<t.JSXOpeningElement>,
+  state: PluginPass,
+): boolean => {
   const namePath = path.get('name');
 
   if (namePath.isJSXMemberExpression()) {
@@ -45,7 +51,10 @@ export const checkIsComponent = (path: NodePath<t.JSXOpeningElement>, state: Plu
  * @param state State
  * @returns Identifier | StringLiteral | MemberExpression | CallExpression
  */
-export const getTag = (path: NodePath<t.JSXElement>, state: PluginPass): t.Identifier | t.CallExpression | t.StringLiteral | t.MemberExpression => {
+export const getTag = (
+  path: NodePath<t.JSXElement>,
+  state: PluginPass,
+): t.Identifier | t.CallExpression | t.StringLiteral | t.MemberExpression => {
   const namePath = path.get('openingElement').get('name');
   if (namePath.isJSXIdentifier()) {
     const { name } = namePath.node;

@@ -11,10 +11,13 @@ export class BeanRouterGuardsBase extends BeanBase {
   private _eventRouterGuards: TypeEventOff;
 
   protected async __init__() {
-    this._eventRouterGuards = this.app.meta.event.on('a-router:routerGuards', async (router, next) => {
-      this.onRouterGuards(router);
-      return await next();
-    });
+    this._eventRouterGuards = this.app.meta.event.on(
+      'a-router:routerGuards',
+      async (router, next) => {
+        this.onRouterGuards(router);
+        return await next();
+      },
+    );
   }
 
   protected __dispose__() {

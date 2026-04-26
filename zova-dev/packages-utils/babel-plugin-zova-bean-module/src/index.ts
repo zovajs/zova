@@ -67,7 +67,10 @@ function __getModuleName(sourceFileName: string | null | undefined) {
 }
 
 function __createDecoratorNode(beanInfo) {
-  const propertyNodeModule = t.objectProperty(t.identifier('module'), t.stringLiteral(beanInfo.module));
+  const propertyNodeModule = t.objectProperty(
+    t.identifier('module'),
+    t.stringLiteral(beanInfo.module),
+  );
   const objectExpression = t.objectExpression([propertyNodeModule]);
   const callExpression = t.callExpression(t.identifier('__z_BeanInfo'), [objectExpression]);
   const decoratorNode = t.decorator(callExpression);

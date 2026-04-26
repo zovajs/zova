@@ -18,7 +18,9 @@ import {
   inputTypePresets,
 } from '../../types/formField.js';
 
-export interface ControllerFormFieldProps<TParentData extends {} = {}> extends IFormFieldPresetOptions<TParentData> {}
+export interface ControllerFormFieldProps<
+  TParentData extends {} = {},
+> extends IFormFieldPresetOptions<TParentData> {}
 
 @Controller()
 export class ControllerFormField<TParentData extends {} = {}> extends BeanControllerBase {
@@ -109,7 +111,12 @@ export class ControllerFormField<TParentData extends {} = {}> extends BeanContro
     if (disableNotifyChanged === undefined) {
       disableNotifyChanged = this.propsBucket.disableNotifyChanged;
     }
-    return this.$$form.setFieldDisplayValue(this.name, value, this.propsBucket.onSetDisplayValue, disableNotifyChanged);
+    return this.$$form.setFieldDisplayValue(
+      this.name,
+      value,
+      this.propsBucket.onSetDisplayValue,
+      disableNotifyChanged,
+    );
   }
 
   public setValue(value: any, disableNotifyChanged?: boolean) {
@@ -201,7 +208,9 @@ export class ControllerFormField<TParentData extends {} = {}> extends BeanContro
   private _getFormFieldOptions() {
     // defaultValue
     const value = this.$$form.getFieldValue(this.name);
-    const defaultValue = isNil(value) ? (this.$props.defaultValue ?? this.property?.default) : undefined;
+    const defaultValue = isNil(value)
+      ? (this.$props.defaultValue ?? this.property?.default)
+      : undefined;
     // validators
     const validators = this._getFormFieldOptionsValidators();
     return Object.assign(
@@ -219,7 +228,9 @@ export class ControllerFormField<TParentData extends {} = {}> extends BeanContro
   private _getFormFieldOptionsValidators() {
     const zodSchemaField = this.fieldZodSchema;
     const validateOnDynamicDefault =
-      this.$props.validateOnDynamic === undefined && this.$props.validateOnBlur === undefined && this.$props.validateOnChange === undefined;
+      this.$props.validateOnDynamic === undefined &&
+      this.$props.validateOnBlur === undefined &&
+      this.$props.validateOnChange === undefined;
     const validateOnDynamic = this.$props.validateOnDynamic ?? validateOnDynamicDefault;
     const validateOnBlur = this.$props.validateOnBlur;
     const validateOnChange = this.$props.validateOnChange;
@@ -235,7 +246,10 @@ export class ControllerFormField<TParentData extends {} = {}> extends BeanContro
   }
 }
 
-function _normalizeValidateSchema(validateSchema?: boolean | z.ZodType, zodSchemaField?: z.ZodType) {
+function _normalizeValidateSchema(
+  validateSchema?: boolean | z.ZodType,
+  zodSchemaField?: z.ZodType,
+) {
   if (!validateSchema) return undefined;
   if (validateSchema === true) return zodSchemaField;
   return validateSchema;

@@ -1,5 +1,11 @@
 import type { IModule } from '@cabloy/module-info';
-import type { BeanBase, BeanContainer, IBeanScopeRecord, IMonkeyBeanInit, IMonkeyModule } from 'zova';
+import type {
+  BeanBase,
+  BeanContainer,
+  IBeanScopeRecord,
+  IMonkeyBeanInit,
+  IMonkeyModule,
+} from 'zova';
 
 import { appResource, BeanSimple, cast } from 'zova';
 

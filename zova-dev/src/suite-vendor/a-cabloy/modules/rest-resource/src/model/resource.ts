@@ -1,6 +1,12 @@
 import type { TableIdentity } from 'table-identity';
 import type { DataMutation, IDecoratorModelOptions } from 'zova-module-a-model';
-import type { IOpenapiOptionsResourceMeta, ITableQuery, ITableRes, ScopeModuleAOpenapi, TypeOpenapiPermissions } from 'zova-module-a-openapi';
+import type {
+  IOpenapiOptionsResourceMeta,
+  ITableQuery,
+  ITableRes,
+  ScopeModuleAOpenapi,
+  TypeOpenapiPermissions,
+} from 'zova-module-a-openapi';
 
 import { hashkey, isNil } from '@cabloy/utils';
 import { SchemaObject } from 'openapi3-ts/oas31';
@@ -15,7 +21,11 @@ export interface IModelOptionsResource extends IDecoratorModelOptions {}
 @Model<IModelOptionsResource>({
   enableSelector: true,
 })
-export class ModelResource<Entity = any, EntityCreate = Partial<Entity>, EntityUpdate = Partial<Entity>> extends BeanModelBase {
+export class ModelResource<
+  Entity = any,
+  EntityCreate = Partial<Entity>,
+  EntityUpdate = Partial<Entity>,
+> extends BeanModelBase {
   public resource: string;
   public resourceApi: string;
   public resourceMeta: IOpenapiOptionsResourceMeta;
@@ -39,7 +49,11 @@ export class ModelResource<Entity = any, EntityCreate = Partial<Entity>, EntityU
     // resourceMeta
     this.resourceMeta = this.$useComputed(() => {
       const resourceMeta = this.$sdk.getBootstrap(this.resource);
-      return deepExtend({}, this.$$scopeModuleAOpenapi.config.resourceMeta, resourceMeta.data?.resourceMeta);
+      return deepExtend(
+        {},
+        this.$$scopeModuleAOpenapi.config.resourceMeta,
+        resourceMeta.data?.resourceMeta,
+      );
     });
     this.permissions = this.$useComputed(() => {
       const permissions = this.$sdk.getPermissions(this.resource);
@@ -210,7 +224,10 @@ export class ModelResource<Entity = any, EntityCreate = Partial<Entity>, EntityU
     }
   }
 
-  public getFormData(formMeta: IFormMeta, id?: TableIdentity): Entity | EntityCreate | EntityUpdate | undefined {
+  public getFormData(
+    formMeta: IFormMeta,
+    id?: TableIdentity,
+  ): Entity | EntityCreate | EntityUpdate | undefined {
     if (formMeta.formMode === 'edit' && formMeta.editMode === 'create') {
       return this.getQueryDataDefaultValue(this.schemaCreate);
     }

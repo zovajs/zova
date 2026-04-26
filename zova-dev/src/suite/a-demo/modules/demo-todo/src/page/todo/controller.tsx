@@ -57,7 +57,11 @@ export class ControllerPageTodo extends BeanControllerPageBase {
           <div role="alert" class="alert alert-success">
             <div>
               Current:{' '}
-              <RouterLink to={this.$router.getPagePath('/demo/todo/item/:id', { params: { id: queryTodoCurrent?.data?.id } })}>
+              <RouterLink
+                to={this.$router.getPagePath('/demo/todo/item/:id', {
+                  params: { id: queryTodoCurrent?.data?.id },
+                })}
+              >
                 {queryTodoCurrent?.data?.title}
               </RouterLink>
             </div>
@@ -71,7 +75,11 @@ export class ControllerPageTodo extends BeanControllerPageBase {
         <form>
           <div class="card bg-base-100 shadow-xl">
             <div class="card-body flex-row">
-              <input type="text" class="input input-bordered w-full max-w-xs" v-model={this.newTitle}></input>
+              <input
+                type="text"
+                class="input input-bordered w-full max-w-xs"
+                v-model={this.newTitle}
+              ></input>
               <button
                 class="btn btn-primary"
                 type="submit"
@@ -108,7 +116,11 @@ export class ControllerPageTodo extends BeanControllerPageBase {
                         {item.title}
                       </a>
                     </td>
-                    <td>{item.done && <input type="checkbox" checked={true} class="checkbox checkbox-success" />}</td>
+                    <td>
+                      {item.done && (
+                        <input type="checkbox" checked={true} class="checkbox checkbox-success" />
+                      )}
+                    </td>
                     <td>
                       <button
                         class="btn btn-error btn-sm"

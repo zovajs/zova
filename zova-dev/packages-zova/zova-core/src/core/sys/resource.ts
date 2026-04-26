@@ -60,9 +60,16 @@ export class AppResource {
     // virtual
     const virtual = appMetadata.getOwnMetadata<boolean>(SymbolDecoratorVirtual, beanClass!);
     // name
-    const { scene, name } = this._parseSceneAndBeanName(beanClass!, beanOptions.scene, beanOptions.name);
+    const { scene, name } = this._parseSceneAndBeanName(
+      beanClass!,
+      beanOptions.scene,
+      beanOptions.name,
+    );
     // beanInfo
-    const beanInfo = appMetadata.getOwnMetadata<IDecoratorBeanInfoOptions>(SymbolDecoratorBeanInfo, beanClass!);
+    const beanInfo = appMetadata.getOwnMetadata<IDecoratorBeanInfoOptions>(
+      SymbolDecoratorBeanInfo,
+      beanClass!,
+    );
     // module
     const module = beanInfo?.module;
     if (!module) throw new Error(`module name not parsed for bean: ${scene}.${name}`);
@@ -71,7 +78,12 @@ export class AppResource {
     // moduleBelong
     const moduleBelong = this._parseModuleBelong(module, beanClass, virtual);
     // options
-    const options2 = this._prepareOnionOptions(options, optionsPrimitive, scene, `${module}:${name}`);
+    const options2 = this._prepareOnionOptions(
+      options,
+      optionsPrimitive,
+      scene,
+      `${module}:${name}`,
+    );
     // beanOptions2
     const beanOptions2 = {
       ...beanOptions,
@@ -113,7 +125,9 @@ export class AppResource {
   }
 
   getBean<T>(A: Constructable<T>): IDecoratorBeanOptionsBase<T> | undefined;
-  getBean<K extends keyof IBeanRecord>(beanFullName: K): IDecoratorBeanOptionsBase<IBeanRecord[K]> | undefined;
+  getBean<K extends keyof IBeanRecord>(
+    beanFullName: K,
+  ): IDecoratorBeanOptionsBase<IBeanRecord[K]> | undefined;
   getBean<T>(beanFullName: string): IDecoratorBeanOptionsBase<T> | undefined;
   getBean<T>(beanFullName): IDecoratorBeanOptionsBase<T> | undefined {
     const fullName = this.getBeanFullName(beanFullName);
@@ -121,7 +135,11 @@ export class AppResource {
     return this.beans[fullName] as IDecoratorBeanOptionsBase<T>;
   }
 
-  _parseSceneAndBeanName<T>(beanClass: Constructable<T>, scene?: string, name?: string): { scene: string; name: string } {
+  _parseSceneAndBeanName<T>(
+    beanClass: Constructable<T>,
+    scene?: string,
+    name?: string,
+  ): { scene: string; name: string } {
     if (scene && name) {
       return { scene, name };
     }
@@ -181,7 +199,12 @@ export class AppResource {
     return beanOptions?.module;
   }
 
-  _prepareOnionOptions(options: unknown, optionsPrimitive: boolean | undefined, scene: any, name: string) {
+  _prepareOnionOptions(
+    options: unknown,
+    optionsPrimitive: boolean | undefined,
+    scene: any,
+    name: string,
+  ) {
     const sys = getSys();
     const optionsConfig = cast(sys.config).onions[scene]?.[name];
     if (optionsPrimitive) {

@@ -50,7 +50,10 @@ export class SysMeta extends BeanSimple {
   }
 
   /** @internal */
-  public async initialize(SysMonkey?: Constructable<IMonkeyModuleSys & IMonkeySys>, legacyRoutes?: RouteRecordRaw[]) {
+  public async initialize(
+    SysMonkey?: Constructable<IMonkeyModuleSys & IMonkeySys>,
+    legacyRoutes?: RouteRecordRaw[],
+  ) {
     if (SysMonkey) {
       this.sysMonkey = this.bean._newBeanSimple(SysMonkey, false);
     }

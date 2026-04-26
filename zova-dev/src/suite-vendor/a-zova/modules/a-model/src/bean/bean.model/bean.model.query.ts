@@ -23,7 +23,9 @@ export class BeanModelQuery extends BeanModelCookie {
   $setQueryData<
     TQueryFnData,
     TTaggedQueryKey extends QueryKey,
-    TData = TTaggedQueryKey extends DataTag<unknown, infer TaggedValue> ? TaggedValue : TQueryFnData,
+    TData = TTaggedQueryKey extends DataTag<unknown, infer TaggedValue>
+      ? TaggedValue
+      : TQueryFnData,
   >(
     queryKey: TTaggedQueryKey,
     updater: Updater<NoInfer<TData> | undefined, NoInfer<TData> | undefined>,
@@ -59,12 +61,18 @@ export class BeanModelQuery extends BeanModelCookie {
     return this.$queryClient.getQueryCache().find(filters as any);
   }
 
-  $invalidateQueries(filters?: InvalidateQueryFilters, options?: MaybeRefDeep<InvalidateOptions>): Promise<void> {
+  $invalidateQueries(
+    filters?: InvalidateQueryFilters,
+    options?: MaybeRefDeep<InvalidateOptions>,
+  ): Promise<void> {
     filters = this.$normalizeFilters(filters);
     return this.$queryClient.invalidateQueries(filters, options);
   }
 
-  $refetchQueries(filters?: RefetchQueryFilters, options?: MaybeRefDeep<RefetchOptions>): Promise<void> {
+  $refetchQueries(
+    filters?: RefetchQueryFilters,
+    options?: MaybeRefDeep<RefetchOptions>,
+  ): Promise<void> {
     filters = this.$normalizeFilters(filters);
     return this.$queryClient.refetchQueries(filters, options);
   }

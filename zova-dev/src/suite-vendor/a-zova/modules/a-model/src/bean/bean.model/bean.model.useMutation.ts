@@ -1,4 +1,10 @@
-import type { DefaultError, MutationKey, MutationObserverOptions, QueryClient, UseMutationReturnType } from '@tanstack/vue-query';
+import type {
+  DefaultError,
+  MutationKey,
+  MutationObserverOptions,
+  QueryClient,
+  UseMutationReturnType,
+} from '@tanstack/vue-query';
 import type { UnwrapNestedRefs } from 'vue';
 
 import { hashKey, useMutation } from '@tanstack/vue-query';
@@ -14,7 +20,9 @@ export class BeanModelUseMutation extends BeanModelUseStateGeneral {
   private [SymbolUseMutations]: Record<string, unknown> = {};
 
   $useMutation<TData = unknown, TVariables = void, TContext = unknown>(
-    mutationOptions: MaybeRefDeep<MutationObserverOptions<TData, DefaultError, TVariables, TContext>>,
+    mutationOptions: MaybeRefDeep<
+      MutationObserverOptions<TData, DefaultError, TVariables, TContext>
+    >,
     queryClient?: QueryClient,
   ): UnwrapNestedRefs<UseMutationReturnType<TData, DefaultError, TVariables, TContext>> {
     return this.ctx.util.instanceScope(() => {
@@ -23,7 +31,9 @@ export class BeanModelUseMutation extends BeanModelUseStateGeneral {
   }
 
   $useMutationData<TData = unknown, TVariables = void, TContext = unknown>(
-    mutationOptions: MaybeRefDeep<MutationObserverOptions<TData, DefaultError, TVariables, TContext>>,
+    mutationOptions: MaybeRefDeep<
+      MutationObserverOptions<TData, DefaultError, TVariables, TContext>
+    >,
     queryClient?: QueryClient,
   ): UnwrapNestedRefs<UseMutationReturnType<TData, DefaultError, TVariables, TContext>> {
     let mutationKey: MutationKey = cast(mutationOptions).mutationKey;
@@ -44,6 +54,8 @@ export class BeanModelUseMutation extends BeanModelUseStateGeneral {
       mutationOptions = Object.assign(optionsDefault, mutationOptions, { mutationKey });
       this[SymbolUseMutations][mutationHash] = this.$useMutation(mutationOptions, queryClient);
     }
-    return this[SymbolUseMutations][mutationHash] as UnwrapNestedRefs<UseMutationReturnType<TData, DefaultError, TVariables, TContext>>;
+    return this[SymbolUseMutations][mutationHash] as UnwrapNestedRefs<
+      UseMutationReturnType<TData, DefaultError, TVariables, TContext>
+    >;
   }
 }

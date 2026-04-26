@@ -1,4 +1,9 @@
-import type { OperationObject, ParameterObject, RequestBodyObject, SchemaObject } from 'openapi3-ts/oas31';
+import type {
+  OperationObject,
+  ParameterObject,
+  RequestBodyObject,
+  SchemaObject,
+} from 'openapi3-ts/oas31';
 
 import jsonSchemaToZod from '@cabloy/json-schema-to-zod';
 import { evaluateSimple } from '@cabloy/utils';
@@ -30,12 +35,17 @@ export function loadSchemaProperties(
     const customKey = property.rest?.customKey;
     if (customKey) {
       const parts = customKey.split('.');
-      const propertyParent: any = parts[0] === key ? property : result.find(item => item.key === parts[0]);
+      const propertyParent: any =
+        parts[0] === key ? property : result.find(item => item.key === parts[0]);
       property = propertyParent?.properties[parts[1]];
       key = customKey;
     }
     if (!property) continue;
-    property = deepExtend({ key }, property, scene ? { rest: property.rest?.[scene] ?? {} } : undefined);
+    property = deepExtend(
+      { key },
+      property,
+      scene ? { rest: property.rest?.[scene] ?? {} } : undefined,
+    );
     result.push(property);
   }
   // sort
@@ -55,7 +65,10 @@ export function schemaToZodSchema<T extends z.ZodType = z.ZodType>(
   return evaluateSimple(code, { z });
 }
 
-function _normalizeSchema(schema: SchemaObject, onGetSchema: (schemaName: string) => SchemaObject | undefined) {
+function _normalizeSchema(
+  schema: SchemaObject,
+  onGetSchema: (schemaName: string) => SchemaObject | undefined,
+) {
   if (!schema.properties) return schema;
   const schemaNew = Object.assign({}, schema, { properties: {} });
   for (const key in schema.properties) {
@@ -69,15 +82,22 @@ function _normalizeSchema(schema: SchemaObject, onGetSchema: (schemaName: string
   return schemaNew;
 }
 
-export function getSchemaOfRequestBody(operationObject?: OperationObject): SchemaObject | undefined {
-  return cast<RequestBodyObject>(operationObject?.requestBody)?.content?.['application/json']?.schema as any;
+export function getSchemaOfRequestBody(
+  operationObject?: OperationObject,
+): SchemaObject | undefined {
+  return cast<RequestBodyObject>(operationObject?.requestBody)?.content?.['application/json']
+    ?.schema as any;
 }
 
-export function getSchemaOfResponseBody(operationObject?: OperationObject): SchemaObject | undefined {
+export function getSchemaOfResponseBody(
+  operationObject?: OperationObject,
+): SchemaObject | undefined {
   return operationObject?.responses?.['200']?.content?.['application/json']?.schema;
 }
 
-export function getSchemaOfRequestQuery(operationObject?: OperationObject): SchemaObject | undefined {
+export function getSchemaOfRequestQuery(
+  operationObject?: OperationObject,
+): SchemaObject | undefined {
   const parameters = operationObject?.parameters;
   if (!parameters) return;
   const schema: SchemaObject = { type: 'object', required: [], properties: {} };
@@ -92,7 +112,10 @@ export function getSchemaOfRequestQuery(operationObject?: OperationObject): Sche
   return schema;
 }
 
-export function getSchemaOfRequestQueryFilter(operationObject?: OperationObject, options?: { where?: boolean; order?: boolean }) {
+export function getSchemaOfRequestQueryFilter(
+  operationObject?: OperationObject,
+  options?: { where?: boolean; order?: boolean },
+) {
   const parameters = operationObject?.parameters;
   if (!parameters) return;
   const schema: SchemaObject = { type: 'object', required: [], properties: {} };

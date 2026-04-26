@@ -10,14 +10,20 @@ export type TypeControllerRouterViewTabsPublicProps = {
   controllerRef?: (ref: ControllerRouterViewTabs) => void;
 } & ControllerRouterViewTabsProps;
 
-type ControllerInnerProps = TypeControllerInnerProps<ControllerRouterViewTabsProps, keyof typeof ControllerRouterViewTabs.$propsDefault>;
+type ControllerInnerProps = TypeControllerInnerProps<
+  ControllerRouterViewTabsProps,
+  keyof typeof ControllerRouterViewTabs.$propsDefault
+>;
 declare module 'zova-module-a-routertabs' {
   export interface ControllerRouterViewTabs {
     $props: ControllerInnerProps;
   }
 }
 
-export const ZRouterViewTabs = defineComponent((_props: TypeControllerRouterViewTabsPublicProps) => {
-  useController(ControllerRouterViewTabs, undefined, undefined);
-  return () => {};
-}, prepareComponentOptions());
+export const ZRouterViewTabs = defineComponent(
+  (_props: TypeControllerRouterViewTabsPublicProps) => {
+    useController(ControllerRouterViewTabs, undefined, undefined);
+    return () => {};
+  },
+  prepareComponentOptions(),
+);

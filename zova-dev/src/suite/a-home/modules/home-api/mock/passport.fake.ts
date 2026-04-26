@@ -277,28 +277,29 @@ const __sdkSchemaPassportLogin = {
           },
           required: ['username', 'password', 'captcha'],
         },
-        'a-captcha.dto.captchaVerify_c3cd80b1eeafe39bfe4433491bb081d68e84797e_3218e7d152830e08f6e764b9e0c3796df929ee2b': {
-          type: 'object',
-          properties: {
-            id: {
-              type: 'string',
-              errorMessage: {
-                default: '必填项',
+        'a-captcha.dto.captchaVerify_c3cd80b1eeafe39bfe4433491bb081d68e84797e_3218e7d152830e08f6e764b9e0c3796df929ee2b':
+          {
+            type: 'object',
+            properties: {
+              id: {
+                type: 'string',
+                errorMessage: {
+                  default: '必填项',
+                },
+              },
+              token: {
+                type: 'string',
+                errorMessage: {
+                  default: '必填项',
+                },
               },
             },
-            token: {
-              type: 'string',
-              errorMessage: {
-                default: '必填项',
-              },
+            required: ['id', 'token'],
+            rest: {
+              render: 'captcha',
+              iconPrefix: ':editor:code-block',
             },
           },
-          required: ['id', 'token'],
-          rest: {
-            render: 'captcha',
-            iconPrefix: ':editor:code-block',
-          },
-        },
       },
       parameters: {},
     },
@@ -367,8 +368,10 @@ export default defineFakeRoute([
       if (captcha.id !== '88b3ad2d-e2a9-44bf-9154-3086ef9770a4' || captcha.token !== '7') {
         return {
           code: 422,
-          message: '[\n  {\n    "code": "custom",\n    "path": [\n      "captcha"\n    ],\n    "message": "验证码不正确"\n  }\n]',
-          stack: 'Error: [\n  {\n    "code": "custom",\n    "path": [\n      "captcha"\n    ],\n    "message": "验证码不正确"\n  }\n]\n',
+          message:
+            '[\n  {\n    "code": "custom",\n    "path": [\n      "captcha"\n    ],\n    "message": "验证码不正确"\n  }\n]',
+          stack:
+            'Error: [\n  {\n    "code": "custom",\n    "path": [\n      "captcha"\n    ],\n    "message": "验证码不正确"\n  }\n]\n',
           name: 'Error',
           level: 'error',
         };

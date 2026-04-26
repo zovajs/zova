@@ -20,7 +20,11 @@ import type { AppEvent } from '../core/component/event.ts';
 import type { ILoggerChildRecord, ILoggerClientRecord } from '../core/logger/types.ts';
 import type { FunctionAsync } from '../decorator/type/functionable.ts';
 import type { MapSources, MaybeUndefined } from '../vueExtra/watch.ts';
-import type { IErrorHandlerEventResult, IModuleLocaleText, IZovaComponentRecord } from './resource/index.ts';
+import type {
+  IErrorHandlerEventResult,
+  IModuleLocaleText,
+  IZovaComponentRecord,
+} from './resource/index.ts';
 
 import { cast } from '../types/utils/cast.ts';
 import { useComputed } from '../vueExtra/computed.ts';
@@ -35,7 +39,8 @@ const SymbolLoggerChildren = Symbol('SymbolLoggerChildren');
 export class BeanBase extends BeanBaseSimple {
   private [SymbolText]: IModuleLocaleText;
   private [SymbolLogger]: Record<keyof ILoggerClientRecord, Logger> = {} as any;
-  private [SymbolLoggerChildren]: Record<keyof ILoggerClientRecord, Record<string, Logger>> = {} as any;
+  private [SymbolLoggerChildren]: Record<keyof ILoggerClientRecord, Record<string, Logger>> =
+    {} as any;
 
   protected get $el(): RendererNode {
     if (!this.ctx) {
@@ -57,18 +62,26 @@ export class BeanBase extends BeanBaseSimple {
 
   protected $loggerClient(clientName: keyof ILoggerClientRecord) {
     if (!this[SymbolLogger][clientName]) {
-      this[SymbolLogger][clientName] = this.sys.meta.logger.get(clientName).child({ beanFullName: this.$beanFullName });
+      this[SymbolLogger][clientName] = this.sys.meta.logger
+        .get(clientName)
+        .child({ beanFullName: this.$beanFullName });
     }
     return this[SymbolLogger][clientName];
   }
 
-  protected $loggerChild(childName: keyof ILoggerChildRecord, clientName: keyof ILoggerClientRecord = 'default') {
-    if (!this[SymbolLoggerChildren][clientName]) this[SymbolLoggerChildren][clientName] = {} as never;
+  protected $loggerChild(
+    childName: keyof ILoggerChildRecord,
+    clientName: keyof ILoggerClientRecord = 'default',
+  ) {
+    if (!this[SymbolLoggerChildren][clientName])
+      this[SymbolLoggerChildren][clientName] = {} as never;
     if (!this[SymbolLoggerChildren][clientName][childName]) {
-      this[SymbolLoggerChildren][clientName][childName] = this.sys.meta.logger.get(clientName).child({
-        beanFullName: this.$beanFullName,
-        name: childName,
-      });
+      this[SymbolLoggerChildren][clientName][childName] = this.sys.meta.logger
+        .get(clientName)
+        .child({
+          beanFullName: this.$beanFullName,
+          name: childName,
+        });
     }
     return this[SymbolLoggerChildren][clientName][childName];
   }
@@ -96,7 +109,9 @@ export class BeanBase extends BeanBaseSimple {
     return cast(this.ctx.instance).ctx.renderFreeze(freeze);
   }
 
-  protected async $renderFreezeScope<RESULT>(fn: FunctionAsync<RESULT>): Promise<RESULT | undefined> {
+  protected async $renderFreezeScope<RESULT>(
+    fn: FunctionAsync<RESULT>,
+  ): Promise<RESULT | undefined> {
     if (this.ctx.disposed) return;
     return await cast(this.ctx.instance).ctx.renderFreezeScope(fn);
   }
@@ -113,7 +128,11 @@ export class BeanBase extends BeanBaseSimple {
     if (err instanceof Error && err[SymbolErrorInstanceInfo]) {
       delete err[SymbolErrorInstanceInfo];
     }
-    return this.app?.vue.config.errorHandler!(err, this.ctx.instance as any, info!) as unknown as IErrorHandlerEventResult;
+    return this.app?.vue.config.errorHandler!(
+      err,
+      this.ctx.instance as any,
+      info!,
+    ) as unknown as IErrorHandlerEventResult;
   }
 
   protected $useComputed<T>(getter: ComputedGetter<T>, debugOptions?: DebuggerOptions): T;
@@ -147,9 +166,14 @@ export class BeanBase extends BeanBaseSimple {
     cb: WatchCallback<T, MaybeUndefined<T, Immediate>>,
     options?: WatchOptions<Immediate>,
   ): WatchHandle;
-  protected $watch<T extends Readonly<MultiWatchSources>, Immediate extends Readonly<boolean> = false>(
+  protected $watch<
+    T extends Readonly<MultiWatchSources>,
+    Immediate extends Readonly<boolean> = false,
+  >(
     sources: readonly [...T] | T,
-    cb: [T] extends [ReactiveMarker] ? WatchCallback<T, MaybeUndefined<T, Immediate>> : WatchCallback<MapSources<T, false>, MapSources<T, Immediate>>,
+    cb: [T] extends [ReactiveMarker]
+      ? WatchCallback<T, MaybeUndefined<T, Immediate>>
+      : WatchCallback<MapSources<T, false>, MapSources<T, Immediate>>,
     options?: WatchOptions<Immediate>,
   ): WatchHandle;
   protected $watch<T extends MultiWatchSources, Immediate extends Readonly<boolean> = false>(
@@ -179,7 +203,9 @@ export class BeanBase extends BeanBaseSimple {
     });
   }
 
-  protected $zovaComponent<K extends keyof IZovaComponentRecord>(componentName: K): IZovaComponentRecord[K];
+  protected $zovaComponent<K extends keyof IZovaComponentRecord>(
+    componentName: K,
+  ): IZovaComponentRecord[K];
   protected $zovaComponent(module: string, name: string);
   protected $zovaComponent(module: string, name?: string) {
     return this.sys.meta.component.getZovaComponent(module, name!);

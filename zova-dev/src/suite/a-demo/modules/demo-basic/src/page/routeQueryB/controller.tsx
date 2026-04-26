@@ -34,14 +34,18 @@ export class ControllerPageRouteQueryB extends BeanControllerPageBase {
   }
 
   toggleUser() {
-    const user = this.$query.user?.name === 'tom' ? { name: 'kevin', age: 18 } : { name: 'tom', age: 6 };
+    const user =
+      this.$query.user?.name === 'tom' ? { name: 'kevin', age: 18 } : { name: 'tom', age: 6 };
     const query = { ...this.$query, user };
     const url = this.$router.getPagePath('/demo/basic/routeQueryB', { query });
     this.$router.push(url);
   }
 
   toggleTodos() {
-    const todo = (this.$query.todos?.length ?? 0) % 2 === 0 ? { title: 'Running', done: false } : { title: 'Eating', done: true };
+    const todo =
+      (this.$query.todos?.length ?? 0) % 2 === 0
+        ? { title: 'Running', done: false }
+        : { title: 'Eating', done: true };
     const todos = this.$query.todos ? [todo].concat(this.$query.todos) : [todo];
     const query = { ...this.$query, todos };
     const url = this.$router.getPagePath('/demo/basic/routeQueryB', { query });
@@ -183,7 +187,11 @@ export class ControllerPageRouteQueryB extends BeanControllerPageBase {
                         <tr>
                           <td>{item.title}</td>
                           <td>
-                            <input type="checkbox" checked={item.done} class="checkbox checkbox-success" />
+                            <input
+                              type="checkbox"
+                              checked={item.done}
+                              class="checkbox checkbox-success"
+                            />
                           </td>
                         </tr>
                       );

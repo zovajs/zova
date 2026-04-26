@@ -13,7 +13,10 @@ export interface TransformableInfo {
   [key: string | symbol]: unknown;
 }
 
-export type TransformFunction = (info: TransformableInfo, opts?: unknown) => TransformableInfo | boolean;
+export type TransformFunction = (
+  info: TransformableInfo,
+  opts?: unknown,
+) => TransformableInfo | boolean;
 export type FormatWrap = (opts?: object) => Format;
 
 export enum NpmConfigSetLevels {

@@ -9,9 +9,16 @@ import type { IControllerInfo } from './types.ts';
 import { generateFileComponent } from './generateFileComponent.ts';
 import { generateFilePage } from './generateFilePage.ts';
 
-export async function generateFile(options: IMetadataCustomGenerateOptions, globFile: IGlobBeanFile, controllerInfo: IControllerInfo) {
+export async function generateFile(
+  options: IMetadataCustomGenerateOptions,
+  globFile: IGlobBeanFile,
+  controllerInfo: IControllerInfo,
+) {
   const cli = options.cli;
-  const fileDest = path.join(options.modulePath, `src/.metadata/${controllerInfo.type}/${controllerInfo.name}.ts`);
+  const fileDest = path.join(
+    options.modulePath,
+    `src/.metadata/${controllerInfo.type}/${controllerInfo.name}.ts`,
+  );
   const content =
     controllerInfo.type === 'page'
       ? await generateFilePage(options, globFile, controllerInfo)

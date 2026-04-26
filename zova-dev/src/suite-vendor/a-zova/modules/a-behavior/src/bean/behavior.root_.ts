@@ -17,7 +17,11 @@ export interface IBehaviorOptionsRoot extends IDecoratorBehaviorOptions {
 }
 
 @Behavior<IBehaviorOptionsRoot>()
-export class BehaviorRoot extends BeanBehaviorBase<IBehaviorOptionsRoot, IBehaviorPropsInputRoot, IBehaviorPropsOutputRoot> {
+export class BehaviorRoot extends BeanBehaviorBase<
+  IBehaviorOptionsRoot,
+  IBehaviorPropsInputRoot,
+  IBehaviorPropsOutputRoot
+> {
   private composer: ServiceComposer;
 
   protected async __init__(options: IBehaviorOptionsRoot) {
@@ -33,7 +37,10 @@ export class BehaviorRoot extends BeanBehaviorBase<IBehaviorOptionsRoot, IBehavi
     await this.composer.load(options.behaviors);
   }
 
-  protected render(props: IBehaviorPropsInputRoot, next: NextBehavior<IBehaviorPropsOutputRoot>): VNode {
+  protected render(
+    props: IBehaviorPropsInputRoot,
+    next: NextBehavior<IBehaviorPropsOutputRoot>,
+  ): VNode {
     return this.composer.render(props, next);
   }
 }

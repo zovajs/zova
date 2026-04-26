@@ -28,7 +28,9 @@ export class SysComponent extends BeanSimple {
     // });
   }
 
-  public getZovaComponent<K extends keyof IZovaComponentRecord>(componentName: K): IZovaComponentRecord[K];
+  public getZovaComponent<K extends keyof IZovaComponentRecord>(
+    componentName: K,
+  ): IZovaComponentRecord[K];
   public getZovaComponent(module: string, name: string);
   public getZovaComponent(module: string, name?: string) {
     const componentName = module.includes(':') ? module : `${module}:${name}`;

@@ -2,7 +2,10 @@ import { z } from 'zod';
 import { createZovaComponentPage } from 'zova';
 
 import { ControllerPageRouteQuery } from '../../page/routeQuery/controller.jsx';
-import { ControllerPageRouteQuerySchemaParams, ControllerPageRouteQuerySchemaQuery } from '../../page/routeQuery/controller.jsx';
+import {
+  ControllerPageRouteQuerySchemaParams,
+  ControllerPageRouteQuerySchemaQuery,
+} from '../../page/routeQuery/controller.jsx';
 export namespace NSControllerPageRouteQuery {
   export const paramsSchema = ControllerPageRouteQuerySchemaParams;
   export type ParamsInput = z.input<typeof ControllerPageRouteQuerySchemaParams>;
@@ -13,4 +16,8 @@ export namespace NSControllerPageRouteQuery {
   export type QueryOutput = z.output<typeof ControllerPageRouteQuerySchemaQuery>;
 }
 
-export const ZPageRouteQuery = createZovaComponentPage(ControllerPageRouteQuery, undefined, undefined);
+export const ZPageRouteQuery = createZovaComponentPage(
+  ControllerPageRouteQuery,
+  undefined,
+  undefined,
+);

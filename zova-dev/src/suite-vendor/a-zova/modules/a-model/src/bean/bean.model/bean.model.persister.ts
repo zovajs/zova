@@ -11,7 +11,13 @@ import { resolveMaxAgeTime } from '../../types/index.js';
 import { BeanModelLast } from './bean.model.last.js';
 
 export class BeanModelPersister extends BeanModelLast {
-  private _persisterLoad_inner<T>(storage: Storage, storageKey: string, storedData: any, query: Query, options: QueryMetaPersister): T | undefined {
+  private _persisterLoad_inner<T>(
+    storage: Storage,
+    storageKey: string,
+    storedData: any,
+    query: Query,
+    options: QueryMetaPersister,
+  ): T | undefined {
     if (!storedData) return undefined;
     const persistedQuery = options.deserialize
       ? options.deserialize(storedData as string, options.deserializeDefault!)
@@ -56,7 +62,9 @@ export class BeanModelPersister extends BeanModelLast {
     } catch (err) {
       if (process.env.DEV) {
         console.error(err);
-        console.warn('Encountered an error attempting to restore query cache from persisted location.');
+        console.warn(
+          'Encountered an error attempting to restore query cache from persisted location.',
+        );
       }
       storage.removeItem(storageKey);
     }
@@ -76,7 +84,9 @@ export class BeanModelPersister extends BeanModelLast {
       queryHash: query.queryHash,
       buster: options.buster,
     };
-    const data = options.serialize ? options.serialize(params, options.serializeDefault!) : options.serializeDefault!(params);
+    const data = options.serialize
+      ? options.serialize(params, options.serializeDefault!)
+      : options.serializeDefault!(params);
     if (options.sync === true) {
       storage.setItem(storageKey, data);
     } else {
@@ -126,7 +136,8 @@ export class BeanModelPersister extends BeanModelLast {
     }
     options.storage = options.storage ?? (options.sync ? 'local' : 'db');
     options.maxAge = options.maxAge ?? this.scopeSelf.config.persister.maxAge[options.storage];
-    options.refetchOnRestore = options.refetchOnRestore ?? this.scopeSelf.config.persister.refetchOnRestore;
+    options.refetchOnRestore =
+      options.refetchOnRestore ?? this.scopeSelf.config.persister.refetchOnRestore;
     options.prefix = options.prefix ?? this._getPersisterPrefix();
     options.buster = options.buster ?? this._getPersisterBuster();
     options.serializeDefault = options.serializeDefault ?? JSON.stringify;
@@ -143,7 +154,8 @@ export class BeanModelPersister extends BeanModelLast {
     options = this._adjustPersisterOptions(options);
     if (!options) return undefined;
     // cookie
-    if (options.storage === 'cookie') return this.bean._newBeanSimple(CookieWrapper, false, options, query);
+    if (options.storage === 'cookie')
+      return this.bean._newBeanSimple(CookieWrapper, false, options, query);
     // check server
     if (process.env.SERVER) return undefined;
     // local

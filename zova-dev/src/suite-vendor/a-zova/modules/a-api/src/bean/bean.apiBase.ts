@@ -12,7 +12,11 @@ export class BeanApiBase extends BeanBase {
     return this.sys.util.apiActionPathTranslate(pathName, pathParams);
   }
 
-  $configPrepare(baseURL?: string, options?: IApiActionOptions, authToken?: TypeAuthToken): AxiosRequestConfig {
+  $configPrepare(
+    baseURL?: string,
+    options?: IApiActionOptions,
+    authToken?: TypeAuthToken,
+  ): AxiosRequestConfig {
     return this.sys.util.apiActionConfigPrepare(baseURL, options, authToken);
   }
 

@@ -35,7 +35,13 @@ export class ControllerPageResource extends BeanControllerPageBase {
     this.pageWrapperScope = this._getPageWrapperScope();
     // jsx
     this.pageWrapperCelEnv = this._getPageWrapperCelEnv();
-    this.zovaJsx = this.app.bean._newBeanSimple(ZovaJsx, false, this.tableProvider.components, this.tableProvider.actions, this.pageWrapperCelEnv);
+    this.zovaJsx = this.app.bean._newBeanSimple(
+      ZovaJsx,
+      false,
+      this.tableProvider.components,
+      this.tableProvider.actions,
+      this.pageWrapperCelEnv,
+    );
   }
 
   get resource() {

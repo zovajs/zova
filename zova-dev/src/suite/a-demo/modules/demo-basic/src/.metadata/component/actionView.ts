@@ -10,7 +10,10 @@ export type TypeControllerActionViewPublicProps = {
   controllerRef?: (ref: ControllerActionView) => void;
 } & ControllerActionViewProps;
 
-type ControllerInnerProps = TypeControllerInnerProps<ControllerActionViewProps, keyof typeof ControllerActionView.$propsDefault>;
+type ControllerInnerProps = TypeControllerInnerProps<
+  ControllerActionViewProps,
+  keyof typeof ControllerActionView.$propsDefault
+>;
 declare module 'zova-module-demo-basic' {
   export interface ControllerActionView {
     $props: ControllerInnerProps;

@@ -6,7 +6,12 @@ import { deepExtend, useComputed } from 'zova';
 import { BeanModelBase, Model } from 'zova-module-a-model';
 import { IRouteViewRouteMeta } from 'zova-module-a-router';
 
-import { ModelStackOptions, ModelStackOptionsBase, RouteTab, RouteTabTransient } from '../types/stack.js';
+import {
+  ModelStackOptions,
+  ModelStackOptionsBase,
+  RouteTab,
+  RouteTabTransient,
+} from '../types/stack.js';
 
 export interface IModelOptionsStack extends IDecoratorModelOptions, ModelStackOptionsBase {}
 
@@ -120,7 +125,9 @@ export class ModelStack extends BeanModelBase {
 
   // special for _addTab
   private _checkIfTabNeedUpdate(tabOld: RouteTab, _tabNew: Partial<RouteTabTransient>) {
-    const recentTabIndex = this.tabs.findIndex(item => item.tabKey !== tabOld.tabKey && (item.updatedAt ?? 0) >= (tabOld.updatedAt ?? 0));
+    const recentTabIndex = this.tabs.findIndex(
+      item => item.tabKey !== tabOld.tabKey && (item.updatedAt ?? 0) >= (tabOld.updatedAt ?? 0),
+    );
     if (recentTabIndex > -1) return true;
     return false;
   }

@@ -10,7 +10,10 @@ export type TypeControllerIconPublicProps = {
   controllerRef?: (ref: ControllerIcon) => void;
 } & ControllerIconProps;
 
-type ControllerInnerProps = TypeControllerInnerProps<ControllerIconProps, keyof typeof ControllerIcon.$propsDefault>;
+type ControllerInnerProps = TypeControllerInnerProps<
+  ControllerIconProps,
+  keyof typeof ControllerIcon.$propsDefault
+>;
 declare module 'zova-module-a-icon' {
   export interface ControllerIcon {
     $props: ControllerInnerProps;

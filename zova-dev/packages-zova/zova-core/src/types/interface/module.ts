@@ -4,7 +4,15 @@ import type { Component } from 'vue';
 import type { ZovaSys } from '../../core/sys/sys.ts';
 import type { Constructable } from '../../decorator/type/constructable.ts';
 import type { StateLock } from '../../utils/stateLock.ts';
-import type { IModuleMain, IModuleMainSys, IMonkeyApp, IMonkeyController, IMonkeyModule, IMonkeyModuleSys, IMonkeySys } from './monkey.ts';
+import type {
+  IModuleMain,
+  IModuleMainSys,
+  IMonkeyApp,
+  IMonkeyController,
+  IMonkeyModule,
+  IMonkeyModuleSys,
+  IMonkeySys,
+} from './monkey.ts';
 
 export type TypeModuleResourceIcons = Record<string, string>;
 export type TypeModuleResourceLocales = Record<string, object>;

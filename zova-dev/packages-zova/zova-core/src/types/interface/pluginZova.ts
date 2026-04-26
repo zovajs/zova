@@ -5,7 +5,13 @@ import type { ViteHotContext } from 'vite/types/hot.js';
 import type { ZovaLocaleOptionalMap } from '../../core/app/locale.ts';
 import type { Constructable } from '../../decorator/index.ts';
 import type { TypeModuleResourceConfig } from './module.ts';
-import type { IMonkeyApp, IMonkeyController, IMonkeyModule, IMonkeyModuleSys, IMonkeySys } from './monkey.ts';
+import type {
+  IMonkeyApp,
+  IMonkeyController,
+  IMonkeyModule,
+  IMonkeyModuleSys,
+  IMonkeySys,
+} from './monkey.ts';
 export interface PluginZovaModulesMeta {
   modules: Record<string, IModule>;
   moduleNames: string[];

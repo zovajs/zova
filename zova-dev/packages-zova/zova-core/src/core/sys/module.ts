@@ -5,7 +5,14 @@ import { forEach, forEachSync } from '@cabloy/utils';
 import { shallowReactive } from 'vue';
 
 import type { TypeBeanScopeRecordKeys } from '../../bean/type.ts';
-import type { IModuleMainSys, IModuleResource, IMonkeyModuleSys, IMonkeySys, PluginZovaModulesMeta, TypeMonkeyName } from '../../types/index.ts';
+import type {
+  IModuleMainSys,
+  IModuleResource,
+  IMonkeyModuleSys,
+  IMonkeySys,
+  PluginZovaModulesMeta,
+  TypeMonkeyName,
+} from '../../types/index.ts';
 
 import { BeanSimple } from '../../bean/beanSimple.ts';
 import { SymbolInstalled } from '../../types/index.ts';
@@ -41,7 +48,8 @@ export class SysModule extends BeanSimple {
   get(moduleName: string | IModuleInfo): IModule | undefined {
     // module info
     if (!moduleName) return undefined;
-    const moduleInfo = typeof moduleName === 'string' ? ModuleInfo.parseInfo(moduleName) : moduleName;
+    const moduleInfo =
+      typeof moduleName === 'string' ? ModuleInfo.parseInfo(moduleName) : moduleName;
     if (!moduleInfo) throw new Error(`invalid module name: ${moduleName}`);
     // get
     const module = this.modules[moduleInfo.relativeName];
@@ -60,7 +68,8 @@ export class SysModule extends BeanSimple {
   async use(moduleName?: string | IModuleInfo): Promise<IModule> {
     // module info
     if (!moduleName) throw new Error('should specify the module name');
-    const moduleInfo = typeof moduleName === 'string' ? ModuleInfo.parseInfo(moduleName) : moduleName;
+    const moduleInfo =
+      typeof moduleName === 'string' ? ModuleInfo.parseInfo(moduleName) : moduleName;
     if (!moduleInfo) throw new Error(`invalid module name: ${moduleName}`);
     const relativeName = moduleInfo.relativeName;
     // should not try check get directly
@@ -81,7 +90,8 @@ export class SysModule extends BeanSimple {
   exists(moduleName: string | IModuleInfo): boolean {
     // module info
     if (!moduleName) return false;
-    const moduleInfo = typeof moduleName === 'string' ? ModuleInfo.parseInfo(moduleName) : moduleName;
+    const moduleInfo =
+      typeof moduleName === 'string' ? ModuleInfo.parseInfo(moduleName) : moduleName;
     if (!moduleInfo) throw new Error(`invalid module name: ${moduleName}`);
     const moduleRepo = this.modulesMeta.modules[moduleInfo.relativeName];
     return !!moduleRepo;
@@ -92,7 +102,11 @@ export class SysModule extends BeanSimple {
     for (const moduleName of this.modulesMeta.moduleNames) {
       const module = this.modulesMeta.modules[moduleName];
       const info = module.info;
-      const shouldLoad = process.env.SERVER || info.capabilities?.monkey || info.capabilities?.sync || info.capabilities?.preload;
+      const shouldLoad =
+        process.env.SERVER ||
+        info.capabilities?.monkey ||
+        info.capabilities?.sync ||
+        info.capabilities?.preload;
       if (shouldLoad) {
         const moduleResource = module.resource as any;
         if (typeof moduleResource === 'function') {
@@ -133,7 +147,9 @@ export class SysModule extends BeanSimple {
       return module.info.capabilities?.[capabilityName];
     });
     if (moduleNames.length > 0) {
-      this.sys.meta.logger.child('module', 'default').debug(`modules ${capabilityName}: ${moduleNames.join(',')}`);
+      this.sys.meta.logger
+        .child('module', 'default')
+        .debug(`modules ${capabilityName}: ${moduleNames.join(',')}`);
     }
     for (const moduleName of moduleNames) {
       const module = this.modulesMeta.modules[moduleName];
@@ -145,7 +161,8 @@ export class SysModule extends BeanSimple {
     for (const moduleName of this.modulesMeta.moduleNames) {
       const module = this.modulesMeta.modules[moduleName];
       const info = module.info;
-      const shouldInstall = !info.capabilities?.monkey && !info.capabilities?.sync && !info.capabilities?.preload;
+      const shouldInstall =
+        !info.capabilities?.monkey && !info.capabilities?.sync && !info.capabilities?.preload;
       if (shouldInstall) {
         await this._install(moduleName, module);
       }
@@ -188,10 +205,18 @@ export class SysModule extends BeanSimple {
     }
     // main / monkey
     if (moduleRepo.resource.MainSys) {
-      this.mainInstances[moduleName] = this.sys.bean._newBeanSimple(moduleRepo.resource.MainSys, false, moduleRepo);
+      this.mainInstances[moduleName] = this.sys.bean._newBeanSimple(
+        moduleRepo.resource.MainSys,
+        false,
+        moduleRepo,
+      );
     }
     if (moduleRepo.resource.MonkeySys) {
-      this.monkeyInstances[moduleName] = this.sys.bean._newBeanSimple(moduleRepo.resource.MonkeySys, false, moduleRepo);
+      this.monkeyInstances[moduleName] = this.sys.bean._newBeanSimple(
+        moduleRepo.resource.MonkeySys,
+        false,
+        moduleRepo,
+      );
     }
     // monkey: moduleLoading
     await this._monkeyModule(true, 'moduleLoading', moduleRepo);
@@ -218,7 +243,11 @@ export class SysModule extends BeanSimple {
   private _registerConstants(module: IModule) {
     if (!module.resource.constants) return;
     const relativeName = module.info.relativeName;
-    this.sys.constant.modules[relativeName] = deepExtend({}, module.resource.constants, this.sys.constant.modules[relativeName]);
+    this.sys.constant.modules[relativeName] = deepExtend(
+      {},
+      module.resource.constants,
+      this.sys.constant.modules[relativeName],
+    );
   }
 
   private async _registerConfig(module: IModule) {
@@ -229,12 +258,21 @@ export class SysModule extends BeanSimple {
     await this._monkeyModule(true, 'configLoaded', module, config);
     // extend
     const relativeName = module.info.relativeName;
-    this.sys.config.modules[relativeName] = deepExtend({}, config, this.sys.config.modules[relativeName]);
+    this.sys.config.modules[relativeName] = deepExtend(
+      {},
+      config,
+      this.sys.config.modules[relativeName],
+    );
     this.sys.configOriginal.modules![relativeName] = config;
   }
 
   /** @internal */
-  public async _monkeyModule(order: boolean, monkeyName: TypeMonkeyName, moduleTarget?: IModule, ...monkeyData: any[]) {
+  public async _monkeyModule(
+    order: boolean,
+    monkeyName: TypeMonkeyName,
+    moduleTarget?: IModule,
+    ...monkeyData: any[]
+  ) {
     // self: main
     if (moduleTarget) {
       const mainInstance = this.mainInstances[moduleTarget.info.relativeName];
@@ -272,7 +310,12 @@ export class SysModule extends BeanSimple {
   }
 
   /** @internal */
-  public _monkeyModuleSync(order: boolean, monkeyName: TypeMonkeyName, moduleTarget?: IModule, ...monkeyData: any[]) {
+  public _monkeyModuleSync(
+    order: boolean,
+    monkeyName: TypeMonkeyName,
+    moduleTarget?: IModule,
+    ...monkeyData: any[]
+  ) {
     // self: main
     if (moduleTarget) {
       const mainInstance = this.mainInstances[moduleTarget.info.relativeName];

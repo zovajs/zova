@@ -21,9 +21,14 @@ declare module 'zova-module-a-form' {
   }
 }
 declare module 'zova-module-a-form' {
-  export interface RenderFormField<TParentData extends {} = {}> extends ControllerFormField<TParentData> {}
+  export interface RenderFormField<
+    TParentData extends {} = {},
+  > extends ControllerFormField<TParentData> {}
 }
-export const ZFormField = defineComponent(<TParentData extends {} = {}>(_props: TypeControllerFormFieldPublicProps<TParentData>) => {
-  useController(ControllerFormField, RenderFormField, undefined);
-  return () => {};
-}, prepareComponentOptions(ControllerFormField.$componentOptions));
+export const ZFormField = defineComponent(
+  <TParentData extends {} = {}>(_props: TypeControllerFormFieldPublicProps<TParentData>) => {
+    useController(ControllerFormField, RenderFormField, undefined);
+    return () => {};
+  },
+  prepareComponentOptions(ControllerFormField.$componentOptions),
+);

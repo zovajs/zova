@@ -3,7 +3,11 @@ import type { Ref } from 'vue';
 import * as localeutil from '@cabloy/localeutil';
 import { ref } from 'vue';
 
-import type { ILocaleRecord, IModuleLocale, IModuleLocaleText } from '../../bean/resource/locale/type.ts';
+import type {
+  ILocaleRecord,
+  IModuleLocale,
+  IModuleLocaleText,
+} from '../../bean/resource/locale/type.ts';
 
 import { BeanSimple } from '../../bean/beanSimple.ts';
 import { LocaleModuleNameSeparator } from '../../bean/resource/locale/type.ts';
@@ -21,7 +25,8 @@ export class AppLocale extends BeanSimple {
 
   get current(): keyof ILocaleRecord {
     let locale = this[SymbolLocaleCurrent].value;
-    if (!locale && this.sys.config.ssr.cookie) locale = this.metaCookie.getItem(this.sys.config.locale.storeKey);
+    if (!locale && this.sys.config.ssr.cookie)
+      locale = this.metaCookie.getItem(this.sys.config.locale.storeKey);
     if (!locale) locale = this.sys.config.locale.default;
     return locale as keyof ILocaleRecord;
   }
@@ -56,7 +61,11 @@ export class AppLocale extends BeanSimple {
     const getText = function (text: string, ...args: any[]): string {
       return self.getText(false, moduleScope, undefined, text, ...args);
     };
-    getText.locale = function <T extends keyof ILocaleRecord>(locale: T | undefined, text: string, ...args: any[]): string {
+    getText.locale = function <T extends keyof ILocaleRecord>(
+      locale: T | undefined,
+      text: string,
+      ...args: any[]
+    ): string {
       return self.getText(false, moduleScope, locale, text, ...args);
     };
     return getText;
@@ -68,7 +77,10 @@ export class AppLocale extends BeanSimple {
     const getText = function (...args: any[]): string {
       return self.getText(false, moduleScope, undefined, text, ...args);
     };
-    getText.locale = function <T extends keyof ILocaleRecord>(locale: T | undefined, ...args: any[]): string {
+    getText.locale = function <T extends keyof ILocaleRecord>(
+      locale: T | undefined,
+      ...args: any[]
+    ): string {
       return self.getText(false, moduleScope, locale, text, ...args);
     };
     return getText;

@@ -74,11 +74,13 @@ export class ServiceOnion<OPTIONS, ONIONNAME extends string> extends BeanSimple 
     swapDeps(onions as ISwapDepsItem[], {
       name: 'name',
       dependencies: item => {
-        const onionOptions = cast<IOnionItem<OPTIONS, ONIONNAME>>(item).options as IOnionOptionsDeps<string>;
+        const onionOptions = cast<IOnionItem<OPTIONS, ONIONNAME>>(item)
+          .options as IOnionOptionsDeps<string>;
         return onionOptions.dependencies as any;
       },
       dependents: item => {
-        const onionOptions = cast<IOnionItem<OPTIONS, ONIONNAME>>(item).options as IOnionOptionsDeps<string>;
+        const onionOptions = cast<IOnionItem<OPTIONS, ONIONNAME>>(item)
+          .options as IOnionOptionsDeps<string>;
         return onionOptions.dependents as any;
       },
     });
@@ -118,7 +120,11 @@ export class ServiceOnion<OPTIONS, ONIONNAME extends string> extends BeanSimple 
   //   return this.getOnionSlice(onionName).beanOptions.options as OPTIONS | undefined;
   // }
 
-  async loadOnionsFromPackage(selector?: string | boolean, matchThis?: any, ...matchArgs: any[]): Promise<IOnionSlice<OPTIONS, ONIONNAME>[]> {
+  async loadOnionsFromPackage(
+    selector?: string | boolean,
+    matchThis?: any,
+    ...matchArgs: any[]
+  ): Promise<IOnionSlice<OPTIONS, ONIONNAME>[]> {
     // onionItems
     const onionItems = this.getOnionsEnabled(this.onionsAll, selector, matchThis, ...matchArgs);
     // loadOnions
@@ -147,7 +153,10 @@ export class ServiceOnion<OPTIONS, ONIONNAME extends string> extends BeanSimple 
       if (beanOptions.optionsPrimitive) {
         options = item.options !== undefined ? item.options : beanOptions.options;
       } else {
-        options = item.options !== undefined ? deepExtend({}, beanOptions.options, item.options) : beanOptions.options;
+        options =
+          item.options !== undefined
+            ? deepExtend({}, beanOptions.options, item.options)
+            : beanOptions.options;
       }
       // ok
       onionSlices.push({ name: item.name, options, beanFullName });
@@ -168,12 +177,21 @@ export class ServiceOnion<OPTIONS, ONIONNAME extends string> extends BeanSimple 
   ): IOnionSlice<OPTIONS, ONIONNAME, T>[] {
     if (!onions) return [];
     return onions.filter(onionItem => {
-      const onionOptions = onionItem.options as IOnionOptionsEnable & IOnionOptionsMatch<TypeOnionOptionsMatchRule<string>>;
-      return this.sysOnion.checkOnionOptionsEnabled(onionOptions, selector, matchThis, ...matchArgs);
+      const onionOptions = onionItem.options as IOnionOptionsEnable &
+        IOnionOptionsMatch<TypeOnionOptionsMatchRule<string>>;
+      return this.sysOnion.checkOnionOptionsEnabled(
+        onionOptions,
+        selector,
+        matchThis,
+        ...matchArgs,
+      );
     }) as unknown as IOnionSlice<OPTIONS, ONIONNAME, T>[];
   }
 
-  compose(onions: IOnionSlice<OPTIONS, ONIONNAME>[], executeCustom: IOnionExecuteCustom<OPTIONS, ONIONNAME>) {
+  compose(
+    onions: IOnionSlice<OPTIONS, ONIONNAME>[],
+    executeCustom: IOnionExecuteCustom<OPTIONS, ONIONNAME>,
+  ) {
     // fns
     const fns: Function[] = [];
     for (const item of onions) {
@@ -190,7 +208,10 @@ export class ServiceOnion<OPTIONS, ONIONNAME extends string> extends BeanSimple 
   }
 
   /** internal */
-  public _wrapOnion(item: IOnionSlice<OPTIONS, ONIONNAME>, executeCustom: IOnionExecuteCustom<OPTIONS, ONIONNAME>) {
+  public _wrapOnion(
+    item: IOnionSlice<OPTIONS, ONIONNAME>,
+    executeCustom: IOnionExecuteCustom<OPTIONS, ONIONNAME>,
+  ) {
     const fn = (data: any, next: Next) => {
       return executeCustom(item, data, next);
     };

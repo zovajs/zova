@@ -6,7 +6,11 @@ import type { IControllerData } from '../../bean/type.ts';
 import type { ZovaApplication } from '../../core/app/application.ts';
 import type { ZovaContext } from '../../core/context/context.ts';
 
-export type TypeMonkeyName = keyof IMonkeyModuleSys | keyof IMonkeySys | keyof IMonkeyApp | keyof IMonkeyController;
+export type TypeMonkeyName =
+  | keyof IMonkeyModuleSys
+  | keyof IMonkeySys
+  | keyof IMonkeyApp
+  | keyof IMonkeyController;
 
 export interface IModuleMain {
   moduleLoading(): Promise<void>;

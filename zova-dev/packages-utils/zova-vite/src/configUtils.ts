@@ -102,7 +102,15 @@ export function createConfigUtils(
         // MODE: meta.appMode,
       },
     );
-    for (const key of ['NODE_ENV', 'META_FLAVOR', 'META_MODE', 'META_APP_MODE', 'DEV', 'PROD', 'SSR']) {
+    for (const key of [
+      'NODE_ENV',
+      'META_FLAVOR',
+      'META_MODE',
+      'META_APP_MODE',
+      'DEV',
+      'PROD',
+      'SSR',
+    ]) {
       if ((res[key] as any) !== false) {
         process.env[key] = res[key];
       }

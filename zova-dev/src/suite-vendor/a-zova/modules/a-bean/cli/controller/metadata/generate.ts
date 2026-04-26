@@ -33,7 +33,10 @@ export default async function (options: IMetadataCustomGenerateOptions): Promise
   return content;
 }
 
-function _parseControllerInfo(options: IMetadataCustomGenerateOptions, globFile: IGlobBeanFile): IControllerInfo | undefined {
+function _parseControllerInfo(
+  options: IMetadataCustomGenerateOptions,
+  globFile: IGlobBeanFile,
+): IControllerInfo | undefined {
   const { className, fileContent, fileNameJSRelative } = globFile;
   const matches = fileNameJSRelative.match(/..\/(.+?)\/(.+?)\/controller(.jsx?)$/);
   if (!matches) return;
@@ -44,7 +47,9 @@ function _parseControllerInfo(options: IMetadataCustomGenerateOptions, globFile:
   const controllerExtJs = matches[3];
   const controllerExtTs = controllerExtJs.replace('.js', '.ts');
   // componentOptions
-  const componentOptionsMatched = fileContent.match(/static \$componentOptions[^=]* = (\{[\s\S]*?\});/);
+  const componentOptionsMatched = fileContent.match(
+    /static \$componentOptions[^=]* = (\{[\s\S]*?\});/,
+  );
   const componentOptions = componentOptionsMatched ? componentOptionsMatched[1] : '';
   const hasComponentOptions = !!componentOptionsMatched;
   // props
@@ -58,7 +63,8 @@ function _parseControllerInfo(options: IMetadataCustomGenerateOptions, globFile:
   const matchGeneric = fileContent.match(/interface [^<]*Props<(.*?)> (extends|\{)/);
   const hasGeneric = !!matchGeneric;
   const generic = matchGeneric && matchGeneric[1];
-  const genericKeys = matchGeneric && matchGeneric[1].split(',').map(item => item.trim().split(' ')[0]);
+  const genericKeys =
+    matchGeneric && matchGeneric[1].split(',').map(item => item.trim().split(' ')[0]);
   // schemaParams
   const nameSchemaParams = `${className}SchemaParams`;
   const hasSchemaParams = fileContent.includes(nameSchemaParams);
@@ -70,11 +76,18 @@ function _parseControllerInfo(options: IMetadataCustomGenerateOptions, globFile:
   const hasRenderFirst = fse.existsSync(fileRenderFirst);
   const classNameRenderFirst = `Render${type === 'page' ? 'Page' : ''}${nameCapitalize}`;
   const importRenderFirst = `import { ${classNameRenderFirst} } from '../../${type}/${name}/render.jsx';`;
-  const fileRenderOthers = globbySync(`src/${type}/${name}/render.*.tsx`, { cwd: options.modulePath });
-  const nameRenderOthers: string[] = fileRenderOthers.map(item => /render\.(.*)\.tsx/.exec(item)![1]);
-  const classNameRenderOthers: string[] = nameRenderOthers.map(item => `Render${type === 'page' ? 'Page' : ''}${toUpperCaseFirstChar(item)}`);
+  const fileRenderOthers = globbySync(`src/${type}/${name}/render.*.tsx`, {
+    cwd: options.modulePath,
+  });
+  const nameRenderOthers: string[] = fileRenderOthers.map(
+    item => /render\.(.*)\.tsx/.exec(item)![1],
+  );
+  const classNameRenderOthers: string[] = nameRenderOthers.map(
+    item => `Render${type === 'page' ? 'Page' : ''}${toUpperCaseFirstChar(item)}`,
+  );
   const importRenderOthers: string[] = nameRenderOthers.map(
-    item => `import { ${`Render${type === 'page' ? 'Page' : ''}${toUpperCaseFirstChar(item)}`} } from '../../${type}/${name}/render.${item}.jsx';`,
+    item =>
+      `import { ${`Render${type === 'page' ? 'Page' : ''}${toUpperCaseFirstChar(item)}`} } from '../../${type}/${name}/render.${item}.jsx';`,
   );
   // style
   const fileStyleFirst = path.join(options.modulePath, `src/${type}/${name}/style.ts`);
@@ -83,9 +96,12 @@ function _parseControllerInfo(options: IMetadataCustomGenerateOptions, globFile:
   const importStyleFirst = `import { ${classNameStyleFirst} } from '../../${type}/${name}/style.js';`;
   const fileStyleOthers = globbySync(`src/${type}/${name}/style.*.ts`, { cwd: options.modulePath });
   const nameStyleOthers: string[] = fileStyleOthers.map(item => /style\.(.*)\.ts/.exec(item)![1]);
-  const classNameStyleOthers: string[] = nameStyleOthers.map(item => `Style${type === 'page' ? 'Page' : ''}${toUpperCaseFirstChar(item)}`);
+  const classNameStyleOthers: string[] = nameStyleOthers.map(
+    item => `Style${type === 'page' ? 'Page' : ''}${toUpperCaseFirstChar(item)}`,
+  );
   const importStyleOthers: string[] = nameStyleOthers.map(
-    item => `import { ${`Style${type === 'page' ? 'Page' : ''}${toUpperCaseFirstChar(item)}`} } from '../../${type}/${name}/style.${item}.js';`,
+    item =>
+      `import { ${`Style${type === 'page' ? 'Page' : ''}${toUpperCaseFirstChar(item)}`} } from '../../${type}/${name}/style.${item}.js';`,
   );
   // ok
   return {

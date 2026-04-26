@@ -7,7 +7,12 @@ import { Sys } from 'zova-module-a-bean';
 import { BeanFetch } from 'zova-module-a-fetch';
 
 import { IOpenapiSchema } from '../types/schema.js';
-import { IOpenapiSdkBootstrap, IOpenapiSdkItem, SymbolOpenapiSchemaName, TypeRequestMethod } from '../types/sdk.js';
+import {
+  IOpenapiSdkBootstrap,
+  IOpenapiSdkItem,
+  SymbolOpenapiSchemaName,
+  TypeRequestMethod,
+} from '../types/sdk.js';
 
 // const PATH_PARAM_RE = /\{([^{}/]+)\}/g;
 
@@ -111,7 +116,11 @@ export class SysSdk extends BeanBase {
       params.push(undefined);
     }
     // options
-    const options: IApiActionConfigPrepareOptions = { authToken: apiOptions?.authToken, openapiSchema: true, headers: {} };
+    const options: IApiActionConfigPrepareOptions = {
+      authToken: apiOptions?.authToken,
+      openapiSchema: true,
+      headers: {},
+    };
     const localeKey = this.sys.env.APP_LOCALE_HEADER_KEY;
     if (localeKey) {
       options.headers![localeKey] = this.locale;

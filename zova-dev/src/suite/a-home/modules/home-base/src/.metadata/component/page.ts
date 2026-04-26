@@ -10,7 +10,10 @@ export type TypeControllerPagePublicProps = {
   controllerRef?: (ref: ControllerPage) => void;
 } & ControllerPageProps;
 
-type ControllerInnerProps = TypeControllerInnerProps<ControllerPageProps, keyof typeof ControllerPage.$propsDefault>;
+type ControllerInnerProps = TypeControllerInnerProps<
+  ControllerPageProps,
+  keyof typeof ControllerPage.$propsDefault
+>;
 declare module 'zova-module-home-base' {
   export interface ControllerPage {
     $props: ControllerInnerProps;

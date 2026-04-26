@@ -1,5 +1,10 @@
 import { BeanBase } from 'zova';
-import { Action, IActionExecute, IDecoratorActionOptions, NextActionExecute } from 'zova-module-a-action';
+import {
+  Action,
+  IActionExecute,
+  IDecoratorActionOptions,
+  NextActionExecute,
+} from 'zova-module-a-action';
 import { IJsxRenderContextBase } from 'zova-module-a-openapi';
 import { IJsxRenderContextPageWrapper } from 'zova-module-rest-resource';
 
@@ -11,7 +16,11 @@ export interface IActionOptionsCreate extends IDecoratorActionOptions<TypeAction
 
 @Action<IActionOptionsCreate>()
 export class ActionCreate extends BeanBase implements IActionExecute {
-  execute(options: IActionOptionsCreate, renderContext: IJsxRenderContextBase, next: NextActionExecute) {
+  execute(
+    options: IActionOptionsCreate,
+    renderContext: IJsxRenderContextBase,
+    next: NextActionExecute,
+  ) {
     const { $host } = renderContext;
     let resource: string | undefined;
     if (renderContext.$scene === 'page') {

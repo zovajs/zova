@@ -24,7 +24,10 @@ export function extendQuasarConf(context: ConfigContext, flavor: ZovaMetaFlavor)
     // zovaViteMeta
     context.configMeta = configMeta;
     context.configOptions = configOptions;
-    const zovaViteMeta = (context.zovaViteMeta = await generateZovaViteMeta(configMeta, configOptions));
+    const zovaViteMeta = (context.zovaViteMeta = await generateZovaViteMeta(
+      configMeta,
+      configOptions,
+    ));
 
     // boot
     if (!conf.boot) conf.boot = [];

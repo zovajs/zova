@@ -55,7 +55,10 @@ export class SysLogger extends BeanSimple {
     return logger;
   }
 
-  private _prepareConfigClient(clientName: keyof ILoggerClientRecord, configClient: TypeLoggerOptions) {
+  private _prepareConfigClient(
+    clientName: keyof ILoggerClientRecord,
+    configClient: TypeLoggerOptions,
+  ) {
     if (typeof configClient !== 'function') return configClient;
     return configClient.call(this.sys, {
       clientName,
@@ -70,7 +73,9 @@ function _closeLogger(logger: Logger) {
   (logger as any).__closed__ = true;
 }
 
-export function getLoggerFilterLevel(clientName?: keyof ILoggerClientRecord): LoggerLevel | undefined {
+export function getLoggerFilterLevel(
+  clientName?: keyof ILoggerClientRecord,
+): LoggerLevel | undefined {
   clientName = clientName || 'default';
   if (sys.env.META_MODE === 'production') return; // disable on prod: not use process.env.PROD
   const envName = `LOGGER_CLIENT_${clientName.toUpperCase()}`;
@@ -80,7 +85,10 @@ export function getLoggerFilterLevel(clientName?: keyof ILoggerClientRecord): Lo
   return level as LoggerLevel;
 }
 
-export function setLoggerFilterLevel(level: LoggerLevel | boolean, clientName?: keyof ILoggerClientRecord) {
+export function setLoggerFilterLevel(
+  level: LoggerLevel | boolean,
+  clientName?: keyof ILoggerClientRecord,
+) {
   clientName = clientName || 'default';
   if (sys.env.META_MODE === 'production') return; // disable on prod: not use process.env.PROD
   const envName = `LOGGER_CLIENT_${clientName.toUpperCase()}`;

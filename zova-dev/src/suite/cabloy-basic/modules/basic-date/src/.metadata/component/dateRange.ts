@@ -1,9 +1,17 @@
-import type { DefineModelOptions, TypePropUpdateFromModel, TypePropValueFromModel, TypeControllerInnerProps } from 'zova';
+import type {
+  DefineModelOptions,
+  TypePropUpdateFromModel,
+  TypePropValueFromModel,
+  TypeControllerInnerProps,
+} from 'zova';
 
 import { defineComponent } from 'vue';
 import { prepareComponentOptions, useController } from 'zova';
 
-import type { ControllerDateRangeModels, ControllerDateRangeProps } from '../../component/dateRange/controller.jsx';
+import type {
+  ControllerDateRangeModels,
+  ControllerDateRangeProps,
+} from '../../component/dateRange/controller.jsx';
 
 import { ControllerDateRange } from '../../component/dateRange/controller.jsx';
 export type TypeControllerDateRangePublicProps = {
@@ -12,7 +20,9 @@ export type TypeControllerDateRangePublicProps = {
   ControllerDateRangeModels & {
     [KEY in keyof ControllerDateRangeModels as TypePropValueFromModel<KEY>]: ControllerDateRangeModels[KEY];
   } & {
-    [KEY in keyof ControllerDateRangeModels as TypePropUpdateFromModel<KEY>]: (value: ControllerDateRangeModels[KEY]) => void;
+    [KEY in keyof ControllerDateRangeModels as TypePropUpdateFromModel<KEY>]: (
+      value: ControllerDateRangeModels[KEY],
+    ) => void;
   };
 type TypeModelArguments = {
   [KEY in keyof ControllerDateRangeModels as TypePropValueFromModel<KEY>]: ControllerDateRangeModels[KEY];
@@ -26,7 +36,10 @@ type ControllerInnerProps = TypeControllerInnerProps<
 declare module 'zova-module-basic-date' {
   export interface ControllerDateRange {
     $props: ControllerInnerProps;
-    $useModel<K extends keyof TypeModelArguments>(name: K, options?: DefineModelOptions<TypeModelArguments[K]>): ControllerInnerProps[K];
+    $useModel<K extends keyof TypeModelArguments>(
+      name: K,
+      options?: DefineModelOptions<TypeModelArguments[K]>,
+    ): ControllerInnerProps[K];
   }
 }
 

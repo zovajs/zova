@@ -17,11 +17,23 @@ export interface IAopMethodGet {
 }
 
 export interface IAopMethodSet {
-  set(options: IDecoratorAopMethodOptions, value: any, next: NextSync, receiver: any, prop: string): boolean;
+  set(
+    options: IDecoratorAopMethodOptions,
+    value: any,
+    next: NextSync,
+    receiver: any,
+    prop: string,
+  ): boolean;
 }
 
 export interface IAopMethodExecute {
-  execute(options: IDecoratorAopMethodOptions, args: [], next: Next | NextSync, receiver: any, prop: string): Promise<any> | any;
+  execute(
+    options: IDecoratorAopMethodOptions,
+    args: [],
+    next: Next | NextSync,
+    receiver: any,
+    prop: string,
+  ): Promise<any> | any;
 }
 
 export interface IDecoratorAopMethodOptions extends IOnionOptionsEnable {}

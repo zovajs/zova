@@ -41,7 +41,9 @@ export class ServiceRouterGuards extends BeanRouterGuardsBase {
                 query: to.query,
               } as any,
             );
-            const fullPath = routeAlias.startsWith('/__alias__') ? routeAlias.substring('/__alias__'.length) : routeAlias;
+            const fullPath = routeAlias.startsWith('/__alias__')
+              ? routeAlias.substring('/__alias__'.length)
+              : routeAlias;
             return fullPath || '/';
           } else {
             return {
@@ -71,10 +73,15 @@ export class ServiceRouterGuards extends BeanRouterGuardsBase {
     });
   }
 
-  private _afterEachFrom(router: BeanRouter, from: RouteLocationNormalizedLoadedGeneric, info: NavigationInformation | undefined) {
+  private _afterEachFrom(
+    router: BeanRouter,
+    from: RouteLocationNormalizedLoadedGeneric,
+    info: NavigationInformation | undefined,
+  ) {
     if (!info) return;
     const needBack =
-      (info.type === NavigationType.pop && info.direction === NavigationDirection.back) || (info.type === NavigationType.push && info.replace);
+      (info.type === NavigationType.pop && info.direction === NavigationDirection.back) ||
+      (info.type === NavigationType.push && info.replace);
     if (!needBack) return;
     router.afterEachBackRoute(from);
   }
@@ -83,7 +90,11 @@ export class ServiceRouterGuards extends BeanRouterGuardsBase {
   private async _prepareCheck(pathMatched: string | undefined, pathTo: string): Promise<boolean> {
     if (pathMatched === '/:catchAll(.*)*') {
       const moduleInfo = ModuleInfo.parseInfo(ModuleInfo.parseName(pathTo));
-      if (moduleInfo && this.app.meta.module.exists(moduleInfo.relativeName) && !this.app.meta.module.get(moduleInfo.relativeName, false)) {
+      if (
+        moduleInfo &&
+        this.app.meta.module.exists(moduleInfo.relativeName) &&
+        !this.app.meta.module.get(moduleInfo.relativeName, false)
+      ) {
         // use module
         await this.app.meta.module.use(moduleInfo.relativeName);
         // redirect again

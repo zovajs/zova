@@ -5,7 +5,9 @@ import type { ControllerForm } from '../form/controller.jsx';
 
 import { IFormFieldOptions } from '../../types/formField.js';
 
-export interface ControllerFormFieldWrapperProps<TParentData extends {} = {}> extends IFormFieldOptions<TParentData> {}
+export interface ControllerFormFieldWrapperProps<
+  TParentData extends {} = {},
+> extends IFormFieldOptions<TParentData> {}
 
 @Controller()
 export class ControllerFormFieldWrapper<TParentData extends {} = {}> extends BeanControllerBase {

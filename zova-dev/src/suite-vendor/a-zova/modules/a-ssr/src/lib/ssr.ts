@@ -7,7 +7,12 @@ import { normalizeClass, normalizeStyle, ref, useSSRContext } from 'vue';
 import { BeanSimple } from 'zova';
 
 import type { SysSsrState } from '../bean/sys.ssrState.js';
-import type { OnHydratePropHasMismatch, OnHydratePropHasMismatchResult, SSRContext, TypeSsrSitePerformAction } from '../types/ssr.js';
+import type {
+  OnHydratePropHasMismatch,
+  OnHydratePropHasMismatchResult,
+  SSRContext,
+  TypeSsrSitePerformAction,
+} from '../types/ssr.js';
 
 import { CtxSSRMetaStore } from './ssrMetaStore.js';
 
@@ -94,7 +99,8 @@ export class CtxSSR extends BeanSimple {
   }
 
   getPerformAction(baseURL?: string): TypeSsrSitePerformAction | undefined {
-    if (process.env.SERVER && baseURL === this.sys.env.SSR_API_BASE_URL) return this.context.performAction;
+    if (process.env.SERVER && baseURL === this.sys.env.SSR_API_BASE_URL)
+      return this.context.performAction;
     return undefined;
   }
 
@@ -149,7 +155,9 @@ export class CtxSSR extends BeanSimple {
     } else if (key === 'style') {
       ignore = true;
       if (clientValue !== undefined) {
-        expected = isString(clientValue) ? clientValue : stringifyStyle(normalizeStyle(clientValue));
+        expected = isString(clientValue)
+          ? clientValue
+          : stringifyStyle(normalizeStyle(clientValue));
         el.setAttribute(key, expected as string);
       }
     } else if (['id', 'name', 'for', 'd'].includes(key)) {

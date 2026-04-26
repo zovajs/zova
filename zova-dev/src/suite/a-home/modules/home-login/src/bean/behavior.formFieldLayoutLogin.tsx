@@ -1,6 +1,10 @@
 import type { VNode } from 'vue';
 import type { IDecoratorBehaviorOptions, NextBehavior } from 'zova-module-a-behavior';
-import type { ControllerFormField, IFormFieldRenderContext, TypeFormField } from 'zova-module-a-form';
+import type {
+  ControllerFormField,
+  IFormFieldRenderContext,
+  TypeFormField,
+} from 'zova-module-a-form';
 
 import z from 'zod';
 import { Use } from 'zova';
@@ -12,7 +16,8 @@ export interface IBehaviorPropsInputFormFieldLayoutLogin extends IFormFieldRende
 
 export interface IBehaviorPropsOutputFormFieldLayoutLogin extends IBehaviorPropsInputFormFieldLayoutLogin {}
 
-export interface IBehaviorOptionsFormFieldLayoutLogin extends IDecoratorBehaviorOptions, IFormFieldLayoutOptionsBase {}
+export interface IBehaviorOptionsFormFieldLayoutLogin
+  extends IDecoratorBehaviorOptions, IFormFieldLayoutOptionsBase {}
 
 @Behavior<IBehaviorOptionsFormFieldLayoutLogin>()
 export class BehaviorFormFieldLayoutLogin extends BeanBehaviorBase<
@@ -23,7 +28,10 @@ export class BehaviorFormFieldLayoutLogin extends BeanBehaviorBase<
   @Use({ injectionScope: 'host' })
   $$formField: ControllerFormField;
 
-  protected render(renderContext: IBehaviorPropsInputFormFieldLayoutLogin, next: NextBehavior<IBehaviorPropsOutputFormFieldLayoutLogin>): VNode {
+  protected render(
+    renderContext: IBehaviorPropsInputFormFieldLayoutLogin,
+    next: NextBehavior<IBehaviorPropsOutputFormFieldLayoutLogin>,
+  ): VNode {
     const field = this.$$formField.field;
     this._patchProps(renderContext);
     const vnode = next(renderContext);

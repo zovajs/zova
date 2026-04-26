@@ -8,16 +8,31 @@ import type {
 } from 'zova-module-a-fetch';
 
 import { cast } from 'zova';
-import { BeanInterceptorBase, Interceptor, SymbolInterceptorBodyResponseFlag } from 'zova-module-a-fetch';
+import {
+  BeanInterceptorBase,
+  Interceptor,
+  SymbolInterceptorBodyResponseFlag,
+} from 'zova-module-a-fetch';
 
 export interface IInterceptorOptionsBody extends IDecoratorInterceptorOptions {}
 
 @Interceptor<IInterceptorOptionsBody>({ dependencies: 'a-interceptor:performAction' })
-export class InterceptorBody extends BeanInterceptorBase<IInterceptorOptionsBody> implements IInterceptorResponse, IInterceptorResponseError {
-  async onResponse(response: AxiosResponse, _options: IInterceptorOptionsBody, next: NextInterceptorResponse): Promise<AxiosResponse> {
+export class InterceptorBody
+  extends BeanInterceptorBase<IInterceptorOptionsBody>
+  implements IInterceptorResponse, IInterceptorResponseError
+{
+  async onResponse(
+    response: AxiosResponse,
+    _options: IInterceptorOptionsBody,
+    next: NextInterceptorResponse,
+  ): Promise<AxiosResponse> {
     response = await next();
     const contentType = response.headers['content-type'];
-    if (!contentType || typeof contentType !== 'string' || !contentType.includes('application/json')) {
+    if (
+      !contentType ||
+      typeof contentType !== 'string' ||
+      !contentType.includes('application/json')
+    ) {
       response[SymbolInterceptorBodyResponseFlag] = true;
       return response;
     }
@@ -31,7 +46,11 @@ export class InterceptorBody extends BeanInterceptorBase<IInterceptorOptionsBody
     return response.data.data ?? null;
   }
 
-  async onResponseError(error: AxiosError, _options: IInterceptorOptionsBody, next: NextInterceptorError): Promise<AxiosError> {
+  async onResponseError(
+    error: AxiosError,
+    _options: IInterceptorOptionsBody,
+    next: NextInterceptorError,
+  ): Promise<AxiosError> {
     error = await next();
     if (!(error instanceof Error)) return error;
     if (error.response) {

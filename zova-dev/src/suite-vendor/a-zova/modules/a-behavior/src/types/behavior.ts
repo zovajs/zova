@@ -17,21 +17,28 @@ export type IBehaviorItem = {
   [prop in keyof IBehaviorRecord]?: Partial<IBehaviorRecord[prop]>;
 };
 
-export type IBehaviors = keyof IBehaviorRecord | IBehaviorItem | (keyof IBehaviorRecord | IBehaviorItem)[];
+export type IBehaviors =
+  | keyof IBehaviorRecord
+  | IBehaviorItem
+  | (keyof IBehaviorRecord | IBehaviorItem)[];
 
 export interface IBehaviorRecord {}
 
 export interface IDecoratorBehaviorOptions extends IOnionOptionsEnable {}
 
 export type TypeBehaviorRecordSelector<PREFIX extends string> = {
-  [K in keyof IBehaviorRecord as K extends `${string}:${PREFIX}${string}` ? K : never]: IBehaviorRecord[K];
+  [K in keyof IBehaviorRecord as K extends `${string}:${PREFIX}${string}`
+    ? K
+    : never]: IBehaviorRecord[K];
 };
-export type TypeBehaviorRecordSelectorKeys<PREFIX extends string> = keyof TypeBehaviorRecordSelector<PREFIX>;
+export type TypeBehaviorRecordSelectorKeys<PREFIX extends string> =
+  keyof TypeBehaviorRecordSelector<PREFIX>;
 
 export type TypeBehaviorRecordSelectorStrict<PREFIX extends string> = {
   [K in keyof IBehaviorRecord as K extends `${string}:${PREFIX}` ? K : never]: IBehaviorRecord[K];
 };
-export type TypeBehaviorRecordSelectorKeysStrict<PREFIX extends string> = keyof TypeBehaviorRecordSelectorStrict<PREFIX>;
+export type TypeBehaviorRecordSelectorKeysStrict<PREFIX extends string> =
+  keyof TypeBehaviorRecordSelectorStrict<PREFIX>;
 
 declare module 'zova-module-a-bean' {
   export interface SysOnion {

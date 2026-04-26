@@ -13,6 +13,9 @@ export type ApiApiHomeindexResponseBody =
 export class ApiHome extends BeanApiBase {
   /** @description Home */
   index(options?: IApiActionOptions) {
-    return this.$fetch.get<any, ApiApiHomeindexResponseBody>(ApiApiHomeindexPath, this.$configPrepare(OpenApiBaseURL(this.sys), options));
+    return this.$fetch.get<any, ApiApiHomeindexResponseBody>(
+      ApiApiHomeindexPath,
+      this.$configPrepare(OpenApiBaseURL(this.sys), options),
+    );
   }
 }

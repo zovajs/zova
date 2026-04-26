@@ -11,7 +11,9 @@ export interface IOpenapiSchema {
 
 export interface IOpenapiSchemaMeta {}
 
-export type TypeOpenapiSchemasSdk = UnwrapNestedRefs<UseQueryReturnType<IOpenapiSdkItem, DefaultError>>;
+export type TypeOpenapiSchemasSdk = UnwrapNestedRefs<
+  UseQueryReturnType<IOpenapiSdkItem, DefaultError>
+>;
 
 export interface IOpenapiSchemas {
   sdk: TypeOpenapiSchemasSdk;

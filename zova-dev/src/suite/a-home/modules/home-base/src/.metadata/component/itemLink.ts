@@ -10,7 +10,10 @@ export type TypeControllerItemLinkPublicProps = {
   controllerRef?: (ref: ControllerItemLink) => void;
 } & ControllerItemLinkProps;
 
-type ControllerInnerProps = TypeControllerInnerProps<ControllerItemLinkProps, keyof typeof ControllerItemLink.$propsDefault>;
+type ControllerInnerProps = TypeControllerInnerProps<
+  ControllerItemLinkProps,
+  keyof typeof ControllerItemLink.$propsDefault
+>;
 declare module 'zova-module-home-base' {
   export interface ControllerItemLink {
     $props: ControllerInnerProps;

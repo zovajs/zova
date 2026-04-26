@@ -9,7 +9,10 @@ import type { SysRouter } from './bean/sys.router.js';
 import type { TypeGotoPageResult } from './types/router.js';
 import type { IGotoPageOptions } from './types/utils.js';
 
-export class MonkeySys extends BeanSimple implements IMonkeyModuleSys, IMonkeySysApplicationInitialize {
+export class MonkeySys
+  extends BeanSimple
+  implements IMonkeyModuleSys, IMonkeySysApplicationInitialize
+{
   private _moduleSelf: IModule;
   private _sysRouter: SysRouter;
 
@@ -53,7 +56,8 @@ export class MonkeySys extends BeanSimple implements IMonkeyModuleSys, IMonkeySy
       const query = options?.query ?? {};
       // returnTo
       if (options?.returnTo) {
-        const returnTo = typeof options?.returnTo === 'string' ? options?.returnTo : app.$getCurrentPagePath();
+        const returnTo =
+          typeof options?.returnTo === 'string' ? options?.returnTo : app.$getCurrentPagePath();
         if (returnTo !== app.sys.env.ROUTER_PAGE_HOME) {
           query[app.sys.env.ROUTER_KEY_RETURNTO] = returnTo;
         }
@@ -75,7 +79,8 @@ export class MonkeySys extends BeanSimple implements IMonkeyModuleSys, IMonkeySy
       return app.$gotoPage(app.sys.env.ROUTER_PAGE_HOME);
     };
     app.$gotoLogin = (returnTo?: string, cause?: string) => {
-      if (!returnTo && cast(app.meta.$router.currentRoute)?.path === app.sys.env.ROUTER_PAGE_LOGIN) return;
+      if (!returnTo && cast(app.meta.$router.currentRoute)?.path === app.sys.env.ROUTER_PAGE_LOGIN)
+        return;
       const query: any = {};
       if (cause) {
         query.cause = cause;
@@ -89,12 +94,18 @@ export class MonkeySys extends BeanSimple implements IMonkeyModuleSys, IMonkeySy
     };
     app.$getReturnTo = (returnTo?: string) => {
       // not use ??
-      const pagePath = returnTo || cast(app.meta.$router.currentRoute)?.query?.[app.sys.env.ROUTER_KEY_RETURNTO] || app.sys.env.ROUTER_PAGE_HOME;
+      const pagePath =
+        returnTo ||
+        cast(app.meta.$router.currentRoute)?.query?.[app.sys.env.ROUTER_KEY_RETURNTO] ||
+        app.sys.env.ROUTER_PAGE_HOME;
       return pagePath;
     };
     app.$getCurrentPagePath = (): string | undefined => {
       if (process.env.SERVER) {
-        return app.ctx.meta.$ssr.state.pagePathFull ?? app.sys.util.getPagePathFromAbsoluteUrl(app.ctx.meta.$ssr.context.req.url);
+        return (
+          app.ctx.meta.$ssr.state.pagePathFull ??
+          app.sys.util.getPagePathFromAbsoluteUrl(app.ctx.meta.$ssr.context.req.url)
+        );
       }
       return cast(app.meta.$router.currentRoute)?.fullPath;
     };

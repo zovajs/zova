@@ -1,5 +1,9 @@
 import type { IDecoratorModelOptions } from 'zova-module-a-model';
-import type { ApiSchemaAMenuDtoMenuGroup, ApiSchemaAMenuDtoMenuItem, ApiSchemaAMenuDtoMenus } from 'zova-module-home-api';
+import type {
+  ApiSchemaAMenuDtoMenuGroup,
+  ApiSchemaAMenuDtoMenuItem,
+  ApiSchemaAMenuDtoMenus,
+} from 'zova-module-home-api';
 
 import { TypeEventOff, useComputed } from 'zova';
 import { BeanModelBase, Model } from 'zova-module-a-model';
@@ -49,7 +53,9 @@ export class ModelMenu extends BeanModelBase {
     return this.$useStateData({
       queryKey: ['retrieveMenus'],
       queryFn: async () => {
-        const data = await this.$api.homeBaseMenu.retrieveMenus({ params: { publicPath: this.sys.env.APP_PUBLIC_PATH } });
+        const data = await this.$api.homeBaseMenu.retrieveMenus({
+          params: { publicPath: this.sys.env.APP_PUBLIC_PATH },
+        });
         const menus = data.menus
           ?.map(item => {
             if (item.link && !this.$router.isRouterName(item.link) && item.meta?.params) {
@@ -69,7 +75,9 @@ export class ModelMenu extends BeanModelBase {
   findMenuItem(search: { name?: string; link?: string }): ApiSchemaAMenuDtoMenuItem | undefined {
     const menus = this.retrieveMenus().data;
     if (!menus || !menus.menus) return;
-    return menus.menus.find(item => (item.name && search.name && item.name === search.name) || item.link === search.link);
+    return menus.menus.find(
+      item => (item.name && search.name && item.name === search.name) || item.link === search.link,
+    );
   }
 
   private _prepareMenuTree(menus: ApiSchemaAMenuDtoMenus, groupName?: string): TypeMenuTree {
@@ -77,7 +85,11 @@ export class ModelMenu extends BeanModelBase {
     if (menus.menus) {
       children = children.concat(
         menus.menus
-          ?.filter(item => item.group === groupName || (Array.isArray(item.group) && item.group.includes(groupName!)))
+          ?.filter(
+            item =>
+              item.group === groupName ||
+              (Array.isArray(item.group) && item.group.includes(groupName!)),
+          )
           .map(item => {
             return { ...item, folder: false };
           }),
@@ -85,9 +97,16 @@ export class ModelMenu extends BeanModelBase {
     }
     if (menus.groups) {
       const groups = menus.groups
-        .filter(item => item.group === groupName || (Array.isArray(item.group) && item.group.includes(groupName!)))
+        .filter(
+          item =>
+            item.group === groupName ||
+            (Array.isArray(item.group) && item.group.includes(groupName!)),
+        )
         .map(menuGroup => {
-          return Object.assign({}, menuGroup, { folder: true, children: this._prepareMenuTree(menus, menuGroup.name) });
+          return Object.assign({}, menuGroup, {
+            folder: true,
+            children: this._prepareMenuTree(menus, menuGroup.name),
+          });
         });
       children = children.concat(groups);
     }

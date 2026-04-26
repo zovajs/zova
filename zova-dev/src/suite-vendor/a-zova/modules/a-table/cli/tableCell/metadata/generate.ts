@@ -18,7 +18,10 @@ export default async function (options: IMetadataCustomGenerateOptions): Promise
   return '';
 }
 
-async function generateRestTableCell(options: IMetadataCustomGenerateOptions, globFile: IGlobBeanFile) {
+async function generateRestTableCell(
+  options: IMetadataCustomGenerateOptions,
+  globFile: IGlobBeanFile,
+) {
   const { moduleName, modulePath } = options;
   const { beanName, beanNameCapitalize, sceneName } = globFile;
   // options

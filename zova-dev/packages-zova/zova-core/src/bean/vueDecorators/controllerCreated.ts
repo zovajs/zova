@@ -1,4 +1,7 @@
-import type { IDecoratorVueElement, IDecoratorVueWatchOptions } from '../../decorator/vueExtra/types.ts';
+import type {
+  IDecoratorVueElement,
+  IDecoratorVueWatchOptions,
+} from '../../decorator/vueExtra/types.ts';
 
 import { onControllerCreated } from '../../composables/onControllerCreated.ts';
 

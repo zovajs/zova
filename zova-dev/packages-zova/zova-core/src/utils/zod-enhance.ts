@@ -26,7 +26,11 @@ export function zodEnhanceSys() {
   setParseAdapter(ZodMetadata);
 }
 
-export function zodSetLocaleErrors(app: ZovaApplication, localeErrors: ZodLocaleErrors, localeDefault?: string) {
+export function zodSetLocaleErrors(
+  app: ZovaApplication,
+  localeErrors: ZodLocaleErrors,
+  localeDefault?: string,
+) {
   setLocaleErrors(
     () => {
       return app.meta.locale.current;

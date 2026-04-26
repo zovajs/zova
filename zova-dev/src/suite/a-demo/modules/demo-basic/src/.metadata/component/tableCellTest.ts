@@ -10,7 +10,10 @@ export type TypeControllerTableCellTestPublicProps = {
   controllerRef?: (ref: ControllerTableCellTest) => void;
 } & ControllerTableCellTestProps;
 
-type ControllerInnerProps = TypeControllerInnerProps<ControllerTableCellTestProps, keyof typeof ControllerTableCellTest.$propsDefault>;
+type ControllerInnerProps = TypeControllerInnerProps<
+  ControllerTableCellTestProps,
+  keyof typeof ControllerTableCellTest.$propsDefault
+>;
 declare module 'zova-module-demo-basic' {
   export interface ControllerTableCellTest {
     $props: ControllerInnerProps;

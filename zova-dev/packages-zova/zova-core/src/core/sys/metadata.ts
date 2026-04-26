@@ -4,7 +4,12 @@ import 'reflect-metadata';
 export type MetadataKey = symbol | string;
 
 export class AppMetadata {
-  defineMetadata<V>(metadataKey: MetadataKey, metadataValue: V, target: object, prop?: MetadataKey) {
+  defineMetadata<V>(
+    metadataKey: MetadataKey,
+    metadataValue: V,
+    target: object,
+    prop?: MetadataKey,
+  ) {
     if (isUndefined(prop)) {
       Reflect.defineMetadata(metadataKey, metadataValue, target);
     } else {
@@ -22,7 +27,12 @@ export class AppMetadata {
     return Reflect.getMetadata(metadataKey, target, prop);
   }
 
-  getOwnMetadataArray<Entry>(inherit: boolean, metadataKey: MetadataKey, target: object, prop?: MetadataKey): Array<Entry> {
+  getOwnMetadataArray<Entry>(
+    inherit: boolean,
+    metadataKey: MetadataKey,
+    target: object,
+    prop?: MetadataKey,
+  ): Array<Entry> {
     let own: Array<Entry> | undefined = this.getOwnMetadata(metadataKey, target, prop);
     if (!own) {
       if (!inherit) {
@@ -40,7 +50,12 @@ export class AppMetadata {
     return own;
   }
 
-  getOwnMetadataMap<K extends PropertyKey, V>(inherit: boolean, metadataKey: MetadataKey, target: object, prop?: MetadataKey): Record<K, V> {
+  getOwnMetadataMap<K extends PropertyKey, V>(
+    inherit: boolean,
+    metadataKey: MetadataKey,
+    target: object,
+    prop?: MetadataKey,
+  ): Record<K, V> {
     let own: Record<K, V> | undefined = this.getOwnMetadata(metadataKey, target, prop);
     if (!own) {
       if (!inherit) {

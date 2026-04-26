@@ -1,7 +1,12 @@
 import { RouteLocationNormalizedLoadedGeneric } from '@cabloy/vue-router';
 import { Use } from 'zova';
 import { Controller } from 'zova-module-a-bean';
-import { BeanRouterViewBase, IPageMeta, IRouterViewPropsBase, IRouteViewRouteMeta } from 'zova-module-a-router';
+import {
+  BeanRouterViewBase,
+  IPageMeta,
+  IRouterViewPropsBase,
+  IRouteViewRouteMeta,
+} from 'zova-module-a-router';
 
 import type { ModelTabs } from '../../model/tabs.js';
 

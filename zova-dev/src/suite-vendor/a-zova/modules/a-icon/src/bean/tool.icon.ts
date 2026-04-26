@@ -46,7 +46,10 @@ export class ToolIcon extends BeanBase {
       .join('');
   }
 
-  private _renderSSRGroups(iconSSRGroups: Record<string, Record<string, string>>, moduleName: string) {
+  private _renderSSRGroups(
+    iconSSRGroups: Record<string, Record<string, string>>,
+    moduleName: string,
+  ) {
     return Object.keys(iconSSRGroups)
       .map(groupName => {
         const groupId = `zova-svg-group-${moduleName}-${groupName}`;
@@ -70,6 +73,9 @@ export class ToolIcon extends BeanBase {
     const iconGroup = iconModule[meta.group];
     if (!this._iconSSR[meta.module]) this._iconSSR[meta.module] = {};
     if (!this._iconSSR[meta.module][meta.group]) this._iconSSR[meta.module][meta.group] = {};
-    this._iconSSR[meta.module][meta.group][meta.symbolId] = this.$$sysIcon.extractIconContent(iconGroup.svg, meta.symbolId)!;
+    this._iconSSR[meta.module][meta.group][meta.symbolId] = this.$$sysIcon.extractIconContent(
+      iconGroup.svg,
+      meta.symbolId,
+    )!;
   }
 }

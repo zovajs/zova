@@ -1,4 +1,10 @@
-import type { FormApi, FormAsyncValidateOrFn, FormOptions, FormValidateOrFn, VueFormApi } from '@tanstack/vue-form';
+import type {
+  FormApi,
+  FormAsyncValidateOrFn,
+  FormOptions,
+  FormValidateOrFn,
+  VueFormApi,
+} from '@tanstack/vue-form';
 
 import { useForm } from '@tanstack/vue-form';
 import { markRaw } from 'vue';
@@ -8,16 +14,36 @@ export class BeanControllerFormBase extends BeanControllerBase {
   public $useForm<
     TFormData,
     TSubmitMeta = never,
-    TFormOnMount extends undefined | FormValidateOrFn<TFormData> = undefined | FormValidateOrFn<TFormData>,
-    TFormOnChange extends undefined | FormValidateOrFn<TFormData> = undefined | FormValidateOrFn<TFormData>,
-    TFormOnChangeAsync extends undefined | FormAsyncValidateOrFn<TFormData> = undefined | FormAsyncValidateOrFn<TFormData>,
-    TFormOnBlur extends undefined | FormValidateOrFn<TFormData> = undefined | FormValidateOrFn<TFormData>,
-    TFormOnBlurAsync extends undefined | FormAsyncValidateOrFn<TFormData> = undefined | FormAsyncValidateOrFn<TFormData>,
-    TFormOnSubmit extends undefined | FormValidateOrFn<TFormData> = undefined | FormValidateOrFn<TFormData>,
-    TFormOnSubmitAsync extends undefined | FormAsyncValidateOrFn<TFormData> = undefined | FormAsyncValidateOrFn<TFormData>,
-    TFormOnDynamic extends undefined | FormValidateOrFn<TFormData> = undefined | FormValidateOrFn<TFormData>,
-    TFormOnDynamicAsync extends undefined | FormAsyncValidateOrFn<TFormData> = undefined | FormAsyncValidateOrFn<TFormData>,
-    TFormOnServer extends undefined | FormAsyncValidateOrFn<TFormData> = undefined | FormAsyncValidateOrFn<TFormData>,
+    TFormOnMount extends undefined | FormValidateOrFn<TFormData> =
+      | undefined
+      | FormValidateOrFn<TFormData>,
+    TFormOnChange extends undefined | FormValidateOrFn<TFormData> =
+      | undefined
+      | FormValidateOrFn<TFormData>,
+    TFormOnChangeAsync extends undefined | FormAsyncValidateOrFn<TFormData> =
+      | undefined
+      | FormAsyncValidateOrFn<TFormData>,
+    TFormOnBlur extends undefined | FormValidateOrFn<TFormData> =
+      | undefined
+      | FormValidateOrFn<TFormData>,
+    TFormOnBlurAsync extends undefined | FormAsyncValidateOrFn<TFormData> =
+      | undefined
+      | FormAsyncValidateOrFn<TFormData>,
+    TFormOnSubmit extends undefined | FormValidateOrFn<TFormData> =
+      | undefined
+      | FormValidateOrFn<TFormData>,
+    TFormOnSubmitAsync extends undefined | FormAsyncValidateOrFn<TFormData> =
+      | undefined
+      | FormAsyncValidateOrFn<TFormData>,
+    TFormOnDynamic extends undefined | FormValidateOrFn<TFormData> =
+      | undefined
+      | FormValidateOrFn<TFormData>,
+    TFormOnDynamicAsync extends undefined | FormAsyncValidateOrFn<TFormData> =
+      | undefined
+      | FormAsyncValidateOrFn<TFormData>,
+    TFormOnServer extends undefined | FormAsyncValidateOrFn<TFormData> =
+      | undefined
+      | FormAsyncValidateOrFn<TFormData>,
   >(
     opts?: FormOptions<
       TFormData,

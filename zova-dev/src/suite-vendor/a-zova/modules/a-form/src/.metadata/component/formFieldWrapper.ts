@@ -20,7 +20,10 @@ declare module 'zova-module-a-form' {
   }
 }
 
-export const ZFormFieldWrapper = defineComponent(<TParentData extends {} = {}>(_props: TypeControllerFormFieldWrapperPublicProps<TParentData>) => {
-  useController(ControllerFormFieldWrapper, undefined, undefined);
-  return () => {};
-}, prepareComponentOptions(ControllerFormFieldWrapper.$componentOptions));
+export const ZFormFieldWrapper = defineComponent(
+  <TParentData extends {} = {}>(_props: TypeControllerFormFieldWrapperPublicProps<TParentData>) => {
+    useController(ControllerFormFieldWrapper, undefined, undefined);
+    return () => {};
+  },
+  prepareComponentOptions(ControllerFormFieldWrapper.$componentOptions),
+);

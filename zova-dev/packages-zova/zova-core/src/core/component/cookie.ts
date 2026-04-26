@@ -11,7 +11,9 @@ export class AppCookie extends BeanSimple {
     if (process.env.SERVER && !this.ctx) {
       throw new Error('cannot called in sys bean');
     }
-    const cookieSource = cast(process.env.SERVER ? cast(this.ctx.meta).$ssr.context.req.headers : document);
+    const cookieSource = cast(
+      process.env.SERVER ? cast(this.ctx.meta).$ssr.context.req.headers : document,
+    );
     const cookies = cookieSource.cookie ? cookieSource.cookie.split('; ') : [];
     const l = cookies.length;
     let result: Record<string, string> | undefined = key ? undefined : {};
@@ -54,7 +56,8 @@ export class AppCookie extends BeanSimple {
       } else {
         // otherwise it must be a Number (defined in days)
         expireValue = Number.parseFloat(opts.expires.toString());
-        expire = Number.isNaN(expireValue) === false ? getString(expireValue * 864e5) : opts.expires;
+        expire =
+          Number.isNaN(expireValue) === false ? getString(expireValue * 864e5) : opts.expires;
       }
     }
 
@@ -92,7 +95,10 @@ export class AppCookie extends BeanSimple {
       if (expire !== void 0 && expireValue < 0) {
         const val = this.getItem(key);
         if (val !== undefined) {
-          all = all.replace(`${key}=${val}; `, '').replace(`; ${key}=${val}`, '').replace(`${key}=${val}`, '');
+          all = all
+            .replace(`${key}=${val}; `, '')
+            .replace(`; ${key}=${val}`, '')
+            .replace(`${key}=${val}`, '');
         }
       } else {
         all = all ? `${keyValue}; ${all}` : cookie;

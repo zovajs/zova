@@ -69,7 +69,9 @@ export class ControllerRestPageEntry<TData extends {} = {}> extends BeanControll
     return this.$$pageEntryWrapper.pageEntryWrapperCelEnv;
   }
 
-  public getJsxRenderContextPageEntry(celScope: IPageEntryScope): IJsxRenderContextPageEntry<TData> {
+  public getJsxRenderContextPageEntry(
+    celScope: IPageEntryScope,
+  ): IJsxRenderContextPageEntry<TData> {
     return {
       app: this.app,
       ctx: this.ctx,

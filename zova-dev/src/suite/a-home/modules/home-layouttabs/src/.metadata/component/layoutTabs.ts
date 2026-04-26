@@ -12,7 +12,10 @@ export type TypeControllerLayoutTabsPublicProps = {
   controllerRef?: (ref: ControllerLayoutTabs) => void;
 } & ControllerLayoutTabsProps;
 
-type ControllerInnerProps = TypeControllerInnerProps<ControllerLayoutTabsProps, keyof typeof ControllerLayoutTabs.$propsDefault>;
+type ControllerInnerProps = TypeControllerInnerProps<
+  ControllerLayoutTabsProps,
+  keyof typeof ControllerLayoutTabs.$propsDefault
+>;
 declare module 'zova-module-home-layouttabs' {
   export interface ControllerLayoutTabs {
     $props: ControllerInnerProps;

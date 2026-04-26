@@ -1,4 +1,7 @@
-import type { TypeModuleResourceLocaleModules, TypeModuleResourceLocales } from '../../types/interface/module.ts';
+import type {
+  TypeModuleResourceLocaleModules,
+  TypeModuleResourceLocales,
+} from '../../types/interface/module.ts';
 import type { ZovaLocaleOptionalMap } from '../app/locale.ts';
 
 import { AppLocale } from '../component/locale.ts';
@@ -38,6 +41,10 @@ export class SysLocale extends AppLocale {
     this.locales[locale] = Object.assign({}, moduleLocales, this.locales[locale]);
     // localeModules
     if (!this.localeModules[moduleName]) this.localeModules[moduleName] = {};
-    this.localeModules[moduleName][locale] = Object.assign({}, moduleLocales, this.localeModules[moduleName][locale]);
+    this.localeModules[moduleName][locale] = Object.assign(
+      {},
+      moduleLocales,
+      this.localeModules[moduleName][locale],
+    );
   }
 }

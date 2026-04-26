@@ -64,7 +64,8 @@ export class RenderTabs extends BeanRenderBase {
       // ignore first
       if (tabItem.componentKey === tabKey) continue;
       const { componentKey, pageMeta } = tabItem;
-      const className = componentKey === $$modelTabs.componentKeyCurrent ? 'tab-active text-primary' : '';
+      const className =
+        componentKey === $$modelTabs.componentKeyCurrent ? 'tab-active text-primary' : '';
       const pageTitle = pageMeta?.pageTitle || '';
       const tabItemIcon = this.getTabItemIcon(tabItem);
       const domTab = (

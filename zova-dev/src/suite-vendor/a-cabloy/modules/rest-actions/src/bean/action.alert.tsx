@@ -15,7 +15,11 @@ export interface IActionOptionsAlert extends IDecoratorActionOptions<TypeActionA
 
 @Action<IActionOptionsAlert>({ wait: true })
 export class ActionAlert extends BeanBase implements IActionExecute {
-  execute(options: IActionOptionsAlert, _renderContext: IJsxRenderContextBase, next: NextActionExecute) {
+  execute(
+    options: IActionOptionsAlert,
+    _renderContext: IJsxRenderContextBase,
+    next: NextActionExecute,
+  ) {
     if (options.wait) {
       // eslint-disable-next-line no-alert
       window.alert(options.message);

@@ -1,6 +1,10 @@
 import type { ZovaConfigMeta } from '@cabloy/module-info';
 
-import type { ILayoutRecord, TypeComponentAppRecord, TypeComponentLayoutRecord } from '../../bean/resource/component/type.ts';
+import type {
+  ILayoutRecord,
+  TypeComponentAppRecord,
+  TypeComponentLayoutRecord,
+} from '../../bean/resource/component/type.ts';
 import type { ILocaleRecord } from '../../bean/resource/locale/type.ts';
 import type { ZovaConfigRoutes } from '../../bean/resource/page/type.ts';
 import type { IBeanScopeConfig } from '../../bean/type.ts';

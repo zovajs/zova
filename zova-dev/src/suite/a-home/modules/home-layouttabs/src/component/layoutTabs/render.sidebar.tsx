@@ -10,7 +10,10 @@ export class RenderSidebar extends BeanRenderBase {
 
   public render() {
     return (
-      <div class="drawer-side" style={{ width: this.$scopeBase.config.layout.sidebar.width + 'px' }}>
+      <div
+        class="drawer-side"
+        style={{ width: this.$scopeBase.config.layout.sidebar.width + 'px' }}
+      >
         <label htmlFor="my-drawer-2" aria-label="close sidebar" class="drawer-overlay"></label>
         {this.$$r.$$renderMenu.render()}
       </div>

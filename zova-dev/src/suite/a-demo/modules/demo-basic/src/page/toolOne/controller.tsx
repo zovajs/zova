@@ -2,7 +2,12 @@ import { SchemaObject } from 'openapi3-ts/oas31';
 import { z } from 'zod';
 import { Use } from 'zova';
 import { Controller } from 'zova-module-a-bean';
-import { BeanControllerPageFormBase, ControllerForm, IFormMeta, TypeFormOnSubmitData } from 'zova-module-a-form';
+import {
+  BeanControllerPageFormBase,
+  ControllerForm,
+  IFormMeta,
+  TypeFormOnSubmitData,
+} from 'zova-module-a-form';
 import { $QueryAutoLoad } from 'zova-module-a-model';
 import { ApiSchemaTestSsrDtoTestBodyPartial } from 'zova-module-home-api';
 

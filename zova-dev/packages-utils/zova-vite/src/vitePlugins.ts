@@ -13,7 +13,10 @@ import { getAbsolutePathOfModule, requireModule } from './utils.ts';
 import { cssCollectPlugin } from './vitePluginCssCollect.ts';
 import { hmrPlugin } from './vitePluginHmr.ts';
 
-export function generateVitePlugins(configOptions: ZovaViteConfigOptions, modulesMeta: Awaited<ReturnType<typeof glob>>) {
+export function generateVitePlugins(
+  configOptions: ZovaViteConfigOptions,
+  modulesMeta: Awaited<ReturnType<typeof glob>>,
+) {
   const vitePlugins: ZovaVitePlugin[] = [];
   vitePlugins.push(__getVitePluginTs());
   vitePlugins.push(__getVitePluginTsx());
@@ -31,10 +34,22 @@ export function generateVitePlugins(configOptions: ZovaViteConfigOptions, module
   function __getVitePluginTs() {
     const babelPluginZovaBeanModule = getAbsolutePathOfModule('babel-plugin-zova-bean-module', '');
     const babelPluginZovaBeanUse = getAbsolutePathOfModule('babel-plugin-zova-bean-use', '');
-    const babelPluginTransformTypescriptMetadata = getAbsolutePathOfModule('babel-plugin-transform-typescript-metadata', '');
-    const babelPluginProposalDecorators = getAbsolutePathOfModule('@babel/plugin-proposal-decorators', '');
-    const babelPluginTransformClassProperties = getAbsolutePathOfModule('@babel/plugin-transform-class-properties', '');
-    const babelPluginTransformTypescript = getAbsolutePathOfModule('@babel/plugin-transform-typescript', '');
+    const babelPluginTransformTypescriptMetadata = getAbsolutePathOfModule(
+      'babel-plugin-transform-typescript-metadata',
+      '',
+    );
+    const babelPluginProposalDecorators = getAbsolutePathOfModule(
+      '@babel/plugin-proposal-decorators',
+      '',
+    );
+    const babelPluginTransformClassProperties = getAbsolutePathOfModule(
+      '@babel/plugin-transform-class-properties',
+      '',
+    );
+    const babelPluginTransformTypescript = getAbsolutePathOfModule(
+      '@babel/plugin-transform-typescript',
+      '',
+    );
     return [
       'vite-plugin-babel',
       babel,
@@ -63,9 +78,18 @@ export function generateVitePlugins(configOptions: ZovaViteConfigOptions, module
     const babelPluginZovaBehavior = getAbsolutePathOfModule('babel-plugin-zova-behavior', '');
     const babelPluginZovaBeanModule = getAbsolutePathOfModule('babel-plugin-zova-bean-module', '');
     const babelPluginZovaBeanUse = getAbsolutePathOfModule('babel-plugin-zova-bean-use', '');
-    const babelPluginTransformTypescriptMetadata = getAbsolutePathOfModule('babel-plugin-transform-typescript-metadata', '');
-    const babelPluginProposalDecorators = getAbsolutePathOfModule('@babel/plugin-proposal-decorators', '');
-    const babelPluginTransformClassProperties = getAbsolutePathOfModule('@babel/plugin-transform-class-properties', '');
+    const babelPluginTransformTypescriptMetadata = getAbsolutePathOfModule(
+      'babel-plugin-transform-typescript-metadata',
+      '',
+    );
+    const babelPluginProposalDecorators = getAbsolutePathOfModule(
+      '@babel/plugin-proposal-decorators',
+      '',
+    );
+    const babelPluginTransformClassProperties = getAbsolutePathOfModule(
+      '@babel/plugin-transform-class-properties',
+      '',
+    );
     return [
       '@vitejs/plugin-vue-jsx',
       vueJsxPlugin,
@@ -97,7 +121,10 @@ export function generateVitePlugins(configOptions: ZovaViteConfigOptions, module
     return ['vite-plugin-zova-hmr', hmrPlugin, {}, undefined] as ZovaVitePlugin;
   }
 
-  function __getVitePluginMock(configOptions: ZovaViteConfigOptions, _modulesMeta: Awaited<ReturnType<typeof glob>>) {
+  function __getVitePluginMock(
+    configOptions: ZovaViteConfigOptions,
+    _modulesMeta: Awaited<ReturnType<typeof glob>>,
+  ) {
     const include = [];
     __prepareMockIncludes(include, configOptions, modulesMeta);
     const logger = process.env.MOCK_LOGGER === 'true';
@@ -129,7 +156,11 @@ export function generateVitePlugins(configOptions: ZovaViteConfigOptions, module
     ] as ZovaVitePlugin;
   }
 
-  function __prepareMockIncludes(includes: string[], _configOptions: ZovaViteConfigOptions, modulesMeta: Awaited<ReturnType<typeof glob>>) {
+  function __prepareMockIncludes(
+    includes: string[],
+    _configOptions: ZovaViteConfigOptions,
+    modulesMeta: Awaited<ReturnType<typeof glob>>,
+  ) {
     // modules
     const { modules } = modulesMeta;
     // loop

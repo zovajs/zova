@@ -10,7 +10,10 @@ export type TypeControllerFormFieldTestPublicProps = {
   controllerRef?: (ref: ControllerFormFieldTest) => void;
 } & ControllerFormFieldTestProps;
 
-type ControllerInnerProps = TypeControllerInnerProps<ControllerFormFieldTestProps, keyof typeof ControllerFormFieldTest.$propsDefault>;
+type ControllerInnerProps = TypeControllerInnerProps<
+  ControllerFormFieldTestProps,
+  keyof typeof ControllerFormFieldTest.$propsDefault
+>;
 declare module 'zova-module-demo-basic' {
   export interface ControllerFormFieldTest {
     $props: ControllerInnerProps;

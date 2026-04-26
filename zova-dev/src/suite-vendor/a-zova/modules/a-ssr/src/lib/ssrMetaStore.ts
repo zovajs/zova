@@ -112,7 +112,8 @@ export class CtxSSRMetaStore extends BeanSimple {
     const htmlAttr = Object.keys(data.htmlAttr!).filter(htmlFilter);
 
     if (htmlAttr.length !== 0) {
-      ctx.htmlAttrs += (ctx.htmlAttrs.length !== 0 ? ' ' : '') + htmlAttr.map(getAttr(data.htmlAttr)).join(' ');
+      ctx.htmlAttrs +=
+        (ctx.htmlAttrs.length !== 0 ? ' ' : '') + htmlAttr.map(getAttr(data.htmlAttr)).join(' ');
     }
 
     ctx.headTags += getHead(data);
@@ -120,7 +121,8 @@ export class CtxSSRMetaStore extends BeanSimple {
     const bodyAttr = Object.keys(data.bodyAttr!).filter(bodyFilter);
 
     if (bodyAttr.length !== 0) {
-      ctx.bodyAttrs += (ctx.bodyAttrs.length !== 0 ? ' ' : '') + bodyAttr.map(getAttr(data.bodyAttr)).join(' ');
+      ctx.bodyAttrs +=
+        (ctx.bodyAttrs.length !== 0 ? ' ' : '') + bodyAttr.map(getAttr(data.bodyAttr)).join(' ');
     }
 
     const bodyStyle = Object.keys(data.bodyStyle!)
@@ -166,7 +168,9 @@ export class CtxSSRMetaStore extends BeanSimple {
             return _data;
           },
         });`;
-    const ssr_local_themename = this.sys.config.ssr.cookie ? '' : "window.ssr_local_themename=window.ssr_load_local('themename');";
+    const ssr_local_themename = this.sys.config.ssr.cookie
+      ? ''
+      : "window.ssr_local_themename=window.ssr_load_local('themename');";
     ctx.endingHeadTags += `<script id="ssr-prefers-color-schema-dark">
         window.ssr_load_local=function(key){
           const __ssr_local=localStorage.getItem(key);

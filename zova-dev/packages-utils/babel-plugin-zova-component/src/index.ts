@@ -91,7 +91,9 @@ function isUpperCase(character) {
 function removeImports(context: ContextInfo) {
   for (const _import of context.imports) {
     for (const component of _import.components) {
-      const index = _import.path.node.specifiers.findIndex(item => item.local.name === component?.localName);
+      const index = _import.path.node.specifiers.findIndex(
+        item => item.local.name === component?.localName,
+      );
       _import.path.node.specifiers.splice(index, 1);
     }
     if (_import.path.node.specifiers.length === 0) {
@@ -102,7 +104,12 @@ function removeImports(context: ContextInfo) {
 
 function insertImport(path: NodePath<t.Program>) {
   const nodeImport = t.importDeclaration(
-    [t.importSpecifier(t.identifier('__z_createZovaComponentAsync'), t.stringLiteral('createZovaComponentAsync'))],
+    [
+      t.importSpecifier(
+        t.identifier('__z_createZovaComponentAsync'),
+        t.stringLiteral('createZovaComponentAsync'),
+      ),
+    ],
     t.stringLiteral('zova'),
   );
   path.get('body')[0].insertBefore(nodeImport);

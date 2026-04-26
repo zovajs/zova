@@ -1,14 +1,27 @@
 import { catchError } from '@cabloy/utils';
 import { AxiosRequestConfig } from 'axios';
 import { cast } from 'zova';
-import { BeanInterceptorBase, IDecoratorInterceptorOptions, IInterceptorRequest, Interceptor, NextInterceptorRequest } from 'zova-module-a-fetch';
+import {
+  BeanInterceptorBase,
+  IDecoratorInterceptorOptions,
+  IInterceptorRequest,
+  Interceptor,
+  NextInterceptorRequest,
+} from 'zova-module-a-fetch';
 import { ISsrSitePerformActionOptions } from 'zova-module-a-ssr';
 
 export interface IInterceptorOptionsPerformAction extends IDecoratorInterceptorOptions {}
 
 @Interceptor<IInterceptorOptionsPerformAction>({ dependencies: 'a-interceptor:jwt' })
-export class InterceptorPerformAction extends BeanInterceptorBase<IInterceptorOptionsPerformAction> implements IInterceptorRequest {
-  async onRequest(config: AxiosRequestConfig, _options: IInterceptorOptionsPerformAction, next: NextInterceptorRequest): Promise<AxiosRequestConfig> {
+export class InterceptorPerformAction
+  extends BeanInterceptorBase<IInterceptorOptionsPerformAction>
+  implements IInterceptorRequest
+{
+  async onRequest(
+    config: AxiosRequestConfig,
+    _options: IInterceptorOptionsPerformAction,
+    next: NextInterceptorRequest,
+  ): Promise<AxiosRequestConfig> {
     if (process.env.CLIENT) return next();
     const performAction = this.ctx.meta.$ssr.getPerformAction(config.baseURL);
     if (!performAction) return next();

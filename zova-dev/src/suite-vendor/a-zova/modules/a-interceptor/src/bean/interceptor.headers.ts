@@ -1,6 +1,11 @@
 import { AxiosRequestConfig } from 'axios';
 import { $customKey } from 'zova-core';
-import { BeanInterceptorBase, IDecoratorInterceptorOptions, Interceptor, NextInterceptorRequest } from 'zova-module-a-fetch';
+import {
+  BeanInterceptorBase,
+  IDecoratorInterceptorOptions,
+  Interceptor,
+  NextInterceptorRequest,
+} from 'zova-module-a-fetch';
 
 export interface IInterceptorOptionsHeaders extends IDecoratorInterceptorOptions {
   openapiSchema?: boolean;
@@ -8,7 +13,11 @@ export interface IInterceptorOptionsHeaders extends IDecoratorInterceptorOptions
 
 @Interceptor<IInterceptorOptionsHeaders>({ dependencies: 'a-interceptor:mock' })
 export class InterceptorHeaders extends BeanInterceptorBase<IInterceptorOptionsHeaders> {
-  async onRequest(config: AxiosRequestConfig, options: IInterceptorOptionsHeaders, next: NextInterceptorRequest): Promise<AxiosRequestConfig> {
+  async onRequest(
+    config: AxiosRequestConfig,
+    options: IInterceptorOptionsHeaders,
+    next: NextInterceptorRequest,
+  ): Promise<AxiosRequestConfig> {
     // locale
     const keyLocale = this.sys.env.APP_LOCALE_HEADER_KEY;
     if (keyLocale && !config.headers![keyLocale]) {

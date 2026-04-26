@@ -23,7 +23,9 @@ export function extendSSRWebserverConf(context: ConfigContext) {
     // buildsPatch
     (conf as any).buildsPatch = [
       {
-        banner: { js: "import { createRequire } from 'module';const require = createRequire(import.meta.url);" },
+        banner: {
+          js: "import { createRequire } from 'module';const require = createRequire(import.meta.url);",
+        },
         entryPoints: [{ in: (api.resolve as any).entry('ssr-prod-webserver.js'), out: 'index' }],
       },
       {
@@ -33,7 +35,9 @@ export function extendSSRWebserverConf(context: ConfigContext) {
   };
 }
 
-function _normalizeSourcemap(sourcemap?: boolean | 'linked' | 'inline' | 'external' | 'both' | 'true' | 'false' | '' | string): any {
+function _normalizeSourcemap(
+  sourcemap?: boolean | 'linked' | 'inline' | 'external' | 'both' | 'true' | 'false' | '' | string,
+): any {
   if (sourcemap === undefined || sourcemap === '') return false;
   if (sourcemap === 'true') return true;
   if (sourcemap === 'false') return false;

@@ -10,14 +10,20 @@ export type TypeControllerFormFieldCaptchaPublicProps = {
   controllerRef?: (ref: ControllerFormFieldCaptcha) => void;
 } & ControllerFormFieldCaptchaProps;
 
-type ControllerInnerProps = TypeControllerInnerProps<ControllerFormFieldCaptchaProps, keyof typeof ControllerFormFieldCaptcha.$propsDefault>;
+type ControllerInnerProps = TypeControllerInnerProps<
+  ControllerFormFieldCaptchaProps,
+  keyof typeof ControllerFormFieldCaptcha.$propsDefault
+>;
 declare module 'zova-module-basic-form' {
   export interface ControllerFormFieldCaptcha {
     $props: ControllerInnerProps;
   }
 }
 
-export const ZFormFieldCaptcha = defineComponent((_props: TypeControllerFormFieldCaptchaPublicProps) => {
-  useController(ControllerFormFieldCaptcha, undefined, undefined);
-  return () => {};
-}, prepareComponentOptions(ControllerFormFieldCaptcha.$componentOptions));
+export const ZFormFieldCaptcha = defineComponent(
+  (_props: TypeControllerFormFieldCaptchaPublicProps) => {
+    useController(ControllerFormFieldCaptcha, undefined, undefined);
+    return () => {};
+  },
+  prepareComponentOptions(ControllerFormFieldCaptcha.$componentOptions),
+);

@@ -21,9 +21,14 @@ declare module 'zova-module-basic-restpage' {
   }
 }
 declare module 'zova-module-basic-restpage' {
-  export interface RenderRestPageEntry<TData extends {} = {}> extends ControllerRestPageEntry<TData> {}
+  export interface RenderRestPageEntry<
+    TData extends {} = {},
+  > extends ControllerRestPageEntry<TData> {}
 }
-export const ZRestPageEntry = defineComponent(<TData extends {} = {}>(_props: TypeControllerRestPageEntryPublicProps<TData>) => {
-  useController(ControllerRestPageEntry, RenderRestPageEntry, undefined);
-  return () => {};
-}, prepareComponentOptions());
+export const ZRestPageEntry = defineComponent(
+  <TData extends {} = {}>(_props: TypeControllerRestPageEntryPublicProps<TData>) => {
+    useController(ControllerRestPageEntry, RenderRestPageEntry, undefined);
+    return () => {};
+  },
+  prepareComponentOptions(),
+);

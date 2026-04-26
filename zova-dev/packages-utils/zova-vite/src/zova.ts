@@ -10,7 +10,10 @@ import { generateVitePlugins } from './vitePlugins.ts';
 
 const __SvgIconPattern = /\.metadata\/icons\/groups\/.*?\.svg/;
 
-export async function generateZovaViteMeta(configMeta: ZovaConfigMeta, configOptions: ZovaViteConfigOptions): Promise<ZovaViteConfigResult> {
+export async function generateZovaViteMeta(
+  configMeta: ZovaConfigMeta,
+  configOptions: ZovaViteConfigOptions,
+): Promise<ZovaViteConfigResult> {
   // config utils
   const configUtils = createConfigUtils(configMeta, configOptions);
   // env

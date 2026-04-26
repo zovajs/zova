@@ -10,7 +10,10 @@ export type TypeControllerLayoutEmptyPublicProps = {
   controllerRef?: (ref: ControllerLayoutEmpty) => void;
 } & ControllerLayoutEmptyProps;
 
-type ControllerInnerProps = TypeControllerInnerProps<ControllerLayoutEmptyProps, keyof typeof ControllerLayoutEmpty.$propsDefault>;
+type ControllerInnerProps = TypeControllerInnerProps<
+  ControllerLayoutEmptyProps,
+  keyof typeof ControllerLayoutEmpty.$propsDefault
+>;
 declare module 'zova-module-home-layoutempty' {
   export interface ControllerLayoutEmpty {
     $props: ControllerInnerProps;

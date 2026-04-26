@@ -1,7 +1,12 @@
 import 'zova-module-a-openapi';
 import type { CurrencyOptions } from '@zhennann/currency';
 
-import type { IActionDeleteOptions, IActionOperationsOptions, IActionUpdateOptions, IActionViewOptions } from './action.ts';
+import type {
+  IActionDeleteOptions,
+  IActionOperationsOptions,
+  IActionUpdateOptions,
+  IActionViewOptions,
+} from './action.ts';
 import type { ICaptchaOptions } from './captcha.ts';
 import type { IDateOptions } from './date.ts';
 import type { IDateRangeOptions } from './dateRange.ts';

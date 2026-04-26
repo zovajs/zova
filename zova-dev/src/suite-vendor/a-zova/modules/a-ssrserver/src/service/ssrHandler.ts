@@ -57,7 +57,8 @@ export class ServiceSsrHandler extends BeanBase {
 
   public async render(options: ISsrHandlerRenderOptionsInner) {
     // resolve route
-    const pagePathFull = options.state?.pagePathFull ?? this.sys.util.getPagePathFromAbsoluteUrl(options.req.url!);
+    const pagePathFull =
+      options.state?.pagePathFull ?? this.sys.util.getPagePathFromAbsoluteUrl(options.req.url!);
     const route = await this.$$sysRouter.resolveRoute(pagePathFull, true, false);
     if (!route) return;
     // handler
@@ -92,8 +93,12 @@ export class ServiceSsrHandler extends BeanBase {
     // @vitejs/plugin-vue injects code into a component's setup() that registers
     // itself on ctx.modules. After the render, ctx.modules would contain all the
     // components that have been instantiated during this render call.
-    ssrContext._meta.endingHeadTags += this._renderModulesPreload_zova(cast(ssrContext).modules, { ssrContext });
-    ssrContext._meta.endingHeadTags += this._renderModulesPreload(cast(ssrContext).modules, { ssrContext });
+    ssrContext._meta.endingHeadTags += this._renderModulesPreload_zova(cast(ssrContext).modules, {
+      ssrContext,
+    });
+    ssrContext._meta.endingHeadTags += this._renderModulesPreload(cast(ssrContext).modules, {
+      ssrContext,
+    });
 
     const html = renderTemplate(ssrContext);
 
@@ -221,13 +226,19 @@ export class ServiceSsrHandler extends BeanBase {
     return '';
   }
 
-  private async _renderTransferCache(options: ISsrHandlerRenderOptionsInner, route: RouteLocationResolvedGeneric) {
+  private async _renderTransferCache(
+    options: ISsrHandlerRenderOptionsInner,
+    route: RouteLocationResolvedGeneric,
+  ) {
     const { res } = options;
     const transferCache = route.meta.transferCache ?? this.$$scopeSsr.config.transferCache;
     if (transferCache === false) return;
     // expires
     const transferCacheExpires = transferCache.expires ?? 0;
-    const expires = typeof transferCacheExpires === 'string' ? ms(transferCacheExpires) / 1000 : transferCacheExpires;
+    const expires =
+      typeof transferCacheExpires === 'string'
+        ? ms(transferCacheExpires) / 1000
+        : transferCacheExpires;
     if (expires === 0) {
       res.appendHeader('cache-control', 'no-cache, no-store, must-revalidate');
     } else {

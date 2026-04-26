@@ -47,6 +47,10 @@ export class Monkey extends BeanSimple implements IMonkeyModule, IMonkeyBeanInit
   }
 
   private async _loadSdk() {
-    this._modelSdk.value = await this.app.bean._getBeanSelector('a-openapi.model.sdk', true, this.app.meta.locale.current);
+    this._modelSdk.value = await this.app.bean._getBeanSelector(
+      'a-openapi.model.sdk',
+      true,
+      this.app.meta.locale.current,
+    );
   }
 }

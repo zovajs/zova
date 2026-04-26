@@ -9,4 +9,8 @@ export namespace NSControllerPageEntryCreate {
   export type ParamsOutput = z.output<typeof ControllerPageEntryCreateSchemaParams>;
 }
 
-export const ZPageEntryCreate = createZovaComponentPage(ControllerPageEntryCreate, undefined, undefined);
+export const ZPageEntryCreate = createZovaComponentPage(
+  ControllerPageEntryCreate,
+  undefined,
+  undefined,
+);

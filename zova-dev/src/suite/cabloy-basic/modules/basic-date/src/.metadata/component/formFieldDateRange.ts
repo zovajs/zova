@@ -10,14 +10,20 @@ export type TypeControllerFormFieldDateRangePublicProps = {
   controllerRef?: (ref: ControllerFormFieldDateRange) => void;
 } & ControllerFormFieldDateRangeProps;
 
-type ControllerInnerProps = TypeControllerInnerProps<ControllerFormFieldDateRangeProps, keyof typeof ControllerFormFieldDateRange.$propsDefault>;
+type ControllerInnerProps = TypeControllerInnerProps<
+  ControllerFormFieldDateRangeProps,
+  keyof typeof ControllerFormFieldDateRange.$propsDefault
+>;
 declare module 'zova-module-basic-date' {
   export interface ControllerFormFieldDateRange {
     $props: ControllerInnerProps;
   }
 }
 
-export const ZFormFieldDateRange = defineComponent((_props: TypeControllerFormFieldDateRangePublicProps) => {
-  useController(ControllerFormFieldDateRange, undefined, undefined);
-  return () => {};
-}, prepareComponentOptions(ControllerFormFieldDateRange.$componentOptions));
+export const ZFormFieldDateRange = defineComponent(
+  (_props: TypeControllerFormFieldDateRangePublicProps) => {
+    useController(ControllerFormFieldDateRange, undefined, undefined);
+    return () => {};
+  },
+  prepareComponentOptions(ControllerFormFieldDateRange.$componentOptions),
+);

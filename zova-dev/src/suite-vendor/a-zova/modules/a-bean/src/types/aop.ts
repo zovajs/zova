@@ -19,9 +19,18 @@ export type AopAction<T extends {}, NAME extends keyof T, RESULT = undefined> = 
   next: AopActionNext<Parameters<T[NAME]>, ReturnType<T[NAME]>>,
   _receiver: T,
 ) // @ts-ignore ignore
-=> RESULT extends undefined ? ReturnType<T[NAME]> : ReturnType<T[NAME]> extends Promise<any> ? Promise<RESULT> : RESULT;
+=> RESULT extends undefined
+  ? ReturnType<T[NAME]>
+  : ReturnType<T[NAME]> extends Promise<any>
+    ? Promise<RESULT>
+    : RESULT;
 
-export type AopActionMethod<T extends {}> = (method: keyof T, args: any[], next: AopActionNext<any[], any>, _receiver: T) => any;
+export type AopActionMethod<T extends {}> = (
+  method: keyof T,
+  args: any[],
+  next: AopActionNext<any[], any>,
+  _receiver: T,
+) => any;
 
 export type AopActionGetter<T extends {}, NAME extends keyof T, RESULT = undefined> =
   // @ts-ignore ignore
@@ -43,7 +52,10 @@ export type AopActionSetter<T extends {}, NAME extends keyof T, DATA = undefined
 export interface IAopRecord {}
 
 export interface IDecoratorAopOptions
-  extends IOnionOptionsEnable, IOnionOptionsMatch<keyof IBeanRecord | RegExp>, IOnionOptionsDeps<keyof IAopRecord> {}
+  extends
+    IOnionOptionsEnable,
+    IOnionOptionsMatch<keyof IBeanRecord | RegExp>,
+    IOnionOptionsDeps<keyof IAopRecord> {}
 
 declare module 'zova-module-a-bean' {
   export interface SysOnion {

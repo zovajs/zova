@@ -2,7 +2,10 @@ import { z } from 'zod';
 import { createZovaComponentPage } from 'zova';
 
 import { ControllerPageItem } from '../../page/item/controller.jsx';
-import { ControllerPageItemSchemaParams, ControllerPageItemSchemaQuery } from '../../page/item/controller.jsx';
+import {
+  ControllerPageItemSchemaParams,
+  ControllerPageItemSchemaQuery,
+} from '../../page/item/controller.jsx';
 export namespace NSControllerPageItem {
   export const paramsSchema = ControllerPageItemSchemaParams;
   export type ParamsInput = z.input<typeof ControllerPageItemSchemaParams>;

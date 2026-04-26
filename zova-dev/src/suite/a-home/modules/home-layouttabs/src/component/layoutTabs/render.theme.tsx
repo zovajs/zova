@@ -29,7 +29,10 @@ export class RenderTheme extends BeanRenderBase {
             <ul class="bg-base-100 rounded-t-none p-2 w-48">
               {themes.map(item => {
                 return (
-                  <li key={item.mode.toString()} class={this.$theme.darkMode === item.mode ? 'disabled' : ''}>
+                  <li
+                    key={item.mode.toString()}
+                    class={this.$theme.darkMode === item.mode ? 'disabled' : ''}
+                  >
                     <a
                       onClick={() => {
                         this.$theme.darkMode = item.mode as any;

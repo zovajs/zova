@@ -13,7 +13,10 @@ export class RenderTable extends BeanRenderBase {
             {table.getFlatHeaders().map(header => {
               return (
                 <th key={header.id}>
-                  <FlexRender render={header.column.columnDef.header} props={header.getContext()}></FlexRender>
+                  <FlexRender
+                    render={header.column.columnDef.header}
+                    props={header.getContext()}
+                  ></FlexRender>
                 </th>
               );
             })}
@@ -26,7 +29,10 @@ export class RenderTable extends BeanRenderBase {
                 {row.getVisibleCells().map(cell => {
                   return (
                     <td key={cell.id}>
-                      <FlexRender render={cell.column.columnDef.cell} props={cell.getContext()}></FlexRender>
+                      <FlexRender
+                        render={cell.column.columnDef.cell}
+                        props={cell.getContext()}
+                      ></FlexRender>
                     </td>
                   );
                 })}

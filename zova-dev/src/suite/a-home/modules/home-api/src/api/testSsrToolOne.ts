@@ -17,8 +17,10 @@ export type ApiApiTestSsrToolOnetestGetResponseBody =
 export const ApiApiTestSsrToolOnetestPath = '/api/test/ssr/toolOne/test/{id?}';
 export type ApiApiTestSsrToolOnetestPath = '/api/test/ssr/toolOne/test/{id?}';
 export type ApiApiTestSsrToolOnetestMethod = 'post';
-export type ApiApiTestSsrToolOnetestRequestParams = paths[ApiApiTestSsrToolOnetestPath][ApiApiTestSsrToolOnetestMethod]['parameters']['path'];
-export type ApiApiTestSsrToolOnetestRequestQuery = paths[ApiApiTestSsrToolOnetestPath][ApiApiTestSsrToolOnetestMethod]['parameters']['query'];
+export type ApiApiTestSsrToolOnetestRequestParams =
+  paths[ApiApiTestSsrToolOnetestPath][ApiApiTestSsrToolOnetestMethod]['parameters']['path'];
+export type ApiApiTestSsrToolOnetestRequestQuery =
+  paths[ApiApiTestSsrToolOnetestPath][ApiApiTestSsrToolOnetestMethod]['parameters']['query'];
 export type ApiApiTestSsrToolOnetestRequestBody = components['schemas']['test-ssr.dto.testBody'];
 export type ApiApiTestSsrToolOnetestResponseBody =
   paths[ApiApiTestSsrToolOnetestPath][ApiApiTestSsrToolOnetestMethod]['responses']['200']['content']['application/json']['data'];

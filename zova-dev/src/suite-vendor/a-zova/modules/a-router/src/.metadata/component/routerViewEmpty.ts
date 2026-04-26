@@ -6,7 +6,10 @@ export type TypeControllerRouterViewEmptyPublicProps = {
   controllerRef?: (ref: ControllerRouterViewEmpty) => void;
 };
 
-export const ZRouterViewEmpty = defineComponent((_props: TypeControllerRouterViewEmptyPublicProps) => {
-  useController(ControllerRouterViewEmpty, undefined, undefined);
-  return () => {};
-}, prepareComponentOptions());
+export const ZRouterViewEmpty = defineComponent(
+  (_props: TypeControllerRouterViewEmptyPublicProps) => {
+    useController(ControllerRouterViewEmpty, undefined, undefined);
+    return () => {};
+  },
+  prepareComponentOptions(),
+);

@@ -49,19 +49,31 @@ export class AppError extends ErrorClass {
         delete error[SymbolErrorInstanceInfo];
       }
       // should not catch error
-      this.app.vue.config.errorHandler!(error, errorInfo?.instance as any, errorInfo?.info || infoDefault) as unknown as Error;
+      this.app.vue.config.errorHandler!(
+        error,
+        errorInfo?.instance as any,
+        errorInfo?.info || infoDefault,
+      ) as unknown as Error;
     }
   }
 
-  private _handleError(err: Error, instance: ComponentPublicInstance | null | undefined, info: string | undefined) {
+  private _handleError(
+    err: Error,
+    instance: ComponentPublicInstance | null | undefined,
+    info: string | undefined,
+  ) {
     if (!this.app) {
       // means destroyed
       console.error(err);
       return;
     }
-    const err2 = this.app.meta.event.emitSync('app:errorHandler', { err: err as Error, instance, info }, data => {
-      return data.err;
-    });
+    const err2 = this.app.meta.event.emitSync(
+      'app:errorHandler',
+      { err: err as Error, instance, info },
+      data => {
+        return data.err;
+      },
+    );
     // only log error in client
     if (process.env.CLIENT) {
       if (!err2 || !(err2 instanceof Error)) return err2;

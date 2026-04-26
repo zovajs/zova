@@ -36,7 +36,13 @@ export class RenderMenu extends BeanRenderBase {
     }
     return (
       <li key={item.title}>
-        <ZItemLink title={titleLocale} description={item.description} icon={item.icon as any} href={item.external ? item.link : undefined} to={to} />
+        <ZItemLink
+          title={titleLocale}
+          description={item.description}
+          icon={item.icon as any}
+          href={item.external ? item.link : undefined}
+          to={to}
+        />
       </li>
     );
   }

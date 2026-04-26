@@ -10,7 +10,10 @@ export type TypeControllerFormFieldDatePublicProps = {
   controllerRef?: (ref: ControllerFormFieldDate) => void;
 } & ControllerFormFieldDateProps;
 
-type ControllerInnerProps = TypeControllerInnerProps<ControllerFormFieldDateProps, keyof typeof ControllerFormFieldDate.$propsDefault>;
+type ControllerInnerProps = TypeControllerInnerProps<
+  ControllerFormFieldDateProps,
+  keyof typeof ControllerFormFieldDate.$propsDefault
+>;
 declare module 'zova-module-a-date' {
   export interface ControllerFormFieldDate {
     $props: ControllerInnerProps;

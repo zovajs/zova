@@ -24,7 +24,10 @@ export class ApiTodo extends BeanApiBase {
   }
 
   update(id: string, body: ApiTodoUpdateBody) {
-    return this.$fetch.patch<any, void, ApiTodoUpdateBody>(this.$pathTranslate('/demo/todo/{id}', { id }), body);
+    return this.$fetch.patch<any, void, ApiTodoUpdateBody>(
+      this.$pathTranslate('/demo/todo/{id}', { id }),
+      body,
+    );
   }
 
   delete(id: string) {

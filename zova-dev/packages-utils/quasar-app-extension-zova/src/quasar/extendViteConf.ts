@@ -66,7 +66,17 @@ export function extendViteConf(context: ConfigContext) {
       // process.env.CLIENT = env.CLIENT; // should not set if false
     }
     // define
-    const define = generateConfigDefine(env, ['NODE_ENV', 'META_FLAVOR', 'META_MODE', 'META_APP_MODE', 'SERVER', 'CLIENT', 'DEV', 'PROD', 'SSR']);
+    const define = generateConfigDefine(env, [
+      'NODE_ENV',
+      'META_FLAVOR',
+      'META_MODE',
+      'META_APP_MODE',
+      'SERVER',
+      'CLIENT',
+      'DEV',
+      'PROD',
+      'SSR',
+    ]);
     conf.define = mergeConfig(conf.define || {}, define);
     // ssr
     if (opts.isServer && context.configMeta?.mode === 'development') {
@@ -115,8 +125,16 @@ export function extendViteConf(context: ConfigContext) {
       if (opts.isServer && context.configMeta?.mode === 'development') {
         if (msg.includes('Failed to load source map')) return;
       }
-      if (msg.includes('Arbitrary module namespace identifier names are not available in the configured target environment')) return;
-      if (msg.includes('Big integer literals are not available in the configured target environment')) return;
+      if (
+        msg.includes(
+          'Arbitrary module namespace identifier names are not available in the configured target environment',
+        )
+      )
+        return;
+      if (
+        msg.includes('Big integer literals are not available in the configured target environment')
+      )
+        return;
       loggerWarn(msg, options);
     };
     conf.customLogger = logger;

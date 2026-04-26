@@ -9,4 +9,8 @@ export namespace NSControllerPageErrorExpired {
   export type QueryOutput = z.output<typeof ControllerPageErrorExpiredSchemaQuery>;
 }
 
-export const ZPageErrorExpired = createZovaComponentPage(ControllerPageErrorExpired, undefined, undefined);
+export const ZPageErrorExpired = createZovaComponentPage(
+  ControllerPageErrorExpired,
+  undefined,
+  undefined,
+);

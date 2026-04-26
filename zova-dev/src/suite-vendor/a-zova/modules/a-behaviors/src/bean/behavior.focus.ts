@@ -14,10 +14,17 @@ export interface IBehaviorOptionsFocus extends IDecoratorBehaviorOptions {
 }
 
 @Behavior<IBehaviorOptionsFocus>()
-export class BehaviorFocus extends BeanBehaviorBase<IBehaviorOptionsFocus, IBehaviorPropsInputFocus, IBehaviorPropsOutputFocus> {
+export class BehaviorFocus extends BeanBehaviorBase<
+  IBehaviorOptionsFocus,
+  IBehaviorPropsInputFocus,
+  IBehaviorPropsOutputFocus
+> {
   inputRef?: HTMLElement;
 
-  protected render(props: IBehaviorPropsInputFocus, next: NextBehavior<IBehaviorPropsOutputFocus>): VNode {
+  protected render(
+    props: IBehaviorPropsInputFocus,
+    next: NextBehavior<IBehaviorPropsOutputFocus>,
+  ): VNode {
     const refOuter = props?.ref;
     props = {
       ...props,

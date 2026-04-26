@@ -12,4 +12,6 @@ export interface ITableMeta<TData extends RowData = RowData> {
   renders: Record<string, TypeTableCellRender<TData>>;
 }
 
-export type TypeTableGetColumnsNext<TData extends RowData = RowData> = (properties?: SchemaObject[]) => Promise<TypeColumn<TData>[]>;
+export type TypeTableGetColumnsNext<TData extends RowData = RowData> = (
+  properties?: SchemaObject[],
+) => Promise<TypeColumn<TData>[]>;

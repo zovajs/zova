@@ -1,6 +1,9 @@
 import { toLowerCaseFirstChar } from '@cabloy/word-utils';
 
-import type { IDecoratorVueElement, IDecoratorVueModelOptions } from '../../decorator/vueExtra/types.ts';
+import type {
+  IDecoratorVueElement,
+  IDecoratorVueModelOptions,
+} from '../../decorator/vueExtra/types.ts';
 import type { BeanContainer } from '../beanContainer.ts';
 import type { DefineModelOptions } from '../type.ts';
 

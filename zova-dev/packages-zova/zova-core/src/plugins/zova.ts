@@ -4,7 +4,11 @@ import type { ZovaContext } from '../core/index.ts';
 import type { PluginZovaOptions } from '../types/interface/pluginZova.ts';
 
 import { SymbolBeanContainerInstances } from '../bean/beanContainer.ts';
-import { BeanControllerIdentifier, BeanRenderIdentifier, BeanStyleIdentifier } from '../bean/type.ts';
+import {
+  BeanControllerIdentifier,
+  BeanRenderIdentifier,
+  BeanStyleIdentifier,
+} from '../bean/type.ts';
 import { ZovaApplication } from '../core/index.ts';
 import { cast } from '../types/index.ts';
 
@@ -12,11 +16,29 @@ export const PluginZova = {
   async install(
     vue: App,
     ctxRoot: ZovaContext,
-    { modulesMeta, locales, config, env, viteHot, SysMonkey, AppMonkey, legacyRoutes }: PluginZovaOptions,
+    {
+      modulesMeta,
+      locales,
+      config,
+      env,
+      viteHot,
+      SysMonkey,
+      AppMonkey,
+      legacyRoutes,
+    }: PluginZovaOptions,
   ) {
     // zova app
     const app = new ZovaApplication(vue, ctxRoot);
-    await app.initialize({ modulesMeta, locales, config, env, viteHot, SysMonkey, AppMonkey, legacyRoutes });
+    await app.initialize({
+      modulesMeta,
+      locales,
+      config,
+      env,
+      viteHot,
+      SysMonkey,
+      AppMonkey,
+      legacyRoutes,
+    });
     return app;
   },
   async update(app: ZovaApplication, ctxRoot: ZovaContext) {

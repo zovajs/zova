@@ -12,7 +12,9 @@ import { inject } from 'vue';
 
 import { pageRouteKey } from './const.js';
 
-export function getRouteMatched(route: RouteLocationNormalizedLoaded): RouteLocationMatched | undefined {
+export function getRouteMatched(
+  route: RouteLocationNormalizedLoaded,
+): RouteLocationMatched | undefined {
   let match = route.matched.find(item => item.aliasOf);
   if (match) {
     match = match.aliasOf;
@@ -38,7 +40,9 @@ export function getPageRoute(ctx: ZovaContext): RouteLocationNormalizedLoadedGen
   return route as RouteLocationNormalizedLoadedGeneric | undefined;
 }
 
-export function getCurrentRoute(ctx: ZovaContext): Ref<RouteLocationNormalizedLoadedGeneric> | undefined {
+export function getCurrentRoute(
+  ctx: ZovaContext,
+): Ref<RouteLocationNormalizedLoadedGeneric> | undefined {
   const route = ctx.util.instanceScope(() => {
     return inject(routerViewLocationKey);
   });
