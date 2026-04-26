@@ -9,20 +9,14 @@ import type {
   ISchemaRenderComponentPresetRecord,
   TypeFormFieldRenderComponent,
   TypeFormFieldRenderComponentProvider,
+  TypeRenderComponentPreset,
 } from 'zova-module-a-openapi';
 
 import type { ControllerForm } from '../component/form/controller.jsx';
 import type { ControllerFormField } from '../component/formField/controller.jsx';
 import type { TypeBehaviorFormFieldOptions } from './form.js';
 
-export type HTMLInputElementType =
-  | 'text'
-  | 'password'
-  | 'number'
-  | 'file'
-  | 'hidden'
-  | 'tel'
-  | 'email';
+export type HTMLInputElementType = 'text' | 'password' | 'number' | 'file' | 'hidden' | 'tel' | 'email';
 export const inputTypePresets = ['text', 'password', 'number', 'file', 'hidden', 'tel', 'email'];
 export const constFieldProps = '$$FieldProps';
 
@@ -50,7 +44,7 @@ export type TypeFormFieldOnSetDisplayValue = (value: any) => any;
 export type TypeFormFieldDisplayValueUpdateTiming = 'input' | 'change';
 
 export interface IFormFieldOptionsBase {
-  render?: TypeFormFieldRenderComponent;
+  render?: TypeRenderComponentPreset;
   displayValue?: any;
   displayValueUpdateTiming?: TypeFormFieldDisplayValueUpdateTiming;
   onSetDisplayValue?: TypeFormFieldOnSetDisplayValue;
@@ -72,15 +66,9 @@ export interface IFormFieldPresetOptions<TParentData = {}> extends IFormFieldOpt
 }
 
 export interface IFormFieldOptions<TParentData = {}>
-  extends
-    TypeBehaviorFormFieldOptions<TParentData>,
-    IFormFieldOptionsBase,
-    IFormFieldLayoutOptionsBase {
+  extends TypeBehaviorFormFieldOptions<TParentData>, IFormFieldOptionsBase, IFormFieldLayoutOptionsBase {
   behaviors?: IBehaviorItem;
-  slotDefault?: (
-    props: IFormFieldRenderContext<TParentData>,
-    formField: ControllerFormField,
-  ) => VNode;
+  slotDefault?: (props: IFormFieldRenderContext<TParentData>, formField: ControllerFormField) => VNode;
 }
 
 export interface IFormFieldRenderContextProps {
@@ -95,10 +83,7 @@ export interface IFormFieldRenderContextProps {
   onBlur?: (e: Event) => void;
 }
 
-export interface IFormFieldRenderContextPropsBucket<TParentData = {}> extends Omit<
-  IFormFieldOptions<TParentData>,
-  'render'
-> {
+export interface IFormFieldRenderContextPropsBucket<TParentData = {}> extends Omit<IFormFieldOptions<TParentData>, 'render'> {
   render: TypeFormFieldRenderComponent;
   renderFlattern?: TypeFormFieldRenderComponent;
   renderProvider?: TypeFormFieldRenderComponentProvider;
@@ -111,10 +96,7 @@ export interface IFormFieldRenderContext<TParentData = {}> {
   jsxRenderContext: {};
 }
 
-export interface IJsxRenderContextFormField<
-  TParentData extends {} = {},
-  TSubmitMeta = never,
-> extends IJsxRenderContextBase {
+export interface IJsxRenderContextFormField<TParentData extends {} = {}, TSubmitMeta = never> extends IJsxRenderContextBase {
   $celScope: IFormFieldScope<TParentData>;
   $$formField: ControllerFormField<TParentData> | undefined;
   $$form: ControllerForm<TParentData, TSubmitMeta>;
