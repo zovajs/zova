@@ -6,11 +6,7 @@ import { Use } from 'zova';
 import { Controller } from 'zova-module-a-bean';
 import { $QueriesAutoLoad } from 'zova-module-a-model';
 import { ITablePaged, ITableQuery, ITableResPaged } from 'zova-module-a-openapi';
-import {
-  BeanControllerTableBase,
-  ControllerTable,
-  TypeTableGetColumnsNext,
-} from 'zova-module-a-table';
+import { BeanControllerTableBase, ControllerTable, TypeTableGetColumnsNext } from 'zova-module-a-table';
 
 import { IJsxRenderContextPage, IPageScope } from '../../types/page.js';
 
@@ -108,7 +104,7 @@ export class ControllerRestPage<TData extends {} = {}> extends BeanControllerTab
     if (!permissionUpdate && !permissionDelete) return columns;
     const columnHelper = createColumnHelper<TData>();
     const id = 'actions';
-    const columnRender = await $$table.createColumnRender(id, 'actionOperationsRow');
+    const columnRender = await $$table.createColumnRender(id, 'actionOperations');
     columns.push(
       columnHelper.display({
         id: 'actions',
