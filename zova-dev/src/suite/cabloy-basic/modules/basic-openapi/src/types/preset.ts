@@ -1,7 +1,7 @@
 import 'zova-module-a-openapi';
 import type { CurrencyOptions } from '@zhennann/currency';
 
-import type { IActionDeleteOptions, IActionOperationsRowOptions, IActionUpdateOptions, IActionViewOptions } from './action.ts';
+import type { IResourceActionRowRecord } from './actions.ts';
 import type { ICaptchaOptions } from './captcha.ts';
 import type { IDateOptions } from './date.ts';
 import type { IDateRangeOptions } from './dateRange.ts';
@@ -12,11 +12,7 @@ import type { ITextareaOptions } from './textarea.ts';
 import type { IToggleOptions } from './toggle.ts';
 
 declare module 'zova-module-a-openapi' {
-  export interface ISchemaRenderComponentPresetRecord {
-    actionView?: IActionViewOptions;
-    actionUpdate?: IActionUpdateOptions;
-    actionDelete?: IActionDeleteOptions;
-    actionOperationsRow?: IActionOperationsRowOptions;
+  export interface ISchemaRenderComponentPresetRecord extends IResourceActionRowRecord {
     input?: IInputOptions;
     captcha?: ICaptchaOptions;
     currency?: CurrencyOptions;

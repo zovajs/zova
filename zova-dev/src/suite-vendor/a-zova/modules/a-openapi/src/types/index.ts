@@ -1,5 +1,4 @@
 export * from './action.js';
-export * from './actions.js';
 export * from './database.js';
 export * from './jsx.js';
 export * from './permissions.js';

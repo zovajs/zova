@@ -1,22 +1,12 @@
 import { BeanBase } from 'zova';
 import { ZIcon } from 'zova-module-a-icon';
-import {
-  IDecoratorTableCellOptions,
-  IJsxRenderContextTableCell,
-  ITableCellRender,
-  NextTableCellRender,
-  TableCell,
-} from 'zova-module-a-table';
+import { IDecoratorTableCellPresetOptions, IJsxRenderContextTableCell, ITableCellRender, NextTableCellRender, TableCell } from 'zova-module-a-table';
 
-export interface ITableCellOptionsActionOperationsRow extends IDecoratorTableCellOptions {}
+export interface ITableCellOptionsActionOperationsRow extends IDecoratorTableCellPresetOptions {}
 
 @TableCell<ITableCellOptionsActionOperationsRow>()
 export class TableCellActionOperationsRow extends BeanBase implements ITableCellRender {
-  render(
-    _options: ITableCellOptionsActionOperationsRow,
-    renderContext: IJsxRenderContextTableCell,
-    _next: NextTableCellRender,
-  ) {
+  render(_options: ITableCellOptionsActionOperationsRow, renderContext: IJsxRenderContextTableCell, _next: NextTableCellRender) {
     const { $jsx, $celScope, $host } = renderContext;
     const permissions = $celScope.permissions;
     const permissionUpdate = $host.$passport.checkPermission(permissions, 'update');

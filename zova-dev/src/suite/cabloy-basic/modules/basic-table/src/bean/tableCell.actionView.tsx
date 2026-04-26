@@ -1,24 +1,11 @@
 import { BeanBase } from 'zova';
-import {
-  IDecoratorTableCellOptions,
-  IJsxRenderContextTableCell,
-  ITableCellRender,
-  NextTableCellRender,
-  TableCell,
-} from 'zova-module-a-table';
+import { IDecoratorTableCellPresetOptions, IJsxRenderContextTableCell, ITableCellRender, NextTableCellRender, TableCell } from 'zova-module-a-table';
 
-export interface ITableCellOptionsActionView extends IDecoratorTableCellOptions {
-  resource?: string;
-  id?: string;
-}
+export interface ITableCellOptionsActionView extends IDecoratorTableCellPresetOptions {}
 
 @TableCell<ITableCellOptionsActionView>()
 export class TableCellActionView extends BeanBase implements ITableCellRender {
-  render(
-    options: ITableCellOptionsActionView,
-    renderContext: IJsxRenderContextTableCell,
-    next: NextTableCellRender,
-  ) {
+  render(options: ITableCellOptionsActionView, renderContext: IJsxRenderContextTableCell, next: NextTableCellRender) {
     const { $jsx, $host } = renderContext;
     const value = next();
     return (
@@ -29,7 +16,7 @@ export class TableCellActionView extends BeanBase implements ITableCellRender {
           e.preventDefault();
           e.stopPropagation();
           const actionName = $jsx.normalizeAction('actionView');
-          await $host.$performAction(actionName, options, renderContext);
+          await $host.$performAction(actionName, options.preset?.actionView, renderContext);
         }}
       >
         {value}
