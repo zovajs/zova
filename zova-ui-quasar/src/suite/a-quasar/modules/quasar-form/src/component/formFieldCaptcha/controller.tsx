@@ -3,13 +3,11 @@ import type { QInputProps } from 'quasar';
 import { QInput } from 'quasar';
 import { BeanControllerBase, ClientOnly, IComponentOptions, TypeEventOff, Use } from 'zova';
 import { Controller } from 'zova-module-a-bean';
-import { ControllerForm, IFormFieldOptions, ZFormField } from 'zova-module-a-form';
-import { ICaptchaData, ICaptchaOptions } from 'zova-module-a-openapi';
+import { ControllerForm, IFormFieldPresetOptions, ZFormField } from 'zova-module-a-form';
+import { ICaptchaData } from 'zova-module-a-openapi';
 import { ToolV } from 'zova-module-a-zod';
 
-export interface ControllerFormFieldCaptchaProps extends IFormFieldOptions {
-  captcha?: ICaptchaOptions;
-}
+export interface ControllerFormFieldCaptchaProps extends IFormFieldPresetOptions {}
 
 @Controller()
 export class ControllerFormFieldCaptcha extends BeanControllerBase {
@@ -48,7 +46,7 @@ export class ControllerFormFieldCaptcha extends BeanControllerBase {
   }
 
   get captchaScene() {
-    return this.$props.captcha?.scene ?? 'captcha-simple:simple';
+    return this.$props.preset?.captcha?.scene ?? 'captcha-simple:simple';
   }
 
   private async createCaptchaData() {

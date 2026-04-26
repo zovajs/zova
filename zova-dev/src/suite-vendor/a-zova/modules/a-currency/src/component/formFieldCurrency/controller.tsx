@@ -1,16 +1,13 @@
 import type { CurrencyOptions } from '@zhennann/currency';
 import type { IComponentOptions } from 'zova';
-import type { IFormFieldOptions } from 'zova-module-a-form';
 
 import { BeanControllerBase } from 'zova';
 import { Controller } from 'zova-module-a-bean';
-import { ZFormField } from 'zova-module-a-form';
+import { IFormFieldPresetOptions, ZFormField } from 'zova-module-a-form';
 
 import { currencyFormat, currencyUpdate } from '../../lib/utils.js';
 
-export interface ControllerFormFieldCurrencyProps extends IFormFieldOptions {
-  currency?: CurrencyOptions;
-}
+export interface ControllerFormFieldCurrencyProps extends IFormFieldPresetOptions {}
 
 @Controller()
 export class ControllerFormFieldCurrency extends BeanControllerBase {
@@ -22,7 +19,7 @@ export class ControllerFormFieldCurrency extends BeanControllerBase {
   protected async __init__() {}
 
   protected render() {
-    const currencyOptions = this.$props.currency;
+    const currencyOptions = this.$props.preset?.currency;
     const displayValue = this._displayValuePatch(currencyOptions);
     return (
       <ZFormField
