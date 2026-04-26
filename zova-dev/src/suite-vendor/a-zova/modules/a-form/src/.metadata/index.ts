@@ -3,7 +3,6 @@
 export * from '../component/form/controller.jsx';
 export * from '../component/formField/controller.jsx';
 export * from '../component/formFieldWrapper/controller.jsx';
-export * from '../component/formSubscribe/controller.jsx';
 
 import 'zova';
 declare module 'zova' {
@@ -25,11 +24,6 @@ declare module 'zova-module-a-form' {
         export interface ControllerFormFieldWrapper {
           /** @internal */
           get scope(): ScopeModuleAForm;
-        }
-
-        export interface ControllerFormSubscribe {
-          /** @internal */
-          get scope(): ScopeModuleAForm;
         } 
 }
 /** controller: end */
@@ -37,14 +31,12 @@ declare module 'zova-module-a-form' {
 import { ControllerForm } from '../component/form/controller.jsx';
 import { ControllerFormField } from '../component/formField/controller.jsx';
 import { ControllerFormFieldWrapper } from '../component/formFieldWrapper/controller.jsx';
-import { ControllerFormSubscribe } from '../component/formSubscribe/controller.jsx';
 import 'zova';
 declare module 'zova' {
   export interface IBeanRecordLocal {
     'a-form.controller.form': ControllerForm;
 'a-form.controller.formField': ControllerFormField;
 'a-form.controller.formFieldWrapper': ControllerFormFieldWrapper;
-'a-form.controller.formSubscribe': ControllerFormSubscribe;
   }
 }
 /** controller: end */
@@ -56,13 +48,10 @@ export * from './component/formField.js';
 import { ZFormField } from './component/formField.js';
 export * from './component/formFieldWrapper.js';
 import { ZFormFieldWrapper } from './component/formFieldWrapper.js';
-export * from './component/formSubscribe.js';
-import { ZFormSubscribe } from './component/formSubscribe.js';
 export const components = {
   'form': ZForm,
 'formField': ZFormField,
 'formFieldWrapper': ZFormFieldWrapper,
-'formSubscribe': ZFormSubscribe,
 };
 import 'zova';
 declare module 'zova' {
@@ -70,13 +59,11 @@ export interface IComponentRecord {
   'a-form:form': ControllerForm;
 'a-form:formField': ControllerFormField;
 'a-form:formFieldWrapper': ControllerFormFieldWrapper;
-'a-form:formSubscribe': ControllerFormSubscribe;
 }
 export interface IZovaComponentRecord {
   'a-form:form': typeof ZForm;
 'a-form:formField': typeof ZFormField;
 'a-form:formFieldWrapper': typeof ZFormFieldWrapper;
-'a-form:formSubscribe': typeof ZFormSubscribe;
 }
 }
 /** components: end */
