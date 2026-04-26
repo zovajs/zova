@@ -4,4 +4,4 @@ export interface IActionUpdateOptions {}
 
 export interface IActionDeleteOptions {}
 
-export interface IActionOperationsOptions {}
+export interface IActionOperationsRowOptions {}

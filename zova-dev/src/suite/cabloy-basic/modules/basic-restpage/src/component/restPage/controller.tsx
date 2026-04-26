@@ -104,7 +104,7 @@ export class ControllerRestPage<TData extends {} = {}> extends BeanControllerTab
     if (!permissionUpdate && !permissionDelete) return columns;
     const columnHelper = createColumnHelper<TData>();
     const id = 'actions';
-    const columnRender = await $$table.createColumnRender(id, 'actionOperations');
+    const columnRender = await $$table.createColumnRender(id, 'actionOperationsRow');
     columns.push(
       columnHelper.display({
         id: 'actions',
