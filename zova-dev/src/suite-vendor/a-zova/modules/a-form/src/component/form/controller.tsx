@@ -1,4 +1,4 @@
-import { catchError, celEnvBase } from '@cabloy/utils';
+import { catchError, celEnvBase, isEmptyObject } from '@cabloy/utils';
 import { ZodMetadata } from '@cabloy/zod-openapi';
 import {
   DeepKeys,
@@ -215,15 +215,12 @@ export class ControllerForm<TFormData extends {} = {}, TSubmitMeta = never> exte
     celScope: IFormFieldScope<TFormData>,
     jsxRenderContext: {},
   ): IFormFieldRenderContextPropsBucket {
-    const props: any = {
+    let props: any = {
       [constFieldProps]: true,
       key: name,
       name,
       value: celScope.value,
     };
-    if (this.formMeta?.formMode === 'view') {
-      props.readonly = true;
-    }
     const property = this.getFieldProperty(name);
     if (!property) return props;
     const rest = property.rest;
@@ -244,6 +241,13 @@ export class ControllerForm<TFormData extends {} = {}, TSubmitMeta = never> exte
       }
       props[key] = keyValue;
     }
+    // render
+    const needAppend = isJsxComponent(props.render) && this.isComponentFormField(props.render.type);
+    if (needAppend && !isEmptyObject(props.render.props)) {
+      const propsAppend = this.zovaJsx.renderJsxOrCel(props.render.props, undefined, celScope, jsxRenderContext);
+      props = Object.assign({}, props, propsAppend);
+    }
+    // ok
     return props;
   }
 
