@@ -74,13 +74,10 @@ export type TypeRenderComponentPreset =
 // form
 export type TypeFormFieldRenderComponentNormal = Constructable<ComponentPublicInstance> | keyof IComponentRecord | TypeRenderComponentPreset;
 export type TypeFormFieldRenderComponent = TypeFormFieldRenderComponentNormal | TypeRenderComponentJsx;
-export type TypeFormFieldRenderComponentProvider =
-  | Constructable
-  | Constructable<ComponentPublicInstance>
-  | keyof IComponentRecord
-  | 'input'
-  | 'textarea'
-  | 'select';
+export type TypeFormFieldRenderComponentProvider = Constructable | Constructable<ComponentPublicInstance> | keyof IComponentRecord;
+// | 'input'
+// | 'textarea'
+// | 'select';
 
 // table
 export type TypeTableCellRenderComponentNormal =
