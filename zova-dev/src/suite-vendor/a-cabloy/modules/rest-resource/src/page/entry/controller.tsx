@@ -4,7 +4,7 @@ import { BeanControllerPageBase, Use, useCustomRef, usePrepareArg } from 'zova';
 import { ZovaJsx } from 'zova-jsx';
 import { Controller } from 'zova-module-a-bean';
 import { formMetaFromFormScene, IFormMeta, IFormProvider, TypeFormScene } from 'zova-module-a-form';
-import {} from 'zova-module-a-openapi';
+import { IResourceActionRowRecord, IResourceActionTableRecord } from 'zova-module-a-openapi';
 import { ZPage } from 'zova-module-home-base';
 
 import type { ModelResource } from '../../model/resource.js';
@@ -57,9 +57,9 @@ export class ControllerPageEntry extends BeanControllerPageBase {
     this.zovaJsx = this.app.bean._newBeanSimple(ZovaJsx, false, this.formProvider.components, this.formProvider.actions, this.pageEntryWrapperCelEnv);
   }
 
-  async onActionTable(_action: keyof TypeResourceActionTableRecord) {}
+  async onActionTable(_action: keyof IResourceActionTableRecord) {}
 
-  async onActionRow(action: keyof TypeResourceActionRowRecord) {
+  async onActionRow(action: keyof IResourceActionRowRecord) {
     if (!this.entryId) return;
     if (action === 'delete') {
       const mutation = this.$$modelResource.delete(this.entryId);
@@ -81,10 +81,10 @@ export class ControllerPageEntry extends BeanControllerPageBase {
       resource: this.$params.resource,
       id: this.entryId,
       permissions,
-      onActionTable: (action: keyof TypeResourceActionTableRecord) => {
+      onActionTable: (action: keyof IResourceActionTableRecord) => {
         return this.onActionTable(action);
       },
-      onActionRow: (action: keyof TypeResourceActionRowRecord) => {
+      onActionRow: (action: keyof IResourceActionRowRecord) => {
         return this.onActionRow(action);
       },
     };

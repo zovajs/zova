@@ -1,32 +1,24 @@
-/** table */
+import 'zova-module-a-openapi';
+import { IResourceActionRowOptionsBase, IResourceActionTableOptionsBase } from 'zova-module-a-openapi';
 
-import { TableIdentity } from 'table-identity';
+declare module 'zova-module-a-openapi' {
+  /** table */
+  export interface IResourceActionTableRecord {
+    create?: IResourceActionTableOptionsCreate;
+    operationsTable?: IResourceActionTableOptionsOperationsTable;
+  }
 
-export interface IResourceActionTableRecord {
-  create?: IResourceActionTableOptionsCreate;
-  operationsTable?: IResourceActionTableOptionsOperationsTable;
-}
-
-export interface IResourceActionTableOptionsBase {
-  resource?: string;
+  /** row */
+  export interface IResourceActionRowRecord {
+    actionView?: IResourceActionRowOptionsView;
+    actionUpdate?: IResourceActionRowOptionsUpdate;
+    actionDelete?: IResourceActionRowOptionsDelete;
+    actionOperationsRow?: IResourceActionRowOptionsOperationsRow;
+  }
 }
 
 export interface IResourceActionTableOptionsCreate extends IResourceActionTableOptionsBase {}
 export interface IResourceActionTableOptionsOperationsTable extends IResourceActionTableOptionsBase {}
-
-/** row */
-
-export interface IResourceActionRowRecord {
-  actionView?: IResourceActionRowOptionsView;
-  actionUpdate?: IResourceActionRowOptionsUpdate;
-  actionDelete?: IResourceActionRowOptionsDelete;
-  actionOperationsRow?: IResourceActionRowOptionsOperationsRow;
-}
-
-export interface IResourceActionRowOptionsBase {
-  resource?: string;
-  id?: TableIdentity;
-}
 
 export interface IResourceActionRowOptionsView extends IResourceActionRowOptionsBase {}
 

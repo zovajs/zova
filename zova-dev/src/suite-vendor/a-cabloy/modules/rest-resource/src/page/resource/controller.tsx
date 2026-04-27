@@ -3,7 +3,7 @@ import { z } from 'zod';
 import { BeanControllerPageBase, Use, useCustomRef, usePrepareArg } from 'zova';
 import { ZovaJsx } from 'zova-jsx';
 import { Controller } from 'zova-module-a-bean';
-import { TypeResourceActionRowRecord, TypeResourceActionTableRecord } from 'zova-module-a-openapi';
+import { IResourceActionRowRecord, IResourceActionTableRecord } from 'zova-module-a-openapi';
 import { ITableProvider } from 'zova-module-a-table';
 import { ZPage } from 'zova-module-home-base';
 
@@ -35,22 +35,16 @@ export class ControllerPageResource extends BeanControllerPageBase {
     this.pageWrapperScope = this._getPageWrapperScope();
     // jsx
     this.pageWrapperCelEnv = this._getPageWrapperCelEnv();
-    this.zovaJsx = this.app.bean._newBeanSimple(
-      ZovaJsx,
-      false,
-      this.tableProvider.components,
-      this.tableProvider.actions,
-      this.pageWrapperCelEnv,
-    );
+    this.zovaJsx = this.app.bean._newBeanSimple(ZovaJsx, false, this.tableProvider.components, this.tableProvider.actions, this.pageWrapperCelEnv);
   }
 
   get resource() {
     return this.$params.resource;
   }
 
-  async onActionTable(_action: keyof TypeResourceActionTableRecord) {}
+  async onActionTable(_action: keyof IResourceActionTableRecord) {}
 
-  async onActionRow(action: keyof TypeResourceActionRowRecord, id: string) {
+  async onActionRow(action: keyof IResourceActionRowRecord, id: string) {
     if (action === 'delete') {
       const mutation = this.$$modelResource.delete(id);
       await mutation.mutateAsync();
@@ -70,10 +64,10 @@ export class ControllerPageResource extends BeanControllerPageBase {
     return {
       resource: this.$$modelResource.resource,
       permissions,
-      onActionTable: (action: keyof TypeResourceActionTableRecord) => {
+      onActionTable: (action: keyof IResourceActionTableRecord) => {
         return this.onActionTable(action);
       },
-      onActionRow: (action: keyof TypeResourceActionRowRecord, id: string) => {
+      onActionRow: (action: keyof IResourceActionRowRecord, id: string) => {
         return this.onActionRow(action, id);
       },
     };

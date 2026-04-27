@@ -7,3 +7,4 @@ export * from './rest.js';
 export * from './schema.js';
 export * from './sdk.js';
 export * from './table.js';
+export * from './actions.js';

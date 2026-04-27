@@ -4,8 +4,9 @@ import type { TypeRenderComponentJsx } from 'zova-jsx';
 
 import 'openapi3-ts/oas30';
 import 'openapi3-ts/oas31';
+import { IResourceActionRowRecord } from './actions.js';
 
-export interface ISchemaRenderComponentPresetRecord {}
+export interface ISchemaRenderComponentPresetRecord extends IResourceActionRowRecord {}
 
 export interface ISchemaObjectExtensionFieldRest {
   render?: TypeFormFieldRenderComponentNormal | TypeTableCellRenderComponentNormal;
@@ -72,13 +73,8 @@ export type TypeRenderComponentPreset =
 // | 'url';
 
 // form
-export type TypeFormFieldRenderComponentNormal =
-  | Constructable<ComponentPublicInstance>
-  | keyof IComponentRecord
-  | TypeRenderComponentPreset;
-export type TypeFormFieldRenderComponent =
-  | TypeFormFieldRenderComponentNormal
-  | TypeRenderComponentJsx;
+export type TypeFormFieldRenderComponentNormal = Constructable<ComponentPublicInstance> | keyof IComponentRecord | TypeRenderComponentPreset;
+export type TypeFormFieldRenderComponent = TypeFormFieldRenderComponentNormal | TypeRenderComponentJsx;
 export type TypeFormFieldRenderComponentProvider =
   | Constructable
   | Constructable<ComponentPublicInstance>
@@ -93,15 +89,10 @@ export type TypeTableCellRenderComponentNormal =
   | keyof IComponentRecord
   | keyof TypeBeanRecordGeneralSelector<'tableCell'>
   | TypeRenderComponentPreset;
-export type TypeTableCellRenderComponent =
-  | TypeTableCellRenderComponentNormal
-  | TypeRenderComponentJsx;
+export type TypeTableCellRenderComponent = TypeTableCellRenderComponentNormal | TypeRenderComponentJsx;
 export type TypeTableCellRenderComponentProvider =
   | Constructable<ComponentPublicInstance>
   | keyof IComponentRecord
   | keyof TypeBeanRecordGeneralSelector<'tableCell'>
   | 'text';
-export type TypeTableRenderComponentProvider =
-  | Constructable<ComponentPublicInstance>
-  | keyof IComponentRecord
-  | TypeRenderComponentJsx;
+export type TypeTableRenderComponentProvider = Constructable<ComponentPublicInstance> | keyof IComponentRecord | TypeRenderComponentJsx;
