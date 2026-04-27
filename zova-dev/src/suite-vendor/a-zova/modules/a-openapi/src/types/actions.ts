@@ -1,8 +1,8 @@
 import { TableIdentity } from 'table-identity';
 
-export interface IResourceActionTableRecord1 {}
+export interface IResourceActionTableRecord {}
 
-export interface IResourceActionRowRecord1 {}
+export interface IResourceActionRowRecord {}
 
 export interface IResourceActionTableOptionsBase {
   resource?: string;

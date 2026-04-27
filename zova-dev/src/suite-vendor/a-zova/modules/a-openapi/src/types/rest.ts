@@ -4,9 +4,8 @@ import type { TypeRenderComponentJsx } from 'zova-jsx';
 
 import 'openapi3-ts/oas30';
 import 'openapi3-ts/oas31';
-import { IResourceActionRowRecord } from './actions.js';
 
-export interface ISchemaRenderComponentPresetRecord extends IResourceActionRowRecord {}
+export interface ISchemaRenderComponentPresetRecord {}
 
 export interface ISchemaObjectExtensionFieldRest {
   render?: TypeFormFieldRenderComponentNormal | TypeTableCellRenderComponentNormal;

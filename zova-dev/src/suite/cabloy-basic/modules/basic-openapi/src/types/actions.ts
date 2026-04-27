@@ -4,17 +4,24 @@ import { IResourceActionRowOptionsBase, IResourceActionTableOptionsBase } from '
 declare module 'zova-module-a-openapi' {
   /** table */
   export interface IResourceActionTableRecord {
-    create?: IResourceActionTableOptionsCreate;
-    operationsTable?: IResourceActionTableOptionsOperationsTable;
+    create?: never;
+    operationsTable?: never;
   }
 
   /** row */
   export interface IResourceActionRowRecord {
-    actionView?: IResourceActionRowOptionsView;
-    actionUpdate?: IResourceActionRowOptionsUpdate;
-    actionDelete?: IResourceActionRowOptionsDelete;
-    actionOperationsRow?: IResourceActionRowOptionsOperationsRow;
+    view?: never;
+    update?: never;
+    delete?: never;
+    operationsRow?: never;
   }
+}
+
+export interface IResourceActionComponentRowRecord {
+  actionView?: IResourceActionRowOptionsView;
+  actionUpdate?: IResourceActionRowOptionsUpdate;
+  actionDelete?: IResourceActionRowOptionsDelete;
+  actionOperationsRow?: IResourceActionRowOptionsOperationsRow;
 }
 
 export interface IResourceActionTableOptionsCreate extends IResourceActionTableOptionsBase {}

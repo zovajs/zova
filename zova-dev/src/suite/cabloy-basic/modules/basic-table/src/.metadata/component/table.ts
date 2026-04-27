@@ -7,23 +7,26 @@ import type { ControllerTableProps } from '../../component/table/controller.jsx'
 
 import { ControllerTable } from '../../component/table/controller.jsx';
 import { RenderTable } from '../../component/table/render.jsx';
-export type TypeControllerTablePublicProps = {
-  controllerRef?: (ref: ControllerTable) => void;
-} & ControllerTableProps;
+export type TypeControllerTablePublicProps<TData extends {} = {}> = {
+  controllerRef?: (ref: ControllerTable<TData>) => void;
+} & ControllerTableProps<TData>;
 
-type ControllerInnerProps = TypeControllerInnerProps<
-  ControllerTableProps,
+type ControllerInnerProps<TData extends {} = {}> = TypeControllerInnerProps<
+  ControllerTableProps<TData>,
   keyof typeof ControllerTable.$propsDefault
 >;
 declare module 'zova-module-basic-table' {
-  export interface ControllerTable {
-    $props: ControllerInnerProps;
+  export interface ControllerTable<TData extends {} = {}> {
+    $props: ControllerInnerProps<TData>;
   }
 }
 declare module 'zova-module-basic-table' {
-  export interface RenderTable extends ControllerTable {}
+  export interface RenderTable<TData extends {} = {}> extends ControllerTable<TData> {}
 }
-export const ZTable = defineComponent((_props: TypeControllerTablePublicProps) => {
-  useController(ControllerTable, RenderTable, undefined);
-  return () => {};
-}, prepareComponentOptions());
+export const ZTable = defineComponent(
+  <TData extends {} = {}>(_props: TypeControllerTablePublicProps<TData>) => {
+    useController(ControllerTable, RenderTable, undefined);
+    return () => {};
+  },
+  prepareComponentOptions(),
+);
