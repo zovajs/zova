@@ -1,7 +1,7 @@
 import { QBtn, QCard, QSeparator } from 'quasar';
 import { BeanRenderBase } from 'zova';
 import { Render } from 'zova-module-a-bean';
-import { ZForm, ZFormField, ZFormFieldBlank, ZFormFieldWrapper } from 'zova-module-a-form';
+import { ZForm, ZFormFieldBlank, ZFormFieldWrapper } from 'zova-module-a-form';
 import { ZIcon } from 'zova-module-a-icon';
 
 @Render()
@@ -57,8 +57,8 @@ export class RenderPageLogin extends BeanRenderBase {
           window.alert(error.message);
         }}
       >
-        <ZFormField name="username" iconPrefix=":daisy:person" label={this.scope.locale.YourUsername()}></ZFormField>
-        <ZFormField name="password" inputType="password" iconPrefix=":daisy:lock" label={this.scope.locale.YourPassword()}></ZFormField>
+        <ZFormFieldWrapper name="username" iconPrefix=":daisy:person" label={this.scope.locale.YourUsername()}></ZFormFieldWrapper>
+        <ZFormFieldWrapper name="password" inputType="password" iconPrefix=":daisy:lock" label={this.scope.locale.YourPassword()}></ZFormFieldWrapper>
         <ZFormFieldWrapper name="captcha"></ZFormFieldWrapper>
         <ZFormFieldBlank
           slotDefault={$$form => {
