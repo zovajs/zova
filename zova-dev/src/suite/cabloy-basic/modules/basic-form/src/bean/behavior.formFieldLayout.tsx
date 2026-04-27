@@ -24,7 +24,8 @@ export class BehaviorFormFieldLayout extends BeanBehaviorBase<
 
   protected render(renderContext: IFormFieldRenderContext, next: NextBehavior<IBehaviorPropsOutputFormFieldLayout>): VNode {
     const field = this.$$formField.field;
-    this._patchProps(renderContext);
+    // needHandleBorder
+    renderContext.propsBucket.needHandleBorder = !renderContext.propsBucket.inline;
     const vnode = next(renderContext);
     const error = field.state.meta.errors[0] as z.ZodError | undefined;
     if (renderContext.propsBucket.inline) {
@@ -71,23 +72,5 @@ export class BehaviorFormFieldLayout extends BeanBehaviorBase<
         {invokeProp(renderContext.propsBucket.footer)}
       </fieldset>
     );
-  }
-
-  private _patchProps(renderContext: IFormFieldRenderContext) {
-    const field = this.$$formField.field;
-    if (renderContext.propsBucket.renderProvider === ('input' as any)) {
-      this._patchProps_input(field, renderContext);
-    }
-  }
-
-  private _patchProps_input(field: TypeFormField, renderContext: IFormFieldRenderContext) {
-    if (!renderContext.propsBucket.inline) {
-      renderContext.props.class = classes(
-        renderContext.props.class,
-        'input',
-        this.$options.bordered && 'input-bordered',
-        !field.state.meta.isValid && 'input-error',
-      );
-    }
   }
 }
