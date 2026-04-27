@@ -17,6 +17,11 @@ declare module 'zova-module-a-openapi' {
   }
 }
 
+export interface IResourceActionComponentTableRecord {
+  actionCreate?: IResourceActionTableOptionsCreate;
+  actionOperationsTable?: IResourceActionTableOptionsOperationsTable;
+}
+
 export interface IResourceActionComponentRowRecord {
   actionView?: IResourceActionRowOptionsView;
   actionUpdate?: IResourceActionRowOptionsUpdate;
