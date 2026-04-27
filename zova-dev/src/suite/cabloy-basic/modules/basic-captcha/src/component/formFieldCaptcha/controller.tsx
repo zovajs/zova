@@ -79,7 +79,6 @@ export class ControllerFormFieldCaptcha extends BeanControllerBase {
       <>
         <ZFormField
           {...this.$props}
-          render="text"
           slotDefault={({ props }, $$formField) => {
             const propsNew: IInputOptions = {
               ...props,
@@ -92,7 +91,7 @@ export class ControllerFormFieldCaptcha extends BeanControllerBase {
                 if (this.captchaData) {
                   this.captchaData.token = token;
                 }
-                $$formField.field.api.handleChange({
+                $$formField.setValue({
                   id: this.captchaData?.id,
                   token,
                 });

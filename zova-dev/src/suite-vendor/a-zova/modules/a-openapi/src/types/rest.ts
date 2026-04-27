@@ -50,17 +50,16 @@ export type TypeFormSchemaScene = 'form' | 'filter';
 export const renderFormFieldTopPropsSystem = ['order', 'table', 'form', 'filter'];
 export const renderTableColumnTopPropsSystem = ['order', 'table', 'form', 'filter', 'displayValue'];
 
-export type TypeRenderComponentPreset =
-  | keyof ISchemaRenderComponentPresetRecord
-  | 'text'
-  | 'captcha'
-  | 'currency'
-  | 'date'
-  | 'dateRange'
-  | 'toggle'
-  | 'select'
-  | 'textarea'
-  | 'resourcePicker';
+export type TypeRenderComponentPreset = keyof ISchemaRenderComponentPresetRecord;
+// | 'text'
+// | 'captcha'
+// | 'currency'
+// | 'date'
+// | 'dateRange'
+// | 'toggle'
+// | 'select'
+// | 'textarea'
+// | 'resourcePicker';
 // | 'checkbox';
 // | 'radio'
 // | 'switch';

@@ -46,6 +46,7 @@ export type TypeFormFieldDisplayValueUpdateTiming = 'input' | 'change';
 export interface IFormFieldOptionsBase {
   render?: TypeRenderComponentPreset;
   class?: any;
+  value?: any;
   displayValue?: any;
   displayValueUpdateTiming?: TypeFormFieldDisplayValueUpdateTiming;
   onSetDisplayValue?: TypeFormFieldOnSetDisplayValue;
@@ -93,9 +94,7 @@ export interface IFormFieldRenderContextPropsBucket<TParentData = {}> extends Om
   // renderFlattern?: TypeFormFieldRenderComponent;
   renderProvider?: TypeFormFieldRenderComponentProvider;
   needHandleBorder?: boolean;
-  value?: any;
   readonly?: boolean;
-  placeholder?: string;
 }
 
 export interface IFormFieldRenderContext<TParentData = {}> {

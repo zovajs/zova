@@ -1,9 +1,9 @@
 import type { CurrencyOptions } from '@zhennann/currency';
 import type { IComponentOptions } from 'zova';
 
-import { BeanControllerBase } from 'zova';
+import { BeanControllerBase, Use } from 'zova';
 import { Controller } from 'zova-module-a-bean';
-import { IFormFieldPresetOptions, ZFormField } from 'zova-module-a-form';
+import { ControllerForm, IFormFieldPresetOptions, ZFormFieldWrapper } from 'zova-module-a-form';
 
 import { currencyFormat, currencyUpdate } from '../../lib/utils.js';
 
@@ -16,39 +16,54 @@ export class ControllerFormFieldCurrency extends BeanControllerBase {
 
   private _valueKeyboardInput: string | undefined;
 
+  @Use({ injectionScope: 'host' })
+  $$form: ControllerForm;
+
   protected async __init__() {}
 
   protected render() {
     const currencyOptions = this.$props.preset?.currency;
-    const displayValue = this._displayValuePatch(currencyOptions);
+    const value = this._displayValuePatch(currencyOptions);
     return (
-      <ZFormField
+      <ZFormFieldWrapper
         {...this.$props}
-        render="text"
-        displayValue={displayValue}
-        displayValueUpdateTiming="input"
-        onSetDisplayValue={value => {
-          this._valueKeyboardInput = value;
-          // valuePatch maybe null
-          const valuePatch = currencyUpdate(value, currencyOptions);
-          return valuePatch !== undefined ? (valuePatch ?? undefined) : value;
+        render="input"
+        preset={{
+          input: {
+            value,
+            onInput: (e: Event) => {
+              const value = (e.target as HTMLInputElement).value;
+              this._valueKeyboardInput = value;
+              // valuePatch maybe null
+              const valuePatch = currencyUpdate(value, currencyOptions);
+              const valueNew = valuePatch !== undefined ? (valuePatch ?? undefined) : value;
+              this.$$form.setFieldValue(this.$props.name!, valueNew);
+            },
+            onChange: (e: Event) => {
+              const value = (e.target as HTMLInputElement).value;
+              const valueInputPatch = currencyUpdate(value, currencyOptions);
+              if (valueInputPatch !== undefined) {
+                this._valueKeyboardInput = undefined;
+              }
+            },
+          },
         }}
-      ></ZFormField>
+      ></ZFormFieldWrapper>
     );
   }
 
   private _displayValuePatch(currencyOptions?: CurrencyOptions) {
-    if (this._valueKeyboardInput === undefined) return this._getDisplayValue(currencyOptions);
+    if (this._valueKeyboardInput === undefined) return this._getValue(currencyOptions);
     // hold the current input value if invalid
     const valueInputPatch = currencyUpdate(this._valueKeyboardInput, currencyOptions);
     if (valueInputPatch === undefined) return this._valueKeyboardInput;
     // hold the current input value if equal
-    if (valueInputPatch === this.$props.displayValue) return this._valueKeyboardInput;
+    if (valueInputPatch === this.$props.value) return this._valueKeyboardInput;
     // default
-    return this._getDisplayValue(currencyOptions);
+    return this._getValue(currencyOptions);
   }
 
-  private _getDisplayValue(currencyOptions?: CurrencyOptions) {
-    return currencyFormat(this.$props.displayValue, currencyOptions);
+  private _getValue(currencyOptions?: CurrencyOptions) {
+    return currencyFormat(this.$props.value, currencyOptions);
   }
 }
