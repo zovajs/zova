@@ -1,6 +1,7 @@
 import type { IComponentOptions } from 'zova';
 
 import { pickObject } from '@cabloy/utils';
+import { classes } from 'typestyle';
 import { BeanControllerBase } from 'zova';
 import { Controller } from 'zova-module-a-bean';
 import { IFormFieldPresetOptions, ZFormField } from 'zova-module-a-form';
@@ -20,6 +21,9 @@ export class ControllerFormFieldInput extends BeanControllerBase {
       <ZFormField
         {...this.$props}
         slotDefault={({ propsBucket, props }, $$formField) => {
+          const className = !propsBucket.needHandleBorder
+            ? props.class
+            : classes(props.class, 'input', propsBucket.bordered && 'input-bordered', !$$formField.field.state.meta.isValid && 'input-error');
           const propsNew: IInputOptions = {
             type: 'text',
             placeholder: undefined,
@@ -32,6 +36,7 @@ export class ControllerFormFieldInput extends BeanControllerBase {
             ...pickObject(propsBucket, ['value']),
             ...props,
             ...this.$props.preset?.input,
+            class: className,
           };
           return <input {...propsNew}></input>;
         }}

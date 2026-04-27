@@ -1,6 +1,6 @@
 import type { VNode } from 'vue';
 import type { IDecoratorBehaviorOptions, NextBehavior } from 'zova-module-a-behavior';
-import type { ControllerFormField, IFormFieldRenderContext, TypeFormField } from 'zova-module-a-form';
+import type { ControllerFormField, IFormFieldRenderContext } from 'zova-module-a-form';
 
 import z from 'zod';
 import { Use } from 'zova';
@@ -25,7 +25,6 @@ export class BehaviorFormFieldLayoutLogin extends BeanBehaviorBase<
 
   protected render(renderContext: IBehaviorPropsInputFormFieldLayoutLogin, next: NextBehavior<IBehaviorPropsOutputFormFieldLayoutLogin>): VNode {
     const field = this.$$formField.field;
-    this._patchProps(renderContext);
     const vnode = next(renderContext);
     const iconPrefix = renderContext.propsBucket.iconPrefix;
     const error = field.state.meta.errors[0] as z.ZodError | undefined;
@@ -40,16 +39,5 @@ export class BehaviorFormFieldLayoutLogin extends BeanBehaviorBase<
         )}
       </label>
     );
-  }
-
-  private _patchProps(renderContext: IFormFieldRenderContext) {
-    const field = this.$$formField.field;
-    if (renderContext.propsBucket.renderProvider === 'basic-input:formFieldInput') {
-      this._patchProps_input(field, renderContext);
-    }
-  }
-
-  private _patchProps_input(_field: TypeFormField, _renderContext: IFormFieldRenderContext) {
-    // renderContext.props.class = classes(renderContext.props.class, 'input', !field.state.meta.isValid && 'input-error');
   }
 }
