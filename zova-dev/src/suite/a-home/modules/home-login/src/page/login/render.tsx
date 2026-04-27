@@ -1,6 +1,6 @@
 import { BeanRenderBase } from 'zova';
 import { Render } from 'zova-module-a-bean';
-import { ZForm, ZFormFieldWrapper } from 'zova-module-a-form';
+import { ZForm, ZFormFieldBlank, ZFormFieldWrapper } from 'zova-module-a-form';
 import { ZIcon } from 'zova-module-a-icon';
 
 @Render()
@@ -63,7 +63,7 @@ export class RenderPageLogin extends BeanRenderBase {
           iconPrefix=":daisy:lock"
         ></ZFormFieldWrapper>
         <ZFormFieldWrapper name="captcha"></ZFormFieldWrapper>
-        <ZFormFieldWrapper
+        <ZFormFieldBlank
           slotDefault={$$form => {
             console.log($$form.formState.isSubmitting);
             return (
@@ -72,7 +72,7 @@ export class RenderPageLogin extends BeanRenderBase {
               </button>
             );
           }}
-        ></ZFormFieldWrapper>
+        ></ZFormFieldBlank>
       </ZForm>
     );
   }

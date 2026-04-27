@@ -2,7 +2,7 @@ import { classes } from 'typestyle';
 import { z } from 'zod';
 import { BeanRenderBase } from 'zova';
 import { Render } from 'zova-module-a-bean';
-import { ZForm, ZFormField, ZFormFieldWrapper } from 'zova-module-a-form';
+import { ZForm, ZFormField, ZFormFieldBlank, ZFormFieldWrapper } from 'zova-module-a-form';
 import { ApiSchemaTestSsrDtoTestBodyPartial } from 'zova-module-home-api';
 
 @Render()
@@ -47,17 +47,18 @@ export class RenderPageToolOne extends BeanRenderBase {
   private _renderManual() {
     return (
       <ZForm data={this.formData} onSubmitData={data => this.onSubmit(data)}>
-        <ZFormField<ApiSchemaTestSsrDtoTestBodyPartial>
+        <ZFormFieldWrapper<ApiSchemaTestSsrDtoTestBodyPartial>
           name="name"
           label={`${this.scope.locale.YourName()}:`}
           validateOnDynamic={z.string().min(3)}
-        ></ZFormField>
+        ></ZFormFieldWrapper>
         <ZFormField
           name="name"
           slotDefault={({ propsBucket, props }, $$formField) => {
             return (
               <input
                 {...props}
+                class="input"
                 value={propsBucket.value}
                 onInput={(e: Event) => {
                   $$formField.setValue((e.target as HTMLInputElement).value);
@@ -72,7 +73,7 @@ export class RenderPageToolOne extends BeanRenderBase {
         <ZFormField name="name">
           <span>span: name</span>
         </ZFormField>
-        <ZFormFieldWrapper
+        <ZFormFieldBlank
           slotDefault={$$form => {
             return (
               <button disabled={$$form.formState.isSubmitting} type="submit" class="btn btn-primary">
@@ -80,7 +81,7 @@ export class RenderPageToolOne extends BeanRenderBase {
               </button>
             );
           }}
-        ></ZFormFieldWrapper>
+        ></ZFormFieldBlank>
       </ZForm>
     );
   }

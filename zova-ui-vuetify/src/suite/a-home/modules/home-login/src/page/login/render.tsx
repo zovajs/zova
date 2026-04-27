@@ -1,7 +1,7 @@
 import { VBtn, VCard, VCol, VDivider, VRow } from 'vuetify/components';
 import { BeanRenderBase } from 'zova';
 import { Render } from 'zova-module-a-bean';
-import { ZForm, ZFormField, ZFormFieldWrapper } from 'zova-module-a-form';
+import { ZForm, ZFormField, ZFormFieldBlank, ZFormFieldWrapper } from 'zova-module-a-form';
 import { $iconName } from 'zova-module-a-icon';
 
 import { $useLocale } from '../../.metadata/locales.js';
@@ -70,7 +70,7 @@ export class RenderPageLogin extends BeanRenderBase {
         <ZFormField name="username" iconPrefix=":daisy:person" label={this.scope.locale.YourUsername()}></ZFormField>
         <ZFormField name="password" inputType="password" iconPrefix=":daisy:lock" label={this.scope.locale.YourPassword()}></ZFormField>
         <ZFormFieldWrapper name="captcha"></ZFormFieldWrapper>
-        <ZFormFieldWrapper
+        <ZFormFieldBlank
           slotDefault={$$form => {
             return (
               <div class="d-flex justify-center">
@@ -80,7 +80,7 @@ export class RenderPageLogin extends BeanRenderBase {
               </div>
             );
           }}
-        ></ZFormFieldWrapper>
+        ></ZFormFieldBlank>
       </ZForm>
     );
   }
