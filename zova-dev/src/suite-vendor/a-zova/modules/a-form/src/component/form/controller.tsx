@@ -314,12 +314,11 @@ export class ControllerForm<TFormData extends {} = {}, TSubmitMeta = never> exte
 
   public renderField<K extends DeepKeys<TFormData>>(name: K, propsExtra?: IFormFieldOptions<TFormData>) {
     const property = this.getFieldProperty(name);
-    if (!property) return;
-    return this._renderField(property, propsExtra);
+    const key = property?.key ?? name;
+    return this._renderFieldByKey(key, propsExtra);
   }
 
-  protected _renderField(property: SchemaObject, propsExtra?: IFormFieldOptions<TFormData>) {
-    const key = property.key!;
+  protected _renderFieldByKey(key: string, propsExtra?: IFormFieldOptions<TFormData>) {
     // celScope
     const celScope = this.getFieldScope(key);
     const jsxRenderContext = this.getFieldJsxRenderContext(undefined, celScope);
