@@ -1,0 +1,29 @@
+import type { TypeControllerInnerProps } from 'zova';
+
+import { defineComponent } from 'vue';
+import { prepareComponentOptions, useController } from 'zova';
+
+import type { ControllerFormFieldInputProps } from '../../component/formFieldInput/controller.jsx';
+
+import { ControllerFormFieldInput } from '../../component/formFieldInput/controller.jsx';
+export type TypeControllerFormFieldInputPublicProps = {
+  controllerRef?: (ref: ControllerFormFieldInput) => void;
+} & ControllerFormFieldInputProps;
+
+type ControllerInnerProps = TypeControllerInnerProps<
+  ControllerFormFieldInputProps,
+  keyof typeof ControllerFormFieldInput.$propsDefault
+>;
+declare module 'zova-module-basic-form' {
+  export interface ControllerFormFieldInput {
+    $props: ControllerInnerProps;
+  }
+}
+
+export const ZFormFieldInput = defineComponent(
+  (_props: TypeControllerFormFieldInputPublicProps) => {
+    useController(ControllerFormFieldInput, undefined, undefined);
+    return () => {};
+  },
+  prepareComponentOptions(ControllerFormFieldInput.$componentOptions),
+);
