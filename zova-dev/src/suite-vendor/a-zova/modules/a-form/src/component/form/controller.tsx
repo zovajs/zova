@@ -27,14 +27,7 @@ import {
 } from 'zova-module-a-openapi';
 
 import { BeanControllerFormBase } from '../../lib/beanControllerFormBase.js';
-import {
-  IFormScope,
-  RevalidateLogicProps,
-  TypeForm,
-  TypeFormOnShowError,
-  TypeFormOnSubmit,
-  TypeFormOnSubmitInvalid,
-} from '../../types/form.js';
+import { IFormScope, RevalidateLogicProps, TypeForm, TypeFormOnShowError, TypeFormOnSubmit, TypeFormOnSubmitInvalid } from '../../types/form.js';
 import {
   constFieldProps,
   IFormFieldLayoutOptionsBase,
@@ -69,16 +62,10 @@ export interface ControllerFormProps<TFormData extends {} = {}, TSubmitMeta = ne
   slotHeader?: (form: ControllerForm<TFormData, TSubmitMeta>) => VNode;
   slotBody?: (children: VNode, form: ControllerForm<TFormData, TSubmitMeta>) => VNode;
   slotFooter?: (form: ControllerForm<TFormData, TSubmitMeta>) => VNode;
-  slotWrapper?: (
-    children: (VNode | undefined)[],
-    form: ControllerForm<TFormData, TSubmitMeta>,
-  ) => VNode;
+  slotWrapper?: (children: (VNode | undefined)[], form: ControllerForm<TFormData, TSubmitMeta>) => VNode;
 }
 @Controller()
-export class ControllerForm<
-  TFormData extends {} = {},
-  TSubmitMeta = never,
-> extends BeanControllerFormBase {
+export class ControllerForm<TFormData extends {} = {}, TSubmitMeta = never> extends BeanControllerFormBase {
   static $propsDefault = { formTag: 'form', schemaScene: 'form' };
 
   form: TypeForm<TFormData, TSubmitMeta>;
@@ -115,13 +102,7 @@ export class ControllerForm<
       return this.$sdk.loadSchemaProperties(this.schema, this.$props.schemaScene);
     });
     this.fieldCelEnv = this._getFieldCelEnv();
-    this.zovaJsx = this.app.bean._newBeanSimple(
-      ZovaJsx,
-      false,
-      this.formProvider.components,
-      this.formProvider.actions,
-      this.fieldCelEnv,
-    );
+    this.zovaJsx = this.app.bean._newBeanSimple(ZovaJsx, false, this.formProvider.components, this.formProvider.actions, this.fieldCelEnv);
     this.$watch(
       () => this.$props.data,
       (newValue, oldValue) => {
@@ -151,11 +132,7 @@ export class ControllerForm<
     return getBy(this.formState.values, name) ?? null;
   }
 
-  public setFieldValue<K extends DeepKeys<TFormData>>(
-    name: K,
-    value: any,
-    disableNotifyChanged?: boolean,
-  ) {
+  public setFieldValue<K extends DeepKeys<TFormData>>(name: K, value: any, disableNotifyChanged?: boolean) {
     this.form.setFieldValue(name, value);
     if (!disableNotifyChanged) {
       this.$props.onChanged?.(this.formState.values);
@@ -194,10 +171,7 @@ export class ControllerForm<
     return celEnv;
   }
 
-  public getFieldScope<K extends DeepKeys<TFormData>>(
-    name: K,
-    scopeExtra?: {},
-  ): IFormFieldScope<TFormData> {
+  public getFieldScope<K extends DeepKeys<TFormData>>(name: K, scopeExtra?: {}): IFormFieldScope<TFormData> {
     return objectAssignReactive({}, this.$props.formScope, {
       name,
       value: this.getFieldValue(name),
@@ -240,7 +214,15 @@ export class ControllerForm<
     celScope: IFormFieldScope<TFormData>,
     jsxRenderContext: {},
   ): IFormFieldRenderContextPropsBucket {
-    const props: any = { [constFieldProps]: true, key: name, name };
+    const props: any = {
+      [constFieldProps]: true,
+      key: name,
+      name,
+      value: celScope.value,
+    };
+    if (this.formMeta?.formMode === 'view') {
+      props.readonly = true;
+    }
     const property = this.getFieldProperty(name);
     if (!property) return props;
     const rest = property.rest;
@@ -268,9 +250,7 @@ export class ControllerForm<
     return isJsxComponent(render) ? cast(render).type : render;
   }
 
-  public getRenderProvider(
-    render: TypeFormFieldRenderComponent,
-  ): TypeFormFieldRenderComponentProvider {
+  public getRenderProvider(render: TypeFormFieldRenderComponent): TypeFormFieldRenderComponentProvider {
     let renderProvider = this.getRenderFlattern(render);
     if (typeof renderProvider === 'string') {
       renderProvider = this.formProvider.components?.[renderProvider] ?? renderProvider;
@@ -296,10 +276,7 @@ export class ControllerForm<
     // not use $useComputed
     return this.$useForm<TFormData, TSubmitMeta>({
       defaultValues: this.$props.data,
-      validationLogic:
-        this.$props.validateOnDynamic !== false
-          ? revalidateLogic(this.$props.validateOnDynamicLogic)
-          : undefined,
+      validationLogic: this.$props.validateOnDynamic !== false ? revalidateLogic(this.$props.validateOnDynamicLogic) : undefined,
       onSubmitInvalid: data => {
         this.$props.onSubmitInvalid?.(data, this);
       },
@@ -348,14 +325,17 @@ export class ControllerForm<
     return this.zovaJsx.render(componentOptions, props, celScope, jsxRenderContext);
   }
 
-  private _getFieldComponentOptionsTop(
-    render: TypeFormFieldRenderComponent,
-  ): TypeFormFieldRenderComponent {
+  private _getFieldComponentOptionsTop(render: TypeFormFieldRenderComponent): TypeFormFieldRenderComponent {
+    render = render ?? 'input';
     const renderProvider = this.getRenderProvider(render);
-    if (typeof renderProvider === 'string' && renderProvider.includes(':formField')) {
+    if (this.isComponentFormField(renderProvider)) {
       return render;
     }
     return this.formProvider.components?.formField ?? 'a-form:formField';
+  }
+
+  public isComponentFormField(renderProvider?: TypeFormFieldRenderComponentProvider) {
+    return typeof renderProvider === 'string' && renderProvider.includes(':formField');
   }
 
   private _handleError422(error: Error, cause: ValidationCause = 'submit') {
@@ -458,8 +438,7 @@ export class ControllerForm<
 }
 
 function parseIssues(error: Error) {
-  const issues: $ZodIssue[] =
-    typeof error.message === 'string' ? JSON.parse(error.message) : error.message;
+  const issues: $ZodIssue[] = typeof error.message === 'string' ? JSON.parse(error.message) : error.message;
   const fields = {};
   for (const issue of issues) {
     const key = issue.path.join('.');

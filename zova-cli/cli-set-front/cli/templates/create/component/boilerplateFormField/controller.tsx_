@@ -1,10 +1,10 @@
 import type { IComponentOptions } from 'zova';
-import type { IFormFieldOptions } from 'zova-module-a-form';
+import type { IFormFieldComponentOptions } from 'zova-module-a-form';
 import { BeanControllerBase } from 'zova';
 import { Controller } from 'zova-module-a-bean';
 import { ZFormField } from 'zova-module-a-form';
 
-export interface Controller<%=argv.nameMeta.fullCapitalize%>Props extends IFormFieldOptions {}
+export interface Controller<%=argv.nameMeta.fullCapitalize%>Props extends IFormFieldComponentOptions {}
 
 @Controller()
 export class Controller<%=argv.nameMeta.fullCapitalize%> extends BeanControllerBase {

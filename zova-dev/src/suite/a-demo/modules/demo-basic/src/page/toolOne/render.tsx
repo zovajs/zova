@@ -54,8 +54,19 @@ export class RenderPageToolOne extends BeanRenderBase {
         ></ZFormField>
         <ZFormField
           name="name"
-          slotDefault={({ props }) => {
-            return <input name={props.name} value={props.value} onInput={props.onInput} onBlur={props.onBlur}></input>;
+          slotDefault={({ propsBucket, props }, $$formField) => {
+            return (
+              <input
+                {...props}
+                value={propsBucket.value}
+                onInput={(e: Event) => {
+                  $$formField.setValue((e.target as HTMLInputElement).value);
+                }}
+                onBlur={() => {
+                  $$formField.handleBlur();
+                }}
+              ></input>
+            );
           }}
         ></ZFormField>
         <ZFormField name="name">

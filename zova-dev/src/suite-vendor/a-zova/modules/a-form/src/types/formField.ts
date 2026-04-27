@@ -45,25 +45,28 @@ export type TypeFormFieldDisplayValueUpdateTiming = 'input' | 'change';
 
 export interface IFormFieldOptionsBase {
   render?: TypeRenderComponentPreset;
+  value?: any;
+  readonly?: boolean;
   displayValue?: any;
   displayValueUpdateTiming?: TypeFormFieldDisplayValueUpdateTiming;
   onSetDisplayValue?: TypeFormFieldOnSetDisplayValue;
   disableNotifyChanged?: boolean;
   class?: any;
   placeholder?: string;
-  readonly?: boolean;
   inputType?: HTMLInputElementType;
   validateOnDynamic?: boolean | z.ZodType;
   validateOnChange?: boolean | z.ZodType;
   validateOnBlur?: boolean | z.ZodType;
-  onChange?: (e: Event) => void; // allow set to null, but not provide null type
-  onInput?: (e: Event) => void; // allow set to null, but not provide null type
-  onBlur?: (e: Event) => void; // allow set to null, but not provide null type
+  // onChange?: (e: Event) => void; // allow set to null, but not provide null type
+  // onInput?: (e: Event) => void; // allow set to null, but not provide null type
+  // onBlur?: (e: Event) => void; // allow set to null, but not provide null type
 }
 
-export interface IFormFieldPresetOptions<TParentData = {}> extends IFormFieldOptions<TParentData> {
+export interface IFormFieldPresetOptions<TParentData = {}> extends IFormFieldComponentOptions<TParentData> {
   preset?: ISchemaRenderComponentPresetRecord;
 }
+
+export interface IFormFieldComponentOptions<TParentData = {}> extends Partial<IFormFieldOptions<TParentData>> {}
 
 export interface IFormFieldOptions<TParentData = {}>
   extends TypeBehaviorFormFieldOptions<TParentData>, IFormFieldOptionsBase, IFormFieldLayoutOptionsBase {
@@ -73,15 +76,21 @@ export interface IFormFieldOptions<TParentData = {}>
 
 export interface IFormFieldRenderContextProps {
   name?: string;
-  value?: any;
-  type?: any; // not use string for quasar
-  readonly?: boolean;
-  placeholder?: string;
   class?: any;
-  onChange?: (e: Event) => void;
-  onInput?: (e: Event) => void;
-  onBlur?: (e: Event) => void;
+  readonly?: boolean;
 }
+
+// export interface IFormFieldRenderContextProps {
+//   name?: string;
+//   value?: any;
+//   type?: any; // not use string for quasar
+//   readonly?: boolean;
+//   placeholder?: string;
+//   class?: any;
+//   onChange?: (e: Event) => void;
+//   onInput?: (e: Event) => void;
+//   onBlur?: (e: Event) => void;
+// }
 
 export interface IFormFieldRenderContextPropsBucket<TParentData = {}> extends Omit<IFormFieldOptions<TParentData>, 'render'> {
   render: TypeFormFieldRenderComponent;

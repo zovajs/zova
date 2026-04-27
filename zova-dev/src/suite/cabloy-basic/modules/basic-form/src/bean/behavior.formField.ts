@@ -1,20 +1,10 @@
-import type {
-  ControllerFormField,
-  IFormFieldRenderContext,
-  IFormFieldRenderContextProps,
-  IFormMeta,
-  TypeFormField,
-} from 'zova-module-a-form';
+import type { ControllerFormField, IFormFieldRenderContext, IFormFieldRenderContextProps, IFormMeta, TypeFormField } from 'zova-module-a-form';
 
-import { isNil } from '@cabloy/utils';
+import { isEmptyObject, isNil } from '@cabloy/utils';
 import { VNode } from 'vue';
 import { Use } from 'zova';
-import {
-  BeanBehaviorBase,
-  Behavior,
-  IDecoratorBehaviorOptions,
-  NextBehavior,
-} from 'zova-module-a-behavior';
+import { isJsxComponent } from 'zova-jsx';
+import { BeanBehaviorBase, Behavior, IDecoratorBehaviorOptions, NextBehavior } from 'zova-module-a-behavior';
 
 export interface IBehaviorPropsInputFormField extends IFormFieldRenderContext {}
 
@@ -23,80 +13,42 @@ export interface IBehaviorPropsOutputFormField extends IBehaviorPropsInputFormFi
 export interface IBehaviorOptionsFormField extends IDecoratorBehaviorOptions {}
 
 @Behavior<IBehaviorOptionsFormField>()
-export class BehaviorFormField extends BeanBehaviorBase<
-  IBehaviorOptionsFormField,
-  IBehaviorPropsInputFormField,
-  IBehaviorPropsOutputFormField
-> {
+export class BehaviorFormField extends BeanBehaviorBase<IBehaviorOptionsFormField, IBehaviorPropsInputFormField, IBehaviorPropsOutputFormField> {
   @Use({ injectionScope: 'host' })
   $$formField: ControllerFormField;
 
-  protected render(
-    renderContext: IFormFieldRenderContext,
-    next: NextBehavior<IBehaviorPropsOutputFormField>,
-  ): VNode {
+  protected render(renderContext: IFormFieldRenderContext, next: NextBehavior<IBehaviorPropsOutputFormField>): VNode {
     this._patchProps(renderContext);
     return next(renderContext);
   }
 
   private _patchProps(renderContext: IFormFieldRenderContext) {
+    const $$form = this.$$formField.$$form;
     const formMeta = this.$$formField.formMeta;
     const field = this.$$formField.field;
-    if (renderContext.propsBucket.renderProvider === 'input') {
-      this._patchProps_input(formMeta, field, renderContext);
+    const needPatch = !isJsxComponent(renderContext.propsBucket.render) || $$form.isComponentFormField(renderContext.propsBucket.renderProvider);
+    if (!needPatch) return;
+    // propsPatch
+    let propsPatch = this._patchProps_general(formMeta, field, renderContext);
+    // merge
+    if (!isEmptyObject(propsPatch)) {
+      renderContext.props = Object.assign({}, propsPatch, renderContext.props);
     }
   }
 
-  private _patchProps_general(
-    formMeta: IFormMeta | undefined,
-    _field: TypeFormField,
-    renderContext: IFormFieldRenderContext,
-  ) {
+  private _patchProps_general(formMeta: IFormMeta | undefined, _field: TypeFormField, renderContext: IFormFieldRenderContext) {
     const { propsBucket } = renderContext;
-    const propsPatch: IFormFieldRenderContextProps = {
-      value: propsBucket.displayValue,
-    };
+    const propsPatch: IFormFieldRenderContextProps = {};
+    // class
+    if (!isNil(propsBucket.class)) {
+      propsPatch.class = propsBucket.class;
+    }
+    // readonly
     if (!isNil(propsBucket.readonly)) {
       propsPatch.readonly = propsBucket.readonly;
     } else if (formMeta?.formMode === 'view') {
       propsPatch.readonly = true;
     }
     return propsPatch;
-  }
-
-  private _patchProps_input(
-    formMeta: IFormMeta | undefined,
-    field: TypeFormField,
-    renderContext: IFormFieldRenderContext,
-  ) {
-    const { propsBucket } = renderContext;
-    const renderFlattern = propsBucket.renderFlattern;
-    const propsGeneral = this._patchProps_general(formMeta, field, renderContext);
-    const inputType = this.$$formField.normalizeInputType(renderFlattern, propsBucket.inputType);
-    const onSetDisplayValueDefault = (e: Event) => {
-      this.$$formField.setDisplayValue((e.target as HTMLInputElement).value);
-    };
-    const propsPatch: IFormFieldRenderContextProps = {
-      type: inputType,
-      onChange:
-        propsBucket.onChange !== undefined
-          ? (propsBucket.onChange ?? undefined)
-          : propsBucket.displayValueUpdateTiming === 'change'
-            ? onSetDisplayValueDefault
-            : undefined,
-      onInput:
-        propsBucket.onInput !== undefined
-          ? (propsBucket.onInput ?? undefined)
-          : propsBucket.displayValueUpdateTiming !== 'change'
-            ? onSetDisplayValueDefault
-            : undefined,
-      onBlur:
-        propsBucket.onBlur !== undefined
-          ? (propsBucket.onBlur ?? undefined)
-          : (_e: Event) => {
-              field.api.handleBlur();
-            },
-    };
-    renderContext.props = Object.assign({}, propsGeneral, propsPatch, renderContext.props);
   }
 }

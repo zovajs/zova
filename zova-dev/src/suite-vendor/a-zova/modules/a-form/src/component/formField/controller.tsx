@@ -78,7 +78,7 @@ export class ControllerFormField<TParentData extends {} = {}> extends BeanContro
   }
 
   public get name() {
-    return this.$props.name;
+    return this.$props.name!;
   }
 
   public get property() {
@@ -119,15 +119,16 @@ export class ControllerFormField<TParentData extends {} = {}> extends BeanContro
     return this.$$form.setFieldValue(this.name, value, disableNotifyChanged);
   }
 
+  public handleBlur() {
+    this.field.api.handleBlur();
+  }
+
   public getRenderContext(): IFormFieldRenderContext<TParentData> {
     const name = this.name;
     // propsBucket
     const propsBucket = this.propsBucket;
     // props
     const props: IFormFieldRenderContextProps = { name };
-    if (propsBucket.class) {
-      props.class = propsBucket.class;
-    }
     // celScope
     const celScope = this.$$form.getFieldScope(this.name, {
       displayValue: propsBucket.displayValue,

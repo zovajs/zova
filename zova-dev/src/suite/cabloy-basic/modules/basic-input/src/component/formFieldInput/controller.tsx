@@ -1,8 +1,10 @@
 import type { IComponentOptions } from 'zova';
 
+import { pickObject } from '@cabloy/utils';
 import { BeanControllerBase } from 'zova';
 import { Controller } from 'zova-module-a-bean';
 import { IFormFieldPresetOptions, ZFormField } from 'zova-module-a-form';
+import { IInputOptions } from 'zova-module-basic-openapi';
 
 export interface ControllerFormFieldInputProps extends IFormFieldPresetOptions {}
 
@@ -17,11 +19,54 @@ export class ControllerFormFieldInput extends BeanControllerBase {
     return (
       <ZFormField
         {...this.$props}
-        slotDefault={({ propsBucket }) => {
-          console.log(propsBucket);
-          return <div>Hello</div>;
+        slotDefault={({ propsBucket, props }, $$formField) => {
+          const propsNew: IInputOptions = {
+            type: 'text',
+            placeholder: undefined,
+            onInput: (e: Event) => {
+              $$formField.setValue((e.target as HTMLInputElement).value);
+            },
+            onBlur: () => {
+              $$formField.handleBlur();
+            },
+            ...pickObject(propsBucket, ['value']),
+            ...props,
+            ...this.$props.preset?.input,
+          };
+          return <input {...propsNew}></input>;
         }}
       ></ZFormField>
     );
   }
+
+  // private _patchProps_input(formMeta: IFormMeta | undefined, field: TypeFormField, renderContext: IFormFieldRenderContext) {
+  //   const { propsBucket } = renderContext;
+  //   const renderFlattern = propsBucket.renderFlattern;
+  //   const inputType = this.$$formField.normalizeInputType(renderFlattern, propsBucket.inputType);
+  //   const onSetDisplayValueDefault = (e: Event) => {
+  //     this.$$formField.setDisplayValue((e.target as HTMLInputElement).value);
+  //   };
+  //   const propsPatch: IFormFieldRenderContextProps = {
+  //     type: inputType,
+  //     onChange:
+  //       propsBucket.onChange !== undefined
+  //         ? (propsBucket.onChange ?? undefined)
+  //         : propsBucket.displayValueUpdateTiming === 'change'
+  //           ? onSetDisplayValueDefault
+  //           : undefined,
+  //     onInput:
+  //       propsBucket.onInput !== undefined
+  //         ? (propsBucket.onInput ?? undefined)
+  //         : propsBucket.displayValueUpdateTiming !== 'change'
+  //           ? onSetDisplayValueDefault
+  //           : undefined,
+  //     onBlur:
+  //       propsBucket.onBlur !== undefined
+  //         ? (propsBucket.onBlur ?? undefined)
+  //         : (_e: Event) => {
+  //             field.api.handleBlur();
+  //           },
+  //   };
+  //   renderContext.props = Object.assign({}, propsGeneral, propsPatch, renderContext.props);
+  // }
 }

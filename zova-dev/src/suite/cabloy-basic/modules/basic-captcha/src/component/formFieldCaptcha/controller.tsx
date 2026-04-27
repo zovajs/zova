@@ -1,8 +1,8 @@
 import { BeanControllerBase, ClientOnly, IComponentOptions, TypeEventOff, Use } from 'zova';
 import { Controller } from 'zova-module-a-bean';
-import { ControllerForm, IFormFieldPresetOptions, IFormFieldRenderContextProps, ZFormField } from 'zova-module-a-form';
+import { ControllerForm, IFormFieldPresetOptions, ZFormField } from 'zova-module-a-form';
 import { ToolV } from 'zova-module-a-zod';
-import { ICaptchaData } from 'zova-module-basic-openapi';
+import { ICaptchaData, IInputOptions } from 'zova-module-basic-openapi';
 
 export interface ControllerFormFieldCaptchaProps extends IFormFieldPresetOptions {}
 
@@ -68,7 +68,7 @@ export class ControllerFormFieldCaptcha extends BeanControllerBase {
   }
 
   private setFieldCaptchaData() {
-    this.$$form.setFieldValue(this.$props.name, {
+    this.$$form.setFieldValue(this.$props.name!, {
       id: this.captchaData?.id,
       token: this.captchaData?.token,
     });
@@ -81,7 +81,7 @@ export class ControllerFormFieldCaptcha extends BeanControllerBase {
           {...this.$props}
           render="text"
           slotDefault={({ props }, $$formField) => {
-            const propsNew: IFormFieldRenderContextProps = {
+            const propsNew: IInputOptions = {
               ...props,
               type: 'text',
               class: 'grow',
