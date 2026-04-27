@@ -1,34 +1,16 @@
 import type { VNode } from 'vue';
 
 import { compose } from '@cabloy/compose';
-import {
-  celEnvBase,
-  evaluateExpressions,
-  getProperty,
-  isEmptyObject,
-  isNil,
-  isPromise,
-} from '@cabloy/utils';
+import { celEnvBase, evaluateExpressions, getProperty, isEmptyObject, isNil, isPromise } from '@cabloy/utils';
 import { toUpperCaseFirstChar } from '@cabloy/word-utils';
 import { classes } from 'typestyle';
 import { createTextVNode, h } from 'vue';
 import { beanFullNameFromOnionName, BeanSimple, cast, objectAssignReactive } from 'zova-core';
 
-import type {
-  IFormProviderComponents,
-  TypeRenderComponent,
-  TypeRenderComponentJsx,
-  TypeRenderComponentJsxProps,
-} from '../types/rest.ts';
+import type { IFormProviderComponents, TypeRenderComponent, TypeRenderComponentJsx, TypeRenderComponentJsxProps } from '../types/rest.ts';
 
 import { renderFieldJsxPropsSystem } from './const.ts';
-import {
-  isJsxComponent,
-  isJsxEvent,
-  isNativeElement,
-  isZovaComponent,
-  normalizePropName,
-} from './utils.ts';
+import { isJsxComponent, isJsxEvent, isNativeElement, isZovaComponent, normalizePropName } from './utils.ts';
 
 type CelEnv = typeof celEnvBase;
 
@@ -38,11 +20,7 @@ export class ZovaJsx extends BeanSimple {
   private _celEnv: CelEnv;
   private _transientObject: any;
 
-  constructor(
-    components?: IFormProviderComponents,
-    actions?: Record<string, string>,
-    celEnv?: CelEnv,
-  ) {
+  constructor(components?: IFormProviderComponents, actions?: Record<string, string>, celEnv?: CelEnv) {
     super();
     this._components = components;
     this._actions = actions;
@@ -94,12 +72,7 @@ export class ZovaJsx extends BeanSimple {
     return evaluateExpressions(expression, celScope, this.celEnv);
   }
 
-  public renderJsxOrCel(
-    componentOptions: TypeRenderComponent | any,
-    props: {} | undefined,
-    celScope: {},
-    renderContext: {},
-  ) {
+  public renderJsxOrCel(componentOptions: TypeRenderComponent | any, props: {} | undefined, celScope: {}, renderContext: {}) {
     // component
     if (isJsxComponent(componentOptions)) {
       const transientObject = this.transientObject;
@@ -122,12 +95,7 @@ export class ZovaJsx extends BeanSimple {
     return this.evaluateExpression(componentOptions, celScope);
   }
 
-  public renderEvent(
-    event: Event,
-    componentOptions: TypeRenderComponentJsx,
-    celScope: {},
-    renderContext: {},
-  ) {
+  public renderEvent(event: Event, componentOptions: TypeRenderComponentJsx, celScope: {}, renderContext: {}) {
     // props
     if (event && event instanceof Event) {
       const props: any = this.renderJsxProps(componentOptions.props, {}, celScope, renderContext);
@@ -140,13 +108,7 @@ export class ZovaJsx extends BeanSimple {
     return this.renderEventDirect(componentOptions, celScope, renderContext, eventRes);
   }
 
-  public renderEventDirect(
-    componentOptions: TypeRenderComponentJsx,
-    celScope: {},
-    renderContext: {},
-    eventRes: any[],
-    next?: Function,
-  ) {
+  public renderEventDirect(componentOptions: TypeRenderComponentJsx, celScope: {}, renderContext: {}, eventRes: any[], next?: Function) {
     const actions = this._collectEventActions(componentOptions, celScope, renderContext, eventRes);
     if (!actions || actions.length === 0) return next ? next(undefined) : undefined;
     const transientObject = this.transientObject;
@@ -158,12 +120,7 @@ export class ZovaJsx extends BeanSimple {
     });
   }
 
-  private _collectEventActions(
-    componentOptions: TypeRenderComponentJsx,
-    celScope: {},
-    renderContext: {},
-    eventRes: any[],
-  ) {
+  private _collectEventActions(componentOptions: TypeRenderComponentJsx, celScope: {}, renderContext: {}, eventRes: any[]) {
     let actionChildren = componentOptions.props?.children;
     if (!actionChildren) return;
     if (!Array.isArray(actionChildren)) actionChildren = [actionChildren];
@@ -175,30 +132,10 @@ export class ZovaJsx extends BeanSimple {
       const action = (actionRes: any, next: Function) => {
         if (isPromise(actionRes)) {
           return actionRes.then(actionRes => {
-            return this._actionHandler(
-              index,
-              actionChild,
-              actionRes,
-              next,
-              actionChildren,
-              celScope,
-              renderContext,
-              eventRes,
-              transientObject,
-            );
+            return this._actionHandler(index, actionChild, actionRes, next, actionChildren, celScope, renderContext, eventRes, transientObject);
           });
         } else {
-          return this._actionHandler(
-            index,
-            actionChild,
-            actionRes,
-            next,
-            actionChildren,
-            celScope,
-            renderContext,
-            eventRes,
-            transientObject,
-          );
+          return this._actionHandler(index, actionChild, actionRes, next, actionChildren, celScope, renderContext, eventRes, transientObject);
         }
       };
       actions.push(action);
@@ -242,13 +179,7 @@ export class ZovaJsx extends BeanSimple {
       } else if (isJsxEvent(actionChild)) {
         // nested action
         eventRes[index] = [];
-        return this.renderEventDirect(
-          actionChild,
-          objectAssignReactive({}, celScope),
-          renderContext,
-          eventRes[index],
-          next,
-        );
+        return this.renderEventDirect(actionChild, objectAssignReactive({}, celScope), renderContext, eventRes[index], next);
       } else {
         // normal
         return this._renderEventActionNormal(actionChild, celScope, renderContext, next);
@@ -256,48 +187,25 @@ export class ZovaJsx extends BeanSimple {
     });
   }
 
-  private _renderEventActionNormal(
-    actionChild: TypeRenderComponentJsx,
-    celScope: {},
-    renderContext: {},
-    next: Function,
-  ) {
+  private _renderEventActionNormal(actionChild: TypeRenderComponentJsx, celScope: {}, renderContext: {}, next: Function) {
     // action
     const actionName = this.normalizeAction(actionChild.type);
     const beanFullName = beanFullNameFromOnionName(actionName, 'action' as never);
     const beanInstance = this.sys.bean._getBeanSyncOnly(beanFullName);
     if (beanInstance) {
       // sync
-      return this._renderEventActionNormal_inner(
-        beanInstance,
-        actionChild,
-        celScope,
-        renderContext,
-        next,
-      );
+      return this._renderEventActionNormal_inner(beanInstance, actionChild, celScope, renderContext, next);
     }
     // async
     const transientObject = this.transientObject;
     return this.sys.bean._getBean(beanFullName, false).then(beanInstance => {
       return this.setTransientObject(transientObject, () => {
-        return this._renderEventActionNormal_inner(
-          beanInstance,
-          actionChild,
-          celScope,
-          renderContext,
-          next,
-        );
+        return this._renderEventActionNormal_inner(beanInstance, actionChild, celScope, renderContext, next);
       });
     });
   }
 
-  private _renderEventActionNormal_inner(
-    beanInstance: any,
-    actionChild: TypeRenderComponentJsx,
-    celScope: {},
-    renderContext: {},
-    next: Function,
-  ) {
+  private _renderEventActionNormal_inner(beanInstance: any, actionChild: TypeRenderComponentJsx, celScope: {}, renderContext: {}, next: Function) {
     const onionOptions = beanInstance.$onionOptions;
     // props
     let props = this.renderJsxProps(actionChild.props, {}, celScope, renderContext);
@@ -309,12 +217,7 @@ export class ZovaJsx extends BeanSimple {
     return beanInstance.execute(props, renderContext, next);
   }
 
-  public render(
-    componentOptions: TypeRenderComponent,
-    props: {} | undefined,
-    celScope: {},
-    renderContext: {},
-  ) {
+  public render(componentOptions: TypeRenderComponent, props: {} | undefined, celScope: {}, renderContext: {}) {
     if (!componentOptions) {
       throw new Error(`render component should not ${componentOptions}`);
     }
@@ -327,25 +230,17 @@ export class ZovaJsx extends BeanSimple {
     const Component = this.normalizeComponent(componentOptions.type);
     // vFor
     const vFor = this.evaluateExpression(componentOptions.props?.['v-for'], celScope);
-    if (!vFor)
-      return this._renderJsxSingle(Component, componentOptions, props, celScope, renderContext);
+    if (!vFor) return this._renderJsxSingle(Component, componentOptions, props, celScope, renderContext);
     const children: VNode[] = [];
     for (let index = 0; index < vFor.length; index++) {
       const each = vFor[index];
-      const eachName =
-        this.evaluateExpression(componentOptions.props?.['v-each'], celScope) ?? 'each';
+      const eachName = this.evaluateExpression(componentOptions.props?.['v-each'], celScope) ?? 'each';
       const celScopeEach = objectAssignReactive({}, celScope, {
         [eachName]: each,
         [`${eachName}Index`]: index,
       });
       const propsEach = { ...props };
-      const child = this._renderJsxSingle(
-        Component,
-        componentOptions,
-        propsEach,
-        celScopeEach,
-        renderContext,
-      );
+      const child = this._renderJsxSingle(Component, componentOptions, propsEach, celScopeEach, renderContext);
       if (child) {
         children.push(child);
       }
@@ -360,9 +255,10 @@ export class ZovaJsx extends BeanSimple {
 
   public normalizeComponent(type: TypeRenderComponent) {
     if (typeof type === 'function') return type;
-    if (typeof type === 'string') {
-      type = this.components?.[type] ?? type;
-    }
+    // should not replace with components, if type is native element or preset component, for example: 'div/input'
+    // if (typeof type === 'string') {
+    //   type = this.components?.[type] ?? type;
+    // }
     if (typeof type === 'string' && ['script', 'style', 'link'].includes(type)) {
       throw new Error(`not valid zova jsx component: ${type}`);
     }
@@ -374,13 +270,7 @@ export class ZovaJsx extends BeanSimple {
     return this.actions?.[type] ?? type;
   }
 
-  private _renderJsxSingle(
-    Component: any,
-    componentOptions: TypeRenderComponentJsx,
-    props: {},
-    celScope: {},
-    renderContext: {},
-  ) {
+  private _renderJsxSingle(Component: any, componentOptions: TypeRenderComponentJsx, props: {}, celScope: {}, renderContext: {}) {
     const _isZovaComponent = isZovaComponent(Component);
     // key
     if (!cast(props).key && componentOptions.key) {
@@ -395,17 +285,9 @@ export class ZovaJsx extends BeanSimple {
       children = undefined;
     } else {
       if (isNativeElement(Component)) {
-        children = this.renderJsxChildrenDirect(
-          componentOptions.props!.children,
-          celScope,
-          renderContext,
-        );
+        children = this.renderJsxChildrenDirect(componentOptions.props!.children, celScope, renderContext);
       } else {
-        const childrenCollect = this._renderJsxChildrenCollect(
-          componentOptions.props!.children,
-          celScope,
-          renderContext,
-        );
+        const childrenCollect = this._renderJsxChildrenCollect(componentOptions.props!.children, celScope, renderContext);
         if (_isZovaComponent) {
           for (const key in childrenCollect) {
             const slot = childrenCollect[key];
@@ -430,12 +312,7 @@ export class ZovaJsx extends BeanSimple {
     return vnode;
   }
 
-  public renderJsxProps(
-    jsxProps: TypeRenderComponentJsxProps | undefined,
-    props: {},
-    celScope: {},
-    renderContext: {},
-  ) {
+  public renderJsxProps(jsxProps: TypeRenderComponentJsxProps | undefined, props: {}, celScope: {}, renderContext: {}) {
     if (!jsxProps) return props;
     const keys = Object.keys(jsxProps).filter(item => !renderFieldJsxPropsSystem.includes(item));
     if (keys.length === 0) return props;
@@ -450,11 +327,7 @@ export class ZovaJsx extends BeanSimple {
     return props;
   }
 
-  private _renderJsxChildrenCollect(
-    jsxChildren: TypeRenderComponentJsx | TypeRenderComponentJsx[],
-    celScope: {},
-    renderContext: {},
-  ) {
+  private _renderJsxChildrenCollect(jsxChildren: TypeRenderComponentJsx | TypeRenderComponentJsx[], celScope: {}, renderContext: {}) {
     if (!Array.isArray(jsxChildren)) jsxChildren = [jsxChildren];
     const children: TypeRenderComponentJsx[] = [];
     const slots: Record<string, TypeRenderComponentJsx> = {};
@@ -501,11 +374,7 @@ export class ZovaJsx extends BeanSimple {
     };
   }
 
-  public renderJsxChildrenDirect(
-    jsxChildren: TypeRenderComponentJsx | TypeRenderComponentJsx[],
-    celScope: {},
-    renderContext: {},
-  ) {
+  public renderJsxChildrenDirect(jsxChildren: TypeRenderComponentJsx | TypeRenderComponentJsx[], celScope: {}, renderContext: {}) {
     if (!Array.isArray(jsxChildren)) jsxChildren = [jsxChildren];
     const children: VNode[] = [];
     for (const jsxChild of jsxChildren) {

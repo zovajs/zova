@@ -31,6 +31,7 @@ import { IFormScope, RevalidateLogicProps, TypeForm, TypeFormOnShowError, TypeFo
 import {
   constFieldProps,
   IFormFieldLayoutOptionsBase,
+  IFormFieldOptions,
   IFormFieldRenderContextPropsBucket,
   IFormFieldScope,
   IJsxRenderContextFormField,
@@ -246,16 +247,18 @@ export class ControllerForm<TFormData extends {} = {}, TSubmitMeta = never> exte
     return props;
   }
 
-  public getRenderFlattern(render: TypeFormFieldRenderComponent): TypeFormFieldRenderComponent {
-    return isJsxComponent(render) ? cast(render).type : render;
-  }
+  // public getRenderFlattern(render: TypeFormFieldRenderComponent): TypeFormFieldRenderComponent {
+  //   return isJsxComponent(render) ? cast(render).type : render;
+  // }
 
   public getRenderProvider(render: TypeFormFieldRenderComponent): TypeFormFieldRenderComponentProvider {
-    let renderProvider = this.getRenderFlattern(render);
-    if (typeof renderProvider === 'string') {
-      renderProvider = this.formProvider.components?.[renderProvider] ?? renderProvider;
+    if (isJsxComponent(render)) {
+      return cast(render).type;
     }
-    return renderProvider as TypeFormFieldRenderComponentProvider;
+    if (typeof render === 'string') {
+      return this.formProvider.components?.[render] ?? render;
+    }
+    return render as TypeFormFieldRenderComponentProvider;
   }
 
   private _getZodSchema() {
@@ -305,19 +308,22 @@ export class ControllerForm<TFormData extends {} = {}, TSubmitMeta = never> exte
     });
   }
 
-  public renderField<K extends DeepKeys<TFormData>>(name: K) {
+  public renderField<K extends DeepKeys<TFormData>>(name: K, propsExtra?: IFormFieldOptions<TFormData>) {
     const property = this.getFieldProperty(name);
     if (!property) return;
-    return this._renderField(property);
+    return this._renderField(property, propsExtra);
   }
 
-  protected _renderField(property: SchemaObject) {
+  protected _renderField(property: SchemaObject, propsExtra?: IFormFieldOptions<TFormData>) {
     const key = property.key!;
     // celScope
     const celScope = this.getFieldScope(key);
     const jsxRenderContext = this.getFieldJsxRenderContext(undefined, celScope);
     // props
-    const props = this.getFieldComponentPropsTop(key, celScope, jsxRenderContext);
+    let props = this.getFieldComponentPropsTop(key, celScope, jsxRenderContext);
+    if (propsExtra) {
+      props = Object.assign({}, props, propsExtra);
+    }
     if (cast(props).visible === false) return;
     // displayValue
     celScope.displayValue = props.displayValue;
@@ -329,7 +335,7 @@ export class ControllerForm<TFormData extends {} = {}, TSubmitMeta = never> exte
     render = render ?? 'input';
     const renderProvider = this.getRenderProvider(render);
     if (this.isComponentFormField(renderProvider)) {
-      return render;
+      return renderProvider as TypeFormFieldRenderComponent;
     }
     return this.formProvider.components?.formField ?? 'a-form:formField';
   }

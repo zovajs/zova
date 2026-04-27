@@ -57,7 +57,7 @@ export class RenderPageLogin extends BeanRenderBase {
             return <input {...props} type="text" class="grow" placeholder={this.scope.locale.YourUsername()} />;
           }}
         ></ZFormField>
-        <ZFormField name="password" class="grow" inputType="password" iconPrefix=":daisy:lock"></ZFormField>
+        <ZFormFieldWrapper name="password" class="grow" preset={{ input: { type: 'password' } }} iconPrefix=":daisy:lock"></ZFormFieldWrapper>
         <ZFormFieldWrapper name="captcha"></ZFormFieldWrapper>
         <ZFormFieldWrapper
           slotDefault={$$form => {

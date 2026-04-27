@@ -4,18 +4,22 @@ import { Controller } from 'zova-module-a-bean';
 
 import type { ControllerForm } from '../form/controller.jsx';
 
-export interface ControllerFormFieldWrapperProps<TParentData extends {} = {}, TSubmitMeta = never> {
-  name?: string;
-  slotDefault?: (form: ControllerForm<TParentData, TSubmitMeta>) => VNode;
+import { IFormFieldPresetOptions } from '../../types/formField.js';
+
+export interface ControllerFormFieldWrapperProps<TParentData extends {} = {}, TSubmitMeta = never> extends Omit<
+  IFormFieldPresetOptions<TParentData>,
+  'slotDefault'
+> {
+  slotDefault?: (form: ControllerForm<TParentData, TSubmitMeta>) => VNode | undefined;
 }
 
 @Controller()
-export class ControllerFormFieldWrapper extends BeanControllerBase {
+export class ControllerFormFieldWrapper<TParentData extends {} = {}> extends BeanControllerBase {
   static $propsDefault = {};
   static $componentOptions: IComponentOptions = { inheritAttrs: false };
 
   @Use({ injectionScope: 'host' })
-  $$form: ControllerForm;
+  $$form: ControllerForm<TParentData>;
 
   protected async __init__() {}
 
@@ -25,6 +29,6 @@ export class ControllerFormFieldWrapper extends BeanControllerBase {
     }
     const name = this.$props.name;
     if (!name) throw new Error(`should specify field name`);
-    return this.$$form.renderField(name);
+    return this.$$form.renderField(name, this.$props as any);
   }
 }

@@ -57,9 +57,9 @@ export class BehaviorFormFieldLayout extends BeanBehaviorBase<
 
   private _renderBlock(renderContext: IFormFieldRenderContext, vnode: VNode, field: TypeFormField, error: z.ZodError | undefined): VNode {
     const label = renderContext.propsBucket.label;
-    const className = classes('fieldset', renderContext.propsBucket.classContainer);
+    const classNameContainer = classes('fieldset', renderContext.propsBucket.classContainer);
     return (
-      <fieldset class={className}>
+      <fieldset class={classNameContainer}>
         {!!label && <legend class="fieldset-legend">{label}</legend>}
         {invokeProp(renderContext.propsBucket.header)}
         {vnode}

@@ -146,14 +146,14 @@ export class ControllerFormField<TParentData extends {} = {}> extends BeanContro
       {
         bordered: this.scope.config.formFieldLayout.bordered,
         label: property?.title ?? name,
-        render: 'text', // default
+        render: 'input', // default
       },
       this.$$form.$props.formFieldLayout,
       propsTop,
       this.$props as IFormFieldOptions<TParentData>,
     );
     // render
-    propsBucket.renderFlattern = this.$$form.getRenderFlattern(propsBucket.render);
+    // propsBucket.renderFlattern = this.$$form.getRenderFlattern(propsBucket.render);
     propsBucket.renderProvider = this.$$form.getRenderProvider(propsBucket.render);
     return propsBucket;
   }

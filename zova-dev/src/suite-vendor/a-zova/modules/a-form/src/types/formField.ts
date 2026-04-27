@@ -45,15 +45,11 @@ export type TypeFormFieldDisplayValueUpdateTiming = 'input' | 'change';
 
 export interface IFormFieldOptionsBase {
   render?: TypeRenderComponentPreset;
-  value?: any;
-  readonly?: boolean;
+  class?: any;
   displayValue?: any;
   displayValueUpdateTiming?: TypeFormFieldDisplayValueUpdateTiming;
   onSetDisplayValue?: TypeFormFieldOnSetDisplayValue;
   disableNotifyChanged?: boolean;
-  class?: any;
-  placeholder?: string;
-  inputType?: HTMLInputElementType;
   validateOnDynamic?: boolean | z.ZodType;
   validateOnChange?: boolean | z.ZodType;
   validateOnBlur?: boolean | z.ZodType;
@@ -94,8 +90,12 @@ export interface IFormFieldRenderContextProps {
 
 export interface IFormFieldRenderContextPropsBucket<TParentData = {}> extends Omit<IFormFieldOptions<TParentData>, 'render'> {
   render: TypeFormFieldRenderComponent;
-  renderFlattern?: TypeFormFieldRenderComponent;
+  // renderFlattern?: TypeFormFieldRenderComponent;
   renderProvider?: TypeFormFieldRenderComponentProvider;
+  needHandleBorder?: boolean;
+  value?: any;
+  readonly?: boolean;
+  placeholder?: string;
 }
 
 export interface IFormFieldRenderContext<TParentData = {}> {

@@ -1,10 +1,5 @@
 import { celEnvBase } from '@cabloy/utils';
-import {
-  CellContext,
-  createColumnHelper,
-  getCoreRowModel,
-  TableOptionsWithReactiveData,
-} from '@tanstack/vue-table';
+import { CellContext, createColumnHelper, getCoreRowModel, TableOptionsWithReactiveData } from '@tanstack/vue-table';
 import { SchemaObject } from 'openapi3-ts/oas31';
 import { VNode } from 'vue';
 import { appResource, cast, deepEqual, deepExtend, objectAssignReactive, UseScope } from 'zova';
@@ -20,11 +15,7 @@ import {
 import { BeanControllerTableBase } from '../../lib/beanControllerTableBase.js';
 import { ITableProvider } from '../../types/providers.js';
 import { ITableMeta, TypeColumn, TypeTable, TypeTableGetColumnsNext } from '../../types/table.js';
-import {
-  IDecoratorTableCellOptions,
-  IJsxRenderContextTableCell,
-  ITableCellRender,
-} from '../../types/tableCell.js';
+import { IDecoratorTableCellOptions, IJsxRenderContextTableCell, ITableCellRender } from '../../types/tableCell.js';
 import {
   constColumnProps,
   IJsxRenderContextTableColumn,
@@ -40,10 +31,7 @@ export interface ControllerTableProps<TData extends {} = {}> {
   schema?: SchemaObject;
   tableProvider?: ITableProvider;
   tableScope?: ITableScope;
-  getColumns?: (
-    next: TypeTableGetColumnsNext<TData>,
-    table: ControllerTable<TData>,
-  ) => Promise<TypeColumn<TData>[]>;
+  getColumns?: (next: TypeTableGetColumnsNext<TData>, table: ControllerTable<TData>) => Promise<TypeColumn<TData>[]>;
   slotDefault?: (table: ControllerTable<TData>) => VNode;
 }
 
@@ -74,13 +62,7 @@ export class ControllerTable<TData extends {} = {}> extends BeanControllerTableB
     });
     // jsx
     this.columnCelEnv = this._getColumnCelEnv();
-    this.zovaJsx = this.app.bean._newBeanSimple(
-      ZovaJsx,
-      false,
-      this.tableProvider.components,
-      this.tableProvider.actions,
-      this.columnCelEnv,
-    );
+    this.zovaJsx = this.app.bean._newBeanSimple(ZovaJsx, false, this.tableProvider.components, this.tableProvider.actions, this.columnCelEnv);
     // properties
     this._createProperties();
     // tableMeta
@@ -176,9 +158,7 @@ export class ControllerTable<TData extends {} = {}> extends BeanControllerTableB
       // property
       properties.push(property);
       // render
-      promises.push(
-        this._createColumnRender(columnProps.render, property, columnProps, columnScope),
-      );
+      promises.push(this._createColumnRender(columnProps.render, property, columnProps, columnScope));
     }
     const res = await Promise.all(promises);
     properties.forEach((item, index) => (renders[item.key!] = res[index]));
@@ -197,10 +177,7 @@ export class ControllerTable<TData extends {} = {}> extends BeanControllerTableB
     };
   }
 
-  public getCellJsxRenderContext(
-    celScope: ITableCellScope,
-    cellContext: CellContext<TData, any>,
-  ): IJsxRenderContextTableCell {
+  public getCellJsxRenderContext(celScope: ITableCellScope, cellContext: CellContext<TData, any>): IJsxRenderContextTableCell {
     return {
       app: this.app,
       ctx: this.ctx,
@@ -237,16 +214,7 @@ export class ControllerTable<TData extends {} = {}> extends BeanControllerTableB
     }
     return cellContext => {
       if (!cellContext) return;
-      return this._cellRender(
-        render,
-        property,
-        columnProps,
-        columnScope,
-        cellContext,
-        renderProvider,
-        beanInstance,
-        onionOptions,
-      );
+      return this._cellRender(render, property, columnProps, columnScope, cellContext, renderProvider, beanInstance, onionOptions);
     };
   }
 
@@ -267,16 +235,7 @@ export class ControllerTable<TData extends {} = {}> extends BeanControllerTableB
         },
       },
       () => {
-        return this._cellRenderInner(
-          render,
-          property,
-          columnProps,
-          columnScope,
-          cellContext,
-          renderProvider,
-          beanInstance,
-          onionOptions,
-        );
+        return this._cellRenderInner(render, property, columnProps, columnScope, cellContext, renderProvider, beanInstance, onionOptions);
       },
     );
   }
@@ -296,10 +255,7 @@ export class ControllerTable<TData extends {} = {}> extends BeanControllerTableB
     // cellScope
     const cellScope: ITableCellScope = objectAssignReactive({}, columnScope, { value });
     // displayValue
-    let displayValue =
-      property?.rest?.displayValue !== undefined
-        ? this.zovaJsx.evaluateExpression(property?.rest?.displayValue, cellScope)
-        : value;
+    let displayValue = property?.rest?.displayValue !== undefined ? this.zovaJsx.evaluateExpression(property?.rest?.displayValue, cellScope) : value;
     if (displayValue === undefined || displayValue === null || displayValue === '') {
       displayValue = this.table.options.renderFallbackValue;
     }
@@ -314,12 +270,7 @@ export class ControllerTable<TData extends {} = {}> extends BeanControllerTableB
     if (beanInstance) {
       // jsx: props
       let cellProps = isJsxComponent(render)
-        ? this.zovaJsx.renderJsxProps(
-            cast(render).props,
-            { ...columnProps },
-            cellScope,
-            jsxRenderContext,
-          )
+        ? this.zovaJsx.renderJsxProps(cast(render).props, { ...columnProps }, cellScope, jsxRenderContext)
         : columnProps;
       if (onionOptions) {
         cellProps = deepExtend({}, onionOptions, cellProps);
@@ -361,11 +312,7 @@ export class ControllerTable<TData extends {} = {}> extends BeanControllerTableB
     });
   }
 
-  public getColumnComponentPropsTop(
-    name: string,
-    celScope: {},
-    renderContext: {},
-  ): ITableCellRenderColumnProps {
+  public getColumnComponentPropsTop(name: string, celScope: {}, renderContext: {}): ITableCellRenderColumnProps {
     const props: any = { [constColumnProps]: true, key: name, name };
     const property = this.getColumnProperty(name);
     if (!property) return props;
@@ -390,17 +337,17 @@ export class ControllerTable<TData extends {} = {}> extends BeanControllerTableB
     return props;
   }
 
-  public getRenderFlattern(render: TypeTableCellRenderComponent): TypeTableCellRenderComponent {
-    return isJsxComponent(render) ? cast(render).type : render;
-  }
+  // public getRenderFlattern(render: TypeTableCellRenderComponent): TypeTableCellRenderComponent {
+  //   return isJsxComponent(render) ? cast(render).type : render;
+  // }
 
-  public getRenderProvider(
-    render: TypeTableCellRenderComponent,
-  ): TypeTableCellRenderComponentProvider {
-    let renderProvider = this.getRenderFlattern(render);
-    if (typeof renderProvider === 'string') {
-      renderProvider = this.tableProvider.components?.[renderProvider] ?? renderProvider;
+  public getRenderProvider(render: TypeTableCellRenderComponent): TypeTableCellRenderComponentProvider {
+    if (isJsxComponent(render)) {
+      return cast(render).type;
     }
-    return (renderProvider ?? 'text') as TypeTableCellRenderComponentProvider;
+    if (typeof render === 'string') {
+      render = this.tableProvider.components?.[render] ?? render;
+    }
+    return (render ?? 'text') as TypeTableCellRenderComponentProvider;
   }
 }
