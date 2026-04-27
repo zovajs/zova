@@ -4,15 +4,12 @@ import { BeanControllerPageBase, Use, useCustomRef, usePrepareArg } from 'zova';
 import { ZovaJsx } from 'zova-jsx';
 import { Controller } from 'zova-module-a-bean';
 import { formMetaFromFormScene, IFormMeta, IFormProvider, TypeFormScene } from 'zova-module-a-form';
-import { TypeResourceActionRowRecord, TypeResourceActionTableRecord } from 'zova-module-a-openapi';
+import {} from 'zova-module-a-openapi';
 import { ZPage } from 'zova-module-home-base';
 
 import type { ModelResource } from '../../model/resource.js';
 
-import {
-  IJsxRenderContextPageEntryWrapper,
-  IPageEntryWrapperScope,
-} from '../../types/pageEntryWrapper.js';
+import { IJsxRenderContextPageEntryWrapper, IPageEntryWrapperScope } from '../../types/pageEntryWrapper.js';
 
 export const ControllerPageEntrySchemaParams = z.object({
   resource: z.string(),
@@ -42,10 +39,7 @@ export class ControllerPageEntry extends BeanControllerPageBase {
   }
 
   get formScene() {
-    return (
-      (this.$params.formScene as TypeFormScene | undefined) ??
-      (isNil(this.entryId) ? 'create' : 'view')
-    );
+    return (this.$params.formScene as TypeFormScene | undefined) ?? (isNil(this.entryId) ? 'create' : 'view');
   }
 
   protected async __init__() {
@@ -60,13 +54,7 @@ export class ControllerPageEntry extends BeanControllerPageBase {
     this.pageEntryWrapperScope = this._getPageEntryWrapperScope();
     // jsx
     this.pageEntryWrapperCelEnv = this._getPageEntryWrapperCelEnv();
-    this.zovaJsx = this.app.bean._newBeanSimple(
-      ZovaJsx,
-      false,
-      this.formProvider.components,
-      this.formProvider.actions,
-      this.pageEntryWrapperCelEnv,
-    );
+    this.zovaJsx = this.app.bean._newBeanSimple(ZovaJsx, false, this.formProvider.components, this.formProvider.actions, this.pageEntryWrapperCelEnv);
   }
 
   async onActionTable(_action: keyof TypeResourceActionTableRecord) {}
@@ -107,9 +95,7 @@ export class ControllerPageEntry extends BeanControllerPageBase {
     return celEnv;
   }
 
-  public getJsxRenderContextPageEntryWrapper(
-    celScope: IPageEntryWrapperScope,
-  ): IJsxRenderContextPageEntryWrapper {
+  public getJsxRenderContextPageEntryWrapper(celScope: IPageEntryWrapperScope): IJsxRenderContextPageEntryWrapper {
     return {
       app: this.app,
       ctx: this.ctx,
@@ -128,12 +114,7 @@ export class ControllerPageEntry extends BeanControllerPageBase {
     }
     const celScope = this.pageEntryWrapperScope;
     const jsxRenderContext = this.getJsxRenderContextPageEntryWrapper(celScope);
-    const domRestPageEntry = this.zovaJsx.render(
-      componentRestPageEntry,
-      {},
-      celScope,
-      jsxRenderContext,
-    );
+    const domRestPageEntry = this.zovaJsx.render(componentRestPageEntry, {}, celScope, jsxRenderContext);
     return <ZPage>{domRestPageEntry}</ZPage>;
   }
 }
