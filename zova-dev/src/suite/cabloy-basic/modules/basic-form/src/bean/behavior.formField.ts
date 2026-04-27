@@ -29,7 +29,7 @@ export class BehaviorFormField extends BeanBehaviorBase<IBehaviorOptionsFormFiel
     const needPatch = !isJsxComponent(renderContext.propsBucket.render) || $$form.isComponentFormField(renderContext.propsBucket.renderProvider);
     if (!needPatch) return;
     // propsPatch
-    let propsPatch = this._patchProps_general(formMeta, field, renderContext);
+    const propsPatch = this._patchProps_general(formMeta, field, renderContext);
     // merge
     if (!isEmptyObject(propsPatch)) {
       renderContext.props = Object.assign({}, propsPatch, renderContext.props);
