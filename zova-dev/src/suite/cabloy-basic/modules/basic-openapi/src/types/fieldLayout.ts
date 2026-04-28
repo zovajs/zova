@@ -4,6 +4,7 @@ import 'zova-module-a-openapi';
 
 declare module 'zova-module-a-openapi' {
   export interface ISchemaRenderComponentLayoutOptions {
+    disable?: boolean;
     class?: any;
     label?: string | false;
     inline?: boolean;
