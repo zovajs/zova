@@ -29,7 +29,7 @@ export class ControllerFormFieldDateRange extends BeanControllerBase {
           return (
             <ZDateRange
               separator={this.$props.preset?.dateRange?.separator}
-              modelValue={propsBucket.displayValue}
+              modelValue={propsBucket.value}
               onUpdate:modelValue={value => {
                 $$formField.setDisplayValue(value);
               }}

@@ -20,8 +20,8 @@ export class ControllerTableCellTest extends BeanControllerBase {
   protected async __init__() {}
 
   protected render() {
-    const { name, displayValue } = this.$$renderContext.$celScope;
-    const domCell = this.$slotDefault ? this.$slotDefault() : displayValue;
+    const { name, value } = this.$$renderContext.$celScope;
+    const domCell = this.$slotDefault ? this.$slotDefault() : value;
     return (
       <>
         {this.$props.slotHeader?.({ name: 'kevin' })}

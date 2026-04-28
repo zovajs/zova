@@ -105,13 +105,6 @@ export class ControllerFormField<TParentData extends {} = {}> extends BeanContro
     return 'text';
   }
 
-  public setDisplayValue(value: any, disableNotifyChanged?: boolean) {
-    if (disableNotifyChanged === undefined) {
-      disableNotifyChanged = this.propsBucket.disableNotifyChanged;
-    }
-    return this.$$form.setFieldDisplayValue(this.name, value, this.propsBucket.onSetDisplayValue, disableNotifyChanged);
-  }
-
   public setValue(value: any, disableNotifyChanged?: boolean) {
     if (disableNotifyChanged === undefined) {
       disableNotifyChanged = this.propsBucket.disableNotifyChanged;
