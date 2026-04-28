@@ -51,6 +51,7 @@ export interface IFormFieldOptionsBase<TParentData = {}, TName extends DeepKeys<
   render?: TypeRenderComponentPreset;
   class?: any;
   value?: any;
+  readonly?: boolean;
   displayValue?: any;
   displayValueUpdateTiming?: TypeFormFieldDisplayValueUpdateTiming;
   onSetDisplayValue?: TypeFormFieldOnSetDisplayValue;
@@ -96,7 +97,6 @@ export interface IFormFieldRenderContextPropsBucket<TParentData = {}> extends Om
   render: TypeFormFieldRenderComponent;
   renderProvider?: TypeFormFieldRenderComponentProvider;
   needHandleBorder?: boolean;
-  readonly?: boolean;
 }
 
 export interface IFormFieldRenderContext<TParentData = {}> {
