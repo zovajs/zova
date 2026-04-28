@@ -8,14 +8,15 @@ import 'openapi3-ts/oas31';
 export interface ISchemaRenderComponentPresetRecord {}
 
 export interface ISchemaObjectExtensionFieldRest {
-  render?: TypeFormFieldRenderComponentNormal | TypeTableCellRenderComponentNormal;
-  preset?: ISchemaRenderComponentPresetRecord;
-  customKey?: string;
-  visible?: boolean;
-  order?: number;
-  table?: Omit<ISchemaObjectExtensionFieldRest, TypeSchemaScene>;
-  form?: Omit<ISchemaObjectExtensionFieldRest, TypeSchemaScene>;
-  filter?: Omit<ISchemaObjectExtensionFieldRest, TypeSchemaScene>;
+  'render'?: TypeFormFieldRenderComponentNormal | TypeTableCellRenderComponentNormal;
+  'preset'?: ISchemaRenderComponentPresetRecord;
+  'customKey'?: string;
+  'visible'?: boolean;
+  'order'?: number;
+  'table'?: Omit<ISchemaObjectExtensionFieldRest, TypeSchemaScene>;
+  'form'?: Omit<ISchemaObjectExtensionFieldRest, TypeSchemaScene>;
+  'form-view'?: Omit<ISchemaObjectExtensionFieldRest, TypeSchemaScene>;
+  'filter'?: Omit<ISchemaObjectExtensionFieldRest, TypeSchemaScene>;
 }
 
 export interface ISchemaObjectExtensionFieldFilterCapabilities {
@@ -43,11 +44,11 @@ declare module 'openapi3-ts/oas31' {
   export interface SchemaObject extends ISchemaObjectExtensionField {}
 }
 
-export type TypeSchemaScene = 'table' | 'form' | 'filter';
+export type TypeSchemaScene = 'table' | 'form' | 'form-view' | 'filter';
 export type TypeFormSchemaScene = 'form' | 'filter';
 
-export const renderFormFieldTopPropsSystem = ['order', 'table', 'form', 'filter'];
-export const renderTableColumnTopPropsSystem = ['order', 'table', 'form', 'filter'];
+export const renderFormFieldTopPropsSystem = ['order', 'table', 'form', 'form-view', 'filter'];
+export const renderTableColumnTopPropsSystem = ['order', 'table', 'form', 'form-view', 'filter'];
 
 export type TypeRenderComponentPreset = keyof ISchemaRenderComponentPresetRecord;
 // | 'text'
