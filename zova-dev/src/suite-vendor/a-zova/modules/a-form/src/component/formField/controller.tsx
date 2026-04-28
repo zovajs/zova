@@ -142,15 +142,27 @@ export class ControllerFormField<TParentData extends {} = {}> extends BeanContro
     const name = this.name;
     // options
     const propsTop = this._getFieldComponentPropsTop();
-    const propsBucket = Object.assign(
+    // layout options
+    const layoutOptions = Object.assign(
       {
         bordered: this.scope.config.formFieldLayout.bordered,
         label: property?.title ?? name,
-        render: 'input', // default
+      },
+      this.$$form.$props.formFieldLayout,
+      propsTop?.layout,
+      this.$props?.layout,
+    );
+    // propsBucket
+    const propsBucket = Object.assign(
+      {
+        render: 'input',
       },
       this.$$form.$props.formFieldLayout,
       propsTop,
       this.$props as IFormFieldOptions<TParentData>,
+      {
+        layout: layoutOptions,
+      },
     );
     // render
     // propsBucket.renderFlattern = this.$$form.getRenderFlattern(propsBucket.render);

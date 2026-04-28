@@ -81,8 +81,8 @@ export interface IFormFieldRenderContextProps {
 // }
 
 export interface IFormFieldRenderContextPropsBucket<TParentData = {}> extends Omit<IFormFieldOptions<TParentData>, 'render'> {
+  preset?: ISchemaRenderComponentPresetRecord;
   render: TypeFormFieldRenderComponent;
-  // renderFlattern?: TypeFormFieldRenderComponent;
   renderProvider?: TypeFormFieldRenderComponentProvider;
   needHandleBorder?: boolean;
   readonly?: boolean;

@@ -33,9 +33,9 @@ export class ControllerFormFieldInput extends BeanControllerBase {
             onBlur: () => {
               $$formField.handleBlur();
             },
-            ...pickObject(propsBucket, ['value']),
             ...props,
-            ...this.$props.preset?.input,
+            ...pickObject(propsBucket, ['value']),
+            ...propsBucket.preset?.input,
             class: className,
           };
           return <input {...propsNew}></input>;
