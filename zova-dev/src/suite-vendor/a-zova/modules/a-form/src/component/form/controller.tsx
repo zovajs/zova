@@ -19,6 +19,7 @@ import { cast, deepEqual, deepExtend, objectAssignReactive, UseScope } from 'zov
 import { isJsxComponent, ZovaJsx } from 'zova-jsx';
 import { Controller } from 'zova-module-a-bean';
 import {
+  ISchemaRenderComponentLayoutOptions,
   renderFormFieldTopPropsSystem,
   ScopeModuleAOpenapi,
   TypeFormFieldRenderComponent,
@@ -30,7 +31,6 @@ import { BeanControllerFormBase } from '../../lib/beanControllerFormBase.js';
 import { IFormScope, RevalidateLogicProps, TypeForm, TypeFormOnShowError, TypeFormOnSubmit, TypeFormOnSubmitInvalid } from '../../types/form.js';
 import {
   constFieldProps,
-  IFormFieldLayoutOptionsBase,
   IFormFieldOptions,
   IFormFieldRenderContextPropsBucket,
   IFormFieldScope,
@@ -53,7 +53,7 @@ export interface ControllerFormProps<TFormData extends {} = {}, TSubmitMeta = ne
   formMeta?: IFormMeta;
   formProvider?: IFormProvider;
   formScope?: IFormScope;
-  formFieldLayout?: IFormFieldLayoutOptionsBase;
+  formFieldLayout?: ISchemaRenderComponentLayoutOptions;
   onFormSubmit?: (e: SubmitEvent, form: ControllerForm<TFormData, TSubmitMeta>) => any;
   onSubmitInvalid?: TypeFormOnSubmitInvalid<TFormData, TSubmitMeta>;
   onSubmitData?: TypeFormOnSubmit<TFormData, TSubmitMeta>;

@@ -26,7 +26,8 @@ export class BehaviorFormFieldLayoutLogin extends BeanBehaviorBase<
   protected render(renderContext: IBehaviorPropsInputFormFieldLayoutLogin, next: NextBehavior<IBehaviorPropsOutputFormFieldLayoutLogin>): VNode {
     const field = this.$$formField.field;
     const vnode = next(renderContext);
-    const iconPrefix = renderContext.propsBucket.iconPrefix;
+    const layout = renderContext.propsBucket.layout;
+    const iconPrefix = layout?.iconPrefix;
     const error = field.state.meta.errors[0] as z.ZodError | undefined;
     return (
       <label class="input input-bordered flex items-center gap-2 w-full">

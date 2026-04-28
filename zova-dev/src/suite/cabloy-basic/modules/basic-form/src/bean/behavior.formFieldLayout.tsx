@@ -24,25 +24,22 @@ export class BehaviorFormFieldLayout extends BeanBehaviorBase<
 
   protected render(renderContext: IFormFieldRenderContext, next: NextBehavior<IBehaviorPropsOutputFormFieldLayout>): VNode {
     const field = this.$$formField.field;
+    const layout = renderContext.propsBucket.layout;
     // needHandleBorder
-    renderContext.propsBucket.needHandleBorder = !renderContext.propsBucket.inline;
+    renderContext.propsBucket.needHandleBorder = !layout?.inline;
     const vnode = next(renderContext);
     const error = field.state.meta.errors[0] as z.ZodError | undefined;
-    if (renderContext.propsBucket.inline) {
+    if (layout?.inline) {
       return this._renderInline(renderContext, vnode, field, error);
     }
     return this._renderBlock(renderContext, vnode, field, error);
   }
 
   private _renderInline(renderContext: IFormFieldRenderContext, vnode: VNode, field: TypeFormField, error: z.ZodError | undefined): VNode {
-    const bordered = renderContext.propsBucket.bordered;
-    const label = renderContext.propsBucket.label;
-    const className = classes(
-      'input',
-      renderContext.propsBucket.classContainer,
-      bordered && 'input-bordered',
-      !field.state.meta.isValid && 'input-error',
-    );
+    const layout = renderContext.propsBucket.layout;
+    const bordered = layout?.bordered;
+    const label = layout?.label;
+    const className = classes('input', layout?.class, bordered && 'input-bordered', !field.state.meta.isValid && 'input-error');
     return (
       <label class={className}>
         {label}
@@ -57,19 +54,20 @@ export class BehaviorFormFieldLayout extends BeanBehaviorBase<
   }
 
   private _renderBlock(renderContext: IFormFieldRenderContext, vnode: VNode, field: TypeFormField, error: z.ZodError | undefined): VNode {
-    const label = renderContext.propsBucket.label;
-    const classNameContainer = classes('fieldset', renderContext.propsBucket.classContainer);
+    const layout = renderContext.propsBucket.layout;
+    const label = layout?.label;
+    const classNameContainer = classes('fieldset', layout?.class);
     return (
       <fieldset class={classNameContainer}>
         {!!label && <legend class="fieldset-legend">{label}</legend>}
-        {invokeProp(renderContext.propsBucket.header)}
+        {invokeProp(layout?.header)}
         {vnode}
         {!field.state.meta.isValid && (
           <div class="label">
             <span class="label-text-alt text-error">{error?.message}</span>
           </div>
         )}
-        {invokeProp(renderContext.propsBucket.footer)}
+        {invokeProp(layout?.footer)}
       </fieldset>
     );
   }

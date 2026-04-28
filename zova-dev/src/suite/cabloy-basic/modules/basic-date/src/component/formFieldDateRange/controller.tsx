@@ -24,7 +24,7 @@ export class ControllerFormFieldDateRange extends BeanControllerBase {
     return (
       <ZFormField
         {...this.$props}
-        classContainer={this.cContainer}
+        layout={{ class: this.cContainer }}
         slotDefault={({ propsBucket }, $$formField) => {
           return (
             <ZDateRange

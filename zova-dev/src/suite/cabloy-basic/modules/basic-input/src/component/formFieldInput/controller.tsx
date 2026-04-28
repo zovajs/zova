@@ -23,7 +23,7 @@ export class ControllerFormFieldInput extends BeanControllerBase {
         slotDefault={({ propsBucket, props }, $$formField) => {
           const className = !propsBucket.needHandleBorder
             ? props.class
-            : classes(props.class, 'input', propsBucket.bordered && 'input-bordered', !$$formField.field.state.meta.isValid && 'input-error');
+            : classes(props.class, 'input', propsBucket.layout?.bordered && 'input-bordered', !$$formField.field.state.meta.isValid && 'input-error');
           const propsNew: IInputOptions = {
             type: 'text',
             placeholder: undefined,
