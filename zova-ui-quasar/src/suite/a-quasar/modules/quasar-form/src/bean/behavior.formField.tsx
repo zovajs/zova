@@ -1,10 +1,11 @@
 import type { ControllerFormField, IFormFieldRenderContext, IFormFieldRenderContextProps, IFormMeta, TypeFormField } from 'zova-module-a-form';
 
-import { isEmptyObject } from '@cabloy/utils';
+import { isEmptyObject, isNil } from '@cabloy/utils';
 import { QIcon } from 'quasar';
 import { VNode } from 'vue';
 import z from 'zod';
-import { cast, Use } from 'zova';
+import { Use } from 'zova';
+import { isJsxComponent } from 'zova-jsx';
 import { BeanBehaviorBase, Behavior, IDecoratorBehaviorOptions, NextBehavior } from 'zova-module-a-behavior';
 
 export interface IBehaviorPropsInputFormField extends IFormFieldRenderContext {}
@@ -24,22 +25,33 @@ export class BehaviorFormField extends BeanBehaviorBase<IBehaviorOptionsFormFiel
   }
 
   private _patchProps(renderContext: IFormFieldRenderContext) {
+    const $$form = this.$$formField.$$form;
     const formMeta = this.$$formField.formMeta;
     const field = this.$$formField.field;
-    const componentName =
-      typeof renderContext.propsBucket.renderProvider === 'object'
-        ? cast(renderContext.propsBucket.renderProvider)?.name
-        : renderContext.propsBucket.renderProvider;
+    const needPatch = !isJsxComponent(renderContext.propsBucket.render) || $$form.isComponentFormField(renderContext.propsBucket.renderProvider);
+    if (!needPatch) return;
+    // propsPatch
+    const propsPatch = this._patchProps_general(formMeta, field, renderContext);
+    // merge
+    if (!isEmptyObject(propsPatch)) {
+      renderContext.props = Object.assign({}, propsPatch, renderContext.props);
+    }
     if (componentName === 'QInput') {
       this._patchProps_input(formMeta, field, renderContext);
     }
   }
 
-  private _patchProps_general(formMeta: IFormMeta | undefined, _field: TypeFormField, _renderContext: IFormFieldRenderContext) {
-    const propsPatch: IFormFieldRenderContextProps = {
-      // value: renderContext.propsBucket.displayValue,
-    };
-    if (formMeta?.formMode === 'view') {
+  private _patchProps_general(formMeta: IFormMeta | undefined, _field: TypeFormField, renderContext: IFormFieldRenderContext) {
+    const { propsBucket } = renderContext;
+    const propsPatch: IFormFieldRenderContextProps = {};
+    // class
+    if (!isNil(propsBucket.class)) {
+      propsPatch.class = propsBucket.class;
+    }
+    // readonly
+    if (!isNil(propsBucket.readonly)) {
+      propsPatch.readonly = propsBucket.readonly;
+    } else if (formMeta?.formMode === 'view') {
       propsPatch.readonly = true;
     }
     return propsPatch;

@@ -3,8 +3,8 @@ import type { ControllerFormField, IFormFieldRenderContext, IFormFieldRenderCont
 import { isEmptyObject, isNil } from '@cabloy/utils';
 import { VNode } from 'vue';
 import z from 'zod';
-import { cast, Use } from 'zova';
-import { isNativeElement } from 'zova-jsx';
+import { Use } from 'zova';
+import { isJsxComponent } from 'zova-jsx';
 import { BeanBehaviorBase, Behavior, IDecoratorBehaviorOptions, NextBehavior } from 'zova-module-a-behavior';
 
 export interface IBehaviorPropsInputFormField extends IFormFieldRenderContext {}
@@ -24,21 +24,20 @@ export class BehaviorFormField extends BeanBehaviorBase<IBehaviorOptionsFormFiel
   }
 
   private _patchProps(renderContext: IFormFieldRenderContext) {
+    const $$form = this.$$formField.$$form;
     const formMeta = this.$$formField.formMeta;
     const field = this.$$formField.field;
-    const componentName =
-      typeof renderContext.propsBucket.renderProvider === 'object'
-        ? cast(renderContext.propsBucket.renderProvider)?.name
-        : renderContext.propsBucket.renderProvider;
+    const needPatch = !isJsxComponent(renderContext.propsBucket.render) || $$form.isComponentFormField(renderContext.propsBucket.renderProvider);
+    if (!needPatch) return;
     // propsPatch
-    let propsPatch = isNativeElement(componentName) ? {} : this._patchProps_general(formMeta, field, renderContext);
-    // input
-    if (componentName === 'VTextField') {
-      propsPatch = this._patchProps_input(formMeta, field, renderContext, propsPatch);
-    }
+    const propsPatch = this._patchProps_general(formMeta, field, renderContext);
     // merge
     if (!isEmptyObject(propsPatch)) {
       renderContext.props = Object.assign({}, propsPatch, renderContext.props);
+    }
+    // input
+    if (componentName === 'VTextField') {
+      propsPatch = this._patchProps_input(formMeta, field, renderContext, propsPatch);
     }
   }
 
