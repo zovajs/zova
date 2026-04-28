@@ -1,11 +1,10 @@
 import type { SchemaObject } from 'openapi3-ts/oas31';
 import type { VNode } from 'vue';
 import type z from 'zod';
-import type { TypeRenderComponentJsx } from 'zova-jsx';
 import type { IBehaviorItem } from 'zova-module-a-behavior';
-import type { IIconRecord } from 'zova-module-a-icon';
 import type {
   IJsxRenderContextBase,
+  ISchemaRenderComponentLayoutOptions,
   ISchemaRenderComponentPresetRecord,
   TypeFormFieldRenderComponent,
   TypeFormFieldRenderComponentProvider,
@@ -29,15 +28,7 @@ export interface IFormFieldScope<TParentData = {}> {
 }
 
 export interface IFormFieldLayoutOptionsBase {
-  classContainer?: any;
-  label?: string | false;
-  inline?: boolean;
-  bordered?: boolean;
-  floating?: boolean;
-  iconPrefix?: keyof IIconRecord;
-  iconSuffix?: keyof IIconRecord;
-  header?: TypeRenderComponentJsx | string;
-  footer?: TypeRenderComponentJsx | string;
+  layout?: ISchemaRenderComponentLayoutOptions;
 }
 
 export type TypeFormFieldOnSetDisplayValue = (value: any) => any;
