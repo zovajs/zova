@@ -6,6 +6,7 @@ import { BeanControllerBase, deepEqual, Use } from 'zova';
 import { Controller } from 'zova-module-a-bean';
 import { ControllerForm, TypeFormOnSubmitData } from 'zova-module-a-form';
 import { $QueriesAutoLoad } from 'zova-module-a-model';
+import { TypeFormSchemaScene } from 'zova-module-a-openapi';
 
 import { IJsxRenderContextPageEntry, IPageEntryScope } from '../../types/pageEntry.js';
 
@@ -69,9 +70,7 @@ export class ControllerRestPageEntry<TData extends {} = {}> extends BeanControll
     return this.$$pageEntryWrapper.pageEntryWrapperCelEnv;
   }
 
-  public getJsxRenderContextPageEntry(
-    celScope: IPageEntryScope,
-  ): IJsxRenderContextPageEntry<TData> {
+  public getJsxRenderContextPageEntry(celScope: IPageEntryScope): IJsxRenderContextPageEntry<TData> {
     return {
       app: this.app,
       ctx: this.ctx,
@@ -93,6 +92,11 @@ export class ControllerRestPageEntry<TData extends {} = {}> extends BeanControll
 
   get formMeta() {
     return this.$$pageEntryWrapper.formMeta;
+  }
+
+  get schemaScene(): TypeFormSchemaScene {
+    if (this.formMeta.formMode === 'view') return 'form-view';
+    return 'form';
   }
 
   get queryData() {
