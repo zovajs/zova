@@ -30,7 +30,7 @@ export class ControllerActionView extends BeanControllerBase {
           await this.$performAction(actionName, undefined, this.$$renderContext);
         }}
       >
-        {this.$slotDefault ? this.$slotDefault() : $celScope.displayValue}
+        {this.$slotDefault ? this.$slotDefault() : $celScope.value}
       </a>
     );
   }
