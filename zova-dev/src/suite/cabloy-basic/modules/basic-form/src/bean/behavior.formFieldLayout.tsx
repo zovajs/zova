@@ -1,4 +1,4 @@
-import type { ControllerFormField, IFormFieldLayoutOptionsBase, IFormFieldRenderContext, TypeFormField } from 'zova-module-a-form';
+import type { ControllerFormField, IFormFieldRenderContext, TypeFormField } from 'zova-module-a-form';
 
 import { classes } from 'typestyle';
 import { VNode } from 'vue';
@@ -11,7 +11,7 @@ export interface IBehaviorPropsInputFormFieldLayout extends IFormFieldRenderCont
 
 export interface IBehaviorPropsOutputFormFieldLayout extends IBehaviorPropsInputFormFieldLayout {}
 
-export interface IBehaviorOptionsFormFieldLayout extends IDecoratorBehaviorOptions, IFormFieldLayoutOptionsBase {}
+export interface IBehaviorOptionsFormFieldLayout extends IDecoratorBehaviorOptions {}
 
 @Behavior<IBehaviorOptionsFormFieldLayout>()
 export class BehaviorFormFieldLayout extends BeanBehaviorBase<

@@ -5,14 +5,13 @@ import type { ControllerFormField, IFormFieldRenderContext } from 'zova-module-a
 import z from 'zod';
 import { Use } from 'zova';
 import { BeanBehaviorBase, Behavior } from 'zova-module-a-behavior';
-import { IFormFieldLayoutOptionsBase } from 'zova-module-a-form';
 import { ZIcon } from 'zova-module-a-icon';
 
 export interface IBehaviorPropsInputFormFieldLayoutLogin extends IFormFieldRenderContext {}
 
 export interface IBehaviorPropsOutputFormFieldLayoutLogin extends IBehaviorPropsInputFormFieldLayoutLogin {}
 
-export interface IBehaviorOptionsFormFieldLayoutLogin extends IDecoratorBehaviorOptions, IFormFieldLayoutOptionsBase {}
+export interface IBehaviorOptionsFormFieldLayoutLogin extends IDecoratorBehaviorOptions {}
 
 @Behavior<IBehaviorOptionsFormFieldLayoutLogin>()
 export class BehaviorFormFieldLayoutLogin extends BeanBehaviorBase<
