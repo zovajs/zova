@@ -242,7 +242,7 @@ export class ControllerTable<TData extends {} = {}> extends BeanControllerTableB
 
   private _cellRenderInner(
     render: TypeTableCellRenderComponent,
-    property: SchemaObject | undefined,
+    _property: SchemaObject | undefined,
     columnProps: ITableCellRenderColumnProps | undefined,
     columnScope: ITableColumnScope,
     cellContext: CellContext<TData, any>,
