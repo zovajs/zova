@@ -50,7 +50,7 @@ export class RenderPageToolOne extends BeanRenderBase {
         <ZFormFieldWrapper<ApiSchemaTestSsrDtoTestBodyPartial>
           name="name"
           layout={{ label: `${this.scope.locale.YourName()}:` }}
-          validateOnDynamic={z.string().min(3)}
+          validators={{ onDynamic: z.string().min(3) }}
         ></ZFormFieldWrapper>
         <ZFormField
           name="name"
