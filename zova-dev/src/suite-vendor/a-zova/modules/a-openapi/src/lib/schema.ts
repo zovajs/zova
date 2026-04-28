@@ -15,7 +15,7 @@ const __FilterColumnsIgnore = ['columns', 'where', 'orders', 'pageNo', 'pageSize
 export function loadSchemaProperties(
   schema: SchemaObject | undefined,
   onGetSchema: (schemaName: string) => SchemaObject | undefined,
-  scene?: TypeSchemaScene,
+  schemaScene?: TypeSchemaScene,
 ): SchemaObject[] | undefined {
   if (!schema) return;
   const properties = schema.properties!;
@@ -38,8 +38,8 @@ export function loadSchemaProperties(
     property = deepExtend(
       { key },
       property,
-      scene === 'form-view' ? { rest: property.rest?.['form'] ?? {} } : undefined,
-      scene ? { rest: property.rest?.[scene] ?? {} } : undefined,
+      // scene === 'form-view' ? { rest: property.rest?.['form'] ?? {} } : undefined,
+      schemaScene ? { rest: property.rest?.[schemaScene] ?? {} } : undefined,
     );
     result.push(property);
   }
