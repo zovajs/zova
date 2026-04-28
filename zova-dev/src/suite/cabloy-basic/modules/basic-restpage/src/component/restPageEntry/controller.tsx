@@ -96,6 +96,7 @@ export class ControllerRestPageEntry<TData extends {} = {}> extends BeanControll
 
   get schemaScene(): TypeFormSchemaScene {
     if (this.formMeta.formMode === 'view') return 'form-view';
+    if (this.formMeta.editMode === 'create') return 'form-create';
     return 'form';
   }
 

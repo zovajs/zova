@@ -16,6 +16,7 @@ export interface ISchemaObjectExtensionFieldRest {
   'table'?: Omit<ISchemaObjectExtensionFieldRest, TypeSchemaScene>;
   'form'?: Omit<ISchemaObjectExtensionFieldRest, TypeSchemaScene>;
   'form-view'?: Omit<ISchemaObjectExtensionFieldRest, TypeSchemaScene>;
+  'form-create'?: Omit<ISchemaObjectExtensionFieldRest, TypeSchemaScene>;
   'filter'?: Omit<ISchemaObjectExtensionFieldRest, TypeSchemaScene>;
 }
 
@@ -44,11 +45,11 @@ declare module 'openapi3-ts/oas31' {
   export interface SchemaObject extends ISchemaObjectExtensionField {}
 }
 
-export type TypeSchemaScene = 'table' | 'form' | 'form-view' | 'filter';
-export type TypeFormSchemaScene = 'form' | 'form-view' | 'filter';
+export type TypeSchemaScene = 'table' | TypeFormSchemaScene;
+export type TypeFormSchemaScene = 'form' | 'form-view' | 'form-create' | 'filter';
 
-export const renderFormFieldTopPropsSystem = ['order', 'table', 'form', 'form-view', 'filter'];
-export const renderTableColumnTopPropsSystem = ['order', 'table', 'form', 'form-view', 'filter'];
+export const renderFormFieldTopPropsSystem = ['order', 'table', 'form', 'form-view', 'form-create', 'filter'];
+export const renderTableColumnTopPropsSystem = ['order', 'table', 'form', 'form-view', 'form-create', 'filter'];
 
 export type TypeRenderComponentPreset = keyof ISchemaRenderComponentPresetRecord;
 // | 'text'

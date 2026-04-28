@@ -38,7 +38,7 @@ export function loadSchemaProperties(
     property = deepExtend(
       { key },
       property,
-      // scene === 'form-view' ? { rest: property.rest?.['form'] ?? {} } : undefined,
+      schemaScene && ['form-view', 'form-create'].includes(schemaScene) ? { rest: property.rest?.['form'] ?? {} } : undefined,
       schemaScene ? { rest: property.rest?.[schemaScene] ?? {} } : undefined,
     );
     result.push(property);
