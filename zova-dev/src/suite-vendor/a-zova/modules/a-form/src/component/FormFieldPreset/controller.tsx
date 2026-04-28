@@ -5,10 +5,10 @@ import type { ControllerForm } from '../form/controller.jsx';
 
 import { IFormFieldPresetOptions } from '../../types/formField.js';
 
-export interface ControllerFormFieldWrapperProps<TParentData extends {} = {}> extends IFormFieldPresetOptions<TParentData> {}
+export interface ControllerFormFieldPresetProps<TParentData extends {} = {}> extends IFormFieldPresetOptions<TParentData> {}
 
 @Controller()
-export class ControllerFormFieldWrapper<TParentData extends {} = {}> extends BeanControllerBase {
+export class ControllerFormFieldPreset<TParentData extends {} = {}> extends BeanControllerBase {
   static $propsDefault = {};
   static $componentOptions: IComponentOptions = { inheritAttrs: false };
 
