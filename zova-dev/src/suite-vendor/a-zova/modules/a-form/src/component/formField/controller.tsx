@@ -143,16 +143,18 @@ export class ControllerFormField<TParentData extends {} = {}> extends BeanContro
       propsTop?.layout,
       this.$props?.layout,
     );
+    // preset options
+    const presetOptions = Object.assign({}, propsTop?.preset, this.$props?.preset);
     // propsBucket
     const propsBucket = Object.assign(
       {
         render: 'input',
       },
-      this.$$form.$props.formFieldLayout,
       propsTop,
       this.$props as IFormFieldOptions<TParentData>,
       {
         layout: layoutOptions,
+        preset: presetOptions,
       },
     );
     // render
