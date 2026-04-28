@@ -1,9 +1,9 @@
 // eslint-disable
 /** controller: begin */
-export * from '../component/FormFieldPreset/controller.jsx';
 export * from '../component/form/controller.jsx';
 export * from '../component/formField/controller.jsx';
 export * from '../component/formFieldBlank/controller.jsx';
+export * from '../component/formFieldPreset/controller.jsx';
 
 import 'zova';
 declare module 'zova' {
@@ -12,11 +12,6 @@ declare module 'zova' {
 }
 declare module 'zova-module-a-form' {
   
-        export interface ControllerFormFieldPreset {
-          /** @internal */
-          get scope(): ScopeModuleAForm;
-        }
-
         export interface ControllerForm {
           /** @internal */
           get scope(): ScopeModuleAForm;
@@ -30,53 +25,58 @@ declare module 'zova-module-a-form' {
         export interface ControllerFormFieldBlank {
           /** @internal */
           get scope(): ScopeModuleAForm;
+        }
+
+        export interface ControllerFormFieldPreset {
+          /** @internal */
+          get scope(): ScopeModuleAForm;
         } 
 }
 /** controller: end */
 /** controller: begin */
-import { ControllerFormFieldPreset } from '../component/FormFieldPreset/controller.jsx';
 import { ControllerForm } from '../component/form/controller.jsx';
 import { ControllerFormField } from '../component/formField/controller.jsx';
 import { ControllerFormFieldBlank } from '../component/formFieldBlank/controller.jsx';
+import { ControllerFormFieldPreset } from '../component/formFieldPreset/controller.jsx';
 import 'zova';
 declare module 'zova' {
   export interface IBeanRecordLocal {
-    'a-form.controller.formFieldPreset': ControllerFormFieldPreset;
-'a-form.controller.form': ControllerForm;
+    'a-form.controller.form': ControllerForm;
 'a-form.controller.formField': ControllerFormField;
 'a-form.controller.formFieldBlank': ControllerFormFieldBlank;
+'a-form.controller.formFieldPreset': ControllerFormFieldPreset;
   }
 }
 /** controller: end */
 
 /** components: begin */
-export * from './component/FormFieldPreset.js';
-import { ZFormFieldPreset } from './component/FormFieldPreset.js';
 export * from './component/form.js';
 import { ZForm } from './component/form.js';
 export * from './component/formField.js';
 import { ZFormField } from './component/formField.js';
 export * from './component/formFieldBlank.js';
 import { ZFormFieldBlank } from './component/formFieldBlank.js';
+export * from './component/formFieldPreset.js';
+import { ZFormFieldPreset } from './component/formFieldPreset.js';
 export const components = {
-  'FormFieldPreset': ZFormFieldPreset,
-'form': ZForm,
+  'form': ZForm,
 'formField': ZFormField,
 'formFieldBlank': ZFormFieldBlank,
+'formFieldPreset': ZFormFieldPreset,
 };
 import 'zova';
 declare module 'zova' {
 export interface IComponentRecord {
-  'a-form:FormFieldPreset': ControllerFormFieldPreset;
-'a-form:form': ControllerForm;
+  'a-form:form': ControllerForm;
 'a-form:formField': ControllerFormField;
 'a-form:formFieldBlank': ControllerFormFieldBlank;
+'a-form:formFieldPreset': ControllerFormFieldPreset;
 }
 export interface IZovaComponentRecord {
-  'a-form:FormFieldPreset': typeof ZFormFieldPreset;
-'a-form:form': typeof ZForm;
+  'a-form:form': typeof ZForm;
 'a-form:formField': typeof ZFormField;
 'a-form:formFieldBlank': typeof ZFormFieldBlank;
+'a-form:formFieldPreset': typeof ZFormFieldPreset;
 }
 }
 /** components: end */
