@@ -3,7 +3,7 @@ import type { IComponentOptions } from 'zova';
 
 import { BeanControllerBase, Use } from 'zova';
 import { Controller } from 'zova-module-a-bean';
-import { ControllerForm, IFormFieldPresetOptions, ZFormFieldWrapper } from 'zova-module-a-form';
+import { ControllerForm, IFormFieldPresetOptions, ZFormFieldPreset } from 'zova-module-a-form';
 
 import { currencyFormat, currencyUpdate } from '../../lib/utils.js';
 
@@ -25,7 +25,7 @@ export class ControllerFormFieldCurrency extends BeanControllerBase {
     const currencyOptions = this.$props.preset?.currency;
     const value = this._valuePatch(currencyOptions);
     return (
-      <ZFormFieldWrapper
+      <ZFormFieldPreset
         {...this.$props}
         render="input"
         preset={{
@@ -48,7 +48,7 @@ export class ControllerFormFieldCurrency extends BeanControllerBase {
             },
           },
         }}
-      ></ZFormFieldWrapper>
+      ></ZFormFieldPreset>
     );
   }
 

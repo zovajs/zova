@@ -1,6 +1,6 @@
 import { BeanRenderBase } from 'zova';
 import { Render } from 'zova-module-a-bean';
-import { ZForm, ZFormFieldBlank, ZFormFieldWrapper } from 'zova-module-a-form';
+import { ZForm, ZFormFieldBlank, ZFormFieldPreset } from 'zova-module-a-form';
 import { ZIcon } from 'zova-module-a-icon';
 
 @Render()
@@ -50,20 +50,20 @@ export class RenderPageLogin extends BeanRenderBase {
           window.alert(error.message);
         }}
       >
-        <ZFormFieldWrapper
+        <ZFormFieldPreset
           name="username"
           class="grow"
           preset={{ input: { type: 'text', placeholder: this.scope.locale.YourUsername() } }}
           layout={{ iconPrefix: ':daisy:person' }}
-        ></ZFormFieldWrapper>
-        <ZFormFieldWrapper
+        ></ZFormFieldPreset>
+        <ZFormFieldPreset
           name="password"
           class="grow"
           sys={{ asyncDebounceMs: 1000 }}
           preset={{ input: { type: 'password', placeholder: this.scope.locale.YourPassword() } }}
           layout={{ iconPrefix: ':daisy:lock' }}
-        ></ZFormFieldWrapper>
-        <ZFormFieldWrapper name="captcha"></ZFormFieldWrapper>
+        ></ZFormFieldPreset>
+        <ZFormFieldPreset name="captcha"></ZFormFieldPreset>
         <ZFormFieldBlank
           slotDefault={$$form => {
             return (

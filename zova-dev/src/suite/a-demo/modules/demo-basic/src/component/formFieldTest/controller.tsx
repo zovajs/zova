@@ -4,7 +4,7 @@ import type { IFormFieldComponentOptions } from 'zova-module-a-form';
 
 import { BeanControllerBase } from 'zova';
 import { Controller } from 'zova-module-a-bean';
-import { ZFormFieldWrapper } from 'zova-module-a-form';
+import { ZFormFieldPreset } from 'zova-module-a-form';
 
 export interface ControllerFormFieldTestProps extends IFormFieldComponentOptions {
   showLog?: boolean;
@@ -20,7 +20,7 @@ export class ControllerFormFieldTest extends BeanControllerBase {
   protected async __init__() {}
 
   protected render() {
-    const domField = this.$slotDefault ? this.$slotDefault() : <ZFormFieldWrapper {...this.$props} render="input"></ZFormFieldWrapper>;
+    const domField = this.$slotDefault ? this.$slotDefault() : <ZFormFieldPreset {...this.$props} render="input"></ZFormFieldPreset>;
     return (
       <>
         {this.$props.slotHeader?.({ name: 'kevin' })}

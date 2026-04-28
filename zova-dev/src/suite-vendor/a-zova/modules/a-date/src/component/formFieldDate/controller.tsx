@@ -3,7 +3,7 @@ import type { IFormFieldPresetOptions } from 'zova-module-a-form';
 
 import { BeanControllerBase } from 'zova';
 import { Controller } from 'zova-module-a-bean';
-import { ZFormFieldWrapper } from 'zova-module-a-form';
+import { ZFormFieldPreset } from 'zova-module-a-form';
 import { IDateOptions } from 'zova-module-basic-openapi';
 
 import { dateFormatUtil } from '../../lib/utils.js';
@@ -19,7 +19,7 @@ export class ControllerFormFieldDate extends BeanControllerBase {
 
   protected render() {
     const value = dateFormatUtil(this.$props.value, this.dateFormat);
-    return <ZFormFieldWrapper {...this.$props} render="input" preset={{ input: { value } }}></ZFormFieldWrapper>;
+    return <ZFormFieldPreset {...this.$props} render="input" preset={{ input: { value } }}></ZFormFieldPreset>;
   }
 
   get dateFormat(): IDateOptions {
