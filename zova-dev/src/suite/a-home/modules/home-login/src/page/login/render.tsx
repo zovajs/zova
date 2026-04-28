@@ -59,6 +59,7 @@ export class RenderPageLogin extends BeanRenderBase {
         <ZFormFieldWrapper
           name="password"
           class="grow"
+          sys={{ asyncDebounceMs: 1000 }}
           preset={{ input: { type: 'password', placeholder: this.scope.locale.YourPassword() } }}
           layout={{ iconPrefix: ':daisy:lock' }}
         ></ZFormFieldWrapper>

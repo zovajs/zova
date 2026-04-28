@@ -214,15 +214,16 @@ export class ControllerFormField<TParentData extends {} = {}> extends BeanContro
   private _getFormFieldOptions() {
     // defaultValue
     const value = this.$$form.getFieldValue(this.name);
-    const defaultValue = isNil(value) ? (this.$props.defaultValue ?? this.property?.default) : undefined;
+    const defaultValue = isNil(value) ? (this.$props.sys?.defaultValue ?? this.property?.default) : undefined;
     // validators
     const validators = this._getFormFieldOptionsValidators();
     return Object.assign(
       {
         defaultValue,
       },
-      this.$props,
+      this.$props.sys,
       {
+        name: this.name,
         form: this.$$form.form,
         validators,
       },
@@ -243,7 +244,7 @@ export class ControllerFormField<TParentData extends {} = {}> extends BeanContro
         onBlur: _normalizeValidateSchema(validateOnBlur, zodSchemaField),
         onChange: _normalizeValidateSchema(validateOnChange, zodSchemaField),
       },
-      this.$props.validators,
+      this.$props.sys?.validators,
     );
   }
 }

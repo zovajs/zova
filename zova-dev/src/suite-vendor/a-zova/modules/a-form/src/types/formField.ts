@@ -11,6 +11,8 @@ import type {
   TypeRenderComponentPreset,
 } from 'zova-module-a-openapi';
 
+import { DeepKeys } from '@tanstack/vue-form';
+
 import type { ControllerForm } from '../component/form/controller.jsx';
 import type { ControllerFormField } from '../component/formField/controller.jsx';
 import type { TypeBehaviorFormFieldOptions } from './form.js';
@@ -34,7 +36,12 @@ export interface IFormFieldLayoutOptionsBase {
 export type TypeFormFieldOnSetDisplayValue = (value: any) => any;
 export type TypeFormFieldDisplayValueUpdateTiming = 'input' | 'change';
 
-export interface IFormFieldOptionsBase {
+export interface IFormFieldSysOptionsBase<TParentData = {}> {
+  sys: Omit<TypeBehaviorFormFieldOptions<TParentData>, 'name'>;
+}
+
+export interface IFormFieldOptionsBase<TParentData = {}, TName extends DeepKeys<TParentData> = DeepKeys<TParentData>> {
+  name?: TName;
   render?: TypeRenderComponentPreset;
   class?: any;
   value?: any;
@@ -57,7 +64,7 @@ export interface IFormFieldPresetOptions<TParentData = {}> extends IFormFieldCom
 export interface IFormFieldComponentOptions<TParentData = {}> extends Partial<IFormFieldOptions<TParentData>> {}
 
 export interface IFormFieldOptions<TParentData = {}>
-  extends TypeBehaviorFormFieldOptions<TParentData>, IFormFieldOptionsBase, IFormFieldLayoutOptionsBase {
+  extends IFormFieldSysOptionsBase<TParentData>, IFormFieldOptionsBase<TParentData>, IFormFieldLayoutOptionsBase {
   behaviors?: IBehaviorItem;
   slotDefault?: (props: IFormFieldRenderContext<TParentData>, formField: ControllerFormField) => VNode;
 }
