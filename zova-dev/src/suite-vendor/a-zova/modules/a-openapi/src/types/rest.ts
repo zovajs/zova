@@ -12,7 +12,6 @@ export interface ISchemaObjectExtensionFieldRest {
   preset?: ISchemaRenderComponentPresetRecord;
   customKey?: string;
   visible?: boolean;
-  displayValue?: any;
   order?: number;
   table?: Omit<ISchemaObjectExtensionFieldRest, TypeSchemaScene>;
   form?: Omit<ISchemaObjectExtensionFieldRest, TypeSchemaScene>;
@@ -48,7 +47,7 @@ export type TypeSchemaScene = 'table' | 'form' | 'filter';
 export type TypeFormSchemaScene = 'form' | 'filter';
 
 export const renderFormFieldTopPropsSystem = ['order', 'table', 'form', 'filter'];
-export const renderTableColumnTopPropsSystem = ['order', 'table', 'form', 'filter', 'displayValue'];
+export const renderTableColumnTopPropsSystem = ['order', 'table', 'form', 'filter'];
 
 export type TypeRenderComponentPreset = keyof ISchemaRenderComponentPresetRecord;
 // | 'text'

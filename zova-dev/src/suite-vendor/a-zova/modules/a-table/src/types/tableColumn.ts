@@ -29,4 +29,5 @@ export interface ITableColumnScope extends ITableScope {
 
 export interface ITableCellScope extends ITableColumnScope {
   value: any;
+  fallbackValue: any;
 }

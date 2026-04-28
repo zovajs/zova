@@ -25,16 +25,12 @@ export interface IFormFieldScope<TParentData = {}> {
   name: string;
   value: any;
   property?: SchemaObject;
-  displayValue?: any;
   render?: IFormFieldRenderContext<TParentData>;
 }
 
 export interface IFormFieldLayoutOptionsBase {
   layout?: ISchemaRenderComponentLayoutOptions;
 }
-
-export type TypeFormFieldOnSetDisplayValue = (value: any) => any;
-export type TypeFormFieldDisplayValueUpdateTiming = 'input' | 'change';
 
 export interface IFormFieldSysOptionsBase<TParentData = {}> {
   sys?: Omit<TypeBehaviorFormFieldOptions<TParentData>, 'name'>;
@@ -52,9 +48,6 @@ export interface IFormFieldOptionsBase<TParentData = {}, TName extends DeepKeys<
   class?: any;
   value?: any;
   readonly?: boolean;
-  displayValue?: any;
-  displayValueUpdateTiming?: TypeFormFieldDisplayValueUpdateTiming;
-  onSetDisplayValue?: TypeFormFieldOnSetDisplayValue;
   disableNotifyChanged?: boolean;
   validators?: IFormFieldValidatorsOptionsBase;
   // onChange?: (e: Event) => void; // allow set to null, but not provide null type

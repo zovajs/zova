@@ -1,4 +1,4 @@
-import { celEnvBase } from '@cabloy/utils';
+import { celEnvBase, isNilOrEmptyString } from '@cabloy/utils';
 import { CellContext, createColumnHelper, getCoreRowModel, TableOptionsWithReactiveData } from '@tanstack/vue-table';
 import { SchemaObject } from 'openapi3-ts/oas31';
 import { VNode } from 'vue';
@@ -252,17 +252,13 @@ export class ControllerTable<TData extends {} = {}> extends BeanControllerTableB
   ) {
     // value
     const value = cellContext.getValue();
+    // renderFallbackValue
+    const fallbackValue = this.table.options.renderFallbackValue;
     // cellScope
-    const cellScope: ITableCellScope = objectAssignReactive({}, columnScope, { value });
-    // displayValue
-    let displayValue = property?.rest?.displayValue !== undefined ? this.zovaJsx.evaluateExpression(property?.rest?.displayValue, cellScope) : value;
-    if (displayValue === undefined || displayValue === null || displayValue === '') {
-      displayValue = this.table.options.renderFallbackValue;
-    }
-    cellScope.displayValue = displayValue;
+    const cellScope: ITableCellScope = objectAssignReactive({}, columnScope, { value, fallbackValue });
     // render: text
     if (renderProvider === 'text') {
-      return displayValue;
+      return isNilOrEmptyString(value) ? fallbackValue : value;
     }
     // renderContext
     const jsxRenderContext = this.getCellJsxRenderContext(cellScope, cellContext);
@@ -280,7 +276,7 @@ export class ControllerTable<TData extends {} = {}> extends BeanControllerTableB
         if (children && children.length > 0) {
           return this.zovaJsx.renderJsxChildrenDirect(children, cellScope, jsxRenderContext);
         } else {
-          return displayValue;
+          return value;
         }
       });
     }

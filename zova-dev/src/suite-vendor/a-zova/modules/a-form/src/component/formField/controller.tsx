@@ -123,9 +123,7 @@ export class ControllerFormField<TParentData extends {} = {}> extends BeanContro
     // props
     const props: IFormFieldRenderContextProps = { name };
     // celScope
-    const celScope = this.$$form.getFieldScope(this.name, {
-      displayValue: propsBucket.displayValue,
-    });
+    const celScope = this.$$form.getFieldScope(this.name, {});
     const jsxRenderContext = this.$$form.getFieldJsxRenderContext(this, celScope);
     return { propsBucket, props, celScope, jsxRenderContext };
   }

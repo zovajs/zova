@@ -35,7 +35,6 @@ import {
   IFormFieldRenderContextPropsBucket,
   IFormFieldScope,
   IJsxRenderContextFormField,
-  TypeFormFieldOnSetDisplayValue,
 } from '../../types/formField.js';
 import { IFormMeta } from '../../types/formMeta.js';
 import { IFormProvider } from '../../types/provider.js';
@@ -191,10 +190,6 @@ export class ControllerForm<TFormData extends {} = {}, TSubmitMeta = never> exte
     jsxRenderContext: {},
   ): IFormFieldRenderContextPropsBucket {
     const props = this._getFieldComponentPropsTopInner(name, celScope, jsxRenderContext);
-    // displayValue
-    if (props.displayValue === undefined) {
-      props.displayValue = celScope.value;
-    }
     return props;
   }
 
@@ -316,8 +311,6 @@ export class ControllerForm<TFormData extends {} = {}, TSubmitMeta = never> exte
       props = Object.assign({}, props, propsExtra);
     }
     if (cast(props).visible === false) return;
-    // displayValue
-    celScope.displayValue = props.displayValue;
     const componentOptions = this._getFieldComponentOptionsTop(props.render);
     return this.zovaJsx.render(componentOptions, props, celScope, jsxRenderContext);
   }

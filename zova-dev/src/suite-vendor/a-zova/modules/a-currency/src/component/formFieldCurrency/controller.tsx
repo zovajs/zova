@@ -23,7 +23,7 @@ export class ControllerFormFieldCurrency extends BeanControllerBase {
 
   protected render() {
     const currencyOptions = this.$props.preset?.currency;
-    const value = this._displayValuePatch(currencyOptions);
+    const value = this._valuePatch(currencyOptions);
     return (
       <ZFormFieldWrapper
         {...this.$props}
@@ -52,7 +52,7 @@ export class ControllerFormFieldCurrency extends BeanControllerBase {
     );
   }
 
-  private _displayValuePatch(currencyOptions?: CurrencyOptions) {
+  private _valuePatch(currencyOptions?: CurrencyOptions) {
     if (this._valueKeyboardInput === undefined) return this._getValue(currencyOptions);
     // hold the current input value if invalid
     const valueInputPatch = currencyUpdate(this._valueKeyboardInput, currencyOptions);
