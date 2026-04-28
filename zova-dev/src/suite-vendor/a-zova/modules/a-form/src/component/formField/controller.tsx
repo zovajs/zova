@@ -232,11 +232,11 @@ export class ControllerFormField<TParentData extends {} = {}> extends BeanContro
 
   private _getFormFieldOptionsValidators() {
     const zodSchemaField = this.fieldZodSchema;
-    const validateOnDynamicDefault =
-      this.$props.validateOnDynamic === undefined && this.$props.validateOnBlur === undefined && this.$props.validateOnChange === undefined;
-    const validateOnDynamic = this.$props.validateOnDynamic ?? validateOnDynamicDefault;
-    const validateOnBlur = this.$props.validateOnBlur;
-    const validateOnChange = this.$props.validateOnChange;
+    const validators = this.$props.validators;
+    const validateOnDynamicDefault = validators?.onDynamic === undefined && validators?.onBlur === undefined && validators?.onChange === undefined;
+    const validateOnDynamic = validators?.onDynamic ?? validateOnDynamicDefault;
+    const validateOnBlur = validators?.onBlur;
+    const validateOnChange = validators?.onChange;
     return Object.assign(
       {},
       {

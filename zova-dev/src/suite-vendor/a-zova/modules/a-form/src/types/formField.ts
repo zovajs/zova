@@ -37,7 +37,13 @@ export type TypeFormFieldOnSetDisplayValue = (value: any) => any;
 export type TypeFormFieldDisplayValueUpdateTiming = 'input' | 'change';
 
 export interface IFormFieldSysOptionsBase<TParentData = {}> {
-  sys: Omit<TypeBehaviorFormFieldOptions<TParentData>, 'name'>;
+  sys?: Omit<TypeBehaviorFormFieldOptions<TParentData>, 'name'>;
+}
+
+export interface IFormFieldValidatorsOptionsBase {
+  onDynamic?: boolean | z.ZodType;
+  onChange?: boolean | z.ZodType;
+  onBlur?: boolean | z.ZodType;
 }
 
 export interface IFormFieldOptionsBase<TParentData = {}, TName extends DeepKeys<TParentData> = DeepKeys<TParentData>> {
@@ -49,9 +55,7 @@ export interface IFormFieldOptionsBase<TParentData = {}, TName extends DeepKeys<
   displayValueUpdateTiming?: TypeFormFieldDisplayValueUpdateTiming;
   onSetDisplayValue?: TypeFormFieldOnSetDisplayValue;
   disableNotifyChanged?: boolean;
-  validateOnDynamic?: boolean | z.ZodType;
-  validateOnChange?: boolean | z.ZodType;
-  validateOnBlur?: boolean | z.ZodType;
+  validators?: IFormFieldValidatorsOptionsBase;
   // onChange?: (e: Event) => void; // allow set to null, but not provide null type
   // onInput?: (e: Event) => void; // allow set to null, but not provide null type
   // onBlur?: (e: Event) => void; // allow set to null, but not provide null type
@@ -61,7 +65,7 @@ export interface IFormFieldPresetOptions<TParentData = {}> extends IFormFieldCom
   preset?: ISchemaRenderComponentPresetRecord;
 }
 
-export interface IFormFieldComponentOptions<TParentData = {}> extends Partial<IFormFieldOptions<TParentData>> {}
+export interface IFormFieldComponentOptions<TParentData = {}> extends IFormFieldOptions<TParentData> {}
 
 export interface IFormFieldOptions<TParentData = {}>
   extends IFormFieldSysOptionsBase<TParentData>, IFormFieldOptionsBase<TParentData>, IFormFieldLayoutOptionsBase {
