@@ -93,6 +93,7 @@ export class ControllerTable<TData extends {} = {}> extends BeanControllerTableB
   }
 
   private _createTable() {
+    // eslint-disable-next-line
     const self = this;
     const tableOptions: TableOptionsWithReactiveData<TData> = {
       getRowId: (row: TData) => cast(row).id,
@@ -143,7 +144,7 @@ export class ControllerTable<TData extends {} = {}> extends BeanControllerTableB
   }
 
   private async _createTableMeta() {
-    const properties: SchemaObject[] = [];
+    let properties: SchemaObject[] = [];
     const renders: Record<string, TypeTableCellRender<TData>> = {};
     if (!this.properties) return { properties, renders };
     const promises: Promise<any>[] = [];
@@ -162,8 +163,12 @@ export class ControllerTable<TData extends {} = {}> extends BeanControllerTableB
       // render
       promises.push(this._createColumnRender(columnProps.render, property, columnProps, columnScope));
     }
-    const res = await Promise.all(promises);
-    properties.forEach((item, index) => (renders[item.key!] = res[index]));
+    let res = await Promise.all(promises);
+    properties = properties.filter((_item, index) => !!res[index]);
+    res = res.filter(item => !!item);
+    properties.forEach((item, index) => {
+      renders[item.key!] = res[index];
+    });
     return { properties, renders };
   }
 
@@ -192,7 +197,7 @@ export class ControllerTable<TData extends {} = {}> extends BeanControllerTableB
     };
   }
 
-  public async createColumnRender(key: string, render: TypeTableCellRenderComponent) {
+  public async createColumnRender(key: string, render: TypeTableCellRenderComponent): Promise<TypeTableCellRender<TData, any> | undefined> {
     // columnScope
     const columnScope = this.getColumnScope(key);
     return await this._createColumnRender(render, undefined, undefined, columnScope);
@@ -203,7 +208,7 @@ export class ControllerTable<TData extends {} = {}> extends BeanControllerTableB
     property: SchemaObject | undefined,
     columnProps: ITableCellRenderColumnProps | undefined,
     columnScope: ITableColumnScope,
-  ): Promise<TypeTableCellRender<TData, any>> {
+  ): Promise<TypeTableCellRender<TData, any> | undefined> {
     // renderProvider
     const renderProvider = this.getRenderProvider(render);
     // beanInstance
@@ -213,6 +218,7 @@ export class ControllerTable<TData extends {} = {}> extends BeanControllerTableB
       beanInstance = await this.sys.bean._getBean(renderProvider as any, true);
       const beanOptions = appResource.getBean(renderProvider as any);
       onionOptions = beanOptions?.options as IDecoratorTableCellOptions | undefined;
+      if (beanInstance?.checkVisible && !beanInstance.checkVisible()) return;
     }
     return cellContext => {
       if (!cellContext) return;

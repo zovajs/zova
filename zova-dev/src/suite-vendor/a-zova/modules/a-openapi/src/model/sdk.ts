@@ -153,6 +153,7 @@ export class ModelSdk extends BeanModelBase {
   }
 
   public createApiSchemas(api: string, apiMethod?: TypeRequestMethod, apiOptions?: IApiSchemaOptions): IOpenapiSchemas {
+    // eslint-disable-next-line
     const self = this;
     const sdk = this.getSdk(api, apiMethod, apiOptions);
     return {
