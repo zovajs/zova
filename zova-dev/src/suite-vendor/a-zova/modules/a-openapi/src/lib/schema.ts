@@ -27,12 +27,12 @@ export function loadSchemaProperties(
       property = onGetSchema(property.$ref)!;
     }
     if (!property) continue;
-    const customKey = property.rest?.customKey;
-    if (customKey) {
-      const parts = customKey.split('.');
+    const fieldSource = property.rest?.fieldSource;
+    if (fieldSource) {
+      const parts = fieldSource.split('.');
       const propertyParent: any = parts[0] === key ? property : result.find(item => item.key === parts[0]);
       property = propertyParent?.properties[parts[1]];
-      key = customKey;
+      key = fieldSource;
     }
     if (!property) continue;
     property = deepExtend(

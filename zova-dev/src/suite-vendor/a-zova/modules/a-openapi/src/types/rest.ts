@@ -10,7 +10,7 @@ export interface ISchemaRenderComponentPresetRecord {}
 export interface ISchemaObjectExtensionFieldRest {
   'render'?: TypeFormFieldRenderComponentNormal | TypeTableCellRenderComponentNormal;
   'preset'?: ISchemaRenderComponentPresetRecord;
-  'customKey'?: string;
+  'fieldSource'?: string;
   'visible'?: boolean;
   'order'?: number;
   'table'?: Omit<ISchemaObjectExtensionFieldRest, TypeSchemaScene>;
