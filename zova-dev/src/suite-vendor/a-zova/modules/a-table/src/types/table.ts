@@ -1,7 +1,6 @@
 import type { ColumnDef, useVueTable } from '@tanstack/vue-table';
 import type { SchemaObject } from 'openapi3-ts/oas31';
-
-import { TypeTableCellRenderComponent } from 'zova-module-a-openapi';
+import type { TypeTableCellRenderComponent } from 'zova-module-a-openapi';
 
 import type { ControllerTable } from '../component/table/controller.jsx';
 import type { TypeTableCellRender } from './tableColumn.js';
@@ -17,13 +16,13 @@ export interface ITableMeta<TData extends {} = {}> {
 
 export type TypeTableGetColumnsNext<TData extends {} = {}> = (properties?: SchemaObject[]) => Promise<TypeColumn<TData>[]>;
 
-export type TypeTablePropsCreateColumnRender<TData extends {} = {}> = (
+export type TypeTableCreateColumnRender<TData extends {} = {}> = (
   key: string,
   render: TypeTableCellRenderComponent,
 ) => Promise<TypeTableCellRender<TData, any> | undefined>;
 
-export type TypeTablePropsGetColumns<TData extends {} = {}> = (
+export type TypeTableGetColumns<TData extends {} = {}> = (
   next: TypeTableGetColumnsNext<TData>,
-  createColumnRender: TypeTablePropsCreateColumnRender<TData>,
+  createColumnRender: TypeTableCreateColumnRender<TData>,
   table: ControllerTable<TData>,
 ) => Promise<TypeColumn<TData>[]>;

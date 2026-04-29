@@ -6,7 +6,7 @@ import { BeanControllerBase, deepEqual, Use } from 'zova';
 import { Controller } from 'zova-module-a-bean';
 import { $QueriesAutoLoad } from 'zova-module-a-model';
 import { ITablePaged, ITableQuery, ITableResPaged } from 'zova-module-a-openapi';
-import { BeanControllerTableBase, ControllerTable, TypeTableGetColumnsNext } from 'zova-module-a-table';
+import { BeanControllerTableBase, TypeTableCreateColumnRender, TypeTableGetColumnsNext } from 'zova-module-a-table';
 
 import { IJsxRenderContextPage, IPageScope } from '../../types/page.js';
 
@@ -107,21 +107,23 @@ export class ControllerRestPage<TData extends {} = {}> extends BeanControllerBas
     return this.$$modelResource.permissions;
   }
 
-  async getColumns(next: TypeTableGetColumnsNext<TData>, $$table: ControllerTable<TData>) {
+  async getColumns(next: TypeTableGetColumnsNext<TData>, createColumnRender: TypeTableCreateColumnRender<TData>) {
     const columns = await next();
     const permissionUpdate = this.$passport.checkPermission(this.permissions, 'update');
     const permissionDelete = this.$passport.checkPermission(this.permissions, 'delete');
     if (!permissionUpdate && !permissionDelete) return columns;
     const columnHelper = createColumnHelper<TData>();
     const id = 'actions';
-    const columnRender = await $$table.createColumnRender(id, 'actionOperationsRow');
-    columns.push(
-      columnHelper.display({
-        id: 'actions',
-        header: () => this.scope.locale.TableActions(),
-        cell: columnRender,
-      }),
-    );
+    const columnRender = await createColumnRender(id, 'actionOperationsRow');
+    if (columnRender) {
+      columns.push(
+        columnHelper.display({
+          id: 'actions',
+          header: () => this.scope.locale.TableActions(),
+          cell: columnRender,
+        }),
+      );
+    }
     return columns;
   }
 

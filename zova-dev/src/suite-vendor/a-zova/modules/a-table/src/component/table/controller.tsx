@@ -13,18 +13,18 @@ import {
 } from 'zova-module-a-openapi';
 
 import type { ITableProvider } from '../../types/providers.js';
-import type { ITableMeta, TypeColumn, TypeTable, TypeTablePropsGetColumns } from '../../types/table.js';
+import type { ITableMeta, TypeColumn, TypeTable, TypeTableGetColumns } from '../../types/table.js';
 import type { IDecoratorTableCellOptions, IJsxRenderContextTableCell, ITableCellRender } from '../../types/tableCell.js';
 
 import { BeanControllerTableBase } from '../../lib/beanControllerTableBase.js';
 import {
   constColumnProps,
-  IJsxRenderContextTableColumn,
-  ITableCellRenderColumnProps,
-  ITableCellScope,
-  ITableColumnScope,
-  ITableScope,
-  TypeTableCellRender,
+  type IJsxRenderContextTableColumn,
+  type ITableCellRenderColumnProps,
+  type ITableCellScope,
+  type ITableColumnScope,
+  type ITableScope,
+  type TypeTableCellRender,
 } from '../../types/tableColumn.js';
 
 export interface ControllerTableProps<TData extends {} = {}> {
@@ -32,7 +32,7 @@ export interface ControllerTableProps<TData extends {} = {}> {
   schema?: SchemaObject;
   tableProvider?: ITableProvider;
   tableScope?: ITableScope;
-  getColumns?: TypeTablePropsGetColumns<TData>;
+  getColumns?: TypeTableGetColumns<TData>;
   slotDefault?: (table: ControllerTable<TData>) => VNode;
 }
 
@@ -123,7 +123,12 @@ export class ControllerTable<TData extends {} = {}> extends BeanControllerTableB
         const columnScope = this.getColumnScope(key);
         // renderContext
         const jsxRenderContext = this.getColumnJsxRenderContext(columnScope);
-        return await this._createColumnRender(render, undefined, undefined, columnScope, jsxRenderContext);
+        // columnProps
+        const columnProps = this.getColumnComponentPropsTop(key, columnScope, jsxRenderContext);
+        // visible
+        if (columnProps.visible === false) return;
+        const property = this.getColumnProperty(key);
+        return await this._createColumnRender(render, property, columnProps, columnScope, jsxRenderContext);
       },
       this,
     );
@@ -219,16 +224,16 @@ export class ControllerTable<TData extends {} = {}> extends BeanControllerTableB
     const renderProvider = this.getRenderProvider(render);
     // beanInstance
     let beanInstance: ITableCellRender | undefined;
-    let onionOptions: IDecoratorTableCellOptions | undefined;
     if (typeof renderProvider === 'string' && renderProvider.includes('.tableCell.')) {
       beanInstance = await this.sys.bean._getBean(renderProvider as any, true);
       const beanOptions = appResource.getBean(renderProvider as any);
-      onionOptions = beanOptions?.options as IDecoratorTableCellOptions | undefined;
-      if (beanInstance?.checkVisible && !beanInstance.checkVisible(onionOptions ?? {}, renderContext)) return;
+      const onionOptions = beanOptions?.options as IDecoratorTableCellOptions | undefined;
+      columnProps = deepExtend({}, onionOptions, columnProps);
+      if (beanInstance?.checkVisible && !beanInstance.checkVisible(columnProps as any, renderContext)) return;
     }
     return cellContext => {
       if (!cellContext) return;
-      return this._cellRender(render, property, columnProps, columnScope, cellContext, renderProvider, beanInstance, onionOptions);
+      return this._cellRender(render, property, columnProps, columnScope, cellContext, renderProvider, beanInstance);
     };
   }
 
@@ -240,7 +245,6 @@ export class ControllerTable<TData extends {} = {}> extends BeanControllerTableB
     cellContext: CellContext<TData, any>,
     renderProvider: TypeTableCellRenderComponentProvider,
     beanInstance: ITableCellRender | undefined,
-    onionOptions: IDecoratorTableCellOptions | undefined,
   ) {
     return this.zovaJsx.setTransientObject(
       {
@@ -249,7 +253,7 @@ export class ControllerTable<TData extends {} = {}> extends BeanControllerTableB
         },
       },
       () => {
-        return this._cellRenderInner(render, property, columnProps, columnScope, cellContext, renderProvider, beanInstance, onionOptions);
+        return this._cellRenderInner(render, property, columnProps, columnScope, cellContext, renderProvider, beanInstance);
       },
     );
   }
@@ -262,7 +266,6 @@ export class ControllerTable<TData extends {} = {}> extends BeanControllerTableB
     cellContext: CellContext<TData, any>,
     renderProvider: TypeTableCellRenderComponentProvider,
     beanInstance: ITableCellRender | undefined,
-    onionOptions: IDecoratorTableCellOptions | undefined,
   ) {
     // value
     const value = cellContext.getValue();
@@ -279,12 +282,9 @@ export class ControllerTable<TData extends {} = {}> extends BeanControllerTableB
     // beanInstance
     if (beanInstance) {
       // jsx: props
-      let cellProps = isJsxComponent(render)
+      const cellProps = isJsxComponent(render)
         ? this.zovaJsx.renderJsxProps(cast(render).props, { ...columnProps }, cellScope, jsxRenderContext)
         : columnProps;
-      if (onionOptions) {
-        cellProps = deepExtend({}, onionOptions, cellProps);
-      }
       return beanInstance.render(cellProps ?? {}, jsxRenderContext, () => {
         const children = isJsxComponent(render) && cast(render).children;
         if (children && children.length > 0) {
