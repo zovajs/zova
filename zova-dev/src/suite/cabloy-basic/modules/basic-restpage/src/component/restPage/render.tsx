@@ -37,9 +37,6 @@ export class RenderRestPage<TData extends {} = {}> extends BeanRenderBase {
         schema={this.schema}
         tableProvider={this.tableProvider}
         tableScope={this.pageScope}
-        getColumns={(next, createColumnRender) => {
-          return this.getColumns(next, createColumnRender);
-        }}
       ></ComponentTable>
     );
   }

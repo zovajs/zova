@@ -5,7 +5,6 @@ export default {
   Submit: 'Submit',
   Search: 'Search',
   Reset: 'Reset',
-  TableActions: 'Actions',
   PagedTotalItems: 'Total',
   PagedTotalPages: 'Pages',
   EntryNotExist: 'The entry does not exist',
