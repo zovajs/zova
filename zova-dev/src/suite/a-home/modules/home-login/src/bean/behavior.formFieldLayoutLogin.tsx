@@ -24,8 +24,11 @@ export class BehaviorFormFieldLayoutLogin extends BeanBehaviorBase<
 
   protected render(renderContext: IBehaviorPropsInputFormFieldLayoutLogin, next: NextBehavior<IBehaviorPropsOutputFormFieldLayoutLogin>): VNode {
     const field = this.$$formField.field;
-    const vnode = next(renderContext);
     const layout = renderContext.propsBucket.layout;
+    // needHandleBorder
+    renderContext.propsBucket.needHandleBorder = layout?.disable || !layout?.inline;
+    const vnode = next(renderContext);
+    if (layout?.disable) return vnode;
     const iconPrefix = layout?.iconPrefix;
     const error = field.state.meta.errors[0] as z.ZodError | undefined;
     return (

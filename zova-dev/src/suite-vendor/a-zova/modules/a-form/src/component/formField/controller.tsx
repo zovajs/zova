@@ -15,7 +15,6 @@ import {
   IFormFieldRenderContext,
   IFormFieldRenderContextProps,
   IFormFieldRenderContextPropsBucket,
-  inputTypePresets,
 } from '../../types/formField.js';
 
 export interface ControllerFormFieldProps<TParentData extends {} = {}> extends IFormFieldPresetOptions<TParentData> {}
@@ -95,14 +94,6 @@ export class ControllerFormField<TParentData extends {} = {}> extends BeanContro
 
   public get formProvider() {
     return this.$$form.formProvider;
-  }
-
-  public normalizeInputType(renderFlattern: any, inputType?: string) {
-    if (inputType) return inputType;
-    if (typeof renderFlattern === 'string' && inputTypePresets.includes(renderFlattern)) {
-      return renderFlattern;
-    }
-    return 'text';
   }
 
   public setValue(value: any, disableNotifyChanged?: boolean) {

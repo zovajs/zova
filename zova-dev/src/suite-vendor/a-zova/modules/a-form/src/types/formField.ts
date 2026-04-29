@@ -18,7 +18,6 @@ import type { ControllerFormField } from '../component/formField/controller.jsx'
 import type { TypeBehaviorFormFieldOptions } from './form.js';
 
 export type HTMLInputElementType = 'text' | 'password' | 'number' | 'file' | 'hidden' | 'tel' | 'email';
-export const inputTypePresets = ['text', 'password', 'number', 'file', 'hidden', 'tel', 'email'];
 export const constFieldProps = '$$FieldProps';
 
 export interface IFormFieldScope<TParentData = {}> {
