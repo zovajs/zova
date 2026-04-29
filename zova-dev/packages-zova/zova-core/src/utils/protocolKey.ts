@@ -1,6 +1,6 @@
 import type { ILocaleRecord } from '../bean/resource/locale/type.ts';
 
-export interface ICustomKeyRecord {
+export interface IProtocolKeyRecord {
   'x-vona-locale': keyof ILocaleRecord | undefined;
   'x-vona-instance-name': string | undefined;
   'x-vona-passport-code': string | undefined;
@@ -9,6 +9,6 @@ export interface ICustomKeyRecord {
   'x-vona-jwt-authtoken': 'true' | 'false' | undefined;
 }
 
-export function $customKey<K extends keyof ICustomKeyRecord>(key: K): K {
+export function $protocolKey<K extends keyof IProtocolKeyRecord>(key: K): K {
   return key;
 }

@@ -1,2 +1,2 @@
-export * from './customKey.ts';
+export * from './protocolKey.ts';
 export * from './stateLock.ts';
