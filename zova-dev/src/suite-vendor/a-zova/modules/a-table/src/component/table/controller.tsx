@@ -12,10 +12,11 @@ import {
   TypeTableCellRenderComponentProvider,
 } from 'zova-module-a-openapi';
 
+import type { ITableProvider } from '../../types/providers.js';
+import type { ITableMeta, TypeColumn, TypeTable, TypeTablePropsGetColumns } from '../../types/table.js';
+import type { IDecoratorTableCellOptions, IJsxRenderContextTableCell, ITableCellRender } from '../../types/tableCell.js';
+
 import { BeanControllerTableBase } from '../../lib/beanControllerTableBase.js';
-import { ITableProvider } from '../../types/providers.js';
-import { ITableMeta, TypeColumn, TypeTable, TypeTableGetColumnsNext } from '../../types/table.js';
-import { IDecoratorTableCellOptions, IJsxRenderContextTableCell, ITableCellRender } from '../../types/tableCell.js';
 import {
   constColumnProps,
   IJsxRenderContextTableColumn,
@@ -31,7 +32,7 @@ export interface ControllerTableProps<TData extends {} = {}> {
   schema?: SchemaObject;
   tableProvider?: ITableProvider;
   tableScope?: ITableScope;
-  getColumns?: (next: TypeTableGetColumnsNext<TData>, table: ControllerTable<TData>) => Promise<TypeColumn<TData>[]>;
+  getColumns?: TypeTablePropsGetColumns<TData>;
   slotDefault?: (table: ControllerTable<TData>) => VNode;
 }
 
@@ -113,12 +114,22 @@ export class ControllerTable<TData extends {} = {}> extends BeanControllerTableB
   private async _createColumns() {
     if (!this.properties) return [];
     if (!this.$props.getColumns) return await this._createColumnsMiddle(this.tableMeta.properties);
-    return await this.$props.getColumns(async properties => {
-      return await this._createColumnsMiddle(properties ?? this.tableMeta.properties);
-    }, this);
+    return await this.$props.getColumns(
+      async properties => {
+        return await this._createColumnsMiddle(properties ?? this.tableMeta.properties);
+      },
+      async (key: string, render: TypeTableCellRenderComponent): Promise<TypeTableCellRender<TData, any> | undefined> => {
+        // columnScope
+        const columnScope = this.getColumnScope(key);
+        // renderContext
+        const jsxRenderContext = this.getColumnJsxRenderContext(columnScope);
+        return await this._createColumnRender(render, undefined, undefined, columnScope, jsxRenderContext);
+      },
+      this,
+    );
   }
 
-  private async _createColumnsMiddle(properties: SchemaObject[]) {
+  private async _createColumnsMiddle(properties: SchemaObject[]): Promise<TypeColumn<TData>[]> {
     const tableMeta = this.tableMeta;
     const columnHelper = createColumnHelper<TData>();
     const columns: TypeColumn<TData>[] = [];
@@ -161,7 +172,7 @@ export class ControllerTable<TData extends {} = {}> extends BeanControllerTableB
       // property
       properties.push(property);
       // render
-      promises.push(this._createColumnRender(columnProps.render, property, columnProps, columnScope));
+      promises.push(this._createColumnRender(columnProps.render, property, columnProps, columnScope, jsxRenderContext));
     }
     let res = await Promise.all(promises);
     properties = properties.filter((_item, index) => !!res[index]);
@@ -197,17 +208,12 @@ export class ControllerTable<TData extends {} = {}> extends BeanControllerTableB
     };
   }
 
-  public async createColumnRender(key: string, render: TypeTableCellRenderComponent): Promise<TypeTableCellRender<TData, any> | undefined> {
-    // columnScope
-    const columnScope = this.getColumnScope(key);
-    return await this._createColumnRender(render, undefined, undefined, columnScope);
-  }
-
   private async _createColumnRender(
     render: TypeTableCellRenderComponent,
     property: SchemaObject | undefined,
     columnProps: ITableCellRenderColumnProps | undefined,
     columnScope: ITableColumnScope,
+    renderContext: IJsxRenderContextTableColumn,
   ): Promise<TypeTableCellRender<TData, any> | undefined> {
     // renderProvider
     const renderProvider = this.getRenderProvider(render);
@@ -218,7 +224,7 @@ export class ControllerTable<TData extends {} = {}> extends BeanControllerTableB
       beanInstance = await this.sys.bean._getBean(renderProvider as any, true);
       const beanOptions = appResource.getBean(renderProvider as any);
       onionOptions = beanOptions?.options as IDecoratorTableCellOptions | undefined;
-      if (beanInstance?.checkVisible && !beanInstance.checkVisible()) return;
+      if (beanInstance?.checkVisible && !beanInstance.checkVisible(onionOptions ?? {}, renderContext)) return;
     }
     return cellContext => {
       if (!cellContext) return;

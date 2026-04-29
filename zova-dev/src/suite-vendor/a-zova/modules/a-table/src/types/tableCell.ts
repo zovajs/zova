@@ -4,7 +4,7 @@ import type { ServiceOnion } from 'zova-module-a-bean';
 import type { IJsxRenderContextBase, ISchemaRenderComponentPresetRecord } from 'zova-module-a-openapi';
 
 import type { ControllerTable } from '../component/table/controller.jsx';
-import type { ITableCellScope } from './tableColumn.js';
+import type { IJsxRenderContextTableColumn, ITableCellScope } from './tableColumn.js';
 
 export interface IJsxRenderContextTableCell<TData extends {} = any> extends IJsxRenderContextBase {
   $celScope: ITableCellScope;
@@ -18,7 +18,7 @@ export interface ITableCellRecord {}
 
 export interface ITableCellRender {
   render(options: IDecoratorTableCellOptions, renderContext: IJsxRenderContextTableCell, next: NextTableCellRender): any;
-  checkVisible?(): boolean;
+  checkVisible?(options: IDecoratorTableCellOptions, renderContext: IJsxRenderContextTableColumn): boolean;
 }
 
 export interface IDecoratorTableCellPresetOptions {
