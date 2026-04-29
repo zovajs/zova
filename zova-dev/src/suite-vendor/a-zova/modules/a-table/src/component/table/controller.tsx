@@ -65,17 +65,14 @@ export class ControllerTable<TData extends {} = {}> extends BeanControllerTableB
     this.zovaJsx = this.app.bean._newBeanSimple(ZovaJsx, false, this.tableProvider.components, this.tableProvider.actions, this.columnCelEnv);
     // properties
     this._createProperties();
-    // tableMeta
-    this.tableMeta = await this._createTableMeta();
-    // columns
-    this.columns = await this._createColumns();
+    // tableMeta/columns
+    await this.refreshMeta();
     // watch
     this.$watch(
       () => this.$props.schema,
       async (newValue, oldValue) => {
         if (deepEqual(newValue, oldValue)) return;
-        this.tableMeta = await this._createTableMeta();
-        this.columns = await this._createColumns();
+        await this.refreshMeta();
       },
     );
     // table
@@ -88,6 +85,11 @@ export class ControllerTable<TData extends {} = {}> extends BeanControllerTableB
 
   get data() {
     return this.$props.data;
+  }
+
+  public async refreshMeta() {
+    this.tableMeta = await this._createTableMeta();
+    this.columns = await this._createColumns();
   }
 
   private _createTable() {

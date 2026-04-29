@@ -2,7 +2,7 @@ import type { ControllerPageResource, ModelResource } from 'zova-module-rest-res
 
 import { celEnvBase } from '@cabloy/utils';
 import { createColumnHelper } from '@tanstack/table-core';
-import { Use } from 'zova';
+import { BeanControllerBase, deepEqual, Use } from 'zova';
 import { Controller } from 'zova-module-a-bean';
 import { $QueriesAutoLoad } from 'zova-module-a-model';
 import { ITablePaged, ITableQuery, ITableResPaged } from 'zova-module-a-openapi';
@@ -17,12 +17,14 @@ export interface ControllerRestPageProps<TData extends {} = {}> {
 }
 
 @Controller()
-export class ControllerRestPage<TData extends {} = {}> extends BeanControllerTableBase {
+export class ControllerRestPage<TData extends {} = {}> extends BeanControllerBase {
   static $propsDefault = { showFilter: true };
 
   queryFilterData: {};
   queryPaged: ITablePaged;
   query: ITableQuery;
+
+  tableRef: BeanControllerTableBase;
 
   @Use({ injectionScope: 'host' })
   $$pageWrapper: ControllerPageResource;
@@ -42,6 +44,14 @@ export class ControllerRestPage<TData extends {} = {}> extends BeanControllerTab
     await $QueriesAutoLoad(
       () => this.$$modelResource.apiSchemasSelect.sdk,
       () => this.queryData,
+    );
+    // watch
+    this.$watch(
+      () => this.permissions,
+      async (newValue, oldValue) => {
+        if (deepEqual(newValue, oldValue)) return;
+        await this.tableRef?.refreshMeta();
+      },
     );
   }
 

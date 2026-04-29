@@ -30,6 +30,9 @@ export class RenderRestPage<TData extends {} = {}> extends BeanRenderBase {
     const ComponentTable = this.$zovaComponent(this.$$modelResource.componentTable);
     return (
       <ComponentTable<TData>
+        controllerRef={ref => {
+          this.tableRef = ref;
+        }}
         data={this.data}
         schema={this.schema}
         tableProvider={this.tableProvider}

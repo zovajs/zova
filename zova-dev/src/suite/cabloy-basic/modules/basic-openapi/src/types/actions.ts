@@ -1,5 +1,7 @@
+import type { TypeRenderComponentJsx } from 'zova-jsx';
+
 import 'zova-module-a-openapi';
-import { IResourceActionRowOptionsBase, IResourceActionTableOptionsBase } from 'zova-module-a-openapi';
+import type { IResourceActionRowOptionsBase, IResourceActionRowRecord, IResourceActionTableOptionsBase } from 'zova-module-a-openapi';
 
 declare module 'zova-module-a-openapi' {
   /** table */
@@ -38,4 +40,14 @@ export interface IResourceActionRowOptionsUpdate extends IResourceActionRowOptio
 
 export interface IResourceActionRowOptionsDelete extends IResourceActionRowOptionsBase {}
 
-export interface IResourceActionRowOptionsOperationsRow extends IResourceActionRowOptionsBase {}
+export interface IResourceActionRowOptionsOperationsRow extends IResourceActionRowOptionsBase {
+  actions?: TypeResourceActionRowOptionsOperationsRowActions;
+}
+
+export type TypeResourceActionRowOptionsOperationsRowActions = {
+  [key in keyof Omit<IResourceActionRowRecord, 'operationsRow'>]?: IResourceActionRowOptionsOperationsRowAction | false;
+};
+export interface IResourceActionRowOptionsOperationsRowAction {
+  component?: keyof Omit<IResourceActionComponentRowRecord, 'actionOperationsRow'>;
+  jsx?: TypeRenderComponentJsx;
+}
