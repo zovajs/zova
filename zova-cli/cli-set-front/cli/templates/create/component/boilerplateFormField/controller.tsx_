@@ -9,7 +9,7 @@ export interface Controller<%=argv.nameMeta.fullCapitalize%>Props extends IFormF
 @Controller()
 export class Controller<%=argv.nameMeta.fullCapitalize%> extends BeanControllerBase {
   static $propsDefault = {};
-  static $componentOptions: IComponentOptions = { inheritAttrs: false };
+  static $componentOptions: IComponentOptions = { inheritAttrs: false, deepExtendDefault: true };
 
   protected async __init__() {}
 

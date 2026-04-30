@@ -12,7 +12,7 @@ export interface ControllerFormFieldCurrencyProps extends IFormFieldPresetOption
 @Controller()
 export class ControllerFormFieldCurrency extends BeanControllerBase {
   static $propsDefault = {};
-  static $componentOptions: IComponentOptions = { inheritAttrs: false };
+  static $componentOptions: IComponentOptions = { inheritAttrs: false, deepExtendDefault: true };
 
   private _valueKeyboardInput: string | undefined;
 

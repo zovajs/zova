@@ -12,7 +12,7 @@ export interface ControllerFormFieldInputProps extends IFormFieldPresetOptions {
 @Controller()
 export class ControllerFormFieldInput extends BeanControllerBase {
   static $propsDefault = {};
-  static $componentOptions: IComponentOptions = { inheritAttrs: false };
+  static $componentOptions: IComponentOptions = { inheritAttrs: false, deepExtendDefault: true };
 
   protected async __init__() {}
 

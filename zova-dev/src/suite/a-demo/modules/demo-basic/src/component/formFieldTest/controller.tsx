@@ -15,7 +15,7 @@ export interface ControllerFormFieldTestProps extends IFormFieldComponentOptions
 @Controller()
 export class ControllerFormFieldTest extends BeanControllerBase {
   static $propsDefault = {};
-  static $componentOptions: IComponentOptions = { inheritAttrs: false };
+  static $componentOptions: IComponentOptions = { inheritAttrs: false, deepExtendDefault: true };
 
   protected async __init__() {}
 

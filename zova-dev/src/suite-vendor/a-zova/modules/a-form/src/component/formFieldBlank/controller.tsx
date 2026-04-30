@@ -13,7 +13,7 @@ export interface ControllerFormFieldBlankProps<TParentData extends {} = {}, TSub
 @Controller()
 export class ControllerFormFieldBlank<TParentData extends {} = {}> extends BeanControllerBase {
   static $propsDefault = {};
-  static $componentOptions: IComponentOptions = { inheritAttrs: false };
+  static $componentOptions: IComponentOptions = { inheritAttrs: false, deepExtendDefault: true };
 
   @Use({ injectionScope: 'host' })
   $$form: ControllerForm<TParentData>;

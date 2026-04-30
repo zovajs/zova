@@ -12,7 +12,7 @@ export interface ControllerFormFieldDateRangeProps extends IFormFieldPresetOptio
 @Controller()
 export class ControllerFormFieldDateRange extends BeanControllerBase {
   static $propsDefault = {};
-  static $componentOptions: IComponentOptions = { inheritAttrs: false };
+  static $componentOptions: IComponentOptions = { inheritAttrs: false, deepExtendDefault: true };
 
   cContainer: string;
 

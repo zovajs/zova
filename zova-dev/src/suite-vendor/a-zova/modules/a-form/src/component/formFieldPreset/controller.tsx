@@ -10,7 +10,7 @@ export interface ControllerFormFieldPresetProps<TParentData extends {} = {}> ext
 @Controller()
 export class ControllerFormFieldPreset<TParentData extends {} = {}> extends BeanControllerBase {
   static $propsDefault = {};
-  static $componentOptions: IComponentOptions = { inheritAttrs: false };
+  static $componentOptions: IComponentOptions = { inheritAttrs: false, deepExtendDefault: true };
 
   @Use({ injectionScope: 'host' })
   $$form: ControllerForm<TParentData>;

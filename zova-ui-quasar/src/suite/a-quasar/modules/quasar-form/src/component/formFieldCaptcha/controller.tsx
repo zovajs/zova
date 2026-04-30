@@ -12,7 +12,7 @@ export interface ControllerFormFieldCaptchaProps extends IFormFieldPresetOptions
 @Controller()
 export class ControllerFormFieldCaptcha extends BeanControllerBase {
   static $propsDefault = {};
-  static $componentOptions: IComponentOptions = { inheritAttrs: false };
+  static $componentOptions: IComponentOptions = { inheritAttrs: false, deepExtendDefault: true };
 
   eventFormSubmission: TypeEventOff;
   captchaData?: ICaptchaData;
