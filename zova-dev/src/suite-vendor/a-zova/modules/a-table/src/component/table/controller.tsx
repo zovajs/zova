@@ -246,7 +246,7 @@ export class ControllerTable<TData extends {} = {}> extends BeanControllerTableB
     }
     return cellContext => {
       if (!cellContext) return;
-      return this._cellRender(render, columnProps, columnScope, cellContext, renderProvider, beanInstance, undefined, undefined);
+      return this._cellRender(render, columnProps, columnScope, cellContext, renderProvider, beanInstance, undefined, undefined, undefined);
     };
   }
 
@@ -264,6 +264,7 @@ export class ControllerTable<TData extends {} = {}> extends BeanControllerTableB
       const onionOptions = beanOptions?.options as IDecoratorTableCellOptions | undefined;
       columnProps = deepExtend({}, onionOptions, columnProps);
     }
+    const cellProps = isJsxComponent(render) ? deepExtend({}, columnProps, cast(render).props) : columnProps;
     return this._cellRender(
       render,
       columnProps as ITableCellRenderColumnProps,
@@ -271,6 +272,7 @@ export class ControllerTable<TData extends {} = {}> extends BeanControllerTableB
       renderContext.cellContext,
       renderProvider,
       beanInstance,
+      cellProps,
       cellScope,
       renderContext,
     );
@@ -283,6 +285,7 @@ export class ControllerTable<TData extends {} = {}> extends BeanControllerTableB
     cellContext: CellContext<TData, any>,
     renderProvider: TypeTableCellRenderComponentProvider,
     beanInstance: ITableCellRender | undefined,
+    cellProps: any | undefined,
     cellScope: ITableCellScope | undefined,
     jsxRenderContext: IJsxRenderContextTableCell | undefined,
   ) {
@@ -293,7 +296,17 @@ export class ControllerTable<TData extends {} = {}> extends BeanControllerTableB
         },
       },
       () => {
-        return this._cellRenderInner(render, columnProps, columnScope, cellContext, renderProvider, beanInstance, cellScope, jsxRenderContext);
+        return this._cellRenderInner(
+          render,
+          columnProps,
+          columnScope,
+          cellContext,
+          renderProvider,
+          beanInstance,
+          cellProps,
+          cellScope,
+          jsxRenderContext,
+        );
       },
     );
   }
@@ -305,6 +318,7 @@ export class ControllerTable<TData extends {} = {}> extends BeanControllerTableB
     cellContext: CellContext<TData, any>,
     renderProvider: TypeTableCellRenderComponentProvider,
     beanInstance: ITableCellRender | undefined,
+    cellProps: any | undefined,
     cellScope: ITableCellScope | undefined,
     jsxRenderContext: IJsxRenderContextTableCell | undefined,
   ) {
@@ -327,9 +341,11 @@ export class ControllerTable<TData extends {} = {}> extends BeanControllerTableB
     // beanInstance
     if (beanInstance) {
       // jsx: props
-      const cellProps = isJsxComponent(render)
-        ? this.zovaJsx.renderJsxProps(cast(render).props, { ...columnProps }, cellScope, jsxRenderContext)
-        : columnProps;
+      if (!cellProps) {
+        cellProps = isJsxComponent(render)
+          ? this.zovaJsx.renderJsxProps(cast(render).props, { ...columnProps }, cellScope, jsxRenderContext)
+          : columnProps;
+      }
       return beanInstance.render(cellProps ?? {}, jsxRenderContext, () => {
         const children = isJsxComponent(render) && cast(render).children;
         if (children && children.length > 0) {
