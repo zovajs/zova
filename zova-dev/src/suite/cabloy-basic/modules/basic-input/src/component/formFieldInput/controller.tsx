@@ -28,7 +28,7 @@ export class ControllerFormFieldInput extends BeanControllerBase {
             type: 'text',
             placeholder: undefined,
             onInput: (e: Event) => {
-              $$formField.setValue((e.target as HTMLInputElement).value);
+              $$formField.setValue((e.target as HTMLInputElement).value, propsBucket.disableNotifyChanged);
             },
             onBlur: () => {
               $$formField.handleBlur();
