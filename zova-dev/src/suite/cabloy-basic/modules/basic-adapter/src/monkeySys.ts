@@ -33,6 +33,8 @@ export class MonkeySys extends BeanSimple implements IMonkeySysInitialize {
             actionOperationsTable: 'basic-table:actionOperationsTable',
             actionOperationsRow: 'basic-table.tableCell.actionOperationsRow',
             actionView: 'basic-table.tableCell.actionView',
+            actionUpdate: 'basic-table.tableCell.actionUpdate',
+            actionDelete: 'basic-table.tableCell.actionDelete',
           },
           actions: {
             actionCreate: 'rest-actions:create',

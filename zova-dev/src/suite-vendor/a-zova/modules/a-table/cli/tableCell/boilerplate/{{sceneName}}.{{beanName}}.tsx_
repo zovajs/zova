@@ -1,6 +1,6 @@
 import { BeanBase } from 'zova';
 import {
-  IDecoratorTableCellPresetOptions,
+  IDecoratorTableCellOptions,
   IJsxRenderContextTableCell,
   IJsxRenderContextTableColumn,
   ITableCellRender,

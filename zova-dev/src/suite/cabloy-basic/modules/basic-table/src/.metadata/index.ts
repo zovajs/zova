@@ -80,15 +80,21 @@ declare module 'zova' {
 }
 /** render: end */
 /** tableCell: begin */
+export * from '../bean/tableCell.actionDelete.jsx';
 export * from '../bean/tableCell.actionOperationsRow.jsx';
+export * from '../bean/tableCell.actionUpdate.jsx';
 export * from '../bean/tableCell.actionView.jsx';
+import { ITableCellOptionsActionDelete } from '../bean/tableCell.actionDelete.jsx';
 import { ITableCellOptionsActionOperationsRow } from '../bean/tableCell.actionOperationsRow.jsx';
+import { ITableCellOptionsActionUpdate } from '../bean/tableCell.actionUpdate.jsx';
 import { ITableCellOptionsActionView } from '../bean/tableCell.actionView.jsx';
 import 'zova-module-a-table';
 declare module 'zova-module-a-table' {
   
     export interface ITableCellRecord {
-      'basic-table:actionOperationsRow': ITableCellOptionsActionOperationsRow;
+      'basic-table:actionDelete': ITableCellOptionsActionDelete;
+'basic-table:actionOperationsRow': ITableCellOptionsActionOperationsRow;
+'basic-table:actionUpdate': ITableCellOptionsActionUpdate;
 'basic-table:actionView': ITableCellOptionsActionView;
     }
 
@@ -96,6 +102,17 @@ declare module 'zova-module-a-table' {
 }
 declare module 'zova-module-basic-table' {
   
+        export interface TableCellActionDelete {
+          /** @internal */
+          get scope(): ScopeModuleBasicTable;
+        }
+
+        export interface TableCellActionDelete {
+          get $beanFullName(): 'basic-table.tableCell.actionDelete';
+          get $onionName(): 'basic-table:actionDelete';
+          get $onionOptions(): ITableCellOptionsActionDelete;
+        }
+
         export interface TableCellActionOperationsRow {
           /** @internal */
           get scope(): ScopeModuleBasicTable;
@@ -105,6 +122,17 @@ declare module 'zova-module-basic-table' {
           get $beanFullName(): 'basic-table.tableCell.actionOperationsRow';
           get $onionName(): 'basic-table:actionOperationsRow';
           get $onionOptions(): ITableCellOptionsActionOperationsRow;
+        }
+
+        export interface TableCellActionUpdate {
+          /** @internal */
+          get scope(): ScopeModuleBasicTable;
+        }
+
+        export interface TableCellActionUpdate {
+          get $beanFullName(): 'basic-table.tableCell.actionUpdate';
+          get $onionName(): 'basic-table:actionUpdate';
+          get $onionOptions(): ITableCellOptionsActionUpdate;
         }
 
         export interface TableCellActionView {
@@ -120,12 +148,16 @@ declare module 'zova-module-basic-table' {
 }
 /** tableCell: end */
 /** tableCell: begin */
+import { TableCellActionDelete } from '../bean/tableCell.actionDelete.jsx';
 import { TableCellActionOperationsRow } from '../bean/tableCell.actionOperationsRow.jsx';
+import { TableCellActionUpdate } from '../bean/tableCell.actionUpdate.jsx';
 import { TableCellActionView } from '../bean/tableCell.actionView.jsx';
 import 'zova';
 declare module 'zova' {
   export interface IBeanRecordGeneral {
-    'basic-table.tableCell.actionOperationsRow': TableCellActionOperationsRow;
+    'basic-table.tableCell.actionDelete': TableCellActionDelete;
+'basic-table.tableCell.actionOperationsRow': TableCellActionOperationsRow;
+'basic-table.tableCell.actionUpdate': TableCellActionUpdate;
 'basic-table.tableCell.actionView': TableCellActionView;
   }
 }

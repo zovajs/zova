@@ -11,4 +11,5 @@ export interface IResourceActionTableOptionsBase {
 export interface IResourceActionRowOptionsBase {
   resource?: string;
   id?: TableIdentity;
+  class?: any;
 }

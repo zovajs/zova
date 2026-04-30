@@ -45,36 +45,6 @@ export class TableCellActionOperationsRow extends BeanBase implements ITableCell
       if (!action || !$host.$passport.checkPermission(permissions, actionName)) continue;
       domActions.push($$table.cellRender(action, renderContext));
     }
-
     return <div class="flex gap-2">{domActions}</div>;
   }
 }
-
-// return (
-//       <div class="flex gap-2">
-//         {permissionUpdate && (
-//           <button
-//             class="btn btn-outline btn-primary"
-//             onClick={async () => {
-//               const actionName = $jsx.normalizeAction('actionEdit');
-//               await $host.$performAction(actionName, undefined, renderContext);
-//             }}
-//           >
-//             <ZIcon name="::draft" width={24}></ZIcon>
-//           </button>
-//         )}
-//         {permissionDelete && (
-//           <button
-//             class="btn btn-outline btn-error"
-//             onClick={async () => {
-//               // eslint-disable-next-line no-alert
-//               if (!window.confirm(this.scope.locale.DeleteConfirm())) return;
-//               const actionName = $jsx.normalizeAction('actionDelete');
-//               await $host.$performAction(actionName, undefined, renderContext);
-//             }}
-//           >
-//             <ZIcon name="::delete" width={24}></ZIcon>
-//           </button>
-//         )}
-//       </div>
-//     );

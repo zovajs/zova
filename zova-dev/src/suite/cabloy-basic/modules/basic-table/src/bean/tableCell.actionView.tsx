@@ -10,7 +10,7 @@ export class TableCellActionView extends BeanBase implements ITableCellRender {
     const value = next();
     return (
       <a
-        class="hover:text-blue-500"
+        class={options.preset?.actionView?.class ?? 'hover:text-blue-500'}
         href="#"
         onClick={async e => {
           e.preventDefault();
