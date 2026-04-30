@@ -18,7 +18,7 @@ export interface ITableCellRecord {}
 
 export interface ITableCellRender {
   render(options: IDecoratorTableCellOptions, renderContext: IJsxRenderContextTableCell, next: NextTableCellRender): any;
-  checkVisible?(options: IDecoratorTableCellOptions, renderContext: IJsxRenderContextTableColumn): boolean;
+  checkVisible?(options: IDecoratorTableCellOptions, renderContext: IJsxRenderContextTableColumn): Promise<boolean>;
 }
 
 export interface IDecoratorTableCellPresetOptions {

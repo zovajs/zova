@@ -8,11 +8,16 @@ import 'openapi3-ts/oas31';
 export interface ISchemaRenderComponentPresetRecord {}
 
 export interface ISchemaObjectExtensionFieldRest {
-  'render'?: TypeFormFieldRenderComponentNormal | TypeTableCellRenderComponentNormal;
+  //
   'preset'?: ISchemaRenderComponentPresetRecord;
+  //
   'fieldSource'?: string;
   'visible'?: boolean;
   'order'?: number;
+  'disableNotifyChanged'?: boolean;
+  'readonly'?: boolean;
+  //
+  'render'?: TypeFormFieldRenderComponentNormal | TypeTableCellRenderComponentNormal;
   'table'?: Omit<ISchemaObjectExtensionFieldRest, TypeSchemaScene>;
   'form'?: Omit<ISchemaObjectExtensionFieldRest, TypeSchemaScene>;
   'form-view'?: Omit<ISchemaObjectExtensionFieldRest, TypeSchemaScene>;

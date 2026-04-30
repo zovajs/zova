@@ -1,7 +1,10 @@
-import type { TypeRenderComponentJsx } from 'zova-jsx';
-
 import 'zova-module-a-openapi';
-import type { IResourceActionRowOptionsBase, IResourceActionRowRecord, IResourceActionTableOptionsBase } from 'zova-module-a-openapi';
+import type {
+  IResourceActionRowOptionsBase,
+  IResourceActionRowRecord,
+  IResourceActionTableOptionsBase,
+  ISchemaObjectExtensionFieldRest,
+} from 'zova-module-a-openapi';
 
 declare module 'zova-module-a-openapi' {
   /** table */
@@ -45,9 +48,5 @@ export interface IResourceActionRowOptionsOperationsRow extends IResourceActionR
 }
 
 export type TypeResourceActionRowOptionsOperationsRowActions = {
-  [key in keyof Omit<IResourceActionRowRecord, 'operationsRow'>]?: IResourceActionRowOptionsOperationsRowAction | false;
+  [key in keyof Omit<IResourceActionRowRecord, 'operationsRow'>]?: ISchemaObjectExtensionFieldRest | false;
 };
-export interface IResourceActionRowOptionsOperationsRowAction {
-  component?: keyof Omit<IResourceActionComponentRowRecord, 'actionOperationsRow'>;
-  jsx?: TypeRenderComponentJsx;
-}

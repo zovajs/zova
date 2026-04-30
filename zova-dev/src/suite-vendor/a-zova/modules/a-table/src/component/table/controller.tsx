@@ -229,7 +229,7 @@ export class ControllerTable<TData extends {} = {}> extends BeanControllerTableB
       const beanOptions = appResource.getBean(renderProvider as any);
       const onionOptions = beanOptions?.options as IDecoratorTableCellOptions | undefined;
       columnProps = deepExtend({}, onionOptions, columnProps);
-      if (beanInstance?.checkVisible && !beanInstance.checkVisible(columnProps as any, renderContext)) return;
+      if (beanInstance?.checkVisible && !(await beanInstance.checkVisible(columnProps as any, renderContext))) return;
     }
     return cellContext => {
       if (!cellContext) return;
