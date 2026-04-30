@@ -45,6 +45,6 @@ export class TableCellActionOperationsRow extends BeanBase implements ITableCell
       if (!action || !$host.$passport.checkPermission(permissions, actionName)) continue;
       domActions.push($$table.cellRender(action, renderContext));
     }
-    return <div class="flex gap-2">{domActions}</div>;
+    return <div class="join">{domActions}</div>;
   }
 }

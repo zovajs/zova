@@ -21,7 +21,7 @@ export class TableCellActionDelete extends BeanBase implements ITableCellRender 
     const { $jsx, $host } = renderContext;
     return (
       <button
-        class={options.preset?.actionDelete?.class ?? 'btn btn-outline btn-error'}
+        class={options.preset?.actionDelete?.class ?? 'btn btn-outline btn-error join-item'}
         onClick={async () => {
           // eslint-disable-next-line no-alert
           if (!window.confirm(this.scope.locale.DeleteConfirm())) return;
