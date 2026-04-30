@@ -3,7 +3,7 @@ import type {
   IResourceActionRowOptionsBase,
   IResourceActionRowRecord,
   IResourceActionTableOptionsBase,
-  ISchemaObjectExtensionFieldRest,
+  ISchemaObjectExtensionFieldRestTable,
 } from 'zova-module-a-openapi';
 
 declare module 'zova-module-a-openapi' {
@@ -48,5 +48,5 @@ export interface IResourceActionRowOptionsOperationsRow extends IResourceActionR
 }
 
 export type TypeResourceActionRowOptionsOperationsRowActions = {
-  [key in keyof Omit<IResourceActionRowRecord, 'operationsRow'>]?: ISchemaObjectExtensionFieldRest | false;
+  [key in keyof Omit<IResourceActionRowRecord, 'operationsRow'>]?: ISchemaObjectExtensionFieldRestTable | false;
 };

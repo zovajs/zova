@@ -6,6 +6,8 @@ import { appResource, cast, deepEqual, deepExtend, objectAssignReactive, UseScop
 import { isJsxComponent, ZovaJsx } from 'zova-jsx';
 import { Controller } from 'zova-module-a-bean';
 import {
+  ISchemaObjectExtensionFieldRest,
+  ISchemaObjectExtensionFieldRestTable,
   renderTableColumnTopPropsSystem,
   ScopeModuleAOpenapi,
   TypeTableCellRenderComponent,
@@ -127,8 +129,7 @@ export class ControllerTable<TData extends {} = {}> extends BeanControllerTableB
         const columnProps = this.getColumnComponentPropsTop(key, columnScope, jsxRenderContext);
         // visible
         if (columnProps.visible === false) return;
-        const property = this.getColumnProperty(key);
-        return await this._createColumnRender(render, property, columnProps, columnScope, jsxRenderContext);
+        return await this._createColumnRender(render, columnProps, columnScope, jsxRenderContext);
       },
       this,
     );
@@ -177,7 +178,7 @@ export class ControllerTable<TData extends {} = {}> extends BeanControllerTableB
       // property
       properties.push(property);
       // render
-      promises.push(this._createColumnRender(columnProps.render, property, columnProps, columnScope, jsxRenderContext));
+      promises.push(this._createColumnRender(columnProps.render, columnProps, columnScope, jsxRenderContext));
     }
     let res = await Promise.all(promises);
     properties = properties.filter((_item, index) => !!res[index]);
@@ -213,7 +214,7 @@ export class ControllerTable<TData extends {} = {}> extends BeanControllerTableB
     };
   }
 
-  public async prepareRenderComponent(renders: TypeTableCellRenderComponent | TypeTableCellRenderComponent[]) {
+  public async cellRenderPrepare(renders: TypeTableCellRenderComponent | TypeTableCellRenderComponent[]) {
     if (!Array.isArray(renders)) renders = [renders];
     const renderProviders = renders.map(item => this.getRenderProvider(item));
     const promises: Promise<any>[] = renderProviders.map(renderProvider =>
@@ -228,7 +229,6 @@ export class ControllerTable<TData extends {} = {}> extends BeanControllerTableB
 
   private async _createColumnRender(
     render: TypeTableCellRenderComponent,
-    property: SchemaObject | undefined,
     columnProps: ITableCellRenderColumnProps | undefined,
     columnScope: ITableColumnScope,
     renderContext: IJsxRenderContextTableColumn,
@@ -246,18 +246,45 @@ export class ControllerTable<TData extends {} = {}> extends BeanControllerTableB
     }
     return cellContext => {
       if (!cellContext) return;
-      return this._cellRender(render, property, columnProps, columnScope, cellContext, renderProvider, beanInstance);
+      return this._cellRender(render, columnProps, columnScope, cellContext, renderProvider, beanInstance, undefined, undefined);
     };
+  }
+
+  public cellRender(columnProps: ISchemaObjectExtensionFieldRestTable, renderContext: IJsxRenderContextTableCell) {
+    // render
+    const render = columnProps.render!;
+    const cellScope = renderContext.$celScope;
+    // renderProvider
+    const renderProvider = this.getRenderProvider(render);
+    // beanInstance
+    let beanInstance: ITableCellRender | undefined;
+    if (typeof renderProvider === 'string' && renderProvider.includes('.tableCell.')) {
+      beanInstance = this.sys.bean._getBeanSyncOnly(renderProvider as any);
+      const beanOptions = appResource.getBean(renderProvider as any);
+      const onionOptions = beanOptions?.options as IDecoratorTableCellOptions | undefined;
+      columnProps = deepExtend({}, onionOptions, columnProps);
+    }
+    return this._cellRender(
+      render,
+      columnProps as ITableCellRenderColumnProps,
+      undefined,
+      renderContext.cellContext,
+      renderProvider,
+      beanInstance,
+      cellScope,
+      renderContext,
+    );
   }
 
   private _cellRender(
     render: TypeTableCellRenderComponent,
-    property: SchemaObject | undefined,
     columnProps: ITableCellRenderColumnProps | undefined,
-    columnScope: ITableColumnScope,
+    columnScope: ITableColumnScope | undefined,
     cellContext: CellContext<TData, any>,
     renderProvider: TypeTableCellRenderComponentProvider,
     beanInstance: ITableCellRender | undefined,
+    cellScope: ITableCellScope | undefined,
+    jsxRenderContext: IJsxRenderContextTableCell | undefined,
   ) {
     return this.zovaJsx.setTransientObject(
       {
@@ -266,32 +293,37 @@ export class ControllerTable<TData extends {} = {}> extends BeanControllerTableB
         },
       },
       () => {
-        return this._cellRenderInner(render, property, columnProps, columnScope, cellContext, renderProvider, beanInstance);
+        return this._cellRenderInner(render, columnProps, columnScope, cellContext, renderProvider, beanInstance, cellScope, jsxRenderContext);
       },
     );
   }
 
   private _cellRenderInner(
     render: TypeTableCellRenderComponent,
-    _property: SchemaObject | undefined,
     columnProps: ITableCellRenderColumnProps | undefined,
-    columnScope: ITableColumnScope,
+    columnScope: ITableColumnScope | undefined,
     cellContext: CellContext<TData, any>,
     renderProvider: TypeTableCellRenderComponentProvider,
     beanInstance: ITableCellRender | undefined,
+    cellScope: ITableCellScope | undefined,
+    jsxRenderContext: IJsxRenderContextTableCell | undefined,
   ) {
     // value
     const value = cellContext.getValue();
     // renderFallbackValue
     const fallbackValue = this.table.options.renderFallbackValue;
     // cellScope
-    const cellScope: ITableCellScope = objectAssignReactive({}, columnScope, { value, fallbackValue });
+    if (!cellScope) {
+      cellScope = objectAssignReactive({}, columnScope, { value, fallbackValue })!;
+    }
     // render: text
     if (renderProvider === 'text') {
       return isNilOrEmptyString(value) ? fallbackValue : value;
     }
     // renderContext
-    const jsxRenderContext = this.getCellJsxRenderContext(cellScope, cellContext);
+    if (!jsxRenderContext) {
+      jsxRenderContext = this.getCellJsxRenderContext(cellScope, cellContext);
+    }
     // beanInstance
     if (beanInstance) {
       // jsx: props
@@ -336,10 +368,18 @@ export class ControllerTable<TData extends {} = {}> extends BeanControllerTableB
   }
 
   public getColumnComponentPropsTop(name: string, celScope: {}, renderContext: {}): ITableCellRenderColumnProps {
-    const props: any = { [constColumnProps]: true, key: name, name };
     const property = this.getColumnProperty(name);
-    if (!property) return props;
-    const rest = property.rest;
+    const rest = property?.rest;
+    return this._getColumnComponentPropsTopByRest(rest, name, celScope, renderContext);
+  }
+
+  private _getColumnComponentPropsTopByRest(
+    rest: ISchemaObjectExtensionFieldRest | undefined,
+    name: string,
+    celScope: {},
+    renderContext: {},
+  ): ITableCellRenderColumnProps {
+    const props: any = { [constColumnProps]: true, key: name, name };
     if (!rest) return props;
     const keys = Object.keys(rest).filter(item => !renderTableColumnTopPropsSystem.includes(item));
     if (keys.length === 0) return props;

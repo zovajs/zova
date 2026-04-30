@@ -7,6 +7,19 @@ import 'openapi3-ts/oas31';
 
 export interface ISchemaRenderComponentPresetRecord {}
 
+export interface ISchemaObjectExtensionFieldRestTable {
+  //
+  preset?: ISchemaRenderComponentPresetRecord;
+  //
+  fieldSource?: string;
+  visible?: boolean;
+  order?: number;
+  disableNotifyChanged?: boolean;
+  readonly?: boolean;
+  //
+  render?: TypeTableCellRenderComponentNormal;
+}
+
 export interface ISchemaObjectExtensionFieldRest {
   //
   'preset'?: ISchemaRenderComponentPresetRecord;
