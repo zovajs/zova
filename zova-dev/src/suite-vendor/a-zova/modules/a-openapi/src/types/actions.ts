@@ -1,12 +1,14 @@
 import { TableIdentity } from 'table-identity';
 
-import type { ISchemaObjectExtensionFieldRestScene } from './rest.ts';
+import { ISchemaObjectExtensionFieldRest } from './rest.js';
 
 export interface IResourceComponentFormFieldRecord {}
 
 export interface IResourceActionBulkRecord {}
 
 export interface IResourceActionRowRecord {}
+
+export interface IResourceActionTableRecord extends IResourceActionBulkRecord, IResourceActionRowRecord {}
 
 export type IResourceComponentActionBulkRecord = {
   [key in keyof IResourceActionBulkRecord as `action${Capitalize<key>}`]: IResourceActionBulkRecord[key];
@@ -44,10 +46,10 @@ export interface IResourceActionRowOptionsOperationsRow extends IResourceActionR
 
 export interface IResourceActionBulkOptionsOperationsBulkAction {
   name: keyof Omit<IResourceActionBulkRecord, 'operationsBulk'>;
-  options: ISchemaObjectExtensionFieldRestScene;
+  options: ISchemaObjectExtensionFieldRest;
 }
 
 export interface IResourceActionRowOptionsOperationsRowAction {
   name: keyof Omit<IResourceActionRowRecord, 'operationsRow'>;
-  options: ISchemaObjectExtensionFieldRestScene;
+  options: ISchemaObjectExtensionFieldRest;
 }
