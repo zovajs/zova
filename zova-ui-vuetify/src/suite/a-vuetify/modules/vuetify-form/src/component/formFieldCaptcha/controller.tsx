@@ -9,7 +9,11 @@ export interface ControllerFormFieldCaptchaProps extends IFormFieldPresetOptions
 
 @Controller()
 export class ControllerFormFieldCaptcha extends BeanControllerBase {
-  static $propsDefault = {};
+  static $propsDefault = {
+    preset: {
+      captcha: { scene: 'captcha-simple:simple' },
+    },
+  };
   static $componentOptions: IComponentOptions = { inheritAttrs: false, deepExtendDefault: true };
 
   eventFormSubmission: TypeEventOff;
@@ -44,7 +48,7 @@ export class ControllerFormFieldCaptcha extends BeanControllerBase {
   }
 
   get captchaScene() {
-    return this.$props.preset?.captcha?.scene ?? 'captcha-simple:simple';
+    return this.$props.preset!.captcha!.scene!;
   }
 
   private async createCaptchaData() {
