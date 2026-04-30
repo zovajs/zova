@@ -12,8 +12,12 @@ export interface ControllerFormFieldDateProps extends IFormFieldPresetOptions {}
 
 @Controller()
 export class ControllerFormFieldDate extends BeanControllerBase {
-  static $propsDefault = {};
-  static $componentOptions: IComponentOptions = { inheritAttrs: false };
+  static $propsDefault = {
+    preset: {
+      date: { preset: 'DATETIME_SHORT' },
+    },
+  };
+  static $componentOptions: IComponentOptions = { inheritAttrs: false, deepExtendDefault: true };
 
   protected async __init__() {}
 
@@ -22,8 +26,7 @@ export class ControllerFormFieldDate extends BeanControllerBase {
     return <ZFormFieldPreset {...this.$props} render="input" preset={{ input: { value } }}></ZFormFieldPreset>;
   }
 
-  get dateFormat(): IDateOptions {
-    const date = this.$props.preset?.date;
-    return { preset: 'DATETIME_SHORT', ...date };
+  get dateFormat(): IDateOptions | undefined {
+    return this.$props.preset?.date;
   }
 }

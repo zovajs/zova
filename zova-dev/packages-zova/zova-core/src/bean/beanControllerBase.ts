@@ -1,7 +1,8 @@
 import { shallowReactive } from 'vue';
 
-import type { IControllerData, ISlot, ISlotsDefault } from './type.ts';
+import type { IComponentOptions, IControllerData, ISlot, ISlotsDefault } from './type.ts';
 
+import { deepExtend } from '../core/sys/util.ts';
 import { cast } from '../types/utils/cast.ts';
 import { useModel } from '../vueExtra/useModel.ts';
 import { BeanBase } from './beanBase.ts';
@@ -17,13 +18,7 @@ export class BeanControllerBase extends BeanBase {
     this.$slots = controllerData.context.slots as any;
     // props
     this.__initControllerProps(this.ctx.instance.vnode.props);
-    this.app.meta.module._monkeyModuleSync(
-      true,
-      'controllerDataInit',
-      undefined,
-      controllerData,
-      this,
-    );
+    this.app.meta.module._monkeyModuleSync(true, 'controllerDataInit', undefined, controllerData, this);
   }
 
   /** @internal */
@@ -48,6 +43,7 @@ export class BeanControllerBase extends BeanBase {
   }
 
   private __initControllerProps(propsInput: unknown | undefined) {
+    const componentOptions: IComponentOptions | undefined = Object.getPrototypeOf(this).constructor.$componentOptions;
     const propsDefault = Object.getPrototypeOf(this).constructor.$propsDefault;
     let props = Object.assign({}, propsInput);
     for (const key in props) {
@@ -55,7 +51,7 @@ export class BeanControllerBase extends BeanBase {
         delete props[key];
       }
     }
-    props = Object.assign({}, propsDefault, props);
+    props = componentOptions?.deepExtendDefault ? deepExtend({}, propsDefault, props) : Object.assign({}, propsDefault, props);
     if (!this.$props) {
       this.$props = process.env.SERVER ? props : shallowReactive(props as any);
     } else {
