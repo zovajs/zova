@@ -17,8 +17,8 @@ export class RenderRestPage<TData extends {} = {}> extends BeanRenderBase {
     );
   }
 
-  private _renderOperationsTable() {
-    const render = this.tableProvider.components!.actionOperationsTable!;
+  private _renderOperationsBulk() {
+    const render = this.tableProvider.components!.actionOperationsBulk!;
     const celScope = this.pageScope;
     const jsxRenderContext = this.getJsxRenderContextPage(celScope);
     const domRestPageEntry = this.zovaJsx.render(render, {}, celScope, jsxRenderContext);
@@ -76,7 +76,7 @@ export class RenderRestPage<TData extends {} = {}> extends BeanRenderBase {
     return (
       <div>
         {this._renderFilter()}
-        {this._renderOperationsTable()}
+        {this._renderOperationsBulk()}
         {this._renderTable()}
         {this._renderPages()}
       </div>

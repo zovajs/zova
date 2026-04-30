@@ -10,7 +10,7 @@ declare module 'zova-module-a-openapi' {
   /** table */
   export interface IResourceActionTableRecord {
     create?: never;
-    operationsTable?: never;
+    operationsBulk?: never;
   }
 
   /** row */
@@ -24,7 +24,7 @@ declare module 'zova-module-a-openapi' {
 
 export interface IResourceActionComponentTableRecord {
   actionCreate?: IResourceActionTableOptionsCreate;
-  actionOperationsTable?: IResourceActionTableOptionsOperationsTable;
+  actionOperationsBulk?: IResourceActionTableOptionsOperationsBulk;
 }
 
 export interface IResourceActionComponentRowRecord {
@@ -35,7 +35,7 @@ export interface IResourceActionComponentRowRecord {
 }
 
 export interface IResourceActionTableOptionsCreate extends IResourceActionTableOptionsBase {}
-export interface IResourceActionTableOptionsOperationsTable extends IResourceActionTableOptionsBase {}
+export interface IResourceActionBulkOptionsOperationsBulk extends IResourceActionBulkOptionsBase {}
 
 export interface IResourceActionRowOptionsView extends IResourceActionRowOptionsBase {}
 
