@@ -10,7 +10,7 @@ import type {
 import { combineQueries, isNil } from '@cabloy/utils';
 import { SchemaObject } from 'openapi3-ts/oas31';
 import { BeanModelBase, Model } from 'zova-module-a-model';
-import { IResourceActionRowRecord, IResourceActionTableRecord, TypeOpenapiPermissions } from 'zova-module-a-openapi';
+import { IResourceActionTableRecord, TypeOpenapiPermissions } from 'zova-module-a-openapi';
 import { ApiApiHomeUserPassportloginOauthPath, OpenApiBaseURL } from 'zova-module-home-api';
 
 export interface IModelOptionsPassport extends IDecoratorModelOptions {}
