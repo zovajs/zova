@@ -4,7 +4,7 @@ import { BeanControllerBase, Use } from 'zova';
 import { Controller } from 'zova-module-a-bean';
 
 @Controller()
-export class ControllerActionOperationsTable extends BeanControllerBase {
+export class ControllerActionOperationsBulk extends BeanControllerBase {
   protected async __init__() {}
 
   @Use({ injectionScope: 'host' })
