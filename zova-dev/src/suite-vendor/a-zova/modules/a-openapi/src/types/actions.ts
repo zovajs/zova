@@ -18,6 +18,8 @@ export type IResourceComponentActionRowRecord = {
   [key in keyof IResourceActionRowRecord as `action${Capitalize<key>}`]: IResourceActionRowRecord[key];
 };
 
+export interface IResourceComponentActionTableRecord extends IResourceComponentActionBulkRecord, IResourceComponentActionRowRecord {}
+
 export interface IResourceActionBulkOptionsBase {
   resource?: string;
 }

@@ -1,4 +1,3 @@
-import { typedKeys } from '@cabloy/utils';
 import { VNode } from 'vue';
 import { BeanBase } from 'zova';
 import { TypeTableCellRenderComponent } from 'zova-module-a-openapi';
@@ -19,15 +18,15 @@ export class TableCellActionOperationsRow extends BeanBase implements ITableCell
     const { $celScope, $host, $$table } = renderContext;
     const permissions = $celScope.permissions;
     let actions = options.preset?.actionOperationsRow?.actions;
-    if (!actions) return false;
+    if (!actions || actions.length === 0) return false;
     // renders
     const renders: TypeTableCellRenderComponent[] = [];
-    for (const actionName of typedKeys(actions)) {
-      const action = actions[actionName];
-      // action maybe false
-      if (!!action && $host.$passport.checkPermission(permissions, actionName)) {
-        if (!action.render) throw new Error(`should specify action render: ${actionName}`);
-        renders.push(action.render);
+    for (const action of actions) {
+      const actionName = action.name;
+      const actionRender = action.options?.render;
+      if ($host.$passport.checkPermission(permissions, actionName)) {
+        if (!actionRender) throw new Error(`should specify action render: ${actionName}`);
+        renders.push(actionRender);
       }
     }
     await $$table.cellRenderPrepare(renders);
@@ -38,12 +37,12 @@ export class TableCellActionOperationsRow extends BeanBase implements ITableCell
     const { $celScope, $host, $$table } = renderContext;
     const permissions = $celScope.permissions;
     const actions = options.preset?.actionOperationsRow?.actions;
-    if (!actions) return;
+    if (!actions || actions.length === 0) return;
     const domActions: VNode[] = [];
-    for (const actionName of typedKeys(actions)) {
-      const action = actions[actionName];
-      if (!action || !$host.$passport.checkPermission(permissions, actionName)) continue;
-      domActions.push($$table.cellRender(action, renderContext));
+    for (const action of actions) {
+      const actionName = action.name;
+      if (!$host.$passport.checkPermission(permissions, actionName)) continue;
+      domActions.push($$table.cellRender(action.options, renderContext));
     }
     return <div class="join">{domActions}</div>;
   }
