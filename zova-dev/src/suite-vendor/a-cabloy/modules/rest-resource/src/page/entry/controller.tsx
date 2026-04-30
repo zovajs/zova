@@ -4,7 +4,7 @@ import { BeanControllerPageBase, Use, useCustomRef, usePrepareArg } from 'zova';
 import { ZovaJsx } from 'zova-jsx';
 import { Controller } from 'zova-module-a-bean';
 import { formMetaFromFormScene, IFormMeta, IFormProvider, TypeFormScene } from 'zova-module-a-form';
-import { IResourceActionRowRecord, IResourceActionTableRecord } from 'zova-module-a-openapi';
+import { IResourceActionBulkRecord, IResourceActionRowRecord } from 'zova-module-a-openapi';
 import { ZPage } from 'zova-module-home-base';
 
 import type { ModelResource } from '../../model/resource.js';
@@ -57,7 +57,7 @@ export class ControllerPageEntry extends BeanControllerPageBase {
     this.zovaJsx = this.app.bean._newBeanSimple(ZovaJsx, false, this.formProvider.components, this.formProvider.actions, this.pageEntryWrapperCelEnv);
   }
 
-  async onActionTable(_action: keyof IResourceActionTableRecord) {}
+  async onActionBulk(_action: keyof IResourceActionBulkRecord) {}
 
   async onActionRow(action: keyof IResourceActionRowRecord) {
     if (!this.entryId) return;
@@ -81,8 +81,8 @@ export class ControllerPageEntry extends BeanControllerPageBase {
       resource: this.$params.resource,
       id: this.entryId,
       permissions,
-      onActionTable: (action: keyof IResourceActionTableRecord) => {
-        return this.onActionTable(action);
+      onActionBulk: (action: keyof IResourceActionBulkRecord) => {
+        return this.onActionBulk(action);
       },
       onActionRow: (action: keyof IResourceActionRowRecord) => {
         return this.onActionRow(action);

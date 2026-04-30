@@ -3,7 +3,7 @@ import { z } from 'zod';
 import { BeanControllerPageBase, Use, useCustomRef, usePrepareArg } from 'zova';
 import { ZovaJsx } from 'zova-jsx';
 import { Controller } from 'zova-module-a-bean';
-import { IResourceActionRowRecord, IResourceActionTableRecord } from 'zova-module-a-openapi';
+import { IResourceActionBulkRecord, IResourceActionRowRecord } from 'zova-module-a-openapi';
 import { ITableProvider } from 'zova-module-a-table';
 import { ZPage } from 'zova-module-home-base';
 
@@ -42,7 +42,7 @@ export class ControllerPageResource extends BeanControllerPageBase {
     return this.$params.resource;
   }
 
-  async onActionTable(_action: keyof IResourceActionTableRecord) {}
+  async onActionBulk(_action: keyof IResourceActionBulkRecord) {}
 
   async onActionRow(action: keyof IResourceActionRowRecord, id: string) {
     if (action === 'delete') {
@@ -64,8 +64,8 @@ export class ControllerPageResource extends BeanControllerPageBase {
     return {
       resource: this.$$modelResource.resource,
       permissions,
-      onActionTable: (action: keyof IResourceActionTableRecord) => {
-        return this.onActionTable(action);
+      onActionBulk: (action: keyof IResourceActionBulkRecord) => {
+        return this.onActionBulk(action);
       },
       onActionRow: (action: keyof IResourceActionRowRecord, id: string) => {
         return this.onActionRow(action, id);
