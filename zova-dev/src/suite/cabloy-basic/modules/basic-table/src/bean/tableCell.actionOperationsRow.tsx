@@ -1,13 +1,38 @@
 import { BeanBase } from 'zova';
 import { ZIcon } from 'zova-module-a-icon';
-import { IDecoratorTableCellPresetOptions, IJsxRenderContextTableCell, ITableCellRender, NextTableCellRender, TableCell } from 'zova-module-a-table';
+import { TypeTableCellRenderComponent } from 'zova-module-a-openapi';
+import {
+  IDecoratorTableCellPresetOptions,
+  IJsxRenderContextTableCell,
+  IJsxRenderContextTableColumn,
+  ITableCellRender,
+  NextTableCellRender,
+  TableCell,
+} from 'zova-module-a-table';
 
 export interface ITableCellOptionsActionOperationsRow extends IDecoratorTableCellPresetOptions {}
 
 @TableCell<ITableCellOptionsActionOperationsRow>()
 export class TableCellActionOperationsRow extends BeanBase implements ITableCellRender {
-  render(_options: ITableCellOptionsActionOperationsRow, renderContext: IJsxRenderContextTableCell, _next: NextTableCellRender) {
+  async checkVisible(options: ITableCellOptionsActionOperationsRow, renderContext: IJsxRenderContextTableColumn): Promise<boolean> {
+    const { $celScope, $host, $$table } = renderContext;
+    const permissions = $celScope.permissions;
+    let actions = options.preset?.actionOperationsRow?.actions;
+    if (!actions) return false;
+    const renders: TypeTableCellRenderComponent[] = [];
+    for (const actionName in actions) {
+      const action = actions[actionName];
+      // actions[actionName] maybe false
+      if (!!action && $host.$passport.checkPermission(permissions, actionName as any)) {
+        renders.push(action);
+      }
+    }
+    return false;
+  }
+
+  render(options: ITableCellOptionsActionOperationsRow, renderContext: IJsxRenderContextTableCell, _next: NextTableCellRender) {
     const { $jsx, $celScope, $host } = renderContext;
+    const actions = options.preset?.actionOperationsRow?.actions;
     const permissions = $celScope.permissions;
     const permissionUpdate = $host.$passport.checkPermission(permissions, 'update');
     const permissionDelete = $host.$passport.checkPermission(permissions, 'delete');

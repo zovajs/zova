@@ -213,6 +213,19 @@ export class ControllerTable<TData extends {} = {}> extends BeanControllerTableB
     };
   }
 
+  public async prepareRenderComponent(renders: TypeTableCellRenderComponent | TypeTableCellRenderComponent[]) {
+    if (!Array.isArray(renders)) renders = [renders];
+    const renderProviders = renders.map(item => this.getRenderProvider(item));
+    const promises: Promise<any>[] = renderProviders.map(renderProvider =>
+      (async () => {
+        if (typeof renderProvider === 'string' && renderProvider.includes('.tableCell.')) {
+          return await this.sys.bean._getBean(renderProvider as any, true);
+        }
+      })(),
+    );
+    return await Promise.all(promises);
+  }
+
   private async _createColumnRender(
     render: TypeTableCellRenderComponent,
     property: SchemaObject | undefined,
