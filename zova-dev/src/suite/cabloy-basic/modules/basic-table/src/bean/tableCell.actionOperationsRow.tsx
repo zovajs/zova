@@ -19,6 +19,7 @@ export class TableCellActionOperationsRow extends BeanBase implements ITableCell
     const permissions = $celScope.permissions;
     let actions = options.preset?.actionOperationsRow?.actions;
     if (!actions) return false;
+
     const renders: TypeTableCellRenderComponent[] = [];
     for (const actionName in actions) {
       const action = actions[actionName];
