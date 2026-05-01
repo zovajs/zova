@@ -22,3 +22,7 @@ export interface IActionOptionsRowBase<Result = any> extends IDecoratorActionOpt
   resource?: string;
   id?: TableIdentity;
 }
+
+export interface IActionOptionsBulkBase<Result = any> extends IDecoratorActionOptions<Result> {
+  resource?: string;
+}
