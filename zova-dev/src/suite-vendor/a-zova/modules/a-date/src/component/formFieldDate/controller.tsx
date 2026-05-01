@@ -23,10 +23,10 @@ export class ControllerFormFieldDate extends BeanControllerBase {
 
   protected render() {
     const value = dateFormatUtil(this.$props.value, this.dateFormat);
-    return <ZFormFieldPreset {...this.$props} render="input" preset={{ input: { value } }}></ZFormFieldPreset>;
+    return <ZFormFieldPreset {...this.$props} render="Input" preset={{ Input: { value } }}></ZFormFieldPreset>;
   }
 
   get dateFormat(): IDateOptions | undefined {
-    return this.$props.preset?.date;
+    return this.$props.preset?.Date;
   }
 }

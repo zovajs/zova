@@ -22,14 +22,14 @@ export class ControllerFormFieldCurrency extends BeanControllerBase {
   protected async __init__() {}
 
   protected render() {
-    const currencyOptions = this.$props.preset?.currency;
+    const currencyOptions = this.$props.preset?.Currency;
     const value = this._valuePatch(currencyOptions);
     return (
       <ZFormFieldPreset
         {...this.$props}
-        render="input"
+        render="Input"
         preset={{
-          input: {
+          Input: {
             value,
             onInput: (e: Event) => {
               const value = (e.target as HTMLInputElement).value;

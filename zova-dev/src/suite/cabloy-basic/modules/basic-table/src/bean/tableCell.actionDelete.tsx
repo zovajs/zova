@@ -25,7 +25,7 @@ export class TableCellActionDelete extends BeanBase implements ITableCellRender 
         onClick={async () => {
           // eslint-disable-next-line no-alert
           if (!window.confirm(this.scope.locale.DeleteConfirm())) return;
-          const actionName = $jsx.normalizeAction('actionDelete');
+          const actionName = $jsx.normalizeAction('ActionDelete');
           await $host.$performAction(actionName, options.preset?.ActionDelete, renderContext);
         }}
       >

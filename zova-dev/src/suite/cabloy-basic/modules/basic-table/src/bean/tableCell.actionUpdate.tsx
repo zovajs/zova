@@ -23,7 +23,7 @@ export class TableCellActionUpdate extends BeanBase implements ITableCellRender 
       <button
         class={options.preset?.ActionUpdate?.class ?? 'btn btn-outline btn-primary join-item'}
         onClick={async () => {
-          const actionName = $jsx.normalizeAction('actionEdit');
+          const actionName = $jsx.normalizeAction('ActionEdit');
           await $host.$performAction(actionName, options.preset?.ActionUpdate, renderContext);
         }}
       >

@@ -26,7 +26,7 @@ export class ControllerActionView extends BeanControllerBase {
         onClick={async e => {
           e.preventDefault();
           e.stopPropagation();
-          const actionName = $jsx.normalizeAction('actionView');
+          const actionName = $jsx.normalizeAction('ActionView');
           await this.$performAction(actionName, undefined, this.$$renderContext);
         }}
       >

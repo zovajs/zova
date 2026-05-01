@@ -15,7 +15,7 @@ export class TableCellActionView extends BeanBase implements ITableCellRender {
         onClick={async e => {
           e.preventDefault();
           e.stopPropagation();
-          const actionName = $jsx.normalizeAction('actionView');
+          const actionName = $jsx.normalizeAction('ActionView');
           await $host.$performAction(actionName, options.preset?.ActionView, renderContext);
         }}
       >

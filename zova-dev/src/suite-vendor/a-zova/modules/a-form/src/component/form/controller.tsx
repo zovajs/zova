@@ -321,7 +321,7 @@ export class ControllerForm<TFormData extends {} = {}, TSubmitMeta = never> exte
     if (this.isComponentFormField(renderProvider)) {
       return renderProvider as TypeFormFieldRenderComponent;
     }
-    return this.formProvider.components?.formField ?? 'a-form:formField';
+    return this.formProvider.components?.FormField ?? 'a-form:formField';
   }
 
   public isComponentFormField(renderProvider?: TypeFormFieldRenderComponentProvider) {

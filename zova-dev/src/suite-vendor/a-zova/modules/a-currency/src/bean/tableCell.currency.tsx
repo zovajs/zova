@@ -9,6 +9,6 @@ export interface ITableCellOptionsCurrency extends IDecoratorTableCellPresetOpti
 export class TableCellCurrency extends BeanBase implements ITableCellRender {
   render(options: ITableCellOptionsCurrency, _renderContext: IJsxRenderContextTableCell, next: NextTableCellRender) {
     const value = next();
-    return currencyFormat(value, options.preset?.currency);
+    return currencyFormat(value, options.preset?.Currency);
   }
 }

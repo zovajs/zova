@@ -28,7 +28,7 @@ export class ControllerFormFieldDateRange extends BeanControllerBase {
         slotDefault={({ propsBucket }, $$formField) => {
           return (
             <ZDateRange
-              separator={this.$props.preset?.dateRange?.separator}
+              separator={this.$props.preset?.DateRange?.separator}
               modelValue={propsBucket.value}
               onUpdate:modelValue={value => {
                 $$formField.setValue(value);

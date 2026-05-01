@@ -41,7 +41,7 @@ export class RenderPageLogin extends BeanRenderBase {
       <ZForm
         data={this.user}
         schema={this.schema}
-        formProvider={{ behaviors: { formFieldLayout: 'home-login:formFieldLayoutLogin' } }}
+        formProvider={{ behaviors: { FormFieldLayout: 'home-login:formFieldLayoutLogin' } }}
         onSubmitData={data => {
           return this.onSubmitLogin(data);
         }}
@@ -53,14 +53,14 @@ export class RenderPageLogin extends BeanRenderBase {
         <ZFormFieldPreset
           name="username"
           class="grow"
-          preset={{ input: { type: 'text', placeholder: this.scope.locale.YourUsername() } }}
+          preset={{ Input: { type: 'text', placeholder: this.scope.locale.YourUsername() } }}
           layout={{ iconPrefix: ':daisy:person' }}
         ></ZFormFieldPreset>
         <ZFormFieldPreset
           name="password"
           class="grow"
           sys={{ asyncDebounceMs: 1000 }}
-          preset={{ input: { type: 'password', placeholder: this.scope.locale.YourPassword() } }}
+          preset={{ Input: { type: 'password', placeholder: this.scope.locale.YourPassword() } }}
           layout={{ iconPrefix: ':daisy:lock' }}
         ></ZFormFieldPreset>
         <ZFormFieldPreset name="captcha"></ZFormFieldPreset>

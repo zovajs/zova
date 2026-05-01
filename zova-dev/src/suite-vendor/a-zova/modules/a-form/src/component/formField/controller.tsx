@@ -175,13 +175,13 @@ export class ControllerFormField<TParentData extends {} = {}> extends BeanContro
   }
 
   private _prepareBehaviorFormField(behaviors: IBehaviorItem) {
-    const behaviorFormField = this.formProvider.behaviors?.formField;
+    const behaviorFormField = this.formProvider.behaviors?.FormField;
     if (!behaviorFormField) return;
     behaviors[behaviorFormField] = {} as never;
   }
 
   private _prepareBehaviorFormFieldLayout(behaviors: IBehaviorItem) {
-    const behaviorFormFieldLayout = this.formProvider.behaviors?.formFieldLayout;
+    const behaviorFormFieldLayout = this.formProvider.behaviors?.FormFieldLayout;
     if (!behaviorFormFieldLayout) return;
     behaviors[behaviorFormFieldLayout] = {} as never;
   }

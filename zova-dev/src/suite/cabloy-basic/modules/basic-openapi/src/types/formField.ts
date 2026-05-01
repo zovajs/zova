@@ -12,14 +12,14 @@ import type { IToggleOptions } from './toggle.ts';
 
 declare module 'zova-module-a-openapi' {
   export interface IResourceComponentFormFieldRecord {
-    input?: IInputOptions;
-    captcha?: ICaptchaOptions;
-    currency?: CurrencyOptions;
-    date?: IDateOptions;
-    dateRange?: IDateRangeOptions;
-    toggle?: IToggleOptions;
-    select?: ISelectOptions;
-    textarea?: ITextareaOptions;
-    resourcePicker?: IResourcePickerOptions;
+    Input?: IInputOptions;
+    Captcha?: ICaptchaOptions;
+    Currency?: CurrencyOptions;
+    Date?: IDateOptions;
+    DateRange?: IDateRangeOptions;
+    Toggle?: IToggleOptions;
+    Select?: ISelectOptions;
+    Textarea?: ITextareaOptions;
+    ResourcePicker?: IResourcePickerOptions;
   }
 }
