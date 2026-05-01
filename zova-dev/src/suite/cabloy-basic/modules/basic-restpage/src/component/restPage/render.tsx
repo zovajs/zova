@@ -21,8 +21,7 @@ export class RenderRestPage<TData extends {} = {}> extends BeanRenderBase {
     const render = this.tableProvider.components!.actionOperationsBulk!;
     const celScope = this.pageScope;
     const jsxRenderContext = this.getJsxRenderContextPage(celScope);
-    const domRestPageEntry = this.zovaJsx.render(render, {}, celScope, jsxRenderContext);
-    return domRestPageEntry;
+    return this.zovaJsx.render(render, this.schema?.rest, celScope, jsxRenderContext);
   }
 
   private _renderTable() {
