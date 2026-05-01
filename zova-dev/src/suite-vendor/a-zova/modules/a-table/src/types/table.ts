@@ -1,6 +1,6 @@
 import type { ColumnDef, useVueTable } from '@tanstack/vue-table';
 import type { SchemaObject } from 'openapi3-ts/oas31';
-import type { IResourceComponentActionBulkRecord, TypeTableCellRenderComponent } from 'zova-module-a-openapi';
+import type { TypeTableCellRenderComponent } from 'zova-module-a-openapi';
 
 import type { ControllerTable } from '../component/table/controller.jsx';
 import type { TypeTableCellRender } from './tableColumn.js';
