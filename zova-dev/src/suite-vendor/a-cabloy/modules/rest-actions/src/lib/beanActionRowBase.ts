@@ -1,3 +1,4 @@
+import { isNil } from '@cabloy/utils';
 import { TableIdentity } from 'table-identity';
 import { BeanBase } from 'zova';
 import { IJsxRenderContextBase } from 'zova-module-a-openapi';
@@ -14,7 +15,7 @@ export class BeanActionRowBase extends BeanBase {
       resource = options.resource ?? $celScope.resource;
       id = options.id ?? cellContext.row.id;
     }
-    if (!resource || !id) {
+    if (isNil(resource) || isNil(id)) {
       throw new Error(`should specify resource or id in scene: ${renderContext.$scene}`);
     }
     return { resource, id };
