@@ -20,11 +20,11 @@ export class ControllerActionCreate extends BeanControllerBase {
     const { $jsx } = this.$$renderContext;
     return (
       <button
-        class={this.$props.preset?.actionCreate?.class ?? 'btn btn-primary'}
+        class={this.$props.preset?.ActionCreate?.class ?? 'btn  btn-primary join-item'}
         type="button"
         onClick={async () => {
           const actionName = $jsx.normalizeAction('actionCreate');
-          await this.$performAction(actionName, this.$props.preset?.actionCreate, this.$$renderContext);
+          await this.$performAction(actionName, this.$props.preset?.ActionCreate, this.$$renderContext);
         }}
       >
         {this.scope.locale.Create()}

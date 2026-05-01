@@ -255,10 +255,10 @@ export class ZovaJsx extends BeanSimple {
 
   public normalizeComponent(type: TypeRenderComponent) {
     if (typeof type === 'function') return type;
-    // should not replace with components, if type is native element or preset component, for example: 'div/input'
-    // if (typeof type === 'string') {
-    //   type = this.components?.[type] ?? type;
-    // }
+    // if type is native element, for example: 'div/input'
+    if (typeof type === 'string' && !isNativeElement(type)) {
+      type = this.components?.[type] ?? type;
+    }
     if (typeof type === 'string' && ['script', 'style', 'link'].includes(type)) {
       throw new Error(`not valid zova jsx component: ${type}`);
     }

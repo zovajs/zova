@@ -23,7 +23,7 @@ export class ControllerActionOperationsBulk extends BeanControllerBase {
 
   protected render() {
     const { $jsx, $celScope } = this.$$renderContext;
-    const actions = this.$props.preset?.actionOperationsBulk?.actions;
+    const actions = this.$props.preset?.ActionOperationsBulk?.actions;
     if (!actions || actions.length === 0) return;
     const domActions: VNode[] = [];
     for (const action of actions) {
@@ -38,6 +38,10 @@ export class ControllerActionOperationsBulk extends BeanControllerBase {
         domActions.push(domAction);
       }
     }
-    return <div class="join">{domActions}</div>;
+    return (
+      <div class={this.$props.preset?.ActionOperationsBulk?.class}>
+        <div class="join">{domActions}</div>
+      </div>
+    );
   }
 }

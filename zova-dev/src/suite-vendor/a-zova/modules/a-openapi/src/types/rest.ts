@@ -4,7 +4,7 @@ import type { TypeRenderComponentJsx } from 'zova-jsx';
 
 import 'openapi3-ts/oas30';
 import 'openapi3-ts/oas31';
-import { IResourceComponentActionRowRecord, IResourceComponentFormFieldRecord } from './actions.js';
+import { IResourceActionBulkOptionsOperationsBulkAction, IResourceComponentActionRowRecord, IResourceComponentFormFieldRecord } from './actions.js';
 
 export interface ISchemaRenderComponentPresetRecord extends IResourceComponentFormFieldRecord, IResourceComponentActionRowRecord {}
 
@@ -24,6 +24,7 @@ export interface ISchemaObjectExtensionFieldRestTable {
 export interface ISchemaObjectExtensionFieldRest {
   //
   'preset'?: ISchemaRenderComponentPresetRecord;
+  'dtoActions'?: IResourceActionBulkOptionsOperationsBulkAction[];
   //
   'fieldSource'?: string;
   'visible'?: boolean;
@@ -110,4 +111,4 @@ export type TypeTableCellRenderComponentProvider =
   | keyof IComponentRecord
   | keyof TypeBeanRecordGeneralSelector<'tableCell'>
   | 'text';
-export type TypeTableRenderComponentProvider = Constructable<ComponentPublicInstance> | keyof IComponentRecord | TypeRenderComponentJsx;
+export type TypeTableBulkRenderComponentProvider = Constructable<ComponentPublicInstance> | keyof IComponentRecord | TypeRenderComponentJsx;

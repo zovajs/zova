@@ -17,7 +17,7 @@ export class TableCellActionOperationsRow extends BeanBase implements ITableCell
   async checkVisible(options: ITableCellOptionsActionOperationsRow, renderContext: IJsxRenderContextTableColumn): Promise<boolean> {
     const { $celScope, $host, $$table } = renderContext;
     const permissions = $celScope.permissions;
-    let actions = options.preset?.actionOperationsRow?.actions;
+    let actions = options.preset?.ActionOperationsRow?.actions;
     if (!actions || actions.length === 0) return false;
     // renders
     const renders: TypeTableCellRenderComponent[] = [];
@@ -36,7 +36,7 @@ export class TableCellActionOperationsRow extends BeanBase implements ITableCell
   render(options: ITableCellOptionsActionOperationsRow, renderContext: IJsxRenderContextTableCell, _next: NextTableCellRender) {
     const { $celScope, $host, $$table } = renderContext;
     const permissions = $celScope.permissions;
-    const actions = options.preset?.actionOperationsRow?.actions;
+    const actions = options.preset?.ActionOperationsRow?.actions;
     if (!actions || actions.length === 0) return;
     const domActions: VNode[] = [];
     for (const action of actions) {

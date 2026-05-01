@@ -21,10 +21,10 @@ export class TableCellActionUpdate extends BeanBase implements ITableCellRender 
     const { $jsx, $host } = renderContext;
     return (
       <button
-        class={options.preset?.actionUpdate?.class ?? 'btn btn-outline btn-primary join-item'}
+        class={options.preset?.ActionUpdate?.class ?? 'btn btn-outline btn-primary join-item'}
         onClick={async () => {
           const actionName = $jsx.normalizeAction('actionEdit');
-          await $host.$performAction(actionName, options.preset?.actionUpdate, renderContext);
+          await $host.$performAction(actionName, options.preset?.ActionUpdate, renderContext);
         }}
       >
         <ZIcon name="::draft" width={24}></ZIcon>

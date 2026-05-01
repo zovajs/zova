@@ -21,12 +21,12 @@ export class TableCellActionDelete extends BeanBase implements ITableCellRender 
     const { $jsx, $host } = renderContext;
     return (
       <button
-        class={options.preset?.actionDelete?.class ?? 'btn btn-outline btn-error join-item'}
+        class={options.preset?.ActionDelete?.class ?? 'btn btn-outline btn-error join-item'}
         onClick={async () => {
           // eslint-disable-next-line no-alert
           if (!window.confirm(this.scope.locale.DeleteConfirm())) return;
           const actionName = $jsx.normalizeAction('actionDelete');
-          await $host.$performAction(actionName, options.preset?.actionDelete, renderContext);
+          await $host.$performAction(actionName, options.preset?.ActionDelete, renderContext);
         }}
       >
         <ZIcon name="::delete" width={24}></ZIcon>

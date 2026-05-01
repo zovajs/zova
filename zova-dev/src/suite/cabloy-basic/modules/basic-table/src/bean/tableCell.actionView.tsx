@@ -10,13 +10,13 @@ export class TableCellActionView extends BeanBase implements ITableCellRender {
     const value = next();
     return (
       <a
-        class={options.preset?.actionView?.class ?? 'hover:text-blue-500'}
+        class={options.preset?.ActionView?.class ?? 'hover:text-blue-500'}
         href="#"
         onClick={async e => {
           e.preventDefault();
           e.stopPropagation();
           const actionName = $jsx.normalizeAction('actionView');
-          await $host.$performAction(actionName, options.preset?.actionView, renderContext);
+          await $host.$performAction(actionName, options.preset?.ActionView, renderContext);
         }}
       >
         {value}

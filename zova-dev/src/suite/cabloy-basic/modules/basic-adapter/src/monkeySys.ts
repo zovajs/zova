@@ -30,7 +30,8 @@ export class MonkeySys extends BeanSimple implements IMonkeySysInitialize {
       table: {
         provider: {
           components: {
-            actionOperationsBulk: 'basic-table:actionOperationsBulk',
+            ActionOperationsBulk: 'basic-table:actionOperationsBulk',
+            ActionCreate: 'basic-table:actionCreate',
             actionOperationsRow: 'basic-table.tableCell.actionOperationsRow',
             actionView: 'basic-table.tableCell.actionView',
             actionUpdate: 'basic-table.tableCell.actionUpdate',
