@@ -1,39 +1,20 @@
-import { BeanBase } from 'zova';
-import {
-  Action,
-  IActionExecute,
-  IDecoratorActionOptions,
-  NextActionExecute,
-} from 'zova-module-a-action';
+import { Action, IActionExecute, NextActionExecute } from 'zova-module-a-action';
 import { IJsxRenderContextBase } from 'zova-module-a-openapi';
-import { IJsxRenderContextTableCell } from 'zova-module-a-table';
+
+import { BeanActionRowBase } from '../lib/beanActionRowBase.js';
+import { IActionOptionsRowBase } from '../types/actions.js';
 
 export type TypeActionViewResult = unknown;
 
-export interface IActionOptionsView extends IDecoratorActionOptions<TypeActionViewResult> {
-  resource?: string;
-  id?: string;
-}
+export interface IActionOptionsView extends IActionOptionsRowBase<TypeActionViewResult> {}
 
 @Action<IActionOptionsView>()
-export class ActionView extends BeanBase implements IActionExecute {
-  execute(
-    options: IActionOptionsView,
-    renderContext: IJsxRenderContextBase,
-    next: NextActionExecute,
-  ) {
+export class ActionView extends BeanActionRowBase implements IActionExecute {
+  execute(options: IActionOptionsView, renderContext: IJsxRenderContextBase, next: NextActionExecute) {
     const { $host } = renderContext;
-    let resource: string | undefined;
-    let id: string | undefined;
-    if (renderContext.$scene === 'tableCell') {
-      const { $celScope, cellContext } = renderContext as IJsxRenderContextTableCell;
-      resource = options.resource ?? $celScope.resource;
-      id = options.id ?? cellContext.row.id;
-    }
-    if (!resource || !id)
-      throw new Error(`should specify resource or id in scene: ${renderContext.$scene}`);
+    const { resource, id } = this.getResourceAndId(options, renderContext);
     const url = $host.$router.getPagePath('/rest/resource/:resource/:id/:formScene?', {
-      params: { resource, id },
+      params: { resource, id: id.toString() },
     });
     $host.$router.push(url);
     return next();

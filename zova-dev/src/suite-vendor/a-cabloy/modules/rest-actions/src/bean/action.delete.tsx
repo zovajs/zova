@@ -1,31 +1,21 @@
-import { BeanBase } from 'zova';
-import {
-  Action,
-  IActionExecute,
-  IDecoratorActionOptions,
-  NextActionExecute,
-} from 'zova-module-a-action';
+import { Action, IActionExecute, NextActionExecute } from 'zova-module-a-action';
 import { IJsxRenderContextBase } from 'zova-module-a-openapi';
-import { IJsxRenderContextTableCell } from 'zova-module-a-table';
 
-export type TypeActionDeleteResult = unknown;
+import { BeanActionRowBase } from '../lib/beanActionRowBase.js';
+import { IActionOptionsRowBase } from '../types/actions.js';
 
-export interface IActionOptionsDelete extends IDecoratorActionOptions<TypeActionDeleteResult> {
-  id?: string;
-}
+export type TypeActionDeleteResult = number;
+
+export interface IActionOptionsDelete extends IActionOptionsRowBase<TypeActionDeleteResult> {}
 
 @Action<IActionOptionsDelete>()
-export class ActionDelete extends BeanBase implements IActionExecute {
-  async execute(
-    options: IActionOptionsDelete,
-    renderContext: IJsxRenderContextBase,
-    next: NextActionExecute,
-  ) {
-    if (renderContext.$scene === 'tableCell') {
-      const { $celScope, cellContext } = renderContext as IJsxRenderContextTableCell;
-      const id = options.id ?? cellContext.row.id;
-      await $celScope.onActionRow?.('delete', id);
-    }
+export class ActionDelete extends BeanActionRowBase implements IActionExecute {
+  async execute(options: IActionOptionsDelete, renderContext: IJsxRenderContextBase, next: NextActionExecute) {
+    const { ctx } = renderContext;
+    const { resource, id } = this.getResourceAndId(options, renderContext);
+    const modelResource = await ctx.bean._getBeanSelector('rest-resource.model.resource', true, resource);
+    const mutation = modelResource.delete(id);
+    await mutation.mutateAsync();
     return next();
   }
 }
