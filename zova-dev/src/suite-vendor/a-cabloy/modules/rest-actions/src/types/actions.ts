@@ -7,10 +7,10 @@ import { IDecoratorActionOptions } from 'zova-module-a-action';
 
 declare module 'zova-module-a-action' {
   export interface IActionsRecord {
-    actionCreate?: TypeActionProvider;
-    actionView?: TypeActionProvider;
-    actionEdit?: TypeActionProvider;
-    actionDelete?: TypeActionProvider;
+    ActionCreate?: TypeActionProvider;
+    ActionView?: TypeActionProvider;
+    ActionEdit?: TypeActionProvider;
+    ActionDelete?: TypeActionProvider;
   }
 }
 

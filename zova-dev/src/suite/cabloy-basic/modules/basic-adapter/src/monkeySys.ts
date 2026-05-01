@@ -9,21 +9,27 @@ export class MonkeySys extends BeanSimple implements IMonkeySysInitialize {
     const configCustom: IOpenapiOptionsResourceMeta = {
       provider: {
         components: {
-          restPage: 'basic-restpage:restPage',
-          restPageEntry: 'basic-restpage:restPageEntry',
-          table: 'basic-table:table',
+          RestPage: 'basic-restpage:restPage',
+          RestPageEntry: 'basic-restpage:restPageEntry',
+          Table: 'basic-table:table',
+        },
+        actions: {
+          ActionCreate: 'rest-actions:create',
+          ActionView: 'rest-actions:view',
+          ActionEdit: 'rest-actions:edit',
+          ActionDelete: 'rest-actions:delete',
         },
       },
       form: {
         provider: {
           components: {
-            input: 'basic-input:formFieldInput',
-            captcha: 'basic-captcha:formFieldCaptcha',
-            dateRange: 'basic-date:formFieldDateRange',
+            Input: 'basic-input:formFieldInput',
+            Captcha: 'basic-captcha:formFieldCaptcha',
+            DateRange: 'basic-date:formFieldDateRange',
           },
           behaviors: {
-            formField: 'basic-form:formField',
-            formFieldLayout: 'basic-form:formFieldLayout',
+            FormField: 'basic-form:formField',
+            FormFieldLayout: 'basic-form:formFieldLayout',
           },
         },
       },
@@ -32,16 +38,10 @@ export class MonkeySys extends BeanSimple implements IMonkeySysInitialize {
           components: {
             ActionOperationsBulk: 'basic-table:actionOperationsBulk',
             ActionCreate: 'basic-table:actionCreate',
-            actionOperationsRow: 'basic-table.tableCell.actionOperationsRow',
-            actionView: 'basic-table.tableCell.actionView',
-            actionUpdate: 'basic-table.tableCell.actionUpdate',
-            actionDelete: 'basic-table.tableCell.actionDelete',
-          },
-          actions: {
-            actionCreate: 'rest-actions:create',
-            actionView: 'rest-actions:view',
-            actionEdit: 'rest-actions:edit',
-            actionDelete: 'rest-actions:delete',
+            ActionOperationsRow: 'basic-table.tableCell.actionOperationsRow',
+            ActionView: 'basic-table.tableCell.actionView',
+            ActionUpdate: 'basic-table.tableCell.actionUpdate',
+            ActionDelete: 'basic-table.tableCell.actionDelete',
           },
         },
       },

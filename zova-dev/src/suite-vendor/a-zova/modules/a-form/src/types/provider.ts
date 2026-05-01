@@ -4,21 +4,21 @@ import type { TypeBehaviorRecordSelectorKeys, TypeBehaviorRecordSelectorKeysStri
 import type { TypeFormFieldRenderComponentProvider } from 'zova-module-a-openapi';
 
 export interface IFormProviderBehaviors {
-  formField?: TypeBehaviorRecordSelectorKeysStrict<'formField'>;
-  formFieldLayout?: TypeBehaviorRecordSelectorKeys<'formFieldLayout'>;
+  FormField?: TypeBehaviorRecordSelectorKeysStrict<'formField'>;
+  FormFieldLayout?: TypeBehaviorRecordSelectorKeys<'formFieldLayout'>;
 }
 
 export interface IFormProviderComponents {
-  formField?: TypeComponentRecordSelectorKeysStrict<'formField'>;
-  input?: TypeFormFieldRenderComponentProvider;
-  captcha?: TypeFormFieldRenderComponentProvider;
-  currency?: TypeFormFieldRenderComponentProvider;
-  date?: TypeFormFieldRenderComponentProvider;
-  dateRange?: TypeFormFieldRenderComponentProvider;
-  toggle?: TypeFormFieldRenderComponentProvider;
-  select?: TypeFormFieldRenderComponentProvider;
-  textarea?: TypeFormFieldRenderComponentProvider;
-  resourcePicker?: TypeFormFieldRenderComponentProvider;
+  FormField?: TypeComponentRecordSelectorKeysStrict<'formField'>;
+  Input?: TypeFormFieldRenderComponentProvider;
+  Captcha?: TypeFormFieldRenderComponentProvider;
+  Currency?: TypeFormFieldRenderComponentProvider;
+  Date?: TypeFormFieldRenderComponentProvider;
+  DateRange?: TypeFormFieldRenderComponentProvider;
+  Toggle?: TypeFormFieldRenderComponentProvider;
+  Select?: TypeFormFieldRenderComponentProvider;
+  Textarea?: TypeFormFieldRenderComponentProvider;
+  ResourcePicker?: TypeFormFieldRenderComponentProvider;
 }
 
 export interface IFormProvider {

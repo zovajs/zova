@@ -36,12 +36,12 @@ export class MonkeySys extends BeanSimple implements IMonkeySysInitialize {
       form: {
         provider: {
           components: {
-            text: VTextField,
-            captcha: 'vuetify-form:formFieldCaptcha',
+            Input: VTextField,
+            Captcha: 'vuetify-form:formFieldCaptcha',
           },
           behaviors: {
-            formField: 'vuetify-form:formField',
-            formFieldLayout: 'vuetify-form:formFieldLayout',
+            FormField: 'vuetify-form:formField',
+            FormFieldLayout: 'vuetify-form:formFieldLayout',
           },
         },
       },

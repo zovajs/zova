@@ -4,17 +4,17 @@ import type { TypeTableCellRenderComponentProvider, TypeTableBulkRenderComponent
 export interface ITableProviderComponents {
   ActionOperationsBulk?: TypeTableBulkRenderComponentProvider;
   ActionCreate?: TypeTableBulkRenderComponentProvider;
-  actionOperationsRow?: TypeTableCellRenderComponentProvider;
-  actionView?: TypeTableCellRenderComponentProvider;
-  actionUpdate?: TypeTableCellRenderComponentProvider;
-  actionDelete?: TypeTableCellRenderComponentProvider;
-  currency?: TypeTableCellRenderComponentProvider;
-  date?: TypeTableCellRenderComponentProvider;
-  dateRange?: TypeTableCellRenderComponentProvider;
-  toggle?: TypeTableCellRenderComponentProvider;
-  select?: TypeTableCellRenderComponentProvider;
-  textarea?: TypeTableCellRenderComponentProvider;
-  resourcePicker?: TypeTableCellRenderComponentProvider;
+  ActionOperationsRow?: TypeTableCellRenderComponentProvider;
+  ActionView?: TypeTableCellRenderComponentProvider;
+  ActionUpdate?: TypeTableCellRenderComponentProvider;
+  ActionDelete?: TypeTableCellRenderComponentProvider;
+  Currency?: TypeTableCellRenderComponentProvider;
+  Date?: TypeTableCellRenderComponentProvider;
+  DateRange?: TypeTableCellRenderComponentProvider;
+  Toggle?: TypeTableCellRenderComponentProvider;
+  Select?: TypeTableCellRenderComponentProvider;
+  Textarea?: TypeTableCellRenderComponentProvider;
+  ResourcePicker?: TypeTableCellRenderComponentProvider;
 }
 
 export interface ITableProvider {
