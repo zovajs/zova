@@ -3,7 +3,6 @@ import { z } from 'zod';
 import { BeanControllerPageBase, Use, useCustomRef, usePrepareArg } from 'zova';
 import { ZovaJsx } from 'zova-jsx';
 import { Controller } from 'zova-module-a-bean';
-import { IResourceActionBulkRecord, IResourceActionRowRecord } from 'zova-module-a-openapi';
 import { ITableProvider } from 'zova-module-a-table';
 import { ZPage } from 'zova-module-home-base';
 
@@ -42,15 +41,6 @@ export class ControllerPageResource extends BeanControllerPageBase {
     return this.$params.resource;
   }
 
-  async onActionBulk(_action: keyof IResourceActionBulkRecord) {}
-
-  async onActionRow(action: keyof IResourceActionRowRecord, id: string) {
-    if (action === 'delete') {
-      const mutation = this.$$modelResource.delete(id);
-      await mutation.mutateAsync();
-    }
-  }
-
   private _getPageWrapperScope(): IPageWrapperScope {
     // eslint-disable-next-line
     const self = this;
@@ -65,12 +55,6 @@ export class ControllerPageResource extends BeanControllerPageBase {
     return {
       resource: this.$$modelResource.resource,
       permissions,
-      onActionBulk: (action: keyof IResourceActionBulkRecord) => {
-        return this.onActionBulk(action);
-      },
-      onActionRow: (action: keyof IResourceActionRowRecord, id: string) => {
-        return this.onActionRow(action, id);
-      },
     };
   }
 
