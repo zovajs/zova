@@ -52,6 +52,7 @@ export class ControllerPageResource extends BeanControllerPageBase {
   }
 
   private _getPageWrapperScope(): IPageWrapperScope {
+    // eslint-disable-next-line
     const self = this;
     const permissions = useCustomRef(() => {
       return {
