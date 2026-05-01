@@ -316,7 +316,7 @@ export class ControllerForm<TFormData extends {} = {}, TSubmitMeta = never> exte
   }
 
   private _getFieldComponentOptionsTop(render: TypeFormFieldRenderComponent): TypeFormFieldRenderComponent {
-    render = render ?? 'input';
+    render = render ?? 'Input';
     const renderProvider = this.getRenderProvider(render);
     if (this.isComponentFormField(renderProvider)) {
       return renderProvider as TypeFormFieldRenderComponent;
