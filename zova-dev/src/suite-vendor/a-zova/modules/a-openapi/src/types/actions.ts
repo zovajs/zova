@@ -21,13 +21,14 @@ export type IResourceComponentActionRowRecord = {
 export interface IResourceComponentActionTableRecord extends IResourceComponentActionBulkRecord, IResourceComponentActionRowRecord {}
 
 export interface IResourceActionBulkOptionsBase {
+  class?: any;
   resource?: string;
 }
 
 export interface IResourceActionRowOptionsBase {
+  class?: any;
   resource?: string;
   id?: TableIdentity;
-  class?: any;
 }
 
 export interface IResourceActionBulkOptionsCreate extends IResourceActionBulkOptionsBase {}

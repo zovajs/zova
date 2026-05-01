@@ -2,9 +2,14 @@ import type { IJsxRenderContextPage } from 'zova-module-basic-restpage';
 
 import { BeanControllerBase, Use } from 'zova';
 import { Controller } from 'zova-module-a-bean';
+import { ITableActionBulkPresetOptions } from 'zova-module-a-table';
+
+export interface ControllerActionOperationsBulkProps extends ITableActionBulkPresetOptions {}
 
 @Controller()
 export class ControllerActionOperationsBulk extends BeanControllerBase {
+  static $propsDefault = {};
+
   protected async __init__() {}
 
   @Use({ injectionScope: 'host' })
@@ -33,6 +38,8 @@ export class ControllerActionOperationsBulk extends BeanControllerBase {
   }
 
   protected render() {
+    const actions = this.$props.preset?.actionOperationsBulk?.actions;
+
     return <div>{this._renderCreate()}</div>;
   }
 }
