@@ -23,4 +23,4 @@ declare module 'zova-module-basic-table' {
 export const ZActionCreate = defineComponent((_props: TypeControllerActionCreatePublicProps) => {
   useController(ControllerActionCreate, undefined, undefined);
   return () => {};
-}, prepareComponentOptions());
+}, prepareComponentOptions(ControllerActionCreate.$componentOptions));
