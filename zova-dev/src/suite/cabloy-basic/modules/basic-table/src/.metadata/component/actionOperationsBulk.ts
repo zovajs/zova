@@ -25,5 +25,5 @@ export const ZActionOperationsBulk = defineComponent(
     useController(ControllerActionOperationsBulk, undefined, undefined);
     return () => {};
   },
-  prepareComponentOptions(),
+  prepareComponentOptions(ControllerActionOperationsBulk.$componentOptions),
 );

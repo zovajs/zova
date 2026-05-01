@@ -1,5 +1,6 @@
 // eslint-disable
 /** controller: begin */
+export * from '../component/actionCreate/controller.jsx';
 export * from '../component/actionOperationsBulk/controller.jsx';
 export * from '../component/table/controller.jsx';
 
@@ -10,6 +11,11 @@ declare module 'zova' {
 }
 declare module 'zova-module-basic-table' {
   
+        export interface ControllerActionCreate {
+          /** @internal */
+          get scope(): ScopeModuleBasicTable;
+        }
+
         export interface ControllerActionOperationsBulk {
           /** @internal */
           get scope(): ScopeModuleBasicTable;
@@ -22,34 +28,41 @@ declare module 'zova-module-basic-table' {
 }
 /** controller: end */
 /** controller: begin */
+import { ControllerActionCreate } from '../component/actionCreate/controller.jsx';
 import { ControllerActionOperationsBulk } from '../component/actionOperationsBulk/controller.jsx';
 import { ControllerTable } from '../component/table/controller.jsx';
 import 'zova';
 declare module 'zova' {
   export interface IBeanRecordLocal {
-    'basic-table.controller.actionOperationsBulk': ControllerActionOperationsBulk;
+    'basic-table.controller.actionCreate': ControllerActionCreate;
+'basic-table.controller.actionOperationsBulk': ControllerActionOperationsBulk;
 'basic-table.controller.table': ControllerTable;
   }
 }
 /** controller: end */
 
 /** components: begin */
+export * from './component/actionCreate.js';
+import { ZActionCreate } from './component/actionCreate.js';
 export * from './component/actionOperationsBulk.js';
 import { ZActionOperationsBulk } from './component/actionOperationsBulk.js';
 export * from './component/table.js';
 import { ZTable } from './component/table.js';
 export const components = {
-  'actionOperationsBulk': ZActionOperationsBulk,
+  'actionCreate': ZActionCreate,
+'actionOperationsBulk': ZActionOperationsBulk,
 'table': ZTable,
 };
 import 'zova';
 declare module 'zova' {
 export interface IComponentRecord {
-  'basic-table:actionOperationsBulk': ControllerActionOperationsBulk;
+  'basic-table:actionCreate': ControllerActionCreate;
+'basic-table:actionOperationsBulk': ControllerActionOperationsBulk;
 'basic-table:table': ControllerTable;
 }
 export interface IZovaComponentRecord {
-  'basic-table:actionOperationsBulk': typeof ZActionOperationsBulk;
+  'basic-table:actionCreate': typeof ZActionCreate;
+'basic-table:actionOperationsBulk': typeof ZActionOperationsBulk;
 'basic-table:table': typeof ZTable;
 }
 }
