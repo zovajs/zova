@@ -94,7 +94,8 @@ export type TypeRenderComponentPreset = keyof ISchemaRenderComponentPresetRecord
 // form
 export type TypeFormFieldRenderComponentNormal = Constructable<ComponentPublicInstance> | keyof IComponentRecord | TypeRenderComponentPreset;
 export type TypeFormFieldRenderComponent = TypeFormFieldRenderComponentNormal | TypeRenderComponentJsx;
-export type TypeFormFieldRenderComponentProvider = Constructable | Constructable<ComponentPublicInstance> | keyof IComponentRecord;
+// should use input for config.ts of a-openapi
+export type TypeFormFieldRenderComponentProvider = Constructable | Constructable<ComponentPublicInstance> | keyof IComponentRecord | 'input';
 // | 'input'
 // | 'textarea'
 // | 'select';

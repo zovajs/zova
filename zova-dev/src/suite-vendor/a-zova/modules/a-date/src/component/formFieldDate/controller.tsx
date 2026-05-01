@@ -14,7 +14,7 @@ export interface ControllerFormFieldDateProps extends IFormFieldPresetOptions {}
 export class ControllerFormFieldDate extends BeanControllerBase {
   static $propsDefault = {
     preset: {
-      date: { preset: 'DATETIME_SHORT' },
+      Date: { preset: 'DATETIME_SHORT' },
     },
   };
   static $componentOptions: IComponentOptions = { inheritAttrs: false, deepExtendDefault: true };

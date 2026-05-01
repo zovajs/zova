@@ -7,21 +7,20 @@ export const config = (_sys: ZovaSys) => {
     base: {
       provider: {
         components: {
-          form: 'a-form:form',
-          table: 'a-table:table',
+          Form: 'a-form:form',
+          Table: 'a-table:table',
         },
         actions: {
-          actionLog: 'a-actions:log',
+          ActionLog: 'a-actions:log',
         },
       },
       form: {
         provider: {
           components: {
-            formField: 'a-form:formField',
-            text: 'input',
-            password: 'input',
-            currency: 'a-currency:formFieldCurrency',
-            date: 'a-date:formFieldDate',
+            FormField: 'a-form:formField',
+            Input: 'input',
+            Currency: 'a-currency:formFieldCurrency',
+            Date: 'a-date:formFieldDate',
           },
           behaviors: {},
         },
@@ -29,8 +28,8 @@ export const config = (_sys: ZovaSys) => {
       table: {
         provider: {
           components: {
-            currency: 'a-currency.tableCell.currency',
-            date: 'a-date.tableCell.date',
+            Currency: 'a-currency.tableCell.currency',
+            Date: 'a-date.tableCell.date',
           },
           actions: {},
         },

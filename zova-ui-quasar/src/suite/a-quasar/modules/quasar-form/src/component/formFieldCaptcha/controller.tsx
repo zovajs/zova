@@ -13,7 +13,7 @@ export interface ControllerFormFieldCaptchaProps extends IFormFieldPresetOptions
 export class ControllerFormFieldCaptcha extends BeanControllerBase {
   static $propsDefault = {
     preset: {
-      captcha: { scene: 'captcha-simple:simple' },
+      Captcha: { scene: 'captcha-simple:simple' },
     },
   };
   static $componentOptions: IComponentOptions = { inheritAttrs: false, deepExtendDefault: true };
