@@ -3,9 +3,9 @@ import type { IJsxRenderContextPage } from 'zova-module-basic-restpage';
 import { VNode } from 'vue';
 import { BeanControllerBase, IComponentOptions, Use } from 'zova';
 import { Controller } from 'zova-module-a-bean';
-import { ITableActionBulkPresetOptions } from 'zova-module-a-table';
+import { IResourceActionBulkPresetOptionsBase } from 'zova-module-a-openapi';
 
-export interface ControllerActionOperationsBulkProps extends ITableActionBulkPresetOptions {}
+export interface ControllerActionOperationsBulkProps extends IResourceActionBulkPresetOptionsBase {}
 
 @Controller()
 export class ControllerActionOperationsBulk extends BeanControllerBase {

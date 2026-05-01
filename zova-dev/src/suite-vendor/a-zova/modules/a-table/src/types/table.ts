@@ -26,7 +26,3 @@ export type TypeTableGetColumns<TData extends {} = {}> = (
   createColumnRender: TypeTableCreateColumnRender<TData>,
   table: ControllerTable<TData>,
 ) => Promise<TypeColumn<TData>[]>;
-
-export interface ITableActionBulkPresetOptions {
-  preset?: IResourceComponentActionBulkRecord;
-}

@@ -20,6 +20,10 @@ export type IResourceComponentActionRowRecord = {
 
 export interface IResourceComponentActionTableRecord extends IResourceComponentActionBulkRecord, IResourceComponentActionRowRecord {}
 
+export interface IResourceActionBulkPresetOptionsBase {
+  preset?: IResourceComponentActionBulkRecord;
+}
+
 export interface IResourceActionBulkOptionsBase {
   class?: any;
   resource?: string;
