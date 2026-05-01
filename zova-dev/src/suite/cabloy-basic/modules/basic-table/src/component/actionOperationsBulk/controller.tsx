@@ -12,32 +12,14 @@ export class ControllerActionOperationsBulk extends BeanControllerBase {
   static $propsDefault = {};
   static $componentOptions: IComponentOptions = { inheritAttrs: false, deepExtendDefault: true };
 
-  protected async __init__() {}
-
   @Use({ injectionScope: 'host' })
   $$renderContext: IJsxRenderContextPage;
+
+  protected async __init__() {}
 
   get permissions() {
     return this.$$renderContext.$celScope.permissions;
   }
-
-  // private _renderCreate() {
-  //   const permissionCreate = this.$passport.checkPermission(this.permissions, 'create');
-  //   if (!permissionCreate) return;
-  //   const { $jsx } = this.$$renderContext;
-  //   return (
-  //     <button
-  //       class="btn btn-primary"
-  //       type="button"
-  //       onClick={() => {
-  //         const actionName = $jsx.normalizeAction('actionCreate');
-  //         this.$performAction(actionName, undefined, this.$$renderContext);
-  //       }}
-  //     >
-  //       {this.scope.locale.Create()}
-  //     </button>
-  //   );
-  // }
 
   protected render() {
     const { $jsx, $celScope } = this.$$renderContext;
