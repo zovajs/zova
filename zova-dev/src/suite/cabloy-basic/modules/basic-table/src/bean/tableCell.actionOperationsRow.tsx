@@ -42,7 +42,8 @@ export class TableCellActionOperationsRow extends BeanBase implements ITableCell
     for (const action of actions) {
       const actionName = action.name;
       if (!$host.$passport.checkPermission(permissions, actionName)) continue;
-      domActions.push($$table.cellRender(action.options, renderContext));
+      const options2 = Object.assign({ key: actionName }, action.options);
+      domActions.push($$table.cellRender(options2, renderContext));
     }
     return <div class="join">{domActions}</div>;
   }

@@ -27,7 +27,7 @@ export class RenderWrapperFilter extends BeanRenderBase {
                 {this.scope.locale.Search()}
               </button>
               <button
-                class="btn"
+                class="btn btn-warning"
                 onClick={() => {
                   const data = $$form.reset();
                   this.onReset(data);

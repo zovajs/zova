@@ -217,7 +217,7 @@ export class ZovaJsx extends BeanSimple {
     return beanInstance.execute(props, renderContext, next);
   }
 
-  public render(componentOptions: TypeRenderComponent, props: {} | undefined, celScope: {}, renderContext: {}) {
+  public render(componentOptions: TypeRenderComponent, props: {} | undefined, celScope: {}, renderContext: {}): VNode | VNode[] | undefined {
     if (!componentOptions) {
       throw new Error(`render component should not ${componentOptions}`);
     }
@@ -270,7 +270,7 @@ export class ZovaJsx extends BeanSimple {
     return this.actions?.[type] ?? type;
   }
 
-  private _renderJsxSingle(Component: any, componentOptions: TypeRenderComponentJsx, props: {}, celScope: {}, renderContext: {}) {
+  private _renderJsxSingle(Component: any, componentOptions: TypeRenderComponentJsx, props: {}, celScope: {}, renderContext: {}): VNode {
     const _isZovaComponent = isZovaComponent(Component);
     // key
     if (!cast(props).key && componentOptions.key) {
