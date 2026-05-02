@@ -20,7 +20,7 @@ export function getEnvMeta(configMeta: ZovaConfigMeta) {
     flavor: configMeta.flavor,
     mode: configMeta.mode,
     appMode: configMeta.appMode,
-    mine: 'mine',
+    local: 'local',
   };
 }
 
@@ -32,12 +32,7 @@ export function getOutReleasesDir() {
   return `dist-releases/${process.env.META_APP_MODE}-${process.env.META_FLAVOR}-${process.env.APP_VERSION}`;
 }
 
-export function getEnvFromCli(
-  cliEnvName: string,
-  cliArgName: string,
-  defaultValue: string,
-  offset: number = 2,
-): string {
+export function getEnvFromCli(cliEnvName: string, cliArgName: string, defaultValue: string, offset: number = 2): string {
   let value = process.env[cliEnvName];
   if (!value) {
     const argv = parseArgs(process.argv.slice(offset));
