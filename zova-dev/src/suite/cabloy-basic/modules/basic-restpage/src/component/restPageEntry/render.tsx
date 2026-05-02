@@ -1,4 +1,3 @@
-import { classes } from 'typestyle';
 import { VNode } from 'vue';
 import { BeanRenderBase } from 'zova';
 import { Render } from 'zova-module-a-bean';
@@ -52,32 +51,6 @@ export class RenderRestPageEntry<TData extends {} = {}> extends BeanRenderBase {
 
   private _renderToolbar() {
     return this._renderOperationsRow();
-    return (
-      <div>
-        {this.controllerForm?.formState.isSubmitting && <span class="loading loading-spinner text-primary"></span>}
-        {this.formMeta.formMode === 'edit' && (
-          <button
-            class={classes('btn btn-primary', this.controllerForm?.formState.isSubmitting && 'btn-disabled')}
-            onClick={async () => {
-              const res = await this.controllerForm.submit();
-              if (res) {
-                this.$router.back();
-              }
-            }}
-          >
-            {this.scope.locale.Submit()}
-          </button>
-        )}
-        <button
-          class={classes('btn', this.controllerForm?.formState.isSubmitting && 'btn-disabled')}
-          onClick={() => {
-            this.$router.back();
-          }}
-        >
-          {this.scope.locale.Back()}
-        </button>
-      </div>
-    );
   }
 
   public render() {

@@ -1,5 +1,4 @@
 export default {
-  Back: '回退',
   Close: '关闭',
   Create: '创建',
   Search: '搜索',

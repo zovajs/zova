@@ -20,19 +20,23 @@ export class ControllerActionSubmit extends BeanControllerBase {
   protected render() {
     const { $$pageEntry } = this.$$renderContext;
     const controllerForm: ControllerForm = $$pageEntry.controllerForm;
+    const isSubmitting = controllerForm?.formState.isSubmitting;
     const className = this.$props.preset?.ActionSubmit?.class ?? 'btn btn-primary join-item';
     return (
-      <button
-        class={classes(className, controllerForm?.formState.isSubmitting && 'btn-disabled')}
-        onClick={async () => {
-          const res = await controllerForm.submit();
-          if (res) {
-            this.$router.back();
-          }
-        }}
-      >
-        {this.scope.locale.Submit()}
-      </button>
+      <>
+        {isSubmitting && <span class="loading loading-spinner text-primary"></span>}
+        <button
+          class={classes(className, isSubmitting && 'btn-disabled')}
+          onClick={async () => {
+            const res = await controllerForm.submit();
+            if (res) {
+              this.$router.back();
+            }
+          }}
+        >
+          {this.scope.locale.Submit()}
+        </button>
+      </>
     );
   }
 }

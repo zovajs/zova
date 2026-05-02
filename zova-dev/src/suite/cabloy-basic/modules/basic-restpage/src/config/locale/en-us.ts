@@ -1,5 +1,4 @@
 export default {
-  Back: 'Back',
   Close: 'Close',
   Create: 'Create',
   Search: 'Search',
