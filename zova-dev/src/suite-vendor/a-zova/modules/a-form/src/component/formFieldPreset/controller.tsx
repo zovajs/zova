@@ -1,5 +1,3 @@
-import type { ISchemaRenderComponentPresetRecord } from 'zova-module-a-openapi';
-
 import { BeanControllerBase, IComponentOptions, Use } from 'zova';
 import { Controller } from 'zova-module-a-bean';
 
@@ -7,10 +5,7 @@ import type { ControllerForm } from '../form/controller.jsx';
 
 import { IFormFieldPresetOptions } from '../../types/formField.js';
 
-export interface ControllerFormFieldPresetProps<
-  TParentData extends {} = {},
-  TComponentName extends keyof ISchemaRenderComponentPresetRecord = keyof ISchemaRenderComponentPresetRecord,
-> extends IFormFieldPresetOptions<TParentData> {}
+export interface ControllerFormFieldPresetProps<TParentData extends {} = {}> extends IFormFieldPresetOptions<TParentData> {}
 
 @Controller()
 export class ControllerFormFieldPreset<TParentData extends {} = {}> extends BeanControllerBase {
