@@ -1,5 +1,4 @@
-import type { TypeActionProvider } from 'zova-module-a-openapi';
-import type { IPageWrapperScope } from 'zova-module-rest-resource';
+import type { IPageWrapperScope, TypeActionProvider } from 'zova-module-a-openapi';
 
 import 'zova-module-a-action';
 import { TableIdentity } from 'table-identity';

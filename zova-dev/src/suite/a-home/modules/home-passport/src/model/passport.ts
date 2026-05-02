@@ -10,7 +10,7 @@ import type {
 import { combineQueries, isNil } from '@cabloy/utils';
 import { SchemaObject } from 'openapi3-ts/oas31';
 import { BeanModelBase, Model } from 'zova-module-a-model';
-import { IResourceActionTableRecord, TypeOpenapiPermissions } from 'zova-module-a-openapi';
+import { IPermissionHint, IResourceActionTableRecord, TypeOpenapiPermissions } from 'zova-module-a-openapi';
 import { ApiApiHomeUserPassportloginOauthPath, OpenApiBaseURL } from 'zova-module-home-api';
 
 export interface IModelOptionsPassport extends IDecoratorModelOptions {}
@@ -185,7 +185,13 @@ export class ModelPassport extends BeanModelBase {
     }
   }
 
-  public checkPermission(permissions: TypeOpenapiPermissions | undefined, actionName: keyof IResourceActionTableRecord): boolean {
+  public checkPermission(
+    permissions: TypeOpenapiPermissions | undefined,
+    actionName: keyof IResourceActionTableRecord,
+    permissionHint?: IPermissionHint,
+  ): boolean {
+    if (permissionHint?.public) return true;
+    const permissionAction = permissionHint?.action ?? actionName;
     if (isNil(permissions)) return false;
     if (permissions === false) return false;
     if (permissions === true) return true;
@@ -194,7 +200,7 @@ export class ModelPassport extends BeanModelBase {
     // roleNames
     if (permissions.roleNames && permissions.roleNames.some(roleName => this.roles?.some(role => role.name === roleName))) return true;
     // actions
-    if (permissions.actions && !!permissions.actions[actionName]) return true;
+    if (permissions.actions && !!permissions.actions[permissionAction]) return true;
     // others
     return false;
   }

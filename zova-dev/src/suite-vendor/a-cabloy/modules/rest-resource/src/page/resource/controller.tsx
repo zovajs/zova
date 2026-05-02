@@ -3,12 +3,11 @@ import { z } from 'zod';
 import { BeanControllerPageBase, Use, useCustomRef, usePrepareArg } from 'zova';
 import { ZovaJsx } from 'zova-jsx';
 import { Controller } from 'zova-module-a-bean';
+import { IJsxRenderContextPageWrapper, IPageWrapperScope } from 'zova-module-a-openapi';
 import { ITableProvider } from 'zova-module-a-table';
 import { ZPage } from 'zova-module-home-base';
 
 import type { ModelResource } from '../../model/resource.js';
-
-import { IJsxRenderContextPageWrapper, IPageWrapperScope } from '../../types/pageWrapper.js';
 
 export const ControllerPageResourceSchemaParams = z.object({
   resource: z.string(),

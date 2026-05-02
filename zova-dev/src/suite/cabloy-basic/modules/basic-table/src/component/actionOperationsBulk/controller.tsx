@@ -1,5 +1,6 @@
 import type { IJsxRenderContextPage, IResourceActionBulkPresetOptionsBase } from 'zova-module-a-openapi';
 
+import { toUpperCaseFirstChar } from '@cabloy/word-utils';
 import { VNode } from 'vue';
 import { BeanControllerBase, IComponentOptions, Use } from 'zova';
 import { Controller } from 'zova-module-a-bean';
@@ -27,7 +28,9 @@ export class ControllerActionOperationsBulk extends BeanControllerBase {
     const domActions: VNode[] = [];
     for (const action of actions) {
       const actionName = action.name;
-      if (!this.$passport.checkPermission(this.permissions, actionName)) continue;
+      const actionNameCapitalize = `Action${toUpperCaseFirstChar(actionName)}`;
+      const permissionHint = action.options?.preset?.[actionNameCapitalize]?.permission;
+      if (!this.$passport.checkPermission(this.permissions, actionName, permissionHint)) continue;
       const options = Object.assign({ key: actionName }, action.options);
       const domAction = $jsx.render(options.render!, options, $celScope, this.$$renderContext);
       if (!domAction) continue;

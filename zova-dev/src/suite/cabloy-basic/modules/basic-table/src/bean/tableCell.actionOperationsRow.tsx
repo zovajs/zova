@@ -1,3 +1,4 @@
+import { toUpperCaseFirstChar } from '@cabloy/word-utils';
 import { VNode } from 'vue';
 import { BeanBase } from 'zova';
 import { TypeTableCellRenderComponent } from 'zova-module-a-openapi';
@@ -24,7 +25,9 @@ export class TableCellActionOperationsRow extends BeanBase implements ITableCell
     for (const action of actions) {
       const actionName = action.name;
       const actionRender = action.options?.render;
-      if ($host.$passport.checkPermission(permissions, actionName)) {
+      const actionNameCapitalize = `Action${toUpperCaseFirstChar(actionName)}`;
+      const permissionHint = action.options?.preset?.[actionNameCapitalize]?.permission;
+      if ($host.$passport.checkPermission(permissions, actionName, permissionHint)) {
         if (!actionRender) throw new Error(`should specify action render: ${actionName}`);
         renders.push(actionRender);
       }
@@ -41,7 +44,9 @@ export class TableCellActionOperationsRow extends BeanBase implements ITableCell
     const domActions: VNode[] = [];
     for (const action of actions) {
       const actionName = action.name;
-      if (!$host.$passport.checkPermission(permissions, actionName)) continue;
+      const actionNameCapitalize = `Action${toUpperCaseFirstChar(actionName)}`;
+      const permissionHint = action.options?.preset?.[actionNameCapitalize]?.permission;
+      if (!$host.$passport.checkPermission(permissions, actionName, permissionHint)) continue;
       const options2 = Object.assign({ key: actionName }, action.options);
       domActions.push($$table.cellRender(options2, renderContext));
     }

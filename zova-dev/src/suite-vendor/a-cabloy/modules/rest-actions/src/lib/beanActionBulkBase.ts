@@ -1,6 +1,5 @@
 import { BeanBase } from 'zova';
-import { IJsxRenderContextBase } from 'zova-module-a-openapi';
-import { IJsxRenderContextPageWrapper } from 'zova-module-rest-resource';
+import { IJsxRenderContextBase, IJsxRenderContextPageWrapper } from 'zova-module-a-openapi';
 
 import { IActionOptionsBulkBase } from '../types/actions.js';
 

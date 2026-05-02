@@ -24,9 +24,18 @@ export interface IResourceActionBulkPresetOptionsBase {
   preset?: IResourceComponentActionBulkRecord;
 }
 
+export interface IPermissionHint {
+  action?: string;
+  public?: boolean;
+}
+
 export interface IResourceActionBulkOptionsBase {
   class?: any;
   resource?: string;
+  permission?: {
+    action?: keyof IResourceActionBulkRecord;
+    public?: boolean;
+  };
 }
 
 export interface IResourceActionRowPresetOptionsBase {
@@ -37,6 +46,10 @@ export interface IResourceActionRowOptionsBase {
   class?: any;
   resource?: string;
   id?: TableIdentity;
+  permission?: {
+    action?: keyof IResourceActionRowRecord;
+    public?: boolean;
+  };
 }
 
 export interface IResourceActionBulkOptionsCreate extends IResourceActionBulkOptionsBase {}

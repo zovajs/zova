@@ -6,9 +6,7 @@ import { BeanControllerBase, deepEqual, Use } from 'zova';
 import { Controller } from 'zova-module-a-bean';
 import { ControllerForm, TypeFormOnSubmitData } from 'zova-module-a-form';
 import { $QueriesAutoLoad } from 'zova-module-a-model';
-import { TypeFormSchemaScene } from 'zova-module-a-openapi';
-
-import { IJsxRenderContextPageEntry, IPageEntryScope } from '../../types/pageEntry.js';
+import { IJsxRenderContextPageEntry, IPageEntryScope, TypeFormSchemaScene } from 'zova-module-a-openapi';
 
 // @ts-ignore ignore
 // eslint-disable-next-line

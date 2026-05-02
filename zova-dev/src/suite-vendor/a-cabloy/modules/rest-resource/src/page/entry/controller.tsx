@@ -4,11 +4,10 @@ import { BeanControllerPageBase, Use, useCustomRef, usePrepareArg } from 'zova';
 import { ZovaJsx } from 'zova-jsx';
 import { Controller } from 'zova-module-a-bean';
 import { formMetaFromFormScene, IFormMeta, IFormProvider, TypeFormScene } from 'zova-module-a-form';
+import { IJsxRenderContextPageEntryWrapper, IPageEntryWrapperScope } from 'zova-module-a-openapi';
 import { ZPage } from 'zova-module-home-base';
 
 import type { ModelResource } from '../../model/resource.js';
-
-import { IJsxRenderContextPageEntryWrapper, IPageEntryWrapperScope } from '../../types/pageEntryWrapper.js';
 
 export const ControllerPageEntrySchemaParams = z.object({
   resource: z.string(),
