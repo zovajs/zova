@@ -3,8 +3,8 @@ import type { ModelResource } from 'zova-module-rest-resource';
 import { isNilOrEmptyString } from '@cabloy/utils';
 import { BeanControllerBase, Use } from 'zova';
 import { Controller } from 'zova-module-a-bean';
-import { IFormMeta, IFormProvider, TypeFormOnSubmitData } from 'zova-module-a-form';
-import { ISchemaRenderComponentLayoutOptions } from 'zova-module-a-openapi';
+import { IFormProvider, TypeFormOnSubmitData } from 'zova-module-a-form';
+import { IFormMeta, ISchemaRenderComponentLayoutOptions } from 'zova-module-a-openapi';
 
 export interface ControllerWrapperFilterProps {
   formData?: any;

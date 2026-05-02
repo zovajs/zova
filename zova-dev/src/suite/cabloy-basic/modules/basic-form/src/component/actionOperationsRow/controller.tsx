@@ -1,4 +1,4 @@
-import type { IJsxRenderContextPageEntry, IResourceActionRowPresetOptionsBase } from 'zova-module-a-openapi';
+import type { IJsxRenderContextPageEntry, IPermissionHint, IResourceActionRowPresetOptionsBase } from 'zova-module-a-openapi';
 
 import { toUpperCaseFirstChar } from '@cabloy/word-utils';
 import { VNode } from 'vue';
@@ -25,11 +25,15 @@ export class ControllerActionOperationsRow extends BeanControllerBase {
     const { $jsx, $celScope } = this.$$renderContext;
     const actions = this.$props.preset?.ActionOperationsRow?.actions;
     if (!actions || actions.length === 0) return;
+
     const domActions: VNode[] = [];
     for (const action of actions) {
       const actionName = action.name;
       const actionNameCapitalize = `Action${toUpperCaseFirstChar(actionName)}`;
-      const permissionHint = action.options?.preset?.[actionNameCapitalize]?.permission;
+      const permissionHint: IPermissionHint | undefined = action.options?.preset?.[actionNameCapitalize]?.permission;
+      // check formScene
+      if (!this._checkFormScene(permissionHint)) continue;
+      // check permission
       if (!this.$passport.checkPermission(this.permissions, actionName, permissionHint)) continue;
       const options = Object.assign({ key: actionName }, action.options);
       const domAction = $jsx.render(options.render!, options, $celScope, this.$$renderContext);
@@ -45,5 +49,15 @@ export class ControllerActionOperationsRow extends BeanControllerBase {
         <div class="join">{domActions}</div>
       </div>
     );
+  }
+
+  private _checkFormScene(permissionHint?: IPermissionHint) {
+    const { $$pageEntry } = this.$$renderContext;
+    const formScene = $$pageEntry.formMeta.formScene;
+    const formSceneHint = permissionHint?.formScene;
+    if (!formSceneHint) return true;
+    if (Array.isArray(formSceneHint) && formSceneHint.includes(formScene!)) return true;
+    if (formSceneHint === formScene) return true;
+    return false;
   }
 }

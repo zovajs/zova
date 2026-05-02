@@ -1,4 +1,4 @@
-import type { IFormMeta, TypeFormScene } from '../types/formMeta.js';
+import type { IFormMeta, TypeFormScene } from 'zova-module-a-openapi';
 
 export function formMetaFromFormScene(formScene: TypeFormScene): IFormMeta {
   if (formScene === 'view') return { formScene, formMode: 'view', editMode: undefined };

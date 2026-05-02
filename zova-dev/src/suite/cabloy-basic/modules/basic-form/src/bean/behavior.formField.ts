@@ -1,10 +1,11 @@
-import type { ControllerFormField, IFormFieldRenderContext, IFormFieldRenderContextProps, IFormMeta, TypeFormField } from 'zova-module-a-form';
+import type { ControllerFormField, IFormFieldRenderContext, IFormFieldRenderContextProps, TypeFormField } from 'zova-module-a-form';
 
 import { isEmptyObject, isNil } from '@cabloy/utils';
 import { VNode } from 'vue';
 import { Use } from 'zova';
 import { isJsxComponent } from 'zova-jsx';
 import { BeanBehaviorBase, Behavior, IDecoratorBehaviorOptions, NextBehavior } from 'zova-module-a-behavior';
+import { IFormMeta } from 'zova-module-a-openapi';
 
 export interface IBehaviorPropsInputFormField extends IFormFieldRenderContext {}
 

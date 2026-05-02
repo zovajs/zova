@@ -24,6 +24,8 @@ export class MonkeySys extends BeanSimple implements IMonkeySysInitialize {
         provider: {
           components: {
             ActionOperationsRow: 'basic-form:actionOperationsRow',
+            ActionSubmit: 'basic-form:actionSubmit',
+            ActionBack: 'basic-form:actionBack',
             Input: 'basic-input:formFieldInput',
             Captcha: 'basic-captcha:formFieldCaptcha',
             DateRange: 'basic-date:formFieldDateRange',

@@ -20,6 +20,8 @@ export interface IFormProviderComponents {
   Textarea?: TypeFormFieldRenderComponentProvider;
   ResourcePicker?: TypeFormFieldRenderComponentProvider;
   ActionOperationsRow?: TypeFormFieldRenderComponentProvider;
+  ActionSubmit?: TypeFormFieldRenderComponentProvider;
+  ActionBack?: TypeFormFieldRenderComponentProvider;
 }
 
 export interface IFormProvider {

@@ -1,5 +1,6 @@
 import { TableIdentity } from 'table-identity';
 
+import { TypeFormScene } from './formMeta.js';
 import { ISchemaObjectExtensionFieldRest } from './rest.js';
 
 export interface IResourceComponentFormFieldRecord {}
@@ -27,6 +28,7 @@ export interface IResourceActionBulkPresetOptionsBase {
 export interface IPermissionHint {
   action?: string;
   public?: boolean;
+  formScene?: TypeFormScene | TypeFormScene[];
 }
 
 export interface IResourceActionBulkOptionsBase {
@@ -49,6 +51,7 @@ export interface IResourceActionRowOptionsBase {
   permission?: {
     action?: keyof IResourceActionRowRecord;
     public?: boolean;
+    formScene?: TypeFormScene | TypeFormScene[];
   };
 }
 

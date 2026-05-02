@@ -1,4 +1,4 @@
-import { IFormMeta } from 'zova-module-a-form';
+import { IFormMeta } from 'zova-module-a-openapi';
 
 export interface IPageMeta {
   pageTitle?: string;

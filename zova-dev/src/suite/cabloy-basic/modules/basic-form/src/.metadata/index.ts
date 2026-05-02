@@ -1,6 +1,8 @@
 // eslint-disable
 /** controller: begin */
+export * from '../component/actionBack/controller.jsx';
 export * from '../component/actionOperationsRow/controller.jsx';
+export * from '../component/actionSubmit/controller.jsx';
 
 import 'zova';
 declare module 'zova' {
@@ -9,35 +11,59 @@ declare module 'zova' {
 }
 declare module 'zova-module-basic-form' {
   
+        export interface ControllerActionBack {
+          /** @internal */
+          get scope(): ScopeModuleBasicForm;
+        }
+
         export interface ControllerActionOperationsRow {
+          /** @internal */
+          get scope(): ScopeModuleBasicForm;
+        }
+
+        export interface ControllerActionSubmit {
           /** @internal */
           get scope(): ScopeModuleBasicForm;
         } 
 }
 /** controller: end */
 /** controller: begin */
+import { ControllerActionBack } from '../component/actionBack/controller.jsx';
 import { ControllerActionOperationsRow } from '../component/actionOperationsRow/controller.jsx';
+import { ControllerActionSubmit } from '../component/actionSubmit/controller.jsx';
 import 'zova';
 declare module 'zova' {
   export interface IBeanRecordLocal {
-    'basic-form.controller.actionOperationsRow': ControllerActionOperationsRow;
+    'basic-form.controller.actionBack': ControllerActionBack;
+'basic-form.controller.actionOperationsRow': ControllerActionOperationsRow;
+'basic-form.controller.actionSubmit': ControllerActionSubmit;
   }
 }
 /** controller: end */
 
 /** components: begin */
+export * from './component/actionBack.js';
+import { ZActionBack } from './component/actionBack.js';
 export * from './component/actionOperationsRow.js';
 import { ZActionOperationsRow } from './component/actionOperationsRow.js';
+export * from './component/actionSubmit.js';
+import { ZActionSubmit } from './component/actionSubmit.js';
 export const components = {
-  'actionOperationsRow': ZActionOperationsRow,
+  'actionBack': ZActionBack,
+'actionOperationsRow': ZActionOperationsRow,
+'actionSubmit': ZActionSubmit,
 };
 import 'zova';
 declare module 'zova' {
 export interface IComponentRecord {
-  'basic-form:actionOperationsRow': ControllerActionOperationsRow;
+  'basic-form:actionBack': ControllerActionBack;
+'basic-form:actionOperationsRow': ControllerActionOperationsRow;
+'basic-form:actionSubmit': ControllerActionSubmit;
 }
 export interface IZovaComponentRecord {
-  'basic-form:actionOperationsRow': typeof ZActionOperationsRow;
+  'basic-form:actionBack': typeof ZActionBack;
+'basic-form:actionOperationsRow': typeof ZActionOperationsRow;
+'basic-form:actionSubmit': typeof ZActionSubmit;
 }
 }
 /** components: end */
@@ -113,8 +139,11 @@ declare module 'vue/jsx-runtime' {
   }
 }
 /** behaviors: end */
+/** locale: begin */
+import { locales } from './locales.js';
+/** locale: end */
 /** scope: begin */
-import { BeanScopeBase, type BeanScopeUtil } from 'zova';
+import { BeanScopeBase, type BeanScopeUtil, TypeModuleLocales, TypeLocaleBase } from 'zova';
 import { Scope } from 'zova-module-a-bean';
 
 @Scope()
@@ -122,6 +151,7 @@ export class ScopeModuleBasicForm extends BeanScopeBase {}
 
 export interface ScopeModuleBasicForm {
   util: BeanScopeUtil;
+locale: TypeModuleLocales<(typeof locales)[TypeLocaleBase]>;
 }
 
 import 'zova';
@@ -132,9 +162,14 @@ declare module 'zova' {
   
   
 
-  
+  export interface IBeanScopeLocale {
+    'basic-form': (typeof locales)[TypeLocaleBase];
+  }
 
   
 }
-  
+
+export function locale<K extends keyof (typeof locales)[TypeLocaleBase]>(key: K): `basic-form::${K}` {
+  return `basic-form::${key}`;
+}  
 /** scope: end */

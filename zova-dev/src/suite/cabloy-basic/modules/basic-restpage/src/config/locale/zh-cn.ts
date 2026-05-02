@@ -2,7 +2,6 @@ export default {
   Back: '回退',
   Close: '关闭',
   Create: '创建',
-  Submit: '提交',
   Search: '搜索',
   Reset: '重置',
   PagedTotalItems: '总条数',

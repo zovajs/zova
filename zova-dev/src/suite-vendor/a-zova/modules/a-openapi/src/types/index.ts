@@ -9,3 +9,4 @@ export * from './sdk.js';
 export * from './table.js';
 export * from './actions.js';
 export * from './fieldLayout.js';
+export * from './formMeta.js';

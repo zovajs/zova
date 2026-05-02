@@ -19,6 +19,7 @@ import { cast, deepEqual, deepExtend, objectAssignReactive, UseScope } from 'zov
 import { isJsxComponent, ZovaJsx } from 'zova-jsx';
 import { Controller } from 'zova-module-a-bean';
 import {
+  IFormMeta,
   ISchemaRenderComponentLayoutOptions,
   renderFormFieldTopPropsSystem,
   ScopeModuleAOpenapi,
@@ -36,7 +37,6 @@ import {
   IFormFieldScope,
   IJsxRenderContextFormField,
 } from '../../types/formField.js';
-import { IFormMeta } from '../../types/formMeta.js';
 import { IFormProvider } from '../../types/provider.js';
 import { ControllerFormField } from '../formField/controller.jsx';
 
