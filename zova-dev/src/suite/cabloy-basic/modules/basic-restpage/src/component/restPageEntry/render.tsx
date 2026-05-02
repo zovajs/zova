@@ -1,4 +1,5 @@
 import { classes } from 'typestyle';
+import { VNode } from 'vue';
 import { BeanRenderBase } from 'zova';
 import { Render } from 'zova-module-a-bean';
 
@@ -29,7 +30,28 @@ export class RenderRestPageEntry<TData extends {} = {}> extends BeanRenderBase {
     );
   }
 
+  private _renderOperationsRow() {
+    const celScope = this.pageEntryScope;
+    const jsxRenderContext = this.getJsxRenderContextPageEntry(celScope);
+    const actions = this.formSchema?.rest?.dtoActions;
+    if (!actions || actions.length === 0) return;
+    const domActions: VNode[] = [];
+    for (const action of actions) {
+      const actionName = action.name;
+      const options = Object.assign({ key: actionName }, action.options);
+      const domAction = this.zovaJsx.render(options.render!, options, celScope, jsxRenderContext);
+      if (!domAction) continue;
+      if (Array.isArray(domAction)) {
+        domActions.push(...domAction);
+      } else {
+        domActions.push(domAction);
+      }
+    }
+    return <div>{domActions}</div>;
+  }
+
   private _renderToolbar() {
+    return this._renderOperationsRow();
     return (
       <div>
         {this.controllerForm?.formState.isSubmitting && <span class="loading loading-spinner text-primary"></span>}

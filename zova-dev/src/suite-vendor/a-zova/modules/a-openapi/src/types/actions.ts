@@ -43,6 +43,9 @@ export interface IResourceActionRowOptionsUpdate extends IResourceActionRowOptio
 
 export interface IResourceActionRowOptionsDelete extends IResourceActionRowOptionsBase {}
 
+export interface IResourceActionRowOptionsSubmit extends IResourceActionRowOptionsBase {}
+export interface IResourceActionRowOptionsBack extends IResourceActionRowOptionsBase {}
+
 export interface IResourceActionBulkOptionsOperationsBulk extends IResourceActionBulkOptionsBase {
   actions?: IResourceActionBulkOptionsOperationsBulkAction[];
 }
