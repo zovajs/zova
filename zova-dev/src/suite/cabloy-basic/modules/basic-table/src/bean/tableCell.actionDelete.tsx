@@ -22,6 +22,7 @@ export class TableCellActionDelete extends BeanBase implements ITableCellRender 
     return (
       <button
         class={options.preset?.ActionDelete?.class ?? 'btn btn-outline btn-error join-item'}
+        type="button"
         onClick={async () => {
           // eslint-disable-next-line no-alert
           if (!window.confirm(this.scope.locale.DeleteConfirm())) return;
