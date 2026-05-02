@@ -1,8 +1,7 @@
-import type { IJsxRenderContextPageEntry } from 'zova-module-basic-restpage';
+import type { IJsxRenderContextPageEntry, IResourceActionRowPresetOptionsBase } from 'zova-module-a-openapi';
 
 import { BeanControllerBase, IComponentOptions, Use } from 'zova';
 import { Controller } from 'zova-module-a-bean';
-import { IResourceActionRowPresetOptionsBase } from 'zova-module-a-openapi';
 
 export interface ControllerActionOperationsRowProps extends IResourceActionRowPresetOptionsBase {}
 

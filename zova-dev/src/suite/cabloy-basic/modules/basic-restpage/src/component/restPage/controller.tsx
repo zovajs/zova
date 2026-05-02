@@ -4,10 +4,8 @@ import { celEnvBase } from '@cabloy/utils';
 import { BeanControllerBase, deepEqual, Use } from 'zova';
 import { Controller } from 'zova-module-a-bean';
 import { $QueriesAutoLoad } from 'zova-module-a-model';
-import { ITablePaged, ITableQuery, ITableResPaged } from 'zova-module-a-openapi';
+import { IJsxRenderContextPage, IPageScope, ITablePaged, ITableQuery, ITableResPaged } from 'zova-module-a-openapi';
 import { BeanControllerTableBase } from 'zova-module-a-table';
-
-import { IJsxRenderContextPage, IPageScope } from '../../types/page.js';
 
 // @ts-ignore ignore
 // eslint-disable-next-line
