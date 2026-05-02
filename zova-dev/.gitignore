@@ -46,9 +46,9 @@ yarn-error.log*
 *.njsproj
 *.sln
 
-# mine .env files
-env/.env*.mine
-/src/front/config/config/config*.mine.ts
+# local .env files
+env/.env*.local
+/src/front/config/config/config*.local.ts
 /src/front/typing/modules.d.ts
 **/.metadata/modules.d.ts
 /package.json

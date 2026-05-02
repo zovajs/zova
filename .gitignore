@@ -21,6 +21,8 @@ miniprogram_npm
 *.tmp
 *.rdb
 
+.claude/settings.local.json
+
 # package-lock.json
 
 # auto created
