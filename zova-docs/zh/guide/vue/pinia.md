@@ -10,7 +10,7 @@ Zova 推荐使用[store bean](../essentials/ioc/bean-scene.md)来创建全局状
 
 Pinia 模块默认是禁用的。这样，如果项目中没有使用 pinia store 就不会打包 pinia 代码。因此，如果要使用 pinia store 就需要先启用 Pinia 模块。
 
-在项目根目录新建文件`env/.env.mine`:
+在项目根目录新建文件`env/.env.local`:
 
 ```txt
 PINIA_ENABLED = true

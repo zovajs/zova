@@ -9,8 +9,8 @@ Zova 从`src/front/config/config`目录中加载 config 文件，支持基于`me
 ```txt
 config.ts                 # 所有情况下都会加载
 config.[meta].ts          # 只在指定条件下加载
-config.mine.ts            # 所有情况下都会加载，但会被 git 忽略
-config.[meta].mine.ts     # 只在指定条件下加载，但会被 git 忽略
+config.local.ts            # 所有情况下都会加载，但会被 git 忽略
+config.[meta].local.ts     # 只在指定条件下加载，但会被 git 忽略
 ```
 
 - `[meta]`可以是以下三个变量值的`任意组合`
@@ -58,10 +58,10 @@ config.ts
 config.ssr.ts
 config.ssr.admin.ts
 config.ssr.admin.development.ts
-config.mine.ts
-config.ssr.mine.ts
-config.ssr.admin.mine.ts
-config.ssr.admin.development.mine.ts
+config.local.ts
+config.ssr.local.ts
+config.ssr.admin.local.ts
+config.ssr.admin.development.local.ts
 ```
 
 ## 支持异步加载

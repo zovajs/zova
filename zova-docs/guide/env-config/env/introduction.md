@@ -9,8 +9,8 @@ Zova uses [dotenv](https://github.com/motdotla/dotenv) to load environment varia
 ```txt
 .env                # loaded in all cases
 .env.[meta]         # only loaded in specified condition
-.env.mine           # loaded in all cases, ignored by git
-.env.[meta].mine    # only loaded in specified condition, ignored by git
+.env.local           # loaded in all cases, ignored by git
+.env.[meta].local    # only loaded in specified condition, ignored by git
 ```
 
 - `[meta]` can be `any combination` of the following three variables
@@ -58,10 +58,10 @@ The system will automatically load the environment variables in the following fi
 .env.ssr
 .env.ssr.admin
 .env.ssr.admin.development
-.env.mine
-.env.ssr.mine
-.env.ssr.admin.mine
-.env.ssr.admin.development.mine
+.env.local
+.env.ssr.local
+.env.ssr.admin.local
+.env.ssr.admin.development.local
 ```
 
 ## Tree-shaking

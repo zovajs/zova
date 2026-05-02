@@ -9,8 +9,8 @@ Zova loads config files from the `src/front/config/config` directory. File loadi
 ```txt
 config.ts                # loaded in all cases
 config.[meta].ts         # only loaded in specified condition
-config.mine.ts           # loaded in all cases, ignored by git
-config.[meta].mine.ts    # only loaded in specified condition, ignored by git
+config.local.ts           # loaded in all cases, ignored by git
+config.[meta].local.ts    # only loaded in specified condition, ignored by git
 ```
 
 - `[meta]` can be `any combination` of the following three variables
@@ -58,10 +58,10 @@ config.ts
 config.ssr.ts
 config.ssr.admin.ts
 config.ssr.admin.development.ts
-config.mine.ts
-config.ssr.mine.ts
-config.ssr.admin.mine.ts
-config.ssr.admin.development.mine.ts
+config.local.ts
+config.ssr.local.ts
+config.ssr.admin.local.ts
+config.ssr.admin.development.local.ts
 ```
 
 ## Support Asynchronous Loading

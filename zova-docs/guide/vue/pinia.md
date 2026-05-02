@@ -10,7 +10,7 @@ Create a `store bean` and embed the `pinia store` in the store bean. In this way
 
 The Pinia module is disabled by default. In this way, if the pinia store is not used in the project, the pinia code will not be bundled. Therefore, if you want to use the pinia store, you need to enable the Pinia module first.
 
-Create a new file `env/.env.mine` in the project root directory:
+Create a new file `env/.env.local` in the project root directory:
 
 ```txt
 PINIA_ENABLED = true
