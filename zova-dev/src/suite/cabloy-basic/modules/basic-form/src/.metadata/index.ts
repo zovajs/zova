@@ -1,4 +1,46 @@
 // eslint-disable
+/** controller: begin */
+export * from '../component/actionOperationsRow/controller.jsx';
+
+import 'zova';
+declare module 'zova' {
+  
+  
+}
+declare module 'zova-module-basic-form' {
+  
+        export interface ControllerActionOperationsRow {
+          /** @internal */
+          get scope(): ScopeModuleBasicForm;
+        } 
+}
+/** controller: end */
+/** controller: begin */
+import { ControllerActionOperationsRow } from '../component/actionOperationsRow/controller.jsx';
+import 'zova';
+declare module 'zova' {
+  export interface IBeanRecordLocal {
+    'basic-form.controller.actionOperationsRow': ControllerActionOperationsRow;
+  }
+}
+/** controller: end */
+
+/** components: begin */
+export * from './component/actionOperationsRow.js';
+import { ZActionOperationsRow } from './component/actionOperationsRow.js';
+export const components = {
+  'actionOperationsRow': ZActionOperationsRow,
+};
+import 'zova';
+declare module 'zova' {
+export interface IComponentRecord {
+  'basic-form:actionOperationsRow': ControllerActionOperationsRow;
+}
+export interface IZovaComponentRecord {
+  'basic-form:actionOperationsRow': typeof ZActionOperationsRow;
+}
+}
+/** components: end */
 /** behavior: begin */
 export * from '../bean/behavior.formField.js';
 export * from '../bean/behavior.formFieldLayout.jsx';

@@ -29,6 +29,10 @@ export interface IResourceActionBulkOptionsBase {
   resource?: string;
 }
 
+export interface IResourceActionRowPresetOptionsBase {
+  preset?: IResourceComponentActionRowRecord;
+}
+
 export interface IResourceActionRowOptionsBase {
   class?: any;
   resource?: string;

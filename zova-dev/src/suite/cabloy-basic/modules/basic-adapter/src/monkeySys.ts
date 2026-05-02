@@ -23,6 +23,7 @@ export class MonkeySys extends BeanSimple implements IMonkeySysInitialize {
       form: {
         provider: {
           components: {
+            ActionOperationsRow: ,
             Input: 'basic-input:formFieldInput',
             Captcha: 'basic-captcha:formFieldCaptcha',
             DateRange: 'basic-date:formFieldDateRange',

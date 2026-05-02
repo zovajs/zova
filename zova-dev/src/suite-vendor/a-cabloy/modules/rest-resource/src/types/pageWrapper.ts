@@ -1,13 +1,8 @@
-import type { IJsxRenderContextBase, TypeOpenapiPermissions } from 'zova-module-a-openapi';
-
 import type { ControllerPageResource } from '../page/resource/controller.jsx';
+import 'zova-module-a-openapi';
 
-export interface IPageWrapperScope {
-  resource?: string;
-  permissions?: TypeOpenapiPermissions;
-}
-
-export interface IJsxRenderContextPageWrapper extends IJsxRenderContextBase {
-  $celScope: IPageWrapperScope;
-  $$pageWrapper: ControllerPageResource;
+declare module 'zova-module-a-openapi' {
+  export interface IJsxRenderContextPageWrapper {
+    $$pageWrapper: ControllerPageResource;
+  }
 }
