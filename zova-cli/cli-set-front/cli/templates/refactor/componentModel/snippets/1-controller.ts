@@ -6,7 +6,7 @@ declare module '@cabloy/cli' {
   }
 }
 
-const __regProps = /interface [^<]*Props<(.*?)> \{/;
+const __regProps = /interface Controller[^<]*Props<(.*?)>/;
 const __regModelsReplace = /interface [^<]*Models([^{]*) \{/;
 const __regModelValue = /import \{[^}]*ModelValue[^}]*\} from 'zova';/;
 const __regModelValueReplace = /import \{ ([^}]*) \} from 'zova';/;

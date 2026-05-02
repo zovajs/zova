@@ -1,6 +1,6 @@
 import { metadataCustomSnippet } from '@cabloy/cli';
 
-const __regProps = /interface [^<]*Props<(.*?)> \{/;
+const __regProps = /interface Controller[^<]*Props<(.*?)>/;
 
 export default metadataCustomSnippet({
   file: ({ argv }) => {
