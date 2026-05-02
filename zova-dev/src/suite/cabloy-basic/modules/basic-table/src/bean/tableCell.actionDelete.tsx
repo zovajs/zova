@@ -1,22 +1,11 @@
 import { BeanBase } from 'zova';
 import { ZIcon } from 'zova-module-a-icon';
-import {
-  IDecoratorTableCellPresetOptions,
-  IJsxRenderContextTableCell,
-  IJsxRenderContextTableColumn,
-  ITableCellRender,
-  NextTableCellRender,
-  TableCell,
-} from 'zova-module-a-table';
+import { IDecoratorTableCellPresetOptions, IJsxRenderContextTableCell, ITableCellRender, NextTableCellRender, TableCell } from 'zova-module-a-table';
 
 export interface ITableCellOptionsActionDelete extends IDecoratorTableCellPresetOptions {}
 
 @TableCell<ITableCellOptionsActionDelete>()
 export class TableCellActionDelete extends BeanBase implements ITableCellRender {
-  async checkVisible(_options: ITableCellOptionsActionDelete, _renderContext: IJsxRenderContextTableColumn): Promise<boolean> {
-    return true;
-  }
-
   render(options: ITableCellOptionsActionDelete, renderContext: IJsxRenderContextTableCell, _next: NextTableCellRender) {
     const { $jsx, $host } = renderContext;
     return (

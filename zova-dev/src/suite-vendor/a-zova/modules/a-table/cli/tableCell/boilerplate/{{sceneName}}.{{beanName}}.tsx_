@@ -12,10 +12,6 @@ export interface ITableCellOptions<%=argv.beanNameCapitalize%> extends IDecorato
 
 @TableCell<ITableCellOptions<%=argv.beanNameCapitalize%>>()
 export class TableCell<%=argv.beanNameCapitalize%> extends BeanBase implements ITableCellRender {
-  async checkVisible(_options: ITableCellOptions<%=argv.beanNameCapitalize%>, _renderContext: IJsxRenderContextTableColumn): Promise<boolean> {
-    return true;
-  }
-
   render(_options: ITableCellOptions<%=argv.beanNameCapitalize%>, _renderContext: IJsxRenderContextTableCell, next: NextTableCellRender) {
     return next();
   }
