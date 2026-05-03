@@ -7,6 +7,8 @@
   "type": "module",
   "dependencies": {
     "zova-module-basic-adapter": "workspace:^",
+    "zova-module-basic-blockpage": "^5.0.0",
+    "zova-module-basic-blockpageentry": "^5.0.0",
     "zova-module-basic-captcha": "^5.0.0",
     "zova-module-basic-date": "workspace:^",
     "zova-module-basic-form": "workspace:^",
