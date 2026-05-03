@@ -1,5 +1,5 @@
 {
-  "name": "zova-module-basic-blockpageentry",
+  "name": "zova-module-basic-pageentry",
   "version": "5.0.0",
   "description": "",
   "keywords": [
@@ -49,5 +49,5 @@
       "exports.\\..import"
     ]
   },
-  "title": "basic-blockpageentry"
+  "title": "basic-pageentry"
 }

@@ -12,6 +12,7 @@ export class MonkeySys extends BeanSimple implements IMonkeySysInitialize {
           RestPage: 'basic-restpage:restPage',
           RestPageEntry: 'basic-restpage:restPageEntry',
           Table: 'basic-table:table',
+          BlockPageEntry: '',
         },
         actions: {
           ActionCreate: 'rest-actions:create',

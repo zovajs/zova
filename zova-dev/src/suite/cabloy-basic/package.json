@@ -7,13 +7,13 @@
   "type": "module",
   "dependencies": {
     "zova-module-basic-adapter": "workspace:^",
-    "zova-module-basic-blockpage": "^5.0.0",
-    "zova-module-basic-blockpageentry": "^5.0.0",
     "zova-module-basic-captcha": "^5.0.0",
     "zova-module-basic-date": "workspace:^",
     "zova-module-basic-form": "workspace:^",
     "zova-module-basic-input": "^5.0.0",
     "zova-module-basic-openapi": "^5.0.0",
+    "zova-module-basic-page": "^5.0.0",
+    "zova-module-basic-pageentry": "^5.0.0",
     "zova-module-basic-restpage": "workspace:^",
     "zova-module-basic-table": "workspace:^",
     "zova-suite-a-cabloy": "workspace:^"

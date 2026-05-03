@@ -1,6 +1,6 @@
 import type { TableIdentity } from 'table-identity';
 
-import { ISchemaObjectExtensionFieldRest } from './rest.js';
+import { TypeRenderComponent } from 'zova-jsx';
 
 export interface IResourceComponentBlockRecord {}
 
@@ -11,16 +11,20 @@ export interface IResourceBlockOptionsBase {
   blocks?: IResourceComponentBlockOptionsBlock[];
 }
 
+export interface IResourceBlockPresetOptionsBase {
+  preset?: IResourceComponentBlockRecord;
+}
+
 export interface IResourceBlockOptionsPageEntry extends IResourceBlockOptionsBase {}
 
-export interface IResourceComponentBlockOptionsBlock extends ISchemaObjectExtensionFieldRest {}
+export interface IResourceComponentBlockOptionsBlock extends IResourceComponentBlockOptions {}
 
 // export interface IResourceComponentBlockOptionsBlock {
 //   name: keyof IResourceComponentBlockRecord;
 //   options: IResourceComponentBlockOptions;
 // }
 
-// export interface IResourceComponentBlockOptions {
-//   render?: TypeRenderComponent;
-//   preset?: IResourceComponentBlockRecord;
-// }
+export interface IResourceComponentBlockOptions {
+  render?: TypeRenderComponent;
+  preset?: IResourceComponentBlockRecord;
+}
