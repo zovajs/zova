@@ -21,7 +21,7 @@ export class ControllerActionBack extends BeanControllerBase {
     const { $$pageEntry } = this.$$renderContext;
     const controllerForm: ControllerForm = $$pageEntry.controllerForm;
     const isSubmitting = controllerForm?.formState.isSubmitting;
-    const className = this.$props.preset?.ActionBack?.class ?? 'btn btn-btn-neutral join-item';
+    const className = this.$props.preset?.ActionBack?.class ?? 'btn btn-secondary join-item';
     return (
       <button
         class={classes(className, isSubmitting && 'btn-disabled')}
