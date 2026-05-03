@@ -1,13 +1,20 @@
+import type {
+  IFormMeta,
+  IJsxRenderContextPageEntryWrapper,
+  IPageEntryWrapperScope,
+  IResourceBlockOptionsPageEntry,
+  TypeFormScene,
+} from 'zova-module-a-openapi';
+
 import { celEnvBase, isNil } from '@cabloy/utils';
 import { SchemaObject } from 'openapi3-ts/oas31';
 import { VNode } from 'vue';
 import { z } from 'zod';
-import { BeanControllerPageBase, Use, useCustomRef, usePrepareArg } from 'zova';
+import { BeanControllerPageBase, deepExtend, Use, useCustomRef, usePrepareArg } from 'zova';
 import { ZovaJsx } from 'zova-jsx';
 import { Controller } from 'zova-module-a-bean';
 import { formMetaFromFormScene, IFormProvider } from 'zova-module-a-form';
 import { $QueriesAutoLoad } from 'zova-module-a-model';
-import { IFormMeta, IJsxRenderContextPageEntryWrapper, IPageEntryWrapperScope, TypeFormScene } from 'zova-module-a-openapi';
 
 import type { ModelResource } from '../../model/resource.js';
 
@@ -107,7 +114,19 @@ export class ControllerPageEntry extends BeanControllerPageBase {
     if (!blocks || blocks.length === 0) return;
     let domBlocks: VNode[] = [];
     blocks.forEach((block, index) => {
-      const options = Object.assign({ key: index }, block);
+      const options = deepExtend(
+        { key: index },
+        {
+          preset: {
+            [block.render as any]: {
+              resource: this.resource,
+              id: this.entryId,
+              formScene: this.formScene,
+            } satisfies IResourceBlockOptionsPageEntry,
+          },
+        },
+        block,
+      );
       const domBlock = this.zovaJsx.render(options.render!, options, celScope, jsxRenderContext);
       if (!domBlock) return;
       if (Array.isArray(domBlock)) {
