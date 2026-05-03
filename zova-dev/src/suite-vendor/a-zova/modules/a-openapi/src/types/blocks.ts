@@ -23,14 +23,12 @@ export interface IResourceBlockOptionsPageEntry extends IResourceBlockOptionsBas
   formScene?: TypeFormScene;
 }
 
-export interface IResourceComponentBlockOptionsBlock extends IResourceComponentBlockOptions {}
-
-// export interface IResourceComponentBlockOptionsBlock {
-//   name: keyof IResourceComponentBlockRecord;
-//   options: IResourceComponentBlockOptions;
-// }
+export interface IResourceComponentBlockOptionsBlock {
+  name?: keyof IResourceComponentBlockRecord;
+  render?: TypeRenderComponent;
+  options?: IResourceComponentBlockOptions;
+}
 
 export interface IResourceComponentBlockOptions {
-  render?: TypeRenderComponent;
   preset?: IResourceComponentBlockRecord;
 }

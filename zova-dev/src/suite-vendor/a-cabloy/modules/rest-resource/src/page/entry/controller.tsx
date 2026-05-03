@@ -114,20 +114,25 @@ export class ControllerPageEntry extends BeanControllerPageBase {
     if (!blocks || blocks.length === 0) return;
     let domBlocks: VNode[] = [];
     blocks.forEach((block, index) => {
-      const options = deepExtend(
-        { key: index },
-        {
-          preset: {
-            [block.render as any]: {
-              resource: this.resource,
-              id: this.entryId,
-              formScene: this.formScene,
-            } satisfies IResourceBlockOptionsPageEntry,
+      let domBlock;
+      if (block.name) {
+        const options2 = deepExtend(
+          { key: index },
+          {
+            preset: {
+              [block.name]: {
+                resource: this.resource,
+                id: this.entryId,
+                formScene: this.formScene,
+              } satisfies IResourceBlockOptionsPageEntry,
+            },
           },
-        },
-        block,
-      );
-      const domBlock = this.zovaJsx.render(options.render!, options, celScope, jsxRenderContext);
+          block.options,
+        );
+        domBlock = this.zovaJsx.render(block.name, options2, celScope, jsxRenderContext);
+      } else if (block.render) {
+        domBlock = this.zovaJsx.render(block.render, { key: index }, celScope, jsxRenderContext);
+      }
       if (!domBlock) return;
       if (Array.isArray(domBlock)) {
         domBlocks.push(...domBlock);
