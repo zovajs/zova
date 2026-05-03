@@ -1,11 +1,13 @@
 import { celEnvBase, isNil } from '@cabloy/utils';
+import { SchemaObject } from 'openapi3-ts/oas31';
+import { VNode } from 'vue';
 import { z } from 'zod';
 import { BeanControllerPageBase, Use, useCustomRef, usePrepareArg } from 'zova';
 import { ZovaJsx } from 'zova-jsx';
 import { Controller } from 'zova-module-a-bean';
 import { formMetaFromFormScene, IFormProvider } from 'zova-module-a-form';
+import { $QueriesAutoLoad } from 'zova-module-a-model';
 import { IFormMeta, IJsxRenderContextPageEntryWrapper, IPageEntryWrapperScope, TypeFormScene } from 'zova-module-a-openapi';
-import { ZPage } from 'zova-module-home-base';
 
 import type { ModelResource } from '../../model/resource.js';
 
@@ -18,8 +20,10 @@ export const ControllerPageEntrySchemaParams = z.object({
 @Controller()
 export class ControllerPageEntry extends BeanControllerPageBase {
   formMeta: IFormMeta;
+  formSchema?: SchemaObject;
   formProvider: IFormProvider;
   pageEntryWrapperScope: IPageEntryWrapperScope;
+  jsxRenderContext: IJsxRenderContextPageEntryWrapper;
   zovaJsx: ZovaJsx;
   pageEntryWrapperCelEnv: typeof celEnvBase;
 
@@ -46,13 +50,19 @@ export class ControllerPageEntry extends BeanControllerPageBase {
       const formScene = this.formScene;
       return { ...formMetaFromFormScene(formScene), formScene };
     });
+    this.formSchema = this.$useComputed(() => {
+      return this.$$modelResource.getFormSchema(this.formMeta);
+    });
     this.formProvider = this.$useComputed(() => {
       return this.$$modelResource.formProvider;
     });
     this.pageEntryWrapperScope = this._getPageEntryWrapperScope();
+    this.jsxRenderContext = this._getJsxRenderContextPageEntryWrapper(this.pageEntryWrapperScope);
     // jsx
     this.pageEntryWrapperCelEnv = this._getPageEntryWrapperCelEnv();
     this.zovaJsx = this.app.bean._newBeanSimple(ZovaJsx, false, this.formProvider.components, this.formProvider.actions, this.pageEntryWrapperCelEnv);
+    // load schema
+    await $QueriesAutoLoad(() => this.$$modelResource.getFormApiSchemas(this.formMeta)?.sdk);
   }
 
   private _getPageEntryWrapperScope(): IPageEntryWrapperScope {
@@ -78,7 +88,7 @@ export class ControllerPageEntry extends BeanControllerPageBase {
     return celEnv;
   }
 
-  public getJsxRenderContextPageEntryWrapper(celScope: IPageEntryWrapperScope): IJsxRenderContextPageEntryWrapper {
+  public _getJsxRenderContextPageEntryWrapper(celScope: IPageEntryWrapperScope): IJsxRenderContextPageEntryWrapper {
     return {
       app: this.app,
       ctx: this.ctx,
@@ -91,13 +101,29 @@ export class ControllerPageEntry extends BeanControllerPageBase {
   }
 
   protected render() {
-    const componentRestPageEntry = this.$$modelResource.componentRestPageEntry;
-    if (!componentRestPageEntry) {
-      return <ZPage>not found componentRestPageEntry</ZPage>;
-    }
     const celScope = this.pageEntryWrapperScope;
-    const jsxRenderContext = this.getJsxRenderContextPageEntryWrapper(celScope);
-    const domRestPageEntry = this.zovaJsx.render(componentRestPageEntry, {}, celScope, jsxRenderContext);
-    return <ZPage>{domRestPageEntry}</ZPage>;
+    const jsxRenderContext = this.jsxRenderContext;
+    const blocks = this.formSchema?.rest?.blocks;
+    if (!blocks || blocks.length === 0) return;
+    let domBlocks: VNode[] = [];
+    blocks.forEach((block, index) => {
+      const options = Object.assign({ key: index }, block);
+      const domBlock = this.zovaJsx.render(options.render!, options, celScope, jsxRenderContext);
+      if (!domBlock) return;
+      if (Array.isArray(domBlock)) {
+        domBlocks.push(...domBlock);
+      } else {
+        domBlocks.push(domBlock);
+      }
+    });
+    return <div>{domBlocks}</div>;
+    // const componentRestPageEntry = this.$$modelResource.componentRestPageEntry;
+    // if (!componentRestPageEntry) {
+    //   return <ZPage>not found componentRestPageEntry</ZPage>;
+    // }
+    // const celScope = this.pageEntryWrapperScope;
+    // const jsxRenderContext = this.getJsxRenderContextPageEntryWrapper(celScope);
+    // const domRestPageEntry = this.zovaJsx.render(componentRestPageEntry, {}, celScope, jsxRenderContext);
+    // return <ZPage>{domRestPageEntry}</ZPage>;
   }
 }
