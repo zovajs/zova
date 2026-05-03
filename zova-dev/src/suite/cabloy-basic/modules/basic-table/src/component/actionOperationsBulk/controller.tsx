@@ -32,7 +32,7 @@ export class ControllerActionOperationsBulk extends BeanControllerBase {
       const permissionHint = action.options?.preset?.[actionNameCapitalize]?.permission;
       if (!this.$passport.checkPermission(this.permissions, actionName, permissionHint)) return;
       const options = Object.assign({ key: index }, action.options);
-      const domAction = $jsx.render(options.render!, options, $celScope, this.$$renderContext);
+      const domAction = $jsx.render(action.render!, options, $celScope, this.$$renderContext);
       if (!domAction) return;
       if (Array.isArray(domAction)) {
         domActions.push(...domAction);

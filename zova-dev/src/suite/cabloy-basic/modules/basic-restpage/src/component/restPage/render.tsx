@@ -26,7 +26,7 @@ export class RenderRestPage<TData extends {} = {}> extends BeanRenderBase {
     const domActions: VNode[] = [];
     actions.forEach((action, index) => {
       const options = Object.assign({ key: index }, action.options);
-      const domAction = this.zovaJsx.render(options.render!, options, celScope, jsxRenderContext);
+      const domAction = this.zovaJsx.render(action.render!, options, celScope, jsxRenderContext);
       if (!domAction) return;
       if (Array.isArray(domAction)) {
         domActions.push(...domAction);

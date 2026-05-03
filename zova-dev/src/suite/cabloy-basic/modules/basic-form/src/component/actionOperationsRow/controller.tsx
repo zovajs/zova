@@ -36,7 +36,7 @@ export class ControllerActionOperationsRow extends BeanControllerBase {
       // check permission
       if (!this.$passport.checkPermission(this.permissions, actionName, permissionHint)) return;
       const options = Object.assign({ key: index }, action.options);
-      const domAction = $jsx.render(options.render!, options, $celScope, this.$$renderContext);
+      const domAction = $jsx.render(action.render!, options, $celScope, this.$$renderContext);
       if (!domAction) return;
       if (Array.isArray(domAction)) {
         domActions.push(...domAction);

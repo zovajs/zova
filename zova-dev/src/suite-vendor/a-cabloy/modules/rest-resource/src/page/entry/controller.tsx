@@ -116,7 +116,7 @@ export class ControllerPageEntry extends BeanControllerPageBase {
     blocks.forEach((block, index) => {
       let domBlock;
       if (typeof block.render === 'string') {
-        const options2 = deepExtend(
+        const options = deepExtend(
           { key: index },
           {
             preset: {
@@ -129,7 +129,7 @@ export class ControllerPageEntry extends BeanControllerPageBase {
           },
           block.options,
         );
-        domBlock = this.zovaJsx.render(block.render, options2, celScope, jsxRenderContext);
+        domBlock = this.zovaJsx.render(block.render, options, celScope, jsxRenderContext);
       } else if (block.render) {
         domBlock = this.zovaJsx.render(block.render, { key: index }, celScope, jsxRenderContext);
       }

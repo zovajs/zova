@@ -24,7 +24,7 @@ export class TableCellActionOperationsRow extends BeanBase implements ITableCell
     const renders: TypeTableCellRenderComponent[] = [];
     for (const action of actions) {
       const actionName = action.name;
-      const actionRender = action.options?.render;
+      const actionRender = action.render;
       const actionNameCapitalize = `Action${toUpperCaseFirstChar(actionName)}`;
       const permissionHint = action.options?.preset?.[actionNameCapitalize]?.permission;
       if ($host.$passport.checkPermission(permissions, actionName, permissionHint)) {
@@ -48,7 +48,7 @@ export class TableCellActionOperationsRow extends BeanBase implements ITableCell
       const permissionHint = action.options?.preset?.[actionNameCapitalize]?.permission;
       if (!$host.$passport.checkPermission(permissions, actionName, permissionHint)) return;
       const options2 = Object.assign({ key: index }, action.options);
-      domActions.push($$table.cellRender(options2, renderContext));
+      domActions.push($$table.cellRender(action.render!, options2, renderContext));
     });
     return <div class="join">{domActions}</div>;
   }

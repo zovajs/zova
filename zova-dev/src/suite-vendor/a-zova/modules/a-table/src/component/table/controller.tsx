@@ -250,9 +250,12 @@ export class ControllerTable<TData extends {} = {}> extends BeanControllerTableB
     };
   }
 
-  public cellRender(columnProps: ISchemaObjectExtensionFieldRestTable, renderContext: IJsxRenderContextTableCell) {
+  public cellRender(
+    render: TypeTableCellRenderComponent,
+    columnProps: ISchemaObjectExtensionFieldRestTable,
+    renderContext: IJsxRenderContextTableCell,
+  ) {
     // render
-    const render = columnProps.render!;
     const cellScope = renderContext.$celScope;
     // renderProvider
     const renderProvider = this.getRenderProvider(render);
