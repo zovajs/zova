@@ -115,12 +115,12 @@ export class ControllerPageEntry extends BeanControllerPageBase {
     let domBlocks: VNode[] = [];
     blocks.forEach((block, index) => {
       let domBlock;
-      if (block.name) {
+      if (typeof block.render === 'string') {
         const options2 = deepExtend(
           { key: index },
           {
             preset: {
-              [block.name]: {
+              [block.render]: {
                 resource: this.resource,
                 id: this.entryId,
                 formScene: this.formScene,
@@ -129,7 +129,7 @@ export class ControllerPageEntry extends BeanControllerPageBase {
           },
           block.options,
         );
-        domBlock = this.zovaJsx.render(block.name, options2, celScope, jsxRenderContext);
+        domBlock = this.zovaJsx.render(block.render, options2, celScope, jsxRenderContext);
       } else if (block.render) {
         domBlock = this.zovaJsx.render(block.render, { key: index }, celScope, jsxRenderContext);
       }

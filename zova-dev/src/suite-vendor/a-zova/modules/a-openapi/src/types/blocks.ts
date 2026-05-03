@@ -1,7 +1,7 @@
 import type { TableIdentity } from 'table-identity';
 
 import { types } from 'typestyle';
-import { TypeRenderComponent } from 'zova-jsx';
+import { TypeRenderComponentJsx } from 'zova-jsx';
 
 import { TypeFormScene } from './formMeta.js';
 
@@ -24,8 +24,7 @@ export interface IResourceBlockOptionsPageEntry extends IResourceBlockOptionsBas
 }
 
 export interface IResourceComponentBlockOptionsBlock {
-  name?: keyof IResourceComponentBlockRecord;
-  render?: TypeRenderComponent;
+  render?: keyof IResourceComponentBlockRecord | TypeRenderComponentJsx;
   options?: IResourceComponentBlockOptions;
 }
 
