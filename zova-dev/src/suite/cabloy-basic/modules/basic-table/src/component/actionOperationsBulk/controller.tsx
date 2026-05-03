@@ -26,20 +26,20 @@ export class ControllerActionOperationsBulk extends BeanControllerBase {
     const actions = this.$props.preset?.ActionOperationsBulk?.actions;
     if (!actions || actions.length === 0) return;
     const domActions: VNode[] = [];
-    for (const action of actions) {
+    actions.forEach((action, index) => {
       const actionName = action.name;
       const actionNameCapitalize = `Action${toUpperCaseFirstChar(actionName)}`;
       const permissionHint = action.options?.preset?.[actionNameCapitalize]?.permission;
-      if (!this.$passport.checkPermission(this.permissions, actionName, permissionHint)) continue;
-      const options = Object.assign({ key: actionName }, action.options);
+      if (!this.$passport.checkPermission(this.permissions, actionName, permissionHint)) return;
+      const options = Object.assign({ key: index }, action.options);
       const domAction = $jsx.render(options.render!, options, $celScope, this.$$renderContext);
-      if (!domAction) continue;
+      if (!domAction) return;
       if (Array.isArray(domAction)) {
         domActions.push(...domAction);
       } else {
         domActions.push(domAction);
       }
-    }
+    });
     return (
       <div class={this.$props.preset?.ActionOperationsBulk?.class}>
         <div class="join">{domActions}</div>

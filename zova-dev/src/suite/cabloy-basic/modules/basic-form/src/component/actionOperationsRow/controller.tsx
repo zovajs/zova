@@ -27,23 +27,23 @@ export class ControllerActionOperationsRow extends BeanControllerBase {
     if (!actions || actions.length === 0) return;
 
     const domActions: VNode[] = [];
-    for (const action of actions) {
+    actions.forEach((action, index) => {
       const actionName = action.name;
       const actionNameCapitalize = `Action${toUpperCaseFirstChar(actionName)}`;
       const permissionHint: IPermissionHint | undefined = action.options?.preset?.[actionNameCapitalize]?.permission;
       // check formScene
-      if (!this._checkFormScene(permissionHint)) continue;
+      if (!this._checkFormScene(permissionHint)) return;
       // check permission
-      if (!this.$passport.checkPermission(this.permissions, actionName, permissionHint)) continue;
-      const options = Object.assign({ key: actionName }, action.options);
+      if (!this.$passport.checkPermission(this.permissions, actionName, permissionHint)) return;
+      const options = Object.assign({ key: index }, action.options);
       const domAction = $jsx.render(options.render!, options, $celScope, this.$$renderContext);
-      if (!domAction) continue;
+      if (!domAction) return;
       if (Array.isArray(domAction)) {
         domActions.push(...domAction);
       } else {
         domActions.push(domAction);
       }
-    }
+    });
     return (
       <div class={this.$props.preset?.ActionOperationsRow?.class}>
         <div class="join">{domActions}</div>

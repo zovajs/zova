@@ -35,17 +35,16 @@ export class RenderRestPageEntry<TData extends {} = {}> extends BeanRenderBase {
     const actions = this.formSchema?.rest?.dtoActions;
     if (!actions || actions.length === 0) return;
     const domActions: VNode[] = [];
-    for (const action of actions) {
-      const actionName = action.name;
-      const options = Object.assign({ key: actionName }, action.options);
+    actions.forEach((action, index) => {
+      const options = Object.assign({ key: index }, action.options);
       const domAction = this.zovaJsx.render(options.render!, options, celScope, jsxRenderContext);
-      if (!domAction) continue;
+      if (!domAction) return;
       if (Array.isArray(domAction)) {
         domActions.push(...domAction);
       } else {
         domActions.push(domAction);
       }
-    }
+    });
     return <div>{domActions}</div>;
   }
 

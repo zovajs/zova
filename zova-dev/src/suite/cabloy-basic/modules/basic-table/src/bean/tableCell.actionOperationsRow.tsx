@@ -42,14 +42,14 @@ export class TableCellActionOperationsRow extends BeanBase implements ITableCell
     const actions = options.preset?.ActionOperationsRow?.actions;
     if (!actions || actions.length === 0) return;
     const domActions: VNode[] = [];
-    for (const action of actions) {
+    actions.forEach((action, index) => {
       const actionName = action.name;
       const actionNameCapitalize = `Action${toUpperCaseFirstChar(actionName)}`;
       const permissionHint = action.options?.preset?.[actionNameCapitalize]?.permission;
-      if (!$host.$passport.checkPermission(permissions, actionName, permissionHint)) continue;
-      const options2 = Object.assign({ key: actionName }, action.options);
+      if (!$host.$passport.checkPermission(permissions, actionName, permissionHint)) return;
+      const options2 = Object.assign({ key: index }, action.options);
       domActions.push($$table.cellRender(options2, renderContext));
-    }
+    });
     return <div class="join">{domActions}</div>;
   }
 }
