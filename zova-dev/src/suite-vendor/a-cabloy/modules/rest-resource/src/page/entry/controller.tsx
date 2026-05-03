@@ -56,11 +56,11 @@ export class ControllerPageEntry extends BeanControllerPageBase {
     this.formProvider = this.$useComputed(() => {
       return this.$$modelResource.formProvider;
     });
-    this.pageEntryWrapperScope = this._getPageEntryWrapperScope();
-    this.jsxRenderContext = this._getJsxRenderContextPageEntryWrapper(this.pageEntryWrapperScope);
     // jsx
     this.pageEntryWrapperCelEnv = this._getPageEntryWrapperCelEnv();
     this.zovaJsx = this.app.bean._newBeanSimple(ZovaJsx, false, this.formProvider.components, this.formProvider.actions, this.pageEntryWrapperCelEnv);
+    this.pageEntryWrapperScope = this._getPageEntryWrapperScope();
+    this.jsxRenderContext = this._getJsxRenderContextPageEntryWrapper(this.pageEntryWrapperScope);
     // load schema
     await $QueriesAutoLoad(() => this.$$modelResource.getFormApiSchemas(this.formMeta)?.sdk);
   }
