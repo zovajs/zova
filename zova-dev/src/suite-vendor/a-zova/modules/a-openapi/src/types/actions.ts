@@ -1,7 +1,7 @@
 import { TableIdentity } from 'table-identity';
+import { TypeRenderComponentJsx } from 'zova-jsx';
 
-import { TypeFormScene } from './formMeta.js';
-import { ISchemaObjectExtensionFieldRest } from './rest.js';
+import type { TypeFormScene } from './formMeta.ts';
 
 export interface IResourceComponentFormFieldRecord {}
 
@@ -67,19 +67,29 @@ export interface IResourceActionRowOptionsSubmit extends IResourceActionRowOptio
 export interface IResourceActionRowOptionsBack extends IResourceActionRowOptionsBase {}
 
 export interface IResourceActionBulkOptionsOperationsBulk extends IResourceActionBulkOptionsBase {
-  actions?: IResourceActionBulkOptionsOperationsBulkAction[];
+  actions?: IResourceComponentActionBulkOptionsAction[];
 }
 
 export interface IResourceActionRowOptionsOperationsRow extends IResourceActionRowOptionsBase {
-  actions?: IResourceActionRowOptionsOperationsRowAction[];
+  actions?: IResourceComponentActionRowOptionsAction[];
 }
 
-export interface IResourceActionBulkOptionsOperationsBulkAction {
-  name: keyof Omit<IResourceActionBulkRecord, 'operationsBulk'>;
-  options: ISchemaObjectExtensionFieldRest;
+export interface IResourceComponentActionBulkOptionsAction {
+  name: keyof IResourceActionBulkRecord; // not omit operationsBulk
+  render?: keyof IResourceComponentActionBulkRecord | TypeRenderComponentJsx;
+  options?: IResourceComponentActionBulkOptions;
 }
 
-export interface IResourceActionRowOptionsOperationsRowAction {
-  name: keyof Omit<IResourceActionRowRecord, 'operationsRow'>;
-  options: ISchemaObjectExtensionFieldRest;
+export interface IResourceComponentActionBulkOptions {
+  preset?: IResourceComponentActionBulkRecord;
+}
+
+export interface IResourceComponentActionRowOptionsAction {
+  name: keyof IResourceActionRowRecord; // not omit operationsBulk
+  render?: keyof IResourceComponentActionRowRecord | TypeRenderComponentJsx;
+  options?: IResourceComponentActionRowOptions;
+}
+
+export interface IResourceComponentActionRowOptions {
+  preset?: IResourceComponentActionRowRecord;
 }
