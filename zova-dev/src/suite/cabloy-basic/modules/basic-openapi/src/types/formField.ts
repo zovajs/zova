@@ -3,12 +3,13 @@ import type { CurrencyOptions } from '@zhennann/currency';
 
 import { IResourceFormFieldOptionsBase, ITableQuery } from 'zova-module-a-openapi';
 
-import { ICaptchaProviderRecord, ISelectOptions, TypeDateFormatPreset } from './utils.js';
+import { ICaptchaSceneRecord, ISelectOptions, TypeDateFormatPreset } from './utils.js';
 
 export type HTMLInputElementType = 'text' | 'password' | 'number' | 'file' | 'hidden' | 'tel' | 'email';
 
 export interface IResourceFormFieldOptionsInput extends IResourceFormFieldOptionsBase {
   value?: any;
+  type?: HTMLInputElementType;
   placeholder?: string;
   onChange?: (e: Event) => void;
   onInput?: (e: Event) => void;
@@ -16,10 +17,7 @@ export interface IResourceFormFieldOptionsInput extends IResourceFormFieldOption
 }
 
 export interface IResourceFormFieldOptionsCaptcha extends IResourceFormFieldOptionsBase {
-  id: string;
-  provider: keyof ICaptchaProviderRecord | string;
-  token?: unknown;
-  payload?: unknown;
+  scene?: keyof ICaptchaSceneRecord;
 }
 
 export interface IResourceFormFieldOptionsCurrency extends IResourceFormFieldOptionsBase, CurrencyOptions {}

@@ -24,6 +24,7 @@ export interface IPermissionHint {
 
 export interface IResourceActionBulkOptionsBase {
   class?: any;
+  style?: types.NestedCSSProperties;
   resource?: string;
   permission?: {
     action?: keyof IResourceActionBulkRecord;

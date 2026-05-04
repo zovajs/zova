@@ -2,7 +2,14 @@ import { BeanControllerBase, ClientOnly, IComponentOptions, TypeEventOff, Use } 
 import { Controller } from 'zova-module-a-bean';
 import { ControllerForm, IFormFieldPresetOptions, ZFormField } from 'zova-module-a-form';
 import { ToolV } from 'zova-module-a-zod';
-import { ICaptchaData, IInputOptions } from 'zova-module-basic-openapi';
+import { ICaptchaProviderRecord, IResourceFormFieldOptionsInput } from 'zova-module-basic-openapi';
+
+export interface ICaptchaData {
+  id: string;
+  provider: keyof ICaptchaProviderRecord | string;
+  token?: unknown;
+  payload?: unknown;
+}
 
 export interface ControllerFormFieldCaptchaProps extends IFormFieldPresetOptions {}
 
@@ -84,7 +91,7 @@ export class ControllerFormFieldCaptcha extends BeanControllerBase {
         <ZFormField
           {...this.$props}
           slotDefault={({ props }, $$formField) => {
-            const propsNew: IInputOptions = {
+            const propsNew = {
               ...props,
               type: 'text',
               class: 'grow',
@@ -100,7 +107,7 @@ export class ControllerFormFieldCaptcha extends BeanControllerBase {
                   token,
                 });
               },
-            };
+            } satisfies IResourceFormFieldOptionsInput;
             return <input {...propsNew}></input>;
           }}
         ></ZFormField>

@@ -1,14 +1,16 @@
-import type { IJsxRenderContextPageEntry, IPermissionHint, IResourceActionRowOptionsOperationsRow } from 'zova-module-a-openapi';
+import type { IJsxRenderContextPageEntry, IPermissionHint } from 'zova-module-a-openapi';
 
+import { classes } from 'typestyle';
 import { VNode } from 'vue';
 import { BeanControllerBase, IComponentOptions, Use } from 'zova';
 import { Controller } from 'zova-module-a-bean';
+import { IResourceActionRowOptionsOperationsRow } from 'zova-module-basic-openapi';
 
 export interface ControllerActionOperationsRowProps extends IResourceActionRowOptionsOperationsRow {}
 
 @Controller()
 export class ControllerActionOperationsRow extends BeanControllerBase {
-  static $propsDefault = {};
+  static $propsDefault = { class: undefined };
   static $componentOptions: IComponentOptions = { inheritAttrs: false, deepExtendDefault: true };
 
   @Use({ injectionScope: 'host' })
@@ -43,7 +45,7 @@ export class ControllerActionOperationsRow extends BeanControllerBase {
       }
     });
     return (
-      <div class={this.$props.class}>
+      <div class={classes(this.$props.class, this.$style(this.$props.style))}>
         <div class="join">{domActions}</div>
       </div>
     );

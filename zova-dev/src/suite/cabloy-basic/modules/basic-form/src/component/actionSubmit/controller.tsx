@@ -1,15 +1,16 @@
-import type { IJsxRenderContextPageEntry, IResourceActionRowOptionsSubmit } from 'zova-module-a-openapi';
+import type { IJsxRenderContextPageEntry } from 'zova-module-a-openapi';
 
 import { classes } from 'typestyle';
 import { BeanControllerBase, IComponentOptions, Use } from 'zova';
 import { Controller } from 'zova-module-a-bean';
 import { ControllerForm } from 'zova-module-a-form';
+import { IResourceActionRowOptionsSubmit } from 'zova-module-basic-openapi';
 
 export interface ControllerActionSubmitProps extends IResourceActionRowOptionsSubmit {}
 
 @Controller()
 export class ControllerActionSubmit extends BeanControllerBase {
-  static $propsDefault = {};
+  static $propsDefault = { class: 'btn btn-primary join-item' };
   static $componentOptions: IComponentOptions = { inheritAttrs: false, deepExtendDefault: true };
 
   @Use({ injectionScope: 'host' })
@@ -21,7 +22,7 @@ export class ControllerActionSubmit extends BeanControllerBase {
     const { $$pageEntry } = this.$$renderContext;
     const controllerForm: ControllerForm = $$pageEntry.controllerForm;
     const isSubmitting = controllerForm?.formState.isSubmitting;
-    const className = this.$props.class ?? 'btn btn-primary join-item';
+    const className = classes(this.$props.class, this.$style(this.$props.style));
     return (
       <>
         {isSubmitting && <span class="loading loading-spinner text-primary"></span>}

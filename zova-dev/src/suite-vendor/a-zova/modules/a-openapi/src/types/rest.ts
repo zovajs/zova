@@ -4,10 +4,11 @@ import type { TypeRenderComponentJsx } from 'zova-jsx';
 
 import 'openapi3-ts/oas30';
 import 'openapi3-ts/oas31';
-import { IResourceComponentActionBulkOptionsAction, IResourceComponentActionRowRecord, IResourceComponentFormFieldRecord } from './actions.js';
+import { IResourceComponentActionBulkOptionsAction } from './actions.js';
 import { IResourceComponentBlockOptionsBlock } from './blocks.js';
+import { IResourceComponentFormFieldRecord } from './formField.js';
 
-export interface ISchemaRenderComponentPresetRecord extends IResourceComponentFormFieldRecord, IResourceComponentActionRowRecord {}
+export interface ISchemaRenderComponentPresetRecord extends IResourceComponentFormFieldRecord {}
 
 export interface ISchemaObjectExtensionFieldRestTable {
   //
