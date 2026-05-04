@@ -12,6 +12,7 @@ import type {
 } from 'zova-module-a-openapi';
 
 import { DeepKeys } from '@tanstack/vue-form';
+import { types } from 'typestyle';
 
 import type { ControllerForm } from '../component/form/controller.jsx';
 import type { ControllerFormField } from '../component/formField/controller.jsx';
@@ -45,6 +46,7 @@ export interface IFormFieldOptionsBase<TParentData = {}, TName extends DeepKeys<
   name?: TName;
   render?: TypeRenderComponentPreset;
   class?: any;
+  style?: types.NestedCSSProperties;
   value?: any;
   readonly?: boolean;
   disableNotifyChanged?: boolean;

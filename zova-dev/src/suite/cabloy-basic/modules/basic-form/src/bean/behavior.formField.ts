@@ -1,6 +1,7 @@
 import type { ControllerFormField, IFormFieldRenderContext, IFormFieldRenderContextProps, TypeFormField } from 'zova-module-a-form';
 
 import { isEmptyObject, isNil } from '@cabloy/utils';
+import { classes } from 'typestyle';
 import { VNode } from 'vue';
 import { Use } from 'zova';
 import { isJsxComponent } from 'zova-jsx';
@@ -42,8 +43,9 @@ export class BehaviorFormField extends BeanBehaviorBase<IBehaviorOptionsFormFiel
     const propsPatch: IFormFieldRenderContextProps = {};
     // class
     const classTemp = (typeof propsBucket.render === 'string' && propsBucket.preset?.[propsBucket.render]?.class) ?? propsBucket.class;
-    if (!isNil(classTemp)) {
-      propsPatch.class = classTemp;
+    const styleTemp = (typeof propsBucket.render === 'string' && propsBucket.preset?.[propsBucket.render]?.style) ?? propsBucket.style;
+    if (!isNil(classTemp) || !isNil(styleTemp)) {
+      propsPatch.class = classes(classTemp, this.$style(styleTemp));
     }
     // readonly
     const readonlyTemp = (typeof propsBucket.render === 'string' && propsBucket.preset?.[propsBucket.render]?.readonly) ?? propsBucket.readonly;

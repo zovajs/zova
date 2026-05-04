@@ -2,6 +2,7 @@ import type { ControllerFormField, IFormFieldRenderContext, IFormFieldRenderCont
 
 import { isEmptyObject, isNil } from '@cabloy/utils';
 import { QIcon } from 'quasar';
+import { classes } from 'typestyle';
 import { VNode } from 'vue';
 import z from 'zod';
 import { Use } from 'zova';
@@ -46,8 +47,9 @@ export class BehaviorFormField extends BeanBehaviorBase<IBehaviorOptionsFormFiel
     const propsPatch: IFormFieldRenderContextProps = {};
     // class
     const classTemp = (typeof propsBucket.render === 'string' && propsBucket.preset?.[propsBucket.render]?.class) ?? propsBucket.class;
-    if (!isNil(classTemp)) {
-      propsPatch.class = classTemp;
+    const styleTemp = (typeof propsBucket.render === 'string' && propsBucket.preset?.[propsBucket.render]?.style) ?? propsBucket.style;
+    if (!isNil(classTemp) || !isNil(styleTemp)) {
+      propsPatch.class = classes(classTemp, this.$style(styleTemp));
     }
     // readonly
     const readonlyTemp = (typeof propsBucket.render === 'string' && propsBucket.preset?.[propsBucket.render]?.readonly) ?? propsBucket.readonly;
