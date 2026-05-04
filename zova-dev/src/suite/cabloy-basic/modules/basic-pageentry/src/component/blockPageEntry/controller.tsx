@@ -1,8 +1,9 @@
+import type { IJsxRenderContextPageEntry, IResourceBlockOptionsPageEntry } from 'zova-module-a-openapi';
+
 import { BeanControllerBase, IComponentOptions, Use } from 'zova';
 import { Controller } from 'zova-module-a-bean';
-import { type IResourceBlockPresetOptionsBase, type IJsxRenderContextPageEntry } from 'zova-module-a-openapi';
 
-export interface ControllerBlockPageEntryProps extends IResourceBlockPresetOptionsBase {}
+export interface ControllerBlockPageEntryProps extends IResourceBlockOptionsPageEntry {}
 
 @Controller()
 export class ControllerBlockPageEntry extends BeanControllerBase {
@@ -15,7 +16,7 @@ export class ControllerBlockPageEntry extends BeanControllerBase {
   protected async __init__() {}
 
   protected render() {
-    console.log(this.$props.preset?.BlockPageEntry);
+    console.log(this.$props);
     return null;
   }
 }

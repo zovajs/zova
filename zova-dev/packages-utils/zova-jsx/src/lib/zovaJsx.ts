@@ -273,7 +273,7 @@ export class ZovaJsx extends BeanSimple {
   private _renderJsxSingle(Component: any, componentOptions: TypeRenderComponentJsx, props: {}, celScope: {}, renderContext: {}): VNode {
     const _isZovaComponent = isZovaComponent(Component);
     // key
-    if (!cast(props).key && componentOptions.key) {
+    if (isNil(cast(props).key) && !isNil(componentOptions.key)) {
       cast(props).key = this.evaluateExpression(componentOptions.key, celScope);
     }
     // props
