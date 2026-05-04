@@ -30,10 +30,9 @@ export class ControllerBlockPageEntry<TData extends {} = {}> extends BeanControl
   formProvider: IFormProvider;
   formData?: TData;
 
-  jsxCelEnv: typeof celEnvBase;
   jsxZova: ZovaJsx;
   jsxCelScope: IPageEntryScope;
-  jsxRenderContext: IJsxRenderContextPageEntry;
+  jsxRenderContext: IJsxRenderContextPageEntry<TData>;
 
   $$modelResource: ModelResource<TData>;
 
@@ -46,11 +45,11 @@ export class ControllerBlockPageEntry<TData extends {} = {}> extends BeanControl
     this.formSchema = this.$useComputed(() => {
       return this.$$modelResource.getFormSchema(this.formMeta);
     });
-    this.formProvider = this.$useComputed(() => {
-      return this.$$modelResource.formProvider;
-    });
     this.formData = this.$useComputed(() => {
       return this.$$modelResource.getFormData(this.formMeta, this.entryId) as TData | undefined;
+    });
+    this.formProvider = this.$useComputed(() => {
+      return this.$$modelResource.formProvider;
     });
     // jsx
     this._prepareJsx();
@@ -93,8 +92,8 @@ export class ControllerBlockPageEntry<TData extends {} = {}> extends BeanControl
   }
 
   private _prepareJsx() {
-    this.jsxCelEnv = celEnvBase.clone();
-    this.jsxZova = this.app.bean._newBeanSimple(ZovaJsx, false, this.formProvider.components, this.formProvider.actions, this.jsxCelEnv);
+    const jsxCelEnv = celEnvBase.clone();
+    this.jsxZova = this.app.bean._newBeanSimple(ZovaJsx, false, this.formProvider.components, this.formProvider.actions, jsxCelEnv);
     this.jsxCelScope = this._prepareJsxCelScope();
     this.jsxRenderContext = {
       app: this.app,
@@ -125,10 +124,6 @@ export class ControllerBlockPageEntry<TData extends {} = {}> extends BeanControl
     };
   }
 
-  private _prepareJsxRenderContext() {
-    return;
-  }
-
   async onSubmit(data: TypeFormOnSubmitData<TData>) {
     const mutationSubmit = this.$$modelResource.getFormMutationSubmit(this.formMeta, this.entryId);
     await mutationSubmit?.mutateAsync(data.value as any);
@@ -142,6 +137,9 @@ export class ControllerBlockPageEntry<TData extends {} = {}> extends BeanControl
   }
 
   protected render() {
+    if (!this.formData) {
+      return <div>{this.scope.locale.EntryNotExist()}</div>;
+    }
     console.log(this.$props);
     console.log(this.$style(undefined));
     return null;

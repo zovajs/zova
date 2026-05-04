@@ -1,19 +1,13 @@
-import type {
-  IFormMeta,
-  IJsxRenderContextPageEntryWrapper,
-  IPageEntryWrapperScope,
-  IResourceBlockOptionsPageEntry,
-  TypeFormScene,
-} from 'zova-module-a-openapi';
+import type { IFormMeta, IResourceBlockOptionsPageEntry, TypeFormScene } from 'zova-module-a-openapi';
 
-import { celEnvBase, isNil } from '@cabloy/utils';
+import { isNil } from '@cabloy/utils';
 import { SchemaObject } from 'openapi3-ts/oas31';
 import { VNode } from 'vue';
 import { z } from 'zod';
 import { BeanControllerPageBase, deepExtend, Use, usePrepareArg } from 'zova';
 import { ZovaJsx } from 'zova-jsx';
 import { Controller } from 'zova-module-a-bean';
-import { formMetaFromFormScene, IFormProvider } from 'zova-module-a-form';
+import { formMetaFromFormScene } from 'zova-module-a-form';
 import { $QueriesAutoLoad } from 'zova-module-a-model';
 
 import type { ModelResource } from '../../model/resource.js';
@@ -28,11 +22,7 @@ export const ControllerPageEntrySchemaParams = z.object({
 export class ControllerPageEntry extends BeanControllerPageBase {
   formMeta: IFormMeta;
   formSchema?: SchemaObject;
-  formProvider: IFormProvider;
-  pageEntryWrapperScope: IPageEntryWrapperScope;
-  jsxRenderContext: IJsxRenderContextPageEntryWrapper;
-  zovaJsx: ZovaJsx;
-  pageEntryWrapperCelEnv: typeof celEnvBase;
+  jsxZova: ZovaJsx;
 
   @Use({ beanFullName: 'rest-resource.model.resource' })
   get $$modelResource(): ModelResource {
@@ -60,35 +50,17 @@ export class ControllerPageEntry extends BeanControllerPageBase {
     this.formSchema = this.$useComputed(() => {
       return this.$$modelResource.getFormSchema(this.formMeta);
     });
-    this.formProvider = this.$useComputed(() => {
-      return this.$$modelResource.formProvider;
-    });
     // jsx
-
+    this._prepareJsx();
     // load schema
     await $QueriesAutoLoad(() => this.$$modelResource.getFormApiSchemas(this.formMeta)?.sdk);
   }
 
-  private _getPageEntryWrapperCelEnv(): typeof celEnvBase {
-    const celEnv = celEnvBase.clone();
-    return celEnv;
-  }
-
-  public _getJsxRenderContextPageEntryWrapper(celScope: IPageEntryWrapperScope): IJsxRenderContextPageEntryWrapper {
-    return {
-      app: this.app,
-      ctx: this.ctx,
-      $scene: 'pageEntryWrapper',
-      $host: this,
-      $celScope: celScope,
-      $jsx: this.zovaJsx,
-      $$pageEntryWrapper: this,
-    };
+  private _prepareJsx() {
+    this.jsxZova = this.app.bean._newBeanSimple(ZovaJsx, false);
   }
 
   protected render() {
-    const celScope = this.pageEntryWrapperScope;
-    const jsxRenderContext = this.jsxRenderContext;
     const blocks = this.formSchema?.rest?.blocks;
     if (!blocks || blocks.length === 0) return;
     let domBlocks: VNode[] = [];
@@ -102,7 +74,7 @@ export class ControllerPageEntry extends BeanControllerPageBase {
         } satisfies IResourceBlockOptionsPageEntry,
         block.options,
       );
-      const domBlock = this.zovaJsx.render(block.render!, options);
+      const domBlock = this.jsxZova.render(block.render!, options);
       if (!domBlock) return;
       if (Array.isArray(domBlock)) {
         domBlocks.push(...domBlock);

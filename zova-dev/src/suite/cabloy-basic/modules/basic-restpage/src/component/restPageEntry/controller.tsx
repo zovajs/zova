@@ -1,12 +1,12 @@
 import type { ControllerPageEntry, ModelResource } from 'zova-module-rest-resource';
 
-import { celEnvBase, isNil } from '@cabloy/utils';
+import { isNil } from '@cabloy/utils';
 import { SchemaObject } from 'openapi3-ts/oas31';
 import { BeanControllerBase, deepEqual, Use } from 'zova';
 import { Controller } from 'zova-module-a-bean';
 import { ControllerForm, TypeFormOnSubmitData } from 'zova-module-a-form';
 import { $QueriesAutoLoad } from 'zova-module-a-model';
-import { IJsxRenderContextPageEntry, IPageEntryScope, TypeFormSchemaScene } from 'zova-module-a-openapi';
+import { TypeFormSchemaScene } from 'zova-module-a-openapi';
 
 // @ts-ignore ignore
 // eslint-disable-next-line
@@ -52,33 +52,33 @@ export class ControllerRestPageEntry<TData extends {} = {}> extends BeanControll
     );
   }
 
-  get formProvider() {
-    return this.$$pageEntryWrapper.formProvider;
-  }
+  // get formProvider() {
+  //   return this.$$pageEntryWrapper.formProvider;
+  // }
 
-  get pageEntryScope(): IPageEntryScope {
-    return this.$$pageEntryWrapper.pageEntryWrapperScope;
-  }
+  // get pageEntryScope(): IPageEntryScope {
+  //   return this.$$pageEntryWrapper.pageEntryWrapperScope;
+  // }
 
-  get zovaJsx() {
-    return this.$$pageEntryWrapper.zovaJsx;
-  }
+  // get zovaJsx() {
+  //   return this.$$pageEntryWrapper.zovaJsx;
+  // }
 
-  get pageEntryCelEnv(): typeof celEnvBase {
-    return this.$$pageEntryWrapper.pageEntryWrapperCelEnv;
-  }
+  // get pageEntryCelEnv(): typeof celEnvBase {
+  //   return this.$$pageEntryWrapper.pageEntryWrapperCelEnv;
+  // }
 
-  public getJsxRenderContextPageEntry(celScope: IPageEntryScope): IJsxRenderContextPageEntry<TData> {
-    return {
-      app: this.app,
-      ctx: this.ctx,
-      $scene: 'pageEntry',
-      $host: this,
-      $celScope: celScope,
-      $jsx: this.zovaJsx,
-      $$pageEntry: this,
-    };
-  }
+  // public getJsxRenderContextPageEntry(celScope: IPageEntryScope): IJsxRenderContextPageEntry<TData> {
+  //   return {
+  //     app: this.app,
+  //     ctx: this.ctx,
+  //     $scene: 'pageEntry',
+  //     $host: this,
+  //     $celScope: celScope,
+  //     $jsx: this.zovaJsx,
+  //     $$pageEntry: this,
+  //   };
+  // }
 
   get resource() {
     return this.$$pageEntryWrapper.resource;
