@@ -223,19 +223,20 @@ export class ZovaJsx extends BeanSimple {
     return beanInstance.execute(props, renderContext, next);
   }
 
-  public render(componentJsx: TypeRenderComponent, props: {} | undefined, celScope?: {}, renderContext?: {}): VNode | VNode[] | undefined {
+  public render(componentJsx: TypeRenderComponent, propsInit: {} | undefined, celScope?: {}, renderContext?: {}): VNode | VNode[] | undefined {
     if (!componentJsx) {
       throw new Error(`render component should not ${componentJsx}`);
     }
-    componentJsx = this.normalizeComponenJsx(componentJsx);
-    props = props ?? {};
+    componentJsx = this.normalizeComponenJsx(componentJsx, propsInit);
+    const componentProps = componentJsx.props;
+    const props = {}; // new one
     // vIf
-    const vIf = this.evaluateExpression(componentJsx.props?.['v-if'], celScope);
+    const vIf = this.evaluateExpression(componentProps?.['v-if'], celScope);
     if (vIf === false) return;
     // component
     const Component = this.normalizeComponent(componentJsx.type);
     // vFor
-    const vFor = this.evaluateExpression(componentJsx.props?.['v-for'], celScope);
+    const vFor = this.evaluateExpression(componentProps?.['v-for'], celScope);
     if (!vFor) return this._renderJsxSingle(Component, componentJsx, props, celScope, renderContext);
     const children: VNode[] = [];
     for (let index = 0; index < vFor.length; index++) {
@@ -254,9 +255,14 @@ export class ZovaJsx extends BeanSimple {
     return children;
   }
 
-  public normalizeComponenJsx(componentJsx: TypeRenderComponent): TypeRenderComponentJsx {
-    if (typeof componentJsx === 'object') return componentJsx;
-    return { type: componentJsx as any };
+  public normalizeComponenJsx(componentJsx: TypeRenderComponent, propsInit?: {}): TypeRenderComponentJsx {
+    if (typeof componentJsx === 'object') {
+      return Object.assign({}, componentJsx, {
+        key: cast(propsInit)?.key ?? componentJsx.key,
+        props: Object.assign({}, componentJsx.props, propsInit),
+      });
+    }
+    return { type: componentJsx as any, props: propsInit as any };
   }
 
   public normalizeComponent(type: TypeRenderComponent) {
@@ -279,7 +285,7 @@ export class ZovaJsx extends BeanSimple {
   private _renderJsxSingle(Component: any, componentJsx: TypeRenderComponentJsx, props: {}, celScope?: {}, renderContext?: {}): VNode {
     const _isZovaComponent = isZovaComponent(Component);
     // key
-    if (isNil(cast(props).key) && !isNil(componentJsx.key)) {
+    if (!isNil(componentJsx.key)) {
       cast(props).key = this.evaluateExpression(componentJsx.key, celScope);
     }
     // props
