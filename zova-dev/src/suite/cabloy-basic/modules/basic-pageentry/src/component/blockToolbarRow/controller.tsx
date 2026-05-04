@@ -1,9 +1,12 @@
-import type { IResourceBlockOptionsBase, IJsxRenderContextPageEntry } from 'zova-module-a-openapi';
+import type { IJsxRenderContextPageEntry, IPermissionHint } from 'zova-module-a-openapi';
 
+import { classes } from 'typestyle';
+import { VNode } from 'vue';
 import { BeanControllerBase, IComponentOptions, Use } from 'zova';
 import { Controller } from 'zova-module-a-bean';
+import { IResourceBlockOptionsToolbarRow } from 'zova-module-basic-openapi';
 
-export interface ControllerBlockToolbarRowProps extends IResourceBlockOptionsBase {}
+export interface ControllerBlockToolbarRowProps extends IResourceBlockOptionsToolbarRow {}
 
 @Controller()
 export class ControllerBlockToolbarRow extends BeanControllerBase {
@@ -15,7 +18,45 @@ export class ControllerBlockToolbarRow extends BeanControllerBase {
 
   protected async __init__() {}
 
+  get permissions() {
+    return this.$$renderContext.$celScope.permissions;
+  }
+
   protected render() {
-    return <div>toolbar row</div>;
+    const { $jsx, $celScope } = this.$$renderContext;
+    const actions = this.$props.actions;
+    if (!actions || actions.length === 0) return;
+    const domActions: VNode[] = [];
+    actions.forEach((action, index) => {
+      const actionName = action.name;
+      const permissionHint: IPermissionHint | undefined = action.options?.permission;
+      // check formScene
+      if (!this._checkFormScene(permissionHint)) return;
+      // check permission
+      if (!this.$passport.checkPermission(this.permissions, actionName, permissionHint)) return;
+      const options = Object.assign({ key: index }, action.options);
+      const domAction = $jsx.render(action.render!, options, $celScope, this.$$renderContext);
+      if (!domAction) return;
+      if (Array.isArray(domAction)) {
+        domActions.push(...domAction);
+      } else {
+        domActions.push(domAction);
+      }
+    });
+    return (
+      <div class={classes(this.$props.class, this.$style(this.$props.style))}>
+        <div class="join">{domActions}</div>
+      </div>
+    );
+  }
+
+  private _checkFormScene(permissionHint?: IPermissionHint) {
+    const { $$pageEntry } = this.$$renderContext;
+    const formScene = $$pageEntry.formMeta.formScene;
+    const formSceneHint = permissionHint?.formScene;
+    if (!formSceneHint) return true;
+    if (Array.isArray(formSceneHint) && formSceneHint.includes(formScene!)) return true;
+    if (formSceneHint === formScene) return true;
+    return false;
   }
 }

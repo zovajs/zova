@@ -1,4 +1,9 @@
-import type { IResourceBlockOptionsBase, IResourceComponentBlockOptionsBlock, TypeFormScene } from 'zova-module-a-openapi';
+import type {
+  IResourceBlockOptionsBase,
+  IResourceComponentActionRowOptionsAction,
+  IResourceComponentBlockOptionsBlock,
+  TypeFormScene,
+} from 'zova-module-a-openapi';
 
 import 'zova-module-a-openapi';
 import { TableIdentity } from 'table-identity';
@@ -15,7 +20,9 @@ export interface IResourceBlockOptionsPageEntry extends IResourceBlockOptionsBas
   formScene?: TypeFormScene;
 }
 
-export interface IResourceBlockOptionsToolbarRow extends IResourceBlockOptionsBase {}
+export interface IResourceBlockOptionsToolbarRow extends IResourceBlockOptionsBase {
+  actions?: IResourceComponentActionRowOptionsAction[];
+}
 
 declare module 'zova-module-a-openapi' {
   export interface IResourceComponentBlockRecord {
