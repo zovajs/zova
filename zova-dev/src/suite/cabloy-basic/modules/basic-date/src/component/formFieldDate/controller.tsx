@@ -4,7 +4,6 @@ import type { IFormFieldPresetOptions } from 'zova-module-a-form';
 import { BeanControllerBase } from 'zova';
 import { Controller } from 'zova-module-a-bean';
 import { ZFormFieldPreset } from 'zova-module-a-form';
-import { IDateOptions } from 'zova-module-basic-openapi';
 
 import { dateFormatUtil } from '../../lib/utils.js';
 

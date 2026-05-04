@@ -4,8 +4,6 @@ import { TypeRenderComponentJsx } from 'zova-jsx';
 
 import type { TypeFormScene } from './formMeta.ts';
 
-export interface IResourceComponentFormFieldRecord {}
-
 export interface IResourceActionBulkRecord {}
 
 export interface IResourceActionRowRecord {}

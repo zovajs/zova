@@ -1,7 +1,7 @@
 import type { CellContext } from '@tanstack/table-core';
 import type { OmitNever } from 'zova';
 import type { ServiceOnion } from 'zova-module-a-bean';
-import type { IJsxRenderContextBase, ISchemaRenderComponentPresetRecord } from 'zova-module-a-openapi';
+import type { IJsxRenderContextBase } from 'zova-module-a-openapi';
 
 import type { ControllerTable } from '../component/table/controller.jsx';
 import type { IJsxRenderContextTableColumn, ITableCellScope } from './tableColumn.js';
