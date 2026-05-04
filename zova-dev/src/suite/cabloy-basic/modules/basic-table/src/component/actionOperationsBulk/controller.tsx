@@ -1,5 +1,6 @@
 import type { IJsxRenderContextPage } from 'zova-module-a-openapi';
 
+import { classes } from 'typestyle';
 import { VNode } from 'vue';
 import { BeanControllerBase, IComponentOptions, Use } from 'zova';
 import { Controller } from 'zova-module-a-bean';
@@ -40,7 +41,7 @@ export class ControllerActionOperationsBulk extends BeanControllerBase {
       }
     });
     return (
-      <div class={this.$props.class}>
+      <div class={classes(this.$props.class, this.$style(this.$props.style))}>
         <div class="join">{domActions}</div>
       </div>
     );

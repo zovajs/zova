@@ -60,7 +60,7 @@
     "@cabloy/json5": "^1.1.5",
     "@cabloy/logger": "^1.1.9",
     "@cabloy/module-info": "^2.0.0",
-    "@cabloy/utils": "^2.1.12",
+    "@cabloy/utils": "^2.1.13",
     "@cabloy/vue-router": "^4.4.16",
     "@cabloy/word-utils": "^2.1.8",
     "@cabloy/zod-openapi": "^1.1.5",
