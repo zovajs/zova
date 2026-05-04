@@ -91,7 +91,7 @@ export class ControllerFormFieldCaptcha extends BeanControllerBase {
         <ZFormField
           {...this.$props}
           slotDefault={({ props }, $$formField) => {
-            const propsNew = {
+            const propsNew: Omit<IResourceFormFieldOptionsInput, 'style'> = {
               ...props,
               type: 'text',
               class: 'grow',
@@ -107,7 +107,7 @@ export class ControllerFormFieldCaptcha extends BeanControllerBase {
                   token,
                 });
               },
-            } satisfies IResourceFormFieldOptionsInput;
+            };
             return <input {...propsNew}></input>;
           }}
         ></ZFormField>

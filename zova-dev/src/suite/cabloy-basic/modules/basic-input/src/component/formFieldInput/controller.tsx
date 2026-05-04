@@ -5,7 +5,7 @@ import { classes } from 'typestyle';
 import { BeanControllerBase } from 'zova';
 import { Controller } from 'zova-module-a-bean';
 import { IFormFieldPresetOptions, ZFormField } from 'zova-module-a-form';
-import { IInputOptions } from 'zova-module-basic-openapi';
+import { IResourceFormFieldOptionsInput } from 'zova-module-basic-openapi';
 
 export interface ControllerFormFieldInputProps extends IFormFieldPresetOptions {}
 
@@ -24,7 +24,7 @@ export class ControllerFormFieldInput extends BeanControllerBase {
           const className = !propsBucket.needHandleBorder
             ? props.class
             : classes(props.class, 'input', propsBucket.layout?.bordered && 'input-bordered', !$$formField.field.state.meta.isValid && 'input-error');
-          const propsNew: IInputOptions = {
+          const propsNew: Omit<IResourceFormFieldOptionsInput, 'style'> = {
             type: 'text',
             placeholder: undefined,
             onInput: (e: Event) => {

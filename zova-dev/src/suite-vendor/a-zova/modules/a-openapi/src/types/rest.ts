@@ -4,7 +4,7 @@ import type { TypeRenderComponentJsx } from 'zova-jsx';
 
 import 'openapi3-ts/oas30';
 import 'openapi3-ts/oas31';
-import { IResourceComponentActionBulkOptionsAction } from './actions.js';
+import { IResourceComponentActionBulkOptionsAction, IResourceComponentActionRowRecord } from './actions.js';
 import { IResourceComponentBlockOptionsBlock } from './blocks.js';
 import { IResourceComponentFormFieldRecord } from './formField.js';
 
@@ -109,7 +109,7 @@ export type TypeTableCellRenderComponentNormal =
   | keyof IComponentRecord
   | keyof TypeBeanRecordGeneralSelector<'tableCell'>
   | TypeRenderComponentPreset;
-export type TypeTableCellRenderComponent = TypeTableCellRenderComponentNormal | TypeRenderComponentJsx;
+export type TypeTableCellRenderComponent = keyof IResourceComponentActionRowRecord | TypeRenderComponentJsx;
 export type TypeTableCellRenderComponentProvider =
   | Constructable<ComponentPublicInstance>
   | keyof IComponentRecord
