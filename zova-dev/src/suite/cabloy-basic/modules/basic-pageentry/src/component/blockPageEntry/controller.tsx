@@ -115,7 +115,7 @@ export class ControllerBlockPageEntry<TData extends {} = {}> extends BeanControl
     }) as any;
     return {
       resource: this.resource,
-      id: this.entryId,
+      id: this.entryId ?? null,
       permissions,
     };
   }
