@@ -21,10 +21,6 @@ export type IResourceComponentActionRowRecord = {
 
 export interface IResourceComponentActionTableRecord extends IResourceComponentActionBulkRecord, IResourceComponentActionRowRecord {}
 
-export interface IResourceActionBulkPresetOptionsBase {
-  preset?: IResourceComponentActionBulkRecord;
-}
-
 export interface IPermissionHint {
   action?: string;
   public?: boolean;
@@ -38,10 +34,6 @@ export interface IResourceActionBulkOptionsBase {
     action?: keyof IResourceActionBulkRecord;
     public?: boolean;
   };
-}
-
-export interface IResourceActionRowPresetOptionsBase {
-  preset?: IResourceComponentActionRowRecord;
 }
 
 export interface IResourceActionRowOptionsBase {
@@ -77,19 +69,11 @@ export interface IResourceActionRowOptionsOperationsRow extends IResourceActionR
 export interface IResourceComponentActionBulkOptionsAction {
   name: keyof IResourceActionBulkRecord; // not omit operationsBulk
   render?: keyof IResourceComponentActionBulkRecord | TypeRenderComponentJsx;
-  options?: IResourceComponentActionBulkOptions;
-}
-
-export interface IResourceComponentActionBulkOptions {
-  preset?: IResourceComponentActionBulkRecord;
+  options?: IResourceActionBulkOptionsBase;
 }
 
 export interface IResourceComponentActionRowOptionsAction {
   name: keyof IResourceActionRowRecord; // not omit operationsBulk
   render?: keyof IResourceComponentActionRowRecord | TypeRenderComponentJsx;
-  options?: IResourceComponentActionRowOptions;
-}
-
-export interface IResourceComponentActionRowOptions {
-  preset?: IResourceComponentActionRowRecord;
+  options?: IResourceActionRowOptionsBase;
 }

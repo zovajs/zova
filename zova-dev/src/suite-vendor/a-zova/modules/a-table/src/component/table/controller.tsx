@@ -6,8 +6,8 @@ import { appResource, cast, deepEqual, deepExtend, objectAssignReactive, UseScop
 import { isJsxComponent, ZovaJsx } from 'zova-jsx';
 import { Controller } from 'zova-module-a-bean';
 import {
+  IResourceActionRowOptionsBase,
   ISchemaObjectExtensionFieldRest,
-  ISchemaObjectExtensionFieldRestTable,
   renderTableColumnTopPropsSystem,
   ScopeModuleAOpenapi,
   TypeTableCellRenderComponent,
@@ -250,11 +250,7 @@ export class ControllerTable<TData extends {} = {}> extends BeanControllerTableB
     };
   }
 
-  public cellRender(
-    render: TypeTableCellRenderComponent,
-    columnProps: ISchemaObjectExtensionFieldRestTable,
-    renderContext: IJsxRenderContextTableCell,
-  ) {
+  public cellRender(render: TypeTableCellRenderComponent, columnProps: IResourceActionRowOptionsBase, renderContext: IJsxRenderContextTableCell) {
     // render
     const cellScope = renderContext.$celScope;
     // renderProvider

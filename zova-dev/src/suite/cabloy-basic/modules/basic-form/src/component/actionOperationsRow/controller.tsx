@@ -1,11 +1,10 @@
-import type { IJsxRenderContextPageEntry, IPermissionHint, IResourceActionRowPresetOptionsBase } from 'zova-module-a-openapi';
+import type { IJsxRenderContextPageEntry, IPermissionHint, IResourceActionRowOptionsOperationsRow } from 'zova-module-a-openapi';
 
-import { toUpperCaseFirstChar } from '@cabloy/word-utils';
 import { VNode } from 'vue';
 import { BeanControllerBase, IComponentOptions, Use } from 'zova';
 import { Controller } from 'zova-module-a-bean';
 
-export interface ControllerActionOperationsRowProps extends IResourceActionRowPresetOptionsBase {}
+export interface ControllerActionOperationsRowProps extends IResourceActionRowOptionsOperationsRow {}
 
 @Controller()
 export class ControllerActionOperationsRow extends BeanControllerBase {
@@ -23,14 +22,13 @@ export class ControllerActionOperationsRow extends BeanControllerBase {
 
   protected render() {
     const { $jsx, $celScope } = this.$$renderContext;
-    const actions = this.$props.preset?.ActionOperationsRow?.actions;
+    const actions = this.$props.actions;
     if (!actions || actions.length === 0) return;
 
     const domActions: VNode[] = [];
     actions.forEach((action, index) => {
       const actionName = action.name;
-      const actionNameCapitalize = `Action${toUpperCaseFirstChar(actionName)}`;
-      const permissionHint: IPermissionHint | undefined = action.options?.preset?.[actionNameCapitalize]?.permission;
+      const permissionHint: IPermissionHint | undefined = action.options?.permission;
       // check formScene
       if (!this._checkFormScene(permissionHint)) return;
       // check permission
@@ -45,7 +43,7 @@ export class ControllerActionOperationsRow extends BeanControllerBase {
       }
     });
     return (
-      <div class={this.$props.preset?.ActionOperationsRow?.class}>
+      <div class={this.$props.class}>
         <div class="join">{domActions}</div>
       </div>
     );

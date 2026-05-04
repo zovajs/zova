@@ -1,11 +1,10 @@
-import type { IJsxRenderContextPage, IResourceActionBulkPresetOptionsBase } from 'zova-module-a-openapi';
+import type { IJsxRenderContextPage, IResourceActionBulkOptionsOperationsBulk } from 'zova-module-a-openapi';
 
-import { toUpperCaseFirstChar } from '@cabloy/word-utils';
 import { VNode } from 'vue';
 import { BeanControllerBase, IComponentOptions, Use } from 'zova';
 import { Controller } from 'zova-module-a-bean';
 
-export interface ControllerActionOperationsBulkProps extends IResourceActionBulkPresetOptionsBase {}
+export interface ControllerActionOperationsBulkProps extends IResourceActionBulkOptionsOperationsBulk {}
 
 @Controller()
 export class ControllerActionOperationsBulk extends BeanControllerBase {
@@ -23,13 +22,12 @@ export class ControllerActionOperationsBulk extends BeanControllerBase {
 
   protected render() {
     const { $jsx, $celScope } = this.$$renderContext;
-    const actions = this.$props.preset?.ActionOperationsBulk?.actions;
+    const actions = this.$props.actions;
     if (!actions || actions.length === 0) return;
     const domActions: VNode[] = [];
     actions.forEach((action, index) => {
       const actionName = action.name;
-      const actionNameCapitalize = `Action${toUpperCaseFirstChar(actionName)}`;
-      const permissionHint = action.options?.preset?.[actionNameCapitalize]?.permission;
+      const permissionHint = action.options?.permission;
       if (!this.$passport.checkPermission(this.permissions, actionName, permissionHint)) return;
       const options = Object.assign({ key: index }, action.options);
       const domAction = $jsx.render(action.render!, options, $celScope, this.$$renderContext);
@@ -41,7 +39,7 @@ export class ControllerActionOperationsBulk extends BeanControllerBase {
       }
     });
     return (
-      <div class={this.$props.preset?.ActionOperationsBulk?.class}>
+      <div class={this.$props.class}>
         <div class="join">{domActions}</div>
       </div>
     );
