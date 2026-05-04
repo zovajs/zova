@@ -14,7 +14,7 @@ type ControllerInnerProps = TypeControllerInnerProps<
   ControllerFormFieldDateProps,
   keyof typeof ControllerFormFieldDate.$propsDefault
 >;
-declare module 'zova-module-a-date' {
+declare module 'zova-module-basic-date' {
   export interface ControllerFormFieldDate {
     $props: ControllerInnerProps;
   }
