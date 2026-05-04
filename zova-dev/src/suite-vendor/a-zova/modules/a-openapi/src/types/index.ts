@@ -11,3 +11,4 @@ export * from './actions.js';
 export * from './fieldLayout.js';
 export * from './formMeta.js';
 export * from './blocks.js';
+export * from './tableCell.js';

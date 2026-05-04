@@ -1,8 +1,10 @@
+import type { IResourceTableCellOptionsBase } from 'zova-module-a-openapi';
+
 import { BeanBase } from 'zova';
 import { ZIcon } from 'zova-module-a-icon';
-import { IDecoratorTableCellPresetOptions, IJsxRenderContextTableCell, ITableCellRender, NextTableCellRender, TableCell } from 'zova-module-a-table';
+import { IJsxRenderContextTableCell, ITableCellRender, NextTableCellRender, TableCell } from 'zova-module-a-table';
 
-export interface ITableCellOptionsActionDelete extends IDecoratorTableCellPresetOptions {}
+export interface ITableCellOptionsActionDelete extends IResourceTableCellOptionsBase {}
 
 @TableCell<ITableCellOptionsActionDelete>()
 export class TableCellActionDelete extends BeanBase implements ITableCellRender {

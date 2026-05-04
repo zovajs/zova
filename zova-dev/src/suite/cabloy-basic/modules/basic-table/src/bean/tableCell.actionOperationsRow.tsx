@@ -1,23 +1,16 @@
 import { VNode } from 'vue';
 import { BeanBase } from 'zova';
-import { TypeTableCellRenderComponent } from 'zova-module-a-openapi';
-import {
-  IDecoratorTableCellPresetOptions,
-  IJsxRenderContextTableCell,
-  IJsxRenderContextTableColumn,
-  ITableCellRender,
-  NextTableCellRender,
-  TableCell,
-} from 'zova-module-a-table';
+import { IResourceActionRowOptionsOperationsRow, TypeTableCellRenderComponent } from 'zova-module-a-openapi';
+import { IJsxRenderContextTableCell, IJsxRenderContextTableColumn, ITableCellRender, NextTableCellRender, TableCell } from 'zova-module-a-table';
 
-export interface ITableCellOptionsActionOperationsRow extends IDecoratorTableCellPresetOptions {}
+export interface ITableCellOptionsActionOperationsRow extends IResourceActionRowOptionsOperationsRow {}
 
 @TableCell<ITableCellOptionsActionOperationsRow>()
 export class TableCellActionOperationsRow extends BeanBase implements ITableCellRender {
   async checkVisible(options: ITableCellOptionsActionOperationsRow, renderContext: IJsxRenderContextTableColumn): Promise<boolean> {
     const { $celScope, $host, $$table } = renderContext;
     const permissions = $celScope.permissions;
-    let actions = options.preset?.ActionOperationsRow?.actions;
+    let actions = options.actions;
     if (!actions || actions.length === 0) return false;
     // renders
     const renders: TypeTableCellRenderComponent[] = [];
@@ -37,7 +30,7 @@ export class TableCellActionOperationsRow extends BeanBase implements ITableCell
   render(options: ITableCellOptionsActionOperationsRow, renderContext: IJsxRenderContextTableCell, _next: NextTableCellRender) {
     const { $celScope, $host, $$table } = renderContext;
     const permissions = $celScope.permissions;
-    const actions = options.preset?.ActionOperationsRow?.actions;
+    const actions = options.actions;
     if (!actions || actions.length === 0) return;
     const domActions: VNode[] = [];
     actions.forEach((action, index) => {
