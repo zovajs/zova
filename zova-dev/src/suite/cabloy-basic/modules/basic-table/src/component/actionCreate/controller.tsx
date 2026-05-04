@@ -9,7 +9,7 @@ export interface ControllerActionCreateProps extends IResourceActionBulkOptionsC
 
 @Controller()
 export class ControllerActionCreate extends BeanControllerBase {
-  static $propsDefault = { class: 'btn  btn-primary join-item' };
+  static $propsDefault = { class: 'btn btn-primary join-item' };
   static $componentOptions: IComponentOptions = { inheritAttrs: false, deepExtendDefault: true };
 
   @Use({ injectionScope: 'host' })
