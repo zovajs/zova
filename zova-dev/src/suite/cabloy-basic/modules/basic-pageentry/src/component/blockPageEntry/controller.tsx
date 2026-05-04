@@ -1,19 +1,13 @@
-import type {
-  IFormMeta,
-  IJsxRenderContextPageEntry,
-  IPageEntryScope,
-  IResourceBlockOptionsPageEntry,
-  TypeFormScene,
-  TypeFormSchemaScene,
-} from 'zova-module-a-openapi';
+import type { IFormMeta, IJsxRenderContextPageEntry, IPageEntryScope, TypeFormScene, TypeFormSchemaScene } from 'zova-module-a-openapi';
 
 import { celEnvBase, isNil } from '@cabloy/utils';
 import { SchemaObject } from 'openapi3-ts/oas31';
 import { BeanControllerBase, deepEqual, IComponentOptions, useCustomRef } from 'zova';
 import { ZovaJsx } from 'zova-jsx';
 import { Controller } from 'zova-module-a-bean';
-import { ControllerForm, formMetaFromFormScene, IFormProvider, TypeFormOnSubmitData } from 'zova-module-a-form';
+import { BeanControllerFormBase, formMetaFromFormScene, IFormProvider, TypeFormOnSubmitData } from 'zova-module-a-form';
 import { $QueriesAutoLoad } from 'zova-module-a-model';
+import { IResourceBlockOptionsPageEntry } from 'zova-module-basic-openapi';
 import { ModelResource } from 'zova-module-rest-resource';
 
 export interface ControllerBlockPageEntryProps extends IResourceBlockOptionsPageEntry {}
@@ -23,11 +17,11 @@ export class ControllerBlockPageEntry<TData extends {} = {}> extends BeanControl
   static $propsDefault = {};
   static $componentOptions: IComponentOptions = { inheritAttrs: false, deepExtendDefault: true };
 
-  controllerForm: ControllerForm;
+  formInstance: BeanControllerFormBase;
 
   formMeta: IFormMeta;
-  formSchema?: SchemaObject;
   formProvider: IFormProvider;
+  formSchema?: SchemaObject;
   formData?: TData;
 
   jsxZova: ZovaJsx;
@@ -42,14 +36,14 @@ export class ControllerBlockPageEntry<TData extends {} = {}> extends BeanControl
       const formScene = this.formScene;
       return { ...formMetaFromFormScene(formScene), formScene };
     });
+    this.formProvider = this.$useComputed(() => {
+      return this.$$modelResource.formProvider;
+    });
     this.formSchema = this.$useComputed(() => {
       return this.$$modelResource.getFormSchema(this.formMeta);
     });
     this.formData = this.$useComputed(() => {
       return this.$$modelResource.getFormData(this.formMeta, this.entryId) as TData | undefined;
-    });
-    this.formProvider = this.$useComputed(() => {
-      return this.$$modelResource.formProvider;
     });
     // jsx
     this._prepareJsx();

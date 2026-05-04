@@ -1,11 +1,10 @@
-import { celEnvBase } from '@cabloy/utils';
+import { VNode } from 'vue';
 import { z } from 'zod';
-import { BeanControllerPageBase, Use, useCustomRef, usePrepareArg } from 'zova';
+import { BeanControllerPageBase, deepExtend, Use, usePrepareArg } from 'zova';
 import { ZovaJsx } from 'zova-jsx';
 import { Controller } from 'zova-module-a-bean';
-import { IJsxRenderContextPageWrapper, IPageWrapperScope } from 'zova-module-a-openapi';
-import { ITableProvider } from 'zova-module-a-table';
-import { ZPage } from 'zova-module-home-base';
+import { $QueryAutoLoad } from 'zova-module-a-model';
+import { IResourceBlockOptionsPage } from 'zova-module-basic-openapi';
 
 import type { ModelResource } from '../../model/resource.js';
 
@@ -15,73 +14,52 @@ export const ControllerPageResourceSchemaParams = z.object({
 
 @Controller()
 export class ControllerPageResource extends BeanControllerPageBase {
-  tableProvider: ITableProvider;
-  pageWrapperScope: IPageWrapperScope;
-  zovaJsx: ZovaJsx;
-  pageWrapperCelEnv: typeof celEnvBase;
+  jsxZova: ZovaJsx;
 
   @Use({ beanFullName: 'rest-resource.model.resource' })
   get $$modelResource(): ModelResource {
     return usePrepareArg(this.$params.resource, true);
   }
 
-  protected async __init__() {
-    this.bean._setBean('$$pageWrapper', this);
-    this.tableProvider = this.$useComputed(() => {
-      return this.$$modelResource.tableProvider;
-    });
-    this.pageWrapperScope = this._getPageWrapperScope();
-    // jsx
-    this.pageWrapperCelEnv = this._getPageWrapperCelEnv();
-    this.zovaJsx = this.app.bean._newBeanSimple(ZovaJsx, false, this.tableProvider.components, this.tableProvider.actions, this.pageWrapperCelEnv);
-  }
-
   get resource() {
     return this.$params.resource;
   }
 
-  private _getPageWrapperScope(): IPageWrapperScope {
-    // eslint-disable-next-line
-    const self = this;
-    const permissions = useCustomRef(() => {
-      return {
-        get() {
-          return self.$$modelResource.permissions;
-        },
-        set(_value) {},
-      };
-    }) as any;
-    return {
-      resource: this.$$modelResource.resource,
-      permissions,
-    };
+  protected async __init__() {
+    // jsx
+    this._prepareJsx();
+    // load schema/data
+    await $QueryAutoLoad(() => this.$$modelResource.apiSchemasSelect.sdk);
   }
 
-  private _getPageWrapperCelEnv(): typeof celEnvBase {
-    const celEnv = celEnvBase.clone();
-    return celEnv;
+  private _prepareJsx() {
+    this.jsxZova = this.app.bean._newBeanSimple(ZovaJsx, false);
   }
 
-  public getJsxRenderContextPageWrapper(celScope: IPageWrapperScope): IJsxRenderContextPageWrapper {
-    return {
-      app: this.app,
-      ctx: this.ctx,
-      $scene: 'pageWrapper',
-      $host: this,
-      $celScope: celScope,
-      $jsx: this.zovaJsx,
-      $$pageWrapper: this,
-    };
+  get schemaRow() {
+    return this.$$modelResource.schemaRow;
   }
 
   public render() {
-    const componentRestPage = this.$$modelResource.componentRestPage;
-    if (!componentRestPage) {
-      return <ZPage>not found componentRestPage</ZPage>;
-    }
-    const celScope = this.pageWrapperScope;
-    const jsxRenderContext = this.getJsxRenderContextPageWrapper(celScope);
-    const domRestPage = this.zovaJsx.render(componentRestPage, {}, celScope, jsxRenderContext);
-    return <ZPage>{domRestPage}</ZPage>;
+    const blocks = this.schemaRow?.rest?.blocks;
+    if (!blocks || blocks.length === 0) return;
+    let domBlocks: VNode[] = [];
+    blocks.forEach((block, index) => {
+      const options = deepExtend(
+        { key: index },
+        {
+          resource: this.resource,
+        } satisfies IResourceBlockOptionsPage,
+        block.options,
+      );
+      const domBlock = this.jsxZova.render(block.render!, options);
+      if (!domBlock) return;
+      if (Array.isArray(domBlock)) {
+        domBlocks.push(...domBlock);
+      } else {
+        domBlocks.push(domBlock);
+      }
+    });
+    return <div>{domBlocks}</div>;
   }
 }

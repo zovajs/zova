@@ -1,4 +1,4 @@
-import type { IFormMeta, IResourceBlockOptionsPageEntry, TypeFormScene } from 'zova-module-a-openapi';
+import type { IFormMeta, TypeFormScene } from 'zova-module-a-openapi';
 
 import { isNil } from '@cabloy/utils';
 import { SchemaObject } from 'openapi3-ts/oas31';
@@ -8,7 +8,8 @@ import { BeanControllerPageBase, deepExtend, Use, usePrepareArg } from 'zova';
 import { ZovaJsx } from 'zova-jsx';
 import { Controller } from 'zova-module-a-bean';
 import { formMetaFromFormScene } from 'zova-module-a-form';
-import { $QueriesAutoLoad } from 'zova-module-a-model';
+import { $QueryAutoLoad } from 'zova-module-a-model';
+import { IResourceBlockOptionsPageEntry } from 'zova-module-basic-openapi';
 
 import type { ModelResource } from '../../model/resource.js';
 
@@ -42,7 +43,6 @@ export class ControllerPageEntry extends BeanControllerPageBase {
   }
 
   protected async __init__() {
-    this.bean._setBean('$$pageEntryWrapper', this);
     this.formMeta = this.$useComputed(() => {
       const formScene = this.formScene;
       return { ...formMetaFromFormScene(formScene), formScene };
@@ -53,7 +53,7 @@ export class ControllerPageEntry extends BeanControllerPageBase {
     // jsx
     this._prepareJsx();
     // load schema
-    await $QueriesAutoLoad(() => this.$$modelResource.getFormApiSchemas(this.formMeta)?.sdk);
+    await $QueryAutoLoad(() => this.$$modelResource.getFormApiSchemas(this.formMeta)?.sdk);
   }
 
   private _prepareJsx() {
