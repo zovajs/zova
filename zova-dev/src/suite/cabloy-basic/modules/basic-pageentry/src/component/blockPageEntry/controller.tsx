@@ -17,6 +17,7 @@ export class ControllerBlockPageEntry extends BeanControllerBase {
 
   protected render() {
     console.log(this.$props);
+    console.log(this.$style(undefined));
     return null;
   }
 }
