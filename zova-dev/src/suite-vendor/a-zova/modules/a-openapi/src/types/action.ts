@@ -20,23 +20,14 @@ export interface IJsxRenderContextPageEntry extends IJsxRenderContextBase {
   // $$pageEntry: ControllerRestPageEntry<TData>;
 }
 
-export interface IJsxRenderContextPageEntryWrapper extends IJsxRenderContextBase {
-  $celScope: IPageEntryWrapperScope;
-  //$$pageEntryWrapper: ControllerPageEntry;
-}
-
-export interface IPageEntryWrapperScope {
+export interface IPageEntryScope {
   resource?: string;
   id?: TableIdentity;
   permissions?: TypeOpenapiPermissions;
 }
 
-export interface IPageEntryScope extends IPageEntryWrapperScope {}
-
 export interface IJsxRenderSceneRecord {
-  pageWrapper: never;
   page: never;
-  pageEntryWrapper: never;
   pageEntry: never;
   // table: never;
   tableColumn: never;
@@ -47,17 +38,10 @@ export interface IJsxRenderSceneRecord {
 
 export type TypeActionProvider = keyof IActionRecord;
 
-export interface IPageWrapperScope {
+export interface IPageScope {
   resource?: string;
   permissions?: TypeOpenapiPermissions;
 }
-
-export interface IJsxRenderContextPageWrapper extends IJsxRenderContextBase {
-  $celScope: IPageWrapperScope;
-  // $$pageWrapper: ControllerPageResource;
-}
-
-export interface IPageScope extends IPageWrapperScope {}
 
 export interface IJsxRenderContextPage extends IJsxRenderContextBase {
   $celScope: IPageScope;

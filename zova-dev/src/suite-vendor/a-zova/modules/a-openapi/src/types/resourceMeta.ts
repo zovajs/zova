@@ -30,8 +30,6 @@ export interface IOpenapiOptionsResourceMetaProvider {
 }
 
 export interface IOpenapiOptionsResourceMetaProviderComponents {
-  RestPage?: TypeComponentRecordSelectorKeysStrict<'restPage'>;
-  RestPageEntry?: TypeComponentRecordSelectorKeysStrict<'restPageEntry'>;
   Table?: TypeComponentRecordSelectorKeysStrict<'table'>;
   Form?: TypeComponentRecordSelectorKeysStrict<'form'>;
   BlockPageEntry?: TypeComponentRecordSelectorKeys<'block'>;

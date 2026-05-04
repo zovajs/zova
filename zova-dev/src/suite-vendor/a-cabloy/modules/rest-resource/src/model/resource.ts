@@ -177,14 +177,6 @@ export class ModelResource<Entity = any, EntityCreate = Partial<Entity>, EntityU
     return this.$sdk.createApiSchemas(`${this.resourceApi}/:id`, 'patch');
   }
 
-  public get componentRestPage() {
-    return this.resourceMeta.provider!.components!.RestPage!;
-  }
-
-  public get componentRestPageEntry() {
-    return this.resourceMeta.provider!.components!.RestPageEntry!;
-  }
-
   public get componentTable() {
     return this.resourceMeta.provider!.components!.Table!;
   }

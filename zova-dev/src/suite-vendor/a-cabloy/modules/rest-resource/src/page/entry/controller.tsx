@@ -10,7 +10,7 @@ import { celEnvBase, isNil } from '@cabloy/utils';
 import { SchemaObject } from 'openapi3-ts/oas31';
 import { VNode } from 'vue';
 import { z } from 'zod';
-import { BeanControllerPageBase, deepExtend, Use, useCustomRef, usePrepareArg } from 'zova';
+import { BeanControllerPageBase, deepExtend, Use, usePrepareArg } from 'zova';
 import { ZovaJsx } from 'zova-jsx';
 import { Controller } from 'zova-module-a-bean';
 import { formMetaFromFormScene, IFormProvider } from 'zova-module-a-form';
@@ -64,30 +64,9 @@ export class ControllerPageEntry extends BeanControllerPageBase {
       return this.$$modelResource.formProvider;
     });
     // jsx
-    this.pageEntryWrapperCelEnv = this._getPageEntryWrapperCelEnv();
-    this.zovaJsx = this.app.bean._newBeanSimple(ZovaJsx, false, this.formProvider.components, this.formProvider.actions, this.pageEntryWrapperCelEnv);
-    this.pageEntryWrapperScope = this._getPageEntryWrapperScope();
-    this.jsxRenderContext = this._getJsxRenderContextPageEntryWrapper(this.pageEntryWrapperScope);
+
     // load schema
     await $QueriesAutoLoad(() => this.$$modelResource.getFormApiSchemas(this.formMeta)?.sdk);
-  }
-
-  private _getPageEntryWrapperScope(): IPageEntryWrapperScope {
-    // eslint-disable-next-line
-    const self = this;
-    const permissions = useCustomRef(() => {
-      return {
-        get() {
-          return self.$$modelResource.permissions;
-        },
-        set(_value) {},
-      };
-    }) as any;
-    return {
-      resource: this.$params.resource,
-      id: this.entryId,
-      permissions,
-    };
   }
 
   private _getPageEntryWrapperCelEnv(): typeof celEnvBase {
@@ -123,7 +102,7 @@ export class ControllerPageEntry extends BeanControllerPageBase {
         } satisfies IResourceBlockOptionsPageEntry,
         block.options,
       );
-      const domBlock = this.zovaJsx.render(block.render!, options, celScope, jsxRenderContext);
+      const domBlock = this.zovaJsx.render(block.render!, options);
       if (!domBlock) return;
       if (Array.isArray(domBlock)) {
         domBlocks.push(...domBlock);
@@ -132,13 +111,5 @@ export class ControllerPageEntry extends BeanControllerPageBase {
       }
     });
     return <div>{domBlocks}</div>;
-    // const componentRestPageEntry = this.$$modelResource.componentRestPageEntry;
-    // if (!componentRestPageEntry) {
-    //   return <ZPage>not found componentRestPageEntry</ZPage>;
-    // }
-    // const celScope = this.pageEntryWrapperScope;
-    // const jsxRenderContext = this.getJsxRenderContextPageEntryWrapper(celScope);
-    // const domRestPageEntry = this.zovaJsx.render(componentRestPageEntry, {}, celScope, jsxRenderContext);
-    // return <ZPage>{domRestPageEntry}</ZPage>;
   }
 }

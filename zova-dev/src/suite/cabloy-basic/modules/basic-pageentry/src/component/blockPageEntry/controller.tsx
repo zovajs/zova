@@ -1,10 +1,18 @@
-import type { IFormMeta, IResourceBlockOptionsPageEntry, TypeFormScene, TypeFormSchemaScene } from 'zova-module-a-openapi';
+import type {
+  IFormMeta,
+  IJsxRenderContextPageEntry,
+  IPageEntryScope,
+  IResourceBlockOptionsPageEntry,
+  TypeFormScene,
+  TypeFormSchemaScene,
+} from 'zova-module-a-openapi';
 
-import { isNil } from '@cabloy/utils';
+import { celEnvBase, isNil } from '@cabloy/utils';
 import { SchemaObject } from 'openapi3-ts/oas31';
-import { BeanControllerBase, deepEqual, IComponentOptions } from 'zova';
+import { BeanControllerBase, deepEqual, IComponentOptions, useCustomRef } from 'zova';
+import { ZovaJsx } from 'zova-jsx';
 import { Controller } from 'zova-module-a-bean';
-import { ControllerForm, formMetaFromFormScene, IFormProvider } from 'zova-module-a-form';
+import { ControllerForm, formMetaFromFormScene, IFormProvider, TypeFormOnSubmitData } from 'zova-module-a-form';
 import { $QueriesAutoLoad } from 'zova-module-a-model';
 import { ModelResource } from 'zova-module-rest-resource';
 
@@ -21,6 +29,11 @@ export class ControllerBlockPageEntry<TData extends {} = {}> extends BeanControl
   formSchema?: SchemaObject;
   formProvider: IFormProvider;
   formData?: TData;
+
+  jsxCelEnv: typeof celEnvBase;
+  jsxZova: ZovaJsx;
+  jsxCelScope: IPageEntryScope;
+  jsxRenderContext: IJsxRenderContextPageEntry;
 
   $$modelResource: ModelResource<TData>;
 
@@ -39,7 +52,8 @@ export class ControllerBlockPageEntry<TData extends {} = {}> extends BeanControl
     this.formData = this.$useComputed(() => {
       return this.$$modelResource.getFormData(this.formMeta, this.entryId) as TData | undefined;
     });
-
+    // jsx
+    this._prepareJsx();
     // load schema/data
     await $QueriesAutoLoad(
       () => this.$$modelResource.getFormApiSchemas(this.formMeta)?.sdk,
@@ -73,33 +87,46 @@ export class ControllerBlockPageEntry<TData extends {} = {}> extends BeanControl
     return 'form';
   }
 
-  get pageEntryScope(): IPageEntryScope {
-    return this.$$pageEntryWrapper.pageEntryWrapperScope;
+  get queryData() {
+    if (isNil(this.entryId)) return;
+    return this.$$modelResource.view(this.entryId);
   }
 
-  get zovaJsx() {
-    return this.$$pageEntryWrapper.zovaJsx;
-  }
-
-  get pageEntryCelEnv(): typeof celEnvBase {
-    return this.$$pageEntryWrapper.pageEntryWrapperCelEnv;
-  }
-
-  public getJsxRenderContextPageEntry(celScope: IPageEntryScope): IJsxRenderContextPageEntry<TData> {
-    return {
+  private _prepareJsx() {
+    this.jsxCelEnv = celEnvBase.clone();
+    this.jsxZova = this.app.bean._newBeanSimple(ZovaJsx, false, this.formProvider.components, this.formProvider.actions, this.jsxCelEnv);
+    this.jsxCelScope = this._prepareJsxCelScope();
+    this.jsxRenderContext = {
       app: this.app,
       ctx: this.ctx,
       $scene: 'pageEntry',
       $host: this,
-      $celScope: celScope,
-      $jsx: this.zovaJsx,
+      $celScope: this.jsxCelScope,
+      $jsx: this.jsxZova,
       $$pageEntry: this,
     };
   }
 
-  get queryData() {
-    if (isNil(this.entryId)) return;
-    return this.$$modelResource.view(this.entryId);
+  private _prepareJsxCelScope(): IPageEntryScope {
+    // eslint-disable-next-line
+    const self = this;
+    const permissions = useCustomRef(() => {
+      return {
+        get() {
+          return self.$$modelResource.permissions;
+        },
+        set(_value) {},
+      };
+    }) as any;
+    return {
+      resource: this.resource,
+      id: this.entryId,
+      permissions,
+    };
+  }
+
+  private _prepareJsxRenderContext() {
+    return;
   }
 
   async onSubmit(data: TypeFormOnSubmitData<TData>) {
