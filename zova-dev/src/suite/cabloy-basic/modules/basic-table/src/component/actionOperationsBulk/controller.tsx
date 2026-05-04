@@ -1,8 +1,9 @@
-import type { IJsxRenderContextPage, IResourceActionBulkOptionsOperationsBulk } from 'zova-module-a-openapi';
+import type { IJsxRenderContextPage } from 'zova-module-a-openapi';
 
 import { VNode } from 'vue';
 import { BeanControllerBase, IComponentOptions, Use } from 'zova';
 import { Controller } from 'zova-module-a-bean';
+import { IResourceActionBulkOptionsOperationsBulk } from 'zova-module-basic-openapi';
 
 export interface ControllerActionOperationsBulkProps extends IResourceActionBulkOptionsOperationsBulk {}
 

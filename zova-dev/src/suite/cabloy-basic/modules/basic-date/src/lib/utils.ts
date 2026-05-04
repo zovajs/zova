@@ -1,7 +1,8 @@
 import { DateTime } from 'luxon';
-import { IDateOptions } from 'zova-module-basic-openapi';
 
-export function dateFormatUtil(value: any, options?: IDateOptions) {
+import { ITableCellOptionsDate } from '../bean/tableCell.date.jsx';
+
+export function dateFormatUtil(value: any, options?: ITableCellOptionsDate) {
   if (!value) return;
   if (!options) return value;
   const datetime = DateTime.fromJSDate(value);

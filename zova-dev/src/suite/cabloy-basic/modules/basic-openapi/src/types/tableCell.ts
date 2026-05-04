@@ -1,3 +1,4 @@
+import { CurrencyOptions } from '@zhennann/currency';
 import { IResourceTableCellOptionsBase } from 'zova-module-a-openapi';
 
 export type TypeDateFormatPreset =
@@ -29,11 +30,13 @@ export interface IResourceTableCellOptionsDate extends IResourceTableCellOptions
   format?: string;
 }
 
+export interface IResourceTableCellOptionsCurrency extends IResourceTableCellOptionsBase, CurrencyOptions {}
+
 declare module 'zova-module-a-openapi' {
   export interface IResourceComponentTableCellRecord {
     // Input?: IInputOptions;
     // Captcha?: ICaptchaOptions;
-    // Currency?: CurrencyOptions;
+    Currency?: IResourceTableCellOptionsCurrency;
     Date?: IResourceTableCellOptionsDate;
     // DateRange?: IDateRangeOptions;
     // Toggle?: IToggleOptions;

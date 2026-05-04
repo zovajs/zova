@@ -1,4 +1,5 @@
 import { TableIdentity } from 'table-identity';
+import { types } from 'typestyle';
 import { TypeRenderComponentJsx } from 'zova-jsx';
 
 import type { TypeFormScene } from './formMeta.ts';
@@ -11,13 +12,9 @@ export interface IResourceActionRowRecord {}
 
 export interface IResourceActionTableRecord extends IResourceActionBulkRecord, IResourceActionRowRecord {}
 
-export type IResourceComponentActionBulkRecord = {
-  [key in keyof IResourceActionBulkRecord as `Action${Capitalize<key>}`]: IResourceActionBulkRecord[key];
-};
+export interface IResourceComponentActionBulkRecord {}
 
-export type IResourceComponentActionRowRecord = {
-  [key in keyof IResourceActionRowRecord as `Action${Capitalize<key>}`]: IResourceActionRowRecord[key];
-};
+export interface IResourceComponentActionRowRecord {}
 
 export interface IResourceComponentActionTableRecord extends IResourceComponentActionBulkRecord, IResourceComponentActionRowRecord {}
 
@@ -38,6 +35,7 @@ export interface IResourceActionBulkOptionsBase {
 
 export interface IResourceActionRowOptionsBase {
   class?: any;
+  style?: types.NestedCSSProperties;
   resource?: string;
   id?: TableIdentity;
   permission?: {
@@ -45,25 +43,6 @@ export interface IResourceActionRowOptionsBase {
     public?: boolean;
     formScene?: TypeFormScene | TypeFormScene[];
   };
-}
-
-export interface IResourceActionBulkOptionsCreate extends IResourceActionBulkOptionsBase {}
-
-export interface IResourceActionRowOptionsView extends IResourceActionRowOptionsBase {}
-
-export interface IResourceActionRowOptionsUpdate extends IResourceActionRowOptionsBase {}
-
-export interface IResourceActionRowOptionsDelete extends IResourceActionRowOptionsBase {}
-
-export interface IResourceActionRowOptionsSubmit extends IResourceActionRowOptionsBase {}
-export interface IResourceActionRowOptionsBack extends IResourceActionRowOptionsBase {}
-
-export interface IResourceActionBulkOptionsOperationsBulk extends IResourceActionBulkOptionsBase {
-  actions?: IResourceComponentActionBulkOptionsAction[];
-}
-
-export interface IResourceActionRowOptionsOperationsRow extends IResourceActionRowOptionsBase {
-  actions?: IResourceComponentActionRowOptionsAction[];
 }
 
 export interface IResourceComponentActionBulkOptionsAction {

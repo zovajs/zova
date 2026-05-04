@@ -1,7 +1,8 @@
 import { VNode } from 'vue';
 import { BeanBase } from 'zova';
-import { IResourceActionRowOptionsOperationsRow, TypeTableCellRenderComponent } from 'zova-module-a-openapi';
+import { TypeTableCellRenderComponent } from 'zova-module-a-openapi';
 import { IJsxRenderContextTableCell, IJsxRenderContextTableColumn, ITableCellRender, NextTableCellRender, TableCell } from 'zova-module-a-table';
+import { IResourceActionRowOptionsOperationsRow } from 'zova-module-basic-openapi';
 
 export interface ITableCellOptionsActionOperationsRow extends IResourceActionRowOptionsOperationsRow {}
 
