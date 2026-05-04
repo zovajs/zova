@@ -7,11 +7,11 @@ declare module 'zova' {
   
   
 }
-declare module 'zova-module-a-currency' {
+declare module 'zova-module-basic-currency' {
   
         export interface ControllerFormFieldCurrency {
           /** @internal */
-          get scope(): ScopeModuleACurrency;
+          get scope(): ScopeModuleBasicCurrency;
         } 
 }
 /** controller: end */
@@ -20,7 +20,7 @@ import { ControllerFormFieldCurrency } from '../component/formFieldCurrency/cont
 import 'zova';
 declare module 'zova' {
   export interface IBeanRecordLocal {
-    'a-currency.controller.formFieldCurrency': ControllerFormFieldCurrency;
+    'basic-currency.controller.formFieldCurrency': ControllerFormFieldCurrency;
   }
 }
 /** controller: end */
@@ -34,10 +34,10 @@ export const components = {
 import 'zova';
 declare module 'zova' {
 export interface IComponentRecord {
-  'a-currency:formFieldCurrency': ControllerFormFieldCurrency;
+  'basic-currency:formFieldCurrency': ControllerFormFieldCurrency;
 }
 export interface IZovaComponentRecord {
-  'a-currency:formFieldCurrency': typeof ZFormFieldCurrency;
+  'basic-currency:formFieldCurrency': typeof ZFormFieldCurrency;
 }
 }
 /** components: end */
@@ -48,21 +48,21 @@ import 'zova-module-a-table';
 declare module 'zova-module-a-table' {
   
     export interface ITableCellRecord {
-      'a-currency:currency': ITableCellOptionsCurrency;
+      'basic-currency:currency': ITableCellOptionsCurrency;
     }
 
   
 }
-declare module 'zova-module-a-currency' {
+declare module 'zova-module-basic-currency' {
   
         export interface TableCellCurrency {
           /** @internal */
-          get scope(): ScopeModuleACurrency;
+          get scope(): ScopeModuleBasicCurrency;
         }
 
         export interface TableCellCurrency {
-          get $beanFullName(): 'a-currency.tableCell.currency';
-          get $onionName(): 'a-currency:currency';
+          get $beanFullName(): 'basic-currency.tableCell.currency';
+          get $onionName(): 'basic-currency:currency';
           get $onionOptions(): ITableCellOptionsCurrency;
         } 
 }
@@ -72,7 +72,7 @@ import { TableCellCurrency } from '../bean/tableCell.currency.jsx';
 import 'zova';
 declare module 'zova' {
   export interface IBeanRecordGeneral {
-    'a-currency.tableCell.currency': TableCellCurrency;
+    'basic-currency.tableCell.currency': TableCellCurrency;
   }
 }
 /** tableCell: end */
@@ -81,16 +81,16 @@ import { BeanScopeBase, type BeanScopeUtil } from 'zova';
 import { Scope } from 'zova-module-a-bean';
 
 @Scope()
-export class ScopeModuleACurrency extends BeanScopeBase {}
+export class ScopeModuleBasicCurrency extends BeanScopeBase {}
 
-export interface ScopeModuleACurrency {
+export interface ScopeModuleBasicCurrency {
   util: BeanScopeUtil;
 }
 
 import 'zova';
 declare module 'zova' {
   export interface IBeanScopeRecord {
-    'a-currency': ScopeModuleACurrency;
+    'basic-currency': ScopeModuleBasicCurrency;
   }
   
   

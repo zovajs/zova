@@ -19,18 +19,13 @@ export const config = (_sys: ZovaSys) => {
           components: {
             FormField: 'a-form:formField',
             Input: 'input',
-            Currency: 'a-currency:formFieldCurrency',
-            Date: 'a-date:formFieldDate',
           },
           behaviors: {},
         },
       },
       table: {
         provider: {
-          components: {
-            Currency: 'a-currency.tableCell.currency',
-            Date: 'a-date.tableCell.date',
-          },
+          components: {},
           actions: {},
         },
       },

@@ -30,6 +30,8 @@ export class MonkeySys extends BeanSimple implements IMonkeySysInitialize {
             Input: 'basic-input:formFieldInput',
             Captcha: 'basic-captcha:formFieldCaptcha',
             DateRange: 'basic-date:formFieldDateRange',
+            Currency: 'basic-currency:formFieldCurrency',
+            Date: 'basic-date:formFieldDate',
           },
           behaviors: {
             FormField: 'basic-form:formField',
@@ -46,6 +48,8 @@ export class MonkeySys extends BeanSimple implements IMonkeySysInitialize {
             ActionView: 'basic-table.tableCell.actionView',
             ActionUpdate: 'basic-table.tableCell.actionUpdate',
             ActionDelete: 'basic-table.tableCell.actionDelete',
+            Currency: 'basic-currency.tableCell.currency',
+            Date: 'basic-date.tableCell.date',
           },
         },
       },

@@ -14,7 +14,7 @@ type ControllerInnerProps = TypeControllerInnerProps<
   ControllerFormFieldCurrencyProps,
   keyof typeof ControllerFormFieldCurrency.$propsDefault
 >;
-declare module 'zova-module-a-currency' {
+declare module 'zova-module-basic-currency' {
   export interface ControllerFormFieldCurrency {
     $props: ControllerInnerProps;
   }

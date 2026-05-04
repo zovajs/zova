@@ -8,6 +8,7 @@
   "dependencies": {
     "zova-module-basic-adapter": "workspace:^",
     "zova-module-basic-captcha": "^5.0.0",
+    "zova-module-basic-currency": "workspace:^",
     "zova-module-basic-date": "workspace:^",
     "zova-module-basic-form": "workspace:^",
     "zova-module-basic-input": "^5.0.0",
