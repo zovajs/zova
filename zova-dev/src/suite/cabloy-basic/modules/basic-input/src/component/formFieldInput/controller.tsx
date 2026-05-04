@@ -1,6 +1,6 @@
 import type { IComponentOptions } from 'zova';
 
-import { pickObject } from '@cabloy/utils';
+import { omitObject, pickObject } from '@cabloy/utils';
 import { classes } from 'typestyle';
 import { BeanControllerBase } from 'zova';
 import { Controller } from 'zova-module-a-bean';
@@ -35,7 +35,7 @@ export class ControllerFormFieldInput extends BeanControllerBase {
             },
             ...props,
             ...pickObject(propsBucket, ['value']),
-            ...propsBucket.preset?.Input,
+            ...omitObject(propsBucket.preset?.Input, ['style']),
             class: className,
           };
           return <input {...propsNew}></input>;
