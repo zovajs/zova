@@ -2,6 +2,7 @@ import type { IFormMeta, IJsxRenderContextPageEntry, IPageEntryScope, TypeFormSc
 
 import { celEnvBase, isNil } from '@cabloy/utils';
 import { SchemaObject } from 'openapi3-ts/oas31';
+import { classes } from 'typestyle';
 import { BeanControllerBase, deepEqual, IComponentOptions, useCustomRef } from 'zova';
 import { ZovaJsx } from 'zova-jsx';
 import { Controller } from 'zova-module-a-bean';
@@ -136,6 +137,6 @@ export class ControllerBlockPageEntry<TData extends {} = {}> extends BeanControl
     }
     console.log(this.$props);
     console.log(this.$style(undefined));
-    return null;
+    return <div class={classes(this.$props.class, this.$style(this.$props.style))}>sssss</div>;
   }
 }
