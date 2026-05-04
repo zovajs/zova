@@ -15,9 +15,12 @@ export interface IResourceBlockOptionsPageEntry extends IResourceBlockOptionsBas
   formScene?: TypeFormScene;
 }
 
+export interface IResourceBlockOptionsToolbarRow extends IResourceBlockOptionsBase {}
+
 declare module 'zova-module-a-openapi' {
   export interface IResourceComponentBlockRecord {
     BlockPage?: IResourceBlockOptionsPage;
     BlockPageEntry?: IResourceBlockOptionsPageEntry;
+    BlockToolbarRow?: IResourceBlockOptionsToolbarRow;
   }
 }

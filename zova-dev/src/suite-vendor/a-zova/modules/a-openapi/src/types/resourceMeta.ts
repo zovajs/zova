@@ -32,5 +32,7 @@ export interface IOpenapiOptionsResourceMetaProvider {
 export interface IOpenapiOptionsResourceMetaProviderComponents {
   Table?: TypeComponentRecordSelectorKeysStrict<'table'>;
   Form?: TypeComponentRecordSelectorKeysStrict<'form'>;
+  BlockPage?: TypeComponentRecordSelectorKeys<'block'>;
   BlockPageEntry?: TypeComponentRecordSelectorKeys<'block'>;
+  BlockToolbarRow?: TypeComponentRecordSelectorKeys<'block'>;
 }

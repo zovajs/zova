@@ -7,9 +7,10 @@ import { z } from 'zod';
 import { BeanControllerPageBase, deepExtend, Use, usePrepareArg } from 'zova';
 import { ZovaJsx } from 'zova-jsx';
 import { Controller } from 'zova-module-a-bean';
-import { formMetaFromFormScene } from 'zova-module-a-form';
+import { formMetaFromFormScene, IFormProvider } from 'zova-module-a-form';
 import { $QueryAutoLoad } from 'zova-module-a-model';
 import { IResourceBlockOptionsPageEntry } from 'zova-module-basic-openapi';
+import { ZPage } from 'zova-module-home-base';
 
 import type { ModelResource } from '../../model/resource.js';
 
@@ -22,6 +23,7 @@ export const ControllerPageEntrySchemaParams = z.object({
 @Controller()
 export class ControllerPageEntry extends BeanControllerPageBase {
   formMeta: IFormMeta;
+  formProvider: IFormProvider;
   formSchema?: SchemaObject;
   jsxZova: ZovaJsx;
 
@@ -47,6 +49,9 @@ export class ControllerPageEntry extends BeanControllerPageBase {
       const formScene = this.formScene;
       return { ...formMetaFromFormScene(formScene), formScene };
     });
+    this.formProvider = this.$useComputed(() => {
+      return this.$$modelResource.formProvider;
+    });
     this.formSchema = this.$useComputed(() => {
       return this.$$modelResource.getFormSchema(this.formMeta);
     });
@@ -57,7 +62,7 @@ export class ControllerPageEntry extends BeanControllerPageBase {
   }
 
   private _prepareJsx() {
-    this.jsxZova = this.app.bean._newBeanSimple(ZovaJsx, false);
+    this.jsxZova = this.app.bean._newBeanSimple(ZovaJsx, false, this.formProvider.components, this.formProvider.actions);
   }
 
   protected render() {
@@ -82,6 +87,6 @@ export class ControllerPageEntry extends BeanControllerPageBase {
         domBlocks.push(domBlock);
       }
     });
-    return <div>{domBlocks}</div>;
+    return <ZPage>{domBlocks}</ZPage>;
   }
 }
