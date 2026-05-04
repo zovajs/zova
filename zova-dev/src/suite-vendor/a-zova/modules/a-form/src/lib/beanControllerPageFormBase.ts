@@ -1,16 +1,23 @@
-import type {
-  FormApi,
-  FormAsyncValidateOrFn,
-  FormOptions,
-  FormValidateOrFn,
-  VueFormApi,
-} from '@tanstack/vue-form';
+import type { FormApi, FormAsyncValidateOrFn, FormOptions, FormValidateOrFn, VueFormApi } from '@tanstack/vue-form';
 
 import { useForm } from '@tanstack/vue-form';
 import { markRaw } from 'vue';
 import { BeanControllerPageBase } from 'zova';
 
-export class BeanControllerPageFormBase extends BeanControllerPageBase {
+import { TypeForm } from '../types/form.js';
+
+export class BeanControllerPageFormBase<TFormData extends {} = {}, TSubmitMeta = never> extends BeanControllerPageBase {
+  form: TypeForm<TFormData, TSubmitMeta>;
+  formState: TypeForm<TFormData>['state'];
+
+  public async submit(_submitMeta?: TSubmitMeta): Promise<boolean> {
+    throw new Error('should implement submit');
+  }
+
+  public reset(_values?: TFormData, _opts?: { keepDefaultValues?: boolean }): TFormData {
+    throw new Error('should implement reset');
+  }
+
   public $useForm<
     TParentData,
     TFormOnMount extends undefined | FormValidateOrFn<TParentData>,

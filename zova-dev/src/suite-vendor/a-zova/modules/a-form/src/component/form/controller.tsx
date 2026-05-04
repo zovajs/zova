@@ -29,7 +29,7 @@ import {
 } from 'zova-module-a-openapi';
 
 import { BeanControllerFormBase } from '../../lib/beanControllerFormBase.js';
-import { IFormScope, RevalidateLogicProps, TypeForm, TypeFormOnShowError, TypeFormOnSubmit, TypeFormOnSubmitInvalid } from '../../types/form.js';
+import { IFormScope, RevalidateLogicProps, TypeFormOnShowError, TypeFormOnSubmit, TypeFormOnSubmitInvalid } from '../../types/form.js';
 import {
   constFieldProps,
   IFormFieldOptions,
@@ -65,11 +65,9 @@ export interface ControllerFormProps<TFormData extends {} = {}, TSubmitMeta = ne
   slotWrapper?: (children: (VNode | undefined)[], form: ControllerForm<TFormData, TSubmitMeta>) => VNode;
 }
 @Controller()
-export class ControllerForm<TFormData extends {} = {}, TSubmitMeta = never> extends BeanControllerFormBase {
+export class ControllerForm<TFormData extends {} = {}, TSubmitMeta = never> extends BeanControllerFormBase<TFormData, TSubmitMeta> {
   static $propsDefault = { formTag: 'form', schemaScene: 'form' };
 
-  form: TypeForm<TFormData, TSubmitMeta>;
-  formState: TypeForm<TFormData>['state'];
   formProvider: IFormProvider;
   schema: SchemaObject | undefined;
   zodSchema: z.ZodObject<any> | undefined;

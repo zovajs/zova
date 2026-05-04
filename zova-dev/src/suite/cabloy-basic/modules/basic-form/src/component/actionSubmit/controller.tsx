@@ -3,7 +3,7 @@ import type { IJsxRenderContextPageEntry } from 'zova-module-a-openapi';
 import { classes } from 'typestyle';
 import { BeanControllerBase, IComponentOptions, Use } from 'zova';
 import { Controller } from 'zova-module-a-bean';
-import { ControllerForm } from 'zova-module-a-form';
+import { BeanControllerFormBase } from 'zova-module-a-form';
 import { IResourceActionRowOptionsSubmit } from 'zova-module-basic-openapi';
 
 export interface ControllerActionSubmitProps extends IResourceActionRowOptionsSubmit {}
@@ -20,8 +20,8 @@ export class ControllerActionSubmit extends BeanControllerBase {
 
   protected render() {
     const { $$pageEntry } = this.$$renderContext;
-    const controllerForm: ControllerForm = $$pageEntry.controllerForm;
-    const isSubmitting = controllerForm?.formState.isSubmitting;
+    const formInstance: BeanControllerFormBase = $$pageEntry.formInstance;
+    const isSubmitting = formInstance?.formState.isSubmitting;
     const className = classes(this.$props.class, this.$style(this.$props.style));
     return (
       <>
@@ -29,7 +29,7 @@ export class ControllerActionSubmit extends BeanControllerBase {
         <button
           class={classes(className, isSubmitting && 'btn-disabled')}
           onClick={async () => {
-            const res = await controllerForm.submit();
+            const res = await formInstance.submit();
             if (res) {
               this.$router.back();
             }

@@ -1,10 +1,9 @@
 import type { ControllerPageResource, ModelResource } from 'zova-module-rest-resource';
 
-import { celEnvBase } from '@cabloy/utils';
 import { BeanControllerBase, deepEqual, Use } from 'zova';
 import { Controller } from 'zova-module-a-bean';
 import { $QueriesAutoLoad } from 'zova-module-a-model';
-import { IJsxRenderContextPage, IPageScope, ITablePaged, ITableQuery, ITableResPaged } from 'zova-module-a-openapi';
+import { ITablePaged, ITableQuery, ITableResPaged } from 'zova-module-a-openapi';
 import { BeanControllerTableBase } from 'zova-module-a-table';
 
 // @ts-ignore ignore
@@ -56,33 +55,33 @@ export class ControllerRestPage<TData extends {} = {}> extends BeanControllerBas
     return this.$$pageWrapper.resource;
   }
 
-  get tableProvider() {
-    return this.$$pageWrapper.tableProvider;
-  }
+  // get tableProvider() {
+  //   return this.$$pageWrapper.tableProvider;
+  // }
 
-  get pageScope(): IPageScope {
-    return this.$$pageWrapper.pageWrapperScope;
-  }
+  // get pageScope(): IPageScope {
+  //   return this.$$pageWrapper.pageWrapperScope;
+  // }
 
-  get zovaJsx() {
-    return this.$$pageWrapper.zovaJsx;
-  }
+  // get zovaJsx() {
+  //   return this.$$pageWrapper.zovaJsx;
+  // }
 
-  get pageCelEnv(): typeof celEnvBase {
-    return this.$$pageWrapper.pageWrapperCelEnv;
-  }
+  // get pageCelEnv(): typeof celEnvBase {
+  //   return this.$$pageWrapper.pageWrapperCelEnv;
+  // }
 
-  public getJsxRenderContextPage(celScope: IPageScope): IJsxRenderContextPage<TData> {
-    return {
-      app: this.app,
-      ctx: this.ctx,
-      $scene: 'page',
-      $host: this,
-      $celScope: celScope,
-      $jsx: this.zovaJsx,
-      $$page: this,
-    };
-  }
+  // public getJsxRenderContextPage(celScope: IPageScope): IJsxRenderContextPage<TData> {
+  //   return {
+  //     app: this.app,
+  //     ctx: this.ctx,
+  //     $scene: 'page',
+  //     $host: this,
+  //     $celScope: celScope,
+  //     $jsx: this.zovaJsx,
+  //     $$page: this,
+  //   };
+  // }
 
   get queryData() {
     return this.$$modelResource.select(this.query);

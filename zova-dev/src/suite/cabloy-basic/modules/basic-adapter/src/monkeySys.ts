@@ -9,8 +9,6 @@ export class MonkeySys extends BeanSimple implements IMonkeySysInitialize {
     const configCustom: IOpenapiOptionsResourceMeta = {
       provider: {
         components: {
-          RestPage: 'basic-restpage:restPage',
-          RestPageEntry: 'basic-restpage:restPageEntry',
           Table: 'basic-table:table',
           BlockPageEntry: 'basic-pageentry:blockPageEntry',
         },

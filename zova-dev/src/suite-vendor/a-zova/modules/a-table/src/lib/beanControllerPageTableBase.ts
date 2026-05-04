@@ -6,11 +6,13 @@ import { markRaw } from 'vue';
 import { BeanControllerPageBase } from 'zova';
 
 export class BeanControllerPageTableBase extends BeanControllerPageBase {
-  public $useTable<TData extends RowData>(
-    initialOptions: TableOptionsWithReactiveData<TData>,
-  ): Table<TData> {
+  public $useTable<TData extends RowData>(initialOptions: TableOptionsWithReactiveData<TData>): Table<TData> {
     return this.ctx.util.instanceScope(() => {
       return markRaw(useVueTable(initialOptions));
     });
+  }
+
+  public async refreshMeta() {
+    throw new Error('should implement refreshMeta');
   }
 }
