@@ -43,7 +43,7 @@ export class RenderPageLogin extends BeanRenderBase {
         schema={this.schema}
         formProvider={{ behaviors: { FormFieldLayout: 'home-login:formFieldLayoutLogin' } }}
         onSubmitData={data => {
-          return this.onSubmitLogin(data);
+          return this.submitLogin(data);
         }}
         onShowError={({ error }) => {
           // eslint-disable-next-line no-alert
@@ -82,7 +82,7 @@ export class RenderPageLogin extends BeanRenderBase {
       <button
         class="btn mt-2 w-full btn-default"
         onClick={() => {
-          this.onSubmitLoginGitHub();
+          this.loginGitHub();
         }}
       >
         <ZIcon name=":auth:github" width={24}></ZIcon>

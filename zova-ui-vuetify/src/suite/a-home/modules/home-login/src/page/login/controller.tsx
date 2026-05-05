@@ -27,11 +27,11 @@ export class ControllerPageLogin extends BeanControllerPageBase {
     return this.$passport.schemaLogin;
   }
 
-  async onSubmitLogin(data: TypeFormOnSubmitData<ApiApiHomeUserPassportloginRequestBody>) {
+  async submitLogin(data: TypeFormOnSubmitData<ApiApiHomeUserPassportloginRequestBody>) {
     await this.$passport.login().mutateAsync(data.value);
   }
 
-  async onSubmitLoginGitHub() {
+  async loginGitHub() {
     const apiUrl = this.$passport.getOauthLoginUrl('auth-github', 'github', 'default');
     window.location.assign(apiUrl);
   }

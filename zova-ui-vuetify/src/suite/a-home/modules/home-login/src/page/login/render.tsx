@@ -60,7 +60,7 @@ export class RenderPageLogin extends BeanRenderBase {
         data={this.user}
         schema={this.schema}
         onSubmitData={data => {
-          return this.onSubmitLogin(data);
+          return this.submitLogin(data);
         }}
         onShowError={({ error }) => {
           // eslint-disable-next-line no-alert
@@ -92,7 +92,7 @@ export class RenderPageLogin extends BeanRenderBase {
           color="secondary"
           prependIcon={$iconName(':auth:github')}
           nativeOnClick={() => {
-            this.onSubmitLoginGitHub();
+            this.loginGitHub();
           }}
         >
           {this.scope.locale.LoginGitHub()}
