@@ -35,6 +35,7 @@ export interface IOpenapiOptionsResourceMetaProviderComponents {
   BlockFilter?: TypeComponentRecordSelectorKeys<'block'>;
   BlockToolbarBulk?: TypeComponentRecordSelectorKeys<'block'>;
   BlockTable?: TypeComponentRecordSelectorKeys<'block'>;
+  BlockPager?: TypeComponentRecordSelectorKeys<'block'>;
   BlockPageEntry?: TypeComponentRecordSelectorKeys<'block'>;
   BlockToolbarRow?: TypeComponentRecordSelectorKeys<'block'>;
   BlockForm?: TypeComponentRecordSelectorKeys<'block'>;
