@@ -12,8 +12,6 @@ export interface IResourceTableCellOptionsCurrency extends IResourceTableCellOpt
 
 declare module 'zova-module-a-openapi' {
   export interface IResourceComponentTableCellRecord {
-    // Input?: IInputOptions;
-    // Captcha?: ICaptchaOptions;
     Currency?: IResourceTableCellOptionsCurrency;
     Date?: IResourceTableCellOptionsDate;
     // DateRange?: IDateRangeOptions;
