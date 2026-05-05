@@ -1,3 +1,4 @@
+import { throwErrorComponentUnmounted } from '../core/sys/util.ts';
 import { cast } from '../types/utils/cast.ts';
 import { BeanBase } from './beanBase.ts';
 import { BeanControllerIdentifier } from './type.ts';
@@ -7,9 +8,7 @@ const SymbolController = Symbol('SymbolController');
 export class BeanControllerLike extends BeanBase {
   protected get [SymbolController](): unknown | undefined {
     if (!this.bean) {
-      const error = new Error();
-      error.code = 600;
-      throw error;
+      throwErrorComponentUnmounted();
     }
     return this.bean._getBeanSyncOnly(BeanControllerIdentifier);
   }

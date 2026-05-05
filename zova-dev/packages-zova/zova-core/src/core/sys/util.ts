@@ -1,9 +1,5 @@
 import { extend } from '@cabloy/extend';
-import {
-  combineApiPathControllerAndAction,
-  defaultPathSerializer,
-  isEmptyObject,
-} from '@cabloy/utils';
+import { combineApiPathControllerAndAction, defaultPathSerializer, isEmptyObject } from '@cabloy/utils';
 import DeepEqual from 'deep-equal';
 import { isReactive, reactive } from 'vue';
 
@@ -62,21 +58,13 @@ export class SysUtil extends BeanSimple {
 
   getOpenApiBaseURL(envName: string): string {
     if (process.env.CLIENT) {
-      return (
-        this.sys.env[envName] || this.sys.env.OPENAPI_BASE_URL_DEFAULT || this.sys.env.API_BASE_URL
-      );
+      return this.sys.env[envName] || this.sys.env.OPENAPI_BASE_URL_DEFAULT || this.sys.env.API_BASE_URL;
     } else {
-      return (
-        this.sys.env[envName] ||
-        this.sys.env.OPENAPI_BASE_URL_DEFAULT ||
-        this.sys.env.SSR_API_BASE_URL
-      );
+      return this.sys.env[envName] || this.sys.env.OPENAPI_BASE_URL_DEFAULT || this.sys.env.SSR_API_BASE_URL;
     }
   }
 
-  getApiPath<K extends string | undefined = string | undefined>(
-    path: K,
-  ): K extends string ? string : undefined {
+  getApiPath<K extends string | undefined = string | undefined>(path: K): K extends string ? string : undefined {
     if (!path) return path as any;
     if (path.startsWith('//')) {
       path = path.substring(1) as any;
@@ -90,11 +78,7 @@ export class SysUtil extends BeanSimple {
     return defaultPathSerializer(pathName, pathParams);
   }
 
-  apiActionConfigPrepare(
-    baseURL?: string,
-    options?: IApiActionConfigPrepareOptions,
-    authToken?: TypeAuthToken,
-  ) {
+  apiActionConfigPrepare(baseURL?: string, options?: IApiActionConfigPrepareOptions, authToken?: TypeAuthToken) {
     // custom
     const optionsCustom: any = {
       params: options?.query,
@@ -123,9 +107,7 @@ export class SysUtil extends BeanSimple {
     );
   }
 
-  getModuleConfigSafe<K extends TypeBeanScopeRecordKeys>(
-    moduleName: K,
-  ): IBeanScopeRecord[K] extends { config?: infer CONFIG } ? CONFIG : undefined {
+  getModuleConfigSafe<K extends TypeBeanScopeRecordKeys>(moduleName: K): IBeanScopeRecord[K] extends { config?: infer CONFIG } ? CONFIG : undefined {
     const module = this.sys.meta.module.get(moduleName);
     if (module) {
       const scope = this.sys.bean.scope(moduleName);
@@ -146,17 +128,7 @@ export class SysUtil extends BeanSimple {
 
   parseResourceApi(resource: string, api?: string) {
     const parts = resource.split(':');
-    return (
-      api ??
-      combineApiPathControllerAndAction(
-        parts[0],
-        parts[1],
-        undefined,
-        true,
-        true,
-        this.sys.env.API_PREFIX,
-      )
-    );
+    return api ?? combineApiPathControllerAndAction(parts[0], parts[1], undefined, true, true, this.sys.env.API_PREFIX);
   }
 }
 
@@ -193,11 +165,7 @@ export function deepExtend<T = any>(...args): T {
   return extend(true, ...args);
 }
 
-export function deepEqual(
-  actual: unknown,
-  expected: unknown,
-  opts?: { strict?: boolean },
-): boolean {
+export function deepEqual(actual: unknown, expected: unknown, opts?: { strict?: boolean }): boolean {
   return DeepEqual(actual, expected, opts);
 }
 
@@ -210,29 +178,17 @@ export function polyfillDispose(instance: any) {
   Object.getPrototypeOf(instance).__dispose__ = () => {};
 }
 
-export function beanFullNameFromOnionName(
-  onionName: string,
-  sceneName: keyof IBeanSceneRecord,
-): keyof IBeanRecord {
+export function beanFullNameFromOnionName(onionName: string, sceneName: keyof IBeanSceneRecord): keyof IBeanRecord {
   return onionName.replace(':', `.${sceneName}.`) as unknown as keyof IBeanRecord;
 }
 
-export function onionNameFromBeanFullName(
-  beanFullName: string,
-  sceneName: keyof IBeanSceneRecord,
-): string {
+export function onionNameFromBeanFullName(beanFullName: string, sceneName: keyof IBeanSceneRecord): string {
   return beanFullName.replace(`.${sceneName}.`, ':');
 }
 
 export function convertToUnit(str: number, unit?: string): string;
-export function convertToUnit(
-  str: string | number | null | undefined,
-  unit?: string,
-): string | undefined;
-export function convertToUnit(
-  str: string | number | null | undefined,
-  unit: string = 'px',
-): string | undefined {
+export function convertToUnit(str: string | number | null | undefined, unit?: string): string | undefined;
+export function convertToUnit(str: string | number | null | undefined, unit: string = 'px'): string | undefined {
   if (str === undefined || str === null || str === '') {
     return undefined;
   }
@@ -248,4 +204,10 @@ export function convertToUnit(
 
 export function isHttpUrl(url?: string): boolean {
   return !!url && (url.startsWith('http://') || url.startsWith('https://'));
+}
+
+export function throwErrorComponentUnmounted() {
+  const error = new Error();
+  error.code = 600;
+  throw error;
 }
