@@ -6,6 +6,11 @@ const SymbolController = Symbol('SymbolController');
 
 export class BeanControllerLike extends BeanBase {
   protected get [SymbolController](): unknown | undefined {
+    if (!this.bean) {
+      const error = new Error();
+      error.code = 600;
+      throw error;
+    }
     return this.bean._getBeanSyncOnly(BeanControllerIdentifier);
   }
 
