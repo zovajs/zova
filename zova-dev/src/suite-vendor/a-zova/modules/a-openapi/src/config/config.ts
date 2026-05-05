@@ -6,10 +6,7 @@ export const config = (_sys: ZovaSys) => {
   return {
     base: {
       provider: {
-        components: {
-          Form: 'a-form:form',
-          Table: 'a-table:table',
-        },
+        components: {},
         actions: {
           ActionLog: 'a-actions:log',
         },

@@ -1,4 +1,4 @@
-import type { TypeComponentRecordSelectorKeys, TypeComponentRecordSelectorKeysStrict } from 'zova';
+import type { TypeComponentRecordSelectorKeys } from 'zova';
 import type { IActionsRecord } from 'zova-module-a-action';
 
 import type { IOpenapiPermissions } from './permissions.js';
@@ -30,9 +30,8 @@ export interface IOpenapiOptionsResourceMetaProvider {
 }
 
 export interface IOpenapiOptionsResourceMetaProviderComponents {
-  Table?: TypeComponentRecordSelectorKeysStrict<'table'>;
-  Form?: TypeComponentRecordSelectorKeysStrict<'form'>;
   BlockPage?: TypeComponentRecordSelectorKeys<'block'>;
   BlockPageEntry?: TypeComponentRecordSelectorKeys<'block'>;
   BlockToolbarRow?: TypeComponentRecordSelectorKeys<'block'>;
+  BlockForm?: TypeComponentRecordSelectorKeys<'block'>;
 }

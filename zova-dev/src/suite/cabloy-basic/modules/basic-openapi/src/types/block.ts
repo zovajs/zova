@@ -24,10 +24,13 @@ export interface IResourceBlockOptionsToolbarRow extends IResourceBlockOptionsBa
   actions?: IResourceComponentActionRowOptionsAction[];
 }
 
+export interface IResourceBlockOptionsForm extends IResourceBlockOptionsBase {}
+
 declare module 'zova-module-a-openapi' {
   export interface IResourceComponentBlockRecord {
     BlockPage?: IResourceBlockOptionsPage;
     BlockPageEntry?: IResourceBlockOptionsPageEntry;
     BlockToolbarRow?: IResourceBlockOptionsToolbarRow;
+    BlockForm?: IResourceBlockOptionsForm;
   }
 }

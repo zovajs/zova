@@ -177,14 +177,6 @@ export class ModelResource<Entity = any, EntityCreate = Partial<Entity>, EntityU
     return this.$sdk.createApiSchemas(`${this.resourceApi}/:id`, 'patch');
   }
 
-  public get componentTable() {
-    return this.resourceMeta.provider!.components!.Table!;
-  }
-
-  public get componentForm() {
-    return this.resourceMeta.provider!.components!.Form!;
-  }
-
   public getFormSchema(formMeta: IFormMeta) {
     const formScene = formMeta.formScene ?? formSceneFromFormMeta(formMeta);
     if (formScene === 'view') return this.schemaView;
