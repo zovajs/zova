@@ -20,6 +20,8 @@ export interface IResourceBlockOptionsToolbarBulk extends IResourceBlockOptionsB
   actions?: IResourceComponentActionBulkOptionsAction[];
 }
 
+export interface IResourceBlockOptionsTable extends IResourceBlockOptionsBase {}
+
 export interface IResourceBlockOptionsPageEntry extends IResourceBlockOptionsBase {
   blocks?: IResourceComponentBlockOptionsBlock[];
   resource?: string;
@@ -38,6 +40,7 @@ declare module 'zova-module-a-openapi' {
     BlockPage?: IResourceBlockOptionsPage;
     BlockFilter?: IResourceBlockOptionsFilter;
     BlockToolbarBulk?: IResourceBlockOptionsToolbarBulk;
+    BlockTable?: IResourceBlockOptionsTable;
     BlockPageEntry?: IResourceBlockOptionsPageEntry;
     BlockToolbarRow?: IResourceBlockOptionsToolbarRow;
     BlockForm?: IResourceBlockOptionsForm;
