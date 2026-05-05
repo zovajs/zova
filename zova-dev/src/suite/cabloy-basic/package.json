@@ -12,6 +12,7 @@
     "zova-module-basic-date": "workspace:^",
     "zova-module-basic-form": "workspace:^",
     "zova-module-basic-input": "^5.0.0",
+    "zova-module-basic-log": "^5.0.0",
     "zova-module-basic-openapi": "^5.0.0",
     "zova-module-basic-page": "^5.0.0",
     "zova-module-basic-pageentry": "^5.0.0",

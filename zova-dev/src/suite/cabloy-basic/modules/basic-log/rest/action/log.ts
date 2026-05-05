@@ -1,8 +1,8 @@
 import type { TypeActionOptionsRest } from 'zova-module-a-action';
-import type { IActionOptionsLog } from 'zova-module-a-actions';
+import type { IActionOptionsLog } from 'zova-module-basic-log';
 
-export function BBAActionsLog(
+export function BBABasicLog(
   _props: TypeActionOptionsRest<IActionOptionsLog>,
 ) {
-  return 'a-actions:log';
+  return 'basic-log:log';
 }

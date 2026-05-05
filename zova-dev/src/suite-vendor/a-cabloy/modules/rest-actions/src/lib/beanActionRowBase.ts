@@ -1,13 +1,11 @@
 import { isNil } from '@cabloy/utils';
 import { TableIdentity } from 'table-identity';
 import { BeanBase } from 'zova';
-import { IJsxRenderContextBase } from 'zova-module-a-openapi';
+import { IJsxRenderContextBase, IPerformActionRowOptionsBase } from 'zova-module-a-openapi';
 import { IJsxRenderContextTableCell } from 'zova-module-a-table';
 
-import { IActionOptionsRowBase } from '../types/actions.js';
-
 export class BeanActionRowBase extends BeanBase {
-  getResourceAndId(options: IActionOptionsRowBase, renderContext: IJsxRenderContextBase) {
+  getResourceAndId(options: IPerformActionRowOptionsBase, renderContext: IJsxRenderContextBase) {
     let resource: string | undefined;
     let id: TableIdentity | undefined;
     if (renderContext.$scene === 'tableCell') {
