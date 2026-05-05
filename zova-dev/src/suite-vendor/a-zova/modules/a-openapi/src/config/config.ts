@@ -7,14 +7,11 @@ export const config = (_sys: ZovaSys) => {
     base: {
       provider: {
         components: {},
-        actions: {
-          ActionLog: 'a-actions:log',
-        },
+        actions: {},
       },
       form: {
         provider: {
           components: {
-            FormField: 'a-form:formField',
             Input: 'input',
           },
           behaviors: {},

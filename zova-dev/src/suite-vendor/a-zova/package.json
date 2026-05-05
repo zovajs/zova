@@ -9,7 +9,6 @@
   "type": "module",
   "dependencies": {
     "zova-module-a-action": "workspace:^",
-    "zova-module-a-actions": "workspace:^",
     "zova-module-a-api": "workspace:^",
     "zova-module-a-app": "workspace:^",
     "zova-module-a-bean": "workspace:^",
