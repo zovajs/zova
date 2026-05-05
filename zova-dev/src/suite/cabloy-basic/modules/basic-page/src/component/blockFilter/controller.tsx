@@ -2,6 +2,7 @@ import type { IJsxRenderContextPage, IFormMeta, ISchemaRenderComponentLayoutOpti
 import type { ModelResource } from 'zova-module-rest-resource';
 
 import { isNilOrEmptyString } from '@cabloy/utils';
+import { classes } from 'typestyle';
 import { BeanControllerBase, IComponentOptions, Use } from 'zova';
 import { Controller } from 'zova-module-a-bean';
 import { TypeFormOnSubmitData, ZForm } from 'zova-module-a-form';
@@ -56,6 +57,7 @@ export class ControllerBlockFilter extends BeanControllerBase {
     const { $$page } = this.$$renderContext;
     return (
       <ZForm
+        class={classes(this.$props.class, this.$style(this.$props.style))}
         inline={true}
         data={$$page.queryFilterData}
         schema={this.schemaFilter}
