@@ -6,12 +6,12 @@ import { IJsxRenderContextTableCell } from 'zova-module-a-table';
 
 export class BeanActionRowBase extends BeanBase {
   getResourceAndId(options: IPerformActionRowOptionsBase, renderContext: IJsxRenderContextBase) {
-    let resource: string | undefined;
-    let id: TableIdentity | undefined;
+    let resource: string | undefined = options.resource;
+    let id: TableIdentity | undefined = options.id;
     if (renderContext.$scene === 'tableCell') {
       const { $celScope, cellContext } = renderContext as IJsxRenderContextTableCell;
-      resource = options.resource ?? $celScope.resource;
-      id = options.id ?? cellContext.row.id;
+      resource = resource ?? $celScope.resource;
+      id = id ?? cellContext.row.id;
     }
     if (isNil(resource) || isNil(id)) {
       throw new Error(`should specify resource or id in scene: ${renderContext.$scene}`);

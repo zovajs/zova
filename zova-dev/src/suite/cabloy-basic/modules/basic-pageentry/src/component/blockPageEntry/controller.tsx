@@ -2,6 +2,7 @@ import type { IFormMeta, IJsxRenderContextPageEntry, IPageEntryScope, TypeFormSc
 
 import { celEnvBase, isNil } from '@cabloy/utils';
 import { SchemaObject } from 'openapi3-ts/oas31';
+import { TableIdentity } from 'table-identity';
 import { classes } from 'typestyle';
 import { VNode } from 'vue';
 import { BeanControllerBase, deepEqual, IComponentOptions, useCustomRef } from 'zova';
@@ -18,6 +19,8 @@ export interface ControllerBlockPageEntryProps extends IResourceBlockOptionsPage
 export class ControllerBlockPageEntry<TData extends {} = {}> extends BeanControllerBase {
   static $propsDefault = {};
   static $componentOptions: IComponentOptions = { inheritAttrs: false, deepExtendDefault: true };
+
+  entryIdCreated?: TableIdentity;
 
   formInstance: BeanControllerFormBase;
 
@@ -122,7 +125,7 @@ export class ControllerBlockPageEntry<TData extends {} = {}> extends BeanControl
 
   async submitData(data: TypeFormOnSubmitData<TData>) {
     const mutationSubmit = this.$$modelResource.getFormMutationSubmit(this.formMeta, this.entryId);
-    await mutationSubmit?.mutateAsync(data.value as any);
+    this.entryIdCreated = (await mutationSubmit?.mutateAsync(data.value as any)) as TableIdentity;
     this.setPageMeta(data.value, false);
   }
 

@@ -3,10 +3,10 @@ import { IJsxRenderContextBase, IJsxRenderContextPage, IPerformActionBulkOptions
 
 export class BeanActionBulkBase extends BeanBase {
   getResource(options: IPerformActionBulkOptionsBase, renderContext: IJsxRenderContextBase) {
-    let resource: string | undefined;
+    let resource: string | undefined = options.resource;
     if (renderContext.$scene === 'page') {
       const { $celScope } = renderContext as IJsxRenderContextPage;
-      resource = options.resource ?? $celScope.resource;
+      resource = resource ?? $celScope.resource;
     }
     if (!resource) {
       throw new Error(`should specify resource in scene: ${renderContext.$scene}`);

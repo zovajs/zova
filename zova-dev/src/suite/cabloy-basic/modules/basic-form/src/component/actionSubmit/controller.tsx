@@ -1,7 +1,7 @@
 import type { IJsxRenderContextPageEntry } from 'zova-module-a-openapi';
 
 import { classes } from 'typestyle';
-import { BeanControllerBase, IComponentOptions, Use } from 'zova';
+import { BeanControllerBase, cast, IComponentOptions, Use } from 'zova';
 import { Controller } from 'zova-module-a-bean';
 import { BeanControllerFormBase } from 'zova-module-a-form';
 import { IResourceActionRowOptionsSubmit } from 'zova-module-basic-openapi';
@@ -29,17 +29,37 @@ export class ControllerActionSubmit extends BeanControllerBase {
         <button
           class={classes(className, isSubmitting && 'btn-disabled')}
           type="submit"
-          onClick={async e => {
-            console.log(e);
-            const res = await formInstance.submit();
-            if (res) {
-              this.$router.back();
-            }
+          onClick={async (e: Event) => {
+            this.onClick(e);
           }}
         >
           {this.scope.locale.Submit()}
         </button>
       </>
+    );
+  }
+
+  private async onClick(e: Event) {
+    const { $jsx, $host, $$pageEntry } = this.$$renderContext;
+    const formInstance: BeanControllerFormBase = $$pageEntry.formInstance;
+    const res = await formInstance.submit();
+    if (!res) return;
+    const pointerType = cast<PointerEvent>(e).pointerType;
+    if (pointerType) {
+      // back
+      this.$router.back();
+      return;
+    }
+    // replace edit page
+    const actionName = $jsx.normalizeAction('ActionEdit');
+    await $host.$performAction(
+      actionName,
+      {
+        replace: true,
+        resource: $$pageEntry.resource,
+        id: $$pageEntry.entryIdCreated,
+      },
+      this.$$renderContext,
     );
   }
 }
