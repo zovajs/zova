@@ -75,6 +75,10 @@ export class ControllerBlockPage<TData extends {} = {}> extends BeanControllerBa
     return this.queryData.data;
   }
 
+  get schemaFilter() {
+    return this.$$modelResource.schemaFilter;
+  }
+
   get schemaRow() {
     return this.$$modelResource.schemaRow;
   }

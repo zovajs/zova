@@ -19,9 +19,6 @@ export class ControllerBlockFilter extends BeanControllerBase {
   formFieldLayout: ISchemaRenderComponentLayoutOptions;
 
   @Use({ injectionScope: 'host' })
-  $$modelResource: ModelResource;
-
-  @Use({ injectionScope: 'host' })
   $$renderContext: IJsxRenderContextPage;
 
   protected async __init__() {
@@ -30,7 +27,8 @@ export class ControllerBlockFilter extends BeanControllerBase {
   }
 
   get schemaFilter() {
-    return this.$$modelResource.schemaFilter;
+    const { $$page } = this.$$renderContext;
+    return $$page.schemaFilter;
   }
 
   submitData(data: TypeFormOnSubmitData) {
