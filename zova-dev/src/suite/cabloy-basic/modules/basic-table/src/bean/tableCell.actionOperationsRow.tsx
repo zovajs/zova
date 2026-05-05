@@ -1,3 +1,4 @@
+import { classes } from 'typestyle';
 import { VNode } from 'vue';
 import { BeanBase } from 'zova';
 import { TypeTableCellRenderComponent } from 'zova-module-a-openapi';
@@ -6,7 +7,9 @@ import { IResourceActionRowOptionsOperationsRow } from 'zova-module-basic-openap
 
 export interface ITableCellOptionsActionOperationsRow extends IResourceActionRowOptionsOperationsRow {}
 
-@TableCell<ITableCellOptionsActionOperationsRow>()
+@TableCell<ITableCellOptionsActionOperationsRow>({
+  class: 'join',
+})
 export class TableCellActionOperationsRow extends BeanBase implements ITableCellRender {
   async checkVisible(options: ITableCellOptionsActionOperationsRow, renderContext: IJsxRenderContextTableColumn): Promise<boolean> {
     const { $celScope, $host, $$table } = renderContext;
@@ -41,6 +44,6 @@ export class TableCellActionOperationsRow extends BeanBase implements ITableCell
       const options2 = Object.assign({ key: index }, action.options);
       domActions.push($$table.cellRender(action.render!, options2, renderContext));
     });
-    return <div class="join">{domActions}</div>;
+    return <div class={classes(options.class, $host.$style(options.style))}>{domActions}</div>;
   }
 }

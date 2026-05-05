@@ -4,8 +4,6 @@ import type { IJsxRenderContextBase, TypeTableCellRenderComponent } from 'zova-m
 
 import type { ControllerTable } from '../component/table/controller.jsx';
 
-export const constColumnProps = '$$ColumnProps';
-
 export type TypeTableCellRender<TData extends RowData = RowData, TValue = any> = (props?: CellContext<TData, TValue>) => any;
 
 export interface IJsxRenderContextTableColumn<TData extends {} = any> extends IJsxRenderContextBase {
@@ -15,9 +13,12 @@ export interface IJsxRenderContextTableColumn<TData extends {} = any> extends IJ
 
 export interface ITableCellRenderColumnProps {
   key: string;
-  name: string;
+}
+
+export interface ITableCellRenderColumnOptions {
   visible?: boolean;
   render: TypeTableCellRenderComponent;
+  columnProps: ITableCellRenderColumnProps;
 }
 
 export interface ITableScope {}

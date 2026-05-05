@@ -8,7 +8,6 @@ import { Controller } from 'zova-module-a-bean';
 import {
   IResourceActionRowOptionsBase,
   ISchemaObjectExtensionFieldRest,
-  renderTableColumnTopPropsSystem,
   ScopeModuleAOpenapi,
   TypeTableCellRenderComponent,
   TypeTableCellRenderComponentProvider,
@@ -20,7 +19,7 @@ import type { IDecoratorTableCellOptions, IJsxRenderContextTableCell, ITableCell
 
 import { BeanControllerTableBase } from '../../lib/beanControllerTableBase.js';
 import {
-  constColumnProps,
+  ITableCellRenderColumnOptions,
   type IJsxRenderContextTableColumn,
   type ITableCellRenderColumnProps,
   type ITableCellScope,
@@ -126,9 +125,9 @@ export class ControllerTable<TData extends {} = {}> extends BeanControllerTableB
         // renderContext
         const jsxRenderContext = this.getColumnJsxRenderContext(columnScope);
         // columnProps
-        const columnProps = this.getColumnComponentPropsTop(key, columnScope, jsxRenderContext);
+        const { visible, columnProps } = this.getColumnComponentPropsTop(key, columnScope, jsxRenderContext);
         // visible
-        if (columnProps.visible === false) return;
+        if (visible === false) return;
         return await this._createColumnRender(render, columnProps, columnScope, jsxRenderContext);
       },
       this,
@@ -172,13 +171,13 @@ export class ControllerTable<TData extends {} = {}> extends BeanControllerTableB
       // renderContext
       const jsxRenderContext = this.getColumnJsxRenderContext(columnScope);
       // columnProps
-      const columnProps = this.getColumnComponentPropsTop(key, columnScope, jsxRenderContext);
+      const { visible, render, columnProps } = this.getColumnComponentPropsTop(key, columnScope, jsxRenderContext);
       // visible
-      if (columnProps.visible === false) continue;
+      if (visible === false) continue;
       // property
       properties.push(property);
       // render
-      promises.push(this._createColumnRender(columnProps.render, columnProps, columnScope, jsxRenderContext));
+      promises.push(this._createColumnRender(render, columnProps, columnScope, jsxRenderContext));
     }
     let res = await Promise.all(promises);
     properties = properties.filter((_item, index) => !!res[index]);
@@ -382,7 +381,7 @@ export class ControllerTable<TData extends {} = {}> extends BeanControllerTableB
     });
   }
 
-  public getColumnComponentPropsTop(name: string, celScope: {}, renderContext: {}): ITableCellRenderColumnProps {
+  public getColumnComponentPropsTop(name: string, celScope: {}, renderContext: {}): ITableCellRenderColumnOptions {
     const property = this.getColumnProperty(name);
     const rest = property?.rest;
     return this._getColumnComponentPropsTopByRest(rest, name, celScope, renderContext);
@@ -392,27 +391,12 @@ export class ControllerTable<TData extends {} = {}> extends BeanControllerTableB
     rest: ISchemaObjectExtensionFieldRest | undefined,
     name: string,
     celScope: {},
-    renderContext: {},
-  ): ITableCellRenderColumnProps {
-    const props: any = { [constColumnProps]: true, key: name, name };
-    if (!rest) return props;
-    const keys = Object.keys(rest).filter(item => !renderTableColumnTopPropsSystem.includes(item));
-    if (keys.length === 0) return props;
-    for (const key of keys) {
-      const value = rest[key];
-      let keyValue;
-      if (key === 'render') {
-        if (typeof value === 'string') {
-          keyValue = this.zovaJsx.evaluateExpression(value, celScope);
-        } else {
-          keyValue = value;
-        }
-      } else {
-        keyValue = this.zovaJsx.renderJsxOrCel(value, undefined, celScope, renderContext);
-      }
-      props[key] = keyValue;
-    }
-    return props;
+    _renderContext: {},
+  ): ITableCellRenderColumnOptions {
+    const visible = this.zovaJsx.evaluateExpression(rest?.visible, celScope);
+    const render = rest?.render as TypeTableCellRenderComponent;
+    const columnProps = Object.assign({ key: name }, cast(rest)?.columnProps);
+    return { visible, render, columnProps };
   }
 
   // public getRenderFlattern(render: TypeTableCellRenderComponent): TypeTableCellRenderComponent {
