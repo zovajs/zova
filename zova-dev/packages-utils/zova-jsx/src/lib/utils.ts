@@ -3,12 +3,7 @@ const __propsMapper = {
 };
 
 export function isNativeElement(Component: any) {
-  return (
-    typeof Component === 'string' &&
-    !Component.includes(':') &&
-    Component.charAt(0) >= 'a' &&
-    Component.charAt(0) <= 'z'
-  );
+  return typeof Component === 'string' && !Component.includes(':') && Component.charAt(0) >= 'a' && Component.charAt(0) <= 'z';
 }
 
 export function isZovaComponent(Component: any) {
@@ -16,20 +11,15 @@ export function isZovaComponent(Component: any) {
 }
 
 export function isLegacyComponent(Component: any) {
-  return (
-    typeof Component === 'string' &&
-    !Component.includes(':') &&
-    Component.charAt(0) >= 'A' &&
-    Component.charAt(0) <= 'Y'
-  );
+  return typeof Component === 'string' && !Component.includes(':') && Component.charAt(0) >= 'A' && Component.charAt(0) <= 'Y';
 }
 
 export function isJsxComponent(Component: any) {
-  return typeof Component === 'object' && Component.$$typeof === 'zova-jsx:component';
+  return typeof Component === 'object' && Component?.$$typeof === 'zova-jsx:component';
 }
 
 export function isJsxEvent(Component: any) {
-  return typeof Component === 'object' && Component.$$typeof === 'zova-jsx:event';
+  return typeof Component === 'object' && Component?.$$typeof === 'zova-jsx:event';
 }
 
 export function invokeProp(prop: any) {

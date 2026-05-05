@@ -1,13 +1,13 @@
 import type { IResourceBlockOptionsBase, IJsxRenderContextPageEntry } from 'zova-module-a-openapi';
-import type { ModelResource } from 'zova-module-rest-resource';
 
 import { BeanControllerBase, IComponentOptions, Use } from 'zova';
 import { Controller } from 'zova-module-a-bean';
+import { ZForm } from 'zova-module-a-form';
 
 export interface ControllerBlockFormProps extends IResourceBlockOptionsBase {}
 
 @Controller()
-export class ControllerBlockForm<TData extends {} = {}> extends BeanControllerBase {
+export class ControllerBlockForm extends BeanControllerBase {
   static $propsDefault = {};
   static $componentOptions: IComponentOptions = { inheritAttrs: false, deepExtendDefault: true };
 
@@ -17,26 +17,27 @@ export class ControllerBlockForm<TData extends {} = {}> extends BeanControllerBa
   protected async __init__() {}
 
   protected render() {
-    // return (
-    //   <ComponentForm<TData>
-    //     controllerRef={ref => {
-    //       this.controllerForm = ref;
-    //     }}
-    //     data={this.formData}
-    //     schema={this.formSchema}
-    //     schemaScene={this.schemaScene}
-    //     formMeta={this.formMeta}
-    //     formProvider={this.formProvider}
-    //     formScope={this.pageEntryScope}
-    //     onSubmitData={data => this.onSubmit(data)}
-    //     onShowError={({ error }) => {
-    //       // eslint-disable-next-line no-alert
-    //       window.alert(error.message);
-    //     }}
-    //     onChanged={data => {
-    //       this.setPageMeta(data, true);
-    //     }}
-    //   ></ComponentForm>
-    // );
+    const { $$pageEntry } = this.$$renderContext;
+    return (
+      <ZForm
+        controllerRef={ref => {
+          $$pageEntry.formInstance = ref;
+        }}
+        data={$$pageEntry.formData}
+        schema={$$pageEntry.formSchema}
+        schemaScene={$$pageEntry.schemaScene}
+        formMeta={$$pageEntry.formMeta}
+        formProvider={$$pageEntry.formProvider}
+        formScope={$$pageEntry.jsxCelScope}
+        onSubmitData={data => $$pageEntry.onSubmit(data)}
+        onShowError={({ error }) => {
+          // eslint-disable-next-line no-alert
+          window.alert(error.message);
+        }}
+        onChanged={data => {
+          $$pageEntry.setPageMeta(data, true);
+        }}
+      ></ZForm>
+    );
   }
 }
