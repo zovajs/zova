@@ -1,7 +1,8 @@
 import type { TypeComponentRecordSelectorKeys } from 'zova';
-import type { IActionsRecord } from 'zova-module-a-action';
 
 import type { IOpenapiPermissions } from './permissions.js';
+
+import { IPerformActionProviderRecord } from './performAction.js';
 
 export type TypeOpenApiRestResourceScene = 'table' | 'row';
 
@@ -26,7 +27,7 @@ export interface IOpenapiOptionsResourceMetaTable {}
 
 export interface IOpenapiOptionsResourceMetaProvider {
   components?: IOpenapiOptionsResourceMetaProviderComponents;
-  actions?: IActionsRecord;
+  actions?: IPerformActionProviderRecord;
 }
 
 export interface IOpenapiOptionsResourceMetaProviderComponents {

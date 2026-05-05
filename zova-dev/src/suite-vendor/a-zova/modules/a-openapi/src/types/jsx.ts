@@ -1,10 +1,10 @@
-import type { IActionsRecord } from 'zova-module-a-action';
-
-import type { TypeActionProvider } from './action.js';
 import 'zova-jsx';
+import { IActionRecord } from 'zova-module-a-action';
+
+import { IPerformActionRecord } from './performAction.js';
 
 declare module 'zova-jsx' {
   export interface ZovaJsx {
-    normalizeAction(type: keyof IActionsRecord): TypeActionProvider;
+    normalizeAction(type: keyof IPerformActionRecord): keyof IActionRecord;
   }
 }
