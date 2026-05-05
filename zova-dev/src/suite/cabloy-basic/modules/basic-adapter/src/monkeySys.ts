@@ -20,6 +20,10 @@ export class MonkeySys extends BeanSimple implements IMonkeySysInitialize {
           ActionEdit: 'basic-actions:edit',
           ActionDelete: 'basic-actions:delete',
           ActionLog: 'basic-log:log',
+          ActionAlert: 'basic-actions:alert',
+          ActionConfirm: 'basic-actions:confirm',
+          ActionCopy: 'basic-actions:copy',
+          ActionSetValue: 'basic-actions:setValue',
         },
       },
       form: {

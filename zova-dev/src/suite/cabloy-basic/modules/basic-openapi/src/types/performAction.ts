@@ -47,5 +47,8 @@ declare module 'zova-module-a-openapi' {
     ActionDelete?: IPerformActionOptionsDelete;
     ActionLog?: IPerformActionOptionsLog;
     ActionAlert?: IPerformActionOptionsAlert;
+    ActionConfirm?: IPerformActionOptionsConfirm;
+    ActionCopy?: IPerformActionOptionsCopy;
+    ActionSetValue?: IPerformActionOptionsSetValue;
   }
 }
