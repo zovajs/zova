@@ -28,6 +28,7 @@ export class ControllerActionSubmit extends BeanControllerBase {
         {isSubmitting && <span class="loading loading-spinner text-primary"></span>}
         <button
           class={classes(className, isSubmitting && 'btn-disabled')}
+          type="submit"
           onClick={async () => {
             const res = await formInstance.submit();
             if (res) {

@@ -26,6 +26,7 @@ export class ControllerActionBack extends BeanControllerBase {
     return (
       <button
         class={classes(className, isSubmitting && 'btn-disabled')}
+        type="button"
         onClick={() => {
           this.$router.back();
         }}
