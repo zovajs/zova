@@ -262,7 +262,7 @@ export class ControllerTable<TData extends {} = {}> extends BeanControllerTableB
       const onionOptions = beanOptions?.options as IDecoratorTableCellOptions | undefined;
       columnProps = deepExtend({}, onionOptions, columnProps);
     }
-    const cellProps = isJsxComponent(render) ? deepExtend({}, columnProps, cast(render).props) : columnProps;
+    const cellProps = isJsxComponent(render) ? Object.assign({}, columnProps, cast(render).props) : columnProps;
     return this._cellRender(
       render,
       columnProps as ITableCellRenderColumnProps,
@@ -340,11 +340,10 @@ export class ControllerTable<TData extends {} = {}> extends BeanControllerTableB
     if (beanInstance) {
       // jsx: props
       if (!cellProps) {
-        cellProps = isJsxComponent(render)
-          ? this.zovaJsx.renderJsxProps(cast(render).props, { ...columnProps }, cellScope, jsxRenderContext)
-          : columnProps;
+        cellProps = isJsxComponent(render) ? Object.assign({}, columnProps, cast(render).props) : columnProps;
       }
-      return beanInstance.render(cellProps ?? {}, jsxRenderContext, () => {
+      const cellProps2 = this.zovaJsx.renderJsxProps(cellProps, {}, cellScope, jsxRenderContext);
+      return beanInstance.render(cellProps2, jsxRenderContext, () => {
         const children = isJsxComponent(render) && cast(render).children;
         if (children && children.length > 0) {
           return this.zovaJsx.renderJsxChildrenDirect(children, cellScope, jsxRenderContext);
