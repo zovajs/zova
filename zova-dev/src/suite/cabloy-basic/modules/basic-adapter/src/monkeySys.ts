@@ -15,10 +15,10 @@ export class MonkeySys extends BeanSimple implements IMonkeySysInitialize {
           BlockForm: 'basic-pageentry:blockForm',
         },
         actions: {
-          ActionCreate: 'rest-actions:create',
-          ActionView: 'rest-actions:view',
-          ActionEdit: 'rest-actions:edit',
-          ActionDelete: 'rest-actions:delete',
+          ActionCreate: 'basic-actions:create',
+          ActionView: 'basic-actions:view',
+          ActionEdit: 'basic-actions:edit',
+          ActionDelete: 'basic-actions:delete',
         },
       },
       form: {

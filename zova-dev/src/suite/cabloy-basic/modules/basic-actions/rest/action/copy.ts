@@ -1,8 +1,8 @@
 import type { TypeActionOptionsRest } from 'zova-module-a-action';
-import type { IActionOptionsCopy } from 'zova-module-rest-actions';
+import type { IActionOptionsCopy } from 'zova-module-basic-actions';
 
-export function BBARestActionsCopy(
+export function BBABasicActionsCopy(
   _props: TypeActionOptionsRest<IActionOptionsCopy>,
 ) {
-  return 'rest-actions:copy';
+  return 'basic-actions:copy';
 }

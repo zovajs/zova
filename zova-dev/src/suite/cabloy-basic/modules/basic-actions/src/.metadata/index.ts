@@ -20,105 +20,105 @@ import 'zova-module-a-action';
 declare module 'zova-module-a-action' {
   
     export interface IActionRecord {
-      'rest-actions:alert': IActionOptionsAlert;
-'rest-actions:confirm': IActionOptionsConfirm;
-'rest-actions:copy': IActionOptionsCopy;
-'rest-actions:create': IActionOptionsCreate;
-'rest-actions:delete': IActionOptionsDelete;
-'rest-actions:edit': IActionOptionsEdit;
-'rest-actions:setValue': IActionOptionsSetValue;
-'rest-actions:view': IActionOptionsView;
+      'basic-actions:alert': IActionOptionsAlert;
+'basic-actions:confirm': IActionOptionsConfirm;
+'basic-actions:copy': IActionOptionsCopy;
+'basic-actions:create': IActionOptionsCreate;
+'basic-actions:delete': IActionOptionsDelete;
+'basic-actions:edit': IActionOptionsEdit;
+'basic-actions:setValue': IActionOptionsSetValue;
+'basic-actions:view': IActionOptionsView;
     }
 
   
 }
-declare module 'zova-module-rest-actions' {
+declare module 'zova-module-basic-actions' {
   
         export interface ActionAlert {
           /** @internal */
-          get scope(): ScopeModuleRestActions;
+          get scope(): ScopeModuleBasicActions;
         }
 
         export interface ActionAlert {
-          get $beanFullName(): 'rest-actions.action.alert';
-          get $onionName(): 'rest-actions:alert';
+          get $beanFullName(): 'basic-actions.action.alert';
+          get $onionName(): 'basic-actions:alert';
           get $onionOptions(): IActionOptionsAlert;
         }
 
         export interface ActionConfirm {
           /** @internal */
-          get scope(): ScopeModuleRestActions;
+          get scope(): ScopeModuleBasicActions;
         }
 
         export interface ActionConfirm {
-          get $beanFullName(): 'rest-actions.action.confirm';
-          get $onionName(): 'rest-actions:confirm';
+          get $beanFullName(): 'basic-actions.action.confirm';
+          get $onionName(): 'basic-actions:confirm';
           get $onionOptions(): IActionOptionsConfirm;
         }
 
         export interface ActionCopy {
           /** @internal */
-          get scope(): ScopeModuleRestActions;
+          get scope(): ScopeModuleBasicActions;
         }
 
         export interface ActionCopy {
-          get $beanFullName(): 'rest-actions.action.copy';
-          get $onionName(): 'rest-actions:copy';
+          get $beanFullName(): 'basic-actions.action.copy';
+          get $onionName(): 'basic-actions:copy';
           get $onionOptions(): IActionOptionsCopy;
         }
 
         export interface ActionCreate {
           /** @internal */
-          get scope(): ScopeModuleRestActions;
+          get scope(): ScopeModuleBasicActions;
         }
 
         export interface ActionCreate {
-          get $beanFullName(): 'rest-actions.action.create';
-          get $onionName(): 'rest-actions:create';
+          get $beanFullName(): 'basic-actions.action.create';
+          get $onionName(): 'basic-actions:create';
           get $onionOptions(): IActionOptionsCreate;
         }
 
         export interface ActionDelete {
           /** @internal */
-          get scope(): ScopeModuleRestActions;
+          get scope(): ScopeModuleBasicActions;
         }
 
         export interface ActionDelete {
-          get $beanFullName(): 'rest-actions.action.delete';
-          get $onionName(): 'rest-actions:delete';
+          get $beanFullName(): 'basic-actions.action.delete';
+          get $onionName(): 'basic-actions:delete';
           get $onionOptions(): IActionOptionsDelete;
         }
 
         export interface ActionEdit {
           /** @internal */
-          get scope(): ScopeModuleRestActions;
+          get scope(): ScopeModuleBasicActions;
         }
 
         export interface ActionEdit {
-          get $beanFullName(): 'rest-actions.action.edit';
-          get $onionName(): 'rest-actions:edit';
+          get $beanFullName(): 'basic-actions.action.edit';
+          get $onionName(): 'basic-actions:edit';
           get $onionOptions(): IActionOptionsEdit;
         }
 
         export interface ActionSetValue {
           /** @internal */
-          get scope(): ScopeModuleRestActions;
+          get scope(): ScopeModuleBasicActions;
         }
 
         export interface ActionSetValue {
-          get $beanFullName(): 'rest-actions.action.setValue';
-          get $onionName(): 'rest-actions:setValue';
+          get $beanFullName(): 'basic-actions.action.setValue';
+          get $onionName(): 'basic-actions:setValue';
           get $onionOptions(): IActionOptionsSetValue;
         }
 
         export interface ActionView {
           /** @internal */
-          get scope(): ScopeModuleRestActions;
+          get scope(): ScopeModuleBasicActions;
         }
 
         export interface ActionView {
-          get $beanFullName(): 'rest-actions.action.view';
-          get $onionName(): 'rest-actions:view';
+          get $beanFullName(): 'basic-actions.action.view';
+          get $onionName(): 'basic-actions:view';
           get $onionOptions(): IActionOptionsView;
         } 
 }
@@ -135,14 +135,14 @@ import { ActionView } from '../bean/action.view.jsx';
 import 'zova';
 declare module 'zova' {
   export interface IBeanRecordGeneral {
-    'rest-actions.action.alert': ActionAlert;
-'rest-actions.action.confirm': ActionConfirm;
-'rest-actions.action.copy': ActionCopy;
-'rest-actions.action.create': ActionCreate;
-'rest-actions.action.delete': ActionDelete;
-'rest-actions.action.edit': ActionEdit;
-'rest-actions.action.setValue': ActionSetValue;
-'rest-actions.action.view': ActionView;
+    'basic-actions.action.alert': ActionAlert;
+'basic-actions.action.confirm': ActionConfirm;
+'basic-actions.action.copy': ActionCopy;
+'basic-actions.action.create': ActionCreate;
+'basic-actions.action.delete': ActionDelete;
+'basic-actions.action.edit': ActionEdit;
+'basic-actions.action.setValue': ActionSetValue;
+'basic-actions.action.view': ActionView;
   }
 }
 /** action: end */
@@ -151,16 +151,16 @@ import { BeanScopeBase, type BeanScopeUtil } from 'zova';
 import { Scope } from 'zova-module-a-bean';
 
 @Scope()
-export class ScopeModuleRestActions extends BeanScopeBase {}
+export class ScopeModuleBasicActions extends BeanScopeBase {}
 
-export interface ScopeModuleRestActions {
+export interface ScopeModuleBasicActions {
   util: BeanScopeUtil;
 }
 
 import 'zova';
 declare module 'zova' {
   export interface IBeanScopeRecord {
-    'rest-actions': ScopeModuleRestActions;
+    'basic-actions': ScopeModuleBasicActions;
   }
   
   

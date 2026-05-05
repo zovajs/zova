@@ -8,7 +8,6 @@ This suite includes the following modules:
 
 | Name          | Description                                                                                                                                                |
 | ------------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| rest-actions  | Actions for Zova JSX. Includes: alert/confirm/copy/create/delete/edit/setValue/view                                                                        |
 | rest-resource | Universal component supporting CRUD rendering. Includes: list page, entry page, providing best practices for `Tanstack Table/Tanstack Form/Tanstack Query` |
 
 ## 2. Zova Suite: zova-suite-cabloy-basic (MIT)

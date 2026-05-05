@@ -1,8 +1,8 @@
 import type { TypeActionOptionsRest } from 'zova-module-a-action';
-import type { IActionOptionsConfirm } from 'zova-module-rest-actions';
+import type { IActionOptionsConfirm } from 'zova-module-basic-actions';
 
-export function BBARestActionsConfirm(
+export function BBABasicActionsConfirm(
   _props: TypeActionOptionsRest<IActionOptionsConfirm>,
 ) {
-  return 'rest-actions:confirm';
+  return 'basic-actions:confirm';
 }

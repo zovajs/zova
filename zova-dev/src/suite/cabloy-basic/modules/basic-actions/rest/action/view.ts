@@ -1,8 +1,8 @@
 import type { TypeActionOptionsRest } from 'zova-module-a-action';
-import type { IActionOptionsView } from 'zova-module-rest-actions';
+import type { IActionOptionsView } from 'zova-module-basic-actions';
 
-export function BBARestActionsView(
+export function BBABasicActionsView(
   _props: TypeActionOptionsRest<IActionOptionsView>,
 ) {
-  return 'rest-actions:view';
+  return 'basic-actions:view';
 }

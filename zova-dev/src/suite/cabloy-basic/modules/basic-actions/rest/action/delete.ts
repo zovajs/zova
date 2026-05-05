@@ -1,8 +1,8 @@
 import type { TypeActionOptionsRest } from 'zova-module-a-action';
-import type { IActionOptionsDelete } from 'zova-module-rest-actions';
+import type { IActionOptionsDelete } from 'zova-module-basic-actions';
 
-export function BBARestActionsDelete(
+export function BBABasicActionsDelete(
   _props: TypeActionOptionsRest<IActionOptionsDelete>,
 ) {
-  return 'rest-actions:delete';
+  return 'basic-actions:delete';
 }

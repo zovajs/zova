@@ -1,2 +1,2 @@
-export const __ThisModule__ = 'rest-actions';
-export { ScopeModuleRestActions as ScopeModule } from './index.js';
+export const __ThisModule__ = 'basic-actions';
+export { ScopeModuleBasicActions as ScopeModule } from './index.js';
