@@ -7,7 +7,7 @@ const SymbolController = Symbol('SymbolController');
 
 export class BeanControllerLike extends BeanBase {
   protected get [SymbolController](): unknown | undefined {
-    if (!this.bean) {
+    if (this.ctx.disposed) {
       throwErrorComponentUnmounted();
     }
     return this.bean._getBeanSyncOnly(BeanControllerIdentifier);
