@@ -1,4 +1,6 @@
 import { celEnvBase } from '@cabloy/utils';
+import { classes } from 'typestyle';
+import { VNode } from 'vue';
 import { BeanControllerBase, deepEqual, IComponentOptions, useCustomRef } from 'zova';
 import { ZovaJsx } from 'zova-jsx';
 import { Controller } from 'zova-module-a-bean';
@@ -124,8 +126,23 @@ export class ControllerBlockPage<TData extends {} = {}> extends BeanControllerBa
   }
 
   protected render() {
-    console.log(this.$props);
-    console.log(this.$style(undefined));
-    return <div>Page</div>;
+    return <div class={classes(this.$props.class, this.$style(this.$props.style))}>{this._renderBlocks()}</div>;
+  }
+
+  private _renderBlocks() {
+    const blocks = this.$props.blocks;
+    if (!blocks || blocks.length === 0) return;
+    let domBlocks: VNode[] = [];
+    blocks.forEach((block, index) => {
+      const options = Object.assign({ key: index }, block.options);
+      const domBlock = this.jsxZova.render(block.render!, options, this.jsxCelScope, this.jsxRenderContext);
+      if (!domBlock) return;
+      if (Array.isArray(domBlock)) {
+        domBlocks.push(...domBlock);
+      } else {
+        domBlocks.push(domBlock);
+      }
+    });
+    return domBlocks;
   }
 }

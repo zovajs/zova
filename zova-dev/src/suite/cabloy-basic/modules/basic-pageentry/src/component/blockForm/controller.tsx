@@ -1,11 +1,12 @@
-import type { IResourceBlockOptionsBase, IJsxRenderContextPageEntry } from 'zova-module-a-openapi';
+import type { IJsxRenderContextPageEntry } from 'zova-module-a-openapi';
 
 import { classes } from 'typestyle';
 import { BeanControllerBase, IComponentOptions, Use } from 'zova';
 import { Controller } from 'zova-module-a-bean';
 import { ZForm } from 'zova-module-a-form';
+import { IResourceBlockOptionsForm } from 'zova-module-basic-openapi';
 
-export interface ControllerBlockFormProps extends IResourceBlockOptionsBase {}
+export interface ControllerBlockFormProps extends IResourceBlockOptionsForm {}
 
 @Controller()
 export class ControllerBlockForm extends BeanControllerBase {
