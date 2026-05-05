@@ -1,5 +1,6 @@
 import type { IJsxRenderContextPageEntry } from 'zova-module-a-openapi';
 
+import { isNil } from '@cabloy/utils';
 import { classes } from 'typestyle';
 import { BeanControllerBase, cast, IComponentOptions, Use } from 'zova';
 import { Controller } from 'zova-module-a-bean';
@@ -50,7 +51,9 @@ export class ControllerActionSubmit extends BeanControllerBase {
       this.$router.back();
       return;
     }
-    // replace edit page
+    // edit
+    if (!isNil($$pageEntry.entryId)) return;
+    // create: replace by edit page
     const actionName = $jsx.normalizeAction('ActionEdit');
     await $host.$performAction(
       actionName,
