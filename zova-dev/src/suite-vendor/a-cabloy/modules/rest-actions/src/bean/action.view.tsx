@@ -1,12 +1,12 @@
 import { Action, IActionExecute, NextActionExecute } from 'zova-module-a-action';
 import { IJsxRenderContextBase } from 'zova-module-a-openapi';
+import { IPerformActionOptionsView } from 'zova-module-basic-openapi';
 
 import { BeanActionRowBase } from '../lib/beanActionRowBase.js';
-import { IActionOptionsRowBase } from '../types/actions.js';
 
 export type TypeActionViewResult = unknown;
 
-export interface IActionOptionsView extends IActionOptionsRowBase<TypeActionViewResult> {}
+export interface IActionOptionsView extends IPerformActionOptionsView<TypeActionViewResult> {}
 
 @Action<IActionOptionsView>()
 export class ActionView extends BeanActionRowBase implements IActionExecute {
@@ -16,7 +16,11 @@ export class ActionView extends BeanActionRowBase implements IActionExecute {
     const url = $host.$router.getPagePath('/rest/resource/:resource/:id/:formScene?', {
       params: { resource, id: id.toString() },
     });
-    $host.$router.push(url);
+    if (options.replace) {
+      $host.$router.replace(url);
+    } else {
+      $host.$router.push(url);
+    }
     return next();
   }
 }

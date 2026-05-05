@@ -1,12 +1,12 @@
 import { Action, IActionExecute, NextActionExecute } from 'zova-module-a-action';
 import { IJsxRenderContextBase } from 'zova-module-a-openapi';
+import { IPerformActionOptionsCreate } from 'zova-module-basic-openapi';
 
 import { BeanActionBulkBase } from '../lib/beanActionBulkBase.js';
-import { IActionOptionsBulkBase } from '../types/actions.js';
 
 export type TypeActionCreateResult = unknown;
 
-export interface IActionOptionsCreate extends IActionOptionsBulkBase<TypeActionCreateResult> {}
+export interface IActionOptionsCreate extends IPerformActionOptionsCreate<TypeActionCreateResult> {}
 
 @Action<IActionOptionsCreate>()
 export class ActionCreate extends BeanActionBulkBase implements IActionExecute {
@@ -16,7 +16,11 @@ export class ActionCreate extends BeanActionBulkBase implements IActionExecute {
     const url = $host.$router.getPagePath('/rest/resource/:resource/create', {
       params: { resource },
     });
-    $host.$router.push(url);
+    if (options.replace) {
+      $host.$router.replace(url);
+    } else {
+      $host.$router.push(url);
+    }
     return next();
   }
 }

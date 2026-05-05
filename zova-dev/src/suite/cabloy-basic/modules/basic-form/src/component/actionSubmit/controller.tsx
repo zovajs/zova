@@ -29,7 +29,8 @@ export class ControllerActionSubmit extends BeanControllerBase {
         <button
           class={classes(className, isSubmitting && 'btn-disabled')}
           type="submit"
-          onClick={async () => {
+          onClick={async e => {
+            console.log(e);
             const res = await formInstance.submit();
             if (res) {
               this.$router.back();

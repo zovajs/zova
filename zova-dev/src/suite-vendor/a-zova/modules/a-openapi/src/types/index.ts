@@ -13,3 +13,4 @@ export * from './formMeta.js';
 export * from './blocks.js';
 export * from './tableCell.js';
 export * from './formField.js';
+export * from './performAction.js';
