@@ -25,6 +25,20 @@ export interface IPerformActionOptionsAlert<Result = any> extends IPerformAction
   wait?: boolean;
 }
 
+export interface IPerformActionOptionsConfirm<Result = any> extends IPerformActionBulkOptionsBase<Result> {
+  message: string;
+}
+
+export interface IPerformActionOptionsCopy<Result = any> extends IPerformActionBulkOptionsBase<Result> {
+  text: any;
+}
+
+export interface IPerformActionOptionsSetValue<Result = any> extends IPerformActionBulkOptionsBase<Result> {
+  name?: string;
+  value?: any;
+  disableNotifyChanged?: boolean;
+}
+
 declare module 'zova-module-a-openapi' {
   export interface IPerformActionRecord {
     ActionCreate?: IPerformActionOptionsCreate;
