@@ -2,6 +2,7 @@
 /** controller: begin */
 export * from '../component/blockFilter/controller.jsx';
 export * from '../component/blockPage/controller.jsx';
+export * from '../component/blockToolbarBulk/controller.jsx';
 
 import 'zova';
 declare module 'zova' {
@@ -18,17 +19,24 @@ declare module 'zova-module-basic-page' {
         export interface ControllerBlockPage {
           /** @internal */
           get scope(): ScopeModuleBasicPage;
+        }
+
+        export interface ControllerBlockToolbarBulk {
+          /** @internal */
+          get scope(): ScopeModuleBasicPage;
         } 
 }
 /** controller: end */
 /** controller: begin */
 import { ControllerBlockFilter } from '../component/blockFilter/controller.jsx';
 import { ControllerBlockPage } from '../component/blockPage/controller.jsx';
+import { ControllerBlockToolbarBulk } from '../component/blockToolbarBulk/controller.jsx';
 import 'zova';
 declare module 'zova' {
   export interface IBeanRecordLocal {
     'basic-page.controller.blockFilter': ControllerBlockFilter;
 'basic-page.controller.blockPage': ControllerBlockPage;
+'basic-page.controller.blockToolbarBulk': ControllerBlockToolbarBulk;
   }
 }
 /** controller: end */
@@ -38,19 +46,24 @@ export * from './component/blockFilter.js';
 import { ZBlockFilter } from './component/blockFilter.js';
 export * from './component/blockPage.js';
 import { ZBlockPage } from './component/blockPage.js';
+export * from './component/blockToolbarBulk.js';
+import { ZBlockToolbarBulk } from './component/blockToolbarBulk.js';
 export const components = {
   'blockFilter': ZBlockFilter,
 'blockPage': ZBlockPage,
+'blockToolbarBulk': ZBlockToolbarBulk,
 };
 import 'zova';
 declare module 'zova' {
 export interface IComponentRecord {
   'basic-page:blockFilter': ControllerBlockFilter;
 'basic-page:blockPage': ControllerBlockPage;
+'basic-page:blockToolbarBulk': ControllerBlockToolbarBulk;
 }
 export interface IZovaComponentRecord {
   'basic-page:blockFilter': typeof ZBlockFilter;
 'basic-page:blockPage': typeof ZBlockPage;
+'basic-page:blockToolbarBulk': typeof ZBlockToolbarBulk;
 }
 }
 /** components: end */

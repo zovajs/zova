@@ -1,20 +1,20 @@
-import type { IJsxRenderContextPageEntry, IPermissionHint } from 'zova-module-a-openapi';
+import type { IJsxRenderContextPage } from 'zova-module-a-openapi';
 
 import { classes } from 'typestyle';
 import { VNode } from 'vue';
 import { BeanControllerBase, IComponentOptions, Use } from 'zova';
 import { Controller } from 'zova-module-a-bean';
-import { IResourceBlockOptionsToolbarRow } from 'zova-module-basic-openapi';
+import { IResourceBlockOptionsToolbarBulk } from 'zova-module-basic-openapi';
 
-export interface ControllerBlockToolbarRowProps extends IResourceBlockOptionsToolbarRow {}
+export interface ControllerBlockToolbarBulkProps extends IResourceBlockOptionsToolbarBulk {}
 
 @Controller()
-export class ControllerBlockToolbarRow extends BeanControllerBase {
+export class ControllerBlockToolbarBulk extends BeanControllerBase {
   static $propsDefault = {};
   static $componentOptions: IComponentOptions = { inheritAttrs: false, deepExtendDefault: true };
 
   @Use({ injectionScope: 'host' })
-  $$renderContext: IJsxRenderContextPageEntry;
+  $$renderContext: IJsxRenderContextPage;
 
   protected async __init__() {}
 
@@ -39,10 +39,7 @@ export class ControllerBlockToolbarRow extends BeanControllerBase {
     const domActions: VNode[] = [];
     actions.forEach((action, index) => {
       const actionName = action.name;
-      const permissionHint: IPermissionHint | undefined = action.options?.permission;
-      // check formScene
-      if (!this._checkFormScene(permissionHint)) return;
-      // check permission
+      const permissionHint = action.options?.permission;
       if (!this.$passport.checkPermission(this.permissions, actionName, permissionHint)) return;
       const options = Object.assign({ key: index }, action.options);
       const domAction = $jsx.render(action.render!, options, $celScope, this.$$renderContext);
@@ -54,15 +51,5 @@ export class ControllerBlockToolbarRow extends BeanControllerBase {
       }
     });
     return domActions;
-  }
-
-  private _checkFormScene(permissionHint?: IPermissionHint) {
-    const { $$pageEntry } = this.$$renderContext;
-    const formScene = $$pageEntry.formMeta.formScene;
-    const formSceneHint = permissionHint?.formScene;
-    if (!formSceneHint) return true;
-    if (Array.isArray(formSceneHint) && formSceneHint.includes(formScene!)) return true;
-    if (formSceneHint === formScene) return true;
-    return false;
   }
 }

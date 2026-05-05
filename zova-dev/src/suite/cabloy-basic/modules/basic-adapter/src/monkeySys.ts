@@ -11,6 +11,7 @@ export class MonkeySys extends BeanSimple implements IMonkeySysInitialize {
         components: {
           BlockPage: 'basic-page:blockPage',
           BlockFilter: 'basic-page:blockFilter',
+          BlockToolbarBulk: 'basic-page:blockToolbarBulk',
           BlockPageEntry: 'basic-pageentry:blockPageEntry',
           BlockToolbarRow: 'basic-pageentry:blockToolbarRow',
           BlockForm: 'basic-pageentry:blockForm',
