@@ -23,13 +23,14 @@ export class ControllerBlockForm extends BeanControllerBase {
         controllerRef={ref => {
           $$pageEntry.formInstance = ref;
         }}
+        formTag="div"
         data={$$pageEntry.formData}
         schema={$$pageEntry.formSchema}
         schemaScene={$$pageEntry.schemaScene}
         formMeta={$$pageEntry.formMeta}
         formProvider={$$pageEntry.formProvider}
         formScope={$$pageEntry.jsxCelScope}
-        onSubmitData={data => $$pageEntry.onSubmit(data)}
+        onSubmitData={data => $$pageEntry.submitData(data)}
         onShowError={({ error }) => {
           // eslint-disable-next-line no-alert
           window.alert(error.message);

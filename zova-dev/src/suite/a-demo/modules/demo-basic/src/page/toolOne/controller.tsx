@@ -61,7 +61,7 @@ export class ControllerPageToolOne extends BeanControllerPageFormBase {
     // },1000)
   }
 
-  async onSubmit(data: TypeFormOnSubmitData<ApiSchemaTestSsrDtoTestBodyPartial>) {
+  async submitData(data: TypeFormOnSubmitData<ApiSchemaTestSsrDtoTestBodyPartial>) {
     // eslint-disable-next-line
     console.log('submit auto: ', JSON.stringify(data.value));
     this.formData = data.value;

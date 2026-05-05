@@ -120,7 +120,7 @@ export class ControllerBlockPageEntry<TData extends {} = {}> extends BeanControl
     };
   }
 
-  async onSubmit(data: TypeFormOnSubmitData<TData>) {
+  async submitData(data: TypeFormOnSubmitData<TData>) {
     const mutationSubmit = this.$$modelResource.getFormMutationSubmit(this.formMeta, this.entryId);
     await mutationSubmit?.mutateAsync(data.value as any);
     this.setPageMeta(data.value, false);
@@ -136,6 +136,25 @@ export class ControllerBlockPageEntry<TData extends {} = {}> extends BeanControl
     if (!this.formData) {
       return <div>{this.scope.locale.EntryNotExist()}</div>;
     }
+    return <div class={classes(this.$props.class, this.$style(this.$props.style))}>{this._renderFormWrapper()}</div>;
+  }
+
+  private _renderFormWrapper() {
+    return (
+      <form
+        onSubmit={(e: Event) => {
+          e.preventDefault();
+          e.stopPropagation();
+          this.formInstance?.submit();
+        }}
+      >
+        {this._renderBlocks()}
+        <button type="submit" style={{ display: 'none' }}></button>
+      </form>
+    );
+  }
+
+  private _renderBlocks() {
     const blocks = this.$props.blocks;
     if (!blocks || blocks.length === 0) return;
     let domBlocks: VNode[] = [];
@@ -149,6 +168,6 @@ export class ControllerBlockPageEntry<TData extends {} = {}> extends BeanControl
         domBlocks.push(domBlock);
       }
     });
-    return <div class={classes(this.$props.class, this.$style(this.$props.style))}>{domBlocks}</div>;
+    return domBlocks;
   }
 }

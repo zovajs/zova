@@ -17,7 +17,7 @@ export class RenderPageToolOne extends BeanRenderBase {
           data={this.formData}
           schema={this.schemaUpdate}
           formMeta={this.formMeta}
-          onSubmitData={data => this.onSubmit(data)}
+          onSubmitData={data => this.submitData(data)}
           onShowError={({ error }) => {
             // eslint-disable-next-line no-alert
             window.alert(error.message);
@@ -46,7 +46,7 @@ export class RenderPageToolOne extends BeanRenderBase {
 
   private _renderManual() {
     return (
-      <ZForm data={this.formData} onSubmitData={data => this.onSubmit(data)}>
+      <ZForm data={this.formData} onSubmitData={data => this.submitData(data)}>
         <ZFormFieldPreset<ApiSchemaTestSsrDtoTestBodyPartial>
           name="name"
           layout={{ label: `${this.scope.locale.YourName()}:` }}
