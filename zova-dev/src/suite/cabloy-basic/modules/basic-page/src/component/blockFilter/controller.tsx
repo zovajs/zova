@@ -1,5 +1,4 @@
 import type { IJsxRenderContextPage, IFormMeta, ISchemaRenderComponentLayoutOptions } from 'zova-module-a-openapi';
-import type { ModelResource } from 'zova-module-rest-resource';
 
 import { isNilOrEmptyString } from '@cabloy/utils';
 import { classes } from 'typestyle';
