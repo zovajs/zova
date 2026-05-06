@@ -33,7 +33,6 @@ export class MonkeySys extends BeanSimple implements IMonkeySysInitialize {
       form: {
         provider: {
           components: {
-            ActionOperationsRow: 'basic-form:actionOperationsRow',
             ActionSubmit: 'basic-form:actionSubmit',
             ActionBack: 'basic-form:actionBack',
             Input: 'basic-input:formFieldInput',
@@ -51,7 +50,6 @@ export class MonkeySys extends BeanSimple implements IMonkeySysInitialize {
       table: {
         provider: {
           components: {
-            ActionOperationsBulk: 'basic-table:actionOperationsBulk',
             ActionCreate: 'basic-table:actionCreate',
             ActionOperationsRow: 'basic-table.tableCell.actionOperationsRow',
             ActionView: 'basic-table.tableCell.actionView',

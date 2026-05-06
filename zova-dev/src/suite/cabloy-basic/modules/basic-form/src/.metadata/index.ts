@@ -1,7 +1,6 @@
 // eslint-disable
 /** controller: begin */
 export * from '../component/actionBack/controller.jsx';
-export * from '../component/actionOperationsRow/controller.jsx';
 export * from '../component/actionSubmit/controller.jsx';
 
 import 'zova';
@@ -16,11 +15,6 @@ declare module 'zova-module-basic-form' {
           get scope(): ScopeModuleBasicForm;
         }
 
-        export interface ControllerActionOperationsRow {
-          /** @internal */
-          get scope(): ScopeModuleBasicForm;
-        }
-
         export interface ControllerActionSubmit {
           /** @internal */
           get scope(): ScopeModuleBasicForm;
@@ -29,13 +23,11 @@ declare module 'zova-module-basic-form' {
 /** controller: end */
 /** controller: begin */
 import { ControllerActionBack } from '../component/actionBack/controller.jsx';
-import { ControllerActionOperationsRow } from '../component/actionOperationsRow/controller.jsx';
 import { ControllerActionSubmit } from '../component/actionSubmit/controller.jsx';
 import 'zova';
 declare module 'zova' {
   export interface IBeanRecordLocal {
     'basic-form.controller.actionBack': ControllerActionBack;
-'basic-form.controller.actionOperationsRow': ControllerActionOperationsRow;
 'basic-form.controller.actionSubmit': ControllerActionSubmit;
   }
 }
@@ -44,25 +36,20 @@ declare module 'zova' {
 /** components: begin */
 export * from './component/actionBack.js';
 import { ZActionBack } from './component/actionBack.js';
-export * from './component/actionOperationsRow.js';
-import { ZActionOperationsRow } from './component/actionOperationsRow.js';
 export * from './component/actionSubmit.js';
 import { ZActionSubmit } from './component/actionSubmit.js';
 export const components = {
   'actionBack': ZActionBack,
-'actionOperationsRow': ZActionOperationsRow,
 'actionSubmit': ZActionSubmit,
 };
 import 'zova';
 declare module 'zova' {
 export interface IComponentRecord {
   'basic-form:actionBack': ControllerActionBack;
-'basic-form:actionOperationsRow': ControllerActionOperationsRow;
 'basic-form:actionSubmit': ControllerActionSubmit;
 }
 export interface IZovaComponentRecord {
   'basic-form:actionBack': typeof ZActionBack;
-'basic-form:actionOperationsRow': typeof ZActionOperationsRow;
 'basic-form:actionSubmit': typeof ZActionSubmit;
 }
 }
