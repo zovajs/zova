@@ -1,7 +1,7 @@
 import { celEnvBase } from '@cabloy/utils';
 import { classes } from 'typestyle';
 import { VNode } from 'vue';
-import { BeanControllerBase, deepEqual, IComponentOptions, useCustomRef } from 'zova';
+import { BeanControllerBase, IComponentOptions, useCustomRef } from 'zova';
 import { ZovaJsx } from 'zova-jsx';
 import { Controller } from 'zova-module-a-bean';
 import { $QueriesAutoLoad } from 'zova-module-a-model';
@@ -48,14 +48,6 @@ export class ControllerBlockPage<TData extends {} = {}> extends BeanControllerBa
     await $QueriesAutoLoad(
       () => this.$$modelResource.apiSchemasSelect.sdk,
       () => this.queryData,
-    );
-    // watch
-    this.$watch(
-      () => this.permissions,
-      async (newValue, oldValue) => {
-        if (deepEqual(newValue, oldValue)) return;
-        await this.tableInstance?.refreshMeta();
-      },
     );
   }
 

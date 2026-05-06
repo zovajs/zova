@@ -1,9 +1,9 @@
 import type { IJsxRenderContextPage } from 'zova-module-a-openapi';
 
 import { classes } from 'typestyle';
-import { BeanControllerBase, IComponentOptions, Use } from 'zova';
+import { BeanControllerBase, deepEqual, IComponentOptions, Use } from 'zova';
 import { Controller } from 'zova-module-a-bean';
-import { ZTable } from 'zova-module-a-table';
+import { BeanControllerTableBase, ZTable } from 'zova-module-a-table';
 import { IResourceBlockOptionsTable } from 'zova-module-basic-openapi';
 
 export interface ControllerBlockTableProps extends IResourceBlockOptionsTable {}
@@ -13,10 +13,25 @@ export class ControllerBlockTable extends BeanControllerBase {
   static $propsDefault = {};
   static $componentOptions: IComponentOptions = { inheritAttrs: false, deepExtendDefault: true };
 
+  tableInstance: BeanControllerTableBase;
+
   @Use({ injectionScope: 'host' })
   $$renderContext: IJsxRenderContextPage;
 
-  protected async __init__() {}
+  protected async __init__() {
+    // watch
+    this.$watch(
+      () => this.permissions,
+      async (newValue, oldValue) => {
+        if (deepEqual(newValue, oldValue)) return;
+        await this.tableInstance?.refreshMeta();
+      },
+    );
+  }
+
+  get permissions() {
+    return this.$$renderContext.$celScope.permissions;
+  }
 
   protected render() {
     const { $$page } = this.$$renderContext;
@@ -24,6 +39,7 @@ export class ControllerBlockTable extends BeanControllerBase {
       <ZTable
         class={classes(this.$props.class, this.$style(this.$props.style))}
         controllerRef={ref => {
+          this.tableInstance = ref;
           $$page.tableInstance = ref;
         }}
         data={$$page.data}
