@@ -1,6 +1,6 @@
 {
   "name": "zova-ui-vuetify",
-  "version": "5.1.67",
+  "version": "5.1.68",
   "gitHead": "4d11b0fed7af50b828971785af3c014046be6afa",
   "description": "A vue3 vuetify framework with ioc",
   "keywords": [
@@ -146,7 +146,7 @@
     "less": "^4.6.4",
     "oxfmt": "^0.45.0",
     "oxlint": "^1.60.0",
-    "quasar-app-extension-zova": "^1.2.20",
+    "quasar-app-extension-zova": "^1.2.21",
     "sass-embedded": "^1.99.0",
     "typescript": "^5.9.3",
     "unplugin-fonts": "^1.4.0",
