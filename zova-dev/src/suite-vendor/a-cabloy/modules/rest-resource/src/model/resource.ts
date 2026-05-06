@@ -45,8 +45,7 @@ export class ModelResource<Entity = any, EntityCreate = Partial<Entity>, EntityU
     this.resource = resource;
     // resourceMeta
     this.resourceMeta = this.$useComputed(() => {
-      const resourceMeta = this.$sdk.getBootstrap(this.resource);
-      return deepExtend({}, this.$$scopeModuleAOpenapi.config.resourceMeta, resourceMeta.data?.resourceMeta);
+      return this.$$scopeModuleAOpenapi.config.resourceMeta;
     });
     this.permissions = this.$useComputed(() => {
       const permissions = this.$sdk.getPermissions(this.resource);
