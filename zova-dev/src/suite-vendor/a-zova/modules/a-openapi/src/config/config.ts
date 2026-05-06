@@ -1,29 +1,14 @@
 import type { ZovaSys } from 'zova';
 
-import type { IOpenapiOptionsResourceMeta } from '../types/resourceMeta.js';
+import { IResourceProviders } from '../types/resourceProviders.js';
 
 export const config = (_sys: ZovaSys) => {
   return {
     base: {
-      provider: {
-        components: {},
-        actions: {},
+      formFields: {
+        Input: 'input' as never,
       },
-      form: {
-        provider: {
-          components: {
-            Input: 'input',
-          },
-          behaviors: {},
-        },
-      },
-      table: {
-        provider: {
-          components: {},
-          actions: {},
-        },
-      },
-    } as IOpenapiOptionsResourceMeta,
+    } as IResourceProviders,
     resourceMeta: {} as IOpenapiOptionsResourceMeta,
     api: {
       bootstrap: '/api/openapischema/resource/bootstrap/:resource',
