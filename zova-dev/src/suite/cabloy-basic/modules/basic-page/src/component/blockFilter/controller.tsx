@@ -47,7 +47,7 @@ export class ControllerBlockFilter extends BeanControllerBase {
         dataNew[key] = value;
       }
     }
-    $$page.onFilter?.(dataNew);
+    $$page.onFilter(dataNew);
   }
 
   protected render() {
