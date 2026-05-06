@@ -3,7 +3,7 @@ import type { IJsxRenderContextPageEntry } from 'zova-module-a-openapi';
 import { classes } from 'typestyle';
 import { BeanControllerBase, IComponentOptions, Use } from 'zova';
 import { Controller } from 'zova-module-a-bean';
-import { ZForm } from 'zova-module-a-form';
+import { BeanControllerFormBase, ZForm } from 'zova-module-a-form';
 import { IResourceBlockOptionsForm } from 'zova-module-basic-openapi';
 
 export interface ControllerBlockFormProps extends IResourceBlockOptionsForm {}
@@ -12,6 +12,8 @@ export interface ControllerBlockFormProps extends IResourceBlockOptionsForm {}
 export class ControllerBlockForm extends BeanControllerBase {
   static $propsDefault = {};
   static $componentOptions: IComponentOptions = { inheritAttrs: false, deepExtendDefault: true };
+
+  formInstance: BeanControllerFormBase;
 
   @Use({ injectionScope: 'host' })
   $$renderContext: IJsxRenderContextPageEntry;
@@ -24,6 +26,7 @@ export class ControllerBlockForm extends BeanControllerBase {
       <ZForm
         class={classes(this.$props.class, this.$style(this.$props.style))}
         controllerRef={ref => {
+          this.formInstance = ref;
           $$pageEntry.formInstance = ref;
         }}
         formTag="div"
