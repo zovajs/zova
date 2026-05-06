@@ -211,6 +211,7 @@ export type {
   IResourceComponentBlockRecord,
   IResourceComponentFormFieldRecord,
   IResourceComponentTableCellRecord,
+  ISchemaRenderComponentLayoutOptions,
 } from 'zova-module-a-openapi';
 `;
     indexContent += await this._prepareResourcesIndex_rest(srcDir);
