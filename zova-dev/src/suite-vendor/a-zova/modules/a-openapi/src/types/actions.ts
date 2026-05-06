@@ -5,11 +5,15 @@ import { TypeRenderComponentJsx } from 'zova-jsx';
 import type { TypeFormScene } from './formMeta.ts';
 
 export type IResourceActionBulkRecord = {
-  [KEY in keyof IResourceComponentActionBulkRecord]: IResourceComponentActionBulkRecord[KEY];
+  [KEY in keyof IResourceComponentActionBulkRecord as KEY extends `Action${infer Rest}`
+    ? Uncapitalize<Rest>
+    : KEY]: IResourceComponentActionBulkRecord[KEY];
 };
 
 export type IResourceActionRowRecord = {
-  [KEY in keyof IResourceComponentActionRowRecord]: IResourceComponentActionRowRecord[KEY];
+  [KEY in keyof IResourceComponentActionRowRecord as KEY extends `Action${infer Rest}`
+    ? Uncapitalize<Rest>
+    : KEY]: IResourceComponentActionRowRecord[KEY];
 };
 
 export interface IResourceActionTableRecord extends IResourceActionBulkRecord, IResourceActionRowRecord {}
