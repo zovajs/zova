@@ -20,6 +20,7 @@ import { isJsxComponent, ZovaJsx } from 'zova-jsx';
 import { Controller } from 'zova-module-a-bean';
 import {
   IFormMeta,
+  IFormProvider,
   ISchemaRenderComponentLayoutOptions,
   renderFormFieldTopPropsSystem,
   ScopeModuleAOpenapi,
@@ -37,7 +38,6 @@ import {
   IFormFieldScope,
   IJsxRenderContextFormField,
 } from '../../types/formField.js';
-import { IFormProvider } from '../../types/provider.js';
 import { ControllerFormField } from '../formField/controller.jsx';
 
 export interface ControllerFormProps<TFormData extends {} = {}, TSubmitMeta = never> {
@@ -83,12 +83,13 @@ export class ControllerForm<TFormData extends {} = {}, TSubmitMeta = never> exte
     this.form = this._createForm();
     this.formState = useStore(this.form.store, state => state) as any;
     this.formProvider = this.$useComputed(() => {
-      return deepExtend(
-        {},
-        this.$$scopeModuleAOpenapi.config.resourceMeta.provider,
-        this.$$scopeModuleAOpenapi.config.resourceMeta.form?.provider,
-        this.$props.formProvider,
-      );
+      const resourceProviders = this.$$scopeModuleAOpenapi.config.resourceProviders;
+      const formProvider = {
+        components: Object.assign({}, resourceProviders.formFields, resourceProviders.form?.actionsRow),
+        actions: resourceProviders.performActions,
+        behaviors: resourceProviders.behaviors,
+      };
+      return this.$props.formProvider ? deepExtend({}, formProvider, this.$props.formProvider) : formProvider;
     });
     this.schema = this.$useComputed(() => {
       return this.$props.schema;
@@ -319,7 +320,7 @@ export class ControllerForm<TFormData extends {} = {}, TSubmitMeta = never> exte
     if (this.isComponentFormField(renderProvider)) {
       return renderProvider as TypeFormFieldRenderComponent;
     }
-    return this.formProvider.components?.FormField ?? 'a-form:formField';
+    return 'a-form:formField';
   }
 
   public isComponentFormField(renderProvider?: TypeFormFieldRenderComponentProvider) {

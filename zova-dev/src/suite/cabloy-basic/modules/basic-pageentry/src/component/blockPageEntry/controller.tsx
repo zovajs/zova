@@ -1,4 +1,11 @@
-import type { IFormMeta, IJsxRenderContextPageEntry, IPageEntryScope, TypeFormScene, TypeFormSchemaScene } from 'zova-module-a-openapi';
+import type {
+  IFormMeta,
+  IFormProvider,
+  IJsxRenderContextPageEntry,
+  IPageEntryScope,
+  TypeFormScene,
+  TypeFormSchemaScene,
+} from 'zova-module-a-openapi';
 
 import { celEnvBase, isNil } from '@cabloy/utils';
 import { SchemaObject } from 'openapi3-ts/oas31';
@@ -8,7 +15,7 @@ import { VNode } from 'vue';
 import { BeanControllerBase, deepEqual, IComponentOptions, useCustomRef } from 'zova';
 import { ZovaJsx } from 'zova-jsx';
 import { Controller } from 'zova-module-a-bean';
-import { BeanControllerFormBase, formMetaFromFormScene, IFormProvider, TypeFormOnSubmitData } from 'zova-module-a-form';
+import { BeanControllerFormBase, formMetaFromFormScene, TypeFormOnSubmitData } from 'zova-module-a-form';
 import { $QueriesAutoLoad } from 'zova-module-a-model';
 import { IResourceBlockOptionsPageEntry } from 'zova-module-basic-openapi';
 import { ModelResource } from 'zova-module-rest-resource';

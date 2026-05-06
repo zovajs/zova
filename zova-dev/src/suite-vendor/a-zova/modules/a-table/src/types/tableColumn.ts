@@ -17,7 +17,7 @@ export interface ITableCellRenderColumnProps {
 
 export interface ITableCellRenderColumnOptions {
   visible?: boolean;
-  render: TypeTableCellRenderComponent;
+  render?: TypeTableCellRenderComponent;
   columnProps: ITableCellRenderColumnProps;
 }
 

@@ -1,4 +1,4 @@
-import type { IFormMeta, TypeFormScene } from 'zova-module-a-openapi';
+import type { IFormMeta, IFormProvider, TypeFormScene } from 'zova-module-a-openapi';
 
 import { isNil } from '@cabloy/utils';
 import { SchemaObject } from 'openapi3-ts/oas31';
@@ -7,7 +7,7 @@ import { z } from 'zod';
 import { BeanControllerPageBase, deepExtend, Use, usePrepareArg } from 'zova';
 import { ZovaJsx } from 'zova-jsx';
 import { Controller } from 'zova-module-a-bean';
-import { formMetaFromFormScene, IFormProvider } from 'zova-module-a-form';
+import { formMetaFromFormScene } from 'zova-module-a-form';
 import { $QueryAutoLoad } from 'zova-module-a-model';
 import { IResourceBlockOptionsPageEntry } from 'zova-module-basic-openapi';
 import { ZPage } from 'zova-module-home-base';
