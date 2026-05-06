@@ -39,16 +39,27 @@ export type IResourceProvidersFormActionsRow = {
 export type IResourceProvidersBehaviors = IFormProviderBehaviors;
 
 export interface IResourceProviders {
-  blocks: IResourceProvidersBlocks;
-  formFields: IResourceProvidersFormFields;
-  tableCells: IResourceProvidersTableCells;
-  performActions: IResourceProvidersPerformActions;
-  behaviors: IResourceProvidersBehaviors;
-  table: {
-    actionsBulk: IResourceProvidersTableActionsBulk;
-    actionsRow: IResourceProvidersTableActionsRow;
+  blocks?: IResourceProvidersBlocks;
+  formFields?: IResourceProvidersFormFields;
+  tableCells?: IResourceProvidersTableCells;
+  performActions?: IResourceProvidersPerformActions;
+  behaviors?: IResourceProvidersBehaviors;
+  table?: {
+    actionsBulk?: IResourceProvidersTableActionsBulk;
+    actionsRow?: IResourceProvidersTableActionsRow;
   };
-  form: {
-    actionsRow: IResourceProvidersFormActionsRow;
+  form?: {
+    actionsRow?: IResourceProvidersFormActionsRow;
   };
+}
+
+export interface IFormProvider {
+  components?: IResourceProvidersFormFields & IResourceProvidersFormActionsRow;
+  actions?: IResourceProvidersPerformActions;
+  behaviors?: IResourceProvidersBehaviors;
+}
+
+export interface ITableProvider {
+  components?: IResourceProvidersTableCells & IResourceProvidersTableActionsRow;
+  actions?: IResourceProvidersPerformActions;
 }

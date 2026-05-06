@@ -24,5 +24,3 @@ export interface TypeRenderComponentJsx {
 export type TypeRenderComponentNormal = Constructable<ComponentPublicInstance> | string;
 
 export type TypeRenderComponent = TypeRenderComponentNormal | TypeRenderComponentJsx;
-
-export interface IFormProviderComponents {}

@@ -11,3 +11,5 @@ export interface IOpenapiPermissions {
   roleNames?: string[];
   actions?: IOpenapiPermissionModeActionActions;
 }
+
+export type TypeOpenapiPermissions = IOpenapiPermissions | boolean;

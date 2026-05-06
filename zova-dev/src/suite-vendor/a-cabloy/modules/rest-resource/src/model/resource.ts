@@ -2,7 +2,9 @@ import type { TableIdentity } from 'table-identity';
 import type { DataMutation, IDecoratorModelOptions } from 'zova-module-a-model';
 import type {
   IFormMeta,
-  IOpenapiOptionsResourceMeta,
+  IFormProvider,
+  IResourceProviders,
+  ITableProvider,
   ITableQuery,
   ITableRes,
   ScopeModuleAOpenapi,
@@ -11,11 +13,10 @@ import type {
 
 import { hashkey, isNil } from '@cabloy/utils';
 import { SchemaObject } from 'openapi3-ts/oas31';
-import { deepExtend, UseScope } from 'zova';
-import { formSceneFromFormMeta, IFormProvider } from 'zova-module-a-form';
+import { UseScope } from 'zova';
+import { formSceneFromFormMeta } from 'zova-module-a-form';
 import { $QueryAutoLoad, BeanModelBase, Model } from 'zova-module-a-model';
 import { SymbolOpenapiSchemaName } from 'zova-module-a-openapi';
-import { ITableProvider } from 'zova-module-a-table';
 
 export interface IModelOptionsResource extends IDecoratorModelOptions {}
 
@@ -25,7 +26,7 @@ export interface IModelOptionsResource extends IDecoratorModelOptions {}
 export class ModelResource<Entity = any, EntityCreate = Partial<Entity>, EntityUpdate = Partial<Entity>> extends BeanModelBase {
   public resource: string;
   public resourceApi: string;
-  public resourceMeta: IOpenapiOptionsResourceMeta;
+  public resourceProviders: IResourceProviders;
   public permissions?: TypeOpenapiPermissions;
   public formProvider: IFormProvider;
   public tableProvider: ITableProvider;
@@ -43,19 +44,26 @@ export class ModelResource<Entity = any, EntityCreate = Partial<Entity>, EntityU
     if (!resource) throw new Error('resource not specified');
     await super.__init__(resource);
     this.resource = resource;
-    // resourceMeta
-    this.resourceMeta = this.$useComputed(() => {
-      return this.$$scopeModuleAOpenapi.config.resourceMeta;
+    // resourceProviders
+    this.resourceProviders = this.$useComputed(() => {
+      return this.$$scopeModuleAOpenapi.config.resourceProviders;
     });
     this.permissions = this.$useComputed(() => {
       const permissions = this.$sdk.getPermissions(this.resource);
       return permissions.data;
     });
     this.formProvider = this.$useComputed(() => {
-      return deepExtend({}, this.resourceMeta.provider, this.resourceMeta.form?.provider);
+      return {
+        components: Object.assign({}, this.resourceProviders.formFields, this.resourceProviders.form?.actionsRow),
+        actions: this.resourceProviders.performActions,
+        behaviors: this.resourceProviders.behaviors,
+      };
     });
     this.tableProvider = this.$useComputed(() => {
-      return deepExtend({}, this.resourceMeta.provider, this.resourceMeta.table?.provider);
+      return {
+        components: Object.assign({}, this.resourceProviders.tableCells, this.resourceProviders.table?.actionsRow),
+        actions: this.resourceProviders.performActions,
+      };
     });
     this.schemaView = this.$useComputed(() => {
       return this.apiSchemasView.responseBody;
