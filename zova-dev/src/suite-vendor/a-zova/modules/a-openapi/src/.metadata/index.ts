@@ -65,6 +65,37 @@ declare module 'zova' {
   }
 }
 /** sys: end */
+/** bean: begin */
+export * from '../bean/bean.resourceProviders.js';
+
+import 'zova';
+declare module 'zova' {
+  
+  
+}
+declare module 'zova-module-a-openapi' {
+  
+        export interface BeanResourceProviders {
+          /** @internal */
+          get scope(): ScopeModuleAOpenapi;
+        }
+
+        export interface BeanResourceProviders {
+          get $beanFullName(): 'a-openapi.bean.resourceProviders';
+          get $onionName(): 'a-openapi:resourceProviders';
+          
+        } 
+}
+/** bean: end */
+/** bean: begin */
+import { BeanResourceProviders } from '../bean/bean.resourceProviders.js';
+import 'zova';
+declare module 'zova' {
+  export interface IBeanRecordGeneral {
+    'a-openapi.bean.resourceProviders': BeanResourceProviders;
+  }
+}
+/** bean: end */
 /** config: begin */
 export * from '../config/config.js';
 import { config } from '../config/config.js';

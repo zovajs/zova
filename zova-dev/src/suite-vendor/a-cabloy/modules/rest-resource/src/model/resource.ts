@@ -1,12 +1,13 @@
 import type { TableIdentity } from 'table-identity';
 import type { DataMutation, IDecoratorModelOptions } from 'zova-module-a-model';
-import type { IFormMeta, ITableQuery, ITableRes, TypeOpenapiPermissions } from 'zova-module-a-openapi';
+import type { IFormMeta, IFormProvider, ITableProvider, ITableQuery, ITableRes, TypeOpenapiPermissions } from 'zova-module-a-openapi';
 
 import { hashkey, isNil } from '@cabloy/utils';
 import { SchemaObject } from 'openapi3-ts/oas31';
+import { Use } from 'zova';
 import { formSceneFromFormMeta } from 'zova-module-a-form';
 import { $QueryAutoLoad, BeanModelBase, Model } from 'zova-module-a-model';
-import { SymbolOpenapiSchemaName } from 'zova-module-a-openapi';
+import { BeanResourceProviders, SymbolOpenapiSchemaName } from 'zova-module-a-openapi';
 
 export interface IModelOptionsResource extends IDecoratorModelOptions {}
 
@@ -17,12 +18,17 @@ export class ModelResource<Entity = any, EntityCreate = Partial<Entity>, EntityU
   public resource: string;
   public resourceApi: string;
   public permissions?: TypeOpenapiPermissions;
+  public formProvider: IFormProvider;
+  public tableProvider: ITableProvider;
   public schemaView?: SchemaObject;
   public schemaCreate?: SchemaObject;
   public schemaUpdate?: SchemaObject;
   public schemaFilter?: SchemaObject;
   public schemaRow?: SchemaObject;
   public schemaPages?: SchemaObject;
+
+  @Use()
+  $$beanResourceProviders: BeanResourceProviders;
 
   protected async __init__(resource: string) {
     if (!resource) throw new Error('resource not specified');
@@ -31,6 +37,12 @@ export class ModelResource<Entity = any, EntityCreate = Partial<Entity>, EntityU
     this.permissions = this.$useComputed(() => {
       const permissions = this.$sdk.getPermissions(this.resource);
       return permissions.data;
+    });
+    this.formProvider = this.$useComputed(() => {
+      return this.$$beanResourceProviders.formProvider;
+    });
+    this.tableProvider = this.$useComputed(() => {
+      return this.$$beanResourceProviders.tableProvider;
     });
     this.schemaView = this.$useComputed(() => {
       return this.apiSchemasView.responseBody;

@@ -1,18 +1,19 @@
+import type {
+  IResourceActionRowOptionsBase,
+  ISchemaObjectExtensionFieldRest,
+  ITableProvider,
+  TypeTableCellRenderComponent,
+  TypeTableCellRenderComponentProvider,
+} from 'zova-module-a-openapi';
+
 import { celEnvBase, isNilOrEmptyString } from '@cabloy/utils';
 import { CellContext, createColumnHelper, getCoreRowModel, TableOptionsWithReactiveData } from '@tanstack/vue-table';
 import { SchemaObject } from 'openapi3-ts/oas31';
 import { VNode } from 'vue';
-import { appResource, cast, deepEqual, deepExtend, objectAssignReactive, UseScope } from 'zova';
+import { appResource, cast, deepEqual, deepExtend, objectAssignReactive, Use } from 'zova';
 import { isJsxComponent, ZovaJsx } from 'zova-jsx';
 import { Controller } from 'zova-module-a-bean';
-import {
-  IResourceActionRowOptionsBase,
-  ISchemaObjectExtensionFieldRest,
-  ITableProvider,
-  ScopeModuleAOpenapi,
-  TypeTableCellRenderComponent,
-  TypeTableCellRenderComponentProvider,
-} from 'zova-module-a-openapi';
+import { BeanResourceProviders } from 'zova-module-a-openapi';
 
 import type { ITableMeta, TypeColumn, TypeTable, TypeTableGetColumns } from '../../types/table.js';
 import type { IDecoratorTableCellOptions, IJsxRenderContextTableCell, ITableCellRender } from '../../types/tableCell.js';
@@ -49,17 +50,13 @@ export class ControllerTable<TData extends {} = {}> extends BeanControllerTableB
   zovaJsx: ZovaJsx;
   columnCelEnv: typeof celEnvBase;
 
-  @UseScope()
-  $$scopeModuleAOpenapi: ScopeModuleAOpenapi;
+  @Use()
+  $$beanResourceProviders: BeanResourceProviders;
 
   protected async __init__() {
     this.bean._setBean('$$table', this);
     this.tableProvider = this.$useComputed(() => {
-      const resourceProviders = this.$$scopeModuleAOpenapi.config.resourceProviders;
-      const tableProvider = {
-        components: Object.assign({}, resourceProviders.tableCells, resourceProviders.table?.actionsRow),
-        actions: resourceProviders.performActions,
-      };
+      const tableProvider = this.$$beanResourceProviders.tableProvider;
       return this.$props.tableProvider ? deepExtend({}, tableProvider, this.$props.tableProvider) : tableProvider;
     });
     // jsx
