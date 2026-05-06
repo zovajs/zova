@@ -209,6 +209,7 @@ export type { IPagePathRecord } from 'zova-module-a-router';
     indexContent += await this._prepareResourcesIndex_rest(srcDir);
     indexContent += await this._prepareResourcesIndex_icons(srcDir);
     indexContent += await this._prepareResourcesIndex_pages(srcDir);
+    indexContent += await this._prepareResourcesIndex_providers(srcDir);
     await fse.writeFile(path.join(srcDir, 'index.ts'), indexContent);
   }
 
@@ -235,6 +236,15 @@ export type { IPagePathRecord } from 'zova-module-a-router';
   }
 
   async _prepareResourcesIndex_icons(_srcDir: string) {
+    const content = `export function $iconName<K extends keyof IIconRecord>(name: K): any {
+  return name;
+}
+`;
+    return content;
+  }
+
+  async _prepareResourcesIndex_providers(_srcDir: string) {
+    return '';
     const content = `export function $iconName<K extends keyof IIconRecord>(name: K): any {
   return name;
 }
