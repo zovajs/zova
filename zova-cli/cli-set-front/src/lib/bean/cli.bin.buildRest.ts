@@ -200,16 +200,23 @@ export class CliBinBuildRest extends BeanCliBase {
     await fse.writeFile(path.join(srcDir, 'package.json'), pkgContent!);
   }
 
-  async _prepareResourcesIndex({ srcDir }: IBinBuildRestContext) {
+  async _prepareResourcesIndex({ srcDir, projectPath }: IBinBuildRestContext) {
     let indexContent = `import type { IIconRecord } from 'zova-module-a-icon';
-import type { TypePagePathSchema } from 'zova-module-a-router';
 export type { IIconRecord } from 'zova-module-a-icon';
+import type { TypePagePathSchema } from 'zova-module-a-router';
 export type { IPagePathRecord } from 'zova-module-a-router';
+export type {
+  IResourceComponentActionBulkRecord,
+  IResourceComponentActionRowRecord,
+  IResourceComponentBlockRecord,
+  IResourceComponentFormFieldRecord,
+  IResourceComponentTableCellRecord,
+} from 'zova-module-a-openapi';
 `;
     indexContent += await this._prepareResourcesIndex_rest(srcDir);
     indexContent += await this._prepareResourcesIndex_icons(srcDir);
     indexContent += await this._prepareResourcesIndex_pages(srcDir);
-    indexContent += await this._prepareResourcesIndex_providers(srcDir);
+    indexContent += await this._prepareResourcesIndex_providers(srcDir, projectPath);
     await fse.writeFile(path.join(srcDir, 'index.ts'), indexContent);
   }
 
@@ -243,12 +250,15 @@ export type { IPagePathRecord } from 'zova-module-a-router';
     return content;
   }
 
-  async _prepareResourcesIndex_providers(_srcDir: string) {
-    return '';
-    const content = `export function $iconName<K extends keyof IIconRecord>(name: K): any {
-  return name;
-}
-`;
+  async _prepareResourcesIndex_providers(_srcDir: string, projectPath: string) {
+    const dirBasicOpenapi = path.join(projectPath, './src/suite/cabloy-basic/modules/basic-openapi');
+    const dirStartOpenapi = path.join(projectPath, './src/suite/cabloy-start/modules/start-openapi');
+    let content = '';
+    if (fse.existsSync(dirBasicOpenapi)) {
+      content += `import 'zova-module-basic-openapi';\n`;
+    } else if (fse.existsSync(dirStartOpenapi)) {
+      content += `import 'zova-module-start-openapi';\n`;
+    }
     return content;
   }
 
