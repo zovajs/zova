@@ -6,10 +6,10 @@ This suite `zova-suite-cabloy-basic` uses the `Daisyui + Tailwindcss` UI library
 
 ### 1. Core Modules
 
-| Name           | Description                                                                                                                                                 |
-| -------------- | ----------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| basic-adapter  | UI component adapter: defines commonly used UI components for rendering `Table/Form`                                                                        |
-| basic-restpage | Dynamically render CRUD list pages, entry pages, and search forms, while demonstrating best practices for Tanstack Table, Tanstack Form, and Tanstack Query |
+| Name                       | Description                                                                                                                                                 |
+| -------------------------- | ----------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| basic-adapter              | UI component adapter: defines commonly used UI components for rendering `Table/Form`                                                                        |
+| basic-page/basic-pageentry | Dynamically render CRUD list pages, entry pages, and search forms, while demonstrating best practices for Tanstack Table, Tanstack Form, and Tanstack Query |
 
 ### 2. Other Modules
 
