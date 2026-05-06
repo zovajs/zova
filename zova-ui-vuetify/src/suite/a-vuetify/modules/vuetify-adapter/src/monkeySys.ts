@@ -1,9 +1,8 @@
 import type { IMonkeySysInitialize } from 'zova';
-import type { IOpenapiOptionsResourceMeta } from 'zova-module-a-openapi';
 
-import { VTextField } from 'vuetify/components';
 import { BeanSimple, deepExtend } from 'zova';
 
+import { __ThisModule__ } from './.metadata/this.js';
 import { SysAppBar } from './bean/sys.appBar.jsx';
 import { SysIcon } from './bean/sys.icon.js';
 import { SysMain } from './bean/sys.main.js';
@@ -28,32 +27,9 @@ export class MonkeySys extends BeanSimple implements IMonkeySysInitialize {
     // appBar
     const sysAppBar = await this.bean._newBean(SysAppBar, false);
     await sysAppBar.initialize();
-    // config custom
-    const configCustom: IOpenapiOptionsResourceMeta = {
-      provider: {
-        components: {},
-      },
-      form: {
-        provider: {
-          components: {
-            Input: VTextField,
-            Captcha: 'vuetify-form:formFieldCaptcha',
-          },
-          behaviors: {
-            FormField: 'vuetify-form:formField',
-            FormFieldLayout: 'vuetify-form:formFieldLayout',
-          },
-        },
-      },
-      table: {
-        provider: {
-          components: {},
-          actions: {},
-        },
-      },
-    };
-    // rest
-    const scopeRestConfig = this.sys.util.getModuleConfigSafe('a-openapi');
-    scopeRestConfig.resourceMeta = deepExtend({}, scopeRestConfig.base, configCustom, scopeRestConfig.resourceMeta);
+    // config
+    const configSelf = this.sys.util.getModuleConfigSafe(__ThisModule__);
+    const configOpenapi = this.sys.util.getModuleConfigSafe('a-openapi');
+    configOpenapi.resourceProviders = deepExtend({}, configOpenapi.resourceProviders, configSelf.resourceProviders);
   }
 }

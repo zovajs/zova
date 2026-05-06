@@ -142,6 +142,10 @@ declare module 'zova' {
   }
 }
 /** meta: end */
+/** config: begin */
+export * from '../config/config.js';
+import { config } from '../config/config.js';
+/** config: end */
 /** monkey: begin */
 export * from '../monkey.js';
 /** monkey: end */
@@ -149,7 +153,7 @@ export * from '../monkey.js';
 export * from '../monkeySys.js';
 /** monkeySys: end */
 /** scope: begin */
-import { BeanScopeBase, type BeanScopeUtil } from 'zova';
+import { BeanScopeBase, type BeanScopeUtil, TypeModuleConfig } from 'zova';
 import { Scope } from 'zova-module-a-bean';
 
 @Scope()
@@ -157,6 +161,7 @@ export class ScopeModuleVuetifyAdapter extends BeanScopeBase {}
 
 export interface ScopeModuleVuetifyAdapter {
   util: BeanScopeUtil;
+config: TypeModuleConfig<typeof config>;
 }
 
 import 'zova';
@@ -165,7 +170,9 @@ declare module 'zova' {
     'vuetify-adapter': ScopeModuleVuetifyAdapter;
   }
   
-  
+  export interface IBeanScopeConfig {
+    'vuetify-adapter': ReturnType<typeof config>;
+  }
 
   
 
