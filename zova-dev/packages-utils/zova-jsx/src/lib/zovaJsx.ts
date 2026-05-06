@@ -7,7 +7,7 @@ import { classes } from 'typestyle';
 import { createTextVNode, h } from 'vue';
 import { beanFullNameFromOnionName, BeanSimple, cast, objectAssignReactive } from 'zova-core';
 
-import type { IFormProviderComponents, TypeRenderComponent, TypeRenderComponentJsx, TypeRenderComponentJsxProps } from '../types/rest.ts';
+import type { TypeRenderComponent, TypeRenderComponentJsx, TypeRenderComponentJsxProps } from '../types/rest.ts';
 
 import { renderFieldJsxPropsSystem } from './const.ts';
 import { isJsxComponent, isJsxEvent, isNativeElement, isZovaComponent, normalizePropName } from './utils.ts';
@@ -15,12 +15,12 @@ import { isJsxComponent, isJsxEvent, isNativeElement, isZovaComponent, normalize
 type CelEnv = typeof celEnvBase;
 
 export class ZovaJsx extends BeanSimple {
-  private _components: IFormProviderComponents | undefined;
+  private _components: {} | undefined;
   private _actions: Record<string, string> | undefined;
   private _celEnv: CelEnv;
   private _transientObject: any;
 
-  constructor(components?: IFormProviderComponents, actions?: Record<string, string>, celEnv?: CelEnv) {
+  constructor(components?: {}, actions?: Record<string, string>, celEnv?: CelEnv) {
     super();
     this._components = components;
     this._actions = actions;
