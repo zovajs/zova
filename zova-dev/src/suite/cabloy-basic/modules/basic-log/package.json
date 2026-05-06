@@ -49,5 +49,10 @@
       "exports.\\..import"
     ]
   },
-  "title": "basic-log"
+  "title": "basic-log",
+  "zovaModule": {
+    "beansPreload": [
+      "basic-log.action.log"
+    ]
+  }
 }

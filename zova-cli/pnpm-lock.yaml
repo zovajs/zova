@@ -9,8 +9,8 @@ importers:
   .:
     devDependencies:
       '@cabloy/lint':
-        specifier: ^5.1.5
-        version: 5.1.7(eslint@10.2.0)(oxlint@1.60.0)(typescript@5.9.3)(vue-eslint-parser@10.4.0(eslint@10.2.0))
+        specifier: ^5.1.8
+        version: 5.1.8(eslint@10.2.0)(oxlint@1.60.0)(typescript@5.9.3)(vue-eslint-parser@10.4.0(eslint@10.2.0))
       '@types/mocha':
         specifier: ^10.0.6
         version: 10.0.10
@@ -45,7 +45,7 @@ importers:
         specifier: ^7.6.2
         version: 7.7.4
       zova-cli-set-front:
-        specifier: ^1.2.33
+        specifier: ^1.2.35
         version: link:../cli-set-front
     devDependencies:
       clean-package:
@@ -79,8 +79,8 @@ importers:
         specifier: ^7.9.2
         version: 7.9.2(typescript@5.9.3)
       '@cabloy/utils':
-        specifier: ^2.1.9
-        version: 2.1.9
+        specifier: ^2.1.15
+        version: 2.1.15
       '@cabloy/vite-plugin-babel':
         specifier: ^1.3.3
         version: 1.3.3(@babel/core@7.29.0)(vite@8.0.8(@types/node@22.19.17)(esbuild@0.25.12)(terser@5.46.1)(yaml@2.8.3))
@@ -88,8 +88,8 @@ importers:
         specifier: ^2.0.1
         version: 2.0.1(@babel/core@7.29.0)
       '@cabloy/word-utils':
-        specifier: ^2.1.8
-        version: 2.1.8
+        specifier: ^2.1.9
+        version: 2.1.9
       '@typescript/native-preview':
         specifier: ^7.0.0-dev.20260320.1
         version: 7.0.0-dev.20260415.1
@@ -100,17 +100,17 @@ importers:
         specifier: ^0.4.0
         version: 0.4.0(@babel/core@7.29.0)
       babel-plugin-zova-bean-module:
-        specifier: ^1.2.8
-        version: 1.2.8
+        specifier: ^1.2.9
+        version: 1.2.9
       babel-plugin-zova-bean-use:
-        specifier: ^1.1.8
-        version: 1.1.8
+        specifier: ^1.1.9
+        version: 1.1.9
       babel-plugin-zova-behavior:
-        specifier: ^1.1.8
-        version: 1.1.8
+        specifier: ^1.1.9
+        version: 1.1.9
       babel-plugin-zova-component:
-        specifier: ^1.1.8
-        version: 1.1.8
+        specifier: ^1.1.9
+        version: 1.1.9
       compressing:
         specifier: ^1.10.0
         version: 1.10.5
@@ -151,11 +151,11 @@ importers:
         specifier: ^2.8.3
         version: 2.8.3
       zova-openapi:
-        specifier: ^1.1.8
-        version: 1.1.8(typescript@5.9.3)
+        specifier: ^1.1.9
+        version: 1.1.9(typescript@5.9.3)
       zova-vite:
-        specifier: ^1.1.18
-        version: 1.1.18(@babel/core@7.29.0)(vue@3.5.13(typescript@5.9.3))(yaml@2.8.3)
+        specifier: ^1.1.20
+        version: 1.1.20(@babel/core@7.29.0)(vue@3.5.13(typescript@5.9.3))(yaml@2.8.3)
     devDependencies:
       clean-package:
         specifier: ^2.2.0
@@ -345,8 +345,8 @@ packages:
   '@cabloy/extend@3.2.4':
     resolution: {integrity: sha512-YTftBhta0KHUpG9GyuOSctAf2AGyZRdZANp/eYyl5zvIoDRK8gRJ6WXGfhbbV0BI+8A8ok6ESK2Sj9eP+C7U9Q==}
 
-  '@cabloy/lint@5.1.7':
-    resolution: {integrity: sha512-52ClU1KaTmUYamKbX0vGdZOs2avwdE1SupQd636gmYkQLqQJzcZRbiQASxH0Ixf1lxsnXCC9EWzGoIo3deVO0w==}
+  '@cabloy/lint@5.1.8':
+    resolution: {integrity: sha512-xJosGE2hM/cfs0yQrGYIbIbjpdFHQlV0EudaGpEXB/Tfhc+InKatzj6Mw3KD5eRjBwkU9teLVknQLfNum5l/hA==}
 
   '@cabloy/module-glob@5.3.7':
     resolution: {integrity: sha512-OhfiArNB3LkoZ05KI0anuJR0qp85slKlLuCZFEt+u9IAQHhd31ZpTStnvW99s39VIYoJsRiD2DqM/QD5YvrBCw==}
@@ -362,6 +362,9 @@ packages:
 
   '@cabloy/process-helper@3.1.4':
     resolution: {integrity: sha512-26Bma3KdY/ZyDgGvRGY/Sxro1u4V8KTiTwd9TQnRVnw7Llam/gU0XcubsDNPFBdAY+tm9NfqAVkBU5ghe+MzSQ==}
+
+  '@cabloy/utils@2.1.15':
+    resolution: {integrity: sha512-ak2kCVLFJFpeIPsFV/g9Vhg6mJHggKkBjjpqgZ3DXtDqagqBlpf1o9NunSARdZl4nS0DcwLmhrttjl2dzEqhcQ==}
 
   '@cabloy/utils@2.1.9':
     resolution: {integrity: sha512-BYPx8icGbID9zgI+MSZKd2gRcWA0GLEynYwwh/xgs6hObg3KnXYT4gjo+3EYVxCatZFk9LfB1eCFL5cNWwI24A==}
@@ -407,6 +410,9 @@ packages:
 
   '@cabloy/word-utils@2.1.8':
     resolution: {integrity: sha512-ZprZwfiL427En/fhJLGJPfRjsQy/yE8nplol6WlWBlyVLVL7G7BqRs7sr0MWdvPAkdDAyIUvaqPwEgD0xU1OWw==}
+
+  '@cabloy/word-utils@2.1.9':
+    resolution: {integrity: sha512-IH0QGvx9p1+zOC+AkKhKULatkRJO5n5iuMfwSXLZyc9T2u/w6pbPtj/dO/6LDAPinUvyaisHHehTqcnkLRUNTw==}
 
   '@colors/colors@1.5.0':
     resolution: {integrity: sha512-ooWCrlZP11i8GImSjTHYHLkvFDP48nS4+204nGb1RiX/WXYHmJA2III9/e2DWVabCESdW7hBAEzHRqUn9OUVvQ==}
@@ -1842,17 +1848,17 @@ packages:
     peerDependencies:
       '@babel/core': ^7.0.0 || ^8.0.0-0
 
-  babel-plugin-zova-bean-module@1.2.8:
-    resolution: {integrity: sha512-IH/GTXUktD3hQ+KiidG5H56igPLclQP0xK2kfmMfOAMy4Vc/ODzBMHGlRGHhxU/MDSVe/3x5Rmx9kiNXGFoZQQ==}
+  babel-plugin-zova-bean-module@1.2.9:
+    resolution: {integrity: sha512-sCm0aNzLmR9sgMQ1283n3N+23zwzFTnky+GMkqt0DDd9wI6eAp+c4EjKqjAQU4/aZTvwbNqLp+BwOKh/OhD0gA==}
 
-  babel-plugin-zova-bean-use@1.1.8:
-    resolution: {integrity: sha512-PLjeoUHJlX8ZcARDiYgdIEe4+1Bd7TpgTKIIq3CZB9heiZc4eYCOiRPx5SsKRRrGtjZccdxpBtS4PmXn6xR0mg==}
+  babel-plugin-zova-bean-use@1.1.9:
+    resolution: {integrity: sha512-XIlDs4f3vItB5KOBhOaa9QAAzz9QkT0xskqhwJd/zbNc17pkZOu+C+c2IkeiUe5MRszGFFs/IZ1wn4VP5v8YpQ==}
 
-  babel-plugin-zova-behavior@1.1.8:
-    resolution: {integrity: sha512-Lag905FUZe92QI+nmHQIpchMj6+AOjJsMtUQov+jU4u/KWJdZKpT6H4euMY7JzDcac05ySk3oRaavhRurfC7zQ==}
+  babel-plugin-zova-behavior@1.1.9:
+    resolution: {integrity: sha512-s0eCL3CSS8Bid6KoZIfn9jhzYG/9XkmJW2fCJJPEhmWWXIjHaowuxEPpCv+5+uBKLqcvX1Kym5zu2lGROnq+bA==}
 
-  babel-plugin-zova-component@1.1.8:
-    resolution: {integrity: sha512-fsQ0cKoWTWTQHfUL5WIe5dMHsOL0S4ZgqZf8odkqiGzwWyvZEBuCVQwQybJlP9HJpjDpfSC422NKLU0zoU02Rg==}
+  babel-plugin-zova-component@1.1.9:
+    resolution: {integrity: sha512-SYo5ksS9YTLpWG+z/s4ReuJpsTWWjUI9b8Z+SFW9ORnQtobJy+pgM44a23/sb4qBl2nbud1ksbKyIwPeckABvA==}
 
   balanced-match@1.0.2:
     resolution: {integrity: sha512-3oSeUO0TMV67hN1AmbXsK4yaqU7tjiHlbxRDZOpH0KW9+CeX4bRAaX0Anxt0tx2MrpRpWwQaPwIlISEJhYU5Pw==}
@@ -4060,11 +4066,11 @@ packages:
     resolution: {integrity: sha512-rVksvsnNCdJ/ohGc6xgPwyN8eheCxsiLM8mxuE/t/mOVqJewPuO1miLpTHQiRgTKCLexL4MeAFVagts7HmNZ2Q==}
     engines: {node: '>=10'}
 
-  zova-openapi@1.1.8:
-    resolution: {integrity: sha512-Ne2Ga0g5zlKShf2HjzO5wX0JQzIMLH2xMSBoUCu6tzbTXMlu9Zb9vi+T7nQJKV22CcLGL8mYSAOGjIzpQY6UpA==}
+  zova-openapi@1.1.9:
+    resolution: {integrity: sha512-ILWUsCqpTlwDkkodihB9QNT4Ujg5Hf8SXkFDeay20E+I16fMpkR+H28XzvANN52Dam0nsNbzb74S16+kppr3rg==}
 
-  zova-vite@1.1.18:
-    resolution: {integrity: sha512-JDxmJNIPZDT6s3cED44b4UXTh2SH8hJvFIUFvaBwvzY19L8NxMAT77Z/7+P1xu8WJHryEO6UaR5m9xasWjJ+Vw==}
+  zova-vite@1.1.20:
+    resolution: {integrity: sha512-iZCvhfWzHLF+MrTghoevxe7jy8ROmw4Iqbo/QYpXOaq4v9yLDSNc2dWtig1txZ8KtwPZwP8HiHnTxNcmmPk25g==}
 
   zwitch@2.0.4:
     resolution: {integrity: sha512-bXE4cR/kVZhKZX/RjPEflHaKVhUVl85noU3v6b8apfQEc1x4A+zBxjZ4lN8LqGd6WZ3dl98pY4o717VFmoPp+A==}
@@ -4339,7 +4345,7 @@ snapshots:
 
   '@cabloy/extend@3.2.4': {}
 
-  '@cabloy/lint@5.1.7(eslint@10.2.0)(oxlint@1.60.0)(typescript@5.9.3)(vue-eslint-parser@10.4.0(eslint@10.2.0))':
+  '@cabloy/lint@5.1.8(eslint@10.2.0)(oxlint@1.60.0)(typescript@5.9.3)(vue-eslint-parser@10.4.0(eslint@10.2.0))':
     dependencies:
       '@e18e/eslint-plugin': 0.2.0(eslint@10.2.0)(oxlint@1.60.0)
       '@eslint/json': 1.2.0
@@ -4360,7 +4366,7 @@ snapshots:
   '@cabloy/module-glob@5.3.7':
     dependencies:
       '@cabloy/module-info': 2.0.0
-      '@cabloy/utils': 2.1.9
+      '@cabloy/utils': 2.1.15
       boxen: 4.2.0
       chalk: 3.0.0
       fs-extra: 11.3.4
@@ -4381,10 +4387,17 @@ snapshots:
 
   '@cabloy/process-helper@3.1.4': {}
 
+  '@cabloy/utils@2.1.15':
+    dependencies:
+      '@cabloy/module-info': 2.0.0
+      '@cabloy/word-utils': 2.1.9
+      '@marcbachmann/cel-js': 7.6.0
+      object-hash: 3.0.0
+
   '@cabloy/utils@2.1.9':
     dependencies:
       '@cabloy/module-info': 2.0.0
-      '@cabloy/word-utils': 2.1.8
+      '@cabloy/word-utils': 2.1.9
       '@marcbachmann/cel-js': 7.6.0
       object-hash: 3.0.0
 
@@ -4455,6 +4468,8 @@ snapshots:
       vue: 3.5.13(typescript@5.9.3)
 
   '@cabloy/word-utils@2.1.8': {}
+
+  '@cabloy/word-utils@2.1.9': {}
 
   '@colors/colors@1.5.0':
     optional: true
@@ -5566,16 +5581,16 @@ snapshots:
       '@babel/core': 7.29.0
       '@babel/helper-plugin-utils': 7.28.6
 
-  babel-plugin-zova-bean-module@1.2.8:
+  babel-plugin-zova-bean-module@1.2.9:
     dependencies:
       '@babel/core': 7.29.0
       '@babel/traverse': 7.29.0
       '@cabloy/module-info': 2.0.0
-      '@cabloy/word-utils': 2.1.8
+      '@cabloy/word-utils': 2.1.9
     transitivePeerDependencies:
       - supports-color
 
-  babel-plugin-zova-bean-use@1.1.8:
+  babel-plugin-zova-bean-use@1.1.9:
     dependencies:
       '@babel/core': 7.29.0
       '@babel/traverse': 7.29.0
@@ -5583,7 +5598,7 @@ snapshots:
     transitivePeerDependencies:
       - supports-color
 
-  babel-plugin-zova-behavior@1.1.8:
+  babel-plugin-zova-behavior@1.1.9:
     dependencies:
       '@babel/core': 7.29.0
       '@babel/traverse': 7.29.0
@@ -5593,7 +5608,7 @@ snapshots:
     transitivePeerDependencies:
       - supports-color
 
-  babel-plugin-zova-component@1.1.8:
+  babel-plugin-zova-component@1.1.9:
     dependencies:
       '@babel/core': 7.29.0
       '@babel/traverse': 7.29.0
@@ -8136,13 +8151,13 @@ snapshots:
 
   yocto-queue@0.1.0: {}
 
-  zova-openapi@1.1.8(typescript@5.9.3):
+  zova-openapi@1.1.9(typescript@5.9.3):
     dependencies:
       '@cabloy/openapi-typescript': 7.9.2(typescript@5.9.3)
     transitivePeerDependencies:
       - typescript
 
-  zova-vite@1.1.18(@babel/core@7.29.0)(vue@3.5.13(typescript@5.9.3))(yaml@2.8.3):
+  zova-vite@1.1.20(@babel/core@7.29.0)(vue@3.5.13(typescript@5.9.3))(yaml@2.8.3):
     dependencies:
       '@babel/plugin-proposal-decorators': 7.29.0(@babel/core@7.29.0)
       '@babel/plugin-transform-class-properties': 7.28.6(@babel/core@7.29.0)
@@ -8163,10 +8178,10 @@ snapshots:
       '@types/node': 22.19.17
       '@vitejs/plugin-vue-jsx': 5.1.5(vite@8.0.8(@types/node@22.19.17)(esbuild@0.25.12)(terser@5.46.1)(yaml@2.8.3))(vue@3.5.13(typescript@5.9.3))
       babel-plugin-transform-typescript-metadata: 0.4.0(@babel/core@7.29.0)
-      babel-plugin-zova-bean-module: 1.2.8
-      babel-plugin-zova-bean-use: 1.1.8
-      babel-plugin-zova-behavior: 1.1.8
-      babel-plugin-zova-component: 1.1.8
+      babel-plugin-zova-bean-module: 1.2.9
+      babel-plugin-zova-bean-use: 1.1.9
+      babel-plugin-zova-behavior: 1.1.9
+      babel-plugin-zova-component: 1.1.9
       chalk: 3.0.0
       esbuild: 0.25.12
       fs-extra: 11.3.4
