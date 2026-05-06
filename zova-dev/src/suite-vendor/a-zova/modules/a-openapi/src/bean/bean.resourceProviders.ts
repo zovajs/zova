@@ -12,7 +12,7 @@ export class BeanResourceProviders extends BeanBase {
     this.formProvider = this.$useComputed(() => {
       const resourceProviders = this.scope.config.resourceProviders;
       return {
-        components: Object.assign({}, resourceProviders.formFields, resourceProviders.form?.actionsRow),
+        components: Object.assign({}, resourceProviders.blocks, resourceProviders.formFields, resourceProviders.form?.actionsRow),
         actions: resourceProviders.performActions,
         behaviors: resourceProviders.behaviors,
       };
@@ -20,7 +20,13 @@ export class BeanResourceProviders extends BeanBase {
     this.tableProvider = this.$useComputed(() => {
       const resourceProviders = this.scope.config.resourceProviders;
       return {
-        components: Object.assign({}, resourceProviders.tableCells, resourceProviders.table?.actionsRow),
+        components: Object.assign(
+          {},
+          resourceProviders.blocks,
+          resourceProviders.tableCells,
+          resourceProviders.table?.actionsBulk,
+          resourceProviders.table?.actionsRow,
+        ),
         actions: resourceProviders.performActions,
       };
     });

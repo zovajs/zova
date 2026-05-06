@@ -4,7 +4,7 @@ import { BeanControllerPageBase, deepExtend, Use, usePrepareArg } from 'zova';
 import { ZovaJsx } from 'zova-jsx';
 import { Controller } from 'zova-module-a-bean';
 import { $QueryAutoLoad } from 'zova-module-a-model';
-import { ITableProvider } from 'zova-module-a-table';
+import { ITableProvider } from 'zova-module-a-openapi';
 import { IResourceBlockOptionsPage } from 'zova-module-basic-openapi';
 import { ZPage } from 'zova-module-home-base';
 

@@ -5,8 +5,8 @@ import { BeanControllerBase, IComponentOptions, useCustomRef } from 'zova';
 import { ZovaJsx } from 'zova-jsx';
 import { Controller } from 'zova-module-a-bean';
 import { $QueriesAutoLoad } from 'zova-module-a-model';
-import { IJsxRenderContextPage, IPageScope, ITablePaged, ITableQuery, ITableResPaged } from 'zova-module-a-openapi';
-import { BeanControllerTableBase, ITableProvider } from 'zova-module-a-table';
+import { IJsxRenderContextPage, IPageScope, ITablePaged, ITableProvider, ITableQuery, ITableResPaged } from 'zova-module-a-openapi';
+import { BeanControllerTableBase } from 'zova-module-a-table';
 import { IResourceBlockOptionsPage } from 'zova-module-basic-openapi';
 import { ModelResource } from 'zova-module-rest-resource';
 

@@ -3,7 +3,7 @@ import type { ZovaJsx } from 'zova-jsx';
 
 import { TableIdentity } from 'table-identity';
 
-import { TypeOpenapiPermissions } from './resourceMeta.js';
+import { TypeOpenapiPermissions } from './permissions.js';
 
 export interface IJsxRenderContextBase {
   app: ZovaApplication;

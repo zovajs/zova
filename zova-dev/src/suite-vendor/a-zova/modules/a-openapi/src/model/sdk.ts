@@ -14,7 +14,7 @@ import {
   loadSchemaProperties,
   schemaToZodSchema,
 } from '../lib/schema.js';
-import { TypeOpenapiPermissions } from '../types/resourceMeta.js';
+import { TypeOpenapiPermissions } from '../types/permissions.js';
 import { TypeSchemaScene } from '../types/rest.js';
 import { IOpenapiSchemas, TypeOpenapiSchemasSdk } from '../types/schema.js';
 import { TypeRequestMethod } from '../types/sdk.js';
