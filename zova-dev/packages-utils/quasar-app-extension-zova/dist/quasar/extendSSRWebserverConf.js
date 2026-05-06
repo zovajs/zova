@@ -18,7 +18,9 @@ export function extendSSRWebserverConf(context) {
         // buildsPatch
         conf.buildsPatch = [
             {
-                banner: { js: "import { createRequire } from 'module';const require = createRequire(import.meta.url);" },
+                banner: {
+                    js: "import { createRequire } from 'module';const require = createRequire(import.meta.url);",
+                },
                 entryPoints: [{ in: api.resolve.entry('ssr-prod-webserver.js'), out: 'index' }],
             },
             {

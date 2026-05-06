@@ -22,7 +22,8 @@
     "init": "pnpm install --no-frozen-lockfile && cd ./zova-cli && pnpm install --no-frozen-lockfile && cd .. && npm run zova-dev-deps",
     "zova-dev-deps": "cd ./zova-dev && node ../zova-cli/cli/src/bin/zova.ts :tools:deps",
     "docs:fix": "textlint --fix ./zova-docs/**/*.md",
-    "release": "./scripts/release.sh"
+    "release-patch": "./scripts/release.sh patch",
+    "release-minor": "./scripts/release.sh minor"
   },
   "dependencies": {},
   "devDependencies": {
