@@ -133,6 +133,12 @@ export async function generateFileComponent(options: IMetadataCustomGenerateOpti
     },
     prepareComponentOptions(${componentOptions}),
   );`;
+  // rest props
+  const contentRestProps = `declare module 'zova' {
+  export interface IVonaComponentRecord {
+    '${moduleName}:${name}': ${nameProps};
+  }
+}`;
   // content
   const content = `${contentImports.join('\n')}
 ${contentTypeControllerPublicProps}
@@ -141,6 +147,7 @@ ${contentControllerInnerProps}
 ${contentControllerInterface}
 ${combineContentRenderAndStyle(controllerInfo, moduleName, className, genericDeclare, genericArguments)}
 ${contentComponent}
+${contentRestProps}
 `;
   // restComponent
   await generateRestComponent(options, globFile, controllerInfo, genericDeclare, genericArguments, generateImports, _contentImportTypeController);

@@ -27,3 +27,8 @@ export const ZFormFieldPreset = defineComponent(
   },
   prepareComponentOptions(ControllerFormFieldPreset.$componentOptions),
 );
+declare module 'zova' {
+  export interface IVonaComponentRecord {
+    'a-form:formFieldPreset': ControllerFormFieldPresetProps;
+  }
+}

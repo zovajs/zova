@@ -32,3 +32,8 @@ export const ZFormField = defineComponent(
   },
   prepareComponentOptions(ControllerFormField.$componentOptions),
 );
+declare module 'zova' {
+  export interface IVonaComponentRecord {
+    'a-form:formField': ControllerFormFieldProps;
+  }
+}

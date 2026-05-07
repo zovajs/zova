@@ -207,6 +207,8 @@ import type { TypePagePathSchema } from 'zova-module-a-router';
 export type { IPagePathRecord } from 'zova-module-a-router';
 import type { IActionRecord, TypeActionOptions } from 'zova-module-a-action';
 export type { IActionRecord } from 'zova-module-a-action';
+import type { IVonaComponentRecord, TypeComponentOptions } from 'zova';
+export type { IVonaComponentRecord } from 'zova';
 export type {
   IResourceComponentActionBulkRecord,
   IResourceComponentActionRowRecord,
@@ -263,9 +265,16 @@ export type {
     } else if (fse.existsSync(dirStartOpenapi)) {
       content += `import 'zova-module-start-openapi';\n`;
     }
+    // actions
     content += `export function Action<K extends keyof IActionRecord>(options: TypeActionOptions<K>) {
   if(!options.name) throw new Error('should specify the action name');
   return options.name.replace(':','.action.');
+}
+`;
+    // components
+    content += `export function Component<K extends keyof IVonaComponentRecord>(options: TypeComponentOptions<K>) {
+  if (!options.name) throw new Error('should specify the component name');
+  return options.name;
 }
 `;
     return content;

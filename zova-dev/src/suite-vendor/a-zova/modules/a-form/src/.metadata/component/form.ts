@@ -38,3 +38,8 @@ export const ZForm = defineComponent(
   },
   prepareComponentOptions(),
 );
+declare module 'zova' {
+  export interface IVonaComponentRecord {
+    'a-form:form': ControllerFormProps;
+  }
+}
