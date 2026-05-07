@@ -1,2 +1,1 @@
-export * from './action/expr.js';
-export * from './action/log.js';
+export * from 'zova-module-basic-actionssync';

@@ -6,8 +6,6 @@ import { TableIdentity } from 'table-identity';
 
 export const SymbolActionResult = Symbol('SymbolActionResult');
 
-export type TypeActionOptionsRest<T> = Omit<T, typeof SymbolActionResult> & { res?: string };
-
 export type TypeActionOptions<K extends keyof IActionRecord> = {
   name: K;
   options?: Omit<IActionRecord[K], typeof SymbolActionResult>;
