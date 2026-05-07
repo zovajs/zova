@@ -13,7 +13,7 @@ export const config = (_sys: ZovaSys) => {
       ActionView: 'basic-actions:view',
       ActionEdit: 'basic-actions:edit',
       ActionDelete: 'basic-actions:delete',
-      ActionLog: 'basic-log:log',
+      // ActionLog: 'basic-log:log',
       ActionAlert: 'basic-actions:alert',
       ActionConfirm: 'basic-actions:confirm',
       ActionCopy: 'basic-actions:copy',
