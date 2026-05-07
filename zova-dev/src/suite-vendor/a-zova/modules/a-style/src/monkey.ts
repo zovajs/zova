@@ -2,7 +2,6 @@ import type { TypeStyle } from 'typestyle';
 import type { NestedCSSProperties } from 'typestyle/lib/types.js';
 import type { BeanBase, BeanContainer, IMonkeyAppInitialize, IMonkeyAppInitialized, IMonkeyBeanInit } from 'zova';
 
-import { isNil } from '@cabloy/utils';
 import { createTypeStyle, cssRaw, cssRule, style } from 'typestyle';
 import { beanFullNameFromOnionName, BeanSimple, SymbolBeanFullName, useComputed } from 'zova';
 
@@ -95,7 +94,8 @@ export class Monkey extends BeanSimple implements IMonkeyAppInitialize, IMonkeyA
   }
 
   _patchStyle(beanInstance: BeanBase, props, ...args) {
-    if (isNil(props)) return undefined;
+    // undefined/null/false
+    if (!props) return undefined;
     if (this.sys.env.META_MODE === 'development') {
       if (props && typeof props === 'object') {
         props = Object.assign({ $debugName: beanInstance[SymbolBeanFullName].replaceAll('.', '_') }, props);

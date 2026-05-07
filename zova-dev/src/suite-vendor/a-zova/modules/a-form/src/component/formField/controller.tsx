@@ -117,12 +117,7 @@ export class ControllerFormField<TParentData extends {} = {}> extends BeanContro
     // class
     props.class = propsBucket.class;
     // readonly
-    const readonlyTemp = (typeof propsBucket.render === 'string' && propsBucket.options?.readonly) ?? propsBucket.readonly;
-    if (!isNil(readonlyTemp)) {
-      props.readonly = readonlyTemp;
-    } else if (this.formMeta?.formMode === 'view') {
-      props.readonly = true;
-    }
+    props.readonly = propsBucket.readonly;
     // celScope
     const celScope = this.$$form.getFieldScope(this.name, {});
     const jsxRenderContext = this.$$form.getFieldJsxRenderContext(this, celScope);
@@ -158,14 +153,22 @@ export class ControllerFormField<TParentData extends {} = {}> extends BeanContro
         options: presetOptions,
       },
     );
-    // class/style
-    const classTemp = (typeof propsBucket.render === 'string' && propsBucket.options?.class) ?? propsBucket.class;
-    const styleTemp = (typeof propsBucket.render === 'string' && propsBucket.options?.style) ?? propsBucket.style;
-    if (!isNil(classTemp) || !isNil(styleTemp)) {
+    // class/style: need not check typeof propsBucket.render === 'string' because maybe return false
+    const classTemp = propsBucket.options?.class ?? propsBucket.class;
+    const styleTemp = propsBucket.options?.style ?? propsBucket.style;
+    if (classTemp || styleTemp) {
       propsBucket.class = classes(classTemp, this.$style(styleTemp));
-      if (typeof propsBucket.render === 'string' && propsBucket.options?.class) delete propsBucket.options.class;
-      if (typeof propsBucket.render === 'string' && propsBucket.options?.style) delete propsBucket.options.style;
+      if (propsBucket.options?.class) delete propsBucket.options.class;
+      if (propsBucket.options?.style) delete propsBucket.options.style;
       delete propsBucket.style;
+    }
+    // readonly
+    const readonlyTemp = propsBucket.options?.readonly ?? propsBucket.readonly;
+    if (!isNil(readonlyTemp)) {
+      propsBucket.readonly = readonlyTemp;
+      if (propsBucket.options?.readonly) delete propsBucket.options.readonly;
+    } else if (this.formMeta?.formMode === 'view') {
+      propsBucket.readonly = true;
     }
     // render
     // propsBucket.renderFlattern = this.$$form.getRenderFlattern(propsBucket.render);

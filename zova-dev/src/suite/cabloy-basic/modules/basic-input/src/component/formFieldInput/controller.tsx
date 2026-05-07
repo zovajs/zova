@@ -1,6 +1,5 @@
 import type { IComponentOptions } from 'zova';
 
-import { omitObject, pickObject } from '@cabloy/utils';
 import { classes } from 'typestyle';
 import { BeanControllerBase } from 'zova';
 import { Controller } from 'zova-module-a-bean';
@@ -33,9 +32,9 @@ export class ControllerFormFieldInput extends BeanControllerBase {
             onBlur: () => {
               $$formField.handleBlur();
             },
+            value: propsBucket.value,
+            ...propsBucket.options,
             ...props,
-            ...pickObject(propsBucket, ['value']),
-            ...omitObject(propsBucket.options, ['style']),
             class: className,
           };
           return <input {...propsNew}></input>;
