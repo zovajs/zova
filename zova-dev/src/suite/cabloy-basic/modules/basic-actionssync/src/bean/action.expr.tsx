@@ -1,11 +1,11 @@
-import type { IJsxRenderContextBase, IPerformActionOptionsBase } from 'zova-module-a-openapi';
+import type { IJsxRenderContextBase } from 'zova-module-a-openapi';
 
 import { BeanBase, Preload } from 'zova';
-import { Action, IActionExecute, NextActionExecute } from 'zova-module-a-action';
+import { Action, type IActionExecute, type IActionOptionsBase, type NextActionExecute } from 'zova-module-a-action';
 
 export type TypeActionExprResult = unknown;
 
-export interface IActionOptionsExpr extends IPerformActionOptionsBase<TypeActionExprResult> {
+export interface IActionOptionsExpr extends IActionOptionsBase<TypeActionExprResult> {
   expression: string;
 }
 

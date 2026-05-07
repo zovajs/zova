@@ -200,7 +200,7 @@ export class ZovaJsx extends BeanSimple {
   ) {
     const onionOptions = beanInstance.$onionOptions;
     // props
-    let props = this.renderJsxProps(actionChild.props, {}, celScope, renderContext);
+    let props = this.renderJsxProps(cast(actionChild.props).options, {}, celScope, renderContext);
     if (!isEmptyObject(onionOptions)) {
       // not use deepExtend, maybe: Maximum call stack size exceeded
       props = Object.assign({}, onionOptions, props);

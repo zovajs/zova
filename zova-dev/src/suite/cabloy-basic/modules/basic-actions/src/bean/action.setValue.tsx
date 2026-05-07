@@ -1,12 +1,15 @@
 import { BeanBase, cast } from 'zova';
-import { Action, IActionExecute, NextActionExecute } from 'zova-module-a-action';
+import { Action, IActionExecute, IActionOptionsBase, NextActionExecute } from 'zova-module-a-action';
 import { IJsxRenderContextFormField } from 'zova-module-a-form';
 import { IJsxRenderContextBase } from 'zova-module-a-openapi';
-import { IPerformActionOptionsSetValue } from 'zova-module-basic-openapi';
 
 export type TypeActionSetValueResult = unknown;
 
-export interface IActionOptionsSetValue extends IPerformActionOptionsSetValue<TypeActionSetValueResult> {}
+export interface IActionOptionsSetValue extends IActionOptionsBase<TypeActionSetValueResult> {
+  name?: string;
+  value?: any;
+  disableNotifyChanged?: boolean;
+}
 
 @Action<IActionOptionsSetValue>()
 export class ActionSetValue extends BeanBase implements IActionExecute {

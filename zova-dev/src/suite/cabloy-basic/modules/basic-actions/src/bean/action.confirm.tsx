@@ -1,11 +1,12 @@
 import { BeanBase } from 'zova';
-import { Action, IActionExecute, NextActionExecute } from 'zova-module-a-action';
+import { Action, IActionExecute, IActionOptionsBase, NextActionExecute } from 'zova-module-a-action';
 import { IJsxRenderContextBase } from 'zova-module-a-openapi';
-import { IPerformActionOptionsConfirm } from 'zova-module-basic-openapi';
 
 export type TypeActionConfirmResult = boolean;
 
-export interface IActionOptionsConfirm extends IPerformActionOptionsConfirm<TypeActionConfirmResult> {}
+export interface IActionOptionsConfirm extends IActionOptionsBase<TypeActionConfirmResult> {
+  message: string;
+}
 
 @Action<IActionOptionsConfirm>()
 export class ActionConfirm extends BeanBase implements IActionExecute {

@@ -1,12 +1,11 @@
-import { Action, IActionExecute, NextActionExecute } from 'zova-module-a-action';
+import { Action, IActionExecute, IActionRowOptionsBase, NextActionExecute } from 'zova-module-a-action';
 import { IJsxRenderContextBase } from 'zova-module-a-openapi';
-import { IPerformActionOptionsDelete } from 'zova-module-basic-openapi';
 
 import { BeanActionRowBase } from '../lib/beanActionRowBase.js';
 
 export type TypeActionDeleteResult = number;
 
-export interface IActionOptionsDelete extends IPerformActionOptionsDelete<TypeActionDeleteResult> {}
+export interface IActionOptionsDelete extends IActionRowOptionsBase<TypeActionDeleteResult> {}
 
 @Action<IActionOptionsDelete>()
 export class ActionDelete extends BeanActionRowBase implements IActionExecute {

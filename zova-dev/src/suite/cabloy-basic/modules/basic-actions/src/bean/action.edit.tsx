@@ -1,12 +1,13 @@
-import { Action, IActionExecute, NextActionExecute } from 'zova-module-a-action';
+import { Action, IActionExecute, IActionRowOptionsBase, NextActionExecute } from 'zova-module-a-action';
 import { IJsxRenderContextBase } from 'zova-module-a-openapi';
-import { IPerformActionOptionsEdit } from 'zova-module-basic-openapi';
 
 import { BeanActionRowBase } from '../lib/beanActionRowBase.js';
 
 export type TypeActionEditResult = unknown;
 
-export interface IActionOptionsEdit extends IPerformActionOptionsEdit<TypeActionEditResult> {}
+export interface IActionOptionsEdit extends IActionRowOptionsBase<TypeActionEditResult> {
+  replace?: boolean;
+}
 
 @Action<IActionOptionsEdit>()
 export class ActionEdit extends BeanActionRowBase implements IActionExecute {

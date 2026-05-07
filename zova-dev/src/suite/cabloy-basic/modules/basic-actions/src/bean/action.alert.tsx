@@ -1,14 +1,16 @@
-import type { IActionExecute } from 'zova-module-a-action';
+import type { IActionExecute, IActionOptionsBase } from 'zova-module-a-action';
 import type { NextActionExecute } from 'zova-module-a-action';
 import type { IJsxRenderContextBase } from 'zova-module-a-openapi';
 
 import { BeanBase } from 'zova';
 import { Action } from 'zova-module-a-action';
-import { IPerformActionOptionsAlert } from 'zova-module-basic-openapi';
 
 export type TypeActionAlertResult = unknown;
 
-export interface IActionOptionsAlert extends IPerformActionOptionsAlert<TypeActionAlertResult> {}
+export interface IActionOptionsAlert extends IActionOptionsBase<TypeActionAlertResult> {
+  message: string;
+  wait?: boolean;
+}
 
 @Action<IActionOptionsAlert>({ wait: true })
 export class ActionAlert extends BeanBase implements IActionExecute {

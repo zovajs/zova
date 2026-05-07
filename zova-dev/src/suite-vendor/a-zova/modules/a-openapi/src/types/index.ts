@@ -1,6 +1,5 @@
 export * from './action.js';
 export * from './database.js';
-export * from './jsx.js';
 export * from './permissions.js';
 export * from './rest.js';
 export * from './schema.js';
@@ -12,5 +11,4 @@ export * from './formMeta.js';
 export * from './blocks.js';
 export * from './tableCell.js';
 export * from './formField.js';
-export * from './performAction.js';
 export * from './resourceProviders.js';

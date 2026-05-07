@@ -2,6 +2,8 @@ import type { OmitNever } from 'zova';
 import type { ServiceOnion } from 'zova-module-a-bean';
 import type { IJsxRenderContextBase } from 'zova-module-a-openapi';
 
+import { TableIdentity } from 'table-identity';
+
 export const SymbolActionResult = Symbol('SymbolActionResult');
 
 export type TypeActionOptionsRest<T> = Omit<T, typeof SymbolActionResult> & { res?: string };
@@ -23,6 +25,17 @@ export interface IActionExecute {
 export interface IDecoratorActionOptions<Result = any> {
   [SymbolActionResult]: Result;
   // res?: string; // need not define here
+}
+
+export interface IActionOptionsBase<Result = any> extends IDecoratorActionOptions<Result> {}
+
+export interface IActionBulkOptionsBase<Result = any> extends IActionOptionsBase<Result> {
+  resource?: string;
+}
+
+export interface IActionRowOptionsBase<Result = any> extends IActionOptionsBase<Result> {
+  resource?: string;
+  id?: TableIdentity;
 }
 
 declare module 'zova-module-a-bean' {

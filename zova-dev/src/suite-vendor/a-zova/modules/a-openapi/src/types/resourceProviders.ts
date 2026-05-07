@@ -1,11 +1,9 @@
 import { TypeBeanRecordGeneralSelector, TypeComponentRecordSelectorKeys } from 'zova';
-import { IActionRecord } from 'zova-module-a-action';
 import { IFormProviderBehaviors } from 'zova-module-a-form';
 
 import { IResourceComponentActionBulkRecord, IResourceComponentActionRowRecord } from './actions.js';
 import { IResourceComponentBlockRecord } from './blocks.js';
 import { IResourceComponentFormFieldRecord } from './formField.js';
-import { IPerformActionRecord } from './performAction.js';
 import { IResourceComponentTableCellRecord } from './tableCell.js';
 
 export type IResourceProvidersBlocks = {
@@ -18,10 +16,6 @@ export type IResourceProvidersFormFields = {
 
 export type IResourceProvidersTableCells = {
   [KEY in keyof IResourceComponentTableCellRecord]?: keyof TypeBeanRecordGeneralSelector<'tableCell'>;
-};
-
-export type IResourceProvidersPerformActions = {
-  [KEY in keyof IPerformActionRecord]?: keyof IActionRecord;
 };
 
 export type IResourceProvidersTableActionsBulk = {
@@ -42,7 +36,6 @@ export interface IResourceProviders {
   blocks?: IResourceProvidersBlocks;
   formFields?: IResourceProvidersFormFields;
   tableCells?: IResourceProvidersTableCells;
-  performActions?: IResourceProvidersPerformActions;
   behaviors?: IResourceProvidersBehaviors;
   table?: {
     actionsBulk?: IResourceProvidersTableActionsBulk;
@@ -55,11 +48,9 @@ export interface IResourceProviders {
 
 export interface IFormProvider {
   components?: IResourceProvidersFormFields & IResourceProvidersFormActionsRow;
-  actions?: IResourceProvidersPerformActions;
   behaviors?: IResourceProvidersBehaviors;
 }
 
 export interface ITableProvider {
   components?: IResourceProvidersTableCells & IResourceProvidersTableActionsRow;
-  actions?: IResourceProvidersPerformActions;
 }

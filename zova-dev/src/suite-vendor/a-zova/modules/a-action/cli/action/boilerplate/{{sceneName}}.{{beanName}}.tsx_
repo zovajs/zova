@@ -1,11 +1,11 @@
-import type { IJsxRenderContextBase, IPerformActionOptionsBase } from 'zova-module-a-openapi';
+import type { IJsxRenderContextBase } from 'zova-module-a-openapi';
 
 import { BeanBase } from 'zova';
-import { Action, IActionExecute, NextActionExecute } from 'zova-module-a-action';
+import { Action, type IActionExecute, type IActionOptionsBase, type NextActionExecute } from 'zova-module-a-action';
 
 export type TypeAction<%=argv.beanNameCapitalize%>Result = unknown;
 
-export interface IActionOptions<%=argv.beanNameCapitalize%> extends IPerformActionOptionsBase<TypeAction<%=argv.beanNameCapitalize%>Result> {}
+export interface IActionOptions<%=argv.beanNameCapitalize%> extends IActionOptionsBase<TypeAction<%=argv.beanNameCapitalize%>Result> {}
 
 @Action<IActionOptions<%=argv.beanNameCapitalize%>>()
 export class Action<%=argv.beanNameCapitalize%> extends BeanBase implements IActionExecute {

@@ -2,12 +2,14 @@ import type { IJsxRenderContextBase } from 'zova-module-a-openapi';
 
 import { isNil } from '@cabloy/utils';
 import { BeanBase, Preload } from 'zova';
-import { Action, IActionExecute, NextActionExecute } from 'zova-module-a-action';
-import { IPerformActionOptionsLog } from 'zova-module-basic-openapi';
+import { Action, IActionExecute, IActionOptionsBase, NextActionExecute } from 'zova-module-a-action';
 
 export type TypeActionLogResult = unknown;
 
-export interface IActionOptionsLog extends IPerformActionOptionsLog<TypeActionLogResult> {}
+export interface IActionOptionsLog extends IActionOptionsBase<TypeActionLogResult> {
+  name?: string;
+  message: any;
+}
 
 @Action<IActionOptionsLog>()
 @Preload()
