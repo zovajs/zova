@@ -4,10 +4,10 @@ import { omitObject, pickObject } from '@cabloy/utils';
 import { classes } from 'typestyle';
 import { BeanControllerBase } from 'zova';
 import { Controller } from 'zova-module-a-bean';
-import { IFormFieldPresetOptions, ZFormField } from 'zova-module-a-form';
+import { IFormFieldPresetOptionsBase, ZFormField } from 'zova-module-a-form';
 import { IResourceFormFieldOptionsInput } from 'zova-module-basic-openapi';
 
-export interface ControllerFormFieldInputProps extends IFormFieldPresetOptions {}
+export interface ControllerFormFieldInputProps extends IFormFieldPresetOptionsBase<IResourceFormFieldOptionsInput> {}
 
 @Controller()
 export class ControllerFormFieldInput extends BeanControllerBase {

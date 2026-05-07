@@ -3,11 +3,12 @@ import type { IComponentOptions } from 'zova';
 
 import { BeanControllerBase, Use } from 'zova';
 import { Controller } from 'zova-module-a-bean';
-import { ControllerForm, IFormFieldPresetOptions, ZFormFieldPreset } from 'zova-module-a-form';
+import { ControllerForm, IFormFieldPresetOptionsBase, ZFormFieldPreset } from 'zova-module-a-form';
+import { IResourceFormFieldOptionsCurrency } from 'zova-module-basic-openapi';
 
 import { currencyFormat, currencyUpdate } from '../../lib/utils.js';
 
-export interface ControllerFormFieldCurrencyProps extends IFormFieldPresetOptions {}
+export interface ControllerFormFieldCurrencyProps extends IFormFieldPresetOptionsBase<IResourceFormFieldOptionsCurrency> {}
 
 @Controller()
 export class ControllerFormFieldCurrency extends BeanControllerBase {
@@ -22,30 +23,28 @@ export class ControllerFormFieldCurrency extends BeanControllerBase {
   protected async __init__() {}
 
   protected render() {
-    const currencyOptions = this.$props.preset?.Currency;
+    const currencyOptions = this.$props.options;
     const value = this._valuePatch(currencyOptions);
     return (
       <ZFormFieldPreset
         {...this.$props}
         render="Input"
-        preset={{
-          Input: {
-            value,
-            onInput: (e: Event) => {
-              const value = (e.target as HTMLInputElement).value;
-              this._valueKeyboardInput = value;
-              // valuePatch maybe null
-              const valuePatch = currencyUpdate(value, currencyOptions);
-              const valueNew = valuePatch !== undefined ? (valuePatch ?? undefined) : value;
-              this.$$form.setFieldValue(this.$props.name!, valueNew);
-            },
-            onChange: (e: Event) => {
-              const value = (e.target as HTMLInputElement).value;
-              const valueInputPatch = currencyUpdate(value, currencyOptions);
-              if (valueInputPatch !== undefined) {
-                this._valueKeyboardInput = undefined;
-              }
-            },
+        options={{
+          value,
+          onInput: (e: Event) => {
+            const value = (e.target as HTMLInputElement).value;
+            this._valueKeyboardInput = value;
+            // valuePatch maybe null
+            const valuePatch = currencyUpdate(value, currencyOptions);
+            const valueNew = valuePatch !== undefined ? (valuePatch ?? undefined) : value;
+            this.$$form.setFieldValue(this.$props.name!, valueNew);
+          },
+          onChange: (e: Event) => {
+            const value = (e.target as HTMLInputElement).value;
+            const valueInputPatch = currencyUpdate(value, currencyOptions);
+            if (valueInputPatch !== undefined) {
+              this._valueKeyboardInput = undefined;
+            }
           },
         }}
       ></ZFormFieldPreset>

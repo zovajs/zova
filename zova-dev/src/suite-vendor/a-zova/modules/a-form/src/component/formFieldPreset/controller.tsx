@@ -1,19 +1,22 @@
 import { BeanControllerBase, IComponentOptions, Use } from 'zova';
 import { Controller } from 'zova-module-a-bean';
+import { ISchemaRenderComponentPresetRecord } from 'zova-module-a-openapi';
 
 import type { ControllerForm } from '../form/controller.jsx';
 
 import { IFormFieldPresetOptions } from '../../types/formField.js';
 
-export interface ControllerFormFieldPresetProps<TParentData extends {} = {}> extends IFormFieldPresetOptions<TParentData> {}
+export interface ControllerFormFieldPresetProps<
+  PresetName extends keyof ISchemaRenderComponentPresetRecord = 'Input',
+> extends IFormFieldPresetOptions<ISchemaRenderComponentPresetRecord[PresetName]> {}
 
 @Controller()
-export class ControllerFormFieldPreset<TParentData extends {} = {}> extends BeanControllerBase {
+export class ControllerFormFieldPreset extends BeanControllerBase {
   static $propsDefault = {};
   static $componentOptions: IComponentOptions = { inheritAttrs: false, deepExtendDefault: true };
 
   @Use({ injectionScope: 'host' })
-  $$form: ControllerForm<TParentData>;
+  $$form: ControllerForm;
 
   protected async __init__() {}
 

@@ -1,8 +1,8 @@
 import { BeanControllerBase, ClientOnly, IComponentOptions, TypeEventOff, Use } from 'zova';
 import { Controller } from 'zova-module-a-bean';
-import { ControllerForm, IFormFieldPresetOptions, ZFormField } from 'zova-module-a-form';
+import { ControllerForm, IFormFieldPresetOptionsBase, ZFormField } from 'zova-module-a-form';
 import { ToolV } from 'zova-module-a-zod';
-import { ICaptchaProviderRecord, IResourceFormFieldOptionsInput } from 'zova-module-basic-openapi';
+import { ICaptchaProviderRecord, IResourceFormFieldOptionsCaptcha, IResourceFormFieldOptionsInput } from 'zova-module-basic-openapi';
 
 export interface ICaptchaData {
   id: string;
@@ -11,13 +11,13 @@ export interface ICaptchaData {
   payload?: unknown;
 }
 
-export interface ControllerFormFieldCaptchaProps extends IFormFieldPresetOptions {}
+export interface ControllerFormFieldCaptchaProps extends IFormFieldPresetOptionsBase<IResourceFormFieldOptionsCaptcha> {}
 
 @Controller()
 export class ControllerFormFieldCaptcha extends BeanControllerBase {
   static $propsDefault = {
-    preset: {
-      Captcha: { scene: 'captcha-simple:simple' },
+    options: {
+      scene: 'captcha-simple:simple',
     },
   };
   static $componentOptions: IComponentOptions = { inheritAttrs: false, deepExtendDefault: true };
@@ -54,7 +54,7 @@ export class ControllerFormFieldCaptcha extends BeanControllerBase {
   }
 
   get captchaScene() {
-    return this.$props.preset!.Captcha!.scene!;
+    return this.$props.options!.scene!;
   }
 
   private async createCaptchaData() {

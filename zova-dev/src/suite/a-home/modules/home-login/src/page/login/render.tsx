@@ -52,15 +52,19 @@ export class RenderPageLogin extends BeanRenderBase {
       >
         <ZFormFieldPreset
           name="username"
+          style={{ fontSize: '12px' }}
+          options={{
+            style: { border: 'solid 1px orange' },
+            type: 'text',
+            placeholder: this.scope.locale.YourUsername(),
+          }}
           class="grow"
-          preset={{ Input: { type: 'text', placeholder: this.scope.locale.YourUsername() } }}
           layout={{ iconPrefix: ':daisy:person' }}
         ></ZFormFieldPreset>
         <ZFormFieldPreset
           name="password"
           class="grow"
-          sys={{ asyncDebounceMs: 1000 }}
-          preset={{ Input: { type: 'password', placeholder: this.scope.locale.YourPassword() } }}
+          options={{ type: 'password', placeholder: this.scope.locale.YourPassword() }}
           layout={{ iconPrefix: ':daisy:lock' }}
         ></ZFormFieldPreset>
         <ZFormFieldPreset name="captcha"></ZFormFieldPreset>

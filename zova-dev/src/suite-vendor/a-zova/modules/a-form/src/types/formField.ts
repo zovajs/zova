@@ -56,8 +56,12 @@ export interface IFormFieldOptionsBase<TParentData = {}, TName extends DeepKeys<
   // onBlur?: (e: Event) => void; // allow set to null, but not provide null type
 }
 
-export interface IFormFieldPresetOptions<TParentData = {}> extends IFormFieldComponentOptions<TParentData> {
-  preset?: ISchemaRenderComponentPresetRecord;
+export interface IFormFieldPresetOptions<OPTIONS> extends IFormFieldComponentOptions {
+  options?: OPTIONS;
+}
+
+export interface IFormFieldPresetOptionsBase<OPTIONS> extends IFormFieldComponentOptions {
+  options?: OPTIONS;
 }
 
 export interface IFormFieldComponentOptions<TParentData = {}> extends IFormFieldOptions<TParentData> {}
