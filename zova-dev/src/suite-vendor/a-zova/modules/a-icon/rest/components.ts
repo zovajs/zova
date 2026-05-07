@@ -1,1 +1,1 @@
-export * from './component/icon.js';
+export * from 'zova-module-a-icon';

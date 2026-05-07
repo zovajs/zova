@@ -1,1 +1,1 @@
-export * from './component/table.js';
+export * from 'zova-module-a-table';

@@ -24,3 +24,8 @@ export const ZCard = defineComponent((_props: TypeControllerCardPublicProps) => 
   useController(ControllerCard, undefined, undefined);
   return () => {};
 }, prepareComponentOptions());
+declare module 'zova-module-a-bean' {
+  export interface IVonaComponentRecord {
+    'demo-basic:card': ControllerCardProps;
+  }
+}

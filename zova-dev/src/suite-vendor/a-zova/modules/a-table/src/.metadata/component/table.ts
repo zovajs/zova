@@ -30,3 +30,8 @@ export const ZTable = defineComponent(
   },
   prepareComponentOptions(),
 );
+declare module 'zova-module-a-bean' {
+  export interface IVonaComponentRecord {
+    'a-table:table': ControllerTableProps;
+  }
+}

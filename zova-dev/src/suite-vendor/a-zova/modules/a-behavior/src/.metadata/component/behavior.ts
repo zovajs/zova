@@ -24,3 +24,8 @@ export const ZBehavior = defineComponent((_props: TypeControllerBehaviorPublicPr
   useController(ControllerBehavior, undefined, undefined);
   return () => {};
 }, prepareComponentOptions(ControllerBehavior.$componentOptions));
+declare module 'zova-module-a-bean' {
+  export interface IVonaComponentRecord {
+    'a-behavior:behavior': ControllerBehaviorProps;
+  }
+}

@@ -24,3 +24,8 @@ export const ZIcon = defineComponent((_props: TypeControllerIconPublicProps) => 
   useController(ControllerIcon, undefined, undefined);
   return () => {};
 }, prepareComponentOptions());
+declare module 'zova-module-a-bean' {
+  export interface IVonaComponentRecord {
+    'a-icon:icon': ControllerIconProps;
+  }
+}

@@ -24,3 +24,8 @@ export const ZActionView = defineComponent((_props: TypeControllerActionViewPubl
   useController(ControllerActionView, undefined, undefined);
   return () => {};
 }, prepareComponentOptions());
+declare module 'zova-module-a-bean' {
+  export interface IVonaComponentRecord {
+    'demo-basic:actionView': ControllerActionViewProps;
+  }
+}

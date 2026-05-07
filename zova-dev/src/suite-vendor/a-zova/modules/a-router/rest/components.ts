@@ -1,1 +1,1 @@
-export * from './component/routerViewEmpty.js';
+export * from 'zova-module-a-router';

@@ -1,2 +1,1 @@
-export * from './component/itemLink.js';
-export * from './component/page.js';
+export * from 'zova-module-home-base';

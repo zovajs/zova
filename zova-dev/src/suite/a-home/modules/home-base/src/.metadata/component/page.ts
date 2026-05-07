@@ -24,3 +24,8 @@ export const ZPage = defineComponent((_props: TypeControllerPagePublicProps) => 
   useController(ControllerPage, undefined, undefined);
   return () => {};
 }, prepareComponentOptions());
+declare module 'zova-module-a-bean' {
+  export interface IVonaComponentRecord {
+    'home-base:page': ControllerPageProps;
+  }
+}

@@ -35,7 +35,7 @@ export const ZFormFieldBlank = defineComponent(
   },
   prepareComponentOptions(ControllerFormFieldBlank.$componentOptions),
 );
-declare module 'zova' {
+declare module 'zova-module-a-bean' {
   export interface IVonaComponentRecord {
     'a-form:formFieldBlank': ControllerFormFieldBlankProps;
   }

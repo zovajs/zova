@@ -1,1 +1,1 @@
-export * from './component/app.js';
+export * from 'zova-module-a-app';

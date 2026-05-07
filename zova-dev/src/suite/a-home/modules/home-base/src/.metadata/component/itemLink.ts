@@ -24,3 +24,8 @@ export const ZItemLink = defineComponent((_props: TypeControllerItemLinkPublicPr
   useController(ControllerItemLink, undefined, undefined);
   return () => {};
 }, prepareComponentOptions());
+declare module 'zova-module-a-bean' {
+  export interface IVonaComponentRecord {
+    'home-base:itemLink': ControllerItemLinkProps;
+  }
+}

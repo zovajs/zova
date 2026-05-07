@@ -1,1 +1,1 @@
-export * from './component/behavior.js';
+export * from 'zova-module-a-behavior';

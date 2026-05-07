@@ -24,3 +24,8 @@ export const ZTableCellTest = defineComponent((_props: TypeControllerTableCellTe
   useController(ControllerTableCellTest, undefined, undefined);
   return () => {};
 }, prepareComponentOptions());
+declare module 'zova-module-a-bean' {
+  export interface IVonaComponentRecord {
+    'demo-basic:tableCellTest': ControllerTableCellTestProps;
+  }
+}

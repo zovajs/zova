@@ -24,3 +24,8 @@ export const ZFormFieldTest = defineComponent((_props: TypeControllerFormFieldTe
   useController(ControllerFormFieldTest, undefined, undefined);
   return () => {};
 }, prepareComponentOptions(ControllerFormFieldTest.$componentOptions));
+declare module 'zova-module-a-bean' {
+  export interface IVonaComponentRecord {
+    'demo-basic:formFieldTest': ControllerFormFieldTestProps;
+  }
+}
