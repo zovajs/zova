@@ -5,7 +5,7 @@ import { celEnvBase, evaluateExpressions, getProperty, isEmptyObject, isNil, isP
 import { toUpperCaseFirstChar } from '@cabloy/word-utils';
 import { classes } from 'typestyle';
 import { createTextVNode, h } from 'vue';
-import { beanFullNameFromOnionName, BeanSimple, cast, objectAssignReactive } from 'zova-core';
+import { BeanSimple, cast, objectAssignReactive } from 'zova-core';
 
 import type { TypeRenderComponent, TypeRenderComponentJsx, TypeRenderComponentJsxProps } from '../types/rest.ts';
 
@@ -16,14 +16,12 @@ type CelEnv = typeof celEnvBase;
 
 export class ZovaJsx extends BeanSimple {
   private _components: {} | undefined;
-  private _actions: Record<string, string> | undefined;
   private _celEnv: CelEnv;
   private _transientObject: any;
 
-  constructor(components?: {}, actions?: Record<string, string>, celEnv?: CelEnv) {
+  constructor(components?: {}, celEnv?: CelEnv) {
     super();
     this._components = components;
-    this._actions = actions;
     this._celEnv = this._prepareCelEnv(celEnv ?? celEnvBase);
   }
 
@@ -58,10 +56,6 @@ export class ZovaJsx extends BeanSimple {
 
   public get components() {
     return this._components;
-  }
-
-  public get actions() {
-    return this._actions;
   }
 
   public get celEnv(): CelEnv {
@@ -169,14 +163,7 @@ export class ZovaJsx extends BeanSimple {
       const vIf = this.evaluateExpression(actionChild.props?.['v-if'], celScope);
       if (vIf === false) return next(undefined);
       // action
-      if (actionChild.type === 'actionVar') {
-        const props = this.renderJsxProps(actionChild.props, {}, celScope, renderContext);
-        celScope[cast(props).name] = cast(props).value;
-        return next(undefined);
-      } else if (actionChild.type === 'actionExpr') {
-        const expression = this.evaluateExpression(cast(actionChild.props)?.expression, celScope);
-        return next(expression);
-      } else if (isJsxEvent(actionChild)) {
+      if (actionChild.type === 'ActionActions') {
         // nested action
         eventRes[index] = [];
         return this.renderEventDirect(actionChild, objectAssignReactive({}, celScope), renderContext, eventRes[index], next);
@@ -189,8 +176,7 @@ export class ZovaJsx extends BeanSimple {
 
   private _renderEventActionNormal(actionChild: TypeRenderComponentJsx, celScope: {}, renderContext: {} | undefined, next: Function) {
     // action
-    const actionName = this.normalizeAction(actionChild.type);
-    const beanFullName = beanFullNameFromOnionName(actionName, 'action' as never);
+    const beanFullName = actionChild.type as any;
     const beanInstance = this.sys.bean._getBeanSyncOnly(beanFullName);
     if (beanInstance) {
       // sync
@@ -276,10 +262,6 @@ export class ZovaJsx extends BeanSimple {
     }
     // div/QInput/Zova Component
     return type;
-  }
-
-  public normalizeAction(type: string) {
-    return this.actions?.[type] ?? type;
   }
 
   private _renderJsxSingle(Component: any, componentJsx: TypeRenderComponentJsx, props: {}, celScope?: {}, renderContext?: {}): VNode {
