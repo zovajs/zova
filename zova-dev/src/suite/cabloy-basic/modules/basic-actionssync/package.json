@@ -52,6 +52,7 @@
   "title": "basic-actionssync",
   "zovaModule": {
     "beansPreload": [
+      "basic-actionssync.action.expr",
       "basic-actionssync.action.log"
     ]
   }
