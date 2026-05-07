@@ -5,7 +5,7 @@ import { celEnvBase, evaluateExpressions, getProperty, isEmptyObject, isNil, isP
 import { toUpperCaseFirstChar } from '@cabloy/word-utils';
 import { classes } from 'typestyle';
 import { createTextVNode, h } from 'vue';
-import { BeanSimple, cast, objectAssignReactive } from 'zova-core';
+import { BeanControllerIdentifier, BeanSimple, cast, objectAssignReactive } from 'zova-core';
 
 import type { TypeRenderComponent, TypeRenderComponentJsx, TypeRenderComponentJsxProps } from '../types/rest.ts';
 
@@ -317,6 +317,11 @@ export class ZovaJsx extends BeanSimple {
         keyValue = classes(props[propName], keyValue);
       }
       props[propName] = keyValue;
+    }
+    if (cast(props).style) {
+      const controller = this.ctx.bean._getBeanSyncOnly(BeanControllerIdentifier) as any;
+      cast(props).class = classes(cast(props).class, controller.$style(cast(props).style));
+      delete cast(props).style;
     }
     return props;
   }

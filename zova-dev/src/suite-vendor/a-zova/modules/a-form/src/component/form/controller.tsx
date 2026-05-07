@@ -96,7 +96,7 @@ export class ControllerForm<TFormData extends {} = {}, TSubmitMeta = never> exte
       return this.$sdk.loadSchemaProperties(this.schema, this.$props.schemaScene);
     });
     this.fieldCelEnv = this._getFieldCelEnv();
-    this.zovaJsx = this.app.bean._newBeanSimple(ZovaJsx, false, this.formProvider.components, this.fieldCelEnv);
+    this.zovaJsx = this.bean._newBeanSimple(ZovaJsx, false, this.formProvider.components, this.fieldCelEnv);
     this.$watch(
       () => this.$props.data,
       (newValue, oldValue) => {

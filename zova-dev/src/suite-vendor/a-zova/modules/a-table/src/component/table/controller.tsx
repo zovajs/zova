@@ -61,7 +61,7 @@ export class ControllerTable<TData extends {} = {}> extends BeanControllerTableB
     });
     // jsx
     this.columnCelEnv = this._getColumnCelEnv();
-    this.zovaJsx = this.app.bean._newBeanSimple(ZovaJsx, false, this.tableProvider.components, this.columnCelEnv);
+    this.zovaJsx = this.bean._newBeanSimple(ZovaJsx, false, this.tableProvider.components, this.columnCelEnv);
     // properties
     this._createProperties();
     // tableMeta/columns

@@ -3,7 +3,7 @@ import { cast } from '../types/utils/cast.ts';
 import { BeanBase } from './beanBase.ts';
 import { BeanControllerIdentifier } from './type.ts';
 
-const SymbolController = Symbol('SymbolController');
+export const SymbolController = Symbol('SymbolController');
 
 export class BeanControllerLike extends BeanBase {
   protected get [SymbolController](): unknown | undefined {
