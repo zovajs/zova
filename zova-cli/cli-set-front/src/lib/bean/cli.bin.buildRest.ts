@@ -207,8 +207,8 @@ import type { TypePagePathSchema } from 'zova-module-a-router';
 export type { IPagePathRecord } from 'zova-module-a-router';
 import type { IActionRecord, TypeActionOptions } from 'zova-module-a-action';
 export type { IActionRecord } from 'zova-module-a-action';
-import type { IVonaComponentRecord, TypeComponentOptions } from 'zova';
-export type { IVonaComponentRecord } from 'zova';
+import type { IVonaComponentRecord, TypeComponentOptions } from 'zova-module-a-bean';
+export type { IVonaComponentRecord } from 'zova-module-a-bean';
 export type {
   IResourceComponentActionBulkRecord,
   IResourceComponentActionRowRecord,

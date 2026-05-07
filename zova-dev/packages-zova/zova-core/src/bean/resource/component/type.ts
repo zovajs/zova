@@ -2,15 +2,7 @@ export type TypeModuleComponents<T> = T;
 
 export interface IZovaComponentRecord {}
 
-export interface IVonaComponentRecord {}
-
 export interface IComponentRecord {}
-
-export type TypeComponentOptions<K extends keyof IVonaComponentRecord> = {
-  name: K;
-  options?: IVonaComponentRecord[K];
-  res?: string;
-};
 
 export interface ILayoutRecord {
   empty: never;

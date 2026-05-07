@@ -134,7 +134,7 @@ export async function generateFileComponent(options: IMetadataCustomGenerateOpti
     prepareComponentOptions(${componentOptions}),
   );`;
   // rest props
-  const contentRestProps = `declare module 'zova' {
+  const contentRestProps = `declare module 'zova-module-a-bean' {
   export interface IVonaComponentRecord {
     '${moduleName}:${name}': ${nameProps};
   }
