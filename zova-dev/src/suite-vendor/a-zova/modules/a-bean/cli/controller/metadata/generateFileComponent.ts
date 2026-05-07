@@ -134,11 +134,30 @@ export async function generateFileComponent(options: IMetadataCustomGenerateOpti
     prepareComponentOptions(${componentOptions}),
   );`;
   // rest props
-  const contentRestProps = `declare module 'zova-module-a-bean' {
+  let contentRestPropsType = '';
+  if (hasProps) {
+    contentRestPropsType += `${nameProps}`;
+  }
+  if (hasModels) {
+    if (hasProps) {
+      contentRestPropsType += ' & ';
+    }
+    contentRestPropsType += `${nameModels} &
+{
+  [KEY in keyof ${nameModels} as TypePropValueFromModel<KEY>]: ${nameModels}[KEY];
+} &
+{
+  [KEY in keyof ${nameModels} as TypePropUpdateFromModel<KEY>]: (value: ${nameModels}[KEY]) => void;
+}`;
+  }
+  let contentRestProps = '';
+  if (contentRestPropsType) {
+    contentRestProps = `declare module 'zova-module-a-bean' {
   export interface IVonaComponentRecord {
-    '${moduleName}:${name}': ${nameProps};
+    '${moduleName}:${name}': ${contentRestPropsType};
   }
 }`;
+  }
   // content
   const content = `${contentImports.join('\n')}
 ${contentTypeControllerPublicProps}
