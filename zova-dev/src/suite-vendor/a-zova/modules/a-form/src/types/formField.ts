@@ -5,7 +5,6 @@ import type { IBehaviorItem } from 'zova-module-a-behavior';
 import type {
   IJsxRenderContextBase,
   ISchemaRenderComponentLayoutOptions,
-  ISchemaRenderComponentPresetRecord,
   TypeFormFieldRenderComponent,
   TypeFormFieldRenderComponentProvider,
   TypeRenderComponentPreset,
@@ -91,7 +90,7 @@ export interface IFormFieldRenderContextProps {
 // }
 
 export interface IFormFieldRenderContextPropsBucket<TParentData = {}> extends Omit<IFormFieldOptions<TParentData>, 'render'> {
-  preset?: ISchemaRenderComponentPresetRecord;
+  options?: any;
   render: TypeFormFieldRenderComponent;
   renderProvider?: TypeFormFieldRenderComponentProvider;
   needHandleBorder?: boolean;

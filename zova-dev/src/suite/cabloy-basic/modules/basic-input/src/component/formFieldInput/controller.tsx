@@ -35,7 +35,7 @@ export class ControllerFormFieldInput extends BeanControllerBase {
             },
             ...props,
             ...pickObject(propsBucket, ['value']),
-            ...omitObject(propsBucket.preset?.Input, ['style']),
+            ...omitObject(propsBucket.options, ['style']),
             class: className,
           };
           return <input {...propsNew}></input>;

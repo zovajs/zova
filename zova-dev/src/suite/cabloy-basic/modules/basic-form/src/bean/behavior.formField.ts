@@ -42,13 +42,13 @@ export class BehaviorFormField extends BeanBehaviorBase<IBehaviorOptionsFormFiel
     const { propsBucket } = renderContext;
     const propsPatch: IFormFieldRenderContextProps = {};
     // class
-    const classTemp = (typeof propsBucket.render === 'string' && propsBucket.preset?.[propsBucket.render]?.class) ?? propsBucket.class;
-    const styleTemp = (typeof propsBucket.render === 'string' && propsBucket.preset?.[propsBucket.render]?.style) ?? propsBucket.style;
+    const classTemp = (typeof propsBucket.render === 'string' && propsBucket.options?.class) ?? propsBucket.class;
+    const styleTemp = (typeof propsBucket.render === 'string' && propsBucket.options?.style) ?? propsBucket.style;
     if (!isNil(classTemp) || !isNil(styleTemp)) {
       propsPatch.class = classes(classTemp, this.$style(styleTemp));
     }
     // readonly
-    const readonlyTemp = (typeof propsBucket.render === 'string' && propsBucket.preset?.[propsBucket.render]?.readonly) ?? propsBucket.readonly;
+    const readonlyTemp = (typeof propsBucket.render === 'string' && propsBucket.options?.readonly) ?? propsBucket.readonly;
     if (!isNil(readonlyTemp)) {
       propsPatch.readonly = readonlyTemp;
     } else if (formMeta?.formMode === 'view') {
