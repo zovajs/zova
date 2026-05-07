@@ -1,1 +1,1 @@
-export * from './component/formFieldCurrency.js';
+export * from 'zova-module-basic-currency';

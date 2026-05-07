@@ -27,3 +27,8 @@ export const ZRouterViewStack = defineComponent(
   },
   prepareComponentOptions(),
 );
+declare module 'zova-module-a-bean' {
+  export interface IVonaComponentRecord {
+    'a-routerstack:routerViewStack': ControllerRouterViewStackProps;
+  }
+}

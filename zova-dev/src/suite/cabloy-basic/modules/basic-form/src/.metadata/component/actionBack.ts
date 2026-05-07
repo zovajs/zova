@@ -24,3 +24,8 @@ export const ZActionBack = defineComponent((_props: TypeControllerActionBackPubl
   useController(ControllerActionBack, undefined, undefined);
   return () => {};
 }, prepareComponentOptions(ControllerActionBack.$componentOptions));
+declare module 'zova-module-a-bean' {
+  export interface IVonaComponentRecord {
+    'basic-form:actionBack': ControllerActionBackProps;
+  }
+}

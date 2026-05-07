@@ -1,1 +1,1 @@
-export * from './component/formFieldInput.js';
+export * from 'zova-module-basic-input';

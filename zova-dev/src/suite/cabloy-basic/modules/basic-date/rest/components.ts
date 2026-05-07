@@ -1,3 +1,1 @@
-export * from './component/dateRange.js';
-export * from './component/formFieldDate.js';
-export * from './component/formFieldDateRange.js';
+export * from 'zova-module-basic-date';

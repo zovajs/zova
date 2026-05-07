@@ -1,2 +1,1 @@
-export * from './component/actionBack.js';
-export * from './component/actionSubmit.js';
+export * from 'zova-module-basic-form';

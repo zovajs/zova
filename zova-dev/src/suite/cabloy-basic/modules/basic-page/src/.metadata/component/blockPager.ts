@@ -24,3 +24,8 @@ export const ZBlockPager = defineComponent((_props: TypeControllerBlockPagerPubl
   useController(ControllerBlockPager, undefined, undefined);
   return () => {};
 }, prepareComponentOptions(ControllerBlockPager.$componentOptions));
+declare module 'zova-module-a-bean' {
+  export interface IVonaComponentRecord {
+    'basic-page:blockPager': ControllerBlockPagerProps;
+  }
+}

@@ -27,3 +27,8 @@ export const ZFormFieldInput = defineComponent(
   },
   prepareComponentOptions(ControllerFormFieldInput.$componentOptions),
 );
+declare module 'zova-module-a-bean' {
+  export interface IVonaComponentRecord {
+    'basic-input:formFieldInput': ControllerFormFieldInputProps;
+  }
+}

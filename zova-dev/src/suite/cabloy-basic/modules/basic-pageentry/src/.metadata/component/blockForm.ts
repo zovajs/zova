@@ -24,3 +24,8 @@ export const ZBlockForm = defineComponent((_props: TypeControllerBlockFormPublic
   useController(ControllerBlockForm, undefined, undefined);
   return () => {};
 }, prepareComponentOptions(ControllerBlockForm.$componentOptions));
+declare module 'zova-module-a-bean' {
+  export interface IVonaComponentRecord {
+    'basic-pageentry:blockForm': ControllerBlockFormProps;
+  }
+}

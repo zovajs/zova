@@ -27,3 +27,8 @@ export const ZFormFieldCaptcha = defineComponent(
   },
   prepareComponentOptions(ControllerFormFieldCaptcha.$componentOptions),
 );
+declare module 'zova-module-a-bean' {
+  export interface IVonaComponentRecord {
+    'basic-captcha:formFieldCaptcha': ControllerFormFieldCaptchaProps;
+  }
+}

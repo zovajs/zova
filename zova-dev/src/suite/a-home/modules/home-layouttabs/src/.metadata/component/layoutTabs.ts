@@ -37,3 +37,8 @@ export const ZLayoutTabs = defineComponent((_props: TypeControllerLayoutTabsPubl
   useController(ControllerLayoutTabs, RenderLayoutTabs, StyleLayoutTabs);
   return () => {};
 }, prepareComponentOptions());
+declare module 'zova-module-a-bean' {
+  export interface IVonaComponentRecord {
+    'home-layouttabs:layoutTabs': ControllerLayoutTabsProps;
+  }
+}

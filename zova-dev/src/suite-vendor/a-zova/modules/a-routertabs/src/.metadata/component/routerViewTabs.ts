@@ -27,3 +27,8 @@ export const ZRouterViewTabs = defineComponent(
   },
   prepareComponentOptions(),
 );
+declare module 'zova-module-a-bean' {
+  export interface IVonaComponentRecord {
+    'a-routertabs:routerViewTabs': ControllerRouterViewTabsProps;
+  }
+}

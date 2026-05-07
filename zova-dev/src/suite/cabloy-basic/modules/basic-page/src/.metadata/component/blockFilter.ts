@@ -24,3 +24,8 @@ export const ZBlockFilter = defineComponent((_props: TypeControllerBlockFilterPu
   useController(ControllerBlockFilter, undefined, undefined);
   return () => {};
 }, prepareComponentOptions(ControllerBlockFilter.$componentOptions));
+declare module 'zova-module-a-bean' {
+  export interface IVonaComponentRecord {
+    'basic-page:blockFilter': ControllerBlockFilterProps;
+  }
+}

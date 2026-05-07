@@ -1,2 +1,1 @@
-export * from './component/actionCreate.js';
-export * from './component/table.js';
+export * from 'zova-module-basic-table';

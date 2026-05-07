@@ -27,3 +27,8 @@ export const ZFormFieldDateRange = defineComponent(
   },
   prepareComponentOptions(ControllerFormFieldDateRange.$componentOptions),
 );
+declare module 'zova-module-a-bean' {
+  export interface IVonaComponentRecord {
+    'basic-date:formFieldDateRange': ControllerFormFieldDateRangeProps;
+  }
+}

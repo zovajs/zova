@@ -27,3 +27,8 @@ export const ZBlockToolbarBulk = defineComponent(
   },
   prepareComponentOptions(ControllerBlockToolbarBulk.$componentOptions),
 );
+declare module 'zova-module-a-bean' {
+  export interface IVonaComponentRecord {
+    'basic-page:blockToolbarBulk': ControllerBlockToolbarBulkProps;
+  }
+}

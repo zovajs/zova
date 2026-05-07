@@ -1,1 +1,1 @@
-export * from './component/layoutTabs.js';
+export * from 'zova-module-home-layouttabs';

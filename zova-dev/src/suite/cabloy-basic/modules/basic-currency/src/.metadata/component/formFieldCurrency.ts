@@ -27,3 +27,8 @@ export const ZFormFieldCurrency = defineComponent(
   },
   prepareComponentOptions(ControllerFormFieldCurrency.$componentOptions),
 );
+declare module 'zova-module-a-bean' {
+  export interface IVonaComponentRecord {
+    'basic-currency:formFieldCurrency': ControllerFormFieldCurrencyProps;
+  }
+}

@@ -24,3 +24,8 @@ export const ZActionCreate = defineComponent((_props: TypeControllerActionCreate
   useController(ControllerActionCreate, undefined, undefined);
   return () => {};
 }, prepareComponentOptions(ControllerActionCreate.$componentOptions));
+declare module 'zova-module-a-bean' {
+  export interface IVonaComponentRecord {
+    'basic-table:actionCreate': ControllerActionCreateProps;
+  }
+}

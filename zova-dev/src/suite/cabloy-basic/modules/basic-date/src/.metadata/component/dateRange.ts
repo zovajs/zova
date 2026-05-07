@@ -47,3 +47,15 @@ export const ZDateRange = defineComponent((_props: TypeControllerDateRangePublic
   useController(ControllerDateRange, undefined, undefined);
   return () => {};
 }, prepareComponentOptions());
+declare module 'zova-module-a-bean' {
+  export interface IVonaComponentRecord {
+    'basic-date:dateRange': ControllerDateRangeProps &
+      ControllerDateRangeModels & {
+        [KEY in keyof ControllerDateRangeModels as TypePropValueFromModel<KEY>]: ControllerDateRangeModels[KEY];
+      } & {
+        [KEY in keyof ControllerDateRangeModels as TypePropUpdateFromModel<KEY>]: (
+          value: ControllerDateRangeModels[KEY],
+        ) => void;
+      };
+  }
+}

@@ -27,3 +27,8 @@ export const ZBlockToolbarRow = defineComponent(
   },
   prepareComponentOptions(ControllerBlockToolbarRow.$componentOptions),
 );
+declare module 'zova-module-a-bean' {
+  export interface IVonaComponentRecord {
+    'basic-pageentry:blockToolbarRow': ControllerBlockToolbarRowProps;
+  }
+}

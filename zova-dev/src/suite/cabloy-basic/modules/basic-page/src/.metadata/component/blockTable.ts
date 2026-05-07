@@ -24,3 +24,8 @@ export const ZBlockTable = defineComponent((_props: TypeControllerBlockTablePubl
   useController(ControllerBlockTable, undefined, undefined);
   return () => {};
 }, prepareComponentOptions(ControllerBlockTable.$componentOptions));
+declare module 'zova-module-a-bean' {
+  export interface IVonaComponentRecord {
+    'basic-page:blockTable': ControllerBlockTableProps;
+  }
+}

@@ -27,3 +27,8 @@ export const ZBlockPageEntry = defineComponent(
   },
   prepareComponentOptions(ControllerBlockPageEntry.$componentOptions),
 );
+declare module 'zova-module-a-bean' {
+  export interface IVonaComponentRecord {
+    'basic-pageentry:blockPageEntry': ControllerBlockPageEntryProps;
+  }
+}

@@ -1,1 +1,1 @@
-export * from './component/layoutEmpty.js';
+export * from 'zova-module-home-layoutempty';

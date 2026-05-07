@@ -24,3 +24,8 @@ export const ZBlockPage = defineComponent((_props: TypeControllerBlockPagePublic
   useController(ControllerBlockPage, undefined, undefined);
   return () => {};
 }, prepareComponentOptions(ControllerBlockPage.$componentOptions));
+declare module 'zova-module-a-bean' {
+  export interface IVonaComponentRecord {
+    'basic-page:blockPage': ControllerBlockPageProps;
+  }
+}

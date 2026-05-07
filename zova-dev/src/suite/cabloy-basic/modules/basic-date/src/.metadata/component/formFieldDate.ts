@@ -24,3 +24,8 @@ export const ZFormFieldDate = defineComponent((_props: TypeControllerFormFieldDa
   useController(ControllerFormFieldDate, undefined, undefined);
   return () => {};
 }, prepareComponentOptions(ControllerFormFieldDate.$componentOptions));
+declare module 'zova-module-a-bean' {
+  export interface IVonaComponentRecord {
+    'basic-date:formFieldDate': ControllerFormFieldDateProps;
+  }
+}

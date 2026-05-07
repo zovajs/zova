@@ -24,3 +24,8 @@ export const ZLayoutEmpty = defineComponent((_props: TypeControllerLayoutEmptyPu
   useController(ControllerLayoutEmpty, undefined, undefined);
   return () => {};
 }, prepareComponentOptions());
+declare module 'zova-module-a-bean' {
+  export interface IVonaComponentRecord {
+    'home-layoutempty:layoutEmpty': ControllerLayoutEmptyProps;
+  }
+}

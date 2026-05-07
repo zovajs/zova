@@ -24,3 +24,8 @@ export const ZActionSubmit = defineComponent((_props: TypeControllerActionSubmit
   useController(ControllerActionSubmit, undefined, undefined);
   return () => {};
 }, prepareComponentOptions(ControllerActionSubmit.$componentOptions));
+declare module 'zova-module-a-bean' {
+  export interface IVonaComponentRecord {
+    'basic-form:actionSubmit': ControllerActionSubmitProps;
+  }
+}

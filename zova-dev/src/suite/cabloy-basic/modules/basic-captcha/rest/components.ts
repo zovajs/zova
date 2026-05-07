@@ -1,1 +1,1 @@
-export * from './component/formFieldCaptcha.js';
+export * from 'zova-module-basic-captcha';

@@ -1,1 +1,1 @@
-export * from './component/routerViewStack.js';
+export * from 'zova-module-a-routerstack';

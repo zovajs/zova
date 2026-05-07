@@ -1,1 +1,1 @@
-export * from './component/routerViewTabs.js';
+export * from 'zova-module-a-routertabs';
