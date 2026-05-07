@@ -6,21 +6,21 @@ import 'zova-module-a-action';
 declare module 'zova-module-a-action' {
   
     export interface IActionRecord {
-      'basic-log:log': IActionOptionsLog;
+      'basic-actionssync:log': IActionOptionsLog;
     }
 
   
 }
-declare module 'zova-module-basic-log' {
+declare module 'zova-module-basic-actionssync' {
   
         export interface ActionLog {
           /** @internal */
-          get scope(): ScopeModuleBasicLog;
+          get scope(): ScopeModuleBasicActionssync;
         }
 
         export interface ActionLog {
-          get $beanFullName(): 'basic-log.action.log';
-          get $onionName(): 'basic-log:log';
+          get $beanFullName(): 'basic-actionssync.action.log';
+          get $onionName(): 'basic-actionssync:log';
           get $onionOptions(): IActionOptionsLog;
         } 
 }
@@ -30,7 +30,7 @@ import { ActionLog } from '../bean/action.log.jsx';
 import 'zova';
 declare module 'zova' {
   export interface IBeanRecordGeneral {
-    'basic-log.action.log': ActionLog;
+    'basic-actionssync.action.log': ActionLog;
   }
 }
 /** action: end */
@@ -39,16 +39,16 @@ import { BeanScopeBase, type BeanScopeUtil } from 'zova';
 import { Scope } from 'zova-module-a-bean';
 
 @Scope()
-export class ScopeModuleBasicLog extends BeanScopeBase {}
+export class ScopeModuleBasicActionssync extends BeanScopeBase {}
 
-export interface ScopeModuleBasicLog {
+export interface ScopeModuleBasicActionssync {
   util: BeanScopeUtil;
 }
 
 import 'zova';
 declare module 'zova' {
   export interface IBeanScopeRecord {
-    'basic-log': ScopeModuleBasicLog;
+    'basic-actionssync': ScopeModuleBasicActionssync;
   }
   
   

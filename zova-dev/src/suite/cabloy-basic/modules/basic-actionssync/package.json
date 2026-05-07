@@ -49,5 +49,10 @@
       "exports.\\..import"
     ]
   },
-  "title": "basic-actionssync"
+  "title": "basic-actionssync",
+  "zovaModule": {
+    "beansPreload": [
+      "basic-actionssync.action.log"
+    ]
+  }
 }
