@@ -1,8 +1,6 @@
 import type { IMetadataCustomGenerateOptions } from '@cabloy/cli';
 import type { IGlobBeanFile } from '@cabloy/module-info';
 
-import { combineResourceName } from '@cabloy/utils';
-import { toLowerCaseFirstChar, toUpperCaseFirstChar } from '@cabloy/word-utils';
 import fse from 'fs-extra';
 import path from 'node:path';
 
@@ -169,94 +167,18 @@ ${contentComponent}
 ${contentRestProps}
 `;
   // restComponent
-  await generateRestComponent(options, globFile, controllerInfo, genericDeclare, genericArguments, generateImports, _contentImportTypeController);
+  await generateRestComponent(options);
   // ok
   return content;
 }
 
-async function generateRestComponent(
-  options: IMetadataCustomGenerateOptions,
-  _globFile: IGlobBeanFile,
-  controllerInfo: IControllerInfo,
-  genericDeclare: string,
-  genericArguments: string,
-  generateImports: string[] | null | undefined,
-  _contentImportTypeController: string[],
-) {
-  const { cli, moduleName, modulePath } = options;
-  // const { className } = globFile;
-  const { name, nameCapitalize, hasProps, nameProps, hasModels, nameModels } = controllerInfo;
-  // TypeControllerPublicProps
-  const typeControllerPublicPropsName = `TypeController${nameCapitalize}PublicProps`;
-  let contentTypeControllerPublicProps = `type ${typeControllerPublicPropsName}${genericDeclare} = TypeRenderComponentJsxPropsPublic`;
-  if (hasProps) {
-    contentTypeControllerPublicProps += `\n  & ${nameProps}${genericArguments}`;
-  }
-  if (hasModels) {
-    contentTypeControllerPublicProps += `\n  & ${nameModels}${genericArguments} &
-  {
-    [KEY in keyof ${nameModels}${genericArguments} as TypePropValueFromModel<KEY>]: ${nameModels}${genericArguments}[KEY];
-  } &
-  {
-    [KEY in keyof ${nameModels}${genericArguments} as TypePropUpdateFromModel<KEY>]: (value: ${nameModels}${genericArguments}[KEY]) => void;
-  }`;
-  }
-  contentTypeControllerPublicProps = `${contentTypeControllerPublicProps};`;
-  // import
-  const contentImports: string[] = [];
-  if (generateImports) {
-    contentImports.push(...generateImports);
-  }
-  const _contentImportTypeZova: string[] = [];
-  if (hasModels) _contentImportTypeZova.push('TypePropUpdateFromModel', 'TypePropValueFromModel');
-  if (_contentImportTypeZova.length > 0) {
-    contentImports.push(`import type { ${_contentImportTypeZova.join(', ')} } from 'zova';`);
-  }
-  contentImports.push("import type { TypeRenderComponentJsxPropsPublic } from 'zova-jsx';");
-  if (_contentImportTypeController.length > 0) {
-    contentImports.push(`import type { ${_contentImportTypeController.join(', ')} } from 'zova-module-${moduleName}';`);
-  }
-  // component
-  let componentNamePrefix;
-  let componentName;
-  if (name !== 'formField' && name.startsWith('formField')) {
-    componentNamePrefix = 'BBF';
-    componentName = toLowerCaseFirstChar(name.substring('formField'.length));
-  } else if (name.startsWith('restPage')) {
-    componentNamePrefix = 'BBP';
-    componentName = toLowerCaseFirstChar(name.substring('restPage'.length));
-  } else {
-    componentNamePrefix = 'BBZ';
-    componentName = name;
-  }
-  const componentNameFull = `${componentNamePrefix}${toUpperCaseFirstChar(combineResourceName(componentName, moduleName, true, true))}`;
-  const contentComponent = `export function ${componentNameFull}${genericDeclare}(
-  _props: ${typeControllerPublicPropsName}${genericArguments},
-) {
-  return '${moduleName}:${name}';
-}`;
-  // content
-  const content = `${contentImports.join('\n')}
-
-${contentTypeControllerPublicProps}
-${contentComponent}
-`;
-  // output
-  const fileDest = path.join(modulePath, `rest/component/${name}.ts`);
-  await fse.outputFile(fileDest, content);
-  await cli.helper.formatFile({ fileName: fileDest });
+async function generateRestComponent(options: IMetadataCustomGenerateOptions) {
+  const { moduleName, modulePath } = options;
   // components
   const fileComponents = path.join(modulePath, 'rest/components.ts');
-  let contentComponents = '';
-  if (fse.existsSync(fileComponents)) {
-    contentComponents = (await fse.readFile(fileComponents)).toString();
-  }
-  const exportContent = `export * from './component/${name}.js';`;
-  if (!contentComponents.includes(exportContent)) {
-    contentComponents = `${contentComponents}${exportContent}\n`;
-    await fse.outputFile(fileComponents, contentComponents);
-    await cli.helper.formatFile({ fileName: fileComponents });
-  }
+  if (fse.existsSync(fileComponents)) return;
+  const contentComponents = `export * from 'zova-module-${moduleName}';`;
+  await fse.outputFile(fileComponents, contentComponents);
   // index
   const exportIndexContent = "export * from './components.js';";
   await generateRestIndex(options, modulePath, exportIndexContent);
