@@ -10,22 +10,7 @@ import { IResourceProvidersTableActionsRow, IResourceProvidersTableCells } from 
 
 export interface ISchemaRenderComponentPresetRecord extends IResourceComponentFormFieldRecord {}
 
-export interface ISchemaObjectExtensionFieldRestTable {
-  //
-  preset?: ISchemaRenderComponentPresetRecord;
-  //
-  fieldSource?: string;
-  visible?: boolean;
-  order?: number;
-  disableNotifyChanged?: boolean;
-  readonly?: boolean;
-  //
-  render?: TypeTableCellRenderComponentNormal;
-}
-
 export interface ISchemaObjectExtensionFieldRest {
-  //
-  'preset'?: ISchemaRenderComponentPresetRecord;
   'blocks'?: IResourceComponentBlockOptionsBlock[];
   //
   'fieldSource'?: string;
