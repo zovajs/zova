@@ -264,6 +264,7 @@ export type {
       content += `import 'zova-module-start-openapi';\n`;
     }
     content += `export function Action<K extends keyof IActionRecord>(options: TypeActionOptions<K>) {
+  if(!options.name) throw new Error('should specify the action name');
   return options.name.replace(':','.action.');
 }
 `;
