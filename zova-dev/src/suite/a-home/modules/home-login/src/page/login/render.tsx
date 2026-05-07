@@ -52,9 +52,7 @@ export class RenderPageLogin extends BeanRenderBase {
       >
         <ZFormFieldPreset
           name="username"
-          style={{ fontSize: '12px' }}
           options={{
-            style: { border: 'solid 1px orange' },
             type: 'text',
             placeholder: this.scope.locale.YourUsername(),
           }}

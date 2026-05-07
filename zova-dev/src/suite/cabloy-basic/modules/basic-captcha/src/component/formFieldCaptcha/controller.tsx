@@ -94,7 +94,7 @@ export class ControllerFormFieldCaptcha extends BeanControllerBase {
             const propsNew: Omit<IResourceFormFieldOptionsInput, 'style'> = {
               ...props,
               type: 'text',
-              class: 'grow',
+              class: 'grow input',
               placeholder: this.scope.locale.InputCaptcha(),
               value: this.captchaData?.token,
               onInput: (e: Event) => {
