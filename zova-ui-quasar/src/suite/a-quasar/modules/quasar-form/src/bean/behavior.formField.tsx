@@ -1,8 +1,7 @@
 import type { ControllerFormField, IFormFieldRenderContext, IFormFieldRenderContextProps, IFormMeta, TypeFormField } from 'zova-module-a-form';
 
-import { isEmptyObject, isNil } from '@cabloy/utils';
+import { isEmptyObject } from '@cabloy/utils';
 import { QIcon } from 'quasar';
-import { classes } from 'typestyle';
 import { VNode } from 'vue';
 import z from 'zod';
 import { Use } from 'zova';
@@ -31,40 +30,14 @@ export class BehaviorFormField extends BeanBehaviorBase<IBehaviorOptionsFormFiel
     const field = this.$$formField.field;
     const needPatch = !isJsxComponent(renderContext.propsBucket.render) || $$form.isComponentFormField(renderContext.propsBucket.renderProvider);
     if (!needPatch) return;
-    // propsPatch
-    const propsPatch = this._patchProps_general(formMeta, field, renderContext);
-    // merge
-    if (!isEmptyObject(propsPatch)) {
-      renderContext.props = Object.assign({}, propsPatch, renderContext.props);
-    }
     if (componentName === 'QInput') {
       this._patchProps_input(formMeta, field, renderContext);
     }
   }
 
-  private _patchProps_general(formMeta: IFormMeta | undefined, _field: TypeFormField, renderContext: IFormFieldRenderContext) {
-    const { propsBucket } = renderContext;
-    const propsPatch: IFormFieldRenderContextProps = {};
-    // class
-    const classTemp = (typeof propsBucket.render === 'string' && propsBucket.preset?.[propsBucket.render]?.class) ?? propsBucket.class;
-    const styleTemp = (typeof propsBucket.render === 'string' && propsBucket.preset?.[propsBucket.render]?.style) ?? propsBucket.style;
-    if (!isNil(classTemp) || !isNil(styleTemp)) {
-      propsPatch.class = classes(classTemp, this.$style(styleTemp));
-    }
-    // readonly
-    const readonlyTemp = (typeof propsBucket.render === 'string' && propsBucket.preset?.[propsBucket.render]?.readonly) ?? propsBucket.readonly;
-    if (!isNil(readonlyTemp)) {
-      propsPatch.readonly = readonlyTemp;
-    } else if (formMeta?.formMode === 'view') {
-      propsPatch.readonly = true;
-    }
-    return propsPatch;
-  }
-
   private _patchProps_input(formMeta: IFormMeta | undefined, field: TypeFormField, renderContext: IFormFieldRenderContext) {
     const { propsBucket } = renderContext;
     const renderFlattern = propsBucket.renderFlattern;
-    const propsGeneral = this._patchProps_general(formMeta, field, renderContext);
     const inputType = this.$$formField.normalizeInputType(renderFlattern, propsBucket.inputType);
     const error = !field.state.meta.isValid;
     const errorObj = field.state.meta.errors[0] as z.ZodError | undefined;
@@ -108,6 +81,6 @@ export class BehaviorFormField extends BeanBehaviorBase<IBehaviorOptionsFormFiel
       propsPatch['v-slots'] = slots;
     }
     // merge
-    renderContext.props = Object.assign({}, propsGeneral, propsPatch, renderContext.props);
+    renderContext.props = Object.assign({}, propsPatch, renderContext.props);
   }
 }

@@ -1,5 +1,6 @@
 import { isNil } from '@cabloy/utils';
 import { useField } from '@tanstack/vue-form';
+import { classes } from 'typestyle';
 import z from 'zod';
 import { BeanControllerBase, deepEqual, IComponentOptions, Use } from 'zova';
 import { Controller } from 'zova-module-a-bean';
@@ -113,6 +114,15 @@ export class ControllerFormField<TParentData extends {} = {}> extends BeanContro
     const propsBucket = this.propsBucket;
     // props
     const props: IFormFieldRenderContextProps = { name };
+    // class
+    props.class = propsBucket.class;
+    // readonly
+    const readonlyTemp = (typeof propsBucket.render === 'string' && propsBucket.options?.readonly) ?? propsBucket.readonly;
+    if (!isNil(readonlyTemp)) {
+      props.readonly = readonlyTemp;
+    } else if (this.formMeta?.formMode === 'view') {
+      props.readonly = true;
+    }
     // celScope
     const celScope = this.$$form.getFieldScope(this.name, {});
     const jsxRenderContext = this.$$form.getFieldJsxRenderContext(this, celScope);
@@ -148,6 +158,15 @@ export class ControllerFormField<TParentData extends {} = {}> extends BeanContro
         options: presetOptions,
       },
     );
+    // class/style
+    const classTemp = (typeof propsBucket.render === 'string' && propsBucket.options?.class) ?? propsBucket.class;
+    const styleTemp = (typeof propsBucket.render === 'string' && propsBucket.options?.style) ?? propsBucket.style;
+    if (!isNil(classTemp) || !isNil(styleTemp)) {
+      propsBucket.class = classes(classTemp, this.$style(styleTemp));
+      if (typeof propsBucket.render === 'string' && propsBucket.options?.class) delete propsBucket.options.class;
+      if (typeof propsBucket.render === 'string' && propsBucket.options?.style) delete propsBucket.options.style;
+      delete propsBucket.style;
+    }
     // render
     // propsBucket.renderFlattern = this.$$form.getRenderFlattern(propsBucket.render);
     propsBucket.renderProvider = this.$$form.getRenderProvider(propsBucket.render);
