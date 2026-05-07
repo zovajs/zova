@@ -1,6 +1,6 @@
 {
   "name": "zova-ui-vuetify",
-  "version": "5.1.68",
+  "version": "5.1.69",
   "gitHead": "4d11b0fed7af50b828971785af3c014046be6afa",
   "description": "A vue3 vuetify framework with ioc",
   "keywords": [
@@ -88,9 +88,9 @@
     "vue-router": "npm:@cabloy/vue-router@^4.4.16",
     "vuetify": "^4.0.5",
     "zod": "^4.3.6",
-    "zova": "^5.1.44",
+    "zova": "^5.1.45",
     "zova-jsx": "^1.1.26",
-    "zova-module-a-action": "^5.1.12",
+    "zova-module-a-action": "^5.1.13",
     "zova-module-a-api": "^5.1.9",
     "zova-module-a-app": "^5.1.10",
     "zova-module-a-bean": "^5.1.12",
