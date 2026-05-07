@@ -40,7 +40,7 @@ export class ControllerPageResource extends BeanControllerPageBase {
   }
 
   private _prepareJsx() {
-    this.jsxZova = this.app.bean._newBeanSimple(ZovaJsx, false, this.tableProvider.components, this.tableProvider.actions);
+    this.jsxZova = this.app.bean._newBeanSimple(ZovaJsx, false, this.tableProvider.components);
   }
 
   get schemaRow() {

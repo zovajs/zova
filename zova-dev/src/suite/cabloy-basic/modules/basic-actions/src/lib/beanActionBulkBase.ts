@@ -1,8 +1,9 @@
 import { BeanBase } from 'zova';
-import { IJsxRenderContextBase, IJsxRenderContextPage, IPerformActionBulkOptionsBase } from 'zova-module-a-openapi';
+import { IActionBulkOptionsBase } from 'zova-module-a-action';
+import { IJsxRenderContextBase, IJsxRenderContextPage } from 'zova-module-a-openapi';
 
 export class BeanActionBulkBase extends BeanBase {
-  getResource(options: IPerformActionBulkOptionsBase, renderContext: IJsxRenderContextBase) {
+  getResource(options: IActionBulkOptionsBase, renderContext: IJsxRenderContextBase) {
     let resource: string | undefined = options.resource;
     if (renderContext.$scene === 'page') {
       const { $celScope } = renderContext as IJsxRenderContextPage;

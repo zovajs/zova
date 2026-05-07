@@ -41,7 +41,7 @@ export class ControllerActionSubmit extends BeanControllerBase {
   }
 
   private async onClick(e: Event) {
-    const { $jsx, $host, $$pageEntry } = this.$$renderContext;
+    const { $host, $$pageEntry } = this.$$renderContext;
     const formInstance: BeanControllerFormBase = $$pageEntry.formInstance;
     const res = await formInstance.submit();
     if (!res) return;
@@ -54,9 +54,8 @@ export class ControllerActionSubmit extends BeanControllerBase {
     // edit
     if (!isNil($$pageEntry.entryId)) return;
     // create: replace by edit page
-    const actionName = $jsx.normalizeAction('ActionEdit');
     await $host.$performAction(
-      actionName,
+      'basic-actions:edit',
       {
         replace: true,
         resource: $$pageEntry.resource,

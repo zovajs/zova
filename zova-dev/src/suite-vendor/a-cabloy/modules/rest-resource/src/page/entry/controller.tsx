@@ -62,7 +62,7 @@ export class ControllerPageEntry extends BeanControllerPageBase {
   }
 
   private _prepareJsx() {
-    this.jsxZova = this.app.bean._newBeanSimple(ZovaJsx, false, this.formProvider.components, this.formProvider.actions);
+    this.jsxZova = this.app.bean._newBeanSimple(ZovaJsx, false, this.formProvider.components);
   }
 
   protected render() {

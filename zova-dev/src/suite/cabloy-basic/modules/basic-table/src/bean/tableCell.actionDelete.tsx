@@ -11,7 +11,7 @@ export interface ITableCellOptionsActionDelete extends IResourceActionRowOptions
 })
 export class TableCellActionDelete extends BeanBase implements ITableCellRender {
   render(options: ITableCellOptionsActionDelete, renderContext: IJsxRenderContextTableCell, _next: NextTableCellRender) {
-    const { $jsx, $host } = renderContext;
+    const { $host } = renderContext;
     return (
       <button
         class={classes(options.class, $host.$style(options.style))}
@@ -19,8 +19,7 @@ export class TableCellActionDelete extends BeanBase implements ITableCellRender 
         onClick={async () => {
           // eslint-disable-next-line no-alert
           if (!window.confirm(this.scope.locale.DeleteConfirm())) return;
-          const actionName = $jsx.normalizeAction('ActionDelete');
-          await $host.$performAction(actionName, options, renderContext);
+          await $host.$performAction('basic-actions:delete', options, renderContext);
         }}
       >
         <ZIcon name="::delete" width={24}></ZIcon>

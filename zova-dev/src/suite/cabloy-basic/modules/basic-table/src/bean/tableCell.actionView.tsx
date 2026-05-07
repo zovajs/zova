@@ -10,7 +10,7 @@ export interface ITableCellOptionsActionView extends IResourceActionRowOptionsVi
 })
 export class TableCellActionView extends BeanBase implements ITableCellRender {
   render(options: ITableCellOptionsActionView, renderContext: IJsxRenderContextTableCell, next: NextTableCellRender) {
-    const { $jsx, $host } = renderContext;
+    const { $host } = renderContext;
     const value = next();
     return (
       <a
@@ -19,8 +19,7 @@ export class TableCellActionView extends BeanBase implements ITableCellRender {
         onClick={async e => {
           e.preventDefault();
           e.stopPropagation();
-          const actionName = $jsx.normalizeAction('ActionView');
-          await $host.$performAction(actionName, options, renderContext);
+          await $host.$performAction('basic-actions:view', options, renderContext);
         }}
       >
         {value}

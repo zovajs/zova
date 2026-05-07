@@ -18,7 +18,7 @@ export class ControllerActionView extends BeanControllerBase {
 
   protected render() {
     if (!this.$$renderContext) throw new Error('should used in table');
-    const { $jsx, $celScope } = this.$$renderContext;
+    const { $celScope } = this.$$renderContext;
     return (
       <a
         class="hover:text-blue-500"
@@ -26,8 +26,7 @@ export class ControllerActionView extends BeanControllerBase {
         onClick={async e => {
           e.preventDefault();
           e.stopPropagation();
-          const actionName = $jsx.normalizeAction('ActionView');
-          await this.$performAction(actionName, undefined, this.$$renderContext);
+          await this.$performAction('basic-actions:view', undefined, this.$$renderContext);
         }}
       >
         {this.$slotDefault ? this.$slotDefault() : $celScope.value}

@@ -11,14 +11,13 @@ export interface ITableCellOptionsActionUpdate extends IResourceActionRowOptions
 })
 export class TableCellActionUpdate extends BeanBase implements ITableCellRender {
   render(options: ITableCellOptionsActionUpdate, renderContext: IJsxRenderContextTableCell, _next: NextTableCellRender) {
-    const { $jsx, $host } = renderContext;
+    const { $host } = renderContext;
     return (
       <button
         class={classes(options.class, $host.$style(options.style))}
         type="button"
         onClick={async () => {
-          const actionName = $jsx.normalizeAction('ActionEdit');
-          await $host.$performAction(actionName, options, renderContext);
+          await $host.$performAction('basic-actions:edit', options, renderContext);
         }}
       >
         <ZIcon name="::draft" width={24}></ZIcon>

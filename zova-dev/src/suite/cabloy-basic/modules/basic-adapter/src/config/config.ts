@@ -8,17 +8,6 @@ export const config = (_sys: ZovaSys) => {
       FormField: 'basic-form:formField',
       FormFieldLayout: 'basic-form:formFieldLayout',
     },
-    performActions: {
-      ActionCreate: 'basic-actions:create',
-      ActionView: 'basic-actions:view',
-      ActionEdit: 'basic-actions:edit',
-      ActionDelete: 'basic-actions:delete',
-      // ActionLog: 'basic-log:log',
-      ActionAlert: 'basic-actions:alert',
-      ActionConfirm: 'basic-actions:confirm',
-      ActionCopy: 'basic-actions:copy',
-      ActionSetValue: 'basic-actions:setValue',
-    },
     blocks: {
       BlockPage: 'basic-page:blockPage',
       BlockFilter: 'basic-page:blockFilter',

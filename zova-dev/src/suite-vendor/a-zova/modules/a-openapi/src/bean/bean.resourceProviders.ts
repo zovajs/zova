@@ -13,7 +13,6 @@ export class BeanResourceProviders extends BeanBase {
       const resourceProviders = this.scope.config.resourceProviders;
       return {
         components: Object.assign({}, resourceProviders.blocks, resourceProviders.formFields, resourceProviders.form?.actionsRow),
-        actions: resourceProviders.performActions,
         behaviors: resourceProviders.behaviors,
       };
     });
@@ -27,7 +26,6 @@ export class BeanResourceProviders extends BeanBase {
           resourceProviders.table?.actionsBulk,
           resourceProviders.table?.actionsRow,
         ),
-        actions: resourceProviders.performActions,
       };
     });
   }

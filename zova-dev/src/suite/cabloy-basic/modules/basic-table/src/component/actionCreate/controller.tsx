@@ -18,14 +18,12 @@ export class ControllerActionCreate extends BeanControllerBase {
   protected async __init__() {}
 
   protected render() {
-    const { $jsx } = this.$$renderContext;
     return (
       <button
         class={classes(this.$props.class, this.$style(this.$props.style))}
         type="button"
         onClick={async () => {
-          const actionName = $jsx.normalizeAction('ActionCreate');
-          await this.$performAction(actionName, this.$props, this.$$renderContext);
+          await this.$performAction('basic-actions:create', this.$props, this.$$renderContext);
         }}
       >
         {this.scope.locale.Create()}
