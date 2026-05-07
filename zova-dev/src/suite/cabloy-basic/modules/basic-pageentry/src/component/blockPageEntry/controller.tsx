@@ -99,7 +99,7 @@ export class ControllerBlockPageEntry<TData extends {} = {}> extends BeanControl
 
   private _prepareJsx() {
     const jsxCelEnv = celEnvBase.clone();
-    this.jsxZova = this.app.bean._newBeanSimple(ZovaJsx, false, this.formProvider.components, this.formProvider.actions, jsxCelEnv);
+    this.jsxZova = this.app.bean._newBeanSimple(ZovaJsx, false, this.formProvider.components, jsxCelEnv);
     this.jsxCelScope = this._prepareJsxCelScope();
     this.jsxRenderContext = {
       app: this.app,
