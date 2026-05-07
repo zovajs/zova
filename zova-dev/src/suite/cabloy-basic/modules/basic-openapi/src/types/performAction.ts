@@ -1,5 +1,5 @@
 import 'zova-module-a-openapi';
-import { IPerformActionBulkOptionsBase, IPerformActionRowOptionsBase } from 'zova-module-a-openapi';
+import { IPerformActionBulkOptionsBase, IPerformActionOptionsBase, IPerformActionRowOptionsBase } from 'zova-module-a-openapi';
 
 export interface IPerformActionOptionsCreate<Result = any> extends IPerformActionBulkOptionsBase<Result> {
   replace?: boolean;
@@ -15,25 +15,25 @@ export interface IPerformActionOptionsEdit<Result = any> extends IPerformActionR
 
 export interface IPerformActionOptionsDelete<Result = any> extends IPerformActionRowOptionsBase<Result> {}
 
-export interface IPerformActionOptionsLog<Result = any> extends IPerformActionBulkOptionsBase<Result> {
+export interface IPerformActionOptionsLog<Result = any> extends IPerformActionOptionsBase<Result> {
   name?: string;
   message: any;
 }
 
-export interface IPerformActionOptionsAlert<Result = any> extends IPerformActionBulkOptionsBase<Result> {
+export interface IPerformActionOptionsAlert<Result = any> extends IPerformActionOptionsBase<Result> {
   message: string;
   wait?: boolean;
 }
 
-export interface IPerformActionOptionsConfirm<Result = any> extends IPerformActionBulkOptionsBase<Result> {
+export interface IPerformActionOptionsConfirm<Result = any> extends IPerformActionOptionsBase<Result> {
   message: string;
 }
 
-export interface IPerformActionOptionsCopy<Result = any> extends IPerformActionBulkOptionsBase<Result> {
+export interface IPerformActionOptionsCopy<Result = any> extends IPerformActionOptionsBase<Result> {
   text: any;
 }
 
-export interface IPerformActionOptionsSetValue<Result = any> extends IPerformActionBulkOptionsBase<Result> {
+export interface IPerformActionOptionsSetValue<Result = any> extends IPerformActionOptionsBase<Result> {
   name?: string;
   value?: any;
   disableNotifyChanged?: boolean;

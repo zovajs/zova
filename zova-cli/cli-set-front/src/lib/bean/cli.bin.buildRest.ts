@@ -205,6 +205,8 @@ export class CliBinBuildRest extends BeanCliBase {
 export type { IIconRecord } from 'zova-module-a-icon';
 import type { TypePagePathSchema } from 'zova-module-a-router';
 export type { IPagePathRecord } from 'zova-module-a-router';
+import type { IActionRecord, TypeActionOptions } from 'zova-module-a-action';
+export type { IActionRecord } from 'zova-module-a-action';
 export type {
   IResourceComponentActionBulkRecord,
   IResourceComponentActionRowRecord,
@@ -252,6 +254,7 @@ export type {
   }
 
   async _prepareResourcesIndex_providers(_srcDir: string, projectPath: string) {
+    // openapi
     const dirBasicOpenapi = path.join(projectPath, './src/suite/cabloy-basic/modules/basic-openapi');
     const dirStartOpenapi = path.join(projectPath, './src/suite/cabloy-start/modules/start-openapi');
     let content = '';
@@ -260,6 +263,10 @@ export type {
     } else if (fse.existsSync(dirStartOpenapi)) {
       content += `import 'zova-module-start-openapi';\n`;
     }
+    content += `export function Action<K extends keyof IActionRecord>(options: TypeActionOptions<K>) {
+  return options?.name;
+}
+`;
     return content;
   }
 

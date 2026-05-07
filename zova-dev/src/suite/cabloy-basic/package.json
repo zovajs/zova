@@ -6,6 +6,7 @@
   "files": [],
   "type": "module",
   "dependencies": {
+    "zova-module-basic-actionssync": "^5.0.0",
     "zova-module-basic-adapter": "workspace:^",
     "zova-module-basic-captcha": "^5.0.0",
     "zova-module-basic-currency": "workspace:^",
