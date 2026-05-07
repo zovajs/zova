@@ -272,6 +272,12 @@ export class ZovaJsx extends BeanSimple {
     }
     // props
     this.renderJsxProps(componentJsx.props, props, celScope, renderContext);
+    // style
+    if (_isZovaComponent && cast(props).style) {
+      const controller = this.ctx.bean._getBeanSyncOnly(BeanControllerIdentifier) as any;
+      cast(props).class = classes(cast(props).class, controller.$style(cast(props).style));
+      delete cast(props).style;
+    }
     // children
     let children;
     const propsChildren = componentJsx.props?.children;
@@ -317,11 +323,6 @@ export class ZovaJsx extends BeanSimple {
         keyValue = classes(props[propName], keyValue);
       }
       props[propName] = keyValue;
-    }
-    if (cast(props).style) {
-      const controller = this.ctx.bean._getBeanSyncOnly(BeanControllerIdentifier) as any;
-      cast(props).class = classes(cast(props).class, controller.$style(cast(props).style));
-      delete cast(props).style;
     }
     return props;
   }
