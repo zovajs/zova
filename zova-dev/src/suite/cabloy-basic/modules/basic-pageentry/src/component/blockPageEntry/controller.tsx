@@ -11,7 +11,7 @@ import { celEnvBase, isNil } from '@cabloy/utils';
 import { SchemaObject } from 'openapi3-ts/oas31';
 import { TableIdentity } from 'table-identity';
 import { VNode } from 'vue';
-import { BeanControllerBase, deepEqual, IComponentOptions, useCustomRef } from 'zova';
+import { BeanControllerBase, deepEqual, IComponentOptions } from 'zova';
 import { ZovaJsx } from 'zova-jsx';
 import { Controller } from 'zova-module-a-bean';
 import { BeanControllerFormBase, formMetaFromFormScene, TypeFormOnSubmitData } from 'zova-module-a-form';
@@ -43,17 +43,17 @@ export class ControllerBlockPageEntry<TData extends {} = {}> extends BeanControl
 
   protected async __init__() {
     this.$$modelResource = await this.bean._getBeanSelector('rest-resource.model.resource', true, this.resource);
-    this.formMeta = this.$useComputed(() => {
+    this.formMeta = this.$computed(() => {
       const formScene = this.formScene;
       return { ...formMetaFromFormScene(formScene), formScene };
     });
-    this.formProvider = this.$useComputed(() => {
+    this.formProvider = this.$computed(() => {
       return this.$$modelResource.formProvider;
     });
-    this.formSchema = this.$useComputed(() => {
+    this.formSchema = this.$computed(() => {
       return this.$$modelResource.getFormSchema(this.formMeta);
     });
-    this.formData = this.$useComputed(() => {
+    this.formData = this.$computed(() => {
       return this.$$modelResource.getFormData(this.formMeta, this.entryId) as TData | undefined;
     });
     // jsx
@@ -114,7 +114,7 @@ export class ControllerBlockPageEntry<TData extends {} = {}> extends BeanControl
   private _prepareJsxCelScope(): IPageEntryScope {
     // eslint-disable-next-line
     const self = this;
-    const permissions = useCustomRef(() => {
+    const permissions = this.$customRef(() => {
       return {
         get() {
           return self.$$modelResource.permissions;

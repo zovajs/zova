@@ -45,14 +45,14 @@ export class ControllerPageEntry extends BeanControllerPageBase {
   }
 
   protected async __init__() {
-    this.formMeta = this.$useComputed(() => {
+    this.formMeta = this.$computed(() => {
       const formScene = this.formScene;
       return { ...formMetaFromFormScene(formScene), formScene };
     });
-    this.formProvider = this.$useComputed(() => {
+    this.formProvider = this.$computed(() => {
       return this.$$modelResource.formProvider;
     });
-    this.formSchema = this.$useComputed(() => {
+    this.formSchema = this.$computed(() => {
       return this.$$modelResource.getFormSchema(this.formMeta);
     });
     // jsx

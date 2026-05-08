@@ -30,7 +30,7 @@ export class ControllerPageResource extends BeanControllerPageBase {
   }
 
   protected async __init__() {
-    this.tableProvider = this.$useComputed(() => {
+    this.tableProvider = this.$computed(() => {
       return this.$$modelResource.tableProvider;
     });
     // jsx

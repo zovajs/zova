@@ -9,7 +9,7 @@
 
 - Zova 提供了两个代码片段，你可以通过输入`init`和`dispose`快速添加相应的生命周期方法
 
-## 举例：$useComputed
+## 举例：$computed
 
 ```typescript
 export class Counter {
@@ -17,7 +17,7 @@ export class Counter {
   count2: string;
 
   protected async __init__() {
-    this.count2 = this.$useComputed(() => {
+    this.count2 = this.$computed(() => {
       return `=== ${this.count} ===`;
     });
   }

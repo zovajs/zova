@@ -56,7 +56,7 @@ export class ControllerTable<TData extends {} = {}> extends BeanControllerTableB
 
   protected async __init__() {
     this.bean._setBean('$$table', this);
-    this.tableProvider = this.$useComputed(() => {
+    this.tableProvider = this.$computed(() => {
       const tableProvider = this.$$beanResourceProviders.tableProvider;
       return this.$props.tableProvider ? deepExtend({}, tableProvider, this.$props.tableProvider) : tableProvider;
     });
@@ -152,7 +152,7 @@ export class ControllerTable<TData extends {} = {}> extends BeanControllerTableB
   }
 
   private _createProperties() {
-    this.properties = this.$useComputed(() => {
+    this.properties = this.$computed(() => {
       return this.$sdk.loadSchemaProperties(this.schema, 'table');
     });
   }

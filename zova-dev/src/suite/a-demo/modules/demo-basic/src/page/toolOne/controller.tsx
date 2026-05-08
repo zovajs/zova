@@ -33,7 +33,7 @@ export class ControllerPageToolOne extends BeanControllerPageFormBase {
   protected async __init__() {
     const apiSchemas = this.$apiSchema.testSsrToolOne.test();
     const querySdk = await $QueryAutoLoad(() => apiSchemas.sdk);
-    this.schemaUpdate = this.$useComputed(() => {
+    this.schemaUpdate = this.$computed(() => {
       const schema = apiSchemas.requestBody;
       // eslint-disable-next-line
       console.log('schema: ', schema);

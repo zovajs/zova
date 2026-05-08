@@ -18,7 +18,7 @@ export class ControllerPageItem extends BeanControllerPageBase {
   currentTodoId?: string;
 
   protected async __init__() {
-    this.currentTodoId = this.$useComputed(() => {
+    this.currentTodoId = this.$computed(() => {
       return this.$params.id;
     });
   }

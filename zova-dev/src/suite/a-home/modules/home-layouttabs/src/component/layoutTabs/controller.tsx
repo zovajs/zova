@@ -1,6 +1,6 @@
 import type { ModelTabs, ModelTabsOptions } from 'zova-module-a-routertabs';
 
-import { BeanControllerBase, Use, useComputed, useCustomRef } from 'zova';
+import { BeanControllerBase, Use } from 'zova';
 import { Controller } from 'zova-module-a-bean';
 import { $QueryAutoLoad } from 'zova-module-a-model';
 import { IServiceSsrLayoutOptions, ServiceSsrLayout } from 'zova-module-home-base';
@@ -31,7 +31,7 @@ export class ControllerLayoutTabs extends BeanControllerBase {
 
   protected async __init__() {
     // belowBreakpoint
-    this.belowBreakpoint = useComputed(() => {
+    this.belowBreakpoint = this.$computed(() => {
       let width;
       if (process.env.SERVER) {
         width = 0;
@@ -41,13 +41,11 @@ export class ControllerLayoutTabs extends BeanControllerBase {
       return width <= this.sys.config.layout.sidebar.breakpoint;
     });
     // leftDrawerOpen
-    this.leftDrawerOpen = useCustomRef(() => {
+    this.leftDrawerOpen = this.$customRef(() => {
       const self = this;
       return {
         get() {
-          return self.belowBreakpoint
-            ? self.leftDrawerOpenMobile
-            : self.$$modelLayout.leftDrawerOpenPC;
+          return self.belowBreakpoint ? self.leftDrawerOpenMobile : self.$$modelLayout.leftDrawerOpenPC;
         },
         set(value) {
           if (self.belowBreakpoint) {
@@ -86,12 +84,7 @@ export class ControllerLayoutTabs extends BeanControllerBase {
         return { title: menuItem.title, icon: menuItem.icon };
       },
     };
-    this.$$modelTabs = await this.bean._getBeanSelector(
-      'a-routertabs.model.tabs',
-      true,
-      configTabs.scene,
-      tabsOptions,
-    );
+    this.$$modelTabs = await this.bean._getBeanSelector('a-routertabs.model.tabs', true, configTabs.scene, tabsOptions);
     // watch menus
     this.$watch(
       () => {

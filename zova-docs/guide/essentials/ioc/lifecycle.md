@@ -9,7 +9,7 @@ All beans can provide two lifecycle methods.
 
 - Zova provides two code snippets, you can quickly add corresponding lifecycle methods by entering `init` or `dispose`
 
-## For Example: $useComputed
+## For Example: $computed
 
 ```typescript
 export class Counter {
@@ -17,7 +17,7 @@ export class Counter {
   count2: string;
 
   protected async __init__() {
-    this.count2 = this.$useComputed(() => {
+    this.count2 = this.$computed(() => {
       return `=== ${this.count} ===`;
     });
   }

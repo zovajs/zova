@@ -43,7 +43,7 @@ export class ControllerFormField<TParentData extends {} = {}> extends BeanContro
     // field
     const options = this._getFormFieldOptions();
     this._formField = useField(options as any) as any;
-    this.propsBucket = this.$useComputed(() => {
+    this.propsBucket = this.$computed(() => {
       return this._getPropsBucket();
     });
     // defaultValue

@@ -1,6 +1,6 @@
 import { celEnvBase } from '@cabloy/utils';
 import { VNode } from 'vue';
-import { BeanControllerBase, IComponentOptions, useCustomRef } from 'zova';
+import { BeanControllerBase, IComponentOptions } from 'zova';
 import { ZovaJsx } from 'zova-jsx';
 import { Controller } from 'zova-module-a-bean';
 import { $QueriesAutoLoad } from 'zova-module-a-model';
@@ -32,7 +32,7 @@ export class ControllerBlockPage<TData extends {} = {}> extends BeanControllerBa
 
   protected async __init__() {
     this.$$modelResource = await this.bean._getBeanSelector('rest-resource.model.resource', true, this.resource);
-    this.tableProvider = this.$useComputed(() => {
+    this.tableProvider = this.$computed(() => {
       return this.$$modelResource.tableProvider;
     });
     // jsx
@@ -40,7 +40,7 @@ export class ControllerBlockPage<TData extends {} = {}> extends BeanControllerBa
     // query
     this.queryFilterData = {};
     this.queryPaged = { pageNo: 1 };
-    this.query = this.$useComputed(() => {
+    this.query = this.$computed(() => {
       return Object.assign({}, this.queryFilterData, this.queryPaged);
     });
     // load schema/data
@@ -106,7 +106,7 @@ export class ControllerBlockPage<TData extends {} = {}> extends BeanControllerBa
   private _prepareJsxCelScope(): IPageScope {
     // eslint-disable-next-line
     const self = this;
-    const permissions = useCustomRef(() => {
+    const permissions = this.$customRef(() => {
       return {
         get() {
           return self.$$modelResource.permissions;

@@ -82,17 +82,17 @@ export class ControllerForm<TFormData extends {} = {}, TSubmitMeta = never> exte
     this.bean._setBean('$$form', this);
     this.form = this._createForm();
     this.formState = useStore(this.form.store, state => state) as any;
-    this.formProvider = this.$useComputed(() => {
+    this.formProvider = this.$computed(() => {
       const formProvider = this.$$beanResourceProviders.formProvider;
       return this.$props.formProvider ? deepExtend({}, formProvider, this.$props.formProvider) : formProvider;
     });
-    this.schema = this.$useComputed(() => {
+    this.schema = this.$computed(() => {
       return this.$props.schema;
     });
-    this.zodSchema = this.$useComputed(() => {
+    this.zodSchema = this.$computed(() => {
       return this._getZodSchema();
     });
-    this.properties = this.$useComputed(() => {
+    this.properties = this.$computed(() => {
       return this.$sdk.loadSchemaProperties(this.schema, this.$props.schemaScene);
     });
     this.fieldCelEnv = this._getFieldCelEnv();
@@ -257,7 +257,7 @@ export class ControllerForm<TFormData extends {} = {}, TSubmitMeta = never> exte
   }
 
   private _createForm() {
-    // not use $useComputed
+    // not use $computed
     return this.$useForm<TFormData, TSubmitMeta>({
       defaultValues: this.$props.data,
       validationLogic: this.$props.validateOnDynamic !== false ? revalidateLogic(this.$props.validateOnDynamicLogic) : undefined,

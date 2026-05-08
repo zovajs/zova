@@ -11,12 +11,9 @@ import type {
 import type { UnwrapNestedRefs } from 'vue';
 
 import { hashKey } from '@tanstack/vue-query';
-import { deepExtend, useCustomRef } from 'zova';
+import { deepExtend } from 'zova';
 
-import type {
-  DefinedInitialQueryOptions,
-  UndefinedInitialQueryOptions,
-} from '../../common/types.js';
+import type { DefinedInitialQueryOptions, UndefinedInitialQueryOptions } from '../../common/types.js';
 import type { QueryMetaPersister, UseQueryComputedOptions } from '../../types/query.js';
 
 import { BeanModelUseQuery } from './bean.model.useQuery.js';
@@ -32,30 +29,15 @@ export class BeanModelUseState extends BeanModelUseQuery {
     return await dbData;
   }
 
-  $useStateDb<
-    TQueryFnData = unknown,
-    TError = DefaultError,
-    TData = TQueryFnData,
-    TQueryKey extends QueryKey = QueryKey,
-  >(
+  $useStateDb<TQueryFnData = unknown, TError = DefaultError, TData = TQueryFnData, TQueryKey extends QueryKey = QueryKey>(
     options: UndefinedInitialQueryOptions<TQueryFnData, TError, TData, TQueryKey>,
     queryClient?: QueryClient,
   ): TData;
-  $useStateDb<
-    TQueryFnData = unknown,
-    TError = DefaultError,
-    TData = TQueryFnData,
-    TQueryKey extends QueryKey = QueryKey,
-  >(
+  $useStateDb<TQueryFnData = unknown, TError = DefaultError, TData = TQueryFnData, TQueryKey extends QueryKey = QueryKey>(
     options: DefinedInitialQueryOptions<TQueryFnData, TError, TData, TQueryKey>,
     queryClient?: QueryClient,
   ): TData;
-  $useStateDb<
-    TQueryFnData = unknown,
-    TError = DefaultError,
-    TData = TQueryFnData,
-    TQueryKey extends QueryKey = QueryKey,
-  >(
+  $useStateDb<TQueryFnData = unknown, TError = DefaultError, TData = TQueryFnData, TQueryKey extends QueryKey = QueryKey>(
     options: UseQueryOptions<TQueryFnData, TError, TData, TQueryFnData, TQueryKey>,
     queryClient?: QueryClient,
   ): TData;
@@ -79,7 +61,7 @@ export class BeanModelUseState extends BeanModelUseQuery {
       },
     );
     const self = this;
-    return useCustomRef(() => {
+    return this.$customRef(() => {
       return {
         get() {
           return self._handleAsyncDataGet(options, queryClient, true);
@@ -91,30 +73,15 @@ export class BeanModelUseState extends BeanModelUseQuery {
     });
   }
 
-  $useStateLocal<
-    TQueryFnData = unknown,
-    TError = DefaultError,
-    TData = TQueryFnData,
-    TQueryKey extends QueryKey = QueryKey,
-  >(
+  $useStateLocal<TQueryFnData = unknown, TError = DefaultError, TData = TQueryFnData, TQueryKey extends QueryKey = QueryKey>(
     options: UndefinedInitialQueryOptions<TQueryFnData, TError, TData, TQueryKey>,
     queryClient?: QueryClient,
   ): TData;
-  $useStateLocal<
-    TQueryFnData = unknown,
-    TError = DefaultError,
-    TData = TQueryFnData,
-    TQueryKey extends QueryKey = QueryKey,
-  >(
+  $useStateLocal<TQueryFnData = unknown, TError = DefaultError, TData = TQueryFnData, TQueryKey extends QueryKey = QueryKey>(
     options: DefinedInitialQueryOptions<TQueryFnData, TError, TData, TQueryKey>,
     queryClient?: QueryClient,
   ): TData;
-  $useStateLocal<
-    TQueryFnData = unknown,
-    TError = DefaultError,
-    TData = TQueryFnData,
-    TQueryKey extends QueryKey = QueryKey,
-  >(
+  $useStateLocal<TQueryFnData = unknown, TError = DefaultError, TData = TQueryFnData, TQueryKey extends QueryKey = QueryKey>(
     options: UseQueryOptions<TQueryFnData, TError, TData, TQueryFnData, TQueryKey>,
     queryClient?: QueryClient,
   ): TData;
@@ -143,7 +110,7 @@ export class BeanModelUseState extends BeanModelUseQuery {
       },
     );
     const self = this;
-    return useCustomRef(() => {
+    return this.$customRef(() => {
       return {
         get() {
           return self._handleSyncDataGet(options, queryClient, true);
@@ -163,30 +130,15 @@ export class BeanModelUseState extends BeanModelUseQuery {
     // });
   }
 
-  $useStateCookie<
-    TQueryFnData = unknown,
-    TError = DefaultError,
-    TData = TQueryFnData,
-    TQueryKey extends QueryKey = QueryKey,
-  >(
+  $useStateCookie<TQueryFnData = unknown, TError = DefaultError, TData = TQueryFnData, TQueryKey extends QueryKey = QueryKey>(
     options: UndefinedInitialQueryOptions<TQueryFnData, TError, TData, TQueryKey>,
     queryClient?: QueryClient,
   ): TData;
-  $useStateCookie<
-    TQueryFnData = unknown,
-    TError = DefaultError,
-    TData = TQueryFnData,
-    TQueryKey extends QueryKey = QueryKey,
-  >(
+  $useStateCookie<TQueryFnData = unknown, TError = DefaultError, TData = TQueryFnData, TQueryKey extends QueryKey = QueryKey>(
     options: DefinedInitialQueryOptions<TQueryFnData, TError, TData, TQueryKey>,
     queryClient?: QueryClient,
   ): TData;
-  $useStateCookie<
-    TQueryFnData = unknown,
-    TError = DefaultError,
-    TData = TQueryFnData,
-    TQueryKey extends QueryKey = QueryKey,
-  >(
+  $useStateCookie<TQueryFnData = unknown, TError = DefaultError, TData = TQueryFnData, TQueryKey extends QueryKey = QueryKey>(
     options: UseQueryOptions<TQueryFnData, TError, TData, TQueryFnData, TQueryKey>,
     queryClient?: QueryClient,
   ): TData;
@@ -216,7 +168,7 @@ export class BeanModelUseState extends BeanModelUseQuery {
       },
     );
     const self = this;
-    return useCustomRef(() => {
+    return this.$customRef(() => {
       return {
         get() {
           return self._handleSyncDataGet(options, queryClient, true);
@@ -236,30 +188,15 @@ export class BeanModelUseState extends BeanModelUseQuery {
     // });
   }
 
-  $useStateMem<
-    TQueryFnData = unknown,
-    TError = DefaultError,
-    TData = TQueryFnData,
-    TQueryKey extends QueryKey = QueryKey,
-  >(
+  $useStateMem<TQueryFnData = unknown, TError = DefaultError, TData = TQueryFnData, TQueryKey extends QueryKey = QueryKey>(
     options: UndefinedInitialQueryOptions<TQueryFnData, TError, TData, TQueryKey>,
     queryClient?: QueryClient,
   ): TData;
-  $useStateMem<
-    TQueryFnData = unknown,
-    TError = DefaultError,
-    TData = TQueryFnData,
-    TQueryKey extends QueryKey = QueryKey,
-  >(
+  $useStateMem<TQueryFnData = unknown, TError = DefaultError, TData = TQueryFnData, TQueryKey extends QueryKey = QueryKey>(
     options: DefinedInitialQueryOptions<TQueryFnData, TError, TData, TQueryKey>,
     queryClient?: QueryClient,
   ): TData;
-  $useStateMem<
-    TQueryFnData = unknown,
-    TError = DefaultError,
-    TData = TQueryFnData,
-    TQueryKey extends QueryKey = QueryKey,
-  >(
+  $useStateMem<TQueryFnData = unknown, TError = DefaultError, TData = TQueryFnData, TQueryKey extends QueryKey = QueryKey>(
     options: UseQueryOptions<TQueryFnData, TError, TData, TQueryFnData, TQueryKey>,
     queryClient?: QueryClient,
   ): TData;
@@ -272,7 +209,7 @@ export class BeanModelUseState extends BeanModelUseQuery {
       },
     });
     const self = this;
-    return useCustomRef(() => {
+    return this.$customRef(() => {
       return {
         get() {
           return self._handleSyncDataGet(options, queryClient, false);
@@ -292,44 +229,24 @@ export class BeanModelUseState extends BeanModelUseQuery {
     // });
   }
 
-  $useStateComputed<TDATA, TQueryKey extends QueryKey>(
-    options: UseQueryComputedOptions<TDATA, TQueryKey>,
-  ): TDATA {
+  $useStateComputed<TDATA, TQueryKey extends QueryKey>(options: UseQueryComputedOptions<TDATA, TQueryKey>): TDATA {
     const queryKey = this.self._forceQueryKeyPrefix(options.queryKey);
     const queryHash = hashKey(queryKey);
     if (!this[SymbolUseComputeds][queryHash]) {
-      this[SymbolUseComputeds][queryHash] = this.$useComputed(
-        options.queryFn,
-        options.debugOptions,
-      );
+      this[SymbolUseComputeds][queryHash] = this.$computed(options.queryFn, options.debugOptions);
     }
     return this[SymbolUseComputeds][queryHash] as unknown as TDATA;
   }
 
-  $useStateData<
-    TQueryFnData = unknown,
-    TError = DefaultError,
-    TData = TQueryFnData,
-    TQueryKey extends QueryKey = QueryKey,
-  >(
+  $useStateData<TQueryFnData = unknown, TError = DefaultError, TData = TQueryFnData, TQueryKey extends QueryKey = QueryKey>(
     options: UndefinedInitialQueryOptions<TQueryFnData, TError, TData, TQueryKey>,
     queryClient?: QueryClient,
   ): UnwrapNestedRefs<UseQueryReturnType<TData, TError>>;
-  $useStateData<
-    TQueryFnData = unknown,
-    TError = DefaultError,
-    TData = TQueryFnData,
-    TQueryKey extends QueryKey = QueryKey,
-  >(
+  $useStateData<TQueryFnData = unknown, TError = DefaultError, TData = TQueryFnData, TQueryKey extends QueryKey = QueryKey>(
     options: DefinedInitialQueryOptions<TQueryFnData, TError, TData, TQueryKey>,
     queryClient?: QueryClient,
   ): UnwrapNestedRefs<UseQueryDefinedReturnType<TData, TError>>;
-  $useStateData<
-    TQueryFnData = unknown,
-    TError = DefaultError,
-    TData = TQueryFnData,
-    TQueryKey extends QueryKey = QueryKey,
-  >(
+  $useStateData<TQueryFnData = unknown, TError = DefaultError, TData = TQueryFnData, TQueryKey extends QueryKey = QueryKey>(
     options: UseQueryOptions<TQueryFnData, TError, TData, TQueryFnData, TQueryKey>,
     queryClient?: QueryClient,
   ): UnwrapNestedRefs<UseQueryReturnType<TData, TError>>;

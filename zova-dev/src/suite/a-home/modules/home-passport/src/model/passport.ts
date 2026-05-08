@@ -24,7 +24,7 @@ export class ModelPassport extends BeanModelBase {
   schemaLogin?: SchemaObject;
 
   protected async __init__() {
-    this.schemaLogin = this.$useComputed(() => {
+    this.schemaLogin = this.$computed(() => {
       return this.apiSchemasLogin.requestBody;
     });
     this.passport = process.env.CLIENT ? this.$useStateLocal({ queryKey: ['passport'] }) : this.$useStateMem({ queryKey: ['passport'] });

@@ -1,5 +1,5 @@
 import type { Logger } from '@cabloy/logger';
-import type { ReactiveMarker } from '@vue/reactivity';
+import type { CustomRefFactory, ReactiveMarker, Ref, UnwrapRef } from '@vue/reactivity';
 import type {
   ComputedGetter,
   DebuggerOptions,
@@ -14,7 +14,7 @@ import type {
   WritableComputedOptions,
 } from 'vue';
 
-import { computed, watch, watchEffect, watchPostEffect, watchSyncEffect } from 'vue';
+import { computed, customRef, toRef, watch, watchEffect, watchPostEffect, watchSyncEffect } from 'vue';
 
 import type { AppEvent } from '../core/component/event.ts';
 import type { ILoggerChildRecord, ILoggerClientRecord } from '../core/logger/types.ts';
@@ -100,14 +100,6 @@ export class BeanBase extends BeanBaseSimple {
     return await cast(this.ctx.instance).ctx.renderFreezeScope(fn);
   }
 
-  protected $onCreated(fn: any) {
-    this.ctx.meta.hooks.onCreated(fn);
-  }
-
-  protected $onMounted(fn: any) {
-    this.ctx.meta.hooks.onMounted(fn);
-  }
-
   protected $errorHandler(err: unknown, info?: string): IErrorHandlerEventResult {
     if (err instanceof Error && err[SymbolErrorInstanceInfo]) {
       delete err[SymbolErrorInstanceInfo];
@@ -115,9 +107,9 @@ export class BeanBase extends BeanBaseSimple {
     return this.app?.vue.config.errorHandler!(err, this.ctx.instance as any, info!) as unknown as IErrorHandlerEventResult;
   }
 
-  protected $useComputed<T>(getter: ComputedGetter<T>, debugOptions?: DebuggerOptions): T;
-  protected $useComputed<T>(options: WritableComputedOptions<T>, debugOptions?: DebuggerOptions): T;
-  protected $useComputed(options, debugOptions) {
+  protected $computed<T>(getter: ComputedGetter<T>, debugOptions?: DebuggerOptions): T;
+  protected $computed<T>(options: WritableComputedOptions<T>, debugOptions?: DebuggerOptions): T;
+  protected $computed(options, debugOptions) {
     return this.ctx.util.instanceScope(() => {
       return computed(options, debugOptions);
     });
@@ -176,6 +168,17 @@ export class BeanBase extends BeanBaseSimple {
     return this.ctx.util.instanceScope(() => {
       return this.ctx.meta.hooks.onMounted(fn);
     });
+  }
+
+  protected $customRef<T>(factory: CustomRefFactory<T>): T {
+    return customRef(factory) as T;
+  }
+
+  protected $toRef<T>(value: T): T extends () => infer R ? R : T extends Ref ? UnwrapRef<T> : UnwrapRef<T>;
+  protected $toRef<T extends object, K extends keyof T>(object: T, key: K): T[K];
+  protected $toRef<T extends object, K extends keyof T>(object: T, key: K, defaultValue: T[K]): Exclude<T[K], undefined>;
+  protected $toRef(object, key?, defaultValue?) {
+    return toRef(object, key, defaultValue);
   }
 
   protected $zovaComponent<K extends keyof IZovaComponentRecord>(componentName: K): IZovaComponentRecord[K];

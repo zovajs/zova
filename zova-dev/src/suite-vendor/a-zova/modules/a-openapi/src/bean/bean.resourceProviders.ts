@@ -9,14 +9,14 @@ export class BeanResourceProviders extends BeanBase {
   public tableProvider: ITableProvider;
 
   protected async __init__() {
-    this.formProvider = this.$useComputed(() => {
+    this.formProvider = this.$computed(() => {
       const resourceProviders = this.scope.config.resourceProviders;
       return {
         components: Object.assign({}, resourceProviders.blocks, resourceProviders.formFields, resourceProviders.form?.actionsRow),
         behaviors: resourceProviders.behaviors,
       };
     });
-    this.tableProvider = this.$useComputed(() => {
+    this.tableProvider = this.$computed(() => {
       const resourceProviders = this.scope.config.resourceProviders;
       return {
         components: Object.assign(

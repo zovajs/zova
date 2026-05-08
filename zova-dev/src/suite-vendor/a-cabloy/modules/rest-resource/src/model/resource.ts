@@ -34,32 +34,32 @@ export class ModelResource<Entity = any, EntityCreate = Partial<Entity>, EntityU
     if (!resource) throw new Error('resource not specified');
     await super.__init__(resource);
     this.resource = resource;
-    this.permissions = this.$useComputed(() => {
+    this.permissions = this.$computed(() => {
       const permissions = this.$sdk.getPermissions(this.resource);
       return permissions.data;
     });
-    this.formProvider = this.$useComputed(() => {
+    this.formProvider = this.$computed(() => {
       return this.$$beanResourceProviders.formProvider;
     });
-    this.tableProvider = this.$useComputed(() => {
+    this.tableProvider = this.$computed(() => {
       return this.$$beanResourceProviders.tableProvider;
     });
-    this.schemaView = this.$useComputed(() => {
+    this.schemaView = this.$computed(() => {
       return this.apiSchemasView.responseBody;
     });
-    this.schemaCreate = this.$useComputed(() => {
+    this.schemaCreate = this.$computed(() => {
       return this.apiSchemasCreate.requestBody;
     });
-    this.schemaUpdate = this.$useComputed(() => {
+    this.schemaUpdate = this.$computed(() => {
       return this.apiSchemasUpdate.requestBody;
     });
-    this.schemaFilter = this.$useComputed(() => {
+    this.schemaFilter = this.$computed(() => {
       return this.apiSchemasSelect.filter;
     });
-    this.schemaRow = this.$useComputed(() => {
+    this.schemaRow = this.$computed(() => {
       return this.apiSchemasSelect.row;
     });
-    this.schemaPages = this.$useComputed(() => {
+    this.schemaPages = this.$computed(() => {
       return this.apiSchemasSelect.paged;
     });
     // bootstrap
