@@ -10,7 +10,6 @@ import type {
 import { celEnvBase, isNil } from '@cabloy/utils';
 import { SchemaObject } from 'openapi3-ts/oas31';
 import { TableIdentity } from 'table-identity';
-import { classes } from 'typestyle';
 import { VNode } from 'vue';
 import { BeanControllerBase, deepEqual, IComponentOptions, useCustomRef } from 'zova';
 import { ZovaJsx } from 'zova-jsx';
@@ -146,7 +145,7 @@ export class ControllerBlockPageEntry<TData extends {} = {}> extends BeanControl
     if (!this.formData) {
       return <div>{this.scope.locale.EntryNotExist()}</div>;
     }
-    return <div class={classes(this.$props.class, this.$style(this.$props.style))}>{this._renderFormWrapper()}</div>;
+    return <div class={this.$props.class}>{this._renderFormWrapper()}</div>;
   }
 
   private _renderFormWrapper() {

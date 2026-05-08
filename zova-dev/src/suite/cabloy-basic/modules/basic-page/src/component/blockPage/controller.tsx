@@ -1,5 +1,4 @@
 import { celEnvBase } from '@cabloy/utils';
-import { classes } from 'typestyle';
 import { VNode } from 'vue';
 import { BeanControllerBase, IComponentOptions, useCustomRef } from 'zova';
 import { ZovaJsx } from 'zova-jsx';

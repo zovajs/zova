@@ -1,6 +1,5 @@
 import type { IJsxRenderContextPage } from 'zova-module-a-openapi';
 
-import { classes } from 'typestyle';
 import { VNode } from 'vue';
 import { BeanControllerBase, IComponentOptions, Use } from 'zova';
 import { Controller } from 'zova-module-a-bean';
@@ -26,7 +25,7 @@ export class ControllerBlockToolbarBulk extends BeanControllerBase {
     const domActions = this._renderActions();
     if (!domActions || domActions.length === 0) return;
     return (
-      <div class={classes(this.$props.class, this.$style(this.$props.style))}>
+      <div class={this.$props.class}>
         <div class="join">{domActions}</div>
       </div>
     );

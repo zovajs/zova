@@ -1,6 +1,5 @@
 import type { IJsxRenderContextPage } from 'zova-module-a-openapi';
 
-import { classes } from 'typestyle';
 import { BeanControllerBase, deepEqual, IComponentOptions, Use } from 'zova';
 import { Controller } from 'zova-module-a-bean';
 import { BeanControllerTableBase, ZTable } from 'zova-module-a-table';
@@ -37,7 +36,7 @@ export class ControllerBlockTable extends BeanControllerBase {
     const { $$page } = this.$$renderContext;
     return (
       <ZTable
-        class={classes(this.$props.class, this.$style(this.$props.style))}
+        class={this.$props.class}
         controllerRef={ref => {
           this.tableInstance = ref;
           $$page.tableInstance = ref;

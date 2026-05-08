@@ -1,6 +1,5 @@
 import type { IJsxRenderContextPage } from 'zova-module-a-openapi';
 
-import { classes } from 'typestyle';
 import { BeanControllerBase, IComponentOptions, Use } from 'zova';
 import { Controller } from 'zova-module-a-bean';
 import { IResourceBlockOptionsPager } from 'zova-module-basic-openapi';
@@ -21,7 +20,7 @@ export class ControllerBlockPager extends BeanControllerBase {
     const domPager = this._renderPager();
     if (!domPager) return;
     return (
-      <div class={classes(this.$props.class, this.$style(this.$props.style))}>
+      <div class={this.$props.class}>
         <div class="join">{domPager}</div>
       </div>
     );
