@@ -188,12 +188,6 @@ ZovaJS provides several built-in env variables:
 | API_PREFIX   |                       |
 | API_JWT      | Whether to enable JWT |
 
-### PINIA
-
-| Name          | Description             |
-| ------------- | ----------------------- |
-| PINIA_ENABLED | Whether to enable Pinia |
-
 ### Proxy
 
 | Name               | Description                                                                                               |

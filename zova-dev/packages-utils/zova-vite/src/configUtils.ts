@@ -102,15 +102,7 @@ export function createConfigUtils(
         // MODE: meta.appMode,
       },
     );
-    for (const key of [
-      'NODE_ENV',
-      'META_FLAVOR',
-      'META_MODE',
-      'META_APP_MODE',
-      'DEV',
-      'PROD',
-      'SSR',
-    ]) {
+    for (const key of ['NODE_ENV', 'META_FLAVOR', 'META_MODE', 'META_APP_MODE', 'DEV', 'PROD', 'SSR']) {
       if ((res[key] as any) !== false) {
         process.env[key] = res[key];
       }
@@ -136,9 +128,6 @@ export function createConfigUtils(
   function __getDisabledModules() {
     let modules: string[] | string = process.env.PROJECT_DISABLED_MODULES ?? '';
     if (!Array.isArray(modules)) modules = modules ? modules.split(',') : [];
-    if (process.env.PINIA_ENABLED === 'false') {
-      modules.push('a-pinia');
-    }
     return modules;
   }
 

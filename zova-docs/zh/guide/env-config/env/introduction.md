@@ -189,12 +189,6 @@ ZovaJS 提供了若干内置的环境变量：
 | API_PREFIX   |             |
 | API_JWT      | 是否启用JWT |
 
-### PINIA
-
-| 名称          | 说明          |
-| ------------- | ------------- |
-| PINIA_ENABLED | 是否启用Pinia |
-
 ### Proxy
 
 | 名称               | 说明                                                                                            |
