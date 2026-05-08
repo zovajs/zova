@@ -83,11 +83,6 @@
         "optionsGlobalInterfaceFrom": "zova-module-a-bean",
         "boilerplate": "service/boilerplate"
       },
-      "store": {
-        "beanGeneral": true,
-        "optionsNone": true,
-        "boilerplate": "store/boilerplate"
-      },
       "tool": {
         "beanGeneral": true,
         "optionsNone": true,
