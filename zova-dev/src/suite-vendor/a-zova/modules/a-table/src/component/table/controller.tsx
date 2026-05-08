@@ -9,6 +9,7 @@ import type {
 import { celEnvBase, isNilOrEmptyString } from '@cabloy/utils';
 import { CellContext, createColumnHelper, getCoreRowModel, TableOptionsWithReactiveData } from '@tanstack/vue-table';
 import { SchemaObject } from 'openapi3-ts/oas31';
+import { classes } from 'typestyle';
 import { VNode } from 'vue';
 import { appResource, cast, deepEqual, deepExtend, objectAssignReactive, Use } from 'zova';
 import { isJsxComponent, ZovaJsx } from 'zova-jsx';
@@ -345,7 +346,11 @@ export class ControllerTable<TData extends {} = {}> extends BeanControllerTableB
         // cellProps = isJsxComponent(render) ? Object.assign({}, columnProps, cast(render).props) : columnProps;
         cellProps = columnProps;
       }
-      const cellProps2 = this.zovaJsx.renderJsxProps(cellProps, {}, cellScope, jsxRenderContext);
+      const cellProps2 = this.zovaJsx.renderJsxProps(cellProps, {}, cellScope, jsxRenderContext) as any;
+      if (cellProps2.class || cellProps2.style) {
+        cellProps2.class = classes(cellProps2.class, jsxRenderContext.$host.$style(cellProps2.style));
+        delete cellProps2.style;
+      }
       return beanInstance.render(cellProps2, jsxRenderContext, () => {
         const children = isJsxComponent(render) && cast(render).children;
         if (children && children.length > 0) {

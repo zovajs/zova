@@ -1,4 +1,3 @@
-import { classes } from 'typestyle';
 import { BeanBase } from 'zova';
 import { IJsxRenderContextTableCell, ITableCellRender, NextTableCellRender, TableCell } from 'zova-module-a-table';
 import { IResourceTableCellOptionsDate } from 'zova-module-basic-openapi';
@@ -11,10 +10,9 @@ export interface ITableCellOptionsDate extends IResourceTableCellOptionsDate {}
   preset: 'DATETIME_SHORT',
 })
 export class TableCellDate extends BeanBase implements ITableCellRender {
-  render(options: ITableCellOptionsDate, renderContext: IJsxRenderContextTableCell, next: NextTableCellRender) {
-    const { $host } = renderContext;
+  render(options: ITableCellOptionsDate, _renderContext: IJsxRenderContextTableCell, next: NextTableCellRender) {
     const value = dateFormatUtil(next(), options);
-    if (!options.class || !options.style) return value;
-    return <div class={classes(options.class, $host.$style(options.style))}>{value}</div>;
+    if (!options.class) return value;
+    return <div class={options.class}>{value}</div>;
   }
 }

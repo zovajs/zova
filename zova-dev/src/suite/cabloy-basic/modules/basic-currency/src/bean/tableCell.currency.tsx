@@ -1,4 +1,3 @@
-import { classes } from 'typestyle';
 import { BeanBase } from 'zova';
 import { IJsxRenderContextTableCell, ITableCellRender, NextTableCellRender, TableCell } from 'zova-module-a-table';
 import { IResourceTableCellOptionsCurrency } from 'zova-module-basic-openapi';
@@ -9,10 +8,9 @@ export interface ITableCellOptionsCurrency extends IResourceTableCellOptionsCurr
 
 @TableCell<ITableCellOptionsCurrency>()
 export class TableCellCurrency extends BeanBase implements ITableCellRender {
-  render(options: ITableCellOptionsCurrency, renderContext: IJsxRenderContextTableCell, next: NextTableCellRender) {
-    const { $host } = renderContext;
+  render(options: ITableCellOptionsCurrency, _renderContext: IJsxRenderContextTableCell, next: NextTableCellRender) {
     const value = currencyFormat(next(), options);
-    if (!options.class || !options.style) return value;
-    return <div class={classes(options.class, $host.$style(options.style))}>{value}</div>;
+    if (!options.class) return value;
+    return <div class={options.class}>{value}</div>;
   }
 }
