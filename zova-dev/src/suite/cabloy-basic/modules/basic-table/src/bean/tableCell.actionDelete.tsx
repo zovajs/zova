@@ -1,4 +1,3 @@
-import { classes } from 'typestyle';
 import { BeanBase } from 'zova';
 import { ZIcon } from 'zova-module-a-icon';
 import { IJsxRenderContextTableCell, ITableCellRender, NextTableCellRender, TableCell } from 'zova-module-a-table';
@@ -14,7 +13,7 @@ export class TableCellActionDelete extends BeanBase implements ITableCellRender 
     const { $host } = renderContext;
     return (
       <button
-        class={classes(options.class, $host.$style(options.style))}
+        class={options.class}
         type="button"
         onClick={async () => {
           // eslint-disable-next-line no-alert

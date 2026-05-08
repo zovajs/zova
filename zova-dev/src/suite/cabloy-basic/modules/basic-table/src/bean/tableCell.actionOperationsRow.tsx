@@ -1,4 +1,3 @@
-import { classes } from 'typestyle';
 import { VNode } from 'vue';
 import { BeanBase } from 'zova';
 import { TypeTableCellRenderComponent } from 'zova-module-a-openapi';
@@ -44,6 +43,6 @@ export class TableCellActionOperationsRow extends BeanBase implements ITableCell
       const options2 = Object.assign({ key: index }, action.options);
       domActions.push($$table.cellRender(action.render!, options2, renderContext));
     });
-    return <div class={classes(options.class, $host.$style(options.style))}>{domActions}</div>;
+    return <div class={options.class}>{domActions}</div>;
   }
 }

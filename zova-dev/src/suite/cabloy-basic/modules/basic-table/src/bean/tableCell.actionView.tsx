@@ -1,4 +1,3 @@
-import { classes } from 'typestyle';
 import { BeanBase } from 'zova';
 import { IJsxRenderContextTableCell, ITableCellRender, NextTableCellRender, TableCell } from 'zova-module-a-table';
 import { IResourceActionRowOptionsView } from 'zova-module-basic-openapi';
@@ -14,7 +13,7 @@ export class TableCellActionView extends BeanBase implements ITableCellRender {
     const value = next();
     return (
       <a
-        class={classes(options.class, $host.$style(options.style))}
+        class={options.class}
         href="#"
         onClick={async e => {
           e.preventDefault();
