@@ -3,15 +3,16 @@ import { metadataCustomSnippet } from '@cabloy/cli';
 declare module '@cabloy/cli' {
   interface ICommandArgv {
     modelName: string;
+    controllerFileName: string;
+    controllerClassName: string;
   }
 }
 
 const __regProps = /interface Controller[^<]*Props<(.*?)>/;
 const __regModelsReplace = /interface [^<]*Models([^{]*) \{/;
-const __regModelValue = /import \{[^}]*ModelValue[^}]*\} from 'zova';/;
-const __regModelValueReplace = /import \{ ([^}]*) \} from 'zova';/;
 const __regPropsDefaultReplace = /static \$propsDefault([^{]*) = \{/;
 const __regLocalNameReplace = /protected async __init__/;
+const __regLocalNameInitReplace = /protected async __init__([^{]*){/;
 
 export default metadataCustomSnippet({
   file: ({ argv }) => {
@@ -38,19 +39,17 @@ export default metadataCustomSnippet({
     ast = ast.replace(__regModelsReplace, $0 => {
       return `${$0}\n  '${typeName}'?: number;`;
     });
-    // @Model
-    if (!__regModelValue.test(ast)) {
-      ast = ast.replace(__regModelValueReplace, (_, $1) => {
-        return `import { ${$1}, ModelValue } from 'zova';`;
-      });
-    }
     // propsDefault
     ast = ast.replace(__regPropsDefaultReplace, $0 => {
       return `${$0}\n  ${modelName}: 0,`;
     });
     // localName
     ast = ast.replace(__regLocalNameReplace, $0 => {
-      return `@ModelValue()\n${localName}: number;\n\n    ${$0}`;
+      return `${localName}: number;\n\n    ${$0}`;
+    });
+    // init
+    ast = ast.replace(__regLocalNameInitReplace, $0 => {
+      return `${$0}\n    this.${localName} = this.$useModel('${modelName}');`;
     });
     // ok
     return ast;
