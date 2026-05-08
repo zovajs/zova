@@ -1,3 +1,4 @@
+import { types } from 'typestyle';
 import { TypeRenderComponentJsx } from 'zova-jsx';
 import { IIconRecord } from 'zova-module-a-icon';
 import 'zova-module-a-openapi';
@@ -6,6 +7,7 @@ declare module 'zova-module-a-openapi' {
   export interface ISchemaRenderComponentLayoutOptions {
     disable?: boolean;
     class?: any;
+    style?: types.NestedCSSProperties;
     label?: string | false;
     inline?: boolean;
     bordered?: boolean;
