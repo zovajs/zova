@@ -33,8 +33,11 @@ export class ControllerCard extends BeanControllerBase {
 +   modelValue: 0,
   };
 
-+ @ModelValue()
 + modelValue: number;
+
+  protected async __init__() {
++   this.modelValue = this.$useModel('modelValue');
+  }
 }
 ```
 
@@ -112,8 +115,11 @@ export class ControllerCard extends BeanControllerBase {
 +   title: 0,
   };
 
-+ @ModelValue()
 + modelTitle: number;
+
+  protected async __init__() {
++   this.modelTitle = this.$useModel('title');
+  }
 }
 ```
 
