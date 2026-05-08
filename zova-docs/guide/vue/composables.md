@@ -6,7 +6,7 @@ The following takes `mouse tracker` as an example to demonstrate how to use Comp
 
 ## 1. Create Composable
 
-`src/suite/a-demo/modules/demo-basic/src/page/state/mouse.ts`
+`mouse.ts`
 
 ```typescript
 import { ref, onMounted, onUnmounted } from 'vue';
@@ -27,34 +27,30 @@ export function useMouse() {
 }
 ```
 
-## 2. Inject and use Composable
+## 2. Use Composable
 
 Take the existing page component of module `demo-basic` as an example:
 
-`src/suite/a-demo/modules/demo-basic/src/page/state/controller.ts`
+`controller.ts`
 
 ```typescript
+import { ReturnTypeComposable } from 'zova';
 import { useMouse } from './mouse.js';
 
 @Controller()
-export class ControllerPageState extends BeanControllerPageBase {
-  @UseComposable(useMouse)
-  $$mouse: ReturnTypeComposable<typeof useMouse>;
-}
-```
+export class ControllerSome {
+  mouse: ReturnTypeComposable<typeof useMouse>;
 
-- line 6: Use the `@UseComposable` decorator function to pass in the composable to be used
-- line 7: Declare the variable `$$mouse` and generate its type through the type tool `ReturnTypeComposable`
+  protected async __init__() {
+    this.mouse = this.$composable(() => {
+      return useMouse();
+    });
+  }
 
-`src/suite/a-demo/modules/demo-basic/src/page/state/render.tsx`
-
-```typescript
-@Controller()
-export class RenderState extends BeanRenderBase {
-  render() {
+  protected render() {
     return (
       <div>
-        Mouse position is at: {this.$$mouse.x}, {this.$$mouse.y}
+        Mouse position is at: {this.mouse.x}, {this.mouse.y}
       </div>
     );
   }

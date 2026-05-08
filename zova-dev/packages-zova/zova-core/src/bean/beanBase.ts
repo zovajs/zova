@@ -115,6 +115,12 @@ export class BeanBase extends BeanBaseSimple {
     });
   }
 
+  protected $composable(fn: Function): any {
+    return this.ctx.util.instanceScope(() => {
+      return fn();
+    });
+  }
+
   protected $watchEffect(effect: WatchEffect, options?: WatchEffectOptions): WatchHandle {
     return this.ctx.util.instanceScope(() => {
       return watchEffect(effect, options);
