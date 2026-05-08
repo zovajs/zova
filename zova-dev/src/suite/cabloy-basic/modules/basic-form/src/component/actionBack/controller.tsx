@@ -22,10 +22,9 @@ export class ControllerActionBack extends BeanControllerBase {
     const { $$pageEntry } = this.$$renderContext;
     const formInstance: BeanControllerFormBase = $$pageEntry.formInstance;
     const isSubmitting = formInstance?.formState.isSubmitting;
-    const className = classes(this.$props.class, this.$style(this.$props.style));
     return (
       <button
-        class={classes(className, isSubmitting && 'btn-disabled')}
+        class={classes(this.$props.class, isSubmitting && 'btn-disabled')}
         type="button"
         onClick={() => {
           this.$router.back();

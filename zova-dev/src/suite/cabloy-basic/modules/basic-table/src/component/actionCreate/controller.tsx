@@ -1,6 +1,5 @@
 import type { IJsxRenderContextPage } from 'zova-module-a-openapi';
 
-import { classes } from 'typestyle';
 import { BeanControllerBase, IComponentOptions, Use } from 'zova';
 import { Controller } from 'zova-module-a-bean';
 import { IResourceActionBulkOptionsCreate } from 'zova-module-basic-openapi';
@@ -20,7 +19,7 @@ export class ControllerActionCreate extends BeanControllerBase {
   protected render() {
     return (
       <button
-        class={classes(this.$props.class, this.$style(this.$props.style))}
+        class={this.$props.class}
         type="button"
         onClick={async () => {
           await this.$performAction('basic-actions:create', this.$props, this.$$renderContext);

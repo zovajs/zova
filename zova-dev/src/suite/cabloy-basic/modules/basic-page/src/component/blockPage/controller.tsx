@@ -122,7 +122,7 @@ export class ControllerBlockPage<TData extends {} = {}> extends BeanControllerBa
   }
 
   protected render() {
-    return <div class={classes(this.$props.class, this.$style(this.$props.style))}>{this._renderBlocks()}</div>;
+    return <div class={this.$props.class}>{this._renderBlocks()}</div>;
   }
 
   private _renderBlocks() {

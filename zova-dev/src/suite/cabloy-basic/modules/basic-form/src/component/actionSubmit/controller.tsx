@@ -23,12 +23,11 @@ export class ControllerActionSubmit extends BeanControllerBase {
     const { $$pageEntry } = this.$$renderContext;
     const formInstance: BeanControllerFormBase = $$pageEntry.formInstance;
     const isSubmitting = formInstance?.formState.isSubmitting;
-    const className = classes(this.$props.class, this.$style(this.$props.style));
     return (
       <>
         {isSubmitting && <span class="loading loading-spinner text-primary"></span>}
         <button
-          class={classes(className, isSubmitting && 'btn-disabled')}
+          class={classes(this.$props.class, isSubmitting && 'btn-disabled')}
           type="submit"
           onClick={async (e: Event) => {
             this.onClick(e);
