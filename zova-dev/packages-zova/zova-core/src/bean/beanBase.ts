@@ -14,7 +14,7 @@ import type {
   WritableComputedOptions,
 } from 'vue';
 
-import { watch, watchEffect, watchPostEffect, watchSyncEffect } from 'vue';
+import { computed, watch, watchEffect, watchPostEffect, watchSyncEffect } from 'vue';
 
 import type { AppEvent } from '../core/component/event.ts';
 import type { ILoggerChildRecord, ILoggerClientRecord } from '../core/logger/types.ts';
@@ -23,7 +23,6 @@ import type { MapSources, MaybeUndefined } from '../vueExtra/watch.ts';
 import type { IErrorHandlerEventResult, IModuleLocaleText, IZovaComponentRecord } from './resource/index.ts';
 
 import { cast } from '../types/utils/cast.ts';
-import { useComputed } from '../vueExtra/computed.ts';
 import { BeanBaseSimple, SymbolModuleBelong } from './beanBaseSimple.ts';
 import { SymbolErrorInstanceInfo } from './resource/index.ts';
 import { getVueDecoratorValue } from './vueDecorators/utils.ts';
@@ -120,7 +119,7 @@ export class BeanBase extends BeanBaseSimple {
   protected $useComputed<T>(options: WritableComputedOptions<T>, debugOptions?: DebuggerOptions): T;
   protected $useComputed(options, debugOptions) {
     return this.ctx.util.instanceScope(() => {
-      return useComputed(options, debugOptions);
+      return computed(options, debugOptions);
     });
   }
 
