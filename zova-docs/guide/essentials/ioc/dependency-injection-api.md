@@ -40,9 +40,3 @@ export interface IDecoratorUseOptions {
 Inject the module's Scope object through the `@UseScope` decorator function.
 
 - see: [Module Scope](../scope/introduction.md)
-
-## @UseComposable
-
-Inject the Vue Composables through the `@UseComposable` decorator function.
-
-- see: [Composables](../../vue/composables.md)

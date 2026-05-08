@@ -27,15 +27,6 @@ export interface IDecoratorUseOptions {
   init?: IDecoratorUseOptionsInit;
 }
 
-export interface IDecoratorUseComposableOptions {
-  beanComposable?: Functionable;
-  name?: string;
-  selector?: string;
-  injectionScope?: InjectionScope;
-  markReactive?: boolean;
-  init?: IDecoratorUseOptionsInit;
-}
-
 export interface IDecoratorUseScopeOptions {
   module?: keyof IBeanScopeRecord;
 }

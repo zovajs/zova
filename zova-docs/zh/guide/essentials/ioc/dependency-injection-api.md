@@ -40,9 +40,3 @@ export interface IDecoratorUseOptions {
 通过`@UseScope`装饰器函数注入模块的 Scope 对象。
 
 - 参见：[模块Scope](../scope/introduction.md)
-
-## @UseComposable
-
-通过`@UseComposable`装饰器函数注入 Vue Composables。
-
-- 参见：[Composables](../../vue/composables.md)

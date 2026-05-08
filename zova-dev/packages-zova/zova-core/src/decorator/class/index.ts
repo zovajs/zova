@@ -3,6 +3,5 @@ export * from './createBeanDecorator.ts';
 export * from './preload.ts';
 export * from './proxyDisable.ts';
 export * from './use.ts';
-export * from './useComposable.ts';
 export * from './useScope.ts';
 export * from './virtual.ts';
