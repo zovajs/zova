@@ -5,7 +5,6 @@ declare module 'zova' {
     bean: never;
     scope: never;
     service: never;
-    store: never;
     tool: never;
     data: never;
     controller: never;

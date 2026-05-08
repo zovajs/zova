@@ -15,10 +15,6 @@ export function Service(): ClassDecorator {
   return createBeanDecorator('service', 'ctx');
 }
 
-export function Store(): ClassDecorator {
-  return createBeanDecorator('store', 'app');
-}
-
 export function Tool(): ClassDecorator {
   return createBeanDecorator('tool', 'app');
 }

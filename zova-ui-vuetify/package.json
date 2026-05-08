@@ -105,7 +105,6 @@
     "zova-module-a-meta": "^5.1.9",
     "zova-module-a-model": "^5.1.12",
     "zova-module-a-openapi": "^5.1.13",
-    "zova-module-a-pinia": "^5.1.9",
     "zova-module-a-router": "^5.1.14",
     "zova-module-a-routerstack": "^5.1.11",
     "zova-module-a-routertabs": "^5.1.15",

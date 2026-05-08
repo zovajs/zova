@@ -44,7 +44,6 @@ When a project is created, there will be some modules present in the project, pr
 | [$fetch](../../techniques/server-data/fetch.md)        | Fetch object provided by module `a-fetch`          |
 | [$scopeBase](../../essentials/scope/introduction.md)   | Scope object provided by module `home-base`        |
 | [$css](../../techniques/css-in-js/css.md)              | Global style object provided by module `home-base` |
-| [$pinia](../../vue/pinia.md)                           | Pinia object provided by module `a-pinia`          |
 | [$queryClient](../../techniques/model/introduction.md) | QueryClient object provided by module `a-model`    |
 | [$router](../../page/navigation-guards.md)             | Router object provided by module `a-router`        |
 | [$style](../../techniques/css-in-js/style.md)          | Style method provided by module `a-style`          |

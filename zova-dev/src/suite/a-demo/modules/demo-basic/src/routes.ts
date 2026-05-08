@@ -2,7 +2,6 @@ import type { IModuleRoute } from 'zova-module-a-router';
 
 import { ZPageComponent } from './.metadata/page/component.js';
 import { ZPageLocale } from './.metadata/page/locale.js';
-import { ZPagePinia } from './.metadata/page/pinia.js';
 import { ZPageRouteParams } from './.metadata/page/routeParams.js';
 import { ZPageRouteQuery } from './.metadata/page/routeQuery.js';
 import { ZPageRouteQueryB } from './.metadata/page/routeQueryB.js';
@@ -16,7 +15,6 @@ export const routes: IModuleRoute[] = [
   { path: 'component', component: ZPageComponent },
   { path: 'locale', component: ZPageLocale },
   { path: 'style', component: ZPageStyle },
-  { path: 'pinia', component: ZPagePinia },
   { path: 'routeQuery', component: ZPageRouteQuery },
   {
     name: 'routeParams',

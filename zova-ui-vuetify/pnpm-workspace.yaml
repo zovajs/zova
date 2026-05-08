@@ -32,7 +32,6 @@ publicHoistPattern:
   - '*vite*'
   - '*@vitejs*'
   - '*zod*'
-  - '*pinia*'
   - '*@tanstack*'
   - 'zod'
   - '*vuetify*'

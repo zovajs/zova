@@ -34,37 +34,6 @@ declare module 'zova' {
   }
 }
 /** model: end */
-/** store: begin */
-export * from '../bean/store.counter.js';
-
-import 'zova';
-declare module 'zova' {
-  
-  
-}
-declare module 'zova-module-demo-basic' {
-  
-        export interface StoreCounter {
-          /** @internal */
-          get scope(): ScopeModuleDemoBasic;
-        }
-
-        export interface StoreCounter {
-          get $beanFullName(): 'demo-basic.store.counter';
-          get $onionName(): 'demo-basic:counter';
-          
-        } 
-}
-/** store: end */
-/** store: begin */
-import { StoreCounter } from '../bean/store.counter.js';
-import 'zova';
-declare module 'zova' {
-  export interface IBeanRecordGeneral {
-    'demo-basic.store.counter': StoreCounter;
-  }
-}
-/** store: end */
 /** controller: begin */
 export * from '../component/actionView/controller.jsx';
 export * from '../component/card/controller.jsx';
@@ -72,7 +41,6 @@ export * from '../component/formFieldTest/controller.jsx';
 export * from '../component/tableCellTest/controller.jsx';
 export * from '../page/component/controller.jsx';
 export * from '../page/locale/controller.jsx';
-export * from '../page/pinia/controller.jsx';
 export * from '../page/routeParams/controller.jsx';
 export * from '../page/routeQuery/controller.jsx';
 export * from '../page/routeQueryB/controller.jsx';
@@ -114,11 +82,6 @@ declare module 'zova-module-demo-basic' {
         }
 
         export interface ControllerPageLocale {
-          /** @internal */
-          get scope(): ScopeModuleDemoBasic;
-        }
-
-        export interface ControllerPagePinia {
           /** @internal */
           get scope(): ScopeModuleDemoBasic;
         }
@@ -166,7 +129,6 @@ import { ControllerFormFieldTest } from '../component/formFieldTest/controller.j
 import { ControllerTableCellTest } from '../component/tableCellTest/controller.jsx';
 import { ControllerPageComponent } from '../page/component/controller.jsx';
 import { ControllerPageLocale } from '../page/locale/controller.jsx';
-import { ControllerPagePinia } from '../page/pinia/controller.jsx';
 import { ControllerPageRouteParams } from '../page/routeParams/controller.jsx';
 import { ControllerPageRouteQuery } from '../page/routeQuery/controller.jsx';
 import { ControllerPageRouteQueryB } from '../page/routeQueryB/controller.jsx';
@@ -183,7 +145,6 @@ declare module 'zova' {
 'demo-basic.controller.tableCellTest': ControllerTableCellTest;
 'demo-basic.controller.pageComponent': ControllerPageComponent;
 'demo-basic.controller.pageLocale': ControllerPageLocale;
-'demo-basic.controller.pagePinia': ControllerPagePinia;
 'demo-basic.controller.pageRouteParams': ControllerPageRouteParams;
 'demo-basic.controller.pageRouteQuery': ControllerPageRouteQuery;
 'demo-basic.controller.pageRouteQueryB': ControllerPageRouteQueryB;
@@ -197,7 +158,6 @@ declare module 'zova' {
 /** pages: begin */
 export * from './page/component.js';
 export * from './page/locale.js';
-export * from './page/pinia.js';
 export * from './page/routeParams.js';
 import { NSControllerPageRouteParams } from './page/routeParams.js';
 export * from './page/routeQuery.js';
@@ -217,7 +177,6 @@ declare module 'zova-module-a-router' {
 export interface IPagePathRecord {
   '/demo/basic/component': TypePagePathSchema<undefined,undefined>;
 '/demo/basic/locale': TypePagePathSchema<undefined,undefined>;
-'/demo/basic/pinia': TypePagePathSchema<undefined,undefined>;
 '/demo/basic/routeParams/:id?': TypePagePathSchema<NSControllerPageRouteParams.ParamsInput,NSControllerPageRouteParams.QueryInput>;
 '/demo/basic/routeQuery': TypePagePathSchema<NSControllerPageRouteQuery.ParamsInput,NSControllerPageRouteQuery.QueryInput>;
 '/demo/basic/routeQueryB': TypePagePathSchema<NSControllerPageRouteQueryB.ParamsInput,NSControllerPageRouteQueryB.QueryInput>;

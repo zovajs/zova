@@ -4,19 +4,18 @@ Zova 提供了一组装饰器函数，用于声明 Bean Class 是可注入的。
 
 - a-bean
 
-| 名称        | 说明                             | Scene      | 默认注入范围 |
-| ----------- | -------------------------------- | ---------- | ------------ |
-| @Sys        | Sys Bean                         | sys        | sys          |
-| @Aop        | Aop Bean                         | aop        | sys          |
-| @AopMethod  | AopMethod Bean                   | aopMethod  | sys          |
-| @Store      | [Vue: Pinia](../../vue/pinia.md) | store      | app          |
-| @Tool       | Tool Bean                        | tool       | app          |
-| @Controller | Controller Bean                  | controller | ctx          |
-| @Render     | Render Bean                      | render     | ctx          |
-| @Style      | Style Bean                       | style      | ctx          |
-| @Service    | Service for Component/Page       | service    | ctx          |
-| @Bean       | General Service                  | bean       | ctx          |
-| @Data       | Data Bean                        | data       | new          |
+| 名称        | 说明                       | Scene      | 默认注入范围 |
+| ----------- | -------------------------- | ---------- | ------------ |
+| @Sys        | Sys Bean                   | sys        | sys          |
+| @Aop        | Aop Bean                   | aop        | sys          |
+| @AopMethod  | AopMethod Bean             | aopMethod  | sys          |
+| @Tool       | Tool Bean                  | tool       | app          |
+| @Controller | Controller Bean            | controller | ctx          |
+| @Render     | Render Bean                | render     | ctx          |
+| @Style      | Style Bean                 | style      | ctx          |
+| @Service    | Service for Component/Page | service    | ctx          |
+| @Bean       | General Service            | bean       | ctx          |
+| @Data       | Data Bean                  | data       | new          |
 
 - a-action
 

@@ -39,7 +39,6 @@ const __MenuItems = [
     icon: '',
     link: '/demo/basic/style',
   },
-  { group: 'basic', title: 'Pinia', caption: '', icon: '', link: '/demo/basic/pinia' },
   {
     group: 'business',
     title: 'Todo: CRUD',

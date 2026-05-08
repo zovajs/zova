@@ -4,19 +4,18 @@ Zova provides a set of decorator functions for declaring that a Bean Class is in
 
 - a-bean
 
-| Name        | Description                      | Scene      | Default Injection Scope |
-| ----------- | -------------------------------- | ---------- | ----------------------- |
-| @Sys        | Sys Bean                         | sys        | sys                     |
-| @Aop        | Aop Bean                         | aop        | sys                     |
-| @AopMethod  | AopMethod Bean                   | aopMethod  | sys                     |
-| @Store      | [Vue: Pinia](../../vue/pinia.md) | store      | app                     |
-| @Tool       | Tool Bean                        | tool       | app                     |
-| @Controller | Controller Bean                  | controller | ctx                     |
-| @Render     | Render Bean                      | render     | ctx                     |
-| @Style      | Style Bean                       | style      | ctx                     |
-| @Service    | Service for Component/Page       | service    | ctx                     |
-| @Bean       | General Service                  | bean       | ctx                     |
-| @Data       | Data Bean                        | data       | new                     |
+| Name        | Description                | Scene      | Default Injection Scope |
+| ----------- | -------------------------- | ---------- | ----------------------- |
+| @Sys        | Sys Bean                   | sys        | sys                     |
+| @Aop        | Aop Bean                   | aop        | sys                     |
+| @AopMethod  | AopMethod Bean             | aopMethod  | sys                     |
+| @Tool       | Tool Bean                  | tool       | app                     |
+| @Controller | Controller Bean            | controller | ctx                     |
+| @Render     | Render Bean                | render     | ctx                     |
+| @Style      | Style Bean                 | style      | ctx                     |
+| @Service    | Service for Component/Page | service    | ctx                     |
+| @Bean       | General Service            | bean       | ctx                     |
+| @Data       | Data Bean                  | data       | new                     |
 
 - a-action
 
