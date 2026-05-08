@@ -238,7 +238,8 @@ export class ControllerTable<TData extends {} = {}> extends BeanControllerTableB
       const beanOptions = appResource.getBean(renderProvider as any);
       const onionOptions = beanOptions?.options as IDecoratorTableCellOptions | undefined;
       columnProps = deepExtend({}, onionOptions, columnProps);
-      columnProps = this.zovaJsx.renderJsxProps(columnProps as any, {}, columnScope, renderContext) as any;
+      // should not eval jsx columnProps
+      // columnProps = this.zovaJsx.renderJsxProps(columnProps as any, {}, columnScope, renderContext) as any;
       if (beanInstance?.checkVisible && !(await beanInstance.checkVisible(columnProps as any, renderContext))) return;
     }
     return cellContext => {
@@ -259,7 +260,8 @@ export class ControllerTable<TData extends {} = {}> extends BeanControllerTableB
       const beanOptions = appResource.getBean(renderProvider as any);
       const onionOptions = beanOptions?.options as IDecoratorTableCellOptions | undefined;
       columnProps = deepExtend({}, onionOptions, columnProps);
-      columnProps = this.zovaJsx.renderJsxProps(columnProps as any, {}, renderContext.$celScope, renderContext) as any;
+      // should not eval jsx columnProps
+      // columnProps = this.zovaJsx.renderJsxProps(columnProps as any, {}, renderContext.$celScope, renderContext) as any;
     }
     // const cellProps = isJsxComponent(render) ? Object.assign({}, columnProps, cast(render).props) : columnProps;
     const cellProps = columnProps;
@@ -343,8 +345,8 @@ export class ControllerTable<TData extends {} = {}> extends BeanControllerTableB
         // cellProps = isJsxComponent(render) ? Object.assign({}, columnProps, cast(render).props) : columnProps;
         cellProps = columnProps;
       }
-      // const cellProps2 = this.zovaJsx.renderJsxProps(cellProps, {}, cellScope, jsxRenderContext);
-      return beanInstance.render(cellProps, jsxRenderContext, () => {
+      const cellProps2 = this.zovaJsx.renderJsxProps(cellProps, {}, cellScope, jsxRenderContext);
+      return beanInstance.render(cellProps2, jsxRenderContext, () => {
         const children = isJsxComponent(render) && cast(render).children;
         if (children && children.length > 0) {
           return this.zovaJsx.renderJsxChildrenDirect(children, cellScope, jsxRenderContext);
