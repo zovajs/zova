@@ -99,17 +99,17 @@ export class ControllerPageComponent {
 Then set the `controllerRef` prop of the child component to obtain the ref value of the `controller bean` instance:
 
 ```typescript
-import Card from '../../component/card/index.vue';
+import { ZCard } from '../../.metadata/index.jsx';
 
 export class RenderComponent {
   render() {
     return (
       <div>
-        <Card
+        <ZCard
           controllerRef={ref => {
             this.cardRef = ref;
           }}
-        ></Card>
+        ></ZCard>
       </div>
     );
   }

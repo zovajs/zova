@@ -99,17 +99,17 @@ export class ControllerPageComponent {
 然后设置子组件的`controllerRef`属性获取到`controller bean`实例的引用值：
 
 ```typescript
-import Card from '../../component/card/index.vue';
+import { ZCard } from '../../.metadata/index.jsx';
 
 export class RenderComponent {
   render() {
     return (
       <div>
-        <Card
+        <ZCard
           controllerRef={ref => {
             this.cardRef = ref;
           }}
-        ></Card>
+        ></ZCard>
       </div>
     );
   }
