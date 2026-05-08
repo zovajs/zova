@@ -1,7 +1,6 @@
 import type { IBeanRecord, IBeanScopeRecord } from '../../bean/type.ts';
 import type { MetadataKey } from '../../core/sys/metadata.ts';
 import type { Constructable } from '../type/constructable.ts';
-import type { Functionable } from '../type/functionable.ts';
 import type { InjectionScope } from '../type/injectionScope.ts';
 
 export interface IDecoratorUseOptionsBase<T = unknown> {
@@ -9,7 +8,6 @@ export interface IDecoratorUseOptionsBase<T = unknown> {
   beanFullName?: string;
   name?: string;
   beanClass?: Constructable<T>;
-  beanComposable?: Functionable;
   /** such as: moduleScope */
   selector?: string;
   injectionScope?: InjectionScope;

@@ -1,21 +1,9 @@
-import {
-  getCurrentInstance,
-  onBeforeUnmount,
-  onServerPrefetch,
-  onUnmounted,
-  queuePostFlushCb,
-  useSlots,
-} from 'vue';
+import { getCurrentInstance, onBeforeUnmount, onServerPrefetch, onUnmounted, queuePostFlushCb, useSlots } from 'vue';
 
 import type { IBeanRecord, IControllerData } from '../bean/type.ts';
 import type { Constructable } from '../decorator/index.ts';
 
-import {
-  BeanControllerIdentifier,
-  BeanRenderIdentifier,
-  BeanStyleIdentifier,
-  SymbolControllerRefDisable,
-} from '../bean/type.ts';
+import { BeanControllerIdentifier, BeanRenderIdentifier, BeanStyleIdentifier, SymbolControllerRefDisable } from '../bean/type.ts';
 import { ZovaContext } from '../core/context/index.ts';
 import { sys } from '../core/sys/sys.ts';
 
@@ -24,11 +12,11 @@ export function useControllerPage<M, R, S>(
   renderBeanFullName?: Constructable<R>,
   styleBeanFullName?: Constructable<S>,
 );
-export function useControllerPage<
-  MK extends keyof IBeanRecord,
-  RK extends keyof IBeanRecord,
-  SK extends keyof IBeanRecord,
->(controllerBeanFullName: MK, renderBeanFullName?: RK, styleBeanFullName?: SK);
+export function useControllerPage<MK extends keyof IBeanRecord, RK extends keyof IBeanRecord, SK extends keyof IBeanRecord>(
+  controllerBeanFullName: MK,
+  renderBeanFullName?: RK,
+  styleBeanFullName?: SK,
+);
 // not use type string for typed params
 // export function useControllerPage(controllerBeanFullName: string, renderBeanFullName?: string, styleBeanFullName?: string);
 export function useControllerPage(
@@ -47,11 +35,11 @@ export function useController<M, R, S>(
   renderBeanFullName?: Constructable<R>,
   styleBeanFullName?: Constructable<S>,
 );
-export function useController<
-  MK extends keyof IBeanRecord,
-  RK extends keyof IBeanRecord,
-  SK extends keyof IBeanRecord,
->(controllerBeanFullName: MK, renderBeanFullName?: RK, styleBeanFullName?: SK);
+export function useController<MK extends keyof IBeanRecord, RK extends keyof IBeanRecord, SK extends keyof IBeanRecord>(
+  controllerBeanFullName: MK,
+  renderBeanFullName?: RK,
+  styleBeanFullName?: SK,
+);
 // not use type string for typed params
 // export function useController(
 //   props: unknown | undefined,
@@ -89,13 +77,7 @@ async function _useController(
   }
   // monkey
   if (ctx.app) {
-    ctx.app.meta.module._monkeyModuleSync(
-      true,
-      'controllerDataPrepare',
-      undefined,
-      controllerData,
-      ctx,
-    );
+    ctx.app.meta.module._monkeyModuleSync(true, 'controllerDataPrepare', undefined, controllerData, ctx);
   }
   if (process.env.CLIENT) {
     // dispose
@@ -115,38 +97,14 @@ async function _useController(
   async function __load() {
     // controller
     if (ctx.disposed) return;
-    await ctx.bean._newBeanInner(
-      true,
-      BeanControllerIdentifier,
-      controllerData,
-      undefined,
-      controllerBeanFullName,
-      true,
-      false,
-    );
+    await ctx.bean._newBeanInner(true, BeanControllerIdentifier, controllerData, controllerBeanFullName, true, false);
     if (styleBeanFullName) {
       if (ctx.disposed) return;
-      await ctx.bean._newBeanInner(
-        true,
-        BeanStyleIdentifier,
-        undefined,
-        undefined,
-        styleBeanFullName,
-        true,
-        false,
-      );
+      await ctx.bean._newBeanInner(true, BeanStyleIdentifier, undefined, styleBeanFullName, true, false);
     }
     if (renderBeanFullName) {
       if (ctx.disposed) return;
-      await ctx.bean._newBeanInner(
-        true,
-        BeanRenderIdentifier,
-        undefined,
-        undefined,
-        renderBeanFullName,
-        true,
-        false,
-      );
+      await ctx.bean._newBeanInner(true, BeanRenderIdentifier, undefined, renderBeanFullName, true, false);
     }
     // must touch inited on server/client, force router.use effect
     if (ctx.disposed) return;
