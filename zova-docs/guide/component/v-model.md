@@ -22,6 +22,22 @@ Context Menu - [Module Path/src/component/componentName]: `Zova Refactor/Add v-m
 
 Enter the name of the v-model as prompted, the default is `modelValue`, and the VSCode plugin will automatically add the code skeleton of `v-model`
 
+```diff
++ export interface ControllerCardModels {
++   vModel?: number;
++ }
+
+@Controller()
+export class ControllerCard extends BeanControllerBase {
+  static $propsDefault = {
++   modelValue: 0,
+  };
+
++ @ModelValue()
++ modelValue: number;
+}
+```
+
 ### Using v-model
 
 ```diff
@@ -84,6 +100,22 @@ Context Menu - [Module Path/src/component/componentName]: `Zova Refactor/Add v-m
 :::
 
 Enter the name of the v-model `title` when prompted, and the VSCode plugin will automatically add the code skeleton of `v-model`
+
+```diff
++ export interface ControllerCardModels {
++   'vModel:title'?: number;
++ }
+
+@Controller()
+export class ControllerCard extends BeanControllerBase {
+  static $propsDefault = {
++   title: 0,
+  };
+
++ @ModelValue()
++ modelTitle: number;
+}
+```
 
 ### Using v-model
 

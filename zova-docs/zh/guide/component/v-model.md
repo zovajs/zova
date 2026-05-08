@@ -22,6 +22,22 @@ $ zova :refactor:componentModel card modelValue --module=demo-student
 
 依据提示输入 model 属性的名称，默认是`modelValue`，VSCode 插件会自动添加`v-model`的代码骨架。
 
+```diff
++ export interface ControllerCardModels {
++   vModel?: number;
++ }
+
+@Controller()
+export class ControllerCard extends BeanControllerBase {
+  static $propsDefault = {
++   modelValue: 0,
+  };
+
++ @ModelValue()
++ modelValue: number;
+}
+```
+
 ### 使用v-model
 
 ```diff
@@ -84,6 +100,22 @@ $ zova :refactor:componentModel card title --module=demo-student
 :::
 
 依据提示输入 model 属性的名称`title`，VSCode 插件会自动添加`v-model`的代码骨架。
+
+```diff
++ export interface ControllerCardModels {
++   'vModel:title'?: number;
++ }
+
+@Controller()
+export class ControllerCard extends BeanControllerBase {
+  static $propsDefault = {
++   title: 0,
+  };
+
++ @ModelValue()
++ modelTitle: number;
+}
+```
 
 ### 使用v-model
 
