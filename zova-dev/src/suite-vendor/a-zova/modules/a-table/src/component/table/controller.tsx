@@ -411,7 +411,7 @@ export class ControllerTable<TData extends {} = {}> extends BeanControllerTableB
   // }
 
   public getRenderProvider(render: TypeTableCellRenderComponent | undefined): TypeTableCellRenderComponentProvider {
-    if (!render) return 'text';
+    if (!render || render === ('text' as TypeTableCellRenderComponentProvider)) return 'text';
     if (typeof render === 'string') {
       const render2 = this.tableProvider.components?.[render];
       if (!render2) throw new Error(`not found table cell component of: ${render}`);
