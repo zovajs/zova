@@ -1,4 +1,4 @@
-import { BeanControllerBase, ModelValue } from 'zova';
+import { BeanControllerBase } from 'zova';
 import { Controller } from 'zova-module-a-bean';
 
 export interface ControllerDateRangeProps {
@@ -15,10 +15,10 @@ export class ControllerDateRange extends BeanControllerBase {
 
   private cSeparator: string;
 
-  @ModelValue()
   modelValue: string | undefined;
 
   protected async __init__() {
+    this.modelValue = this.$useModel('modelValue');
     this.cSeparator = this.$style({
       width: '20px',
       display: 'inline-block',
