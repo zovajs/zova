@@ -153,6 +153,11 @@ export class ControllerFormField<TParentData extends {} = {}> extends BeanContro
         options: presetOptions,
       },
     );
+    // class/style: layout
+    if (propsBucket.layout.class || propsBucket.layout.style) {
+      propsBucket.layout.class = classes(propsBucket.layout.class, this.$style(propsBucket.layout.style));
+      delete propsBucket.layout.style;
+    }
     // class/style: need not check typeof propsBucket.render === 'string' because maybe return false
     const classTemp = propsBucket.options?.class ?? propsBucket.class;
     const styleTemp = propsBucket.options?.style ?? propsBucket.style;
