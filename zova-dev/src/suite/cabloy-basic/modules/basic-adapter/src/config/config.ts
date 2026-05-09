@@ -21,10 +21,7 @@ export const config = (_sys: ZovaSys) => {
     formFields: {
       Input: 'basic-input:formFieldInput',
     } as any,
-    tableCells: {
-      Currency: 'basic-currency.tableCell.currency',
-      Date: 'basic-date.tableCell.date',
-    },
+    tableCells: {},
     table: {
       actionsBulk: {
         ActionCreate: 'basic-table:actionCreate',
