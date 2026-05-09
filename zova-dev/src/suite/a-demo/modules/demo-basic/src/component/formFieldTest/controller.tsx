@@ -20,7 +20,11 @@ export class ControllerFormFieldTest extends BeanControllerBase {
   protected async __init__() {}
 
   protected render() {
-    const domField = this.$slotDefault ? this.$slotDefault() : <ZFormFieldPreset {...this.$props} render="Input"></ZFormFieldPreset>;
+    const domField = this.$slotDefault ? (
+      this.$slotDefault()
+    ) : (
+      <ZFormFieldPreset {...this.$props} render="basic-input:formFieldInput"></ZFormFieldPreset>
+    );
     return (
       <>
         {this.$props.slotHeader?.({ name: 'kevin' })}

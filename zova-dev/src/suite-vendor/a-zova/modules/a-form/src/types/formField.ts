@@ -62,7 +62,7 @@ export interface IFormFieldPresetOptions<PresetName extends keyof ISchemaRenderC
 }
 
 export interface IFormFieldComponentOptions<TParentData = {}> extends IFormFieldOptions<TParentData> {
-  options?: unknown;
+  options?: any;
 }
 
 export interface IFormFieldOptions<TParentData = {}>
