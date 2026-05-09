@@ -61,7 +61,9 @@ export interface IFormFieldPresetOptions<PresetName extends keyof ISchemaRenderC
   options?: ISchemaRenderComponentPresetRecord[PresetName];
 }
 
-export interface IFormFieldComponentOptions<TParentData = {}> extends IFormFieldOptions<TParentData> {}
+export interface IFormFieldComponentOptions<TParentData = {}> extends IFormFieldOptions<TParentData> {
+  options?: unknown;
+}
 
 export interface IFormFieldOptions<TParentData = {}>
   extends IFormFieldSysOptionsBase<TParentData>, IFormFieldOptionsBase<TParentData>, IFormFieldLayoutOptionsBase {

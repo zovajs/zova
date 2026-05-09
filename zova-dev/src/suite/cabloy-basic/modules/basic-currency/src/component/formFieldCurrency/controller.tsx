@@ -1,14 +1,24 @@
-import type { CurrencyOptions } from '@zhennann/currency';
 import type { IComponentOptions } from 'zova';
+import type { IResourceFormFieldOptionsBase } from 'zova-module-a-openapi';
 
+import { CurrencyOptions } from '@zhennann/currency';
 import { BeanControllerBase, Use } from 'zova';
 import { Controller } from 'zova-module-a-bean';
-import { ControllerForm, IFormFieldPresetOptionsBase, ZFormFieldPreset } from 'zova-module-a-form';
-import { IResourceFormFieldOptionsCurrency } from 'zova-module-basic-openapi';
+import { ControllerForm, ZFormFieldPreset, type IFormFieldComponentOptions } from 'zova-module-a-form';
 
 import { currencyFormat, currencyUpdate } from '../../lib/utils.js';
 
-export interface ControllerFormFieldCurrencyProps extends IFormFieldPresetOptionsBase<IResourceFormFieldOptionsCurrency> {}
+declare module 'zova-module-a-openapi' {
+  export interface IResourceComponentFormFieldRecord {
+    'basic-currency:formFieldCurrency'?: IResourceFormFieldCurrencyOptions;
+  }
+}
+
+export interface IResourceFormFieldCurrencyOptions extends IResourceFormFieldOptionsBase, CurrencyOptions {}
+
+export interface ControllerFormFieldCurrencyProps extends IFormFieldComponentOptions {
+  options?: IResourceFormFieldCurrencyOptions;
+}
 
 @Controller()
 export class ControllerFormFieldCurrency extends BeanControllerBase {
@@ -28,7 +38,7 @@ export class ControllerFormFieldCurrency extends BeanControllerBase {
     return (
       <ZFormFieldPreset
         {...this.$props}
-        render="Input"
+        render="basic-input:formFieldInput"
         options={{
           value,
           onInput: (e: Event) => {

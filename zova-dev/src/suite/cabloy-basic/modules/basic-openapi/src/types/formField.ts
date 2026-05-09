@@ -1,6 +1,4 @@
 import 'zova-module-a-openapi';
-import type { CurrencyOptions } from '@zhennann/currency';
-
 import { IResourceFormFieldOptionsBase, ITableQuery } from 'zova-module-a-openapi';
 
 import { ICaptchaSceneRecord, ISelectOptions } from './utils.js';
@@ -8,8 +6,6 @@ import { ICaptchaSceneRecord, ISelectOptions } from './utils.js';
 export interface IResourceFormFieldOptionsCaptcha extends IResourceFormFieldOptionsBase {
   scene?: keyof ICaptchaSceneRecord;
 }
-
-export interface IResourceFormFieldOptionsCurrency extends IResourceFormFieldOptionsBase, CurrencyOptions {}
 
 export interface IResourceFormFieldOptionsToggle extends IResourceFormFieldOptionsBase {
   color?: 'primary' | 'secondary' | 'success' | 'info' | 'warning' | 'error';
@@ -40,7 +36,7 @@ declare module 'zova-module-a-openapi' {
   export interface IResourceComponentFormFieldRecord {
     // Input?: IResourceFormFieldOptionsInput;
     Captcha?: IResourceFormFieldOptionsCaptcha;
-    Currency?: IResourceFormFieldOptionsCurrency;
+    // Currency?: IResourceFormFieldOptionsCurrency;
     // Date?: IResourceFormFieldOptionsDate;
     // DateRange?: IResourceFormFieldOptionsDateRange;
     Toggle?: IResourceFormFieldOptionsToggle;

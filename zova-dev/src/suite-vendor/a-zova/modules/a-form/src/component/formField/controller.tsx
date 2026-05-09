@@ -11,14 +11,14 @@ import type { ControllerForm } from '../form/controller.jsx';
 import { TypeFormField } from '../../types/form.js';
 import {
   constFieldProps,
+  IFormFieldComponentOptions,
   IFormFieldOptions,
-  IFormFieldPresetOptions,
   IFormFieldRenderContext,
   IFormFieldRenderContextProps,
   IFormFieldRenderContextPropsBucket,
 } from '../../types/formField.js';
 
-export interface ControllerFormFieldProps<TParentData extends {} = {}> extends IFormFieldPresetOptions<TParentData> {}
+export interface ControllerFormFieldProps<TParentData extends {} = {}> extends IFormFieldComponentOptions<TParentData> {}
 
 @Controller()
 export class ControllerFormField<TParentData extends {} = {}> extends BeanControllerBase {
