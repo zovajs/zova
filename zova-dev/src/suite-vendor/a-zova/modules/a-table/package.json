@@ -77,8 +77,7 @@
         "beanGeneral": true,
         "optionsGlobalInterfaceName": "IDecoratorTableCellOptions",
         "optionsGlobalInterfaceFrom": "zova-module-a-table",
-        "boilerplate": "tableCell/boilerplate",
-        "metadataCustom": "tableCell/metadata/generate.ts"
+        "boilerplate": "tableCell/boilerplate"
       }
     }
   }
