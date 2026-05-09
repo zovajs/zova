@@ -5,17 +5,6 @@ import { IResourceFormFieldOptionsBase, ITableQuery } from 'zova-module-a-openap
 
 import { ICaptchaSceneRecord, ISelectOptions, TypeDateFormatPreset } from './utils.js';
 
-export type HTMLInputElementType = 'text' | 'password' | 'number' | 'file' | 'hidden' | 'tel' | 'email';
-
-export interface IResourceFormFieldOptionsInput extends IResourceFormFieldOptionsBase {
-  value?: any;
-  type?: HTMLInputElementType;
-  placeholder?: string;
-  onChange?: (e: Event) => void;
-  onInput?: (e: Event) => void;
-  onBlur?: (e: Event) => void;
-}
-
 export interface IResourceFormFieldOptionsCaptcha extends IResourceFormFieldOptionsBase {
   scene?: keyof ICaptchaSceneRecord;
 }
@@ -58,7 +47,7 @@ export interface IResourceFormFieldOptionsResourcePicker extends IResourceFormFi
 
 declare module 'zova-module-a-openapi' {
   export interface IResourceComponentFormFieldRecord {
-    Input?: IResourceFormFieldOptionsInput;
+    // Input?: IResourceFormFieldOptionsInput;
     Captcha?: IResourceFormFieldOptionsCaptcha;
     Currency?: IResourceFormFieldOptionsCurrency;
     Date?: IResourceFormFieldOptionsDate;

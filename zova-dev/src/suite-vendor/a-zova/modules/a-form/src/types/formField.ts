@@ -59,10 +59,6 @@ export interface IFormFieldPresetOptions<OPTIONS> extends IFormFieldComponentOpt
   options?: OPTIONS;
 }
 
-export interface IFormFieldPresetOptionsBase<OPTIONS> extends IFormFieldComponentOptions {
-  options?: OPTIONS;
-}
-
 export interface IFormFieldComponentOptions<TParentData = {}> extends IFormFieldOptions<TParentData> {}
 
 export interface IFormFieldOptions<TParentData = {}>
