@@ -3,18 +3,13 @@ import type { CurrencyOptions } from '@zhennann/currency';
 
 import { IResourceFormFieldOptionsBase, ITableQuery } from 'zova-module-a-openapi';
 
-import { ICaptchaSceneRecord, ISelectOptions, TypeDateFormatPreset } from './utils.js';
+import { ICaptchaSceneRecord, ISelectOptions } from './utils.js';
 
 export interface IResourceFormFieldOptionsCaptcha extends IResourceFormFieldOptionsBase {
   scene?: keyof ICaptchaSceneRecord;
 }
 
 export interface IResourceFormFieldOptionsCurrency extends IResourceFormFieldOptionsBase, CurrencyOptions {}
-
-export interface IResourceFormFieldOptionsDate extends IResourceFormFieldOptionsBase {
-  preset?: TypeDateFormatPreset;
-  format?: string;
-}
 
 export interface IResourceFormFieldOptionsDateRange extends IResourceFormFieldOptionsBase {
   separator?: string;
@@ -50,7 +45,7 @@ declare module 'zova-module-a-openapi' {
     // Input?: IResourceFormFieldOptionsInput;
     Captcha?: IResourceFormFieldOptionsCaptcha;
     Currency?: IResourceFormFieldOptionsCurrency;
-    Date?: IResourceFormFieldOptionsDate;
+    // Date?: IResourceFormFieldOptionsDate;
     DateRange?: IResourceFormFieldOptionsDateRange;
     Toggle?: IResourceFormFieldOptionsToggle;
     Select?: IResourceFormFieldOptionsSelect;
