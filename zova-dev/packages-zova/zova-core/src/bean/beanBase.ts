@@ -25,7 +25,6 @@ import type { IErrorHandlerEventResult, IModuleLocaleText, IZovaComponentRecord 
 import { cast } from '../types/utils/cast.ts';
 import { BeanBaseSimple, SymbolModuleBelong } from './beanBaseSimple.ts';
 import { SymbolErrorInstanceInfo } from './resource/index.ts';
-import { getVueDecoratorValue } from './vueDecorators/utils.ts';
 
 const SymbolText = Symbol('SymbolText');
 const SymbolLogger = Symbol('SymbolLogger');
@@ -82,13 +81,6 @@ export class BeanBase extends BeanBaseSimple {
 
   public get scope(): unknown {
     return this.bean.scope(this[SymbolModuleBelong] as never);
-  }
-
-  protected $watchHandle(prop: string | Function, index?: number): WatchHandle {
-    if (typeof prop === 'function') {
-      prop = prop.name;
-    }
-    return getVueDecoratorValue(this, prop, index ?? 0);
   }
 
   protected $renderFreeze(freeze: boolean) {
