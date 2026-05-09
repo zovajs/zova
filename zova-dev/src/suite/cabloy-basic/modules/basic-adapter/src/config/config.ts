@@ -18,7 +18,9 @@ export const config = (_sys: ZovaSys) => {
       BlockToolbarRow: 'basic-pageentry:blockToolbarRow',
       BlockForm: 'basic-pageentry:blockForm',
     },
-    formFields: {},
+    formFields: {
+      Input: 'basic-input:formFieldInput',
+    } as any,
     tableCells: {
       Currency: 'basic-currency.tableCell.currency',
       Date: 'basic-date.tableCell.date',

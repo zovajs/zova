@@ -21,15 +21,10 @@ export type TypeDateFormatPreset =
   | 'DATETIME_MED_WITH_SECONDS'
   | 'DATETIME_FULL_WITH_SECONDS'
   | 'DATETIME_HUGE_WITH_SECONDS';
-export interface ICaptchaSceneRecord {
-  'captcha-simple:simple': never;
-}
 
 export interface ICaptchaOptions {
   scene?: keyof ICaptchaSceneRecord;
 }
-
-export interface ICaptchaProviderRecord {}
 
 export interface ISelectChipsOptions {
   column?: boolean;
