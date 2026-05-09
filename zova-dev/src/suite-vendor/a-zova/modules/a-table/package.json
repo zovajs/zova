@@ -1,7 +1,7 @@
 {
   "name": "zova-module-a-table",
   "version": "5.1.14",
-  "gitHead": "f5d3b2199568d99240050518542fd95e71cea61c",
+  "gitHead": "1c1c99cd879a2f00f32fb4b369a16ae90b9405da",
   "description": "",
   "keywords": [
     "Zova Module"
@@ -14,8 +14,7 @@
     "rest",
     "src",
     "icons",
-    "assets",
-    "dist-cli"
+    "assets"
   ],
   "type": "module",
   "exports": {
@@ -30,8 +29,8 @@
     "./*": "./*"
   },
   "scripts": {
-    "clean": "rimraf dist dist-cli tsconfig.build.tsbuildinfo tsconfig.cli.tsbuildinfo",
-    "tsc:publish": "npm run clean && zova :bin:buildModule --sourcemap && tsc -p tsconfig.build.json && tsc -p tsconfig.cli.json",
+    "clean": "rimraf dist tsconfig.build.tsbuildinfo",
+    "tsc:publish": "npm run clean && zova :bin:buildModule --sourcemap && tsc -p tsconfig.build.json",
     "prepublishOnly": "npm run tsc:publish",
     "prepack": "clean-package",
     "postpack": "clean-package restore && npm run clean"
