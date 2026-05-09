@@ -16,7 +16,7 @@ export class ControllerBlockPage<TData extends {} = {}> extends BeanControllerBa
   static $propsDefault = {};
   static $componentOptions: IComponentOptions = { inheritAttrs: false, deepExtendDefault: true };
 
-  tableInstance: BeanControllerTableBase;
+  tableRef: BeanControllerTableBase;
 
   tableProvider: ITableProvider;
 

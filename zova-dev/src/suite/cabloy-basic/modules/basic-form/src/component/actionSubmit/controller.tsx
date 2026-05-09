@@ -21,8 +21,8 @@ export class ControllerActionSubmit extends BeanControllerBase {
 
   protected render() {
     const { $$pageEntry } = this.$$renderContext;
-    const formInstance: BeanControllerFormBase = $$pageEntry.formInstance;
-    const isSubmitting = formInstance?.formState.isSubmitting;
+    const formRef: BeanControllerFormBase = $$pageEntry.formRef;
+    const isSubmitting = formRef?.formState.isSubmitting;
     return (
       <>
         {isSubmitting && <span class="loading loading-spinner text-primary"></span>}
@@ -41,8 +41,8 @@ export class ControllerActionSubmit extends BeanControllerBase {
 
   private async onClick(e: Event) {
     const { $host, $$pageEntry } = this.$$renderContext;
-    const formInstance: BeanControllerFormBase = $$pageEntry.formInstance;
-    const res = await formInstance.submit();
+    const formRef: BeanControllerFormBase = $$pageEntry.formRef;
+    const res = await formRef.submit();
     if (!res) return;
     const pointerType = cast<PointerEvent>(e).pointerType;
     if (pointerType) {

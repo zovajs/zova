@@ -12,7 +12,7 @@ export class ControllerBlockForm extends BeanControllerBase {
   static $propsDefault = {};
   static $componentOptions: IComponentOptions = { inheritAttrs: false, deepExtendDefault: true };
 
-  formInstance: BeanControllerFormBase;
+  formRef: BeanControllerFormBase;
 
   @Use({ injectionScope: 'host' })
   $$renderContext: IJsxRenderContextPageEntry;
@@ -25,8 +25,8 @@ export class ControllerBlockForm extends BeanControllerBase {
       <ZForm
         class={this.$props.class}
         controllerRef={ref => {
-          this.formInstance = ref;
-          $$pageEntry.formInstance = ref;
+          this.formRef = ref;
+          $$pageEntry.formRef = ref;
         }}
         formTag="div"
         data={$$pageEntry.formData}

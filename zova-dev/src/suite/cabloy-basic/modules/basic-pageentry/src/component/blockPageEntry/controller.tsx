@@ -28,7 +28,7 @@ export class ControllerBlockPageEntry<TData extends {} = {}> extends BeanControl
 
   entryIdCreated?: TableIdentity;
 
-  formInstance: BeanControllerFormBase;
+  formRef: BeanControllerFormBase;
 
   formMeta: IFormMeta;
   formProvider: IFormProvider;
@@ -154,7 +154,7 @@ export class ControllerBlockPageEntry<TData extends {} = {}> extends BeanControl
         onSubmit={(e: Event) => {
           e.preventDefault();
           e.stopPropagation();
-          this.formInstance?.submit();
+          this.formRef?.submit();
         }}
       >
         {this._renderBlocks()}

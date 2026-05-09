@@ -12,7 +12,7 @@ export class ControllerBlockTable extends BeanControllerBase {
   static $propsDefault = {};
   static $componentOptions: IComponentOptions = { inheritAttrs: false, deepExtendDefault: true };
 
-  tableInstance: BeanControllerTableBase;
+  tableRef: BeanControllerTableBase;
 
   @Use({ injectionScope: 'host' })
   $$renderContext: IJsxRenderContextPage;
@@ -23,7 +23,7 @@ export class ControllerBlockTable extends BeanControllerBase {
       () => this.permissions,
       async (newValue, oldValue) => {
         if (deepEqual(newValue, oldValue)) return;
-        await this.tableInstance?.refreshMeta();
+        await this.tableRef?.refreshMeta();
       },
     );
   }
@@ -38,8 +38,8 @@ export class ControllerBlockTable extends BeanControllerBase {
       <ZTable
         class={this.$props.class}
         controllerRef={ref => {
-          this.tableInstance = ref;
-          $$page.tableInstance = ref;
+          this.tableRef = ref;
+          $$page.tableRef = ref;
         }}
         data={$$page.data}
         schema={$$page.schemaRow}
