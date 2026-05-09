@@ -1,6 +1,7 @@
 // eslint-disable
 /** controller: begin */
 export * from '../component/formFieldCaptcha/controller.jsx';
+export * from '../component/formFieldCaptcha_/controller.jsx';
 
 import 'zova';
 declare module 'zova' {
@@ -12,15 +13,22 @@ declare module 'zova-module-basic-captcha' {
         export interface ControllerFormFieldCaptcha {
           /** @internal */
           get scope(): ScopeModuleBasicCaptcha;
+        }
+
+        export interface ControllerFormFieldCaptcha {
+          /** @internal */
+          get scope(): ScopeModuleBasicCaptcha;
         } 
 }
 /** controller: end */
 /** controller: begin */
 import { ControllerFormFieldCaptcha } from '../component/formFieldCaptcha/controller.jsx';
+import { ControllerFormFieldCaptcha } from '../component/formFieldCaptcha_/controller.jsx';
 import 'zova';
 declare module 'zova' {
   export interface IBeanRecordLocal {
     'basic-captcha.controller.formFieldCaptcha': ControllerFormFieldCaptcha;
+'basic-captcha.controller.formFieldCaptcha': ControllerFormFieldCaptcha;
   }
 }
 /** controller: end */
@@ -28,16 +36,21 @@ declare module 'zova' {
 /** components: begin */
 export * from './component/formFieldCaptcha.js';
 import { ZFormFieldCaptcha } from './component/formFieldCaptcha.js';
+export * from './component/formFieldCaptcha_.js';
+import { ZFormFieldCaptcha_ } from './component/formFieldCaptcha_.js';
 export const components = {
   'formFieldCaptcha': ZFormFieldCaptcha,
+'formFieldCaptcha_': ZFormFieldCaptcha_,
 };
 import 'zova';
 declare module 'zova' {
 export interface IComponentRecord {
   'basic-captcha:formFieldCaptcha': ControllerFormFieldCaptcha;
+'basic-captcha:formFieldCaptcha_': ControllerFormFieldCaptcha;
 }
 export interface IZovaComponentRecord {
   'basic-captcha:formFieldCaptcha': typeof ZFormFieldCaptcha;
+'basic-captcha:formFieldCaptcha_': typeof ZFormFieldCaptcha_;
 }
 }
 /** components: end */

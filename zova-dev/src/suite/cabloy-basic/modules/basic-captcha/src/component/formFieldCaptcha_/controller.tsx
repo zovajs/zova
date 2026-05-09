@@ -1,28 +1,17 @@
-import type { IComponentOptions, TypeEventOff } from 'zova';
-import type { ICaptchaData, ICaptchaSceneRecord, IResourceFormFieldOptionsBase } from 'zova-module-a-openapi';
-
-import { BeanControllerBase, ClientOnly, Use } from 'zova';
+import { BeanControllerBase, ClientOnly, IComponentOptions, TypeEventOff, Use } from 'zova';
 import { Controller } from 'zova-module-a-bean';
-import { ControllerForm, ZFormField, type IFormFieldComponentOptions } from 'zova-module-a-form';
-import { IResourceFormFieldInputOptions } from 'zova-module-basic-input';
+import { ControllerForm, IFormFieldPresetOptionsBase, ZFormField } from 'zova-module-a-form';
+import { ToolV } from 'zova-module-a-zod';
+import { ICaptchaProviderRecord, IResourceFormFieldOptionsCaptcha, IResourceFormFieldOptionsInput } from 'zova-module-basic-openapi';
 
-declare module 'zova-module-a-openapi' {
-  export interface IResourceComponentFormFieldRecord {
-    'basic-captcha:formFieldCaptcha'?: IResourceFormFieldCaptchaOptions;
-  }
-
-  export interface ICaptchaSceneRecord {
-    'captcha-simple:simple': never;
-  }
+export interface ICaptchaData {
+  id: string;
+  provider: keyof ICaptchaProviderRecord | string;
+  token?: unknown;
+  payload?: unknown;
 }
 
-export interface IResourceFormFieldCaptchaOptions extends IResourceFormFieldOptionsBase {
-  scene?: keyof ICaptchaSceneRecord;
-}
-
-export interface ControllerFormFieldCaptchaProps extends IFormFieldComponentOptions {
-  options?: IResourceFormFieldCaptchaOptions;
-}
+export interface ControllerFormFieldCaptchaProps extends IFormFieldPresetOptionsBase<IResourceFormFieldOptionsCaptcha> {}
 
 @Controller()
 export class ControllerFormFieldCaptcha extends BeanControllerBase {
@@ -35,6 +24,9 @@ export class ControllerFormFieldCaptcha extends BeanControllerBase {
 
   eventFormSubmission: TypeEventOff;
   captchaData?: ICaptchaData;
+
+  @Use()
+  $$v: ToolV;
 
   @Use({ injectionScope: 'host' })
   $$form: ControllerForm;
@@ -99,7 +91,7 @@ export class ControllerFormFieldCaptcha extends BeanControllerBase {
         <ZFormField
           {...this.$props}
           slotDefault={({ props }, $$formField) => {
-            const propsNew: Omit<IResourceFormFieldInputOptions, 'style'> = {
+            const propsNew: Omit<IResourceFormFieldOptionsInput, 'style'> = {
               ...props,
               type: 'text',
               class: 'grow input',
