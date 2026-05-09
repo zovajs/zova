@@ -8,26 +8,26 @@ import type { ControllerFormFieldPresetProps } from '../../component/formFieldPr
 
 import { ControllerFormFieldPreset } from '../../component/formFieldPreset/controller.jsx';
 export type TypeControllerFormFieldPresetPublicProps<
-  PresetName extends keyof ISchemaRenderComponentPresetRecord = 'Input',
+  PresetName extends keyof ISchemaRenderComponentPresetRecord = never,
 > = {
   controllerRef?: (ref: ControllerFormFieldPreset<PresetName>) => void;
 } & ControllerFormFieldPresetProps<PresetName>;
 
-type ControllerInnerProps<PresetName extends keyof ISchemaRenderComponentPresetRecord = 'Input'> =
+type ControllerInnerProps<PresetName extends keyof ISchemaRenderComponentPresetRecord = never> =
   TypeControllerInnerProps<
     ControllerFormFieldPresetProps<PresetName>,
     keyof typeof ControllerFormFieldPreset.$propsDefault
   >;
 declare module 'zova-module-a-form' {
   export interface ControllerFormFieldPreset<
-    PresetName extends keyof ISchemaRenderComponentPresetRecord = 'Input',
+    PresetName extends keyof ISchemaRenderComponentPresetRecord = never,
   > {
     $props: ControllerInnerProps<PresetName>;
   }
 }
 
 export const ZFormFieldPreset = defineComponent(
-  <PresetName extends keyof ISchemaRenderComponentPresetRecord = 'Input'>(
+  <PresetName extends keyof ISchemaRenderComponentPresetRecord = never>(
     _props: TypeControllerFormFieldPresetPublicProps<PresetName>,
   ) => {
     useController(ControllerFormFieldPreset, undefined, undefined);

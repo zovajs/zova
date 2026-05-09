@@ -1,14 +1,25 @@
 import type { IComponentOptions } from 'zova';
-import type { IFormFieldPresetOptionsBase } from 'zova-module-a-form';
+import type { IResourceFormFieldOptionsBase } from 'zova-module-a-openapi';
 
 import { BeanControllerBase } from 'zova';
 import { Controller } from 'zova-module-a-bean';
-import { ZFormField } from 'zova-module-a-form';
-import { IResourceFormFieldOptionsDateRange } from 'zova-module-basic-openapi';
+import { ZFormField, type IFormFieldComponentOptions } from 'zova-module-a-form';
 
-import { ZDateRange } from '../../.metadata/index.js';
+import { ZDateRange } from '../../.metadata/component/dateRange.js';
 
-export interface ControllerFormFieldDateRangeProps extends IFormFieldPresetOptionsBase<IResourceFormFieldOptionsDateRange> {}
+declare module 'zova-module-a-openapi' {
+  export interface IResourceComponentFormFieldRecord {
+    'basic-date:formFieldDateRange'?: IResourceFormFieldDateRangeOptions;
+  }
+}
+
+export interface IResourceFormFieldDateRangeOptions extends IResourceFormFieldOptionsBase {
+  separator?: string;
+}
+
+export interface ControllerFormFieldDateRangeProps extends IFormFieldComponentOptions {
+  options?: IResourceFormFieldDateRangeOptions;
+}
 
 @Controller()
 export class ControllerFormFieldDateRange extends BeanControllerBase {

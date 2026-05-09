@@ -5,6 +5,7 @@ import type { IBehaviorItem } from 'zova-module-a-behavior';
 import type {
   IJsxRenderContextBase,
   ISchemaRenderComponentLayoutOptions,
+  ISchemaRenderComponentPresetRecord,
   TypeFormFieldRenderComponent,
   TypeFormFieldRenderComponentProvider,
   TypeRenderComponentPreset,
@@ -55,8 +56,9 @@ export interface IFormFieldOptionsBase<TParentData = {}, TName extends DeepKeys<
   // onBlur?: (e: Event) => void; // allow set to null, but not provide null type
 }
 
-export interface IFormFieldPresetOptions<OPTIONS> extends IFormFieldComponentOptions {
-  options?: OPTIONS;
+export interface IFormFieldPresetOptions<PresetName extends keyof ISchemaRenderComponentPresetRecord = never> extends IFormFieldComponentOptions {
+  render?: PresetName;
+  options?: ISchemaRenderComponentPresetRecord[PresetName];
 }
 
 export interface IFormFieldComponentOptions<TParentData = {}> extends IFormFieldOptions<TParentData> {}

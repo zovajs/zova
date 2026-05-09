@@ -11,10 +11,6 @@ export interface IResourceFormFieldOptionsCaptcha extends IResourceFormFieldOpti
 
 export interface IResourceFormFieldOptionsCurrency extends IResourceFormFieldOptionsBase, CurrencyOptions {}
 
-export interface IResourceFormFieldOptionsDateRange extends IResourceFormFieldOptionsBase {
-  separator?: string;
-}
-
 export interface IResourceFormFieldOptionsToggle extends IResourceFormFieldOptionsBase {
   color?: 'primary' | 'secondary' | 'success' | 'info' | 'warning' | 'error';
 }
@@ -46,7 +42,7 @@ declare module 'zova-module-a-openapi' {
     Captcha?: IResourceFormFieldOptionsCaptcha;
     Currency?: IResourceFormFieldOptionsCurrency;
     // Date?: IResourceFormFieldOptionsDate;
-    DateRange?: IResourceFormFieldOptionsDateRange;
+    // DateRange?: IResourceFormFieldOptionsDateRange;
     Toggle?: IResourceFormFieldOptionsToggle;
     Select?: IResourceFormFieldOptionsSelect;
     Textarea?: IResourceFormFieldOptionsTextarea;

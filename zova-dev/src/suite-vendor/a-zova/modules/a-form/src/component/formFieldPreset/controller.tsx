@@ -7,8 +7,8 @@ import type { ControllerForm } from '../form/controller.jsx';
 import { IFormFieldPresetOptions } from '../../types/formField.js';
 
 export interface ControllerFormFieldPresetProps<
-  PresetName extends keyof ISchemaRenderComponentPresetRecord = 'Input',
-> extends IFormFieldPresetOptions<ISchemaRenderComponentPresetRecord[PresetName]> {}
+  PresetName extends keyof ISchemaRenderComponentPresetRecord = never,
+> extends IFormFieldPresetOptions<PresetName> {}
 
 @Controller()
 export class ControllerFormFieldPreset extends BeanControllerBase {
