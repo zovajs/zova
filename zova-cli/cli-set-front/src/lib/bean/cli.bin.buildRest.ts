@@ -11,6 +11,7 @@ import yaml from 'yaml';
 import { createConfigUtils, saveJSONFile } from 'zova-vite';
 
 import { loadJSONFile } from '../common/utils.ts';
+import { __ThisSetName__ } from '../this.ts';
 
 function svgResolverPlugin() {
   return {
@@ -49,6 +50,8 @@ const __template_package = `{
 declare module '@cabloy/cli' {
   interface ICommandArgv {
     flavor?: ZovaMetaFlavor;
+    Name: string;
+    Version: string;
   }
 }
 
@@ -93,7 +96,30 @@ export class CliBinBuildRest extends BeanCliBase {
     await rimraf(srcDir);
   }
 
-  async _prepareResources(context: IBinBuildRestContext) {
+  async _prepareResources({ projectPath, flavor, bundleName, srcDir }: IBinBuildRestContext) {
+    const { argv } = this.context;
+    //
+    const mode: ZovaMetaMode = 'production';
+    const appMode: ZovaMetaAppMode = 'ssr';
+    const configMeta: ZovaConfigMeta = { flavor, mode, appMode };
+    const configOptions: ZovaViteConfigOptions = {
+      appDir: projectPath,
+      runtimeDir: '.zova',
+    };
+    const configUtils = createConfigUtils(configMeta, configOptions);
+    // env
+    const env = configUtils.loadEnvs();
+    // Name/Version
+    argv.Name = bundleName;
+    argv.Version = env.APP_VERSION;
+    // templateDir
+    const templateDir = this.template.resolveTemplatePath(__ThisSetName__, 'rest');
+    // render
+    await this.template.renderDir(srcDir, templateDir);
+    process.exit(0);
+  }
+
+  async _prepareResources_(context: IBinBuildRestContext) {
     // package.json
     await this._prepareResourcesPackage(context);
     // index.ts

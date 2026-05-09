@@ -1,0 +1,14 @@
+{
+  "name": "zova-rest-cabloy-basic-admin",
+  "version": "5.0.0",
+  "type": "module",
+  "exports": {
+    ".": {
+      "types": [
+        "./index.d.mts"
+      ],
+      "import": "./index.mjs"
+    },
+    "./package.json": "./package.json"
+  }
+}
