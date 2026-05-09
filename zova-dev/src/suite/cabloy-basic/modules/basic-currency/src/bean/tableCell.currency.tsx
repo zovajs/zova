@@ -1,10 +1,17 @@
+import { CurrencyOptions } from '@zhennann/currency';
 import { BeanBase } from 'zova';
+import { IResourceTableCellOptionsBase } from 'zova-module-a-openapi';
 import { IJsxRenderContextTableCell, ITableCellRender, NextTableCellRender, TableCell } from 'zova-module-a-table';
-import { IResourceTableCellOptionsCurrency } from 'zova-module-basic-openapi';
 
 import { currencyFormat } from '../lib/utils.js';
 
-export interface ITableCellOptionsCurrency extends IResourceTableCellOptionsCurrency {}
+declare module 'zova-module-a-openapi' {
+  export interface IResourceComponentTableCellRecord {
+    'basic-currency:currency'?: ITableCellOptionsCurrency;
+  }
+}
+
+export interface ITableCellOptionsCurrency extends IResourceTableCellOptionsBase, CurrencyOptions {}
 
 @TableCell<ITableCellOptionsCurrency>()
 export class TableCellCurrency extends BeanBase implements ITableCellRender {
