@@ -50,6 +50,7 @@ const __template_package = `{
 declare module '@cabloy/cli' {
   interface ICommandArgv {
     flavor?: ZovaMetaFlavor;
+    Modules: string;
     Name: string;
     Version: string;
   }
@@ -62,6 +63,7 @@ interface IBinBuildRestContext {
   bundleNameCopy: string;
   srcDir: string;
   outDir: string;
+  bundleModules?: string[];
 }
 
 export class CliBinBuildRest extends BeanCliBase {
@@ -96,7 +98,8 @@ export class CliBinBuildRest extends BeanCliBase {
     await rimraf(srcDir);
   }
 
-  async _prepareResources({ projectPath, flavor, bundleName, srcDir }: IBinBuildRestContext) {
+  async _prepareResources(context: IBinBuildRestContext) {
+    const { projectPath, flavor, bundleName, srcDir } = context;
     const { argv } = this.context;
     //
     const mode: ZovaMetaMode = 'production';
@@ -109,6 +112,20 @@ export class CliBinBuildRest extends BeanCliBase {
     const configUtils = createConfigUtils(configMeta, configOptions);
     // env
     const env = configUtils.loadEnvs();
+    // modulesMeta
+    const modulesMeta = await configUtils.loadModulesMeta();
+    // Modules
+    const modules: string[] = [];
+    const bundleModules: string[] = [];
+    for (const module of modulesMeta.modulesArray) {
+      modules.push(`export * from '${module.info.fullName}';`);
+      const moduleRoot = module.root.replaceAll('\\', '/');
+      if (moduleRoot.includes('/src/module/') || moduleRoot.includes('/src/suite/')) {
+        bundleModules.push(module.info.fullName);
+      }
+    }
+    context.bundleModules = bundleModules;
+    argv.Modules = modules.join('\n');
     // Name/Version
     argv.Name = bundleName;
     argv.Version = env.APP_VERSION;
