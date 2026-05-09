@@ -1,10 +1,21 @@
+import type { IResourceTableCellOptionsBase } from 'zova-module-a-openapi';
+
 import { BeanBase } from 'zova';
-import { IJsxRenderContextTableCell, ITableCellRender, NextTableCellRender, TableCell } from 'zova-module-a-table';
-import { IResourceTableCellOptionsDate } from 'zova-module-basic-openapi';
+import { TableCell, type IJsxRenderContextTableCell, type ITableCellRender, type NextTableCellRender } from 'zova-module-a-table';
 
 import { dateFormatUtil } from '../lib/utils.js';
+import { TypeDateFormatPreset } from '../types/date.js';
 
-export interface ITableCellOptionsDate extends IResourceTableCellOptionsDate {}
+declare module 'zova-module-a-openapi' {
+  export interface IResourceComponentTableCellRecord {
+    'basic-date:date'?: ITableCellOptionsDate;
+  }
+}
+
+export interface ITableCellOptionsDate extends IResourceTableCellOptionsBase {
+  preset?: TypeDateFormatPreset;
+  format?: string;
+}
 
 @TableCell<ITableCellOptionsDate>({
   preset: 'DATETIME_SHORT',

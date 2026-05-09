@@ -1,7 +1,8 @@
+import type { IResourceTableCellOptionsBase } from 'zova-module-a-openapi';
+
 import { CurrencyOptions } from '@zhennann/currency';
 import { BeanBase } from 'zova';
-import { IResourceTableCellOptionsBase } from 'zova-module-a-openapi';
-import { IJsxRenderContextTableCell, ITableCellRender, NextTableCellRender, TableCell } from 'zova-module-a-table';
+import { TableCell, type IJsxRenderContextTableCell, type ITableCellRender, type NextTableCellRender } from 'zova-module-a-table';
 
 import { currencyFormat } from '../lib/utils.js';
 
