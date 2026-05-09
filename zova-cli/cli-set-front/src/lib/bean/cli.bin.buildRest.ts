@@ -133,7 +133,6 @@ export class CliBinBuildRest extends BeanCliBase {
     const templateDir = this.template.resolveTemplatePath(__ThisSetName__, 'rest');
     // render
     await this.template.renderDir(srcDir, templateDir);
-    process.exit(0);
   }
 
   async _prepareResources_(context: IBinBuildRestContext) {
@@ -169,7 +168,7 @@ export class CliBinBuildRest extends BeanCliBase {
           return false;
         },
       },
-      minify: true,
+      // minify: true,
     });
     const fileIndex = path.join(outDir, 'index.mjs');
     let fileContent = (await fse.readFile(fileIndex)).toString();
@@ -177,8 +176,7 @@ export class CliBinBuildRest extends BeanCliBase {
     await fse.writeFile(fileIndex, fileContent);
   }
 
-  async _buildDts({ srcDir, outDir }: IBinBuildRestContext) {
-    const bundleModules = this._prepareBundleModules();
+  async _buildDts({ srcDir, outDir, bundleModules }: IBinBuildRestContext) {
     // entry
     const entry = path.join(srcDir, 'index.ts');
     // build
@@ -199,11 +197,11 @@ export class CliBinBuildRest extends BeanCliBase {
       plugins: [svgResolverPlugin()],
       deps: {
         alwaysBundle: (id: string) => {
-          if (bundleModules.includes(id)) return true;
+          if (bundleModules!.includes(id)) return true;
           return false;
         },
       },
-      minify: true,
+      // minify: true,
     });
   }
 
