@@ -52,6 +52,7 @@ export class RenderPageLogin extends BeanRenderBase {
       >
         <ZFormFieldPreset
           name="username"
+          render="basic-input:formFieldInput"
           options={{
             type: 'text',
             placeholder: this.scope.locale.YourUsername(),
@@ -62,6 +63,7 @@ export class RenderPageLogin extends BeanRenderBase {
         <ZFormFieldPreset
           name="password"
           class="grow"
+          render="basic-input:formFieldInput"
           options={{ type: 'password', placeholder: this.scope.locale.YourPassword() }}
           layout={{ iconPrefix: ':daisy:lock' }}
         ></ZFormFieldPreset>

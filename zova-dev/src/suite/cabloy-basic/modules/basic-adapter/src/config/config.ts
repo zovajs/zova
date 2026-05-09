@@ -18,13 +18,7 @@ export const config = (_sys: ZovaSys) => {
       BlockToolbarRow: 'basic-pageentry:blockToolbarRow',
       BlockForm: 'basic-pageentry:blockForm',
     },
-    formFields: {
-      Input: 'basic-input:formFieldInput',
-      Captcha: 'basic-captcha:formFieldCaptcha',
-      DateRange: 'basic-date:formFieldDateRange',
-      Currency: 'basic-currency:formFieldCurrency',
-      Date: 'basic-date:formFieldDate',
-    },
+    formFields: {},
     tableCells: {
       Currency: 'basic-currency.tableCell.currency',
       Date: 'basic-date.tableCell.date',
