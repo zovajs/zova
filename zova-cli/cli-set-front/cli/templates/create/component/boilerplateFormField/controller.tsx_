@@ -1,12 +1,21 @@
 import type { IComponentOptions } from 'zova';
-import type { IFormFieldPresetOptionsBase } from 'zova-module-a-form';
 import type { IResourceFormFieldOptionsBase } from 'zova-module-a-openapi';
 
 import { BeanControllerBase } from 'zova';
 import { Controller } from 'zova-module-a-bean';
-import { ZFormField } from 'zova-module-a-form';
+import { ZFormField, type HTMLInputElementType, type IFormFieldComponentOptions } from 'zova-module-a-form';
 
-export interface Controller<%=argv.nameMeta.fullCapitalize%>Props extends IFormFieldPresetOptionsBase<IResourceFormFieldOptionsBase> {}
+declare module 'zova-module-a-openapi' {
+  export interface IResourceComponentFormFieldRecord {
+    '<%=argv.module%>:<%=argv.nameMeta.full%>'?: IResource<%=argv.nameMeta.fullCapitalize%>Options;
+  }
+}
+
+export interface IResource<%=argv.nameMeta.fullCapitalize%>Options extends IResourceFormFieldOptionsBase {}
+
+export interface Controller<%=argv.nameMeta.fullCapitalize%>Props extends IFormFieldComponentOptions {
+  options?: IResource<%=argv.nameMeta.fullCapitalize%>Options;
+}
 
 @Controller()
 export class Controller<%=argv.nameMeta.fullCapitalize%> extends BeanControllerBase {
