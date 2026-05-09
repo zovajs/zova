@@ -1,7 +1,7 @@
 {
   "name": "zova-jsx",
   "version": "1.1.29",
-  "gitHead": "8cb2168b0a2607c216a4d9b81bc9e16088895fc5",
+  "gitHead": "f5d3b2199568d99240050518542fd95e71cea61c",
   "description": "Zova JSX",
   "keywords": [
     "ioc",
@@ -47,10 +47,10 @@
   "dependencies": {
     "@cabloy/compose": "^2.1.4",
     "@cabloy/utils": "^2.1.15",
-    "@cabloy/word-utils": "workspace:^",
+    "@cabloy/word-utils": "^2.1.9",
     "typestyle": "^2.4.0",
     "vue": "^3.5.32",
-    "zova-core": "workspace:^"
+    "zova-core": "^5.1.26"
   },
   "devDependencies": {
     "clean-package": "^2.2.0",
