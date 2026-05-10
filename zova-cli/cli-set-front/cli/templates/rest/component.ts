@@ -8,8 +8,8 @@ import type {
   IResourceTableActionBulkRecord,
   IResourceBlockRecord,
   TypeFormSchemaScene,
+  IResourceRenderTableActionRowOptionsAction,
   IResourceRenderFormActionRowOptionsAction,
-  IResourceComponentActionRowOptionsAction,
   IResourceRenderTableActionBulkOptionsAction,
   IResourceRenderBlockOptionsBlock,
   IResourceTableActionRowOptionsBase,
@@ -49,17 +49,20 @@ export function schemaRenderCell<K extends keyof (IResourceTableCellRecord & IRe
   };
 }
 
-export function schemaRenderCellJsx<T extends z.ZodType>(renderComponentJsx: TypeRenderComponentJsx) {
+export function schemaRenderCellJsx<T extends z.ZodType>(
+  renderComponentJsx: TypeRenderComponentJsx,
+  options?: Pick<IResourceTableActionRowOptionsBase, 'permission'>,
+) {
   return function (schema: T): T {
-    const options = { render: renderComponentJsx };
-    return _generalSchemaRest(schema, options, 'table');
+    const options2 = options !== undefined ? { render: renderComponentJsx, columnProps: options } : { render: renderComponentJsx };
+    return _generalSchemaRest(schema, options2, 'table');
   };
 }
 
 export function schemaRenderTableActionRow<K extends keyof IResourceTableActionRowRecord>(
   render: K,
   options?: IResourceTableActionRowRecord[K],
-): IResourceRenderFormActionRowOptionsAction {
+): IResourceRenderTableActionRowOptionsAction {
   const pos = render.toString().indexOf(':action');
   const name = pos > -1 ? toLowerCaseFirstChar(render.toString().substring(pos + ':action'.length)) : undefined;
   return { $$typeof: 'zova-jsx:actionRow', name, render, options };
@@ -75,7 +78,7 @@ export function schemaRenderTableActionRowJsx(
 export function schemaRenderFormActionRow<K extends keyof IResourceFormActionRowRecord>(
   render: K,
   options?: IResourceFormActionRowRecord[K],
-): IResourceComponentActionRowOptionsAction {
+): IResourceRenderFormActionRowOptionsAction {
   const pos = render.toString().indexOf(':action');
   const name = pos > -1 ? toLowerCaseFirstChar(render.toString().substring(pos + ':action'.length)) : undefined;
   return { $$typeof: 'zova-jsx:actionRow', name, render, options };
