@@ -1,10 +1,10 @@
 import type { ZovaSys } from 'zova';
 
-import { IResourceProviders } from '../types/resourceProviders.js';
+import { IFormProvider } from '../types/formProvider.js';
 
 export const config = (_sys: ZovaSys) => {
   return {
-    resourceProviders: {} as IResourceProviders,
+    formProvider: {} as IFormProvider,
     api: {
       bootstrap: '/api/openapischema/resource/bootstrap/:resource',
       permissions: '/api/home/base/permission/:resource',

@@ -7,7 +7,7 @@ export * from './sdk.js';
 export * from './table.js';
 export * from './actions.js';
 export * from './formMeta.js';
-export * from './resourceProviders.js';
+export * from './formProvider.js';
 export * from './order.js';
 export * from './captcha.js';
 export * from './resource/index.js';

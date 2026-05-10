@@ -21,7 +21,7 @@ import { Controller } from 'zova-module-a-bean';
 import {
   IFormMeta,
   IFormProvider,
-  ISchemaRenderComponentLayoutOptions,
+  IResourceFormFieldLayoutOptions,
   renderFormFieldTopPropsSystem,
   TypeFormFieldRenderComponent,
   TypeFormFieldRenderComponentProvider,
@@ -52,7 +52,7 @@ export interface ControllerFormProps<TFormData extends {} = {}, TSubmitMeta = ne
   formMeta?: IFormMeta;
   formProvider?: IFormProvider;
   formScope?: IFormScope;
-  formFieldLayout?: ISchemaRenderComponentLayoutOptions;
+  formFieldLayout?: IResourceFormFieldLayoutOptions;
   onFormSubmit?: (e: SubmitEvent, form: ControllerForm<TFormData, TSubmitMeta>) => any;
   onSubmitInvalid?: TypeFormOnSubmitInvalid<TFormData, TSubmitMeta>;
   onSubmitData?: TypeFormOnSubmit<TFormData, TSubmitMeta>;
