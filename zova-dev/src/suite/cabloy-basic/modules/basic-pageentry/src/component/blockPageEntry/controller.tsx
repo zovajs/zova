@@ -1,9 +1,11 @@
 import type {
+  IResourceBlockOptionsBase,
+  IJsxRenderContextPageEntry,
+  IResourceRenderBlockOptionsBlock,
+  TypeFormScene,
   IFormMeta,
   IFormProvider,
-  IJsxRenderContextPageEntry,
   IPageEntryScope,
-  TypeFormScene,
   TypeFormSchemaScene,
 } from 'zova-module-a-openapi';
 
@@ -11,15 +13,25 @@ import { celEnvBase, isNil } from '@cabloy/utils';
 import { SchemaObject } from 'openapi3-ts/oas31';
 import { TableIdentity } from 'table-identity';
 import { VNode } from 'vue';
-import { BeanControllerBase, deepEqual, IComponentOptions } from 'zova';
+import { BeanControllerBase, deepEqual, type IComponentOptions } from 'zova';
 import { ZovaJsx } from 'zova-jsx';
 import { Controller } from 'zova-module-a-bean';
 import { BeanControllerFormBase, formMetaFromFormScene, TypeFormOnSubmitData } from 'zova-module-a-form';
 import { $QueriesAutoLoad } from 'zova-module-a-model';
-import { IResourceBlockOptionsPageEntry } from 'zova-module-basic-openapi';
 import { ModelResource } from 'zova-module-rest-resource';
 
-export interface ControllerBlockPageEntryProps extends IResourceBlockOptionsPageEntry {}
+declare module 'zova-module-a-openapi' {
+  export interface IResourceBlockRecord {
+    'basic-pageentry:blockPageEntry'?: ControllerBlockPageEntryProps;
+  }
+}
+
+export interface ControllerBlockPageEntryProps extends IResourceBlockOptionsBase {
+  blocks?: IResourceRenderBlockOptionsBlock[];
+  resource?: string;
+  id?: TableIdentity;
+  formScene?: TypeFormScene;
+}
 
 @Controller()
 export class ControllerBlockPageEntry<TData extends {} = {}> extends BeanControllerBase {
