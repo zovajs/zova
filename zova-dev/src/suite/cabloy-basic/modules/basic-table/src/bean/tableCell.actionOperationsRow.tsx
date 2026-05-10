@@ -1,6 +1,6 @@
 import type {
+  IResourceRenderTableCellActionRowOptionsAction,
   IResourceTableCellActionRowOptionsBase,
-  IResourceTableCellActionRowOptionsAction,
   TypeTableCellRenderComponent,
 } from 'zova-module-a-openapi';
 
@@ -21,7 +21,7 @@ declare module 'zova-module-a-openapi' {
 }
 
 export interface ITableCellOptionsActionOperationsRow extends IResourceTableCellActionRowOptionsBase {
-  actions?: IResourceTableCellActionRowOptionsAction[];
+  actions?: IResourceRenderTableCellActionRowOptionsAction[];
 }
 
 @TableCell<ITableCellOptionsActionOperationsRow>({
