@@ -1,8 +1,15 @@
-import { BeanBase } from 'zova';
-import { IJsxRenderContextTableCell, ITableCellRender, NextTableCellRender, TableCell } from 'zova-module-a-table';
-import { IResourceActionRowOptionsView } from 'zova-module-basic-openapi';
+import type { IResourceTableCellActionRowOptionsBase } from 'zova-module-a-openapi';
 
-export interface ITableCellOptionsActionView extends IResourceActionRowOptionsView {}
+import { BeanBase } from 'zova';
+import { type IJsxRenderContextTableCell, type ITableCellRender, type NextTableCellRender, TableCell } from 'zova-module-a-table';
+
+declare module 'zova-module-a-openapi' {
+  export interface IResourceTableCellActionRowRecord {
+    'basic-table:actionView'?: ITableCellOptionsActionView;
+  }
+}
+
+export interface ITableCellOptionsActionView extends IResourceTableCellActionRowOptionsBase {}
 
 @TableCell<ITableCellOptionsActionView>({
   class: 'hover:text-blue-500',

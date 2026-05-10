@@ -1,9 +1,16 @@
+import type { IResourceTableCellActionRowOptionsBase } from 'zova-module-a-openapi';
+
 import { BeanBase } from 'zova';
 import { ZIcon } from 'zova-module-a-icon';
-import { IJsxRenderContextTableCell, ITableCellRender, NextTableCellRender, TableCell } from 'zova-module-a-table';
-import { IResourceActionRowOptionsUpdate } from 'zova-module-basic-openapi';
+import { type IJsxRenderContextTableCell, type ITableCellRender, type NextTableCellRender, TableCell } from 'zova-module-a-table';
 
-export interface ITableCellOptionsActionUpdate extends IResourceActionRowOptionsUpdate {}
+declare module 'zova-module-a-openapi' {
+  export interface IResourceTableCellActionRowRecord {
+    'basic-table:actionUpdate'?: ITableCellOptionsActionUpdate;
+  }
+}
+
+export interface ITableCellOptionsActionUpdate extends IResourceTableCellActionRowOptionsBase {}
 
 @TableCell<ITableCellOptionsActionUpdate>({
   class: 'btn btn-outline btn-primary join-item',
