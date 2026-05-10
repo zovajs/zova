@@ -8,7 +8,7 @@ export interface IResourceBlockOptionsBase {
   style?: types.NestedCSSProperties;
 }
 
-export interface IResourceComponentBlockOptionsBlock {
+export interface IResourceRenderBlockOptionsBlock {
   render?: keyof IResourceBlockRecord | TypeRenderComponentJsx;
   options?: IResourceBlockOptionsBase;
 }

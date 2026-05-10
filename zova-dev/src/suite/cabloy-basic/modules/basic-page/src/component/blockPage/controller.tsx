@@ -1,19 +1,20 @@
-import { celEnvBase } from '@cabloy/utils';
-import { VNode } from 'vue';
-import { BeanControllerBase, IComponentOptions } from 'zova';
-import { ZovaJsx } from 'zova-jsx';
-import { Controller } from 'zova-module-a-bean';
-import { $QueriesAutoLoad } from 'zova-module-a-model';
-import {
-  IJsxRenderContextPage,
-  IPageScope,
+import type {
   IResourceBlockOptionsBase,
-  IResourceComponentBlockOptionsBlock,
-  ITablePaged,
+  IJsxRenderContextPage,
+  IResourceRenderBlockOptionsBlock,
   ITableProvider,
+  IPageScope,
+  ITablePaged,
   ITableQuery,
   ITableResPaged,
 } from 'zova-module-a-openapi';
+
+import { celEnvBase } from '@cabloy/utils';
+import { VNode } from 'vue';
+import { BeanControllerBase, type IComponentOptions } from 'zova';
+import { ZovaJsx } from 'zova-jsx';
+import { Controller } from 'zova-module-a-bean';
+import { $QueriesAutoLoad } from 'zova-module-a-model';
 import { BeanControllerTableBase } from 'zova-module-a-table';
 import { ModelResource } from 'zova-module-rest-resource';
 
@@ -24,7 +25,7 @@ declare module 'zova-module-a-openapi' {
 }
 
 export interface ControllerBlockPageProps extends IResourceBlockOptionsBase {
-  blocks?: IResourceComponentBlockOptionsBlock[];
+  blocks?: IResourceRenderBlockOptionsBlock[];
   resource?: string;
 }
 
