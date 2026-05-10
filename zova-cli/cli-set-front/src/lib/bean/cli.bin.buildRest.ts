@@ -252,7 +252,6 @@ import type { IVonaComponentRecord, TypeComponentOptions } from 'zova-module-a-b
 export type { IVonaComponentRecord } from 'zova-module-a-bean';
 export type {
   IResourceComponentActionBulkRecord,
-  IResourceComponentActionRowRecord,
   IResourceComponentBlockRecord,
   IResourceFormFieldRecord,
   IResourceTableCellRecord,

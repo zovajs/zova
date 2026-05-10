@@ -9,11 +9,6 @@ import type {
 import 'zova-module-a-openapi';
 import { TableIdentity } from 'table-identity';
 
-export interface IResourceBlockOptionsPage extends IResourceBlockOptionsBase {
-  blocks?: IResourceComponentBlockOptionsBlock[];
-  resource?: string;
-}
-
 export interface IResourceBlockOptionsFilter extends IResourceBlockOptionsBase {}
 
 export interface IResourceBlockOptionsToolbarBulk extends IResourceBlockOptionsBase {
@@ -39,7 +34,7 @@ export interface IResourceBlockOptionsForm extends IResourceBlockOptionsBase {}
 
 declare module 'zova-module-a-openapi' {
   export interface IResourceComponentBlockRecord {
-    BlockPage?: IResourceBlockOptionsPage;
+    // BlockPage?: IResourceBlockOptionsPage;
     BlockFilter?: IResourceBlockOptionsFilter;
     BlockToolbarBulk?: IResourceBlockOptionsToolbarBulk;
     BlockTable?: IResourceBlockOptionsTable;

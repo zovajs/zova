@@ -4,12 +4,23 @@ import { BeanControllerBase, IComponentOptions } from 'zova';
 import { ZovaJsx } from 'zova-jsx';
 import { Controller } from 'zova-module-a-bean';
 import { $QueriesAutoLoad } from 'zova-module-a-model';
-import { IJsxRenderContextPage, IPageScope, ITablePaged, ITableProvider, ITableQuery, ITableResPaged } from 'zova-module-a-openapi';
+import {
+  IJsxRenderContextPage,
+  IPageScope,
+  IResourceBlockOptionsBase,
+  IResourceComponentBlockOptionsBlock,
+  ITablePaged,
+  ITableProvider,
+  ITableQuery,
+  ITableResPaged,
+} from 'zova-module-a-openapi';
 import { BeanControllerTableBase } from 'zova-module-a-table';
-import { IResourceBlockOptionsPage } from 'zova-module-basic-openapi';
 import { ModelResource } from 'zova-module-rest-resource';
 
-export interface ControllerBlockPageProps extends IResourceBlockOptionsPage {}
+export interface ControllerBlockPageProps extends IResourceBlockOptionsBase {
+  blocks?: IResourceComponentBlockOptionsBlock[];
+  resource?: string;
+}
 
 @Controller()
 export class ControllerBlockPage<TData extends {} = {}> extends BeanControllerBase {

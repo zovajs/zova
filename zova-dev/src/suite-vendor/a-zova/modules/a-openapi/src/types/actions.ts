@@ -1,5 +1,3 @@
-import { TypeRenderComponentJsx } from 'zova-jsx';
-
 import type { TypeFormScene } from './formMeta.ts';
 
 // export interface IResourceActionBulkNameRecord {}
@@ -10,9 +8,9 @@ import type { TypeFormScene } from './formMeta.ts';
 
 // export interface IResourceComponentActionBulkRecord {}
 
-export interface IResourceComponentActionRowRecord {}
+// export interface IResourceComponentActionRowRecord {}
 
-export interface IResourceComponentActionTableRecord extends IResourceComponentActionBulkRecord, IResourceComponentActionRowRecord {}
+// export interface IResourceComponentActionTableRecord extends IResourceComponentActionBulkRecord, IResourceComponentActionRowRecord {}
 
 export interface IPermissionHint {
   action?: string;
@@ -36,8 +34,8 @@ export interface IPermissionHint {
 //   options?: IResourceActionBulkOptionsBase;
 // }
 
-export interface IResourceComponentActionRowOptionsAction {
-  name: keyof IResourceActionRowRecord; // not omit operationsBulk
-  render?: keyof IResourceComponentActionRowRecord | TypeRenderComponentJsx;
-  options?: IResourceActionRowOptionsBase;
-}
+// export interface IResourceComponentActionRowOptionsAction {
+//   name: keyof IResourceActionRowRecord; // not omit operationsBulk
+//   render?: keyof IResourceComponentActionRowRecord | TypeRenderComponentJsx;
+//   options?: IResourceActionRowOptionsBase;
+// }

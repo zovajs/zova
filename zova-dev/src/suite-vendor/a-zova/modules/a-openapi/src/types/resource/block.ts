@@ -1,7 +1,7 @@
 import { types } from 'typestyle';
 import { TypeRenderComponentJsx } from 'zova-jsx';
 
-export interface IResourceComponentBlockRecord {}
+export interface IResourceBlockRecord {}
 
 export interface IResourceBlockOptionsBase {
   class?: any;
@@ -9,6 +9,6 @@ export interface IResourceBlockOptionsBase {
 }
 
 export interface IResourceComponentBlockOptionsBlock {
-  render?: keyof IResourceComponentBlockRecord | TypeRenderComponentJsx;
+  render?: keyof IResourceBlockRecord | TypeRenderComponentJsx;
   options?: IResourceBlockOptionsBase;
 }

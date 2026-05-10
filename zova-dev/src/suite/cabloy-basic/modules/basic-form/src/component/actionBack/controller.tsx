@@ -1,12 +1,17 @@
-import type { IJsxRenderContextPageEntry } from 'zova-module-a-openapi';
+import type { IJsxRenderContextPageEntry, IResourceFormActionRowOptionsBase } from 'zova-module-a-openapi';
 
 import { classes } from 'typestyle';
-import { BeanControllerBase, IComponentOptions, Use } from 'zova';
+import { BeanControllerBase, type IComponentOptions, Use } from 'zova';
 import { Controller } from 'zova-module-a-bean';
 import { BeanControllerFormBase } from 'zova-module-a-form';
-import { IResourceActionRowOptionsBack } from 'zova-module-basic-openapi';
 
-export interface ControllerActionBackProps extends IResourceActionRowOptionsBack {}
+declare module 'zova-module-a-openapi' {
+  export interface IResourceFormActionRowRecord {
+    'basic-form:actionBack'?: ControllerActionBackProps;
+  }
+}
+
+export interface ControllerActionBackProps extends IResourceFormActionRowOptionsBase {}
 
 @Controller()
 export class ControllerActionBack extends BeanControllerBase {
