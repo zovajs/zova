@@ -6,12 +6,6 @@ import { TableCell, type IJsxRenderContextTableCell, type ITableCellRender, type
 import { dateFormatUtil } from '../lib/utils.js';
 import { TypeDateFormatPreset } from '../types/date.js';
 
-declare module 'zova-module-a-openapi' {
-  export interface IResourceComponentTableCellRecord {
-    'basic-date:date'?: ITableCellOptionsDate;
-  }
-}
-
 export interface ITableCellOptionsDate extends IResourceTableCellOptionsBase {
   preset?: TypeDateFormatPreset;
   format?: string;
