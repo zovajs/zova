@@ -1,15 +1,15 @@
-import type { IJsxRenderContextPage, IResourceActionBulkOptionsBase } from 'zova-module-a-openapi';
+import type { IJsxRenderContextPage, IResourceTableActionBulkOptionsBase } from 'zova-module-a-openapi';
 
 import { BeanControllerBase, type IComponentOptions, Use } from 'zova';
 import { Controller } from 'zova-module-a-bean';
 
 declare module 'zova-module-a-openapi' {
-  export interface IResourceComponentActionBulkRecord {
+  export interface IResourceTableActionBulkRecord {
     'basic-table:actionCreate'?: ControllerActionCreateProps;
   }
 }
 
-export interface ControllerActionCreateProps extends IResourceActionBulkOptionsBase {}
+export interface ControllerActionCreateProps extends IResourceTableActionBulkOptionsBase {}
 
 @Controller()
 export class ControllerActionCreate extends BeanControllerBase {
