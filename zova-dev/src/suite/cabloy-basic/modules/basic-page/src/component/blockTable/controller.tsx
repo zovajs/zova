@@ -1,11 +1,16 @@
-import type { IJsxRenderContextPage } from 'zova-module-a-openapi';
+import type { IResourceBlockOptionsBase, IJsxRenderContextPage } from 'zova-module-a-openapi';
 
-import { BeanControllerBase, deepEqual, IComponentOptions, Use } from 'zova';
+import { BeanControllerBase, deepEqual, type IComponentOptions, Use } from 'zova';
 import { Controller } from 'zova-module-a-bean';
 import { BeanControllerTableBase, ZTable } from 'zova-module-a-table';
-import { IResourceBlockOptionsTable } from 'zova-module-basic-openapi';
 
-export interface ControllerBlockTableProps extends IResourceBlockOptionsTable {}
+declare module 'zova-module-a-openapi' {
+  export interface IResourceBlockRecord {
+    'basic-page:blockTable'?: ControllerBlockTableProps;
+  }
+}
+
+export interface ControllerBlockTableProps extends IResourceBlockOptionsBase {}
 
 @Controller()
 export class ControllerBlockTable extends BeanControllerBase {
