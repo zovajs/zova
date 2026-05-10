@@ -1,11 +1,17 @@
-import type { IJsxRenderContextPage } from 'zova-module-a-openapi';
+import type { IResourceBlockOptionsBase, IJsxRenderContextPage, IResourceRenderTableActionBulkOptionsAction } from 'zova-module-a-openapi';
 
-import { VNode } from 'vue';
-import { BeanControllerBase, IComponentOptions, Use } from 'zova';
+import { BeanControllerBase, type IComponentOptions, Use } from 'zova';
 import { Controller } from 'zova-module-a-bean';
-import { IResourceBlockOptionsToolbarBulk } from 'zova-module-basic-openapi';
 
-export interface ControllerBlockToolbarBulkProps extends IResourceBlockOptionsToolbarBulk {}
+declare module 'zova-module-a-openapi' {
+  export interface IResourceBlockRecord {
+    'basic-page:blockToolbarBulk'?: ControllerBlockToolbarBulkProps;
+  }
+}
+
+export interface ControllerBlockToolbarBulkProps extends IResourceBlockOptionsBase {
+  actions?: IResourceRenderTableActionBulkOptionsAction[];
+}
 
 @Controller()
 export class ControllerBlockToolbarBulk extends BeanControllerBase {
