@@ -31,22 +31,6 @@ function svgResolverPlugin() {
   };
 }
 
-const __template_package = `{
-  "name": "{{Name}}",
-  "version": "{{Version}}",
-  "type": "module",
-  "exports": {
-    ".": {
-      "types": [
-        "./index.d.mts"
-      ],
-      "import": "./index.mjs"
-    },
-    "./package.json": "./package.json"
-  }
-}
-`;
-
 declare module '@cabloy/cli' {
   interface ICommandArgv {
     flavor?: ZovaMetaFlavor;
