@@ -6,7 +6,7 @@ import 'openapi3-ts/oas30';
 import 'openapi3-ts/oas31';
 import { IResourceComponentBlockOptionsBlock } from './blocks.js';
 import { IResourceComponentFormFieldRecord } from './formField.js';
-import { IResourceProvidersTableActionsRow, IResourceProvidersTableCells } from './resourceProviders.js';
+import { IResourceTableCellActionRowRecord } from './tableCell.js';
 
 export interface ISchemaRenderComponentPresetRecord extends IResourceComponentFormFieldRecord {}
 
@@ -93,7 +93,7 @@ export type TypeTableCellRenderComponentNormal =
   | keyof IComponentRecord
   | keyof TypeBeanRecordGeneralSelector<'tableCell'>
   | TypeRenderComponentPreset;
-export type TypeTableCellRenderComponent = keyof (IResourceProvidersTableCells & IResourceProvidersTableActionsRow) | TypeRenderComponentJsx;
+export type TypeTableCellRenderComponent = keyof IResourceTableCellActionRowRecord | TypeRenderComponentJsx;
 export type TypeTableCellRenderComponentProvider =
   | Constructable<ComponentPublicInstance>
   | TypeRenderComponentJsx

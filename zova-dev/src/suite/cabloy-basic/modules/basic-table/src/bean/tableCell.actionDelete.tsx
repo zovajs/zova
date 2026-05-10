@@ -1,4 +1,4 @@
-import type { IResourceActionRowOptionsBase } from 'zova-module-a-openapi';
+import type { IResourceTableCellActionRowOptionsBase } from 'zova-module-a-openapi';
 
 import { BeanBase } from 'zova';
 import { ZIcon } from 'zova-module-a-icon';
@@ -10,7 +10,7 @@ declare module 'zova-module-a-openapi' {
   }
 }
 
-export interface ITableCellOptionsActionDelete extends IResourceActionRowOptionsBase {}
+export interface ITableCellOptionsActionDelete extends IResourceTableCellActionRowOptionsBase {}
 
 @TableCell<ITableCellOptionsActionDelete>({
   class: 'btn btn-outline btn-error join-item',

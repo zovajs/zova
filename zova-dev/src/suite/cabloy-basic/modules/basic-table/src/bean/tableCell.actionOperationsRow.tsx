@@ -1,4 +1,8 @@
-import type { IResourceActionRowOptionsBase, IResourceComponentActionRowOptionsAction, TypeTableCellRenderComponent } from 'zova-module-a-openapi';
+import type {
+  IResourceTableCellActionRowOptionsBase,
+  IResourceTableCellActionRowOptionsAction,
+  TypeTableCellRenderComponent,
+} from 'zova-module-a-openapi';
 
 import { VNode } from 'vue';
 import { BeanBase } from 'zova';
@@ -16,8 +20,8 @@ declare module 'zova-module-a-openapi' {
   }
 }
 
-export interface ITableCellOptionsActionOperationsRow extends IResourceActionRowOptionsBase {
-  actions?: IResourceComponentActionRowOptionsAction[];
+export interface ITableCellOptionsActionOperationsRow extends IResourceTableCellActionRowOptionsBase {
+  actions?: IResourceTableCellActionRowOptionsAction[];
 }
 
 @TableCell<ITableCellOptionsActionOperationsRow>({

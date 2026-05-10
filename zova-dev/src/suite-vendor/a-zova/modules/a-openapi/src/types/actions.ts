@@ -1,22 +1,13 @@
-import { TableIdentity } from 'table-identity';
 import { types } from 'typestyle';
 import { TypeRenderComponentJsx } from 'zova-jsx';
 
 import type { TypeFormScene } from './formMeta.ts';
 
-export type IResourceActionBulkRecord = {
-  [KEY in keyof IResourceComponentActionBulkRecord as KEY extends `Action${infer Rest}`
-    ? Uncapitalize<Rest>
-    : KEY]: IResourceComponentActionBulkRecord[KEY];
-};
+export interface IResourceActionBulkNameRecord {}
 
-export type IResourceActionRowRecord = {
-  [KEY in keyof IResourceComponentActionRowRecord as KEY extends `Action${infer Rest}`
-    ? Uncapitalize<Rest>
-    : KEY]: IResourceComponentActionRowRecord[KEY];
-};
+export interface IResourceActionRowNameRecord {}
 
-export interface IResourceActionTableRecord extends IResourceActionBulkRecord, IResourceActionRowRecord {}
+export interface IResourceActionTableNameRecord extends IResourceActionBulkNameRecord, IResourceActionRowNameRecord {}
 
 export interface IResourceComponentActionBulkRecord {}
 
@@ -37,18 +28,6 @@ export interface IResourceActionBulkOptionsBase {
   permission?: {
     action?: keyof IResourceActionBulkRecord;
     public?: boolean;
-  };
-}
-
-export interface IResourceActionRowOptionsBase {
-  class?: any;
-  style?: types.NestedCSSProperties;
-  resource?: string;
-  id?: TableIdentity;
-  permission?: {
-    action?: keyof IResourceActionRowRecord;
-    public?: boolean;
-    formScene?: TypeFormScene | TypeFormScene[];
   };
 }
 
