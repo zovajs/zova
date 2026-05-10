@@ -3,6 +3,7 @@ import { types } from 'typestyle';
 import { TypeRenderComponentJsx } from 'zova-jsx';
 
 import { TypeFormScene } from '../formMeta.js';
+import { IResourceTableActionRowNameRecord } from './tableActionRow.js';
 
 export type IResourceFormActionRowNameRecord = {
   [KEY in keyof IResourceFormActionRowRecord as KEY extends `${string}:action${infer Name}`
@@ -18,7 +19,7 @@ export interface IResourceFormActionRowOptionsBase {
   resource?: string;
   id?: TableIdentity;
   permission?: {
-    action?: keyof IResourceFormActionRowNameRecord;
+    action?: keyof (IResourceFormActionRowNameRecord & IResourceTableActionRowNameRecord);
     public?: boolean;
     formScene?: TypeFormScene | TypeFormScene[];
   };
