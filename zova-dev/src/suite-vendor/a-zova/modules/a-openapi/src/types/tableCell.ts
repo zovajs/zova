@@ -1,9 +1,8 @@
 import type { types } from 'typestyle';
 import type { TypeRenderComponentJsx } from 'zova-jsx';
 
-import type { IResourceComponentActionRowRecord } from './actions.js';
-
-export interface IResourceComponentTableCellRecord {}
+export interface IResourceTableCellRecord {}
+export interface IResourceTableCellActionRowRecord {}
 
 export interface IResourceTableCellOptionsBase {
   class?: any;
@@ -11,8 +10,8 @@ export interface IResourceTableCellOptionsBase {
 }
 
 export interface IResourceComponentTableCellOptionsCell {
-  render?: keyof IResourceComponentTableCellRecord | TypeRenderComponentJsx;
+  render?: keyof IResourceTableCellRecord | TypeRenderComponentJsx;
   options?: IResourceTableCellOptionsBase;
 }
 
-export interface IResourceComponentTableCellActionRowRecord extends IResourceComponentTableCellRecord, IResourceComponentActionRowRecord {}
+export interface IResourceTableCellActionRowRecordBoth extends IResourceTableCellRecord, IResourceTableCellActionRowRecord {}

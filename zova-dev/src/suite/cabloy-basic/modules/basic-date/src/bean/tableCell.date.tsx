@@ -7,7 +7,7 @@ import { dateFormatUtil } from '../lib/utils.js';
 import { TypeDateFormatPreset } from '../types/date.js';
 
 declare module 'zova-module-a-openapi' {
-  export interface IResourceComponentTableCellRecord {
+  export interface IResourceTableCellRecord {
     'basic-date:date'?: ITableCellOptionsDate;
   }
 }

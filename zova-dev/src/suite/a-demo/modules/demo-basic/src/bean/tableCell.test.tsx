@@ -5,7 +5,7 @@ import { ZIcon } from 'zova-module-a-icon';
 import { TableCell, type IJsxRenderContextTableCell, type ITableCellRender, type NextTableCellRender } from 'zova-module-a-table';
 
 declare module 'zova-module-a-openapi' {
-  export interface IResourceComponentTableCellRecord {
+  export interface IResourceTableCellRecord {
     'demo-basic:test'?: ITableCellOptionsTest;
   }
 }

@@ -4,7 +4,7 @@ import { IFormProviderBehaviors } from 'zova-module-a-form';
 import { IResourceComponentActionBulkRecord, IResourceComponentActionRowRecord } from './actions.js';
 import { IResourceComponentBlockRecord } from './blocks.js';
 import { IResourceComponentFormFieldRecord } from './formField.js';
-import { IResourceComponentTableCellRecord } from './tableCell.js';
+import { IResourceTableCellRecord } from './tableCell.js';
 
 export type IResourceProvidersBlocks = {
   [KEY in keyof IResourceComponentBlockRecord]?: TypeComponentRecordSelectorKeys<'block'>;
@@ -15,7 +15,7 @@ export type IResourceProvidersFormFields = {
 };
 
 export type IResourceProvidersTableCells = {
-  [KEY in keyof IResourceComponentTableCellRecord]?: keyof TypeBeanRecordGeneralSelector<'tableCell'>;
+  [KEY in keyof IResourceTableCellRecord]?: keyof TypeBeanRecordGeneralSelector<'tableCell'>;
 };
 
 export type IResourceProvidersTableActionsBulk = {

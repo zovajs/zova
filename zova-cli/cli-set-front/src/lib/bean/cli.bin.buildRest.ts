@@ -255,7 +255,7 @@ export type {
   IResourceComponentActionRowRecord,
   IResourceComponentBlockRecord,
   IResourceComponentFormFieldRecord,
-  IResourceComponentTableCellRecord,
+  IResourceTableCellRecord,
   ISchemaRenderComponentLayoutOptions,
 } from 'zova-module-a-openapi';
 `;

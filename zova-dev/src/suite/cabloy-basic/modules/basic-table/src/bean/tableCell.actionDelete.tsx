@@ -3,6 +3,17 @@ import { ZIcon } from 'zova-module-a-icon';
 import { IJsxRenderContextTableCell, ITableCellRender, NextTableCellRender, TableCell } from 'zova-module-a-table';
 import { IResourceActionRowOptionsDelete } from 'zova-module-basic-openapi';
 
+declare module 'zova-module-a-openapi' {
+  export interface IResourceTableCellActionRowRecord {
+    ActionView?: IResourceActionRowOptionsView;
+    ActionUpdate?: IResourceActionRowOptionsUpdate;
+    ActionDelete?: IResourceActionRowOptionsDelete;
+    ActionOperationsRow?: IResourceActionRowOptionsOperationsRow;
+    ActionSubmit?: IResourceActionRowOptionsSubmit;
+    ActionBack?: IResourceActionRowOptionsBack;
+  }
+}
+
 export interface ITableCellOptionsActionDelete extends IResourceActionRowOptionsDelete {}
 
 @TableCell<ITableCellOptionsActionDelete>({

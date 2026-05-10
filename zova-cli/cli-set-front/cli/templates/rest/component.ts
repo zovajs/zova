@@ -3,7 +3,7 @@ import type { TypeRenderComponentJsx } from 'zova-jsx';
 import type {
   IResourceComponentFormFieldRecord,
   TypeFormSchemaScene,
-  IResourceComponentTableCellActionRowRecord,
+  IResourceTableCellActionRowRecordBoth,
   IResourceActionRowRecord,
   IResourceComponentActionRowOptionsAction,
   IResourceActionBulkRecord,
@@ -34,9 +34,9 @@ export function schemaRenderFieldJsx<T extends z.ZodType>(renderComponentJsx: Ty
   };
 }
 
-export function schemaRenderCell<K extends keyof IResourceComponentTableCellActionRowRecord, T extends z.ZodType>(
+export function schemaRenderCell<K extends keyof IResourceTableCellActionRowRecordBoth, T extends z.ZodType>(
   name: K,
-  options?: IResourceComponentTableCellActionRowRecord[K],
+  options?: IResourceTableCellActionRowRecordBoth[K],
 ) {
   return function (schema: T): T {
     const options2 = options !== undefined ? { render: name as never, columnProps: options } : { render: name as never };
