@@ -48,7 +48,6 @@ export class ControllerBlockTable extends BeanControllerBase {
         }}
         data={$$page.data}
         schema={$$page.schemaRow}
-        tableProvider={$$page.tableProvider}
         tableScope={$$page.jsxCelScope}
       ></ZTable>
     );

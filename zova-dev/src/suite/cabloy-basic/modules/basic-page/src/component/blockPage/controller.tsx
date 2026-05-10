@@ -47,9 +47,6 @@ export class ControllerBlockPage<TData extends {} = {}> extends BeanControllerBa
 
   protected async __init__() {
     this.$$modelResource = await this.bean._getBeanSelector('rest-resource.model.resource', true, this.resource);
-    this.tableProvider = this.$computed(() => {
-      return this.$$modelResource.tableProvider;
-    });
     // jsx
     this._prepareJsx();
     // query
@@ -105,7 +102,7 @@ export class ControllerBlockPage<TData extends {} = {}> extends BeanControllerBa
 
   private _prepareJsx() {
     const jsxCelEnv = celEnvBase.clone();
-    this.jsxZova = this.bean._newBeanSimple(ZovaJsx, false, this.tableProvider.components, jsxCelEnv);
+    this.jsxZova = this.bean._newBeanSimple(ZovaJsx, false, undefined, jsxCelEnv);
     this.jsxCelScope = this._prepareJsxCelScope();
     this.jsxRenderContext = {
       app: this.app,
