@@ -1,12 +1,17 @@
-import type { IJsxRenderContextPage, IFormMeta, ISchemaRenderComponentLayoutOptions } from 'zova-module-a-openapi';
+import type { IResourceBlockOptionsBase, IJsxRenderContextPage, IFormMeta, ISchemaRenderComponentLayoutOptions } from 'zova-module-a-openapi';
 
 import { isNilOrEmptyString } from '@cabloy/utils';
-import { BeanControllerBase, IComponentOptions, Use } from 'zova';
+import { BeanControllerBase, type IComponentOptions, Use } from 'zova';
 import { Controller } from 'zova-module-a-bean';
 import { TypeFormOnSubmitData, ZForm } from 'zova-module-a-form';
-import { IResourceBlockOptionsFilter } from 'zova-module-basic-openapi';
 
-export interface ControllerBlockFilterProps extends IResourceBlockOptionsFilter {}
+declare module 'zova-module-a-openapi' {
+  export interface IResourceBlockRecord {
+    'basic-page:blockFilter'?: ControllerBlockFilterProps;
+  }
+}
+
+export interface ControllerBlockFilterProps extends IResourceBlockOptionsBase {}
 
 @Controller()
 export class ControllerBlockFilter extends BeanControllerBase {
