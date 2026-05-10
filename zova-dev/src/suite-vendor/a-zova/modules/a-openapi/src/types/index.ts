@@ -14,4 +14,4 @@ export * from './resourceProviders.js';
 export * from './order.js';
 export * from './captcha.js';
 export * from './form.js';
-export * from './rest/index.js';
+export * from './resource/index.js';
