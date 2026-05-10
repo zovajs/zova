@@ -15,7 +15,7 @@ import { SchemaObject } from 'openapi3-ts/oas31';
 import { VNode } from 'vue';
 import { z } from 'zod';
 import { $ZodIssue } from 'zod/v4/core';
-import { cast, deepEqual, deepExtend, objectAssignReactive, Use } from 'zova';
+import { cast, deepEqual, deepExtend, objectAssignReactive, UseScope } from 'zova';
 import { isJsxComponent, ZovaJsx } from 'zova-jsx';
 import { Controller } from 'zova-module-a-bean';
 import {
@@ -26,8 +26,8 @@ import {
   TypeFormFieldRenderComponent,
   TypeFormFieldRenderComponentProvider,
   TypeFormSchemaScene,
+  ScopeModuleAOpenapi,
 } from 'zova-module-a-openapi';
-import { BeanResourceProviders } from 'zova-module-a-openapi';
 
 import { BeanControllerFormBase } from '../../lib/beanControllerFormBase.js';
 import { IFormScope, RevalidateLogicProps, TypeFormOnShowError, TypeFormOnSubmit, TypeFormOnSubmitInvalid } from '../../types/form.js';
@@ -75,15 +75,15 @@ export class ControllerForm<TFormData extends {} = {}, TSubmitMeta = never> exte
   zovaJsx: ZovaJsx;
   fieldCelEnv: typeof celEnvBase;
 
-  @Use()
-  $$beanResourceProviders: BeanResourceProviders;
+  @UseScope()
+  $$scopeOpenapi: ScopeModuleAOpenapi;
 
   protected async __init__() {
     this.bean._setBean('$$form', this);
     this.form = this._createForm();
     this.formState = useStore(this.form.store, state => state) as any;
     this.formProvider = this.$computed(() => {
-      const formProvider = this.$$beanResourceProviders.formProvider;
+      const formProvider = this.$$scopeOpenapi.config.formProvider;
       return this.$props.formProvider ? deepExtend({}, formProvider, this.$props.formProvider) : formProvider;
     });
     this.schema = this.$computed(() => {
