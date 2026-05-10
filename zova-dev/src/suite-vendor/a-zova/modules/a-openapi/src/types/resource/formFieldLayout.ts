@@ -1,1 +1,1 @@
-export interface ISchemaRenderComponentLayoutOptions {}
+export interface IResourceFormFieldLayoutOptions {}
