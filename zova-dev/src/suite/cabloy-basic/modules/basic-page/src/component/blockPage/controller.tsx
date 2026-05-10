@@ -17,6 +17,12 @@ import {
 import { BeanControllerTableBase } from 'zova-module-a-table';
 import { ModelResource } from 'zova-module-rest-resource';
 
+declare module 'zova-module-a-openapi' {
+  export interface IResourceBlockRecord {
+    'basic-page:blockPage'?: ControllerBlockPageProps;
+  }
+}
+
 export interface ControllerBlockPageProps extends IResourceBlockOptionsBase {
   blocks?: IResourceComponentBlockOptionsBlock[];
   resource?: string;
