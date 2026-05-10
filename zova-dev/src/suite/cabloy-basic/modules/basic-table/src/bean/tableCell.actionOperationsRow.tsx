@@ -1,10 +1,24 @@
+import type { IResourceActionRowOptionsBase, IResourceComponentActionRowOptionsAction, TypeTableCellRenderComponent } from 'zova-module-a-openapi';
+
 import { VNode } from 'vue';
 import { BeanBase } from 'zova';
-import { TypeTableCellRenderComponent } from 'zova-module-a-openapi';
-import { IJsxRenderContextTableCell, IJsxRenderContextTableColumn, ITableCellRender, NextTableCellRender, TableCell } from 'zova-module-a-table';
-import { IResourceActionRowOptionsOperationsRow } from 'zova-module-basic-openapi';
+import {
+  type IJsxRenderContextTableCell,
+  IJsxRenderContextTableColumn,
+  type ITableCellRender,
+  type NextTableCellRender,
+  TableCell,
+} from 'zova-module-a-table';
 
-export interface ITableCellOptionsActionOperationsRow extends IResourceActionRowOptionsOperationsRow {}
+declare module 'zova-module-a-openapi' {
+  export interface IResourceTableCellActionRowRecord {
+    'basic-table:actionOperationsRow'?: ITableCellOptionsActionOperationsRow;
+  }
+}
+
+export interface ITableCellOptionsActionOperationsRow extends IResourceActionRowOptionsBase {
+  actions?: IResourceComponentActionRowOptionsAction[];
+}
 
 @TableCell<ITableCellOptionsActionOperationsRow>({
   class: 'join',

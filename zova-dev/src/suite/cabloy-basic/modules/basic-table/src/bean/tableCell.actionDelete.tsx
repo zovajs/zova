@@ -6,7 +6,7 @@ import { type IJsxRenderContextTableCell, type ITableCellRender, type NextTableC
 
 declare module 'zova-module-a-openapi' {
   export interface IResourceTableCellActionRowRecord {
-    'basic-table:actionDelete': ITableCellOptionsActionDelete;
+    'basic-table:actionDelete'?: ITableCellOptionsActionDelete;
   }
 }
 
