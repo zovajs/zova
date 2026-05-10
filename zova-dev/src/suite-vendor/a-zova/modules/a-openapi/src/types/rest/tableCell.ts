@@ -39,5 +39,5 @@ export interface IResourceComponentTableCellOptionsCell {
 export interface IResourceTableCellActionRowOptionsAction {
   name: keyof IResourceTableCellActionRowNameRecord; // not omit operationsRow
   render?: keyof IResourceTableCellActionRowRecord | TypeRenderComponentJsx;
-  options?: IResourceActionRowOptionsBase;
+  options?: IResourceTableCellActionRowOptionsBase;
 }
