@@ -1,4 +1,4 @@
-import type { IResourceTableCellActionRowOptionsBase, ISchemaObjectExtensionFieldRest, TypeTableCellRenderComponent } from 'zova-module-a-openapi';
+import type { IResourceTableActionRowOptionsBase, ISchemaObjectExtensionFieldRest, TypeTableCellRenderComponent } from 'zova-module-a-openapi';
 
 import { celEnvBase, isNilOrEmptyString } from '@cabloy/utils';
 import { CellContext, createColumnHelper, getCoreRowModel, TableOptionsWithReactiveData } from '@tanstack/vue-table';
@@ -235,7 +235,7 @@ export class ControllerTable<TData extends {} = {}> extends BeanControllerTableB
 
   public cellRender(
     render: TypeTableCellRenderComponent,
-    columnProps: IResourceTableCellActionRowOptionsBase,
+    columnProps: IResourceTableActionRowOptionsBase,
     renderContext: IJsxRenderContextTableCell,
   ) {
     // render

@@ -4,28 +4,28 @@ import { TypeRenderComponentJsx } from 'zova-jsx';
 
 import { TypeFormScene } from '../formMeta.js';
 
-export type IResourceTableCellActionRowNameRecord = {
-  [KEY in keyof IResourceTableCellActionRowRecord as KEY extends `${string}:action${infer Name}`
+export type IResourceTableActionRowNameRecord = {
+  [KEY in keyof IResourceTableActionRowRecord as KEY extends `${string}:action${infer Name}`
     ? Uncapitalize<Name>
-    : KEY]: IResourceTableCellActionRowRecord[KEY];
+    : KEY]: IResourceTableActionRowRecord[KEY];
 };
 
-export interface IResourceTableCellActionRowRecord {}
+export interface IResourceTableActionRowRecord {}
 
-export interface IResourceTableCellActionRowOptionsBase {
+export interface IResourceTableActionRowOptionsBase {
   class?: any;
   style?: types.NestedCSSProperties;
   resource?: string;
   id?: TableIdentity;
   permission?: {
-    action?: keyof IResourceTableCellActionRowNameRecord;
+    action?: keyof IResourceTableActionRowNameRecord;
     public?: boolean;
     formScene?: TypeFormScene | TypeFormScene[];
   };
 }
 
-export interface IResourceRenderTableCellActionRowOptionsAction {
-  name: keyof IResourceTableCellActionRowNameRecord; // not omit operationsRow
-  render?: keyof IResourceTableCellActionRowRecord | TypeRenderComponentJsx;
-  options?: IResourceTableCellActionRowOptionsBase;
+export interface IResourceRenderTableActionRowOptionsAction {
+  name: keyof IResourceTableActionRowNameRecord; // not omit operationsRow
+  render?: keyof IResourceTableActionRowRecord | TypeRenderComponentJsx;
+  options?: IResourceTableActionRowOptionsBase;
 }

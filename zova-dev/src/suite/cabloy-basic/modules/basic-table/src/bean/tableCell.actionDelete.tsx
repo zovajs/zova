@@ -1,16 +1,16 @@
-import type { IResourceTableCellActionRowOptionsBase } from 'zova-module-a-openapi';
+import type { IResourceTableActionRowOptionsBase } from 'zova-module-a-openapi';
 
 import { BeanBase } from 'zova';
 import { ZIcon } from 'zova-module-a-icon';
 import { type IJsxRenderContextTableCell, type ITableCellRender, type NextTableCellRender, TableCell } from 'zova-module-a-table';
 
 declare module 'zova-module-a-openapi' {
-  export interface IResourceTableCellActionRowRecord {
+  export interface IResourceTableActionRowRecord {
     'basic-table:actionDelete'?: ITableCellOptionsActionDelete;
   }
 }
 
-export interface ITableCellOptionsActionDelete extends IResourceTableCellActionRowOptionsBase {}
+export interface ITableCellOptionsActionDelete extends IResourceTableActionRowOptionsBase {}
 
 @TableCell<ITableCellOptionsActionDelete>({
   class: 'btn btn-outline btn-error join-item',

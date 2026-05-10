@@ -1,6 +1,6 @@
 import type {
-  IResourceRenderTableCellActionRowOptionsAction,
-  IResourceTableCellActionRowOptionsBase,
+  IResourceRenderTableActionRowOptionsAction,
+  IResourceTableActionRowOptionsBase,
   TypeTableCellRenderComponent,
 } from 'zova-module-a-openapi';
 
@@ -15,13 +15,13 @@ import {
 } from 'zova-module-a-table';
 
 declare module 'zova-module-a-openapi' {
-  export interface IResourceTableCellActionRowRecord {
+  export interface IResourceTableActionRowRecord {
     'basic-table:actionOperationsRow'?: ITableCellOptionsActionOperationsRow;
   }
 }
 
-export interface ITableCellOptionsActionOperationsRow extends IResourceTableCellActionRowOptionsBase {
-  actions?: IResourceRenderTableCellActionRowOptionsAction[];
+export interface ITableCellOptionsActionOperationsRow extends IResourceTableActionRowOptionsBase {
+  actions?: IResourceRenderTableActionRowOptionsAction[];
 }
 
 @TableCell<ITableCellOptionsActionOperationsRow>({

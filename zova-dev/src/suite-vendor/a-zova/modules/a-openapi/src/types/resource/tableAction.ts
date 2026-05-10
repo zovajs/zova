@@ -1,4 +1,4 @@
 import { IResourceTableActionBulkNameRecord } from './tableActionBulk.js';
-import { IResourceTableCellActionRowNameRecord } from './tableCellActionRow.js';
+import { IResourceTableActionRowNameRecord } from './tableCellActionRow.js';
 
-export type IResourceTableActionNameRecord = IResourceTableCellActionRowNameRecord & IResourceTableActionBulkNameRecord;
+export type IResourceTableActionNameRecord = IResourceTableActionRowNameRecord & IResourceTableActionBulkNameRecord;
