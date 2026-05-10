@@ -20,3 +20,7 @@ export function _order(order: number, level?: TypeSchemaOrderLevel) {
   const levelBase = OrderLevelBaseMap[level ?? 'business'];
   return levelBase + order;
 }
+
+export function _toLowerCaseFirstChar(str: string) {
+  return str.charAt(0).toLowerCase() + str.substring(1);
+}

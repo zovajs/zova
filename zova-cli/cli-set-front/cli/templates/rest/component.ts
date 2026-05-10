@@ -17,9 +17,7 @@ import type {
   IResourceTableActionBulkOptionsBase,
 } from 'zova-module-a-openapi';
 
-import { toLowerCaseFirstChar } from '@cabloy/word-utils';
-
-import { _generalSchemaRest } from './inner.ts';
+import { _generalSchemaRest, _toLowerCaseFirstChar } from './inner.ts';
 
 export function schemaRenderField<K extends keyof IResourceFormFieldRecord, T extends z.ZodType>(
   render: K,
@@ -64,7 +62,7 @@ export function schemaRenderTableActionRow<K extends keyof IResourceTableActionR
   options?: IResourceTableActionRowRecord[K],
 ): IResourceRenderTableActionRowOptionsAction {
   const pos = render.toString().indexOf(':action');
-  const name = pos > -1 ? toLowerCaseFirstChar(render.toString().substring(pos + ':action'.length)) : undefined;
+  const name = pos > -1 ? _toLowerCaseFirstChar(render.toString().substring(pos + ':action'.length)) : undefined;
   return { $$typeof: 'zova-jsx:actionRow', name, render, options };
 }
 
@@ -80,7 +78,7 @@ export function schemaRenderFormActionRow<K extends keyof IResourceFormActionRow
   options?: IResourceFormActionRowRecord[K],
 ): IResourceRenderFormActionRowOptionsAction {
   const pos = render.toString().indexOf(':action');
-  const name = pos > -1 ? toLowerCaseFirstChar(render.toString().substring(pos + ':action'.length)) : undefined;
+  const name = pos > -1 ? _toLowerCaseFirstChar(render.toString().substring(pos + ':action'.length)) : undefined;
   return { $$typeof: 'zova-jsx:actionRow', name, render, options };
 }
 
@@ -96,7 +94,7 @@ export function schemaRenderTableActionBulk<K extends keyof IResourceTableAction
   options?: IResourceTableActionBulkRecord[K],
 ): IResourceRenderTableActionBulkOptionsAction {
   const pos = render.toString().indexOf(':action');
-  const name = pos > -1 ? toLowerCaseFirstChar(render.toString().substring(pos + ':action'.length)) : undefined;
+  const name = pos > -1 ? _toLowerCaseFirstChar(render.toString().substring(pos + ':action'.length)) : undefined;
   return { $$typeof: 'zova-jsx:actionBulk', name, render, options };
 }
 
