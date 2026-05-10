@@ -9,7 +9,7 @@ import { dateFormatUtil } from '../../lib/utils.js';
 import { TypeDateFormatPreset } from '../../types/date.js';
 
 declare module 'zova-module-a-openapi' {
-  export interface IResourceComponentFormFieldRecord {
+  export interface IResourceFormFieldRecord {
     'basic-date:formFieldDate'?: IResourceFormFieldDateOptions;
   }
 }

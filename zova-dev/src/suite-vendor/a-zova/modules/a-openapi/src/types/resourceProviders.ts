@@ -3,7 +3,7 @@ import { IFormProviderBehaviors } from 'zova-module-a-form';
 
 import { IResourceComponentActionBulkRecord, IResourceComponentActionRowRecord } from './actions.js';
 import { IResourceComponentBlockRecord } from './blocks.js';
-import { IResourceComponentFormFieldRecord } from './formField.js';
+import { IResourceFormFieldRecord } from './resource/formField.js';
 import { IResourceTableCellRecord } from './tableCell.js';
 
 export type IResourceProvidersBlocks = {
@@ -11,7 +11,7 @@ export type IResourceProvidersBlocks = {
 };
 
 export type IResourceProvidersFormFields = {
-  [KEY in keyof IResourceComponentFormFieldRecord]?: TypeComponentRecordSelectorKeys<'formField'>;
+  [KEY in keyof IResourceFormFieldRecord]?: TypeComponentRecordSelectorKeys<'formField'>;
 };
 
 export type IResourceProvidersTableCells = {

@@ -5,10 +5,10 @@ import type { TypeRenderComponentJsx } from 'zova-jsx';
 import 'openapi3-ts/oas30';
 import 'openapi3-ts/oas31';
 import { IResourceComponentBlockOptionsBlock } from './blocks.js';
-import { IResourceComponentFormFieldRecord } from './formField.js';
-import { IResourceTableCellActionRowRecord } from './tableCell.js';
+import { IResourceFormFieldRecord } from './resource/formField.js';
+import { IResourceTableCellActionRowRecord } from './resource/tableCellActionRow.js';
 
-export interface ISchemaRenderComponentPresetRecord extends IResourceComponentFormFieldRecord {}
+export interface ISchemaRenderComponentPresetRecord extends IResourceFormFieldRecord {}
 
 export interface ISchemaObjectExtensionFieldRest {
   'blocks'?: IResourceComponentBlockOptionsBlock[];

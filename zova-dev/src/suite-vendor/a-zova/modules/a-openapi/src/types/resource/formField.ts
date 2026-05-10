@@ -1,6 +1,6 @@
 import { types } from 'typestyle';
 
-export interface IResourceComponentFormFieldRecord {}
+export interface IResourceFormFieldRecord {}
 
 export interface IResourceFormFieldOptionsBase {
   class?: any;

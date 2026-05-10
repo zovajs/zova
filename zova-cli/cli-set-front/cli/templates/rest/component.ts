@@ -1,7 +1,7 @@
 import type z from 'zod';
 import type { TypeRenderComponentJsx } from 'zova-jsx';
 import type {
-  IResourceComponentFormFieldRecord,
+  IResourceFormFieldRecord,
   TypeFormSchemaScene,
   IResourceTableCellActionRowRecordBoth,
   IResourceActionRowRecord,
@@ -16,9 +16,9 @@ import { toUpperCaseFirstChar } from '@cabloy/word-utils';
 
 import { _generalSchemaRest } from './inner.ts';
 
-export function schemaRenderField<K extends keyof IResourceComponentFormFieldRecord, T extends z.ZodType>(
+export function schemaRenderField<K extends keyof IResourceFormFieldRecord, T extends z.ZodType>(
   name: K,
-  options?: IResourceComponentFormFieldRecord[K],
+  options?: IResourceFormFieldRecord[K],
   scene?: TypeFormSchemaScene,
 ) {
   return function (schema: T): T {

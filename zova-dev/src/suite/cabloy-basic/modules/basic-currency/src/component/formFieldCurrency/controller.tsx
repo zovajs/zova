@@ -9,7 +9,7 @@ import { ControllerForm, ZFormFieldPreset, type IFormFieldComponentOptions } fro
 import { currencyFormat, currencyUpdate } from '../../lib/utils.js';
 
 declare module 'zova-module-a-openapi' {
-  export interface IResourceComponentFormFieldRecord {
+  export interface IResourceFormFieldRecord {
     'basic-currency:formFieldCurrency'?: IResourceFormFieldCurrencyOptions;
   }
 }

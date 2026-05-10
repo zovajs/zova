@@ -7,7 +7,7 @@ import { ControllerForm, ZFormField, type IFormFieldComponentOptions } from 'zov
 import { IResourceFormFieldInputOptions } from 'zova-module-basic-input';
 
 declare module 'zova-module-a-openapi' {
-  export interface IResourceComponentFormFieldRecord {
+  export interface IResourceFormFieldRecord {
     'basic-captcha:formFieldCaptcha'?: IResourceFormFieldCaptchaOptions;
   }
 

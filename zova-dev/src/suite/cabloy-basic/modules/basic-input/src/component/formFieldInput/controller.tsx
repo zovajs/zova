@@ -7,7 +7,7 @@ import { Controller } from 'zova-module-a-bean';
 import { ZFormField, type HTMLInputElementType, type IFormFieldComponentOptions } from 'zova-module-a-form';
 
 declare module 'zova-module-a-openapi' {
-  export interface IResourceComponentFormFieldRecord {
+  export interface IResourceFormFieldRecord {
     'basic-input:formFieldInput'?: IResourceFormFieldInputOptions;
   }
 }

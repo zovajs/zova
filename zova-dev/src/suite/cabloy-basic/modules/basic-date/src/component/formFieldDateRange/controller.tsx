@@ -8,7 +8,7 @@ import { ZFormField, type IFormFieldComponentOptions } from 'zova-module-a-form'
 import { ZDateRange } from '../../.metadata/component/dateRange.js';
 
 declare module 'zova-module-a-openapi' {
-  export interface IResourceComponentFormFieldRecord {
+  export interface IResourceFormFieldRecord {
     'basic-date:formFieldDateRange'?: IResourceFormFieldDateRangeOptions;
   }
 }
