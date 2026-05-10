@@ -19,7 +19,7 @@ export interface IResourceTableActionRowOptionsBase {
   resource?: string;
   id?: TableIdentity;
   permission?: {
-    action?: IResourceFormActionRowNameRecord & IResourceTableActionRowNameRecord;
+    action?: keyof (IResourceFormActionRowNameRecord & IResourceTableActionRowNameRecord);
     public?: boolean;
     formScene?: TypeFormScene | TypeFormScene[];
   };
