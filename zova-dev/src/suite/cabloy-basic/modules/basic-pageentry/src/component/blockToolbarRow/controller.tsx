@@ -1,11 +1,23 @@
-import type { IJsxRenderContextPageEntry, IPermissionHint } from 'zova-module-a-openapi';
+import type {
+  IResourceBlockOptionsBase,
+  IJsxRenderContextPageEntry,
+  IResourceRenderFormActionRowOptionsAction,
+  IPermissionHint,
+} from 'zova-module-a-openapi';
 
 import { VNode } from 'vue';
-import { BeanControllerBase, IComponentOptions, Use } from 'zova';
+import { BeanControllerBase, type IComponentOptions, Use } from 'zova';
 import { Controller } from 'zova-module-a-bean';
-import { IResourceBlockOptionsToolbarRow } from 'zova-module-basic-openapi';
 
-export interface ControllerBlockToolbarRowProps extends IResourceBlockOptionsToolbarRow {}
+declare module 'zova-module-a-openapi' {
+  export interface IResourceBlockRecord {
+    'basic-pageentry:blockToolbarRow'?: ControllerBlockToolbarRowProps;
+  }
+}
+
+export interface ControllerBlockToolbarRowProps extends IResourceBlockOptionsBase {
+  actions?: IResourceRenderFormActionRowOptionsAction[];
+}
 
 @Controller()
 export class ControllerBlockToolbarRow extends BeanControllerBase {
