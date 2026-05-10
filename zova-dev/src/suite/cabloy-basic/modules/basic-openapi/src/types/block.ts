@@ -8,8 +8,6 @@ import type {
 import 'zova-module-a-openapi';
 import { TableIdentity } from 'table-identity';
 
-export interface IResourceBlockOptionsPager extends IResourceBlockOptionsBase {}
-
 export interface IResourceBlockOptionsPageEntry extends IResourceBlockOptionsBase {
   blocks?: IResourceComponentBlockOptionsBlock[];
   resource?: string;
@@ -29,7 +27,7 @@ declare module 'zova-module-a-openapi' {
     // BlockFilter?: IResourceBlockOptionsFilter;
     // BlockToolbarBulk?: IResourceBlockOptionsToolbarBulk;
     // BlockTable?: IResourceBlockOptionsTable;
-    BlockPager?: IResourceBlockOptionsPager;
+    // BlockPager?: IResourceBlockOptionsPager;
     BlockPageEntry?: IResourceBlockOptionsPageEntry;
     BlockToolbarRow?: IResourceBlockOptionsToolbarRow;
     BlockForm?: IResourceBlockOptionsForm;

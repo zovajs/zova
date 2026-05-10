@@ -1,10 +1,15 @@
-import type { IJsxRenderContextPage } from 'zova-module-a-openapi';
+import type { IResourceBlockOptionsBase, IJsxRenderContextPage } from 'zova-module-a-openapi';
 
-import { BeanControllerBase, IComponentOptions, Use } from 'zova';
+import { BeanControllerBase, type IComponentOptions, Use } from 'zova';
 import { Controller } from 'zova-module-a-bean';
-import { IResourceBlockOptionsPager } from 'zova-module-basic-openapi';
 
-export interface ControllerBlockPagerProps extends IResourceBlockOptionsPager {}
+declare module 'zova-module-a-openapi' {
+  export interface IResourceBlockRecord {
+    'basic-page:blockPager'?: ControllerBlockPagerProps;
+  }
+}
+
+export interface ControllerBlockPagerProps extends IResourceBlockOptionsBase {}
 
 @Controller()
 export class ControllerBlockPager extends BeanControllerBase {
