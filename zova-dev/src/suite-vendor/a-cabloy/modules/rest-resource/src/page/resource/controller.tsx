@@ -5,7 +5,6 @@ import { ZovaJsx } from 'zova-jsx';
 import { Controller } from 'zova-module-a-bean';
 import { $QueryAutoLoad } from 'zova-module-a-model';
 import { ITableProvider } from 'zova-module-a-openapi';
-import { IResourceBlockOptionsPage } from 'zova-module-basic-openapi';
 import { ZPage } from 'zova-module-home-base';
 
 import type { ModelResource } from '../../model/resource.js';
@@ -56,7 +55,7 @@ export class ControllerPageResource extends BeanControllerPageBase {
         { key: index },
         {
           resource: this.resource,
-        } satisfies IResourceBlockOptionsPage,
+        },
         block.options,
       );
       const domBlock = this.jsxZova.render(block.render!, options);

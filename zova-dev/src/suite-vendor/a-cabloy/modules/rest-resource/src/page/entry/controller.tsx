@@ -9,7 +9,6 @@ import { ZovaJsx } from 'zova-jsx';
 import { Controller } from 'zova-module-a-bean';
 import { formMetaFromFormScene } from 'zova-module-a-form';
 import { $QueryAutoLoad } from 'zova-module-a-model';
-import { IResourceBlockOptionsPageEntry } from 'zova-module-basic-openapi';
 import { ZPage } from 'zova-module-home-base';
 
 import type { ModelResource } from '../../model/resource.js';
@@ -76,7 +75,7 @@ export class ControllerPageEntry extends BeanControllerPageBase {
           resource: this.resource,
           id: this.entryId,
           formScene: this.formScene,
-        } satisfies IResourceBlockOptionsPageEntry,
+        },
         block.options,
       );
       const domBlock = this.jsxZova.render(block.render!, options);
