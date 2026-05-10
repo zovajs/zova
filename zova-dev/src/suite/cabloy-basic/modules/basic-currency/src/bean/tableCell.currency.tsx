@@ -6,6 +6,12 @@ import { TableCell, type IJsxRenderContextTableCell, type ITableCellRender, type
 
 import { currencyFormat } from '../lib/utils.js';
 
+declare module 'zova-module-a-openapi' {
+  export interface IResourceComponentTableCellRecord {
+    'basic-currency:currency'?: ITableCellOptionsCurrency;
+  }
+}
+
 export interface ITableCellOptionsCurrency extends IResourceTableCellOptionsBase, CurrencyOptions {}
 
 @TableCell<ITableCellOptionsCurrency>()
