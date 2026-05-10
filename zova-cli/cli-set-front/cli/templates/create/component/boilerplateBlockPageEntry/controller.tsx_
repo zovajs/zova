@@ -3,6 +3,12 @@ import type { IResourceBlockOptionsBase, IJsxRenderContextPageEntry } from 'zova
 import { BeanControllerBase, type IComponentOptions, Use } from 'zova';
 import { Controller } from 'zova-module-a-bean';
 
+declare module 'zova-module-a-openapi' {
+  export interface IResourceBlockRecord {
+    '<%=argv.module%>:<%=argv.nameMeta.full%>'?: Controller<%=argv.nameMeta.fullCapitalize%>Props;
+  }
+}
+
 export interface Controller<%=argv.nameMeta.fullCapitalize%>Props extends IResourceBlockOptionsBase {}
 
 @Controller()
