@@ -4,6 +4,12 @@ import { BeanBase } from 'zova';
 import { ZIcon } from 'zova-module-a-icon';
 import { TableCell, type IJsxRenderContextTableCell, type ITableCellRender, type NextTableCellRender } from 'zova-module-a-table';
 
+declare module 'zova-module-a-openapi' {
+  export interface IResourceComponentTableCellRecord {
+    'demo-basic:test'?: ITableCellOptionsTest;
+  }
+}
+
 export interface ITableCellOptionsTest extends IResourceTableCellOptionsBase {
   iconPrefix?: string;
 }
