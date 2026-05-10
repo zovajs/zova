@@ -1,4 +1,4 @@
-import type { IResourceBlockOptionsBase, IJsxRenderContextPage, IFormMeta, ISchemaRenderComponentLayoutOptions } from 'zova-module-a-openapi';
+import type { IResourceBlockOptionsBase, IJsxRenderContextPage, IFormMeta, IResourceFormFieldLayoutOptions } from 'zova-module-a-openapi';
 
 import { isNilOrEmptyString } from '@cabloy/utils';
 import { BeanControllerBase, type IComponentOptions, Use } from 'zova';
@@ -19,7 +19,7 @@ export class ControllerBlockFilter extends BeanControllerBase {
   static $componentOptions: IComponentOptions = { inheritAttrs: false, deepExtendDefault: true };
 
   formMeta: IFormMeta;
-  formFieldLayout: ISchemaRenderComponentLayoutOptions;
+  formFieldLayout: IResourceFormFieldLayoutOptions;
 
   @Use({ injectionScope: 'host' })
   $$renderContext: IJsxRenderContextPage;

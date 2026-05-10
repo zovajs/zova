@@ -5,3 +5,4 @@ export * from './formField.js';
 export * from './formActionRow.js';
 export * from './block.js';
 export * from './formFieldLayout.js';
+export * from './tableAction.js';

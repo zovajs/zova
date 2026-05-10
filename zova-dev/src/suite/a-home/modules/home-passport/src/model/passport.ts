@@ -10,7 +10,7 @@ import type {
 import { combineQueries, isNil } from '@cabloy/utils';
 import { SchemaObject } from 'openapi3-ts/oas31';
 import { BeanModelBase, Model } from 'zova-module-a-model';
-import { IPermissionHint, IResourceActionTableRecord, TypeOpenapiPermissions } from 'zova-module-a-openapi';
+import { IPermissionHint, IResourceTableActionNameRecord, TypeOpenapiPermissions } from 'zova-module-a-openapi';
 import { ApiApiHomeUserPassportloginOauthPath, OpenApiBaseURL } from 'zova-module-home-api';
 
 export interface IModelOptionsPassport extends IDecoratorModelOptions {}
@@ -187,7 +187,7 @@ export class ModelPassport extends BeanModelBase {
 
   public checkPermission(
     permissions: TypeOpenapiPermissions | undefined,
-    actionName: keyof IResourceActionTableRecord,
+    actionName: keyof IResourceTableActionNameRecord,
     permissionHint?: IPermissionHint,
   ): boolean {
     if (permissionHint?.public) return true;
