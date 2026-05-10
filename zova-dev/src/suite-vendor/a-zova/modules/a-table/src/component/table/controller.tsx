@@ -1,20 +1,13 @@
-import type {
-  IResourceActionRowOptionsBase,
-  ISchemaObjectExtensionFieldRest,
-  ITableProvider,
-  TypeTableCellRenderComponent,
-  TypeTableCellRenderComponentProvider,
-} from 'zova-module-a-openapi';
+import type { IResourceTableCellActionRowOptionsBase, ISchemaObjectExtensionFieldRest, TypeTableCellRenderComponent } from 'zova-module-a-openapi';
 
 import { celEnvBase, isNilOrEmptyString } from '@cabloy/utils';
 import { CellContext, createColumnHelper, getCoreRowModel, TableOptionsWithReactiveData } from '@tanstack/vue-table';
 import { SchemaObject } from 'openapi3-ts/oas31';
 import { classes } from 'typestyle';
 import { VNode } from 'vue';
-import { appResource, cast, deepEqual, deepExtend, objectAssignReactive, Use } from 'zova';
+import { appResource, cast, deepEqual, deepExtend, objectAssignReactive } from 'zova';
 import { isJsxComponent, ZovaJsx } from 'zova-jsx';
 import { Controller } from 'zova-module-a-bean';
-import { BeanResourceProviders } from 'zova-module-a-openapi';
 
 import type { ITableMeta, TypeColumn, TypeTable, TypeTableGetColumns } from '../../types/table.js';
 import type { IDecoratorTableCellOptions, IJsxRenderContextTableCell, ITableCellRender } from '../../types/tableCell.js';
@@ -33,7 +26,6 @@ import {
 export interface ControllerTableProps<TData extends {} = {}> {
   data?: TData[];
   schema?: SchemaObject;
-  tableProvider?: ITableProvider;
   tableScope?: ITableScope;
   getColumns?: TypeTableGetColumns<TData>;
   slotDefault?: (table: ControllerTable<TData>) => VNode;
@@ -46,23 +38,15 @@ export class ControllerTable<TData extends {} = {}> extends BeanControllerTableB
   properties: SchemaObject[] | undefined;
   columns: TypeColumn<TData>[];
   table: TypeTable<TData>;
-  tableProvider: ITableProvider;
   tableMeta: ITableMeta<TData>;
   zovaJsx: ZovaJsx;
   columnCelEnv: typeof celEnvBase;
 
-  @Use()
-  $$beanResourceProviders: BeanResourceProviders;
-
   protected async __init__() {
     this.bean._setBean('$$table', this);
-    this.tableProvider = this.$computed(() => {
-      const tableProvider = this.$$beanResourceProviders.tableProvider;
-      return this.$props.tableProvider ? deepExtend({}, tableProvider, this.$props.tableProvider) : tableProvider;
-    });
     // jsx
     this.columnCelEnv = this._getColumnCelEnv();
-    this.zovaJsx = this.bean._newBeanSimple(ZovaJsx, false, this.tableProvider.components, this.columnCelEnv);
+    this.zovaJsx = this.bean._newBeanSimple(ZovaJsx, false, undefined, this.columnCelEnv);
     // properties
     this._createProperties();
     // tableMeta/columns
@@ -249,7 +233,11 @@ export class ControllerTable<TData extends {} = {}> extends BeanControllerTableB
     };
   }
 
-  public cellRender(render: TypeTableCellRenderComponent, columnProps: IResourceActionRowOptionsBase, renderContext: IJsxRenderContextTableCell) {
+  public cellRender(
+    render: TypeTableCellRenderComponent,
+    columnProps: IResourceTableCellActionRowOptionsBase,
+    renderContext: IJsxRenderContextTableCell,
+  ) {
     // render
     const cellScope = renderContext.$celScope;
     // renderProvider
@@ -284,7 +272,7 @@ export class ControllerTable<TData extends {} = {}> extends BeanControllerTableB
     columnProps: ITableCellRenderColumnProps | undefined,
     columnScope: ITableColumnScope | undefined,
     cellContext: CellContext<TData, any>,
-    renderProvider: TypeTableCellRenderComponentProvider,
+    renderProvider: TypeTableCellRenderComponent,
     beanInstance: ITableCellRender | undefined,
     cellProps: any | undefined,
     cellScope: ITableCellScope | undefined,
@@ -317,7 +305,7 @@ export class ControllerTable<TData extends {} = {}> extends BeanControllerTableB
     columnProps: ITableCellRenderColumnProps | undefined,
     columnScope: ITableColumnScope | undefined,
     cellContext: CellContext<TData, any>,
-    renderProvider: TypeTableCellRenderComponentProvider,
+    renderProvider: TypeTableCellRenderComponent,
     beanInstance: ITableCellRender | undefined,
     cellProps: any | undefined,
     cellScope: ITableCellScope | undefined,
@@ -332,7 +320,7 @@ export class ControllerTable<TData extends {} = {}> extends BeanControllerTableB
       cellScope = objectAssignReactive({}, columnScope, { value, fallbackValue })!;
     }
     // render: text
-    if (renderProvider === 'text') {
+    if (renderProvider === ('text' as TypeTableCellRenderComponent)) {
       return isNilOrEmptyString(value) ? fallbackValue : value;
     }
     // renderContext
@@ -410,13 +398,7 @@ export class ControllerTable<TData extends {} = {}> extends BeanControllerTableB
   //   return isJsxComponent(render) ? cast(render).type : render;
   // }
 
-  public getRenderProvider(render: TypeTableCellRenderComponent | undefined): TypeTableCellRenderComponentProvider {
-    if (!render || render === ('text' as TypeTableCellRenderComponentProvider)) return 'text';
-    if (typeof render === 'string') {
-      const render2 = this.tableProvider.components?.[render];
-      if (!render2) throw new Error(`not found table cell component of: ${render}`);
-      return render2;
-    }
-    return render;
+  public getRenderProvider(render: TypeTableCellRenderComponent | undefined): TypeTableCellRenderComponent {
+    return render || ('text' as TypeTableCellRenderComponent);
   }
 }
