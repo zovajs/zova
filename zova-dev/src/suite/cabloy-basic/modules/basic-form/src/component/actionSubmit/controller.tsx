@@ -1,13 +1,18 @@
-import type { IJsxRenderContextPageEntry } from 'zova-module-a-openapi';
+import type { IJsxRenderContextPageEntry, IResourceFormActionRowOptionsBase } from 'zova-module-a-openapi';
 
 import { isNil } from '@cabloy/utils';
 import { classes } from 'typestyle';
-import { BeanControllerBase, cast, IComponentOptions, Use } from 'zova';
+import { BeanControllerBase, cast, type IComponentOptions, Use } from 'zova';
 import { Controller } from 'zova-module-a-bean';
 import { BeanControllerFormBase } from 'zova-module-a-form';
-import { IResourceActionRowOptionsSubmit } from 'zova-module-basic-openapi';
 
-export interface ControllerActionSubmitProps extends IResourceActionRowOptionsSubmit {}
+declare module 'zova-module-a-openapi' {
+  export interface IResourceFormActionRowRecord {
+    'basic-form:actionSubmit'?: ControllerActionSubmitProps;
+  }
+}
+
+export interface ControllerActionSubmitProps extends IResourceFormActionRowOptionsBase {}
 
 @Controller()
 export class ControllerActionSubmit extends BeanControllerBase {

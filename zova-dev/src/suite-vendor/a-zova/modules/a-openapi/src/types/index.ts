@@ -13,5 +13,4 @@ export * from './formField.js';
 export * from './resourceProviders.js';
 export * from './order.js';
 export * from './captcha.js';
-export * from './form.js';
 export * from './resource/index.js';

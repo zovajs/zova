@@ -4,9 +4,9 @@ import type { TypeFormScene } from './formMeta.ts';
 
 // export interface IResourceActionBulkNameRecord {}
 
-export interface IResourceActionRowNameRecord {}
+// export interface IResourceActionRowNameRecord {}
 
-export interface IResourceActionTableNameRecord extends IResourceActionBulkNameRecord, IResourceActionRowNameRecord {}
+// export interface IResourceActionTableNameRecord extends IResourceActionBulkNameRecord, IResourceActionRowNameRecord {}
 
 // export interface IResourceComponentActionBulkRecord {}
 
