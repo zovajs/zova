@@ -2,7 +2,6 @@ import type {
   IResourceBlockOptionsBase,
   IJsxRenderContextPage,
   IResourceRenderBlockOptionsBlock,
-  ITableProvider,
   IPageScope,
   ITablePaged,
   ITableQuery,
@@ -35,8 +34,6 @@ export class ControllerBlockPage<TData extends {} = {}> extends BeanControllerBa
   static $componentOptions: IComponentOptions = { inheritAttrs: false, deepExtendDefault: true };
 
   tableRef: BeanControllerTableBase;
-
-  tableProvider: ITableProvider;
 
   jsxZova: ZovaJsx;
   jsxCelScope: IPageScope;

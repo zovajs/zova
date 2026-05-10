@@ -1,13 +1,13 @@
 import type { TableIdentity } from 'table-identity';
 import type { DataMutation, IDecoratorModelOptions } from 'zova-module-a-model';
-import type { IFormMeta, IFormProvider, ITableProvider, ITableQuery, ITableRes, TypeOpenapiPermissions } from 'zova-module-a-openapi';
+import type { IFormMeta, IFormProvider, ITableQuery, ITableRes, TypeOpenapiPermissions } from 'zova-module-a-openapi';
 
 import { hashkey, isNil } from '@cabloy/utils';
 import { SchemaObject } from 'openapi3-ts/oas31';
-import { Use } from 'zova';
+import { UseScope } from 'zova';
 import { formSceneFromFormMeta } from 'zova-module-a-form';
 import { $QueryAutoLoad, BeanModelBase, Model } from 'zova-module-a-model';
-import { BeanResourceProviders, SymbolOpenapiSchemaName } from 'zova-module-a-openapi';
+import { SymbolOpenapiSchemaName, ScopeModuleAOpenapi } from 'zova-module-a-openapi';
 
 export interface IModelOptionsResource extends IDecoratorModelOptions {}
 
@@ -19,7 +19,6 @@ export class ModelResource<Entity = any, EntityCreate = Partial<Entity>, EntityU
   public resourceApi: string;
   public permissions?: TypeOpenapiPermissions;
   public formProvider: IFormProvider;
-  public tableProvider: ITableProvider;
   public schemaView?: SchemaObject;
   public schemaCreate?: SchemaObject;
   public schemaUpdate?: SchemaObject;
@@ -27,8 +26,8 @@ export class ModelResource<Entity = any, EntityCreate = Partial<Entity>, EntityU
   public schemaRow?: SchemaObject;
   public schemaPages?: SchemaObject;
 
-  @Use()
-  $$beanResourceProviders: BeanResourceProviders;
+  @UseScope()
+  $$scopeOpenapi: ScopeModuleAOpenapi;
 
   protected async __init__(resource: string) {
     if (!resource) throw new Error('resource not specified');
@@ -39,10 +38,7 @@ export class ModelResource<Entity = any, EntityCreate = Partial<Entity>, EntityU
       return permissions.data;
     });
     this.formProvider = this.$computed(() => {
-      return this.$$beanResourceProviders.formProvider;
-    });
-    this.tableProvider = this.$computed(() => {
-      return this.$$beanResourceProviders.tableProvider;
+      return this.$$scopeOpenapi.config.formProvider;
     });
     this.schemaView = this.$computed(() => {
       return this.apiSchemasView.responseBody;
