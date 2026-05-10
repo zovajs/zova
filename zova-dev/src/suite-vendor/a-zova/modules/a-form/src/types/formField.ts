@@ -4,7 +4,7 @@ import type z from 'zod';
 import type { IBehaviorItem } from 'zova-module-a-behavior';
 import type {
   IJsxRenderContextBase,
-  ISchemaRenderComponentLayoutOptions,
+  IResourceFormFieldLayoutOptions,
   ISchemaRenderComponentPresetRecord,
   TypeFormFieldRenderComponent,
   TypeFormFieldRenderComponentProvider,
@@ -29,7 +29,7 @@ export interface IFormFieldScope<TParentData = {}> {
 }
 
 export interface IFormFieldLayoutOptionsBase {
-  layout?: ISchemaRenderComponentLayoutOptions;
+  layout?: IResourceFormFieldLayoutOptions;
 }
 
 export interface IFormFieldSysOptionsBase<TParentData = {}> {

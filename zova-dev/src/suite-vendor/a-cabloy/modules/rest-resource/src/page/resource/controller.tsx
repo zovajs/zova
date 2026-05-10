@@ -4,7 +4,6 @@ import { BeanControllerPageBase, deepExtend, Use, usePrepareArg } from 'zova';
 import { ZovaJsx } from 'zova-jsx';
 import { Controller } from 'zova-module-a-bean';
 import { $QueryAutoLoad } from 'zova-module-a-model';
-import { ITableProvider } from 'zova-module-a-openapi';
 import { ZPage } from 'zova-module-home-base';
 
 import type { ModelResource } from '../../model/resource.js';
@@ -15,8 +14,6 @@ export const ControllerPageResourceSchemaParams = z.object({
 
 @Controller()
 export class ControllerPageResource extends BeanControllerPageBase {
-  tableProvider: ITableProvider;
-
   jsxZova: ZovaJsx;
 
   @Use({ beanFullName: 'rest-resource.model.resource' })
@@ -29,9 +26,6 @@ export class ControllerPageResource extends BeanControllerPageBase {
   }
 
   protected async __init__() {
-    this.tableProvider = this.$computed(() => {
-      return this.$$modelResource.tableProvider;
-    });
     // jsx
     this._prepareJsx();
     // load schema/data
@@ -39,7 +33,7 @@ export class ControllerPageResource extends BeanControllerPageBase {
   }
 
   private _prepareJsx() {
-    this.jsxZova = this.bean._newBeanSimple(ZovaJsx, false, this.tableProvider.components);
+    this.jsxZova = this.bean._newBeanSimple(ZovaJsx, false);
   }
 
   get schemaRow() {

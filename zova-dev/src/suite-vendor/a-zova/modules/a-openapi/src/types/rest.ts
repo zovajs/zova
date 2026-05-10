@@ -4,14 +4,14 @@ import type { TypeRenderComponentJsx } from 'zova-jsx';
 
 import 'openapi3-ts/oas30';
 import 'openapi3-ts/oas31';
-import { IResourceComponentBlockOptionsBlock } from './blocks.js';
+import { IResourceRenderBlockOptionsBlock } from './resource/block.js';
 import { IResourceFormFieldRecord } from './resource/formField.js';
-import { IResourceTableActionRowRecord } from './resource/tableCellActionRow.js';
+import { IResourceTableActionRowRecord } from './resource/tableActionRow.js';
 
 export interface ISchemaRenderComponentPresetRecord extends IResourceFormFieldRecord {}
 
 export interface ISchemaObjectExtensionFieldRest {
-  'blocks'?: IResourceComponentBlockOptionsBlock[];
+  'blocks'?: IResourceRenderBlockOptionsBlock[];
   //
   'fieldSource'?: string;
   'visible'?: boolean;

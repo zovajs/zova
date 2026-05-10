@@ -1,9 +1,9 @@
 import type { TableIdentity } from 'table-identity';
 
-import { IResourceActionTableRecord } from './actions.js';
+import { IResourceTableActionRecord } from './resource/tableAction.js';
 
 export type IOpenapiPermissionModeActionActions = {
-  [K in keyof IResourceActionTableRecord]?: IResourceActionTableRecord[K];
+  [K in keyof IResourceTableActionRecord]?: boolean; // IResourceTableActionRecord[K];
 };
 
 export interface IOpenapiPermissions {
