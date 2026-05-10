@@ -4,8 +4,6 @@ export interface IResourceActionRowOptionsView extends IResourceActionRowOptions
 
 export interface IResourceActionRowOptionsUpdate extends IResourceActionRowOptionsBase {}
 
-export interface IResourceActionRowOptionsDelete extends IResourceActionRowOptionsBase {}
-
 export interface IResourceActionRowOptionsSubmit extends IResourceActionRowOptionsBase {}
 export interface IResourceActionRowOptionsBack extends IResourceActionRowOptionsBase {}
 
@@ -17,7 +15,7 @@ declare module 'zova-module-a-openapi' {
   export interface IResourceComponentActionRowRecord {
     ActionView?: IResourceActionRowOptionsView;
     ActionUpdate?: IResourceActionRowOptionsUpdate;
-    ActionDelete?: IResourceActionRowOptionsDelete;
+    // ActionDelete?: IResourceActionRowOptionsDelete;
     ActionOperationsRow?: IResourceActionRowOptionsOperationsRow;
     ActionSubmit?: IResourceActionRowOptionsSubmit;
     ActionBack?: IResourceActionRowOptionsBack;

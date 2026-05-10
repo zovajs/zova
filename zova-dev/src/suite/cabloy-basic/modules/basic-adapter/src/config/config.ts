@@ -23,14 +23,11 @@ export const config = (_sys: ZovaSys) => {
     } as any,
     tableCells: {},
     table: {
-      actionsBulk: {
-        ActionCreate: 'basic-table:actionCreate',
-      },
+      actionsBulk: {},
       actionsRow: {
         ActionOperationsRow: 'basic-table.tableCell.actionOperationsRow',
         ActionView: 'basic-table.tableCell.actionView',
         ActionUpdate: 'basic-table.tableCell.actionUpdate',
-        ActionDelete: 'basic-table.tableCell.actionDelete',
       },
     },
     form: {
