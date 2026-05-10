@@ -2,7 +2,7 @@ import type { ZovaConfigMeta, ZovaMetaAppMode, ZovaMetaFlavor, ZovaMetaMode } fr
 import type { ZovaViteConfigOptions } from 'zova-vite';
 
 import { BeanCliBase } from '@cabloy/cli';
-import { camelToKebab, replaceTemplate } from '@cabloy/word-utils';
+import { camelToKebab } from '@cabloy/word-utils';
 import fse from 'fs-extra';
 import path from 'node:path';
 import { rimraf } from 'rimraf';
@@ -135,24 +135,6 @@ export class CliBinBuildRest extends BeanCliBase {
     await this.template.renderDir(srcDir, templateDir);
   }
 
-  async _prepareResources_(context: IBinBuildRestContext) {
-    // package.json
-    await this._prepareResourcesPackage(context);
-    // index.ts
-    await this._prepareResourcesIndex(context);
-  }
-
-  _prepareBundleModules() {
-    const modules: string[] = [];
-    for (const module of this.modulesMeta.modulesArray) {
-      const moduleRoot = module.root.replaceAll('\\', '/');
-      if (moduleRoot.includes('/src/module/') || moduleRoot.includes('/src/suite/')) {
-        modules.push(module.info.fullName);
-      }
-    }
-    return modules;
-  }
-
   async _buildTs({ srcDir, outDir }: IBinBuildRestContext) {
     // entry
     const entry = path.join(srcDir, 'index.ts');
@@ -223,114 +205,6 @@ export class CliBinBuildRest extends BeanCliBase {
     await fse.copy(outDir, outReleasesDir);
     // copy
     _copyToTarget(outDir, process.env.BUILD_REST_COPY_DIST, bundleNameCopy);
-  }
-
-  async _prepareResourcesPackage({ projectPath, flavor, bundleName, srcDir }: IBinBuildRestContext) {
-    const mode: ZovaMetaMode = 'production';
-    const appMode: ZovaMetaAppMode = 'ssr';
-    const configMeta: ZovaConfigMeta = { flavor, mode, appMode };
-    const configOptions: ZovaViteConfigOptions = {
-      appDir: projectPath,
-      runtimeDir: '.zova',
-    };
-    const configUtils = createConfigUtils(configMeta, configOptions);
-    // env
-    const env = configUtils.loadEnvs();
-    // package.json
-    const pkgContent = replaceTemplate(__template_package, { Name: bundleName, Version: env.APP_VERSION });
-    await fse.writeFile(path.join(srcDir, 'package.json'), pkgContent!);
-  }
-
-  async _prepareResourcesIndex({ srcDir, projectPath }: IBinBuildRestContext) {
-    let indexContent = `import type { IIconRecord } from 'zova-module-a-icon';
-export type { IIconRecord } from 'zova-module-a-icon';
-import type { TypePagePathSchema } from 'zova-module-a-router';
-export type { IPagePathRecord } from 'zova-module-a-router';
-import type { IActionRecord, TypeActionOptions } from 'zova-module-a-action';
-export type { IActionRecord } from 'zova-module-a-action';
-import type { IVonaComponentRecord, TypeComponentOptions } from 'zova-module-a-bean';
-export type { IVonaComponentRecord } from 'zova-module-a-bean';
-export type {
-  IResourceComponentActionBulkRecord,
-  IResourceComponentBlockRecord,
-  IResourceFormFieldRecord,
-  IResourceTableCellRecord,
-  ISchemaRenderComponentLayoutOptions,
-} from 'zova-module-a-openapi';
-`;
-    indexContent += await this._prepareResourcesIndex_rest(srcDir);
-    indexContent += await this._prepareResourcesIndex_icons(srcDir);
-    indexContent += await this._prepareResourcesIndex_pages(srcDir);
-    indexContent += await this._prepareResourcesIndex_providers(srcDir, projectPath);
-    await fse.writeFile(path.join(srcDir, 'index.ts'), indexContent);
-  }
-
-  async _prepareResourcesIndex_rest(srcDir: string) {
-    let content = '';
-    for (const module of this.modulesMeta.modulesArray) {
-      const restDir = path.join(module.root, 'rest');
-      if (!fse.existsSync(restDir)) continue;
-      let tempDir;
-      if (module.info.node_modules) {
-        tempDir = path.join(srcDir, 'modules', module.info.relativeName, 'rest');
-        await fse.copy(restDir, tempDir);
-      } else {
-        tempDir = path.join(module.root, 'rest');
-      }
-      const restIndexFile = path.join(tempDir, 'index.ts');
-      let restIndexFileRelative = path.relative(srcDir, restIndexFile);
-      if (!restIndexFileRelative.startsWith('.')) {
-        restIndexFileRelative = `./${restIndexFileRelative}`;
-      }
-      content += `export * from '${restIndexFileRelative.replaceAll('\\', '/')}';\n`;
-    }
-    return content;
-  }
-
-  async _prepareResourcesIndex_icons(_srcDir: string) {
-    const content = `export function $iconName<K extends keyof IIconRecord>(name: K): any {
-  return name;
-}
-`;
-    return content;
-  }
-
-  async _prepareResourcesIndex_providers(_srcDir: string, projectPath: string) {
-    // openapi
-    const dirBasicOpenapi = path.join(projectPath, './src/suite/cabloy-basic/modules/basic-openapi');
-    const dirStartOpenapi = path.join(projectPath, './src/suite/cabloy-start/modules/start-openapi');
-    let content = '';
-    if (fse.existsSync(dirBasicOpenapi)) {
-      content += `import 'zova-module-basic-openapi';\n`;
-    } else if (fse.existsSync(dirStartOpenapi)) {
-      content += `import 'zova-module-start-openapi';\n`;
-    }
-    // actions
-    content += `export function Action<K extends keyof IActionRecord>(options: TypeActionOptions<K>) {
-  if(!options.name) throw new Error('should specify the action name');
-  return options.name.replace(':','.action.');
-}
-`;
-    // components
-    content += `export function Component<K extends keyof IVonaComponentRecord>(options: TypeComponentOptions<K>) {
-  if (!options.name) throw new Error('should specify the component name');
-  return options.name;
-}
-`;
-    return content;
-  }
-
-  async _prepareResourcesIndex_pages(_srcDir: string) {
-    const content = `declare module 'zova-module-a-router' {
-  export interface IPagePathRecord {
-    '/': TypePagePathSchema<undefined, undefined>;
-    'presetLogin': TypePagePathSchema<undefined, undefined>;
-    'presetErrorExpired': TypePagePathSchema<undefined, undefined>;
-    'presetResource': TypePagePathSchema<undefined, undefined>;
-  }
-}
-`;
-    return content;
   }
 }
 
