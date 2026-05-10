@@ -187,11 +187,12 @@ export class ModelPassport extends BeanModelBase {
 
   public checkPermission(
     permissions: TypeOpenapiPermissions | undefined,
-    actionName: keyof (IResourceTableActionNameRecord & IResourceFormActionRowNameRecord),
+    actionName?: keyof (IResourceTableActionNameRecord & IResourceFormActionRowNameRecord),
     permissionHint?: IPermissionHint,
   ): boolean {
     if (permissionHint?.public) return true;
     const permissionAction = permissionHint?.action ?? actionName;
+    if (!permissionAction) return true;
     if (isNil(permissions)) return false;
     if (permissions === false) return false;
     if (permissions === true) return true;

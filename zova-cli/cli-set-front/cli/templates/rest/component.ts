@@ -2,17 +2,21 @@ import type z from 'zod';
 import type { TypeRenderComponentJsx } from 'zova-jsx';
 import type {
   IResourceFormFieldRecord,
+  IResourceTableCellRecord,
+  IResourceTableActionRowRecord,
+  IResourceFormActionRowRecord,
   TypeFormSchemaScene,
-  IResourceTableActionRowRecordBoth,
-  IResourceActionRowRecord,
+  IResourceRenderFormActionRowOptionsAction,
   IResourceComponentActionRowOptionsAction,
   IResourceActionBulkRecord,
   IResourceComponentActionBulkOptionsAction,
   IResourceComponentBlockRecord,
   IResourceComponentBlockOptionsBlock,
+  IResourceTableActionRowOptionsBase,
+  IResourceFormActionRowOptionsBase,
 } from 'zova-module-a-openapi';
 
-import { toUpperCaseFirstChar } from '@cabloy/word-utils';
+import { toLowerCaseFirstChar, toUpperCaseFirstChar } from '@cabloy/word-utils';
 
 import { _generalSchemaRest } from './inner.ts';
 
@@ -34,10 +38,7 @@ export function schemaRenderFieldJsx<T extends z.ZodType>(renderComponentJsx: Ty
   };
 }
 
-export function schemaRenderCell<K extends keyof IResourceTableActionRowRecordBoth, T extends z.ZodType>(
-  name: K,
-  options?: IResourceTableActionRowRecordBoth[K],
-) {
+export function schemaRenderCell<K extends keyof IResourceTableCellRecord, T extends z.ZodType>(name: K, options?: IResourceTableCellRecord[K]) {
   return function (schema: T): T {
     const options2 = options !== undefined ? { render: name as never, columnProps: options } : { render: name as never };
     return _generalSchemaRest(schema, options2, 'table');
@@ -51,16 +52,36 @@ export function schemaRenderCellJsx<T extends z.ZodType>(renderComponentJsx: Typ
   };
 }
 
-export function schemaRenderActionRow<K extends keyof IResourceActionRowRecord>(
-  name: K,
-  options?: IResourceActionRowRecord[K],
-): IResourceComponentActionRowOptionsAction {
-  const render = 'Action' + toUpperCaseFirstChar(name);
-  return { $$typeof: 'zova-jsx:actionRow', name, render: render as any, options };
+export function schemaRenderTableActionRow<K extends keyof IResourceTableActionRowRecord>(
+  render: K,
+  options?: IResourceTableActionRowRecord[K],
+): IResourceRenderFormActionRowOptionsAction {
+  const pos = render.toString().indexOf(':action');
+  const name = pos > -1 ? toLowerCaseFirstChar(render.toString().substring(pos + ':action'.length)) : undefined;
+  return { $$typeof: 'zova-jsx:actionRow', name, render, options };
 }
 
-export function schemaRenderActionRowJsx<K extends keyof IResourceActionRowRecord>(name: K, renderComponentJsx: TypeRenderComponentJsx) {
-  return { name, render: renderComponentJsx };
+export function schemaRenderTableActionRowJsx(
+  renderComponentJsx: TypeRenderComponentJsx,
+  options?: Pick<IResourceTableActionRowOptionsBase, 'permission'>,
+) {
+  return { render: renderComponentJsx, options };
+}
+
+export function schemaRenderFormActionRow<K extends keyof IResourceFormActionRowRecord>(
+  render: K,
+  options?: IResourceFormActionRowRecord[K],
+): IResourceComponentActionRowOptionsAction {
+  const pos = render.toString().indexOf(':action');
+  const name = pos > -1 ? toLowerCaseFirstChar(render.toString().substring(pos + ':action'.length)) : undefined;
+  return { $$typeof: 'zova-jsx:actionRow', name, render, options };
+}
+
+export function schemaRenderFormActionRowJsx(
+  renderComponentJsx: TypeRenderComponentJsx,
+  options?: Pick<IResourceFormActionRowOptionsBase, 'permission'>,
+) {
+  return { render: renderComponentJsx, options };
 }
 
 export function schemaRenderActionBulk<K extends keyof IResourceActionBulkRecord>(

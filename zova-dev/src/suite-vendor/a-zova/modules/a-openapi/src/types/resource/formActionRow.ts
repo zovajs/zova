@@ -25,7 +25,7 @@ export interface IResourceFormActionRowOptionsBase {
 }
 
 export interface IResourceRenderFormActionRowOptionsAction {
-  name: keyof IResourceFormActionRowNameRecord; // not omit operationsRow
+  name?: keyof IResourceFormActionRowNameRecord; // not omit operationsRow
   render?: keyof IResourceFormActionRowRecord | TypeRenderComponentJsx;
   options?: IResourceFormActionRowOptionsBase;
 }

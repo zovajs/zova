@@ -20,7 +20,7 @@ export interface IResourceTableActionBulkOptionsBase {
 }
 
 export interface IResourceRenderTableActionBulkOptionsAction {
-  name: keyof IResourceTableActionBulkNameRecord; // not omit operationsBulk
+  name?: keyof IResourceTableActionBulkNameRecord; // not omit operationsBulk
   render?: keyof IResourceTableActionBulkRecord | TypeRenderComponentJsx;
   options?: IResourceTableActionBulkOptionsBase;
 }
