@@ -2,7 +2,7 @@ import type { TypeStyle } from 'typestyle';
 import type { NestedCSSProperties } from 'typestyle/lib/types.js';
 import type { BeanBase, BeanContainer, IMonkeyAppInitialize, IMonkeyAppInitialized, IMonkeyBeanInit } from 'zova';
 
-import { createTypeStyle, cssRaw, cssRule, style } from 'typestyle';
+import { classes, createTypeStyle, cssRaw, cssRule, style } from 'typestyle';
 import { beanFullNameFromOnionName, BeanSimple, SymbolBeanFullName, useComputed } from 'zova';
 
 import type { ScopeModule } from './.metadata/this.js';
@@ -77,6 +77,15 @@ export class Monkey extends BeanSimple implements IMonkeyAppInitialize, IMonkeyA
         return self._beanCssBase;
       },
     });
+    bean.defineProperty(beanInstance, '$cssMerge', {
+      enumerable: false,
+      configurable: true,
+      get() {
+        return function (...args) {
+          return self._patchCssMerge(beanInstance, ...args);
+        };
+      },
+    });
     bean.defineProperty(beanInstance, '$theme', {
       enumerable: false,
       configurable: true,
@@ -122,5 +131,16 @@ export class Monkey extends BeanSimple implements IMonkeyAppInitialize, IMonkeyA
     } else {
       return cssRaw(mustBeValidCSS);
     }
+  }
+
+  _patchCssMerge(beanInstance: BeanBase, ...args: any[]): string {
+    const args2 = args.map(item => {
+      if (typeof item === 'string' && item.startsWith('cssBase:')) {
+        const varName = item.substring('cssBase:'.length);
+        return beanInstance.$cssBase[varName];
+      }
+      return item;
+    });
+    return classes(...args2);
   }
 }

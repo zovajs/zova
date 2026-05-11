@@ -3,7 +3,6 @@ import type { VNode } from 'vue';
 import { compose } from '@cabloy/compose';
 import { celEnvBase, evaluateExpressions, getProperty, isEmptyObject, isNil, isPromise } from '@cabloy/utils';
 import { toUpperCaseFirstChar } from '@cabloy/word-utils';
-import { classes } from 'typestyle';
 import { createTextVNode, h } from 'vue';
 import { BeanControllerIdentifier, BeanSimple, cast, objectAssignReactive } from 'zova-core';
 
@@ -275,7 +274,9 @@ export class ZovaJsx extends BeanSimple {
     // style
     if (cast(props).class || cast(props).style) {
       const controller = this.ctx.bean._getBeanSyncOnly(BeanControllerIdentifier) as any;
-      cast(props).class = classes(cast(props).class, controller.$style(cast(props).style));
+      const classes = Array.isArray(cast(props).class) ? cast(props).class : [cast(props).class];
+      const style = controller.$style(cast(props).style);
+      cast(props).class = controller.$cssMerge(...classes, style);
       delete cast(props).style;
     }
     // children

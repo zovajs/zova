@@ -9,5 +9,6 @@ declare module 'zova' {
     $cssRule: typeof cssRule;
     $cssRaw: typeof cssRaw;
     $theme: BeanTheme;
+    $cssMerge: (...args: any[]) => string;
   }
 }
