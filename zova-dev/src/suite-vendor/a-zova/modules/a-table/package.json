@@ -77,7 +77,7 @@
         "optionsGlobalInterfaceName": "IDecoratorTableCellOptions",
         "optionsGlobalInterfaceFrom": "zova-module-a-table",
         "boilerplate": "tableCell/boilerplate",
-        "boilerplateActionRow": "tableCellActionRow/boilerplate"
+        "boilerplateTableActionRow": "tableActionRow/boilerplate"
       }
     }
   }
