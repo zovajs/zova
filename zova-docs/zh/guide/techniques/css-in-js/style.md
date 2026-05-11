@@ -37,7 +37,7 @@ export class RenderTest extends BeanRenderBase {
   cTextColor: string;
 
   protected async __init__() {
-    this.cTextColor = useComputed(() => {
+    this.cTextColor = this.$computed(() => {
       return this.$style({ color: this.active ? 'orange' : '' });
     });
   }
@@ -50,5 +50,5 @@ export class RenderTest extends BeanRenderBase {
 }
 ```
 
-- 使用`useComputed`创建计算属性
+- 使用`this.$computed`创建计算属性
 - 根据`this.active`的变化生成不同的 className

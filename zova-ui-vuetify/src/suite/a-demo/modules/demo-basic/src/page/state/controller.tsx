@@ -1,5 +1,5 @@
 import { VBtn, VBtnGroup, VDivider, VIcon } from 'vuetify/components';
-import { BeanControllerPageBase, useComputed } from 'zova';
+import { BeanControllerPageBase } from 'zova';
 import { Controller } from 'zova-module-a-bean';
 import { IIconRecord } from 'zova-module-a-icon';
 import { ZPage } from 'zova-module-home-base';
@@ -11,7 +11,7 @@ export class ControllerPageState extends BeanControllerPageBase {
   icon: keyof IIconRecord;
 
   protected async __init__() {
-    this.count2 = useComputed(() => {
+    this.count2 = this.$computed(() => {
       return `=== ${this.count} ===`;
     });
   }

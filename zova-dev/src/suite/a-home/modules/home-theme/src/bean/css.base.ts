@@ -1,6 +1,6 @@
 import type { IDecoratorCssOptions } from 'zova-module-a-style';
 
-import { BeanBase, useComputed } from 'zova';
+import { BeanBase } from 'zova';
 import { Css } from 'zova-module-a-style';
 
 export interface ICssOptionsBase extends IDecoratorCssOptions {}

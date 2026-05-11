@@ -48,7 +48,7 @@ export class RenderTest extends BeanRenderBase {
   cButtonPrimary: string;
 
   protected async __init__() {
-    this.cButtonPrimary = useComputed(() => {
+    this.cButtonPrimary = this.$computed(() => {
       return this.$style({
         color: this.$token.color.primary,
         borderColor: this.$token.var.borderColor,

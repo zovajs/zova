@@ -1,4 +1,4 @@
-import { BeanControllerPageBase, useComputed } from 'zova';
+import { BeanControllerPageBase } from 'zova';
 import { Controller } from 'zova-module-a-bean';
 import { $getThemeName } from 'zova-module-a-style';
 import { ZPage } from 'zova-module-home-base';
@@ -12,16 +12,16 @@ export class ControllerPageStyle extends BeanControllerPageBase {
   renderHello2;
 
   protected async __init__() {
-    this.cTextColor = useComputed(() => {
+    this.cTextColor = this.$computed(() => {
       return this.$style({ color: this.active ? this.$token.color.primary : '' });
     });
-    this.cBlock = useComputed(() => {
+    this.cBlock = this.$computed(() => {
       return this.$style({
         padding: '8px',
       });
     });
     this.renderHello = <div class={this.cTextColor}>Hello World</div>;
-    this.renderHello2 = useComputed(() => {
+    this.renderHello2 = this.$computed(() => {
       return <div class={this.cTextColor}>Hello World</div>;
     });
   }

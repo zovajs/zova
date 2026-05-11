@@ -1,7 +1,7 @@
 import type { ModelTabs, ModelTabsOptions } from 'zova-module-a-routertabs';
 
 import { provide, ref } from 'vue';
-import { BeanControllerBase, Use, useComputed, useCustomRef, UseScope } from 'zova';
+import { BeanControllerBase, Use, useCustomRef, UseScope } from 'zova';
 import { Controller } from 'zova-module-a-bean';
 import { $QueryAutoLoad } from 'zova-module-a-model';
 import { ScopeModuleASsr } from 'zova-module-a-ssr';
@@ -43,7 +43,7 @@ export class ControllerLayoutTabs extends BeanControllerBase {
 
   protected async __init__() {
     // belowBreakpoint
-    this.belowBreakpoint = useComputed(() => {
+    this.belowBreakpoint = this.$computed(() => {
       let width;
       if (process.env.SERVER) {
         width = 0;

@@ -1,7 +1,7 @@
 import { VBtn } from 'vuetify/components';
 import { VRadio } from 'vuetify/components';
 import { VRadioGroup } from 'vuetify/components';
-import { BeanControllerPageBase, useComputed } from 'zova';
+import { BeanControllerPageBase } from 'zova';
 import { Controller } from 'zova-module-a-bean';
 import { $getThemeName } from 'zova-module-a-style';
 import { ZPage } from 'zova-module-home-base';
@@ -25,7 +25,7 @@ export class ControllerPageStyle extends BeanControllerPageBase {
   ];
 
   protected async __init__() {
-    this.cTextColor = useComputed(() => {
+    this.cTextColor = this.$computed(() => {
       return this.$style({ color: this.active ? this.$token.colors.primary : '' });
     });
   }

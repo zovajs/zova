@@ -1,4 +1,4 @@
-import { BeanControllerPageBase, useComputed } from 'zova';
+import { BeanControllerPageBase } from 'zova';
 import { Controller } from 'zova-module-a-bean';
 import { ZPage } from 'zova-module-home-base';
 
@@ -8,7 +8,7 @@ export class ControllerPageState extends BeanControllerPageBase {
   count2: string;
 
   protected async __init__() {
-    this.count2 = useComputed(() => {
+    this.count2 = this.$computed(() => {
       return `=== ${this.count} ===`;
     });
   }

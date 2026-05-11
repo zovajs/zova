@@ -1,7 +1,7 @@
 import type { IDecoratorModelOptions } from 'zova-module-a-model';
 import type { ApiSchemaAMenuDtoMenuGroup, ApiSchemaAMenuDtoMenuItem, ApiSchemaAMenuDtoMenus } from 'zova-module-home-api';
 
-import { TypeEventOff, useComputed } from 'zova';
+import { TypeEventOff } from 'zova';
 import { BeanModelBase, Model } from 'zova-module-a-model';
 
 export type TypeMenuGroup = ApiSchemaAMenuDtoMenuGroup & { folder: true; children: TypeMenuItem[] };
@@ -16,7 +16,7 @@ export class ModelMenu extends BeanModelBase {
   private _eventSsrHmrReload: TypeEventOff;
 
   protected async __init__() {
-    this.menuTree = useComputed(() => {
+    this.menuTree = this.$computed(() => {
       const queryMenus = this.retrieveMenus();
       if (!queryMenus.data) return;
       return this._prepareMenuTree(queryMenus.data);

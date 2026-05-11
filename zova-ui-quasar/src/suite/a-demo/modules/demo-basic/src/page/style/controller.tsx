@@ -1,5 +1,5 @@
 import { QBtn, QOptionGroup, QPage } from 'quasar';
-import { BeanControllerPageBase, useComputed } from 'zova';
+import { BeanControllerPageBase } from 'zova';
 import { Controller } from 'zova-module-a-bean';
 import { $getThemeName } from 'zova-module-a-style';
 
@@ -22,7 +22,7 @@ export class ControllerPageStyle extends BeanControllerPageBase {
   ];
 
   protected async __init__() {
-    this.cTextColor = useComputed(() => {
+    this.cTextColor = this.$computed(() => {
       return this.$style({ color: this.active ? this.$token.color.primary : '' });
     });
   }
