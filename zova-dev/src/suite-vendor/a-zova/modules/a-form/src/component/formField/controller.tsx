@@ -1,6 +1,5 @@
 import { isNil } from '@cabloy/utils';
 import { useField } from '@tanstack/vue-form';
-import { classes } from 'typestyle';
 import z from 'zod';
 import { BeanControllerBase, deepEqual, IComponentOptions, Use } from 'zova';
 import { Controller } from 'zova-module-a-bean';
@@ -155,14 +154,14 @@ export class ControllerFormField<TParentData extends {} = {}> extends BeanContro
     );
     // class/style: layout
     if (propsBucket.layout.class || propsBucket.layout.style) {
-      propsBucket.layout.class = classes(propsBucket.layout.class, this.$style(propsBucket.layout.style));
+      propsBucket.layout.class = this.$cssMerge(propsBucket.layout.class, this.$style(propsBucket.layout.style));
       delete propsBucket.layout.style;
     }
     // class/style: need not check typeof propsBucket.render === 'string' because maybe return false
     const classTemp = propsBucket.options?.class ?? propsBucket.class;
     const styleTemp = propsBucket.options?.style ?? propsBucket.style;
     if (classTemp || styleTemp) {
-      propsBucket.class = classes(classTemp, this.$style(styleTemp));
+      propsBucket.class = this.$cssMerge(classTemp, this.$style(styleTemp));
       if (propsBucket.options?.class) delete propsBucket.options.class;
       if (propsBucket.options?.style) delete propsBucket.options.style;
       delete propsBucket.style;

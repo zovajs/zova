@@ -274,9 +274,7 @@ export class ZovaJsx extends BeanSimple {
     // style
     if (cast(props).class || cast(props).style) {
       const controller = this.ctx.bean._getBeanSyncOnly(BeanControllerIdentifier) as any;
-      const classes = Array.isArray(cast(props).class) ? cast(props).class : [cast(props).class];
-      const style = controller.$style(cast(props).style);
-      cast(props).class = controller.$cssMerge(...classes, style);
+      cast(props).class = controller.$cssMerge(cast(props).class, controller.$style(cast(props).style));
       delete cast(props).style;
     }
     // children

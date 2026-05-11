@@ -135,7 +135,9 @@ export class Monkey extends BeanSimple implements IMonkeyAppInitialize, IMonkeyA
 
   _patchCssMerge(beanInstance: BeanBase, ...args: any[]): string {
     const args2 = args.map(item => {
-      if (typeof item === 'string' && item.startsWith('cssBase:')) {
+      if (Array.isArray(item)) {
+        return this._patchCssMerge(beanInstance, ...item);
+      } else if (typeof item === 'string' && item.startsWith('cssBase:')) {
         const varName = item.substring('cssBase:'.length);
         return beanInstance.$cssBase[varName];
       }
