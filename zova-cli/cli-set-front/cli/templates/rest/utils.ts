@@ -28,7 +28,7 @@ export function $cssMerge(
         [className: string]: any;
       }
   )[]
-): any[] {
+): any {
   return classes;
 }
 
