@@ -273,7 +273,7 @@ export class ZovaJsx extends BeanSimple {
     // props
     this.renderJsxProps(componentJsx.props, props, celScope, renderContext);
     // style
-    if (_isZovaComponent && cast(props).style) {
+    if (cast(props).class || cast(props).style) {
       const controller = this.ctx.bean._getBeanSyncOnly(BeanControllerIdentifier) as any;
       cast(props).class = classes(cast(props).class, controller.$style(cast(props).style));
       delete cast(props).style;
