@@ -88,10 +88,5 @@ export type TypeTableCellRenderComponentNormal =
   | keyof TypeBeanRecordGeneralSelector<'tableCell'>
   | TypeRenderComponentPreset;
 export type TypeTableCellRenderComponent = keyof IResourceTableActionRowRecord | TypeRenderComponentJsx;
-export type TypeTableCellRenderComponentProvider =
-  | Constructable<ComponentPublicInstance>
-  | TypeRenderComponentJsx
-  | keyof IComponentRecord
-  | keyof TypeBeanRecordGeneralSelector<'tableCell'>
-  | 'text';
+export type TypeTableCellRenderComponentProvider = TypeRenderComponentJsx | 'text' | string;
 export type TypeTableBulkRenderComponentProvider = Constructable<ComponentPublicInstance> | keyof IComponentRecord | TypeRenderComponentJsx;

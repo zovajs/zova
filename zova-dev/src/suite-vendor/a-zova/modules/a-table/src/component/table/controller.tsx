@@ -3,6 +3,7 @@ import type {
   ISchemaObjectExtensionField,
   ISchemaObjectExtensionFieldRest,
   TypeTableCellRenderComponent,
+  TypeTableCellRenderComponentProvider,
 } from 'zova-module-a-openapi';
 
 import { celEnvBase, isNilOrEmptyString } from '@cabloy/utils';
@@ -10,7 +11,7 @@ import { CellContext, createColumnHelper, getCoreRowModel, TableOptionsWithReact
 import { SchemaObject } from 'openapi3-ts/oas31';
 import { classes } from 'typestyle';
 import { VNode } from 'vue';
-import { appResource, cast, deepEqual, deepExtend, objectAssignReactive } from 'zova';
+import { appResource, beanFullNameFromOnionName, cast, deepEqual, deepExtend, objectAssignReactive } from 'zova';
 import { isJsxComponent, ZovaJsx } from 'zova-jsx';
 import { Controller } from 'zova-module-a-bean';
 
@@ -277,7 +278,7 @@ export class ControllerTable<TData extends {} = {}> extends BeanControllerTableB
     columnProps: ITableCellRenderColumnProps | undefined,
     columnScope: ITableColumnScope | undefined,
     cellContext: CellContext<TData, any>,
-    renderProvider: TypeTableCellRenderComponent,
+    renderProvider: TypeTableCellRenderComponentProvider,
     beanInstance: ITableCellRender | undefined,
     cellProps: any | undefined,
     cellScope: ITableCellScope | undefined,
@@ -310,7 +311,7 @@ export class ControllerTable<TData extends {} = {}> extends BeanControllerTableB
     columnProps: ITableCellRenderColumnProps | undefined,
     columnScope: ITableColumnScope | undefined,
     cellContext: CellContext<TData, any>,
-    renderProvider: TypeTableCellRenderComponent,
+    renderProvider: TypeTableCellRenderComponentProvider,
     beanInstance: ITableCellRender | undefined,
     cellProps: any | undefined,
     cellScope: ITableCellScope | undefined,
@@ -403,7 +404,11 @@ export class ControllerTable<TData extends {} = {}> extends BeanControllerTableB
   //   return isJsxComponent(render) ? cast(render).type : render;
   // }
 
-  public getRenderProvider(render: TypeTableCellRenderComponent | undefined): TypeTableCellRenderComponent {
-    return render || ('text' as TypeTableCellRenderComponent);
+  public getRenderProvider(render: TypeTableCellRenderComponent | undefined): TypeTableCellRenderComponentProvider {
+    if (!render) return 'text';
+    if (typeof render === 'string' && render.includes(':')) {
+      return beanFullNameFromOnionName(render, 'tableCell');
+    }
+    return render;
   }
 }
