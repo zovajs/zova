@@ -1,7 +1,6 @@
-import type { IFormMeta, IFormProvider, TypeFormScene } from 'zova-module-a-openapi';
+import type { IFormMeta, IFormProvider, ISchemaObjectExtensionField, TypeFormScene } from 'zova-module-a-openapi';
 
 import { isNil } from '@cabloy/utils';
-import { SchemaObject } from 'openapi3-ts/oas31';
 import { VNode } from 'vue';
 import { z } from 'zod';
 import { BeanControllerPageBase, deepExtend, Use, usePrepareArg } from 'zova';
@@ -23,7 +22,7 @@ export const ControllerPageEntrySchemaParams = z.object({
 export class ControllerPageEntry extends BeanControllerPageBase {
   formMeta: IFormMeta;
   formProvider: IFormProvider;
-  formSchema?: SchemaObject;
+  formSchema?: ISchemaObjectExtensionField;
   jsxZova: ZovaJsx;
 
   @Use({ beanFullName: 'rest-resource.model.resource' })

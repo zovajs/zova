@@ -4,6 +4,8 @@ import type { TypeRenderComponentJsx } from 'zova-jsx';
 
 import 'openapi3-ts/oas30';
 import 'openapi3-ts/oas31';
+import { SchemaObject } from 'openapi3-ts/oas31';
+
 import { IResourceRenderBlockOptionsBlock } from './resource/block.js';
 import { IResourceFormFieldRecord } from './resource/formField.js';
 import { IResourceTableActionRowRecord } from './resource/tableActionRow.js';
@@ -38,18 +40,10 @@ export interface ISchemaObjectExtensionFieldFilter {
   capabilities?: ISchemaObjectExtensionFieldFilterCapabilities;
 }
 
-export interface ISchemaObjectExtensionField {
+export interface ISchemaObjectExtensionField extends SchemaObject {
   key?: string;
   rest?: ISchemaObjectExtensionFieldRest;
   filter?: ISchemaObjectExtensionFieldFilter;
-}
-
-declare module 'openapi3-ts/oas30' {
-  export interface SchemaObject extends ISchemaObjectExtensionField {}
-}
-
-declare module 'openapi3-ts/oas31' {
-  export interface SchemaObject extends ISchemaObjectExtensionField {}
 }
 
 export type TypeSchemaScene = 'table' | TypeFormSchemaScene;

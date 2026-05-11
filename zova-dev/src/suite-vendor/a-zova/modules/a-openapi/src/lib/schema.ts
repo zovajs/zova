@@ -6,7 +6,7 @@ import { toRaw } from 'vue';
 import { z } from 'zod';
 import { cast, deepExtend } from 'zova';
 
-import type { TypeSchemaScene } from '../types/rest.js';
+import type { ISchemaObjectExtensionField, TypeSchemaScene } from '../types/rest.js';
 
 import { OrderUnknownBase } from '../types/database.js';
 
@@ -19,10 +19,10 @@ export function loadSchemaProperties(
 ): SchemaObject[] | undefined {
   if (!schema) return;
   const properties = schema.properties!;
-  const result: SchemaObject[] = [];
+  const result: ISchemaObjectExtensionField[] = [];
   // filter
   for (let key in properties) {
-    let property = properties[key] as SchemaObject;
+    let property = properties[key] as ISchemaObjectExtensionField;
     if (property.$ref) {
       property = onGetSchema(property.$ref)!;
     }
@@ -106,7 +106,7 @@ export function getSchemaOfRequestQueryFilter(operationObject?: OperationObject,
     if (parameter.in !== 'query') continue;
     const name = parameter.name;
     if (__FilterColumnsIgnore.includes(name)) continue;
-    const fieldSchema = parameter.schema! as SchemaObject;
+    const fieldSchema = parameter.schema! as ISchemaObjectExtensionField;
     if (
       (options?.where === true && fieldSchema.filter?.capabilities?.where !== false) ||
       (options?.order === true && fieldSchema.filter?.capabilities?.order !== false)

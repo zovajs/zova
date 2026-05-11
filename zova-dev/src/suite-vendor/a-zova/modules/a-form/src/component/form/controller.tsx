@@ -27,6 +27,7 @@ import {
   TypeFormFieldRenderComponentProvider,
   TypeFormSchemaScene,
   ScopeModuleAOpenapi,
+  ISchemaObjectExtensionField,
 } from 'zova-module-a-openapi';
 
 import { BeanControllerFormBase } from '../../lib/beanControllerFormBase.js';
@@ -71,7 +72,7 @@ export class ControllerForm<TFormData extends {} = {}, TSubmitMeta = never> exte
   formProvider: IFormProvider;
   schema: SchemaObject | undefined;
   zodSchema: z.ZodObject<any> | undefined;
-  properties: SchemaObject[] | undefined;
+  properties: ISchemaObjectExtensionField[] | undefined;
   zovaJsx: ZovaJsx;
   fieldCelEnv: typeof celEnvBase;
 
@@ -133,7 +134,7 @@ export class ControllerForm<TFormData extends {} = {}, TSubmitMeta = never> exte
     }
   }
 
-  public getFieldProperty<K extends DeepKeys<TFormData>>(name: K): SchemaObject | undefined {
+  public getFieldProperty<K extends DeepKeys<TFormData>>(name: K): ISchemaObjectExtensionField | undefined {
     if (!this.properties) return;
     return this.properties.find(item => item.key === name);
   }

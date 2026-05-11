@@ -1,4 +1,9 @@
-import type { IResourceTableActionRowOptionsBase, ISchemaObjectExtensionFieldRest, TypeTableCellRenderComponent } from 'zova-module-a-openapi';
+import type {
+  IResourceTableActionRowOptionsBase,
+  ISchemaObjectExtensionField,
+  ISchemaObjectExtensionFieldRest,
+  TypeTableCellRenderComponent,
+} from 'zova-module-a-openapi';
 
 import { celEnvBase, isNilOrEmptyString } from '@cabloy/utils';
 import { CellContext, createColumnHelper, getCoreRowModel, TableOptionsWithReactiveData } from '@tanstack/vue-table';
@@ -35,7 +40,7 @@ export interface ControllerTableProps<TData extends {} = {}> {
 export class ControllerTable<TData extends {} = {}> extends BeanControllerTableBase {
   static $propsDefault = {};
 
-  properties: SchemaObject[] | undefined;
+  properties: ISchemaObjectExtensionField[] | undefined;
   columns: TypeColumn<TData>[];
   table: TypeTable<TData>;
   tableMeta: ITableMeta<TData>;
@@ -116,7 +121,7 @@ export class ControllerTable<TData extends {} = {}> extends BeanControllerTableB
     );
   }
 
-  private async _createColumnsMiddle(properties: SchemaObject[]): Promise<TypeColumn<TData>[]> {
+  private async _createColumnsMiddle(properties: ISchemaObjectExtensionField[]): Promise<TypeColumn<TData>[]> {
     const tableMeta = this.tableMeta;
     const columnHelper = createColumnHelper<TData>();
     const columns: TypeColumn<TData>[] = [];
@@ -142,7 +147,7 @@ export class ControllerTable<TData extends {} = {}> extends BeanControllerTableB
   }
 
   private async _createTableMeta() {
-    let properties: SchemaObject[] = [];
+    let properties: ISchemaObjectExtensionField[] = [];
     const renders: Record<string, TypeTableCellRender<TData>> = {};
     if (!this.properties) return { properties, renders };
     const promises: Promise<any>[] = [];
@@ -352,7 +357,7 @@ export class ControllerTable<TData extends {} = {}> extends BeanControllerTableB
     return this.zovaJsx.render(render!, {}, cellScope, jsxRenderContext);
   }
 
-  public getColumnProperty(name: string): SchemaObject | undefined {
+  public getColumnProperty(name: string): ISchemaObjectExtensionField | undefined {
     if (!this.properties) return;
     return this.properties.find(item => item.key === name);
   }

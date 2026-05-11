@@ -1,6 +1,6 @@
 import type { TableIdentity } from 'table-identity';
 import type { DataMutation, IDecoratorModelOptions } from 'zova-module-a-model';
-import type { IFormMeta, IFormProvider, ITableQuery, ITableRes, TypeOpenapiPermissions } from 'zova-module-a-openapi';
+import type { IFormMeta, IFormProvider, ISchemaObjectExtensionField, ITableQuery, ITableRes, TypeOpenapiPermissions } from 'zova-module-a-openapi';
 
 import { hashkey, isNil } from '@cabloy/utils';
 import { SchemaObject } from 'openapi3-ts/oas31';
@@ -19,12 +19,12 @@ export class ModelResource<Entity = any, EntityCreate = Partial<Entity>, EntityU
   public resourceApi: string;
   public permissions?: TypeOpenapiPermissions;
   public formProvider: IFormProvider;
-  public schemaView?: SchemaObject;
-  public schemaCreate?: SchemaObject;
-  public schemaUpdate?: SchemaObject;
-  public schemaFilter?: SchemaObject;
-  public schemaRow?: SchemaObject;
-  public schemaPages?: SchemaObject;
+  public schemaView?: ISchemaObjectExtensionField;
+  public schemaCreate?: ISchemaObjectExtensionField;
+  public schemaUpdate?: ISchemaObjectExtensionField;
+  public schemaFilter?: ISchemaObjectExtensionField;
+  public schemaRow?: ISchemaObjectExtensionField;
+  public schemaPages?: ISchemaObjectExtensionField;
 
   @UseScope()
   $$scopeOpenapi: ScopeModuleAOpenapi;
