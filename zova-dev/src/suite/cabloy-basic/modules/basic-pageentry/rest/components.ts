@@ -1,1 +1,0 @@
-export * from 'zova-module-basic-pageentry';
