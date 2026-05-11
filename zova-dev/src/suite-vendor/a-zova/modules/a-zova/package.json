@@ -12,8 +12,7 @@
     "dist",
     "src",
     "icons",
-    "assets",
-    "rest"
+    "assets"
   ],
   "type": "module",
   "exports": {
