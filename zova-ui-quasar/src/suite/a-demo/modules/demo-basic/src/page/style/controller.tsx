@@ -29,7 +29,7 @@ export class ControllerPageStyle extends BeanControllerPageBase {
 
   protected render() {
     return (
-      <QPage padding class={this.$css.textCenter}>
+      <QPage padding class={this.$cssBase.cTextCenter}>
         <div class={this.cTextColor}>Hello World</div>
         <QBtn
           onClick={() => {

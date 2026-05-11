@@ -32,7 +32,7 @@ export class ControllerPageStyle extends BeanControllerPageBase {
 
   protected render() {
     return (
-      <ZPage class={this.$css.textCenter}>
+      <ZPage class={this.$cssBase.cTextCenter}>
         <div class={this.cTextColor}>Hello World</div>
         <VBtn
           nativeOnClick={() => {
