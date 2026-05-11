@@ -1,5 +1,5 @@
 #! /usr/bin/env bash
 
-lerna version patch
+lerna version $1
 lerna publish from-git
 
