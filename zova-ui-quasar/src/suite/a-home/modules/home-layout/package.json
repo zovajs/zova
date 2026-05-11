@@ -9,7 +9,6 @@
   "files": [
     "dist",
     "mock",
-    "rest",
     "src",
     "icons",
     "assets"
