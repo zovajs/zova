@@ -12,7 +12,7 @@ import { BeanTheme } from './bean/bean.theme.js';
 
 export class Monkey extends BeanSimple implements IMonkeyAppInitialize, IMonkeyAppInitialized, IMonkeyBeanInit {
   private _beanTheme: BeanTheme;
-  private _beanCssDefault: any;
+  private _beanCssBase: any;
   private _styleInstance: TypeStyle;
 
   async appInitialize() {
@@ -35,9 +35,9 @@ export class Monkey extends BeanSimple implements IMonkeyAppInitialize, IMonkeyA
   async appInitialized() {
     // theme
     this._beanTheme = await this.bean._getBean(BeanTheme, true);
-    // css default
+    // css base
     const scope: ScopeModule = await this.bean.getScope(__ThisModule__);
-    this._beanCssDefault = await this.bean._getBean(beanFullNameFromOnionName(scope.config.defaultCss, 'css'), true);
+    this._beanCssBase = await this.bean._getBean(beanFullNameFromOnionName(scope.config.defaultCss, 'css'), true);
   }
 
   async beanInit(bean: BeanContainer, beanInstance: BeanBase) {
@@ -70,11 +70,11 @@ export class Monkey extends BeanSimple implements IMonkeyAppInitialize, IMonkeyA
         };
       },
     });
-    bean.defineProperty(beanInstance, '$css', {
+    bean.defineProperty(beanInstance, '$cssBase', {
       enumerable: false,
       configurable: true,
       get() {
-        return self._beanCssDefault;
+        return self._beanCssBase;
       },
     });
     bean.defineProperty(beanInstance, '$theme', {

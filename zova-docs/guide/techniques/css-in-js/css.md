@@ -1,4 +1,4 @@
-# $css
+# $cssBase
 
 ## Global style
 
@@ -16,17 +16,17 @@ Enter the name of style bean according to the prompt, such as `myStyle`. The VSC
 
 Zova provides a global style Bean in the module `home-base`. We can provide some global styles directly here.
 
-`src/suite/a-home/modules/home-base/src/bean/css.default.ts`
+`src/suite/a-home/modules/home-base/src/bean/css.base.ts`
 
 ```typescript
 @Css()
-export class CssDefault extends BeanBase {
-  textCenter: string;
-  buttonPrimary: string;
+export class CssBase extends BeanBase {
+  cTextCenter: string;
+  cButtonPrimary: string;
 
   protected async __init__() {
-    this.textCenter = this.$style({ textAlign: 'center' });
-    this.buttonPrimary = useComputed(() => {
+    this.cTextCenter = this.$style({ textAlign: 'center' });
+    this.cButtonPrimary = this.$computed(() => {
       return this.$style({
         color: this.$token.color.primary,
         borderColor: this.$token.var.borderColor,
@@ -36,19 +36,19 @@ export class CssDefault extends BeanBase {
 }
 ```
 
-- `this.textCenter` is a static style
-- `this.buttonPrimary` is a dynamic style
+- `this.cTextCenter` is a static style
+- `this.cButtonPrimary` is a dynamic style
 
 ### Use default global style bean
 
 ```typescript
 export class RenderTest extends BeanRenderBase {
   @Use()
-  $$cssDefault: CssDefault;
+  $$cssBase: CssBase;
 
   render() {
     return (
-      <div class={this.$$cssDefault.textCenter}>Hello Zova</div>
+      <div class={this.$$cssBase.cTextCenter}>Hello Zova</div>
     );
   }
 }
@@ -56,15 +56,15 @@ export class RenderTest extends BeanRenderBase {
 
 - Use `@Use` to inject the Bean instance
 
-## $css
+## $cssBase
 
-Since the default global style bean can be used extensively across different bean instances. To simplify the code, Zova injects a `$css` object into the `BeanBase` base class, so that global styles can be directly accessed through `this.$css` in any bean instance.
+Since the default global style bean can be used extensively across different bean instances. To simplify the code, Zova injects a `$cssBase` object into the `BeanBase` base class, so that global styles can be directly accessed through `this.$cssBase` in any bean instance.
 
 ```typescript
 export class RenderTest extends BeanRenderBase {
   render() {
     return (
-      <div class={this.$css.textCenter}>Hello Zova</div>
+      <div class={this.$cssBase.cTextCenter}>Hello Zova</div>
     );
   }
 }

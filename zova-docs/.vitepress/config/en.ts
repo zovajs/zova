@@ -203,7 +203,7 @@ function sidebarGuide(): DefaultTheme.SidebarItem[] {
           items: [
             { text: 'Introduction', link: 'introduction' },
             { text: '$style', link: 'style' },
-            { text: '$css', link: 'css' },
+            { text: '$cssBase', link: 'css' },
             { text: '$token', link: 'token' },
             { text: '$theme', link: 'theme' },
           ],

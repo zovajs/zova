@@ -1,36 +1,36 @@
 // eslint-disable
 /** css: begin */
-export * from '../bean/css.default.js';
-import { ICssOptionsDefault } from '../bean/css.default.js';
+export * from '../bean/css.base.js';
+import { ICssOptionsBase } from '../bean/css.base.js';
 import 'zova-module-a-style';
 declare module 'zova-module-a-style' {
   
     export interface ICssRecord {
-      'home-theme:default': ICssOptionsDefault;
+      'home-theme:base': ICssOptionsBase;
     }
 
   
 }
 declare module 'zova-module-home-theme' {
   
-        export interface CssDefault {
+        export interface CssBase {
           /** @internal */
           get scope(): ScopeModuleHomeTheme;
         }
 
-        export interface CssDefault {
-          get $beanFullName(): 'home-theme.css.default';
-          get $onionName(): 'home-theme:default';
-          get $onionOptions(): ICssOptionsDefault;
+        export interface CssBase {
+          get $beanFullName(): 'home-theme.css.base';
+          get $onionName(): 'home-theme:base';
+          get $onionOptions(): ICssOptionsBase;
         } 
 }
 /** css: end */
 /** css: begin */
-import { CssDefault } from '../bean/css.default.js';
+import { CssBase } from '../bean/css.base.js';
 import 'zova';
 declare module 'zova' {
   export interface IBeanRecordLocal {
-    'home-theme.css.default': CssDefault;
+    'home-theme.css.base': CssBase;
   }
 }
 /** css: end */

@@ -43,7 +43,7 @@
 | ------------------------------------------------------ | ------------------------------------ |
 | [$fetch](../../techniques/server-data/fetch.md)        | 由模块`a-fetch`提供的fetch对象       |
 | [$scopeBase](../../essentials/scope/introduction.md)   | 由模块`home-base`提供的scope对象     |
-| [$css](../../techniques/css-in-js/css.md)              | 由模块`home-base`提供的全局样式对象  |
+| [$cssBase](../../techniques/css-in-js/css.md)          | 由模块`home-base`提供的全局样式对象  |
 | [$queryClient](../../techniques/model/introduction.md) | 由模块`a-model`提供的queryClient对象 |
 | [$router](../../page/navigation-guards.md)             | 由模块`a-router`提供的router对象     |
 | [$style](../../techniques/css-in-js/style.md)          | 由模块`a-style`提供的style方法       |

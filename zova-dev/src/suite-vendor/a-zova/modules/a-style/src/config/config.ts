@@ -6,7 +6,7 @@ import type { IThemeRecord } from '../types/theme.js';
 
 export const config = (_sys: ZovaSys) => {
   return {
-    defaultCss: 'home-theme:default' as keyof ICssRecord,
+    defaultCss: 'home-theme:base' as keyof ICssRecord,
     defaultTheme: 'home-theme:default' as keyof IThemeRecord,
     defaultThemeHandler: '' as TypeMetaRecordSelectorSpecificNameKeys<'themeHandler'>,
     model: {
