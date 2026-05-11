@@ -1,12 +1,9 @@
 import type { IMetadataCustomGenerateOptions } from '@cabloy/cli';
 import type { IGlobBeanFile } from '@cabloy/module-info';
 
-import fse from 'fs-extra';
-import path from 'node:path';
-
 import type { IControllerInfo } from './types.ts';
 
-import { combineContentRenderAndStyle, generateRestIndex } from './utils.ts';
+import { combineContentRenderAndStyle } from './utils.ts';
 
 export async function generateFileComponent(options: IMetadataCustomGenerateOptions, globFile: IGlobBeanFile, controllerInfo: IControllerInfo) {
   const { moduleName } = options;
@@ -166,20 +163,6 @@ ${combineContentRenderAndStyle(controllerInfo, moduleName, className, genericDec
 ${contentComponent}
 ${contentRestProps}
 `;
-  // restComponent
-  await generateRestComponent(options);
   // ok
   return content;
-}
-
-async function generateRestComponent(options: IMetadataCustomGenerateOptions) {
-  const { moduleName, modulePath } = options;
-  // components
-  const fileComponents = path.join(modulePath, 'rest/components.ts');
-  if (fse.existsSync(fileComponents)) return;
-  const contentComponents = `export * from 'zova-module-${moduleName}';`;
-  await fse.outputFile(fileComponents, contentComponents);
-  // index
-  const exportIndexContent = "export * from './components.js';";
-  await generateRestIndex(options, modulePath, exportIndexContent);
 }

@@ -28,20 +28,8 @@ ${contentResourceIcons}
 }
 /** icons: end */
 `;
-  // restComponent
-  await generateRestIcon(moduleName, modulePath, resourceIcons);
   // ok
   return content;
-}
-
-async function generateRestIcon(moduleName: string, modulePath: string, _resourceIcons: string[]) {
-  // icons
-  const contentResourceIcons = `export * from 'zova-module-${moduleName}';\n`;
-  const fileIcons = path.join(modulePath, 'rest/icons.ts');
-  await fse.outputFile(fileIcons, contentResourceIcons);
-  // index
-  const exportIndexContent = "export * from './icons.js';";
-  await generateRestIndex(modulePath, exportIndexContent);
 }
 
 async function _generateFileConfigIcons(groups) {
@@ -126,19 +114,6 @@ function _getRecordId(moduleName: string, groupName: string, iconName: string) {
   if (moduleName === 'home-icon') moduleName = '';
   if (groupName === 'default') groupName = '';
   return `${moduleName}:${groupName}:${iconName}`;
-}
-
-async function generateRestIndex(modulePath: string, append: string) {
-  // index
-  const fileIndex = path.join(modulePath, 'rest/index.ts');
-  let contentIndex = '';
-  if (fse.existsSync(fileIndex)) {
-    contentIndex = (await fse.readFile(fileIndex)).toString();
-  }
-  if (!contentIndex.includes(append)) {
-    contentIndex = `${contentIndex}${append}\n`;
-    await fse.outputFile(fileIndex, contentIndex);
-  }
 }
 
 // import SVGCompiler from 'svg-baker';
