@@ -1,3 +1,4 @@
+import type { PrefixKeys } from 'zova';
 import type { IActionRecord, TypeActionOptions } from 'zova-module-a-action';
 import type { IVonaComponentRecord, TypeComponentOptions } from 'zova-module-a-bean';
 import type { IIconRecord } from 'zova-module-a-icon';
@@ -13,8 +14,22 @@ declare module 'zova-module-a-router' {
   }
 }
 
-export function $cssBase<K extends keyof CssBase>(name: K): any {
+export function $cssBase<K extends PrefixKeys<CssBase, 'c'>>(name: K): string {
   return `cssBase:${name}`;
+}
+
+export function $cssMerge(
+  ...classes: (
+    | string
+    | false
+    | undefined
+    | null
+    | {
+        [className: string]: any;
+      }
+  )[]
+): any[] {
+  return classes;
 }
 
 export function $iconName<K extends keyof IIconRecord>(name: K): any {
