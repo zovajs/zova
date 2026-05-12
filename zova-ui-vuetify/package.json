@@ -115,7 +115,7 @@
     "zova-module-a-table": "^5.1.19",
     "zova-module-a-zod": "^5.1.13",
     "zova-module-a-zova": "^5.1.39",
-    "zova-module-basic-actions": "^5.1.10",
+    "zova-module-basic-commands": "^5.1.10",
     "zova-module-demo-basic": "workspace:^",
     "zova-module-home-api": "workspace:^",
     "zova-module-home-base": "workspace:^",

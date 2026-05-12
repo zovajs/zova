@@ -6,10 +6,10 @@
   "files": [],
   "type": "module",
   "dependencies": {
-    "zova-module-basic-actions": "^5.0.0",
-    "zova-module-basic-actionssync": "^5.0.0",
     "zova-module-basic-adapter": "workspace:^",
     "zova-module-basic-captcha": "^5.0.0",
+    "zova-module-basic-commands": "^5.0.0",
+    "zova-module-basic-commandssync": "^5.0.0",
     "zova-module-basic-currency": "workspace:^",
     "zova-module-basic-date": "workspace:^",
     "zova-module-basic-form": "workspace:^",
