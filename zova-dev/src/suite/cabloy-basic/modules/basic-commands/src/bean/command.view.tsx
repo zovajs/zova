@@ -1,5 +1,6 @@
-import { BeanCommandRowBase, Command, ICommandExecute, ICommandRowOptionsBase, NextCommandExecute } from 'zova-module-a-command';
-import { IJsxRenderContextBase } from 'zova-module-a-openapi';
+import type { IJsxRenderContextBase } from 'zova-module-a-openapi';
+
+import { BeanCommandRowBase, Command, type ICommandExecute, type ICommandRowOptionsBase, type NextCommandExecute } from 'zova-module-a-command';
 
 export type TypeCommandViewResult = unknown;
 
