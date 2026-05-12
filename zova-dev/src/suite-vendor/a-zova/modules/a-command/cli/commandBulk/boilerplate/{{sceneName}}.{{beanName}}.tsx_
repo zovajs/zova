@@ -9,7 +9,6 @@ export interface ICommandOptions<%=argv.beanNameCapitalize%> extends ICommandBul
 @Command<ICommandOptions<%=argv.beanNameCapitalize%>>()
 export class Command<%=argv.beanNameCapitalize%> extends BeanCommandBulkBase implements ICommandExecute {
   execute(options: ICommandOptions<%=argv.beanNameCapitalize%>, renderContext: IJsxRenderContextBase, next: NextCommandExecute) {
-    const { $host } = renderContext;
     const { resource } = this.getResource(options, renderContext);
     return next();
   }
