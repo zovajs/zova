@@ -373,7 +373,8 @@ export class ZovaJsx extends BeanSimple {
   public renderJsxChildrenDirect(jsxChildren: TypeRenderComponentJsx | TypeRenderComponentJsx[], celScope?: {}, renderContext?: {}) {
     if (!Array.isArray(jsxChildren)) jsxChildren = [jsxChildren];
     const children: VNode[] = [];
-    for (const jsxChild of jsxChildren) {
+    for (let index = 0; index < jsxChildren.length; index++) {
+      const jsxChild = jsxChildren[index];
       let child;
       if (isJsxComponent(jsxChild)) {
         if (jsxChild.type === 'var') {
@@ -393,7 +394,8 @@ export class ZovaJsx extends BeanSimple {
           }
           child = undefined;
         } else {
-          child = this.render(jsxChild, undefined, celScope, renderContext);
+          const propsInit = { key: jsxChild.key ?? index };
+          child = this.render(jsxChild, propsInit, celScope, renderContext);
         }
       } else {
         const childText = this.evaluateExpression(jsxChild, celScope);
