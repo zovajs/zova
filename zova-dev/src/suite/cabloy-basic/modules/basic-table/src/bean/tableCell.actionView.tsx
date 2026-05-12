@@ -25,7 +25,7 @@ export class TableCellActionView extends BeanBase implements ITableCellRender {
         onClick={async e => {
           e.preventDefault();
           e.stopPropagation();
-          await $host.$performAction('basic-actions:view', options, renderContext);
+          await $host.$performCommand('basic-commands:view', options, renderContext);
         }}
       >
         {value}

@@ -23,7 +23,7 @@ export class TableCellActionUpdate extends BeanBase implements ITableCellRender 
         class={options.class}
         type="button"
         onClick={async () => {
-          await $host.$performAction('basic-actions:edit', options, renderContext);
+          await $host.$performCommand('basic-commands:edit', options, renderContext);
         }}
       >
         <ZIcon name="::draft" width={24}></ZIcon>

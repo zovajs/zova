@@ -58,8 +58,8 @@ export class ControllerActionSubmit extends BeanControllerBase {
     // edit
     if (!isNil($$pageEntry.entryId)) return;
     // create: replace by edit page
-    await $host.$performAction(
-      'basic-actions:edit',
+    await $host.$performCommand(
+      'basic-commands:edit',
       {
         replace: true,
         resource: $$pageEntry.resource,

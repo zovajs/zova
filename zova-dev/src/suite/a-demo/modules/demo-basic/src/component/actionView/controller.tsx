@@ -26,7 +26,7 @@ export class ControllerActionView extends BeanControllerBase {
         onClick={async e => {
           e.preventDefault();
           e.stopPropagation();
-          await this.$performAction('basic-actions:view', undefined, this.$$renderContext);
+          await this.$performCommand('basic-commands:view', undefined, this.$$renderContext);
         }}
       >
         {this.$slotDefault ? this.$slotDefault() : $celScope.value}

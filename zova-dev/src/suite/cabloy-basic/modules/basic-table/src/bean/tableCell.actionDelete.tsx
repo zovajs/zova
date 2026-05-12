@@ -25,7 +25,7 @@ export class TableCellActionDelete extends BeanBase implements ITableCellRender 
         onClick={async () => {
           // eslint-disable-next-line no-alert
           if (!window.confirm(this.scope.locale.DeleteConfirm())) return;
-          await $host.$performAction('basic-actions:delete', options, renderContext);
+          await $host.$performCommand('basic-commands:delete', options, renderContext);
         }}
       >
         <ZIcon name="::delete" width={24}></ZIcon>

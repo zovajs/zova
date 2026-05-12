@@ -27,7 +27,7 @@ export class ControllerActionCreate extends BeanControllerBase {
         class={this.$props.class}
         type="button"
         onClick={async () => {
-          await this.$performAction('basic-actions:create', this.$props, this.$$renderContext);
+          await this.$performCommand('basic-commands:create', this.$props, this.$$renderContext);
         }}
       >
         {this.scope.locale.Create()}
