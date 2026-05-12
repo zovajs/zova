@@ -1,6 +1,6 @@
 import type { ModelTabs, ModelTabsOptions } from 'zova-module-a-routertabs';
 
-import { BeanControllerBase, Use, useCustomRef } from 'zova';
+import { BeanControllerBase, Use } from 'zova';
 import { Controller } from 'zova-module-a-bean';
 import { $QueryAutoLoad } from 'zova-module-a-model';
 
@@ -41,7 +41,7 @@ export class ControllerLayoutTabs extends BeanControllerBase {
       return width <= this.sys.config.layout.sidebar.breakpoint;
     });
     // leftDrawerOpen
-    this.leftDrawerOpen = useCustomRef(() => {
+    this.leftDrawerOpen = this.$customRef(() => {
       const self = this;
       return {
         get() {

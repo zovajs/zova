@@ -1,6 +1,6 @@
 {
   "name": "zova-ui-quasar",
-  "version": "5.1.57",
+  "version": "5.1.80",
   "description": "A vue3 quasar framework with ioc",
   "publishConfig": {
     "access": "public"
@@ -45,28 +45,28 @@
     "cors": "^2.8.6",
     "express": "^5.2.1",
     "quasar": "^2.19.3",
-    "vue": "^3.5.32",
+    "vue": "^3.5.34",
     "vue-router": "npm:@cabloy/vue-router@^4.4.16",
-    "zova": "^5.1.39"
+    "zova": "^5.1.61"
   },
   "devDependencies": {
-    "@cabloy/lint": "^5.1.8",
+    "@cabloy/lint": "^5.1.9",
     "@cabloy/openapi-typescript": "^7.9.2",
     "@quasar/app-vite": "npm:@cabloy/quasar-app-vite@^2.5.9",
-    "@types/node": "^22.19.17",
-    "autoprefixer": "^10.4.27",
+    "@types/node": "^22.19.19",
+    "autoprefixer": "^10.5.0",
     "concurrently": "^8.2.2",
     "oxfmt": "^0.45.0",
-    "oxlint": "^1.60.0",
-    "quasar-app-extension-zova": "^1.2.20",
+    "oxlint": "^1.64.0",
+    "quasar-app-extension-zova": "^1.2.25",
     "typescript": "^5.9.3",
-    "vite": "^7.3.2",
+    "vite": "^7.3.3",
     "vite-plugin-fake-server-turbo": "^3.0.18",
-    "vue-tsc": "^3.2.6",
-    "zova-vite": "^1.1.20"
+    "vue-tsc": "^3.2.8",
+    "zova-vite": "^1.1.24"
   },
   "license": "MIT",
-  "gitHead": "4d11b0fed7af50b828971785af3c014046be6afa",
+  "gitHead": "1c1c99cd879a2f00f32fb4b369a16ae90b9405da",
   "pnpm": {
     "overrides": {
       "@quasar/app-vite": "npm:@cabloy/quasar-app-vite@^2.5.9",
