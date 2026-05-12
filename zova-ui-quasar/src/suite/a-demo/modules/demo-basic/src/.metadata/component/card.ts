@@ -10,7 +10,10 @@ export type TypeControllerCardPublicProps = {
   controllerRef?: (ref: ControllerCard) => void;
 } & ControllerCardProps;
 
-type ControllerInnerProps = TypeControllerInnerProps<ControllerCardProps, keyof typeof ControllerCard.$propsDefault>;
+type ControllerInnerProps = TypeControllerInnerProps<
+  ControllerCardProps,
+  keyof typeof ControllerCard.$propsDefault
+>;
 declare module 'zova-module-demo-basic' {
   export interface ControllerCard {
     $props: ControllerInnerProps;
@@ -21,3 +24,8 @@ export const ZCard = defineComponent((_props: TypeControllerCardPublicProps) => 
   useController(ControllerCard, undefined, undefined);
   return () => {};
 }, prepareComponentOptions());
+declare module 'zova-module-a-bean' {
+  export interface IVonaComponentRecord {
+    'demo-basic:card': ControllerCardProps;
+  }
+}
