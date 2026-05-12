@@ -69,11 +69,13 @@ export class ZovaJsx extends BeanSimple {
     // component
     if (isJsxComponent(componentJsx)) {
       const transientObject = this.transientObject;
-      return () => {
+      const renderFn = () => {
         return this.setTransientObject(transientObject, () => {
           return this.render(componentJsx, props, celScope, renderContext);
         });
       };
+      renderFn['zova-jsx:component'] = componentJsx.type;
+      return renderFn;
     }
     if (isJsxEvent(componentJsx)) {
       let transientObject = this.transientObject;
