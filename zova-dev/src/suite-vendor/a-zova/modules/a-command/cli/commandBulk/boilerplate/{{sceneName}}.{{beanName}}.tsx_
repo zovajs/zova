@@ -1,15 +1,16 @@
 import type { IJsxRenderContextBase } from 'zova-module-a-openapi';
 
-import { BeanBase } from 'zova';
-import { Command, type ICommandExecute, type ICommandOptionsBase, type NextCommandExecute } from 'zova-module-a-command';
+import { BeanCommandBulkBase, Command, type ICommandBulkOptionsBase, type ICommandExecute, type NextCommandExecute } from 'zova-module-a-command';
 
 export type TypeCommand<%=argv.beanNameCapitalize%>Result = unknown;
 
-export interface ICommandOptions<%=argv.beanNameCapitalize%> extends ICommandOptionsBase<TypeCommand<%=argv.beanNameCapitalize%>Result> {}
+export interface ICommandOptions<%=argv.beanNameCapitalize%> extends ICommandBulkOptionsBase<TypeCommand<%=argv.beanNameCapitalize%>Result> {}
 
 @Command<ICommandOptions<%=argv.beanNameCapitalize%>>()
-export class Command<%=argv.beanNameCapitalize%> extends BeanBase implements ICommandExecute {
-  execute(_options: ICommandOptions<%=argv.beanNameCapitalize%>, _renderContext: IJsxRenderContextBase, next: NextCommandExecute) {
+export class Command<%=argv.beanNameCapitalize%> extends BeanCommandBulkBase implements ICommandExecute {
+  execute(options: ICommandOptions<%=argv.beanNameCapitalize%>, renderContext: IJsxRenderContextBase, next: NextCommandExecute) {
+    const { $host } = renderContext;
+    const { resource } = this.getResource(options, renderContext);
     return next();
   }
 }
