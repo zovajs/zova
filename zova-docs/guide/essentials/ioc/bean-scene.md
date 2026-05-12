@@ -17,11 +17,11 @@ Zova provides a set of decorator functions for declaring that a Bean Class is in
 | @Bean       | General Service            | bean       | ctx                     |
 | @Data       | Data Bean                  | data       | new                     |
 
-- a-action
+- a-command
 
-| Name    | Description | Scene  | Default Injection Scope |
-| ------- | ----------- | ------ | ----------------------- |
-| @Action | Action Bean | action | sys                     |
+| Name     | Description  | Scene   | Default Injection Scope |
+| -------- | ------------ | ------- | ----------------------- |
+| @Command | Command Bean | command | sys                     |
 
 - a-api
 

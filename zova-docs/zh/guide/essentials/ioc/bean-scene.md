@@ -17,11 +17,11 @@ Zova 提供了一组装饰器函数，用于声明 Bean Class 是可注入的。
 | @Bean       | General Service            | bean       | ctx          |
 | @Data       | Data Bean                  | data       | new          |
 
-- a-action
+- a-command
 
-| 名称    | 说明        | Scene  | 默认注入范围 |
-| ------- | ----------- | ------ | ------------ |
-| @Action | Action Bean | action | sys          |
+| 名称     | 说明         | Scene   | 默认注入范围 |
+| -------- | ------------ | ------- | ------------ |
+| @Command | Command Bean | command | sys          |
 
 - a-api
 

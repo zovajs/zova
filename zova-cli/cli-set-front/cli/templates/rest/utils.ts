@@ -1,6 +1,6 @@
 import type { PrefixKeys } from 'zova';
-import type { IActionRecord, TypeActionOptions } from 'zova-module-a-action';
 import type { IVonaComponentRecord, TypeComponentOptions } from 'zova-module-a-bean';
+import type { ICommandRecord, TypeCommandOptions } from 'zova-module-a-command';
 import type { IIconRecord } from 'zova-module-a-icon';
 import type { TypePagePathSchema } from 'zova-module-a-router';
 import type { CssBase } from 'zova-module-home-theme';
@@ -36,9 +36,9 @@ export function $iconName<K extends keyof IIconRecord>(name: K): any {
   return name;
 }
 
-export function Action<K extends keyof IActionRecord>(options: TypeActionOptions<K>) {
-  if (!options.name) throw new Error('should specify the action name');
-  return options.name.replace(':', '.action.');
+export function Command<K extends keyof ICommandRecord>(options: TypeCommandOptions<K>) {
+  if (!options.name) throw new Error('should specify the command name');
+  return options.name.replace(':', '.command.');
 }
 
 export function Component<K extends keyof IVonaComponentRecord>(options: TypeComponentOptions<K>) {
