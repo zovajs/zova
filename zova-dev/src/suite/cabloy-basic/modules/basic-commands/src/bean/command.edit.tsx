@@ -10,8 +10,8 @@ export interface ICommandOptionsEdit extends ICommandRowOptionsBase<TypeCommandE
 @Command<ICommandOptionsEdit>()
 export class CommandEdit extends BeanCommandRowBase implements ICommandExecute {
   execute(options: ICommandOptionsEdit, renderContext: IJsxRenderContextBase, next: NextCommandExecute) {
-    const { $host } = renderContext;
     const { resource, id } = this.getResourceAndId(options, renderContext);
+    const { $host } = renderContext;
     const url = $host.$router.getPagePath('/rest/resource/:resource/:id/:formScene?', {
       params: { resource, id: id.toString(), formScene: 'edit' },
     });

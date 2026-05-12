@@ -11,8 +11,8 @@ export interface ICommandOptionsCreate extends ICommandBulkOptionsBase<TypeComma
 @Command<ICommandOptionsCreate>()
 export class CommandCreate extends BeanCommandBulkBase implements ICommandExecute {
   execute(options: ICommandOptionsCreate, renderContext: IJsxRenderContextBase, next: NextCommandExecute) {
-    const { $host } = renderContext;
     const { resource } = this.getResource(options, renderContext);
+    const { $host } = renderContext;
     const url = $host.$router.getPagePath('/rest/resource/:resource/create', {
       params: { resource },
     });
