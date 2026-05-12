@@ -47,9 +47,9 @@ export function ZovaCommand<K extends keyof ICommandRecord>(options: TypeCommand
 }
 
 export function ZovaEvent(_options: IJsxCommandOptionsEvent) {
-  return 'ActionEvent';
+  return 'ZovaEvent';
 }
 
 export function ZovaCommands(_options: IJsxCommandOptionsCommands) {
-  return 'ActionActions';
+  return 'ZovaCommands';
 }

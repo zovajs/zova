@@ -162,7 +162,7 @@ export class ZovaJsx extends BeanSimple {
       const vIf = this.evaluateExpression(actionChild.props?.['v-if'], celScope);
       if (vIf === false) return next(undefined);
       // action
-      if (actionChild.type === 'ActionActions') {
+      if (actionChild.type === 'ZovaCommands') {
         // nested action
         eventRes[index] = [];
         return this.renderEventDirect(actionChild, objectAssignReactive({}, celScope), renderContext, eventRes[index], next);
