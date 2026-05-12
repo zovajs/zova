@@ -10,7 +10,10 @@ export type TypeControllerLayoutEmptyPublicProps = {
   controllerRef?: (ref: ControllerLayoutEmpty) => void;
 } & ControllerLayoutEmptyProps;
 
-type ControllerInnerProps = TypeControllerInnerProps<ControllerLayoutEmptyProps, keyof typeof ControllerLayoutEmpty.$propsDefault>;
+type ControllerInnerProps = TypeControllerInnerProps<
+  ControllerLayoutEmptyProps,
+  keyof typeof ControllerLayoutEmpty.$propsDefault
+>;
 declare module 'zova-module-home-layoutempty' {
   export interface ControllerLayoutEmpty {
     $props: ControllerInnerProps;
@@ -21,3 +24,8 @@ export const ZLayoutEmpty = defineComponent((_props: TypeControllerLayoutEmptyPu
   useController(ControllerLayoutEmpty, undefined, undefined);
   return () => {};
 }, prepareComponentOptions());
+declare module 'zova-module-a-bean' {
+  export interface IVonaComponentRecord {
+    'home-layoutempty:layoutEmpty': ControllerLayoutEmptyProps;
+  }
+}
