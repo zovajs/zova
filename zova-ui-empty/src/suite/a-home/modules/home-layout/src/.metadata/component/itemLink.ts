@@ -10,7 +10,10 @@ export type TypeControllerItemLinkPublicProps = {
   controllerRef?: (ref: ControllerItemLink) => void;
 } & ControllerItemLinkProps;
 
-type ControllerInnerProps = TypeControllerInnerProps<ControllerItemLinkProps, keyof typeof ControllerItemLink.$propsDefault>;
+type ControllerInnerProps = TypeControllerInnerProps<
+  ControllerItemLinkProps,
+  keyof typeof ControllerItemLink.$propsDefault
+>;
 declare module 'zova-module-home-layout' {
   export interface ControllerItemLink {
     $props: ControllerInnerProps;
@@ -21,3 +24,8 @@ export const ZItemLink = defineComponent((_props: TypeControllerItemLinkPublicPr
   useController(ControllerItemLink, undefined, undefined);
   return () => {};
 }, prepareComponentOptions());
+declare module 'zova-module-a-bean' {
+  export interface IVonaComponentRecord {
+    'home-layout:itemLink': ControllerItemLinkProps;
+  }
+}

@@ -12,7 +12,10 @@ export type TypeControllerLayoutTabsPublicProps = {
   controllerRef?: (ref: ControllerLayoutTabs) => void;
 } & ControllerLayoutTabsProps;
 
-type ControllerInnerProps = TypeControllerInnerProps<ControllerLayoutTabsProps, keyof typeof ControllerLayoutTabs.$propsDefault>;
+type ControllerInnerProps = TypeControllerInnerProps<
+  ControllerLayoutTabsProps,
+  keyof typeof ControllerLayoutTabs.$propsDefault
+>;
 declare module 'zova-module-home-layout' {
   export interface ControllerLayoutTabs {
     $props: ControllerInnerProps;
@@ -28,3 +31,8 @@ export const ZLayoutTabs = defineComponent((_props: TypeControllerLayoutTabsPubl
   useController(ControllerLayoutTabs, RenderLayoutTabs, StyleLayoutTabs);
   return () => {};
 }, prepareComponentOptions());
+declare module 'zova-module-a-bean' {
+  export interface IVonaComponentRecord {
+    'home-layout:layoutTabs': ControllerLayoutTabsProps;
+  }
+}
