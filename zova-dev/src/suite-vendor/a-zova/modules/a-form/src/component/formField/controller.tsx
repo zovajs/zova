@@ -112,7 +112,7 @@ export class ControllerFormField<TParentData extends {} = {}> extends BeanContro
     // propsBucket
     const propsBucket = this.propsBucket;
     // props
-    const props: IFormFieldRenderContextProps = { name };
+    const props: IFormFieldRenderContextProps = { key: name, name };
     // class
     props.class = propsBucket.class;
     // readonly

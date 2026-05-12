@@ -72,6 +72,7 @@ export interface IFormFieldOptions<TParentData = {}>
 }
 
 export interface IFormFieldRenderContextProps {
+  key?: string;
   name?: string;
   class?: any;
   readonly?: boolean;

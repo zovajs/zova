@@ -5,5 +5,5 @@ export const renderFieldJsxPropsSystem = [
   'v-if',
   'v-for',
   'v-each',
-  'key',
+  //'key', // need key
 ];
