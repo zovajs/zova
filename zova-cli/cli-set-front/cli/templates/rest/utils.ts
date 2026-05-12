@@ -14,11 +14,11 @@ declare module 'zova-module-a-router' {
   }
 }
 
-export function $cssBase<K extends PrefixKeys<CssBase, 'c'>>(name: K): string {
+export function ZovaCssBase<K extends PrefixKeys<CssBase, 'c'>>(name: K): string {
   return `cssBase:${name}`;
 }
 
-export function $cssMerge(
+export function ZovaCssMerge(
   ...classes: (
     | string
     | false
@@ -32,7 +32,7 @@ export function $cssMerge(
   return classes;
 }
 
-export function $iconName<K extends keyof IIconRecord>(name: K): any {
+export function ZovaIconName<K extends keyof IIconRecord>(name: K): any {
   return name;
 }
 
