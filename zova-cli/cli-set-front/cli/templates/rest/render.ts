@@ -21,7 +21,7 @@ import {
   schemaRenderVisible,
 } from './rest.ts';
 
-export const render = {
+export const ZovaRender = {
   // render
   layout: schemaRenderLayout,
   visible: schemaRenderVisible,
