@@ -56,7 +56,9 @@
         "beanGeneral": true,
         "optionsGlobalInterfaceName": "IDecoratorCommandOptions",
         "optionsGlobalInterfaceFrom": "zova-module-a-command",
-        "boilerplate": "command/boilerplate"
+        "boilerplate": "command/boilerplate",
+        "boilerplateCommandBulk": "commandBulk/boilerplate",
+        "boilerplateCommandRow": "commandRow/boilerplate"
       }
     },
     "capabilities": {

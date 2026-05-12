@@ -1,9 +1,11 @@
+import type { IJsxRenderContextBase } from 'zova-module-a-openapi';
+import type { IJsxRenderContextTableCell } from 'zova-module-a-table';
+
 import { isNil } from '@cabloy/utils';
 import { TableIdentity } from 'table-identity';
 import { BeanBase } from 'zova';
-import { ICommandRowOptionsBase } from 'zova-module-a-command';
-import { IJsxRenderContextBase } from 'zova-module-a-openapi';
-import { IJsxRenderContextTableCell } from 'zova-module-a-table';
+
+import type { ICommandRowOptionsBase } from '../types/command.js';
 
 export class BeanCommandRowBase extends BeanBase {
   getResourceAndId(options: ICommandRowOptionsBase, renderContext: IJsxRenderContextBase) {
