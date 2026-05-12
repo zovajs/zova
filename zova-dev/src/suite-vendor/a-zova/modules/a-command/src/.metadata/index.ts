@@ -18,11 +18,12 @@ declare module 'zova' {
   export interface IBeanScopeRecord {
     'a-command': ScopeModuleACommand;
   }
+  
+  
 
+  
 
-
-
-
+  
 }
-
+  
 /** scope: end */
