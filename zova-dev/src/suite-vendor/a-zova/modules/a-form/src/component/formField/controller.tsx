@@ -41,8 +41,8 @@ export class ControllerFormField<TParentData extends {} = {}> extends BeanContro
     // provide
     this.bean._setBean('$$formField', this);
     // field
-    const options = this._getFormFieldOptions();
-    this._formField = markRaw(useField(options as any)) as any;
+    this._formField = this._createField();
+    // propsBucket
     this.propsBucket = this.$computed(() => {
       return this._getPropsBucket();
     });
@@ -122,6 +122,11 @@ export class ControllerFormField<TParentData extends {} = {}> extends BeanContro
     const celScope = this.$$form.getFieldScope(this.name, {});
     const jsxRenderContext = this.$$form.getFieldJsxRenderContext(this, celScope);
     return { propsBucket, props, celScope, jsxRenderContext };
+  }
+
+  private _createField() {
+    const options = this._getFormFieldOptions();
+    return markRaw(useField(options as any)) as any;
   }
 
   private _getPropsBucket() {
