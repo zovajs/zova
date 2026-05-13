@@ -1,5 +1,5 @@
 import { isNil } from '@cabloy/utils';
-import { useField } from '@tanstack/vue-form';
+import { useField, useStore } from '@tanstack/vue-form';
 import { markRaw } from 'vue';
 import z from 'zod';
 import { BeanControllerBase, deepEqual, IComponentOptions, Use } from 'zova';
@@ -126,7 +126,9 @@ export class ControllerFormField<TParentData extends {} = {}> extends BeanContro
 
   private _createField() {
     const options = this._getFormFieldOptions();
-    return markRaw(useField(options as any)) as any;
+    const field = markRaw(useField(options as any)) as any;
+    const fieldState = useStore(field.api.store, state => state) as any;
+    return { api: field.api, state: fieldState };
   }
 
   private _getPropsBucket() {
