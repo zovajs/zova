@@ -4,5 +4,5 @@ import { ZPageHome } from './.metadata/page/home.js';
 
 export const routes: IModuleRoute[] = [
   //
-  { path: '', component: ZPageHome },
+  { path: '', component: ZPageHome, meta: { requiresAuth: false } },
 ];
