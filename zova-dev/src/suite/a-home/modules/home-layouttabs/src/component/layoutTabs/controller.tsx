@@ -42,6 +42,7 @@ export class ControllerLayoutTabs extends BeanControllerBase {
     });
     // leftDrawerOpen
     this.leftDrawerOpen = this.$customRef(() => {
+      // eslint-disable-next-line
       const self = this;
       return {
         get() {
