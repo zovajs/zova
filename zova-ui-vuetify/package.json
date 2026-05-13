@@ -122,7 +122,6 @@
     "zova-module-home-index": "workspace:^",
     "zova-module-home-layoutempty": "workspace:^",
     "zova-module-home-layouttabs": "workspace:^",
-    "zova-module-home-login": "workspace:^",
     "zova-module-home-passport": "workspace:^",
     "zova-module-home-theme": "workspace:^",
     "zova-module-rest-resource": "^5.1.19",
