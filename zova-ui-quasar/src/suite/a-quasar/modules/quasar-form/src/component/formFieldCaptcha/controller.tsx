@@ -1,7 +1,7 @@
 import type { IComponentOptions, TypeEventOff } from 'zova';
 import type { ICaptchaData, ICaptchaSceneRecord, IResourceFormFieldOptionsBase } from 'zova-module-a-openapi';
 
-import { QInput, QInputProps } from 'quasar';
+import { QIcon, QInput, QInputProps } from 'quasar';
 import { BeanControllerBase, ClientOnly, Use } from 'zova';
 import { Controller } from 'zova-module-a-bean';
 import { ControllerForm, ZFormField, type IFormFieldComponentOptions } from 'zova-module-a-form';
@@ -101,7 +101,7 @@ export class ControllerFormFieldCaptcha extends BeanControllerBase {
     return (
       <ZFormField
         {...this.$props}
-        slotDefault={({ props }, $$formField) => {
+        slotDefault={({ propsBucket, props }, $$formField) => {
           const propsNew: QInputProps = {
             'type': 'text',
             'label': this.scope.locale.InputCaptcha(),
@@ -120,13 +120,14 @@ export class ControllerFormFieldCaptcha extends BeanControllerBase {
             },
             ...props,
           };
-          return (
-            <QInput {...propsNew}>
-              {{
-                append: () => this._renderCaptcha(),
-              }}
-            </QInput>
-          );
+          // slots
+          const slots: any = {
+            append: () => this._renderCaptcha(),
+          };
+          if (propsBucket.layout?.iconPrefix) {
+            slots.prepend = () => <QIcon name={propsBucket.layout?.iconPrefix}></QIcon>;
+          }
+          return <QInput {...propsNew} v-slots={slots}></QInput>;
         }}
       ></ZFormField>
     );
