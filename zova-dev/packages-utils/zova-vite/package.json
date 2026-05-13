@@ -62,7 +62,7 @@
     "babel-plugin-zova-component": "^1.1.9",
     "chalk": "^3.0.0",
     "esbuild": "^0.25.12",
-    "fs-extra": "^11.3.4",
+    "fs-extra": "^11.3.5",
     "lodash": "^4.18.1",
     "minimist": "^1.2.8",
     "terser": "^5.46.1",
