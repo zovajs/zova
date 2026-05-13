@@ -87,7 +87,7 @@
     "vue": "^3.5.34",
     "vue-router": "npm:@cabloy/vue-router@^4.4.16",
     "vuetify": "^4.0.7",
-    "zod": "npm:@cabloy/zod@4.3.6",
+    "zod": "^4.3.6",
     "zova": "^5.1.63",
     "zova-jsx": "^1.1.38",
     "zova-module-a-api": "^5.1.10",
