@@ -35,6 +35,8 @@ export class ControllerActionSubmit extends BeanControllerBase {
           class={classes(this.$props.class, isSubmitting && 'btn-disabled')}
           type="submit"
           onClick={async (e: Event) => {
+            e.preventDefault();
+            e.stopPropagation();
             this.onClick(e);
           }}
         >
