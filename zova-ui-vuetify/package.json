@@ -1,6 +1,6 @@
 {
   "name": "zova-ui-vuetify",
-  "version": "5.1.88",
+  "version": "5.1.89",
   "gitHead": "1c1c99cd879a2f00f32fb4b369a16ae90b9405da",
   "description": "A vue3 vuetify framework with ioc",
   "keywords": [
