@@ -1,13 +1,29 @@
-import type { QInputProps } from 'quasar';
+import type { IComponentOptions, TypeEventOff } from 'zova';
+import type { ICaptchaData, ICaptchaSceneRecord, IResourceFormFieldOptionsBase } from 'zova-module-a-openapi';
 
-import { QInput } from 'quasar';
-import { BeanControllerBase, ClientOnly, IComponentOptions, TypeEventOff, Use } from 'zova';
+import { QInput, QInputProps } from 'quasar';
+import { BeanControllerBase, ClientOnly, Use } from 'zova';
 import { Controller } from 'zova-module-a-bean';
-import { ControllerForm, IFormFieldPresetOptions, ZFormField } from 'zova-module-a-form';
-import { ICaptchaData } from 'zova-module-a-openapi';
+import { ControllerForm, ZFormField, type IFormFieldComponentOptions } from 'zova-module-a-form';
 import { ToolV } from 'zova-module-a-zod';
 
-export interface ControllerFormFieldCaptchaProps extends IFormFieldPresetOptions {}
+declare module 'zova-module-a-openapi' {
+  export interface IResourceFormFieldRecord {
+    'quasar-form:formFieldCaptcha'?: IResourceFormFieldCaptchaOptions;
+  }
+
+  export interface ICaptchaSceneRecord {
+    'captcha-simple:simple': never;
+  }
+}
+
+export interface IResourceFormFieldCaptchaOptions extends IResourceFormFieldOptionsBase {
+  scene?: keyof ICaptchaSceneRecord;
+}
+
+export interface ControllerFormFieldCaptchaProps extends IFormFieldComponentOptions {
+  options?: IResourceFormFieldCaptchaOptions;
+}
 
 @Controller()
 export class ControllerFormFieldCaptcha extends BeanControllerBase {
@@ -75,7 +91,7 @@ export class ControllerFormFieldCaptcha extends BeanControllerBase {
   }
 
   private setFieldCaptchaData() {
-    this.$$form.setFieldValue(this.$props.name, {
+    this.$$form.setFieldValue(this.$props.name!, {
       id: this.captchaData?.id,
       token: this.captchaData?.token,
     });

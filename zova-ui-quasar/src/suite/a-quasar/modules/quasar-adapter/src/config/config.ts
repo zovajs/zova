@@ -1,20 +1,18 @@
 import type { ZovaSys } from 'zova';
 
-import { QInput } from 'quasar';
-import { IResourceProviders } from 'zova-module-a-openapi';
+import { IFormProvider } from 'zova-module-a-openapi';
 
 export const config = (_sys: ZovaSys) => {
-  const resourceProviders: IResourceProviders = {
+  const formProvider: IFormProvider = {
     behaviors: {
       FormField: 'quasar-form:formField',
       FormFieldLayout: 'quasar-form:formFieldLayout',
     },
-    formFields: {
-      Input: QInput,
-      Captcha: 'quasar-form:formFieldCaptcha',
+    components: {
+      Input: 'quasar-form:formFieldInput',
     },
   };
   return {
-    resourceProviders,
+    formProvider,
   };
 };

@@ -18,6 +18,6 @@ export class MonkeySys extends BeanSimple implements IMonkeySysInitialize {
     // config
     const configSelf = this.sys.util.getModuleConfigSafe(__ThisModule__);
     const configOpenapi = this.sys.util.getModuleConfigSafe('a-openapi');
-    configOpenapi.resourceProviders = deepExtend({}, configOpenapi.resourceProviders, configSelf.resourceProviders);
+    configOpenapi.formProvider = deepExtend({}, configOpenapi.formProvider, configSelf.formProvider);
   }
 }
