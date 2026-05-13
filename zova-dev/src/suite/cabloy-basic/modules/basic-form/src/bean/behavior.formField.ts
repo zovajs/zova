@@ -24,7 +24,7 @@ export class BehaviorFormField extends BeanBehaviorBase<IBehaviorOptionsFormFiel
   //   const $$form = this.$$formField.$$form;
   //   const formMeta = this.$$formField.formMeta;
   //   const field = this.$$formField.field;
-  //   const needPatch = !isJsxComponent(renderContext.propsBucket.render) || $$form.isComponentFormField(renderContext.propsBucket.renderProvider);
+  //   const needPatch = !isJsxComponent(renderContext.propsBucket.render) && $$form.isComponentFormField(renderContext.propsBucket.renderProvider);
   //   if (!needPatch) return;
   //   // propsPatch
   //   const propsPatch = this._patchProps_general(formMeta, field, renderContext);

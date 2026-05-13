@@ -1,6 +1,7 @@
 // eslint-disable
 /** controller: begin */
 export * from '../component/formFieldCaptcha/controller.jsx';
+export * from '../component/formFieldInput/controller.jsx';
 
 import 'zova';
 declare module 'zova' {
@@ -12,15 +13,22 @@ declare module 'zova-module-quasar-form' {
         export interface ControllerFormFieldCaptcha {
           /** @internal */
           get scope(): ScopeModuleQuasarForm;
+        }
+
+        export interface ControllerFormFieldInput {
+          /** @internal */
+          get scope(): ScopeModuleQuasarForm;
         } 
 }
 /** controller: end */
 /** controller: begin */
 import { ControllerFormFieldCaptcha } from '../component/formFieldCaptcha/controller.jsx';
+import { ControllerFormFieldInput } from '../component/formFieldInput/controller.jsx';
 import 'zova';
 declare module 'zova' {
   export interface IBeanRecordLocal {
     'quasar-form.controller.formFieldCaptcha': ControllerFormFieldCaptcha;
+'quasar-form.controller.formFieldInput': ControllerFormFieldInput;
   }
 }
 /** controller: end */
@@ -28,16 +36,21 @@ declare module 'zova' {
 /** components: begin */
 export * from './component/formFieldCaptcha.js';
 import { ZFormFieldCaptcha } from './component/formFieldCaptcha.js';
+export * from './component/formFieldInput.js';
+import { ZFormFieldInput } from './component/formFieldInput.js';
 export const components = {
   'formFieldCaptcha': ZFormFieldCaptcha,
+'formFieldInput': ZFormFieldInput,
 };
 import 'zova';
 declare module 'zova' {
 export interface IComponentRecord {
   'quasar-form:formFieldCaptcha': ControllerFormFieldCaptcha;
+'quasar-form:formFieldInput': ControllerFormFieldInput;
 }
 export interface IZovaComponentRecord {
   'quasar-form:formFieldCaptcha': typeof ZFormFieldCaptcha;
+'quasar-form:formFieldInput': typeof ZFormFieldInput;
 }
 }
 /** components: end */

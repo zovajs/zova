@@ -57,8 +57,18 @@ export class RenderPageLogin extends BeanRenderBase {
           window.alert(error.message);
         }}
       >
-        <ZFormFieldPreset name="username" iconPrefix=":daisy:person" label={this.scope.locale.YourUsername()}></ZFormFieldPreset>
-        <ZFormFieldPreset name="password" inputType="password" iconPrefix=":daisy:lock" label={this.scope.locale.YourPassword()}></ZFormFieldPreset>
+        <ZFormFieldPreset
+          name="username"
+          render={'quasar-form:formFieldInput'}
+          options={{ type: 'text' }}
+          layout={{ iconPrefix: ':daisy:person', label: this.scope.locale.YourUsername() }}
+        ></ZFormFieldPreset>
+        <ZFormFieldPreset
+          name="password"
+          render={'quasar-form:formFieldInput'}
+          options={{ type: 'password' }}
+          layout={{ iconPrefix: ':daisy:lock', label: this.scope.locale.YourPassword() }}
+        ></ZFormFieldPreset>
         <ZFormFieldPreset name="captcha"></ZFormFieldPreset>
         <ZFormFieldBlank
           slotDefault={$$form => {
