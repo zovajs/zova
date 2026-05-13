@@ -1,6 +1,7 @@
 import type { IComponentOptions, TypeEventOff } from 'zova';
 import type { ICaptchaData, ICaptchaSceneRecord, IResourceFormFieldOptionsBase } from 'zova-module-a-openapi';
 
+import { classes } from 'typestyle';
 import { BeanControllerBase, ClientOnly, Use } from 'zova';
 import { Controller } from 'zova-module-a-bean';
 import { ControllerForm, ZFormField, type IFormFieldComponentOptions } from 'zova-module-a-form';
@@ -98,13 +99,18 @@ export class ControllerFormFieldCaptcha extends BeanControllerBase {
       <>
         <ZFormField
           {...this.$props}
-          slotDefault={({ props }, $$formField) => {
+          slotDefault={({ propsBucket, props }, $$formField) => {
+            const className = !propsBucket.needHandleBorder
+              ? props.class
+              : classes(
+                  props.class,
+                  'input',
+                  propsBucket.layout?.bordered && 'input-bordered',
+                  !$$formField.field.state.meta.isValid && 'input-error',
+                );
             const propsNew: Omit<IResourceFormFieldInputOptions, 'style'> = {
-              ...props,
               type: 'text',
-              class: 'grow input',
               placeholder: this.scope.locale.InputCaptcha(),
-              value: this.captchaData?.token,
               onInput: (e: Event) => {
                 const token = (e.target as HTMLInputElement).value;
                 if (this.captchaData) {
@@ -115,6 +121,9 @@ export class ControllerFormFieldCaptcha extends BeanControllerBase {
                   token,
                 });
               },
+              value: this.captchaData?.token,
+              ...props,
+              class: className,
             };
             return <input {...propsNew}></input>;
           }}

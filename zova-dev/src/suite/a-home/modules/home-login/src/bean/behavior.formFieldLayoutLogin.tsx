@@ -26,7 +26,8 @@ export class BehaviorFormFieldLayoutLogin extends BeanBehaviorBase<
     const field = this.$$formField.field;
     const layout = renderContext.propsBucket.layout;
     // needHandleBorder
-    renderContext.propsBucket.needHandleBorder = layout?.disable || !layout?.inline;
+    // renderContext.propsBucket.needHandleBorder = layout?.disable || !layout?.inline;
+    renderContext.propsBucket.needHandleBorder = false;
     const vnode = next(renderContext);
     if (layout?.disable) return vnode;
     const iconPrefix = layout?.iconPrefix;
