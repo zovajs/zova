@@ -69,7 +69,7 @@ export class RenderPageLogin extends BeanRenderBase {
           options={{ type: 'password' }}
           layout={{ iconPrefix: ':daisy:lock', label: this.scope.locale.YourPassword() }}
         ></ZFormFieldPreset>
-        <ZFormFieldPreset name="captcha"></ZFormFieldPreset>
+        <ZFormFieldPreset name="captcha" render={'quasar-form:formFieldCaptcha'} layout={{ iconPrefix: ':editor:code-block' }}></ZFormFieldPreset>
         <ZFormFieldBlank
           slotDefault={$$form => {
             return (
