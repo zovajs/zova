@@ -1,7 +1,7 @@
 import type { IComponentOptions } from 'zova';
 import type { IResourceFormFieldOptionsBase } from 'zova-module-a-openapi';
 
-import { QIcon, QInput, QInputProps } from 'quasar';
+import { QIcon, QInput, type QInputProps } from 'quasar';
 import z from 'zod';
 import { BeanControllerBase } from 'zova';
 import { Controller } from 'zova-module-a-bean';

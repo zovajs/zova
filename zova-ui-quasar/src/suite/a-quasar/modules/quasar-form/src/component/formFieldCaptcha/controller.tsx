@@ -1,7 +1,7 @@
 import type { IComponentOptions, TypeEventOff } from 'zova';
 import type { ICaptchaData, ICaptchaSceneRecord, IResourceFormFieldOptionsBase } from 'zova-module-a-openapi';
 
-import { QIcon, QInput, QInputProps } from 'quasar';
+import { QIcon, QInput, type QInputProps } from 'quasar';
 import { BeanControllerBase, ClientOnly, Use } from 'zova';
 import { Controller } from 'zova-module-a-bean';
 import { ControllerForm, ZFormField, type IFormFieldComponentOptions } from 'zova-module-a-form';
