@@ -136,7 +136,7 @@ export class ModelPassport extends BeanModelBase {
 
   async ensurePassport() {
     if (process.env.CLIENT) return this.passport;
-    if (!this.isAuthenticated && this.accessToken) {
+    if (!this.sys.config.ssr.ignoreCookieOnServer && !this.isAuthenticated && this.accessToken) {
       this.passport = await this.$api.homeUserPassport.current();
       this._setLocaleTz();
     }
