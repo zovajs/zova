@@ -5,8 +5,7 @@
   "author": "zhennann",
   "type": "module",
   "dependencies": {
-    "zova-module-vuetify-adapter": "workspace:^",
-    "zova-module-vuetify-form": "workspace:^"
+    "zova-module-vuetify-adapter": "workspace:^"
   },
   "title": "a-vuetify"
 }

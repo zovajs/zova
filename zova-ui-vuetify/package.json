@@ -126,7 +126,6 @@
     "zova-module-home-theme": "workspace:^",
     "zova-module-rest-resource": "^5.1.19",
     "zova-module-vuetify-adapter": "workspace:^",
-    "zova-module-vuetify-form": "workspace:^",
     "zova-suite-a-cabloy": "^5.1.20"
   },
   "devDependencies": {
