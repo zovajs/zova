@@ -121,6 +121,9 @@ export class ControllerFormFieldCaptcha extends BeanControllerBase {
                   token,
                 });
               },
+              onBlur: () => {
+                $$formField.handleBlur();
+              },
               value: this.captchaData?.token,
               ...props,
               class: className,

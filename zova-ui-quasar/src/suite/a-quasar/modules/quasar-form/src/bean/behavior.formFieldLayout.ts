@@ -14,7 +14,7 @@ export interface IBehaviorResourceFormFieldLayoutOptions {
   disable?: boolean;
   class?: any;
   style?: types.NestedCSSProperties;
-  label?: string | false;
+  label?: string;
   inline?: boolean;
   bordered?: boolean;
   floating?: boolean;

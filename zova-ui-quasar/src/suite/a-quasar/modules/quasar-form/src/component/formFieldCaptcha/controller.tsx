@@ -103,7 +103,7 @@ export class ControllerFormFieldCaptcha extends BeanControllerBase {
         {...this.$props}
         slotDefault={({ props }, $$formField) => {
           const propsNew: QInputProps = {
-            ...props,
+            'type': 'text',
             'label': this.scope.locale.InputCaptcha(),
             'modelValue': this.captchaData?.token as any,
             'onUpdate:modelValue': token => {
@@ -115,6 +115,10 @@ export class ControllerFormFieldCaptcha extends BeanControllerBase {
                 token,
               });
             },
+            'onBlur': () => {
+              $$formField.handleBlur();
+            },
+            ...props,
           };
           return (
             <QInput {...propsNew}>
