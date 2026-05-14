@@ -4,7 +4,11 @@ import type { IResourceFormFieldOptionsBase } from 'zova-module-a-openapi';
 import { classes } from 'typestyle';
 import { BeanControllerBase } from 'zova';
 import { Controller } from 'zova-module-a-bean';
-import { ZFormField, type HTMLInputElementType, type IFormFieldComponentOptions } from 'zova-module-a-form';
+import {
+  type HTMLInputElementType,
+  ZFormField,
+  type IFormFieldComponentOptions,
+} from 'zova-module-a-form';
 
 declare module 'zova-module-a-openapi' {
   export interface IResourceFormFieldRecord {
@@ -39,12 +43,20 @@ export class ControllerFormFieldInput extends BeanControllerBase {
         slotDefault={({ propsBucket, props }, $$formField) => {
           const className = !propsBucket.needHandleBorder
             ? props.class
-            : classes(props.class, 'input', propsBucket.layout?.bordered && 'input-bordered', !$$formField.field.state.meta.isValid && 'input-error');
+            : classes(
+                props.class,
+                'input',
+                propsBucket.layout?.bordered && 'input-bordered',
+                !$$formField.field.state.meta.isValid && 'input-error',
+              );
           const propsNew: Omit<IResourceFormFieldInputOptions, 'style'> = {
             type: 'text',
             placeholder: undefined,
             onInput: (e: Event) => {
-              $$formField.setValue((e.target as HTMLInputElement).value, propsBucket.disableNotifyChanged);
+              $$formField.setValue(
+                (e.target as HTMLInputElement).value,
+                propsBucket.disableNotifyChanged,
+              );
             },
             onBlur: () => {
               $$formField.handleBlur();
