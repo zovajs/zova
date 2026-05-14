@@ -18,7 +18,9 @@ import {
   IFormFieldRenderContextPropsBucket,
 } from '../../types/formField.js';
 
-export interface ControllerFormFieldProps<TParentData extends {} = {}> extends IFormFieldComponentOptions<TParentData> {}
+export interface ControllerFormFieldProps<
+  TParentData extends {} = {},
+> extends IFormFieldComponentOptions<TParentData> {}
 
 @Controller()
 export class ControllerFormField<TParentData extends {} = {}> extends BeanControllerBase {
@@ -143,18 +145,18 @@ export class ControllerFormField<TParentData extends {} = {}> extends BeanContro
         label: property?.title ?? name,
       },
       this.$$form.$props.formFieldLayout,
-      propsTop?.layout,
       this.$props?.layout,
+      propsTop?.layout,
     );
     // preset options
-    const presetOptions = Object.assign({}, propsTop?.options, this.$props?.options);
+    const presetOptions = Object.assign({}, this.$props?.options, propsTop?.options);
     // propsBucket
     const propsBucket = Object.assign(
       {
         render: 'Input',
       },
-      propsTop,
       this.$props as IFormFieldOptions<TParentData>,
+      propsTop,
       {
         layout: layoutOptions,
         options: presetOptions,
@@ -162,7 +164,10 @@ export class ControllerFormField<TParentData extends {} = {}> extends BeanContro
     );
     // class/style: layout
     if (propsBucket.layout.class || propsBucket.layout.style) {
-      propsBucket.layout.class = this.$cssMerge(propsBucket.layout.class, this.$style(propsBucket.layout.style));
+      propsBucket.layout.class = this.$cssMerge(
+        propsBucket.layout.class,
+        this.$style(propsBucket.layout.style),
+      );
       delete propsBucket.layout.style;
     }
     // class/style: need not check typeof propsBucket.render === 'string' because maybe return false
@@ -232,7 +237,9 @@ export class ControllerFormField<TParentData extends {} = {}> extends BeanContro
   private _getFormFieldOptions() {
     // defaultValue
     const value = this.$$form.getFieldValue(this.name);
-    const defaultValue = isNil(value) ? (this.$props.sys?.defaultValue ?? this.property?.default) : undefined;
+    const defaultValue = isNil(value)
+      ? (this.$props.sys?.defaultValue ?? this.property?.default)
+      : undefined;
     // validators
     const validators = this._getFormFieldOptionsValidators();
     return Object.assign(
@@ -251,7 +258,10 @@ export class ControllerFormField<TParentData extends {} = {}> extends BeanContro
   private _getFormFieldOptionsValidators() {
     const zodSchemaField = this.fieldZodSchema;
     const validators = this.$props.validators;
-    const validateOnDynamicDefault = validators?.onDynamic === undefined && validators?.onBlur === undefined && validators?.onChange === undefined;
+    const validateOnDynamicDefault =
+      validators?.onDynamic === undefined &&
+      validators?.onBlur === undefined &&
+      validators?.onChange === undefined;
     const validateOnDynamic = validators?.onDynamic ?? validateOnDynamicDefault;
     const validateOnBlur = validators?.onBlur;
     const validateOnChange = validators?.onChange;
@@ -267,7 +277,10 @@ export class ControllerFormField<TParentData extends {} = {}> extends BeanContro
   }
 }
 
-function _normalizeValidateSchema(validateSchema?: boolean | z.ZodType, zodSchemaField?: z.ZodType) {
+function _normalizeValidateSchema(
+  validateSchema?: boolean | z.ZodType,
+  zodSchemaField?: z.ZodType,
+) {
   if (!validateSchema) return undefined;
   if (validateSchema === true) return zodSchemaField;
   return validateSchema;
