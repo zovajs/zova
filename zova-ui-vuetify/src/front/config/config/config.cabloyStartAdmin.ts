@@ -6,6 +6,7 @@ export default function (_sys: ZovaSys) {
   // routes
   config.routes = {
     path: {
+      '/home/index': { alias: '/', meta: { requiresAuth: true } },
       ['/start/login' as any]: { alias: '/login' },
     },
     name: {},
