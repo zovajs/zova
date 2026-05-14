@@ -1,6 +1,6 @@
 {
   "name": "zova",
-  "version": "5.1.65",
+  "version": "5.1.66",
   "gitHead": "1c1c99cd879a2f00f32fb4b369a16ae90b9405da",
   "description": "A vue3 framework with ioc",
   "keywords": [
@@ -46,7 +46,7 @@
   },
   "dependencies": {
     "zova-core": "^5.1.33",
-    "zova-suite-a-zova": "^5.1.64"
+    "zova-suite-a-zova": "^5.1.65"
   },
   "devDependencies": {
     "clean-package": "^2.2.0",
