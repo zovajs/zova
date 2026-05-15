@@ -1,7 +1,11 @@
 import { BeanBase } from 'zova';
 import { ApiSchema, IApiSchemaOptions } from 'zova-module-a-api';
 
-import { ApiApiCaptchacreatePath, ApiApiCaptcharefreshPath, ApiApiCaptchaverifyImmediatePath } from '../api/captcha.js';
+import {
+  ApiApiCaptchacreatePath,
+  ApiApiCaptcharefreshPath,
+  ApiApiCaptchaverifyImmediatePath,
+} from '../api/captcha.js';
 
 @ApiSchema()
 export class ApiSchemaCaptcha extends BeanBase {

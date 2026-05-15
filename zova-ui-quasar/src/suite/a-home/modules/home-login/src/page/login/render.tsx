@@ -11,7 +11,14 @@ export class RenderPageLogin extends BeanRenderBase {
       <div class="q-pa-md row items-center justify-center" style={{ minHeight: '100vh' }}>
         <QCard class="shadow-2" style={{ width: '100%', maxWidth: '960px' }}>
           <div class="row">
-            <div class="col-12 col-md-6" style={{ background: 'var(--q-color-grey-3)', borderTopLeftRadius: '6px', borderBottomLeftRadius: '6px' }}>
+            <div
+              class="col-12 col-md-6"
+              style={{
+                background: 'var(--q-color-grey-3)',
+                borderTopLeftRadius: '6px',
+                borderBottomLeftRadius: '6px',
+              }}
+            >
               {this._renderLandingInfo()}
             </div>
             <div class="col-12 col-md-6" style={{ minWidth: '320px' }}>
@@ -69,12 +76,21 @@ export class RenderPageLogin extends BeanRenderBase {
           options={{ type: 'password' }}
           layout={{ iconPrefix: ':daisy:lock', label: this.scope.locale.YourPassword() }}
         ></ZFormFieldPreset>
-        <ZFormFieldPreset name="captcha" render={'quasar-form:formFieldCaptcha'} layout={{ iconPrefix: ':editor:code-block' }}></ZFormFieldPreset>
+        <ZFormFieldPreset
+          name="captcha"
+          render={'quasar-form:formFieldCaptcha'}
+          layout={{ iconPrefix: ':editor:code-block' }}
+        ></ZFormFieldPreset>
         <ZFormFieldBlank
           slotDefault={$$form => {
             return (
               <div class="text-center">
-                <QBtn label={this.scope.locale.Login()} disable={$$form.formState.isSubmitting} type="submit" color="primary"></QBtn>
+                <QBtn
+                  label={this.scope.locale.Login()}
+                  disable={$$form.formState.isSubmitting}
+                  type="submit"
+                  color="primary"
+                ></QBtn>
               </div>
             );
           }}

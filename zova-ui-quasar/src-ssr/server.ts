@@ -5,7 +5,13 @@
  * Runs in Node context.
  */
 
-import { defineSsrClose, defineSsrCreate, defineSsrListen, defineSsrRenderPreloadTag, defineSsrServeStaticContent } from '@quasar/app-vite/wrappers';
+import {
+  defineSsrClose,
+  defineSsrCreate,
+  defineSsrListen,
+  defineSsrRenderPreloadTag,
+  defineSsrServeStaticContent,
+} from '@quasar/app-vite/wrappers';
 import compression from 'compression';
 /**
  * Make sure to yarn add / npm install (in your project root)

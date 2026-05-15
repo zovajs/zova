@@ -36,7 +36,10 @@ export class BehaviorFormFieldLayout extends BeanBehaviorBase<
   IBehaviorPropsInputFormFieldLayout,
   IBehaviorPropsOutputFormFieldLayout
 > {
-  protected render(_props: IBehaviorPropsInputFormFieldLayout, next: NextBehavior<IBehaviorPropsOutputFormFieldLayout>): VNode {
+  protected render(
+    _props: IBehaviorPropsInputFormFieldLayout,
+    next: NextBehavior<IBehaviorPropsOutputFormFieldLayout>,
+  ): VNode {
     return next();
   }
 }

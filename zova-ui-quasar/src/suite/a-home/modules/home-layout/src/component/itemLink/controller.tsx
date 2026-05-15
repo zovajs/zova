@@ -20,7 +20,13 @@ export class ControllerItemLink extends BeanControllerBase {
 
   _renderLink() {
     return (
-      <QItem clickable tag="a" target={this.$props.href ? '_blank' : undefined} href={this.$props.href} to={this.$props.to}>
+      <QItem
+        clickable
+        tag="a"
+        target={this.$props.href ? '_blank' : undefined}
+        href={this.$props.href}
+        to={this.$props.to}
+      >
         <QItemSection avatar>
           <QIcon name={this.$props.icon} />
         </QItemSection>

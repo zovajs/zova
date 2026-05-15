@@ -26,7 +26,14 @@ export class RenderLayoutTabs extends BeanRenderBase {
       <QLayout view="lHh Lpr lFf">
         <QHeader elevated>
           <QToolbar>
-            <QBtn flat dense round icon="::menu" aria-label="Menu" onClick={() => this.toggleLeftDrawer()} />
+            <QBtn
+              flat
+              dense
+              round
+              icon="::menu"
+              aria-label="Menu"
+              onClick={() => this.toggleLeftDrawer()}
+            />
 
             <QToolbarTitle> Quasar App </QToolbarTitle>
 
@@ -34,7 +41,11 @@ export class RenderLayoutTabs extends BeanRenderBase {
           </QToolbar>
         </QHeader>
 
-        <QDrawer v-model={this.leftDrawerOpen} breakpoint={this.sys.config.layout.sidebar.breakpoint} bordered>
+        <QDrawer
+          v-model={this.leftDrawerOpen}
+          breakpoint={this.sys.config.layout.sidebar.breakpoint}
+          bordered
+        >
           {this.$$renderMenu.render()}
         </QDrawer>
 

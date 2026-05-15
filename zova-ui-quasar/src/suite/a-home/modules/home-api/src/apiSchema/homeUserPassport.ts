@@ -49,10 +49,18 @@ export class ApiSchemaHomeUserPassport extends BeanBase {
   }
 
   createPassportJwtFromOauthCode(options?: IApiSchemaOptions) {
-    return this.$sdk.createApiSchemas(ApiApiHomeUserPassportcreatePassportJwtFromOauthCodePath, 'post', options);
+    return this.$sdk.createApiSchemas(
+      ApiApiHomeUserPassportcreatePassportJwtFromOauthCodePath,
+      'post',
+      options,
+    );
   }
 
   createTempAuthToken(options?: IApiSchemaOptions) {
-    return this.$sdk.createApiSchemas(ApiApiHomeUserPassportcreateTempAuthTokenPath, 'post', options);
+    return this.$sdk.createApiSchemas(
+      ApiApiHomeUserPassportcreateTempAuthTokenPath,
+      'post',
+      options,
+    );
   }
 }

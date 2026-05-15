@@ -10,7 +10,12 @@ import type {
 import { combineQueries, isNil } from '@cabloy/utils';
 import { SchemaObject } from 'openapi3-ts/oas31';
 import { BeanModelBase, Model } from 'zova-module-a-model';
-import { IPermissionHint, IResourceFormActionRowNameRecord, IResourceTableActionNameRecord, TypeOpenapiPermissions } from 'zova-module-a-openapi';
+import {
+  IPermissionHint,
+  IResourceFormActionRowNameRecord,
+  IResourceTableActionNameRecord,
+  TypeOpenapiPermissions,
+} from 'zova-module-a-openapi';
 import { ApiApiHomeUserPassportloginOauthPath, OpenApiBaseURL } from 'zova-module-home-api';
 
 export interface IModelOptionsPassport extends IDecoratorModelOptions {}
@@ -27,10 +32,14 @@ export class ModelPassport extends BeanModelBase {
     this.schemaLogin = this.$computed(() => {
       return this.apiSchemasLogin.requestBody;
     });
-    this.passport = process.env.CLIENT ? this.$useStateLocal({ queryKey: ['passport'] }) : this.$useStateMem({ queryKey: ['passport'] });
+    this.passport = process.env.CLIENT
+      ? this.$useStateLocal({ queryKey: ['passport'] })
+      : this.$useStateMem({ queryKey: ['passport'] });
     this.jwt = this.$useStateLocal({ queryKey: ['jwt'] });
     this.expireTime = this.$useStateLocal({ queryKey: ['expireTime'] });
-    this.accessToken = this.sys.config.ssr.ignoreCookieOnServer ? undefined : this.$useStateCookie({ queryKey: ['token'] });
+    this.accessToken = this.sys.config.ssr.ignoreCookieOnServer
+      ? undefined
+      : this.$useStateCookie({ queryKey: ['token'] });
     if (process.env.CLIENT) {
       this._setLocaleTz();
     }
@@ -41,7 +50,10 @@ export class ModelPassport extends BeanModelBase {
   }
 
   login() {
-    return this.$useMutationData<ApiApiHomeUserPassportloginResponseBody, ApiApiHomeUserPassportloginRequestBody>({
+    return this.$useMutationData<
+      ApiApiHomeUserPassportloginResponseBody,
+      ApiApiHomeUserPassportloginRequestBody
+    >({
       mutationKey: ['login'],
       mutationFn: async params => {
         return this.$api.homeUserPassport.login(params, { authToken: false });
@@ -59,7 +71,9 @@ export class ModelPassport extends BeanModelBase {
     >({
       mutationKey: ['loginByOauthCode'],
       mutationFn: async params => {
-        return this.$api.homeUserPassport.createPassportJwtFromOauthCode(params, { authToken: false });
+        return this.$api.homeUserPassport.createPassportJwtFromOauthCode(params, {
+          authToken: false,
+        });
       },
       onSuccess: data => {
         this.afterLogin(data);
@@ -74,7 +88,11 @@ export class ModelPassport extends BeanModelBase {
       clientName,
     });
     const returnTo = this.app.$getReturnTo();
-    const redirect = this.$router.getPagePath('/home/base/authCallback', { query: { returnTo } }, true);
+    const redirect = this.$router.getPagePath(
+      '/home/base/authCallback',
+      { query: { returnTo } },
+      true,
+    );
     return combineQueries(`${OpenApiBaseURL(this.sys)}${apiPath}`, { redirect });
   }
 
@@ -125,7 +143,10 @@ export class ModelPassport extends BeanModelBase {
   }
 
   async refreshAuthToken(refreshToken: string): Promise<IJwtInfo> {
-    const jwt = await this.$api.homeUserPassport.refreshAuthToken({ refreshToken }, { authToken: false });
+    const jwt = await this.$api.homeUserPassport.refreshAuthToken(
+      { refreshToken },
+      { authToken: false },
+    );
     this._setJwt(jwt);
     return (await this.getJwtInfo())!;
   }
@@ -174,7 +195,8 @@ export class ModelPassport extends BeanModelBase {
   private _setJwt(jwt?: ApiApiHomeUserPassportloginResponseBody['jwt']) {
     if (jwt) {
       this.jwt = jwt;
-      this.expireTime = Date.now() + (jwt.expiresIn - this.scope.config.accessToken.expireTimeDelay) * 1000;
+      this.expireTime =
+        Date.now() + (jwt.expiresIn - this.scope.config.accessToken.expireTimeDelay) * 1000;
       this.accessToken = jwt.accessToken;
     } else {
       this.jwt = undefined;
@@ -195,9 +217,17 @@ export class ModelPassport extends BeanModelBase {
     if (permissions === false) return false;
     if (permissions === true) return true;
     // roleIds
-    if (permissions.roleIds && permissions.roleIds.some(roleId => this.roles?.some(role => role.id === roleId))) return true;
+    if (
+      permissions.roleIds &&
+      permissions.roleIds.some(roleId => this.roles?.some(role => role.id === roleId))
+    )
+      return true;
     // roleNames
-    if (permissions.roleNames && permissions.roleNames.some(roleName => this.roles?.some(role => role.name === roleName))) return true;
+    if (
+      permissions.roleNames &&
+      permissions.roleNames.some(roleName => this.roles?.some(role => role.name === roleName))
+    )
+      return true;
     // actions
     if (permissions.actions && !!permissions.actions[permissionAction]) return true;
     // others

@@ -1526,7 +1526,9 @@ export interface components {
       orderNo?: string;
       /** @description Remark */
       remark?: string | undefined;
-      products?: components['schemas']['test-vona.entity.product_29731960f3f38d3572bc2f8a01a7498bfe927055'][] | undefined;
+      products?:
+        | components['schemas']['test-vona.entity.product_29731960f3f38d3572bc2f8a01a7498bfe927055'][]
+        | undefined;
     };
     'test-vona.entity.product_29731960f3f38d3572bc2f8a01a7498bfe927055': {
       /** @description Name */
@@ -1546,7 +1548,9 @@ export interface components {
       orderNo?: string;
       /** @description Remark */
       remark?: string | undefined;
-      products?: components['schemas']['test-vona.entity.product_9cf2c6bcd41713270c34bcfce21b7b4942e3fbc6'][] | undefined;
+      products?:
+        | components['schemas']['test-vona.entity.product_9cf2c6bcd41713270c34bcfce21b7b4942e3fbc6'][]
+        | undefined;
     };
     'test-vona.entity.product_9cf2c6bcd41713270c34bcfce21b7b4942e3fbc6': {
       /**

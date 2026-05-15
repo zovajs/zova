@@ -13,7 +13,8 @@ declare module 'zova-module-a-openapi' {
   }
 }
 
-export interface IResourceFormFieldInputOptions extends IResourceFormFieldOptionsBase, QInputProps {}
+export interface IResourceFormFieldInputOptions
+  extends IResourceFormFieldOptionsBase, QInputProps {}
 
 export interface ControllerFormFieldInputProps extends IFormFieldComponentOptions {
   options?: IResourceFormFieldInputOptions;
