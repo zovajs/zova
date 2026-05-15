@@ -55,10 +55,12 @@ export class ControllerFormFieldCurrency extends BeanControllerBase {
             this.$$form.setFieldValue(this.$props.name!, valueNew);
           },
           onChange: (e: Event) => {
-            const value = (e.target as HTMLInputElement).value;
-            const valueInputPatch = currencyUpdate(value, currencyOptions);
-            if (valueInputPatch !== undefined) {
-              this._valueKeyboardInput = undefined;
+            if (this._valueKeyboardInput !== undefined) {
+              const value = (e.target as HTMLInputElement).value;
+              const valueInputPatch = currencyUpdate(value, currencyOptions);
+              if (valueInputPatch !== undefined) {
+                this._valueKeyboardInput = undefined;
+              }
             }
           },
         }}

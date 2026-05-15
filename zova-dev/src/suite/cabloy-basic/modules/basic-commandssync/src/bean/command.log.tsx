@@ -4,9 +4,9 @@ import { isNil } from '@cabloy/utils';
 import { BeanBase, Preload } from 'zova';
 import {
   Command,
-  ICommandExecute,
-  ICommandOptionsBase,
-  NextCommandExecute,
+  type ICommandExecute,
+  type ICommandOptionsBase,
+  type NextCommandExecute,
 } from 'zova-module-a-command';
 
 export type TypeCommandLogResult = unknown;
