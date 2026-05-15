@@ -8,6 +8,10 @@ export class MonkeySys extends BeanSimple implements IMonkeySysInitialize {
   async sysInitialize() {
     const configSelf = this.sys.util.getModuleConfigSafe(__ThisModule__);
     const configOpenapi = this.sys.util.getModuleConfigSafe('a-openapi');
-    configOpenapi.formProvider = deepExtend({}, configOpenapi.formProvider, configSelf.formProvider);
+    configOpenapi.formProvider = deepExtend(
+      {},
+      configOpenapi.formProvider,
+      configSelf.formProvider,
+    );
   }
 }
