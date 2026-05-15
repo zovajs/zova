@@ -16,7 +16,11 @@ import { VNode } from 'vue';
 import { BeanControllerBase, deepEqual, type IComponentOptions } from 'zova';
 import { ZovaJsx } from 'zova-jsx';
 import { Controller } from 'zova-module-a-bean';
-import { BeanControllerFormBase, formMetaFromFormScene, TypeFormOnSubmitData } from 'zova-module-a-form';
+import {
+  BeanControllerFormBase,
+  formMetaFromFormScene,
+  TypeFormOnSubmitData,
+} from 'zova-module-a-form';
 import { $QueriesAutoLoad } from 'zova-module-a-model';
 import { ModelResource } from 'zova-module-rest-resource';
 
@@ -31,11 +35,12 @@ export interface ControllerBlockPageEntryProps extends IResourceBlockOptionsBase
   resource?: string;
   id?: TableIdentity;
   formScene?: TypeFormScene;
+  pageTitleKey?: string;
 }
 
 @Controller()
 export class ControllerBlockPageEntry<TData extends {} = {}> extends BeanControllerBase {
-  static $propsDefault = {};
+  static $propsDefault = { pageTitleKey: 'name' };
   static $componentOptions: IComponentOptions = { inheritAttrs: false, deepExtendDefault: true };
 
   entryIdCreated?: TableIdentity;
@@ -54,7 +59,11 @@ export class ControllerBlockPageEntry<TData extends {} = {}> extends BeanControl
   $$modelResource: ModelResource<TData>;
 
   protected async __init__() {
-    this.$$modelResource = await this.bean._getBeanSelector('rest-resource.model.resource', true, this.resource);
+    this.$$modelResource = await this.bean._getBeanSelector(
+      'rest-resource.model.resource',
+      true,
+      this.resource,
+    );
     this.formMeta = this.$computed(() => {
       const formScene = this.formScene;
       return { ...formMetaFromFormScene(formScene), formScene };
@@ -94,7 +103,10 @@ export class ControllerBlockPageEntry<TData extends {} = {}> extends BeanControl
   }
 
   get formScene() {
-    return (this.$props.formScene as TypeFormScene | undefined) ?? (isNil(this.entryId) ? 'create' : 'view');
+    return (
+      (this.$props.formScene as TypeFormScene | undefined) ??
+      (isNil(this.entryId) ? 'create' : 'view')
+    );
   }
 
   get schemaScene(): TypeFormSchemaScene {
@@ -110,7 +122,12 @@ export class ControllerBlockPageEntry<TData extends {} = {}> extends BeanControl
 
   private _prepareJsx() {
     const jsxCelEnv = celEnvBase.clone();
-    this.jsxZova = this.bean._newBeanSimple(ZovaJsx, false, this.formProvider.components, jsxCelEnv);
+    this.jsxZova = this.bean._newBeanSimple(
+      ZovaJsx,
+      false,
+      this.formProvider.components,
+      jsxCelEnv,
+    );
     this.jsxCelScope = this._prepareJsxCelScope();
     this.jsxRenderContext = {
       app: this.app,
@@ -149,7 +166,7 @@ export class ControllerBlockPageEntry<TData extends {} = {}> extends BeanControl
 
   setPageMeta(data: any | undefined, pageDirty?: boolean) {
     if (!this.$pageRoute) return;
-    const pageTitle = data?.name;
+    const pageTitle = data?.[this.$props.pageTitleKey];
     this.$router.setPageMeta(this.$pageRoute, { pageTitle, pageDirty, formMeta: this.formMeta });
   }
 
@@ -181,7 +198,12 @@ export class ControllerBlockPageEntry<TData extends {} = {}> extends BeanControl
     let domBlocks: VNode[] = [];
     blocks.forEach((block, index) => {
       const options = Object.assign({ key: index }, block.options);
-      const domBlock = this.jsxZova.render(block.render!, options, this.jsxCelScope, this.jsxRenderContext);
+      const domBlock = this.jsxZova.render(
+        block.render!,
+        options,
+        this.jsxCelScope,
+        this.jsxRenderContext,
+      );
       if (!domBlock) return;
       if (Array.isArray(domBlock)) {
         domBlocks.push(...domBlock);
