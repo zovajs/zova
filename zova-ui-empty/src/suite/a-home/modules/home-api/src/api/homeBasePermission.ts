@@ -3,8 +3,10 @@ import { Api, BeanApiBase, IApiActionOptions } from 'zova-module-a-api';
 import { OpenApiBaseURL, type paths } from './openapi/index.js';
 
 /** HomeBasePermission_retrievePermissions */
-export const ApiApiHomeBasePermissionretrievePermissionsPath = '/api/home/base/permission/{resource}';
-export type ApiApiHomeBasePermissionretrievePermissionsPath = '/api/home/base/permission/{resource}';
+export const ApiApiHomeBasePermissionretrievePermissionsPath =
+  '/api/home/base/permission/{resource}';
+export type ApiApiHomeBasePermissionretrievePermissionsPath =
+  '/api/home/base/permission/{resource}';
 export type ApiApiHomeBasePermissionretrievePermissionsMethod = 'get';
 export type ApiApiHomeBasePermissionretrievePermissionsRequestParams =
   paths[ApiApiHomeBasePermissionretrievePermissionsPath][ApiApiHomeBasePermissionretrievePermissionsMethod]['parameters']['path'];

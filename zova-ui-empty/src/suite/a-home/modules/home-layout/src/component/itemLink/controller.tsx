@@ -19,7 +19,10 @@ export class ControllerItemLink extends BeanControllerBase {
   };
 
   _renderLink() {
-    const domContent = [<ZIcon name={this.$props.icon} height={24} width={24}></ZIcon>, <span>{this.$props.title}</span>];
+    const domContent = [
+      <ZIcon name={this.$props.icon} height={24} width={24}></ZIcon>,
+      <span>{this.$props.title}</span>,
+    ];
     if (this.$props.href) {
       return (
         <a href={this.$props.href} target="_blank">

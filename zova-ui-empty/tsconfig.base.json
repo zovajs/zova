@@ -4,6 +4,6 @@
     "allowImportingTsExtensions": false,
     "noEmit": true,
     "rewriteRelativeImportExtensions": false,
-    "verbatimModuleSyntax": false,
-  },
+    "verbatimModuleSyntax": false
+  }
 }

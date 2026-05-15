@@ -8,7 +8,11 @@ import { BeanRouterGuardsBase } from 'zova-module-a-router';
 export class ServiceRouterGuards extends BeanRouterGuardsBase {
   protected onRouterGuards(router: BeanRouter) {
     router.beforeEach(async to => {
-      if (!this.sys.config.ssr.ignoreCookieOnServer && to.meta.requiresAuth !== false && !this.$passport.isAuthenticated) {
+      if (
+        !this.sys.config.ssr.ignoreCookieOnServer &&
+        to.meta.requiresAuth !== false &&
+        !this.$passport.isAuthenticated
+      ) {
         const [_res, err] = await catchError(() => {
           return this.$passport.ensurePassport();
         });

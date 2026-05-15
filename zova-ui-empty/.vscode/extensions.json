@@ -1,4 +1,4 @@
 {
   "recommendations": ["cabloy.zova-vscode", "oxc.oxc-vscode"],
-  "unwantedRecommendations": [],
+  "unwantedRecommendations": []
 }
