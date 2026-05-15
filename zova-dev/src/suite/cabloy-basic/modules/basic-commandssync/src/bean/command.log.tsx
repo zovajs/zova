@@ -2,7 +2,12 @@ import type { IJsxRenderContextBase } from 'zova-module-a-openapi';
 
 import { isNil } from '@cabloy/utils';
 import { BeanBase, Preload } from 'zova';
-import { Command, ICommandExecute, ICommandOptionsBase, NextCommandExecute } from 'zova-module-a-command';
+import {
+  Command,
+  ICommandExecute,
+  ICommandOptionsBase,
+  NextCommandExecute,
+} from 'zova-module-a-command';
 
 export type TypeCommandLogResult = unknown;
 
@@ -14,7 +19,11 @@ export interface ICommandOptionsLog extends ICommandOptionsBase<TypeCommandLogRe
 @Command<ICommandOptionsLog>()
 @Preload()
 export class CommandLog extends BeanBase implements ICommandExecute {
-  execute(options: ICommandOptionsLog, _renderContext: IJsxRenderContextBase, next: NextCommandExecute) {
+  execute(
+    options: ICommandOptionsLog,
+    _renderContext: IJsxRenderContextBase,
+    next: NextCommandExecute,
+  ) {
     if (process.env.CLIENT) {
       const name = options.name;
       const message = options.message;

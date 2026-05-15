@@ -22,7 +22,10 @@ export class BehaviorFormFieldLayoutLogin extends BeanBehaviorBase<
   @Use({ injectionScope: 'host' })
   $$formField: ControllerFormField;
 
-  protected render(renderContext: IBehaviorPropsInputFormFieldLayoutLogin, next: NextBehavior<IBehaviorPropsOutputFormFieldLayoutLogin>): VNode {
+  protected render(
+    renderContext: IBehaviorPropsInputFormFieldLayoutLogin,
+    next: NextBehavior<IBehaviorPropsOutputFormFieldLayoutLogin>,
+  ): VNode {
     const field = this.$$formField.field;
     const layout = renderContext.propsBucket.layout;
     // needHandleBorder

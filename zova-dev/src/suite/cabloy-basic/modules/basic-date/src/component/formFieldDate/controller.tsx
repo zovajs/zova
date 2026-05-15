@@ -36,7 +36,13 @@ export class ControllerFormFieldDate extends BeanControllerBase {
 
   protected render() {
     const value = dateFormatUtil(this.$props.value, this.dateFormat);
-    return <ZFormFieldPreset {...this.$props} render="basic-input:formFieldInput" options={{ value }}></ZFormFieldPreset>;
+    return (
+      <ZFormFieldPreset
+        {...this.$props}
+        render="basic-input:formFieldInput"
+        options={{ value }}
+      ></ZFormFieldPreset>
+    );
   }
 
   get dateFormat(): IResourceFormFieldDateOptions | undefined {

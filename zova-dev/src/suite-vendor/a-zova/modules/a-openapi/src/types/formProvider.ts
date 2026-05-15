@@ -1,5 +1,8 @@
 import { TypeComponentRecordSelectorKeys } from 'zova';
-import { TypeBehaviorRecordSelectorKeys, TypeBehaviorRecordSelectorKeysStrict } from 'zova-module-a-behavior';
+import {
+  TypeBehaviorRecordSelectorKeys,
+  TypeBehaviorRecordSelectorKeysStrict,
+} from 'zova-module-a-behavior';
 
 export interface IFormProviderComponents {
   Input?: TypeComponentRecordSelectorKeys<'formField'>;

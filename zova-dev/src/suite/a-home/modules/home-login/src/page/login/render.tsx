@@ -67,11 +67,19 @@ export class RenderPageLogin extends BeanRenderBase {
           options={{ type: 'password', placeholder: this.scope.locale.YourPassword() }}
           layout={{ iconPrefix: ':daisy:lock' }}
         ></ZFormFieldPreset>
-        <ZFormFieldPreset name="captcha" render={'basic-captcha:formFieldCaptcha'} layout={{ iconPrefix: ':editor:code-block' }}></ZFormFieldPreset>
+        <ZFormFieldPreset
+          name="captcha"
+          render={'basic-captcha:formFieldCaptcha'}
+          layout={{ iconPrefix: ':editor:code-block' }}
+        ></ZFormFieldPreset>
         <ZFormFieldBlank
           slotDefault={$$form => {
             return (
-              <button disabled={$$form.formState.isSubmitting} type="submit" class="btn mt-2 w-full btn-primary">
+              <button
+                disabled={$$form.formState.isSubmitting}
+                type="submit"
+                class="btn mt-2 w-full btn-primary"
+              >
                 {this.scope.locale.Login()}
               </button>
             );

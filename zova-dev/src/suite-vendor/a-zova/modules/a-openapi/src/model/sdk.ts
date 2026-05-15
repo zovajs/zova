@@ -82,7 +82,11 @@ export class ModelSdk extends BeanModelBase {
     });
   }
 
-  getSdk(api: string, apiMethod?: TypeRequestMethod, apiOptions?: IApiSchemaOptions): TypeOpenapiSchemasSdk {
+  getSdk(
+    api: string,
+    apiMethod?: TypeRequestMethod,
+    apiOptions?: IApiSchemaOptions,
+  ): TypeOpenapiSchemasSdk {
     if (!api) throw new Error('should specify api');
     const [api2, apiMethod2] = this.$$sysSdk.prepareApiMeta(api, apiMethod);
     return this.$useStateData({
@@ -148,7 +152,11 @@ export class ModelSdk extends BeanModelBase {
     });
   }
 
-  public createApiSchemas(api: string, apiMethod?: TypeRequestMethod, apiOptions?: IApiSchemaOptions): IOpenapiSchemas {
+  public createApiSchemas(
+    api: string,
+    apiMethod?: TypeRequestMethod,
+    apiOptions?: IApiSchemaOptions,
+  ): IOpenapiSchemas {
     // eslint-disable-next-line
     const self = this;
     const sdk = this.getSdk(api, apiMethod, apiOptions);
@@ -214,7 +222,10 @@ export class ModelSdk extends BeanModelBase {
     };
   }
 
-  public loadSchemaProperties(schema: SchemaObject | undefined, schemaScene?: TypeSchemaScene): SchemaObject[] | undefined {
+  public loadSchemaProperties(
+    schema: SchemaObject | undefined,
+    schemaScene?: TypeSchemaScene,
+  ): SchemaObject[] | undefined {
     return loadSchemaProperties(schema, schemaName => this.getSchema(schemaName).data, schemaScene);
   }
 

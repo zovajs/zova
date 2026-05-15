@@ -1,5 +1,10 @@
 import { BeanBase, cast } from 'zova';
-import { Command, ICommandExecute, ICommandOptionsBase, NextCommandExecute } from 'zova-module-a-command';
+import {
+  Command,
+  ICommandExecute,
+  ICommandOptionsBase,
+  NextCommandExecute,
+} from 'zova-module-a-command';
 import { IJsxRenderContextFormField } from 'zova-module-a-form';
 import { IJsxRenderContextBase } from 'zova-module-a-openapi';
 
@@ -13,7 +18,11 @@ export interface ICommandOptionsSetValue extends ICommandOptionsBase<TypeCommand
 
 @Command<ICommandOptionsSetValue>()
 export class CommandSetValue extends BeanBase implements ICommandExecute {
-  execute(options: ICommandOptionsSetValue, renderContext: IJsxRenderContextBase, next: NextCommandExecute) {
+  execute(
+    options: ICommandOptionsSetValue,
+    renderContext: IJsxRenderContextBase,
+    next: NextCommandExecute,
+  ) {
     if (renderContext.$scene === 'formField') {
       const { $celScope, $jsx, $$form } = renderContext as IJsxRenderContextFormField;
       const name = options.name ?? $celScope.name;

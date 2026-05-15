@@ -7,13 +7,24 @@ export function combineContentRenderAndStyle(
   genericDeclare: string,
   genericArguments: string,
 ) {
-  const { hasRenderFirst, classNameRenderFirst, classNameRenderOthers, hasStyleFirst, classNameStyleFirst, classNameStyleOthers } = controllerInfo;
+  const {
+    hasRenderFirst,
+    classNameRenderFirst,
+    classNameRenderOthers,
+    hasStyleFirst,
+    classNameStyleFirst,
+    classNameStyleOthers,
+  } = controllerInfo;
   const contentControllerInterfaceRecords: string[] = [];
   if (hasStyleFirst) {
-    contentControllerInterfaceRecords.push(`export interface ${classNameStyleFirst}${genericDeclare} extends ${className}${genericArguments} {}`);
+    contentControllerInterfaceRecords.push(
+      `export interface ${classNameStyleFirst}${genericDeclare} extends ${className}${genericArguments} {}`,
+    );
   }
   for (const item of classNameStyleOthers) {
-    contentControllerInterfaceRecords.push(`export interface ${item}${genericDeclare} extends ${className}${genericArguments} {}`);
+    contentControllerInterfaceRecords.push(
+      `export interface ${item}${genericDeclare} extends ${className}${genericArguments} {}`,
+    );
   }
   if (hasRenderFirst) {
     if (hasStyleFirst) {
@@ -21,14 +32,20 @@ export function combineContentRenderAndStyle(
         `export interface ${classNameRenderFirst}${genericDeclare} extends ${classNameStyleFirst}${genericArguments} {}`,
       );
     } else {
-      contentControllerInterfaceRecords.push(`export interface ${classNameRenderFirst}${genericDeclare} extends ${className}${genericArguments} {}`);
+      contentControllerInterfaceRecords.push(
+        `export interface ${classNameRenderFirst}${genericDeclare} extends ${className}${genericArguments} {}`,
+      );
     }
   }
   for (const item of classNameRenderOthers) {
     if (hasStyleFirst) {
-      contentControllerInterfaceRecords.push(`export interface ${item}${genericDeclare} extends ${classNameStyleFirst}${genericArguments} {}`);
+      contentControllerInterfaceRecords.push(
+        `export interface ${item}${genericDeclare} extends ${classNameStyleFirst}${genericArguments} {}`,
+      );
     } else {
-      contentControllerInterfaceRecords.push(`export interface ${item}${genericDeclare} extends ${className}${genericArguments} {}`);
+      contentControllerInterfaceRecords.push(
+        `export interface ${item}${genericDeclare} extends ${className}${genericArguments} {}`,
+      );
     }
   }
   if (contentControllerInterfaceRecords.length === 0) return '';

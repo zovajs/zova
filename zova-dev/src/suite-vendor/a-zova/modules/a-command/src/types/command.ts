@@ -17,7 +17,11 @@ export type NextCommandExecute = (res?: any) => any | Promise<any>;
 export interface ICommandRecord {}
 
 export interface ICommandExecute {
-  execute(options: IDecoratorCommandOptions, renderContext: IJsxRenderContextBase, next: NextCommandExecute): any | Promise<any>;
+  execute(
+    options: IDecoratorCommandOptions,
+    renderContext: IJsxRenderContextBase,
+    next: NextCommandExecute,
+  ): any | Promise<any>;
 }
 
 export interface IDecoratorCommandOptions<Result = any> {

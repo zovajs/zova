@@ -46,7 +46,9 @@ export class ControllerLayoutTabs extends BeanControllerBase {
       const self = this;
       return {
         get() {
-          return self.belowBreakpoint ? self.leftDrawerOpenMobile : self.$$modelLayout.leftDrawerOpenPC;
+          return self.belowBreakpoint
+            ? self.leftDrawerOpenMobile
+            : self.$$modelLayout.leftDrawerOpenPC;
         },
         set(value) {
           if (self.belowBreakpoint) {
@@ -85,7 +87,12 @@ export class ControllerLayoutTabs extends BeanControllerBase {
         return { title: menuItem.title, icon: menuItem.icon };
       },
     };
-    this.$$modelTabs = await this.bean._getBeanSelector('a-routertabs.model.tabs', true, configTabs.scene, tabsOptions);
+    this.$$modelTabs = await this.bean._getBeanSelector(
+      'a-routertabs.model.tabs',
+      true,
+      configTabs.scene,
+      tabsOptions,
+    );
     // watch menus
     this.$watch(
       () => {

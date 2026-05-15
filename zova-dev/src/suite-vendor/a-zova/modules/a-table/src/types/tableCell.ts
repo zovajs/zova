@@ -17,8 +17,15 @@ export type NextTableCellRender = () => any;
 export interface ITableCellRecord {}
 
 export interface ITableCellRender {
-  render(options: IDecoratorTableCellOptions, renderContext: IJsxRenderContextTableCell, next: NextTableCellRender): any;
-  checkVisible?(options: IDecoratorTableCellOptions, renderContext: IJsxRenderContextTableColumn): Promise<boolean>;
+  render(
+    options: IDecoratorTableCellOptions,
+    renderContext: IJsxRenderContextTableCell,
+    next: NextTableCellRender,
+  ): any;
+  checkVisible?(
+    options: IDecoratorTableCellOptions,
+    renderContext: IJsxRenderContextTableColumn,
+  ): Promise<boolean>;
 }
 
 export interface IDecoratorTableCellOptions {}

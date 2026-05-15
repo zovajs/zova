@@ -2,7 +2,12 @@ import type { ControllerFormField, IFormFieldRenderContext } from 'zova-module-a
 
 import { VNode } from 'vue';
 import { Use } from 'zova';
-import { BeanBehaviorBase, Behavior, IDecoratorBehaviorOptions, NextBehavior } from 'zova-module-a-behavior';
+import {
+  BeanBehaviorBase,
+  Behavior,
+  IDecoratorBehaviorOptions,
+  NextBehavior,
+} from 'zova-module-a-behavior';
 
 export interface IBehaviorPropsInputFormField extends IFormFieldRenderContext {}
 
@@ -11,11 +16,18 @@ export interface IBehaviorPropsOutputFormField extends IBehaviorPropsInputFormFi
 export interface IBehaviorOptionsFormField extends IDecoratorBehaviorOptions {}
 
 @Behavior<IBehaviorOptionsFormField>()
-export class BehaviorFormField extends BeanBehaviorBase<IBehaviorOptionsFormField, IBehaviorPropsInputFormField, IBehaviorPropsOutputFormField> {
+export class BehaviorFormField extends BeanBehaviorBase<
+  IBehaviorOptionsFormField,
+  IBehaviorPropsInputFormField,
+  IBehaviorPropsOutputFormField
+> {
   @Use({ injectionScope: 'host' })
   $$formField: ControllerFormField;
 
-  protected render(renderContext: IFormFieldRenderContext, next: NextBehavior<IBehaviorPropsOutputFormField>): VNode {
+  protected render(
+    renderContext: IFormFieldRenderContext,
+    next: NextBehavior<IBehaviorPropsOutputFormField>,
+  ): VNode {
     return next(renderContext);
   }
 }

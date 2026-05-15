@@ -1,4 +1,10 @@
-import type { FormApi, FormAsyncValidateOrFn, FormOptions, FormValidateOrFn, VueFormApi } from '@tanstack/vue-form';
+import type {
+  FormApi,
+  FormAsyncValidateOrFn,
+  FormOptions,
+  FormValidateOrFn,
+  VueFormApi,
+} from '@tanstack/vue-form';
 
 import { useForm } from '@tanstack/vue-form';
 import { markRaw } from 'vue';
@@ -6,7 +12,10 @@ import { BeanControllerPageBase } from 'zova';
 
 import { TypeForm } from '../types/form.js';
 
-export class BeanControllerPageFormBase<TFormData extends {} = {}, TSubmitMeta = never> extends BeanControllerPageBase {
+export class BeanControllerPageFormBase<
+  TFormData extends {} = {},
+  TSubmitMeta = never,
+> extends BeanControllerPageBase {
   form: TypeForm<TFormData, TSubmitMeta>;
   formState: TypeForm<TFormData>['state'];
 

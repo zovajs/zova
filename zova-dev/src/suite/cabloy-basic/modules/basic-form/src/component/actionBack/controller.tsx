@@ -1,4 +1,7 @@
-import type { IJsxRenderContextPageEntry, IResourceFormActionRowOptionsBase } from 'zova-module-a-openapi';
+import type {
+  IJsxRenderContextPageEntry,
+  IResourceFormActionRowOptionsBase,
+} from 'zova-module-a-openapi';
 
 import { classes } from 'typestyle';
 import { BeanControllerBase, type IComponentOptions, Use } from 'zova';

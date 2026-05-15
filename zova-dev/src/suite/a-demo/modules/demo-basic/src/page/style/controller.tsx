@@ -44,7 +44,9 @@ export class ControllerPageStyle extends BeanControllerPageBase {
         <hr></hr>
         <div class={this.$cssBase.cTextCenter}>
           <div>$cssBase.cTextCenter</div>
-          <button class={this.$cssBase.cButtonPrimary}>{`$token.color.primary: ${this.$token.color.primary}`}</button>
+          <button
+            class={this.$cssBase.cButtonPrimary}
+          >{`$token.color.primary: ${this.$token.color.primary}`}</button>
           <hr></hr>
           <div class={this.cBlock}>
             <div>{`dark: ${String(this.$theme.dark)}`}</div>
@@ -83,10 +85,16 @@ export class ControllerPageStyle extends BeanControllerPageBase {
                   this.$theme.name = target.value as any;
                 }}
               >
-                <option value={$getThemeName('home-theme:default')} selected={this.$theme.name === $getThemeName('home-theme:default')}>
+                <option
+                  value={$getThemeName('home-theme:default')}
+                  selected={this.$theme.name === $getThemeName('home-theme:default')}
+                >
                   Default
                 </option>
-                <option value={$getThemeName('home-theme:orange')} selected={this.$theme.name === $getThemeName('home-theme:orange')}>
+                <option
+                  value={$getThemeName('home-theme:orange')}
+                  selected={this.$theme.name === $getThemeName('home-theme:orange')}
+                >
                   Orange
                 </option>
               </select>

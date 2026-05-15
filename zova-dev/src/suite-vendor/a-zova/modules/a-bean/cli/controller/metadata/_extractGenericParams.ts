@@ -3,7 +3,13 @@ import ts from 'typescript';
 
 export function extractGenericParamsAndImports(filePath: string, interfaceName: string) {
   const sourceText = fs.readFileSync(filePath, 'utf-8');
-  const sourceFile = ts.createSourceFile(filePath, sourceText, ts.ScriptTarget.Latest, true, ts.ScriptKind.TSX);
+  const sourceFile = ts.createSourceFile(
+    filePath,
+    sourceText,
+    ts.ScriptTarget.Latest,
+    true,
+    ts.ScriptKind.TSX,
+  );
 
   // 1. Find the target interface
   let targetInterface: ts.InterfaceDeclaration | undefined;
@@ -43,7 +49,9 @@ export function extractGenericParamsAndImports(filePath: string, interfaceName: 
     const clause = node.importClause;
     if (!clause?.namedBindings || !ts.isNamedImports(clause.namedBindings)) return;
 
-    const matched = clause.namedBindings.elements.map(el => el.name.text).filter(name => typeRefNames.has(name));
+    const matched = clause.namedBindings.elements
+      .map(el => el.name.text)
+      .filter(name => typeRefNames.has(name));
     if (matched.length === 0) return;
 
     const specifier = (node.moduleSpecifier as ts.StringLiteral).text;

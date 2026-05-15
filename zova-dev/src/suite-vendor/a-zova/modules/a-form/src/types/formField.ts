@@ -18,7 +18,14 @@ import type { ControllerForm } from '../component/form/controller.jsx';
 import type { ControllerFormField } from '../component/formField/controller.jsx';
 import type { TypeBehaviorFormFieldOptions } from './form.js';
 
-export type HTMLInputElementType = 'text' | 'password' | 'number' | 'file' | 'hidden' | 'tel' | 'email';
+export type HTMLInputElementType =
+  | 'text'
+  | 'password'
+  | 'number'
+  | 'file'
+  | 'hidden'
+  | 'tel'
+  | 'email';
 export const constFieldProps = '$$FieldProps';
 
 export interface IFormFieldScope<TParentData = {}> {
@@ -42,7 +49,10 @@ export interface IFormFieldValidatorsOptionsBase {
   onBlur?: boolean | z.ZodType;
 }
 
-export interface IFormFieldOptionsBase<TParentData = {}, TName extends DeepKeys<TParentData> = DeepKeys<TParentData>> {
+export interface IFormFieldOptionsBase<
+  TParentData = {},
+  TName extends DeepKeys<TParentData> = DeepKeys<TParentData>,
+> {
   name?: TName;
   render?: TypeRenderComponentPreset;
   class?: any;
@@ -56,19 +66,29 @@ export interface IFormFieldOptionsBase<TParentData = {}, TName extends DeepKeys<
   // onBlur?: (e: Event) => void; // allow set to null, but not provide null type
 }
 
-export interface IFormFieldPresetOptions<PresetName extends keyof ISchemaRenderComponentPresetRecord = never> extends IFormFieldComponentOptions {
+export interface IFormFieldPresetOptions<
+  PresetName extends keyof ISchemaRenderComponentPresetRecord = never,
+> extends IFormFieldComponentOptions {
   render?: PresetName;
   options?: ISchemaRenderComponentPresetRecord[PresetName];
 }
 
-export interface IFormFieldComponentOptions<TParentData = {}> extends IFormFieldOptions<TParentData> {
+export interface IFormFieldComponentOptions<
+  TParentData = {},
+> extends IFormFieldOptions<TParentData> {
   options?: any;
 }
 
 export interface IFormFieldOptions<TParentData = {}>
-  extends IFormFieldSysOptionsBase<TParentData>, IFormFieldOptionsBase<TParentData>, IFormFieldLayoutOptionsBase {
+  extends
+    IFormFieldSysOptionsBase<TParentData>,
+    IFormFieldOptionsBase<TParentData>,
+    IFormFieldLayoutOptionsBase {
   behaviors?: IBehaviorItem;
-  slotDefault?: (props: IFormFieldRenderContext<TParentData>, formField: ControllerFormField) => VNode;
+  slotDefault?: (
+    props: IFormFieldRenderContext<TParentData>,
+    formField: ControllerFormField,
+  ) => VNode;
 }
 
 export interface IFormFieldRenderContextProps {
@@ -90,7 +110,10 @@ export interface IFormFieldRenderContextProps {
 //   onBlur?: (e: Event) => void;
 // }
 
-export interface IFormFieldRenderContextPropsBucket<TParentData = {}> extends Omit<IFormFieldOptions<TParentData>, 'render'> {
+export interface IFormFieldRenderContextPropsBucket<TParentData = {}> extends Omit<
+  IFormFieldOptions<TParentData>,
+  'render'
+> {
   options?: any;
   render: TypeFormFieldRenderComponent;
   renderProvider?: TypeFormFieldRenderComponentProvider;
@@ -104,7 +127,10 @@ export interface IFormFieldRenderContext<TParentData = {}> {
   jsxRenderContext: {};
 }
 
-export interface IJsxRenderContextFormField<TParentData extends {} = {}, TSubmitMeta = never> extends IJsxRenderContextBase {
+export interface IJsxRenderContextFormField<
+  TParentData extends {} = {},
+  TSubmitMeta = never,
+> extends IJsxRenderContextBase {
   $celScope: IFormFieldScope<TParentData>;
   $$formField: ControllerFormField<TParentData> | undefined;
   $$form: ControllerForm<TParentData, TSubmitMeta>;

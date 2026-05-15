@@ -1,4 +1,7 @@
-import type { IJsxRenderContextPage, IResourceTableActionBulkOptionsBase } from 'zova-module-a-openapi';
+import type {
+  IJsxRenderContextPage,
+  IResourceTableActionBulkOptionsBase,
+} from 'zova-module-a-openapi';
 
 import { BeanControllerBase, type IComponentOptions, Use } from 'zova';
 import { Controller } from 'zova-module-a-bean';

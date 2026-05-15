@@ -1,4 +1,8 @@
-import type { IResourceBlockOptionsBase, IJsxRenderContextPage, IResourceRenderTableActionBulkOptionsAction } from 'zova-module-a-openapi';
+import type {
+  IResourceBlockOptionsBase,
+  IJsxRenderContextPage,
+  IResourceRenderTableActionBulkOptionsAction,
+} from 'zova-module-a-openapi';
 
 import { VNode } from 'vue';
 import { BeanControllerBase, type IComponentOptions, Use } from 'zova';

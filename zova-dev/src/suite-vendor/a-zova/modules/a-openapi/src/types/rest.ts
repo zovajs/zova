@@ -49,8 +49,22 @@ export interface ISchemaObjectExtensionField extends SchemaObject {
 export type TypeSchemaScene = 'table' | TypeFormSchemaScene;
 export type TypeFormSchemaScene = 'form' | 'form-view' | 'form-create' | 'filter';
 
-export const renderFormFieldTopPropsSystem = ['order', 'table', 'form', 'form-view', 'form-create', 'filter'];
-export const renderTableColumnTopPropsSystem = ['order', 'table', 'form', 'form-view', 'form-create', 'filter'];
+export const renderFormFieldTopPropsSystem = [
+  'order',
+  'table',
+  'form',
+  'form-view',
+  'form-create',
+  'filter',
+];
+export const renderTableColumnTopPropsSystem = [
+  'order',
+  'table',
+  'form',
+  'form-view',
+  'form-create',
+  'filter',
+];
 
 export type TypeRenderComponentPreset = keyof ISchemaRenderComponentPresetRecord;
 // | 'text'
@@ -73,10 +87,19 @@ export type TypeRenderComponentPreset = keyof ISchemaRenderComponentPresetRecord
 // | 'url';
 
 // form
-export type TypeFormFieldRenderComponentNormal = Constructable<ComponentPublicInstance> | keyof IComponentRecord | TypeRenderComponentPreset;
-export type TypeFormFieldRenderComponent = TypeFormFieldRenderComponentNormal | TypeRenderComponentJsx;
+export type TypeFormFieldRenderComponentNormal =
+  | Constructable<ComponentPublicInstance>
+  | keyof IComponentRecord
+  | TypeRenderComponentPreset;
+export type TypeFormFieldRenderComponent =
+  | TypeFormFieldRenderComponentNormal
+  | TypeRenderComponentJsx;
 // should use input for config.ts of a-openapi
-export type TypeFormFieldRenderComponentProvider = Constructable | Constructable<ComponentPublicInstance> | keyof IComponentRecord | 'input';
+export type TypeFormFieldRenderComponentProvider =
+  | Constructable
+  | Constructable<ComponentPublicInstance>
+  | keyof IComponentRecord
+  | 'input';
 // | 'input'
 // | 'textarea'
 // | 'select';
@@ -87,6 +110,11 @@ export type TypeTableCellRenderComponentNormal =
   | keyof IComponentRecord
   | keyof TypeBeanRecordGeneralSelector<'tableCell'>
   | TypeRenderComponentPreset;
-export type TypeTableCellRenderComponent = keyof IResourceTableActionRowRecord | TypeRenderComponentJsx;
+export type TypeTableCellRenderComponent =
+  | keyof IResourceTableActionRowRecord
+  | TypeRenderComponentJsx;
 export type TypeTableCellRenderComponentProvider = TypeRenderComponentJsx | 'text' | string;
-export type TypeTableBulkRenderComponentProvider = Constructable<ComponentPublicInstance> | keyof IComponentRecord | TypeRenderComponentJsx;
+export type TypeTableBulkRenderComponentProvider =
+  | Constructable<ComponentPublicInstance>
+  | keyof IComponentRecord
+  | TypeRenderComponentJsx;

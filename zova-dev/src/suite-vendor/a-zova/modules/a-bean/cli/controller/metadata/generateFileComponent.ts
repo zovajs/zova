@@ -5,7 +5,11 @@ import type { IControllerInfo } from './types.ts';
 
 import { combineContentRenderAndStyle } from './utils.ts';
 
-export async function generateFileComponent(options: IMetadataCustomGenerateOptions, globFile: IGlobBeanFile, controllerInfo: IControllerInfo) {
+export async function generateFileComponent(
+  options: IMetadataCustomGenerateOptions,
+  globFile: IGlobBeanFile,
+  controllerInfo: IControllerInfo,
+) {
   const { moduleName } = options;
   const { className } = globFile;
   const {
@@ -35,10 +39,17 @@ export async function generateFileComponent(options: IMetadataCustomGenerateOpti
   }
   const genericDeclare = hasGeneric ? `<${generic}>` : '';
   const genericArguments = hasGeneric ? `<${genericKeys?.join(', ')}>` : '';
-  const componentOptions = hasComponentOptions ? `Controller${nameCapitalize}.$componentOptions` : '';
+  const componentOptions = hasComponentOptions
+    ? `Controller${nameCapitalize}.$componentOptions`
+    : '';
   // import
   const _contentImportTypeZova: string[] = [];
-  if (hasModels) _contentImportTypeZova.push('DefineModelOptions', 'TypePropUpdateFromModel', 'TypePropValueFromModel');
+  if (hasModels)
+    _contentImportTypeZova.push(
+      'DefineModelOptions',
+      'TypePropUpdateFromModel',
+      'TypePropValueFromModel',
+    );
   if (hasProps) _contentImportTypeZova.push('TypeControllerInnerProps');
   if (_contentImportTypeZova.length > 0) {
     contentImports.push(`import type { ${_contentImportTypeZova.join(', ')} } from 'zova';`);
@@ -47,12 +58,16 @@ export async function generateFileComponent(options: IMetadataCustomGenerateOpti
   if (hasModels) _contentImportTypeController.push(nameModels);
   if (hasProps) _contentImportTypeController.push(nameProps);
   if (_contentImportTypeController.length > 0) {
-    contentImports.push(`import type { ${_contentImportTypeController.join(', ')} } from '../../component/${name}/controller${controllerExtJs}';`);
+    contentImports.push(
+      `import type { ${_contentImportTypeController.join(', ')} } from '../../component/${name}/controller${controllerExtJs}';`,
+    );
   }
   contentImports.push("import { defineComponent } from 'vue'");
   contentImports.push("import { prepareComponentOptions, useController } from 'zova';");
   // controller
-  contentImports.push(`import { ${className} } from '../../component/${name}/controller${controllerExtJs}';`);
+  contentImports.push(
+    `import { ${className} } from '../../component/${name}/controller${controllerExtJs}';`,
+  );
   // render
   if (hasRenderFirst) {
     contentImports.push(importRenderFirst);

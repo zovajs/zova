@@ -1,4 +1,7 @@
-import type { IJsxRenderContextPageEntry, IResourceFormActionRowOptionsBase } from 'zova-module-a-openapi';
+import type {
+  IJsxRenderContextPageEntry,
+  IResourceFormActionRowOptionsBase,
+} from 'zova-module-a-openapi';
 
 import { isNil } from '@cabloy/utils';
 import { classes } from 'typestyle';

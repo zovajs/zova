@@ -23,4 +23,8 @@ export interface TypeRenderComponentJsx {
 
 export type TypeRenderComponentNormal = Constructable<ComponentPublicInstance> | string;
 
-export type TypeRenderComponent = TypeRenderComponentNormal | TypeRenderComponentJsx | number | symbol;
+export type TypeRenderComponent =
+  | TypeRenderComponentNormal
+  | TypeRenderComponentJsx
+  | number
+  | symbol;

@@ -1,12 +1,29 @@
 import { compose } from '@cabloy/compose';
 import { isClass, isNilOrEmptyString } from '@cabloy/utils';
-import { inject as composableInject, provide as composableProvide, markRaw, reactive, shallowReactive } from 'vue';
+import {
+  inject as composableInject,
+  provide as composableProvide,
+  markRaw,
+  reactive,
+  shallowReactive,
+} from 'vue';
 
 import type { ZovaApplication, ZovaContext, ZovaSys } from '../core/index.ts';
 import type { MetadataKey } from '../core/sys/metadata.ts';
-import type { Constructable, ContainerType, IDecoratorBeanOptionsBase, IDecoratorUseOptions, IDecoratorUseOptionsBase } from '../decorator/index.js';
+import type {
+  Constructable,
+  ContainerType,
+  IDecoratorBeanOptionsBase,
+  IDecoratorUseOptions,
+  IDecoratorUseOptionsBase,
+} from '../decorator/index.js';
 import type { IInjectRecord } from '../types/interface/inject.ts';
-import type { IBeanRecord, IBeanScopeRecord, IControllerData, TypeBeanScopeRecordKeys } from './type.ts';
+import type {
+  IBeanRecord,
+  IBeanScopeRecord,
+  IControllerData,
+  TypeBeanScopeRecordKeys,
+} from './type.ts';
 
 import { appMetadata } from '../core/sys/metadata.ts';
 import { appResource, SymbolDecoratorProxyDisable } from '../core/sys/resource.ts';
@@ -62,15 +79,39 @@ export class BeanContainer {
       const beanInstance = cast(beanInstances[prop]);
       if (beanInstance && !(beanInstance instanceof BeanAopBase) && beanInstance.__dispose__) {
         if (this.containerType === 'sys') {
-          this.sys.meta.module._monkeyModuleSync(false, 'beanDispose', undefined, this, beanInstance);
+          this.sys.meta.module._monkeyModuleSync(
+            false,
+            'beanDispose',
+            undefined,
+            this,
+            beanInstance,
+          );
           beanInstance.__dispose__();
-          this.sys.meta.module._monkeyModuleSync(false, 'beanDisposed', undefined, this, beanInstance);
+          this.sys.meta.module._monkeyModuleSync(
+            false,
+            'beanDisposed',
+            undefined,
+            this,
+            beanInstance,
+          );
         } else {
-          this.app.meta.module._monkeyModuleSync(false, 'beanDispose', undefined, this, beanInstance);
+          this.app.meta.module._monkeyModuleSync(
+            false,
+            'beanDispose',
+            undefined,
+            this,
+            beanInstance,
+          );
           this.runWithInstanceScopeOrAppContext(() => {
             beanInstance.__dispose__();
           });
-          this.app.meta.module._monkeyModuleSync(false, 'beanDisposed', undefined, this, beanInstance);
+          this.app.meta.module._monkeyModuleSync(
+            false,
+            'beanDisposed',
+            undefined,
+            this,
+            beanInstance,
+          );
         }
       }
     }
@@ -119,7 +160,11 @@ export class BeanContainer {
   }
 
   inject<K extends keyof IInjectRecord>(injectKey: K): IInjectRecord[K];
-  inject<K extends keyof IInjectRecord>(injectKey: K, defaultValue: IInjectRecord[K], treatDefaultAsFactory?: false): IInjectRecord[K];
+  inject<K extends keyof IInjectRecord>(
+    injectKey: K,
+    defaultValue: IInjectRecord[K],
+    treatDefaultAsFactory?: false,
+  ): IInjectRecord[K];
   inject<K extends keyof IInjectRecord>(
     injectKey: K,
     defaultValue: IInjectRecord[K] | (() => IInjectRecord[K]),
@@ -177,7 +222,11 @@ export class BeanContainer {
     this[SymbolBeanContainerInstances][key] = instance;
   }
 
-  _getBeanSync<K extends keyof IBeanRecord>(beanFullName: K, markReactive?: boolean, forceLoad?: boolean): IBeanRecord[K] | undefined;
+  _getBeanSync<K extends keyof IBeanRecord>(
+    beanFullName: K,
+    markReactive?: boolean,
+    forceLoad?: boolean,
+  ): IBeanRecord[K] | undefined;
   _getBeanSync<T>(key: string, markReactive?: boolean, forceLoad?: boolean): T | undefined;
   _getBeanSync<T>(key: string, markReactive?: boolean, forceLoad?: boolean): T | undefined {
     const beanInstance: any = this[SymbolBeanContainerInstances][key];
@@ -199,20 +248,54 @@ export class BeanContainer {
   }
 
   async _getBean<T>(A: Constructable<T>, markReactive?: boolean, ...args): Promise<T>;
-  async _getBean<K extends keyof IBeanRecord>(beanFullName: K, markReactive?: boolean, ...args): Promise<IBeanRecord[K]>;
+  async _getBean<K extends keyof IBeanRecord>(
+    beanFullName: K,
+    markReactive?: boolean,
+    ...args
+  ): Promise<IBeanRecord[K]>;
   // async _getBean<T>(beanFullName: string, markReactive?: boolean, ...args): Promise<T>;
-  async _getBean<T>(beanFullName: Constructable<T> | string, markReactive?: boolean, ...args): Promise<T> {
+  async _getBean<T>(
+    beanFullName: Constructable<T> | string,
+    markReactive?: boolean,
+    ...args
+  ): Promise<T> {
     return await this._getBeanSelectorInner(true, null, beanFullName, markReactive, false, ...args);
   }
 
-  async _getBeanSelector<T>(A: Constructable<T>, markReactive?: boolean, selector?: string, ...args): Promise<T>;
-  async _getBeanSelector<K extends keyof IBeanRecord>(beanFullName: K, markReactive?: boolean, selector?: string, ...args): Promise<IBeanRecord[K]>;
+  async _getBeanSelector<T>(
+    A: Constructable<T>,
+    markReactive?: boolean,
+    selector?: string,
+    ...args
+  ): Promise<T>;
+  async _getBeanSelector<K extends keyof IBeanRecord>(
+    beanFullName: K,
+    markReactive?: boolean,
+    selector?: string,
+    ...args
+  ): Promise<IBeanRecord[K]>;
   // async _getBeanSelector<T>(beanFullName: string, markReactive?: boolean, selector?: string): Promise<T>;
-  async _getBeanSelector<T>(beanFullName: Constructable<T> | string, markReactive?: boolean, selector?: string, ...args): Promise<T> {
-    return await this._getBeanSelectorInner(true, null, beanFullName, markReactive, true, selector, ...args);
+  async _getBeanSelector<T>(
+    beanFullName: Constructable<T> | string,
+    markReactive?: boolean,
+    selector?: string,
+    ...args
+  ): Promise<T> {
+    return await this._getBeanSelectorInner(
+      true,
+      null,
+      beanFullName,
+      markReactive,
+      true,
+      selector,
+      ...args,
+    );
   }
 
-  _getBeanSelectorInnerSync<T>(beanFullName: Constructable<T> | string | undefined, selector?: string): T {
+  _getBeanSelectorInnerSync<T>(
+    beanFullName: Constructable<T> | string | undefined,
+    selector?: string,
+  ): T {
     // fullName
     const fullName = this._getBeanFullNameByComposableOrClassSync(beanFullName);
     if (!fullName) {
@@ -240,7 +323,13 @@ export class BeanContainer {
     const key = __getSelectorKey(fullName, withSelector, args[0]);
     if (this[SymbolBeanContainerInstances][key] === undefined && newBeanForce) {
       if (!this[SymbolGetBeanSelectorInnerPromises][key]) {
-        this[SymbolGetBeanSelectorInnerPromises][key] = this._getBeanSelectorInnerPromise(recordProp, fullName, markReactive, withSelector, ...args);
+        this[SymbolGetBeanSelectorInnerPromises][key] = this._getBeanSelectorInnerPromise(
+          recordProp,
+          fullName,
+          markReactive,
+          withSelector,
+          ...args,
+        );
       }
       await this[SymbolGetBeanSelectorInnerPromises][key];
     }
@@ -259,7 +348,15 @@ export class BeanContainer {
     withSelector?: boolean,
     ...args
   ): Promise<T> {
-    return await this._newBeanInner(true, recordProp, null, fullName, markReactive, withSelector, ...args);
+    return await this._newBeanInner(
+      true,
+      recordProp,
+      null,
+      fullName,
+      markReactive,
+      withSelector,
+      ...args,
+    );
   }
 
   _newBeanSimple<T>(A: Constructable<T>, markReactive: boolean, ...args): T {
@@ -274,16 +371,39 @@ export class BeanContainer {
   }
 
   async _newBean<T>(A: Constructable<T>, markReactive?: boolean, ...args): Promise<T>;
-  async _newBean<K extends keyof IBeanRecord>(beanFullName: K, markReactive?: boolean, ...args): Promise<IBeanRecord[K]>;
+  async _newBean<K extends keyof IBeanRecord>(
+    beanFullName: K,
+    markReactive?: boolean,
+    ...args
+  ): Promise<IBeanRecord[K]>;
   // async _newBean<T>(beanFullName: string, markReactive?: boolean, ...args): Promise<T>;
-  async _newBean<T>(beanFullName: Constructable<T> | string, markReactive?: boolean, ...args): Promise<T> {
+  async _newBean<T>(
+    beanFullName: Constructable<T> | string,
+    markReactive?: boolean,
+    ...args
+  ): Promise<T> {
     return await this._newBeanInner(false, null, null, beanFullName, markReactive, false, ...args);
   }
 
-  async _newBeanSelector<T>(A: Constructable<T>, markReactive?: boolean, selector?: string, ...args): Promise<T>;
-  async _newBeanSelector<K extends keyof IBeanRecord>(beanFullName: K, markReactive?: boolean, selector?: string, ...args): Promise<IBeanRecord[K]>;
+  async _newBeanSelector<T>(
+    A: Constructable<T>,
+    markReactive?: boolean,
+    selector?: string,
+    ...args
+  ): Promise<T>;
+  async _newBeanSelector<K extends keyof IBeanRecord>(
+    beanFullName: K,
+    markReactive?: boolean,
+    selector?: string,
+    ...args
+  ): Promise<IBeanRecord[K]>;
   // async _newBeanSelector<T>(beanFullName: string, markReactive?: boolean, selector?: string, ...args): Promise<T>;
-  async _newBeanSelector<T>(beanFullName: Constructable<T> | string, markReactive?: boolean, selector?: string, ...args): Promise<T> {
+  async _newBeanSelector<T>(
+    beanFullName: Constructable<T> | string,
+    markReactive?: boolean,
+    selector?: string,
+    ...args
+  ): Promise<T> {
     return await this._newBean(beanFullName as any, markReactive, selector, ...args);
   }
 
@@ -386,7 +506,13 @@ export class BeanContainer {
     withSelector?: boolean,
   ): Promise<T> {
     // prepare
-    const beanInstance = await this._prepareBeanInstance(beanFullName, beanClass, args, markReactive, aop);
+    const beanInstance = await this._prepareBeanInstance(
+      beanFullName,
+      beanClass,
+      args,
+      markReactive,
+      aop,
+    );
     // special for controller
     if (controllerData) {
       beanInstance.__initControllerData(controllerData);
@@ -415,7 +541,11 @@ export class BeanContainer {
     // prepare
     let beanInstance = this._prepareBeanInstanceCommon(beanFullName, beanClass, args, markReactive);
     // aop: proxy
-    const beanInstanceProxy = await this._patchBeanInstance(beanFullName || beanClass, beanInstance, aop);
+    const beanInstanceProxy = await this._patchBeanInstance(
+      beanFullName || beanClass,
+      beanInstance,
+      aop,
+    );
     if (beanInstanceProxy) {
       // reactive
       if (markReactive) {
@@ -432,7 +562,10 @@ export class BeanContainer {
     // prepare
     let beanInstance = this._prepareBeanInstanceCommon(beanFullName, beanClass, args, markReactive);
     // aop: proxy
-    const beanInstanceProxy = this._patchBeanInstanceSimple(beanFullName || beanClass, beanInstance);
+    const beanInstanceProxy = this._patchBeanInstanceSimple(
+      beanFullName || beanClass,
+      beanInstance,
+    );
     if (beanInstanceProxy) {
       // reactive
       if (markReactive) {
@@ -548,20 +681,35 @@ export class BeanContainer {
       // 0. host/skipSelf
       if (useOptions.injectionScope && ['host', 'skipSelf'].includes(useOptions.injectionScope)) {
         const selectorInfo = __prepareInjectSelectorInfo(beanInstance, useOptions);
-        const useOptions2 = selectorInfo.withSelector ? Object.assign({}, useOptions, { selector: selectorInfo.args[0] }) : useOptions;
+        const useOptions2 = selectorInfo.withSelector
+          ? Object.assign({}, useOptions, { selector: selectorInfo.args[0] })
+          : useOptions;
         const targetBeanInstance = useComputed(() => {
-          return this._getBeanFromHostInner(false, useOptions.prop, targetBeanFullName, useOptions2 as IDecoratorUseOptions);
+          return this._getBeanFromHostInner(
+            false,
+            useOptions.prop,
+            targetBeanFullName,
+            useOptions2 as IDecoratorUseOptions,
+          );
         });
         __setPropertyValue(beanInstance, key, targetBeanInstance, true);
         continue;
       }
       // others
-      const targetBeanInstance = await this._injectBeanInstanceProp(beanInstance, targetBeanFullName, useOptions);
+      const targetBeanInstance = await this._injectBeanInstanceProp(
+        beanInstance,
+        targetBeanFullName,
+        useOptions,
+      );
       __setPropertyValue(beanInstance, key, targetBeanInstance, true);
     }
   }
 
-  private async _injectBeanInstanceProp(beanInstance, targetBeanFullName: string | undefined, useOptions: IDecoratorUseOptionsBase) {
+  private async _injectBeanInstanceProp(
+    beanInstance,
+    targetBeanFullName: string | undefined,
+    useOptions: IDecoratorUseOptionsBase,
+  ) {
     // 1. use name
     if (useOptions.name) {
       return this[SymbolBeanContainerInstances][useOptions.name];
@@ -571,7 +719,9 @@ export class BeanContainer {
       return this[SymbolBeanContainerInstances][useOptions.prop];
     }
     // 3. targetBeanFullName
-    let targetOptions: Pick<IDecoratorBeanOptionsBase, 'containerScope' | 'markReactive' | 'scene'> | undefined;
+    let targetOptions:
+      | Pick<IDecoratorBeanOptionsBase, 'containerScope' | 'markReactive' | 'scene'>
+      | undefined;
     if (targetBeanFullName) {
       targetOptions = await this._getBeanOptionsForce(targetBeanFullName);
       if (!targetOptions) {
@@ -624,14 +774,28 @@ export class BeanContainer {
       );
     } else if (injectionScope === 'new') {
       // not record prop
-      targetInstance = await this._newBeanInner(false, null, null, targetBeanFullName, markReactive, selectorInfo.withSelector, ...selectorInfo.args);
+      targetInstance = await this._newBeanInner(
+        false,
+        null,
+        null,
+        targetBeanFullName,
+        markReactive,
+        selectorInfo.withSelector,
+        ...selectorInfo.args,
+      );
     }
     return targetInstance;
   }
 
   public _getBeanFromHost<T = unknown>(useOptions: IDecoratorUseOptions): T;
-  public _getBeanFromHost<K extends keyof IBeanRecord>(beanFullName: K, useOptions?: IDecoratorUseOptions): IBeanRecord[K] | undefined;
-  public _getBeanFromHost(beanFullName?: string | IDecoratorUseOptions, useOptions?: IDecoratorUseOptions) {
+  public _getBeanFromHost<K extends keyof IBeanRecord>(
+    beanFullName: K,
+    useOptions?: IDecoratorUseOptions,
+  ): IBeanRecord[K] | undefined;
+  public _getBeanFromHost(
+    beanFullName?: string | IDecoratorUseOptions,
+    useOptions?: IDecoratorUseOptions,
+  ) {
     if (typeof beanFullName !== 'string') {
       useOptions = beanFullName;
       beanFullName = undefined;
@@ -657,7 +821,12 @@ export class BeanContainer {
     }
     while (true) {
       if (!beanContainerParent) return null;
-      const beanInstance = this._getBeanFromHostInner2(recordProp, beanContainerParent, targetBeanFullName, useOptions);
+      const beanInstance = this._getBeanFromHostInner2(
+        recordProp,
+        beanContainerParent,
+        targetBeanFullName,
+        useOptions,
+      );
       // null is valid value
       if (beanInstance !== undefined) {
         // record prop
@@ -745,7 +914,13 @@ export class BeanContainer {
           if (__isLifeCycleMethod(prop)) return Reflect.get(target, prop, receiver);
           const methodName = `__get_${prop}__`;
           const methodNameMagic = '__get__';
-          const _aopChainsProp = self._getAopChainsProp(beanFullName, methodName, methodNameMagic, 'get', prop);
+          const _aopChainsProp = self._getAopChainsProp(
+            beanFullName,
+            methodName,
+            methodNameMagic,
+            'get',
+            prop,
+          );
           if (!_aopChainsProp) return Reflect.get(target, prop, receiver);
           // aop
           return _aopChainsProp([receiver, undefined], ([receiver, _]) => {
@@ -776,7 +951,13 @@ export class BeanContainer {
         }
         const methodName = `__set_${prop}__`;
         const methodNameMagic = '__set__';
-        const _aopChainsProp = self._getAopChainsProp(beanFullName, methodName, methodNameMagic, 'set', prop);
+        const _aopChainsProp = self._getAopChainsProp(
+          beanFullName,
+          methodName,
+          methodNameMagic,
+          'set',
+          prop,
+        );
         if (!_aopChainsProp) {
           Reflect.set(target, prop, value, receiver);
           return true;
@@ -807,7 +988,13 @@ export class BeanContainer {
     }
     // aop chains
     const methodNameMagic = '__method__';
-    const _aopChainsProp = this._getAopChainsProp(beanFullName, prop, methodNameMagic, 'method', prop);
+    const _aopChainsProp = this._getAopChainsProp(
+      beanFullName,
+      prop,
+      methodNameMagic,
+      'method',
+      prop,
+    );
     if (!_aopChainsProp) return Reflect.get(target, prop, receiver);
     // proxy
     const methodProxyKey = `__aopproxy_method_${prop}__`;
@@ -830,7 +1017,9 @@ export class BeanContainer {
     const beanOptions = appResource.getBean(beanFullNameOrBeanClass);
     const cacheKey = beanOptions?.beanFullName || beanFullNameOrBeanClass;
     // ProxyDisable
-    const proxyDisable = beanOptions?.beanClass ? appMetadata.getMetadata<boolean>(SymbolDecoratorProxyDisable, beanOptions?.beanClass) : false;
+    const proxyDisable = beanOptions?.beanClass
+      ? appMetadata.getMetadata<boolean>(SymbolDecoratorProxyDisable, beanOptions?.beanClass)
+      : false;
     // host
     const host = this._aopCacheHost();
     if (!host[SymbolCacheAopChains]) host[SymbolCacheAopChains] = {};
@@ -899,14 +1088,21 @@ export class BeanContainer {
     return this.sys;
   }
 
-  private _getAopChainsProp(beanFullName, methodName, methodNameMagic, methodType: 'get' | 'set' | 'method', prop: string) {
+  private _getAopChainsProp(
+    beanFullName,
+    methodName,
+    methodNameMagic,
+    methodType: 'get' | 'set' | 'method',
+    prop: string,
+  ) {
     const chainsKey = `__aopChains_${methodName}__`;
     const beanOptions = appResource.getBean(beanFullName);
     const cacheKey = beanOptions?.beanFullName || beanFullName;
     const host = this._aopCacheHost();
     if (!host[SymbolCacheAopChainsKey]) host[SymbolCacheAopChainsKey] = {};
     if (!host[SymbolCacheAopChainsKey][cacheKey]) host[SymbolCacheAopChainsKey][cacheKey] = {};
-    if (host[SymbolCacheAopChainsKey][cacheKey][chainsKey] !== undefined) return host[SymbolCacheAopChainsKey][cacheKey][chainsKey];
+    if (host[SymbolCacheAopChainsKey][cacheKey][chainsKey] !== undefined)
+      return host[SymbolCacheAopChainsKey][cacheKey][chainsKey];
     const _aopChains = this._getAopChains(beanFullName);
     const chains: [MetadataKey, string][] = [];
     for (const aopKey of _aopChains) {
@@ -944,11 +1140,21 @@ export class BeanContainer {
               };
             } else if (methodType === 'set') {
               fn = function ([receiver, value], next) {
-                return aop[methodNameMagic](prop, value, _patchAopNext([receiver, value], next), receiver);
+                return aop[methodNameMagic](
+                  prop,
+                  value,
+                  _patchAopNext([receiver, value], next),
+                  receiver,
+                );
               };
             } else if (methodType === 'method') {
               fn = function ([receiver, args], next) {
-                return aop[methodNameMagic](prop, args, _patchAopNext([receiver, args], next), receiver);
+                return aop[methodNameMagic](
+                  prop,
+                  args,
+                  _patchAopNext([receiver, args], next),
+                  receiver,
+                );
               };
             }
             chains.push([aopKey, fn]);
@@ -973,25 +1179,50 @@ export class BeanContainer {
       let fn;
       if (methodType === 'get') {
         fn = function ([receiver, _], next) {
-          if (!aopMethod.beanInstance.get) throw new Error(`get property accessor not exists: ${aopMethod.onionName}`);
-          return aopMethod.beanInstance.get(aopMethod.options, _patchAopNext([receiver, _], next), receiver, prop);
+          if (!aopMethod.beanInstance.get)
+            throw new Error(`get property accessor not exists: ${aopMethod.onionName}`);
+          return aopMethod.beanInstance.get(
+            aopMethod.options,
+            _patchAopNext([receiver, _], next),
+            receiver,
+            prop,
+          );
         };
       } else if (methodType === 'set') {
         fn = function ([receiver, value], next) {
-          if (!aopMethod.beanInstance.set) throw new Error(`set property accessor not exists: ${aopMethod.onionName}`);
-          return aopMethod.beanInstance.set(aopMethod.options, value, _patchAopNext([receiver, value], next), receiver, prop);
+          if (!aopMethod.beanInstance.set)
+            throw new Error(`set property accessor not exists: ${aopMethod.onionName}`);
+          return aopMethod.beanInstance.set(
+            aopMethod.options,
+            value,
+            _patchAopNext([receiver, value], next),
+            receiver,
+            prop,
+          );
         };
       } else if (methodType === 'method') {
         fn = function ([receiver, args], next) {
-          if (!aopMethod.beanInstance.execute) throw new Error(`execute method not exists: ${aopMethod.onionName}`);
-          return aopMethod.beanInstance.execute(aopMethod.options, args, _patchAopNext([receiver, args], next), receiver, prop);
+          if (!aopMethod.beanInstance.execute)
+            throw new Error(`execute method not exists: ${aopMethod.onionName}`);
+          return aopMethod.beanInstance.execute(
+            aopMethod.options,
+            args,
+            _patchAopNext([receiver, args], next),
+            receiver,
+            prop,
+          );
         };
       }
       chains.push([aopKey, fn]);
     }
   }
 
-  private __recordProp(recordProp, fullName: string | undefined, beanInstance, throwError: boolean) {
+  private __recordProp(
+    recordProp,
+    fullName: string | undefined,
+    beanInstance,
+    throwError: boolean,
+  ) {
     if (this[SymbolBeanContainerInstances][recordProp] !== undefined && throwError) {
       throw new Error(`prop exsits: ${recordProp.toString()}, ${fullName}`);
     }

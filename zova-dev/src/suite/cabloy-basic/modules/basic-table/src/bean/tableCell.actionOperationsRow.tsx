@@ -28,7 +28,10 @@ export interface ITableCellOptionsActionOperationsRow extends IResourceTableActi
   class: 'join',
 })
 export class TableCellActionOperationsRow extends BeanBase implements ITableCellRender {
-  async checkVisible(options: ITableCellOptionsActionOperationsRow, renderContext: IJsxRenderContextTableColumn): Promise<boolean> {
+  async checkVisible(
+    options: ITableCellOptionsActionOperationsRow,
+    renderContext: IJsxRenderContextTableColumn,
+  ): Promise<boolean> {
     const { $celScope, $host, $$table } = renderContext;
     const permissions = $celScope.permissions;
     let actions = options.actions;
@@ -48,7 +51,11 @@ export class TableCellActionOperationsRow extends BeanBase implements ITableCell
     return renders.length > 0;
   }
 
-  render(options: ITableCellOptionsActionOperationsRow, renderContext: IJsxRenderContextTableCell, _next: NextTableCellRender) {
+  render(
+    options: ITableCellOptionsActionOperationsRow,
+    renderContext: IJsxRenderContextTableCell,
+    _next: NextTableCellRender,
+  ) {
     const { $celScope, $host, $$table } = renderContext;
     const permissions = $celScope.permissions;
     const actions = options.actions;

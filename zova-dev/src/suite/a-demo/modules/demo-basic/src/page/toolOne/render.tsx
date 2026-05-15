@@ -24,10 +24,15 @@ export class RenderPageToolOne extends BeanRenderBase {
           slotFooter={$$form => {
             return (
               <div>
-                {$$form.formState.isSubmitting && <span class="loading loading-spinner text-primary"></span>}
+                {$$form.formState.isSubmitting && (
+                  <span class="loading loading-spinner text-primary"></span>
+                )}
                 {this.formMeta.formMode === 'edit' && (
                   <button
-                    class={classes('btn btn-primary', $$form.formState.isSubmitting && 'btn-disabled')}
+                    class={classes(
+                      'btn btn-primary',
+                      $$form.formState.isSubmitting && 'btn-disabled',
+                    )}
                     onClick={async () => {
                       await $$form.submit();
                     }}
@@ -75,7 +80,11 @@ export class RenderPageToolOne extends BeanRenderBase {
         <ZFormFieldBlank
           slotDefault={$$form => {
             return (
-              <button disabled={$$form.formState.isSubmitting} type="submit" class="btn btn-primary">
+              <button
+                disabled={$$form.formState.isSubmitting}
+                type="submit"
+                class="btn btn-primary"
+              >
                 Submit
               </button>
             );

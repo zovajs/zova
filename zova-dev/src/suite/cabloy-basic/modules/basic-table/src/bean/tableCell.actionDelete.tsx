@@ -2,7 +2,12 @@ import type { IResourceTableActionRowOptionsBase } from 'zova-module-a-openapi';
 
 import { BeanBase } from 'zova';
 import { ZIcon } from 'zova-module-a-icon';
-import { type IJsxRenderContextTableCell, type ITableCellRender, type NextTableCellRender, TableCell } from 'zova-module-a-table';
+import {
+  type IJsxRenderContextTableCell,
+  type ITableCellRender,
+  type NextTableCellRender,
+  TableCell,
+} from 'zova-module-a-table';
 
 declare module 'zova-module-a-openapi' {
   export interface IResourceTableActionRowRecord {
@@ -16,7 +21,11 @@ export interface ITableCellOptionsActionDelete extends IResourceTableActionRowOp
   class: 'btn btn-outline btn-error join-item',
 })
 export class TableCellActionDelete extends BeanBase implements ITableCellRender {
-  render(options: ITableCellOptionsActionDelete, renderContext: IJsxRenderContextTableCell, _next: NextTableCellRender) {
+  render(
+    options: ITableCellOptionsActionDelete,
+    renderContext: IJsxRenderContextTableCell,
+    _next: NextTableCellRender,
+  ) {
     const { $host } = renderContext;
     return (
       <button

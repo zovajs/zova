@@ -2,7 +2,12 @@ import type { IResourceTableCellOptionsBase } from 'zova-module-a-openapi';
 
 import { BeanBase } from 'zova';
 import { ZIcon } from 'zova-module-a-icon';
-import { TableCell, type IJsxRenderContextTableCell, type ITableCellRender, type NextTableCellRender } from 'zova-module-a-table';
+import {
+  TableCell,
+  type IJsxRenderContextTableCell,
+  type ITableCellRender,
+  type NextTableCellRender,
+} from 'zova-module-a-table';
 
 declare module 'zova-module-a-openapi' {
   export interface IResourceTableCellRecord {
@@ -18,7 +23,11 @@ export interface ITableCellOptionsTest extends IResourceTableCellOptionsBase {
   iconPrefix: '::home',
 })
 export class TableCellTest extends BeanBase implements ITableCellRender {
-  render(options: ITableCellOptionsTest, _renderContext: IJsxRenderContextTableCell, next: NextTableCellRender) {
+  render(
+    options: ITableCellOptionsTest,
+    _renderContext: IJsxRenderContextTableCell,
+    next: NextTableCellRender,
+  ) {
     const value = next();
     const iconPrefix = options.iconPrefix;
     if (!iconPrefix) return value;

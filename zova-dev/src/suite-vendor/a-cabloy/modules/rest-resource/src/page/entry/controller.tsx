@@ -1,4 +1,9 @@
-import type { IFormMeta, IFormProvider, ISchemaObjectExtensionField, TypeFormScene } from 'zova-module-a-openapi';
+import type {
+  IFormMeta,
+  IFormProvider,
+  ISchemaObjectExtensionField,
+  TypeFormScene,
+} from 'zova-module-a-openapi';
 
 import { isNil } from '@cabloy/utils';
 import { VNode } from 'vue';
@@ -39,7 +44,10 @@ export class ControllerPageEntry extends BeanControllerPageBase {
   }
 
   get formScene() {
-    return (this.$params.formScene as TypeFormScene | undefined) ?? (isNil(this.entryId) ? 'create' : 'view');
+    return (
+      (this.$params.formScene as TypeFormScene | undefined) ??
+      (isNil(this.entryId) ? 'create' : 'view')
+    );
   }
 
   protected async __init__() {

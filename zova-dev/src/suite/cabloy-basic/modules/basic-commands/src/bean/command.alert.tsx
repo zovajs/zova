@@ -14,7 +14,11 @@ export interface ICommandOptionsAlert extends ICommandOptionsBase<TypeCommandAle
 
 @Command<ICommandOptionsAlert>({ wait: true })
 export class CommandAlert extends BeanBase implements ICommandExecute {
-  execute(options: ICommandOptionsAlert, _renderContext: IJsxRenderContextBase, next: NextCommandExecute) {
+  execute(
+    options: ICommandOptionsAlert,
+    _renderContext: IJsxRenderContextBase,
+    next: NextCommandExecute,
+  ) {
     if (options.wait) {
       // eslint-disable-next-line no-alert
       window.alert(options.message);
