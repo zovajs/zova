@@ -13,11 +13,11 @@ declare module 'zova-module-a-openapi' {
 export interface ControllerBlockTableProps extends IResourceBlockOptionsBase {}
 
 @Controller()
-export class ControllerBlockTable extends BeanControllerBase {
+export class ControllerBlockTable<TData extends {} = {}> extends BeanControllerBase {
   static $propsDefault = {};
   static $componentOptions: IComponentOptions = { inheritAttrs: false, deepExtendDefault: true };
 
-  tableRef: BeanControllerTableBase;
+  tableRef: BeanControllerTableBase<TData>;
 
   @Use({ injectionScope: 'host' })
   $$renderContext: IJsxRenderContextPage;
@@ -40,13 +40,13 @@ export class ControllerBlockTable extends BeanControllerBase {
   protected render() {
     const { $$page } = this.$$renderContext;
     return (
-      <ZTable
+      <ZTable<TData>
         class={this.$props.class}
         controllerRef={ref => {
           this.tableRef = ref;
-          $$page.tableRef = ref;
+          $$page.tableRef = ref as unknown as BeanControllerTableBase<{}>;
         }}
-        data={$$page.data}
+        data={$$page.data as unknown as TData[]}
         schema={$$page.schemaRow}
         tableScope={$$page.jsxCelScope}
       ></ZTable>

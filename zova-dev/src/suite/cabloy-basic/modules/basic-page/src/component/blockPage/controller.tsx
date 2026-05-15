@@ -33,7 +33,7 @@ export class ControllerBlockPage<TData extends {} = {}> extends BeanControllerBa
   static $propsDefault = {};
   static $componentOptions: IComponentOptions = { inheritAttrs: false, deepExtendDefault: true };
 
-  tableRef: BeanControllerTableBase;
+  tableRef: BeanControllerTableBase<TData>;
 
   jsxZova: ZovaJsx;
   jsxCelScope: IPageScope;
@@ -46,7 +46,11 @@ export class ControllerBlockPage<TData extends {} = {}> extends BeanControllerBa
   $$modelResource: ModelResource<TData>;
 
   protected async __init__() {
-    this.$$modelResource = await this.bean._getBeanSelector('rest-resource.model.resource', true, this.resource);
+    this.$$modelResource = await this.bean._getBeanSelector(
+      'rest-resource.model.resource',
+      true,
+      this.resource,
+    );
     // jsx
     this._prepareJsx();
     // query
@@ -142,7 +146,12 @@ export class ControllerBlockPage<TData extends {} = {}> extends BeanControllerBa
     let domBlocks: VNode[] = [];
     blocks.forEach((block, index) => {
       const options = Object.assign({ key: index }, block.options);
-      const domBlock = this.jsxZova.render(block.render!, options, this.jsxCelScope, this.jsxRenderContext);
+      const domBlock = this.jsxZova.render(
+        block.render!,
+        options,
+        this.jsxCelScope,
+        this.jsxRenderContext,
+      );
       if (!domBlock) return;
       if (Array.isArray(domBlock)) {
         domBlocks.push(...domBlock);
