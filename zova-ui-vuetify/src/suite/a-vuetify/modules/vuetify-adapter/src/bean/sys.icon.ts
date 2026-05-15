@@ -1,4 +1,12 @@
-import { computed, createCommentVNode, createVNode, normalizeClass, normalizeStyle, onServerPrefetch, shallowRef } from 'vue';
+import {
+  computed,
+  createCommentVNode,
+  createVNode,
+  normalizeClass,
+  normalizeStyle,
+  onServerPrefetch,
+  shallowRef,
+} from 'vue';
 import { useTheme } from 'vuetify';
 import { VIcon } from 'vuetify/components';
 import { useTextColor } from 'vuetify/lib/composables/color.js';
@@ -122,7 +130,9 @@ export class SysIcon extends BeanBase {
     if (!slots.default) return [undefined, null];
     const slotDefault = slots.default();
     if (!slotDefault) return [undefined, null];
-    const icons = flattenFragments(slotDefault).filter(node => node.type === Text && node.children && typeof node.children === 'string');
+    const icons = flattenFragments(slotDefault).filter(
+      node => node.type === Text && node.children && typeof node.children === 'string',
+    );
     const iconName = icons[0]?.children as string;
     return [iconName, slotDefault];
   }

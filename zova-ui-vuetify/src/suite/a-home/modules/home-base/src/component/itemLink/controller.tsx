@@ -26,7 +26,13 @@ export class ControllerItemLink extends BeanControllerBase {
       },
     };
     return (
-      <VListItem tag="a" href={this.$props.href} to={this.$props.to} subtitle={this.$props.description} v-slots={slots}>
+      <VListItem
+        tag="a"
+        href={this.$props.href}
+        to={this.$props.to}
+        subtitle={this.$props.description}
+        v-slots={slots}
+      >
         <VListItemTitle>{this.$props.title}</VListItemTitle>
       </VListItem>
     );

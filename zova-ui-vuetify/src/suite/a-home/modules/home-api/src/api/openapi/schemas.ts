@@ -16,7 +16,8 @@ export type ApiSchemaAMenuDtoMenuItemMeta = components['schemas']['a-menu.dto.me
 export type ApiSchemaAMenuDtoMenuItemMetaPartial = Partial<ApiSchemaAMenuDtoMenuItemMeta>;
 export type ApiSchemaAMenuDtoMenuGroup = components['schemas']['a-menu.dto.menuGroup'];
 export type ApiSchemaAMenuDtoMenuGroupPartial = Partial<ApiSchemaAMenuDtoMenuGroup>;
-export type ApiSchemaAPermissionDtoPermissions = components['schemas']['a-permission.dto.permissions'];
+export type ApiSchemaAPermissionDtoPermissions =
+  components['schemas']['a-permission.dto.permissions'];
 export type ApiSchemaAPermissionDtoPermissionsPartial = Partial<ApiSchemaAPermissionDtoPermissions>;
 export type ApiSchemaHomeUserDtoPassport = components['schemas']['home-user.dto.passport'];
 export type ApiSchemaHomeUserDtoPassportPartial = Partial<ApiSchemaHomeUserDtoPassport>;
@@ -42,13 +43,17 @@ export type ApiSchemaACaptchaDtoCaptchaVerify_c3cd80b1eeafe39bfe4433491bb081d68e
   components['schemas']['a-captcha.dto.captchaVerify_c3cd80b1eeafe39bfe4433491bb081d68e84797e_3218e7d152830e08f6e764b9e0c3796df929ee2b'];
 export type ApiSchemaACaptchaDtoCaptchaVerify_c3cd80b1eeafe39bfe4433491bb081d68e84797e_3218e7d152830e08f6e764b9e0c3796df929ee2bPartial =
   Partial<ApiSchemaACaptchaDtoCaptchaVerify_c3cd80b1eeafe39bfe4433491bb081d68e84797e_3218e7d152830e08f6e764b9e0c3796df929ee2b>;
-export type ApiSchemaTestRestDtoProductCreate = components['schemas']['test-rest.dto.productCreate'];
+export type ApiSchemaTestRestDtoProductCreate =
+  components['schemas']['test-rest.dto.productCreate'];
 export type ApiSchemaTestRestDtoProductCreatePartial = Partial<ApiSchemaTestRestDtoProductCreate>;
-export type ApiSchemaTestRestDtoProductQueryRes = components['schemas']['test-rest.dto.productQueryRes'];
-export type ApiSchemaTestRestDtoProductQueryResPartial = Partial<ApiSchemaTestRestDtoProductQueryRes>;
+export type ApiSchemaTestRestDtoProductQueryRes =
+  components['schemas']['test-rest.dto.productQueryRes'];
+export type ApiSchemaTestRestDtoProductQueryResPartial =
+  Partial<ApiSchemaTestRestDtoProductQueryRes>;
 export type ApiSchemaTestRestEntityProduct = components['schemas']['test-rest.entity.product'];
 export type ApiSchemaTestRestEntityProductPartial = Partial<ApiSchemaTestRestEntityProduct>;
-export type ApiSchemaTestRestDtoProductUpdate = components['schemas']['test-rest.dto.productUpdate'];
+export type ApiSchemaTestRestDtoProductUpdate =
+  components['schemas']['test-rest.dto.productUpdate'];
 export type ApiSchemaTestRestDtoProductUpdatePartial = Partial<ApiSchemaTestRestDtoProductUpdate>;
 export type ApiSchemaTestSsrDtoTestResult = components['schemas']['test-ssr.dto.testResult'];
 export type ApiSchemaTestSsrDtoTestResultPartial = Partial<ApiSchemaTestSsrDtoTestResult>;
@@ -58,12 +63,17 @@ export type ApiSchemaTestSsrDtoTestBody = components['schemas']['test-ssr.dto.te
 export type ApiSchemaTestSsrDtoTestBodyPartial = Partial<ApiSchemaTestSsrDtoTestBody>;
 export type ApiSchemaTestCaptchaDtoSignin = components['schemas']['test-captcha.dto.signin'];
 export type ApiSchemaTestCaptchaDtoSigninPartial = Partial<ApiSchemaTestCaptchaDtoSignin>;
-export type ApiSchemaAPaypalEntityPaypalRecord = components['schemas']['a-paypal.entity.paypalRecord'];
+export type ApiSchemaAPaypalEntityPaypalRecord =
+  components['schemas']['a-paypal.entity.paypalRecord'];
 export type ApiSchemaAPaypalEntityPaypalRecordPartial = Partial<ApiSchemaAPaypalEntityPaypalRecord>;
-export type ApiSchemaAPaypalDtoPaypalOrderRecordPayload = components['schemas']['a-paypal.dto.paypalOrderRecordPayload'];
-export type ApiSchemaAPaypalDtoPaypalOrderRecordPayloadPartial = Partial<ApiSchemaAPaypalDtoPaypalOrderRecordPayload>;
-export type ApiSchemaAPaypalDtoPaypalOrderRecordOptions = components['schemas']['a-paypal.dto.paypalOrderRecordOptions'];
-export type ApiSchemaAPaypalDtoPaypalOrderRecordOptionsPartial = Partial<ApiSchemaAPaypalDtoPaypalOrderRecordOptions>;
+export type ApiSchemaAPaypalDtoPaypalOrderRecordPayload =
+  components['schemas']['a-paypal.dto.paypalOrderRecordPayload'];
+export type ApiSchemaAPaypalDtoPaypalOrderRecordPayloadPartial =
+  Partial<ApiSchemaAPaypalDtoPaypalOrderRecordPayload>;
+export type ApiSchemaAPaypalDtoPaypalOrderRecordOptions =
+  components['schemas']['a-paypal.dto.paypalOrderRecordOptions'];
+export type ApiSchemaAPaypalDtoPaypalOrderRecordOptionsPartial =
+  Partial<ApiSchemaAPaypalDtoPaypalOrderRecordOptions>;
 export type ApiSchemaAPlayDtoPlay = components['schemas']['a-play.dto.play'];
 export type ApiSchemaAPlayDtoPlayPartial = Partial<ApiSchemaAPlayDtoPlay>;
 export type ApiSchemaTestVonaDtoUserLazy = components['schemas']['test-vona.dto.userLazy'];
@@ -110,19 +120,27 @@ export type ApiSchemaTestVonaEntityProduct_bce173590aaef19772f1ae3a82196493c2633
   components['schemas']['test-vona.entity.product_bce173590aaef19772f1ae3a82196493c2633e2e'];
 export type ApiSchemaTestVonaEntityProduct_bce173590aaef19772f1ae3a82196493c2633e2ePartial =
   Partial<ApiSchemaTestVonaEntityProduct_bce173590aaef19772f1ae3a82196493c2633e2e>;
-export type ApiSchemaTestVonaDtoOrderResultPage = components['schemas']['test-vona.dto.orderResultPage'];
-export type ApiSchemaTestVonaDtoOrderResultPagePartial = Partial<ApiSchemaTestVonaDtoOrderResultPage>;
+export type ApiSchemaTestVonaDtoOrderResultPage =
+  components['schemas']['test-vona.dto.orderResultPage'];
+export type ApiSchemaTestVonaDtoOrderResultPagePartial =
+  Partial<ApiSchemaTestVonaDtoOrderResultPage>;
 export type ApiSchemaTestVonaDtoPostGroup = components['schemas']['test-vona.dto.postGroup'];
 export type ApiSchemaTestVonaDtoPostGroupPartial = Partial<ApiSchemaTestVonaDtoPostGroup>;
-export type ApiSchemaTestVonaDtoPostAggregate = components['schemas']['test-vona.dto.postAggregate'];
+export type ApiSchemaTestVonaDtoPostAggregate =
+  components['schemas']['test-vona.dto.postAggregate'];
 export type ApiSchemaTestVonaDtoPostAggregatePartial = Partial<ApiSchemaTestVonaDtoPostAggregate>;
 export type ApiSchemaTestVonaDtoPostQueryRes = components['schemas']['test-vona.dto.postQueryRes'];
 export type ApiSchemaTestVonaDtoPostQueryResPartial = Partial<ApiSchemaTestVonaDtoPostQueryRes>;
-export type ApiSchemaTestVonaDtoSerializerSimple = components['schemas']['test-vona.dto.serializerSimple'];
-export type ApiSchemaTestVonaDtoSerializerSimplePartial = Partial<ApiSchemaTestVonaDtoSerializerSimple>;
-export type ApiSchemaTestVonaDtoSerializerArray = components['schemas']['test-vona.dto.serializerArray'];
-export type ApiSchemaTestVonaDtoSerializerArrayPartial = Partial<ApiSchemaTestVonaDtoSerializerArray>;
-export type ApiSchemaTestVonaDtoSerializerLazy = components['schemas']['test-vona.dto.serializerLazy'];
+export type ApiSchemaTestVonaDtoSerializerSimple =
+  components['schemas']['test-vona.dto.serializerSimple'];
+export type ApiSchemaTestVonaDtoSerializerSimplePartial =
+  Partial<ApiSchemaTestVonaDtoSerializerSimple>;
+export type ApiSchemaTestVonaDtoSerializerArray =
+  components['schemas']['test-vona.dto.serializerArray'];
+export type ApiSchemaTestVonaDtoSerializerArrayPartial =
+  Partial<ApiSchemaTestVonaDtoSerializerArray>;
+export type ApiSchemaTestVonaDtoSerializerLazy =
+  components['schemas']['test-vona.dto.serializerLazy'];
 export type ApiSchemaTestVonaDtoSerializerLazyPartial = Partial<ApiSchemaTestVonaDtoSerializerLazy>;
 export type ApiSchemaTestVonaDtoSerializerSimple_1c4b95bcfe8fe28a56dbcc7028097cf11836b4fc =
   components['schemas']['test-vona.dto.serializerSimple_1c4b95bcfe8fe28a56dbcc7028097cf11836b4fc'];

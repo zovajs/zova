@@ -28,7 +28,11 @@ export class SysMain extends BeanBase {
             class={['v-main', { 'v-main--scrollable': props.scrollable }, props.class]}
             style={[mainStylesPatch.value, ssrBootStyles.value, dimensionStyles.value, props.style]}
           >
-            {props.scrollable ? <div class="v-main__scroller">{slots.default?.()}</div> : slots.default?.()}
+            {props.scrollable ? (
+              <div class="v-main__scroller">{slots.default?.()}</div>
+            ) : (
+              slots.default?.()
+            )}
           </props.tag>
         );
       });
@@ -39,7 +43,9 @@ export class SysMain extends BeanBase {
 }
 
 function useLayoutStylePatch(mainStyles: Ref<CSSProperties, CSSProperties>) {
-  const layoutConfigRef = inject('VuetifyLayoutConfig', undefined) as Ref<ILayoutConfig> | undefined;
+  const layoutConfigRef = inject('VuetifyLayoutConfig', undefined) as
+    | Ref<ILayoutConfig>
+    | undefined;
   return computed(() => {
     let mainStylesPatch;
     if (process.env.SSR && layoutConfigRef?.value) {

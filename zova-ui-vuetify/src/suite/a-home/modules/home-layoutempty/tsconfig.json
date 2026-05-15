@@ -1,5 +1,5 @@
 {
   "extends": "../../tsconfig.base",
   "compilerOptions": {},
-  "include": ["src", "src/.metadata/**/*"],
+  "include": ["src", "src/.metadata/**/*"]
 }

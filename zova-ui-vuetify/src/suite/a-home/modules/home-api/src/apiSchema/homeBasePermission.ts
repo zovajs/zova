@@ -6,6 +6,10 @@ import { ApiApiHomeBasePermissionretrievePermissionsPath } from '../api/homeBase
 @ApiSchema()
 export class ApiSchemaHomeBasePermission extends BeanBase {
   retrievePermissions(options?: IApiSchemaOptions) {
-    return this.$sdk.createApiSchemas(ApiApiHomeBasePermissionretrievePermissionsPath, 'get', options);
+    return this.$sdk.createApiSchemas(
+      ApiApiHomeBasePermissionretrievePermissionsPath,
+      'get',
+      options,
+    );
   }
 }

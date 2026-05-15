@@ -17,7 +17,11 @@ export class RenderHeader extends BeanRenderBase {
     };
     return (
       <VAppBar style={{ transition: 'none' }} extended={true} v-slots={slots}>
-        <VAppBarNavIcon icon="::menu" variant="text" nativeOnClick={() => this.toggleLeftDrawer()}></VAppBarNavIcon>
+        <VAppBarNavIcon
+          icon="::menu"
+          variant="text"
+          nativeOnClick={() => this.toggleLeftDrawer()}
+        ></VAppBarNavIcon>
         <VToolbarTitle>{this.sys.env.APP_TITLE}</VToolbarTitle>
         {this.$$r.$$renderTabs.renderTabItems()}
         <VSpacer></VSpacer>

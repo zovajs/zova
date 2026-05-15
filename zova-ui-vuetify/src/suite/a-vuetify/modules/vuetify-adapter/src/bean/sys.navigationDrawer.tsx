@@ -1,5 +1,17 @@
 import { useRouter } from '@cabloy/vue-router';
-import { computed, CSSProperties, inject, nextTick, readonly, Ref, ref, shallowRef, toRef, Transition, watch } from 'vue';
+import {
+  computed,
+  CSSProperties,
+  inject,
+  nextTick,
+  readonly,
+  Ref,
+  ref,
+  shallowRef,
+  toRef,
+  Transition,
+  watch,
+} from 'vue';
 import { useDisplay, useRtl } from 'vuetify';
 import { VDefaultsProvider, VImg } from 'vuetify/components';
 import { VNavigationDrawer } from 'vuetify/components';
@@ -36,7 +48,9 @@ export class SysNavigationDrawer extends BeanBase {
       const { isRtl } = useRtl();
       const { themeClasses } = provideTheme(props);
       const { borderClasses } = useBorder(props);
-      const { backgroundColorClasses, backgroundColorStyles } = useBackgroundColor(() => props.color);
+      const { backgroundColorClasses, backgroundColorStyles } = useBackgroundColor(
+        () => props.color,
+      );
       const { elevationClasses } = useElevation(props);
       const { displayClasses, mobile } = useDisplay(props);
       const { roundedClasses } = useRounded(props);
@@ -53,14 +67,18 @@ export class SysNavigationDrawer extends BeanBase {
       });
 
       const width = computed(() => {
-        return props.rail && props.expandOnHover && isHovering.value ? Number(props.width) : Number(props.rail ? props.railWidth : props.width);
+        return props.rail && props.expandOnHover && isHovering.value
+          ? Number(props.width)
+          : Number(props.rail ? props.railWidth : props.width);
       });
       const location = computed(() => {
         return toPhysical(props.location, isRtl.value) as 'left' | 'right' | 'bottom';
       });
       const isPersistent = toRef(() => props.persistent);
       const isTemporary = computed(() => !props.permanent && (mobile.value || props.temporary));
-      const isSticky = computed(() => props.sticky && !isTemporary.value && location.value !== 'bottom');
+      const isSticky = computed(
+        () => props.sticky && !isTemporary.value && location.value !== 'bottom',
+      );
 
       useFocusTrap(props, { isActive, localTop: isTemporary, contentEl: rootEl });
 
@@ -115,7 +133,11 @@ export class SysNavigationDrawer extends BeanBase {
       });
 
       const layoutSize = computed(() => {
-        const size = isTemporary.value ? 0 : props.rail && props.expandOnHover ? Number(props.railWidth) : width.value;
+        const size = isTemporary.value
+          ? 0
+          : props.rail && props.expandOnHover
+            ? Number(props.railWidth)
+            : width.value;
 
         return isDragging.value ? size * dragProgress.value : size;
       });
@@ -187,7 +209,13 @@ export class SysNavigationDrawer extends BeanBase {
                 roundedClasses.value,
                 props.class,
               ]}
-              style={[backgroundColorStyles.value, layoutItemStylesPatch.value, ssrBootStyles.value, stickyStyles.value, props.style]}
+              style={[
+                backgroundColorStyles.value,
+                layoutItemStylesPatch.value,
+                ssrBootStyles.value,
+                stickyStyles.value,
+                props.style,
+              ]}
               inert={!isActive.value}
               {...scopeId}
               {...attrs}
@@ -246,7 +274,9 @@ export class SysNavigationDrawer extends BeanBase {
 }
 
 function useLayoutStylePatch(layoutItemStyles: Ref<CSSProperties, CSSProperties>) {
-  const layoutConfigRef = inject('VuetifyLayoutConfig', undefined) as Ref<ILayoutConfig> | undefined;
+  const layoutConfigRef = inject('VuetifyLayoutConfig', undefined) as
+    | Ref<ILayoutConfig>
+    | undefined;
   return computed(() => {
     let layoutItemStylesPatch;
     if (process.env.SSR && layoutConfigRef?.value) {

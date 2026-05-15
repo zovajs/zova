@@ -54,21 +54,36 @@ export class SysAppBar extends BeanBase {
         return height + extensionHeight;
       });
 
-      const { currentScroll, scrollThreshold, isScrollingUp, scrollRatio, isAtBottom, reachedBottomWhileScrollingDown, hasEnoughScrollableSpace } =
-        useScroll(props, { canScroll, layoutSize: appBarHeight });
+      const {
+        currentScroll,
+        scrollThreshold,
+        isScrollingUp,
+        scrollRatio,
+        isAtBottom,
+        reachedBottomWhileScrollingDown,
+        hasEnoughScrollableSpace,
+      } = useScroll(props, { canScroll, layoutSize: appBarHeight });
 
       const canHide = toRef(() => scrollBehavior.value.hide || scrollBehavior.value.fullyHide);
       const isCollapsed = computed(
-        () => props.collapse || (scrollBehavior.value.collapse && (scrollBehavior.value.inverted ? scrollRatio.value > 0 : scrollRatio.value === 0)),
+        () =>
+          props.collapse ||
+          (scrollBehavior.value.collapse &&
+            (scrollBehavior.value.inverted ? scrollRatio.value > 0 : scrollRatio.value === 0)),
       );
       const isFlat = computed(
         () =>
           props.flat ||
           (scrollBehavior.value.fullyHide && !isActive.value) ||
-          (scrollBehavior.value.elevate && (scrollBehavior.value.inverted ? currentScroll.value > 0 : currentScroll.value === 0)),
+          (scrollBehavior.value.elevate &&
+            (scrollBehavior.value.inverted ? currentScroll.value > 0 : currentScroll.value === 0)),
       );
       const opacity = computed(() =>
-        scrollBehavior.value.fadeImage ? (scrollBehavior.value.inverted ? 1 - scrollRatio.value : scrollRatio.value) : undefined,
+        scrollBehavior.value.fadeImage
+          ? scrollBehavior.value.inverted
+            ? 1 - scrollRatio.value
+            : scrollRatio.value
+          : undefined,
       );
       const height = computed(() => {
         if (scrollBehavior.value.hide && scrollBehavior.value.inverted) return 0;
@@ -78,7 +93,9 @@ export class SysAppBar extends BeanBase {
 
         if (!canHide.value) return height + extensionHeight;
 
-        return currentScroll.value < scrollThreshold.value || scrollBehavior.value.fullyHide ? height + extensionHeight : height;
+        return currentScroll.value < scrollThreshold.value || scrollBehavior.value.fullyHide
+          ? height + extensionHeight
+          : height;
       });
 
       useToggleScope(
@@ -110,7 +127,9 @@ export class SysAppBar extends BeanBase {
             }
 
             // Normal behavior: show when scrolling up (and not at bottom) or above threshold
-            isActive.value = (isScrollingUp.value && !isAtBottom.value) || currentScroll.value < scrollThreshold.value;
+            isActive.value =
+              (isScrollingUp.value && !isAtBottom.value) ||
+              currentScroll.value < scrollThreshold.value;
           });
         },
       );
@@ -164,7 +183,9 @@ export class SysAppBar extends BeanBase {
 }
 
 function useLayoutStylePatch(layoutItemStyles: Ref<CSSProperties, CSSProperties>) {
-  const layoutConfigRef = inject('VuetifyLayoutConfig', undefined) as Ref<ILayoutConfig> | undefined;
+  const layoutConfigRef = inject('VuetifyLayoutConfig', undefined) as
+    | Ref<ILayoutConfig>
+    | undefined;
   return computed(() => {
     let layoutItemStylesPatch;
     if (process.env.SSR && layoutConfigRef?.value) {

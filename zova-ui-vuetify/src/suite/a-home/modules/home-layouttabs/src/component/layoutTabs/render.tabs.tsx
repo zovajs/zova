@@ -51,7 +51,12 @@ export class RenderTabs extends BeanRenderBase {
       domTabs.push(domTab);
     }
     const domWrapper = (
-      <VTabs alignTabs="start" centerActive modelValue={$$modelTabs.tabKeyCurrent} mandatory={false}>
+      <VTabs
+        alignTabs="start"
+        centerActive
+        modelValue={$$modelTabs.tabKeyCurrent}
+        mandatory={false}
+      >
         {domTabs}
       </VTabs>
     );
