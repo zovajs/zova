@@ -1,6 +1,6 @@
 import type { IResourceBlockOptionsBase, IJsxRenderContextPage } from 'zova-module-a-openapi';
 
-import { BeanControllerBase, deepEqual, type IComponentOptions, Use } from 'zova';
+import { BeanControllerBase, type IComponentOptions, Use } from 'zova';
 import { Controller } from 'zova-module-a-bean';
 import { BeanControllerTableBase, ZTable } from 'zova-module-a-table';
 
@@ -22,16 +22,7 @@ export class ControllerBlockTable<TData extends {} = {}> extends BeanControllerB
   @Use({ injectionScope: 'host' })
   $$renderContext: IJsxRenderContextPage;
 
-  protected async __init__() {
-    // watch
-    this.$watch(
-      () => this.permissions,
-      async (newValue, oldValue) => {
-        if (deepEqual(newValue, oldValue)) return;
-        await this.tableRef?.refreshMeta();
-      },
-    );
-  }
+  protected async __init__() {}
 
   get permissions() {
     return this.$$renderContext.$celScope.permissions;
