@@ -7,10 +7,21 @@ import { rimraf } from 'rimraf';
 
 import { loadJSONFile, saveJSONFile } from '../common/utils.ts';
 import { generateBeanGenerals } from './toolsMetadata/generateBeanGenerals.ts';
-import { generateConfig, generateConstant, generateError, generateLocale1, generateLocale2 } from './toolsMetadata/generateConfig.ts';
+import {
+  generateConfig,
+  generateConstant,
+  generateError,
+  generateLocale1,
+  generateLocale2,
+} from './toolsMetadata/generateConfig.ts';
 import { generateIcons } from './toolsMetadata/generateIcons.ts';
 import { generateMetadataCustom } from './toolsMetadata/generateMetadataCustom.ts';
-import { generateMain, generateMainSys, generateMonkey, generateMonkeySys } from './toolsMetadata/generateMonkey.ts';
+import {
+  generateMain,
+  generateMainSys,
+  generateMonkey,
+  generateMonkeySys,
+} from './toolsMetadata/generateMonkey.ts';
 import { generateOnions } from './toolsMetadata/generateOnions.ts';
 import { generateOptionsPackage } from './toolsMetadata/generateOptionsPackage.ts';
 import { generateScope } from './toolsMetadata/generateScope.ts';
@@ -35,7 +46,9 @@ export class CliToolsMetadata extends BeanCliBase {
     let moduleNames = argv._;
     const force = argv.force ?? moduleNames.length > 0;
     if (moduleNames.length === 0) {
-      moduleNames = this.modulesMeta.modulesArray.filter(item => !item.info.node_modules).map(item => item.info.relativeName);
+      moduleNames = this.modulesMeta.modulesArray
+        .filter(item => !item.info.node_modules)
+        .map(item => item.info.relativeName);
     }
     const total = moduleNames.length;
     for (let index = 0; index < total; index++) {
@@ -83,20 +96,34 @@ export class CliToolsMetadata extends BeanCliBase {
       content += await generateOnions(globFilesScene, sceneName, sceneMeta, moduleName, modulePath);
       // scope resources
       if (sceneMeta.scopeResource) {
-        const contentScopeResource = await generateScopeResources(globFilesScene, sceneName, sceneMeta, moduleName, modulePath);
+        const contentScopeResource = await generateScopeResources(
+          globFilesScene,
+          sceneName,
+          sceneMeta,
+          moduleName,
+          modulePath,
+        );
         if (contentScopeResource) {
           content += contentScopeResource;
           scopeResources[sceneName] = `IModule${toUpperCaseFirstChar(sceneName)}`;
         }
       }
       // bean generals
-      content += await generateBeanGenerals(globFilesScene, sceneName, sceneMeta, moduleName, modulePath);
+      content += await generateBeanGenerals(
+        globFilesScene,
+        sceneName,
+        sceneMeta,
+        moduleName,
+        modulePath,
+      );
       // metas
       if (sceneName === 'meta') {
         const onionMetasMeta = getOnionMetasMeta(this.modulesMeta.modules);
         for (const metaName in onionMetasMeta) {
           const metaMeta = onionMetasMeta[metaName];
-          const globFilesMeta = globFiles.filter(item => item.sceneName === 'meta' && item.beanName === metaName);
+          const globFilesMeta = globFiles.filter(
+            item => item.sceneName === 'meta' && item.beanName === metaName,
+          );
           if (metaMeta.scopeResource) {
             const contentScopeResourceMeta = await generateScopeResourcesMeta(
               globFilesMeta,
@@ -116,11 +143,24 @@ export class CliToolsMetadata extends BeanCliBase {
       }
       // metadata custom
       if (sceneMeta.metadataCustom) {
-        content += await generateMetadataCustom(this, globFilesScene, sceneName, sceneMeta, moduleName, modulePath);
+        content += await generateMetadataCustom(
+          this,
+          globFilesScene,
+          sceneName,
+          sceneMeta,
+          moduleName,
+          modulePath,
+        );
       }
     }
     // onions: optionsPackage
-    content += await generateOptionsPackage(this, globFiles, onionScenesMeta, moduleName, modulePath);
+    content += await generateOptionsPackage(
+      this,
+      globFiles,
+      onionScenesMeta,
+      moduleName,
+      modulePath,
+    );
     // icons
     content += await generateIcons(moduleName, modulePath);
     // config
@@ -173,6 +213,7 @@ export class CliToolsMetadata extends BeanCliBase {
     const localesDest = path.join(modulePath, 'src/.metadata/locales.ts');
     // save
     await fse.writeFile(localesDest, contentLocales);
+    await this.helper.formatFile({ fileName: localesDest, logPrefix: 'format: ' });
   }
 
   async _generateThis(moduleName: string, relativeNameCapitalize: string, modulePath: string) {
@@ -237,7 +278,10 @@ export { ScopeModule${relativeNameCapitalize} as ScopeModule } from './index.js'
     if (beansPreload.length > 0) {
       pkg = await _loadPkg();
       if (!pkg.zovaModule) pkg.zovaModule = {};
-      if (!pkg.zovaModule.beansPreload || pkg.zovaModule.beansPreload.join(',') !== beansPreload.join(',')) {
+      if (
+        !pkg.zovaModule.beansPreload ||
+        pkg.zovaModule.beansPreload.join(',') !== beansPreload.join(',')
+      ) {
         changed = true;
         pkg.zovaModule.beansPreload = beansPreload;
       }
