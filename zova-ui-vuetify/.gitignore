@@ -54,21 +54,3 @@ env/.env*.local
 # /package.json
 
 **/*.tsbuildinfo
-
-/src/suite/*
-!/src/suite/.gitkeep
-!/src/suite/a-demo
-!/src/suite/a-home
-!/src/suite/a-vuetify
-
-/src/suite-vendor/*
-!/src/suite-vendor/.gitkeep
-!/src/suite-vendor/a-cabloy
-!/src/suite-vendor/a-zova
-
-
-/src/module/*
-!/src/module/.gitkeep
-
-/src/module-vendor/*
-!/src/module-vendor/.gitkeep
