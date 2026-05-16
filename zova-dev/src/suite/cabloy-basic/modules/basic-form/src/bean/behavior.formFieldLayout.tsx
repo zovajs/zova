@@ -47,8 +47,22 @@ export class BehaviorFormFieldLayout extends BeanBehaviorBase<
   IBehaviorPropsInputFormFieldLayout,
   IBehaviorPropsOutputFormFieldLayout
 > {
+  cFieldRequired: string;
+
   @Use({ injectionScope: 'host' })
   $$formField: ControllerFormField;
+
+  protected async __init__() {
+    this.cFieldRequired = this.$style({
+      $nest: {
+        '& > .fieldset-legend::after': {
+          content: '" *"',
+          color: 'var(--color-error)',
+          fontSize: '1rem',
+        },
+      },
+    });
+  }
 
   protected render(
     renderContext: IFormFieldRenderContext,
@@ -106,7 +120,7 @@ export class BehaviorFormFieldLayout extends BeanBehaviorBase<
     const label = layout?.label;
     const classNameContainer = classes(
       'fieldset',
-      propsBucket.required && 'zova-field-required',
+      propsBucket.required && this.cFieldRequired,
       layout?.class,
     );
     return (
