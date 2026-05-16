@@ -22,3 +22,9 @@ ul.menu details > ul {
   width: 100%;
   height: 100%;
 }
+
+.zova-field-required > .fieldset-legend::after {
+  content: ' *';
+  color: var(--color-error);
+  font-size: 1rem;
+}

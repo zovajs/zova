@@ -101,9 +101,14 @@ export class BehaviorFormFieldLayout extends BeanBehaviorBase<
     field: TypeFormField,
     error: z.ZodError | undefined,
   ): VNode {
-    const layout = renderContext.propsBucket.layout;
+    const { propsBucket } = renderContext;
+    const layout = propsBucket.layout;
     const label = layout?.label;
-    const classNameContainer = classes('fieldset', layout?.class);
+    const classNameContainer = classes(
+      'fieldset',
+      propsBucket.required && 'zova-field-required',
+      layout?.class,
+    );
     return (
       <fieldset class={classNameContainer}>
         {!!label && <legend class="fieldset-legend">{label}</legend>}
