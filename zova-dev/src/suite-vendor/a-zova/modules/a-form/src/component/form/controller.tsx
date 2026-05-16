@@ -1,4 +1,4 @@
-import { catchError, celEnvBase, isEmptyObject } from '@cabloy/utils';
+import { catchError, celEnvBase, isEmptyObject, isNil } from '@cabloy/utils';
 import { ZodMetadata } from '@cabloy/zod-openapi';
 import {
   DeepKeys,
@@ -257,6 +257,11 @@ export class ControllerForm<
         jsxRenderContext,
       );
       props = Object.assign({}, props, propsAppend);
+    }
+    // readonly
+    const readonlyTemp = props.readonly;
+    if (isNil(readonlyTemp) && this.formMeta?.formMode === 'view') {
+      props.readonly = true;
     }
     // ok
     return props;
