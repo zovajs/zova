@@ -59,6 +59,7 @@ export interface IFormFieldOptionsBase<
   style?: types.NestedCSSProperties;
   value?: any;
   readonly?: boolean;
+  required?: boolean;
   disableNotifyChanged?: boolean;
   validators?: IFormFieldValidatorsOptionsBase;
   // onChange?: (e: Event) => void; // allow set to null, but not provide null type

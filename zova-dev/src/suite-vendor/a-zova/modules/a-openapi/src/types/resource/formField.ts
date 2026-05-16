@@ -5,5 +5,5 @@ export interface IResourceFormFieldRecord {}
 export interface IResourceFormFieldOptionsBase {
   class?: any;
   style?: types.NestedCSSProperties;
-  readonly?: boolean;
+  // readonly?: boolean; // need not readonly here
 }
