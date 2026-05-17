@@ -14,10 +14,6 @@
     },
     "ja-space-between-half-and-full-width": {
       "space": "always"
-    },
-    "textlint-rule-period-in-list-item": {
-      "periodMark": "",
-      "forceAppendPeriod": true
     }
   }
 }
