@@ -3,6 +3,8 @@
 !.gitignore
 !.npmrc
 
+.claude/settings.local.json
+
 .DS_Store
 .thumbs.db
 pnpm-lock.yaml
