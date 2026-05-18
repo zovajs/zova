@@ -1,7 +1,6 @@
 {
   "recommendations": [
     "cabloy.zova-vscode",
-    "vscodevim.vim",
     "oxc.oxc-vscode",
     "csstools.postcss",
     "bradlc.vscode-tailwindcss"
