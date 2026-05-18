@@ -29,7 +29,7 @@ importers:
         specifier: ^1.1.6
         version: 1.1.6
       '@cabloy/logger':
-        specifier: ^1.1.11
+        specifier: ^1.1.12
         version: link:packages-utils/logger
       '@cabloy/module-info':
         specifier: ^2.0.0
@@ -41,7 +41,7 @@ importers:
         specifier: ^4.4.16
         version: 4.4.16(vue@3.5.34(typescript@5.9.3))
       '@cabloy/word-utils':
-        specifier: ^2.1.10
+        specifier: ^2.1.11
         version: link:packages-utils/word-utils
       '@cabloy/zod-openapi':
         specifier: ^1.1.6
@@ -98,7 +98,7 @@ importers:
         specifier: ^3.7.2
         version: 3.7.2
       mutate-on-copy:
-        specifier: ^1.1.9
+        specifier: ^1.1.10
         version: link:packages-utils/mutate-on-copy
       openapi3-ts:
         specifier: ^4.5.0
@@ -131,7 +131,7 @@ importers:
         specifier: workspace:^
         version: link:packages-zova/zova
       zova-jsx:
-        specifier: ^1.1.42
+        specifier: ^1.1.43
         version: link:packages-utils/zova-jsx
       zova-module-a-api:
         specifier: workspace:^
@@ -354,7 +354,7 @@ importers:
         specifier: ^3.2.6
         version: 3.2.9(typescript@5.9.3)
       zova-openapi:
-        specifier: ^1.1.10
+        specifier: ^1.1.11
         version: link:packages-utils/zova-openapi
       zova-vite:
         specifier: workspace:^
