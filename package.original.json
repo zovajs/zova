@@ -17,7 +17,7 @@
   "packageManager": "pnpm@10.19.0",
   "scripts": {
     "init": "pnpm install --no-frozen-lockfile && npm run zova :tools:deps",
-    "zova": "node ../packages-cli/cli/src/bin/zova.ts",
+    "zova": "node ./packages-cli/cli/src/bin/zova.ts",
     "dev": "npm run dev:ssr:admin",
     "build": "npm run build:ssr:admin",
     "preview": "npm run preview:ssr:admin",
