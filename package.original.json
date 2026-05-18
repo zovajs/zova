@@ -1,7 +1,22 @@
 {
-  "name": "zova-dev",
+  "name": "zova",
+  "private": true,
   "description": "A vue3 framework with ioc",
+  "keywords": [
+    "ioc",
+    "vue3",
+    "zova"
+  ],
+  "homepage": "https://github.com/zovajs/zova#readme",
+  "bugs": {
+    "url": "https://github.com/zovajs/zova/issues"
+  },
+  "license": "MIT",
   "author": "zhennann",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/zovajs/zova.git"
+  },
   "type": "module",
   "packageManager": "pnpm@10.19.0",
   "scripts": {
@@ -20,6 +35,9 @@
     "format:fix": "oxfmt --write",
     "lint": "oxlint",
     "lint:fix": "oxlint --fix",
+    "docs:fix": "textlint --fix ./zova-docs/**/*.md",
+    "release-patch": "./scripts/release.sh patch",
+    "release-minor": "./scripts/release.sh minor",
     "dev:ssr:admin": "npm run prerun && quasar dev --mode ssr --flavor admin",
     "build:ssr:admin": "npm run prerun && quasar build --mode ssr --flavor admin",
     "preview:ssr:admin": "concurrently \"node ./dist-mock/index.js\" \"node ./dist/ssr-admin/index.js\"",
@@ -37,7 +55,7 @@
     "preview:ssr:testSecond": "concurrently \"node ./dist-mock/index.js\" \"node ./dist/ssr-testSecond/index.js\"",
     "dev:spa:testSecond": "npm run prerun && quasar dev --mode spa --flavor testSecond",
     "build:ssr:cabloyBasicBatch": "npm run build:ssr:cabloyBasicAdmin && npm run build:rest:cabloyBasicAdmin",
-    "build:ssr:testSecondBatch": "npm run build:ssr:testSecond && npm run build:rest:testSecond"
+    "build:ssr:testSecondBatch": "npm run build:ssr:testSecond && npm run build:rest:testSecond",
   },
   "keywords": ["vue3", "ioc", "zova"],
   "repository": {
@@ -71,17 +89,27 @@
     "@types/node": "^22.19.17",
     "@vitejs/plugin-vue": "^5.2.4",
     "concurrently": "^8.2.2",
-    "oxfmt": "^0.45.0",
-    "oxlint": "^1.60.0",
     "quasar-app-extension-zova": "workspace:^",
     "sass": "^1.99.0",
     "typescript": "^5.9.3",
     "vite": "^7.3.2",
     "vite-plugin-fake-server-turbo": "^3.0.18",
     "vue-tsc": "^3.2.6",
-    "zova-vite": "workspace:^"
+    "zova-vite": "workspace:^",
+    "lerna": "^9.0.7",
+    "textlint": "^15.7.0",
+    "textlint-rule-en-no-mixed-period": "^3.0.2",
+    "textlint-rule-ja-no-mixed-period": "^3.0.2",
+    "textlint-rule-ja-space-between-half-and-full-width": "^2.4.2",
+    "textlint-rule-period-in-list-item": "^1.0.1",
+    "oxfmt": "^0.45.0",
+    "oxlint": "^1.65.0"
   },
   "license": "MIT",
+  "engines": {
+    "node": ">=22.12.0"
+  },
+  "packageManager": "pnpm@10.19.0",
   "pnpm": {
     "overrides": {
       "@quasar/app-vite": "npm:@cabloy/quasar-app-vite@^2.5.9",

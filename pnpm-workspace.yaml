@@ -1,6 +1,8 @@
 packages:
-  - 'packages-zova/*'
+  - 'packages-cli/*'
+  - 'packages-docs'
   - 'packages-utils/*'
+  - 'packages-zova/*'
   - 'src/module/*'
   - 'src/module-vendor/*'
   - 'src/suite/*'
