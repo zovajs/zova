@@ -47,17 +47,17 @@ jobs:
         run: npm run init
       - name: Install dependencies docs
         run: pnpm install --no-frozen-lockfile
-        working-directory: zova-docs
+        working-directory: packages-docs
       - name: Build with VitePress
         run: npm run docs:build # or pnpm docs:build / yarn docs:build / bun run docs:build
-        working-directory: zova-docs
+        working-directory: packages-docs
       - name: Build with zova-demo
         run: npm run build:githubpages
         working-directory: zova-dev
       - name: Upload artifact
         uses: actions/upload-pages-artifact@v4
         with:
-          path: zova-docs/.vitepress/dist
+          path: packages-docs/.vitepress/dist
 
   # Deployment job
   deploy:

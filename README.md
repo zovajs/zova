@@ -48,7 +48,7 @@ The Website and Admin-Dashboard of Cabloy Store are built by one codebase
 
 - Dual-layer tabs navigation
 
-![](./zova-docs/assets/img/start/cabloy-start-two-level-tabs.gif)
+![](./packages-docs/assets/img/start/cabloy-start-two-level-tabs.gif)
 
 ## Technology Stack
 

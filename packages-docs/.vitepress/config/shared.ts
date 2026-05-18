@@ -15,7 +15,7 @@ export const shared = defineConfig({
   ],
   themeConfig: {
     editLink: {
-      pattern: 'https://github.com/zovajs/zova/edit/main/zova-docs/:path',
+      pattern: 'https://github.com/zovajs/zova/edit/main/packages-docs/:path',
     },
     search: {
       provider: 'local',
