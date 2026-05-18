@@ -1,10 +1,10 @@
 {
-  "extends": "../../tsconfig.base.json",
+  "extends": "../../tsconfig.base.esm.json",
   "compilerOptions": {
     "rootDir": "cli",
     "outDir": "dist-cli",
     "composite": false,
-    "declaration": false,
+    "declaration": false
   },
-  "include": ["cli/**/snippets/*.ts"],
+  "include": ["cli/**/snippets/*.ts"]
 }

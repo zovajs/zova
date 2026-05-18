@@ -1,5 +1,5 @@
 {
-  "extends": "./tsconfig.base.json",
+  "extends": "../tsconfig.base.esm.json",
   "compilerOptions": {},
   "references": [
     {
@@ -9,5 +9,5 @@
       "path": "cli-set-front"
     }
   ],
-  "exclude": ["cli", "cli-set-front"]
+  "include": []
 }
