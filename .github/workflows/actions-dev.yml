@@ -21,4 +21,3 @@ jobs:
       - run: npm run init
       - name: build
         run: npm run build
-        working-directory: zova-dev
