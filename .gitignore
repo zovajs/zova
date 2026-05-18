@@ -1,38 +1,76 @@
+!.gitignore
+!.npmrc
+
+.DS_Store
+.thumbs.db
+pnpm-lock.yaml
+# package-lock.json
 node_modules
 miniprogram_npm
-/typings/core
-/coverage
-**/dist/
-/dist-release
-/docs-api
-/run
+vite.config.ts.timestamp-*
 
-.rollup.cache
-.my-tools
+**/dist/
+**/dist-toolsIsolate/
+**/dist-cli/
+dist-releases
+dist-mock
+
+# zova core related directories
+.temp-dynamic-*
+.zova
+.zova-rest
+.quasar
+/quasar.config.*.temporary.compiled*
+/openapi.config.ts
+
+# Cordova related directories and files
+/src-cordova/node_modules
+/src-cordova/platforms
+/src-cordova/plugins
+/src-cordova/www
+
+# Capacitor related directories and files
+/src-capacitor/www
+/src-capacitor/node_modules
+
+# Log files
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+
+# Editor directories and files
 .nx
 .idea
-.DS_Store
+*.suo
+*.ntvs*
+*.njsproj
+*.sln
 
-*.tsbuildinfo
+# local .env files
+env/.env*.local
+/src/front/config/config/config*.local.ts
+/src/front/typing/modules.d.ts
+**/.metadata/modules.d.ts
+/package.json
 
-*.log
-*.logs
-*.swp
-*.tmp
-*.rdb
+**/*.tsbuildinfo
 
-.claude/settings.local.json
+/src/suite/*
+!/src/suite/.gitkeep
+!/src/suite/a-demo
+!/src/suite/a-devui
+!/src/suite/a-home
+!/src/suite/cabloy-basic
 
-# package-lock.json
+/src/suite-vendor/*
+!/src/suite-vendor/.gitkeep
+!/src/suite-vendor/a-cabloy
+!/src/suite-vendor/a-zova
 
-# auto created
+/src/module/*
+!/src/module/.gitkeep
 
-# should pre-compiled
+/src/module-vendor/*
+!/src/module-vendor/.gitkeep
 
-.vscode/sftp.json
-.sync-config.cson
-sftp-config.json
-sftp-config-.json
-/.assets
-zova-docs/.vitepress/cache
-vite.config.ts.timestamp-*
+!/packages-utils/quasar-app-extension-zova/dist

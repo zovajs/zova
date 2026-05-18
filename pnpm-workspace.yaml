@@ -1,4 +1,12 @@
 packages:
+  - 'packages-zova/*'
+  - 'packages-utils/*'
+  - 'src/module/*'
+  - 'src/module-vendor/*'
+  - 'src/suite/*'
+  - 'src/suite/*/modules/*'
+  - 'src/suite-vendor/*'
+  - 'src/suite-vendor/*/modules/*'
 
 # shamefullyHoist: true
 strictPeerDependencies: false
@@ -26,4 +34,5 @@ publicHoistPattern:
   - '*vite*'
   - '*@vitejs*'
   - '*zod*'
+  - '*@tanstack*'
   - 'zod'

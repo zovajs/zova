@@ -1,9 +1,0 @@
-{
-  "extends": "./tsconfig.base.esm",
-  "compilerOptions": {
-    "allowImportingTsExtensions": false,
-    "noEmit": true,
-    "rewriteRelativeImportExtensions": false,
-    "verbatimModuleSyntax": false
-  }
-}
