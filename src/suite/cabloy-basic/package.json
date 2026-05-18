@@ -6,18 +6,19 @@
   "files": [],
   "type": "module",
   "dependencies": {
-    "zova-module-basic-adapter": "workspace:^",
+    "zova-module-basic-adapter": "^5.0.1",
     "zova-module-basic-captcha": "^5.0.1",
     "zova-module-basic-commands": "^5.1.11",
     "zova-module-basic-commandssync": "^5.0.1",
-    "zova-module-basic-currency": "workspace:^",
-    "zova-module-basic-date": "workspace:^",
-    "zova-module-basic-form": "workspace:^",
+    "zova-module-basic-currency": "^5.1.10",
+    "zova-module-basic-date": "^5.0.1",
+    "zova-module-basic-form": "^5.0.1",
     "zova-module-basic-input": "^5.0.1",
     "zova-module-basic-page": "^5.0.1",
     "zova-module-basic-pageentry": "^5.0.1",
-    "zova-module-basic-table": "workspace:^",
-    "zova-suite-a-cabloy": "workspace:^"
+    "zova-module-basic-table": "^5.0.1",
+    "zova-suite-a-cabloy": "^5.1.22"
   },
-  "title": "cabloy-basic"
+  "title": "cabloy-basic",
+  "gitHead": "6f675a8cc46d596142c591c28a40cc4d82fcc6cc"
 }
