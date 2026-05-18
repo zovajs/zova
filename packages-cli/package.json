@@ -1,37 +1,12 @@
 {
   "name": "zova-cli",
   "private": true,
-  "description": "A Node.js full-stack framework with workflow engine",
+  "description": "zova cli",
   "keywords": [
     "zova"
   ],
-  "homepage": "https://github.com/cabloy/zova#readme",
-  "bugs": {
-    "url": "https://github.com/cabloy/zova/issues"
-  },
   "license": "MIT",
   "author": "zhennann",
-  "repository": {
-    "type": "git",
-    "url": "git+https://github.com/cabloy/zova.git"
-  },
   "type": "module",
-  "scripts": {},
-  "devDependencies": {
-    "@cabloy/lint": "^5.1.15",
-    "@types/mocha": "^10.0.6",
-    "@types/node": "^22.10.2",
-    "oxfmt": "^0.45.0",
-    "oxlint": "^1.60.0",
-    "typedoc": "^0.25.13",
-    "typescript": "^5.9.3"
-  },
-  "engines": {
-    "node": ">=22.12.0"
-  },
-  "packageManager": "pnpm@10.19.0",
-  "pnpm": {
-    "overrides": {}
-  },
   "title": "zova cli"
 }
