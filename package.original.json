@@ -2,11 +2,7 @@
   "name": "zova",
   "private": true,
   "description": "A vue3 framework with ioc",
-  "keywords": [
-    "ioc",
-    "vue3",
-    "zova"
-  ],
+  "keywords": ["ioc", "vue3", "zova"],
   "homepage": "https://github.com/zovajs/zova#readme",
   "bugs": {
     "url": "https://github.com/zovajs/zova/issues"
@@ -55,16 +51,7 @@
     "preview:ssr:testSecond": "concurrently \"node ./dist-mock/index.js\" \"node ./dist/ssr-testSecond/index.js\"",
     "dev:spa:testSecond": "npm run prerun && quasar dev --mode spa --flavor testSecond",
     "build:ssr:cabloyBasicBatch": "npm run build:ssr:cabloyBasicAdmin && npm run build:rest:cabloyBasicAdmin",
-    "build:ssr:testSecondBatch": "npm run build:ssr:testSecond && npm run build:rest:testSecond",
-  },
-  "keywords": ["vue3", "ioc", "zova"],
-  "repository": {
-    "type": "git",
-    "url": "git+https://github.com/cabloy/zova.git"
-  },
-  "homepage": "https://github.com/cabloy/zova#readme",
-  "bugs": {
-    "url": "https://github.com/cabloy/zova/issues"
+    "build:ssr:testSecondBatch": "npm run build:ssr:testSecond && npm run build:rest:testSecond"
   },
   "dependencies": {
     "@tailwindcss/postcss": "^4.2.2",
@@ -105,11 +92,9 @@
     "oxfmt": "^0.45.0",
     "oxlint": "^1.65.0"
   },
-  "license": "MIT",
   "engines": {
     "node": ">=22.12.0"
   },
-  "packageManager": "pnpm@10.19.0",
   "pnpm": {
     "overrides": {
       "@quasar/app-vite": "npm:@cabloy/quasar-app-vite@^2.5.9",
