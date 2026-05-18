@@ -1,6 +1,6 @@
 #! /usr/bin/env bash
 
 lerna version $1
-lerna publish from-git
+pnpm publish -r
 
 npm run build:ssr:cabloyBasicBatch
