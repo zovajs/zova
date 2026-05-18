@@ -18,6 +18,7 @@ jobs:
       - uses: pnpm/action-setup@v5
         with:
           version: 10.19.0
+      - run: cp package.original.json package.json
       - run: npm run init
       - name: build
         run: npm run build
