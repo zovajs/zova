@@ -46,7 +46,7 @@
   },
   "dependencies": {
     "@cabloy/compose": "^2.1.5",
-    "@cabloy/utils": "^2.1.18",
+    "@cabloy/utils": "^2.1.19",
     "@cabloy/word-utils": "^2.1.11",
     "typestyle": "^2.4.0",
     "vue": "^3.5.32",
