@@ -1,0 +1,13 @@
+{
+  "$schema": "node_modules/lerna/schemas/lerna-schema.json",
+  "version": "independent",
+  "npmClient": "pnpm",
+  "packages": [
+    "zova-cli/cli",
+    "zova-cli/cli-set-front",
+    "packages-zova/*",
+    "packages-utils/*",
+    "src/suite-vendor/*",
+    "src/suite-vendor/*/modules/*",
+  ]
+}
