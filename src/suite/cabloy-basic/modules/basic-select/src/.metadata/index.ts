@@ -54,6 +54,41 @@ export interface IZovaComponentRecord {
 }
 }
 /** components: end */
+/** tableCell: begin */
+export * from '../bean/tableCell.select.jsx';
+import { ITableCellOptionsSelect } from '../bean/tableCell.select.jsx';
+import 'zova-module-a-table';
+declare module 'zova-module-a-table' {
+  
+    export interface ITableCellRecord {
+      'basic-select:select': ITableCellOptionsSelect;
+    }
+
+  
+}
+declare module 'zova-module-basic-select' {
+  
+        export interface TableCellSelect {
+          /** @internal */
+          get scope(): ScopeModuleBasicSelect;
+        }
+
+        export interface TableCellSelect {
+          get $beanFullName(): 'basic-select.tableCell.select';
+          get $onionName(): 'basic-select:select';
+          get $onionOptions(): ITableCellOptionsSelect;
+        } 
+}
+/** tableCell: end */
+/** tableCell: begin */
+import { TableCellSelect } from '../bean/tableCell.select.jsx';
+import 'zova';
+declare module 'zova' {
+  export interface IBeanRecordGeneral {
+    'basic-select.tableCell.select': TableCellSelect;
+  }
+}
+/** tableCell: end */
 /** scope: begin */
 import { BeanScopeBase, type BeanScopeUtil } from 'zova';
 import { Scope } from 'zova-module-a-bean';

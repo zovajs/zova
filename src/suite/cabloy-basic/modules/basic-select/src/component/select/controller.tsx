@@ -47,7 +47,7 @@ export class ControllerSelect extends BeanControllerBase {
         onChange={(e: Event) => {
           const selectedValue = (e.target as HTMLSelectElement).value;
           const item = this.$props.items?.find(
-            (it: any) => String(it[this.$props.itemValue]) === selectedValue,
+            item => String(item[this.$props.itemValue]) === selectedValue,
           );
           const value = item ? item[this.$props.itemValue] : undefined;
           this.modelValue = value;
