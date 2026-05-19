@@ -1,12 +1,12 @@
 import type { IComponentOptions } from 'zova';
 import type { IResourceFormFieldOptionsBase } from 'zova-module-a-openapi';
 
-import { isNil } from '@cabloy/utils';
 import { classes } from 'typestyle';
-import { VNode } from 'vue';
 import { BeanControllerBase } from 'zova';
 import { Controller } from 'zova-module-a-bean';
 import { ZFormField, ZFormFieldPreset, type IFormFieldComponentOptions } from 'zova-module-a-form';
+
+import { TypeControllerSelectPublicProps, ZSelect } from '../../.metadata/component/select.js';
 
 declare module 'zova-module-a-openapi' {
   export interface IResourceFormFieldRecord {
@@ -14,14 +14,8 @@ declare module 'zova-module-a-openapi' {
   }
 }
 
-export interface IResourceFormFieldSelectOptions extends IResourceFormFieldOptionsBase {
-  value?: any;
-  onChange?: (value: any) => void;
-  placeholder?: string;
-  items?: any[] | undefined;
-  itemTitle?: string;
-  itemValue?: string;
-}
+export interface IResourceFormFieldSelectOptions
+  extends IResourceFormFieldOptionsBase, TypeControllerSelectPublicProps {}
 
 export interface ControllerFormFieldSelectProps extends IFormFieldComponentOptions {
   options?: IResourceFormFieldSelectOptions;
@@ -60,51 +54,16 @@ export class ControllerFormFieldSelect extends BeanControllerBase {
                 'select',
                 !$$formField.field.state.meta.isValid && 'select-error',
               );
-          const propsNew: Omit<IResourceFormFieldSelectOptions, 'style'> = {
-            onChange: (value: any) => {
+          const propsNew: TypeControllerSelectPublicProps = {
+            'modelValue': propsBucket.value,
+            'onUpdate:modelValue': (value: any) => {
               $$formField.setValue(value, propsBucket.disableNotifyChanged);
             },
-            value: propsBucket.value,
             ...propsBucket.options,
             ...props,
-            class: className,
+            'class': className,
           };
-          const domOptions: VNode[] = [];
-          if (propsNew.items) {
-            for (const item of propsNew.items) {
-              const title = item[propsNew.itemTitle!];
-              const value = item[propsNew.itemValue!];
-              domOptions.push(
-                <option
-                  key={value}
-                  value={value}
-                  selected={String(propsNew.value) === String(value)}
-                >
-                  {title}
-                </option>,
-              );
-            }
-          }
-          return (
-            <select
-              class={propsNew.class}
-              onChange={(e: Event) => {
-                const selectedValue = (e.target as HTMLSelectElement).value;
-                const item = propsNew.items?.find(
-                  (it: any) => String(it[propsNew.itemValue!]) === selectedValue,
-                );
-                const value = item ? item[propsNew.itemValue!] : undefined;
-                propsNew.onChange!(value);
-              }}
-            >
-              {!!propsNew.placeholder && (
-                <option disabled={true} selected={isNil(propsNew.value)}>
-                  {propsNew.placeholder}
-                </option>
-              )}
-              {domOptions}
-            </select>
-          );
+          return <ZSelect {...propsNew}></ZSelect>;
         }}
       ></ZFormField>
     );

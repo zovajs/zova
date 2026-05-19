@@ -1,6 +1,7 @@
 // eslint-disable
 /** controller: begin */
 export * from '../component/formFieldSelect/controller.jsx';
+export * from '../component/select/controller.jsx';
 
 import 'zova';
 declare module 'zova' {
@@ -12,15 +13,22 @@ declare module 'zova-module-basic-select' {
         export interface ControllerFormFieldSelect {
           /** @internal */
           get scope(): ScopeModuleBasicSelect;
+        }
+
+        export interface ControllerSelect {
+          /** @internal */
+          get scope(): ScopeModuleBasicSelect;
         } 
 }
 /** controller: end */
 /** controller: begin */
 import { ControllerFormFieldSelect } from '../component/formFieldSelect/controller.jsx';
+import { ControllerSelect } from '../component/select/controller.jsx';
 import 'zova';
 declare module 'zova' {
   export interface IBeanRecordLocal {
     'basic-select.controller.formFieldSelect': ControllerFormFieldSelect;
+'basic-select.controller.select': ControllerSelect;
   }
 }
 /** controller: end */
@@ -28,16 +36,21 @@ declare module 'zova' {
 /** components: begin */
 export * from './component/formFieldSelect.js';
 import { ZFormFieldSelect } from './component/formFieldSelect.js';
+export * from './component/select.js';
+import { ZSelect } from './component/select.js';
 export const components = {
   'formFieldSelect': ZFormFieldSelect,
+'select': ZSelect,
 };
 import 'zova';
 declare module 'zova' {
 export interface IComponentRecord {
   'basic-select:formFieldSelect': ControllerFormFieldSelect;
+'basic-select:select': ControllerSelect;
 }
 export interface IZovaComponentRecord {
   'basic-select:formFieldSelect': typeof ZFormFieldSelect;
+'basic-select:select': typeof ZSelect;
 }
 }
 /** components: end */
