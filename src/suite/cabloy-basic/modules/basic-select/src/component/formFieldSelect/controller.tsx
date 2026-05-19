@@ -6,7 +6,7 @@ import { classes } from 'typestyle';
 import { VNode } from 'vue';
 import { BeanControllerBase } from 'zova';
 import { Controller } from 'zova-module-a-bean';
-import { ZFormField, type IFormFieldComponentOptions } from 'zova-module-a-form';
+import { ZFormField, ZFormFieldPreset, type IFormFieldComponentOptions } from 'zova-module-a-form';
 
 declare module 'zova-module-a-openapi' {
   export interface IResourceFormFieldRecord {
@@ -40,6 +40,15 @@ export class ControllerFormFieldSelect extends BeanControllerBase {
   protected async __init__() {}
 
   protected render() {
+    if (this.$props.readonly) {
+      return (
+        <ZFormFieldPreset
+          {...this.$props}
+          render={'basic-input:formFieldInput'}
+          options={{ value: this._getValueByItems() }}
+        ></ZFormFieldPreset>
+      );
+    }
     return (
       <ZFormField
         {...this.$props}
@@ -64,16 +73,30 @@ export class ControllerFormFieldSelect extends BeanControllerBase {
           if (propsNew.items) {
             for (const item of propsNew.items) {
               const title = item[propsNew.itemTitle!];
-              const value = item[propsNew.value!];
+              const value = item[propsNew.itemValue!];
               domOptions.push(
-                <option key={value} selected={propsNew.value === value}>
+                <option
+                  key={value}
+                  value={value}
+                  selected={String(propsNew.value) === String(value)}
+                >
                   {title}
                 </option>,
               );
             }
           }
           return (
-            <select class={propsNew.class}>
+            <select
+              class={propsNew.class}
+              onChange={(e: Event) => {
+                const selectedValue = (e.target as HTMLSelectElement).value;
+                const item = propsNew.items?.find(
+                  (it: any) => String(it[propsNew.itemValue!]) === selectedValue,
+                );
+                const value = item ? item[propsNew.itemValue!] : undefined;
+                propsNew.onChange!(value);
+              }}
+            >
               {!!propsNew.placeholder && (
                 <option disabled={true} selected={isNil(propsNew.value)}>
                   {propsNew.placeholder}
@@ -85,5 +108,13 @@ export class ControllerFormFieldSelect extends BeanControllerBase {
         }}
       ></ZFormField>
     );
+  }
+
+  private _getValueByItems() {
+    const value = this.$props.value;
+    const item = this.$props.options.items?.find(
+      item => String(item[String(this.$props.options.itemValue)]) === String(value),
+    );
+    return item?.[String(this.$props.options.itemTitle)];
   }
 }
