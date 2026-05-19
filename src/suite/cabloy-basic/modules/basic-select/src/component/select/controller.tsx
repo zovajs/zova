@@ -4,7 +4,6 @@ import { BeanControllerBase } from 'zova';
 import { Controller } from 'zova-module-a-bean';
 
 export interface ControllerSelectProps {
-  class?: any;
   placeholder?: string;
   items?: any[] | undefined;
   itemTitle?: string;
@@ -43,7 +42,6 @@ export class ControllerSelect extends BeanControllerBase {
     }
     return (
       <select
-        class={this.$props.class}
         onChange={(e: Event) => {
           const selectedValue = (e.target as HTMLSelectElement).value;
           const item = this.$props.items?.find(

@@ -8,7 +8,7 @@ import {
   type NextTableCellRender,
 } from 'zova-module-a-table';
 
-import { TypeControllerSelectPublicProps } from '../.metadata/index.js';
+import { ZSelectProps } from '../.metadata/index.js';
 
 declare module 'zova-module-a-openapi' {
   export interface IResourceTableCellRecord {
@@ -16,8 +16,7 @@ declare module 'zova-module-a-openapi' {
   }
 }
 
-export interface ITableCellOptionsSelect
-  extends IResourceTableCellOptionsBase, TypeControllerSelectPublicProps {}
+export interface ITableCellOptionsSelect extends IResourceTableCellOptionsBase, ZSelectProps {}
 
 @TableCell<ITableCellOptionsSelect>({
   itemValue: 'value',
