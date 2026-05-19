@@ -75,11 +75,7 @@ export class ControllerPageTodo extends BeanControllerPageBase {
         <form>
           <div class="card bg-base-100 shadow-xl">
             <div class="card-body flex-row">
-              <input
-                type="text"
-                class="input input-bordered w-full max-w-xs"
-                v-model={this.newTitle}
-              ></input>
+              <input type="text" class="input w-full max-w-xs" v-model={this.newTitle}></input>
               <button
                 class="btn btn-primary"
                 type="submit"

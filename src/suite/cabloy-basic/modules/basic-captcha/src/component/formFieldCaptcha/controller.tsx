@@ -109,7 +109,6 @@ export class ControllerFormFieldCaptcha extends BeanControllerBase {
               : classes(
                   props.class,
                   'input',
-                  propsBucket.layout?.bordered && 'input-bordered',
                   !$$formField.field.state.meta.isValid && 'input-error',
                 );
             const propsNew: Omit<IResourceFormFieldInputOptions, 'style'> = {

@@ -37,7 +37,7 @@ export class ControllerPageComponent extends BeanControllerPageBase {
         <input
           bs-behaviors-focus
           type="text"
-          class="input input-bordered w-full max-w-xs"
+          class="input w-full max-w-xs"
           value={this.resetTime.toString()}
           ref={ref => {
             // eslint-disable-next-line

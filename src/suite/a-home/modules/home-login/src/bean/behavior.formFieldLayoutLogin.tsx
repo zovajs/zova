@@ -36,7 +36,7 @@ export class BehaviorFormFieldLayoutLogin extends BeanBehaviorBase<
     const iconPrefix = layout?.iconPrefix;
     const error = field.state.meta.errors[0] as z.ZodError | undefined;
     return (
-      <label class="input input-bordered flex items-center gap-2 w-full">
+      <label class="input flex items-center gap-2 w-full">
         <ZIcon class="opacity-70" name={iconPrefix} width={16}></ZIcon>
         {vnode}
         {!field.state.meta.isValid && (

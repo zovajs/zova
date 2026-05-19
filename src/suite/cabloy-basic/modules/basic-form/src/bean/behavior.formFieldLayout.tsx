@@ -88,14 +88,8 @@ export class BehaviorFormFieldLayout extends BeanBehaviorBase<
     error: z.ZodError | undefined,
   ): VNode {
     const layout = renderContext.propsBucket.layout;
-    const bordered = layout?.bordered;
     const label = layout?.label;
-    const className = classes(
-      'input',
-      layout?.class,
-      bordered && 'input-bordered',
-      !field.state.meta.isValid && 'input-error',
-    );
+    const className = classes('input', layout?.class, !field.state.meta.isValid && 'input-error');
     return (
       <label class={className}>
         {label}
