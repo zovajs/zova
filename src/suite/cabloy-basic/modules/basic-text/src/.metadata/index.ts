@@ -41,6 +41,57 @@ export interface IZovaComponentRecord {
 }
 }
 /** components: end */
+/** tableCell: begin */
+export * from '../bean/tableCell.text.jsx';
+export * from '../bean/tableCell.textarea.jsx';
+import { ITableCellOptionsText } from '../bean/tableCell.text.jsx';
+import { ITableCellOptionsTextarea } from '../bean/tableCell.textarea.jsx';
+import 'zova-module-a-table';
+declare module 'zova-module-a-table' {
+  
+    export interface ITableCellRecord {
+      'basic-text:text': ITableCellOptionsText;
+'basic-text:textarea': ITableCellOptionsTextarea;
+    }
+
+  
+}
+declare module 'zova-module-basic-text' {
+  
+        export interface TableCellText {
+          /** @internal */
+          get scope(): ScopeModuleBasicText;
+        }
+
+        export interface TableCellText {
+          get $beanFullName(): 'basic-text.tableCell.text';
+          get $onionName(): 'basic-text:text';
+          get $onionOptions(): ITableCellOptionsText;
+        }
+
+        export interface TableCellTextarea {
+          /** @internal */
+          get scope(): ScopeModuleBasicText;
+        }
+
+        export interface TableCellTextarea {
+          get $beanFullName(): 'basic-text.tableCell.textarea';
+          get $onionName(): 'basic-text:textarea';
+          get $onionOptions(): ITableCellOptionsTextarea;
+        } 
+}
+/** tableCell: end */
+/** tableCell: begin */
+import { TableCellText } from '../bean/tableCell.text.jsx';
+import { TableCellTextarea } from '../bean/tableCell.textarea.jsx';
+import 'zova';
+declare module 'zova' {
+  export interface IBeanRecordGeneral {
+    'basic-text.tableCell.text': TableCellText;
+'basic-text.tableCell.textarea': TableCellTextarea;
+  }
+}
+/** tableCell: end */
 /** scope: begin */
 import { BeanScopeBase, type BeanScopeUtil } from 'zova';
 import { Scope } from 'zova-module-a-bean';
