@@ -238,6 +238,9 @@ importers:
       zova-module-basic-pageentry:
         specifier: workspace:^
         version: link:src/suite/cabloy-basic/modules/basic-pageentry
+      zova-module-basic-select:
+        specifier: workspace:^
+        version: link:src/suite/cabloy-basic/modules/basic-select
       zova-module-basic-table:
         specifier: workspace:^
         version: link:src/suite/cabloy-basic/modules/basic-table
@@ -1573,6 +1576,9 @@ importers:
       zova-module-basic-pageentry:
         specifier: ^5.0.2
         version: link:modules/basic-pageentry
+      zova-module-basic-select:
+        specifier: ^5.0.0
+        version: link:modules/basic-select
       zova-module-basic-table:
         specifier: ^5.0.2
         version: link:modules/basic-table
@@ -1666,6 +1672,15 @@ importers:
         version: 6.1.3
 
   src/suite/cabloy-basic/modules/basic-pageentry:
+    devDependencies:
+      clean-package:
+        specifier: ^2.2.0
+        version: 2.2.0
+      rimraf:
+        specifier: ^6.1.3
+        version: 6.1.3
+
+  src/suite/cabloy-basic/modules/basic-select:
     devDependencies:
       clean-package:
         specifier: ^2.2.0
