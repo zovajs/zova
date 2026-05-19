@@ -6,7 +6,7 @@ import { prepareComponentOptions, useController } from 'zova';
 import type { ControllerFormFieldSelectProps } from '../../component/formFieldSelect/controller.jsx';
 
 import { ControllerFormFieldSelect } from '../../component/formFieldSelect/controller.jsx';
-export type TypeControllerFormFieldSelectPublicProps = {
+export type ZFormFieldSelectProps = {
   controllerRef?: (ref: ControllerFormFieldSelect) => void;
 } & ControllerFormFieldSelectProps;
 
@@ -20,13 +20,10 @@ declare module 'zova-module-basic-select' {
   }
 }
 
-export const ZFormFieldSelect = defineComponent(
-  (_props: TypeControllerFormFieldSelectPublicProps) => {
-    useController(ControllerFormFieldSelect, undefined, undefined);
-    return () => {};
-  },
-  prepareComponentOptions(ControllerFormFieldSelect.$componentOptions),
-);
+export const ZFormFieldSelect = defineComponent((_props: ZFormFieldSelectProps) => {
+  useController(ControllerFormFieldSelect, undefined, undefined);
+  return () => {};
+}, prepareComponentOptions(ControllerFormFieldSelect.$componentOptions));
 declare module 'zova-module-a-bean' {
   export interface IVonaComponentRecord {
     'basic-select:formFieldSelect': ControllerFormFieldSelectProps;

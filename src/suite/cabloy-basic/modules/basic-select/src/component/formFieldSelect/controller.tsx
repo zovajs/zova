@@ -6,7 +6,7 @@ import { BeanControllerBase } from 'zova';
 import { Controller } from 'zova-module-a-bean';
 import { ZFormField, ZFormFieldPreset, type IFormFieldComponentOptions } from 'zova-module-a-form';
 
-import { TypeControllerSelectPublicProps, ZSelect } from '../../.metadata/component/select.js';
+import { ZSelect, ZSelectProps } from '../../.metadata/component/select.js';
 
 declare module 'zova-module-a-openapi' {
   export interface IResourceFormFieldRecord {
@@ -15,7 +15,7 @@ declare module 'zova-module-a-openapi' {
 }
 
 export interface IResourceFormFieldSelectOptions
-  extends IResourceFormFieldOptionsBase, TypeControllerSelectPublicProps {}
+  extends IResourceFormFieldOptionsBase, ZSelectProps {}
 
 export interface ControllerFormFieldSelectProps extends IFormFieldComponentOptions {
   options?: IResourceFormFieldSelectOptions;
@@ -54,7 +54,7 @@ export class ControllerFormFieldSelect extends BeanControllerBase {
                 'select',
                 !$$formField.field.state.meta.isValid && 'select-error',
               );
-          const propsNew: TypeControllerSelectPublicProps = {
+          const propsNew: ZSelectProps = {
             'modelValue': propsBucket.value,
             'onUpdate:modelValue': (value: any) => {
               $$formField.setValue(value, propsBucket.disableNotifyChanged);

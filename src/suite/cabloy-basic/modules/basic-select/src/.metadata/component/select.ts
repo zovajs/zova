@@ -14,7 +14,7 @@ import type {
 } from '../../component/select/controller.jsx';
 
 import { ControllerSelect } from '../../component/select/controller.jsx';
-export type TypeControllerSelectPublicProps = {
+export type ZSelectProps = {
   controllerRef?: (ref: ControllerSelect) => void;
 } & ControllerSelectProps &
   ControllerSelectModels & {
@@ -43,7 +43,7 @@ declare module 'zova-module-basic-select' {
   }
 }
 
-export const ZSelect = defineComponent((_props: TypeControllerSelectPublicProps) => {
+export const ZSelect = defineComponent((_props: ZSelectProps) => {
   useController(ControllerSelect, undefined, undefined);
   return () => {};
 }, prepareComponentOptions());

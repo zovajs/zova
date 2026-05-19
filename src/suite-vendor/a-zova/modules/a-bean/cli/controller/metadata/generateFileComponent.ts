@@ -77,7 +77,7 @@ export async function generateFileComponent(
     contentImports.push(importStyleFirst);
   }
   // TypeControllerPublicProps
-  const typeControllerPublicPropsName = `TypeController${nameCapitalize}PublicProps`;
+  const typeControllerPublicPropsName = `Z${nameCapitalize}Props`;
   let contentTypeControllerPublicProps = `export type ${typeControllerPublicPropsName}${genericDeclare} = {
     controllerRef?: (ref: ${className}${genericArguments}) => void;
   }`;
