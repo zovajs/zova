@@ -6,7 +6,7 @@ import { prepareComponentOptions, useController } from 'zova';
 import type { ControllerBlockPageProps } from '../../component/blockPage/controller.jsx';
 
 import { ControllerBlockPage } from '../../component/blockPage/controller.jsx';
-export type TypeControllerBlockPagePublicProps = {
+export type ZBlockPageProps = {
   controllerRef?: (ref: ControllerBlockPage) => void;
 } & ControllerBlockPageProps;
 
@@ -20,7 +20,7 @@ declare module 'zova-module-basic-page' {
   }
 }
 
-export const ZBlockPage = defineComponent((_props: TypeControllerBlockPagePublicProps) => {
+export const ZBlockPage = defineComponent((_props: ZBlockPageProps) => {
   useController(ControllerBlockPage, undefined, undefined);
   return () => {};
 }, prepareComponentOptions(ControllerBlockPage.$componentOptions));

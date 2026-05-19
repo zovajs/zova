@@ -6,7 +6,7 @@ import { prepareComponentOptions, useController } from 'zova';
 import type { ControllerActionBackProps } from '../../component/actionBack/controller.jsx';
 
 import { ControllerActionBack } from '../../component/actionBack/controller.jsx';
-export type TypeControllerActionBackPublicProps = {
+export type ZActionBackProps = {
   controllerRef?: (ref: ControllerActionBack) => void;
 } & ControllerActionBackProps;
 
@@ -20,7 +20,7 @@ declare module 'zova-module-basic-form' {
   }
 }
 
-export const ZActionBack = defineComponent((_props: TypeControllerActionBackPublicProps) => {
+export const ZActionBack = defineComponent((_props: ZActionBackProps) => {
   useController(ControllerActionBack, undefined, undefined);
   return () => {};
 }, prepareComponentOptions(ControllerActionBack.$componentOptions));

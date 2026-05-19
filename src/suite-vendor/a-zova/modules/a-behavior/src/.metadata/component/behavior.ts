@@ -6,7 +6,7 @@ import { prepareComponentOptions, useController } from 'zova';
 import type { ControllerBehaviorProps } from '../../component/behavior/controller.jsx';
 
 import { ControllerBehavior } from '../../component/behavior/controller.jsx';
-export type TypeControllerBehaviorPublicProps = {
+export type ZBehaviorProps = {
   controllerRef?: (ref: ControllerBehavior) => void;
 } & ControllerBehaviorProps;
 
@@ -20,7 +20,7 @@ declare module 'zova-module-a-behavior' {
   }
 }
 
-export const ZBehavior = defineComponent((_props: TypeControllerBehaviorPublicProps) => {
+export const ZBehavior = defineComponent((_props: ZBehaviorProps) => {
   useController(ControllerBehavior, undefined, undefined);
   return () => {};
 }, prepareComponentOptions(ControllerBehavior.$componentOptions));

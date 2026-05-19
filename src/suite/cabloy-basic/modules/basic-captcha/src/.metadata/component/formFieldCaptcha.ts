@@ -6,7 +6,7 @@ import { prepareComponentOptions, useController } from 'zova';
 import type { ControllerFormFieldCaptchaProps } from '../../component/formFieldCaptcha/controller.jsx';
 
 import { ControllerFormFieldCaptcha } from '../../component/formFieldCaptcha/controller.jsx';
-export type TypeControllerFormFieldCaptchaPublicProps = {
+export type ZFormFieldCaptchaProps = {
   controllerRef?: (ref: ControllerFormFieldCaptcha) => void;
 } & ControllerFormFieldCaptchaProps;
 
@@ -20,13 +20,10 @@ declare module 'zova-module-basic-captcha' {
   }
 }
 
-export const ZFormFieldCaptcha = defineComponent(
-  (_props: TypeControllerFormFieldCaptchaPublicProps) => {
-    useController(ControllerFormFieldCaptcha, undefined, undefined);
-    return () => {};
-  },
-  prepareComponentOptions(ControllerFormFieldCaptcha.$componentOptions),
-);
+export const ZFormFieldCaptcha = defineComponent((_props: ZFormFieldCaptchaProps) => {
+  useController(ControllerFormFieldCaptcha, undefined, undefined);
+  return () => {};
+}, prepareComponentOptions(ControllerFormFieldCaptcha.$componentOptions));
 declare module 'zova-module-a-bean' {
   export interface IVonaComponentRecord {
     'basic-captcha:formFieldCaptcha': ControllerFormFieldCaptchaProps;

@@ -6,7 +6,7 @@ import { prepareComponentOptions, useController } from 'zova';
 import type { ControllerActionCreateProps } from '../../component/actionCreate/controller.jsx';
 
 import { ControllerActionCreate } from '../../component/actionCreate/controller.jsx';
-export type TypeControllerActionCreatePublicProps = {
+export type ZActionCreateProps = {
   controllerRef?: (ref: ControllerActionCreate) => void;
 } & ControllerActionCreateProps;
 
@@ -20,7 +20,7 @@ declare module 'zova-module-basic-table' {
   }
 }
 
-export const ZActionCreate = defineComponent((_props: TypeControllerActionCreatePublicProps) => {
+export const ZActionCreate = defineComponent((_props: ZActionCreateProps) => {
   useController(ControllerActionCreate, undefined, undefined);
   return () => {};
 }, prepareComponentOptions(ControllerActionCreate.$componentOptions));

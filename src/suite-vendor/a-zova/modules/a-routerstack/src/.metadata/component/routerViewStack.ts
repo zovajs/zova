@@ -6,7 +6,7 @@ import { prepareComponentOptions, useController } from 'zova';
 import type { ControllerRouterViewStackProps } from '../../component/routerViewStack/controller.jsx';
 
 import { ControllerRouterViewStack } from '../../component/routerViewStack/controller.jsx';
-export type TypeControllerRouterViewStackPublicProps = {
+export type ZRouterViewStackProps = {
   controllerRef?: (ref: ControllerRouterViewStack) => void;
 } & ControllerRouterViewStackProps;
 
@@ -20,13 +20,10 @@ declare module 'zova-module-a-routerstack' {
   }
 }
 
-export const ZRouterViewStack = defineComponent(
-  (_props: TypeControllerRouterViewStackPublicProps) => {
-    useController(ControllerRouterViewStack, undefined, undefined);
-    return () => {};
-  },
-  prepareComponentOptions(),
-);
+export const ZRouterViewStack = defineComponent((_props: ZRouterViewStackProps) => {
+  useController(ControllerRouterViewStack, undefined, undefined);
+  return () => {};
+}, prepareComponentOptions());
 declare module 'zova-module-a-bean' {
   export interface IVonaComponentRecord {
     'a-routerstack:routerViewStack': ControllerRouterViewStackProps;

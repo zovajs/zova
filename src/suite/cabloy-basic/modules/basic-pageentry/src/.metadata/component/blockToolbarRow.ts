@@ -6,7 +6,7 @@ import { prepareComponentOptions, useController } from 'zova';
 import type { ControllerBlockToolbarRowProps } from '../../component/blockToolbarRow/controller.jsx';
 
 import { ControllerBlockToolbarRow } from '../../component/blockToolbarRow/controller.jsx';
-export type TypeControllerBlockToolbarRowPublicProps = {
+export type ZBlockToolbarRowProps = {
   controllerRef?: (ref: ControllerBlockToolbarRow) => void;
 } & ControllerBlockToolbarRowProps;
 
@@ -20,13 +20,10 @@ declare module 'zova-module-basic-pageentry' {
   }
 }
 
-export const ZBlockToolbarRow = defineComponent(
-  (_props: TypeControllerBlockToolbarRowPublicProps) => {
-    useController(ControllerBlockToolbarRow, undefined, undefined);
-    return () => {};
-  },
-  prepareComponentOptions(ControllerBlockToolbarRow.$componentOptions),
-);
+export const ZBlockToolbarRow = defineComponent((_props: ZBlockToolbarRowProps) => {
+  useController(ControllerBlockToolbarRow, undefined, undefined);
+  return () => {};
+}, prepareComponentOptions(ControllerBlockToolbarRow.$componentOptions));
 declare module 'zova-module-a-bean' {
   export interface IVonaComponentRecord {
     'basic-pageentry:blockToolbarRow': ControllerBlockToolbarRowProps;

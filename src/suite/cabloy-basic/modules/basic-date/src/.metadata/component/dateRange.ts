@@ -14,7 +14,7 @@ import type {
 } from '../../component/dateRange/controller.jsx';
 
 import { ControllerDateRange } from '../../component/dateRange/controller.jsx';
-export type TypeControllerDateRangePublicProps = {
+export type ZDateRangeProps = {
   controllerRef?: (ref: ControllerDateRange) => void;
 } & ControllerDateRangeProps &
   ControllerDateRangeModels & {
@@ -43,7 +43,7 @@ declare module 'zova-module-basic-date' {
   }
 }
 
-export const ZDateRange = defineComponent((_props: TypeControllerDateRangePublicProps) => {
+export const ZDateRange = defineComponent((_props: ZDateRangeProps) => {
   useController(ControllerDateRange, undefined, undefined);
   return () => {};
 }, prepareComponentOptions());

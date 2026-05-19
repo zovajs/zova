@@ -6,7 +6,7 @@ import { prepareComponentOptions, useController } from 'zova';
 import type { ControllerActionViewProps } from '../../component/actionView/controller.jsx';
 
 import { ControllerActionView } from '../../component/actionView/controller.jsx';
-export type TypeControllerActionViewPublicProps = {
+export type ZActionViewProps = {
   controllerRef?: (ref: ControllerActionView) => void;
 } & ControllerActionViewProps;
 
@@ -20,7 +20,7 @@ declare module 'zova-module-demo-basic' {
   }
 }
 
-export const ZActionView = defineComponent((_props: TypeControllerActionViewPublicProps) => {
+export const ZActionView = defineComponent((_props: ZActionViewProps) => {
   useController(ControllerActionView, undefined, undefined);
   return () => {};
 }, prepareComponentOptions());

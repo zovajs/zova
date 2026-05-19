@@ -6,7 +6,7 @@ import { prepareComponentOptions, useController } from 'zova';
 import type { ControllerCardProps } from '../../component/card/controller.jsx';
 
 import { ControllerCard } from '../../component/card/controller.jsx';
-export type TypeControllerCardPublicProps = {
+export type ZCardProps = {
   controllerRef?: (ref: ControllerCard) => void;
 } & ControllerCardProps;
 
@@ -20,7 +20,7 @@ declare module 'zova-module-demo-basic' {
   }
 }
 
-export const ZCard = defineComponent((_props: TypeControllerCardPublicProps) => {
+export const ZCard = defineComponent((_props: ZCardProps) => {
   useController(ControllerCard, undefined, undefined);
   return () => {};
 }, prepareComponentOptions());

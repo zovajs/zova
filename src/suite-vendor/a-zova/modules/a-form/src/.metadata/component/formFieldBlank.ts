@@ -6,10 +6,7 @@ import { prepareComponentOptions, useController } from 'zova';
 import type { ControllerFormFieldBlankProps } from '../../component/formFieldBlank/controller.jsx';
 
 import { ControllerFormFieldBlank } from '../../component/formFieldBlank/controller.jsx';
-export type TypeControllerFormFieldBlankPublicProps<
-  TParentData extends {} = {},
-  TSubmitMeta = never,
-> = {
+export type ZFormFieldBlankProps<TParentData extends {} = {}, TSubmitMeta = never> = {
   controllerRef?: (ref: ControllerFormFieldBlank<TParentData, TSubmitMeta>) => void;
 } & ControllerFormFieldBlankProps<TParentData, TSubmitMeta>;
 
@@ -28,7 +25,7 @@ declare module 'zova-module-a-form' {
 
 export const ZFormFieldBlank = defineComponent(
   <TParentData extends {} = {}, TSubmitMeta = never>(
-    _props: TypeControllerFormFieldBlankPublicProps<TParentData, TSubmitMeta>,
+    _props: ZFormFieldBlankProps<TParentData, TSubmitMeta>,
   ) => {
     useController(ControllerFormFieldBlank, undefined, undefined);
     return () => {};

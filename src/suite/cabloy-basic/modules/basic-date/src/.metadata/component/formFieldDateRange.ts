@@ -6,7 +6,7 @@ import { prepareComponentOptions, useController } from 'zova';
 import type { ControllerFormFieldDateRangeProps } from '../../component/formFieldDateRange/controller.jsx';
 
 import { ControllerFormFieldDateRange } from '../../component/formFieldDateRange/controller.jsx';
-export type TypeControllerFormFieldDateRangePublicProps = {
+export type ZFormFieldDateRangeProps = {
   controllerRef?: (ref: ControllerFormFieldDateRange) => void;
 } & ControllerFormFieldDateRangeProps;
 
@@ -20,13 +20,10 @@ declare module 'zova-module-basic-date' {
   }
 }
 
-export const ZFormFieldDateRange = defineComponent(
-  (_props: TypeControllerFormFieldDateRangePublicProps) => {
-    useController(ControllerFormFieldDateRange, undefined, undefined);
-    return () => {};
-  },
-  prepareComponentOptions(ControllerFormFieldDateRange.$componentOptions),
-);
+export const ZFormFieldDateRange = defineComponent((_props: ZFormFieldDateRangeProps) => {
+  useController(ControllerFormFieldDateRange, undefined, undefined);
+  return () => {};
+}, prepareComponentOptions(ControllerFormFieldDateRange.$componentOptions));
 declare module 'zova-module-a-bean' {
   export interface IVonaComponentRecord {
     'basic-date:formFieldDateRange': ControllerFormFieldDateRangeProps;

@@ -6,7 +6,7 @@ import { prepareComponentOptions, useController } from 'zova';
 import type { ControllerTableCellTestProps } from '../../component/tableCellTest/controller.jsx';
 
 import { ControllerTableCellTest } from '../../component/tableCellTest/controller.jsx';
-export type TypeControllerTableCellTestPublicProps = {
+export type ZTableCellTestProps = {
   controllerRef?: (ref: ControllerTableCellTest) => void;
 } & ControllerTableCellTestProps;
 
@@ -20,7 +20,7 @@ declare module 'zova-module-demo-basic' {
   }
 }
 
-export const ZTableCellTest = defineComponent((_props: TypeControllerTableCellTestPublicProps) => {
+export const ZTableCellTest = defineComponent((_props: ZTableCellTestProps) => {
   useController(ControllerTableCellTest, undefined, undefined);
   return () => {};
 }, prepareComponentOptions());

@@ -6,7 +6,7 @@ import { prepareComponentOptions, useController } from 'zova';
 import type { ControllerFormFieldTestProps } from '../../component/formFieldTest/controller.jsx';
 
 import { ControllerFormFieldTest } from '../../component/formFieldTest/controller.jsx';
-export type TypeControllerFormFieldTestPublicProps = {
+export type ZFormFieldTestProps = {
   controllerRef?: (ref: ControllerFormFieldTest) => void;
 } & ControllerFormFieldTestProps;
 
@@ -20,7 +20,7 @@ declare module 'zova-module-demo-basic' {
   }
 }
 
-export const ZFormFieldTest = defineComponent((_props: TypeControllerFormFieldTestPublicProps) => {
+export const ZFormFieldTest = defineComponent((_props: ZFormFieldTestProps) => {
   useController(ControllerFormFieldTest, undefined, undefined);
   return () => {};
 }, prepareComponentOptions(ControllerFormFieldTest.$componentOptions));

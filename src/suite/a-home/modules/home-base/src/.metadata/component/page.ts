@@ -6,7 +6,7 @@ import { prepareComponentOptions, useController } from 'zova';
 import type { ControllerPageProps } from '../../component/page/controller.jsx';
 
 import { ControllerPage } from '../../component/page/controller.jsx';
-export type TypeControllerPagePublicProps = {
+export type ZPageProps = {
   controllerRef?: (ref: ControllerPage) => void;
 } & ControllerPageProps;
 
@@ -20,7 +20,7 @@ declare module 'zova-module-home-base' {
   }
 }
 
-export const ZPage = defineComponent((_props: TypeControllerPagePublicProps) => {
+export const ZPage = defineComponent((_props: ZPageProps) => {
   useController(ControllerPage, undefined, undefined);
   return () => {};
 }, prepareComponentOptions());

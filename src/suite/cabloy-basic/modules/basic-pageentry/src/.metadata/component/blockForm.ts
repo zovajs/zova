@@ -6,7 +6,7 @@ import { prepareComponentOptions, useController } from 'zova';
 import type { ControllerBlockFormProps } from '../../component/blockForm/controller.jsx';
 
 import { ControllerBlockForm } from '../../component/blockForm/controller.jsx';
-export type TypeControllerBlockFormPublicProps = {
+export type ZBlockFormProps = {
   controllerRef?: (ref: ControllerBlockForm) => void;
 } & ControllerBlockFormProps;
 
@@ -20,7 +20,7 @@ declare module 'zova-module-basic-pageentry' {
   }
 }
 
-export const ZBlockForm = defineComponent((_props: TypeControllerBlockFormPublicProps) => {
+export const ZBlockForm = defineComponent((_props: ZBlockFormProps) => {
   useController(ControllerBlockForm, undefined, undefined);
   return () => {};
 }, prepareComponentOptions(ControllerBlockForm.$componentOptions));

@@ -6,7 +6,7 @@ import { prepareComponentOptions, useController } from 'zova';
 import type { ControllerBlockPagerProps } from '../../component/blockPager/controller.jsx';
 
 import { ControllerBlockPager } from '../../component/blockPager/controller.jsx';
-export type TypeControllerBlockPagerPublicProps = {
+export type ZBlockPagerProps = {
   controllerRef?: (ref: ControllerBlockPager) => void;
 } & ControllerBlockPagerProps;
 
@@ -20,7 +20,7 @@ declare module 'zova-module-basic-page' {
   }
 }
 
-export const ZBlockPager = defineComponent((_props: TypeControllerBlockPagerPublicProps) => {
+export const ZBlockPager = defineComponent((_props: ZBlockPagerProps) => {
   useController(ControllerBlockPager, undefined, undefined);
   return () => {};
 }, prepareComponentOptions(ControllerBlockPager.$componentOptions));

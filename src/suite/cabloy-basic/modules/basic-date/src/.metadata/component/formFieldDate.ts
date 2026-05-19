@@ -6,7 +6,7 @@ import { prepareComponentOptions, useController } from 'zova';
 import type { ControllerFormFieldDateProps } from '../../component/formFieldDate/controller.jsx';
 
 import { ControllerFormFieldDate } from '../../component/formFieldDate/controller.jsx';
-export type TypeControllerFormFieldDatePublicProps = {
+export type ZFormFieldDateProps = {
   controllerRef?: (ref: ControllerFormFieldDate) => void;
 } & ControllerFormFieldDateProps;
 
@@ -20,7 +20,7 @@ declare module 'zova-module-basic-date' {
   }
 }
 
-export const ZFormFieldDate = defineComponent((_props: TypeControllerFormFieldDatePublicProps) => {
+export const ZFormFieldDate = defineComponent((_props: ZFormFieldDateProps) => {
   useController(ControllerFormFieldDate, undefined, undefined);
   return () => {};
 }, prepareComponentOptions(ControllerFormFieldDate.$componentOptions));

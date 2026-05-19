@@ -6,7 +6,7 @@ import { prepareComponentOptions, useController } from 'zova';
 import type { ControllerBlockPageEntryProps } from '../../component/blockPageEntry/controller.jsx';
 
 import { ControllerBlockPageEntry } from '../../component/blockPageEntry/controller.jsx';
-export type TypeControllerBlockPageEntryPublicProps = {
+export type ZBlockPageEntryProps = {
   controllerRef?: (ref: ControllerBlockPageEntry) => void;
 } & ControllerBlockPageEntryProps;
 
@@ -20,13 +20,10 @@ declare module 'zova-module-basic-pageentry' {
   }
 }
 
-export const ZBlockPageEntry = defineComponent(
-  (_props: TypeControllerBlockPageEntryPublicProps) => {
-    useController(ControllerBlockPageEntry, undefined, undefined);
-    return () => {};
-  },
-  prepareComponentOptions(ControllerBlockPageEntry.$componentOptions),
-);
+export const ZBlockPageEntry = defineComponent((_props: ZBlockPageEntryProps) => {
+  useController(ControllerBlockPageEntry, undefined, undefined);
+  return () => {};
+}, prepareComponentOptions(ControllerBlockPageEntry.$componentOptions));
 declare module 'zova-module-a-bean' {
   export interface IVonaComponentRecord {
     'basic-pageentry:blockPageEntry': ControllerBlockPageEntryProps;

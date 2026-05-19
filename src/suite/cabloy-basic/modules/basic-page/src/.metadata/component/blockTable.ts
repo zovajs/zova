@@ -6,7 +6,7 @@ import { prepareComponentOptions, useController } from 'zova';
 import type { ControllerBlockTableProps } from '../../component/blockTable/controller.jsx';
 
 import { ControllerBlockTable } from '../../component/blockTable/controller.jsx';
-export type TypeControllerBlockTablePublicProps = {
+export type ZBlockTableProps = {
   controllerRef?: (ref: ControllerBlockTable) => void;
 } & ControllerBlockTableProps;
 
@@ -20,7 +20,7 @@ declare module 'zova-module-basic-page' {
   }
 }
 
-export const ZBlockTable = defineComponent((_props: TypeControllerBlockTablePublicProps) => {
+export const ZBlockTable = defineComponent((_props: ZBlockTableProps) => {
   useController(ControllerBlockTable, undefined, undefined);
   return () => {};
 }, prepareComponentOptions(ControllerBlockTable.$componentOptions));

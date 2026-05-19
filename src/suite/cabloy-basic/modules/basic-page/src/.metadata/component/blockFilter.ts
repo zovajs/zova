@@ -6,7 +6,7 @@ import { prepareComponentOptions, useController } from 'zova';
 import type { ControllerBlockFilterProps } from '../../component/blockFilter/controller.jsx';
 
 import { ControllerBlockFilter } from '../../component/blockFilter/controller.jsx';
-export type TypeControllerBlockFilterPublicProps = {
+export type ZBlockFilterProps = {
   controllerRef?: (ref: ControllerBlockFilter) => void;
 } & ControllerBlockFilterProps;
 
@@ -20,7 +20,7 @@ declare module 'zova-module-basic-page' {
   }
 }
 
-export const ZBlockFilter = defineComponent((_props: TypeControllerBlockFilterPublicProps) => {
+export const ZBlockFilter = defineComponent((_props: ZBlockFilterProps) => {
   useController(ControllerBlockFilter, undefined, undefined);
   return () => {};
 }, prepareComponentOptions(ControllerBlockFilter.$componentOptions));

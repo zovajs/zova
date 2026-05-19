@@ -6,7 +6,7 @@ import { prepareComponentOptions, useController } from 'zova';
 import type { ControllerItemLinkProps } from '../../component/itemLink/controller.jsx';
 
 import { ControllerItemLink } from '../../component/itemLink/controller.jsx';
-export type TypeControllerItemLinkPublicProps = {
+export type ZItemLinkProps = {
   controllerRef?: (ref: ControllerItemLink) => void;
 } & ControllerItemLinkProps;
 
@@ -20,7 +20,7 @@ declare module 'zova-module-home-base' {
   }
 }
 
-export const ZItemLink = defineComponent((_props: TypeControllerItemLinkPublicProps) => {
+export const ZItemLink = defineComponent((_props: ZItemLinkProps) => {
   useController(ControllerItemLink, undefined, undefined);
   return () => {};
 }, prepareComponentOptions());

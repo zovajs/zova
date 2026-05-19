@@ -6,7 +6,7 @@ import { prepareComponentOptions, useController } from 'zova';
 import type { ControllerFormFieldCurrencyProps } from '../../component/formFieldCurrency/controller.jsx';
 
 import { ControllerFormFieldCurrency } from '../../component/formFieldCurrency/controller.jsx';
-export type TypeControllerFormFieldCurrencyPublicProps = {
+export type ZFormFieldCurrencyProps = {
   controllerRef?: (ref: ControllerFormFieldCurrency) => void;
 } & ControllerFormFieldCurrencyProps;
 
@@ -20,13 +20,10 @@ declare module 'zova-module-basic-currency' {
   }
 }
 
-export const ZFormFieldCurrency = defineComponent(
-  (_props: TypeControllerFormFieldCurrencyPublicProps) => {
-    useController(ControllerFormFieldCurrency, undefined, undefined);
-    return () => {};
-  },
-  prepareComponentOptions(ControllerFormFieldCurrency.$componentOptions),
-);
+export const ZFormFieldCurrency = defineComponent((_props: ZFormFieldCurrencyProps) => {
+  useController(ControllerFormFieldCurrency, undefined, undefined);
+  return () => {};
+}, prepareComponentOptions(ControllerFormFieldCurrency.$componentOptions));
 declare module 'zova-module-a-bean' {
   export interface IVonaComponentRecord {
     'basic-currency:formFieldCurrency': ControllerFormFieldCurrencyProps;

@@ -7,7 +7,7 @@ import { ISchemaRenderComponentPresetRecord } from 'zova-module-a-openapi';
 import type { ControllerFormFieldPresetProps } from '../../component/formFieldPreset/controller.jsx';
 
 import { ControllerFormFieldPreset } from '../../component/formFieldPreset/controller.jsx';
-export type TypeControllerFormFieldPresetPublicProps<
+export type ZFormFieldPresetProps<
   PresetName extends keyof ISchemaRenderComponentPresetRecord = never,
 > = {
   controllerRef?: (ref: ControllerFormFieldPreset<PresetName>) => void;
@@ -28,7 +28,7 @@ declare module 'zova-module-a-form' {
 
 export const ZFormFieldPreset = defineComponent(
   <PresetName extends keyof ISchemaRenderComponentPresetRecord = never>(
-    _props: TypeControllerFormFieldPresetPublicProps<PresetName>,
+    _props: ZFormFieldPresetProps<PresetName>,
   ) => {
     useController(ControllerFormFieldPreset, undefined, undefined);
     return () => {};

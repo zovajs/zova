@@ -6,7 +6,7 @@ import { prepareComponentOptions, useController } from 'zova';
 import type { ControllerLayoutEmptyProps } from '../../component/layoutEmpty/controller.jsx';
 
 import { ControllerLayoutEmpty } from '../../component/layoutEmpty/controller.jsx';
-export type TypeControllerLayoutEmptyPublicProps = {
+export type ZLayoutEmptyProps = {
   controllerRef?: (ref: ControllerLayoutEmpty) => void;
 } & ControllerLayoutEmptyProps;
 
@@ -20,7 +20,7 @@ declare module 'zova-module-home-layoutempty' {
   }
 }
 
-export const ZLayoutEmpty = defineComponent((_props: TypeControllerLayoutEmptyPublicProps) => {
+export const ZLayoutEmpty = defineComponent((_props: ZLayoutEmptyProps) => {
   useController(ControllerLayoutEmpty, undefined, undefined);
   return () => {};
 }, prepareComponentOptions());

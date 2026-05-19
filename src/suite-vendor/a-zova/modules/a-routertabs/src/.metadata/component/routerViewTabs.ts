@@ -6,7 +6,7 @@ import { prepareComponentOptions, useController } from 'zova';
 import type { ControllerRouterViewTabsProps } from '../../component/routerViewTabs/controller.jsx';
 
 import { ControllerRouterViewTabs } from '../../component/routerViewTabs/controller.jsx';
-export type TypeControllerRouterViewTabsPublicProps = {
+export type ZRouterViewTabsProps = {
   controllerRef?: (ref: ControllerRouterViewTabs) => void;
 } & ControllerRouterViewTabsProps;
 
@@ -20,13 +20,10 @@ declare module 'zova-module-a-routertabs' {
   }
 }
 
-export const ZRouterViewTabs = defineComponent(
-  (_props: TypeControllerRouterViewTabsPublicProps) => {
-    useController(ControllerRouterViewTabs, undefined, undefined);
-    return () => {};
-  },
-  prepareComponentOptions(),
-);
+export const ZRouterViewTabs = defineComponent((_props: ZRouterViewTabsProps) => {
+  useController(ControllerRouterViewTabs, undefined, undefined);
+  return () => {};
+}, prepareComponentOptions());
 declare module 'zova-module-a-bean' {
   export interface IVonaComponentRecord {
     'a-routertabs:routerViewTabs': ControllerRouterViewTabsProps;

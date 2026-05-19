@@ -8,7 +8,7 @@ import type { ControllerLayoutTabsProps } from '../../component/layoutTabs/contr
 import { ControllerLayoutTabs } from '../../component/layoutTabs/controller.jsx';
 import { RenderLayoutTabs } from '../../component/layoutTabs/render.jsx';
 import { StyleLayoutTabs } from '../../component/layoutTabs/style.js';
-export type TypeControllerLayoutTabsPublicProps = {
+export type ZLayoutTabsProps = {
   controllerRef?: (ref: ControllerLayoutTabs) => void;
 } & ControllerLayoutTabsProps;
 
@@ -33,7 +33,7 @@ declare module 'zova-module-home-layouttabs' {
   export interface RenderTheme extends StyleLayoutTabs {}
   export interface RenderUser extends StyleLayoutTabs {}
 }
-export const ZLayoutTabs = defineComponent((_props: TypeControllerLayoutTabsPublicProps) => {
+export const ZLayoutTabs = defineComponent((_props: ZLayoutTabsProps) => {
   useController(ControllerLayoutTabs, RenderLayoutTabs, StyleLayoutTabs);
   return () => {};
 }, prepareComponentOptions());
