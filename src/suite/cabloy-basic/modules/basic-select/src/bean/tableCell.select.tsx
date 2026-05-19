@@ -33,7 +33,7 @@ export class TableCellSelect extends BeanBase implements ITableCellRender {
       item => String(item[String(options.itemValue)]) === String(value),
     );
     const value2 = item?.[String(options.itemTitle)];
-    if (!options.class) return value;
+    if (!options.class) return value2;
     return <div class={options.class}>{value2}</div>;
   }
 }
