@@ -19,6 +19,7 @@
     "zova-module-basic-pageentry": "^5.0.3",
     "zova-module-basic-select": "^5.0.1",
     "zova-module-basic-table": "^5.0.3",
+    "zova-module-basic-text": "^5.0.0",
     "zova-suite-a-cabloy": "^5.1.23"
   },
   "title": "cabloy-basic"
