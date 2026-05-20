@@ -69,7 +69,7 @@ importers:
         version: 8.21.3(vue@3.5.34(typescript@5.9.3))
       autoprefixer:
         specifier: ^10.4.27
-        version: 10.5.0(postcss@8.5.14)
+        version: 10.5.0(postcss@8.5.15)
       axios:
         specifier: ^1.16.1
         version: 1.16.1
@@ -104,8 +104,8 @@ importers:
         specifier: ^4.5.0
         version: 4.5.0
       postcss:
-        specifier: ^8.5.9
-        version: 8.5.14
+        specifier: ^8.5.15
+        version: 8.5.15
       quasar:
         specifier: ^2.19.3
         version: 2.19.3
@@ -501,7 +501,7 @@ importers:
     devDependencies:
       vitepress:
         specifier: ^1.6.4
-        version: 1.6.4(@algolia/client-search@5.52.1)(@types/node@22.19.19)(axios@1.16.1)(change-case@5.4.4)(lightningcss@1.32.0)(postcss@8.5.14)(sass-embedded@1.99.0)(sass@1.99.0)(search-insights@2.17.3)(terser@5.47.1)(typescript@5.9.3)
+        version: 1.6.4(@algolia/client-search@5.52.1)(@types/node@22.19.19)(axios@1.16.1)(change-case@5.4.4)(lightningcss@1.32.0)(postcss@8.5.15)(sass-embedded@1.99.0)(sass@1.99.0)(search-insights@2.17.3)(terser@5.47.1)(typescript@5.9.3)
 
   packages-utils/babel-plugin-zova-bean-module:
     dependencies:
@@ -8429,8 +8429,8 @@ packages:
     resolution: {integrity: sha512-iBXEV5VTTYaRRdxiFYzTtuv2lGMQBExqkZKSzkJe+Fl6rvQrA/49UVGKqB+LG54hpW/TtDBMGds8j33GFNW7pg==}
     engines: {node: ^10 || ^12 || >=14}
 
-  postcss@8.5.14:
-    resolution: {integrity: sha512-SoSL4+OSEtR99LHFZQiJLkT59C5B1amGO1NzTwj7TT1qCUgUO6hxOvzkOYxD+vMrXBM3XJIKzokoERdqQq/Zmg==}
+  postcss@8.5.15:
+    resolution: {integrity: sha512-FfR8sjd4em2T6fb3I2MwAJU7HWVMr9zba+enmQeeWFfCbm+UOC/0X4DS8XtpUTMwWMGbjKYP7xjfNekzyGmB3A==}
     engines: {node: ^10 || ^12 || >=14}
 
   powershell-utils@0.1.0:
@@ -10715,7 +10715,7 @@ snapshots:
       '@vue/shared': 3.5.13
       estree-walker: 2.0.2
       magic-string: 0.30.21
-      postcss: 8.5.14
+      postcss: 8.5.15
       source-map-js: 1.2.1
 
   '@cabloy/vue-reactivity@3.5.16':
@@ -12586,7 +12586,7 @@ snapshots:
       '@alloc/quick-lru': 5.2.0
       '@tailwindcss/node': 4.3.0
       '@tailwindcss/oxide': 4.3.0
-      postcss: 8.5.14
+      postcss: 8.5.15
       tailwindcss: 4.3.0
 
   '@tailwindcss/typography@0.5.19(tailwindcss@4.3.0)':
@@ -13474,13 +13474,13 @@ snapshots:
 
   asynckit@0.4.0: {}
 
-  autoprefixer@10.5.0(postcss@8.5.14):
+  autoprefixer@10.5.0(postcss@8.5.15):
     dependencies:
       browserslist: 4.28.2
       caniuse-lite: 1.0.30001793
       fraction.js: 5.3.4
       picocolors: 1.1.1
-      postcss: 8.5.14
+      postcss: 8.5.15
       postcss-value-parser: 4.2.0
 
   available-typed-arrays@1.0.7:
@@ -17369,7 +17369,7 @@ snapshots:
       source-map: 0.6.1
       vfile-location: 3.2.0
 
-  postcss@8.5.14:
+  postcss@8.5.15:
     dependencies:
       nanoid: 3.3.12
       picocolors: 1.1.1
@@ -18752,7 +18752,7 @@ snapshots:
   vite@5.4.21(@types/node@22.19.19)(lightningcss@1.32.0)(sass-embedded@1.99.0)(sass@1.99.0)(terser@5.47.1):
     dependencies:
       esbuild: 0.21.5
-      postcss: 8.5.14
+      postcss: 8.5.15
       rollup: 4.60.4
     optionalDependencies:
       '@types/node': 22.19.19
@@ -18767,7 +18767,7 @@ snapshots:
       esbuild: 0.27.7
       fdir: 6.5.0(picomatch@4.0.4)
       picomatch: 4.0.4
-      postcss: 8.5.14
+      postcss: 8.5.15
       rollup: 4.60.4
       tinyglobby: 0.2.16
     optionalDependencies:
@@ -18784,7 +18784,7 @@ snapshots:
     dependencies:
       lightningcss: 1.32.0
       picomatch: 4.0.4
-      postcss: 8.5.14
+      postcss: 8.5.15
       rolldown: 1.0.1
       tinyglobby: 0.2.16
     optionalDependencies:
@@ -18801,7 +18801,7 @@ snapshots:
     dependencies:
       lightningcss: 1.32.0
       picomatch: 4.0.4
-      postcss: 8.5.14
+      postcss: 8.5.15
       rolldown: 1.0.1
       tinyglobby: 0.2.16
     optionalDependencies:
@@ -18814,7 +18814,7 @@ snapshots:
       terser: 5.47.1
       yaml: 2.9.0
 
-  vitepress@1.6.4(@algolia/client-search@5.52.1)(@types/node@22.19.19)(axios@1.16.1)(change-case@5.4.4)(lightningcss@1.32.0)(postcss@8.5.14)(sass-embedded@1.99.0)(sass@1.99.0)(search-insights@2.17.3)(terser@5.47.1)(typescript@5.9.3):
+  vitepress@1.6.4(@algolia/client-search@5.52.1)(@types/node@22.19.19)(axios@1.16.1)(change-case@5.4.4)(lightningcss@1.32.0)(postcss@8.5.15)(sass-embedded@1.99.0)(sass@1.99.0)(search-insights@2.17.3)(terser@5.47.1)(typescript@5.9.3):
     dependencies:
       '@docsearch/css': 3.8.2
       '@docsearch/js': 3.8.2(@algolia/client-search@5.52.1)(search-insights@2.17.3)
@@ -18835,7 +18835,7 @@ snapshots:
       vite: 5.4.21(@types/node@22.19.19)(lightningcss@1.32.0)(sass-embedded@1.99.0)(sass@1.99.0)(terser@5.47.1)
       vue: 3.5.34(typescript@5.9.3)
     optionalDependencies:
-      postcss: 8.5.14
+      postcss: 8.5.15
     transitivePeerDependencies:
       - '@algolia/client-search'
       - '@types/node'
