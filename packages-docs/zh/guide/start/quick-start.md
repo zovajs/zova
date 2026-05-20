@@ -42,6 +42,8 @@ Zova 提供了三个项目模版:
 $ npm run dev
 ```
 
+- http://localhost:9000
+
 ### 3. 构建
 
 ```bash
@@ -53,3 +55,5 @@ $ npm run build
 ```bash
 $ npm run preview
 ```
+
+- http://localhost:3000

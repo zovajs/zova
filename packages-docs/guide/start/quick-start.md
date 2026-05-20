@@ -42,6 +42,8 @@ Zova provides three project templates:
 $ npm run dev
 ```
 
+- http://localhost:9000
+
 ### 3. Build
 
 ```bash
@@ -53,3 +55,5 @@ $ npm run build
 ```bash
 $ npm run preview
 ```
+
+- http://localhost:3000

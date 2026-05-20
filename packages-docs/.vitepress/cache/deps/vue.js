@@ -83,7 +83,6 @@ import {
   mergeModels,
   mergeProps,
   nextTick,
-  nodeOps,
   normalizeClass,
   normalizeProps,
   normalizeStyle,
@@ -102,7 +101,6 @@ import {
   onUpdated,
   onWatcherCleanup,
   openBlock,
-  patchProp,
   popScopeId,
   provide,
   proxyRefs,
@@ -121,6 +119,7 @@ import {
   resolveFilter,
   resolveTransitionHooks,
   setBlockTracking,
+  setCurrentInstance,
   setDevtoolsHook,
   setTransitionHooks,
   shallowReactive,
@@ -170,7 +169,7 @@ import {
   withMemo,
   withModifiers,
   withScopeId
-} from "./chunk-OCWCGHWM.js";
+} from "./chunk-5ZXOFXTD.js";
 export {
   BaseTransition,
   BaseTransitionPropsValidators,
@@ -256,7 +255,6 @@ export {
   mergeModels,
   mergeProps,
   nextTick,
-  nodeOps,
   normalizeClass,
   normalizeProps,
   normalizeStyle,
@@ -275,7 +273,6 @@ export {
   onUpdated,
   onWatcherCleanup,
   openBlock,
-  patchProp,
   popScopeId,
   provide,
   proxyRefs,
@@ -294,6 +291,7 @@ export {
   resolveFilter,
   resolveTransitionHooks,
   setBlockTracking,
+  setCurrentInstance,
   setDevtoolsHook,
   setTransitionHooks,
   shallowReactive,
