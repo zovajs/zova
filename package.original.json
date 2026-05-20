@@ -74,7 +74,7 @@
     "@cabloy/openapi-typescript": "^7.9.2",
     "@quasar/app-vite": "npm:@cabloy/quasar-app-vite@^2.5.9",
     "@types/node": "^22.19.17",
-    "@vitejs/plugin-vue": "^5.2.4",
+    "@vitejs/plugin-vue": "^6.0.7",
     "concurrently": "^8.2.2",
     "quasar-app-extension-zova": "workspace:^",
     "sass": "^1.99.0",
