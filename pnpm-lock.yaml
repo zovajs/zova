@@ -369,8 +369,8 @@ importers:
   packages-cli/cli:
     dependencies:
       '@cabloy/cli':
-        specifier: ^3.1.12
-        version: 3.1.12(vue@3.5.34(typescript@5.9.3))
+        specifier: ^3.1.13
+        version: 3.1.13(vue@3.5.34(typescript@5.9.3))
       '@cabloy/process-helper':
         specifier: ^3.0.0
         version: 3.1.5
@@ -381,7 +381,7 @@ importers:
         specifier: ^7.6.2
         version: 7.8.0
       zova-cli-set-front:
-        specifier: ^1.2.57
+        specifier: ^1.2.58
         version: link:../cli-set-front
     devDependencies:
       clean-package:
@@ -403,8 +403,8 @@ importers:
         specifier: ^7.28.6
         version: 7.28.6(@babel/core@7.29.0)
       '@cabloy/cli':
-        specifier: ^3.1.12
-        version: 3.1.12(vue@3.5.34(typescript@5.9.3))
+        specifier: ^3.1.13
+        version: 3.1.13(vue@3.5.34(typescript@5.9.3))
       '@cabloy/extend':
         specifier: ^3.1.0
         version: 3.2.5
@@ -839,7 +839,7 @@ importers:
         specifier: ^5.1.38
         version: link:../zova-core
       zova-suite-a-zova:
-        specifier: ^5.1.74
+        specifier: ^5.1.75
         version: link:../../src/suite-vendor/a-zova
     devDependencies:
       clean-package:
@@ -1033,7 +1033,7 @@ importers:
         specifier: ^5.1.18
         version: link:modules/a-zod
       zova-module-a-zova:
-        specifier: ^5.1.48
+        specifier: ^5.1.49
         version: link:modules/a-zova
 
   src/suite-vendor/a-zova/modules/a-api:
@@ -1376,8 +1376,8 @@ importers:
         version: link:../../../../../packages-utils/zova-jsx
     devDependencies:
       '@cabloy/cli':
-        specifier: ^3.1.12
-        version: 3.1.12(vue@3.5.34(typescript@5.9.3))
+        specifier: ^3.1.13
+        version: 3.1.13(vue@3.5.34(typescript@5.9.3))
       '@types/luxon':
         specifier: ^3.7.1
         version: 3.7.1
@@ -1983,6 +1983,9 @@ packages:
 
   '@cabloy/cli@3.1.12':
     resolution: {integrity: sha512-Ft86sK6Gr/zss9egMFq9JFDiPIoRlaFhdUBGeavoyv8pZVsbEmiZoDRMqrtcGo4DxYv2ImN/d6iz3WAQ+uy4Kw==}
+
+  '@cabloy/cli@3.1.13':
+    resolution: {integrity: sha512-IAhwEELp5JsYIcy0CDuQFsBPkpZLt3D2E830teqg7gCP2cuoPILdJ6uIQ1h5mLgGdc7BWAY0OzBLIOs7en+OeA==}
 
   '@cabloy/compose@2.1.5':
     resolution: {integrity: sha512-fp2DGeZYzIuAw8BYMbYPB60T03Uo6ND/x++VLQKnDEllk6TCkRgoBFnM7D8n57Lwme7RgcvP13JLyujiBBTj2g==}
@@ -10410,6 +10413,34 @@ snapshots:
       - supports-color
       - vue
 
+  '@cabloy/cli@3.1.13(vue@3.5.34(typescript@5.9.3))':
+    dependencies:
+      '@babel/parser': 7.29.3
+      '@cabloy/module-glob': 5.3.10
+      '@cabloy/module-info': 2.0.0
+      '@cabloy/process-helper': 3.1.5
+      '@cabloy/utils': 2.1.19
+      '@cabloy/word-utils': link:packages-utils/word-utils
+      '@npmcli/config': 10.9.0
+      '@zhennann/common-bin': 4.0.1
+      '@zhennann/ejs': 3.0.1
+      boxen: 4.2.0
+      chalk: 3.0.0
+      cli-table3: 0.6.5
+      deep-equal: 2.2.3
+      enquirer: 2.4.1
+      fs-extra: 11.3.5
+      globby: 16.2.0
+      gogocode: 1.0.55(vue@3.5.34(typescript@5.9.3))
+      is-type-of: 2.2.0
+      istextorbinary: 3.3.0
+      semver: 7.8.0
+      tmp: 0.2.5
+      urllib: 4.9.0
+    transitivePeerDependencies:
+      - supports-color
+      - vue
+
   '@cabloy/compose@2.1.5': {}
 
   '@cabloy/deps@1.1.5': {}
@@ -11688,11 +11719,11 @@ snapshots:
 
   '@npmcli/fs@4.0.0':
     dependencies:
-      semver: 7.7.2
+      semver: 7.8.0
 
   '@npmcli/fs@5.0.0':
     dependencies:
-      semver: 7.7.2
+      semver: 7.8.0
 
   '@npmcli/git@6.0.3':
     dependencies:
@@ -11713,7 +11744,7 @@ snapshots:
       lru-cache: 11.4.0
       npm-pick-manifest: 11.0.3
       proc-log: 6.1.0
-      semver: 7.7.2
+      semver: 7.8.0
       which: 6.0.1
 
   '@npmcli/installed-package-contents@3.0.0':
@@ -11739,7 +11770,7 @@ snapshots:
       json-parse-even-better-errors: 5.0.0
       pacote: 21.5.0
       proc-log: 6.1.0
-      semver: 7.7.2
+      semver: 7.8.0
     transitivePeerDependencies:
       - supports-color
 
@@ -13875,7 +13906,7 @@ snapshots:
       handlebars: 4.7.9
       json-stringify-safe: 5.0.1
       meow: 8.1.2
-      semver: 7.7.2
+      semver: 7.8.0
       split: 1.0.1
 
   conventional-commits-filter@3.0.0:
@@ -14949,7 +14980,7 @@ snapshots:
   git-semver-tags@5.0.1:
     dependencies:
       meow: 8.1.2
-      semver: 7.7.2
+      semver: 7.8.0
 
   git-up@7.0.0:
     dependencies:
@@ -16527,7 +16558,7 @@ snapshots:
       graceful-fs: 4.2.11
       nopt: 9.0.0
       proc-log: 6.1.0
-      semver: 7.7.2
+      semver: 7.8.0
       tar: 7.5.11
       tinyglobby: 0.2.12
       undici: 6.25.0
@@ -16556,7 +16587,7 @@ snapshots:
     dependencies:
       hosted-git-info: 4.1.0
       is-core-module: 2.16.2
-      semver: 7.7.2
+      semver: 7.8.0
       validate-npm-package-license: 3.0.4
 
   normalize-package-data@6.0.2:
@@ -16577,11 +16608,11 @@ snapshots:
 
   npm-install-checks@7.1.2:
     dependencies:
-      semver: 7.7.2
+      semver: 7.8.0
 
   npm-install-checks@8.0.0:
     dependencies:
-      semver: 7.7.2
+      semver: 7.8.0
 
   npm-normalize-package-bin@4.0.0: {}
 
@@ -16591,7 +16622,7 @@ snapshots:
     dependencies:
       hosted-git-info: 8.1.0
       proc-log: 5.0.0
-      semver: 7.7.2
+      semver: 7.8.0
       validate-npm-package-name: 6.0.2
 
   npm-package-arg@13.0.1:
@@ -16618,7 +16649,7 @@ snapshots:
       npm-install-checks: 8.0.0
       npm-normalize-package-bin: 5.0.0
       npm-package-arg: 13.0.1
-      semver: 7.7.2
+      semver: 7.8.0
 
   npm-registry-fetch@19.1.0:
     dependencies:
