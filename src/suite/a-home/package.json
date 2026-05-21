@@ -1,6 +1,6 @@
 {
   "name": "zova-suite-a-home",
-  "version": "5.0.5",
+  "version": "5.0.6",
   "description": "",
   "author": "zhennann",
   "type": "module",
@@ -12,7 +12,7 @@
     "zova-module-home-layoutempty": "^5.0.3",
     "zova-module-home-layouttabs": "^5.0.3",
     "zova-module-home-login": "^5.0.4",
-    "zova-module-home-passport": "^5.0.2",
+    "zova-module-home-passport": "^5.0.3",
     "zova-module-home-theme": "^5.0.2"
   },
   "title": "Home",
