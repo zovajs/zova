@@ -1,6 +1,8 @@
 import { types } from 'typestyle';
 import { TypeRenderComponentJsx } from 'zova-jsx';
 
+import type { IPermissionHintTableActionBulk } from '../permissions.js';
+
 export type IResourceTableActionBulkNameRecord = {
   [KEY in keyof IResourceTableActionBulkRecord as KEY extends `${string}:action${infer Name}`
     ? Uncapitalize<Name>
@@ -13,10 +15,7 @@ export interface IResourceTableActionBulkOptionsBase {
   class?: any;
   style?: types.NestedCSSProperties;
   resource?: string;
-  permission?: {
-    action?: keyof IResourceTableActionBulkNameRecord;
-    public?: boolean;
-  };
+  permission?: IPermissionHintTableActionBulk;
 }
 
 export interface IResourceRenderTableActionBulkOptionsAction {

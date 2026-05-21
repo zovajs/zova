@@ -2,8 +2,7 @@ import { TableIdentity } from 'table-identity';
 import { types } from 'typestyle';
 import { TypeRenderComponentJsx } from 'zova-jsx';
 
-import { TypeFormScene } from '../formMeta.js';
-import { IResourceTableActionRowNameRecord } from './tableActionRow.js';
+import type { IPermissionHintTableActionRow } from '../permissions.js';
 
 export type IResourceFormActionRowNameRecord = {
   [KEY in keyof IResourceFormActionRowRecord as KEY extends `${string}:action${infer Name}`
@@ -18,11 +17,7 @@ export interface IResourceFormActionRowOptionsBase {
   style?: types.NestedCSSProperties;
   resource?: string;
   id?: TableIdentity;
-  permission?: {
-    action?: keyof (IResourceFormActionRowNameRecord & IResourceTableActionRowNameRecord);
-    public?: boolean;
-    formScene?: TypeFormScene | TypeFormScene[];
-  };
+  permission?: IPermissionHintTableActionRow;
 }
 
 export interface IResourceRenderFormActionRowOptionsAction {
