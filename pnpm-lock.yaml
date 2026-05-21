@@ -8,7 +8,7 @@ overrides:
   '@quasar/app-vite': npm:@cabloy/quasar-app-vite@^2.5.9
   '@vue/babel-plugin-jsx': npm:@cabloy/vue-babel-plugin-jsx@^2.0.1
   '@vue/compiler-sfc': npm:@cabloy/vue-compiler-sfc@^3.5.14
-  '@vue/runtime-core': npm:@cabloy/vue-runtime-core@^3.5.52
+  '@vue/runtime-core': npm:@cabloy/vue-runtime-core@^3.5.53
   '@vue/runtime-dom': npm:@cabloy/vue-runtime-dom@^3.5.13
   '@vue/reactivity': npm:@cabloy/vue-reactivity@^3.5.16
   '@vue/server-renderer': npm:@cabloy/vue-server-renderer@^3.5.18
@@ -381,7 +381,7 @@ importers:
         specifier: ^7.6.2
         version: 7.8.0
       zova-cli-set-front:
-        specifier: ^1.2.59
+        specifier: ^1.2.60
         version: link:../cli-set-front
     devDependencies:
       clean-package:
@@ -490,7 +490,7 @@ importers:
         specifier: ^1.1.11
         version: link:../../packages-utils/zova-openapi
       zova-vite:
-        specifier: ^1.1.28
+        specifier: ^1.1.29
         version: link:../../packages-utils/zova-vite
     devDependencies:
       clean-package:
@@ -655,7 +655,7 @@ importers:
         specifier: ^8.0.8
         version: 8.0.13(@types/node@22.19.19)(esbuild@0.25.12)(jiti@2.7.0)(sass-embedded@1.99.0)(sass@1.99.0)(terser@5.47.1)(yaml@2.9.0)
       zova-vite:
-        specifier: ^1.1.28
+        specifier: ^1.1.29
         version: link:../zova-vite
     devDependencies:
       '@cabloy/lint':
@@ -695,7 +695,7 @@ importers:
         specifier: ^3.5.32
         version: 3.5.34(typescript@5.9.3)
       zova-core:
-        specifier: ^5.1.38
+        specifier: ^5.1.39
         version: link:../../packages-zova/zova-core
     devDependencies:
       clean-package:
@@ -757,8 +757,8 @@ importers:
         specifier: ^4.4.16
         version: 4.4.16(vue@3.5.34(typescript@5.9.3))
       '@cabloy/vue-runtime-core':
-        specifier: ^3.5.52
-        version: 3.5.52
+        specifier: ^3.5.53
+        version: 3.5.53
       '@cabloy/vue-runtime-dom':
         specifier: ^3.5.13
         version: 3.5.13
@@ -836,10 +836,10 @@ importers:
   packages-zova/zova:
     dependencies:
       zova-core:
-        specifier: ^5.1.38
+        specifier: ^5.1.39
         version: link:../zova-core
       zova-suite-a-zova:
-        specifier: ^5.1.76
+        specifier: ^5.1.77
         version: link:../../src/suite-vendor/a-zova
     devDependencies:
       clean-package:
@@ -882,8 +882,8 @@ importers:
         specifier: ^4.4.16
         version: 4.4.16(vue@3.5.34(typescript@5.9.3))
       '@cabloy/vue-runtime-core':
-        specifier: ^3.5.52
-        version: 3.5.52
+        specifier: ^3.5.53
+        version: 3.5.53
       '@cabloy/vue-runtime-dom':
         specifier: ^3.5.13
         version: 3.5.13
@@ -1033,7 +1033,7 @@ importers:
         specifier: ^5.1.18
         version: link:modules/a-zod
       zova-module-a-zova:
-        specifier: ^5.1.49
+        specifier: ^5.1.50
         version: link:modules/a-zova
 
   src/suite-vendor/a-zova/modules/a-api:
@@ -1372,7 +1372,7 @@ importers:
         specifier: ^3.7.2
         version: 3.7.2
       zova-jsx:
-        specifier: ^1.1.44
+        specifier: ^1.1.45
         version: link:../../../../../packages-utils/zova-jsx
     devDependencies:
       '@cabloy/cli':
@@ -2083,8 +2083,8 @@ packages:
     peerDependencies:
       vue: ^3.2.0
 
-  '@cabloy/vue-runtime-core@3.5.52':
-    resolution: {integrity: sha512-xK6dGdeyaZbHksXdHtUdLkKUJmOik8xQd0UVJUClBzFkQukD5L3Mlf/IuYRSkYDM42d1yfakrLednCG6s7TbSQ==}
+  '@cabloy/vue-runtime-core@3.5.53':
+    resolution: {integrity: sha512-Q6MRyee6UUCZtezKhd6/U4DE2dW3X4EQZGeLhHaqzcWdzciJxwWcgd5Xqi4QDwq0kQCQkLGbrpMoFQix0lumHg==}
 
   '@cabloy/vue-runtime-dom@3.5.13':
     resolution: {integrity: sha512-Wn66YnEk3ySzYe8iuFF9Nx7lt0Qeaks4HkgpC3AzUzOnBgqCvuf9+gxLvUe9o2YNPG3ViwV0K8IW69i2Llvo2g==}
@@ -10554,7 +10554,7 @@ snapshots:
       '@vue/devtools-api': 6.6.4
       vue: 3.5.34(typescript@5.9.3)
 
-  '@cabloy/vue-runtime-core@3.5.52':
+  '@cabloy/vue-runtime-core@3.5.53':
     dependencies:
       '@vue/reactivity': '@cabloy/vue-reactivity@3.5.16'
       '@vue/shared': 3.5.13
@@ -10562,7 +10562,7 @@ snapshots:
   '@cabloy/vue-runtime-dom@3.5.13':
     dependencies:
       '@vue/reactivity': '@cabloy/vue-reactivity@3.5.16'
-      '@vue/runtime-core': '@cabloy/vue-runtime-core@3.5.52'
+      '@vue/runtime-core': '@cabloy/vue-runtime-core@3.5.53'
       '@vue/shared': 3.5.13
       csstype: 3.2.3
 
