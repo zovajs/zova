@@ -19,18 +19,18 @@ export interface IOpenapiPermissions {
 export type TypeOpenapiPermissions = IOpenapiPermissions | boolean;
 
 export interface IPermissionHintGeneral {
-  action?: string;
+  actionInherit?: string;
   public?: boolean;
   formScene?: TypeFormScene | TypeFormScene[];
 }
 
 export interface IPermissionHintTableActionRow {
-  action?: keyof (IResourceFormActionRowNameRecord & IResourceTableActionRowNameRecord);
+  actionInherit?: keyof (IResourceFormActionRowNameRecord & IResourceTableActionRowNameRecord);
   public?: boolean;
   formScene?: TypeFormScene | TypeFormScene[];
 }
 
 export interface IPermissionHintTableActionBulk {
-  action?: keyof IResourceTableActionBulkNameRecord;
+  actionInherit?: keyof IResourceTableActionBulkNameRecord;
   public?: boolean;
 }

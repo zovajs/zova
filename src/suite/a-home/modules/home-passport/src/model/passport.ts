@@ -11,7 +11,7 @@ import { combineQueries, isNil } from '@cabloy/utils';
 import { SchemaObject } from 'openapi3-ts/oas31';
 import { BeanModelBase, Model } from 'zova-module-a-model';
 import {
-  IPermissionHint,
+  IPermissionHintGeneral,
   IResourceFormActionRowNameRecord,
   IResourceTableActionNameRecord,
   TypeOpenapiPermissions,
@@ -208,10 +208,10 @@ export class ModelPassport extends BeanModelBase {
   public checkPermission(
     permissions: TypeOpenapiPermissions | undefined,
     actionName?: keyof (IResourceTableActionNameRecord & IResourceFormActionRowNameRecord),
-    permissionHint?: IPermissionHint,
+    permissionHint?: IPermissionHintGeneral,
   ): boolean {
     if (permissionHint?.public) return true;
-    const permissionAction = permissionHint?.action ?? actionName;
+    const permissionAction = permissionHint?.actionInherit ?? actionName;
     if (!permissionAction) return true;
     if (isNil(permissions)) return false;
     if (permissions === false) return false;

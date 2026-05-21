@@ -2,7 +2,7 @@ import type {
   IResourceBlockOptionsBase,
   IJsxRenderContextPageEntry,
   IResourceRenderFormActionRowOptionsAction,
-  IPermissionHint,
+  IPermissionHintTableActionRow,
 } from 'zova-module-a-openapi';
 
 import { VNode } from 'vue';
@@ -50,7 +50,7 @@ export class ControllerBlockToolbarRow extends BeanControllerBase {
     const domActions: VNode[] = [];
     actions.forEach((action, index) => {
       const actionName = action.name;
-      const permissionHint: IPermissionHint | undefined = action.options?.permission;
+      const permissionHint: IPermissionHintTableActionRow | undefined = action.options?.permission;
       // check formScene
       if (!this._checkFormScene(permissionHint)) return;
       // check permission
@@ -67,7 +67,7 @@ export class ControllerBlockToolbarRow extends BeanControllerBase {
     return domActions;
   }
 
-  private _checkFormScene(permissionHint?: IPermissionHint) {
+  private _checkFormScene(permissionHint?: IPermissionHintTableActionRow) {
     const { $$pageEntry } = this.$$renderContext;
     const formScene = $$pageEntry.formMeta.formScene;
     const formSceneHint = permissionHint?.formScene;
