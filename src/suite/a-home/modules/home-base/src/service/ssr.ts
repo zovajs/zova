@@ -25,7 +25,7 @@ export class ServiceSsr extends BeanBase {
           try {
             this.app.$gotoPage('/home/base/errorExpired', { returnTo: true });
           } catch (err: any) {
-            this.ctx.meta.$ssr.context._meta.renderError = err;
+            this.ctx.meta.$ssr.renderSSRError = err;
           }
           return undefined;
         }

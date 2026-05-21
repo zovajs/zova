@@ -80,18 +80,18 @@ export class Monkey
   private _errorHandlerDefaultServer(err: Error) {
     if (!process.env.SERVER) return err;
     if (isNavigationFailure(err)) {
-      if (!this.ctx.meta.$ssr.context._meta.renderError) {
-        this.ctx.meta.$ssr.context._meta.renderError = err;
+      if (!this.ctx.meta.$ssr.renderSSRError) {
+        this.ctx.meta.$ssr.renderSSRError = err;
       }
       return undefined;
     } else if (err.code === 401) {
       try {
         this.app.$gotoLogin();
       } catch (err: any) {
-        this.ctx.meta.$ssr.context._meta.renderError = err;
+        this.ctx.meta.$ssr.renderSSRError = err;
       }
     } else {
-      this.ctx.meta.$ssr.context._meta.renderError = err;
+      this.ctx.meta.$ssr.renderSSRError = err;
     }
     return undefined;
   }

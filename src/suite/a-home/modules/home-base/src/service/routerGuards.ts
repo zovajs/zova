@@ -21,7 +21,11 @@ export class ServiceRouterGuards extends BeanRouterGuardsBase {
           return false;
         }
         if (!this.$passport.isAuthenticated) {
-          this.app.$gotoLogin(to.fullPath);
+          try {
+            this.app.$gotoLogin(to.fullPath);
+          } catch (err: any) {
+            this.$errorHandler(err);
+          }
           return false;
         }
       }

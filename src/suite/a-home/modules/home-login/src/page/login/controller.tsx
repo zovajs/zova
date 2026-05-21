@@ -32,7 +32,7 @@ export class ControllerPageLogin extends BeanControllerPageBase {
   }
 
   async loginGitHub() {
-    const apiUrl = this.$passport.getOauthLoginUrl('auth-github', 'github', 'default');
+    const apiUrl = this.$passport.getOauthLoginUrl('auth-oauth', 'oauth', 'github');
     window.location.assign(apiUrl);
   }
 }
