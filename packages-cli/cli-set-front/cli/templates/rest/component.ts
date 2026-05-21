@@ -30,17 +30,20 @@ export function schemaRenderField<K extends keyof IResourceFormFieldRecord, T ex
   };
 }
 
-export function schemaRenderFieldJsx<T extends z.ZodType>(renderComponentJsx: TypeRenderComponentJsx, scene?: TypeFormSchemaScene) {
+export function schemaRenderFieldJsx<T extends z.ZodType>(
+  renderComponentJsx: TypeRenderComponentJsx,
+  scene?: TypeFormSchemaScene,
+) {
   return function (schema: T): T {
     const options = { render: renderComponentJsx };
     return _generalSchemaRest(schema, options, scene ?? 'form'); //diff from table
   };
 }
 
-export function schemaRenderCell<K extends keyof (IResourceTableCellRecord & IResourceTableActionRowRecord), T extends z.ZodType>(
-  render: K,
-  options?: (IResourceTableCellRecord & IResourceTableActionRowRecord)[K],
-) {
+export function schemaRenderCell<
+  K extends keyof (IResourceTableCellRecord & IResourceTableActionRowRecord),
+  T extends z.ZodType,
+>(render: K, options?: (IResourceTableCellRecord & IResourceTableActionRowRecord)[K]) {
   return function (schema: T): T {
     const options2 = options !== undefined ? { render, columnProps: options } : { render };
     return _generalSchemaRest(schema, options2, 'table');
@@ -52,7 +55,10 @@ export function schemaRenderCellJsx<T extends z.ZodType>(
   options?: Pick<IResourceTableActionRowOptionsBase, 'permission'>,
 ) {
   return function (schema: T): T {
-    const options2 = options !== undefined ? { render: renderComponentJsx, columnProps: options } : { render: renderComponentJsx };
+    const options2 =
+      options !== undefined
+        ? { render: renderComponentJsx, columnProps: options }
+        : { render: renderComponentJsx };
     return _generalSchemaRest(schema, options2, 'table');
   };
 }
@@ -62,7 +68,10 @@ export function schemaRenderTableActionRow<K extends keyof IResourceTableActionR
   options?: IResourceTableActionRowRecord[K],
 ): IResourceRenderTableActionRowOptionsAction {
   const pos = render.toString().indexOf(':action');
-  const name = pos > -1 ? _toLowerCaseFirstChar(render.toString().substring(pos + ':action'.length)) : undefined;
+  const name =
+    pos > -1
+      ? _toLowerCaseFirstChar(render.toString().substring(pos + ':action'.length))
+      : undefined;
   return { $$typeof: 'zova-jsx:actionRow', name, render, options };
 }
 
@@ -78,7 +87,10 @@ export function schemaRenderFormActionRow<K extends keyof IResourceFormActionRow
   options?: IResourceFormActionRowRecord[K],
 ): IResourceRenderFormActionRowOptionsAction {
   const pos = render.toString().indexOf(':action');
-  const name = pos > -1 ? _toLowerCaseFirstChar(render.toString().substring(pos + ':action'.length)) : undefined;
+  const name =
+    pos > -1
+      ? _toLowerCaseFirstChar(render.toString().substring(pos + ':action'.length))
+      : undefined;
   return { $$typeof: 'zova-jsx:actionRow', name, render, options };
 }
 
@@ -94,7 +106,10 @@ export function schemaRenderTableActionBulk<K extends keyof IResourceTableAction
   options?: IResourceTableActionBulkRecord[K],
 ): IResourceRenderTableActionBulkOptionsAction {
   const pos = render.toString().indexOf(':action');
-  const name = pos > -1 ? _toLowerCaseFirstChar(render.toString().substring(pos + ':action'.length)) : undefined;
+  const name =
+    pos > -1
+      ? _toLowerCaseFirstChar(render.toString().substring(pos + ':action'.length))
+      : undefined;
   return { $$typeof: 'zova-jsx:actionBulk', name, render, options };
 }
 
