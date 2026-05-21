@@ -26,11 +26,14 @@ declare module 'zova-module-a-openapi' {
 export interface ControllerBlockPageProps extends IResourceBlockOptionsBase {
   blocks?: IResourceRenderBlockOptionsBlock[];
   resource?: string;
+  pageSize?: number;
 }
 
 @Controller()
 export class ControllerBlockPage<TData extends {} = {}> extends BeanControllerBase {
-  static $propsDefault = {};
+  static $propsDefault = {
+    pageSize: 20,
+  };
   static $componentOptions: IComponentOptions = { inheritAttrs: false, deepExtendDefault: true };
 
   tableRef: BeanControllerTableBase<TData>;
@@ -55,7 +58,7 @@ export class ControllerBlockPage<TData extends {} = {}> extends BeanControllerBa
     this._prepareJsx();
     // query
     this.queryFilterData = {};
-    this.queryPaged = { pageNo: 1 };
+    this.queryPaged = { pageNo: 1, pageSize: this.$props.pageSize };
     this.query = this.$computed(() => {
       return Object.assign({}, this.queryFilterData, this.queryPaged);
     });
@@ -105,6 +108,12 @@ export class ControllerBlockPage<TData extends {} = {}> extends BeanControllerBa
   gotoPage(pageNo: number) {
     if (this.queryPaged.pageNo !== pageNo) {
       this.queryPaged.pageNo = pageNo;
+    }
+  }
+
+  setPageSize(pageSize: number) {
+    if (this.queryPaged.pageSize !== pageSize) {
+      this.queryPaged.pageSize = pageSize;
     }
   }
 
