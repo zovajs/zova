@@ -5,6 +5,10 @@ import fse from 'fs-extra';
 import { globby } from 'globby';
 import path from 'node:path';
 
+function escapeRegExp(str: string) {
+  return str.replace(/[.*+?^${}()|[\]\\]/g, '\\$&');
+}
+
 export function checkIgnoreOfParts(parts: string[]) {
   const indexLast = parts.length - 1;
   if (parts[indexLast].endsWith('_')) {
@@ -74,12 +78,12 @@ export function extractBeanInfo(sceneName: string, fileContent: string, sceneMet
   // optionsCustomInterface
   let optionsCustomInterface: string | undefined;
   let optionsCustomInterfaceFrom: string | undefined;
-  let reg = new RegExp(`@${sceneNameCapitalize}<(I${sceneNameCapitalize}Options[^>]*)>`);
+  let reg = new RegExp(`@${escapeRegExp(sceneNameCapitalize)}<(I${escapeRegExp(sceneNameCapitalize)}Options[^>]*)>`);
   let matches = fileContent.match(reg);
   if (matches) {
     optionsCustomInterface = matches[1];
     // optionsCustomInterfaceFrom
-    reg = new RegExp(`import {[\\s\\S]*?${optionsCustomInterface}[, ][\\s\\S]*?} from '([^']*)'`);
+    reg = new RegExp(`import {[\\s\\S]*?${escapeRegExp(optionsCustomInterface)}[, ][\\s\\S]*?} from '([^']*)'`);
     matches = fileContent.match(reg);
     if (matches) {
       optionsCustomInterfaceFrom = matches[1];

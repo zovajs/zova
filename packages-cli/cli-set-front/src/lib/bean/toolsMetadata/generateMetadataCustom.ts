@@ -17,7 +17,7 @@ export async function generateMetadataCustom(
   if (globFiles.length === 0) return '';
   // custom
   let jsFile = path.join(sceneMeta.module!.root, 'dist-cli', sceneMeta.metadataCustom!.replace('.ts', '.js'));
-  if (!fse.existsSync(jsFile)) {
+  if (!(await fse.pathExists(jsFile))) {
     jsFile = path.join(sceneMeta.module!.root, 'cli', sceneMeta.metadataCustom!);
   }
   return await cli.helper.importDynamic(jsFile, async instance => {

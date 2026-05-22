@@ -70,13 +70,14 @@ export class CliToolsMetadata extends BeanCliBase {
     const modulePath = module.root;
     const metaDir = path.join(modulePath, 'src/.metadata');
     const metaIndexFile = path.join(metaDir, 'index.ts');
-    if (fse.existsSync(metaIndexFile) && !force) {
+    if (await fse.pathExists(metaIndexFile) && !force) {
       // do nothing
       return;
     }
     // rest
     await rimraf(path.join(modulePath, 'rest'));
     // metaDir
+    await fse.remove(metaDir);
     await this.helper.ensureDir(metaDir);
     // relativeNameCapitalize
     const relativeNameCapitalize = this.helper.stringToCapitalize(moduleName, '-');
@@ -197,7 +198,6 @@ export class CliToolsMetadata extends BeanCliBase {
     }
     // save
     await fse.writeFile(metaIndexFile, content);
-    // await this.helper.formatFile({ fileName: metaIndexFile, logPrefix: 'format: ' });
     // locales
     await this._generateLocales(modulePath, contentLocales1);
     // generate this
@@ -218,7 +218,7 @@ export class CliToolsMetadata extends BeanCliBase {
 
   async _generateThis(moduleName: string, relativeNameCapitalize: string, modulePath: string) {
     const thisDest = path.join(modulePath, 'src/.metadata/this.ts');
-    if (fse.existsSync(thisDest)) return;
+    if (await fse.pathExists(thisDest)) return;
     const content = `export const __ThisModule__ = '${moduleName}';
 export { ScopeModule${relativeNameCapitalize} as ScopeModule } from './index.js';
 `;
@@ -226,36 +226,24 @@ export { ScopeModule${relativeNameCapitalize} as ScopeModule } from './index.js'
     await fse.writeFile(thisDest, content);
   }
 
+  async _prependExportIfNeeded(jsContent: string, exportLine: string, sourceFile: string, modulePath: string) {
+    const sourcePath = path.join(modulePath, sourceFile);
+    if (await fse.pathExists(sourcePath) && !jsContent.includes(exportLine)) {
+      return `${exportLine}\n${jsContent}`;
+    }
+    return jsContent;
+  }
+
   async _generateIndex(modulePath: string) {
     let jsContent = '';
     const jsFile = path.join(modulePath, 'src/index.ts');
-    if (fse.existsSync(jsFile)) {
+    if (await fse.pathExists(jsFile)) {
       jsContent = (await fse.readFile(jsFile)).toString();
     }
-    // jsTypes
-    const jsTypes = "export * from './types/index.js';";
-    const jsTypesFile = path.join(modulePath, 'src/types/index.ts');
-    if (fse.existsSync(jsTypesFile) && !jsContent.includes(jsTypes)) {
-      jsContent = `${jsTypes}\n${jsContent}`;
-    }
-    // jsLib
-    const jsLib = "export * from './lib/index.js';";
-    const jsLibFile = path.join(modulePath, 'src/lib/index.ts');
-    if (fse.existsSync(jsLibFile) && !jsContent.includes(jsLib)) {
-      jsContent = `${jsLib}\n${jsContent}`;
-    }
-    // jsLocales
-    const jsLocales = "export * from './.metadata/locales.js';";
-    const jsLocalesFile = path.join(modulePath, 'src/.metadata/locales.ts');
-    if (fse.existsSync(jsLocalesFile) && !jsContent.includes(jsLocales)) {
-      jsContent = `${jsLocales}\n${jsContent}`;
-    }
-    // jsMetadata
-    const jsMetadata = "export * from './.metadata/index.js';";
-    const jsMetadataFile = path.join(modulePath, 'src/.metadata/index.ts');
-    if (fse.existsSync(jsMetadataFile) && !jsContent.includes(jsMetadata)) {
-      jsContent = `${jsMetadata}\n${jsContent}`;
-    }
+    jsContent = await this._prependExportIfNeeded(jsContent, "export * from './types/index.js';", 'src/types/index.ts', modulePath);
+    jsContent = await this._prependExportIfNeeded(jsContent, "export * from './lib/index.js';", 'src/lib/index.ts', modulePath);
+    jsContent = await this._prependExportIfNeeded(jsContent, "export * from './.metadata/locales.js';", 'src/.metadata/locales.ts', modulePath);
+    jsContent = await this._prependExportIfNeeded(jsContent, "export * from './.metadata/index.js';", 'src/.metadata/index.ts', modulePath);
     // trim empty
     jsContent = jsContent.replace('export {};\n', '');
     // write
@@ -289,8 +277,9 @@ export { ScopeModule${relativeNameCapitalize} as ScopeModule } from './index.js'
     // cli/rest
     for (const name of ['cli', 'icons', 'rest']) {
       const cli = path.join(modulePath, name);
-      if (fse.existsSync(cli)) {
+      if (await fse.pathExists(cli)) {
         pkg = await _loadPkg();
+        pkg.files ??= [];
         const index = pkg.files.indexOf(name);
         if (index === -1) {
           changed = true;

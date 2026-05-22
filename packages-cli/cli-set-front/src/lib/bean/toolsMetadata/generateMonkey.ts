@@ -19,7 +19,7 @@ export async function generateMainSys(modulePath: string) {
 
 async function generateMonkey_common(modulePath: string, commandName: string) {
   const monkeyFile = path.join(modulePath, `src/${commandName}.ts`);
-  if (!fse.existsSync(monkeyFile)) return '';
+  if (!(await fse.pathExists(monkeyFile))) return '';
   // combine
   const content = `/** ${commandName}: begin */
 export * from '../${commandName}.js';
@@ -30,7 +30,7 @@ export * from '../${commandName}.js';
 
 async function generateMain_common(modulePath: string, commandName: string) {
   const monkeyFile = path.join(modulePath, `src/${commandName}.ts`);
-  if (!fse.existsSync(monkeyFile)) return '';
+  if (!(await fse.pathExists(monkeyFile))) return '';
   // combine
   const content = `/** ${commandName}: begin */
 export * from '../${commandName}.js';

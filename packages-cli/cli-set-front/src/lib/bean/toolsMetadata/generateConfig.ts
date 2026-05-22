@@ -4,7 +4,7 @@ import path from 'node:path';
 
 export async function generateConfig(modulePath: string) {
   const configFile = path.join(modulePath, 'src/config/config.ts');
-  if (!fse.existsSync(configFile)) return '';
+  if (!(await fse.pathExists(configFile))) return '';
   // combine
   const content = `/** config: begin */
 export * from '../config/config.js';
@@ -16,7 +16,7 @@ import { config } from '../config/config.js';
 
 export async function generateConstant(modulePath: string) {
   const constantFile = path.join(modulePath, 'src/config/constants.ts');
-  if (!fse.existsSync(constantFile)) return '';
+  if (!(await fse.pathExists(constantFile))) return '';
   // combine
   const content = `/** constant: begin */
 export * from '../config/constants.js';
@@ -70,7 +70,7 @@ import { locales } from './locales.js';
 
 export async function generateError(modulePath: string) {
   const errorFile = path.join(modulePath, 'src/config/errors.ts');
-  if (!fse.existsSync(errorFile)) return '';
+  if (!(await fse.pathExists(errorFile))) return '';
   // combine
   const content = `/** error: begin */
 export * from '../config/errors.js';
