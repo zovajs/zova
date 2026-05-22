@@ -10,10 +10,8 @@ $ pnpm add -g zova-cli@latest
 
 ## 框架升级
 
-- 常规升级
-
 ```bash
-$ pnpm update
+$ npm run update
 ```
 
 - 如果遇到任何跟依赖相关的问题，可以强制重新安装

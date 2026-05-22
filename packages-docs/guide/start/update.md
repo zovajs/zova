@@ -10,10 +10,8 @@ $ pnpm add -g zova-cli@latest
 
 ## Framework Update
 
-- Regular update
-
 ```bash
-$ pnpm update
+$ npm run update
 ```
 
 - If you encounter any dependency-related problems, you can force a reinstall

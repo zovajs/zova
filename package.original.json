@@ -31,6 +31,7 @@
     "format:fix": "oxfmt --write",
     "lint": "oxlint",
     "lint:fix": "oxlint --fix",
+    "update": "pnpm update && npm run zova :tools:deps",
     "docs:fix": "textlint --fix ./packages-docs/**/*.md",
     "release-patch": "./scripts/release.sh patch",
     "release-minor": "./scripts/release.sh minor",
