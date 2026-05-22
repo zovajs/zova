@@ -3,7 +3,6 @@ import { getOnionMetasMeta, getOnionScenesMeta } from '@cabloy/module-info';
 import { toUpperCaseFirstChar } from '@cabloy/word-utils';
 import fse from 'fs-extra';
 import path from 'node:path';
-import { rimraf } from 'rimraf';
 
 import { loadJSONFile, saveJSONFile } from '../common/utils.ts';
 import { generateBeanGenerals } from './toolsMetadata/generateBeanGenerals.ts';
@@ -70,12 +69,10 @@ export class CliToolsMetadata extends BeanCliBase {
     const modulePath = module.root;
     const metaDir = path.join(modulePath, 'src/.metadata');
     const metaIndexFile = path.join(metaDir, 'index.ts');
-    if (await fse.pathExists(metaIndexFile) && !force) {
+    if ((await fse.pathExists(metaIndexFile)) && !force) {
       // do nothing
       return;
     }
-    // rest
-    await rimraf(path.join(modulePath, 'rest'));
     // metaDir
     await fse.remove(metaDir);
     await this.helper.ensureDir(metaDir);
@@ -226,9 +223,14 @@ export { ScopeModule${relativeNameCapitalize} as ScopeModule } from './index.js'
     await fse.writeFile(thisDest, content);
   }
 
-  async _prependExportIfNeeded(jsContent: string, exportLine: string, sourceFile: string, modulePath: string) {
+  async _prependExportIfNeeded(
+    jsContent: string,
+    exportLine: string,
+    sourceFile: string,
+    modulePath: string,
+  ) {
     const sourcePath = path.join(modulePath, sourceFile);
-    if (await fse.pathExists(sourcePath) && !jsContent.includes(exportLine)) {
+    if ((await fse.pathExists(sourcePath)) && !jsContent.includes(exportLine)) {
       return `${exportLine}\n${jsContent}`;
     }
     return jsContent;
@@ -240,10 +242,30 @@ export { ScopeModule${relativeNameCapitalize} as ScopeModule } from './index.js'
     if (await fse.pathExists(jsFile)) {
       jsContent = (await fse.readFile(jsFile)).toString();
     }
-    jsContent = await this._prependExportIfNeeded(jsContent, "export * from './types/index.js';", 'src/types/index.ts', modulePath);
-    jsContent = await this._prependExportIfNeeded(jsContent, "export * from './lib/index.js';", 'src/lib/index.ts', modulePath);
-    jsContent = await this._prependExportIfNeeded(jsContent, "export * from './.metadata/locales.js';", 'src/.metadata/locales.ts', modulePath);
-    jsContent = await this._prependExportIfNeeded(jsContent, "export * from './.metadata/index.js';", 'src/.metadata/index.ts', modulePath);
+    jsContent = await this._prependExportIfNeeded(
+      jsContent,
+      "export * from './types/index.js';",
+      'src/types/index.ts',
+      modulePath,
+    );
+    jsContent = await this._prependExportIfNeeded(
+      jsContent,
+      "export * from './lib/index.js';",
+      'src/lib/index.ts',
+      modulePath,
+    );
+    jsContent = await this._prependExportIfNeeded(
+      jsContent,
+      "export * from './.metadata/locales.js';",
+      'src/.metadata/locales.ts',
+      modulePath,
+    );
+    jsContent = await this._prependExportIfNeeded(
+      jsContent,
+      "export * from './.metadata/index.js';",
+      'src/.metadata/index.ts',
+      modulePath,
+    );
     // trim empty
     jsContent = jsContent.replace('export {};\n', '');
     // write
@@ -274,8 +296,8 @@ export { ScopeModule${relativeNameCapitalize} as ScopeModule } from './index.js'
         pkg.zovaModule.beansPreload = beansPreload;
       }
     }
-    // cli/rest
-    for (const name of ['cli', 'icons', 'rest']) {
+    // cli
+    for (const name of ['cli', 'icons']) {
       const cli = path.join(modulePath, name);
       if (await fse.pathExists(cli)) {
         pkg = await _loadPkg();
