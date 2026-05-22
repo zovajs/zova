@@ -74,7 +74,9 @@ export class CliToolsMetadata extends BeanCliBase {
       return;
     }
     // metaDir
-    await fse.remove(metaDir);
+    await fse.remove(path.join(metaDir, 'component'));
+    await fse.remove(path.join(metaDir, 'page'));
+    await fse.remove(path.join(metaDir, 'icons'));
     await this.helper.ensureDir(metaDir);
     // relativeNameCapitalize
     const relativeNameCapitalize = this.helper.stringToCapitalize(moduleName, '-');
