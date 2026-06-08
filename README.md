@@ -2,6 +2,11 @@ English | [简体中文](./README.zh-CN.md)
 
 # Zova
 
+> [!WARNING]
+> This Zova site is now a **historical archive**, not the current documentation source of truth.
+>
+> Use [https://docs.cabloy.com](https://docs.cabloy.com) for current public documentation, monorepo workflows, edition-aware guidance, and AI-development guidance.
+
 Zova: The Intuitive Frontend Framework = Vue3 Reactive + React TSX + Angular IOC
 
 - Built-in out-of-the-box SSR solution, building `SSR/SPA/Website/Admin-Dashboard` in one codebase
