@@ -3,9 +3,9 @@ English | [简体中文](./README.zh-CN.md)
 # Zova
 
 > [!WARNING]
-> This Zova site is now a **historical archive**, not the current documentation source of truth.
+> This Zova site is now a **historical archive**, not the current source of truth.
 >
-> Use [https://docs.cabloy.com](https://docs.cabloy.com) for current public documentation, monorepo workflows, edition-aware guidance, and AI-development guidance.
+> For the latest project source, ongoing development updates, and related guidance, visit [https://github.com/cabloy/cabloy](https://github.com/cabloy/cabloy).
 
 Zova: The Intuitive Frontend Framework = Vue3 Reactive + React TSX + Angular IOC
 

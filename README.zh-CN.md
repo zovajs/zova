@@ -3,9 +3,9 @@
 # Zova
 
 > [!WARNING]
-> This Zova site is now a **historical archive**, not the current documentation source of truth.
+> 当前 Zova 站点已作为**历史归档**保存，不再是最新内容的来源。
 >
-> Use [https://docs.cabloy.com](https://docs.cabloy.com) for current public documentation, monorepo workflows, edition-aware guidance, and AI-development guidance.
+> 如需查看最新的项目源码、持续开发进展及相关说明，请访问 [https://github.com/cabloy/cabloy](https://github.com/cabloy/cabloy)。
 
 Zova: 直观的前端框架 = Vue3 响应式 + React TSX + Angular IOC
 
