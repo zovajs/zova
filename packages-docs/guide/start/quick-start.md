@@ -1,5 +1,10 @@
 # Quick Start
 
+> [!WARNING]
+> This Zova site is now a **historical archive**, not the current documentation source of truth.
+>
+> Use [https://cabloy.com](https://cabloy.com) for current public documentation, monorepo workflows, edition-aware guidance, and AI-development guidance.
+
 ## Prerequisites
 
 | Name   | Version   |
